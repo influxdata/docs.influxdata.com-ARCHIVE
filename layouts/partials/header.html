@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>InfluxData | Documentation{{ if .Title }} | {{ title .Title }}{{ end }}</title>
+        <meta name="description" content="{{ if .Description }}{{ .Description }}. {{ end }}Documentation for the InfluxData products InfluxDB, Telegraf, Chronograf and Kapacitor, along with the Hosted and Enterprise services">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <link rel="stylesheet" href="/css/normalize-3.0.2.css">
+        <link rel="stylesheet" href="/css/layout.css" type="text/css">
+        <link rel="stylesheet" href="/css/icon-font.css" type="text/css">
+        {{ $currentNode := . }}
+        {{ range .Site.Menus.products }}
+        {{if or ($currentNode.IsMenuCurrent "products" .) ($currentNode.HasMenuCurrent "products" .) }}
+        <link rel="stylesheet" href="/css/theme/{{ .Identifier }}.css" type="text/css">
+        {{ end }}
+        {{ end }}
+        <!-- TODO(Gunnar): Add prism or switch to pygments -->
+        <!-- <link rel="stylesheet" href="css/prism.css" /> -->
+
+        <meta name="application-name" content="InfluxData" />
+        <meta name="msapplication-TileColor" content="" />
+        <meta name="msapplication-TileImage" content="https://docs.influxdata.com/img/logo.png" />
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@influxdb">
+        <meta name="twitter:title" content="InfluxData Documentation">
+        <meta name="twitter:description" content="Documentation for InfluxDB, Telegraf, Chronograf, and Kapacitor">
+        <meta name="twitter:image" content="https://docs.influxdata.com/img/logo.png" />
+
+        <meta property="og:title" content="InfluxData Documentation" />
+        <meta property="og:description" content="Documentation for InfluxDB, Telegraf, Chronograf, and Kapacitor" />
+        <meta property="og:url" content="https://docs.influxdata.com/" />
+        <meta property="og:image" content="https://docs.influxdata.com/img/logo.png" />
+
+        <meta name="Copyright" content="InfluxData, Inc." />
+    </head>
+    <body>
+    {{ partial "navbar.html" . }}
+    {{ partial "product-switcher.html" . }}

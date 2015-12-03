@@ -1,0 +1,13 @@
+{{ partial "header.html" . }}
+<div class="documentation-home">
+    <div class="documentation-home--hero">
+        <div class="documentation-home--title">Documentation</div>
+    </div>
+    <div class="documentation-home--menu">
+        {{ $currentNode := . }}
+        {{ range .Site.Menus.products }}
+        <a class="documentation-home--menu-item" href="{{.URL}}">{{ .Name }}</a>
+        {{ end }}
+    </div>
+</div>
+{{ partial "footer.html" . }}

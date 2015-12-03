@@ -1,0 +1,15 @@
+# TEAM
+
+    Alex Paxton -- Designer, InfluxData -- @hexkvlt
+    Gunnar Aasen -- Support Engineer, InfluxData -- @gunnaraasen
+    Regan Kuchan -- Support Engineer, InfluxData
+    Sean Beckett -- Director of Support, InfluxData
+
+# THANKS
+
+    TODO(Gunnar): Add list of docs contributors
+
+# TECHNOLOGY COLOPHON
+
+    Go, HTML, CSS
+    Hugo, jQuery, Normalize.css, s3cmd, Pygments

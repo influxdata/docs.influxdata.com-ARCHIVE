@@ -1,0 +1,11 @@
+{{ range .Data.Pages.GroupBy "Section" }}
+<h3>{{ .Key }}</h3>
+<ul>
+    {{ range .Pages }}
+    <li>
+    <a href="{{ .Permalink }}">{{ .Title }}</a>
+    <div class="meta">{{ .Date.Format "Mon, Jan 2, 2006" }}</div>
+    </li>
+    {{ end }}
+</ul>
+{{ end }}
