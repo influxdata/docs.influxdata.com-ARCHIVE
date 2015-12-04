@@ -6,35 +6,34 @@ languageCode = "en-us"
 [blackfriday]
   plainIdAnchors = true
 
-
 SectionPagesMenu = "products"
 [[menu.products]]
   name = "Telegraf"
   identifier = "telegraf"
-  weight = 2
+  weight = 1
   url = "/telegraf/"
 [[menu.products]]
   name = "InfluxDB"
   identifier = "influxdb"
-  weight = 1
+  weight = 2
   url = "/influxdb/"
-[[menu.products]]
-  name = "Kapacitor"
-  identifier = "kapacitor"
-  weight = 3
-  url = "/kapacitor/"
 [[menu.products]]
   name = "Chronograf"
   identifier = "chronograf"
-  weight = 4
+  weight = 3
   url = "/chronograf/"
+[[menu.products]]
+  name = "Kapacitor"
+  identifier = "kapacitor"
+  weight = 4
+  url = "/kapacitor/"
 [[menu.products]]
   name = "Hosted"
   identifier = "hosted"
   weight = 5
   url = "/hosted/"
 
-
+# InfluxDB
 [[menu.influxdb]]
   name = "Introduction"
   identifier = "introduction"
@@ -63,25 +62,39 @@ SectionPagesMenu = "products"
 [[menu.influxdb]]
   name = "Query Language"
   identifier = "query_language"
-  weight = 5
+  weight = 6
   url = "/influxdb/query_language"
 [[menu.influxdb]]
   name = "Client Libraries"
   identifier = "clients"
-  weight = 5
+  weight = 7
   url = "/influxdb/clients"
 [[menu.influxdb]]
   name = "Administration"
   identifier = "administration"
-  weight = 5
+  weight = 8
   url = "/influxdb/administration"
 [[menu.influxdb]]
   name = "Tools"
   identifier = "tools"
-  weight = 5
+  weight = 9
   url = "/influxdb/tools"
 [[menu.influxdb]]
   name = "About the Project"
   identifier = "about"
-  weight = 5
+  weight = 10
   url = "/influxdb/about"
+
+# Chronograf
+[[menu.chronograf]]
+  name = "Introduction"
+  identifier = "introduction"
+  weight = 1
+  url = "/chronograf/introduction"
+
+[[menu.chronograf]]
+  name = "Troubleshooting"
+  identifier = "troubleshooting"
+  weight = 2
+  url = "/chronograf/troubleshooting"
+

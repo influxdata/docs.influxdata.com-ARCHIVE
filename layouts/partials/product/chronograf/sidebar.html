@@ -1,0 +1,15 @@
+<div class="product-sidebar" id="product-sidebar">
+{{ $currentNode := . }}
+{{ range .Site.Menus.chronograf}}
+    <div class="product-sidebar--section-title">
+        <a class="product-sidebar--nav-item active" href="{{.URL}}">{{ .Name }}</a>
+    </div>
+    {{ if .HasChildren }}
+    <section class="product-sidebar--section">
+        {{ range .Children }}
+        <a class="product-sidebar--page active" href="{{ .URL }}">{{ .Name }}</a>
+        {{ end }}
+    </section>
+    {{end}}
+{{end}}
+</div>
