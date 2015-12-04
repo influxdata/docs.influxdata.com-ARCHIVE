@@ -1,22 +1,25 @@
 ---
 title: Installation
+menu:
+  main:
+    parent: introduction
 ---
 
-This page provides directions on downloading and starting InfluxDB Version 0.9.4.2.
+This page provides directions on downloading and starting InfluxDB Version 0.9.5.1.
 
 ## Requirements
 Installation of the pre-built InfluxDB package requires root privileges on the host machine.
 
 ### Networking
-By default InfluxDB will use TCP ports `8083` and `8086` so these ports should be available on your system. Once installation is complete you can change those ports and other options in the configuration file, which is located by default in `/etc/opt/influxdb`.
+By default InfluxDB will use TCP ports `8083` and `8086` so these ports should be available on your system. Once installation is complete you can change those ports and other options in the configuration file, which is located by default in `/etc/influxdb`.
 
 ## Ubuntu & Debian
-Debian users can install 0.9.4.2 by downloading the package and installing it like this:
+Debian users can install 0.9.5.1 by downloading the package and installing it like this:
 
 ```shell
 # 64-bit system install instructions
-wget http://influxdb.s3.amazonaws.com/influxdb_0.9.4.2_amd64.deb
-sudo dpkg -i influxdb_0.9.4.2_amd64.deb
+wget http://influxdb.s3.amazonaws.com/influxdb_0.9.5.1_amd64.deb
+sudo dpkg -i influxdb_0.9.5.1_amd64.deb
 ```
 
 Then start the daemon by running:
@@ -30,8 +33,8 @@ RedHat and CentOS users can install by downloading and installing the rpm like t
 
 ```shell
 # 64-bit system install instructions
-wget http://influxdb.s3.amazonaws.com/influxdb-0.9.4.2-1.x86_64.rpm
-sudo yum localinstall influxdb-0.9.4.2-1.x86_64.rpm
+wget http://influxdb.s3.amazonaws.com/influxdb-0.9.5.1-1.x86_64.rpm
+sudo yum localinstall influxdb-0.9.5.1-1.x86_64.rpm
 ```
 
 Then start the daemon by running:
@@ -49,6 +52,19 @@ zypper ar -f obs://devel:languages:go/ go
 # install latest influxdb
 zypper in influxdb
 ```
+
+## FreeBSD/PC-BSD
+
+InfluxDB is part of the FreeBSD package system. It can be installed by running
+```shell
+sudo pkg install influxdb
+```
+The configuration file is `/usr/local/etc/influxd.conf` with examples in `/usr/local/etc/influxd.conf.sample`.
+Start the backend by executing
+```shell
+sudo service influxd onestart
+```
+and/or adding `influxd_enable="YES"` to `/etc/rc.conf` for launch influxd during system boot.
 
 ## OS X
 
@@ -74,12 +90,11 @@ Or, if you don't want/need launchctl, in a separate terminal window you can just
 influxd -config /usr/local/etc/influxdb.conf
 ```
 
-<a href="getting_started.html"><font size="6"><b>⇒ Now get started!</b></font></a>
-
-
 ## Hosted
 
 For users who don't want to install any software and are ready to use InfluxDB, you may want to check out our [managed hosted InfluxDB offering](http://customers.influxdb.com).
+
+<a href="getting_started.html"><font size="6"><b>⇒ Now get started!</b></font></a>
 
 ## Generate a configuration file
 
@@ -88,13 +103,13 @@ Configuration files from prior versions of InfluxDB 0.9 should work with future 
 To generate a new config file, run `influxd config` and redirect the output to a file. For example:
 
 ```shell
-/opt/influxdb/influxd config > /etc/influxdb/influxdb.generated.conf
+influxd config > /etc/influxdb/influxdb.generated.conf
 ```
 
 Edit the `influxdb.generated.conf` file to have the desired configuration settings. When launching InfluxDB, point the process to the correct configuration file using the `-config` option.
 
 ```shell
-/opt/influxdb/influxd -config /etc/influxdb/influxdb.generated.conf
+influxd -config /etc/influxdb/influxdb.generated.conf
 ```
 
 In addition, a valid configuration file can be displayed at any time using the command `influxd config`. Redirect the output to a file to save a clean generated configuration file.
@@ -103,10 +118,10 @@ If no `-config` option is supplied, InfluxDB will use an internal default config
 
 > Note: The `influxd` command has two similarly named flags. The `config` flag prints a generated default configuration file to STDOUT but does not launch the `influxd` process. The `-config` flag takes a single argument, which is the path to the InfluxDB configuration file to use when launching the process.
 
-The `config` and `-config` flags can be combined to output the union of the internal default configuration and the configuration file passed to `-config`. The options specificed in the configuration file will overwrite any internally generated configration.
+The `config` and `-config` flags can be combined to output the union of the internal default configuration and the configuration file passed to `-config`. The options specificed in the configuration file will overwrite any internally generated configuration.
 
 ```shell
-/opt/influxdb/influxd config -config /etc/influxdb/influxdb.partial.conf
+influxd config -config /etc/influxdb/influxdb.partial.conf
 ```
 
 The output will show every option configured in the `influxdb.partial.conf` file and will substitute internal defaults for any configuration options not specified in that file.
@@ -125,7 +140,7 @@ We’ve seen the best performance with the C3 class of machines.
 
 ## Configuring the Instance
 
-This example assumes that you are using two SSD volumes and that you have mounted them appropriately. This example also assumes that each of those volumes is mounted at `/mnt/influx` and `/mnt/db`. For more infomation on how to do that see the Amazon documentation on how to [Add a Volume to Your Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-add-volume-to-instance.html).
+This example assumes that you are using two SSD volumes and that you have mounted them appropriately. This example also assumes that each of those volumes is mounted at `/mnt/influx` and `/mnt/db`. For more information on how to do that see the Amazon documentation on how to [Add a Volume to Your Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-add-volume-to-instance.html).
 
 ### Config File
 You'll have to update the config file appropriately for each InfluxDB instance you have.
@@ -170,7 +185,7 @@ If you're planning on using a cluster, you may also want to set `hostname` and `
 INFLUXD_OPTS='-hostname host[:port] [-join hostname_1:port_1[,hostname_2:port_2]]'
 ```
 
-For more detailed instructions on how to set up a cluster, see the documenation on [clustering](/docs/v0.9/guides/clustering.html)
+For more detailed instructions on how to set up a cluster, see the documentation on [clustering](/docs/v0.9/guides/clustering.html)
 
 ## Development Versions
 

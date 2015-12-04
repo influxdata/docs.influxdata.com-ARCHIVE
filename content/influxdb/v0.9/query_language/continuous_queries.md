@@ -33,6 +33,15 @@ CREATE CONTINUOUS QUERY event_counts_per_10m_by_type ON mydb BEGIN
 END
 ```
 
+To preserve a subset of tags in your downsampled data, add them individually in the `GROUP BY` clause of the continuous query. For example:
+
+```sql
+# Create a CQ to count the number of points with non-null "type" value per 10 minute bucket, preserving just the "type" tag
+CREATE CONTINUOUS QUERY event_counts_per_10m_by_type ON mydb BEGIN
+  SELECT COUNT(type) INTO typeCount_10m_byType FROM events GROUP BY time(10m), type
+END
+```
+
 ### Downsampling Continuous Queries
 
 This is expected to be the primary use case for continuous queries. When a continuous query is created from a select query that contains a `GROUP BY` time() clause, InfluxDB will write the aggregate into the target time series when each time interval elapses. Continuous queries are not applied to historical data. See GitHub Issue [#211](https://github.com/influxdb/influxdb/issues/211) to follow development of the historical backfill feature for continuous queries.

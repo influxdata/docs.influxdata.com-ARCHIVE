@@ -4,7 +4,7 @@ aliases:
   - /docs/v0.9/clients/shell.html
 ---
 
-The Influx shell is an interactive shell for InfluxDB, and is part of all InfluxDB distributions starting with the InfluxDB 0.9.0. The shell is not compatible with InfluxDB 0.8 and earlier. If you install InfluxDB via a package manager, the shell is installed at `/opt/influxdb/influx` (`/usr/local/bin/influx` on OS X).
+The Influx shell is an interactive shell for InfluxDB, and is part of all InfluxDB distributions starting with the InfluxDB 0.9.0. The shell is not compatible with InfluxDB 0.8 and earlier. If you install InfluxDB via a package manager, the shell is installed at `/usr/bin/influx` (`/usr/local/bin/influx` on OS X).
 
 ## Shell Arguments
 

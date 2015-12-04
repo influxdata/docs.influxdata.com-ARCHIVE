@@ -7,16 +7,16 @@ aliases:
 
 InfluxQL offers a full suite of administrative commands.
 
-* [Data management](../query_language/database_management.html#data-management)
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Create a database with `CREATE DATABASE`](../query_language/database_management.html#create-a-database-with-create-database)
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete a database with `DROP DATABASE`](../query_language/database_management.html#delete-a-database-with-drop-database)
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete series with `DROP SERIES`](../query_language/database_management.html#delete-series-with-drop-series)
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete measurements with `DROP MEASUREMENT`](../query_language/database_management.html#delete-measurements-with-drop-measurement)
+* [Data management](../query_language/database_management.html#data-management)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Create a database with `CREATE DATABASE`](../query_language/database_management.html#create-a-database-with-create-database)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete a database with `DROP DATABASE`](../query_language/database_management.html#delete-a-database-with-drop-database)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete series with `DROP SERIES`](../query_language/database_management.html#delete-series-with-drop-series)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete measurements with `DROP MEASUREMENT`](../query_language/database_management.html#delete-measurements-with-drop-measurement)  
 
-* [Retention policy management](../query_language/database_management.html#retention-policy-management)
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Create retention policies with `CREATE RETENTION POLICY`](../query_language/database_management.html#create-retention-policies-with-create-retention-policy)
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Modify retention policies with `ALTER RETENTION POLICY`](../query_language/database_management.html#modify-retention-policies-with-alter-retention-policy)
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete retention policies with `DROP RETENTION POLICY`](../query_language/database_management.html#delete-retention-policies-with-drop-retention-policy)
+* [Retention policy management](../query_language/database_management.html#retention-policy-management)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Create retention policies with `CREATE RETENTION POLICY`](../query_language/database_management.html#create-retention-policies-with-create-retention-policy)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Modify retention policies with `ALTER RETENTION POLICY`](../query_language/database_management.html#modify-retention-policies-with-alter-retention-policy)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete retention policies with `DROP RETENTION POLICY`](../query_language/database_management.html#delete-retention-policies-with-drop-retention-policy)  
 
 The examples in the sections below use InfluxDB's [Command Line Interface (CLI)](../introduction/getting_started.html). You can also execute the commands using the HTTP API; simply  send a `GET` request to the `/query` endpoint and include the command in the URL parameter `q`. See the [Querying Data](../guides/querying_data.html) guide for more on using the HTTP API.
 
@@ -28,7 +28,7 @@ The examples in the sections below use InfluxDB's [Command Line Interface (CLI)]
 ---
 The `CREATE DATABASE` query takes the following form, where `IF NOT EXISTS` is optional:
 ```sql
-CREATE DATABASE <database_name> [IF NOT EXISTS]
+CREATE DATABASE [IF NOT EXISTS] <database_name>
 ```
 
 Create the database ` NOAA_water_database`:
@@ -39,7 +39,7 @@ Create the database ` NOAA_water_database`:
 
 Create the database `NOAA_water_database` only if it doesn't exist:
 ```sh
-> CREATE DATABASE  NOAA_water_database IF NOT EXISTS
+> CREATE DATABASE IF NOT EXISTS NOAA_water_database
 >
 ```
 

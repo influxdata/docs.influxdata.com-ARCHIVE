@@ -5,9 +5,10 @@
     </div>
     <div class="documentation-home--menu">
         {{ $currentNode := . }}
-        {{ range .Site.Menus.products }}
-        <a class="documentation-home--menu-item" href="{{.URL}}">{{ .Name }}</a>
+        {{ range .Site.Menus.influxdb }}
+        <a href="{{.URL}}">{{ .Name }}</a>
         {{ end }}
     </div>
 </div>
+{{ partial "product/sidebar.html" . }}
 {{ partial "footer.html" . }}

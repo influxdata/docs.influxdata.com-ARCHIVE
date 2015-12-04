@@ -2,6 +2,9 @@
 title: Querying Data
 alias:
   -/docs/v0.9/query_language/querying_data.html
+menu:
+  main:
+    parent: guides
 ---
 
 ## Querying data using the HTTP API

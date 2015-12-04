@@ -1,5 +1,9 @@
 ---
 title: Line Protocol
+menu:
+  main:
+    weight: 1
+    parent: write_protocols
 ---
 
 The line protocol is a text based format for writing points to InfluxDB.  Each line defines a single point. 
@@ -43,7 +47,7 @@ Field keys are always strings and follow the same syntactical rules as described
 
 **Floats** are numeric values that are not followed by a trailing `i`. (e.g. 1, 1.0, -3.14, 6.0e5, 10).
 
-**Boolean** values indicate true or false.  Valid boolean strings are (t, T, true, TRUE, f, F, false, and FALSE).
+**Boolean** values indicate true or false.  Valid boolean strings are (t, T, true, True, TRUE, f, F, false, False and FALSE).
 
 **Strings** are text values.  All string values _must_ be surrounded in double-quotes `"`.  If the string contains
 a double-quote, it must be escaped with a backslash, e.g. `\"`.

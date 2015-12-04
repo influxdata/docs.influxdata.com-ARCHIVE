@@ -2,4 +2,4 @@
 title: Service - CollectD
 ---
 
-InfluxDB provides an easy way to hook up CollectD as an input source. Documentation for the CollectD input service does not yet exist but will be added soon!
+InfluxDB provides an easy way to hook up CollectD as an input source. See the [README on Github](https://github.com/influxdb/influxdb/blob/master/services/collectd/README.md) for more information.

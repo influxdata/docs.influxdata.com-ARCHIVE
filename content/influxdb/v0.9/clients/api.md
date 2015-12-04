@@ -17,10 +17,15 @@ This is a list of the client libraries which have some support for InfluxDB vers
 - [InfluxDB Java](https://github.com/influxdb/influxdb-java) by [majst01](https://github.com/majst01)
 
 ## JavaScript/Node.js
+- [node-influx](https://github.com/node-influx/node-influx) by [node-influx](https://github.com/node-influx)
 - [Influent](https://github.com/gobwas/influent) by [gobwas](https://github.com/gobwas)
 
 ## Lisp
 - [cl-influxdb](https://github.com/mmaul/cl-influxdb) by [mmaul](https://github.com/mmaul)
+
+## .Net
+- [InfluxDB.Client.Net](https://github.com/AdysTech/InfluxDB.Client.Net) by [mvadu](https://github.com/mvadu)
+
 
 ## Perfmon
 - [naf_windows_perfmon_to_influxdb](https://github.com/willemdh/naf_windows_perfmon_to_influxdb) by [willemdh](https://github.com/willemdh)
@@ -49,6 +54,9 @@ This is a list of the client libraries which have some support for InfluxDB vers
 
 ## Scala
 - [scala-influxdb-client](https://github.com/paulgoldbaum/scala-influxdb-client) by [paulgoldbaum](https://github.com/paulgoldbaum)
+
+## Sensu
+- [sensu-influxdb-extension](https://github.com/jhrv/sensu-influxdb-extension) by [jhrv](https://github.com/jhrv)
 
 ## SNMP
 - [influxsnmp](https://github.com/paulstuart/influxsnmp) by [paulstuart](https://github.com/paulstuart)

@@ -1,217 +1,198 @@
 ---
 title: Glossary of Terms
+menu:
+  main:
+    parent: concepts
 ---
 
-## Series
-A **series** is a collection of data points along a timeline that share a common key, expressed as a **measurement** and **tag set** pairing, grouped under a **retention policy**.
+## aggregation
+An InfluxQL function that returns an aggregated value across a set of points. See [InfluxQL Functions](../query_language/functions.html#aggregations) for a complete list of the available and upcoming aggregations.
 
-```
-<measurement>,<tag set>
-```
+Related entries: [function](../concepts/glossary.html#function), [selector](../concepts/glossary.html#selector), [transformation](../concepts/glossary.html#transformation)
 
-> **Note:** The [field set](/docs/v0.9/concepts/glossary.html#field) is not part of the series identification.
+## cluster
+A collection of servers running InfluxDB nodes. All nodes in a cluster have the same users, databases, retention policies, and continuous queries. See [Clustering](../guides/clustering.html) for how to set up an InfluxDB cluster.
 
-## Measurement
-A **measurement** is the name of the value that is recorded in the **series**, and can be shared amongst many **series**.
+Related entries: [node](../concepts/glossary.html#node), [server](../concepts/glossary.html#server)
+	
+## continuous query (CQ)
+An InfluxQL query that runs automatically and periodically within a database. Continuous queries require a function in the `SELECT` clause and must include a `GROUP BY time()` clause. See [Continuous Queries](../query_language/continuous_queries.html).  
 
-The **measurement** should describe the metric(s) recorded in the associated **series** and should not explicitly include information about the source of or the metadata associated with what is being measured. Metadata should be recorded in **tags**.
+Related entries: [function](../concepts/glossary.html#function)
 
-All **series** under a given **measurement** have the same **field keys** and differ only in their **tag set**.
+## coordinator node
+The node that receives write and query requests for the cluster.  
 
-The **measurement** is what appears in the SELECT clause of query statements, and is thus similar to a table name in traditional SQL databases.
+Related entries: [cluster](../concepts/glossary.html#cluster), [hinted handoff](../concepts/glossary.html#hinted-handoff), [node](../concepts/glossary.html#node)
+	
+## database
+A logical container for users, retention policies, continuous queries, and time series data.
 
-#### Example:
+Related entries: [continuous query](../concepts/glossary.html#continuous-query-cq), [retention policy](../concepts/glossary.html#retention-policy-rp), [user](../concepts/glossary.html#user)
 
-The metrics `cpu_load`, `energy_generated`, and `bikes_present` would be reasonable **measurements** for a server, a photovoltaic array, and a bike-sharing station, respectively.
+## duration
+The attribute of the retention policy that determines how long InfluxDB stores data. Data older than the duration are automatically dropped from the database. See [Database Management](../query_language/database_management.html#create-retention-policies-with-create-retention-policy) for how to set duration.
+	
+Related entries: [replication factor](../concepts/glossary.html#replication-factor), [retention policy](../concepts/glossary.html#retention-policy-rp) 
 
-The `cpu_load` measurement would likely have tags for hostname, server region, server function, and OS. The `energy_generated` measurement might have tags for pv_installation_id, outside_temperature, and weather. The `bikes_present` measurement might only have a tag for station_id.
+## field
+The key-value pair in InfluxDB's data structure that records metadata and the actual data value. Fields are required in InfluxDB's data structure and they are not indexed - queries on field values scan all points that match the specified time range and, as a result, are not performant relative to tags.
 
-## Point
-A **point** is a single collection of **fields** in a **series**. Each **point** is uniquely identified by its **series** and **timestamp**.
+*Query tip:* Compare fields to tags; tags are indexed.
 
-It is not possible to store two **points** in the same **series** with the same timestamp. The most recently written version of the **point** will silently overwrite the previous **field set** with its **field set**.
+Related entries: [field key](../concepts/glossary.html#field-key), [field set](../concepts/glossary.html#field-set), [field value](../concepts/glossary.html#field-value), [tag](../concepts/glossary.html#tag)
+	
+## field key
+The key part of the key-value pair that makes up a field. Field keys are strings and they store metadata. 
 
-## Tag
-A **tag** is a key-value pair that provides metadata about the **point**. A **tag** is made up of the **tag key** and the **tag value**.
+Related entries: [field](../concepts/glossary.html#field), [field set](../concepts/glossary.html#field-set), [field value](../concepts/glossary.html#field-value), [tag key](../concepts/glossary.html#tag-key)
+	
+## field set
+The collection of field keys and field values on a point.
 
-**Tags** are indexed, meaning queries on **tag keys** or **tag values** are highly performant.
+Related entries: [field](../concepts/glossary.html#field), [field key](../concepts/glossary.html#field-key), [field value](../concepts/glossary.html#field-value), [point](../concepts/glossary.html#point)  
+	
+## field value  
+The value part of the key-value pair that makes up a field. Field values are the actual data; they can be strings, floats, integers, or booleans. A field value is always associated with a timestamp.
 
-**Tags** are not required.
+Field values are not indexed - queries on field values scan all points that match the specified time range and, as a result, are not performant.
 
-#### Example
-The following are all valid **tags**: `hostname=server01`, `station_id=84`, and `weather='partial sun'`.
+*Query tip:* Compare field values to tag values; tag values are indexed.
 
-## Tag Key
-The **tag key** is the key part of the key-value pair that makes up a **tag** and is always stored as a string.
+Related entries: [field](../concepts/glossary.html#field), [field key](../concepts/glossary.html#field-key), [field set](../concepts/glossary.html#field-set), [tag value](../concepts/glossary.html#tag-value), [timestamp](../concepts/glossary.html#timestamp)
+	
+## function
+InfluxQL aggregations, selectors, and transformations. See [InfluxQL Functions](../query_language/functions.html) for a complete list of InfluxQL functions.
 
-**Tag keys** are unique per **measurement**.
+Related entries: [aggregation](../concepts/glossary.html#aggregation), [selector](../concepts/glossary.html#selector), [transformation](../concepts/glossary.html#transformation)  
 
-## Tag Value
-A **tag value** is the value part of the key-value pair that makes up a **tag** and is always stored as a string.
+## hinted handoff
+A durable queue of data destined for a server which was unavailable at the time the data was received. Coordinating nodes temporarily store queued data when a target node for a write is down for a short period of time.
 
-**Tag values** must be unique per **tag key**.
+Related entries: [cluster](../concepts/glossary.html#cluster), [node](../concepts/glossary.html#node), [server](../concepts/glossary.html#server)
 
-InfluxDB will not allow assignment of `weather='partly sunny'` and `weather='partly cloudy'` to the same **point**.
+## identifier
+Tokens which refer to database names, retention policy names, user names, measurement names, tag keys, and field keys. See [Query Language Specification](../query_language/spec.html#identifiers).
 
-If you write multiple **tag values** for the same **tag key** on a given **point**, one of the **tag values** will be assigned to the **tag key** and all other **tag values** will be silently dropped.
+Related entries: [database](../concepts/glossary.html#database), [field key](../concepts/glossary.html#field-key), [measurement](../concepts/glossary.html#measurement), [retention policy](../concepts/glossary.html#retention-policy-rp), [tag key](../concepts/glossary.html#tag-key), [user](../concepts/glossary.html#user)
 
-## Tag Set
-The **tag set** is the combination of all **tags** on the **point**, including all **tag keys** and their corresponding **tag values**.
+## measurement  
+The part of InfluxDB's structure that describes the data stored in the associated fields. Measurements are strings.
 
-The **tag set** and **measurement** fully describe a **series**.
+Related entries: [field](../concepts/glossary.html#field), [series](../concepts/glossary.html#series)
 
-The **tag set**, **measurement**, and **timestamp** fully describe a **point**.
+## node
+An independent `influxd` process.
 
-The total number of **series** under a given **measurement** is thus identical to the number of distinct **tag sets** applied to **points** within that **measurement**.
+Related entries: [cluster](../concepts/glossary.html#cluster), [server](../concepts/glossary.html#server)
 
-## Field
-A **field** is a key-value pair that records an actual metric for a given **point**.
+## point   
+The part of InfluxDB's data structure that consists of a single collection of fields in a series. Each point is uniquely identified by its series and timestamp.
 
-A **field** is made up of the **field key** and the **field value**.
+You cannot store more than one point with the same timestamp in the same series. Instead, when you write a new point to the same series with the same timestamp as an existing point in that series, InfluxDB silently overwrites the old field set with the new field set.
 
-**Fields** are not indexed, meaning queries on **field keys** or **field values** must scan all points matching the time range of the query. Queries on **fields** are thus not performant, but are assumed to be infrequent for typical use cases.
+Related entries: [field set](../concepts/glossary.html#field-set), [series](../concepts/glossary.html#series), [timestamp](../concepts/glossary.html#timestamp)
 
-If you find yourself querying **fields** consider whether the key-value pair is better stored as a **tag**.
+## query
+An operation that retrieves data from InfluxDB. See [Data Exploration](../query_language/data_exploration.html), [Schema Exploration](../query_language/schema_exploration.html), [Database Management](../query_language/database_management.html).
+	
+## replication factor  
+The attribute of the retention policy that determines how many copies of the data are stored in the cluster. InfluxDB replicates data across `N` data nodes, where `N` is the replication factor.
 
-Regular expressions are not supported when querying against **fields** or **field values**.
+To maintain data availability for queries, the replication factor should be less than or equal to the number of data nodes in the cluster:
 
-Every point must have at least one **Field** or it will be rejected as invalid.
+* Data are fully available when the replication factor is greater than the number of *unavailable* data nodes. 
+* Data may be unavailable when the replication factor is less than the number of *unavailable* data nodes.
 
-#### Example
+Note that there are no query performance benefits from replication. Replication is for ensuring data availability when a data node or nodes are unavailable. See [Database Management](../query_language/database_management.html#create-retention-policies-with-create-retention-policy) for how to set the replication factor.
+	
+Related entries: [cluster](../concepts/glossary.html#cluster), [duration](../concepts/glossary.html#duration), [node](../concepts/glossary.html#node), [retention policy](../concepts/glossary.html#retention-policy-rp)
 
-The pairs `load=0.64`, `event="panels cleaned"`, and `bikes_present=15i` are all valid **Fields**.
+## retention policy (RP)
+The part of InfluxDB's data structure that describes for how long InfluxDB keeps data (duration) and how many copies of those data are stored in the cluster (replication factor). RPs are unique per database and along with the measurement and tag set define a series.
 
-## Field Key
-The **field key** is the key part of the key-value pair that makes up a **field** and is always stored as a string.
+When you create a database, InfluxDB automatically creates a retention policy called `default` with an infinite duration and a replication factor set to the number of nodes in the cluster. See [Database Management](../query_language/database_management.html#retention-policy-management) for retention policy management.
+	
+Related entries: [duration](../concepts/glossary.html#duration), [measurement](../concepts/glossary.html#measurement), [replication factor](../concepts/glossary.html#replication-factor), [series](../concepts/glossary.html#series), [tag set](../concepts/glossary.html#tag-set)
 
-**Field keys** are unique per **point**.
+## schema
+How the data are organized in InfluxDB. The fundamentals of the InfluxDB schema are databases, retention policies, series, measurements, tag keys, tag values, and field keys.
 
-## Field Value
-A **field value** is the value part of the key-value pair that makes up a **field**.
+Related entries: [database](../concepts/glossary.html#database), [field key](../concepts/glossary.html#field-key), [measurement](../concepts/glossary.html#measurement), [retention policy](../concepts/glossary.html#retention-policy-rp), [series](../concepts/glossary.html#series), [tag key](../concepts/glossary.html#tag-key), [tag value](../concepts/glossary.html#tag-value)
+	
+## selector  
+An InfluxQL function that returns a single point from the range of specified points. See [InfluxQL Functions](../query_language/functions.html#selectors) for a complete list of the available and upcoming selectors.
 
-**Field value** data may be stored as a string, boolean, int64, or float64.
+Related entries: [aggregation](../concepts/glossary.html#aggregation), [function](../concepts/glossary.html#function), [transformation](../concepts/glossary.html#transformation)
+	
+## series  
+The collection of data in InfluxDB's data structure that share a measurement, tag set, and retention policy. 
 
-If the **field value** is number it may contain one decimal point.
+> **Note:** The field set is not part of the series identification!
 
-Scientific notation is a valid numerical representation.
+Related entries: [field set](../concepts/glossary.html#field-set), [measurement](../concepts/glossary.html#measurement), [retention policy](../concepts/glossary.html#retention-policy-rp), [tag set](../concepts/glossary.html#tag-set)
 
-**Field values** must be unique per **field key**, meaning you cannot assign `load=0.64` and `load=1.5` to the same **point**.
+## series cardinality
+The count of all combinations of measurements and tags within a given data set. For example, take measurement `mem_available` with tags `host` and `total_mem`.  If there are 35 different `host`s and 15 different `total_mem` values then series cardinality for that measurement is `35 * 15 = 525`. To calculate series cardinality for a database add the series cardinalities for the individual measurements together.
 
-There is no error if you write multiple **field values** for the same **field key** on a given **point**. One of the **field values** will be assigned to the **field key** and all other **field values** will be silently dropped.
+Related entries: [tag set](../concepts/glossary.html#tag-set), [measurement](../concepts/glossary.html#measurement), [tag key](../concepts/glossary.html#tag-key)
 
-## Field Set
-The **field set** is the combination of all **fields** on the **point**, including all **field keys** and their corresponding **field values**.
+## server  
+A machine, virtual or physical, that is running InfluxDB. There should only be one InfluxDB process per server.
 
-## Database
-A **database** is a logical container for **users**, **retention policies**, and **continuous queries** which must be unique per **database**.
+Related entries: [cluster](../concepts/glossary.html#cluster), [node](../concepts/glossary.html#node)
 
-**Databases** are unique per **cluster**.
+## tag  
+The key-value pair in InfluxDB's data structure that records metadata. Tags are an optional part of InfluxDB's data structure but they are useful for storing commonly-queried metadata; tags are indexed so queries on tags are performant.
+	
+*Query tip:* Compare tags to fields; fields are not indexed.
 
-Typical use cases for multiple **databases** are to separate development and production metrics or for multi-tenant systems where distinct authentication to the **database** is desirable.
+Related entries: [field](../concepts/glossary.html#field), [tag key](../concepts/glossary.html#tag-key), [tag set](../concepts/glossary.html#tag-set), [tag value](../concepts/glossary.html#tag-value)
 
-## Retention Policy
-A **retention policy** is a collection of **measurements**, which must be unique within the **retention policy**.
+## tag key  
+The key part of the key-value pair that makes up a tag. Tag keys are strings and they store metadata. Tag keys are indexed so queries on tag keys are performant.
 
-**Retention policies** are unique per **database**.
+*Query tip:* Compare tag keys to field keys; field keys are not indexed.
 
-**Retention policies** are frequently abbreviated as **RPs**.
+Related entries: [field key](../concepts/glossary.html#field-key), [tag](../concepts/glossary.html#tag), [tag set](../concepts/glossary.html#tag-set), [tag value](../concepts/glossary.html#tag-value) 
+	
+## tag set
+The collection of tag keys and tag values on a point. 
 
-A **retention policy** has a **duration** and a **replication factor**.
+Related entries: [point](../concepts/glossary.html#point), [series](../concepts/glossary.html#series), [tag](../concepts/glossary.html#tag), [tag key](../concepts/glossary.html#tag-key), [tag value](../concepts/glossary.html#tag-value)
+ 
+## tag value  
+The value part of the key-value pair that makes up a tag. Tag values are strings and they store metadata. Tag values are indexed so queries on tag values are performant.  
 
-All **databases** must have a default **retention policy**, although any **retention policy** may be declared the default.
+Related entries: [tag](../concepts/glossary.html#tag), [tag key](../concepts/glossary.html#tag-key), [tag set](../concepts/glossary.html#tag-set)
 
-When a **database** is created a **Retention Policy** named “default” is automatically created with an infinite **duration** and a **replication factor** of 1.
+## timestamp  
+The date and time associated with a point. All time in InfluxDB is UTC.
 
-## Duration
-The **duration** determines how long data within the **retention policy** must be kept.
+For how to specify time when writing data, see [Write Syntax](../write_protocols/write_syntax.html). For how to specify time when querying data, see [Data Exploration](../query_language/data_exploration.html#time-syntax-in-queries).
 
-Data older than the **duration** may be automatically dropped by the **database** at any time.
+Related entries: [point](../concepts/glossary.html#point)
+	
+## transformation  
+An InfluxQL function that returns a value or a set of values calculated from specified points, but does not return an aggregated value across those points. See [InfluxQL Functions](../query_language/functions.html#transformations) for a complete list of the available and upcoming aggregations.
 
-**Durations** may be given in terms of minutes, hours, days, or weeks, with INF meaning retain all data forever.
+Related entries: [aggregation](../concepts/glossary.html#aggregation), [function](../concepts/glossary.html#function), [selector](../concepts/glossary.html#selector)
+	
+## user  
+There are two kinds of users in InfluxDB:
 
-**Durations** may not be shorter than one hour.
+* *Admin users* have `READ` and `WRITE` access to all databases and full access to administrative queries and user management commands.
+* *Non-admin users* have `READ`, `WRITE`, or `ALL` (both `READ` and `WRITE`) access per database. 
 
-## Replication Factor
-The **replication factor** determines how many independent copies of each **point** are stored within the **cluster**.
-
-**Points** will be duplicated across N **data nodes**, where N is the **replication factor**.
-
-Data availability is maintained when the number of unavailable **data nodes** in the **cluster** is less than the **replication factor**.
-
-Once the number of unavailable **data nodes** equals or exceeds the **replication factor** some data may be unavailable for queries.
-
-Replication is used to ensure data availability in the event a **data node** or nodes are unavailable. There are no query performance benefits from replication.
-
-The **replication factor** should be less than or equal to the number of **data nodes** in the **cluster**.
-
-## Continuous Query
-A **continuous query** is a special type of query that is run internally by the database.
-
-**Continuous queries** automatically aggregate or downsample data from one **series** into another **series**.
-
-**Continuous queries** are unique per **database**.
-
-**Continuous queries** are frequently abbreviated as **CQs**.
-
-**Continuous queries** must contain at least one **aggregation** in the SELECT clause.
-
-It is not currently possible to copy unaggregated **points** from one **series** to another.
-
-**CQs** must not contain a time restriction in the WHERE clause. The database will interpolate an absolute time restriction for the query at runtime.
-
-For example, suppose a database has a **CQ** like `SELECT MEAN(value) INTO new_measurement FROM old_measurement GROUP BY time(5m)` and the time is currently 10:04:59 (we will omit the date for clarity.) Shortly after 10:05 the database will execute the **continuous query**.
-
-The exact timing is not guaranteed, but **CQs** run once for each interval in the GROUP BY statement, meaning this **CQ** will run once every five minutes. When it runs it will calculate the mean for the **Field** “value” on the **Measurement** “old_measurement” over the interval from 10:00:00 to 10:04:59.999999999 and insert that into the **Measurement** “new_measurement”. Again shortly after 10:10 the database will calculate the mean of the value for the interval from 10:05:00 to 10:09:59.999999999 and insert that into “new_measurement”.
-
-## Aggregation
-An **aggregation** is a function that takes a collection of **points** and produces a summary value over a particular time period.
-
-**Aggregations** supported include COUNT, MEAN, SUM, MEDIAN, PERCENTILE, MIN, MAX, SPREAD, STDDEV, DERIVATIVE, NON_NEGATIVE_DERIVATIVE, DISTINCT, FIRST, and LAST.
-
-**Aggregations** may be run on intervals as short as 1 second and the intervals may be specified in seconds, minutes, hours, days, or weeks.
-
-## Selector
-Functions with Single-value return.
-
-## Transformation
-Functions that transform the data but are neither a **selector** nor an **aggregation**. DERIVATIVE is a good example, as would be HISTOGRAM if implemented.
-
-## Function
-**Aggregations**, **selectors**, and **transformations**, and eventually custom functions.
-
-## Timestamp
-A **timestamp** is the date and time associated with a particular **point**.
-
-All **points** must have one and only one **timestamp**.
-
-The **timestamp** may be specified in UNIX epoch or a datetime string valid under RFC 3339.
-
-For either method precision may be given in seconds, milliseconds, microseconds, or nanoseconds. If precision is not provided it is assumed to be seconds.
-
-If a **timestamp** is not specified at write time the **Node** receiving the write will insert its current system time as the timestamp, using nanosecond precision.
-
-## Cluster
-A **cluster** is a collection of **servers** running InfluxDB **nodes**.
-
-**Clusters** may have 1 or 3 nodes in InfluxDB 0.9.
-
-## User
-A **user** is required when authentication is enabled for the database.
-
-## Node
-A **node** is a logical concept in the clustering setup. **Nodes** belong to **servers** (one node per server.)
-
-## Server
-A **server** is a machine, virtual or physical, running InfluxDB. There should only be one InfluxDB process per **server**.
+When authentication is enabled, InfluxDB only executes HTTP requests that are sent with a valid username and password. See [Authentication and Authorization](../administration/authentication_and_authorization.html).
 
 <!--
-## Column
+## wal
 
-## Identifier
+## shard
 
-## Batch
+## shard group
 
-## Shard
+## storage engines (tsm1, b1, bz1)
 
-## Shard File
 -->

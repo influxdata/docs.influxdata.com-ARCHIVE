@@ -2,6 +2,9 @@
 title: Frequently Encountered Issues
 aliases:
   - /docs/v0.9/guides/troubleshooting.html
+menu:
+  main:
+    parent: troubleshooting
 ---
 
 This page addresses frequent sources of confusion and places where InfluxDB behaves in an unexpected way relative to other database systems. Where applicable, it links to outstanding issues on GitHub.
@@ -195,7 +198,7 @@ For example,
 <br>`cpu_load,hostname=server02,az=us_west value=24.5 1234567890000000` and
 <br>`cpu_load,hostname=server02,az=us_west value=5.24 1234567890000000` are identical points. The last one written will overwrite the other.
 
-In order to store both points, simply introduce an arbitrary new tag to enfore uniqueness. <br>`cpu_load,hostname=server02,az=us_west,uniq=1 value=24.5 1234567890000000` and
+In order to store both points, simply introduce an arbitrary new tag to enforce uniqueness. <br>`cpu_load,hostname=server02,az=us_west,uniq=1 value=24.5 1234567890000000` and
 <br>`cpu_load,hostname=server02,az=us_west,uniq=2 value=5.24 1234567890000000` are now unique points, and each will persist in the database. 
 
 You can also increment the timestamp by a nanosecond:

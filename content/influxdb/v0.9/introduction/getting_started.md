@@ -1,5 +1,8 @@
 ---
 title: Getting Started with InfluxDB
+menu:
+  main:
+    parent: introduction
 ---
 
 With [InfluxDB installed](installation.html), you're ready to start doing awesome things. In this section we'll use the `influx` command line interface (CLI). The CLI is included in all InfluxDB packages and is a lightweight and simple way to interact with the database. The CLI communicates with InfluxDB by making requests to the InfluxDB API. 
@@ -7,12 +10,12 @@ With [InfluxDB installed](installation.html), you're ready to start doing awesom
 > **Note:** The database can also be used by making direct HTTP requests to the API. See [Reading and Writing Data](../concepts/reading_and_writing_data.html) for examples.
 
 ## Logging in and creating your first database
-If you've installed InfluxDB locally, the `influx` command should be available via the command line. Executing `influx` will start the CLI and automatically connect to the local InfluxDB instance (assuming you have already started the server with `influxd`). If `influx` is not on your path, try `/opt/influxdb/influx`. The output should look like this:
+If you've installed InfluxDB locally, the `influx` command should be available via the command line. Executing `influx` will start the CLI and automatically connect to the local InfluxDB instance (assuming you have already started the server with `influxd`). The output should look like this:
 
 ```sh
 $ influx
-Connected to http://localhost:8086 version 0.9.0
-InfluxDB shell 0.9.0
+Connected to http://localhost:8086 version 0.9
+InfluxDB shell 0.9
 > 
 ```
 
@@ -38,11 +41,13 @@ The `SHOW DATABASES` statement can be used to show all existing databases.
 name: databases
 ---------------
 name
+_internal
 mydb
 
 > 
 ```
 
+> **Note:** The `_internal` database is created and used by InfluxDB to store internal runtime metrics. Check it out later to get an interesting look at how InfluxDB is performing under the hood.
 
 Unlike `SHOW DATABASES`, most InfluxQL statements must operate against a specific database. You may explicitly name the database with each query, but the CLI provides a convenient statement, `USE <db-name>`, which will automatically set the database for all future requests.
 
@@ -73,7 +78,7 @@ stock,symbol=AAPL bid=127.46,ask=127.48
 temperature,machine=unit42,type=assembly external=25,internal=37 1434067467000000000
 ```
 
-> **Note:** Measurements, tags, and field names containing any character other than (A-Z,a-z,0-9,_) or starting with a digit must be double-quoted. More information on the line protocol can be found on the [Reading and Writing Data](../concepts/reading_and_writing_data.html) page.
+> **Note:** More information on the line protocol can be found on the [Write Syntax](../write_protocols/write_syntax.html) page.
 
 To insert a single time-series datapoint into InfluxDB using the CLI, enter `INSERT` followed by a point:
 
@@ -89,10 +94,9 @@ Now we will query for the data we just wrote.
 ```sql
 > SELECT * FROM cpu
 name: cpu
-tags: host=serverA, region=us-west
-time                value
-----                -----
-2015-06-11T16:02:54.830398489Z  0.64
+---------
+time		    	                     host     	region   value
+2015-10-21T19:28:07.580664347Z  	serverA	  us_west	0.64
 
 > 
 ```
@@ -111,14 +115,13 @@ Let's try storing a different type of data -- sensor data. Enter the following d
 All fields are returned on query:
 
 ```sql
-> select * from temperature
+> SELECT * FROM temperature
 name: temperature
-tags: machine=unit42, type=assembly
-time                external    internal
-----                --------    --------
-2015-06-11T16:04:52.653752331Z  25      37
+-----------------
+time		                        	 external	  internal	machine	type
+2015-10-21T19:28:08.385013942Z  25	        	37     		unit42  assembly
 
->
+> 
 ```
 
 InfluxDB supports a sophisticated query language, allowing many different types of queries. For example:
@@ -131,46 +134,5 @@ InfluxDB supports a sophisticated query language, allowing many different types 
 > SELECT * FROM cpu_load_short WHERE value > 0.9
 ```
 
-This is all you need to know to write data into InfluxDB and query it back. Of course, to write significant amounts of data you will want to access the HTTP API directly, or use one of the many client libraries.
-
-> **Note:** All identifiers are case-sensitive
-
-```sql
-> show databases
-name: databases
----------------
-name
-mydb
-MyDb
-MYDB
-```
-
-```sql
-> show series
-name: CaseSensitive
--------------------
-_key            TAG1  Tag1  tag1
-CaseSensitive             
-CaseSensitive,Tag1=key          key 
-CaseSensitive,tag1=key            key
-CaseSensitive,TAG1=key        key   
-CaseSensitive,TAG1=key,tag1=key,Tag1=key  key key key
-
-
-name: casesensitive
--------------------
-_key            TAG1  Tag1  tag1
-casesensitive             
-casesensitive,Tag1=key          key 
-casesensitive,TAG1=key,tag1=key,Tag1=key  key key key
-```
-
-```sql
-> select * from casesensitive
-name: casesensitive
-tags: TAG1=, Tag1=, tag1=
-time        VALUE Value value
-----        ----- ----- -----
-2015-06-12T23:08:54.80898266Z     1
-2015-06-12T23:10:28.604159664Z  3 2 1
-```
+This is all you need to know to write data into InfluxDB and query it back. To learn more about the InfluxDB write protocol, check out the guide on [Writing Data](https://influxdb.com/docs/v0.9/guides/writing_data.html). To futher explore the query language, check out the guide on [Querying Data](https://influxdb.com/docs/v0.9/guides/querying_data.html). For more information on InfluxDB concepts, check out the [Key Concepts]
+(https://influxdb.com/docs/v0.9/concepts/key_concepts.html) page.

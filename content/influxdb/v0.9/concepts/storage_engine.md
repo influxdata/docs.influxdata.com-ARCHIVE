@@ -2,6 +2,9 @@
 title: Storage Engine
 aliases:
   - /docs/v0.9/advanced_topics/storage_engine.html
+menu:
+  main:
+    parent: concepts
 ---
 
 Versions 0.9.0-0.9.4 used BoltDB as the underlying storage engine. This writeup is about the new storage engine that will be released in 0.9.5, the Time Structured Merge Tree.

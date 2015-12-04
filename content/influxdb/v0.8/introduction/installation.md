@@ -17,7 +17,7 @@ InfluxDB can potentially have many open files. You will need to up the open file
 
 Replace the `riak` user with `influxdb` and you should be good to go.
 
-## InfluxDB 0.8.9 Installion
+## InfluxDB 0.8.9 Installation
 
 > **Note:** The only addition in InfluxDB version 0.8.9 is an export tool to facilitate migrations to InfluxDB version 0.9. Migration instructions can be found on the [InfluxDB 0.9 Importer README page](https://github.com/influxdb/influxdb/blob/master/importer/README.md).
 
@@ -51,7 +51,7 @@ Then start the daemon by running:
 sudo /etc/init.d/influxdb start
 ```
 
-## InfluxDB 0.8.8 Installion
+## InfluxDB 0.8.8 Installation
 
 ## OS X
 

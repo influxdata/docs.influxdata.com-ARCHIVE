@@ -2,6 +2,9 @@
 title: Writing Data
 aliases:
   - /docs/v0.9/concepts/reading_and_writing_data.html
+menu:
+  main:
+    parent: guides
 ---
 
 There are many ways to write data into InfluxDB including [client libraries](../clients/api.html) and plugins for common data formats such as [Graphite](../write_protocols/graphite.html). Here we'll show you how to create a database and write data to that database using the built-in HTTP API.
@@ -54,6 +57,8 @@ Write the data in `cpu_data.txt` to the `mydb` database with:
 <br>
 `curl -i -XPOST 'http://localhost:8086/write?db=mydb' --data-binary @cpu_data.txt`
 
+> **Note:** If your data file has more than 5,000 points, it may be necessary to split that file into several files in order to write your data in batches to InfluxDB. [By default](https://github.com/influxdb/influxdb/blob/master/etc/config.sample.toml#L97), the HTTP request times out after five seconds. InfluxDB will still attempt to write the points after that time out but there will be no confirmation that they were successfully written.
+
 ### Schemaless Design
 ---
 InfluxDB is a schemaless database. You can add new measurements, tags, and fields at any time. Note that if you attempt to write data with a different type than previously used (for example, writing a string to a field that previously accepted integers), InfluxDB will reject those data.
@@ -64,7 +69,7 @@ InfluxDB uses HTTP solely as a convenient and widely supported data transfer pro
 
 Modern web APIs have settled on REST because it addresses a common need. As the number of endpoints grows the need for an organizing system becomes pressing. REST is the industry agreed style for organizing large numbers of endpoints. This consistency is good for those developing and consuming the API: everyone involved knows what to expect.
 
-REST, however, is a convention. InfluxDB makes due with three API endpoints. This simple, easy to understand system uses HTTP as a transfer system for [InfluxQL](https://github.com/influxdb/influxdb/blob/master/influxql/INFLUXQL.md).  The InfluxDB API makes no attempt to be RESTful.
+REST, however, is a convention. InfluxDB makes do with three API endpoints. This simple, easy to understand system uses HTTP as a transfer system for [InfluxQL](https://github.com/influxdb/influxdb/blob/master/influxql/INFLUXQL.md).  The InfluxDB API makes no attempt to be RESTful.
 
 
 ### HTTP response summary

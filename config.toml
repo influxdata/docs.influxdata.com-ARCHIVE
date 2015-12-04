@@ -1,5 +1,5 @@
 title = "InfluxData Documentation"
-baseurl = "http://docs.influxdata.com/"
+baseurl = "https://docs.influxdata.com"
 
 languageCode = "en-us"
 
@@ -12,29 +12,76 @@ SectionPagesMenu = "products"
   name = "Telegraf"
   identifier = "telegraf"
   weight = 2
-  url = "/telegraf/v0.2/"
+  url = "/telegraf/"
 [[menu.products]]
   name = "InfluxDB"
   identifier = "influxdb"
   weight = 1
-  url = "/influxdb/v0.9/"
+  url = "/influxdb/"
 [[menu.products]]
   name = "Kapacitor"
   identifier = "kapacitor"
   weight = 3
-  url = "/kapacitor/v0.1/"
+  url = "/kapacitor/"
 [[menu.products]]
   name = "Chronograf"
   identifier = "chronograf"
   weight = 4
-  url = "/chronograf/v0.2/"
+  url = "/chronograf/"
 [[menu.products]]
   name = "Hosted"
   identifier = "hosted"
   weight = 5
   url = "/hosted/"
-[[menu.products]]
-  name = "Enterprise"
-  identifier = "enterprise"
-  weight = 6
-  url = "/enterprise/"
+
+
+[[menu.influxdb]]
+  name = "Introduction"
+  identifier = "introduction"
+  weight = 1
+  url = "/influxdb/introduction/"
+[[menu.influxdb]]
+  name = "Guides"
+  identifier = "guides"
+  weight = 2
+  url = "/influxdb/guides/"
+[[menu.influxdb]]
+  name = "Concepts"
+  identifier = "concepts"
+  weight = 3
+  url = "/influxdb/concepts"
+[[menu.influxdb]]
+  name = "Troubleshooting"
+  identifier = "troubleshooting"
+  weight = 4
+  url = "/influxdb/troubleshooting"
+[[menu.influxdb]]
+  name = "Write Protocols and Plugins"
+  identifier = "write_protocols"
+  weight = 5
+  url = "/influxdb/write_protocols"
+[[menu.influxdb]]
+  name = "Query Language"
+  identifier = "query_language"
+  weight = 5
+  url = "/influxdb/query_language"
+[[menu.influxdb]]
+  name = "Client Libraries"
+  identifier = "clients"
+  weight = 5
+  url = "/influxdb/clients"
+[[menu.influxdb]]
+  name = "Administration"
+  identifier = "administration"
+  weight = 5
+  url = "/influxdb/administration"
+[[menu.influxdb]]
+  name = "Tools"
+  identifier = "tools"
+  weight = 5
+  url = "/influxdb/tools"
+[[menu.influxdb]]
+  name = "About the Project"
+  identifier = "about"
+  weight = 5
+  url = "/influxdb/about"

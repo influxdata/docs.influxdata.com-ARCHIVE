@@ -1,3 +1,10 @@
+---
+title: Comparisson to SQL
+menu:
+  main:
+    parent: concepts
+---
+
 # What's in a database?
 
 This page gives SQL users an overview of how InfluxDB is like an SQL database and how it's not. It highlights some of the major distinctions between the two and provides a loose crosswalk between the different database terminologies and query languages.
@@ -122,7 +129,7 @@ SELECT * FROM foodships WHERE planet = 'Saturn' AND time > '2015-04-16 12:00:01'
 As shown in the example above, InfluxQL allows you to specify the time range of your query in the `WHERE` clause. You can use date-time strings wrapped in single quotes that have the format `YYYY-MM-DD HH:MM:SS.mmm` ( `mmm` is milliseconds and is optional, and you can also specify microseconds or nanoseconds). You can also use relative time with `now()` which refers to the server's current timestamp:
 
 ```sql
-SELECT * FROM foodships WHERE time > now() -1h
+SELECT * FROM foodships WHERE time > now() - 1h
 ```
 
 That query outputs the data in the `foodships` measure where the timestamp is newer than the server's current time minus one hour. The options for specifying time durations with `now()` are:
@@ -138,7 +145,7 @@ That query outputs the data in the `foodships` measure where the timestamp is ne
 
 <br/>
 
-InfluxQL also supports regular expressions, arithmetic in expressions, `SHOW` statements, and `GROUP BY` statements. See our [data exploration](https://influxdb.com/docs/v0.9/query_language/data_exploration.html) page for an in-depth discussion of those topics. InfluxQL functions include `COUNT`, `MIN`, `MAX`, `MEDIAN`, `DERIVATIVE` (a function in progress), and more. For a full list check out the [functions](https://influxdb.com/docs/v0.9/query_language/functions.html) page.
+InfluxQL also supports regular expressions, arithmetic in expressions, `SHOW` statements, and `GROUP BY` statements. See our [data exploration](https://influxdb.com/docs/v0.9/query_language/data_exploration.html) page for an in-depth discussion of those topics. InfluxQL functions include `COUNT`, `MIN`, `MAX`, `MEDIAN`, `DERIVATIVE` and more. For a full list check out the [functions](https://influxdb.com/docs/v0.9/query_language/functions.html) page.
 
 Now that you have the general idea, check out our [Getting Started Guide](https://influxdb.com/docs/v0.9/introduction/getting_started.html).
 

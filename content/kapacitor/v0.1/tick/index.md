@@ -13,7 +13,7 @@ defines methods that can be called on it. These methods come in two flavors.
 The following reference documentation list each node's `Property` methods and `Chaining` methods along with examples and descriptions of the function of the node.
 
 Every TICKscript will have either a `stream` or `batch` variable defined depending on the type of task you want to run.
-The `stream` and `batch` variables are an instance of a [StreamNode](/docs/kapacitor/v0.1/tick/stream_node.html) or [BatchNode](/docs/kapacitor/v0.1/tick/batch_node.html) respectively.
+The `stream` and `batch` variables are an instance of a [StreamNode](/docs/kapacitor/v0.1/tick/stream_node.html) or [SourceBatchNode](/docs/kapacitor/v0.1/tick/source_batch_node.html) respectively.
 
 Pipelines
 ---------
@@ -37,98 +37,15 @@ Example
 -------
 
 ```javascript
-    // Define a basic batch node that queries for idle cpu.
-    var cpu = batch
-        .query('''
-               SELECT mean("idle")
-               FROM "tests"."default".cpu
-               WHERE dc = 'nyc'
-        ''')
-        .period(10s)
-        .groupBy(time(2s))
-    // Filter down a fork of the cpu data for serverA
-    cpu
-        .fork()
-        .where("host = 'serverA'")
-        .mapReduce(influxql.top("mean", 10)
-        .window()
-            .period(1m)
-            .every(1m)
-        .httpOut("serverA")
-    // Filter down a fork of the cpu data for serverB
-    cpu
-        .fork()
-        .where("host = 'serverB'")
-        .mapReduce(influxql.top("mean", 10)
-        .window()
-            .period(1m)
-            .every(1m)
-        .httpOut("serverB")
+stream
+    .eval(lambda: "errors" / "total")
+        .as('error_percent')
+    // Write the transformed data to InfluxDB
+    .influxDBOut()
+        .database('mydb')
+        .retentionPolicy('myrp')
+        .measurement('errors')
+        .tag('kapacitor', 'true')
+        .tag('version', '0.1')
 ```
-
-Syntax
-------
-
-### Strings
-
-There are three ways to write string literals:
-
-1. Single quoted strings with backslash escaped single quotes.
-
-    `'single \' quoted'` -> `single ' quoted`
-
-2. Double quoted strings with backslash escaped double quotes.
-
-    `"double \" quoted"` -> `double " quoted`
-
-3. Triple single quoted strings with no escaping.
-
-    `'''triple \" quoted'''` -> `triple \" quoted`
-
-### Numbers
-
-Numbers are typed and are either a `float64` or an `int64`. If the number contains a decimal it is considered to be a `float64` otherwise it is an `int64`.
-
-Valid number literals:
-
-* 1 -- int64
-* 1.2 -- float64
-* -5 -- int64
-* -5.0 -- float64
-* 0.42 -- float64
-* -.1 -- float64
-
-Invalid number literals:
-
-* .1 -- positive decimals must have a leading zero
-
-### Durations
-
-TICKscript supports durations literals. They are of the form of an InfluxQL duration. See https://influxdb.com/docs/v0.9/query_language/spec.html#literals
-
-
-
-### Statements
-
-A statement begins with an identifier and any number of chaining function calls. The result of a statement can be assigned to a variable using the `var` keyword and assignment operator `=`.
-
-Example:
-
-```javascript
-    var errors = stream.fork().from("errors")
-    var requests = stream.fork().from("requests")
-    // Join the errors and requests stream
-    errors.join(requests)
-            .as("errors", "requests")
-            .rename("error_rate")
-        .apply(expr("rate", "errors.value / requests.value"))
-```
-
-### Whitespace
-
- Whitespace is ignored and can be used to format the code as you like.
-
-### Comments
-
- Basic `//` style single line comments are supported.
 

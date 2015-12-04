@@ -1,5 +1,9 @@
 ---
 title: Write Syntax
+menu:
+  main:
+    weight: 2
+    parent: write_protocols
 ---
 
 Syntax is always a challenge to remember, so here's a reference
@@ -54,7 +58,7 @@ Tag keys and values, and field keys and values must be separated by the equals s
 
 ### Escaping Characters
 
-If a measurement, tag key, tag value, or field key contains a space ` `, comma `,`, or an equals sign `=` it must be escaped using the backslash character `\`. Backslash characters do not need to be escaped.
+If a tag key, tag value, or field key contains a space ` `, comma `,`, or an equals sign `=` it must be escaped using the backslash character `\`. Backslash characters do not need to be escaped. Commas `,` and spaces ` ` will also need to be escaped for measurements, though equals signs `=` do not.
 
 ### Comments
 
@@ -200,12 +204,6 @@ In this context, "valid node" means a node that hosts a copy of the shard contai
 curl -X POST 'http://localhost:8086/write?db=mydb' --data-binary 'disk_free,hostname=server01 value=442221834240i 1435362189575692182'
 ```
 
-You can also supply the query string parameters elsewhere in the command. They must be URL encoded:
-
-```bash
-curl -X POST 'http://localhost:8086/write' --data-urlencode 'db=mydb' --data-binary 'disk_free,hostname=server01 value=442221834240i 1435362189575692182'
-```
-
 #### Write a Point to a non-default Retention Policy
 
 Use the `rp=<retention_policy` query string parameter to supply a target retention policy. If not specified, the default retention policy for the target database will be used.
@@ -214,20 +212,12 @@ Use the `rp=<retention_policy` query string parameter to supply a target retenti
 curl -X POST 'http://localhost:8086/write?db=mydb&rp=six_month_rollup' --data-binary 'disk_free,hostname=server01 value=442221834240i 1435362189575692182'
 ```
 
-```bash
-curl -X POST 'http://localhost:8086/write' --data-urlencode 'db=mydb' --data-urlencode 'rp=six_month_rollup' --data-binary 'disk_free,hostname=server01 value=442221834240i 1435362189575692182'
-```
-
 #### Write a Point Using Authentication
 
 Use the `u=<user>` and `p=<password>` to pass the authentication details, if required.
 
 ```bash
 curl -X POST 'http://localhost:8086/write?db=mydb&u=root&p=123456' --data-binary 'disk_free,hostname=server01 value=442221834240i 1435362189575692182'
-```
-
-```bash
-curl -X POST 'http://localhost:8086/write' --data-urlencode 'db=mydb' --data-urlencode 'u=root&p=correct horse battery staple' --data-binary 'disk_free,hostname=server01 value=442221834240i 1435362189575692182'
 ```
 
 #### Specify Non-nanosecond Timestamps
@@ -240,19 +230,11 @@ All timestamps are assumed to be Unix nanoseconds unless otherwise specified. If
 curl -X POST 'http://localhost:8086/write?db=mydb&precision=ms' --data-binary 'disk_free value=442221834240i 1435362189575'
 ```
 
-```bash
-curl -X POST 'http://localhost:8086/write' --data-urlencode 'db=mydb&precision=s' --data-binary @points.txt
-```
-
 #### Write a Batch of Points with `curl`
 
 You can also pass a file using the `@` flag. The file can contain a batch of points, one per line. Points must be separated by newline characters `\n`. Batches should be 5000 points or fewer for best performance.
 
-`curl -X POST 'http://<hostname>:<port>/write?db=<database>' --data-binary @<filename>`
-
-```bash
-curl -X POST 'http://localhost:8086/write' --data-urlencode 'db=mydb&rp=myrp&u=root&p=root' --data-binary @points.txt
-```
+`curl -X POST 'http://localhost:8086/write?db=<database>' --data-binary @<filename>`
 
 ### Caveats
 

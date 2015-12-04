@@ -40,9 +40,11 @@ The examples below query data using [InfluxDB's Command Line Interface (CLI)](..
 
 #### Sample data
 <br>
+If you'd like to follow along with the queries in this document, see [Sample Data](../sample_data/data_download.html) for how to download and write the data to InfluxDB.
+
 This document uses publicly available data from the [National Oceanic and Atmospheric Administration's (NOAA) Center for Operational Oceanographic Products and Services](http://tidesandcurrents.noaa.gov/stations.html?type=Water+Levels). The data include water levels (ft) collected every six seconds at two stations (Santa Monica, CA (ID 9410840) and Coyote Creek, CA (ID 9414575)) over the period from August 18, 2015 through September 18, 2015.
 
-A subsample of the data in InfluxDB: 
+A subsample of the data in the measurement `h2o_feet`: 
 ```
 name: h2o_feet
 --------------
