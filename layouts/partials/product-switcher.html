@@ -1,0 +1,21 @@
+{{ if not .IsHome }}
+{{ $currentNode := . }}
+<div class="product-switcher--container" id="product-switcher--container">
+    <div class="product-switcher--dismiss" id="product-switcher--dismiss"></div>
+    <nav class="product-switcher--menu" id="product-switcher--menu">
+        <div class="product-switcher--title">Developer Docs</div>
+        {{ range .Site.Menus.products }}
+        <a class="product-switcher--item{{if or ($currentNode.IsMenuCurrent "products" .) ($currentNode.HasMenuCurrent "products" .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
+        {{ end }}
+    </nav>
+</div>
+{{ range .Site.Menus.products }}
+{{ if or ($currentNode.IsMenuCurrent "products" .) ($currentNode.HasMenuCurrent "products" .) }}
+<div class="product-switcher" id="product-switcher">
+    <div class="product-switcher--current">{{ .Name }}</div>
+    <!-- TODO(Gunnar): Add a version number -->
+    <div class="product-switcher--toggle"><i class="icon arrow-down"></i></div>
+</div>
+{{ end }}
+{{ end }}
+{{ end }}

@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /
+## TODO(Gunnar): Uncomment and these lines for docs launch.
+## Disallow: /influxdb/v0.6/
+## Disallow: /influxdb/v0.7/
