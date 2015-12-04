@@ -1,5 +1,9 @@
 ---
 title: InfluxDB Query Language Specification
+menu:
+  main:
+    weight: 6
+    parent: query_language
 ---
 
 ## Introduction

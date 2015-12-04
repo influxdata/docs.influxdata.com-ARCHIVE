@@ -1,5 +1,9 @@
 ---
 title: Query Syntax
+menu:
+  main:
+    weight: 7
+    parent: query_language
 ---
 
 The InfluxDB Query Language (InfluxQL) syntax is a SQL-like query language tailored for querying ranges of time. This page explains the InfluxQL syntax. See the [specification](/docs/v0.9/query_language/spec.html) for a formal explanation of InfluxQL.

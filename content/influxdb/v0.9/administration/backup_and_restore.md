@@ -2,6 +2,10 @@
 title: Backup and Restore
 aliases:
   - /docs/v0.9/concepts/backup_and_restore.html
+menu:
+  main:
+    weight: 3
+    parent: administration
 ---
 
 Starting with v0.9.0, InfluxDB has the ability to snapshot a single data node at a point-in-time and restore it.

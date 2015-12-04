@@ -7,6 +7,7 @@ languageCode = "en-us"
   plainIdAnchors = true
 
 SectionPagesMenu = "products"
+
 [[menu.products]]
   name = "Telegraf"
   identifier = "telegraf"
