@@ -3,9 +3,11 @@ title: Continuous Queries
 aliases:
   - /docs/v0.9/concepts/continuous_queries.html
 menu:
-  main:
-    weight: 5
+  influxdb:
+    weight: 40
     parent: query_language
+  products:
+    parent: influxdb
 ---
 
 When writing in large amounts of raw data, you will often want to query a downsampled variant of the data for viewing or analysis. In some cases, this downsampled data may be needed many times in the future, and repeatedly computing the same rollups is wasteful. Continuous queries let you precompute these expensive queries into another time series in real-time.

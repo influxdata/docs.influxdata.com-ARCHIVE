@@ -1,9 +1,11 @@
 ---
 title: Database Configuration
 menu:
-  main:
-    weight: 5
+  influxdb:
+    weight: 40
     parent: administration
+  products:
+    parent: influxdb
 ---
 
 ## The basics

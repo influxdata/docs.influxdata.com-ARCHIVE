@@ -1,11 +1,13 @@
 ---
-title: Using the Influx Shell
+title: InfluxDB CLI/Shell
 aliases:
   - /docs/v0.9/clients/shell.html
 menu:
-  main:
-    weight: 1
+  influxdb:
+    weight: 0
     parent: tools
+  products:
+    parent: influxdb
 ---
 
 The Influx shell is an interactive shell for InfluxDB, and is part of all InfluxDB distributions starting with the InfluxDB 0.9.0. The shell is not compatible with InfluxDB 0.8 and earlier. If you install InfluxDB via a package manager, the shell is installed at `/usr/bin/influx` (`/usr/local/bin/influx` on OS X).
