@@ -1,8 +1,10 @@
 ---
 title: Telegraf Metrics Collection
 menu:
-  main:
+  influxdb:
     url: "https://github.com/influxdb/telegraf"
-    weight: 4
+    weight: 20
     parent: tools
+  products:
+    parent: influxdb
 ---

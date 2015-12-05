@@ -4,9 +4,11 @@ aliases:
   - /docs/v0.9/administration/authentication.html
   - /docs/v0.9/administration/authorization.html
 menu:
-  influxdb_v09:
-    weight: 1
+  influxdb:
+    weight: 0
     parent: administration
+  products:
+    parent: influxdb
 ---
 
 This document covers setting up and managing authentication and authorization in InfluxDB.

@@ -1,8 +1,10 @@
 ---
 title: Chronograf Dashboards
 menu:
-  main:
+  influxdb:
     url: "/chronograf/"
-    weight: 3
+    weight: 40
     parent: tools
+  products:
+    parent: influxdb
 ---
