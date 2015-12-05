@@ -3,6 +3,10 @@ title: Database management
 aliases:
   - /docs/v0.9/query_language/database_administration.html
   - /docs/v0.9/query_language/database_management.html
+menu:
+  main:
+    weight: 3
+    parent: query_language
 ---
 
 InfluxQL offers a full suite of administrative commands.

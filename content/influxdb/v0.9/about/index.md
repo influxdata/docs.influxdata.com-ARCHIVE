@@ -1,8 +1,8 @@
 ---
 title: About InfluxDB
 menu:
-  main:
-    parent: about
+  influxdb:
+    parent: 'about'
 ---
 
 ## [Release Notes](https://github.com/influxdb/influxdb/blob/master/CHANGELOG.md)

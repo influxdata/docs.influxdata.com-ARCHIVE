@@ -2,6 +2,10 @@
 title: Web Admin Interface
 aliases:
   - /docs/v0.9/ui/built_in_admin_and_explorer.html
+menu:
+  main:
+    weight: 2
+    parent: tools
 ---
 
 The built-in web administration GUI is a simple way to interact with InfluxDB. For any significant use, whether writing or querying data, the HTTP API ([reading](../guides/querying_data.html), [writing](../guides/writing_data.html)) or the [command line interface](shell.html) are better options.

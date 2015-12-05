@@ -1,7 +1,8 @@
 ---
-title: Telegraf
+title: Telegraf Metrics Collection
+menu:
+  main:
+    url: "https://github.com/influxdb/telegraf"
+    weight: 4
+    parent: tools
 ---
-
-Telegraf is a tool for metrics collection (e.g. CollectD).
-
-Read more about Telegraf [here](https://github.com/influxdb/telegraf)

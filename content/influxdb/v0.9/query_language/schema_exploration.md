@@ -1,5 +1,9 @@
 ---
 title: Schema Exploration
+menu:
+  main:
+    weight: 2
+    parent: query_language
 ---
 
 InfluxQL is an SQL-like query language for interacting with data in InfluxDB. The following sections cover useful query syntax for exploring your schema (that is, how you set up your time series data):

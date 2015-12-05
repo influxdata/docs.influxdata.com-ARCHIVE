@@ -1,5 +1,9 @@
 ---
 title: Database Configuration
+menu:
+  main:
+    weight: 5
+    parent: administration
 ---
 
 ## The basics

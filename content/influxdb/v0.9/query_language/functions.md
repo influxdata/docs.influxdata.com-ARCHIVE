@@ -2,6 +2,10 @@
 title: Functions
 aliases:
   - /docs/v0.9/query_language/aggregate_functions.html
+menu:
+  main:
+    weight: 4
+    parent: query_language
 ---
 
 Use InfluxQL functions to aggregate, select, and transform data.

@@ -2,6 +2,10 @@
 title: Data Exploration
 aliases:
   - /docs/v0.9/query_language/querying_data.html
+menu:
+  main:
+    weight: 1
+    parent: query_language
 ---
 
 

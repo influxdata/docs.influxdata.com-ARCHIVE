@@ -3,8 +3,11 @@ title: Frequently Encountered Issues
 aliases:
   - /docs/v0.9/guides/troubleshooting.html
 menu:
-  main:
+  influxdb:
+    weight: 0
     parent: troubleshooting
+  products:
+    parent: influxdb
 ---
 
 This page addresses frequent sources of confusion and places where InfluxDB behaves in an unexpected way relative to other database systems. Where applicable, it links to outstanding issues on GitHub.

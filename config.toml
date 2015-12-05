@@ -4,97 +4,115 @@ baseurl = "https://docs.influxdata.com"
 languageCode = "en-us"
 
 [blackfriday]
-  plainIdAnchors = true
+  plainIDAnchors = true
 
-SectionPagesMenu = "products"
 [[menu.products]]
   name = "Telegraf"
   identifier = "telegraf"
-  weight = 1
+  weight = 0
   url = "/telegraf/"
 [[menu.products]]
   name = "InfluxDB"
   identifier = "influxdb"
-  weight = 2
+  weight = 10
   url = "/influxdb/"
 [[menu.products]]
   name = "Chronograf"
   identifier = "chronograf"
-  weight = 3
+  weight = 20
   url = "/chronograf/"
 [[menu.products]]
   name = "Kapacitor"
   identifier = "kapacitor"
-  weight = 4
+  weight = 30
   url = "/kapacitor/"
 [[menu.products]]
   name = "Hosted"
   identifier = "hosted"
-  weight = 5
+  weight = 40
   url = "/hosted/"
 
 # InfluxDB
 [[menu.influxdb]]
   name = "Introduction"
   identifier = "introduction"
-  weight = 1
-  url = "/influxdb/introduction/"
+  weight = 0
 [[menu.influxdb]]
   name = "Guides"
   identifier = "guides"
-  weight = 2
-  url = "/influxdb/guides/"
+  weight = 10
 [[menu.influxdb]]
   name = "Concepts"
   identifier = "concepts"
-  weight = 3
-  url = "/influxdb/concepts"
+  weight = 20
 [[menu.influxdb]]
   name = "Troubleshooting"
   identifier = "troubleshooting"
-  weight = 4
-  url = "/influxdb/troubleshooting"
+  weight = 30
 [[menu.influxdb]]
   name = "Write Protocols and Plugins"
   identifier = "write_protocols"
-  weight = 5
-  url = "/influxdb/write_protocols"
+  weight = 40
 [[menu.influxdb]]
   name = "Query Language"
   identifier = "query_language"
-  weight = 6
-  url = "/influxdb/query_language"
+  weight = 50
 [[menu.influxdb]]
   name = "Client Libraries"
   identifier = "clients"
-  weight = 7
-  url = "/influxdb/clients"
+  weight = 60
 [[menu.influxdb]]
   name = "Administration"
   identifier = "administration"
-  weight = 8
-  url = "/influxdb/administration"
+  weight = 70
 [[menu.influxdb]]
   name = "Tools"
   identifier = "tools"
-  weight = 9
-  url = "/influxdb/tools"
+  weight = 80
 [[menu.influxdb]]
   name = "About the Project"
   identifier = "about"
+  weight = 90
+[[menu.influxdb]]
+  name = "InfluxDB Versions"
+  identifier = "influxdb_versions"
+  weight = 90
+
+[[menu.influxdb]]
+  name = "Version 0.9"
+  identifier = "influxdb_v09"
+  weight = 0
+  url = "/influxdb/"
+  parent = "influxdb_versions"
+[[menu.influxdb]]
+  name = "Version 0.8"
+  identifier = "influxdb_v08"
   weight = 10
-  url = "/influxdb/about"
+  url = "/influxdb/v0.8/"
+  parent = "influxdb_versions"
+[[menu.influxdb]]
+  name = "Version 0.7"
+  identifier = "influxdb_v07"
+  weight = 20
+  url = "/influxdb/v0.7/"
+  parent = "influxdb_versions"
+[[menu.influxdb]]
+  name = "Version 0.6"
+  identifier = "influxdb_v06"
+  weight = 30
+  url = "/influxdb/v0.6/"
+  parent = "influxdb_versions"
+
 
 # Chronograf
 [[menu.chronograf]]
   name = "Introduction"
   identifier = "introduction"
-  weight = 1
+  weight = 0
   url = "/chronograf/introduction"
-
 [[menu.chronograf]]
   name = "Troubleshooting"
   identifier = "troubleshooting"
-  weight = 2
+  weight = 10
   url = "/chronograf/troubleshooting"
 

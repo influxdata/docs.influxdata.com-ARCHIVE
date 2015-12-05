@@ -1,8 +1,11 @@
 ---
 title: API Endpoints & Ports
 menu:
-  main:
+  influxdb:
+    weight: 60
     parent: concepts
+  products:
+    parent: influxdb
 ---
 
 ## Endpoints

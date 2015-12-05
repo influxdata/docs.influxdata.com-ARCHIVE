@@ -2,6 +2,10 @@
 title: Logs
 aliases:
   - /docs/v0.9/concepts/logs.html
+menu:
+  main:
+    weight: 2
+    parent: administration
 ---
 
 InfluxDB writes log output, by default, to `stderr`. Depending on your use case, this log information can be written to another location.

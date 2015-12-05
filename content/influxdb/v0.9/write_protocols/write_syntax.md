@@ -1,9 +1,11 @@
 ---
 title: Write Syntax
 menu:
-  main:
-    weight: 2
+  influxdb:
+    weight: 10
     parent: write_protocols
+  products:
+    parent: influxdb
 ---
 
 Syntax is always a challenge to remember, so here's a reference

@@ -1,5 +1,9 @@
 ---
 title: HTTP API Client Libraries
+menu:
+  main:
+    weight: 1
+    parent: clients
 ---
 
 This is a list of the client libraries which have some support for InfluxDB version 0.9. Functionality will vary, and there are, as yet, no standard features that all libraries must implement in order to be listed here.
