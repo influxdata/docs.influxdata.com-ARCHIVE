@@ -1,8 +1,11 @@
 ---
-title: Getting Started with InfluxDB
+title: Getting Started
 menu:
-  main:
+  influxdb:
+    weight: 20
     parent: introduction
+  products:
+    parent: influxdb
 ---
 
 With [InfluxDB installed](installation.html), you're ready to start doing awesome things. In this section we'll use the `influx` command line interface (CLI). The CLI is included in all InfluxDB packages and is a lightweight and simple way to interact with the database. The CLI communicates with InfluxDB by making requests to the InfluxDB API. 

@@ -3,7 +3,7 @@ title: Backup and Restore
 aliases:
   - /docs/v0.9/concepts/backup_and_restore.html
 menu:
-  main:
+  influxdb:
     weight: 3
     parent: administration
 ---

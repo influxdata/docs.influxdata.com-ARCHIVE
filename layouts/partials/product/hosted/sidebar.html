@@ -1,6 +1,6 @@
 <div class="product-sidebar" id="product-sidebar">
 {{ $currentNode := . }}
-{{ range .Site.Menus.chronograf }}
+{{ range .Site.Menus.hosted }}
     <div class="product-sidebar--section-title">
         <a class="product-sidebar--nav-item{{if or ($currentNode.IsMenuCurrent "influxdb" .) ($currentNode.HasMenuCurrent "influxdb" .) }} active{{end}}" href="{{.URL}}">{{ .Name }}</a>
     </div>

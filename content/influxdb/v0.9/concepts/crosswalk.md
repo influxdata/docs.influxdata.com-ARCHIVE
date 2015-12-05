@@ -1,8 +1,11 @@
 ---
 title: Comparisson to SQL
 menu:
-  main:
+  influxdb:
+    weight: 20
     parent: concepts
+  products:
+    parent: influxdb
 ---
 
 # What's in a database?

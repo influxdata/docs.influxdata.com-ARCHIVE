@@ -1,8 +1,11 @@
 ---
 title: Glossary of Terms
 menu:
-  main:
+  influxdb:
+    weight: 10
     parent: concepts
+  products:
+    parent: influxdb
 ---
 
 ## aggregation

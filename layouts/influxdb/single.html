@@ -2,11 +2,12 @@
 {{ if .Title }}
 <div class="page-title" id="page-title">
     <div class="page-title--toggle" id="page-title--toggle"><i class="icon arrow-right"></i></div>
-    <div class="page-title--name">InfluxDB Documentation - Version 0.9</div>
+    <div class="page-title--name">{{ .Title }}</div>
 </div>
 {{ end }}
 <div class="page-content" id="page-content">
     <div class="page-content--container">
+        {{ .Content }}
     </div>
 </div>
 
