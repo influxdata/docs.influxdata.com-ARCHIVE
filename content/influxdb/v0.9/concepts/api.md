@@ -4,8 +4,6 @@ menu:
   influxdb:
     weight: 60
     parent: concepts
-  products:
-    parent: influxdb
 ---
 
 ## Endpoints

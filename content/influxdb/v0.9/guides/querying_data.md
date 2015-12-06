@@ -6,8 +6,6 @@ menu:
   influxdb:
     weight: 10
     parent: guides
-  products:
-    parent: influxdb
 ---
 
 ## Querying data using the HTTP API

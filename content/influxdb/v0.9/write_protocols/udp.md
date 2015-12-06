@@ -4,8 +4,6 @@ menu:
   influxdb:
     weight: 30
     parent: write_protocols
-  products:
-    parent: influxdb
 ---
 
 InfluxDB accepts writes over UDP. By default, no ports are open to UDP. To configure InfluxDB to support writes over UDP you must adjust your config file.

@@ -12,12 +12,7 @@
         <link rel="stylesheet" href="/css/normalize-3.0.2.css">
         <link rel="stylesheet" href="/css/layout.css" type="text/css">
         <link rel="stylesheet" href="/css/icon-font.css" type="text/css">
-        {{ $currentNode := . }}
-        {{ range .Site.Menus.products }}
-        {{if or ($currentNode.IsMenuCurrent "products" .) ($currentNode.HasMenuCurrent "products" .) }}
-        <link rel="stylesheet" href="/css/theme/{{ .Identifier }}.css" type="text/css">
-        {{ end }}
-        {{ end }}
+        <link rel="stylesheet" href="/css/theme/{{ .Section }}.css" type="text/css">
         <!-- TODO(Gunnar): Add prism or switch to pygments -->
         <!-- <link rel="stylesheet" href="css/prism.css" /> -->
 

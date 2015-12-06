@@ -1,7 +1,7 @@
 ---
 title: Troubleshooting Chronograf
 menu:
-  main:
+  chronograf:
     parent: troubleshooting
 ---
 

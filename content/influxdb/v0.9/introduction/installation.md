@@ -4,8 +4,6 @@ menu:
   influxdb:
     weight: 10
     parent: introduction
-  products:
-    parent: influxdb
 ---
 
 This page provides directions on downloading and starting InfluxDB Version 0.9.5.1.

@@ -6,61 +6,93 @@ languageCode = "en-us"
 [blackfriday]
   plainIDAnchors = true
 
-# InfluxDB sections
+SectionPagesMenu = "products"
+[[menu.products]]
+  name = "Telegraf"
+  identifier = "telegraf"
+  weight = 0
+  url = "/telegraf/"
+[[menu.products]]
+  name = "InfluxDB"
+  identifier = "influxdb"
+  weight = 10
+  url = "/influxdb/"
+[[menu.products]]
+  name = "Chronograf"
+  identifier = "chronograf"
+  weight = 20
+  url = "/chronograf/"
+[[menu.products]]
+  name = "Kapacitor"
+  identifier = "kapacitor"
+  weight = 30
+  url = "/kapacitor/"
+[[menu.products]]
+  name = "Hosted"
+  identifier = "hosted"
+  weight = 40
+  url = "/hosted/"
+
+# InfluxDB v0.9 sections
 [[menu.influxdb]]
   name = "Introduction"
   identifier = "introduction"
   weight = 0
+  url = "/influxdb/v0.9/introduction/"
   parent = "version_09"
 [[menu.influxdb]]
   name = "Guides"
   identifier = "guides"
   weight = 10
+  url = "/influxdb/v0.9/guides/"
   parent = "version_09"
 [[menu.influxdb]]
   name = "Concepts"
   identifier = "concepts"
   weight = 20
+  url = "/influxdb/v0.9/concepts/"
   parent = "version_09"
 [[menu.influxdb]]
   name = "Troubleshooting"
   identifier = "troubleshooting"
   weight = 30
+  url = "/influxdb/v0.9/troubleshooting/"
   parent = "version_09"
 [[menu.influxdb]]
   name = "Write Protocols and Plugins"
   identifier = "write_protocols"
   weight = 40
+  url = "/influxdb/v0.9/write_protocols/"
   parent = "version_09"
 [[menu.influxdb]]
   name = "Query Language"
   identifier = "query_language"
   weight = 50
+  url = "/influxdb/v0.9/query_language/"
   parent = "version_09"
 [[menu.influxdb]]
   name = "Client Libraries"
   identifier = "clients"
   weight = 60
+  url = "/influxdb/v0.9/clients/"
   parent = "version_09"
 [[menu.influxdb]]
   name = "Administration"
   identifier = "administration"
   weight = 70
+  url = "/influxdb/v0.9/administration/"
   parent = "version_09"
 [[menu.influxdb]]
   name = "Tools"
   identifier = "tools"
   weight = 80
+  url = "/influxdb/v0.9/tools/"
   parent = "version_09"
 [[menu.influxdb]]
   name = "About the Project"
   identifier = "about"
   weight = 90
-  parent = "version_09"
-[[menu.influxdb]]
-  name = "InfluxDB Versions"
-  identifier = "versions"
-  weight = 100
+  url = "/influxdb/v0.9/about/"
   parent = "version_09"
 
 # InfluxDB about
@@ -95,8 +127,6 @@ languageCode = "en-us"
   identifier = "version_03"
   weight = 0
   url = "/chronograf/v0.3/"
-  parent = "chronograf"
-[[menu.products]]
   parent = "chronograf"
 
 # Chronograf sections

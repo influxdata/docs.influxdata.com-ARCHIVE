@@ -4,8 +4,6 @@ menu:
   influxdb:
     weight: 20
     parent: concepts
-  products:
-    parent: influxdb
 ---
 
 # What's in a database?

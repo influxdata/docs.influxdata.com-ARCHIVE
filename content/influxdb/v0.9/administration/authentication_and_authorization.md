@@ -7,8 +7,6 @@ menu:
   influxdb:
     weight: 0
     parent: administration
-  products:
-    parent: influxdb
 ---
 
 This document covers setting up and managing authentication and authorization in InfluxDB.

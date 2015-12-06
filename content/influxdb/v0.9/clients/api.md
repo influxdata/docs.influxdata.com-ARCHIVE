@@ -4,8 +4,6 @@ menu:
   influxdb:
     weight: 0
     parent: clients
-  products:
-    parent: influxdb
 ---
 
 This is a list of the client libraries which have some support for InfluxDB version 0.9. Functionality will vary, and there are, as yet, no standard features that all libraries must implement in order to be listed here.

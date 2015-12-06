@@ -4,8 +4,6 @@ menu:
   influxdb:
     weight: 10
     parent: query_language
-  products:
-    parent: influxdb
 ---
 
 InfluxQL is an SQL-like query language for interacting with data in InfluxDB. The following sections cover useful query syntax for exploring your schema (that is, how you set up your time series data):

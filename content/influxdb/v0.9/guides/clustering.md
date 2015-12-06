@@ -8,8 +8,6 @@ menu:
   influxdb:
     weight: 20
     parent: guides
-  products:
-    parent: influxdb
 ---
 
 > **Note:** Clustering is in a alpha state right now. There are still a good number of rough edges. If you notice any issues please [report them](https://github.com/influxdb/influxdb/issues/new).

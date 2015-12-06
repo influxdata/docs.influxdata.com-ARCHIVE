@@ -6,8 +6,6 @@ menu:
   influxdb:
     weight: 30
     parent: query_language
-  products:
-    parent: influxdb
 ---
 
 Use InfluxQL functions to aggregate, select, and transform data.

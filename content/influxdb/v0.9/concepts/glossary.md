@@ -4,8 +4,6 @@ menu:
   influxdb:
     weight: 10
     parent: concepts
-  products:
-    parent: influxdb
 ---
 
 ## aggregation

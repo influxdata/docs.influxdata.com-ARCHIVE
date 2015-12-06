@@ -4,8 +4,6 @@ menu:
   influxdb:
     weight: 0
     parent: concepts
-  products:
-    parent: influxdb
 ---
 
 Before diving into InfluxDB it's good to get acquainted with some of the key concepts of the database. This document provides a gentle introduction to those concepts and common InfluxDB terminology. We've provided a list below of all the terms we'll cover, but we recommend reading this document from start to finish to gain a more general understanding of our favorite time series database. 

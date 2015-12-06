@@ -7,8 +7,6 @@ menu:
   influxdb:
     weight: 20
     parent: query_language
-  products:
-    parent: influxdb
 ---
 
 InfluxQL offers a full suite of administrative commands.

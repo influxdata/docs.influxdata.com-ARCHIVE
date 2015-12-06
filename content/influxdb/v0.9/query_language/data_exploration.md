@@ -6,8 +6,6 @@ menu:
   influxdb:
     weight: 0
     parent: query_language
-  products:
-    parent: influxdb
 ---
 
 

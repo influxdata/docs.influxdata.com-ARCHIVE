@@ -6,8 +6,6 @@ menu:
   influxdb:
     weight: 70
     parent: concepts
-  products:
-    parent: influxdb
 ---
 
 Versions 0.9.0-0.9.4 used BoltDB as the underlying storage engine. This writeup is about the new storage engine that will be released in 0.9.5, the Time Structured Merge Tree.
