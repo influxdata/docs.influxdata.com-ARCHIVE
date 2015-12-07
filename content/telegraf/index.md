@@ -1,4 +1,3 @@
-+++
-title = "Telegraf"
-
-+++
+---
+title: Telegraf
+---

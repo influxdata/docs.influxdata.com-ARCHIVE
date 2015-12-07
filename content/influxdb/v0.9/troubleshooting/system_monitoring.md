@@ -1,7 +1,7 @@
 ---
 title: System Monitoring
 menu:
-  influxdb:
+  influxdb_09:
     weight: 10
     parent: troubleshooting
 ---

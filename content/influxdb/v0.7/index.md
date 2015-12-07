@@ -1,9 +1,10 @@
 ---
 title: InfluxDB Version 0.7 Documentation
+
 menu:
   influxdb:
     name: Version 0.7
-    id: version_07
+    identifier: influxdb_07
     weight: 20
 ---
 

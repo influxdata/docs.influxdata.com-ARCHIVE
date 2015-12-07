@@ -1,5 +1,11 @@
 ---
 title: Cluster Setup
+
+menu:
+  influxdb_08:
+    name: Setup
+    weight: 10
+    parent: clustering
 ---
 
 The current clustering implementation is experimental. We suggest using Influx in single server mode for the time being. However, if you're feeling adventurous, here's how you set up a cluster.

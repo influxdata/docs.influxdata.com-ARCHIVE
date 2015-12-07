@@ -1,7 +1,7 @@
 ---
 title: Write Syntax
 menu:
-  influxdb:
+  influxdb_09:
     weight: 10
     parent: write_protocols
 ---

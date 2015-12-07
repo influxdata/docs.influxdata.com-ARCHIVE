@@ -1,7 +1,7 @@
 ---
 title: Schema Exploration
 menu:
-  influxdb:
+  influxdb_09:
     weight: 10
     parent: query_language
 ---

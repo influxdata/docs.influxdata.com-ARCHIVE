@@ -3,7 +3,7 @@ title: Writing Data
 aliases:
   - /docs/v0.9/concepts/reading_and_writing_data.html
 menu:
-  influxdb:
+  influxdb_09:
     weight: 0
     parent: guides
 ---

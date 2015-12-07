@@ -1,7 +1,7 @@
 ---
 title: Service - UDP
 menu:
-  influxdb:
+  influxdb_09:
     weight: 30
     parent: write_protocols
 ---

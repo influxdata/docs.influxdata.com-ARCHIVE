@@ -5,7 +5,7 @@ aliases:
   - /docs/v0.9/concepts/clustering.html
   - /docs/v0.9/advanced_topics/clustering.html
 menu:
-  influxdb:
+  influxdb_09:
     weight: 20
     parent: guides
 ---

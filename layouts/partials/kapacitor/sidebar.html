@@ -1,0 +1,41 @@
+<div class="product-sidebar" id="product-sidebar">
+    {{ $currentNode := . }}
+    {{ if (eq $currentNode.RelPermalink "/kapacitor/") }}
+        {{ range (index $.Site.Menus .Site.Data.default_versions.kapacitor) }}
+            <div class="product-sidebar--section-title">
+                <a class="product-sidebar--nav-item{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{.URL}}">{{ .Name }}</a>
+            </div>
+            {{ if .HasChildren }}
+                <section class="product-sidebar--section">
+                    {{ range .Children }}
+                    <a class="product-sidebar--page{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
+                    {{ end }}
+                </section>
+            {{end}}
+        {{end}}
+    {{end}}
+    {{ range .Site.Menus.kapacitor }}
+        {{ if (in $currentNode.Permalink .URL) }}
+            {{ range (index $.Site.Menus .Identifier) }}
+                <div class="product-sidebar--section-title">
+                    <a class="product-sidebar--nav-item{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{.URL}}">{{ .Name }}</a>
+                </div>
+                {{ if .HasChildren }}
+                    <section class="product-sidebar--section">
+                        {{ range .Children }}
+                        <a class="product-sidebar--page{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
+                        {{ end }}
+                    </section>
+                {{end}}
+            {{end}}
+        {{end}}
+    {{end}}
+    <div class="product-sidebar--section-title">
+        <a class="product-sidebar--nav-item" href="/kapacitor/">Kapacitor Versions</a>
+    </div>
+    <section class="product-sidebar--section">
+        {{ range .Site.Menus.kapacitor }}
+        <a class="product-sidebar--page{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
+        {{end}}
+    </section>
+</div>

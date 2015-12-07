@@ -1,7 +1,7 @@
 ---
 title: Line Protocol
 menu:
-  influxdb:
+  influxdb_09:
     weight: 0
     parent: write_protocols
 ---

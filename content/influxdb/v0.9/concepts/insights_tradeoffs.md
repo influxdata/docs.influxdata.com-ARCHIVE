@@ -1,7 +1,7 @@
 ---
 title: Design Insights and Tradeoffs in InfluxDB
 menu:
-  influxdb:
+  influxdb_09:
     weight: 50
     parent: concepts
 ---

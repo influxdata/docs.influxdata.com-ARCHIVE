@@ -3,7 +3,7 @@ title: Frequently Encountered Issues
 aliases:
   - /docs/v0.9/guides/troubleshooting.html
 menu:
-  influxdb:
+  influxdb_09:
     weight: 0
     parent: troubleshooting
 ---

@@ -1,7 +1,7 @@
 ---
 title: Installation
 menu:
-  influxdb:
+  influxdb_09:
     weight: 10
     parent: introduction
 ---

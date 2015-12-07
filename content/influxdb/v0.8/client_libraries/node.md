@@ -1,5 +1,11 @@
 ---
 title: Node.js
+menu:
+  influxdb_08:
+    name: Node.js
+    identifier: nodejs
+    weight: 60
+    parent: client_libraries
 ---
 
 There's a [Node.js InfluxDB library on GitHub](https://github.com/bencevans/node-influx) thanks to [Ben Evans](https://twitter.com/bencevans).

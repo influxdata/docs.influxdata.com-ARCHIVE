@@ -1,7 +1,7 @@
 ---
 title: Query Syntax
 menu:
-  influxdb:
+  influxdb_09:
     weight: 60
     parent: query_language
 ---

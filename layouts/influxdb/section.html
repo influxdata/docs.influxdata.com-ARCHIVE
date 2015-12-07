@@ -1,0 +1,14 @@
+{{ partial "header.html" . }}
+<div class="page-title" id="page-title">
+    <div class="page-title--toggle" id="page-title--toggle"><i class="icon arrow-right"></i></div>
+    <div class="page-title--name">{{ .Title }} Section</div>
+</div>
+<div class="page-content" id="page-content">
+    <div class="page-content--container">
+        {{ range .Pages }}
+            {{ .Render "list"}}
+        {{ end }}
+    </div>
+</div>
+{{ partial "influxdb/sidebar.html" . }}
+{{ partial "footer.html" . }}

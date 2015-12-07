@@ -1,7 +1,7 @@
 ---
 title: Schema Design
 menu:
-  influxdb:
+  influxdb_09:
     weight: 40
     parent: concepts
 ---

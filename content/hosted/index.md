@@ -1,3 +1,3 @@
-+++
-title = "Hosted"
-+++
+---
+title: Hosted Documentation
+---

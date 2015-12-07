@@ -21,7 +21,7 @@ if [[ "$branch" == "master" ]]; then
   s3cmd --acl-public --delete-removed --no-progress sync deploy/* s3://$bucket
   echo -e "\nUpdated s3://$bucket"
   echo -e "\nRunning Cloudfront invalidation..."
-  aws cloudfront create-invalidation --distribution-id EEGXBLHGY3Y3J --invalidation-batch $json
+  aws cloudfront create-invalidation --distribution-id E2IGITYNZC52HZ --invalidation-batch $json
 else
   echo "*** s3://$bucket only gets synced from master! ***"
 fi

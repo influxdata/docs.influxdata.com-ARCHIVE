@@ -3,7 +3,7 @@ title: InfluxDB CLI/Shell
 aliases:
   - /docs/v0.9/clients/shell.html
 menu:
-  influxdb:
+  influxdb_09:
     weight: 0
     parent: tools
 ---

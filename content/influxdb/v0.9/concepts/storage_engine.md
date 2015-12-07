@@ -3,7 +3,7 @@ title: Storage Engine
 aliases:
   - /docs/v0.9/advanced_topics/storage_engine.html
 menu:
-  influxdb:
+  influxdb_09:
     weight: 70
     parent: concepts
 ---

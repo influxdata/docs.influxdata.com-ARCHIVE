@@ -3,7 +3,7 @@ title: Logs
 aliases:
   - /docs/v0.9/concepts/logs.html
 menu:
-  influxdb:
+  influxdb_09:
     weight: 10
     parent: administration
 ---

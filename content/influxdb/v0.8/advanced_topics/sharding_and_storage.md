@@ -1,5 +1,11 @@
 ---
 title: Underlying Storage and Sharding
+
+menu:
+  influxdb_08:
+    name: Underlying Storage and Sharding
+    weight: 0
+    parent: advanced_topics
 ---
 
 ## Storage Engines

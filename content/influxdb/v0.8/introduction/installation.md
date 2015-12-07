@@ -1,5 +1,10 @@
 ---
 title: Installation
+menu:
+  influxdb_08:
+    identifier: installation
+    weight: 10
+    parent: introduction
 ---
 
 ## Ports

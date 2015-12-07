@@ -1,7 +1,7 @@
 ---
 title: Service - CollectD
 menu:
-  influxdb:
+  influxdb_09:
     weight: 50
     parent: write_protocols
 ---
