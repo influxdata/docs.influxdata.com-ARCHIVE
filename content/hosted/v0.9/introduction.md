@@ -8,4 +8,4 @@ menu:
     weight: 0
 ---
 
-This is a stub page.
+The Hosted documentation is currently under construction.

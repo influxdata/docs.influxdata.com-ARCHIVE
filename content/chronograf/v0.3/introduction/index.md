@@ -7,4 +7,4 @@ menu:
     weight: 0
 ---
 
-This is a stub page.
+The Chronograf documentation is currently under construction.

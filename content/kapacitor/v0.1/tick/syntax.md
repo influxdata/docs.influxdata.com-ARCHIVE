@@ -1,5 +1,12 @@
 ---
 title: Syntax
+
+menu:
+  kapacitor_01:
+    name: Syntax Reference
+    identifier: syntax
+    weight: 0
+    parent: tick
 ---
 
 Literals

@@ -1,5 +1,12 @@
 ---
 title: TICKscript Specification
+
+menu:
+  kapacitor_01:
+    name: Specification
+    identifier: specification
+    weight: 10
+    parent: tick
 ---
 
 Introduction

@@ -7,3 +7,5 @@ menu:
     identifier: telegraf_02
     weight: 0
 ---
+
+The Telegraf documentation is currently under construction.

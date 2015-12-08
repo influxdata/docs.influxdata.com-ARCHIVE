@@ -7,3 +7,5 @@ menu:
     identifier: hosted_08
     weight: 10
 ---
+
+The Hosted documentation is currently under construction.

@@ -8,4 +8,4 @@ menu:
     weight: 10
 ---
 
-This is another stub page.
+The Chronograf documentation is currently under construction.

@@ -1,5 +1,11 @@
 ---
 title: Introduction
+
+menu:
+  kapacitor_01:
+    name: Introduction
+    identifier: introduction
+    weight: 0
 ---
 
 Kapacitor is a time series data processing engine.
