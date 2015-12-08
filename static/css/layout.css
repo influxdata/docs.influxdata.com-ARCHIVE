@@ -293,7 +293,7 @@ a:hover {
 	width: 50%;
 	right: 0;
 	height: calc(100% - 2.5rem);
-	background-color: #333;
+	background-color: #2C323D;
 	transform: translateX(100%);
 	-webkit-transform: translateX(100%);
 	padding-top: 1rem;
