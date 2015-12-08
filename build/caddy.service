@@ -1,0 +1,19 @@
+[Unit]
+Description=Caddy
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/caddy -pidfile /tmp/caddy.pid -agree -email gunnar@influxdb.com -conf /home/caddy/Caddyfile -log stderr
+PIDFile=/tmp/caddy.pid
+ExecReload=/bin/kill -USR1 $MAINPID
+
+LimitNOFILE=32768
+Restart=always
+
+User=caddy
+PermissionsStartOnly=true
+ExecStartPre=/sbin/setcap cap_net_bind_service=+ep /usr/local/bin/caddy
+Environment=HOME=/home/caddy
