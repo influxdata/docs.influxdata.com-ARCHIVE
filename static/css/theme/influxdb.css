@@ -7,17 +7,6 @@
 .product-switcher--current,
 .product-sidebar--section-title {
 	color: #4591ED;
-	background: #4591ED;
-	background: -moz-linear-gradient(left,  #4591ED 0%, #00C9FF 100%);
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#4591ED), color-stop(100%,#00C9FF));
-	background: -webkit-linear-gradient(left,  #4591ED 0%,#00C9FF 100%);
-	background: -o-linear-gradient(left,  #4591ED 0%,#00C9FF 100%);
-	background: -ms-linear-gradient(left,  #4591ED 0%,#00C9FF 100%);
-	background: linear-gradient(to right,  #4591ED 0%,#00C9FF 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4591ED', endColorstr='#00C9FF',GradientType=1 );
-
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
 }
 .product-switcher--toggle {
 	color: #00C9FF;
