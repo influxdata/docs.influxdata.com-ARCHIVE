@@ -22,7 +22,7 @@
 	font-size: 1.75em;
 	font-weight: 700;
 	padding-bottom: 0.5em;
-	margin-top: 1em;
+	margin-top: 3em;
 	margin-bottom: 0.5em;
 	border-bottom: 2px solid #eee;
 	line-height: 1.375em;
@@ -30,11 +30,18 @@
 .page-content--container h3 {
 	font-size: 1em;
 	margin-bottom: 0.5em;
+	margin-top: 1em;
 }
 .page-content--container h4 {
 	padding-left: 1.5em;
 	font-size: 1em;
 	margin-bottom: 0.5em;
+}
+.page-content--container h1:first-of-type,
+.page-content--container h2:first-of-type,
+.page-content--container h3:first-of-type,
+.page-content--container h4:first-of-type {
+	margin-top: 0;
 }
 .page-content--container p {
 	padding-left: 1.5em;
