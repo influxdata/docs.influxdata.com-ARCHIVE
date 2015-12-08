@@ -7,3 +7,5 @@ menu:
     identifier: chronograf_04
     weight: 0
 ---
+
+The Chronograf documentation is currently under construction.
