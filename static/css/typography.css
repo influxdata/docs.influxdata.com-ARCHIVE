@@ -77,10 +77,10 @@
 	margin-top: 0em;
 }
 .page-content--container blockquote {
-	color: #6ba0b0;
+	color: #5c81b4;
 	font-style: italic;
 	padding-left: 1.5em;
-	border-left: 6px solid #e6eff2;
+	border-left: 6px solid #aec0da;
 	border-radius: 3px;
 	width: calc(100% - 1.65rem);
 	margin-left: 1.65rem;

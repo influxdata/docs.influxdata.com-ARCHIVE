@@ -6,22 +6,23 @@
 
 .product-switcher--current,
 .product-sidebar--section-title {
-	color: #8050EA;
-	background: #8050EA;
-	background: -moz-linear-gradient(left,  #8050EA 0%, #C557FF 100%);
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#8050EA), color-stop(100%,#C557FF));
-	background: -webkit-linear-gradient(left,  #8050EA 0%,#C557FF 100%);
-	background: -o-linear-gradient(left,  #8050EA 0%,#C557FF 100%);
-	background: -ms-linear-gradient(left,  #8050EA 0%,#C557FF 100%);
-	background: linear-gradient(to right,  #8050EA 0%,#C557FF 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8050EA', endColorstr='#C557FF',GradientType=1 );
-
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+	color: #fff;
 }
 .product-switcher--toggle {
-	color: #C557FF;
+	color: #fff;
+}
+.product-switcher {
+	background-color: #3AC69A;
+}
+.product-switcher:hover,
+.product-switcher.show,
+.product-switcher--menu {
+	background-color: #4ED8A0;
+}
+a.product-sidebar--nav-item,
+a.product-sidebar--nav-item:hover {
+	color: #3AC69A;
 }
 .page-title {
-	background: #8050EA;
+	background-image: url(../../img/page-title__kapacitor.jpg);
 }

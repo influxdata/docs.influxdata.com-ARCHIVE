@@ -6,22 +6,23 @@
 
 .product-switcher--current,
 .product-sidebar--section-title {
-	color: #F95F53;
-	background: #F95F53;
-	background: -moz-linear-gradient(left,  #F95F53 0%, #FF8564 100%);
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#F95F53), color-stop(100%,#FF8564));
-	background: -webkit-linear-gradient(left,  #F95F53 0%,#FF8564 100%);
-	background: -o-linear-gradient(left,  #F95F53 0%,#FF8564 100%);
-	background: -ms-linear-gradient(left,  #F95F53 0%,#FF8564 100%);
-	background: linear-gradient(to right,  #F95F53 0%,#FF8564 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F95F53', endColorstr='#FF8564',GradientType=1 );
-
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+	color: #fff;
 }
 .product-switcher--toggle {
-	color: #FF8564;
+	color: #fff;
+}
+.product-switcher {
+	background-color: #F95F53;
+}
+.product-switcher:hover,
+.product-switcher.show,
+.product-switcher--menu {
+	background-color: #FF8564;
+}
+a.product-sidebar--nav-item,
+a.product-sidebar--nav-item:hover {
+	color: #F95F53;
 }
 .page-title {
-	background: #F95F53;
+	background-image: url(../../img/page-title__telegraf.jpg);
 }
