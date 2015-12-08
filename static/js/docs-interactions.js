@@ -33,3 +33,13 @@ $('#product-switcher--menu').click( function() {
 	$('#product-switcher').removeClass('show');
 	$('#product-switcher--container').removeClass('show');
 });
+
+
+/* Inject tooltips on load */
+$(function(){
+	$('.tooltip').each( function(){
+		$toolTipText = $('<div/>').addClass('tooltip-text').text($(this).attr('data-tooltip-text'));
+		$toolTipElement = $('<div/>').addClass('tooltip-container').append($toolTipText);
+		$(this).prepend($toolTipElement);
+	})
+});

@@ -756,3 +756,59 @@ a.product-sidebar--page:hover {
 		font-size: 2.3rem;
 	}
 }
+
+
+/* Tooltips */
+.tooltip {
+	position: relative;
+	display: inline-block;
+	z-index: 10;
+	font-weight: 900;
+	color: #25B394;
+}
+.tooltip-container {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	overflow: visible;
+	visibility: hidden;
+}
+.tooltip-text {
+	font-weight: 500;
+	line-height: 2em;
+	height: 2em;
+	position: absolute;
+	color: #fff;
+	background-color: #575E6B;
+	border-radius: 3px;
+	padding: 0 0.75em;
+	font-size: 0.875rem;
+	left: 50%;
+	transform: translate(-50%,-1.875rem);
+	-webkit-transform: translate(-50%,-1.875rem);
+	transition: all 0.2s ease;
+	white-space: nowrap;
+	opacity: 0;
+}
+.tooltip-text:after {
+	content: '';
+	position: absolute;
+	left: 50%;
+	bottom: -14px;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	border-top: 8px solid #575E6B;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+	border-bottom: 8px solid transparent;
+}
+.tooltip:hover .tooltip-container {
+	visibility: visible;
+}
+.tooltip:hover .tooltip-text {
+	opacity: 1;
+	transform: translate(-50%,-2rem);
+	-webkit-transform: translate(-50%,-2rem);
+}
