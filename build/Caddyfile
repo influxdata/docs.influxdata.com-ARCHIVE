@@ -1,19 +1,23 @@
-http://build.docs.influxdata.com
-
-log
-git {
-    repo    git@github.com:influxdb/docs.influxdata.com.git
-    path    docs.influxdata.com
-    branch  develop
-    key     /home/user/.ssh/github_docs_build_rsa
-    then    "hugo --config /root/docs.influxdata.com/config.toml -s /root/docs.influxdata.com -d ../deploy"
+http://hooks.docs.influxdata.com {
+    git {
+        repo    git@github.com:influxdb/docs.influxdata.com.git
+        path    docs.influxdata.com
+        branch  master
+        key     {$PWD}/.ssh/github_docs_build_rsa
+        hook    {$GIT_HOOK_PATH} {GIT_HOOK_SECRET}
+        then    git checkout master
+        then    {$PWD}/docs.influxdata.com/build/publish.sh
+    }
+    git {
+        repo    git@github.com:influxdb/docs.influxdata.com.git
+        path    docs.influxdata.com
+        branch  develop
+        key     {$PWD}/.ssh/github_docs_build_rsa
+        hook    {$GIT_HOOK_PATH} {GIT_HOOK_SECRET}
+        then    git checkout develop
+        then    hugo -b https://docs.staging.influxdata.com
+    }
 }
-
-git {
-    repo    git@github.com:influxdb/docs.influxdata.com.git
-    path    docs.influxdata.com
-    branch  develop
-    key     /home/user/.ssh/github_docs_build_rsa
-    interval 86400
-    then    /root/docs.influxdata.com/publish.py
+http://docs.staging.influxdata.com {
+    root docs.influxdata.com/public
 }
