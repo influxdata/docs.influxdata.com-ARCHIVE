@@ -1,5 +1,12 @@
 ---
 title: Calculate Rates across joined series + Backfill
+
+menu:
+  kapacitor_01:
+    name: Calculate Rates Across Series
+    identifier: join_backfill
+    weight: 0
+    parent: examples
 ---
 
 Often times we have set of series where each series is counting a particular event.

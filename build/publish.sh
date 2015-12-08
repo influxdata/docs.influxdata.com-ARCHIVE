@@ -1,10 +1,6 @@
 #!/bin/bash
 #
-# Push the updated site to s3 from master.
-#
-# This expects (and does NOT check for) s3cmd to be installed and configured!
-# This expects (and does NOT check for) hugo to be installed and on your $PATH.
-# You still need to manually create a Cloudfront invalidation when this script finishes.
+# Push the updated site to s3 from master. See README for more info.
 
 bucket='docs.influxdata.com'
 

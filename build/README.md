@@ -25,7 +25,7 @@ cd path/to/docs.influxdata.com
 ./build/publish.sh
 ```
 
-## Setting up a docs build server
+## Deploy using a build server
 
 Starting with a new Ubuntu instance, install Hugo.
 
@@ -57,24 +57,27 @@ aws configure set preview.cloudfront true
 Install Caddy with the `git` add-on
 
 ```
+mkdir temp && cd temp
 # Note: the following link may not work. If not, download and scp the binary to the server
 wget https://caddyserver.com/download/build?os=linux&arch=amd64&features=git
-mkdir temp && cd temp
 tar xzvf caddy_linux_amd64.tar.gz
 mv caddy /usr/local/bin/caddy
 cd .. && rm -rf temp
 ```
 
-- Start Caddy
+Install the docs.influxdata.com repo and Caddyfile
 
 ```
-# on local machine
-cd docs.influxdata.com
-scp Caddyfile build.docs.influxdata.com:
-# on build server
+git clone git@github.com:influxdb/docs.influxdata.com.git
+cp docs.influxdata.com/build/publish.sh .
+```
+
+Start Caddy
+
+```
 caddy
 ```
 
-TODO:(Gunnar): Figure out the best way to run Caddy as a service, probably as a [systemd service](https://blog.captncraig.io/post/caddy/).
+[comment]: <> (TODO:(Gunnar): Figure out the best way to run Caddy as a service, probably as a [systemd service](https://blog.captncraig.io/post/caddy/).)
 
-TODO(Gunnar): Set up search using Caddy Bleve or custom [fuzzy](https://github.com/sajari/fuzzy) plugin.
+[comment]: <> (TODO(Gunnar): Set up search using Caddy Bleve or custom [fuzzy](https://github.com/sajari/fuzzy) plugin.)

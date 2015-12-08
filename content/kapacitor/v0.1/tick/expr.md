@@ -1,5 +1,11 @@
 ---
 title: Lambda Expressions
+
+menu:
+  kapacitor_01:
+    identifier: expr
+    weight: 20
+    parent: tick
 ---
 
 TICKscript uses lambda expressions  to define transformations on data points as well as define boolean conditions that act as filters.

@@ -794,29 +794,6 @@ SectionPagesMenu = "products"
   parent = "tools"
 
 
-# Kapacitor v0.1 Menu
-[[menu.kapacitor_01]]
-  name = "Introduction"
-  identifier = "introduction"
-  weight = 0
-  url = "/kapacitor/v0.1/introduction/"
-[[menu.kapacitor_01]]
-  name = "TICKscript"
-  identifier = "tick"
-  weight = 10
-  url = "/kapacitor/v0.1/tick/"
-[[menu.kapacitor_01]]
-  name = "Examples"
-  identifier = "examples"
-  weight = 20
-  url = "/kapacitor/v0.1/examples/"
-[[menu.kapacitor_01]]
-  name = "Contributing"
-  identifier = "contributing"
-  weight = 30
-  url = "/kapacitor/v0.1/contributing/"
-
-
 # Hosted v0.9 Menu
 [[menu.hosted_09]]
   name = "Troubleshooting"

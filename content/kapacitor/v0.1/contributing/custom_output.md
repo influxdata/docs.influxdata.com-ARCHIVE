@@ -1,5 +1,12 @@
 ---
 title: How to contribute a new output to Kapacitor
+
+menu:
+  kapacitor_01:
+    name: Writing your own Output node
+    identifier: custom_output
+    weight: 0
+    parent: contributing
 ---
 
 If you haven't already check out [this] (https://github.com/influxdb/kapacitor/blob/master/CONTRIBUTING.md)

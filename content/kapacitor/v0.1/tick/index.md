@@ -1,5 +1,11 @@
 ---
 title: TICKscript Language Reference
+
+menu:
+  kapacitor_01:
+    name: TICKscript
+    identifier: tick
+    weight: 10
 ---
 
 Kapacitor uses a DSL named `TICKscript`. The DSL is used to define the pipelines for processing data in Kapacitor.

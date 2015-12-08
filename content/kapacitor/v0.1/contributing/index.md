@@ -1,5 +1,11 @@
 ---
 title: Contributing to Kapacitor
+
+menu:
+  kapacitor_01:
+    name: Contributing
+    identifier: contributing
+    weight: 30
 ---
 
 Kapacitor is open source and we welcome contributions from the community.
