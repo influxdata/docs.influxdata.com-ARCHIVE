@@ -2,7 +2,7 @@
 title: Introduction to Chronograf
 
 menu:
-  chronograf_03:
+  chronograf_04:
     name: Introduction
     weight: 0
 ---

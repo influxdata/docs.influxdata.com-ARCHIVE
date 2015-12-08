@@ -1,10 +1,10 @@
 ---
-title: Chronograf Version 0.3 Documentation
+title: Chronograf Version 0.4 Documentation
 
 menu:
   chronograf:
-    name: Version 0.3
-    identifier: chronograf_03
+    name: Version 0.4
+    identifier: chronograf_04
     weight: 0
 ---
 
