@@ -1,5 +1,11 @@
 ---
 title: Schema Design Guidelines
+
+menu:
+  influxdb_08:
+    name: Schema Design
+    weight: 20
+    parent: advanced_topics
 ---
 
 ## Schema Design

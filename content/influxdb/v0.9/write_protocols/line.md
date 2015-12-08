@@ -1,11 +1,9 @@
 ---
 title: Line Protocol
 menu:
-  influxdb:
+  influxdb_09:
     weight: 0
     parent: write_protocols
-  products:
-    parent: influxdb
 ---
 
 The line protocol is a text based format for writing points to InfluxDB.  Each line defines a single point. 

@@ -4,11 +4,9 @@ aliases:
   - /docs/v0.9/query_language/database_administration.html
   - /docs/v0.9/query_language/database_management.html
 menu:
-  influxdb:
+  influxdb_09:
     weight: 20
     parent: query_language
-  products:
-    parent: influxdb
 ---
 
 InfluxQL offers a full suite of administrative commands.

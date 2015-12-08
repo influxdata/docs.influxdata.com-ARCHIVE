@@ -1,5 +1,11 @@
 ---
 title: Replacing Collectd network server with InfluxDB
+
+menu:
+  influxdb_08:
+    name: Syslog Analytics with FluentD
+    weight: 20
+    parent: guides
 ---
 
 Since version 0.8.4 Influxdb supports the native collect network protocol hence it can replace a collectd network server transparently.

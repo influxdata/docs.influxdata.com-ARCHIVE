@@ -1,5 +1,11 @@
 ---
 title: Upgrading from previous versions
+
+menu:
+  influxdb_08:
+    name: Upgrading from previous versions
+    weight: 30
+    parent: advanced_topics
 ---
 
 ## Upgrading from 0.7 to 0.8

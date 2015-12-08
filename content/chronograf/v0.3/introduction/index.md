@@ -1,8 +1,10 @@
 ---
 title: Introduction to Chronograf
+
 menu:
-  chronograf:
-    parent: 'introduction'
+  chronograf_03:
+    name: Introduction
+    weight: 0
 ---
 
 This is a stub page.

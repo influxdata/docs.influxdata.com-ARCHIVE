@@ -1,11 +1,9 @@
 ---
 title: Design Insights and Tradeoffs in InfluxDB
 menu:
-  influxdb:
+  influxdb_09:
     weight: 50
     parent: concepts
-  products:
-    parent: influxdb
 ---
 
 InfluxDB is a time-series database. Optimizing for this use-case entails some tradeoffs, primarily to increase performance at the cost of functionality.  Below is a list of some of those design insights that lead to tradeoffs:

@@ -1,11 +1,9 @@
 ---
 title: InfluxDB Query Language Specification
 menu:
-  influxdb:
+  influxdb_09:
     weight: 50
     parent: query_language
-  products:
-    parent: influxdb
 ---
 
 ## Introduction

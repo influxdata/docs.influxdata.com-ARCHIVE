@@ -3,11 +3,9 @@ title: Data Exploration
 aliases:
   - /docs/v0.9/query_language/querying_data.html
 menu:
-  influxdb:
+  influxdb_09:
     weight: 0
     parent: query_language
-  products:
-    parent: influxdb
 ---
 
 

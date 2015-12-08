@@ -3,11 +3,9 @@ title: Mathematical Operators
 aliases:
   - /docs/v0.9/query_language/math_operators.html
 menu:
-  influxdb:
+  influxdb_09:
     weight: 70
     parent: query_language
-  products:
-    parent: influxdb
 ---
 
 **Note:** Currently all mathematical operators work solely on `floats`.  For the moment being any `int` involved will be converted to a `float` as any operation performed on an `int` would return a `null` value. This fixes the problem for all integer values up to 2^53. Issue [3614](https://github.com/influxdb/influxdb/issues/3614) tracks implementing true integer math, which will support values up to 2^63.

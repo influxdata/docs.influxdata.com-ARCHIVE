@@ -1,5 +1,10 @@
 ---
 title: Getting Started
+
+menu:
+  kapacitor_01:
+    weight: 10
+    parent: introduction
 ---
 
 Kapacitor is a data processing engine. It can process both stream and batch data.

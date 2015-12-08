@@ -3,11 +3,9 @@ title: Querying Data
 alias:
   -/docs/v0.9/query_language/querying_data.html
 menu:
-  influxdb:
+  influxdb_09:
     weight: 10
     parent: guides
-  products:
-    parent: influxdb
 ---
 
 ## Querying data using the HTTP API

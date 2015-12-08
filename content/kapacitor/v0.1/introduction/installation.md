@@ -1,5 +1,10 @@
 ---
 title: Installing Kapacitor
+
+menu:
+  kapacitor_01:
+    weight: 20
+    parent: introduction
 ---
 
 Kapacitor has two binaries:

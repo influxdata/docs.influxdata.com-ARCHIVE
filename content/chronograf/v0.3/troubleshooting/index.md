@@ -1,8 +1,11 @@
 ---
 title: Troubleshooting Chronograf
+
 menu:
-  main:
-    parent: troubleshooting
+  chronograf_03:
+    name: Troubleshooting
+    identifier: troubleshooting
+    weight: 10
 ---
 
 This is another stub page.

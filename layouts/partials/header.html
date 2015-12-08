@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>InfluxData | Documentation{{ if .Title }} | {{ title .Title }}{{ end }}</title>
+        <title>InfluxData | Documentation{{ if .Title }} | {{ .Title }}{{ end }}</title>
         <meta name="description" content="{{ if .Description }}{{ .Description }}. {{ end }}Documentation for the InfluxData products InfluxDB, Telegraf, Chronograf and Kapacitor, along with the Hosted and Enterprise services">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -14,10 +14,11 @@
         <link rel="stylesheet" href="/css/icon-font.css" type="text/css">
         {{ $currentNode := . }}
         {{ range .Site.Menus.products }}
-        {{if or ($currentNode.IsMenuCurrent "products" .) ($currentNode.HasMenuCurrent "products" .) }}
-        <link rel="stylesheet" href="/css/theme/{{ .Identifier }}.css" type="text/css">
-        {{ end }}
-        {{ end }}
+            {{ if (in $currentNode.Permalink .URL) }}
+                <link rel="stylesheet" href="/css/theme/{{ .Identifier }}.css" type="text/css">
+            {{end}}
+        {{end}}
+
         <!-- TODO(Gunnar): Add prism or switch to pygments -->
         <!-- <link rel="stylesheet" href="css/prism.css" /> -->
 
@@ -40,4 +41,4 @@
     </head>
     <body>
     {{ partial "navbar.html" . }}
-    {{ partial "product/switcher.html" . }}
+    {{ partial "product-switcher.html" . }}

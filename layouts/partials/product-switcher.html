@@ -10,7 +10,7 @@
     </nav>
 </div>
 {{ range .Site.Menus.products }}
-{{ if or ($currentNode.IsMenuCurrent "products" .) ($currentNode.HasMenuCurrent "products" .) }}
+{{ if eq .Identifier $currentNode.Section }}
 <div class="product-switcher" id="product-switcher">
     <div class="product-switcher--current">{{ .Name }}</div>
     <!-- TODO(Gunnar): Add a version number -->

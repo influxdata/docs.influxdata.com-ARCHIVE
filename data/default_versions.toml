@@ -1,0 +1,5 @@
+telegraf = "telegraf_02"
+influxdb = "influxdb_09"
+chronograf = "chronograf_03"
+kapacitor = "kapacitor_01"
+hosted = "hosted_09"

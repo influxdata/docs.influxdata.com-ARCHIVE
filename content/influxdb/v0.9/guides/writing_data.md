@@ -3,11 +3,9 @@ title: Writing Data
 aliases:
   - /docs/v0.9/concepts/reading_and_writing_data.html
 menu:
-  influxdb:
+  influxdb_09:
     weight: 0
     parent: guides
-  products:
-    parent: influxdb
 ---
 
 There are many ways to write data into InfluxDB including [client libraries](../clients/api.html) and plugins for common data formats such as [Graphite](../write_protocols/graphite.html). Here we'll show you how to create a database and write data to that database using the built-in HTTP API.
