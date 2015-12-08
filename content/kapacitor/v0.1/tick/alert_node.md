@@ -10,12 +10,12 @@ menu:
     parent: tick
 ---
 
-An [AlertNode](/docs/kapacitor/v0.1/tick/alert_node.html) can trigger an event of varying severity levels, 
+An [AlertNode](/kapacitor/v0.1/tick/alert_node/) can trigger an event of varying severity levels, 
 and pass the event to alert handlers. The criteria for triggering 
 an alert is specified via a [lambda expression](https://influxdb.com/docs/kapacitor/v0.1/tick/expr.html). 
-See [AlertNode.Info,](/docs/kapacitor/v0.1/tick/alert_node.html#info) [AlertNode.Warn,](/docs/kapacitor/v0.1/tick/alert_node.html#warn) and [AlertNode.Crit](/docs/kapacitor/v0.1/tick/alert_node.html#crit) below. 
+See [AlertNode.Info,](/kapacitor/v0.1/tick/alert_node/#info) [AlertNode.Warn,](/kapacitor/v0.1/tick/alert_node/#warn) and [AlertNode.Crit](/kapacitor/v0.1/tick/alert_node.html#crit) below. 
 
-Different event handlers can be configured for each [AlertNode.](/docs/kapacitor/v0.1/tick/alert_node.html) 
+Different event handlers can be configured for each [AlertNode.](/kapacitor/v0.1/tick/alert_node/) 
 Some handlers like Email, Slack, VictorOps and PagerDuty have a configuration 
 option &#39;global&#39; that indicates that all alerts implicitly use the handler. 
 
@@ -41,7 +41,7 @@ Each event that gets sent to a handler contains the following alert data:
 
 Events are sent to handlers if the alert is in a state other than &#39;OK&#39; 
 or the alert just changed to the &#39;OK&#39; state from a non &#39;OK&#39; state (a.k.a. the alert recovered). 
-Using the [AlertNode.StateChangesOnly](/docs/kapacitor/v0.1/tick/alert_node.html#statechangesonly) property events will only be sent to handlers 
+Using the [AlertNode.StateChangesOnly](/kapacitor/v0.1/tick/alert_node/#statechangesonly) property events will only be sent to handlers 
 if the alert changed state. 
 
 Example: 
@@ -101,7 +101,7 @@ node.crit(value tick.Node)
 Email the alert data. 
 
 If the To list is empty, the To addresses from the configuration are used. 
-The email subject is the [AlertNode.Message](/docs/kapacitor/v0.1/tick/alert_node.html#message) property. 
+The email subject is the [AlertNode.Message](/kapacitor/v0.1/tick/alert_node/#message) property. 
 The email body is the JSON alert data. 
 
 If the &#39;smtp&#39; section in the configuration has the option: global = true 
@@ -401,7 +401,7 @@ Example:
 ```
 
 In order to not post a message every alert interval 
-use [AlertNode.StateChangesOnly](/docs/kapacitor/v0.1/tick/alert_node.html#statechangesonly) so that only events 
+use [AlertNode.StateChangesOnly](/kapacitor/v0.1/tick/alert_node/#statechangesonly) so that only events 
 where the alert changed state are posted to the channel. 
 
 Example: 

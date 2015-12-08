@@ -12,9 +12,9 @@ menu:
 
 A node that handles creating several child BatchNodes. 
 Each call to `query` creates a child batch node that 
-can further be configured. See [BatchNode](/docs/kapacitor/v0.1/tick/batch_node.html) 
+can further be configured. See [BatchNode](/kapacitor/v0.1/tick/batch_node/) 
 The `batch` variable in batch tasks is an instance of 
-a [SourceBatchNode.](/docs/kapacitor/v0.1/tick/source_batch_node.html) 
+a [SourceBatchNode.](/kapacitor/v0.1/tick/source_batch_node/) 
 
 Example: 
 
@@ -48,5 +48,5 @@ passed to the `groupBy` method.
 node.query(q string)
 ```
 
-Returns: [BatchNode](/docs/kapacitor/v0.1/tick/batch_node.html)
+Returns: [BatchNode](/kapacitor/v0.1/tick/batch_node/)
 

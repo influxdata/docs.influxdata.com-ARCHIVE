@@ -10,7 +10,7 @@ menu:
     parent: tick
 ---
 
-An [HTTPOutNode](/docs/kapacitor/v0.1/tick/http_out_node.html) caches the most recent data for each group it has received. 
+An [HTTPOutNode](/kapacitor/v0.1/tick/http_out_node/) caches the most recent data for each group it has received. 
 
 The cached data is available at the given endpoint. 
 The endpoint is the relative path from the API endpoint of the running task. 

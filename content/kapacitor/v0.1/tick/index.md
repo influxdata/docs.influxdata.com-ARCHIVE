@@ -19,7 +19,7 @@ defines methods that can be called on it. These methods come in two flavors.
 The following reference documentation list each node's `Property` methods and `Chaining` methods along with examples and descriptions of the function of the node.
 
 Every TICKscript will have either a `stream` or `batch` variable defined depending on the type of task you want to run.
-The `stream` and `batch` variables are an instance of a [StreamNode](/docs/kapacitor/v0.1/tick/stream_node.html) or [SourceBatchNode](/docs/kapacitor/v0.1/tick/source_batch_node.html) respectively.
+The `stream` and `batch` variables are an instance of a [StreamNode](/kapacitor/v0.1/tick/stream_node/) or [SourceBatchNode](/kapacitor/v0.1/tick/source_batch_node/) respectively.
 
 Pipelines
 ---------

@@ -88,7 +88,7 @@ Create an alert node, which can trigger alerts.
 node.alert()
 ```
 
-Returns: [AlertNode](/docs/kapacitor/v0.1/tick/alert_node.html)
+Returns: [AlertNode](/kapacitor/v0.1/tick/alert_node/)
 
 
 ### Derivative
@@ -100,7 +100,7 @@ Create a new node that computes the derivative of adjacent points.
 node.derivative(field string)
 ```
 
-Returns: [DerivativeNode](/docs/kapacitor/v0.1/tick/derivative_node.html)
+Returns: [DerivativeNode](/kapacitor/v0.1/tick/derivative_node/)
 
 
 ### Eval
@@ -114,7 +114,7 @@ and results of previous expressions are made available to later expressions.
 node.eval(expressions ...tick.Node)
 ```
 
-Returns: [EvalNode](/docs/kapacitor/v0.1/tick/eval_node.html)
+Returns: [EvalNode](/kapacitor/v0.1/tick/eval_node/)
 
 
 ### GroupBy
@@ -135,7 +135,7 @@ Example:
 node.groupBy(tag ...interface{})
 ```
 
-Returns: [GroupByNode](/docs/kapacitor/v0.1/tick/group_by_node.html)
+Returns: [GroupByNode](/kapacitor/v0.1/tick/group_by_node/)
 
 
 ### HttpOut
@@ -151,7 +151,7 @@ For example if the task endpoint is at &#34;/api/v1/task/&lt;task_name&gt;&#34; 
 node.httpOut(endpoint string)
 ```
 
-Returns: [HTTPOutNode](/docs/kapacitor/v0.1/tick/http_out_node.html)
+Returns: [HTTPOutNode](/kapacitor/v0.1/tick/http_out_node/)
 
 
 ### InfluxDBOut
@@ -163,7 +163,7 @@ Create an influxdb output node that will store the incoming data into InfluxDB.
 node.influxDBOut()
 ```
 
-Returns: [InfluxDBOutNode](/docs/kapacitor/v0.1/tick/influx_d_b_out_node.html)
+Returns: [InfluxDBOutNode](/kapacitor/v0.1/tick/influx_d_b_out_node/)
 
 
 ### Join
@@ -175,7 +175,7 @@ Join this node with other nodes. The data is joined on timestamp.
 node.join(others ...Node)
 ```
 
-Returns: [JoinNode](/docs/kapacitor/v0.1/tick/join_node.html)
+Returns: [JoinNode](/kapacitor/v0.1/tick/join_node/)
 
 
 ### MapReduce
@@ -195,7 +195,7 @@ the exact same time are combined into a batch and sent to the mapper.
 node.mapReduce(mr MapReduceInfo)
 ```
 
-Returns: [ReduceNode](/docs/kapacitor/v0.1/tick/reduce_node.html)
+Returns: [ReduceNode](/kapacitor/v0.1/tick/reduce_node/)
 
 
 ### Sample
@@ -209,7 +209,7 @@ One point will be emitted every count or duration specified.
 node.sample(rate interface{})
 ```
 
-Returns: [SampleNode](/docs/kapacitor/v0.1/tick/sample_node.html)
+Returns: [SampleNode](/kapacitor/v0.1/tick/sample_node/)
 
 
 ### Union
@@ -221,7 +221,7 @@ Perform the union of this node and all other given nodes.
 node.union(node ...Node)
 ```
 
-Returns: [UnionNode](/docs/kapacitor/v0.1/tick/union_node.html)
+Returns: [UnionNode](/kapacitor/v0.1/tick/union_node/)
 
 
 ### Where
@@ -233,7 +233,7 @@ Create a new node that filters the data stream by a given expression.
 node.where(expression tick.Node)
 ```
 
-Returns: [WhereNode](/docs/kapacitor/v0.1/tick/where_node.html)
+Returns: [WhereNode](/kapacitor/v0.1/tick/where_node/)
 
 
 ### Window
@@ -247,5 +247,5 @@ NOTE: Window can only be applied to stream edges.
 node.window()
 ```
 
-Returns: [WindowNode](/docs/kapacitor/v0.1/tick/window_node.html)
+Returns: [WindowNode](/kapacitor/v0.1/tick/window_node/)
 
