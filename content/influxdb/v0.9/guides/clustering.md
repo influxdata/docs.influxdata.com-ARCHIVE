@@ -26,7 +26,7 @@ The following is the current recommended procedure for configuring a cluster.
 
 Throughout this example, each node will be given a number that denotes the order in which it was started (e.g. 1 for the first node, 2 for the second node, etc.). It is also assumed that you are running some version of Linux and while it is possible to build a cluster locally, it is not recommended.
 
-1. Install InfluxDB on the 3 machines following the [installation guide](/docs/v0.9/introduction/installation.html). Do not start the daemon on any of the machines.
+1. Install InfluxDB on the 3 machines following the [installation guide](/influxdb/v0.9/introduction/installation/). Do not start the daemon on any of the machines.
 2. For each node's `/etc/influxdb/influxdb.conf` file, replace `hostname = "localhost"` with your host's actual name. This hostname must be resolved by all members in the cluster. It can be an IP or a hostname and optional port number if necessary.
 3. For each node's `/etc/influxdb/influxdb.conf` file, update the bind-address to another port if `8088` is unacceptable. The bind-address can also specify the host interface IP to use (e.g. `10.0.1.10:8088`). By default it will bind on all interfaces. Note that the port may differ from node to node (e.g. one can use `8088`, another use `9099`, and the other `10101`).
 4. Start InfluxDB on the first node, `sudo service influxdb start` (or `sudo systemctl start influxdb` if you are using systemd).

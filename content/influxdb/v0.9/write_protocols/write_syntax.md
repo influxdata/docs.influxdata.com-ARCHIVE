@@ -158,7 +158,7 @@ that are stored as strings must always be double-quoted. Only double-quotes shou
 
 Querying measurements or tags that contain double-quotes `"` can be difficult, since double-quotes are also the syntax for an identifier. It's possible to work around the limitations with regular expressions but it's not easy.
 
-Avoid using Keywords as identifiers (database names, retention policy names, measurement names, tag keys, or field keys) whenever possible. Keywords in InfluxDB are referenced on the [InfluxQL Syntax](../query_language/spec.md) page. There is no need to quote or escape keywords in the write syntax.
+Avoid using Keywords as identifiers (database names, retention policy names, measurement names, tag keys, or field keys) whenever possible. Keywords in InfluxDB are referenced on the [InfluxQL Syntax](/influxdb/v0.9/query_language/spec/) page. There is no need to quote or escape keywords in the write syntax.
 
 All values in InfluxDB are case-sensitive: `MyDB` != `mydb` != `MYDB`. The exception is Keywords, which are case-insensitive.
 

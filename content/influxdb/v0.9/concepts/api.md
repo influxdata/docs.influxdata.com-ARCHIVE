@@ -24,7 +24,7 @@ X-Influxdb-Version: 0.9.5-nightly-548b898
 Date: Wed, 21 Oct 2015 16:29:02 GMT
 ```
 
-In InfluxDB versions 0.9.5+ the `/ping` endpoint can also accept an optional query param, `wait_for_leader=Ns` where `N` is the number of seconds to wait before returning a response. This will check with the leader of the [cluster](/docs/v0.9/concepts/glossary.html#cluster) to ensure that the leader is available and ready. One second is a good default, but for highly distributed clusters or clusters under significant load it may lead to false negatives. Increasing the timeout gives the raft leader longer to respond. The request will return `204` if successful and `503` in the case of a timeout.
+In InfluxDB versions 0.9.5+ the `/ping` endpoint can also accept an optional query param, `wait_for_leader=Ns` where `N` is the number of seconds to wait before returning a response. This will check with the leader of the [cluster](/influxdb/v0.9/concepts/glossary/#cluster) to ensure that the leader is available and ready. One second is a good default, but for highly distributed clusters or clusters under significant load it may lead to false negatives. Increasing the timeout gives the raft leader longer to respond. The request will return `204` if successful and `503` in the case of a timeout.
 
 ```sh
 $ curl -sl -I localhost:8086/ping?wait_for_leader=1s
@@ -36,10 +36,10 @@ Date: Wed, 21 Oct 2015 16:29:35 GMT
 ```
 
 ### /query
-For more information on the `/query` endpoint see the [Querying Data](/docs/v0.9/guides/querying_data.html) section of our docs.
+For more information on the `/query` endpoint see the [Querying Data](/influxdb/v0.9/guides/querying_data/) section of our docs.
 
 ### /write
-For more information on the `/write` endpoint see the [Writing Data](/docs/v0.9/guides/writing_data.html) section of our docs.
+For more information on the `/write` endpoint see the [Writing Data](/influxdb/v0.9/guides/writing_data/) section of our docs.
 
 ## Ports
 

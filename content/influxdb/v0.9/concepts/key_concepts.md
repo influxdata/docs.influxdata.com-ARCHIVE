@@ -10,41 +10,41 @@ Before diving into InfluxDB it's good to get acquainted with some of the key con
  
 <table style="width:100%">
   <tr>
-    <td><a href="../concepts/key_concepts.html#database">database</a></td>
-    <td><a href="../concepts/key_concepts.html#field-key">field key</a></td> 
-    <td><a href="../concepts/key_concepts.html#field-set">field set</a></td>
+    <td><a href="/influxdb/v0.9/concepts/key_concepts/#database">database</a></td>
+    <td><a href="/influxdb/v0.9/concepts/key_concepts/#field-key">field key</a></td> 
+    <td><a href="/influxdb/v0.9/concepts/key_concepts/#field-set">field set</a></td>
   </tr>
   <tr>
-    <td><a href="../concepts/key_concepts.html#field-value">field value</a></td>
-    <td><a href="../concepts/key_concepts.html#measurement">measurement</a></td> 
-    <td><a href="../concepts/key_concepts.html#point">point</a></td>
+    <td><a href="/influxdb/v0.9/concepts/key_concepts/#field-value">field value</a></td>
+    <td><a href="/influxdb/v0.9/concepts/key_concepts/#measurement">measurement</a></td> 
+    <td><a href="/influxdb/v0.9/concepts/key_concepts/#point">point</a></td>
   </tr>
     <tr>
-    <td><a href="../concepts/key_concepts.html#retention-policy">retention policy</a></td>
-    <td><a href="../concepts/key_concepts.html#series">series</a></td> 
-    <td><a href="../concepts/key_concepts.html#tag-key">tag key</a></td>
+    <td><a href="/influxdb/v0.9/concepts/key_concepts/#retention-policy">retention policy</a></td>
+    <td><a href="/influxdb/v0.9/concepts/key_concepts/#series">series</a></td> 
+    <td><a href="/influxdb/v0.9/concepts/key_concepts/#tag-key">tag key</a></td>
   </tr>
     <tr>
-    <td><a href="../concepts/key_concepts.html#tag-set">tag set</a></td>
-    <td><a href="../concepts/key_concepts.html#tag-value">tag value</a></td> 
-    <td><a href="../concepts/key_concepts.html#timestamp">timestamp</a></td>
+    <td><a href="/influxdb/v0.9/concepts/key_concepts/#tag-set">tag set</a></td>
+    <td><a href="/influxdb/v0.9/concepts/key_concepts/#tag-value">tag value</a></td> 
+    <td><a href="/influxdb/v0.9/concepts/key_concepts/#timestamp">timestamp</a></td>
   </tr>
 </table>
 
-Check out the [Glossary](../concepts/glossary.html) if you prefer the cold, hard facts.
+Check out the [Glossary](/influxdb/v0.9/concepts/glossary/) if you prefer the cold, hard facts.
 
 ### Sample data
 The next section references the data printed out below. The data are fictional, but represent a believable setup in InfluxDB. They show the number of butterflies and honeybees counted by two scientists (`langstroth` and `perpetua`) in two locations (location `1` and location `2`) over the time period from August 18, 2015 at midnight through August 18, 2015 at 6:12 AM. Assume that the data live in a database called `my_database` and are subject to the `default` retention policy (more on databases and retention policies to come). 
 
 *Hint:* Hover over the links for tooltips to get acquainted with InfluxDB terminology and the layout. It's probably best not to follow the links until you are somewhat familiar with InfluxDB.
 
-name: [census](../concepts/key_concepts.html#measurement "Measurement")  
+name: [census](/influxdb/v0.9/concepts/key_concepts/#measurement "Measurement")  
 \-------------------------------------  
-time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[butterflies](../concepts/key_concepts.html#field-key "Field key")&nbsp;&nbsp;&nbsp;[honeybees](../concepts/key_concepts.html#field-key "Field key")&nbsp;&nbsp;&nbsp;[location](../concepts/key_concepts.html#tag-key "Tag key")&nbsp;&nbsp;&nbsp;&nbsp;[scientist](../concepts/key_concepts.html#tag-key "Tag key")  
+time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[butterflies](/influxdb/v0.9/concepts/key_concepts/#field-key "Field key")&nbsp;&nbsp;&nbsp;[honeybees](/influxdb/v0.9/concepts/key_concepts/#field-key "Field key")&nbsp;&nbsp;&nbsp;[location](/influxdb/v0.9/concepts/key_concepts/#tag-key "Tag key")&nbsp;&nbsp;&nbsp;&nbsp;[scientist](/influxdb/v0.9/concepts/key_concepts/#tag-key "Tag key")  
 2015-08-18T00:00:00Z&nbsp;&nbsp;&nbsp;12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;23&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth  
 2015-08-18T00:00:00Z&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;perpetua  
 2015-08-18T00:06:00Z&nbsp;&nbsp;&nbsp;11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;28&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth  
-[2015-08-18T00:06:00Z](../concepts/key_concepts.html#timestamp "Timestamp")&nbsp;&nbsp;&nbsp;[3](../concepts/key_concepts.html#field-value "Field value")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[28](../concepts/key_concepts.html#field-value "Field value")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1](../concepts/key_concepts.html#tag-value "Tag value")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[perpetua](../concepts/key_concepts.html#tag-value "Tag value")  
+[2015-08-18T00:06:00Z](/influxdb/v0.9/concepts/key_concepts/#timestamp "Timestamp")&nbsp;&nbsp;&nbsp;[3](/influxdb/v0.9/concepts/key_concepts/#field-value "Field value")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[28](/influxdb/v0.9/concepts/key_concepts/#field-value "Field value")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1](/influxdb/v0.9/concepts/key_concepts/#tag-value "Tag value")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[perpetua](/influxdb/v0.9/concepts/key_concepts/#tag-value "Tag value")  
 2015-08-18T05:54:00Z&nbsp;&nbsp;&nbsp;2&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth  
 2015-08-18T06:00:00Z&nbsp;&nbsp;&nbsp;1	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth  
 2015-08-18T06:06:00Z&nbsp;&nbsp;&nbsp;8	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;23&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;perpetua  
@@ -81,7 +81,7 @@ In the data above, the collection of field-key and field-value pairs make up a <
 * `butterflies = 8    honeybees = 23`
 * `butterflies = 7    honeybees = 22`
 
-Fields are a required piece of InfluxDB's data structure - you cannot have data in InfluxDB without fields. It's also important to note that fields are not indexed. [Queries](../concepts/glossary.html#query) that use field values as filters must scan all values that match the other conditions in the query. As a result, those queries are not performant relative to queries on tags (more on tags below). In general, fields should not contain commonly-queried metadata.  
+Fields are a required piece of InfluxDB's data structure - you cannot have data in InfluxDB without fields. It's also important to note that fields are not indexed. [Queries](/influxdb/v0.9/concepts/glossary/#query) that use field values as filters must scan all values that match the other conditions in the query. As a result, those queries are not performant relative to queries on tags (more on tags below). In general, fields should not contain commonly-queried metadata.  
 
 The last two columns in the sample data, called `location` and `scientist`, are tags. Tags are made up of tag keys and tag values. Both <a name="tag-key"></a>**tag keys** and <a name="tag-value"></a>**tag values** are stored as strings and record metadata. The tag keys in the sample data are `location` and `scientist`. The tag key `location` has two tag values: `1` and `2`. The tag key `scientist` also has two tag values: `langstroth` and `perpetua`.
 
@@ -101,15 +101,15 @@ Tags are optional. You don't need to have tags in your data structure, but it's 
 > `SELECT * FROM census WHERE butterflies = 1`  
 > `SELECT * FROM census WHERE honeybees = 23`
 
-> Because fields aren't indexed, InfluxDB scans every value of `butterflies`  in the first query and every value of `honeybees` in the second query before it provides a response. That behavior can hurt query response times - especially on a much larger scale. To optimize your queries, it may be beneficial to rearrange your [schema](../concepts/glossary.html#schema) such that the fields (`butterflies` and `honeybees`) become the tags and the tags (`location` and `scientist`) become the fields:
+> Because fields aren't indexed, InfluxDB scans every value of `butterflies`  in the first query and every value of `honeybees` in the second query before it provides a response. That behavior can hurt query response times - especially on a much larger scale. To optimize your queries, it may be beneficial to rearrange your [schema](/influxdb/v0.9/concepts/glossary/#schema) such that the fields (`butterflies` and `honeybees`) become the tags and the tags (`location` and `scientist`) become the fields:
 
-> name: [census](../concepts/key_concepts.html#measurement "Measurement")  
+> name: [census](/influxdb/v0.9/concepts/key_concepts/#measurement "Measurement")  
 \-------------------------------------  
-time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[location](../concepts/key_concepts.html#field-key "Field key")&nbsp;&nbsp;&nbsp;[scientist](../concepts/key_concepts.html#field-key "Field key")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[butterflies](../concepts/key_concepts.html#tag-key "Tag key")&nbsp;&nbsp;&nbsp;[honeybees](../concepts/key_concepts.html#tag-key "Tag key")  
+time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[location](/influxdb/v0.9/concepts/key_concepts/#field-key "Field key")&nbsp;&nbsp;&nbsp;[scientist](/influxdb/v0.9/concepts/key_concepts/#field-key "Field key")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[butterflies](/influxdb/v0.9/concepts/key_concepts/#tag-key "Tag key")&nbsp;&nbsp;&nbsp;[honeybees](/influxdb/v0.9/concepts/key_concepts/#tag-key "Tag key")  
 2015-08-18T00:00:00Z&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth&nbsp;&nbsp;&nbsp;&nbsp;12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;23  
 2015-08-18T00:00:00Z&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;perpetua&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30  
 2015-08-18T00:06:00Z&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth&nbsp;&nbsp;&nbsp;&nbsp;11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;28  
-[2015-08-18T00:06:00Z](../concepts/key_concepts.html#timestamp "Timestamp")&nbsp;&nbsp;&nbsp;[1](../concepts/key_concepts.html#field-value "Field value")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[perpetua](../concepts/key_concepts.html#field-value "Field value")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3](../concepts/key_concepts.html#tag-value "Tag value")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[28](../concepts/key_concepts.html#tag-value "Tag value")  
+[2015-08-18T00:06:00Z](/influxdb/v0.9/concepts/key_concepts/#timestamp "Timestamp")&nbsp;&nbsp;&nbsp;[1](/influxdb/v0.9/concepts/key_concepts/#field-value "Field value")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[perpetua](/influxdb/v0.9/concepts/key_concepts/#field-value "Field value")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3](/influxdb/v0.9/concepts/key_concepts/#tag-value "Tag value")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[28](/influxdb/v0.9/concepts/key_concepts/#tag-value "Tag value")  
 2015-08-18T05:54:00Z&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11  
 2015-08-18T06:00:00Z&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10  
 2015-08-18T06:06:00Z&nbsp;&nbsp;&nbsp;2	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;perpetua&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;23  
@@ -119,7 +119,7 @@ time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 
 The <a name=measurement></a>**measurement** acts as a container for tags, fields, and the `time` column, and the measurement name is the description of the data that are stored in the associated fields. Measurement names are strings, and, for any SQL users out there, a measurement is conceptually similar to a table. The only measurement in the sample data is `census`. The name `census` tells us that the field values record the number of `butterflies` and `honeybees` - not their size, direction, or some sort of happiness index.
 
-A single measurement can belong to different retention policies. A <a name="retention-policy"></a>**retention policy** describes how long InfluxDB keeps data (`DURATION`) and how many copies of those data are stored in the cluster (`REPLICATION`). If you're interested in reading more about retention policies, check out [Database Management](../query_language/database_management.html#retention-policy-management). 
+A single measurement can belong to different retention policies. A <a name="retention-policy"></a>**retention policy** describes how long InfluxDB keeps data (`DURATION`) and how many copies of those data are stored in the cluster (`REPLICATION`). If you're interested in reading more about retention policies, check out [Database Management](/influxdb/v0.9/query_language/database_management/#retention-policy-management). 
 
 In the sample data, everything in the `census` measurement belongs to the `default` retention policy. InfluxDB automatically creates that retention policy; it has an infinite duration and a replication factor set to the number of nodes in the cluster.
 
@@ -132,7 +132,7 @@ Now that you're familiar with measurements, tag sets, and retention policies it'
 | series 3  | `default` | `census`  | `location = 1`,`scientist = perpetua` |
 | series 4 | `default` |  `census` |  `location = 2`,`scientist = perpetua` |
 
-Understanding the concept of a series is essential when designing your [schema](../concepts/glossary.html#schema) and when working with your data in InfluxDB.
+Understanding the concept of a series is essential when designing your [schema](/influxdb/v0.9/concepts/glossary/#schema) and when working with your data in InfluxDB.
 
 Finally, a <a name="point"></a>**point** is the field set in the same series with the same timestamp. For example, here's a single point:
 ```
@@ -144,11 +144,11 @@ time			               butterflies	 honeybees	 location	 scientist
 
 The series in the example is defined by the retention policy (`default`), the measurement (`census`), and the tag set (`location = 1`, `scientist = perpetua`). The timestamp for the point is `2015-08-18T00:00:00Z`.
 
-All of the stuff we've just covered is stored in a database - the sample data are in the database `my_database`. An InfluxDB <a name=database></a> **database** is similar to traditional relational databases and serves as a logical container for users, retention policies, continuous queries, and, of course, your time series data. See [users](../administration/authentication_and_authorization.html) and [continuous queries](../query_language/continuous_queries.html) for more on those topics.
+All of the stuff we've just covered is stored in a database - the sample data are in the database `my_database`. An InfluxDB <a name=database></a> **database** is similar to traditional relational databases and serves as a logical container for users, retention policies, continuous queries, and, of course, your time series data. See [users](/influxdb/v0.9/administration/authentication_and_authorization/) and [continuous queries](/influxdb/v0.9/query_language/continuous_queries/) for more on those topics.
 
 Databases can have several users, continuous queries, retention policies, and measurements. InfluxDB is a schemaless database which means it's easy to add new measurements, tags, and fields at any time. It's designed to make working with time series data awesome.
 
-You made it! You've covered the fundamental concepts and terminology in InfluxDB. If you're just starting out, we recommend taking a look at [Getting Started](../introduction/getting_started.html) and the [Writing Data](../guides/writing_data.html) and [Querying Data](../guides/querying_data.html) guides. May our time series database serve you well 🕔. 
+You made it! You've covered the fundamental concepts and terminology in InfluxDB. If you're just starting out, we recommend taking a look at [Getting Started](/influxdb/v0.9/introduction/getting_started/) and the [Writing Data](/influxdb/v0.9/guides/writing_data/) and [Querying Data](/influxdb/v0.9/guides/querying_data/) guides. May our time series database serve you well 🕔. 
  
 
 

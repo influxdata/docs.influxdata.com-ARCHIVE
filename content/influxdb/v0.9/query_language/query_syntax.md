@@ -6,7 +6,7 @@ menu:
     parent: query_language
 ---
 
-The InfluxDB Query Language (InfluxQL) syntax is a SQL-like query language tailored for querying ranges of time. This page explains the InfluxQL syntax. See the [specification](/docs/v0.9/query_language/spec.html) for a formal explanation of InfluxQL.
+The InfluxDB Query Language (InfluxQL) syntax is a SQL-like query language tailored for querying ranges of time. This page explains the InfluxQL syntax. See the [specification](/influxdb/v0.9/query_language/spec/) for a formal explanation of InfluxQL.
 
 ## Identifiers (Double-quoted)
 
@@ -26,7 +26,7 @@ Identifiers can be either bare (no quotes) or wrapped in double-quotes. Bare (un
 
 - contain only `A-Z`, `a-z`, `0-9`, or `_`
 - begin with `A-Z`, `a-z`, or `_`
-- not match a [keyword](/docs/v0.9/query_language/spec.html#keywords).
+- not match a [keyword](/influxdb/v0.9/query_language/spec/#keywords).
 
 All other identifiers must be wrapped in double-quotes (`"`). Double-quoted identifers may contain any unicode characters except for double quotes, new lines and backslashes, which must be backslash (`\`) escaped.
 
@@ -194,6 +194,6 @@ Some queries require a target database. You may specify that in the URL query st
 
 Querying measurements or tags that contain double-quotes `"` can be difficult, since double-quotes are also the syntax for an identifier. It's possible to work around the limitations with regular expressions but it's not easy.
 
-Avoid using Keywords as identifiers (database names, retention policy names, measurement names, tag keys, or field keys) whenever possible. Keywords in InfluxDB are referenced on the [InfluxQL Syntax](../query_language/spec.html) page. There is no need to quote or escape keywords in the write syntax. 
+Avoid using Keywords as identifiers (database names, retention policy names, measurement names, tag keys, or field keys) whenever possible. Keywords in InfluxDB are referenced on the [InfluxQL Syntax](/influxdb/v0.9/query_language/spec/) page. There is no need to quote or escape keywords in the write syntax. 
 
 All values in InfluxDB are case-sensitive: `MyDB` != `mydb` != `MYDB`. The exception is Keywords, which are case-insensitive.

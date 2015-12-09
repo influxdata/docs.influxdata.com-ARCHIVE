@@ -1,14 +1,14 @@
 ---
 title: Writing Data
 aliases:
-  - /docs/v0.9/concepts/reading_and_writing_data.html
+  - /docs/v0.9/concepts/reading_and_writing_data/
 menu:
   influxdb_09:
     weight: 0
     parent: guides
 ---
 
-There are many ways to write data into InfluxDB including [client libraries](../clients/api.html) and plugins for common data formats such as [Graphite](../write_protocols/graphite.html). Here we'll show you how to create a database and write data to that database using the built-in HTTP API.
+There are many ways to write data into InfluxDB including [client libraries](/influxdb/v0.9/clients/api/) and plugins for common data formats such as [Graphite](/influxdb/v0.9/write_protocols/graphite/). Here we'll show you how to create a database and write data to that database using the built-in HTTP API.
 
 ## Creating a database using the HTTP API
 To create a database send a `GET` request to the `/query` endpoint and set the URL parameter `q` to `CREATE DATABASE <new_database_name>`. The example below sends a request to InfluxDB running on `localhost` and creates the database `mydb`:  
@@ -19,15 +19,15 @@ curl -G http://localhost:8086/query --data-urlencode "q=CREATE DATABASE mydb"
 ```
 
 ## Writing data using the HTTP API
-The HTTP API is the primary means of putting data into InfluxDB. To write data send a `POST` request to the `/write` endpoint. The example below writes a single point to the `mydb` database. The data consist of the [measurement](../concepts/glossary.html#measurement) `cpu_load_short`, the [tag keys](../concepts/glossary.html#tag-key) `host` and `region` with the [tag values](../concepts/glossary.html#tag-value) `server01` and `us-west`, the [field key](../concepts/glossary.html#field-key) `value` with a [field value](../concepts/glossary.html#field-value) of `0.64`, and the [timestamp](../concepts/glossary.html#timestamp) `1434055562000000000`.  
+The HTTP API is the primary means of putting data into InfluxDB. To write data send a `POST` request to the `/write` endpoint. The example below writes a single point to the `mydb` database. The data consist of the [measurement](/influxdb/v0.9/concepts/glossary/#measurement) `cpu_load_short`, the [tag keys](/influxdb/v0.9/concepts/glossary/#tag-key) `host` and `region` with the [tag values](/influxdb/v0.9/concepts/glossary/#tag-value) `server01` and `us-west`, the [field key](/influxdb/v0.9/concepts/glossary/#field-key) `value` with a [field value](/influxdb/v0.9/concepts/glossary/#field-value) of `0.64`, and the [timestamp](/influxdb/v0.9/concepts/glossary/#timestamp) `1434055562000000000`.  
 <br>
 
 ```sh
 curl -i -XPOST 'http://localhost:8086/write?db=mydb' --data-binary 'cpu_load_short,host=server01,region=us-west value=0.64 1434055562000000000'
 ```
-When writing points, you must specify an existing database in the `db` query parameter. See the [HTTP section](../write_protocols/write_syntax.html#http) on the Write Syntax page for a complete list of the available query parameters.
+When writing points, you must specify an existing database in the `db` query parameter. See the [HTTP section](/influxdb/v0.9/write_protocols/write_syntax/#http) on the Write Syntax page for a complete list of the available query parameters.
 
-The body of the POST - we call this the [Line Protocol](../write_protocols/line.html) - contains the time-series data that you wish to store. They consist of a measurement, tags, fields, and a timestamp. InfluxDB requires a measurement name. Strictly speaking, tags are optional but most series include tags to differentiate data sources and to make querying both easy and efficient. Both tag keys and tag values are strings. Field keys are required and are always strings, and, [by default](../write_protocols/write_syntax.html#line-protocol), field values are floats. The timestamp - supplied at the end of the line in Unix time in nanoseconds since January 1, 1970 UTC - is optional. If you do not specify a timestamp InfluxDB uses the server's local nanosecond timestamp in Unix epoch. Anything that has to do with time in InfluxDB is always UTC.
+The body of the POST - we call this the [Line Protocol](/influxdb/v0.9/write_protocols/line/) - contains the time-series data that you wish to store. They consist of a measurement, tags, fields, and a timestamp. InfluxDB requires a measurement name. Strictly speaking, tags are optional but most series include tags to differentiate data sources and to make querying both easy and efficient. Both tag keys and tag values are strings. Field keys are required and are always strings, and, [by default](/influxdb/v0.9/write_protocols/write_syntax/#line-protocol), field values are floats. The timestamp - supplied at the end of the line in Unix time in nanoseconds since January 1, 1970 UTC - is optional. If you do not specify a timestamp InfluxDB uses the server's local nanosecond timestamp in Unix epoch. Anything that has to do with time in InfluxDB is always UTC.
 
 ### Writing multiple points
 ---
@@ -44,7 +44,7 @@ cpu_load_short,direction=in,host=server01,region=us-west value=2.0 1422568543702
 
 ### Writing points from a file
 ---
-Write points from a file by passing `@filename` to `curl`. The data in the file should follow InfluxDB's [line protocol syntax](../write_protocols/write_syntax.html).
+Write points from a file by passing `@filename` to `curl`. The data in the file should follow InfluxDB's [line protocol syntax](/influxdb/v0.9/write_protocols/write_syntax/).
 
 Example of a properly-formatted file (`cpu_data.txt`):  
 <br>
@@ -58,7 +58,7 @@ Write the data in `cpu_data.txt` to the `mydb` database with:
 <br>
 `curl -i -XPOST 'http://localhost:8086/write?db=mydb' --data-binary @cpu_data.txt`
 
-> **Note:** If your data file has more than 5,000 points, it may be necessary to split that file into several files in order to write your data in batches to InfluxDB. [By default](https://github.com/influxdb/influxdb/blob/master/etc/config.sample.toml#L97), the HTTP request times out after five seconds. InfluxDB will still attempt to write the points after that time out but there will be no confirmation that they were successfully written.
+> **Note:** If your data file has more than 5,000 points, it may be necessary to split that file into several files in order to write your data in batches to InfluxDB. [By default](/influxdb/v0.9/administration/config/#cluster), the HTTP request times out after five seconds. InfluxDB will still attempt to write the points after that time out but there will be no confirmation that they were successfully written.
 
 ### Schemaless Design
 ---
@@ -108,4 +108,4 @@ database not found: "atlantis"
 
 ### Next steps
 ---
-Now that you know how to write data with the built-in HTTP API discover how to query them with the [Querying Data](../guides/querying_data.html) guide!
+Now that you know how to write data with the built-in HTTP API discover how to query them with the [Querying Data](/influxdb/v0.9/guides/querying_data/) guide!

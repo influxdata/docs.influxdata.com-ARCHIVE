@@ -113,7 +113,7 @@ influxd -config /usr/local/etc/influxdb.conf
 
 For users who don't want to install any software and are ready to use InfluxDB, you may want to check out our [managed hosted InfluxDB offering](http://customers.influxdb.com).
 
-<a href="getting_started.html"><font size="6"><b>⇒ Now get started!</b></font></a>
+<a href="/influxdb/v0.9/introduction/getting_started/"><font size="6"><b>⇒ Now get started!</b></font></a>
 
 ## Generate a configuration file
 
@@ -204,8 +204,8 @@ If you're planning on using a cluster, you may also want to set `hostname` and `
 INFLUXD_OPTS='-hostname host[:port] [-join hostname_1:port_1[,hostname_2:port_2]]'
 ```
 
-For more detailed instructions on how to set up a cluster, see the documentation on [clustering](/docs/v0.9/guides/clustering.html)
+For more detailed instructions on how to set up a cluster, see the documentation on [clustering](/influxdb/v0.9/guides/clustering/)
 
 ## Development Versions
 
-Nightly packages are available for Linux through the InfluxData package repository by using the `nightly` channel. Other package options can be found on the [downloads page](/downloads/#influxdb)
+Nightly packages are available for Linux through the InfluxData package repository by using the `nightly` channel. Other package options can be found on the [downloads page](https://influxdata.com/downloads/)

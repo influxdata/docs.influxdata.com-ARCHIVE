@@ -1,7 +1,7 @@
 ---
 title: Frequently Encountered Issues
 aliases:
-  - /docs/v0.9/guides/troubleshooting.html
+  - /docs/v0.9/guides/troubleshooting/
 menu:
   influxdb_09:
     weight: 0
@@ -12,34 +12,34 @@ This page addresses frequent sources of confusion and places where InfluxDB beha
 
 **Querying data**  
 
-* [Getting unexpected results with `GROUP BY time()`](../troubleshooting/frequently_encountered_issues.html#getting-unexpected-results-with-group-by-time)  
-* [Querying after `now()`](../troubleshooting/frequently_encountered_issues.html#querying-after-now)  
-* [Querying outside the min/max time range](../troubleshooting/frequently_encountered_issues.html#querying-outside-the-min-max-time-range)  
-* [Querying a time range that spans epoch 0](../troubleshooting/frequently_encountered_issues.html#querying-a-time-range-that-spans-epoch-0)  
-* [Querying with booleans](../troubleshooting/frequently_encountered_issues.html#querying-with-booleans)  
-* [Working with really big or really small integers](../troubleshooting/frequently_encountered_issues.html#working-with-really-big-or-really-small-integers) 
-* [Doing math on timestamps](../troubleshooting/frequently_encountered_issues.html#doing-math-on-timestamps)  
-* [Getting an unexpected epoch 0 timestamp in query returns](../troubleshooting/frequently_encountered_issues.html#getting-an-unexpected-epoch-0-timestamp-in-query-returns)  
-* [Getting large query returns in batches when using the HTTP API](../troubleshooting/frequently_encountered_issues.html#getting-large-query-returns-in-batches-when-using-the-http-api)  
-* [Getting the `expected identifier` error, unexpectedly](../troubleshooting/frequently_encountered_issues.html#getting-the-expected-identifier-error-unexpectedly) 
-* [Identifying write precision from returned timestamps](../troubleshooting/frequently_encountered_issues.html#identifying-write-precision-from-returned-timestamps)  
-* [Single quoting and double quoting in queries](../troubleshooting/frequently_encountered_issues.html#single-quoting-and-double-quoting-in-queries)  
-* [Writing more than one continuous query to a single series](../troubleshooting/frequently_encountered_issues.html#writing-more-than-one-continuous-query-to-a-single-series)
+* [Getting unexpected results with `GROUP BY time()`](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#getting-unexpected-results-with-group-by-time)  
+* [Querying after `now()`](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#querying-after-now)  
+* [Querying outside the min/max time range](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#querying-outside-the-min-max-time-range)  
+* [Querying a time range that spans epoch 0](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#querying-a-time-range-that-spans-epoch-0)  
+* [Querying with booleans](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#querying-with-booleans)  
+* [Working with really big or really small integers](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#working-with-really-big-or-really-small-integers) 
+* [Doing math on timestamps](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#doing-math-on-timestamps)  
+* [Getting an unexpected epoch 0 timestamp in query returns](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#getting-an-unexpected-epoch-0-timestamp-in-query-returns)  
+* [Getting large query returns in batches when using the HTTP API](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#getting-large-query-returns-in-batches-when-using-the-http-api)  
+* [Getting the `expected identifier` error, unexpectedly](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#getting-the-expected-identifier-error-unexpectedly) 
+* [Identifying write precision from returned timestamps](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#identifying-write-precision-from-returned-timestamps)  
+* [Single quoting and double quoting in queries](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#single-quoting-and-double-quoting-in-queries)  
+* [Writing more than one continuous query to a single series](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#writing-more-than-one-continuous-query-to-a-single-series)
 
 **Writing data**  
 
-* [Writing integers](../troubleshooting/frequently_encountered_issues.html#writing-integers)  
-* [Writing data with negative timestamps](../troubleshooting/frequently_encountered_issues.html#writing-data-with-negative-timestamps)  
-* [Writing duplicate points](../troubleshooting/frequently_encountered_issues.html#writing-duplicate-points)  
-* [Getting an unexpected error when sending data over the HTTP API](../troubleshooting/frequently_encountered_issues.html#getting-an-unexpected-error-when-sending-data-over-the-http-api) 
-* [Words and characters to avoid](../troubleshooting/frequently_encountered_issues.html#words-and-characters-to-avoid)  
-* [Single quoting and double quoting when writing data](../troubleshooting/frequently_encountered_issues.html#single-quoting-and-double-quoting-when-writing-data)  
+* [Writing integers](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#writing-integers)  
+* [Writing data with negative timestamps](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#writing-data-with-negative-timestamps)  
+* [Writing duplicate points](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#writing-duplicate-points)  
+* [Getting an unexpected error when sending data over the HTTP API](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#getting-an-unexpected-error-when-sending-data-over-the-http-api) 
+* [Words and characters to avoid](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#words-and-characters-to-avoid)  
+* [Single quoting and double quoting when writing data](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#single-quoting-and-double-quoting-when-writing-data)  
 
 **Administration**  
 
-* [Single quoting the password string](../troubleshooting/frequently_encountered_issues.html#single-quoting-the-password-string) 
-* [Escaping the single quote in a password](../troubleshooting/frequently_encountered_issues.html#escaping-the-single-quote-in-a-password)  
-* [Identifying your version of InfluxDB](../troubleshooting/frequently_encountered_issues.html#identifying-your-version-of-influxdb)
+* [Single quoting the password string](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#single-quoting-the-password-string) 
+* [Escaping the single quote in a password](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#escaping-the-single-quote-in-a-password)  
+* [Identifying your version of InfluxDB](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#identifying-your-version-of-influxdb)
 
 
 # Querying data
@@ -169,7 +169,7 @@ No: `SELECT 'bikes_available' FROM 'bikes' WHERE 'station_id'="9"`
 
 No: `SELECT * from cr@zy where p^e='2'`
 
-See the [Query Syntax](../query_language/query_syntax.html) page for more information.
+See the [Query Syntax](/influxdb/v0.9/query_language/query_syntax/) page for more information.
 
 ## Writing more than one continuous query to a single series
 Use a single continuous query to write several statistics to the same measurement and tag set. For example, tell InfluxDB to write to the `aggregated_stats` measurement the `MEAN` and `MIN` of the `value` field grouped by five-minute intervals and grouped by the `cpu` tag with:
@@ -178,7 +178,7 @@ Use a single continuous query to write several statistics to the same measuremen
 
 If you create two separate continuous queries (one for calculating the `MEAN` and one for calculating the `MIN`), the `aggregated_stats` measurement will appear to be missing data. Separate continuous queries run at slightly different times and InfluxDB defines a unique point by its measurement, tag set, and timestamp (notice that field is missing from that list). So if two continuous queries write to different fields but also write to the same measurement and tag set, only one of the two fields will ever have data; the last continuous query to run will overwrite the results that were written by the first continuous query with the same timestamp.
 
-For more on continuous queries, see the [continuous queries page](../query_language/continuous_queries.html).
+For more on continuous queries, see the [continuous queries page](/influxdb/v0.9/query_language/continuous_queries/).
 
 # Writing data
 ## Writing integers
@@ -193,7 +193,7 @@ Writes a float: `value=100`
 There was a bug in the line protocol parser in versions 0.9.0 to 0.9.4 which treated negative timestamps as invalid syntax. For example, `INSERT waybackwhen past=1 -1` returned `ERR: unable to parse 'waybackwhen past=1 -1': bad timestamp`. Starting with version 0.9.5 and later, the line protocol parser accepts negative timestamps.
 
 ## Writing duplicate points
-In InfluxDB 0.9 a point is uniquely identified by the measurement name, full [tag set]()(../concepts/glossary.html#tag-set), and the nanosecond timestamp. If a point is submitted with an identical measurement, tag set, and timestamp it will silently overwrite the previous point. This is the intended behavior.
+In InfluxDB 0.9 a point is uniquely identified by the measurement name, full [tag set]()(/influxdb/v0.9/concepts/glossary/#tag-set), and the nanosecond timestamp. If a point is submitted with an identical measurement, tag set, and timestamp it will silently overwrite the previous point. This is the intended behavior.
 
 For example, 
 <br>`cpu_load,hostname=server02,az=us_west value=24.5 1234567890000000` and
@@ -212,12 +212,12 @@ You can also increment the timestamp by a nanosecond:
 
 
 ## Getting an unexpected error when sending data over the HTTP API
-First, double check your [line protocol](../write_protocols/line.html) syntax. Second, if you continue to receive errors along the lines of `bad timestamp` or `unable to parse`, verify that your newline character is line feed (`\n`, which is ASCII `0x0A`). InfluxDB's line protocol relies on `\n` to indicate the end of a line and the beginning of a new line; files or data that use a newline character other than `\n` will encounter parsing issues. Convert the newline character and try sending the data again.
+First, double check your [line protocol](/influxdb/v0.9/write_protocols/line/) syntax. Second, if you continue to receive errors along the lines of `bad timestamp` or `unable to parse`, verify that your newline character is line feed (`\n`, which is ASCII `0x0A`). InfluxDB's line protocol relies on `\n` to indicate the end of a line and the beginning of a new line; files or data that use a newline character other than `\n` will encounter parsing issues. Convert the newline character and try sending the data again.
 
 > **Note:** If you generated your data file on a Windows machine, Windows uses carriage return and line feed (`\r\n`) as the newline character. 
 
 ## Words and characters to avoid
-If you use any of the [InfluxQL keywords](https://github.com/influxdb/influxdb/blob/master/influxql/INFLUXQL.md#keywords) as an identifier you will need to double quote that identifier in every query. This can lead to [non-intuitive errors](../troubleshooting/frequently_encountered_issues.html#getting-the-expected-identifier-error-unexpectedly). Identifiers are database names, retention policy names, user names, measurement names, tag keys, and field keys. 
+If you use any of the [InfluxQL keywords](https://github.com/influxdb/influxdb/blob/master/influxql/INFLUXQL.md#keywords) as an identifier you will need to double quote that identifier in every query. This can lead to [non-intuitive errors](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#getting-the-expected-identifier-error-unexpectedly). Identifiers are database names, retention policy names, user names, measurement names, tag keys, and field keys. 
 
 To keep regular expressions and quoting simple, avoid using the following characters in identifiers:  
 
@@ -257,7 +257,7 @@ To keep regular expressions and quoting simple, avoid using the following charac
 	Write: `INSERT wacky va\"ue=4`  
 	Applicable query: `SELECT "va\"ue" FROM wacky`
 	
-See the [Line Protocol Syntax](https://influxdb.com/docs/v0.9/write_protocols/write_syntax.html) page for more information.
+See the [Line Protocol Syntax](https://influxdb.com/docs/v0.9/write_protocols/write_syntax/) page for more information.
 
 # Administration
 ## Single quoting the password string 
@@ -276,7 +276,7 @@ There a number of ways to identify the version of InfluxDB that you're using:
 ✨`X-Influxdb-Version: 0.9.3`✨
 `Date: Fri, 04 Sep 2015 19:18:26 GMT`
 
-* Check the text that appears when you [launch](../introduction/getting_started.html#logging-in-and-creating-your-first-database) the CLI:
+* Check the text that appears when you [launch](/influxdb/v0.9/introduction/getting_started/#logging-in-and-creating-your-first-database) the CLI:
 
 `Connected to http://localhost:8086` ✨`version 0.9.3`✨   
 `InfluxDB shell 0.9.3`

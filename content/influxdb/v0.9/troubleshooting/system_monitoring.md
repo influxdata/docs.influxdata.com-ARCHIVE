@@ -8,8 +8,8 @@ menu:
 
 To assist with troubleshooting and performance analysis InfluxDB makes available statistical and diagnostic information about the system. For additional information see the [README on GitHub](https://github.com/influxdb/influxdb/blob/master/monitor/README.md).
 
-* [See statistics for your installation with `SHOW STATS`](../query_language/schema_exploration.html#see-statistics-about-your-installation-with-show-stats)
-* [Show diagnostic information about your installation with `SHOW DIAGNOSTICS`](../query_language/schema_exploration.html#show-diagnostic-information-about-your-installation-with-show-diagnostics)
+* [See statistics for your installation with `SHOW STATS`](/influxdb/v0.9/troubleshooting/system_monitoring/#see-statistics-for-your-installation-with-show-stats)
+* [Show diagnostic information about your installation with `SHOW DIAGNOSTICS`](/influxdb/v0.9/troubleshooting/system_monitoring/#show-diagnostic-information-about-your-installation-with-show-diagnostics)
 
 ## See statistics for your installation with `SHOW STATS`
 

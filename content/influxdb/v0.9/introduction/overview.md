@@ -8,7 +8,7 @@ menu:
 
 InfluxDB is a time series, metrics, and analytics database. It's written in Go and has no external dependencies. That means once you install it there's nothing else to manage (such as Redis, ZooKeeper, Cassandra, HBase, or anything else).
 
-InfluxDB is targeted at use cases for DevOps, metrics, sensor data, and real-time analytics. It arose from our need for a database like this on more than a few previous products we've built. You can [read more about our journey from SaaS application to open source time series database](/blog/2014/09/26/one-year-of-influxdb-and-the-road-to-1_0.html).
+InfluxDB is targeted at use cases for DevOps, metrics, sensor data, and real-time analytics. It arose from our need for a database like this on more than a few previous products we've built. You can [read more about our journey from SaaS application to open source time series database](https://influxdata.com/blog/one-year-of-influxdb-and-the-road-to-1-0/).
 
 ## Project Status
 
@@ -44,7 +44,7 @@ SELECT mean(value) FROM cpu
 SELECT mean(value) FROM /cpu.*/ WHERE time > now() - 1h GROUP BY time(30m)
 ```
 
-There's much more, have a look at the [getting started guide](getting_started.html) to see some examples.
+There's much more, have a look at the [getting started guide](/influxdb/v0.9/introduction/getting_started/) to see some examples.
 
 ## Design Goals
 

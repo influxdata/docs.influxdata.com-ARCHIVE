@@ -121,7 +121,7 @@ Multiple configurations can be specified to support multiple listening ports or 
 
 ## Writing Points
 
-To write, just send newline separated [line protocol](/docs/v0.9/write_protocols/line.html) over UDP. For better performance send batches of points rather than multiple single points.
+To write, just send newline separated [line protocol](/influxdb/v0.9/write_protocols/line/) over UDP. For better performance send batches of points rather than multiple single points.
 
 ```bash
 $ echo "cpu value=1"> /dev/udp/localhost/8089
