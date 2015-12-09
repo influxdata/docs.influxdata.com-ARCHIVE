@@ -21,7 +21,7 @@ Don't worry about installing anything yet, instructions are found below.
     You will need InfluxDB >= 0.9.5
 * [Telegraf](https://github.com/influxdb/telegraf#installation) - We will use a specific Telegraf config to send data to InfluxDB so that the examples Kapacitor tasks have context.
     You will need Telegraf >= 0.1.9 since the names of measurements change prior to that version.
-* [Kapacitor](https://github/com/influxdb/kapacitor) - You can get the latest Kapacitor binaries for your OS at the [downloads](/download/#download) page.
+* [Kapacitor](https://github/com/influxdb/kapacitor) - You can get the latest Kapacitor binaries for your OS at the [downloads](https://influxdata.com/downloads/#kapacitor) page.
 * Terminal - Kapacitor's interface is via a CLI and so you will need a basic terminal to issue commands.
 
 

@@ -12,8 +12,8 @@ menu:
 
 An [AlertNode](/kapacitor/v0.1/tick/alert_node/) can trigger an event of varying severity levels, 
 and pass the event to alert handlers. The criteria for triggering 
-an alert is specified via a [lambda expression](https://influxdb.com/docs/kapacitor/v0.1/tick/expr.html). 
-See [AlertNode.Info,](/kapacitor/v0.1/tick/alert_node/#info) [AlertNode.Warn,](/kapacitor/v0.1/tick/alert_node/#warn) and [AlertNode.Crit](/kapacitor/v0.1/tick/alert_node.html#crit) below. 
+an alert is specified via a [lambda expression](/kapacitor/v0.1/tick/expr/).
+See [AlertNode.Info,](/kapacitor/v0.1/tick/alert_node/#info) [AlertNode.Warn,](/kapacitor/v0.1/tick/alert_node/#warn) and [AlertNode.Crit](/kapacitor/v0.1/tick/alert_node/#crit) below. 
 
 Different event handlers can be configured for each [AlertNode.](/kapacitor/v0.1/tick/alert_node/) 
 Some handlers like Email, Slack, VictorOps and PagerDuty have a configuration 
