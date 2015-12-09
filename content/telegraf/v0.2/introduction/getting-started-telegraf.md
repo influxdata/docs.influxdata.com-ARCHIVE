@@ -50,9 +50,9 @@ systemctl start telegraf
 ## Results
 Once Telegraf is up and running it'll start collecting data and writing them to the desired output. 
 
-Returning to our sample configuration above, we show what the `cpu` and `mem` data look like in InfluxDB below. Note that we used the default configuration settings to get these data.
+Returning to our sample configuration, we show what the `cpu` and `mem` data look like in InfluxDB below. Note that we used the default plugin and output configuration settings to get these data.
 
-* List all measurements in the `telegraf` [database](https://docs.influxdata.com/influxdb/v0.9/concepts/glossary/#database):
+* List all [measurements](https://docs.influxdata.com/influxdb/v0.9/concepts/glossary/#measurement) in the `telegraf` [database](https://docs.influxdata.com/influxdb/v0.9/concepts/glossary/#database):
 
 ```sh
 > SHOW MEASUREMENTS
@@ -79,7 +79,7 @@ mem_used
 mem_used_percent
 ```
 
-Notice that each [measurement](https://docs.influxdata.com/influxdb/v0.9/concepts/glossary/#measurement) has the name of the plugin prepended to it.
+Notice that each measurement has the name of the plugin prepended to it.
 
 * Select a sample of the data in the measurement `cpu_usage_idle`: 
 
