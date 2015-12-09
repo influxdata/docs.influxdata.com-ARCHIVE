@@ -1,16 +1,20 @@
 ---
-title: Plugins
+title: Supported Collection Plugins
 
 menu:
   telegraf_02:
-    name: Plugins
-    weight: 0
-    parent: Supported Plugins and Service Plugins
+    name: Collection Plugins
+    identifier: plugins
+    weight: 20
 ---
 
-## Supported Plugins
+Telegraf is entirely plugin driven. It gathers all metrics from the plugins specified in the configuration file.
 
-Telegraf currently supports collecting metrics from:
+## Usage Instructions
+
+View usage instructions for each collection plugin by running `telegraf -usage <pluginname>`.
+
+## Supported Collection Plugin List
 
 * [aerospike](https://github.com/influxdb/telegraf/tree/master/plugins/aerospike)
 * [apache](https://github.com/influxdb/telegraf/tree/master/plugins/apache)
@@ -41,18 +45,10 @@ Telegraf currently supports collecting metrics from:
 * [zfs](https://github.com/influxdb/telegraf/tree/master/plugins/zfs)
 * [zookeeper](https://github.com/influxdb/telegraf/tree/master/plugins/zookeeper)
 * [system](https://github.com/influxdb/telegraf/tree/master/plugins/system)
-	* cpu
+    * cpu
     * mem
     * io
     * net
     * netstat
     * disk
     * swap
-
-## Usage Instructions
-
-View usage instructions for each plugin by running `telegraf -usage <pluginname>`.
-
-
-
-

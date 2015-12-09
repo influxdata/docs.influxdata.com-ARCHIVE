@@ -3,14 +3,14 @@ title: Supported Outputs
 
 menu:
   telegraf_02:
-    name: Outputs
-    weight: 2
-    parent: Supported Outputs
+    name: Output Plugins
+    identifier: outputs
+    weight: 10
 ---
 
-## Supported Outputs
+Telegraf allows users to specify multiple output sinks in the configuration file.
 
-Telegraf currently supports sending metrics to:
+## Supported Output Plugins List
 
 * [influxdb](https://github.com/influxdb/telegraf/tree/master/outputs/influxdb)
 * [nsq](https://github.com/influxdb/telegraf/tree/master/outputs/nsq)
@@ -24,4 +24,4 @@ Telegraf currently supports sending metrics to:
 * [amon](https://github.com/influxdb/telegraf/tree/master/outputs/amon)
 * [riemann](https://github.com/influxdb/telegraf/tree/master/outputs/riemann)
 
-The configuration file contains sample configurations for each output.
+

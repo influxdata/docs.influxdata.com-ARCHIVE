@@ -5,7 +5,7 @@ menu:
   telegraf_02:
     name: Configuring Telegraf
     weight: 1
-    parent: Introduction
+    parent: introduction
 ---
 
 ## Configuring Telegraf
