@@ -3,9 +3,9 @@ title: Getting started with Telegraf
 
 menu:
   telegraf_02:
-    name: Getting started with Telegraf
-    identifier: getting started with telegraf
+    name: Getting Started
     weight: 0
+    parent: Introduction
 ---
 
 ## Getting started with Telegraf
@@ -22,7 +22,7 @@ Follow the instructions in the Telegraf section on the [Downloads page](https://
 * Standalone Binary: see the next section for how to create a configuration file
 
 ### Creating and editing the configuration file
-Before starting the Telegraf server you need to edit and/or create an initial configuration that specifies your desired [plugins](../plugins/) (where the metrics come from) and [outputs](../outputs/) (where the metrics go). There are [several ways](../configuration/) to create and edit the configuration file. Here, we'll generate a configuration file and simultaneously specify the desired plugins with the `-filter` flag and the desired output with the `-outputfilter` flag. 
+Before starting the Telegraf server you need to edit and/or create an initial configuration that specifies your desired [plugins](/telegraf/v0.2/supported-plugins/) (where the metrics come from) and [outputs](/telegraf/v0.2/supported-outputs/outputs/) (where the metrics go). There are [several ways](../configuration/) to create and edit the configuration file. Here, we'll generate a configuration file and simultaneously specify the desired plugins with the `-filter` flag and the desired output with the `-outputfilter` flag. 
 
 In the example below, we create a configuration file called `telegraf.conf` with two plugins: one that reads metrics about the system's cpu usage (`cpu`) and one that reads metrics about the system's memory usage (`mem`). `telegraf.conf` specifies InfluxDB as the desired ouput.
 

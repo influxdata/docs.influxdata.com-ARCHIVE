@@ -4,8 +4,8 @@ title: Configuring Telegraf
 menu:
   telegraf_02:
     name: Configuring Telegraf
-    identifier: configuring telegraf
-    weight: 0
+    weight: 1
+    parent: Introduction
 ---
 
 ## Configuring Telegraf

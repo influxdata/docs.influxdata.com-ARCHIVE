@@ -1,18 +1,14 @@
 ---
-title: Supported plugins and service plugins
+title: Plugins
 
 menu:
   telegraf_02:
-    name: Supported plugins and service plugins
-    identifier: supported plugins and service plugings
+    name: Plugins
     weight: 0
+    parent: Supported Plugins and Service Plugins
 ---
 
-## Supported plugins and service plugins
-
-### Supported plugins
-
-Telegraf is entirely plugin driven; it gathers all metrics from the plugins specified in the configuration file.
+## Supported Plugins
 
 Telegraf currently supports collecting metrics from:
 
@@ -53,12 +49,10 @@ Telegraf currently supports collecting metrics from:
     * disk
     * swap
 
+## Usage Instructions
+
 View usage instructions for each plugin by running `telegraf -usage <pluginname>`.
 
-### Supported service plugins
 
-Telegraf can collect metrics via the following services:
 
-* [statsd](https://github.com/influxdb/telegraf/tree/master/plugins/statsd)
-* [kafka_consumer](https://github.com/influxdb/telegraf/tree/master/plugins/kafka_consumer)
 

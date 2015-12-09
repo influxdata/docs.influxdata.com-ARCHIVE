@@ -3,14 +3,12 @@ title: Supported outputs
 
 menu:
   telegraf_02:
-    name: Supported outputs
-    identifier: supported outputs
-    weight: 0
+    name: Outputs
+    weight: 2
+    parent: Supported Outputs
 ---
 
 ## Supported outputs
-
-Telegraf allows users to specify multiple output sinks in the configuration file.
 
 Telegraf currently supports sending metrics to:
 
