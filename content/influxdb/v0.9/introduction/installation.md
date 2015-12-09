@@ -6,7 +6,7 @@ menu:
     parent: introduction
 ---
 
-This page provides directions on downloading and starting InfluxDB Version 0.9.5.1.
+This page provides directions for installing, starting, and configuring InfluxDB.
 
 ## Requirements
 Installation of the pre-built InfluxDB package requires root privileges on the host machine.
@@ -14,38 +14,56 @@ Installation of the pre-built InfluxDB package requires root privileges on the h
 ### Networking
 By default InfluxDB will use TCP ports `8083` and `8086` so these ports should be available on your system. Once installation is complete you can change those ports and other options in the configuration file, which is located by default in `/etc/influxdb`.
 
-## Ubuntu & Debian
-Debian users can install 0.9.5.1 by downloading the package and installing it like this:
+## Installation
+
+### Ubuntu & Debian
+Debian and Ubuntu users can install the latest stable version of InfluxDB using the `apt-get` package manager. For Ubuntu users, you can add the InfluxData repository configuration by using the following commands:
 
 ```shell
-# 64-bit system install instructions
-wget http://influxdb.s3.amazonaws.com/influxdb_0.9.5.1_amd64.deb
-sudo dpkg -i influxdb_0.9.5.1_amd64.deb
+curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+source /etc/lsb-release
+echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
 ```
 
-Then start the daemon by running:
+For Debian users, you can add the InfluxData repository configuration by using the following commands:
 
 ```shell
+curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+source /etc/os-release
+test $VERSION_ID = "7" && echo "deb https://repos.influxdata.com/debian wheezy stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+test $VERSION_ID = "8" && echo "deb https://repos.influxdata.com/debian jessie stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+```
+
+And then to install and start the InfluxDB service:
+
+```shell
+sudo apt-get update && sudo apt-get install influxdb
 sudo service influxdb start
 ```
 
-## RedHat & CentOS
-RedHat and CentOS users can install by downloading and installing the rpm like this:
+### RedHat & CentOS
+RedHat and CentOS users can install the latest stable version of InfluxDB using the `yum` package manager:
 
 ```shell
-# 64-bit system install instructions
-wget http://influxdb.s3.amazonaws.com/influxdb-0.9.5.1-1.x86_64.rpm
-sudo yum localinstall influxdb-0.9.5.1-1.x86_64.rpm
+cat <<EOF | sudo tee /etc/yum.repos.d/influxdb.repo
+[influxdb]
+name = InfluxDB Repository - RHEL \$releasever
+baseurl = https://repos.influxdata.com/rhel/\$releasever/\$basearch/stable
+enabled = 1
+gpgcheck = 1
+gpgkey = https://repos.influxdata.com/influxdb.key
+EOF
 ```
 
-Then start the daemon by running:
+Once repository is added to the `yum` configuration, you can install and start the InfluxDB service by running:
 
 ```shell
+sudo yum install influxdb
 sudo service influxdb start
 ```
 
-## SLES & openSUSE
-There are RPM packages provided by openSUSE Build Service for SUSE Linux users.
+### SLES & openSUSE
+There are RPM packages provided by openSUSE Build Service for SUSE Linux users:
 
 ```shell
 # add go repository
@@ -54,7 +72,7 @@ zypper ar -f obs://devel:languages:go/ go
 zypper in influxdb
 ```
 
-## FreeBSD/PC-BSD
+### FreeBSD/PC-BSD
 
 InfluxDB is part of the FreeBSD package system. It can be installed by running
 ```shell
@@ -67,7 +85,7 @@ sudo service influxd onestart
 ```
 and/or adding `influxd_enable="YES"` to `/etc/rc.conf` for launch influxd during system boot.
 
-## OS X
+### OS X
 
 Users of OS X 10.8 and higher can install using the [Homebrew](http://brew.sh/) package manager.
 
@@ -190,4 +208,4 @@ For more detailed instructions on how to set up a cluster, see the documentation
 
 ## Development Versions
 
-Nightly packages are available and can be found on the [downloads page](/download/index.html)
+Nightly packages are available for Linux through the InfluxData package repository by using the `nightly` channel. Other package options can be found on the [downloads page](/downloads/#influxdb)
