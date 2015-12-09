@@ -1,5 +1,5 @@
 telegraf = "telegraf_02"
 influxdb = "influxdb_09"
 chronograf = "chronograf_04"
-kapacitor = "kapacitor_01"
+kapacitor = "kapacitor_02"
 hosted = "hosted_09"
