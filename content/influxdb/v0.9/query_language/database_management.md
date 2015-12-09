@@ -26,13 +26,13 @@ The examples in the sections below use InfluxDB's [Command Line Interface (CLI)]
 
 > **Note:** When authentication is enabled, only admin users can execute most of the commands listed on this page. See the documentation on [authentication and authorization](../administration/authentication_and_authorization.html) for more information.
 
-## Data management
+## Data Management
 
 ### Create a database with CREATE DATABASE
 ---
-The `CREATE DATABASE` query takes the following form, where `IF NOT EXISTS` is optional:
+The `CREATE DATABASE` query takes the following form:
 ```sql
-CREATE DATABASE [IF NOT EXISTS] <database_name>
+CREATE DATABASE [IF NOT EXISTS] <database_name> [WITH [DURATION <duration>] [REPLICATION <n>] [NAME <retention-policy-name>]]
 ```
 
 Create the database ` NOAA_water_database`:
@@ -47,7 +47,16 @@ Create the database `NOAA_water_database` only if it doesn't exist:
 >
 ```
 
+Create the database `NOAA_water_database` with a new retention policy called `liquid`:
+```sh
+> CREATE DATABASE NOAA_water_database WITH DURATION 3d REPLICATION 3 NAME liquid
+>
+```
+When specifying a retention policy you can include one or more of the attributes `DURATION`, `REPLICATION`, and `NAME`. For more on retention policies, see [Retention Policy Management](/influxdb/v0.9/query_language/database_management/#retention-policy-management)
+
 A successful `CREATE DATABASE` query returns an empty result.
+
+> **Note:** Specifying a retention policy in the `CREATE DATABASE` query is available in InfluxDB versions 0.9.6+.
 
 ### Delete a database with DROP DATABASE
 ---
@@ -147,6 +156,8 @@ Create the same retention policy as the one in the example above, but set it as 
 
 A successful `CREATE RETENTION POLICY` query returns an empty response.
 
+> **Note:** If you're using InfluxDB versions 0.9.6+, you can also specify a new retention policy in the `CREATE DATABASE` query. See [Create a database with CREATE DATABASE](/influxdb/v0.9/query_language/database_management/#create-a-database-with-create-database).
+
 ### Modify retention policies with ALTER RETENTION POLICY
 ---
 The `ALTER RETENTION POLICY` query takes the following form, where you must declare at least one of the retention policy attributes `DURATION`, `REPLICATION`, or `DEFAULT`:
@@ -184,5 +195,3 @@ Delete the retention policy `what_is_time` in the `NOAA_water_database` database
 A successful `DROP RETENTION POLICY` query returns an empty result.
 
 >**Note:** If you attempt `DROP` a retention policy that is the default retention policy for the database InfluxDB does not delete the policy and returns the error: `ERR: retention policy is default`. `CREATE` a new default policy or `ALTER` an already existing policy to be the default before deleting the retention policy.
-
-
