@@ -28,11 +28,6 @@ SectionPagesMenu = "products"
   identifier = "kapacitor"
   weight = 30
   url = "/kapacitor/"
-[[menu.products]]
-  name = "Hosted"
-  identifier = "hosted"
-  weight = 40
-  url = "/hosted/"
 
 
 # InfluxDB v0.9 Menu
@@ -793,10 +788,3 @@ SectionPagesMenu = "products"
   url = "https://github.com/ezotrank/logsend"
   parent = "tools"
 
-
-# Hosted v0.9 Menu
-[[menu.hosted_09]]
-  name = "Troubleshooting"
-  identifier = "troubleshooting"
-  weight = 10
-  url = "/hosted/troubleshooting"
