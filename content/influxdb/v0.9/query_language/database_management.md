@@ -1,5 +1,5 @@
 ---
-title: Database management
+title: Database Management
 aliases:
   - /docs/v0.9/query_language/database_administration.html
   - /docs/v0.9/query_language/database_management.html

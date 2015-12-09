@@ -1,9 +1,9 @@
 ---
-title: Upgrading from previous versions
+title: Upgrading from Previous Versions
 
 menu:
   influxdb_08:
-    name: Upgrading from previous versions
+    name: Upgrading from Previous Versions
     weight: 30
     parent: advanced_topics
 ---
