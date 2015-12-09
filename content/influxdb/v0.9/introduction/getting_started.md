@@ -6,9 +6,9 @@ menu:
     parent: introduction
 ---
 
-With [InfluxDB installed](installation.html), you're ready to start doing awesome things. In this section we'll use the `influx` command line interface (CLI). The CLI is included in all InfluxDB packages and is a lightweight and simple way to interact with the database. The CLI communicates with InfluxDB by making requests to the InfluxDB API. 
+With [InfluxDB installed](/influxdb/v0.9/introduction/installation), you're ready to start doing awesome things. In this section we'll use the `influx` command line interface (CLI). The CLI is included in all InfluxDB packages and is a lightweight and simple way to interact with the database. The CLI communicates with InfluxDB by making requests to the InfluxDB API. 
 
-> **Note:** The database can also be used by making direct HTTP requests to the API. See [Reading and Writing Data](../concepts/reading_and_writing_data.html) for examples.
+> **Note:** The database can also be used by making direct HTTP requests to the API. See [Writing Data](/influxdb/v0.9/guides/writing_data/) and [Querying Data](/influxdb/v0.9/guides/querying_data/) for examples.
 
 ## Logging in and creating your first database
 If you've installed InfluxDB locally, the `influx` command should be available via the command line. Executing `influx` will start the CLI and automatically connect to the local InfluxDB instance (assuming you have already started the server with `influxd`). The output should look like this:
@@ -20,7 +20,7 @@ InfluxDB shell 0.9
 > 
 ```
 
-> **Note:** The InfluxDB HTTP API runs on port `8086` by default. Therefore, `influx` will connect to port `8086` and `localhost` by default. If you need to alter these defaults run `influx --help` or read the [man page](../clients/shell.html)
+> **Note:** The InfluxDB HTTP API runs on port `8086` by default. Therefore, `influx` will connect to port `8086` and `localhost` by default. If you need to alter these defaults run `influx --help`.
 
 The command line is now ready to take input in the form of Influx Query Language (a.k.a InfluxQL) statements. To exit the InfluxQL shell, type `exit` and hit return or type `ctrl` + `D`.
 
@@ -79,7 +79,7 @@ stock,symbol=AAPL bid=127.46,ask=127.48
 temperature,machine=unit42,type=assembly external=25,internal=37 1434067467000000000
 ```
 
-> **Note:** More information on the line protocol can be found on the [Write Syntax](../write_protocols/write_syntax.html) page.
+> **Note:** More information on the line protocol can be found on the [Write Syntax](/influxdb/v0.9/write_protocols/write_syntax/) page.
 
 To insert a single time-series datapoint into InfluxDB using the CLI, enter `INSERT` followed by a point:
 
@@ -135,5 +135,5 @@ InfluxDB supports a sophisticated query language, allowing many different types 
 > SELECT * FROM cpu_load_short WHERE value > 0.9
 ```
 
-This is all you need to know to write data into InfluxDB and query it back. To learn more about the InfluxDB write protocol, check out the guide on [Writing Data](https://influxdb.com/docs/v0.9/guides/writing_data.html). To futher explore the query language, check out the guide on [Querying Data](https://influxdb.com/docs/v0.9/guides/querying_data.html). For more information on InfluxDB concepts, check out the [Key Concepts]
-(https://influxdb.com/docs/v0.9/concepts/key_concepts.html) page.
+This is all you need to know to write data into InfluxDB and query it back. To learn more about the InfluxDB write protocol, check out the guide on [Writing Data](/influxdb/v0.9/guides/writing_data/). To futher explore the query language, check out the guide on [Querying Data](/influxdb/v0.9/guides/querying_data/). For more information on InfluxDB concepts, check out the [Key Concepts]
+(/influxdb/v0.9/concepts/key_concepts/) page.

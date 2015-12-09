@@ -8,19 +8,19 @@ menu:
 
 InfluxQL is an SQL-like query language for interacting with data in InfluxDB. The following sections cover useful query syntax for exploring your schema (that is, how you set up your time series data):
 
-* [See all databases with `SHOW DATABASES`](../query_language/schema_exploration.html#see-all-databases-with-show-databases)
-* [Explore retention policies with `SHOW RETENTION POLICIES`](../query_language/schema_exploration.html#explore-retention-policies-with-show-retention-policies)
-* [Explore series with `SHOW SERIES`](../query_language/schema_exploration.html#explore-series-with-show-series)
-* [Explore measurements with `SHOW MEASUREMENTS`](../query_language/schema_exploration.html#explore-measurements-with-show-measurements)
-* [Explore tag keys with `SHOW TAG KEYS`](../query_language/schema_exploration.html#explore-tag-keys-with-show-tag-keys)
-* [Explore tag values with `SHOW TAG VALUES`](../query_language/schema_exploration.html#explore-tag-values-with-show-tag-values)
-* [Explore field keys with `SHOW FIELD KEYS`](../query_language/schema_exploration.html#explore-field-keys-with-show-field-keys)
+* [See all databases with `SHOW DATABASES`](/influxdb/v0.9/query_language/schema_exploration/#see-all-databases-with-show-databases)
+* [Explore retention policies with `SHOW RETENTION POLICIES`](/influxdb/v0.9/query_language/schema_exploration/#explore-retention-policies-with-show-retention-policies)
+* [Explore series with `SHOW SERIES`](/influxdb/v0.9/query_language/schema_exploration/#explore-series-with-show-series)
+* [Explore measurements with `SHOW MEASUREMENTS`](/influxdb/v0.9/query_language/schema_exploration/#explore-measurements-with-show-measurements)
+* [Explore tag keys with `SHOW TAG KEYS`](/influxdb/v0.9/query_language/schema_exploration/#explore-tag-keys-with-show-tag-keys)
+* [Explore tag values with `SHOW TAG VALUES`](/influxdb/v0.9/query_language/schema_exploration/#explore-tag-values-with-show-tag-values)
+* [Explore field keys with `SHOW FIELD KEYS`](/influxdb/v0.9/query_language/schema_exploration/#explore-field-keys-with-show-field-keys)
 
-The examples below query data using [InfluxDB's Command Line Interface (CLI)](../introduction/getting_started.html). See the [Querying Data](../guides/querying_data.html) guide for how to directly query data with the HTTP API.
+The examples below query data using [InfluxDB's Command Line Interface (CLI)](/influxdb/v0.9/tools/shell/). See the [Querying Data](/influxdb/v0.9/guides/querying_data/) guide for how to directly query data with the HTTP API.
 
 **Sample data**
 
-This document uses the same sample data as the [Data Exploration](../query_language/data_exploration.html) page. The data are described and are available for download on the [Sample Data](../sample_data/data_download.html) page.
+This document uses the same sample data as the [Data Exploration](/influxdb/v0.9/query_language/data_exploration/) page. The data are described and are available for download on the [Sample Data](/influxdb/v0.9/sample_data/data_download/) page.
 
 ## See all databases with `SHOW DATABASES`
 Get a list of all the databases in your system by entering:
@@ -38,7 +38,7 @@ NOAA_water_database
 ```
 
 ## Explore retention policies with `SHOW RETENTION POLICIES`
-The `SHOW RETENTION POLICIES` query lists the existing [retention policies](../concepts/glossary.html#retention-policy) on a given database, and it takes the following form:
+The `SHOW RETENTION POLICIES` query lists the existing [retention policies](/influxdb/v0.9/concepts/glossary/#retention-policy-rp) on a given database, and it takes the following form:
 ```sql
 SHOW RETENTION POLICIES ON <database_name>
 ```
@@ -54,7 +54,7 @@ name	    duration	 replicaN	 default
 default	 0		       1		       true
 ```
 
-The first column of the output contains the names of the different retention policies in the specified database. The second column shows the [duration](../concepts/glossary.html#duration) and the third column shows the [replication factor](../concepts/glossary.html#replication-factor) of the retention policy. The fourth column specifies if the retention policy is the default retention policy for the database.
+The first column of the output contains the names of the different retention policies in the specified database. The second column shows the [duration](/influxdb/v0.9/concepts/glossary/#duration) and the third column shows the [replication factor](/influxdb/v0.9/concepts/glossary/#replication-factor) of the retention policy. The fourth column specifies if the retention policy is the default retention policy for the database.
 
 The following example shows a hypothetical CLI response where there are four different retention policies in the database, and where the default retention policy is `three_days_only`:
 
@@ -67,7 +67,7 @@ three_days_only	 72h0m0s		 1		       true
 ```
 
 ## Explore series with `SHOW SERIES`
-The `SHOW SERIES` query returns the distinct [series](../concepts/glossary.html#series) in your database and takes the following form, where the `FROM` and `WHERE` clauses are optional:
+The `SHOW SERIES` query returns the distinct [series](/influxdb/v0.9/concepts/glossary/#series) in your database and takes the following form, where the `FROM` and `WHERE` clauses are optional:
 
 ```sql
 SHOW SERIES FROM [<measurement_name> WHERE <tag_key>='<tag_value>']
@@ -119,8 +119,8 @@ h2o_temperature,location=coyote_creek	   coyote_creek
 h2o_temperature,location=santa_monica	   santa_monica
 ```
 
-`SHOW SERIES` organizes its output by [measurement](../concepts/glossary.html#measurement) name. From the return you can see that the data in the database `NOAA_water_database` have five different measurements and 14 different series. The measurements are `average_temperature`, `h2o_feet`, `h2o_pH`, `h2o_quality`, and `h2o_temperature`. Every measurement
-has the [tag key](../concepts/glossary.html#tag-key) `location` with the [tag values](../concepts/glossary.html#tag-value) `coyote_creek` and `santa_monica` - that makes 10 series. The measurement `h2o_quality` has the additional tag key `randtag` with the tag values `1`,`2`, and `3` - that makes 14 series.
+`SHOW SERIES` organizes its output by [measurement](/influxdb/v0.9/concepts/glossary/#measurement) name. From the return you can see that the data in the database `NOAA_water_database` have five different measurements and 14 different series. The measurements are `average_temperature`, `h2o_feet`, `h2o_pH`, `h2o_quality`, and `h2o_temperature`. Every measurement
+has the [tag key](/influxdb/v0.9/concepts/glossary/#tag-key) `location` with the [tag values](/influxdb/v0.9/concepts/glossary/#tag-value) `coyote_creek` and `santa_monica` - that makes 10 series. The measurement `h2o_quality` has the additional tag key `randtag` with the tag values `1`,`2`, and `3` - that makes 14 series.
 
 Return series for a specific measurement:
 ```sql
@@ -156,7 +156,7 @@ h2o_quality,location=coyote_creek,randtag=3	   coyote_creek	   3
 ```
 
 ## Explore measurements with `SHOW MEASUREMENTS`
-The `SHOW MEASUREMENTS` query returns all [measurements](../concepts/glossary.html#measurement) in your database and it takes the following form, where the `WHERE` clause is optional:
+The `SHOW MEASUREMENTS` query returns all [measurements](/influxdb/v0.9/concepts/glossary/#measurement) in your database and it takes the following form, where the `WHERE` clause is optional:
 ```sql
 SHOW MEASUREMENTS [WHERE <tag_key>=<'tag_value'>]
 ```
@@ -209,7 +209,7 @@ h2o_quality
 ```
 
 ## Explore tag keys with SHOW TAG KEYS
-`SHOW TAG KEYS` returns the [tag keys](../concepts/glossary.html#tag-key) associated with each measurement and takes the following form, where the `FROM` clause is optional:
+`SHOW TAG KEYS` returns the [tag keys](/influxdb/v0.9/concepts/glossary/#tag-key) associated with each measurement and takes the following form, where the `FROM` clause is optional:
 ```sql
 SHOW TAG KEYS [FROM <measurement_name>]
 ```
@@ -268,7 +268,7 @@ location
 ```
 
 ## Explore tag values with SHOW TAG VALUES
-The `SHOW TAG VALUES` query returns the set of [tag values](../concepts/glossary.html#tag-value) for a specific tag key across all measurements in the database. It takes the following form, where the `FROM` clause is optional:
+The `SHOW TAG VALUES` query returns the set of [tag values](/influxdb/v0.9/concepts/glossary/#tag-value) for a specific tag key across all measurements in the database. It takes the following form, where the `FROM` clause is optional:
 ```sql
 SHOW TAG VALUES [FROM <measurement_name> WITH KEY = <tag_key>]
 ```
@@ -300,7 +300,7 @@ CLI response:
 The measurement `average_temperature` doesn't have the tag key `randtag` so InfluxDB returns nothing.
 
 ## Explore field keys with `SHOW FIELD KEYS`
-The `SHOW FIELD KEYS` query returns the [field keys](../concepts/glossary.html#field-key) across each measurement in the database. It takes the following form, where the `FROM` clause is optional:
+The `SHOW FIELD KEYS` query returns the [field keys](/influxdb/v0.9/concepts/glossary/#field-key) across each measurement in the database. It takes the following form, where the `FROM` clause is optional:
 
 ```sql
 SHOW FIELD KEYS [FROM <measurement_name>]

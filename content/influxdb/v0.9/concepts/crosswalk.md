@@ -94,11 +94,11 @@ Referencing the example above, in general:
 * InfluxDB fields (`#_foodships`) are like unindexed columns in an SQL database.
 * InfluxDB points (for example, `2015-04-16T12:00:00Z	5`) are similar to SQL rows.
 
-Building on this comparison of database terminology, InfluxDB's [continuous queries](https://influxdb.com/docs/v0.9/query_language/continuous_queries.html) and [replication policies](https://influxdb.com/docs/v0.9/administration/administration.html) are similar to stored procedures in an SQL database. They're specified once and then performed regularly and automatically.
+Building on this comparison of database terminology, InfluxDB's [continuous queries](/influxdb/v0.9/query_language/continuous_queries/) and [replication policies](/influxdb/v0.9/administration/administration/) are similar to stored procedures in an SQL database. They're specified once and then performed regularly and automatically.
 
 Of course, there are some major disparities between SQL databases and InfluxDB. SQL `JOIN`s aren't available for InfluxDB measurements; your schema design should reflect that difference. And, as we mentioned above, a measurement is like an SQL table where the primary index is always pre-set to time. InfluxDB timestamps must be in UNIX epoch (GMT) or formatted as a date-time string valid under RFC3339.
 
-For more detailed descriptions of the InfluxDB terms mentioned in this section see our [Glossary of Terms](https://influxdb.com/docs/v0.9/concepts/glossary.html).
+For more detailed descriptions of the InfluxDB terms mentioned in this section see our [Glossary of Terms](/influxdb/v0.9/concepts/glossary/).
 
 ## InfluxQL and SQL
 
@@ -146,9 +146,9 @@ That query outputs the data in the `foodships` measure where the timestamp is ne
 
 <br/>
 
-InfluxQL also supports regular expressions, arithmetic in expressions, `SHOW` statements, and `GROUP BY` statements. See our [data exploration](https://influxdb.com/docs/v0.9/query_language/data_exploration.html) page for an in-depth discussion of those topics. InfluxQL functions include `COUNT`, `MIN`, `MAX`, `MEDIAN`, `DERIVATIVE` and more. For a full list check out the [functions](https://influxdb.com/docs/v0.9/query_language/functions.html) page.
+InfluxQL also supports regular expressions, arithmetic in expressions, `SHOW` statements, and `GROUP BY` statements. See our [data exploration](/influxdb/v0.9/query_language/data_exploration/) page for an in-depth discussion of those topics. InfluxQL functions include `COUNT`, `MIN`, `MAX`, `MEDIAN`, `DERIVATIVE` and more. For a full list check out the [functions](/influxdb/v0.9/query_language/functions/) page.
 
-Now that you have the general idea, check out our [Getting Started Guide](https://influxdb.com/docs/v0.9/introduction/getting_started.html).
+Now that you have the general idea, check out our [Getting Started Guide](/influxdb/v0.9/introduction/getting_started/).
 
 ## A note on why InfluxDB isn't CRUD...
 
@@ -156,4 +156,4 @@ InfluxDB is a database that has been optimized for time series data. This data c
 
 One thing this data has in common is that it is more useful in the aggregate. One reading saying that your computer’s CPU is at 12% utilization at 12:38:35 UTC on a Tuesday is hard to draw conclusions from. It becomes more useful when combined with the rest of the series and visualized. This is where trends over time begin to show, and actionable insight can be drawn from the data. In addition, time series data is generally written once and rarely updated.
 
-The result is that InfluxDB is not a full CRUD database but more like a CR-ud, prioritizing the performance of creating and reading data over update and destroy, and preventing some update and destroy behaviors to make create and read more performant. For more information on why InfluxDB made these architectural decisions [Paul Dix](https://github.com/pauldix) has an excellent [blog post](https://influxdb.com/blog/2015/06/03/InfluxDB_clustering_design.html) with more explanation.
+The result is that InfluxDB is not a full CRUD database but more like a CR-ud, prioritizing the performance of creating and reading data over update and destroy, and preventing some update and destroy behaviors to make create and read more performant. For more information on why InfluxDB made these architectural decisions [Paul Dix](https://github.com/pauldix) has an excellent [blog post](https://influxdata.com/blog/influxdb-clustering-design-neither-strictly-cp-or-ap/) with more explanation.

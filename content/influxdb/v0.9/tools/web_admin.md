@@ -1,14 +1,14 @@
 ---
 title: Web Admin Interface
 aliases:
-  - /docs/v0.9/ui/built_in_admin_and_explorer.html
+  - /docs/v0.9/ui/built_in_admin_and_explorer/
 menu:
   influxdb_09:
     weight: 10
     parent: tools
 ---
 
-The built-in web administration GUI is a simple way to interact with InfluxDB. For any significant use, whether writing or querying data, the HTTP API ([reading](../guides/querying_data.html), [writing](../guides/writing_data.html)) or the [command line interface](shell.html) are better options.
+The built-in web administration GUI is a simple way to interact with InfluxDB. For any significant use, whether writing or querying data, the HTTP API ([reading](/influxdb/v0.9/guides/querying_data/), [writing](/influxdb/v0.9/guides/writing_data/)) or the [command line interface](/influxdb/v0.9/tools/shell/) are better options.
 
 ## Accessing the UI
 
@@ -27,8 +27,8 @@ Choose your target database for writes and queries from the "Databases" pull-dow
 
 ## Writing Data
 
-The Admin UI has a "Write Data" link in the top menu bar. This link pops up a modal dialog that will accept points in the [line protocol](../write_protocols/line.html) format.
+The Admin UI has a "Write Data" link in the top menu bar. This link pops up a modal dialog that will accept points in the [line protocol](/influxdb/v0.9/write_protocols/line/) format.
 
 ## Querying Data
 
-The Admin UI has a "Query" box where you can enter any valid [InfluxQL](../query_language/spec.html) command, including database administration and schema exploration commands. The "Query Templates" pull-down menu will pre-populate the Query box with a number of common InfluxQL queries.
+The Admin UI has a "Query" box where you can enter any valid [InfluxQL](/influxdb/v0.9/query_language/spec/) command, including database administration and schema exploration commands. The "Query Templates" pull-down menu will pre-populate the Query box with a number of common InfluxQL queries.
