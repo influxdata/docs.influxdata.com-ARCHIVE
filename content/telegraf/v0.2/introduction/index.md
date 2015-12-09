@@ -8,4 +8,3 @@ menu:
     weight: 0
 ---
 
-The Telegraf documentation is currently under construction.
