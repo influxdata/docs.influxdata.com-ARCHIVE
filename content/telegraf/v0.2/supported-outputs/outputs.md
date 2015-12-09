@@ -1,5 +1,5 @@
 ---
-title: Supported outputs
+title: Supported Outputs
 
 menu:
   telegraf_02:
@@ -8,7 +8,7 @@ menu:
     parent: Supported Outputs
 ---
 
-## Supported outputs
+## Supported Outputs
 
 Telegraf currently supports sending metrics to:
 

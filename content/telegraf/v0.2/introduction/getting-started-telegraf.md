@@ -1,5 +1,5 @@
 ---
-title: Getting started with Telegraf
+title: Getting Started with Telegraf
 
 menu:
   telegraf_02:
@@ -8,10 +8,10 @@ menu:
     parent: Introduction
 ---
 
-## Getting started with Telegraf
+## Getting Started with Telegraf
 Telegraf is an agent written in Go for collecting metrics and writing them into InfluxDB or other possible outputs. This guide will get you up and running with Telegraf. It walks you through the download, installation, and configuration processes, and it shows how to use Telegraf to get data into InfluxDB.
 
-## Download and install Telegraf
+## Download and Install Telegraf
 Follow the instructions in the Telegraf section on the [Downloads page](https://influxdata.com/downloads/).
 
 ## Configuration
@@ -21,7 +21,7 @@ Follow the instructions in the Telegraf section on the [Downloads page](https://
 * Linux debian and RPM packages: `/etc/opt/telegraf/telegraf.conf`
 * Standalone Binary: see the next section for how to create a configuration file
 
-### Creating and editing the configuration file
+### Creating and Editing the Configuration File
 Before starting the Telegraf server you need to edit and/or create an initial configuration that specifies your desired [plugins](/telegraf/v0.2/supported-plugins/) (where the metrics come from) and [outputs](/telegraf/v0.2/supported-outputs/outputs/) (where the metrics go). There are [several ways](../configuration/) to create and edit the configuration file. Here, we'll generate a configuration file and simultaneously specify the desired plugins with the `-filter` flag and the desired output with the `-outputfilter` flag. 
 
 In the example below, we create a configuration file called `telegraf.conf` with two plugins: one that reads metrics about the system's cpu usage (`cpu`) and one that reads metrics about the system's memory usage (`mem`). `telegraf.conf` specifies InfluxDB as the desired ouput.
@@ -30,7 +30,7 @@ In the example below, we create a configuration file called `telegraf.conf` with
 telegraf -sample-config -filter cpu:mem -outputfilter influxdb > telegraf.conf
 ```
 
-## Start the Telegraf server
+## Start the Telegraf Server
 Start the Telegraf server and direct it to the relevant configuration file:
 ### OS X [Homebrew](http://brew.sh/)
 ```sh
