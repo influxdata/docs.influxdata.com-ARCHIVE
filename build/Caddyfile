@@ -1,4 +1,4 @@
-http://hooks.docs.influxdata.com {
+http://docs.staging.influxdata.com {
     git {
         repo    git@github.com:influxdb/docs.influxdata.com.git
         path    docs.influxdata.com
@@ -15,9 +15,9 @@ http://hooks.docs.influxdata.com {
         key     {$PWD}/.ssh/github_docs_build_rsa
         hook    {$GIT_HOOK_PATH} {GIT_HOOK_SECRET}
         then    git checkout develop
-        then    hugo -b https://docs.staging.influxdata.com
+        then    hugo -b https://docs.staging.influxdata.com -d ../branches/develop
     }
 }
-http://docs.staging.influxdata.com {
-    root docs.influxdata.com/public
+http://develop.docs.staging.influxdata.com {
+    root branches/develop
 }
