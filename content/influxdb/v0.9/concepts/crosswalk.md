@@ -1,5 +1,5 @@
 ---
-title: Comparisson to SQL
+title: Comparison to SQL
 menu:
   influxdb_09:
     weight: 20

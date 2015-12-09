@@ -1,5 +1,5 @@
 ---
-title: Authentication and authorization
+title: Authentication and Authorization
 aliases:
   - /docs/v0.9/administration/authentication.html
   - /docs/v0.9/administration/authorization.html
