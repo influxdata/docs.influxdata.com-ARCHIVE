@@ -5,15 +5,17 @@ menu:
   chronograf_04:
     name: Getting Started
     weight: 0
-    parent: introduction
+    parent: Introduction
 ---
+
+## Getting Started with Chronograf
 
 This guide shows how to download, install, and start visualizing data with Chronograf.
 
-## Download and install Chronograf
+## Download and Install Chronograf
 Follow the instructions in the Chronograf Downloads section on the [Downloads page](https://influxdb.com/download/index.html#).
 
-## Start the Chronograf server
+## Start the Chronograf Server
 How you start Chronograf depends on how you installed it:
 
 #### Debian or RPM package
@@ -45,7 +47,7 @@ Check to see that Chronograf is running at http://127.0.0.1:10000. If this is th
 
 Now that you've got everything installed and running it's time to start visualizing your data in Chronograf!
 
-## Add your first server
+## Add your first Server
 Direct Chronograf to your InfluxDB data by adding a server:
 
 1. Click the `Add new server` button.
@@ -66,7 +68,7 @@ Direct Chronograf to your InfluxDB data by adding a server:
 
 Click `Done` in the top left corner and move on to the next section to create your first graph. You can always return to the `Servers` page by clicking on the gear in the top right corner.
 
-## Create your first graph
+## Create your first Graph
 It's time to graph your data. In the next steps, we'll create an example graph that shows the average idle CPU percentage grouped by CPU tag and by one minute time intervals. 
 
 1. Click `+` and name your graph in the `New Graph` window. We'll call our graph `Average idle CPU usage`.
@@ -91,7 +93,7 @@ For this query, we select the measurement `cpu_usage_idle` in the `FILTER BY` se
 
 Click `Done` in the top right corner to complete your graph, and move on to the next section to create your first dashboard.
 
-## Create your first dashboard
+## Create your first Dashboard
 Now that we have a graph we want to add it to a dashboard.
 
 1. Move to the `DASHBOARDS` tab at the top of your screen.
