@@ -37,7 +37,7 @@ Check to see that Chronograf is running at http://127.0.0.1:10000. If this is th
 
 ![Add new server](/img/chronograf/add-new-server.png)
 
-> **NOTE:** By default, Chronograf run on localhost port `10000` (`127.0.0.1`). Those settings are configurable; see the configuration file to change them and to see the other configuration options. We list the location of the configuration file by installation process below.
+> **NOTE:** By default, Chronograf runs on localhost port `10000`. Those settings are configurable; see the configuration file to change them and to see the other configuration options. We list the location of the configuration file by installation process below.
 
 > * Debian or RPM package: `/opt/chronograf/config.toml`
 > * OS X via Homebrew: `/usr/local/etc/chronograf.toml`
