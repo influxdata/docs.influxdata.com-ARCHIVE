@@ -22,6 +22,8 @@ InfluxQL offers a full suite of administrative commands.
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Modify retention policies with `ALTER RETENTION POLICY`](/influxdb/v0.9/query_language/database_management/#modify-retention-policies-with-alter-retention-policy)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete retention policies with `DROP RETENTION POLICY`](/influxdb/v0.9/query_language/database_management/#delete-retention-policies-with-drop-retention-policy)  
 
+If you're looking for `SHOW` queries (for example, `SHOW DATABASES` or `SHOW RETENTION POLICIES`), see [Schema Exploration](/influxdb/v0.9/query_language/schema_exploration).
+
 The examples in the sections below use InfluxDB's [Command Line Interface (CLI)](/influxdb/v0.9/introduction/getting_started/). You can also execute the commands using the HTTP API; simply  send a `GET` request to the `/query` endpoint and include the command in the URL parameter `q`. See the [Querying Data](/influxdb/v0.9/guides/querying_data/) guide for more on using the HTTP API.
 
 > **Note:** When authentication is enabled, only admin users can execute most of the commands listed on this page. See the documentation on [authentication and authorization](/influxdb/v0.9/administration/authentication_and_authorization/) for more information.
@@ -53,12 +55,18 @@ A successful `CREATE DATABASE` query returns an empty result.
 ---
 The `DROP DATABASE` query deletes all of the data, measurements, series, continuous queries, and retention policies from the specified database. The query takes the following form:
 ```sql
-DROP DATABASE <database_name>
+DROP DATABASE [IF EXISTS] <database_name>
 ```
 
-CLI example:
+Drop the database NOAA_water_database:
 ```sh
 > DROP DATABASE NOAA_water_database
+>
+```
+
+Drop the database NOAA_water_database only if it exists:
+```sh
+> DROP DATABASE IF EXISTS NOAA_water_database
 >
 ```
 
@@ -184,5 +192,3 @@ Delete the retention policy `what_is_time` in the `NOAA_water_database` database
 A successful `DROP RETENTION POLICY` query returns an empty result.
 
 >**Note:** If you attempt `DROP` a retention policy that is the default retention policy for the database InfluxDB does not delete the policy and returns the error: `ERR: retention policy is default`. `CREATE` a new default policy or `ALTER` an already existing policy to be the default before deleting the retention policy.
-
-
