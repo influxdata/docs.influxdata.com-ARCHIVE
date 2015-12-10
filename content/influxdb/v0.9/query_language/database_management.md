@@ -55,12 +55,18 @@ A successful `CREATE DATABASE` query returns an empty result.
 ---
 The `DROP DATABASE` query deletes all of the data, measurements, series, continuous queries, and retention policies from the specified database. The query takes the following form:
 ```sql
-DROP DATABASE <database_name>
+DROP DATABASE [IF EXISTS] <database_name>
 ```
 
-CLI example:
+Drop the database NOAA_water_database:
 ```sh
 > DROP DATABASE NOAA_water_database
+>
+```
+
+Drop the database NOAA_water_database only if it exists:
+```sh
+> DROP DATABASE IF EXISTS NOAA_water_database
 >
 ```
 
