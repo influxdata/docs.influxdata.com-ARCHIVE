@@ -12,26 +12,26 @@ Now that you've [installed InfluxDB](installation.html) you're ready to start do
 ## Logging in and creating your first database
 If you've installed locally, point your browser to <a href="http://localhost:8083" target="_blank">localhost:8083</a>. The built in user interface runs on port `8083` by default. You should see a screen like this:
 
-![Admin login](/img/docs/admin_login.jpg)
+![Admin login](/img/influxdb/old/admin_login.png)
 
 The default options for hostname of `localhost` and port of `8086` should work. The InfluxDB HTTP API runs on port `8086` by default. Enter the username `root` and password `root` and click Connect. You'll then see a logged in screen like this:
 
-![Logged in with no databases](/img/docs/logged_in_no_databases.jpg)
+![Logged in with no databases](/img/influxdb/old/logged_in_no_databases.png)
 
 Enter in a database name and click Create. Database names should contain only letters, numbers, or underscores and start with a letter. Once you've created a database you should see it on the screen:
 
-![Database list screen](/img/docs/database_created.jpg)
+![Database list screen](/img/influxdb/old/database_created.png)
 
 ## Writing and exploring data in the UI
 Go ahead and click the "Explore" link to get here:
 
-![Explore data interface](/img/docs/explore_screen.jpg)
+![Explore data interface](/img/influxdb/old/explore_screen.png)
 
 From this screen you can write some test data. More importantly, you'll be able to issue ad-hoc queries and see basic visualizations. Let's write a little data in to see how things work. Data in InfluxDB is organized by "time series" which then have "points" which have a `time`, `sequence_number`, and `columns`. Think of it kind of like SQL tables, and rows where the primary index is always time. The difference is that with InfluxDB you can have millions of series, you don't have to define schemas up front, and null values aren't stored.
 
 Let's write some data. Here are a couple of examples of things we'd want to write. We'll show the screenshot and what the JSON data looks like right after.
 
-![Storing log lines](/img/docs/log_lines.jpg)
+![Storing log lines](/img/influxdb/old/log_lines.png)
 
 If you're writing data in the web UI, you need to put something like this in the `Values` textbox:
 
@@ -55,7 +55,7 @@ And now let's look at what the resulting JSON would look like if querying it aft
 ]
 ```
 
-![Storing response times](/img/docs/response_times.jpg)
+![Storing response times](/img/influxdb/old/response_times.png)
 
 Write values input:
 
@@ -81,7 +81,7 @@ Resulting JSON that will get returned on query:
 ]
 ```
 
-![Storing user analytics data](/img/docs/user_events.jpg)
+![Storing user analytics data](/img/influxdb/old/user_events.png)
 
 ```json
 [
@@ -95,7 +95,7 @@ Resulting JSON that will get returned on query:
 ]
 ```
 
-![Storing sensor data](/img/docs/device_temperatures.jpg)
+![Storing sensor data](/img/influxdb/old/device_temperatures.png)
 
 ```json
 [
@@ -137,7 +137,7 @@ select * from user_events where url_base = 'friends#show'
 select line from log_lines where line =~ /paul@influxdb.com/
 ```
 
-![Selecting log lines on regex match](/img/docs/select_log_lines.jpg)
+![Selecting log lines on regex match](/img/influxdb/old/select_log_lines.png)
 
 In the results of those queries we notice two columns that we didn't explicitly write in: `time` and `sequence_number`. Those are automatically assigned by InfluxDB when you write data in if they're not specified. In the UI time is represented as an epoch in seconds, but the underlying storage keeps them as microsecond epochs.
 
@@ -195,7 +195,7 @@ select mean(value) from cpu_idle
 group by time(30m) where time > now() - 1d
 ```
 
-![Cpu idle time in 30 minute windows](/img/docs/cpu_idle_mean_group_by.jpg)
+![Cpu idle time in 30 minute windows](/img/influxdb/old/cpu_idle_mean_group_by.png)
 
 Get the average of `cpu_idle` for `server1` in 30 minute windows for the last day:
 
@@ -205,7 +205,7 @@ group by time(30m)
 where time > now() - 1d and hostName = 'server1'
 ```
 
-![Cpu idle time for server1 in 30 minute windows](/img/docs/cpu_idle_mean_group_by_where_server.jpg)
+![Cpu idle time for server1 in 30 minute windows](/img/influxdb/old/cpu_idle_mean_group_by_where_server.png)
 
 Get the number of data points from the `cpu_idle` series for the last hour:
 
@@ -220,7 +220,7 @@ select count(customerId) from customer_events
 where time > now() - 1d group by time(10m)
 ```
 
-![Customer events in 10 minute increments](/img/docs/customer_events_count_10m.jpg)
+![Customer events in 10 minute increments](/img/influxdb/old/customer_events_count_10m.png)
 
 Find the unique customer ids from `customer_events` for the last hour:
 
@@ -229,7 +229,7 @@ select distinct(customerId) as customerId from customer_events
 where time > now() - 1h
 ```
 
-![Customer events in 10 minute increments](/img/docs/customer_events_distinct.jpg)
+![Customer events in 10 minute increments](/img/influxdb/old/customer_events_distinct.png)
 
 Count the number of `customer_events` per customer in 10 minute windows for the last 4 hours:
 
