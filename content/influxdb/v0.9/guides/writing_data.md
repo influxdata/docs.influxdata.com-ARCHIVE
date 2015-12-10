@@ -82,24 +82,31 @@ REST, however, is a convention. InfluxDB makes do with three API endpoints. This
 **Examples of error responses:**
 
 * Writing a float to a field that previously accepted booleans:
+
 ```sh
 curl -i -XPOST 'http://localhost:8086/write?db=hamlet' --data-binary 'tobeornottobe booleanonly=true'  
 
 curl -i -XPOST 'http://localhost:8086/write?db=hamlet' --data-binary 'tobeornottobe booleanonly=5'
 ```
+
 returns:  
 <br>
+
 ```sh
 HTTP/1.1 400 Bad Request
 [...]
 write failed: field type conflict: input field "booleanonly" on measurement "tobeornottobe" is type float64, already exists as type boolean
 ```
+
 * Writing a point to a database that doesn't exist:
+
 ```sh
 curl -i -XPOST 'http://localhost:8086/write?db=atlantis' --data-binary 'liters value=10'
 ```
+
 returns:  
 <br>
+
 ```sh
 HTTP/1.1 404 Not Found
 [...]
