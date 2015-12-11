@@ -24,7 +24,6 @@ This page addresses frequent sources of confusion and places where InfluxDB beha
 * [Getting the `expected identifier` error, unexpectedly](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#getting-the-expected-identifier-error-unexpectedly)
 * [Identifying write precision from returned timestamps](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#identifying-write-precision-from-returned-timestamps)  
 * [Single quoting and double quoting in queries](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#single-quoting-and-double-quoting-in-queries)  
-* [Writing more than one continuous query to a single series](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#writing-more-than-one-continuous-query-to-a-single-series)
 * [Missing data after creating a new `DEFAULT` retention policy](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#missing-data-after-creating-a-new-default-retention-policy)
 
 **Writing data**  
@@ -33,6 +32,7 @@ This page addresses frequent sources of confusion and places where InfluxDB beha
 * [Writing data with negative timestamps](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#writing-data-with-negative-timestamps)  
 * [Writing duplicate points](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#writing-duplicate-points)  
 * [Getting an unexpected error when sending data over the HTTP API](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#getting-an-unexpected-error-when-sending-data-over-the-http-api)
+* [Writing more than one continuous query to a single series](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#writing-more-than-one-continuous-query-to-a-single-series)
 * [Words and characters to avoid](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#words-and-characters-to-avoid)  
 * [Single quoting and double quoting when writing data](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#single-quoting-and-double-quoting-when-writing-data)  
 
@@ -40,7 +40,8 @@ This page addresses frequent sources of confusion and places where InfluxDB beha
 
 * [Single quoting the password string](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#single-quoting-the-password-string)
 * [Escaping the single quote in a password](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#escaping-the-single-quote-in-a-password)  
-* [Identifying your version of InfluxDB](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#identifying-your-version-of-influxdb)
+* [Identifying your version of InfluxDB](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#identifying-your-version-of-influxdb)  
+* [Data aren't dropped after altering a retention policy](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#data-aren-t-dropped-after-altering-a-retention-policy)
 
 
 # Querying data
@@ -172,14 +173,32 @@ No: `SELECT * from cr@zy where p^e='2'`
 
 See the [Query Syntax](/influxdb/v0.9/query_language/query_syntax/) page for more information.
 
-## Writing more than one continuous query to a single series
-Use a single continuous query to write several statistics to the same measurement and tag set. For example, tell InfluxDB to write to the `aggregated_stats` measurement the `MEAN` and `MIN` of the `value` field grouped by five-minute intervals and grouped by the `cpu` tag with:
+## Missing data after creating a new `DEFAULT` retention policy
+When you create a new `DEFAULT` retention policy (RP) on a database, the data written to the old `DEFAULT` RP remain in the old RP. Queries that do not specify an RP automatically query the new `DEFAULT` RP so the old data may appear to be missing. To query the old data you must fully qualify the relevant data in the query.
 
-`CREATE CONTINUOUS QUERY mean_min_value ON telegraf BEGIN SELECT MEAN(value) AS mean, MIN(value) AS min INTO aggregated_stats FROM cpu_idle GROUP BY time(5m),cpu END`
+Example:
 
-If you create two separate continuous queries (one for calculating the `MEAN` and one for calculating the `MIN`), the `aggregated_stats` measurement will appear to be missing data. Separate continuous queries run at slightly different times and InfluxDB defines a unique point by its measurement, tag set, and timestamp (notice that field is missing from that list). So if two continuous queries write to different fields but also write to the same measurement and tag set, only one of the two fields will ever have data; the last continuous query to run will overwrite the results that were written by the first continuous query with the same timestamp.
-
-For more on continuous queries, see the [continuous queries page](/influxdb/v0.9/query_language/continuous_queries/).
+All of the data in the measurement `fleeting` fall under the `DEFAULT` RP called `one_hour`:
+```sh
+> SELECT count(flounders) FROM fleeting
+name: fleeting
+--------------
+time			               count
+1970-01-01T00:00:00Z	 8
+```
+We [create](/influxdb/v0.9/query_language/database_management/#create-retention-policies-with-create-retention-policy) a new `DEFAULT` RP (`two_hour`) and perform the same query:
+```sh
+> SELECT count(flounders) FROM fleeting
+>
+```
+To query the old data, we must specify the old `DEFAULT` RP by fully qualifying `fleeting`:
+```sh
+> SELECT count(flounders) FROM fish.one_hour.fleeting
+name: fleeting
+--------------
+time			               count
+1970-01-01T00:00:00Z	 8
+```
 
 ## Missing data after creating a new `DEFAULT` retention policy
 When you create a new `DEFAULT` retention policy (RP) on a database, the data written to the old `DEFAULT` RP remain in the old RP. Queries that do not specify an RP automatically query the new `DEFAULT` RP so the old data may appear to be missing. To query the old data you must fully qualify the relevant data in the query.
@@ -243,6 +262,17 @@ You can also increment the timestamp by a nanosecond:
 First, double check your [line protocol](/influxdb/v0.9/write_protocols/line/) syntax. Second, if you continue to receive errors along the lines of `bad timestamp` or `unable to parse`, verify that your newline character is line feed (`\n`, which is ASCII `0x0A`). InfluxDB's line protocol relies on `\n` to indicate the end of a line and the beginning of a new line; files or data that use a newline character other than `\n` will encounter parsing issues. Convert the newline character and try sending the data again.
 
 > **Note:** If you generated your data file on a Windows machine, Windows uses carriage return and line feed (`\r\n`) as the newline character.
+
+## Writing more than one continuous query to a single series
+Use a single continuous query to write several statistics to the same measurement and tag set. For example, tell InfluxDB to write to the `aggregated_stats` measurement the `MEAN` and `MIN` of the `value` field grouped by five-minute intervals and grouped by the `cpu` tag with:
+
+```sql
+CREATE CONTINUOUS QUERY mean_min_value ON telegraf BEGIN SELECT MEAN(value) AS mean, MIN(value) AS min INTO aggregated_stats FROM cpu_idle GROUP BY time(5m),cpu END
+```
+
+If you create two separate continuous queries (one for calculating the `MEAN` and one for calculating the `MIN`), the `aggregated_stats` measurement will appear to be missing data. Separate continuous queries run at slightly different times and InfluxDB defines a unique point by its measurement, tag set, and timestamp (notice that field is missing from that list). So if two continuous queries write to different fields but also write to the same measurement and tag set, only one of the two fields will ever have data; the last continuous query to run will overwrite the results that were written by the first continuous query with the same timestamp.
+
+For more on continuous queries, see [Continuous Queries](/influxdb/v0.9/query_language/continuous_queries/).
 
 ## Words and characters to avoid
 If you use any of the [InfluxQL keywords](https://github.com/influxdb/influxdb/blob/master/influxql/INFLUXQL.md#keywords) as an identifier you will need to double quote that identifier in every query. This can lead to [non-intuitive errors](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#getting-the-expected-identifier-error-unexpectedly). Identifiers are database names, retention policy names, user names, measurement names, tag keys, and field keys.
@@ -312,3 +342,39 @@ There a number of ways to identify the version of InfluxDB that you're using:
 * Check the HTTP response in your logs:  
 
 `[http] 2015/09/04 12:29:07 ::1 - - [04/Sep/2015:12:29:06 -0700] GET /query?db=&q=create+database+there_you_go HTTP/1.1 200 40 -` ✨`InfluxDBShell/0.9.3`✨ `357970a0-533b-11e5-8001-000000000000 6.07408ms`
+
+## Data aren't dropped after altering a retention policy
+After [shortening](/influxdb/v0.9/query_language/database_management/#modify-retention-policies-with-alter-retention-policy) the `DURATION` of a [retention policy](/influxdb/v0.9/concepts/glossary/#retention-policy-rp) (RP), you may notice that InfluxDB keeps some data that are older than the `DURATION` of the modified RP. This behavior is a result of the relationship between the time interval covered by a shard group and the `DURATION` of a retention policy.
+
+InfluxDB stores data in shard groups. A single shard group covers a specific time interval; InfluxDB determines that time interval by looking at the `DURATION` of the relevant RP. The table below outlines the relationship between the `DURATION` of an RP and the time interval of a shard group:
+
+| RP duration  | Shard group interval  |
+|---|---|
+| < 2 days  | 1 hour  |
+| >= 2 days and <= 6 months  | 1 day  |
+| > 6 months  | 7 days  |
+
+If you shorten the `DURATION` of an RP and the shard group interval also shrinks, InfluxDB may be forced to keep data that are older than the new `DURATION`. This happens because InfluxDB cannot divide the old, longer shard group into new, shorter shard groups; it must keep all of the data in the longer shard group even if only a small part of those data overlaps with the new `DURATION`.
+
+*Example: Moving from an infinite RP to a three day RP*
+
+Figure 1 shows the shard groups for our example database (`example_db`) after 11 days. The database uses the automatically generated `default` retention policy with an infinite (`INF`) `DURATION` so each shard group interval is seven days. On day 11, InfluxDB is no longer writing to `Shard Group 1` and `Shard Group 2` has four days worth of data:
+
+**Figure 1**
+![Retention policy duration infinite](/img/influxdb/fei/alter-rp-inf.png)
+
+On day 11, we notice that `example_db` is accruing data too fast; we want to delete, and keep deleting, all data older than three days. We do this by [altering](/influxdb/v0.9/query_language/database_management/#modify-retention-policies-with-alter-retention-policy) the retention policy:
+<br>
+<br>
+```
+> ALTER RETENTION POLICY default ON example_db DURATION 3d
+```
+
+At the next [retention policy enforcement check](/influxdb/v0.9/administration/config/#retention), InfluxDB immediately drops `Shard Group 1` because all of its data are older than 3 days. InfluxDB does not drop `Shard Group 2`. This is because InfluxDB cannot divide existing shard groups and some data in `Shard Group 2` still fall within the new three day retention policy.
+
+Figure 2 shows the shard groups for `example_db` five days after the retention policy change. Notice that the new shard groups span one day intervals. All of the data in `Shard Group 2` remain in the database because the shard group still has data within the retention policy's three day `DURATION`:
+
+**Figure 2**
+![Retention policy duration three days](/img/influxdb/fei/alter-rp-3d.png)
+
+After day 17, all data within the past 3 days will be in one day shard groups. InfluxDB will then be able to drop `Shard Group 2` and `example_db` will have only 3 days worth of data.
