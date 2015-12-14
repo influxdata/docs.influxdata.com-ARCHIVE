@@ -68,3 +68,41 @@ The drop query takes the following form:
 ```sql
 DROP CONTINUOUS QUERY <name> ON <database>
 ```
+
+## Backfilling
+
+Backfilling in InfluxDB 0.9 is not supported per se. Instead ad-hoc queries using `INTO` clause must be run. This is useful because it makes backfills more flexible and controlable - running them can now be restricted to short time ranges to prevent long lasting CPU spikes. Backfill queries do require a `WHERE` clause with a `time` restriction. Tags can be used optionally in the same way as in continuous queries.
+
+```sql
+SELECT min(temp) as min_temp, max(temp) as max_temp INTO "reading.minmax.5m" FROM reading 
+WHERE time >= '2015-12-14 00:05:20' AND time < '2015-12-15 00:05:20'
+GROUP BY time(5m)
+```
+
+Tags (`sensor_id` in the example bellow) can be used optionally in the same way as in continuous queries.
+
+```sql
+SELECT min(temp) as min_temp, max(temp) as max_temp INTO "reading.minmax.5m" FROM reading 
+WHERE time >= '2015-12-14 00:05:20' AND time < '2015-12-15 00:05:20'
+GROUP BY time(5m), sensor_id
+```
+
+To prevent the backfill from creating a huge number of "empty" points containing only `null` values, [fill()](/influxdb/v0.9/query_language/data_exploration/#the-group-by-clause-and-fill) can be used at the end of the query.
+
+```sql
+SELECT min(temp) as min_temp, max(temp) as max_temp INTO "reading.minmax.5m" FROM reading 
+WHERE time >= '2015-12-14 00:05:20' AND time < '2015-12-15 00:05:20'
+GROUP BY time(5m), fill(none)
+```
+
+If you would like to further break down the queries and run them with even more control, you can add additional `WHERE` clauses.
+
+```sql
+SELECT min(temp) as min_temp, max(temp) as max_temp INTO "reading.minmax.5m" FROM reading 
+WHERE sensor_id="EG-21442" AND time >= '2015-12-14 00:05:20' AND time < '2015-12-15 00:05:20'
+GROUP BY time(5m)
+```
+
+In InfluxDB 0.9, a point is uniquely identified by the measurement, full tag set, and timestamp. Re-backfilling or writing another point with the same measurement, tag set, and timestamp will silently overwrite the already existing point, it will not create a duplicate.
+
+
