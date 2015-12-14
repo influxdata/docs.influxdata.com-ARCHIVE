@@ -270,7 +270,7 @@ location
 ## Explore tag values with SHOW TAG VALUES
 The `SHOW TAG VALUES` query returns the set of [tag values](/influxdb/v0.9/concepts/glossary/#tag-value) for a specific tag key across all measurements in the database. It takes the following form, where the `FROM` clause is optional:
 ```sql
-SHOW TAG VALUES [FROM <measurement_name> WITH KEY = <tag_key>]
+SHOW TAG VALUES [FROM <measurement_name>] WITH KEY = <tag_key>
 ```
 
 Return the tag values for the tag key `randtag` across all measurements in the database `NOAA_water_database`:
