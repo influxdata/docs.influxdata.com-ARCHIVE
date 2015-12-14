@@ -395,6 +395,8 @@ Combine the `INTO` clause with an InfluxQL [function](/influxdb/v0.9/query_langu
 SELECT <function>(<field_key>) INTO <different_measurement> FROM <current-measurement> WHERE <stuff> GROUP BY <stuff>
 ```
 
+> **Note:** The `INTO` queries in this section downsample old data, that is, data that have already been written to InfluxDB. If you want InfluxDB to automatically query and downsample all future data see [Continuous Queries](/influxdb/v0.9/query_language/continuous_queries/).
+
 Calculate the average `water_level` in `santa_monica`, and write the results to a new measurement (`average`) in the same database:
 ```sql
 > SELECT mean(water_level) INTO average FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
