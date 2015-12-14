@@ -20,6 +20,9 @@ The basics:
 * [The `GROUP BY` clause](/influxdb/v0.9/query_language/data_exploration/#the-group-by-clause)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[The basic `GROUP BY` clause](/influxdb/v0.9/query_language/data_exploration/#the-basic-group-by-clause)   
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[The `GROUP BY` clause and `fill()`](/influxdb/v0.9/query_language/data_exploration/#the-group-by-clause-and-fill)  
+* [The `INTO` clause](/influxdb/v0.9/query_language/data_exploration/#the-into-clause)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Relocate data](/influxdb/v0.9/query_language/data_exploration/#relocate-data)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Downsample data](/influxdb/v0.9/query_language/data_exploration/#downsample-data)    
 
 Limit and sort your results:
 
@@ -28,11 +31,6 @@ Limit and sort your results:
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Limit the number of series returned with `SLIMIT`](/influxdb/v0.9/query_language/data_exploration/#limit-the-number-of-series-returned-with-slimit)  
 * [Sort query returns with `ORDER BY time DESC`](/influxdb/v0.9/query_language/data_exploration/#sort-query-returns-with-order-by-time-desc)
 * [Paginate query returns with `OFFSET`](/influxdb/v0.9/query_language/data_exploration/#paginate-query-returns-with-offset)
-
-Downsample data:
-
-* [Downsample old data with `INTO`](/influxdb/v0.9/query_language/data_exploration/#downsample-old-data-with-into)
-* [Downsample future data with Continuous Queries](/influxdb/v0.9/query_language/data_exploration/#downsample-future-data-with-continuous-queries)
 
 General tips on query syntax:
 
@@ -356,6 +354,134 @@ time			mean
 
 > **Note:** If you're `GROUP(ing) BY` several things (for example, both tags and a time interval) `fill()` must go at the end of the `GROUP BY` clause.
 
+## The INTO clause
+### Relocate data
+Copy data to another database, retention policy, and measurement with the `INTO` clause:
+```sql
+SELECT <field_key> INTO <different_measurement> FROM <current-measurement> [WHERE <stuff>] [GROUP BY <stuff>]
+```
+
+Write the field `water_level` in `h2o_feet` to a new measurement (`h2o_feet_copy`) in the same database:
+```sql
+> SELECT water_level INTO h2o_feet_copy FROM h2o_feet WHERE location = 'coyote_creek'
+```
+
+The CLI response shows the number of points that InfluxDB wrote to `h2o_feet_copy`:
+```
+name: result
+------------
+time			               written
+1970-01-01T00:00:00Z	 7604
+```
+
+Write the field `water_level` in `h2o_feet` to a new measurement (`h2o_feet_copy`) and to the retention policy `default` in the database `where_else`:
+```sql
+> SELECT water_level INTO where_else."default".h2o_feet_copy FROM h2o_feet WHERE location = 'coyote_creek'
+```
+
+CLI response:
+```sh
+name: result
+------------
+time			               written
+1970-01-01T00:00:00Z	 7604
+```
+
+> **Note**: If you use `SELECT *` with `INTO`, the query converts tags in the current measurement to fields in the new measurement. This can cause InfluxDB to overwrite points that were previously differentiated by a tag value. Use `GROUP BY <tag_key>` to preserve tags as tags.
+
+### Downsample data
+Combine the `INTO` clause with an InfluxQL [function](/influxdb/v0.9/query_language/functions/) and a `GROUP BY` clause to write the lower precision query results to a different measurement:
+```sql
+SELECT <function>(<field_key>) INTO <different_measurement> FROM <current-measurement> WHERE <stuff> GROUP BY <stuff>
+```
+
+Calculate the average `water_level` in `santa_monica`, and write the results to a new measurement (`average`) in the same database:
+```sql
+> SELECT mean(water_level) INTO average FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
+```
+
+The CLI response shows the number of points that InfluxDB wrote to the new measurement:
+```sh
+name: result
+------------
+time			               written
+1970-01-01T00:00:00Z	 3
+```
+
+To see the query results, select everything from the new measurement `average` in `NOAA_water_database`:
+```sh
+> SELECT * FROM average
+name: average
+-------------
+time			               mean
+2015-08-18T00:00:00Z	 2.09
+2015-08-18T00:12:00Z	 2.077
+2015-08-18T00:24:00Z	 2.0460000000000003
+```
+
+Calculate the average `water_level` and the max `water_level` in `santa_monica`, and write the results to a new measurement (`aggregates`) in a different database (`where_else`):
+```sql
+> SELECT mean(water_level), max(water_level) INTO where_else."default".aggregates FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
+```
+
+CLI response:
+```sh
+name: result
+------------
+time			               written
+1970-01-01T00:00:00Z	 3
+```
+
+Select everything from the new measurement `aggregates` in the database `where_else`:
+```sh
+> SELECT * FROM where_else."default".aggregates
+name: aggregates
+----------------
+time			               max	   mean
+2015-08-18T00:00:00Z	 2.116	 2.09
+2015-08-18T00:12:00Z	 2.126	 2.077
+2015-08-18T00:24:00Z	 2.051	 2.0460000000000003
+```
+
+Calculate the average `degrees` for all temperature measurements (`h2o_temperature` and `average_temperature`) in the `NOAA_water_database` and write the results to new measurements with the same names in a different database (`where_else`):
+```sql
+> SELECT mean(degrees) INTO where_else."default".:MEASUREMENT FROM /temperature/ WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
+```
+
+CLI response:
+```sh
+name: result
+------------
+time			               written
+1970-01-01T00:00:00Z	 6
+```
+
+Select the `mean` field from all new temperature measurements in the database `where_else`:
+```sh
+> SELECT mean FROM where_else."default"./temperature/
+name: average_temperature
+-------------------------
+time			               mean
+2015-08-18T00:00:00Z	 78.5
+2015-08-18T00:12:00Z	 84
+2015-08-18T00:24:00Z	 74.75
+
+
+name: h2o_temperature
+---------------------
+time			                mean
+2015-08-18T00:00:00Z	  63.75
+2015-08-18T00:12:00Z	  63.5
+2015-08-18T00:24:00Z	  63.5
+```
+
+An `INTO` query that includes `:MEASUREMENT` writes the query results to measurements with the same names as those targeted by the query.
+
+More on downsampling with `INTO`:
+
+* InfluxDB does not store null values. Depending on the frequency of your data, the query results may be missing time intervals. Use [fill()](/influxdb/v0.9/query_language/data_exploration/#the-group-by-clause-and-fill) to ensure that every time interval appears in the results.
+* The number of writes in the CLI response includes one write for every time interval in the query's time range even if there is no data for some of the time intervals.
+
 ## Limit query returns with LIMIT and SLIMIT
 InfluxQL supports two different clauses to limit your query results. Currently, they are mutually exclusive so you may use one or the other, but not both in the same query.
 
@@ -516,102 +642,6 @@ time			water_level
 2015-08-18T00:24:00Z	7.635
 2015-08-18T00:30:00Z	7.5
 ```
-
-## Downsample old data with INTO
-Write data from one measurement to another measurement with `INTO`. For the downsampling use case, combine an InfluxQL [function](/influxdb/v0.9/query_language/functions/) and a `GROUP BY` clause with `INTO` to write the lower precision query results to a different measurement:
-```sql
-SELECT <function>(<field_key>) INTO <different_measurement> FROM <old-measurement> WHERE <stuff> GROUP BY <stuff>
-```
-
-Calculate the average `water_level` in `santa_monica`, and write the results to a new measurement (`average`) in the same database:
-```sql
-> SELECT mean(water_level) INTO average FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
-```
-
-The CLI response shows the number of points that InfluxDB wrote to the new measurement:
-```sh
-name: result
-------------
-time			               written
-1970-01-01T00:00:00Z	 3
-```
-
-To see the query results, select everything from the new measurement `average` in `NOAA_water_database`:
-```sh
-> SELECT * FROM average
-name: average
--------------
-time			               mean
-2015-08-18T00:00:00Z	 2.09
-2015-08-18T00:12:00Z	 2.077
-2015-08-18T00:24:00Z	 2.0460000000000003
-```
-
-Calculate the average `water_level` and the max `water_level` in `santa_monica`, and write the results to a new measurement (`aggregates`) in a different database (`where_else`):
-```sql
-> SELECT mean(water_level), max(water_level) INTO where_else."default".aggregates FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
-```
-
-CLI response:
-```sh
-name: result
-------------
-time			               written
-1970-01-01T00:00:00Z	 3
-```
-
-Select everything from the new measurement `aggregates` in the database `where_else`:
-```sh
-> SELECT * FROM where_else."default".aggregates
-name: aggregates
-----------------
-time			               max	   mean
-2015-08-18T00:00:00Z	 2.116	 2.09
-2015-08-18T00:12:00Z	 2.126	 2.077
-2015-08-18T00:24:00Z	 2.051	 2.0460000000000003
-```
-
-Calculate the average `degrees` for all temperature measurements (`h2o_temperature` and `average_temperature`) in the `NOAA_water_database` and write the results to new measurements with the same names in a different database (`where_else`):
-```sql
-> SELECT mean(degrees) INTO where_else."default".:MEASUREMENT FROM /temperature/ WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
-```
-
-CLI response:
-```sh
-name: result
-------------
-time			               written
-1970-01-01T00:00:00Z	 6
-```
-
-Select the `mean` field from all new temperature measurements in the database `where_else`:
-```sh
-> SELECT mean FROM where_else."default"./temperature/
-name: average_temperature
--------------------------
-time			               mean
-2015-08-18T00:00:00Z	 78.5
-2015-08-18T00:12:00Z	 84
-2015-08-18T00:24:00Z	 74.75
-
-
-name: h2o_temperature
----------------------
-time			                mean
-2015-08-18T00:00:00Z	  63.75
-2015-08-18T00:12:00Z	  63.5
-2015-08-18T00:24:00Z	  63.5
-```
-
-An `INTO` query that includes `:MEASUREMENT` writes the query results to measurements with the same names as those targeted by the query.
-
-More on queries with `INTO`:
-
-* InfluxDB does not store null values. Depending on the frequency of your data, the query results may be missing time intervals. Use [fill()](/influxdb/v0.9/query_language/data_exploration/#the-group-by-clause-and-fill) to ensure that every time interval appears in the results.
-* The number of writes in the CLI response includes one write for every time interval in the query's time range even if there is no data for some of the time intervals.
-
-## Downsample future data with Continuous Queries
-See [Continuous Queries](/influxdb/v0.9/query_language/continuous_queries/).
 
 ## Multiple statements in queries
 
