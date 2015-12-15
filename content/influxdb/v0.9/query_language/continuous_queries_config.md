@@ -1,9 +1,13 @@
 ---
-title: Configuring continuous queries
+title: Configuring Continuous Queries
+menu:
+  influxdb_09:
+    weight: 41
+    parent: query_language
 ---
 
 ## What is a continuous query?
-A continuous query (CQ) is an InfluxQL query that the system periodically executes in batches. 
+A continuous query (CQ) is an InfluxQL query that the system periodically executes in batches.
 
 Each batch contains one or more queries where each query covers a single `GROUP BY time()` interval. InfluxDB always generates a query for the current `GROUP BY time()` interval (determined by `now()`) and it generates zero or more queries for recent `GROUP BY time()` intervals.
 
@@ -36,9 +40,9 @@ For example, if the CQ has a `30s` `GROUP BY time()` interval, then InfluxDB gen
 
 Depending on your CQ's `GROUP BY time()` interval you may want to make changes to the default configuration settings. The next sections present example CQs and discuss how they work with the configuration options:
 
-* [CQ 1](../query_language/continuous_queries_config.html#cq-1-4-minute-group-by-time-interval) is an introductory example CQ that shows how the default configuration settings work with a CQ's `GROUP BY time()` interval. 
-* [CQ 2](../query_language/continuous_queries_config.html#cq-2-30-second-group-by-time-interval) is an example of a CQ with a shorter term `GROUP BY time()` interval that doesn't work well with the default configuration settings. This section also covers how to alter the configuration settings to fix the issue.
-* [CQ 3](../query_language/continuous_queries_config.html#cq-3-1-hour-group-by-time-interval) is an example of a CQ with a longer term `GROUP BY time()` interval. This section shows how to alter the configuration settings to take into account lagged data.
+* [CQ 1](/influxdb/v0.9/query_language/continuous_queries_config/#cq-1-4-minute-group-by-time-interval) is an introductory example CQ that shows how the default configuration settings work with a CQ's `GROUP BY time()` interval.
+* [CQ 2](/influxdb/v0.9/query_language/continuous_queries_config/#cq-2-30-second-group-by-time-interval) is an example of a CQ with a shorter term `GROUP BY time()` interval that doesn't work well with the default configuration settings. This section also covers how to alter the configuration settings to fix the issue.
+* [CQ 3](/influxdb/v0.9/query_language/continuous_queries_config/#cq-3-1-hour-group-by-time-interval) is an example of a CQ with a longer term `GROUP BY time()` interval. This section shows how to alter the configuration settings to take into account lagged data.
 
 ## CQ 1: 4 minute `GROUP BY time()` interval
 ### Create CQ 1
@@ -46,7 +50,7 @@ Depending on your CQ's `GROUP BY time()` interval you may want to make changes t
 CREATE CONTINUOUS QUERY cq1 ON telegraf BEGIN SELECT MEAN(value) INTO cq_4m FROM cpu_usage_idle WHERE cpu='cpu-total' GROUP BY time(4m) END
 ```
 
-For our purposes the only important part of that statement is the `4m` `GROUP BY time()` interval. For more on the syntax for creating CQs, see [Continuous Queries](../query_language/continuous_queries.html).
+For our purposes the only important part of that statement is the `4m` `GROUP BY time()` interval. For more on the syntax for creating CQs, see [Continuous Queries](/influxdb/v0.9/query_language/continuous_queries/).
 
 ### The default CQ schedule
 Default configuration settings:  
@@ -90,7 +94,7 @@ In both cases, the first query has the relevant time range that spans `now()`: 1
 ```sql
 CREATE CONTINUOUS QUERY cq2 ON telegraf BEGIN SELECT MEAN(value) INTO "telegraf"."default".cq_30s FROM "telegraf"."default".cpu_usage_idle WHERE cpu = 'cpu-total' GROUP BY time(30s) END
 ```
-For our purposes the only important part of that statement is the `30s` `GROUP BY time()` interval. For more on the syntax for creating CQs, see [Continuous Queries](../query_language/continuous_queries.html).
+For our purposes the only important part of that statement is the `30s` `GROUP BY time()` interval. For more on the syntax for creating CQs, see [Continuous Queries](/influxdb/v0.9/query_language/continuous_queries/).
 
 ### The default CQ schedule
 Default configuration settings:  
@@ -127,7 +131,7 @@ SELECT MEAN(value) INTO "telegraf"."default".cq_30s FROM "telegraf"."default".cp
 SELECT MEAN(value) INTO "telegraf"."default".cq_30s FROM "telegraf"."default".cpu_usage_idle WHERE cpu = 'cpu-total' AND time >= '2015-11-24T19:42:00Z' AND time < '2015-11-24T19:42:30Z' GROUP BY time(30s)
 ```
 
-In both cases, the first query has the revelant time range that spans `now()`: 19:41:17 falls within the 30 second interval between 19:41:00 and 19:41:30, and 19:43:17 falls within the 30 second interval between 19:43:00 and 19:43:30. The second two queries span older 30 second time intervals. 
+In both cases, the first query has the revelant time range that spans `now()`: 19:41:17 falls within the 30 second interval between 19:41:00 and 19:41:30, and 19:43:17 falls within the 30 second interval between 19:43:00 and 19:43:30. The second two queries span older 30 second time intervals.
 
 Because of CQ 2's small `GROUP BY time()` interval, leaving the default configuration settings as is causes InfluxDB to skip a 30 second interval. In the example above, the system never queries the time range between 19:41:30 and 19:42:00. The next two sections offer different ways to solve the missing interval problem.
 
@@ -200,7 +204,7 @@ Notice that because of the new number of queries per batch, InfluxDB no longer m
 ```sql
 CREATE CONTINUOUS QUERY cq3 ON telegraf BEGIN SELECT MEAN(value) INTO cq_1h FROM cpu_usage_idle WHERE cpu='cpu-total' GROUP BY time(1h) END
 ```
-For our purposes the only important part of that statement is the `1h` `GROUP BY time()` interval. For more on the syntax for creating CQs, see [Continuous Queries](../query_language/continuous_queries.html).
+For our purposes the only important part of that statement is the `1h` `GROUP BY time()` interval. For more on the syntax for creating CQs, see [Continuous Queries](/influxdb/v0.9/query_language/continuous_queries/).
 
 ### The default CQ schedule
 Default configuration settings:   
@@ -231,7 +235,7 @@ InfluxDB generates one query six minutes later at 22:15:55:
 SELECT MEAN(value) INTO "telegraf"."default".cq_1h FROM "telegraf"."default".cpu_usage_idle WHERE cpu = 'cpu-total' AND time >= '2015-11-24T22:00:00Z' AND time < '2015-11-24T23:00:00Z' GROUP BY time(1h)
 ```
 
-At 22:09:55, InfluxDB generates two queries; one query covers the time range that spans `now()` and one query covers the previous `GROUP BY time()` interval. InfluxDB generates the second query because  `now()` - `10m` falls in the previous `GROUP BY time()` interval (22:09:55 -  `10m` = 21:59:55). 
+At 22:09:55, InfluxDB generates two queries; one query covers the time range that spans `now()` and one query covers the previous `GROUP BY time()` interval. InfluxDB generates the second query because  `now()` - `10m` falls in the previous `GROUP BY time()` interval (22:09:55 -  `10m` = 21:59:55).
 
 At 22:15:55, InfluxDB generates only one query. That query covers the time range that spans `now()`. InfluxDB doesn't generate a second query because `now()` - `10m` falls in the interval that spans `now()` (22:15:55 - `10m` = 22:05:55).
 
@@ -262,4 +266,3 @@ SELECT MEAN(value) INTO "telegraf"."default".cq_1h FROM "telegraf"."default".cpu
 ```
 
 Because of the new settings, InfluxDB always includes in a batch one query that spans an older time interval in addition to the query that spans `now()`.
-
