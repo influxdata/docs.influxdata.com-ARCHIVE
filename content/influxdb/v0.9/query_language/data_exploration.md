@@ -296,9 +296,9 @@ Calculate the average `water_level` for the different tag values of `location` i
 By default, a `GROUP BY` interval with no data has `null` as its value in the output column. Use `fill()` to change the value reported for intervals that have no data. `fill()` options include:
 
 * Any numerical value
-* `null` - exhibits the same behavior as the default (sets `null` as value for interval with no data)
-* `previous` - reports the value of the previous time window (copies values from the previous interval)
-* `none` - suppresses timestamps and values where the value is null (interval record is skipped ant not shown at all)
+* `null` - sets `null` as the value for intervals with no data
+* `previous` - copies the value from the previous interval for intervals with no data
+* `none` - skips intervals with no data to report
 
 Follow the ✨ in the examples below to see what `fill()` can do.
 
