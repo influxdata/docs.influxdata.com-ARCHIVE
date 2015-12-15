@@ -60,7 +60,7 @@ The major component that affects your RAM needs is series cardinality. Series ca
 
 The increase in RAM needs relative to series cardinality is exponential where the exponent is between one and two:
 
-![Series Cardinality](/img/series-cardinality.png)
+![Series Cardinality](/img/influxdb/series-cardinality.png)
 
 ## What kind of storage do I need?
 InfluxDB is designed to run on SSDs.  Performance is drastically lower on spinning disk drives.
