@@ -56,7 +56,7 @@ Performance at this scale is a significant challenge and may not be achievable. 
 ## When do I need more RAM?
 In general, having more RAM helps queries return faster. There is no known downside to adding more RAM.
 
-The major component that affects your RAM needs is series cardinality. Series cardinality is the total number of [series](/influxdb/v0.9/concepts/glossary/#series) in a database. If you have one measurement with two tags, and each tag has 1,000 possible values then the series cardinality is 1M. A series cardinality around or above 10MM can cause OOM failures. If this is the case, you can usually address the problem by redesigning your [schema](/influxdb/v0.9/concepts/glossary/#schema).
+The major component that affects your RAM needs is series cardinality. Series cardinality is the total number of [series](/influxdb/v0.9/concepts/glossary/#series) in a database. If you have one measurement with two tags, and each tag has 1,000 possible values then the series cardinality is 1 million. A series cardinality around or above 10 million can cause OOM failures. If this is the case, you can usually address the problem by redesigning your [schema](/influxdb/v0.9/concepts/glossary/#schema).
 
 The increase in RAM needs relative to series cardinality is exponential where the exponent is between one and two:
 
