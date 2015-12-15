@@ -27,10 +27,10 @@ We define the load that you'll be placing on InfluxDB by the number of writes pe
 
 | Load         | Writes per second  | Queries per second | Unique series |
 |--------------|----------------|----------------|---------------|
-|  **Low**         |  < 5K         |  < 5           |  < 100K         |
-|  **Moderate**    |  < 100K        |  < 25          |  < 1MM        |
-|  **High**        |  > 100K        |  > 25          |  > 1MM        |
-| **Probably infeasible**  |  > 500K        |  > 100         |  > 10MM       |
+|  **Low**         |  < 5 thousand         |  < 5           |  < 100 thousand         |
+|  **Moderate**    |  < 100 thousand        |  < 25          |  < 1 million        |
+|  **High**        |  > 100 thousand        |  > 25          |  > 1 million        |
+| **Probably infeasible**  |  > 500 thousand        |  > 100         |  > 10 million       |
 
 
 #### Low load recommendations
