@@ -20,6 +20,9 @@ The basics:
 * [The `GROUP BY` clause](/influxdb/v0.9/query_language/data_exploration/#the-group-by-clause)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[The basic `GROUP BY` clause](/influxdb/v0.9/query_language/data_exploration/#the-basic-group-by-clause)   
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[The `GROUP BY` clause and `fill()`](/influxdb/v0.9/query_language/data_exploration/#the-group-by-clause-and-fill)  
+* [The `INTO` clause](/influxdb/v0.9/query_language/data_exploration/#the-into-clause)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Relocate data](/influxdb/v0.9/query_language/data_exploration/#relocate-data)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Downsample data](/influxdb/v0.9/query_language/data_exploration/#downsample-data)    
 
 Limit and sort your results:
 
@@ -48,7 +51,7 @@ If you'd like to follow along with the queries in this document, see [Sample Dat
 
 This document uses publicly available data from the [National Oceanic and Atmospheric Administration's (NOAA) Center for Operational Oceanographic Products and Services](http://tidesandcurrents.noaa.gov/stations.html?type=Water+Levels). The data include water levels (ft) collected every six seconds at two stations (Santa Monica, CA (ID 9410840) and Coyote Creek, CA (ID 9414575)) over the period from August 18, 2015 through September 18, 2015.
 
-A subsample of the data in the measurement `h2o_feet`: 
+A subsample of the data in the measurement `h2o_feet`:
 ```
 name: h2o_feet
 --------------
@@ -77,8 +80,8 @@ SELECT <stuff> FROM <measurement_name> WHERE <some_conditions>
 
 ### The basic `SELECT` statement
 ---
-The following three examples return everything from the measurement `h2o_feet` (see the CLI response at the end of this section). While they all return the same result, they get to that result in slightly different ways and serve to introduce some of the specifics of the `SELECT` syntax: 
- 
+The following three examples return everything from the measurement `h2o_feet` (see the CLI response at the end of this section). While they all return the same result, they get to that result in slightly different ways and serve to introduce some of the specifics of the `SELECT` syntax:
+
  Select everything from `h2o_feet` with `*`:
  ```sql
  > SELECT * FROM h2o_feet
@@ -95,12 +98,12 @@ The following three examples return everything from the measurement `h2o_feet` (
  Select everything from `h2o_feet` by fully qualifying the measurement:
  ```sql
  > SELECT * FROM NOAA_water_database."default".h2o_feet
- ``` 
+ ```
 * Fully qualify a measurement if you wish to query data from a different database or from a retention policy other than the default [retention policy](/influxdb/v0.9/concepts/glossary/#retention-policy). A fully qualified measurement takes the following form:  
 ```
 "<database>"."<retention policy>"."<measurement>"
  ```
- 
+
 The CLI response for all three queries:
  ```
 name: h2o_feet
@@ -157,7 +160,7 @@ time
 
 ### The `WHERE` clause
 ---
-Use a `WHERE` clause to filter your data based on tags, time ranges, and/or field values. 
+Use a `WHERE` clause to filter your data based on tags, time ranges, and/or field values.
 
 **Tags**  
 Return data where the tag key `location` has the tag value `santa_monica`:  
@@ -166,7 +169,7 @@ Return data where the tag key `location` has the tag value `santa_monica`:
 ```
 * Always single quote tag values in queries - they are strings. Note that double quotes do not work when specifying tag values and can cause queries to silently fail.   
 
-> **Note:** Tags are indexed so queries on tag keys or tag values are highly performant. 
+> **Note:** Tags are indexed so queries on tag keys or tag values are highly performant.
 
 Return data where the tag key `location` has no tag value (more on regular expressions [later](/influxdb/v0.9/query_language/data_exploration/#regular-expressions-in-queries)):
 ```sql
@@ -195,11 +198,11 @@ Return data where the tag key `location` has the tag value `santa_monica` and th
 ```
 * Always single quote field values that are strings. Note that double quotes do not work when specifying string field values and can cause queries to silently fail.
 
-> **Note:** Fields are not indexed so queries on field keys or field values are not performant. 
+> **Note:** Fields are not indexed so queries on field keys or field values are not performant.
 
 More on the `WHERE` clause in InfluxQL:
 
-* The `WHERE` clause supports comparisons against regular expressions, strings, booleans, floats, integers, and against the `time` of the timestamp. 
+* The `WHERE` clause supports comparisons against regular expressions, strings, booleans, floats, integers, and against the `time` of the timestamp.
 * Chain logic together using `AND`  and `OR`, and separate using `(` and `)`.
 * Acceptable comparators include:  
 `=` equal to  
@@ -212,7 +215,7 @@ More on the `WHERE` clause in InfluxQL:
 
 ## The GROUP BY clause
 
-Use the `GROUP BY` clause to group data by tags and/or time intervals. To successfully implement `GROUP BY`,  append the`GROUP BY` clause to a `SELECT` statement and pair the `SELECT` statement with one of InfluxQL's [functions](/influxdb/v0.9/query_language/functions/). 
+Use the `GROUP BY` clause to group data by tags and/or time intervals. To successfully implement `GROUP BY`,  append the`GROUP BY` clause to a `SELECT` statement and pair the `SELECT` statement with one of InfluxQL's [functions](/influxdb/v0.9/query_language/functions/).
 
 > **Note:** If your query includes both a `WHERE` clause and a `GROUP BY` clause, the `GROUP BY` clause must come after the `WHERE` clause.
 
@@ -269,7 +272,7 @@ time			               count
 2015-09-18T00:00:00Z	 165
 ```
 
-Notice that each timestamp represents a two day interval and that the value in the `count` field is the number of `water_level` points that occurred in that two day interval. You could get the same results by querying the data 17 times - that is, one `COUNT()` query for every two days between August 18, 2015 at midnight and September 18 at 5:00pm - but that could take a while. 
+Notice that each timestamp represents a two day interval and that the value in the `count` field is the number of `water_level` points that occurred in that two day interval. You could get the same results by querying the data 17 times - that is, one `COUNT()` query for every two days between August 18, 2015 at midnight and September 18 at 5:00pm - but that could take a while.
 
 
 Other things to note about `GROUP BY time()`:
@@ -351,6 +354,134 @@ time			mean
 
 > **Note:** If you're `GROUP(ing) BY` several things (for example, both tags and a time interval) `fill()` must go at the end of the `GROUP BY` clause.
 
+## The INTO clause
+### Relocate data
+Copy data to another database, retention policy, and measurement with the `INTO` clause:
+```sql
+SELECT <field_key> INTO <different_measurement> FROM <current-measurement> [WHERE <stuff>] [GROUP BY <stuff>]
+```
+
+Write the field `water_level` in `h2o_feet` to a new measurement (`h2o_feet_copy`) in the same database:
+```sql
+> SELECT water_level INTO h2o_feet_copy FROM h2o_feet WHERE location = 'coyote_creek'
+```
+
+The CLI response shows the number of points that InfluxDB wrote to `h2o_feet_copy`:
+```
+name: result
+------------
+time			               written
+1970-01-01T00:00:00Z	 7604
+```
+
+Write the field `water_level` in `h2o_feet` to a new measurement (`h2o_feet_copy`) and to the retention policy `default` in the database `where_else`:
+```sql
+> SELECT water_level INTO where_else."default".h2o_feet_copy FROM h2o_feet WHERE location = 'coyote_creek'
+```
+
+CLI response:
+```sh
+name: result
+------------
+time			               written
+1970-01-01T00:00:00Z	 7604
+```
+
+> **Note**: If you use `SELECT *` with `INTO`, the query converts tags in the current measurement to fields in the new measurement. This can cause InfluxDB to overwrite points that were previously differentiated by a tag value. Use `GROUP BY <tag_key>` to preserve tags as tags.
+
+### Downsample data
+Combine the `INTO` clause with an InfluxQL [function](/influxdb/v0.9/query_language/functions/) and a `GROUP BY` clause to write the lower precision query results to a different measurement:
+```sql
+SELECT <function>(<field_key>) INTO <different_measurement> FROM <current-measurement> WHERE <stuff> GROUP BY <stuff>
+```
+
+> **Note:** The `INTO` queries in this section downsample old data, that is, data that have already been written to InfluxDB. If you want InfluxDB to automatically query and downsample all future data see [Continuous Queries](/influxdb/v0.9/query_language/continuous_queries/).
+
+Calculate the average `water_level` in `santa_monica`, and write the results to a new measurement (`average`) in the same database:
+```sql
+> SELECT mean(water_level) INTO average FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
+```
+
+The CLI response shows the number of points that InfluxDB wrote to the new measurement:
+```sh
+name: result
+------------
+time			               written
+1970-01-01T00:00:00Z	 3
+```
+
+To see the query results, select everything from the new measurement `average` in `NOAA_water_database`:
+```sh
+> SELECT * FROM average
+name: average
+-------------
+time			               mean
+2015-08-18T00:00:00Z	 2.09
+2015-08-18T00:12:00Z	 2.077
+2015-08-18T00:24:00Z	 2.0460000000000003
+```
+
+Calculate the average `water_level` and the max `water_level` in `santa_monica`, and write the results to a new measurement (`aggregates`) in a different database (`where_else`):
+```sql
+> SELECT mean(water_level), max(water_level) INTO where_else."default".aggregates FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
+```
+
+CLI response:
+```sh
+name: result
+------------
+time			               written
+1970-01-01T00:00:00Z	 3
+```
+
+Select everything from the new measurement `aggregates` in the database `where_else`:
+```sh
+> SELECT * FROM where_else."default".aggregates
+name: aggregates
+----------------
+time			               max	   mean
+2015-08-18T00:00:00Z	 2.116	 2.09
+2015-08-18T00:12:00Z	 2.126	 2.077
+2015-08-18T00:24:00Z	 2.051	 2.0460000000000003
+```
+
+Calculate the average `degrees` for all temperature measurements (`h2o_temperature` and `average_temperature`) in the `NOAA_water_database` and write the results to new measurements with the same names in a different database (`where_else`). `:MEASUREMENT` tells InfluxDB to write the query results to measurements with the same names as those targeted by the query:
+```sql
+> SELECT mean(degrees) INTO where_else."default".:MEASUREMENT FROM /temperature/ WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
+```
+
+CLI response:
+```sh
+name: result
+------------
+time			               written
+1970-01-01T00:00:00Z	 6
+```
+
+Select the `mean` field from all new temperature measurements in the database `where_else`.
+```sh
+> SELECT mean FROM where_else."default"./temperature/
+name: average_temperature
+-------------------------
+time			               mean
+2015-08-18T00:00:00Z	 78.5
+2015-08-18T00:12:00Z	 84
+2015-08-18T00:24:00Z	 74.75
+
+
+name: h2o_temperature
+---------------------
+time			                mean
+2015-08-18T00:00:00Z	  63.75
+2015-08-18T00:12:00Z	  63.5
+2015-08-18T00:24:00Z	  63.5
+```
+
+More on downsampling with `INTO`:
+
+* InfluxDB does not store null values. Depending on the frequency of your data, the query results may be missing time intervals. Use [fill()](/influxdb/v0.9/query_language/data_exploration/#the-group-by-clause-and-fill) to ensure that every time interval appears in the results.
+* The number of writes in the CLI response includes one write for every time interval in the query's time range even if there is no data for some of the time intervals.
+
 ## Limit query returns with LIMIT and SLIMIT
 InfluxQL supports two different clauses to limit your query results. Currently, they are mutually exclusive so you may use one or the other, but not both in the same query.
 
@@ -389,7 +520,7 @@ time			              water_level
 
 ### Limit the number of series returned with `SLIMIT`
 ---
-Use `SLIMIT <N>` with `SELECT` and `GROUP BY *` to return every point from N [series](/influxdb/v0.9/concepts/glossary/#series). 
+Use `SLIMIT <N>` with `SELECT` and `GROUP BY *` to return every point from N [series](/influxdb/v0.9/concepts/glossary/#series).
 
 Return everything from one of the series associated with the measurement `h2o_feet`:
 ```sql
@@ -523,7 +654,7 @@ Separate multiple statements in a query with a semicolon. For example:
 
 ## Merge series in queries
 
-In InfluxDB, queries merge series automatically. 
+In InfluxDB, queries merge series automatically.
 
 The `NOAA_water_database` database has two [series](/influxdb/v0.9/concepts/glossary/#series). The first series is made up of the measurement `h2o_feet` and the tag key `location` with the tag value `coyote_creek`. The second series is made of up the measurement `h2o_feet` and the tag key `location` with the tag value `santa_monica`.
 
@@ -558,11 +689,11 @@ time			              mean
 
 ## Time syntax in queries  
 InfluxDB is a time series database so, unsurprisingly, InfluxQL has a lot to do with specifying time ranges. If you do not specify start and end times in your query, they default to epoch 0 (`1970-01-01T00:00:00Z`) and `now()`. The following sections detail how to specify different start and end times in queries.
- 
+
 ### Relative time
 ---
 `now()` is the Unix time of the server at the time the query is executed on that server. Use `now()` to calculate a timestamp relative to the server's
-current timestamp. 
+current timestamp.
 
 Query data starting an hour ago and ending `now()`:
 ```sql
@@ -594,7 +725,7 @@ The following two queries query data between August 18, 2015 23:00:01.232000000 
 
 ```sql
 > SELECT water_level FROM h2o_feet WHERE time > '2015-08-18 23:00:01.232000000' AND time < '2015-09-19'
-``` 
+```
 ```sql
 > SELECT water_level FROM h2o_feet WHERE time > '2015-08-18T23:00:01.232000000Z' AND time < '2015-09-19'
 ```
@@ -773,5 +904,3 @@ time			               level description	    location	     water_level
 ```
 
 See [the WHERE clause](/influxdb/v0.9/query_language/data_exploration/#the-where-clause) section for an example of how to return data where a tag key has a value and an example of how to return data where a tag key has no value using regular expressions.
-
-
