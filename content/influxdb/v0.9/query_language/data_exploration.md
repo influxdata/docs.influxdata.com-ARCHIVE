@@ -445,7 +445,7 @@ time			               max	   mean
 2015-08-18T00:24:00Z	 2.051	 2.0460000000000003
 ```
 
-Calculate the average `degrees` for all temperature measurements (`h2o_temperature` and `average_temperature`) in the `NOAA_water_database` and write the results to new measurements with the same names in a different database (`where_else`):
+Calculate the average `degrees` for all temperature measurements (`h2o_temperature` and `average_temperature`) in the `NOAA_water_database` and write the results to new measurements with the same names in a different database (`where_else`). `:MEASUREMENT` tells InfluxDB to write the query results to measurements with the same names as those targeted by the query:
 ```sql
 > SELECT mean(degrees) INTO where_else."default".:MEASUREMENT FROM /temperature/ WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
 ```
@@ -458,7 +458,7 @@ time			               written
 1970-01-01T00:00:00Z	 6
 ```
 
-Select the `mean` field from all new temperature measurements in the database `where_else`:
+Select the `mean` field from all new temperature measurements in the database `where_else`.
 ```sh
 > SELECT mean FROM where_else."default"./temperature/
 name: average_temperature
@@ -476,8 +476,6 @@ time			                mean
 2015-08-18T00:12:00Z	  63.5
 2015-08-18T00:24:00Z	  63.5
 ```
-
-An `INTO` query that includes `:MEASUREMENT` writes the query results to measurements with the same names as those targeted by the query.
 
 More on downsampling with `INTO`:
 
