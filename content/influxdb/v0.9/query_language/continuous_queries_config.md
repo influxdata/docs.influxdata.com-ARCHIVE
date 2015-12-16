@@ -9,9 +9,9 @@ menu:
 ## What is a continuous query?
 A continuous query (CQ) is an InfluxQL query that the system periodically executes in batches.
 
-Each batch contains one or more queries where each query covers a single `GROUP BY time()` interval. InfluxDB always generates a query for the current `GROUP BY time()` interval (determined by `now()`) and it generates zero or more queries for recent `GROUP BY time()` intervals.
+Each batch contains one or more queries where each query covers a single `GROUP BY time()` interval. InfluxDB always generates a query for the current `GROUP BY time()` interval (the one containing `now()`) and it generates zero or more queries for recent `GROUP BY time()` intervals.
 
-The time ranges of the generated queries have round-number boundaries. For example, if the CQ's `GROUP BY time()` interval is 30 minutes long, the queries' start and end times (in `MM:SS`) are always `00:00` or `30:00`.
+The time ranges of the generated queries have round-number boundaries. For example, if the CQ's `GROUP BY time()` interval is 30 minutes long, the start and end times for each query (in `MM:SS`) are always `00:00` or `30:00`.
 
 ## The CQ schedule
 The rate at which InfluxDB generates batches of queries and the number of queries generated per batch depend on the CQ's `GROUP BY time()` interval and on the following configuration options (shown with their default settings):
@@ -27,16 +27,16 @@ InfluxDB compares `compute-runs-per-interval` and `compute-no-more-than` to dete
 
 In the default settings, InfluxDB generates batches for a CQ as often as  `10` times per the `GROUP BY time()` interval. However, it will not generate batches more often than every two minutes, regardless of the value of `GROUP BY  time()` divided by 10.
 
-For example, if the CQ has a `30m` `GROUP BY time()` interval, then `compute-runs-per-interval` sets a maximum batch frequency of `3m`, since `30m` / 10 = `3m`. This is less frequent than the maximum frequency of `2m`, as set by `compute-no-more-than`, so the system generates a batch of that CQ every `3m`.
+For example, if the CQ has a `GROUP BY time(30m)` interval, then `compute-runs-per-interval` sets a maximum batch frequency of `3m`, since `30m` / 10 = `3m`. This is less frequent than the maximum frequency of `2m`, as set by `compute-no-more-than`, so the system generates a batch of that CQ every `3m`.
 
-If the CQ has a `30s` `GROUP BY time()` interval, then `compute-runs-per-interval` sets a maximum batch frequency of `3s`, since `30s` / 10 = `3s`. However, `compute-no-more-than` takes precedence and thus the system generates batches every `2m`.
+If the CQ has a `GROUP BY time(30s)` interval, then `compute-runs-per-interval` sets a maximum batch frequency of `3s`, since `30s` / 10 = `3s`. However, `compute-no-more-than` takes precedence and thus the system generates batches every `2m`.
 
 ### Number of queries per batch
 InfluxDB uses `recompute-previous-n` and `recompute-no-older-than` to determine the number queries generated per batch for a CQ. All batches include at least one generated query with the time range that spans `now()`. The maximum number of additional queries with time ranges that span intervals prior to `now()` is determined by `recompute-previous-n`. Therefore `recompute-previous-n` + 1 is the maximum number of queries per batch. `recompute-no-older-than` puts a limit on the age of the previous query interval, such that the upper boundary  of each generated query must be greater than `now()` - `recompute-no-older-than`. `recompute-no-older-than` takes precedence over `recompute-previous-n`.
 
 In the default settings, InfluxDB generates at most three queries per batch: one spanning `now()` and up to two queries spanning older time intervals, as set by `recompute-previous-n`. In addition, the upper boundary of the query time range for each generated query must be less than `10m` in the past.
 
-For example, if the CQ has a `30s` `GROUP BY time()` interval, then InfluxDB generates three queries for each batch. However, if the CQ has a `30m` `GROUP BY time` interval, then InfluxDB generates only one or two queries for a given batch, since the third query would have an upper boundary at least `30m` in the past, which exceeds the `recompute-no-older-than` setting.
+For example, if the CQ has a `GROUP BY time(30s)` interval, then InfluxDB generates three queries for each batch. However, if the CQ has a `GROUP BY time(30m)` interval, then InfluxDB generates only one or two queries for a given batch, since the third query would have an upper boundary at least `30m` in the past, which exceeds the `recompute-no-older-than` setting.
 
 Depending on your CQ's `GROUP BY time()` interval you may want to make changes to the default configuration settings. The next sections present example CQs and discuss how they work with the configuration options:
 
@@ -65,7 +65,7 @@ Default configuration settings:
 
 *InfluxDB generates 3 queries per batch of CQ 1.*
 
-InfluxDB generates one query that spans `now()` and two additional queries that span older time intervals because `recompute-no-older-than` (`10m`) always falls within the time range covered by `recompute-previous-n` (`2` intervals * `4m` = `8m`).
+InfluxDB generates one query that spans `now()` and two additional queries that span older time intervals because `recompute-no-older-than=10m` always exceeds the recent time range covered by `recompute-previous-n=2`: `2` intervals * `4m` = `8m`, which is less than the `10m` maximum.
 
 ### CQ 1 in practice
 A sample of CQ 1's frequency of batch creation and the number of queries per batch on 2015/11/24 starting at 18:19:45 (UTC):
@@ -87,7 +87,7 @@ SELECT MEAN(value) INTO "telegraf"."default".cq_4m FROM "telegraf"."default".cpu
 SELECT MEAN(value) INTO "telegraf"."default".cq_4m FROM "telegraf"."default".cpu_usage_idle WHERE cpu = 'cpu-total' AND time >= '2015-11-24T18:12:00Z' AND time < '2015-11-24T18:16:00Z' GROUP BY time(4m)
 ```
 
-In both cases, the first query has the relevant time range that spans `now()`: 18:19:45 falls within the four minute interval between 18:16:00 and 18:20:00, and 18:21:45 falls within the four minute interval between 18:20:00 and 18:24:00. The second two queries span older four minute time intervals. Notice that the queries that cover the time ranges 18:16:00 through 18:20:00 and 18:12:00 through 18:16:00 appear in both the first batch of generated queries and in the second batch of generated queries.  
+In both cases, the first query has the relevant time range that spans `now()`: 18:19:45 falls within the four minute interval between 18:16:00 and 18:20:00, and 18:21:45 falls within the four minute interval between 18:20:00 and 18:24:00. The second two queries span older four minute time intervals. Notice that the queries that cover the time ranges 18:16:00 through 18:20:00 and 18:12:00 through 18:16:00 appear in both the first batch of generated queries and in the second batch of generated queries. The more recent CQ results overwrite previously calculated values. This ensures that if data points arrive with a timestamp a few minutes in the past they are still incorporated into the CQ results.  
 
 ## CQ 2: 30 second `GROUP BY time()` interval
 ### Create CQ 2
@@ -109,7 +109,7 @@ Default configuration settings:
 
 *InfluxDB generates 3 queries per batch of CQ 2.*
 
-InfluxDB generates one query that spans `now()` and two additional queries that span older time intervals because `recompute-no-older-than` (`10m`) always falls within the time range covered by `recompute-previous-n` (`2` intervals * `30s` = `1m`).
+InfluxDB generates one query that spans `now()` and two additional queries that span older time intervals because `recompute-no-older-than=10m` always exceeds the recent time range covered by `recompute-previous-n=2`: `2` intervals * `30s` = `1m`, which is less than the `10m` maximum.
 
 ### CQ 2 in practice
 A sample of CQ 2’s frequency of batch creation and the number of queries per batch on 2015/11/24 starting at 19:41:17 (UTC):
@@ -133,12 +133,14 @@ SELECT MEAN(value) INTO "telegraf"."default".cq_30s FROM "telegraf"."default".cp
 
 In both cases, the first query has the revelant time range that spans `now()`: 19:41:17 falls within the 30 second interval between 19:41:00 and 19:41:30, and 19:43:17 falls within the 30 second interval between 19:43:00 and 19:43:30. The second two queries span older 30 second time intervals.
 
-Because of CQ 2's small `GROUP BY time()` interval, leaving the default configuration settings as is causes InfluxDB to skip a 30 second interval. In the example above, the system never queries the time range between 19:41:30 and 19:42:00. The next two sections offer different ways to solve the missing interval problem.
+Because of CQ 2's small `GROUP BY time()` interval, leaving the default configuration settings as-is causes InfluxDB to skip a 30 second interval. In the example above, the system never queries the time range between 19:41:30 and 19:42:00. The next two sections offer different ways to solve the missing interval problem.
 
 ### Change the frequency of batch creation
-New configuration settings:  
-`compute-runs-per-interval = 10`  
-`compute-no-more-than = "1m30s"`  
+New (✨) configuration settings:  
+`compute-runs-per-interval = 10 #✨`   
+`compute-no-more-than = "1m30s" #✨`   
+`recompute-previous-n = 2`  
+`recompute-no-older-than = "10m0s"`
 
 *InfluxDB now generates batches of CQ 2 every 1.5 minutes.*
 
@@ -166,13 +168,15 @@ SELECT MEAN(value) INTO "telegraf"."default".cq_30s FROM "telegraf"."default".cp
 Notice that because of the new frequency of batch creation, InfluxDB no longer misses the query that covers the time range from 19:41:30 through 19:42:00.
 
 ### Change the number of queries per batch
-New configuration settings:    
-`recompute-previous-n = 3`  
-`recompute-no-older-than = "10m0s"`  
+New (✨) configuration settings:  
+`compute-runs-per-interval = 10`  
+`compute-no-more-than = "2m0s"`    
+`recompute-previous-n = 3 #✨`  
+`recompute-no-older-than = "10m0s" #✨`  
 
 *InfluxDB generates 4 queries per batch of CQ 2.*
 
-InfluxDB generates one query that spans `now()` and three additional queries that span older time intervals because `recompute-no-older-than` (`10m`) always falls within the time range covered by `recompute-previous-n` (`3` intervals * `30s` = `1.5m`).
+InfluxDB generates one query that spans `now()` and three additional queries that span older time intervals because `recompute-no-older-than=10m` always exceeds the recent time range covered by `recompute-previous-n=3`: `3` intervals * `30s` = `1.5m`, which is less than the `10m` maximum.
 
 Now a sample of CQ 2’s frequency of batch creation and the number of queries per batch on 2015/11/24 starting at 19:41:17 (UTC) looks like this:
 
@@ -241,14 +245,16 @@ At 22:15:55, InfluxDB generates only one query. That query covers the time range
 
 If you have lagged data, generating, at most, one query for a previous interval may not take into account all of your data. The next section offers one way to adjust the configuration settings so that a query batch always includes a query for one previous time interval.
 
-### Change the number of previous intervals queried
-New configuration settings:  
-`recompute-previous-n = 1`  
-`recompute-no-older-than = 120m0s`  
+### Change the number queries per batch
+New (✨) configuration settings:  
+`compute-runs-per-interval = 10`  
+`compute-no-more-than = "2m0s"`   
+`recompute-previous-n = 1 #✨`  
+`recompute-no-older-than = 120m0s #✨`  
 
 *InfluxDB generates 2 queries per batch of CQ 3.*
 
-InfluxDB generates one query that spans `now()` and one additional query that spans an older time interval because `recompute-no-older-than` (`120m`) always falls within the time range covered by `recompute-previous-n` (`1` intervals * `1h` = `60m`).
+InfluxDB generates one query that spans `now()` and one additional query that spans an older time interval because `recompute-no-older-than=120m` always exceeds the recent time range covered by `recompute-previous-n=1`: `1` interval * `1h` = `60m`, which is less than the `120m` maximum.
 
 Now, a sample of CQ 3’s frequency of batch creation and the number of queries per batch on 2015/11/24 starting at 22:09:55 (UTC) looks like this:
 
