@@ -358,7 +358,7 @@ time			mean
 ### Relocate data
 Copy data to another database, retention policy, and measurement with the `INTO` clause:
 ```sql
-SELECT <field_key> INTO <different_measurement> FROM <current-measurement> [WHERE <stuff>] [GROUP BY <stuff>]
+SELECT <field_key> INTO <different_measurement> FROM <current_measurement> [WHERE <stuff>] [GROUP BY <stuff>]
 ```
 
 Write the field `water_level` in `h2o_feet` to a new measurement (`h2o_feet_copy`) in the same database:
