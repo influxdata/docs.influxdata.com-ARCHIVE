@@ -156,9 +156,9 @@ h2o_quality,location=coyote_creek,randtag=3	   coyote_creek	   3
 ```
 
 ## Explore measurements with `SHOW MEASUREMENTS`
-The `SHOW MEASUREMENTS` query returns all [measurements](/influxdb/v0.9/concepts/glossary/#measurement) in your database and it takes the following form, where the `WHERE` clause is optional:
+The `SHOW MEASUREMENTS` query returns the [measurements](/influxdb/v0.9/concepts/glossary/#measurement) in your database and it takes the following form:
 ```sql
-SHOW MEASUREMENTS [WHERE <tag_key>=<'tag_value'>]
+SHOW MEASUREMENTS [WITH MEASUREMENT <regular_expression>] [WHERE <tag_key>=<'tag_value'>]
 ```
 
 Return all measurements in the `NOAA_water_database` database:
@@ -206,6 +206,22 @@ name: measurements
 ------------------
 name
 h2o_quality
+```
+
+Use a regular expression with `WITH MEASUREMENT` to return all measurements that start with `h2o`:
+```sql
+> SHOW MEASUREMENTS WITH MEASUREMENT =~ /h2o.*/
+```
+
+CLI response:
+```sh
+name: measurements
+------------------
+name
+h2o_feet
+h2o_pH
+h2o_quality
+h2o_temperature
 ```
 
 ## Explore tag keys with SHOW TAG KEYS

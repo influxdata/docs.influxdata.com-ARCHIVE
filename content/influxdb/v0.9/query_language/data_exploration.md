@@ -169,7 +169,7 @@ Return data where the tag key `location` has the tag value `santa_monica`:
 ```
 * Always single quote tag values in queries - they are strings. Note that double quotes do not work when specifying tag values and can cause queries to silently fail.   
 
-> **Note:** Tags are indexed so queries on tag keys or tag values are highly performant.
+> **Note:** Tags are indexed so queries on tag keys or tag values are more performant than queries on fields.
 
 Return data where the tag key `location` has no tag value (more on regular expressions [later](/influxdb/v0.9/query_language/data_exploration/#regular-expressions-in-queries)):
 ```sql
@@ -198,11 +198,11 @@ Return data where the tag key `location` has the tag value `santa_monica` and th
 ```
 * Always single quote field values that are strings. Note that double quotes do not work when specifying string field values and can cause queries to silently fail.
 
-> **Note:** Fields are not indexed so queries on field keys or field values are not performant.
+> **Note:** Fields are not indexed; queries on fields are not as performant as those on tags.
 
 More on the `WHERE` clause in InfluxQL:
 
-* The `WHERE` clause supports comparisons against regular expressions, strings, booleans, floats, integers, and against the `time` of the timestamp.
+* The `WHERE` clause supports comparisons against strings, booleans, floats, integers, and against the `time` of the timestamp. It supports using regular expressions to match tags, but not to match fields.
 * Chain logic together using `AND`  and `OR`, and separate using `(` and `)`.
 * Acceptable comparators include:  
 `=` equal to  
@@ -392,7 +392,7 @@ time			               written
 ### Downsample data
 Combine the `INTO` clause with an InfluxQL [function](/influxdb/v0.9/query_language/functions/) and a `GROUP BY` clause to write the lower precision query results to a different measurement:
 ```sql
-SELECT <function>(<field_key>) INTO <different_measurement> FROM <current-measurement> WHERE <stuff> GROUP BY <stuff>
+SELECT <function>(<field_key>) INTO <different_measurement> FROM <current_measurement> WHERE <stuff> GROUP BY <stuff>
 ```
 
 > **Note:** The `INTO` queries in this section downsample old data, that is, data that have already been written to InfluxDB. If you want InfluxDB to automatically query and downsample all future data see [Continuous Queries](/influxdb/v0.9/query_language/continuous_queries/).
@@ -745,7 +745,7 @@ Return all points that occur after  `2014-01-01 00:00:00`:
 
 Regular expressions are surrounded by `/` characters and use [Golang's regular expression syntax](http://golang.org/pkg/regexp/syntax/). Use regular expressions when selecting measurements and tags.
 
->**Note:** You cannot use regular expressions to match databases, retention policies, or fields. You can only use regular expressions to match measurements and tags
+>**Note:** You cannot use regular expressions to match databases, retention policies, or fields. You can only use regular expressions to match measurements and tags.
 
 The [sample data](/influxdb/v0.9/query_language/data_exploration/#sample-data) need to be more intricate for the following sections. Assume that the database `NOAA_water_database` now holds several measurements: `h2o_feet`, `h2o_quality`, `h2o_pH`, `average_temperature`, and `h2o_temperature`. Please note that every measurement besides `h2o_feet` is fictional and contains fictional data.
 
