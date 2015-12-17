@@ -137,7 +137,7 @@ If no `-config` option is supplied, InfluxDB will use an internal default config
 
 > Note: The `influxd` command has two similarly named flags. The `config` flag prints a generated default configuration file to STDOUT but does not launch the `influxd` process. The `-config` flag takes a single argument, which is the path to the InfluxDB configuration file to use when launching the process.
 
-The `config` and `-config` flags can be combined to output the union of the internal default configuration and the configuration file passed to `-config`. The options specificed in the configuration file will overwrite any internally generated configuration.
+The `config` and `-config` flags can be combined to output the union of the internal default configuration and the configuration file passed to `-config`. The options specified in the configuration file will overwrite any internally generated configuration.
 
 ```shell
 influxd config -config /etc/influxdb/influxdb.partial.conf
