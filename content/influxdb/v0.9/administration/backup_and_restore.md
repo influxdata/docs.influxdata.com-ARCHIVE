@@ -24,7 +24,7 @@ By default, this can only be run from the data node itself. See configuration op
 To capture a backup from a remote node, specify the host and port using the -host configuration switch:
 
 ```sh
-$ influxd backup -host 10.0.0.0:8808 /tmp/mysnapshot
+$ influxd backup -host 10.0.0.0:8088 /tmp/mysnapshot
 ```
 
 Once you have your snapshot file, you can copy it to another machine and restore it. Be sure to first shut down any running influxd process
