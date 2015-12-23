@@ -201,7 +201,7 @@ time			               count
 ```
 
 ## Missing data after creating a new `DEFAULT` retention policy
-When you create a new `DEFAULT` retention policy (RP) on a database, the data written to the old `DEFAULT` RP remain in the old RP. Queries that do not specify an RP automatically query the new `DEFAULT` RP so the old data may appear to be missing. To query the old data you must fully qualify the relevant data in the query.
+When you create a new `DEFAULT` retention policy (RP) on a database, the data written to the old `DEFAULT` RP remain in the old RP. Queries that do not specify a RP automatically query the new `DEFAULT` RP so the old data may appear to be missing. To query the old data you must fully qualify the relevant data in the query.
 
 Example:
 
