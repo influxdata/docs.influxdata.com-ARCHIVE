@@ -8,181 +8,139 @@ menu:
     parent: tools
 ---
 
-The Influx shell is an interactive shell for InfluxDB, and is part of all InfluxDB distributions starting with the InfluxDB 0.9.0. The shell is not compatible with InfluxDB 0.8 and earlier. If you install InfluxDB via a package manager, the shell is installed at `/usr/bin/influx` (`/usr/local/bin/influx` on OS X).
+The InfluxDB's command line interface (`influx`) is an interactive shell for the database, and is part of all InfluxDB distributions starting with version 0.9.0. Use `influx` to write data (manually or from a file), query data interactively, and view query output in different formats.
 
-## Shell Arguments
+* [Launch `influx`](/influxdb/v0.9/tools/shell/#launch-influx)
+* [`influx` Arguments](/influxdb/v0.9/tools/shell/#influx-arguments)
+* [`influx` Commands](/influxdb/v0.9/tools/shell/#influx-commands)
 
-There are several arguments you can pass into the shell when starting.  You can list them by passing in `--help` to get the following results:
+## Launch `influx`
+If you [install](https://influxdata.com/downloads/) InfluxDB via a package manager, the CLI is installed at `/usr/bin/influx` (`/usr/local/bin/influx` on OS X).
 
-```sh
-$ influx --help
-Usage of influx:
-  -version
-       Display the version and exit.
-  -host 'host name'
-       Host to connect to.
-  -port 'port #'
-       Port to connect to.
-  -database 'database name'
-       Database to connect to the server.
-  -password 'password'
-      Password to connect to the server.  Leaving blank will prompt for password (--password '')
-  -username 'username'
-       Username to connect to the server.
-  -execute 'command'
-       Execute command and quit.
-  -format 'json|csv|column'
-       Format specifies the format of the server responses:  json, csv, or column.
-  -pretty
-       Turns on pretty print for the json format.
-
-Examples:
-
-    # Use influx in a non-interactive mode to query the database "metrics" and pretty print json
-    $ influx -database 'metrics' -execute 'select * from cpu' -format 'json' -pretty
-
-    # Dumping out your data
-    $ influx  -database 'metrics' -dump
-
-    # Connect to a specific database on startup and set database context
-    $ influx -database 'metrics' -host 'localhost' -port '8086'
-```
-
-## Shell Commands
-
-Once you have entered the shell, and successfully connecting to an InfluxDB node, you will see the following output:
-
+Access the CLI by starting the `influxd` process and entering `influx` in your terminal. Once you've entered the shell and successfully connected to an InfluxDB node, you'll see the following output:
+<br>
+<br>
 ```sh
 $ influx
-Connected to http://localhost:8086 version 0.9
-InfluxDB shell 0.9
+Connected to http://localhost:8086 version 0.9.x
+InfluxDB shell 0.9.x
 ```
 
-### Getting Help
+## `influx` Arguments
+There are several arguments you can pass into `influx` when starting. List them with `$ influx --help`. The list below offers a brief discussion of each option. We provide detailed information on `-execute`, `-format`, and `-import` at the end of this section.
 
-To see a partial list of commands, you can type `help` and see the following:
+`-compressed`  
+Set to true if the import file is compressed. Use with `-import`.
 
+`-consistency 'any|one|quorum|all'`  
+Set the write consistency level.
+
+`-database 'database name'`  
+The database to connect to.
+
+`-execute 'command'`  
+Execute an [InfluxQL](/influxdb/v0.9/query_language/data_exploration/) command and quit. See [-execute](/influxdb/v0.9/tools/shell/#execute-an-influxql-command-and-quit-with-execute).
+
+`-format 'json|csv|column'`  
+Specifies the format of the server responses. See [-format](/influxdb/v0.9/tools/shell/#specify-the-format-of-the-server-responses-with-format).
+
+`-host 'host name'`  
+Host to connect to. By default, InfluxDB runs on localhost.
+
+`-import`  
+Import new data from a file or import a previously [exported](https://github.com/influxdb/influxdb/blob/master/importer/README.md) database from a file. See [-import](/influxdb/v0.9/tools/shell/#import-data-from-a-file-with-import).
+
+`-password 'password'`  
+Password to connect to the server. `influx` will prompt for a password if you leave it blank (`-password ''`).
+
+`-path`  
+The path to the file to import. Use with `-import`.
+
+`-port 'port #'`  
+Port to connect to. By default, InfluxDB runs on port `8086`.
+
+`-pps`  
+How many points per second the import will allow. By default, pps is zero and influx will not throttle importing. Use with `-import`.
+
+`-precision 'h|m|s|ms|u|ns'`  
+Specifies the precision of the timestamp: `h` (hours), `m` (minutes), `s` (seconds), `ms` (milliseconds), `u` (microseconds), `ns` (nanoseconds). Precision defaults to nanoseconds.
+
+`-pretty`  
+Turns on pretty print for the `json` format.
+
+`-ssl`  
+Use https for requests.
+
+`-username 'username'`  
+Username to connect to the server.
+
+`-version`  
+Display the InfluxDB version and exit.
+
+### Execute an InfluxQL command and quit with `-execute`
+Execute queries that don't require a database specification:
 ```sh
-> help
-Usage:
-        connect <host:port>   connect to another node
-        auth                  prompt for username and password
-        pretty                toggle pretty print
-        use <db_name>         set current databases
-        format <format>       set the output format: json, csv, or column
-        settings              output the current settings for the shell
-        exit                  quit the influx shell
-
-        show databases        show database names
-        show series           show series information
-        show measurements     show measurement information
-        show tag keys         show tag key information
-        show tag values       show tag value information
-
-        a full list of influxql commands can be found at:
-        http://influxdb.com/docs
-```
-
-### connect
-
-Connect allows you to connect to a different server without exiting the shell.
-
-```sh
-> connect localhost:8087
-Connected to http://localhost:8087 version 0.9
-```
-
-You do not need specify both parts of the server.  For example,
-if your current host is `localhost:8086`, the following command:
-
-```sh
-> connect :8087
-```
-
-will try to connect to `localhost:8087`.
-
-If you specify only the `host` and not the `port`, port `8086` (the default port)
-is always assumed.
-
-### auth
-
-The `auth` command will prompt you for a username and password,
-and use those credentials when querying the database.
-
-### settings
-
-Settings will output the current state of the shell.
-
-```sh
-> settings
-Host            localhost:8086
-Username
-Database        foo
-Pretty          false
-Format          csv
-```
-
-### Issuing Queries
-
-For a complete reference to the query language, please read the [online documentation](/docs/v0.9/query_language/querying_data.html).
-
-#### show databases
-
-```sh
-> show databases
+$ influx -execute 'SHOW DATABASES'
 name: databases
 ---------------
 name
-foo
+NOAA_water_database
+_internal
+telegraf
+pirates
 ```
 
-#### Setting a default database to query from
-
-You can set the `context` of all your queries in the CLI to a specific database with the `use` command.
-This will allow you to not have to specify the database for each query.  They query engine will then default
-to using the default retention policy for that database.
-
+Execute queries that do require a database specification, and change the timestamp precision:
 ```sh
-> use foo
-Using database foo
-> show tag keys
-name: cpu
----------
-tagKey
-
-
-name: names
------------
-tagKey
-
-
-name: sensor
-------------
-tagKey
+$ influx -execute 'SELECT * FROM h2o_feet LIMIT 3' -database=NOAA_water_database -precision=rfc3339
+name: h2o_feet
+--------------
+time			               level description	    location	     water_level
+2015-08-18T00:00:00Z	 below 3 feet		        santa_monica	 2.064
+2015-08-18T00:00:00Z	 between 6 and 9 feet  coyote_creek  8.12
+2015-08-18T00:06:00Z	 between 6 and 9 feet  coyote_creek  8.005
 ```
 
-### format
-
-Format changes the format in which results are displayed in the shell.  Options
-are `column`, `csv`, and `json`.  The default is `column`.
-
+### Specify the format of the server responses with `-format`
+The default format is `column`:
 ```sh
-> format csv
-> show databases
+$ influx -format=column
+[...]
+> SHOW DATABASES
+name: databases
+---------------
+name
+NOAA_water_database
+_internal
+telegraf
+pirates
+```
+
+Change the format to `csv`:
+```sh
+$ influx -format=csv
+[...]
+> SHOW DATABASES
 name,name
-databases,foo
+databases,NOAA_water_database
+databases,_internal
+databases,telegraf
+databases,pirates
 ```
 
-### pretty
-
-Pretty will toggle formatting on the JSON results. This only applies when format
-is set to `json`.
-
+Change the format to `json`:
 ```sh
-> format json
-> pretty
-Pretty print enabled
-> show databases
+$ influx -format=json
+[...]
+> SHOW DATABASES
+{"results":[{"series":[{"name":"databases","columns":["name"],"values":[["NOAA_water_database"],["_internal"],["telegraf"],["pirates"]]}]}]}
+```
+
+Change the format to `json` and turn on pretty print:
+```sh
+$ influx -format=json -pretty
+[...]
+> SHOW DATABASES
 {
     "results": [
         {
@@ -194,7 +152,16 @@ Pretty print enabled
                     ],
                     "values": [
                         [
-                            "foo"
+                            "NOAA_water_database"
+                        ],
+                        [
+                            "_internal"
+                        ],
+                        [
+                            "telegraf"
+                        ],
+                        [
+                            "pirates"
                         ]
                     ]
                 }
@@ -204,76 +171,109 @@ Pretty print enabled
 }
 ```
 
-### exit
+### Import data from a file with `-import`
+The import file has two sections:
 
-Exit will exit the shell
+* **DDL (Data Definition Language)**: Contains the [InfluxQL commands](/influxdb/v0.9/query_language/database_management/) for creating the relevant [database](/influxdb/v0.9/concepts/glossary/) and managing the [retention policy](/influxdb/v0.9/concepts/glossary/#retention-policy-rp). If your database and retention policy already exist, your file can skip this section.
+* **DML (Data Manipulation Language)**: Lists the relevant database and (if desired) retention policy and contains the data in [line protocol](/influxdb/v0.9/write_protocols/line/).
 
-```sh
-exit
+Example:
+
+File (`datarrr.txt`):
+```
+# DDL
+CREATE DATABASE IF NOT EXISTS pirates
+CREATE RETENTION POLICY oneday ON pirates DURATION 1d REPLICATION 1
+
+# DML
+# CONTEXT-DATABASE: pirates
+# CONTEXT-RETENTION-POLICY: oneday
+
+treasures,captain_id=dread_pirate_roberts value=801 1439856000
+treasures,captain_id=flint value=29 1439856000
+treasures,captain_id=sparrow value=38 1439856000
+treasures,captain_id=tetra value=47 1439856000
+treasures,captain_id=crunch value=109 1439858880
 ```
 
-### Executing with arguments
-
-The CLI allows you to execute a query via arguments so you can run commands without having to be in interactive mode.
-
-```sh
-influx -execute="select * from cpu" -database=foo
-name: cpu
----------
-time                    value
-2015-05-01T00:00:00Z    1.1
-2015-05-01T08:00:00Z    1.2
-2015-05-01T16:00:00Z    1.3
+Command:
+```
+$influx -import -path=datarrr.txt -precision=s
 ```
 
-You can combine this with other arguments such as `-format` as well to get different outputs:
-
-```sh
-$ influx -execute="select * from cpu" -database=foo -format=csv
-name,time,value
-cpu,2015-05-01T00:00:00Z,1.1
-cpu,2015-05-01T08:00:00Z,1.2
-cpu,2015-05-01T16:00:00Z,1.3
+Results:
+```
+2015/12/22 12:25:06 Processed 2 commands
+2015/12/22 12:25:06 Processed 5 inserts
+2015/12/22 12:25:06 Failed 0 inserts
 ```
 
-```sh
-$ influx -execute="select * from cpu" -database=foo -format=json
-{"results":[{"series":[{"name":"cpu","columns":["time","value"],"values":[["2015-05-01T00:00:00Z",1.1],["2015-05-01T08:00:00Z",1.2],["2015-05-01T16:00:00Z",1.3],["2015-05-02T00:00:00Z",2.1],["2015-05-02T08:00:00Z",2.2],["2015-05-02T16:00:00Z",2.3],["2015-05-03T00:00:00Z",3.1],["2015-05-03T08:00:00Z",3.2],["2015-05-03T16:00:00Z",3.3],["2015-05-04T00:00:00Z",4.1],["2015-05-04T08:00:00Z",4.2],["2015-05-04T16:00:00Z",4.3]]}]}]}
+> **Note:** For large datasets, `influx` writes out a status message every 100,000 points. For example:
+```
+2015/08/21 14:48:01 Processed 3100000 lines.  Time elapsed: 56.740578415s.  Points per second (PPS): 54634
 ```
 
-```sh
-$ influx -execute="select * from cpu" -database=foo -format=json -pretty=true
-{
-    "results": [
-        {
-            "series": [
-                {
-                    "name": "cpu",
-                    "columns": [
-                        "time",
-                        "value"
-                    ],
-                    "values": [
-                        [
-                            "2015-05-01T00:00:00Z",
-                            1.1
-                        ],
-                        [
-                            "2015-05-01T08:00:00Z",
-                            1.2
-                        ],
-                        [
-                            "2015-05-01T16:00:00Z",
-                            1.3
-                        ]
-                    ]
-                }
-            ]
-        }
-    ]
-}
+Things to note about `-import`:
+
+* Allow the database to ingest points by using `-pps` to set the number of points per second allowed by the import. By default, pps is zero and `influx` does not throttle importing.
+* Imports work with `.gz` files, just include `-compressed` in the command.
+* If your data file has more than 5,000 points, it may be necessary to split that file into several files in order to write your data in batches to InfluxDB. By default, the HTTP request times out after five seconds. InfluxDB will still attempt to write the points after that time out but there will be no confirmation that they were successfully written.
+
+> **Note:** For how to export data from InfluxDB version 0.8.9, see [Exporting from 0.8.9](https://github.com/influxdb/influxdb/blob/master/importer/README.md). The exported data can be imported into InfluxDB versions 0.9.3+ as discussed above.
+
+## `influx` Commands
+Enter `help` in the CLI for a partial list of the available commands.
+
+### Commands
+The list below offers a brief discussion of each command. We provide detailed information on `insert` at the end of this section.
+
+`auth`  
+Prompts you for your username and password. `influx` uses those credentials when querying a database.
+
+`connect <host:port>`  
+Connect to a different server without exiting the shell. By default, `influx` connects to `localhost:8086`. If you do not specify either the host or the port, `influx` assumes the default setting for the missing attribute.
+
+`consistency <level>`  
+Sets the write consistency level: `any`, `one`, `quorum`, or `all`.
+
+`exit`                
+Quits the `influx` shell.
+
+`format <format>`  
+Specifies the format of the server responses: `json`, `csv`, or `column`. See the description of [-format](/influxdb/v0.9/tools/shell/#specify-the-format-of-the-server-responses-with-format) for examples of each format.
+
+`history`  
+Displays your command history. To use the history while in the shell, simply use the "up" arrow. `influx` stores your last 1,000 commands in your home directory in `.influx_history`.
+
+`insert`  
+Write data using line protocol. See [insert](/influxdb/v0.9/tools/shell/#write-data-to-influxdb-with-insert).
+
+`precision <format>`  
+Specifies the format/precision of the timestamp: `rfc3339` (`YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ`), `h` (hours), `m` (minutes), `s` (seconds), `ms` (milliseconds), `u` (microseconds), `ns` (nanoseconds). Precision defaults to nanoseconds.
+
+`pretty`  
+Turns on pretty print for the `json` format.
+
+`settings`  
+Outputs the current settings for the shell including the `Host`, `Username`, `Database`, `Pretty` status, `Format`, and `Write Consistency`.
+
+`use <db_name>`  
+Sets the current database. Once `influx` sets the current database, there is no need to specify that database in queries. `influx` automatically queries the current database and its `DEFAULT` retention policy.
+
+#### Write data to InfluxDB with `insert`
+Enter `insert` followed by the data in [line protocol](/influxdb/v0.9/write_protocols/line/) to write data to InfluxDB.
+
+Write data to a single field the measurement `treasures` with the tag `captain_id = pirate_king`:
+```
+> INSERT treasures,captain_id=pirate_king value=2
+>
 ```
 
-### Command History
+Write data to two fields in the measurement `treasures` with a timestamp:
+```
+> INSERT treasures value=3,weight=89 1434067467000000000
+>
+```
 
-The Influx shell stores that last 1,000 commands in you home directory in a file called `.influx_history`.  To use the history while in the shell, simply use the "up" arrow.
+### Queries
+Execute all InfluxQL queries in `influx`. See [Data Exploration](/influxdb/v0.9/query_language/data_exploration/), [Schema Exploration](/influxdb/v0.9/query_language/schema_exploration/), [Database Management](/influxdb/v0.9/query_language/database_management/), [Authentication and Authorization](/influxdb/v0.9/administration/authentication_and_authorization/) for InfluxQL documentation.
