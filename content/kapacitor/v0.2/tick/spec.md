@@ -5,7 +5,7 @@ menu:
   kapacitor_02:
     name: Specification
     identifier: specification
-    weight: 10
+    weight: 3
     parent: tick
 ---
 

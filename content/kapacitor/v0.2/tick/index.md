@@ -5,7 +5,7 @@ menu:
   kapacitor_02:
     name: TICKscript
     identifier: tick
-    weight: 10
+    weight: 0
 ---
 
 Kapacitor uses a DSL named `TICKscript`.
