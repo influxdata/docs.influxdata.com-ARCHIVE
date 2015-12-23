@@ -242,6 +242,54 @@ time			mean
 ```
 >**Note:** In InfluxDB, [epoch 0](https://en.wikipedia.org/wiki/Unix_time) (`1970-01-01T00:00:00Z`) is often used as a null timestamp equivalent. If you request a query that has no timestamp to return, such as an aggregation function with an unbounded time range, InfluxDB returns epoch 0 as the timestamp.
 
+Calculate the [`MEAN()`](../query_language/functions.html#mean) `index` for every tag set in `h2o_quality`:
+```sql
+> SELECT MEAN(index) FROM h2o_quality GROUP BY *
+```
+CLI response:
+```sh
+name: h2o_quality
+tags: location = coyote_creek, randtag = 1
+time			               mean
+----			               ----
+1970-01-01T00:00:00Z	 50.69033760186263
+
+
+name: h2o_quality
+tags: location = coyote_creek, randtag = 2
+time			               mean
+----			               ----
+1970-01-01T00:00:00Z	 49.661867544220485
+
+
+name: h2o_quality
+tags: location = coyote_creek, randtag = 3
+time			               mean
+----			               ----
+1970-01-01T00:00:00Z	 49.360939907550076
+
+
+name: h2o_quality
+tags: location = santa_monica, randtag = 1
+time			               mean
+----			               ----
+1970-01-01T00:00:00Z	 49.132712456344585
+
+
+name: h2o_quality
+tags: location = santa_monica, randtag = 2
+time			               mean
+----			               ----
+1970-01-01T00:00:00Z	 50.2937984496124
+
+
+name: h2o_quality
+tags: location = santa_monica, randtag = 3
+time			               mean
+----			               ----
+1970-01-01T00:00:00Z	 49.99919903884662
+```
+
 **GROUP BY time intervals**  
 [`COUNT()`](../query_language/functions.html#count) the number of `water_level` points between August 18, 2015 at midnight and September 18 at 5:00pm at two day intervals:
 ```sql
