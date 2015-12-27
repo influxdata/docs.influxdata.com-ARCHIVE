@@ -29,6 +29,7 @@ This is a list of the client libraries which have some support for InfluxDB vers
 
 ## .Net
 - [InfluxDB.Client.Net](https://github.com/AdysTech/InfluxDB.Client.Net) by [mvadu](https://github.com/mvadu)
+- [InfluxData.Net](https://github.com/pootzko/InfluxData.Net) by [pootzko](https://github.com/pootzko)
 
 
 ## Perfmon
