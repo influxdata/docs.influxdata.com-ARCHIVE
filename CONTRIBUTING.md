@@ -3,7 +3,7 @@
 We welcome (and encourage!) contributions from the community.
 
 * [Install Hugo](http://gohugo.io/overview/installing/)
-* Fork this repository on Github
+* Fork this repository on GitHub
 * Clone the repo to your local computer
 ```bash
 git clone https://github.com/your_username/docs.influxdata.com.git
