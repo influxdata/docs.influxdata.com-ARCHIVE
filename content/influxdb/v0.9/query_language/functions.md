@@ -22,6 +22,7 @@ Use InfluxQL functions to aggregate, select, and transform data.
 
 Useful InfluxQL for functions:  
 
+* [Include multiple functions in a single query](/influxdb/v0.9/query_language/functions/#include-multiple-functions-in-a-single-query)
 * [Change the value reported for intervals with no data with `fill()` ](/influxdb/v0.9/query_language/functions/#change-the-value-reported-for-intervals-with-no-data-with-fill)
 * [Rename the output column's title with `AS`](/influxdb/v0.9/query_language/functions/#rename-the-output-column-s-title-with-as)
 
@@ -1140,6 +1141,22 @@ time			               stddev
 2015-09-03T00:00:00Z	 1.3516778450902067
 2015-09-10T00:00:00Z	 1.4960573811500588
 2015-09-17T00:00:00Z	 1.075701669442093
+```
+
+## Include multiple functions in a single query
+Separate multiple functions in one query with a `,`.
+
+Calculate the [minimum](http://localhost:1313/influxdb/v0.9/query_language/functions/#min) `water_level` and the [maximum](/influxdb/v0.9/query_language/functions/#max) `water_level` with a single query:
+```sql
+> SELECT MIN(water_level), MAX(water_level) FROM h2o_feet
+```
+
+CLI response:
+```sh
+name: h2o_feet
+--------------
+time			               min	   max
+1970-01-01T00:00:00Z	 -0.61	 9.964
 ```
 
 ## Change the value reported for intervals with no data with `fill()`
