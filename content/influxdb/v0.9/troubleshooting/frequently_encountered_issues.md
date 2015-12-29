@@ -378,3 +378,5 @@ Figure 2 shows the shard groups for `example_db` five days after the retention p
 ![Retention policy duration three days](/img/influxdb/fei/alter-rp-3d.png)
 
 After day 17, all data within the past 3 days will be in one day shard groups. InfluxDB will then be able to drop `Shard Group 2` and `example_db` will have only 3 days worth of data.
+
+> **Note:** The time it takes for InfluxDB to adjust to the new retention policy may be longer depending on your shard precreation configuration setting. See [Database Configuration](/influxdb/v0.9/administration/config/#shard-precreation) for more on that setting.
