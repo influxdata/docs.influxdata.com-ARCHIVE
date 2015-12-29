@@ -20,7 +20,11 @@ Use InfluxQL functions to aggregate, select, and transform data.
 | [SUM()](/influxdb/v0.9/query_language/functions/#sum) | [PERCENTILE()](/influxdb/v0.9/query_language/functions/#percentile)  | [NON_NEGATIVE_DERIVATIVE()](/influxdb/v0.9/query_language/functions/#non-negative-derivative)
 |   | [TOP()](/influxdb/v0.9/query_language/functions/#top) | [STDDEV()](/influxdb/v0.9/query_language/functions/#stddev)
 
-Tip: [Rename the output column's title with `AS`](/influxdb/v0.9/query_language/functions/#rename-the-output-column-s-title-with-as)
+Useful InfluxQL for functions:  
+
+* [Include multiple functions in a single query](/influxdb/v0.9/query_language/functions/#include-multiple-functions-in-a-single-query)
+* [Change the value reported for intervals with no data with `fill()` ](/influxdb/v0.9/query_language/functions/#change-the-value-reported-for-intervals-with-no-data-with-fill)
+* [Rename the output column's title with `AS`](/influxdb/v0.9/query_language/functions/#rename-the-output-column-s-title-with-as)
 
 The examples below query data using [InfluxDB's Command Line Interface (CLI)](/influxdb/v0.9/tools/shell/). See the [Querying Data](/influxdb/v0.9/guides/querying_data/) guide for how to query data directly using the HTTP API.
 
@@ -75,6 +79,35 @@ time			               count
 2015-09-14T00:00:00Z	 1920
 2015-09-18T00:00:00Z	 335
 ```
+
+> #### `COUNT()` and controlling the values reported for intervals with no data
+> <br>
+> Other InfluxQL functions report `null` values for intervals with no data, and appending `fill(<stuff>)` to queries with those functions replaces `null` values in the output with `<stuff>`. `COUNT()`, however, reports `0`s for intervals with no data, so appending `fill(<stuff>)` to queries with `COUNT()` replaces `0`s in the output with `<stuff>`. This `COUNT()` behavior is functional in InfluxDB versions 0.10+.
+
+> Example: Use `fill(none)` to suppress intervals with `0` data
+
+> `COUNT()` without `fill(none)`:
+```sh
+> SELECT COUNT(water_level) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-09-18T21:41:00Z' AND time <= '2015-09-18T22:41:00Z' GROUP BY time(30m)
+name: h2o_feet
+--------------
+time			               count
+2015-09-18T21:30:00Z	 1
+2015-09-18T22:00:00Z	 0
+2015-09-18T22:30:00Z	 0
+```
+
+> `COUNT()` with `fill(none)`:
+```sh
+> SELECT COUNT(water_level) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-09-18T21:41:00Z' AND time <= '2015-09-18T22:41:00Z' GROUP BY time(30m) fill(none)
+name: h2o_feet
+--------------
+time			               count
+2015-09-18T21:30:00Z	 1
+```
+
+> For a more general discussion of `fill()`, see [Data Exploration](/influxdb/v0.9/query_language/data_exploration/#the-group-by-clause-and-fill).
+
 
 ## DISTINCT()
 Returns an array of the unique values in a single [field](/influxdb/v0.9/concepts/glossary/#field).
@@ -1109,6 +1142,27 @@ time			               stddev
 2015-09-10T00:00:00Z	 1.4960573811500588
 2015-09-17T00:00:00Z	 1.075701669442093
 ```
+
+## Include multiple functions in a single query
+Separate multiple functions in one query with a `,`.
+
+Calculate the [minimum](http://localhost:1313/influxdb/v0.9/query_language/functions/#min) `water_level` and the [maximum](/influxdb/v0.9/query_language/functions/#max) `water_level` with a single query:
+```sql
+> SELECT MIN(water_level), MAX(water_level) FROM h2o_feet
+```
+
+CLI response:
+```sh
+name: h2o_feet
+--------------
+time			               min	   max
+1970-01-01T00:00:00Z	 -0.61	 9.964
+```
+
+## Change the value reported for intervals with no data with `fill()`
+By default, queries with an InfluxQL function report `null` values for intervals with no data. Append `fill()` to the end of your query to alter that value. For a complete discussion of `fill()`, see [Data Exploration](/influxdb/v0.9/query_language/data_exploration/#the-group-by-clause-and-fill).
+
+> **Note:** `fill()` works differently with `COUNT()`. See [the documentation on `COUNT()`](http://localhost:1313/influxdb/v0.9/query_language/functions/#count-and-controlling-the-values-reported-for-intervals-with-no-data) for a function-specific use of `fill()`.
 
 ## Rename the output column's title with `AS`
 
