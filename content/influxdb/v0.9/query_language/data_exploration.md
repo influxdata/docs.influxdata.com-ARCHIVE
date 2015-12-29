@@ -274,6 +274,8 @@ time			               count
 
 Notice that each timestamp represents a two day interval and that the value in the `count` field is the number of `water_level` points that occurred in that two day interval. You could get the same results by querying the data 17 times - that is, one `COUNT()` query for every two days between August 18, 2015 at midnight and September 18 at 5:00pm - but that could take a while.
 
+> **Note:** The first timestamp in the CLI response (`2015-08-17T00:00:00Z`) occurs before the lower bound of the query's time range (`2015-08-18T00:00:00Z`). See [Frequently Encountered Issues](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#understanding-the-time-intervals-returned-from-group-by-time-queries) for an explanation of the time intervals returned from `GROUP BY time()` queries.
+
 
 Other things to note about `GROUP BY time()`:
 
