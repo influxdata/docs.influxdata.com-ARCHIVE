@@ -82,7 +82,7 @@ time			               count
 
 > #### `COUNT()` and controlling the values reported for intervals with no data
 > <br>
-> Other InfluxQL functions report `null` values for intervals with no data, and appending `fill(<stuff>)` to queries with those functions replaces `null` values in the output with `<stuff>`. `COUNT()`, however, reports `0`s for intervals with no data, so appending `fill(<stuff>)` to queries with `COUNT()` replaces `0`s in the output with `<stuff>`.
+> Other InfluxQL functions report `null` values for intervals with no data, and appending `fill(<stuff>)` to queries with those functions replaces `null` values in the output with `<stuff>`. `COUNT()`, however, reports `0`s for intervals with no data, so appending `fill(<stuff>)` to queries with `COUNT()` replaces `0`s in the output with `<stuff>`. This `COUNT()` behavior is functional in InfluxDB versions 0.10+.
 
 > Example: Use `fill(none)` to suppress intervals with `0` data
 
