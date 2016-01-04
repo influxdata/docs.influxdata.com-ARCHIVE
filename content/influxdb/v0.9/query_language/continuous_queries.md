@@ -22,11 +22,11 @@ When writing large amounts of data to InfluxDB, you may often want to downsample
 ## CQ definition
 A CQ is an InfluxQL query that the system runs automatically and periodically within a database. InfluxDB stores the results of the CQ in a specified [measurement](/influxdb/v0.9/concepts/glossary/#measurement). CQs require a function in the `SELECT` clause and must include a `GROUP BY time()` clause.
 
-The time ranges of the CQ results have round-number boundaries. For example, if the CQ's `GROUP BY time()` interval is 30 minutes long, the start and end times for each query (in MM:SS) are always `00:00` or `30:00`.
+The time ranges of the CQ results have round-number boundaries that are set internally by the database. There is currently no way for users to alter the start or end times of the intervals.
 
 Only admin users are allowed to work with continuous queries. For more on user privileges, see [Authentication and Authorization](/influxdb/v0.9/administration/authentication_and_authorization/#user-types-and-their-privileges).
 
-> **Note:** CQs run on future data. If you'd like to downsample data that existed before InfluxDB began running the CQ and write the results to another measurement, see [Data Exploration](/influxdb/v0.9/query_language/data_exploration/#downsample-data).
+> **Note:** CQs only execute on data received after the CQ's creation. If you'd like to downsample data written to InfluxDB before the CQ was created, see the examples in [Data Exploration](/influxdb/v0.9/query_language/data_exploration/#downsample-data).
 
 ## InfluxQL for creating a CQ
 ### The `CREATE CONTINUOUS QUERY` statement
@@ -42,7 +42,7 @@ The `CREATE CONTINUOUS QUERY` statement is essentially an InfluxQL query surroun
 
 2. The optional `WHERE` clause:
 
-    Because CQs run on different time ranges in the future, you don't need to (and shouldn't!) specify a time range in the `WHERE` clause. When included, the CQ's `WHERE` clause should filter information about tags.
+    Because CQs run on regularly incremented time intervals you don't need to (and shouldn't!) specify a time range in the `WHERE` clause. When included, the CQ's `WHERE` clause should filter information about tags.
 
 *CQ examples:*
 
