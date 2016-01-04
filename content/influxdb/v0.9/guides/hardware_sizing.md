@@ -49,7 +49,7 @@ We define the load that you'll be placing on InfluxDB by the number of writes pe
 * IOPS: 500-1000  
 
 #### Probably infeasible load
-Performance at this scale is a significant challenge and may not be achievable. Please contact InfluxDB for assistance with tuning your systems. (link?)
+Performance at this scale is a significant challenge and may not be achievable. Please contact us at <sales@influxdb.com> for assistance with tuning your systems.
 
 > **Note:** For the b1 and bz1 storage engines, we recommend having > 15,000 IOPS. The CPU and RAM guidelines are the same.
 
@@ -73,7 +73,7 @@ Non-string values require about three bytes. String values require variable spac
 > **Note:** With the b1 storage engine, non-string values require about 50 bytes. With the bz1 storage engine, non-string values require about 20 bytes.
 
 ## How should I configure my hardware?
-When running InfluxDB in a production environment the write-ahead-log directory the data directory should be housed on separate mounted volumes. This prevents disk contention when the system is under heavy write load.
+When running InfluxDB in a production environment the `wal` directory the `data` directory should be on separate storage devices. This prevents disk contention when the system is under heavy write load.
 
 Note that the WAL directory can be on a spinning disk and that IOPS are most important for the data directory.
 
@@ -90,4 +90,4 @@ When running a cluster every member should have at least two cores.
 For better performance, we recommend having 8 GB RAM and 4 CPUs or more.
 
 ## How should I configure my hardware?
-Place the hinted-handoff directory on a separate SSD volume from the write-ahead-log directory and the data directory. For more information on setting up a cluster, see [Clustering setup](/influxdb/v0.9/guides/clustering/).
+Place the `hh` directory on a separate storage device from the `wal` and `data` directories. This prevents disk contention when the system is under heavy write load. For more information on setting up a cluster, see [Clustering setup](/influxdb/v0.9/guides/clustering/).
