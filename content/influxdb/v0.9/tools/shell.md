@@ -36,7 +36,7 @@ Set to true if the import file is compressed. Use with `-import`.
 Set the write consistency level.
 
 `-database 'database name'`  
-The database to connect to.
+The database to which `influx` connects.
 
 `-execute 'command'`  
 Execute an [InfluxQL](/influxdb/v0.9/query_language/data_exploration/) command and quit. See [-execute](/influxdb/v0.9/tools/shell/#execute-an-influxql-command-and-quit-with-execute).
@@ -45,25 +45,27 @@ Execute an [InfluxQL](/influxdb/v0.9/query_language/data_exploration/) command a
 Specifies the format of the server responses. See [-format](/influxdb/v0.9/tools/shell/#specify-the-format-of-the-server-responses-with-format).
 
 `-host 'host name'`  
-Host to connect to. By default, InfluxDB runs on localhost.
+The host to which `influx` connects. By default, InfluxDB runs on localhost.
 
 `-import`  
 Import new data from a file or import a previously [exported](https://github.com/influxdb/influxdb/blob/master/importer/README.md) database from a file. See [-import](/influxdb/v0.9/tools/shell/#import-data-from-a-file-with-import).
 
 `-password 'password'`  
-Password to connect to the server. `influx` will prompt for a password if you leave it blank (`-password ''`).
+The password `influx` uses to connect to the server. `influx` will prompt for a password if you leave it blank (`-password ''`).
 
 `-path`  
 The path to the file to import. Use with `-import`.
 
 `-port 'port #'`  
-Port to connect to. By default, InfluxDB runs on port `8086`.
+The port to which `influx` connects. By default, InfluxDB runs on port `8086`.
 
 `-pps`  
 How many points per second the import will allow. By default, pps is zero and influx will not throttle importing. Use with `-import`.
 
-`-precision 'h|m|s|ms|u|ns'`  
-Specifies the precision of the timestamp: `h` (hours), `m` (minutes), `s` (seconds), `ms` (milliseconds), `u` (microseconds), `ns` (nanoseconds). Precision defaults to nanoseconds.
+`-precision 'rfc3339|h|m|s|ms|u|ns'`  
+Specifies the format/precision of the timestamp: `rfc3339` (`YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ`), `h` (hours), `m` (minutes), `s` (seconds), `ms` (milliseconds), `u` (microseconds), `ns` (nanoseconds). Precision defaults to nanoseconds.
+
+> **Note:** Setting the precision to `rfc3339` (`-precision rfc3339`) only works with the `-execute` option. It does not work with the `-import` option. It also doesn't change the format of the timestamps displayed in the `influx` shell. To change the format of the `influx` shell's timestamps to `rfc3339`, see [influx Commands](/influxdb/v0.9/tools/shell/#influx-commands). All other precision formats (e.g. `h`,`m`,`s`,`ms`,`u`, and `ns`) work with the `-execute` and `-import` options, and they'll change the format of the timestamps displayed in the `influx` shell.
 
 `-pretty`  
 Turns on pretty print for the `json` format.
@@ -72,7 +74,7 @@ Turns on pretty print for the `json` format.
 Use https for requests.
 
 `-username 'username'`  
-Username to connect to the server.
+The username `influx` uses to connect to the server.
 
 `-version`  
 Display the InfluxDB version and exit.
@@ -261,19 +263,22 @@ Outputs the current settings for the shell including the `Host`, `Username`, `Da
 Sets the current database. Once `influx` sets the current database, there is no need to specify that database in queries. `influx` automatically queries the current database and its `DEFAULT` retention policy.
 
 #### Write data to InfluxDB with `insert`
-Enter `insert` followed by the data in [line protocol](/influxdb/v0.9/write_protocols/line/) to write data to InfluxDB.
+Enter `insert` followed by the data in [line protocol](/influxdb/v0.9/write_protocols/line/) to write data to InfluxDB. Use `insert into <retention policy> <line protocol>` to write data to a specific [retention policy](/influxdb/v0.9/concepts/glossary/#retention-policy-rp).
 
-Write data to a single field the measurement `treasures` with the tag `captain_id = pirate_king`:
+Write data to a single field in the measurement `treasures` with the tag `captain_id = pirate_king`. `influx` automatically writes the point to the database's `DEFAULT` retention policy.
 ```
 > INSERT treasures,captain_id=pirate_king value=2
 >
 ```
 
-Write data to two fields in the measurement `treasures` with a timestamp:
+Write the same point to the already-existing retention policy `oneday`:
 ```
-> INSERT treasures value=3,weight=89 1434067467000000000
+> INSERT INTO oneday treasures,captain_id=pirate_king value=2
+Using retention policy oneday
 >
 ```
+
+Note that once you specify a retention policy with `INSERT INTO`, `influx` automatically writes data to that retention policy. This occurs even for later `INSERT` entries that do not include an `INTO` clause.
 
 ### Queries
 Execute all InfluxQL queries in `influx`. See [Data Exploration](/influxdb/v0.9/query_language/data_exploration/), [Schema Exploration](/influxdb/v0.9/query_language/schema_exploration/), [Database Management](/influxdb/v0.9/query_language/database_management/), [Authentication and Authorization](/influxdb/v0.9/administration/authentication_and_authorization/) for InfluxQL documentation.
