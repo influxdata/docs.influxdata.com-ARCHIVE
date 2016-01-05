@@ -12,7 +12,8 @@ This page addresses frequent sources of confusion and places where InfluxDB beha
 
 **Querying data**  
 
-* [Getting unexpected results with `GROUP BY time()`](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#getting-unexpected-results-with-group-by-time)  
+* [Getting unexpected results with `GROUP BY time()`](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#getting-unexpected-results-with-group-by-time)
+* [Understanding the time intervals returned from `GROUP BY time()` queries](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#understanding-the-time-intervals-returned-from-group-by-time-queries)    
 * [Querying after `now()`](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#querying-after-now)  
 * [Querying outside the min/max time range](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#querying-outside-the-min-max-time-range)  
 * [Querying a time range that spans epoch 0](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#querying-a-time-range-that-spans-epoch-0)  
@@ -58,8 +59,44 @@ Those returns typically proceed from the combination of the following two featur
 
 If your `WHERE` time clause is simply `WHERE time < now()` InfluxDB queries the data back to epoch 0 - that behavior often causes the query to breach the 100,000 instances rule and InfluxDB returns a confusing error or result. Avoid perplexing `GROUP BY time()` returns by specifying a valid time interval in the `WHERE` clause.
 
-<dt> [GitHub Issue #2702](https://github.com/influxdb/influxdb/issues/2702)  and [GitHub Issue #4004](https://github.com/influxdb/influxdb/issues/4004)
+<dt> [GitHub Issue #2702](https://github.com/influxdb/influxdb/issues/2702) and [GitHub Issue #4004](https://github.com/influxdb/influxdb/issues/4004)
 </dt>
+
+## Understanding the time intervals returned from `GROUP BY time()` queries
+With some `GROUP BY time()` queries, the returned time intervals may not reflect the time range specified in the `WHERE` clause. In the example below the first [timestamp](/influxdb/v0.9/concepts/glossary/#timestamp) in the results occurs before the lower bound of the query:
+
+Query with a two day `GROUP BY time()` interval:
+<pre><code class="language-sh">
+> SELECT count(water_level) FROM h2o_feet WHERE time >= <u><b>'2015-08-20T00:00:00Z'</b></u> AND time <= '2015-08-24T00:00:00Z' AND location = 'santa_monica' GROUP BY time(2d)
+</code></pre>
+
+Results:
+
+<pre><code class="language-sh">name: h2o_feet
+--------------
+time			         count
+<u><b>2015-08-19T00:00:00Z</b></u>	      240
+2015-08-21T00:00:00Z	 480
+2015-08-23T00:00:00Z	 241
+</code></pre>
+
+InfluxDB queries the `GROUP BY time()` intervals that fall within the `WHERE time` clause. `GROUP BY time()` intervals always fall on rounded calendar time boundaries. Because they're rounded time boundaries, the start and end timestamps may appear to include more data than those covered by the query's `WHERE time` clause.
+
+For the example above, InfluxDB works with two day intervals based on round number calendar days. The rounded two day buckets in August are as follows (explanation continues below):
+
+```
+August 1st-2nd
+August 3rd-4th
+[...]
+August 19th-20th
+August 21st-22nd
+August 23rd-24th
+[...]
+```
+
+Because InfluxDB automatically groups together August 19th and August 20th, August 19th is the first timestamp to appear in the results despite not being within the query's time range. The number in the `count` column, however, only includes data that occur on or after August 20th as that is the time range specified by the query's `WHERE` clause.
+
+<dt> See [GitHub Issue #1837](https://github.com/influxdb/influxdb/issues/1837) for more context on the future development of `GROUP BY time()` windows. </dt>
 
 ## Querying after `now()`
 By default, InfluxDB uses `now()` (the current nanosecond timestamp of the node that is processing the query) as the upper bound in queries. You must provide explicit directions in the `WHERE` clause to query points that occur after `now()`.
