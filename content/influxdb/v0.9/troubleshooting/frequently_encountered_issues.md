@@ -80,7 +80,9 @@ time			         count
 2015-08-23T00:00:00Z	 241
 </code></pre>
 
-InfluxDB buckets the query's time range modulo the `GROUP BY time()` interval into pre-determined calendar time boundaries. For queries with a two day `GROUP BY time()` interval, like the example above, InfluxDB works with two day intervals based on calendar days. For August, the pre-determined two day buckets are listed below:
+InfluxDB queries the `GROUP BY time()` intervals that fall within the `WHERE time` clause. `GROUP BY time()` intervals always fall on rounded calendar time boundaries. Because they're rounded time boundaries, the start and end timestamps may appear to include more data than those covered by the query's `WHERE time` clause.
+
+For the example above, InfluxDB works with two day intervals based on round number calendar days. The rounded two day buckets in August are as follows (explanation continues below):
 
 ```
 August 1st-2nd
