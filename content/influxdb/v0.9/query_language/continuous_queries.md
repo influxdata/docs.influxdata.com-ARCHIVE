@@ -62,7 +62,7 @@ The `CREATE CONTINUOUS QUERY` statement is essentially an InfluxQL query surroun
 
     The CQ `minnie_jr` acts in the same way as the CQ `minnie`, however, InfluxDB calculates the 30 minute minimum of the field `mouse` in the measurement `zoo` and under the retention policy `1day`, and it automatically writes the results of the query to the measurement `min_mouse` under the retention policy `4hours`.
 
-    Combining CQs and retention policies provides a useful way to automatically downsample data and expire the unnecessary raw data. For a complete discussion on this topic, see [Downsampling and Data Retention](/influxdb/v0.9/guides/downsampling-and-retention/).
+    Combining CQs and retention policies provides a useful way to automatically downsample data and expire the unnecessary raw data. For a complete discussion on this topic, see [Downsampling and Data Retention](/influxdb/v0.9/guides/downsampling_and_retention/).
 
 * Create a CQ with two functions:
 
@@ -206,7 +206,7 @@ WHERE sensor_id="EG-21442" AND time >= '2015-12-14 00:05:20' AND time < '2015-12
 GROUP BY time(5m)
 ```
 
-**Note**: In InfluxDB 0.9, a point is uniquely identified by the measurement, full tag set, and timestamp. Re-backfilling or writing another point with the same measurement, tag set, and timestamp will silently overwrite the already existing point, it will not create a duplicate.
+> **Note**: In InfluxDB 0.9, a point is uniquely identified by the measurement, full tag set, and timestamp. Re-backfilling or writing another point with the same measurement, tag set, and timestamp will silently overwrite the already existing point, it will not create a duplicate.
 
 ## Further reading
-Now that you know how to create CQs with InfluxDB, check out [Downsampling and Data Retention](/influxdb/v0.9/guides/downsampling-and-retention/) for how to combine CQs with retention policies to automatically downsample data and expire unnecessary data. For details on how often CQs run and how many queries they generate per run, see [Configuring Continuous Queries](/influxdb/v0.9/query_language/continuous-queries-config/).
+Now that you know how to create CQs with InfluxDB, check out [Downsampling and Data Retention](/influxdb/v0.9/guides/downsampling_and_retention/) for how to combine CQs with retention policies to automatically downsample data and expire unnecessary data. For details on how often CQs run and how many queries they generate per run, see [Configuring Continuous Queries](/influxdb/v0.9/query_language/continuous_queries_config/).
