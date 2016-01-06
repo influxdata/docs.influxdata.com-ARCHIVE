@@ -8,7 +8,7 @@
 .page-content--container hr {
 	width: 100%;
 	height: 2px;
-	background-color: #eee;
+	background-color: #2C323D;
 	margin: 0 0 3em 0;
 	border: none;
 	display: block;
@@ -24,8 +24,9 @@
 	padding-bottom: 0.5em;
 	margin-top: 3em;
 	margin-bottom: 0.5em;
-	border-bottom: 2px solid #eee;
+	border-bottom: 2px solid #2C323D;
 	line-height: 1.375em;
+	color: #BEC4CC;
 }
 .page-content--container h3 {
 	font-size: 1em;
@@ -77,27 +78,26 @@
 	margin-top: 0em;
 }
 .page-content--container blockquote {
-	color: #00867a;
+	color: #3AC69A;
 	font-style: italic;
 	padding: 1em 1.5em;
-	border-left: 0.875rem solid #d7f7dd;
+	border-left: 0.875rem solid #3AC69A;
 	border-radius: 3px;
 	width: calc(100% - 1.65rem);
 	margin-left: 1.65rem;
 	margin-bottom: 2.5em;
-	background-color: #f8fef9;
+	background-color: #262B35;
 	font-size: 0.875rem;
-}
-.page-content--container blockquote code,
-.page-content--container blockquote pre {
-	border-color: #d7f7dd;
-	background-color: #fff;
 }
 .page-content--container blockquote p {
 	line-height: 1.5em;
 	font-size: inherit;
 	padding-left: 0;
 	margin-bottom: 1em;
+}
+.page-content--container blockquote pre {
+	margin: 0 0 1em 0;
+	border-left: 1px;
 }
 .page-content--container blockquote li {
 	margin-bottom: 0.5em;
@@ -120,11 +120,12 @@
 
 .page-content--container dt {
 	font-size: 0.875em;
-	background-color: #fef4f2;
+	background-color: #262B35;
 	padding: 1em 1em 1em 3em;
 	border-radius: 3px;
+	border-left: 0.875rem solid #F95F53;
 	position: relative;
-	color: #ea4a42;
+	color: #FF8564;
 	width: calc(100% - 1.5em);
 	margin-left: 1.5em;
 	line-height: 1.3em;
@@ -143,25 +144,26 @@
 	border-radius: 4px;
 }
 .page-content--container table {
-	background-color: #fff;
+	background-color: #1F242D;
 	margin: 0px 0px 3em 1.5rem;
 }
 
 .page-content--container td,
 .page-content--container th {
-	border: 1px solid #eee;
+	border: 1px solid #262B35;
 	font-size: 0.875em;
 	padding: 0.75em 1.5em;
 }
 
 .page-content--container tr:nth-child(even) {
-	background-color: #fafafa;
+	background-color: #181C23;
 }
 .page-content--container thead tr {
-	background-color: #edf3f5 !important;
+	background-color: #262B35 !important;
 }
 .page-content--container thead th {
 	padding: 1.25em 1.5em;
+	color: #BEC4CC;
 }
 
 /* Code blocks */
@@ -170,7 +172,7 @@
 	-moz-tab-size: 1;
 	-o-tab-size: 1;
 	tab-size: 1;
-	color: #7f72f9;
+	color: #9394FF;
 	direction: ltr;
 	text-align: left;
 	-webkit-hyphens: none;
@@ -181,28 +183,29 @@
 	font-style:normal !important;
 	display: inline;
 	border-radius: 3px;
-	border: 1px solid #F5F6F7;
-	background-color: #FAFBFC;
+	border: 1px solid #262B35;
+	background-color: #181C23;
 	padding: 0.25em 0.5em;
 	position: relative;
 	top:-0.1em;
 	-webkit-font-smoothing: subpixel-antialiased !important;
 	-moz-osx-font-smoothing: auto !important;
+	font-weight: 400 !important;
 }
 .page-content--container pre {
 	padding: 0.75em 1em;
 	overflow: auto;
 	border-radius: 3px;
-	border: 1px solid #F5F6F7;
+	border: 1px solid #262B35;
 	border-left-width: 0.875rem;
-	background-color: #FAFBFC;
+	background-color: #181C23;
 	margin-bottom: 2.5em;
 	width: calc(100% - 1.5em);
 	margin-left: 1.5em;
 }
-.page-content--container pre::-webkit-scrollbar              { background-color: #FAFBFC; width: 1rem; }
-.page-content--container pre::-webkit-scrollbar-track        { background-color: #FAFBFC; }
-.page-content--container pre::-webkit-scrollbar-thumb        { border: 4px solid #FAFBFC; background-color: #D7DCE0; border-radius: 0.5rem; }
+.page-content--container pre::-webkit-scrollbar              { background-color: #181C23; width: 1rem; }
+.page-content--container pre::-webkit-scrollbar-track        { background-color: #181C23; }
+.page-content--container pre::-webkit-scrollbar-thumb        { border: 4px solid #181C23; background-color: #262B35; border-radius: 0.5rem; }
 
 .page-content--container pre code {
 	white-space: pre;
