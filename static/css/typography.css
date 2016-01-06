@@ -77,14 +77,33 @@
 	margin-top: 0em;
 }
 .page-content--container blockquote {
-	color: #5c81b4;
+	color: #00867a;
 	font-style: italic;
-	padding-left: 1.5em;
-	border-left: 6px solid #aec0da;
+	padding: 1em 1.5em;
+	border-left: 0.875rem solid #d7f7dd;
 	border-radius: 3px;
 	width: calc(100% - 1.65rem);
 	margin-left: 1.65rem;
-	font-size: 1rem;
+	margin-bottom: 2.5em;
+	background-color: #f8fef9;
+	font-size: 0.875rem;
+}
+.page-content--container blockquote code,
+.page-content--container blockquote pre {
+	border-color: #d7f7dd;
+	background-color: #fff;
+}
+.page-content--container blockquote p {
+	line-height: 1.5em;
+	font-size: inherit;
+	padding-left: 0;
+	margin-bottom: 1em;
+}
+.page-content--container blockquote li {
+	margin-bottom: 0.5em;
+}
+.page-content--container blockquote > *:last-child {
+	margin-bottom: 0;
 }
 .page-content--container figure {
 	margin: 2em 0;
@@ -151,7 +170,7 @@
 	-moz-tab-size: 1;
 	-o-tab-size: 1;
 	tab-size: 1;
-	color: #7A65F2;
+	color: #7f72f9;
 	direction: ltr;
 	text-align: left;
 	-webkit-hyphens: none;
@@ -162,8 +181,8 @@
 	font-style:normal !important;
 	display: inline;
 	border-radius: 3px;
-	border: 1px solid #e6eff2;
-	background-color: #fafcfe;
+	border: 1px solid #F5F6F7;
+	background-color: #FAFBFC;
 	padding: 0.25em 0.5em;
 	position: relative;
 	top:-0.1em;
@@ -174,13 +193,17 @@
 	padding: 0.75em 1em;
 	overflow: auto;
 	border-radius: 3px;
-	border: 1px solid #e6eff2;
-	border-left-width: 6px;
-	background-color: #fafcfe;
+	border: 1px solid #F5F6F7;
+	border-left-width: 0.875rem;
+	background-color: #FAFBFC;
 	margin-bottom: 2.5em;
 	width: calc(100% - 1.5em);
 	margin-left: 1.5em;
 }
+.page-content--container pre::-webkit-scrollbar              { background-color: #FAFBFC; width: 1rem; }
+.page-content--container pre::-webkit-scrollbar-track        { background-color: #FAFBFC; }
+.page-content--container pre::-webkit-scrollbar-thumb        { border: 4px solid #FAFBFC; background-color: #D7DCE0; border-radius: 0.5rem; }
+
 .page-content--container pre code {
 	white-space: pre;
 	word-spacing: normal;
