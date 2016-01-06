@@ -342,7 +342,15 @@ SectionPagesMenu = "products"
   weight = 90
   url = "/influxdb/v0.9/about/"
 
-# InfluxDB About Sub-Menu
+# InfluxDB v0.9 Sub-Menu - Introduction
+[[menu.influxdb_09]]
+  name = "Download"
+  identifier = "download"
+  weight = 0
+  url = "https://influxdata.com/downloads/#influxdb"
+  parent = "introduction"
+
+# InfluxDB v0.9 Sub-Menu - About
 [[menu.influxdb_09]]
   name = "Release Notes/Changelog"
   identifier = "changelog"
