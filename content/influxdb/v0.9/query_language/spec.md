@@ -236,10 +236,15 @@ ALTER RETENTION POLICY policy1 ON somedb DURATION 1h REPLICATION 4
 ### CREATE CONTINUOUS QUERY
 
 ```
-create_continuous_query_stmt = "CREATE CONTINUOUS QUERY" query_name "ON" db_name
+create_continuous_query_stmt = "CREATE CONTINUOUS QUERY" query_name on_clause
+                               [ "RESAMPLE" resample_opts ]
                                "BEGIN" select_stmt "END" .
 
 query_name                   = identifier .
+
+resample_opts                = (every_stmt for_stmt | every_stmt | for_stmt) .
+every_stmt                   = "EVERY" duration_lit
+for_stmt                     = "FOR" duration_lit
 ```
 
 #### Examples:
@@ -253,7 +258,7 @@ BEGIN
   INTO "6_months".events
   FROM events
   GROUP BY time(10m)
-END
+END;
 
 -- this selects from the output of one continuous query in one retention policy and outputs to another series in another retention policy
 CREATE CONTINUOUS QUERY "1h_event_count"
@@ -263,7 +268,19 @@ BEGIN
   INTO "2_years".events
   FROM "6_months".events
   GROUP BY time(1h)
-END
+END;
+
+-- this customizes the resample interval so the interval is queried every 10s and intervals are resampled until 2m after their start time
+-- when resample is used, at least one of "EVERY" or "FOR" must be used
+CREATE CONTINUOUS QUERY "cpu_mean"
+ON db_name
+RESAMPLE EVERY 10s FOR 2m
+BEGIN
+  SELECT mean(value)
+  INTO "cpu_mean"
+  FROM "cpu"
+  GROUP BY time(1m)
+END;
 ```
 
 ### CREATE DATABASE

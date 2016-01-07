@@ -501,7 +501,7 @@ An empty string is equivalent to `0.0.0.0`.
 The name of the database that you want to write to.
 
 ### retention-policy = ""
-  
+
 The relevant retention policy for your data. An empty string is equivalent to the database's `DEFAULT` retention policy.
 
 *The next three options control how batching works. You should have this enabled otherwise you could get dropped metrics or poor performance. Batching will buffer points in memory if you have many coming in.*
@@ -539,24 +539,9 @@ Set to `false` to disable logging for CQ events.
 
 Set to `false` to disable CQs.
 
-### recompute-previous-n = 2
+### run-interval = "1s"
 
-The upper bound on the number of previous interval queries that InfluxDB executes per CQ batch.
-
-### recompute-no-older-than = "10m0s"
-
-InfluxDB will not generate queries with an upper time boundary older than `now()` - `recompute-no-older-than`, regardless of the value of `recompute-previous-n`.
-
-### compute-runs-per-interval = 10
-
-The upper bound on the number of incremental queries generated within each `GROUP BY time()` interval. The actual number of generated queries can be lower, depending on the `GROUP BY time()` interval in the CQ and the `compute-no-more-than` setting.
-
-### compute-no-more-than = "2m0s"
-
-Batches of CQs run at intervals determined by the `GROUP BY time()` interval divided by `compute-runs-per-interval`. However, CQ batches will never run more often than the `compute-no-more-than` value.
-
-> **Note:** `GROUP BY time()` * (`recompute-previous-n` + 1) must be greater than `compute-no-more-than` or some time intervals will never be sampled.
-
+The interval at which InfluxDB checks to see if a CQ needs to run. Set this option to the lowest interval at which your CQs run. For example, if your most frequent CQ runs every minute, set `run-interval` to `1m`.
 
 ## [hinted-handoff]
 
