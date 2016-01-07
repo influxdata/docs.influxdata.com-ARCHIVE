@@ -573,7 +573,7 @@ a.product-sidebar--page:hover {
 	}
 	.product-switcher {
 		top: 3.25rem;
-		height: 6rem;
+		height: 4.5rem;
 	}
 	.product-switcher,
 	.product-sidebar,
@@ -592,8 +592,8 @@ a.product-sidebar--page:hover {
 	}
 	.product-sidebar,
 	.product-sidebar.open {
-		top: calc(3.25rem + 6rem);
-		height: calc(100% - 3.25rem - 6rem);
+		top: calc(3.25rem + 4.5rem);
+		height: calc(100% - 3.25rem - 4.5rem);
 	}
 	.page-content {
 		top: calc(3.25rem);
@@ -607,8 +607,8 @@ a.product-sidebar--page:hover {
 	}
 	.product-switcher--current,
 	.page-title--name {
-		height: 6rem;
-		line-height: 6rem;
+		height: 4.5rem;
+		line-height: 4.5rem;
 	}
 	.product-switcher--menu {
 		padding: 0;
@@ -646,7 +646,7 @@ a.product-sidebar--page:hover {
 		font-weight: 200;
 		font-style: italic;
 		font-family: 'Klavika-Light';
-		font-size: 3.25em;
+		font-size: 3.25rem;
 		left: 50%;
 		transform: translateX(-50%);
 		-webkit-transform: translateX(-50%);
@@ -707,7 +707,7 @@ a.product-sidebar--page:hover {
 	}
 	.product-switcher--container {
 		position: fixed;
-		top: calc(3.25rem + 6rem);
+		top: calc(3.25rem + 4.5rem);
 		left: 0;
 		width: 19rem;
 		visibility: hidden;
