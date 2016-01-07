@@ -21,7 +21,7 @@ Here are some of the features that InfluxDB currently supports that make it a gr
 * Expressive SQL-like query language tailored to easily query aggregated data.
 * Tags allow series to be indexed for fast and efficient queries.
 * Retention policies efficiently auto-expire stale data.
-# Continuous queries automatically compute aggregate data to make frequent queries more efficient.
+* Continuous queries automatically compute aggregate data to make frequent queries more efficient.
 * Built in web admin interface.
 
 ## Project Status

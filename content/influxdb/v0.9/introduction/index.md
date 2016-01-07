@@ -4,9 +4,9 @@ title: Introduction
 
 The introductory documentation includes all the information needed to get up and running with InfluxDB.
 
-## [Overview](/influxdb/v0.9/introduction/overview/)
+## [Download](https://influxdata.com/downloads/#influxdb)
 
-Gives an introduction to the capabilities of InfluxDB.
+Provides the location to download the latest stable and nightly builds of InfluxDB.
 
 ## [Installation](/influxdb/v0.9/introduction/installation/)
 
