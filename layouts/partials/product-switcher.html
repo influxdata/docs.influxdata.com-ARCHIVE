@@ -3,7 +3,6 @@
 <div class="product-switcher--container" id="product-switcher--container">
     <div class="product-switcher--dismiss" id="product-switcher--dismiss"></div>
     <nav class="product-switcher--menu" id="product-switcher--menu">
-        <div class="product-switcher--title">Developer Docs</div>
         {{ range .Site.Menus.products }}
         <a class="product-switcher--item{{if or ($currentNode.IsMenuCurrent "products" .) ($currentNode.HasMenuCurrent "products" .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
         {{ end }}

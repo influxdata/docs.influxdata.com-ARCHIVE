@@ -17,6 +17,7 @@
 	font-size: 3.5em;
 	font-weight: 100;
 	margin-bottom: 1.5em;
+	color: #E6E9EC;
 }
 .page-content--container h2 {
 	font-size: 1.75em;
@@ -26,7 +27,7 @@
 	margin-bottom: 0.5em;
 	border-bottom: 2px solid #2C323D;
 	line-height: 1.375em;
-	color: #BEC4CC;
+	color: #E6E9EC;
 }
 .page-content--container h3 {
 	font-size: 1em;

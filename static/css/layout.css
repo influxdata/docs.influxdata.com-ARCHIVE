@@ -37,7 +37,7 @@ body {
 	font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	color: #8F97A1;
+	color: #A5ACB5;
 	line-height: 1;
 }
 * {
@@ -227,7 +227,7 @@ a:hover {
 	left: 0;
 	height: 2.5rem;
 	width: 100%;
-	background-color: #1F242D;
+	background-color: #FAFBFC;
 }
 .main-nav--logo {
 	left: 1rem;
@@ -253,7 +253,7 @@ a:hover {
 	transition: all 0.3s ease;
 }
 .main-nav--hamburger:hover .main-nav--hamburger-bar {
-	background-color: #fff;
+	background-color: #A5ACB5;
 }
 .main-nav--hamburger-bar.top {
 	top: 30%;
@@ -322,7 +322,6 @@ a.main-nav--link:hover {
 	background-color: #373D49;
 	transform: translateX(-100%);
 	-webkit-transform: translateX(-100%);
-	padding: 1rem;
 }
 .main-nav--links.show,
 .product-switcher--menu.show {
@@ -364,10 +363,8 @@ a.product-switcher--item:visited {
 	text-decoration: none;
 	width: 100%;
 	color: #A5ACB5;
-	background-color: #2C323D;
-	border-radius: 4px;
-	margin-top: 2px;
-	padding: 1em;
+	background-color: #373D49;
+	padding: 1.25em 1em 1.25em 2rem;
 	transition:
 		background-color 0.2s ease,
 		color 0.2s ease;
@@ -386,7 +383,7 @@ a.product-switcher--item:hover {
 	height: 3rem;
 	background-color: #373D49;
 	background-position: center center;
-	background-size: cover;
+	background-size: cover !important;
 	background-repeat: no-repeat;
 }
 .page-title--toggle {
@@ -454,7 +451,7 @@ a.product-switcher--item:hover {
 	Product Sidebar
 */
 .product-sidebar {
-	background-color: #101419;
+	background-color: #181C23;
 	top: calc(2.5rem + 3rem + 3rem);
 	left: 0;
 	width: 100%;
@@ -508,11 +505,11 @@ a.product-sidebar--page:visited {
 a.product-sidebar--page:hover {
 	cursor: pointer;
 	color: #A5ACB5;
-	background-color: #1F242D;
+	background-color: #2C323D;
 }
-.product-sidebar::-webkit-scrollbar              { background-color: #101419; width: 1em; }
-.product-sidebar::-webkit-scrollbar-track        { background-color: #101419; }
-.product-sidebar::-webkit-scrollbar-thumb        { border: 4px solid #101419; background-color: #373D49; border-radius: 0.5em; }
+.product-sidebar::-webkit-scrollbar              { background-color: #181C23; width: 1em; }
+.product-sidebar::-webkit-scrollbar-track        { background-color: #181C23; }
+.product-sidebar::-webkit-scrollbar-thumb        { border: 4px solid #181C23; background-color: #373D49; border-radius: 0.5em; }
 
 /*
 	Documentation Home
@@ -574,8 +571,7 @@ a.product-sidebar--page:hover {
 	.main-nav--hamburger {
 		display: none;
 	}
-	.product-switcher,
-	.page-title {
+	.product-switcher {
 		top: 3.25rem;
 		height: 6rem;
 	}
@@ -585,7 +581,6 @@ a.product-sidebar--page:hover {
 		width: 19rem;
 		transition: none;
 	}
-	.page-title,
 	.page-content,
 	.main-nav--links,
 	.main-nav--links.show  {
@@ -596,10 +591,13 @@ a.product-sidebar--page:hover {
 		display: none;
 	}
 	.product-sidebar,
-	.product-sidebar.open,
-	.page-content {
+	.product-sidebar.open {
 		top: calc(3.25rem + 6rem);
 		height: calc(100% - 3.25rem - 6rem);
+	}
+	.page-content {
+		top: calc(3.25rem);
+		height: calc(100% - 3.25rem);
 	}
 	.product-sidebar,
 	.product-sidebar.open {
@@ -612,9 +610,9 @@ a.product-sidebar--page:hover {
 		height: 6rem;
 		line-height: 6rem;
 	}
-	/*.product-sidebar {
-		background-color: #F5F6F7;
-	}*/
+	.product-switcher--menu {
+		padding: 0;
+	}
 	.product-switcher {
 		transition: background-color 0.2s ease;
 	}
@@ -636,14 +634,29 @@ a.product-sidebar--page:hover {
 	.page-content--container {
 		margin: 5rem auto;
 	}
+	.page-title {
+		width: 100%;
+		display: inline-block;
+		position: relative;
+		left: 0;
+		top: 0;
+		height: 41rem;
+	}
 	.page-title--name {
 		font-weight: 200;
 		font-style: italic;
 		font-family: 'Klavika-Light';
-		font-size: 1.875em;
+		font-size: 3.25em;
 		left: 50%;
 		transform: translateX(-50%);
 		-webkit-transform: translateX(-50%);
+		text-align: left;
+		bottom: 25%;
+		white-space: normal;
+		height: auto;
+		line-height: 1.3em;
+		letter-spacing: -0.04em;
+		padding-right: 20%;
 
 	}
 	.page-content--container,
@@ -712,7 +725,7 @@ a.product-sidebar--page:hover {
 		-webkit-transform: none;
 		transition: opacity 0.3s ease;
 		opacity: 0;
-		padding: 0 2rem 2rem 2rem;
+		padding: 0;
 		border-radius: 0px 0px 4px 4px;
 	}
 	.product-switcher--title {
@@ -768,7 +781,6 @@ a.product-sidebar--page:hover {
 	.product-switcher--container {
 		width: 26rem;
 	}
-	.page-title,
 	.page-content,
 	.main-nav--links,
 	.main-nav--links.show  {
@@ -776,7 +788,7 @@ a.product-sidebar--page:hover {
 		width: calc(100% - 26rem);
 	}
 	.page-title--name {
-		font-size: 2.3rem;
+		font-size: 3.625rem;
 	}
 }
 
