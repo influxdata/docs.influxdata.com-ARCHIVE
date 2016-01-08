@@ -1,7 +1,6 @@
 ---
 title: Writing Data
-aliases:
-  - /docs/v0.9/concepts/reading_and_writing_data/
+
 menu:
   influxdb_09:
     weight: 0

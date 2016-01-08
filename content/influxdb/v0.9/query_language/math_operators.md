@@ -1,7 +1,6 @@
 ---
 title: Mathematical Operators
-aliases:
-  - /docs/v0.9/query_language/math_operators.html
+
 menu:
   influxdb_09:
     weight: 70

@@ -1,7 +1,6 @@
 ---
 title: Upgrading from previous versions
-aliases:
-  - /docs/v0.9/advanced_topics/upgrading.html
+
 menu:
   influxdb_09:
     weight: 30

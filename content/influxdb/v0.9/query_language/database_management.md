@@ -1,8 +1,6 @@
 ---
 title: Database Management
-aliases:
-  - /docs/v0.9/query_language/database_administration/
-  - /docs/v0.9/query_language/database_management/
+
 menu:
   influxdb_09:
     weight: 20
