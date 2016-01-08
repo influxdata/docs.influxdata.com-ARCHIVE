@@ -34,12 +34,20 @@ $('#product-switcher--menu').click( function() {
 	$('#product-switcher--container').removeClass('show');
 });
 
+function getRandomIntInclusive(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
-/* Inject tooltips on load */
+
 $(function(){
+	/* Inject tooltips on load */
 	$('.tooltip').each( function(){
 		$toolTipText = $('<div/>').addClass('tooltip-text').text($(this).attr('data-tooltip-text'));
 		$toolTipElement = $('<div/>').addClass('tooltip-container').append($toolTipText);
 		$(this).prepend($toolTipElement);
-	})
+	});
+
+	/* Set random header image */
+	var imagePathString = "/img/header-images/header-image-"+getRandomIntInclusive(1,14)+".jpg";
+	$('#page-title').css('background-image','url('+imagePathString+')');
 });
