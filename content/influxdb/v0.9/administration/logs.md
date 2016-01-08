@@ -1,7 +1,6 @@
 ---
 title: Logs
-aliases:
-  - /docs/v0.9/concepts/logs.html
+
 menu:
   influxdb_09:
     weight: 10

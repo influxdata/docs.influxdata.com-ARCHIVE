@@ -1,7 +1,6 @@
 ---
 title: Web Admin Interface
-aliases:
-  - /docs/v0.9/ui/built_in_admin_and_explorer/
+
 menu:
   influxdb_09:
     weight: 10

@@ -1,7 +1,6 @@
 ---
 title: Functions
-aliases:
-  - /docs/v0.9/query_language/aggregate_functions/
+
 menu:
   influxdb_09:
     weight: 30

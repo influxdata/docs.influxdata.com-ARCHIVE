@@ -1,7 +1,6 @@
 ---
 title: Backup and Restore
-aliases:
-  - /docs/v0.9/concepts/backup_and_restore.html
+
 menu:
   influxdb_09:
     weight: 20

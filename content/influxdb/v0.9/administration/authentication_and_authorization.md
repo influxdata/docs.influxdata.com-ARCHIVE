@@ -1,8 +1,6 @@
 ---
 title: Authentication and Authorization
-aliases:
-  - /docs/v0.9/administration/authentication/
-  - /docs/v0.9/administration/authorization/
+
 menu:
   influxdb_09:
     weight: 0

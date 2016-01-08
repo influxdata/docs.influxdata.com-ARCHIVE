@@ -1,7 +1,6 @@
 ---
 title: InfluxDB CLI/Shell
-aliases:
-  - /docs/v0.9/clients/shell.html
+
 menu:
   influxdb_09:
     weight: 0

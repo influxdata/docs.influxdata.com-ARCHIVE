@@ -1,7 +1,9 @@
 ---
 title: Server Monitoring
-aliases:
-  - /docs/v0.9/query_language/stats_diags.html
+menu:
+  influxdb_09:
+    weight: 50
+    parent: administration
 ---
 
 InfluxDB can display statistical and diagnostic information about each node. This information can be very useful for troubleshooting and performance monitoring.
