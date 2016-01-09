@@ -1,5 +1,5 @@
 ---
-title: InfluxDB Query Language Specification
+title: InfluxDB Query Language Reference
 menu:
   influxdb_09:
     weight: 50
@@ -9,9 +9,24 @@ menu:
 ## Introduction
 
 This is a reference for the Influx Query Language ("InfluxQL").
+If you're looking for less formal documentation see [Data Exploration](/influxdb/v0.9/query_language/data_exploration/), [Schema Exploration](/influxdb/v0.9/query_language/schema_exploration/), [Database Management](/influxdb/v0.9/query_language/database_management/), and [Authentication and Authorization](/influxdb/v0.9/administration/authentication_and_authorization/).
 
 InfluxQL is a SQL-like query language for interacting with InfluxDB.
 It has been lovingly crafted to feel familiar to those coming from other SQL or SQL-like environments while providing features specific to storing and analyzing time series data.
+
+Sections:
+
+* [Notation](/influxdb/v0.9/query_language/spec/#notation)
+* [Query representation](/influxdb/v0.9/query_language/spec/#query-representation)
+* [Letters and digits](/influxdb/v0.9/query_language/spec/#letters-and-digits)
+* [Identifiers](/influxdb/v0.9/query_language/spec/#identifiers)
+* [Keywords](/influxdb/v0.9/query_language/spec/#keywords)
+* [Literals](/influxdb/v0.9/query_language/spec/#literals)
+* [Queries](/influxdb/v0.9/query_language/spec/#queries)
+* [Statements](/influxdb/v0.9/query_language/spec/#statements)
+* [Clauses](/influxdb/v0.9/query_language/spec/#clauses)
+* [Expressions](/influxdb/v0.9/query_language/spec/#expressions)
+* [Other](/influxdb/v0.9/query_language/spec/#other)
 
 ## Notation
 
@@ -63,7 +78,7 @@ digit               = "0" … "9" .
 
 ## Identifiers
 
-Identifiers are tokens which refer to database names, retention policy names, user names, measurement names, tag keys, and field keys.
+Identifiers are tokens which refer to [database](/influxdb/v0.9/concepts/glossary/#database) names, [retention policy](/influxdb/v0.9/concepts/glossary/#retention-policy-rp) names, [user](/influxdb/v0.9/concepts/glossary/#user) names, [measurement](/influxdb/v0.9/concepts/glossary/#measurement) names, [tag keys](/influxdb/v0.9/concepts/glossary/#tag-key), and [field keys](/influxdb/v0.9/concepts/glossary/#field-key).
 
 The rules:
 
@@ -182,6 +197,13 @@ bool_lit            = TRUE | FALSE .
 regex_lit           = "/" { unicode_char } "/" .
 ```
 
+**Comparators:**  
+`=~` matches against  
+`!=` doesn't match against
+
+> **Note:** Use regular expressions to match measurements and tags.
+You cannot use regular expressions to match databases, retention policies, or fields.
+
 ## Queries
 
 A query is composed of one or more statements separated by a semicolon.
@@ -236,7 +258,7 @@ alter_retention_policy_stmt  = "ALTER RETENTION POLICY" policy_name on_clause
 
 ```sql
 -- Set default retention policy for mydb to 1h.cpu.
-ALTER RETENTION POLICY "1h.cpu" ON mydb DEFAULT;
+ALTER RETENTION POLICY "1h.cpu" ON mydb DEFAULT
 
 -- Change duration and replication factor.
 ALTER RETENTION POLICY policy1 ON somedb DURATION 1h REPLICATION 4
@@ -295,13 +317,16 @@ END;
 ### CREATE DATABASE
 
 ```
-create_database_stmt = "CREATE DATABASE" db_name
+create_database_stmt = "CREATE DATABASE" ["IF NOT EXISTS"] db_name
 ```
 
-#### Example:
+#### Examples:
 
 ```sql
 CREATE DATABASE foo
+
+-- create a database if it doesn't already exist
+CREATE DATABASE IF NOT EXISTS foo
 ```
 
 ### CREATE RETENTION POLICY
@@ -317,10 +342,10 @@ create_retention_policy_stmt = "CREATE RETENTION POLICY" policy_name on_clause
 
 ```sql
 -- Create a retention policy.
-CREATE RETENTION POLICY "10m.events" ON somedb DURATION 10m REPLICATION 2;
+CREATE RETENTION POLICY "10m.events" ON somedb DURATION 10m REPLICATION 2
 
 -- Create a retention policy and set it as the default.
-CREATE RETENTION POLICY "10m.events" ON somedb DURATION 10m REPLICATION 2 DEFAULT;
+CREATE RETENTION POLICY "10m.events" ON somedb DURATION 10m REPLICATION 2 DEFAULT
 ```
 
 ### CREATE USER
@@ -334,12 +359,14 @@ create_user_stmt = "CREATE USER" user_name "WITH PASSWORD" password
 
 ```sql
 -- Create a normal database user.
-CREATE USER jdoe WITH PASSWORD '1337password';
+CREATE USER jdoe WITH PASSWORD '1337password'
 
 -- Create a cluster admin.
 -- Note: Unlike the GRANT statement, the "PRIVILEGES" keyword is required here.
-CREATE USER jdoe WITH PASSWORD '1337password' WITH ALL PRIVILEGES;
+CREATE USER jdoe WITH PASSWORD '1337password' WITH ALL PRIVILEGES
 ```
+
+> **Note:** The password string must be wrapped in single quotes.
 
 ### DELETE
 
@@ -352,7 +379,7 @@ delete_stmt  = "DELETE FROM" measurement where_clause .
 ```sql
 -- delete data points from the cpu measurement where the region tag
 -- equals 'uswest'
-DELETE FROM cpu WHERE region = 'uswest';
+DELETE FROM cpu WHERE region = 'uswest'
 ```
 
 ### DROP CONTINUOUS QUERY
@@ -364,19 +391,22 @@ drop_continuous_query_stmt = "DROP CONTINUOUS QUERY" query_name "ON" db_name.
 #### Example:
 
 ```sql
-DROP CONTINUOUS QUERY myquery ON mydb;
+DROP CONTINUOUS QUERY myquery ON mydb
 ```
 
 ### DROP DATABASE
 
 ```
-drop_database_stmt = "DROP DATABASE" db_name .
+drop_database_stmt = "DROP DATABASE" ["IF EXISTS"] db_name .
 ```
 
 #### Example:
 
 ```sql
-DROP DATABASE mydb;
+DROP DATABASE mydb
+
+-- drop a database only if it exists
+DROP DATABASE IF EXISTS mydb
 ```
 
 ### DROP MEASUREMENT
@@ -389,7 +419,7 @@ drop_measurement_stmt = "DROP MEASUREMENT" measurement .
 
 ```sql
 -- drop the cpu measurement
-DROP MEASUREMENT cpu;
+DROP MEASUREMENT cpu
 ```
 
 ### DROP RETENTION POLICY
@@ -402,7 +432,7 @@ drop_retention_policy_stmt = "DROP RETENTION POLICY" policy_name on_clause .
 
 ```sql
 -- drop the retention policy named 1h.cpu from mydb
-DROP RETENTION POLICY "1h.cpu" ON mydb;
+DROP RETENTION POLICY "1h.cpu" ON mydb
 ```
 
 ### DROP SERIES
@@ -426,7 +456,7 @@ drop_subscription_stmt = "DROP SUBSCRIPTION" subscription_name "ON" db_name "." 
 #### Example:
 
 ```sql
-DROP SUBSCRIPTION sub0 ON "mydb"."default";
+DROP SUBSCRIPTION sub0 ON "mydb"."default"
 ```
 
 ### DROP USER
@@ -438,7 +468,7 @@ drop_user_stmt = "DROP USER" user_name .
 #### Example:
 
 ```sql
-DROP USER jdoe;
+DROP USER jdoe
 ```
 
 ### GRANT
@@ -453,10 +483,10 @@ grant_stmt = "GRANT" privilege [ on_clause ] to_clause
 
 ```sql
 -- grant cluster admin privileges
-GRANT ALL TO jdoe;
+GRANT ALL TO jdoe
 
 -- grant read access to a database
-GRANT READ ON mydb TO jdoe;
+GRANT READ ON mydb TO jdoe
 ```
 
 ### SHOW CONTINUOUS QUERIES
@@ -469,7 +499,7 @@ show_continuous_queries_stmt = "SHOW CONTINUOUS QUERIES" .
 
 ```sql
 -- show all continuous queries
-SHOW CONTINUOUS QUERIES;
+SHOW CONTINUOUS QUERIES
 ```
 
 ### SHOW DATABASES
@@ -482,7 +512,7 @@ show_databases_stmt = "SHOW DATABASES" .
 
 ```sql
 -- show all databases
-SHOW DATABASES;
+SHOW DATABASES
 ```
 
 ### SHOW FIELD KEYS
@@ -495,10 +525,10 @@ show_field_keys_stmt = "SHOW FIELD KEYS" [ from_clause ] .
 
 ```sql
 -- show field keys from all measurements
-SHOW FIELD KEYS;
+SHOW FIELD KEYS
 
 -- show field keys from specified measurement
-SHOW FIELD KEYS FROM cpu;
+SHOW FIELD KEYS FROM cpu
 ```
 
 ### SHOW GRANTS
@@ -511,7 +541,7 @@ show_grants_stmt = "SHOW GRANTS FOR" user_name .
 
 ```sql
 -- show grants for jdoe
-SHOW GRANTS FOR jdoe;
+SHOW GRANTS FOR jdoe
 ```
 
 ### SHOW MEASUREMENTS
@@ -522,10 +552,13 @@ show_measurements_stmt = "SHOW MEASUREMENTS" [ with_measurement_clause ] [ where
 
 ```sql
 -- show all measurements
-SHOW MEASUREMENTS;
+SHOW MEASUREMENTS
 
 -- show measurements where region tag = 'uswest' AND host tag = 'serverA'
-SHOW MEASUREMENTS WHERE region = 'uswest' AND host = 'serverA';
+SHOW MEASUREMENTS WHERE region = 'uswest' AND host = 'serverA'
+
+-- show measurements that start with 'h2o'
+SHOW MEASUREMENTS WITH MEASUREMENT =~ /h2o.*/
 ```
 
 ### SHOW RETENTION POLICIES
@@ -538,7 +571,7 @@ show_retention_policies = "SHOW RETENTION POLICIES" on_clause .
 
 ```sql
 -- show all retention policies on a database
-SHOW RETENTION POLICIES ON mydb;
+SHOW RETENTION POLICIES ON mydb
 ```
 
 ### SHOW SERIES
@@ -562,7 +595,7 @@ show_shard_groups_stmt = "SHOW SHARD GROUPS" .
 #### Example:
 
 ```sql
-SHOW SHARD GROUPS;
+SHOW SHARD GROUPS
 ```
 
 ### SHOW SHARDS
@@ -574,7 +607,7 @@ show_shards_stmt = "SHOW SHARDS" .
 #### Example:
 
 ```sql
-SHOW SHARDS;
+SHOW SHARDS
 ```
 
 ### SHOW SUBSCRIPTIONS
@@ -586,7 +619,7 @@ show_subscriptions_stmt = "SHOW SUBSCRIPTIONS" .
 #### Example:
 
 ```sql
-SHOW SUBSCRIPTIONS;
+SHOW SUBSCRIPTIONS
 ```
 
 ### SHOW TAG KEYS
@@ -600,16 +633,16 @@ show_tag_keys_stmt = "SHOW TAG KEYS" [ from_clause ] [ where_clause ] [ group_by
 
 ```sql
 -- show all tag keys
-SHOW TAG KEYS;
+SHOW TAG KEYS
 
 -- show all tag keys from the cpu measurement
-SHOW TAG KEYS FROM cpu;
+SHOW TAG KEYS FROM cpu
 
 -- show all tag keys from the cpu measurement where the region key = 'uswest'
-SHOW TAG KEYS FROM cpu WHERE region = 'uswest';
+SHOW TAG KEYS FROM cpu WHERE region = 'uswest'
 
 -- show all tag keys where the host key = 'serverA'
-SHOW TAG KEYS WHERE host = 'serverA';
+SHOW TAG KEYS WHERE host = 'serverA'
 ```
 
 ### SHOW TAG VALUES
@@ -623,13 +656,13 @@ show_tag_values_stmt = "SHOW TAG VALUES" [ from_clause ] with_tag_clause [ where
 
 ```sql
 -- show all tag values across all measurements for the region tag
-SHOW TAG VALUES WITH KEY = 'region';
+SHOW TAG VALUES WITH KEY = 'region'
 
 -- show tag values from the cpu measurement for the region tag
-SHOW TAG VALUES FROM cpu WITH KEY = 'region';
+SHOW TAG VALUES FROM cpu WITH KEY = 'region'
 
 -- show tag values from the cpu measurement for region & host tag keys where service = 'redis'
-SHOW TAG VALUES FROM cpu WITH KEY IN (region, host) WHERE service = 'redis';
+SHOW TAG VALUES FROM cpu WITH KEY IN (region, host) WHERE service = 'redis'
 ```
 
 ### SHOW USERS
@@ -642,7 +675,7 @@ show_users_stmt = "SHOW USERS" .
 
 ```sql
 -- show all users
-SHOW USERS;
+SHOW USERS
 ```
 
 ### REVOKE
@@ -655,10 +688,10 @@ revoke_stmt = "REVOKE" privilege [ on_clause ] "FROM" user_name .
 
 ```sql
 -- revoke cluster admin from jdoe
-REVOKE ALL PRIVILEGES FROM jdoe;
+REVOKE ALL PRIVILEGES FROM jdoe
 
 -- revoke read privileges from jdoe on mydb
-REVOKE READ ON mydb FROM jdoe;
+REVOKE READ ON mydb FROM jdoe
 ```
 
 ### SELECT
@@ -673,7 +706,7 @@ select_stmt = "SELECT" fields from_clause [ into_clause ] [ where_clause ]
 
 ```sql
 -- select mean value from the cpu measurement where region = 'uswest' grouped by 10 minute intervals
-SELECT mean(value) FROM cpu WHERE region = 'uswest' GROUP BY time(10m) fill(0);
+SELECT mean(value) FROM cpu WHERE region = 'uswest' GROUP BY time(10m) fill(0)
 
 -- select from all measurements beginning with cpu into the same measurement name in the cpu_1h retention policy
 SELECT mean(value) INTO cpu_1h.:MEASUREMENT FROM /cpu.*/
