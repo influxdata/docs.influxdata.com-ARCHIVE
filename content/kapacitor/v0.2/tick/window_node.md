@@ -10,11 +10,11 @@ menu:
     parent: tick
 ---
 
-Windows data over time. 
-A window has a length defined by `period` 
-and a frequency at which it emits the window to the pipeline. 
+Windows data over time.
+A window has a length defined by `period`
+and a frequency at which it emits the window to the pipeline.
 
-Example: 
+Example:
 
 
 ```javascript
@@ -25,13 +25,13 @@ Example:
         .httpOut('recent')
 ```
 
-The above windowing example emits a window to the pipeline every `5 minutes` 
-and the window contains the last `10 minutes` worth of data. 
-As a result each time the window is emitted it contains half new data and half old data. 
+The above windowing example emits a window to the pipeline every `5 minutes`
+and the window contains the last `10 minutes` worth of data.
+As a result each time the window is emitted it contains half new data and half old data.
 
-NOTE: Time for a window (or any node) is implemented by inspecting the times on the incoming data points. 
-As a result if the incoming data stream stops then no more windows will be emitted because time is no longer 
-increasing for the window node. 
+NOTE: Time for a window (or any node) is implemented by inspecting the times on the incoming data points.
+As a result if the incoming data stream stops then no more windows will be emitted because time is no longer
+increasing for the window node.
 
 
 Properties
@@ -41,9 +41,9 @@ Property methods modify state on the calling node. They do not add another node 
 
 ### Align
 
-Wether to align the window edges with the zero time. 
-If not aligned the window starts and ends relative to the 
-first data point it receives. 
+Whether to align the window edges with the zero time.
+If not aligned the window starts and ends relative to the
+first data point it receives.
 
 
 ```javascript
@@ -53,7 +53,7 @@ node.align()
 
 ### Every
 
-How often the current window is emitted into the pipeline. 
+How often the current window is emitted into the pipeline.
 
 
 ```javascript
@@ -63,7 +63,7 @@ node.every(value time.Duration)
 
 ### Period
 
-The period, or length in time, of the window. 
+The period, or length in time, of the window.
 
 
 ```javascript
@@ -78,7 +78,7 @@ Chaining methods create a new node in the pipeline as a child of the calling nod
 
 ### Alert
 
-Create an alert node, which can trigger alerts. 
+Create an alert node, which can trigger alerts.
 
 
 ```javascript
@@ -90,7 +90,7 @@ Returns: [AlertNode](/kapacitor/v0.2/tick/alert_node/)
 
 ### Derivative
 
-Create a new node that computes the derivative of adjacent points. 
+Create a new node that computes the derivative of adjacent points.
 
 
 ```javascript
@@ -102,9 +102,9 @@ Returns: [DerivativeNode](/kapacitor/v0.2/tick/derivative_node/)
 
 ### Eval
 
-Create an eval node that will evaluate the given transformation function to each data point. 
-A list of expressions may be provided and will be evaluated in the order they are given 
-and results of previous expressions are made available to later expressions. 
+Create an eval node that will evaluate the given transformation function to each data point.
+A list of expressions may be provided and will be evaluated in the order they are given
+and results of previous expressions are made available to later expressions.
 
 
 ```javascript
@@ -116,10 +116,10 @@ Returns: [EvalNode](/kapacitor/v0.2/tick/eval_node/)
 
 ### GroupBy
 
-Group the data by a set of tags. 
+Group the data by a set of tags.
 
-Can pass literal * to group by all dimensions. 
-Example: 
+Can pass literal * to group by all dimensions.
+Example:
 
 
 ```javascript
@@ -137,11 +137,11 @@ Returns: [GroupByNode](/kapacitor/v0.2/tick/group_by_node/)
 
 ### HttpOut
 
-Create an http output node that caches the most recent data it has received. 
-The cached data is available at the given endpoint. 
-The endpoint is the relative path from the API endpoint of the running task. 
-For example if the task endpoint is at &#34;/api/v1/task/&lt;task_name&gt;&#34; and endpoint is 
-&#34;top10&#34;, then the data can be requested from &#34;/api/v1/task/&lt;task_name&gt;/top10&#34;. 
+Create an http output node that caches the most recent data it has received.
+The cached data is available at the given endpoint.
+The endpoint is the relative path from the API endpoint of the running task.
+For example if the task endpoint is at &#34;/api/v1/task/&lt;task_name&gt;&#34; and endpoint is
+&#34;top10&#34;, then the data can be requested from &#34;/api/v1/task/&lt;task_name&gt;/top10&#34;.
 
 
 ```javascript
@@ -153,7 +153,7 @@ Returns: [HTTPOutNode](/kapacitor/v0.2/tick/http_out_node/)
 
 ### InfluxDBOut
 
-Create an influxdb output node that will store the incoming data into InfluxDB. 
+Create an influxdb output node that will store the incoming data into InfluxDB.
 
 
 ```javascript
@@ -165,7 +165,7 @@ Returns: [InfluxDBOutNode](/kapacitor/v0.2/tick/influx_d_b_out_node/)
 
 ### Join
 
-Join this node with other nodes. The data is joined on timestamp. 
+Join this node with other nodes. The data is joined on timestamp.
 
 
 ```javascript
@@ -177,15 +177,15 @@ Returns: [JoinNode](/kapacitor/v0.2/tick/join_node/)
 
 ### MapReduce
 
-Perform a map-reduce operation on the data. 
-The built-in functions under `influxql` provide the 
-selection,aggregation, and transformation functions 
-from the InfluxQL language. 
+Perform a map-reduce operation on the data.
+The built-in functions under `influxql` provide the
+selection,aggregation, and transformation functions
+from the InfluxQL language.
 
-MapReduce may be applied to either a batch or a stream edge. 
-In the case of a batch each batch is passed to the mapper idependently. 
-In the case of a stream all incoming data points that have 
-the exact same time are combined into a batch and sent to the mapper. 
+MapReduce may be applied to either a batch or a stream edge.
+In the case of a batch each batch is passed to the mapper independently.
+In the case of a stream all incoming data points that have
+the exact same time are combined into a batch and sent to the mapper.
 
 
 ```javascript
@@ -197,9 +197,9 @@ Returns: [ReduceNode](/kapacitor/v0.2/tick/reduce_node/)
 
 ### Sample
 
-Create a new node that samples the incoming points or batches. 
+Create a new node that samples the incoming points or batches.
 
-One point will be emitted every count or duration specified. 
+One point will be emitted every count or duration specified.
 
 
 ```javascript
@@ -211,7 +211,7 @@ Returns: [SampleNode](/kapacitor/v0.2/tick/sample_node/)
 
 ### Union
 
-Perform the union of this node and all other given nodes. 
+Perform the union of this node and all other given nodes.
 
 
 ```javascript
@@ -223,7 +223,7 @@ Returns: [UnionNode](/kapacitor/v0.2/tick/union_node/)
 
 ### Where
 
-Create a new node that filters the data stream by a given expression. 
+Create a new node that filters the data stream by a given expression.
 
 
 ```javascript
@@ -235,9 +235,9 @@ Returns: [WhereNode](/kapacitor/v0.2/tick/where_node/)
 
 ### Window
 
-Create a new node that windows the stream by time. 
+Create a new node that windows the stream by time.
 
-NOTE: Window can only be applied to stream edges. 
+NOTE: Window can only be applied to stream edges.
 
 
 ```javascript
@@ -245,4 +245,3 @@ node.window()
 ```
 
 Returns: [WindowNode](/kapacitor/v0.2/tick/window_node/)
-
