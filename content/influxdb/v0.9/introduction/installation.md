@@ -109,11 +109,9 @@ Or, if you don't want/need launchctl, in a separate terminal window you can just
 influxd -config /usr/local/etc/influxdb.conf
 ```
 
-## Hosted
+### Other
 
 For users who don't want to install any software and are ready to use InfluxDB, you may want to check out our [managed hosted InfluxDB offering](http://customers.influxdb.com).
-
-<a href="/influxdb/v0.9/introduction/getting_started/"><font size="6"><b>⇒ Now get started!</b></font></a>
 
 ## Generate a configuration file
 
@@ -125,7 +123,7 @@ To generate a new config file, run `influxd config` and redirect the output to a
 influxd config > /etc/influxdb/influxdb.generated.conf
 ```
 
-Edit the `influxdb.generated.conf` file to have the desired configuration settings. When launching InfluxDB, point the process to the correct configuration file using the `-config` option.
+Edit the `influxdb.generated.conf` file to have the desired configuration settings. See [Database Configuration](/influxdb/v0.9/administration/config/) for detailed documentation on the different configuration settings. When launching InfluxDB, point the process to the correct configuration file using the `-config` option.
 
 ```shell
 influxd -config /etc/influxdb/influxdb.generated.conf
@@ -147,6 +145,8 @@ The output will show every option configured in the `influxdb.partial.conf` file
 
 The example configuration file shipped with the installer is for information only. It is an identical file to the internally generated configuration except that the example file has comments.
 
+<a href="/influxdb/v0.9/introduction/getting_started/"><font size="6"><b>⇒ Now get started!</b></font></a>
+
 ## Hosting on AWS
 
 ### Hardware
@@ -157,11 +157,11 @@ Each machine should have a minimum of 8G RAM.
 
 We’ve seen the best performance with the C3 class of machines.
 
-## Configuring the Instance
+### Configuring the Instance
 
 This example assumes that you are using two SSD volumes and that you have mounted them appropriately. This example also assumes that each of those volumes is mounted at `/mnt/influx` and `/mnt/db`. For more information on how to do that see the Amazon documentation on how to [Add a Volume to Your Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-add-volume-to-instance.html).
 
-### Config File
+#### Config File
 You'll have to update the config file appropriately for each InfluxDB instance you have.
 
 ```
