@@ -1,7 +1,6 @@
 ---
 title: JSON Protocol
-aliases:
-  - /docs/v0.9/concepts/chunked_responses.html
+
 menu:
   influxdb_09:
     weight: 20

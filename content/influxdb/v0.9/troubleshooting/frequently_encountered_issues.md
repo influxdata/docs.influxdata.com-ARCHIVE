@@ -1,7 +1,6 @@
 ---
 title: Frequently Encountered Issues
-aliases:
-  - /docs/v0.9/guides/troubleshooting/
+
 menu:
   influxdb_09:
     weight: 0

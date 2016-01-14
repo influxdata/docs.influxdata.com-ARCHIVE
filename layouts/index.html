@@ -5,7 +5,7 @@
     </div>
     <div class="documentation-home--menu">
         {{ range .Site.Menus.products }}
-        <a class="documentation-home--menu-item" href="{{ .URL }}">{{ .Name }}</a>
+        <a class="documentation-home--menu-item" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .Name }}</a>
         {{ end }}
     </div>
 </div>

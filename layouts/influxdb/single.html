@@ -7,7 +7,9 @@
 	</div>
 	{{ end }}
 	<div class="page-content--container">
+        {{ partial "influxdb/version.html" . }}
         {{ .Content }}
+        {{ partial "influxdb/contribute.html" . }}
     </div>
 </div>
 {{ partial "influxdb/sidebar.html" . }}

@@ -1,9 +1,6 @@
 ---
 title: Clustering
-aliases:
-  - /docs/v0.9/guides/clustering.html
-  - /docs/v0.9/concepts/clustering.html
-  - /docs/v0.9/advanced_topics/clustering.html
+
 menu:
   influxdb_09:
     weight: 20

@@ -70,7 +70,7 @@ three_days_only	 72h0m0s		 1		       true
 The `SHOW SERIES` query returns the distinct [series](/influxdb/v0.9/concepts/glossary/#series) in your database and takes the following form, where the `FROM` and `WHERE` clauses are optional:
 
 ```sql
-SHOW SERIES FROM [<measurement_name> WHERE <tag_key>='<tag_value>']
+SHOW SERIES [FROM <measurement_name> [WHERE <tag_key>='<tag_value>']]
 ```
 
 Return all series in the database `NOAA_water_database`:

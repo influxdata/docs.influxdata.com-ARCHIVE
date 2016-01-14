@@ -16,5 +16,5 @@ View usage instructions for each service plugin by running `telegraf -usage <ser
 
 ## Supported Service Plugin List
 
-* [statsd](https://github.com/influxdb/telegraf/tree/master/plugins/statsd)
-* [kafka_consumer](https://github.com/influxdb/telegraf/tree/master/plugins/kafka_consumer)
+* [statsd](https://github.com/influxdb/telegraf/tree/master/plugins/inputs/statsd)
+* [kafka_consumer](https://github.com/influxdb/telegraf/tree/master/plugins/inputs/kafka_consumer)
