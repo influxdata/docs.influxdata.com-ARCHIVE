@@ -14,11 +14,13 @@ Literals
 
 ### Booleans
 
-Boolean literals are the keywords `TRUE` and `FALSE`. They are case sensitive.
+Boolean literals are the keywords `TRUE` and `FALSE`.
+They are case sensitive.
 
 ### Numbers
 
-Numbers are typed and are either a `float64` or an `int64`. If the number contains a decimal it is considered to be a `float64` otherwise it is an `int64`.
+Numbers are typed and are either a `float64` or an `int64`.
+If the number contains a decimal it is considered to be a `float64` otherwise it is an `int64`.
 All numbers are considered to be base 10 numbers.
 
 Valid number literals:
@@ -37,19 +39,24 @@ Invalid number literals:
 
 There are two ways to write string literals:
 
-1. Single quoted strings with backslash escaped single quotes.
+1.
+Single quoted strings with backslash escaped single quotes.
 
     This string `'single \' quoted'` becomes the literal `single ' quoted`.
 
-2. Triple single quoted strings with no escaping.
+2.
+Triple single quoted strings with no escaping.
 
     This string `'''triple \' quoted'''` becomes the literal `triple \' quoted`.
 
 ### Durations
 
-TICKscript supports durations literals. They are of the form of an InfluxQL duration literals. See https://influxdb.com/docs/v0.9/query_language/spec.html#literals
+TICKscript supports durations literals.
+They are of the form of an InfluxQL duration literals.
+See https://influxdb.com/docs/v0.9/query_language/spec.html#literals
 
-Duration literals specify a length of time. An integer literal followed immediately (with no spaces) by a duration unit listed below is interpreted as a duration literal.
+Duration literals specify a length of time.
+An integer literal followed immediately (with no spaces) by a duration unit listed below is interpreted as a duration literal.
 
 #### Duration unit definitions
 
@@ -66,7 +73,8 @@ Duration literals specify a length of time. An integer literal followed immediat
 Statements
 ----------
 
-A statement begins with an identifier and any number of chaining function calls. The result of a statement can be assigned to a variable using the `var` keyword and assignment operator `=`.
+A statement begins with an identifier and any number of chaining function calls.
+The result of a statement can be assigned to a variable using the `var` keyword and assignment operator `=`.
 
 Example:
 
@@ -95,10 +103,8 @@ For example:
 stream
    .eval(lambda: "views" + "errors")
        .as('total_views') // Increase indent for property method.
-   .httpOut('example') // Decrease indent for chaining method.
+.httpOut('example') // Decrease indent for chaining method.
 ```
-
-
 
 ### Comments
 

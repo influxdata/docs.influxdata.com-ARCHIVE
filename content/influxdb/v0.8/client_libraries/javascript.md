@@ -30,20 +30,24 @@ First, create a new InfluxDB object by connecting to a running instance.
 
 #### createDatabase(_databaseName_)
 
-This will allow you to create a new database. This function is restricted to cluster admins.
+This will allow you to create a new database.
+This function is restricted to cluster admins.
 
 #### deleteDatabase(_databaseName_)
 
-This will allow you to delete a database. This function is restricted to cluster admins.
+This will allow you to delete a database.
+This function is restricted to cluster admins.
 
 #### writePoint(_seriesName_, _values_)
 
-This will allow you to write a point to a time series. The content of values should be an associative array,
+This will allow you to write a point to a time series.
+The content of values should be an associative array,
 where the keys are the column names.
 
 #### readPoint(_fieldNames_, _seriesNames_)
 
-This will allow you to read a point from a time series. The query will be constructed in the form of:
+This will allow you to read a point from a time series.
+The query will be constructed in the form of:
 
     SELECT [fieldNames] FROM [seriesNames];
 

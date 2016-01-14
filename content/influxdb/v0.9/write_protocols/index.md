@@ -16,7 +16,8 @@ The JSON write protocol is deprecated as of InfluxDB 0.9.1.
 
 ## [UDP](/influxdb/v0.9/write_protocols/udp/)
 
-InfluxDB accepts writes over UDP. To configure InfluxDB to support writes over UDP you must adjust your config file.
+InfluxDB accepts writes over UDP.
+To configure InfluxDB to support writes over UDP you must adjust your config file.
 
 ## [Graphite](/influxdb/v0.9/write_protocols/graphite/)
 

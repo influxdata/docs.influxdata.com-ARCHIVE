@@ -7,10 +7,10 @@ menu:
     parent: introduction
 ---
 
-Kapacitor is a data processing engine. It can process both stream and batch data.
+Kapacitor is a data processing engine.
+It can process both stream and batch data.
 This guide will walk you through both workflows and teach you the basics of using
 and running a Kapacitor daemon.
-
 
 What you will need
 ------------------
@@ -18,13 +18,11 @@ What you will need
 Don't worry about installing anything yet, instructions are found below.
 
 * [InfluxDB](/docs/v0.9/introduction/installation.html)  - While Kapacitor does not require InfluxDB it is the easiest to setup and so we will use it in this guide.
-    You will need InfluxDB >= 0.9.5
+You will need InfluxDB >= 0.9.5
 * [Telegraf](https://github.com/influxdb/telegraf#installation) - We will use a specific Telegraf config to send data to InfluxDB so that the examples Kapacitor tasks have context.
-    You will need Telegraf >= 0.1.9 since the names of measurements change prior to that version.
+You will need Telegraf >= 0.1.9 since the names of measurements change prior to that version.
 * [Kapacitor](https://github.com/influxdb/kapacitor) - You can get the latest Kapacitor binaries for your OS at the [downloads](https://influxdata.com/downloads/#kapacitor) page.
 * Terminal - Kapacitor's interface is via a CLI and so you will need a basic terminal to issue commands.
-
-
 
 The Use Case
 ------------
@@ -34,13 +32,18 @@ For this guide we will follow the classic use case of triggering an alert for hi
 The Process
 -----------
 
-1. Install everything we need.
-1. Start InfluxDB and send it data from Telegraf.
-2. Configure Kapacitor.
-3. Start Kapacitor.
-4. Define and run a streaming task to trigger cpu alerts.
-5. Define and run a batching task to trigger cpu alerts.
-
+1.
+Install everything we need.
+1.
+Start InfluxDB and send it data from Telegraf.
+2.
+Configure Kapacitor.
+3.
+Start Kapacitor.
+4.
+Define and run a streaming task to trigger cpu alerts.
+5.
+Define and run a batching task to trigger cpu alerts.
 
 Installation
 ------------
@@ -71,7 +74,7 @@ The following is a simple Telegraf configuration file that will send just cpu me
 # Configuration to send data to InfluxDB.
 [outputs.influxdb]
     # Change this URL to be the address of your InfluxDB server.
-    urls = ["http://localhost:8086"]
+urls = ["http://localhost:8086"]
     database = "kapacitor_example"
     user_agent = "telegraf"
 
@@ -97,11 +100,11 @@ Confirm this with this query:
 curl -G 'http://localhost:8086/query?db=kapacitor_example' --data-urlencode 'q=SELECT count(value) FROM cpu_usage_idle'
 ```
 
-
 Starting Kapacitor
 ------------------
 
-First we need a valid configuration file. Run the following command to create a default configuration file:
+First we need a valid configuration file.
+Run the following command to create a default configuration file:
 
 ```sh
 kapacitord config > kapacitor.conf
@@ -130,10 +133,12 @@ Run this command to turn on debug logging:
 kapacitor level debug
 ```
 
-You should see a bunch of lines with numbers scrolling by. Something like this:
+You should see a bunch of lines with numbers scrolling by.
+Something like this:
 
 ```
-[edge:src->stream] 2015/10/22 14:02:13 D! next point c: 120 e: 120
+[edge:src->stream] 2015/10/22 14:02:13 D!
+next point c: 120 e: 120
 ```
 
 The numbers indicate the number of points `collected` and `emitted` from the stream.
@@ -154,14 +159,16 @@ Trigger Alert from Stream data
 
 That was a bit of setup, but at this point it should be smooth sailing and we can get to the fun stuff of actually using Kapacitor.
 
-A `task` in Kapacitor represents an amount of work to do on a set of data. There are two types of tasks, `stream` and `batch` tasks.
+A `task` in Kapacitor represents an amount of work to do on a set of data.
+There are two types of tasks, `stream` and `batch` tasks.
 We will be using a `stream` task first, and next we will do the same thing with a `batch` task.
-
 
 Kapacitor uses a DSL called [TICKscript](/kapacitor/v0.2/tick/) to define tasks.
 Each TICKscript defines a pipeline that tells Kapacitor which data to process and how.
 
-So what do we want to tell Kapacitor to do? As an example, we will trigger an alert on high cpu usage. What is high cpu usage?
+So what do we want to tell Kapacitor to do?
+As an example, we will trigger an alert on high cpu usage.
+What is high cpu usage?
 Let's say when idle cpu drops below 70% we should trigger an alert.
 
 Now that we know what we want to do, let's write it in a way the Kapacitor understands.
@@ -170,13 +177,12 @@ Put the script below into a file called `cpu_alert.tick` in your working directo
 ```javascript
 stream
     // Select just the cpu_usage_idle measurement from our example database.
-    .from().measurement('cpu_usage_idle')
+.from().measurement('cpu_usage_idle')
     .alert()
         .crit(lambda: "value" <  70)
         // Whenever we get an alert write it to a file.
-        .log('/tmp/alerts.log')
+.log('/tmp/alerts.log')
 ```
-
 
 Now lets define the `task` and the databases and retention policies it can access:
 
@@ -188,7 +194,8 @@ kapacitor define \
     -dbrp kapacitor_example.default
 ```
 
-That's it, Kapacitor now knows how to trigger our alert. However nothing is going to happen until we enable the task.
+That's it, Kapacitor now knows how to trigger our alert.
+However nothing is going to happen until we enable the task.
 Before we enable the task, we should test it first so we do not spam ourselves with alerts.
 
 Record the current data stream for a bit so we can use it to test our task with:
@@ -207,7 +214,8 @@ rid=cd158f21-02e6-405c-8527-261ae6f26153
 ```
 
 OK, we have a snapshot of data recorded from the stream, so we can now replay that data to our task.
-The `replay` action replays data only to a specific task. This way we can test the task in complete isolation:
+The `replay` action replays data only to a specific task.
+This way we can test the task in complete isolation:
 
 ```sh
 kapacitor replay -id $rid -name cpu_alert -fast
@@ -215,7 +223,8 @@ kapacitor replay -id $rid -name cpu_alert -fast
 
 Notice the `-fast` flag.
 Since we already have the data recorded, we can just replay the data as fast as possible instead of waiting for real time to pass.
-If `-fast` is not set, then the data is replayed by waiting for the deltas between the timestamps to pass, though the result is identical whether real time passes or not. This is because time is measured on each node by the data points it receives.
+If `-fast` is not set, then the data is replayed by waiting for the deltas between the timestamps to pass, though the result is identical whether real time passes or not.
+This is because time is measured on each node by the data points it receives.
 
 Check the log using the command below, did we get any alerts?
 The file should contain lines of JSON, where each line represents one alert.
@@ -225,12 +234,14 @@ The JSON contains the alert level and the data that triggered the alert.
 cat /tmp/alerts.log
 ```
 
-Depending on how busy the server was, maybe not. Let's modify the task to be really sensitive so that we know the alerts are working.
-Change the `.crit(lambda: "value" < 70)` line in the TICKscript to `.crit(lambda: "value" < 100)`. Now every data point that was received during
+Depending on how busy the server was, maybe not.
+Let's modify the task to be really sensitive so that we know the alerts are working.
+Change the `.crit(lambda: "value" < 70)` line in the TICKscript to `.crit(lambda: "value" < 100)`.
+Now every data point that was received during
 the recording will trigger an alert.
 
-
-Let's replay it again and verify the results. Any time you want to update a task change the TICKscript and then run the `define` command again with just the `-name` and `-tick` arguments:
+Let's replay it again and verify the results.
+Any time you want to update a task change the TICKscript and then run the `define` command again with just the `-name` and `-tick` arguments:
 
 ```sh
 # edit threshold in cpu_alert.tick and redefine the task.
@@ -241,7 +252,8 @@ kapacitor replay -id $rid -name cpu_alert -fast
 NOTE: you can also run `kapacitor show cpu_alert` to see what definition Kapacitor has stored for the task.
 
 Now that we know it's working, let's change it back to a more reasonable threshold.
-Are you happy with the threshold? If so, let's `enable` the task so it can start processing the live data stream with:
+Are you happy with the threshold?
+If so, let's `enable` the task so it can start processing the live data stream with:
 
 ```sh
 kapacitor enable cpu_alert
@@ -254,8 +266,10 @@ Here is a quick hack to use 100% of one core if you want to get some cpu activit
 while true; do i=0; done
 ```
 
-Well, that was cool and all, but, just to get a simple threshold alert, there are plenty of ways to do that. Why all this
-pipeline TICKscript stuff? Well, it can quickly be extended to become *much* more powerful.
+Well, that was cool and all, but, just to get a simple threshold alert, there are plenty of ways to do that.
+Why all this
+pipeline TICKscript stuff?
+Well, it can quickly be extended to become *much* more powerful.
 
 ### Extending Your TICKscripts
 
@@ -285,13 +299,15 @@ Now tail the alert log:
 tail -f /tmp/alerts.log
 ```
 
-There shouldn't be any alerts triggering just yet. Next, start a few while loops to add some load:
+There shouldn't be any alerts triggering just yet.
+Next, start a few while loops to add some load:
 
 ```sh
 while true; do i=0; done
 ```
 
-You should see an alert trigger in the log once you create enough load. Leave the loops running for a few minutes.
+You should see an alert trigger in the log once you create enough load.
+Leave the loops running for a few minutes.
 After canceling the loops, you should get another alert that cpu usage has again changed.
 Using this technique you can get alerts for the raising and falling edges of cpu usage, as well as any outliers.
 
@@ -300,23 +316,25 @@ Using this technique you can get alerts for the raising and falling edges of cpu
 Now that we understand the basics, here is a more real world example.
 Once you get metrics from all your hosts streaming to Kapacitor, you can do something like: Aggregate and group
 the cpu usage for each service running in each datacenter, and then trigger an alert
-based off the 95th percentile. In addition to just writing the alert to a log, Kapacitor can
+based off the 95th percentile.
+In addition to just writing the alert to a log, Kapacitor can
 integrate with third-party utilities: currently Slack, PagerDuty and VictorOps are supported, as well as
 posting the alert to a custom endpoint or executing a custom script.
-You can also define a custom message format so that alerts have the right context and meaning. The TICKscript for this would look like:
+You can also define a custom message format so that alerts have the right context and meaning.
+The TICKscript for this would look like:
 
 ```javascript
 stream
     .from().measurement('cpu_usage_idle')
     // create a new field called 'used' which inverts the idle cpu.
-    .eval(lambda: 100 - "value")
+.eval(lambda: 100 - "value")
         .as('used')
     .groupBy('service', 'datacenter')
     .window()
         .period(1m)
         .every(1m)
     // calculate the 95th percentile of the used cpu.
-    .mapReduce(influxql.percentile('used', 95))
+.mapReduce(influxql.percentile('used', 95))
     .eval(lambda: sigma("percentile"))
         .as('sigma')
         .keep('percentile', 'sigma')

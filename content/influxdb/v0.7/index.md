@@ -8,4 +8,5 @@ menu:
     weight: 20
 ---
 
-__InfluxDB v0.7 is no longer actively developed. For new development, we highly recommend using the latest version.__
+__InfluxDB v0.7 is no longer actively developed.
+For new development, we highly recommend using the latest version.__

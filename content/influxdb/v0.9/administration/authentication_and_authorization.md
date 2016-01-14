@@ -39,20 +39,26 @@ This document covers setting up and managing authentication and authorization in
 	
 [Authentication and authorization HTTP errors](/influxdb/v0.9/administration/authentication_and_authorization/#authentication-and-authorization-http-errors)
 
-
-> **Note:** Authentication and authorization should not be relied upon to prevent access and protect data from malicious actors.  If additional security or compliance features are desired, InfluxDB should be run behind a third-party service.
+> **Note:** Authentication and authorization should not be relied upon to prevent access and protect data from malicious actors.
+If additional security or compliance features are desired, InfluxDB should be run behind a third-party service.
 
 ## Authentication
 
-InfluxDB's HTTP API and the command line interface (CLI), which connects to the database using the API, include simple, built-in authentication based on user credentials. When you enable authentication InfluxDB only executes HTTP requests that are sent with valid credentials. 
+InfluxDB's HTTP API and the command line interface (CLI), which connects to the database using the API, include simple, built-in authentication based on user credentials.
+When you enable authentication InfluxDB only executes HTTP requests that are sent with valid credentials.
 
-> **Note:** Authentication only occurs at the HTTP request scope. Plugins do not currently have the ability to authenticate requests and service endpoints (for example, Graphite, collectd, etc.) are not authenticated.
+
+> **Note:** Authentication only occurs at the HTTP request scope.
+Plugins do not currently have the ability to authenticate requests and service endpoints (for example, Graphite, collectd, etc.) are not authenticated.
 
 ### Set up authentication
 ---
-1. Create at least one [admin user](/influxdb/v0.9/administration/authentication_and_authorization/#admin-users). See the [authorization section](/influxdb/v0.9/administration/authentication_and_authorization/#authorization) for how to create an admin user.
- 
-2. By default, authentication is disabled in the configuration file. Enable authentication by setting the `auth-enabled` option to `true` in the `[http]` section of the configuration file:
+1.
+Create at least one [admin user](/influxdb/v0.9/administration/authentication_and_authorization/#admin-users).
+See the [authorization section](/influxdb/v0.9/administration/authentication_and_authorization/#authorization) for how to create an admin user.
+2.
+By default, authentication is disabled in the configuration file.
+Enable authentication by setting the `auth-enabled` option to `true` in the `[http]` section of the configuration file:
 
     ```
 [http]  
@@ -66,16 +72,17 @@ InfluxDB's HTTP API and the command line interface (CLI), which connects to the 
   https-certificate = "/etc/ssl/influxdb.pem"  
     ```
     
-3. Restart the process.
+3.
+Restart the process.
 
 Now InfluxDB will check user credentials on every request and will only process requests that have valid credentials for an existing user.
-    
 > **Note:** If you enable authentication and have no users, InfluxDB will **not** enforce authentication until you create the first admin user, and InfluxDB will only accept the [query](/influxdb/v0.9/administration/authentication_and_authorization/#create-a-new-admin-user) that creates an admin user.
 
 ### Authenticating requests
 ---
 #### Authenticate using the HTTP API
-There are two options for authenticating with the HTTP API. 
+There are two options for authenticating with the HTTP API.
+
 
 * Authenticate with Basic Authentication as described in [RFC 2617, Section 2](http://tools.ietf.org/html/rfc2617) - this is the preferred method for providing user credentials.
 
@@ -85,7 +92,9 @@ There are two options for authenticating with the HTTP API.
 curl -G http://localhost:8086/query -u todd:influxdb4ever --data-urlencode "q=SHOW DATABASES"
     ```
 
-* Authenticate by providing query parameters in the URL. Set `u` as the username and `p` as the password. 
+* Authenticate by providing query parameters in the URL.
+Set `u` as the username and `p` as the password.
+
 
     Example:
 
@@ -93,7 +102,9 @@ curl -G http://localhost:8086/query -u todd:influxdb4ever --data-urlencode "q=SH
 curl -G http://localhost:8086/query --data-urlencode "u=todd" --data-urlencode "p=influxdb4ever" --data-urlencode "q=SHOW DATABASES"
     ```
     
-The queries in both examples assume that the user is an [admin user](/influxdb/v0.9/administration/authentication_and_authorization/#admin-users). See the section on [authorization](/influxdb/v0.9/administration/authentication_and_authorization/#authorization) for the different user types, their privileges, and more on user management. 
+The queries in both examples assume that the user is an [admin user](/influxdb/v0.9/administration/authentication_and_authorization/#admin-users).
+See the section on [authorization](/influxdb/v0.9/administration/authentication_and_authorization/#authorization) for the different user types, their privileges, and more on user management.
+
 
 Note about redacted passwords when disabled and enabled?
 
@@ -123,7 +134,8 @@ influx -username todd -password influxdb4ever
     ```
 
 ## Authorization
-Authorization is only enforced once you've [enabled authentication](/influxdb/v0.9/administration/authentication_and_authorization/#set-up-authentication). By default, authentication is disabled, all credentials are silently ignored, and all users have all privileges.
+Authorization is only enforced once you've [enabled authentication](/influxdb/v0.9/administration/authentication_and_authorization/#set-up-authentication).
+By default, authentication is disabled, all credentials are silently ignored, and all users have all privileges.
 
 ### User types and their privileges
 ---
@@ -154,7 +166,8 @@ Non-admin users can have one of the following three privileges per database:
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`WRITE`  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ALL` (both `READ` and `WRITE` access)
 
-`READ`, `WRITE`, and `ALL` privileges are controlled per user per database. A new non-admin user has no access to any database until they are specifically [granted privileges to a database](/influxdb/v0.9/administration/authentication_and_authorization/#grant-read-write-or-all-database-privileges-to-an-existing-user) by an admin user.
+`READ`, `WRITE`, and `ALL` privileges are controlled per user per database.
+A new non-admin user has no access to any database until they are specifically [granted privileges to a database](/influxdb/v0.9/administration/authentication_and_authorization/#grant-read-write-or-all-database-privileges-to-an-existing-user) by an admin user.
 
 ### User management commands
 ---
@@ -228,9 +241,9 @@ CREATE USER <username> WITH PASSWORD '<password>'
 > CREATE USER todd WITH PASSWORD 'influxdb41yf3'
 >
     ```
-    > **Note:** The password [string](/influxdb/v0.9/query_language/query_syntax/#string-literals-single-quoted) must be wrapped in single quotes. Do not include the single quotes when authenticating requests.
-    
-    > For passwords that include a single quote or a newline character, escape the single quote or newline character with a backslash both when creating the password and when submitting authentication requests.
+    > **Note:** The password [string](/influxdb/v0.9/query_language/query_syntax/#string-literals-single-quoted) must be wrapped in single quotes.
+Do not include the single quotes when authenticating requests.
+> For passwords that include a single quote or a newline character, escape the single quote or newline character with a backslash both when creating the password and when submitting authentication requests.
 
 * ##### `GRANT` `READ`, `WRITE` or `ALL` database privileges to an existing user:
 
@@ -309,9 +322,9 @@ SET PASSWORD FOR <username> = '<password>'
 >
     ```
     
-    > **Note:** The password [string](/influxdb/v0.9/query_language/query_syntax/#string-literals-single-quoted) must be wrapped in single quotes. Do not include the single quotes when authenticating requests.
-    
-    > For passwords that include a single quote or a newline character, escape the single quote or newline character with a backslash both when creating the password and when submitting authentication requests.
+    > **Note:** The password [string](/influxdb/v0.9/query_language/query_syntax/#string-literals-single-quoted) must be wrapped in single quotes.
+Do not include the single quotes when authenticating requests.
+> For passwords that include a single quote or a newline character, escape the single quote or newline character with a backslash both when creating the password and when submitting authentication requests.
 
 * ##### `DROP` a user:
 
@@ -328,7 +341,5 @@ DROP USER <username>
 
 ## Authentication and authorization HTTP errors
 Requests with invalid credentials and requests by unauthorized users yield the `HTTP 401 Unauthorized` response.
- 
-
 
 

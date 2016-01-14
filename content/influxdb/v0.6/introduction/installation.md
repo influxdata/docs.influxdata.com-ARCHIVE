@@ -3,7 +3,8 @@ title: Installation
 ---
 
 ## Ports
-By default InfluxDB will use ports `8083`, `8086`, `8090`, and `8099`. Once you install you can change those ports and other options in the configuration file, which is located at either `/opt/influxdb/shared/config.toml` or `/usr/local/etc/influxdb.conf`
+By default InfluxDB will use ports `8083`, `8086`, `8090`, and `8099`.
+Once you install you can change those ports and other options in the configuration file, which is located at either `/opt/influxdb/shared/config.toml` or `/usr/local/etc/influxdb.conf`
 
 ## Ubuntu & Debian
 Debian users can install by downloading the package and installing it like this:

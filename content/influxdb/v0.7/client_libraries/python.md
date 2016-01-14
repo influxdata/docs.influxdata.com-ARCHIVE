@@ -28,11 +28,13 @@ First, create a new InfluxDB object by connecting to a running instance.
 
 #### create\_database(_database_)
 
-Create database. Requires cluster-admin privileges.
+Create database.
+Requires cluster-admin privileges.
 
 #### delete\_database(_database_)
 
-Delete database. Requires cluster-admin privileges.
+Delete database.
+Requires cluster-admin privileges.
 
 #### switch\_db(_databaseName_)
 

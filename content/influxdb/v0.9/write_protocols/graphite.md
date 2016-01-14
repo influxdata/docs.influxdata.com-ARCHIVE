@@ -6,4 +6,5 @@ menu:
     parent: write_protocols
 ---
 
-InfluxDB provides an easy way to hook up Graphite as an input source. See the [README on GitHub](https://github.com/influxdb/influxdb/blob/master/services/graphite/README.md) for more information.
+InfluxDB provides an easy way to hook up Graphite as an input source.
+See the [README on GitHub](https://github.com/influxdb/influxdb/blob/master/services/graphite/README.md) for more information.
