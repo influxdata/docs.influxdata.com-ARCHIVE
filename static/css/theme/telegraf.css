@@ -14,15 +14,18 @@
 .product-switcher {
 	background-color: #F95F53;
 }
-.product-switcher:hover,
-.product-switcher.show,
-.product-switcher--menu {
-	background-color: #FF8564;
-}
 a.product-sidebar--nav-item,
 a.product-sidebar--nav-item:hover {
 	color: #F95F53;
 }
 .page-title {
 	background-image: url(../../img/page-title__telegraf.jpg);
+}
+
+@media (min-width: 925px) {
+	.product-switcher:hover,
+	.product-switcher.show,
+	.product-switcher--menu {
+		background-color: #FF8564;
+	}
 }

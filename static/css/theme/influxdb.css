@@ -11,16 +11,8 @@
 .product-switcher--toggle {
 	color: #fff;
 }
-.page-title {
-	background: #326BBA;
-}
 .product-switcher {
 	background-color: #4591ed;
-}
-.product-switcher:hover,
-.product-switcher.show,
-.product-switcher--menu {
-	background-color: #22ADF6;
 }
 a.product-sidebar--nav-item,
 a.product-sidebar--nav-item:hover {
@@ -28,4 +20,12 @@ a.product-sidebar--nav-item:hover {
 }
 .page-title {
 	background-image: url(../../img/page-title__influxdb.jpg);
+}
+
+@media (min-width: 925px) {
+	.product-switcher:hover,
+	.product-switcher.show,
+	.product-switcher--menu {
+		background-color: #22ADF6;
+	}
 }
