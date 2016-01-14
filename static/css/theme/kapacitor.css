@@ -21,6 +21,14 @@ a.product-sidebar--nav-item:hover {
 .page-title {
 	background-image: url(../../img/page-title__kapacitor.jpg);
 }
+a.ad-cta:link,
+a.ad-cta:visited,
+a.ad-cta:active {
+	background-color: #7A65F2;
+}
+a.ad-cta:hover {
+	background-color: #9394FF;
+}
 
 @media (min-width: 925px) {
 	.product-switcher:hover,

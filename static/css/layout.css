@@ -176,7 +176,8 @@ table {
 .product-sidebar,
 .page-content,
 .main-nav--hamburger,
-.documentation-home {
+.documentation-home,
+.advertisement {
 	position: absolute;
 }
 .main-nav--links,
@@ -189,7 +190,8 @@ table {
 .product-switcher {
 	z-index: 7;
 }
-.product-sidebar {
+.product-sidebar,
+.advertisement {
 	z-index: 6;
 }
 .page-content,
@@ -351,6 +353,34 @@ a.product-switcher--item:visited {
 a.product-switcher--item:hover {
 	background-color: #454C59;
 	color: #fff;
+}
+
+/* Advertisement */
+.advertisement {
+	display: none;
+	background-color: #101419;
+	padding: 2rem;
+	font-size: 1rem;
+	line-height: 1.3em;
+}
+.advertisement strong {
+	color: #E6E9EC;
+}
+a.ad-cta:link,
+a.ad-cta:visited,
+a.ad-cta:active {
+	display: inline-block;
+	text-decoration: none;
+	color: #fff;
+	border-radius: 4px;
+	padding: 0.75em 1.5em;
+	background-color: #68707C;
+	margin-top: 1em;
+	transition: all 0.3s ease;
+}
+a.ad-cta:hover {
+	background-color: #8F97A1;
+	cursor: pointer;
 }
 /*
 	Page Title
@@ -537,6 +567,14 @@ a.product-sidebar--page:hover {
 	+----------------------------+
 */
 @media (min-width: 925px) {
+	.advertisement {
+		display: block;
+		top: calc(3.25rem + 4.5rem);
+		height: 10rem;
+	}
+	.advertisement strong {
+		color: 
+	}
 	.main-nav {
 		height: 3.25rem;
 	}
@@ -553,7 +591,8 @@ a.product-sidebar--page:hover {
 	}
 	.product-switcher,
 	.product-sidebar,
-	.product-sidebar.open {
+	.product-sidebar.open,
+	.advertisement {
 		width: 19rem;
 		transition: none;
 	}
@@ -565,8 +604,8 @@ a.product-sidebar--page:hover {
 	}
 	.product-sidebar,
 	.product-sidebar.open {
-		top: calc(3.25rem + 4.5rem);
-		height: calc(100% - 3.25rem - 4.5rem);
+		top: calc(3.25rem + 4.5rem + 10rem);
+		height: calc(100% - 3.25rem - 4.5rem - 10rem);
 	}
 	.page-content {
 		top: calc(3.25rem);
@@ -726,7 +765,8 @@ a.product-sidebar--page:hover {
 	.product-switcher,
 	.product-sidebar,
 	.product-sidebar.open,
-	.product-switcher--container {
+	.product-switcher--container,
+	.advertisement {
 		width: 26rem;
 	}
 	.page-content,
