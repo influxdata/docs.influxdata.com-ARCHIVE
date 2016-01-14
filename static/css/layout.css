@@ -174,7 +174,6 @@ table {
 .product-switcher,
 .product-switcher--menu,
 .product-sidebar,
-.page-title,
 .page-content,
 .main-nav--hamburger,
 .documentation-home {
@@ -187,8 +186,7 @@ table {
 	overflow: hidden;
 }
 .main-nav,
-.product-switcher,
-.page-title {
+.product-switcher {
 	z-index: 7;
 }
 .product-sidebar {
@@ -358,45 +356,29 @@ a.product-switcher--item:hover {
 	Page Title
 */
 .page-title {
-	top: calc(2.5rem + 3rem);
-	left: 0;
+	display: inline-block;
 	width: 100%;
-	height: 3rem;
+	height: 30rem;
 	background-color: #373D49;
 	background-position: center center;
 	background-size: cover !important;
 	background-repeat: no-repeat;
+	position: relative;
 }
-.page-title--toggle {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 3rem;
-	height: 3rem;
-	transition: all 0.3s ease;
-	text-align: center;
+.page-title .page-content--container {
+	font-weight: 200;
+	font-style: italic;
+	font-family: 'Klavika-Light';
+	font-size: 3.25rem;
+	line-height: 1.3em;
+	letter-spacing: -0.04em;
+	text-align: left;
 	color: #fff;
-	font-weight: 900;
-	line-height: 2.9rem;
-	font-size: 1rem;
-}
-.page-title--toggle.open {
-	transform: rotate(90deg);
-	-webkit-transform: rotate(90deg);
-}
-.page-title--name {
 	position: absolute;
-	left: 2.625rem;
-	display: block;
-	width: calc(100% - 2.625rem);
-	height: 3rem;
-	line-height: 3rem;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	color: #fff;
-	letter-spacing: -0.01em;
-	font-weight: 600;
+	bottom: 10%;
+	left: 50%;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
 }
 /*
 	Page Content
@@ -581,9 +563,6 @@ a.product-sidebar--page:hover {
 		left: 19rem;
 		width: calc(100% - 19rem);
 	}
-	.page-title--toggle {
-		display: none;
-	}
 	.product-sidebar,
 	.product-sidebar.open {
 		top: calc(3.25rem + 4.5rem);
@@ -599,8 +578,7 @@ a.product-sidebar--page:hover {
 		-webkit-transform: none;
 		transition: none;
 	}
-	.product-switcher--current,
-	.page-title--name {
+	.product-switcher--current {
 		height: 4.5rem;
 		line-height: 4.5rem;
 	}
@@ -629,32 +607,9 @@ a.product-sidebar--page:hover {
 		margin: 5rem auto;
 	}
 	.page-title {
-		width: 100%;
-		display: inline-block;
-		position: relative;
-		left: 0;
-		top: 0;
 		height: 41rem;
 	}
-	.page-title--name {
-		font-weight: 200;
-		font-style: italic;
-		font-family: 'Klavika-Light';
-		font-size: 3.25rem;
-		left: 50%;
-		transform: translateX(-50%);
-		-webkit-transform: translateX(-50%);
-		text-align: left;
-		bottom: 25%;
-		white-space: normal;
-		height: auto;
-		line-height: 1.3em;
-		letter-spacing: -0.04em;
-		padding-right: 20%;
-
-	}
-	.page-content--container,
-	.page-title--name {
+	.page-content--container {
 		width: calc(100% - 10rem);
 	}
 	.main-nav--links,
@@ -765,8 +720,7 @@ a.product-sidebar--page:hover {
 	.product-switcher--current {
 		font-size: 1.625em;
 	}
-	.page-content--container,
-	.page-title--name {
+	.page-content--container {
 		width: calc(1184px - 10rem);
 	}
 	.product-switcher,
@@ -781,7 +735,7 @@ a.product-sidebar--page:hover {
 		left: 26rem;
 		width: calc(100% - 26rem);
 	}
-	.page-title--name {
+	.page-title {
 		font-size: 3.625rem;
 	}
 }
