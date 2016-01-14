@@ -809,8 +809,8 @@ a.product-sidebar--page:hover {
 	line-height: 2em;
 	height: 2em;
 	position: absolute;
-	color: #fff;
-	background-color: #575E6B;
+	color: #454C59;
+	background-color: #EEF0F2;
 	border-radius: 3px;
 	padding: 0 0.75em;
 	font-size: 0.875rem;
@@ -828,7 +828,7 @@ a.product-sidebar--page:hover {
 	bottom: -14px;
 	transform: translateX(-50%);
 	-webkit-transform: translateX(-50%);
-	border-top: 8px solid #575E6B;
+	border-top: 8px solid #EEF0F2;
 	border-left: 8px solid transparent;
 	border-right: 8px solid transparent;
 	border-bottom: 8px solid transparent;
