@@ -1,7 +1,22 @@
 /*
 	Docs Text Formatting
 */
+a:link,
+a:active,
+a:visited {
+	text-decoration: none;
+	font-weight: 700;
+	color: #4591ED;
+	transition: color 0.2s ease;
+}
+a:hover {
+	color: #00C9FF;
+	cursor: pointer;
+}
 
+.page-content--container {
+	color: #BEC4CC;
+}
 .page-content--container > * {
 	text-decoration: none;
 }
@@ -13,11 +28,16 @@
 	border: none;
 	display: block;
 }
+.page-content--container h1,
+.page-content--container h2,
+.page-content--container h3,
+.page-content--container h4 {
+	color: #F5F6F7;
+}
 .page-content--container h1 {
 	font-size: 3.5em;
 	font-weight: 100;
 	margin-bottom: 1.5em;
-	color: #E6E9EC;
 }
 .page-content--container h2 {
 	font-size: 1.75em;
@@ -27,7 +47,6 @@
 	margin-bottom: 0.5em;
 	border-bottom: 2px solid #2C323D;
 	line-height: 1.375em;
-	color: #E6E9EC;
 }
 .page-content--container h3 {
 	font-size: 1em;
@@ -35,7 +54,6 @@
 	margin-top: 1em;
 }
 .page-content--container h4 {
-	padding-left: 1.5em;
 	font-size: 1em;
 	margin-bottom: 0.5em;
 }
@@ -46,7 +64,6 @@
 	margin-top: 0;
 }
 .page-content--container p {
-	padding-left: 1.5em;
 	line-height: 1.75em;
 	margin-bottom: 2.75em;
 }
@@ -84,16 +101,15 @@
 	padding: 1em 1.5em;
 	border-left: 0.875rem solid #3AC69A;
 	border-radius: 3px;
-	width: calc(100% - 1.65rem);
-	margin-left: 1.65rem;
 	margin-bottom: 2.5em;
 	background-color: #262B35;
-	font-size: 0.875rem;
+	font-size: 0.875em;
 }
 .page-content--container blockquote p {
 	line-height: 1.5em;
 	font-size: inherit;
-	padding-left: 0;
+	width: 100%;
+	margin-left: 0;
 	margin-bottom: 1em;
 }
 .page-content--container blockquote pre {
@@ -127,8 +143,6 @@
 	border-left: 0.875rem solid #F95F53;
 	position: relative;
 	color: #FF8564;
-	width: calc(100% - 1.5em);
-	margin-left: 1.5em;
 	line-height: 1.3em;
 }
 .page-content--container dt:after {
@@ -201,8 +215,6 @@
 	border-left-width: 0.875rem;
 	background-color: #181C23;
 	margin-bottom: 2.5em;
-	width: calc(100% - 1.5em);
-	margin-left: 1.5em;
 }
 .page-content--container pre::-webkit-scrollbar              { background-color: #181C23; width: 1rem; }
 .page-content--container pre::-webkit-scrollbar-track        { background-color: #181C23; }
@@ -217,4 +229,47 @@
 	padding: 0;
 	border-radius: 0;
 	background-color: transparent;
+}
+
+/* Indented items */
+.page-content--container dt,
+.page-content--container blockquote,
+.page-content--container pre,
+.page-content--container h4,
+.page-content--container p {
+	width: calc(100% - 1.5rem);
+	margin-left: 1.5rem;
+}
+
+
+
+/*
+
+	Media Queries
+	________________________________________________________________________________________________________________
+
+*/
+
+@media screen and (min-width: 1550px) {
+	.page-content--container {
+		font-size: 1.125rem;
+	}
+	/* Indented items */
+	.page-content--container dt,
+	.page-content--container blockquote,
+	.page-content--container pre,
+	.page-content--container h4,
+	.page-content--container p {
+		width: calc(100% - 3.5rem);
+		margin-left: 3.5rem;
+	}
+}
+@media screen and (min-width: 1800px) {
+	.page-content--container {
+		font-size: 1.25rem;
+	}
+	.page-content--container code,
+	.page-content--container pre {
+		border-width: 2px;
+	}
 }
