@@ -428,6 +428,19 @@ a.product-switcher--item:hover {
 	margin: 2rem auto;
 	width: calc(100% - 4rem);
 }
+
+/*
+	Page Footer Elements
+*/
+.page-content--contribute {
+	width: 100%;
+	height: auto;
+	display: inline-block;
+	background-color: #262B35;
+}
+
+
+
 /*
 	Product Sidebar
 */
