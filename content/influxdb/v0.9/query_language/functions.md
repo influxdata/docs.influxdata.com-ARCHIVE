@@ -405,6 +405,8 @@ SELECT BOTTOM(water_level,location,3) FROM h2o_feet
 ```
 
 > CLI response:
+> <br>
+> <br>
 ```
 name: h2o_feet
 --------------
@@ -423,6 +425,8 @@ time			               bottom	 location
 ```
 
 > CLI response:
+> <br>
+> <br>
 ```sh
 name: h2o_feet
 --------------
@@ -811,6 +815,8 @@ To demonstrate this behavior, see the results of the above example query where `
 ```
 
 > CLI response:
+> <br>
+> <br>
 ```sh
 name: h2o_feet
 --------------
@@ -829,6 +835,8 @@ time			               top	   location
 ```
 
 > CLI response:
+> <br>
+> <br>
 ```sh
 name: h2o_feet
 --------------

@@ -15,7 +15,7 @@ This document covers setting up and managing authentication and authorization in
 * [Authenticating requests](/influxdb/v0.9/administration/authentication_and_authorization/#authenticating-requests)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Authenticate using the HTTP API](/influxdb/v0.9/administration/authentication_and_authorization/#authenticate-using-the-http-api)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Authenticate using the CLI](/influxdb/v0.9/administration/authentication_and_authorization/#authenticate-using-the-cli)  
-	
+
 [Authorization](/influxdb/v0.9/administration/authentication_and_authorization/#authorization)
 
 * [User types and their privileges](/influxdb/v0.9/administration/authentication_and_authorization/#user-types-and-their-privileges)  
@@ -36,7 +36,7 @@ This document covers setting up and managing authentication and authorization in
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Re`SET` a user's password](/influxdb/v0.9/administration/authentication_and_authorization/#re-set-a-user-s-password)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`DROP` a user](/influxdb/v0.9/administration/authentication_and_authorization/#drop-a-user)  
 
-	
+
 [Authentication and authorization HTTP errors](/influxdb/v0.9/administration/authentication_and_authorization/#authentication-and-authorization-http-errors)
 
 > **Note:** Authentication and authorization should not be relied upon to prevent access and protect data from malicious actors.
@@ -53,11 +53,10 @@ Plugins do not currently have the ability to authenticate requests and service e
 
 ### Set up authentication
 ---
-1.
-Create at least one [admin user](/influxdb/v0.9/administration/authentication_and_authorization/#admin-users).
+1. Create at least one [admin user](/influxdb/v0.9/administration/authentication_and_authorization/#admin-users).
 See the [authorization section](/influxdb/v0.9/administration/authentication_and_authorization/#authorization) for how to create an admin user.
-2.
-By default, authentication is disabled in the configuration file.
+
+2. By default, authentication is disabled in the configuration file.
 Enable authentication by setting the `auth-enabled` option to `true` in the `[http]` section of the configuration file:
 
     ```
@@ -71,11 +70,11 @@ Enable authentication by setting the `auth-enabled` option to `true` in the `[ht
   https-enabled = false  
   https-certificate = "/etc/ssl/influxdb.pem"  
     ```
-    
-3.
-Restart the process.
+
+3. Restart the process.
 
 Now InfluxDB will check user credentials on every request and will only process requests that have valid credentials for an existing user.
+
 > **Note:** If you enable authentication and have no users, InfluxDB will **not** enforce authentication until you create the first admin user, and InfluxDB will only accept the [query](/influxdb/v0.9/administration/authentication_and_authorization/#create-a-new-admin-user) that creates an admin user.
 
 ### Authenticating requests
@@ -101,7 +100,7 @@ Set `u` as the username and `p` as the password.
     ```sh
 curl -G http://localhost:8086/query --data-urlencode "u=todd" --data-urlencode "p=influxdb4ever" --data-urlencode "q=SHOW DATABASES"
     ```
-    
+
 The queries in both examples assume that the user is an [admin user](/influxdb/v0.9/administration/authentication_and_authorization/#admin-users).
 See the section on [authorization](/influxdb/v0.9/administration/authentication_and_authorization/#authorization) for the different user types, their privileges, and more on user management.
 
@@ -116,7 +115,7 @@ There are two options for authenticating with the CLI.
 * Authenticate with `auth <username> <password>` after starting the CLI.
 
     Example:
-    
+
     ```sh
 $ influx
 Connected to http://localhost:8086 version 0.9.4.1
@@ -179,7 +178,7 @@ CREATE USER <username> WITH PASSWORD '<password>' WITH ALL PRIVILEGES
     ```
 
     CLI example:
-    
+
     ```sh
 > CREATE USER paul WITH PASSWORD 'timeseries4days' WITH ALL PRIVILEGES
 >
@@ -192,7 +191,7 @@ GRANT ALL PRIVILEGES TO <username>
     ```
 
     CLI example:
-    
+
     ```sh
 > GRANT ALL PRIVILEGES TO todd
 >
@@ -205,7 +204,7 @@ REVOKE ALL PRIVILEGES FROM <username>
     ```
 
     CLI example:
-    
+
     ```sh
 > REVOKE ALL PRIVILEGES FROM todd
 >
@@ -234,9 +233,9 @@ dobby    false
     ```sql
 CREATE USER <username> WITH PASSWORD '<password>'
     ```
-    
+
     CLI example:
-    
+
     ```sh
 > CREATE USER todd WITH PASSWORD 'influxdb41yf3'
 >
@@ -252,21 +251,21 @@ GRANT [READ,WRITE,ALL] ON <database_name> TO <username>
     ```
 
     CLI examples:
-    
+
     `GRANT` `READ` access to `todd` on the `NOAA_water_database` database:
-    
+
     ```sh
 > GRANT READ ON NOAA_water_database TO todd
 >
     ```
 
     `GRANT` `ALL` access to `todd` on the `NOAA_water_database` database:
-    
+
     ```sh
 > GRANT ALL ON NOAA_water_database TO todd
 >
     ```
-    
+
 * ##### `REVOKE` `READ`, `WRITE`, or `ALL` database privileges from an existing user:
 
     ```sql
@@ -276,12 +275,12 @@ REVOKE [READ,WRITE,ALL] ON <database_name> FROM <username>
     CLI examples:
 
     `REVOKE` `ALL` privileges from `todd` on the `NOAA_water_database` database:
-    
+
     ```sh
 > REVOKE ALL ON NOAA_water_database FROM todd
 >
     ```
-    
+
     `REVOKE` `WRITE` privileges from `todd` on the `NOAA_water_database` database:
 
     ```sh
@@ -291,7 +290,7 @@ REVOKE [READ,WRITE,ALL] ON <database_name> FROM <username>
 
     >**Note:** If a user with `ALL` privileges has `WRITE` privileges revoked, they are left with `READ` privileges, and vice versa.
 
-* ##### `SHOW` a user's database privileges: 
+* ##### `SHOW` a user's database privileges:
 
     ```sql
 SHOW GRANTS FOR <user_name>
@@ -316,12 +315,12 @@ SET PASSWORD FOR <username> = '<password>'
     ```
 
     CLI example:
-    
+
     ```sh
 > SET PASSWORD FOR todd = 'influxdb4ever'
 >
     ```
-    
+
     > **Note:** The password [string](/influxdb/v0.9/query_language/query_syntax/#string-literals-single-quoted) must be wrapped in single quotes.
 Do not include the single quotes when authenticating requests.
 > For passwords that include a single quote or a newline character, escape the single quote or newline character with a backslash both when creating the password and when submitting authentication requests.
@@ -333,7 +332,7 @@ DROP USER <username>
     ```
 
     CLI example:
-    
+
     ```sh
 > DROP USER todd
 >
@@ -341,5 +340,3 @@ DROP USER <username>
 
 ## Authentication and authorization HTTP errors
 Requests with invalid credentials and requests by unauthorized users yield the `HTTP 401 Unauthorized` response.
-
-
