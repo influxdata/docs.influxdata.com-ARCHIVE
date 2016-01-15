@@ -1,5 +1,9 @@
 ---
 title: Overview
+menu:
+  influxdb_07:
+    weight: 0
+    parent: introduction
 ---
 
 InfluxDB is a time series, events, and metrics database. It's written in Go and has no external dependencies. That means once you install it there's nothing else to manage (like Redis, HBase, or whatever). It's designed to be distributed and scale horizontally, but be useful even if you're only running it on a single box. There are three of us ([Paul Dix](https://twitter.com/pauldix), [Todd Persen](https://github.com/toddboom), and [John Shahid](https://github.com/jvshahid) working full time on the core of the database. We're a YC (W13) backed company.

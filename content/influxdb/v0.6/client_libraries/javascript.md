@@ -1,5 +1,9 @@
 ---
 title: JavaScript
+menu:
+  influxdb_06:
+    weight: 0
+    parent: client_libraries
 ---
 
 The [InfluxDB javascript library lives on GitHub](https://github.com/influxdb/influxdb-js)

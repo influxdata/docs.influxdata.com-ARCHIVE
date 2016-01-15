@@ -1,5 +1,9 @@
 ---
 title: Query Language
+menu:
+  influxdb_06:
+    weight: 10
+    parent: api
 ---
 
 InfluxDB features a SQL like query language, only used for querying data. The HTTP API has endpoints for writing data and performing other database administration tasks. The only exception to this is [continuous queries](continuous_queries.html), which perpetually write their results into one or more time series.

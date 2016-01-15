@@ -1,5 +1,10 @@
 ---
 title: Guides
+menu:
+  influxdb_07:
+    name: Introduction
+    weight: 0
+    parent: guides
 ---
 
 The goal of guides is to walk you through some specific use case or implementation scenario. If there's something you've done recently that you think would make a good guide, [let us know on the mailing list](https://groups.google.com/forum/#!forum/influxdb).

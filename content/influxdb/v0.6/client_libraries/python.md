@@ -1,5 +1,9 @@
 ---
 title: Python
+menu:
+  influxdb_06:
+    weight: 30
+    parent: client_libraries
 ---
 
 The [InfluxDB Python library lives on GitHub](https://github.com/influxdb/influxdb-python) thanks to [smly](https://github.com/smly).

@@ -1,5 +1,9 @@
 ---
 title: Getting Started
+menu:
+  influxdb_06:
+    weight: 20
+    parent: introduction
 ---
 
 Now that you've [installed InfluxDB](installation.html) you're ready to start doing awesome things. There are many client libraries available for InfluxDB, but in this section we're going to use the built in user interface to get started quickly.

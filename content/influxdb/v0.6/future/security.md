@@ -1,5 +1,9 @@
 ---
 title: Security Enhancements
+menu:
+  influxdb_06:
+    weight: 50
+    parent: future
 ---
 
 Should it be possible to limit a user's permissions for reads and writes
