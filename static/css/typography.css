@@ -132,12 +132,13 @@ a:hover {
 .page--body ol,
 .page--body ul {
 	font-size: 1em;
+	padding-left: 1.125em;
 }
 .page--body ul li,
 .page--body ol li {
 	display: list-item;
-	list-style-position: inside;
-	padding-left: 1em;
+	list-style-position: outside;
+	padding-left: 0.5em;
 }
 .page--body ul li {
 	list-style-type: disc;
