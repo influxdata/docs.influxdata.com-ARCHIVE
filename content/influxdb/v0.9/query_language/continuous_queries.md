@@ -30,20 +30,38 @@ Only admin users are allowed to work with continuous queries. For more on user p
 ## InfluxQL for creating a CQ
 ### The `CREATE CONTINUOUS QUERY` statement
 ```sql
-CREATE CONTINUOUS QUERY <cq_name> ON <database_name> BEGIN SELECT <function>(<stuff>)[,<function>(<stuff>)] INTO <different_measurement> FROM <current_measurement> [WHERE <stuff>] GROUP BY time(<interval>)[,<stuff>] END
+CREATE CONTINUOUS QUERY <cq_name> ON <database_name> [RESAMPLE [EVERY <interval>] [FOR <interval>]] BEGIN SELECT <function>(<stuff>)[,<function>(<stuff>)] INTO <different_measurement> FROM <current_measurement> [WHERE <stuff>] GROUP BY time(<interval>)[,<stuff>] END
 ```
 
-The `CREATE CONTINUOUS QUERY` statement is essentially an InfluxQL query surrounded by `CREATE CONTINUOUS QUERY ON <database_name> BEGIN` and `END`. Notice that the query portion of the statement differs from a typical `SELECT [...] GROUP BY (time)` statement in two ways:
+The `CREATE CONTINUOUS QUERY` statement is essentially an InfluxQL query surrounded by `CREATE CONTINUOUS QUERY [...] BEGIN` and `END`.
+The following discussion breaks the CQ statement into its meta portion (everything between `CREATE` and `BEGIN`) and query portion (everything between `BEGIN` and `END`).
+
+#### Meta syntax:
+```
+CREATE CONTINUOUS QUERY ON <database_name> [RESAMPLE [EVERY <interval>] [FOR <interval>]]
+```
+
+A CQ belongs to a database.
+Specify the database where you want the CQ to live with `ON <database_name>`.  
+
+The optional `RESAMPLE` clause determines how often InfluxDB runs the CQ (`EVERY <interval>`) and the time range over which InfluxDB runs the CQ (`FOR <interval>`).
+If included, the `RESAMPLE` clause must specify either `EVERY`, or `FOR`, or both.
+Without the `RESAMPLE` clause, InfluxDB runs the CQ at the same interval as the `GROUP BY time()` interval and it calculates the query for the most recent `GROUP BY time()` interval (that is, where time is between `now()` and `now()` minus the `GROUP BY time()` interval).
+
+#### Query syntax:
+```
+BEGIN SELECT <function>(<stuff>)[,<function>(<stuff>)] INTO <different_measurement> FROM <current_measurement> [WHERE <stuff>] GROUP BY time(<interval>)[,<stuff>] END
+```
+
+The query portion of the statement differs from a typical `SELECT [...] GROUP BY (time)` statement in two ways:
 
 1. The `INTO` clause:
-
-    This is where you specify the destination measurement for the query results.
+This is where you specify the destination measurement for the query results.
 
 2. The optional `WHERE` clause:
+Because CQs run on regularly incremented time intervals you don't need to (and shouldn't!) specify a time range in the `WHERE` clause. When included, the CQ's `WHERE` clause should filter information about tags.
 
-    Because CQs run on regularly incremented time intervals you don't need to (and shouldn't!) specify a time range in the `WHERE` clause. When included, the CQ's `WHERE` clause should filter information about tags.
-
-*CQ examples:*
+#### CQ examples:
 
 * Create a CQ with one function:
 
@@ -51,7 +69,8 @@ The `CREATE CONTINUOUS QUERY` statement is essentially an InfluxQL query surroun
 > CREATE CONTINUOUS QUERY minnie ON world BEGIN SELECT min(mouse) INTO min_mouse FROM zoo GROUP BY time(30m) END
     ```
 
-    Once executed, InfluxDB automatically calculates the 30 minute minimum of the field `mouse` in the measurement `zoo`, and it writes the results to the measurement `min_mouse`. Note that the CQ `minnie` only exists in the database `world`.
+    Once executed, InfluxDB automatically calculates the 30 minute minimum of the field `mouse` in the measurement `zoo`, and it writes the results to the measurement `min_mouse`.
+    Note that the CQ `minnie` only exists in the database `world`.
 
 * Create a CQ with one function and write the results to another [retention policy](/influxdb/v0.9/concepts/glossary/#retention-policy-rp):
 
@@ -61,7 +80,8 @@ The `CREATE CONTINUOUS QUERY` statement is essentially an InfluxQL query surroun
 
     The CQ `minnie_jr` acts in the same way as the CQ `minnie`, however, InfluxDB calculates the 30 minute minimum of the field `mouse` in the measurement `zoo` and under the retention policy `1day`, and it automatically writes the results of the query to the measurement `min_mouse` under the retention policy `4hours`.
 
-    Combining CQs and retention policies provides a useful way to automatically downsample data and expire the unnecessary raw data. For a complete discussion on this topic, see [Downsampling and Data Retention](/influxdb/v0.9/guides/downsampling_and_retention/).
+    Combining CQs and retention policies provides a useful way to automatically downsample data and expire the unnecessary raw data.
+    For a complete discussion on this topic, see [Downsampling and Data Retention](/influxdb/v0.9/guides/downsampling_and_retention/).
 
 * Create a CQ with two functions:
 
@@ -71,7 +91,8 @@ The `CREATE CONTINUOUS QUERY` statement is essentially an InfluxQL query surroun
 
     The CQ `minnie_maximus` automatically calculates the 30 minute minimum of the field `mouse` and the 30 minute maximum of the field `imus` (both fields are in the measurement `zoo`), and it writes the results to the measurement `min_max_mouse`.
 
-    > **Note:** If we create two CQs, one CQ to calculate the minimum and one CQ to calculate the maximum and we write the results to the same measurement, the data in the destination measurement may appear to be missing data. For a complete explanation, see [Frequently Encountered Issues](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#writing-more-than-one-continuous-query-to-a-single-series).   
+    > **Note:** If we create two CQs, one CQ to calculate the minimum and one CQ to calculate the maximum and we write the results to the same measurement, the data in the destination measurement may appear to be missing data.
+    For a complete explanation, see [Frequently Encountered Issues](/influxdb/v0.9/troubleshooting/frequently_encountered_issues/#writing-more-than-one-continuous-query-to-a-single-series).   
 
 * Create a CQ with two functions and personalize the [field keys](/influxdb/v0.9/concepts/glossary/#field-key) in the results:
 
@@ -79,7 +100,35 @@ The `CREATE CONTINUOUS QUERY` statement is essentially an InfluxQL query surroun
 > CREATE CONTINUOUS QUERY minnie_maximus_1 ON world BEGIN SELECT min(mouse) AS minuscule,max(imus) AS monstrous INTO min_max_mouse FROM zoo GROUP BY time(30m) END
     ```
 
-    The CQ `minnie_maximus_1` acts in the same way as `minnie_maximus`, however, InfluxDB names field keys `miniscule` and `monstrous` in the destination measurement instead of `min` and `max`. For more on `AS`, see [Functions](/influxdb/v0.9/query_language/functions/#rename-the-output-column-s-title-with-as).
+    The CQ `minnie_maximus_1` acts in the same way as `minnie_maximus`, however, InfluxDB names field keys `miniscule` and `monstrous` in the destination measurement instead of `min` and `max`.
+    For more on `AS`, see [Functions](/influxdb/v0.9/query_language/functions/#rename-the-output-column-s-title-with-as).
+
+* Create a CQ with a 30 minute `GROUP BY time()` interval that runs every 15 minutes:
+
+    ```sql
+> CREATE CONTINUOUS QUERY vampires ON transylvania RESAMPLE EVERY 15m BEGIN SELECT count(dracula) INTO vampire_populations FROM raw_vampires GROUP BY time(30m) END
+    ```
+
+    Without `RESAMPLE EVERY 15m`, `vampires` would run every 30 minutes - the same interval as the `GROUP BY time()` interval.
+
+* Create a CQ with a 30 minute `GROUP BY time()` interval that runs every 30 minutes and computes the query for all `GROUP BY time()` intervals within the last hour:
+
+    ```sql
+> CREATE CONTINUOUS QUERY vampires_1 ON transylvania RESAMPLE FOR 60m BEGIN SELECT count(dracula) INTO vampire_populations_1 FROM raw_vampires GROUP BY time(30m) END
+    ```
+
+    InfluxDB runs `vampires_1` every 30 minutes (the same interval as the `GROUP BY time()` interval) and it computes two queries per run:
+    one where time is between `now()` and `now() - 30m` and one where time is between `now() - 30m` and `now() - 60m`.
+    Without the `RESAMPLE` clause, InfluxDB would compute the query for only one 30 minute interval, that is, where time is between `now()` and `now() - 30m`.
+
+* Create a CQ with a 30 minute `GROUP BY time()` interval that runs every 15 minutes and computes the query for all `GROUP BY time()` intervals within the last hour:
+
+    ```sql
+> CREATE CONTINUOUS QUERY vampires_2 ON transylvania RESAMPLE EVERY 15m FOR 60m BEGIN SELECT count(dracula) INTO vampire_populations_2 FROM raw_vampires GROUP BY time(30m) END
+    ```
+
+    `vampires_2` runs every 15 minutes and computes two queries per run:
+    one where time is between `now()` and `now() - 30m` and one where time is between `now() - 30m` and `now() - 60m`
 
 ### CQs with backreferencing
 Use `:MEASUREMENT` in the `INTO` statement to backreference measurement names:
@@ -208,4 +257,4 @@ GROUP BY time(5m)
 > **Note**: In InfluxDB 0.9, a point is uniquely identified by the measurement, full tag set, and timestamp. Re-backfilling or writing another point with the same measurement, tag set, and timestamp will silently overwrite the already existing point, it will not create a duplicate.
 
 ## Further reading
-Now that you know how to create CQs with InfluxDB, check out [Downsampling and Data Retention](/influxdb/v0.9/guides/downsampling_and_retention/) for how to combine CQs with retention policies to automatically downsample data and expire unnecessary data. For details on how often CQs run and how many queries they generate per run, see [Configuring Continuous Queries](/influxdb/v0.9/query_language/continuous_queries_config/).
+Now that you know how to create CQs with InfluxDB, check out [Downsampling and Data Retention](/influxdb/v0.9/guides/downsampling_and_retention/) for how to combine CQs with retention policies to automatically downsample data and expire unnecessary data.
