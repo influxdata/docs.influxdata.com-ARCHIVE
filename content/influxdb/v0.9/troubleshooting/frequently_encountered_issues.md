@@ -261,35 +261,6 @@ time			               count
 1970-01-01T00:00:00Z	 8
 ```
 
-## Missing data after creating a new `DEFAULT` retention policy
-When you create a new `DEFAULT` retention policy (RP) on a database, the data written to the old `DEFAULT` RP remain in the old RP.
-Queries that do not specify a RP automatically query the new `DEFAULT` RP so the old data may appear to be missing.
-To query the old data you must fully qualify the relevant data in the query.
-
-Example:
-
-All of the data in the measurement `fleeting` fall under the `DEFAULT` RP called `one_hour`:
-```sh
-> SELECT count(flounders) FROM fleeting
-name: fleeting
---------------
-time			               count
-1970-01-01T00:00:00Z	 8
-```
-We [create](/influxdb/v0.9/query_language/database_management/#create-retention-policies-with-create-retention-policy) a new `DEFAULT` RP (`two_hour`) and perform the same query:
-```sh
-> SELECT count(flounders) FROM fleeting
->
-```
-To query the old data, we must specify the old `DEFAULT` RP by fully qualifying `fleeting`:
-```sh
-> SELECT count(flounders) FROM fish.one_hour.fleeting
-name: fleeting
---------------
-time			               count
-1970-01-01T00:00:00Z	 8
-```
-
 # Writing data
 ## Writing integers
 Add a trailing `i` to the end of the field value when writing an integer.
