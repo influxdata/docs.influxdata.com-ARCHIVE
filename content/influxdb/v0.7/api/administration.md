@@ -1,5 +1,10 @@
 ---
 title: Administration & Security
+menu:
+  influxdb_07:
+    name: Administration
+    weight: 50
+    parent: api
 ---
 
 The following section details the endpoints in the HTTP API for administering the cluster and managing database security.

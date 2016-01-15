@@ -1,5 +1,10 @@
 ---
 title: Reading and Writing Data
+menu:
+  influxdb_07:
+    name: Reading & Writing Data
+    weight: 0
+    parent: api
 ---
 
 There are many ways to write data into InfluxDB. Client libraries, data collectors, integrations to third parties. All of these go through one of InfluxDB's **input plugins**, which are documented below.

@@ -1,5 +1,9 @@
 ---
 title: Installation
+menu:
+  influxdb_06:
+    weight: 0
+    parent: introduction
 ---
 
 ## Ports

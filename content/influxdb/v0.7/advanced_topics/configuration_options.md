@@ -1,5 +1,10 @@
 ---
 title: Configuration
+menu:
+  influxdb_07:
+    name: Configuration Options
+    weight: 10
+    parent: advanced_topics
 ---
 
 Here's a sample configuration file. Comments in the file explain the options.

@@ -643,6 +643,72 @@ SectionPagesMenu = "products"
   parent = "tools"
 
 
+# InfluxDB v0.7 Menu
+[[menu.influxdb_07]]
+  name = "Introduction"
+  identifier = "introduction"
+  weight = 0
+  url = "/influxdb/v0.7/introduction/"
+[[menu.influxdb_07]]
+  name = "API"
+  identifier = "api"
+  weight = 10
+  url = "/influxdb/v0.7/api/"
+[[menu.influxdb_07]]
+  name = "UI"
+  identifier = "ui"
+  weight = 20
+  url = "/influxdb/v0.7/ui/"
+[[menu.influxdb_07]]
+  name = "Advanced Topics"
+  identifier = "advanced_topics"
+  weight = 30
+  url = "/influxdb/v0.7/advanced_topics/"
+[[menu.influxdb_07]]
+  name = "Clustering"
+  identifier = "clustering"
+  weight = 40
+  url = "/influxdb/v0.7/clustering/"
+[[menu.influxdb_07]]
+  name = "Guides"
+  identifier = "guides"
+  weight = 50
+  url = "/influxdb/v0.7/guides/"
+[[menu.influxdb_07]]
+  name = "Future Features"
+  identifier = "future"
+  weight = 60
+  url = "/influxdb/v0.7/future/"
+[[menu.influxdb_07]]
+  name = "Client Libraries"
+  identifier = "client_libraries"
+  weight = 70
+  url = "/influxdb/v0.7/client_libraries/"
+[[menu.influxdb_07]]
+  name = "Contributing"
+  identifier = "contributing"
+  weight = 80
+  url = "/influxdb/v0.7/contributing/"
+[[menu.influxdb_07]]
+  name = "Other Libraries and Tools"
+  identifier = "tools"
+  weight = 90
+  url = "/influxdb/v0.7/tools/"
+
+# InfluxDB v0.7 Sub-Menu - UI
+[[menu.influxdb_07]]
+  name = "Influxga Dashboards"
+  weight = 20
+  url = "https://github.com/hakobera/influga"
+  parent = "ui"
+
+# InfluxDB v0.7 Sub-Menu - Guides
+[[menu.influxdb_07]]
+  name = "Syslog Analytics with FluentD"
+  weight = 20
+  url = "http://www.fluentd.org/guides/recipes/syslog-influxdb"
+  parent = "guides"
+
 # InfluxDB v0.7 Sub-Menu - Client Libraries
 [[menu.influxdb_07]]
   name = "Ruby"
@@ -655,78 +721,53 @@ SectionPagesMenu = "products"
   url = "https://github.com/influxdb/influxdb-rails"
   parent = "client_libraries"
 [[menu.influxdb_07]]
-  name = "Rails (Influxer)"
-  weight = 30
-  url = "https://github.com/palkan/influxer"
-  parent = "client_libraries"
-[[menu.influxdb_07]]
-  name = "Python"
-  weight = 40
-  url = "https://github.com/influxdb/influxdb-python"
-  parent = "client_libraries"
-[[menu.influxdb_07]]
   name = "Python (async Tornado)"
-  weight = 50
+  weight = 40
   url = "https://github.com/puentesarrin/asyncflux"
   parent = "client_libraries"
 [[menu.influxdb_07]]
   name = "Java"
-  weight = 80
+  weight = 70
   url = "https://github.com/influxdb/influxdb-java"
   parent = "client_libraries"
 [[menu.influxdb_07]]
   name = "Clojure"
-  weight = 90
+  weight = 80
   url = "https://github.com/olauzon/capacitor"
   parent = "client_libraries"
 [[menu.influxdb_07]]
   name = "Common Lisp"
-  weight = 100
+  weight = 90
   url = "https://github.com/mmaul/cl-influxdb"
   parent = "client_libraries"
 [[menu.influxdb_07]]
   name = "Java Metrics"
-  weight = 110
+  weight = 100
   url = "https://github.com/davidB/metrics-influxdb"
   parent = "client_libraries"
 [[menu.influxdb_07]]
   name = "Go"
-  weight = 120
+  weight = 110
   url = "https://github.com/influxdb/influxdb/tree/master/client"
   parent = "client_libraries"
 [[menu.influxdb_07]]
   name = "Go Metrics"
-  weight = 130
+  weight = 120
   url = "https://github.com/rcrowley/go-metrics"
   parent = "client_libraries"
 [[menu.influxdb_07]]
   name = "Scala"
-  weight = 140
+  weight = 130
   url = "https://github.com/influxdb/influxdb-scala"
   parent = "client_libraries"
 [[menu.influxdb_07]]
   name = "R"
-  weight = 150
+  weight = 140
   url = "https://github.com/influxdb/influxdb-r"
   parent = "client_libraries"
 [[menu.influxdb_07]]
-  name = "Erlang"
-  weight = 160
-  url = "https://github.com/radekg/erflux"
-  parent = "client_libraries"
-[[menu.influxdb_07]]
-  name = "Erlang (fluxer)"
-  weight = 170
-  url = "https://github.com/saa/fluxer"
-  parent = "client_libraries"
-[[menu.influxdb_07]]
-  name = "Erlang (UDP)"
-  weight = 180
-  url = "https://github.com/palkan/influx_udp"
-  parent = "client_libraries"
-[[menu.influxdb_07]]
   name = "Perl"
-  weight = 190
+  weight = 150
   url = "https://metacpan.org/pod/InfluxDB"
   parent = "client_libraries"
 [[menu.influxdb_07]]
@@ -734,18 +775,8 @@ SectionPagesMenu = "products"
   weight = 200
   url = "https://github.com/maoe/influxdb-haskell"
   parent = "client_libraries"
-[[menu.influxdb_07]]
-  name = ".NET (C#)"
-  weight = 210
-  url = "https://github.com/ziyasal/InfluxDB.Net"
-  parent = "client_libraries"
 
 # InfluxDB v0.7 Sub-Menu - Contributing
-[[menu.influxdb_07]]
-  name = "Building and Contributing"
-  weight = 0
-  url = "https://github.com/influxdb/influxdb/blob/master/docs/contributing.md"
-  parent = "contributing"
 [[menu.influxdb_07]]
   name = "CLA"
   weight = 0
@@ -753,102 +784,121 @@ SectionPagesMenu = "products"
   parent = "contributing"
 [[menu.influxdb_07]]
   name = "To this Documentation"
-  weight = 0
-  url = "https://github.com/influxdb/docs.influxdata.com.html"
+  weight = 10
+  url = "https://github.com/influxdata/docs.influxdata.com/blob/master/contributing.md"
   parent = "contributing"
 [[menu.influxdb_07]]
   name = "License (MIT)"
-  weight = 0
+  weight = 20
   url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
   parent = "contributing"
 
 # InfluxDB v0.7 Sub-Menu - Tools
 [[menu.influxdb_07]]
-  name = "CLI (Go)"
-  weight = 0
-  url = "https://github.com/Dieterbe/influx-cli"
-  parent = "tools"
-[[menu.influxdb_07]]
   name = "CLI (Node)"
-  weight = 10
+  weight = 0
   url = "https://github.com/FGRibreau/influxdb-cli"
   parent = "tools"
 [[menu.influxdb_07]]
   name = "CLI (Ruby)"
-  weight = 20
+  weight = 10
   url = "https://github.com/phstc/influxdb-cli"
   parent = "tools"
 [[menu.influxdb_07]]
-  name = "Alternative ruby client (Ruby)"
-  weight = 30
-  url = "https://github.com/undr/influxdb-api"
-  parent = "tools"
-[[menu.influxdb_07]]
-  name = "Query builder (Ruby)"
-  weight = 40
-  url = "https://github.com/undr/influxdb-arel"
-  parent = "tools"
-[[menu.influxdb_07]]
   name = "Grafana (dashboards)"
-  weight = 50
+  weight = 20
   url = "http://grafana.org/"
   parent = "tools"
 [[menu.influxdb_07]]
-  name = "Graphite-Influxdb bridge"
-  weight = 60
-  url = "https://github.com/vimeo/graphite-influxdb"
-  parent = "tools"
-[[menu.influxdb_07]]
   name = "Tasseo (realtime dashboard)"
-  weight = 70
+  weight = 30
   url = "https://github.com/obfuscurity/tasseo"
   parent = "tools"
 [[menu.influxdb_07]]
   name = "StatsD Backend"
-  weight = 80
+  weight = 40
   url = "https://github.com/bernd/statsd-influxdb-backend"
   parent = "tools"
 [[menu.influxdb_07]]
   name = "CollectD Proxy"
-  weight = 90
+  weight = 50
   url = "https://github.com/bpaquet/collectd-influxdb-proxy"
   parent = "tools"
 [[menu.influxdb_07]]
   name = "FluentD Plugin"
-  weight = 100
+  weight = 60
   url = "https://github.com/fangli/fluent-plugin-influxdb"
   parent = "tools"
 [[menu.influxdb_07]]
   name = "Sensu Handler"
-  weight = 110
+  weight = 70
   url = "https://github.com/lusis/sensu_influxdb_handler"
   parent = "tools"
 [[menu.influxdb_07]]
   name = "Chef Handler/Reporter"
-  weight = 120
+  weight = 80
   url = "https://github.com/SimpleFinance/chef-handler-influxdb"
   parent = "tools"
 [[menu.influxdb_07]]
   name = "Puppet Handler/Reporter"
-  weight = 130
+  weight = 90
   url = "https://github.com/tracyde/puppet-influxdb-reporter"
   parent = "tools"
 [[menu.influxdb_07]]
   name = "Config Management via Boxen"
-  weight = 140
+  weight = 100
   url = "https://github.com/CargoSense/puppet-influxdb"
   parent = "tools"
-[[menu.influxdb_07]]
-  name = "Shinken module"
-  weight = 150
-  url = "https://github.com/savoirfairelinux/mod-influxdb"
-  parent = "tools"
-[[menu.influxdb_07]]
-  name = "LogSend"
-  weight = 160
-  url = "https://github.com/ezotrank/logsend"
-  parent = "tools"
 
+
+# InfluxDB v0.6 Menu
+[[menu.influxdb_06]]
+  name = "Introduction"
+  identifier = "introduction"
+  weight = 0
+  url = "/influxdb/v0.6/introduction/"
+[[menu.influxdb_06]]
+  name = "API"
+  identifier = "api"
+  weight = 10
+  url = "/influxdb/v0.6/api/"
+[[menu.influxdb_06]]
+  name = "UI"
+  identifier = "ui"
+  weight = 20
+  url = "/influxdb/v0.6/ui/"
+[[menu.influxdb_06]]
+  name = "Advanced Topics"
+  identifier = "advanced_topics"
+  weight = 30
+  url = "/influxdb/v0.6/advanced_topics/"
+[[menu.influxdb_06]]
+  name = "Future Features"
+  identifier = "future"
+  weight = 50
+  url = "/influxdb/v0.6/future/"
+[[menu.influxdb_06]]
+  name = "Client Libraries"
+  identifier = "client_libraries"
+  weight = 60
+  url = "/influxdb/v0.6/client_libraries/"
+[[menu.influxdb_06]]
+  name = "Contributing"
+  identifier = "contributing"
+  weight = 70
+  url = "/influxdb/v0.6/contributing/"
+[[menu.influxdb_06]]
+  name = "Other Libraries and Tools"
+  identifier = "tools"
+  weight = 80
+  url = "/influxdb/v0.6/tools/"
+
+# InfluxDB v0.6 Sub-Menu - UI
+[[menu.influxdb_06]]
+  name = "Influxga Dashboards"
+  weight = 20
+  url = "https://github.com/hakobera/influga"
+  parent = "ui"
 
 # InfluxDB v0.6 Sub-Menu - Client Libraries
 [[menu.influxdb_06]]
@@ -862,97 +912,57 @@ SectionPagesMenu = "products"
   url = "https://github.com/influxdb/influxdb-rails"
   parent = "client_libraries"
 [[menu.influxdb_06]]
-  name = "Rails (Influxer)"
-  weight = 30
-  url = "https://github.com/palkan/influxer"
-  parent = "client_libraries"
-[[menu.influxdb_06]]
-  name = "Python"
-  weight = 40
-  url = "https://github.com/influxdb/influxdb-python"
-  parent = "client_libraries"
-[[menu.influxdb_06]]
-  name = "Python (async Tornado)"
-  weight = 50
-  url = "https://github.com/puentesarrin/asyncflux"
-  parent = "client_libraries"
-[[menu.influxdb_06]]
   name = "Java"
-  weight = 80
+  weight = 60
   url = "https://github.com/influxdb/influxdb-java"
   parent = "client_libraries"
 [[menu.influxdb_06]]
   name = "Clojure"
-  weight = 90
+  weight = 70
   url = "https://github.com/olauzon/capacitor"
   parent = "client_libraries"
 [[menu.influxdb_06]]
   name = "Common Lisp"
-  weight = 100
+  weight = 80
   url = "https://github.com/mmaul/cl-influxdb"
   parent = "client_libraries"
 [[menu.influxdb_06]]
   name = "Java Metrics"
-  weight = 110
+  weight = 90
   url = "https://github.com/davidB/metrics-influxdb"
   parent = "client_libraries"
 [[menu.influxdb_06]]
   name = "Go"
-  weight = 120
+  weight = 100
   url = "https://github.com/influxdb/influxdb/tree/master/client"
   parent = "client_libraries"
 [[menu.influxdb_06]]
   name = "Go Metrics"
-  weight = 130
+  weight = 110
   url = "https://github.com/rcrowley/go-metrics"
   parent = "client_libraries"
 [[menu.influxdb_06]]
   name = "Scala"
-  weight = 140
+  weight = 120
   url = "https://github.com/influxdb/influxdb-scala"
   parent = "client_libraries"
 [[menu.influxdb_06]]
   name = "R"
-  weight = 150
+  weight = 130
   url = "https://github.com/influxdb/influxdb-r"
   parent = "client_libraries"
 [[menu.influxdb_06]]
-  name = "Erlang"
-  weight = 160
-  url = "https://github.com/radekg/erflux"
-  parent = "client_libraries"
-[[menu.influxdb_06]]
-  name = "Erlang (fluxer)"
-  weight = 170
-  url = "https://github.com/saa/fluxer"
-  parent = "client_libraries"
-[[menu.influxdb_06]]
-  name = "Erlang (UDP)"
-  weight = 180
-  url = "https://github.com/palkan/influx_udp"
-  parent = "client_libraries"
-[[menu.influxdb_06]]
   name = "Perl"
-  weight = 190
+  weight = 140
   url = "https://metacpan.org/pod/InfluxDB"
   parent = "client_libraries"
 [[menu.influxdb_06]]
   name = "Haskell"
-  weight = 200
+  weight = 190
   url = "https://github.com/maoe/influxdb-haskell"
-  parent = "client_libraries"
-[[menu.influxdb_06]]
-  name = ".NET (C#)"
-  weight = 210
-  url = "https://github.com/ziyasal/InfluxDB.Net"
   parent = "client_libraries"
 
 # InfluxDB v0.6 Sub-Menu - Contributing
-[[menu.influxdb_06]]
-  name = "Building and Contributing"
-  weight = 0
-  url = "https://github.com/influxdb/influxdb/blob/master/docs/contributing.md"
-  parent = "contributing"
 [[menu.influxdb_06]]
   name = "CLA"
   weight = 0
@@ -960,99 +970,68 @@ SectionPagesMenu = "products"
   parent = "contributing"
 [[menu.influxdb_06]]
   name = "To this Documentation"
-  weight = 0
-  url = "https://github.com/influxdb/docs.influxdata.com.html"
+  weight = 10
+  url = "https://github.com/influxdata/docs.influxdata.com/blob/master/contributing.md"
   parent = "contributing"
 [[menu.influxdb_06]]
   name = "License (MIT)"
-  weight = 0
+  weight = 20
   url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
   parent = "contributing"
 
 # InfluxDB v0.6 Sub-Menu - Tools
 [[menu.influxdb_06]]
-  name = "CLI (Go)"
-  weight = 0
-  url = "https://github.com/Dieterbe/influx-cli"
-  parent = "tools"
-[[menu.influxdb_06]]
   name = "CLI (Node)"
-  weight = 10
+  weight = 0
   url = "https://github.com/FGRibreau/influxdb-cli"
   parent = "tools"
 [[menu.influxdb_06]]
   name = "CLI (Ruby)"
-  weight = 20
+  weight = 10
   url = "https://github.com/phstc/influxdb-cli"
   parent = "tools"
 [[menu.influxdb_06]]
-  name = "Alternative ruby client (Ruby)"
-  weight = 30
-  url = "https://github.com/undr/influxdb-api"
-  parent = "tools"
-[[menu.influxdb_06]]
-  name = "Query builder (Ruby)"
-  weight = 40
-  url = "https://github.com/undr/influxdb-arel"
-  parent = "tools"
-[[menu.influxdb_06]]
   name = "Grafana (dashboards)"
-  weight = 50
+  weight = 20
   url = "http://grafana.org/"
   parent = "tools"
 [[menu.influxdb_06]]
-  name = "Graphite-Influxdb bridge"
-  weight = 60
-  url = "https://github.com/vimeo/graphite-influxdb"
-  parent = "tools"
-[[menu.influxdb_06]]
   name = "Tasseo (realtime dashboard)"
-  weight = 70
+  weight = 30
   url = "https://github.com/obfuscurity/tasseo"
   parent = "tools"
 [[menu.influxdb_06]]
   name = "StatsD Backend"
-  weight = 80
+  weight = 40
   url = "https://github.com/bernd/statsd-influxdb-backend"
   parent = "tools"
 [[menu.influxdb_06]]
   name = "CollectD Proxy"
-  weight = 90
+  weight = 50
   url = "https://github.com/bpaquet/collectd-influxdb-proxy"
   parent = "tools"
 [[menu.influxdb_06]]
   name = "FluentD Plugin"
-  weight = 100
+  weight = 60
   url = "https://github.com/fangli/fluent-plugin-influxdb"
   parent = "tools"
 [[menu.influxdb_06]]
   name = "Sensu Handler"
-  weight = 110
+  weight = 70
   url = "https://github.com/lusis/sensu_influxdb_handler"
   parent = "tools"
 [[menu.influxdb_06]]
   name = "Chef Handler/Reporter"
-  weight = 120
+  weight = 80
   url = "https://github.com/SimpleFinance/chef-handler-influxdb"
   parent = "tools"
 [[menu.influxdb_06]]
   name = "Puppet Handler/Reporter"
-  weight = 130
+  weight = 90
   url = "https://github.com/tracyde/puppet-influxdb-reporter"
   parent = "tools"
 [[menu.influxdb_06]]
   name = "Config Management via Boxen"
-  weight = 140
+  weight = 100
   url = "https://github.com/CargoSense/puppet-influxdb"
   parent = "tools"
-[[menu.influxdb_06]]
-  name = "Shinken module"
-  weight = 150
-  url = "https://github.com/savoirfairelinux/mod-influxdb"
-  parent = "tools"
-[[menu.influxdb_06]]
-  name = "LogSend"
-  weight = 160
-  url = "https://github.com/ezotrank/logsend"
-  parent = "tools"
-

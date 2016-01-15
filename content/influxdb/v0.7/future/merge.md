@@ -1,5 +1,10 @@
 ---
 title: Merging many series into one
+menu:
+  influxdb_07:
+    name: Merging Many Series
+    weight: 60
+    parent: future
 ---
 
 ```sql
