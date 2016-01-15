@@ -12,7 +12,7 @@ Telegraf allows users to specify multiple output sinks in the configuration file
 
 ## Supported Output Plugins List
 
-* [influxdb](https://github.com/influxdb/telegraf/tree/master/outputs/influxdb)
+* [influxdb](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/influxdb)
 * [nsq](https://github.com/influxdb/telegraf/tree/master/outputs/nsq)
 * [kafka](https://github.com/influxdb/telegraf/tree/master/outputs/kafka)
 * [datadog](https://github.com/influxdb/telegraf/tree/master/outputs/datadog)
