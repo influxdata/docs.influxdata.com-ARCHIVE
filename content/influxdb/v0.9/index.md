@@ -5,7 +5,7 @@ aliases:
 
 menu:
   influxdb:
-    name: Version 0.9
+    name: v0.9
     identifier: influxdb_09
     weight: 0
 ---

@@ -326,6 +326,10 @@ a.main-nav--link:hover {
 	margin-left: 1rem;
 	font-family: 'Klavika-Bold';
 }
+.product-switcher--current span {
+	font-family: 'Klavika-Light';
+	font-weight: 200;
+}
 .product-switcher--toggle {
 	display: none;
 	position: absolute;

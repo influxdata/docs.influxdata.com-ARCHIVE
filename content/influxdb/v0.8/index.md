@@ -3,7 +3,7 @@ title: InfluxDB Version 0.8 Documentation
 
 menu:
   influxdb:
-    name: Version 0.8
+    name: v0.8
     identifier: influxdb_08
     weight: 10
 ---
