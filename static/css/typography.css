@@ -30,10 +30,23 @@ a:hover {
 }
 .page-content--container h1,
 .page-content--container h2,
+.page-content--container h2 a:link,
+.page-content--container h2 a:active,
+.page-content--container h2 a:visited,
+.page-content--container h2 a:hover,
 .page-content--container h3,
-.page-content--container h4 {
+.page-content--container h3 a:link,
+.page-content--container h3 a:active,
+.page-content--container h3 a:visited,
+.page-content--container h3 a:hover,
+.page-content--container h4,
+.page-content--container h4 a:link,
+.page-content--container h4 a:active,
+.page-content--container h4 a:visited,
+.page-content--container h4 a:hover {
 	color: #F5F6F7;
 }
+
 .page-content--container h1 {
 	font-size: 3.5em;
 	font-weight: 100;
