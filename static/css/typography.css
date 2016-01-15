@@ -1,5 +1,21 @@
 /*
-	Docs Text Formatting
+
+	T Y P O G R A P H Y
+
+	____________________________________________________________
+
+	Note:
+	Typography uses a type scale of 1.3
+	I've made use of EMs such that you can proportionally scale the type
+	by changing the font size on .page using REMs as the unit
+
+
+*/
+
+
+/*
+	Default Styles
+	____________________________________________________________
 */
 a:link,
 a:active,
@@ -13,196 +29,232 @@ a:hover {
 	color: #00C9FF;
 	cursor: pointer;
 }
-
-.page-content--container {
-	color: #BEC4CC;
+.page--body {
+	color: #A5ACB5;
+	text-align: left;
 }
-.page-content--container > * {
+.page--body > * {
 	text-decoration: none;
+	
 }
-.page-content--container hr {
-	width: 100%;
-	height: 2px;
-	background-color: #2C323D;
-	margin: 0 0 3em 0;
-	border: none;
-	display: block;
+.page--body h1,
+.page--body h2,
+.page--body h3,
+.page--body h4,
+.page--body p,
+.page--body ul,
+.page--body ol,
+.page--body li,
+.page--body blockquote,
+.page--body dt,
+.page--body pre {
+	display: inline-block;
+	margin-bottom: 1.5em;
+	line-height: 1.45em;
 }
-.page-content--container h1,
-.page-content--container h2,
-.page-content--container h2 a:link,
-.page-content--container h2 a:active,
-.page-content--container h2 a:visited,
-.page-content--container h2 a:hover,
-.page-content--container h3,
-.page-content--container h3 a:link,
-.page-content--container h3 a:active,
-.page-content--container h3 a:visited,
-.page-content--container h3 a:hover,
-.page-content--container h4,
-.page-content--container h4 a:link,
-.page-content--container h4 a:active,
-.page-content--container h4 a:visited,
-.page-content--container h4 a:hover {
-	color: #F5F6F7;
-}
-
-.page-content--container h1 {
-	font-size: 3.5em;
-	font-weight: 100;
+.page--body table {
 	margin-bottom: 1.5em;
 }
-.page-content--container h2 {
-	font-size: 1.75em;
-	font-weight: 700;
+.page--body em {
+	color: #CBD0D6;
+	font-weight: 600;
+}
+
+/*
+	Indented items 
+	____________________________________________________________
+*/
+.page--body dt,
+.page--body blockquote,
+.page--body pre,
+.page--body h4,
+.page--body p,
+.page--bpdy table {
+	width: calc(100% - 0rem);
+	margin-left: 0rem;
+}
+
+/*
+	Plaintext items 
+	____________________________________________________________
+*/
+.page--body h1,
+.page--body h2,
+.page--body h2 a:link,
+.page--body h2 a:active,
+.page--body h2 a:visited,
+.page--body h2 a:hover,
+.page--body h3,
+.page--body h3 a:link,
+.page--body h3 a:active,
+.page--body h3 a:visited,
+.page--body h3 a:hover,
+.page--body h4,
+.page--body h4 a:link,
+.page--body h4 a:active,
+.page--body h4 a:visited,
+.page--body h4 a:hover {
+	color: #F5F6F7;
+	width: 100%;
+}
+.page--body h1 {
+	font-size: 2.85em;
+	font-weight: 200;
+	font-family: 'Klavika-Light';
+}
+.page--body h2 {
+	font-size: 2.197em;
+	font-weight: 800;
 	padding-bottom: 0.5em;
 	margin-top: 3em;
-	margin-bottom: 0.5em;
 	border-bottom: 2px solid #2C323D;
-	line-height: 1.375em;
 }
-.page-content--container h3 {
-	font-size: 1em;
-	margin-bottom: 0.5em;
+.page--body h3 {
 	margin-top: 1em;
+	font-size: 1.69em;
+	font-weight: 200;
 }
-.page-content--container h4 {
-	font-size: 1em;
-	margin-bottom: 0.5em;
+.page--body h4 {
+	font-size: 1.3em;
+	font-weight: 200;
 }
-.page-content--container h1:first-of-type,
-.page-content--container h2:first-of-type,
-.page-content--container h3:first-of-type,
-.page-content--container h4:first-of-type {
+.page--body h1:first-child,
+.page--body h2:first-child,
+.page--body h3:first-child,
+.page--body h4:first-child {
 	margin-top: 0;
 }
-.page-content--container p {
-	line-height: 1.75em;
-	margin-bottom: 2.75em;
+.page--body p {
+	font-size: 1em;
 }
-.page-content--container p + pre {
-	margin-top: -2.375em;
+.page--body p + pre {
+	/*margin-top: -2.375em;*/
 }
-.page-content--container ul {
+.page--body ul {
 	list-style-type: disc;
 }
-.page-content--container ol {
+.page--body ol {
 	list-style-type: upper-roman;
 }
-.page-content--container ol,
-.page-content--container ul {
+.page--body ol,
+.page--body ul {
+	font-size: 1em;
 	padding-left: 2.625em;
-	margin-bottom: 3em;
 }
-.page-content--container ul ul,
-.page-content--container ol ol,
-.page-content--container ul ol,
-.page-content--container ol ul {
-	margin-top: 1.25em;
+.page--body ul ul,
+.page--body ol ol,
+.page--body ul ol,
+.page--body ol ul {
+	/*margin-top: 1.25em;*/
 }
-.page-content--container li {
-	line-height: 1.75em;
-	margin-bottom: 1em;
-	padding-left: 1em;
+.page--body li {
+/*	line-height: 1.75em;*/
 }
-.page-content--container li p + pre {
+.page--body li p + pre {
 	margin-top: 0em;
 }
-.page-content--container blockquote {
-	color: #3AC69A;
-	font-style: italic;
-	padding: 1em 1.5em;
-	border-left: 0.875rem solid #3AC69A;
-	border-radius: 3px;
-	margin-bottom: 2.5em;
-	background-color: #262B35;
-	font-size: 0.875em;
+.page--body figure {
 }
-.page-content--container blockquote p {
-	line-height: 1.5em;
-	font-size: inherit;
-	width: 100%;
-	margin-left: 0;
-	margin-bottom: 1em;
-}
-.page-content--container blockquote pre {
-	margin: 0 0 1em 0;
-	border-left: 1px;
-}
-.page-content--container blockquote li {
-	margin-bottom: 0.5em;
-}
-.page-content--container blockquote > *:last-child {
-	margin-bottom: 0;
-}
-.page-content--container figure {
-	margin: 2em 0;
-}
-.page-content--container figcaption {
+.page--body figcaption {
 	color: #444;
 	font-size: 0.75em;
 	font-style: italic;
-	line-height: 1.5em;
-	margin-bottom: 1em;
 	padding: 0 2em 0.5em;
 	text-align: center;
 }
 
-.page-content--container dt {
+/*
+	Notes <blockquote> and Gotchas <dt> 
+	____________________________________________________________
+*/
+.page--body dt,
+.page--body blockquote {
 	font-size: 0.875em;
 	background-color: #262B35;
-	padding: 1em 1em 1em 3em;
-	border-radius: 3px;
-	border-left: 0.875rem solid #F95F53;
-	position: relative;
+	padding: 1em 1.5em;
+	border-radius: 4px;
+	border-left-width: 0.875rem;
+	border-style: solid;
+}
+.page--body blockquote {
+	color: #3AC69A;
+	font-style: italic;
+	border-color: #3AC69A;
+}
+.page--body dt {
 	color: #FF8564;
-	line-height: 1.3em;
+	border-color: #F95F53;
 }
-.page-content--container dt:after {
-	content: '🚨';
+.page--body blockquote p,
+.page--body dt p {
+	width: 100%;
+	margin-left: 0;
+}
+.page--body blockquote pre,
+.page--body dt pre {
+	border-left: 1px;
+}
+.page--body blockquote code,
+.page--body dt code {
+	border-color: #2C323D;
+}
+.page--body blockquote > *:last-child,
+.page--body dt > *:last-child {
+	/*margin-bottom: 0;*/
+}
+.page--body blockquote .tooltip,
+.page--body dt .tooltip {
+	color: #fff;
+}
+
+/*
+	Misc markdown elements 
+	____________________________________________________________
+*/
+.page--body hr {
+	width: 100%;
+	height: 2px;
+	background-color: #2C323D;
+	margin: 0;
+	border: none;
 	display: block;
-	position: absolute;
-	top: 1em;
-	left: 1em;
-	color: #8e7e59;
 }
-.page-content--container img {
+.page--body img {
 	width: 100%;
 	height: auto;
 	border-radius: 4px;
 }
-.page-content--container table {
+.page--body table {
 	background-color: #1F242D;
-	margin: 0px 0px 3em 1.5rem;
 }
-
-.page-content--container td,
-.page-content--container th {
+.page--body td,
+.page--body th {
 	border: 1px solid #262B35;
 	font-size: 0.875em;
 	padding: 0.75em 1.5em;
 }
-
-.page-content--container tr:nth-child(even) {
+.page--body tr:nth-child(even) {
 	background-color: #181C23;
 }
-.page-content--container thead tr {
+.page--body thead tr {
 	background-color: #262B35 !important;
 }
-.page-content--container thead th {
+.page--body thead th {
 	padding: 1.25em 1.5em;
 	color: #BEC4CC;
 }
 
-/* Code blocks */
-.page-content--container code {
+/*
+	Inline Code and Code Blocks
+	____________________________________________________________
+*/
+.page--body code {
 	font-family: Consolas, "Lucida Console", Monaco, monospace;
 	-moz-tab-size: 1;
 	-o-tab-size: 1;
 	tab-size: 1;
 	color: #9394FF;
 	direction: ltr;
-	text-align: left;
 	-webkit-hyphens: none;
 	-moz-hyphens: none;
 	-ms-hyphens: none;
@@ -210,7 +262,7 @@ a:hover {
 	font-size: 0.75em !important;
 	font-style:normal !important;
 	display: inline;
-	border-radius: 3px;
+	border-radius: 4px;
 	border: 1px solid #262B35;
 	background-color: #181C23;
 	padding: 0.25em 0.5em;
@@ -220,38 +272,85 @@ a:hover {
 	-moz-osx-font-smoothing: auto !important;
 	font-weight: 400 !important;
 }
-.page-content--container pre {
+.page--body pre {
 	padding: 0.75em 1em;
 	overflow: auto;
-	border-radius: 3px;
+	border-radius: 4px;
 	border: 1px solid #262B35;
 	border-left-width: 0.875rem;
 	background-color: #181C23;
-	margin-bottom: 2.5em;
 }
-.page-content--container pre::-webkit-scrollbar              { background-color: #181C23; width: 1rem; }
-.page-content--container pre::-webkit-scrollbar-track        { background-color: #181C23; }
-.page-content--container pre::-webkit-scrollbar-thumb        { border: 4px solid #181C23; background-color: #262B35; border-radius: 0.5rem; }
+.page--body pre::-webkit-scrollbar       { background-color: #181C23; width: 1rem; }
+.page--body pre::-webkit-scrollbar-track { background-color: #181C23; }
+.page--body pre::-webkit-scrollbar-thumb { border: 4px solid #181C23; background-color: #262B35; border-radius: 0.5rem; }
 
-.page-content--container pre code {
+.page--body pre code {
 	white-space: pre;
 	word-spacing: normal;
 	word-break: normal;
-	line-height: 1.5em;
 	border: none;
 	padding: 0;
 	border-radius: 0;
 	background-color: transparent;
 }
 
-/* Indented items */
-.page-content--container dt,
-.page-content--container blockquote,
-.page-content--container pre,
-.page-content--container h4,
-.page-content--container p {
-	width: calc(100% - 1.5rem);
-	margin-left: 1.5rem;
+/*
+	Tooltips
+	____________________________________________________________
+*/
+.tooltip {
+	position: relative;
+	display: inline-block;
+	z-index: 10;
+	font-weight: 900;
+	color: #25B394;
+}
+.tooltip-container {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	overflow: visible;
+	visibility: hidden;
+}
+.tooltip-text {
+	font-weight: 600;
+	line-height: 2em;
+	height: 2em;
+	position: absolute;
+	color: #454C59;
+	background-color: #EEF0F2;
+	border-radius: 3px;
+	padding: 0 0.75em;
+	font-size: 0.9rem;
+	left: 50%;
+	transform: translate(-50%,-1.875rem);
+	-webkit-transform: translate(-50%,-1.875rem);
+	transition: all 0.2s ease;
+	white-space: nowrap;
+	opacity: 0;
+	font-style: normal !important;
+}
+.tooltip-text:after {
+	content: '';
+	position: absolute;
+	left: 50%;
+	bottom: -14px;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	border-top: 8px solid #EEF0F2;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+	border-bottom: 8px solid transparent;
+}
+.tooltip:hover .tooltip-container {
+	visibility: visible;
+}
+.tooltip:hover .tooltip-text {
+	opacity: 1;
+	transform: translate(-50%,-2rem);
+	-webkit-transform: translate(-50%,-2rem);
 }
 
 
@@ -264,25 +363,32 @@ a:hover {
 */
 
 @media screen and (min-width: 1550px) {
-	.page-content--container {
+	.page--body {
 		font-size: 1.125rem;
 	}
-	/* Indented items */
-	.page-content--container dt,
-	.page-content--container blockquote,
-	.page-content--container pre,
-	.page-content--container h4,
-	.page-content--container p {
+	/* Increase indent on Indented items */
+	.page--body dt,
+	.page--body blockquote,
+	.page--body pre,
+	.page--body h4,
+	.page--body p {
 		width: calc(100% - 3.5rem);
+		margin-left: 3.5rem;
+	}
+	.page--body table {
 		margin-left: 3.5rem;
 	}
 }
 @media screen and (min-width: 1800px) {
-	.page-content--container {
+	.page--body {
 		font-size: 1.25rem;
 	}
-	.page-content--container code,
-	.page-content--container pre {
+
+	/* Thicken borders on larger screens */
+	.page--body code,
+	.page--body pre,
+	.page--body td,
+	.page--body th {
 		border-width: 2px;
 	}
 }
