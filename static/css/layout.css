@@ -409,7 +409,7 @@ a.ad-cta:hover {
 .page--title {
 	display: inline-block;
 	width: 100%;
-	height: 30rem;
+	height: auto;
 	background-color: #373D49;
 	background-position: center center;
 	background-size: cover !important;
@@ -417,19 +417,10 @@ a.ad-cta:hover {
 	position: relative;
 }
 .page--title .page--body {
-/*	font-weight: 200;
-	font-style: italic;
-	font-family: 'Klavika-Light';
-	font-size: 3.25rem;
-	line-height: 1.3em;
-	letter-spacing: -0.04em;
-	text-align: left;
-	color: #fff;
-	position: absolute;
-	bottom: 10%;
-	left: 50%;
-	transform: translateX(-50%);
-	-webkit-transform: translateX(-50%);*/
+	margin: 0;
+}
+.page--title h1 {
+	margin: 3em 0 1em 0 !important;
 }
 /*
 	Page Content
@@ -452,7 +443,7 @@ a.ad-cta:hover {
 .page::-webkit-scrollbar-thumb        { border: 4px solid #1F242D; background-color: #575E6B; border-radius: 0.5rem; }
 
 .page.hide {
-	opacity: 0.2;
+	opacity: 0;
 }
 .page--body {
 	display: inline-block;
@@ -665,8 +656,8 @@ a.product-sidebar--page:hover {
 	.page--body {
 		margin: 5rem auto;
 	}
-	.page--title {
-		height: 41rem;
+	.page--title h1 {
+		margin: 8em 0 4em 0 !important;
 	}
 	.page--body {
 		width: calc(100% - 10rem);
