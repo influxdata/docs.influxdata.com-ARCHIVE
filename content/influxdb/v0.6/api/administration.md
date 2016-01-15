@@ -11,7 +11,8 @@ The following section details the endpoints in the HTTP API for administering th
 
 ## Creating and Dropping Databases
 
-There are two endpoints for creating or dropping databases. The requesting user must be a cluster administrator.
+There are two endpoints for creating or dropping databases.
+The requesting user must be a cluster administrator.
 
 ```bash
 # create a database
@@ -28,9 +29,12 @@ InfluxDB has three different kinds of users:
 
 ### cluster admin
 
-A cluster admin can add and drop databases. Add and remove database
+A cluster admin can add and drop databases.
+Add and remove database
 users and database admins to any database and change their read and
-write access. A cluster admin can't query a database though. Below are
+write access.
+A cluster admin can't query a database though.
+Below are
 the endpoints specific to cluster admins:
 
 ```bash
@@ -52,7 +56,8 @@ curl -X DELETE 'http://localhost:8086/cluster_admins/paul?u=root&p=root'
 ### database admin
 
 A database admin can add and remove databases admins and database
-users and change their read and write permissions. It can't add
+users and change their read and write permissions.
+It can't add
 or remove users from a different database.
 
 ### database user
@@ -91,11 +96,11 @@ curl -X POST 'http://localhost:8086/db/site_dev/users/paul?u=root&p=root' \
 
 ```
 
-
 ### Limiting User Access
 
 Database users have two additional arguments when creating or updating
-their objects: `readFrom` and `writeTo`. Here's what a
+their objects: `readFrom` and `writeTo`.
+Here's what a
 default database user looks like when those arguments aren't specified
 on create.
 
@@ -108,7 +113,8 @@ on create.
 ```
 
 This example user has the ability to read and write from any time
-series. If you want to restrict the user to only being able to write
+series.
+If you want to restrict the user to only being able to write
 data, update the user by `POST`ing to `db/site_dev/users/paul`.
 
 ```json
@@ -119,5 +125,6 @@ data, update the user by `POST`ing to `db/site_dev/users/paul`.
 ```
 
 You have to specify both `readFrom` and `writeTo` when you update the
-permissions of a user. Both are a regex that determine which time
+permissions of a user.
+Both are a regex that determine which time
 series the user has permission to read from or write to.

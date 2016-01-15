@@ -19,6 +19,7 @@ typesdb = "/usr/share/collectd/types.db"
 ```
 
 The ```port``` if not specified will be set by default to ```25826```, the one that collectd use too.
-the definition ```typesdb``` define the [types definition](https://collectd.org/documentation/manpages/types.db.5.shtml) file to use. An example can be found on the [collectd GitHub repository](https://github.com/collectd/collectd/blob/master/src/types.db).
+the definition ```typesdb``` define the [types definition](https://collectd.org/documentation/manpages/types.db.5.shtml) file to use.
+An example can be found on the [collectd GitHub repository](https://github.com/collectd/collectd/blob/master/src/types.db).
 
 And restart the server to apply the change.

@@ -16,7 +16,6 @@ and a frequency at which it emits the window to the pipeline.
 
 Example:
 
-
 ```javascript
     stream
         .window()
@@ -33,11 +32,11 @@ NOTE: Time for a window (or any node) is implemented by inspecting the times on 
 As a result if the incoming data stream stops then no more windows will be emitted because time is no longer
 increasing for the window node.
 
-
 Properties
 ----------
 
-Property methods modify state on the calling node. They do not add another node to the pipeline, and always return a reference to the calling node.
+Property methods modify state on the calling node.
+They do not add another node to the pipeline, and always return a reference to the calling node.
 
 ### Align
 
@@ -45,41 +44,35 @@ Whether to align the window edges with the zero time.
 If not aligned the window starts and ends relative to the
 first data point it receives.
 
-
 ```javascript
 node.align()
 ```
-
 
 ### Every
 
 How often the current window is emitted into the pipeline.
 
-
 ```javascript
 node.every(value time.Duration)
 ```
-
 
 ### Period
 
 The period, or length in time, of the window.
 
-
 ```javascript
 node.period(value time.Duration)
 ```
 
-
 Chaining Methods
 ----------------
 
-Chaining methods create a new node in the pipeline as a child of the calling node. They do not modify the calling node.
+Chaining methods create a new node in the pipeline as a child of the calling node.
+They do not modify the calling node.
 
 ### Alert
 
 Create an alert node, which can trigger alerts.
-
 
 ```javascript
 node.alert()
@@ -87,11 +80,9 @@ node.alert()
 
 Returns: [AlertNode](/kapacitor/v0.2/tick/alert_node/)
 
-
 ### Derivative
 
 Create a new node that computes the derivative of adjacent points.
-
 
 ```javascript
 node.derivative(field string)
@@ -99,20 +90,17 @@ node.derivative(field string)
 
 Returns: [DerivativeNode](/kapacitor/v0.2/tick/derivative_node/)
 
-
 ### Eval
 
 Create an eval node that will evaluate the given transformation function to each data point.
 A list of expressions may be provided and will be evaluated in the order they are given
 and results of previous expressions are made available to later expressions.
 
-
 ```javascript
 node.eval(expressions ...tick.Node)
 ```
 
 Returns: [EvalNode](/kapacitor/v0.2/tick/eval_node/)
-
 
 ### GroupBy
 
@@ -121,19 +109,15 @@ Group the data by a set of tags.
 Can pass literal * to group by all dimensions.
 Example:
 
-
 ```javascript
     .groupBy(*)
 ```
-
-
 
 ```javascript
 node.groupBy(tag ...interface{})
 ```
 
 Returns: [GroupByNode](/kapacitor/v0.2/tick/group_by_node/)
-
 
 ### HttpOut
 
@@ -143,18 +127,15 @@ The endpoint is the relative path from the API endpoint of the running task.
 For example if the task endpoint is at &#34;/api/v1/task/&lt;task_name&gt;&#34; and endpoint is
 &#34;top10&#34;, then the data can be requested from &#34;/api/v1/task/&lt;task_name&gt;/top10&#34;.
 
-
 ```javascript
 node.httpOut(endpoint string)
 ```
 
 Returns: [HTTPOutNode](/kapacitor/v0.2/tick/http_out_node/)
 
-
 ### InfluxDBOut
 
 Create an influxdb output node that will store the incoming data into InfluxDB.
-
 
 ```javascript
 node.influxDBOut()
@@ -162,18 +143,16 @@ node.influxDBOut()
 
 Returns: [InfluxDBOutNode](/kapacitor/v0.2/tick/influx_d_b_out_node/)
 
-
 ### Join
 
-Join this node with other nodes. The data is joined on timestamp.
-
+Join this node with other nodes.
+The data is joined on timestamp.
 
 ```javascript
 node.join(others ...Node)
 ```
 
 Returns: [JoinNode](/kapacitor/v0.2/tick/join_node/)
-
 
 ### MapReduce
 
@@ -187,13 +166,11 @@ In the case of a batch each batch is passed to the mapper independently.
 In the case of a stream all incoming data points that have
 the exact same time are combined into a batch and sent to the mapper.
 
-
 ```javascript
 node.mapReduce(mr MapReduceInfo)
 ```
 
 Returns: [ReduceNode](/kapacitor/v0.2/tick/reduce_node/)
-
 
 ### Sample
 
@@ -201,18 +178,15 @@ Create a new node that samples the incoming points or batches.
 
 One point will be emitted every count or duration specified.
 
-
 ```javascript
 node.sample(rate interface{})
 ```
 
 Returns: [SampleNode](/kapacitor/v0.2/tick/sample_node/)
 
-
 ### Union
 
 Perform the union of this node and all other given nodes.
-
 
 ```javascript
 node.union(node ...Node)
@@ -220,11 +194,9 @@ node.union(node ...Node)
 
 Returns: [UnionNode](/kapacitor/v0.2/tick/union_node/)
 
-
 ### Where
 
 Create a new node that filters the data stream by a given expression.
-
 
 ```javascript
 node.where(expression tick.Node)
@@ -232,13 +204,11 @@ node.where(expression tick.Node)
 
 Returns: [WhereNode](/kapacitor/v0.2/tick/where_node/)
 
-
 ### Window
 
 Create a new node that windows the stream by time.
 
 NOTE: Window can only be applied to stream edges.
-
 
 ```javascript
 node.window()

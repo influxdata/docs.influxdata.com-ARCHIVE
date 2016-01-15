@@ -24,4 +24,3 @@ Telegraf allows users to specify multiple output sinks in the configuration file
 * [amon](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/amon)
 * [riemann](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/riemann)
 
-

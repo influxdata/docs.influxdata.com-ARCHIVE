@@ -8,11 +8,13 @@ menu:
 
 ## Introduction
 
-The InfluxDB Query Language (InfluxQL) is a SQL-like query language for interacting with InfluxDB.  It has been lovingly crafted to feel familiar to those coming from other SQL or SQL-like environments while providing features specific to storing and analyzing time series data.
+The InfluxDB Query Language (InfluxQL) is a SQL-like query language for interacting with InfluxDB.
+It has been lovingly crafted to feel familiar to those coming from other SQL or SQL-like environments while providing features specific to storing and analyzing time series data.
 
 ## Notation
 
-The syntax is specified using Extended Backus-Naur Form ("EBNF").  EBNF is the same notation used in the [Go](http://golang.org) programming language specification, which can be found [here](https://golang.org/ref/spec).
+The syntax is specified using Extended Backus-Naur Form ("EBNF").
+EBNF is the same notation used in the [Go](http://golang.org) programming language specification, which can be found [here](https://golang.org/ref/spec).
 
 ```
 Production  = production_name "=" [ Expression ] "." .
@@ -102,7 +104,8 @@ USER         USERS        VALUES       WHERE        WITH         WRITE
 
 ### Integers
 
-InfluxQL supports decimal integer literals.  Hexadecimal and octal literals are not currently supported.
+InfluxQL supports decimal integer literals.
+Hexadecimal and octal literals are not currently supported.
 
 ```
 int_lit             = ( "1" … "9" ) { digit } .
@@ -110,7 +113,8 @@ int_lit             = ( "1" … "9" ) { digit } .
 
 ### Floats
 
-InfluxQL supports floating-point literals.  Exponents are not currently supported.
+InfluxQL supports floating-point literals.
+Exponents are not currently supported.
 
 ```
 float_lit           = int_lit "." int_lit .
@@ -118,7 +122,8 @@ float_lit           = int_lit "." int_lit .
 
 ### Strings
 
-String literals must be surrounded by single quotes. Strings may contain `'` characters as long as they are escaped (i.e., `\'`).
+String literals must be surrounded by single quotes.
+Strings may contain `'` characters as long as they are escaped (i.e., `\'`).
 
 ```
 string_lit          = `'` { unicode_char } `'`' .
@@ -126,7 +131,8 @@ string_lit          = `'` { unicode_char } `'`' .
 
 ### Durations
 
-Duration literals specify a length of time.  An integer literal followed immediately (with no spaces) by a duration unit listed below is interpreted as a duration literal.
+Duration literals specify a length of time.
+An integer literal followed immediately (with no spaces) by a duration unit listed below is interpreted as a duration literal.
 
 #### Duration unit definitions
 
@@ -140,7 +146,6 @@ Duration literals specify a length of time.  An integer literal followed immedia
  d      | day
  w      | week
 
-
 ```
 duration_lit        = int_lit duration_unit .
 duration_unit       = "u" | "µ" | "s" | "h" | "d" | "w" | "ms" .
@@ -148,7 +153,9 @@ duration_unit       = "u" | "µ" | "s" | "h" | "d" | "w" | "ms" .
 
 ### Dates & Times
 
-The date and time literal format is not specified in EBNF like the rest of this document.  It is specified using Go's date / time parsing format, which is a reference date written in the format required by InfluxQL.  The reference date time is:
+The date and time literal format is not specified in EBNF like the rest of this document.
+It is specified using Go's date / time parsing format, which is a reference date written in the format required by InfluxQL.
+The reference date time is:
 
 InfluxQL reference date time: January 2nd, 2006 at 3:04:05 PM
 

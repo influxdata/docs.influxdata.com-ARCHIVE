@@ -14,11 +14,11 @@ Introduction
 
 The TICKscript language is an invocation chaining language used to define data processing pipelines.
 
-
 Notation
 -------
 
-The syntax is specified using Extended Backus-Naur Form (“EBNF”). EBNF is the same notation used in the [Go](http://golang.org/) programming language specification, which can be found [here](https://golang.org/ref/spec).
+The syntax is specified using Extended Backus-Naur Form (“EBNF”).
+EBNF is the same notation used in the [Go](http://golang.org/) programming language specification, which can be found [here](https://golang.org/ref/spec).
 
 ```
 Production  = production_name "=" [ Expression ] "." .
@@ -78,5 +78,4 @@ Reference    = `"` { unicode_char } `"` .
 LambdaExpr   = "lambda:" Primary operator_lit Primary .
 
 ```
-
 

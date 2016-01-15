@@ -11,7 +11,6 @@ The following is a list of examples in no particular order that demonstrate some
 These guides assume your are familiar with the basics of defining, recording, replaying and enabling tasks within Kapacitor.
 See the [getting started](/kapacitor/v0.2/introduction/getting_started/) guide if you need a refresher.
 
-
 ### [Calculate Rates across joined series + Backfill](/kapacitor/v0.2/examples/join_backfill/)
 
 Learn how to join two series and calculate a combined results, plus how to perform that operation on historical data.
