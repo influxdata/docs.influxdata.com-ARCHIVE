@@ -565,6 +565,24 @@ a.product-sidebar--page:hover {
 	font-weight: 900;
 }
 
+.flash {
+	width: 100%;
+	display: inline-block;
+	border-radius: 4px;
+	background-color: rgba(55,61,73,0.8);
+	position: fixed;
+	top: calc(2.5rem + 3rem); /* .main-nav + .product-switcher */
+	left: 0;
+	z-index: 9999;
+	font-size: 0.875em;
+	padding: 1rem 2rem;
+	color: #FF8564;
+	text-align: left;
+}
+.flash > * {
+	margin: 0 !important;
+}
+
 
 
 
@@ -762,6 +780,11 @@ a.product-sidebar--page:hover {
 	.documentation-home--menu-item:hover {
 		background-color: #E6E9EC;
 	}
+	.flash {
+		width: calc(100% - 19rem - 3rem);
+		top: calc(3.25rem + 1rem); /* .main-nav + margin */
+		left: calc(19rem + 1rem);
+	}
 	
 }
 
@@ -792,5 +815,10 @@ a.product-sidebar--page:hover {
 	}
 	.page--title {
 		font-size: 3.625rem;
+	}
+	.flash {
+		width: calc(100% - 26rem - 3rem);
+		top: calc(3.25rem + 1rem); /* .main-nav + margin */
+		left: calc(26rem + 1rem);
 	}
 }
