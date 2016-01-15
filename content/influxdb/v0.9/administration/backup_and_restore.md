@@ -9,6 +9,7 @@ menu:
 
 Starting with v0.9.0, InfluxDB has the ability to snapshot a single data node at a point-in-time and restore it.
 
+<dt> Backup and Restore are non-functional for a significant subset of users. Full backup and restore capabilities will be implemented with the new `tsm` engine released with InfluxDB 0.10.0.
 
 ## Usage
 
