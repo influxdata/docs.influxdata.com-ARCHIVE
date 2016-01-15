@@ -11,41 +11,48 @@ menu:
 ---
 
 An [AlertNode](/kapacitor/v0.2/tick/alert_node/) can trigger an event of varying severity levels, 
-and pass the event to alert handlers. The criteria for triggering 
+and pass the event to alert handlers.
+The criteria for triggering 
 an alert is specified via a [lambda expression](/kapacitor/v0.2/tick/expr/).
-See [AlertNode.Info,](/kapacitor/v0.2/tick/alert_node/#info) [AlertNode.Warn,](/kapacitor/v0.2/tick/alert_node/#warn) and [AlertNode.Crit](/kapacitor/v0.2/tick/alert_node/#crit) below. 
+See [AlertNode.Info,](/kapacitor/v0.2/tick/alert_node/#info) [AlertNode.Warn,](/kapacitor/v0.2/tick/alert_node/#warn) and [AlertNode.Crit](/kapacitor/v0.2/tick/alert_node/#crit) below.
+
 
 Different event handlers can be configured for each [AlertNode.](/kapacitor/v0.2/tick/alert_node/) 
 Some handlers like Email, Slack, VictorOps and PagerDuty have a configuration 
-option &#39;global&#39; that indicates that all alerts implicitly use the handler. 
+option &#39;global&#39; that indicates that all alerts implicitly use the handler.
+
 
 Available event handlers: 
 
-* log -- log alert data to file. 
-* post -- HTTP POST data to a specified URL. 
-* email -- Send and email with alert data. 
-* exec -- Execute a command passing alert data over STDIN. 
-* Slack -- Post alert message to Slack channel. 
-* VictorOps -- Send alert to VictorOps. 
-* PagerDuty -- Send alert to PagerDuty. 
+* log -- log alert data to file.
+* post -- HTTP POST data to a specified URL.
+* email -- Send and email with alert data.
+* exec -- Execute a command passing alert data over STDIN.
+* Slack -- Post alert message to Slack channel.
+* VictorOps -- Send alert to VictorOps.
+* PagerDuty -- Send alert to PagerDuty.
 
-See below for more details on configuring each handler. 
+
+See below for more details on configuring each handler.
+
 
 Each event that gets sent to a handler contains the following alert data: 
 
-* ID -- the ID of the alert, user defined. 
-* Message -- the alert message, user defined. 
-* Time -- the time the alert occurred. 
-* Level -- one of OK, INFO, WARNING or CRITICAL. 
-* Data -- influxql.Result containing the data that triggered the alert. 
+* ID -- the ID of the alert, user defined.
+* Message -- the alert message, user defined.
+* Time -- the time the alert occurred.
+* Level -- one of OK, INFO, WARNING or CRITICAL.
+* Data -- influxql.Result containing the data that triggered the alert.
+
 
 Events are sent to handlers if the alert is in a state other than &#39;OK&#39; 
-or the alert just changed to the &#39;OK&#39; state from a non &#39;OK&#39; state (a.k.a. the alert recovered). 
+or the alert just changed to the &#39;OK&#39; state from a non &#39;OK&#39; state (a.k.a.
+the alert recovered).
 Using the [AlertNode.StateChangesOnly](/kapacitor/v0.2/tick/alert_node/#statechangesonly) property events will only be sent to handlers 
-if the alert changed state. 
+if the alert changed state.
+
 
 Example: 
-
 
 ```javascript
    stream
@@ -59,57 +66,58 @@ Example:
             .post("http://example.com/api/alert")
 ```
 
-
 It is assumed that each successive level filters a subset 
-of the previous level. As a result, the filter will only be applied if 
-a data point passed the previous level. 
+of the previous level.
+As a result, the filter will only be applied if 
+a data point passed the previous level.
 In the above example, if value = 15 then the INFO and 
 WARNING expressions would be evaluated, but not the 
-CRITICAL expression. 
-Each expression maintains its own state. 
+CRITICAL expression.
+Each expression maintains its own state.
 
 
 Properties
 ----------
 
-Property methods modify state on the calling node. They do not add another node to the pipeline, and always return a reference to the calling node.
+Property methods modify state on the calling node.
+They do not add another node to the pipeline, and always return a reference to the calling node.
 
 ### Channel
 
-Slack channel in which to post messages. 
-If empty uses the channel from the configuration. 
+Slack channel in which to post messages.
+If empty uses the channel from the configuration.
 
 
 ```javascript
 node.channel(channel string)
 ```
 
-
 ### Crit
 
-Filter expression for the CRITICAL alert level. 
-An empty value indicates the level is invalid and is skipped. 
+Filter expression for the CRITICAL alert level.
+An empty value indicates the level is invalid and is skipped.
 
 
 ```javascript
 node.crit(value tick.Node)
 ```
 
-
 ### Email
 
-Email the alert data. 
+Email the alert data.
 
-If the To list is empty, the To addresses from the configuration are used. 
-The email subject is the [AlertNode.Message](/kapacitor/v0.2/tick/alert_node/#message) property. 
-The email body is the JSON alert data. 
+
+If the To list is empty, the To addresses from the configuration are used.
+The email subject is the [AlertNode.Message](/kapacitor/v0.2/tick/alert_node/#message) property.
+The email body is the JSON alert data.
+
 
 If the &#39;smtp&#39; section in the configuration has the option: global = true 
 then all alerts are sent via email without the need to explicitly state it 
-in the TICKscript. 
+in the TICKscript.
+
 
 Example: 
-
 
 ```javascript
      [smtp]
@@ -121,85 +129,85 @@ Example:
        from = "kapacitor@example.com"
        to = ["oncall@example.com"]
        # Set global to true so all alert trigger emails.
-       global = true
+global = true
 ```
 
 Example: 
 
-
 ```javascript
     stream...
-         .alert()
+.alert()
 ```
 
 Send email to &#39;oncall@example.com&#39; from &#39;kapacitor@example.com&#39; 
 
-**NOTE**: The global option for email also implies stateChangesOnly is set on all alerts. 
+**NOTE**: The global option for email also implies stateChangesOnly is set on all alerts.
 
 
 ```javascript
 node.email(to ...string)
 ```
 
-
 ### Exec
 
-Execute a command whenever an alert is trigger and pass the alert data over STDIN in JSON format. 
+Execute a command whenever an alert is trigger and pass the alert data over STDIN in JSON format.
 
 
 ```javascript
 node.exec(executable string, args ...string)
 ```
 
-
 ### Flapping
 
-Perform flap detection on the alerts. 
+Perform flap detection on the alerts.
 The method used is similar method to Nagios: 
 https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/flapping.html 
 
-Each different alerting level is considered a different state. 
-The low and high thresholds are inverted thresholds of a percentage of state changes. 
+Each different alerting level is considered a different state.
+The low and high thresholds are inverted thresholds of a percentage of state changes.
 Meaning that if the percentage of state changes goes above the `high` 
-threshold, the alert enters a flapping state. The alert remains in the flapping state 
-until the percentage of state changes goes below the `low` threshold. 
-Typical values are low: 0.25 and high: 0.5. The percentage values represent the number state changes 
-over the total possible number of state changes. A percentage change of 0.5 means that the alert changed 
-state in half of the recorded history, and remained the same in the other half of the history. 
+threshold, the alert enters a flapping state.
+The alert remains in the flapping state 
+until the percentage of state changes goes below the `low` threshold.
+Typical values are low: 0.25 and high: 0.5.
+The percentage values represent the number state changes 
+over the total possible number of state changes.
+A percentage change of 0.5 means that the alert changed 
+state in half of the recorded history, and remained the same in the other half of the history.
 
 
 ```javascript
 node.flapping(low float64, high float64)
 ```
 
-
 ### History
 
 Number of previous states to remember when computing flapping levels and 
-checking for state changes. 
-Minimum value is 2 in order to keep track of current and previous states. 
+checking for state changes.
+Minimum value is 2 in order to keep track of current and previous states.
+
 
 Default: 21 
-
 
 ```javascript
 node.history(value int)
 ```
 
-
 ### Id
 
-Template for constructing a unique ID for a given alert. 
+Template for constructing a unique ID for a given alert.
+
 
 Available template data: 
 
-* Name -- Measurement name. 
-* Group -- Concatenation of all group-by tags of the form [key=value,]+. 
-If no groupBy is performed equal to literal &#39;nil&#39;. 
-* Tags -- Map of tags. Use &#39;{{ index .Tags &#34;key&#34; }}&#39; to get a specific tag value. 
+* Name -- Measurement name.
+* Group -- Concatenation of all group-by tags of the form [key=value,]+.
+If no groupBy is performed equal to literal &#39;nil&#39;.
+* Tags -- Map of tags.
+Use &#39;{{ index .Tags &#34;key&#34; }}&#39; to get a specific tag value.
+
 
 Example: 
-
 
 ```javascript
    stream.from().measurement('cpu')
@@ -212,10 +220,9 @@ ID: kapacitor/cpu/cpu=cpu0,
 
 Example: 
 
-
 ```javascript
    stream...
-   .groupBy('service')
+.groupBy('service')
    .alert()
       .id('kapacitor/{{ index .Tags "service" }}')
 ```
@@ -224,10 +231,9 @@ ID: kapacitor/authentication
 
 Example: 
 
-
 ```javascript
    stream...
-   .groupBy('service', 'host')
+.groupBy('service', 'host')
    .alert()
       .id('kapacitor/{{ index .Tags "service" }}/{{ index .Tags "host" }}')
 ```
@@ -236,53 +242,53 @@ ID: kapacitor/authentication/auth001.example.com
 
 Default: {{ .Name }}:{{ .Group }} 
 
-
 ```javascript
 node.id(value string)
 ```
 
-
 ### Info
 
-Filter expression for the INFO alert level. 
-An empty value indicates the level is invalid and is skipped. 
+Filter expression for the INFO alert level.
+An empty value indicates the level is invalid and is skipped.
 
 
 ```javascript
 node.info(value tick.Node)
 ```
 
-
 ### Log
 
-Log JSON alert data to file. One event per line. 
+Log JSON alert data to file.
+One event per line.
 
 
 ```javascript
 node.log(value string)
 ```
 
-
 ### Message
 
-Template for constructing a meaningful message for the alert. 
+Template for constructing a meaningful message for the alert.
+
 
 Available template data: 
 
-* ID -- The ID of the alert. 
-* Name -- Measurement name. 
-* Group -- Concatenation of all group-by tags of the form [key=value,]+. 
-If no groupBy is performed equal to literal &#39;nil&#39;. 
-* Tags -- Map of tags. Use &#39;{{ index .Tags &#34;key&#34; }}&#39; to get a specific tag value. 
-* Level -- Alert Level, one of: INFO, WARNING, CRITICAL. 
-* Fields -- Map of fields. Use &#39;{{ index .Fields &#34;key&#34; }}&#39; to get a specific field value. 
+* ID -- The ID of the alert.
+* Name -- Measurement name.
+* Group -- Concatenation of all group-by tags of the form [key=value,]+.
+If no groupBy is performed equal to literal &#39;nil&#39;.
+* Tags -- Map of tags.
+Use &#39;{{ index .Tags &#34;key&#34; }}&#39; to get a specific tag value.
+* Level -- Alert Level, one of: INFO, WARNING, CRITICAL.
+* Fields -- Map of fields.
+Use &#39;{{ index .Fields &#34;key&#34; }}&#39; to get a specific field value.
+
 
 Example: 
 
-
 ```javascript
    stream...
-   .groupBy('service', 'host')
+.groupBy('service', 'host')
    .alert()
       .id('{{ index .Tags "service" }}/{{ index .Tags "host" }}')
       .message('{{ .ID }} is {{ .Level}} value: {{ index .Fields "value" }}')
@@ -292,28 +298,33 @@ Message: authentication/auth001.example.com is CRITICAL value:42
 
 Default: {{ .ID }} is {{ .Level }} 
 
-
 ```javascript
 node.message(value string)
 ```
 
-
 ### PagerDuty
 
-Send the alert to PagerDuty. 
-To use PagerDuty alerting you must first follow the steps to enable a new &#39;Generic API&#39; service. 
+Send the alert to PagerDuty.
+To use PagerDuty alerting you must first follow the steps to enable a new &#39;Generic API&#39; service.
+
 
 From https://developer.pagerduty.com/documentation/integration/events 
 
-1. In your account, under the Services tab, click &#34;Add New Service&#34;. 
-2. Enter a name for the service and select an escalation policy. Then, select &#34;Generic API&#34; for the Service Type. 
-3. Click the &#34;Add Service&#34; button. 
-4. Once the service is created, you&#39;ll be taken to the service page. On this page, you&#39;ll see the &#34;Service key&#34;, which is needed to access the API 
+1.
+In your account, under the Services tab, click &#34;Add New Service&#34;.
+2.
+Enter a name for the service and select an escalation policy.
+Then, select &#34;Generic API&#34; for the Service Type.
+3.
+Click the &#34;Add Service&#34; button.
+4.
+Once the service is created, you&#39;ll be taken to the service page.
+On this page, you&#39;ll see the &#34;Service key&#34;, which is needed to access the API 
 
-Place the &#39;service key&#39; into the &#39;pagerduty&#39; section of the Kapacitor configuration as the option &#39;service-key&#39;. 
+Place the &#39;service key&#39; into the &#39;pagerduty&#39; section of the Kapacitor configuration as the option &#39;service-key&#39;.
+
 
 Example: 
-
 
 ```javascript
     [pagerduty]
@@ -321,23 +332,23 @@ Example:
       service-key = "xxxxxxxxx"
 ```
 
-With the correct configuration you can now use PagerDuty in TICKscripts. 
+With the correct configuration you can now use PagerDuty in TICKscripts.
+
 
 Example: 
 
-
 ```javascript
     stream...
-         .alert()
+.alert()
              .pagerDuty()
 ```
 
 If the &#39;pagerduty&#39; section in the configuration has the option: global = true 
 then all alerts are sent to PagerDuty without the need to explicitly state it 
-in the TICKscript. 
+in the TICKscript.
+
 
 Example: 
-
 
 ```javascript
     [pagerduty]
@@ -348,50 +359,47 @@ Example:
 
 Example: 
 
-
 ```javascript
     stream...
-         .alert()
+.alert()
 ```
 
-Send alert to PagerDuty. 
+Send alert to PagerDuty.
 
 
 ```javascript
 node.pagerDuty()
 ```
 
-
 ### Post
 
-Post the JSON alert data to the specified URL. 
+Post the JSON alert data to the specified URL.
 
 
 ```javascript
 node.post(value string)
 ```
 
-
 ### RoutingKey
 
-The VictorOps routing key. If not set uses key specified in configuration. 
+The VictorOps routing key.
+If not set uses key specified in configuration.
 
 
 ```javascript
 node.routingKey(routingKey string)
 ```
 
-
 ### Slack
 
-Send the alert to Slack. 
+Send the alert to Slack.
 To allow Kapacitor to post to Slack, 
 go to the URL https://slack.com/services/new/incoming-webhook 
 and create a new incoming webhook and place the generated URL 
-in the &#39;slack&#39; configuration section. 
+in the &#39;slack&#39; configuration section.
+
 
 Example: 
-
 
 ```javascript
     [slack]
@@ -402,25 +410,25 @@ Example:
 
 In order to not post a message every alert interval 
 use [AlertNode.StateChangesOnly](/kapacitor/v0.2/tick/alert_node/#statechangesonly) so that only events 
-where the alert changed state are posted to the channel. 
+where the alert changed state are posted to the channel.
+
 
 Example: 
 
-
 ```javascript
     stream...
-         .alert()
+.alert()
              .slack()
 ```
 
-Send alerts to Slack channel in the configuration file. 
+Send alerts to Slack channel in the configuration file.
+
 
 Example: 
 
-
 ```javascript
     stream...
-         .alert()
+.alert()
              .slack()
              .channel('#alerts')
 ```
@@ -429,10 +437,9 @@ Send alerts to Slack channel &#39;#alerts&#39;
 
 Example: 
 
-
 ```javascript
     stream...
-         .alert()
+.alert()
              .slack()
              .channel('@jsmith')
 ```
@@ -441,10 +448,10 @@ Send alert to user &#39;@jsmith&#39;
 
 If the &#39;slack&#39; section in the configuration has the option: global = true 
 then all alerts are sent to Slack without the need to explicitly state it 
-in the TICKscript. 
+in the TICKscript.
+
 
 Example: 
-
 
 ```javascript
     [slack]
@@ -456,33 +463,31 @@ Example:
 
 Example: 
 
-
 ```javascript
     stream...
-         .alert()
+.alert()
 ```
 
-Send alert to Slack using default channel &#39;#general&#39;. 
-**NOTE**: The global option for Slack also implies stateChangesOnly is set on all alerts. 
+Send alert to Slack using default channel &#39;#general&#39;.
+**NOTE**: The global option for Slack also implies stateChangesOnly is set on all alerts.
 
 
 ```javascript
 node.slack()
 ```
 
-
 ### StateChangesOnly
 
-Only sends events where the state changed. 
+Only sends events where the state changed.
 Each different alert level OK, INFO, WARNING, and CRITICAL 
-are considered different states. 
+are considered different states.
+
 
 Example: 
 
-
 ```javascript
     stream...
-        .window()
+.window()
              .period(10s)
              .every(10s)
         .alert()
@@ -492,28 +497,27 @@ Example:
 ```
 
 If the &#34;value&#34; is greater than 10 for a total of 60s, then 
-only two events will be sent. First, when the value crosses 
-the threshold, and second, when it falls back into an OK state. 
+only two events will be sent.
+First, when the value crosses 
+the threshold, and second, when it falls back into an OK state.
 Without stateChangesOnly, the alert would have triggered 7 times: 
 6 times for each 10s period where the condition was met and once more 
-for the recovery. 
-
+for the recovery.
 
 
 ```javascript
 node.stateChangesOnly()
 ```
 
-
 ### VictorOps
 
-Send alert to VictorOps. 
+Send alert to VictorOps.
 To use VictorOps alerting you must first enable the &#39;Alert Ingestion API&#39; 
-in the &#39;Integrations&#39; section of VictorOps. 
-Then place the API key from the URL into the &#39;victorops&#39; section of the Kapacitor configuration. 
+in the &#39;Integrations&#39; section of VictorOps.
+Then place the API key from the URL into the &#39;victorops&#39; section of the Kapacitor configuration.
+
 
 Example: 
-
 
 ```javascript
     [victorops]
@@ -522,25 +526,25 @@ Example:
       routing-key = "everyone"
 ```
 
-With the correct configuration you can now use VictorOps in TICKscripts. 
+With the correct configuration you can now use VictorOps in TICKscripts.
+
 
 Example: 
 
-
 ```javascript
     stream...
-         .alert()
+.alert()
              .victorOps()
 ```
 
-Send alerts to VictorOps using the routing key in the configuration file. 
+Send alerts to VictorOps using the routing key in the configuration file.
+
 
 Example: 
 
-
 ```javascript
     stream...
-         .alert()
+.alert()
              .victorOps()
              .routingKey('team_rocket')
 ```
@@ -549,10 +553,10 @@ Send alerts to VictorOps with routing key &#39;team_rocket&#39;
 
 If the &#39;victorops&#39; section in the configuration has the option: global = true 
 then all alerts are sent to VictorOps without the need to explicitly state it 
-in the TICKscript. 
+in the TICKscript.
+
 
 Example: 
-
 
 ```javascript
     [victorops]
@@ -564,24 +568,22 @@ Example:
 
 Example: 
 
-
 ```javascript
     stream...
-         .alert()
+.alert()
 ```
 
-Send alert to VictorOps using the default routing key, found in the configuration. 
+Send alert to VictorOps using the default routing key, found in the configuration.
 
 
 ```javascript
 node.victorOps()
 ```
 
-
 ### Warn
 
-Filter expression for the WARNING alert level. 
-An empty value indicates the level is invalid and is skipped. 
+Filter expression for the WARNING alert level.
+An empty value indicates the level is invalid and is skipped.
 
 
 ```javascript

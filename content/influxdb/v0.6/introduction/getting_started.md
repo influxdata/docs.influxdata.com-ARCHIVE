@@ -1,19 +1,31 @@
 ---
 title: Getting Started
+menu:
+  influxdb_06:
+    weight: 20
+    parent: introduction
 ---
 
-Now that you've [installed InfluxDB](installation.html) you're ready to start doing awesome things. There are many client libraries available for InfluxDB, but in this section we're going to use the built in user interface to get started quickly.
+Now that you've [installed InfluxDB](installation.html) you're ready to start doing awesome things.
+There are many client libraries available for InfluxDB, but in this section we're going to use the built in user interface to get started quickly.
 
 ## Logging in and creating your first database
-If you've installed locally, point your browser to <a href="http://localhost:8083" target="_blank">localhost:8083</a>. The built in user interface runs on port `8083` by default. You should see a screen like this:
+If you've installed locally, point your browser to <a href="http://localhost:8083" target="_blank">localhost:8083</a>.
+The built in user interface runs on port `8083` by default.
+You should see a screen like this:
 
 ![Admin login](/img/influxdb/old/admin_login.png)
 
-The default options for hostname of `localhost` and port of `8086` should work. The InfluxDB HTTP API runs on port `8086` by default. Enter the username `root` and password `root` and click Connect. You'll then see a logged in screen like this:
+The default options for hostname of `localhost` and port of `8086` should work.
+The InfluxDB HTTP API runs on port `8086` by default.
+Enter the username `root` and password `root` and click Connect.
+You'll then see a logged in screen like this:
 
 ![Logged in with no databases](/img/influxdb/old/logged_in_no_databases.png)
 
-Enter in a database name and click Create. Database names should contain only letters, numbers, or underscores and start with a letter. Once you've created a database you should see it on the screen:
+Enter in a database name and click Create.
+Database names should contain only letters, numbers, or underscores and start with a letter.
+Once you've created a database you should see it on the screen:
 
 ![Database list screen](/img/influxdb/old/database_created.png)
 
@@ -22,9 +34,16 @@ Go ahead and click the "Explore" link to get here:
 
 ![Explore data interface](/img/influxdb/old/explore_screen.png)
 
-From this screen you can write some test data. More importantly, you'll be able to issue ad-hoc queries and see basic visualizations. Let's write a little data in to see how things work. Data in InfluxDB is organized by "time series" which then have "points" which have a `time`, `sequence_number`, and `columns`. Think of it kind of like SQL tables, and rows where the primary index is always time. The difference is that with InfluxDB you can have millions of series, you don't have to define schemas up front, and null values aren't stored.
+From this screen you can write some test data.
+More importantly, you'll be able to issue ad-hoc queries and see basic visualizations.
+Let's write a little data in to see how things work.
+Data in InfluxDB is organized by "time series" which then have "points" which have a `time`, `sequence_number`, and `columns`.
+Think of it kind of like SQL tables, and rows where the primary index is always time.
+The difference is that with InfluxDB you can have millions of series, you don't have to define schemas up front, and null values aren't stored.
 
-Let's write some data. Here are a couple of examples of things we'd want to write. We'll show the screenshot and what the JSON data looks like right after.
+Let's write some data.
+Here are a couple of examples of things we'd want to write.
+We'll show the screenshot and what the JSON data looks like right after.
 
 ![Storing log lines](/img/influxdb/old/log_lines.png)
 
@@ -96,7 +115,9 @@ Or a classic example from DevOps:
 ]
 ```
 
-Now that we've written a few points. Let's take a look at them. Try some of the following queries:
+Now that we've written a few points.
+Let's take a look at them.
+Try some of the following queries:
 
 ```sql
 select * from /.*/ limit 1
@@ -112,14 +133,19 @@ select line from log_lines where line =~ /paul@influx.com/
 
 ![Selecting log lines on regex match](/img/influxdb/old/select_log_lines.png)
 
-In the results of those queries we notice two columns that we didn't explicitly write in: `time` and `sequence_number`. Those are automatically assigned by InfluxDB when you write data in if they're not specified. In the UI time is represented as an epoch in seconds, but the underlying storage keeps them as microsecond epochs.
+In the results of those queries we notice two columns that we didn't explicitly write in: `time` and `sequence_number`.
+Those are automatically assigned by InfluxDB when you write data in if they're not specified.
+In the UI time is represented as an epoch in seconds, but the underlying storage keeps them as microsecond epochs.
 
-There's a lot more you can do with the query language. Let's get to writing some test data to try things out.
-
+There's a lot more you can do with the query language.
+Let's get to writing some test data to try things out.
 
 ## Writing Data Through JavaScript
 
-Let's drop into the javascript console to write some test data. That'll help us try some queries that show more of what InfluxDB can do. While in the explore data interface, bring up the javascript console. Copy and paste this code in and execute it.
+Let's drop into the javascript console to write some test data.
+That'll help us try some queries that show more of what InfluxDB can do.
+While in the explore data interface, bring up the javascript console.
+Copy and paste this code in and execute it.
 
 ```javascript
 // start time of 24 hours ago
@@ -159,7 +185,9 @@ for (i = 0; i < backMilliseconds; i += timeInterval) {
 influxdb.writeSeries([cpuSeries, eventSeries]);
 ```
 
-`influxdb` is the javascript library that is available in that window. Go [here for more info on using the InfluxDB javascript library](../client_libraries/javascript.html). But for now, let's run some queries:
+`influxdb` is the javascript library that is available in that window.
+Go [here for more info on using the InfluxDB javascript library](../client_libraries/javascript.html).
+But for now, let's run some queries:
 
 Get the average of `cpu_idle` in 30 minute windows for the last day:
 

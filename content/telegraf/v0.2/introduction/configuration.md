@@ -20,5 +20,6 @@ telegraf -sample-config > telegraf.conf
 telegraf -sample-config -filter <pluginname>[:<pluginname>] -outputfilter <outputname>[:<outputname>] > telegraf.conf
 ```
 
-> **Note:** In most cases, you will need to edit the configuration file to match your needs. 
+> **Note:** In most cases, you will need to edit the configuration file to match your needs.
+
 

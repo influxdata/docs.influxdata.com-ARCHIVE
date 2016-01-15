@@ -8,7 +8,8 @@ menu:
     weight: 30
 ---
 
-Telegraf is entirely plugin driven. It gathers all metrics from the plugins specified in the configuration file.
+Telegraf is entirely plugin driven.
+It gathers all metrics from the plugins specified in the configuration file.
 
 ## Usage Instructions
 

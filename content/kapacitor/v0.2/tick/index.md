@@ -8,10 +8,13 @@ menu:
     weight: 10
 ---
 
-Kapacitor uses a DSL named `TICKscript`. The DSL is used to define the pipelines for processing data in Kapacitor.
+Kapacitor uses a DSL named `TICKscript`.
+The DSL is used to define the pipelines for processing data in Kapacitor.
 
-The TICKscript language is an invocation chaining language. Each script has a flat scope and each variable in the scope
-defines methods that can be called on it. These methods come in two flavors.
+The TICKscript language is an invocation chaining language.
+Each script has a flat scope and each variable in the scope
+defines methods that can be called on it.
+These methods come in two flavors.
 
 * Property methods -- Modifies the node they are called on and returns a reference to the same node.
 * Chaining methods -- Creates a new node as a child of the node they are called on and returns a reference to the new node.
@@ -37,7 +40,6 @@ Each edge has a type, one of the following:
 
 When connecting nodes the TICKscript language will not prevent you from connecting edges of the wrong type but rather the check will be performed at runtime.
 So just be aware that a syntactically correct script may define a pipeline that is invalid.
-
 
 Example
 -------
