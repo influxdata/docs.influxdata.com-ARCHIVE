@@ -275,7 +275,7 @@ a:hover {
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-position: center center;
-	background-size: 66.6%;
+	background-size: 40%;
 }
 .page--body pre::-webkit-scrollbar       { background-color: #181C23; width: 1rem; }
 .page--body pre::-webkit-scrollbar-track { background-color: #181C23; }
