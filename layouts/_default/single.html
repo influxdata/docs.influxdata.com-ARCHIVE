@@ -1,11 +1,11 @@
 {{ partial "header.html" . }}
-<div class="page-content" id="page-content">
+<div class="page" id="page-content">
 	{{ if .Title }}
-	<div class="page-title" id="page-title">
-		<div class="page-content--container">{{ .Title }} (Default Template)</div>
+	<div class="page--title" id="page-title">
+		<div class="page--body">{{ .Title }} (Default Template)</div>
 	</div>
 	{{ end }}
-	<div class="page-content--container">
+	<div class="page--body">
 		{{ .Content }}
 	</div>
 </div>
