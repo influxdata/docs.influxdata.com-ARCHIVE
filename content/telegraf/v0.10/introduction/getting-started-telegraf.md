@@ -27,9 +27,11 @@ Follow the instructions in the Telegraf section on the [Downloads page](https://
 * Standalone Binary: see the next section for how to create a configuration file
 
 ### Creating and Editing the Configuration File
-Before starting the Telegraf server you need to edit and/or create an initial configuration that specifies your desired [inputs](/telegraf/v0.10/inputs/) (where the metrics come from) and [outputs](/telegraf/v0.10/outputs/) (where the metrics go). There are [several ways](/telegraf/v0.10/introduction/configuration/) to create and edit the configuration file. Here, we'll generate a configuration file and simultaneously specify the desired inputs with the `-input-filter` flag and the desired output with the `-output-filter` flag.
+Before starting the Telegraf server you need to edit and/or create an initial configuration that specifies your desired [inputs](/telegraf/v0.10/inputs/) (where the metrics come from) and [outputs](/telegraf/v0.10/outputs/) (where the metrics go). There are [several ways](/telegraf/v0.10/introduction/configuration/) to create and edit the configuration file.
+Here, we'll generate a configuration file and simultaneously specify the desired inputs with the `-input-filter` flag and the desired output with the `-output-filter` flag.
 
-In the example below, we create a configuration file called `telegraf.conf` with two inputs: one that reads metrics about the system's cpu usage (`cpu`) and one that reads metrics about the system's memory usage (`mem`). `telegraf.conf` specifies InfluxDB as the desired output.
+In the example below, we create a configuration file called `telegraf.conf` with two inputs:
+one that reads metrics about the system's cpu usage (`cpu`) and one that reads metrics about the system's memory usage (`mem`). `telegraf.conf` specifies InfluxDB as the desired output.
 
 ```sh
 telegraf -sample-config -input-filter cpu:mem -output-filter influxdb > telegraf.conf
@@ -55,7 +57,8 @@ systemctl start telegraf
 ## Results
 Once Telegraf is up and running it'll start collecting data and writing them to the desired output.
 
-Returning to our sample configuration, we show what the `cpu` and `mem` data look like in InfluxDB below. Note that we used the default input and output configuration settings to get these data.
+Returning to our sample configuration, we show what the `cpu` and `mem` data look like in InfluxDB below.
+Note that we used the default input and output configuration settings to get these data.
 
 * List all [measurements](https://docs.influxdata.com/influxdb/v0.9/concepts/glossary/#measurement) in the `telegraf` [database](https://docs.influxdata.com/influxdb/v0.9/concepts/glossary/#database):
 
