@@ -10,14 +10,14 @@ menu:
 
 ## Configuring Telegraf
 
-### Create a configuration file with every plugin and output
+### Create a configuration file with every input and output
 ```
 telegraf -sample-config > telegraf.conf
 ```
 
-### Create a configuration file with specific plugins and outputs
+### Create a configuration file with specific inputs and outputs
 ```
-telegraf -sample-config -filter <pluginname>[:<pluginname>] -outputfilter <outputname>[:<outputname>] > telegraf.conf
+telegraf -sample-config -input-filter <pluginname>[:<pluginname>] -output-filter <outputname>[:<outputname>] > telegraf.conf
 ```
 
 > **Note:** In most cases, you will need to edit the configuration file to match your needs.

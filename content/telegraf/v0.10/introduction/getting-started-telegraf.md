@@ -27,12 +27,12 @@ Follow the instructions in the Telegraf section on the [Downloads page](https://
 * Standalone Binary: see the next section for how to create a configuration file
 
 ### Creating and Editing the Configuration File
-Before starting the Telegraf server you need to edit and/or create an initial configuration that specifies your desired [plugins](/telegraf/v0.2/plugins/) (where the metrics come from) and [outputs](/telegraf/v0.2/outputs/) (where the metrics go). There are [several ways](../configuration/) to create and edit the configuration file. Here, we'll generate a configuration file and simultaneously specify the desired plugins with the `-filter` flag and the desired output with the `-outputfilter` flag.
+Before starting the Telegraf server you need to edit and/or create an initial configuration that specifies your desired [inputs](/telegraf/v0.10/inputs/) (where the metrics come from) and [outputs](/telegraf/v0.10/outputs/) (where the metrics go). There are [several ways](/telegraf/v0.10/introduction/configuration/) to create and edit the configuration file. Here, we'll generate a configuration file and simultaneously specify the desired inputs with the `-input-filter` flag and the desired output with the `-output-filter` flag.
 
-In the example below, we create a configuration file called `telegraf.conf` with two plugins: one that reads metrics about the system's cpu usage (`cpu`) and one that reads metrics about the system's memory usage (`mem`). `telegraf.conf` specifies InfluxDB as the desired ouput.
+In the example below, we create a configuration file called `telegraf.conf` with two inputs: one that reads metrics about the system's cpu usage (`cpu`) and one that reads metrics about the system's memory usage (`mem`). `telegraf.conf` specifies InfluxDB as the desired output.
 
 ```sh
-telegraf -sample-config -filter cpu:mem -outputfilter influxdb > telegraf.conf
+telegraf -sample-config -input-filter cpu:mem -output-filter influxdb > telegraf.conf
 ```
 
 ## Start the Telegraf Server
@@ -55,7 +55,7 @@ systemctl start telegraf
 ## Results
 Once Telegraf is up and running it'll start collecting data and writing them to the desired output.
 
-Returning to our sample configuration, we show what the `cpu` and `mem` data look like in InfluxDB below. Note that we used the default plugin and output configuration settings to get these data.
+Returning to our sample configuration, we show what the `cpu` and `mem` data look like in InfluxDB below. Note that we used the default input and output configuration settings to get these data.
 
 * List all [measurements](https://docs.influxdata.com/influxdb/v0.9/concepts/glossary/#measurement) in the `telegraf` [database](https://docs.influxdata.com/influxdb/v0.9/concepts/glossary/#database):
 
@@ -64,40 +64,53 @@ Returning to our sample configuration, we show what the `cpu` and `mem` data loo
 name: measurements
 ------------------
 name
-cpu_usage_guest
-cpu_usage_guest_nice
-cpu_usage_idle
-cpu_usage_iowait
-cpu_usage_irq
-cpu_usage_nice
-cpu_usage_softirq
-cpu_usage_steal
-cpu_usage_system
-cpu_usage_user
-mem_available
-mem_available_percent
-mem_buffered
-mem_cached
-mem_free
-mem_total
-mem_used
-mem_used_percent
+cpu
+mem
 ```
 
-Notice that each measurement has the name of the plugin prepended to it.
-
-* Select a sample of the data in the measurement `cpu_usage_idle`:
+* List all [field keys](https://docs.influxdata.com/influxdb/v0.9/concepts/glossary/#field-key) by measurement:
 
 ```sh
-> SELECT value FROM cpu_usage_idle WHERE cpu='cpu-total' LIMIT 5
-name: cpu_usage_idle
---------------------
-time			                value
-2015-12-08T21:39:20Z	  98.04902451225612
-2015-12-08T21:39:30Z	  97.70028746406699
-2015-12-08T21:39:40Z	  98.37520309961255
-2015-12-08T21:39:50Z	  98.17522809648794
-2015-12-08T21:40:00Z	  96.84881830686507
+> SHOW FIELD KEYS
+name: cpu
+---------
+fieldKey
+usage_guest
+usage_guest_nice
+usage_idle
+usage_iowait
+usage_irq
+usage_nice
+usage_softirq
+usage_steal
+usage_system
+usage_user
+
+name: mem
+---------
+fieldKey
+available
+available_percent
+buffered
+cached
+free
+total
+used
+used_percent
+```
+
+* Select a sample of the data in the [field](https://docs.influxdata.com/influxdb/v0.9/concepts/glossary/#field) `usage_idle` in the measurement `cpu_usage_idle`:
+
+```sh
+> SELECT usage_idle FROM cpu WHERE cpu = 'cpu-total' LIMIT 5
+name: cpu
+---------
+time			               usage_idle
+2016-01-16T00:03:00Z	 97.56189047261816
+2016-01-16T00:03:10Z	 97.76305923519121
+2016-01-16T00:03:20Z	 97.32533433320835
+2016-01-16T00:03:30Z	 95.68857785553611
+2016-01-16T00:03:40Z	 98.63715928982245
 ```
 
 
