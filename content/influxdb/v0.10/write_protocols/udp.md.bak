@@ -1,7 +1,7 @@
 ---
 title: Service - UDP
 menu:
-  influxdb_09:
+  influxdb_010:
     weight: 30
     parent: write_protocols
 ---
@@ -133,7 +133,7 @@ For example:
 
 ## Writing Points
 
-To write, just send newline separated [line protocol](/influxdb/v0.9/write_protocols/line/) over UDP.
+To write, just send newline separated [line protocol](/influxdb/v0.10/write_protocols/line/) over UDP.
 For better performance send batches of points rather than multiple single points.
 
 ```bash

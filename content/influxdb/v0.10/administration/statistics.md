@@ -1,7 +1,7 @@
 ---
 title: Server Monitoring
 menu:
-  influxdb_09:
+  influxdb_010:
     weight: 50
     parent: administration
 ---

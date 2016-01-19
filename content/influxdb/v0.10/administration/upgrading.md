@@ -2,7 +2,7 @@
 title: Upgrading from previous versions
 
 menu:
-  influxdb_09:
+  influxdb_010:
     weight: 30
     parent: administration
 ---

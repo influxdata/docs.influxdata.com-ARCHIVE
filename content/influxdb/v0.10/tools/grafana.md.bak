@@ -2,7 +2,7 @@
 title: Grafana Dashboards
 
 menu:
-  influxdb_09:
+  influxdb_010:
     url: "http://docs.grafana.org/datasources/influxdb/"
     weight: 30
     parent: tools

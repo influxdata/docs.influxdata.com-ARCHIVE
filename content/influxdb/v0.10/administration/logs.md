@@ -2,7 +2,7 @@
 title: Logs
 
 menu:
-  influxdb_09:
+  influxdb_010:
     weight: 10
     parent: administration
 ---

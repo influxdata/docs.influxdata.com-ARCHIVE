@@ -1,14 +1,14 @@
 ---
 title: Query Syntax
 menu:
-  influxdb_09:
+  influxdb_010:
     weight: 60
     parent: query_language
 ---
 
 The InfluxDB Query Language (InfluxQL) syntax is a SQL-like query language tailored for querying ranges of time.
 This page explains the InfluxQL syntax.
-See the [specification](/influxdb/v0.9/query_language/spec/) for a formal explanation of InfluxQL.
+See the [specification](/influxdb/v0.10/query_language/spec/) for a formal explanation of InfluxQL.
 
 ## Identifiers (Double-quoted)
 
@@ -31,7 +31,7 @@ Bare (unquoted) identifiers are allowed for convenience and must meet all of the
 
 - contain only `A-Z`, `a-z`, `0-9`, or `_`
 - begin with `A-Z`, `a-z`, or `_`
-- not match a [keyword](/influxdb/v0.9/query_language/spec/#keywords).
+- not match a [keyword](/influxdb/v0.10/query_language/spec/#keywords).
 
 All other identifiers must be wrapped in double-quotes (`"`).
 Double-quoted identifers may contain any unicode characters except for double quotes, new lines and backslashes, which must be backslash (`\`) escaped.
@@ -223,7 +223,7 @@ Querying measurements or tags that contain double-quotes `"` can be difficult, s
 It's possible to work around the limitations with regular expressions but it's not easy.
 
 Avoid using Keywords as identifiers (database names, retention policy names, measurement names, tag keys, or field keys) whenever possible.
-Keywords in InfluxDB are referenced on the [InfluxQL Syntax](/influxdb/v0.9/query_language/spec/) page.
+Keywords in InfluxDB are referenced on the [InfluxQL Syntax](/influxdb/v0.10/query_language/spec/) page.
 There is no need to quote or escape keywords in the write syntax.
 
 

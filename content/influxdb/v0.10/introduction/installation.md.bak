@@ -1,7 +1,7 @@
 ---
 title: Installation
 menu:
-  influxdb_09:
+  influxdb_010:
     weight: 10
     parent: introduction
 ---
@@ -116,7 +116,7 @@ influxd -config /usr/local/etc/influxdb.conf
 
 For users who don't want to install any software and are ready to use InfluxDB, you may want to check out our [managed hosted InfluxDB offering](http://customers.influxdb.com).
 
-<a href="/influxdb/v0.9/introduction/getting_started/"><font size="6"><b>⇒ Now get started!</b></font></a>
+<a href="/influxdb/v0.10/introduction/getting_started/"><font size="6"><b>⇒ Now get started!</b></font></a>
 
 ## Generate a configuration file
 
@@ -223,7 +223,7 @@ For example:
 INFLUXD_OPTS='-hostname host[:port] [-join hostname_1:port_1[,hostname_2:port_2]]'
 ```
 
-For more detailed instructions on how to set up a cluster, see the documentation on [clustering](/influxdb/v0.9/guides/clustering/)
+For more detailed instructions on how to set up a cluster, see the documentation on [clustering](/influxdb/v0.10/guides/clustering/)
 
 ## Development Versions
 

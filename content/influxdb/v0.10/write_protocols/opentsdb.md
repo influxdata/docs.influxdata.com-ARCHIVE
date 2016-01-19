@@ -1,7 +1,7 @@
 ---
 title: Service - OpenTSDB
 menu:
-  influxdb_09:
+  influxdb_010:
     weight: 60
     parent: write_protocols
 ---

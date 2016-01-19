@@ -1,7 +1,7 @@
 ---
 title: Hardware Sizing Guidelines
 menu:
-  influxdb_09:
+  influxdb_010:
     weight: 12
     parent: guides
 ---

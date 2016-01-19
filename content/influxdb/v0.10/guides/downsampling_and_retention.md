@@ -1,7 +1,7 @@
 ---
 title: Downsampling and Data Retention
 menu:
-  influxdb_09:
+  influxdb_010:
     weight: 11
     parent: guides
 ---

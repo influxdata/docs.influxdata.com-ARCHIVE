@@ -1,7 +1,7 @@
 ---
 title: Database Configuration
 menu:
-  influxdb_09:
+  influxdb_010:
     weight: 40
     parent: administration
 ---
@@ -32,26 +32,26 @@ influxd -config /etc/influxdb/influxdb.conf.new
 InfluxDB will use the default configuration settings when no configuration file is provided.
 A new configuration file should be generated every time InfluxDB is upgraded.
 
-See the [installation documentation](/influxdb/v0.9/introduction/installation/#generate-a-configuration-file) for more detail on generating and using configuration files.
+See the [installation documentation](/influxdb/v0.10/introduction/installation/#generate-a-configuration-file) for more detail on generating and using configuration files.
 
 ## Configuration Sections
 
-* [[reporting]](/influxdb/v0.9/administration/config/#reporting)
-* [[meta]](/influxdb/v0.9/administration/config/#meta)
-* [[data]](/influxdb/v0.9/administration/config/#data)
-* [[cluster]](/influxdb/v0.9/administration/config/#cluster)
-* [[retention]](/influxdb/v0.9/administration/config/#retention)
-* [[shard-precreation]](/influxdb/v0.9/administration/config/#shard-precreation)
-* [[admin]](/influxdb/v0.9/administration/config/#admin)
-* [[monitor]](/influxdb/v0.9/administration/config/#monitor)
-* [[subscriber]](/influxdb/v0.9/administration/config/#subscriber)
-* [[http]](/influxdb/v0.9/administration/config/#http)
-* [[graphite]](/influxdb/v0.9/administration/config/#graphite)
-* [[collectd]](/influxdb/v0.9/administration/config/#collectd)
-* [[opentsdb]](/influxdb/v0.9/administration/config/#opentsdb)
-* [[udp]](/influxdb/v0.9/administration/config/#udp)
-* [[continuous_queries]](/influxdb/v0.9/administration/config/#continuous-queries)
-* [[hinted-handoff]](/influxdb/v0.9/administration/config/#hinted-handoff)
+* [[reporting]](/influxdb/v0.10/administration/config/#reporting)
+* [[meta]](/influxdb/v0.10/administration/config/#meta)
+* [[data]](/influxdb/v0.10/administration/config/#data)
+* [[cluster]](/influxdb/v0.10/administration/config/#cluster)
+* [[retention]](/influxdb/v0.10/administration/config/#retention)
+* [[shard-precreation]](/influxdb/v0.10/administration/config/#shard-precreation)
+* [[admin]](/influxdb/v0.10/administration/config/#admin)
+* [[monitor]](/influxdb/v0.10/administration/config/#monitor)
+* [[subscriber]](/influxdb/v0.10/administration/config/#subscriber)
+* [[http]](/influxdb/v0.10/administration/config/#http)
+* [[graphite]](/influxdb/v0.10/administration/config/#graphite)
+* [[collectd]](/influxdb/v0.10/administration/config/#collectd)
+* [[opentsdb]](/influxdb/v0.10/administration/config/#opentsdb)
+* [[udp]](/influxdb/v0.10/administration/config/#udp)
+* [[continuous_queries]](/influxdb/v0.10/administration/config/#continuous-queries)
+* [[hinted-handoff]](/influxdb/v0.10/administration/config/#hinted-handoff)
 
 ## Configuration Options
 
@@ -71,14 +71,14 @@ InfluxData does not request, track, or store the IP addresses of reporting serve
 ### reporting-disabled = false
 
 The reporting disabled option toggles the reporting of anonymous data every 24 hours to `m.influxdb.com`.
-Each report includes a unique, randomly-generated cluster identifier (an 8-byte Raft ID); OS; architecture; InfluxDB version; and the number of [databases](/influxdb/v0.9/concepts/glossary/#database), [measurements](/influxdb/v0.9/concepts/glossary/#measurement), and unique [series](/influxdb/v0.9/concepts/glossary/#series).
+Each report includes a unique, randomly-generated cluster identifier (an 8-byte Raft ID); OS; architecture; InfluxDB version; and the number of [databases](/influxdb/v0.10/concepts/glossary/#database), [measurements](/influxdb/v0.10/concepts/glossary/#measurement), and unique [series](/influxdb/v0.10/concepts/glossary/#series).
 Setting this option to `true` will disable reporting.
 
 ## [meta]
 
 This section controls some of the parameters for the InfluxDB cluster.
 Specifically, it handles the parameters for the Raft consensus group which coordinates metadata about the cluster.
-For step-by-step instructions on setting up an InfluxDB cluster, see [Cluster Setup](/influxdb/v0.9/guides/clustering/).
+For step-by-step instructions on setting up an InfluxDB cluster, see [Cluster Setup](/influxdb/v0.10/guides/clustering/).
 
 ### dir = "/var/opt/influxdb/meta"
 
@@ -101,7 +101,7 @@ The bind address is the `port` of the node which is used to communicates with it
 
 ### retention-autocreate = true
 
-Retention policy auto-creation automatically creates a [`default` retention policy](/influxdb/v0.9/concepts/glossary/#retention-policy-rp) when a database is created.
+Retention policy auto-creation automatically creates a [`default` retention policy](/influxdb/v0.10/concepts/glossary/#retention-policy-rp) when a database is created.
 The retention policy is named `default`, has an infinite duration, and is also set as the database's default retention policy, which is used when a write or query does not specify a retention policy.
 Disable this setting to prevent the creation of a `default` retention policy when creating databases.
 
@@ -248,13 +248,13 @@ This section controls non-Raft cluster behavior, which generally includes how da
 ### write-timeout = "5s"
 
 The time during which the coordinating node must receive a successful response for writing to all remote shard owners before it considers the write a failure.
-If the write times out, it may still succeed but we stop waiting and queue those writes in [hinted handoff](/influxdb/v0.9/concepts/glossary/#hinted-handoff).
+If the write times out, it may still succeed but we stop waiting and queue those writes in [hinted handoff](/influxdb/v0.10/concepts/glossary/#hinted-handoff).
 Depending on the requested consistency level and the number of successful responses received, the return value will be either `write failure` or `partial write`.
 
 ### shard-writer-timeout = "5s"
 
 The time that a write from one node to another must complete before the write times out.
-If the write times out, it may still succeed on the remote node but the client node stops waiting and queues it in [hinted handoff](/influxdb/v0.9/concepts/glossary/#hinted-handoff).
+If the write times out, it may still succeed on the remote node but the client node stops waiting and queues it in [hinted handoff](/influxdb/v0.10/concepts/glossary/#hinted-handoff).
 This timeout should always be less than or equal to the write-timeout.
 
 ### shard-mapper-timeout = "5s"
@@ -303,7 +303,7 @@ The port used by the admin interface.
 
 Set to `true` to enable HTTPS for the admin interface.
 
->**Note:** HTTPS must be enable for the [[http]](/influxdb/v0.9/administration/config/#http) service for the admin UI to function properly using HTTPS.
+>**Note:** HTTPS must be enable for the [[http]](/influxdb/v0.10/administration/config/#http) service for the admin UI to function properly using HTTPS.
 
 ### https-certificate = "/etc/ssl/influxdb.pem"
 
@@ -316,7 +316,7 @@ This section controls InfluxDB's [system self-monitoring](https://github.com/inf
 By default, InfluxDB writes the data to the `_internal` database.
 If that database does not exist, InfluxDB creates it automatically.
 The `DEFAULT` retention policy on the `_internal` database is seven days.
-If you want to use a retention policy other than the seven-day retention policy, you must [create](/influxdb/v0.9/administration/administration/#retention-policy-management) it.
+If you want to use a retention policy other than the seven-day retention policy, you must [create](/influxdb/v0.10/administration/administration/#retention-policy-management) it.
 
 ### store-enabled = true
 
@@ -343,12 +343,12 @@ When a service like Kapacitor has subscribed to InfluxDB, all incoming writes ar
 This section controls how InfluxDB configures the HTTP endpoints.
 These are the primary mechanisms for getting data into and out of InfluxDB.
 Edit the options in this section to enable HTTPS and authentication.
-See [Authentication and Authorization](/influxdb/v0.9/administration/authentication_and_authorization/).
+See [Authentication and Authorization](/influxdb/v0.10/administration/authentication_and_authorization/).
 
 ### enabled = true
 
 Set to `false` to disable HTTP.
-Note that the InfluxDB [command line interface (CLI)](/influxdb/v0.9/tools/shell/) connects to the database using the HTTP API.
+Note that the InfluxDB [command line interface (CLI)](/influxdb/v0.10/tools/shell/) connects to the database using the HTTP API.
 
 ### bind-address = ":8086"
 
@@ -404,7 +404,7 @@ Set to `tcp` or `udp`.
 
 The number of nodes that must confirm the write.
 If the requirement is not met the return value will be either `partial write` if some points in the batch fail or `write failure` if all points in the batch fail.
-For more information, see the Query String Parameters for Writes section in the [Line Protocol Syntax Reference ](/influxdb/v0.9/write_protocols/write_syntax/).
+For more information, see the Query String Parameters for Writes section in the [Line Protocol Syntax Reference ](/influxdb/v0.10/write_protocols/write_syntax/).
 
 ### name-separator = "."
 
@@ -547,7 +547,7 @@ The input will flush at least this often even if it hasn't reached the configure
 ## [[udp]]
 
 This section controls the listeners for InfluxDB line protocol data via UDP.
-See the [UDP page](/influxdb/v0.9/write_protocols/udp/) for more information.
+See the [UDP page](/influxdb/v0.10/write_protocols/udp/) for more information.
 
 ### enabled = false
 
@@ -594,7 +594,7 @@ Lower values tend to yield better performance, default is max UDP size 65536.
 
 ## [continuous_queries]
 
-This section controls how [continuous queries (CQs)](/influxdb/v0.9/concepts/glossary/#continuous-query-cq) run within InfluxDB.
+This section controls how [continuous queries (CQs)](/influxdb/v0.10/concepts/glossary/#continuous-query-cq) run within InfluxDB.
 CQs are automated batches of queries that execute over recent time intervals.
 InfluxDB executes one auto-generated query per `GROUP BY time()` interval.
 
@@ -639,7 +639,7 @@ Set to `false` to disable hinted handoff.
 
 The hinted handoff directory.
 For best throughput, the HH directory and the WAL directory should be on different physical devices.
-If you have performance concerns, you will also want to make this setting different from the dir in the [[data]](/influxdb/v0.9/administration/config/#data) section.
+If you have performance concerns, you will also want to make this setting different from the dir in the [[data]](/influxdb/v0.10/administration/config/#data) section.
 
 ### max-size = 1073741824
 

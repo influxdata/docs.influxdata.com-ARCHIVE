@@ -2,7 +2,7 @@
 title: Clustering
 
 menu:
-  influxdb_09:
+  influxdb_010:
     weight: 20
     parent: guides
 ---
@@ -34,7 +34,7 @@ Throughout this example, each node will be given a number that denotes the order
 1 for the first node, 2 for the second node, etc.).
 It is also assumed that you are running some version of Linux and while it is possible to build a cluster locally, it is not recommended.
 
-1. Install InfluxDB on the 3 machines following the [installation guide](/influxdb/v0.9/introduction/installation/).
+1. Install InfluxDB on the 3 machines following the [installation guide](/influxdb/v0.10/introduction/installation/).
 Do not start the daemon on any of the machines.
 2. For each node's `/etc/influxdb/influxdb.conf` file, replace `hostname = "localhost"` with your host's actual name.
 This hostname must be resolved by all members in the cluster.

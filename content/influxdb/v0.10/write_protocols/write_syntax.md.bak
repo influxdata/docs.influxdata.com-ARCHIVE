@@ -1,7 +1,7 @@
 ---
 title: Write Syntax
 menu:
-  influxdb_09:
+  influxdb_010:
     weight: 10
     parent: write_protocols
 ---
@@ -185,7 +185,7 @@ Querying measurements or tags that contain double-quotes `"` can be difficult, s
 It's possible to work around the limitations with regular expressions but it's not easy.
 
 Avoid using Keywords as identifiers (database names, retention policy names, measurement names, tag keys, or field keys) whenever possible.
-Keywords in InfluxDB are referenced on the [InfluxQL Syntax](/influxdb/v0.9/query_language/spec/) page.
+Keywords in InfluxDB are referenced on the [InfluxQL Syntax](/influxdb/v0.10/query_language/spec/) page.
 There is no need to quote or escape keywords in the write syntax.
 
 All values in InfluxDB are case-sensitive: `MyDB` != `mydb` != `MYDB`.

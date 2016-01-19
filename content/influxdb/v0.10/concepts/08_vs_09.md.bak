@@ -1,7 +1,7 @@
 ---
 title: Differences Between InfluxDB 0.8 and InfluxDB 0.9 
 menu:
-  influxdb_09:
+  influxdb_010:
     weight: 30
     parent: concepts
 ---
@@ -111,7 +111,7 @@ Uniqueness tags used in this manner will not significantly affect write or query
 ## Write Protocols
 
 In InfluxDB 0.8 the primary write method is a JSON protocol.
-In InfluxDB 0.9 the JSON write protocol is deprecated and replaced by the [line](https://influxdb.com/docs/v0.9/write_protocols/line.html) [protocol](https://influxdb.com/docs/v0.9/write_protocols/write_syntax.html).
+In InfluxDB 0.9 the JSON write protocol is deprecated and replaced by the [line](https://influxdb.com/docs/v0.10/write_protocols/line.html) [protocol](https://influxdb.com/docs/v0.10/write_protocols/write_syntax.html).
 
 
 The JSON write protocol was deprecated because JSON marshalling, unmarshalling, and parsing was consuming well over half of the total CPU used to process writes.

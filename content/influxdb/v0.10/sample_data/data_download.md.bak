@@ -7,7 +7,7 @@ Download and write to InfluxDB the sample data used in [Data Exploration](../que
 ### Download and write the data to InfluxDB
 The following instructions are compatible with InfluxDB versions 0.9.5+.
 
-From your terminal, download the text file that contains the data in [line protocol](https://influxdb.com/docs/v0.9/write_protocols/line.html) format:
+From your terminal, download the text file that contains the data in [line protocol](https://influxdb.com/docs/v0.10/write_protocols/line.html) format:
 ```
 curl https://s3-us-west-1.amazonaws.com/noaa.water.database.0.9/NOAA_data.txt > NOAA_data.txt
 ```

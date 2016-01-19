@@ -3,7 +3,7 @@ title: Querying Data
 alias:
   -/docs/v0.10/query_language/querying_data/
 menu:
-  influxdb_09:
+  influxdb_010:
     weight: 10
     parent: guides
 ---

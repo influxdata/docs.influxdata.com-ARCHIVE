@@ -2,7 +2,7 @@
 title: InfluxDB CLI/Shell
 
 menu:
-  influxdb_09:
+  influxdb_010:
     weight: 0
     parent: tools
 ---

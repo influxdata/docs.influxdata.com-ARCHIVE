@@ -1,7 +1,7 @@
 ---
 title: Service - Graphite
 menu:
-  influxdb_09:
+  influxdb_010:
     weight: 40
     parent: write_protocols
 ---
