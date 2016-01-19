@@ -67,13 +67,11 @@ If they do not they will be written as floats.
 1, 1.0, -3.14, 6.0e5, 10).
 
 **Boolean** values indicate true or false.
-Valid boolean strings are (t, T, true, True, TRUE, f, F, false, False and FALSE).
+Valid boolean strings for line protocol are (t, T, true, True, TRUE, f, F, false, False and FALSE).
 
 **Strings** are text values.
-All string values _must_ be surrounded in double-quotes `"`.
-If the string contains
-a double-quote, it must be escaped with a backslash, e.g.
-`\"`.
+All string field values _must_ be surrounded in double-quotes `"`.
+If the string contains a double-quote, the double-quote must be escaped with a backslash, e.g. `\"`.
 
 ```
 # integer value
@@ -103,8 +101,7 @@ The value is an integer representing nanoseconds since the epoch.
 If the timestamp is not provided the point will inherit the server's local timestamp.
 
 Some write APIs allow passing a lower precision.
-If the API supports a lower precision, the timestamp may also be
-an integer epoch in microseconds, milliseconds, seconds, minutes or hours.
+If the API supports a lower precision, the timestamp may also be an integer epoch in microseconds, milliseconds, seconds, minutes or hours.
 
 ## Full Example
 A full example is shown below.
@@ -125,8 +122,3 @@ The field value associated with field key `msg` is double-quoted, as it is a str
 The second example shows a region of `us,west` with the comma properly escaped.
 In the first example `value` is written as a floating point number.
 In the second, `value_int` is an integer.
-
-> **Note:** Prior to version 0.9.3, integers were numeric values that did not include a decimal (e.g.
-1, 345, 2015, -10) and were not followed by a trailing `i`.
-Including a trailing `i` when writing integers will cause an error in versions 0.9.2 and prior.
-See [issue](https://github.com/influxdb/influxdb/issues/3519) for more information.
