@@ -3,7 +3,6 @@
 <div class="product-switcher--container" id="product-switcher--container">
     <div class="product-switcher--dismiss" id="product-switcher--dismiss"></div>
     <nav class="product-switcher--menu" id="product-switcher--menu">
-        <div class="product-switcher--title">Developer Docs</div>
         {{ range .Site.Menus.products }}
         <a class="product-switcher--item{{if or ($currentNode.IsMenuCurrent "products" .) ($currentNode.HasMenuCurrent "products" .) }} active{{end}}" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .Name }}</a>
         {{ end }}
@@ -14,7 +13,7 @@
 <div class="product-switcher" id="product-switcher">
     <div class="product-switcher--current">{{ .Name }}
         {{ range (index $.Site.Menus .Identifier) }}
-        {{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} {{ .Name }}{{end}}
+        {{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} <span>{{ .Name }}</span>{{end}}
         {{end}}
     </div>
     <div class="product-switcher--toggle"><i class="icon arrow-down"></i></div>

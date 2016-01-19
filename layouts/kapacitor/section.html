@@ -1,14 +1,11 @@
 {{ partial "header.html" . }}
 <div class="page" id="page-content">
-    {{ if .Title }}
-	<div class="page--title" id="page-title">
-	    <div class="page--body"><h1>{{ .Title }}</h1></div>
+    <div class="page--title" id="page-title">
+	    <div class="page--body"><h1>{{ .Title }} Section</h1></div>
 	</div>
-	{{ end }}
 	<div class="page--body">
         {{ .Content }}
     </div>
-    {{ partial "kapacitor/contribute.html" . }}
 </div>
 {{ partial "advertisement.html" . }}
 {{ partial "kapacitor/sidebar.html" . }}

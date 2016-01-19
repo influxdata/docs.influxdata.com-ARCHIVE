@@ -7,7 +7,7 @@
 
 code[class*="language-"],
 pre[class*="language-"] {
-	text-shadow: 0 1px white;
+	/*text-shadow: 0 1px #101419;*/
 	direction: ltr;
 	text-align: left;
 	white-space: pre;
@@ -65,7 +65,7 @@ pre[class*="language-"] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-	color: #A5ACB5;
+	color: #575E6B;
 }
 
 .token.punctuation {
@@ -83,7 +83,7 @@ pre[class*="language-"] {
 .token.constant,
 .token.symbol,
 .token.deleted {
-	color: #7CE490;
+	color: #FF8564;
 }
 
 .token.selector,
@@ -100,18 +100,18 @@ pre[class*="language-"] {
 .token.url,
 .language-css .token.string,
 .style .token.string {
-	color: #a67f59;
-	background: hsla(0, 0%, 100%, .5);
+	color: #BF3D5E;
+	font-weight: 900;
 }
 
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-	color: #22ADF6;
+	color: #AAEF81;
 }
 
 .token.function {
-	color: #DC4E58;
+	color: #22ADF6;
 }
 
 .token.regex,

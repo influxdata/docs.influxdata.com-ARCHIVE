@@ -14,15 +14,26 @@
 .product-switcher {
 	background-color: #F95F53;
 }
-.product-switcher:hover,
-.product-switcher.show,
-.product-switcher--menu {
-	background-color: #FF8564;
-}
 a.product-sidebar--nav-item,
 a.product-sidebar--nav-item:hover {
 	color: #F95F53;
 }
 .page-title {
 	background-image: url(../../img/page-title__telegraf.jpg);
+}
+a.ad-cta:link,
+a.ad-cta:visited,
+a.ad-cta:active {
+	background-color: #4591ED;
+}
+a.ad-cta:hover {
+	background-color: #00C9FF;
+}
+
+@media (min-width: 925px) {
+	.product-switcher:hover,
+	.product-switcher.show,
+	.product-switcher--menu {
+		background-color: #FF8564;
+	}
 }
