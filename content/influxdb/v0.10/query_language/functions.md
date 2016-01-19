@@ -86,7 +86,6 @@ time			               count
 > <br>
 > Other InfluxQL functions report `null` values for intervals with no data, and appending `fill(<stuff>)` to queries with those functions replaces `null` values in the output with `<stuff>`.
 `COUNT()`, however, reports `0`s for intervals with no data, so appending `fill(<stuff>)` to queries with `COUNT()` replaces `0`s in the output with `<stuff>`.
-This `COUNT()` behavior is functional in InfluxDB versions 0.10+.
 
 > Example: Use `fill(none)` to suppress intervals with `0` data
 
@@ -342,8 +341,6 @@ The field type must be int64 or float64.
 SELECT BOTTOM(<field_key>[,<tag_keys>],<N>)[,<tag_keys>] FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
 ```
 
-> **Note:** `BOTTOM()` is available in InfluxDB versions 0.9.5+.
-
 Examples:
 
 * Select the smallest three values of `water_level`:
@@ -503,8 +500,6 @@ time			               first
 2015-08-18T00:00:00Z	 2.064
 ```
 
-> **Note:** In versions prior to 0.9.5, InfluxDB returns epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp.
-
 * Select the oldest values of the field `water_level` grouped by the `location` tag:
 
 ```sql
@@ -551,8 +546,6 @@ name: h2o_feet
 time			               last
 2015-09-18T21:42:00Z	 4.938
 ```
-
-> **Note:** In versions prior to 0.9.5, InfluxDB returns epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp.
 
 * Select the newest values of the field `water_level` grouped by the `location` tag:
 
@@ -605,8 +598,6 @@ time			               max
 2015-08-29T07:24:00Z	 9.964
 ```
 
-> **Note:** In versions prior to 0.9.5, InfluxDB returns epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp.
-
 * Select the maximum `water_level` in the measurement `h2o_feet` between August 18, 2015 at midnight and August 18, 2015 at 00:48 grouped at 12 minute intervals and by the `location` tag:
 
 ```sql
@@ -658,8 +649,6 @@ name: h2o_feet
 time			               min
 2015-08-29T14:30:00Z	 -0.61
 ```
-
-> **Note:** In versions prior to 0.9.5, InfluxDB returns epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp.
 
 * Select the minimum `water_level` in the measurement `h2o_feet` between August 18, 2015 at midnight and August 18, at 00:48 grouped at 12 minute intervals and by the `location` tag:
 
@@ -740,7 +729,7 @@ time			               percentile
 Notice that `PERCENTILE(<field_key>,100)` is equivalent to `MAX(<field_key>)`.
 
 <dt> Currently, `PERCENTILE(<field_key>,0)` is not equivalent to `MIN(<field_key>)`.
-See GitHub Issue [#4724](https://github.com/influxdb/influxdb/issues/4724) for more information.
+See GitHub Issue [#4418](https://github.com/influxdata/influxdb/issues/4418) for more information.
 </dt>
 
 > **Note**: `PERCENTILE(<field_key>, 50)` is nearly equivalent to `MEDIAN()`, except `MEDIAN()` returns the average of the two middle values if the field contains an even number of points.
@@ -751,8 +740,6 @@ The field type must be int64 or float64.
 ```sql
 SELECT TOP(<field_key>[,<tag_keys>],<N>)[,<tag_keys>] FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
 ```
-
-> **Note:** `TOP()` is available in InfluxDB versions 0.9.5+.
 
 Examples:
 

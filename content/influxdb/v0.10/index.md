@@ -1,11 +1,11 @@
 ---
-title: InfluxDB Version 0.9 Documentation
+title: InfluxDB Version 0.10 Documentation
 aliases:
   - /influxdb/v0.10/introduction/overview/
 
 menu:
   influxdb:
-    name: Version 0.10
+    name: v0.10
     identifier: influxdb_010
     weight: 0
 ---
@@ -17,6 +17,8 @@ InfluxDB is meant to be used as a backing store for any use case involving large
 
 Here are some of the features that InfluxDB currently supports that make it a great choice for working with time series data.
 
+* Custom high performance datastore written specifically for time series data.
+The TSM engine allows for high ingest speed and data compression.
 * Written entirely in Go.
 It compiles into a single binary with no external dependencies.
 * Clustering is built in.
@@ -31,5 +33,6 @@ Nothing else is needed to make data highly available (unlike Redis, ZooKeeper, C
 
 ## Project Status
 
-The current version of InfluxDB is 0.9.6.1.
-Clustering, replication, and high-availability should be considered in an alpha state.
+* Clustering, replication, and high-availability are in a beta state.
+* The query engine is not optimized for the new TSM engine.
+A significant refactor of the query engine is in progress targeted for release in version 0.10.1.

@@ -8,23 +8,22 @@ menu:
 ---
 
 The built-in web administration GUI is a simple way to interact with InfluxDB.
-For any significant use, whether writing or querying data, the HTTP API ([reading](/influxdb/v0.10/guides/querying_data/), [writing](/influxdb/v0.10/guides/writing_data/)) or the [command line interface](/influxdb/v0.10/tools/shell/) are better options.
+For any significant use, whether writing or querying data, direct use of the HTTP API ([reading](/influxdb/v0.10/guides/querying_data/), [writing](/influxdb/v0.10/guides/writing_data/)) or the [command line interface](/influxdb/v0.10/tools/shell/) are better options.
 
 ## Accessing the UI
 
-The Admin UI is available by default at port 8083, e.g.
-[http://localhost:8083](http://localhost:8083).
-You can control the port in the InfluxDB config file.
+The Admin UI is available by default at port 8083, i.e. [http://localhost:8083](http://localhost:8083).
+You can control the port in the InfluxDB config file using the `port` option in the `[admin]` section.
 
-
-You can also access remote InfluxDB instances from the same admin page, although you may only connect to one instance at a time.
+You can also access remote InfluxDB instances, although you may only connect to one instance at a time.
 To access an instance at a location other than than http://localhost:8083, click the Settings icon in the upper right and enter the proper connection settings for the target InfluxDB instance.
 
 ### HTTP vs HTTPS
 
 The Admin UI uses HTTP by default but can be configured to use HTTPS.
 In the InfluxDB config file, find the `[admin]` section and set `https-enabled = true`.
-You must explicitly connect to the instance using `https://`, there is no redirect from `http` to `https`.
+
+> **Note:** If HTTPS is enabled, you must explicitly connect to the instance using `https://`, there is no redirect from `http` to `https`.
 
 ### Selecting the Database
 

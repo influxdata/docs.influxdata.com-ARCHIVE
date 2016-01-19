@@ -604,7 +604,7 @@ An empty string is equivalent to `0.0.0.0`.
 The name of the database that you want to write to.
 
 ### retention-policy = ""
-  
+
 The relevant retention policy for your data.
 An empty string is equivalent to the database's `DEFAULT` retention policy.
 
@@ -648,6 +648,38 @@ Set to `false` to disable logging for CQ events.
 
 Set to `false` to disable CQs.
 
+<<<<<<< HEAD
 ### run-interval = "1s" 
+=======
+### run-interval = "1s"
+
+The interval at which InfluxDB checks to see if a CQ needs to run. Set this option to the lowest interval at which your CQs run. For example, if your most frequent CQ runs every minute, set `run-interval` to `1m`.
+
+## [hinted-handoff]
+
+This section controls the hinted handoff feature, which allows nodes to temporarily store queued data when one node of a cluster is down for a short period of time.
+Note that the hinted handoff has no function in a single node cluster.
+
+### enabled = true
+
+Set to `false` to disable hinted handoff.
+
+### dir = "/var/opt/influxdb/hh"
+
+The hinted handoff directory.
+For best throughput, the HH directory and the WAL directory should be on different physical devices.
+If you have performance concerns, you will also want to make this setting different from the dir in the [[data]](/influxdb/v0.10/administration/config/#data) section.
+
+
+### max-size = 1073741824
+
+The maximum size of the hinted handoff queue for a node.
+If the queue is full, new writes are rejected and an error is returned to the client.
+The queue is drained when either the writes are retried successfully or the writes expire.
+
+### max-age = "168h"
+
+The time writes sit in the queue before they are purged.
+The time is determined by how long the batch has been in the queue, not by the timestamps in the data.
 
 Interval for how often continuous queries will be checked if they need to run.
