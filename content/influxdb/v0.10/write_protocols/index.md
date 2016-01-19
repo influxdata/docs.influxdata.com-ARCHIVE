@@ -13,6 +13,7 @@ Syntax reference for Line Protocol
 ## [JSON Protocol(DEPRECATED)](/influxdb/v0.10/write_protocols/json/)
 
 The JSON write protocol is deprecated as of InfluxDB 0.9.1.
+It receives no bug fixes or updates, and should not be used in production environments.
 
 ## [UDP](/influxdb/v0.10/write_protocols/udp/)
 
