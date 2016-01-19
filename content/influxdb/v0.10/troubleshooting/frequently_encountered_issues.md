@@ -29,8 +29,7 @@ Where applicable, it links to outstanding issues on GitHub.
 
 **Writing data**  
 
-* [Writing integers](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#writing-integers)  
-* [Writing data with negative timestamps](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#writing-data-with-negative-timestamps)  
+* [Writing integers](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#writing-integers)   
 * [Writing duplicate points](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#writing-duplicate-points)  
 * [Getting an unexpected error when sending data over the HTTP API](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#getting-an-unexpected-error-when-sending-data-over-the-http-api)
 * [Writing more than one continuous query to a single series](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#writing-more-than-one-continuous-query-to-a-single-series)
@@ -134,11 +133,11 @@ Acceptable boolean syntax differs for data writes and data queries.
 
 | Boolean syntax |  Writes | Queries  |
 -----------------------|-----------|--------------|
-|  `t`,`f` |	✔️ | ❌ |
-|  `T`,`F` |  ✔️ |  ❌ |
-|  `true`,`false` | ✔️  | ✔️  |
-|  `True`,`False` |  ✔️ |  ✔️ |
-|  `TRUE`,`FALSE` |  ✔️ |  ✔️ |
+|  `t`,`f` |	👍 | ❌ |
+|  `T`,`F` |  👍 |  ❌ |
+|  `true`,`false` | 👍  | 👍  |
+|  `True`,`False` |  👍 |  👍 |
+|  `TRUE`,`FALSE` |  👍 |  👍 |
 
 For example, `SELECT * FROM hamlet WHERE bool=True` returns all points with `bool` set to `TRUE`, but `SELECT * FROM hamlet WHERE bool=T` returns all points with`bool` set to `false`.
 
@@ -269,14 +268,6 @@ If you do not provide the `i`, InfluxDB will treat the field value as a float.
 Writes an integer: `value=100i`  
 Writes a float: `value=100`
 
-> **Note:** This syntax for writing integers is for versions 0.9.3+.
-Versions prior to 0.9.3 had a different syntax, see [PR #3526](https://github.com/influxdb/influxdb/pull/3526).
-
-## Writing data with negative timestamps
-There was a bug in the line protocol parser in versions 0.9.0 to 0.9.4 which treated negative timestamps as invalid syntax.
-For example, `INSERT waybackwhen past=1 -1` returned `ERR: unable to parse 'waybackwhen past=1 -1': bad timestamp`.
-Starting with version 0.9.5 and later, the line protocol parser accepts negative timestamps.
-
 ## Writing duplicate points
 In InfluxDB 0.9 a point is uniquely identified by the measurement name, full [tag set]()(/influxdb/v0.10/concepts/glossary/#tag-set), and the nanosecond timestamp.
 If a point is submitted with an identical measurement, tag set, and timestamp it will silently overwrite the previous point.
@@ -366,7 +357,7 @@ Identifiers are database names, retention policy names, user names, measurement 
 	Write: `INSERT wacky va\"ue=4`  
 	Applicable query: `SELECT "va\"ue" FROM wacky`
 
-See the [Line Protocol Syntax](https://influxdb.com/docs/v0.10/write_protocols/write_syntax/) page for more information.
+See the [Line Protocol Syntax](/influxdb/v0.10/write_protocols/write_syntax/) page for more information.
 
 # Administration
 ## Single quoting the password string
@@ -387,7 +378,7 @@ For example, if you're using 0.9.3 `curl -i 'http://localhost:8086/ping'` return
 ✨`X-Influxdb-Version: 0.9.3`✨
 `Date: Fri, 04 Sep 2015 19:18:26 GMT`
 
-* Check the text that appears when you [launch](/influxdb/v0.10/introduction/getting_started/#logging-in-and-creating-your-first-database) the CLI:
+* Check the text that appears when you [launch](/influxdb/v0.10/tools/shell/) the CLI:
 
 `Connected to http://localhost:8086` ✨`version 0.9.3`✨   
 `InfluxDB shell 0.9.3`
@@ -419,7 +410,7 @@ Figure 1 shows the shard groups for our example database (`example_db`) after 11
 The database uses the automatically generated `default` retention policy with an infinite (`INF`) `DURATION` so each shard group interval is seven days.
 On day 11, InfluxDB is no longer writing to `Shard Group 1` and `Shard Group 2` has four days worth of data:
 
-**Figure 1**
+> **Figure 1**
 ![Retention policy duration infinite](/img/influxdb/fei/alter-rp-inf.png)
 
 On day 11, we notice that `example_db` is accruing data too fast; we want to delete, and keep deleting, all data older than three days.
@@ -438,7 +429,7 @@ Figure 2 shows the shard groups for `example_db` five days after the retention p
 Notice that the new shard groups span one day intervals.
 All of the data in `Shard Group 2` remain in the database because the shard group still has data within the retention policy's three day `DURATION`:
 
-**Figure 2**
+> **Figure 2**
 ![Retention policy duration three days](/img/influxdb/fei/alter-rp-3d.png)
 
 After day 17, all data within the past 3 days will be in one day shard groups.
