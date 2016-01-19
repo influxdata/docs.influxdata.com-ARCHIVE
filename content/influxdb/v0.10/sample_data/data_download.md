@@ -2,7 +2,7 @@
 title: Sample data
 ---
 
-Download and write to InfluxDB the sample data used in [Data Exploration](../query_language/data_exploration.html), [Schema Exploration](../query_language/schema_exploration.html), and [Functions](../query_language/functions.html).
+Download and write to any InfluxDB installation the sample data used in [Data Exploration](../query_language/data_exploration.html), [Schema Exploration](../query_language/schema_exploration.html), and [Functions](../query_language/functions.html).
 
 ### Download and write the data to InfluxDB
 The following instructions are compatible with InfluxDB versions 0.9.5+.

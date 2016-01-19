@@ -7,26 +7,19 @@ menu:
     parent: guides
 ---
 
-> **Note:** Clustering is in a alpha state right now.
-There are still a good number of rough edges.
+> **Note:** Clustering is in a beta state right now.
+There may still be rough edges and some planned functionality is not yet ready.
 If you notice any issues please [report them](https://github.com/influxdb/influxdb/issues/new).
 
-Starting with version 0.9.3, InfluxDB supports arbitrarily sized clusters that need not be fully replicated.
-Additionally new data nodes can be added to a cluster.
-The first three nodes to join a cluster are raft peers.
-All subsequent nodes are data nodes and do not participate in consensus.
-
-<dt> Versions 0.9.4 and earlier do not support fully functional distributed meta-queries.
-See issue [3295](https://github.com/influxdb/influxdb/issues/3295) for more information.
-Clusters on running on those versions should be upgraded to version 0.9.5 for working meta-query support.
-</dt>
+InfluxDB supports arbitrarily sized clusters that need not be fully replicated.
+New nodes can be added to a cluster and existing nodes can be dropped.
+TODO - this is not true anymore: The first three nodes to join a cluster are raft peers.
+TODO - ditto: All subsequent nodes are data nodes and do not participate in consensus.
 
 ## Configuration
 The following is the current recommended procedure for configuring a cluster.
 
 > **Note:** You should always use the most recent release for clustering as there are significant improvements with each release.
-Do not attempt a cluster with InfluxDB versions prior to 0.9.3.
-
 
 ### Start the Initial Raft Cluster
 
@@ -123,6 +116,4 @@ Please verify that your cluster is healthy and retry steps 1 through 3.
 
 ## Unimplemented Features
 
-* Configuring which nodes participate in raft consensus after the first three nodes form a cluster is not currently possible.
-For now, all new nodes are data-only nodes.
-* Removing raft nodes.
+* Rebalancing shards across nodes

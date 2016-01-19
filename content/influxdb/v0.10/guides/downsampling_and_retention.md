@@ -148,8 +148,7 @@ The data in `downsampled_orders` aren't subject to the `two_hours` RP.
 In the second `SELECT` statement, we get the CQ results by fully qualifying the measurement.
 To fully qualify a measurement, specify its database and RP with `<database_name>."<retention_policy>".<measurement_name>`.
 
-Using a combination of RPs and CQs, we've made InfluxDB automatically downsample data and expire old data.
-Now that you have a general understanding of how these features can work together, we recommend looking at the detailed documentation on  CQs ([Continuous Query Syntax](/influxdb/v0.10/query_language/continuous_queries/) and [Configuring Continuous Queries](/influxdb/v0.10/query_language/continuous_queries_config/)) and [RPs](/influxdb/v0.10/query_language/database_management/#retention-policy-management) to see all that they can do for you.
+Using a combination of RPs and CQs, we've made InfluxDB automatically downsample data and expire old data. Now that you have a general understanding of how these features can work together, we recommend looking at the detailed documentation on [CQs](/influxdb/v0.10/query_language/continuous_queries/) and [RPs](/influxdb/v0.10/query_language/database_management/#retention-policy-management) to see all that they can do for you.
 
 <a name="retentionconfig">1</a>: By default, InfluxDB checks to enforce an RP every 30 minutes so you may have data that are older than two hours between checks.
 The rate at which InfluxDB checks to enforce an RP is a configurable setting, see [Database Configuration](/influxdb/v0.10/administration/config/#retention).

@@ -60,8 +60,6 @@ For more on retention policies, see [Retention Policy Management](/influxdb/v0.1
 
 A successful `CREATE DATABASE` query returns an empty result.
 
-> **Note:** Specifying a retention policy in the `CREATE DATABASE` query is available in InfluxDB versions 0.9.6+.
-
 ### Delete a database with DROP DATABASE
 ---
 The `DROP DATABASE` query deletes all of the data, measurements, series, continuous queries, and retention policies from the specified database.
@@ -111,10 +109,6 @@ A successful `DROP SERIES` query returns an empty result.
 
 <dt> `DROP SERIES` does not support time intervals in the `WHERE` clause.
 See GitHub Issue [#1647](https://github.com/influxdb/influxdb/issues/1647) for more information).
-</dt>
-
-<dt>Currently, InfluxDB does not support regular expressions with `DROP SERIES`.
-See GitHub Issue [#4276](https://github.com/influxdb/influxdb/issues/4276) for more information.
 </dt>
 
 ### Delete measurements with DROP MEASUREMENT
@@ -182,7 +176,7 @@ Create the same retention policy as the one in the example above, but set it as 
 
 A successful `CREATE RETENTION POLICY` query returns an empty response.
 
-> **Note:** If you're using InfluxDB versions 0.9.6+, you can also specify a new retention policy in the `CREATE DATABASE` query.
+> **Note:** You can also specify a new retention policy in the `CREATE DATABASE` query.
 See [Create a database with CREATE DATABASE](/influxdb/v0.10/query_language/database_management/#create-a-database-with-create-database).
 
 ### Modify retention policies with ALTER RETENTION POLICY

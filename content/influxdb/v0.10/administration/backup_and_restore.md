@@ -7,6 +7,8 @@ menu:
     parent: administration
 ---
 
+>TODO: Update with information about new backup and restore functionality: [New Backups](https://github.com/influxdata/influxdb/tree/master/cmd/influxd/backup)
+
 Starting with v0.10.0, InfluxDB has the ability to snapshot a single data node at a point-in-time and restore it.
 
 ## Usage

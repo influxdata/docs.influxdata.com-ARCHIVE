@@ -85,29 +85,28 @@ There are two options for authenticating with the HTTP API.
 
 * Authenticate with Basic Authentication as described in [RFC 2617, Section 2](http://tools.ietf.org/html/rfc2617) - this is the preferred method for providing user credentials.
 
-    Example:
+Example:
 
-    ```sh
+```bash
 curl -G http://localhost:8086/query -u todd:influxdb4ever --data-urlencode "q=SHOW DATABASES"
-    ```
+```
 
 * Authenticate by providing query parameters in the URL.
 Set `u` as the username and `p` as the password.
 
 
-    Example:
+Example:
 
-    ```sh
+```bash
 curl -G http://localhost:8086/query --data-urlencode "u=todd" --data-urlencode "p=influxdb4ever" --data-urlencode "q=SHOW DATABASES"
-    ```
+```
 
 The queries in both examples assume that the user is an [admin user](/influxdb/v0.10/administration/authentication_and_authorization/#admin-users).
 See the section on [authorization](/influxdb/v0.10/administration/authentication_and_authorization/#authorization) for the different user types, their privileges, and more on user management.
 
-
-Note about redacted passwords when disabled and enabled?
-
 > **Notes:** If you authenticate with both Basic Authentication **and** the URL query parameters, the user credentials specified in the query parameters take precedence.
+
+>TODO: Note about redacted passwords when disabled and enabled?
 
 #### Authenticate using the CLI
 There are two options for authenticating with the CLI.
