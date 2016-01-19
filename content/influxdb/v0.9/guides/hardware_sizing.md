@@ -34,8 +34,8 @@ We define the load that you'll be placing on InfluxDB by the number of writes pe
 
 
 #### Low load recommendations
-* CPU: 1-2   
-* RAM: 1-2 GB   
+* CPU: 2-4   
+* RAM: 2-4 GB   
 * IOPS: 500   
 
 #### Moderate load recommendations
@@ -45,8 +45,8 @@ We define the load that you'll be placing on InfluxDB by the number of writes pe
 
 #### High load recommendations
 * CPU: 8+  
-* RAM: 16+ GB  
-* IOPS: 500-1000  
+* RAM: 32+ GB  
+* IOPS: 1000+  
 
 #### Probably infeasible load
 Performance at this scale is a significant challenge and may not be achievable. Please contact us at <sales@influxdb.com> for assistance with tuning your systems.
@@ -63,7 +63,7 @@ The increase in RAM needs relative to series cardinality is exponential where th
 ![Series Cardinality](/img/influxdb/series-cardinality.png)
 
 ## What kind of storage do I need?
-InfluxDB is designed to run on SSDs.  Performance is drastically lower on spinning disk drives.
+InfluxDB is designed to run on SSDs.  Performance is drastically lower on spinning disk drives and may not function at all under moderate load.
 
 ## How much storage do I need?
 Database names, [measurements](/influxdb/v0.9/concepts/glossary/#measurement), [tag keys](/influxdb/v0.9/concepts/glossary/#tag-key), [field keys](/influxdb/v0.9/concepts/glossary/#field-key), and [tag values](/influxdb/v0.9/concepts/glossary/#tag-value) are stored once and as strings. Only [field values](/influxdb/v0.9/concepts/glossary/#field-value) and [timestamps](/influxdb/v0.9/concepts/glossary/#timestamp) are stored per-point.
