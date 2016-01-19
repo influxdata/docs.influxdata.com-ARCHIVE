@@ -6,10 +6,13 @@ menu:
     parent: concepts
 ---
 
-In the 0.9.x version of InfluxDB, it is recommended that you encode most metadata into the series `Tags`.
+>TODO: Update with schema suggestions for 0.10.0, tsm. Single measurement, many fields and tags. 
+
+In the 0.10.x version of InfluxDB, it is recommended that you encode metadata into `Tags`.
 Tags are indexed within the InfluxDB system allowing fast querying by 1 or more tag values.
 Note that tag values are always interpreted as strings.
-And the optimal way to structure things is to have many series and a single field named "value" (or some other key of your choice) used consistently across all series.
+
+Starting in the 0.10.x line it is recommended to store more than one field per point and to have as few measurements as possible. 
 
 It’s also a good idea to start the tag names and measurement names with a character in [a-z] or [A-Z], but not a requirement.
 It will just make writing queries easier later since you won’t have to wrap the names in double quotes.
