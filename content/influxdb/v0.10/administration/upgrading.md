@@ -7,6 +7,6 @@ menu:
     parent: administration
 ---
 
-InfluxDB version 0.8.9 supports exporting data to a format that can be imported into versions 0.9.3+.
-For how to use export and import see the
-[README.md](https://github.com/influxdata/influxdb/blob/master/importer/README.md) on GitHub.
+InfluxDB version 0.10.0 uses a new default storage engine, `tsm1`. 
+The data storage format change requires a manual conversion for data written using the `b1` or `bz1` engines. 
+Full documentation on this conversion is available as a [README.md](https://github.com/influxdata/influxdb/tree/master/cmd/influx_tsm) on Github.

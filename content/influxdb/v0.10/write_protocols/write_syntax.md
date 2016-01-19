@@ -53,9 +53,8 @@ Timestamps are not required.
 When no timestamp is provided the server will insert the point with the local server
 timestamp.
 If a timestamp is provided it must be separated from the field(s) by a space.
-Timestamps must be in Unix
-time and are assumed to be in nanoseconds.
-A different precision can be provided, see the HTTP syntax for details.
+Timestamps must be in Unix time and are assumed to be in nanoseconds.
+A different precision can be specified, see the HTTP syntax for details.
 
 ### Key-value Separator
 
@@ -77,14 +76,12 @@ All subsequent characters are ignored.
 Measurements, tag keys, tag values, and field keys are always stored as strings in the database.
 
 `string` values have a length limit of 64 KB.
-All Unicode characters should be valid, although commas and spaces
-require escaping.
+All Unicode characters should be valid, although commas and spaces require escaping.
 Backslash characters do not require escaping, but may not be used directly preceding a comma or space.
 (Note that `string` field values have different quoting and escaping rules than the measurement, tag, and field name `string` syntax.) The field `location="us-west"` stores a string value.
 
 Field values may be stored as `float64`, `int64`, `boolean`, or `string`.
-All subsequent field values must match
-the type of the first point written to given measurement.
+All subsequent field values must match the type of the first point written to given measurement.
 
 `float64` values are the default numerical type.
 `1` is a float, `1i` is an integer.
@@ -177,8 +174,7 @@ It is a best practice to provide explicit timestamps with all points.
 
 Measurements, tag keys, tag values, and field keys are never quoted.
 Spaces and commas must be escaped.
-Field values
-that are stored as strings must always be double-quoted.
+Field values that are stored as strings must always be double-quoted.
 Only double-quotes should be escaped.
 
 Querying measurements or tags that contain double-quotes `"` can be difficult, since double-quotes are also the syntax for an identifier.
