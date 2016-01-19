@@ -30,7 +30,8 @@ If you need an explanation of the terms measurements, tags, and fields check out
 
 ## Terminology
 
-The table below is a (very) simple example of a table  called `foodships` in an SQL database with the unindexed column `#_foodships` and the indexed columns `park_id`, `planet`, and `time`.
+The table below is a (very) simple example of a table  called `foodships` in an SQL database
+with the unindexed column `#_foodships` and the indexed columns `park_id`, `planet`, and `time`.
 
 ``` sql
 +---------+---------+---------------------+--------------+
@@ -102,7 +103,10 @@ Referencing the example above, in general:
 * InfluxDB fields (`#_foodships`) are like unindexed columns in an SQL database.
 * InfluxDB points (for example, `2015-04-16T12:00:00Z	5`) are similar to SQL rows.
 
-Building on this comparison of database terminology, InfluxDB's [continuous queries](/influxdb/v0.10/query_language/continuous_queries/) and [replication policies](/influxdb/v0.10/administration/administration/) are similar to stored procedures in an SQL database.
+Building on this comparison of database terminology,
+InfluxDB's [continuous queries](/influxdb/v0.10/query_language/continuous_queries/)
+and [replication policies](/influxdb/v0.10/administration/administration/) are
+similar to stored procedures in an SQL database.
 They're specified once and then performed regularly and automatically.
 
 Of course, there are some major disparities between SQL databases and InfluxDB.
@@ -115,7 +119,9 @@ For more detailed descriptions of the InfluxDB terms mentioned in this section s
 ## InfluxQL and SQL
 
 InfluxQL is an SQL-like query language for interacting with InfluxDB.
-It has been lovingly crafted to feel familiar to those coming from other SQL or SQL-like environments while also providing features specific to storing and analyzing time series data.
+It has been lovingly crafted to feel familiar to those coming from other
+SQL or SQL-like environments while also providing features specific
+to storing and analyzing time series data.
 
 InfluxQL's `SELECT` statement follows the form of an SQL `SELECT` statement:
 
@@ -142,7 +148,9 @@ SELECT * FROM foodships WHERE planet = 'Saturn' AND time > '2015-04-16 12:00:01'
 ```
 
 As shown in the example above, InfluxQL allows you to specify the time range of your query in the `WHERE` clause.
-You can use date-time strings wrapped in single quotes that have the format `YYYY-MM-DD HH:MM:SS.mmm` ( `mmm` is milliseconds and is optional, and you can also specify microseconds or nanoseconds).
+You can use date-time strings wrapped in single quotes that have the
+format `YYYY-MM-DD HH:MM:SS.mmm`
+( `mmm` is milliseconds and is optional, and you can also specify microseconds or nanoseconds).
 You can also use relative time with `now()` which refers to the server's current timestamp:
 
 ```sql
@@ -181,5 +189,9 @@ It becomes more useful when combined with the rest of the series and visualized.
 This is where trends over time begin to show, and actionable insight can be drawn from the data.
 In addition, time series data is generally written once and rarely updated.
 
-The result is that InfluxDB is not a full CRUD database but more like a CR-ud, prioritizing the performance of creating and reading data over update and destroy, and preventing some update and destroy behaviors to make create and read more performant.
-For more information on why InfluxDB made these architectural decisions [Paul Dix](https://github.com/pauldix) has an excellent [blog post](https://influxdata.com/blog/influxdb-clustering-design-neither-strictly-cp-or-ap/) with more explanation.
+The result is that InfluxDB is not a full CRUD database but more like a CR-ud,
+prioritizing the performance of creating and reading data over update and destroy,
+and preventing some update and destroy behaviors to make create and read more performant.
+For more information on why InfluxDB made these architectural decisions [Paul Dix](https://github.com/pauldix)
+has an excellent [blog post](https://influxdata.com/blog/influxdb-clustering-design-neither-strictly-cp-or-ap/)
+with more explanation.

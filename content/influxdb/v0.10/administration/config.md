@@ -203,7 +203,7 @@ The more memory you have, the bigger this setting can be.
 
 ### query-log-enabled = true
 
-The query log enabled setting toggles the logging of parsed queries before execution. 
+The query log enabled setting toggles the logging of parsed queries before execution.
 Very useful for troubleshooting, but will log any sensitive data contained within a query.
 
 ### cache-max-memory-size = 524288000
@@ -648,9 +648,6 @@ Set to `false` to disable logging for CQ events.
 
 Set to `false` to disable CQs.
 
-<<<<<<< HEAD
-### run-interval = "1s" 
-=======
 ### run-interval = "1s"
 
 The interval at which InfluxDB checks to see if a CQ needs to run. Set this option to the lowest interval at which your CQs run. For example, if your most frequent CQ runs every minute, set `run-interval` to `1m`.

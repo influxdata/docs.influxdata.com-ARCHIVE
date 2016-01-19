@@ -9,17 +9,27 @@ menu:
 This page provides directions for installing, starting, and configuring InfluxDB.
 
 ## Requirements
-Installation of the pre-built InfluxDB package requires root privileges on the host machine.
+
+Installation of the InfluxDB package may require `root` or administrator privileges in order to complete successfully.
 
 ### Networking
-By default InfluxDB will use TCP ports `8083` and `8086` so these ports should be available on your system.
-Once installation is complete you can change those ports and other options in the configuration file, which is located by default in `/etc/influxdb`.
+
+By default, InfluxDB uses the following network ports:
+
+- TCP port `8083` is used for InfluxDB's [Admin panel](/influxdb/v0.10/tools/web_admin/)
+- TCP port `8086` is used for client-server communication over InfluxDB's HTTP API
+- TCP ports `8088` and `8091` are required for clustered InfluxDB instances
+
+> Note: In addition to the ports above,
+InfluxDB also offers multiple plugins that may require custom ports.
+All port mappings can be modified through the [configuration file](/influxdb/v0.10/administration/config),
+which is located at `/etc/influxdb/influxdb.conf` for default installations.
 
 ## Installation
 
 ### Ubuntu & Debian
 Debian and Ubuntu users can install the latest stable version of InfluxDB using the `apt-get` package manager.
-For Ubuntu users, you can add the InfluxData repository configuration by using the following commands:
+For Ubuntu users, you can add the InfluxData repository by using the following commands:
 
 ```shell
 curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
@@ -27,7 +37,7 @@ source /etc/lsb-release
 echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
 ```
 
-For Debian users, you can add the InfluxData repository configuration by using the following commands:
+For Debian users, you can add the InfluxData repository by using the following commands:
 
 ```shell
 curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
@@ -57,7 +67,8 @@ gpgkey = https://repos.influxdata.com/influxdb.key
 EOF
 ```
 
-Once repository is added to the `yum` configuration, you can install and start the InfluxDB service by running:
+Once repository is added to the `yum` configuration,
+you can install and start the InfluxDB service by running:
 
 ```shell
 sudo yum install influxdb
@@ -77,37 +88,46 @@ zypper in influxdb
 ### FreeBSD/PC-BSD
 
 InfluxDB is part of the FreeBSD package system.
-It can be installed by running
+It can be installed by running:
+
 ```shell
 sudo pkg install influxdb
 ```
-The configuration file is `/usr/local/etc/influxd.conf` with examples in `/usr/local/etc/influxd.conf.sample`.
-Start the backend by executing
+
+The configuration file is located at `/usr/local/etc/influxd.conf` with examples in `/usr/local/etc/influxd.conf.sample`.
+
+Start the backend by executing:
+
 ```shell
 sudo service influxd onestart
 ```
-and/or adding `influxd_enable="YES"` to `/etc/rc.conf` for launch influxd during system boot.
 
-### OS 
+To have InfluxDB start at system boot, add `influxd_enable="YES"` to `/etc/rc.conf`.
 
-XUsers of OS X 10.8 and higher can install using the [Homebrew](http://brew.sh/) package manager.
+### Mac OS X
+
+Users of OS X 10.8 and higher can install InfluxDB using the [Homebrew](http://brew.sh/) package manager.
+Once `brew` is installed, you can install InfluxDB by running:
 
 ```shell
 brew update
 brew install influxdb
 ```
 
-To have launchd start influxdb at login:
+To have `launchd` start InfluxDB at login, run:
+
 ```shell
 ln -sfv /usr/local/opt/influxdb/*.plist ~/Library/LaunchAgents
 ```
 
-Then to load influxdb now:
+And then to start InfluxDB now, run:
+
 ```shell
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.influxdb.plist
 ```
 
 Or, if you don't want/need launchctl, in a separate terminal window you can just run:
+
 ```shell
 influxd -config /usr/local/etc/influxdb.conf
 ```
@@ -118,31 +138,34 @@ For users who don't want to install any software and are ready to use InfluxDB, 
 
 <a href="/influxdb/v0.10/introduction/getting_started/"><font size="6"><b>⇒ Now get started!</b></font></a>
 
-## Generate a configuration file
+## Configuration
 
-Configuration files from prior versions of InfluxDB 0.9 should work with future releases, but the old files may lack configuration options for new features.
-It is a best practice to generate a new config file for each upgrade.
+For non-packaged installations, it is a best practice to generate a new configuration
+for each upgrade to ensure you have the latest features and settings.
 Any changes made in the old file will need to be manually ported to the newly generated file.
-The newly generated configuration file has no knowledge of any local customization to the settings.
+Packaged installations will come with a configuration pre-installed,
+so this step may not be needed if you installed InfluxDB using a
+package manager (though it is handy to know either way).
 
-To generate a new config file, run `influxd config` and redirect the output to a file.
-For example:
+> Note: Newly generated configuration files have no knowledge of any local customizations or settings.
+Please make sure to double-check any configuration changes prior to deploying them.
 
-```shell
-influxd config > /etc/influxdb/influxdb.generated.conf
-```
-
-Edit the `influxdb.generated.conf` file to have the desired configuration settings.
-When launching InfluxDB, point the process to the correct configuration file using the `-config` option.
+To generate a new configuration file, run:
 
 ```shell
-influxd -config /etc/influxdb/influxdb.generated.conf
+influxd config > influxdb.generated.conf
 ```
 
-In addition, a valid configuration file can be displayed at any time using the command `influxd config`.
-Redirect the output to a file to save a clean generated configuration file.
+And then edit the `influxdb.generated.conf` file to have the desired configuration settings.
+When launching InfluxDB, point the process to the correct configuration file using the `-config` option. For example, use:
 
-If no `-config` option is supplied, InfluxDB will use an internal default configuration equivalent to the output of `influxd config`
+```shell
+influxd -config influxdb.generated.conf
+```
+
+To launch InfluxDB with your newly generated configuration. In addition, a valid configuration file can be displayed at any time using the command `influxd config`.
+
+If no `-config` option is supplied, InfluxDB will use an internal default configuration (equivalent to the output of `influxd config`).
 
 > Note: The `influxd` command has two similarly named flags.
 The `config` flag prints a generated default configuration file to STDOUT but does not launch the `influxd` process.
@@ -173,7 +196,7 @@ Each machine should have a minimum of 8G RAM.
 
 We’ve seen the best performance with the C3 class of machines.
 
-## Configuring the Instance
+### Configuring the Instance
 
 This example assumes that you are using two SSD volumes and that you have mounted them appropriately.
 This example also assumes that each of those volumes is mounted at `/mnt/influx` and `/mnt/db`.
@@ -216,16 +239,16 @@ chown influxdb:influxdb /mnt/db
 
 ### Other Considerations
 
-If you're planning on using a cluster, you may also want to set `hostname` and `join` flags for the `INFLUXD_OPTS` variable in `/etc/default/influxdb`.
+If you're planning on using a cluster, you may also want to set `-join` flags for the `INFLUXD_OPTS` variable in `/etc/default/influxdb`.
 For example:
 
 ```
-INFLUXD_OPTS='-hostname host[:port] [-join hostname_1:port_1[,hostname_2:port_2]]'
+INFLUXD_OPTS='[-join hostname_1:port_1[,hostname_2:port_2]]'
 ```
 
-For more detailed instructions on how to set up a cluster, see the documentation on [clustering](/influxdb/v0.10/guides/clustering/)
+For more detailed instructions on how to set up a cluster, please see the [Clustering](/influxdb/v0.10/guides/clustering/) section.
 
-## Development Versions
+## Nightly and Development Versions
 
 Nightly packages are available for Linux through the InfluxData package repository by using the `nightly` channel.
 Other package options can be found on the [downloads page](https://influxdata.com/downloads/)
