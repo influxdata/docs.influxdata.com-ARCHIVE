@@ -6,40 +6,45 @@ menu:
     parent: introduction
 ---
 
-With [InfluxDB installed](/influxdb/v0.10/introduction/installation), you're ready to start doing awesome things.
-In this section we'll use the `influx` command line interface (CLI).
-The CLI is included in all InfluxDB packages and is a lightweight and simple way to interact with the database.
-The CLI communicates with InfluxDB by making requests to the InfluxDB API.
+With InfluxDB [installed](/influxdb/v0.10/introduction/installation), you're ready to start doing some awesome things.
+In this section we'll use the `influx` command line interface (CLI), which is included in all
+InfluxDB packages and is a lightweight and simple way to interact with the database.
+The CLI communicates with InfluxDB directly by making requests to the InfluxDB HTTP API over port `8086` by default.
 
+> **Note:** The database can also be used by making raw HTTP requests.
+See [Writing Data](/influxdb/v0.10/guides/writing_data/) and [Querying Data](/influxdb/v0.10/guides/querying_data/)
+for examples with the `curl` application.
 
-> **Note:** The database can also be used by making direct HTTP requests to the API.
-See [Writing Data](/influxdb/v0.10/guides/writing_data/) and [Querying Data](/influxdb/v0.10/guides/querying_data/) for examples.
+## Creating a database
 
-## Logging in and creating your first database
 If you've installed InfluxDB locally, the `influx` command should be available via the command line.
-Executing `influx` will start the CLI and automatically connect to the local InfluxDB instance (assuming you have already started the server with `influxd`).
+Executing `influx` will start the CLI and automatically connect to the local InfluxDB instance
+(assuming you have already started the server with `service influxdb start` or by running `influxd` directly).
 The output should look like this:
 
 ```sh
 $ influx
-Connected to http://localhost:8086 version 0.9
-InfluxDB shell 0.9
+Connected to http://localhost:8086 version 0.10.0
+InfluxDB shell 0.10.0
 > 
 ```
 
 > **Note:** The InfluxDB HTTP API runs on port `8086` by default.
 Therefore, `influx` will connect to port `8086` and `localhost` by default.
-If you need to alter these defaults run `influx --help`.
+If you need to alter these defaults, run `influx --help`.
 
-The command line is now ready to take input in the form of Influx Query Language (a.k.a InfluxQL) statements.
-To exit the InfluxQL shell, type `exit` and hit return or type `ctrl` + `D`.
+The command line is now ready to take input in the form of the Influx Query Language (a.k.a InfluxQL) statements.
+To exit the InfluxQL shell, type `exit` and hit return.
 
-A fresh install of InfluxDB has no databases so creating one is our first task.
-Create a database with the `CREATE DATABASE <db-name>` InfluxQL statement, where `<db-name>` is the name of the database you wish to create.
+A fresh install of InfluxDB has no databases (apart from the system `_internal`),
+so creating one is our first task.
+You can create a database with the `CREATE DATABASE <db-name>` InfluxQL statement,
+where `<db-name>` is the name of the database you wish to create.
 Names of databases can contain any unicode character as long as the string is double-quoted.
-Names can be left unquoted if they contain only ASCII letters, digits, or underscores and do not begin with a digit.
+Names can also be left unquoted if they contain _only_ ASCII letters,
+digits, or underscores and do not begin with a digit.
 
-Throughout this guide, we'll use the database name `mydb`.
+Throughout this guide, we'll use the database name `mydb`:
 
 ```sql
 > CREATE DATABASE mydb
@@ -51,7 +56,8 @@ In the CLI, this means the statement was executed and there were no errors to di
 There will always be an error displayed if something went wrong.
 No news is good news!
 
-The `SHOW DATABASES` statement can be used to show all existing databases.
+Now that the `mydb` database is created, we'll use the `SHOW DATABASES` statement
+to display all existing databases:
 
 ```sql
 > SHOW DATABASES
@@ -68,7 +74,9 @@ mydb
 Check it out later to get an interesting look at how InfluxDB is performing under the hood.
 
 Unlike `SHOW DATABASES`, most InfluxQL statements must operate against a specific database.
-You may explicitly name the database with each query, but the CLI provides a convenient statement, `USE <db-name>`, which will automatically set the database for all future requests.
+You may explicitly name the database with each query,
+but the CLI provides a convenience statement, `USE <db-name>`,
+which will automatically set the database for all future requests. For example:
 
 ```sql
 > USE mydb
@@ -76,22 +84,29 @@ Using database mydb
 > 
 ```
 
+Now future commands will only be run against the `mydb` database.
+
 ## Writing and exploring data
 
 Now that we have a database, InfluxDB is ready to accept queries and writes.
 
-First a short primer on the datastore.
-Data in InfluxDB is organized by `time series`, which contain a measured value, like "cpu_load" or "temperature".
+First, a short primer on the datastore.
+Data in InfluxDB is organized by "time series",
+which contain a measured value, like "cpu_load" or "temperature".
 Time series have zero to many `points`, one for each discrete sample of the metric.
-Points consist of `time` (a timestamp), a `measurement` ("cpu_load"), at least one key-value `field` (the measured value itself, e.g.
-"value=0.64" or "15min=0.78"), and zero to many key-value `tags` containing metadata (e.g.
+Points consist of `time` (a timestamp), a `measurement` ("cpu_load", for example),
+at least one key-value `field` (the measured value itself, e.g.
+"value=0.64", or "temperature=21.2"), and zero to many key-value `tags` containing any metadata about the value (e.g.
 "host=server01", "region=EMEA", "dc=Frankfurt").
-Conceptually you can think of a `measurement` as an SQL table, with rows where the primary index is always time.
-`tags` and `fields` are effectively columns in the table.
-`tags` are indexed, `fields` are not.
-The difference is that with InfluxDB you can have millions of measurements, you don't have to define schemas up front, and null values aren't stored.
 
-Points are written to InfluxDB using line protocol, which follows the following format:
+Conceptually you can think of a `measurement` as an SQL table,
+where the primary index is always time.
+`tags` and `fields` are effectively columns in the table.
+`tags` are indexed, and `fields` are not.
+The difference is that, with InfluxDB, you can have millions of measurements,
+you don't have to define schemas up-front, and null values aren't stored.
+
+Points are written to InfluxDB using the Line Protocol, which follows the following format:
 
 ```
 <measurement>[,<tag-key>=<tag-value>...] <field-key>=<field-value>[,<field2-key>=<field2-value>...] [unix-nano-timestamp]
@@ -115,12 +130,12 @@ To insert a single time-series datapoint into InfluxDB using the CLI, enter `INS
 >
 ```
 
-A point with the measurement name of `cpu` and tag `host` has now been written to the database, with the measured value of `0.64`.
+A point with the measurement name of `cpu` and tag `host` has now been written to the database, with the measured `value` of `0.64`.
 
-Now we will query for the data we just wrote.
+Now we will query for the data we just wrote:
 
 ```sql
-> SELECT * FROM cpu
+> SELECT host, region, value FROM cpu
 name: cpu
 ---------
 time		    	                     host     	region   value
@@ -133,19 +148,14 @@ time		    	                     host     	region   value
 When no timestamp is supplied for a point, InfluxDB assigns the local current timestamp when the point is ingested.
 That means your timestamp will be different.
 
-Let's try storing a different type of data -- sensor data.
-Enter the following data in the `Values` textbox:
+Let's try storing another type of data, with two fields in the same measurement:
 
 ```sql
 > INSERT temperature,machine=unit42,type=assembly external=25,internal=37
 >
 ```
 
-> **Note:** In this example we write two values in the `fields` section.
-Up to 255 different `fields` can be stored per `measurement`.
-
-
-All fields are returned on query:
+To return all fields and tags with a query, you can use the `*` operator:
 
 ```sql
 > SELECT * FROM temperature
@@ -157,8 +167,8 @@ time		                        	 external	  internal	machine	type
 > 
 ```
 
-InfluxDB supports a sophisticated query language, allowing many different types of queries.
-For example:
+InfluxQL has many [features and keywords](http://localhost:1313/influxdb/v0.10/query_language/spec/) that are not covered here,
+including support for Go-style regex. For example:
 
 ```sql
 > SELECT * FROM /.*/ LIMIT 1
@@ -169,7 +179,9 @@ For example:
 ```
 
 This is all you need to know to write data into InfluxDB and query it back.
-To learn more about the InfluxDB write protocol, check out the guide on [Writing Data](/influxdb/v0.10/guides/writing_data/).
-To futher explore the query language, check out the guide on [Querying Data](/influxdb/v0.10/guides/querying_data/).
+To learn more about the InfluxDB write protocol,
+check out the guide on [Writing Data](/influxdb/v0.10/guides/writing_data/).
+To futher explore the query language,
+check out the guide on [Querying Data](/influxdb/v0.10/guides/querying_data/).
 For more information on InfluxDB concepts, check out the [Key Concepts]
 (/influxdb/v0.10/concepts/key_concepts/) page.
