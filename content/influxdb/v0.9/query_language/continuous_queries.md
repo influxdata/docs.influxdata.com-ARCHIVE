@@ -71,7 +71,7 @@ Note that the CQ `minnie` only exists in the database `world`.
 > CREATE CONTINUOUS QUERY minnie_jr ON world BEGIN SELECT min(mouse) INTO world."7days".min_mouse FROM world."1day".zoo GROUP BY time(30m) END
     ```
 
-    The CQ `minnie_jr` acts in the same way as the CQ `minnie`, however, InfluxDB calculates the 30 minute minimum of the field `mouse` in the measurement `zoo` and under the retention policy `1day`, and it automatically writes the results of the query to the measurement `min_mouse` under the retention policy `4hours`.
+    The CQ `minnie_jr` acts in the same way as the CQ `minnie`, however, InfluxDB calculates the 30 minute minimum of the field `mouse` in the measurement `zoo` and under the retention policy `1day`, and it automatically writes the results of the query to the measurement `min_mouse` under the retention policy `7days`.
 
     Combining CQs and retention policies provides a useful way to automatically downsample data and expire the unnecessary raw data.
 For a complete discussion on this topic, see [Downsampling and Data Retention](/influxdb/v0.9/guides/downsampling_and_retention/).
