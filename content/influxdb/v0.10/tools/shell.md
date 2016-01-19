@@ -7,7 +7,7 @@ menu:
     parent: tools
 ---
 
-The InfluxDB's command line interface (`influx`) is an interactive shell for the database, and is part of all InfluxDB distributions starting with version 0.9.0.
+The InfluxDB's command line interface (`influx`) is an interactive shell for the HTTP API.
 Use `influx` to write data (manually or from a file), query data interactively, and view query output in different formats.
 
 * [Launch `influx`](/influxdb/v0.10/tools/shell/#launch-influx)
@@ -17,14 +17,14 @@ Use `influx` to write data (manually or from a file), query data interactively, 
 ## Launch `influx`
 If you [install](https://influxdata.com/downloads/) InfluxDB via a package manager, the CLI is installed at `/usr/bin/influx` (`/usr/local/bin/influx` on OS X).
 
-Access the CLI by starting the `influxd` process and entering `influx` in your terminal.
+To access the CLI, first launch the `influxd` database process and then launch `influx` in your terminal.
 Once you've entered the shell and successfully connected to an InfluxDB node, you'll see the following output:
 <br>
 <br>
 ```sh
 $ influx
-Connected to http://localhost:8086 version 0.9.x
-InfluxDB shell 0.9.x
+Connected to http://localhost:8086 version 0.10.x
+InfluxDB shell 0.10.x
 ```
 
 ## `influx` Arguments
@@ -251,7 +251,6 @@ By default, the HTTP request times out after five seconds.
 InfluxDB will still attempt to write the points after that time out but there will be no confirmation that they were successfully written.
 
 > **Note:** For how to export data from InfluxDB version 0.8.9, see [Exporting from 0.8.9](https://github.com/influxdb/influxdb/blob/master/importer/README.md).
-The exported data can be imported into InfluxDB versions 0.9.3+ as discussed above.
 
 ## `influx` Commands
 Enter `help` in the CLI for a partial list of the available commands.
@@ -323,6 +322,7 @@ Using retention policy oneday
 
 Note that once you specify a retention policy with `INSERT INTO`, `influx` automatically writes data to that retention policy.
 This occurs even for later `INSERT` entries that do not include an `INTO` clause.
+Restarting the CLI will revert to using the `DEFAULT` retention policy.
 
 ### Queries
 Execute all InfluxQL queries in `influx`.
