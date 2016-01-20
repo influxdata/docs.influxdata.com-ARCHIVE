@@ -48,7 +48,7 @@ Define and run a batching task to trigger cpu alerts.
 Installation
 ------------
 
-Install [Kapacitor](/kapacitor/v0.2/introduction/installation/),
+Install [Kapacitor](/kapacitor/v0.10/introduction/installation/),
 [InfluxDB](/docs/v0.9/introduction/installation.html)
 and [Telegraf](https://github.com/influxdb/telegraf#installation) on the same host.
 
@@ -163,7 +163,7 @@ A `task` in Kapacitor represents an amount of work to do on a set of data.
 There are two types of tasks, `stream` and `batch` tasks.
 We will be using a `stream` task first, and next we will do the same thing with a `batch` task.
 
-Kapacitor uses a DSL called [TICKscript](/kapacitor/v0.2/tick/) to define tasks.
+Kapacitor uses a DSL called [TICKscript](/kapacitor/v0.10/tick/) to define tasks.
 Each TICKscript defines a pipeline that tells Kapacitor which data to process and how.
 
 So what do we want to tell Kapacitor to do?
@@ -368,7 +368,7 @@ Something so simple as defining an alert can quickly be extended to apply to a m
 With the above script, you will be alerted if any service in any datacenter deviates more than 3
 standard deviations away from normal behavior as defined by the historical 95th percentile of cpu usage, within 1 minute!
 
-For more information on how the alerting works, see the [AlertNode](/kapacitor/v0.2/tick/alert_node/) docs.
+For more information on how the alerting works, see the [AlertNode](/kapacitor/v0.10/tick/alert_node/) docs.
 
 Trigger Alert from Batch data
 ------------------------------
@@ -422,6 +422,6 @@ Play around until you are comfortable updating, testing, and running tasks in Ka
 
 ### What's next?
 
-Take a look at the [examples](/kapacitor/v0.2/examples/) page for more guides on how to use Kapacitor.
+Take a look at the [examples](/kapacitor/v0.10/examples/) page for more guides on how to use Kapacitor.
 These use cases demonstrate some of the more rich features of Kapacitor.
 

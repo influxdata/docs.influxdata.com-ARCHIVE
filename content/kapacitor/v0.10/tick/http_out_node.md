@@ -10,7 +10,7 @@ menu:
     parent: tick
 ---
 
-An [HTTPOutNode](/kapacitor/v0.2/tick/http_out_node/) caches the most recent data for each group it has received. 
+An [HTTPOutNode](/kapacitor/v0.10/tick/http_out_node/) caches the most recent data for each group it has received. 
 
 The cached data is available at the given endpoint. 
 The endpoint is the relative path from the API endpoint of the running task. 
@@ -76,7 +76,7 @@ Example:
 
 The `id` and `message` alert properties can be configured globally via the &#39;deadman&#39; configuration section. 
 
-Since the [AlertNode](/kapacitor/v0.2/tick/alert_node/) is the last piece it can be further modified as normal. 
+Since the [AlertNode](/kapacitor/v0.10/tick/alert_node/) is the last piece it can be further modified as normal. 
 Example: 
 
 
@@ -94,7 +94,7 @@ Example:
 node.deadman(threshold float64, interval time.Duration)
 ```
 
-Returns: [AlertNode](/kapacitor/v0.2/tick/alert_node/)
+Returns: [AlertNode](/kapacitor/v0.10/tick/alert_node/)
 
 
 ### Stats
@@ -108,5 +108,5 @@ This means the interval time is independent of the times of the data points the 
 node.stats(interval time.Duration)
 ```
 
-Returns: [StatsNode](/kapacitor/v0.2/tick/stats_node/)
+Returns: [StatsNode](/kapacitor/v0.10/tick/stats_node/)
 
