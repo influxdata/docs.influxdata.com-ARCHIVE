@@ -5,7 +5,7 @@ menu:
   kapacitor_02:
     name: Syntax Reference
     identifier: syntax
-    weight: 0
+    weight: 1
     parent: tick
 ---
 
