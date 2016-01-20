@@ -141,7 +141,7 @@ Example:
 
 The `id` and `message` alert properties can be configured globally via the &#39;deadman&#39; configuration section. 
 
-Since the [AlertNode](/kapacitor/v0.2/tick/alert_node/) is the last piece it can be further modified as normal. 
+Since the [AlertNode](/kapacitor/v0.10/tick/alert_node/) is the last piece it can be further modified as normal. 
 Example: 
 
 
@@ -159,7 +159,7 @@ Example:
 node.deadman(threshold float64, interval time.Duration)
 ```
 
-Returns: [AlertNode](/kapacitor/v0.2/tick/alert_node/)
+Returns: [AlertNode](/kapacitor/v0.10/tick/alert_node/)
 
 
 ### Stats
@@ -173,5 +173,5 @@ This means the interval time is independent of the times of the data points the 
 node.stats(interval time.Duration)
 ```
 
-Returns: [StatsNode](/kapacitor/v0.2/tick/stats_node/)
+Returns: [StatsNode](/kapacitor/v0.10/tick/stats_node/)
 

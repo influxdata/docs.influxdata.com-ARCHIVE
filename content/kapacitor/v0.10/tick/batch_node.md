@@ -10,7 +10,7 @@ menu:
     parent: tick
 ---
 
-A [BatchNode](/kapacitor/v0.2/tick/batch_node/) defines a source and a schedule for 
+A [BatchNode](/kapacitor/v0.10/tick/batch_node/) defines a source and a schedule for 
 processing batch data. The data is queried from 
 an InfluxDB database and then passed into the data pipeline. 
 
@@ -146,7 +146,7 @@ Create an alert node, which can trigger alerts.
 node.alert()
 ```
 
-Returns: [AlertNode](/kapacitor/v0.2/tick/alert_node/)
+Returns: [AlertNode](/kapacitor/v0.10/tick/alert_node/)
 
 
 ### Deadman
@@ -188,7 +188,7 @@ Example:
 
 The `id` and `message` alert properties can be configured globally via the &#39;deadman&#39; configuration section. 
 
-Since the [AlertNode](/kapacitor/v0.2/tick/alert_node/) is the last piece it can be further modified as normal. 
+Since the [AlertNode](/kapacitor/v0.10/tick/alert_node/) is the last piece it can be further modified as normal. 
 Example: 
 
 
@@ -206,7 +206,7 @@ Example:
 node.deadman(threshold float64, interval time.Duration)
 ```
 
-Returns: [AlertNode](/kapacitor/v0.2/tick/alert_node/)
+Returns: [AlertNode](/kapacitor/v0.10/tick/alert_node/)
 
 
 ### Derivative
@@ -218,7 +218,7 @@ Create a new node that computes the derivative of adjacent points.
 node.derivative(field string)
 ```
 
-Returns: [DerivativeNode](/kapacitor/v0.2/tick/derivative_node/)
+Returns: [DerivativeNode](/kapacitor/v0.10/tick/derivative_node/)
 
 
 ### Eval
@@ -232,7 +232,7 @@ and results of previous expressions are made available to later expressions.
 node.eval(expressions ...tick.Node)
 ```
 
-Returns: [EvalNode](/kapacitor/v0.2/tick/eval_node/)
+Returns: [EvalNode](/kapacitor/v0.10/tick/eval_node/)
 
 
 ### HttpOut
@@ -248,7 +248,7 @@ For example if the task endpoint is at &#34;/api/v1/task/&lt;task_name&gt;&#34; 
 node.httpOut(endpoint string)
 ```
 
-Returns: [HTTPOutNode](/kapacitor/v0.2/tick/http_out_node/)
+Returns: [HTTPOutNode](/kapacitor/v0.10/tick/http_out_node/)
 
 
 ### InfluxDBOut
@@ -260,7 +260,7 @@ Create an influxdb output node that will store the incoming data into InfluxDB.
 node.influxDBOut()
 ```
 
-Returns: [InfluxDBOutNode](/kapacitor/v0.2/tick/influx_d_b_out_node/)
+Returns: [InfluxDBOutNode](/kapacitor/v0.10/tick/influx_d_b_out_node/)
 
 
 ### Join
@@ -272,7 +272,7 @@ Join this node with other nodes. The data is joined on timestamp.
 node.join(others ...Node)
 ```
 
-Returns: [JoinNode](/kapacitor/v0.2/tick/join_node/)
+Returns: [JoinNode](/kapacitor/v0.10/tick/join_node/)
 
 
 ### MapReduce
@@ -292,7 +292,7 @@ the exact same time are combined into a batch and sent to the mapper.
 node.mapReduce(mr MapReduceInfo)
 ```
 
-Returns: [ReduceNode](/kapacitor/v0.2/tick/reduce_node/)
+Returns: [ReduceNode](/kapacitor/v0.10/tick/reduce_node/)
 
 
 ### Sample
@@ -306,7 +306,7 @@ One point will be emitted every count or duration specified.
 node.sample(rate interface{})
 ```
 
-Returns: [SampleNode](/kapacitor/v0.2/tick/sample_node/)
+Returns: [SampleNode](/kapacitor/v0.10/tick/sample_node/)
 
 
 ### Stats
@@ -320,7 +320,7 @@ This means the interval time is independent of the times of the data points the 
 node.stats(interval time.Duration)
 ```
 
-Returns: [StatsNode](/kapacitor/v0.2/tick/stats_node/)
+Returns: [StatsNode](/kapacitor/v0.10/tick/stats_node/)
 
 
 ### Union
@@ -332,7 +332,7 @@ Perform the union of this node and all other given nodes.
 node.union(node ...Node)
 ```
 
-Returns: [UnionNode](/kapacitor/v0.2/tick/union_node/)
+Returns: [UnionNode](/kapacitor/v0.10/tick/union_node/)
 
 
 ### Where
@@ -344,7 +344,7 @@ Create a new node that filters the data stream by a given expression.
 node.where(expression tick.Node)
 ```
 
-Returns: [WhereNode](/kapacitor/v0.2/tick/where_node/)
+Returns: [WhereNode](/kapacitor/v0.10/tick/where_node/)
 
 
 ### Window
@@ -358,5 +358,5 @@ NOTE: Window can only be applied to stream edges.
 node.window()
 ```
 
-Returns: [WindowNode](/kapacitor/v0.2/tick/window_node/)
+Returns: [WindowNode](/kapacitor/v0.10/tick/window_node/)
 

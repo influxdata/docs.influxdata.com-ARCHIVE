@@ -12,9 +12,9 @@ menu:
 
 A node that handles creating several child BatchNodes. 
 Each call to `query` creates a child batch node that 
-can further be configured. See [BatchNode](/kapacitor/v0.2/tick/batch_node/) 
+can further be configured. See [BatchNode](/kapacitor/v0.10/tick/batch_node/) 
 The `batch` variable in batch tasks is an instance of 
-a [SourceBatchNode.](/kapacitor/v0.2/tick/source_batch_node/) 
+a [SourceBatchNode.](/kapacitor/v0.10/tick/source_batch_node/) 
 
 Example: 
 
@@ -74,7 +74,7 @@ Example:
 
 The `id` and `message` alert properties can be configured globally via the &#39;deadman&#39; configuration section. 
 
-Since the [AlertNode](/kapacitor/v0.2/tick/alert_node/) is the last piece it can be further modified as normal. 
+Since the [AlertNode](/kapacitor/v0.10/tick/alert_node/) is the last piece it can be further modified as normal. 
 Example: 
 
 
@@ -92,7 +92,7 @@ Example:
 node.deadman(threshold float64, interval time.Duration)
 ```
 
-Returns: [AlertNode](/kapacitor/v0.2/tick/alert_node/)
+Returns: [AlertNode](/kapacitor/v0.10/tick/alert_node/)
 
 
 ### Query
@@ -108,7 +108,7 @@ passed to the `groupBy` method.
 node.query(q string)
 ```
 
-Returns: [BatchNode](/kapacitor/v0.2/tick/batch_node/)
+Returns: [BatchNode](/kapacitor/v0.10/tick/batch_node/)
 
 
 ### Stats
@@ -122,5 +122,5 @@ This means the interval time is independent of the times of the data points the 
 node.stats(interval time.Duration)
 ```
 
-Returns: [StatsNode](/kapacitor/v0.2/tick/stats_node/)
+Returns: [StatsNode](/kapacitor/v0.10/tick/stats_node/)
 

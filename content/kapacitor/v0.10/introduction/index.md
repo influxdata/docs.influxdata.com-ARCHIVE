@@ -22,5 +22,5 @@ as well as receive data via the line protocol and any other method InfluxDB supp
 * C - Chronograf -- Data visualization
 * K - Kapacitor -- Data processing
 
-See the [getting started guides](/kapacitor/v0.2/introduction/getting_started/) for walk through on getting up and running with Kapacitor.
+See the [getting started guides](/kapacitor/v0.10/introduction/getting_started/) for walk through on getting up and running with Kapacitor.
 
