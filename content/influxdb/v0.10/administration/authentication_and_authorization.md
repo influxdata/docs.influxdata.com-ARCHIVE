@@ -104,9 +104,9 @@ curl -G http://localhost:8086/query --data-urlencode "u=todd" --data-urlencode "
 The queries in both examples assume that the user is an [admin user](/influxdb/v0.10/administration/authentication_and_authorization/#admin-users).
 See the section on [authorization](/influxdb/v0.10/administration/authentication_and_authorization/#authorization) for the different user types, their privileges, and more on user management.
 
-> **Notes:** If you authenticate with both Basic Authentication **and** the URL query parameters, the user credentials specified in the query parameters take precedence.
+If you authenticate with both Basic Authentication **and** the URL query parameters, the user credentials specified in the query parameters take precedence.
 
->TODO: Note about redacted passwords when disabled and enabled?
+> **Note:** InfluxDB redacts passwords when you enable authentication. 
 
 #### Authenticate using the CLI
 There are two options for authenticating with the CLI.
