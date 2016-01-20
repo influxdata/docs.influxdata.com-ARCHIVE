@@ -80,12 +80,9 @@ Use with `-import`.
 Specifies the format/precision of the timestamp: `rfc3339` (`YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ`), `h` (hours), `m` (minutes), `s` (seconds), `ms` (milliseconds), `u` (microseconds), `ns` (nanoseconds).
 Precision defaults to nanoseconds.
 
-> **Note:** Setting the precision to `rfc3339` (`-precision rfc3339`) only works with the `-execute` option.
-It does not work with the `-import` option.
-It also doesn't change the format of the timestamps displayed in the `influx` shell.
-To change the format of the `influx` shell's timestamps to `rfc3339`, see [influx Commands](/influxdb/v0.10/tools/shell/#influx-commands).
+> **Note:** Setting the precision to `rfc3339` (`-precision rfc3339`) works with the `-execute` option, but it does not work with the `-import option`.
 All other precision formats (e.g.
-`h`,`m`,`s`,`ms`,`u`, and `ns`) work with the `-execute` and `-import` options, and they'll change the format of the timestamps displayed in the `influx` shell.
+`h`,`m`,`s`,`ms`,`u`, and `ns`) work with the `-execute` and `-import` options.
 
 `-pretty`  
 Turns on pretty print for the `json` format.
