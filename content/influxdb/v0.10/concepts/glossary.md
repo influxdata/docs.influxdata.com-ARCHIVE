@@ -30,9 +30,13 @@ Related entries: [function](/influxdb/v0.10/concepts/glossary/#function)
 ## coordinator node
 The node that receives write and query requests for the cluster.
 
-
 Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [hinted handoff](/influxdb/v0.10/concepts/glossary/#hinted-handoff), [node](/influxdb/v0.10/concepts/glossary/#node)
 	
+## data node
+A node that stores data. A data node may also be a meta node, but it is not required.
+
+Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [meta node](/influxdb/v0.10/concepts/glossary/#meta-node), [node](/influxdb/v0.10/concepts/glossary/#node)
+
 ## database
 A logical container for users, retention policies, continuous queries, and time series data.
 
@@ -98,6 +102,11 @@ The part of InfluxDB's structure that describes the data stored in the associate
 Measurements are strings.
 
 Related entries: [field](/influxdb/v0.10/concepts/glossary/#field), [series](/influxdb/v0.10/concepts/glossary/#series)
+
+## meta node
+A node that participates in the raf consensus group. A meta node may also be a data node, but it is not required. A cluster should have at least three meta nodes, but it can have more. There should be an odd number of meta nodes in a cluster.
+
+Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [meta node](/influxdb/v0.10/concepts/glossary/#data-node), [node](/influxdb/v0.10/concepts/glossary/#node)
 
 ## node
 An independent `influxd` process.
