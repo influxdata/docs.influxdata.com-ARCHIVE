@@ -13,13 +13,8 @@
         <link rel="stylesheet" href="/css/icon-font.css" type="text/css">
         <link rel="stylesheet" href="/css/typography.css" type="text/css">
         <link rel="stylesheet" href="/css/prism.css" type="text/css">
-
-        {{ $currentNode := . }}
-        {{ range .Site.Menus.products }}
-            {{ if (in $currentNode.Permalink .URL) }}
-                <link rel="stylesheet" href="/css/theme/{{ .Identifier }}.css" type="text/css">
-            {{end}}
-        {{end}}
+        {{ $currentNode := . }}{{ range .Site.Menus.products }}{{ if (in $currentNode.Permalink .URL) }}<link rel="stylesheet" href="/css/theme/{{ .Identifier }}.css" type="text/css">{{end}}{{end}}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
 
         <!-- TODO(Gunnar): Add prism or switch to pygments -->
         <!-- <link rel="stylesheet" href="css/prism.css" /> -->
