@@ -7,14 +7,16 @@ menu:
     parent: guides
 ---
 
-> **Note:** Clustering is in a beta state right now.
-There may still be rough edges and some planned functionality is not yet ready.
-If you notice any issues please [report them](https://github.com/influxdb/influxdb/issues/new).
-
-InfluxDB supports arbitrarily sized clusters that need not be fully replicated.
+InfluxDB supports arbitrarily sized clusters and any replication factor from 1 to the number of nodes in the cluster.
+There are two types of nodes in an InfluxDB cluser. 
+[Meta nodes](/influxdb/v0.10/concepts/glossary/#meta-node) coordinate activity in the cluster.
+Meta nodes do not require significant system resources and can run on a very lightweight server.
+[Data nodes](/influxdb/v0.10/concepts/glossary/#data-node) store data and respond to queries.
+Data nodes must run on hardware with at least 2 CPUs, 4GB RAM, and storage with 1000 IOPS. 
+See the [hardware sizing guide](/influxdb/v0.10/guides/hardware_sizing/) for more detail.
+Any node can be a meta node, data node, or both, and can change roles over time.
+Each cluster should have at least three meta nodes. 
 New nodes can be added to a cluster and existing nodes can be dropped.
-TODO - this is not true anymore: The first three nodes to join a cluster are raft peers.
-TODO - ditto: All subsequent nodes are data nodes and do not participate in consensus.
 
 ## Configuration
 The following is the current recommended procedure for configuring a cluster.
@@ -113,7 +115,3 @@ You should see something along the lines of this:
 
 If you do not, then your node was not successfully added to the cluster.
 Please verify that your cluster is healthy and retry steps 1 through 3.
-
-## Unimplemented Features
-
-* Rebalancing shards across nodes
