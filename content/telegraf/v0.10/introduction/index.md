@@ -2,7 +2,7 @@
 title: Introduction
 
 menu:
-  telegraf_10:
+  telegraf_010:
     name: Introduction
     identifier: introduction
     weight: 0

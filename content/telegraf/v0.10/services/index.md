@@ -2,7 +2,7 @@
 title: Supported Service Inputs
 
 menu:
-  telegraf_10:
+  telegraf_010:
     name: Service Inputs
     identifier: services
     weight: 30
@@ -16,5 +16,5 @@ View usage instructions for each service input by running `telegraf -usage <serv
 
 ## Supported Service Plugin List
 
-* [statsd](https://github.com/influxdb/telegraf/tree/master/plugins/inputs/statsd)
-* [kafka_consumer](https://github.com/influxdb/telegraf/tree/master/plugins/inputs/kafka_consumer)
+* [StatsD](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/statsd)
+* [Kafka Consumer](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/kafka_consumer)

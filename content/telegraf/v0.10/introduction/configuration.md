@@ -2,9 +2,9 @@
 title: Configuring Telegraf
 
 menu:
-  telegraf_10:
+  telegraf_010:
     name: Configuring Telegraf
-    weight: 1
+    weight: 10
     parent: introduction
 ---
 

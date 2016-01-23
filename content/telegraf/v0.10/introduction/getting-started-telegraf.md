@@ -2,7 +2,7 @@
 title: Getting Started with Telegraf
 
 menu:
-  telegraf_10:
+  telegraf_010:
     name: Getting Started
     weight: 0
     parent: introduction
