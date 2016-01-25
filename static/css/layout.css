@@ -185,7 +185,6 @@ table {
 .product-switcher--menu {
 	z-index: 10;
 	transition: all 0.3s ease;
-	overflow: hidden;
 }
 .main-nav,
 .product-switcher {
@@ -319,6 +318,7 @@ a.main-nav--link:hover {
 	background-color: #373D49;
 	transform: translateX(-100%);
 	-webkit-transform: translateX(-100%);
+	overflow: hidden;
 }
 .main-nav--links.show,
 .product-switcher--menu.show {
