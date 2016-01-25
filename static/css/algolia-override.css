@@ -1,0 +1,10 @@
+.algolia-autocomplete {
+	display: inline-block !important;
+	vertical-align: middle;
+	height: 2rem;
+	width: auto;
+	position: relative;
+	background-color: #ccc;
+	line-height: 2rem;
+	top: -0.125rem;
+}

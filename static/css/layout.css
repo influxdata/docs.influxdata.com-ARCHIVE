@@ -171,6 +171,7 @@ table {
 */
 .main-nav,
 .main-nav--links,
+.main-nav--logo,
 .product-switcher,
 .product-switcher--menu,
 .product-sidebar,
@@ -210,18 +211,33 @@ table {
 	width: 100%;
 	background-color: #FAFBFC;
 }
-.main-nav--logo {
-	left: 1rem;
-	height: 60%;
-	position: absolute;
+.main-nav--logo,
+.main-nav--hamburger {
 	top: 50%;
 	transform: translateY(-50%);
 	-webkit-transform: translateY(-50%);
 }
+.main-nav--logo {
+	left: 1rem;
+	height: 60%;
+}
+.main-nav--search {
+	display: inline-block;
+	height: 2rem;
+	width: 15rem;
+	border-radius: calc(2rem / 2);
+	border: 2px solid #ddd;
+	padding: 0 1rem 0 1rem;
+	outline: none;
+	transition: all 0.3s ease;
+	color: #575E6B;
+}
+.main-nav--search:focus {
+	border-color: #ff0054;
+}
 .main-nav--hamburger {
 	width: 2.5rem;
 	height: 2.5rem;
-	top: 0;
 	right: 0;
 }
 .main-nav--hamburger-bar {
