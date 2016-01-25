@@ -16,7 +16,7 @@ an alert is specified via a [lambda expression](/kapacitor/v0.10/tick/expr/).
 See [AlertNode.Info,](/kapacitor/v0.10/tick/alert_node/#info) [AlertNode.Warn,](/kapacitor/v0.10/tick/alert_node/#warn) and [AlertNode.Crit](/kapacitor/v0.10/tick/alert_node/#crit) below. 
 
 Different event handlers can be configured for each [AlertNode.](/kapacitor/v0.10/tick/alert_node/) 
-Some handlers like Email, HipChat, Slack, OpsGenie, VictorOps and PagerDuty have a configuration 
+Some handlers like Email, HipChat, Sensu, Slack, OpsGenie, VictorOps and PagerDuty have a configuration 
 option &#39;global&#39; that indicates that all alerts implicitly use the handler. 
 
 Available event handlers: 
@@ -27,6 +27,7 @@ Available event handlers:
 * exec -- Execute a command passing alert data over STDIN. 
 * HipChat -- Post alert message to HipChat room. 
 * Alerta -- Post alert message to Alerta. 
+* Sensu -- Post alert message to Sensu client. 
 * Slack -- Post alert message to Slack channel. 
 * OpsGenie -- Send alert to OpsGenie. 
 * VictorOps -- Send alert to VictorOps. 
@@ -667,6 +668,38 @@ node.post(url string)
 ```
 
 
+### Sensu
+
+Send the alert to Sensu. 
+
+Example: 
+
+
+```javascript
+    [sensu]
+      enabled = true
+      url = "http://sensu:3030"
+      source = "Kapacitor"
+```
+
+Example: 
+
+
+```javascript
+    stream...
+         .alert()
+             .sensu()
+```
+
+Send alerts to Sensu client. 
+
+
+
+```javascript
+node.sensu()
+```
+
+
 ### Slack
 
 Send the alert to Slack. 
@@ -909,6 +942,7 @@ Helper function for creating an alert on low throughput, aka deadman&#39;s switc
 
 - Threshold -- trigger alert if throughput drops below threshold in points/interval. 
 - Interval -- how often to check the throughput. 
+- Expressions -- optional list of expressions to also evaluate. Useful for time of day alerting. 
 
 Example: 
 
@@ -954,10 +988,23 @@ Example:
     data....
 ```
 
+You can specify additional lambda expressions to further constrain when the deadman&#39;s switch is triggered. 
+Example: 
 
 
 ```javascript
-node.deadman(threshold float64, interval time.Duration)
+    var data = stream.from()...
+    // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
+    // Only trigger the alert if the time of day is between 8am-5pm.
+    data.deadman(100.0, 10s, lambda: hour("time") >= 8 AND hour("time") <= 17)
+    //Do normal processing of data
+    data....
+```
+
+
+
+```javascript
+node.deadman(threshold float64, interval time.Duration, expr ...tick.Node)
 ```
 
 Returns: [AlertNode](/kapacitor/v0.10/tick/alert_node/)
