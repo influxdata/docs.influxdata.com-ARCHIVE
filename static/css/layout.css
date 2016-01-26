@@ -329,10 +329,10 @@ a.main-nav--link:hover {
 	font-size: 1.25em;
 	font-weight: 700;
 	margin-left: 3.5rem;
-	font-family: 'Klavika-Bold';
+	font-family: 'Klavika-Bold','Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;;
 }
 .product-switcher--current span {
-	font-family: 'Klavika-Light';
+	font-family: 'Klavika-Light','Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;;
 	font-weight: 200;
 }
 .product-switcher--toggle {
@@ -565,7 +565,7 @@ a.product-sidebar--page:hover {
 	color: #fff;
 	font-weight: 200;
 	font-style: italic;
-	font-family: 'Klavika-Light';
+	font-family: 'Klavika-Light','Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;;
 	font-size: 2.5rem;
 	margin: 2.5em 0;
 	display: inline-block;
