@@ -14,7 +14,7 @@
 	width: 100%;
 	display: block;
 	border: none;
-	padding: 0 1rem 0 1rem;
+	padding: 0 1rem 0 2.5rem;
 	outline: none;
 	transition: all 0.3s ease;
 	color: #575E6B;
@@ -55,6 +55,18 @@
 	width: 100%;
 	position: relative;
 	line-height: 2rem;
+}
+.algolia-autocomplete:after {
+	font-family: 'icomoon';
+	content: "\e98a";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 2.5rem;
+	height: 2.5rem;
+	text-align: center;
+	line-height: 2.5rem;
+	font-size: 1rem;
 }
 /* Dropdown container */
 .aa-dropdown-menu {
@@ -153,7 +165,7 @@
 		z-index: 100;
 	}
 	.influx-search--field {
-		padding: 0 1.125rem 0 1.125rem;
+		padding: 0 1.125rem 0 3rem;
 		font-size: 1.25rem;
 		font-family: 'Klavika-Bold';
 		font-weight: 500;
@@ -162,6 +174,12 @@
 	.aa-dropdown-menu {
 		width: 100%;
 		left: 0 !important;
+	}
+	.algolia-autocomplete:after {
+		width: 3.25rem;
+		height: 3.25rem;
+		line-height: 3.25rem;
+		font-size: 1.125rem;
 	}
 }
 
