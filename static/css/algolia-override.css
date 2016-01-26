@@ -1,40 +1,73 @@
+.influx-search {
+	position: absolute;
+	display: block;
+	position: absolute;
+	height: 2.5rem;
+	width: calc(100% - 2.75rem - 10rem);
+	right: 2.75rem;
+	left: 10rem;
+	z-index: 100;
+}
+.influx-search--field {
+	height: 100%;
+	line-height: 2.5rem;
+	width: 100%;
+	display: block;
+	border: none;
+	padding: 0 1rem 0 1rem;
+	outline: none;
+	transition: all 0.3s ease;
+	color: #575E6B;
+	font-weight: 500;
+	background-color: #E6E9EC;
+	text-align: left;
+	font-size: 1rem;
+}
+.influx-search--field::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	font-family: 'Klavika-Light';
+	font-weight: 500;
+	color: #8F97A1;
+}
+.influx-search--field::-moz-placeholder { /* Firefox 19+ */
+	font-family: 'Klavika-Light';
+	font-weight: 500;
+	color: #8F97A1;
+}
+.influx-search--field:-ms-input-placeholder { /* IE 10+ */
+	font-family: 'Klavika-Light';
+	font-weight: 500;
+	color: #8F97A1;
+}
+.influx-search--field:-moz-placeholder { /* Firefox 18- */
+	font-family: 'Klavika-Light';
+	font-weight: 500;
+	color: #8F97A1;
+}
+.influx-search--field:focus {
+	background-color: #EEF0F2;
+	color: #4591ED;
+}
+
 .algolia-autocomplete {
 	display: inline-block !important;
 	vertical-align: middle;
 	height: 100%;
-	width: auto;
+	width: 100%;
 	position: relative;
 	line-height: 2rem;
-	top: -0.125rem;
 }
 /* Dropdown container */
 .aa-dropdown-menu {
+	box-sizing: border-box;
+	position: absolute;
+	width: calc(100% + 2.75rem + 10rem);
 	background-color: #373D49;
 	border: 2px solid #454C59 !important;
-	border-radius: 4px !important;
 	padding: 0;
 	font-size: 1rem;
-	left: 50% !important;
-	transform: translateX(-50%);
-	-webkit-transform: translateX(-50%);
-	margin: 0.5em 0 0 0;
+	left: -10rem !important;
+	margin: 0;
 }
-.aa-dropdown-menu:after {
-	content: '';
-	display: block;
-	position: absolute;
-	top: -0.75rem;
-	left: calc(50% - 6rem);
-	transform: translateY(-50%);
-	-webkit-transform: translateY(-50%);
-	width: 0;
-	height: 0;
-	border-width: 0.75rem;
-	border-style: solid;
-	border-color: transparent;
-	border-bottom-color: #454C59;
-}
-
 /* Bottom border of each suggestion */
 .algolia-docsearch-suggestion {
   border-bottom-color: #f00;
@@ -82,7 +115,6 @@
 		color 0.3s ease,
 		background-color 0.3s ease;
 }
-
 /* Footer of dropdown with logo in it */
 .algolia-docsearch-footer {
 	border: none !important;
@@ -92,6 +124,7 @@
 	padding: 0 1em 0 0 !important;
 	margin: 0!important;
 	color: #575E6B;
+	border-radius: 0;
 }
 /* Left column, with secondary category header */
 .algolia-docsearch-suggestion--subcategory-column {
@@ -101,4 +134,51 @@
 	font-size: 0.875em;
 	font-weight: 600;
 	display: none;
+}
+
+/*
+	+----------------------------+
+	|  Responsive Breakpoint	 |
+	+----------------------------+
+*/
+@media (min-width: 925px) {
+	.influx-search {
+		position: absolute;
+		display: block;
+		position: absolute;
+		height: 3.25rem;
+		width: calc(100% - 19rem);
+		right: 0rem;
+		left: initial;
+		z-index: 100;
+	}
+	.influx-search--field {
+		padding: 0 1.125rem 0 1.125rem;
+		font-size: 1.25rem;
+		font-family: 'Klavika-Bold';
+		font-weight: 500;
+		line-height: 3.25rem;
+	}
+	.aa-dropdown-menu {
+		width: 100%;
+		left: 0 !important;
+	}
+}
+
+/*
+	+----------------------------+
+	|  Responsive Breakpoint	 |
+	+----------------------------+
+*/
+@media (min-width: 1600px) {
+	.influx-search {
+/*		position: absolute;
+		display: block;
+		position: absolute;
+		height: 3.25rem;*/
+		width: calc(100% - 26rem);
+/*		right: 0rem;
+		left: initial;
+		z-index: 100;*/
+	}
 }

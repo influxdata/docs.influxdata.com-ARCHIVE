@@ -202,7 +202,6 @@ table {
 	z-index: 5;
 }
 
-
 /*
 	Main Navigation
 */
@@ -214,8 +213,7 @@ table {
 	background-color: #FAFBFC;
 }
 .main-nav--logo,
-.main-nav--hamburger,
-.main-nav--search {
+.main-nav--hamburger {
 	top: 50%;
 	transform: translateY(-50%);
 	-webkit-transform: translateY(-50%);
@@ -223,28 +221,6 @@ table {
 .main-nav--logo {
 	left: 1rem;
 	height: 60%;
-}
-.main-nav--search {
-	display: inline-block;
-	position: absolute;
-	height: 2.5rem;
-	width: 15rem;
-	border-radius: calc(2.5rem / 2);
-/*	border: 2px solid #D7DCE0;*/
-	border: none;
-	padding: 0 1rem 0 1rem;
-	outline: none;
-	transition: all 0.3s ease;
-	color: #575E6B;
-	font-weight: 500;
-	background-color: #4591ED;
-	color: #fff;
-}
-.main-nav--search:focus {
-	/*border-color: #4591ED;*/
-/*	box-shadow: 0 0 12px #4591ED;*/
-	background-color: #22ADF6;
-	color: #fff;
 }
 .main-nav--hamburger {
 	width: 2.5rem;
