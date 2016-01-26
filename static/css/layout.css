@@ -186,6 +186,9 @@ table {
 	z-index: 10;
 	transition: all 0.3s ease;
 }
+.main-nav--links {
+	z-index: 100;
+}
 .main-nav,
 .product-switcher {
 	z-index: 7;
@@ -211,7 +214,8 @@ table {
 	background-color: #FAFBFC;
 }
 .main-nav--logo,
-.main-nav--hamburger {
+.main-nav--hamburger,
+.main-nav--search {
 	top: 50%;
 	transform: translateY(-50%);
 	-webkit-transform: translateY(-50%);
@@ -222,17 +226,25 @@ table {
 }
 .main-nav--search {
 	display: inline-block;
-	height: 2rem;
+	position: absolute;
+	height: 2.5rem;
 	width: 15rem;
-	border-radius: calc(2rem / 2);
-	border: 2px solid #ddd;
+	border-radius: calc(2.5rem / 2);
+/*	border: 2px solid #D7DCE0;*/
+	border: none;
 	padding: 0 1rem 0 1rem;
 	outline: none;
 	transition: all 0.3s ease;
 	color: #575E6B;
+	font-weight: 500;
+	background-color: #4591ED;
+	color: #fff;
 }
 .main-nav--search:focus {
-	border-color: #ff0054;
+	/*border-color: #4591ED;*/
+/*	box-shadow: 0 0 12px #4591ED;*/
+	background-color: #22ADF6;
+	color: #fff;
 }
 .main-nav--hamburger {
 	width: 2.5rem;

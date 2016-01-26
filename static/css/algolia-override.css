@@ -1,10 +1,104 @@
 .algolia-autocomplete {
 	display: inline-block !important;
 	vertical-align: middle;
-	height: 2rem;
+	height: 100%;
 	width: auto;
 	position: relative;
-	background-color: #ccc;
 	line-height: 2rem;
 	top: -0.125rem;
+}
+/* Dropdown container */
+.aa-dropdown-menu {
+	background-color: #373D49;
+	border: 2px solid #454C59 !important;
+	border-radius: 4px !important;
+	padding: 0;
+	font-size: 1rem;
+	left: 50% !important;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	margin: 0.5em 0 0 0;
+}
+.aa-dropdown-menu:after {
+	content: '';
+	display: block;
+	position: absolute;
+	top: -0.75rem;
+	left: calc(50% - 6rem);
+	transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	width: 0;
+	height: 0;
+	border-width: 0.75rem;
+	border-style: solid;
+	border-color: transparent;
+	border-bottom-color: #454C59;
+}
+
+/* Bottom border of each suggestion */
+.algolia-docsearch-suggestion {
+  border-bottom-color: #f00;
+}
+/* Main category headers */
+.algolia-docsearch-suggestion--category-header {
+	font-family: 'Klavika-Light';
+	background-color: #454C59;
+	border: none !important;
+	padding: 0 0 0 1em !important;
+	height: 2.5em !important;
+	font-size: 1.25em;
+	line-height: 2.5em;
+	font-weight: 600;
+	color: #D7DCE0;
+}
+/* Highlighted search terms */
+.algolia-docsearch-suggestion--highlight {
+	color: #4591ED;
+	font-weight: 900 !important;
+}
+/* Highligted search terms in the main category headers */
+.algolia-docsearch-suggestion--category-header .algolia-docsearch-suggestion--highlight  {
+	font-family: 'Klavika-Bold';
+	font-weight: 900;
+	background-color: transparent;
+	padding: 0;
+	color: #fff;
+}
+/* Currently selected suggestion */
+.aa-cursor .algolia-docsearch-suggestion--content {
+	color: inherit;
+}
+.aa-cursor .algolia-docsearch-suggestion {
+	background: #575E6B;
+	color: #FFF;
+}
+.algolia-docsearch-suggestion {
+	margin: 0 !important;
+	padding: 0 !important;
+	font-size: 1.125em;
+	border-bottom: 2px solid #454C59;
+	color: #9AA2AB;
+	transition:
+		color 0.3s ease,
+		background-color 0.3s ease;
+}
+
+/* Footer of dropdown with logo in it */
+.algolia-docsearch-footer {
+	border: none !important;
+	background-color: #2C323D;
+	height: 4em;
+	line-height: 4em !important;
+	padding: 0 1em 0 0 !important;
+	margin: 0!important;
+	color: #575E6B;
+}
+/* Left column, with secondary category header */
+.algolia-docsearch-suggestion--subcategory-column {
+	border: none !important;
+	background-color: #2C323D;
+	color: #8F97A1;
+	font-size: 0.875em;
+	font-weight: 600;
+	display: none;
 }
