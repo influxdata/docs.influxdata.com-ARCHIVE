@@ -9,7 +9,8 @@ menu:
 ---
 
 ## Querying data using the HTTP API
-The HTTP API is the primary means for querying data in InfluxDB.
+The HTTP API is the primary means for querying data in InfluxDB (see the [command line interface](/influxdb/v0.10/tools/shell/) and [client libraries](/influxdb/v0.10/clients/api/) for alternative ways to query the database).
+
 To perform a query send a `GET` request to the `/query` endpoint, set the URL parameter `db` as the target database, and set the URL parameter `q` as your query.
 The example below uses the HTTP API to query the same database that you encountered in [Writing Data](/influxdb/v0.10/guides/writing_data/).
 <br>
