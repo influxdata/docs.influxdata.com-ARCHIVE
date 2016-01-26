@@ -29,6 +29,10 @@ a.ad-cta:active {
 a.ad-cta:hover {
 	background-color: #9394FF;
 }
+.influx-search--field:focus,
+.algolia-docsearch-suggestion--highlight {
+	color: #4ED8A0 !important;
+}
 
 @media (min-width: 925px) {
 	.product-switcher:hover,
