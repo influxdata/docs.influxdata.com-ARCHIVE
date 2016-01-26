@@ -394,14 +394,14 @@ a.product-switcher--item.smaller {
 */
 .advertisement {
 	display: none;
-	background-color: #101419;
-	padding: 1.5rem 2rem;
+	padding: 1.75rem 2rem;
 	font-size: 1.125rem;
 	line-height: 1.3em;
-	background: -moz-linear-gradient(top,  #1F242D 0%, #101419 100%);
-	background: -webkit-linear-gradient(top,  #1F242D 0%,#101419 100%);
-	background: linear-gradient(to bottom,  #1F242D 0%,#101419 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1F242D', endColorstr='#101419',GradientType=0 );
+	background: #1F242D;
+	background: -moz-linear-gradient(left,  #1F242D 0%, #2c323d 100%);
+	background: -webkit-linear-gradient(left,  #1F242D 0%,#2c323d 100%);
+	background: linear-gradient(to right,  #1F242D 0%,#2c323d 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1F242D', endColorstr='#2c323d',GradientType=1 );
 }
 .advertisement strong {
 	color: #E6E9EC;
