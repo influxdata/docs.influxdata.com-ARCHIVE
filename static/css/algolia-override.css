@@ -159,7 +159,7 @@
 		display: block;
 		position: absolute;
 		height: 3.25rem;
-		width: calc(100% - 19rem);
+		width: calc(100% - 22rem);
 		right: 0rem;
 		left: initial;
 		z-index: 100;
@@ -194,7 +194,7 @@
 		display: block;
 		position: absolute;
 		height: 3.25rem;*/
-		width: calc(100% - 26rem);
+		width: calc(100% - 30rem);
 /*		right: 0rem;
 		left: initial;
 		z-index: 100;*/

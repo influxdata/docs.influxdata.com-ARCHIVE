@@ -106,7 +106,7 @@ a:hover {
 }
 .page--body h2 {
 	font-size: 2.197em;
-	font-weight: 800;
+	font-weight: 600;
 	padding-bottom: 0.5em;
 	margin-top: 3em;
 	border-bottom: 2px solid #2C323D;
@@ -114,11 +114,11 @@ a:hover {
 .page--body h3 {
 	margin-top: 1em;
 	font-size: 1.69em;
-	font-weight: 200;
+	font-weight: 300;
 }
 .page--body h4 {
 	font-size: 1.3em;
-	font-weight: 200;
+	font-weight: 300;
 }
 .page--body h1:first-child,
 .page--body h2:first-child,

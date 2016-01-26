@@ -34,7 +34,7 @@ html,body {
 	background-color: #181C23;
 }
 body {
-	font-family: 'Open Sans','Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;
+	font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	color: #A5ACB5;
@@ -128,7 +128,6 @@ video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;
 	vertical-align: baseline;
 }
 article,
@@ -396,8 +395,8 @@ a.product-switcher--item.smaller {
 .advertisement {
 	display: none;
 	background-color: #101419;
-	padding: 2rem;
-	font-size: 1rem;
+	padding: 1.5rem 2rem;
+	font-size: 1.125rem;
 	line-height: 1.3em;
 	background: -moz-linear-gradient(top,  #1F242D 0%, #101419 100%);
 	background: -webkit-linear-gradient(top,  #1F242D 0%,#101419 100%);
@@ -414,10 +413,12 @@ a.ad-cta:active {
 	text-decoration: none;
 	color: #fff;
 	border-radius: 4px;
-	padding: 0.75em 1.5em;
+	padding: 0.6em 1.5em;
 	background-color: #68707C;
 	margin-top: 1em;
 	transition: all 0.3s ease;
+	font-size: 1em;
+	font-weight: 800;
 }
 a.ad-cta:hover {
 	background-color: #8F97A1;
@@ -524,8 +525,9 @@ a.product-sidebar--page:active,
 a.product-sidebar--page:visited {
 	border-radius: 0 4px 4px 0;
 	background-color: transparent;
-	font-size: 0.875em;
-	font-weight: 500;
+	font-size: 1.125em;
+	line-height: 1.125em;
+	font-weight: 400;
 	display: block;
 	width: 100%;
 	text-decoration: none;
@@ -642,14 +644,14 @@ a.product-sidebar--page:hover {
 	.product-sidebar,
 	.product-sidebar.open,
 	.advertisement {
-		width: 19rem;
+		width: 22rem;
 		transition: none;
 	}
 	.page,
 	.main-nav--links,
 	.main-nav--links.show  {
-		left: 19rem;
-		width: calc(100% - 19rem);
+		left: 22rem;
+		width: calc(100% - 22rem);
 	}
 	.product-sidebar,
 	.product-sidebar.open {
@@ -746,7 +748,7 @@ a.product-sidebar--page:hover {
 		position: fixed;
 		top: calc(3.25rem + 4.5rem);
 		left: 0;
-		width: 19rem;
+		width: 22rem;
 		visibility: hidden;
 		z-index: 90;
 		transition: all 0.3s ease;
@@ -797,9 +799,9 @@ a.product-sidebar--page:hover {
 		background-color: #E6E9EC;
 	}
 	.flash {
-		width: calc(100% - 19rem - 3rem);
+		width: calc(100% - 22rem - 3rem);
 		top: calc(3.25rem + 1rem); /* .main-nav + margin */
-		left: calc(19rem + 1rem);
+		left: calc(22rem + 1rem);
 	}
 	
 }
@@ -821,20 +823,20 @@ a.product-sidebar--page:hover {
 	.product-sidebar.open,
 	.product-switcher--container,
 	.advertisement {
-		width: 26rem;
+		width: 30rem;
 	}
 	.page,
 	.main-nav--links,
 	.main-nav--links.show  {
-		left: 26rem;
-		width: calc(100% - 26rem);
+		left: 30rem;
+		width: calc(100% - 30rem);
 	}
 	.page--title {
 		font-size: 3.625rem;
 	}
 	.flash {
-		width: calc(100% - 26rem - 3rem);
+		width: calc(100% - 30rem - 3rem);
 		top: calc(3.25rem + 1rem); /* .main-nav + margin */
-		left: calc(26rem + 1rem);
+		left: calc(30rem + 1rem);
 	}
 }
