@@ -24,22 +24,22 @@
 	font-size: 1rem;
 }
 .influx-search--field::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-	font-family: 'Klavika-Light';
+	font-family: 'Klavika-Light','Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;
 	font-weight: 500;
 	color: #8F97A1;
 }
 .influx-search--field::-moz-placeholder { /* Firefox 19+ */
-	font-family: 'Klavika-Light';
+	font-family: 'Klavika-Light','Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;
 	font-weight: 500;
 	color: #8F97A1;
 }
 .influx-search--field:-ms-input-placeholder { /* IE 10+ */
-	font-family: 'Klavika-Light';
+	font-family: 'Klavika-Light','Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;
 	font-weight: 500;
 	color: #8F97A1;
 }
 .influx-search--field:-moz-placeholder { /* Firefox 18- */
-	font-family: 'Klavika-Light';
+	font-family: 'Klavika-Light','Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;
 	font-weight: 500;
 	color: #8F97A1;
 }
@@ -86,7 +86,7 @@
 }
 /* Main category headers */
 .algolia-docsearch-suggestion--category-header {
-	font-family: 'Klavika-Light';
+	font-family: 'Klavika-Light','Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;
 	background-color: #454C59;
 	border: none !important;
 	padding: 0 0 0 1em !important;
@@ -103,7 +103,7 @@
 }
 /* Highligted search terms in the main category headers */
 .algolia-docsearch-suggestion--category-header .algolia-docsearch-suggestion--highlight  {
-	font-family: 'Klavika-Bold';
+	font-family: 'Klavika-Bold','Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;
 	font-weight: 900;
 	background-color: transparent;
 	padding: 0;
