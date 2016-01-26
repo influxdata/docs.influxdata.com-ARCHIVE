@@ -16,6 +16,7 @@
         {{ $currentNode := . }}{{ range .Site.Menus.products }}{{ if (in $currentNode.Permalink .URL) }}<link rel="stylesheet" href="/css/theme/{{ .Identifier }}.css" type="text/css">{{end}}{{end}}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
         <link rel="stylesheet" href="/css/algolia-override.css" type="text/css">
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,500,400italic,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
         <!-- TODO(Gunnar): Add prism or switch to pygments -->
         <!-- <link rel="stylesheet" href="css/prism.css" /> -->
