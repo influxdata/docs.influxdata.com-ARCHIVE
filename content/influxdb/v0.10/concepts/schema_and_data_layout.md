@@ -6,32 +6,124 @@ menu:
     parent: concepts
 ---
 
->TODO: Update with schema suggestions for 0.10.0, tsm. Single measurement, many fields and tags. 
+Every InfluxDB use case is special and your [schema](/influxdb/v0.10/concepts/glossary/#schema) will reflect that uniqueness.
+There are, however, general guidelines to follow and pitfalls to avoid when designing your schema.
 
-In the 0.10.x version of InfluxDB, it is recommended that you encode metadata into `Tags`.
-Tags are indexed within the InfluxDB system allowing fast querying by 1 or more tag values.
-Note that tag values are always interpreted as strings.
+## Encouraged Schema Design
 
-Starting in the 0.10.x line it is recommended to store more than one field per point and to have as few measurements as possible. 
+In no particular order, we recommend that you:
 
-It’s also a good idea to start the tag names and measurement names with a character in [a-z] or [A-Z], but not a requirement.
-It will just make writing queries easier later since you won’t have to wrap the names in double quotes.
+* *Encode meta data in tags*
 
-Take a common example from the world of computer infrastructure monitoring.
-Imagine you need to record CPU load across your entire deployment.
-Furthermore, each CPU is actually composed of two cores, numbered 0 and 1.
-In this case you could log 4 datapoints into InfluxDB as follows:
+    [Tags](/influxdb/v0.10/concepts/glossary/#tag) are indexed and [fields](/influxdb/v0.10/concepts/glossary/#field) are not indexed.
+    This means that queries on tags are more performant than those on fields.
 
-```
-cpu_load,host=server01,core=0 value=0.45 1437171724
-cpu_load,host=server01,core=1 value=1.56 1437171724
-cpu_load,host=server02,core=0 value=0.72 1437171724
-cpu_load,host=server02,core=1 value=2.14 1437171724
-```
+    In general, your queries should guide what gets stored as a tag and what gets stored as a field:
+      * Store data in tags if they're commonly-queried meta data
+      * Store data in tags if you plan to use them with `GROUP BY()`
+      * Store data in fields if you plan to use them with an [InfluxQL function](/influxdb/v0.10/query_language/functions/)
+      * Store data in fields if you *need* them to be something other than a string - [tag values](/influxdb/v0.10/concepts/glossary/#tag-value) are always interpreted as strings
 
-With the data in this format, querying and aggregating by various dimension is straightforward -- filter by tags as necessary.
-For example, to see only CPU load information from `server01` simply add `host='server01'` to your query.
-This would return data for both cores on that machine.
-To only see data from core 1, add `host='server01',core='1'`.
-And so on.
+* *Avoid using InfluxQL Keywords as identifier names*
 
+    This isn't necessary, but it simplifies writing queries; you won't have to wrap those identifiers in double quotes.
+    Identifiers are are database names, [retention policy](/influxdb/v0.10/concepts/glossary/#retention-policy-rp) names, [user](/influxdb/v0.10/concepts/glossary/#user) names, [measurement](/influxdb/v0.10/concepts/glossary/#measurement) names, [tag keys](/influxdb/v0.10/concepts/glossary/#tag-key), and [field keys](/influxdb/v0.10/concepts/glossary/#field-key).
+    See [InfluxQL Keywords](https://github.com/influxdata/influxdb/blob/master/influxql/INFLUXQL.md#keywords) for words to avoid.
+
+    Note that you will also need to wrap identifiers in double quotes in queries if they contain characters other than `[A-z,_]`.
+
+## Discouraged Schema Design
+
+In no particular order, we recommend that you:
+
+* *Don't have too many series*
+
+    See [Hardware Sizing Guidelines](/influxdb/v0.10/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node) for [series cardinality](/influxdb/v0.10/concepts/glossary/#series-cardinality) recommendations based on your hardware.
+
+    [Tags](/influxdb/v0.10/concepts/glossary/#tag) that specify highly variable information like UUIDs, hashes, and random strings can increase your series cardinality to uncomfortable levels.
+    If you need that information in your database, consider:
+
+    * Vertical sharding
+    * Dropping that information when you downsample your data
+    * Storing that information under a shorter [retention policy](/influxdb/v0.10/concepts/glossary/#retention-policy-rp)
+    <br>
+    <br>
+    See [Downsampling and Data Retention](/influxdb/v0.10/guides/downsampling_and_retention/) for how to combine two InfluxDB features to automatically downsample and expire data.
+
+* *Don't differentiate data with measurement names*
+
+    In general, taking this step will simplify your queries.
+    InfluxDB queries merge data that fall within the same [measurement](/influxdb/v0.10/concepts/glossary/#measurement); it's better to differentiate data with [tags](/influxdb/v0.10/concepts/glossary/#tag) than with detailed measurement names.
+
+    Example:
+
+    Schema 1  | Schema 2
+    ------------- | -------------
+    *Measurement:* `blueberries.field-1.region-north` | *Measurement:* `blueberries`; *Tags:* `field = 1` and `region = north`
+    *Measurement:*  `blueberries.field-2.region-midwest` | *Measurement:* `blueberries`; *Tags:* `field = 2` and `region = midwest`
+
+    Assume that each measurement contains a single field key called `value`.
+    The following queries calculate the average of `value` across all fields and all regions.
+    Notice that, even at this small scale, this is harder to do under Schema 1.
+
+    *Schema 1*
+    ```
+    > SELECT mean(value) FROM /^blueberries/
+    name: blueberries.field-1.region-north
+    --------------------------------------
+    time			        mean
+    1970-01-01T00:00:00Z	444
+
+    name: blueberries.field-2.region-midwest
+    ----------------------------------------
+    time			        mean
+    1970-01-01T00:00:00Z	33766.666666666664
+    ```
+    Then calculate the mean yourself.
+
+
+    *Schema 2*
+    ```
+    > SELECT mean(value) FROM blueberries
+    name: blueberries
+    -----------------
+    time			        mean
+    1970-01-01T00:00:00Z	17105.333333333332
+    ```
+
+* *Don't put more than one piece of information in one tag*
+
+    Similar to the point above, taking this step will simplify your queries.
+    It will reduce your need for regular expressions.
+
+    Example:
+
+    Tagset 1  | Tagset 2
+    ------------- | -------------
+    `location = field-1.region-north` | `field = 1` and `region = north`
+    `location = field-2.region-north` | `field = 2` and `region = north`
+    `location = field-2.region-midwest` | `field = 2` and `region = north`
+
+    Assume that each [tag set](/influxdb/v0.10/concepts/glossary/#tag-set) falls in the [measurement](/influxdb/v0.10/concepts/glossary/#measurement) `blueberries` and is associated with a [field](/influxdb/v0.10/concepts/glossary/#field) called `value`.
+    The following queries calculate the average of `value` for blueberries that fall in the `north`.
+    While both queries are relatively simple, you can imagine that the regex could get much more complicated if Schema 1 contained a more complex tag value.
+
+    *Schema 1*
+    ```
+    > SELECT mean(value) FROM blueberries WHERE location =~ /north/
+    ```
+
+    *Schema 2*
+    ```
+    > SELECT mean(value) FROM blueberries WHERE region = 'north'
+    ```
+
+
+* *Don't use the same name for a field key and tag key*
+
+    You won't be able to query the [tag key](/influxdb/v0.10/concepts/glossary/#tag-key) if the tag key is the same as a [field key](/influxdb/v0.10/concepts/glossary/#field-key) in your schema.
+    Be sure to differentiate your tag keys and field keys.
+
+    <dt>
+    See GitHub Issue [#4630](https://github.com/influxdata/influxdb/issues/4630) for more information.
+    </dt>
