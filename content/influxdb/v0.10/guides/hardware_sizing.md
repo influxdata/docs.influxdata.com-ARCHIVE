@@ -64,7 +64,7 @@ The increase in RAM needs relative to series cardinality is exponential where th
 InfluxDB is designed to run on SSDs.  Performance is lower on spinning disk drives and may not function properly under increasing loads.
 
 ## How much storage do I need?
-Database names, [measurements](/influxdb/v0.10/concepts/glossary/#measurement), [tag keys](/influxdb/v0.10/concepts/glossary/#tag-key), [field keys](/influxdb/v0.10/concepts/glossary/#field-key), and [tag values](/influxdb/v0.10/concepts/glossary/#tag-value) are stored only once and lways as strings. Only [field values](/influxdb/v0.10/concepts/glossary/#field-value) and [timestamps](/influxdb/v0.10/concepts/glossary/#timestamp) are stored per-point.
+Database names, [measurements](/influxdb/v0.10/concepts/glossary/#measurement), [tag keys](/influxdb/v0.10/concepts/glossary/#tag-key), [field keys](/influxdb/v0.10/concepts/glossary/#field-key), and [tag values](/influxdb/v0.10/concepts/glossary/#tag-value) are stored only once and always as strings. Only [field values](/influxdb/v0.10/concepts/glossary/#field-value) and [timestamps](/influxdb/v0.10/concepts/glossary/#timestamp) are stored per-point.
 
 Non-string values require approximately three bytes. String values require variable space as determined by string compression.
 
