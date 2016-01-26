@@ -6,6 +6,10 @@
         {{ range .Site.Menus.products }}
         <a class="product-switcher--item{{if or ($currentNode.IsMenuCurrent "products" .) ($currentNode.HasMenuCurrent "products" .) }} active{{end}}" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .Name }}</a>
         {{ end }}
+        <div class="product-switcher--divider"></div>
+        <a class="product-switcher--item smaller" href="https://influxdata.com/use-cases/" target="_blank">Use Cases</a>
+        <a class="product-switcher--item smaller" href="https://influxdata.com/pricing/#professional-services" target="_blank">Services</a>
+        <a class="product-switcher--item smaller" href="https://influxdata.com/pricing/#professional-services" target="_blank">Services</a>
     </nav>
 </div>
 {{ range .Site.Menus.products }}
