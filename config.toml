@@ -832,7 +832,7 @@ SectionPagesMenu = "products"
   url = "https://grafana.com"
   parent = "ui"
 [[menu.influxdb_08]]
-  name = "Influxga Dashboards"
+  name = "Influga Dashboards"
   weight = 20
   url = "https://github.com/hakobera/influga"
   parent = "ui"
