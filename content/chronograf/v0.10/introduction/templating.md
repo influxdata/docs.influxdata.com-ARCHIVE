@@ -66,6 +66,6 @@ Now you can select alternative tag values of the tag key `cpu` in the `cpu` drop
 
 Chronograf's template variables also work on dashboards. Note that only visualizations that specify `tmplTime()` and/or `tmplTagValue()` will work with the template variables.
 
-*Chronograf dashboard with template variables*
+*Chronograf dashboard with template variables:*
 
 ![Tag template](/img/chronograf/template-dashboard.gif)
