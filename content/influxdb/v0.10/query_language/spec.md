@@ -155,7 +155,7 @@ string_lit          = `'` { unicode_char } `'`' .
 Duration literals specify a length of time.
 An integer literal followed immediately (with no spaces) by a duration unit listed below is interpreted as a duration literal.
 
-#### Duration unit definitions
+#### Duration units
 
  Units  | Meaning
 --------|-----------------------------------------
@@ -348,6 +348,23 @@ CREATE RETENTION POLICY "10m.events" ON somedb DURATION 10m REPLICATION 2
 CREATE RETENTION POLICY "10m.events" ON somedb DURATION 10m REPLICATION 2 DEFAULT
 ```
 
+### CREATE SUBSCRIPTION
+
+Subscriptions tell InfluxDB to send all the data it receives to [Kapacitor](https://docs.influxdata.com/kapacitor/v0.10/introduction/).
+
+```
+create_subscription_stmt = "CREATE SUBSCRIPTION" subscription_name "ON" db_name "." retention_policy "DESTINATIONS" ("ANY"|"ALL") host { "," host} .
+```
+
+#### Examples:
+```sql
+-- Create a SUBSCRIPTION on database 'mydb' and retention policy 'default' that send data to 'example.com:9090' via UDP.
+CREATE SUBSCRIPTION sub0 ON "mydb"."default" DESTINATIONS ALL 'udp://example.com:9090'
+
+-- Create a SUBSCRIPTION on database 'mydb' and retention policy 'default' that round robins the data to 'h1.example.com:9090' and 'h2.example.com:9090'.
+CREATE SUBSCRIPTION sub0 ON "mydb"."default" DESTINATIONS ANY 'udp://h1.example.com:9090', 'udp://h2.example.com:9090'
+```
+
 ### CREATE USER
 
 ```
@@ -356,7 +373,6 @@ create_user_stmt = "CREATE USER" user_name "WITH PASSWORD" password
 ```
 
 #### Examples:
-
 ```sql
 -- Create a normal database user.
 CREATE USER jdoe WITH PASSWORD '1337password'
