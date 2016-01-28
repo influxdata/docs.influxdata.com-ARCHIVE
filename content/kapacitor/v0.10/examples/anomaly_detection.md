@@ -10,45 +10,72 @@ menu:
 ---
 
 
-Everyone has their own anomaly detection algorithm, so we have built Kapacitor to integrate easily with which ever algorithm fits your domain.
-Kapacitor calls these custom algorithms UDFs for User Defined Functions.
-This guide will walk through writing a UDF and using it within Kapacitor.
-If you haven't already I recommend following the [getting started guide](/kapacitor/v0.10/introduction/getting_started/) for Kapacitor.
+Everyone has their own anomaly detection algorithm, so we have built
+Kapacitor to integrate easily with which ever algorithm fits your
+domain.  Kapacitor calls these custom algorithms UDFs for User Defined
+Functions.  This guide will walk through the necessary steps for
+writing and using your own UDFs within Kapacitor.
+
+If you haven't already, we recommend following the [getting started
+guide](/kapacitor/v0.10/introduction/getting_started/) for Kapacitor
+prior to continuing.
 
 ## 3D Printing
 
-I recently purchased a 3D printer; 3D printing requires that the environment be at certain temperatures in order to ensure quality prints.
-Prints can also take a long time (some can take more than 24 hours), as such I can't just watch the temperature graphs the whole time to make sure the print is going well.
-Also if a print goes bad early, I want to stop it so that I can restart it and not waste materials on continuing a bad print.
+If you own or have recently purchased a 3D printer, you may know that
+3D printing requires the environment to be at certain temperatures in
+order to ensure quality prints.  Prints can also take a long time
+(some can take more than 24 hours), so you can't just watch the
+temperature graphs the whole time to make sure the print is going
+well. Also, if a print goes bad early, you want to make sure and stop
+it so that you can restart it, and not waste materials on continuing a
+bad print.
 
-The printer software is designed to keep the temperatures within certain tolerances but I don't trust it yet so I want an alert when my printing temperatures go abnormal.
-There are three temperatures when it comes to printing:
+Due to the physical limitations of 3D printing, the printer software
+is typically designed to keep the temperatures within certain
+tolerances. For the sake of argument, let's say that you don't trust
+the software to do it's job (or want to create your own), and want to
+be alerted when the temperature reaches an abnormal level.
 
-1. The temperature of the hot end where the plastic is melted before being printed.
-2. The temperature of the bed where the part is being printed.
-3. The temperature of the ambient air around the printer.
+There are three temperatures when it comes to 3D printing:
 
-All three of the temperatures effect the quality of the print, some more than others but we want to track them all.
+1. The temperature of the hot end (where the plastic is melted before being printed).
+2. The temperature of the bed (where the part is being printed).
+3. The temperature of the ambient air (the air around the printer).
 
-To keep our anomaly detection algorithm simple let's compute a `p-value` for each window of data we receive and then emit a single data point with that `p-value`.
-To compute the `p-value` we will use [Welch's t-test](https://en.wikipedia.org/wiki/Welch%27s_t_test).
-For a null hypothesis we will state that a new window is from the same population as the historical windows.
-If the `p-value` drops low enough we can reject the null hypothesis and conclude that the window must be from something different than the historical data population, an anomaly.
-This is an oversimplified approach but we are learning how to write UDFs, not statistics.
+All three of these temperatures affect the quality of the print (some
+being more important than others), but we want to make sure and track
+all of them.
+
+To keep our anomaly detection algorithm simple, let's compute a
+`p-value` for each window of data we receive, and then emit a single
+data point with that `p-value`. To compute the `p-value`, we will use
+[Welch's t-test](https://en.wikipedia.org/wiki/Welch%27s_t_test).  For
+a null hypothesis, we will state that a new window is from the same
+population as the historical windows. If the `p-value` drops low
+enough, we can reject the null hypothesis and conclude that the window
+must be from something different than the historical data population, or
+_an anomaly_.  This is an oversimplified approach, but we are learning
+how to write UDFs, not statistics.
 
 ## Writing a UDF
 
-Now that we have an idea of what we want to do let's understand how Kapacitor wants to communicate with our process.
-From the [README](https://github.com/influxdata/kapacitor/tree/master/udf/agent) we learn that Kapacitor will spawn a process called an `agent`.
-The `agent` is responsible for describing what options it has and then initializing itself with a set of options.
-Then as data arrives, the `agent` performs its computation and returns data to Kapacitor.
-All of this communication occurs over STDIN and STDOUT using protocol buffers.
-As of this writing Kapacitor has agents implemented in Go and Python that take care of the communication details and expose and an interface for doing the actual work.
-For this guide we will use the python agent.
+Now that we have an idea of what we want to do, let's understand how
+Kapacitor wants to communicate with our process. From the [UDF
+README](https://github.com/influxdata/kapacitor/tree/master/udf/agent)
+we learn that Kapacitor will spawn a process called an `agent`.  The
+`agent` is responsible for describing what options it has, and then
+initializing itself with a set of options.  As data is received by the
+UDF, the `agent` performs its computation and then returns the
+resulting data to Kapacitor.  All of this communication occurs over
+STDIN and STDOUT using protocol buffers.  As of this writing, Kapacitor
+has agents implemented in Go and Python that take care of the
+communication details and expose an interface for doing the actual
+work.  For this guide, we will be using the Python agent.
 
-### The handler interface
+### The Handler Interface
 
-Here is the python handler interface for the agent.
+Here is the Python handler interface for the agent:
 
 ```python
 # The Agent calls the appropriate methods on the Handler as requests are read off STDIN.
@@ -77,22 +104,27 @@ class Handler(object):
         pass
 ```
 
-### The Info method
+### The Info Method
 
-Let's start with the `info` method.
-When Kapacitor starts up it will call `info` and expect in return some information about how this UDFs behaves.
-Specifically what kind of edge the UDF wants and provides.
-Remember that within Kapacitor data is transported in streams or batches so the UDF must declare what it expects.
-Second UDFs can accept certain options so that they are individually configurable.
-The info response can contain a list of options, their names and expected arguments.
+Let's start with the `info` method.  When Kapacitor starts up it will
+call `info` and expect in return some information about how this UDF
+behaves.  Specifically, Kapacitor expects the kind of edge the UDF
+wants and provides.
 
-For our UDF we need to know three things.
+> **Remember**: within Kapacitor, data is transported in streams or
+batches, so the UDF must declare what it expects.
+
+In addition, UDFs can accept certain options so that they are
+individually configurable.  The `info` response can contain a list of
+options, their names, and expected arguments.
+
+For our example UDF, we need to know three things:
 
 1. The field to operate on.
 2. The size of the historical window to keep.
 3. The significance level or `alpha` being used.
 
-Below we have the implementation of the `info` method for our handler that defines the edge types and options available.
+Below we have the implementation of the `info` method for our handler that defines the edge types and options available:
 
 ```python
 ...
@@ -123,15 +155,19 @@ Below we have the implementation of the `info` method for our handler that defin
 ...
 ```
 
-Now when Kapacitor starts up it will spawn our UDF process and request the `info` data and then shutdown the process.
-Kapacitor will remember to information for each UDF.
-This way Kapacitor can understand the available options for a given UDF before its executing inside a task.
+When Kapacitor starts, it will spawn our UDF process and request
+the `info` data and then shutdown the process.  Kapacitor will
+remember this information for each UDF.  This way, Kapacitor can
+understand the available options for a given UDF before its executed
+inside of a task.
 
-### The Init method
+### The Init Method
 
-Next let's implement the `init` method, which is called once the task starts executing.
-The `init` method receives a list of chosen options so we can configure the handler appropriately.
-In response we indicate whether the `init` request was successful and any error message if the options were invalid.
+Next let's implement the `init` method, which is called once the task
+starts executing.  The `init` method receives a list of chosen
+options, which are then used to configure the handler appropriately.
+In response, we indicate whether the `init` request was successful,
+and, if not, any error messages if the options were invalid.
 
 ```python
 ...
@@ -172,24 +208,30 @@ In response we indicate whether the `init` request was successful and any error 
 ...
 ```
 
-When a task starts Kapacitor spawns a new process for the UDF and calls `init` passing any specified options from the TICKscript.
-The process at that point will remain running and Kapacitor will begin sending data as it arrives.
+When a task starts, Kapacitor spawns a new process for the UDF and
+calls `init`, passing any specified options from the TICKscript. Once
+initialized, the process will remain running and Kapacitor will begin
+sending data as it arrives.
 
-### The Batch and Point methods
+### The Batch and Point Methods
 
-Our task wants a `batch` edge meaning it expects to get data in batches or windows.
-To send a batch of data to the UDF process Kapacitor first calls the `begin_batch` method indicating that all subsequent points belong to a batch.
-Once the batch is complete the `end_batch` method is called with some meta data about the batch.
+Our task wants a `batch` edge, meaning it expects to get data in
+batches or windows.  To send a batch of data to the UDF process,
+Kapacitor first calls the `begin_batch` method, which indicates that all
+subsequent points belong to a batch.  Once the batch is complete, the
+`end_batch` method is called with some metadata about the batch.
 
-At a high level this is what our UDF code will do for each of the `begin_batch`, `point`, and `end_batch` calls.
+At a high level, this is what our UDF code will do for each of the
+`begin_batch`, `point`, and `end_batch` calls:
 
-* `begin_batch` -- mark the start of a new batch and initialize a structure for it.
-* `point` -- store the point.
-* `end_batch` -- perform the `t-test` and then update the historical data.
+* `begin_batch` -- mark the start of a new batch and initialize a structure for it
+* `point` -- store the point
+* `end_batch` -- perform the `t-test` and then update the historical data
 
-### The complete UDF script
+### The Complete UDF Script
 
-What follows is the complete UDF implementation with our `info`, `init` and batching methods as well as everything else we need.
+What follows is the complete UDF implementation with our `info`,
+`init`, and batching methods (as well as everything else we need).
 
 ```python
 
@@ -370,9 +412,9 @@ if __name__ == '__main__':
 
 ```
 
-
-That was a lot, but now we are ready to configure Kapacitor to run our code.
-Create a scratch dir for working through the rest of this guide.
+That was a lot, but now we are ready to configure Kapacitor to run our
+code.  Create a scratch dir for working through the rest of this
+guide:
 
 ```sh
 mkdir /tmp/kapacitor_udf
@@ -383,7 +425,7 @@ Save the above UDF python script into `/tmp/kapacitor_udf/ttest.py`.
 
 ### Configuring Kapacitor for our UDF
 
-Add this snippet to your Kapacitor configuration file.
+Add this snippet to your Kapacitor configuration file (typically located at `/etc/kapacitor/kapacitor.conf`):
 
 ```
 [udf]
@@ -402,27 +444,38 @@ Add this snippet to your Kapacitor configuration file.
             PYTHONPATH = "/tmp/kapacitor_udf/kapacitor/udf/agent/py"
 ```
 
-In the configuration we called the function `tTest`, that is how we will reference it in the TICKscript.
+In the configuration we called the function `tTest`. That is also how
+we will reference it in the TICKscript.
 
-Notice that our python script imported the `Agent` object and we set the `PYTHONPATH` in the configuration.
-Clone the Kapacitor source into the tmp dir so we can point the `PYTHONPATH` at the necessary python code.
-This is overkill since its just two python files but it makes it easy to follow.
+Notice that our Python script imported the `Agent` object, and we set
+the `PYTHONPATH` in the configuration.  Clone the Kapacitor source
+into the tmp dir so we can point the `PYTHONPATH` at the necessary
+python code.  This is typically overkill since it's just two Python
+files, but it makes it easy to follow:
 
 ```
 git clone https://github.com/influxdata/kapacitor.git /tmp/kapacitor_udf/kapacitor
 ```
 
-
 ### Running Kapacitor with the UDF
 
-Restart the Kapacitor daemon to make sure everything is configured correctly.
-Check the logs to make sure you see a *Listening for signals* line and that no errors occurred.
-If you don't see the line its because the UDF process is hung and not responding, it should be killed after the timeout.
-Then you can fix any errors and try again.
+Restart the Kapacitor daemon to make sure everything is configured
+correctly:
+
+```sh
+service kapacitor restart
+```
+
+Check the logs (`/var/log/kapacitor/`) to make sure you see a
+*Listening for signals* line and that no errors occurred.  If you
+don't see the line, it's because the UDF process is hung and not
+responding. It should be killed after a timeout, so give it a moment
+to stop properly. Once stopped, you can fix any errors and try again.
 
 ### The TICKscript
 
-If everything is running fine it's time to write our TICKscript to use the `tTest` UDF method.
+If everything was started correctly, then it's time to write our
+TICKscript to use the `tTest` UDF method:
 
 ```javascript
 // This TICKscript monitors the three temperatures for a 3d printing job,
@@ -475,22 +528,28 @@ data
 
 ```
 
-Notice that we have called `tTest` three times.
-This means that Kapacitor will spawn three different python processes and pass the respective init option to each one.
+Notice that we have called `tTest` three times. This means that
+Kapacitor will spawn three different Python processes and pass the
+respective init option to each one.
 
-Save this script as `/tmp/kapacitor_udf/print_temps.tick` and define the Kapacitor task.
+Save this script as `/tmp/kapacitor_udf/print_temps.tick` and define
+the Kapacitor task:
 
 ```sh
 kapacitor define -name print_temps -type stream -dbrp printer.default -tick print_temps.tick
 ```
 
-### Generating test data
+### Generating Test Data
 
-To simulate our printer for testing we will write a simple python script to generate temperatures.
-This script generates random temperatures that are normally distributed around a target temperature.
-Then at specified times the variation and offset of the temperatures changes, creating an anomaly.
-Don't worry too much about the details here.
-It would be much better to use real data for testing our TICKscript and UDF but this will have to do.
+To simulate our printer for testing, we will write a simple Python
+script to generate temperatures.  This script generates random
+temperatures that are normally distributed around a target
+temperature.  At specified times, the variation and offset of the
+temperatures changes, creating an anomaly.
+
+> Don't worry too much about the details here.  It would be much better
+to use real data for testing our TICKscript and UDF, but this is
+faster (and much cheaper than a 3D printer).
 
 ```python
 #!/usr/bin/python2
@@ -596,12 +655,14 @@ if __name__ == '__main__':
 
 ```
 
-This python script has two python dependencies `requests` and `numpy`.
-They can easily be installed via `pip` or your package manager.
-Then save the above script as `/tmp/kapacitor_udf/printer_data.py`.
+Save the above script as `/tmp/kapacitor_udf/printer_data.py`.
 
-At this point we have a  task ready to go and a script to generate some fake data with anomalies.
-Now we can create a recording of our fake data so that we can easily iterate on the task.
+> This Python script has two Python dependencies: `requests` and `numpy`.
+They can easily be installed via `pip` or your package manager.  
+
+At this point we have a task ready to go, and a script to generate
+some fake data with anomalies.  Now we can create a recording of our
+fake data so that we can easily iterate on the task:
 
 ```
 # Start the recording in the background
@@ -615,7 +676,8 @@ rid=7bd3ced5-5e95-4a67-a0e1-f00860b1af47
 ```
 
 We can verify it worked by listing information about the recording.
-My recording came out to `1.6MB` yours should come out somewhere close to that.
+Our recording came out to `1.6MB`, so yours should come out somewhere
+close to that:
 
 ```
 $ kapacitor list recordings $rid
@@ -625,42 +687,55 @@ ID                                      Type    Size      Created
 
 ### Detecting Anomalies
 
-OK, finally we are ready to run the replay against the task and see how it works.
+Finally, let's run the play against our task and see how it works:
 
 ```
 kapacitor replay -name print_temps -id $rid -fast -rec-time
 ```
 
-Check the various log files to see if the algorithm caught the anomalies.
+Check the various log files to see if the algorithm caught the
+anomalies:
 
 ```
 cat /tmp/kapacitor_udf/{hotend,bed,air}_failure.log
 ```
 
-Based on the `printer_data.py` script above there should be anomalies at:
+Based on the `printer_data.py` script above, there should be anomalies at:
 
 * 1hr -- hotend
 * 8hr -- bed
 * 12hr -- air
 
-There may be some false positives but since we want this to work with real data not our nice clean fake data it doesn't help much to tweak it at this point.
+There may be some false positives as well, but, since we want this to
+work with real data (not our nice clean fake data), it doesn't help
+much to tweak it at this point.
 
-Well, there we have it.
-We can now get alerts when the temperatures for a our prints are out of norm.
-We understand how Kapacitor UDFs work and we have a good working example as a launch point.
-The framework is in place, now go plug in a real anomaly detection algorithm that works well for your domain.
+Well, there we have it.  We can now get alerts when the temperatures
+for our prints deviates from the norm.  Hopefully you now have a
+better understanding of how Kapacitor UDFs work, and have a good
+working example as a launching point into further work with UDFS.
 
+The framework is in place, now go plug in a real anomaly detection
+algorithm that works for your domain!
 
-## Extending this Example
+## Extending This Example
 
-There are a few things I am leaving as exercises to the reader.
+There are a few things that we have left as exercises to the reader:
 
-1. Snapshot/Restore -- Kapacitor will regularly snapshot the state of your UDF process so that it can be restored if the process is restarted.
-   The examples [here](https://github.com/influxdata/kapacitor/tree/master/udf/agent/examples/) have implementations for the `snapshot` and `restore` methods.
+1. Snapshot/Restore -- Kapacitor will regularly snapshot the state of
+   your UDF process so that it can be restored if the process is
+   restarted.  The examples
+   [here](https://github.com/influxdata/kapacitor/tree/master/udf/agent/examples/)
+   have implementations for the `snapshot` and `restore` methods.
    Implement them for the `TTestHandler` handler as an exercise.
-2. Change the algorithm from a t-test to something more fitting for your domain. Both `numpy` and `scipy` have a wealth of algorithms.
-3. The options returned by the `info` request can contain multiple arguments.
-   Modify the `field` option to accept three field names and change the `TTestHandler` to maintain historical data and batches for each field instead of just the one.
-   That way only one ttest.py process need be running.
+
+2. Change the algorithm from a t-test to something more fitting for
+   your domain. Both `numpy` and `scipy` have a wealth of algorithms.
+
+3. The options returned by the `info` request can contain multiple
+   arguments.  Modify the `field` option to accept three field names
+   and change the `TTestHandler` to maintain historical data and
+   batches for each field instead of just the one.  That way only one
+   ttest.py process needs to be running.
 
 
