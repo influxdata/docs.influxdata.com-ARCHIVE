@@ -23,9 +23,23 @@ sudo service chronograf start
 Note that the Chronograf startup script needs root permission to ensure that it can write to `/var/log`, but the executable runs as a normal user.
 
 #### OS X via [Homebrew](http://brew.sh/)
-```
+* Run Chronograf manually on the command line:
+
+    ```
 chronograf
-```
+    ```
+
+* To have launchd start homebrew/binary/chronograf at login:
+
+    ```
+ln -sfv /usr/local/opt/chronograf/*.plist ~/Library/LaunchAgents
+    ```
+
+    Then to load homebrew/binary/chronograf now:
+
+    ```
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.chronograf.plist
+    ```
 
 #### Standalone OS X binary
 Assuming you're working with Chronograf version 0.10, from the `chronograf-0.10/` directory:
