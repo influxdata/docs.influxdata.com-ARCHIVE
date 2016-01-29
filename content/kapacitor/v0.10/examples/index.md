@@ -19,8 +19,6 @@ Learn how to join two series and calculate a combined results, plus how to perfo
 
 See how you can use Kapacitor to create a live updating leaderboard for a game.
 
+### [Custom Anomaly Detection](/kapacitor/v0.10/examples/anomaly_detection/)
 
-### [Custom Anomaly Detection](/kapacitor/v0.10/examples/anomal_detection/)
-
-See how you can use Kapacitor to create a live updating leaderboard for a game.
-
+Integrate your custom anomaly detection algorithm with Kapacitor.
