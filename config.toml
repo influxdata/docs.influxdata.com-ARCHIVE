@@ -829,7 +829,7 @@ SectionPagesMenu = "products"
 [[menu.influxdb_08]]
   name = "Grafana Dashboards"
   weight = 10
-  url = "https://grafana.com"
+  url = "http://grafana.org"
   parent = "ui"
 [[menu.influxdb_08]]
   name = "Influga Dashboards"
