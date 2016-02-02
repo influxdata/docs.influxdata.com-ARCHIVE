@@ -41,14 +41,7 @@ In no particular order, we recommend that you:
     See [Hardware Sizing Guidelines](/influxdb/v0.10/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node) for [series cardinality](/influxdb/v0.10/concepts/glossary/#series-cardinality) recommendations based on your hardware.
 
     [Tags](/influxdb/v0.10/concepts/glossary/#tag) that specify highly variable information like UUIDs, hashes, and random strings can increase your series cardinality to uncomfortable levels.
-    If you need that information in your database, consider:
-
-    * Vertical sharding
-    * Dropping that information when you downsample your data
-    * Storing that information under a shorter [retention policy](/influxdb/v0.10/concepts/glossary/#retention-policy-rp)
-    <br>
-    <br>
-    See [Downsampling and Data Retention](/influxdb/v0.10/guides/downsampling_and_retention/) for how to combine two InfluxDB features to automatically downsample and expire data.
+    If you need that information in your database, consider storing the high-cardinality data as a field rather than a tag (note that query performance will be slower).
 
 * *Don't differentiate data with measurement names*
 
