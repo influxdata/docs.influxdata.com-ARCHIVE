@@ -7,7 +7,7 @@ menu:
     parent: guides
 ---
 
-There are many ways to write data into InfluxDB including [client libraries](/influxdb/v0.10/clients/api/) and plugins for common data formats such as [Graphite](/influxdb/v0.10/write_protocols/graphite/).
+There are many ways to write data into InfluxDB including the [command line interface](/influxdb/v0.10/tools/shell/), [client libraries](/influxdb/v0.10/clients/api/) and plugins for common data formats such as [Graphite](/influxdb/v0.10/write_protocols/graphite/).
 Here we'll show you how to create a database and write data to that database using the built-in HTTP API.
 
 ## Creating a database using the HTTP API
