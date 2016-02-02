@@ -7,16 +7,23 @@ menu:
     parent: guides
 ---
 
-InfluxDB supports arbitrarily sized clusters and any replication factor from 1 to the number of nodes in the cluster.
-There are two types of nodes in an InfluxDB cluser. 
-[Meta nodes](/influxdb/v0.10/concepts/glossary/#meta-node) coordinate activity in the cluster.
-Meta nodes do not require significant system resources and can run on a very lightweight server.
-[Data nodes](/influxdb/v0.10/concepts/glossary/#data-node) store data and respond to queries.
-Data nodes must run on hardware with at least 2 CPUs, 4GB RAM, and storage with 1000 IOPS. 
-See the [hardware sizing guide](/influxdb/v0.10/guides/hardware_sizing/) for more detail.
-Any node can be a meta node, data node, or both, and can change roles over time.
-Each cluster should have at least three meta nodes. 
-New nodes can be added to a cluster and existing nodes can be dropped.
+InfluxDB supports arbitrarily sized clusters and any replication
+factor from 1 to the number of nodes in the cluster. There are two
+types of nodes in an InfluxDB cluser:
+
+- [Meta nodes](/influxdb/v0.10/concepts/glossary/#meta-node) coordinate
+activity in the cluster.  Meta nodes do not require significant system
+resources and can run on a very lightweight server.
+
+- [Data nodes](/influxdb/v0.10/concepts/glossary/#data-node) store data
+and respond to queries. Data nodes must run on systems with at least
+2 CPUs, 4GB RAM, and storage with 1000 IOPS.  See the
+[hardware sizing guide](/influxdb/v0.10/guides/hardware_sizing/) for
+more detail.
+
+Any node can be a meta node, data node, or both. Each cluster must
+have _at least_ three meta nodes in order to form a Raft concensus and
+remain in a healthy state.
 
 ## Configuration
 
@@ -30,7 +37,7 @@ Throughout this example, each node will be given a hostname that
 denotes the order in which it was started (e.g. `influx1` for the
 first node, `influx2` for the second node, etc.). Each machine
 hostname must be resolvable over the network. You will need at least
-**three** nodes in order to form a healthy raft cluster. It is also
+_three_ nodes in order to form a healthy raft cluster. It is also
 assumed that you are running some version of Linux, and, while it is
 possible to build a cluster locally, it is not recommended.
 
