@@ -59,6 +59,7 @@ Helper function for creating an alert on low throughput, aka deadman&#39;s switc
 
 - Threshold -- trigger alert if throughput drops below threshold in points/interval. 
 - Interval -- how often to check the throughput. 
+- Expressions -- optional list of expressions to also evaluate. Useful for time of day alerting. 
 
 Example: 
 
@@ -104,10 +105,23 @@ Example:
     data....
 ```
 
+You can specify additional lambda expressions to further constrain when the deadman&#39;s switch is triggered. 
+Example: 
 
 
 ```javascript
-node.deadman(threshold float64, interval time.Duration)
+    var data = stream.from()...
+    // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
+    // Only trigger the alert if the time of day is between 8am-5pm.
+    data.deadman(100.0, 10s, lambda: hour("time") >= 8 AND hour("time") <= 17)
+    //Do normal processing of data
+    data....
+```
+
+
+
+```javascript
+node.deadman(threshold float64, interval time.Duration, expr ...tick.Node)
 ```
 
 Returns: [AlertNode](/kapacitor/v0.10/tick/alert_node/)
