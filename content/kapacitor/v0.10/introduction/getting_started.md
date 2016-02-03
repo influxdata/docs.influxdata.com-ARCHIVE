@@ -19,8 +19,7 @@ Don't worry about installing anything yet, instructions are found below.
 
 * [InfluxDB](/docs/v0.9/introduction/installation.html)  - While Kapacitor does not require InfluxDB it is the easiest to setup and so we will use it in this guide.
 You will need InfluxDB >= 0.9.5
-* [Telegraf](https://github.com/influxdb/telegraf#installation) - We will use a specific Telegraf config to send data to InfluxDB so that the examples Kapacitor tasks have context.
-You will need Telegraf >= 0.1.9 since the names of measurements change prior to that version.
+* [Telegraf](https://github.com/influxdb/telegraf#installation) - We will use a specific Telegraf config to send data to InfluxDB so that the examples Kapacitor tasks have context. You will need Telegraf >= 0.10.0 since the names of measurements change prior to that version.
 * [Kapacitor](https://github.com/influxdb/kapacitor) - You can get the latest Kapacitor binaries for your OS at the [downloads](https://influxdata.com/downloads/#kapacitor) page.
 * Terminal - Kapacitor's interface is via a CLI and so you will need a basic terminal to issue commands.
 
@@ -32,18 +31,12 @@ For this guide we will follow the classic use case of triggering an alert for hi
 The Process
 -----------
 
-1.
-Install everything we need.
-1.
-Start InfluxDB and send it data from Telegraf.
-2.
-Configure Kapacitor.
-3.
-Start Kapacitor.
-4.
-Define and run a streaming task to trigger cpu alerts.
-5.
-Define and run a batching task to trigger cpu alerts.
+1. Install everything we need.
+2. Start InfluxDB and send it data from Telegraf.
+3. Configure Kapacitor.
+4. Start Kapacitor.
+5. Define and run a streaming task to trigger cpu alerts.
+6. Define and run a batching task to trigger cpu alerts.
 
 Installation
 ------------
@@ -69,20 +62,18 @@ The following is a simple Telegraf configuration file that will send just cpu me
 [agent]
     interval = "1s"
 
-[outputs]
-
 # Configuration to send data to InfluxDB.
-[outputs.influxdb]
+[[outputs.influxdb]]
     # Change this URL to be the address of your InfluxDB server.
-urls = ["http://localhost:8086"]
+	urls = ["http://localhost:8086"]
     database = "kapacitor_example"
     user_agent = "telegraf"
 
 # Collect metrics about cpu usage
-[cpu]
+[[inputs.cpu]]
     percpu = false
     totalcpu = true
-    drop = ["cpu_time"]
+    drop = ["time_*"]
 
 ```
 
@@ -176,10 +167,10 @@ Put the script below into a file called `cpu_alert.tick` in your working directo
 
 ```javascript
 stream
-    // Select just the cpu_usage_idle measurement from our example database.
-.from().measurement('cpu_usage_idle')
+    // Select just the cpu measurement from our example database.
+.from().measurement('cpu')
     .alert()
-        .crit(lambda: "value" <  70)
+        .crit(lambda: "usage_idle" <  70)
         // Whenever we get an alert write it to a file.
 .log('/tmp/alerts.log')
 ```
@@ -236,7 +227,7 @@ cat /tmp/alerts.log
 
 Depending on how busy the server was, maybe not.
 Let's modify the task to be really sensitive so that we know the alerts are working.
-Change the `.crit(lambda: "value" < 70)` line in the TICKscript to `.crit(lambda: "value" < 100)`.
+Change the `.crit(lambda: "usage_idle" < 70)` line in the TICKscript to `.crit(lambda: "usage_idle" < 100)`.
 Now every data point that was received during
 the recording will trigger an alert.
 
@@ -278,10 +269,10 @@ It will then trigger an alert if the values are more than 3 standard deviations 
 
 ```javascript
 stream
-    .from().measurement('cpu_usage_idle')
+    .from().measurement('cpu')
     .alert()
         // Compare values to running mean and standard deviation
-        .crit(lambda: sigma("value") > 3)
+        .crit(lambda: sigma("usage_idle") > 3)
         .log('/tmp/alerts.log')
 ```
 
@@ -325,9 +316,9 @@ The TICKscript for this would look like:
 
 ```javascript
 stream
-    .from().measurement('cpu_usage_idle')
+    .from().measurement('cpu)
     // create a new field called 'used' which inverts the idle cpu.
-.eval(lambda: 100 - "value")
+.eval(lambda: 100 - "usage_idle")
         .as('used')
     .groupBy('service', 'datacenter')
     .window()
@@ -383,14 +374,14 @@ This TICKscript does the same thing as the earlier stream task, but as a batch t
 ```javascript
 batch
     .query('''
-        SELECT mean(value)
-        FROM "kapacitor_example"."default"."cpu_usage_idle"
+        SELECT mean(usage_idle)
+        FROM "kapacitor_example"."default"."cpu"
     ''')
     .period(5m)
     .every(5m)
     .groupBy(time(1m))
     .alert()
-        .crit(lambda: "value" < 70)
+        .crit(lambda: "usage_idle" < 70)
 ```
 
 To define this task do:
