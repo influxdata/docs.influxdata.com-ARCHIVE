@@ -20,7 +20,7 @@ Don't worry about installing anything yet, instructions are found below.
 * [InfluxDB](/docs/v0.9/introduction/installation.html)  - While Kapacitor does not require InfluxDB it is the easiest to setup and so we will use it in this guide.
 You will need InfluxDB >= 0.9.5
 * [Telegraf](https://github.com/influxdb/telegraf#installation) - We will use a specific Telegraf config to send data to InfluxDB so that the examples Kapacitor tasks have context.
-You will need Telegraf >= 0.1.9 since the names of measurements change prior to that version.
+You will need Telegraf >= 0.10 since the names of measurements change prior to that version.
 * [Kapacitor](https://github.com/influxdb/kapacitor) - You can get the latest Kapacitor binaries for your OS at the [downloads](https://influxdata.com/downloads/#kapacitor) page.
 * Terminal - Kapacitor's interface is via a CLI and so you will need a basic terminal to issue commands.
 
@@ -32,18 +32,12 @@ For this guide we will follow the classic use case of triggering an alert for hi
 The Process
 -----------
 
-1.
-Install everything we need.
-1.
-Start InfluxDB and send it data from Telegraf.
-2.
-Configure Kapacitor.
-3.
-Start Kapacitor.
-4.
-Define and run a streaming task to trigger cpu alerts.
-5.
-Define and run a batching task to trigger cpu alerts.
+1. Install everything we need.
+2. Start InfluxDB and send it data from Telegraf.
+3. Configure Kapacitor.
+4. Start Kapacitor.
+5. Define and run a streaming task to trigger cpu alerts.
+6. Define and run a batching task to trigger cpu alerts.
 
 Installation
 ------------
@@ -73,8 +67,7 @@ The following is a simple Telegraf configuration file that will send just cpu me
 
 # Configuration to send data to InfluxDB.
 [outputs.influxdb]
-    # Change this URL to be the address of your InfluxDB server.
-urls = ["http://localhost:8086"]
+    urls = ["http://localhost:8086"]
     database = "kapacitor_example"
     user_agent = "telegraf"
 
@@ -97,7 +90,7 @@ There should be some cpu metrics in a database called `kapacitor_example`.
 Confirm this with this query:
 
 ```sh
-curl -G 'http://localhost:8086/query?db=kapacitor_example' --data-urlencode 'q=SELECT count(value) FROM cpu_usage_idle'
+curl -G 'http://localhost:8086/query?db=kapacitor_example' --data-urlencode 'q=SELECT count(usage_idle) FROM cpu'
 ```
 
 Starting Kapacitor
@@ -124,36 +117,6 @@ These subscriptions tell InfluxDB to send all the data it receives to Kapacitor.
 You should see some basic start up messages and something about listening on UDP port and starting subscriptions.
 At this point InfluxDB is streaming the data it is receiving from Telegraf to Kapacitor.
 
-Let's confirm that kapacitord is receiving data from InfluxDB.
-Kapacitor has an HTTP API with which all communcation happens.
-The binary `kapacitor` exposes the API over the command line.
-Run this command to turn on debug logging:
-
-```sh
-kapacitor level debug
-```
-
-You should see a bunch of lines with numbers scrolling by.
-Something like this:
-
-```
-[edge:src->stream] 2015/10/22 14:02:13 D!
-next point c: 120 e: 120
-```
-
-The numbers indicate the number of points `collected` and `emitted` from the stream.
-As long as the numbers are increasing we are in good shape.
-Turn logging back to info with:
-
-```sh
-kapacitor level info
-```
-
-If Kapacitor is not receiving data yet, check each layer: Telegraf -> InfluxDB -> Kapacitor.
-Telegraf will log errors if it cannot communicate to InfluxDB.
-InfluxDB will log an error about `connection refused` if it cannot send data to Kapacitor.
-Run the query `SHOW SUBSCRIPTIONS` to find the endpoint that InfluxDB is using to send data to Kapacitor.
-
 Trigger Alert from Stream data
 ------------------------------
 
@@ -176,15 +139,17 @@ Put the script below into a file called `cpu_alert.tick` in your working directo
 
 ```javascript
 stream
-    // Select just the cpu_usage_idle measurement from our example database.
-.from().measurement('cpu_usage_idle')
+    // Select just the cpu measurement from our example database.
+    .from().measurement('cpu')
     .alert()
-        .crit(lambda: "value" <  70)
+        .crit(lambda: "usage_idle" <  70)
         // Whenever we get an alert write it to a file.
-.log('/tmp/alerts.log')
+        .log('/tmp/alerts.log')
 ```
 
-Now lets define the `task` and the databases and retention policies it can access:
+Kapacitor has an HTTP API with which all communcation happens.
+The binary `kapacitor` exposes the API over the command line.
+Now use the CLI tool to define the `task` and the databases and retention policies it can access:
 
 ```sh
 kapacitor define \
@@ -195,9 +160,10 @@ kapacitor define \
 ```
 
 That's it, Kapacitor now knows how to trigger our alert.
+
+
 However nothing is going to happen until we enable the task.
 Before we enable the task, we should test it first so we do not spam ourselves with alerts.
-
 Record the current data stream for a bit so we can use it to test our task with:
 
 ```sh
@@ -212,6 +178,25 @@ Now grab that ID that was returned and lets put it in a bash variable for easy u
 ```sh
 rid=cd158f21-02e6-405c-8527-261ae6f26153
 ```
+
+Let's confirm that the recording captured some data. Run
+
+```sh
+kapacitor list recordings $rid
+```
+
+You should see some output like:
+
+```
+ID                                      Type    Size      Created
+cd158f21-02e6-405c-8527-261ae6f26153    stream  2.0 kB    01 Dec 15 19:17 MST
+```
+
+As long as the size is more than a few bytes we know we captured data.
+If Kapacitor is not receiving data yet, check each layer: Telegraf -> InfluxDB -> Kapacitor.
+Telegraf will log errors if it cannot communicate to InfluxDB.
+InfluxDB will log an error about `connection refused` if it cannot send data to Kapacitor.
+Run the query `SHOW SUBSCRIPTIONS` to find the endpoint that InfluxDB is using to send data to Kapacitor.
 
 OK, we have a snapshot of data recorded from the stream, so we can now replay that data to our task.
 The `replay` action replays data only to a specific task.
@@ -249,8 +234,6 @@ kapacitor define -name cpu_alert -tick cpu_alert.tick
 kapacitor replay -id $rid -name cpu_alert -fast
 ```
 
-NOTE: you can also run `kapacitor show cpu_alert` to see what definition Kapacitor has stored for the task.
-
 Now that we know it's working, let's change it back to a more reasonable threshold.
 Are you happy with the threshold?
 If so, let's `enable` the task so it can start processing the live data stream with:
@@ -260,36 +243,73 @@ kapacitor enable cpu_alert
 ```
 
 Now you can see alerts in the log in real time.
-Here is a quick hack to use 100% of one core if you want to get some cpu activity:
+
+To see that the task is receiving data and behaving as expected run the `show` command to get more information about a task:
+
+```sh
+$ kapacitor show cpu_alert
+Name: cpu_alert
+Error:
+Type: stream
+Enabled: true
+Executing: true
+Databases Retention Policies: ["kapacitor_example"."default"]
+TICKscript:
+stream
+    // Select just the cpu measurement from our example database.
+    .from().measurement('cpu')
+    .alert()
+        .crit(lambda: "usage_idle" <  70)
+        // Whenever we get an alert write it to a file.
+        .log('/tmp/alerts.log')
+
+DOT:
+digraph cpu_alert {
+stream0 -> stream1 [label="12"];
+stream1 -> alert2 [label="12"];
+}
+```
+
+The first part has information about the state of the task and any error it may have encounted.
+The `TICKscript` section displays the version of the TICKscript that Kapacitor has stored in its local db.
+
+The last section `DOT` is a [graphviz dot](http://www.graphviz.org) formatted string that contains information about the data processing pipeline defined by the TICKscript.
+The *label*'s indicate the number of data points that have passed along the specified edge of the graph.
+For example in the above the `stream0` node (aka the `stream` var from the TICKscript) has sent 12 points to the `stream1` node.
+The `stream1` node has also sent 12 points on to the `alert2` node.
+Since Telegraf is configured to only send `cpu` data all 12 points match the from/measurement criteria of the `stream1` node and are passed on.
+
+Well now that we can see the task is running with live data, here is a quick hack to use 100% of one core so you can get some cpu activity:
 
 ```sh
 while true; do i=0; done
 ```
 
 Well, that was cool and all, but, just to get a simple threshold alert, there are plenty of ways to do that.
-Why all this
-pipeline TICKscript stuff?
+Why all this pipeline TICKscript stuff?
 Well, it can quickly be extended to become *much* more powerful.
 
 ### Extending Your TICKscripts
 
 The TICKscript below will compute the running mean and compare current values to it.
-It will then trigger an alert if the values are more than 3 standard deviations away from the mean:
+It will then trigger an alert if the values are more than 3 standard deviations away from the mean.
+Replace the `cpu_alert.tick` script with the TICKscript below:
 
 ```javascript
 stream
-    .from().measurement('cpu_usage_idle')
+    .from().measurement('cpu')
     .alert()
         // Compare values to running mean and standard deviation
-        .crit(lambda: sigma("value") > 3)
+        .crit(lambda: sigma("usage_idle") > 3)
         .log('/tmp/alerts.log')
 ```
 
 Just like that, we have a dynamic threshold, and, if cpu usage drops in the day or spikes at night, we will get an alert!
 Let's try it out.
-Use `reload` in order to get a running task to update based on a new definition:
+Use `define` and `reload` in order to get a running task to update based on a new definition:
 
 ```sh
+kapacitor define -name cpu_alert -tick cpu_alert.tick
 kapacitor reload cpu_alert
 ```
 
@@ -325,9 +345,9 @@ The TICKscript for this would look like:
 
 ```javascript
 stream
-    .from().measurement('cpu_usage_idle')
+    .from().measurement('cpu')
     // create a new field called 'used' which inverts the idle cpu.
-.eval(lambda: 100 - "value")
+.eval(lambda: 100 - "usage_idle")
         .as('used')
     .groupBy('service', 'datacenter')
     .window()
@@ -383,12 +403,12 @@ This TICKscript does the same thing as the earlier stream task, but as a batch t
 ```javascript
 batch
     .query('''
-        SELECT mean(value)
-        FROM "kapacitor_example"."default"."cpu_usage_idle"
+        SELECT mean(usage_idle)
+        FROM "kapacitor_example"."default"."cpu"
     ''')
-    .period(5m)
-    .every(5m)
-    .groupBy(time(1m))
+        .period(5m)
+        .every(5m)
+        .groupBy(time(1m))
     .alert()
         .crit(lambda: "value" < 70)
 ```
