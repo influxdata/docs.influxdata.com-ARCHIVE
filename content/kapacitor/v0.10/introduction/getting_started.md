@@ -115,35 +115,12 @@ These subscriptions tell InfluxDB to send all the data it receives to Kapacitor.
 You should see some basic start up messages and something about listening on UDP port and starting subscriptions.
 At this point InfluxDB is streaming the data it is receiving from Telegraf to Kapacitor.
 
-Let's confirm that kapacitord is receiving data from InfluxDB.
-Kapacitor has an HTTP API with which all communcation happens.
-The binary `kapacitor` exposes the API over the command line.
-Run this command to turn on debug logging:
-
-```sh
-kapacitor level debug
-```
-
-You should see a bunch of lines with numbers scrolling by.
-Something like this:
-
-```
-[edge:src->stream] 2015/10/22 14:02:13 D!
-next point c: 120 e: 120
-```
-
-The numbers indicate the number of points `collected` and `emitted` from the stream.
-As long as the numbers are increasing we are in good shape.
-Turn logging back to info with:
-
-```sh
-kapacitor level info
-```
-
-If Kapacitor is not receiving data yet, check each layer: Telegraf -> InfluxDB -> Kapacitor.
-Telegraf will log errors if it cannot communicate to InfluxDB.
-InfluxDB will log an error about `connection refused` if it cannot send data to Kapacitor.
-Run the query `SHOW SUBSCRIPTIONS` to find the endpoint that InfluxDB is using to send data to Kapacitor.
+If Kapacitor is not receiving data yet, be sure to check each layer of
+the stack: Telegraf -> InfluxDB -> Kapacitor.  Telegraf will log
+errors if it cannot communicate to InfluxDB.  InfluxDB will log an
+error about `connection refused` if it cannot send data to Kapacitor.
+Run the query `SHOW SUBSCRIPTIONS` to find the endpoint that InfluxDB
+is using to send data to Kapacitor.
 
 Trigger Alert from Stream data
 ------------------------------
