@@ -88,7 +88,7 @@ There should be some cpu metrics in a database called `kapacitor_example`.
 Confirm this with this query:
 
 ```sh
-curl -G 'http://localhost:8086/query?db=kapacitor_example' --data-urlencode 'q=SELECT count(value) FROM cpu_usage_idle'
+curl -G 'http://localhost:8086/query?db=kapacitor_example' --data-urlencode 'q=SELECT count(usage_idle) FROM cpu
 ```
 
 Starting Kapacitor
