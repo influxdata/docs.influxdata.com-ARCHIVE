@@ -16,8 +16,8 @@ Use InfluxQL functions to aggregate, select, and transform data.
 | [INTEGRAL()](/influxdb/v0.10/query_language/functions/#integral)  | [LAST()](/influxdb/v0.10/query_language/functions/#last)  | [DIFFERENCE()](/influxdb/v0.10/query_language/functions/#difference)  
 | [MEAN()](/influxdb/v0.10/query_language/functions/#mean) | [MAX()](/influxdb/v0.10/query_language/functions/#max)  | [FLOOR()](/influxdb/v0.10/query_language/functions/#floor)
 | [MEDIAN()](/influxdb/v0.10/query_language/functions/#median)  | [MIN()](/influxdb/v0.10/query_language/functions/#min)  | [HISTOGRAM()](/influxdb/v0.10/query_language/functions/#histogram)  
-| [SUM()](/influxdb/v0.10/query_language/functions/#sum) | [PERCENTILE()](/influxdb/v0.10/query_language/functions/#percentile)  | [NON_NEGATIVE_DERIVATIVE()](/influxdb/v0.10/query_language/functions/#non-negative-derivative)
-|   | [TOP()](/influxdb/v0.10/query_language/functions/#top) | [STDDEV()](/influxdb/v0.10/query_language/functions/#stddev)
+| [SPREAD()](/influxdb/v0.10/query_language/functions/#spread) | [PERCENTILE()](/influxdb/v0.10/query_language/functions/#percentile)  | [NON_NEGATIVE_DERIVATIVE()](/influxdb/v0.10/query_language/functions/#non-negative-derivative)
+| [SUM()](/influxdb/v0.10/query_language/functions/#sum)  | [TOP()](/influxdb/v0.10/query_language/functions/#top) | [STDDEV()](/influxdb/v0.10/query_language/functions/#stddev)
 
 Useful InfluxQL for functions:  
 
@@ -289,6 +289,50 @@ time			               median
 See GitHub Issue [#4680](https://github.com/influxdb/influxdb/issues/4680) for more information.
 </dt>
 
+## SPREAD()
+Returns the difference between the minimum and maximum values of a [field](/influxdb/v0.10/concepts/glossary/#field).
+The field must be of type int64 or float64.
+```sql
+SELECT SPREAD(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+```
+
+Examples:
+
+* Calculate the difference between the minimum and maximum values across all values in the `water_level` field:
+
+```sql
+> SELECT SPREAD(water_level) FROM h2o_feet
+```
+
+CLI response:
+```
+name: h2o_feet
+--------------
+time			                spread
+1970-01-01T00:00:00Z	  10.574
+```
+
+* Calculate the difference between the minimum and maximum values in the field `water_level` for a specific tag and time range and at 30 minute intervals:
+
+```sql
+> SELECT SPREAD(water_level) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-09-18T17:00:00Z' AND time < '2015-09-18T20:30:00Z' GROUP BY time(30m)
+```
+
+CLI response:
+```
+name: h2o_feet
+--------------
+time			                spread
+2015-09-18T17:00:00Z	  0.16699999999999982
+2015-09-18T17:30:00Z	  0.5469999999999997
+2015-09-18T18:00:00Z	  0.47499999999999964
+2015-09-18T18:30:00Z	  0.2560000000000002
+2015-09-18T19:00:00Z	  0.23899999999999988
+2015-09-18T19:30:00Z	  0.1609999999999996
+2015-09-18T20:00:00Z	  0.16800000000000015
+```
+
+
 ## SUM()
 Returns the sum of the all values in a single [field](/influxdb/v0.10/concepts/glossary/#field).
 The field must be of type int64 or float64.
@@ -298,7 +342,7 @@ SELECT SUM(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff
 
 Examples:
 
-* Calculate the sum of the values in the `water level` field:
+* Calculate the sum of the values in the `water_level` field:
 
 ```sql
 > SELECT SUM(water_level) FROM h2o_feet
@@ -312,7 +356,7 @@ time			               sum
 1970-01-01T00:00:00Z	 67777.66900000001
 ```
 
-* Calculate the sum of the `water level` field grouped by five-day intervals:
+* Calculate the sum of the `water_level` field grouped by five-day intervals:
 
 ```sql
 > SELECT SUM(water_level) FROM h2o_feet WHERE time >= '2015-08-18T00:00:00Z' AND time < '2015-09-18T17:00:00Z' GROUP BY time(5d)
