@@ -222,7 +222,7 @@ If not present the default retention policy is used
 If not present timestamps are assumed to be in nanoseconds
 - `consistency=[one,quorum,all,any]` - set the number of nodes that must confirm the write.
 If the requirement is not met the return value will be `partial write` if some points in the batch fail, or `write failure` if all points in the batch fail.
-- `one` - the data must be written to disk by at least 1 valid node
+ - `one` - the data must be written to disk by at least 1 valid node
  - `quorum` - the data must be written to disk by (N/2 + 1) valid nodes (N is the replication factor for the target retention policy)
  - `all` - the data must be written to disk by all valid nodes
  - `any` - a write is confirmed if hinted-handoff is successful, even if all target nodes report a write failure
