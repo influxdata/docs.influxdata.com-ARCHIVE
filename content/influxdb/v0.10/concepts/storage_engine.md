@@ -7,10 +7,8 @@ menu:
     parent: concepts
 ---
 
->TODO: Decide on state of this file
-
 The 0.9 line of InfluxDB used BoltDB as the underlying storage engine.
-This writeup is about the new storage engine that will be released in 0.10.0, the Time Structured Merge Tree.
+This writeup is about the new storage engine that was released in 0.10.0, the Time Structured Merge Tree.
 
 <a href="https://influxdata.com/blog/new-storage-engine-time-structured-merge-tree/" target="_">See the blog post announcement about the storage engine here</a>.
 
