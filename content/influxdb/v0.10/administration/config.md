@@ -36,7 +36,7 @@ See the [installation documentation](/influxdb/v0.10/introduction/installation/#
 
 ## Configuration Sections
 
-* [[reporting]](/influxdb/v0.10/administration/config/#reporting)
+* [Global Options](/influxdb/v0.10/administration/config/#global-options)
 * [[meta]](/influxdb/v0.10/administration/config/#meta)
 * [[data]](/influxdb/v0.10/administration/config/#data)
 * [[hinted-handoff]](/influxdb/v0.10/administration/config/#hinted-handoff)
@@ -62,17 +62,24 @@ All configuration options listed below are set to their default value.
 
 >**Note:** This page documents configuration options for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/master/etc/config.sample.toml) will always be slightly ahead of what is documented here.
 
-## [reporting]
-
-InfluxData, the company, relies on reported data from running nodes primarily to track the adoption rates of different InfluxDB versions.
-This data helps InfluxData support the continuing development of InfluxDB.
-InfluxData does not request, track, or store the IP addresses of reporting servers.
+## Global Options
 
 ### reporting-disabled = false
 
-The reporting disabled option toggles the reporting of anonymous data every 24 hours to `m.influxdb.com`.
-Each report includes a unique, randomly-generated cluster identifier (an 8-byte Raft ID), OS, architecture, InfluxDB version, and the number of [databases](/influxdb/v0.10/concepts/glossary/#database), [measurements](/influxdb/v0.10/concepts/glossary/#measurement), and unique [series](/influxdb/v0.10/concepts/glossary/#series).
-Setting this option to `true` will disable reporting.
+InfluxData, the company, relies on reported data from running nodes
+primarily to track the adoption rates of different InfluxDB versions.
+This data helps InfluxData support the continuing development of
+InfluxDB.  InfluxData does not request, track, or store the IP
+addresses of reporting servers.
+
+The `reporting-disabled` option toggles
+the reporting of anonymous data every 24 hours to `m.influxdb.com`.
+Each report includes a unique, randomly-generated cluster identifier
+(an 8-byte Raft ID), OS, architecture, InfluxDB version, and the
+number of [databases](/influxdb/v0.10/concepts/glossary/#database),
+[measurements](/influxdb/v0.10/concepts/glossary/#measurement), and
+unique [series](/influxdb/v0.10/concepts/glossary/#series).  Setting
+this option to `true` will disable reporting.
 
 ## [meta]
 
