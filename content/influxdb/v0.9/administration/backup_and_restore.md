@@ -8,7 +8,10 @@ menu:
     parent: administration
 ---
 
-<dt> Backup and Restore in InfluxDB 0.9 are non-functional for a significant subset of users. The underlying storage engine in InfluxDB 0.9 does not lend itself to hot backups. The new storage engine released with InfluxDB 0.10 supports hot incremental backups by design. If reliable hot or incremental backups are an important consideration for you, please upgrade to InfluxDB 0.10 as soon as feasible.
+<dt> Backup and Restore in InfluxDB 0.9 are non-functional for a significant subset of users. 
+The underlying storage engine in InfluxDB 0.9 does not lend itself to hot backups. 
+The new storage engine released with InfluxDB 0.10 supports hot incremental backups by design. 
+If reliable hot or incremental backups are an important consideration for you, please upgrade to InfluxDB 0.10 as soon as feasible.
 
 ## File-level Workaround
 
@@ -20,7 +23,10 @@ If the backup feature does not work on your instance, it is possible to to a fil
 2. Back up the `/data` and `/meta` directories, as well as the configuration file
 3. Restart the InfluxDB process
 
-> Note: It is possible to get a working backup without shutting down the process, but some portion of file-level backups against a running database will be non-viable for restore due to race conditions and locking issues during the backup. In our experience at least two out of three backups are viable for servers experiencing ~50k points per second write load. (Query load is largely irrelevant to the race conditions.) Even viable backups may have some data loss for the period immediately preceeding and during the backup process.
+> Note: It is possible to get a working backup without shutting down the process, but some portion of file-level backups against a running database will be non-viable for restore due to race conditions and locking issues during the backup. 
+In our experience at least two out of three backups are viable for servers experiencing ~50k points per second write load. 
+(Query load is largely irrelevant to the race conditions.) 
+Even viable backups may have some data loss for the period immediately preceeding and during the backup process.
 
 Here is an example set of commands:
 
