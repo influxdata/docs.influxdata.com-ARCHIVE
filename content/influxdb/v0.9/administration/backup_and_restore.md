@@ -36,6 +36,8 @@ tar -cvf influxdb.backup.2016.01.02.tar /var/opt/influxdb/meta /var/opt/influxdb
 service influxd start
 ```
 
+> Note: We recommend using `tar` without compression to reduce process downtime during backups, or reduce the risk of race conditions if the daemon is still running.
+
 ### Restore
 
 1. Shut down the InfluxDB process
