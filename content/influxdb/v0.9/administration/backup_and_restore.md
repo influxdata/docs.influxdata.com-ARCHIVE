@@ -7,7 +7,44 @@ menu:
     parent: administration
 ---
 
-Starting with v0.9.0, InfluxDB has the ability to snapshot a single data node at a point-in-time and restore it.
+<dt> Backup and Restore in InfluxDB 0.9 are non-functional for a significant subset of users. 
+The underlying storage engine in InfluxDB 0.9 does not lend itself to hot backups. 
+The new storage engine released with InfluxDB 0.10 supports hot incremental backups by design. 
+If reliable hot or incremental backups are an important consideration for you, please upgrade to InfluxDB 0.10 as soon as feasible. </dt>
+
+## File-level Workaround
+
+If the backup feature does not work on your instance, it is possible to do a file-system backup of InfluxDB. 
+
+### Backup
+
+1. Shut down the InfluxDB process
+2. Make a copy of the `/data` and `/meta` directories, as well as the configuration file
+3. Restart the InfluxDB process
+
+> Note: It is possible to get a working backup without shutting down the process, but some portion of file-level backups against a running database will be non-viable for restore due to race conditions and locking issues during the backup. 
+In our experience at least two out of three backups are viable for servers experiencing ~50k points per second write load. 
+(Query load is largely irrelevant to the race conditions.) 
+Even viable backups may have some data loss for the period immediately preceeding and during the backup process.
+
+Here is an example set of commands:
+
+```sh
+service influxd stop 
+tar -cvf influxdb.backup.2016.01.02.tar /var/opt/influxdb/meta /var/opt/influxdb/data /etc/influxdb/influxdb.conf
+...
+service influxd start
+```
+
+> Note: We recommend using `tar` without compression to reduce process downtime during backups, or reduce the risk of race conditions if the daemon is still running.
+
+### Restore
+
+1. Shut down the InfluxDB process
+2. Remove the current contents of the `/data` and `/meta` directories
+3. Restore the directory contents from the backup
+4. Restart the InfluxDB process
+
 
 ## Usage
 
