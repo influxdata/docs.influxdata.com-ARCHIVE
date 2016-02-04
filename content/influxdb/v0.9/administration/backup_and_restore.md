@@ -10,16 +10,16 @@ menu:
 <dt> Backup and Restore in InfluxDB 0.9 are non-functional for a significant subset of users. 
 The underlying storage engine in InfluxDB 0.9 does not lend itself to hot backups. 
 The new storage engine released with InfluxDB 0.10 supports hot incremental backups by design. 
-If reliable hot or incremental backups are an important consideration for you, please upgrade to InfluxDB 0.10 as soon as feasible.
+If reliable hot or incremental backups are an important consideration for you, please upgrade to InfluxDB 0.10 as soon as feasible. </dt>
 
 ## File-level Workaround
 
-If the backup feature does not work on your instance, it is possible to to a file-system backup of InfluxDB. 
+If the backup feature does not work on your instance, it is possible to do a file-system backup of InfluxDB. 
 
 ### Backup
 
 1. Shut down the InfluxDB process
-2. Back up the `/data` and `/meta` directories, as well as the configuration file
+2. Make a copy of the `/data` and `/meta` directories, as well as the configuration file
 3. Restart the InfluxDB process
 
 > Note: It is possible to get a working backup without shutting down the process, but some portion of file-level backups against a running database will be non-viable for restore due to race conditions and locking issues during the backup. 
