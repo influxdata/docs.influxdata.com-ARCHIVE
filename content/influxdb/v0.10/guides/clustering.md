@@ -11,7 +11,7 @@ menu:
 
 InfluxDB supports arbitrarily sized clusters and any replication
 factor from 1 to the number of nodes in the cluster. There are two
-types of nodes in an InfluxDB cluser:
+types of nodes in an InfluxDB cluster:
 
 - [Meta nodes](/influxdb/v0.10/concepts/glossary/#meta-node) coordinate
 activity in the cluster.  Meta nodes do not require significant system
