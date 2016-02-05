@@ -140,11 +140,18 @@ a:hover {
 	list-style-position: outside;
 	padding-left: 0.5em;
 }
-.page--body ul li {
-	list-style-type: disc;
+.page--body ul > li {
+	list-style-type: disc !important;
 }
-.page--body ol li {
+.page--body ol li,
+.page--body ul ol li {
 	list-style-type: upper-roman;
+}
+.page--body ol ol li {
+	list-style-type: lower-alpha;
+}
+.page--body ol ol ol li {
+	list-style-type: decimal;
 }
 .page--body li:last-child {
 	margin-bottom: 0;
@@ -158,6 +165,11 @@ a:hover {
 	margin-left: 0;
 	margin-bottom: 0;
 	margin-top: 1.25em;
+}
+/* removing left margin on nested p */
+.page--body ul p,
+.page--body ol p {
+	margin-left: 0;
 }
 
 /*
