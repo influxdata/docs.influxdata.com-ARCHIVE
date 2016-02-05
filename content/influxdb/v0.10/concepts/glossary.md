@@ -105,9 +105,9 @@ Measurements are strings.
 Related entries: [field](/influxdb/v0.10/concepts/glossary/#field), [series](/influxdb/v0.10/concepts/glossary/#series)
 
 ## meta node
-A node that participates in the raf consensus group. A meta node may also be a data node, but it is not required. A cluster should have at least three meta nodes, but it can have more. There should be an odd number of meta nodes in a cluster.
+A node that participates in the raft consensus group. A meta node may also be a data node, but it is not required. A cluster should have at least three meta nodes, but it can have more. There should be an odd number of meta nodes in a cluster.
 
-Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [meta node](/influxdb/v0.10/concepts/glossary/#data-node), [node](/influxdb/v0.10/concepts/glossary/#node)
+Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [data node](/influxdb/v0.10/concepts/glossary/#data-node), [node](/influxdb/v0.10/concepts/glossary/#node)
 
 ## node
 An independent `influxd` process.
