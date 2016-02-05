@@ -7,6 +7,8 @@ menu:
     parent: guides
 ---
 
+> **NOTE:** Clustering is still considered _experimental_, and there are still quite a few rough edges. If you encounter any issues, please [report them](https://github.com/influxdata/influxdb/issues/new).
+
 InfluxDB supports arbitrarily sized clusters and any replication
 factor from 1 to the number of nodes in the cluster. There are two
 types of nodes in an InfluxDB cluser:
