@@ -90,10 +90,14 @@ the incoming data until it has a task that wants it.
 
 What does a leaderboard need to do?
 
-1. Get the most recent score per player per game.
-2. Calculate the top X player scores per game.
-3. Publish the results.
-4. Store the results.
+1.
+Get the most recent score per player per game.
+2.
+Calculate the top X player scores per game.
+3.
+Publish the results.
+4.
+Store the results.
 
 To complete step one we need to buffer the incoming stream and return the most recent score update per player per game.
 Our [TICKscript](/kapacitor/v0.2/tick/) will look like this:
@@ -102,16 +106,16 @@ Our [TICKscript](/kapacitor/v0.2/tick/) will look like this:
 var topPlayerScores = stream
     .from().measurement('scores')
     // Get the most recent score for each player per game.
-    // Not likely that a player is playing two games but just in case.
-    .groupBy('game', 'player')
+// Not likely that a player is playing two games but just in case.
+.groupBy('game', 'player')
     .window()
         // keep a buffer of the last 11s of scores
         // just in case a player score hasn't updated in a while
         .period(11s)
         // Emit the current score per player every second.
-        .every(1s)
+.every(1s)
         // Align the window boundaries to be on the second.
-        .align()
+.align()
     .mapReduce(influxql.last('value'))
 ```
 
@@ -119,7 +123,8 @@ Place this script in a file called `top_scores.tick`.
 
 Now our `topPlayerScores` variable contains each player's most recent score.
 Next to calculate the top scores per game we just need to group by game and run another map reduce job.
-Let's keep the top 15 scores per game. Add these lines to the `top_scores.tick` file.
+Let's keep the top 15 scores per game.
+Add these lines to the `top_scores.tick` file.
 
 ```javascript
 // Calculate the top 15 scores per game
@@ -133,7 +138,6 @@ All we need to be able to build our leaderboard.
 Kapacitor can expose the scores over HTTP via the [HTTPOutNode](/kapacitor/v0.2/tick/http_out_node/).
 We will call our task `top_scores`; with the following addition the most recent scores will be available at
 `http://localhost:9092/api/v1/top_scores/top_scores`.
-
 
 ```javascript
 // Expose top scores over the HTTP API at the 'top_scores' endpoint.
@@ -173,11 +177,11 @@ var min = topScoresSampled
 max.join(min)
         .as('max', 'min')
     // Calculate the difference between the max and min scores.
-    // Rename the max and min fields to more friendly names 'topFirst', 'topLast'.
-    .eval(lambda: "max.max" - "min.min", lambda: "max.max", lambda: "min.min")
+// Rename the max and min fields to more friendly names 'topFirst', 'topLast'.
+.eval(lambda: "max.max" - "min.min", lambda: "max.max", lambda: "min.min")
         .as('gap', 'topFirst', 'topLast')
     // Store the fields: gap, topFirst and topLast in InfluxDB.
-    .influxDBOut()
+.influxDBOut()
         .database('game')
         .measurement('top_scores_gap')
 ```
@@ -195,16 +199,16 @@ Here is the complete task TICKscript if you don't want to copy paste as much :)
 var topPlayerScores = stream
     .from().measurement('scores')
     // Get the most recent score for each player per game.
-    // Not likely that a player is playing two games but just in case.
-    .groupBy('game', 'player')
+// Not likely that a player is playing two games but just in case.
+.groupBy('game', 'player')
     .window()
         // keep a buffer of the last 11s of scores
         // just in case a player score hasn't updated in a while
         .period(11s)
         // Emit the current score per player every second.
-        .every(1s)
+.every(1s)
         // Align the window boundaries to be on the second.
-        .align()
+.align()
     .mapReduce(influxql.last('value'))
 
 // Calculate the top 15 scores per game
@@ -240,14 +244,13 @@ var min = topScoresSampled
 max.join(min)
         .as('max', 'min')
     // calculate the difference between the max and min scores.
-    .eval(lambda: "max.max" - "min.min", lambda: "max.max", lambda: "min.min")
+.eval(lambda: "max.max" - "min.min", lambda: "max.max", lambda: "min.min")
         .as('gap', 'topFirst', 'topLast')
     // store the fields: gap, topFirst, and topLast in InfluxDB.
-    .influxDBOut()
+.influxDBOut()
         .database('game')
         .measurement('top_scores_gap')
 ```
-
 
 Define and enable our task to see it in action:
 
@@ -277,6 +280,7 @@ curl \
     --data-urlencode 'q=SELECT * FROM top_scores_gap WHERE time > now() - 5m GROUP BY game'
 ```
 
-Great! the hard work is done.
+Great!
+the hard work is done.
 All that is left is to configure the game server to send score updates to Kapacitor and update the spectator dashboard to pull scores from Kapacitor.
 

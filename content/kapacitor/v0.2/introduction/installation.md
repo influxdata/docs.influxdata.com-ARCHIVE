@@ -19,7 +19,6 @@ go get github.com/influxdb/kapacitor/cmd/kapacitor
 go get github.com/influxdb/kapacitor/cmd/kapacitord
 ```
 
-
 ### Configuration
 
 An example configuration file can be found [here](https://github.com/influxdb/kapacitor/blob/master/etc/kapacitor/kapacitor.conf)

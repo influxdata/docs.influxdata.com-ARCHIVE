@@ -9,7 +9,9 @@ menu:
 ---
 
 ## Getting Started with Telegraf
-Telegraf is an agent written in Go for collecting metrics and writing them into InfluxDB or other possible outputs. This guide will get you up and running with Telegraf. It walks you through the download, installation, and configuration processes, and it shows how to use Telegraf to get data into InfluxDB.
+Telegraf is an agent written in Go for collecting metrics and writing them into InfluxDB or other possible outputs.
+This guide will get you up and running with Telegraf.
+It walks you through the download, installation, and configuration processes, and it shows how to use Telegraf to get data into InfluxDB.
 
 ## Download and Install Telegraf
 Follow the instructions in the Telegraf section on the [Downloads page](https://influxdata.com/downloads/).
@@ -22,9 +24,13 @@ Follow the instructions in the Telegraf section on the [Downloads page](https://
 * Standalone Binary: see the next section for how to create a configuration file
 
 ### Creating and Editing the Configuration File
-Before starting the Telegraf server you need to edit and/or create an initial configuration that specifies your desired [plugins](/telegraf/v0.2/plugins/) (where the metrics come from) and [outputs](/telegraf/v0.2/outputs/) (where the metrics go). There are [several ways](../configuration/) to create and edit the configuration file. Here, we'll generate a configuration file and simultaneously specify the desired plugins with the `-filter` flag and the desired output with the `-outputfilter` flag. 
+Before starting the Telegraf server you need to edit and/or create an initial configuration that specifies your desired [plugins](/telegraf/v0.2/plugins/) (where the metrics come from) and [outputs](/telegraf/v0.2/outputs/) (where the metrics go).
+There are [several ways](../configuration/) to create and edit the configuration file.
+Here, we'll generate a configuration file and simultaneously specify the desired plugins with the `-filter` flag and the desired output with the `-outputfilter` flag.
 
-In the example below, we create a configuration file called `telegraf.conf` with two plugins: one that reads metrics about the system's cpu usage (`cpu`) and one that reads metrics about the system's memory usage (`mem`). `telegraf.conf` specifies InfluxDB as the desired ouput.
+
+In the example below, we create a configuration file called `telegraf.conf` with two plugins: one that reads metrics about the system's cpu usage (`cpu`) and one that reads metrics about the system's memory usage (`mem`).
+`telegraf.conf` specifies InfluxDB as the desired ouput.
 
 ```sh
 telegraf -sample-config -filter cpu:mem -outputfilter influxdb > telegraf.conf
@@ -50,7 +56,8 @@ systemctl start telegraf
 ## Results
 Once Telegraf is up and running it'll start collecting data and writing them to the desired output.
 
-Returning to our sample configuration, we show what the `cpu` and `mem` data look like in InfluxDB below. Note that we used the default plugin and output configuration settings to get these data.
+Returning to our sample configuration, we show what the `cpu` and `mem` data look like in InfluxDB below.
+Note that we used the default plugin and output configuration settings to get these data.
 
 * List all [measurements](https://docs.influxdata.com/influxdb/v0.9/concepts/glossary/#measurement) in the `telegraf` [database](https://docs.influxdata.com/influxdb/v0.9/concepts/glossary/#database):
 
@@ -95,8 +102,7 @@ time			                value
 2015-12-08T21:40:00Z	  96.84881830686507
 ```
 
-
 Notice that the timestamps occur at rounded ten second intervals (that is, `:00`, `:10`, `:20`, and so on) - this is a configurable setting.
 
-
-That's it! You now have the foundation for using Telegraf to collect metrics and write them to your output of choice.  
+That's it!
+You now have the foundation for using Telegraf to collect metrics and write them to your output of choice.

@@ -12,7 +12,6 @@ menu:
 Often times we have set of series where each series is counting a particular event.
 Using Kapacitor we can join those series and calculate a combined value.
 
-
 Let's say we have two measurements:
 
 * `errors` -- the number of page views that had an error.
@@ -59,8 +58,10 @@ errors.join(views)
 ```
 
 The data is joined by time, meaning that as pairs of batches arrive from each source
-they will be combined into a single batch. As a result the fields from each source need to
-be renamed to properly namespace the fields. This is done via the `.as('errors', 'views')` line.
+they will be combined into a single batch.
+As a result the fields from each source need to
+be renamed to properly namespace the fields.
+This is done via the `.as('errors', 'views')` line.
 In this example each measurement has only one field named `sum`, the joined fields will be called
 `errors.sum` and `views.sum` respectively.
 
@@ -75,9 +76,7 @@ Using the new names for the fields we can write this expression to calculate our
 
 ```
 
-
  Finally we want to store this data back into InfluxDB.
-
 
 ```javascript
         .influxDBOut()
@@ -87,7 +86,6 @@ Using the new names for the fields we can write this expression to calculate our
 ```
 
 Here is the complete TICKscript for the batch task:
-
 
 ```javascript
 // Get errors batch data
@@ -141,7 +139,6 @@ time stored in the recording when processing the data instead of adjusting to th
 ```sh
 kapacitor replay -name error_percent -id RECORDING_ID -fast -rec-time
 ```
-
 
 If the data set is too large to keep in one recording you can define a specific range of time to record
 and then replay each range individually.

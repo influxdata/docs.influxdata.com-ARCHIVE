@@ -26,18 +26,22 @@ A pipeline is formally a directed acyclic graph (DAG).
 The basic idea is that each node in the graph represents some form of processing on the data and each edge passes the data between nodes.
 In order to add a new type of node there are two components that need to be written:
 
-1. The API (TICKscript) for creating and configuring the node.
-2. The implementation of the data processing step.
-    In this case, the implementation of outputting the data to HouseDB.
+1.
+The API (TICKscript) for creating and configuring the node.
+2.
+The implementation of the data processing step.
+In this case, the implementation of outputting the data to HouseDB.
 
 The code mirrors these requirements with two Go packages.
 
-1. `pipeline` -- this package defines what types of nodes are available and how they are configured.
-2. `kapacitor` -- this package provides implementations of each of the nodes defined in the `pipeline` package.
+1.
+`pipeline` -- this package defines what types of nodes are available and how they are configured.
+2.
+`kapacitor` -- this package provides implementations of each of the nodes defined in the `pipeline` package.
 
-The reason for splitting out defining the node from the implementation of the node is to make the API (i.e. a TICKscript)
+The reason for splitting out defining the node from the implementation of the node is to make the API (i.e.
+a TICKscript)
 clean and easy to follow.
-
 
 ### Updating TICKscript
 
@@ -68,7 +72,7 @@ package pipeline
 // HouseDB instance.
 type HouseDBOutNode struct {
     // Include the generic node implementation.
-    node
+node
 }
 ```
 
@@ -85,7 +89,7 @@ package pipeline
 // HouseDB instance.
 type HouseDBOutNode struct {
     // Include the generic node implementation.
-    node
+node
 
     // URL for connecting to HouseDB
     Url string
@@ -118,8 +122,7 @@ func newHouseDBOutNode(wants EdgeType) *HouseDBOutNode {
 }
 ```
 
-By explicitly stating what types of edges the node `wants` and `provides` Kapacitor will do the necessary
-type checking so that users cannot define invalid pipelines.
+By explicitly stating what types of edges the node `wants` and `provides` Kapacitor will do the necessary type checking so that users cannot define invalid pipelines.
 
 Finally we need to add a new `chaining method` so that users can connect HouseDBOutNodes to their existing pipelines.
 A `chaining method` is one that creates a new node and adds it as a child of the calling node, in effect the method chains nodes together.
@@ -136,7 +139,8 @@ func (c *chainnode) HouseDBOut() *HouseDBOutNode {
 }
 ```
 
-That should do it. In review we now have defined all the necessary pieces so that TICKscripts can define HouseDBOutNodes.
+That should do it.
+In review we now have defined all the necessary pieces so that TICKscripts can define HouseDBOutNodes.
 
 ```javascript
     node
@@ -144,7 +148,6 @@ That should do it. In review we now have defined all the necessary pieces so tha
             .url('house://housedb.example.com') // added as a field to the HouseDBOutNode
             .database('metrics') // added as a field to the HouseDBOutNode
 ```
-
 
 ### Implementing the HouseDB output
 
@@ -192,7 +195,7 @@ func newHouseDBOutNode(et *ExecutingTask, n *pipeline.HouseDBOutNode) (*HouseDBO
     }
     // Set the function to be called when running the node
     // more on this in a bit.
-    h.node.runF = h.runOut
+h.node.runF = h.runOut
     return h
 }
 ```
@@ -207,19 +210,17 @@ Add a new case like so:
 func (et *ExecutingTask) createNode(p pipeline.Node) (Node, error) {
     switch t := p.(type) {
     ...
-    case *pipeline.HouseDBOutNode:
+case *pipeline.HouseDBOutNode:
         return newHouseDBOutNode(et, t)
     ...
 }
 ```
-
 
 Now that we have associated our two types let's get back to implementing the output code.
 Notice the line `h.node.runF = h.runOut` in the `newHouseDBOutNode` function.
 This line sets the method of the `kapacitor.HouseDBOutNode` that will be called when the node should start executing.
 We need to define the `runOut` method now.
 In the file `housedb_out.go` add this method:
-
 
 ```go
 func (h *HouseDBOutNode) runOut() error {
@@ -284,7 +285,7 @@ func (h *HouseDBOutNode) runOut() error {
         // Read stream data and send to HouseDB
         for p, ok := h.ins[0].NextPoint(); ok; p, ok = h.ins[0].NextPoint() {
             // Turn the point into a batch with just one point.
-            batch := models.Batch{
+batch := models.Batch{
                 Name:   p.Name,
                 Group:  p.Group,
                 Tags:   p.Tags,
@@ -309,24 +310,21 @@ func (h *HouseDBOutNode) runOut() error {
     return nil
 }
 
-
 // Write a batch of data to HouseDB
 func (h *HouseDBOutNode) write(batch models.Batch) error {
     // Implement writing to HouseDB here...
-    return nil
+return nil
 }
 ```
 
 Once you have implemented the `write` method you are done, now as the data arrives
 it will be written to the specified HouseDB instance.
 
-
 ### Summary
 
 In summary we first wrote a node in the `pipeline` package (filepath: `pipeline/housedb_out.go`) that defines how the TICKscript API will work for sending data to a HouseDB instance.
 Then we wrote the implementation of that node in the `kapacitor` package (filepath: `housedb_out.go`).
 We also had to update two existing files `pipeline/node.go` to add a new chaining method, and `task.go` to associate the two types.
-
 
 Here are the complete file contents:
 
@@ -339,7 +337,7 @@ package pipeline
 // HouseDB instance.
 type HouseDBOutNode struct {
     // Include the generic node implementation.
-    node
+node
 
     // URL for connecting to HouseDB
     Url string
@@ -394,7 +392,7 @@ func (h *HouseDBOutNode) runOut() error {
         // Read stream data and send to HouseDB
         for p, ok := h.ins[0].NextPoint(); ok; p, ok = h.ins[0].NextPoint() {
             // Turn the point into a batch with just one point.
-            batch := models.Batch{
+batch := models.Batch{
                 Name:   p.Name,
                 Group:  p.Group,
                 Tags:   p.Tags,
@@ -419,14 +417,12 @@ func (h *HouseDBOutNode) runOut() error {
     return nil
 }
 
-
 // Write a batch of data to HouseDB
 func (h *HouseDBOutNode) write(batch models.Batch) error {
     // Implement writing to HouseDB here...
-    return nil
+return nil
 }
 ```
-
 
 pipeline/node.go (just the new chaining method is shown):
 
@@ -446,12 +442,11 @@ task.go (just the new case is shown):
 func (et *ExecutingTask) createNode(p pipeline.Node) (Node, error) {
     switch t := p.(type) {
     ...
-    case *pipeline.HouseDBOutNode:
+case *pipeline.HouseDBOutNode:
         return newHouseDBOutNode(et, t)
     ...
 }
 ```
-
 
 ### Documenting your new node
 
@@ -459,9 +454,12 @@ Since TICKscript is its own language we have built a small utility similiar to [
 that generates documentation from the comments in the code.
 The `tickdoc` utility understands two special comments to help it generate clean documentation.
 
-1. `tick:ignore` -- can be added to any field, method, function or struct and tickdoc will simply skip it and not
-    generate any documentation for it. Useful for ignore fields that are set via property methods.
-2. `tick:property` -- is only added to methods and informs tickdoc that the method is a `property method` not a `chaining method`.
+1.
+`tick:ignore` -- can be added to any field, method, function or struct and tickdoc will simply skip it and not
+    generate any documentation for it.
+Useful for ignore fields that are set via property methods.
+2.
+`tick:property` -- is only added to methods and informs tickdoc that the method is a `property method` not a `chaining method`.
 
 Just place one of these comments on a line all by itself and tickdoc will find it and behave accordingly.
 
@@ -473,8 +471,8 @@ Writing any node not just an output node is a very similar process and is left a
 There are few things that are different.
 
 First is that your new node in the `pipeline` package will want to use the `pipeline.chainnode` implementation
-of the `pipeline.Node` interface if it wishes to send data on to children. For example:
-
+of the `pipeline.Node` interface if it wishes to send data on to children.
+For example:
 
 ```go
 package pipeline
@@ -495,9 +493,9 @@ func newMyCustomNode(e EdgeType, n Node) *MyCustomNode {
 }
 ```
 
-
 Second it is possible to define a method that sets fields on a pipeline Node and just return the same instance
-in order to create a `property method`. For example:
+in order to create a `property method`.
+For example:
 
 ```go
 package pipeline
@@ -522,7 +520,6 @@ func newMyCustomNode(e EdgeType, n Node) *MyCustomNode {
     return m
 }
 
-
 // Set the NameList field on the node via this method.
 //
 // Example:
@@ -536,5 +533,4 @@ func (m *MyCustomNode) Names(name ...string) *MyCustomNode {
     return m
 }
 ```
-
 

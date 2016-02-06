@@ -8,7 +8,9 @@ menu:
     parent: api
 ---
 
-If the request asks for a chunked response, JSON objects will get written to the HTTP response as they are ready. They will come in batches in the requested time order. That might look like this:
+If the request asks for a chunked response, JSON objects will get written to the HTTP response as they are ready.
+They will come in batches in the requested time order.
+That might look like this:
 
 ```json
 {
@@ -46,4 +48,6 @@ Then followed by
 }
 ```
 
-The chunks for different series can be interleaved, but they will always come back in the correct time order. You should use chunked queries when pulling back a large number of data points. If you're just pulling back data for a graph, which should generally have fewer than a few thousand points, non-chunked responses are easiest to work with.
+The chunks for different series can be interleaved, but they will always come back in the correct time order.
+You should use chunked queries when pulling back a large number of data points.
+If you're just pulling back data for a graph, which should generally have fewer than a few thousand points, non-chunked responses are easiest to work with.

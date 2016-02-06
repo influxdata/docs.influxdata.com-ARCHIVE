@@ -1,13 +1,16 @@
 {{ partial "header.html" . }}
-<div class="page-title" id="page-title">
-    <div class="page-title--toggle" id="page-title--toggle"><i class="icon arrow-right"></i></div>
-    <div class="page-title--name">Telegraf Documentation</div>
-</div>
-<div class="page-content" id="page-content">
-    <div class="page-content--container">
-        {{ .Content }}
-        {{ partial "telegraf/contribute.html" . }}
+<div class="page" id="page-content">
+    {{ if .Title }}
+    <div class="page--title" id="page-title">
+        <div class="page--body"><h1>{{ .Title }}</h1></div>
     </div>
+    {{ end }}
+    <div class="page--body">
+        {{ partial "telegraf/version.html" . }}
+        {{ .Content }}
+    </div>
+    {{ partial "telegraf/contribute.html" . }}
 </div>
+{{ partial "advertisement.html" . }}
 {{ partial "telegraf/sidebar.html" . }}
 {{ partial "footer.html" . }}

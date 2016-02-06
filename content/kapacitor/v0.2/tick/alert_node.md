@@ -12,11 +12,11 @@ menu:
 
 An [AlertNode](/kapacitor/v0.2/tick/alert_node/) can trigger an event of varying severity levels, 
 and pass the event to alert handlers. The criteria for triggering 
-an alert is specified via a [lambda expression](/kapacitor/v0.2/tick/expr/).
+an alert is specified via a [lambda expression](/kapacitor/v0.2/tick/expr/). 
 See [AlertNode.Info,](/kapacitor/v0.2/tick/alert_node/#info) [AlertNode.Warn,](/kapacitor/v0.2/tick/alert_node/#warn) and [AlertNode.Crit](/kapacitor/v0.2/tick/alert_node/#crit) below. 
 
 Different event handlers can be configured for each [AlertNode.](/kapacitor/v0.2/tick/alert_node/) 
-Some handlers like Email, Slack, VictorOps and PagerDuty have a configuration 
+Some handlers like Email, HipChat, Slack, OpsGenie, VictorOps and PagerDuty have a configuration 
 option &#39;global&#39; that indicates that all alerts implicitly use the handler. 
 
 Available event handlers: 
@@ -25,7 +25,10 @@ Available event handlers:
 * post -- HTTP POST data to a specified URL. 
 * email -- Send and email with alert data. 
 * exec -- Execute a command passing alert data over STDIN. 
+* HipChat -- Post alert message to HipChat room. 
+* Alerta -- Post alert message to Alerta. 
 * Slack -- Post alert message to Slack channel. 
+* OpsGenie -- Send alert to OpsGenie. 
 * VictorOps -- Send alert to VictorOps. 
 * PagerDuty -- Send alert to PagerDuty. 
 
@@ -44,6 +47,8 @@ or the alert just changed to the &#39;OK&#39; state from a non &#39;OK&#39; stat
 Using the [AlertNode.StateChangesOnly](/kapacitor/v0.2/tick/alert_node/#statechangesonly) property events will only be sent to handlers 
 if the alert changed state. 
 
+It is valid to configure multiple alert handlers, even with the same type. 
+
 Example: 
 
 
@@ -57,6 +62,8 @@ Example:
             .warn(lambda: "value" > 20)
             .crit(lambda: "value" > 30)
             .post("http://example.com/api/alert")
+            .post("http://another.example.com/api/alert")
+            .email('oncall@example.com')
 ```
 
 
@@ -74,15 +81,142 @@ Properties
 
 Property methods modify state on the calling node. They do not add another node to the pipeline, and always return a reference to the calling node.
 
-### Channel
+### Alerta
 
-Slack channel in which to post messages. 
-If empty uses the channel from the configuration. 
+Send the alert to Alerta. 
+
+Example: 
 
 
 ```javascript
-node.channel(channel string)
+    [alerta]
+      enabled = true
+      url = "https://alerta.yourdomain"
+      token = "9hiWoDOZ9IbmHsOTeST123ABciWTIqXQVFDo63h9"
+      environment = "Production"
+      origin = "Kapacitor"
 ```
+
+In order to not post a message every alert interval 
+use [AlertNode.StateChangesOnly](/kapacitor/v0.2/tick/alert_node/#statechangesonly) so that only events 
+where the alert changed state are sent to Alerta. 
+
+Send alerts to Alerta. The resource and event properties are required. 
+
+Example: 
+
+
+```javascript
+    stream...
+         .alert()
+             .alerta()
+                 .resource('Hostname or service')
+                 .event('Something went wrong')
+```
+
+Alerta also accepts optional alert information. 
+
+Example: 
+
+
+```javascript
+    stream...
+         .alert()
+             .alerta()
+                 .resource('Hostname or service')
+                 .event('Something went wrong')
+                 .environment('Development')
+                 .group('Dev. Servers')
+```
+
+NOTE: Alerta cannot be configured globally because of its required properties. 
+
+
+```javascript
+node.alerta()
+```
+
+#### Alerta Environment
+
+Alerta environment. 
+If empty uses the environment from the configuration. 
+
+
+```javascript
+node.alerta()
+      .environment(value string)
+```
+
+
+#### Alerta Event
+
+Alerta event. 
+This is a required field. 
+
+
+```javascript
+node.alerta()
+      .event(value string)
+```
+
+
+#### Alerta Group
+
+Alerta group. 
+
+
+```javascript
+node.alerta()
+      .group(value string)
+```
+
+
+#### Alerta Origin
+
+Alerta origin. 
+If empty uses the origin from the configuration. 
+
+
+```javascript
+node.alerta()
+      .origin(value string)
+```
+
+
+#### Alerta Resource
+
+Alerta resource. 
+This is a required field. 
+
+
+```javascript
+node.alerta()
+      .resource(value string)
+```
+
+
+#### Alerta Token
+
+Alerta authentication token. 
+If empty uses the token from the configuration. 
+
+
+```javascript
+node.alerta()
+      .token(value string)
+```
+
+
+#### Alerta Value
+
+Alerta value. 
+
+
+```javascript
+node.alerta()
+      .value(value string)
+```
+
 
 
 ### Crit
@@ -144,7 +278,7 @@ node.email(to ...string)
 
 ### Exec
 
-Execute a command whenever an alert is trigger and pass the alert data over STDIN in JSON format. 
+Execute a command whenever an alert is triggered and pass the alert data over STDIN in JSON format. 
 
 
 ```javascript
@@ -173,6 +307,67 @@ node.flapping(low float64, high float64)
 ```
 
 
+### HipChat
+
+
+If the &#39;hipchat&#39; section in the configuration has the option: global = true 
+then all alerts are sent to HipChat without the need to explicitly state it 
+in the TICKscript. 
+
+Example: 
+
+
+```javascript
+    [hipchat]
+      enabled = true
+      url = "https://orgname.hipchat.com/v2/room"
+      room = "Test Room"
+      token = "9hiWoDOZ9IbmHsOTeST123ABciWTIqXQVFDo63h9"
+      global = true
+```
+
+Example: 
+
+
+```javascript
+    stream...
+         .alert()
+```
+
+Send alert to HipChat using default room &#39;Test Room&#39;. 
+**NOTE**: The global option for HipChat also implies stateChangesOnly is set on all alerts. 
+Also, the room can either be the room id (numerical) or the room name. 
+
+
+```javascript
+node.hipChat()
+```
+
+#### HipChat Room
+
+HipChat room in which to post messages. 
+If empty uses the channel from the configuration. 
+
+
+```javascript
+node.hipChat()
+      .room(value string)
+```
+
+
+#### HipChat Token
+
+HipChat authentication token. 
+If empty uses the token from the configuration. 
+
+
+```javascript
+node.hipChat()
+      .token(value string)
+```
+
+
+
 ### History
 
 Number of previous states to remember when computing flapping levels and 
@@ -183,7 +378,7 @@ Default: 21
 
 
 ```javascript
-node.history(value int)
+node.history(value int64)
 ```
 
 
@@ -256,10 +451,12 @@ node.info(value tick.Node)
 ### Log
 
 Log JSON alert data to file. One event per line. 
+Must specify the absolute path to the log file. 
+It will be created if it does not exist. 
 
 
 ```javascript
-node.log(value string)
+node.log(filepath string)
 ```
 
 
@@ -296,6 +493,102 @@ Default: {{ .ID }} is {{ .Level }}
 ```javascript
 node.message(value string)
 ```
+
+
+### OpsGenie
+
+Send alert to OpsGenie. 
+To use OpsGenie alerting you must first enable the &#39;Alert Ingestion API&#39; 
+in the &#39;Integrations&#39; section of OpsGenie. 
+Then place the API key from the URL into the &#39;opsgenie&#39; section of the Kapacitor configuration. 
+
+Example: 
+
+
+```javascript
+    [opsgenie]
+      enabled = true
+      api-key = "xxxxx"
+      teams = ["everyone"]
+      recipients = ["jim", "bob"]
+```
+
+With the correct configuration you can now use OpsGenie in TICKscripts. 
+
+Example: 
+
+
+```javascript
+    stream...
+         .alert()
+             .opsGenie()
+```
+
+Send alerts to OpsGenie using the teams and recipients in the configuration file. 
+
+Example: 
+
+
+```javascript
+    stream...
+         .alert()
+             .opsGenie()
+             .teams('team_rocket','team_test')
+```
+
+Send alerts to OpsGenie with team set to &#39;team_rocket&#39; and &#39;team_test&#39; 
+
+If the &#39;opsgenie&#39; section in the configuration has the option: global = true 
+then all alerts are sent to OpsGenie without the need to explicitly state it 
+in the TICKscript. 
+
+Example: 
+
+
+```javascript
+    [opsgenie]
+      enabled = true
+      api-key = "xxxxx"
+      recipients = ["johndoe"]
+      global = true
+```
+
+Example: 
+
+
+```javascript
+    stream...
+         .alert()
+```
+
+Send alert to OpsGenie using the default recipients, found in the configuration. 
+
+
+```javascript
+node.opsGenie()
+```
+
+#### OpsGenie Recipients
+
+The list of recipients to be alerted. If empty defaults to the recipients from the configuration. 
+
+
+```javascript
+node.opsGenie()
+      .recipients(recipients ...string)
+```
+
+
+#### OpsGenie Teams
+
+The list of teams to be alerted. If empty defaults to the teams from the configuration. 
+
+
+```javascript
+node.opsGenie()
+      .teams(teams ...string)
+```
+
 
 
 ### PagerDuty
@@ -364,21 +657,11 @@ node.pagerDuty()
 
 ### Post
 
-Post the JSON alert data to the specified URL. 
+HTTP POST JSON alert data to a specified URL. 
 
 
 ```javascript
-node.post(value string)
-```
-
-
-### RoutingKey
-
-The VictorOps routing key. If not set uses key specified in configuration. 
-
-
-```javascript
-node.routingKey(routingKey string)
+node.post(url string)
 ```
 
 
@@ -469,6 +752,18 @@ Send alert to Slack using default channel &#39;#general&#39;.
 ```javascript
 node.slack()
 ```
+
+#### Slack Channel
+
+Slack channel in which to post messages. 
+If empty uses the channel from the configuration. 
+
+
+```javascript
+node.slack()
+      .channel(value string)
+```
+
 
 
 ### StateChangesOnly
@@ -576,6 +871,18 @@ Send alert to VictorOps using the default routing key, found in the configuratio
 ```javascript
 node.victorOps()
 ```
+
+#### VictorOps RoutingKey
+
+The routing key to use for the alert. 
+Defaults to the value in the configuration if empty. 
+
+
+```javascript
+node.victorOps()
+      .routingKey(value string)
+```
+
 
 
 ### Warn
