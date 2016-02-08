@@ -48,6 +48,7 @@ Do not start the daemon on any of the machines.
 2. For each node's `/etc/influxdb/influxdb.conf` file, replace each of the following paramaters:
    - Under the `[meta]` section, set the `bind-address` parameter to `<hostname>:8088`. For example, `influx1`'s meta `bind-address` value will be set to `influx1:8088`.
    - Under the `[meta]` section, set the `http-bind-address` parameter to `<hostname>:8091`. For example, `influx1`'s meta `http-bind-address` value will be set to `influx1:8091`.
+   - Under the `[http]` section, set the `bind-address` parameter to `<hostname>:8086`. For example, `influx1`'s http `bind-address` value will be set to `influx1:8086`
 
 	<br>
 	
