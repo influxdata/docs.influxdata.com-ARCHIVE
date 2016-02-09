@@ -34,6 +34,7 @@ Libraries that have been updated for InfluxDB version 0.10 are listed in **bold*
 - [InfluxDB.Client.Net](https://github.com/AdysTech/InfluxDB.Client.Net) by [mvadu](https://github.com/mvadu)
 - [MyInfluxDbClient](https://github.com/danielwertheim/myinfluxdbclient) by [danielwertheim](https://github.com/danielwertheim)
 - [InfluxData.Net](https://github.com/pootzko/InfluxData.Net) by [pootzko](https://github.com/pootzko)
+- [InfluxDB Client for .NET](https://github.com/MikaelGRA/InfluxDB.Client) by [MikaelGRA](https://github.com/MikaelGRA)
 
 ## Perfmon
 - [naf_windows_perfmon_to_influxdb](https://github.com/willemdh/naf_windows_perfmon_to_influxdb) by [willemdh](https://github.com/willemdh)
