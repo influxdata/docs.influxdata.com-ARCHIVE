@@ -58,7 +58,7 @@ Do not start the daemon on any of the machines.
 4. In `/etc/default/influxdb` on the second and third node (`influx2` and `influx3`), set `INFLUXD_OPTS="-join influx1:8091"`. If the `/etc/default/influxdb` file does not exist, create it.
 5. Start InfluxDB on the second and third node, `sudo service influxdb start`.
 
-At this point you'll want to verify that that your initial raft cluster is healthy.
+At this point you'll want to verify that your initial raft cluster is healthy.
 To do this, issue a `SHOW SERVERS` query to each node in your raft cluster using the `influx` CLI.
 You should see something along the lines of this:
 
