@@ -16,7 +16,7 @@ an alert is specified via a [lambda expression](/kapacitor/v0.10/tick/expr/).
 See [AlertNode.Info,](/kapacitor/v0.10/tick/alert_node/#info) [AlertNode.Warn,](/kapacitor/v0.10/tick/alert_node/#warn) and [AlertNode.Crit](/kapacitor/v0.10/tick/alert_node/#crit) below. 
 
 Different event handlers can be configured for each [AlertNode.](/kapacitor/v0.10/tick/alert_node/) 
-Some handlers like Email, HipChat, Sensu, Slack, OpsGenie, VictorOps and PagerDuty have a configuration 
+Some handlers like Email, HipChat, Sensu, Slack, OpsGenie, VictorOps, PagerDuty and Talk have a configuration 
 option &#39;global&#39; that indicates that all alerts implicitly use the handler. 
 
 Available event handlers: 
@@ -32,6 +32,7 @@ Available event handlers:
 * OpsGenie -- Send alert to OpsGenie. 
 * VictorOps -- Send alert to VictorOps. 
 * PagerDuty -- Send alert to PagerDuty. 
+* Talk -- Post alert message to Talk client. 
 
 See below for more details on configuring each handler. 
 
@@ -39,6 +40,7 @@ Each event that gets sent to a handler contains the following alert data:
 
 * ID -- the ID of the alert, user defined. 
 * Message -- the alert message, user defined. 
+* Details -- the alert details, user defined HTML content. 
 * Time -- the time the alert occurred. 
 * Level -- one of OK, INFO, WARNING or CRITICAL. 
 * Data -- influxql.Result containing the data that triggered the alert. 
@@ -64,7 +66,7 @@ Example:
             .crit(lambda: "value" > 30)
             .post("http://example.com/api/alert")
             .post("http://another.example.com/api/alert")
-            .email('oncall@example.com')
+            .email().to('oncall@example.com')
 ```
 
 
@@ -231,17 +233,75 @@ node.crit(value tick.Node)
 ```
 
 
+### Details
+
+Template for constructing a detailed HTML message for the alert. 
+The same template data is available as the [AlertNode.Message](/kapacitor/v0.10/tick/alert_node/#message) property, 
+in addition to a Message field that contains the rendered Message value. 
+
+The intent is that the Message property be a single line summary while the 
+Details property is a more detailed message possibly spanning multiple lines, 
+and containing HTML formatting. 
+
+This template is rendered using the html/template package in Go so that 
+safe and valid HTML can be generated. 
+
+The `json` method is available within the template to convert any variable to a valid 
+JSON string. 
+
+Example: 
+
+
+```javascript
+    .alert()
+       .id('{{ .Name }}')
+       .details('''
+<h1>{{ .ID }}</h1>
+<b>{{ .Message }}</b>
+Value: {{ index .Fields "value" }}
+''')
+       .email()
+```
+
+Default: {{ json . }} 
+
+
+```javascript
+node.details(value string)
+```
+
+
 ### Email
 
 Email the alert data. 
 
 If the To list is empty, the To addresses from the configuration are used. 
 The email subject is the [AlertNode.Message](/kapacitor/v0.10/tick/alert_node/#message) property. 
-The email body is the JSON alert data. 
+The email body is the [AlertNode.Details](/kapacitor/v0.10/tick/alert_node/#details) property. 
+The emails are sent as HTML emails and so the body can contain html markup. 
 
 If the &#39;smtp&#39; section in the configuration has the option: global = true 
 then all alerts are sent via email without the need to explicitly state it 
 in the TICKscript. 
+
+Example: 
+
+
+```javascript
+    .alert()
+       .id('{{ .Name }}')
+       // Email subject
+       .meassage('{{ .ID }}:{{ .Level }}')
+       //Email body as HTML
+       .details('''
+<h1>{{ .ID }}</h1>
+<b>{{ .Message }}</b>
+Value: {{ index .Fields "value" }}
+''')
+       .email()
+```
+
+Send an email with custom subject and body. 
 
 Example: 
 
@@ -832,6 +892,47 @@ for the recovery.
 
 ```javascript
 node.stateChangesOnly()
+```
+
+
+### Talk
+
+Send the alert to Talk. 
+To use Talk alerting you must first follow the steps to create a new incoming webhook. 
+
+1. Go to the URL https:/account.jianliao.com/signin. 
+2. Sign in with you account. under the Team tab, click &#34;Integrations&#34;. 
+3. Select &#34;Customize service&#34;, click incoming Webhook &#34;Add&#34; button. 
+4. After choose the topic to connect with &#34;xxx&#34;, click &#34;Confirm Add&#34; button. 
+5. Once the service is created, you&#39;ll see the &#34;Generate Webhook url&#34;. 
+
+Place the &#39;Generate Webhook url&#39; into the &#39;Talk&#39; section of the Kapacitor configuration as the option &#39;url&#39;. 
+
+Example: 
+
+
+```javascript
+    [talk]
+      enabled = true
+      url = "https://jianliao.com/v2/services/webhook/uuid"
+      author_name = "Kapacitor"
+```
+
+Example: 
+
+
+```javascript
+    stream...
+         .alert()
+             .talk()
+```
+
+Send alerts to Talk client. 
+
+
+
+```javascript
+node.talk()
 ```
 
 
