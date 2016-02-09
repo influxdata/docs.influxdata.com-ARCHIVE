@@ -24,7 +24,7 @@ Example:
     .where(lambda: "host" == 'h001.example.com')
     .alert()
         .crit(lambda: TRUE)
-        .email('user@example.com')
+        .email().to('user@example.com')
 ```
 
 
@@ -215,7 +215,7 @@ selection,aggregation, and transformation functions
 from the InfluxQL language. 
 
 MapReduce may be applied to either a batch or a stream edge. 
-In the case of a batch each batch is passed to the mapper idependently. 
+In the case of a batch each batch is passed to the mapper independently. 
 In the case of a stream all incoming data points that have 
 the exact same time are combined into a batch and sent to the mapper. 
 
@@ -269,7 +269,7 @@ Returns: [UnionNode](/kapacitor/v0.10/tick/union_node/)
 
 ### Where
 
-Create a new node that filters the data stream by a given expression. 
+And another expression onto the existing expression. 
 
 
 ```javascript

@@ -100,7 +100,69 @@ node.truncate(value time.Duration)
 Filter the current stream using the given expression. 
 This expression is a Kapacitor expression. Kapacitor 
 expressions are a superset of InfluxQL WHERE expressions. 
-See the `Expression` docs for more information. 
+See the [expression](https://docs.influxdata.com/kapacitor/v0.10/tick/expr/) docs for more information. 
+
+Multiple calls to the Where method will `AND` together each expression. 
+
+Example: 
+
+
+```javascript
+    stream
+       .from()
+          .where(lambda: condition1)
+          .where(lambda: condition2)
+```
+
+The above is equivalent to this 
+Example: 
+
+
+```javascript
+    stream
+       .from()
+          .where(lambda: condition1 AND condition2)
+```
+
+
+NOTE: Becareful to always use `.from` if you want multiple different streams. 
+
+Example: 
+
+
+```javascript
+  var data = stream.from().measurement('cpu')
+  var total = data.where(lambda: "cpu" == 'cpu-total')
+  var others = data.where(lambda: "cpu" != 'cpu-total')
+```
+
+The example above is equivalent to the example below, 
+which is obviously not what was intended. 
+
+Example: 
+
+
+```javascript
+  var data = stream
+              .from()
+                  .measurement('cpu')
+                  .where(lambda: "cpu" == 'cpu-total' AND "cpu" != 'cpu-total')
+  var total = data
+  var others = total
+```
+
+The example below will create two different streams each selecting 
+a different subset of the original stream. 
+
+Example: 
+
+
+```javascript
+  var data = stream.from().measurement('cpu')
+  var total = stream.from().measurement('cpu').where(lambda: "cpu" == 'cpu-total')
+  var others = stream.from().measurement('cpu').where(lambda: "cpu" != 'cpu-total')
+```
+
 
 If empty then all data points are considered to match. 
 
@@ -331,7 +393,7 @@ selection,aggregation, and transformation functions
 from the InfluxQL language. 
 
 MapReduce may be applied to either a batch or a stream edge. 
-In the case of a batch each batch is passed to the mapper idependently. 
+In the case of a batch each batch is passed to the mapper independently. 
 In the case of a stream all incoming data points that have 
 the exact same time are combined into a batch and sent to the mapper. 
 
