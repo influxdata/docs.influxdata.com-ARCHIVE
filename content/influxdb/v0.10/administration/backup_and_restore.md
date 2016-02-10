@@ -110,13 +110,13 @@ Will attempt to restore the contents of the `/tmp/backup`. The
 optional flags for restoring a backup are:
 
 - `-metadir <path to meta directory>` - This is the path to the meta
-  directory where you would like the metastore backup recoevered
+  directory where you would like the metastore backup recovered
   to. For packaged installations, this should be specified as
   `/var/lib/influxdb/meta`.
   
-- `-datadir <path to data directory>` - This is the path to the meta
-  directory where you would like the metastore backup recoevered
-  to. For packaged installations, this should be specified as
+- `-datadir <path to data directory>` - This is the path to the data
+  directory where you would like the database backup recovered to. For
+  packaged installations, this should be specified as
   `/var/lib/influxdb/data`.
   
 - `-database <database>` - This is the database that you would like to
