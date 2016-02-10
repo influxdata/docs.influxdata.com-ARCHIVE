@@ -681,7 +681,7 @@ SectionPagesMenu = "products"
   name = "CLA"
   identifier = "cla"
   weight = 20
-  url = "https://influxdata.com/community/cla.html"
+  url = "https://influxdata.com/community/cla/"
   parent = "about"
 [[menu.influxdb_010]]
   name = "Licenses"
