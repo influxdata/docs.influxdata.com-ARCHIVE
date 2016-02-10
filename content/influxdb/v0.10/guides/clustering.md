@@ -97,7 +97,7 @@ sudo service influxdb start
 **<font color=white size=4>6</font>** Verify that the Raft cluster is healthy.
 
 Issue a `SHOW SERVERS` query to each node in your raft cluster using the [`influx` CLI](/influxdb/v0.10/tools/shell/).
-You should see something along the lines of this:
+The output should show that your cluster is made up of three meta-data nodes (note that meta-data nodes appear as both `data_nodes` and `meta_nodes` in the `SHOW SERVERS` query results):
 
 ```
 > SHOW SERVERS
@@ -172,8 +172,7 @@ sudo service influxdb start
 
 **<font color=white size=4>5</font>** Verify that the cluster is healthy.
 
-Issue a `SHOW SERVERS` query to each node in your **Raft cluster** using the [`influx` CLI](/influxdb/v0.10/tools/shell/).
-You should see something along the lines of this:
+The results of the `SHOW SERVERS` query should now show that your cluster is made up of three meta-data nodes and one data-only node:
 
 ```
 > SHOW SERVERS
@@ -183,7 +182,7 @@ id	 http_addr  tcp_addr
 1	  IP1:8086	  IP1:8088
 3	  IP2:8086	  IP2:8088
 5	  IP3:8086	  IP3:8088
-6	  IP4:8086	  IP4:8088
+6	  IP4:8086	  IP4:8088 ✨The new data-only node✨
 
 
 name: meta_nodes
