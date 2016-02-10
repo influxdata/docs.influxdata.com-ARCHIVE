@@ -117,6 +117,9 @@ id	 http_addr  tcp_addr
 4	  IP3:8091	  IP3:8088
 ```
 
+> **Note:** The irregular node `id` numbers is a known issue and a fix is underway.
+For now, it may be easier to identify data nodes and meta nodes by the IP addresses reported in the `SHOW SERVERS` results.
+
 And that's the Raft cluster!
 If you believe that you did the following steps correctly, but are still experiencing problems, try restarting each node in your cluster.
 
@@ -192,6 +195,9 @@ id	 http_addr  tcp_addr
 2	  IP2:8091	  IP2:8088
 4	  IP3:8091	  IP3:8088
 ```
+
+> **Note:** The irregular node `id` numbers is a known issue and a fix is underway.
+For now, it may be easier to identify data nodes and meta nodes by the IP addresses reported in the `SHOW SERVERS` results.
 
 You now have a four node cluster! Follow the same procedure to add additional data nodes, meta nodes, and/or meta-data nodes. Note that the configuration file (`/etc/influxdb/influxdb.conf`) for a meta-data node looks like this:
 ```
