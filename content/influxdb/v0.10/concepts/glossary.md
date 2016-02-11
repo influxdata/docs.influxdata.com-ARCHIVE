@@ -153,7 +153,7 @@ Related entries: [duration](/influxdb/v0.10/concepts/glossary/#duration), [measu
 
 ## schema
 How the data are organized in InfluxDB.
-The fundamentals of the InfluxDB schema are databases, retention policies, series, measurements, tag keys, tag values, and field keys.
+The fundamentals of the InfluxDB schema are databases, retention policies, series, measurements, tag keys, tag values, and field keys. See [Schema Design](/influxdb/v0.10/concepts/schema_and_data_layout/) for more information.
 
 Related entries: [database](/influxdb/v0.10/concepts/glossary/#database), [field key](/influxdb/v0.10/concepts/glossary/#field-key), [measurement](/influxdb/v0.10/concepts/glossary/#measurement), [retention policy](/influxdb/v0.10/concepts/glossary/#retention-policy-rp), [series](/influxdb/v0.10/concepts/glossary/#series), [tag key](/influxdb/v0.10/concepts/glossary/#tag-key), [tag value](/influxdb/v0.10/concepts/glossary/#tag-value)
 

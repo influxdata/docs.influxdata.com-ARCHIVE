@@ -6,7 +6,7 @@ menu:
     parent: guides
 ---
 
-This guide offers general hardware recommendations for InfluxDB and addresses some frequently asked questions about hardware sizing. The recommendations are only for the `tsm1` storage engine. Instances still running unconverted `b1` or `bz1` shards may have different performance characteristics. See the [InfluxDB 0.9 sizing guide](/influxdb/v0.9/guides/hardware_sizing/) for more detail.
+This guide offers general hardware recommendations for InfluxDB and addresses some frequently asked questions about hardware sizing. The recommendations are only for the `tsm1` storage engine. Instances still running [unconverted](/influxdb/v0.10/administration/upgrading/#convert-b1-and-bz1-shards-to-tsm1) `b1` or `bz1` shards may have different performance characteristics. See the [InfluxDB 0.9 sizing guide](/influxdb/v0.9/guides/hardware_sizing/) for more detail.
 
 Single node:
 
@@ -69,7 +69,7 @@ Database names, [measurements](/influxdb/v0.10/concepts/glossary/#measurement), 
 Non-string values require approximately three bytes. String values require variable space as determined by string compression.
 
 ## How should I configure my hardware?
-When running InfluxDB in a production environment the `wal` directory the `data` directory should be on separate storage devices. This optimization significantly reduces disk contention when the system is under heavy write load. This is an important consideration if the write load is highly variable. If the write load does not vary by more than 15% the optimization is probably unneeded.
+When running InfluxDB in a production environment the `wal` directory and the `data` directory should be on separate storage devices. This optimization significantly reduces disk contention when the system is under heavy write load. This is an important consideration if the write load is highly variable. If the write load does not vary by more than 15% the optimization is probably unneeded.
 
 ## General hardware guidelines for clusters
 
