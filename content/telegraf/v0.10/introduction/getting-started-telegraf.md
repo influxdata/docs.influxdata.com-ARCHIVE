@@ -60,7 +60,7 @@ Once Telegraf is up and running it'll start collecting data and writing them to 
 Returning to our sample configuration, we show what the `cpu` and `mem` data look like in InfluxDB below.
 Note that we used the default input and output configuration settings to get these data.
 
-* List all [measurements](https://docs.influxdata.com/influxdb/v0.9/concepts/glossary/#measurement) in the `telegraf` [database](https://docs.influxdata.com/influxdb/v0.9/concepts/glossary/#database):
+* List all [measurements](https://docs.influxdata.com/influxdb/v0.10/concepts/glossary/#measurement) in the `telegraf` [database](https://docs.influxdata.com/influxdb/v0.10/concepts/glossary/#database):
 
 ```sh
 > SHOW MEASUREMENTS
@@ -71,7 +71,7 @@ cpu
 mem
 ```
 
-* List all [field keys](https://docs.influxdata.com/influxdb/v0.9/concepts/glossary/#field-key) by measurement:
+* List all [field keys](https://docs.influxdata.com/influxdb/v0.10/concepts/glossary/#field-key) by measurement:
 
 ```sh
 > SHOW FIELD KEYS
@@ -102,7 +102,7 @@ used
 used_percent
 ```
 
-* Select a sample of the data in the [field](https://docs.influxdata.com/influxdb/v0.9/concepts/glossary/#field) `usage_idle` in the measurement `cpu_usage_idle`:
+* Select a sample of the data in the [field](https://docs.influxdata.com/influxdb/v0.10/concepts/glossary/#field) `usage_idle` in the measurement `cpu_usage_idle`:
 
 ```sh
 > SELECT usage_idle FROM cpu WHERE cpu = 'cpu-total' LIMIT 5
