@@ -14,8 +14,10 @@ data node at a point-in-time and restore it.
 
 ### Backing up the Metastore
 
-While a node is running, you can create a hot backup of your InfluxDB
-instance by running the command:
+InfluxDB's metastore contains internal information about the status of
+the system, including: user information, database/shard metadata, and
+which retention policies are enabled. While a node is running, you can
+create a backup of your instance's metastore by running the command:
 
 ```
 influxd backup /path/to/backup
@@ -34,8 +36,6 @@ $ influxd backup /tmp/backup
 
 Will create a metastore backup in the directory `/tmp/backup` (the
 directory will be created if it doesn't already exist). 
-
-> **Note:** Metastore backups are also included in per-database backups
 
 ### Backing up a Database
 
@@ -66,6 +66,8 @@ stored. Optional flags also include:
   `2015-12-24T08:12:23`). This flag is important if you would like to
   take incremental backups of your database. If not specified, all
   timeranges within the database will be backed up.
+
+> **Note:** Metastore backups are also included in per-database backups
 
 As a real-world example, you can take a backup of the `default`
 retention policy for the `telegraf` database since midnight UTC on
