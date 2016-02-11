@@ -59,7 +59,7 @@ InfluxDB + Telegraf
 
 Start InfluxDB:
 
-```sh
+```shell
 influxd run
 ```
 
@@ -88,7 +88,7 @@ urls = ["http://localhost:8086"]
 
 Put the above configuration in a file called `telegraf.conf` and start telegraf:
 
-```sh
+```shell
 telegraf -config telegraf.conf
 ```
 
@@ -96,7 +96,7 @@ OK, at this point we should have a running InfluxDB + Telegraf setup.
 There should be some cpu metrics in a database called `kapacitor_example`.
 Confirm this with this query:
 
-```sh
+```shell
 curl -G 'http://localhost:8086/query?db=kapacitor_example' --data-urlencode 'q=SELECT count(value) FROM cpu_usage_idle'
 ```
 
@@ -106,7 +106,7 @@ Starting Kapacitor
 First we need a valid configuration file.
 Run the following command to create a default configuration file:
 
-```sh
+```shell
 kapacitord config > kapacitor.conf
 ```
 
@@ -115,7 +115,7 @@ That is because any input that you can configure for InfluxDB also works for Kap
 
 Let's start the Kapacitor server:
 
-```sh
+```shell
 kapacitord -config kapacitor.conf
 ```
 
@@ -129,7 +129,7 @@ Kapacitor has an HTTP API with which all communcation happens.
 The binary `kapacitor` exposes the API over the command line.
 Run this command to turn on debug logging:
 
-```sh
+```shell
 kapacitor level debug
 ```
 
@@ -145,7 +145,7 @@ The numbers indicate the number of points `collected` and `emitted` from the str
 As long as the numbers are increasing we are in good shape.
 Turn logging back to info with:
 
-```sh
+```shell
 kapacitor level info
 ```
 
@@ -186,7 +186,7 @@ stream
 
 Now lets define the `task` and the databases and retention policies it can access:
 
-```sh
+```shell
 kapacitor define \
     -name cpu_alert \
     -type stream \
@@ -200,7 +200,7 @@ Before we enable the task, we should test it first so we do not spam ourselves w
 
 Record the current data stream for a bit so we can use it to test our task with:
 
-```sh
+```shell
 kapacitor record stream -name cpu_alert -duration 20s
 ```
 
@@ -209,7 +209,7 @@ only record data from that database and retention policy.
 
 Now grab that ID that was returned and lets put it in a bash variable for easy use later (your ID will be different):
 
-```sh
+```shell
 rid=cd158f21-02e6-405c-8527-261ae6f26153
 ```
 
@@ -217,7 +217,7 @@ OK, we have a snapshot of data recorded from the stream, so we can now replay th
 The `replay` action replays data only to a specific task.
 This way we can test the task in complete isolation:
 
-```sh
+```shell
 kapacitor replay -id $rid -name cpu_alert -fast
 ```
 
@@ -230,7 +230,7 @@ Check the log using the command below, did we get any alerts?
 The file should contain lines of JSON, where each line represents one alert.
 The JSON contains the alert level and the data that triggered the alert.
 
-```sh
+```shell
 cat /tmp/alerts.log
 ```
 
@@ -243,7 +243,7 @@ the recording will trigger an alert.
 Let's replay it again and verify the results.
 Any time you want to update a task change the TICKscript and then run the `define` command again with just the `-name` and `-tick` arguments:
 
-```sh
+```shell
 # edit threshold in cpu_alert.tick and redefine the task.
 kapacitor define -name cpu_alert -tick cpu_alert.tick
 kapacitor replay -id $rid -name cpu_alert -fast
@@ -255,14 +255,14 @@ Now that we know it's working, let's change it back to a more reasonable thresho
 Are you happy with the threshold?
 If so, let's `enable` the task so it can start processing the live data stream with:
 
-```sh
+```shell
 kapacitor enable cpu_alert
 ```
 
 Now you can see alerts in the log in real time.
 Here is a quick hack to use 100% of one core if you want to get some cpu activity:
 
-```sh
+```shell
 while true; do i=0; done
 ```
 
@@ -289,20 +289,20 @@ Just like that, we have a dynamic threshold, and, if cpu usage drops in the day 
 Let's try it out.
 Use `reload` in order to get a running task to update based on a new definition:
 
-```sh
+```shell
 kapacitor reload cpu_alert
 ```
 
 Now tail the alert log:
 
-```sh
+```shell
 tail -f /tmp/alerts.log
 ```
 
 There shouldn't be any alerts triggering just yet.
 Next, start a few while loops to add some load:
 
-```sh
+```shell
 while true; do i=0; done
 ```
 
@@ -395,13 +395,13 @@ batch
 
 To define this task do:
 
-```sh
+```shell
 kapacitor define -name batch_cpu_alert -type batch -tick batch_cpu_alert.tick -dbrp kapacitor_example.default
 ```
 
 You can record the result of the query in the task like so (again, your ID will differ):
 
-```sh
+```shell
 kapacitor record batch -name batch_cpu_alert -past 20m
 # Save the id again
 rid=b82d4034-7d5c-4d59-a252-16604f902832
@@ -412,7 +412,7 @@ In this case, since the `period` is 5 minutes, the last 4 batches will be saved 
 
 The batch recording can be replayed in the same way:
 
-```sh
+```shell
 kapacitor replay -id $rid -name batch_cpu_alert
 ```
 

@@ -20,7 +20,7 @@ If you've installed InfluxDB locally, the `influx` command should be available v
 Executing `influx` will start the CLI and automatically connect to the local InfluxDB instance (assuming you have already started the server with `influxd`).
 The output should look like this:
 
-```sh
+```shell
 $ influx
 Connected to http://localhost:8086 version 0.9
 InfluxDB shell 0.9

@@ -32,7 +32,7 @@ SHOW DATABASES
 ```
 
 CLI example:
-```sh
+```shell
 > SHOW DATABASES
 name: databases
 ---------------
@@ -52,7 +52,7 @@ CLI example:
 ```
 
 CLI response:
-```sh
+```shell
 name	    duration	 replicaN	 default
 default	 0		       1		       true
 ```
@@ -63,7 +63,7 @@ The fourth column specifies if the retention policy is the default retention pol
 
 The following example shows a hypothetical CLI response where there are four different retention policies in the database, and where the default retention policy is `three_days_only`:
 
-```sh
+```shell
 name		           duration	 replicaN	 default
 default		        0		       1		       false
 two_days_only	   48h0m0s		 1		       false
@@ -84,7 +84,7 @@ Return all series in the database `NOAA_water_database`:
 ```
 
 CLI response:  
-```sh
+```shell
 name: average_temperature
 -------------------------
 _key						                                   location
@@ -133,7 +133,7 @@ Return series for a specific measurement:
 ```
 
 CLI response:
-```sh
+```shell
 name: h2o_quality
 -----------------
 _key						                                     location	       randtag
@@ -151,7 +151,7 @@ Return series for a specific measurement and tag set:
 ```
 
 CLI response:
-```sh
+```shell
 name: h2o_quality
 -----------------
 _key						                                     location	       randtag
@@ -172,7 +172,7 @@ Return all measurements in the `NOAA_water_database` database:
 ```
 
 CLI response:
-```sh
+```shell
 name: measurements
 ------------------
 name
@@ -191,7 +191,7 @@ Return measurements where the tag key `randtag` equals `1`:
 ```
 
 CLI response:
-```sh
+```shell
 name: measurements
 ------------------
 name
@@ -206,7 +206,7 @@ SHOW MEASUREMENTS WHERE randtag =~ /\d/
 ```
 
 CLI response:
-```sh
+```shell
 name: measurements
 ------------------
 name
@@ -219,7 +219,7 @@ Use a regular expression with `WITH MEASUREMENT` to return all measurements that
 ```
 
 CLI response:
-```sh
+```shell
 name: measurements
 ------------------
 name
@@ -241,7 +241,7 @@ Return all tag keys that are in the database `NOAA_water_database`:
 ```
 
 CLI response:
-```sh
+```shell
 name: average_temperature
 -------------------------
 tagKey
@@ -278,7 +278,7 @@ Return the tag keys for a specific measurement:
 ```
 
 CLI response:
-```sh
+```shell
 name: h2o_temperature
 ---------------------
 tagKey
@@ -298,7 +298,7 @@ Return the tag values for the tag key `randtag` across all measurements in the d
 ```
 
 CLI response:
-```sh
+```shell
 name: randtagTagValues
 ----------------------
 randtag
@@ -313,7 +313,7 @@ Return the tag values for the tag key `randtag` for a specific measurement in th
 ```
 
 CLI response:
-```sh
+```shell
 ```
 
 The measurement `average_temperature` doesn't have the tag key `randtag` so InfluxDB returns nothing.
@@ -333,7 +333,7 @@ Return the field keys across all measurements in the database `NOAA_water_databa
 ```
 
 CLI response:
-```sh
+```shell
 name: average_temperature
 -------------------------
 fieldKey
@@ -369,7 +369,7 @@ Return the field keys in the measurement `h2o_feet` in the database `NOAA_water_
 
 CLI response:
 
-```sh
+```shell
 name: h2o_feet
 --------------
 fieldKey

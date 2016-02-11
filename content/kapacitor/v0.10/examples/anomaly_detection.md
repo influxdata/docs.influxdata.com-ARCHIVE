@@ -416,7 +416,7 @@ That was a lot, but now we are ready to configure Kapacitor to run our
 code.  Create a scratch dir for working through the rest of this
 guide:
 
-```sh
+```shell
 mkdir /tmp/kapacitor_udf
 cd /tmp/kapacitor_udf
 ```
@@ -462,7 +462,7 @@ git clone https://github.com/influxdata/kapacitor.git /tmp/kapacitor_udf/kapacit
 Restart the Kapacitor daemon to make sure everything is configured
 correctly:
 
-```sh
+```shell
 service kapacitor restart
 ```
 
@@ -535,7 +535,7 @@ respective init option to each one.
 Save this script as `/tmp/kapacitor_udf/print_temps.tick` and define
 the Kapacitor task:
 
-```sh
+```shell
 kapacitor define -name print_temps -type stream -dbrp printer.default -tick print_temps.tick
 ```
 

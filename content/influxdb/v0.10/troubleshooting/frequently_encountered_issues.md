@@ -201,7 +201,7 @@ It is important to note that when returning query results, the database silently
 In the example below, the tags `precision_supplied` and `timestamp_supplied` show the time precision and timestamp that the user provided at the write.
 Because InfluxDB silently drops trailing zeros on returned timestamps, the write precision is not recognizable in the returned timestamps.
 <br>
-```sh
+```shell
 name: trails
 -------------
 time                  value	 precision_supplied  timestamp_supplied
@@ -239,7 +239,7 @@ To query the old data you must fully qualify the relevant data in the query.
 Example:
 
 All of the data in the measurement `fleeting` fall under the `DEFAULT` RP called `one_hour`:
-```sh
+```shell
 > SELECT count(flounders) FROM fleeting
 name: fleeting
 --------------
@@ -247,12 +247,12 @@ time			               count
 1970-01-01T00:00:00Z	 8
 ```
 We [create](/influxdb/v0.10/query_language/database_management/#create-retention-policies-with-create-retention-policy) a new `DEFAULT` RP (`two_hour`) and perform the same query:
-```sh
+```shell
 > SELECT count(flounders) FROM fleeting
 >
 ```
 To query the old data, we must specify the old `DEFAULT` RP by fully qualifying `fleeting`:
-```sh
+```shell
 > SELECT count(flounders) FROM fish.one_hour.fleeting
 name: fleeting
 --------------

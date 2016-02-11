@@ -47,7 +47,7 @@ Start Kapacitor running with that added to the configuration.
 Here is a simple bash script to generate random score data so we can test it without
 messing with the real game servers.
 
-```sh
+```shell
 #!/bin/bash
 
 # default options: can be overriden with corresponding arguments.
@@ -77,7 +77,7 @@ done
 
 Place the above script into a file `scores.sh` and run it:
 
-```sh
+```shell
 chmod +x ./scores.sh
 ./scores.sh
 ```
@@ -254,14 +254,14 @@ max.join(min)
 
 Define and enable our task to see it in action:
 
-```sh
+```shell
 kapacitor define -name top_scores -tick top_scores.tick -type stream -dbrp game.default
 kapacitor enable top_scores
 ```
 
 First  let's check that the HTTP output is working.
 
-```sh
+```shell
 curl 'http://localhost:9092/api/v1/top_scores/top_scores'
 ```
 
@@ -270,7 +270,7 @@ Hit the endpoint several times to see that the scores are updating once a second
 
 Now, let's check InfluxDB to see our historical data.
 
-```sh
+```shell
 curl \
     -G 'http://localhost:8086/query?db=game' \
     --data-urlencode 'q=SELECT * FROM top_scores  WHERE time > now() - 5m GROUP BY game'

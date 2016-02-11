@@ -19,7 +19,7 @@ influx -import -path=NOAA_data.txt -precision=s
 
 ### Test queries
 See all five measurements:
-```sh
+```shell
 > SHOW measurements
 name: measurements
 ------------------
@@ -32,7 +32,7 @@ h2o_temperature
 ```
 
 Count the number of non-null values of `water_level` in `h2o_feet`:
-```sh
+```shell
 > SELECT COUNT(water_level) FROM h2o_feet
 name: h2o_feet
 --------------
@@ -42,7 +42,7 @@ time			               count
 
 Select the first ten observations in the measurement h2o_feet:
 
-```sh
+```shell
 > SELECT * FROM h2o_feet LIMIT 5
 name: h2o_feet
 --------------
