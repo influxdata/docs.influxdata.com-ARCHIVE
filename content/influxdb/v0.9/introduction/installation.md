@@ -21,7 +21,7 @@ Once installation is complete you can change those ports and other options in th
 Debian and Ubuntu users can install the latest stable version of InfluxDB using the `apt-get` package manager.
 For Ubuntu users, you can add the InfluxData repository configuration by using the following commands:
 
-```shell
+```sh
 curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
 source /etc/lsb-release
 echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
@@ -29,7 +29,7 @@ echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stabl
 
 For Debian users, you can add the InfluxData repository configuration by using the following commands:
 
-```shell
+```sh
 curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
 source /etc/os-release
 test $VERSION_ID = "7" && echo "deb https://repos.influxdata.com/debian wheezy stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
@@ -38,7 +38,7 @@ test $VERSION_ID = "8" && echo "deb https://repos.influxdata.com/debian jessie s
 
 And then to install and start the InfluxDB service:
 
-```shell
+```sh
 sudo apt-get update && sudo apt-get install influxdb
 sudo service influxdb start
 ```
@@ -46,7 +46,7 @@ sudo service influxdb start
 ### RedHat & CentOS
 RedHat and CentOS users can install the latest stable version of InfluxDB using the `yum` package manager:
 
-```shell
+```sh
 cat <<EOF | sudo tee /etc/yum.repos.d/influxdb.repo
 [influxdb]
 name = InfluxDB Repository - RHEL \$releasever
@@ -59,7 +59,7 @@ EOF
 
 Once repository is added to the `yum` configuration, you can install and start the InfluxDB service by running:
 
-```shell
+```sh
 sudo yum install influxdb
 sudo service influxdb start
 ```
@@ -67,7 +67,7 @@ sudo service influxdb start
 ### SLES & openSUSE
 There are RPM packages provided by openSUSE Build Service for SUSE Linux users:
 
-```shell
+```sh
 # add go repository
 zypper ar -f obs://devel:languages:go/ go
 # install latest influxdb
@@ -78,12 +78,12 @@ zypper in influxdb
 
 InfluxDB is part of the FreeBSD package system.
 It can be installed by running
-```shell
+```sh
 sudo pkg install influxdb
 ```
 The configuration file is `/usr/local/etc/influxd.conf` with examples in `/usr/local/etc/influxd.conf.sample`.
 Start the backend by executing
-```shell
+```sh
 sudo service influxd onestart
 ```
 and/or adding `influxd_enable="YES"` to `/etc/rc.conf` for launch influxd during system boot.
@@ -92,23 +92,23 @@ and/or adding `influxd_enable="YES"` to `/etc/rc.conf` for launch influxd during
 
 Users of OS X 10.8 and higher can install using the [Homebrew](http://brew.sh/) package manager.
 
-```shell
+```sh
 brew update
 brew install influxdb
 ```
 
 To have launchd start influxdb at login:
-```shell
+```sh
 ln -sfv /usr/local/opt/influxdb/*.plist ~/Library/LaunchAgents
 ```
 
 Then to load influxdb now:
-```shell
+```sh
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.influxdb.plist
 ```
 
 Or, if you don't want/need launchctl, in a separate terminal window you can just run:
-```shell
+```sh
 influxd -config /usr/local/etc/influxdb.conf
 ```
 
@@ -128,14 +128,14 @@ The newly generated configuration file has no knowledge of any local customizati
 To generate a new config file, run `influxd config` and redirect the output to a file.
 For example:
 
-```shell
+```sh
 influxd config > /etc/influxdb/influxdb.generated.conf
 ```
 
 Edit the `influxdb.generated.conf` file to have the desired configuration settings.
 When launching InfluxDB, point the process to the correct configuration file using the `-config` option.
 
-```shell
+```sh
 influxd -config /etc/influxdb/influxdb.generated.conf
 ```
 
@@ -151,7 +151,7 @@ The `-config` flag takes a single argument, which is the path to the InfluxDB co
 The `config` and `-config` flags can be combined to output the union of the internal default configuration and the configuration file passed to `-config`.
 The options specified in the configuration file will overwrite any internally generated configuration.
 
-```shell
+```sh
 influxd config -config /etc/influxdb/influxdb.partial.conf
 ```
 
@@ -209,7 +209,7 @@ dir = "/mnt/db/hh"
 
 When using non-standard directories for InfluxDB data and configurations, also be sure to set filesystem permissions correctly:
 
-```shell
+```sh
 chown influxdb:influxdb /mnt/influx
 chown influxdb:influxdb /mnt/db
 ```
