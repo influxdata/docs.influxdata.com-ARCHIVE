@@ -21,7 +21,7 @@ Access the CLI by starting the `influxd` process and entering `influx` in your t
 Once you've entered the shell and successfully connected to an InfluxDB node, you'll see the following output:
 <br>
 <br>
-```sh
+```bash
 $ influx
 Connected to http://localhost:8086 version 0.9.x
 InfluxDB shell 0.9.x
@@ -101,7 +101,7 @@ Display the InfluxDB version and exit.
 
 ### Execute an InfluxQL command and quit with `-execute`
 Execute queries that don't require a database specification:
-```sh
+```bash
 $ influx -execute 'SHOW DATABASES'
 name: databases
 ---------------
@@ -113,7 +113,7 @@ pirates
 ```
 
 Execute queries that do require a database specification, and change the timestamp precision:
-```sh
+```bash
 $ influx -execute 'SELECT * FROM h2o_feet LIMIT 3' -database=NOAA_water_database -precision=rfc3339
 name: h2o_feet
 --------------
@@ -125,7 +125,7 @@ time			               level description	    location	     water_level
 
 ### Specify the format of the server responses with `-format`
 The default format is `column`:
-```sh
+```bash
 $ influx -format=column
 [...]
 > SHOW DATABASES
@@ -139,7 +139,7 @@ pirates
 ```
 
 Change the format to `csv`:
-```sh
+```bash
 $ influx -format=csv
 [...]
 > SHOW DATABASES
@@ -151,7 +151,7 @@ databases,pirates
 ```
 
 Change the format to `json`:
-```sh
+```bash
 $ influx -format=json
 [...]
 > SHOW DATABASES
@@ -159,7 +159,7 @@ $ influx -format=json
 ```
 
 Change the format to `json` and turn on pretty print:
-```sh
+```bash
 $ influx -format=json -pretty
 [...]
 > SHOW DATABASES

@@ -39,19 +39,19 @@ CREATE DATABASE [IF NOT EXISTS] <database_name> [WITH [DURATION <duration>] [REP
 ```
 
 Create the database ` NOAA_water_database`:
-```sh
+```bash
 > CREATE DATABASE NOAA_water_database
 >
 ```
 
 Create the database `NOAA_water_database` only if it doesn't exist:
-```sh
+```bash
 > CREATE DATABASE IF NOT EXISTS NOAA_water_database
 >
 ```
 
 Create the database `NOAA_water_database` with a new retention policy called `liquid`:
-```sh
+```bash
 > CREATE DATABASE NOAA_water_database WITH DURATION 3d REPLICATION 3 NAME liquid
 >
 ```
@@ -71,13 +71,13 @@ DROP DATABASE [IF EXISTS] <database_name>
 ```
 
 Drop the database NOAA_water_database:
-```sh
+```bash
 > DROP DATABASE NOAA_water_database
 >
 ```
 
 Drop the database NOAA_water_database only if it exists:
-```sh
+```bash
 > DROP DATABASE IF EXISTS NOAA_water_database
 >
 ```
@@ -214,7 +214,7 @@ DROP RETENTION POLICY <retention_policy_name> ON <database_name>
 ```
 
 Delete the retention policy `what_is_time` in the `NOAA_water_database` database:  
-```sh
+```bash
 > DROP RETENTION POLICY what_is_time ON NOAA_water_database
 >
 ```
