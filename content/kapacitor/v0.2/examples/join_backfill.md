@@ -123,7 +123,7 @@ Using Kapacitor's record/replay actions we can actually run this TICKscript on h
 First save the above script as `error_percent.tick` and define it.
 Then create a recording for the past time frame we want.
 
-```sh
+```shell
 kapacitor define \
     -name error_percent \
     -type batch \
@@ -136,14 +136,14 @@ Grab the recording ID and replay the historical data against the task.
 Here we specify the `-rec-time` flag to instruct Kapacitor to use the actual
 time stored in the recording when processing the data instead of adjusting to the present time.
 
-```sh
+```shell
 kapacitor replay -name error_percent -id RECORDING_ID -fast -rec-time
 ```
 
 If the data set is too large to keep in one recording you can define a specific range of time to record
 and then replay each range individually.
 
-```sh
+```shell
 rid=$(kapacitor record batch -name error_percent -start 2015-10-01 -stop 2015-10-02)
 echo $rid
 kapacitor replay -name error_percent -id $rid -fast -rec-time

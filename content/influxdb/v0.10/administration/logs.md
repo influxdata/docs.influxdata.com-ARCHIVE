@@ -15,7 +15,7 @@ Depending on your use case, this log information can be written to another locat
 If you run InfluxDB directly, using `influxd`, all logs will be written to `stderr`.
 You may redirect this log output as you would any output to `stderr` like so:
 
-```sh
+```shell
 influxd 2>$HOME/my_log_file
 ```
 
@@ -28,7 +28,7 @@ You can override this location by setting the variable `STDERR` in the file `/et
  
 For example, if `/etc/default/influxdb` contains:
 
-```sh
+```shell
 STDERR=/dev/null
 ```
 

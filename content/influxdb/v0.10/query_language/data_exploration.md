@@ -136,7 +136,7 @@ Add two to the field `water_level`:
 > SELECT water_level + 2 FROM h2o_feet
 ```
 CLI response:
-```sh
+```shell
 name: h2o_feet
 --------------
 time
@@ -152,7 +152,7 @@ Another example that works:
 > SELECT (water_level * 2) + 4 from h2o_feet
 ```
 CLI response:
-```sh
+```shell
 name: h2o_feet
 --------------
 time
@@ -241,7 +241,7 @@ Calculate the [`MEAN()`](../query_language/functions.html#mean) `water_level` fo
 > SELECT MEAN(water_level) FROM h2o_feet GROUP BY location
 ```
 CLI response:
-```sh
+```shell
 name: h2o_feet
 tags: location=coyote_creek
 time			mean
@@ -262,7 +262,7 @@ Calculate the [`MEAN()`](../query_language/functions.html#mean) `index` for ever
 > SELECT MEAN(index) FROM h2o_quality GROUP BY *
 ```
 CLI response:
-```sh
+```shell
 name: h2o_quality
 tags: location = coyote_creek, randtag = 1
 time			               mean
@@ -307,7 +307,7 @@ time			               mean
 ```
 
 CLI response:
-```sh
+```shell
 name: h2o_feet
 ----------
 time			               count
@@ -374,7 +374,7 @@ Follow the ✨ in the examples below to see what `fill()` can do.
 > SELECT MEAN(water_level) FROM h2o_feet WHERE time >= '2015-08-18' AND time < '2015-09-24' GROUP BY time(10d)
 ```
 CLI response:
-```sh
+```shell
 name: h2o_feet
 ----------
 time			mean
@@ -390,7 +390,7 @@ Use `fill()` with `-100`:
 > SELECT MEAN(water_level) FROM h2o_feet WHERE time >= '2015-08-18' AND time < '2015-09-24' GROUP BY time(10d) fill(-100)
 ```
 CLI response:  
-```sh
+```shell
 name: h2o_feet
 ----------
 time			mean
@@ -444,7 +444,7 @@ Write the field `water_level` in `h2o_feet` to a new measurement (`h2o_feet_copy
 ```
 
 CLI response:
-```sh
+```shell
 name: result
 ------------
 time			               written
@@ -470,7 +470,7 @@ Calculate the average `water_level` in `santa_monica`, and write the results to 
 ```
 
 The CLI response shows the number of points that InfluxDB wrote to the new measurement:
-```sh
+```shell
 name: result
 ------------
 time			               written
@@ -478,7 +478,7 @@ time			               written
 ```
 
 To see the query results, select everything from the new measurement `average` in `NOAA_water_database`:
-```sh
+```shell
 > SELECT * FROM average
 name: average
 -------------
@@ -494,7 +494,7 @@ Calculate the average `water_level` and the max `water_level` in `santa_monica`,
 ```
 
 CLI response:
-```sh
+```shell
 name: result
 ------------
 time			               written
@@ -502,7 +502,7 @@ time			               written
 ```
 
 Select everything from the new measurement `aggregates` in the database `where_else`:
-```sh
+```shell
 > SELECT * FROM where_else."default".aggregates
 name: aggregates
 ----------------
@@ -519,7 +519,7 @@ Calculate the average `degrees` for all temperature measurements (`h2o_temperatu
 ```
 
 CLI response:
-```sh
+```shell
 name: result
 ------------
 time			               written
@@ -527,7 +527,7 @@ time			               written
 ```
 
 Select the `mean` field from all new temperature measurements in the database `where_else`.
-```sh
+```shell
 > SELECT mean FROM where_else."default"./temperature/
 name: average_temperature
 -------------------------
@@ -569,7 +569,7 @@ Return the three oldest points from each series associated with the measurement 
 ```
 
 CLI response:
-```sh
+```shell
 name: h2o_feet
 tags: location=coyote_creek
 time			              water_level
@@ -599,7 +599,7 @@ Return everything from one of the series associated with the measurement `h2o_fe
 ```
 
 CLI response:
-```sh
+```shell
 name: h2o_feet
 tags: location=coyote_creek
 time			              water_level
@@ -625,7 +625,7 @@ Return the oldest five points from one series **without** `ORDER BY time DESC`:
 ```
 
 CLI response:  
-```sh
+```shell
 name: h2o_feet
 ----------
 time			water_level
@@ -642,7 +642,7 @@ Now include  `ORDER BY time DESC` to get the newest five points from the same se
 ```
 
 CLI response:  
-```sh
+```shell
 name: h2o_feet
 ----------
 time			water_level
@@ -659,7 +659,7 @@ Finally, use `GROUP BY` with `ORDER BY time DESC` to return the last five points
 ```
 
 CLI response:
-```sh
+```shell
 name: h2o_feet
 tags: location=coyote_creek
 time			water_level
@@ -690,7 +690,7 @@ For example, get the first three points written to a series:
 ```
 
 CLI response:  
-```sh
+```shell
 name: h2o_feet
 ----------
 time			water_level
@@ -706,7 +706,7 @@ Then get the second three points from that same series:
 ```
 
 CLI response:
-```sh
+```shell
 name: h2o_feet
 ----------
 time			water_level
@@ -740,7 +740,7 @@ The following query automatically merges those two series when it calculates the
 ```
 
 CLI response:
-```sh
+```shell
 name: h2o_feet
 --------------
 time			              mean
@@ -753,7 +753,7 @@ If you only want the `MEAN()` `water_level` for the first series, specify the ta
 ```
 
 CLI response:
-```sh
+```shell
 name: h2o_feet
 --------------
 time			              mean
@@ -846,7 +846,7 @@ Select the oldest point from every measurement in the `NOAA_water_database` data
 ```
 
 CLI response:
-```sh
+```shell
 name: average_temperature
 -------------------------
 time			              degrees	index	level description	location	    pH	randtag	water_level
@@ -883,7 +883,7 @@ Select the first three points from every measurement whose name starts with `h2o
 > SELECT * FROM /^h2o/ LIMIT 3
 ```
 CLI response:  
-```sh
+```shell
 name: h2o_feet
 --------------
 time			              degrees	index	level description	   location	    pH	randtag	water_level
@@ -920,7 +920,7 @@ Select the last 5 points from every measurement whose name contains `temperature
 ```
 
 CLI response:
-```sh
+```shell
 name: average_temperature
 -------------------------
 time			              degrees	location
@@ -953,7 +953,7 @@ Select the oldest four points from the measurement `h2o_feet` where the value of
 ```
 
 CLI response:
-```sh
+```shell
 name: h2o_feet
 --------------
 time			               level description	    location	     water_level
