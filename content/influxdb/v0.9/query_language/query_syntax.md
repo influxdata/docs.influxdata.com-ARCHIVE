@@ -121,7 +121,7 @@ You should first set a target database for all queries.
 This will be passed along with each subsequent query until a new selection is made.
 The CLI command is `USE` and the syntax is `USE <database>`.
 
-```sh
+```bash
 > use mydb
 Using database mydb
 ```
@@ -131,7 +131,7 @@ All subsequent queries will run against the `mydb` database.
 You do not need to select a target database.
 You may choose to explicitly name the database in each query:
 
-```sh
+```bash
 > select * from mydb.myrp.mymeasurement
 ```
 
@@ -174,7 +174,7 @@ Use the `u=<user>` and `p=<password>` to pass the authentication details, if req
 
 #### Query to Show All Databases
 
-```sh
+```bash
 curl -G 'http://localhost:8086/query' --data-urlencode 'q=SHOW DATABASES'
 ```
 
@@ -182,17 +182,17 @@ curl -G 'http://localhost:8086/query' --data-urlencode 'q=SHOW DATABASES'
 
 This query is against a particular database, so we must supply the `db=` parameter in the query string.
 
-```sh
+```bash
 curl -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SHOW MEASUREMENTS'
 ```
 
-```sh
+```bash
 curl -G 'http://localhost:8086/query' --data-urlencode 'db=mydb&q=SHOW MEASUREMENTS'
 ```
 
 #### Query Against Non-defaults with Authentication 
 
-```sh
+```bash
 curl -G 'http://localhost:8086/query' --data-urlencode 'db=mydb&rp=six_months' --data-urlencode 'u=root&p=123456' --data-urlencode 'q=select * from disk_free where time > now() - 2w group by time(2h)'
 ```
 
@@ -200,13 +200,13 @@ curl -G 'http://localhost:8086/query' --data-urlencode 'db=mydb&rp=six_months' -
 
 Rather than using the GET query string parameters you can specify the target database and/or retention policy directly in the InfluxQL query.
 
-```sh
+```bash
 curl -G 'http://localhost:8086/query' --data-urlencode 'q=select * from mydb.myrp.disk_free'
 ```
 
 If you want to specify the database but are using the default retention policy for that database, you can leave the retention policy undeclared:
 
-```sh
+```bash
 curl -G 'http://localhost:8086/query' --data-urlencode 'q=select * from mydb..disk_free'
 ```
 

@@ -16,7 +16,7 @@ The syntax for the line protocol is
 
 For example:
 
-```sh
+```bash
 measurement,tkey1=tval1,tkey2=tval2 fkey=fval,fkey2=fval2 1234567890000000000
 ```
 
@@ -29,7 +29,7 @@ The measurement and tags must be separated by a single comma `,` with no whitesp
 There must also be whitespace between the field(s) and the timestamp, if one is provided.
 
 Valid (`value` and `otherval` are fields, `foo` and `bat` are tags)
-```sh
+```bash
 measurement value=12
 measurement value=12 1439587925
 measurement,foo=bar value=12
@@ -38,7 +38,7 @@ measurement,foo=bar,bat=baz value=12,otherval=21 1439587925
 ```
 
 Invalid
-```sh
+```bash
 measurement,value=12
 measurement value=12,1439587925
 measurement foo=bar value=12

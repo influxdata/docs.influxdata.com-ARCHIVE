@@ -14,7 +14,7 @@ Kapacitor has two binaries:
 
 You can either download the binaries directly from the [downloads](https://influxdata.com/downloads/#kapacitor) page or `go get` them:
 
-```sh
+```bash
 go get github.com/influxdb/kapacitor/cmd/kapacitor
 go get github.com/influxdb/kapacitor/cmd/kapacitord
 ```
@@ -25,7 +25,7 @@ An example configuration file can be found [here](https://github.com/influxdb/ka
 
 Kapacitor can also provide an example config for you using this command:
 
-```sh
+```bash
 kapacitord config
 ```
 
