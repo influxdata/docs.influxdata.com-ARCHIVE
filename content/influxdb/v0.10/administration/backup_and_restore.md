@@ -153,12 +153,11 @@ unpacking /var/lib/influxdb/data/telegraf/default/2/000000004-000000003.tsm
 unpacking /var/lib/influxdb/data/telegraf/default/2/000000005-000000001.tsm
 ```
 
-Once the backed up data has been recovered, we'll want to ensure the
-file permissions are correct:
+> **Note:** Once the backed up data has been recovered, the
+permissions on the shards may no longer be accurate. To ensure
+the file permissions are correct, please run:
 
-```
-$ sudo chown -R influxdb:influxdb /var/lib/influxdb
-```
+> `$ sudo chown -R influxdb:influxdb /var/lib/influxdb`
 
 Once the data and metastore are recovered, it's time to start the database:
 
