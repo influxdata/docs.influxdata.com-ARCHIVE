@@ -50,7 +50,7 @@ Examples:
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               count
@@ -67,7 +67,7 @@ If you request a query that has no timestamp to return, such as an aggregation f
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               count
@@ -91,7 +91,7 @@ This `COUNT()` behavior is functional in InfluxDB versions 0.10+.
 > Example: Use `fill(none)` to suppress intervals with `0` data
 
 > `COUNT()` without `fill(none)`:
-```sh
+```bash
 > SELECT COUNT(water_level) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-09-18T21:41:00Z' AND time <= '2015-09-18T22:41:00Z' GROUP BY time(30m)
 name: h2o_feet
 --------------
@@ -102,7 +102,7 @@ time			               count
 ```
 
 > `COUNT()` with `fill(none)`:
-```sh
+```bash
 > SELECT COUNT(water_level) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-09-18T21:41:00Z' AND time <= '2015-09-18T22:41:00Z' GROUP BY time(30m) fill(none)
 name: h2o_feet
 --------------
@@ -127,7 +127,7 @@ Examples:
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			                distinct
@@ -143,7 +143,7 @@ The response shows that `level description` has four distinct field values:  `at
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 tags: location = coyote_creek
 time			                distinct
@@ -168,7 +168,7 @@ See GitHub Issue [#4680](https://github.com/influxdb/influxdb/issues/4680) for m
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 tags: location = coyote_creek
 time			               count
@@ -204,7 +204,7 @@ Examples:
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               mean
@@ -221,7 +221,7 @@ If you request a query that has no timestamp to return, such as an aggregation f
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               mean
@@ -255,7 +255,7 @@ Examples:
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               median
@@ -272,7 +272,7 @@ If you request a query that has no timestamp to return, such as an aggregation f
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 tags: location = coyote_creek
 time			               median
@@ -306,7 +306,7 @@ Examples:
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               sum
@@ -320,7 +320,7 @@ time			               sum
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               sum
@@ -353,7 +353,7 @@ Examples:
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               bottom
@@ -368,7 +368,7 @@ time			               bottom
 > SELECT BOTTOM(water_level,3),location FROM h2o_feet
 ```
 
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               bottom	 location
@@ -384,7 +384,7 @@ time			               bottom	 location
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               bottom	 location
@@ -427,7 +427,7 @@ time			               bottom	 location
 > CLI response:
 > <br>
 > <br>
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               bottom	 location
@@ -443,7 +443,7 @@ time			               bottom	 location
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 tags: location = coyote_creek
 time			               bottom
@@ -470,7 +470,7 @@ See GitHub Issue [#4680](https://github.com/influxdb/influxdb/issues/4680) for m
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               bottom
@@ -496,7 +496,7 @@ Examples:
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               first
@@ -512,7 +512,7 @@ time			               first
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 tags: location = coyote_creek
 time			               first
@@ -545,7 +545,7 @@ Examples:
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               last
@@ -561,7 +561,7 @@ time			               last
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 tags: location = coyote_creek
 time			               last
@@ -598,7 +598,7 @@ Examples:
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               max
@@ -614,7 +614,7 @@ time			               max
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 tags: location = coyote_creek
 time			              max
@@ -652,7 +652,7 @@ Examples:
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               min
@@ -668,7 +668,7 @@ time			               min
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 tags: location = coyote_creek
 time			               min
@@ -707,7 +707,7 @@ Examples:
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               percentile
@@ -723,7 +723,7 @@ time			               percentile
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 tags: location = coyote_creek
 time			               percentile
@@ -763,7 +763,7 @@ Examples:
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               top
@@ -778,7 +778,7 @@ time			               top
 > SELECT TOP(water_level,3),location FROM h2o_feet
 ```
 
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               top	   location
@@ -794,7 +794,7 @@ time			               top	   location
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               top	   location
@@ -817,7 +817,7 @@ To demonstrate this behavior, see the results of the above example query where `
 > CLI response:
 > <br>
 > <br>
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               top	   location
@@ -837,7 +837,7 @@ time			               top	   location
 > CLI response:
 > <br>
 > <br>
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               top	   location
@@ -853,7 +853,7 @@ time			               top	   location
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 tags: location = coyote_creek
 time			               top
@@ -880,7 +880,7 @@ See GitHub Issue [#4680](https://github.com/influxdb/influxdb/issues/4680) for m
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               top
@@ -928,7 +928,7 @@ SELECT DERIVATIVE(AGGREGATION_FUNCTION(<field_key>),[<unit>]) FROM <measurement_
 Examples:
 
 The following examples work with the first six observations of the `water_level` field in the measurement `h2o_feet` with the tag set `location = santa_monica`:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               water_level
@@ -948,7 +948,7 @@ Calculate the rate of change per one second
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               derivative
@@ -980,7 +980,7 @@ Calculate the rate of change per six minutes
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               derivative
@@ -1010,7 +1010,7 @@ Calculate the rate of change per 12 minutes
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               derivative
@@ -1043,7 +1043,7 @@ Select the `MAX()` value at 12 minute intervals and calculate the rate of change
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               derivative
@@ -1053,7 +1053,7 @@ time			               derivative
 
 To get those results, InfluxDB first aggregates the data by calculating the `MAX()` `water_level` at the time interval specified in the `GROUP BY time()` clause (`12m`).
 Those results look like this:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               max
@@ -1082,7 +1082,7 @@ Aggregate the data to 18 minute intervals and calculate the rate of change per s
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               derivative
@@ -1091,7 +1091,7 @@ time			               derivative
 
 To get those results, InfluxDB first aggregates the data by calculating the `SUM()` of `water_level` at the time interval specified in the `GROUP BY time()` clause (`18m`).
 The aggregated results look like this:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               sum
@@ -1174,7 +1174,7 @@ Examples:
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               stddev
@@ -1188,7 +1188,7 @@ time			               stddev
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 tags: location = coyote_creek
 time			               stddev
@@ -1221,7 +1221,7 @@ Calculate the [minimum](http://localhost:1313/influxdb/v0.9/query_language/funct
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               min	   max
@@ -1247,7 +1247,7 @@ Before:
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               mean
@@ -1260,7 +1260,7 @@ After:
 ```
 
 CLI response:
-```sh
+```bash
 name: h2o_feet
 --------------
 time			               dream_name

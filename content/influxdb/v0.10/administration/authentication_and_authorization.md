@@ -115,7 +115,7 @@ There are two options for authenticating with the CLI.
 
     Example:
 
-    ```sh
+    ```bash
 $ influx
 Connected to http://localhost:8086 version 0.9.4.1
 InfluxDB shell 0.9.4.1
@@ -127,7 +127,7 @@ InfluxDB shell 0.9.4.1
 
     Example:
 
-    ```sh
+    ```bash
 influx -username todd -password influxdb4ever
     ```
 
@@ -178,7 +178,7 @@ CREATE USER <username> WITH PASSWORD '<password>' WITH ALL PRIVILEGES
 
     CLI example:
 
-    ```sh
+    ```bash
 > CREATE USER paul WITH PASSWORD 'timeseries4days' WITH ALL PRIVILEGES
 >
     ```
@@ -191,7 +191,7 @@ GRANT ALL PRIVILEGES TO <username>
 
     CLI example:
 
-    ```sh
+    ```bash
 > GRANT ALL PRIVILEGES TO todd
 >
     ```
@@ -204,7 +204,7 @@ REVOKE ALL PRIVILEGES FROM <username>
 
     CLI example:
 
-    ```sh
+    ```bash
 > REVOKE ALL PRIVILEGES FROM todd
 >
     ```
@@ -217,7 +217,7 @@ SHOW USERS
 
     CLI example:
 
-    ```sh
+    ```bash
 > SHOW USERS
 user 	 admin
 todd     false
@@ -235,7 +235,7 @@ CREATE USER <username> WITH PASSWORD '<password>'
 
     CLI example:
 
-    ```sh
+    ```bash
 > CREATE USER todd WITH PASSWORD 'influxdb41yf3'
 >
     ```
@@ -253,14 +253,14 @@ GRANT [READ,WRITE,ALL] ON <database_name> TO <username>
 
     `GRANT` `READ` access to `todd` on the `NOAA_water_database` database:
 
-    ```sh
+    ```bash
 > GRANT READ ON NOAA_water_database TO todd
 >
     ```
 
     `GRANT` `ALL` access to `todd` on the `NOAA_water_database` database:
 
-    ```sh
+    ```bash
 > GRANT ALL ON NOAA_water_database TO todd
 >
     ```
@@ -275,14 +275,14 @@ REVOKE [READ,WRITE,ALL] ON <database_name> FROM <username>
 
     `REVOKE` `ALL` privileges from `todd` on the `NOAA_water_database` database:
 
-    ```sh
+    ```bash
 > REVOKE ALL ON NOAA_water_database FROM todd
 >
     ```
 
     `REVOKE` `WRITE` privileges from `todd` on the `NOAA_water_database` database:
 
-    ```sh
+    ```bash
 > REVOKE WRITE ON NOAA_water_database FROM todd
 >
     ```
@@ -297,7 +297,7 @@ SHOW GRANTS FOR <user_name>
 
     CLI example:
 
-    ```sh
+    ```bash
 > SHOW GRANTS FOR todd
 database		            privilege
 NOAA_water_database	        WRITE
@@ -315,7 +315,7 @@ SET PASSWORD FOR <username> = '<password>'
 
     CLI example:
 
-    ```sh
+    ```bash
 > SET PASSWORD FOR todd = 'influxdb4ever'
 >
     ```
@@ -332,7 +332,7 @@ DROP USER <username>
 
     CLI example:
 
-    ```sh
+    ```bash
 > DROP USER todd
 >
     ```

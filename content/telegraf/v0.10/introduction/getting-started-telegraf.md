@@ -33,24 +33,24 @@ Here, we'll generate a configuration file and simultaneously specify the desired
 In the example below, we create a configuration file called `telegraf.conf` with two inputs:
 one that reads metrics about the system's cpu usage (`cpu`) and one that reads metrics about the system's memory usage (`mem`). `telegraf.conf` specifies InfluxDB as the desired output.
 
-```sh
+```bash
 telegraf -sample-config -input-filter cpu:mem -output-filter influxdb > telegraf.conf
 ```
 
 ## Start the Telegraf Server
 Start the Telegraf server and direct it to the relevant configuration file:
 ### OS X [Homebrew](http://brew.sh/)
-```sh
+```bash
 telegraf -config telegraf.conf
 ```
 
 ### Linux debian and RPM packages
-```sh
+```bash
 sudo service telegraf start
 ```
 
 ### Ubuntu 15+
-```sh
+```bash
 systemctl start telegraf
 ```
 
@@ -62,7 +62,7 @@ Note that we used the default input and output configuration settings to get the
 
 * List all [measurements](https://docs.influxdata.com/influxdb/v0.10/concepts/glossary/#measurement) in the `telegraf` [database](https://docs.influxdata.com/influxdb/v0.10/concepts/glossary/#database):
 
-```sh
+```bash
 > SHOW MEASUREMENTS
 name: measurements
 ------------------
@@ -73,7 +73,7 @@ mem
 
 * List all [field keys](https://docs.influxdata.com/influxdb/v0.10/concepts/glossary/#field-key) by measurement:
 
-```sh
+```bash
 > SHOW FIELD KEYS
 name: cpu
 ---------
@@ -104,7 +104,7 @@ used_percent
 
 * Select a sample of the data in the [field](https://docs.influxdata.com/influxdb/v0.10/concepts/glossary/#field) `usage_idle` in the measurement `cpu_usage_idle`:
 
-```sh
+```bash
 > SELECT usage_idle FROM cpu WHERE cpu = 'cpu-total' LIMIT 5
 name: cpu
 ---------

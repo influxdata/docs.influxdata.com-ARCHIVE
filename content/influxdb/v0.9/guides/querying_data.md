@@ -13,7 +13,7 @@ The HTTP API is the primary means for querying data in InfluxDB.
 To perform a query send a `GET` request to the `/query` endpoint, set the URL parameter `db` as the target database, and set the URL parameter `q` as your query.
 The example below uses the HTTP API to query the same database that you encountered in [Writing Data](/influxdb/v0.9/guides/writing_data/).
 <br>
-```sh
+```bash
 curl -G 'http://localhost:8086/query?pretty=true' --data-urlencode "db=mydb" --data-urlencode "q=SELECT value FROM cpu_load_short WHERE region='us-west'"
 ```
 
@@ -62,7 +62,7 @@ While this is useful for debugging or when querying directly with tools like `cu
 Send multiple queries to InfluxDB in a single API call.
 Simply delimit each query using a semicolon, for example:  
 <br>
-```sh
+```bash
 curl -G 'http://localhost:8086/query?pretty=true' --data-urlencode "db=mydb" --data-urlencode "q=SELECT value FROM cpu_load_short WHERE region='us-west';SELECT count(value) FROM cpu_load_short WHERE region='us-west'"
 ```
 
@@ -125,7 +125,7 @@ By default, timestamps are returned in RFC3339 UTC and have nanosecond precision
 If you want timestamps in Unix epoch format include in your request the query string parameter `epoch` where `epoch=[h,m,s,ms,u,ns]`.
 For example, get epoch in seconds with:  
 <br>
-```sh
+```bash
 curl -G 'http://localhost:8086/query' --data-urlencode "db=mydb" --data-urlencode "epoch=s" --data-urlencode "q=SELECT value FROM cpu_load_short WHERE region='us-west'"
 ```
 
@@ -137,7 +137,7 @@ See [Authentication and Authorization](/influxdb/v0.9/administration/authenticat
 For large queries, results are returned in batches of 10,000 points unless you use the query string parameter `chunk_size` to explicitly set the batch size.
 For example, get your results in batches of 20,000 points with:  
 <br>
-```sh
+```bash
 curl -G 'http://localhost:8086/query' --data-urlencode "db=deluge" --data-urlencode "chunk_size=20000" --data-urlencode "q=SELECT * FROM liters"
 ```
 
