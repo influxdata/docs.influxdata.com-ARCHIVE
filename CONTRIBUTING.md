@@ -12,5 +12,6 @@ cd docs.influxdata.com/
 * Make sweet edits
 * Make sure the site compiles locally with `hugo server --watch`
 * Check it out at [localhost:1313](http://localhost:1313/)
+* Sign the [CLA](https://influxdb.com/community/cla.html)
 * Submit a pull request
 * Earn the respect, admiration, and eternal love of the entire InfluxDB community
