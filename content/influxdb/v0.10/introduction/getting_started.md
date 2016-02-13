@@ -167,7 +167,7 @@ time		                        	 external	  internal	machine	type
 > 
 ```
 
-InfluxQL has many [features and keywords](http://localhost:1313/influxdb/v0.10/query_language/spec/) that are not covered here,
+InfluxQL has many [features and keywords](/influxdb/v0.10/query_language/spec/) that are not covered here,
 including support for Go-style regex. For example:
 
 ```sql
