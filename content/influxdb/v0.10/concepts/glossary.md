@@ -20,13 +20,22 @@ See [Clustering](/influxdb/v0.10/guides/clustering/) for how to set up an Influx
 Related entries: [node](/influxdb/v0.10/concepts/glossary/#node), [server](/influxdb/v0.10/concepts/glossary/#server)
 
 ## consensus node
-A node that participates in the raft consensus group.
-A cluster should have at least three consensus and/or hybrid nodes, but it can have more.
-There should be an odd number of consensus and/or hybrid nodes in a cluster.
+A node running only the consensus service.
 
 See [Cluster Node Configuration](/influxdb/v0.10/clustering/cluster_node_config/).
 
-Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [data node](/influxdb/v0.10/concepts/glossary/#data-node), [node](/influxdb/v0.10/concepts/glossary/#node), [hybrid node](/influxdb/v0.10/concepts/glossary/#hybrid-node)
+Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [consensus service](/influxdb/v0.10/concepts/glossary/#consensus-service), [data node](/influxdb/v0.10/concepts/glossary/#data-node), [node](/influxdb/v0.10/concepts/glossary/#node), [hybrid node](/influxdb/v0.10/concepts/glossary/#hybrid-node)
+
+## consensus service
+The InfluxDB service that participates in the raft consensus group.
+A cluster must have at least three nodes running the consensus service (consensus or hybrid nodes), but it can have more.
+There should be an odd number of nodes running the consensus service in a cluster. 
+The number of consensus services that can fail before the cluster is degraded is &#8968;n/2 + 1&#8969; where `n` is the number of consensus services in the cluster.
+Thus, even numbers of consensus services offer no additional redundancy or resiliency.
+
+See [Cluster Node Configuration](/influxdb/v0.10/clustering/cluster_node_config/).
+
+Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [consensus node](/influxdb/v0.10/concepts/glossary/#consensus-node), [data service](/influxdb/v0.10/concepts/glossary/#data-service), [node](/influxdb/v0.10/concepts/glossary/#node), [hybrid node](/influxdb/v0.10/concepts/glossary/#hybrid-node)
 
 ## continuous query (CQ)
 An InfluxQL query that runs automatically and periodically within a database.
@@ -42,11 +51,19 @@ The node that receives write and query requests for the cluster.
 Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [hinted handoff](/influxdb/v0.10/concepts/glossary/#hinted-handoff), [node](/influxdb/v0.10/concepts/glossary/#node)
 
 ## data node
-A node that stores data.
+A node running only the data service.
 
 See [Cluster Node Configuration](/influxdb/v0.10/clustering/cluster_node_config/).
 
-Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [consensus node](/influxdb/v0.10/concepts/glossary/#consensus-node), [node](/influxdb/v0.10/concepts/glossary/#node), [hybrid node](/influxdb/v0.10/concepts/glossary/#hybrid-node)
+Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [consensus node](/influxdb/v0.10/concepts/glossary/#consensus-node), [data service](/influxdb/v0.10/concepts/glossary/#data-service), [node](/influxdb/v0.10/concepts/glossary/#node), [hybrid node](/influxdb/v0.10/concepts/glossary/#hybrid-node)
+
+## data service
+The InfluxDB service that persists time-series data to the node.
+A cluster must have at least one node running the data service (data or hybrid nodes), but may have any number beyond one.
+
+See [Cluster Node Configuration](/influxdb/v0.10/clustering/cluster_node_config/).
+
+Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [consensus node](/influxdb/v0.10/concepts/glossary/#consensus-node), [consensus service](/influxdb/v0.10/concepts/glossary/#consensus-service), [node](/influxdb/v0.10/concepts/glossary/#node), [hybrid node](/influxdb/v0.10/concepts/glossary/#hybrid-node)
 
 ## database
 A logical container for users, retention policies, continuous queries, and time series data.
@@ -103,13 +120,11 @@ Coordinating nodes temporarily store queued data when a target node for a write 
 Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [node](/influxdb/v0.10/concepts/glossary/#node), [server](/influxdb/v0.10/concepts/glossary/#server)
 
 ## hybrid node
-A node that acts as both a data node and a consensus node.
-A cluster should have at least three consensus and/or hybrid nodes, but it can have more.
-There should be an odd number of consensus and/or hybrid nodes in a cluster.
+A node running both the consensus and data services. 
 
 See [Cluster Node Configuration](/influxdb/v0.10/clustering/cluster_node_config/).
 
-Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [consensus node](/influxdb/v0.10/concepts/glossary/#consensus-node), [node](/influxdb/v0.10/concepts/glossary/#node), [data node](/influxdb/v0.10/concepts/glossary/#data-node)
+Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [consensus node](/influxdb/v0.10/concepts/glossary/#consensus-node), [consensus service](/influxdb/v0.10/concepts/glossary/#consensus-service), [node](/influxdb/v0.10/concepts/glossary/#node), [data node](/influxdb/v0.10/concepts/glossary/#data-node), [data service](/influxdb/v0.10/concepts/glossary/#data-service)
 
 ## identifier
 Tokens which refer to database names, retention policy names, user names, measurement names, tag keys, and field keys.
