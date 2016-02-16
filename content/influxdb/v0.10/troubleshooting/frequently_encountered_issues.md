@@ -32,7 +32,6 @@ Where applicable, it links to outstanding issues on GitHub.
 * [Writing integers](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#writing-integers)   
 * [Writing duplicate points](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#writing-duplicate-points)  
 * [Getting an unexpected error when sending data over the HTTP API](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#getting-an-unexpected-error-when-sending-data-over-the-http-api)
-* [Writing more than one continuous query to a single series](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#writing-more-than-one-continuous-query-to-a-single-series)
 * [Words and characters to avoid](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#words-and-characters-to-avoid)  
 * [Single quoting and double quoting when writing data](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#single-quoting-and-double-quoting-when-writing-data)  
 
@@ -269,27 +268,57 @@ Writes an integer: `value=100i`
 Writes a float: `value=100`
 
 ## Writing duplicate points
-In InfluxDB 0.9 a point is uniquely identified by the measurement name, full [tag set]()(/influxdb/v0.10/concepts/glossary/#tag-set), and the nanosecond timestamp.
-If a point is submitted with an identical measurement, tag set, and timestamp it will silently overwrite the previous point.
+In InfluxDB 0.10 a point is uniquely identified by the measurement name, [tag set](/influxdb/v0.10/concepts/glossary/#tag-set), and the nanosecond timestamp.
+If you submit a new point with the same measurement, tag set, and timestamp as an existing point, the field set becomes the union of the old field set and the new field set, where any ties go to the new field set.
 This is the intended behavior.
 
-For example,
-<br>`cpu_load,hostname=server02,az=us_west value=24.5 1234567890000000` and
-<br>`cpu_load,hostname=server02,az=us_west value=5.24 1234567890000000` are identical points.
-The last one written will overwrite the other.
+For example:
 
-In order to store both points, simply introduce an arbitrary new tag to enforce uniqueness.
-<br>`cpu_load,hostname=server02,az=us_west,uniq=1 value=24.5 1234567890000000` and
-<br>`cpu_load,hostname=server02,az=us_west,uniq=2 value=5.24 1234567890000000` are now unique points, and each will persist in the database.
+Old point: `cpu_load,hostname=server02,az=us_west val=24.5,feld=7 1234567890000000`
 
-You can also increment the timestamp by a nanosecond:
-<br>`cpu_load,hostname=server02,az=us_west,uniq=1 value=24.5 1234567890000000` and
-<br>`cpu_load,hostname=server02,az=us_west,uniq=2 value=5.24 1234567890000001` are now unique points, and each will persist in the database.
+New point: `cpu_load,hostname=server02,az=us_west val=5.24 1234567890000000`
 
-> **Note:**  The field set has nothing to do with the uniqueness of a point.
-These are still identical points and the last one written would be the only one to persist:<br>`cpu_load,hostname=server02,az=us_west value=24.5 1234567890000000` and
-<br>`cpu_load,hostname=server02,az=us_west loadavg=12.2 1234567890000000` are still identical points.
-The last one written will overwrite the other.
+After you submit the new point, InfluxDB overwrites `val` with the new field value and leaves the field `feld` alone:
+```
+> SELECT * FROM cpu_load WHERE time = 1234567890000000
+name: cpu_load
+--------------
+time                     az       feld  hostname  val
+1970-01-15T06:56:07.89Z  us_west  7     server02  5.24
+```
+
+To store both points:
+
+* Introduce an arbitrary new tag to enforce uniqueness.
+
+    Old point: `cpu_load,hostname=server02,az=us_west,uniq=1 val=24.5,feld=7 1234567890000000`
+
+    New point: `cpu_load,hostname=server02,az=us_west,uniq=2 val=5.24 1234567890000000`
+
+    After writing the new point to InfluxDB:
+    ```
+  > SELECT * FROM cpu_load WHERE time = 1234567890000000
+  name: cpu_load
+  --------------
+  time                     az       feld  hostname  uniq  val
+  1970-01-15T06:56:07.89Z  us_west  7	  server02  1     24.5
+  1970-01-15T06:56:07.89Z  us_west        server02  2     5.24
+    ```
+* Increment the timestamp by a nanosecond.
+
+    Old point: `cpu_load,hostname=server02,az=us_west val=24.5,feld=7 1234567890000000`
+
+    New point: `cpu_load,hostname=server02,az=us_west val=5.24 1234567890000001`
+
+    After writing the new point to InfluxDB:
+    ```
+    > SELECT * FROM cpu_load WHERE time >= 1234567890000000 and time <= 1234567890000001
+    name: cpu_load
+    --------------
+    time                            az       feld  hostname  val
+    1970-01-15T06:56:07.89Z         us_west  7     server02  24.5
+    1970-01-15T06:56:07.890000001Z  us_west        server02  5.24
+    ```
 
 ## Getting an unexpected error when sending data over the HTTP API
 First, double check your [line protocol](/influxdb/v0.10/write_protocols/line/) syntax.
@@ -298,20 +327,6 @@ InfluxDB's line protocol relies on `\n` to indicate the end of a line and the be
 Convert the newline character and try sending the data again.
 
 > **Note:** If you generated your data file on a Windows machine, Windows uses carriage return and line feed (`\r\n`) as the newline character.
-
-## Writing more than one continuous query to a single series
-Use a single continuous query to write several statistics to the same measurement and tag set.
-For example, tell InfluxDB to write to the `aggregated_stats` measurement the `MEAN` and `MIN` of the `value` field grouped by five-minute intervals and grouped by the `cpu` tag with:
-
-```sql
-CREATE CONTINUOUS QUERY mean_min_value ON telegraf BEGIN SELECT MEAN(value) AS mean, MIN(value) AS min INTO aggregated_stats FROM cpu_idle GROUP BY time(5m),cpu END
-```
-
-If you create two separate continuous queries (one for calculating the `MEAN` and one for calculating the `MIN`), the `aggregated_stats` measurement will appear to be missing data.
-Separate continuous queries run at slightly different times and InfluxDB defines a unique point by its measurement, tag set, and timestamp (notice that field is missing from that list).
-So if two continuous queries write to different fields but also write to the same measurement and tag set, only one of the two fields will ever have data; the last continuous query to run will overwrite the results that were written by the first continuous query with the same timestamp.
-
-For more on continuous queries, see [Continuous Queries](/influxdb/v0.10/query_language/continuous_queries/).
 
 ## Words and characters to avoid
 If you use any of the [InfluxQL keywords](https://github.com/influxdb/influxdb/blob/master/influxql/INFLUXQL.md#keywords) as an identifier you will need to double quote that identifier in every query.

@@ -169,7 +169,7 @@ See [issue](https://github.com/influxdb/influxdb/issues/3519) for more informati
 
 If you write points in a batch all points without explicit timestamps will receive the same timestamp when inserted.
 Since a point is defined only by its measurement, tag set, and timestamp, that can lead to duplicate points.
-When InfluxDB encounters a duplicate point it silently overwrites the previous point.
+When InfluxDB encounters a duplicate point, the [field set](/influxdb/v0.10/concepts/glossary/#field-set) becomes the union of the old field set and the new field set, where any ties go to the new field set.
 It is a best practice to provide explicit timestamps with all points.
 
 Measurements, tag keys, tag values, and field keys are never quoted.

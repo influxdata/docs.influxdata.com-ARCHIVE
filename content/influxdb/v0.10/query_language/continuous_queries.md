@@ -90,10 +90,7 @@ Because CQs run on regularly incremented time intervals you don't need to (and s
 > CREATE CONTINUOUS QUERY minnie_maximus ON world BEGIN SELECT min(mouse),max(imus) INTO min_max_mouse FROM zoo GROUP BY time(30m) END
     ```
 
-    The CQ `minnie_maximus` automatically calculates the 30 minute minimum of the field `mouse` and the 30 minute maximum of the field `imus` (both fields are in the measurement `zoo`), and it writes the results to the measurement `min_max_mouse`.
-
-    > **Note:** If we create two CQs, one CQ to calculate the minimum and one CQ to calculate the maximum and we write the results to the same measurement, the data in the destination measurement may appear to be missing data.
-    For a complete explanation, see [Frequently Encountered Issues](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#writing-more-than-one-continuous-query-to-a-single-series).   
+    The CQ `minnie_maximus` automatically calculates the 30 minute minimum of the field `mouse` and the 30 minute maximum of the field `imus` (both fields are in the measurement `zoo`), and it writes the results to the measurement `min_max_mouse`. 
 
 * Create a CQ with two functions and personalize the [field keys](/influxdb/v0.10/concepts/glossary/#field-key) in the results:
 

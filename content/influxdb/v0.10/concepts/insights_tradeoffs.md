@@ -10,8 +10,8 @@ InfluxDB is a time-series database.
 Optimizing for this use-case entails some tradeoffs, primarily to increase performance at the cost of functionality.
 Below is a list of some of those design insights that lead to tradeoffs:
 
-1. For the time series use case, we assume that if the same data point is sent multiple times, it is the exact same data that a client just sent several times.
-  * *Pro:* Simplified conflict resolution increases write performance
+1. For the time series use case, we assume that if the same data is sent multiple times, it is the exact same data that a client just sent several times.
+  * *Pro:* Simplified [conflict resolution](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#writing-duplicate-points) increases write performance
   * *Con:* May lose data in rare circumstances
 1. Deletes are a rare occurrence.
 When they do occur it is almost always against large ranges of old data that are cold for writes.
