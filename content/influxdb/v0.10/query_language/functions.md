@@ -1265,7 +1265,7 @@ Append `fill()` to the end of your query to alter that value.
 For a complete discussion of `fill()`, see [Data Exploration](/influxdb/v0.10/query_language/data_exploration/#the-group-by-clause-and-fill).
 
 > **Note:** `fill()` works differently with `COUNT()`.
-See [the documentation on `COUNT()`](http://localhost:1313/influxdb/v0.10/query_language/functions/#count-and-controlling-the-values-reported-for-intervals-with-no-data) for a function-specific use of `fill()`.
+See [the documentation on `COUNT()`](/influxdb/v0.10/query_language/functions/#count-and-controlling-the-values-reported-for-intervals-with-no-data) for a function-specific use of `fill()`.
 
 ## Rename the output column's title with `AS`
 
