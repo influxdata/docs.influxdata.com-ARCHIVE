@@ -628,6 +628,10 @@ The input will flush at least this often even if it hasn't reached the configure
 UDP read buffer size, 0 means OS default.
 UDP listener will fail if set above OS max.
 
+### precision = "n"
+
+The time precision used for UDP services.
+
 ### udp-payload-size = 65536
 
 Sets the expected UDP payload size.
