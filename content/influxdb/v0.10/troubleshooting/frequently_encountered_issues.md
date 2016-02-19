@@ -274,50 +274,50 @@ This is the intended behavior.
 
 For example:
 
-Old point: `cpu_load,hostname=server02,az=us_west val=24.5,feld=7 1234567890000000`
+Old point: `cpu_load,hostname=server02,az=us_west val_1=24.5,val_2=7 1234567890000000`
 
-New point: `cpu_load,hostname=server02,az=us_west val=5.24 1234567890000000`
+New point: `cpu_load,hostname=server02,az=us_west val_1=5.24 1234567890000000`
 
-After you submit the new point, InfluxDB overwrites `val` with the new field value and leaves the field `feld` alone:
+After you submit the new point, InfluxDB overwrites `val_1` with the new field value and leaves the field `val_2` alone:
 ```
 > SELECT * FROM cpu_load WHERE time = 1234567890000000
 name: cpu_load
 --------------
-time                     az       feld  hostname  val
-1970-01-15T06:56:07.89Z  us_west  7     server02  5.24
+time			                  az	      hostname	 val_1	 val_2
+1970-01-15T06:56:07.89Z	 us_west	 server02	 5.24	  7
 ```
 
 To store both points:
 
 * Introduce an arbitrary new tag to enforce uniqueness.
 
-    Old point: `cpu_load,hostname=server02,az=us_west,uniq=1 val=24.5,feld=7 1234567890000000`
+    Old point: `cpu_load,hostname=server02,az=us_west,uniq=1 val_1=24.5,val_2=7 1234567890000000`
 
-    New point: `cpu_load,hostname=server02,az=us_west,uniq=2 val=5.24 1234567890000000`
+    New point: `cpu_load,hostname=server02,az=us_west,uniq=2 val_1=5.24 1234567890000000`
 
     After writing the new point to InfluxDB:
     ```
   > SELECT * FROM cpu_load WHERE time = 1234567890000000
   name: cpu_load
   --------------
-  time                     az       feld  hostname  uniq  val
-  1970-01-15T06:56:07.89Z  us_west  7	  server02  1     24.5
-  1970-01-15T06:56:07.89Z  us_west        server02  2     5.24
+  time			            az	     hostname	uniq	val_1	val_2
+  1970-01-15T06:56:07.89Z	us_west	 server02	1	    24.5	7
+  1970-01-15T06:56:07.89Z	us_west	 server02	2	    5.24
     ```
 * Increment the timestamp by a nanosecond.
 
-    Old point: `cpu_load,hostname=server02,az=us_west val=24.5,feld=7 1234567890000000`
+    Old point: `cpu_load,hostname=server02,az=us_west val_1=24.5,val_2=7 1234567890000000`
 
-    New point: `cpu_load,hostname=server02,az=us_west val=5.24 1234567890000001`
+    New point: `cpu_load,hostname=server02,az=us_west val_1=5.24 1234567890000001`
 
     After writing the new point to InfluxDB:
     ```
     > SELECT * FROM cpu_load WHERE time >= 1234567890000000 and time <= 1234567890000001
     name: cpu_load
     --------------
-    time                            az       feld  hostname  val
-    1970-01-15T06:56:07.89Z         us_west  7     server02  24.5
-    1970-01-15T06:56:07.890000001Z  us_west        server02  5.24
+    time				             az	      hostname	 val_1	val_2
+    1970-01-15T06:56:07.89Z		     us_west  server02	 24.5	 7
+    1970-01-15T06:56:07.890000001Z	 us_west  server02	 5.24
     ```
 
 ## Getting an unexpected error when sending data over the HTTP API
