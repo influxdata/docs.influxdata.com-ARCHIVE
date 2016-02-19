@@ -1,3 +1,7 @@
 User-agent: *
+Disallow: /telegraf/v0.2/
 Disallow: /influxdb/v0.6/
 Disallow: /influxdb/v0.7/
+Disallow: /influxdb/v0.9/
+Disallow: /chronograf/v0.4/
+Disallow: /kapacitor/v0.2/
