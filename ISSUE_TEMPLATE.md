@@ -1,7 +1,4 @@
-## Issue
 
-
-## Relevant Questions
 
 What products and version are you using?
 
