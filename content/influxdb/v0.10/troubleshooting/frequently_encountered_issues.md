@@ -192,7 +192,7 @@ To successfully query data that use a keyword as an identifier enclose that iden
 * `SELECT * FROM "grant" WHERE why = 9`
 
 While using double quotes is an acceptable workaround, we recommend that you avoid using InfluxQL keywords as identifiers for simplicity's sake.
-The InfluxQL documentation has a comprehensive list of all [InfluxQL keywords](https://github.com/influxdb/influxdb/blob/master/influxql/INFLUXQL.md#keywords).
+The InfluxQL documentation has a comprehensive list of all [InfluxQL keywords](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords).
 
 ## Identifying write precision from returned timestamps
 InfluxDB stores all timestamps as nanosecond values regardless of the write precision supplied.
@@ -216,7 +216,7 @@ time                  value	 precision_supplied  timestamp_supplied
 ## Single quoting and double quoting in queries
 Single quote string values (for example, tag values) but do not single quote identifiers (database names, retention policy names, user names, measurement names, tag keys, and field keys).
 
-Double quote identifiers if they start with a digit, contain characters other than `[A-z,0-9,_]`, or if they are an [InfluxQL keyword](https://github.com/influxdb/influxdb/blob/master/influxql/INFLUXQL.md#keywords).
+Double quote identifiers if they start with a digit, contain characters other than `[A-z,0-9,_]`, or if they are an [InfluxQL keyword](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords).
 You can double quote identifiers even if they don't fall into one of those categories but it isn't necessary.
 
 Yes: `SELECT bikes_available FROM bikes WHERE station_id='9'`
@@ -314,7 +314,7 @@ So if two continuous queries write to different fields but also write to the sam
 For more on continuous queries, see [Continuous Queries](/influxdb/v0.10/query_language/continuous_queries/).
 
 ## Words and characters to avoid
-If you use any of the [InfluxQL keywords](https://github.com/influxdb/influxdb/blob/master/influxql/INFLUXQL.md#keywords) as an identifier you will need to double quote that identifier in every query.
+If you use any of the [InfluxQL keywords](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords) as an identifier you will need to double quote that identifier in every query.
 This can lead to [non-intuitive errors](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#getting-the-expected-identifier-error-unexpectedly).
 Identifiers are database names, retention policy names, user names, measurement names, tag keys, and field keys.
 
