@@ -16,5 +16,8 @@ View usage instructions for each service input by running `telegraf -usage <serv
 
 ## Supported Service Plugin List
 
-* [StatsD](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/statsd)
 * [Kafka Consumer](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/kafka_consumer)
+* [GitHub Webhooks](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/github_webhooks)
+* [MQTT Consumer](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/mqtt_consumer)
+* [NATS Consumer](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/nats_consumer)
+* [StatsD](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/statsd)
