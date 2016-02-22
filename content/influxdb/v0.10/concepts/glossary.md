@@ -29,9 +29,12 @@ Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [consens
 ## consensus service
 The InfluxDB service that participates in the raft consensus group.
 A cluster must have at least three nodes running the consensus service (consensus or hybrid nodes), but it can have more.
-There should be an odd number of nodes running the consensus service in a cluster. 
+There should be an odd number of nodes running the consensus service in a cluster.
+
 The number of consensus services that can fail before the cluster is degraded is &#8968;n/2 + 1&#8969; where `n` is the number of consensus services in the cluster.
-Thus, even numbers of consensus services offer no additional redundancy or resiliency.
+Thus, an even number of consensus services offer no additional redundancy or resiliency.
+
+The consensus service has consistent data about cluster membership, databases, retention policies, users, continuous queries, shard metadata, and subscriptions.
 
 See [Cluster Node Configuration](/influxdb/v0.10/clustering/cluster_node_config/).
 
@@ -59,7 +62,7 @@ Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [consens
 
 ## data service
 The InfluxDB service that persists time-series data to the node.
-A cluster must have at least one node running the data service (data or hybrid nodes), but may have any number beyond one.
+A cluster must have at least one node (data or hybrid nodes) running the data service, but may have any number beyond one.
 
 See [Cluster Node Configuration](/influxdb/v0.10/clustering/cluster_node_config/).
 
@@ -120,7 +123,7 @@ Coordinating nodes temporarily store queued data when a target node for a write 
 Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [node](/influxdb/v0.10/concepts/glossary/#node), [server](/influxdb/v0.10/concepts/glossary/#server)
 
 ## hybrid node
-A node running both the consensus and data services. 
+A node running both the consensus and data services.
 
 See [Cluster Node Configuration](/influxdb/v0.10/clustering/cluster_node_config/).
 

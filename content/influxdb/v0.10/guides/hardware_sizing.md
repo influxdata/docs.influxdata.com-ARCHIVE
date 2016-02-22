@@ -76,8 +76,8 @@ When running InfluxDB in a production environment the `wal` directory the `data`
 ### Consensus nodes
 [Consensus nodes](/influxdb/v0.10/concepts/glossary/#consensus-node) do not require significant system resources and can run on a very lightweight server.
 
-### Data nodes
-[Data nodes](/influxdb/v0.10/concepts/glossary/#data-node) have the following minimum hardware requirements:
+### Data or Hybrid nodes
+[Data nodes](/influxdb/v0.10/concepts/glossary/#data-node) and [Hybrid nodes](/influxdb/v0.10/concepts/glossary/#hybrid-node) have the following minimum hardware requirements:
 
 * CPU: 2
 * RAM: 4 GB

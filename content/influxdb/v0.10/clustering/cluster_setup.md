@@ -18,8 +18,7 @@ This guide briefly introduces the InfluxDB cluster model and provides step-by-st
 InfluxDB supports arbitrarily sized clusters and any [replication factor](/influxdb/v0.10/concepts/glossary/#replication-factor) from 1 to the number of nodes in the cluster.
 
 There are three types of nodes in an InfluxDB cluster: [consensus nodes](/influxdb/v0.10/concepts/glossary/#consensus-node), [data nodes](/influxdb/v0.10/concepts/glossary/#data-node), and [hybrid nodes](/influxdb/v0.10/concepts/glossary/#hybrid-node).
-A cluster must have an odd number of consensus and/or hybrid nodes to form a Raft consensus and remain in a healthy state.
-Any InfluxDB cluster must have _at least_ three consensus and/or hybrid nodes.
+A cluster must have an odd number of nodes running the [consensus service](/influxdb/v0.10/concepts/glossary/#consensus-service) to form a Raft consensus group and remain in a healthy state.
 
 
 Hardware requirements vary for the different node types. See [Hardware Sizing](/influxdb/v0.10/guides/hardware_sizing/#general-hardware-guidelines-for-clusters) for cluster hardware requirements.
@@ -31,7 +30,7 @@ If you're interested in having any of the different node types, see [Cluster Nod
 Note that your first three nodes must be either hybrid nodes or consensus nodes.
 
 
-We assume that you are running some version of Linux, and, while it is possible to build a cluster locally, it is not recommended.
+We assume that you are running some version of Linux, and, while it is possible to build a cluster on a single server, it is not recommended.
 
 > **Note:** Always use the [most recent release](https://influxdata.com/downloads/#influxdb) for clustering as there are significant improvements with each release.
 
@@ -45,8 +44,8 @@ Where `IP` is the node's IP address *or* hostname, each node's `/etc/influxdb/in
 [meta]
   enabled = true
   ...
-  bind-address = "IP:8088"
-  http-bind-address = "IP:8091"
+  bind-address = "<IP>:8088"
+  http-bind-address = "<IP>:8091"
 
 ...
 
@@ -55,7 +54,7 @@ Where `IP` is the node's IP address *or* hostname, each node's `/etc/influxdb/in
 
 [http]
   ...
-  bind-address = "IP:8086"
+  bind-address = "<IP>:8086"
 ```
 
 * Setting `[meta] enabled = true` and `[data] enabled = true` makes the node a hybrid node.
@@ -70,11 +69,11 @@ Where `IP` is the node's IP address *or* hostname, each node's `/etc/influxdb/in
 sudo service influxdb start
 ```
 
-**<font color=white size=4>4</font>**&nbsp;&nbsp;Connect the second and third nodes to the first node.
+**<font color=white size=4>4</font>**&nbsp;&nbsp;Point the second and third nodes to the first node.
 
 On the second and third nodes, set `INFLUXD_OPTS` in `/etc/default/influxdb`:
 ```
-INFLUXD_OPTS="-join IP1:8091"
+INFLUXD_OPTS="-join <IP1>:8091"
 ```
 where `IP1` is the *first* node's IP address *or* hostname.
 
@@ -108,7 +107,10 @@ id	 http_addr  tcp_addr
 4	  IP3:8091	  IP3:8088
 ```
 
-> **Note:** The irregular node `id` numbers is a known issue and a fix is underway.
+> **Notes:**
+>
+* Currently, the `SHOW SERVERS` query groups results into `data_nodes` and `meta_nodes`. The term `meta_nodes` is outdated and refers to a node that runs the consensus service.
+* The irregular node `id` numbers in the `SHOW SERVERS` results is a known issue and a fix is underway.
 For now, it may be easier to identify data nodes and consensus nodes by the IP addresses reported in the `SHOW SERVERS` results.
 
 And that's your three node cluster!
@@ -117,6 +119,10 @@ If you believe that you did the above steps correctly, but are still experiencin
 
 ### Adding nodes to your cluster
 
-Once your initial cluster is healthy and running appropriately, you can start adding nodes to the cluster. Additional nodes can be consensus nodes, data nodes, or hybrid nodes. See [Cluster Node Configuration](/influxdb/v0.10/clustering/cluster_node_config/) for how to configure the different node types.
+Once your initial cluster is healthy and running appropriately, you can start adding nodes to the cluster.
+Additional nodes can be consensus nodes, data nodes, or hybrid nodes.
+See [Cluster Node Configuration](/influxdb/v0.10/clustering/cluster_node_config/) for how to configure the different node types.
 
-Adding a node to your cluster follows the same procedure that we outlined above. Note that in step 4, when you connect your new node to the cluster, you must set `INFLUXD_OPTS` to any single pre-existing cluster member's `hostname:port` pair. If you specify more than one pair in a comma delimited list, Influx will try to connect with the additional pairs if it cannot connect with the first.
+Adding a node to your cluster follows the same procedure that we outlined above.
+Note that in step 4, when you point your new node to the cluster, you must set `INFLUXD_OPTS` to the `hostname:port` pair of a pre-existing cluster member that is running the [consensus service](/influxdb/v0.10/concepts/glossary/#consensus-service).
+If you specify more than one `hostname:port` pair in a comma delimited list, Influx will try to connect with the additional pairs if it cannot connect with the first.

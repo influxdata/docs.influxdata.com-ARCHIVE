@@ -16,7 +16,7 @@ Each node's [configuration file](/influxdb/v0.10/administration/config/) must sp
 * A `bind-address` in the `[meta]` section.
 This is the address for cluster wide communication.
 * An `http-bind-address` in the `[meta]` section.
-This is the address for consensus node communication.
+This is the address for consensus service communication.
 * A `bind-address` in the `[http]` section.
 This is the address for the HTTP API.
 
@@ -26,15 +26,16 @@ Each configuration option should indicate the node's IP address or hostname foll
 
 ### Consensus node
 
-Consensus nodes coordinate activity in the cluster. They participate in consensus, which means that they have consistent data about cluster membership, [databases](/influxdb/v0.10/concepts/glossary/#database), [retention policies](/influxdb/v0.10/concepts/glossary/#retention-policy-rp), [users](/influxdb/v0.10/concepts/glossary/#user), [continuous queries](/influxdb/v0.10/concepts/glossary/#continuous-query-cq), and shard metadata.
+Consensus nodes run only the consensus service.
+The consensus service has consistent data about cluster membership, [databases](/influxdb/v0.10/concepts/glossary/#database), [retention policies](/influxdb/v0.10/concepts/glossary/#retention-policy-rp), [users](/influxdb/v0.10/concepts/glossary/#user), [continuous queries](/influxdb/v0.10/concepts/glossary/#continuous-query-cq), shard metadata, and [subscriptions](/influxdb/v0.10/query_language/spec/#create-subscription).
 
 #### Configuration:
 ```
 [meta]
   enabled = true #✨
   ...
-  bind-address = "IP:8088"
-  http-bind-address = "IP:8091"
+  bind-address = "<IP>:8088"
+  http-bind-address = "<IP>:8091"
 
 ...
 
@@ -43,20 +44,21 @@ Consensus nodes coordinate activity in the cluster. They participate in consensu
 
 [http]
   ...
-  bind-address = "IP:8086"
+  bind-address = "<IP>:8086"
 ```
 
 ### Data node
 
-Data nodes store the actual time series data and respond to queries about those data.
+Data nodes run only the data service.
+The data service stores the actual time series data and responds to queries about those data.
 
 #### Configuration:
 ```
 [meta]
   enabled = false #✨
   ...
-  bind-address = "IP:8088"
-  http-bind-address = "IP:8091"
+  bind-address = "<IP>:8088"
+  http-bind-address = "<IP>:8091"
 
 ...
 
@@ -65,20 +67,20 @@ Data nodes store the actual time series data and respond to queries about those 
 
 [http]
   ...
-  bind-address = "IP:8086"
+  bind-address = "<IP>:8086"
 ```
 
 ### Hybrid node
 
-Hybrid nodes act as both a consensus node and a data node.
+Hybrid nodes run both the consensus and data services.
 
 #### Configuration:
 ```
 [meta]
   enabled = true #✨
   ...
-  bind-address = "IP:8088"
-  http-bind-address = "IP:8091"
+  bind-address = "<IP>:8088"
+  http-bind-address = "<IP>:8091"
 
 ...
 
@@ -87,5 +89,5 @@ Hybrid nodes act as both a consensus node and a data node.
 
 [http]
   ...
-  bind-address = "IP:8086"
+  bind-address = "<IP>:8086"
 ```
