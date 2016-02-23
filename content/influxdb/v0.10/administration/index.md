@@ -11,7 +11,7 @@ This section covers setting up and managing authentication and authorization in 
 
 Procedures to backup data created by InfluxDB and to restore from a backup.
 
-## [Database Configuration](/influxdb/v0.10/administration/configuration/)
+## [Database Configuration](/influxdb/v0.10/administration/config/)
 
 Information about the config file `influx.conf`
 
