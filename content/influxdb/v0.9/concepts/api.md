@@ -17,7 +17,7 @@ The response body is empty.
 The version of the InfluxDB server you issued the request to can be extracted through the `X-Influxdb-Version` field of the header.
 For example this is the response from a server running `0.9.5-nightly-548b898` of InfluxDB:
 
-```sh
+```bash
 $ curl -sl -I localhost:8086/ping
 
 HTTP/1.1 204 No Content
@@ -32,7 +32,7 @@ One second is a good default, but for highly distributed clusters or clusters un
 Increasing the timeout gives the raft leader longer to respond.
 The request will return `204` if successful and `503` in the case of a timeout.
 
-```sh
+```bash
 $ curl -sl -I localhost:8086/ping?wait_for_leader=1s
 
 HTTP/1.1 204 No Content

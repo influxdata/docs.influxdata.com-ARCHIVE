@@ -32,24 +32,24 @@ Here, we'll generate a configuration file and simultaneously specify the desired
 In the example below, we create a configuration file called `telegraf.conf` with two plugins: one that reads metrics about the system's cpu usage (`cpu`) and one that reads metrics about the system's memory usage (`mem`).
 `telegraf.conf` specifies InfluxDB as the desired ouput.
 
-```sh
+```bash
 telegraf -sample-config -filter cpu:mem -outputfilter influxdb > telegraf.conf
 ```
 
 ## Start the Telegraf Server
 Start the Telegraf server and direct it to the relevant configuration file:
 ### OS X [Homebrew](http://brew.sh/)
-```sh
+```bash
 telegraf -config telegraf.conf
 ```
 
 ### Linux debian and RPM packages
-```sh
+```bash
 sudo service telegraf start
 ```
 
 ### Ubuntu 15+
-```sh
+```bash
 systemctl start telegraf
 ```
 
@@ -61,7 +61,7 @@ Note that we used the default plugin and output configuration settings to get th
 
 * List all [measurements](https://docs.influxdata.com/influxdb/v0.9/concepts/glossary/#measurement) in the `telegraf` [database](https://docs.influxdata.com/influxdb/v0.9/concepts/glossary/#database):
 
-```sh
+```bash
 > SHOW MEASUREMENTS
 name: measurements
 ------------------
@@ -90,7 +90,7 @@ Notice that each measurement has the name of the plugin prepended to it.
 
 * Select a sample of the data in the measurement `cpu_usage_idle`:
 
-```sh
+```bash
 > SELECT value FROM cpu_usage_idle WHERE cpu='cpu-total' LIMIT 5
 name: cpu_usage_idle
 --------------------

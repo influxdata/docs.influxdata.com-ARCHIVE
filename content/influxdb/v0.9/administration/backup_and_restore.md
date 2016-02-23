@@ -29,7 +29,7 @@ Even viable backups may have some data loss for the period immediately preceedin
 
 Here is an example set of commands:
 
-```sh
+```bash
 service influxd stop 
 tar -cvf influxdb.backup.2016.01.02.tar /var/opt/influxdb/meta /var/opt/influxdb/data /etc/influxdb/influxdb.conf
 ...
@@ -51,7 +51,7 @@ service influxd start
 While a data node is running, you can create a hot backup to a snapshot file (e.g.
 `/tmp/mysnapshot`):
 
-```sh
+```bash
 $ influxd backup /tmp/mysnapshot
 ```
 
@@ -60,14 +60,14 @@ See configuration options below to snapshot from another machine.
 
 To capture a backup from a remote node, specify the host and port using the -host configuration switch:
 
-```sh
+```bash
 $ influxd backup -host 10.0.0.0:8088 /tmp/mysnapshot
 ```
 
 Once you have your snapshot file, you can copy it to another machine and restore it.
 Be sure to first shut down any running influxd process
 
-```sh
+```bash
 $ influxd restore -config /path/to/influxdb.conf /path/to/mysnapshot
 ```
 
@@ -103,7 +103,7 @@ Snapshotting from the server now creates a full backup if one does not exist and
 
 For example, if you ran:
 
-```sh
+```bash
 $ influxd backup /tmp/snapshot
 ```
 

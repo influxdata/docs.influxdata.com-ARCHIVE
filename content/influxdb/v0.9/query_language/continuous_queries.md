@@ -113,7 +113,7 @@ The CQ `elsewhere` automatically calculates the 10 minute average of the field `
 It writes the results to the already-existing database `reality`, preserving all of the measurement names in `fantasy`.
 
 A sample of the data in `fantasy`:
-```sh
+```bash
 > SHOW MEASUREMENTS
 name: measurements
 ------------------
@@ -134,7 +134,7 @@ time			               value
 ```
 
 A sample of the data in `reality` after `elsewhere` runs for a bit:
-```sh
+```bash
 > SHOW MEASUREMENTS
 name: measurements
 ------------------
@@ -159,7 +159,7 @@ SHOW CONTINUOUS QUERIES
 
 *Example:*
 
-```sh
+```bash
 > SHOW CONTINUOUS QUERIES
 name: reality
 -------------
@@ -181,7 +181,7 @@ DROP CONTINUOUS QUERY <cq_name> ON <database_name>
 
 *Example:*
 
-```sh
+```bash
 > DROP CONTINUOUS QUERY elsewhere ON fantasy
 >
 ```

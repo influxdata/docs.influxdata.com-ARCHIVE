@@ -28,7 +28,7 @@ would like the backup to be written to. Without any other arguments,
 the backup will only record the current state of the system
 metastore. For example, the command:
 
-```sh
+```bash
 $ influxd backup /tmp/backup
 2016/02/01 17:15:03 backing up metastore to /tmp/backup/meta.00
 2016/02/01 17:15:03 backup complete
@@ -41,7 +41,7 @@ directory will be created if it doesn't already exist).
 
 To backup a database, you will need to add the `-database` flag:
 
-```
+```bash
 influxd backup -database mydatabase /path/to/backup
 ```
 
@@ -89,7 +89,7 @@ then be compressed and sent to long-term storage.
 To capture a backup from a remote node, specify the host and port of
 the remote instance using the `-host` configuration switch:
 
-```sh
+```bash
 $ influxd backup -database mydatabase -host 10.0.0.1:8088 /tmp/mysnapshot
 ```
 
@@ -161,7 +161,7 @@ the file permissions are correct, please run:
 
 Once the data and metastore are recovered, it's time to start the database:
 
-```
+```bash
 $ service influxdb start
 ```
 

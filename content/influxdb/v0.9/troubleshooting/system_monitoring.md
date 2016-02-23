@@ -22,7 +22,7 @@ Show a series of statistics related to your InfluxDB instance
 
 CLI response:
 
-```sh
+```bash
 name: engine
 tags: path=/Users/johnzampolin/.influxdb/data/telegraf/default/65, version=bz1
 blks_write	blks_write_bytes	blks_write_bytes_c	points_write	points_write_dedupe
@@ -77,7 +77,7 @@ Retrieve a collection of diagnostic information helpful for troubleshooting.
 
 CLI response:
 
-```sh
+```bash
 name: build
 -----------
 Branch   Commit				            	  	               Version

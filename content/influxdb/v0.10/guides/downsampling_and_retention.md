@@ -88,7 +88,7 @@ For a more detailed discussion on the `CREATE RETENTION POLICY` syntax, see [Dat
 To clarify, we've included the results from the [`SHOW RETENTION POLICIES`](/influxdb/v0.10/query_language/schema_exploration/#explore-retention-policies-with-show-retention-policies) query below.
 Notice that there are two RPs in `food_data` (`default` and `two_hours`) and that the third column identifies `two_hours` as the `DEFAULT` RP.
 
-```sh
+```bash
 > SHOW RETENTION POLICIES ON food_data
 name		      duration	  replicaN	  default
 default		   0		        1		        false
@@ -116,7 +116,7 @@ Now that we've prepped `food_data`, we start writing the data to InfluxDB and le
 After a while, we see that the database has two measurements: `orders` and `downsampled_orders`.
 
 A sample of the oldest data in `orders` - these are the raw 10 second data subject to the `two_hours` RP:
-```sh
+```bash
 > SELECT * FROM orders LIMIT 5
 name: orders
 -----------------
@@ -130,7 +130,7 @@ time						            phone 	website
 We submitted this query on 12/04/2015 at 22:08:19 UTC  - notice that the oldest data have timestamps that are no older than around two hours ago<sup>[1](#retentionconfig)</sup>.
 
 A sample of the oldest data in `downsampled_orders` - these are the aggregated data subject to the `default` RP:
-```sh
+```bash
 > SELECT * FROM food_data."default".downsampled_orders LIMIT 5
 name: downsampled_orders
 ------------------------

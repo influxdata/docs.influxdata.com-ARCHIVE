@@ -15,7 +15,7 @@ To create a database send a `GET` request to the `/query` endpoint and set the U
 The example below sends a request to InfluxDB running on `localhost` and creates the database `mydb`:  
 <br>
 
-```sh
+```bash
 curl -G http://localhost:8086/query --data-urlencode "q=CREATE DATABASE mydb"
 ```
 
@@ -26,7 +26,7 @@ The example below writes a single point to the `mydb` database.
 The data consist of the [measurement](/influxdb/v0.10/concepts/glossary/#measurement) `cpu_load_short`, the [tag keys](/influxdb/v0.10/concepts/glossary/#tag-key) `host` and `region` with the [tag values](/influxdb/v0.10/concepts/glossary/#tag-value) `server01` and `us-west`, the [field key](/influxdb/v0.10/concepts/glossary/#field-key) `value` with a [field value](/influxdb/v0.10/concepts/glossary/#field-value) of `0.64`, and the [timestamp](/influxdb/v0.10/concepts/glossary/#timestamp) `1434055562000000000`.
 <br>
 
-```sh
+```bash
 curl -i -XPOST 'http://localhost:8086/write?db=mydb' --data-binary 'cpu_load_short,host=server01,region=us-west value=0.64 1434055562000000000'
 ```
 When writing points, you must specify an existing database in the `db` query parameter.
@@ -53,7 +53,7 @@ The second point belongs to the series with the measurement `cpu_load_short` and
 The third point has the same specified timestamp as the second point, but it is written to the series with the measurement `cpu_load_short` and tag set `direction=in,host=server01,region=us-west`.
 <br>
 
-```sh
+```bash
 curl -i -XPOST 'http://localhost:8086/write?db=mydb' --data-binary 'cpu_load_short,host=server02 value=0.67
 cpu_load_short,host=server02,region=us-west value=0.55 1422568543702900257
 cpu_load_short,direction=in,host=server01,region=us-west value=2.0 1422568543702900257'
@@ -113,7 +113,7 @@ The body of the response will contain additional error information.
 
 * Writing a float to a field that previously accepted booleans:
 
-```sh
+```bash
 curl -i -XPOST 'http://localhost:8086/write?db=hamlet' --data-binary 'tobeornottobe booleanonly=true'  
 
 curl -i -XPOST 'http://localhost:8086/write?db=hamlet' --data-binary 'tobeornottobe booleanonly=5'
@@ -122,7 +122,7 @@ curl -i -XPOST 'http://localhost:8086/write?db=hamlet' --data-binary 'tobeornott
 returns:  
 <br>
 
-```sh
+```bash
 HTTP/1.1 400 Bad Request
 [...]
 write failed: field type conflict: input field "booleanonly" on measurement "tobeornottobe" is type float64, already exists as type boolean
@@ -130,14 +130,14 @@ write failed: field type conflict: input field "booleanonly" on measurement "tob
 
 * Writing a point to a database that doesn't exist:
 
-```sh
+```bash
 curl -i -XPOST 'http://localhost:8086/write?db=atlantis' --data-binary 'liters value=10'
 ```
 
 returns:  
 <br>
 
-```sh
+```bash
 HTTP/1.1 404 Not Found
 [...]
 database not found: "atlantis"
