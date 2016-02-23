@@ -64,6 +64,12 @@ This is where you specify the destination measurement for the query results.
 2. The optional `WHERE` clause:
 Because CQs run on regularly incremented time intervals you don't need to (and shouldn't!) specify a time range in the `WHERE` clause. When included, the CQ's `WHERE` clause should filter information about tags.
 
+> **Note:** If you include a tag in the CQ's `SELECT` clause, InfluxDB changes the tag in `<current_measurement>` to a field in `<different_measurement>`.
+To preserve a tag in `<different_measurement>`, only include the tag key in the CQ's `GROUP BY` clause.
+
+> If you specify a tag in the CQ's `SELECT` clause **and** in the CQ's `GROUP BY` clause, you will not be able to query the data in `<different_measurement>`.
+See GitHub Issue [#4630](https://github.com/influxdata/influxdb/issues/4630) for more information.
+
 #### CQ examples:
 
 * Create a CQ with one function:
@@ -92,7 +98,7 @@ Because CQs run on regularly incremented time intervals you don't need to (and s
 > CREATE CONTINUOUS QUERY minnie_maximus ON world BEGIN SELECT min(mouse),max(imus) INTO min_max_mouse FROM zoo GROUP BY time(30m) END
     ```
 
-    The CQ `minnie_maximus` automatically calculates the 30 minute minimum of the field `mouse` and the 30 minute maximum of the field `imus` (both fields are in the measurement `zoo`), and it writes the results to the measurement `min_max_mouse`. 
+    The CQ `minnie_maximus` automatically calculates the 30 minute minimum of the field `mouse` and the 30 minute maximum of the field `imus` (both fields are in the measurement `zoo`), and it writes the results to the measurement `min_max_mouse`.
 
 * Create a CQ with two functions and personalize the [field keys](/influxdb/v0.10/concepts/glossary/#field-key) in the results:
 
