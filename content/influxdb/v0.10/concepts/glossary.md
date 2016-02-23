@@ -19,6 +19,27 @@ See [Clustering](/influxdb/v0.10/guides/clustering/) for how to set up an Influx
 
 Related entries: [node](/influxdb/v0.10/concepts/glossary/#node), [server](/influxdb/v0.10/concepts/glossary/#server)
 
+## consensus node
+A node running only the consensus service.
+
+See [Cluster Node Configuration](/influxdb/v0.10/clustering/cluster_node_config/).
+
+Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [consensus service](/influxdb/v0.10/concepts/glossary/#consensus-service), [data node](/influxdb/v0.10/concepts/glossary/#data-node), [node](/influxdb/v0.10/concepts/glossary/#node), [hybrid node](/influxdb/v0.10/concepts/glossary/#hybrid-node)
+
+## consensus service
+The InfluxDB service that participates in the raft consensus group.
+A cluster must have at least three nodes running the consensus service (consensus or hybrid nodes), but it can have more.
+There should be an odd number of nodes running the consensus service in a cluster.
+
+The number of consensus services that can fail before the cluster is degraded is &#8968;n/2 + 1&#8969; where `n` is the number of consensus services in the cluster.
+Thus, an even number of consensus services offer no additional redundancy or resiliency.
+
+The consensus service ensures consistency across the cluster for node membership, databases, retention policies, users, continuous queries, shard metadata, and subscriptions.
+
+See [Cluster Node Configuration](/influxdb/v0.10/clustering/cluster_node_config/).
+
+Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [consensus node](/influxdb/v0.10/concepts/glossary/#consensus-node), [data service](/influxdb/v0.10/concepts/glossary/#data-service), [node](/influxdb/v0.10/concepts/glossary/#node), [hybrid node](/influxdb/v0.10/concepts/glossary/#hybrid-node)
+
 ## continuous query (CQ)
 An InfluxQL query that runs automatically and periodically within a database.
 Continuous queries require a function in the `SELECT` clause and must include a `GROUP BY time()` clause.
@@ -33,9 +54,19 @@ The node that receives write and query requests for the cluster.
 Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [hinted handoff](/influxdb/v0.10/concepts/glossary/#hinted-handoff), [node](/influxdb/v0.10/concepts/glossary/#node)
 
 ## data node
-A node that stores data. A data node may also be a meta node, but it is not required.
+A node running only the data service.
 
-Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [meta node](/influxdb/v0.10/concepts/glossary/#meta-node), [node](/influxdb/v0.10/concepts/glossary/#node)
+See [Cluster Node Configuration](/influxdb/v0.10/clustering/cluster_node_config/).
+
+Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [consensus node](/influxdb/v0.10/concepts/glossary/#consensus-node), [data service](/influxdb/v0.10/concepts/glossary/#data-service), [node](/influxdb/v0.10/concepts/glossary/#node), [hybrid node](/influxdb/v0.10/concepts/glossary/#hybrid-node)
+
+## data service
+The InfluxDB service that persists time-series data to the node.
+A cluster must have at least one node (data or hybrid nodes) running the data service, but may have any number beyond one.
+
+See [Cluster Node Configuration](/influxdb/v0.10/clustering/cluster_node_config/).
+
+Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [consensus node](/influxdb/v0.10/concepts/glossary/#consensus-node), [consensus service](/influxdb/v0.10/concepts/glossary/#consensus-service), [node](/influxdb/v0.10/concepts/glossary/#node), [hybrid node](/influxdb/v0.10/concepts/glossary/#hybrid-node)
 
 ## database
 A logical container for users, retention policies, continuous queries, and time series data.
@@ -60,7 +91,6 @@ Related entries: [field key](/influxdb/v0.10/concepts/glossary/#field-key), [fie
 ## field key
 The key part of the key-value pair that makes up a field.
 Field keys are strings and they store metadata.
-
 
 Related entries: [field](/influxdb/v0.10/concepts/glossary/#field), [field set](/influxdb/v0.10/concepts/glossary/#field-set), [field value](/influxdb/v0.10/concepts/glossary/#field-value), [tag key](/influxdb/v0.10/concepts/glossary/#tag-key)
 
@@ -92,6 +122,13 @@ Coordinating nodes temporarily store queued data when a target node for a write 
 
 Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [node](/influxdb/v0.10/concepts/glossary/#node), [server](/influxdb/v0.10/concepts/glossary/#server)
 
+## hybrid node
+A node running both the consensus and data services.
+
+See [Cluster Node Configuration](/influxdb/v0.10/clustering/cluster_node_config/).
+
+Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [consensus node](/influxdb/v0.10/concepts/glossary/#consensus-node), [consensus service](/influxdb/v0.10/concepts/glossary/#consensus-service), [node](/influxdb/v0.10/concepts/glossary/#node), [data node](/influxdb/v0.10/concepts/glossary/#data-node), [data service](/influxdb/v0.10/concepts/glossary/#data-service)
+
 ## identifier
 Tokens which refer to database names, retention policy names, user names, measurement names, tag keys, and field keys.
 See [Query Language Specification](/influxdb/v0.10/query_language/spec/#identifiers).
@@ -103,11 +140,6 @@ The part of InfluxDB's structure that describes the data stored in the associate
 Measurements are strings.
 
 Related entries: [field](/influxdb/v0.10/concepts/glossary/#field), [series](/influxdb/v0.10/concepts/glossary/#series)
-
-## meta node
-A node that participates in the raft consensus group. A meta node may also be a data node, but it is not required. A cluster should have at least three meta nodes, but it can have more. There should be an odd number of meta nodes in a cluster.
-
-Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [data node](/influxdb/v0.10/concepts/glossary/#data-node), [node](/influxdb/v0.10/concepts/glossary/#node)
 
 ## node
 An independent `influxd` process.

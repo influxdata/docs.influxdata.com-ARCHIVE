@@ -73,15 +73,19 @@ When running InfluxDB in a production environment the `wal` directory and the `d
 
 ## General hardware guidelines for clusters
 
-Minimum hardware requirements:
+### Consensus nodes
+[Consensus nodes](/influxdb/v0.10/concepts/glossary/#consensus-node) do not require significant system resources and can run on a very lightweight server.
+
+### Data or Hybrid nodes
+[Data nodes](/influxdb/v0.10/concepts/glossary/#data-node) and [Hybrid nodes](/influxdb/v0.10/concepts/glossary/#hybrid-node) have the following minimum hardware requirements:
 
 * CPU: 2
 * RAM: 4 GB
 * IOPS: 1000+
 
-When running a cluster every member should have at least two cores.
-
 For better performance, we recommend having 8 GB RAM and 4 CPUs or more.
+
+When running a cluster every member should have at least two cores.
 
 ## How should I configure my hardware differently from a single-node instance?
 Place the `hh` directory on a separate storage device from the `wal` and `data` directories. This significantly reduces disk contention when the cluster is under heavy write load. For more information on setting up a cluster, see [Clustering setup](/influxdb/v0.10/guides/clustering/).
