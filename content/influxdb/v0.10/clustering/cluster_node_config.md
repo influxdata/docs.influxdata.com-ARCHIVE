@@ -27,7 +27,7 @@ Each configuration option should indicate the node's IP address or hostname foll
 ### Consensus node
 
 Consensus nodes run only the consensus service.
-The consensus service has consistent data about cluster membership, [databases](/influxdb/v0.10/concepts/glossary/#database), [retention policies](/influxdb/v0.10/concepts/glossary/#retention-policy-rp), [users](/influxdb/v0.10/concepts/glossary/#user), [continuous queries](/influxdb/v0.10/concepts/glossary/#continuous-query-cq), shard metadata, and [subscriptions](/influxdb/v0.10/query_language/spec/#create-subscription).
+The consensus service ensures consistency across the cluster for node membership, [databases](/influxdb/v0.10/concepts/glossary/#database), [retention policies](/influxdb/v0.10/concepts/glossary/#retention-policy-rp), [users](/influxdb/v0.10/concepts/glossary/#user), [continuous queries](/influxdb/v0.10/concepts/glossary/#continuous-query-cq), shard metadata, and [subscriptions](/influxdb/v0.10/query_language/spec/#create-subscription).
 
 #### Configuration:
 ```

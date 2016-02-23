@@ -34,7 +34,7 @@ There should be an odd number of nodes running the consensus service in a cluste
 The number of consensus services that can fail before the cluster is degraded is &#8968;n/2 + 1&#8969; where `n` is the number of consensus services in the cluster.
 Thus, an even number of consensus services offer no additional redundancy or resiliency.
 
-The consensus service has consistent data about cluster membership, databases, retention policies, users, continuous queries, shard metadata, and subscriptions.
+The consensus service ensures consistency across the cluster for node membership, databases, retention policies, users, continuous queries, shard metadata, and subscriptions.
 
 See [Cluster Node Configuration](/influxdb/v0.10/clustering/cluster_node_config/).
 
