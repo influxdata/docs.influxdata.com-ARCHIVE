@@ -317,16 +317,13 @@ END;
 ### CREATE DATABASE
 
 ```
-create_database_stmt = "CREATE DATABASE" ["IF NOT EXISTS"] db_name
+create_database_stmt = "CREATE DATABASE" db_name
 ```
 
 #### Examples:
 
 ```sql
 CREATE DATABASE foo
-
--- create a database if it doesn't already exist
-CREATE DATABASE IF NOT EXISTS foo
 ```
 
 ### CREATE RETENTION POLICY
