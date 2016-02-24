@@ -152,7 +152,7 @@ Meta logging toggles the logging of messages from the meta service.
 
 ## [data]
 
-This section controls where the actural shard data for InfluxDB lives and how it is flushed from the WAL. `dir` may need to be changed to a suitable place for you system, but the WAL settings are an advanced configuration. The defaults should work for most systems.
+This section controls where the actual shard data for InfluxDB lives and how it is flushed from the WAL. `dir` may need to be changed to a suitable place for you system, but the WAL settings are an advanced configuration. The defaults should work for most systems.
 
 ### dir = "/var/opt/influxdb/data"
 
