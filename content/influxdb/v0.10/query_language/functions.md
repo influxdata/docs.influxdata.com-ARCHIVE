@@ -523,7 +523,7 @@ Note that in the raw data, `water_level` equals `4.055` at `2015-08-18T04:06:00Z
 In the case of a tie, InfluxDB returns the value with the earlier timestamp.
 
 ## FIRST()
-Returns the oldest value (determined by the timestamp) of a single [field](/influxdb/v0.10/concepts/glossary/#field).
+Returns the oldest value (determined by the timestamp) of a single [field](/influxdb/v0.10/concepts/glossary/#field). If two points have the same timestamp, only a single point will be returned and the returned point is non-derministic.
 ```sql
 SELECT FIRST(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
 ```
@@ -570,7 +570,7 @@ See GitHub Issue [#4680](https://github.com/influxdb/influxdb/issues/4680) for m
 </dt>
 
 ## LAST()
-Returns the newest value (determined by the timestamp) of a single [field](/influxdb/v0.10/concepts/glossary/#field).
+Returns the newest value (determined by the timestamp) of a single [field](/influxdb/v0.10/concepts/glossary/#field). If two points have the same timestamp, only a single point will be returned and the returned point is non-derministic.
 ```sql
 SELECT LAST(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
 ```
