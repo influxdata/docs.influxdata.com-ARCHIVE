@@ -1,14 +1,9 @@
 <nav class="main-nav" id="main-nav">
-    <a href="{{ .Site.BaseURL }}" target="_blank" title="Return to influxdata.com"><img src="/img/logo.svg" class="main-nav--logo" /></a>
+    <a href="{{ .Site.BaseURL }}" target="_blank" title="Go to Documentation Home"><img src="/img/logo.svg" class="main-nav--logo" /></a>
     <div class="main-nav--hamburger" id="main-nav--hamburger">
         <div class="main-nav--hamburger-bar top"></div>
         <div class="main-nav--hamburger-bar middle"></div>
         <div class="main-nav--hamburger-bar bottom"></div>
     </div>
 </nav>
-<nav class="main-nav--links" id="main-nav--links">
-    <a class="main-nav--link" href="https://influxdata.com/use-cases/">Why use Influx?</a>
-    <a class="main-nav--link" href="https://influxdata.com/time-series-platform/">Platform</a>
-    <a class="main-nav--link" href="https://influxdata.com/pricing/#professional-services">Services</a>
-    <a class="main-nav--link" href="https://influxdata.com/pricing/#product-subscriptions">Pricing</a>
-</nav>
+{{ partial "search.html" . }}

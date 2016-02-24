@@ -50,7 +50,7 @@ a:hover {
 .page--body pre {
 	display: inline-block;
 	margin-bottom: 1.5em;
-	line-height: 1.45em;
+	line-height: 1.6em;
 }
 .page--body table {
 	margin-bottom: 1.5em;
@@ -102,11 +102,11 @@ a:hover {
 .page--body h1 {
 	font-size: 2.85em;
 	font-weight: 200;
-	font-family: 'Klavika-Light';
+	font-family: 'Klavika-Light','Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;;
 }
 .page--body h2 {
 	font-size: 2.197em;
-	font-weight: 800;
+	font-weight: 600;
 	padding-bottom: 0.5em;
 	margin-top: 3em;
 	border-bottom: 2px solid #2C323D;
@@ -114,11 +114,11 @@ a:hover {
 .page--body h3 {
 	margin-top: 1em;
 	font-size: 1.69em;
-	font-weight: 200;
+	font-weight: 300;
 }
 .page--body h4 {
 	font-size: 1.3em;
-	font-weight: 200;
+	font-weight: 300;
 }
 .page--body h1:first-child,
 .page--body h2:first-child,
@@ -140,11 +140,18 @@ a:hover {
 	list-style-position: outside;
 	padding-left: 0.5em;
 }
-.page--body ul li {
-	list-style-type: disc;
+.page--body ul > li {
+	list-style-type: disc !important;
 }
-.page--body ol li {
+.page--body ol li,
+.page--body ul ol li {
 	list-style-type: upper-roman;
+}
+.page--body ol ol li {
+	list-style-type: lower-alpha;
+}
+.page--body ol ol ol li {
+	list-style-type: decimal;
 }
 .page--body li:last-child {
 	margin-bottom: 0;
@@ -158,6 +165,11 @@ a:hover {
 	margin-left: 0;
 	margin-bottom: 0;
 	margin-top: 1.25em;
+}
+/* removing left margin on nested p */
+.page--body ul p,
+.page--body ol p {
+	margin-left: 0;
 }
 
 /*
