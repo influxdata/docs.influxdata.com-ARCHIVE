@@ -1,6 +1,13 @@
 {{ if not (or (in .RelPermalink .Site.Data.default_versions.influxdb_semver) (eq .RelPermalink "/influxdb/")) }}
+{{ if in .RelPermalink "v0.9"}}
+<div class="flash">
+    <p><b>0.9 Warning! This page documents an old version of InfluxDB, which is no longer actively developed. <a href="/influxdb/{{ .Site.Data.default_versions.influxdb_semver }}/{{ substr .RelPermalink 15 }}">InfluxDB {{ .Site.Data.default_versions.influxdb_semver }}</a> is the most recent version of InfluxDB.</b></p>
+</div>
+<br />
+{{ else }}
 <div class="flash">
     <p><b>Warning! This page documents an old version of InfluxDB, which is no longer actively developed. <a href="/influxdb/{{ .Site.Data.default_versions.influxdb_semver }}/">InfluxDB {{ .Site.Data.default_versions.influxdb_semver }}</a> is the most recent version of InfluxDB.</b></p>
 </div>
 <br />
+{{ end }}
 {{ end }}
