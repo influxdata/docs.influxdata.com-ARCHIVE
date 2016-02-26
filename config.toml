@@ -1495,3 +1495,11 @@ SectionPagesMenu = "products"
   weight = 100
   url = "https://github.com/CargoSense/puppet-influxdb"
   parent = "tools"
+
+# Kapacitor v0.10 Sub-Menu - Introduction
+[[menu.kapacitor_010]]
+  name = "Download"
+  identifier = "download"
+  weight = 0
+  url = "https://influxdata.com/downloads/#kapacitor"
+  parent = "introduction"
