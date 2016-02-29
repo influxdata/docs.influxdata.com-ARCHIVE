@@ -496,15 +496,17 @@ For more information on templates please see the [graphite service README](https
 
 ## [collectd]
 
-This section controls the listener for collectd data.
+This section controls the listener for collectd data. See the
+[README](https://github.com/influxdata/influxdb/tree/master/services/collectd)
+on Github for more information.
 
 ### enabled = false
 
 Set to `true` to enable collectd writes.
 
-### bind-address = ""
+### bind-address = ":25826"
 
-An empty string is equivalent to `0.0.0.0`.
+The default port.
 
 ### database = ""
 
@@ -513,7 +515,9 @@ This defaults to `collectd`.
 
 ### typesdb = ""
 
-Defaults to `/usr/share/collectd/types.db`.
+Defaults to `/usr/share/collectd/types.db`. A sample `types.db` file
+can be found
+[here](https://github.com/collectd/collectd/blob/master/src/types.db).
 
 *The next three options control how batching works.
 You should have this enabled otherwise you could get dropped metrics or poor performance.
