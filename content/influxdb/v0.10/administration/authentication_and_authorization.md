@@ -106,7 +106,7 @@ See the section on [authorization](/influxdb/v0.10/administration/authentication
 
 If you authenticate with both Basic Authentication **and** the URL query parameters, the user credentials specified in the query parameters take precedence.
 
-> **Note:** InfluxDB redacts passwords when you enable authentication. 
+> **Note:** InfluxDB redacts passwords when you enable authentication.
 
 #### Authenticate using the CLI
 There are two options for authenticating with the CLI.
@@ -117,8 +117,8 @@ There are two options for authenticating with the CLI.
 
     ```bash
 $ influx
-Connected to http://localhost:8086 version 0.9.4.1
-InfluxDB shell 0.9.4.1
+Connected to http://localhost:8086 version 0.10.1
+InfluxDB shell 0.10.1
 > auth todd influxdb4ever
 >
     ```

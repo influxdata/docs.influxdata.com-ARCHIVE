@@ -162,11 +162,6 @@ tag value is `tag,value,with"commas"`, the field key is `field_key\\\\` and the 
 
 ### Caveats
 
-> **Note:** Prior to version 0.9.3, integers were numeric values that did not include a decimal (e.g.
-1, 345, 2015, -10) and were not followed by a trailing `i`.
-Including a trailing `i` when writing integers will cause an error in versions 0.9.2 and prior.
-See [issue](https://github.com/influxdb/influxdb/issues/3519) for more information.
-
 If you write points in a batch all points without explicit timestamps will receive the same timestamp when inserted.
 Since a point is defined only by its measurement, tag set, and timestamp, that can lead to duplicate points.
 When InfluxDB encounters a duplicate point, the [field set](/influxdb/v0.10/concepts/glossary/#field-set) becomes the union of the old field set and the new field set, where any ties go to the new field set.
