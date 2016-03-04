@@ -1,5 +1,6 @@
 ---
 title: Configuring Continuous Queries
+newversionredirect: query_language/continuous_queries/
 menu:
   influxdb_09:
     weight: 41
