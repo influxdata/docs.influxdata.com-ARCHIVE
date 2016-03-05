@@ -56,6 +56,8 @@ Plugins do not currently have the ability to authenticate requests and service e
 1. Create at least one [admin user](/influxdb/v0.10/administration/authentication_and_authorization/#admin-users).
 See the [authorization section](/influxdb/v0.10/administration/authentication_and_authorization/#authorization) for how to create an admin user.
 
+    > **Note:** If you enable authentication and have no users, InfluxDB will **not** enforce authentication until you create the first admin user, and InfluxDB will only accept the [query](/influxdb/v0.10/administration/authentication_and_authorization/#create-a-new-admin-user) that creates an admin user.
+
 2. By default, authentication is disabled in the configuration file.
 Enable authentication by setting the `auth-enabled` option to `true` in the `[http]` section of the configuration file:
 
@@ -74,8 +76,6 @@ Enable authentication by setting the `auth-enabled` option to `true` in the `[ht
 3. Restart the process.
 
 Now InfluxDB will check user credentials on every request and will only process requests that have valid credentials for an existing user.
-
-> **Note:** If you enable authentication and have no users, InfluxDB will **not** enforce authentication until you create the first admin user, and InfluxDB will only accept the [query](/influxdb/v0.10/administration/authentication_and_authorization/#create-a-new-admin-user) that creates an admin user.
 
 ### Authenticating requests
 ---
