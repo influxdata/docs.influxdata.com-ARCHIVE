@@ -202,7 +202,7 @@ Example:
 File (`datarrr.txt`):
 ```
 # DDL
-CREATE DATABASE IF NOT EXISTS pirates
+CREATE DATABASE pirates
 CREATE RETENTION POLICY oneday ON pirates DURATION 1d REPLICATION 1
 
 # DML

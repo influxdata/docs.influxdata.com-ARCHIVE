@@ -47,6 +47,9 @@ CREATE CONTINUOUS QUERY ON <database_name> [RESAMPLE [EVERY <interval>] [FOR <in
 A CQ belongs to a database.
 Specify the database where you want the CQ to live with `ON <database_name>`.  
 
+> **Note:** If two continuous queries on different databases have the same name, only one of the continuous queries will run.
+This issue is not present in InfluxDB version 0.11 (fixed in [PR #5814](https://github.com/influxdata/influxdb/issues/5814)).
+
 The optional `RESAMPLE` clause determines how often InfluxDB runs the CQ (`EVERY <interval>`) and the time range over which InfluxDB runs the CQ (`FOR <interval>`).
 If included, the `RESAMPLE` clause must specify either `EVERY`, or `FOR`, or both.
 Without the `RESAMPLE` clause, InfluxDB runs the CQ at the same interval as the `GROUP BY time()` interval and it calculates the query for the most recent `GROUP BY time()` interval (that is, where time is between `now()` and `now()` minus the `GROUP BY time()` interval).

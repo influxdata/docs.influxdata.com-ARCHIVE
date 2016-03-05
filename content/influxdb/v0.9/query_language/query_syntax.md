@@ -1,5 +1,6 @@
 ---
 title: Query Syntax
+newversionredirect: query_language/spec/
 menu:
   influxdb_09:
     weight: 60
@@ -80,7 +81,7 @@ SHOW TAG KEYS WHERE tag_key = 'string value'
 When querying you often want to limit the set of returned points to a particular time range.
 This is done with the `now()` function in conjunction with the set of possible time range descriptors.
 
-### `now()` is Local 
+### `now()` is Local
 
 `now()` is the Unix time of the server at the time the query is executed on that server.
 In a cluster, `now()` will come from the node that receives and processes the query, regardless of where the queried data resides.
@@ -102,13 +103,13 @@ SELECT * FROM mydb WHERE time > now() - 1d
 SELECT * FROM mydb WHERE time> now() - 1d
 SELECT * FROM mydb WHERE time >now() - 1d
 SELECT * FROM mydb WHERE time > now()- 1d
-``` 
+```
 are all valid, but  
 
 ```sql
 SELECT * FROM mydb WHERE time > now() -1d
 SELECT * FROM mydb WHERE time > now() - 1 d
-``` 
+```
 are not.
 
 ## CLI
@@ -190,7 +191,7 @@ curl -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SHOW MEASUREME
 curl -G 'http://localhost:8086/query' --data-urlencode 'db=mydb&q=SHOW MEASUREMENTS'
 ```
 
-#### Query Against Non-defaults with Authentication 
+#### Query Against Non-defaults with Authentication
 
 ```bash
 curl -G 'http://localhost:8086/query' --data-urlencode 'db=mydb&rp=six_months' --data-urlencode 'u=root&p=123456' --data-urlencode 'q=select * from disk_free where time > now() - 2w group by time(2h)'
