@@ -7,20 +7,17 @@ menu:
     identifier: introduction
     weight: 0
 ---
+The introductory documentation includes all the information needed to get up and running with Kapacitor.
 
-Kapacitor is a time series data processing engine.
-Kapacitor is the final piece of the TICK stack.
 
-Kapacitor provides a way for you to define a pipeline for processing time series data.
-You can use Kapacitor to perform monitoring and alerting or to do large ETL jobs.
-Kapacitor can process both streaming data and batch data.
-Kapacitor will query data from InfluxDB on a schedule,
-as well as receive data via the line protocol and any other method InfluxDB supports.
+## [Download](https://influxdata.com/downloads/#kapacitor)
 
-* T - Telegraf -- Data collection
-* I - InfluxDB -- Data storage
-* C - Chronograf -- Data visualization
-* K - Kapacitor -- Data processing
+Provides the location to download the latest stable and nightly builds of Kapacitor.
 
-See the [getting started guides](/kapacitor/v0.10/introduction/getting_started/) for walk through on getting up and running with Kapacitor.
+## [Installation](/kapacitor/v0.10/introduction/installation/)
 
+Provides instructions for installing InfluxDB on Ubuntu, Debian, RedHat, CentOS, and OS X.
+
+## [Getting Started](/kapacitor/v0.10/introduction/getting_started/)
+
+A introductory guide to data processing and alerting using Kapacitor.

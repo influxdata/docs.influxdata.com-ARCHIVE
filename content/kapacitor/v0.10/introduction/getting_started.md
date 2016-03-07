@@ -3,25 +3,26 @@ title: Getting Started
 
 menu:
   kapacitor_010:
-    weight: 10
+    weight: 20
     parent: introduction
 ---
 
-Kapacitor is a data processing engine.
-It can process both stream and batch data.
+Kapacitor is a data processing engine.  
+It can process both stream and batch data.  
 This guide will walk you through both workflows and teach you the basics of using
-and running a Kapacitor daemon.
+and running a Kapacitor daemon.  
+
 
 What you will need
 ------------------
 
 Don't worry about installing anything yet, instructions are found below.
 
-* [InfluxDB](/docs/v0.9/introduction/installation.html)  - While Kapacitor does not require InfluxDB it is the easiest to setup and so we will use it in this guide.
+* [InfluxDB](/influxdb/v0.10/)  - While Kapacitor does not require InfluxDB it is the easiest to setup and so we will use it in this guide.
 You will need InfluxDB >= 0.9.5
 * [Telegraf](https://github.com/influxdb/telegraf#installation) - We will use a specific Telegraf config to send data to InfluxDB so that the examples Kapacitor tasks have context.
 You will need Telegraf >= 0.10 since the names of measurements change prior to that version.
-* [Kapacitor](https://github.com/influxdb/kapacitor) - You can get the latest Kapacitor binaries for your OS at the [downloads](https://influxdata.com/downloads/#kapacitor) page.
+* [Kapacitor](/kapacitor/v0.10/) - You can get the latest Kapacitor binaries for your OS at the [downloads](https://influxdata.com/downloads/#kapacitor) page.
 * Terminal - Kapacitor's interface is via a CLI and so you will need a basic terminal to issue commands.
 
 The Use Case
@@ -43,8 +44,8 @@ Installation
 ------------
 
 Install [Kapacitor](/kapacitor/v0.10/introduction/installation/),
-[InfluxDB](/docs/v0.9/introduction/installation.html)
-and [Telegraf](https://github.com/influxdb/telegraf#installation) on the same host.
+[InfluxDB](/influxdb/v0.10/introduction/installation/)
+and [Telegraf](/telegraf/v0.10/introduction/installation/) on the same host.
 
 All examples will assume that Kapacitor is running on `http://localhost:9092` and InfluxDB on `http://localhost:8086`.
 

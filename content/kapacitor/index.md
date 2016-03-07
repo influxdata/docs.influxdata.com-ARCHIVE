@@ -1,4 +1,4 @@
-+++
-title = "Kapacitor"
+---
+title: "Kapacitor"
 
-+++
+---
