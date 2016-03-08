@@ -15,7 +15,7 @@ Libraries that have been updated for InfluxDB version 0.10 are listed in **bold*
 - [InfluxDB Erlang UDP](https://github.com/palkan/influx_udp) by [palkan](https://github.com/palkan)
 
 ## Go
-- [InfluxDB Go](https://github.com/influxdb/influxdb/blob/master/client/README.md) by InfluxDB
+- [InfluxDB Go](https://github.com/influxdb/influxdb/blob/master/client/README.md) by [InfluxData](https://github.com/influxdata)
 
 ## Haskell
 - [InfluxDB Haskell](https://github.com/maoe/influxdb-haskell) by [maoe](https://github.com/maoe)
