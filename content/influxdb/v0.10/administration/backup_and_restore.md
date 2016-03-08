@@ -35,7 +35,7 @@ $ influxd backup /tmp/backup
 ```
 
 Will create a metastore backup in the directory `/tmp/backup` (the
-directory will be created if it doesn't already exist). 
+directory will be created if it doesn't already exist).
 
 ### Backing up a Database
 
@@ -59,11 +59,11 @@ stored. Optional flags also include:
   shard ID. To see which shards are available, you can run the command
   `SHOW SHARDS` using the InfluxDB query language. If not specified,
   all shards will be backed up.
-  
+
 - `-since <date>` - This flag can be used to create a backup _since_ a
   specific date, where the date must be in
-  [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) format (ex:
-  `2015-12-24T08:12:23`). This flag is important if you would like to
+  [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) format (for example,
+  `2015-12-24T08:12:23Z`). This flag is important if you would like to
   take incremental backups of your database. If not specified, all
   timeranges within the database will be backed up.
 
@@ -115,16 +115,16 @@ optional flags for restoring a backup are:
   directory where you would like the metastore backup recovered
   to. For packaged installations, this should be specified as
   `/var/lib/influxdb/meta`.
-  
+
 - `-datadir <path to data directory>` - This is the path to the data
   directory where you would like the database backup recovered to. For
   packaged installations, this should be specified as
   `/var/lib/influxdb/data`.
-  
+
 - `-database <database>` - This is the database that you would like to
   restore the data to. This option is required if no `-metadir` option
   is provided.
-  
+
 - `-retention <retention policy>` - This is the target retention policy
   for the stored data to be restored to.
 
