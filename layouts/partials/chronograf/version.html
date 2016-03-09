@@ -1,0 +1,6 @@
+{{ if not (or (in .RelPermalink .Site.Data.default_versions.chronograf_semver) (eq .RelPermalink "/chronograf/")) }}
+<div class="flash">
+    <p><b>Warning! This page documents an old version of Chronograf, which is no longer actively developed. <a href="/chronograf/{{ .Site.Data.default_versions.chronograf_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ substr .RelPermalink 15 }}{{end}}">Chronograf {{ .Site.Data.default_versions.chronograf_semver }}</a> is the most recent version of Chronograf.</b></p>
+</div>
+<br />
+{{ end }}

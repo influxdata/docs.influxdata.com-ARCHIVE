@@ -6,6 +6,7 @@
 	</div>
 	{{ end }}
 	<div class="page--body">
+        {{ partial "kapacitor/version.html" . }}
         {{ .Content }}
     </div>
     {{ partial "kapacitor/contribute.html" . }}
