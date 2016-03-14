@@ -117,7 +117,7 @@ These subscriptions tell InfluxDB to send all the data it receives to Kapacitor.
 You should see some basic start up messages and something about listening on UDP port and starting subscriptions.
 At this point InfluxDB is streaming the data it is receiving from Telegraf to Kapacitor.
 
-Trigger Alert from Stream data
+Trigger Alert from Stream Data
 ------------------------------
 
 That was a bit of setup, but at this point it should be smooth sailing and we can get to the fun stuff of actually using Kapacitor.
@@ -388,9 +388,9 @@ Something so simple as defining an alert can quickly be extended to apply to a m
 With the above script, you will be alerted if any service in any datacenter deviates more than 3
 standard deviations away from normal behavior as defined by the historical 95th percentile of cpu usage, within 1 minute!
 
-For more information on how the alerting works, see the [AlertNode](/kapacitor/v0.10/tick/alert_node/) docs.
+For more information on how the alerting works, see the [AlertNode](/kapacitor/v0.10/nodes/alert_node/) docs.
 
-Trigger Alert from Batch data
+Trigger Alert from Batch Data
 ------------------------------
 
 Instead of just processing the data in streams, you can also tell Kapacitor to periodically query
