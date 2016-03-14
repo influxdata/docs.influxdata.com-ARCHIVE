@@ -120,6 +120,17 @@ a:hover {
 	font-size: 1.3em;
 	font-weight: 300;
 }
+/* Making sure anchors inside headings maintain correct font weights */
+.page--body h1 a {
+	font-weight: 200;
+}
+.page--body h2 a {
+	font-weight: 600;
+}
+.page--body h3 a,
+.page--body h4 a {
+	font-weight: 300;
+}
 .page--body h1:first-child,
 .page--body h2:first-child,
 .page--body h3:first-child,
