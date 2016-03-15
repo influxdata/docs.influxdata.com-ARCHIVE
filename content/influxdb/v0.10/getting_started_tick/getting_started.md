@@ -505,9 +505,14 @@ stream
         .crit(lambda: "usage_idle" <  70)
         // Whenever we get an alert write it to a file.
         .log('/tmp/alerts.log')
+        // Specify the content of the alert
+        .id('kapacitor/{{ .TaskName }}/{{ index .Tags "cpu"}}')
+        .message('{{ index .Tags "cpu" }} is {{ .Level }} value')
+        .details('None')
 ```
 
-For more on Kapacitor's TICKscripts, see [TICKscript Language Reference](/kapacitor/v0.10/tick/).
+See [TICKscript Language Reference](/kapacitor/v0.10/tick/) for more on Kapacitor's TICKscrips.
+For details on how to customize the alert output, see [AlertNode](/kapacitor/v0.10/tick/alert_node/).
 
 II. Define the task
 
@@ -536,16 +541,14 @@ while true; do i=0; done
 ```
 
 Let that run for a bit and then check out `/tmp/alerts.log`.
-Kapacitor writes alerts to that file once idle CPU usage is below 70% for one core.
+Kapacitor writes JSON alerts to that file once idle CPU usage is below 70% for one core.
 
 Example:
 ```
-cat "/tmp/alerts.log"
-{"id":"cpu:nil","message":"cpu:nil is CRITICAL","details":"{\u0026#34;Name\u0026#34;:\u0026#34;cpu\u0026#34;,\u0026#34;TaskName\u0026#34;:\u0026#34;cpu_alert\u0026#34;,\u0026#34;Group\u0026#34;:\u0026#34;nil\u0026#34;,\u0026#34;Tags\u0026#34;:{\u0026#34;cpu\u0026#34;:\u0026#34;cpu0\u0026#34;,\u0026#34;host\u0026#34;:\u0026#34;Regans-MacBook-Pro-2.local\u0026#34;},\u0026#34;ID\u0026#34;:\u0026#34;cpu:nil\u0026#34;,\u0026#34;Fields\u0026#34;:{\u0026#34;usage_guest\u0026#34;:0,\u0026#34;usage_guest_nice\u0026#34;:0,\u0026#34;usage_idle\u0026#34;:69.9,\u0026#34;usage_iowait\u0026#34;:0,\u0026#34;usage_irq\u0026#34;:0,\u0026#34;usage_nice\u0026#34;:0,\u0026#34;usage_softirq\u0026#34;:0,\u0026#34;usage_steal\u0026#34;:0,\u0026#34;usage_system\u0026#34;:2.2,\u0026#34;usage_user\u0026#34;:27.9},\u0026#34;Level\u0026#34;:\u0026#34;CRITICAL\u0026#34;,\u0026#34;Message\u0026#34;:\u0026#34;cpu:nil is CRITICAL\u0026#34;}","time":"2016-03-14T23:08:40Z","level":"CRITICAL","data":{"series":[{"name":"cpu","tags":{"cpu":"cpu0","host":"Regans-MacBook-Pro-2.local"},"columns":["time","usage_guest","usage_guest_nice","usage_idle","usage_iowait","usage_irq","usage_nice","usage_softirq","usage_steal","usage_system","usage_user"],"values":[["2016-03-14T23:08:40Z",0,0,69.9,0,0,0,0,0,2.2,27.9]]}]}}
-{"id":"cpu:nil","message":"cpu:nil is OK","details":"{\u0026#34;Name\u0026#34;:\u0026#34;cpu\u0026#34;,\u0026#34;TaskName\u0026#34;:\u0026#34;cpu_alert\u0026#34;,\u0026#34;Group\u0026#34;:\u0026#34;nil\u0026#34;,\u0026#34;Tags\u0026#34;:{\u0026#34;cpu\u0026#34;:\u0026#34;cpu1\u0026#34;,\u0026#34;host\u0026#34;:\u0026#34;Regans-MacBook-Pro-2.local\u0026#34;},\u0026#34;ID\u0026#34;:\u0026#34;cpu:nil\u0026#34;,\u0026#34;Fields\u0026#34;:{\u0026#34;usage_guest\u0026#34;:0,\u0026#34;usage_guest_nice\u0026#34;:0,\u0026#34;usage_idle\u0026#34;:100,\u0026#34;usage_iowait\u0026#34;:0,\u0026#34;usage_irq\u0026#34;:0,\u0026#34;usage_nice\u0026#34;:0,\u0026#34;usage_softirq\u0026#34;:0,\u0026#34;usage_steal\u0026#34;:0,\u0026#34;usage_system\u0026#34;:0,\u0026#34;usage_user\u0026#34;:0},\u0026#34;Level\u0026#34;:\u0026#34;OK\u0026#34;,\u0026#34;Message\u0026#34;:\u0026#34;cpu:nil is OK\u0026#34;}","time":"2016-03-14T23:08:40Z","level":"OK","data":{"series":[{"name":"cpu","tags":{"cpu":"cpu1","host":"Regans-MacBook-Pro-2.local"},"columns":["time","usage_guest","usage_guest_nice","usage_idle","usage_iowait","usage_irq","usage_nice","usage_softirq","usage_steal","usage_system","usage_user"],"values":[["2016-03-14T23:08:40Z",0,0,100,0,0,0,0,0,0,0]]}]}}
+$ cat "/tmp/alerts.log"
+{"id":"kapacitor/cpu_alert/cpu2","message":"cpu2 is CRITICAL value","details":"None","time":"2016-03-15T21:11:30Z","level":"CRITICAL","data":{"series":[{"name":"cpu","tags":{"cpu":"cpu2","host":"Regans-MacBook-Pro-2.local"},"columns":["time","usage_guest","usage_guest_nice","usage_idle","usage_iowait","usage_irq","usage_nice","usage_softirq","usage_steal","usage_system","usage_user"],"values":[["2016-03-15T21:11:30Z",0,0,68.4,0,0,0,0,0,0.8,30.8]]}]}}
+{"id":"kapacitor/cpu_alert/cpu3","message":"cpu3 is OK value","details":"None","time":"2016-03-15T21:11:30Z","level":"OK","data":{"series":[{"name":"cpu","tags":{"cpu":"cpu3","host":"Regans-MacBook-Pro-2.local"},"columns":["time","usage_guest","usage_guest_nice","usage_idle","usage_iowait","usage_irq","usage_nice","usage_softirq","usage_steal","usage_system","usage_user"],"values":[["2016-03-15T21:11:30Z",0,0,99.5995995995996,0,0,0,0,0,0,0.4004004004004004]]}]}}
 ```
-
-*(Briefly describe what appears in `alerts.log`)*
 
 And that's it! Now you'll receive an alert whenever your idle CPU usage falls below 70%.
 That was just a simple threshold alert.
