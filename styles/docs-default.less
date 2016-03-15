@@ -1,0 +1,64 @@
+/*
+
+	InfluxData Docs Theme File
+
+	"Default Theme" (Dark)
+*/
+
+//
+// Load Tools
+// --------------------------------------------------
+
+@import "normalize-3.0.2.less";
+@import "variables.less";
+@import "influx-palette.less";
+@import "icon-font.less";
+
+//
+// Load UI Element styles
+// --------------------------------------------------
+@import "typography.less";
+@import "prism.less";
+@import "layout.less";
+
+
+//
+// Font & Body
+// --------------------------------------------------
+body {
+	font-family: 'Roboto',Helvetica,Arial,Tahoma, Verdana, sans-serif;
+	color: @g8-storm;
+	background-color: @g19-ghost;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+//
+// Base link style
+// --------------------------------------------------
+
+
+a:link,
+a:active,
+a:visited {
+	text-decoration: none;
+	font-weight: 700;
+	color: #4591ED;
+	transition: color 0.2s ease;
+}
+a:hover {
+	color: #00C9FF;
+	cursor: pointer;
+}
+
+//
+// Selection Styling
+// --------------------------------------------------
+::selection {
+	background-color: @g9-mountain;
+	color: @g20-white; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+	background-color: @g9-mountain;
+	color: @g20-white; /* Gecko Browsers */
+}
