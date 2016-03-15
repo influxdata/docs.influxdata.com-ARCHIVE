@@ -1070,7 +1070,7 @@ Example:
           .alert()
               .id('node \'stream0\' in task \'{{ .TaskName }}\'')
               .message('{{ .ID }} is {{ if eq .Level "OK" }}alive{{ else }}dead{{ end }}: {{ index .Fields "collected" | printf "%0.3f" }} points/10s.')
-              .crit(lamdba: "collected" <= 100.0)
+              .crit(lambda: "collected" <= 100.0)
     //Do normal processing of data
     data....
 ```
