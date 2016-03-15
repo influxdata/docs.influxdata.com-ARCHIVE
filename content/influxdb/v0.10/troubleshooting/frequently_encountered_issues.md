@@ -391,21 +391,21 @@ For passwords that include a single quote, escape the single quote with a backsl
 There a number of ways to identify the version of InfluxDB that you're using:
 
 * Check the return when you `curl` the `/ping` endpoint.
-For example, if you're using 0.10.1 `curl -i 'http://localhost:8086/ping'` returns:  
+For example, if you're using 0.10.3 `curl -i 'http://localhost:8086/ping'` returns:  
 
 `HTTP/1.1 204 No Content`  
 `Request-Id: 874101f6-e23e-11e5-8097-000000000000`  
-✨`X-Influxdb-Version: 0.10.1`✨  
+✨`X-Influxdb-Version: 0.10.3`✨  
 `Date: Fri, 04 Mar 2016 19:23:08 GMT`
 
 * Check the text that appears when you [launch](/influxdb/v0.10/tools/shell/) the CLI:
 
-`Connected to http://localhost:8086`✨`version 0.10.1`✨  
-`InfluxDB shell 0.10.1`
+`Connected to http://localhost:8086`✨`version 0.10.3`✨  
+`InfluxDB shell 0.10.3`
 
 * Check the HTTP response in your logs:  
 
-`[http] 2016/03/04 11:25:13 ::1 - - [04/Mar/2016:11:25:13 -0800] GET /query?db=&epoch=ns&q=show+databases HTTP/1.1 200 98 -`     ✨`InfluxDBShell/0.10.1`✨`d16e7a83-e23e-11e5-80a7-000000000000 529.543µs`
+`[http] 2016/03/04 11:25:13 ::1 - - [04/Mar/2016:11:25:13 -0800] GET /query?db=&epoch=ns&q=show+databases HTTP/1.1 200 98 -`     ✨`InfluxDBShell/0.10.3`✨`d16e7a83-e23e-11e5-80a7-000000000000 529.543µs`
 
 ## Data aren't dropped after altering a retention policy
 After [shortening](/influxdb/v0.10/query_language/database_management/#modify-retention-policies-with-alter-retention-policy) the `DURATION` of a [retention policy](/influxdb/v0.10/concepts/glossary/#retention-policy-rp) (RP), you may notice that InfluxDB keeps some data that are older than the `DURATION` of the modified RP.

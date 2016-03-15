@@ -15,14 +15,14 @@ All current API Endpoints are listed below.
 The ping endpoint accepts both `GET` and `HEAD` HTTP requests.
 The response body is empty.
 The version of the InfluxDB server you issued the request to can be extracted through the `X-Influxdb-Version` field of the header.
-For example this is the response from a server running `0.10.1` of InfluxDB:
+For example this is the response from a server running `0.10.3` of InfluxDB:
 
 ```bash
 $ curl -sl -I localhost:8086/ping
 
 HTTP/1.1 204 No Content
 Request-Id: 7d641f0b-e23b-11e5-8005-000000000000
-X-Influxdb-Version: 0.10.1
+X-Influxdb-Version: 0.10.3
 Date: Fri, 04 Mar 2016 19:01:23 GMT
 ```
 
@@ -37,7 +37,7 @@ $ curl -sl -I localhost:8086/ping?wait_for_leader=1s
 
 HTTP/1.1 204 No Content
 Request-Id: b280e5eb-e23b-11e5-8019-000000000000
-X-Influxdb-Version: 0.10.1
+X-Influxdb-Version: 0.10.3
 Date: Fri, 04 Mar 2016 19:02:53 GMT
 ```
 

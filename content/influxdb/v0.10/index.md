@@ -35,4 +35,4 @@ Nothing else is needed to make data highly available (unlike Redis, ZooKeeper, C
 
 * Clustering, replication, and high-availability are in a beta state.
 * The query engine is not optimized for the new TSM engine.
-A significant refactor of the query engine is in progress targeted for release in version 0.10.1.
+A significant refactor of the query engine is in progress targeted for release in version 0.11.
