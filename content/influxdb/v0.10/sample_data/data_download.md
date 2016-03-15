@@ -5,7 +5,6 @@ title: Sample data
 Download and write to any InfluxDB installation the sample data used in [Data Exploration](../../query_language/data_exploration/), [Schema Exploration](../../query_language/schema_exploration/), and [Functions](../../query_language/functions/).
 
 ### Download and write the data to InfluxDB
-The following instructions are compatible with InfluxDB versions 0.9.5+.
 
 From your terminal, download the text file that contains the data in [line protocol](../../write_protocols/line/) format:
 ```

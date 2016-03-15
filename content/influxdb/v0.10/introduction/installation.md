@@ -28,6 +28,9 @@ which is located at `/etc/influxdb/influxdb.conf` for default installations.
 ## Installation
 
 ### Ubuntu & Debian
+
+For instructions on how to install the Debian package from a file, please see the [downloads page](https://influxdata.com/downloads/).
+
 Debian and Ubuntu users can install the latest stable version of InfluxDB using the `apt-get` package manager.
 For Ubuntu users, you can add the InfluxData repository by using the following commands:
 
@@ -54,6 +57,9 @@ sudo service influxdb start
 ```
 
 ### RedHat & CentOS
+
+For instructions on how to install the RPM package from a file, please see the [downloads page](https://influxdata.com/downloads/).
+
 RedHat and CentOS users can install the latest stable version of InfluxDB using the `yum` package manager:
 
 ```bash

@@ -135,11 +135,19 @@ See [Query Language Specification](/influxdb/v0.10/query_language/spec/#identifi
 
 Related entries: [database](/influxdb/v0.10/concepts/glossary/#database), [field key](/influxdb/v0.10/concepts/glossary/#field-key), [measurement](/influxdb/v0.10/concepts/glossary/#measurement), [retention policy](/influxdb/v0.10/concepts/glossary/#retention-policy-rp), [tag key](/influxdb/v0.10/concepts/glossary/#tag-key), [user](/influxdb/v0.10/concepts/glossary/#user)
 
+## line protocol
+The text based format for writing points to InfluxDB. See [Line Protocol](/influxdb/v0.10/write_protocols/line/).
+
 ## measurement  
 The part of InfluxDB's structure that describes the data stored in the associated fields.
 Measurements are strings.
 
 Related entries: [field](/influxdb/v0.10/concepts/glossary/#field), [series](/influxdb/v0.10/concepts/glossary/#series)
+
+## metastore
+Contains internal information about the status of the system. That includes user information, database and shard metadata, and which retention policies are enabled.
+
+Related entries: [database](/influxdb/v0.10/concepts/glossary/#database),[retention policy](/influxdb/v0.10/concepts/glossary/#retention-policy-rp),[user](/influxdb/v0.10/concepts/glossary/#user)
 
 ## node
 An independent `influxd` process.

@@ -1,14 +1,17 @@
 ---
 title: Server Monitoring
+aliases:
+  - /influxdb/v0.10/troubleshooting/system_monitoring
+  - /influxdb/v0.10/administration/statistics
 menu:
   influxdb_010:
     weight: 50
-    parent: administration
+    parent: troubleshooting
 ---
 
 InfluxDB can display statistical and diagnostic information about each node.
 This information can be very useful for troubleshooting and performance monitoring.
- 
+
 ## SHOW STATS
 To see node stats execute the command `SHOW STATS`.
 An example is shown below.
@@ -64,9 +67,9 @@ Check out the [monitor service README](https://github.com/influxdb/influxdb/blob
 
 ## Useful Commands
 
-Below are a collection of commands to find useful performance metrics about your InfluxDB instance. 
+Below are a collection of commands to find useful performance metrics about your InfluxDB instance.
 
-To find the number of unique series in a database run the following command: 
+To find the number of unique series in a database run the following command:
 ```bash
 $ influx -execute "SHOW SERIES" -database "mydb" | sed '/name: .*/d' | sed '/\-\-/d' | sed '/_key/d' | sed '/^$/d' | wc -l
 ```
@@ -76,5 +79,5 @@ $ influx -execute 'select derivative(pointReq, 1s) from "write" where time > now
 ```
 To find the number of writes separated by database since the beginnning of the log file:
 ```bash
-$ grep 'POST' /var/log/influxdb/influxd.log | awk '{ print $10 }' | sort | uniq -c 
+$ grep 'POST' /var/log/influxdb/influxd.log | awk '{ print $10 }' | sort | uniq -c
 ```

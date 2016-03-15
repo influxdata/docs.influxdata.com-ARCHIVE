@@ -744,7 +744,7 @@ with_tag_clause = "WITH KEY" ( "=" tag_key | "IN (" tag_keys ")" ) .
 ## Expressions
 
 ```
-binary_op        = "+" | "-" | "*" | "/" | "AND" | "OR" | "=" | "!=" | "<" |
+binary_op        = "+" | "-" | "*" | "/" | "AND" | "OR" | "=" | "!=" | "<>" | "<" |
                    "<=" | ">" | ">=" .
 
 expr             = unary_expr { binary_op unary_expr } .
