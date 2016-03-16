@@ -31,7 +31,7 @@ SELECT usage_idle FROM "telegraf"."default"."cpu" WHERE tmplTime()
 
 *Chronograf visualization with a time template variable:*
 
-![Time template](/img/chronograf/time-template.gif)
+![Time template](/img/chronograf/v0.11/time-template.gif)
 
 ### Template tag values with `tmplTagValue()`
 
@@ -60,7 +60,7 @@ Now you can select alternative tag values of the tag key `cpu` in the `cpu` drop
 
 *Chronograf visualization with a tag template variable:*
 
-![Tag template](/img/chronograf/tag-template.gif)
+![Tag template](/img/chronograf/v0.11/tag-template.gif)
 
 ## Templating a dashboard
 
@@ -68,4 +68,4 @@ Chronograf's template variables also work on dashboards. Note that only visualiz
 
 *Chronograf dashboard with template variables:*
 
-![Tag template](/img/chronograf/template-dashboard.gif)
+![Tag template](/img/chronograf/v0.11/template-dashboard.gif)
