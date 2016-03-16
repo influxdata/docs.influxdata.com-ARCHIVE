@@ -13,6 +13,7 @@ These changes were:
 
 * Support for multiple InfluxDB clusters
 * Changes to InfluxQL functions
+* Changes to Email, Slack, HipChat global behavior
 
 ### Multiple InfluxDB Clusters
 
@@ -62,4 +63,19 @@ stream.from()...
 We like the simplicity of this new syntax as it no longer exposes the map/reduce concept directly to the user and improves readability.
 **The old syntax will continue to work for all v0.11 versions of Kapacitor but starting with v0.12 it will be removed.**
 
+### Email, Slack, HipChat Global/StateChangesOnly
 
+In previous releases setting Email, Slack, or HipChat globally in the configuration would also set `stateChangesOnly` globally.
+This coupling caused significant confusion as the behavior of alerts changed as a result of enabling a handler.
+Now there is an explicit setting to enable the `stateChangesOnly` only behavior for the globally configured alerts.
+To preserve previous behavior add a `state-changes-only = true` option to any of these handlers you may have configured globally.
+
+```
+[slack]
+    enabled = true
+    ...
+    global = true
+    state-changes-only = true
+```
+
+With this change you can now control whether you want to receive alerts for all events or just state changes independent of a globally configured alert handler.
