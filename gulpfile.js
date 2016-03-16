@@ -7,13 +7,15 @@ var gulp = require('gulp'),
 	watch = require('gulp-watch');
 
 gulp.task('less', function() {
-   gulp.src('*.less')
-      .pipe(watch())
+   gulp.src('styles/docs-default.less')
       .pipe(less())
       .pipe(sourcemaps.init())
-      .pipe(cleanCSS())
+      // .pipe(cleanCSS())
       .pipe(sourcemaps.write())
       .pipe(autoprefix('last 2 version', 'ie 8', 'ie 9'))
-      .pipe(gulp.dest('static/css/docs-default.css'))
-      .pipe(livereload());
+      .pipe(gulp.dest('static/css/'))
+});
+
+gulp.task('watch', function () {
+   gulp.watch('styles/*.less', ['less']);
 });
