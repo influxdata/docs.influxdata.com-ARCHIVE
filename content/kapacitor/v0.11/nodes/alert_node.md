@@ -343,6 +343,7 @@ Example:
        to = ["oncall@example.com"]
        # Set global to true so all alert trigger emails.
        global = true
+       state-changes-only =  true
 ```
 
 Example: 
@@ -355,7 +356,6 @@ Example:
 
 Send email to &#39;oncall@example.com&#39; from &#39;kapacitor@example.com&#39; 
 
-**NOTE**: The global option for email also implies stateChangesOnly is set on all alerts. 
 
 
 ```javascript
@@ -411,6 +411,7 @@ Example:
       room = "Test Room"
       token = "9hiWoDOZ9IbmHsOTeST123ABciWTIqXQVFDo63h9"
       global = true
+      state-changes-only = true
 ```
 
 Example: 
@@ -422,8 +423,6 @@ Example:
 ```
 
 Send alert to HipChat using default room &#39;Test Room&#39;. 
-**NOTE**: The global option for HipChat also implies stateChangesOnly is set on all alerts. 
-Also, the room can either be the room id (numerical) or the room name. 
 
 
 ```javascript
@@ -857,6 +856,7 @@ Example:
       url = "https://hooks.slack.com/services/xxxxxxxxx/xxxxxxxxx/xxxxxxxxxxxxxxxxxxxxxxxx"
       channel = "#general"
       global = true
+      state-changes-only = true
 ```
 
 Example: 
@@ -868,7 +868,6 @@ Example:
 ```
 
 Send alert to Slack using default channel &#39;#general&#39;. 
-**NOTE**: The global option for Slack also implies stateChangesOnly is set on all alerts. 
 
 
 ```javascript
