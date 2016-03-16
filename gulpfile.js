@@ -1,10 +1,10 @@
 var gulp = require('gulp'),
-    less = require('gulp-less'),
-    autoprefix = require('gulp-autoprefixer'),
-    livereload = require('gulp-livereload'),
-    watch = require('gulp-watch'),
-    cleanCSS = require('gulp-clean-css'),
-    sourcemaps = require('gulp-sourcemaps');
+	autoprefix = require('gulp-autoprefixer'),
+	cleanCSS = require('gulp-clean-css'),
+	less = require('gulp-less'),
+	livereload = require('gulp-livereload'),
+	sourcemaps = require('gulp-sourcemaps'),
+	watch = require('gulp-watch');
 
 gulp.task('less', function() {
    gulp.src('*.less')
