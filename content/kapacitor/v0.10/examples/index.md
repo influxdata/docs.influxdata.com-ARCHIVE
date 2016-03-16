@@ -4,7 +4,7 @@ title: Examples
 menu:
   kapacitor_010:
     identifier: examples
-    weight: 20
+    weight: 1
 ---
 
 The following is a list of examples in no particular order that demonstrate some of the features of Kapacitor.

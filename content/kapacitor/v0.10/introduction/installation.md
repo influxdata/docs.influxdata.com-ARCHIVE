@@ -3,7 +3,7 @@ title: Installing Kapacitor
 
 menu:
   kapacitor_010:
-    weight: 20
+    weight: 5
     parent: introduction
 ---
 
