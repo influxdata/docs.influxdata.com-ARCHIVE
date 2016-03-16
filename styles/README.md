@@ -18,3 +18,12 @@ To turn on watching: `$ gulp watch`
 - Split `less` task into two different tasks:
  - One without minification or sourcemaps
  - One with minification and sourcemaps
+
+# List of Plugins
+
+- `gulp-less` converts .less files to .css
+- `gulp-autoprefixer` set to "last 2 versions" of all major browsers
+- `gulp-cleanCSS` used for minification
+- `gulp-watch` used to auto-build when changes are detected in /styles
+- `gulp-sourcemaps` generates CSS sourcemaps, exposes LESS styles inside Chrome dev tools
+- `gulp-livereload` Save the straing on your fingers!
