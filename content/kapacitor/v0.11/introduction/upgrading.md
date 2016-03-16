@@ -8,17 +8,19 @@ menu:
 ---
 
 
-There are two breaking changes from v0.10 that may require some work to upgrade from a v0.10 instance.
-These changes were:
+There are two breaking changes from v0.10 that may require some work
+to upgrade from a v0.10 instance.  These changes are:
 
-* Support for multiple InfluxDB clusters
-* Changes to InfluxQL functions
-* Changes to Email, Slack, HipChat global behavior
+* [Support for multiple InfluxDB clusters](#multiple-influxdb-clusters)
+* [Changes to InfluxQL functions](#new-influxql-syntax)
+* [Changes to Email, Slack, HipChat global behavior](#email-slack-hipchat-global-statechangesonly)
 
 ### Multiple InfluxDB Clusters
 
-Now that Kapacitor support connecting to multiple InfluxDB clusters the configuration has changed slightly to allow configuring multiple clusters.
-To upgrade your configuration to work with v0.11 change a previous configuration section like:
+Now that Kapacitor supports connecting to multiple InfluxDB clusters,
+the configuration has changed slightly. To upgrade your configuration
+to work with v0.11, you will need to update the `[influxdb]` section
+of your configuration from:
 
 ```
 [influxdb]
@@ -26,7 +28,7 @@ To upgrade your configuration to work with v0.11 change a previous configuration
   ...
 ```
 
-to this:
+To:
 
 ```
 [[influxdb]]
@@ -36,15 +38,28 @@ to this:
   ...
 ```
 
-With the new configuration you can configure multiple clusters.
-By giving each cluster a name you can specify which cluster to use when performing a batch query or writing results to InfluxDB, using the `.cluster` method.
-See [BatchNode.Cluster](/kapacitor/v0.11/tick/batch_node#cluster) and [InfluxDBOut.Cluster](/kapacitor/v0.11/tick/influx_d_b_out_node#cluster) for more info.
+With the new configuration, you can now alert on data from multiple
+clusters.  By giving each cluster a name in your configuration, you
+can now specify which cluster to use when performing a batch query or
+writing results to InfluxDB by using the `.cluster` method.  
+
+Please see [BatchNode.Cluster](/kapacitor/v0.11/nodes/batch_node#cluster) and
+[InfluxDBOut.Cluster](/kapacitor/v0.11/nodes/influx_d_b_out_node#cluster)
+for more information.
 
 
 ### New InfluxQL Syntax
 
-The `.mapReduce` method has been deprecated, and replaced by a simpler syntax.
-If you have a TICKscript that looks like:
+The `.mapReduce` method has been deprecated, and replaced by a simpler
+syntax.  As an example, using the current syntax:
+
+```javascript
+stream.from()...
+    .window()...
+    .mapReduce(influxql.count('value'))
+```
+
+Has been updated to:
 
 ```javascript
 stream.from()...
@@ -52,30 +67,35 @@ stream.from()...
     .count('value')
 ```
 
-then update it to look like this:
+This new syntax no longer exposes the map/reduce concept directly to
+the user, which makes the function calls simpler and improves overall
+readability.
 
-```javascript
-stream.from()...
-    .window()...
-    .count('value')
-```
-
-We like the simplicity of this new syntax as it no longer exposes the map/reduce concept directly to the user and improves readability.
-**The old syntax will continue to work for all v0.11 versions of Kapacitor but starting with v0.12 it will be removed.**
+> **Note: The old syntax will continue to work for all v0.11 versions of
+Kapacitor but will be removed starting with v0.12.**
 
 ### Email, Slack, HipChat Global/StateChangesOnly
 
-In previous releases setting Email, Slack, or HipChat globally in the configuration would also set `stateChangesOnly` globally.
-This coupling caused significant confusion as the behavior of alerts changed as a result of enabling a handler.
-Now there is an explicit setting to enable the `stateChangesOnly` only behavior for the globally configured alerts.
-To preserve previous behavior add a `state-changes-only = true` option to any of these handlers you may have configured globally.
+In previous releases, setting `smtp`, `slack`, or `hipchat` globally
+in the configuration would also set `stateChangesOnly` globally.  This
+coupling caused significant confusion, as the behavior of alerts and
+TICKscripts would change as a result of enabling/disabling a handler.
+With v0.11, there is the `state-changes-only` setting, which
+explicitly enables/disables the `stateChangesOnly` attribute for
+globally configured alerts. For example:
 
 ```
 [slack]
     enabled = true
     ...
     global = true
-    state-changes-only = true
+    state-changes-only = false
 ```
 
-With this change you can now control whether you want to receive alerts for all events or just state changes independent of a globally configured alert handler.
+With this change you can now control whether you want to receive
+alerts for all events or just state changes, regardless of a globally
+configured alert handler.
+
+> **Note: To preserve the legacy behavior, add a `state-changes-only =
+true` option to any of the handlers that have been configured
+globally.**
