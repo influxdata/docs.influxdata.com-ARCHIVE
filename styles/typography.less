@@ -1,0 +1,432 @@
+/*
+
+	T Y P O G R A P H Y
+
+	____________________________________________________________
+
+	Note:
+	Typography uses a type scale of 1.3
+	I've made use of EMs such that you can proportionally scale the type
+	by changing the font size on .page using REMs as the unit
+
+
+*/
+
+
+/*
+	Default Styles
+	____________________________________________________________
+*/
+
+.page--body {
+	color: #A5ACB5;
+	text-align: left;
+
+	> * {
+		text-decoration: none;
+	}
+	h1,
+	h2,
+	h3,
+	h4,
+	p,
+	ul,
+	ol,
+	li,
+	blockquote,
+	dt,
+	pre {
+		display: inline-block;
+		margin-bottom: 1.5em;
+		line-height: 1.6em;
+	}
+	table {
+		margin-bottom: 1.5em;
+	}
+		em {
+		color: #CBD0D6;
+		font-weight: 600;
+	}
+}
+
+/*
+	Indented items
+	____________________________________________________________
+	NOTEL: Indent is 0 by default, becomes larger in media queries
+*/
+.page--body dt,
+.page--body blockquote,
+.page--body pre,
+.page--body h4,
+.page--body p,
+.page--body ol,
+.page--body ul {
+	width: calc(100% - 0rem);
+	margin-left: 0rem;
+}
+
+/*
+	Plaintext items 
+	____________________________________________________________
+*/
+.page--body h1,
+.page--body h2,
+.page--body h2 a:link,
+.page--body h2 a:active,
+.page--body h2 a:visited,
+.page--body h2 a:hover,
+.page--body h3,
+.page--body h3 a:link,
+.page--body h3 a:active,
+.page--body h3 a:visited,
+.page--body h3 a:hover,
+.page--body h4,
+.page--body h4 a:link,
+.page--body h4 a:active,
+.page--body h4 a:visited,
+.page--body h4 a:hover {
+	color: #F5F6F7;
+	width: 100%;
+}
+.page--body h1 {
+	font-size: 2.85em;
+	font-weight: 200;
+	font-family: 'Klavika-Light','Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;;
+}
+.page--body h2 {
+	font-size: 2.197em;
+	font-weight: 600;
+	padding-bottom: 0.5em;
+	margin-top: 3em;
+	border-bottom: 2px solid #2C323D;
+}
+.page--body h3 {
+	margin-top: 1em;
+	font-size: 1.69em;
+	font-weight: 300;
+}
+.page--body h4 {
+	font-size: 1.3em;
+	font-weight: 300;
+}
+/* Making sure anchors inside headings maintain correct font weights */
+.page--body h1 a {
+	font-weight: 200;
+}
+.page--body h2 a {
+	font-weight: 600;
+}
+.page--body h3 a,
+.page--body h4 a {
+	font-weight: 300;
+}
+.page--body h1:first-child,
+.page--body h2:first-child,
+.page--body h3:first-child,
+.page--body h4:first-child {
+	margin-top: 0;
+}
+.page--body p {
+	font-size: 1em;
+}
+.page--body ol,
+.page--body ul {
+	font-size: 1em;
+	padding-left: 1.125em;
+}
+.page--body ul li,
+.page--body ol li {
+	display: list-item;
+	list-style-position: outside;
+	padding-left: 0.5em;
+}
+.page--body ul > li {
+	list-style-type: disc !important;
+}
+.page--body ol li,
+.page--body ul ol li {
+	list-style-type: upper-roman;
+}
+.page--body ol ol li {
+	list-style-type: lower-alpha;
+}
+.page--body ol ol ol li {
+	list-style-type: decimal;
+}
+.page--body li:last-child {
+	margin-bottom: 0;
+}
+/* Removing indent, adjusting margins on nested lists */
+.page--body ol ol,
+.page--body ul ul,
+.page--body ol ul,
+.page--body ul ol {
+	width: 100%;
+	margin-left: 0;
+	margin-bottom: 0;
+	margin-top: 1.25em;
+}
+/* removing left margin on nested p */
+.page--body ul p,
+.page--body ol p {
+	margin-left: 0;
+}
+
+/*
+	Notes <blockquote> and Gotchas <dt> 
+	____________________________________________________________
+*/
+.page--body dt,
+.page--body blockquote {
+	font-size: 0.875em;
+	background-color: #262B35;
+	padding: 1em 1.5em;
+	border-radius: 4px;
+	border-style: solid;
+}
+.page--body blockquote {
+	color: #3AC69A;
+	font-style: italic;
+	border-color: #3AC69A;
+}
+.page--body dt {
+	color: #FF8564;
+	border-color: #F95F53;
+}
+.page--body blockquote code,
+.page--body dt code,
+.page--body blockquote pre,
+.page--body dt pre {
+	border-color: #2C323D;
+}
+.page--body blockquote > *:last-child,
+.page--body dt > *:last-child {
+	margin-bottom: 0;
+}
+.page--body blockquote .tooltip,
+.page--body dt .tooltip {
+	color: #fff;
+}
+		/* Indentation should be removed inside Notes & Gotchas */
+		.page--body blockquote pre,
+		.page--body blockquote h4,
+		.page--body blockquote p,
+		.page--body blockquote ol,
+		.page--body blockquote ul,
+		.page--body dt pre,
+		.page--body dt h4,
+		.page--body dt p,
+		.page--body dt ol,
+		.page--body dt ul {
+			width: 100%;
+			margin-left: 0rem;
+		}
+
+/*
+	Misc markdown elements 
+	____________________________________________________________
+*/
+.page--body hr {
+	width: 100%;
+	height: 2px;
+	background-color: #2C323D;
+	margin-top: 0.25em;
+	margin-bottom: 1em;
+	border: none;
+	display: block;
+}
+.page--body img {
+	width: 100%;
+	height: auto;
+	border-radius: 4px;
+}
+.page--body table {
+	background-color: #1F242D;
+}
+.page--body td,
+.page--body th {
+	border: 1px solid #262B35;
+	font-size: 0.875em;
+	padding: 0.75em 1.5em;
+}
+.page--body tr:nth-child(even) {
+	background-color: #181C23;
+}
+.page--body thead tr {
+	background-color: #262B35 !important;
+}
+.page--body thead th {
+	padding: 1.25em 1.5em;
+	color: #BEC4CC;
+}	
+
+/*
+	Inline Code and Code Blocks
+	____________________________________________________________
+*/
+.page--body code {
+	font-family: Consolas, "Lucida Console", Monaco, monospace;
+	-moz-tab-size: 1;
+	-o-tab-size: 1;
+	tab-size: 1;
+	color: #9394FF;
+	direction: ltr;
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	font-size: 0.75em !important;
+	font-style:normal !important;
+	display: inline;
+	border-radius: 4px;
+	border: 1px solid #262B35;
+	background-color: #181C23;
+	padding: 0.25em 0.5em;
+	position: relative;
+	top:-0.1em;
+	-webkit-font-smoothing: subpixel-antialiased !important;
+	-moz-osx-font-smoothing: auto !important;
+	font-weight: 400 !important;
+}
+.page--body pre {
+	padding: 0.75em 1em;
+	overflow: auto;
+	border-radius: 4px;
+	border: 1px solid #262B35;
+	background-color: #181C23;
+	background-image: url(../img/pre-background.svg);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 70%;
+}
+.page--body pre::-webkit-scrollbar       { background-color: #181C23; width: 1rem; }
+.page--body pre::-webkit-scrollbar-track { background-color: #181C23; }
+.page--body pre::-webkit-scrollbar-thumb { border: 4px solid #181C23; background-color: #262B35; border-radius: 0.5rem; }
+
+.page--body pre code {
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	border: none;
+	padding: 0;
+	border-radius: 0;
+	background-color: transparent;
+}
+
+/*
+	Items with thick left side border
+	____________________________________________________________
+*/
+.page--body dt,
+.page--body blockquote,
+.page--body pre {
+	border-left-width: 6px;
+}
+
+/*
+	Tooltips
+	____________________________________________________________
+*/
+.tooltip {
+	position: relative;
+	display: inline-block;
+	z-index: 10;
+	font-weight: 900;
+	color: #25B394;
+}
+.tooltip-container {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	overflow: visible;
+	visibility: hidden;
+}
+.tooltip-text {
+	font-weight: 600;
+	line-height: 2em;
+	height: 2em;
+	position: absolute;
+	color: #454C59;
+	background-color: #EEF0F2;
+	border-radius: 3px;
+	padding: 0 0.75em;
+	font-size: 0.9rem;
+	left: 50%;
+	transform: translate(-50%,-1.875rem);
+	-webkit-transform: translate(-50%,-1.875rem);
+	transition: all 0.2s ease;
+	white-space: nowrap;
+	opacity: 0;
+	font-style: normal !important;
+}
+.tooltip-text:after {
+	content: '';
+	position: absolute;
+	left: 50%;
+	bottom: -14px;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	border-top: 8px solid #EEF0F2;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+	border-bottom: 8px solid transparent;
+}
+.tooltip:hover .tooltip-container {
+	visibility: visible;
+}
+.tooltip:hover .tooltip-text {
+	opacity: 1;
+	transform: translate(-50%,-2rem);
+	-webkit-transform: translate(-50%,-2rem);
+}
+
+
+
+/*
+
+	Media Queries
+	________________________________________________________________________________________________________________
+
+*/
+
+@media screen and (min-width: 1550px) {
+	.page--body {
+		font-size: 1.125rem;
+	}
+	/* Increase indent on Indented items */
+	.page--body dt,
+	.page--body blockquote,
+	.page--body pre,
+	.page--body h4,
+	.page--body p,
+	.page--body ul,
+	.page--body ol {
+		width: calc(100% - 3.5rem);
+		margin-left: 3.5rem;
+	}
+	.page--body table {
+		margin-left: 3.5rem;
+	}
+}
+@media screen and (min-width: 1800px) {
+	.page--body {
+		font-size: 1.25rem;
+	}
+
+	/* Thicken borders on larger screens */
+	.page--body code,
+	.page--body pre,
+	.page--body td,
+	.page--body th {
+		border-width: 2px;
+	}
+	.page--body dt,
+	.page--body blockquote,
+	.page--body pre {
+		border-left-width: 8px;
+	}
+
+}
