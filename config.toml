@@ -433,85 +433,85 @@ SectionPagesMenu = "products"
         parent = "services"
 
 # Telegraf v0.10 Sub-Menu - Output Plugins
-[[menu.telegraf_011]]
+[[menu.telegraf_010]]
   name = "InfluxDB"
   identifier = "influxdb_output"
   weight = 0
   url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/influxdb"
   parent = "outputs"
-[[menu.telegraf_011]]
+[[menu.telegraf_010]]
   name = "amon"
   identifier = "amon_output"
   weight = 10
   url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/amon"
   parent = "outputs"
-[[menu.telegraf_011]]
+[[menu.telegraf_010]]
   name = "AMQP"
   identifier = "amqp_output"
   weight = 20
   url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/amqp"
   parent = "outputs"
-[[menu.telegraf_011]]
+[[menu.telegraf_010]]
   name = "Amazon CloudWatch"
   identifier = "cloudwatch_output"
   weight = 30
   url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/cloudwatch"
   parent = "outputs"
-[[menu.telegraf_011]]
+[[menu.telegraf_010]]
   name = "Datadog"
   identifier = "datadog_output"
   weight = 40
   url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/datadog"
   parent = "outputs"
-[[menu.telegraf_011]]
+[[menu.telegraf_010]]
   name = "Graphite"
   identifier = "graphite_output"
   weight = 50
   url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/graphite"
   parent = "outputs"
-[[menu.telegraf_011]]
+[[menu.telegraf_010]]
   name = "Kafka"
   identifier = "kafka_output"
   weight = 60
   url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/kafka"
   parent = "outputs"
-[[menu.telegraf_011]]
+[[menu.telegraf_010]]
   name = "Amazon Kinesis"
   identifier = "kinesis_output"
   weight = 70
   url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/kinesis"
   parent = "outputs"
-[[menu.telegraf_011]]
+[[menu.telegraf_010]]
   name = "Librato"
   identifier = "librato_output"
   weight = 80
   url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/librato"
   parent = "outputs"
-[[menu.telegraf_011]]
+[[menu.telegraf_010]]
   name = "MQTT"
   identifier = "mqtt_output"
   weight = 90
   url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/mqtt"
   parent = "outputs"
-[[menu.telegraf_011]]
+[[menu.telegraf_010]]
   name = "NSQ"
   identifier = "nsq_output"
   weight = 100
   url = "ghttps://ithub.com/influxdata/telegraf/tree/master/plugins/outputs/nsq"
   parent = "outputs"
-[[menu.telegraf_011]]
+[[menu.telegraf_010]]
   name = "OpenTSDB"
   identifier = "opentsdb_output"
   weight = 110
   url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/opentsdb"
   parent = "outputs"
-[[menu.telegraf_011]]
+[[menu.telegraf_010]]
   name = "Prometheus"
   identifier = "prometheus_client_output"
   weight = 120
   url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/prometheus_client"
   parent = "outputs"
-[[menu.telegraf_011]]
+[[menu.telegraf_010]]
   name = "Riemann"
   identifier = "riemann_output"
   weight = 130
