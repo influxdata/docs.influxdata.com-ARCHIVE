@@ -299,7 +299,7 @@ Returns: [InfluxQLNode](/kapacitor/v0.11/nodes/influx_q_l_node/)
 
 ### MapReduce
 
-DEPRECATION WARNING: As of v0.11 you can use the new [InfluxQLNode](/kapacitor/v0.11/nodes/influx_q_l_node/) to perform map reduce functions. 
+&gt; *DEPRECATION WARNING*: As of v0.11 you can use the new [InfluxQLNode](/kapacitor/v0.11/nodes/influx_q_l_node/) to perform map reduce functions. 
 This way of performing influxql functions will be removed in the 0.12 release. 
 
 Perform a map-reduce operation on the data. 
