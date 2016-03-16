@@ -1,4 +1,4 @@
 telegraf = ["v0.2", "v0.10"]
 influxdb = ["v0.6", "v0.7", "v0.8", "v0.9", "v0.10"]
 chronograf = ["v0.4", "v0.10"]
-kapacitor = ["v0.2", "v0.10"]
+kapacitor = ["v0.2", "v0.10", "v0.11"]
