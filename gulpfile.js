@@ -14,8 +14,10 @@ gulp.task('less', function() {
 		.pipe(autoprefix('last 2 version'))
 		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('static/css/'))
+		.pipe(livereload())
 });
 
 gulp.task('watch', function () {
-   gulp.watch('styles/*.less', ['less']);
+	livereload.listen();
+	gulp.watch('styles/*.less', ['less']);
 });
