@@ -46,9 +46,9 @@ launchctl load ~/Library/LaunchAgents/homebrew.mxcl.chronograf.plist
     ```
 
 #### Standalone OS X binary
-Assuming you're working with Chronograf version 0.10, from the `chronograf-0.10/` directory:
+Assuming you're working with Chronograf version 0.11, from the `chronograf-0.10/` directory:
 ```
-./chronograf-0.10-darwin_amd64
+./chronograf-0.11-darwin_amd64
 ```
 
 Check to see that Chronograf is running at http://127.0.0.1:10000.
