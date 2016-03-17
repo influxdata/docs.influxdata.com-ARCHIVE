@@ -10,6 +10,10 @@ menu:
 
 This guide shows how to download, install, and start visualizing data with Chronograf.
 
+> **Note:** Chronograf 0.11 made several changes to take into account the [breaking API changes](https://github.com/influxdata/influxdb/blob/master/CHANGELOG.md) released with InfluxDB 0.11.
+As a result, we do not recommend using Chronograf 0.11 with InfluxDB versions prior to 0.11.
+In general, we recommend maintaining version parity across the TICK stack.
+
 ## Download and Install Chronograf
 Follow the instructions in the Chronograf Downloads section on the [Downloads page](https://influxdata.com/downloads/#chronograf).
 
