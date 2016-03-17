@@ -164,7 +164,7 @@ tag value is `tag,value,with"commas"`, the field key is `field_key\\\\` and the 
 
 If you write points in a batch all points without explicit timestamps will receive the same timestamp when inserted.
 Since a point is defined only by its measurement, tag set, and timestamp, that can lead to duplicate points.
-When InfluxDB encounters a duplicate point, the [field set](/influxdb/v0.10/concepts/glossary/#field-set) becomes the union of the old field set and the new field set, where any ties go to the new field set.
+When InfluxDB encounters a duplicate point, the [field set](/influxdb/v0.11/concepts/glossary/#field-set) becomes the union of the old field set and the new field set, where any ties go to the new field set.
 It is a best practice to provide explicit timestamps with all points.
 
 Measurements, tag keys, tag values, and field keys are never quoted.
@@ -176,7 +176,7 @@ Querying measurements or tags that contain double-quotes `"` can be difficult, s
 It's possible to work around the limitations with regular expressions but it's not easy.
 
 Avoid using Keywords as identifiers (database names, retention policy names, measurement names, tag keys, or field keys) whenever possible.
-Keywords in InfluxDB are referenced on the [InfluxQL Syntax](/influxdb/v0.10/query_language/spec/) page.
+Keywords in InfluxDB are referenced on the [InfluxQL Syntax](/influxdb/v0.11/query_language/spec/) page.
 There is no need to quote or escape keywords in the write syntax.
 
 All values in InfluxDB are case-sensitive: `MyDB` != `mydb` != `MYDB`.

@@ -6,7 +6,7 @@ menu:
     parent: concepts
 ---
 
-Every InfluxDB use case is special and your [schema](/influxdb/v0.10/concepts/glossary/#schema) will reflect that uniqueness.
+Every InfluxDB use case is special and your [schema](/influxdb/v0.11/concepts/glossary/#schema) will reflect that uniqueness.
 There are, however, general guidelines to follow and pitfalls to avoid when designing your schema.
 
 ## Encouraged Schema Design
@@ -15,19 +15,19 @@ In no particular order, we recommend that you:
 
 * *Encode meta data in tags*
 
-    [Tags](/influxdb/v0.10/concepts/glossary/#tag) are indexed and [fields](/influxdb/v0.10/concepts/glossary/#field) are not indexed.
+    [Tags](/influxdb/v0.11/concepts/glossary/#tag) are indexed and [fields](/influxdb/v0.11/concepts/glossary/#field) are not indexed.
     This means that queries on tags are more performant than those on fields.
 
     In general, your queries should guide what gets stored as a tag and what gets stored as a field:
       * Store data in tags if they're commonly-queried meta data
       * Store data in tags if you plan to use them with `GROUP BY()`
-      * Store data in fields if you plan to use them with an [InfluxQL function](/influxdb/v0.10/query_language/functions/)
-      * Store data in fields if you *need* them to be something other than a string - [tag values](/influxdb/v0.10/concepts/glossary/#tag-value) are always interpreted as strings
+      * Store data in fields if you plan to use them with an [InfluxQL function](/influxdb/v0.11/query_language/functions/)
+      * Store data in fields if you *need* them to be something other than a string - [tag values](/influxdb/v0.11/concepts/glossary/#tag-value) are always interpreted as strings
 
 * *Avoid using InfluxQL Keywords as identifier names*
 
     This isn't necessary, but it simplifies writing queries; you won't have to wrap those identifiers in double quotes.
-    Identifiers are are database names, [retention policy](/influxdb/v0.10/concepts/glossary/#retention-policy-rp) names, [user](/influxdb/v0.10/concepts/glossary/#user) names, [measurement](/influxdb/v0.10/concepts/glossary/#measurement) names, [tag keys](/influxdb/v0.10/concepts/glossary/#tag-key), and [field keys](/influxdb/v0.10/concepts/glossary/#field-key).
+    Identifiers are are database names, [retention policy](/influxdb/v0.11/concepts/glossary/#retention-policy-rp) names, [user](/influxdb/v0.11/concepts/glossary/#user) names, [measurement](/influxdb/v0.11/concepts/glossary/#measurement) names, [tag keys](/influxdb/v0.11/concepts/glossary/#tag-key), and [field keys](/influxdb/v0.11/concepts/glossary/#field-key).
     See [InfluxQL Keywords](https://github.com/influxdata/influxdb/blob/master/influxql/README.md#keywords) for words to avoid.
 
     Note that you will also need to wrap identifiers in double quotes in queries if they contain characters other than `[A-z,_]`.
@@ -38,15 +38,15 @@ In no particular order, we recommend that you:
 
 * *Don't have too many series*
 
-    See [Hardware Sizing Guidelines](/influxdb/v0.10/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node) for [series cardinality](/influxdb/v0.10/concepts/glossary/#series-cardinality) recommendations based on your hardware.
+    See [Hardware Sizing Guidelines](/influxdb/v0.11/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node) for [series cardinality](/influxdb/v0.11/concepts/glossary/#series-cardinality) recommendations based on your hardware.
 
-    [Tags](/influxdb/v0.10/concepts/glossary/#tag) that specify highly variable information like UUIDs, hashes, and random strings can increase your series cardinality to uncomfortable levels.
+    [Tags](/influxdb/v0.11/concepts/glossary/#tag) that specify highly variable information like UUIDs, hashes, and random strings can increase your series cardinality to uncomfortable levels.
     If you need that information in your database, consider storing the high-cardinality data as a field rather than a tag (note that query performance will be slower).
 
 * *Don't differentiate data with measurement names*
 
     In general, taking this step will simplify your queries.
-    InfluxDB queries merge data that fall within the same [measurement](/influxdb/v0.10/concepts/glossary/#measurement); it's better to differentiate data with [tags](/influxdb/v0.10/concepts/glossary/#tag) than with detailed measurement names.
+    InfluxDB queries merge data that fall within the same [measurement](/influxdb/v0.11/concepts/glossary/#measurement); it's better to differentiate data with [tags](/influxdb/v0.11/concepts/glossary/#tag) than with detailed measurement names.
 
     Example:
 
@@ -97,7 +97,7 @@ In no particular order, we recommend that you:
     `location = field-2.region-north` | `field = 2` and `region = north`
     `location = field-2.region-midwest` | `field = 2` and `region = north`
 
-    Assume that each [tag set](/influxdb/v0.10/concepts/glossary/#tag-set) falls in the [measurement](/influxdb/v0.10/concepts/glossary/#measurement) `blueberries` and is associated with a [field](/influxdb/v0.10/concepts/glossary/#field) called `value`.
+    Assume that each [tag set](/influxdb/v0.11/concepts/glossary/#tag-set) falls in the [measurement](/influxdb/v0.11/concepts/glossary/#measurement) `blueberries` and is associated with a [field](/influxdb/v0.11/concepts/glossary/#field) called `value`.
     The following queries calculate the average of `value` for blueberries that fall in the `north`.
     While both queries are relatively simple, you can imagine that the regex could get much more complicated if Schema 1 contained a more complex tag value.
 
@@ -114,7 +114,7 @@ In no particular order, we recommend that you:
 
 * *Don't use the same name for a field key and tag key*
 
-    You won't be able to query the [tag key](/influxdb/v0.10/concepts/glossary/#tag-key) if the tag key is the same as a [field key](/influxdb/v0.10/concepts/glossary/#field-key) in your schema.
+    You won't be able to query the [tag key](/influxdb/v0.11/concepts/glossary/#tag-key) if the tag key is the same as a [field key](/influxdb/v0.11/concepts/glossary/#field-key) in your schema.
     Be sure to differentiate your tag keys and field keys.
 
     <dt>

@@ -9,24 +9,24 @@ menu:
 ## Introduction
 
 This is a reference for the Influx Query Language ("InfluxQL").
-If you're looking for less formal documentation see [Data Exploration](/influxdb/v0.10/query_language/data_exploration/), [Schema Exploration](/influxdb/v0.10/query_language/schema_exploration/), [Database Management](/influxdb/v0.10/query_language/database_management/), and [Authentication and Authorization](/influxdb/v0.10/administration/authentication_and_authorization/).
+If you're looking for less formal documentation see [Data Exploration](/influxdb/v0.11/query_language/data_exploration/), [Schema Exploration](/influxdb/v0.11/query_language/schema_exploration/), [Database Management](/influxdb/v0.11/query_language/database_management/), and [Authentication and Authorization](/influxdb/v0.11/administration/authentication_and_authorization/).
 
 InfluxQL is a SQL-like query language for interacting with InfluxDB.
 It has been lovingly crafted to feel familiar to those coming from other SQL or SQL-like environments while providing features specific to storing and analyzing time series data.
 
 Sections:
 
-* [Notation](/influxdb/v0.10/query_language/spec/#notation)
-* [Query representation](/influxdb/v0.10/query_language/spec/#query-representation)
-* [Letters and digits](/influxdb/v0.10/query_language/spec/#letters-and-digits)
-* [Identifiers](/influxdb/v0.10/query_language/spec/#identifiers)
-* [Keywords](/influxdb/v0.10/query_language/spec/#keywords)
-* [Literals](/influxdb/v0.10/query_language/spec/#literals)
-* [Queries](/influxdb/v0.10/query_language/spec/#queries)
-* [Statements](/influxdb/v0.10/query_language/spec/#statements)
-* [Clauses](/influxdb/v0.10/query_language/spec/#clauses)
-* [Expressions](/influxdb/v0.10/query_language/spec/#expressions)
-* [Other](/influxdb/v0.10/query_language/spec/#other)
+* [Notation](/influxdb/v0.11/query_language/spec/#notation)
+* [Query representation](/influxdb/v0.11/query_language/spec/#query-representation)
+* [Letters and digits](/influxdb/v0.11/query_language/spec/#letters-and-digits)
+* [Identifiers](/influxdb/v0.11/query_language/spec/#identifiers)
+* [Keywords](/influxdb/v0.11/query_language/spec/#keywords)
+* [Literals](/influxdb/v0.11/query_language/spec/#literals)
+* [Queries](/influxdb/v0.11/query_language/spec/#queries)
+* [Statements](/influxdb/v0.11/query_language/spec/#statements)
+* [Clauses](/influxdb/v0.11/query_language/spec/#clauses)
+* [Expressions](/influxdb/v0.11/query_language/spec/#expressions)
+* [Other](/influxdb/v0.11/query_language/spec/#other)
 
 ## Notation
 
@@ -78,7 +78,7 @@ digit               = "0" … "9" .
 
 ## Identifiers
 
-Identifiers are tokens which refer to [database](/influxdb/v0.10/concepts/glossary/#database) names, [retention policy](/influxdb/v0.10/concepts/glossary/#retention-policy-rp) names, [user](/influxdb/v0.10/concepts/glossary/#user) names, [measurement](/influxdb/v0.10/concepts/glossary/#measurement) names, [tag keys](/influxdb/v0.10/concepts/glossary/#tag-key), and [field keys](/influxdb/v0.10/concepts/glossary/#field-key).
+Identifiers are tokens which refer to [database](/influxdb/v0.11/concepts/glossary/#database) names, [retention policy](/influxdb/v0.11/concepts/glossary/#retention-policy-rp) names, [user](/influxdb/v0.11/concepts/glossary/#user) names, [measurement](/influxdb/v0.11/concepts/glossary/#measurement) names, [tag keys](/influxdb/v0.11/concepts/glossary/#tag-key), and [field keys](/influxdb/v0.11/concepts/glossary/#field-key).
 
 The rules:
 
@@ -347,7 +347,7 @@ CREATE RETENTION POLICY "10m.events" ON somedb DURATION 10m REPLICATION 2 DEFAUL
 
 ### CREATE SUBSCRIPTION
 
-Subscriptions tell InfluxDB to send all the data it receives to [Kapacitor](https://docs.influxdata.com/kapacitor/v0.10/introduction/).
+Subscriptions tell InfluxDB to send all the data it receives to [Kapacitor](https://docs.influxdata.com/kapacitor/v0.11/introduction/).
 
 ```
 create_subscription_stmt = "CREATE SUBSCRIPTION" subscription_name "ON" db_name "." retention_policy "DESTINATIONS" ("ANY"|"ALL") host { "," host} .

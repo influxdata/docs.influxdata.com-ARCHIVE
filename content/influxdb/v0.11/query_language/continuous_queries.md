@@ -8,27 +8,27 @@ menu:
     parent: query_language
 ---
 
-When writing large amounts of data to InfluxDB, you may often want to downsample the raw data, that is, use `GROUP BY time()` with an InfluxQL [function](/influxdb/v0.10/query_language/functions/) to change the high frequency data into lower frequency data. Repeatedly running the same queries by hand can be tedious. InfluxDB's continuous queries (CQ) simplify the downsampling process; CQs run automatically and write the query results to another measurement.
+When writing large amounts of data to InfluxDB, you may often want to downsample the raw data, that is, use `GROUP BY time()` with an InfluxQL [function](/influxdb/v0.11/query_language/functions/) to change the high frequency data into lower frequency data. Repeatedly running the same queries by hand can be tedious. InfluxDB's continuous queries (CQ) simplify the downsampling process; CQs run automatically and write the query results to another measurement.
 
-* [CQ definition](/influxdb/v0.10/query_language/continuous_queries/#cq-definition)
-* [InfluxQL for creating a CQ](/influxdb/v0.10/query_language/continuous_queries/#influxql-for-creating-a-cq)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[The `CREATE CONTINUOUS QUERY` statement](/influxdb/v0.10/query_language/continuous_queries/#the-create-continuous-query-statement)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[CQs with backreferencing](/influxdb/v0.10/query_language/continuous_queries/#cqs-with-backreferencing)  
-* [List CQs with `SHOW`](/influxdb/v0.10/query_language/continuous_queries/#list-cqs-with-show)
-* [Delete CQs with `DROP`](/influxdb/v0.10/query_language/continuous_queries/#delete-cqs-with-drop)
-* [Backfilling](/influxdb/v0.10/query_language/continuous_queries/#backfilling)
-* [Further reading](/influxdb/v0.10/query_language/continuous_queries/#further-reading)
+* [CQ definition](/influxdb/v0.11/query_language/continuous_queries/#cq-definition)
+* [InfluxQL for creating a CQ](/influxdb/v0.11/query_language/continuous_queries/#influxql-for-creating-a-cq)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[The `CREATE CONTINUOUS QUERY` statement](/influxdb/v0.11/query_language/continuous_queries/#the-create-continuous-query-statement)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[CQs with backreferencing](/influxdb/v0.11/query_language/continuous_queries/#cqs-with-backreferencing)  
+* [List CQs with `SHOW`](/influxdb/v0.11/query_language/continuous_queries/#list-cqs-with-show)
+* [Delete CQs with `DROP`](/influxdb/v0.11/query_language/continuous_queries/#delete-cqs-with-drop)
+* [Backfilling](/influxdb/v0.11/query_language/continuous_queries/#backfilling)
+* [Further reading](/influxdb/v0.11/query_language/continuous_queries/#further-reading)
 
 ## CQ definition
-A CQ is an InfluxQL query that the system runs automatically and periodically within a database. InfluxDB stores the results of the CQ in a specified [measurement](/influxdb/v0.10/concepts/glossary/#measurement). CQs require a function in the `SELECT` clause and must include a `GROUP BY time()` clause.
+A CQ is an InfluxQL query that the system runs automatically and periodically within a database. InfluxDB stores the results of the CQ in a specified [measurement](/influxdb/v0.11/concepts/glossary/#measurement). CQs require a function in the `SELECT` clause and must include a `GROUP BY time()` clause.
 
 CQs do not maintain any state. Each execution of a CQ is a standalone query that resamples all points in the database matching the conditions of the query.
 
 The time ranges of the CQ results have round-number boundaries that are set internally by the database. There is currently no way for users to alter the start or end times of the intervals.
 
-Only admin users are allowed to work with continuous queries. For more on user privileges, see [Authentication and Authorization](/influxdb/v0.10/administration/authentication_and_authorization/#user-types-and-their-privileges).
+Only admin users are allowed to work with continuous queries. For more on user privileges, see [Authentication and Authorization](/influxdb/v0.11/administration/authentication_and_authorization/#user-types-and-their-privileges).
 
-> **Note:** CQs only execute on data received after the CQ's creation. If you'd like to downsample data written to InfluxDB before the CQ was created, see the examples in [Data Exploration](/influxdb/v0.10/query_language/data_exploration/#downsample-data).
+> **Note:** CQs only execute on data received after the CQ's creation. If you'd like to downsample data written to InfluxDB before the CQ was created, see the examples in [Data Exploration](/influxdb/v0.11/query_language/data_exploration/#downsample-data).
 
 ## InfluxQL for creating a CQ
 ### The `CREATE CONTINUOUS QUERY` statement
@@ -84,7 +84,7 @@ See GitHub Issue [#4630](https://github.com/influxdata/influxdb/issues/4630) for
     Once executed, InfluxDB automatically calculates the 30 minute minimum of the field `mouse` in the measurement `zoo`, and it writes the results to the measurement `min_mouse`.
     Note that the CQ `minnie` only exists in the database `world`.
 
-* Create a CQ with one function and write the results to another [retention policy](/influxdb/v0.10/concepts/glossary/#retention-policy-rp):
+* Create a CQ with one function and write the results to another [retention policy](/influxdb/v0.11/concepts/glossary/#retention-policy-rp):
 
     ```sql
 > CREATE CONTINUOUS QUERY minnie_jr ON world BEGIN SELECT min(mouse) INTO world."7days".min_mouse FROM world."1day".zoo GROUP BY time(30m) END
@@ -93,7 +93,7 @@ See GitHub Issue [#4630](https://github.com/influxdata/influxdb/issues/4630) for
     The CQ `minnie_jr` acts in the same way as the CQ `minnie`, however, InfluxDB calculates the 30 minute minimum of the field `mouse` in the measurement `zoo` and under the retention policy `1day`, and it automatically writes the results of the query to the measurement `min_mouse` under the retention policy `7days`.
 
     Combining CQs and retention policies provides a useful way to automatically downsample data and expire the unnecessary raw data.
-    For a complete discussion on this topic, see [Downsampling and Data Retention](/influxdb/v0.10/guides/downsampling_and_retention/).
+    For a complete discussion on this topic, see [Downsampling and Data Retention](/influxdb/v0.11/guides/downsampling_and_retention/).
 
 * Create a CQ with two functions:
 
@@ -103,14 +103,14 @@ See GitHub Issue [#4630](https://github.com/influxdata/influxdb/issues/4630) for
 
     The CQ `minnie_maximus` automatically calculates the 30 minute minimum of the field `mouse` and the 30 minute maximum of the field `imus` (both fields are in the measurement `zoo`), and it writes the results to the measurement `min_max_mouse`.
 
-* Create a CQ with two functions and personalize the [field keys](/influxdb/v0.10/concepts/glossary/#field-key) in the results:
+* Create a CQ with two functions and personalize the [field keys](/influxdb/v0.11/concepts/glossary/#field-key) in the results:
 
     ```sql
 > CREATE CONTINUOUS QUERY minnie_maximus_1 ON world BEGIN SELECT min(mouse) AS minuscule,max(imus) AS monstrous INTO min_max_mouse FROM zoo GROUP BY time(30m) END
     ```
 
     The CQ `minnie_maximus_1` acts in the same way as `minnie_maximus`, however, InfluxDB names field keys `miniscule` and `monstrous` in the destination measurement instead of `min` and `max`.
-    For more on `AS`, see [Functions](/influxdb/v0.10/query_language/functions/#rename-the-output-column-s-title-with-as).
+    For more on `AS`, see [Functions](/influxdb/v0.11/query_language/functions/#rename-the-output-column-s-title-with-as).
 
 * Create a CQ with a 30 minute `GROUP BY time()` interval that runs every 15 minutes:
 
@@ -249,7 +249,7 @@ WHERE time >= '2015-12-14 00:05:20' AND time < '2015-12-15 00:05:20'
 GROUP BY time(5m), sensor_id
 ```
 
-To prevent the backfill from creating a huge number of "empty" points containing only `null` values, [fill()](/influxdb/v0.10/query_language/data_exploration/#the-group-by-clause-and-fill) can be used at the end of the query:
+To prevent the backfill from creating a huge number of "empty" points containing only `null` values, [fill()](/influxdb/v0.11/query_language/data_exploration/#the-group-by-clause-and-fill) can be used at the end of the query:
 ```sql
 > SELECT min(temp) as min_temp, max(temp) as max_temp INTO "reading.minmax.5m" FROM reading
 WHERE time >= '2015-12-14 00:05:20' AND time < '2015-12-15 00:05:20'
@@ -264,4 +264,4 @@ GROUP BY time(5m)
 ```
 
 ## Further reading
-Now that you know how to create CQs with InfluxDB, check out [Downsampling and Data Retention](/influxdb/v0.10/guides/downsampling_and_retention/) for how to combine CQs with retention policies to automatically downsample data and expire unnecessary data.
+Now that you know how to create CQs with InfluxDB, check out [Downsampling and Data Retention](/influxdb/v0.11/guides/downsampling_and_retention/) for how to combine CQs with retention policies to automatically downsample data and expire unnecessary data.

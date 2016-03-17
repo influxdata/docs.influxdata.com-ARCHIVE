@@ -16,13 +16,13 @@ Installation of the InfluxDB package may require `root` or administrator privile
 
 By default, InfluxDB uses the following network ports:
 
-- TCP port `8083` is used for InfluxDB's [Admin panel](/influxdb/v0.10/tools/web_admin/)
+- TCP port `8083` is used for InfluxDB's [Admin panel](/influxdb/v0.11/tools/web_admin/)
 - TCP port `8086` is used for client-server communication over InfluxDB's HTTP API
 - TCP ports `8088` and `8091` are required for clustered InfluxDB instances
 
 > Note: In addition to the ports above,
 InfluxDB also offers multiple plugins that may require custom ports.
-All port mappings can be modified through the [configuration file](/influxdb/v0.10/administration/config),
+All port mappings can be modified through the [configuration file](/influxdb/v0.11/administration/config),
 which is located at `/etc/influxdb/influxdb.conf` for default installations.
 
 ## Installation
@@ -142,7 +142,7 @@ influxd -config /usr/local/etc/influxdb.conf
 
 For users who don't want to install any software and are ready to use InfluxDB, you may want to check out our [managed hosted InfluxDB offering](http://customers.influxdb.com).
 
-<a href="/influxdb/v0.10/introduction/getting_started/"><font size="6"><b>⇒ Now get started!</b></font></a>
+<a href="/influxdb/v0.11/introduction/getting_started/"><font size="6"><b>⇒ Now get started!</b></font></a>
 
 ## Configuration
 
@@ -252,7 +252,7 @@ For example:
 INFLUXD_OPTS='[-join hostname_1:port_1[,hostname_2:port_2]]'
 ```
 
-For more detailed instructions on how to set up a cluster, please see the [Clustering](/influxdb/v0.10/guides/clustering/) section.
+For more detailed instructions on how to set up a cluster, please see the [Clustering](/influxdb/v0.11/guides/clustering/) section.
 
 ## Nightly and Development Versions
 

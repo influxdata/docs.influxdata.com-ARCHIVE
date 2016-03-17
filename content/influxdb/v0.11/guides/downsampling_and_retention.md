@@ -30,7 +30,7 @@ InfluxDB automatically queries from and writes to the `DEFAULT` RP on a database
 To query from or write to a different RP, you must fully qualify the measurement, that is, specify the database and retention policy with the measurement name: `<database_name>."<retention_policy>".<measurement_name>`.
 
 You can also create, alter, and delete you own RPs, and you can change the database's `DEFAULT` RP.
-See [Database management](/influxdb/v0.10/query_language/database_management/#retention-policy-management) for more on RP management.
+See [Database management](/influxdb/v0.11/query_language/database_management/#retention-policy-management) for more on RP management.
 
 > **Clarifying** `default` **vs.** `DEFAULT`
 
@@ -51,7 +51,7 @@ CQs are optimal for regularly downsampling data - once you implement the CQ, Inf
 
 ### Working with CQs
 The section below offers a very brief introduction to creating CQs.
-See [Continuous Queries](/influxdb/v0.10/query_language/continuous_queries/) for a detailed discussion on how to create and manage CQs.
+See [Continuous Queries](/influxdb/v0.11/query_language/continuous_queries/) for a detailed discussion on how to create and manage CQs.
 
 ## Combining RPs and CQs - a casestudy
 We have real-time data that track the number of food orders to a restaurant via phone and via website at 10 second intervals.
@@ -62,8 +62,8 @@ In the next steps, we use RPs and CQs to make InfluxDB:
  * automatically aggregate the 10 second level data to 30 minute level data
  * keep the 30 minute level data forever
 
-The following steps work with a fictional [database](/influxdb/v0.10/concepts/glossary/#database) called `food_data` and the [measurement](/influxdb/v0.10/concepts/glossary/#measurement) `orders`.
-`orders` has two [fields](/influxdb/v0.10/concepts/glossary/#field), `phone` and `website`, which store the number of orders that arrive via each channel every 10 seconds.
+The following steps work with a fictional [database](/influxdb/v0.11/concepts/glossary/#database) called `food_data` and the [measurement](/influxdb/v0.11/concepts/glossary/#measurement) `orders`.
+`orders` has two [fields](/influxdb/v0.11/concepts/glossary/#field), `phone` and `website`, which store the number of orders that arrive via each channel every 10 seconds.
 
 ### Prepare the database
 Before writing the data to the database `food_data`, we perform the following steps.
@@ -71,7 +71,7 @@ Before writing the data to the database `food_data`, we perform the following st
 > **Note:** We do this before inserting any data because InfluxDB only performs CQs on new data, that is, data with timestamps that occur after the time at which we create the CQ.
 
 #### Create a new `DEFAULT` RP
-When we initially [created the database](/influxdb/v0.10/query_language/database_management/#create-a-database-with-create-database) `food_data`, InfluxDB automatically generated an RP called `default` with an infinite duration and a replication factor set to the number of nodes in the cluster.
+When we initially [created the database](/influxdb/v0.11/query_language/database_management/#create-a-database-with-create-database) `food_data`, InfluxDB automatically generated an RP called `default` with an infinite duration and a replication factor set to the number of nodes in the cluster.
 `default` is also the `DEFAULT` RP for `food_data`; if we do not supply an explicit RP when we write a point to the database, InfluxDB writes the point to `default` and it keeps those data forever.
 
 We want the `DEFAULT` RP on `food_data` to be a two hour policy.
@@ -83,9 +83,9 @@ To create our new RP, we enter the following command:
 That query makes the `two_hours` RP the `DEFAULT` RP in `food_data`.
 When we write data to the database and do not supply an RP in the write, InfluxDB automatically stores those data in the `two_hours` RP.
 Once those data have timestamps that are older than two hours, InfluxDB deletes those data.
-For a more detailed discussion on the `CREATE RETENTION POLICY` syntax, see [Database Management](/influxdb/v0.10/query_language/database_management/#retention-policy-management).
+For a more detailed discussion on the `CREATE RETENTION POLICY` syntax, see [Database Management](/influxdb/v0.11/query_language/database_management/#retention-policy-management).
 
-To clarify, we've included the results from the [`SHOW RETENTION POLICIES`](/influxdb/v0.10/query_language/schema_exploration/#explore-retention-policies-with-show-retention-policies) query below.
+To clarify, we've included the results from the [`SHOW RETENTION POLICIES`](/influxdb/v0.11/query_language/schema_exploration/#explore-retention-policies-with-show-retention-policies) query below.
 Notice that there are two RPs in `food_data` (`default` and `two_hours`) and that the third column identifies `two_hours` as the `DEFAULT` RP.
 
 ```bash
@@ -109,7 +109,7 @@ In the CQ above, we write the results of the query to the infinite RP `default` 
 To fully qualify a measurement, specify its database and RP with `<database_name>."<retention_policy>".<measurement_name>`.
 If you do not fully qualify the measurement, InfluxDB writes the results of the query to the two hour RP `DEFAULT`.
 
-For a more detailed discussion on the `CREATE CONTINUOUS QUERY` syntax, see [Continuous Queries](/influxdb/v0.10/query_language/continuous_queries/).
+For a more detailed discussion on the `CREATE CONTINUOUS QUERY` syntax, see [Continuous Queries](/influxdb/v0.11/query_language/continuous_queries/).
 
 ### Write the data to InfluxDB and see the results
 Now that we've prepped `food_data`, we start writing the data to InfluxDB and let things run for a bit.
@@ -148,7 +148,7 @@ The data in `downsampled_orders` aren't subject to the `two_hours` RP.
 In the second `SELECT` statement, we get the CQ results by fully qualifying the measurement.
 To fully qualify a measurement, specify its database and RP with `<database_name>."<retention_policy>".<measurement_name>`.
 
-Using a combination of RPs and CQs, we've made InfluxDB automatically downsample data and expire old data. Now that you have a general understanding of how these features can work together, we recommend looking at the detailed documentation on [CQs](/influxdb/v0.10/query_language/continuous_queries/) and [RPs](/influxdb/v0.10/query_language/database_management/#retention-policy-management) to see all that they can do for you.
+Using a combination of RPs and CQs, we've made InfluxDB automatically downsample data and expire old data. Now that you have a general understanding of how these features can work together, we recommend looking at the detailed documentation on [CQs](/influxdb/v0.11/query_language/continuous_queries/) and [RPs](/influxdb/v0.11/query_language/database_management/#retention-policy-management) to see all that they can do for you.
 
 <a name="retentionconfig">1</a>: By default, InfluxDB checks to enforce an RP every 30 minutes so you may have data that are older than two hours between checks.
-The rate at which InfluxDB checks to enforce an RP is a configurable setting, see [Database Configuration](/influxdb/v0.10/administration/config/#retention).
+The rate at which InfluxDB checks to enforce an RP is a configurable setting, see [Database Configuration](/influxdb/v0.11/administration/config/#retention).

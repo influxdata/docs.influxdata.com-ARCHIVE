@@ -6,13 +6,13 @@ menu:
     parent: introduction
 ---
 
-With InfluxDB [installed](/influxdb/v0.10/introduction/installation), you're ready to start doing some awesome things.
+With InfluxDB [installed](/influxdb/v0.11/introduction/installation), you're ready to start doing some awesome things.
 In this section we'll use the `influx` command line interface (CLI), which is included in all
 InfluxDB packages and is a lightweight and simple way to interact with the database.
 The CLI communicates with InfluxDB directly by making requests to the InfluxDB HTTP API over port `8086` by default.
 
 > **Note:** The database can also be used by making raw HTTP requests.
-See [Writing Data](/influxdb/v0.10/guides/writing_data/) and [Querying Data](/influxdb/v0.10/guides/querying_data/)
+See [Writing Data](/influxdb/v0.11/guides/writing_data/) and [Querying Data](/influxdb/v0.11/guides/querying_data/)
 for examples with the `curl` application.
 
 ## Creating a database
@@ -121,7 +121,7 @@ stock,symbol=AAPL bid=127.46,ask=127.48
 temperature,machine=unit42,type=assembly external=25,internal=37 1434067467000000000
 ```
 
-> **Note:** More information on the line protocol can be found on the [Write Syntax](/influxdb/v0.10/write_protocols/write_syntax/) page.
+> **Note:** More information on the line protocol can be found on the [Write Syntax](/influxdb/v0.11/write_protocols/write_syntax/) page.
 
 To insert a single time-series datapoint into InfluxDB using the CLI, enter `INSERT` followed by a point:
 
@@ -167,7 +167,7 @@ time		                        	 external	  internal	machine	type
 > 
 ```
 
-InfluxQL has many [features and keywords](/influxdb/v0.10/query_language/spec/) that are not covered here,
+InfluxQL has many [features and keywords](/influxdb/v0.11/query_language/spec/) that are not covered here,
 including support for Go-style regex. For example:
 
 ```sql
@@ -180,8 +180,8 @@ including support for Go-style regex. For example:
 
 This is all you need to know to write data into InfluxDB and query it back.
 To learn more about the InfluxDB write protocol,
-check out the guide on [Writing Data](/influxdb/v0.10/guides/writing_data/).
+check out the guide on [Writing Data](/influxdb/v0.11/guides/writing_data/).
 To futher explore the query language,
-check out the guide on [Querying Data](/influxdb/v0.10/guides/querying_data/).
+check out the guide on [Querying Data](/influxdb/v0.11/guides/querying_data/).
 For more information on InfluxDB concepts, check out the [Key Concepts]
-(/influxdb/v0.10/concepts/key_concepts/) page.
+(/influxdb/v0.11/concepts/key_concepts/) page.

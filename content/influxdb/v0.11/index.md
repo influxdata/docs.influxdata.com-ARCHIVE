@@ -1,11 +1,11 @@
 ---
 title: InfluxDB Version 0.10 Documentation
 aliases:
-  - /influxdb/v0.10/introduction/overview/
+  - /influxdb/v0.11/introduction/overview/
 
 menu:
   influxdb:
-    name: v0.10
+    name: v0.11
     identifier: influxdb_010
     weight: 0
 ---

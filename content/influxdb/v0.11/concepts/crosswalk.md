@@ -104,8 +104,8 @@ Referencing the example above, in general:
 * InfluxDB points (for example, `2015-04-16T12:00:00Z	5`) are similar to SQL rows.
 
 Building on this comparison of database terminology,
-InfluxDB's [continuous queries](/influxdb/v0.10/query_language/continuous_queries/)
-and [replication policies](/influxdb/v0.10/administration/administration/) are
+InfluxDB's [continuous queries](/influxdb/v0.11/query_language/continuous_queries/)
+and [replication policies](/influxdb/v0.11/administration/administration/) are
 similar to stored procedures in an SQL database.
 They're specified once and then performed regularly and automatically.
 
@@ -114,7 +114,7 @@ SQL `JOIN`s aren't available for InfluxDB measurements; your schema design shoul
 And, as we mentioned above, a measurement is like an SQL table where the primary index is always pre-set to time.
 InfluxDB timestamps must be in UNIX epoch (GMT) or formatted as a date-time string valid under RFC3339.
 
-For more detailed descriptions of the InfluxDB terms mentioned in this section see our [Glossary of Terms](/influxdb/v0.10/concepts/glossary/).
+For more detailed descriptions of the InfluxDB terms mentioned in this section see our [Glossary of Terms](/influxdb/v0.11/concepts/glossary/).
 
 ## InfluxQL and SQL
 
@@ -172,11 +172,11 @@ The options for specifying time durations with `now()` are:
 <br/>
 
 InfluxQL also supports regular expressions, arithmetic in expressions, `SHOW` statements, and `GROUP BY` statements.
-See our [data exploration](/influxdb/v0.10/query_language/data_exploration/) page for an in-depth discussion of those topics.
+See our [data exploration](/influxdb/v0.11/query_language/data_exploration/) page for an in-depth discussion of those topics.
 InfluxQL functions include `COUNT`, `MIN`, `MAX`, `MEDIAN`, `DERIVATIVE` and more.
-For a full list check out the [functions](/influxdb/v0.10/query_language/functions/) page.
+For a full list check out the [functions](/influxdb/v0.11/query_language/functions/) page.
 
-Now that you have the general idea, check out our [Getting Started Guide](/influxdb/v0.10/introduction/getting_started/).
+Now that you have the general idea, check out our [Getting Started Guide](/influxdb/v0.11/introduction/getting_started/).
 
 ## A note on why InfluxDB isn't CRUD...
 

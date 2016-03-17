@@ -12,42 +12,42 @@ The following sections cover useful query syntax for exploring your data.
 
 The basics:
 
-* [The `SELECT` statement and the `WHERE` clause](/influxdb/v0.10/query_language/data_exploration/#the-select-statement-and-the-where-clause)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[The basic `SELECT` statement](/influxdb/v0.10/query_language/data_exploration/#the-basic-select-statement)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[The `SELECT` statement and arithmetic](/influxdb/v0.10/query_language/data_exploration/#the-select-statement-and-arithmetic)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[The `WHERE` clause](/influxdb/v0.10/query_language/data_exploration/#the-where-clause)
-* [The `GROUP BY` clause](/influxdb/v0.10/query_language/data_exploration/#the-group-by-clause)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[The basic `GROUP BY` clause](/influxdb/v0.10/query_language/data_exploration/#the-basic-group-by-clause)   
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[The `GROUP BY` clause and `fill()`](/influxdb/v0.10/query_language/data_exploration/#the-group-by-clause-and-fill)  
-* [The `INTO` clause](/influxdb/v0.10/query_language/data_exploration/#the-into-clause)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Relocate data](/influxdb/v0.10/query_language/data_exploration/#relocate-data)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Downsample data](/influxdb/v0.10/query_language/data_exploration/#downsample-data)    
+* [The `SELECT` statement and the `WHERE` clause](/influxdb/v0.11/query_language/data_exploration/#the-select-statement-and-the-where-clause)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[The basic `SELECT` statement](/influxdb/v0.11/query_language/data_exploration/#the-basic-select-statement)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[The `SELECT` statement and arithmetic](/influxdb/v0.11/query_language/data_exploration/#the-select-statement-and-arithmetic)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[The `WHERE` clause](/influxdb/v0.11/query_language/data_exploration/#the-where-clause)
+* [The `GROUP BY` clause](/influxdb/v0.11/query_language/data_exploration/#the-group-by-clause)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[The basic `GROUP BY` clause](/influxdb/v0.11/query_language/data_exploration/#the-basic-group-by-clause)   
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[The `GROUP BY` clause and `fill()`](/influxdb/v0.11/query_language/data_exploration/#the-group-by-clause-and-fill)  
+* [The `INTO` clause](/influxdb/v0.11/query_language/data_exploration/#the-into-clause)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Relocate data](/influxdb/v0.11/query_language/data_exploration/#relocate-data)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Downsample data](/influxdb/v0.11/query_language/data_exploration/#downsample-data)    
 
 Limit and sort your results:
 
-* [Limit query returns with `LIMIT` and `SLIMIT`](/influxdb/v0.10/query_language/data_exploration/#limit-query-returns-with-limit-and-slimit)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Limit results per series with `LIMIT`](/influxdb/v0.10/query_language/data_exploration/#limit-the-number-of-results-returned-per-series-with-limit)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Limit the number of series returned with `SLIMIT`](/influxdb/v0.10/query_language/data_exploration/#limit-the-number-of-series-returned-with-slimit)  
-* [Sort query returns with `ORDER BY time DESC`](/influxdb/v0.10/query_language/data_exploration/#sort-query-returns-with-order-by-time-desc)
-* [Paginate query returns with `OFFSET`](/influxdb/v0.10/query_language/data_exploration/#paginate-query-returns-with-offset)
+* [Limit query returns with `LIMIT` and `SLIMIT`](/influxdb/v0.11/query_language/data_exploration/#limit-query-returns-with-limit-and-slimit)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Limit results per series with `LIMIT`](/influxdb/v0.11/query_language/data_exploration/#limit-the-number-of-results-returned-per-series-with-limit)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Limit the number of series returned with `SLIMIT`](/influxdb/v0.11/query_language/data_exploration/#limit-the-number-of-series-returned-with-slimit)  
+* [Sort query returns with `ORDER BY time DESC`](/influxdb/v0.11/query_language/data_exploration/#sort-query-returns-with-order-by-time-desc)
+* [Paginate query returns with `OFFSET`](/influxdb/v0.11/query_language/data_exploration/#paginate-query-returns-with-offset)
 
 General tips on query syntax:
 
-* [Multiple statements in queries](/influxdb/v0.10/query_language/data_exploration/#multiple-statements-in-queries)
-* [Merge series in queries](/influxdb/v0.10/query_language/data_exploration/#merge-series-in-queries)
-* [Time syntax in queries](/influxdb/v0.10/query_language/data_exploration/#time-syntax-in-queries)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Relative time](/influxdb/v0.10/query_language/data_exploration/#relative-time)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Absolute time](/influxdb/v0.10/query_language/data_exploration/#absolute-time)
-* [Regular expressions in queries](/influxdb/v0.10/query_language/data_exploration/#regular-expressions-in-queries)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Regular expressions and selecting measurements](/influxdb/v0.10/query_language/data_exploration/#regular-expressions-and-selecting-measurements)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Regular expressions and specifying tags](/influxdb/v0.10/query_language/data_exploration/#regular-expressions-and-specifying-tags)
+* [Multiple statements in queries](/influxdb/v0.11/query_language/data_exploration/#multiple-statements-in-queries)
+* [Merge series in queries](/influxdb/v0.11/query_language/data_exploration/#merge-series-in-queries)
+* [Time syntax in queries](/influxdb/v0.11/query_language/data_exploration/#time-syntax-in-queries)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Relative time](/influxdb/v0.11/query_language/data_exploration/#relative-time)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Absolute time](/influxdb/v0.11/query_language/data_exploration/#absolute-time)
+* [Regular expressions in queries](/influxdb/v0.11/query_language/data_exploration/#regular-expressions-in-queries)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Regular expressions and selecting measurements](/influxdb/v0.11/query_language/data_exploration/#regular-expressions-and-selecting-measurements)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Regular expressions and specifying tags](/influxdb/v0.11/query_language/data_exploration/#regular-expressions-and-specifying-tags)
 
-The examples below query data using [InfluxDB's Command Line Interface (CLI)](/influxdb/v0.10/tools/shell/).
-See the [Querying Data](/influxdb/v0.10/guides/querying_data/) guide for how to query data directly using the HTTP API.
+The examples below query data using [InfluxDB's Command Line Interface (CLI)](/influxdb/v0.11/tools/shell/).
+See the [Querying Data](/influxdb/v0.11/guides/querying_data/) guide for how to query data directly using the HTTP API.
 
 #### Sample data
 <br>
-If you'd like to follow along with the queries in this document, see [Sample Data](/influxdb/v0.10/sample_data/data_download/) for how to download and write the data to InfluxDB.
+If you'd like to follow along with the queries in this document, see [Sample Data](/influxdb/v0.11/sample_data/data_download/) for how to download and write the data to InfluxDB.
 
 This document uses publicly available data from the [National Oceanic and Atmospheric Administration's (NOAA) Center for Operational Oceanographic Products and Services](http://tidesandcurrents.noaa.gov/stations.html?type=Water+Levels).
 The data include water levels (ft) collected every six seconds at two stations (Santa Monica, CA (ID 9410840) and Coyote Creek, CA (ID 9414575)) over the period from August 18, 2015 through September 18, 2015.
@@ -69,11 +69,11 @@ time			                 level description	      location	       water_level
 2015-08-18T00:24:00Z	   below 3 feet		          santa_monica	   2.041
 ```
 
-The [series](/influxdb/v0.10/concepts/glossary/#series) are made up of the [measurement](/influxdb/v0.10/concepts/glossary/#measurement) `h2o_feet` and the [tag key](/influxdb/v0.10/concepts/glossary/#tag-key) `location` with the [tag values](/influxdb/v0.10/concepts/glossary/#tag-value) `santa_monica` and `coyote_creek`.
-There are two [fields](/influxdb/v0.10/concepts/glossary/#field): `water_level` which stores floats and `level description` which stores strings.
+The [series](/influxdb/v0.11/concepts/glossary/#series) are made up of the [measurement](/influxdb/v0.11/concepts/glossary/#measurement) `h2o_feet` and the [tag key](/influxdb/v0.11/concepts/glossary/#tag-key) `location` with the [tag values](/influxdb/v0.11/concepts/glossary/#tag-value) `santa_monica` and `coyote_creek`.
+There are two [fields](/influxdb/v0.11/concepts/glossary/#field): `water_level` which stores floats and `level description` which stores strings.
 All of the data are in the `NOAA_water_database` database.
 
-> **Disclaimer:** The `level description` field isn't part of the original NOAA data - we snuck it in there for the sake of having a field key with a special character and string [field values](/influxdb/v0.10/concepts/glossary/#field-value).
+> **Disclaimer:** The `level description` field isn't part of the original NOAA data - we snuck it in there for the sake of having a field key with a special character and string [field values](/influxdb/v0.11/concepts/glossary/#field-value).
 
 ## The SELECT statement and the `WHERE` clause
 InfluxQL's `SELECT` statement follows the form of an SQL `SELECT` statement where the `WHERE` clause is optional:
@@ -105,7 +105,7 @@ Identifiers are database names, retention policy names, user names, measurement 
  ```sql
  > SELECT * FROM NOAA_water_database."default".h2o_feet
  ```
-* Fully qualify a measurement if you wish to query data from a different database or from a retention policy other than the default [retention policy](/influxdb/v0.10/concepts/glossary/#retention-policy).
+* Fully qualify a measurement if you wish to query data from a different database or from a retention policy other than the default [retention policy](/influxdb/v0.11/concepts/glossary/#retention-policy).
 A fully qualified measurement takes the following form:  
 ```
 "<database>"."<retention policy>"."<measurement>"
@@ -164,7 +164,7 @@ time
 ```
 
 > **Note:** When performing arithmetic on fields that store integers be aware that InfluxDB casts those integers to floats for all mathematical operations.
-This can lead to [overflow issues](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#working-with-really-big-or-really-small-integers) for some numbers.
+This can lead to [overflow issues](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#working-with-really-big-or-really-small-integers) for some numbers.
 
 ### The `WHERE` clause
 ---
@@ -181,7 +181,7 @@ Note that double quotes do not work when specifying tag values and can cause que
 
 > **Note:** Tags are indexed so queries on tag keys or tag values are more performant than queries on fields.
 
-Return data where the tag key `location` has no tag value (more on regular expressions [later](/influxdb/v0.10/query_language/data_exploration/#regular-expressions-in-queries)):
+Return data where the tag key `location` has no tag value (more on regular expressions [later](/influxdb/v0.11/query_language/data_exploration/#regular-expressions-in-queries)):
 ```sql
 > SELECT * FROM h2o_feet WHERE location !~ /.*/
 ```
@@ -196,7 +196,7 @@ Return data from the past seven days:
 > SELECT * FROM h2o_feet WHERE time > now() - 7d
 ```
 * `now()` is the Unix time of the server at the time the query is executed on that server.
-For more on `now()` and other ways to specify time in queries, see [time syntax in queries](/influxdb/v0.10/query_language/data_exploration/#time-syntax-in-queries).
+For more on `now()` and other ways to specify time in queries, see [time syntax in queries](/influxdb/v0.11/query_language/data_exploration/#time-syntax-in-queries).
 
 **Field values**  
 Return data where the tag key `location` has the tag value `coyote_creek` and the field `water_level` is greater than 8 feet:
@@ -229,7 +229,7 @@ It supports using regular expressions to match tags, but not to match fields.
 ## The GROUP BY clause
 
 Use the `GROUP BY` clause to group data by tags and/or time intervals.
-To successfully implement `GROUP BY`,  append the`GROUP BY` clause to a `SELECT` statement and pair the `SELECT` statement with one of InfluxQL's [functions](/influxdb/v0.10/query_language/functions/).
+To successfully implement `GROUP BY`,  append the`GROUP BY` clause to a `SELECT` statement and pair the `SELECT` statement with one of InfluxQL's [functions](/influxdb/v0.11/query_language/functions/).
 
 > **Note:** If your query includes both a `WHERE` clause and a `GROUP BY` clause, the `GROUP BY` clause must come after the `WHERE` clause.
 
@@ -334,12 +334,12 @@ Notice that each timestamp represents a two day interval and that the value in t
 You could get the same results by querying the data 17 times - that is, one `COUNT()` query for every two days between August 18, 2015 at midnight and September 18 at 5:00pm - but that could take a while.
 
 > **Note:** The first timestamp in the CLI response (`2015-08-17T00:00:00Z`) occurs before the lower bound of the query's time range (`2015-08-18T00:00:00Z`).
-See [Frequently Encountered Issues](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#understanding-the-time-intervals-returned-from-group-by-time-queries) for an explanation of the time intervals returned from `GROUP BY time()` queries.
+See [Frequently Encountered Issues](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#understanding-the-time-intervals-returned-from-group-by-time-queries) for an explanation of the time intervals returned from `GROUP BY time()` queries.
 
 Other things to note about `GROUP BY time()`:
 
 * InfluxQL requires a `WHERE` clause if you're using `GROUP BY` with `time()`.
-Note that unless you specify a different upper and lower bound for the time range, `GROUP BY` uses `epoch 0` as the lower bound and `now()` as the upper bound for the query - this can lead to [unexpected results](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#getting-unexpected-results-with-group-by-time).
+Note that unless you specify a different upper and lower bound for the time range, `GROUP BY` uses `epoch 0` as the lower bound and `now()` as the upper bound for the query - this can lead to [unexpected results](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#getting-unexpected-results-with-group-by-time).
 * Valid units for `time()` are:  
 <br>
     `u` microseconds  
@@ -456,13 +456,13 @@ This can cause InfluxDB to overwrite points that were previously differentiated 
 Use `GROUP BY <tag_key>` to preserve tags as tags.
 
 ### Downsample data
-Combine the `INTO` clause with an InfluxQL [function](/influxdb/v0.10/query_language/functions/) and a `GROUP BY` clause to write the lower precision query results to a different measurement:
+Combine the `INTO` clause with an InfluxQL [function](/influxdb/v0.11/query_language/functions/) and a `GROUP BY` clause to write the lower precision query results to a different measurement:
 ```sql
 SELECT <function>(<field_key>) INTO <different_measurement> FROM <current_measurement> WHERE <stuff> GROUP BY <stuff>
 ```
 
 > **Note:** The `INTO` queries in this section downsample old data, that is, data that have already been written to InfluxDB.
-If you want InfluxDB to automatically query and downsample all future data see [Continuous Queries](/influxdb/v0.10/query_language/continuous_queries/).
+If you want InfluxDB to automatically query and downsample all future data see [Continuous Queries](/influxdb/v0.11/query_language/continuous_queries/).
 
 Calculate the average `water_level` in `santa_monica`, and write the results to a new measurement (`average`) in the same database:
 ```sql
@@ -548,7 +548,7 @@ More on downsampling with `INTO`:
 
 * InfluxDB does not store null values.
 Depending on the frequency of your data, the query results may be missing time intervals.
-Use [fill()](/influxdb/v0.10/query_language/data_exploration/#the-group-by-clause-and-fill) to ensure that every time interval appears in the results.
+Use [fill()](/influxdb/v0.11/query_language/data_exploration/#the-group-by-clause-and-fill) to ensure that every time interval appears in the results.
 * The number of writes in the CLI response includes one write for every time interval in the query's time range even if there is no data for some of the time intervals.
 
 ## Limit query returns with LIMIT and SLIMIT
@@ -591,7 +591,7 @@ time			              water_level
 
 ### Limit the number of series returned with `SLIMIT`
 ---
-Use `SLIMIT <N>` with `SELECT` and `GROUP BY *` to return every point from N [series](/influxdb/v0.10/concepts/glossary/#series).
+Use `SLIMIT <N>` with `SELECT` and `GROUP BY *` to return every point from N [series](/influxdb/v0.11/concepts/glossary/#series).
 
 Return everything from one of the series associated with the measurement `h2o_feet`:
 ```sql
@@ -729,7 +729,7 @@ For example:
 
 In InfluxDB, queries merge series automatically.
 
-The `NOAA_water_database` database has two [series](/influxdb/v0.10/concepts/glossary/#series).
+The `NOAA_water_database` database has two [series](/influxdb/v0.11/concepts/glossary/#series).
 The first series is made up of the measurement `h2o_feet` and the tag key `location` with the tag value `coyote_creek`.
 The second series is made of up the measurement `h2o_feet` and the tag key `location` with the tag value `santa_monica`.
 
@@ -834,7 +834,7 @@ Use regular expressions when selecting measurements and tags.
 >**Note:** You cannot use regular expressions to match databases, retention policies, or fields.
 You can only use regular expressions to match measurements and tags.
 
-The [sample data](/influxdb/v0.10/query_language/data_exploration/#sample-data) need to be more intricate for the following sections.
+The [sample data](/influxdb/v0.11/query_language/data_exploration/#sample-data) need to be more intricate for the following sections.
 Assume that the database `NOAA_water_database` now holds several measurements: `h2o_feet`, `h2o_quality`, `h2o_pH`, `average_temperature`, and `h2o_temperature`.
 Please note that every measurement besides `h2o_feet` is fictional and contains fictional data.
 
@@ -985,4 +985,4 @@ time			               level description	    location	     water_level
 2015-08-18T00:06:00Z	 below 3 feet		        santa_monica	 2.116
 ```
 
-See [the WHERE clause](/influxdb/v0.10/query_language/data_exploration/#the-where-clause) section for an example of how to return data where a tag key has a value and an example of how to return data where a tag key has no value using regular expressions.
+See [the WHERE clause](/influxdb/v0.11/query_language/data_exploration/#the-where-clause) section for an example of how to return data where a tag key has a value and an example of how to return data where a tag key has no value using regular expressions.

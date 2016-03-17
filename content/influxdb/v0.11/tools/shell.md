@@ -10,9 +10,9 @@ menu:
 The InfluxDB's command line interface (`influx`) is an interactive shell for the HTTP API.
 Use `influx` to write data (manually or from a file), query data interactively, and view query output in different formats.
 
-* [Launch `influx`](/influxdb/v0.10/tools/shell/#launch-influx)
-* [`influx` Arguments](/influxdb/v0.10/tools/shell/#influx-arguments)
-* [`influx` Commands](/influxdb/v0.10/tools/shell/#influx-commands)
+* [Launch `influx`](/influxdb/v0.11/tools/shell/#launch-influx)
+* [`influx` Arguments](/influxdb/v0.11/tools/shell/#influx-arguments)
+* [`influx` Commands](/influxdb/v0.11/tools/shell/#influx-commands)
 
 ## Launch `influx`
 If you [install](https://influxdata.com/downloads/) InfluxDB via a package manager, the CLI is installed at `/usr/bin/influx` (`/usr/local/bin/influx` on OS X).
@@ -44,12 +44,12 @@ Set the write consistency level.
 The database to which `influx` connects.
 
 `-execute 'command'`  
-Execute an [InfluxQL](/influxdb/v0.10/query_language/data_exploration/) command and quit.
-See [-execute](/influxdb/v0.10/tools/shell/#execute-an-influxql-command-and-quit-with-execute).
+Execute an [InfluxQL](/influxdb/v0.11/query_language/data_exploration/) command and quit.
+See [-execute](/influxdb/v0.11/tools/shell/#execute-an-influxql-command-and-quit-with-execute).
 
 `-format 'json|csv|column'`  
 Specifies the format of the server responses.
-See [-format](/influxdb/v0.10/tools/shell/#specify-the-format-of-the-server-responses-with-format).
+See [-format](/influxdb/v0.11/tools/shell/#specify-the-format-of-the-server-responses-with-format).
 
 `-host 'host name'`  
 The host to which `influx` connects.
@@ -57,7 +57,7 @@ By default, InfluxDB runs on localhost.
 
 `-import`  
 Import new data from a file or import a previously [exported](https://github.com/influxdb/influxdb/blob/master/importer/README.md) database from a file.
-See [-import](/influxdb/v0.10/tools/shell/#import-data-from-a-file-with-import).
+See [-import](/influxdb/v0.11/tools/shell/#import-data-from-a-file-with-import).
 
 `-password 'password'`  
 The password `influx` uses to connect to the server.
@@ -193,9 +193,9 @@ $ influx -format=json -pretty
 ### Import data from a file with `-import`
 The import file has two sections:
 
-* **DDL (Data Definition Language)**: Contains the [InfluxQL commands](/influxdb/v0.10/query_language/database_management/) for creating the relevant [database](/influxdb/v0.10/concepts/glossary/) and managing the [retention policy](/influxdb/v0.10/concepts/glossary/#retention-policy-rp).
+* **DDL (Data Definition Language)**: Contains the [InfluxQL commands](/influxdb/v0.11/query_language/database_management/) for creating the relevant [database](/influxdb/v0.11/concepts/glossary/) and managing the [retention policy](/influxdb/v0.11/concepts/glossary/#retention-policy-rp).
 If your database and retention policy already exist, your file can skip this section.
-* **DML (Data Manipulation Language)**: Lists the relevant database and (if desired) retention policy and contains the data in [line protocol](/influxdb/v0.10/write_protocols/line/).
+* **DML (Data Manipulation Language)**: Lists the relevant database and (if desired) retention policy and contains the data in [line protocol](/influxdb/v0.11/write_protocols/line/).
 
 Example:
 
@@ -273,7 +273,7 @@ Quits the `influx` shell.
 
 `format <format>`  
 Specifies the format of the server responses: `json`, `csv`, or `column`.
-See the description of [-format](/influxdb/v0.10/tools/shell/#specify-the-format-of-the-server-responses-with-format) for examples of each format.
+See the description of [-format](/influxdb/v0.11/tools/shell/#specify-the-format-of-the-server-responses-with-format) for examples of each format.
 
 `history`  
 Displays your command history.
@@ -282,7 +282,7 @@ To use the history while in the shell, simply use the "up" arrow.
 
 `insert`  
 Write data using line protocol.
-See [insert](/influxdb/v0.10/tools/shell/#write-data-to-influxdb-with-insert).
+See [insert](/influxdb/v0.11/tools/shell/#write-data-to-influxdb-with-insert).
 
 `precision <format>`  
 Specifies the format/precision of the timestamp: `rfc3339` (`YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ`), `h` (hours), `m` (minutes), `s` (seconds), `ms` (milliseconds), `u` (microseconds), `ns` (nanoseconds).
@@ -300,8 +300,8 @@ Once `influx` sets the current database, there is no need to specify that databa
 `influx` automatically queries the current database and its `DEFAULT` retention policy.
 
 #### Write data to InfluxDB with `insert`
-Enter `insert` followed by the data in [line protocol](/influxdb/v0.10/write_protocols/line/) to write data to InfluxDB.
-Use `insert into <retention policy> <line protocol>` to write data to a specific [retention policy](/influxdb/v0.10/concepts/glossary/#retention-policy-rp).
+Enter `insert` followed by the data in [line protocol](/influxdb/v0.11/write_protocols/line/) to write data to InfluxDB.
+Use `insert into <retention policy> <line protocol>` to write data to a specific [retention policy](/influxdb/v0.11/concepts/glossary/#retention-policy-rp).
 
 Write data to a single field in the measurement `treasures` with the tag `captain_id = pirate_king`.
 `influx` automatically writes the point to the database's `DEFAULT` retention policy.
@@ -323,4 +323,4 @@ Restarting the CLI will revert to using the `DEFAULT` retention policy.
 
 ### Queries
 Execute all InfluxQL queries in `influx`.
-See [Data Exploration](/influxdb/v0.10/query_language/data_exploration/), [Schema Exploration](/influxdb/v0.10/query_language/schema_exploration/), [Database Management](/influxdb/v0.10/query_language/database_management/), [Authentication and Authorization](/influxdb/v0.10/administration/authentication_and_authorization/) for InfluxQL documentation.
+See [Data Exploration](/influxdb/v0.11/query_language/data_exploration/), [Schema Exploration](/influxdb/v0.11/query_language/schema_exploration/), [Database Management](/influxdb/v0.11/query_language/database_management/), [Authentication and Authorization](/influxdb/v0.11/administration/authentication_and_authorization/) for InfluxQL documentation.

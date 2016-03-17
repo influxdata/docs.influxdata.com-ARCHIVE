@@ -119,7 +119,7 @@ For example:
 
 ## Writing Points
 
-To write, just send newline separated [line protocol](/influxdb/v0.10/write_protocols/line/) over UDP.
+To write, just send newline separated [line protocol](/influxdb/v0.11/write_protocols/line/) over UDP.
 For better performance send batches of points rather than multiple single points.
 
 ```bash

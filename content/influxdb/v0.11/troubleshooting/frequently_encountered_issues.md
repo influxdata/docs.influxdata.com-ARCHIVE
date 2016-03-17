@@ -12,35 +12,35 @@ Where applicable, it links to outstanding issues on GitHub.
 
 **Querying data**  
 
-* [Getting unexpected results with `GROUP BY time()`](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#getting-unexpected-results-with-group-by-time)
-* [Understanding the time intervals returned from `GROUP BY time()` queries](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#understanding-the-time-intervals-returned-from-group-by-time-queries)    
-* [Querying after `now()`](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#querying-after-now)  
-* [Querying outside the min/max time range](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#querying-outside-the-min-max-time-range)  
-* [Querying a time range that spans epoch 0](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#querying-a-time-range-that-spans-epoch-0)  
-* [Querying with booleans](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#querying-with-booleans)  
-* [Working with really big or really small integers](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#working-with-really-big-or-really-small-integers)
-* [Doing math on timestamps](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#doing-math-on-timestamps)  
-* [Getting an unexpected epoch 0 timestamp in query returns](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#getting-an-unexpected-epoch-0-timestamp-in-query-returns)  
-* [Getting large query returns in batches when using the HTTP API](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#getting-large-query-returns-in-batches-when-using-the-http-api)  
-* [Getting the `expected identifier` error, unexpectedly](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#getting-the-expected-identifier-error-unexpectedly)
-* [Identifying write precision from returned timestamps](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#identifying-write-precision-from-returned-timestamps)  
-* [Single quoting and double quoting in queries](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#single-quoting-and-double-quoting-in-queries)  
-* [Missing data after creating a new `DEFAULT` retention policy](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#missing-data-after-creating-a-new-default-retention-policy)
+* [Getting unexpected results with `GROUP BY time()`](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#getting-unexpected-results-with-group-by-time)
+* [Understanding the time intervals returned from `GROUP BY time()` queries](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#understanding-the-time-intervals-returned-from-group-by-time-queries)    
+* [Querying after `now()`](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#querying-after-now)  
+* [Querying outside the min/max time range](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#querying-outside-the-min-max-time-range)  
+* [Querying a time range that spans epoch 0](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#querying-a-time-range-that-spans-epoch-0)  
+* [Querying with booleans](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#querying-with-booleans)  
+* [Working with really big or really small integers](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#working-with-really-big-or-really-small-integers)
+* [Doing math on timestamps](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#doing-math-on-timestamps)  
+* [Getting an unexpected epoch 0 timestamp in query returns](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#getting-an-unexpected-epoch-0-timestamp-in-query-returns)  
+* [Getting large query returns in batches when using the HTTP API](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#getting-large-query-returns-in-batches-when-using-the-http-api)  
+* [Getting the `expected identifier` error, unexpectedly](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#getting-the-expected-identifier-error-unexpectedly)
+* [Identifying write precision from returned timestamps](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#identifying-write-precision-from-returned-timestamps)  
+* [Single quoting and double quoting in queries](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#single-quoting-and-double-quoting-in-queries)  
+* [Missing data after creating a new `DEFAULT` retention policy](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#missing-data-after-creating-a-new-default-retention-policy)
 
 **Writing data**  
 
-* [Writing integers](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#writing-integers)   
-* [Writing duplicate points](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#writing-duplicate-points)  
-* [Getting an unexpected error when sending data over the HTTP API](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#getting-an-unexpected-error-when-sending-data-over-the-http-api)
-* [Words and characters to avoid](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#words-and-characters-to-avoid)  
-* [Single quoting and double quoting when writing data](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#single-quoting-and-double-quoting-when-writing-data)  
+* [Writing integers](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#writing-integers)   
+* [Writing duplicate points](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#writing-duplicate-points)  
+* [Getting an unexpected error when sending data over the HTTP API](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#getting-an-unexpected-error-when-sending-data-over-the-http-api)
+* [Words and characters to avoid](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#words-and-characters-to-avoid)  
+* [Single quoting and double quoting when writing data](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#single-quoting-and-double-quoting-when-writing-data)  
 
 **Administration**  
 
-* [Single quoting the password string](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#single-quoting-the-password-string)
-* [Escaping the single quote in a password](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#escaping-the-single-quote-in-a-password)  
-* [Identifying your version of InfluxDB](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#identifying-your-version-of-influxdb)  
-* [Data aren't dropped after altering a retention policy](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#data-aren-t-dropped-after-altering-a-retention-policy)
+* [Single quoting the password string](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#single-quoting-the-password-string)
+* [Escaping the single quote in a password](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#escaping-the-single-quote-in-a-password)  
+* [Identifying your version of InfluxDB](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#identifying-your-version-of-influxdb)  
+* [Data aren't dropped after altering a retention policy](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#data-aren-t-dropped-after-altering-a-retention-policy)
 
 # Querying data
 ## Getting unexpected results with `GROUP BY time()`
@@ -63,7 +63,7 @@ Avoid perplexing `GROUP BY time()` returns by specifying a valid time interval i
 
 ## Understanding the time intervals returned from `GROUP BY time()` queries
 With some `GROUP BY time()` queries, the returned time intervals may not reflect the time range specified in the `WHERE` clause.
-In the example below the first [timestamp](/influxdb/v0.10/concepts/glossary/#timestamp) in the results occurs before the lower bound of the query:
+In the example below the first [timestamp](/influxdb/v0.11/concepts/glossary/#timestamp) in the results occurs before the lower bound of the query:
 
 Query with a two day `GROUP BY time()` interval:
 <pre><code class="language-sh">
@@ -228,7 +228,7 @@ No: `SELECT 'bikes_available' FROM 'bikes' WHERE 'station_id'="9"`
 
 No: `SELECT * from cr@zy where p^e='2'`
 
-See the [Query Syntax](/influxdb/v0.10/query_language/query_syntax/) page for more information.
+See the [Query Syntax](/influxdb/v0.11/query_language/query_syntax/) page for more information.
 
 ## Missing data after creating a new `DEFAULT` retention policy
 When you create a new `DEFAULT` retention policy (RP) on a database, the data written to the old `DEFAULT` RP remain in the old RP.
@@ -245,7 +245,7 @@ name: fleeting
 time			               count
 1970-01-01T00:00:00Z	 8
 ```
-We [create](/influxdb/v0.10/query_language/database_management/#create-retention-policies-with-create-retention-policy) a new `DEFAULT` RP (`two_hour`) and perform the same query:
+We [create](/influxdb/v0.11/query_language/database_management/#create-retention-policies-with-create-retention-policy) a new `DEFAULT` RP (`two_hour`) and perform the same query:
 ```bash
 > SELECT count(flounders) FROM fleeting
 >
@@ -268,7 +268,7 @@ Writes an integer: `value=100i`
 Writes a float: `value=100`
 
 ## Writing duplicate points
-In InfluxDB 0.10 a point is uniquely identified by the measurement name, [tag set](/influxdb/v0.10/concepts/glossary/#tag-set), and the nanosecond timestamp.
+In InfluxDB 0.10 a point is uniquely identified by the measurement name, [tag set](/influxdb/v0.11/concepts/glossary/#tag-set), and the nanosecond timestamp.
 If you submit a new point with the same measurement, tag set, and timestamp as an existing point, the field set becomes the union of the old field set and the new field set, where any ties go to the new field set.
 This is the intended behavior.
 
@@ -326,7 +326,7 @@ Because of the new 0.10 behavior described above, overwriting a point is no long
 Users will need to use `DELETE SERIES`. See [GitHub Issue #1647](https://github.com/influxdata/influxdb/issues/1647) for developments on `DELETE SERIES`.
 
 ## Getting an unexpected error when sending data over the HTTP API
-First, double check your [line protocol](/influxdb/v0.10/write_protocols/line/) syntax.
+First, double check your [line protocol](/influxdb/v0.11/write_protocols/line/) syntax.
 Second, if you continue to receive errors along the lines of `bad timestamp` or `unable to parse`, verify that your newline character is line feed (`\n`, which is ASCII `0x0A`).
 InfluxDB's line protocol relies on `\n` to indicate the end of a line and the beginning of a new line; files or data that use a newline character other than `\n` will encounter parsing issues.
 Convert the newline character and try sending the data again.
@@ -335,7 +335,7 @@ Convert the newline character and try sending the data again.
 
 ## Words and characters to avoid
 If you use any of the [InfluxQL keywords](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords) as an identifier you will need to double quote that identifier in every query.
-This can lead to [non-intuitive errors](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#getting-the-expected-identifier-error-unexpectedly).
+This can lead to [non-intuitive errors](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#getting-the-expected-identifier-error-unexpectedly).
 Identifiers are database names, retention policy names, user names, measurement names, tag keys, and field keys.
 
 To keep regular expressions and quoting simple, avoid using the following characters in identifiers:  
@@ -377,7 +377,7 @@ Identifiers are database names, retention policy names, user names, measurement 
 	Write: `INSERT wacky va\"ue=4`  
 	Applicable query: `SELECT "va\"ue" FROM wacky`
 
-See the [Line Protocol Syntax](/influxdb/v0.10/write_protocols/write_syntax/) page for more information.
+See the [Line Protocol Syntax](/influxdb/v0.11/write_protocols/write_syntax/) page for more information.
 
 # Administration
 ## Single quoting the password string
@@ -398,7 +398,7 @@ For example, if you're using 0.10.3 `curl -i 'http://localhost:8086/ping'` retur
 ✨`X-Influxdb-Version: 0.10.3`✨  
 `Date: Fri, 04 Mar 2016 19:23:08 GMT`
 
-* Check the text that appears when you [launch](/influxdb/v0.10/tools/shell/) the CLI:
+* Check the text that appears when you [launch](/influxdb/v0.11/tools/shell/) the CLI:
 
 `Connected to http://localhost:8086`✨`version 0.10.3`✨  
 `InfluxDB shell 0.10.3`
@@ -408,7 +408,7 @@ For example, if you're using 0.10.3 `curl -i 'http://localhost:8086/ping'` retur
 `[http] 2016/03/04 11:25:13 ::1 - - [04/Mar/2016:11:25:13 -0800] GET /query?db=&epoch=ns&q=show+databases HTTP/1.1 200 98 -`     ✨`InfluxDBShell/0.10.3`✨`d16e7a83-e23e-11e5-80a7-000000000000 529.543µs`
 
 ## Data aren't dropped after altering a retention policy
-After [shortening](/influxdb/v0.10/query_language/database_management/#modify-retention-policies-with-alter-retention-policy) the `DURATION` of a [retention policy](/influxdb/v0.10/concepts/glossary/#retention-policy-rp) (RP), you may notice that InfluxDB keeps some data that are older than the `DURATION` of the modified RP.
+After [shortening](/influxdb/v0.11/query_language/database_management/#modify-retention-policies-with-alter-retention-policy) the `DURATION` of a [retention policy](/influxdb/v0.11/concepts/glossary/#retention-policy-rp) (RP), you may notice that InfluxDB keeps some data that are older than the `DURATION` of the modified RP.
 This behavior is a result of the relationship between the time interval covered by a shard group and the `DURATION` of a retention policy.
 
 InfluxDB stores data in shard groups.
@@ -434,14 +434,14 @@ On day 11, InfluxDB is no longer writing to `Shard Group 1` and `Shard Group 2` 
 ![Retention policy duration infinite](/img/influxdb/fei/alter-rp-inf.png)
 
 On day 11, we notice that `example_db` is accruing data too fast; we want to delete, and keep deleting, all data older than three days.
-We do this by [altering](/influxdb/v0.10/query_language/database_management/#modify-retention-policies-with-alter-retention-policy) the retention policy:
+We do this by [altering](/influxdb/v0.11/query_language/database_management/#modify-retention-policies-with-alter-retention-policy) the retention policy:
 <br>
 <br>
 ```
 > ALTER RETENTION POLICY default ON example_db DURATION 3d
 ```
 
-At the next [retention policy enforcement check](/influxdb/v0.10/administration/config/#retention), InfluxDB immediately drops `Shard Group 1` because all of its data are older than 3 days.
+At the next [retention policy enforcement check](/influxdb/v0.11/administration/config/#retention), InfluxDB immediately drops `Shard Group 1` because all of its data are older than 3 days.
 InfluxDB does not drop `Shard Group 2`.
 This is because InfluxDB cannot divide existing shard groups and some data in `Shard Group 2` still fall within the new three day retention policy.
 
@@ -456,4 +456,4 @@ After day 17, all data within the past 3 days will be in one day shard groups.
 InfluxDB will then be able to drop `Shard Group 2` and `example_db` will have only 3 days worth of data.
 
 > **Note:** The time it takes for InfluxDB to adjust to the new retention policy may be longer depending on your shard precreation configuration setting.
-See [Database Configuration](/influxdb/v0.10/administration/config/#shard-precreation) for more on that setting.
+See [Database Configuration](/influxdb/v0.11/administration/config/#shard-precreation) for more on that setting.

@@ -1,8 +1,8 @@
 ---
 title: Server Monitoring
 aliases:
-  - /influxdb/v0.10/troubleshooting/system_monitoring
-  - /influxdb/v0.10/administration/statistics
+  - /influxdb/v0.11/troubleshooting/system_monitoring
+  - /influxdb/v0.11/administration/statistics
 menu:
   influxdb_010:
     weight: 50

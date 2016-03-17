@@ -27,7 +27,7 @@ Date: Fri, 04 Mar 2016 19:01:23 GMT
 ```
 
 The `/ping` endpoint can also accept an optional query param, `wait_for_leader=Ns` where `N` is the number of seconds to wait before returning a response.
-This will check with the leader of the [cluster](/influxdb/v0.10/concepts/glossary/#cluster) to ensure that the leader is available and ready.
+This will check with the leader of the [cluster](/influxdb/v0.11/concepts/glossary/#cluster) to ensure that the leader is available and ready.
 One second is a good default, but for highly distributed clusters, or clusters under significant load, it may lead to false negatives.
 Increasing the timeout gives the raft leader longer to respond.
 The request will return `204` if successful and `503` in the case of a timeout.
@@ -42,10 +42,10 @@ Date: Fri, 04 Mar 2016 19:02:53 GMT
 ```
 
 ### /query
-For more information on the `/query` endpoint see the [Querying Data](/influxdb/v0.10/guides/querying_data/) section of our docs.
+For more information on the `/query` endpoint see the [Querying Data](/influxdb/v0.11/guides/querying_data/) section of our docs.
 
 ### /write
-For more information on the `/write` endpoint see the [Writing Data](/influxdb/v0.10/guides/writing_data/) section of our docs.
+For more information on the `/write` endpoint see the [Writing Data](/influxdb/v0.11/guides/writing_data/) section of our docs.
 
 ## Ports
 

@@ -7,7 +7,7 @@ menu:
     parent: administration
 ---
 
-Starting with v0.10.0, InfluxDB has the ability to snapshot a single
+Starting with v0.11.0, InfluxDB has the ability to snapshot a single
 data node at a point-in-time and restore it.
 
 ## Backups
@@ -52,7 +52,7 @@ stored. Optional flags also include:
 - `-retention <retention policy name>` - This flag can be used to
   backup a specific retention policy. For more information on
   retention policies, please see
-  [here](/influxdb/v0.10/query_language/database_management/#retention-policy-management). If
+  [here](/influxdb/v0.11/query_language/database_management/#retention-policy-management). If
   not specified, all retention policies will be backed up.
 
 - `-shard <shard ID>` - This flag can be used to backup a specific
