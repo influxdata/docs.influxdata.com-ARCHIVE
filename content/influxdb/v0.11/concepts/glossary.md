@@ -1,7 +1,7 @@
 ---
 title: Glossary of Terms
 menu:
-  influxdb_010:
+  influxdb_011:
     weight: 10
     parent: concepts
 ---

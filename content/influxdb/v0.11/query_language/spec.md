@@ -1,7 +1,7 @@
 ---
 title: InfluxDB Query Language Reference
 menu:
-  influxdb_010:
+  influxdb_011:
     weight: 50
     parent: query_language
 ---

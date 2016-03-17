@@ -3,7 +3,7 @@ title: Continuous Queries
 aliases:
   - /docs/v0.9/concepts/continuous_queries.html
 menu:
-  influxdb_010:
+  influxdb_011:
     weight: 40
     parent: query_language
 ---

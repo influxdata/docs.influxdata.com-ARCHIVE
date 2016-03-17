@@ -1,7 +1,7 @@
 ---
 title: Getting Started
 menu:
-  influxdb_010:
+  influxdb_011:
     weight: 20
     parent: introduction
 ---

@@ -663,6 +663,93 @@ SectionPagesMenu = "products"
   parent = "services"
 
 
+# InfluxDB v0.11 Menu
+[[menu.influxdb_011]]
+  name = "Introduction"
+  identifier = "introduction"
+  weight = 0
+  url = "/influxdb/v0.11/introduction/"
+[[menu.influxdb_011]]
+  name = "Guides"
+  identifier = "guides"
+  weight = 10
+  url = "/influxdb/v0.11/guides/"
+[[menu.influxdb_011]]
+  name = "Concepts"
+  identifier = "concepts"
+  weight = 20
+  url = "/influxdb/v0.11/concepts/"
+[[menu.influxdb_011]]
+  name = "Troubleshooting"
+  identifier = "troubleshooting"
+  weight = 30
+  url = "/influxdb/v0.11/troubleshooting/"
+[[menu.influxdb_011]]
+  name = "Write Protocols and Plugins"
+  identifier = "write_protocols"
+  weight = 40
+  url = "/influxdb/v0.11/write_protocols/"
+[[menu.influxdb_011]]
+  name = "Query Language"
+  identifier = "query_language"
+  weight = 50
+  url = "/influxdb/v0.11/query_language/"
+[[menu.influxdb_011]]
+  name = "Client Libraries"
+  identifier = "clients"
+  weight = 60
+  url = "/influxdb/v0.11/clients/"
+[[menu.influxdb_011]]
+  name = "Administration"
+  identifier = "administration"
+  weight = 70
+  url = "/influxdb/v0.11/administration/"
+[[menu.influxdb_011]]
+  name = "Tools"
+  identifier = "tools"
+  weight = 80
+  url = "/influxdb/v0.11/tools/"
+[[menu.influxdb_011]]
+  name = "About the Project"
+  identifier = "about"
+  weight = 90
+  url = "/influxdb/v0.11/about/"
+
+# InfluxDB v0.11 Sub-Menu - Introduction
+[[menu.influxdb_011]]
+  name = "Download"
+  identifier = "download"
+  weight = 0
+  url = "https://influxdata.com/downloads/#influxdb"
+  parent = "introduction"
+
+# InfluxDB v0.11 Sub-Menu - About
+[[menu.influxdb_011]]
+  name = "Release Notes/Changelog"
+  identifier = "changelog"
+  weight = 0
+  url = "https://github.com/influxdb/influxdb/blob/master/CHANGELOG.md"
+  parent = "about"
+[[menu.influxdb_011]]
+  name = "Contributing"
+  identifier = "contributing"
+  weight = 10
+  url = "https://github.com/influxdb/influxdb/blob/master/CONTRIBUTING.md"
+  parent = "about"
+[[menu.influxdb_011]]
+  name = "CLA"
+  identifier = "cla"
+  weight = 20
+  url = "https://influxdata.com/community/cla/"
+  parent = "about"
+[[menu.influxdb_011]]
+  name = "Licenses"
+  identifier = "licenses"
+  weight = 30
+  url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
+  parent = "about"
+
+
 # InfluxDB v0.10 Menu
 [[menu.influxdb_010]]
   name = "Introduction"

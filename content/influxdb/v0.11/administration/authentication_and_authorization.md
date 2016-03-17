@@ -2,7 +2,7 @@
 title: Authentication and Authorization
 
 menu:
-  influxdb_010:
+  influxdb_011:
     weight: 0
     parent: administration
 ---

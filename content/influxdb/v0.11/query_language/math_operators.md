@@ -2,7 +2,7 @@
 title: Mathematical Operators
 
 menu:
-  influxdb_010:
+  influxdb_011:
     weight: 70
     parent: query_language
 ---

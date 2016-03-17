@@ -3,7 +3,7 @@ title: Cluster Setup
 aliases:
   - /influxdb/v0.11/guides/clustering/
 menu:
-  influxdb_010:
+  influxdb_011:
     weight: 10
     parent: Clustering
 ---

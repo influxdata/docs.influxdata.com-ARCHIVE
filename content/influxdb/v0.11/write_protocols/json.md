@@ -2,7 +2,7 @@
 title: JSON Protocol
 
 menu:
-  influxdb_010:
+  influxdb_011:
     weight: 20
     parent: write_protocols
 ---

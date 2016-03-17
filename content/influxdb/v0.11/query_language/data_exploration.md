@@ -2,7 +2,7 @@
 title: Data Exploration
 
 menu:
-  influxdb_010:
+  influxdb_011:
     weight: 0
     parent: query_language
 ---
