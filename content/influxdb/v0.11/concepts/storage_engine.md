@@ -3,7 +3,7 @@ title: Storage Engine
 
 menu:
   influxdb_011:
-    weight: 70
+    weight: 90
     parent: concepts
 ---
 
