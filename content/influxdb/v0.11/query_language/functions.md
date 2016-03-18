@@ -112,7 +112,7 @@ time			               count
 > For a more general discussion of `fill()`, see [Data Exploration](/influxdb/v0.11/query_language/data_exploration/#the-group-by-clause-and-fill).
 
 ## DISTINCT()
-Returns an array of the unique values in a single [field](/influxdb/v0.11/concepts/glossary/#field).
+Returns the unique values of a single [field](/influxdb/v0.11/concepts/glossary/#field).
 ```sql
 SELECT DISTINCT(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
 ```
@@ -647,7 +647,7 @@ CLI response:
 name: h2o_feet
 --------------
 time			               max
-2015-08-29T07:24:00Z	 9.964
+1970-01-01T00:00:00Z	 9.964
 ```
 
 * Select the maximum `water_level` in the measurement `h2o_feet` between August 18, 2015 at midnight and August 18, 2015 at 00:48 grouped at 12 minute intervals and by the `location` tag:
@@ -699,7 +699,7 @@ CLI response:
 name: h2o_feet
 --------------
 time			               min
-2015-08-29T14:30:00Z	 -0.61
+1970-01-01T00:00:00Z	 -0.61
 ```
 
 * Select the minimum `water_level` in the measurement `h2o_feet` between August 18, 2015 at midnight and August 18, at 00:48 grouped at 12 minute intervals and by the `location` tag:
