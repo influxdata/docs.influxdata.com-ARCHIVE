@@ -1,5 +1,5 @@
 ---
-title: InfluxDB Version 0.10 Documentation
+title: InfluxDB Version 0.11 Documentation
 aliases:
   - /influxdb/v0.11/introduction/overview/
 
