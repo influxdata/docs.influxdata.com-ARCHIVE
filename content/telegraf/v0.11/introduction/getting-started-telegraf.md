@@ -16,6 +16,8 @@ It walks you through the download, installation, and configuration processes, an
 ## Download and Install Telegraf
 Follow the instructions in the Telegraf section on the [Downloads page](https://influxdata.com/downloads/).
 
+> **Note:** Telegraf will start automatically using the default configuration when installed from a deb package.
+
 ## Configuration
 ### Configuration file location by installation type
 
