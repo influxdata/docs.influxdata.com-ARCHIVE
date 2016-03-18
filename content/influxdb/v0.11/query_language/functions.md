@@ -129,11 +129,15 @@ CLI response:
 ```bash
 name: h2o_feet
 --------------
-time			                distinct
-1970-01-01T00:00:00Z   [at or greater than 9 feet below 3 feet between 3 and 6 feet between 6 and 9 feet]
+time			               distinct
+2015-08-18T00:00:00Z	 between 6 and 9 feet
+2015-08-18T00:00:00Z	 below 3 feet
+2015-08-18T01:42:00Z	 between 3 and 6 feet
+2015-08-26T04:00:00Z	 at or greater than 9 feet
 ```
 
-The response shows that `level description` has four distinct field values:  `at or greater than 9 feet`, `below 3 feet`, `between 3 and 6 feet`, and `between 6 and 9 feet`.
+The response shows that `level description` has four distinct field values.
+The timestamp reflects the first time the field value appears in the data.
 
 * Select the unique field values in the `level description` field grouped by the `location` tag:
 
@@ -144,21 +148,23 @@ The response shows that `level description` has four distinct field values:  `at
 CLI response:
 ```bash
 name: h2o_feet
-tags: location = coyote_creek
+tags: location=coyote_creek
 time			                distinct
 ----			                --------
-1970-01-01T00:00:00Z	  [at or greater than 9 feet below 3 feet between 3 and 6 feet between 6 and 9 feet]
+2015-08-18T00:00:00Z	  between 6 and 9 feet
+2015-08-18T01:42:00Z	  between 3 and 6 feet
+2015-08-18T04:00:00Z	  below 3 feet
+2015-08-26T04:00:00Z	  at or greater than 9 feet
+
 
 name: h2o_feet
-tags: location = santa_monica
+tags: location=santa_monica
 time			                distinct
 ----			                --------
-1970-01-01T00:00:00Z	  [below 3 feet between 3 and 6 feet between 6 and 9 feet]
+2015-08-18T00:00:00Z	  below 3 feet
+2015-08-18T02:54:00Z	  between 3 and 6 feet
+2015-08-26T01:30:00Z	  between 6 and 9 feet
 ```
-
-<dt> The returned timestamps mark the start of the relevant time interval for the query.
-See GitHub Issue [#4680](https://github.com/influxdb/influxdb/issues/4680) for more information.
-</dt>
 
 * Nest `DISTINCT()` in [`COUNT()`](/influxdb/v0.11/query_language/functions/#count) to get the number of unique field values in `level description` grouped by the `location` tag:
 
@@ -180,6 +186,9 @@ time			               count
 ----			               -----
 1970-01-01T00:00:00Z	 3
 ```
+
+> **Note:** InfluxDB often uses [epoch 0](https://en.wikipedia.org/wiki/Unix_time) (`1970-01-01T00:00:00Z`) as a null timestamp equivalent.
+If you request a query that has no timestamp to return, such as an aggregation function with an unbounded time range, InfluxDB returns epoch 0 as the timestamp.
 
 ## INTEGRAL()
 `INTEGRAL()` is not yet functional.
@@ -207,7 +216,7 @@ CLI response:
 name: h2o_feet
 --------------
 time			               mean
-1970-01-01T00:00:00Z	 4.442107025822521
+1970-01-01T00:00:00Z	 4.286791371454075
 ```
 
 > **Note:** InfluxDB often uses [epoch 0](https://en.wikipedia.org/wiki/Unix_time) (`1970-01-01T00:00:00Z`) as a null timestamp equivalent.
@@ -224,14 +233,14 @@ CLI response:
 name: h2o_feet
 --------------
 time			               mean
-2015-08-17T00:00:00Z	 4.322029861111109
-2015-08-21T00:00:00Z	 4.227080729166667
-2015-08-25T00:00:00Z	 4.2850364583333285
-2015-08-29T00:00:00Z	 4.450500520833331
-2015-09-02T00:00:00Z	 4.382785378590078
-2015-09-06T00:00:00Z	 4.43194583333333
-2015-09-10T00:00:00Z	 4.658127604166671
-2015-09-14T00:00:00Z	 4.7635046875
+2015-08-17T00:00:00Z	 4.322029861111125
+2015-08-21T00:00:00Z	 4.251395512375667
+2015-08-25T00:00:00Z	 4.285036458333324
+2015-08-29T00:00:00Z	 4.469495801899061
+2015-09-02T00:00:00Z	 4.382785378590083
+2015-09-06T00:00:00Z	 4.28849666349042
+2015-09-10T00:00:00Z	 4.658127604166656
+2015-09-14T00:00:00Z	 4.763504687500006
 2015-09-18T00:00:00Z	 4.232829850746268
 ```
 
@@ -312,6 +321,9 @@ time			                spread
 1970-01-01T00:00:00Z	  10.574
 ```
 
+> **Note:** InfluxDB often uses [epoch 0](https://en.wikipedia.org/wiki/Unix_time) (`1970-01-01T00:00:00Z`) as a null timestamp equivalent.
+If you request a query that has no timestamp to return, such as an aggregation function with an unbounded time range, InfluxDB returns epoch 0 as the timestamp.
+
 * Calculate the difference between the minimum and maximum values in the field `water_level` for a specific tag and time range and at 30 minute intervals:
 
 ```sql
@@ -353,7 +365,7 @@ CLI response:
 name: h2o_feet
 --------------
 time			               sum
-1970-01-01T00:00:00Z	 67777.66900000001
+1970-01-01T00:00:00Z	 67777.66900000002
 ```
 
 * Calculate the sum of the `water_level` field grouped by five-day intervals:
@@ -364,16 +376,15 @@ time			               sum
 
 CLI response:
 ```bash
-name: h2o_feet
 --------------
 time			               sum
-2015-08-18T00:00:00Z	 10334.908999999989
-2015-08-23T00:00:00Z	 10113.357000000004
-2015-08-28T00:00:00Z	 10663.682999999997
-2015-09-02T00:00:00Z	 10451.321000000013
-2015-09-07T00:00:00Z	 10871.817999999988
-2015-09-12T00:00:00Z	 11459.001000000007
-2015-09-17T00:00:00Z	 3627.7619999999997
+2015-08-18T00:00:00Z	 10334.908999999983
+2015-08-23T00:00:00Z	 10113.356999999995
+2015-08-28T00:00:00Z	 10663.683000000006
+2015-09-02T00:00:00Z	 10451.321
+2015-09-07T00:00:00Z	 10871.817999999994
+2015-09-12T00:00:00Z	 11459.00099999999
+2015-09-17T00:00:00Z	 3627.762000000003
 ```
 
 # Selectors
@@ -486,23 +497,20 @@ time			               bottom	 location
 CLI response:
 ```bash
 name: h2o_feet
-tags: location = coyote_creek
+tags: location=coyote_creek
 time			               bottom
 ----			               ------
-2015-08-18T04:00:00Z	 2.625
-2015-08-18T04:00:00Z	 2.717
+2015-08-18T04:12:00Z	 2.717
+2015-08-18T04:18:00Z	 2.625
+
 
 name: h2o_feet
-tags: location = santa_monica
+tags: location=santa_monica
 time			               bottom
 ----			               ------
 2015-08-18T04:00:00Z	 3.911
-2015-08-18T04:00:00Z	 4.055
+2015-08-18T04:06:00Z	 4.055
 ```
-
-<dt> The returned timestamps mark the start of the relevant time interval for the query.
-See GitHub Issue [#4680](https://github.com/influxdb/influxdb/issues/4680) for more information.
-</dt>
 
 * Select the smallest two values of `water_level` between August 18, 2015 at 4:00:00 and August 18, 2015 at 4:18:00 in `santa_monica`:
 
@@ -523,7 +531,7 @@ Note that in the raw data, `water_level` equals `4.055` at `2015-08-18T04:06:00Z
 In the case of a tie, InfluxDB returns the value with the earlier timestamp.
 
 ## FIRST()
-Returns the oldest value (determined by the timestamp) of a single [field](/influxdb/v0.11/concepts/glossary/#field). If two points have the same timestamp, only a single point will be returned and the returned point is non-derministic.
+Returns the oldest value (determined by the timestamp) of a single [field](/influxdb/v0.11/concepts/glossary/#field).
 ```sql
 SELECT FIRST(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
 ```
@@ -541,7 +549,7 @@ CLI response:
 name: h2o_feet
 --------------
 time			               first
-2015-08-18T00:00:00Z	 2.064
+1970-01-01T00:00:00Z	 2.064
 ```
 
 * Select the oldest values of the field `water_level` grouped by the `location` tag:
@@ -570,7 +578,7 @@ See GitHub Issue [#4680](https://github.com/influxdb/influxdb/issues/4680) for m
 </dt>
 
 ## LAST()
-Returns the newest value (determined by the timestamp) of a single [field](/influxdb/v0.11/concepts/glossary/#field). If two points have the same timestamp, only a single point will be returned and the returned point is non-derministic.
+Returns the newest value (determined by the timestamp) of a single [field](/influxdb/v0.11/concepts/glossary/#field).
 ```sql
 SELECT LAST(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
 ```
@@ -588,7 +596,7 @@ CLI response:
 name: h2o_feet
 --------------
 time			               last
-2015-09-18T21:42:00Z	 4.938
+1970-01-01T00:00:00Z	 4.938
 ```
 
 * Select the newest values of the field `water_level` grouped by the `location` tag:
@@ -886,23 +894,20 @@ time			               top	   location
 CLI response:
 ```bash
 name: h2o_feet
-tags: location = coyote_creek
+tags: location=coyote_creek
 time			               top
 ----			               ---
 2015-08-18T04:00:00Z	 2.943
-2015-08-18T04:00:00Z	 2.831
+2015-08-18T04:06:00Z	 2.831
+
 
 name: h2o_feet
-tags: location = santa_monica
+tags: location=santa_monica
 time			               top
 ----			               ---
-2015-08-18T04:00:00Z	 4.124
-2015-08-18T04:00:00Z	 4.055
+2015-08-18T04:06:00Z	 4.055
+2015-08-18T04:18:00Z	 4.124
 ```
-
-<dt> The returned timestamps mark the start of the relevant time interval for the query.
-See GitHub Issue [#4680](https://github.com/influxdb/influxdb/issues/4680) for more information.
-</dt>
 
 * Select the largest two values of `water_level` between August 18, 2015 at 4:00:00 and August 18, 2015 at 4:18:00 in `santa_monica`:
 
@@ -975,7 +980,7 @@ time			               water_level
 Calculate the rate of change per one second
 
 ```sql
-> SELECT DERIVATIVE(water_level) FROM h2o_feet WHERE location = 'santa_monica' LIMIT 6
+> SELECT DERIVATIVE(water_level) FROM h2o_feet WHERE location = 'santa_monica' LIMIT 5
 ```
 
 CLI response:
@@ -1007,7 +1012,7 @@ This returns the rate of change per second from `2015-08-18T00:00:00Z` to `2015-
 Calculate the rate of change per six minutes
 
 ```sql
-> SELECT DERIVATIVE(water_level,6m) FROM h2o_feet WHERE location = 'santa_monica' LIMIT 6
+> SELECT DERIVATIVE(water_level,6m) FROM h2o_feet WHERE location = 'santa_monica' LIMIT 5
 ```
 
 CLI response:
@@ -1037,7 +1042,7 @@ This returns the rate of change per six minutes from `2015-08-18T00:00:00Z` to `
 Calculate the rate of change per 12 minutes
 
 ```sql
-> SELECT DERIVATIVE(water_level,12m) FROM h2o_feet WHERE location = 'santa_monica' LIMIT 6
+> SELECT DERIVATIVE(water_level,12m) FROM h2o_feet WHERE location = 'santa_monica' LIMIT 5
 ```
 
 CLI response:
@@ -1282,7 +1287,7 @@ CLI response:
 name: h2o_feet
 --------------
 time			               mean
-1970-01-01T00:00:00Z	 4.442107025822522
+1970-01-01T00:00:00Z	 4.442107025822521
 ```
 
 After:
@@ -1295,5 +1300,5 @@ CLI response:
 name: h2o_feet
 --------------
 time			               dream_name
-1970-01-01T00:00:00Z	 4.442107025822522
+1970-01-01T00:00:00Z	 4.442107025822521
 ```

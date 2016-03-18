@@ -28,6 +28,7 @@ Limit and sort your results:
 * [Limit query returns with `LIMIT` and `SLIMIT`](/influxdb/v0.11/query_language/data_exploration/#limit-query-returns-with-limit-and-slimit)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Limit results per series with `LIMIT`](/influxdb/v0.11/query_language/data_exploration/#limit-the-number-of-results-returned-per-series-with-limit)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Limit the number of series returned with `SLIMIT`](/influxdb/v0.11/query_language/data_exploration/#limit-the-number-of-series-returned-with-slimit)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Limit the number of points and series returned with `LIMIT` and `SLIMIT`](/influxdb/v0.11/query_language/data_exploration/#limit-the-number-of-points-and-series-returned-with-limit-and-slimit)
 * [Sort query returns with `ORDER BY time DESC`](/influxdb/v0.11/query_language/data_exploration/#sort-query-returns-with-order-by-time-desc)
 * [Paginate query returns with `OFFSET`](/influxdb/v0.11/query_language/data_exploration/#paginate-query-returns-with-offset)
 
@@ -56,17 +57,17 @@ A subsample of the data in the measurement `h2o_feet`:
 ```
 name: h2o_feet
 --------------
-time			                 level description	      location	       water_level
-2015-08-18T00:00:00Z	   below 3 feet		          santa_monica	   2.064
-2015-08-18T00:00:00Z	   between 6 and 9 feet	   coyote_creek	   8.12
-2015-08-18T00:06:00Z	   between 6 and 9 feet	   coyote_creek	   8.005
-2015-08-18T00:06:00Z	   below 3 feet		          santa_monica	   2.116
-2015-08-18T00:12:00Z	   between 6 and 9 feet	   coyote_creek	   7.887
-2015-08-18T00:12:00Z	   below 3 feet		          santa_monica	   2.028
-2015-08-18T00:18:00Z	   between 6 and 9 feet	   coyote_creek	   7.762
-2015-08-18T00:18:00Z	   below 3 feet		          santa_monica	   2.126
-2015-08-18T00:24:00Z	   between 6 and 9 feet	   coyote_creek	   7.635
-2015-08-18T00:24:00Z	   below 3 feet		          santa_monica	   2.041
+time			                level description	      location	       water_level
+2015-08-18T00:00:00Z	  between 6 and 9 feet	   coyote_creek	   8.12
+2015-08-18T00:00:00Z	  below 3 feet		          santa_monica	   2.064
+2015-08-18T00:06:00Z	  between 6 and 9 feet	   coyote_creek	   8.005
+2015-08-18T00:06:00Z	  below 3 feet		          santa_monica	   2.116
+2015-08-18T00:12:00Z	  between 6 and 9 feet	   coyote_creek	   7.887
+2015-08-18T00:12:00Z	  below 3 feet		          santa_monica	   2.028
+2015-08-18T00:18:00Z	  between 6 and 9 feet	   coyote_creek	   7.762
+2015-08-18T00:18:00Z	  below 3 feet		          santa_monica	   2.126
+2015-08-18T00:24:00Z	  between 6 and 9 feet	   coyote_creek	   7.635
+2015-08-18T00:24:00Z	  below 3 feet		          santa_monica	   2.041
 ```
 
 The [series](/influxdb/v0.11/concepts/glossary/#series) are made up of the [measurement](/influxdb/v0.11/concepts/glossary/#measurement) `h2o_feet` and the [tag key](/influxdb/v0.11/concepts/glossary/#tag-key) `location` with the [tag values](/influxdb/v0.11/concepts/glossary/#tag-value) `santa_monica` and `coyote_creek`.
@@ -115,16 +116,16 @@ The CLI response for all three queries:
  ```
 name: h2o_feet
 --------------
-time			                 level description	      location	       water_level
-2015-08-18T00:00:00Z	   below 3 feet		          santa_monica	   2.064
-2015-08-18T00:00:00Z	   between 6 and 9 feet	   coyote_creek	   8.12
-2015-08-18T00:06:00Z	   between 6 and 9 feet	   coyote_creek	   8.005
-2015-08-18T00:06:00Z	   below 3 feet		          santa_monica	   2.116
+time			                level description	      location	       water_level
+2015-08-18T00:00:00Z	  between 6 and 9 feet	   coyote_creek	   8.12
+2015-08-18T00:00:00Z	  below 3 feet		          santa_monica	   2.064
+2015-08-18T00:06:00Z	  between 6 and 9 feet	   coyote_creek	   8.005
+2015-08-18T00:06:00Z	  below 3 feet		          santa_monica	   2.116
 [...]
-2015-09-18T21:24:00Z	   between 3 and 6 feet	   santa_monica	   5.013
-2015-09-18T21:30:00Z	   between 3 and 6 feet	   santa_monica	   5.01
-2015-09-18T21:36:00Z	   between 3 and 6 feet	   santa_monica	   5.066
-2015-09-18T21:42:00Z	   between 3 and 6 feet	   santa_monica	   4.938
+2015-09-18T21:24:00Z	  between 3 and 6 feet	   santa_monica	   5.013
+2015-09-18T21:30:00Z	  between 3 and 6 feet	   santa_monica	   5.01
+2015-09-18T21:36:00Z	  between 3 and 6 feet	   santa_monica	   5.066
+2015-09-18T21:42:00Z	  between 3 and 6 feet	   santa_monica	   4.938
 ```
 
 ### The `SELECT` statement and arithmetic
@@ -140,8 +141,8 @@ CLI response:
 name: h2o_feet
 --------------
 time
-2015-08-18T00:00:00Z	4.064
 2015-08-18T00:00:00Z	10.12
+2015-08-18T00:00:00Z	4.064
 [...]
 2015-09-18T21:36:00Z	7.066
 2015-09-18T21:42:00Z	6.938
@@ -156,8 +157,8 @@ CLI response:
 name: h2o_feet
 --------------
 time
-2015-08-18T00:00:00Z	8.128
 2015-08-18T00:00:00Z	20.24
+2015-08-18T00:00:00Z	8.128
 [...]
 2015-09-18T21:36:00Z	14.132
 2015-09-18T21:42:00Z	13.876
@@ -246,13 +247,13 @@ name: h2o_feet
 tags: location=coyote_creek
 time			mean
 ----			----
-1970-01-01T00:00:00Z	5.359342451341403
+1970-01-01T00:00:00Z	5.520869225643104
 
 name: h2o_feet
 tags: location=santa_monica
 time			mean
 ----			----
-1970-01-01T00:00:00Z	3.5308634700810053
+1970-01-01T00:00:00Z	3.5181099235481805
 ```
 >**Note:** In InfluxDB, [epoch 0](https://en.wikipedia.org/wiki/Unix_time) (`1970-01-01T00:00:00Z`) is often used as a null timestamp equivalent.
 If you request a query that has no timestamp to return, such as an aggregation function with an unbounded time range, InfluxDB returns epoch 0 as the timestamp.
@@ -264,40 +265,45 @@ Calculate the [`MEAN()`](../query_language/functions.html#mean) `index` for ever
 CLI response:
 ```bash
 name: h2o_quality
-tags: location = coyote_creek, randtag = 1
+tags: location=coyote_creek, randtag=1
 time			               mean
 ----			               ----
-1970-01-01T00:00:00Z	 50.69033760186263
+1970-01-01T00:00:00Z	 50.55405446521169
+
 
 name: h2o_quality
-tags: location = coyote_creek, randtag = 2
+tags: location=coyote_creek, randtag=2
 time			               mean
 ----			               ----
-1970-01-01T00:00:00Z	 49.661867544220485
+1970-01-01T00:00:00Z	 50.49958856271162
+
 
 name: h2o_quality
-tags: location = coyote_creek, randtag = 3
+tags: location=coyote_creek, randtag=3
 time			               mean
 ----			               ----
-1970-01-01T00:00:00Z	 49.360939907550076
+1970-01-01T00:00:00Z	 49.5164137518956
+
 
 name: h2o_quality
-tags: location = santa_monica, randtag = 1
+tags: location=santa_monica, randtag=1
 time			               mean
 ----			               ----
-1970-01-01T00:00:00Z	 49.132712456344585
+1970-01-01T00:00:00Z	 50.43829082296367
+
 
 name: h2o_quality
-tags: location = santa_monica, randtag = 2
+tags: location=santa_monica, randtag=2
 time			               mean
 ----			               ----
-1970-01-01T00:00:00Z	 50.2937984496124
+1970-01-01T00:00:00Z	 52.0688508894012
+
 
 name: h2o_quality
-tags: location = santa_monica, randtag = 3
+tags: location=santa_monica, randtag=3
 time			               mean
 ----			               ----
-1970-01-01T00:00:00Z	 49.99919903884662
+1970-01-01T00:00:00Z	 49.29386362086556
 ```
 
 **GROUP BY time intervals**  
@@ -336,6 +342,13 @@ You could get the same results by querying the data 17 times - that is, one `COU
 > **Note:** The first timestamp in the CLI response (`2015-08-17T00:00:00Z`) occurs before the lower bound of the query's time range (`2015-08-18T00:00:00Z`).
 See [Frequently Encountered Issues](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#understanding-the-time-intervals-returned-from-group-by-time-queries) for an explanation of the time intervals returned from `GROUP BY time()` queries.
 
+**GROUP BY tag values AND a time interval**  
+Calculate the average `water_level` for the different tag values of `location` in the last two weeks at 6 hour intervals:
+```sql
+> SELECT MEAN(water_level) FROM h2o_feet WHERE time > now() - 2w GROUP BY location,time(6h)
+```
+* Separate multiple `GROUP BY` arguments with a comma.
+
 Other things to note about `GROUP BY time()`:
 
 * InfluxQL requires a `WHERE` clause if you're using `GROUP BY` with `time()`.
@@ -348,13 +361,6 @@ Note that unless you specify a different upper and lower bound for the time rang
     `h` hours  
     `d` days  
     `w` weeks   
-
-**GROUP BY tag values AND a time interval**  
-Calculate the average `water_level` for the different tag values of `location` in the last two weeks at 6 hour intervals:
-```sql
-> SELECT MEAN(water_level) FROM h2o_feet WHERE time > now() - 2w GROUP BY location,time(6h)
-```
-* Separate multiple `GROUP BY` arguments with a comma.
 
 ### The `GROUP BY` clause and `fill()`
 ---
@@ -376,12 +382,12 @@ Follow the ✨ in the examples below to see what `fill()` can do.
 CLI response:
 ```bash
 name: h2o_feet
-----------
-time			mean
-2015-08-13T00:00:00Z	4.306212083333333
-2015-08-23T00:00:00Z	4.328549999999998
-2015-09-02T00:00:00Z	4.44695286757038
-2015-09-12T00:00:00Z	4.701986209010117
+--------------
+time			                 mean
+2015-08-13T00:00:00Z	   4.306212083333323
+2015-08-23T00:00:00Z	   4.318944629367029
+2015-09-02T00:00:00Z	   4.363877681204781
+2015-09-12T00:00:00Z   	4.69811470811633
 ✨2015-09-22T00:00:00Z
 ```
 **GROUP BY with fill()**  
@@ -392,27 +398,27 @@ Use `fill()` with `-100`:
 CLI response:  
 ```bash
 name: h2o_feet
-----------
-time			mean
-2015-08-13T00:00:00Z	4.306212083333323
-2015-08-23T00:00:00Z	4.328549999999999
-2015-09-02T00:00:00Z	4.4469528675703796
-2015-09-12T00:00:00Z	4.701986209010117
-✨2015-09-22T00:00:00Z	-100
+--------------
+time			                 mean
+2015-08-13T00:00:00Z	   4.306212083333323
+2015-08-23T00:00:00Z	   4.318944629367029
+2015-09-02T00:00:00Z	   4.363877681204781
+2015-09-12T00:00:00Z	   4.698114708116322
+✨2015-09-22T00:00:00Z	 -100
 ```
 Use `fill()` with `none`:
 ```sql
 > SELECT MEAN(water_level) FROM h2o_feet WHERE time >= '2015-08-18' AND time < '2015-09-24' GROUP BY time(10d) fill(none)
 ```
 CLI response:  
-```
+```bash
 name: h2o_feet
-----------
-time			mean
-2015-08-13T00:00:00Z	4.306212083333333
-2015-08-23T00:00:00Z	4.32855
-2015-09-02T00:00:00Z	4.4469528675703796
-2015-09-12T00:00:00Z	4.701986209010117
+--------------
+time			               mean
+2015-08-13T00:00:00Z	 4.306212083333323
+2015-08-23T00:00:00Z	 4.318944629367029
+2015-09-02T00:00:00Z	 4.363877681204781
+2015-09-12T00:00:00Z	 4.69811470811633
 ✨
 ```
 
@@ -438,7 +444,7 @@ time			               written
 1970-01-01T00:00:00Z	 7604
 ```
 
-Write the field `water_level` in `h2o_feet` to a new measurement (`h2o_feet_copy`) and to the retention policy `default` in the database `where_else`:
+Write the field `water_level` in `h2o_feet` to a new measurement (`h2o_feet_copy`) and to the retention policy `default` in the [already-existing](/influxdb/v0.11/query_language/database_management/#create-a-database-with-create-database) database `where_else`:
 ```sql
 > SELECT water_level INTO where_else."default".h2o_feet_copy FROM h2o_feet WHERE location = 'coyote_creek'
 ```
@@ -552,8 +558,11 @@ Use [fill()](/influxdb/v0.11/query_language/data_exploration/#the-group-by-claus
 * The number of writes in the CLI response includes one write for every time interval in the query's time range even if there is no data for some of the time intervals.
 
 ## Limit query returns with LIMIT and SLIMIT
-InfluxQL supports two different clauses to limit your query results.
-Currently, they are mutually exclusive so you may use one or the other, but not both in the same query.
+InfluxQL supports two different clauses to limit your query results:
+
+* `LIMIT <N>` returns the first \<N> [points](/influxdb/v0.11/concepts/glossary/#point) from each [series](/influxdb/v0.11/concepts/glossary/#series) in the specified measurement.
+* `SLIMIT <N>` returns every point from \<N> series in the specified measurement.
+* `LIMIT <N>` followed by `SLIMIT <N>` returns the first \<N> points from \<N> series in the specified measurement.
 
 <dt> Please note that using `LIMIT` and `SLIMIT` **without** a `GROUP BY *` clause can cause unexpected results.
 See [GitHub Issue #4232](https://github.com/influxdb/influxdb/issues/4232) for more information.
@@ -561,7 +570,7 @@ See [GitHub Issue #4232](https://github.com/influxdb/influxdb/issues/4232) for m
 
 ### Limit the number of results returned per series with `LIMIT`
 ---
-Use `LIMIT <N>` with `SELECT` and `GROUP BY *` to return the first N points from each series.
+Use `LIMIT <N>` with `SELECT` and `GROUP BY *` to return the first \<N> points from each series.
 
 Return the three oldest points from each series associated with the measurement `h2o_feet`:
 ```sql
@@ -587,11 +596,11 @@ time			              water_level
 2015-08-18T00:12:00Z	2.028
 ```
 
-> **Note:** If N is greater than the number of points in the series, InfluxDB returns all points in the series.
+> **Note:** If \<N> is greater than the number of points in the series, InfluxDB returns all points in the series.
 
 ### Limit the number of series returned with `SLIMIT`
 ---
-Use `SLIMIT <N>` with `SELECT` and `GROUP BY *` to return every point from N [series](/influxdb/v0.11/concepts/glossary/#series).
+Use `SLIMIT <N>` with `SELECT` and `GROUP BY *` to return every point from \<N> series.
 
 Return everything from one of the series associated with the measurement `h2o_feet`:
 ```sql
@@ -613,7 +622,30 @@ time			              water_level
 2015-09-18T16:24:00Z	3.235
 ```
 
-> **Note:** If N is greater than the number of series associated with the specified measurement, InfluxDB returns all points from every series.
+> **Note:** If \<N> is greater than the number of series associated with the specified measurement, InfluxDB returns all points from every series.
+
+### Limit the number of points and series returned with `LIMIT` and `SLIMIT`
+---
+Use `LIMIT <N1>` followed by `SLIMIT <N2>` with `GROUP BY *` to return \<N1> points from \<N2> series.
+
+Return the three oldest points from one of the series associated with the measurement `h2o_feet`:
+```sql
+> SELECT water_level FROM h2o_feet GROUP BY * LIMIT 3 SLIMIT 1
+```
+
+CLI response:
+```bash
+name: h2o_feet
+tags: location=coyote_creek
+time			               water_level
+----			               -----------
+2015-08-18T00:00:00Z	 8.12
+2015-08-18T00:06:00Z	 8.005
+2015-08-18T00:12:00Z	 7.887
+```
+
+> **Note:** If \<N1> is greater than the number of points in the series, InfluxDB returns all points in the series.
+If \<N2> is greater than the number of series associated with the specified measurement, InfluxDB returns points from every series.
 
 ## Sort query returns with ORDER BY time DESC
 By default, InfluxDB returns results in ascending time order - so the first points that are returned are the oldest points by timestamp.
@@ -661,24 +693,24 @@ Finally, use `GROUP BY` with `ORDER BY time DESC` to return the last five points
 CLI response:
 ```bash
 name: h2o_feet
-tags: location=coyote_creek
-time			water_level
-----			-----------
-2015-09-18T16:24:00Z	3.235
-2015-09-18T16:18:00Z	3.314
-2015-09-18T16:12:00Z	3.402
-2015-09-18T16:06:00Z	3.497
-2015-09-18T16:00:00Z	3.599
+tags: location=santa_monica
+time			               water_level
+----			               -----------
+2015-09-18T21:42:00Z	 4.938
+2015-09-18T21:36:00Z	 5.066
+2015-09-18T21:30:00Z	 5.01
+2015-09-18T21:24:00Z	 5.013
+2015-09-18T21:18:00Z	 5.072
 
 name: h2o_feet
-tags: location=santa_monica
-time			water_level
-----			-----------
-2015-09-18T21:42:00Z	4.938
-2015-09-18T21:36:00Z	5.066
-2015-09-18T21:30:00Z	5.01
-2015-09-18T21:24:00Z	5.013
-2015-09-18T21:18:00Z	5.072
+tags: location=coyote_creek
+time			               water_level
+----			               -----------
+2015-09-18T16:24:00Z	 3.235
+2015-09-18T16:18:00Z	 3.314
+2015-09-18T16:12:00Z	 3.402
+2015-09-18T16:06:00Z	 3.497
+2015-09-18T16:00:00Z	 3.599
 ```
 
 ## Paginate query returns with OFFSET
@@ -733,7 +765,7 @@ The `NOAA_water_database` database has two [series](/influxdb/v0.11/concepts/glo
 The first series is made up of the measurement `h2o_feet` and the tag key `location` with the tag value `coyote_creek`.
 The second series is made of up the measurement `h2o_feet` and the tag key `location` with the tag value `santa_monica`.
 
-The following query automatically merges those two series when it calculates the [`MEAN()`](../query_language/functions.html#mean) `water_level`:
+The following query automatically merges those two series when it calculates the [average](../query_language/functions.html#mean) `water_level`:
 
 ```sql
 > SELECT MEAN(water_level) FROM h2o_feet
@@ -743,8 +775,8 @@ CLI response:
 ```bash
 name: h2o_feet
 --------------
-time			              mean
-1970-01-01T00:00:00Z	4.442107025822523
+time			               mean
+1970-01-01T00:00:00Z	 4.319097913525821
 ```
 
 If you only want the `MEAN()` `water_level` for the first series, specify the tag set in the `WHERE` clause:
@@ -756,8 +788,8 @@ CLI response:
 ```bash
 name: h2o_feet
 --------------
-time			              mean
-1970-01-01T00:00:00Z	5.359342451341402
+time			               mean
+1970-01-01T00:00:00Z	 5.296914449406493
 ```
 
 > **NOTE:** In InfluxDB, [epoch 0](https://en.wikipedia.org/wiki/Unix_time) (`1970-01-01T00:00:00Z`) is often used as a null timestamp equivalent.
@@ -787,7 +819,7 @@ Query data that occur between epoch 0 and 1,000 days from `now()`:
 * Note the whitespace between the operator and the time duration.
 Leaving that whitespace out can cause InfluxDB to return no results or an `error parsing query` error .
 
-The other options for specifying time durations with `now()` are listed below.
+The other options for specifying time durations with `now()` are listed below.  
 `u` microseconds  
 `s` seconds  
 `m` minutes  
@@ -831,11 +863,11 @@ Return all points that occur after  `2014-01-01 00:00:00`:
 Regular expressions are surrounded by `/` characters and use [Golang's regular expression syntax](http://golang.org/pkg/regexp/syntax/).
 Use regular expressions when selecting measurements and tags.
 
->**Note:** You cannot use regular expressions to match databases, retention policies, or fields.
+> **Note:** You cannot use regular expressions to match databases, retention policies, or fields.
 You can only use regular expressions to match measurements and tags.
 
-The [sample data](/influxdb/v0.11/query_language/data_exploration/#sample-data) need to be more intricate for the following sections.
-Assume that the database `NOAA_water_database` now holds several measurements: `h2o_feet`, `h2o_quality`, `h2o_pH`, `average_temperature`, and `h2o_temperature`.
+In this section we'll be using all of the measurements in the [sample data](/influxdb/v0.11/query_language/data_exploration/#sample-data):
+`h2o_feet`, `h2o_quality`, `h2o_pH`, `average_temperature`, and `h2o_temperature`.
 Please note that every measurement besides `h2o_feet` is fictional and contains fictional data.
 
 ### Regular expressions and selecting measurements
@@ -849,34 +881,39 @@ CLI response:
 ```bash
 name: average_temperature
 -------------------------
-time			              degrees	index	level description	location	    pH	randtag	water_level
-2015-08-18T00:00:00Z	85					                         santa_monica
+time			               degrees	 index	 level description	    location	     pH	 randtag	 water_level
+2015-08-18T00:00:00Z	 82					                               coyote_creek
+
 
 name: h2o_feet
 --------------
-time			              degrees	index	level description	location	    pH	randtag	water_level
-2015-08-18T00:00:00Z			            below 3 feet		    santa_monica			         2.064
+time			               degrees	 index	 level description	    location	     pH	 randtag	 water_level
+2015-08-18T00:00:00Z			               between 6 and 9 feet	 coyote_creek			            8.12
+
 
 name: h2o_pH
 ------------
-time			              degrees	index	level description	location	    pH	randtag	water_level
-2015-08-18T00:00:00Z						                           santa_monica	6
+time			               degrees	 index	 level description	    location	     pH	 randtag	 water_level
+2015-08-18T00:00:00Z						                                  coyote_creek	 7
+
 
 name: h2o_quality
 -----------------
-time			              degrees	index	level description	location	    pH	randtag	water_level
-2015-08-18T00:00:00Z		       41				                  coyote_creek		  1
+time			               degrees	 index	 level description	    location	     pH	 randtag	 water_level
+2015-08-18T00:00:00Z		         41				                       coyote_creek		    1
+
 
 name: h2o_temperature
 ---------------------
-time			              degrees	index	level description	location	    pH	randtag	water_level
-2015-08-18T00:00:00Z	70					                         santa_monica
+time			               degrees	 index	 level description	    location	     pH	 randtag	 water_level
+2015-08-18T00:00:00Z	 60					                               coyote_creek
 ```
 
-* Alternatively, `SELECT` all of the measurements in `NOAA_water_database` by typing them out and separating each name with a comma (see below), but that could get tedious:
-```sql
+* Alternatively, `SELECT` all of the measurements in `NOAA_water_database` by typing them out and separating each name with a comma , but that could get tedious:
+
+    ```sql
 > SELECT * FROM average_temperature,h2o_feet,h2o_pH,h2o_quality,h2o_temperature LIMIT 1
-```
+    ```
 
 Select the first three points from every measurement whose name starts with `h2o`:  
 ```sql
@@ -886,34 +923,38 @@ CLI response:
 ```bash
 name: h2o_feet
 --------------
-time			              degrees	index	level description	   location	    pH	randtag	water_level
-2015-08-18T00:00:00Z			            below 3 feet		       santa_monica	         		2.064
-2015-08-18T00:00:00Z			            between 6 and 9 feet	coyote_creek         			8.12
-2015-08-18T00:06:00Z			            between 6 and 9 feet	coyote_creek	         		8.005
+time			               degrees	 index	 level description	    location	     pH	randtag	water_level
+2015-08-18T00:00:00Z			               between 6 and 9 feet	 coyote_creek			          8.12
+2015-08-18T00:00:00Z			               below 3 feet		        santa_monica			          2.064
+2015-08-18T00:06:00Z			               between 6 and 9 feet	 coyote_creek			          8.005
+
 
 name: h2o_pH
 ------------
-time			              degrees	index	level description	   location	    pH	randtag	water_level
-2015-08-18T00:00:00Z						                              santa_monica	6
-2015-08-18T00:00:00Z						                              coyote_creek	7
-2015-08-18T00:06:00Z						                              coyote_creek	8
+time			               degrees	 index	 level description	    location	     pH	randtag	water_level
+2015-08-18T00:00:00Z						                                  coyote_creek	 7
+2015-08-18T00:00:00Z						                                  santa_monica	 6
+2015-08-18T00:06:00Z						                                  coyote_creek	 8
+
 
 name: h2o_quality
 -----------------
-time			              degrees	index	level description	   location	    pH	randtag	water_level
-2015-08-18T00:00:00Z		       99	                        santa_monica		  2
-2015-08-18T00:00:00Z		       41	                        coyote_creek		  1
-2015-08-18T00:06:00Z		       11	                        coyote_creek		  3
+time			               degrees	 index	 level description	    location	     pH	randtag	water_level
+2015-08-18T00:00:00Z		         99				                       santa_monica		   2
+2015-08-18T00:00:00Z		         41				                       coyote_creek		   1
+2015-08-18T00:06:00Z		         11				                       coyote_creek		   3
+
 
 name: h2o_temperature
 ---------------------
-time			              degrees	index	level description	   location	    pH	randtag	water_level
-2015-08-18T00:00:00Z	70						                           santa_monica
-2015-08-18T00:00:00Z	60						                           coyote_creek
-2015-08-18T00:06:00Z	65						                           coyote_creek
+time			               degrees	 index	 level description	    location	     pH	randtag	water_level
+2015-08-18T00:00:00Z	 70					                               santa_monica
+2015-08-18T00:00:00Z	 60					                               coyote_creek
+2015-08-18T00:06:00Z	 60					                               santa_monica
+
 ```
 
-Select the last 5 points from every measurement whose name contains `temperature`:
+Select the first 5 points from every measurement whose name contains `temperature`:
 
 ```sql
 > SELECT * FROM /.*temperature.*/ LIMIT 5
@@ -933,8 +974,8 @@ time			              degrees	location
 name: h2o_temperature
 ---------------------
 time			              degrees	location
-2015-08-18T00:00:00Z	70	     santa_monica
 2015-08-18T00:00:00Z	60	     coyote_creek
+2015-08-18T00:00:00Z	70	     santa_monica
 2015-08-18T00:06:00Z	65	     coyote_creek
 2015-08-18T00:06:00Z	60	     santa_monica
 2015-08-18T00:12:00Z	68	     coyote_creek
@@ -979,9 +1020,9 @@ CLI response:
 name: h2o_feet
 --------------
 time			               level description	    location	     water_level
+2015-08-18T00:00:00Z	 between 6 and 9 feet	 coyote_creek	 8.12
 2015-08-18T00:00:00Z	 below 3 feet		        santa_monica	 2.064
-2015-08-18T00:00:00Z	 between 6 and 9 feet 	coyote_creek	 8.12
-2015-08-18T00:06:00Z	 between 6 and 9 feet 	coyote_creek	 8.005
+2015-08-18T00:06:00Z	 between 6 and 9 feet	 coyote_creek	 8.005
 2015-08-18T00:06:00Z	 below 3 feet		        santa_monica	 2.116
 ```
 

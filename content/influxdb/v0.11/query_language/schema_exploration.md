@@ -59,9 +59,9 @@ default	 0		       1		       true
 
 The first column of the output contains the names of the different retention policies in the specified database.
 The second column shows the [duration](/influxdb/v0.11/concepts/glossary/#duration) and the third column shows the [replication factor](/influxdb/v0.11/concepts/glossary/#replication-factor) of the retention policy.
-The fourth column specifies if the retention policy is the default retention policy for the database.
+The fourth column specifies if the retention policy is the `DEFAULT` retention policy for the database.
 
-The following example shows a hypothetical CLI response where there are four different retention policies in the database, and where the default retention policy is `three_days_only`:
+The following example shows a hypothetical CLI response where there are four different retention policies in the database, and where the `DEFAULT` retention policy is `three_days_only`:
 
 ```bash
 name		           duration	 replicaN	 default
@@ -85,46 +85,30 @@ Return all series in the database `NOAA_water_database`:
 
 CLI response:  
 ```bash
-name: average_temperature
--------------------------
-_key						                                   location
-average_temperature,location=coyote_creek	   coyote_creek
-average_temperature,location=santa_monica	   santa_monica
-
-name: h2o_feet
---------------
-_key						                        location
-h2o_feet,location=coyote_creek	   coyote_creek
-h2o_feet,location=santa_monica	   santa_monica
-
-name: h2o_pH
-------------
-_key						                      location
-h2o_pH,location=coyote_creek	   coyote_creek
-h2o_pH,location=santa_monica	   santa_monica
-
-name: h2o_quality
------------------
-_key						                                     location	       randtag
-h2o_quality,location=coyote_creek,randtag=1	   coyote_creek	   1
-h2o_quality,location=coyote_creek,randtag=2	   coyote_creek	   2
-h2o_quality,location=coyote_creek,randtag=3	   coyote_creek	   3
-h2o_quality,location=santa_monica,randtag=3	   santa_monica	   3
-h2o_quality,location=santa_monica,randtag=2	   santa_monica	   2
-h2o_quality,location=santa_monica,randtag=1	   santa_monica	   1
-
-name: h2o_temperature
----------------------
-_key					                                location
-h2o_temperature,location=coyote_creek	   coyote_creek
-h2o_temperature,location=santa_monica	   santa_monica
+key
+average_temperature,location=coyote_creek
+average_temperature,location=santa_monica
+h2o_feet,location=coyote_creek
+h2o_feet,location=santa_monica
+h2o_pH,location=coyote_creek
+h2o_pH,location=santa_monica
+h2o_quality,location=coyote_creek,randtag=1
+h2o_quality,location=coyote_creek,randtag=2
+h2o_quality,location=coyote_creek,randtag=3
+h2o_quality,location=santa_monica,randtag=1
+h2o_quality,location=santa_monica,randtag=2
+h2o_quality,location=santa_monica,randtag=3
+h2o_temperature,location=coyote_creek
+h2o_temperature,location=santa_monica
 ```
 
-`SHOW SERIES` organizes its output by [measurement](/influxdb/v0.11/concepts/glossary/#measurement) name.
-From the return you can see that the data in the database `NOAA_water_database` have five different measurements and 14 different series.
+`SHOW SERIES` organizes its output similar to the [line protocol](/influxdb/v0.11/write_protocols/line/) format.
+Everything before the first comma is the [measurement](/influxdb/v0.11/concepts/glossary/#measurement) name.
+Everything after the first comma is either a [tag key](/influxdb/v0.11/concepts/glossary/#tag-key) or a [tag value](/influxdb/v0.11/concepts/glossary/#tag-value).
+
+From the output above you can see that the data in the database `NOAA_water_database` have five different measurements and 14 different series.
 The measurements are `average_temperature`, `h2o_feet`, `h2o_pH`, `h2o_quality`, and `h2o_temperature`.
-Every measurement
-has the [tag key](/influxdb/v0.11/concepts/glossary/#tag-key) `location` with the [tag values](/influxdb/v0.11/concepts/glossary/#tag-value) `coyote_creek` and `santa_monica` - that makes 10 series.
+Every measurement has the tag key `location` with the tag values `coyote_creek` and `santa_monica` - that makes 10 series.
 The measurement `h2o_quality` has the additional tag key `randtag` with the tag values `1`,`2`, and `3` - that makes 14 series.
 
 Return series for a specific measurement:
@@ -134,15 +118,13 @@ Return series for a specific measurement:
 
 CLI response:
 ```bash
-name: h2o_quality
------------------
-_key						                                     location	       randtag
-h2o_quality,location=coyote_creek,randtag=1	   coyote_creek	   1
-h2o_quality,location=coyote_creek,randtag=2	   coyote_creek	   2
-h2o_quality,location=coyote_creek,randtag=3	   coyote_creek	   3
-h2o_quality,location=santa_monica,randtag=3	   santa_monica	   3
-h2o_quality,location=santa_monica,randtag=2	   santa_monica	   2
-h2o_quality,location=santa_monica,randtag=1	   santa_monica	   1
+key
+h2o_quality,location=coyote_creek,randtag=1
+h2o_quality,location=coyote_creek,randtag=2
+h2o_quality,location=coyote_creek,randtag=3
+h2o_quality,location=santa_monica,randtag=1
+h2o_quality,location=santa_monica,randtag=2
+h2o_quality,location=santa_monica,randtag=3
 ```
 
 Return series for a specific measurement and tag set:
@@ -152,12 +134,10 @@ Return series for a specific measurement and tag set:
 
 CLI response:
 ```bash
-name: h2o_quality
------------------
-_key						                                     location	       randtag
-h2o_quality,location=coyote_creek,randtag=1	   coyote_creek	   1
-h2o_quality,location=coyote_creek,randtag=2	   coyote_creek	   2
-h2o_quality,location=coyote_creek,randtag=3	   coyote_creek	   3
+key
+h2o_quality,location=coyote_creek,randtag=1
+h2o_quality,location=coyote_creek,randtag=2
+h2o_quality,location=coyote_creek,randtag=3
 ```
 
 ## Explore measurements with `SHOW MEASUREMENTS`
@@ -287,24 +267,73 @@ location
 
 ## Explore tag values with SHOW TAG VALUES
 The `SHOW TAG VALUES` query returns the set of [tag values](/influxdb/v0.11/concepts/glossary/#tag-value) for a specific tag key across all measurements in the database.
-It takes the following form, where the `FROM` clause is optional:
+Syntax for specifying a single tag key:
 ```sql
 SHOW TAG VALUES [FROM <measurement_name>] WITH KEY = <tag_key>
 ```
+Syntax for specifying more than one tag key:
+```sql
+SHOW TAG VALUES [FROM <measurement_name>] WITH KEY IN (<tag_key1>,<tag_key2)
+```
 
-Return the tag values for the tag key `randtag` across all measurements in the database `NOAA_water_database`:
+Return the tag values for a single tag key (`randtag`) across all measurements in the database `NOAA_water_database`:
 ```sql
 > SHOW TAG VALUES WITH KEY = randtag
 ```
 
 CLI response:
 ```bash
-name: randtagTagValues
-----------------------
-randtag
-1
-2
-3
+name: h2o_quality
+-----------------
+key	     value
+randtag	 1
+randtag	 3
+randtag	 2
+```
+
+Return the tag values for two tag keys (`location` and `randtag`) across all measurements in the database `NOAA_water_database`:
+```sql
+> SHOW TAG VALUES WITH KEY IN (location,randtag)
+```
+
+CLI response:
+```bash
+name: average_temperature
+-------------------------
+key		     value
+location	 coyote_creek
+location	 santa_monica
+
+
+name: h2o_feet
+--------------
+key		     value
+location	 coyote_creek
+location	 santa_monica
+
+
+name: h2o_pH
+------------
+key		     value
+location	 coyote_creek
+location	 santa_monica
+
+
+name: h2o_quality
+-----------------
+key		     value
+location	 coyote_creek
+randtag		 1
+randtag		 3
+randtag		 2
+location	 santa_monica
+
+
+name: h2o_temperature
+---------------------
+key		     value
+location	 coyote_creek
+location	 santa_monica
 ```
 
 Return the tag values for the tag key `randtag` for a specific measurement in the `NOAA_water_database` database:
