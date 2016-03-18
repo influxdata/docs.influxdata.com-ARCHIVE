@@ -1,7 +1,5 @@
 ---
 title: InfluxDB Version 0.11 Documentation
-aliases:
-  - /influxdb/v0.11/introduction/overview/
 
 menu:
   influxdb:
