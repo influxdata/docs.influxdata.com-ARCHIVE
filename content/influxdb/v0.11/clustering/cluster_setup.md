@@ -1,15 +1,14 @@
 ---
 title: Cluster Setup
-aliases:
-  - /influxdb/v0.11/guides/clustering/
 menu:
   influxdb_011:
     weight: 10
     parent: Clustering
 ---
 
-> **NOTE:** Clustering is still considered _experimental_, and there are still quite a few rough edges.
-If you encounter any issues, please [report them](https://github.com/influxdata/influxdb/issues/new).
+> **NOTE:** InfluxDB 0.11 is the last open source version that includes clustering.
+For more information, please see Paul Dix's blog post on [InfluxDB Clustering, High-Availability, and Monetization](https://influxdata.com/blog/update-on-influxdb-clustering-high-availability-and-monetization/).
+Please note that the 0.11 version of clustering is still considered experimental, and there are still quite a few rough edges.
 
 This guide briefly introduces the InfluxDB cluster model and provides step-by-step instructions for setting up a cluster.
 
@@ -32,8 +31,6 @@ Note that your first three nodes must be either hybrid nodes or consensus nodes.
 
 We assume that you are running some version of Linux, and, while it is possible to build a cluster on a single server, it is not recommended.
 
-> **Note:** Always use the [most recent release](https://influxdata.com/downloads/#influxdb) for clustering as there are significant improvements with each release.
-
 **<font color=white size=4>1</font>**&nbsp;&nbsp; [Install](/influxdb/v0.11/introduction/installation/) InfluxDB on three machines.
 Do not start the daemon on any of the machines.
 
@@ -45,12 +42,15 @@ Where `IP` is the node's IP address *or* hostname, each node's `/etc/influxdb/in
   enabled = true
   ...
   bind-address = "<IP>:8088"
+  ...
   http-bind-address = "<IP>:8091"
 
 ...
 
 [data]
   enabled = true
+
+...
 
 [http]
   ...
@@ -64,27 +64,22 @@ Where `IP` is the node's IP address *or* hostname, each node's `/etc/influxdb/in
 
 > **NOTE:** The hostnames for each machine must be resolvable by all members of the cluster.
 
-**<font color=white size=4>3</font>**&nbsp;&nbsp;Start InfluxDB on the first node:
-```
-sudo service influxdb start
-```
+**<font color=white size=4>3</font>**&nbsp;&nbsp;Point all nodes to each other.
 
-**<font color=white size=4>4</font>**&nbsp;&nbsp;Point the second and third nodes to the first node.
-
-On the second and third nodes, set `INFLUXD_OPTS` in `/etc/default/influxdb`:
+On all three nodes, set `INFLUXD_OPTS` in `/etc/default/influxdb`:
 ```
-INFLUXD_OPTS="-join <IP1>:8091"
+INFLUXD_OPTS="-join <IP1>:8091,<IP2>:8091,<IP3>:8091"
 ```
-where `IP1` is the *first* node's IP address *or* hostname.
+where `IP1` is the first node's IP address *or* hostname, `IP2` is the second nodes's IP address *or* hostname, and `IP3` is the third node's IP address *or* hostname.
 
 If the `/etc/default/influxdb` file does not exist, create it.
 
-**<font color=white size=4>5</font>**&nbsp;&nbsp;Start InfluxDB on the second and third nodes:
+**<font color=white size=4>4</font>**&nbsp;&nbsp;Start InfluxDB on each node:
 ```
 sudo service influxdb start
 ```
 
-**<font color=white size=4>6</font>**&nbsp;&nbsp;Verify that the cluster is healthy.
+**<font color=white size=4>5</font>**&nbsp;&nbsp;Verify that the cluster is healthy.
 
 Issue a `SHOW SERVERS` query to each node in your cluster using the [`influx` CLI](/influxdb/v0.11/tools/shell/).
 The output should show that your cluster is made up of three hybrid nodes (hybrid nodes appear as both `data_nodes` and `meta_nodes` in the `SHOW SERVERS` query results):
@@ -93,25 +88,22 @@ The output should show that your cluster is made up of three hybrid nodes (hybri
 > SHOW SERVERS
 name: data_nodes
 ----------------
-id	 http_addr	 tcp_addr
-1	  IP1:8086	  IP1:8088
-3	  IP2:8086	  IP2:8088
-5	  IP3:8086	  IP3:8088
+id	 http_addr		  tcp_addr
+1	  <IP1>:8086	  <IP1>:8088
+2	  <IP2>:8086	  <IP2>:8088
+3	  <IP3>:8086	  <IP3>:8088
 
 
 name: meta_nodes
 ----------------
-id	 http_addr  tcp_addr
-1	  IP1:8091	  IP1:8088
-2	  IP2:8091	  IP2:8088
-4	  IP3:8091	  IP3:8088
+id	 http_addr		  tcp_addr
+1	  <IP1>:8091	  <IP1>:8088
+2	  <IP2>:8091	  <IP2>:8088
+3	  <IP3>:8091	  <IP3>:8088
 ```
 
-> **Notes:**
->
-* Currently, the `SHOW SERVERS` query groups results into `data_nodes` and `meta_nodes`. The term `meta_nodes` is outdated and refers to a node that runs the consensus service.
-* The irregular node `id` numbers in the `SHOW SERVERS` results is a known issue and a fix is underway.
-For now, it may be easier to identify data nodes and consensus nodes by the IP addresses reported in the `SHOW SERVERS` results.
+> **Note:**
+The `SHOW SERVERS` query groups results into `data_nodes` and `meta_nodes`. The term `meta_nodes` is outdated and refers to a node that runs the consensus service.
 
 And that's your three node cluster!
 
@@ -124,5 +116,4 @@ Additional nodes can be consensus nodes, data nodes, or hybrid nodes.
 See [Cluster Node Configuration](/influxdb/v0.11/clustering/cluster_node_config/) for how to configure the different node types.
 
 Adding a node to your cluster follows the same procedure that we outlined above.
-Note that in step 4, when you point your new node to the cluster, you must set `INFLUXD_OPTS` to the `hostname:port` pair of a pre-existing cluster member that is running the [consensus service](/influxdb/v0.11/concepts/glossary/#consensus-service).
-If you specify more than one `hostname:port` pair in a comma delimited list, Influx will try to connect with the additional pairs if it cannot connect with the first.
+Note that in step 4, when you point your new node to the cluster, you must set `INFLUXD_OPTS` to every node in the cluster, including itself.
