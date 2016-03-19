@@ -38,6 +38,9 @@ The `CREATE DATABASE` query takes the following form:
 CREATE DATABASE [IF NOT EXISTS] <database_name> [WITH [DURATION <duration>] [REPLICATION <n>] [NAME <retention-policy-name>]]
 ```
 
+> **Note:** The `IF NOT EXISTS` clause does nothing, is deprecated, and will be removed in InfluxDB version 0.12.
+The `CREATE DATABASE` query will return successfully with no error when a new database is created or if the database already exists.
+
 Create the database ` NOAA_water_database`:
 ```bash
 > CREATE DATABASE NOAA_water_database
