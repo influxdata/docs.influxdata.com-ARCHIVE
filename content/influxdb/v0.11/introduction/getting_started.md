@@ -24,9 +24,9 @@ The output should look like this:
 
 ```bash
 $ influx
-Connected to http://localhost:8086 version 0.10.0
-InfluxDB shell 0.10.0
-> 
+Connected to http://localhost:8086 version 0.11.0
+InfluxDB shell 0.11.0
+>
 ```
 
 > **Note:** The InfluxDB HTTP API runs on port `8086` by default.
@@ -48,7 +48,7 @@ Throughout this guide, we'll use the database name `mydb`:
 
 ```sql
 > CREATE DATABASE mydb
-> 
+>
 ```
 
 > **Note:** After hitting enter, a new prompt appears and nothing else is displayed.
@@ -67,7 +67,7 @@ name
 _internal
 mydb
 
-> 
+>
 ```
 
 > **Note:** The `_internal` database is created and used by InfluxDB to store internal runtime metrics.
@@ -81,7 +81,7 @@ which will automatically set the database for all future requests. For example:
 ```sql
 > USE mydb
 Using database mydb
-> 
+>
 ```
 
 Now future commands will only be run against the `mydb` database.
@@ -141,7 +141,7 @@ name: cpu
 time		    	                     host     	region   value
 2015-10-21T19:28:07.580664347Z  	serverA	  us_west	0.64
 
-> 
+>
 ```
 
 > **Note:** We did not supply a timestamp when writing our point.
@@ -164,7 +164,7 @@ name: temperature
 time		                        	 external	  internal	machine	type
 2015-10-21T19:28:08.385013942Z  25	        	37     		unit42  assembly
 
-> 
+>
 ```
 
 InfluxQL has many [features and keywords](/influxdb/v0.11/query_language/spec/) that are not covered here,

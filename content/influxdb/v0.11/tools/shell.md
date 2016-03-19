@@ -23,8 +23,8 @@ Once you've entered the shell and successfully connected to an InfluxDB node, yo
 <br>
 ```bash
 $ influx
-Connected to http://localhost:8086 version 0.10.x
-InfluxDB shell 0.10.x
+Connected to http://localhost:8086 version 0.11.x
+InfluxDB shell 0.11.x
 ```
 
 ## `influx` Arguments
