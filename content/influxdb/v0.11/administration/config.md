@@ -45,7 +45,6 @@ See the [installation documentation](/influxdb/v0.11/introduction/installation/#
 * [[shard-precreation]](/influxdb/v0.11/administration/config/#shard-precreation)
 * [[admin]](/influxdb/v0.11/administration/config/#admin)
 * [[monitor]](/influxdb/v0.11/administration/config/#monitor)
-* [[subscriber]](/influxdb/v0.11/administration/config/#subscriber)
 * [[http]](/influxdb/v0.11/administration/config/#http)
 * [[graphite]](/influxdb/v0.11/administration/config/#graphite)
 * [[collectd]](/influxdb/v0.11/administration/config/#collectd)
@@ -85,9 +84,12 @@ this option to `true` will disable reporting.
 
 This section controls some of the parameters for the InfluxDB cluster.
 Specifically, it handles the parameters for the Raft consensus group which coordinates metadata about the cluster.
-For step-by-step instructions on setting up an InfluxDB cluster, see [Cluster Setup](/influxdb/v0.11/guides/clustering/).
+For step-by-step instructions on setting up an InfluxDB cluster, see [Cluster Setup](/influxdb/v0.11/clustering/cluster_setup/).
 
-### dir = "/var/opt/influxdb/meta"
+### enabled = true
+Controls if this node should run the metaservice and participate in the Raft group.
+
+### dir = "/var/lib/influxdb/meta"
 
 The `meta` directory contains the metastore, which stores information on nodes, users, databases, retention policies, shards, and continuous queries.
 Files in the `meta` directory include: `id`, `peers.json`, `raft.db`, and the `snapshots` directory.
@@ -102,11 +104,20 @@ There will always be at least one hostname present.
 
 ### hostname = "localhost"
 
-The hostname is the `hostname` of the node which is advertised to its Raft peers.
+The hostname of the node which is advertised to its Raft peers.
+InfluxDB tries to get the hostname automatically, but if the OS returns something that isn't resolvable by other servers in the cluster, use this option to manually set the hostname.
 
 ### bind-address = ":8088"
 
-The bind address is the `port` of the node which is used to communicates with its Raft peers.
+The bind address is the `port` for cluster wide communication.
+
+### http-bind-address = ":8091"
+
+The bind address for consensus communication.
+
+### https-enabled = false
+
+### https-certificate = ""
 
 ### retention-autocreate = true
 
@@ -150,63 +161,25 @@ Disabling Raft promotion is desirable only when specific nodes should be partici
 
 Meta logging toggles the logging of messages from the meta service.
 
+### pprof-enabled = false
+
+### lease-duration = "1m0s"
+
+The default duration for leases.
+
 ## [data]
 
 This section controls where the actual shard data for InfluxDB lives and how it is flushed from the WAL. `dir` may need to be changed to a suitable place for you system, but the WAL settings are an advanced configuration. The defaults should work for most systems.
 
-### dir = "/var/opt/influxdb/data"
+### enabled = true
+Controls if the node holds time series data shards in the cluster.
+
+### dir = "/var/lib/influxdb/data"
 
 The directory where InfluxDB stores the data.
 This directory may be changed.
 
 >**Note:** The default directory for OSX installations is `/Users/<username>/.influxdb/data`
-
-### max-wal-size = 104857600
-
-_Only applies to the `b1` engine, version < 0.9.3_ The maximum WAL size is the max amount of data (in bytes) which triggers a WAL flush.
-This defaults to 100MiB.
-
-### wal-flush-interval = "10m0s"
-
-_Only applies to the `b1` engine, version < 0.9.3_ The WAL flush interval sets the maximum time data can stay in the WAL before a flush.
-
-### wal-partition-flush-delay = "2s"
-
-_Only applies to the `b1` engine, version < 0.9.3_ The WAL partition flush delay is the time the engine will wait between each WAL partition flush.
-
-### wal-dir = "/var/opt/influxdb/wal"
-
-_Only applies to the `bz1` engine, version >= 0.9.3_ The WAL directory is the location of the write ahead log.
-For best throughput, the WAL directory and the data directory should be on different physical devices.
-
-### wal-logging-enabled = true
-
-_Only applies to the `bz1` engine, version >= 0.9.3_ The WAL logging enabled toggles the logging of WAL operations such as WAL flushes to disk.
-
-### wal-ready-series-size = 25600
-
-_Only applies to the `bz1` engine, version >= 0.9.3_ The WAL ready series size is the size (in bytes) of a series in the WAL in-memory cache at which the series is marked as ready to flush to the index.
-
-### wal-compaction-threshold = 0.6
-
-_Only applies to the `bz1` engine, version >= 0.9.3_ The WAL compaction threshold is the ratio of series that are over the `wal-ready-series-size` which trigger a partition flush and compaction.
-
-### wal-max-series-size = 2097152
-
-_Only applies to the `bz1` engine, version >= 0.9.3_ The WAL maximum series size is the maximum size (in bytes) of a series in a partition.
-Any series in a partition above this size is forced to flush and compact.
-
-### wal-flush-cold-interval = "10m"
-
-_Only applies to the `bz1` engine, version >= 0.9.3_ The WAL flush cold interval sets the duration of the interval when all series are flushed and full compaction takes place.
-This option ensures shards with infrequent writes are flushed to disk instead of remaining cached in memory as part of the WAL.
-
-### wal-partition-size-threshold = 20971520
-
-_Only applies to the `bz1` engine, version >= 0.9.3_ The WAL partition size threshold sets the maximum size of a partition (in bytes).
-When the threshold is hit, the partition is forced to flush its largest series.
-There are five partitions so you'll need at least five times this amount of memory.
-The more memory you have, the bigger this setting can be.
 
 ### query-log-enabled = true
 
@@ -215,27 +188,27 @@ Very useful for troubleshooting, but will log any sensitive data contained withi
 
 ### cache-max-memory-size = 524288000
 
-_WAL setting for versions 0.10.0+_ The cache maximum memory size is the maximum size (in bytes) a shard's cache can reach before it starts rejecting writes.
+The cache maximum memory size is the maximum size (in bytes) a shard's cache can reach before it starts rejecting writes.
 
 ### cache-snapshot-memory-size = 26214400
 
-_WAL setting for versions 0.10.0+_ The cache snapshot memory size is the size at which the engine will snapshot the cache and write it to a TSM file, freeing up memory.
+The cache snapshot memory size is the size at which the engine will snapshot the cache and write it to a TSM file, freeing up memory.
 
 ### cache-snapshot-write-cold-duration = "1h"
 
-_WAL setting for versions 0.10.0+_ The cache snapshot write cold duration is the length of time at which the engine will snapshot the cache and write it to a new TSM file if the shard hasn't received writes or deletes.
+The cache snapshot write cold duration is the length of time at which the engine will snapshot the cache and write it to a new TSM file if the shard hasn't received writes or deletes.
 
 ### compact-min-file-count = 3
 
-_WAL setting for versions 0.10.0+_ The compact minimum file count is the minimum number of TSM files that need to exist before a compaction cycle will run.
+The compact minimum file count is the minimum number of TSM files that need to exist before a compaction cycle will run.
 
 ### compact-full-write-cold-duration = "24h"
 
-_WAL setting for versions 0.10.0+_ The compact full write cold duration is the duration at which the engine will compact all TSM files in a shard if it hasn't received a write or delete.
+he compact full write cold duration is the duration at which the engine will compact all TSM files in a shard if it hasn't received a write or delete.
 
 ### max-points-per-block = 1000
 
-_WAL setting for versions 0.10.0+_ The maximum points per block is the maximum number of points in an encoded block in a TSM file.
+The maximum points per block is the maximum number of points in an encoded block in a TSM file.
 Larger numbers may yield better compression but could incur a performance peanalty when querying.
 
 ## [hinted-handoff]
@@ -248,14 +221,13 @@ This section controls the hinted handoff feature, which allows nodes to temporar
 
 Set to `false` to disable hinted handoff.
 
-### dir = "/var/opt/influxdb/hh"
+### dir = "/var/lib/influxdb/hh"
 
 The hinted handoff directory.
 For best throughput, the HH directory and the WAL directory should be on different physical devices.
 If you have performance concerns, you will also want to make this setting different from the dir in the [[data]](/influxdb/v0.11/administration/config/#data) section.
 
 >**Note:** The default directory for OSX installations is `/Users/<username>/.influxdb/hh`
-
 
 ### max-size = 1073741824
 
@@ -379,13 +351,6 @@ Set to `true` to enable HTTPS for the admin interface.
 ### https-certificate = "/etc/ssl/influxdb.pem"
 
 The path of the certificate file.
-
-## [subscriber]
-
-This section toggles the subscriber feature used by Kapacitor.
-When a service like Kapacitor has subscribed to InfluxDB, all incoming writes are sent to the subscribed endpoint via UDP.
-
-### enabled = true
 
 ## [http]
 
@@ -658,32 +623,3 @@ Set to `false` to disable CQs.
 ### run-interval = "1s"
 
 The interval at which InfluxDB checks to see if a CQ needs to run. Set this option to the lowest interval at which your CQs run. For example, if your most frequent CQ runs every minute, set `run-interval` to `1m`.
-
-## [hinted-handoff]
-
-This section controls the hinted handoff feature, which allows nodes to temporarily store queued data when one node of a cluster is down for a short period of time.
-Note that the hinted handoff has no function in a single node cluster.
-
-### enabled = true
-
-Set to `false` to disable hinted handoff.
-
-### dir = "/var/opt/influxdb/hh"
-
-The hinted handoff directory.
-For best throughput, the HH directory and the WAL directory should be on different physical devices.
-If you have performance concerns, you will also want to make this setting different from the dir in the [[data]](/influxdb/v0.11/administration/config/#data) section.
-
-
-### max-size = 1073741824
-
-The maximum size of the hinted handoff queue for a node.
-If the queue is full, new writes are rejected and an error is returned to the client.
-The queue is drained when either the writes are retried successfully or the writes expire.
-
-### max-age = "168h"
-
-The time writes sit in the queue before they are purged.
-The time is determined by how long the batch has been in the queue, not by the timestamps in the data.
-
-Interval for how often continuous queries will be checked if they need to run.
