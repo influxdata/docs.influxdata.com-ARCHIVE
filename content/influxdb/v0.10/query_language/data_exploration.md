@@ -257,7 +257,7 @@ time			mean
 >**Note:** In InfluxDB, [epoch 0](https://en.wikipedia.org/wiki/Unix_time) (`1970-01-01T00:00:00Z`) is often used as a null timestamp equivalent.
 If you request a query that has no timestamp to return, such as an aggregation function with an unbounded time range, InfluxDB returns epoch 0 as the timestamp.
 
-Calculate the [`MEAN()`](../query_language/functions.html#mean) `index` for every tag set in `h2o_quality`:
+Calculate the [`MEAN()`](../functions.html#mean) `index` for every tag set in `h2o_quality`:
 ```sql
 > SELECT MEAN(index) FROM h2o_quality GROUP BY *
 ```
