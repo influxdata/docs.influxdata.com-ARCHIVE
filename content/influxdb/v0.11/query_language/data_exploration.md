@@ -237,7 +237,7 @@ To successfully implement `GROUP BY`,  append the`GROUP BY` clause to a `SELECT`
 ### The basic `GROUP BY` clause
 ---
 **GROUP BY tag values**  
-Calculate the [`MEAN()`](../query_language/functions.html#mean) `water_level` for the different tag values of `location`:
+Calculate the [`MEAN()`](/influxdb/v0.11/query_language/functions/#mean) `water_level` for the different tag values of `location`:
 ```sql
 > SELECT MEAN(water_level) FROM h2o_feet GROUP BY location
 ```
@@ -258,7 +258,7 @@ time			mean
 >**Note:** In InfluxDB, [epoch 0](https://en.wikipedia.org/wiki/Unix_time) (`1970-01-01T00:00:00Z`) is often used as a null timestamp equivalent.
 If you request a query that has no timestamp to return, such as an aggregation function with an unbounded time range, InfluxDB returns epoch 0 as the timestamp.
 
-Calculate the [`MEAN()`](../query_language/functions.html#mean) `index` for every tag set in `h2o_quality`:
+Calculate the [`MEAN()`](/influxdb/v0.11/query_language/functions/#mean) `index` for every tag set in `h2o_quality`:
 ```sql
 > SELECT MEAN(index) FROM h2o_quality GROUP BY *
 ```
@@ -307,7 +307,7 @@ time			               mean
 ```
 
 **GROUP BY time intervals**  
-[`COUNT()`](../query_language/functions.html#count) the number of `water_level` points between August 18, 2015 at midnight and September 18 at 5:00pm at two day intervals:
+[`COUNT()`](/influxdb/v0.11/query_language/functions/#count) the number of `water_level` points between August 18, 2015 at midnight and September 18 at 5:00pm at two day intervals:
 ```sql
 > SELECT COUNT(water_level) FROM h2o_feet WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-09-18T17:00:00Z' AND location='coyote_creek' GROUP BY time(2d)
 ```
@@ -765,7 +765,7 @@ The `NOAA_water_database` database has two [series](/influxdb/v0.11/concepts/glo
 The first series is made up of the measurement `h2o_feet` and the tag key `location` with the tag value `coyote_creek`.
 The second series is made of up the measurement `h2o_feet` and the tag key `location` with the tag value `santa_monica`.
 
-The following query automatically merges those two series when it calculates the [average](../query_language/functions.html#mean) `water_level`:
+The following query automatically merges those two series when it calculates the [average](/influxdb/v0.11/query_language/functions/#mean) `water_level`:
 
 ```sql
 > SELECT MEAN(water_level) FROM h2o_feet
