@@ -6,7 +6,7 @@ menu:
     parent: guides
 ---
 
-This guide offers general hardware recommendations for InfluxDB and addresses some frequently asked questions about hardware sizing. The recommendations are only for the `tsm1` storage engine. Instances still running [unconverted](/influxdb/v0.11/administration/upgrading/#convert-b1-and-bz1-shards-to-tsm1) `b1` or `bz1` shards may have different performance characteristics. See the [InfluxDB 0.9 sizing guide](/influxdb/v0.9/guides/hardware_sizing/) for more detail.
+This guide offers general hardware recommendations for InfluxDB and addresses some frequently asked questions about hardware sizing. The recommendations are only for the [Time Structured Merge](/influxdb/v0.11/concepts/storage_engine/#the-new-influxdb-storage-engine-from-lsm-tree-to-b-tree-and-back-again-to-create-the-time-structured-merge-tree) tree (`TSM`) storage engine, the only storage engine available with InfluxDB 0.11. Users running older versions of InfluxDB with [unconverted](/influxdb/v0.11/administration/upgrading/#convert-any-remaining-b1-and-bz1-shards-to-tsm) `b1` or `bz1` shards may have different performance characteristics. See the [InfluxDB 0.9 sizing guide](/influxdb/v0.9/guides/hardware_sizing/) for more detail.
 
 Single node:
 
@@ -19,7 +19,7 @@ Single node:
 Clustering:
 
 * [General hardware guidelines for clusters](/influxdb/v0.11/guides/hardware_sizing/#general-hardware-guidelines-for-clusters)
-* [How should I configure my hardware?](/influxdb/v0.11/guides/hardware_sizing/#how-should-i-configure-my-hardware-1)
+* [How should I configure my hardware differently form a single-node instance?](/influxdb/v0.11/guides/hardware_sizing/#how-should-i-configure-my-hardware-differently-from-a-single-node-instance)
 
 ## General hardware guidelines for a single node
 
@@ -73,6 +73,8 @@ When running InfluxDB in a production environment the `wal` directory and the `d
 
 ## General hardware guidelines for clusters
 
+> **NOTE:** InfluxDB 0.11 is the last open source version that includes clustering. For more information, please see Paul Dix’s blog post on [InfluxDB Clustering, High-Availability, and Monetization](https://influxdata.com/blog/update-on-influxdb-clustering-high-availability-and-monetization/). Please note that the 0.11 version of clustering is still considered experimental, and there are still quite a few rough edges.
+
 ### Consensus nodes
 [Consensus nodes](/influxdb/v0.11/concepts/glossary/#consensus-node) do not require significant system resources and can run on a very lightweight server.
 
@@ -88,4 +90,4 @@ For better performance, we recommend having 8 GB RAM and 4 CPUs or more.
 When running a cluster every member should have at least two cores.
 
 ## How should I configure my hardware differently from a single-node instance?
-Place the `hh` directory on a separate storage device from the `wal` and `data` directories. This significantly reduces disk contention when the cluster is under heavy write load. For more information on setting up a cluster, see [Clustering setup](/influxdb/v0.11/guides/clustering/).
+Place the `hh` directory on a separate storage device from the `wal` and `data` directories. This significantly reduces disk contention when the cluster is under heavy write load. For more information on setting up a cluster, see [Cluster Setup](/influxdb/v0.11/clustering/cluster_setup/).

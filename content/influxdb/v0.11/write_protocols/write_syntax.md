@@ -176,7 +176,7 @@ Querying measurements or tags that contain double-quotes `"` can be difficult, s
 It's possible to work around the limitations with regular expressions but it's not easy.
 
 Avoid using Keywords as identifiers (database names, retention policy names, measurement names, tag keys, or field keys) whenever possible.
-Keywords in InfluxDB are referenced on the [InfluxQL Syntax](/influxdb/v0.11/query_language/spec/) page.
+Keywords in InfluxDB are referenced on the [InfluxQL Syntax](/influxdb/v0.11/query_language/spec/#keywords) page.
 There is no need to quote or escape keywords in the write syntax.
 
 All values in InfluxDB are case-sensitive: `MyDB` != `mydb` != `MYDB`.
@@ -193,7 +193,7 @@ To write points using the command line interface, use the `insert` command.
 ```
 
 The CLI will return nothing on success and should give an informative parser error if the point cannot be written.
-There is currently no way to write a batch of points using the CLI, each point must be inserted individually.
+See [InfluxDB CLI/Shell](/influxdb/v0.11/tools/shell/#import-data-from-a-file-with-import) for how to import data from a file using the CLI.
 
 ## HTTP
 

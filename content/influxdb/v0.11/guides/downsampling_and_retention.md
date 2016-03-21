@@ -30,7 +30,7 @@ InfluxDB automatically queries from and writes to the `DEFAULT` RP on a database
 To query from or write to a different RP, you must fully qualify the measurement, that is, specify the database and retention policy with the measurement name: `<database_name>."<retention_policy>".<measurement_name>`.
 
 You can also create, alter, and delete you own RPs, and you can change the database's `DEFAULT` RP.
-See [Database management](/influxdb/v0.11/query_language/database_management/#retention-policy-management) for more on RP management.
+See [Database Management](/influxdb/v0.11/query_language/database_management/#retention-policy-management) for more on RP management.
 
 > **Clarifying** `default` **vs.** `DEFAULT`
 
@@ -127,7 +127,10 @@ time						            phone 	website
 2015-12-04T20:00:40Z		3	     10
 2015-12-04T20:00:50Z		1	     15
 ```
-We submitted this query on 12/04/2015 at 22:08:19 UTC  - notice that the oldest data have timestamps that are no older than around two hours ago<sup>[1](#retentionconfig)</sup>.
+We submitted this query on 12/04/2015 at 22:08:19 UTC  - notice that the oldest data have timestamps that are no older than around two hours ago.
+
+> **Note:** By default, InfluxDB checks to enforce an RP every 30 minutes so you may have data that are older than two hours between checks.
+The rate at which InfluxDB checks to enforce an RP is a configurable setting, see [Database Configuration](/influxdb/v0.11/administration/config/#retention).
 
 A sample of the oldest data in `downsampled_orders` - these are the aggregated data subject to the `default` RP:
 ```bash
@@ -149,6 +152,3 @@ In the second `SELECT` statement, we get the CQ results by fully qualifying the 
 To fully qualify a measurement, specify its database and RP with `<database_name>."<retention_policy>".<measurement_name>`.
 
 Using a combination of RPs and CQs, we've made InfluxDB automatically downsample data and expire old data. Now that you have a general understanding of how these features can work together, we recommend looking at the detailed documentation on [CQs](/influxdb/v0.11/query_language/continuous_queries/) and [RPs](/influxdb/v0.11/query_language/database_management/#retention-policy-management) to see all that they can do for you.
-
-<a name="retentionconfig">1</a>: By default, InfluxDB checks to enforce an RP every 30 minutes so you may have data that are older than two hours between checks.
-The rate at which InfluxDB checks to enforce an RP is a configurable setting, see [Database Configuration](/influxdb/v0.11/administration/config/#retention).

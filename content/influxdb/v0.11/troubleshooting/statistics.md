@@ -12,46 +12,7 @@ This information can be very useful for troubleshooting and performance monitori
 
 ## SHOW STATS
 To see node stats execute the command `SHOW STATS`.
-An example is shown below.
-
-```sql
-SHOW STATS
-```
-
-```json
-{
-    "results": [
-        {
-            "series": [
-                {
-                    "name": "server",
-                    "columns": [
-                        "broadcastMessageRx",
-                        "batchWriteRx",
-                        "pointWriteRx",
-                        "writeSeriesMessageTx"
-                    ],
-                    "values": [
-                        [
-                            37
-                        ],
-                        [
-                            299984
-                        ],
-                        [
-                            2789
-                        ],
-                        [
-                            25
-                        ]
-                    ]
-                }
-            ]
-        }
-    ]
-}
-```
-
+      
 The statistics returned by `SHOW STATS` are stored in memory only, and are reset to zero when the node is restarted.
 
 ## SHOW DIAGNOSTICS
@@ -67,11 +28,7 @@ Check out the [monitor service README](https://github.com/influxdb/influxdb/blob
 
 Below are a collection of commands to find useful performance metrics about your InfluxDB instance.
 
-To find the number of unique series in a database run the following command:
-```bash
-$ influx -execute "SHOW SERIES" -database "mydb" | sed '/name: .*/d' | sed '/\-\-/d' | sed '/_key/d' | sed '/^$/d' | wc -l
-```
-To find the number of points per second being written to the instance. Must have the `monotor` service enabled:
+To find the number of points per second being written to the instance. Must have the `monitor` service enabled:
 ```bash
 $ influx -execute 'select derivative(pointReq, 1s) from "write" where time > now() - 5m' -database '_internal' -precision 'rfc3339'
 ```

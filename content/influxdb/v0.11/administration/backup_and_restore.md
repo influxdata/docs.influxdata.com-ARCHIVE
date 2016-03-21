@@ -7,7 +7,7 @@ menu:
     parent: administration
 ---
 
-Starting with v0.11.0, InfluxDB has the ability to snapshot a single
+InfluxDB has the ability to snapshot a single
 data node at a point-in-time and restore it.
 
 ## Backups

@@ -252,7 +252,7 @@ For example:
 INFLUXD_OPTS='[-join hostname_1:port_1[,hostname_2:port_2]]'
 ```
 
-For more detailed instructions on how to set up a cluster, please see the [Clustering](/influxdb/v0.11/guides/clustering/) section.
+For more detailed instructions on how to set up a cluster, please see the [Clustering](/influxdb/v0.11/clustering/cluster_setup/) section.
 
 ## Nightly and Development Versions
 

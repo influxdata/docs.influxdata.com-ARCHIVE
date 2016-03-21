@@ -71,15 +71,11 @@ The query takes the following form:
 DROP DATABASE [IF EXISTS] <database_name>
 ```
 
+> **Note:** The `IF EXISTS` clause does nothing, is deprecated, and will be removed in InfluxDB version 0.12. The `DROP DATABASE` query will return successfully with no error when a new database is created or if the database already exists.
+
 Drop the database NOAA_water_database:
 ```bash
 > DROP DATABASE NOAA_water_database
->
-```
-
-Drop the database NOAA_water_database only if it exists:
-```bash
-> DROP DATABASE IF EXISTS NOAA_water_database
 >
 ```
 

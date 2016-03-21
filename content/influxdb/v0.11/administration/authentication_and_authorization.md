@@ -44,7 +44,7 @@ If additional security or compliance features are desired, InfluxDB should be ru
 
 ## Authentication
 
-InfluxDB's HTTP API and the command line interface (CLI), which connects to the database using the API, include simple, built-in authentication based on user credentials.
+InfluxDB's HTTP API and the [command line interface](/influxdb/v0.11/tools/shell/) (CLI), which connects to the database using the API, include simple, built-in authentication based on user credentials.
 When you enable authentication InfluxDB only executes HTTP requests that are sent with valid credentials.
 
 
@@ -147,7 +147,7 @@ Database management:
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`CREATE RETENTION POLICY`, `ALTER RETENTION POLICY`, and `DROP RETENTION POLICY`  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`CREATE CONTINUOUS QUERY` and `DROP CONTINUOUS QUERY`  
 
-See the [database management](/influxdb/v0.11/query_language/database_management/) and [continuous queries](/influxdb/v0.11/query_language/continuous_queries/) page for a complete discussion of the commands listed above.
+See the [database management](/influxdb/v0.11/query_language/database_management/) and [continuous queries](/influxdb/v0.11/query_language/continuous_queries/) pages for a complete discussion of the commands listed above.
 
 User management:  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin user management:  
@@ -240,7 +240,7 @@ CREATE USER <username> WITH PASSWORD '<password>'
 > CREATE USER todd WITH PASSWORD 'influxdb41yf3'
 >
     ```
-    > **Note:** The password [string](/influxdb/v0.11/query_language/query_syntax/#string-literals-single-quoted) must be wrapped in single quotes.
+    > **Note:** The password [string](/influxdb/v0.11/query_language/spec/#strings) must be wrapped in single quotes.
 Do not include the single quotes when authenticating requests.
 > For passwords that include a single quote or a newline character, escape the single quote or newline character with a backslash both when creating the password and when submitting authentication requests.
 
@@ -321,7 +321,7 @@ SET PASSWORD FOR <username> = '<password>'
 >
     ```
 
-    > **Note:** The password [string](/influxdb/v0.11/query_language/query_syntax/#string-literals-single-quoted) must be wrapped in single quotes.
+    > **Note:** The password [string](/influxdb/v0.11/query_language/spec/#strings) must be wrapped in single quotes.
 Do not include the single quotes when authenticating requests.
 > For passwords that include a single quote or a newline character, escape the single quote or newline character with a backslash both when creating the password and when submitting authentication requests.
 

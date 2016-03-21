@@ -17,6 +17,10 @@ It was originally built for Graphite, modeled after Kibana, and since been updat
 
 <dt> Because of the [changes](/influxdb/v0.11/concepts/010_vs_011/#breaking-api-changes) to the `SHOW SERIES` and `SHOW TAG VALUES` formats, InfluxDB 0.11 will not work with the Query Editor in Grafana 2.6. This issue does not affect existing queries and dashboards. </dt>
 
-## [Telegraf](https://github.com/influxdb/telegraf)
+## [Chronograf Dashboards](/chronograf/v0.11/)
+
+## [Kapacitor Monitoring](/kapacitor/v0.11/)
+
+## [Telegraf](/telegraf/v0.11)
 
 Telegraf is an open source tool for metrics collection (e.g. CollectD) built and maintained by the InfluxDB team.

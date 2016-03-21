@@ -15,7 +15,7 @@ Related entries: [function](/influxdb/v0.11/concepts/glossary/#function), [selec
 ## cluster
 A collection of servers running InfluxDB nodes.
 All nodes in a cluster have the same users, databases, retention policies, and continuous queries.
-See [Clustering](/influxdb/v0.11/guides/clustering/) for how to set up an InfluxDB cluster.
+See [Cluster Setup](/influxdb/v0.11/clustering/cluster_setup/) for how to set up an InfluxDB cluster.
 
 Related entries: [node](/influxdb/v0.11/concepts/glossary/#node), [server](/influxdb/v0.11/concepts/glossary/#server)
 
@@ -147,7 +147,7 @@ Related entries: [field](/influxdb/v0.11/concepts/glossary/#field), [series](/in
 ## metastore
 Contains internal information about the status of the system. That includes user information, database and shard metadata, and which retention policies are enabled.
 
-Related entries: [database](/influxdb/v0.11/concepts/glossary/#database),[retention policy](/influxdb/v0.11/concepts/glossary/#retention-policy-rp),[user](/influxdb/v0.11/concepts/glossary/#user)
+Related entries: [database](/influxdb/v0.11/concepts/glossary/#database), [retention policy](/influxdb/v0.11/concepts/glossary/#retention-policy-rp), [user](/influxdb/v0.11/concepts/glossary/#user)
 
 ## node
 An independent `influxd` process.

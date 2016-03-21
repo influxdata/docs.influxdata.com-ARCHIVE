@@ -193,7 +193,7 @@ If you request a query that has no timestamp to return, such as an aggregation f
 ## INTEGRAL()
 `INTEGRAL()` is not yet functional.
 
-<dt> See GitHub Issue [#1400](https://github.com/influxdb/influxdb/issues/1400) for more information.
+<dt> See GitHub Issue [#5930](https://github.com/influxdata/influxdb/issues/5930) for more information.
 </dt>
 
 ## MEAN()
@@ -932,7 +932,7 @@ In the case of a tie, InfluxDB returns the value with the earlier timestamp.
 ## CEILING()
 `CEILING()` is not yet functional.
 
-<dt> See GitHub Issue [#3691](https://github.com/influxdb/influxdb/issues/3691) for more information.
+<dt> See GitHub Issue [#5930](https://github.com/influxdata/influxdb/issues/5930) for more information.
 </dt>
 
 ## DERIVATIVE()
@@ -1150,19 +1150,19 @@ This returns the rate of change per six minutes for the aggregated data from `20
 ## DIFFERENCE()
 `DIFFERENCE()` is not yet functional.
 
-<dt> See GitHub Issue [#1825](https://github.com/influxdb/influxdb/issues/1825) for more information.
+<dt> See GitHub Issue [#5930](https://github.com/influxdata/influxdb/issues/5930) for more information.
 </dt>
 
 ## FLOOR()
 `FLOOR()` is not yet functional.
 
-<dt> See GitHub Issue [#3691](https://github.com/influxdb/influxdb/issues/3691) for more information.
+<dt> See GitHub Issue [#5930](https://github.com/influxdb/influxdb/issues/5930) for more information.
 </dt>
 
 ## HISTOGRAM()
 `HISTOGRAM()` is not yet functional.
 
-<dt> See GitHub Issue [#3674](https://github.com/influxdb/influxdb/issues/3674) for more information.
+<dt> See GitHub Issue [#5930](https://github.com/influxdb/influxdb/issues/5930) for more information.
 </dt>
 
 ## NON_NEGATIVE_DERIVATIVE()

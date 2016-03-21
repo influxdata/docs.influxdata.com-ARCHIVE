@@ -65,5 +65,10 @@ The admin interface for InfluxDB runs on port `8083` and exposes web UI for the 
 ### Secondary Ports
 
 InfluxDB also supports communication through UDP, Graphite, Collectd, and OpenTSDB.
-By default InfluxDB makes port `2003` available for Graphite.
-No default ports are assigned for UDP, Collectd, or OpenTSDB.
+
+Default ports:
+
+* Graphite: `2003`
+* OpenTSDB: `4242`
+
+No default ports are assigned for UDP and Collectd.

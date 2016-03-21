@@ -7,11 +7,6 @@ menu:
     parent: query_language
 ---
 
-> **Note:** Currently all mathematical operators work solely on `floats`.
-Currently, InfluxDB converts any `int` involved to a `float` as any operation performed on an `int` would return a `null` value.
-This fixes the problem for all integer values up to 2^53.
-Issue [3614](https://github.com/influxdb/influxdb/issues/3614) tracks implementing true integer math, which will support values up to 2^63.
-
 Mathematical operators follow the standard order of operations.
 That is, *parentheses* take precedence to *division* and *multiplication*, which takes precedence to *addition* and *substraction*.
 For example `5 / 2 + 3 * 2 =  (5 / 2) + (3 * 2)` and `5 + 2 * 3 - 2 = 5 + (2 * 3) - 2`.
@@ -113,7 +108,7 @@ will yield a parse error.
 
 ### Inequalities
 
-Using any of `=`,`!=`,`<`,`>`,`<=`,`>=` in the `SELECT` clause yields empty results for all types.
+Using any of `=`,`!=`,`<`,`>`,`<=`,`>=`,`<>` in the `SELECT` clause yields empty results for all types.
 See GitHub issue [3525](https://github.com/influxdb/influxdb/issues/3525).
 
 ### Miscellaneous

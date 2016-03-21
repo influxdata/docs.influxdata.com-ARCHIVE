@@ -45,28 +45,28 @@ Assume that the data live in a database called `my_database` and are subject to 
 
 name: <span class="tooltip" data-tooltip-text="Measurement">census</span>  
 \-------------------------------------  
-time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Field key">butterflies</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Field key">honeybees</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Tag key">location</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Tag key">scientist</span>  
-2015-08-18T00:00:00Z&nbsp;&nbsp;&nbsp;12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;23&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth  
-2015-08-18T00:00:00Z&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;perpetua  
-2015-08-18T00:06:00Z&nbsp;&nbsp;&nbsp;11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;28&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth  
+time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Field key">butterflies</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Field key">honeybees</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Tag key">location</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Tag key">scientist</span>  
+2015-08-18T00:00:00Z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;23&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth  
+2015-08-18T00:00:00Z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;perpetua  
+2015-08-18T00:06:00Z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;28&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth  
 <span class="tooltip" data-tooltip-text="Timestamp">2015-08-18T00:06:00Z</span>&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Field value">3</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Field value">28</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Tag value">1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Tag value">perpetua</span>  
-2015-08-18T05:54:00Z&nbsp;&nbsp;&nbsp;2&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth  
-2015-08-18T06:00:00Z&nbsp;&nbsp;&nbsp;1	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth  
-2015-08-18T06:06:00Z&nbsp;&nbsp;&nbsp;8	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;23&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;perpetua  
-2015-08-18T06:12:00Z&nbsp;&nbsp;&nbsp;7	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;22	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;perpetua  
+2015-08-18T05:54:00Z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth  
+2015-08-18T06:00:00Z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth  
+2015-08-18T06:06:00Z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;23&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;perpetua  
+2015-08-18T06:12:00Z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;22	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;perpetua  
 
 ### Discussion
 Now that you've seen some sample data in InfluxDB this section covers what it all means.
 
 InfluxDB is a time series database so it makes sense to start with what is at the root of everything we do: time.
 In the data above there's a column called `time` - all data in InfluxDB have that column.
-`time` stores timestamps, and the <a name="timestamp"></a>**timestamp** shows the date and time, in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) UTC, associated with particular data.
+`time` stores timestamps, and the <a name="timestamp"></a>*timestamp* shows the date and time, in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) UTC, associated with particular data.
 
 The next two columns, called `butterflies` and `honeybees`, are fields.
 Fields are made up of field keys and field values.
-<a name="field-key"></a>**Field keys** (`butterflies` and `honeybees`) are strings and they store metadata; the field key `butterflies` tells us that the field values `12`-`7` refer to butterflies and the field key `honeybees` tells us that the field values `23`-`22` refer to, well, honeybees.
+<a name="field-key"></a>*Field keys* (`butterflies` and `honeybees`) are strings and they store metadata; the field key `butterflies` tells us that the field values `12`-`7` refer to butterflies and the field key `honeybees` tells us that the field values `23`-`22` refer to, well, honeybees.
 
-<a name="field-value"></a>**Field values** are your data; they can be strings, floats, integers, or booleans, and, because InfluxDB is a time series database, a field value is always associated with a timestamp.
+<a name="field-value"></a>*Field values* are your data; they can be strings, floats, integers, or booleans, and, because InfluxDB is a time series database, a field value is always associated with a timestamp.
 The field values in the sample data are:
 
 ```
@@ -80,7 +80,7 @@ The field values in the sample data are:
 7    22
 ```
 
-In the data above, the collection of field-key and field-value pairs make up a <a name="field-set"></a>**field set**.
+In the data above, the collection of field-key and field-value pairs make up a <a name="field-set"></a>*field set*.
 Here are all eight field sets in the sample data:
 
 * `butterflies = 12   honeybees = 23`
@@ -101,12 +101,12 @@ In general, fields should not contain commonly-queried metadata.
 
 The last two columns in the sample data, called `location` and `scientist`, are tags.
 Tags are made up of tag keys and tag values.
-Both <a name="tag-key"></a>**tag keys** and <a name="tag-value"></a>**tag values** are stored as strings and record metadata.
+Both <a name="tag-key"></a>*tag keys* and <a name="tag-value"></a>*tag values* are stored as strings and record metadata.
 The tag keys in the sample data are `location` and `scientist`.
 The tag key `location` has two tag values: `1` and `2`.
 The tag key `scientist` also has two tag values: `langstroth` and `perpetua`.
 
-In the data above, the <a name="tag-set"></a>**tag set** is the different combinations of all the tag key-value pairs.
+In the data above, the <a name="tag-set"></a>*tag set* is the different combinations of all the tag key-value pairs.
 The four tag sets in the sample data are:
 
 * `location = 1`, `scientist = langstroth`
@@ -131,32 +131,32 @@ To optimize your queries, it may be beneficial to rearrange your [schema](/influ
 
 > name: <span class="tooltip" data-tooltip-text="Measurement">census</span>  
 \-------------------------------------  
-time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Field key">location</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Field key">scientist</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Tag key">butterflies</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Tag key">honeybees</span>  
-2015-08-18T00:00:00Z&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth&nbsp;&nbsp;&nbsp;&nbsp;12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;23  
-2015-08-18T00:00:00Z&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;perpetua&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30  
-2015-08-18T00:06:00Z&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth&nbsp;&nbsp;&nbsp;&nbsp;11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;28  
-<span class="tooltip" data-tooltip-text="Timestamp">2015-08-18T00:06:00Z</span>&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Field value">1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Field value">perpetua</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Tag value">3</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Tag value">28</span>  
-2015-08-18T05:54:00Z&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11  
-2015-08-18T06:00:00Z&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10  
-2015-08-18T06:06:00Z&nbsp;&nbsp;&nbsp;2	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;perpetua&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;23  
-2015-08-18T06:12:00Z&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;perpetua&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;22  
+time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Field key">location</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Field key">scientist</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Tag key">butterflies</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Tag key">honeybees</span>  
+2015-08-18T00:00:00Z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth&nbsp;&nbsp;&nbsp;&nbsp;12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;23  
+2015-08-18T00:00:00Z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;perpetua&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30  
+2015-08-18T00:06:00Z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth&nbsp;&nbsp;&nbsp;&nbsp;11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;28  
+<span class="tooltip" data-tooltip-text="Timestamp">2015-08-18T00:06:00Z</span>&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Field value">1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Field value">perpetua</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Tag value">3</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip" data-tooltip-text="Tag value">28</span>  
+2015-08-18T05:54:00Z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11  
+2015-08-18T06:00:00Z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;langstroth&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10  
+2015-08-18T06:06:00Z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;perpetua&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;23  
+2015-08-18T06:12:00Z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;perpetua&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;22  
 
 > Now that `butterflies` and `honeybees` are tags, InfluxDB won't have to scan every one of their values when it performs the queries above - this means that your queries are even faster.
 
-The <a name=measurement></a>**measurement** acts as a container for tags, fields, and the `time` column, and the measurement name is the description of the data that are stored in the associated fields.
+The <a name=measurement></a>*measurement* acts as a container for tags, fields, and the `time` column, and the measurement name is the description of the data that are stored in the associated fields.
 Measurement names are strings, and, for any SQL users out there, a measurement is conceptually similar to a table.
 The only measurement in the sample data is `census`.
 The name `census` tells us that the field values record the number of `butterflies` and `honeybees` - not their size, direction, or some sort of happiness index.
 
 A single measurement can belong to different retention policies.
-A <a name="retention-policy"></a>**retention policy** describes how long InfluxDB keeps data (`DURATION`) and how many copies of those data are stored in the cluster (`REPLICATION`).
+A <a name="retention-policy"></a>*retention policy* describes how long InfluxDB keeps data (`DURATION`) and how many copies of those data are stored in the cluster (`REPLICATION`).
 If you're interested in reading more about retention policies, check out [Database Management](/influxdb/v0.11/query_language/database_management/#retention-policy-management).
 
 In the sample data, everything in the `census` measurement belongs to the `default` retention policy.
 InfluxDB automatically creates that retention policy; it has an infinite duration and a replication factor set to the number of nodes in the cluster.
 
 Now that you're familiar with measurements, tag sets, and retention policies it's time to discuss series.
-In InfluxDB, a <a name=series></a> **series** is the collection of data that share a retention policy, measurement, and tag set.
+In InfluxDB, a <a name=series></a>*series* is the collection of data that share a retention policy, measurement, and tag set.
 The data above consist of four series:
 
 | Arbitrary series number  |  Retention policy | Measurement  |  Tag set |
@@ -168,7 +168,7 @@ The data above consist of four series:
 
 Understanding the concept of a series is essential when designing your [schema](/influxdb/v0.11/concepts/glossary/#schema) and when working with your data in InfluxDB.
 
-Finally, a <a name="point"></a>**point** is the field set in the same series with the same timestamp.
+Finally, a <a name="point"></a>*point* is the field set in the same series with the same timestamp.
 For example, here's a single point:
 ```
 name: census
@@ -181,8 +181,8 @@ The series in the example is defined by the retention policy (`default`), the me
 The timestamp for the point is `2015-08-18T00:00:00Z`.
 
 All of the stuff we've just covered is stored in a database - the sample data are in the database `my_database`.
-An InfluxDB <a name=database></a> **database** is similar to traditional relational databases and serves as a logical container for users, retention policies, continuous queries, and, of course, your time series data.
-See [users](/influxdb/v0.11/administration/authentication_and_authorization/) and [continuous queries](/influxdb/v0.11/query_language/continuous_queries/) for more on those topics.
+An InfluxDB <a name=database></a>*database* is similar to traditional relational databases and serves as a logical container for users, retention policies, continuous queries, and, of course, your time series data.
+See [Authentication and Authorization](/influxdb/v0.11/administration/authentication_and_authorization/) and [Continuous Queries](/influxdb/v0.11/query_language/continuous_queries/) for more on those topics.
 
 Databases can have several users, continuous queries, retention policies, and measurements.
 InfluxDB is a schemaless database which means it's easy to add new measurements, tags, and fields at any time.

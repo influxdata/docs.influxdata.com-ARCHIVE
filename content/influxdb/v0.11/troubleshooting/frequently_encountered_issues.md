@@ -12,7 +12,6 @@ Where applicable, it links to outstanding issues on GitHub.
 
 **Querying data**  
 
-* [Getting unexpected results with `GROUP BY time()`](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#getting-unexpected-results-with-group-by-time)
 * [Understanding the time intervals returned from `GROUP BY time()` queries](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#understanding-the-time-intervals-returned-from-group-by-time-queries)    
 * [Querying after `now()`](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#querying-after-now)  
 * [Querying outside the min/max time range](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#querying-outside-the-min-max-time-range)  
@@ -43,23 +42,6 @@ Where applicable, it links to outstanding issues on GitHub.
 * [Data aren't dropped after altering a retention policy](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#data-aren-t-dropped-after-altering-a-retention-policy)
 
 # Querying data
-## Getting unexpected results with `GROUP BY time()`
-A query that includes a `GROUP BY time()` clause can yield unexpected results:
-
-* InfluxDB returns a single aggregated value with the timestamp `'1970-01-01T00:00:00Z'` even though the data include more than one instance of the time interval specified in `time()`
-* InfluxDB returns `ERR: too many points in the group by interval.
-maybe you forgot to specify a where time clause?` even though the query includes a `WHERE` time clause.
-
-Those returns typically proceed from the combination of the following two features of InfluxDB:
-
-* By default, InfluxDB uses epoch 0 (`1970-01-01T00:00:00Z`) as the lower bound and `now()` as the upper bound in queries.
-* A query that includes `GROUP BY time()` must cover fewer than 100,000 instances of the supplied time interval
-
-If your `WHERE` time clause is simply `WHERE time < now()` InfluxDB queries the data back to epoch 0 - that behavior often causes the query to breach the 100,000 instances rule and InfluxDB returns a confusing error or result.
-Avoid perplexing `GROUP BY time()` returns by specifying a valid time interval in the `WHERE` clause.
-
-<dt> [GitHub Issue #2702](https://github.com/influxdb/influxdb/issues/2702) and [GitHub Issue #4004](https://github.com/influxdb/influxdb/issues/4004)
-</dt>
 
 ## Understanding the time intervals returned from `GROUP BY time()` queries
 With some `GROUP BY time()` queries, the returned time intervals may not reflect the time range specified in the `WHERE` clause.
@@ -75,7 +57,7 @@ Results:
 <pre><code class="language-sh">name: h2o_feet
 --------------
 time			         count
-<u><b>2015-08-19T00:00:00Z</b></u>	      240
+<u><b>2015-08-19T00:00:00Z</b></u>	   240
 2015-08-21T00:00:00Z	 480
 2015-08-23T00:00:00Z	 241
 </code></pre>

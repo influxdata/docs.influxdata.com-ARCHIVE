@@ -32,7 +32,7 @@ curl -i -XPOST 'http://localhost:8086/write?db=mydb' --data-binary 'cpu_load_sho
 When writing points, you must specify an existing database in the `db` query parameter.
 See the [HTTP section](/influxdb/v0.11/write_protocols/write_syntax/#http) on the Write Syntax page for a complete list of the available query parameters.
 
-The body of the POST - we call this the [Line Protocol](/influxdb/v0.11/write_protocols/line/) - contains the time-series data that you wish to store.
+The body of the POST - we call this the [Line Protocol](/influxdb/v0.11/concepts/glossary/#line-protocol) - contains the time-series data that you wish to store.
 They consist of a measurement, tags, fields, and a timestamp.
 InfluxDB requires a measurement name.
 Strictly speaking, tags are optional but most series include tags to differentiate data sources and to make querying both easy and efficient.

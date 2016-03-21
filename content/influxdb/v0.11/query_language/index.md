@@ -17,11 +17,7 @@ Functions and their usage in InfluxQL.
 
 Proper syntax for continuous queries.
 
-## [Specification](/influxdb/v0.11/query_language/spec/)
-
-The full language specification for InfluxQL.
-
-## [Query Syntax Reference](/influxdb/v0.11/query_language/query_syntax/)
+## [InfluxDB Query Language Reference](/influxdb/v0.11/query_language/spec/)
 
 Syntax specification for InfluxQL.
 

@@ -7,7 +7,7 @@ menu:
 ---
 
 With InfluxDB [installed](/influxdb/v0.11/introduction/installation), you're ready to start doing some awesome things.
-In this section we'll use the `influx` command line interface (CLI), which is included in all
+In this section we'll use the `influx` [command line interface](/influxdb/v0.11/tools/shell/) (CLI), which is included in all
 InfluxDB packages and is a lightweight and simple way to interact with the database.
 The CLI communicates with InfluxDB directly by making requests to the InfluxDB HTTP API over port `8086` by default.
 
@@ -139,7 +139,7 @@ Now we will query for the data we just wrote:
 name: cpu
 ---------
 time		    	                     host     	region   value
-2015-10-21T19:28:07.580664347Z  	serverA	  us_west	0.64
+2015-10-21T19:28:07.580664347Z  serverA	  us_west	 0.64
 
 >
 ```

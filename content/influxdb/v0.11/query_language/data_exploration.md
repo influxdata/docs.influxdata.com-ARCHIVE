@@ -106,7 +106,7 @@ Identifiers are database names, retention policy names, user names, measurement 
  ```sql
  > SELECT * FROM NOAA_water_database."default".h2o_feet
  ```
-* Fully qualify a measurement if you wish to query data from a different database or from a retention policy other than the default [retention policy](/influxdb/v0.11/concepts/glossary/#retention-policy).
+* Fully qualify a measurement if you wish to query data from a different database or from a retention policy other than the default [retention policy](/influxdb/v0.11/concepts/glossary/#retention-policy-rp).
 A fully qualified measurement takes the following form:  
 ```
 "<database>"."<retention policy>"."<measurement>"
@@ -243,17 +243,19 @@ Calculate the [`MEAN()`](/influxdb/v0.11/query_language/functions/#mean) `water_
 ```
 CLI response:
 ```bash
+> SELECT MEAN(water_level) FROM h2o_feet GROUP BY location
 name: h2o_feet
 tags: location=coyote_creek
-time			mean
-----			----
-1970-01-01T00:00:00Z	5.520869225643104
+time			               mean
+----			               ----
+1970-01-01T00:00:00Z	 5.359342451341401
+
 
 name: h2o_feet
 tags: location=santa_monica
-time			mean
-----			----
-1970-01-01T00:00:00Z	3.5181099235481805
+time			               mean
+----			               ----
+1970-01-01T00:00:00Z	 3.530863470081006
 ```
 >**Note:** In InfluxDB, [epoch 0](https://en.wikipedia.org/wiki/Unix_time) (`1970-01-01T00:00:00Z`) is often used as a null timestamp equivalent.
 If you request a query that has no timestamp to return, such as an aggregation function with an unbounded time range, InfluxDB returns epoch 0 as the timestamp.
@@ -352,7 +354,7 @@ Calculate the average `water_level` for the different tag values of `location` i
 Other things to note about `GROUP BY time()`:
 
 * InfluxQL requires a `WHERE` clause if you're using `GROUP BY` with `time()`.
-Note that unless you specify a different upper and lower bound for the time range, `GROUP BY` uses `epoch 0` as the lower bound and `now()` as the upper bound for the query - this can lead to [unexpected results](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#getting-unexpected-results-with-group-by-time).
+Note that unless you specify a different upper and lower bound for the time range, `GROUP BY` uses `epoch 0` as the lower bound and `now()` as the upper bound for the query.
 * Valid units for `time()` are:  
 <br>
     `u` microseconds  

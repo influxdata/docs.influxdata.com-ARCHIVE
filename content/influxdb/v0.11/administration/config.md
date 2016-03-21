@@ -469,9 +469,9 @@ on Github for more information.
 
 Set to `true` to enable collectd writes.
 
-### bind-address = ":25826"
+### bind-address = ""
 
-The default port.
+The port.
 
 ### database = ""
 

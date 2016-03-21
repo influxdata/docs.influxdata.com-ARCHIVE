@@ -22,7 +22,7 @@ In short, InfluxDB is made to store a large volume of time-series data and perfo
 In InfluxDB, a timestamp identifies a single point in any given data series.
 This is like an SQL database table where the primary key is pre-set by the system and is always time.
 
-InfluxDB also recognizes that your schema preferences may change over time.
+InfluxDB also recognizes that your [schema](/influxdb/v0.11/concepts/glossary/#schema) preferences may change over time.
 In InfluxDB you don't have to define schemas up front.
 Data points can have one of the fields on a measurement, all of the fields on a measurement, or any number in-between.
 You can add new fields to a measurement simply by writing a point for that new field.
@@ -61,8 +61,8 @@ Those same data look like this in InfluxDB:
 ```sql
 name: foodships
 tags: park_id=1, planet=Earth
-time			#_foodships
-----			------------
+time			              #_foodships
+----			              ------------
 2015-04-16T12:00:00Z	0
 2015-04-16T12:00:01Z	3
 2015-04-16T12:00:02Z	15
@@ -70,8 +70,8 @@ time			#_foodships
 
 name: foodships
 tags: park_id=2, planet=Saturn
-time			#_foodships
-----			------------
+time			              #_foodships
+----			              ------------
 2015-04-16T12:00:00Z	5
 2015-04-16T12:00:01Z	9
 2015-04-16T12:00:02Z	10
@@ -79,8 +79,8 @@ time			#_foodships
 
 name: foodships
 tags: park_id=3, planet=Jupiter
-time			#_foodships
-----			------------
+time			              #_foodships
+----			              ------------
 2015-04-16T12:00:00Z	20
 2015-04-16T12:00:01Z	21
 2015-04-16T12:00:02Z	21
@@ -88,8 +88,8 @@ time			#_foodships
 
 name: foodships
 tags: park_id=4, planet=Saturn
-time			#_foodships
-----			------------
+time			              #_foodships
+----			              ------------
 2015-04-16T12:00:00Z	5
 2015-04-16T12:00:01Z	5
 2015-04-16T12:00:02Z	6
@@ -104,8 +104,8 @@ Referencing the example above, in general:
 * InfluxDB points (for example, `2015-04-16T12:00:00Z	5`) are similar to SQL rows.
 
 Building on this comparison of database terminology,
-InfluxDB's [continuous queries](/influxdb/v0.11/query_language/continuous_queries/)
-and [replication policies](/influxdb/v0.11/administration/administration/) are
+InfluxDB's [continuous queries](/influxdb/v0.11/concepts/glossary/#continuous-query-cq)
+and [retention policies](/influxdb/v0.11/concepts/glossary/#retention-policy-rp) are
 similar to stored procedures in an SQL database.
 They're specified once and then performed regularly and automatically.
 
