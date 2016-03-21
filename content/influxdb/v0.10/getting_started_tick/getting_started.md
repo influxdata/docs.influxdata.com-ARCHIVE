@@ -1,3 +1,12 @@
+---
+title: Getting Started with the TICK Stack
+menu:
+  influxdb_010:
+    weight: 30
+    parent: introduction
+---
+
+
 ## TICK
 *(Prettier formatting)*
 
