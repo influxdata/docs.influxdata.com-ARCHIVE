@@ -1,6 +1,5 @@
 ---
 title: Writing Data
-
 menu:
   influxdb_010:
     weight: 0
