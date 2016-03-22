@@ -154,15 +154,16 @@ An independent `influxd` process.
 
 Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [server](/influxdb/v0.10/concepts/glossary/#server)
 
-## point   
-The part of InfluxDB's data structure that consists of a single collection of fields in a series.
-Each point is uniquely identified by its series and timestamp.
+## point
+The part of InfluxDB's data structure that consists of a single collection of fields and tags in a series.
+Each point is uniquely identified by its series, [tag
+set](/influxdb/v0.10/concepts/glossary/#tag-set), and timestamp.
 
-You cannot store more than one point with the same timestamp in the same series.
+You cannot store more than one point with the same timestamp and tag set in the same series.
 Instead, when you write a new point to the same series with the same timestamp as an existing point in that series, the field set becomes the union of the old field set and the new field set, where any ties go to the new field set.
 For an example, see [Frequently Encountered Issues](/influxdb/v0.10/troubleshooting/frequently_encountered_issues/#writing-duplicate-points).
 
-Related entries: [field set](/influxdb/v0.10/concepts/glossary/#field-set), [series](/influxdb/v0.10/concepts/glossary/#series), [timestamp](/influxdb/v0.10/concepts/glossary/#timestamp)
+Related entries: [field set](/influxdb/v0.10/concepts/glossary/#field-set), [series](/influxdb/v0.10/concepts/glossary/#series), [tag set](/influxdb/v0.10/concepts/glossary/#tag-set), [timestamp](/influxdb/v0.10/concepts/glossary/#timestamp)
 
 ## query
 An operation that retrieves data from InfluxDB.
