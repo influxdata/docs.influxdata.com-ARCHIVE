@@ -31,6 +31,13 @@ InfluxDB 0.11 uses only the [Time Structured Merge tree](/influxdb/v0.11/concept
 You must convert any remaining `b1` and `bz1` shards to `TSM` before working with InfluxDB 0.11.
 Converting existing `b1` and `bz1` shards to `TSM` format also results in a significant permanent reduction in disk usage and significantly improved write throughput to those shards.
 
+> **Identifying non-`TSM` shards**
+>
+In your data directory:
+>
+* Non-`TSM` shards are files of the form: `data/<database>/<retention_policy>/<shard_id>`
+* `TSM` shards are files of the form: `data/<database>/<retention_policy>/<shard_id>/<file>.tsm`
+
 `influx_tsm` is a tool for converting existing `b1` and `bz1` shards to `TSM` format.
 The following sections outline two ways to use the `influx_tsm` conversion tool.
 The first is the simpler [offline conversion](/influxdb/v0.11/administration/upgrading/#offline-conversion) process; the InfluxDB system must be stopped during the conversion.
@@ -68,7 +75,7 @@ influx_tsm -backup <path_to_backup_directory>  <path_to_data_directory>
     For example:
 
     ```
-influx_tsm -backup /tmp/influxdb_backup /var/opt/influxdb/data
+influx_tsm -backup /tmp/influxdb_backup /var/lib/influxdb/data
     ```
 
     When you run `influx_tsm`, the tool will first list the shards to be converted and will ask for confirmation.
@@ -78,7 +85,7 @@ influx_tsm -backup /tmp/influxdb_backup /var/opt/influxdb/data
     This minimizes load on the host system performing the conversion, but also takes the most time.
     If you wish to minimize the time conversion takes, enable parallel mode with `-parallel`:
     ```
-    influx_tsm -backup /tmp/influxdb_backup -parallel /var/opt/influxdb/data
+    influx_tsm -backup /tmp/influxdb_backup -parallel /var/lib/influxdb/data
     ```
     Conversion will then perform as many operations as possible in parallel, but the process may place significant load on the host system (CPU, disk, and RAM, usage will all increase).  
 
@@ -129,15 +136,15 @@ If, when checking your data after a conversion, you notice things missing or som
 
 1. Shut down your node (this is very important).
 2. Remove the database's directory from the influxdb data directory.
-Where `/var/opt/influxdb/data` is your data directory and `stats` is the name of the database you'd like to remove:
+Where `/var/lib/influxdb/data` is your data directory and `stats` is the name of the database you'd like to remove:
 
     ```
-    rm -r /var/opt/influxdb/data/stats
+    rm -r /var/lib/influxdb/data/stats
     ```
-3. Copy the database's directory from the backup directory you created (`/tmp/influxdb_backup/stats`) into the data directory (`/var/opt/influxdb/data/`):
+3. Copy the database's directory from the backup directory you created (`/tmp/influxdb_backup/stats`) into the data directory (`/var/lib/influxdb/data/`):
 
     ```
-     cp -r /tmp/influxdb_backup/stats /var/opt/influxdb/data/
+     cp -r /tmp/influxdb_backup/stats /var/lib/influxdb/data/
     ```
 4. Restart InfluxDB.
 
