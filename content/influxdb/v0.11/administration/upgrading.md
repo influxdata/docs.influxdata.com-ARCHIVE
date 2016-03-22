@@ -7,10 +7,20 @@ menu:
     parent: administration
 ---
 
-If you're thinking about upgrading from InfluxDB 0.10 to InfluxDB 0.11, there are several steps you should take to ease the transition:
+To upgrade to InfluxDB 0.11, you must be on version 0.10 and all shards must be in `TSM` format (the default storage engine starting with InfluxDB 0.10).
+See the [0.10 documentation](/influxdb/v0.10/administration/upgrading/#convert-b1-and-bz1-shards-to-tsm1) for how to convert `b1` and `bz1` shards to `TSM`.
+If any `b1` or `bz1` shards are present, InfluxDB 0.11 will not start.
+
+> **Identifying non-`TSM` shards**
+>
+In your [data directory](/influxdb/v0.11/administration/config/#dir-var-lib-influxdb-data):
+>
+* Non-`TSM` shards are files of the form: `data/<database>/<retention_policy>/<shard_id>`
+* `TSM` shards are files of the form: `data/<database>/<retention_policy>/<shard_id>/<file>.tsm`
+
+Additional considerations when upgrading to 0.11:
 
 * [Generate a new configuration file](/influxdb/v0.11/administration/upgrading/#generate-a-new-configuration-file)
-* [Convert any remaining `b1` and `bz1` shards to `TSM`](/influxdb/v0.11/administration/upgrading/#convert-any-remaining-b1-and-bz1-shards-to-tsm)
 * [Review queries affected by the breaking API changes](/influxdb/v0.11/administration/upgrading/#review-queries-affected-by-the-breaking-api-changes)
 
 ## Generate a new configuration file
@@ -25,128 +35,6 @@ influxd config > /etc/influxdb/influxdb_011.conf.generated
 ```
 
 Compare your InfluxDB 0.10 configuration file against the newly generated [InfluxDB 0.11 file](/influxdb/v0.11/administration/config/) and manually update any defaults with your localized settings.
-
-## Convert any remaining `b1` and `bz1` shards to `TSM`
-InfluxDB 0.11 uses only the [Time Structured Merge tree](/influxdb/v0.11/concepts/storage_engine/#the-new-influxdb-storage-engine-from-lsm-tree-to-b-tree-and-back-again-to-create-the-time-structured-merge-tree) (`TSM`) storage engine and cannot read `b1` and `bz1` shards from InfluxDB 0.9.
-You must convert any remaining `b1` and `bz1` shards to `TSM` before working with InfluxDB 0.11.
-Converting existing `b1` and `bz1` shards to `TSM` format also results in a significant permanent reduction in disk usage and significantly improved write throughput to those shards.
-
-> **Identifying non-`TSM` shards**
->
-In your data directory:
->
-* Non-`TSM` shards are files of the form: `data/<database>/<retention_policy>/<shard_id>`
-* `TSM` shards are files of the form: `data/<database>/<retention_policy>/<shard_id>/<file>.tsm`
-
-`influx_tsm` is a tool for converting existing `b1` and `bz1` shards to `TSM` format.
-The following sections outline two ways to use the `influx_tsm` conversion tool.
-The first is the simpler [offline conversion](/influxdb/v0.11/administration/upgrading/#offline-conversion) process; the InfluxDB system must be stopped during the conversion.
-The second is the less straightforward, [online conversion](/influxdb/v0.11/administration/upgrading/#online-conversion) process.
-
-Before you get started, there are several things to note:
-
-* The tool automatically ignores `TSM` shards.
-* Conversion can be controlled on per-database basis and can be run idempotently on any database.
-* By default, the tool backs up databases so that you can undo a conversion (we cover how to undo a conversion [below](/influxdb/v0.11/administration/upgrading/#rollback-a-conversion)).
-Before you start, ensure that the host system has at least as much free disk space as the disk space consumed by the data directory of your InfluxDB system.
-
-### Offline conversion
-
-1. Stop all write traffic to your InfluxDB 0.10 system.
-2. Stop the InfluxDB service.
-3. Start the InfluxDB service.
-4. Ensure that all data have persisted to disk by waiting until the WAL is fully flushed.
-This is complete when the system responds to queries following the restart.
-5. Stop the InfluxDB service. Do not restart the service until you've completed the conversion.
-6. [Upgrade](https://influxdata.com/downloads/) your system to InfluxDB 0.11.
-7. Create a directory for the backup. Here, we call it `influxdb_backup`:
-
-    ```
-mkdir /tmp/influxdb_backup
-    ```
-8. Run the conversion tool.
-
-    To convert all databases, run:
-
-    ```
-influx_tsm -backup <path_to_backup_directory>  <path_to_data_directory>
-    ```
-
-    For example:
-
-    ```
-influx_tsm -backup /tmp/influxdb_backup /var/lib/influxdb/data
-    ```
-
-    When you run `influx_tsm`, the tool will first list the shards to be converted and will ask for confirmation.
-    You can abort the conversion process at this step if you just wish to see what would be converted, or if the list of shards does not look correct.
-
-    > **Note:** By default, the conversion operation performs each operation in a serial manner.
-    This minimizes load on the host system performing the conversion, but also takes the most time.
-    If you wish to minimize the time conversion takes, enable parallel mode with `-parallel`:
-    ```
-    influx_tsm -backup /tmp/influxdb_backup -parallel /var/lib/influxdb/data
-    ```
-    Conversion will then perform as many operations as possible in parallel, but the process may place significant load on the host system (CPU, disk, and RAM, usage will all increase).  
-
-    > Enter `influx_tsm -h` for a complete list of the tool's options.
-9. If you ran the conversion tool as a different user from the user who runs InfluxDB, check and, if necessary, set the correct read and write permissions on the new `TSM` directories.
-10. Restart InfluxDB and ensure that the data look correct.
-11. If everything looks correct, you may then wish to remove or archive the backed-up shards in your backup directory (`/tmp/influxdb_backup`):
-    ```
-rm -r /tmp/influxdb_backup
-    ```
-12. Restart write traffic and you're done!
-
-### Online conversion
-
-*Identify non-`TSM` shards*
-
-Non-`TSM` shards are files of the form: `data/<database>/<retention_policy>/<shard_id>`.
-
-`TSM` shards are files of the form: `data/<database>/<retention_policy>/<shard_id>/<file>.tsm`.
-
-*Determine which `bz`/`bz1` shards are cold for writes*
-
-Run the `SHOW SHARDS` query to see the start and end dates for shards.
-If the date range for a shard does not span the current time then the shard is said to be cold for writes.
-This means that no new points are expected to be added to the shard.
-The shard whose date range spans now is said to be hot for writes.
-You can only safely convert cold shards without stopping the InfluxDB process.
-
-*Convert cold shards*
-
-1. Copy each of the cold shards you'd like to convert to a new directory with the structure `/tmp/data/<database>/<retention_policy>/<shard_id>`.
-2. Run the `influx_tsm` tool on the copied files:
-```
-influx_tsm -parallel /tmp/data/
-```
-3. Remove the existing cold `b1`/`bz1` shards from the production data directory.
-4. Move the new `TSM` shards into the original directory, overwriting the existing `b1`/`bz1` shards of the same name. Do this simultaneously with step 3 to avoid any query errors.
-5. Wait an hour, a day, or a week (depending on your retention period) for any hot `b1`/`bz1` shards to become cold and repeat steps 1 through 4 on the newly cold shards.
-6. Once all shards are `TSM` shards, [upgrade](https://influxdata.com/downloads/) your system to InfluxDB 0.11.
-
-> **Note:** Any points written to the cold shards after making a copy will be lost when the `TSM` shard overwrites the existing cold shard.
-Nothing in InfluxDB will prevent writes to cold shards, they are merely unexpected, not impossible.
-It is your responsibility to prevent writes to cold shards to prevent data loss.
-
-### Rollback a conversion
-After a successful backup, you have a duplicate of your database(s) in the backup directory that you provided on the command line.
-If, when checking your data after a conversion, you notice things missing or something just isn't right, you can rollback the conversion.
-
-1. Shut down your node (this is very important).
-2. Remove the database's directory from the influxdb data directory.
-Where `/var/lib/influxdb/data` is your data directory and `stats` is the name of the database you'd like to remove:
-
-    ```
-    rm -r /var/lib/influxdb/data/stats
-    ```
-3. Copy the database's directory from the backup directory you created (`/tmp/influxdb_backup/stats`) into the data directory (`/var/lib/influxdb/data/`):
-
-    ```
-     cp -r /tmp/influxdb_backup/stats /var/lib/influxdb/data/
-    ```
-4. Restart InfluxDB.
 
 ## Review queries affected by the breaking API changes
 We recommend reviewing any queries affected by the [breaking API changes](/influxdb/v0.11/concepts/010_vs_011/#breaking-api-changes) released with InfluxDB 0.11.

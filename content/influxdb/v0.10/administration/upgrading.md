@@ -68,7 +68,7 @@ influx_tsm -backup <path_to_backup_directory>  <path_to_data_directory>
     For example:
 
     ```
-influx_tsm -backup /tmp/influxdb_backup /var/opt/influxdb/data
+influx_tsm -backup /tmp/influxdb_backup /var/lib/influxdb/data
     ```
 
     When you run `influx_tsm`, the tool will first list the shards to be converted and will ask for confirmation.
@@ -78,7 +78,7 @@ influx_tsm -backup /tmp/influxdb_backup /var/opt/influxdb/data
     This minimizes load on the host system performing the conversion, but also takes the most time.
     If you wish to minimize the time conversion takes, enable parallel mode with `-parallel`:
     ```
-    influx_tsm -backup /tmp/influxdb_backup -parallel /var/opt/influxdb/data
+    influx_tsm -backup /tmp/influxdb_backup -parallel /var/lib/influxdb/data
     ```
     Conversion will then perform as many operations as possible in parallel, but the process may place significant load on the host system (CPU, disk, and RAM, usage will all increase).  
 
@@ -97,15 +97,15 @@ If, when checking your data after a conversion, you notice things missing or som
 
 1. Shut down your node (this is very important).
 2. Remove the database's directory from the influxdb data directory.
-Where `/var/opt/influxdb/data` is your data directory and `stats` is the name of the database you'd like to remove:
+Where `/var/lib/influxdb/data` is your data directory and `stats` is the name of the database you'd like to remove:
 
     ```
-    rm -r /var/opt/influxdb/data/stats
+    rm -r /var/lib/influxdb/data/stats
     ```
-3. Copy the database's directory from the backup directory you created (`/tmp/influxdb_backup/stats`) into the data directory (`/var/opt/influxdb/data/`):
+3. Copy the database's directory from the backup directory you created (`/tmp/influxdb_backup/stats`) into the data directory (`/var/lib/influxdb/data/`):
 
     ```
-     cp -r /tmp/influxdb_backup/stats /var/opt/influxdb/data/
+     cp -r /tmp/influxdb_backup/stats /var/lib/influxdb/data/
     ```
 4. Restart InfluxDB.
 
