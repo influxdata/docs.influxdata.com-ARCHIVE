@@ -10,7 +10,7 @@ gulp.task('less', function() {
 	gulp.src('styles/docs-default.less')
 		.pipe(sourcemaps.init())
 		.pipe(less())
-		// .pipe(cleanCSS())
+		.pipe(cleanCSS())
 		.pipe(autoprefix('last 2 version'))
 		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('static/css/'))
