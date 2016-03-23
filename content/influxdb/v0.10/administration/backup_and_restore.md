@@ -10,6 +10,12 @@ menu:
 Starting with v0.10.0, InfluxDB has the ability to snapshot a single
 data node at a point-in-time and restore it.
 
+
+> **Note:** To use InfluxDB's backup and restore functionality all shards must
+be in [Time Structure Merge tree](/influxdb/v0.10/concepts/storage_engine/)
+(`TSM`) format. See [Upgrading from previous versions](/influxdb/v0.10/administration/upgrading/#convert-b1-and-bz1-shards-to-tsm1)
+for how to convert old `b1` and `bz1` shards to `TSM`.
+
 ## Backups
 
 ### Backing up the Metastore
