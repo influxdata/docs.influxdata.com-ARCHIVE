@@ -237,6 +237,7 @@ statement           = alter_retention_policy_stmt |
                       show_measurements_stmt |
                       show_retention_policies |
                       show_series_stmt |
+                      show_servers_stmt |
                       show_shard_groups_stmt |
                       show_shards_stmt |
                       show_subscriptions_stmt|
@@ -474,7 +475,7 @@ DROP META SERVER 3
 DROP DATA SERVER 3
 ```
 
-> **Note:** Identify the server_id with the `show_servers_stmt`.
+> **Note:** Identify the server_id with the [`show_servers_stmt`](/influxdb/v0.11/query_language/spec/#show-servers).
 
 ### DROP SHARD
 
@@ -626,6 +627,40 @@ show_series_stmt = "SHOW SERIES" [ from_clause ] [ where_clause ] [ limit_clause
 ```sql
 
 ```
+
+### SHOW SERVERS
+
+```
+show_servers_stmt  = "SHOW SERVERS" .
+```
+
+#### Example:
+
+```sql
+--- show all servers in the cluster
+> SHOW SERVERS
+
+name: data_nodes
+----------------
+id	 http_addr		  tcp_addr
+1	  <IP1>:8086	  <IP1>:8088
+2	  <IP2>:8086	  <IP2>:8088
+3	  <IP3>:8086	  <IP3>:8088
+
+
+name: meta_nodes
+----------------
+id	 http_addr		  tcp_addr
+1	  <IP1>:8091	  <IP1>:8088
+2	  <IP2>:8091	  <IP2>:8088
+3	  <IP3>:8091	  <IP3>:8088
+```
+
+> **Notes:**
+>
+* `SHOW SERVERS` groups results into `data_nodes` and `meta_nodes`.
+The term `meta_nodes` is outdated and refers to a node that runs the consensus service.
+* [Hybrid nodes](/influxdb/v0.11/concepts/glossary/#hybrid-node) appear as both `data_nodes` and `meta_nodes` in the `SHOW SERVERS` query results.
 
 ### SHOW SHARD GROUPS
 
