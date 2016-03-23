@@ -119,6 +119,7 @@ REPLICATION   RESAMPLE      RETENTION     REVOKE        SELECT        SERIES
 SERVER        SERVERS       SET           SHARD         SHARDS        SLIMIT
 SOFFSET       STATS         SUBSCRIPTION  SUBSCRIPTIONS TAG           TO
 USER          USERS         VALUES        WHERE         WITH          WRITE
+META          DATA
 ```
 
 ## Literals
@@ -223,6 +224,7 @@ statement           = alter_retention_policy_stmt |
                       drop_measurement_stmt |
                       drop_retention_policy_stmt |
                       drop_series_stmt |
+                      drop_server_stmt |
                       drop_subscription_stmt |
                       drop_user_stmt |
                       grant_stmt |
@@ -445,6 +447,32 @@ drop_series_stmt = "DROP SERIES" ( from_clause | where_clause | from_clause wher
 ```sql
 
 ```
+
+### DROP SERVER
+
+```
+drop_server_stmt = "DROP ( META | DATA ) SERVER" ( server_id ) .
+```
+
+#### Examples:
+
+-- drop a [consensus node](/influxdb/v0.10/concepts/glossary/#consensus-node) from a cluster with the id `1`
+```
+DROP META SERVER 1
+```
+
+-- drop a [data node](/influxdb/v0.10/concepts/glossary/#data-node) from a cluster with the id `2`
+```
+DROP DATA SERVER 2
+```
+
+-- drop a [hybrid node](/influxdb/v0.10/concepts/glossary/#hybrid-node) from a cluster with the meta node id `3` and data node id `3`
+```
+DROP META SERVER 3
+DROP DATA SERVER 3
+```
+
+> **Note:** Identify the server_id with the `show_servers_stmt`.
 
 ### DROP SUBSCRIPTION
 
@@ -803,6 +831,8 @@ retention_policy_duration    = "DURATION" duration_lit .
 retention_policy_replication = "REPLICATION" int_lit
 
 series_id        = int_lit .
+
+server_id        = int_lit .
 
 sort_field       = field_key [ ASC | DESC ] .
 
