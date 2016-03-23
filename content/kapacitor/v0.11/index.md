@@ -1,5 +1,5 @@
 ---
-title: Kapacitor Version 0.10 Documentation
+title: Kapacitor Version 0.11 Documentation
 
 menu:
   kapacitor:
