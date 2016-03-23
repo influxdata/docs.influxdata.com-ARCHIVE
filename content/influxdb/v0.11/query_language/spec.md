@@ -224,6 +224,7 @@ statement           = alter_retention_policy_stmt |
                       drop_measurement_stmt |
                       drop_retention_policy_stmt |
                       drop_series_stmt |
+                      drop_shard_stmt |
                       drop_subscription_stmt |
                       drop_user_stmt |
                       grant_stmt |
@@ -445,6 +446,18 @@ drop_series_stmt = "DROP SERIES" ( from_clause | where_clause | from_clause wher
 
 ```sql
 
+```
+
+### DROP SHARD
+
+```
+drop_shard_stmt = "DROP SHARD" ( shard_id ) .
+```
+
+#### Example:
+
+```
+DROP SHARD 1
 ```
 
 ### DROP SUBSCRIPTION
@@ -804,6 +817,8 @@ retention_policy_duration    = "DURATION" duration_lit .
 retention_policy_replication = "REPLICATION" int_lit
 
 series_id        = int_lit .
+
+shard_id         = int_lit .
 
 sort_field       = field_key [ ASC | DESC ] .
 
