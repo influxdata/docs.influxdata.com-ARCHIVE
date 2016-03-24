@@ -2579,7 +2579,7 @@ a:hover {
 .article-content pre {
   display: inline-block;
   margin-bottom: 1em;
-  line-height: 1.6em;
+  line-height: 1.45em;
 }
 .article-content table {
   margin-bottom: 1em;
@@ -2619,23 +2619,24 @@ a:hover {
   margin-top: 0;
 }
 .article-content h1 {
-  font-size: 2.85em;
+  font-size: 2.0736em;
   font-family: 'Klavika-Light', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;
   font-weight: 200;
+  line-height: 1.2em;
 }
 .article-content h2 {
-  font-size: 2.197em;
+  font-size: 1.728em;
   font-weight: 600;
   padding-bottom: 0.25em;
   margin-top: 1.5em;
   border-bottom: 2px solid #2C323D;
 }
 .article-content h3 {
-  font-size: 1.69em;
+  font-size: 1.44em;
   font-weight: 300;
 }
 .article-content h4 {
-  font-size: 1.3em;
+  font-size: 1.2em;
   font-weight: 300;
 }
 .article-content p {
@@ -2668,6 +2669,9 @@ a:hover {
 }
 .article-content ol ol ol li {
   list-style-type: decimal;
+}
+.article-content ul ul ul li {
+  list-style-type: square;
 }
 .article-content li:last-child {
   margin-bottom: 0;

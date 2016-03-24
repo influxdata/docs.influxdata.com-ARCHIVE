@@ -8,10 +8,12 @@
 // Typography Variables
 // --------------------------------------------------
 
-@heading1Size:		2.85em;
-@heading2Size:		2.197em;
-@heading3Size:		1.69em;
-@heading4Size:		1.3em;
+@type-scale:		1.2;
+
+@heading1Size:		@heading2Size*@type-scale;
+@heading2Size:		@heading3Size*@type-scale;
+@heading3Size:		@heading4Size*@type-scale;
+@heading4Size:		@paragraphSize*@type-scale;
 @paragraphSize:		1em;
 @smallTextSize:		0.875em;
 @tinyTextSize:		0.75em;

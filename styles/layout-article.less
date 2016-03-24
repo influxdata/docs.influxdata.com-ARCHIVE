@@ -83,7 +83,7 @@ a {
 	pre {
 		display: inline-block;
 		margin-bottom: @margin-bottom-base;
-		line-height: 1.6em;
+		line-height: 1.45em;
 	}
 	table {
 		margin-bottom: @margin-bottom-base;
@@ -110,6 +110,7 @@ a {
 	h1 {
 		font-size: @heading1Size;
 		.klavika-font;
+		line-height: 1.2em;
 	}
 	h2 {
 		font-size: @heading2Size;
@@ -156,6 +157,9 @@ a {
 	}
 	ol ol ol li {
 		list-style-type: decimal;
+	}
+	ul ul ul li {
+		list-style-type: square;
 	}
 	li:last-child {
 		margin-bottom: 0;
