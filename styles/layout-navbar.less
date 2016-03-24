@@ -298,6 +298,7 @@
 	}
 }
 .theme-switcher {
+	display: none;
 	width: @nav-height;
 	height: @nav-height;
 	right: 0;
@@ -326,6 +327,9 @@
 // Media Queries
 // --------------------------------------------------
 @media (min-width: @breakpoint-small) {
+	.theme-switcher {
+		display: block;
+	}
 	.navbar--product-dropdown {
 		display: block;
 		left: @sidebar-small-width;
