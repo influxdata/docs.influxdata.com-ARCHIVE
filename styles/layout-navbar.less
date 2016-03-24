@@ -1,0 +1,158 @@
+/*
+
+	NAVIGATION BAR
+
+	____________________________________________________________
+
+	Notes:
+	-	Only contains styles relevant to the navbar module
+
+*/
+
+.navbar {
+	top: 0;
+	left: 0;
+	font-size: 1rem;
+	height: @nav-height;
+	width: 100%;
+	background-color: @nav-bg;
+	position: fixed;
+	z-index: @z-nav;
+}
+.navbar--logo,
+.navbar--hamburger {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.navbar--logo {
+	left: 1em;
+	height: 1.25em;
+}
+.navbar--hamburger {
+	width: @nav-height;
+	height: @nav-height;
+	right: 0;
+
+	.navbar--hamburger-bar {
+		width: @nav-height * 0.5em;
+		height: 2px;
+		background-color: @nav-hamburger;
+		border-radius: 1px;
+		position: absolute;
+		left: 50%;
+		transition: all 0.3s ease;
+
+		&.top {
+			top: 35%;
+			transform: translate(-50%,-50%);
+		}
+		&.middle {
+			top: 50%;
+			transform: translate(-50%,-50%);
+		}
+		&.bottom {
+			top: 65%;
+			transform: translate(-50%,-50%);
+		}
+	}
+
+	&:hover {
+		cursor: pointer;
+
+		.navbar--hamburger-bar {
+			background-color: @nav-hamburger-hover;
+		}
+	}
+
+	&.open {
+		.navbar--hamburger-bar {
+			&.top {
+				top: 50%;
+				transform: translate(-50%,-50%) rotate(45deg);
+			}
+			&.middle {
+				opacity: 0;
+			}
+			&.bottom {
+				top: 50%;
+				transform: translate(-50%,-50%) rotate(-45deg);
+			}
+		}
+	}
+}
+
+.navbar--search {
+	position: absolute;
+	height: 100%;
+	width: 40%;
+	right: @nav-height;
+	top: 0;
+
+	> * {
+		position: absolute !important;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #000;
+	}
+}
+
+.navbar--product-menu {
+	width: 100%;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: auto;
+	opacity: 0;
+	transition: opacity 0.25s ease;
+	.gradient-v(@c-ocean,@c-pool);
+
+}
+.navbar--product-container {
+	width: 100%;
+	height: auto;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	visibility: hidden;
+	transition: all 0.25s ease;
+
+	&.open {
+		visibility: visible;
+
+		.navbar--product-menu {
+			opacity: 1;
+		}
+	}
+}
+.navbar--product-divider {
+	margin: 0.25em 0;
+	height: 2px;
+	background-color: fadeout(@c-sapphire, 70%);
+}
+.navbar--product {
+	&:link,
+	&:active,
+	&:visited {
+		color: @c-neutrino;
+		transition:
+			background-color 0.25s ease,
+			color 0.25s ease;
+		background-color: transparent;
+		padding: 1rem;
+		display: block;
+		width: 100%;
+
+		&.external {
+			font-size: 0.875em;
+			background-color: @c-ocean;
+		}
+	}
+	&:hover {
+		background-color: @c-laser;
+		color: @g20-white;
+	}
+	
+}

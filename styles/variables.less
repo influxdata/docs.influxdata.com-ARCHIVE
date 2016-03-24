@@ -4,3 +4,71 @@
 
 @radius: 4px;
 
+//
+// Typography Variables
+// --------------------------------------------------
+
+@heading1Size:		2.85em;
+@heading2Size:		2.197em;
+@heading3Size:		1.69em;
+@heading4Size:		1.3em;
+@paragraphSize:		1em;
+@smallTextSize:		0.875em;
+@tinyTextSize:		0.75em;
+
+@margin-bottom-base: 1em;
+@indented-element-size: 2rem;
+.klavika-font {
+	font-family: 'Klavika-Light','Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;
+	font-weight: 200;
+}
+@thick-left-border: 6px;
+@scrollbar-width: 1rem;
+@border-small-screen: 1px;
+@border-large-screen: 2px;
+
+//
+// Size Variables
+// --------------------------------------------------
+@nav-height: 				3rem;
+@sidebar--toggle-height: 	3rem;
+@sidebar-small-width:		18rem;
+@sidebar-large-width:		23rem;
+@sidebar-huge-width:		28rem;
+@scrollbar-width:			16px;
+
+
+//
+// Z Index Variables
+// --------------------------------------------------
+@z-sidebar:					250;
+@z-sidebar--mask:			200;
+@z-nav:						150;
+@z-sidebar-desktop:			100;
+@z-sidebar--toggle:			100;
+
+//
+// Gradient Mixin
+// --------------------------------------------------
+.gradient-h(@color1,@color2) {
+	background: @color1;
+	background: -moz-linear-gradient(left,  @color1 0%, @color2 100%);
+	background: -webkit-linear-gradient(left,  @color1 0%,@color2 100%);
+	background: linear-gradient(to right,  @color1 0%,@color2 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@color1', endColorstr='@color2',GradientType=1 );
+}
+.gradient-v(@color1,@color2) {
+	background: @color1;
+	background: -moz-linear-gradient(top,  @color1 0%, @color2 100%);
+	background: -webkit-linear-gradient(top,  @color1 0%,@color2 100%);
+	background: linear-gradient(to bottom,  @color1 0%,@color2 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@color1', endColorstr='@color2',GradientType=0 );
+}
+
+//
+// Breakpoints
+// --------------------------------------------------
+@breakpoint-small:			700px;
+@breakpoint-large:			1200px;
+@breakpoint-huge:			1900px;
+

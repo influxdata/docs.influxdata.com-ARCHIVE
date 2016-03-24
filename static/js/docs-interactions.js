@@ -5,11 +5,10 @@
 */
 
 
-/* Toggle hamburger menu on mobile */
-$('#main-nav--hamburger').click( function() {
+/* Toggle product switcher from hamburger */
+$('#navbar--hamburger').click( function() {
 	$(this).toggleClass('open');
-	$('#main-nav--links').toggleClass('show');
-	$('#product-switcher--menu').toggleClass('show');
+	$('#navbar--product-container').toggleClass('open');
 });
 
 /* Open Large Screen Product Switcher */
@@ -18,7 +17,6 @@ $('#product-switcher').click( function() {
 	$('#product-switcher--container').toggleClass('show');
 
 	$('#page-title--toggle').toggleClass('open');
-	$('#product-sidebar').toggleClass('open');
 	$('#page-content').toggleClass('hide');
 });
 /* Close Large Screen Product Switcher */
@@ -29,6 +27,17 @@ $('#product-switcher--dismiss').click( function() {
 $('#product-switcher--menu').click( function() {
 	$('#product-switcher').removeClass('show');
 	$('#product-switcher--container').removeClass('show');
+});
+
+/* Open Sidebar */
+$('#sidebar--toggle').click( function() {
+	$('#sidebar').addClass('open');
+	$('#sidebar--mask-container').addClass('open');
+});
+/* Close Sidebar */
+$('#sidebar--mask').click( function() {
+	$('#sidebar').removeClass('open');
+	$('#sidebar--mask-container').removeClass('open');
 });
 
 function getRandomIntInclusive(min, max) {

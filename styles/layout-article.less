@@ -1,0 +1,397 @@
+/*
+
+	INDIVIDUAL ARTICLE
+
+	____________________________________________________________
+
+	Notes:
+	-	Typography uses a type scale of 1.3
+	-	I've made use of EMs such that you can proportionally scale the type
+		by changing the font size on .page using REMs as the unit
+
+
+*/
+
+::selection {
+	background-color: @default-selection-bg;
+	color: @default-selection-text; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+	background-color: @default-selection-bg;
+	color: @default-selection-text; /* Gecko Browsers */
+}
+a {
+	&:link,
+	&:active,
+	&:visited {
+		text-decoration: none;
+		font-weight: 700;
+		color: @default-link-color;
+		transition: color 0.2s ease;
+	}
+	&:hover {
+		color: @default-link-hover;
+		cursor: pointer;
+	}
+}
+
+.article {
+	background-color: @article-bg;
+}
+.article-section {
+	display: block;
+	width: 100%;
+	text-align: center;
+	padding: 2rem;
+
+	&.article-heading {
+		background-color: @article-bg-heading;
+		background-position: center center;
+		background-size: cover !important;
+		background-repeat: no-repeat;
+		position: relative;
+	}
+
+	&.article-footer {
+		background-color: @article-bg-footer;
+	}
+}
+.article-content {
+	display: inline-block;
+	text-align: left;
+	margin: 0 auto;
+	width: 100%;
+	color: @article-text;
+
+	> * {
+		text-decoration: none;
+	}
+	h1,
+	h2,
+	h3,
+	h4,
+	p,
+	ul,
+	ol,
+	li,
+	blockquote,
+	dt,
+	pre {
+		display: inline-block;
+		margin-bottom: @margin-bottom-base;
+		line-height: 1.6em;
+	}
+	table {
+		margin-bottom: @margin-bottom-base;
+	}
+
+	/* Headings */
+	h1,h2,h3,h4 {
+		width: 100%;
+		color: @article-text-heading;
+
+		/* Maintain heading styles when anchors are present */
+		a:link,
+		a:active,
+		a:visited,
+		a:hover {
+			text-decoration: none;
+			font-weight: inherit;
+			color: @article-text-heading;
+		}
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+	h1 {
+		font-size: @heading1Size;
+		.klavika-font;
+	}
+	h2 {
+		font-size: @heading2Size;
+		font-weight: 600;
+		padding-bottom: 0.25em;
+		margin-top: 1.5em;
+		border-bottom: 2px solid @article-line-color;
+	}
+	h3 {
+		font-size: @heading3Size;
+		font-weight: 300;
+	}
+	h4 {
+		font-size: @heading4Size;
+		font-weight: 300;
+	}
+
+	/* Markdown Elements */
+	p {
+		font-size: 1em;
+	}
+	ol,ul {
+		font-size: 1em;
+		padding-left: 1.125em;
+
+		li {
+			display: list-item;;
+			list-style-position: outside;
+			padding-left: 0.5em;
+		}
+		p {
+			margin-left: 0;
+		}
+	}
+	ul > li {
+		list-style-type: disc !important;
+	}
+	ol li,
+	ul ol li {
+		list-style-type: upper-roman;
+	}
+	ol ol li {
+		list-style-type: lower-alpha;
+	}
+	ol ol ol li {
+		list-style-type: decimal;
+	}
+	li:last-child {
+		margin-bottom: 0;
+	}
+	ol ol,
+	ul ul,
+	ol ul,
+	ul ol {
+		width: 100%;
+		margin-left: 0;
+		margin-bottom: 0;
+		margin-top: 1.25em;
+	}
+	hr {
+		width: 100%;
+		height: 2px;
+		margin-top: 0.25em;
+		margin-bottom: 1em;
+		border: none;
+		display: block;
+		background-color: @article-line-color;
+	}
+	img {
+		width: 100%;
+		height: auto;
+		border-radius: @radius;
+	}
+	table {
+		background-color: @article-bg;
+	}
+	td,
+	th {
+		border: @border-small-screen solid @article-line-color;
+		font-size: 0.875em;
+		padding: 0.75em 1.5em;
+	}
+	tr:nth-child(even) {
+		background-color: @article-bg-darken;
+	}
+	thead {
+		tr {
+			background-color: @article-bg-highlight !important;
+		}
+		th {
+			padding: 1.25em 1.5em;
+		}
+	}
+	/* Notes <blockquote> and Gotchas <dt> */
+	dt,
+	blockquote {
+		font-size: @smallTextSize;
+		padding: 1em 1.5em;
+		border-radius: @radius;
+		border-style: solid;
+		border-left-width: @thick-left-border;
+		background-color: @article-bg-highlight;
+
+		pre,h4,p,ol,ul {
+			width: 100%;
+			margin-left: 0;
+		}
+
+		> *:last-child {
+			margin-bottom: 0;
+		}
+		.tooltip {
+			color: @article-tooltip-nested;
+		}
+	}
+	blockquote {
+		font-style: italic;
+		color: @article-text-note;
+		border-color: @article-text-note;
+	}
+	dt {
+		color: @article-text-gotcha;
+		border-color: @article-text-gotcha;
+	}
+	/* Inline Code & Code Blocks */
+	code {
+		font-family: Consolas, "Lucida Console", Monaco, monospace;
+		-moz-tab-size: 1;
+		-o-tab-size: 1;
+		tab-size: 1;
+		direction: ltr;
+		-webkit-hyphens: none;
+		-moz-hyphens: none;
+		-ms-hyphens: none;
+		hyphens: none;
+		font-size: @tinyTextSize !important;
+		font-style:normal !important;
+		display: inline;
+		border-radius: @radius;
+		border-width: @border-small-screen;
+		border-color: @article-line-color;
+		border-style: solid;
+		padding: 0.25em 0.5em;
+		position: relative;
+		top:-0.1em;
+		-webkit-font-smoothing: subpixel-antialiased !important;
+		-moz-osx-font-smoothing: auto !important;
+		font-weight: 400 !important;
+		color: @article-code-color;
+		background-color: @article-code-bg;
+	}
+	pre {
+		display: block;
+		padding: 0.75em 1em;
+		overflow: auto;
+		border-radius: @radius;
+		border-style: solid;
+		border-width: @border-small-screen @border-small-screen @border-small-screen @thick-left-border;
+		background-color: @article-code-bg;
+		border-color: @article-line-color;
+
+		code {
+			white-space: pre;
+			word-spacing: normal;
+			word-break: normal;
+			border: none;
+			padding: 0;
+			border-radius: 0;
+			background-color: transparent;
+		}
+
+		&::-webkit-scrollbar { background-color: @article-code-bg;width: @scrollbar-width; }
+		&::-webkit-scrollbar-track { background-color: @article-code-bg; }
+		&::-webkit-scrollbar-thumb {
+			border: 4px solid @article-code-bg;
+			background-color: @article-line-color;
+			border-radius: calc(@scrollbar-width / 2);
+		}
+	}
+}
+
+/*
+	Tooltips
+	____________________________________________________________
+*/
+.tooltip {
+	position: relative;
+	display: inline-block;
+	z-index: 10;
+	font-weight: 900;
+	color: @article-tooltip;
+}
+.tooltip-container {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	overflow: visible;
+	visibility: hidden;
+}
+.tooltip-text {
+	font-weight: 600;
+	line-height: 2em;
+	height: 2em;
+	position: absolute;
+	border-radius: @radius;
+	padding: 0 0.75em;
+	font-size: 0.9rem;
+	left: 50%;
+	transform: translate(-50%,-1.875rem);
+	transition: all 0.2s ease;
+	white-space: nowrap;
+	opacity: 0;
+	font-style: normal !important;
+	color: @article-tooltip-text;
+	background-color: @article-tooltip-bg;
+}
+.tooltip-text:after {
+	content: '';
+	position: absolute;
+	left: 50%;
+	bottom: -14px;
+	transform: translateX(-50%);
+	border-top: 8px solid @article-tooltip-bg;
+	border-right: 8px solid transparent;
+	border-bottom: 8px solid transparent;
+	border-left: 8px solid transparent;
+}
+.tooltip:hover .tooltip-container {
+	visibility: visible;
+}
+.tooltip:hover .tooltip-text {
+	opacity: 1;
+	transform: translate(-50%,-2rem);
+}
+
+//
+// Media Queries
+// --------------------------------------------------
+@media (min-width: @breakpoint-small) {
+	.article {
+		padding-left: @sidebar-small-width;
+	}
+	.article-section {
+		padding: 3rem;
+	}
+	.article-content {
+		dt,
+		blockquote,
+		pre,
+		p,
+		ol,
+		ul {
+			width: calc(100% - @indented-element-size);
+			margin-left: @indented-element-size;
+		}
+		table {
+			margin-left: @indented-element-size;
+		}
+		code,
+		pre,
+		td,
+		th {
+			border-width: @border-large-screen;
+		}
+		pre {
+			border-left-width: @thick-left-border;
+		}
+	}
+}
+@media (min-width: @breakpoint-large) {
+	.article {
+		padding-left: @sidebar-large-width;
+	}
+	.article-section {
+		padding: 5rem;
+	}
+}
+@media (min-width: @breakpoint-huge) {
+	.article {
+		padding-left: @sidebar-huge-width;
+	}
+	.article-section {
+		padding: 5rem 11rem;
+	}
+	.article-content {
+		font-size: 1.125rem;
+	}
+}
