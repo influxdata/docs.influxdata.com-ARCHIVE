@@ -2353,6 +2353,7 @@ table {
 .navbar--product-dropdown .navbar--current-product {
   font-weight: 700;
   left: 1rem;
+  text-transform: capitalize;
 }
 .navbar--product-dropdown .navbar--product-dropdown-caret {
   right: 1rem;
