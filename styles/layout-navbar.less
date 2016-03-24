@@ -22,7 +22,8 @@
 .navbar--logo,
 .navbar--hamburger,
 .navbar--product-dropdown,
-.navbar--search {
+.navbar--search,
+.theme-switcher {
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
@@ -294,6 +295,20 @@
 	.algolia-docsearch-footer {
 		border: none;
 		padding: 0.75rem 0 0 0;
+	}
+}
+.theme-switcher {
+	width: @nav-height;
+	height: @nav-height;
+	right: 0;
+	border: 0;
+	outline: none;
+	background-color: @nav-bg;
+	color: @nav-logo;
+
+	&:hover {
+		color: @nav-logo-hover;
+		cursor: pointer;
 	}
 }
 
