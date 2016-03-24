@@ -296,6 +296,28 @@ Well, that was cool and all, but, just to get a simple threshold alert, there ar
 Why all this pipeline TICKscript stuff?
 Well, it can quickly be extended to become *much* more powerful.
 
+### Keep the quotes in mind
+
+Single quotes and double quotes in kapacitor do very different things:
+
+Note the following example:
+
+```javascript
+var data = stream.from().database('telegram').retentionPolicy('default')
+  .measurement('cpu')
+  .where(lambda: "host" == "server1")
+```
+
+Result of this search will always be empty, because we used double quotes around server1. This means that we are searching for series where field "host" is equal to field "server1".  This is probably not what we were planning to do. We were probably searching for series where tag "host" has value "server1", so we should use single quotes for that and our tick script should look like this:
+
+```javascript
+var data = stream.from().database('telegram').retentionPolicy('default')
+  .measurement('cpu')
+  .where(lambda: "host" == 'server1')
+```
+
+
+
 ### Extending Your TICKscripts
 
 The TICKscript below will compute the running mean and compare current values to it.
