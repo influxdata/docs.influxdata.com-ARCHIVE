@@ -32,12 +32,30 @@
 //
 // Size Variables
 // --------------------------------------------------
-@nav-height: 				3rem;
+@nav-height: 				4rem;
 @sidebar--toggle-height: 	3rem;
+@nav-gap:					0.5rem;
+@nav-component-height:		3rem;
+@search-offset:				(@nav-height - @nav-component-height)/2;
+
 @sidebar-small-width:		18rem;
 @sidebar-large-width:		23rem;
 @sidebar-huge-width:		28rem;
+
 @scrollbar-width:			16px;
+
+@product-dropdown-small-width:	11rem;
+@product-dropdown-large-width:	13rem;
+@product-dropdown-huge-width:	16rem;
+
+@search-default-width:		40%;
+@search-small-width:		~"calc( 100% - "@sidebar-small-width~" - "@nav-gap~" - "@nav-height~" - "@product-dropdown-small-width~")";
+@search-large-width:		~"calc( 100% - "@sidebar-large-width~" - "@nav-gap~" - "@nav-height~" - "@product-dropdown-large-width~")";
+@search-huge-width:			~"calc( 100% - "@sidebar-huge-width~" - "@nav-gap~" - "@nav-height~" - "@product-dropdown-huge-width~")";
+
+@search-small-position:		@sidebar-small-width + @product-dropdown-small-width + @nav-gap;
+@search-large-position:		@sidebar-large-width + @product-dropdown-large-width + @nav-gap;
+@search-huge-position:		@sidebar-huge-width + @product-dropdown-huge-width + @nav-gap;
 
 
 //
