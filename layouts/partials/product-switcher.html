@@ -5,17 +5,19 @@
     <div class="navbar--hamburger-bar middle"></div>
     <div class="navbar--hamburger-bar bottom"></div>
 </div>
-<div class="navbar--product-dropdown">YAY
+<div class="navbar--product-dropdown" id="navbar--dropdown">
+    <div class="navbar--current-product">Kapacitor</div>
+    <div class="navbar--product-dropdown-caret"><span class="icon arrow-down"></span></div>
 </div>
 <div class="navbar--product-container" id="navbar--product-container">
-    <div class="product-switcher--dismiss" id="product-switcher--dismiss"></div>
-    <ul class="navbar--product-menu" id="product-switcher--menu">
+    <div class="navbar--dropdown-dismiss" id="navbar--dropdown-dismiss"></div>
+    <ul class="navbar--product-menu" id="navbar--product-menu">
         {{ range .Site.Menus.products }}
         <li><a class="navbar--product{{if or ($currentNode.IsMenuCurrent "products" .) ($currentNode.HasMenuCurrent "products" .) }} active{{end}}" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .Name }}</a></li>
         {{ end }}
         <li class="navbar--product-divider"></li>
-        <li><a class="navbar--product" href="https://influxdata.com/use-cases/" target="_blank">&#9658;&nbsp; See how the TICK Stack is used</a></li>
-        <li><a class="navbar--product" href="https://influxdata.com/pricing/" target="_blank">&#9658;&nbsp; Need help using our stack?</a></li>
+        <li><a class="navbar--product external" href="https://influxdata.com/use-cases/" target="_blank">&#9658;&nbsp; See how the TICK Stack is used</a></li>
+        <li><a class="navbar--product external" href="https://influxdata.com/pricing/" target="_blank">&#9658;&nbsp; Need help using our stack?</a></li>
     </ul>
 </div>
 {{ range .Site.Menus.products }}

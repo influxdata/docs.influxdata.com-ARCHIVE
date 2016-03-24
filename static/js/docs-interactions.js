@@ -11,22 +11,22 @@ $('#navbar--hamburger').click( function() {
 	$('#navbar--product-container').toggleClass('open');
 });
 
-/* Open Large Screen Product Switcher */
-$('#product-switcher').click( function() {
-	$(this).toggleClass('show');
-	$('#product-switcher--container').toggleClass('show');
+/* Open product switcher from dropdown */
+$('#navbar--dropdown').click( function() {
+	$(this).toggleClass('open');
+	$('#navbar--product-container').toggleClass('open');
+});
 
-	$('#page-title--toggle').toggleClass('open');
-	$('#page-content').toggleClass('hide');
+/* Close product switcher from "Dismiss Overlay" */
+$('#navbar--dropdown-dismiss').click( function() {
+	$('#navbar--dropdown').removeClass('open');
+	$('#navbar--product-container').removeClass('open');
 });
-/* Close Large Screen Product Switcher */
-$('#product-switcher--dismiss').click( function() {
-	$('#product-switcher').removeClass('show');
-	$('#product-switcher--container').removeClass('show');
-});
-$('#product-switcher--menu').click( function() {
-	$('#product-switcher').removeClass('show');
-	$('#product-switcher--container').removeClass('show');
+/* Close product switcher by clicking a link */
+$('#navbar--product-menu').click( function() {
+	$('#navbar--hamburger').removeClass('open');
+	$('#navbar--product-container').removeClass('open');
+	$('#navbar--dropdown').removeClass('open');
 });
 
 /* Open Sidebar */

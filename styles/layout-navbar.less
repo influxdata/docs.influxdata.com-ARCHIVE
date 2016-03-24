@@ -128,11 +128,6 @@
 		padding: 1rem;
 		display: block;
 		width: 100%;
-
-		&.external {
-			font-size: 0.875em;
-			background-color: @c-ocean;
-		}
 	}
 	&:hover {
 		background-color: @c-laser;
@@ -141,7 +136,7 @@
 }
 .navbar--product-dropdown {
 	display: none;
-	background-color: #000;
+	background-color: @c-ocean;
 	height: @nav-component-height;
 	border-radius: @radius;
 	transition:
@@ -149,6 +144,23 @@
 		color 0.25s ease;
 	&:hover {
 		cursor: pointer;
+		background-color: @c-pool;
+	}
+	.navbar--current-product,
+	.navbar--product-dropdown-caret {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		color: @g20-white;
+	}
+
+	.navbar--current-product {
+		font-weight: 700;
+		left: 1rem;
+	}
+	.navbar--product-dropdown-caret {
+		right: 1rem;
+		font-size: 0.625em;
 	}
 }
 .navbar--search {
@@ -288,6 +300,31 @@
 		left: @sidebar-small-width;
 		width: @product-dropdown-small-width;
 	}
+	.navbar--product-container {
+		left: @sidebar-small-width;
+		width: @product-dropdown-small-width;
+
+		&.open {
+			.navbar--dropdown-dismiss {
+				width: 10000px;
+				height: 10000px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+				z-index: 100;
+
+				&:hover {
+					cursor: pointer;
+				}
+			}
+		}
+	}
+	.navbar--product-menu {
+		border-radius: 0 0 @radius @radius;
+		overflow: hidden;
+		z-index: 110;
+	}
 	.navbar--search {
 		left: @search-small-position;
 		width: @search-small-width;
@@ -295,9 +332,16 @@
 	.navbar--hamburger {
 		display: none;
 	}
+	.navbar--product.external {
+		font-size: 0.8rem;
+	}
 }
 @media (min-width: @breakpoint-large) {
 	.navbar--product-dropdown {
+		left: @sidebar-large-width;
+		width: @product-dropdown-large-width;
+	}
+	.navbar--product-container {
 		left: @sidebar-large-width;
 		width: @product-dropdown-large-width;
 	}
@@ -308,6 +352,10 @@
 }
 @media (min-width: @breakpoint-huge) {
 	.navbar--product-dropdown {
+		left: @sidebar-huge-width;
+		width: @product-dropdown-huge-width;
+	}
+	.navbar--product-container {
 		left: @sidebar-huge-width;
 		width: @product-dropdown-huge-width;
 	}

@@ -2322,25 +2322,36 @@ table {
   display: block;
   width: 100%;
 }
-.navbar--product:link.external,
-.navbar--product:active.external,
-.navbar--product:visited.external {
-  font-size: 0.875em;
-  background-color: #4591ED;
-}
 .navbar--product:hover {
   background-color: #00C9FF;
   color: #ffffff;
 }
 .navbar--product-dropdown {
   display: none;
-  background-color: #000;
+  background-color: #4591ED;
   height: 3rem;
   border-radius: 4px;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 .navbar--product-dropdown:hover {
   cursor: pointer;
+  background-color: #22ADF6;
+}
+.navbar--product-dropdown .navbar--current-product,
+.navbar--product-dropdown .navbar--product-dropdown-caret {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  color: #ffffff;
+}
+.navbar--product-dropdown .navbar--current-product {
+  font-weight: 700;
+  left: 1rem;
+}
+.navbar--product-dropdown .navbar--product-dropdown-caret {
+  right: 1rem;
+  font-size: 0.625em;
 }
 .navbar--search {
   height: 3rem;
@@ -2466,6 +2477,28 @@ table {
     left: 18rem;
     width: 11rem;
   }
+  .navbar--product-container {
+    left: 18rem;
+    width: 11rem;
+  }
+  .navbar--product-container.open .navbar--dropdown-dismiss {
+    width: 10000px;
+    height: 10000px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    z-index: 100;
+  }
+  .navbar--product-container.open .navbar--dropdown-dismiss:hover {
+    cursor: pointer;
+  }
+  .navbar--product-menu {
+    border-radius: 0 0 4px 4px;
+    overflow: hidden;
+    z-index: 110;
+  }
   .navbar--search {
     left: 29.5rem;
     width: calc( 100% -  18rem  -  0.5rem  -  4rem  -  11rem );
@@ -2473,9 +2506,16 @@ table {
   .navbar--hamburger {
     display: none;
   }
+  .navbar--product.external {
+    font-size: 0.8rem;
+  }
 }
 @media (min-width: 1200px) {
   .navbar--product-dropdown {
+    left: 23rem;
+    width: 13rem;
+  }
+  .navbar--product-container {
     left: 23rem;
     width: 13rem;
   }
@@ -2486,6 +2526,10 @@ table {
 }
 @media (min-width: 1900px) {
   .navbar--product-dropdown {
+    left: 28rem;
+    width: 16rem;
+  }
+  .navbar--product-container {
     left: 28rem;
     width: 16rem;
   }

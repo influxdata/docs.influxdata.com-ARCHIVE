@@ -9,9 +9,6 @@
 apiKey: 'ea4dd788621b585ec1264854745f3de2',
 indexName: 'influxdata',
 inputSelector: '#algolia-search-input',
-// autocompleteOptions: {
-//     debug: true
-//   },
 algoliaOptions: {
 hitsPerPage: 8,{{$current := . }}{{ if not (or .IsHome .IsNode) }}{{ range $product := .Site.Menus.products }}{{ range $version := (index $.Site.Data.versions $product.Identifier) }}{{ if in $current.RelPermalink (print "/" $product.Identifier "/" $version) }}
 facetFilters: ["version:{{$version}}", "project:{{$product.Identifier}}"]{{end}}{{end}}{{end}}{{end}}
