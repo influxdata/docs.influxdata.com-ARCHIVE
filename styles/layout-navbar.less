@@ -29,7 +29,12 @@
 }
 .navbar--logo {
 	left: 1em;
-	height: 1.25em;
+	font-size: 1.4rem;
+	color: @nav-logo;
+	transition: color 0.25s ease;
+	&:hover {
+		color: @nav-logo-hover;
+	}
 }
 .navbar--hamburger {
 	width: @nav-height;

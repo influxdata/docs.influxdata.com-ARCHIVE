@@ -2231,7 +2231,12 @@ table {
 }
 .navbar--logo {
   left: 1em;
-  height: 1.25em;
+  font-size: 1.4rem;
+  color: #575E6B;
+  transition: color 0.25s ease;
+}
+.navbar--logo:hover {
+  color: #4591ED;
 }
 .navbar--hamburger {
   width: 4rem;
