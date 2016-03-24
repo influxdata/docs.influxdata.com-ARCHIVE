@@ -1989,7 +1989,7 @@ pre[class*="language-"] {
 .token.doctype,
 .token.cdata,
 .token.punctuation {
-  color: #68707C;
+  color: #79818C;
 }
 .token.property,
 .token.tag,
@@ -2540,11 +2540,14 @@ a:hover {
   padding: 2rem;
 }
 .article-section.article-heading {
-  background-color: #262B35;
+  background-color: #2C323D;
   background-position: center center;
   background-size: cover !important;
   background-repeat: no-repeat;
   position: relative;
+}
+.article-section.article-heading h1 {
+  margin-bottom: 0;
 }
 .article-section.article-footer {
   background-color: #262B35;
