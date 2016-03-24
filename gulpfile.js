@@ -15,6 +15,14 @@ gulp.task('less', function() {
 		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('static/css/'))
 		.pipe(livereload())
+	gulp.src('styles/docs-light.less')
+		.pipe(sourcemaps.init())
+		.pipe(less())
+		.pipe(cleanCSS())
+		.pipe(autoprefix('last 2 version'))
+		.pipe(sourcemaps.write('.'))
+		.pipe(gulp.dest('static/css/'))
+		.pipe(livereload())
 });
 
 gulp.task('watch', function () {
