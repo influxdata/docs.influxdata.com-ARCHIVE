@@ -954,7 +954,12 @@ Valid time specifications for `unit` are:
 `w` weeks  
 
 `DERIVATIVE()` also works with a nested function coupled with a `GROUP BY time()` clause.
-For queries that include those options, InfluxDB first performs the aggregation, selection, or transformation across the time interval specified in the `GROUP BY time()` clause and then carries out the same procedure outlined above.
+For queries that include those options, InfluxDB first performs the aggregation, selection, or transformation across the time interval specified in the `GROUP BY time()` clause.
+It then calculates the difference between chronological field values and
+converts those results into the rate of change per `unit`.
+The `unit` argument is optional and, if not specified, defaults to the same
+interval as the `GROUP BY time()` interval.
+
 
 The `DERIVATIVE()` query with an aggregation function and `GROUP BY time()` clause:
 ```sql
@@ -1071,11 +1076,11 @@ This returns the rate of change per 12 minutes from `2015-08-18T00:00:00Z` to `2
 > **Note:** Specifying `12m` as the `unit` **does not** mean that InfluxDB calculates the rate of change for every 12 minute interval of data.
 Instead, InfluxDB calculates the rate of change per 12 minutes for each interval of valid data.
 
-* `DERIVATIVE()` with two arguments, a function, and a `GROUP BY time()` clause:  
+* `DERIVATIVE()` with one argument, a function, and a `GROUP BY time()` clause:  
 Select the `MAX()` value at 12 minute intervals and calculate the rate of change per 12 minutes
 
 ```sql
-> SELECT DERIVATIVE(MAX(water_level),12m) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time < '2015-08-18T00:36:00Z' GROUP BY time(12m)
+> SELECT DERIVATIVE(MAX(water_level)) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time < '2015-08-18T00:36:00Z' GROUP BY time(12m)
 ```
 
 CLI response:
@@ -1098,7 +1103,7 @@ time			               max
 2015-08-18T00:24:00Z	 2.051
 ```
 
-Second, InfluxDB calculates the rate of change per `unit` (`12m`) to get the results in the `derivative` column above.
+Second, InfluxDB calculates the rate of change per `12m` (the same interval as the `GROUP BY time()` interval) to get the results in the `derivative` column above.
 The calculation of the first value in the `derivative` column looks like this:
 <br>
 <br>
@@ -1184,7 +1189,11 @@ Valid time specifications for `unit` are:
 `w` weeks  
 
 `NON_NEGATIVE_DERIVATIVE()` also works with a nested function coupled with a `GROUP BY time()` clause.
-For queries that include those options, InfluxDB first performs the aggregation, selection, or transformation across the time interval specified in the `GROUP BY time()` clause and then carries out the same procedure outlined above.
+For queries that include those options, InfluxDB first performs the aggregation, selection, or transformation across the time interval specified in the `GROUP BY time()` clause.
+It then calculates the difference between chronological field values and
+converts those results into the rate of change per `unit`.
+The `unit` argument is optional and, if not specified, defaults to the same
+interval as the `GROUP BY time()` interval.
 
 The `NON_NEGATIVE_DERIVATIVE()` query with an aggregation function and `GROUP BY time()` clause:
 ```sql
