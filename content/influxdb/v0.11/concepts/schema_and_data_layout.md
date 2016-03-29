@@ -95,7 +95,7 @@ In no particular order, we recommend that you:
     ------------- | -------------
     `location = field-1.region-north` | `field = 1` and `region = north`
     `location = field-2.region-north` | `field = 2` and `region = north`
-    `location = field-2.region-midwest` | `field = 2` and `region = north`
+    `location = field-2.region-midwest` | `field = 2` and `region = midwest`
 
     Assume that each [tag set](/influxdb/v0.11/concepts/glossary/#tag-set) falls in the [measurement](/influxdb/v0.11/concepts/glossary/#measurement) `blueberries` and is associated with a [field](/influxdb/v0.11/concepts/glossary/#field) called `value`.
     The following queries calculate the average of `value` for blueberries that fall in the `north`.
