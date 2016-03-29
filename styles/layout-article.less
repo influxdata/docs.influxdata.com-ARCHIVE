@@ -215,7 +215,6 @@ a {
 		border-radius: @radius;
 		border-style: solid;
 		border-left-width: @thick-left-border;
-		background-color: @article-bg-highlight;
 
 		pre,h4,p,ol,ul {
 			width: 100%;
@@ -231,12 +230,14 @@ a {
 	}
 	blockquote {
 		font-style: italic;
-		color: @article-text-note;
-		border-color: @article-text-note;
+		color: @article-note-text;
+		border-color: @article-note-border;
+		background-color: @article-note-bg;
 	}
 	dt {
-		color: @article-text-gotcha;
-		border-color: @article-text-gotcha;
+		color: @article-gotcha-text;
+		border-color: @article-gotcha-border;
+		background-color: @article-gotcha-bg;
 	}
 	/* Inline Code & Code Blocks */
 	code {
