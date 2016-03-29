@@ -1,5 +1,6 @@
 ---
 title: Differences between InfluxDB 0.11 and versions prior to 0.10
+newversionredirect: /concepts/012_vs_previous/
 menu:
   influxdb_011:
     weight: 40
