@@ -1076,7 +1076,7 @@ This returns the rate of change per 12 minutes from `2015-08-18T00:00:00Z` to `2
 > **Note:** Specifying `12m` as the `unit` **does not** mean that InfluxDB calculates the rate of change for every 12 minute interval of data.
 Instead, InfluxDB calculates the rate of change per 12 minutes for each interval of valid data.
 
-* `DERIVATIVE()` with two arguments, a function, and a `GROUP BY time()` clause:  
+* `DERIVATIVE()` with one argument, a function, and a `GROUP BY time()` clause:  
 Select the `MAX()` value at 12 minute intervals and calculate the rate of change per 12 minutes
 
 ```sql
