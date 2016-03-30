@@ -120,7 +120,7 @@ REPLICATION   RESAMPLE      RETENTION     REVOKE        SELECT        SERIES
 SERVER        SERVERS       SET           SHARD         SHARDS        SLIMIT
 SOFFSET       STATS         SUBSCRIPTION  SUBSCRIPTIONS TAG           TO
 USER          USERS         VALUES        WHERE         WITH          WRITE
-NAME
+NAME          KILL
 ```
 
 ## Literals
@@ -228,11 +228,13 @@ statement           = alter_retention_policy_stmt |
                       drop_subscription_stmt |
                       drop_user_stmt |
                       grant_stmt |
+                      kill_query_statement |
                       show_continuous_queries_stmt |
                       show_databases_stmt |
                       show_field_keys_stmt |
                       show_grants_stmt |
                       show_measurements_stmt |
+                      show_queries_stmt |
                       show_retention_policies |
                       show_series_stmt |
                       show_shard_groups_stmt |
@@ -505,6 +507,21 @@ GRANT ALL TO jdoe
 GRANT READ ON mydb TO jdoe
 ```
 
+### KILL QUERY
+
+```
+kill_query_statement = "KILL QUERY" query_id .
+```
+
+#### Examples:
+
+```
+--- kill a query with the query_id 36
+KILL QUERY 36
+```
+
+> **NOTE:** Identify the `query_id` from the [`SHOW QUERIES`](/influxdb/v0.12/query_language/spec/#show-queries) output.
+
 ### SHOW CONTINUOUS QUERIES
 
 ```
@@ -575,6 +592,19 @@ SHOW MEASUREMENTS WHERE region = 'uswest' AND host = 'serverA'
 
 -- show measurements that start with 'h2o'
 SHOW MEASUREMENTS WITH MEASUREMENT =~ /h2o.*/
+```
+
+### SHOW QUERIES
+
+```
+show_queries_stmt = "SHOW QUERIES" .
+```
+
+#### Example:
+
+```sql
+-- show all currently-running queries
+SHOW QUERIES
 ```
 
 ### SHOW RETENTION POLICIES
@@ -807,6 +837,8 @@ password         = string_lit .
 policy_name      = identifier .
 
 privilege        = "ALL" [ "PRIVILEGES" ] | "READ" | "WRITE" .
+
+query_id         = int_lit .
 
 query_name       = identifier .
 

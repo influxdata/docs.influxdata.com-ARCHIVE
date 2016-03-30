@@ -3,7 +3,7 @@ title: Server Monitoring
 
 menu:
   influxdb_012:
-    weight: 50
+    weight: 10
     parent: troubleshooting
 ---
 
@@ -12,7 +12,7 @@ This information can be very useful for troubleshooting and performance monitori
 
 ## SHOW STATS
 To see node stats execute the command `SHOW STATS`.
-      
+
 The statistics returned by `SHOW STATS` are stored in memory only, and are reset to zero when the node is restarted.
 
 ## SHOW DIAGNOSTICS
