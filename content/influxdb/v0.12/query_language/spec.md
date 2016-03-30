@@ -120,6 +120,7 @@ REPLICATION   RESAMPLE      RETENTION     REVOKE        SELECT        SERIES
 SERVER        SERVERS       SET           SHARD         SHARDS        SLIMIT
 SOFFSET       STATS         SUBSCRIPTION  SUBSCRIPTIONS TAG           TO
 USER          USERS         VALUES        WHERE         WITH          WRITE
+NAME
 ```
 
 ## Literals
@@ -318,13 +319,26 @@ END;
 ### CREATE DATABASE
 
 ```
-create_database_stmt = "CREATE DATABASE" db_name
+create_database_stmt = "CREATE DATABASE" ["IF NOT EXISTS"] db_name
+                       [ WITH
+                       [ retention_policy_duration ]
+                       [ retention_policy_replication ]
+                       [ retention_policy_shard_group_duration ]
+                       [ retention_policy_name ]
+                       ] .
 ```
 
 #### Examples:
 
 ```sql
+-- Create a database called foo
 CREATE DATABASE foo
+
+-- Create a database called bar with a new DEFAULT retention policy and specify the duration, replication, shard group duration, and name of that retention policy
+CREATE DATABASE bar WITH DURATION 1d REPLICATION 1 SHARD DURATION 30m NAME myrp
+
+-- Create a database called mydb with a new DEFAULT retention policy and specify the name of that retention policy
+CREATE DATABASE mydb WITH NAME myrp
 ```
 
 ### CREATE RETENTION POLICY
@@ -404,9 +418,6 @@ drop_database_stmt = "DROP DATABASE" ["IF EXISTS"] db_name .
 
 ```sql
 DROP DATABASE mydb
-
--- drop a database only if it exists
-DROP DATABASE IF EXISTS mydb
 ```
 
 ### DROP MEASUREMENT
@@ -801,7 +812,9 @@ retention_policy_option      = retention_policy_duration |
                                "DEFAULT" .
 
 retention_policy_duration    = "DURATION" duration_lit .
-retention_policy_replication = "REPLICATION" int_lit
+retention_policy_replication = "REPLICATION" int_lit .
+retention_policy_shard_group_duration = "SHARD DURATION" duration_lit .
+retention_policy_name = "NAME" identifier .
 
 series_id        = int_lit .
 

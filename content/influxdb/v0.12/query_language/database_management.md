@@ -35,11 +35,10 @@ See the documentation on [authentication and authorization](/influxdb/v0.12/admi
 ---
 The `CREATE DATABASE` query takes the following form:
 ```sql
-CREATE DATABASE [IF NOT EXISTS] <database_name> [WITH [DURATION <duration>] [REPLICATION <n>] [NAME <retention-policy-name>]]
+CREATE DATABASE [IF NOT EXISTS] <database_name> [WITH [DURATION <duration>] [REPLICATION <n>] [SHARD DURATION <duration>] [NAME <retention-policy-name>]]
 ```
 
-> **Note:** The `IF NOT EXISTS` clause does nothing, is deprecated, and will be removed in InfluxDB version 0.12.
-The `CREATE DATABASE` query will return successfully with no error when a new database is created or if the database already exists.
+> **Note:** The `IF NOT EXISTS` clause does nothing, is deprecated, and will be removed in InfluxDB version 0.13.
 
 Create the database ` NOAA_water_database`:
 ```bash
@@ -47,21 +46,16 @@ Create the database ` NOAA_water_database`:
 >
 ```
 
-Create the database `NOAA_water_database` only if it doesn't exist:
+Create the database `NOAA_water_database` with a new `DEFAULT` retention policy called `liquid`:
 ```bash
-> CREATE DATABASE IF NOT EXISTS NOAA_water_database
+> CREATE DATABASE NOAA_water_database WITH DURATION 3d REPLICATION 3 SHARD DURATION 30m NAME liquid
 >
 ```
-
-Create the database `NOAA_water_database` with a new retention policy called `liquid`:
-```bash
-> CREATE DATABASE NOAA_water_database WITH DURATION 3d REPLICATION 3 NAME liquid
->
-```
-When specifying a retention policy you can include one or more of the attributes `DURATION`, `REPLICATION`, and `NAME`.
+When specifying a retention policy you can include one or more of the attributes `DURATION`, `REPLICATION`, `SHARD DURATION`, and `NAME`.
 For more on retention policies, see [Retention Policy Management](/influxdb/v0.12/query_language/database_management/#retention-policy-management)
 
 A successful `CREATE DATABASE` query returns an empty result.
+If you attempt to create a database that already exists, InfluxDB does not return an error.
 
 ### Delete a database with DROP DATABASE
 ---
@@ -71,7 +65,7 @@ The query takes the following form:
 DROP DATABASE [IF EXISTS] <database_name>
 ```
 
-> **Note:** The `IF EXISTS` clause does nothing, is deprecated, and will be removed in InfluxDB version 0.12. The `DROP DATABASE` query will return successfully with no error when a new database is created or if the database already exists.
+> **Note:** The `IF EXISTS` clause does nothing, is deprecated, and will be removed in InfluxDB version 0.13.
 
 Drop the database NOAA_water_database:
 ```bash
@@ -80,6 +74,7 @@ Drop the database NOAA_water_database:
 ```
 
 A successful `DROP DATABASE` query returns an empty result.
+If you attempt to drop a database that does not exist, InfluxDB does not return an error.
 
 ### Delete series with DROP SERIES
 ---
