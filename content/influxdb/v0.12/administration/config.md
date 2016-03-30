@@ -279,6 +279,38 @@ The time during which the coordinating node must receive a successful response f
 If the write times out, it may still succeed but we stop waiting and queue those writes in [hinted handoff](/influxdb/v0.12/concepts/glossary/#hinted-handoff).
 Depending on the requested consistency level and the number of successful responses received, the return value will be either `write failure` or `partial write`.
 
+### max-concurrent-queries = 0
+
+The maximum number of running queries allowed on your instance.
+The default setting (`0`) allows for an unlimited number of queries.
+
+### query-timeout = "0"
+
+The maximum time for which a query can run on your instance before InfluxDB
+kills the query.
+The default setting (`0`) allows queries to run with no time restrictions.
+This setting is a [duration literal](/influxdb/v0.12/query_language/spec/#durations).
+
+### max-select-point = 0
+
+The maximum number of [points](/influxdb/v0.12/concepts/glossary/#point) that a
+`SELECT` statement can process.
+The default setting (`0`) allows the `SELECT` statement to process an unlimited
+number of points.
+
+### max-select-series = 0
+
+The maximum number of [series](/influxdb/v0.12/concepts/glossary/#series) that a
+`SELECT` statement can process.
+The default setting (`0`) allows the `SELECT` statement to process an unlimited
+number of series.
+
+### max-select-buckets = 0
+
+The maximum number of `GROUP BY time()` buckets that a query can process.
+The default setting (`0`) allows a query to process an unlimited number of
+buckets.
+
 ## [retention]
 
 This section controls the enforcement of retention policies for evicting old data.
