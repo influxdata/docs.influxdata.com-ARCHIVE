@@ -117,3 +117,7 @@ See [Cluster Node Configuration](/influxdb/v0.11/clustering/cluster_node_config/
 
 Adding a node to your cluster follows the same procedure that we outlined above.
 Note that in step 4, when you point your new node to the cluster, you must set `INFLUXD_OPTS` to every node in the cluster, including itself.
+
+### Removing nodes from your cluster
+
+Please see the [reference documentation on `DROP SERVER`](/influxdb/v0.11/query_language/spec/#drop-server).

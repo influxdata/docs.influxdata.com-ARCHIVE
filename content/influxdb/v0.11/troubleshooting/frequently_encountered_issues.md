@@ -439,3 +439,4 @@ InfluxDB will then be able to drop `Shard Group 2` and `example_db` will have on
 
 > **Note:** The time it takes for InfluxDB to adjust to the new retention policy may be longer depending on your shard precreation configuration setting.
 See [Database Configuration](/influxdb/v0.11/administration/config/#shard-precreation) for more on that setting.
+See [Database Management](/influxdb/v0.11/query_language/database_management/#delete-a-shard-with-drop-shard) for how to delete a shard.

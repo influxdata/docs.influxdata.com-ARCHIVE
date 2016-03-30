@@ -126,3 +126,7 @@ See [Cluster Node Configuration](/influxdb/v0.10/clustering/cluster_node_config/
 Adding a node to your cluster follows the same procedure that we outlined above.
 Note that in step 4, when you point your new node to the cluster, you must set `INFLUXD_OPTS` to the `hostname:port` pair of a pre-existing cluster member that is running the [consensus service](/influxdb/v0.10/concepts/glossary/#consensus-service).
 If you specify more than one `hostname:port` pair in a comma delimited list, Influx will try to connect with the additional pairs if it cannot connect with the first.
+
+### Removing nodes from your cluster
+
+Please see the [reference documentation on `DROP SERVER`](/influxdb/v0.10/query_language/spec/#drop-server).
