@@ -14,6 +14,7 @@ InfluxQL offers a full suite of administrative commands.
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete a database with `DROP DATABASE`](/influxdb/v0.12/query_language/database_management/#delete-a-database-with-drop-database)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete series with `DROP SERIES`](/influxdb/v0.12/query_language/database_management/#delete-series-with-drop-series)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete measurements with `DROP MEASUREMENT`](/influxdb/v0.12/query_language/database_management/#delete-measurements-with-drop-measurement)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete a shard with `DROP SHARD`](/influxdb/v0.12/query_language/database_management/#delete-a-shard-with-drop-shard)
 
 * [Retention policy management](/influxdb/v0.12/query_language/database_management/#retention-policy-management)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Create retention policies with `CREATE RETENTION POLICY`](/influxdb/v0.12/query_language/database_management/#create-retention-policies-with-create-retention-policy)  
@@ -126,6 +127,25 @@ A successful `DROP MEASUREMENT` query returns an empty result.
 <dt> Currently, InfluxDB does not support regular expressions with `DROP MEASUREMENTS`.
 See GitHub Issue [#4275](https://github.com/influxdb/influxdb/issues/4275) for more information.
 </dt>
+
+### Delete a shard with DROP SHARD
+---
+The `DROP SHARD` query deletes a shard. It also drops the shard from the
+[metastore](/influxdb/v0.12/concepts/glossary/#metastore).
+The query takes the following form:
+```sql
+DROP SHARD <shard_id_number>
+```
+
+Delete the shard with the id `1`:
+```
+> DROP SHARD 1
+>
+```
+
+A successful `DROP SHARD` query returns an empty result.
+InfluxDB does not return an error if you attempt to drop a shard that does not
+exist.
 
 ## Retention Policy Management
 The following sections cover how to create, alter, and delete retention policies.
