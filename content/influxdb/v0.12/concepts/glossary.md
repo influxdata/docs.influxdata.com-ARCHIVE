@@ -184,10 +184,10 @@ See [Database Management](/influxdb/v0.12/query_language/database_management/#cr
 Related entries: [cluster](/influxdb/v0.12/concepts/glossary/#cluster), [duration](/influxdb/v0.12/concepts/glossary/#duration), [node](/influxdb/v0.12/concepts/glossary/#node), [retention policy](/influxdb/v0.12/concepts/glossary/#retention-policy-rp)
 
 ## retention policy (RP)
-The part of InfluxDB's data structure that describes for how long InfluxDB keeps data (duration) and how many copies of those data are stored in the cluster (replication factor).
+The part of InfluxDB's data structure that describes for how long InfluxDB keeps data (duration), how many copies of those data are stored in the cluster (replication factor), and the time range covered by shard groups (shard group duration).
 RPs are unique per database and along with the measurement and tag set define a series.
 
-When you create a database, InfluxDB automatically creates a retention policy called `default` with an infinite duration and a replication factor set to the number of nodes in the cluster.
+When you create a database, InfluxDB automatically creates a retention policy called `default` with an infinite duration, a replication factor set to the number of nodes in the cluster, and a shard group duration set to seven days.
 See [Database Management](/influxdb/v0.12/query_language/database_management/#retention-policy-management) for retention policy management.
 
 Related entries: [duration](/influxdb/v0.12/concepts/glossary/#duration), [measurement](/influxdb/v0.12/concepts/glossary/#measurement), [replication factor](/influxdb/v0.12/concepts/glossary/#replication-factor), [series](/influxdb/v0.12/concepts/glossary/#series), [tag set](/influxdb/v0.12/concepts/glossary/#tag-set)

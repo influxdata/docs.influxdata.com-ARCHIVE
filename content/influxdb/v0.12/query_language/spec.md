@@ -253,6 +253,7 @@ statement           = alter_retention_policy_stmt |
 alter_retention_policy_stmt  = "ALTER RETENTION POLICY" policy_name on_clause
                                retention_policy_option
                                [ retention_policy_option ]
+                               [ retention_policy_option ]
                                [ retention_policy_option ] .
 ```
 
@@ -347,6 +348,7 @@ CREATE DATABASE mydb WITH NAME myrp
 create_retention_policy_stmt = "CREATE RETENTION POLICY" policy_name on_clause
                                retention_policy_duration
                                retention_policy_replication
+                               [ retention_policy_shard_group_duration ]
                                [ "DEFAULT" ] .
 ```
 
@@ -354,10 +356,13 @@ create_retention_policy_stmt = "CREATE RETENTION POLICY" policy_name on_clause
 
 ```sql
 -- Create a retention policy.
-CREATE RETENTION POLICY "10m.events" ON somedb DURATION 10m REPLICATION 2
+CREATE RETENTION POLICY "10m.events" ON somedb DURATION 60m REPLICATION 2
 
--- Create a retention policy and set it as the default.
-CREATE RETENTION POLICY "10m.events" ON somedb DURATION 10m REPLICATION 2 DEFAULT
+-- Create a retention policy and set it as the DEFAULT.
+CREATE RETENTION POLICY "10m.events" ON somedb DURATION 60m REPLICATION 2 DEFAULT
+
+-- Create a retention policy and specify the shard group duration.
+CREATE RETENTION POLICY "10m.events" ON somedb DURATION 60m REPLICATION 2 SHARD DURATION 30m
 ```
 
 ### CREATE SUBSCRIPTION
@@ -809,11 +814,13 @@ retention_policy = identifier .
 
 retention_policy_option      = retention_policy_duration |
                                retention_policy_replication |
+                               retention_policy_shard_group_duration |
                                "DEFAULT" .
 
 retention_policy_duration    = "DURATION" duration_lit .
 retention_policy_replication = "REPLICATION" int_lit .
 retention_policy_shard_group_duration = "SHARD DURATION" duration_lit .
+
 retention_policy_name = "NAME" identifier .
 
 series_id        = int_lit .

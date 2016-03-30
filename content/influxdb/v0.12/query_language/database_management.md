@@ -134,12 +134,13 @@ You may disable that auto-creation in the configuration file.
 
 ### Create retention policies with CREATE RETENTION POLICY
 ---
-The `CREATE RETENTION POLICY` query takes the following form, where `DEFAULT` is optional:
+The `CREATE RETENTION POLICY` query takes the following form:
 ```sql
-CREATE RETENTION POLICY <retention_policy_name> ON <database_name> DURATION <duration> REPLICATION <n> [DEFAULT]
+CREATE RETENTION POLICY <retention_policy_name> ON <database_name> DURATION <duration> REPLICATION <n> [SHARD DURATION <duration>] [DEFAULT]
 ```
 
-* `DURATION` determines how long InfluxDB keeps the data - the options for specifying the duration of the retention policy are listed below.
+* `DURATION` determines how long InfluxDB keeps the data.
+The options for specifying the duration of the retention policy are listed below.
 Note that the minimum retention period is one hour.
 `m` minutes  
 `h` hours  
@@ -153,6 +154,21 @@ See GitHub Issue [#3634](https://github.com/influxdb/influxdb/issues/3634) for m
 </dt>
 
 * `REPLICATION` determines how many independent copies of each point are stored in the cluster, where `n` is the number of data nodes.
+
+* `SHARD DURATION` determines the time range covered by a shard group.
+The options for specifying the duration of the shard group are listed below.
+The default shard group duration depends on your retention policy's `DURATION`.  
+`u` microseconds  
+`ms` milliseconds  
+`s` seconds  
+`m` minutes  
+`h` hours  
+`d` days  
+`w` weeks
+
+<dt> Currently, the `SHARD DURATION` attribute supports only single units.
+For example, you cannot express the duration `7230m` as `120h 30m`.
+</dt>
 
 * `DEFAULT` sets the new retention policy as the default retention policy for the database.
 
@@ -169,15 +185,16 @@ Create the same retention policy as the one in the example above, but set it as 
 ```
 
 A successful `CREATE RETENTION POLICY` query returns an empty response.
+If you attempt to create a retention policy that already exists, InfluxDB does not return an error.
 
 > **Note:** You can also specify a new retention policy in the `CREATE DATABASE` query.
 See [Create a database with CREATE DATABASE](/influxdb/v0.12/query_language/database_management/#create-a-database-with-create-database).
 
 ### Modify retention policies with ALTER RETENTION POLICY
 ---
-The `ALTER RETENTION POLICY` query takes the following form, where you must declare at least one of the retention policy attributes `DURATION`, `REPLICATION`, or `DEFAULT`:
+The `ALTER RETENTION POLICY` query takes the following form, where you must declare at least one of the retention policy attributes `DURATION`, `REPLICATION`, `SHARD DURATION`, or `DEFAULT`:
 ```sql
-ALTER RETENTION POLICY <retention_policy_name> ON <database_name> DURATION <duration> REPLICATION <n> [DEFAULT]
+ALTER RETENTION POLICY <retention_policy_name> ON <database_name> DURATION <duration> REPLICATION <n> SHARD DURATION <duration> DEFAULT
 ```
 
 First, create the retention policy `what_is_time` with a `DURATION` of two days:
@@ -186,9 +203,9 @@ First, create the retention policy `what_is_time` with a `DURATION` of two days:
 >
 ```
 
-Modify `what_is_time` to have a three week `DURATION` and make it the `DEFAULT` retention policy for `NOAA_water_database`.
+Modify `what_is_time` to have a three week `DURATION`, a 30 minute shard group duration, and  make it the `DEFAULT` retention policy for `NOAA_water_database`.
 ```sql
-> ALTER RETENTION POLICY what_is_time ON NOAA_water_database DURATION 3w DEFAULT
+> ALTER RETENTION POLICY what_is_time ON NOAA_water_database DURATION 3w SHARD DURATION 30m DEFAULT
 >
 ```
 In the last example, `what_is_time` retains its original replication factor of 1.
@@ -208,3 +225,4 @@ Delete the retention policy `what_is_time` in the `NOAA_water_database` database
 ```
 
 A successful `DROP RETENTION POLICY` query returns an empty result.
+If you attempt to drop a retention policy that does not exist, InfluxDB does not return an error.
