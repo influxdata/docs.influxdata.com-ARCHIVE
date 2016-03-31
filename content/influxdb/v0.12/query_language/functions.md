@@ -16,8 +16,12 @@ Use InfluxQL functions to aggregate, select, and transform data.
 | [INTEGRAL()](/influxdb/v0.12/query_language/functions/#integral)  | [LAST()](/influxdb/v0.12/query_language/functions/#last)  | [DIFFERENCE()](/influxdb/v0.12/query_language/functions/#difference)  
 | [MEAN()](/influxdb/v0.12/query_language/functions/#mean) | [MAX()](/influxdb/v0.12/query_language/functions/#max)  | [FLOOR()](/influxdb/v0.12/query_language/functions/#floor)
 | [MEDIAN()](/influxdb/v0.12/query_language/functions/#median)  | [MIN()](/influxdb/v0.12/query_language/functions/#min)  | [HISTOGRAM()](/influxdb/v0.12/query_language/functions/#histogram)  
-| [SPREAD()](/influxdb/v0.12/query_language/functions/#spread) | [PERCENTILE()](/influxdb/v0.12/query_language/functions/#percentile)  | [NON_NEGATIVE_DERIVATIVE()](/influxdb/v0.12/query_language/functions/#non-negative-derivative)
-| [SUM()](/influxdb/v0.12/query_language/functions/#sum)  | [TOP()](/influxdb/v0.12/query_language/functions/#top) | [STDDEV()](/influxdb/v0.12/query_language/functions/#stddev)
+| [SPREAD()](/influxdb/v0.12/query_language/functions/#spread) | [PERCENTILE()](/influxdb/v0.12/query_language/functions/#percentile)  | [MOVING_AVERAGE()](/influxdb/v0.12/query_language/functions/#moving-average)
+| [SUM()](/influxdb/v0.12/query_language/functions/#sum)  | [TOP()](/influxdb/v0.12/query_language/functions/#top) | [NON_NEGATIVE_DERIVATIVE()](/influxdb/v0.12/query_language/functions/#non-negative-derivative) |
+|   |  | [STDDEV()](/influxdb/v0.12/query_language/functions/#stddev)
+
+
+
 
 Useful InfluxQL for functions:  
 
@@ -1263,6 +1267,105 @@ values; the first value in the `difference` column is `2.028 - 2.064`.
 
 <dt> See GitHub Issue [#5930](https://github.com/influxdb/influxdb/issues/5930) for more information.
 </dt>
+
+## MOVING_AVERAGE()
+Returns the moving average across a `window` of consecutive chronological field values for a single [field](/influxdb/v0.12/concepts/glossary/#field).
+The field type must be int64 or float64.
+
+The basic `MOVING_AVERAGE()` query:
+```
+SELECT MOVING_AVERAGE(<field_key>,<window>) FROM <measurement_name> [WHERE <stuff>]
+```
+
+The `MOVING_AVERAGE()` query with a nested function and a `GROUP BY time()` clause:
+```
+SELECT MOVING_AVERAGE(<function>(<field_key>),<window>) FROM <measurement_name> WHERE <stuff> GROUP BY time(<time_interval>)
+```
+
+Functions that work with `MOVING_AVERAGE()` include
+[`COUNT()`](/influxdb/v0.12/query_language/functions/#count),
+[`MEAN()`](/influxdb/v0.12/query_language/functions/#mean),
+[`MEDIAN()`](/influxdb/v0.12/query_language/functions/#median),
+[`SUM()`](/influxdb/v0.12/query_language/functions/#sum),
+[`FIRST()`](/influxdb/v0.12/query_language/functions/#first),
+[`LAST()`](/influxdb/v0.12/query_language/functions/#last),
+[`MIN()`](/influxdb/v0.12/query_language/functions/#min),
+[`MAX()`](/influxdb/v0.12/query_language/functions/#max), and
+[`PERCENTILE()`](/influxdb/v0.12/query_language/functions/#percentile).
+
+Examples:
+
+The following examples focus on the field `water_level` in `santa_monica`
+between `2015-08-18T00:00:00Z` and `2015-08-18T00:36:00Z`:
+```
+> SELECT water_level FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' and time <= '2015-08-18T00:36:00Z'
+name: h2o_feet
+--------------
+time			                water_level
+2015-08-18T00:00:00Z	  2.064
+2015-08-18T00:06:00Z	  2.116
+2015-08-18T00:12:00Z	  2.028
+2015-08-18T00:18:00Z	  2.126
+2015-08-18T00:24:00Z	  2.041
+2015-08-18T00:30:00Z	  2.051
+2015-08-18T00:36:00Z	  2.067
+```
+
+* Calculate the moving average across every 2 field values:
+
+```
+> SELECT MOVING_AVERAGE(water_level,2) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' and time <= '2015-08-18T00:36:00Z'
+```
+
+CLI response:
+```
+name: h2o_feet
+--------------
+time			                moving_average
+2015-08-18T00:06:00Z	  2.09
+2015-08-18T00:12:00Z	  2.072
+2015-08-18T00:18:00Z	  2.077
+2015-08-18T00:24:00Z	  2.0835
+2015-08-18T00:30:00Z	  2.0460000000000003
+2015-08-18T00:36:00Z	  2.059
+```
+
+The first value in the `moving_average` column is the average of `2.064` and
+`2.116`, the second value in the `moving_average` column is the average of
+`2.116` and `2.028`.
+
+* Select the minimum `water_level` at 12 minute intervals and calculate the
+moving average across every 2 field values:
+
+```
+> SELECT MOVING_AVERAGE(MIN(water_level),2) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' and time <= '2015-08-18T00:36:00Z' GROUP BY time(12m)
+```
+
+CLI response:
+```
+name: h2o_feet
+--------------
+time			                moving_average
+2015-08-18T00:12:00Z	  2.0460000000000003
+2015-08-18T00:24:00Z	  2.0345000000000004
+2015-08-18T00:36:00Z	  2.0540000000000003
+```
+
+To get those results, InfluxDB first selects the `MIN()` `water_level` for every
+12 minute interval:
+```
+name: h2o_feet
+--------------
+time			                min
+2015-08-18T00:00:00Z	  2.064
+2015-08-18T00:12:00Z	  2.028
+2015-08-18T00:24:00Z	  2.041
+2015-08-18T00:36:00Z	  2.067
+```
+
+It then uses those values to calculate the moving average across every 2 field
+values; the first result in the `moving_average` column the average of `2.064`
+and `2.028`, and the second result is the average of `2.028` and `2.041`.
 
 ## NON_NEGATIVE_DERIVATIVE()
 Returns the non-negative rate of change for the values in a single [field](/influxdb/v0.12/concepts/glossary/#field) in a [series](/influxdb/v0.12/concepts/glossary/#series).
