@@ -1153,10 +1153,104 @@ The denominator is the difference between the relevant timestamps in minutes (`2
 This returns the rate of change per six minutes for the aggregated data from `2015-08-18T00:00:00Z` to `2015-08-18T00:18:00Z`.
 
 ## DIFFERENCE()
-`DIFFERENCE()` is not yet functional.
+Returns the difference between consecutive chronological values in a single [field](/influxdb/v0.12/concepts/glossary/#field).
+The field type must be int64 or float64.
 
-<dt> See GitHub Issue [#5930](https://github.com/influxdata/influxdb/issues/5930) for more information.
-</dt>
+The basic `DIFFERENCE()` query:
+```
+SELECT DIFFERENCE(<field_key>) FROM <measurement_name> [WHERE <stuff>]
+```
+
+The `DIFFERENCE()` query with a nested function and a `GROUP BY time()` clause:
+```
+SELECT DIFFERENCE(<function>(<field_key>)) FROM <measurement_name> WHERE <stuff> GROUP BY time(<time_interval>)
+```
+
+Functions that work with `DIFFERENCE()` include
+[`COUNT()`](/influxdb/v0.12/query_language/functions/#count),
+[`MEAN()`](/influxdb/v0.12/query_language/functions/#mean),
+[`MEDIAN()`](/influxdb/v0.12/query_language/functions/#median),
+[`SUM()`](/influxdb/v0.12/query_language/functions/#sum),
+[`FIRST()`](/influxdb/v0.12/query_language/functions/#first),
+[`LAST()`](/influxdb/v0.12/query_language/functions/#last),
+[`MIN()`](/influxdb/v0.12/query_language/functions/#min),
+[`MAX()`](/influxdb/v0.12/query_language/functions/#max), and
+[`PERCENTILE()`](/influxdb/v0.12/query_language/functions/#percentile).
+
+Examples:
+
+The following examples focus on the field `water_level` in `santa_monica`
+between `2015-08-18T00:00:00Z` and `2015-08-18T00:36:00Z`:
+```
+> SELECT water_level FROM h2o_feet WHERE location='santa_monica' AND time >= '2015-08-18T00:00:00Z' and time <= '2015-08-18T00:36:00Z'
+name: h2o_feet
+--------------
+time			                water_level
+2015-08-18T00:00:00Z	  2.064
+2015-08-18T00:06:00Z	  2.116
+2015-08-18T00:12:00Z	  2.028
+2015-08-18T00:18:00Z	  2.126
+2015-08-18T00:24:00Z	  2.041
+2015-08-18T00:30:00Z	  2.051
+2015-08-18T00:36:00Z	  2.067
+```
+
+* Calculate the difference between `water_level` values:
+
+```
+> SELECT DIFFERENCE(water_level) FROM h2o_feet WHERE location='santa_monica' AND time >= '2015-08-18T00:00:00Z' and time <= '2015-08-18T00:36:00Z'
+```
+
+CLI response:
+```
+name: h2o_feet
+--------------
+time			                difference
+2015-08-18T00:06:00Z	  0.052000000000000046
+2015-08-18T00:12:00Z	  -0.08800000000000008
+2015-08-18T00:18:00Z	  0.09799999999999986
+2015-08-18T00:24:00Z	  -0.08499999999999996
+2015-08-18T00:30:00Z	  0.010000000000000231
+2015-08-18T00:36:00Z	  0.016000000000000014
+```
+
+The first value in the `difference` column is `2.116 - 2.064`, and the second
+value in the `difference` column is `2.028 - 2.116`.
+Please note that the extra decimal places are the result of floating point
+inaccuracies.
+
+* Select the minimum `water_level` values at 12 minute intervals and calculate
+the difference between those values:
+
+```
+> SELECT DIFFERENCE(MIN(water_level)) FROM h2o_feet WHERE location='santa_monica' AND time >= '2015-08-18T00:00:00Z' and time <= '2015-08-18T00:36:00Z' GROUP BY time(12m)
+```
+
+CLI response:
+```
+name: h2o_feet
+--------------
+time			                difference
+2015-08-18T00:12:00Z	  -0.03600000000000003
+2015-08-18T00:24:00Z	  0.0129999999999999
+2015-08-18T00:36:00Z	  0.026000000000000245
+```
+
+To get the values in the `difference` column, InfluxDB first selects the `MIN()`
+values at 12 minute intervals:
+```
+> SELECT MIN(water_level) FROM h2o_feet WHERE location='santa_monica' AND time >= '2015-08-18T00:00:00Z' and time <= '2015-08-18T00:36:00Z' GROUP BY time(12m)
+name: h2o_feet
+--------------
+time			                min
+2015-08-18T00:00:00Z  	2.064
+2015-08-18T00:12:00Z  	2.028
+2015-08-18T00:24:00Z  	2.041
+2015-08-18T00:36:00Z  	2.067
+```
+
+It then uses those values to calculate the difference between chronological
+values; the first value in the `difference` column is `2.028 - 2.064`.
 
 ## FLOOR()
 `FLOOR()` is not yet functional.
