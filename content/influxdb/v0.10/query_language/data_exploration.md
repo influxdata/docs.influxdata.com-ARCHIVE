@@ -788,12 +788,13 @@ Query data that occur between epoch 0 and 1,000 days from `now()`:
 Leaving that whitespace out can cause InfluxDB to return no results or an `error parsing query` error .
 
 The other options for specifying time durations with `now()` are listed below.
-`u` microseconds  
-`s` seconds  
-`m` minutes  
-`h` hours  
-`d` days  
-`w` weeks   
+
+  * `u` microseconds  
+  * `s` seconds  
+  * `m` minutes  
+  * `h` hours  
+  * `d` days  
+  * `w` weeks   
 
 ### Absolute time
 ---
