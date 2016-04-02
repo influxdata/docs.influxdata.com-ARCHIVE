@@ -39,7 +39,6 @@ See the [installation documentation](/influxdb/v0.12/introduction/installation/#
 * [Global Options](/influxdb/v0.12/administration/config/#global-options)
 * [[meta]](/influxdb/v0.12/administration/config/#meta)
 * [[data]](/influxdb/v0.12/administration/config/#data)
-* [[hinted-handoff]](/influxdb/v0.12/administration/config/#hinted-handoff)
 * [[cluster]](/influxdb/v0.12/administration/config/#cluster)
 * [[retention]](/influxdb/v0.12/administration/config/#retention)
 * [[shard-precreation]](/influxdb/v0.12/administration/config/#shard-precreation)
@@ -82,80 +81,22 @@ this option to `true` will disable reporting.
 
 ## [meta]
 
-This section controls some of the parameters for the InfluxDB cluster.
-Specifically, it handles the parameters for the Raft consensus group which coordinates metadata about the cluster.
-For step-by-step instructions on setting up an InfluxDB cluster, see [Cluster Setup](/influxdb/v0.12/clustering/cluster_setup/).
-
-### enabled = true
-Controls if this node should run the metaservice and participate in the Raft group.
+This section controls parameters for InfluxDB's metastore,
+which stores information on users, databases, retention policies, shards, and
+continuous queries.
 
 ### dir = "/var/lib/influxdb/meta"
 
-The `meta` directory contains the metastore, which stores information on nodes, users, databases, retention policies, shards, and continuous queries.
-Files in the `meta` directory include: `id`, `peers.json`, `raft.db`, and the `snapshots` directory.
-
-* `id` stores the identification number of the Raft peer: `1` for the first node to join the cluster, `2` for the second node, and `3` for the third node to join the cluster.
-* `peers.json` stores the hostnames and ports of any Raft peers.
-There will always be at least one hostname present.
-* `snapshots` contains the server's snapshots taken for the purpose of log compaction.
-* `raft.db` is the BoltDB database that contains the Raft log and snapshots.
+The `meta` directory.
+Files in the `meta` directory include: `meta.db` and the `snapshots` directory.
 
 >**Note:** The default directory for OSX installations is `/Users/<username>/.influxdb/meta`
-
-### hostname = "localhost"
-
-The hostname of the node which is advertised to its Raft peers.
-InfluxDB tries to get the hostname automatically, but if the OS returns something that isn't resolvable by other servers in the cluster, use this option to manually set the hostname.
-
-### bind-address = ":8088"
-
-The bind address is the `port` for cluster wide communication.
-
-### http-bind-address = ":8091"
-
-The bind address for consensus communication.
-
-### https-enabled = false
-
-### https-certificate = ""
 
 ### retention-autocreate = true
 
 Retention policy auto-creation automatically creates a [`default` retention policy](/influxdb/v0.12/concepts/glossary/#retention-policy-rp) when a database is created.
-The retention policy is named `default`, has an infinite duration, and is also set as the database's default retention policy, which is used when a write or query does not specify a retention policy.
+The retention policy is named `default`, has an infinite duration, and is also set as the database's `DEFAULT` retention policy, which is used when a write or query does not specify a retention policy.
 Disable this setting to prevent the creation of a `default` retention policy when creating databases.
-
-### election-timeout = "1s"
-
-The election timeout is the duration a Raft candidate spends in the candidate state without a leader before it starts an election.
-The election timeout is slightly randomized on each Raft node to a value between one to two times the election timeout duration.
-The default setting should work for most systems.
-
-### heartbeat-timeout = "1s"
-
-The heartbeat timeout is the amount of time a Raft follower remains in the follower state without a leader before it starts an election.
-Clusters with high latency between nodes may want to increase this parameter.
-
-### leader-lease-timeout = "500ms"
-
-The leader lease timeout is the amount of time a Raft leader will remain leader if it does not hear from a majority of nodes.
-After the timeout the leader steps down to the follower state.
-The default setting should work for most systems.
-
-### commit-timeout = "50ms"
-
-The commit timeout is the amount of time a Raft node will tolerate between commands before issuing a heartbeat to tell the leader it is alive.
-The default setting should work for most systems.
-
-### cluster-tracing = false
-
-Cluster tracing toggles the logging of Raft logs on Raft nodes.
-Enable this setting when debugging Raft consensus issues.
-
-### raft-promotion-enabled = true
-
-Raft promotion automatically promotes a node to a Raft node when needed.
-Disabling Raft promotion is desirable only when specific nodes should be participating in Raft consensus.
 
 ### logging-enabled = true
 
@@ -170,9 +111,6 @@ The default duration for leases.
 ## [data]
 
 This section controls where the actual shard data for InfluxDB lives and how it is flushed from the WAL. `dir` may need to be changed to a suitable place for you system, but the WAL settings are an advanced configuration. The defaults should work for most systems.
-
-### enabled = true
-Controls if the node holds time series data shards in the cluster.
 
 ### dir = "/var/lib/influxdb/data"
 
@@ -211,73 +149,10 @@ he compact full write cold duration is the duration at which the engine will com
 The maximum points per block is the maximum number of points in an encoded block in a TSM file.
 Larger numbers may yield better compression but could incur a performance peanalty when querying.
 
-## [hinted-handoff]
-
-This section controls the hinted handoff feature, which allows nodes to temporarily store queued data when one node of a cluster is down for a short period of time.
-
->**Note:** The hinted handoff has no function in a single node cluster.
-
-### enabled = true
-
-Set to `false` to disable hinted handoff.
-
-### dir = "/var/lib/influxdb/hh"
-
-The hinted handoff directory.
-For best throughput, the HH directory and the WAL directory should be on different physical devices.
-If you have performance concerns, you will also want to make this setting different from the dir in the [[data]](/influxdb/v0.12/administration/config/#data) section.
-
->**Note:** The default directory for OSX installations is `/Users/<username>/.influxdb/hh`
-
-### max-size = 1073741824
-
-The maximum size of the hinted handoff queue for a node.
-If the queue is full, new writes are rejected and an error is returned to the client.
-The queue is drained when either the writes are retried successfully or the writes expire.
-
-### max-age = "168h"
-
-The time writes sit in the queue before they are purged.
-The time is determined by how long the batch has been in the queue, not by the timestamps in the data.
-
-### retry-rate-limit = 0
-
-The rate (in bytes per second) per node at which the hinted handoff retries writes.
-Set to `0` to disable the rate limit.
-
-### retry-interval = "1s"
-
-The initial interval at which the hinted handoff retries a write after it fails.
-
->**Note:** Hinted handoff begins retrying writes to down nodes at the interval defined by the `retry-interval`.
-If any error occurs, it will backoff exponentially until it reaches the interval defined by the `retry-max-interval`.
-Hinted handoff then retries writes at that interval until it succeeds.
-The interval resets to the `retry-interval` once hinted handoff successfully completes writes to all nodes.
-
-### retry-max-interval = "1m"
-
-The maximum interval at which the hinted handoff retries a write after it fails.
-It retries at this interval until it succeeds.
-
-### purge-interval = "1h"
-
-The interval at which InfluxDB checks to purge data that are above `max-age`.
-
 ## [cluster]
 
-This section controls non-Raft cluster behavior, which generally includes how data are shared across shards.
-
-### shard-writer-timeout = "5s"
-
-The time that a write from one node to another must complete before the write times out.
-If the write times out, it may still succeed on the remote node but the client node stops waiting and queues it in [hinted handoff](/influxdb/v0.12/concepts/glossary/#hinted-handoff).
-This timeout should always be less than or equal to the write-timeout.
-
-### write-timeout = "10s"
-
-The time during which the coordinating node must receive a successful response for writing to all remote shard owners before it considers the write a failure.
-If the write times out, it may still succeed but we stop waiting and queue those writes in [hinted handoff](/influxdb/v0.12/concepts/glossary/#hinted-handoff).
-Depending on the requested consistency level and the number of successful responses received, the return value will be either `write failure` or `partial write`.
+This section contains configuration options for query management.
+For more on managing queries, see [Query Management](/v0.12/troubleshooting/query_management/).
 
 ### max-concurrent-queries = 0
 
@@ -347,7 +222,7 @@ This section controls InfluxDB's [system self-monitoring](https://github.com/inf
 By default, InfluxDB writes the data to the `_internal` database.
 If that database does not exist, InfluxDB creates it automatically.
 The `DEFAULT` retention policy on the `_internal` database is seven days.
-If you want to use a retention policy other than the seven-day retention policy, you must [create](/influxdb/v0.12/administration/administration/#retention-policy-management) it.
+If you want to use a retention policy other than the seven-day retention policy, you must [create](/influxdb/v0.12/query_language/database_management/#retention-policy-management) it.
 
 ### store-enabled = true
 
@@ -424,6 +299,8 @@ Set to `true` to enable HTTPS.
 ### https-certificate = "/etc/ssl/influxdb.pem"
 
 The path of the certificate file.
+
+### max-row-limit = 10000
 
 ## [[graphite]]
 
@@ -628,10 +505,6 @@ The input will flush at least this often even if it hasn't reached the configure
 
 UDP read buffer size, 0 means OS default.
 UDP listener will fail if set above OS max.
-
-### precision = "n"
-
-The time precision used for UDP services.
 
 ### udp-payload-size = 65536
 
