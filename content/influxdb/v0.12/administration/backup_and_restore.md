@@ -178,8 +178,3 @@ telegraf
 ```
 
 The database has now been successfully restored!
-
-## Caveats
-
-This approach currently only works in clusters where the replication factor is the same as the number of nodes in the cluster.
-A cluster wide backup and restore will be done in the future.

@@ -17,13 +17,16 @@ This guide shows how to combine two InfluxDB features -- retention policies and 
 A retention policy (RP) is the part of InfluxDB's data structure that describes for how long InfluxDB keeps data (duration) and how many copies of those data are stored in the cluster (replication factor).
 A database can have several RPs and RPs are unique per database.
 
+<dt> Replication factors do not serve a purpose with single node instances.
+</dt>
+
 ### Purpose
 In general, InfluxDB wasn't built to process deletes.
 One of the fundamental assumptions in its architecture is that deletes are infrequent and need not be highly performant.
 However, InfluxDB recognizes the necessity of purging data that have outlived their usefulness - that is the purpose of RPs.
 
 ### Working with RPs
-When you create a database, InfluxDB automatically creates an RP called `default` with an infinite duration and a replication factor set to the number of nodes in the cluster.
+When you create a database, InfluxDB automatically creates an RP called `default` with an infinite duration and a replication factor set to one.
 `default` also serves as the `DEFAULT` RP; if you do not supply an explicit RP when you write a point to the database, the data are subject to the `DEFAULT` RP.
 
 InfluxDB automatically queries from and writes to the `DEFAULT` RP on a database.
@@ -35,7 +38,7 @@ See [Database Management](/influxdb/v0.12/query_language/database_management/#re
 > **Clarifying** `default` **vs.** `DEFAULT`
 
 > `default`: The name of the RP that InfluxDB automatically generates when you create a new database.
-It has an infinite duration and a replication factor set to the number of nodes in the cluster.
+It has an infinite duration and a replication factor set to one.
 It is initially the `DEFAULT` RP as well, but that can be altered.
 
 > `DEFAULT`: The RP that InfluxDB writes to if you do not supply an explicit RP in the write.
@@ -71,7 +74,7 @@ Before writing the data to the database `food_data`, we perform the following st
 > **Note:** We do this before inserting any data because InfluxDB only performs CQs on new data, that is, data with timestamps that occur after the time at which we create the CQ.
 
 #### Create a new `DEFAULT` RP
-When we initially [created the database](/influxdb/v0.12/query_language/database_management/#create-a-database-with-create-database) `food_data`, InfluxDB automatically generated an RP called `default` with an infinite duration and a replication factor set to the number of nodes in the cluster.
+When we initially [created the database](/influxdb/v0.12/query_language/database_management/#create-a-database-with-create-database) `food_data`, InfluxDB automatically generated an RP called `default` with an infinite duration and a replication factor set to one.
 `default` is also the `DEFAULT` RP for `food_data`; if we do not supply an explicit RP when we write a point to the database, InfluxDB writes the point to `default` and it keeps those data forever.
 
 We want the `DEFAULT` RP on `food_data` to be a two hour policy.

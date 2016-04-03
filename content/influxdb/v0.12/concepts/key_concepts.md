@@ -152,8 +152,11 @@ A single measurement can belong to different retention policies.
 A <a name="retention-policy"></a>*retention policy* describes how long InfluxDB keeps data (`DURATION`) and how many copies of those data are stored in the cluster (`REPLICATION`).
 If you're interested in reading more about retention policies, check out [Database Management](/influxdb/v0.12/query_language/database_management/#retention-policy-management).
 
+<dt> Replication factors do not serve a purpose with single node instances.
+</dt>
+
 In the sample data, everything in the `census` measurement belongs to the `default` retention policy.
-InfluxDB automatically creates that retention policy; it has an infinite duration and a replication factor set to the number of nodes in the cluster.
+InfluxDB automatically creates that retention policy; it has an infinite duration and a replication factor set to one.
 
 Now that you're familiar with measurements, tag sets, and retention policies it's time to discuss series.
 In InfluxDB, a <a name=series></a>*series* is the collection of data that share a retention policy, measurement, and tag set.

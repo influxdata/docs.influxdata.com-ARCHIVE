@@ -260,6 +260,9 @@ alter_retention_policy_stmt  = "ALTER RETENTION POLICY" policy_name on_clause
                                [ retention_policy_option ] .
 ```
 
+<dt> Replication factors do not serve a purpose with single node instances.
+</dt>
+
 #### Examples:
 
 ```sql
@@ -332,6 +335,9 @@ create_database_stmt = "CREATE DATABASE" ["IF NOT EXISTS"] db_name
                        ] .
 ```
 
+<dt> Replication factors do not serve a purpose with single node instances.
+</dt>
+
 #### Examples:
 
 ```sql
@@ -354,6 +360,9 @@ create_retention_policy_stmt = "CREATE RETENTION POLICY" policy_name on_clause
                                [ retention_policy_shard_group_duration ]
                                [ "DEFAULT" ] .
 ```
+
+<dt> Replication factors do not serve a purpose with single node instances.
+</dt>
 
 #### Examples
 
@@ -397,7 +406,7 @@ create_user_stmt = "CREATE USER" user_name "WITH PASSWORD" password
 -- Create a normal database user.
 CREATE USER jdoe WITH PASSWORD '1337password'
 
--- Create a cluster admin.
+-- Create an admin user.
 -- Note: Unlike the GRANT statement, the "PRIVILEGES" keyword is required here.
 CREATE USER jdoe WITH PASSWORD '1337password' WITH ALL PRIVILEGES
 ```
@@ -513,7 +522,7 @@ grant_stmt = "GRANT" privilege [ on_clause ] to_clause
 #### Examples:
 
 ```sql
--- grant cluster admin privileges
+-- grant admin privileges
 GRANT ALL TO jdoe
 
 -- grant read access to a database
@@ -746,7 +755,7 @@ revoke_stmt = "REVOKE" privilege [ on_clause ] "FROM" user_name .
 #### Examples:
 
 ```sql
--- revoke cluster admin from jdoe
+-- revoke admin privileges from jdoe
 REVOKE ALL PRIVILEGES FROM jdoe
 
 -- revoke read privileges from jdoe on mydb

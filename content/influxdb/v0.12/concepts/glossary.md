@@ -12,34 +12,6 @@ See [InfluxQL Functions](/influxdb/v0.12/query_language/functions/#aggregations)
 
 Related entries: [function](/influxdb/v0.12/concepts/glossary/#function), [selector](/influxdb/v0.12/concepts/glossary/#selector), [transformation](/influxdb/v0.12/concepts/glossary/#transformation)
 
-## cluster
-A collection of servers running InfluxDB nodes.
-All nodes in a cluster have the same users, databases, retention policies, and continuous queries.
-See [Cluster Setup](/influxdb/v0.12/clustering/cluster_setup/) for how to set up an InfluxDB cluster.
-
-Related entries: [node](/influxdb/v0.12/concepts/glossary/#node), [server](/influxdb/v0.12/concepts/glossary/#server)
-
-## consensus node
-A node running only the consensus service.
-
-See [Cluster Node Configuration](/influxdb/v0.12/clustering/cluster_node_config/).
-
-Related entries: [cluster](/influxdb/v0.12/concepts/glossary/#cluster), [consensus service](/influxdb/v0.12/concepts/glossary/#consensus-service), [data node](/influxdb/v0.12/concepts/glossary/#data-node), [node](/influxdb/v0.12/concepts/glossary/#node), [hybrid node](/influxdb/v0.12/concepts/glossary/#hybrid-node)
-
-## consensus service
-The InfluxDB service that participates in the raft consensus group.
-A cluster must have at least three nodes running the consensus service (consensus or hybrid nodes), but it can have more.
-There should be an odd number of nodes running the consensus service in a cluster.
-
-The number of consensus services that can fail before the cluster is degraded is &#8968;n/2 + 1&#8969; where `n` is the number of consensus services in the cluster.
-Thus, an even number of consensus services offer no additional redundancy or resiliency.
-
-The consensus service ensures consistency across the cluster for node membership, databases, retention policies, users, continuous queries, shard metadata, and subscriptions.
-
-See [Cluster Node Configuration](/influxdb/v0.12/clustering/cluster_node_config/).
-
-Related entries: [cluster](/influxdb/v0.12/concepts/glossary/#cluster), [consensus node](/influxdb/v0.12/concepts/glossary/#consensus-node), [data service](/influxdb/v0.12/concepts/glossary/#data-service), [node](/influxdb/v0.12/concepts/glossary/#node), [hybrid node](/influxdb/v0.12/concepts/glossary/#hybrid-node)
-
 ## continuous query (CQ)
 An InfluxQL query that runs automatically and periodically within a database.
 Continuous queries require a function in the `SELECT` clause and must include a `GROUP BY time()` clause.
@@ -47,26 +19,6 @@ See [Continuous Queries](/influxdb/v0.12/query_language/continuous_queries/).
 
 
 Related entries: [function](/influxdb/v0.12/concepts/glossary/#function)
-
-## coordinator node
-The node that receives write and query requests for the cluster.
-
-Related entries: [cluster](/influxdb/v0.12/concepts/glossary/#cluster), [hinted handoff](/influxdb/v0.12/concepts/glossary/#hinted-handoff), [node](/influxdb/v0.12/concepts/glossary/#node)
-
-## data node
-A node running only the data service.
-
-See [Cluster Node Configuration](/influxdb/v0.12/clustering/cluster_node_config/).
-
-Related entries: [cluster](/influxdb/v0.12/concepts/glossary/#cluster), [consensus node](/influxdb/v0.12/concepts/glossary/#consensus-node), [data service](/influxdb/v0.12/concepts/glossary/#data-service), [node](/influxdb/v0.12/concepts/glossary/#node), [hybrid node](/influxdb/v0.12/concepts/glossary/#hybrid-node)
-
-## data service
-The InfluxDB service that persists time-series data to the node.
-A cluster must have at least one node (data or hybrid nodes) running the data service, but may have any number beyond one.
-
-See [Cluster Node Configuration](/influxdb/v0.12/clustering/cluster_node_config/).
-
-Related entries: [cluster](/influxdb/v0.12/concepts/glossary/#cluster), [consensus node](/influxdb/v0.12/concepts/glossary/#consensus-node), [consensus service](/influxdb/v0.12/concepts/glossary/#consensus-service), [node](/influxdb/v0.12/concepts/glossary/#node), [hybrid node](/influxdb/v0.12/concepts/glossary/#hybrid-node)
 
 ## database
 A logical container for users, retention policies, continuous queries, and time series data.
@@ -78,7 +30,7 @@ The attribute of the retention policy that determines how long InfluxDB stores d
 Data older than the duration are automatically dropped from the database.
 See [Database Management](/influxdb/v0.12/query_language/database_management/#create-retention-policies-with-create-retention-policy) for how to set duration.
 
-Related entries: [replication factor](/influxdb/v0.12/concepts/glossary/#replication-factor), [retention policy](/influxdb/v0.12/concepts/glossary/#retention-policy-rp)
+Related entries: [retention policy](/influxdb/v0.12/concepts/glossary/#retention-policy-rp)
 
 ## field
 The key-value pair in InfluxDB's data structure that records metadata and the actual data value.
@@ -116,19 +68,6 @@ See [InfluxQL Functions](/influxdb/v0.12/query_language/functions/) for a comple
 
 Related entries: [aggregation](/influxdb/v0.12/concepts/glossary/#aggregation), [selector](/influxdb/v0.12/concepts/glossary/#selector), [transformation](/influxdb/v0.12/concepts/glossary/#transformation)  
 
-## hinted handoff
-A durable queue of data destined for a server which was unavailable at the time the data was received.
-Coordinating nodes temporarily store queued data when a target node for a write is down for a short period of time.
-
-Related entries: [cluster](/influxdb/v0.12/concepts/glossary/#cluster), [node](/influxdb/v0.12/concepts/glossary/#node), [server](/influxdb/v0.12/concepts/glossary/#server)
-
-## hybrid node
-A node running both the consensus and data services.
-
-See [Cluster Node Configuration](/influxdb/v0.12/clustering/cluster_node_config/).
-
-Related entries: [cluster](/influxdb/v0.12/concepts/glossary/#cluster), [consensus node](/influxdb/v0.12/concepts/glossary/#consensus-node), [consensus service](/influxdb/v0.12/concepts/glossary/#consensus-service), [node](/influxdb/v0.12/concepts/glossary/#node), [data node](/influxdb/v0.12/concepts/glossary/#data-node), [data service](/influxdb/v0.12/concepts/glossary/#data-service)
-
 ## identifier
 Tokens which refer to database names, retention policy names, user names, measurement names, tag keys, and field keys.
 See [Query Language Specification](/influxdb/v0.12/query_language/spec/#identifiers).
@@ -152,7 +91,7 @@ Related entries: [database](/influxdb/v0.12/concepts/glossary/#database), [reten
 ## node
 An independent `influxd` process.
 
-Related entries: [cluster](/influxdb/v0.12/concepts/glossary/#cluster), [server](/influxdb/v0.12/concepts/glossary/#server)
+Related entries: [server](/influxdb/v0.12/concepts/glossary/#server)
 
 ## point   
 The part of InfluxDB's data structure that consists of a single collection of fields in a series.
@@ -172,23 +111,20 @@ See [Data Exploration](/influxdb/v0.12/query_language/data_exploration/), [Schem
 The attribute of the retention policy that determines how many copies of the data are stored in the cluster.
 InfluxDB replicates data across `N` data nodes, where `N` is the replication factor.
 
-To maintain data availability for queries, the replication factor should be less than or equal to the number of data nodes in the cluster:
+<dt> Replication factors do not serve a purpose with single node instances.
+</dt>
 
-* Data are fully available when the replication factor is greater than the number of *unavailable* data nodes.
-* Data may be unavailable when the replication factor is less than the number of *unavailable* data nodes.
-
-Note that there are no query performance benefits from replication.
-Replication is for ensuring data availability when a data node or nodes are unavailable.
-See [Database Management](/influxdb/v0.12/query_language/database_management/#create-retention-policies-with-create-retention-policy) for how to set the replication factor.
-
-Related entries: [cluster](/influxdb/v0.12/concepts/glossary/#cluster), [duration](/influxdb/v0.12/concepts/glossary/#duration), [node](/influxdb/v0.12/concepts/glossary/#node), [retention policy](/influxdb/v0.12/concepts/glossary/#retention-policy-rp)
+Related entries: [duration](/influxdb/v0.12/concepts/glossary/#duration), [node](/influxdb/v0.12/concepts/glossary/#node), [retention policy](/influxdb/v0.12/concepts/glossary/#retention-policy-rp)
 
 ## retention policy (RP)
 The part of InfluxDB's data structure that describes for how long InfluxDB keeps data (duration), how many copies of those data are stored in the cluster (replication factor), and the time range covered by shard groups (shard group duration).
 RPs are unique per database and along with the measurement and tag set define a series.
 
-When you create a database, InfluxDB automatically creates a retention policy called `default` with an infinite duration, a replication factor set to the number of nodes in the cluster, and a shard group duration set to seven days.
+When you create a database, InfluxDB automatically creates a retention policy called `default` with an infinite duration, a replication factor set to one, and a shard group duration set to seven days.
 See [Database Management](/influxdb/v0.12/query_language/database_management/#retention-policy-management) for retention policy management.
+
+<dt> Replication factors do not serve a purpose with single node instances.
+</dt>
 
 Related entries: [duration](/influxdb/v0.12/concepts/glossary/#duration), [measurement](/influxdb/v0.12/concepts/glossary/#measurement), [replication factor](/influxdb/v0.12/concepts/glossary/#replication-factor), [series](/influxdb/v0.12/concepts/glossary/#series), [tag set](/influxdb/v0.12/concepts/glossary/#tag-set)
 
@@ -225,7 +161,7 @@ Related entries: [tag set](/influxdb/v0.12/concepts/glossary/#tag-set), [measure
 A machine, virtual or physical, that is running InfluxDB.
 There should only be one InfluxDB process per server.
 
-Related entries: [cluster](/influxdb/v0.12/concepts/glossary/#cluster), [node](/influxdb/v0.12/concepts/glossary/#node)
+Related entries: [node](/influxdb/v0.12/concepts/glossary/#node)
 
 ## tag  
 The key-value pair in InfluxDB's data structure that records metadata.
@@ -245,7 +181,6 @@ Related entries: [field key](/influxdb/v0.12/concepts/glossary/#field-key), [tag
 
 ## tag set
 The collection of tag keys and tag values on a point.
-
 
 Related entries: [point](/influxdb/v0.12/concepts/glossary/#point), [series](/influxdb/v0.12/concepts/glossary/#series), [tag](/influxdb/v0.12/concepts/glossary/#tag), [tag key](/influxdb/v0.12/concepts/glossary/#tag-key), [tag value](/influxdb/v0.12/concepts/glossary/#tag-value)
 

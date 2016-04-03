@@ -18,7 +18,6 @@ By default, InfluxDB uses the following network ports:
 
 - TCP port `8083` is used for InfluxDB's [Admin panel](/influxdb/v0.12/tools/web_admin/)
 - TCP port `8086` is used for client-server communication over InfluxDB's HTTP API
-- TCP ports `8088` and `8091` are required for clustered InfluxDB instances
 
 > Note: In addition to the ports above,
 InfluxDB also offers multiple plugins that may require custom ports.
@@ -242,17 +241,6 @@ When using non-standard directories for InfluxDB data and configurations, also b
 chown influxdb:influxdb /mnt/influx
 chown influxdb:influxdb /mnt/db
 ```
-
-### Other Considerations
-
-If you're planning on using a cluster, you may also want to set `-join` flags for the `INFLUXD_OPTS` variable in `/etc/default/influxdb`.
-For example:
-
-```
-INFLUXD_OPTS='[-join hostname_1:port_1[,hostname_2:port_2]]'
-```
-
-For more detailed instructions on how to set up a cluster, please see the [Clustering](/influxdb/v0.12/clustering/cluster_setup/) section.
 
 ## Nightly and Development Versions
 

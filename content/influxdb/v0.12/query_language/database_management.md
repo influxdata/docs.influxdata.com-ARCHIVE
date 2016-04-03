@@ -175,6 +175,9 @@ See GitHub Issue [#3634](https://github.com/influxdb/influxdb/issues/3634) for m
 
 * `REPLICATION` determines how many independent copies of each point are stored in the cluster, where `n` is the number of data nodes.
 
+<dt> Replication factors do not serve a purpose with single node instances.
+</dt>
+
 * `SHARD DURATION` determines the time range covered by a shard group.
 The options for specifying the duration of the shard group are listed below.
 The default shard group duration depends on your retention policy's `DURATION`.  
@@ -216,6 +219,9 @@ The `ALTER RETENTION POLICY` query takes the following form, where you must decl
 ```sql
 ALTER RETENTION POLICY <retention_policy_name> ON <database_name> DURATION <duration> REPLICATION <n> SHARD DURATION <duration> DEFAULT
 ```
+
+<dt> Replication factors do not serve a purpose with single node instances.
+</dt>
 
 First, create the retention policy `what_is_time` with a `DURATION` of two days:
 ```sql
