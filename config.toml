@@ -1096,25 +1096,30 @@ SectionPagesMenu = "products"
     identifier = "query_language"
     weight = 50
     url = "/influxdb/v0.12/query_language/"
+    [[menu.influxdb_012]]
+      name = "High availability"
+      identifier = "high_availability"
+      weight = 60
+      url = "/influxdb/v0.12/high_availability/"
   [[menu.influxdb_012]]
     name = "Client Libraries"
     identifier = "clients"
-    weight = 60
+    weight = 70
     url = "/influxdb/v0.12/clients/"
   [[menu.influxdb_012]]
     name = "Administration"
     identifier = "administration"
-    weight = 70
+    weight = 80
     url = "/influxdb/v0.12/administration/"
   [[menu.influxdb_012]]
     name = "Tools"
     identifier = "tools"
-    weight = 80
+    weight = 90
     url = "/influxdb/v0.12/tools/"
   [[menu.influxdb_012]]
     name = "About the Project"
     identifier = "about"
-    weight = 90
+    weight = 100
     url = "/influxdb/v0.12/about/"
 
   # InfluxDB v0.12 Sub-Menu - Introduction
