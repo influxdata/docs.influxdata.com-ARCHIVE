@@ -847,7 +847,7 @@ The following two queries query data between August 18, 2015 23:00:01.232000000 
 ```
 
 * Single quote the date time string.
-InfluxDB fails to restrict data by date time strings that are double quoted.
+InfluxDB returns as error (`ERR: invalid operation: time and *influxql.VarRef are not compatible`) if you double quote the date time string.
 * If you only specify the date, InfluxDB sets the time to `00:00:00`.
 
 **Epoch time**  

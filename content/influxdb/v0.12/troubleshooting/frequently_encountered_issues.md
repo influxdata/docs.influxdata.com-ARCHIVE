@@ -200,6 +200,8 @@ Single quote string values (for example, tag values) but do not single quote ide
 Double quote identifiers if they start with a digit, contain characters other than `[A-z,0-9,_]`, or if they are an [InfluxQL keyword](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords).
 You can double quote identifiers even if they don't fall into one of those categories but it isn't necessary.
 
+Examples:
+
 Yes: `SELECT bikes_available FROM bikes WHERE station_id='9'`
 
 Yes: `SELECT "bikes_available" FROM "bikes" WHERE "station_id"='9'`
@@ -210,7 +212,17 @@ No: `SELECT 'bikes_available' FROM 'bikes' WHERE 'station_id'="9"`
 
 No: `SELECT * from cr@zy where p^e='2'`
 
-See the [Query Syntax](/influxdb/v0.12/query_language/query_syntax/) page for more information.
+Single quote date time strings. InfluxDB returns an error (`ERR: invalid
+operation: time and *influxql.VarRef are not compatible`) if you double quote
+a date time string.
+
+Examples:
+
+Yes: `SELECT water_level FROM h2o_feet WHERE time > '2015-08-18T23:00:01.232000000Z' AND time < '2015-09-19'`
+
+No: `SELECT water_level FROM h2o_feet WHERE time > "2015-08-18T23:00:01.232000000Z" AND time < "2015-09-19"`
+
+See [Data Exploration](/influxdb/v0.12/query_language/data_exploration/#time-syntax-in-queries) for more on time syntax in queries.
 
 ## Missing data after creating a new `DEFAULT` retention policy
 When you create a new `DEFAULT` retention policy (RP) on a database, the data written to the old `DEFAULT` RP remain in the old RP.
