@@ -10,10 +10,7 @@ The line protocol is a text based format for writing points to InfluxDB.
 
 Syntax reference for Line Protocol
 
-## [JSON Protocol(DEPRECATED)](/influxdb/v0.12/write_protocols/json/)
-
-The JSON write protocol is deprecated as of InfluxDB 0.9.1.
-It receives no bug fixes or updates, and should not be used in production environments.
+## [JSON Protocol(REMOVED)](/influxdb/v0.12/write_protocols/json/)
 
 ## [UDP](/influxdb/v0.12/write_protocols/udp/)
 
