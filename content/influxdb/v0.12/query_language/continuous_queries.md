@@ -38,6 +38,10 @@ CREATE CONTINUOUS QUERY <cq_name> ON <database_name> [RESAMPLE [EVERY <interval>
 The `CREATE CONTINUOUS QUERY` statement is essentially an InfluxQL query surrounded by `CREATE CONTINUOUS QUERY [...] BEGIN` and `END`.
 The following discussion breaks the CQ statement into its meta portion (everything between `CREATE` and `BEGIN`) and query portion (everything between `BEGIN` and `END`).
 
+A successful `CREATE CONTINUOUS QUERY` statement returns an empty response.
+If you attempt to create a continuous query that already exists, InfluxDB does
+not return an error.
+
 #### Meta syntax:
 ```
 CREATE CONTINUOUS QUERY ON <database_name> [RESAMPLE [EVERY <interval>] [FOR <interval>]]
