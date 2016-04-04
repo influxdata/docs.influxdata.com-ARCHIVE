@@ -37,7 +37,7 @@ They consist of a measurement, tags, fields, and a timestamp.
 InfluxDB requires a measurement name.
 Strictly speaking, tags are optional but most series include tags to differentiate data sources and to make querying both easy and efficient.
 Both tag keys and tag values are strings.
-Field keys are required and are always strings, and, [by default](/influxdb/v0.12/write_protocols/write_syntax/#line-protocol), field values are floats.
+Field keys are required and are always strings, and, [fault](/influxdb/v0.12/write_protocols/write_syntax/#line-protocol), field values are floats.
 The timestamp - supplied at the end of the line in Unix time in nanoseconds since January 1, 1970 UTC - is optional.
 If you do not specify a timestamp InfluxDB uses the server's local nanosecond timestamp in Unix epoch.
 Anything that has to do with time in InfluxDB is always UTC.
@@ -77,7 +77,7 @@ Write the data in `cpu_data.txt` to the `mydb` database with:
 `curl -i -XPOST 'http://localhost:8086/write?db=mydb' --data-binary @cpu_data.txt`
 
 > **Note:** If your data file has more than 5,000 points, it may be necessary to split that file into several files in order to write your data in batches to InfluxDB.
-[By default](/influxdb/v0.12/administration/config/#cluster), the HTTP request times out after five seconds.
+By default, the HTTP request times out after five seconds.
 InfluxDB will still attempt to write the points after that time out but there will be no confirmation that they were successfully written.
 
 ### Schemaless Design
@@ -98,7 +98,7 @@ This consistency is good for those developing and consuming the API: everyone in
 
 REST, however, is a convention.
 InfluxDB makes do with three API endpoints.
-This simple, easy to understand system uses HTTP as a transfer system for [InfluxQL](https://github.com/influxdb/influxdb/blob/master/influxql/README.md).
+This simple, easy to understand system uses HTTP as a transfer system for [InfluxQL](/influxdb/v0.12/query_language/spec/).
 The InfluxDB API makes no attempt to be RESTful.
 
 ### HTTP response summary

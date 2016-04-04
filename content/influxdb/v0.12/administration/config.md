@@ -72,7 +72,7 @@ addresses of reporting servers.
 
 The `reporting-disabled` option toggles
 the reporting of anonymous data every 24 hours to `m.influxdb.com`.
-Each report includes a unique, randomly-generated cluster identifier
+Each report includes a unique, randomly-generated identifier
 (an 8-byte Raft ID), OS, architecture, InfluxDB version, and the
 number of [databases](/influxdb/v0.12/concepts/glossary/#database),
 [measurements](/influxdb/v0.12/concepts/glossary/#measurement), and
