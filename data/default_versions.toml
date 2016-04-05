@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 influxdb = "influxdb_011"
 influxdb_semver = "v0.11"
 telegraf = "telegraf_011"
@@ -6,3 +7,13 @@ chronograf = "chronograf_012"
 chronograf_semver = "v0.12"
 kapacitor = "kapacitor_011"
 kapacitor_semver = "v0.11"
+=======
+influxdb = "influxdb_012"
+influxdb_semver = "v0.12"
+telegraf = "telegraf_012"
+telegraf_semver = "v0.12"
+chronograf = "chronograf_012"
+chronograf_semver = "v0.12"
+kapacitor = "kapacitor_012"
+kapacitor_semver = "v0.12"
+>>>>>>> master
