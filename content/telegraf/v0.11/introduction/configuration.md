@@ -10,7 +10,10 @@ menu:
 
 ## Configuring Telegraf
 
-### Create a configuration file with every input and output
+### Create a configuration file with default input and output plugins.
+
+> Every plugin will be in the file, but most will be commented.
+
 ```
 telegraf -sample-config > telegraf.conf
 ```
@@ -19,5 +22,7 @@ telegraf -sample-config > telegraf.conf
 ```
 telegraf -sample-config -input-filter <pluginname>[:<pluginname>] -output-filter <outputname>[:<outputname>] > telegraf.conf
 ```
+
+For more advanced configuration details, see the [Telegraf configuration doc](https://github.com/influxdata/telegraf/blob/master/docs/CONFIGURATION.md)
 
 > **Note:** In most cases, you will need to edit the configuration file to match your needs.

@@ -120,6 +120,7 @@ REPLICATION   RESAMPLE      RETENTION     REVOKE        SELECT        SERIES
 SERVER        SERVERS       SET           SHARD         SHARDS        SLIMIT
 SOFFSET       STATS         SUBSCRIPTION  SUBSCRIPTIONS TAG           TO
 USER          USERS         VALUES        WHERE         WITH          WRITE
+META          DATA
 ```
 
 ## Literals
@@ -224,6 +225,8 @@ statement           = alter_retention_policy_stmt |
                       drop_measurement_stmt |
                       drop_retention_policy_stmt |
                       drop_series_stmt |
+                      drop_server_stmt |
+                      drop_shard_stmt |
                       drop_subscription_stmt |
                       drop_user_stmt |
                       grant_stmt |
@@ -234,6 +237,7 @@ statement           = alter_retention_policy_stmt |
                       show_measurements_stmt |
                       show_retention_policies |
                       show_series_stmt |
+                      show_servers_stmt |
                       show_shard_groups_stmt |
                       show_shards_stmt |
                       show_subscriptions_stmt|
@@ -447,6 +451,44 @@ drop_series_stmt = "DROP SERIES" ( from_clause | where_clause | from_clause wher
 
 ```
 
+### DROP SERVER
+
+```
+drop_server_stmt = "DROP ( META | DATA ) SERVER" ( server_id ) .
+```
+
+#### Examples:
+
+-- drop a [consensus node](/influxdb/v0.11/concepts/glossary/#consensus-node) from a cluster with the id `1`
+```
+DROP META SERVER 1
+```
+
+-- drop a [data node](/influxdb/v0.11/concepts/glossary/#data-node) from a cluster with the id `2`
+```
+DROP DATA SERVER 2
+```
+
+-- drop a [hybrid node](/influxdb/v0.11/concepts/glossary/#hybrid-node) from a cluster with the meta node id `3` and data node id `3`
+```
+DROP META SERVER 3
+DROP DATA SERVER 3
+```
+
+> **Note:** Identify the server_id with the [`show_servers_stmt`](/influxdb/v0.11/query_language/spec/#show-servers).
+
+### DROP SHARD
+
+```
+drop_shard_stmt = "DROP SHARD" ( shard_id ) .
+```
+
+#### Example:
+
+```
+DROP SHARD 1
+```
+
 ### DROP SUBSCRIPTION
 
 ```
@@ -585,6 +627,40 @@ show_series_stmt = "SHOW SERIES" [ from_clause ] [ where_clause ] [ limit_clause
 ```sql
 
 ```
+
+### SHOW SERVERS
+
+```
+show_servers_stmt  = "SHOW SERVERS" .
+```
+
+#### Example:
+
+```sql
+--- show all servers in the cluster
+> SHOW SERVERS
+
+name: data_nodes
+----------------
+id	 http_addr		  tcp_addr
+1	  <IP1>:8086	  <IP1>:8088
+2	  <IP2>:8086	  <IP2>:8088
+3	  <IP3>:8086	  <IP3>:8088
+
+
+name: meta_nodes
+----------------
+id	 http_addr		  tcp_addr
+1	  <IP1>:8091	  <IP1>:8088
+2	  <IP2>:8091	  <IP2>:8088
+3	  <IP3>:8091	  <IP3>:8088
+```
+
+> **Notes:**
+>
+* `SHOW SERVERS` groups results into `data_nodes` and `meta_nodes`.
+The term `meta_nodes` is outdated and refers to a node that runs the consensus service.
+* [Hybrid nodes](/influxdb/v0.11/concepts/glossary/#hybrid-node) appear as both `data_nodes` and `meta_nodes` in the `SHOW SERVERS` query results.
 
 ### SHOW SHARD GROUPS
 
@@ -804,6 +880,10 @@ retention_policy_duration    = "DURATION" duration_lit .
 retention_policy_replication = "REPLICATION" int_lit
 
 series_id        = int_lit .
+
+server_id        = int_lit .
+
+shard_id         = int_lit .
 
 sort_field       = field_key [ ASC | DESC ] .
 
