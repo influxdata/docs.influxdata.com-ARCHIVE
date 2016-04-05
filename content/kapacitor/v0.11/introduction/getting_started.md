@@ -308,7 +308,10 @@ var data = stream.from().database('telegram').retentionPolicy('default')
   .where(lambda: "host" == "server1")
 ```
 
-Result of this search will always be empty, because we used double quotes around server1. This means that we are searching for series where field "host" is equal to field "server1".  This is probably not what we were planning to do. We were probably searching for series where tag "host" has value "server1", so we should use single quotes for that and our tick script should look like this:
+Result of this search will always be empty, because we used double quotes around server1.
+This means that we are searching for series where field "host" is equal to field "server1".
+This is probably not what we were planning to do.
+We were probably searching for series where tag "host" has value "server1", so we should use single quotes for that and our tick script should look like this:
 
 ```javascript
 var data = stream.from().database('telegram').retentionPolicy('default')
