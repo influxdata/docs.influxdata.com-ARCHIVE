@@ -1498,6 +1498,96 @@ SectionPagesMenu = "products"
   url = "https://github.com/influxdb/telegraf/tree/master/plugins/inputs/kafka_consumer"
   parent = "services"
 
+  # InfluxDB v0.12 Menu
+  [[menu.influxdb_012]]
+    name = "Introduction"
+    identifier = "introduction"
+    weight = 0
+    url = "/influxdb/v0.12/introduction/"
+  [[menu.influxdb_012]]
+    name = "Guides"
+    identifier = "guides"
+    weight = 10
+    url = "/influxdb/v0.12/guides/"
+  [[menu.influxdb_012]]
+    name = "Concepts"
+    identifier = "concepts"
+    weight = 20
+    url = "/influxdb/v0.12/concepts/"
+  [[menu.influxdb_012]]
+    name = "Troubleshooting"
+    identifier = "troubleshooting"
+    weight = 30
+    url = "/influxdb/v0.12/troubleshooting/"
+  [[menu.influxdb_012]]
+    name = "Write Protocols and Plugins"
+    identifier = "write_protocols"
+    weight = 40
+    url = "/influxdb/v0.12/write_protocols/"
+  [[menu.influxdb_012]]
+    name = "Query Language"
+    identifier = "query_language"
+    weight = 50
+    url = "/influxdb/v0.12/query_language/"
+    [[menu.influxdb_012]]
+      name = "High availability"
+      identifier = "high_availability"
+      weight = 60
+      url = "/influxdb/v0.12/high_availability/"
+  [[menu.influxdb_012]]
+    name = "Client Libraries"
+    identifier = "clients"
+    weight = 70
+    url = "/influxdb/v0.12/clients/"
+  [[menu.influxdb_012]]
+    name = "Administration"
+    identifier = "administration"
+    weight = 80
+    url = "/influxdb/v0.12/administration/"
+  [[menu.influxdb_012]]
+    name = "Tools"
+    identifier = "tools"
+    weight = 90
+    url = "/influxdb/v0.12/tools/"
+  [[menu.influxdb_012]]
+    name = "About the Project"
+    identifier = "about"
+    weight = 100
+    url = "/influxdb/v0.12/about/"
+
+  # InfluxDB v0.12 Sub-Menu - Introduction
+  [[menu.influxdb_012]]
+    name = "Download"
+    identifier = "download"
+    weight = 0
+    url = "https://influxdata.com/downloads/#influxdb"
+    parent = "introduction"
+
+  # InfluxDB v0.12 Sub-Menu - About
+  [[menu.influxdb_012]]
+    name = "Release Notes/Changelog"
+    identifier = "changelog"
+    weight = 0
+    url = "https://github.com/influxdb/influxdb/blob/master/CHANGELOG.md"
+    parent = "about"
+  [[menu.influxdb_012]]
+    name = "Contributing"
+    identifier = "contributing"
+    weight = 10
+    url = "https://github.com/influxdb/influxdb/blob/master/CONTRIBUTING.md"
+    parent = "about"
+  [[menu.influxdb_012]]
+    name = "CLA"
+    identifier = "cla"
+    weight = 20
+    url = "https://influxdata.com/community/cla/"
+    parent = "about"
+  [[menu.influxdb_012]]
+    name = "Licenses"
+    identifier = "licenses"
+    weight = 30
+    url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
+    parent = "about"
 
 # InfluxDB v0.11 Menu
 [[menu.influxdb_011]]

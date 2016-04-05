@@ -1,5 +1,6 @@
 ---
 title: Cluster Setup
+newversionredirect: /concepts/011_vs_012/#clustering-updates
 menu:
   influxdb_011:
     weight: 10
