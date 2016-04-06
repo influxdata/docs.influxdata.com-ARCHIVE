@@ -7,18 +7,24 @@ menu:
     parent: administration
 ---
 
-To upgrade to InfluxDB 0.11, you must be on version 0.10 and all shards must be in `TSM` format (the default storage engine starting with InfluxDB 0.10).
+To upgrade to InfluxDB 0.11 all shards must be in `TSM` format (the default storage engine starting with InfluxDB 0.10).
 See the [0.10 documentation](/influxdb/v0.10/administration/upgrading/#convert-b1-and-bz1-shards-to-tsm1) for how to convert `b1` and `bz1` shards to `TSM`.
 If any `b1` or `bz1` shards are present, InfluxDB 0.11 will not start.
 
-> **Identifying non-`TSM` shards**
->
+> **Note:** The shard conversion tool (`influx_tsm`) is not functional with
+InfluxDB 0.11.0.
+The tool is functional with InfluxDB 0.11.1.
+Using `influx_tsm` with version 0.11.1 requires downtime as InfluxDB will not start if
+it detects non-`TSM` shards.
+
+**Identifying non-`TSM` shards:**
+
 In your [data directory](/influxdb/v0.11/administration/config/#dir-var-lib-influxdb-data):
->
+
 * Non-`TSM` shards are files of the form: `data/<database>/<retention_policy>/<shard_id>`
 * `TSM` shards are files of the form: `data/<database>/<retention_policy>/<shard_id>/<file>.tsm`
 
-Additional considerations when upgrading to 0.11:
+**Additional considerations when upgrading to 0.11:**
 
 * [Generate a new configuration file](/influxdb/v0.11/administration/upgrading/#generate-a-new-configuration-file)
 * [Review queries affected by the breaking API changes](/influxdb/v0.11/administration/upgrading/#review-queries-affected-by-the-breaking-api-changes)
