@@ -23,13 +23,15 @@ Example:
            .retentionPolicy('myrp')
            .measurement('mymeasurement')
            .where(lambda: "host" =~ /logger\d+/)
+           .groupBy('mytag')
         |window()
         ...
 ```
 
-The above example selects only data points from the database `mydb` 
-and retention policy `myrp` and measurement `mymeasurement` where 
-the tag `host` matches the regex `logger\d+` 
+The above example selects only data points from the database `mydb`
+and retention policy `myrp` and measurement `mymeasurement` where
+the tag `host` matches the regex `logger\d+`. The points are grouped by
+the `host` tag in downstream processing.
 
 
 Index
@@ -42,6 +44,7 @@ Index
 -	[RetentionPolicy](/kapacitor/v0.12/nodes/stream_node/#retentionpolicy)
 -	[Truncate](/kapacitor/v0.12/nodes/stream_node/#truncate)
 -	[Where](/kapacitor/v0.12/nodes/stream_node/#where)
+-	[GroupBy](/kapacitor/v0.12/nodes/stream_node/#groupby)
 
 ### Chaining Methods
 
@@ -54,7 +57,6 @@ Index
 -	[Eval](/kapacitor/v0.12/nodes/stream_node/#eval)
 -	[First](/kapacitor/v0.12/nodes/stream_node/#first)
 -	[From](/kapacitor/v0.12/nodes/stream_node/#from)
--	[GroupBy](/kapacitor/v0.12/nodes/stream_node/#groupby)
 -	[HttpOut](/kapacitor/v0.12/nodes/stream_node/#httpout)
 -	[InfluxDBOut](/kapacitor/v0.12/nodes/stream_node/#influxdbout)
 -	[Join](/kapacitor/v0.12/nodes/stream_node/#join)
@@ -91,6 +93,20 @@ If empty any database will be used.
 
 ```javascript
 node.database(value string)
+```
+
+### GroupBy
+
+Group the data by a set of tags.
+
+Can pass literal * to group by all dimensions.
+Example:
+
+
+```javascript
+  stream
+      |from()
+          .groupBy(*)
 ```
 
 
@@ -441,30 +457,6 @@ node|from()
 ```
 
 Returns: [StreamNode](/kapacitor/v0.12/nodes/stream_node/)
-
-
-### GroupBy
-
-Group the data by a set of tags. 
-
-Can pass literal * to group by all dimensions. 
-Example: 
-
-
-```javascript
-  stream
-      |from()
-          .groupBy(*)
-```
-
-
-
-```javascript
-node|groupBy(tag ...interface{})
-```
-
-Returns: [StreamNode](/kapacitor/v0.12/nodes/stream_node/)
-
 
 ### HttpOut
 
