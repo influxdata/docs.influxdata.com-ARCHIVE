@@ -85,6 +85,7 @@ The rules:
 
 - double quoted identifiers can contain any unicode character other than a new line
 - double quoted identifiers can contain escaped `"` characters (i.e., `\"`)
+- double quoted identifiers can contain InfluxQL [keywords](/influxdb/v0.12/query_language/spec/#keywords)
 - unquoted identifiers must start with an upper or lowercase ASCII character or "_"
 - unquoted identifiers may contain only ASCII letters, decimal digits, and "_"
 
