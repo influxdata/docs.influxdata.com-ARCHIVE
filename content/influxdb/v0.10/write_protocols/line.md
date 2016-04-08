@@ -102,7 +102,7 @@ If the timestamp is not provided the point will inherit the server's local times
 
 Some write APIs allow passing a lower precision.
 If the API supports a lower precision, the timestamp may also be an integer epoch in microseconds, milliseconds, seconds, minutes or hours.
-We recommend using the smallest precision possible as this can result in
+We recommend using the least precise precision possible as this can result in
 significant improvements in compression.
 
 ## Full Example
