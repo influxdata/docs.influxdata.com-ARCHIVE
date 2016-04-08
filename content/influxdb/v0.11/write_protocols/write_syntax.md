@@ -54,7 +54,9 @@ When no timestamp is provided the server will insert the point with the local se
 timestamp.
 If a timestamp is provided it must be separated from the field(s) by a space.
 Timestamps must be in Unix time and are assumed to be in nanoseconds.
-A different precision can be specified, see the HTTP syntax for details.
+A different precision can be specified, see the [HTTP syntax](/influxdb/v0.11/write_protocols/write_syntax/#http) for details.
+We recommend using the least precise precision possible as this can result in
+significant improvements in compression.
 
 ### Key-value Separator
 

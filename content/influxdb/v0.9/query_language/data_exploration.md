@@ -343,6 +343,7 @@ Note that unless you specify a different upper and lower bound for the time rang
 * Valid units for `time()` are:  
 <br>
     `u` microseconds  
+    `ms` milliseconds  
     `s` seconds  
     `m` minutes  
     `h` hours  
@@ -787,8 +788,9 @@ Query data that occur between epoch 0 and 1,000 days from `now()`:
 * Note the whitespace between the operator and the time duration.
 Leaving that whitespace out can cause InfluxDB to return no results or an `error parsing query` error .
 
-The other options for specifying time durations with `now()` are listed below.
+The other options for specifying time durations with `now()` are listed below.  
 `u` microseconds  
+`ms` milliseconds  
 `s` seconds  
 `m` minutes  
 `h` hours  
