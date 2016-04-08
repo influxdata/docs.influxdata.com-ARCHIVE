@@ -358,6 +358,7 @@ Note that unless you specify a different upper and lower bound for the time rang
 * Valid units for `time()` are:  
 <br>
     `u` microseconds  
+    `ms` milliseconds    
     `s` seconds  
     `m` minutes  
     `h` hours  
@@ -823,6 +824,7 @@ Leaving that whitespace out can cause InfluxDB to return no results or an `error
 
 The other options for specifying time durations with `now()` are listed below.  
 `u` microseconds  
+`ms` milliseconds  
 `s` seconds  
 `m` minutes  
 `h` hours  
