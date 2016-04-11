@@ -8,8 +8,16 @@ menu:
     weight: 0
 ---
 
-## [Getting Started](/chronograf/v0.12/introduction/getting_started/)
-Download, install, and start building beautiful visualizations and dashboards with Chronograf.
+Chronograf is the third piece of the [TICK stack](https://influxdata.com/time-series-platform/).
+It's a graphing and visualization application that you use to perform
+ad hoc exploration of your InfluxDB data.
 
-## [Templating](/chronograf/v0.12/introduction/templating/)
-Easily modify the time range and tag values displayed by a visualization and/or dashboard.
+## Key features
+
+Here are some of the features that Chronograf currently supports that make it a
+great choice for data visualization.
+
+* Simple installation.
+* Smart query builder designed to work with large datasets.
+* Collect multiple graphs into dashboards.
+* Support for templates.
