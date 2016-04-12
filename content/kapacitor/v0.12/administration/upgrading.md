@@ -4,7 +4,7 @@ title: Upgrading to Kapacitor v0.12
 menu:
   kapacitor_012:
     weight: 30
-    parent: introduction
+    parent: administration
 ---
 
 
