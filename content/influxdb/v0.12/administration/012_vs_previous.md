@@ -1,9 +1,11 @@
 ---
 title: Differences between InfluxDB 0.12 and versions prior to 0.11
+aliases:
+  /influxdb/v0.12/concepts/012_vs_previous/
 menu:
   influxdb_012:
     weight: 40
-    parent: concepts
+    parent: administration
 ---
 
 Users looking to upgrade to InfluxDB 0.12 from versions prior to 0.11 should view the following pages in our documentation.
