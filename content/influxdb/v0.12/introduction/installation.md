@@ -19,12 +19,14 @@ By default, InfluxDB uses the following network ports:
 - TCP port `8083` is used for InfluxDB's [Admin panel](/influxdb/v0.12/tools/web_admin/)
 - TCP port `8086` is used for client-server communication over InfluxDB's HTTP API
 
-> Note: In addition to the ports above,
+In addition to the ports above,
 InfluxDB also offers multiple plugins that may require custom ports.
 All port mappings can be modified through the [configuration file](/influxdb/v0.12/administration/config),
 which is located at `/etc/influxdb/influxdb.conf` for default installations.
 
 ## Installation
+
+> For users who don't want to install any software and are ready to use InfluxDB, you may want to check out our [managed hosted InfluxDB offering](http://customers.influxdb.com).
 
 ### Ubuntu & Debian
 
@@ -136,12 +138,6 @@ Or, if you don't want/need launchctl, in a separate terminal window you can just
 ```bash
 influxd -config /usr/local/etc/influxdb.conf
 ```
-
-## Hosted
-
-For users who don't want to install any software and are ready to use InfluxDB, you may want to check out our [managed hosted InfluxDB offering](http://customers.influxdb.com).
-
-<a href="/influxdb/v0.12/introduction/getting_started/"><font size="6"><b>⇒ Now get started!</b></font></a>
 
 ## Configuration
 
