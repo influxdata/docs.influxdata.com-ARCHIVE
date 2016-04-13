@@ -109,7 +109,7 @@ influxd config > /etc/influxdb/influxdb_012.conf.generated
 Compare your old configuration file against the newly generated [InfluxDB 0.12 file](/influxdb/v0.12/administration/config/) and manually update any defaults with your localized settings.
 
 > **Note:** If you're working on a system other than OS X you will need to
-change the following directories your newly-generated configuration file:
+change the following directories in your newly-generated configuration file:
 >
 * Change the `dir` setting in the `[meta]` section to `/var/lib/influxdb/meta`
 * Change the `dir` setting in the `[data]` section to `/var/lib/influxdb/data`
