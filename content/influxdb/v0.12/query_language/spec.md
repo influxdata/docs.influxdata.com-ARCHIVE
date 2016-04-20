@@ -913,7 +913,9 @@ The life cycle of a query looks like this:
 
 ### Understanding Iterators
 
-Iterators are at the heart of the query engine. They provide a simple interface for looping over a set of points. For example, this is an iterator over Float points:
+Iterators are at the heart of the query engine. They provide a simple, strongly-typed interface for looping over a set of points. Each field in a query must be a single type (float, integer, string, boolean) and combining series of different types will cause them to be cast to a single type.
+
+For example, this is an iterator over Float points:
 
 ```
 type FloatIterator interface {
