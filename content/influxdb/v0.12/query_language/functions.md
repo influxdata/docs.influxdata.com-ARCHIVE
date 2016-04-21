@@ -14,10 +14,11 @@ Use InfluxQL functions to aggregate, select, and transform data.
 | [COUNT()](/influxdb/v0.12/query_language/functions/#count)  | [BOTTOM()](/influxdb/v0.12/query_language/functions/#bottom)  | [CEILING()](/influxdb/v0.12/query_language/functions/#ceiling)   
 | [DISTINCT()](/influxdb/v0.12/query_language/functions/#distinct)  | [FIRST()](/influxdb/v0.12/query_language/functions/#first)  | [DERIVATIVE()](/influxdb/v0.12/query_language/functions/#derivative)  
 | [INTEGRAL()](/influxdb/v0.12/query_language/functions/#integral)  | [LAST()](/influxdb/v0.12/query_language/functions/#last)  | [DIFFERENCE()](/influxdb/v0.12/query_language/functions/#difference)  
-| [MEAN()](/influxdb/v0.12/query_language/functions/#mean) | [MAX()](/influxdb/v0.12/query_language/functions/#max)  | [FLOOR()](/influxdb/v0.12/query_language/functions/#floor)
-| [MEDIAN()](/influxdb/v0.12/query_language/functions/#median)  | [MIN()](/influxdb/v0.12/query_language/functions/#min)  | [HISTOGRAM()](/influxdb/v0.12/query_language/functions/#histogram)  
-| [SPREAD()](/influxdb/v0.12/query_language/functions/#spread) | [PERCENTILE()](/influxdb/v0.12/query_language/functions/#percentile)  | [MOVING_AVERAGE()](/influxdb/v0.12/query_language/functions/#moving-average)
-| [SUM()](/influxdb/v0.12/query_language/functions/#sum)  | [TOP()](/influxdb/v0.12/query_language/functions/#top) | [NON_NEGATIVE_DERIVATIVE()](/influxdb/v0.12/query_language/functions/#non-negative-derivative) |
+| [MEAN()](/influxdb/v0.12/query_language/functions/#mean) | [MAX()](/influxdb/v0.12/query_language/functions/#max)  | [ELAPSED()](/influxdb/v0.12/query_language/functions/#elapsed)
+| [MEDIAN()](/influxdb/v0.12/query_language/functions/#median)  | [MIN()](/influxdb/v0.12/query_language/functions/#min)  |  [FLOOR()](/influxdb/v0.12/query_language/functions/#floor)
+| [SPREAD()](/influxdb/v0.12/query_language/functions/#spread) | [PERCENTILE()](/influxdb/v0.12/query_language/functions/#percentile) | [HISTOGRAM()](/influxdb/v0.12/query_language/functions/#histogram)
+| [SUM()](/influxdb/v0.12/query_language/functions/#sum)  | [TOP()](/influxdb/v0.12/query_language/functions/#top) | [MOVING_AVERAGE()](/influxdb/v0.12/query_language/functions/#moving-average) |
+|   |  | [NON_NEGATIVE_DERIVATIVE()](/influxdb/v0.12/query_language/functions/#non-negative-derivative) |
 |   |  | [STDDEV()](/influxdb/v0.12/query_language/functions/#stddev)
 
 
@@ -1255,6 +1256,72 @@ time			                min
 
 It then uses those values to calculate the difference between chronological
 values; the first value in the `difference` column is `2.028 - 2.064`.
+
+## ELAPSED()
+Returns the difference between subsequent timestamps in a single
+[field](/influxdb/v0.12/concepts/glossary/#field).
+The `unit` argument is an optional
+[duration literal](/influxdb/v0.12/query_language/spec/#durations)
+and, if not specified, defaults to one nanosecond.
+
+```
+SELECT ELAPSED(<field_key>, <unit>) FROM <measurement_name> [WHERE <stuff>]
+```
+
+Examples:
+
+* Calculate the difference (in nanoseconds) between the timestamps in the field
+`h2o_feet`:
+
+```
+> SELECT ELAPSED(water_level) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' and time <= '2015-08-18T00:24:00Z'
+```
+
+CLI Response:
+```
+name: h2o_feet
+--------------
+time			                elapsed
+2015-08-18T00:06:00Z	  360000000000
+2015-08-18T00:12:00Z	  360000000000
+2015-08-18T00:18:00Z	  360000000000
+2015-08-18T00:24:00Z	  360000000000
+```
+
+* Calculate the number of one minute intervals between the timestamps in the
+field `h2o_feet`:
+
+```
+> SELECT ELAPSED(water_level,1m) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' and time <= '2015-08-18T00:24:00Z'
+```
+
+CLI Response:
+```
+name: h2o_feet
+--------------
+time			                elapsed
+2015-08-18T00:06:00Z	  6
+2015-08-18T00:12:00Z	  6
+2015-08-18T00:18:00Z	  6
+2015-08-18T00:24:00Z	  6
+```
+
+> **Note:** InfluxDB returns `0` if `unit` is greater than the difference
+between the timestamps.
+For example, the timestamps in `h2o_feet` occur at six minute intervals.
+If the query asks for the number of one hour intervals between the
+timestamps, InfluxDB returns `0`:
+>
+```
+> SELECT ELAPSED(water_level,1h) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' and time <= '2015-08-18T00:24:00Z'
+name: h2o_feet
+--------------
+time			                elapsed
+2015-08-18T00:06:00Z	  0
+2015-08-18T00:12:00Z	  0
+2015-08-18T00:18:00Z	  0
+2015-08-18T00:24:00Z	  0
+```
 
 ## FLOOR()
 `FLOOR()` is not yet functional.
