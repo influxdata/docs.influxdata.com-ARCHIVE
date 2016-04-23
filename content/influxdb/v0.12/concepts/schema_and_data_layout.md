@@ -27,7 +27,7 @@ In no particular order, we recommend that you:
 * *Avoid using InfluxQL Keywords as identifier names*
 
     This isn't necessary, but it simplifies writing queries; you won't have to wrap those identifiers in double quotes.
-    Identifiers are are database names, [retention policy](/influxdb/v0.12/concepts/glossary/#retention-policy-rp) names, [user](/influxdb/v0.12/concepts/glossary/#user) names, [measurement](/influxdb/v0.12/concepts/glossary/#measurement) names, [tag keys](/influxdb/v0.12/concepts/glossary/#tag-key), and [field keys](/influxdb/v0.12/concepts/glossary/#field-key).
+    Identifiers are database names, [retention policy](/influxdb/v0.12/concepts/glossary/#retention-policy-rp) names, [user](/influxdb/v0.12/concepts/glossary/#user) names, [measurement](/influxdb/v0.12/concepts/glossary/#measurement) names, [tag keys](/influxdb/v0.12/concepts/glossary/#tag-key), and [field keys](/influxdb/v0.12/concepts/glossary/#field-key).
     See [InfluxQL Keywords](https://github.com/influxdata/influxdb/blob/master/influxql/README.md#keywords) for words to avoid.
 
     Note that you will also need to wrap identifiers in double quotes in queries if they contain characters other than `[A-z,_]`.
