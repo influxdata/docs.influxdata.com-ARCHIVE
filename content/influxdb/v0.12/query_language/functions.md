@@ -741,7 +741,7 @@ Returns the `N`th percentile value for the sorted values of a single [field](/in
 The field must be of type int64 or float64.
 The percentile `N` must be an integer or floating point number between 0 and 100, inclusive.
 ```sql
-SELECT PERCENTILE(<field_key>, <N>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+SELECT PERCENTILE(<field_key>, <N>)[,<tag_key(s)>] FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
 ```
 
 Examples:
@@ -761,6 +761,21 @@ time			               percentile
 ```
 
  The value `1.148` is larger than 5% of the values in `water_level` where `location` equals `coyote_creek`.
+
+* Calculate the fifth percentile of the field `water_level` and output the
+relevant `location` tag:
+
+```sql
+> SELECT PERCENTILE(water_level,5),location FROM h2o_feet
+```
+
+CLI response:
+```
+name: h2o_feet
+--------------
+time	 percentile	 location
+0	    1.122		     santa_monica
+```
 
 * Calculate the 100th percentile of the field `water_level` grouped by the `location` tag:
 
