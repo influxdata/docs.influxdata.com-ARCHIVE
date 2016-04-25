@@ -525,7 +525,7 @@ In the case of a tie, InfluxDB returns the value with the earlier timestamp.
 ## FIRST()
 Returns the oldest value (determined by the timestamp) of a single [field](/influxdb/v0.10/concepts/glossary/#field). If two points have the same timestamp, only a single point will be returned and the returned point is non-derministic.
 ```sql
-SELECT FIRST(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+SELECT FIRST(<field_key>)[,<tag_key(s)>] FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
 ```
 
 Examples:
@@ -572,7 +572,7 @@ See GitHub Issue [#4680](https://github.com/influxdb/influxdb/issues/4680) for m
 ## LAST()
 Returns the newest value (determined by the timestamp) of a single [field](/influxdb/v0.10/concepts/glossary/#field). If two points have the same timestamp, only a single point will be returned and the returned point is non-derministic.
 ```sql
-SELECT LAST(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+SELECT LAST(<field_key>)[,<tag_key(s)>] FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
 ```
 
 Examples:
@@ -623,7 +623,7 @@ See [Frequently Encountered Issues](/influxdb/v0.10/troubleshooting/frequently_e
 Returns the highest value in a single [field](/influxdb/v0.10/concepts/glossary/#field).
 The field must be of type int64 or float64.
 ```sql
-SELECT MAX(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+SELECT MAX(<field_key>)[,<tag_key(s)>] FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
 ```
 
 Examples:
@@ -675,7 +675,7 @@ time			              max
 Returns the lowest value in a single [field](/influxdb/v0.10/concepts/glossary/#field).
 The field must be of type int64 or float64.
 ```sql
-SELECT MIN(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+SELECT MIN(<field_key>)[,<tag_key(s)>] FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
 ```
 
 Examples:

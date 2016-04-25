@@ -537,7 +537,7 @@ In the case of a tie, InfluxDB returns the value with the earlier timestamp.
 ## FIRST()
 Returns the oldest value (determined by the timestamp) of a single [field](/influxdb/v0.12/concepts/glossary/#field).
 ```sql
-SELECT FIRST(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+SELECT FIRST(<field_key>)[,<tag_key(s)>] FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
 ```
 
 Examples:
@@ -554,6 +554,27 @@ name: h2o_feet
 --------------
 time			               first
 1970-01-01T00:00:00Z	 2.064
+```
+
+<dt> The returned timestamp marks the start of the relevant time interval
+for the query.
+See GitHub Issue [#4680](https://github.com/influxdata/influxdb/issues/4680)
+for more information.</dt>
+
+* Select the oldest value of the field `water_level` between
+`2015-08-18T00:42:00Z` and `2015-08-18T00:54:00Z`, and output the relevant
+`location` tag:
+
+```sql
+> SELECT FIRST(water_level),location FROM h2o_feet WHERE time >= '2015-08-18T00:42:00Z' and time <= '2015-08-18T00:54:00Z'
+```
+
+CLI response:
+```
+name: h2o_feet
+--------------
+time			               first	 location
+2015-08-18T00:42:00Z	 7.234	 coyote_creek
 ```
 
 * Select the oldest values of the field `water_level` grouped by the `location` tag:
@@ -577,14 +598,10 @@ time			               first
 1970-01-01T00:00:00Z	 2.064
 ```
 
-<dt> The returned timestamps mark the start of the relevant time interval for the query.
-See GitHub Issue [#4680](https://github.com/influxdb/influxdb/issues/4680) for more information.
-</dt>
-
 ## LAST()
 Returns the newest value (determined by the timestamp) of a single [field](/influxdb/v0.12/concepts/glossary/#field).
 ```sql
-SELECT LAST(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+SELECT LAST(<field_key>)[,<tag_key(s)>] FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
 ```
 
 Examples:
@@ -601,6 +618,27 @@ name: h2o_feet
 --------------
 time			               last
 1970-01-01T00:00:00Z	 4.938
+```
+
+<dt> The returned timestamp marks the start of the relevant time interval
+for the query.
+See GitHub Issue [#4680](https://github.com/influxdata/influxdb/issues/4680)
+for more information.</dt>
+
+* Select the newest value of the field `water_level` between
+`2015-08-18T00:42:00Z` and `2015-08-18T00:54:00Z`, and output the relevant
+`location` tag:
+
+```sql
+> SELECT LAST(water_level),location FROM h2o_feet WHERE time >= '2015-08-18T00:42:00Z' and time <= '2015-08-18T00:54:00Z'
+```
+
+CLI response:
+```
+name: h2o_feet
+--------------
+time			               last	  location
+2015-08-18T00:42:00Z	 6.982	 coyote_creek
 ```
 
 * Select the newest values of the field `water_level` grouped by the `location` tag:
@@ -624,10 +662,6 @@ time			               last
 1970-01-01T00:00:00Z	 4.938
 ```
 
-<dt> The returned timestamps mark the start of the relevant time interval for the query.
-See GitHub Issue [#4680](https://github.com/influxdb/influxdb/issues/4680) for more information.
-</dt>
-
 > **Note:** `LAST()` does not return points that occur after `now()` unless the `WHERE` clause specifies that time range.
 See [Frequently Encountered Issues](/influxdb/v0.12/troubleshooting/frequently_encountered_issues/#querying-after-now) for how to query after `now()`.
 
@@ -635,7 +669,7 @@ See [Frequently Encountered Issues](/influxdb/v0.12/troubleshooting/frequently_e
 Returns the highest value in a single [field](/influxdb/v0.12/concepts/glossary/#field).
 The field must be of type int64 or float64.
 ```sql
-SELECT MAX(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+SELECT MAX(<field_key>)[,<tag_key(s)>] FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
 ```
 
 Examples:
@@ -652,6 +686,26 @@ name: h2o_feet
 --------------
 time			               max
 1970-01-01T00:00:00Z	 9.964
+```
+
+<dt> The returned timestamp marks the start of the relevant time interval
+for the query.
+See GitHub Issue [#4680](https://github.com/influxdata/influxdb/issues/4680)
+for more information.</dt>
+
+* Select the maximum `water_level` in the measurement `h2o_feet` and output the
+relevant `location` tag:
+
+```sql
+> SELECT MAX(water_level),location FROM h2o_feet
+```
+
+CLI response:
+```
+name: h2o_feet
+--------------
+time			               max	   location
+1970-01-01T00:00:00Z	 9.964	 coyote_creek
 ```
 
 * Select the maximum `water_level` in the measurement `h2o_feet` between August 18, 2015 at midnight and August 18, 2015 at 00:48 grouped at 12 minute intervals and by the `location` tag:
@@ -687,7 +741,7 @@ time			              max
 Returns the lowest value in a single [field](/influxdb/v0.12/concepts/glossary/#field).
 The field must be of type int64 or float64.
 ```sql
-SELECT MIN(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+SELECT MIN(<field_key>)[,<tag_key(s)>] FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
 ```
 
 Examples:
@@ -704,6 +758,26 @@ name: h2o_feet
 --------------
 time			               min
 1970-01-01T00:00:00Z	 -0.61
+```
+
+<dt> The returned timestamp marks the start of the relevant time interval
+for the query.
+See GitHub Issue [#4680](https://github.com/influxdata/influxdb/issues/4680)
+for more information.</dt>
+
+* Select the minimum `water_level` in the measurement `h2o_feet` and output the
+relevant `location` tag:
+
+```sql
+> SELECT MIN(water_level),location FROM h2o_feet
+```
+
+CLI response:
+```
+name: h2o_feet
+--------------
+time			              min	   location
+1970-01-01T00:00:00Z	-0.61	 coyote_creek
 ```
 
 * Select the minimum `water_level` in the measurement `h2o_feet` between August 18, 2015 at midnight and August 18, at 00:48 grouped at 12 minute intervals and by the `location` tag:
