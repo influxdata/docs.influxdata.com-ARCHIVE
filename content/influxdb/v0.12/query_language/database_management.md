@@ -39,7 +39,7 @@ The `CREATE DATABASE` query takes the following form:
 CREATE DATABASE [IF NOT EXISTS] <database_name> [WITH [DURATION <duration>] [REPLICATION <n>] [SHARD DURATION <duration>] [NAME <retention-policy-name>]]
 ```
 
-> **Note:** The `IF NOT EXISTS` clause does nothing, is deprecated, and will be removed in InfluxDB version 0.13.
+> **Note:** The `IF NOT EXISTS` clause does nothing, is deprecated, and will be removed in InfluxDB version 1.0.
 
 Create the database ` NOAA_water_database`:
 ```bash
@@ -66,7 +66,7 @@ The query takes the following form:
 DROP DATABASE [IF EXISTS] <database_name>
 ```
 
-> **Note:** The `IF EXISTS` clause does nothing, is deprecated, and will be removed in InfluxDB version 0.13.
+> **Note:** The `IF EXISTS` clause does nothing, is deprecated, and will be removed in InfluxDB version 1.0.
 
 Drop the database NOAA_water_database:
 ```bash
