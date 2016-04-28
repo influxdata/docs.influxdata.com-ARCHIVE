@@ -161,7 +161,7 @@ CREATE RETENTION POLICY <retention_policy_name> ON <database_name> DURATION <dur
 
 * `DURATION` determines how long InfluxDB keeps the data.
 The options for specifying the duration of the retention policy are listed below.
-Note that the minimum retention period is one hour.
+Note that the minimum retention period is one hour.  
 `m` minutes  
 `h` hours  
 `d` days  
