@@ -7,8 +7,13 @@ menu:
     weight: 0
 ---
 
-## [Getting Started](/chronograf/v0.12/introduction/getting_started/)
-Download, install, and start building beautiful visualizations and dashboards with Chronograf.
+The introductory documentation includes all the information you need to get up and running with Chronograf.
 
-## [Templating](/chronograf/v0.12/introduction/templating/)
-Easily modify the time range and tag values displayed by a visualization and/or dashboard.
+## [Download](https://influxdata.com/downloads/#chronograf)
+Download Chronograf.
+
+## [Installation](/chronograf/v0.12/introduction/installation/)
+Directions for installing, starting, and configuring Chronograf.
+
+## [Getting Started](/chronograf/v0.12/introduction/getting_started/)
+Get started building beautiful visualizations and dashboards with Chronograf.

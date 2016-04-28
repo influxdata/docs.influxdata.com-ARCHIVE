@@ -3,7 +3,7 @@ title: Getting Started
 
 menu:
   kapacitor_012:
-    weight: 10
+    weight: 20
     parent: introduction
 ---
 
@@ -477,4 +477,3 @@ Play around until you are comfortable updating, testing, and running tasks in Ka
 
 Take a look at the [examples](/kapacitor/v0.12/examples/) page for more guides on how to use Kapacitor.
 These use cases demonstrate some of the more rich features of Kapacitor.
-

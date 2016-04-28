@@ -4,7 +4,7 @@ title: Getting Started with Chronograf
 menu:
   chronograf_012:
     name: Getting Started
-    weight: 0
+    weight: 20
     parent: Introduction
 ---
 

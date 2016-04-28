@@ -29,6 +29,14 @@ SectionPagesMenu = "products"
   weight = 30
   url = "/kapacitor/"
 
+# Telegraf v0.12 Sub-Menu - Introduction
+[[menu.telegraf_012]]
+  name = "Download"
+  identifier = "download"
+  weight = 0
+  url = "https://influxdata.com/downloads/#telegraf"
+  parent = "introduction"
+
   # Telegraf v0.12 Sub-Menu - Output Plugins
   [[menu.telegraf_012]]
     name = "InfluxDB"
@@ -2508,3 +2516,19 @@ SectionPagesMenu = "products"
   weight = 100
   url = "https://github.com/CargoSense/puppet-influxdb"
   parent = "tools"
+
+# Chronograf v0.12 Sub-Menu - Introduction
+[[menu.chronograf_012]]
+  name = "Download"
+  identifier = "download"
+  weight = 0
+  url = "https://influxdata.com/downloads/#chronograf"
+  parent = "Introduction"
+
+# Kapacitor v0.12 Sub-Menu - Introduction
+[[menu.kapacitor_012]]
+  name = "Download"
+  identifier = "download"
+  weight = 0
+  url = "https://influxdata.com/downloads/#kapacitor"
+  parent = "introduction"
