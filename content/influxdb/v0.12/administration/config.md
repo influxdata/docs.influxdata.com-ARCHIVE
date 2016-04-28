@@ -168,7 +168,8 @@ Larger numbers may yield better compression but could incur a performance peanal
 ## [cluster]
 
 This section contains configuration options for query management.
-For more on managing queries, see [Query Management](/v0.12/troubleshooting/query_management/).
+For more details on managing queries, see
+[Query Management](/v0.12/troubleshooting/query_management/).
 
 ### max-concurrent-queries = 0
 
@@ -180,6 +181,13 @@ The default setting (`0`) allows for an unlimited number of queries.
 The maximum time for which a query can run on your instance before InfluxDB
 kills the query.
 The default setting (`0`) allows queries to run with no time restrictions.
+This setting is a [duration literal](/influxdb/v0.12/query_language/spec/#durations).
+
+### log-queries-after = "0"
+
+The maximum time a query can run after which InfluxDB logs the query with a
+`Detected slow query` message.
+The default setting (`"0"`) will never tell InfluxDB to log the query.
 This setting is a [duration literal](/influxdb/v0.12/query_language/spec/#durations).
 
 ### max-select-point = 0

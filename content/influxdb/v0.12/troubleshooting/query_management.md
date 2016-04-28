@@ -18,6 +18,7 @@ with several new configuration settings.
 * [Configuration settings for query management](/influxdb/v0.12/troubleshooting/query_management/#configuration-settings-for-query-management)
     * [Limit the number of running queries with `max-concurrent-queries`](/influxdb/v0.12/troubleshooting/query_management/#max-concurrent-queries)
     * [Set a query timeout with `query-timeout`](/influxdb/v0.12/troubleshooting/query_management/#query-timeout)
+    * [Log queries if they run longer than specified time with `log-queries-after`](/influxdb/v0.12/troubleshooting/query_management/#log-queries-after)
     * [Limit the number of points that a `SELECT` statement can process with `max-select-point`](/influxdb/v0.12/troubleshooting/query_management/#max-select-point)
     * [Limit the number of series that a `SELECT` statement can process with `max-select-series`](/influxdb/v0.12/troubleshooting/query_management/#max-select-series)
     * [Limit the number of `GROUP BY time()` buckets a query can process with `max-select-buckets`](/influxdb/v0.12/troubleshooting/query_management/#max-select-buckets)
@@ -89,7 +90,7 @@ ERR: max concurrent queries reached
 
 The maximum time for which a query can run on your instance before InfluxDB
 kills the query.
-The default setting (`0`) allows queries to run with no time restrictions.
+The default setting (`"0"`) allows queries to run with no time restrictions.
 This setting is a [duration literal](/influxdb/v0.12/query_language/spec/#durations).
 
 If your query exceeds the query timeout, InfluxDB kills the query and outputs
@@ -98,6 +99,22 @@ the following error:
 ```
 ERR: query timeout reached
 ```
+
+### log-queries-after
+
+The maximum time a query can run after which InfluxDB logs the query with a
+`Detected slow query` message.
+The default setting (`"0"`) will never tell InfluxDB to log the query.
+This setting is a [duration literal](/influxdb/v0.12/query_language/spec/#durations).
+
+Example log output with `log-queries-after` set to `"1s"`:
+
+```
+[query] 2016/04/28 14:11:31 Detected slow query: SELECT mean(usage_idle) FROM cpu WHERE time >= 0 GROUP BY time(20s) (qid: 3, database: telegraf, threshold: 1s)
+```
+
+`qid` is the id number of the query.
+Use this value with [`KILL QUERY`](/influxdb/v0.12/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query).
 
 ### max-select-point
 
