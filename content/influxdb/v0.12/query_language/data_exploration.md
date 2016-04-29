@@ -833,13 +833,14 @@ The other options for specifying time durations with `now()` are listed below.
 
 ### Absolute time
 ---
-**Date time strings**  
+#### Date time strings  
 Specify time with date time strings.
 Date time strings can take two formats: `YYYY-MM-DD HH:MM:SS.nnnnnnnnn` and  `YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ`, where the second specification is [RFC3339](https://www.ietf.org/rfc/rfc3339.txt).
 Nanoseconds (`nnnnnnnnn`) are optional in both formats.
 
-The following two queries query data between August 18, 2015 23:00:01.232000000 and September 19, 2015 00:00:00.
+Examples:
 
+Query data between August 18, 2015 23:00:01.232000000 and September 19, 2015 00:00:00 with the timestamp syntax `YYYY-MM-DD HH:MM:SS.nnnnnnnnn` and  `YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ`:
 
 ```sql
 > SELECT water_level FROM h2o_feet WHERE time > '2015-08-18 23:00:01.232000000' AND time < '2015-09-19'
@@ -848,18 +849,35 @@ The following two queries query data between August 18, 2015 23:00:01.232000000 
 > SELECT water_level FROM h2o_feet WHERE time > '2015-08-18T23:00:01.232000000Z' AND time < '2015-09-19'
 ```
 
+Query data that occur 6 minutes after September 18, 2015 21:24:00:
+
+```sql
+> SELECT water_level FROM h2o_feet WHERE time > '2015-09-18T21:24:00Z' + 6m
+```
+
+Things to note about querying with date time strings:
+
 * Single quote the date time string.
 InfluxDB returns as error (`ERR: invalid operation: time and *influxql.VarRef are not compatible`) if you double quote the date time string.
 * If you only specify the date, InfluxDB sets the time to `00:00:00`.
 
-**Epoch time**  
+#### Epoch time  
 Specify time with timestamps in epoch time.
 Epoch time is the number of nanoseconds that have elapsed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.
 Indicate the units of the timestamp at the end of the timestamp (see the section above for a list of acceptable time units).
 
-Return all points that occur after  `2014-01-01 00:00:00`:  
+Examples:
+
+Return all points that occur after `2014-01-01 00:00:00`:
+
 ```sql
 > SELECT * FROM h2o_feet WHERE time > 1388534400s
+```
+
+Return all points that occur 6 minutes after `2015-09-18 21:24:00`:
+
+```sql
+> SELECT * FROM h2o_feet WHERE time > 24043524m + 6m
 ```
 
 ## Regular expressions in queries
