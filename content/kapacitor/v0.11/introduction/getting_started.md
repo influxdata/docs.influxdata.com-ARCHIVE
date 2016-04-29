@@ -386,7 +386,7 @@ stream
         .period(1m)
         .every(1m)
     // calculate the 95th percentile of the used cpu.
-.percentile('used', 95)
+.percentile('used', 95.0)
     .eval(lambda: sigma("percentile"))
         .as('sigma')
         .keep('percentile', 'sigma')
