@@ -847,7 +847,7 @@ measurement      = measurement_name |
 
 measurements     = measurement { "," measurement } .
 
-measurement_name = identifier .
+measurement_name = identifier | regex_lit .
 
 password         = string_lit .
 
