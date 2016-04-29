@@ -207,23 +207,30 @@ See [InfluxQL Functions](/influxdb/v0.12/query_language/functions/#transformatio
 
 Related entries: [aggregation](/influxdb/v0.12/concepts/glossary/#aggregation), [function](/influxdb/v0.12/concepts/glossary/#function), [selector](/influxdb/v0.12/concepts/glossary/#selector)
 
+## tsm (Time Structured Merge tree)
+The purpose-built data storage format for InfluxDB. TSM allows for greater compaction and higher write and read throughput than existing B+ or LSM tree implementations. See [Storage Engine](http://docs.influxdata.com/influxdb/v0.12/concepts/storage_engine/) for more.
+
 ## user  
 There are two kinds of users in InfluxDB:
 
 * *Admin users* have `READ` and `WRITE` access to all databases and full access to administrative queries and user management commands.
 * *Non-admin users* have `READ`, `WRITE`, or `ALL` (both `READ` and `WRITE`) access per database.
 
-
 When authentication is enabled, InfluxDB only executes HTTP requests that are sent with a valid username and password.
 See [Authentication and Authorization](/influxdb/v0.12/administration/authentication_and_authorization/).
 
+## wal (Write Ahead Log) 
+The temporary cache for recently written points. To reduce the frequency with which the permanent storage files are accessed, InfluxDB caches new points in the WAL until their total size or age triggers a flush to more permanent storage. This allows for efficient batching of the writes into the TSM. 
+
+Points in the WAL can be queried, and they persist through a system reboot. On process start, all points in the WAL must be flushed before the system accepts new writes.
+
+Related entries: [tsm](/influxdb/v0.12/concepts/glossary/#tsm)
+
 <!--
-## wal
+
+
 
 ## shard
 
 ## shard group
-
-## storage engines (tsm1, b1, bz1)
-
 -->
