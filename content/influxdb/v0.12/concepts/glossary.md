@@ -220,7 +220,7 @@ When authentication is enabled, InfluxDB only executes HTTP requests that are se
 See [Authentication and Authorization](/influxdb/v0.12/administration/authentication_and_authorization/).
 
 ## wal (Write Ahead Log) 
-The temporary cache for recently written points. To reduce the frequency with which the permanent storage files are accessed, InfluxDB caches new points in the WAL until their total size or age triggers a flush to more permanant storage. This allows for efficient batching of the writes into the TSM. 
+The temporary cache for recently written points. To reduce the frequency with which the permanent storage files are accessed, InfluxDB caches new points in the WAL until their total size or age triggers a flush to more permanent storage. This allows for efficient batching of the writes into the TSM. 
 
 Points in the WAL can be queried, and they persist through a system reboot. On process start, all points in the WAL must be flushed before the system accepts new writes.
 
