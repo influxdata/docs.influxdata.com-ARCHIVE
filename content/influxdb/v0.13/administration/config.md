@@ -182,6 +182,14 @@ kills the query.
 The default setting (`0`) allows queries to run with no time restrictions.
 This setting is a [duration literal](/influxdb/v0.13/query_language/spec/#durations).
 
+### log-queries-after = "0"
+
+The maximum time a query can run after which InfluxDB logs the query with a
+`Detected slow query` message.
+The default setting (`"0"`) will never tell InfluxDB to log the query.
+This setting is a
+[duration literal](/influxdb/v0.13/query_language/spec/#durations).
+
 ### max-select-point = 0
 
 The maximum number of [points](/influxdb/v0.13/concepts/glossary/#point) that a
