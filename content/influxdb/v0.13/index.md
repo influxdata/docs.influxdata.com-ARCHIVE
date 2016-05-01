@@ -1,11 +1,11 @@
 ---
-title: InfluxDB Version 0.12 Documentation
+title: InfluxDB Version 0.13 Documentation
 
 menu:
   influxdb:
-    name: v0.12
-    identifier: influxdb_012
-    weight: 10
+    name: v0.13
+    identifier: influxdb_013
+    weight: 0
 ---
 
 InfluxDB is a [time series database](https://en.wikipedia.org/wiki/Time_series_database) built from the ground up to handle high write and query loads.
@@ -21,7 +21,7 @@ The TSM engine allows for high ingest speed and data compression.
 It compiles into a single binary with no external dependencies.
 * Simple, high performing write and query HTTP(S) APIs.
 * Plugins support for other data ingestion protocols such as Graphite, collectd, and OpenTSDB.
-* High availability setup available with [Relay](/influxdb/v0.12/high_availability/relay/).
+* High availability setup available with [Relay](/influxdb/v0.13/high_availability/relay/).
 * Expressive SQL-like query language tailored to easily query aggregated data.
 * Tags allow series to be indexed for fast and efficient queries.
 * Retention policies efficiently auto-expire stale data.
