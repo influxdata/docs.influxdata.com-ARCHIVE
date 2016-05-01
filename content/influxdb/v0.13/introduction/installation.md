@@ -155,22 +155,36 @@ package manager (though it is handy to know either way).
 > Note: Newly generated configuration files have no knowledge of any local customizations or settings.
 Please make sure to double-check any configuration changes prior to deploying them.
 
-To generate a new configuration file, run:
+To generate a new configuration file run the following command and edit the
+`influxdb.generated.conf` file to have the desired configuration settings:
 
 ```bash
 influxd config > influxdb.generated.conf
 ```
 
-And then edit the `influxdb.generated.conf` file to have the desired configuration settings.
-When launching InfluxDB, point the process to the correct configuration file using the `-config` option. For example, use:
+There are two ways to launch InfluxDB with your configuration file:
 
-```bash
-influxd -config influxdb.generated.conf
-```
+* Point the process to the correct configuration file by using the `-config`
+option:
 
-To launch InfluxDB with your newly generated configuration. In addition, a valid configuration file can be displayed at any time using the command `influxd config`.
+    ```bash
+    influxd -config influxdb.generated.conf
+    ```
+* Set the environment variable `INFLUXDB_CONFIG_PATH` to the path of your
+configuration file and start the process.
+For example:
 
-If no `-config` option is supplied, InfluxDB will use an internal default configuration (equivalent to the output of `influxd config`).
+    ```
+    echo $INFLUXDB_CONFIG_PATH
+    /root/influxdb.generated.conf
+
+    influxd
+    ```
+
+InfluxDB first checks for the `-config` option and then for the environment
+variable.
+If you do not supply a configuration file, InfluxDB uses an internal default
+configuration (equivalent to the output of `influxd config`).
 
 > Note: The `influxd` command has two similarly named flags.
 The `config` flag prints a generated default configuration file to STDOUT but does not launch the `influxd` process.
