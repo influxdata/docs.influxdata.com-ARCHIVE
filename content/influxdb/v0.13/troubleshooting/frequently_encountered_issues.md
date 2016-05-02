@@ -314,11 +314,6 @@ To store both points:
     1970-01-15T06:56:07.890000001Z	 us_west  server02	 5.24
     ```
 
-> **Note:** In InfluxDB 0.9, the system replaced the **entire** field set of an old point if you wrote a new point with the same measurement, tag set, and timestamp.
-This functioned as a delete workaround for dropping individual points.
-Because of the behavior described above, overwriting a point is no longer a viable workaround for deletes.
-Users will need to use `DELETE SERIES`. See [GitHub Issue #1647](https://github.com/influxdata/influxdb/issues/1647) for developments on `DELETE SERIES`.
-
 ## Getting an unexpected error when sending data over the HTTP API
 First, double check your [line protocol](/influxdb/v0.13/write_protocols/line/) syntax.
 Second, if you continue to receive errors along the lines of `bad timestamp` or `unable to parse`, verify that your newline character is line feed (`\n`, which is ASCII `0x0A`).

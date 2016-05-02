@@ -12,7 +12,8 @@ InfluxQL offers a full suite of administrative commands.
 * [Data management](/influxdb/v0.13/query_language/database_management/#data-management)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Create a database with `CREATE DATABASE`](/influxdb/v0.13/query_language/database_management/#create-a-database-with-create-database)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete a database with `DROP DATABASE`](/influxdb/v0.13/query_language/database_management/#delete-a-database-with-drop-database)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete series with `DROP SERIES`](/influxdb/v0.13/query_language/database_management/#delete-series-with-drop-series)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Drop series from the index with `DROP SERIES`](/influxdb/v0.13/query_language/database_management/#drop-series-from-the-index-with-drop-series)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete series with `DELETE`](/influxdb/v0.13/query_language/database_management/#delete-series-with-delete)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete measurements with `DROP MEASUREMENT`](/influxdb/v0.13/query_language/database_management/#delete-measurements-with-drop-measurement)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete a shard with `DROP SHARD`](/influxdb/v0.13/query_language/database_management/#delete-a-shard-with-drop-shard)
 
@@ -77,38 +78,82 @@ Drop the database NOAA_water_database:
 A successful `DROP DATABASE` query returns an empty result.
 If you attempt to drop a database that does not exist, InfluxDB does not return an error.
 
-### Delete series with DROP SERIES
+### Drop series from the index with DROP SERIES
 ---
-The `DROP SERIES` query deletes all points from [series](/influxdb/v0.13/concepts/glossary/#series) in a database.
+The `DROP SERIES` query deletes all points from [series](/influxdb/v0.13/concepts/glossary/#series) in a database,
+and it drops series from the index.
+
+> **Note:** `DROP SERIES` does not support time intervals in the `WHERE` clause.
+See
+[`DELETE`](/influxdb/v0.13/query_language/database_management/#delete-series-with-delete)
+for that functionality.
+
 The query takes the following form, where you must specify either the `FROM` clause or the `WHERE` clause:
 ```sql
 DROP SERIES FROM <measurement_name[,measurement_name]> WHERE <tag_key>='<tag_value>'
 ```
 
-Delete all series from a single measurement:
+Drop all series from a single measurement:
 ```sql
 > DROP SERIES FROM h2o_feet
 ```
 
-Delete series that have a specific tag set from a single measurement:
+Drop series that have a specific tag set from a single measurement:
 ```sql
 > DROP SERIES FROM h2o_feet WHERE location = 'santa_monica'
 ```
 
-Delete all points in the series that have a specific tag set from all measurements in the database:
+Drop all points in the series that have a specific tag set from all measurements in the database:
 ```sql
 > DROP SERIES WHERE location = 'santa_monica'
 ```
 
 A successful `DROP SERIES` query returns an empty result.
 
-<dt> `DROP SERIES` does not support time intervals in the `WHERE` clause.
-See GitHub Issue [#1647](https://github.com/influxdb/influxdb/issues/1647) for more information).
-</dt>
+### Delete series with DELETE
+---
+The `DELETE` query deletes all points from
+[series](/influxdb/v0.13/concepts/glossary/#series) in a database.
+Unlike
+[`DROP SERIES`](/influxdb/v0.13/query_language/database_management/#drop-series-from-the-index-with-drop-series), it does not drop series from the index and it supports time intervals
+in the `WHERE` clause.
+
+The query takes the following form where you must specify either the `FROM` clause or the `WHERE` clause:
+
+```
+DELETE FROM <measurement_name> WHERE [<tag_key>='<tag_value>'] | [<time interval>]
+```
+
+Delete all data associated with the measurement `h2o_feet`:
+```
+> DELETE FROM h2o_feet
+```
+
+Delete all data associated with the measurement `h2o_quality` and where the tag `randtag` equals `3`:
+```
+> DELETE FROM h2o_quality WHERE randtag = '3'
+```
+
+Delete all data in the database that occur before January 01, 2016:
+```
+> DELETE WHERE time < '2016-01-01'
+```
+
+A successful `DELETE` query returns an empty result.
+
+Things to note about `DELETE`:
+
+* `DELETE` supports
+[regular expressions](/influxdb/v0.13/query_language/data_exploration/#regular-expressions-in-queries)
+in the `FROM` clause when specifying measurement names and in the `WHERE` clause
+when specifying tag values.
+* `DELETE` does not support [fields](/influxdb/v0.13/concepts/glossary/#field) in the `WHERE` clause.
 
 ### Delete measurements with DROP MEASUREMENT
 ---
-The `DROP MEASUREMENT` query deletes all data and series from the specified [measurement](/influxdb/v0.13/concepts/glossary/#measurement) and, unlike `DROP SERIES`, it also deletes the measurement from the index.
+The `DROP MEASUREMENT` query deletes all data and series from the specified [measurement](/influxdb/v0.13/concepts/glossary/#measurement) and deletes the
+measurement from the index.
+
 The query takes the following form:
 ```sql
 DROP MEASUREMENT <measurement_name>

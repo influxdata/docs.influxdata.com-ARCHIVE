@@ -414,6 +414,20 @@ CREATE USER jdoe WITH PASSWORD '1337password' WITH ALL PRIVILEGES
 
 > **Note:** The password string must be wrapped in single quotes.
 
+### DELETE
+
+```
+delete_stmt = "DELETE" ( from_clause | where_clause | from_clause where_clause ) .
+```
+
+#### Examples:
+
+```
+DELETE FROM cpu
+DELETE FROM cpu WHERE time < '2000-01-01T00:00:00Z'
+DELETE WHERE time < '2000-01-01T00:00:00Z'
+```
+
 ### DROP CONTINUOUS QUERY
 
 ```
