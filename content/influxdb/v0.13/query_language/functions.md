@@ -62,8 +62,7 @@ time			               count
 1970-01-01T00:00:00Z	 15258
 ```
 
-> **Note:** InfluxDB often uses [epoch 0](https://en.wikipedia.org/wiki/Unix_time) (`1970-01-01T00:00:00Z`) as a null timestamp equivalent.
-If you request a query that has no timestamp to return, such as an aggregation function with an unbounded time range, InfluxDB returns epoch 0 as the timestamp.
+> **Note:** Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
 
 * Count the number of non-null field values in the `water_level` field at four-day intervals:
 
@@ -135,14 +134,16 @@ CLI response:
 name: h2o_feet
 --------------
 time			               distinct
-2015-08-18T00:00:00Z	 between 6 and 9 feet
-2015-08-18T00:00:00Z	 below 3 feet
-2015-08-18T01:42:00Z	 between 3 and 6 feet
-2015-08-26T04:00:00Z	 at or greater than 9 feet
+1970-01-01T00:00:00Z	 between 6 and 9 feet
+1970-01-01T00:00:00Z	 below 3 feet
+1970-01-01T00:00:00Z	 between 3 and 6 feet
+1970-01-01T00:00:00Z	 at or greater than 9 feet
 ```
 
 The response shows that `level description` has four distinct field values.
 The timestamp reflects the first time the field value appears in the data.
+
+> **Note:** Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
 
 * Select the unique field values in the `level description` field grouped by the `location` tag:
 
@@ -156,19 +157,19 @@ name: h2o_feet
 tags: location=coyote_creek
 time			                distinct
 ----			                --------
-2015-08-18T00:00:00Z	  between 6 and 9 feet
-2015-08-18T01:42:00Z	  between 3 and 6 feet
-2015-08-18T04:00:00Z	  below 3 feet
-2015-08-26T04:00:00Z	  at or greater than 9 feet
+1970-01-01T00:00:00Z	  between 6 and 9 feet
+1970-01-01T00:00:00Z	  between 3 and 6 feet
+1970-01-01T00:00:00Z	  below 3 feet
+1970-01-01T00:00:00Z	  at or greater than 9 feet
 
 
 name: h2o_feet
 tags: location=santa_monica
 time			                distinct
 ----			                --------
-2015-08-18T00:00:00Z	  below 3 feet
-2015-08-18T02:54:00Z	  between 3 and 6 feet
-2015-08-26T01:30:00Z	  between 6 and 9 feet
+1970-01-01T00:00:00Z	  below 3 feet
+1970-01-01T00:00:00Z	  between 3 and 6 feet
+1970-01-01T00:00:00Z	  between 6 and 9 feet
 ```
 
 * Nest `DISTINCT()` in [`COUNT()`](/influxdb/v0.13/query_language/functions/#count) to get the number of unique field values in `level description` grouped by the `location` tag:
@@ -191,9 +192,6 @@ time			               count
 ----			               -----
 1970-01-01T00:00:00Z	 3
 ```
-
-> **Note:** InfluxDB often uses [epoch 0](https://en.wikipedia.org/wiki/Unix_time) (`1970-01-01T00:00:00Z`) as a null timestamp equivalent.
-If you request a query that has no timestamp to return, such as an aggregation function with an unbounded time range, InfluxDB returns epoch 0 as the timestamp.
 
 ## INTEGRAL()
 `INTEGRAL()` is not yet functional.
@@ -224,8 +222,7 @@ time			               mean
 1970-01-01T00:00:00Z	 4.286791371454075
 ```
 
-> **Note:** InfluxDB often uses [epoch 0](https://en.wikipedia.org/wiki/Unix_time) (`1970-01-01T00:00:00Z`) as a null timestamp equivalent.
-If you request a query that has no timestamp to return, such as an aggregation function with an unbounded time range, InfluxDB returns epoch 0 as the timestamp.
+> **Note:** Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
 
 * Calculate the average value in the field `water_level` at four-day intervals:
 
@@ -275,8 +272,7 @@ time			               median
 1970-01-01T00:00:00Z	 4.124
 ```
 
-> **Note:** InfluxDB often uses [epoch 0](https://en.wikipedia.org/wiki/Unix_time) (`1970-01-01T00:00:00Z`) as a null timestamp equivalent.
-If you request a query that has no timestamp to return, such as an aggregation function with an unbounded time range, InfluxDB returns epoch 0 as the timestamp.
+> **Note:** Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
 
 * Select the median value of `water_level` between August 18, 2015 at 00:00:00 and August 18, 2015 at 00:30:00 grouped by the `location` tag:
 
@@ -298,10 +294,6 @@ time			               median
 ----			               ------
 2015-08-18T00:00:00Z	 2.0575
 ```
-
-<dt> The returned timestamps mark the start of the relevant time interval for the query.
-See GitHub Issue [#4680](https://github.com/influxdb/influxdb/issues/4680) for more information.
-</dt>
 
 ## SPREAD()
 Returns the difference between the minimum and maximum values of a [field](/influxdb/v0.13/concepts/glossary/#field).
@@ -326,8 +318,7 @@ time			                spread
 1970-01-01T00:00:00Z	  10.574
 ```
 
-> **Note:** InfluxDB often uses [epoch 0](https://en.wikipedia.org/wiki/Unix_time) (`1970-01-01T00:00:00Z`) as a null timestamp equivalent.
-If you request a query that has no timestamp to return, such as an aggregation function with an unbounded time range, InfluxDB returns epoch 0 as the timestamp.
+> **Note:** Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
 
 * Calculate the difference between the minimum and maximum values in the field `water_level` for a specific tag and time range and at 30 minute intervals:
 
@@ -372,6 +363,8 @@ name: h2o_feet
 time			               sum
 1970-01-01T00:00:00Z	 67777.66900000002
 ```
+
+> **Note:** Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
 
 * Calculate the sum of the `water_level` field grouped by five-day intervals:
 
