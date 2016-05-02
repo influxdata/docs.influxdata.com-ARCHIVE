@@ -208,6 +208,11 @@ Return data where the tag key `location` has the tag value `santa_monica` and th
 ```sql
 > SELECT * FROM h2o_feet WHERE location = 'santa_monica' AND "level description" = 'below 3 feet'
 ```
+Return data where the field values in `water_level` plus `2` are greater than `11.9`:
+```
+> SELECT * FROM h2o_feet WHERE water_level + 2 > 11.9
+```
+
 * Always single quote field values that are strings.
 Note that double quotes do not work when specifying string field values and can cause queries to silently fail.
 
