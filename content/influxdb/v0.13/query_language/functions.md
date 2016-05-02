@@ -554,13 +554,8 @@ CLI response:
 name: h2o_feet
 --------------
 time			               first
-1970-01-01T00:00:00Z	 2.064
+2015-08-18T00:00:00Z	 2.064
 ```
-
-<dt> The returned timestamp marks the start of the relevant time interval
-for the query.
-See GitHub Issue [#4680](https://github.com/influxdata/influxdb/issues/4680)
-for more information.</dt>
 
 * Select the oldest value of the field `water_level` between
 `2015-08-18T00:42:00Z` and `2015-08-18T00:54:00Z`, and output the relevant
@@ -590,13 +585,13 @@ name: h2o_feet
 tags: location = coyote_creek
 time			               first
 ----			               -----
-1970-01-01T00:00:00Z	 8.12
+2015-08-18T00:00:00Z	 8.12
 
 name: h2o_feet
 tags: location = santa_monica
 time			               first
 ----			               -----
-1970-01-01T00:00:00Z	 2.064
+2015-08-18T00:00:00Z	 2.064
 ```
 
 ## LAST()
@@ -618,13 +613,8 @@ CLI response:
 name: h2o_feet
 --------------
 time			               last
-1970-01-01T00:00:00Z	 4.938
+2015-09-18T21:42:00Z	 4.938
 ```
-
-<dt> The returned timestamp marks the start of the relevant time interval
-for the query.
-See GitHub Issue [#4680](https://github.com/influxdata/influxdb/issues/4680)
-for more information.</dt>
 
 * Select the newest value of the field `water_level` between
 `2015-08-18T00:42:00Z` and `2015-08-18T00:54:00Z`, and output the relevant
@@ -639,7 +629,7 @@ CLI response:
 name: h2o_feet
 --------------
 time			               last	  location
-2015-08-18T00:42:00Z	 6.982	 coyote_creek
+2015-08-18T00:54:00Z	 6.982	 coyote_creek
 ```
 
 * Select the newest values of the field `water_level` grouped by the `location` tag:
@@ -654,13 +644,13 @@ name: h2o_feet
 tags: location = coyote_creek
 time			               last
 ----			               ----
-1970-01-01T00:00:00Z	 3.235
+2015-09-18T16:24:00Z	 3.235
 
 name: h2o_feet
 tags: location = santa_monica
 time			               last
 ----			               ----
-1970-01-01T00:00:00Z	 4.938
+2015-09-18T21:42:00Z	 4.938
 ```
 
 > **Note:** `LAST()` does not return points that occur after `now()` unless the `WHERE` clause specifies that time range.
@@ -686,13 +676,8 @@ CLI response:
 name: h2o_feet
 --------------
 time			               max
-1970-01-01T00:00:00Z	 9.964
+2015-08-29T07:24:00Z	 9.964
 ```
-
-<dt> The returned timestamp marks the start of the relevant time interval
-for the query.
-See GitHub Issue [#4680](https://github.com/influxdata/influxdb/issues/4680)
-for more information.</dt>
 
 * Select the maximum `water_level` in the measurement `h2o_feet` and output the
 relevant `location` tag:
@@ -706,7 +691,7 @@ CLI response:
 name: h2o_feet
 --------------
 time			               max	   location
-1970-01-01T00:00:00Z	 9.964	 coyote_creek
+2015-08-29T07:24:00Z	 9.964	 coyote_creek
 ```
 
 * Select the maximum `water_level` in the measurement `h2o_feet` between August 18, 2015 at midnight and August 18, 2015 at 00:48 grouped at 12 minute intervals and by the `location` tag:
@@ -719,23 +704,23 @@ CLI response:
 ```bash
 name: h2o_feet
 tags: location = coyote_creek
-time			              max
-----		  	            ---
-2015-08-18T00:00:00Z	8.12
-2015-08-18T00:12:00Z	7.887
-2015-08-18T00:24:00Z	7.635
-2015-08-18T00:36:00Z	7.372
-2015-08-18T00:48:00Z	7.11
+time			                max
+----		  	              ---
+2015-08-18T00:00:00Z	  8.12
+2015-08-18T00:12:00Z	  7.887
+2015-08-18T00:24:00Z	  7.635
+2015-08-18T00:36:00Z	  7.372
+2015-08-18T00:48:00Z	  7.11
 
 name: h2o_feet
 tags: location = santa_monica
-time			              max
-----		  	            ---
-2015-08-18T00:00:00Z	2.116
-2015-08-18T00:12:00Z	2.126
-2015-08-18T00:24:00Z	2.051
-2015-08-18T00:36:00Z	2.067
-2015-08-18T00:48:00Z	1.991
+time			                max
+----		  	              ---
+2015-08-18T00:00:00Z	  2.116
+2015-08-18T00:12:00Z	  2.126
+2015-08-18T00:24:00Z	  2.051
+2015-08-18T00:36:00Z	  2.067
+2015-08-18T00:48:00Z	  1.991
 ```
 
 ## MIN()
@@ -758,13 +743,8 @@ CLI response:
 name: h2o_feet
 --------------
 time			               min
-1970-01-01T00:00:00Z	 -0.61
+2015-08-29T14:30:00Z	 -0.61
 ```
-
-<dt> The returned timestamp marks the start of the relevant time interval
-for the query.
-See GitHub Issue [#4680](https://github.com/influxdata/influxdb/issues/4680)
-for more information.</dt>
 
 * Select the minimum `water_level` in the measurement `h2o_feet` and output the
 relevant `location` tag:
@@ -778,7 +758,7 @@ CLI response:
 name: h2o_feet
 --------------
 time			              min	   location
-1970-01-01T00:00:00Z	-0.61	 coyote_creek
+2015-08-29T14:30:00Z	-0.61	 coyote_creek
 ```
 
 * Select the minimum `water_level` in the measurement `h2o_feet` between August 18, 2015 at midnight and August 18, at 00:48 grouped at 12 minute intervals and by the `location` tag:
@@ -791,23 +771,23 @@ CLI response:
 ```bash
 name: h2o_feet
 tags: location = coyote_creek
-time			               min
-----			               ---
-2015-08-18T00:00:00Z	 8.005
-2015-08-18T00:12:00Z	 7.762
-2015-08-18T00:24:00Z	 7.5
-2015-08-18T00:36:00Z	 7.234
-2015-08-18T00:48:00Z	 7.11
+time			                 min
+----			                 ---
+2015-08-18T00:00:00Z	   8.005
+2015-08-18T00:12:00Z	   7.762
+2015-08-18T00:24:00Z	   7.5
+2015-08-18T00:36:00Z	   7.234
+2015-08-18T00:48:00Z	   7.11
 
 name: h2o_feet
 tags: location = santa_monica
-time			               min
-----			               ---
-2015-08-18T00:00:00Z	 2.064
-2015-08-18T00:12:00Z	 2.028
-2015-08-18T00:24:00Z	 2.041
-2015-08-18T00:36:00Z	 2.057
-2015-08-18T00:48:00Z	 1.991
+time			                 min
+----			                 ---
+2015-08-18T00:00:00Z	   2.064
+2015-08-18T00:12:00Z	   2.028
+2015-08-18T00:24:00Z	   2.041
+2015-08-18T00:36:00Z	   2.057
+2015-08-18T00:48:00Z	   1.991
 ```
 
 ## PERCENTILE()
@@ -831,7 +811,7 @@ CLI response:
 name: h2o_feet
 --------------
 time			               percentile
-1970-01-01T00:00:00Z	 1.148
+2015-09-09T11:42:00Z	 1.148
 ```
 
  The value `1.148` is larger than 5% of the values in `water_level` where `location` equals `coyote_creek`.
@@ -847,8 +827,8 @@ CLI response:
 ```
 name: h2o_feet
 --------------
-time	 percentile	 location
-0	    1.122		     santa_monica
+time	                  percentile	 location
+2015-08-28T12:06:00Z	  1.122		     santa_monica
 ```
 
 * Calculate the 100th percentile of the field `water_level` grouped by the `location` tag:
@@ -863,13 +843,13 @@ name: h2o_feet
 tags: location = coyote_creek
 time			               percentile
 ----			               ----------
-1970-01-01T00:00:00Z	 9.964
+2015-08-29T07:24:00Z	 9.964
 
 name: h2o_feet
 tags: location = santa_monica
 time			               percentile
 ----			               ----------
-1970-01-01T00:00:00Z	 7.205
+2015-08-29T03:54:00Z	 7.205
 ```
 
 Notice that `PERCENTILE(<field_key>,100)` is equivalent to `MAX(<field_key>)`.
