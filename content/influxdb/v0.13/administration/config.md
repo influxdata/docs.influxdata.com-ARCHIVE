@@ -168,7 +168,7 @@ Larger numbers may yield better compression but could incur a performance peanal
 ## [cluster]
 
 This section contains configuration options for query management.
-For more on managing queries, see [Query Management](/v0.12/troubleshooting/query_management/).
+For more on managing queries, see [Query Management](/influxdb/v0.13/troubleshooting/query_management/).
 
 ### max-concurrent-queries = 0
 

@@ -262,7 +262,7 @@ Writes an integer: `value=100i`
 Writes a float: `value=100`
 
 ## Writing duplicate points
-In InfluxDB 0.12 a point is uniquely identified by the measurement name, [tag set](/influxdb/v0.13/concepts/glossary/#tag-set), and the nanosecond timestamp.
+In InfluxDB 0.13 a point is uniquely identified by the measurement name, [tag set](/influxdb/v0.13/concepts/glossary/#tag-set), and the nanosecond timestamp.
 If you submit a new point with the same measurement, tag set, and timestamp as an existing point, the field set becomes the union of the old field set and the new field set, where any ties go to the new field set.
 This is the intended behavior.
 
@@ -380,21 +380,21 @@ For passwords that include a single quote, escape the single quote with a backsl
 There a number of ways to identify the version of InfluxDB that you're using:
 
 * Check the return when you `curl` the `/ping` endpoint.
-For example, if you're using 0.12.0 `curl -i 'http://localhost:8086/ping'` returns:  
+For example, if you're using 0.13.0 `curl -i 'http://localhost:8086/ping'` returns:  
 
 `HTTP/1.1 204 No Content`  
 `Request-Id: 874101f6-e23e-11e5-8097-000000000000`  
-✨`X-Influxdb-Version: 0.12.0`✨  
+✨`X-Influxdb-Version: 0.13.0`✨  
 `Date: Fri, 04 Mar 2016 19:23:08 GMT`
 
 * Check the text that appears when you [launch](/influxdb/v0.13/tools/shell/) the CLI:
 
-`Connected to http://localhost:8086`✨`version 0.12.0`✨  
-`InfluxDB shell 0.12.0`
+`Connected to http://localhost:8086`✨`version 0.13.0`✨  
+`InfluxDB shell 0.13.0`
 
 * Check the HTTP response in your logs:  
 
-`[http] 2016/03/04 11:25:13 ::1 - - [04/Mar/2016:11:25:13 -0800] GET /query?db=&epoch=ns&q=show+databases HTTP/1.1 200 98 -`     ✨`InfluxDBShell/0.12.0`✨`d16e7a83-e23e-11e5-80a7-000000000000 529.543µs`
+`[http] 2016/03/04 11:25:13 ::1 - - [04/Mar/2016:11:25:13 -0800] GET /query?db=&epoch=ns&q=show+databases HTTP/1.1 200 98 -`     ✨`InfluxDBShell/0.13.0`✨`d16e7a83-e23e-11e5-80a7-000000000000 529.543µs`
 
 ## Data aren't dropped after altering a retention policy
 After [shortening](/influxdb/v0.13/query_language/database_management/#modify-retention-policies-with-alter-retention-policy) the `DURATION` of a [retention policy](/influxdb/v0.13/concepts/glossary/#retention-policy-rp) (RP), you may notice that InfluxDB keeps some data that are older than the `DURATION` of the modified RP.

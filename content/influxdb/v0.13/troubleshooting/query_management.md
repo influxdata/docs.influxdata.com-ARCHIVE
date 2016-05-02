@@ -7,9 +7,9 @@ menu:
     parent: troubleshooting
 ---
 
-InfluxDB 0.12 offers new features for query management.
-Users are now able to identify currently-running queries and have the ability to
-kill queries that are overloading their system.
+With InfluxDB's query management features, users are able to identify
+currently-running queries and have the ability to kill queries that are
+overloading their system.
 Additionally, users can prevent and halt the execution of inefficient queries
 with several new configuration settings.
 
