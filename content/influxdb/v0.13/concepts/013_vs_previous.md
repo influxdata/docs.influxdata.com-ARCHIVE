@@ -1,12 +1,15 @@
 ---
-title: Differences between InfluxDB 0.12 and versions prior to 0.11
+title: Differences between InfluxDB 0.13 and versions prior to 0.12
 menu:
   influxdb_013:
     weight: 40
     parent: concepts
 ---
 
-Users looking to upgrade to InfluxDB 0.12 from versions prior to 0.11 should view the following pages in our documentation.
+Users looking to upgrade to InfluxDB 0.13 from versions prior to 0.12 should view the following pages in our documentation.
+
+##### 0.11 users:
+[Differences between InfluxDB 0.12 and InfluxDB 0.11](/influxdb/v0.12/concepts/011_vs_012/)
 
 ##### 0.10 users:
 [Differences between InfluxDB 0.11 and InfluxDB 0.10](/influxdb/v0.11/concepts/010_vs_011/)
