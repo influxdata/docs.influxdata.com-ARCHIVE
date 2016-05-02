@@ -60,11 +60,12 @@ See the [installation documentation](/influxdb/v0.13/introduction/installation/#
 * [[shard-precreation]](/influxdb/v0.13/administration/config/#shard-precreation)
 * [[admin]](/influxdb/v0.13/administration/config/#admin)
 * [[monitor]](/influxdb/v0.13/administration/config/#monitor)
+* [[subscriber]](/influxdb/v0.13/administration/config/#subscriber)
 * [[http]](/influxdb/v0.13/administration/config/#http)
-* [[graphite]](/influxdb/v0.13/administration/config/#graphite)
-* [[collectd]](/influxdb/v0.13/administration/config/#collectd)
-* [[opentsdb]](/influxdb/v0.13/administration/config/#opentsdb)
-* [[udp]](/influxdb/v0.13/administration/config/#udp)
+* [[[graphite]]](/influxdb/v0.13/administration/config/#graphite)
+* [[[collectd]]](/influxdb/v0.13/administration/config/#collectd)
+* [[[opentsdb]]](/influxdb/v0.13/administration/config/#opentsdb)
+* [[[udp]]](/influxdb/v0.13/administration/config/#udp)
 * [[continuous_queries]](/influxdb/v0.13/administration/config/#continuous-queries)
 
 ## Configuration Options
@@ -104,9 +105,9 @@ continuous queries.
 ### dir = "/var/lib/influxdb/meta"
 
 The `meta` directory.
-Files in the `meta` directory include: `meta.db` and the `snapshots` directory.
+Files in the `meta` directory include `meta.db`.
 
->**Note:** The default directory for OSX installations is `/Users/<username>/.influxdb/meta`
+>**Note:** The default directory for OS X installations is `/Users/<username>/.influxdb/meta`
 
 ### retention-autocreate = true
 
@@ -133,7 +134,20 @@ This section controls where the actual shard data for InfluxDB lives and how it 
 The directory where InfluxDB stores the data.
 This directory may be changed.
 
->**Note:** The default directory for OSX installations is `/Users/<username>/.influxdb/data`
+>**Note:** The default directory for OS X installations is `/Users/<username>/.influxdb/data`
+
+### engine = "tsm1"
+
+The storage engine. This is the only option for version 0.13.
+
+### wal-dir = "/var/lib/influxdb/wal"
+
+The WAL directory is the location of the [write ahead log](/influxdb/v0.13/concepts/glossary/#wal-write-ahead-log).
+
+### wal-logging-enabled = true
+
+The WAL logging enabled toggles the logging of WAL operations such as WAL
+flushes to disk.
 
 ### query-log-enabled = true
 
@@ -148,27 +162,39 @@ The cache maximum memory size is the maximum size (in bytes) a shard's cache can
 
 The cache snapshot memory size is the size at which the engine will snapshot the cache and write it to a TSM file, freeing up memory.
 
-### cache-snapshot-write-cold-duration = "1h"
+### cache-snapshot-write-cold-duration = "1h0m0s"
 
 The cache snapshot write cold duration is the length of time at which the engine will snapshot the cache and write it to a new TSM file if the shard hasn't received writes or deletes.
 
-### compact-min-file-count = 3
+### compact-full-write-cold-duration = "24h0m0s"
 
-The compact minimum file count is the minimum number of TSM files that need to exist before a compaction cycle will run.
+The compact full write cold duration is the duration at which the engine will compact all TSM files in a shard if it hasn't received a write or delete.
 
-### compact-full-write-cold-duration = "24h"
-
-he compact full write cold duration is the duration at which the engine will compact all TSM files in a shard if it hasn't received a write or delete.
-
-### max-points-per-block = 1000
+### max-points-per-block = 0
 
 The maximum points per block is the maximum number of points in an encoded block in a TSM file.
-Larger numbers may yield better compression but could incur a performance peanalty when querying.
+Larger numbers may yield better compression but could incur a performance penalty when querying.
+
+### data-logging-enabled = true
 
 ## [cluster]
 
 This section contains configuration options for query management.
 For more on managing queries, see [Query Management](/influxdb/v0.13/troubleshooting/query_management/).
+
+### force-remote-mapping = false
+
+### write-timeout = "10s"
+
+The time within which a write request must complete on the cluster.
+
+### shard-writer-timeout = "5s"
+
+The time within which a remote shard must respond to a write request.
+
+### max-remote-write-connections = 3
+
+### shard-mapper-timeout = "5s"
 
 ### max-concurrent-queries = 0
 
@@ -218,7 +244,7 @@ This section controls the enforcement of retention policies for evicting old dat
 
 Set to `false` to prevent InfluxDB from enforcing retention policies.
 
-### check-interval = "30m"
+### check-interval = "30m0s"
 
 The rate at which InfluxDB checks to enforce a retention policy.
 
@@ -230,14 +256,37 @@ Shards that would be wholly or partially in the past are never precreated.
 
 ### enabled = true
 
-### check-interval = "10m"
+### check-interval = "10m0s"
 
-### advance-period = "30m"
+### advance-period = "30m0s"
 
 The maximum period in the future for which InfluxDB precreates shards.
 The `30m` default should work for most systems.
 Increasing this setting too far in the future can cause inefficiencies.
 
+## [admin]
+
+Controls the availability of the built-in, web-based admin interface.
+
+### enabled = true
+
+Set to `false` to disable the admin interface.
+
+### bind-address = ":8083"
+
+The port used by the admin interface.
+
+### https-enabled = false
+
+Set to `true` to enable HTTPS for the admin interface.
+
+>**Note:** HTTPS must be enable for the [[http]](/influxdb/v0.13/administration/config/#http) service for the admin UI to function properly using HTTPS.
+
+### https-certificate = "/etc/ssl/influxdb.pem"
+
+The path of the certificate file.
+
+### Version = ""
 
 ## [monitor]
 
@@ -261,27 +310,9 @@ The destination database for recorded statistics.
 
 The interval at which InfluxDB records statistics.
 
-## [admin]
-
-Controls the availability of the built-in, web-based admin interface.
+## [subscriber]
 
 ### enabled = true
-
-Set to `false` to disable the admin interface.
-
-### bind-address = ":8083"
-
-The port used by the admin interface.
-
-### https-enabled = false
-
-Set to `true` to enable HTTPS for the admin interface.
-
->**Note:** HTTPS must be enable for the [[http]](/influxdb/v0.13/administration/config/#http) service for the admin UI to function properly using HTTPS.
-
-### https-certificate = "/etc/ssl/influxdb.pem"
-
-The path of the certificate file.
 
 ## [http]
 
@@ -335,23 +366,17 @@ See the [README](https://github.com/influxdb/influxdb/blob/master/services/graph
 
 Set to `true` to enable Graphite input.
 
-### database = "graphite"
-
-The name of the database that you want to write to.
-
 ### bind-address = ":2003"
 
 The default port.
 
+### database = "graphite"
+
+The name of the database that you want to write to.
+
 ### protocol = "tcp"
 
 Set to `tcp` or `udp`.
-
-### consistency-level = "one"
-
-The number of nodes that must confirm the write.
-If the requirement is not met the return value will be either `partial write` if some points in the batch fail or `write failure` if all points in the batch fail.
-For more information, see the Query String Parameters for Writes section in the [Line Protocol Syntax Reference ](/influxdb/v0.13/write_protocols/write_syntax/).
 
 *The next three options control how batching works.
 You should have this enabled otherwise you could get dropped metrics or poor performance.
@@ -369,30 +394,22 @@ The number of batches that may be pending in memory.
 
 The input will flush at least this often even if it hasn't reached the configured batch-size.
 
-### udp-read-buffer = 0
+### consistency-level = "one"
 
-UDP Read buffer size, 0 means OS default.
-UDP listener will fail if set above OS max.
+The number of nodes that must confirm the write.
+If the requirement is not met the return value will be either `partial write` if some points in the batch fail or `write failure` if all points in the batch fail.
+For more information, see the Query String Parameters for Writes section in the [Line Protocol Syntax Reference ](/influxdb/v0.13/write_protocols/write_syntax/).
 
 ### separator = "."
 
 This string joins multiple matching 'measurement' values providing more control over the final measurement name.
 
-### tags = ["region=us-east", "zone=1c"]
+### udp-read-buffer = 0
 
-Default tags that will be added to all metrics.  
-These can be overridden at the template level or by tags extracted from metric.
+UDP Read buffer size, 0 means OS default.
+UDP listener will fail if set above OS max.
 
-### templates = []
-
-Each template line requires a template pattern.  
-It can have an optional filter before the template and separated by spaces.  
-It can also have optional extra tags following the template.  
-Multiple tags should be separated by commas and no spaces similar to the line protocol format.  
-There can be only one default template.
-For more information on templates please see the [graphite service README](https://github.com/influxdata/influxdb/tree/master/services/graphite#templates)
-
-## [collectd]
+## [[collectd]]
 
 This section controls the listener for collectd data. See the
 [README](https://github.com/influxdata/influxdb/tree/master/services/collectd)
@@ -402,34 +419,28 @@ on Github for more information.
 
 Set to `true` to enable collectd writes.
 
-### bind-address = ""
+### bind-address = ":25826"
 
 The port.
 
-### database = ""
+### database = "collectd"
 
 The name of the database that you want to write to.
 This defaults to `collectd`.
-
-### typesdb = ""
-
-Defaults to `/usr/share/collectd/types.db`. A sample `types.db` file
-can be found
-[here](https://github.com/collectd/collectd/blob/master/src/types.db).
 
 *The next three options control how batching works.
 You should have this enabled otherwise you could get dropped metrics or poor performance.
 Batching will buffer points in memory if you have many coming in.*
 
-### batch-size = 1000
+### batch-size = 5000
 
 The input will flush if this many points get buffered.
 
-### batch-pending = 5
+### batch-pending = 10
 
 The number of batches that may be pending in memory.
 
-### batch-timeout = "1s"
+### batch-timeout = "10s"
 
 The input will flush at least this often even if it hasn't reached the configured batch-size.
 
@@ -438,7 +449,13 @@ The input will flush at least this often even if it hasn't reached the configure
 UDP Read buffer size, 0 means OS default.
 UDP listener will fail if set above OS max.
 
-## [opentsdb]
+### typesdb = "/usr/share/collectd/types.db"
+
+Defaults to `/usr/share/collectd/types.db`. A sample `types.db` file
+can be found
+[here](https://github.com/collectd/collectd/blob/master/src/types.db).
+
+## [[opentsdb]]
 
 Controls the listener for OpenTSDB data.
 See the [README](https://github.com/influxdb/influxdb/blob/master/services/opentsdb/README.md) on GitHub for more information.
@@ -465,11 +482,7 @@ An empty string is equivalent to the database's `DEFAULT` retention policy.
 
 ### tls-enabled = false
 
-### certificate = ""
-
-### log-point-errors = true
-
-Log an error for every malformed point.
+### certificate = "/etc/ssl/influxdb.pem"
 
 *The next three options control how batching works.
 You should have this enabled otherwise you could get dropped metrics or poor performance.
@@ -487,6 +500,10 @@ The number of batches that may be pending in memory.
 
 The input will flush at least this often even if it hasn't reached the configured batch-size.
 
+### log-point-errors = true
+
+Log an error for every malformed point.
+
 ## [[udp]]
 
 This section controls the listeners for InfluxDB line protocol data via UDP.
@@ -496,7 +513,7 @@ See the [UDP page](/influxdb/v0.13/write_protocols/udp/) for more information.
 
 Set to `true` to enable writes over UDP.
 
-### bind-address = ""
+### bind-address = ":8089"
 
 An empty string is equivalent to `0.0.0.0`.
 
@@ -513,11 +530,11 @@ An empty string is equivalent to the database's `DEFAULT` retention policy.
 You should have this enabled otherwise you could get dropped metrics or poor performance.
 Batching will buffer points in memory if you have many coming in.*
 
-### batch-size = 1000
+### batch-size = 5000
 
 The input will flush if this many points get buffered.
 
-### batch-pending = 5
+### batch-pending = 10
 
 The number of batches that may be pending in memory.
 
@@ -530,10 +547,7 @@ The input will flush at least this often even if it hasn't reached the configure
 UDP read buffer size, 0 means OS default.
 UDP listener will fail if set above OS max.
 
-### udp-payload-size = 65536
-
-Sets the expected UDP payload size.
-Lower values tend to yield better performance, default is max UDP size 65536.
+### precision = ""
 
 ## [continuous_queries]
 
