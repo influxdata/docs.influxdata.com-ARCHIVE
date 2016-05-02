@@ -14,10 +14,6 @@ A list of InfluxDB terms and their definitions.
 
 ## [Comparison to SQL](/influxdb/v0.13/concepts/crosswalk/)
 
-## [Differences between InfluxDB 0.13 and 0.12](/influxdb/v0.13/concepts/012_vs_013/)
-
-## [Differences between InfluxDB 0.13 and versions prior to 0.12](/influxdb/v0.13/concepts/013_vs_previous/)
-
 ## [Design Insights and Tradeoffs](/influxdb/v0.13/concepts/insights_tradeoffs/)
 
 A brief treatment of some of the performance tradeoffs made during the design phase of InfluxDB

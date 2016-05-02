@@ -8,6 +8,8 @@ menu:
     weight: 0
 ---
 
+InfluxDB is the second piece of the
+[TICK stack](https://influxdata.com/time-series-platform/).
 InfluxDB is a [time series database](https://en.wikipedia.org/wiki/Time_series_database) built from the ground up to handle high write and query loads.
 InfluxDB is meant to be used as a backing store for any use case involving large amounts of timestamped data, including DevOps monitoring, application metrics, IoT sensor data, and real-time analytics.
 
@@ -27,5 +29,3 @@ It compiles into a single binary with no external dependencies.
 * Retention policies efficiently auto-expire stale data.
 * Continuous queries automatically compute aggregate data to make frequent queries more efficient.
 * Built in web admin interface.
-
-## Project Status

@@ -2,7 +2,7 @@
 title: Introduction
 ---
 
-The introductory documentation includes all the information needed to get up and running with InfluxDB.
+The introductory documentation includes all the information you need to get up and running with InfluxDB.
 
 ## [Download](https://influxdata.com/downloads/#influxdb)
 

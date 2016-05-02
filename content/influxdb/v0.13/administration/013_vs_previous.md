@@ -3,7 +3,7 @@ title: Differences between InfluxDB 0.13 and versions prior to 0.12
 menu:
   influxdb_013:
     weight: 40
-    parent: concepts
+    parent: administration
 ---
 
 Users looking to upgrade to InfluxDB 0.13 from versions prior to 0.12 should view the following pages in our documentation.
