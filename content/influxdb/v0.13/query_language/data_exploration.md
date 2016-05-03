@@ -17,7 +17,9 @@ The basics:
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[The `SELECT` statement and arithmetic](/influxdb/v0.13/query_language/data_exploration/#the-select-statement-and-arithmetic)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[The `WHERE` clause](/influxdb/v0.13/query_language/data_exploration/#the-where-clause)
 * [The `GROUP BY` clause](/influxdb/v0.13/query_language/data_exploration/#the-group-by-clause)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[The basic `GROUP BY` clause](/influxdb/v0.13/query_language/data_exploration/#the-basic-group-by-clause)   
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`GROUP BY` tag values](/influxdb/v0.13/query_language/data_exploration/#group-by-tag-values)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`GROUP BY` time intervals](/influxdb/v0.13/query_language/data_exploration/#group-by-time-intervals)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`GROUP BY` tag values and a time interval](/influxdb/v0.13/query_language/data_exploration/#group-by-tag-values-and-a-time-interval)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[The `GROUP BY` clause and `fill()`](/influxdb/v0.13/query_language/data_exploration/#the-group-by-clause-and-fill)  
 * [The `INTO` clause](/influxdb/v0.13/query_language/data_exploration/#the-into-clause)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Relocate data](/influxdb/v0.13/query_language/data_exploration/#relocate-data)  
@@ -235,13 +237,11 @@ It supports using regular expressions to match tags, but not to match fields.
 ## The GROUP BY clause
 
 Use the `GROUP BY` clause to group data by tags and/or time intervals.
-To successfully implement `GROUP BY`,  append the`GROUP BY` clause to a `SELECT` statement and pair the `SELECT` statement with one of InfluxQL's [functions](/influxdb/v0.13/query_language/functions/).
+To successfully implement `GROUP BY`,  append the`GROUP BY` clause to a `SELECT` statement and pair the `SELECT` statement with one of InfluxQL's [functions](/influxdb/v0.13/query_language/functions/):
 
 > **Note:** If your query includes both a `WHERE` clause and a `GROUP BY` clause, the `GROUP BY` clause must come after the `WHERE` clause.
 
-### The basic `GROUP BY` clause
----
-**GROUP BY tag values**  
+### GROUP BY tag values
 Calculate the [`MEAN()`](/influxdb/v0.13/query_language/functions/#mean) `water_level` for the different tag values of `location`:
 ```sql
 > SELECT MEAN(water_level) FROM h2o_feet GROUP BY location
@@ -313,54 +313,17 @@ time			               mean
 1970-01-01T00:00:00Z	 49.29386362086556
 ```
 
-**GROUP BY time intervals**  
-[`COUNT()`](/influxdb/v0.13/query_language/functions/#count) the number of `water_level` points between August 18, 2015 at midnight and September 18 at 5:00pm at two day intervals:
-```sql
-> SELECT COUNT(water_level) FROM h2o_feet WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-09-18T17:00:00Z' AND location='coyote_creek' GROUP BY time(2d)
+### GROUP BY time intervals
+
+Users can group data by a given time interval with `GROUP BY time()`:
+```
+SELECT <function>(<field_key>) FROM <measurement_name> WHERE <time_range> GROUP BY time(<time_interval>[,<offset_interval>])
 ```
 
-CLI response:
-```bash
-name: h2o_feet
-----------
-time			               count
-2015-08-17T00:00:00Z	 240
-2015-08-19T00:00:00Z	 480
-2015-08-21T00:00:00Z	 480
-2015-08-23T00:00:00Z	 480
-2015-08-25T00:00:00Z	 480
-2015-08-27T00:00:00Z	 480
-2015-08-29T00:00:00Z	 480
-2015-08-31T00:00:00Z	 480
-2015-09-02T00:00:00Z	 480
-2015-09-04T00:00:00Z	 479
-2015-09-06T00:00:00Z	 480
-2015-09-08T00:00:00Z	 480
-2015-09-10T00:00:00Z	 480
-2015-09-12T00:00:00Z	 480
-2015-09-14T00:00:00Z	 480
-2015-09-16T00:00:00Z	 480
-2015-09-18T00:00:00Z	 165
-```
-
-Notice that each timestamp represents a two day interval and that the value in the `count` field is the number of `water_level` points that occurred in that two day interval.
-You could get the same results by querying the data 17 times - that is, one `COUNT()` query for every two days between August 18, 2015 at midnight and September 18 at 5:00pm - but that could take a while.
-
-> **Note:** The first timestamp in the CLI response (`2015-08-17T00:00:00Z`) occurs before the lower bound of the query's time range (`2015-08-18T00:00:00Z`).
-See [Frequently Encountered Issues](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#understanding-the-time-intervals-returned-from-group-by-time-queries) for an explanation of the time intervals returned from `GROUP BY time()` queries.
-
-**GROUP BY tag values AND a time interval**  
-Calculate the average `water_level` for the different tag values of `location` in the last two weeks at 6 hour intervals:
-```sql
-> SELECT MEAN(water_level) FROM h2o_feet WHERE time > now() - 2w GROUP BY location,time(6h)
-```
-* Separate multiple `GROUP BY` arguments with a comma.
-
-Other things to note about `GROUP BY time()`:
-
-* InfluxQL requires a `WHERE` clause if you're using `GROUP BY` with `time()`.
+InfluxQL requires a `WHERE` clause if you're using `GROUP BY` with `time()`.
 Note that unless you specify a different upper and lower bound for the time range, `GROUP BY` uses `epoch 0` as the lower bound and `now()` as the upper bound for the query.
-* Valid units for `time()` are:  
+
+Valid units for `time()` are:  
 <br>
     `u` microseconds    
     `ms` milliseconds  
@@ -368,7 +331,85 @@ Note that unless you specify a different upper and lower bound for the time rang
     `m` minutes  
     `h` hours  
     `d` days  
-    `w` weeks   
+    `w` weeks  
+
+#### Rounded `GROUP BY time()` boundaries
+
+By default, `GROUP BY time()` returns results that fall on rounded calendar time
+boundaries.
+
+Example:
+
+[`COUNT()`](/influxdb/v0.13/query_language/functions/#count) the number of `water_level` points between August 19, 2015 at midnight and August 27 at 5:00pm at three day intervals:
+```sql
+> SELECT COUNT(water_level) FROM h2o_feet WHERE time >= '2015-08-19T00:00:00Z' AND time <= '2015-08-27T17:00:00Z' AND location='coyote_creek' GROUP BY time(3d)
+```
+
+CLI response:
+```bash
+name: h2o_feet
+--------------
+time			               count
+2015-08-18T00:00:00Z	 480
+2015-08-21T00:00:00Z	 720
+2015-08-24T00:00:00Z	 720
+2015-08-27T00:00:00Z	 171
+```
+
+Each timestamp represents a three day interval and the value in the `count` field is the number of `water_level` points that occur in that three day interval.
+You could get the same results by querying the data four times - that is, one `COUNT()` query for every three days between August 19, 2015 at midnight and August 27, 2015 at 5:00pm - but that could take a while.
+
+Notice that the first timestamp in the CLI response (`2015-08-18T00:00:00Z`) occurs before the lower bound of the query's time range (`2015-08-19T00:00:00Z`).
+This is because default `GROUP BY time()` intervals fall on rounded
+calendar time boundaries.
+The `count` results where `time` is `2015-08-18T00:00:00Z`, however, only
+include data from `2015-08-19T00:00:00Z`.
+See [Frequently Encountered Issues](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#understanding-the-time-intervals-returned-from-group-by-time-queries) for more detailed explanation of the default
+`GROUP BY time()` behavior.
+
+#### Configured `GROUP BY time()` boundaries
+
+`GROUP BY time()` also allows you to alter the default rounded calendar time
+boundaries by including an offset interval.
+
+Example:
+
+[`COUNT()`](/influxdb/v0.13/query_language/functions/#count) the number of `water_level` points between August 19, 2015 at midnight and August 27 at 5:00pm at three day intervals, and offset
+the time boundary by one day:
+```sql
+> SELECT COUNT(water_level) FROM h2o_feet WHERE time >= '2015-08-19T00:00:00Z' AND time <= '2015-08-27T17:00:00Z' AND location='coyote_creek' GROUP BY time(3d,1d)
+```
+
+CLI response:
+```
+name: h2o_feet
+--------------
+time			               count
+2015-08-19T00:00:00Z	 720
+2015-08-22T00:00:00Z	 720
+2015-08-25T00:00:00Z	 651
+```
+
+The `1d` offset interval alters the default three day time interval boundaries  
+from:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to:
+```
+August 18 - August 20         August 19 - August 21
+August 21 - August 23         August 22 - August 24
+August 24 - August 26         August 25 - August 27
+August 27 - August 29         
+```
+
+### GROUP BY tag values AND a time interval
+
+Separate multiple `GROUP BY` arguments with a comma.
+
+Calculate the average `water_level` for the different tag values of `location` in the last two weeks at 6 hour intervals:
+```sql
+> SELECT MEAN(water_level) FROM h2o_feet WHERE time > now() - 2w GROUP BY location,time(6h)
+```
 
 ### The `GROUP BY` clause and `fill()`
 ---

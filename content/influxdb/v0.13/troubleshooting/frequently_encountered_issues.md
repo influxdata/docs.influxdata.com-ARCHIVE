@@ -63,7 +63,7 @@ time			         count
 </code></pre>
 
 InfluxDB queries the `GROUP BY time()` intervals that fall within the `WHERE time` clause.
-`GROUP BY time()` intervals always fall on rounded calendar time boundaries.
+Default `GROUP BY time()` intervals fall on rounded calendar time boundaries.
 Because they're rounded time boundaries, the start and end timestamps may appear to include more data than those covered by the query's `WHERE time` clause.
 
 For the example above, InfluxDB works with two day intervals based on round number calendar days.
@@ -79,11 +79,12 @@ August 23rd-24th
 [...]
 ```
 
-Because InfluxDB automatically groups together August 19th and August 20th, August 19th is the first timestamp to appear in the results despite not being within the query's time range.
+Because InfluxDB groups together August 19th and August 20th by default, August 19th is the first timestamp to appear in the results despite not being within the query's time range.
 The number in the `count` column, however, only includes data that occur on or after August 20th as that is the time range specified by the query's `WHERE` clause.
 
-<dt> See [GitHub Issue #1837](https://github.com/influxdb/influxdb/issues/1837) for more context on the future development of `GROUP BY time()` windows.
-</dt>
+Users may offset the default rounded calendar time boundaries by including an
+[offset interval](/influxdb/v0.13/query_language/data_exploration/#configured-group-by-time-boundaries)
+in their query.
 
 ## Querying after `now()`
 By default, InfluxDB uses `now()` (the current nanosecond timestamp of the node that is processing the query) as the upper bound in queries.
