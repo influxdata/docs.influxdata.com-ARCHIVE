@@ -42,12 +42,12 @@ There are two ways to write string literals:
 1.
 Single quoted strings with backslash escaped single quotes.
 
-    This string `'single \' quoted'` becomes the literal `single ' quoted`.
+- This string `'single \' quoted'` becomes the literal `single ' quoted`.
 
 2.
 Triple single quoted strings with no escaping.
 
-    This string `'''triple \' quoted'''` becomes the literal `triple \' quoted`.
+- This string `'''triple \' quoted'''` becomes the literal `triple \' quoted`.
 
 ### Durations
 
