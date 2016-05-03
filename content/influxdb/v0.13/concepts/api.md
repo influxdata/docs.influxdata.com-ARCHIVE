@@ -29,6 +29,8 @@ Date: Fri, 04 Mar 2016 19:01:23 GMT
 ### /query
 For more information on the `/query` endpoint see the [Querying Data](/influxdb/v0.13/guides/querying_data/) section of our docs.
 
+Starting with InfluxDB 0.13, all queries sent to the `/query` endpoint that are not `SELECT` or `SHOW` queries should be `POST` requests. non-`SELECT` and non-`SHOW` queries will continue to work with `GET` requests but this behavior is deprecated in version 0.13 and will no longer work in version 1.0.
+
 ### /write
 For more information on the `/write` endpoint see the [Writing Data](/influxdb/v0.13/guides/writing_data/) section of our docs.
 

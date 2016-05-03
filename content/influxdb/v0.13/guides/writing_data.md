@@ -11,12 +11,12 @@ There are many ways to write data into InfluxDB including the [command line inte
 Here we'll show you how to create a database and write data to that database using the built-in HTTP API.
 
 ## Creating a database using the HTTP API
-To create a database send a `GET` request to the `/query` endpoint and set the URL parameter `q` to `CREATE DATABASE <new_database_name>`.
+To create a database send a `POST` request to the `/query` endpoint and set the URL parameter `q` to `CREATE DATABASE <new_database_name>`.
 The example below sends a request to InfluxDB running on `localhost` and creates the database `mydb`:  
 <br>
 
 ```bash
-curl -G http://localhost:8086/query --data-urlencode "q=CREATE DATABASE mydb"
+curl -POST http://localhost:8086/query --data-urlencode "q=CREATE DATABASE mydb"
 ```
 
 ## Writing data using the HTTP API
@@ -37,7 +37,7 @@ They consist of a measurement, tags, fields, and a timestamp.
 InfluxDB requires a measurement name.
 Strictly speaking, tags are optional but most series include tags to differentiate data sources and to make querying both easy and efficient.
 Both tag keys and tag values are strings.
-Field keys are required and are always strings, and, [fault](/influxdb/v0.13/write_protocols/write_syntax/#line-protocol), field values are floats.
+Field keys are required and are always strings, and, [by default](/influxdb/v0.13/write_protocols/write_syntax/#line-protocol), field values are floats.
 The timestamp - supplied at the end of the line in Unix time in nanoseconds since January 1, 1970 UTC - is optional.
 If you do not specify a timestamp InfluxDB uses the server's local nanosecond timestamp in Unix epoch.
 Anything that has to do with time in InfluxDB is always UTC.
