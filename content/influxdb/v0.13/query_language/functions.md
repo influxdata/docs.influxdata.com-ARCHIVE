@@ -651,7 +651,7 @@ See [Frequently Encountered Issues](/influxdb/v0.13/troubleshooting/frequently_e
 
 ## MAX()
 Returns the highest value in a single [field](/influxdb/v0.13/concepts/glossary/#field).
-The field must be of type int64 or float64.
+The field must be an int64, float64, or boolean.
 ```sql
 SELECT MAX(<field_key>)[,<tag_key(s)>] FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
 ```
@@ -718,7 +718,7 @@ time			                max
 
 ## MIN()
 Returns the lowest value in a single [field](/influxdb/v0.13/concepts/glossary/#field).
-The field must be of type int64 or float64.
+The field must be an int64, float64, or boolean.
 ```sql
 SELECT MIN(<field_key>)[,<tag_key(s)>] FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
 ```
