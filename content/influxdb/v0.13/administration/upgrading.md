@@ -7,129 +7,80 @@ menu:
     parent: administration
 ---
 
-This page guides you through upgrading from InfluxDB 0.11 to 0.12.
 
-> **Note:**
-You can follow the same steps to upgrade from 0.10 to 0.12 (just replace all the
-0.11 mentions with 0.10), but be sure to [convert](/influxdb/v0.10/administration/upgrading/#convert-b1-and-bz1-shards-to-tsm1)
-any remaining `b1` and `bz1` shards to `TSM` format before you start. InfluxDB
-0.12 cannot read non-`TSM` shards.
->
-In your [data directory](/influxdb/v0.13/administration/config/#dir-var-lib-influxdb-data):
->
-* Non-`TSM` shards are files of the form: `data/<database>/<retention_policy>/<shard_id>`
-* `TSM` shards are files of the form: `data/<database>/<retention_policy>/<shard_id>/<file>.tsm`
+This page outlines process for upgrading from:
 
-In the next sections you will:
+* [Version 0.12 to 0.13](/influxdb/v0.13/administration/upgrading/#upgrading-from-0-12-to-0-13)
+* [Version 0.11 to 0.13](/influxdb/v0.13/administration/upgrading/#upgrading-from-0-11-to-0-13)
+* [Version 0.10 to 0.13](/influxdb/v0.13/administration/upgrading/#upgrading-from-0-10-to-0-13)
 
-* Transfer your [metastore](/influxdb/v0.13/concepts/glossary/#metastore)
-information to the new 0.12 store.
-In versions prior to 0.12, InfluxDB stores metastore
-information in `raft.db` via the raft services.
-In 0.12, InfluxDB stores metastore information in `meta.db`, a binary protobuf
-file.
-* Generate a new configuration file.
+## Upgrading from 0.12 to 0.13
 
-To start out, you must be working with version 0.10 or 0.11 (don't upgrade the
-`influxd` binary yet!).
-If you've already upgraded the binary, reinstall 0.10 or 0.11; InfluxDB 0.12
-will yield an error
-(`run: create server: detected /var/lib/influxdb/meta/raft.db. [...]`) if you
-attempt to start the process without completing the steps below.
-The examples below assume you are working with a version of linux.
+1. [Download](https://influxdata.com/downloads/#influxdb) InfluxDB version
+0.13
 
-> Before you start, we recommend making a copy of the entire 0.11 `meta`
-directory in case you experience problems with the upgrade. The upgrade process
-removes the `raft.db` and `node.json` files from the `meta` directory:
->
+2. [Generate](/influxdb/v0.13/administration/config/#using-configuration-files)
+a new configuration file
+
+    Users must
+[update](/influxdb/v0.13/administration/config/#using-configuration-files) their
+configuration file to take into account breaking configuration changes in
+version 0.13:
+
+    InfluxDB 0.13 supports multiple listeners for the collectd and OpenTSDB inputs.
+Update the relevant headers in their configuration files from
+`[collectd]` to `[[collectd]]` and from `[opentsdb]` to `[[opentsdb]]`.
+The InfluxDB service will not start if the old headers remain, and it will
+return the error:
 ```
-cp -r <path_to_meta_directory> <path_to_011_meta_directory_backup>
-```
->
-Example:
->
-Create a copy of the 0.11 `meta` directory in `backups/`:
-```
-~# cp -r /var/lib/influxdb/meta backups/
+run: parse config: Type mismatch for 'run.Config.opentsdb': Expected slice but found 'map[string]interface {}'.
 ```
 
-**1.** While still running 0.11, export the metastore data to a different
-directory:
+3. Check out the new features outlined in
+[Differences between InfluxDB 0.13 and 0.12](/influxdb/v0.13/administration/012_vs_013/)
 
-```
-influxd backup <path_to_metastore_backup>
-```
+## Upgrading from 0.11 to 0.13
 
-The directory will be created if it doesn't already exist.
+In versions prior to 0.12, InfluxDB stores
+[metastore](/influxdb/v0.13/concepts/glossary/#metastore) information in
+`raft.db` via the raft services.
+In versions 0.12+, InfluxDB stores metastore information in `meta.db`, a binary
+protobuf file.
+0.11 users will need to follow
+[these steps](/influxdb/v0.12/administration/upgrading/) to transfer their
+metastore information to the new format (just replace all the 0.12 mentions with
+0.13).
 
-Example:
+Those steps also outline when to upgrade the binary and when to generate a
+new configuration file. Please see
+[Upgrading from 0.12 to 0.13](/influxdb/v0.13/administration/upgrading/#upgrading-from-0-12-to-0-13)
+for why users must upgrade their configuration file to work with version 0.13.
 
-Export the 0.11 metastore to `/tmp/backup`:
-```
-~# influxd backup /tmp/backup/
-2016/04/01 15:33:35 backing up metastore to /tmp/backup/meta.00
-2016/04/01 15:33:35 backup complete
-```
+## Upgrading from 0.10 to 0.13
 
-**2.** Stop the `influxdb` service:
+1. [Convert](/influxdb/v0.10/administration/upgrading/#convert-b1-and-bz1-shards-to-tsm1)
+any remaining `b1` and `bz1` shards to `TSM` format
 
-```
-sudo service influxdb stop
-```
+    InfluxDB 0.13 cannot read non-`TSM` shards.
+    Check for non-`TSM` shards in your data directory:
 
-**3.** [Upgrade](https://influxdata.com/downloads/#influxdb) the `influxd`
-binary from 0.11 to 0.12. but do not start the service.
+    * Non-`TSM` shards are files of the form: `data/<database>/<retention_policy>/<shard_id>``
+    * `TSM` shards are files of the form: `data/<database>/<retention_policy>/<shard_id>/<file>.tsm`
 
-**4.** Upgrade your metastore to the 0.12 store by performing a `restore` with
-the backup you created in step 1.
+2. [Transfer](/influxdb/v0.12/administration/upgrading/) metastore information
+to the format for versions 0.12+
 
-```
-influxd restore -metadir=<path_to_012_meta_directory> <path_to_metastore_backup>
-```
+    In versions prior to 0.12, InfluxDB stores
+[metastore](/influxdb/v0.13/concepts/glossary/#metastore) information in
+`raft.db` via the raft services.
+In versions 0.12+, InfluxDB stores metastore information in `meta.db`, a binary
+protobuf file.
+0.10 users will need to follow
+[these steps](/influxdb/v0.12/administration/upgrading/) to transfer their
+metastore information to the new format (just replace all the 0.12 mentions with
+0.13).
 
-Example:
-
-Restore `/tmp/backup` to the meta directory in `/var/lib/influxdb/meta`:
-```
-~# influxd restore -metadir=/var/lib/influxdb/meta /tmp/backup
-Using metastore snapshot: /tmp/backup/meta.00
-```
-
-**5.** Generate a new configuration file.
-
-InfluxDB 0.12 has several new settings in the [configuration file](/influxdb/v0.13/administration/config/).
-
-The `influxd config` command prints out a new TOML-formatted configuration with all the available configuration options set to their default values.
-On POSIX systems, a new configuration file can be generated by redirecting the output of the command to a file.
-
-```
-influxd config > /etc/influxdb/influxdb_013.conf.generated
-```
-
-Compare your old configuration file against the newly generated [InfluxDB 0.12 file](/influxdb/v0.13/administration/config/) and manually update any defaults with your localized settings.
-
-> **Note:** If you're working on a system other than OS X you will need to
-change the following directories in your newly-generated configuration file:
->
-* Change the `dir` setting in the `[meta]` section to `/var/lib/influxdb/meta`
-* Change the `dir` setting in the `[data]` section to `/var/lib/influxdb/data`
-* Change the `wal-dir` setting in the `[data]` section to `/var/lib/influxdb/wal`
-
-**6.** Start the 0.12 service:
-
-```
-sudo service influxdb start
-```
-
-**7.** Confirm that your metastore data are present.
-
-The 0.12 output from the queries `SHOW DATABASES`,`SHOW USERS` and
-`SHOW RETENTION POLICIES ON <database_name>` should match the 0.11 output.
-
-If your metastore data do not appear to be present, stop the service, reinstall
-InfluxDB 0.11, restore the copy you made of the entire 0.11 `meta` directory to
-the `meta` directory, and try working through these steps again.
-
-**8.** Explore the new 0.12 features.
-
-See [Differences between InfluxDB 0.12 and 0.11](/influxdb/v0.13/concepts/011_vs_012/).
+    Those steps also outline when to upgrade the binary and when to generate a
+new configuration file. Please see
+[Upgrading from 0.12 to 0.13](/influxdb/v0.13/administration/upgrading/#upgrading-from-0-12-to-0-13)
+for why users must upgrade their configuration file to work with version 0.13.
