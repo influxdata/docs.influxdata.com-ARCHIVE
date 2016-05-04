@@ -95,6 +95,13 @@ Restore `/tmp/backup` to the meta directory in `/var/lib/influxdb/meta`:
 Using metastore snapshot: /tmp/backup/meta.00
 ```
 
+> **Note:** If you run `influxd restore` as the root user, you will need to
+change the permissions on the `meta.db` file:
+>
+```
+sudo chown influxdb:influxdb /var/lib/influxdb/meta/*
+```
+
 **5.** Generate a new configuration file.
 
 InfluxDB 0.12 has several new settings in the [configuration file](/influxdb/v0.12/administration/config/).
