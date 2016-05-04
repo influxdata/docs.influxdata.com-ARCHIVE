@@ -29,6 +29,482 @@ SectionPagesMenu = "products"
   weight = 30
   url = "/kapacitor/"
 
+# Telegraf v0.13 Sub-Menu - Introduction
+   [[menu.telegraf_013]]
+   name = "Download"
+   identifier = "download"
+   weight = 0
+   url = "https://influxdata.com/downloads/#telegraf"
+   parent = "introduction"
+
+  # Telegraf v0.13 Sub-Menu - Output Plugins
+  [[menu.telegraf_013]]
+    name = "InfluxDB"
+    identifier = "influxdb_output"
+    weight = 0
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/influxdb"
+    parent = "outputs"
+  [[menu.telegraf_013]]
+    name = "amon"
+    identifier = "amon_output"
+    weight = 10
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/amon"
+    parent = "outputs"
+  [[menu.telegraf_013]]
+    name = "AMQP"
+    identifier = "amqp_output"
+    weight = 20
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/amqp"
+    parent = "outputs"
+  [[menu.telegraf_013]]
+    name = "AWS Kinesis"
+    identifier = "kinesis_output"
+    weight = 30
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/kinesis"
+    parent = "outputs"
+  [[menu.telegraf_013]]
+    name = "AWS CloudWatch"
+    identifier = "cloudwatch_output"
+    weight = 40
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/cloudwatch"
+    parent = "outputs"
+  [[menu.telegraf_013]]
+    name = "Datadog"
+    identifier = "datadog_output"
+    weight = 50
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/datadog"
+    parent = "outputs"
+  [[menu.telegraf_013]]
+    name = "File"
+    identifier = "file"
+    weight = 60
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/file"
+    parent = "outputs"
+  [[menu.telegraf_013]]
+    name = "Graphite"
+    identifier = "graphite_output"
+    weight = 70
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/graphite"
+    parent = "outputs"
+  [[menu.telegraf_013]]
+    name = "Kafka"
+    identifier = "kafka_output"
+    weight = 80
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/kafka"
+    parent = "outputs"
+  [[menu.telegraf_013]]
+    name = "Librato"
+    identifier = "librato_output"
+    weight = 90
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/librato"
+    parent = "outputs"
+  [[menu.telegraf_013]]
+    name = "MQTT"
+    identifier = "mqtt_output"
+    weight = 100
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/mqtt"
+    parent = "outputs"
+  [[menu.telegraf_013]]
+    name = "NSQ"
+    identifier = "nsq_output"
+    weight = 110
+    url = "ghttps://ithub.com/influxdata/telegraf/tree/master/plugins/outputs/nsq"
+    parent = "outputs"
+  [[menu.telegraf_013]]
+    name = "OpenTSDB"
+    identifier = "opentsdb_output"
+    weight = 120
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/opentsdb"
+    parent = "outputs"
+  [[menu.telegraf_013]]
+    name = "Prometheus"
+    identifier = "prometheus_client_output"
+    weight = 130
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/prometheus_client"
+    parent = "outputs"
+  [[menu.telegraf_013]]
+    name = "Riemann"
+    identifier = "riemann_output"
+    weight = 140
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/riemann"
+    parent = "outputs"
+
+  # Telegraf v0.13 Sub-Menu - Input plugins
+  [[menu.telegraf_013]]
+    name = "AWS CloudWatch"
+    identifier = "aws_cloudwatch"
+    weight = 0
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/cloudwatch"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "Aerospike"
+    identifier = "aerospike_input"
+    weight = 10
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/aerospike"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "Apache"
+    identifier = "apache_input"
+    weight = 20
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/apache"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "bcache"
+    identifier = "bcache_input"
+    weight = 30
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/bcache"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "Cassandra"
+    identifier = "cassandra"
+    weight = 40
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/cassandra"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "Couchbase"
+    identifier = "couchbase_input"
+    weight = 50
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/couchbase"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "CouchDB"
+    identifier = "couchdb_input"
+    weight = 60
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/couchdb"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "Disque"
+    identifier = "disque_input"
+    weight = 70
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/disque"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "DNS Query Time"
+    identifier = "dns_query"
+    weight = 80
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/dns_query"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "Docker"
+    identifier = "docker_input"
+    weight = 90
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "Dovecot"
+    identifier = "dovecot_input"
+    weight = 100
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/dovecot"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "Elasticsearch"
+    identifier = "elasticsearch_input"
+    weight = 110
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/elasticsearch"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "exec"
+    identifier = "exec_input"
+    weight = 120
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/exec"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "filestat"
+    identifier = "filestat"
+    weight = 130
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/filestat"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "HAProxy"
+    identifier = "haproxy_input"
+    weight = 140
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/haproxy"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "HTTP response"
+    identifier = "http_response"
+    weight = 150
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/http_response"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "HTTPJSON"
+    identifier = "httpjson_input"
+    weight = 160
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/httpjson"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "InfluxDB"
+    identifier = "influxdb_input"
+    weight = 170
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/influxdb"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "IPMI sensor"
+    identifier = "ipmi_sensor_input"
+    weight = 180
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ipmi_sensor"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "Jolokia"
+    identifier = "jolokia_input"
+    weight = 190
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/jolokia"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "LeoFS"
+    identifier = "leofs_input"
+    weight = 200
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/leofs"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "Lustre2"
+    identifier = "lustre2_input"
+    weight = 210
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/lustre2"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "Mailchimp"
+    identifier = "mailchimp_input"
+    weight = 220
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/mailchimp"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "Memcached"
+    identifier = "memcached_input"
+    weight = 230
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/memcached"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "Mesos"
+    identifier = "mesos"
+    weight = 240
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/mesos"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "MongoDB"
+    identifier = "mongodb_input"
+    weight = 250
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/mongodb"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "MySQL"
+    identifier = "mysql_input"
+    weight = 260
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/mysql"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "Net response"
+    identifier = "net_response_input"
+    weight = 270
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/net_response"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "NGINX"
+    identifier = "nginx_input"
+    weight = 280
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/nginx"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "NSQ"
+    identifier = "nsq_input"
+    weight = 290
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/nsq"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "NTPQ"
+    identifier = "ntpq_input"
+    weight = 300
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ntpq"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "PHP-FPM"
+    identifier = "phpfpm_input"
+    weight = 310
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/phpfpm"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "Phusion Passenger"
+    identifier = "passenger_input"
+    weight = 320
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/passenger"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "ping"
+    identifier = "ping_input"
+    weight = 330
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ping"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "PostgreSQL"
+    identifier = "postgresql_input"
+    weight = 340
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/postgresql"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "PostgreSQL Extensible"
+    identifier = "postgresql__extensible_input"
+    weight = 350
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/postgresql_extensible"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "PowerDNS"
+    identifier = "powerdns_input"
+    weight = 360
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/powerdns"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "procstat"
+    identifier = "procstat_input"
+    weight = 370
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/procstat"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "Prometheus"
+    identifier = "prometheus_input"
+    weight = 380
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/prometheus"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "Puppet Agent"
+    identifier = "puppetagent_input"
+    weight = 390
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/puppetagent"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "RabbitMQ"
+    identifier = "rabbitmq_input"
+    weight = 400
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/rabbitmq"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "raindrops"
+    identifier = "raindrops_input"
+    weight = 410
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/raindrops"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "Redis"
+    identifier = "redis_input"
+    weight = 420
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/redis"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "RethinkDB"
+    identifier = "rethinkdb_input"
+    weight = 430
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/rethinkdb"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "Riak"
+    identifier = "riak"
+    weight = 440
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/riak"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "sensors"
+    identifier = "sensors_input"
+    weight = 450
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/sensors"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "snmp"
+    identifier = "snmp_input"
+    weight = 460
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/snmp"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "SQL server (Microsoft)"
+    identifier = "sqlservermicrosoft_input"
+    weight = 470
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/sqlserver"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "trig"
+    identifier = "trig_input"
+    weight = 480
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/trig"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "twemproxy"
+    identifier = "twemproxy_input"
+    weight = 490
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/twemproxy"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "ZFS"
+    identifier = "zfs_input"
+    weight = 500
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/zfs"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "Zookeeper"
+    identifier = "zookeeper_input"
+    weight = 510
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/zookeeper"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "Windows performance counters"
+    identifier = "winperfcounters_input"
+    weight = 520
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/win_perf_counters"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "sysstat"
+    identifier = "sysstat"
+    weight = 530
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/sysstat"
+    parent = "inputs"
+  [[menu.telegraf_013]]
+    name = "system"
+    identifier = "system_input"
+    weight = 540
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system"
+    parent = "inputs"
+
+  # Telegraf v0.13 Sub-Menu - Service Plugins
+  [[menu.telegraf_013]]
+    name = "Kafka Consumer"
+    identifier = "kafka_consumer_input"
+    weight = 0
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/kafka_consumer"
+    parent = "services"
+  [[menu.telegraf_013]]
+    name = "GitHub Webhooks"
+    identifier = "github_webhooks_input"
+    weight = 10
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/github_webhooks"
+    parent = "services"
+  [[menu.telegraf_013]]
+    name = "MQTT Consumer"
+    identifier = "mqtt_consumer_input"
+    weight = 20
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/mqtt_consumer"
+    parent = "services"
+  [[menu.telegraf_013]]
+    name = "NATS Consumer"
+    identifier = "nats_consumer_input"
+    weight = 30
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/nats_consumer"
+    parent = "services"
+  [[menu.telegraf_013]]
+    name = "StatsD"
+    identifier = "statsd_input"
+    weight = 40
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/statsd"
+    parent = "services"
+  [[menu.telegraf_013]]
+    name = "TCP Listener"
+    identifier = "tcp_listener"
+    weight = 50
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/tcp_listener"
+    parent = "services"
+  [[menu.telegraf_013]]
+    name = "UDP Listener"
+    identifier = "udp_listener"
+    weight = 60
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/udp_listener"
+    parent = "services"
+
   # Telegraf v0.12 Sub-Menu - Output Plugins
   [[menu.telegraf_012]]
     name = "InfluxDB"
@@ -49,7 +525,13 @@ SectionPagesMenu = "products"
     url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/amqp"
     parent = "outputs"
   [[menu.telegraf_012]]
-    name = "Amazon CloudWatch"
+    name = "AWS Kinesis"
+    identifier = "kinesis_output"
+    weight = 70
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/kinesis"
+    parent = "outputs"
+  [[menu.telegraf_012]]
+    name = "AWS CloudWatch"
     identifier = "cloudwatch_output"
     weight = 30
     url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/cloudwatch"
@@ -71,12 +553,6 @@ SectionPagesMenu = "products"
     identifier = "kafka_output"
     weight = 60
     url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/kafka"
-    parent = "outputs"
-  [[menu.telegraf_012]]
-    name = "Amazon Kinesis"
-    identifier = "kinesis_output"
-    weight = 70
-    url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/kinesis"
     parent = "outputs"
   [[menu.telegraf_012]]
     name = "Librato"
@@ -1588,7 +2064,7 @@ SectionPagesMenu = "products"
     weight = 30
     url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
     parent = "about"
-    
+
   # InfluxDB v0.12 Menu
   [[menu.influxdb_012]]
     name = "Introduction"
