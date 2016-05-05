@@ -24,6 +24,7 @@ Changes to how and where task data is store have been made.
 In order to safely upgrade to version 0.13 you need to follow these steps:
 
 1. Update all TICKscripts to use the new `|` and `@` operators. Once Kapacitor no longer issues any `DEPRECATION` warnings you are ready to begin the upgrade.
+The upgrade will work without this step but tasks using the old syntax cannot be enabled, until modified to use the new syntax.
 2. Upgrade the Kapacitor binary.
 3. Configure new database location. By default the location `/var/lib/kapacitor/kapacitor.db` is chosen for package installs or `./kapacitor.db` for manual installs.
 Do **not** remove the configuration for the location of the old task.db database file since it is still needed to do the migration.
