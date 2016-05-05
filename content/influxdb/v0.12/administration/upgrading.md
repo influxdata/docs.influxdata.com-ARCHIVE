@@ -32,7 +32,7 @@ file.
 
 To start out, you must be working with version 0.10 or 0.11 (don't upgrade the
 `influxd` binary yet!).
-If you've already upgraded the binary, reinstall 0.10 or 0.11 (see the end of the page for links); InfluxDB 0.12
+If you've already upgraded the binary, reinstall 0.10 or 0.11 (see the [end of the page](/influxdb/v0.12/administration/upgrading/#urls-for-influxdb-0-11) for links); InfluxDB 0.12
 will yield an error
 (`run: create server: detected /var/lib/influxdb/meta/raft.db. [...]`) if you
 attempt to start the process without completing the steps below.
@@ -142,7 +142,7 @@ the `meta` directory, and try working through these steps again.
 See [Differences between InfluxDB 0.12 and 0.11](/influxdb/v0.12/concepts/011_vs_012/).
 
 
-**URLs for InfluxDB 0.11:**
+#### URLs for InfluxDB 0.11:
 Ubuntu & Debian (64-bit)
 ```
 wget https://dl.influxdata.com/influxdb/releases/influxdb_0.11.1-1_amd64.deb
