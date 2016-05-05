@@ -173,6 +173,9 @@ This can lead to [overflow issues](/influxdb/v0.13/troubleshooting/frequently_en
 ---
 Use a `WHERE` clause to filter your data based on tags, time ranges, and/or field values.
 
+> **Note:** The quoting syntax for queries differs from the [line protocol](/influxdb/v0.13/concepts/glossary/#line-protocol).
+Please review the [rules for single and double-quoting](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#single-quoting-and-double-quoting-in-queries) in queries.
+
 **Tags**  
 Return data where the tag key `location` has the tag value `santa_monica`:  
 ```sql
