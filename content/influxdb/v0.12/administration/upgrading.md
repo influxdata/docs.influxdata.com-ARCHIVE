@@ -144,18 +144,47 @@ See [Differences between InfluxDB 0.12 and 0.11](/influxdb/v0.12/concepts/011_vs
 
 **URLs for InfluxDB 0.11:**
 Ubuntu & Debian (64-bit)
-https://dl.influxdata.com/influxdb/releases/influxdb_0.11.1-1_amd64.deb
-Ubuntu & Debian (ARM)
-https://dl.influxdata.com/influxdb/releases/influxdb_0.11.1-1_armhf.deb
-RedHat & CentOS (64-bit)
-https://dl.influxdata.com/influxdb/releases/influxdb-0.11.1-1.x86_64.rpm
-RedHat & CentOS (ARM)
-https://dl.influxdata.com/influxdb/releases/influxdb-0.11.1-1.armhf.rpm
-Standalone binary (64-bit)
-https://dl.influxdata.com/influxdb/releases/influxdb-0.11.1-1_linux_amd64.tar.gz
-Standalone binary (ARM)
-https://dl.influxdata.com/influxdb/releases/influxdb-0.11.1-1_linux_armhf.tar.gz
+```
+wget https://dl.influxdata.com/influxdb/releases/influxdb_0.11.1-1_amd64.deb
+sudo dpkg -i influxdb_0.11.1-1_amd64.deb
+```
 
+Ubuntu & Debian (ARM)
+```
+wget https://dl.influxdata.com/influxdb/releases/influxdb_0.11.1-1_armhf.deb
+sudo dpkg -i influxdb_0.11.1-1_armhf.deb
+```
+
+RedHat & CentOS (64-bit)
+```
+wget https://dl.influxdata.com/influxdb/releases/influxdb-0.11.1-1.x86_64.rpm
+sudo yum localinstall influxdb-0.11.1-1.x86_64.rpm
+```
+
+RedHat & CentOS (ARM)
+```
+wget https://dl.influxdata.com/influxdb/releases/influxdb-0.11.1-1.armhf.rpm
+sudo yum localinstall influxdb-0.11.1-1.armhf.rpm
+```
+
+Standalone binary (64-bit)
+```
+wget https://dl.influxdata.com/influxdb/releases/influxdb-0.11.1-1_linux_amd64.tar.gz
+tar xvfz influxdb-0.11.1-1_linux_amd64.tar.gz
+```
+
+Standalone binary (ARM)
+```
+wget https://dl.influxdata.com/influxdb/releases/influxdb-0.11.1-1_linux_armhf.tar.gz
+tar xvfz influxdb-0.11.1-1_linux_armhf.tar.gz
+```
 For other versions, please scan the https://dl.influxdata.com/ manifest for the appropriate InfluxDB 0.11.1 package.
 
-TODO: Homebrew users, how to get 0.11?
+Homebrew users
+
+It is simpler to grab a tarball of Darwin binaries than to downgrade a Homebrew installation. Since the `influxd` binary is only briefly needed for the metastore export, the unpacked tarball can be deleted without harm once the metastore backup has been successfully restored via InfluxDB 0.12.
+```
+wget https://dl.influxdata.com/influxdb/releases/influxdb-0.11.1-1_darwin_amd64.tar.gz
+tar -xvf influxdb-0.11.1-1_darwin_amd64.tar.gz
+./influxdb-0.11.1-1/usr/bin/influxd
+```
