@@ -32,7 +32,7 @@ file.
 
 To start out, you must be working with version 0.10 or 0.11 (don't upgrade the
 `influxd` binary yet!).
-If you've already upgraded the binary, reinstall 0.10 or 0.11; InfluxDB 0.12
+If you've already upgraded the binary, reinstall 0.10 or 0.11 (see the end of the page for links); InfluxDB 0.12
 will yield an error
 (`run: create server: detected /var/lib/influxdb/meta/raft.db. [...]`) if you
 attempt to start the process without completing the steps below.
@@ -140,3 +140,22 @@ the `meta` directory, and try working through these steps again.
 **8.** Explore the new 0.12 features.
 
 See [Differences between InfluxDB 0.12 and 0.11](/influxdb/v0.12/concepts/011_vs_012/).
+
+
+**URLs for InfluxDB 0.11:**
+Ubuntu & Debian (64-bit)
+https://dl.influxdata.com/influxdb/releases/influxdb_0.11.1-1_amd64.deb
+Ubuntu & Debian (ARM)
+https://dl.influxdata.com/influxdb/releases/influxdb_0.11.1-1_armhf.deb
+RedHat & CentOS (64-bit)
+https://dl.influxdata.com/influxdb/releases/influxdb-0.11.1-1.x86_64.rpm
+RedHat & CentOS (ARM)
+https://dl.influxdata.com/influxdb/releases/influxdb-0.11.1-1.armhf.rpm
+Standalone binary (64-bit)
+https://dl.influxdata.com/influxdb/releases/influxdb-0.11.1-1_linux_amd64.tar.gz
+Standalone binary (ARM)
+https://dl.influxdata.com/influxdb/releases/influxdb-0.11.1-1_linux_armhf.tar.gz
+
+For other versions, please scan the https://dl.influxdata.com/ manifest for the appropriate InfluxDB 0.11.1 package.
+
+TODO: Homebrew users, how to get 0.11?
