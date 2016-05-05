@@ -1,6 +1,6 @@
 ---
 title: New features in Chronograf 0.12
-
+newversionredirect: /administration/differences/
 menu:
   chronograf_012:
     name: New features in Chronograf 0.12
