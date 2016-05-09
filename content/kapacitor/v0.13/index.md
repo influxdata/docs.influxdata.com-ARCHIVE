@@ -8,9 +8,9 @@ menu:
     weight: 87
 ---
 
-Kapacitor is the final piece of the [TICK stack](https://influxdata.com/time-series-platform/).
-It's an open source data processing framework that makes it easy to create
+Kapacitor is an open source data processing framework that makes it easy to create
 alerts, run ETL jobs and detect anomalies.
+Kapacitor is the final piece of the [TICK stack](https://influxdata.com/time-series-platform/).
 
 ## Key features
 
