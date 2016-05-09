@@ -96,7 +96,7 @@ We'll call our graph `Average idle CPU usage`.
 Click the `Save` button.
 
 3.
-Choose the server, [database](../concepts/glossary.html#database), and [retention policy](../concepts/glossary.html#retention-policy-rp) that you want to work with:
+Choose the server, [database](/influxdb/v0.13/concepts/glossary/#database), and [retention policy](/influxdb/v0.13/concepts/glossary/#retention-policy-rp) that you want to work with:
 <br>
 <br>
 ![Server Tray](/img/chronograf/v0.11/server-tray.png)

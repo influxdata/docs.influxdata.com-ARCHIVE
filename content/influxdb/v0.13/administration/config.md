@@ -52,21 +52,21 @@ See the [installation documentation](/influxdb/v0.13/introduction/installation/#
 
 ## Configuration Sections
 
-* [Global Options](/influxdb/v0.13/administration/config/#global-options)
-* [[meta]](/influxdb/v0.13/administration/config/#meta)
-* [[data]](/influxdb/v0.13/administration/config/#data)
-* [[cluster]](/influxdb/v0.13/administration/config/#cluster)
-* [[retention]](/influxdb/v0.13/administration/config/#retention)
-* [[shard-precreation]](/influxdb/v0.13/administration/config/#shard-precreation)
-* [[admin]](/influxdb/v0.13/administration/config/#admin)
-* [[monitor]](/influxdb/v0.13/administration/config/#monitor)
-* [[subscriber]](/influxdb/v0.13/administration/config/#subscriber)
-* [[http]](/influxdb/v0.13/administration/config/#http)
-* [[[graphite]]](/influxdb/v0.13/administration/config/#graphite)
-* [[[collectd]]](/influxdb/v0.13/administration/config/#collectd)
-* [[[opentsdb]]](/influxdb/v0.13/administration/config/#opentsdb)
-* [[[udp]]](/influxdb/v0.13/administration/config/#udp)
-* [[continuous_queries]](/influxdb/v0.13/administration/config/#continuous-queries)
+* [Global Options](#global-options)
+* [[meta]](#meta)
+* [[data]](#data)
+* [[cluster]](#cluster)
+* [[retention]](#retention)
+* [[shard-precreation]](#shard-precreation)
+* [[admin]](#admin)
+* [[monitor]](#monitor)
+* [[subscriber]](#subscriber)
+* [[http]](#http)
+* [[[graphite]]](#graphite)
+* [[[collectd]]](#collectd)
+* [[[opentsdb]]](#opentsdb)
+* [[[udp]]](#udp)
+* [[continuous_queries]](#continuous-queries)
 
 ## Configuration Options
 
