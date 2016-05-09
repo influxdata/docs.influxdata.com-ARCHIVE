@@ -9,6 +9,10 @@ Query language basics for InfluxQL.
 
 Schema manipulation basics for InfluxQL.
 
+## [Database Management](/influxdb/v0.13/query_language/database_management/)
+
+Manage databases and retention polices with InfluxQL.
+
 ## [Functions](/influxdb/v0.13/query_language/functions/)
 
 Functions and their usage in InfluxQL.

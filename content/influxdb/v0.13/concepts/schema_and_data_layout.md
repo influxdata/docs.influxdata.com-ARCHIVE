@@ -118,5 +118,5 @@ In no particular order, we recommend that you:
     Be sure to differentiate your tag keys and field keys.
 
     <dt>
-    See GitHub Issue [#4630](https://github.com/influxdata/influxdb/issues/4630) for more information.
+    See GitHub Issue [#6519](https://github.com/influxdata/influxdb/issues/6519) for more information.
     </dt>

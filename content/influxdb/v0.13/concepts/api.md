@@ -53,5 +53,5 @@ Default ports:
 
 * Graphite: `2003`
 * OpenTSDB: `4242`
-
-No default ports are assigned for UDP and Collectd.
+* UDP: `8089`
+* Collectd: `4242`
