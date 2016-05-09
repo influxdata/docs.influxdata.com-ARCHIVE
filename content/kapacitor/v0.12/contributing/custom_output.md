@@ -1,6 +1,6 @@
 ---
 title: How to contribute a new output to Kapacitor
-
+newversionredirect: /about_the_project/custom_output/
 menu:
   kapacitor_012:
     name: Writing your own Output node
@@ -250,7 +250,7 @@ func (h *HouseDBOutNode) runOut() error {
 
 The `node` type we included via composition in the HouseDBOutNode provides us with a list of edges in the field named `ins`.
 Since we can only have one parent the edge we are concerned about is only the 0th edge.
-The `Edge` type provides two methods: 
+The `Edge` type provides two methods:
 
 * `NextPoint` for reading stream data.
 * `NextBatch` for reading batch data.
@@ -533,4 +533,3 @@ func (m *MyCustomNode) Names(name ...string) *MyCustomNode {
     return m
 }
 ```
-
