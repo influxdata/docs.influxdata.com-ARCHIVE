@@ -247,7 +247,7 @@ To see that the task is receiving data and behaving as expected run the `show` c
 
 ```bash
 $ kapacitor show cpu_alert
-Name: cpu_alert
+ID: cpu_alert
 Error:
 Type: stream
 Status: Enabled
@@ -348,12 +348,14 @@ stream
 
 Just like that, we have a dynamic threshold, and, if cpu usage drops in the day or spikes at night, we will get an alert!
 Let's try it out.
-Use `define` and `reload` in order to get a running task to update based on a new definition:
+Use `define` to update the task TICKscript.
 
 ```bash
 kapacitor define cpu_alert -tick cpu_alert.tick
-kapacitor reload cpu_alert
 ```
+
+>NOTE: If a task is already enabled `define`ing the task again will automatically `reload` it.
+To define a task without reloading it use `-no-reload`
 
 Now tail the alert log:
 
@@ -390,7 +392,7 @@ stream
     |from()
         .measurement('cpu')
     // create a new field called 'used' which inverts the idle cpu.
-    |eval(lambda: 100 - "usage_idle")
+    |eval(lambda: 100.0 - "usage_idle")
         .as('used')
     |groupBy('service', 'datacenter')
     |window()
@@ -453,7 +455,8 @@ batch
         .every(5m)
         .groupBy(time(1m))
     |alert()
-        .crit(lambda: "value" < 70)
+        .crit(lambda: "mean" < 70)
+        .log('/tmp/alerts.log')
 ```
 
 To define this task do:
