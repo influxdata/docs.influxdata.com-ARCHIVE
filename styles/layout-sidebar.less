@@ -91,6 +91,7 @@
 		}
 
 		&-title {
+			color: @sidebar-title-color;
 			padding: 0 2rem 1em 2rem;
 			font-size: 1.25em;
 
@@ -105,6 +106,26 @@
 			}
 			
 		}
+	}
+
+	&--support-ad {
+		margin-left: 2rem;
+		border-radius: @radius;
+		color: @g20-white;
+		background-color: @c-rainforest;
+		transition: background-color 0.25s ease;
+		padding: 0.75em 1.5em;
+		font-weight: 700;
+		display: inline-block;
+
+		&:hover {
+			background-color: @c-honeydew;
+		}
+	}
+	&--support-desc {
+		margin: 0 2rem 1rem 2rem;
+		color: @sidebar-title-color;
+		line-height: 1.3em;
 	}
 }
 a.sidebar--page {

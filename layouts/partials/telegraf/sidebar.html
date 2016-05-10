@@ -3,6 +3,10 @@
 	<div class="sidebar--mask" id="sidebar--mask"></div>
 </div>
 <aside class="sidebar" id="sidebar">
+	<section class="sidebar--section">
+		<p class="sidebar--support-desc"><strong>Need immediate answers?</strong><br/>Get support from the experts</p>
+		<a class="sidebar--support-ad" href="https://influxdata.com/pricing/#product-subscriptions" target="_blank">Get Support</a>
+	</section>
 	{{ $currentNode := . }}
 	{{ if (eq $currentNode.RelPermalink "/telegraf/") }}
 		{{ range (index $.Site.Menus .Site.Data.default_versions.telegraf) }}
