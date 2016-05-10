@@ -79,6 +79,15 @@ WARNING expressions would be evaluated, but not the
 CRITICAL expression. 
 Each expression maintains its own state. 
 
+Available Statistics: 
+
+* alerts_triggered -- Total number of alerts triggered 
+* oks_triggered -- Number of OK alerts triggered 
+* infos_triggered -- Number of Info alerts triggered 
+* warns_triggered -- Number of Warn alerts triggered 
+* crits_triggered -- Number of Crit alerts triggered 
+
+
 
 Index
 -----

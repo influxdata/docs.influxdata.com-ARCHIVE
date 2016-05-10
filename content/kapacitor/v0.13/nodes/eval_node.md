@@ -28,6 +28,10 @@ The above example will add a new field `error_percent` to each
 data point with the result of `error_count / total_count` where 
 `error_count` and `total_count` are existing fields on the data point. 
 
+Available Statistics: 
+
+* eval_errors -- number of errors evaluating any expressions. 
+
 
 
 Index
