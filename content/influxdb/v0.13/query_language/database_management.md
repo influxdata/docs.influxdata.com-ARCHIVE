@@ -80,8 +80,8 @@ If you attempt to drop a database that does not exist, InfluxDB does not return 
 
 ### Drop series from the index with DROP SERIES
 ---
-The `DROP SERIES` query deletes all points from [series](/influxdb/v0.13/concepts/glossary/#series) in a database,
-and it drops series from the index.
+The `DROP SERIES` query deletes all points from a [series](/influxdb/v0.13/concepts/glossary/#series) in a database,
+and it drops the series from the index.
 
 > **Note:** `DROP SERIES` does not support time intervals in the `WHERE` clause.
 See
@@ -98,12 +98,12 @@ Drop all series from a single measurement:
 > DROP SERIES FROM h2o_feet
 ```
 
-Drop series that have a specific tag set from a single measurement:
+Drop series with a specific tag pair from a single measurement:
 ```sql
 > DROP SERIES FROM h2o_feet WHERE location = 'santa_monica'
 ```
 
-Drop all points in the series that have a specific tag set from all measurements in the database:
+Drop all points in the series that have a specific tag pair from all measurements in the database:
 ```sql
 > DROP SERIES WHERE location = 'santa_monica'
 ```
@@ -112,13 +112,14 @@ A successful `DROP SERIES` query returns an empty result.
 
 ### Delete series with DELETE
 ---
-The `DELETE` query deletes all points from
+The `DELETE` query deletes all points from a
 [series](/influxdb/v0.13/concepts/glossary/#series) in a database.
 Unlike
-[`DROP SERIES`](/influxdb/v0.13/query_language/database_management/#drop-series-from-the-index-with-drop-series), it does not drop series from the index and it supports time intervals
+[`DROP SERIES`](/influxdb/v0.13/query_language/database_management/#drop-series-from-the-index-with-drop-series), it does not drop the series from the index and it supports time intervals
 in the `WHERE` clause.
 
-The query takes the following form where you must specify either the `FROM` clause or the `WHERE` clause:
+The query takes the following form where you must include either the `FROM`
+clause or the `WHERE` clause, or both:
 
 ```
 DELETE FROM <measurement_name> WHERE [<tag_key>='<tag_value>'] | [<time interval>]

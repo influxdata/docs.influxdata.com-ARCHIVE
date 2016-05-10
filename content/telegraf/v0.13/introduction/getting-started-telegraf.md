@@ -43,12 +43,12 @@ Start the Telegraf server and direct it to the relevant configuration file:
 telegraf -config telegraf.conf
 ```
 
-### Linux debian and RPM packages
+### Linux (sysvinit and upstart installations)
 ```bash
 sudo service telegraf start
 ```
 
-### Ubuntu 15+
+### Linux (systemd installations)
 ```bash
 systemctl start telegraf
 ```

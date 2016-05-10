@@ -28,7 +28,7 @@ which is located at `/etc/influxdb/influxdb.conf` for default installations.
 
 For users who don't want to install any software and are ready to use InfluxDB,
 you may want to check out our
-[managed hosted InfluxDB offering](http://customers.influxdb.com).
+[managed hosted InfluxDB offering](https://cloud.influxdata.com).
 
 ### Ubuntu & Debian
 

@@ -8,10 +8,10 @@ menu:
     weight: 0
 ---
 
-
-Chronograf is the third piece of the [TICK stack](https://influxdata.com/time-series-platform/).
-It's a graphing and visualization application that you use to perform
+Chronograf is a graphing and visualization application that you use to perform
 ad hoc exploration of your InfluxDB data.
+It is the third piece of the
+[TICK stack](https://influxdata.com/time-series-platform/).
 
 ## Key features
 

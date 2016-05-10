@@ -263,7 +263,7 @@ Writes an integer: `value=100i`
 Writes a float: `value=100`
 
 ## Writing duplicate points
-In InfluxDB 0.13 a point is uniquely identified by the measurement name, [tag set](/influxdb/v0.13/concepts/glossary/#tag-set), and the nanosecond timestamp.
+In InfluxDB 0.13 a point is uniquely identified by the measurement name, [tag set](/influxdb/v0.13/concepts/glossary/#tag-set), and timestamp.
 If you submit a new point with the same measurement, tag set, and timestamp as an existing point, the field set becomes the union of the old field set and the new field set, where any ties go to the new field set.
 This is the intended behavior.
 
