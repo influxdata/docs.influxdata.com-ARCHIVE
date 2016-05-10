@@ -10,19 +10,23 @@ This page provides directions for installing, starting, and configuring Chronogr
 
 ## Requirements
 
-TODO: More here
+Installation of the Chronograf package may require `root` or administrator privileges in order to complete successfully.
 
 ### Networking
 
-By default, Chronograf runs on `localhost` port `10000`.
+By default, Chronograf runs on `localhost` port `10000`. The port and
+interface can be modified through the
+[configuration file](/chronograf/v0.13/administration/configuration).
+
 
 ## Installation
 
-TODO: More here
+Follow the instructions in the Chronograf Downloads section on the [Downloads page](https://influxdata.com/downloads).
 
 ### Start the Chronograf service
 
-#### OS X (via Homebrew)
+#### Mac OS X (via Homebrew)
+
 To run Chronograf manually, you can specify the configuration file on the
 command line:
 ```
@@ -38,7 +42,7 @@ Then to load homebrew/binary/chronograf now:
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.chronograf.plist
 ```
 
-#### Debian or RPM package:
+#### Linux DEB or RPM package:
 ```
 sudo service chronograf start
 ```
