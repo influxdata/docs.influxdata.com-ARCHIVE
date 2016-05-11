@@ -1,9 +1,9 @@
 {{ if not (or (in .RelPermalink .Site.Data.default_versions.chronograf_semver) (eq .RelPermalink "/chronograf/")) }}
-<div class="old-version flash">
+<div class="old-version">
 {{ if in .RelPermalink "v0.11" }}
-    <p><b>Warning! This page documents an old version of Chronograf, which is no longer actively developed. <a href="/chronograf/{{ .Site.Data.default_versions.chronograf_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ replace .RelPermalink "/chronograf/v0.11/" "" }}{{end}}">Chronograf {{ .Site.Data.default_versions.chronograf_semver }}</a> is the most recent version of Chronograf.</b></p>
+    <strong>Warning!</strong> This page documents an old version of Chronograf, which is no longer actively developed. <a href="/chronograf/{{ .Site.Data.default_versions.chronograf_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ replace .RelPermalink "/chronograf/v0.11/" "" }}{{end}}">Chronograf {{ .Site.Data.default_versions.chronograf_semver }}</a> is the most recent version of Chronograf.
 {{ else }}
-    <p><b>Warning! This page documents an old version of Chronograf, which is no longer actively developed. <a href="/chronograf/{{ .Site.Data.default_versions.chronograf_semver }}/">Chronograf {{ .Site.Data.default_versions.chronograf_semver }}</a> is the most recent version of Chronograf.</b></p>
+    <strong>Warning!</strong> This page documents an old version of Chronograf, which is no longer actively developed. <a href="/chronograf/{{ .Site.Data.default_versions.chronograf_semver }}/">Chronograf {{ .Site.Data.default_versions.chronograf_semver }}</a> is the most recent version of Chronograf.
 {{ end }}
 </div>
 {{ end }}

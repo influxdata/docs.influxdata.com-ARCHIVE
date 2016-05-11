@@ -1,11 +1,11 @@
 {{ if not (or (in .RelPermalink .Site.Data.default_versions.kapacitor_semver) (eq .RelPermalink "/kapacitor/")) }}
-<div class="old-version flash">
+<div class="old-version">
 {{ if in .RelPermalink "v0.11" }}
-    <p><b>Warning! This page documents an old version of Kapacitor, which is no longer actively developed. <a href="/kapacitor/{{ .Site.Data.default_versions.kapacitor_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ replace .RelPermalink "/kapacitor/v0.11/" "" }}{{end}}">Kapacitor {{ .Site.Data.default_versions.kapacitor_semver }}</a> is the most recent version of Kapacitor.</b></p>
+    <strong>Warning!</strong> This page documents an old version of Kapacitor, which is no longer actively developed. <a href="/kapacitor/{{ .Site.Data.default_versions.kapacitor_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ replace .RelPermalink "/kapacitor/v0.11/" "" }}{{end}}">Kapacitor {{ .Site.Data.default_versions.kapacitor_semver }}</a> is the most recent version of Kapacitor.
 {{ else if in .RelPermalink "v0.2"}}
-    <p><b>Warning! This page documents an old version of Kapacitor, which is no longer actively developed. <a href="/kapacitor/{{ .Site.Data.default_versions.kapacitor_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ replace .RelPermalink "/kapacitor/v0.2/" "" }}{{end}}">Kapacitor {{ .Site.Data.default_versions.kapacitor_semver }}</a> is the most recent version of Kapacitor.</b></p>
+    <strong>Warning!</strong> This page documents an old version of Kapacitor, which is no longer actively developed. <a href="/kapacitor/{{ .Site.Data.default_versions.kapacitor_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ replace .RelPermalink "/kapacitor/v0.2/" "" }}{{end}}">Kapacitor {{ .Site.Data.default_versions.kapacitor_semver }}</a> is the most recent version of Kapacitor.
 {{ else }}
-    <p><b>Warning! This page documents an old version of Kapacitor, which is no longer actively developed. <a href="/kapacitor/{{ .Site.Data.default_versions.kapacitor_semver }}/">Kapacitor {{ .Site.Data.default_versions.kapacitor_semver }}</a> is the most recent version of Kapacitor.</b></p>
+    <strong>Warning!</strong> This page documents an old version of Kapacitor, which is no longer actively developed. <a href="/kapacitor/{{ .Site.Data.default_versions.kapacitor_semver }}/">Kapacitor {{ .Site.Data.default_versions.kapacitor_semver }}</a> is the most recent version of Kapacitor.
 {{ end }}
 </div>
 {{ end }}
