@@ -28,13 +28,11 @@ pre[class*="language-"] {
 pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
 code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
 	text-shadow: none;
-	background: #b3d4fc;
 }
 
 pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
 code[class*="language-"]::selection, code[class*="language-"] ::selection {
 	text-shadow: none;
-	background: #b3d4fc;
 }
 
 @media print {
@@ -57,78 +55,66 @@ pre[class*="language-"] {
 :not(pre) > code[class*="language-"] {
 	white-space: normal;
 }
-.token {
-	font-family: inherit;
-}
-
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-	color: #575E6B;
-}
-
-.token.punctuation {
-	color: #575E6B;
-}
-
 .namespace {
 	opacity: .7;
 }
+.token {
+	font-family: inherit;
 
-.token.property,
-.token.tag,
-.token.boolean,
-.token.number,
-.token.constant,
-.token.symbol,
-.token.deleted {
-	color: #FF8564;
-}
-
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-	color: #25B394;
-}
-
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string {
-	color: #BF3D5E;
-	font-weight: 900;
-}
-
-.token.atrule,
-.token.attr-value,
-.token.keyword {
-	color: #AAEF81;
-}
-
-.token.function {
-	color: #22ADF6;
-}
-
-.token.regex,
-.token.important,
-.token.variable {
-	color: #e90;
-}
-
-.token.important,
-.token.bold {
-	font-weight: bold;
-}
-.token.italic {
-	font-style: italic;
-}
-
-.token.entity {
-	cursor: help;
+	&.comment,
+	&.prolog,
+	&.doctype,
+	&.cdata,
+	&.punctuation {
+		color: @article-code-accent1;
+	}
+	&.property,
+	&.tag,
+	&.boolean,
+	&.number,
+	&.constant,
+	&.symbol,
+	&.deleted {
+		color: @article-code-accent2;
+	}
+	&.selector,
+	&.attr-name,
+	&.string,
+	&.char,
+	&.builtin,
+	&.inserted {
+		color: @article-code-accent3;
+	}
+	&.operator,
+	&.entity,
+	&.url,
+	.language-css &.string,
+	.style &.string {
+		color: @article-code-accent4;
+		font-weight: 900;
+	}
+	&.atrule,
+	&.attr-value,
+	&.keyword {
+		color: @article-code-accent5;
+	}
+	&.function {
+		color: @article-code-accent6;
+	}
+	&.regex,
+	&.important,
+	&.variable {
+		color: @article-code-accent7;
+	}
+	&.important,
+	&.bold {
+		font-weight: bold;
+	}
+	&.italic {
+		font-style: italic;
+	}
+	&.entity {
+		cursor: help;
+	}
 }
 
