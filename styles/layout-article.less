@@ -355,6 +355,31 @@ a {
 	opacity: 1;
 	transform: translate(-50%,-2rem);
 }
+//
+// Old Version Warning
+// --------------------------------------------------
+.old-version {
+	width: 100%;
+	display: inline-block;
+	border-radius: @radius;
+	font-size: 1em;
+	line-height: 1.25em;
+	padding: 1.5em 1.5em 1.5em 4em;
+	color: @old-version-text;
+	background-color: @old-version-bg;
+	position: relative;
+	margin-bottom: 1em;
+
+	&:after {
+		content: "\ea0a";
+		font-family: 'icomoon';
+		position: absolute;
+		top: 50%;
+		left: 2em;
+		transform: translate(-50%,-50%) scale(1.5,1.5);
+		font-size: 1em;
+	}
+}
 
 //
 // Media Queries
@@ -396,6 +421,9 @@ a {
 	}
 	.article-section {
 		padding: 5rem;
+	}
+	.old-version {
+		width: 60%;
 	}
 }
 @media (min-width: @breakpoint-huge) {
