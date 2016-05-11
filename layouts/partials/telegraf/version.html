@@ -1,10 +1,9 @@
 {{ if not (or (in .RelPermalink .Site.Data.default_versions.telegraf_semver) (eq .RelPermalink "/telegraf/")) }}
-<div class="flash">
-{{ if in .RelPermalink "v0.10" }}
-    <p><b>Warning! This page documents an old version of Telegraf, which is no longer actively developed. <a href="/telegraf/{{ .Site.Data.default_versions.telegraf_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ replace .RelPermalink "/telegraf/v0.10/" "" }}{{end}}">Telegraf {{ .Site.Data.default_versions.telegraf_semver }}</a> is the most recent version of Telegraf.</b></p>
+<div class="old-version">
+{{ if in .RelPermalink "v0.12" }}
+    <strong>Warning!</strong> This page documents an old version of Telegraf, which is no longer actively developed. <a href="/telegraf/{{ .Site.Data.default_versions.telegraf_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ replace .RelPermalink "/telegraf/v0.12/" "" }}{{end}}">Telegraf {{ .Site.Data.default_versions.telegraf_semver }}</a> is the most recent version of Telegraf.
 {{ else }}
-    <p><b>Warning! This page documents an old version of Telegraf, which is no longer actively developed. <a href="/telegraf/{{ .Site.Data.default_versions.telegraf_semver }}/">Telegraf {{ .Site.Data.default_versions.telegraf_semver }}</a> is the most recent version of Telegraf.</b></p>
+    <strong>Warning!</strong> This page documents an old version of Telegraf, which is no longer actively developed. <a href="/telegraf/{{ .Site.Data.default_versions.telegraf_semver }}/">Telegraf {{ .Site.Data.default_versions.telegraf_semver }}</a> is the most recent version of Telegraf.
 {{ end }}
 </div>
-<br />
 {{ end }}

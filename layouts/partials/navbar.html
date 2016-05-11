@@ -1,9 +1,7 @@
-<nav class="main-nav" id="main-nav">
-    <a href="{{ .Site.BaseURL }}" target="_blank" title="Go to Documentation Home"><img src="/img/logo.svg" class="main-nav--logo" /></a>
-    <div class="main-nav--hamburger" id="main-nav--hamburger">
-        <div class="main-nav--hamburger-bar top"></div>
-        <div class="main-nav--hamburger-bar middle"></div>
-        <div class="main-nav--hamburger-bar bottom"></div>
-    </div>
+<nav class="navbar" id="main-nav">
+    <a href="{{ .Site.BaseURL }}" target="_blank" title="Go to Documentation Home"><span class="icon logotype navbar--logo"></span></a>
+    {{ partial "product-switcher.html" . }}
+    {{ partial "search.html" . }}
+    {{ partial "theme-switcher.html" . }}
 </nav>
-{{ partial "search.html" . }}
+

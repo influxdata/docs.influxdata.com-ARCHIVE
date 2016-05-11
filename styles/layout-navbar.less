@@ -1,0 +1,401 @@
+/*
+
+	NAVIGATION BAR
+
+	____________________________________________________________
+
+	Notes:
+	-	Only contains styles relevant to the navbar module
+
+*/
+
+.navbar {
+	top: 0;
+	left: 0;
+	font-size: 1rem;
+	height: @nav-height;
+	width: 100%;
+	background-color: @nav-bg;
+	position: fixed;
+	z-index: @z-nav;
+}
+.navbar--logo,
+.navbar--hamburger,
+.navbar--product-dropdown,
+.navbar--search,
+.theme-switcher {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.navbar--logo {
+	left: 1em;
+	font-size: 1.4rem;
+	color: @nav-logo;
+	transition: color 0.25s ease;
+	&:hover {
+		color: @nav-logo-hover;
+	}
+}
+.navbar--hamburger {
+	width: @nav-height;
+	height: @nav-height;
+	right: 0;
+
+	.navbar--hamburger-bar {
+		width: @nav-height * 0.3em;
+		height: 2px;
+		background-color: @nav-hamburger;
+		border-radius: 1px;
+		position: absolute;
+		left: 50%;
+		transition: all 0.3s ease;
+
+		&.top {
+			top: 40%;
+			transform: translate(-50%,-50%);
+		}
+		&.middle {
+			top: 50%;
+			transform: translate(-50%,-50%);
+		}
+		&.bottom {
+			top: 60%;
+			transform: translate(-50%,-50%);
+		}
+	}
+
+	&:hover {
+		cursor: pointer;
+
+		.navbar--hamburger-bar {
+			background-color: @nav-hamburger-hover;
+		}
+	}
+
+	&.open {
+		.navbar--hamburger-bar {
+			&.top {
+				top: 50%;
+				transform: translate(-50%,-50%) rotate(45deg);
+			}
+			&.middle {
+				opacity: 0;
+			}
+			&.bottom {
+				top: 50%;
+				transform: translate(-50%,-50%) rotate(-45deg);
+			}
+		}
+	}
+}
+.navbar--product-menu {
+	width: 100%;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: auto;
+	opacity: 0;
+	transition: opacity 0.25s ease;
+	.gradient-v(@c-ocean,@c-pool);
+
+}
+.navbar--product-container {
+	width: 100%;
+	height: auto;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	visibility: hidden;
+	transition: all 0.25s ease;
+
+	&.open {
+		visibility: visible;
+
+		.navbar--product-menu {
+			opacity: 1;
+		}
+	}
+}
+.navbar--product-divider {
+	margin: 0.25em 0;
+	height: 2px;
+	background-color: fadeout(@c-sapphire, 70%);
+}
+.navbar--product {
+	&:link,
+	&:active,
+	&:visited {
+		color: @c-neutrino;
+		transition:
+			background-color 0.25s ease,
+			color 0.25s ease;
+		background-color: transparent;
+		padding: 1rem;
+		display: block;
+		width: 100%;
+	}
+	&:hover {
+		background-color: @c-laser;
+		color: @g20-white;
+	}
+}
+.navbar--product-dropdown {
+	display: none;
+	background-color: @c-ocean;
+	height: @nav-component-height;
+	border-radius: @radius;
+	transition:
+		background-color 0.25s ease,
+		color 0.25s ease;
+	&:hover {
+		cursor: pointer;
+		background-color: @c-pool;
+	}
+	.navbar--current-product,
+	.navbar--product-dropdown-caret {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		color: @g20-white;
+	}
+
+	.navbar--current-product {
+		font-weight: 700;
+		left: 1rem;
+		text-transform: capitalize;
+	}
+	.navbar--product-dropdown-caret {
+		right: 1rem;
+		font-size: 0.625em;
+	}
+}
+.navbar--search {
+	height: @nav-component-height;
+	width: @search-default-width;
+	right: @nav-height;
+
+	> * {
+		position: absolute !important;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+.navbar--search-field {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: @radius;
+	border: 2px solid @nav-search-border;
+	color: @nav-search-text;
+	background-color: @nav-search-bg;
+	padding: 0 1rem;
+	font-weight: 500;
+	outline: none;
+	transition:
+		border-color 0.3s ease,
+		color 0.3s ease;
+	&:focus {
+		border-color: @nav-search-border-focus;
+		color: @nav-search-border-focus;
+	}
+}
+.algolia-autocomplete {
+	width: 100%;
+
+	.aa-input,
+	.aa-hint {
+		width: 100%;
+	}
+	.aa-hint {
+		color: #f00;
+	}
+	.aa-dropdown-menu {
+		margin: @search-offset 0 0 0;
+		width: 100%;
+		padding: 0.75rem;
+		background-color: fadeout(@algolia-background, 30%);
+		border: 0px;
+
+		.algolia-docsearch-suggestion--highlight {
+			color: @algolia-highlight-color;
+		}
+
+		.aa-suggestion {
+			cursor: pointer;
+			padding: 0;
+			
+			.algolia-docsearch-suggestion {
+				background-color: @algolia-category-header;
+				border-radius: @radius;
+				overflow: hidden;
+			}
+			.algolia-docsearch-suggestion__secondary {
+				border: none;
+				margin-top: 2px;
+			}
+			&:first-child .algolia-docsearch-suggestion__secondary {
+				margin-top: 0;
+			}
+			.algolia-docsearch-suggestion--category-header {
+				border-radius: @radius @radius 0 0;
+				background-color: @algolia-category-header;
+				color: @algolia-category-header-text;
+				padding: 0.75rem 1rem;
+				font-weight: 500;
+
+				.algolia-docsearch-suggestion--highlight {
+					background-color: transparent;
+				}
+			}
+			.algolia-docsearch-suggestion--subcategory-column {
+				border: none;
+				background-color: @algolia-suggestion-column;
+			}
+			.algolia-docsearch-suggestion--content {
+				background-color: @algolia-suggestion-content;
+			}
+			.algolia-docsearch-suggestion--title {
+				margin-bottom: 0.25rem;
+				display: inline-block;
+				color: @algolia-suggestion-text;
+			}
+			.algolia-docsearch-suggestion--text {
+				color: @algolia-suggestion-text-alt;
+			}
+			.algolia-docsearch-suggestion--subcategory-column-text {
+				font-size: 0.8rem;
+				line-height: 1.4em;
+				color: @algolia-suggestion-text-alt;
+			}
+			// Highlight style
+			&.aa-cursor {
+				
+				.algolia-docsearch-suggestion--content {
+					.gradient-h(@algolia-cursor-bg1,@algolia-cursor-bg2);
+				}
+				.algolia-docsearch-suggestion--text,
+				.algolia-docsearch-suggestion--title {
+					color: @algolia-cursor-text;
+					.algolia-docsearch-suggestion--highlight {
+						color: @algolia-cursor-highlight !important;
+					}
+				}
+			}
+			em {
+				font-weight: bold;
+				font-style: normal;
+			}
+		}
+	}
+	.algolia-docsearch-footer {
+		border: none;
+		padding: 0.75rem 0 0 0;
+	}
+}
+.theme-switcher {
+	display: none;
+	width: @nav-height;
+	height: @nav-height;
+	right: 0;
+	border: 0;
+	outline: none;
+	background-color: @nav-bg;
+	color: @nav-logo;
+
+	.icon {
+		transition: color 0.25s ease;
+	}
+	.sun2 {
+		font-size: 1.5rem;
+	}
+	.moon {
+		font-size: 1.2rem;
+	}
+
+	&:hover {
+		color: @nav-logo-hover;
+		cursor: pointer;
+	}
+}
+
+//
+// Media Queries
+// --------------------------------------------------
+@media (min-width: @breakpoint-small) {
+	.theme-switcher {
+		display: block;
+	}
+	.navbar--product-dropdown {
+		display: block;
+		left: @sidebar-small-width;
+		width: @product-dropdown-small-width;
+	}
+	.navbar--product-container {
+		left: @sidebar-small-width;
+		width: @product-dropdown-small-width;
+
+		&.open {
+			.navbar--dropdown-dismiss {
+				width: 10000px;
+				height: 10000px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+				z-index: 100;
+
+				&:hover {
+					cursor: pointer;
+				}
+			}
+		}
+	}
+	.navbar--product-menu {
+		border-radius: 0 0 @radius @radius;
+		overflow: hidden;
+		z-index: 110;
+	}
+	.navbar--search {
+		left: @search-small-position;
+		width: @search-small-width;
+	}
+	.navbar--hamburger {
+		display: none;
+	}
+	.navbar--product.external {
+		font-size: 0.8rem;
+	}
+}
+@media (min-width: @breakpoint-large) {
+	.navbar--product-dropdown {
+		left: @sidebar-large-width;
+		width: @product-dropdown-large-width;
+	}
+	.navbar--product-container {
+		left: @sidebar-large-width;
+		width: @product-dropdown-large-width;
+	}
+	.navbar--search {
+		left: @search-large-position;
+		width: @search-large-width;
+	}
+}
+@media (min-width: @breakpoint-huge) {
+	.navbar--product-dropdown {
+		left: @sidebar-huge-width;
+		width: @product-dropdown-huge-width;
+	}
+	.navbar--product-container {
+		left: @sidebar-huge-width;
+		width: @product-dropdown-huge-width;
+	}
+	.navbar--search {
+		left: @search-huge-position;
+		width: @search-huge-width;
+	}
+}

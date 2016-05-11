@@ -4,3 +4,91 @@
 
 @radius: 4px;
 
+//
+// Typography Variables
+// --------------------------------------------------
+
+@type-scale:		1.2;
+
+@heading1Size:		@heading2Size*@type-scale;
+@heading2Size:		@heading3Size*@type-scale;
+@heading3Size:		@heading4Size*@type-scale;
+@heading4Size:		@paragraphSize*@type-scale;
+@paragraphSize:		1em;
+@smallTextSize:		0.875em;
+@tinyTextSize:		0.75em;
+
+@margin-bottom-base: 1em;
+@indented-element-size: 2rem;
+.klavika-font {
+	font-family: 'Klavika-Light','Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;
+	font-weight: 200;
+}
+@thick-left-border: 6px;
+@scrollbar-width: 1rem;
+@border-small-screen: 1px;
+@border-large-screen: 2px;
+
+//
+// Size Variables
+// --------------------------------------------------
+@nav-height: 				4rem;
+@sidebar--toggle-height: 	3rem;
+@nav-gap:					0.5rem;
+@nav-component-height:		3rem;
+@search-offset:				(@nav-height - @nav-component-height)/2;
+
+@sidebar-small-width:		18rem;
+@sidebar-large-width:		23rem;
+@sidebar-huge-width:		28rem;
+
+@scrollbar-width:			16px;
+
+@product-dropdown-small-width:	15rem;
+@product-dropdown-large-width:	16rem;
+@product-dropdown-huge-width:	16rem;
+
+@search-default-width:		40%;
+@search-small-width:		~"calc( 100% - "@sidebar-small-width~" - "@nav-gap~" - "@nav-gap~" - "@nav-height~" - "@product-dropdown-small-width~")";
+@search-large-width:		~"calc( 100% - "@sidebar-large-width~" - "@nav-gap~" - "@nav-gap~" - "@nav-height~" - "@product-dropdown-large-width~")";
+@search-huge-width:			~"calc( 100% - "@sidebar-huge-width~" - "@nav-gap~" - "@nav-gap~" - "@nav-height~" - "@product-dropdown-huge-width~")";
+
+@search-small-position:		@sidebar-small-width + @product-dropdown-small-width + @nav-gap;
+@search-large-position:		@sidebar-large-width + @product-dropdown-large-width + @nav-gap;
+@search-huge-position:		@sidebar-huge-width + @product-dropdown-huge-width + @nav-gap;
+
+
+//
+// Z Index Variables
+// --------------------------------------------------
+@z-sidebar:					250;
+@z-sidebar--mask:			200;
+@z-nav:						150;
+@z-sidebar-desktop:			100;
+@z-sidebar--toggle:			100;
+
+//
+// Gradient Mixin
+// --------------------------------------------------
+.gradient-h(@color1,@color2) {
+	background: @color1;
+	background: -moz-linear-gradient(left,  @color1 0%, @color2 100%);
+	background: -webkit-linear-gradient(left,  @color1 0%,@color2 100%);
+	background: linear-gradient(to right,  @color1 0%,@color2 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@color1', endColorstr='@color2',GradientType=1 );
+}
+.gradient-v(@color1,@color2) {
+	background: @color1;
+	background: -moz-linear-gradient(top,  @color1 0%, @color2 100%);
+	background: -webkit-linear-gradient(top,  @color1 0%,@color2 100%);
+	background: linear-gradient(to bottom,  @color1 0%,@color2 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@color1', endColorstr='@color2',GradientType=0 );
+}
+
+//
+// Breakpoints
+// --------------------------------------------------
+@breakpoint-small:			900px;
+@breakpoint-large:			1200px;
+@breakpoint-huge:			1900px;
+

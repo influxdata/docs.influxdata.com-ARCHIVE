@@ -1,0 +1,64 @@
+/*
+
+	HOME
+
+	____________________________________________________________
+
+	Notes:
+	-	Simple index view with links to the different products
+
+*/
+
+.homepage {
+	width: 100%;
+	display: inline-block;
+	font-size: 0;
+	padding: 0.5rem;
+
+	&--card {
+		font-size: 1rem;
+		width: 50%;
+		display: inline-block;
+		padding: 0.5rem;
+
+		&-container {
+			border-radius: @radius;
+			background-color: @article-bg-heading;
+			text-align: center;
+			padding: 2rem 0;
+		}
+		&-title {
+			font-size: 2em;
+			display: inline-block;
+			font-family: Klavika-Light, sans-serif;
+			font-weight: 200;
+			font-style: italic;
+			color: @sidebar-title-color;
+			margin-bottom: 1em;
+		}
+		&-description {
+			// text-align: left;
+			color: @article-text;
+			padding: 0 2em;
+			line-height: 1.2em;
+		}
+	}
+}
+
+//
+// Media Queries
+// --------------------------------------------------
+@media (min-width: @breakpoint-small) {
+	.homepage--card {
+		width: 25%;
+	}
+}
+@media (min-width: @breakpoint-large) {
+	.homepage--card-description {
+		font-size: 1.125em;
+		padding: 0 3.5em;
+	}
+}
+@media (min-width: @breakpoint-huge) {
+
+}
