@@ -5,7 +5,7 @@ menu:
   telegraf:
     name: v0.2
     identifier: telegraf_02
-    weight: 20
+    weight: 30
 ---
 
 The Telegraf documentation is currently under construction.

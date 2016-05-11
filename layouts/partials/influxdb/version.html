@@ -2,8 +2,5 @@
 <div class="old-version">
 {{ if in .RelPermalink "v0.9"}}
     <strong>Warning!</strong> This page documents an old version of InfluxDB, which is no longer actively developed. <a href="/influxdb/{{ .Site.Data.default_versions.influxdb_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ substr .RelPermalink 15 }}{{end}}">InfluxDB {{ .Site.Data.default_versions.influxdb_semver }}</a> is the most recent version of InfluxDB.
-{{ else }}
-    <strong>Warning!</strong> This page documents an old version of InfluxDB, which is no longer actively developed. <a href="/influxdb/{{ .Site.Data.default_versions.influxdb_semver }}/">InfluxDB {{ .Site.Data.default_versions.influxdb_semver }}</a> is the most recent version of InfluxDB.
-{{ end }}
 </div>
 {{ end }}

@@ -1,0 +1,10 @@
+{{partial "header.html" . }}
+    <div class="documentation-home--hero">
+        <div class="documentation-home--title"><b>Page not found.</b><br><br>We're sorry but we can't find the page you were looking for.<br></div>
+    </div>
+    <div class="documentation-home--menu">
+        {{ range .Site.Menus.products }}
+        <a class="documentation-home--menu-item" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .Name }}</a>
+	{{ end}}
+    </div>
+{{ partial "footer.html" . }}

@@ -5,7 +5,7 @@ menu:
   chronograf:
     name: v0.4
     identifier: chronograf_04
-    weight: 0
+    weight: 30
 ---
 
 The Chronograf documentation is currently under construction.

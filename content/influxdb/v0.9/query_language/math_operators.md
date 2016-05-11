@@ -55,7 +55,6 @@ SELECT A - B FROM sub
 You can multiply by a constant.
 
 ```sql
-SELECT A + B FROM add
 SELECT 10 * A FROM mult
 ```
 
