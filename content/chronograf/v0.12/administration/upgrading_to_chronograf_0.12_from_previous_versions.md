@@ -1,6 +1,6 @@
 ---
 title: Upgrading to Chronograf 0.12 from versions <= 0.4
-
+newversionredirect: /administration/upgrading/
 menu:
   chronograf_012:
     name: Upgrading to Chronograf 0.12 from versions <= 0.4
