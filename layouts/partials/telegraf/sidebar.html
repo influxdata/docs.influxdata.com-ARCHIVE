@@ -1,41 +1,49 @@
-<div class="product-sidebar" id="product-sidebar">
-    {{ $currentNode := . }}
-    {{ if (eq $currentNode.RelPermalink "/telegraf/") }}
-        {{ range (index $.Site.Menus .Site.Data.default_versions.telegraf) }}
-            <div class="product-sidebar--section-title">
-                <a class="product-sidebar--nav-item{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{.URL}}">{{ .Name }}</a>
-            </div>
-            {{ if .HasChildren }}
-                <section class="product-sidebar--section">
-                    {{ range .Children }}
-                    <a class="product-sidebar--page{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
-                    {{ end }}
-                </section>
-            {{end}}
-        {{end}}
-    {{end}}
-    {{ range .Site.Menus.telegraf }}
-        {{ if (in $currentNode.Permalink .URL) }}
-            {{ range (index $.Site.Menus .Identifier) }}
-                <div class="product-sidebar--section-title">
-                    <a class="product-sidebar--nav-item{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{.URL}}">{{ .Name }}</a>
-                </div>
-                {{ if .HasChildren }}
-                    <section class="product-sidebar--section">
-                        {{ range .Children }}
-                        <a class="product-sidebar--page{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
-                        {{ end }}
-                    </section>
-                {{end}}
-            {{end}}
-        {{end}}
-    {{end}}
-    <div class="product-sidebar--section-title">
-        <a class="product-sidebar--nav-item" href="/telegraf/">Telegraf Versions</a>
-    </div>
-    <section class="product-sidebar--section">
-        {{ range .Site.Menus.telegraf }}
-        <a class="product-sidebar--page{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
-        {{end}}
-    </section>
+<div class="sidebar--toggle" id="sidebar--toggle"><span class="icon search"></span> &nbsp;Browse Telegraf Documentation</div>
+<div class="sidebar--mask-container" id="sidebar--mask-container">
+	<div class="sidebar--mask" id="sidebar--mask"></div>
 </div>
+<aside class="sidebar" id="sidebar">
+	<section class="sidebar--section">
+		<p class="sidebar--support-desc"><strong>Need immediate answers?</strong><br/>Get support from the experts</p>
+		<a class="sidebar--support-ad" href="https://influxdata.com/pricing/#product-subscriptions" target="_blank">Get Support</a>
+	</section>
+	{{ $currentNode := . }}
+	{{ if (eq $currentNode.RelPermalink "/telegraf/") }}
+		{{ range (index $.Site.Menus .Site.Data.default_versions.telegraf) }}
+			<section class="sidebar--section">
+				<div class="sidebar--section-title">
+					<a class="{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{.URL}}">{{ .Name }}</a>
+				</div>
+				{{ if .HasChildren }}
+					{{ range .Children }}
+					<a class="sidebar--page{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
+					{{ end }}
+				{{end}}
+			</section>
+		{{end}}
+	{{end}}
+	{{ range .Site.Menus.telegraf }}
+		{{ if (in $currentNode.Permalink .URL) }}
+			{{ range (index $.Site.Menus .Identifier) }}
+				<section class="sidebar--section">
+					<div class="sidebar--section-title">
+						<a class="{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{.URL}}">{{ .Name }}</a>
+					</div>
+					{{ if .HasChildren }}
+						{{ range .Children }}
+						<a class="sidebar--page{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
+						{{ end }}
+					{{end}}
+				</section>
+			{{end}}
+		{{end}}
+	{{end}}
+	<section class="sidebar--section">
+		<div class="sidebar--section-title">
+			<a href="/telegraf/">Telegraf Versions</a>
+		</div>
+		{{ range .Site.Menus.telegraf }}
+		<a class="sidebar--page{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
+		{{end}}
+	</section>
+</aside>

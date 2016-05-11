@@ -32,7 +32,7 @@ file.
 
 To start out, you must be working with version 0.10 or 0.11 (don't upgrade the
 `influxd` binary yet!).
-If you've already upgraded the binary, reinstall 0.10 or 0.11; InfluxDB 0.12
+If you've already upgraded the binary, reinstall 0.10 or 0.11 (see the [end of the page](/influxdb/v0.12/administration/upgrading/#urls-for-influxdb-0-11) for links); InfluxDB 0.12
 will yield an error
 (`run: create server: detected /var/lib/influxdb/meta/raft.db. [...]`) if you
 attempt to start the process without completing the steps below.
@@ -95,6 +95,13 @@ Restore `/tmp/backup` to the meta directory in `/var/lib/influxdb/meta`:
 Using metastore snapshot: /tmp/backup/meta.00
 ```
 
+> **Note:** If you run `influxd restore` as the root user, you will need to
+change the permissions on the `meta.db` file:
+>
+```
+sudo chown influxdb:influxdb /var/lib/influxdb/meta/*
+```
+
 **5.** Generate a new configuration file.
 
 InfluxDB 0.12 has several new settings in the [configuration file](/influxdb/v0.12/administration/config/).
@@ -133,3 +140,51 @@ the `meta` directory, and try working through these steps again.
 **8.** Explore the new 0.12 features.
 
 See [Differences between InfluxDB 0.12 and 0.11](/influxdb/v0.12/concepts/011_vs_012/).
+
+
+#### URLs for InfluxDB 0.11:
+Ubuntu & Debian (64-bit)
+```
+wget https://dl.influxdata.com/influxdb/releases/influxdb_0.11.1-1_amd64.deb
+sudo dpkg -i influxdb_0.11.1-1_amd64.deb
+```
+
+Ubuntu & Debian (ARM)
+```
+wget https://dl.influxdata.com/influxdb/releases/influxdb_0.11.1-1_armhf.deb
+sudo dpkg -i influxdb_0.11.1-1_armhf.deb
+```
+
+RedHat & CentOS (64-bit)
+```
+wget https://dl.influxdata.com/influxdb/releases/influxdb-0.11.1-1.x86_64.rpm
+sudo yum localinstall influxdb-0.11.1-1.x86_64.rpm
+```
+
+RedHat & CentOS (ARM)
+```
+wget https://dl.influxdata.com/influxdb/releases/influxdb-0.11.1-1.armhf.rpm
+sudo yum localinstall influxdb-0.11.1-1.armhf.rpm
+```
+
+Standalone binary (64-bit)
+```
+wget https://dl.influxdata.com/influxdb/releases/influxdb-0.11.1-1_linux_amd64.tar.gz
+tar xvfz influxdb-0.11.1-1_linux_amd64.tar.gz
+```
+
+Standalone binary (ARM)
+```
+wget https://dl.influxdata.com/influxdb/releases/influxdb-0.11.1-1_linux_armhf.tar.gz
+tar xvfz influxdb-0.11.1-1_linux_armhf.tar.gz
+```
+For other versions, please scan the https://dl.influxdata.com/ manifest for the appropriate InfluxDB 0.11.1 package.
+
+Homebrew users
+
+It is simpler to grab a tarball of Darwin binaries than to downgrade a Homebrew installation. Since the `influxd` binary is only briefly needed for the metastore export, the unpacked tarball can be deleted without harm once the metastore backup has been successfully restored via InfluxDB 0.12.
+```
+wget https://dl.influxdata.com/influxdb/releases/influxdb-0.11.1-1_darwin_amd64.tar.gz
+tar -xvf influxdb-0.11.1-1_darwin_amd64.tar.gz
+./influxdb-0.11.1-1/usr/bin/influxd
+```
