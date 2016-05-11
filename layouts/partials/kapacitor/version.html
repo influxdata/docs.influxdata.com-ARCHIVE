@@ -1,7 +1,7 @@
 {{ if not (or (in .RelPermalink .Site.Data.default_versions.kapacitor_semver) (eq .RelPermalink "/kapacitor/")) }}
 <div class="old-version">
-{{ if in .RelPermalink "v0.11" }}
-    <strong>Warning!</strong> This page documents an old version of Kapacitor, which is no longer actively developed. <a href="/kapacitor/{{ .Site.Data.default_versions.kapacitor_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ replace .RelPermalink "/kapacitor/v0.11/" "" }}{{end}}">Kapacitor {{ .Site.Data.default_versions.kapacitor_semver }}</a> is the most recent version of Kapacitor.
+{{ if in .RelPermalink "v0.12" }}
+    <strong>Warning!</strong> This page documents an old version of Kapacitor, which is no longer actively developed. <a href="/kapacitor/{{ .Site.Data.default_versions.kapacitor_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ replace .RelPermalink "/kapacitor/v0.12/" "" }}{{end}}">Kapacitor {{ .Site.Data.default_versions.kapacitor_semver }}</a> is the most recent version of Kapacitor.
 {{ else if in .RelPermalink "v0.2"}}
     <strong>Warning!</strong> This page documents an old version of Kapacitor, which is no longer actively developed. <a href="/kapacitor/{{ .Site.Data.default_versions.kapacitor_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ replace .RelPermalink "/kapacitor/v0.2/" "" }}{{end}}">Kapacitor {{ .Site.Data.default_versions.kapacitor_semver }}</a> is the most recent version of Kapacitor.
 {{ else }}
