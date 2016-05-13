@@ -53,7 +53,7 @@ See the [installation documentation](/influxdb/v0.13/introduction/installation/#
 ## Environment variables
 
 Set any configuration option with an environment variable.
-At the start of the process, InfluxDB checks for environment variables of the
+When the process launches, InfluxDB checks for environment variables of the
 form below.
 The environment variable overrides the equivalent option in the configuration
 file.
