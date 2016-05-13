@@ -50,6 +50,35 @@ A new configuration file should be generated every time InfluxDB is upgraded.
 
 See the [installation documentation](/influxdb/v0.13/introduction/installation/#generate-a-configuration-file) for more detail on generating and using configuration files.
 
+## Environment variables
+
+Set any configuration option with an environment variable.
+At the start of the process, InfluxDB checks for environment variables of the
+form below.
+The environment variable overrides the equivalent option in the configuration
+file.
+
+```
+INFLUXDB_<CONFIG_SECTION_NAME>_<OPTION_NAME>
+```
+
+Example:
+
+InfluxDB will use `~/mydataz` as the
+[data directory](#dir-var-lib-influxdb-data):
+```
+$ echo $INFLUXDB_DATA_DIR
+~/mydataz
+```
+
+> **Note:** Replace any dashes in option names with underscores. For example,
+this is the valid environment variable for the `store-database` option in the
+`[monitor]` section:
+>
+```
+INFLUXDB_MONITOR_STORE_DATABASE
+```
+
 ## Configuration Sections
 
 * [Global Options](#global-options)
