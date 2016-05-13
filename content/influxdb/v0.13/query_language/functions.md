@@ -222,7 +222,13 @@ time			               mean
 1970-01-01T00:00:00Z	 4.286791371454075
 ```
 
-> **Note:** Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
+> **Notes:**
+>
+* Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
+* Executing `mean()` on the same set of float64 points may yield slightly
+different results.
+InfluxDB does not sort points before it applies the function which results in
+those small discrepancies.
 
 * Calculate the average value in the field `water_level` at four-day intervals:
 
@@ -318,7 +324,7 @@ time			                spread
 1970-01-01T00:00:00Z	  10.574
 ```
 
-> **Note:** Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
+> **Notes:** Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
 
 * Calculate the difference between the minimum and maximum values in the field `water_level` for a specific tag and time range and at 30 minute intervals:
 
@@ -364,7 +370,13 @@ time			               sum
 1970-01-01T00:00:00Z	 67777.66900000002
 ```
 
-> **Note:** Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
+> **Notes:**
+>
+* Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
+* Executing `sum()` on the same set of float64 points may yield slightly
+different results.
+InfluxDB does not sort points before it applies the function which results in
+those small discrepancies.
 
 * Calculate the sum of the `water_level` field grouped by five-day intervals:
 
