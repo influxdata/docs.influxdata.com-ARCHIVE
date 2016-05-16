@@ -1,5 +1,5 @@
 ---
-title: Downsampling and Data Retention
+title: Continuous Query Use Cases
 menu:
   influxdb_013:
     weight: 11
