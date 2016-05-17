@@ -171,7 +171,7 @@ An integer literal followed immediately (with no spaces) by a duration unit list
 
 ```
 duration_lit        = int_lit duration_unit .
-duration_unit       = "u" | "µ" | "s" | "h" | "d" | "w" | "ms" .
+duration_unit       = "u" | "µ" | "ms" | "s" | "m" | "h" | "d" | "w" .
 ```
 
 ### Dates & Times
