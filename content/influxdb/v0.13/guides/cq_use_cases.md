@@ -14,7 +14,7 @@ CQs require a function in the `SELECT` clause and must include a
 CQs are great for:
 
 * [Downsampling and configuring data retention](#downsampling-and-data-retention)
-* [Substituting nested functions and HAVING clauses](#substituting-nested-functions-and-having-clauses)
+* [Substituting for nested functions and HAVING clauses](#substituting-for-nested-functions-and-having-clauses)
 
 This guide will not go into detail about the syntax for creating and managing
 CQs.
@@ -220,3 +220,163 @@ expired old data.
 Now that you have a general understanding of how these features can work
 together, we recommend looking at the detailed documentation on [CQs](/influxdb/v0.13/query_language/continuous_queries/) and [RPs](/influxdb/v0.13/query_language/database_management/#retention-policy-management)
 to see all that they can do for you.
+
+## Substituting for nested functions and HAVING clauses
+
+InfluxQL is a SQL-like query language for interacting with InfluxDB.
+While InfluxQL resembles SQL in functionality, it does not always have similar
+syntax.
+
+By the end of this section you will know how to use InfluxDB's CQs to get the
+same functionality as nested functions and SQL's `HAVING` clauses.
+
+### Sample data
+
+This section uses a sample of the data from the
+[NOAA database](http://localhost:1313/influxdb/v0.13/sample_data/data_download/)
+where the `location` is `santa_monica` and over the time period from September
+14, 2015 at `00:00:00` and September 16, 2015 at `23:59:59`:
+
+```
+> SELECT "water_level" FROM "h2o_feet" WHERE "location"='santa_monica' AND time >= '2015-09-14T00:00:00Z' AND time < '2015-09-17T00:00:00Z'
+name: h2o_feet
+--------------
+time			                water_level
+2015-09-14T00:00:00Z	  2.339
+2015-09-14T00:06:00Z	  2.395
+2015-09-14T00:12:00Z	  2.457
+[...]
+2015-09-16T23:42:00Z	  2.159
+2015-09-16T23:48:00Z	  2.139
+2015-09-16T23:54:00Z	  2.11
+```
+
+### Goal
+
+To perform queries that act like:
+
+* A nested function
+
+    Calculate the minimum `water_level` at one-day intervals and calculate the
+average of those values:
+
+    ```
+> SELECT mean(min("water_level")) FROM "h2o_feet" WHERE "location"='santa_monica' AND time >= '2015-09-14T00:00:00Z' AND time < '2015-09-17T00:00:00Z' GROUP BY time(1d)
+name: h2o_feet
+-------------
+time			        mean
+1970-01-01T00:00:00Z	1.9183333333333337
+    ```
+
+Or:
+
+* A `HAVING` clause
+
+    Calculate the average `water_level` at one-day intervals and only return results
+for days where the average is greater than `4.0` feet:
+
+    ```
+> SELECT mean("water_level") FROM "h2o_feet" WHERE "location"='santa_monica' AND time >= '2015-09-14T00:00:00Z' AND time < '2015-09-17T00:00:00Z' GROUP BY time(1d) HAVING mean("water_level") > 4.0
+name: h2o_feet
+--------------
+time			        mean
+2015-09-14T00:00:00Z	4.071287500000001
+    ```
+
+InfluxDB does not understand the syntax in those queries.
+InfluxQL allows nesting with only a few functions (see
+[`DISTINCT()`](/influxdb/v0.13/query_language/functions/#distinct),
+[`DERIVATIVE()`](/influxdb/v0.13/query_language/functions/#derivative),
+[`DIFFERENCE()`](/influxdb/v0.13/query_language/functions/#difference),
+[`MOVING _AVERAGE()`](/influxdb/v0.13/query_language/functions/#moving-average),
+and
+[`NON_NEGATIVE_DERIVATIVE()`](/influxdb/v0.13/query_language/functions/#non-negative-derivative)
+),
+and InfluxQL does not support `HAVING` clauses.
+
+### CQs as a substitute
+
+Use a CQ in place of:
+
+* A nested function
+
+    Create a CQ to automatically calculate the minimum `water_level` at one-day
+    intervals and store those results in a different measurement.
+    You only need to perform this step once.
+
+    The following query creates a CQ called `calc_mins` in the database
+    `NOAA_water_database`.
+    `calc_mins` tells InfluxDB to calculate the one-day minimum of the field
+    `water_level` in the measurement `h2o_feet` where the `location` tag key is
+    equal to `santa_monica`.
+    It also tells InfluxDB to write those results to the measurement
+    `one_day_mins`.
+    InfluxDB will run this query every day for the previous day.
+
+    ```
+    > CREATE CONTINUOUS QUERY "calc_mins" ON "NOAA_water_database" BEGIN SELECT min("water_level") AS "min_water_level" INTO "one_day_mins" FROM "h2o_feet" WHERE "location"='santa_monica' GROUP BY time(1d) END
+    ```
+
+    Then, whenever you want the average of the one-day minimum calculations,
+    query the measurement that stores the CQ results and use the `mean()`
+    function.
+
+    ```
+    > SELECT mean("min_water_level") FROM "one_day_mins" WHERE time >= '2015-09-14T00:00:00Z' AND time < '2015-09-17T00:00:00Z'
+    name: one_day_mins
+    ------------------
+    time			        mean
+    2015-09-14T00:00:00Z	1.9183333333333337
+    ```
+
+    > **Note:** CQs only run on data with timestamps that are newer than the
+    time at which the user initializes the CQ.
+    In practice, the CQ `calc_mins` would not have run against the sample data
+    from 2015.
+    To write the results of a query on old data to a different measurement,
+    simply use a
+    [non-CQ `INTO` query](/influxdb/v0.13/query_language/data_exploration/#downsample-data).
+
+* A `HAVING` clause
+
+    Create a CQ to automatically calculate the average `water_level` at one-day
+intervals and store those results in a different measurement.
+    You only need to perform this step once.
+
+    The following query creates a CQ called `calc_means` in the database
+    `NOAA_water_database`.
+    `calc_means` tells InfluxDB to calculate the one-day average of the field
+    `water_level` in the measurement `h2o_feet` where the `location` tag key is
+    equal to `santa_monica`.
+    It also tells InfluxDB to write those results to the measurement
+    `one_day_means`.
+    InfluxDB will run this query every day for the previous day.
+
+    ```
+    > CREATE CONTINUOUS QUERY "calc_means" ON "NOAA_water_database" BEGIN SELECT mean("water_level") AS "mean_water_level" INTO "one_day_means" FROM "h2o_feet" WHERE "location"='santa_monica' GROUP BY time(1d) END
+    ```
+
+    Then, whenever you want to see results for days where the one-day average of
+    `water_level` is greater than `4.0` feet, query the measurement that stores
+    the CQ result and include that condition in the `WHERE` clause:
+
+    ```
+    > SELECT "mean_water_level" FROM "one_day_means" WHERE "mean_water_level" > 4.0 AND time >= '2015-09-14T00:00:00Z' AND time < '2015-09-17T00:00:00Z'
+    name: one_day_means
+    -------------------
+    time			        mean_water_level
+    2015-09-14T00:00:00Z	4.071287500000001
+    ```
+
+    > **Note:** CQs only run on data with timestamps that are newer than the
+    time at which the user initializes the CQ.
+    In practice, the CQ `calc_means` would not have run against the sample data
+    from 2015.
+    To write the results of a query on old data to a different measurement,
+    simply use a
+    [non-CQ `INTO` query](/influxdb/v0.13/query_language/data_exploration/#downsample-data).
+
+    Using CQs, we've made InfluxQL perform the same calculations as nested
+    queries and `HAVING` clauses.
+    We recommend looking at the detailed documentation on [CQs](/influxdb/v0.13/query_language/continuous_queries/) to get more
+    familiar with the syntax and the possibilities that CQs offer.
