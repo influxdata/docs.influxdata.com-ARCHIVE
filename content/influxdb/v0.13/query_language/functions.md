@@ -324,7 +324,13 @@ time			                spread
 1970-01-01T00:00:00Z	  10.574
 ```
 
-> **Notes:** Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
+> **Notes:**
+>
+* Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
+* Executing `spread()` on the same set of float64 points may yield slightly
+different results.
+InfluxDB does not sort points before it applies the function which results in
+those small discrepancies.
 
 * Calculate the difference between the minimum and maximum values in the field `water_level` for a specific tag and time range and at 30 minute intervals:
 
@@ -1563,6 +1569,14 @@ name: h2o_feet
 time			               stddev
 1970-01-01T00:00:00Z	 2.279144584196145
 ```
+
+> **Notes:**
+>
+* `stddev()` returns epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then it returns the lower bound as the timestamp.
+* Executing `stddev()` on the same set of float64 points may yield slightly
+different results.
+InfluxDB does not sort points before it applies the function which results in
+those small discrepancies.
 
 * Calculate the standard deviation for the `water_level` field between August 18, 2015 at midnight and September 18, 2015 at noon grouped at one week intervals and by the `location` tag:
 
