@@ -26,7 +26,7 @@ Follow the instructions in the Telegraf section on the [Downloads page](https://
 * Standalone Binary: see the next section for how to create a configuration file
 
 ### Creating and Editing the Configuration File
-Before starting the Telegraf server you need to edit and/or create an initial configuration that specifies your desired [inputs](/telegraf/v0.13/inputs/) (where the metrics come from) and [outputs](/telegraf/v0.13/outputs/) (where the metrics go). There are [several ways](/telegraf/v0.13/introduction/configuration/) to create and edit the configuration file.
+Before starting the Telegraf server you need to edit and/or create an initial configuration that specifies your desired [inputs](/telegraf/v0.13/inputs/) (where the metrics come from) and [outputs](/telegraf/v0.13/outputs/) (where the metrics go). There are [several ways](/telegraf/v0.13/administration/configuration/) to create and edit the configuration file.
 Here, we'll generate a configuration file and simultaneously specify the desired inputs with the `-input-filter` flag and the desired output with the `-output-filter` flag.
 
 In the example below, we create a configuration file called `telegraf.conf` with two inputs:
