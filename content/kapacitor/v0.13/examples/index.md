@@ -27,3 +27,7 @@ Integrate your custom anomaly detection algorithm with Kapacitor.
 
 See how to use Kapacitor as a continuous query engine.
 
+### [Socket based UDF](/kapacitor/v0.13/examples/socket_udf/)
+
+Learn how to write a simple socket based UDF.
+
