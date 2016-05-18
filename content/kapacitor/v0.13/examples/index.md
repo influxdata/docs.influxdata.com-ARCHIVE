@@ -22,3 +22,8 @@ See how you can use Kapacitor to create a live updating leaderboard for a game.
 ### [Custom Anomaly Detection](/kapacitor/v0.13/examples/anomaly_detection/)
 
 Integrate your custom anomaly detection algorithm with Kapacitor.
+
+### [Continuous Queries](/kapacitor/v0.13/examples/continuous_queries/)
+
+See how to use Kapacitor as a continuous query engine.
+
