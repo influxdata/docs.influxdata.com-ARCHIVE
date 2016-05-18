@@ -32,7 +32,7 @@ Limit and sort your results:
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Limit the number of series returned with `SLIMIT`](/influxdb/v0.13/query_language/data_exploration/#limit-the-number-of-series-returned-with-slimit)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Limit the number of points and series returned with `LIMIT` and `SLIMIT`](/influxdb/v0.13/query_language/data_exploration/#limit-the-number-of-points-and-series-returned-with-limit-and-slimit)
 * [Sort query returns with `ORDER BY time DESC`](/influxdb/v0.13/query_language/data_exploration/#sort-query-returns-with-order-by-time-desc)
-* [Paginate query returns with `OFFSET`](/influxdb/v0.13/query_language/data_exploration/#paginate-query-returns-with-offset)
+* [Paginate query returns with `OFFSET` and `SOFFSET`](/influxdb/v0.13/query_language/data_exploration/#paginate-query-returns-with-offset-and-soffset)
 
 General tips on query syntax:
 
@@ -765,8 +765,10 @@ time			               water_level
 2015-09-18T16:00:00Z	 3.599
 ```
 
-## Paginate query returns with OFFSET
-Use `OFFSET` to paginate the results returned.
+## Paginate query returns with OFFSET and SOFFSET
+
+### Use `OFFSET` to paginate the results returned
+---
 For example, get the first three points written to a series:
 
 ```sql
@@ -777,10 +779,10 @@ CLI response:
 ```bash
 name: h2o_feet
 ----------
-time			water_level
-2015-08-18T00:00:00Z	8.12
-2015-08-18T00:06:00Z	8.005
-2015-08-18T00:12:00Z	7.887
+time			               water_level
+2015-08-18T00:00:00Z	 8.12
+2015-08-18T00:06:00Z	 8.005
+2015-08-18T00:12:00Z	 7.887
 ```
 
 Then get the second three points from that same series:
@@ -793,10 +795,45 @@ CLI response:
 ```bash
 name: h2o_feet
 ----------
-time			water_level
-2015-08-18T00:18:00Z	7.762
-2015-08-18T00:24:00Z	7.635
-2015-08-18T00:30:00Z	7.5
+time			               water_level
+2015-08-18T00:18:00Z	 7.762
+2015-08-18T00:24:00Z	 7.635
+2015-08-18T00:30:00Z	 7.5
+```
+
+### Use `SOFFSET` to paginate the series returned
+---
+
+For example, get the first three points from a single series:
+```
+> SELECT water_level FROM h2o_feet GROUP BY * LIMIT 3 SLIMIT 1
+```
+
+CLI response:
+```
+name: h2o_feet
+tags: location=coyote_creek
+time			               water_level
+----			               -----------
+2015-08-18T00:00:00Z	 8.12
+2015-08-18T00:06:00Z	 8.005
+2015-08-18T00:12:00Z	 7.887
+```
+
+Then get the first three points from the next series:
+```
+> SELECT water_level FROM h2o_feet GROUP BY * LIMIT 3 SLIMIT 1 SOFFSET 1
+```
+
+CLI response:
+```
+name: h2o_feet
+tags: location=santa_monica
+time			               water_level
+----			               -----------
+2015-08-18T00:00:00Z	 2.064
+2015-08-18T00:06:00Z	 2.116
+2015-08-18T00:12:00Z	 2.028
 ```
 
 ## Multiple statements in queries
