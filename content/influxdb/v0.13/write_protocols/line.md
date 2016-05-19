@@ -106,15 +106,21 @@ We recommend using the least precise precision possible as this can result in
 significant improvements in compression.
 
 ## Full Example
+
 A full example is shown below.
+
 ```
 cpu,host=server01,region=uswest value=1 1434055562000000000
 cpu,host=server02,region=uswest value=3 1434055562000010000
 temperature,machine=unit42,type=assembly internal=32,external=100 1434055562000000035
 temperature,machine=unit143,type=assembly internal=22,external=130 1434055562005000035
 ```
-In this example the first line shows a `measurement` of "cpu", there are two tags "host" and "region", the `value` is 1.0, and the `timestamp` is 1434055562000000000.
+
+In this example the first line shows a `measurement` of "cpu", there are two `tags` "host" and "region", the `value` is 1.0, and the `timestamp` is 1434055562000000000.
 Following this is a second line, also a point in the `measurement` "cpu" but belonging to a different "host".
+
+The two last lines of the example show two points in the `measurement` "temperature". There are two `tags` "machine" and "type" with `fields` for "internal" and "external" temperatures.
+
 ```
 cpu,host=server\ 01,region=uswest value=1,msg="all systems nominal"
 cpu,host=server\ 01,region=us\,west value_int=1i
