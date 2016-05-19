@@ -738,13 +738,13 @@ show_tag_values_stmt = "SHOW TAG VALUES" [ from_clause ] with_tag_clause [ where
 
 ```sql
 -- show all tag values across all measurements for the region tag
-SHOW TAG VALUES WITH KEY = 'region'
+SHOW TAG VALUES WITH KEY = "region"
 
 -- show tag values from the cpu measurement for the region tag
-SHOW TAG VALUES FROM cpu WITH KEY = 'region'
+SHOW TAG VALUES FROM cpu WITH KEY = "region"
 
 -- show tag values from the cpu measurement for region & host tag keys where service = 'redis'
-SHOW TAG VALUES FROM cpu WITH KEY IN (region, host) WHERE service = 'redis'
+SHOW TAG VALUES FROM cpu WITH KEY IN ("region", "host") WHERE service = 'redis'
 ```
 
 ### SHOW USERS
