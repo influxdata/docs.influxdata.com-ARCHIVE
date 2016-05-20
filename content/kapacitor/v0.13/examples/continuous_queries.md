@@ -3,13 +3,13 @@ title: Kapacitor as a Continous Query engine
 
 menu:
   kapacitor_013:
-    name: Kapacitor as a Conitinous Query engine
+    name: Kapacitor as a Continuous Query engine
     identifier: continuous_queries
     weight: 30
     parent: examples
 ---
 
-Kapacitor can be used to do the same work as Conitinous Queries in InfluxDB.
+Kapacitor can be used to do the same work as Continuous Queries in InfluxDB.
 Today we are going to explore reasons to use one over the other and the basics of using Kapacitor for CQ type workloads.
 
 ## An Example
