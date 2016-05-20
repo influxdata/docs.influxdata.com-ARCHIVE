@@ -269,16 +269,16 @@ location
 The `SHOW TAG VALUES` query returns the set of [tag values](/influxdb/v0.13/concepts/glossary/#tag-value) for a specific tag key across all measurements in the database.
 Syntax for specifying a single tag key:
 ```sql
-SHOW TAG VALUES [FROM <measurement_name>] WITH KEY = <tag_key>
+SHOW TAG VALUES [FROM <measurement_name>] WITH KEY = "<tag_key>"
 ```
 Syntax for specifying more than one tag key:
 ```sql
-SHOW TAG VALUES [FROM <measurement_name>] WITH KEY IN (<tag_key1>,<tag_key2)
+SHOW TAG VALUES [FROM <measurement_name>] WITH KEY IN ("<tag_key1>","<tag_key2")
 ```
 
 Return the tag values for a single tag key (`randtag`) across all measurements in the database `NOAA_water_database`:
 ```sql
-> SHOW TAG VALUES WITH KEY = randtag
+> SHOW TAG VALUES WITH KEY = "randtag"
 ```
 
 CLI response:
@@ -293,7 +293,7 @@ randtag	 2
 
 Return the tag values for two tag keys (`location` and `randtag`) across all measurements in the database `NOAA_water_database`:
 ```sql
-> SHOW TAG VALUES WITH KEY IN (location,randtag)
+> SHOW TAG VALUES WITH KEY IN ("location","randtag")
 ```
 
 CLI response:
@@ -338,7 +338,7 @@ location	 santa_monica
 
 Return the tag values for the tag key `randtag` for a specific measurement in the `NOAA_water_database` database:
 ```sql
-> SHOW TAG VALUES FROM average_temperature WITH KEY = randtag
+> SHOW TAG VALUES FROM average_temperature WITH KEY = "randtag"
 ```
 
 CLI response:
