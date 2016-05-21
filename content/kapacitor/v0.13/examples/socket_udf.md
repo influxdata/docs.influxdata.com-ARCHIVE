@@ -23,8 +23,8 @@ A UDF can be written in any language that has protocol buffer support.
 * A process UDF, is a child process of Kapacitor that communicates over STDIN/STDOUT with Kapacitor and is completely managed by Kapacitor.
 * A socket UDF is process external to Kapacitor that communicates over a configured unix domain socket. The process itself is not managed by Kapacitor.
 
-Using a process UDF can be simpler that a socket UDF because Kapacitor will spawn the process and manage everything for you.
-On the other hand you may want more control over the UDF process itself an rather expose only a socket to Kapacitor.
+Using a process UDF can be simpler than a socket UDF because Kapacitor will spawn the process and manage everything for you.
+On the other hand you may want more control over the UDF process itself and rather expose only a socket to Kapacitor.
 One use case that is common is running Kapacitor in a Docker container and the UDF in another container that exposes the socket via a Docker volume.
 
 In both cases the protocol is the same the only difference is the transport mechanism.
@@ -47,18 +47,18 @@ This example is actually part of the test suite and a Python and Go implementati
 
 Before we write any code lets look at the lifecycle of a socket UDF
 
-1. The UDF process is started, independtly from Kapacitor.
+1. The UDF process is started, independently from Kapacitor.
 2. The process listens on a unix domain socket.
 3. Kapacitor connects to the socket and queries basic information about the UDFs options.
 4. A Kapacitor task is enabled that uses the UDF and Kapacitor makes a new connection to the socket.
 5. The task reads and writes data over the socket connection.
-6. If the task is stopped of any reason the socket connection is closed.
+6. If the task is stopped for any reason the socket connection is closed.
 
 ### The Main method
 
 We need to write a program that starts up and listens on a socket.
-The following code is a main function that listens on a socket at 
-a default path, or on an custom path specified as the `-socket` flag.
+The following code is a main function that listens on a socket at
+a default path, or on a custom path specified as the `-socket` flag.
 
 
 ```go
@@ -281,7 +281,7 @@ func (*mirrorHandler) EndBatch(end *udf.EndBatch) error {
 At this point we have a complete implementation of the `Handler` interface.
 In step #4 of the lifecycle Kapacitor makes a new connection to the UDF for each use in a task.
 
-Since its possible our UDF process can handle multiple connections simultaneously we need a mechanism to create a new `agent` and `handler` per connection.
+Since it's possible our UDF process can handle multiple connections simultaneously we need a mechanism to create a new `agent` and `handler` per connection.
 A `server` is provided for this purpose which expects an implementation of the `Accepter` interface:
 
 ```go
@@ -499,7 +499,7 @@ Run `go run main.go`, if you get an error about the socket being in use, just de
 
 ## Configure Kapacitor for our UDF
 
-We need to tell kapacitor where our UDF socket and give it a name so we can use it.
+We need to tell Kapacitor where our UDF socket is and give it a name so we can use it.
 Add this to your Kapacitor configuration file.
 
 
@@ -513,7 +513,7 @@ Add this to your Kapacitor configuration file.
 
 ## Start Kapacitor
 
-Start up Kapacitor and you should see it connect to you UDF in both the Kapacitor logs and the UDF process logs.
+Start up Kapacitor and you should see it connect to your UDF in both the Kapacitor logs and the UDF process logs.
 
 ## Try it out
 
@@ -624,5 +624,3 @@ stream
 
 At this point you should be able to write custom UDFs to do what ever you need, using either the socket or process based methods.
 UDFs have a wide range of uses from custom downsampling logic as part of a continuous query or custom anomaly detection algorithms or simply a system to massage your data a bit.
-
-
