@@ -201,7 +201,7 @@ regex_lit           = "/" { unicode_char } "/" .
 
 **Comparators:**  
 `=~` matches against  
-`!=` doesn't match against
+`!~` doesn't match against
 
 > **Note:** Use regular expressions to match measurements and tags.
 You cannot use regular expressions to match databases, retention policies, or fields.
