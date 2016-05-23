@@ -258,7 +258,8 @@ curl -X POST 'http://localhost:8086/write?db=mydb&precision=ms' --data-binary 'd
 You can also pass a file using the `@` flag.
 The file can contain a batch of points, one per line.
 Points must be separated by newline characters `\n`.
-Batches should be 5000 points or fewer for best performance.
+We recommend writing points in batches of 5,000 to 10,000 points.
+Smaller batches, and more HTTP requests, will result in sub-optimal performance.
 
 `curl -X POST 'http://localhost:8086/write?db=<database>' --data-binary @<filename>`
 
