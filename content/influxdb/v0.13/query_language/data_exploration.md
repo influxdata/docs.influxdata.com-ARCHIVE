@@ -189,7 +189,7 @@ Note that double quotes do not work when specifying tag values and can cause que
 
 Return data where the tag key `location` has no tag value (more on regular expressions [later](/influxdb/v0.13/query_language/data_exploration/#regular-expressions-in-queries)):
 ```sql
-> SELECT * FROM h2o_feet WHERE location !~ /.*/
+> SELECT * FROM h2o_feet WHERE location !~ /./
 ```
 
 Return data where the tag key `location` has a value:
