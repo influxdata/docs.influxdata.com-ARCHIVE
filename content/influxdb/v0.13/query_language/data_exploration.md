@@ -194,7 +194,7 @@ Return data where the tag key `location` has no tag value (more on regular expre
 
 Return data where the tag key `location` has a value:
 ```sql
-> SELECT * FROM h2o_feet WHERE location =~ /.*/
+> SELECT * FROM h2o_feet WHERE location =~ /./
 ```
 **Time ranges**  
 Return data from the past seven days:
