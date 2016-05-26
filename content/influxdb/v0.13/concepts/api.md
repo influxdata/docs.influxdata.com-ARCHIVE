@@ -1,12 +1,10 @@
 ---
-title: API Endpoints & Ports
+title: API Reference
 menu:
   influxdb_013:
     weight: 80
     parent: concepts
 ---
-
-## API reference
 
 The InfluxDB API provides a simple way interact with the database.
 It uses HTTP response codes, HTTP authentication, and responses are returned in
@@ -102,9 +100,10 @@ Those `SELECT` queries require a `POST` request.
 --data-urlencode "q=<InfluxQL query>"
 ```
 
-Use curl's `--data-urlencode` encoding method for all queries.
-Queries must be in [InfluxQL](influxdb/v0.13/query_language/), InfluxDB's query
-language.
+All queries must be URL encoded and follow
+[InfluxQL](/influxdb/v0.13/query_language/) syntax.
+Our example shows the `--data-urlencode` parameter from `curl`, which we will
+use in all examples on this page.
 
 Delimit multiple queries with a semicolon.
 
@@ -272,12 +271,13 @@ POST http://localhost:8086/write
 --data-binary '<Data in Line Protocol format>'
 ```
 
-Use curl's `--data-binary` encoding method for all writes.
-Using any encoding method other than `--data-binary` will likely lead to issues;
-`-d`, `--data-urlencode`, and `--data-ascii` may all strip out newlines or
-introduce new, unintended formatting.
-Data must be in the
+All data must be binary encoded and in the
 [Line Protocol](/influxdb/v0.13/concepts/glossary/#line-protocol) format.
+Our example shows the `--data-binary` parameter from curl, which we will use in
+all examples on this page.
+Using any encoding method other than `--data-binary` will likely lead to issues;
+`-d`, `--data-urlencode`, and `--data-ascii` may strip out newlines or
+introduce new, unintended formatting.
 
 Options:
 
@@ -352,7 +352,7 @@ Errors are returned in JSON.
 | :--------------- | :------------- |
 | 204 No Content   | Success!      |
 | 400 Bad Request  | Unacceptable request. Can occur with a Line Protocol syntax error or if a user attempts to write values to a field that previously accepted a different value type. The returned JSON offers further information. |
-| 404 Not Found    | Unacceptable request. Can occur a user attempts to write to a database that does not exist. The returned JSON offers further information. |
+| 404 Not Found    | Unacceptable request. Can occur if a user attempts to write to a database that does not exist. The returned JSON offers further information. |
 | 500 Internal Server Error  | The system is overloaded or significantly impaired. Can occur if a user attempts to write to a retention policy that does not exist. The returned JSON offers further information. |
 
 ##### Examples
