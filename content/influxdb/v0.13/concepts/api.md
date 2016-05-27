@@ -30,10 +30,10 @@ of InfluxDB.
 
 #### Definition
 ```
-GET http://localhost:8086/query
+GET http://localhost:8086/ping
 ```
 ```
-HEAD http://localhost:8086/query
+HEAD http://localhost:8086/ping
 ```
 
 #### Example
