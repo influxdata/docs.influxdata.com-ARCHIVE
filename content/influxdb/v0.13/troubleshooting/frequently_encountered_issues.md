@@ -14,7 +14,6 @@ Where applicable, it links to outstanding issues on GitHub.
 
 * [Understanding the time intervals returned from `GROUP BY time()` queries](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#understanding-the-time-intervals-returned-from-group-by-time-queries)    
 * [Querying after `now()`](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#querying-after-now)  
-* [Querying outside the min/max time range](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#querying-outside-the-min-max-time-range)  
 * [Querying a time range that spans epoch 0](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#querying-a-time-range-that-spans-epoch-0)  
 * [Querying with booleans](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#querying-with-booleans)  
 * [Working with really big or really small integers](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#working-with-really-big-or-really-small-integers)
@@ -95,14 +94,6 @@ The second query asks InfluxDB to return everything from `hillvalley` that occur
 
 `SELECT * FROM hillvalley`  
 `SELECT * FROM hillvalley WHERE time < now() + 1000d`
-
-## Querying outside the min/max time range
-Queries with a time range that exceeds the minimum or maximum timestamps valid for InfluxDB currently return no results, rather than an error message.
-
-Smallest valid timestamp: `-9023372036854775808` (approximately `1684-01-22T14:50:02Z`)  
-Largest valid timestamp: `9023372036854775807` (approximately `2255-12-09T23:13:56Z`)
-
-<dt> [GitHub Issue #3369](https://github.com/influxdb/influxdb/issues/3369)  </dt>
 
 ## Querying a time range that spans epoch 0
 Currently, InfluxDB can return results for queries that cover either the time range before epoch 0 or the time range after epoch 0, not both.
