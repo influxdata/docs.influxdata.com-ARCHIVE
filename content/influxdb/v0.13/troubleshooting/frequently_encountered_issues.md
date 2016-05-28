@@ -132,8 +132,6 @@ See [Go builtins](http://golang.org/pkg/builtin/#int64) for more information.
 
 Values close to but within those limits may lead to unexpected results; some functions and operators convert the int64 data type to float64 during calculation which can cause overflow issues.
 
-<dt> [GitHub Issue #3130](https://github.com/influxdb/influxdb/issues/3130)  </dt>
-
 ## Doing math on timestamps
 Currently, it is not possible to execute mathematical operators or functions against timestamp values in InfluxDB.
 All time calculations must be carried out by the client receiving the query results.
@@ -141,8 +139,6 @@ All time calculations must be carried out by the client receiving the query resu
 ## Getting an unexpected epoch 0 timestamp in query returns
 In InfluxDB, epoch 0  (`1970-01-01T00:00:00Z`)  is often used as a null timestamp equivalent.
 If you request a query that has no timestamp to return, such as an aggregation function with an unbounded time range, InfluxDB returns epoch 0 as the timestamp.
-
-<dt> [GitHub Issue #3337](https://github.com/influxdb/influxdb/issues/3337) </dt>
 
 ## Getting large query returns in batches when using the HTTP API
 InfluxDB returns large query results in batches of 10,000 points unless you use the query string parameter `chunk_size` to explicitly set the batch size.
