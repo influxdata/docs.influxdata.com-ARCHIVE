@@ -180,13 +180,17 @@ Related entries: [node](/influxdb/v0.13/concepts/glossary/#node)
 
 ## shard
 
-XXXXXX
+A shard is represented by a TSM file on disk. Every shard belongs to one and only one shard group. Multiple shards may exist in a single shard group. Each shard contains a specific set of series. All points falling on a given series in the relevant time range will be stored in the same shard on disk.
 
-Related entries: [database](/influxdb/v0.13/concepts/glossary/#database), [retention policy](/influxdb/v0.13/concepts/glossary/#retention-policy), [series](/influxdb/v0.13/concepts/glossary/#series), [shard group](/influxdb/v0.13/concepts/glossary/#shard-group)
+Related entries: [series](/influxdb/v0.13/concepts/glossary/#series), [shard group](/influxdb/v0.13/concepts/glossary/#shard-group), [tsm](/influxdb/v0.13/concepts/glossary/#tsm)
 
 ## shard group
 
-XXXXXX
+Data on disk is organized into shard groups, logical containers organized by time and retention policy. Every retention policy within a database has at least one associated shard group. A given shard group contains all data from that retention policy for a certain time interval. The specific interval is determined by the `SHARD DURATION` of the retention policy. See [Retention Policy management](/influxdb/v0.13/query_language/database_management/#retention-policy-management) for more information.
+
+For example, given a retention policy with `SHARD DURATION` set to `1w`, each shard group will span a single week and contain all points with timestamps in that week. 
+
+Shard groups are logical containers for shards, which are actual files on disk.
 
 Related entries: [database](/influxdb/v0.13/concepts/glossary/#database), [retention policy](/influxdb/v0.13/concepts/glossary/#retention-policy), [series](/influxdb/v0.13/concepts/glossary/#series), [shard](/influxdb/v0.13/concepts/glossary/#shard)
 
