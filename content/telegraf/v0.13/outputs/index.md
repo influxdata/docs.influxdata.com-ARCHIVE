@@ -20,6 +20,8 @@ Telegraf allows users to specify multiple output sinks in the configuration file
 * [Datadog](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/datadog)
 * [File](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/file)
 * [Graphite](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/graphite)
+* [Graylog](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/graylog)
+* [Instrumental](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/instrumental)
 * [Kafka](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/kafka)
 * [Librato](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/librato)
 * [MQTT](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/mqtt)
