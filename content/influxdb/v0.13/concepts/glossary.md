@@ -12,11 +12,18 @@ See [InfluxQL Functions](/influxdb/v0.13/query_language/functions/#aggregations)
 
 Related entries: [function](/influxdb/v0.13/concepts/glossary/#function), [selector](/influxdb/v0.13/concepts/glossary/#selector), [transformation](/influxdb/v0.13/concepts/glossary/#transformation)
 
+## batch
+A collection of points in line protocol format, separated by newlines (`0x0A`). 
+A batch of points may be submitted to the database using a single call to the write endpoint. 
+This makes writes much more performant by drastically reducing the HTTP overhead. 
+InfluxData recommends batch sizes of 5,000-10,000 points, although different use cases may be better served by significantly smaller or larger batches.
+
+Related entries: [line protocol](/influxdb/v0.13/concepts/glossary/#line-protocol), [point](/influxdb/v0.13/concepts/glossary/#point)
+
 ## continuous query (CQ)
 An InfluxQL query that runs automatically and periodically within a database.
 Continuous queries require a function in the `SELECT` clause and must include a `GROUP BY time()` clause.
 See [Continuous Queries](/influxdb/v0.13/query_language/continuous_queries/).
-
 
 Related entries: [function](/influxdb/v0.13/concepts/glossary/#function)
 
@@ -102,6 +109,14 @@ Instead, when you write a new point to the same series with the same timestamp a
 For an example, see [Frequently Encountered Issues](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#writing-duplicate-points).
 
 Related entries: [field set](/influxdb/v0.13/concepts/glossary/#field-set), [series](/influxdb/v0.13/concepts/glossary/#series), [timestamp](/influxdb/v0.13/concepts/glossary/#timestamp)
+
+## points per second 
+A deprecated measurement of the rate at which data are persisted to InfluxDB. 
+The schema allows and even encourages the recording of multiple metric vales per point, rendering points per second ambiguous. 
+
+Write speeds are generally quoted in values per second, a more precise metric.
+
+Related entries: [schema](/influxdb/v0.13/concepts/glossary/#schema), [values per second](/influxdb/v0.13/concepts/glossary/#values-per-second)
 
 ## query
 An operation that retrieves data from InfluxDB.
@@ -218,6 +233,13 @@ There are two kinds of users in InfluxDB:
 
 When authentication is enabled, InfluxDB only executes HTTP requests that are sent with a valid username and password.
 See [Authentication and Authorization](/influxdb/v0.13/administration/authentication_and_authorization/).
+
+## values per second 
+The preferred measurement of the rate at which data are persisted to InfluxDB. Write speeds are generally quoted in values per second.
+
+To calculate the values per second rate, multiply the number of points written per second by the number of values stored per point. For example, if the points have four fields each, and a batch of 5000 points is written 10 times per second, then the values per second rate is `4 field values per point * 5000 points per batch * 10 batches per second = 200,000 values per second`.
+
+Related entries: [batch](/influxdb/v0.13/concepts/glossary/#batch), [field](/influxdb/v0.13/concepts/glossary/#field), [points per second](/influxdb/v0.13/concepts/glossary/#points-per-second)
 
 ## wal (Write Ahead Log) 
 The temporary cache for recently written points. To reduce the frequency with which the permanent storage files are accessed, InfluxDB caches new points in the WAL until their total size or age triggers a flush to more permanent storage. This allows for efficient batching of the writes into the TSM. 
