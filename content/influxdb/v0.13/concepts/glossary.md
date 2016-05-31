@@ -178,6 +178,18 @@ There should only be one InfluxDB process per server.
 
 Related entries: [node](/influxdb/v0.13/concepts/glossary/#node)
 
+## shard
+
+XXXXXX
+
+Related entries: [database](/influxdb/v0.13/concepts/glossary/#database), [retention policy](/influxdb/v0.13/concepts/glossary/#retention-policy), [series](/influxdb/v0.13/concepts/glossary/#series), [shard group](/influxdb/v0.13/concepts/glossary/#shard-group)
+
+## shard group
+
+XXXXXX
+
+Related entries: [database](/influxdb/v0.13/concepts/glossary/#database), [retention policy](/influxdb/v0.13/concepts/glossary/#retention-policy), [series](/influxdb/v0.13/concepts/glossary/#series), [shard](/influxdb/v0.13/concepts/glossary/#shard)
+
 ## tag  
 The key-value pair in InfluxDB's data structure that records metadata.
 Tags are an optional part of InfluxDB's data structure but they are useful for storing commonly-queried metadata; tags are indexed so queries on tags are performant.
