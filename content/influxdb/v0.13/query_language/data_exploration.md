@@ -649,10 +649,6 @@ InfluxQL supports two different clauses to limit your query results:
 * `SLIMIT <N>` returns every point from \<N> series in the specified measurement.
 * `LIMIT <N>` followed by `SLIMIT <N>` returns the first \<N> points from \<N> series in the specified measurement.
 
-<dt> Please note that using `LIMIT` and `SLIMIT` **without** a `GROUP BY *` clause can cause unexpected results.
-See [GitHub Issue #4232](https://github.com/influxdb/influxdb/issues/4232) for more information.
-</dt>
-
 ### Limit the number of results returned per series with `LIMIT`
 ---
 Use `LIMIT <N>` with `SELECT` and `GROUP BY *` to return the first \<N> points from each series.

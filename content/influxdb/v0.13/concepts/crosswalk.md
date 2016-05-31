@@ -192,6 +192,3 @@ In addition, time series data is generally written once and rarely updated.
 The result is that InfluxDB is not a full CRUD database but more like a CR-ud,
 prioritizing the performance of creating and reading data over update and destroy,
 and preventing some update and destroy behaviors to make create and read more performant.
-For more information on why InfluxDB made these architectural decisions [Paul Dix](https://github.com/pauldix)
-has an excellent [blog post](https://influxdata.com/blog/influxdb-clustering-design-neither-strictly-cp-or-ap/)
-with more explanation.

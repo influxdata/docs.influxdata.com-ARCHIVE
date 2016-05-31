@@ -40,5 +40,3 @@ there are no cross table joins
 1. No one point is too important.
   * *Pro:* InfluxDB has very powerful tools to deal with aggregate data and large data sets
   * *Con:* Points don't have IDs in the traditional sense, they are differentiated by timestamp and series
-
-For more information on this topic please refer to this [blog post](https://influxdata.com/blog/influxdb-clustering-design-neither-strictly-cp-or-ap/) by Paul Dix.

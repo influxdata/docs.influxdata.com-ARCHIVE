@@ -14,7 +14,6 @@ Where applicable, it links to outstanding issues on GitHub.
 
 * [Understanding the time intervals returned from `GROUP BY time()` queries](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#understanding-the-time-intervals-returned-from-group-by-time-queries)    
 * [Querying after `now()`](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#querying-after-now)  
-* [Querying outside the min/max time range](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#querying-outside-the-min-max-time-range)  
 * [Querying a time range that spans epoch 0](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#querying-a-time-range-that-spans-epoch-0)  
 * [Querying with booleans](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#querying-with-booleans)  
 * [Working with really big or really small integers](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#working-with-really-big-or-really-small-integers)
@@ -96,14 +95,6 @@ The second query asks InfluxDB to return everything from `hillvalley` that occur
 `SELECT * FROM hillvalley`  
 `SELECT * FROM hillvalley WHERE time < now() + 1000d`
 
-## Querying outside the min/max time range
-Queries with a time range that exceeds the minimum or maximum timestamps valid for InfluxDB currently return no results, rather than an error message.
-
-Smallest valid timestamp: `-9023372036854775808` (approximately `1684-01-22T14:50:02Z`)  
-Largest valid timestamp: `9023372036854775807` (approximately `2255-12-09T23:13:56Z`)
-
-<dt> [GitHub Issue #3369](https://github.com/influxdb/influxdb/issues/3369)  </dt>
-
 ## Querying a time range that spans epoch 0
 Currently, InfluxDB can return results for queries that cover either the time range before epoch 0 or the time range after epoch 0, not both.
 A query with a time range that spans epoch 0 returns partial results.
@@ -132,8 +123,6 @@ See [Go builtins](http://golang.org/pkg/builtin/#int64) for more information.
 
 Values close to but within those limits may lead to unexpected results; some functions and operators convert the int64 data type to float64 during calculation which can cause overflow issues.
 
-<dt> [GitHub Issue #3130](https://github.com/influxdb/influxdb/issues/3130)  </dt>
-
 ## Doing math on timestamps
 Currently, it is not possible to execute mathematical operators or functions against timestamp values in InfluxDB.
 All time calculations must be carried out by the client receiving the query results.
@@ -141,8 +130,6 @@ All time calculations must be carried out by the client receiving the query resu
 ## Getting an unexpected epoch 0 timestamp in query returns
 In InfluxDB, epoch 0  (`1970-01-01T00:00:00Z`)  is often used as a null timestamp equivalent.
 If you request a query that has no timestamp to return, such as an aggregation function with an unbounded time range, InfluxDB returns epoch 0 as the timestamp.
-
-<dt> [GitHub Issue #3337](https://github.com/influxdb/influxdb/issues/3337) </dt>
 
 ## Getting large query returns in batches when using the HTTP API
 InfluxDB returns large query results in batches of 10,000 points unless you use the query string parameter `chunk_size` to explicitly set the batch size.
