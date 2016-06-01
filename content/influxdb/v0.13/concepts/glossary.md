@@ -14,8 +14,8 @@ Related entries: [function](/influxdb/v0.13/concepts/glossary/#function), [selec
 
 ## batch
 A collection of points in line protocol format, separated by newlines (`0x0A`). 
-A batch of points may be submitted to the database using a single call to the write endpoint. 
-This makes writes much more performant by drastically reducing the HTTP overhead. 
+A batch of points may be submitted to the database using a single HTTP request to the write endpoint. 
+This makes writes via the HTTP API much more performant by drastically reducing the HTTP overhead. 
 InfluxData recommends batch sizes of 5,000-10,000 points, although different use cases may be better served by significantly smaller or larger batches.
 
 Related entries: [line protocol](/influxdb/v0.13/concepts/glossary/#line-protocol), [point](/influxdb/v0.13/concepts/glossary/#point)
