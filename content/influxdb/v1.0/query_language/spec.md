@@ -593,10 +593,10 @@ show_field_keys_stmt = "SHOW FIELD KEYS" [ from_clause ] .
 #### Examples:
 
 ```sql
--- show field keys from all measurements
+-- show field keys and field value data types from all measurements
 SHOW FIELD KEYS
 
--- show field keys from specified measurement
+-- show field keys and field value data types from specified measurement
 SHOW FIELD KEYS FROM "cpu"
 ```
 

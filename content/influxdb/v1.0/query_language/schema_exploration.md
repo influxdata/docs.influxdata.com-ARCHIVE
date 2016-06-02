@@ -347,14 +347,20 @@ CLI response:
 The measurement `average_temperature` doesn't have the tag key `randtag` so InfluxDB returns nothing.
 
 ## Explore field keys with `SHOW FIELD KEYS`
-The `SHOW FIELD KEYS` query returns the [field keys](/influxdb/v1.0/concepts/glossary/#field-key) across each measurement in the database.
+The `SHOW FIELD KEYS` query returns the [field keys](/influxdb/v1.0/concepts/glossary/#field-key)
+and [field value](/influxdb/v1.0/concepts/glossary/#field-value) data [types](/influxdb/v1.0/write_protocols/write_syntax/#data-types) across each measurement in the database.
 It takes the following form, where the `FROM` clause is optional:
 
 ```sql
 SHOW FIELD KEYS [FROM <measurement_name>]
 ```
 
-Return the field keys across all measurements in the database `NOAA_water_database`:
+> **Note:** A field's type can differ across
+[shards](/influxdb/v1.0/concepts/glossary/#shard).
+If your field has more than one type, `SHOW FIELD KEYS` returns the type that
+occurs first in the following list: float, integer, string, boolean.
+
+Return the field keys and field value data types across all measurements in the database `NOAA_water_database`:
 
 ```sql
 > SHOW FIELD KEYS
@@ -364,29 +370,29 @@ CLI response:
 ```bash
 name: average_temperature
 -------------------------
-fieldKey
-degrees
+fieldKey	  fieldType
+degrees		  float
 
 name: h2o_feet
 --------------
-fieldKey
-level description
-water_level
+fieldKey		          fieldType
+level description	  string
+water_level		       float
 
 name: h2o_pH
 ------------
-fieldKey
-pH
+fieldKey	 fieldType
+pH		      float
 
 name: h2o_quality
 -----------------
-fieldKey
-index
+fieldKey	 fieldType
+index		   float
 
 name: h2o_temperature
 ---------------------
-fieldKey
-degrees
+fieldKey	 fieldType
+degrees		 float
 ```
 
 Return the field keys in the measurement `h2o_feet` in the database `NOAA_water_database`:
@@ -400,7 +406,7 @@ CLI response:
 ```bash
 name: h2o_feet
 --------------
-fieldKey
-level description
-water_level
+fieldKey		          fieldType
+level description	  string
+water_level		       float
 ```
