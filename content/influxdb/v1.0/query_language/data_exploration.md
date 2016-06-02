@@ -91,22 +91,23 @@ While they all return the same result, they get to that result in slightly diffe
 
  Select everything from `h2o_feet` with `*`:
  ```sql
- > SELECT * FROM h2o_feet
+ > SELECT * FROM "h2o_feet"
  ```  
  Select everything from `h2o_feet` by specifying each tag key and field key:
  ```sql
- > SELECT "level description",location,water_level FROM h2o_feet
+ > SELECT "level description","location","water_level" FROM "h2o_feet"
  ```  
 
 * Separate multiple fields and tags of interest with a comma.
 Note that you must specify at least one field in the `SELECT` statement.
 
-* Leave identifiers unquoted unless they start with a digit, contain characters other than `[A-z,0-9,_]`, or if they are an [InfluxQL keyword](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords) - then you need to double quote them.
+* While not always necessary, we recommend that you always double quote identifiers.
+Identifiers **must** be double quoted if they contain characters other than `[A-z,0-9,_]`, or if they are an [InfluxQL keyword](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords).
 Identifiers are database names, retention policy names, user names, measurement names, tag keys, and field keys.
 
  Select everything from `h2o_feet` by fully qualifying the measurement:
  ```sql
- > SELECT * FROM NOAA_water_database."default".h2o_feet
+ > SELECT * FROM "NOAA_water_database"."default"."h2o_feet"
  ```
 * Fully qualify a measurement if you wish to query data from a different database or from a retention policy other than the default [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp).
 A fully qualified measurement takes the following form:  
@@ -136,7 +137,7 @@ Perform basic arithmetic operations on fields that store floats and integers.
 
 Add two to the field `water_level`:
 ```sql
-> SELECT water_level + 2 FROM h2o_feet
+> SELECT "water_level" + 2 FROM "h2o_feet"
 ```
 CLI response:
 ```bash
@@ -152,7 +153,7 @@ time
 
 Another example that works:
 ```sql
-> SELECT (water_level * 2) + 4 from h2o_feet
+> SELECT ("water_level" * 2) + 4 from "h2o_feet"
 ```
 CLI response:
 ```bash
@@ -179,7 +180,7 @@ Please review the [rules for single and double-quoting](/influxdb/v1.0/troublesh
 **Tags**  
 Return data where the tag key `location` has the tag value `santa_monica`:  
 ```sql
-> SELECT water_level FROM h2o_feet WHERE location = 'santa_monica'
+> SELECT "water_level" FROM "h2o_feet" WHERE "location" = 'santa_monica'
 ```
 * Always single quote tag values in queries - they are strings.
 Note that double quotes do not work when specifying tag values and can cause queries to silently fail.
@@ -189,17 +190,17 @@ Note that double quotes do not work when specifying tag values and can cause que
 
 Return data where the tag key `location` has no tag value (more on regular expressions [later](/influxdb/v1.0/query_language/data_exploration/#regular-expressions-in-queries)):
 ```sql
-> SELECT * FROM h2o_feet WHERE location !~ /./
+> SELECT * FROM "h2o_feet" WHERE "location" !~ /./
 ```
 
 Return data where the tag key `location` has a value:
 ```sql
-> SELECT * FROM h2o_feet WHERE location =~ /./
+> SELECT * FROM "h2o_feet" WHERE "location" =~ /./
 ```
 **Time ranges**  
 Return data from the past seven days:
 ```sql
-> SELECT * FROM h2o_feet WHERE time > now() - 7d
+> SELECT * FROM "h2o_feet" WHERE time > now() - 7d
 ```
 * `now()` is the Unix time of the server at the time the query is executed on that server.
 For more on `now()` and other ways to specify time in queries, see [time syntax in queries](/influxdb/v1.0/query_language/data_exploration/#time-syntax-in-queries).
@@ -207,15 +208,15 @@ For more on `now()` and other ways to specify time in queries, see [time syntax 
 **Field values**  
 Return data where the tag key `location` has the tag value `coyote_creek` and the field `water_level` is greater than 8 feet:
 ```sql
-> SELECT * FROM h2o_feet WHERE location = 'coyote_creek' AND  water_level > 8
+> SELECT * FROM "h2o_feet" WHERE "location" = 'coyote_creek' AND  "water_level" > 8
 ```
 Return data where the tag key `location` has the tag value `santa_monica` and the field `level description` equals `'below 3 feet'`:
 ```sql
-> SELECT * FROM h2o_feet WHERE location = 'santa_monica' AND "level description" = 'below 3 feet'
+> SELECT * FROM "h2o_feet" WHERE "location" = 'santa_monica' AND "level description" = 'below 3 feet'
 ```
 Return data where the field values in `water_level` plus `2` are greater than `11.9`:
 ```
-> SELECT * FROM h2o_feet WHERE water_level + 2 > 11.9
+> SELECT * FROM "h2o_feet" WHERE "water_level" + 2 > 11.9
 ```
 
 * Always single quote field values that are strings.
@@ -247,11 +248,10 @@ To successfully implement `GROUP BY`,  append the`GROUP BY` clause to a `SELECT`
 ### GROUP BY tag values
 Calculate the [`MEAN()`](/influxdb/v1.0/query_language/functions/#mean) `water_level` for the different tag values of `location`:
 ```sql
-> SELECT MEAN(water_level) FROM h2o_feet GROUP BY location
+> SELECT MEAN("water_level") FROM "h2o_feet" GROUP BY "location"
 ```
 CLI response:
 ```bash
-> SELECT MEAN(water_level) FROM h2o_feet GROUP BY location
 name: h2o_feet
 tags: location=coyote_creek
 time			               mean
@@ -270,7 +270,7 @@ If you request a query that has no timestamp to return, such as an aggregation f
 
 Calculate the [`MEAN()`](/influxdb/v1.0/query_language/functions/#mean) `index` for every tag set in `h2o_quality`:
 ```sql
-> SELECT MEAN(index) FROM h2o_quality GROUP BY *
+> SELECT MEAN("index") FROM "h2o_quality" GROUP BY *
 ```
 CLI response:
 ```bash
@@ -345,7 +345,7 @@ Example:
 
 [`COUNT()`](/influxdb/v1.0/query_language/functions/#count) the number of `water_level` points between August 19, 2015 at midnight and August 27 at 5:00pm at three day intervals:
 ```sql
-> SELECT COUNT(water_level) FROM h2o_feet WHERE time >= '2015-08-19T00:00:00Z' AND time <= '2015-08-27T17:00:00Z' AND location='coyote_creek' GROUP BY time(3d)
+> SELECT COUNT("water_level") FROM "h2o_feet" WHERE time >= '2015-08-19T00:00:00Z' AND time <= '2015-08-27T17:00:00Z' AND "location"='coyote_creek' GROUP BY time(3d)
 ```
 
 CLI response:
@@ -380,7 +380,7 @@ Examples:
 [`COUNT()`](/influxdb/v1.0/query_language/functions/#count) the number of `water_level` points between August 19, 2015 at midnight and August 27 at 5:00pm at three day intervals, and offset
 the time boundary by one day:
 ```sql
-> SELECT COUNT(water_level) FROM h2o_feet WHERE time >= '2015-08-19T00:00:00Z' AND time <= '2015-08-27T17:00:00Z' AND location='coyote_creek' GROUP BY time(3d,1d)
+> SELECT COUNT("water_level") FROM "h2o_feet" WHERE time >= '2015-08-19T00:00:00Z' AND time <= '2015-08-27T17:00:00Z' AND "location"='coyote_creek' GROUP BY time(3d,1d)
 ```
 
 CLI response:
@@ -410,7 +410,7 @@ August 27 - August 29
 at three day intervals, and offset
 the time boundary by -2 days:
 ```
-> SELECT COUNT(water_level) FROM h2o_feet WHERE time >= '2015-08-19T00:00:00Z' AND time <= '2015-08-27T17:00:00Z' AND location='coyote_creek' GROUP BY time(3d,-2d)
+> SELECT COUNT("water_level") FROM "h2o_feet" WHERE time >= '2015-08-19T00:00:00Z' AND time <= '2015-08-27T17:00:00Z' AND "location"='coyote_creek' GROUP BY time(3d,-2d)
 ```
 
 CLI response:
@@ -444,7 +444,7 @@ Separate multiple `GROUP BY` arguments with a comma.
 
 Calculate the average `water_level` for the different tag values of `location` in the last two weeks at 6 hour intervals:
 ```sql
-> SELECT MEAN(water_level) FROM h2o_feet WHERE time > now() - 2w GROUP BY location,time(6h)
+> SELECT MEAN("water_level") FROM "h2o_feet" WHERE time > now() - 2w GROUP BY "location",time(6h)
 ```
 
 ### The `GROUP BY` clause and `fill()`
@@ -462,48 +462,47 @@ Follow the ✨ in the examples below to see what `fill()` can do.
 
 **GROUP BY without fill()**
 ```sql
-> SELECT MEAN(water_level) FROM h2o_feet WHERE time >= '2015-08-18' AND time < '2015-09-24' GROUP BY time(10d)
+> SELECT MEAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18' AND time < '2015-09-24' GROUP BY time(10d)
 ```
 CLI response:
 ```bash
 name: h2o_feet
 --------------
 time			                 mean
-2015-08-13T00:00:00Z	   4.306212083333323
-2015-08-23T00:00:00Z	   4.318944629367029
-2015-09-02T00:00:00Z	   4.363877681204781
-2015-09-12T00:00:00Z   	4.69811470811633
+2015-08-13T00:00:00Z	   4.306212083333326
+2015-08-23T00:00:00Z	   4.32855
+2015-09-02T00:00:00Z	   4.446952867570385
+2015-09-12T00:00:00Z	   4.701986209010121
 ✨2015-09-22T00:00:00Z
 ```
 **GROUP BY with fill()**  
 Use `fill()` with `-100`:  
 ```sql
-> SELECT MEAN(water_level) FROM h2o_feet WHERE time >= '2015-08-18' AND time < '2015-09-24' GROUP BY time(10d) fill(-100)
+> SELECT MEAN("water_level") FROM h2o_feet WHERE time >= '2015-08-18' AND time < '2015-09-24' GROUP BY time(10d) fill(-100)
 ```
 CLI response:  
 ```bash
 name: h2o_feet
 --------------
-time			                 mean
-2015-08-13T00:00:00Z	   4.306212083333323
-2015-08-23T00:00:00Z	   4.318944629367029
-2015-09-02T00:00:00Z	   4.363877681204781
-2015-09-12T00:00:00Z	   4.698114708116322
-✨2015-09-22T00:00:00Z	 -100
+time			                  mean
+2015-08-13T00:00:00Z	    4.306212083333326
+2015-08-23T00:00:00Z	    4.32855
+2015-09-02T00:00:00Z	    4.446952867570385
+2015-09-12T00:00:00Z	    4.701986209010121
+✨2015-09-22T00:00:00Z	  -100
 ```
 Use `fill()` with `none`:
 ```sql
-> SELECT MEAN(water_level) FROM h2o_feet WHERE time >= '2015-08-18' AND time < '2015-09-24' GROUP BY time(10d) fill(none)
+> SELECT MEAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18' AND time < '2015-09-24' GROUP BY time(10d) fill(none)
 ```
 CLI response:  
 ```bash
 name: h2o_feet
---------------
-time			               mean
-2015-08-13T00:00:00Z	 4.306212083333323
-2015-08-23T00:00:00Z	 4.318944629367029
-2015-09-02T00:00:00Z	 4.363877681204781
-2015-09-12T00:00:00Z	 4.69811470811633
+time			                 mean
+2015-08-13T00:00:00Z	   4.306212083333326
+2015-08-23T00:00:00Z	   4.32855
+2015-09-02T00:00:00Z	   4.446952867570385
+2015-09-12T00:00:00Z	   4.701986209010121
 ✨
 ```
 
@@ -518,7 +517,7 @@ SELECT <field_key> INTO <different_measurement> FROM <current_measurement> [WHER
 
 Write the field `water_level` in `h2o_feet` to a new measurement (`h2o_feet_copy`) in the same database:
 ```sql
-> SELECT water_level INTO h2o_feet_copy FROM h2o_feet WHERE location = 'coyote_creek'
+> SELECT "water_level" INTO "h2o_feet_copy" FROM "h2o_feet" WHERE "location" = 'coyote_creek'
 ```
 
 The CLI response shows the number of points that InfluxDB wrote to `h2o_feet_copy`:
@@ -531,7 +530,7 @@ time			               written
 
 Write the field `water_level` in `h2o_feet` to a new measurement (`h2o_feet_copy`) and to the retention policy `default` in the [already-existing](/influxdb/v1.0/query_language/database_management/#create-a-database-with-create-database) database `where_else`:
 ```sql
-> SELECT water_level INTO where_else."default".h2o_feet_copy FROM h2o_feet WHERE location = 'coyote_creek'
+> SELECT "water_level" INTO "where_else"."default"."h2o_feet_copy" FROM "h2o_feet" WHERE "location" = 'coyote_creek'
 ```
 
 CLI response:
@@ -557,7 +556,7 @@ If you want InfluxDB to automatically query and downsample all future data see [
 
 Calculate the average `water_level` in `santa_monica`, and write the results to a new measurement (`average`) in the same database:
 ```sql
-> SELECT mean(water_level) INTO average FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
+> SELECT mean("water_level") INTO "average" FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
 ```
 
 The CLI response shows the number of points that InfluxDB wrote to the new measurement:
@@ -570,7 +569,7 @@ time			               written
 
 To see the query results, select everything from the new measurement `average` in `NOAA_water_database`:
 ```bash
-> SELECT * FROM average
+> SELECT * FROM "average"
 name: average
 -------------
 time			               mean
@@ -581,7 +580,7 @@ time			               mean
 
 Calculate the average `water_level` and the max `water_level` in `santa_monica`, and write the results to a new measurement (`aggregates`) in a different database (`where_else`):
 ```sql
-> SELECT mean(water_level), max(water_level) INTO where_else."default".aggregates FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
+> SELECT mean("water_level"), max("water_level") INTO "where_else"."default"."aggregates" FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
 ```
 
 CLI response:
@@ -594,7 +593,7 @@ time			               written
 
 Select everything from the new measurement `aggregates` in the database `where_else`:
 ```bash
-> SELECT * FROM where_else."default".aggregates
+> SELECT * FROM "where_else"."default"."aggregates"
 name: aggregates
 ----------------
 time			               max	   mean
@@ -606,7 +605,7 @@ time			               max	   mean
 Calculate the average `degrees` for all temperature measurements (`h2o_temperature` and `average_temperature`) in the `NOAA_water_database` and write the results to new measurements with the same names in a different database (`where_else`).
 `:MEASUREMENT` tells InfluxDB to write the query results to measurements with the same names as those targeted by the query:
 ```sql
-> SELECT mean(degrees) INTO where_else."default".:MEASUREMENT FROM /temperature/ WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
+> SELECT mean("degrees") INTO "where_else"."default".:MEASUREMENT FROM /temperature/ WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
 ```
 
 CLI response:
@@ -619,7 +618,7 @@ time			               written
 
 Select the `mean` field from all new temperature measurements in the database `where_else`.
 ```bash
-> SELECT mean FROM where_else."default"./temperature/
+> SELECT mean FROM "where_else"."default"./temperature/
 name: average_temperature
 -------------------------
 time			               mean
@@ -655,7 +654,7 @@ Use `LIMIT <N>` with `SELECT` and `GROUP BY *` to return the first \<N> points f
 
 Return the three oldest points from each series associated with the measurement `h2o_feet`:
 ```sql
-> SELECT water_level FROM h2o_feet GROUP BY * LIMIT 3
+> SELECT "water_level" FROM "h2o_feet" GROUP BY * LIMIT 3
 ```
 
 CLI response:
@@ -685,7 +684,7 @@ Use `SLIMIT <N>` with `SELECT` and `GROUP BY *` to return every point from \<N> 
 
 Return everything from one of the series associated with the measurement `h2o_feet`:
 ```sql
-> SELECT water_level FROM h2o_feet GROUP BY * SLIMIT 1
+> SELECT "water_level" FROM "h2o_feet" GROUP BY * SLIMIT 1
 ```
 
 CLI response:
@@ -711,7 +710,7 @@ Use `LIMIT <N1>` followed by `SLIMIT <N2>` with `GROUP BY *` to return \<N1> poi
 
 Return the three oldest points from one of the series associated with the measurement `h2o_feet`:
 ```sql
-> SELECT water_level FROM h2o_feet GROUP BY * LIMIT 3 SLIMIT 1
+> SELECT "water_level" FROM "h2o_feet" GROUP BY * LIMIT 3 SLIMIT 1
 ```
 
 CLI response:
@@ -734,7 +733,7 @@ Use `ORDER BY time DESC` to see the newest points by timestamp.
 
 Return the oldest five points from one series **without** `ORDER BY time DESC`:  
 ```sql
-> SELECT water_level FROM h2o_feet WHERE location = 'santa_monica' LIMIT 5
+> SELECT "water_level" FROM "h2o_feet" WHERE "location" = 'santa_monica' LIMIT 5
 ```
 
 CLI response:  
@@ -751,7 +750,7 @@ time			water_level
 
 Now include  `ORDER BY time DESC` to get the newest five points from the same series:  
 ```sql
-> SELECT water_level FROM h2o_feet WHERE location = 'santa_monica' ORDER BY time DESC LIMIT 5
+> SELECT "water_level" FROM "h2o_feet" WHERE "location" = 'santa_monica' ORDER BY time DESC LIMIT 5
 ```
 
 CLI response:  
@@ -768,7 +767,7 @@ time			water_level
 
 Finally, use `GROUP BY` with `ORDER BY time DESC` to return the last five points from each series:  
 ```sql
-> SELECT water_level FROM h2o_feet GROUP BY location ORDER BY time DESC LIMIT 5
+> SELECT "water_level" FROM "h2o_feet" GROUP BY "location" ORDER BY time DESC LIMIT 5
 ```
 
 CLI response:
@@ -801,7 +800,7 @@ time			               water_level
 For example, get the first three points written to a series:
 
 ```sql
-> SELECT water_level FROM h2o_feet WHERE location = 'coyote_creek' LIMIT 3
+> SELECT "water_level" FROM "h2o_feet" WHERE "location" = 'coyote_creek' LIMIT 3
 ```
 
 CLI response:  
@@ -817,7 +816,7 @@ time			               water_level
 Then get the second three points from that same series:
 
 ```sql
-> SELECT water_level FROM h2o_feet WHERE location = 'coyote_creek' LIMIT 3 OFFSET 3
+> SELECT "water_level" FROM "h2o_feet" WHERE "location" = 'coyote_creek' LIMIT 3 OFFSET 3
 ```
 
 CLI response:
@@ -835,7 +834,7 @@ time			               water_level
 
 For example, get the first three points from a single series:
 ```
-> SELECT water_level FROM h2o_feet GROUP BY * LIMIT 3 SLIMIT 1
+> SELECT "water_level" FROM "h2o_feet" GROUP BY * LIMIT 3 SLIMIT 1
 ```
 
 CLI response:
@@ -851,7 +850,7 @@ time			               water_level
 
 Then get the first three points from the next series:
 ```
-> SELECT water_level FROM h2o_feet GROUP BY * LIMIT 3 SLIMIT 1 SOFFSET 1
+> SELECT "water_level" FROM "h2o_feet" GROUP BY * LIMIT 3 SLIMIT 1 SOFFSET 1
 ```
 
 CLI response:
@@ -872,7 +871,7 @@ For example:
 <br>
 <br>
 ```sql
-> SELECT mean(water_level) FROM h2o_feet WHERE time > now() - 2w GROUP BY location,time(24h) fill(none); SELECT count(water_level) FROM h2o_feet WHERE time > now() - 2w GROUP BY location,time(24h) fill(80)
+> SELECT mean("water_level") FROM "h2o_feet" WHERE time > now() - 2w GROUP BY "location",time(24h) fill(none); SELECT count("water_level") FROM "h2o_feet" WHERE time > now() - 2w GROUP BY "location",time(24h) fill(80)
 ```
 
 ## Merge series in queries
@@ -886,7 +885,7 @@ The second series is made of up the measurement `h2o_feet` and the tag key `loca
 The following query automatically merges those two series when it calculates the [average](/influxdb/v1.0/query_language/functions/#mean) `water_level`:
 
 ```sql
-> SELECT MEAN(water_level) FROM h2o_feet
+> SELECT MEAN("water_level") FROM "h2o_feet"
 ```
 
 CLI response:
@@ -894,12 +893,12 @@ CLI response:
 name: h2o_feet
 --------------
 time			               mean
-1970-01-01T00:00:00Z	 4.319097913525821
+1970-01-01T00:00:00Z	 4.442107025822521
 ```
 
 If you only want the `MEAN()` `water_level` for the first series, specify the tag set in the `WHERE` clause:
 ```sql
-> SELECT MEAN(water_level) FROM h2o_feet WHERE location = 'coyote_creek'
+> SELECT MEAN("water_level") FROM "h2o_feet" WHERE "location" = 'coyote_creek'
 ```
 
 CLI response:
@@ -907,7 +906,7 @@ CLI response:
 name: h2o_feet
 --------------
 time			               mean
-1970-01-01T00:00:00Z	 5.296914449406493
+1970-01-01T00:00:00Z	 5.359342451341401
 ```
 
 > **NOTE:** In InfluxDB, [epoch 0](https://en.wikipedia.org/wiki/Unix_time) (`1970-01-01T00:00:00Z`) is often used as a null timestamp equivalent.
@@ -926,12 +925,12 @@ current timestamp.
 
 Query data starting an hour ago and ending `now()`:
 ```sql
-> SELECT water_level FROM h2o_feet WHERE time > now() - 1h
+> SELECT "water_level" FROM "h2o_feet" WHERE time > now() - 1h
 ```
 
 Query data that occur between epoch 0 and 1,000 days from `now()`:  
 ```sql
-> SELECT "level description" FROM h2o_feet WHERE time < now() + 1000d
+> SELECT "level description" FROM "h2o_feet" WHERE time < now() + 1000d
 ```
 
 * Note the whitespace between the operator and the time duration.
@@ -958,16 +957,16 @@ Examples:
 Query data between August 18, 2015 23:00:01.232000000 and September 19, 2015 00:00:00 with the timestamp syntax `YYYY-MM-DD HH:MM:SS.nnnnnnnnn` and  `YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ`:
 
 ```sql
-> SELECT water_level FROM h2o_feet WHERE time > '2015-08-18 23:00:01.232000000' AND time < '2015-09-19'
+> SELECT "water_level" FROM "h2o_feet" WHERE time > '2015-08-18 23:00:01.232000000' AND time < '2015-09-19'
 ```
 ```sql
-> SELECT water_level FROM h2o_feet WHERE time > '2015-08-18T23:00:01.232000000Z' AND time < '2015-09-19'
+> SELECT "water_level" FROM "h2o_feet" WHERE time > '2015-08-18T23:00:01.232000000Z' AND time < '2015-09-19'
 ```
 
 Query data that occur 6 minutes after September 18, 2015 21:24:00:
 
 ```sql
-> SELECT water_level FROM h2o_feet WHERE time > '2015-09-18T21:24:00Z' + 6m
+> SELECT "water_level" FROM "h2o_feet" WHERE time > '2015-09-18T21:24:00Z' + 6m
 ```
 
 Things to note about querying with date time strings:
@@ -985,13 +984,13 @@ Examples:
 
 Return all points that occur after  `2014-01-01 00:00:00`:  
 ```sql
-> SELECT * FROM h2o_feet WHERE time > 1388534400s
+> SELECT * FROM "h2o_feet" WHERE time > 1388534400s
 ```
 
 Return all points that occur 6 minutes after `2015-09-18 21:24:00`:
 
 ```sql
-> SELECT * FROM h2o_feet WHERE time > 24043524m + 6m
+> SELECT * FROM "h2o_feet" WHERE time > 24043524m + 6m
 ```
 
 ## Regular expressions in queries
@@ -1048,7 +1047,7 @@ time			               degrees	 index	 level description	    location	     pH	 ra
 * Alternatively, `SELECT` all of the measurements in `NOAA_water_database` by typing them out and separating each name with a comma , but that could get tedious:
 
     ```sql
-> SELECT * FROM average_temperature,h2o_feet,h2o_pH,h2o_quality,h2o_temperature LIMIT 1
+> SELECT * FROM "average_temperature","h2o_feet","h2o_pH","h2o_quality","h2o_temperature" LIMIT 1
     ```
 
 Select the first three points from every measurement whose name starts with `h2o`:  
@@ -1126,7 +1125,7 @@ The relevant comparators include:
 
 Select the oldest four points from the measurement `h2o_feet` where the value of the tag `location` does not include an `a`:
 ```sql
-> SELECT * FROM h2o_feet WHERE location !~ /.*a.*/ LIMIT 4
+> SELECT * FROM "h2o_feet" WHERE "location" !~ /.*a.*/ LIMIT 4
 ```
 
 CLI response:
@@ -1142,13 +1141,13 @@ time			               level description	    location	     water_level
 
 Select the oldest four points from the measurement `h2o_feet` where the value of the tag `location` includes a `y` or an `m` and `water_level` is greater than zero:
 ```sql
-> SELECT * FROM h2o_feet WHERE (location =~ /.*y.*/ OR location =~ /.*m.*/) AND water_level > 0 LIMIT 4
+> SELECT * FROM "h2o_feet" WHERE ("location" =~ /.*y.*/ OR "location" =~ /.*m.*/) AND "water_level" > 0 LIMIT 4
 ```
 or
 <br>
 <br>
 ```sql
-> SELECT * FROM h2o_feet WHERE location =~ /[ym]/ AND water_level > 0 LIMIT 4
+> SELECT * FROM "h2o_feet" WHERE "location" =~ /[ym]/ AND "water_level" > 0 LIMIT 4
 ```
 
 CLI response:

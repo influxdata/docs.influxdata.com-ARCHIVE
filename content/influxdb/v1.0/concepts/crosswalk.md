@@ -61,39 +61,39 @@ Those same data look like this in InfluxDB:
 ```sql
 name: foodships
 tags: park_id=1, planet=Earth
-time			              #_foodships
-----			              ------------
-2015-04-16T12:00:00Z	0
-2015-04-16T12:00:01Z	3
-2015-04-16T12:00:02Z	15
-2015-04-16T12:00:03Z	15
+time			               #_foodships
+----			               ------------
+2015-04-16T12:00:00Z	 0
+2015-04-16T12:00:01Z	 3
+2015-04-16T12:00:02Z	 15
+2015-04-16T12:00:03Z	 15
 
 name: foodships
 tags: park_id=2, planet=Saturn
-time			              #_foodships
-----			              ------------
-2015-04-16T12:00:00Z	5
-2015-04-16T12:00:01Z	9
-2015-04-16T12:00:02Z	10
-2015-04-16T12:00:03Z	14
+time			               #_foodships
+----			               ------------
+2015-04-16T12:00:00Z	 5
+2015-04-16T12:00:01Z	 9
+2015-04-16T12:00:02Z	 10
+2015-04-16T12:00:03Z	 14
 
 name: foodships
 tags: park_id=3, planet=Jupiter
-time			              #_foodships
-----			              ------------
-2015-04-16T12:00:00Z	20
-2015-04-16T12:00:01Z	21
-2015-04-16T12:00:02Z	21
-2015-04-16T12:00:03Z	20
+time			               #_foodships
+----			               ------------
+2015-04-16T12:00:00Z	 20
+2015-04-16T12:00:01Z	 21
+2015-04-16T12:00:02Z	 21
+2015-04-16T12:00:03Z	 20
 
 name: foodships
 tags: park_id=4, planet=Saturn
-time			              #_foodships
-----			              ------------
-2015-04-16T12:00:00Z	5
-2015-04-16T12:00:01Z	5
-2015-04-16T12:00:02Z	6
-2015-04-16T12:00:03Z	5
+time			               #_foodships
+----			               ------------
+2015-04-16T12:00:00Z	 5
+2015-04-16T12:00:01Z	 5
+2015-04-16T12:00:02Z	 6
+2015-04-16T12:00:03Z	 5
 ```
 
 Referencing the example above, in general:
@@ -126,25 +126,25 @@ to storing and analyzing time series data.
 InfluxQL's `SELECT` statement follows the form of an SQL `SELECT` statement:
 
 ```sql
-SELECT <stuff> FROM <measurement_name> WHERE <some_conditions>
+SELECT "<stuff>" FROM "<measurement_name>" WHERE "<some_conditions>"
 ```
 where `WHERE` is optional.
 To get the InfluxDB output in the section above, you'd enter:
 
 ```sql
-SELECT * FROM foodships
+SELECT * FROM "foodships"
 ```
 
 If you only wanted to see data for the planet `Saturn`, you'd enter:
 
 ```sql
-SELECT * FROM foodships WHERE planet = 'Saturn'
+SELECT * FROM "foodships" WHERE "planet" = 'Saturn'
 ```
 
 If you wanted to see data for the planet `Saturn` after 12:00:01 UTC on April 16, 2015, you'd enter:
 
 ```sql
-SELECT * FROM foodships WHERE planet = 'Saturn' AND time > '2015-04-16 12:00:01'
+SELECT * FROM "foodships" WHERE "planet" = 'Saturn' AND time > '2015-04-16 12:00:01'
 ```
 
 As shown in the example above, InfluxQL allows you to specify the time range of your query in the `WHERE` clause.
@@ -154,7 +154,7 @@ format `YYYY-MM-DD HH:MM:SS.mmm`
 You can also use relative time with `now()` which refers to the server's current timestamp:
 
 ```sql
-SELECT * FROM foodships WHERE time > now() - 1h
+SELECT * FROM "foodships" WHERE time > now() - 1h
 ```
 
 That query outputs the data in the `foodships` measure where the timestamp is newer than the server's current time minus one hour.

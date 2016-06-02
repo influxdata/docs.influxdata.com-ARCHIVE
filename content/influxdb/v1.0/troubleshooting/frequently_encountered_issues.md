@@ -48,7 +48,7 @@ In the example below the first [timestamp](/influxdb/v1.0/concepts/glossary/#tim
 
 Query with a two day `GROUP BY time()` interval:
 <pre><code class="language-sh">
-> SELECT count(water_level) FROM h2o_feet WHERE time >= <u><b>'2015-08-20T00:00:00Z'</b></u> AND time <= '2015-08-24T00:00:00Z' AND location = 'santa_monica' GROUP BY time(2d)
+> SELECT count("water_level") FROM "h2o_feet" WHERE time >= <u><b>'2015-08-20T00:00:00Z'</b></u> AND time <= '2015-08-24T00:00:00Z' AND "location" = 'santa_monica' GROUP BY time(2d)
 </code></pre>
 
 Results:
@@ -92,8 +92,8 @@ You must provide explicit directions in the `WHERE` clause to query points that 
 The first query below asks InfluxDB to return everything from `hillvalley` that occurs between epoch 0 (`1970-01-01T00:00:00Z`) and `now()`.
 The second query asks InfluxDB to return everything from `hillvalley` that occurs between epoch 0 and 1,000 days from `now()`.
 
-`SELECT * FROM hillvalley`  
-`SELECT * FROM hillvalley WHERE time < now() + 1000d`
+`SELECT * FROM "hillvalley"`  
+`SELECT * FROM "hillvalley" WHERE time < now() + 1000d`
 
 ## Querying a time range that spans epoch 0
 Currently, InfluxDB can return results for queries that cover either the time range before epoch 0 or the time range after epoch 0, not both.
@@ -112,7 +112,7 @@ Acceptable boolean syntax differs for data writes and data queries.
 |  `True`,`False` |  👍 |  👍 |
 |  `TRUE`,`FALSE` |  👍 |  👍 |
 
-For example, `SELECT * FROM hamlet WHERE bool=True` returns all points with `bool` set to `TRUE`, but `SELECT * FROM hamlet WHERE bool=T` returns all points with`bool` set to `false`.
+For example, `SELECT * FROM "hamlet" WHERE "bool"=True` returns all points with `bool` set to `TRUE`, but `SELECT * FROM "hamlet" WHERE "bool"=T` returns nothing.
 
 <dt> [GitHub Issue #3939](https://github.com/influxdb/influxdb/issues/3939) </dt>
 
@@ -135,7 +135,9 @@ If you request a query that has no timestamp to return, such as an aggregation f
 InfluxDB returns large query results in batches of 10,000 points unless you use the query string parameter `chunk_size` to explicitly set the batch size.
 For example, get results in batches of 20,000 points with:
 
-`curl -G 'http://localhost:8086/query' --data-urlencode "db=deluge" --data-urlencode "chunk_size=20000" --data-urlencode "q=SELECT * FROM liters"`
+```
+curl -G 'http://localhost:8086/query?db=deluge' --data-urlencode "chunk_size=20000" --data-urlencode 'q=SELECT * FROM "liters"'
+```
 
 <dt> See [GitHub Issue #3242](https://github.com/influxdb/influxdb/issues/3242) for more information on the challenges that this can cause, especially with Grafana visualization.
 </dt>
@@ -143,8 +145,8 @@ For example, get results in batches of 20,000 points with:
 ## Getting the `expected identifier` error, unexpectedly
 Receiving the error `ERR: error parsing query: found [WORD], expected identifier[, string, number, bool]` is often a gentle reminder that you forgot to include something in your query, as is the case in the following examples:
 
-* `SELECT FROM logic WHERE rational = 5` should be `SELECT something FROM logic WHERE rational = 5`  
-* `SELECT * FROM WHERE rational = 5` should be `SELECT * FROM logic WHERE rational = 5`
+* `SELECT FROM "logic" WHERE "rational" = 5` should be `SELECT "something" FROM "logic" WHERE "rational" = 5`  
+* `SELECT * FROM WHERE "rational" = 5` should be `SELECT * FROM "logic" WHERE "rational" = 5`
 
 In other cases, your query seems complete but you receive the same error:
 
@@ -186,7 +188,8 @@ time                  value	 precision_supplied  timestamp_supplied
 Single quote string values (for example, tag values) but do not single quote identifiers (database names, retention policy names, user names, measurement names, tag keys, and field keys).
 
 Double quote identifiers if they start with a digit, contain characters other than `[A-z,0-9,_]`, or if they are an [InfluxQL keyword](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords).
-You can double quote identifiers even if they don't fall into one of those categories but it isn't necessary.
+Double quotes are not required for identifiers if they don't fall into one of
+those categories but we recommend double quoting them anyway.
 
 Examples:
 
@@ -206,9 +209,9 @@ a date time string.
 
 Examples:
 
-Yes: `SELECT water_level FROM h2o_feet WHERE time > '2015-08-18T23:00:01.232000000Z' AND time < '2015-09-19'`
+Yes: `SELECT "water_level" FROM "h2o_feet" WHERE time > '2015-08-18T23:00:01.232000000Z' AND time < '2015-09-19'`
 
-No: `SELECT water_level FROM h2o_feet WHERE time > "2015-08-18T23:00:01.232000000Z" AND time < "2015-09-19"`
+No: `SELECT "water_level" FROM "h2o_feet" WHERE time > "2015-08-18T23:00:01.232000000Z" AND time < "2015-09-19"`
 
 See [Data Exploration](/influxdb/v1.0/query_language/data_exploration/#time-syntax-in-queries) for more on time syntax in queries.
 
@@ -262,7 +265,7 @@ New point: `cpu_load,hostname=server02,az=us_west val_1=5.24 1234567890000000`
 
 After you submit the new point, InfluxDB overwrites `val_1` with the new field value and leaves the field `val_2` alone:
 ```
-> SELECT * FROM cpu_load WHERE time = 1234567890000000
+> SELECT * FROM "cpu_load" WHERE time = 1234567890000000
 name: cpu_load
 --------------
 time			                  az	      hostname	 val_1	 val_2
@@ -279,7 +282,7 @@ To store both points:
 
     After writing the new point to InfluxDB:
     ```
-  > SELECT * FROM cpu_load WHERE time = 1234567890000000
+  > SELECT * FROM "cpu_load" WHERE time = 1234567890000000
   name: cpu_load
   --------------
   time			            az	     hostname	uniq	val_1	val_2
@@ -294,7 +297,7 @@ To store both points:
 
     After writing the new point to InfluxDB:
     ```
-    > SELECT * FROM cpu_load WHERE time >= 1234567890000000 and time <= 1234567890000001
+    > SELECT * FROM "cpu_load" WHERE time >= 1234567890000000 and time <= 1234567890000001
     name: cpu_load
     --------------
     time				             az	      hostname	 val_1	val_2
@@ -338,21 +341,21 @@ Identifiers are database names, retention policy names, user names, measurement 
 <br>
 <br>
 	Write with an unquoted measurement: `INSERT bikes bikes_available=3`  
-	Applicable query: `SELECT * FROM bikes`
+	Applicable query: `SELECT * FROM "bikes"`
 <br>
 <br>
 * Double quote field values that are strings.
 <br>
 <br>
 	Write: `INSERT bikes happiness="level 2"`  
-	Applicable query: `SELECT * FROM bikes WHERE happiness='level 2'`
+	Applicable query: `SELECT * FROM "bikes" WHERE "happiness"='level 2'`
 <br>
 <br>
 * Special characters should be escaped with a backslash and not placed in quotes.
 <br>
 <br>
 	Write: `INSERT wacky va\"ue=4`  
-	Applicable query: `SELECT "va\"ue" FROM wacky`
+	Applicable query: `SELECT "va\"ue" FROM "wacky"`
 
 See the [Line Protocol Syntax](/influxdb/v1.0/write_protocols/write_syntax/) page for more information.
 

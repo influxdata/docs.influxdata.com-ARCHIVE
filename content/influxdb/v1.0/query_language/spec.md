@@ -267,10 +267,10 @@ alter_retention_policy_stmt  = "ALTER RETENTION POLICY" policy_name on_clause
 
 ```sql
 -- Set default retention policy for mydb to 1h.cpu.
-ALTER RETENTION POLICY "1h.cpu" ON mydb DEFAULT
+ALTER RETENTION POLICY "1h.cpu" ON "mydb" DEFAULT
 
 -- Change duration and replication factor.
-ALTER RETENTION POLICY policy1 ON somedb DURATION 1h REPLICATION 4
+ALTER RETENTION POLICY "policy1" ON "somedb" DURATION 1h REPLICATION 4
 ```
 
 ### CREATE CONTINUOUS QUERY
@@ -292,31 +292,31 @@ for_stmt                     = "FOR" duration_lit
 ```sql
 -- selects from default retention policy and writes into 6_months retention policy
 CREATE CONTINUOUS QUERY "10m_event_count"
-ON db_name
+ON "db_name"
 BEGIN
-  SELECT count(value)
-  INTO "6_months".events
-  FROM events
+  SELECT count("value")
+  INTO "6_months"."events"
+  FROM "events"
   GROUP BY time(10m)
 END;
 
 -- this selects from the output of one continuous query in one retention policy and outputs to another series in another retention policy
 CREATE CONTINUOUS QUERY "1h_event_count"
-ON db_name
+ON "db_name"
 BEGIN
-  SELECT sum(count) as count
-  INTO "2_years".events
-  FROM "6_months".events
+  SELECT sum("count") as "count"
+  INTO "2_years"."events"
+  FROM "6_months"."events"
   GROUP BY time(1h)
 END;
 
 -- this customizes the resample interval so the interval is queried every 10s and intervals are resampled until 2m after their start time
 -- when resample is used, at least one of "EVERY" or "FOR" must be used
 CREATE CONTINUOUS QUERY "cpu_mean"
-ON db_name
+ON "db_name"
 RESAMPLE EVERY 10s FOR 2m
 BEGIN
-  SELECT mean(value)
+  SELECT mean("value")
   INTO "cpu_mean"
   FROM "cpu"
   GROUP BY time(1m)
@@ -342,13 +342,13 @@ create_database_stmt = "CREATE DATABASE" ["IF NOT EXISTS"] db_name
 
 ```sql
 -- Create a database called foo
-CREATE DATABASE foo
+CREATE DATABASE "foo"
 
 -- Create a database called bar with a new DEFAULT retention policy and specify the duration, replication, shard group duration, and name of that retention policy
-CREATE DATABASE bar WITH DURATION 1d REPLICATION 1 SHARD DURATION 30m NAME myrp
+CREATE DATABASE "bar" WITH DURATION 1d REPLICATION 1 SHARD DURATION 30m NAME "myrp"
 
 -- Create a database called mydb with a new DEFAULT retention policy and specify the name of that retention policy
-CREATE DATABASE mydb WITH NAME myrp
+CREATE DATABASE "mydb" WITH NAME "myrp"
 ```
 
 ### CREATE RETENTION POLICY
@@ -368,13 +368,13 @@ create_retention_policy_stmt = "CREATE RETENTION POLICY" policy_name on_clause
 
 ```sql
 -- Create a retention policy.
-CREATE RETENTION POLICY "10m.events" ON somedb DURATION 60m REPLICATION 2
+CREATE RETENTION POLICY "10m.events" ON "somedb" DURATION 60m REPLICATION 2
 
 -- Create a retention policy and set it as the DEFAULT.
-CREATE RETENTION POLICY "10m.events" ON somedb DURATION 60m REPLICATION 2 DEFAULT
+CREATE RETENTION POLICY "10m.events" ON "somedb" DURATION 60m REPLICATION 2 DEFAULT
 
 -- Create a retention policy and specify the shard group duration.
-CREATE RETENTION POLICY "10m.events" ON somedb DURATION 60m REPLICATION 2 SHARD DURATION 30m
+CREATE RETENTION POLICY "10m.events" ON "somedb" DURATION 60m REPLICATION 2 SHARD DURATION 30m
 ```
 
 ### CREATE SUBSCRIPTION
@@ -388,10 +388,10 @@ create_subscription_stmt = "CREATE SUBSCRIPTION" subscription_name "ON" db_name 
 #### Examples:
 ```sql
 -- Create a SUBSCRIPTION on database 'mydb' and retention policy 'default' that send data to 'example.com:9090' via UDP.
-CREATE SUBSCRIPTION sub0 ON "mydb"."default" DESTINATIONS ALL 'udp://example.com:9090'
+CREATE SUBSCRIPTION "sub0" ON "mydb"."default" DESTINATIONS ALL 'udp://example.com:9090'
 
 -- Create a SUBSCRIPTION on database 'mydb' and retention policy 'default' that round robins the data to 'h1.example.com:9090' and 'h2.example.com:9090'.
-CREATE SUBSCRIPTION sub0 ON "mydb"."default" DESTINATIONS ANY 'udp://h1.example.com:9090', 'udp://h2.example.com:9090'
+CREATE SUBSCRIPTION "sub0" ON "mydb"."default" DESTINATIONS ANY 'udp://h1.example.com:9090', 'udp://h2.example.com:9090'
 ```
 
 ### CREATE USER
@@ -404,11 +404,11 @@ create_user_stmt = "CREATE USER" user_name "WITH PASSWORD" password
 #### Examples:
 ```sql
 -- Create a normal database user.
-CREATE USER jdoe WITH PASSWORD '1337password'
+CREATE USER "jdoe" WITH PASSWORD '1337password'
 
 -- Create an admin user.
 -- Note: Unlike the GRANT statement, the "PRIVILEGES" keyword is required here.
-CREATE USER jdoe WITH PASSWORD '1337password' WITH ALL PRIVILEGES
+CREATE USER "jdoe" WITH PASSWORD '1337password' WITH ALL PRIVILEGES
 ```
 
 > **Note:** The password string must be wrapped in single quotes.
@@ -422,8 +422,8 @@ delete_stmt = "DELETE" ( from_clause | where_clause | from_clause where_clause )
 #### Examples:
 
 ```
-DELETE FROM cpu
-DELETE FROM cpu WHERE time < '2000-01-01T00:00:00Z'
+DELETE FROM "cpu"
+DELETE FROM "cpu" WHERE time < '2000-01-01T00:00:00Z'
 DELETE WHERE time < '2000-01-01T00:00:00Z'
 ```
 
@@ -436,7 +436,7 @@ drop_continuous_query_stmt = "DROP CONTINUOUS QUERY" query_name "ON" db_name.
 #### Example:
 
 ```sql
-DROP CONTINUOUS QUERY myquery ON mydb
+DROP CONTINUOUS QUERY "myquery" ON "mydb"
 ```
 
 ### DROP DATABASE
@@ -448,7 +448,7 @@ drop_database_stmt = "DROP DATABASE" ["IF EXISTS"] db_name .
 #### Example:
 
 ```sql
-DROP DATABASE mydb
+DROP DATABASE "mydb"
 ```
 
 ### DROP MEASUREMENT
@@ -461,7 +461,7 @@ drop_measurement_stmt = "DROP MEASUREMENT" measurement .
 
 ```sql
 -- drop the cpu measurement
-DROP MEASUREMENT cpu
+DROP MEASUREMENT "cpu"
 ```
 
 ### DROP RETENTION POLICY
@@ -474,7 +474,7 @@ drop_retention_policy_stmt = "DROP RETENTION POLICY" policy_name on_clause .
 
 ```sql
 -- drop the retention policy named 1h.cpu from mydb
-DROP RETENTION POLICY "1h.cpu" ON mydb
+DROP RETENTION POLICY "1h.cpu" ON "mydb"
 ```
 
 ### DROP SERIES
@@ -510,7 +510,7 @@ drop_subscription_stmt = "DROP SUBSCRIPTION" subscription_name "ON" db_name "." 
 #### Example:
 
 ```sql
-DROP SUBSCRIPTION sub0 ON "mydb"."default"
+DROP SUBSCRIPTION "sub0" ON "mydb"."default"
 ```
 
 ### DROP USER
@@ -522,7 +522,7 @@ drop_user_stmt = "DROP USER" user_name .
 #### Example:
 
 ```sql
-DROP USER jdoe
+DROP USER "jdoe"
 ```
 
 ### GRANT
@@ -537,10 +537,10 @@ grant_stmt = "GRANT" privilege [ on_clause ] to_clause
 
 ```sql
 -- grant admin privileges
-GRANT ALL TO jdoe
+GRANT ALL TO "jdoe"
 
 -- grant read access to a database
-GRANT READ ON mydb TO jdoe
+GRANT READ ON "mydb" TO "jdoe"
 ```
 
 ### KILL QUERY
@@ -597,7 +597,7 @@ show_field_keys_stmt = "SHOW FIELD KEYS" [ from_clause ] .
 SHOW FIELD KEYS
 
 -- show field keys from specified measurement
-SHOW FIELD KEYS FROM cpu
+SHOW FIELD KEYS FROM "cpu"
 ```
 
 ### SHOW GRANTS
@@ -610,7 +610,7 @@ show_grants_stmt = "SHOW GRANTS FOR" user_name .
 
 ```sql
 -- show grants for jdoe
-SHOW GRANTS FOR jdoe
+SHOW GRANTS FOR "jdoe"
 ```
 
 ### SHOW MEASUREMENTS
@@ -624,7 +624,7 @@ show_measurements_stmt = "SHOW MEASUREMENTS" [ with_measurement_clause ] [ where
 SHOW MEASUREMENTS
 
 -- show measurements where region tag = 'uswest' AND host tag = 'serverA'
-SHOW MEASUREMENTS WHERE region = 'uswest' AND host = 'serverA'
+SHOW MEASUREMENTS WHERE "region" = 'uswest' AND "host" = 'serverA'
 
 -- show measurements that start with 'h2o'
 SHOW MEASUREMENTS WITH MEASUREMENT =~ /h2o.*/
@@ -653,7 +653,7 @@ show_retention_policies = "SHOW RETENTION POLICIES" on_clause .
 
 ```sql
 -- show all retention policies on a database
-SHOW RETENTION POLICIES ON mydb
+SHOW RETENTION POLICIES ON "mydb"
 ```
 
 ### SHOW SERIES
@@ -718,13 +718,13 @@ show_tag_keys_stmt = "SHOW TAG KEYS" [ from_clause ] [ where_clause ] [ group_by
 SHOW TAG KEYS
 
 -- show all tag keys from the cpu measurement
-SHOW TAG KEYS FROM cpu
+SHOW TAG KEYS FROM "cpu"
 
 -- show all tag keys from the cpu measurement where the region key = 'uswest'
-SHOW TAG KEYS FROM cpu WHERE region = 'uswest'
+SHOW TAG KEYS FROM "cpu" WHERE "region" = 'uswest'
 
 -- show all tag keys where the host key = 'serverA'
-SHOW TAG KEYS WHERE host = 'serverA'
+SHOW TAG KEYS WHERE "host" = 'serverA'
 ```
 
 ### SHOW TAG VALUES
@@ -741,10 +741,10 @@ show_tag_values_stmt = "SHOW TAG VALUES" [ from_clause ] with_tag_clause [ where
 SHOW TAG VALUES WITH KEY = "region"
 
 -- show tag values from the cpu measurement for the region tag
-SHOW TAG VALUES FROM cpu WITH KEY = "region"
+SHOW TAG VALUES FROM "cpu" WITH KEY = "region"
 
 -- show tag values from the cpu measurement for region & host tag keys where service = 'redis'
-SHOW TAG VALUES FROM cpu WITH KEY IN ("region", "host") WHERE service = 'redis'
+SHOW TAG VALUES FROM "cpu" WITH KEY IN ("region", "host") WHERE "service" = 'redis'
 ```
 
 ### SHOW USERS
@@ -770,10 +770,10 @@ revoke_stmt = "REVOKE" privilege [ on_clause ] "FROM" user_name .
 
 ```sql
 -- revoke admin privileges from jdoe
-REVOKE ALL PRIVILEGES FROM jdoe
+REVOKE ALL PRIVILEGES FROM "jdoe"
 
 -- revoke read privileges from jdoe on mydb
-REVOKE READ ON mydb FROM jdoe
+REVOKE READ ON "mydb" FROM "jdoe"
 ```
 
 ### SELECT
@@ -788,10 +788,10 @@ select_stmt = "SELECT" fields from_clause [ into_clause ] [ where_clause ]
 
 ```sql
 -- select mean value from the cpu measurement where region = 'uswest' grouped by 10 minute intervals
-SELECT mean(value) FROM cpu WHERE region = 'uswest' GROUP BY time(10m) fill(0)
+SELECT mean("value") FROM "cpu" WHERE "region" = 'uswest' GROUP BY time(10m) fill(0)
 
 -- select from all measurements beginning with cpu into the same measurement name in the cpu_1h retention policy
-SELECT mean(value) INTO cpu_1h.:MEASUREMENT FROM /cpu.*/
+SELECT mean("value") INTO "cpu_1h".:MEASUREMENT FROM /cpu.*/
 ```
 
 ## Clauses

@@ -15,7 +15,7 @@ To perform a query send a `GET` request to the `/query` endpoint, set the URL pa
 The example below uses the HTTP API to query the same database that you encountered in [Writing Data](/influxdb/v1.0/guides/writing_data/).
 <br>
 ```bash
-curl -GET 'http://localhost:8086/query?pretty=true' --data-urlencode "db=mydb" --data-urlencode "q=SELECT value FROM cpu_load_short WHERE region='us-west'"
+curl -GET 'http://localhost:8086/query?pretty=true' --data-urlencode "db=mydb" --data-urlencode "q=SELECT \"value\" FROM \"cpu_load_short\" WHERE \"region\"='us-west'"
 ```
 
 InfluxDB returns JSON.
@@ -64,7 +64,7 @@ Send multiple queries to InfluxDB in a single API call.
 Simply delimit each query using a semicolon, for example:  
 <br>
 ```bash
-curl -G 'http://localhost:8086/query?pretty=true' --data-urlencode "db=mydb" --data-urlencode "q=SELECT value FROM cpu_load_short WHERE region='us-west';SELECT count(value) FROM cpu_load_short WHERE region='us-west'"
+curl -G 'http://localhost:8086/query?pretty=true' --data-urlencode "db=mydb" --data-urlencode "q=SELECT \"value\" FROM \"cpu_load_short\" WHERE \"region\"='us-west';SELECT count(\"value\") FROM \"cpu_load_short\" WHERE \"region\"='us-west'"
 ```
 
 returns:  
@@ -127,7 +127,7 @@ If you want timestamps in Unix epoch format include in your request the query st
 For example, get epoch in seconds with:  
 <br>
 ```bash
-curl -G 'http://localhost:8086/query' --data-urlencode "db=mydb" --data-urlencode "epoch=s" --data-urlencode "q=SELECT value FROM cpu_load_short WHERE region='us-west'"
+curl -G 'http://localhost:8086/query' --data-urlencode "db=mydb" --data-urlencode "epoch=s" --data-urlencode "q=SELECT \"value\" FROM \"cpu_load_short\" WHERE \"region\"='us-west'"
 ```
 
 #### Authentication
@@ -139,7 +139,7 @@ For large queries, results are returned in batches of 10,000 points unless you u
 For example, get your results in batches of 20,000 points with:  
 <br>
 ```bash
-curl -G 'http://localhost:8086/query' --data-urlencode "db=deluge" --data-urlencode "chunk_size=20000" --data-urlencode "q=SELECT * FROM liters"
+curl -G 'http://localhost:8086/query' --data-urlencode "db=deluge" --data-urlencode "chunk_size=20000" --data-urlencode "q=SELECT * FROM \"liters\""
 ```
 
 ### InfluxQL

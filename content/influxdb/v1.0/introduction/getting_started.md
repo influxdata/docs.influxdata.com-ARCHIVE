@@ -135,7 +135,7 @@ A point with the measurement name of `cpu` and tag `host` has now been written t
 Now we will query for the data we just wrote:
 
 ```sql
-> SELECT host, region, value FROM cpu
+> SELECT "host", "region", "value" FROM "cpu"
 name: cpu
 ---------
 time		    	                     host     	region   value
@@ -158,10 +158,10 @@ Let's try storing another type of data, with two fields in the same measurement:
 To return all fields and tags with a query, you can use the `*` operator:
 
 ```sql
-> SELECT * FROM temperature
+> SELECT * FROM "temperature"
 name: temperature
 -----------------
-time		                        	 external	  internal	machine	type
+time		                        	 external	  internal	 machine	type
 2015-10-21T19:28:08.385013942Z  25	        	37     		unit42  assembly
 
 >
@@ -173,9 +173,9 @@ including support for Go-style regex. For example:
 ```sql
 > SELECT * FROM /.*/ LIMIT 1
 --
-> SELECT * FROM cpu_load_short
+> SELECT * FROM "cpu_load_short"
 --
-> SELECT * FROM cpu_load_short WHERE value > 0.9
+> SELECT * FROM "cpu_load_short" WHERE "value" > 0.9
 ```
 
 This is all you need to know to write data into InfluxDB and query it back.

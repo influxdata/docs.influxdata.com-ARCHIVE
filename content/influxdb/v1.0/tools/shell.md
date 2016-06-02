@@ -111,7 +111,7 @@ pirates
 
 Execute queries that do require a database specification, and change the timestamp precision:
 ```bash
-$ influx -execute 'SELECT * FROM h2o_feet LIMIT 3' -database=NOAA_water_database -precision=rfc3339
+$ influx -execute 'SELECT * FROM "h2o_feet" LIMIT 3' -database="NOAA_water_database" -precision=rfc3339
 name: h2o_feet
 --------------
 time			               level description	    location	     water_level

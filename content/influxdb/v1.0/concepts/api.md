@@ -182,14 +182,14 @@ $ curl -GET 'http://localhost:8086/query?db=mydb&epoch=s' --data-urlencode 'q=SE
 
 Create a database:
 ```
-$ curl -POST 'http://localhost:8086/query' --data-urlencode 'q=CREATE DATABASE mydb'
+$ curl -POST 'http://localhost:8086/query' --data-urlencode 'q=CREATE DATABASE "mydb"'
 
 {"results":[{}]}
 ```
 
 Create a database using HTTP authentication:
 ```
-$ curl -POST 'http://localhost:8086/query?u=myusername&p=mypassword' --data-urlencode 'q=CREATE DATABASE mydb'
+$ curl -POST 'http://localhost:8086/query?u=myusername&p=mypassword' --data-urlencode 'q=CREATE DATABASE "mydb"'
 
 {"results":[{}]}
 ```

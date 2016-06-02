@@ -1,4 +1,4 @@
----
+  ---
 title: Schema Design
 menu:
   influxdb_1:
@@ -61,7 +61,7 @@ In no particular order, we recommend that you:
 
     *Schema 1*
     ```
-    > SELECT mean(value) FROM /^blueberries/
+    > SELECT mean("value") FROM /^blueberries/
     name: blueberries.field-1.region-north
     --------------------------------------
     time			        mean
@@ -77,7 +77,7 @@ In no particular order, we recommend that you:
 
     *Schema 2*
     ```
-    > SELECT mean(value) FROM blueberries
+    > SELECT mean("value") FROM "blueberries"
     name: blueberries
     -----------------
     time			        mean
@@ -103,12 +103,12 @@ In no particular order, we recommend that you:
 
     *Schema 1*
     ```
-    > SELECT mean(value) FROM blueberries WHERE location =~ /north/
+    > SELECT mean("value") FROM "blueberries" WHERE location =~ /north/
     ```
 
     *Schema 2*
     ```
-    > SELECT mean(value) FROM blueberries WHERE region = 'north'
+    > SELECT mean("value") FROM "blueberries" WHERE region = 'north'
     ```
 
 

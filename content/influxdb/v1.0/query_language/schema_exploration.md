@@ -48,27 +48,26 @@ SHOW RETENTION POLICIES ON <database_name>
 
 CLI example:
 ```sql
-> SHOW RETENTION POLICIES ON NOAA_water_database
+> SHOW RETENTION POLICIES ON "NOAA_water_database"
 ```
 
 CLI response:
 ```bash
-name	    duration	 replicaN	 default
-default	 0		       1		       true
+name	    duration	 shardGroupDuration	 replicaN	 default
+default	 0		       168h0m0s		          1		       true
 ```
 
 The first column of the output contains the names of the different retention policies in the specified database.
-The second column shows the [duration](/influxdb/v1.0/concepts/glossary/#duration) and the third column shows the [replication factor](/influxdb/v1.0/concepts/glossary/#replication-factor) of the retention policy.
-The fourth column specifies if the retention policy is the `DEFAULT` retention policy for the database.
+The second column shows the retention policy's [duration](/influxdb/v1.0/concepts/glossary/#duration) and the third column shows the [shard group](/influxdb/v1.0/concepts/glossary/#shard-group) duration. The fourth column shows the [replication factor](/influxdb/v1.0/concepts/glossary/#replication-factor) of the retention policy and the fifth column specifies if the retention policy is the `DEFAULT` retention policy for the database.
 
 The following example shows a hypothetical CLI response where there are four different retention policies in the database, and where the `DEFAULT` retention policy is `three_days_only`:
 
 ```bash
-name		           duration	 replicaN	 default
-default		        0		       1		       false
-two_days_only	   48h0m0s		 1		       false
-one_day_only	    24h0m0s		 1		       false
-three_days_only	 72h0m0s		 1		       true
+name		           duration	 shardGroupDuration	 replicaN	 default
+default		        0		       168h0m0s		          1		       false
+two_days_only	   48h0m0s		 24h0m0s			          1		       false
+one_day_only	    24h0m0s		 1h0m0s			           1		       false
+three_days_only	 72h0m0s		 24h0m0s			          1		       true
 ```
 
 ## Explore series with `SHOW SERIES`
@@ -113,7 +112,7 @@ The measurement `h2o_quality` has the additional tag key `randtag` with the tag 
 
 Return series for a specific measurement:
 ```sql
-> SHOW SERIES FROM h2o_quality
+> SHOW SERIES FROM "h2o_quality"
 ```
 
 CLI response:
@@ -129,7 +128,7 @@ h2o_quality,location=santa_monica,randtag=3
 
 Return series for a specific measurement and tag set:
 ```sql
-> SHOW SERIES FROM h2o_quality WHERE location = 'coyote_creek'
+> SHOW SERIES FROM "h2o_quality" WHERE "location" = 'coyote_creek'
 ```
 
 CLI response:
@@ -167,7 +166,7 @@ From the output you can see that the database `NOAA_water_database` has five mea
 
 Return measurements where the tag key `randtag` equals `1`:
 ```sql
-> SHOW MEASUREMENTS WHERE randtag = '1'
+> SHOW MEASUREMENTS WHERE "randtag" = '1'
 ```
 
 CLI response:
@@ -182,7 +181,7 @@ Only the measurement `h2o_quality` contains the tag set `randtag = 1`.
 
 Use a regular expression to return measurements where the tag key `randtag` is a digit:
 ```sql
-SHOW MEASUREMENTS WHERE randtag =~ /\d/
+> SHOW MEASUREMENTS WHERE "randtag" =~ /\d/
 ```
 
 CLI response:
@@ -254,7 +253,7 @@ Notice that each of the five measurements has the tag key `location` and that th
 
 Return the tag keys for a specific measurement:
 ```sql
-> SHOW TAG KEYS FROM h2o_temperature
+> SHOW TAG KEYS FROM "h2o_temperature"
 ```
 
 CLI response:
@@ -338,7 +337,7 @@ location	 santa_monica
 
 Return the tag values for the tag key `randtag` for a specific measurement in the `NOAA_water_database` database:
 ```sql
-> SHOW TAG VALUES FROM average_temperature WITH KEY = "randtag"
+> SHOW TAG VALUES FROM "average_temperature" WITH KEY = "randtag"
 ```
 
 CLI response:
@@ -393,7 +392,7 @@ degrees
 Return the field keys in the measurement `h2o_feet` in the database `NOAA_water_database`:
 
 ```sql
-> SHOW FIELD KEYS FROM h2o_feet
+> SHOW FIELD KEYS FROM "h2o_feet"
 ```
 
 CLI response:

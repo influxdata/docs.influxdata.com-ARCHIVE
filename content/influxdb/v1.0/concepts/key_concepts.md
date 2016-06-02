@@ -122,8 +122,8 @@ This means that queries on tags are faster and that tags are ideal for storing c
 
 > Say you notice that most of your queries focus on the values of the field keys `honeybees` and `butterflies`:
 
-> `SELECT * FROM census WHERE butterflies = 1`  
-> `SELECT * FROM census WHERE honeybees = 23`
+> `SELECT * FROM "census" WHERE "butterflies" = 1`  
+> `SELECT * FROM "census" WHERE "honeybees" = 23`
 
 > Because fields aren't indexed, InfluxDB scans every value of `butterflies`  in the first query and every value of `honeybees` in the second query before it provides a response.
 That behavior can hurt query response times - especially on a much larger scale.

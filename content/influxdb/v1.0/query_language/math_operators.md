@@ -18,19 +18,19 @@ For example `5 / 2 + 3 * 2 =  (5 / 2) + (3 * 2)` and `5 + 2 * 3 - 2 = 5 + (2 * 3
 You can add a constant.
 
 ```sql
-SELECT A + 5 FROM add
+SELECT "A" + 5 FROM "add"
 ```
 ```sql
-SELECT * FROM add WHERE A + 5 > 10
+SELECT * FROM "add" WHERE "A" + 5 > 10
 ```
 
 You can add together other field keys.
 
 ```sql
-SELECT A + B FROM add
+SELECT "A" + "B" FROM "add"
 ```
 ```sql
-SELECT * FROM add WHERE A + B >= 10
+SELECT * FROM "add" WHERE "A" + "B" >= 10
 ```
 
 ### Subtraction
@@ -38,19 +38,19 @@ SELECT * FROM add WHERE A + B >= 10
 You can subtract a constant.
 
 ```sql
-SELECT 1 - A FROM sub
+SELECT 1 - "A" FROM "sub"
 ```
 ```sql
-SELECT * FROM sub WHERE 1 - A <= 3
+SELECT * FROM "sub" WHERE 1 - "A" <= 3
 ```
 
 You can subtract one field key from another field key.
 
 ```sql
-SELECT A - B FROM sub
+SELECT "A" - "B" FROM "sub"
 ```
 ```sql
-SELECT * FROM sub WHERE A - B <= 1
+SELECT * FROM "sub" WHERE "A" - "B" <= 1
 ```
 
 ### Multiplication
@@ -58,58 +58,58 @@ SELECT * FROM sub WHERE A - B <= 1
 You can multiply by a constant.
 
 ```sql
-SELECT 10 * A FROM mult
+SELECT 10 * "A" FROM "mult"
 ```
 ```sql
-SELECT * FROM mult WHERE A * 10 >= 20
+SELECT * FROM "mult" WHERE "A" * 10 >= 20
 ```
 
 You can multiply by other field keys.
 
 ```sql
-SELECT A * B * C FROM mult
+SELECT "A" * "B" * "C" FROM "mult"
 ```
 ```sql
-SELECT * FROM mult WHERE A * B <= 80
+SELECT * FROM "mult" WHERE "A" * "B" <= 80
 ```
 
 Multiplication distributes across other operators
 
 ```sql
-SELECT 10 * (A + B + C) FROM mult
+SELECT 10 * ("A" + "B" + "C") FROM "mult"
 ```
 
 ```sql
-SELECT 10 * (A - B - C) FROM mult
+SELECT 10 * ("A" - "B" - "C") FROM "mult"
 ```
 
 ```sql
-SELECT 10 * (A + B - C) FROM mult
+SELECT 10 * ("A" + "B" - "C") FROM "mult"
 ```
 
 ### Division
 You can divide by a constant.
 
 ```sql
-SELECT 10 / A FROM div
+SELECT 10 / "A" FROM "div"
 ```
 ```sql
-SELECT * FROM div WHERE A / 10 <= 2
+SELECT * FROM "div" WHERE "A" / 10 <= 2
 ```
 
 You can divide by other field keys.
 
 ```sql
-SELECT A / B FROM div
+SELECT "A" / "B" FROM "div"
 ```
 ```sql
-SELECT * FROM div WHERE A / B >= 10
+SELECT * FROM "div" WHERE "A" / "B" >= 10
 ```
 
 Division distributes across other operators
 
 ```sql
-SELECT 10 / (A + B + C) FROM mult
+SELECT 10 / ("A" + "B" + "C") FROM "mult"
 ```
 
 ## Operators with Functions
@@ -120,11 +120,11 @@ Note that InfluxDB only allows functions in the `SELECT` clause.
 For example
 
 ```sql
-SELECT 10 * mean(value) FROM cpu
+SELECT 10 * mean("value") FROM "cpu"
 ```
 will work, however
 ```sql
-SELECT mean(10 * value) FROM cpu
+SELECT mean(10 * "value") FROM "cpu"
 ```
 will yield a parse error.
 

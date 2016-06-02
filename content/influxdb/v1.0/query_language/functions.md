@@ -51,7 +51,7 @@ Examples:
 * Count the number of non-null field values in the `water_level` field:
 
 ```sql
-> SELECT COUNT(water_level) FROM h2o_feet
+> SELECT COUNT("water_level") FROM "h2o_feet"
 ```
 
 CLI response:
@@ -67,7 +67,7 @@ time			               count
 * Count the number of non-null field values in the `water_level` field at four-day intervals:
 
 ```sql
-> SELECT COUNT(water_level) FROM h2o_feet WHERE time >= '2015-08-18T00:00:00Z' AND time < '2015-09-18T17:00:00Z' GROUP BY time(4d)
+> SELECT COUNT("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time < '2015-09-18T17:00:00Z' GROUP BY time(4d)
 ```
 
 CLI response:
@@ -95,7 +95,7 @@ time			               count
 
 > `COUNT()` without `fill(none)`:
 ```bash
-> SELECT COUNT(water_level) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-09-18T21:41:00Z' AND time <= '2015-09-18T22:41:00Z' GROUP BY time(30m)
+> SELECT COUNT("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-09-18T21:41:00Z' AND time <= '2015-09-18T22:41:00Z' GROUP BY time(30m)
 name: h2o_feet
 --------------
 time			               count
@@ -106,7 +106,7 @@ time			               count
 
 > `COUNT()` with `fill(none)`:
 ```bash
-> SELECT COUNT(water_level) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-09-18T21:41:00Z' AND time <= '2015-09-18T22:41:00Z' GROUP BY time(30m) fill(none)
+> SELECT COUNT("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-09-18T21:41:00Z' AND time <= '2015-09-18T22:41:00Z' GROUP BY time(30m) fill(none)
 name: h2o_feet
 --------------
 time			               count
@@ -126,7 +126,7 @@ Examples:
 * Select the unique field values in the `level description` field:
 
 ```sql
-> SELECT DISTINCT("level description") FROM h2o_feet
+> SELECT DISTINCT("level description") FROM "h2o_feet"
 ```
 
 CLI response:
@@ -148,7 +148,7 @@ The timestamp reflects the first time the field value appears in the data.
 * Select the unique field values in the `level description` field grouped by the `location` tag:
 
 ```sql
-> SELECT DISTINCT("level description") FROM h2o_feet GROUP BY location
+> SELECT DISTINCT("level description") FROM "h2o_feet" GROUP BY "location"
 ```
 
 CLI response:
@@ -175,7 +175,7 @@ time			                distinct
 * Nest `DISTINCT()` in [`COUNT()`](/influxdb/v1.0/query_language/functions/#count) to get the number of unique field values in `level description` grouped by the `location` tag:
 
 ```sql
-> SELECT COUNT(DISTINCT("level description")) FROM h2o_feet GROUP BY location
+> SELECT COUNT(DISTINCT("level description")) FROM "h2o_feet" GROUP BY "location"
 ```
 
 CLI response:
@@ -211,7 +211,7 @@ Examples:
 * Calculate the average value of the `water_level` field:
 
 ```sql
-> SELECT MEAN(water_level) FROM h2o_feet
+> SELECT MEAN("water_level") FROM "h2o_feet"
 ```
 
 CLI response:
@@ -233,7 +233,7 @@ those small discrepancies.
 * Calculate the average value in the field `water_level` at four-day intervals:
 
 ```sql
-> SELECT MEAN(water_level) FROM h2o_feet WHERE time >= '2015-08-18T00:00:00Z' AND time < '2015-09-18T17:00:00Z' GROUP BY time(4d)
+> SELECT MEAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time < '2015-09-18T17:00:00Z' GROUP BY time(4d)
 ```
 
 CLI response:
@@ -267,7 +267,7 @@ Examples:
 * Select the median value in the field `water_level`:
 
 ```sql
-> SELECT MEDIAN(water_level) from h2o_feet
+> SELECT MEDIAN("water_level") FROM "h2o_feet"
 ```
 
 CLI response:
@@ -283,7 +283,7 @@ time			               median
 * Select the median value of `water_level` between August 18, 2015 at 00:00:00 and August 18, 2015 at 00:30:00 grouped by the `location` tag:
 
 ```sql
-> SELECT MEDIAN(water_level) FROM h2o_feet WHERE time >= '2015-08-18T00:00:00Z' AND time < '2015-08-18T00:36:00Z' GROUP BY location
+> SELECT MEDIAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time < '2015-08-18T00:36:00Z' GROUP BY "location"
 ```
 
 CLI response:
@@ -313,7 +313,7 @@ Examples:
 * Calculate the difference between the minimum and maximum values across all values in the `water_level` field:
 
 ```sql
-> SELECT SPREAD(water_level) FROM h2o_feet
+> SELECT SPREAD("water_level") FROM "h2o_feet"
 ```
 
 CLI response:
@@ -335,7 +335,7 @@ those small discrepancies.
 * Calculate the difference between the minimum and maximum values in the field `water_level` for a specific tag and time range and at 30 minute intervals:
 
 ```sql
-> SELECT SPREAD(water_level) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-09-18T17:00:00Z' AND time < '2015-09-18T20:30:00Z' GROUP BY time(30m)
+> SELECT SPREAD("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-09-18T17:00:00Z' AND time < '2015-09-18T20:30:00Z' GROUP BY time(30m)
 ```
 
 CLI response:
@@ -365,7 +365,7 @@ Examples:
 * Calculate the sum of the values in the `water_level` field:
 
 ```sql
-> SELECT SUM(water_level) FROM h2o_feet
+> SELECT SUM("water_level") FROM "h2o_feet"
 ```
 
 CLI response:
@@ -387,7 +387,7 @@ those small discrepancies.
 * Calculate the sum of the `water_level` field grouped by five-day intervals:
 
 ```sql
-> SELECT SUM(water_level) FROM h2o_feet WHERE time >= '2015-08-18T00:00:00Z' AND time < '2015-09-18T17:00:00Z' GROUP BY time(5d)
+> SELECT SUM("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time < '2015-09-18T17:00:00Z' GROUP BY time(5d)
 ```
 
 CLI response:
@@ -417,7 +417,7 @@ Examples:
 * Select the smallest three values of `water_level`:
 
 ```sql
-> SELECT BOTTOM(water_level,3) FROM h2o_feet
+> SELECT BOTTOM("water_level",3) FROM "h2o_feet"
 ```
 
 CLI response:
@@ -433,7 +433,7 @@ time			               bottom
 * Select the smallest three values of `water_level` and include the relevant `location` tag in the output:
 
 ```sql
-> SELECT BOTTOM(water_level,3),location FROM h2o_feet
+> SELECT BOTTOM("water_level",3),"location" FROM "h2o_feet"
 ```
 
 ```bash
@@ -448,7 +448,7 @@ time			               bottom	 location
 * Select the smallest value of `water_level` within each tag value of `location`:
 
 ```sql
-> SELECT BOTTOM(water_level,location,2) FROM h2o_feet
+> SELECT BOTTOM("water_level","location",2) FROM "h2o_feet"
 ```
 
 CLI response:
@@ -469,7 +469,7 @@ To demonstrate this behavior, see the results of the above example query where `
 
 >
 ```sql
-SELECT BOTTOM(water_level,location,3) FROM h2o_feet
+SELECT BOTTOM("water_level","location",3) FROM "h2o_feet"
 ```
 
 > CLI response:
@@ -489,7 +489,7 @@ time			               bottom	 location
 
 >
 ```sql
-> SELECT BOTTOM(water_level,location,1) FROM h2o_feet
+> SELECT BOTTOM("water_level","location",1) FROM "h2o_feet"
 ```
 
 > CLI response:
@@ -507,7 +507,7 @@ time			               bottom	 location
 * Select the smallest two values of `water_level` between August 18, 2015 at 4:00:00 and August 18, 2015 at 4:18:00 for every tag value of `location`:
 
 ```sql
-> SELECT BOTTOM(water_level,2) FROM h2o_feet WHERE time >= '2015-08-18T04:00:00Z' AND time < '2015-08-18T04:24:00Z' GROUP BY location
+> SELECT BOTTOM("water_level",2) FROM "h2o_feet" WHERE time >= '2015-08-18T04:00:00Z' AND time < '2015-08-18T04:24:00Z' GROUP BY "location"
 ```
 
 CLI response:
@@ -531,7 +531,7 @@ time			               bottom
 * Select the smallest two values of `water_level` between August 18, 2015 at 4:00:00 and August 18, 2015 at 4:18:00 in `santa_monica`:
 
 ```sql
-> SELECT BOTTOM(water_level,2) FROM h2o_feet WHERE time >= '2015-08-18T04:00:00Z' AND time < '2015-08-18T04:24:00Z' AND location = 'santa_monica'
+> SELECT BOTTOM("water_level",2) FROM "h2o_feet" WHERE time >= '2015-08-18T04:00:00Z' AND time < '2015-08-18T04:24:00Z' AND "location" = 'santa_monica'
 ```
 
 CLI response:
@@ -557,7 +557,7 @@ Examples:
 * Select the oldest value of the field `water_level` where the `location` is `santa_monica`:
 
 ```sql
-> SELECT FIRST(water_level) FROM h2o_feet WHERE location = 'santa_monica'
+> SELECT FIRST("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica'
 ```
 
 CLI response:
@@ -573,7 +573,7 @@ time			               first
 `location` tag:
 
 ```sql
-> SELECT FIRST(water_level),location FROM h2o_feet WHERE time >= '2015-08-18T00:42:00Z' and time <= '2015-08-18T00:54:00Z'
+> SELECT FIRST("water_level"),"location" FROM "h2o_feet" WHERE time >= '2015-08-18T00:42:00Z' and time <= '2015-08-18T00:54:00Z'
 ```
 
 CLI response:
@@ -587,7 +587,7 @@ time			               first	 location
 * Select the oldest values of the field `water_level` grouped by the `location` tag:
 
 ```sql
-> SELECT FIRST(water_level) FROM h2o_feet GROUP BY location
+> SELECT FIRST("water_level") FROM "h2o_feet" GROUP BY "location"
 ```
 
 CLI response:
@@ -616,7 +616,7 @@ Examples:
 * Select the newest value of the field `water_level` where the `location` is `santa_monica`:
 
 ```sql
-> SELECT LAST(water_level) FROM h2o_feet WHERE location = 'santa_monica'
+> SELECT LAST("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica'
 ```
 
 CLI response:
@@ -632,7 +632,7 @@ time			               last
 `location` tag:
 
 ```sql
-> SELECT LAST(water_level),location FROM h2o_feet WHERE time >= '2015-08-18T00:42:00Z' and time <= '2015-08-18T00:54:00Z'
+> SELECT LAST("water_level"),"location" FROM "h2o_feet" WHERE time >= '2015-08-18T00:42:00Z' and time <= '2015-08-18T00:54:00Z'
 ```
 
 CLI response:
@@ -646,7 +646,7 @@ time			               last	  location
 * Select the newest values of the field `water_level` grouped by the `location` tag:
 
 ```sql
-> SELECT LAST(water_level) FROM h2o_feet GROUP BY location
+> SELECT LAST("water_level") FROM "h2o_feet" GROUP BY "location"
 ```
 
 CLI response:
@@ -679,7 +679,7 @@ Examples:
 * Select the maximum `water_level` in the measurement `h2o_feet`:
 
 ```sql
-> SELECT MAX(water_level) FROM h2o_feet
+> SELECT MAX("water_level") FROM "h2o_feet"
 ```
 
 CLI response:
@@ -694,7 +694,7 @@ time			               max
 relevant `location` tag:
 
 ```sql
-> SELECT MAX(water_level),location FROM h2o_feet
+> SELECT MAX("water_level"),"location" FROM "h2o_feet"
 ```
 
 CLI response:
@@ -708,7 +708,7 @@ time			               max	   location
 * Select the maximum `water_level` in the measurement `h2o_feet` between August 18, 2015 at midnight and August 18, 2015 at 00:48 grouped at 12 minute intervals and by the `location` tag:
 
 ```sql
-> SELECT MAX(water_level) FROM h2o_feet WHERE time >= '2015-08-18T00:00:00Z' AND time < '2015-08-18T00:54:00Z' GROUP BY time(12m), location
+> SELECT MAX("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time < '2015-08-18T00:54:00Z' GROUP BY time(12m), "location"
 ```
 
 CLI response:
@@ -746,7 +746,7 @@ Examples:
 * Select the minimum `water_level` in the measurement `h2o_feet`:
 
 ```sql
-> SELECT MIN(water_level) FROM h2o_feet
+> SELECT MIN("water_level") FROM "h2o_feet"
 ```
 
 CLI response:
@@ -761,7 +761,7 @@ time			               min
 relevant `location` tag:
 
 ```sql
-> SELECT MIN(water_level),location FROM h2o_feet
+> SELECT MIN("water_level"),"location" FROM "h2o_feet"
 ```
 
 CLI response:
@@ -775,7 +775,7 @@ time			              min	   location
 * Select the minimum `water_level` in the measurement `h2o_feet` between August 18, 2015 at midnight and August 18, at 00:48 grouped at 12 minute intervals and by the `location` tag:
 
 ```sql
-> SELECT MIN(water_level) FROM h2o_feet WHERE time >= '2015-08-18T00:00:00Z' AND time < '2015-08-18T00:54:00Z' GROUP BY time(12m), location
+> SELECT MIN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time < '2015-08-18T00:54:00Z' GROUP BY time(12m), "location"
 ```
 
 CLI response:
@@ -814,7 +814,7 @@ Examples:
 * Calculate the fifth percentile of the field `water_level` where the tag `location` equals `coyote_creek`:
 
 ```sql
-> SELECT PERCENTILE(water_level,5) FROM h2o_feet WHERE location = 'coyote_creek'
+> SELECT PERCENTILE("water_level",5) FROM "h2o_feet" WHERE "location" = 'coyote_creek'
 ```
 
 CLI response:
@@ -831,7 +831,7 @@ time			               percentile
 relevant `location` tag:
 
 ```sql
-> SELECT PERCENTILE(water_level,5),location FROM h2o_feet
+> SELECT PERCENTILE("water_level",5),"location" FROM "h2o_feet"
 ```
 
 CLI response:
@@ -845,7 +845,7 @@ time	                  percentile	 location
 * Calculate the 100th percentile of the field `water_level` grouped by the `location` tag:
 
 ```sql
-> SELECT PERCENTILE(water_level, 100) FROM h2o_feet GROUP BY location
+> SELECT PERCENTILE("water_level", 100) FROM "h2o_feet" GROUP BY "location"
 ```
 
 CLI response:
@@ -883,7 +883,7 @@ Examples:
 * Select the largest three values of `water_level`:
 
 ```sql
-> SELECT TOP(water_level,3) FROM h2o_feet
+> SELECT TOP("water_level",3) FROM "h2o_feet"
 ```
 
 CLI response:
@@ -899,7 +899,7 @@ time			               top
 * Select the largest three values of `water_level` and include the relevant `location` tag in the output:
 
 ```sql
-> SELECT TOP(water_level,3),location FROM h2o_feet
+> SELECT TOP("water_level",3),"location" FROM "h2o_feet"
 ```
 
 ```bash
@@ -914,7 +914,7 @@ time			               top	   location
 * Select the largest value of `water_level` within each tag value of `location`:
 
 ```sql
-> SELECT TOP(water_level,location,2) FROM h2o_feet
+> SELECT TOP("water_level","location",2) FROM "h2o_feet"
 ```
 
 CLI response:
@@ -935,7 +935,7 @@ To demonstrate this behavior, see the results of the above example query where `
 
 >
 ```sql
-> SELECT TOP(water_level,location,3) FROM h2o_feet
+> SELECT TOP("water_level","location",3) FROM "h2o_feet"
 ```
 
 > CLI response:
@@ -955,7 +955,7 @@ time			               top	   location
 
 >
 ```sql
-> SELECT TOP(water_level,location,1) FROM h2o_feet
+> SELECT TOP("water_level","location",1) FROM "h2o_feet"
 ```
 
 > CLI response:
@@ -973,7 +973,7 @@ time			               top	   location
 * Select the largest two values of `water_level` between August 18, 2015 at 4:00:00 and August 18, 2015 at 4:18:00 for every tag value of `location`:
 
 ```sql
-> SELECT TOP(water_level,2) FROM h2o_feet WHERE time >= '2015-08-18T04:00:00Z' AND time < '2015-08-18T04:24:00Z' GROUP BY location
+> SELECT TOP("water_level",2) FROM "h2o_feet" WHERE time >= '2015-08-18T04:00:00Z' AND time < '2015-08-18T04:24:00Z' GROUP BY "location"
 ```
 
 CLI response:
@@ -997,7 +997,7 @@ time			               top
 * Select the largest two values of `water_level` between August 18, 2015 at 4:00:00 and August 18, 2015 at 4:18:00 in `santa_monica`:
 
 ```sql
-> SELECT TOP(water_level,2) FROM h2o_feet WHERE time >= '2015-08-18T04:00:00Z' AND time < '2015-08-18T04:24:00Z' AND location = 'santa_monica'
+> SELECT TOP("water_level",2) FROM "h2o_feet" WHERE time >= '2015-08-18T04:00:00Z' AND time < '2015-08-18T04:24:00Z' AND "location" = 'santa_monica'
 ```
 
 CLI response:
@@ -1070,7 +1070,7 @@ time			               water_level
 Calculate the rate of change per one second
 
 ```sql
-> SELECT DERIVATIVE(water_level) FROM h2o_feet WHERE location = 'santa_monica' LIMIT 5
+> SELECT DERIVATIVE("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' LIMIT 5
 ```
 
 CLI response:
@@ -1102,7 +1102,7 @@ This returns the rate of change per second from `2015-08-18T00:00:00Z` to `2015-
 Calculate the rate of change per six minutes
 
 ```sql
-> SELECT DERIVATIVE(water_level,6m) FROM h2o_feet WHERE location = 'santa_monica' LIMIT 5
+> SELECT DERIVATIVE("water_level",6m) FROM "h2o_feet" WHERE "location" = 'santa_monica' LIMIT 5
 ```
 
 CLI response:
@@ -1132,7 +1132,7 @@ This returns the rate of change per six minutes from `2015-08-18T00:00:00Z` to `
 Calculate the rate of change per 12 minutes
 
 ```sql
-> SELECT DERIVATIVE(water_level,12m) FROM h2o_feet WHERE location = 'santa_monica' LIMIT 5
+> SELECT DERIVATIVE("water_level",12m) FROM "h2o_feet" WHERE "location" = 'santa_monica' LIMIT 5
 ```
 
 CLI response:
@@ -1165,7 +1165,7 @@ Instead, InfluxDB calculates the rate of change per 12 minutes for each interval
 Select the `MAX()` value at 12 minute intervals and calculate the rate of change per 12 minutes
 
 ```sql
-> SELECT DERIVATIVE(MAX(water_level)) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time < '2015-08-18T00:36:00Z' GROUP BY time(12m)
+> SELECT DERIVATIVE(MAX("water_level")) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time < '2015-08-18T00:36:00Z' GROUP BY time(12m)
 ```
 
 CLI response:
@@ -1204,7 +1204,7 @@ This returns rate of change per 12 minutes for the aggregated data from `2015-08
 Aggregate the data to 18 minute intervals and calculate the rate of change per six minutes
 
 ```sql
-> SELECT DERIVATIVE(SUM(water_level),6m) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time < '2015-08-18T00:36:00Z' GROUP BY time(18m)
+> SELECT DERIVATIVE(SUM("water_level"),6m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time < '2015-08-18T00:36:00Z' GROUP BY time(18m)
 ```
 
 CLI response:
@@ -1267,7 +1267,7 @@ Examples:
 The following examples focus on the field `water_level` in `santa_monica`
 between `2015-08-18T00:00:00Z` and `2015-08-18T00:36:00Z`:
 ```
-> SELECT water_level FROM h2o_feet WHERE location='santa_monica' AND time >= '2015-08-18T00:00:00Z' and time <= '2015-08-18T00:36:00Z'
+> SELECT "water_level" FROM "h2o_feet" WHERE "location"='santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:36:00Z'
 name: h2o_feet
 --------------
 time			                water_level
@@ -1283,7 +1283,7 @@ time			                water_level
 * Calculate the difference between `water_level` values:
 
 ```
-> SELECT DIFFERENCE(water_level) FROM h2o_feet WHERE location='santa_monica' AND time >= '2015-08-18T00:00:00Z' and time <= '2015-08-18T00:36:00Z'
+> SELECT DIFFERENCE("water_level") FROM "h2o_feet" WHERE "location"='santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:36:00Z'
 ```
 
 CLI response:
@@ -1308,7 +1308,7 @@ inaccuracies.
 the difference between those values:
 
 ```
-> SELECT DIFFERENCE(MIN(water_level)) FROM h2o_feet WHERE location='santa_monica' AND time >= '2015-08-18T00:00:00Z' and time <= '2015-08-18T00:36:00Z' GROUP BY time(12m)
+> SELECT DIFFERENCE(MIN("water_level")) FROM "h2o_feet" WHERE "location"='santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:36:00Z' GROUP BY time(12m)
 ```
 
 CLI response:
@@ -1324,7 +1324,7 @@ time			                difference
 To get the values in the `difference` column, InfluxDB first selects the `MIN()`
 values at 12 minute intervals:
 ```
-> SELECT MIN(water_level) FROM h2o_feet WHERE location='santa_monica' AND time >= '2015-08-18T00:00:00Z' and time <= '2015-08-18T00:36:00Z' GROUP BY time(12m)
+> SELECT MIN("water_level") FROM "h2o_feet" WHERE "location"='santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:36:00Z' GROUP BY time(12m)
 name: h2o_feet
 --------------
 time			                min
@@ -1354,7 +1354,7 @@ Examples:
 `h2o_feet`:
 
 ```
-> SELECT ELAPSED(water_level) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' and time <= '2015-08-18T00:24:00Z'
+> SELECT ELAPSED("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:24:00Z'
 ```
 
 CLI Response:
@@ -1372,7 +1372,7 @@ time			                elapsed
 field `h2o_feet`:
 
 ```
-> SELECT ELAPSED(water_level,1m) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' and time <= '2015-08-18T00:24:00Z'
+> SELECT ELAPSED("water_level",1m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:24:00Z'
 ```
 
 CLI Response:
@@ -1393,7 +1393,7 @@ If the query asks for the number of one hour intervals between the
 timestamps, InfluxDB returns `0`:
 >
 ```
-> SELECT ELAPSED(water_level,1h) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' and time <= '2015-08-18T00:24:00Z'
+> SELECT ELAPSED("water_level",1h) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:24:00Z'
 name: h2o_feet
 --------------
 time			                elapsed
@@ -1445,7 +1445,7 @@ Examples:
 The following examples focus on the field `water_level` in `santa_monica`
 between `2015-08-18T00:00:00Z` and `2015-08-18T00:36:00Z`:
 ```
-> SELECT water_level FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' and time <= '2015-08-18T00:36:00Z'
+> SELECT "water_level" FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:36:00Z'
 name: h2o_feet
 --------------
 time			                water_level
@@ -1461,7 +1461,7 @@ time			                water_level
 * Calculate the moving average across every 2 field values:
 
 ```
-> SELECT MOVING_AVERAGE(water_level,2) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' and time <= '2015-08-18T00:36:00Z'
+> SELECT MOVING_AVERAGE("water_level",2) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:36:00Z'
 ```
 
 CLI response:
@@ -1485,7 +1485,7 @@ The first value in the `moving_average` column is the average of `2.064` and
 moving average across every 2 field values:
 
 ```
-> SELECT MOVING_AVERAGE(MIN(water_level),2) FROM h2o_feet WHERE location = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' and time <= '2015-08-18T00:36:00Z' GROUP BY time(12m)
+> SELECT MOVING_AVERAGE(MIN("water_level"),2) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:36:00Z' GROUP BY time(12m)
 ```
 
 CLI response:
@@ -1559,7 +1559,7 @@ Examples:
 * Calculate the standard deviation for the `water_level` field in the measurement `h2o_feet`:
 
 ```sql
-> SELECT STDDEV(water_level) FROM h2o_feet
+> SELECT STDDEV("water_level") FROM "h2o_feet"
 ```
 
 CLI response:
@@ -1581,7 +1581,7 @@ those small discrepancies.
 * Calculate the standard deviation for the `water_level` field between August 18, 2015 at midnight and September 18, 2015 at noon grouped at one week intervals and by the `location` tag:
 
 ```sql
-> SELECT STDDEV(water_level) FROM h2o_feet WHERE time >= '2015-08-18T00:00:00Z' and time < '2015-09-18T12:06:00Z' GROUP BY time(1w), location
+> SELECT STDDEV("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' and time < '2015-09-18T12:06:00Z' GROUP BY time(1w), "location"
 ```
 
 CLI response:
@@ -1614,7 +1614,7 @@ Separate multiple functions in one query with a `,`.
 
 Calculate the [minimum](/influxdb/v1.0/query_language/functions/#min) `water_level` and the [maximum](/influxdb/v1.0/query_language/functions/#max) `water_level` with a single query:
 ```sql
-> SELECT MIN(water_level), MAX(water_level) FROM h2o_feet
+> SELECT MIN("water_level"), MAX("water_level") FROM "h2o_feet"
 ```
 
 CLI response:
@@ -1640,7 +1640,7 @@ If you'd like a different column name change it with an `AS` clause.
 
 Before:
 ```sql
-> SELECT MEAN(water_level) FROM h2o_feet
+> SELECT MEAN("water_level") FROM "h2o_feet"
 ```
 
 CLI response:
@@ -1653,7 +1653,7 @@ time			               mean
 
 After:
 ```sql
-> SELECT MEAN(water_level) AS dream_name FROM h2o_feet
+> SELECT MEAN("water_level") AS "dream_name" FROM "h2o_feet"
 ```
 
 CLI response:
