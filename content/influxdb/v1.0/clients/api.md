@@ -41,6 +41,7 @@ Functionality will vary, and there are, as yet, no standard features that all li
 ## Perl
 - [AnyEvent::InfluxDB](https://github.com/ajgb/anyevent-influxdb) by [ajgb](https://github.com/ajgb)
 - [InfluxDB::LineProtocol](http://search.cpan.org/~domm/InfluxDB-LineProtocol-1.001/) by [domm](http://search.cpan.org/~domm/)
+- [InfluxDB::HTTP](https://github.com/raphaelthomas/InfluxDB-HTTP) by [Raphael Seebacher](https://github.com/raphaelthomas)
 
 ## PHP
 - [InfluxDB PHP](https://github.com/influxdb/influxdb-php) by [thecodeassassin](https://github.com/thecodeassassin)
