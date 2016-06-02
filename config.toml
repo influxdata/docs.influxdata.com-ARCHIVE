@@ -103,45 +103,57 @@ SectionPagesMenu = "products"
     url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/graphite"
     parent = "outputs"
   [[menu.telegraf_013]]
+    name = "Graylog"
+    identifier = "graylog_output"
+    weight = 80
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/graylog"
+    parent = "outputs"
+  [[menu.telegraf_013]]
+    name = "Instrumental"
+    identifier = "instrumental_output"
+    weight = 90
+    url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/instrumental"
+    parent = "outputs"
+  [[menu.telegraf_013]]
     name = "Kafka"
     identifier = "kafka_output"
-    weight = 80
+    weight = 100
     url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/kafka"
     parent = "outputs"
   [[menu.telegraf_013]]
     name = "Librato"
     identifier = "librato_output"
-    weight = 90
+    weight = 110
     url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/librato"
     parent = "outputs"
   [[menu.telegraf_013]]
     name = "MQTT"
     identifier = "mqtt_output"
-    weight = 100
+    weight = 120
     url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/mqtt"
     parent = "outputs"
   [[menu.telegraf_013]]
     name = "NSQ"
     identifier = "nsq_output"
-    weight = 110
+    weight = 130
     url = "ghttps://ithub.com/influxdata/telegraf/tree/master/plugins/outputs/nsq"
     parent = "outputs"
   [[menu.telegraf_013]]
     name = "OpenTSDB"
     identifier = "opentsdb_output"
-    weight = 120
+    weight = 140
     url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/opentsdb"
     parent = "outputs"
   [[menu.telegraf_013]]
     name = "Prometheus"
     identifier = "prometheus_client_output"
-    weight = 130
+    weight = 150
     url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/prometheus_client"
     parent = "outputs"
   [[menu.telegraf_013]]
     name = "Riemann"
     identifier = "riemann_output"
-    weight = 140
+    weight = 160
     url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/riemann"
     parent = "outputs"
 
