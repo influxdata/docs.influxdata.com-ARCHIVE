@@ -191,7 +191,7 @@ Related entries: [series](/influxdb/v0.13/concepts/glossary/#series), [shard gro
 ## shard group
 
 Data on disk are organized into shard groups, logical containers organized by time and retention policy. 
-Every retention policy within a database has at least one associated shard group. 
+Every retention policy that contains data has at least one associated shard group. 
 A given shard group contains all data from that retention policy for a certain time interval. 
 The specific interval is determined by the `SHARD DURATION` of the retention policy. 
 See [Retention Policy management](/influxdb/v0.13/query_language/database_management/#retention-policy-management) for more information.
