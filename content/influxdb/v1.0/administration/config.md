@@ -384,6 +384,14 @@ Set to `true` to enable HTTPS.
 
 The path of the certificate file.
 
+### https-private-key = ""
+
+The separate private key location.
+If only the `https-certificate` is specified, the httpd service will try to load
+the private key from the `https-certificate` file.
+If a separate `https-private-key` file is specified, the httpd service will load
+the private key from the `https-private-key` file.
+
 ### max-row-limit = 10000
 
 ## [[graphite]]
