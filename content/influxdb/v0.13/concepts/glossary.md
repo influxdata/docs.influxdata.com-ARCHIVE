@@ -12,11 +12,18 @@ See [InfluxQL Functions](/influxdb/v0.13/query_language/functions/#aggregations)
 
 Related entries: [function](/influxdb/v0.13/concepts/glossary/#function), [selector](/influxdb/v0.13/concepts/glossary/#selector), [transformation](/influxdb/v0.13/concepts/glossary/#transformation)
 
+## batch
+A collection of points in line protocol format, separated by newlines (`0x0A`). 
+A batch of points may be submitted to the database using a single HTTP request to the write endpoint. 
+This makes writes via the HTTP API much more performant by drastically reducing the HTTP overhead. 
+InfluxData recommends batch sizes of 5,000-10,000 points, although different use cases may be better served by significantly smaller or larger batches.
+
+Related entries: [line protocol](/influxdb/v0.13/concepts/glossary/#line-protocol), [point](/influxdb/v0.13/concepts/glossary/#point)
+
 ## continuous query (CQ)
 An InfluxQL query that runs automatically and periodically within a database.
 Continuous queries require a function in the `SELECT` clause and must include a `GROUP BY time()` clause.
 See [Continuous Queries](/influxdb/v0.13/query_language/continuous_queries/).
-
 
 Related entries: [function](/influxdb/v0.13/concepts/glossary/#function)
 
@@ -103,6 +110,14 @@ For an example, see [Frequently Encountered Issues](/influxdb/v0.13/troubleshoot
 
 Related entries: [field set](/influxdb/v0.13/concepts/glossary/#field-set), [series](/influxdb/v0.13/concepts/glossary/#series), [timestamp](/influxdb/v0.13/concepts/glossary/#timestamp)
 
+## points per second 
+A deprecated measurement of the rate at which data are persisted to InfluxDB. 
+The schema allows and even encourages the recording of multiple metric vales per point, rendering points per second ambiguous. 
+
+Write speeds are generally quoted in values per second, a more precise metric.
+
+Related entries: [point](/influxdb/v0.13/concepts/glossary/#point), [schema](/influxdb/v0.13/concepts/glossary/#schema), [values per second](/influxdb/v0.13/concepts/glossary/#values-per-second)
+
 ## query
 An operation that retrieves data from InfluxDB.
 See [Data Exploration](/influxdb/v0.13/query_language/data_exploration/), [Schema Exploration](/influxdb/v0.13/query_language/schema_exploration/), [Database Management](/influxdb/v0.13/query_language/database_management/).
@@ -163,6 +178,30 @@ There should only be one InfluxDB process per server.
 
 Related entries: [node](/influxdb/v0.13/concepts/glossary/#node)
 
+## shard
+
+A shard is represented by a TSM file on disk. 
+Every shard belongs to one and only one shard group. 
+Multiple shards may exist in a single shard group. 
+Each shard contains a specific set of series. 
+All points falling on a given series in the relevant time range will be stored in the same shard on disk.
+
+Related entries: [series](/influxdb/v0.13/concepts/glossary/#series), [shard group](/influxdb/v0.13/concepts/glossary/#shard-group), [tsm](/influxdb/v0.13/concepts/glossary/#tsm)
+
+## shard group
+
+Data on disk are organized into shard groups, logical containers organized by time and retention policy. 
+Every retention policy that contains data has at least one associated shard group. 
+A given shard group contains all data from that retention policy for a certain time interval. 
+The specific interval is determined by the `SHARD DURATION` of the retention policy. 
+See [Retention Policy management](/influxdb/v0.13/query_language/database_management/#retention-policy-management) for more information.
+
+For example, given a retention policy with `SHARD DURATION` set to `1w`, each shard group will span a single week and contain all points with timestamps in that week. 
+
+Shard groups are logical containers for shards, which are actual files on disk.
+
+Related entries: [database](/influxdb/v0.13/concepts/glossary/#database), [retention policy](/influxdb/v0.13/concepts/glossary/#retention-policy), [series](/influxdb/v0.13/concepts/glossary/#series), [shard](/influxdb/v0.13/concepts/glossary/#shard)
+
 ## tag  
 The key-value pair in InfluxDB's data structure that records metadata.
 Tags are an optional part of InfluxDB's data structure but they are useful for storing commonly-queried metadata; tags are indexed so queries on tags are performant.
@@ -218,6 +257,13 @@ There are two kinds of users in InfluxDB:
 
 When authentication is enabled, InfluxDB only executes HTTP requests that are sent with a valid username and password.
 See [Authentication and Authorization](/influxdb/v0.13/administration/authentication_and_authorization/).
+
+## values per second 
+The preferred measurement of the rate at which data are persisted to InfluxDB. Write speeds are generally quoted in values per second.
+
+To calculate the values per second rate, multiply the number of points written per second by the number of values stored per point. For example, if the points have four fields each, and a batch of 5000 points is written 10 times per second, then the values per second rate is `4 field values per point * 5000 points per batch * 10 batches per second = 200,000 values per second`.
+
+Related entries: [batch](/influxdb/v0.13/concepts/glossary/#batch), [field](/influxdb/v0.13/concepts/glossary/#field), [point](/influxdb/v0.13/concepts/glossary/#point), [points per second](/influxdb/v0.13/concepts/glossary/#points-per-second)
 
 ## wal (Write Ahead Log) 
 The temporary cache for recently written points. To reduce the frequency with which the permanent storage files are accessed, InfluxDB caches new points in the WAL until their total size or age triggers a flush to more permanent storage. This allows for efficient batching of the writes into the TSM. 
