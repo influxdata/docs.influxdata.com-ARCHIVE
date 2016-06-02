@@ -2,7 +2,7 @@
 title: Differences between InfluxDB 0.13 and versions prior to 0.12
 menu:
   influxdb_1:
-    weight: 40
+    weight: 50
     parent: administration
 ---
 

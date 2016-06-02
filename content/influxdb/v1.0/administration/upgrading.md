@@ -3,7 +3,7 @@ title: Upgrading from previous versions
 
 menu:
   influxdb_1:
-    weight: 50
+    weight: 60
     parent: administration
 ---
 

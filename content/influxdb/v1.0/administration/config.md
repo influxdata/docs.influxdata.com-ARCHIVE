@@ -2,7 +2,7 @@
 title: Database Configuration
 menu:
   influxdb_1:
-    weight: 60
+    weight: 70
     parent: administration
 ---
 
