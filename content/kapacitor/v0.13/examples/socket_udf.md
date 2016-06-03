@@ -45,7 +45,7 @@ This example is actually part of the test suite and a Python and Go implementati
 
 ### Lifecycle
 
-Before we write any code lets look at the lifecycle of a socket UDF
+Before we write any code lets look at the lifecycle of a socket UDF:
 
 1. The UDF process is started, independently from Kapacitor.
 2. The process listens on a unix domain socket.
@@ -96,7 +96,7 @@ This above code can be run via `go run main.go`, but at this point it will exit 
 
 ### The Agent
 
-As mentioned early we provide implementation of the communication layer for UDFs, we call this code the `agent`.
+As mentioned earlier, Kapacitor provides an implementation of the communication layer for UDFs called the `agent`.
 Our code need only implement an interface in order to take advantage of the `agent` logic.
 
 The interface we need to implement is as follows:
@@ -182,9 +182,9 @@ func main() {
 }
 ```
 
-Now let's add in each of the method needed to initialize the UDF.
-Remember step #3 of the lifecycle where Kapacitor connects to query basic information about the UDF.
-These next methods implement that behavior.
+Now let's add in each of the methods needed to initialize the UDF. 
+These next methods implement the behavior described in Step 3 of the UDF Lifecycle above,
+where Kapacitor connects to the socket in order to query basic information about the UDF.
 
 Add these methods to the `main.go` file:
 
@@ -215,13 +215,13 @@ func (*mirrorHandler) Init(r *udf.InitRequest) (*udf.InitResponse, error) {
 }
 ```
 
-For now our simple mirroring UDF doesn't need any options so these methods are trivial.
+For now, our simple mirroring UDF doesn't need any options, so these methods are trivial.
 At the end of this example we will modify the code to accept a custom option.
 
-Now that Kapacitor knows which edge types  and options our UDF uses we need to implement the methods
+Now that Kapacitor knows which edge types and options our UDF uses, we need to implement the methods
 for handling data.
 
-Add this method to the `main.go` file which sends back every point it receives to Kapacitor via the agent.
+Add this method to the `main.go` file which sends back every point it receives to Kapacitor via the agent:
 
 ```go
 func (h *mirrorHandler) Point(p *udf.Point) error {
@@ -235,14 +235,14 @@ func (h *mirrorHandler) Point(p *udf.Point) error {
 }
 ```
 
-Notice that the `agent` has a channel for responses this is because your UDF can send data to Kapacitor
-at any time, it does not need to be in response to receiving a point.
+Notice that the `agent` has a channel for responses, this is because your UDF can send data to Kapacitor
+at any time, so it does not need to be in a response to receive a point.
 
-As a result we need to close the channel to let the `agent` know that we will not be sending any more data.
-This can be done via the `Stop` method.
-Once the `agent` calls `Stop` on the `handler` no other methods will be called and the `agent` won't stop until
+As a result, we need to close the channel to let the `agent` know 
+that we will not be sending any more data, which can be done via the `Stop` method.
+Once the `agent` calls `Stop` on the `handler`, no other methods will be called and the `agent` won't stop until
 the channel is closed.
-This gives the UDF the chance to flush out any remaining data it needs to before its shutdown.
+This gives the UDF the chance to flush out any remaining data before it's shutdown:
 
 ```go
 // Stop the handler gracefully.
@@ -252,8 +252,8 @@ func (h *mirrorHandler) Stop() {
 }
 ```
 
-OK, that is the meat of the handler implementation but we are still missing a few methods.
-Specifically the methods around batching and snapshot/restores are missing, but since we don't need them we will just given them trivial implementations.
+Even though we have implemented the majority of the handler implementation, there are still a few missing methods.
+Specifically, the methods around batching and snapshot/restores are missing, but, since we don't need them, we will just give them trivial implementations:
 
 ```go
 // Create a snapshot of the running state of the process.
@@ -279,10 +279,9 @@ func (*mirrorHandler) EndBatch(end *udf.EndBatch) error {
 ### The Server
 
 At this point we have a complete implementation of the `Handler` interface.
-In step #4 of the lifecycle Kapacitor makes a new connection to the UDF for each use in a task.
+In step #4 of the Lifecycle above, Kapacitor makes a new connection to the UDF for each use in a task. Since it's possible that our UDF process can handle multiple connections simultaneously, we need a mechanism for creating a new `agent` and `handler` per connection.
 
-Since it's possible our UDF process can handle multiple connections simultaneously we need a mechanism to create a new `agent` and `handler` per connection.
-A `server` is provided for this purpose which expects an implementation of the `Accepter` interface:
+A `server` is provided for this purpose, which expects an implementation of the `Accepter` interface:
 
 ```go
 type Accepter interface {
@@ -292,9 +291,8 @@ type Accepter interface {
 }
 ```
 
-Here is a simple `accepter` that creates a new `agent` and `mirrorHandler` for each new connection.
-
-Add this to the `main.go` file:
+Here is a simple `accepter` that creates a new `agent` and `mirrorHandler` 
+for each new connection. Add this to the `main.go` file:
 
 ```go
 type accepter struct {
@@ -322,9 +320,8 @@ func (acc *accepter) Accept(conn net.Conn) {
 }
 ```
 
-
-Now with all the pieces in place we can update our `main` function to
-start up the `server`. Replace the main function with:
+Now with all the pieces in place, we can update our `main` function to
+start up the `server`. Replace the previously provided `main` function with:
 
 ```go
 func main() {
@@ -355,11 +352,10 @@ func main() {
 }
 ```
 
-
 ## Start the UDF
 
 At this point we are ready to start the UDF.
-Here is the complete `main.go` file:
+Here is the complete `main.go` file for reference:
 
 ```go
 package main
@@ -494,14 +490,15 @@ func main() {
 }
 ```
 
-Run `go run main.go`, if you get an error about the socket being in use, just delete the socket file and try again.
+Run `go run main.go` to start the UDF. 
+If you get an error about the socket being in use, 
+just delete the socket file and try running the UDF again.
 
+## Configure Kapacitor to Talk to the UDF
 
-## Configure Kapacitor for our UDF
-
-We need to tell Kapacitor where our UDF socket is and give it a name so we can use it.
-Add this to your Kapacitor configuration file.
-
+Now that our UDF is ready, we need to tell Kapacitor
+where our UDF socket is, and give it a name so that we can use it.
+Add this to your Kapacitor configuration file:
 
 ```
 [udf]
@@ -519,7 +516,7 @@ Start up Kapacitor and you should see it connect to your UDF in both the Kapacit
 
 Take an existing task and add `@mirror()` at any point in the TICKscript pipeline to see it in action.
 
-For example:
+Here is an example TICKscript, which will need to be saved to a file:
 
 ```go
 stream
@@ -530,7 +527,7 @@ stream
         .cirt(lambda: "usage_idle" < 30)
 ```
 
-Define the above alert like so:
+Define the above alert from your terminal like so:
 
 ```sh
 kapacitor define mirror_udf_example -type stream -dbrp telegraf.default -tick path/to/above/script.tick
@@ -549,10 +546,10 @@ kapacitor show mirror_udf_example
 ```
 
 
-## Adding a custom field
+## Adding a Custom Field
 
 Now let's change the UDF to add a field to the data.
-We can use the `Info/Init` methods to define and consume an option on the UDF so we can specify the name of the field to add.
+We can use the `Info/Init` methods to define and consume an option on the UDF, so let's specify the name of the field to add.
 
 Update the `mirrorHandler` type and the methods `Info` and `Init` as follows:
 
@@ -621,11 +618,9 @@ func (h *mirrorHandler) Point(p *udf.Point) error {
 }
 ```
 
-
 Restart the UDF process and try it out again.
 Specify which field name and value to use with the `.field(name, value)` method.
 You can add a `|log()` after the `mirror` UDF to see that the new field has indeed been created.
-
 
 ```go
 stream
@@ -640,12 +635,13 @@ stream
 
 ## Summary
 
-At this point you should be able to write custom UDFs to do what ever you need, using either the socket or process based methods.
-UDFs have a wide range of uses from custom downsampling logic as part of a continuous query or custom anomaly detection algorithms or simply a system to massage your data a bit.
+At this point, you should be able to write custom UDFs using either the socket or process-based methods.
+UDFs have a wide range of uses, from custom downsampling logic as part of a continuous query,
+custom anomaly detection algorithms, or simply a system to "massage" your data a bit.
 
 ### Next Steps
 
-If you want to learn more here are a few suggestions:
+If you want to learn more, here are a few places to start:
 
 * Modify the mirror UDF, to function like the [DefaultNode](https://docs.influxdata.com/kapacitor/v0.13/nodes/default_node/).
 	Instead of always overwriting a field, only set it if the field is not absent.
