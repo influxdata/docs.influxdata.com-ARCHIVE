@@ -41,6 +41,7 @@ General tips on query syntax:
 * [Time syntax in queries](/influxdb/v1.0/query_language/data_exploration/#time-syntax-in-queries)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Relative time](/influxdb/v1.0/query_language/data_exploration/#relative-time)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Absolute time](/influxdb/v1.0/query_language/data_exploration/#absolute-time)
+* [Data types and cast operations in queries](#data-types-and-cast-operations-in-queries)
 * [Regular expressions in queries](/influxdb/v1.0/query_language/data_exploration/#regular-expressions-in-queries)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Regular expressions and selecting measurements](/influxdb/v1.0/query_language/data_exploration/#regular-expressions-and-selecting-measurements)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Regular expressions and specifying tags](/influxdb/v1.0/query_language/data_exploration/#regular-expressions-and-specifying-tags)
@@ -86,36 +87,58 @@ SELECT <stuff> FROM <measurement_name> WHERE <some_conditions>
 
 ### The basic `SELECT` statement
 ---
-The following three examples return everything from the measurement `h2o_feet` (see the CLI response at the end of this section).
+The following four examples return everything from the measurement `h2o_feet` (see the CLI response at the end of this section).
 While they all return the same result, they get to that result in slightly different ways and serve to introduce some of the specifics of the `SELECT` syntax:
 
- Select everything from `h2o_feet` with `*`:
- ```sql
- > SELECT * FROM "h2o_feet"
- ```  
- Select everything from `h2o_feet` by specifying each tag key and field key:
- ```sql
- > SELECT "level description","location","water_level" FROM "h2o_feet"
- ```  
-
-* Separate multiple fields and tags of interest with a comma.
-Note that you must specify at least one field in the `SELECT` statement.
-
-* While not always necessary, we recommend that you always double quote identifiers.
-Identifiers **must** be double quoted if they contain characters other than `[A-z,0-9,_]`, or if they are an [InfluxQL keyword](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords).
-Identifiers are database names, retention policy names, user names, measurement names, tag keys, and field keys.
-
- Select everything from `h2o_feet` by fully qualifying the measurement:
+**A**
+```sql
+> SELECT * FROM "h2o_feet"
+```  
+**B**
+```sql
+> SELECT "level description","location","water_level" FROM "h2o_feet"
+```  
+**C**
+```sql
+> SELECT "level description"::field,"location"::tag,"water_level"::field FROM "h2o_feet"
+```
+**D**
  ```sql
  > SELECT * FROM "NOAA_water_database"."default"."h2o_feet"
  ```
-* Fully qualify a measurement if you wish to query data from a different database or from a retention policy other than the default [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp).
-A fully qualified measurement takes the following form:  
-```
-"<database>"."<retention policy>"."<measurement>"
- ```
 
-The CLI response for all three queries:
+Query **A** selects [everything](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#querying-select-with-field-type-discrepancies)
+from `h2o_feet` with `*`.
+
+Queries **B** and **C** select everything from `h2o_feet` by specifying each tag
+key and field key in the measurement.
+Things to note:
+
+* Separate multiple fields and tags of interest with a comma.
+* You must specify at least one field in the `SELECT` statement.
+* While not always necessary, we recommend that you double quote identifiers.
+Identifiers **must** be double quoted if they contain characters other than `[A-z,0-9,_]`, or if they are an [InfluxQL keyword](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords).
+Identifiers are database names, retention policy names, user names, measurement names, tag keys, and field keys.
+
+Query **C** specifies if the identifier is a field or tag by including the
+syntax `<identifier>::<field>` or `<identifier>::<tag>`.
+Include this syntax to differentiate between field keys and tag keys that have
+the same name.
+In addition, you can specify a field's [type](/influxdb/v1.0/write_protocols/write_syntax/#data-types) with the syntax
+`<field_key>::<type>`.
+We'll go into detail about this functionality in the
+[casting section](#data-types-and-cast-operations-in-queries) of this document.
+
+Query **D** selects everything form `h2o_feet` by fully qualifying the measurement
+`h2o_feet`.
+Fully qualify a measurement by specifying its database and
+[retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp) in
+the following form: `"<database>"."<retention policy>"."<measurement>"`.
+Fully qualify a measurement if you wish to query data from a different database
+or from a retention policy other than the `DEFAULT`
+retention policy.
+
+The CLI response for all four queries:
  ```
 name: h2o_feet
 --------------
@@ -1004,6 +1027,61 @@ You can only use regular expressions to match measurements and tags.
 In this section we'll be using all of the measurements in the [sample data](/influxdb/v1.0/query_language/data_exploration/#sample-data):
 `h2o_feet`, `h2o_quality`, `h2o_pH`, `average_temperature`, and `h2o_temperature`.
 Please note that every measurement besides `h2o_feet` is fictional and contains fictional data.
+
+### Data types and cast operations in queries
+
+#### Data types
+
+Field values can be floats, integers, strings, or booleans.
+Specify the relevant field type in a `SELECT` query with the syntax
+`<field_key>::<type>`.
+
+Example:
+
+Specify that the response should contain floats from the field
+`water_level`:
+```
+> SELECT "water_level"::float FROM "h2o_feet" LIMIT 4
+name: h2o_feet
+--------------
+time		                	water_level
+2015-08-18T00:00:00Z	  8.12
+2015-08-18T00:00:00Z	  2.064
+2015-08-18T00:06:00Z	  8.005
+2015-08-18T00:06:00Z	  2.116
+```
+
+> **Note:**  It is possible for field value types to differ across shards.
+Please see
+[Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#querying-select-with-field-type-discrepancies)
+for more information on how InfluxDB handles field value type discrepancies.
+
+#### Cast Operations
+The `<field_key>::<type>` syntax supports casting field values from integers to
+floats or from floats to integers.
+Attempting to cast a float or integer to a string or boolean yields an empty
+response.
+
+Examples:
+
+Specify that the response should contain integers from the field `water_level`:
+```
+> SELECT "water_level"::integer FROM "h2o_feet" LIMIT 4
+name: h2o_feet
+--------------
+time		                	water_level
+2015-08-18T00:00:00Z	  8
+2015-08-18T00:00:00Z	  2
+2015-08-18T00:06:00Z	  8
+2015-08-18T00:06:00Z	  2
+```
+
+Specify that the response should contain strings from the field `water_level`
+(this functionality is not supported):
+```
+> SELECT "water_level"::string FROM "h2o_feet" LIMIT 4
+>
+```
 
 ### Regular expressions and selecting measurements
 ---

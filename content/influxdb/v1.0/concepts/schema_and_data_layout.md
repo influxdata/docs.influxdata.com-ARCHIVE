@@ -110,13 +110,3 @@ In no particular order, we recommend that you:
     ```
     > SELECT mean("value") FROM "blueberries" WHERE region = 'north'
     ```
-
-
-* *Don't use the same name for a field key and tag key*
-
-    You won't be able to query the [tag key](/influxdb/v1.0/concepts/glossary/#tag-key) if the tag key is the same as a [field key](/influxdb/v1.0/concepts/glossary/#field-key) in your schema.
-    Be sure to differentiate your tag keys and field keys.
-
-    <dt>
-    See GitHub Issue [#6519](https://github.com/influxdata/influxdb/issues/6519) for more information.
-    </dt>

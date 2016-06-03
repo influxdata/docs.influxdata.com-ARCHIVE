@@ -70,9 +70,6 @@ Because CQs run on regularly incremented time intervals you don't need to (and s
 > **Note:** If you include a tag in the CQ's `SELECT` clause, InfluxDB changes the tag in `<current_measurement>` to a field in `<different_measurement>`.
 To preserve a tag in `<different_measurement>`, only include the tag key in the CQ's `GROUP BY` clause.
 
-> If you specify a tag in the CQ's `SELECT` clause **and** in the CQ's `GROUP BY` clause, you will not be able to query the data in `<different_measurement>`.
-See GitHub Issue [#4630](https://github.com/influxdata/influxdb/issues/4630) for more information.
-
 #### CQ examples:
 
 * Create a CQ with one function:
