@@ -195,8 +195,8 @@ exist.
 
 ## Retention Policy Management
 The following sections cover how to create, alter, and delete retention policies.
-Note that when you create a database, InfluxDB automatically creates a retention policy named `default` which has infinite retention.
-You may disable that auto-creation in the configuration file.
+Note that when you create a database, InfluxDB automatically creates a retention policy named `autogen` which has infinite retention.
+You may rename that retention policy or disable its auto-creation in the [configuration file](/influxdb/v1.0/administration/config/#meta).
 
 ### Create retention policies with CREATE RETENTION POLICY
 ---

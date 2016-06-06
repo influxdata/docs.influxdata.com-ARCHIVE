@@ -69,12 +69,12 @@ stored. Optional flags also include:
 
 > **Note:** Metastore backups are also included in per-database backups
 
-As a real-world example, you can take a backup of the `default`
+As a real-world example, you can take a backup of the `autogen`
 retention policy for the `telegraf` database since midnight UTC on
 February 1st, 2016 by using the command:
 
 ```
-$ influxd backup -database telegraf -retention default -since 2016-02-01T00:00:00Z /tmp/backup
+$ influxd backup -database telegraf -retention autogen -since 2016-02-01T00:00:00Z /tmp/backup
 2016/02/01 18:02:36 backing up rp=default since 2016-02-01 00:00:00 +0000 UTC
 2016/02/01 18:02:36 backing up metastore to /tmp/backup/meta.01
 2016/02/01 18:02:36 backing up db=telegraf rp=default shard=2 to /tmp/backup/telegraf.default.00002.01 since 2016-02-01 00:00:00 +0000 UTC

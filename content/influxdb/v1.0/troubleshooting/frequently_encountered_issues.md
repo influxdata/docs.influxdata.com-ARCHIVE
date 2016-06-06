@@ -460,7 +460,7 @@ This happens because InfluxDB cannot divide the old, longer shard group into new
 *Example: Moving from an infinite RP to a three day RP*
 
 Figure 1 shows the shard groups for our example database (`example_db`) after 11 days.
-The database uses the automatically generated `default` retention policy with an infinite (`INF`) `DURATION` so each shard group interval is seven days.
+The database uses the automatically generated `autogen` retention policy with an infinite (`INF`) `DURATION` so each shard group interval is seven days.
 On day 11, InfluxDB is no longer writing to `Shard Group 1` and `Shard Group 2` has four days worth of data:
 
 > **Figure 1**
@@ -471,7 +471,7 @@ We do this by [altering](/influxdb/v1.0/query_language/database_management/#modi
 <br>
 <br>
 ```
-> ALTER RETENTION POLICY default ON example_db DURATION 3d
+> ALTER RETENTION POLICY autogen ON example_db DURATION 3d
 ```
 
 At the next [retention policy enforcement check](/influxdb/v1.0/administration/config/#retention), InfluxDB immediately drops `Shard Group 1` because all of its data are older than 3 days.

@@ -54,7 +54,7 @@ CLI example:
 CLI response:
 ```bash
 name	    duration	 shardGroupDuration	 replicaN	 default
-default	 0		       168h0m0s		          1		       true
+autogen	 0		       168h0m0s		          1		       true
 ```
 
 The first column of the output contains the names of the different retention policies in the specified database.
@@ -64,7 +64,7 @@ The following example shows a hypothetical CLI response where there are four dif
 
 ```bash
 name		           duration	 shardGroupDuration	 replicaN	 default
-default		        0		       168h0m0s		          1		       false
+autogen		        0		       168h0m0s		          1		       false
 two_days_only	   48h0m0s		 24h0m0s			          1		       false
 one_day_only	    24h0m0s		 1h0m0s			           1		       false
 three_days_only	 72h0m0s		 24h0m0s			          1		       true

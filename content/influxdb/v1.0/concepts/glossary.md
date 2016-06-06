@@ -136,7 +136,7 @@ Related entries: [duration](/influxdb/v1.0/concepts/glossary/#duration), [node](
 The part of InfluxDB's data structure that describes for how long InfluxDB keeps data (duration), how many copies of those data are stored in the cluster (replication factor), and the time range covered by shard groups (shard group duration).
 RPs are unique per database and along with the measurement and tag set define a series.
 
-When you create a database, InfluxDB automatically creates a retention policy called `default` with an infinite duration, a replication factor set to one, and a shard group duration set to seven days.
+When you create a database, InfluxDB automatically creates a retention policy called `autogen` with an infinite duration, a replication factor set to one, and a shard group duration set to seven days.
 See [Database Management](/influxdb/v1.0/query_language/database_management/#retention-policy-management) for retention policy management.
 
 <dt> Replication factors do not serve a purpose with single node instances.

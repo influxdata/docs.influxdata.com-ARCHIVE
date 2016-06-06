@@ -146,7 +146,7 @@ CREATE CONTINUOUS QUERY <cq_name> ON <database_name> BEGIN SELECT <function>(<st
 <br>
 <br>
 ```sql
-> CREATE CONTINUOUS QUERY "elsewhere" ON "fantasy" BEGIN SELECT mean("value") INTO "reality"."default".:MEASUREMENT FROM /elf/ GROUP BY time(10m) END
+> CREATE CONTINUOUS QUERY "elsewhere" ON "fantasy" BEGIN SELECT mean("value") INTO "reality"."autogen".:MEASUREMENT FROM /elf/ GROUP BY time(10m) END
 ```
 The CQ `elsewhere` automatically calculates the 10 minute average of the field `value` in each `elf` measurement in the database `fantasy`. It writes the results to the already-existing database `reality`, preserving all of the measurement names in `fantasy`.
 
@@ -206,7 +206,7 @@ name	query
 name: fantasy
 -------------
 name		     query
-elsewhere	 CREATE CONTINUOUS QUERY elsewhere ON fantasy BEGIN SELECT mean(value) INTO reality."default".:MEASUREMENT FROM fantasy."default"./cpu/ WHERE cpu = 'cpu-total' GROUP BY time(10m) END
+elsewhere	 CREATE CONTINUOUS QUERY elsewhere ON fantasy BEGIN SELECT mean(value) INTO reality."autogen".:MEASUREMENT FROM fantasy."autogen"./cpu/ WHERE cpu = 'cpu-total' GROUP BY time(10m) END
 ```
 
 The output shows that the database `reality` has no CQs and the database `fantasy` has one CQ called `elsewhere`.

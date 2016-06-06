@@ -213,7 +213,7 @@ The following query string parameters can be passed as part of the GET string wh
 
 - `db=<database>` REQUIRED - sets the target database for the write
 - `rp=<retention_policy>` - sets the target retention policy for the write.
-If not present the default retention policy is used
+If not present the `DEFAULT` retention policy is used
 - `u=<username>`, `p=<password>` - if authentication is enabled, you must authenticate as a user with write permissions to the target database
 - `precision=[n,u,ms,s,m,h]` - sets the precision of the supplied Unix time values.
 If not present timestamps are assumed to be in nanoseconds
@@ -224,10 +224,10 @@ If not present timestamps are assumed to be in nanoseconds
 curl -X POST 'http://localhost:8086/write?db=mydb' --data-binary 'disk_free,hostname=server01 value=442221834240i 1435362189575692182'
 ```
 
-#### Write a Point to a non-default Retention Policy
+#### Write a Point to a non-`DEFAULT`t Retention Policy
 
 Use the `rp=<retention_policy` query string parameter to supply a target retention policy.
-If not specified, the default retention policy for the target database will be used.
+If not specified, the `DEFAULT` retention policy for the target database will be used.
 
 ```bash
 curl -X POST 'http://localhost:8086/write?db=mydb&rp=six_month_rollup' --data-binary 'disk_free,hostname=server01 value=442221834240i 1435362189575692182'

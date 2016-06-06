@@ -290,7 +290,7 @@ for_stmt                     = "FOR" duration_lit
 #### Examples:
 
 ```sql
--- selects from default retention policy and writes into 6_months retention policy
+-- selects from DEFAULT retention policy and writes into 6_months retention policy
 CREATE CONTINUOUS QUERY "10m_event_count"
 ON "db_name"
 BEGIN
@@ -387,11 +387,11 @@ create_subscription_stmt = "CREATE SUBSCRIPTION" subscription_name "ON" db_name 
 
 #### Examples:
 ```sql
--- Create a SUBSCRIPTION on database 'mydb' and retention policy 'default' that send data to 'example.com:9090' via UDP.
-CREATE SUBSCRIPTION "sub0" ON "mydb"."default" DESTINATIONS ALL 'udp://example.com:9090'
+-- Create a SUBSCRIPTION on database 'mydb' and retention policy 'autogen' that send data to 'example.com:9090' via UDP.
+CREATE SUBSCRIPTION "sub0" ON "mydb"."autogen" DESTINATIONS ALL 'udp://example.com:9090'
 
--- Create a SUBSCRIPTION on database 'mydb' and retention policy 'default' that round robins the data to 'h1.example.com:9090' and 'h2.example.com:9090'.
-CREATE SUBSCRIPTION "sub0" ON "mydb"."default" DESTINATIONS ANY 'udp://h1.example.com:9090', 'udp://h2.example.com:9090'
+-- Create a SUBSCRIPTION on database 'mydb' and retention policy 'autogen' that round robins the data to 'h1.example.com:9090' and 'h2.example.com:9090'.
+CREATE SUBSCRIPTION "sub0" ON "mydb"."autogen" DESTINATIONS ANY 'udp://h1.example.com:9090', 'udp://h2.example.com:9090'
 ```
 
 ### CREATE USER
@@ -510,7 +510,7 @@ drop_subscription_stmt = "DROP SUBSCRIPTION" subscription_name "ON" db_name "." 
 #### Example:
 
 ```sql
-DROP SUBSCRIPTION "sub0" ON "mydb"."default"
+DROP SUBSCRIPTION "sub0" ON "mydb"."autogen"
 ```
 
 ### DROP USER

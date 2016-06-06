@@ -104,7 +104,7 @@ While they all return the same result, they get to that result in slightly diffe
 ```
 **D**
  ```sql
- > SELECT * FROM "NOAA_water_database"."default"."h2o_feet"
+ > SELECT * FROM "NOAA_water_database"."autogen"."h2o_feet"
  ```
 
 Query **A** selects [everything](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#querying-select-with-field-type-discrepancies)
@@ -551,9 +551,9 @@ time			               written
 1970-01-01T00:00:00Z	 7604
 ```
 
-Write the field `water_level` in `h2o_feet` to a new measurement (`h2o_feet_copy`) and to the retention policy `default` in the [already-existing](/influxdb/v1.0/query_language/database_management/#create-a-database-with-create-database) database `where_else`:
+Write the field `water_level` in `h2o_feet` to a new measurement (`h2o_feet_copy`) and to the retention policy `autogen` in the [already-existing](/influxdb/v1.0/query_language/database_management/#create-a-database-with-create-database) database `where_else`:
 ```sql
-> SELECT "water_level" INTO "where_else"."default"."h2o_feet_copy" FROM "h2o_feet" WHERE "location" = 'coyote_creek'
+> SELECT "water_level" INTO "where_else"."autogen"."h2o_feet_copy" FROM "h2o_feet" WHERE "location" = 'coyote_creek'
 ```
 
 CLI response:
@@ -603,7 +603,7 @@ time			               mean
 
 Calculate the average `water_level` and the max `water_level` in `santa_monica`, and write the results to a new measurement (`aggregates`) in a different database (`where_else`):
 ```sql
-> SELECT mean("water_level"), max("water_level") INTO "where_else"."default"."aggregates" FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
+> SELECT mean("water_level"), max("water_level") INTO "where_else"."autogen"."aggregates" FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
 ```
 
 CLI response:
@@ -616,7 +616,7 @@ time			               written
 
 Select everything from the new measurement `aggregates` in the database `where_else`:
 ```bash
-> SELECT * FROM "where_else"."default"."aggregates"
+> SELECT * FROM "where_else"."autogen"."aggregates"
 name: aggregates
 ----------------
 time			               max	   mean
@@ -628,7 +628,7 @@ time			               max	   mean
 Calculate the average `degrees` for all temperature measurements (`h2o_temperature` and `average_temperature`) in the `NOAA_water_database` and write the results to new measurements with the same names in a different database (`where_else`).
 `:MEASUREMENT` tells InfluxDB to write the query results to measurements with the same names as those targeted by the query:
 ```sql
-> SELECT mean("degrees") INTO "where_else"."default".:MEASUREMENT FROM /temperature/ WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
+> SELECT mean("degrees") INTO "where_else"."autogen".:MEASUREMENT FROM /temperature/ WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
 ```
 
 CLI response:
@@ -641,7 +641,7 @@ time			               written
 
 Select the `mean` field from all new temperature measurements in the database `where_else`.
 ```bash
-> SELECT mean FROM "where_else"."default"./temperature/
+> SELECT mean FROM "where_else"."autogen"./temperature/
 name: average_temperature
 -------------------------
 time			               mean

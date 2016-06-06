@@ -140,9 +140,17 @@ Files in the `meta` directory include `meta.db`.
 
 ### retention-autocreate = true
 
-Retention policy auto-creation automatically creates a [`default` retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp) when a database is created.
-The retention policy is named `default`, has an infinite duration, and is also set as the database's `DEFAULT` retention policy, which is used when a write or query does not specify a retention policy.
-Disable this setting to prevent the creation of a `default` retention policy when creating databases.
+Retention policy auto-creation automatically creates a [`DEFAULT` retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp) when a database is created.
+The retention policy is has an infinite duration and is also set as the
+database's `DEFAULT` retention policy, which is used when a write or query does
+not specify a retention policy.
+Disable this setting to prevent the creation of this retention policy when creating databases.
+
+See the next setting to configure the name of the retention policy.
+
+### default-retention-policy-name = "autogen"
+
+The name of the auto-created retention policy.
 
 ### logging-enabled = true
 

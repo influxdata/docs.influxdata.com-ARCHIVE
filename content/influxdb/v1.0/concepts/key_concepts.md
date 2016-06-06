@@ -39,7 +39,7 @@ Check out the [Glossary](/influxdb/v1.0/concepts/glossary/) if you prefer the co
 The next section references the data printed out below.
 The data are fictional, but represent a believable setup in InfluxDB.
 They show the number of butterflies and honeybees counted by two scientists (`langstroth` and `perpetua`) in two locations (location `1` and location `2`) over the time period from August 18, 2015 at midnight through August 18, 2015 at 6:12 AM.
-Assume that the data live in a database called `my_database` and are subject to the `default` retention policy (more on databases and retention policies to come).
+Assume that the data live in a database called `my_database` and are subject to the `autogen` retention policy (more on databases and retention policies to come).
 
 *Hint:* Hover over the links for tooltips to get acquainted with InfluxDB terminology and the layout.
 
@@ -155,7 +155,7 @@ If you're interested in reading more about retention policies, check out [Databa
 <dt> Replication factors do not serve a purpose with single node instances.
 </dt>
 
-In the sample data, everything in the `census` measurement belongs to the `default` retention policy.
+In the sample data, everything in the `census` measurement belongs to the `autogen` retention policy.
 InfluxDB automatically creates that retention policy; it has an infinite duration and a replication factor set to one.
 
 Now that you're familiar with measurements, tag sets, and retention policies it's time to discuss series.
@@ -164,10 +164,10 @@ The data above consist of four series:
 
 | Arbitrary series number  |  Retention policy | Measurement  |  Tag set |
 |---|---|---|---|
-| series 1  | `default` | `census`  | `location = 1`,`scientist = langstroth` |
-| series 2 | `default` |  `census` |  `location = 2`,`scientist = langstroth` |
-| series 3  | `default` | `census`  | `location = 1`,`scientist = perpetua` |
-| series 4 | `default` |  `census` |  `location = 2`,`scientist = perpetua` |
+| series 1  | `autogen` | `census`  | `location = 1`,`scientist = langstroth` |
+| series 2 | `autogen` |  `census` |  `location = 2`,`scientist = langstroth` |
+| series 3  | `autogen` | `census`  | `location = 1`,`scientist = perpetua` |
+| series 4 | `autogen` |  `census` |  `location = 2`,`scientist = perpetua` |
 
 Understanding the concept of a series is essential when designing your [schema](/influxdb/v1.0/concepts/glossary/#schema) and when working with your data in InfluxDB.
 
@@ -180,7 +180,7 @@ time			               butterflies	 honeybees	 location	 scientist
 2015-08-18T00:00:00Z	 1		          30		       1		       perpetua
 ```
 
-The series in the example is defined by the retention policy (`default`), the measurement (`census`), and the tag set (`location = 1`, `scientist = perpetua`).
+The series in the example is defined by the retention policy (`autogen`), the measurement (`census`), and the tag set (`location = 1`, `scientist = perpetua`).
 The timestamp for the point is `2015-08-18T00:00:00Z`.
 
 All of the stuff we've just covered is stored in a database - the sample data are in the database `my_database`.

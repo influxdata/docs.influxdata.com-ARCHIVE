@@ -26,22 +26,14 @@ One of the fundamental assumptions in its architecture is that deletes are infre
 However, InfluxDB recognizes the necessity of purging data that have outlived their usefulness - that is the purpose of RPs.
 
 ### Working with RPs
-When you create a database, InfluxDB automatically creates an RP called `default` with an infinite duration and a replication factor set to one.
-`default` also serves as the `DEFAULT` RP; if you do not supply an explicit RP when you write a point to the database, the data are subject to the `DEFAULT` RP.
+When you create a database, InfluxDB automatically creates an RP called `autogen` with an infinite duration and a replication factor set to one.
+`autogen` also serves as the `DEFAULT` RP; if you do not supply an explicit RP when you write a point to the database, the data are subject to the `DEFAULT` RP.
 
 InfluxDB automatically queries from and writes to the `DEFAULT` RP on a database.
 To query from or write to a different RP, you must fully qualify the measurement, that is, specify the database and retention policy with the measurement name: `<database_name>."<retention_policy>".<measurement_name>`.
 
 You can also create, alter, and delete you own RPs, and you can change the database's `DEFAULT` RP.
 See [Database Management](/influxdb/v1.0/query_language/database_management/#retention-policy-management) for more on RP management.
-
-> **Clarifying** `default` **vs.** `DEFAULT`
-
-> `default`: The name of the RP that InfluxDB automatically generates when you create a new database.
-It has an infinite duration and a replication factor set to one.
-It is initially the `DEFAULT` RP as well, but that can be altered.
-
-> `DEFAULT`: The RP that InfluxDB writes to if you do not supply an explicit RP in the write.
 
 ## Continuous Queries
 ### Definition
@@ -74,8 +66,8 @@ Before writing the data to the database `food_data`, we perform the following st
 > **Note:** We do this before inserting any data because InfluxDB only performs CQs on new data, that is, data with timestamps that occur after the time at which we create the CQ.
 
 #### Create a new `DEFAULT` RP
-When we initially [created the database](/influxdb/v1.0/query_language/database_management/#create-a-database-with-create-database) `food_data`, InfluxDB automatically generated an RP called `default` with an infinite duration and a replication factor set to one.
-`default` is also the `DEFAULT` RP for `food_data`; if we do not supply an explicit RP when we write a point to the database, InfluxDB writes the point to `default` and it keeps those data forever.
+When we initially [created the database](/influxdb/v1.0/query_language/database_management/#create-a-database-with-create-database) `food_data`, InfluxDB automatically generated an RP called `autogen` with an infinite duration and a replication factor set to one.
+`autogen` is also the `DEFAULT` RP for `food_data`; if we do not supply an explicit RP when we write a point to the database, InfluxDB writes the point to `autogen` and it keeps those data forever.
 
 We want the `DEFAULT` RP on `food_data` to be a two hour policy.
 To create our new RP, we enter the following command:
@@ -89,12 +81,12 @@ Once those data have timestamps that are older than two hours, InfluxDB deletes 
 For a more detailed discussion on the `CREATE RETENTION POLICY` syntax, see [Database Management](/influxdb/v1.0/query_language/database_management/#retention-policy-management).
 
 To clarify, we've included the results from the [`SHOW RETENTION POLICIES`](/influxdb/v1.0/query_language/schema_exploration/#explore-retention-policies-with-show-retention-policies) query below.
-Notice that there are two RPs in `food_data` (`default` and `two_hours`) and that the third column identifies `two_hours` as the `DEFAULT` RP.
+Notice that there are two RPs in `food_data` (`autogen` and `two_hours`) and that the third column identifies `two_hours` as the `DEFAULT` RP.
 
 ```bash
 > SHOW RETENTION POLICIES ON food_data
 name		      duration	  replicaN	  default
-default		   0		        1		        false
+autogen		   0		        1		        false
 two_hours	  2h0m0s		   1		        true
 ```
 
@@ -102,13 +94,13 @@ two_hours	  2h0m0s		   1		        true
 Now we create a CQ that automatically downsamples the 10 second level data to 30 minute level data:
 
 ```sql
-> CREATE CONTINUOUS QUERY cq_30m ON food_data BEGIN SELECT mean(website) AS mean_website,mean(phone) AS mean_phone INTO food_data."default".downsampled_orders FROM orders GROUP BY time(30m) END
+> CREATE CONTINUOUS QUERY cq_30m ON food_data BEGIN SELECT mean(website) AS mean_website,mean(phone) AS mean_phone INTO food_data."autogen".downsampled_orders FROM orders GROUP BY time(30m) END
 ```
 That CQ makes InfluxDB automatically and periodically calculate the 30 minute average from the 10 second website order data and the 30 minute average from the 10 second phone order data.
-InfluxDB also writes the CQ's results into the measurement `downsampled_orders` and to the RP `default`; InfluxDB stores the aggregated data in `downsampled_orders` forever.
+InfluxDB also writes the CQ's results into the measurement `downsampled_orders` and to the RP `autogen`; InfluxDB stores the aggregated data in `downsampled_orders` forever.
 
 > **Note:** You must specify the RP in the `INTO` clause to write the results of the query to an RP other than the `DEFAULT` RP.
-In the CQ above, we write the results of the query to the infinite RP `default` by fully qualifying the measurement.
+In the CQ above, we write the results of the query to the infinite RP `autogen` by fully qualifying the measurement.
 To fully qualify a measurement, specify its database and RP with `<database_name>."<retention_policy>".<measurement_name>`.
 If you do not fully qualify the measurement, InfluxDB writes the results of the query to the two hour RP `DEFAULT`.
 
@@ -135,9 +127,9 @@ We submitted this query on 12/04/2015 at 22:08:19 UTC  - notice that the oldest 
 > **Note:** By default, InfluxDB checks to enforce an RP every 30 minutes so you may have data that are older than two hours between checks.
 The rate at which InfluxDB checks to enforce an RP is a configurable setting, see [Database Configuration](/influxdb/v1.0/administration/config/#retention).
 
-A sample of the oldest data in `downsampled_orders` - these are the aggregated data subject to the `default` RP:
+A sample of the oldest data in `downsampled_orders` - these are the aggregated data subject to the `autogen` RP:
 ```bash
-> SELECT * FROM food_data."default".downsampled_orders LIMIT 5
+> SELECT * FROM food_data."autogen".downsampled_orders LIMIT 5
 name: downsampled_orders
 ------------------------
 time			               mean_phone		       mean_website
