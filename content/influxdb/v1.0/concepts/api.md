@@ -45,7 +45,7 @@ $ curl -sl -I localhost:8086/ping
 
 HTTP/1.1 204 No Content
 Request-Id: 7d641f0b-e23b-11e5-8005-000000000000
-X-Influxdb-Version: 0.13.x
+X-Influxdb-Version: 1.0.x
 Date: Fri, 04 Mar 2016 19:01:23 GMT
 ```
 

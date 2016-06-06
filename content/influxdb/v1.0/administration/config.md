@@ -167,7 +167,7 @@ This directory may be changed.
 
 ### engine = "tsm1"
 
-The storage engine. This is the only option for version 0.13.
+The storage engine. This is the only option for version 1.0.
 
 ### wal-dir = "/var/lib/influxdb/wal"
 

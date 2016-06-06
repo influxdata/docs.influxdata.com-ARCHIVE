@@ -24,8 +24,8 @@ The output should look like this:
 
 ```bash
 $ influx
-Connected to http://localhost:8086 version 0.13.x
-InfluxDB shell 0.13.x
+Connected to http://localhost:8086 version 1.0.x
+InfluxDB shell 1.0.x
 >
 ```
 

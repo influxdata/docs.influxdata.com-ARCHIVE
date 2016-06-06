@@ -118,8 +118,8 @@ There are two options for authenticating with the CLI.
 
     ```bash
 $ influx
-Connected to http://localhost:8086 version 0.13.x
-InfluxDB shell 0.13.x
+Connected to http://localhost:8086 version 1.0.x
+InfluxDB shell 1.0.x
 > auth todd influxdb4ever
 >
     ```
