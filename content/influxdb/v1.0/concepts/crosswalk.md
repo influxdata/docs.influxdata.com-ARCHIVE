@@ -126,7 +126,7 @@ to storing and analyzing time series data.
 InfluxQL's `SELECT` statement follows the form of an SQL `SELECT` statement:
 
 ```sql
-SELECT "<stuff>" FROM "<measurement_name>" WHERE "<some_conditions>"
+SELECT <stuff> FROM <measurement_name> WHERE <some_conditions>
 ```
 where `WHERE` is optional.
 To get the InfluxDB output in the section above, you'd enter:

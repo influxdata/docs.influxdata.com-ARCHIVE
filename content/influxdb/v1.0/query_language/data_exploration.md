@@ -579,7 +579,7 @@ If you want InfluxDB to automatically query and downsample all future data see [
 
 Calculate the average `water_level` in `santa_monica`, and write the results to a new measurement (`average`) in the same database:
 ```sql
-> SELECT mean("water_level") INTO "average" FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
+> SELECT MEAN("water_level") INTO "average" FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
 ```
 
 The CLI response shows the number of points that InfluxDB wrote to the new measurement:
@@ -603,7 +603,7 @@ time			               mean
 
 Calculate the average `water_level` and the max `water_level` in `santa_monica`, and write the results to a new measurement (`aggregates`) in a different database (`where_else`):
 ```sql
-> SELECT mean("water_level"), max("water_level") INTO "where_else"."autogen"."aggregates" FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
+> SELECT MEAN("water_level"), max("water_level") INTO "where_else"."autogen"."aggregates" FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
 ```
 
 CLI response:
@@ -628,7 +628,7 @@ time			               max	   mean
 Calculate the average `degrees` for all temperature measurements (`h2o_temperature` and `average_temperature`) in the `NOAA_water_database` and write the results to new measurements with the same names in a different database (`where_else`).
 `:MEASUREMENT` tells InfluxDB to write the query results to measurements with the same names as those targeted by the query:
 ```sql
-> SELECT mean("degrees") INTO "where_else"."autogen".:MEASUREMENT FROM /temperature/ WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
+> SELECT MEAN("degrees") INTO "where_else"."autogen".:MEASUREMENT FROM /temperature/ WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
 ```
 
 CLI response:
@@ -641,7 +641,7 @@ time			               written
 
 Select the `mean` field from all new temperature measurements in the database `where_else`.
 ```bash
-> SELECT mean FROM "where_else"."autogen"./temperature/
+> SELECT "mean" FROM "where_else"."autogen"./temperature/
 name: average_temperature
 -------------------------
 time			               mean
@@ -894,7 +894,7 @@ For example:
 <br>
 <br>
 ```sql
-> SELECT mean("water_level") FROM "h2o_feet" WHERE time > now() - 2w GROUP BY "location",time(24h) fill(none); SELECT count("water_level") FROM "h2o_feet" WHERE time > now() - 2w GROUP BY "location",time(24h) fill(80)
+> SELECT MEAN("water_level") FROM "h2o_feet" WHERE time > now() - 2w GROUP BY "location",time(24h) fill(none); SELECT COUNT("water_level") FROM "h2o_feet" WHERE time > now() - 2w GROUP BY "location",time(24h) fill(80)
 ```
 
 ## Merge series in queries
