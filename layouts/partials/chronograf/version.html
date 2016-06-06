@@ -1,9 +1,11 @@
 {{ if not (or (in .RelPermalink .Site.Data.default_versions.chronograf_semver) (eq .RelPermalink "/chronograf/")) }}
 <div class="old-version">
-{{ if in .RelPermalink "v0.13" }}
-    <strong>Warning!</strong> This page documents an old version of Chronograf, which is no longer actively developed. <a href="/chronograf/{{ .Site.Data.default_versions.chronograf_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ replace .RelPermalink "/chronograf/v0.13/" "" }}{{end}}">Chronograf {{ .Site.Data.default_versions.chronograf_semver }}</a> is the most recent version of Chronograf.
+{{ if in .RelPermalink "v0.12"}}
+    <strong>Warning!</strong> This page documents an old version of Chronograf, which is no longer actively developed. <a href="/chronograf/{{ .Site.Data.default_versions.chronograf_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ substr .RelPermalink 16 }}{{end}}">Chronograf {{ .Site.Data.default_versions.chronograf_semver }}</a> is the most recent stable version of Chronograf.
+{{ else if in .RelPermalink "v1.0"}}
+    <strong>Warning!</strong> This page documents Chronograf version 1.0-beta. <a href="/chronograf/{{ .Site.Data.default_versions.chronograf_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ substr .RelPermalink 16 }}{{end}}">Chronograf {{ .Site.Data.default_versions.chronograf_semver }}</a> is the most recent stable version of Chronograf.
 {{ else }}
-    <strong>Warning!</strong> This page documents an old version of Chronograf, which is no longer actively developed. <a href="/chronograf/{{ .Site.Data.default_versions.chronograf_semver }}/">Chronograf {{ .Site.Data.default_versions.chronograf_semver }}</a> is the most recent version of Chronograf.
+    <strong>Warning!</strong> This page documents an old version of Chronograf, which is no longer actively developed. <a href="/chronograf/{{ .Site.Data.default_versions.chronograf_semver }}/">Chronograf {{ .Site.Data.default_versions.chronograf_semver }}</a> is the most recent stable version of Chronograf.
 {{ end }}
 </div>
 {{ end }}
