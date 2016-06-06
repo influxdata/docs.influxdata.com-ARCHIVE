@@ -84,7 +84,7 @@ INFLUXDB_MONITOR_STORE_DATABASE
 * [Global Options](#global-options)
 * [[meta]](#meta)
 * [[data]](#data)
-* [[cluster]](#cluster)
+* [[coordinator]](#coordinator)
 * [[retention]](#retention)
 * [[shard-precreation]](#shard-precreation)
 * [[admin]](#admin)
@@ -206,7 +206,7 @@ Larger numbers may yield better compression but could incur a performance penalt
 
 ### data-logging-enabled = true
 
-## [cluster]
+## [coordinator]
 
 This section contains configuration options for query management.
 For more on managing queries, see [Query Management](/influxdb/v1.0/troubleshooting/query_management/).
@@ -216,14 +216,6 @@ For more on managing queries, see [Query Management](/influxdb/v1.0/troubleshoot
 ### write-timeout = "10s"
 
 The time within which a write request must complete on the cluster.
-
-### shard-writer-timeout = "5s"
-
-The time within which a remote shard must respond to a write request.
-
-### max-remote-write-connections = 3
-
-### shard-mapper-timeout = "5s"
 
 ### max-concurrent-queries = 0
 
@@ -343,6 +335,8 @@ The interval at which InfluxDB records statistics.
 
 ### enabled = true
 
+### http-timeout = "30s"
+
 ## [http]
 
 This section controls how InfluxDB configures the HTTP endpoints.
@@ -393,6 +387,10 @@ If a separate `https-private-key` file is specified, the httpd service will load
 the private key from the `https-private-key` file.
 
 ### max-row-limit = 10000
+
+### max-connection-limit = 0
+
+### shared-secret = ""
 
 ## [[graphite]]
 
@@ -468,6 +466,11 @@ This defaults to `collectd`.
 *The next three options control how batching works.
 You should have this enabled otherwise you could get dropped metrics or poor performance.
 Batching will buffer points in memory if you have many coming in.*
+
+### retention-policy = ""
+
+The relevant retention policy.
+An empty string is equivalent to the database's `DEFAULT` retention policy.
 
 ### batch-size = 5000
 

@@ -71,7 +71,7 @@ A successful `KILL QUERY` query returns no results.
 ## Configuration settings for query management
 
 The following configuration settings are in the
-[[cluster]](/influxdb/v1.0/administration/config/#cluster) section of the
+[[coordinator]](/influxdb/v1.0/administration/config/#coordinator) section of the
 configuration file.
 
 ### max-concurrent-queries
