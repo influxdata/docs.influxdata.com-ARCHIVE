@@ -2,7 +2,7 @@
 title: Kapacitor as a Continous Query engine
 
 menu:
-  kapacitor_013:
+  kapacitor_10b:
     name: Kapacitor as a Continuous Query engine
     identifier: continuous_queries
     weight: 30

@@ -2,16 +2,15 @@
 title: HTTP API Reference
 
 menu:
-  kapacitor_013:
+  kapacitor_10b:
     weight: 10
     parent: api
 ---
 
-# Kapacitor API Reference Documentation
-
 * [General Information](#general-information)
 * [Writing Data](#writing-data)
 * [Tasks](#tasks)
+* [Templates](#templates)
 * [Recordings](#recordings)
 * [Replays](#replays)
 * [Miscellaneous](#miscellaneous)
@@ -60,6 +59,14 @@ Query parameters are used only for GET requests and all other requests expect pa
 When creating resources in Kapacitor the API server will return a `link` object with an `href` of the resource.
 Clients should not need to perform path manipulation in most cases and can use the links provided from previous calls.
 
+### IDs
+
+The API allows the client to specify IDs for the various resources.
+This way you can control the meaning of the IDs.
+If you do not specify an ID a random UUID will be generated for the resource.
+
+All IDs must match this regex `^[-\._\p{L}0-9]+$`, which is essentially numbers, unicode letters, '-', '.' and '_'.
+
 ## Writing Data
 
 Kapacitor can accept writes over HTTP using the line protocol.
@@ -101,27 +108,66 @@ If a task already exists then use the `PATCH` method to modify any property of t
 
 Define a task using a JSON object with the following options:
 
-| Property | Purpose                                                                |
-| -------- | -------                                                                |
-| id       | Unique identifier for the task. If empty a random ID will be chosen.   |
-| type     | The task type: `stream` or `batch`.                                    |
-| dbrps    | List of database retention policy pairs the task is allowed to access. |
-| script   | The content of the script.                                             |
-| status   | One of `enabled` or `disabled`.                                        |
+| Property    | Purpose                                                                                   |
+| --------    | -------                                                                                   |
+| id          | Unique identifier for the task. If empty a random ID will be chosen.                      |
+| template-id | An optional ID of a template to use instead of specifying a TICKscript and type directly. |
+| type        | The task type: `stream` or `batch`.                                                       |
+| dbrps       | List of database retention policy pairs the task is allowed to access.                    |
+| script      | The content of the script.                                                                |
+| status      | One of `enabled` or `disabled`.                                                           |
+| vars        | A set of vars for overwriting any defined vars in the TICKscript.                         |
 
 When using PATCH, if any option is missing it will be left unmodified.
+
+##### Vars
+
+The vars object has the form:
+
+```
+{
+    "field_name" : {
+        "value": <VALUE>,
+        "type": <TYPE>
+    },
+    "another_field" : {
+        "value": <VALUE>,
+        "type": <TYPE>
+    }
+}
+```
+
+The following is a table of valid types and example values.
+
+| Type     | Example Value                    | Description                                                                                             |
+| ----     | -------------                    | -----------                                                                                             |
+| bool     | true                             | "true" or "false"                                                                                       |
+| int      | 42                               | Any integer value                                                                                       |
+| float    | 2.5 or 67                        | Any numeric value                                                                                       |
+| duration | "1s" or 1000000000               | Any integer value interpretted in nanoseconds or an influxql duration string, (i.e. 10000000000 is 10s) |
+| string   | "a string"                       | Any string value                                                                                        |
+| regex    | "^abc.*xyz"                      | Any string value that represents a valid Go regular expression https://golang.org/pkg/regexp/           |
+| lambda   | "\"value\" > 5"                  | Any string that is a valid TICKscript lambda expression                                                 |
+| star     | ""                               | No value is required, a star type var represents the literal `*` in TICKscript (i.e. `.groupBy(*)`)     |
+| list     | [{"type": TYPE, "value": VALUE}] | A list of var objects. Currently lists may only contain string or star vars                             |
 
 #### Example
 
 Create a new task with ID TASK_ID.
 
 ```
-POST /kapacitor/v1/tasks/
+POST /kapacitor/v1/tasks
 {
     "id" : "TASK_ID",
     "type" : "stream",
     "dbrps": [{"db": "DATABASE_NAME", "rp" : "RP_NAME"}],
-    "script": "stream\n    |from()\n        .measurement('cpu')\n"
+    "script": "stream\n    |from()\n        .measurement('cpu')\n",
+    "vars" : {
+        "var1": {
+            "value": 42,
+            "type": "float"
+        }
+    }
 }
 ```
 
@@ -135,6 +181,12 @@ Response with task id and link.
     "dbrps" : [{"db": "DATABASE_NAME", "rp" : "RP_NAME"}],
     "script" : "stream\n    |from()\n        .measurement('cpu')\n",
     "dot" : "digraph TASK_ID { ... }",
+    "vars" : {
+        "var1": {
+            "value": 42,
+            "type": "float"
+        }
+    },
     "status" : "enabled",
     "executing" : true,
     "error" : "",
@@ -154,6 +206,7 @@ PATCH /kapacitor/v1/tasks/TASK_ID
 ```
 
 >NOTE: Setting any DBRP will overwrite all stored DBRPs.
+Setting any Vars will overwrite all stored Vars.
 
 
 Enable an existing task.
@@ -200,7 +253,6 @@ Response with task id and link.
 | Code | Meaning                                  |
 | ---- | -------                                  |
 | 200  | Task created, contains task information. |
-| 204  | Task updated, no content                 |
 | 404  | Task does not exist                      |
 
 ### Get Task
@@ -461,6 +513,255 @@ GET /kapacitor/v1/tasks/TASK_ID/mycustom_endpoint
 
 The output is the same as a query for data to [InfluxDB](https://docs.influxdata.com/influxdb/latest/guides/querying_data/).
 
+
+## Templates
+
+You can also define a task templates.
+A task template is defined by a template TICKscript, and a task type.
+
+
+### Define Templates
+
+To define a template POST to the `/kapacitor/v1/templates/` endpoint.
+If a template already exists then use the `PATCH` method to modify any property of the template.
+
+Define a template using a JSON object with the following options:
+
+| Property | Purpose                                                                  |
+| -------- | -------                                                                  |
+| id       | Unique identifier for the template. If empty a random ID will be chosen. |
+| type     | The template type: `stream` or `batch`.                                  |
+| script   | The content of the script.                                               |
+
+When using PATCH, if any option is missing it will be left unmodified.
+
+
+#### Updating Templates
+
+When updating an existing template all associated tasks are reloaded with the new template definition.
+The first error if any is returned when reloading associated tasks.
+If an error occurs, any task that was updated to the new definition is reverted to the old definition.
+This ensures that all associated tasks for a template either succeed or fail together.
+
+As a result, you will not be able to update a template if it introduces a breaking change in the TICKscript.
+In order to update a template in a breaking way you have two options:
+
+1. Create a new template and reassign each task to the new template updating the task vars as needed.
+2. If the breaking change is forward compatible (i.e. adds a new required var), first update each task with the needed vars,
+then update the template once all tasks are ready.
+
+
+#### Example
+
+Create a new template with ID TEMPLATE_ID.
+
+```
+POST /kapacitor/v1/templates
+{
+    "id" : "TEMPLATE_ID",
+    "type" : "stream",
+    "script": "stream\n    |from()\n        .measurement('cpu')\n"
+}
+```
+
+Response with template id and link.
+
+```
+{
+    "link" : {"rel": "self", "href": "/kapacitor/v1/templates/TASK_ID"},
+    "id" : "TASK_ID",
+    "type" : "stream",
+    "script" : "stream\n    |from()\n        .measurement('cpu')\n",
+    "dot" : "digraph TASK_ID { ... }",
+    "error" : "",
+    "created": "2006-01-02T15:04:05Z07:00",
+    "modified": "2006-01-02T15:04:05Z07:00",
+}
+```
+
+Modify only the script of the template.
+
+```
+PATCH /kapacitor/v1/templates/TEMPLATE_ID
+{
+    "script": "stream|from().measurement('mem')"
+}
+```
+
+#### Response
+
+| Code | Meaning                                          |
+| ---- | -------                                          |
+| 200  | Template created, contains template information. |
+| 404  | Template does not exist                          |
+
+### Get Template
+
+To get information about a template make a GET request to the `/kapacitor/v1/templates/TEMPLATE_ID` endpoint.
+
+| Query Parameter | Default    | Purpose                                                                                                                          |
+| --------------- | -------    | -------                                                                                                                          |
+| script-format   | formatted  | One of `formatted` or `raw`. Raw will return the script identical to how it was defined. Formatted will first format the script. |
+
+
+A template has these read only properties in addition to the properties listed [above](#define-template).
+
+| Property | Description                                                                                                                                                                                                         |
+| -------- | -----------                                                                                                                                                                                                         |
+| vars     | Set of named vars from the TICKscript with their type, default values and description.                                                                                                                                           |
+| dot      | [GraphViz DOT](https://en.wikipedia.org/wiki/DOT_(graph_description_language)) syntax formatted representation of the template DAG. NOTE: lables vs attributes does not matter since a template is never executing. |
+| error    | Any error encountered when reading the template.                                                                                                                                                                    |
+| created  | Date the template was first created                                                                                                                                                                                 |
+| modified | Date the template was last modified                                                                                                                                                                                 |
+
+#### Example
+
+Get information about a template using defaults.
+
+```
+GET /kapacitor/v1/templates/TEMPLATE_ID
+```
+
+```
+{
+    "link" : {"rel": "self", "href": "/kapacitor/v1/templates/TEMPLATE_ID"},
+    "id" : "TASK_ID",
+    "type" : "stream",
+    "script" : "var x = 5\nstream\n    |from()\n        .measurement('cpu')\n",
+    "vars": {"x":{"value": 5, "type":"int", "description": "threshold value"}},
+    "dot" : "digraph TASK_ID { ... }",
+    "error" : "",
+    "created": "2006-01-02T15:04:05Z07:00",
+    "modified": "2006-01-02T15:04:05Z07:00",
+}
+```
+
+#### Response
+
+| Code | Meaning                 |
+| ---- | -------                 |
+| 200  | Success                 |
+| 404  | Template does not exist |
+
+
+### Delete Template
+
+To delete a template make a DELETE request to the `/kapacitor/v1/templates/TEMPLATE_ID` endpoint.
+
+>NOTE:Deleting a template renders all associated tasks as orphans. The current state of the orphaned tasks will be left unmodified,
+but orphaned tasks will not be able to be enabled.
+
+```
+DELETE /kapacitor/v1/templates/TEMPLATE_ID
+```
+
+#### Response
+
+| Code | Meaning |
+| ---- | ------- |
+| 204  | Success |
+
+>NOTE: Deleting a non-existent template is not an error and will return a 204 success.
+
+
+### List Templates
+
+To get information about several templates make a GET request to the `/kapacitor/v1/templates` endpoint.
+
+| Query Parameter | Default    | Purpose                                                                                                                                           |
+| --------------- | -------    | -------                                                                                                                                           |
+| pattern         |            | Filter results based on the pattern. Uses standard shell glob matching, see [this](https://golang.org/pkg/path/filepath/#Match) for more details. |
+| fields          |            | List of fields to return. If empty returns all fields. Fields `id` and `link` are always returned.                                                |
+| script-format   | formatted  | One of `formatted` or `raw`. Raw will return the script identical to how it was defined. Formatted will first format the script.                  |
+| offset          | 0          | Offset count for paginating through templates.                                                                                                        |
+| limit           | 100        | Maximum number of templates to return.                                                                                                                |
+
+#### Example
+
+Get all templates.
+
+```
+GET /kapacitor/v1/templates
+```
+
+```
+{
+    "templates" : [
+        {
+            "link" : {"rel":"self", "href":"/kapacitor/v1/templates/TEMPLATE_ID"},
+            "id" : "TEMPLATE_ID",
+            "type" : "stream",
+            "script" : "stream|from().measurement('cpu')",
+            "dot" : "digraph TEMPLATE_ID { ... }",
+            "error" : ""
+        },
+        {
+            "link" : {"rel":"self", "href":"/kapacitor/v1/templates/ANOTHER_TEMPLATE_ID"},
+            "id" : "ANOTHER_TEMPLATE_ID",
+            "type" : "stream",
+            "script" : "stream|from().measurement('cpu')",
+            "dot" : "digraph ANOTHER_TEMPLATE_ID{ ... }",
+            "error" : ""
+        }
+    ]
+}
+```
+
+Optionally specify a glob `pattern` to list only matching templates.
+
+```
+GET /kapacitor/v1/template?pattern=TEMPLATE*
+```
+
+```
+{
+    "templates" : [
+        {
+            "link" : {"rel":"self", "href":"/kapacitor/v1/templates/TEMPLATE_ID"},
+            "id" : "TEMPLATE_ID",
+            "type" : "stream",
+            "script" : "stream|from().measurement('cpu')",
+            "dot" : "digraph TEMPLATE_ID { ... }",
+            "error" : ""
+        }
+    ]
+}
+```
+
+Get all templates, but only the script and error fields.
+
+```
+GET /kapacitor/v1/templates?fields=status&fields=executing&fields=error
+```
+
+```
+{
+    "templates" : [
+        {
+            "link" : {"rel":"self", "href":"/kapacitor/v1/templates/TEMPLATE_ID"},
+            "id" : "TEMPLATE_ID",
+            "script" : "stream|from().measurement('cpu')",
+            "error" : ""
+        },
+        {
+            "link" : {"rel":"self", "href":"/kapacitor/v1/templates/ANOTHER_TEMPLATE_ID"},
+            "id" : "ANOTHER_TEMPLATE_ID",
+            "script" : "stream|from().measurement('cpu')",
+            "error" : ""
+        }
+    ]
+}
+```
+
+#### Response
+
+| Code | Meaning |
+| ---- | ------- |
+| 200  | Success |
+
+>NOTE: If the pattern does not match any templates an empty list will be returned, with a 200 success.
+
+
 ## Recordings
 
 Kapacitor can save recordings of data and replay them against a specified task.
@@ -495,7 +796,6 @@ A recording ID is returned to later identify the recording.
 | task      | ID of a task, records the results of the queries defined in the task.                                            |
 | start     | Earliest date for which data will be recorded. RFC3339Nano formatted.                                            |
 | stop      | Latest date for which data will be recorded. If not specified uses the current time. RFC3339Nano formatted data. |
-| cluster   | Name of a configured InfluxDB cluster. If empty uses the default cluster.                                        |
 
 ##### Query
 
@@ -545,7 +845,7 @@ POST /kapacitor/v1/recordings/query
 Create a recording using the `query` method specifying a `batch` type.
 
 ```
-POST /kapacitor/v1/recording/query
+POST /kapacitor/v1/recordings/query
 {
     "query" : "SELECT mean(usage_idle) FROM cpu WHERE time > now() - 1h GROUP BY time(10m)",
     "type" : "batch"
@@ -555,7 +855,7 @@ POST /kapacitor/v1/recording/query
 Create a recording with a custom ID.
 
 ```
-POST /kapacitor/v1/recording/query
+POST /kapacitor/v1/recordings/query
 {
     "id" : "MY_RECORDING_ID",
     "query" : "SELECT mean(usage_idle) FROM cpu WHERE time > now() - 1h GROUP BY time(10m)",
@@ -802,6 +1102,101 @@ The request returns once the replay is started and provides a replay ID and link
 | Code | Meaning                      |
 | ---- | -------                      |
 | 201  | Success, replay has started. |
+
+### Replay data without Recording
+
+It is also possible to replay data directly without recording it first.
+This is done by issuing a request similar to either a `batch` or `query` recording
+but instead of storing the data it is immediately replayed against a task.
+Using a `stream` recording for immediately replaying against a task is equivalent to enabling the task
+and so is not supported.
+
+| Method | Description                                        |
+| ------ | -----------                                        |
+| batch  | Replay the results of the queries in a batch task. |
+| query  | Replay the results of an explicit query.           |
+
+
+##### Batch
+
+| Parameter      | Default | Purpose                                                                                                                                                                                                                                          |
+| ---------      | ------- | -------                                                                                                                                                                                                                                          |
+| id             | random  | Unique identifier for the replay. If empty a random one will be chosen.                                                                                                                                                                          |
+| task           |         | ID of a task, replays the results of the queries defined in the task against the task.                                                                                                                                                                            |
+| start          |         | Earliest date for which data will be replayed. RFC3339Nano formatted.                                                                                                                                                                            |
+| stop           | now     | Latest date for which data will be replayed. If not specified uses the current time. RFC3339Nano formatted data.                                                                                                                                 |
+| recording-time | false   | If true, use the times in the recording, otherwise adjust times relative to the current time.                                                                                                                                                    |
+| clock          | fast    | One of `fast` or `real`. If `real` wait for real time to pass corresponding with the time in the recordings. If `fast` replay data without delay. For example, if clock is `real` then a stream recording of duration 5m will take 5m to replay. |
+
+##### Query
+
+| Parameter      | Default | Purpose                                                                                                                                                                                                                                          |
+| ---------      | ------- | -------                                                                                                                                                                                                                                          |
+| id             | random  | Unique identifier for the replay. If empty a random one will be chosen.                                                                                                                                                                          |
+| task           |         | ID of a task, replays the results of the queries against the task.                                                                                                                                                                               |
+| query          |         | Query to execute.                                                                                                                                                                                                                                |
+| cluster        |         | Name of a configured InfluxDB cluster. If empty uses the default cluster.                                                                                                                                                                        |
+| recording-time | false   | If true, use the times in the recording, otherwise adjust times relative to the current time.                                                                                                                                                    |
+| clock          | fast    | One of `fast` or `real`. If `real` wait for real time to pass corresponding with the time in the recordings. If `fast` replay data without delay. For example, if clock is `real` then a stream recording of duration 5m will take 5m to replay. |
+
+#### Example
+
+Perform a replay using the `batch` method specifying a start time.
+
+```
+POST /kapacitor/v1/replays/batch
+{
+    "task" : "TASK_ID",
+    "start" : "2006-01-02T15:04:05Z07:00"
+}
+```
+
+Replay the results of the query against the task.
+
+```
+POST /kapacitor/v1/replays/query
+{
+    "task" : "TASK_ID",
+    "query" : "SELECT mean(usage_idle) FROM cpu WHERE time > now() - 1h GROUP BY time(10m)",
+}
+```
+
+Create a replay with a custom ID.
+
+```
+POST /kapacitor/v1/replays/query
+{
+    "id" : "MY_REPLAY_ID",
+    "task" : "TASK_ID",
+    "query" : "SELECT mean(usage_idle) FROM cpu WHERE time > now() - 1h GROUP BY time(10m)",
+}
+```
+
+#### Response
+
+All replays are assigned an ID which is returned in this format with a link.
+
+```
+{
+    "link" : {"rel": "self", "href": "/kapacitor/v1/replays/e24db07d-1646-4bb3-a445-828f5049bea0"},
+    "id" : "e24db07d-1646-4bb3-a445-828f5049bea0",
+    "task" : "TASK_ID",
+    "recording" : "",
+    "clock" : "fast",
+    "recording-time" : false,
+    "status" : "running",
+    "progress" : 0.57,
+    "error" : ""
+}
+```
+
+>NOTE: For a replay created in this manner the `recording` ID will be empty since no recording was used or created.
+
+
+| Code | Meaning                          |
+| ---- | -------                          |
+| 201  | Success, the replay has started. |
+
 
 ### Waiting for a Replay
 

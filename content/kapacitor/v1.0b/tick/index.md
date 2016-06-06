@@ -2,7 +2,7 @@
 title: TICKscript Language Reference
 
 menu:
-  kapacitor_013:
+  kapacitor_10b:
     name: TICKscript
     identifier: tick
     weight: 3
@@ -22,7 +22,7 @@ These methods come in two flavors.
 The following reference documentation list each node's `Property` methods and `Chaining` methods along with examples and descriptions of the function of the node.
 
 Every TICKscript will have either a `stream` or `batch` variable defined depending on the type of task you want to run.
-The `stream` and `batch` variables are an instance of a [StreamNode](/kapacitor/v0.13/nodes/stream_node/) or [SourceBatchNode](/kapacitor/v0.11/nodes/source_batch_node/) respectively.
+The `stream` and `batch` variables are an instance of a [StreamNode](/kapacitor/v1.0b/nodes/stream_node/) or [SourceBatchNode](/kapacitor/v0.11/nodes/source_batch_node/) respectively.
 
 Pipelines
 ---------

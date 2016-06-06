@@ -2,7 +2,7 @@
 title: TICKscript Specification
 
 menu:
-  kapacitor_013:
+  kapacitor_10b:
     name: Specification
     identifier: specification
     weight: 10

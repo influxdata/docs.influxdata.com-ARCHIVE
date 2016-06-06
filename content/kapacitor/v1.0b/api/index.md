@@ -2,7 +2,7 @@
 title: APIs
 
 menu:
-  kapacitor_013:
+  kapacitor_10b:
     name: APIs
     identifier: api
     weight: 5

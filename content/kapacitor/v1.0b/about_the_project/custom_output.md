@@ -2,7 +2,7 @@
 title: How to contribute a new output to Kapacitor
 
 menu:
-  kapacitor_013:
+  kapacitor_10b:
     name: Writing your own Output node
     identifier: custom_output
     weight: 20

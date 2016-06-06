@@ -1,8 +1,8 @@
 ---
-title: Upgrading to Kapacitor v0.13
+title: Upgrading to Kapacitor v1.0b
 
 menu:
-  kapacitor_013:
+  kapacitor_10b:
     weight: 30
     parent: administration
 ---

@@ -2,7 +2,7 @@
 title: Release Notes/Changelog
 
 menu:
-  kapacitor_013:
+  kapacitor_10b:
    name: Release Notes/Changelog
    weight: 0
    parent: about_the_project

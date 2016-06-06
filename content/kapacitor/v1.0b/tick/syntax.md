@@ -2,7 +2,7 @@
 title: Syntax
 
 menu:
-  kapacitor_013:
+  kapacitor_10b:
     name: Syntax Reference
     identifier: syntax
     weight: 0

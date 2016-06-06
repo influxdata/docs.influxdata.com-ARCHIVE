@@ -2,14 +2,14 @@
 title: Live Leaderboard of game scores
 
 menu:
-  kapacitor_013:
+  kapacitor_10b:
     name: Live Leaderboard
     identifier: live_leaderboard
     weight: 10
     parent: examples
 ---
 
-**If you do not have a running Kapacitor instance check out the [getting started guide](/kapacitor/v0.13/introduction/getting_started/)
+**If you do not have a running Kapacitor instance check out the [getting started guide](/kapacitor/v1.0b/introduction/getting_started/)
 to get Kapacitor up and running on localhost.**
 
 Today we are game developers.
@@ -100,7 +100,7 @@ Publish the results.
 Store the results.
 
 To complete step one we need to buffer the incoming stream and return the most recent score update per player per game.
-Our [TICKscript](/kapacitor/v0.13/tick/) will look like this:
+Our [TICKscript](/kapacitor/v1.0b/tick/) will look like this:
 
 ```javascript
 var topPlayerScores = stream
@@ -136,7 +136,7 @@ var topScores = topPlayerScores
 
 The `topScores` variable now contains the top 15 player's score per game.
 All we need to be able to build our leaderboard.
-Kapacitor can expose the scores over HTTP via the [HTTPOutNode](/kapacitor/v0.13/nodes/http_out_node/).
+Kapacitor can expose the scores over HTTP via the [HTTPOutNode](/kapacitor/v1.0b/nodes/http_out_node/).
 We will call our task `top_scores`; with the following addition the most recent scores will be available at
 `http://localhost:9092/kapacitor/v1/tasks/top_scores/top_scores`.
 

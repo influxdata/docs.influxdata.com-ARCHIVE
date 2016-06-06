@@ -2,7 +2,7 @@
 title: Custom Anomaly Detection
 
 menu:
-  kapacitor_013:
+  kapacitor_10b:
     name: Custom Anomaly Detection
     identifier: anomaly_detection
     weight: 20
@@ -17,7 +17,7 @@ Functions.  This guide will walk through the necessary steps for
 writing and using your own UDFs within Kapacitor.
 
 If you haven't already, we recommend following the [getting started
-guide](/kapacitor/v0.13/introduction/getting_started/) for Kapacitor
+guide](/kapacitor/v1.0b/introduction/getting_started/) for Kapacitor
 prior to continuing.
 
 ## 3D Printing

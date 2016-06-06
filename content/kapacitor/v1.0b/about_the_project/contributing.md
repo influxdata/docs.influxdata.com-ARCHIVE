@@ -2,7 +2,7 @@
 title: Contributing
 
 menu:
-  kapacitor_013:
+  kapacitor_10b:
     name: Contributing
     weight: 10
     parent: about_the_project
