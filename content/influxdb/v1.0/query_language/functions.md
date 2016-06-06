@@ -1755,7 +1755,8 @@ SELECT first("water_level") FROM "h2o_feet" WHERE "location"='santa_monica' and 
 
 Now that we have a query that matches the trends of the raw `water_level` data
 it's time to determine the seasonal pattern in the data.
-We'll use that information when we implement the `HOLT_WINTERS()` function.
+We'll use this information when we implement the `HOLT_WINTERS()` function in
+the next step.
 
 Focusing on the green line in the chart below, notice the pattern that repeats
 about every 25 hours and 15 minutes.
@@ -1765,7 +1766,7 @@ That's four data points per season, so `4` is our seasonal pattern argument.
 
 **Step 3: Include the HOLT_WINTERS() function**
 
-Now it's time to add the `HOLT_WINTERS()` function to our query.
+Now we add the `HOLT_WINTERS()` function to our query.
 Here, we'll use `HOLT_WINTERS_WITH_FIT()` so that the query results show both
 the fitted values and the predicted values.
 
@@ -1774,12 +1775,11 @@ first argument (`10`) tells the function to predict 10 data points.
 Each point will be `379m` apart, the same interval as the first argument in the
 `GROUP BY time()` clause.
 
-The second argument (`12`) is the seasonal pattern in the `water_level` data.
-Notice that we use `12` instead of `4`; sometimes using a multiple of the
-seasonal pattern yields better predicted values.
+The second argument (`4`) is the seasonal pattern that we determined in the
+previous step.
 
 ```
-SELECT holt_winters_with_fit(first(water_level),10,12) FROM h2o_feet where location='santa_monica' and time >= '2015-08-22 22:12:00' and time <= '2015-08-28 03:00:00' group by time(379m,348m)
+SELECT holt_winters_with_fit(first(water_level),10,4) FROM h2o_feet where location='santa_monica' and time >= '2015-08-22 22:12:00' and time <= '2015-08-28 03:00:00' group by time(379m,348m)
 ```
 
 ![Third step](/img/influxdb/hw_third_step.png)
