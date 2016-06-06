@@ -17,7 +17,7 @@ The syntax for the line protocol is
 For example:
 
 ```bash
-measurement,tkey1=tval1,tkey2=tval2 fkey=fval,fkey2=fval2 1234567890000000000
+a_measurement,tkey1=tval1,tkey2=tval2 fkey=fval,fkey2=fval2 1234567890000000000
 ```
 
 ### Whitespace
@@ -30,21 +30,21 @@ There must also be whitespace between the field(s) and the timestamp, if one is 
 
 Valid (`value` and `otherval` are fields, `foo` and `bat` are tags)
 ```bash
-measurement value=12
-measurement value=12 1439587925
-measurement,foo=bar value=12
-measurement,foo=bar value=12 1439587925
-measurement,foo=bar,bat=baz value=12,otherval=21 1439587925
+a_measurement value=12
+a_measurement value=12 1439587925
+a_measurement,foo=bar value=12
+a_measurement,foo=bar value=12 1439587925
+a_measurement,foo=bar,bat=baz value=12,otherval=21 1439587925
 ```
 
 Invalid
 ```bash
-measurement,value=12
-measurement value=12,1439587925
-measurement foo=bar value=12
-measurement,foo=bar,value=12 1439587925
-measurement,foo=bar
-measurement,foo=bar 1439587925
+a_measurement,value=12
+a_measurement value=12,1439587925
+a_measurement foo=bar value=12
+a_measurement,foo=bar,value=12 1439587925
+a_measurement,foo=bar
+a_measurement,foo=bar 1439587925
 ```
 
 ### Timestamps
