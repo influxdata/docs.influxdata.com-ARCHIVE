@@ -16,7 +16,7 @@ Installation of the Telegraf package may require `root` or administrator privile
 
 Telegraf offers multiple [service plugins](/telegraf/v0.13/services) that may
 require custom ports.
-All port mappings can be modified through the configuration file 
+All port mappings can be modified through the configuration file
 which is located at `/etc/telegraf/telegraf.conf` for default installations.
 
 ## Installation
