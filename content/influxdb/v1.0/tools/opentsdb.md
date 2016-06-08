@@ -1,5 +1,6 @@
 ---
 title: Service Plugin - OpenTSDB
+newversionredirect: /write_protocols/opentsdb/
 menu:
   influxdb_1:
     weight: 80

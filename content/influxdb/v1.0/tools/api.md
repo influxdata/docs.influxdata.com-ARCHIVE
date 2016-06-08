@@ -1,5 +1,6 @@
 ---
 title: API Reference
+newversionredirect: /concepts/api/
 menu:
   influxdb_1:
     weight: 0

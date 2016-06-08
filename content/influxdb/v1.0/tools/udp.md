@@ -1,5 +1,6 @@
 ---
 title: Service Plugin - UDP
+newversionredirect: /write_protocols/udp/
 menu:
   influxdb_1:
     weight: 50

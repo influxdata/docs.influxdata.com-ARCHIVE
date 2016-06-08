@@ -1,5 +1,6 @@
 ---
 title: API Client Libraries
+newversionredirect: /clients/api/
 menu:
   influxdb_1:
     weight: 10

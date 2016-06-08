@@ -1,6 +1,6 @@
 ---
 title: Authentication and Authorization
-
+newversionredirect: /administration/authentication_and_authorization/
 menu:
   influxdb_1:
     weight: 0
