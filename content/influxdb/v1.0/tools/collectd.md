@@ -1,9 +1,9 @@
 ---
-title: Service - CollectD
+title: Service Plugin - CollectD
 menu:
   influxdb_1:
-    weight: 50
-    parent: write_protocols
+    weight: 70
+    parent: tools
 ---
 
 InfluxDB provides an easy way to hook up CollectD as an input source.

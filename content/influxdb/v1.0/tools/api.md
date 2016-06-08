@@ -2,8 +2,8 @@
 title: API Reference
 menu:
   influxdb_1:
-    weight: 80
-    parent: concepts
+    weight: 0
+    parent: tools
 ---
 
 The InfluxDB API provides a simple way interact with the database.

@@ -1,9 +1,9 @@
 ---
-title: Service - UDP
+title: Service Plugin - UDP
 menu:
   influxdb_1:
-    weight: 30
-    parent: write_protocols
+    weight: 50
+    parent: tools
 ---
 
 InfluxDB accepts writes over UDP.

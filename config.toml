@@ -2629,35 +2629,30 @@ SectionPagesMenu = "products"
     weight = 30
     url = "/influxdb/v1.0/troubleshooting/"
   [[menu.influxdb_1]]
+    name = "Tools"
+    identifier = "tools"
+    weight = 40
+    url = "/influxdb/v1.0/tools/"
+  [[menu.influxdb_1]]
     name = "Write Protocols and Plugins"
     identifier = "write_protocols"
-    weight = 40
+    weight = 50
     url = "/influxdb/v1.0/write_protocols/"
   [[menu.influxdb_1]]
     name = "Query Language"
     identifier = "query_language"
-    weight = 50
+    weight = 60
     url = "/influxdb/v1.0/query_language/"
-    [[menu.influxdb_1]]
-      name = "High availability"
-      identifier = "high_availability"
-      weight = 60
-      url = "/influxdb/v1.0/high_availability/"
   [[menu.influxdb_1]]
-    name = "Client Libraries"
-    identifier = "clients"
+    name = "High availability"
+    identifier = "high_availability"
     weight = 70
-    url = "/influxdb/v1.0/clients/"
+    url = "/influxdb/v1.0/high_availability/"
   [[menu.influxdb_1]]
     name = "Administration"
     identifier = "administration"
     weight = 80
     url = "/influxdb/v1.0/administration/"
-  [[menu.influxdb_1]]
-    name = "Tools"
-    identifier = "tools"
-    weight = 90
-    url = "/influxdb/v1.0/tools/"
   [[menu.influxdb_1]]
     name = "About the Project"
     identifier = "about"

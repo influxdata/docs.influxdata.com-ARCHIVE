@@ -1,13 +1,13 @@
 ---
-title: InfluxDB CLI/Shell
+title: CLI/Shell
 
 menu:
   influxdb_1:
-    weight: 0
+    weight: 20
     parent: tools
 ---
 
-The InfluxDB's command line interface (`influx`) is an interactive shell for the HTTP API.
+InfluxDB's command line interface (`influx`) is an interactive shell for the HTTP API.
 Use `influx` to write data (manually or from a file), query data interactively, and view query output in different formats.
 
 * [Launch `influx`](/influxdb/v1.0/tools/shell/#launch-influx)

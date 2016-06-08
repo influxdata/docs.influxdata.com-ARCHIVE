@@ -1,9 +1,9 @@
 ---
-title: HTTP API Client Libraries
+title: API Client Libraries
 menu:
   influxdb_1:
-    weight: 0
-    parent: clients
+    weight: 10
+    parent: tools
 ---
 
 This is a list of the client libraries which have some support for InfluxDB version 0.9.

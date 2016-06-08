@@ -1,26 +1,54 @@
 ---
 title: Tools
 ---
-## [InfluxDB Shell(CLI)](/influxdb/v01.0/tools/shell/)
 
-The Influx shell is an interactive shell for InfluxDB and the recommended *ad hoc* method of using the HTTP API.
+This sections covers the available tools for interacting with InfluxDB.
 
-## [InfluxDB Web Admin](/influxdb/v01.0/tools/web_admin/)
+## [API Reference](/influxdb/v1.0/tools/api/)
 
-The built-in web administration GUI is a simple way to interact with InfluxDB.
-For any significant use, whether writing or querying data, the HTTP API is the preferred method.
+Reference documentation for InfluxDB's HTTP API.
+
+Go straight to the reference documentation on:
+
+* [Writing data with the HTTP API](/influxdb/v1.0/tools/api/#write)
+* [Querying data with the HTTP API](/influxdb/v1.0/tools/api/#query)
+
+For friendlier documentation, see the guides on
+[writing data](/influxdb/v1.0/guides/writing_data/) and
+[querying data](/influxdb/v1.0/guides/querying_data/) with the HTTP API.
+
+## [CLI/Shell](/influxdb/v01.0/tools/shell/)
+
+InfluxDB's Command Line Interface (`influx`) is an interactive shell for the
+HTTP API that comes with every InfluxDB package.
+Use `influx` to write data (manually or from a file), query data interactively,
+and view query output in different formats:
+
+![CLI GIF](/img/influxdb/cli-1.0-beta.gif)
+
+Go straight to the documentation on:
+
+* [Launching `influx`](/influxdb/v1.0/tools/shell/#launch-influx)
+* [Writing data with `influx`](/influxdb/v1.0/tools/shell/#write-data-to-influxdb-with-insert)
+
+## [Web Admin Interface](/influxdb/v01.0/tools/web_admin/)
+
+InfluxDB's built-in web administration GUI.
+We recommend using the HTTP API or the CLI instead of the Web Admin.
 
 ## [Grafana Graphs and Dashboards](http://docs.grafana.org/datasources/influxdb/)
 
 Grafana is a convenient dashboard tool for visualizing time series data.
 It was originally built for Graphite, modeled after Kibana, and since been updated to support InfluxDB.
 
-<dt> Because of the [changes](/influxdb/v0.11/concepts/010_vs_011/#breaking-api-changes) to the `SHOW SERIES` and `SHOW TAG VALUES` formats in InfluxDB 0.11, InfluxDB 1.0 will not work with the Query Editor in Grafana 2.6. This issue does not affect existing queries and dashboards or users working with Grafana 3.0. </dt>
+<dt> Because of the [changes](/influxdb/v0.11/concepts/010_vs_011/#breaking-api-changes) to the `SHOW SERIES` and `SHOW TAG VALUES` formats in InfluxDB 0.11, InfluxDB 1.0 will not work with the Query Editor in Grafana 2.6.
+This issue does not affect existing queries and dashboards or users working with Grafana 3.0. </dt>
 
-## [Chronograf Dashboards](/chronograf/v01.0/)
+## Service Plugins
 
-## [Kapacitor Monitoring](/kapacitor/v01.0/)
-
-## [Telegraf](/telegraf/v01.0)
-
-Telegraf is an open source tool for metrics collection (e.g. CollectD) built and maintained by the InfluxDB team.
+InfluxDB accepts writes over
+[UDP](/influxdb/v1.0/tools/udp/)
+and provides an easy way to set up
+[Graphite](/influxdb/v1.0/tools/graphite/),
+[CollectD](/influxdb/v1.0/tools/collectd/),
+and [OpenTSDB](/influxdb/v1.0/tools/opentsdb/) as input sources.

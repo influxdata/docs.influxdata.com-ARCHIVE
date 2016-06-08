@@ -3,7 +3,7 @@ title: Web Admin Interface
 
 menu:
   influxdb_1:
-    weight: 10
+    weight: 30
     parent: tools
 ---
 
