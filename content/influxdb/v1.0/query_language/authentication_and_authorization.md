@@ -3,8 +3,8 @@ title: Authentication and Authorization
 newversionredirect: /administration/authentication_and_authorization/
 menu:
   influxdb_1:
-    weight: 0
-    parent: administration
+    weight: 90
+    parent: query_language
 ---
 
 This document covers setting up and managing authentication and authorization in InfluxDB.

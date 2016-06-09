@@ -2,7 +2,7 @@
 title: Tools
 ---
 
-This sections covers the available tools for interacting with InfluxDB.
+This section covers the available tools for interacting with InfluxDB.
 
 ## [API Reference](/influxdb/v1.0/tools/api/)
 
