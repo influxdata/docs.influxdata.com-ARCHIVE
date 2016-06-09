@@ -60,16 +60,17 @@ Assume that, in the long run, we're only interested in the average number of ord
 and by website at 30 minute intervals.
 In the next steps, we use RPs and CQs to:
 
- * Automatically delete the raw, ten-second resolution data that are older than two hours
  * Automatically aggregate the ten-second resolution data to 30-minute resolution data
+ * Automatically delete the raw, ten-second resolution data that are older than two hours
  * Automatically delete the 30-minute resolution data that are older than 52 weeks
 
 ### Database Preparation
 We perform the following steps before writing the data to the database
 `food_data`.
-We do this **before** inserting any data because InfluxDB only performs CQs on
-new data, that is, data with timestamps that occur after the initial execution
-of the CQ.
+We do this **before** inserting any data because CQs only run against recent
+data; that is, data with timestamps that are no older than `now()` minus
+the `FOR` clause of the CQ, or `now()` minus the `GROUP BY time()` interval if
+the CQ has no `FOR` clause.
 
 #### 1. Create the database
 
