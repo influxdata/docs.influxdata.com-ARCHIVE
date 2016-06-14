@@ -261,10 +261,12 @@ POST http://localhost:8086/write
 | :--------------------- | :---------------- | :---------- |
 | db=\<database> | Required | Sets the target [database](/influxdb/v1.0/concepts/glossary/#database) for the write. |
 | p=\<password> | Optional if you haven't [enabled authentication](/influxdb/v1.0/administration/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication. | Sets the password for authentication if you've enabled authentication. Use with the query string parameter `u`. |
-| precision=[n,u,ms,s,m,h] | Optional | Sets the precision for the supplied Unix time values. InfluxDB assumes that timestamps are in nanoseconds if you do not specify `precision`. |
+| precision=[n,u,ms,s,m,h] | Optional | Sets the precision for the supplied Unix time values. InfluxDB assumes that timestamps are in nanoseconds if you do not specify `precision`.* |
 | rp=\<retention_policy_name> | Optional | Sets the target [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp) for the write. InfluxDB writes to the `DEFAULT` retention policy if you do not specify a retention policy. |
 | u=\<username> | Optional if you haven't [enabled authentication](/influxdb/v1.0/administration/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication. | Sets the username for authentication if you've enabled authentication. The user must have write access to the database. Use with the query string parameter `p`. |
 
+> \* We recommend using the least precise precision possible as this can result
+in significant improvements in compression.
 
 #### Request Body
 

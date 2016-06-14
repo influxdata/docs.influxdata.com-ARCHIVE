@@ -1,5 +1,5 @@
 ---
-title: Writing Data
+title: Writing Data with the HTTP API
 
 menu:
   influxdb_1:

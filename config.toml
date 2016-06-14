@@ -2634,7 +2634,7 @@ SectionPagesMenu = "products"
     weight = 40
     url = "/influxdb/v1.0/tools/"
   [[menu.influxdb_1]]
-    name = "Write Protocols and Plugins"
+    name = "Write Protocol"
     identifier = "write_protocols"
     weight = 50
     url = "/influxdb/v1.0/write_protocols/"
