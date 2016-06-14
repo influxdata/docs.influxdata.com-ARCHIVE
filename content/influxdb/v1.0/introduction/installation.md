@@ -63,7 +63,7 @@ sudo apt-get update && sudo apt-get install influxdb
 sudo service influxdb start
 ```
 
-Or if your operating system is using systemd:
+Or if your operating system is using systemd (Ubuntu 15.04+, Debian 8+):
 
 ```bash
 sudo apt-get update && sudo apt-get install influxdb
@@ -95,7 +95,7 @@ sudo yum install influxdb
 sudo service influxdb start
 ```
 
-Or if your operating system is using systemd:
+Or if your operating system is using systemd (CentOS 7+, RHEL 7+):
 
 ```bash
 sudo yum install influxdb
