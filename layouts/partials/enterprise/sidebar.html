@@ -1,0 +1,49 @@
+<div class="sidebar--toggle" id="sidebar--toggle"><span class="icon search"></span> &nbsp;Browse Enterprise Documentation</div>
+<div class="sidebar--mask-container" id="sidebar--mask-container">
+	<div class="sidebar--mask" id="sidebar--mask"></div>
+</div>
+<aside class="sidebar" id="sidebar">
+	<section class="sidebar--section">
+		<p class="sidebar--support-desc"><strong>Need immediate answers?</strong><br/>Get support from the experts</p>
+		<a class="sidebar--support-ad" href="https://influxdata.com/pricing/#product-subscriptions" target="_blank">Get Support</a>
+	</section>
+	{{ $currentNode := . }}
+	{{ if (eq $currentNode.RelPermalink "/enterprise/") }}
+		{{ range (index $.Site.Menus .Site.Data.default_versions.enterprise) }}
+			<section class="sidebar--section">
+				<div class="sidebar--section-title">
+					<a class="{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{.URL}}">{{ .Name }}</a>
+				</div>
+				{{ if .HasChildren }}
+						{{ range .Children }}
+						<a class="sidebar--page{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
+						{{ end }}
+				{{end}}
+			</section>
+		{{end}}
+	{{end}}
+	{{ range .Site.Menus.enterprise }}
+		{{ if (in $currentNode.Permalink .URL) }}
+			{{ range (index $.Site.Menus .Identifier) }}
+				<section class="sidebar--section">
+					<div class="sidebar--section-title">
+						<a class="{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{.URL}}">{{ .Name }}</a>
+					</div>
+					{{ if .HasChildren }}
+						{{ range .Children }}
+						  <a class="sidebar--page{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}" {{ if eq .Identifier "download" }} target="blank" {{ end }}>{{ .Name }}</a>
+						{{ end }}
+					{{end}}
+				</section>
+			{{end}}
+		{{end}}
+	{{end}}
+	<section class="sidebar--section">
+		<div class="sidebar--section-title">
+			<a href="/enterprise/">Enterprise Versions</a>
+		</div>
+		{{ range .Site.Menus.enterprise }}
+		<a class="sidebar--page{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
+		{{end}}
+	</section>
+</aside>
