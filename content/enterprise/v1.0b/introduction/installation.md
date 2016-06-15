@@ -15,24 +15,26 @@ This document gets you up and running with the Enterprise web application.
 * A functioning InfluxDB cluster
 * A server (the server can be part of the cluster or separate from the cluster)
 
-### Steps
+### Install PostgreSQL and InfluxEnterprise
 
-#### 1. Install PostgreSQL
+#### PostgreSQL
 
 ```
 sudo apt-get update
 sudo apt-get -y install postgresql postgresql-contrib
 ```
 
-#### 2. Install the InfluxEnterprise package
+#### InfluxEnterprise package
 
-TODO: Put the right information here.
+TODO: Put the right information in here.
 ```
 wget https://bagels/smelly-toads/itsabird_amd64.deb
 sudo dpkg -i itsabird_amd64.deb
 ```
 
-#### 3. Edit the configuration file
+### Setup Steps
+
+#### 1. Edit the configuration file
 
 Open the configuration file in `/etc/influx-enterprise/influx-enterprise.conf`
 and update:             
@@ -64,9 +66,9 @@ from_email = "postmaster@mailgun.influxdata.com"
 url = "postgres://postgres:<your_password>@localhost:5432/<your_database_name>" #✨
 ```
 
-#### 4. Set the password for the system's local `postgres` user
+#### 2. Set the password for the system's local `postgres` user
 
-Login to the PostgreSQL:
+Login to PostgreSQL:
 ```
 root@enterprise-web:~# sudo -u postgres psql
 -> psql (9.3.12)
@@ -87,9 +89,10 @@ Exit PostgreSQL:
 postgres=# \q
 ```
 
-#### 5. Create the database
+#### 3. Create the database
 
-Execute the following command and enter your password when prompted.
+Execute the following command, replacing `<your_database_name>` with your
+database name, and enter your password when prompted.
 ```
 psql -U postgres -h "localhost" -c "CREATE DATABASE <your_database_name>;"
 ```
@@ -103,7 +106,7 @@ Output:
 > **Note:** The database name must match the database name in
 `/etc/influx-enterprise/influx-enterprise.conf`.
 
-#### 6. Migrate the configuration file
+#### 4. Migrate the configuration file
 
 ```
 /usr/bin/influx-enterprise migrate --config /etc/influx-enterprise/influx-enterprise.conf
@@ -122,7 +125,7 @@ Output:
 > 0008_rename_product_id_to_node_id.up.sql
 ```
 
-#### 7. Start the Enterprise web application
+#### 5. Start the Enterprise web application
 
 ```
 service influx-enterprise start
