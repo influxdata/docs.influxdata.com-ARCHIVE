@@ -3,7 +3,7 @@ title: Enterprise Beta Documentation
 
 menu:
   enterprise:
-    name: v1.0
-    identifier: enterprise_1
+    name: v1.0b
+    identifier: enterprise_1b
     weight: 0
 ---
