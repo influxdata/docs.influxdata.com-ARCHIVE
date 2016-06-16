@@ -56,7 +56,7 @@ In this case, and in all similar cases, the negative permission holds and User A
 cannot write data.
 ```
 User A
-  O      ---> Role R/W ---> Permission to Read Data, Permission to Write Data ❌      
+  O      ---> Role R/W ---> Permission to Read Data ✅, Permission to Write Data ❌      
  /|\        
  / \     ---> Negative Permission to Write Data ✅
 ```
