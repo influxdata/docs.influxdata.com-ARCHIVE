@@ -23,7 +23,7 @@ A permission is a grant for access.
 They can be global, cluster specific, or database specific.
 Permissions can be granted to roles and to users.
 
-TODO: Confirm
+*TODO: Confirm*
 
 | Permission | Description | Global | Cluster Specific | Database Specific
 | :--------- | :---------- | :----- | :--------------- | :---------------- |

@@ -12,5 +12,5 @@ it's time to start working with the app.
 
 This document walk you through:
 
-* TODO: something
-* TODO: something else
+* *TODO: something*
+* *TODO: something else*

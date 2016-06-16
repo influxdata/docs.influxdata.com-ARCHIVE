@@ -6,12 +6,12 @@ menu:
     parent: introduction
 ---
 
-The Enterprise web application is TODO: cool description here.
+The Enterprise web application is *TODO: cool description here*.
 This document gets you up and running with the Enterprise web application.
 
 ### Requirements
 
-* Your InfluxEnterprise [license key](TODO: LINK HERE)
+* Your InfluxEnterprise [license key](*TODO: LINK HERE*)
 * A functioning InfluxDB cluster (have your meta servers' IP addresses handy)
 * A server (the server can be part of the cluster or separate from the cluster)
 
@@ -26,7 +26,7 @@ sudo apt-get -y install postgresql postgresql-contrib
 
 #### InfluxEnterprise package
 
-TODO: Put the right information in here.
+*TODO: Put the right information in here.*
 ```
 wget https://bagels/smelly-toads/itsabird_amd64.deb
 sudo dpkg -i itsabird_amd64.deb
@@ -40,7 +40,7 @@ Open the configuration file in `/etc/influx-enterprise/influx-enterprise.conf`
 and update:             
 
 * The first `url` setting with your server's IP address
-* The `license_key` setting with your [license key](TODO: link here)
+* The `license_key` setting with your [license key](*TODO: link here*)
 * The `urls` setting in the `[[meta]]` section with the IP addresses of your
 cluster's meta servers
 * The `url` setting in the `[database]` section with the password for the
