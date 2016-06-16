@@ -77,7 +77,7 @@ root@enterprise-web:~# sudo -u postgres psql
 -> Type "help" for help.
 ```
 
-Set the password:
+Set the password, replacing `<your_password>` with your password:
 ```
 postgres=# ALTER USER postgres PASSWORD '<your_password>';
 -> ALTER ROLE
@@ -107,7 +107,7 @@ Output:
 #### 4. Migrate the configuration file
 
 ```
-/usr/bin/influx-enterprise migrate --config /etc/influx-enterprise/influx-enterprise.conf
+influx-enterprise migrate --config /etc/influx-enterprise/influx-enterprise.conf
 ```
 
 Output:
