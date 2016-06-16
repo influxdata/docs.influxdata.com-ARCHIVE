@@ -12,7 +12,7 @@ This document gets you up and running with the Enterprise web application.
 ### Requirements
 
 * Your InfluxEnterprise [license key](TODO: LINK HERE)
-* A functioning InfluxDB cluster
+* A functioning InfluxDB cluster (have your meta servers' IP addresses handy)
 * A server (the server can be part of the cluster or separate from the cluster)
 
 ### Install PostgreSQL and InfluxEnterprise
@@ -41,8 +41,10 @@ and update:
 
 * The first `url` setting with your server's IP address
 * The `license_key` setting with your [license key](TODO: link here)
+* The `urls` setting in the `[[meta]]` section with the IP addresses of your
+cluster's meta servers
 * The `url` setting in the `[database]` section with the password for the
-system's local `postgres` user AND your database name
+system's local `postgres` user
 
 ```
 url = "http://<your_server's_IP_address>:3000" #✨
@@ -54,7 +56,7 @@ license_key = "<your_license_key>" #✨
 shared-secret = "long pass phrase used for signing tokens"
 
 [[meta]]
-urls = ["enterprise-server1:8091"]
+urls = ["<meta_server_IP_address_1>:8091","<meta_server_IP_address_2>:8091","<meta_server_IP_address_3>:8091"] #✨
 use-tls = false
 
 [smtp]
@@ -63,7 +65,7 @@ port = "25"
 from_email = "postmaster@mailgun.influxdata.com"
 
 [database]
-url = "postgres://postgres:<your_password>@localhost:5432/<your_database_name>" #✨
+url = "postgres://postgres:<your_password>@localhost:5432/enterprise" #✨
 ```
 
 #### 2. Set the password for the system's local `postgres` user
@@ -89,12 +91,11 @@ Exit PostgreSQL:
 postgres=# \q
 ```
 
-#### 3. Create the database
+#### 3. Create the PostgreSQL database
 
-Execute the following command, replacing `<your_database_name>` with your
-database name, and enter your password when prompted.
+Execute the following command and enter your password when prompted.
 ```
-psql -U postgres -h "localhost" -c "CREATE DATABASE <your_database_name>;"
+psql -U postgres -h "localhost" -c "CREATE DATABASE enterprise;"
 ```
 
 Output:
@@ -102,9 +103,6 @@ Output:
 -> Password for user postgres: <your_password>
 -> CREATE DATABASE
 ```
-
-> **Note:** The database name must match the database name in
-`/etc/influx-enterprise/influx-enterprise.conf`.
 
 #### 4. Migrate the configuration file
 
