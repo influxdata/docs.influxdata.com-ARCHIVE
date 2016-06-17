@@ -113,17 +113,18 @@ All configuration options listed below are set to their default value.
 InfluxData, the company, relies on reported data from running nodes
 primarily to track the adoption rates of different InfluxDB versions.
 This data helps InfluxData support the continuing development of
-InfluxDB.  InfluxData does not request, track, or store the IP
-addresses of reporting servers.
+InfluxDB.  
 
 The `reporting-disabled` option toggles
-the reporting of anonymous data every 24 hours to `m.influxdb.com`.
-Each report includes a unique, randomly-generated identifier
-(an 8-byte Raft ID), OS, architecture, InfluxDB version, and the
+the reporting of data every 24 hours to `usage.influxdata.com`.
+Each report includes a randomly-generated identifier, OS, architecture, 
+InfluxDB version, and the
 number of [databases](/influxdb/v1.0/concepts/glossary/#database),
 [measurements](/influxdb/v1.0/concepts/glossary/#measurement), and
 unique [series](/influxdb/v1.0/concepts/glossary/#series).  Setting
 this option to `true` will disable reporting.
+
+>**Note:** No data from user databases is ever transmitted.
 
 ## [meta]
 
@@ -140,21 +141,13 @@ Files in the `meta` directory include `meta.db`.
 
 ### retention-autocreate = true
 
-InfluxData, the company, relies on reported data from running nodes
-primarily to track the adoption rates of different InfluxDB versions.
-This data helps InfluxData support the continuing development of
-InfluxDB.  
+Retention policy auto-creation automatically creates a [`DEFAULT` retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp) when a database is created.
+The retention policy is has an infinite duration and is also set as the
+database's `DEFAULT` retention policy, which is used when a write or query does
+not specify a retention policy.
+Disable this setting to prevent the creation of this retention policy when creating databases.
 
-The `reporting-disabled` option toggles
-the reporting of data every 24 hours to `usage.influxdata.com`.
-Each report includes a randomly-generated identifier, OS, architecture, 
-InfluxDB version, and the
-number of [databases](/influxdb/v1.0/concepts/glossary/#database),
-[measurements](/influxdb/v1.0/concepts/glossary/#measurement), and
-unique [series](/influxdb/v1.0/concepts/glossary/#series).  Setting
-this option to `true` will disable reporting.
-
->**Note:** No data from user databases is ever transmitted.
+See the next setting to configure the name of the retention policy.
 
 ### default-retention-policy-name = "autogen"
 
