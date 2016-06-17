@@ -14,7 +14,7 @@ Once you install you can change those ports and other options in the configurati
 
 ## Reporting
 
-As of version 0.7.1, InfluxDB will report data once every 24 hours to m.influxdb.com.
+As of version 0.7.1, InfluxDB will report usage data once every 24 hours to m.influxdb.com.
 This includes the raft id (randomly generated 8 bytes), the InfluxDB version, the OS, and the architecture (amd64, ARM, etc).
 This information is very helpful for our project.
 It lets us know how many servers are running out there in the world and, more importantly, which versions.
