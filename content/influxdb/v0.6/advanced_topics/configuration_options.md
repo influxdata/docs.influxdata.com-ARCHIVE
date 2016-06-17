@@ -20,12 +20,10 @@ Comments in the file explain the options.
 
 bind-address = "0.0.0.0"
 
-# Once every 24 hours InfluxDB will report anonymous data to m.influxdb.com
+# Once every 24 hours InfluxDB will report usage data to m.influxdb.com
 # The data includes raft name (random 8 bytes), os, arch and version
-# We don't track ip addresses of servers reporting.
-This is only used
-# to track the number of instances running and the versions which
-# is very helpful for us.
+# This is only used to track the number of instances running and 
+# the versions which is very helpful for us.
 # Change this option to true to disable reporting.
 reporting-disabled = false
 
