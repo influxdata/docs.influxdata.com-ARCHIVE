@@ -37,7 +37,7 @@ and timestamp.
 The sort should match the results from the
 [Go bytes.Compare function](http://golang.org/pkg/bytes/#Compare).
 >
-* Use the least precise
+* Use the coarsest
 [precision](/influxdb/v1.0/tools/api/#write) possible for timestamps.
 This can result in significant improvements in compression.
 
@@ -202,16 +202,16 @@ Users do not need to escape all other special characters.
 #### Example
 
 Write a point where the measurement is `"measurement with quo⚡️es and emoji"`, the tag key is `tag key with sp🚀ces`, the
-tag value is `tag,value,with"commas"`, the field key is `field_key\\\\` and the field value is `string field value, only " need be qu🍭ted`.
+tag value is `tag,value,with"commas"`, the field key is `field_k\ey` and the field value is `string field value, only " need be esc🍭ped`.
 
 ```
-> INSERT "measurement\ with\ quo⚡️es\ and\ emoji",tag\ key\ with\ sp🚀ces=tag\,value\,with"commas" field_k\ey="string field value, only \" need be qu🍭ted"
+> INSERT "measurement\ with\ quo⚡️es\ and\ emoji",tag\ key\ with\ sp🚀ces=tag\,value\,with"commas" field_k\ey="string field value, only \" need be esc🍭ped"
 ```
 
 ### Additional Naming Guidelines
 
 `#` at the beginning of the line is a valid comment character for Line Protocol.
-InfluxDB will ignore all subsequent characters.
+InfluxDB will ignore all subsequent characters until the next newline `\n`.
 
 Measurement names, tag keys, tag values, field keys, and field values are
 case sensitive.
@@ -233,7 +233,7 @@ write Line Protocol to the database.
 A point is uniquely identified by the measurement name, tag set, and timestamp.
 If you submit Line Protocol with the same measurement, tag set, and timestamp,
 but with a different field set, the field set becomes the union of the old
-field set and the new field set, where any ties go to the new field set.
+field set and the new field set, where any conflicts favor the new field set.
 
 See
 [Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#writing-duplicate-points)

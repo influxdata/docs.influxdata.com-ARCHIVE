@@ -12,8 +12,8 @@ database.
 Points must be in Line Protocol format for InfluxDB to successfully parse and
 write points.
 
-This page introduces the syntax of Line Protocol using fictional temperature
-data and covers:
+Using fictional temperature data, this page introduces Line Protocol.
+It covers:
 
 * [Syntax](#syntax)
 * [Data types](#data-types)
@@ -114,10 +114,8 @@ weather,location=us-midwest temperature=82,bug_concentration=98 1465839830100400
 
 ### Whitespace II
 
-Separate the field set and, if you're including a timestamp with your data
-point, the timestamp with a whitespace.
-The whitespace is required in Line Protocol if you're including a timestamp
-(see the next section for more on timestamps).
+Separate the field set and the optional timestamp with a whitespace.
+The whitespace is required in Line Protocol if you're including a timestamp.
 
 ### Timestamp
 
@@ -136,9 +134,9 @@ local timestamp instead of `2016-06-13T17:43:50.1004002Z`.
 weather,location=us-midwest temperature=82
 ```
 
-It is possible to specify the precision (that is, if the timstamp is in hours,
-minutes, seconds, and so on) of the timestamp with the HTTP API.
-We recommend using the least precise precision possible as this can result in
+Use the HTTP API to specify timestamps with a precision other than nanoseconds,
+such as microseconds, milliseconds, or seconds.
+We recommend using the coarsest precision possible as this can result in
 significant improvements in compression.
 See the [API Reference](/influxdb/v1.0/tools/api/#write) for more information.
 
@@ -189,9 +187,9 @@ weather,location=us-midwest temperature=82i 1465839830100400200
 * Strings - double quote string field values (more on quoting in Line Protocol
 [below](#quoting)).
 
-    Store the field value `too hot` as a string:
+    Store the field value `too warm` as a string:
     ```
-weather,location=us-midwest temperature="too hot" 1465839830100400200
+weather,location=us-midwest temperature="too warm" 1465839830100400200
     ```
 
 * Booleans - specify TRUE with `t`, `T`, `true`, `True`, or `TRUE`. Specify
@@ -250,8 +248,8 @@ It's also not valid Line Protocol.
 
     Example:
     ```
-> INSERT weather,location=us-midwest temperature='too hot'
-ERR: {"error":"unable to parse 'weather,location=us-midwest temperature='too hot'': invalid boolean"}
+> INSERT weather,location=us-midwest temperature='too warm'
+ERR: {"error":"unable to parse 'weather,location=us-midwest temperature='too warm'': invalid boolean"}
     ```
 
 * Do not double or single quote measurement names, tag keys, tag values, and field
@@ -295,12 +293,12 @@ InfluxDB will assume that those values are strings.
 
     Example:
     ```
-> INSERT weather,location=us-midwest temperature="too hot"
+> INSERT weather,location=us-midwest temperature="too warm"
 > SELECT * FROM weather
 name: weather
 -------------
 time				            location	 temperature
-2016-06-13T19:10:09.995766248Z	us-midwest	 too hot
+2016-06-13T19:10:09.995766248Z	us-midwest	 too warm
     ```
 
 ## Special characters and keywords
@@ -354,7 +352,11 @@ For example, Line Protocol handles emojis with no problem:
 
 ```
 > INSERT we⛅️ther,location=us-midwest temper🔥ture=82 1465839830100400200
->
+> SELECT * FROM "we⛅️ther"
+name: we⛅️ther
+------------------
+time			              location	   temper🔥ture
+1465839830100400200	 us-midwest	 82
 ```
 
 ### Keywords
@@ -404,14 +406,18 @@ Protocol from a file.
 There are several ways to write data to InfluxDB.
 See the [Tools](http://localhost:1313/influxdb/v1.0/tools/) section for more
 on the [HTTP API](/influxdb/v1.0/tools/api/#write), the
-[CLI](/influxdb/v1.0/tools/shell/), and other possibilities.
+[CLI](/influxdb/v1.0/tools/shell/), and the available Service Plugins (
+[UDP](/influxdb/v1.0/tools/udp/),
+[Graphite](/influxdb/v1.0/tools/graphite/),
+[CollectD](/influxdb/v1.0/tools/collectd/), and
+[OpenTSDB](/influxdb/v1.0/tools/opentsdb/)).
 
 ### Duplicate points
 
 A point is uniquely identified by the measurement name, tag set, and timestamp.
 If you submit Line Protocol with the same measurement, tag set, and timestamp,
 but with a different field set, the field set becomes the union of the old
-field set and the new field set, where any ties go to the new field set.
+field set and the new field set, where any conflicts favor the new field set.
 
 See
 [Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#writing-duplicate-points)
