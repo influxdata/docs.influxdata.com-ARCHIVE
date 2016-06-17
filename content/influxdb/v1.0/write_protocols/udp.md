@@ -8,7 +8,7 @@ menu:
 
 InfluxDB accepts writes over UDP.
 By default, no ports are open to UDP.
-To configure InfluxDB to support writes over UDP you must adjust your config file.
+To configure InfluxDB to support writes over UDP you must adjust your [config file](influxdb/v1.0/administration/config/#udp).
 
 ## A note on UDP/IP OS Buffer sizes
 
