@@ -110,20 +110,12 @@ All configuration options listed below are set to their default value.
 
 ### reporting-disabled = false
 
-InfluxData, the company, relies on reported data from running nodes
-primarily to track the adoption rates of different InfluxDB versions.
-This data helps InfluxData support the continuing development of
-InfluxDB.  InfluxData does not request, track, or store the IP
-addresses of reporting servers.
+InfluxData, the company, relies on reported data from running nodes primarily to track the adoption rates of different InfluxDB versions. This data helps InfluxData support the continuing development of InfluxDB. 
 
-The `reporting-disabled` option toggles
-the reporting of anonymous data every 24 hours to `m.influxdb.com`.
-Each report includes a unique, randomly-generated identifier
-(an 8-byte Raft ID), OS, architecture, InfluxDB version, and the
-number of [databases](/influxdb/v0.13/concepts/glossary/#database),
-[measurements](/influxdb/v0.13/concepts/glossary/#measurement), and
-unique [series](/influxdb/v0.13/concepts/glossary/#series).  Setting
-this option to `true` will disable reporting.
+The `reporting-disabled` option toggles the reporting of data every 24 hours to `usage.influxdata.com`. Each report includes a randomly-generated identifier, OS, architecture, InfluxDB version, and the number of [databases](/influxdb/v0.13/concepts/glossary/#database), [measurements](/influxdb/v0.13/concepts/glossary/#measurement), and unique [series](/influxdb/v0.13/concepts/glossary/#series). Setting this option to `true` will disable reporting.
+
+>**Note:** No data from user databases is ever transmitted.
+
 
 ## [meta]
 
