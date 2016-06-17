@@ -11,9 +11,9 @@ This document gets you up and running with the Enterprise web application.
 
 ### Requirements
 
-* Your InfluxEnterprise [license key](*TODO: LINK HERE*)
+* Your InfluxEnterprise [license key](*TODO: LINK HERE*) or [license file](*TODO: LINK HERE*)
 * A functioning InfluxDB cluster (have your meta servers' IP addresses handy)
-* A server (the server can be part of the cluster or separate from the cluster)
+* A server (the server can be part of the InfluxDB cluster or separate from the cluster)
 
 ### Install PostgreSQL and InfluxEnterprise
 
@@ -26,7 +26,7 @@ sudo apt-get -y install postgresql postgresql-contrib
 
 #### InfluxEnterprise package
 
-*TODO: Put the right information in here.*
+*TODO: Link to where to find this information on the portal.*
 ```
 wget https://bagels/smelly-toads/itsabird_amd64.deb
 sudo dpkg -i itsabird_amd64.deb
@@ -40,7 +40,7 @@ Open the configuration file in `/etc/influx-enterprise/influx-enterprise.conf`
 and update:             
 
 * The first `url` setting with your server's IP address
-* The `license_key` setting with your [license key](*TODO: link here*)
+* The `license_key` setting with your [license key](*TODO: link here*)*
 * The `urls` setting in the `[[meta]]` section with the IP addresses of your
 cluster's meta servers
 * The `url` setting in the `[database]` section with the password for the
@@ -67,6 +67,14 @@ from_email = "postmaster@mailgun.influxdata.com"
 [database]
 url = "postgres://postgres:<your_password>@localhost:5432/enterprise" #✨
 ```
+> \* If you're using a license file instead of a license key, change
+the `license_key` option to `license_file` and set it to the path of your
+license file:
+```
+license_file = "<path_to_license_file>"
+```
+
+
 
 #### 2. Set the password for the system's local `postgres` user
 

@@ -1,5 +1,5 @@
 ---
-title: Enterprise Beta Documentation
+title: InfluxEnterprise Beta Documentation
 
 menu:
   enterprise:
@@ -7,3 +7,10 @@ menu:
     identifier: enterprise_1b
     weight: 0
 ---
+
+InfluxEnterprise offers highly scalable InfluxDB on your infrastructure with a
+management UI.
+
+*TODO:
+Link to the portal, to pricing information and to the sign up page.
+Document sign up steps and how to get a license key.*
