@@ -32,9 +32,12 @@ you may want to check out our
 
 ### Ubuntu & Debian
 
-For instructions on how to install the Debian package from a file, please see the [downloads page](https://influxdata.com/downloads/).
+For instructions on how to install the Debian package from a file,
+please see the
+[downloads page](https://influxdata.com/downloads/). Debian and Ubuntu
+users can install the latest stable version of InfluxDB using the
+`apt-get` package manager.
 
-Debian and Ubuntu users can install the latest stable version of InfluxDB using the `apt-get` package manager.
 For Ubuntu users, you can add the InfluxData repository by using the following commands:
 
 ```bash
@@ -57,6 +60,13 @@ And then to install and start the InfluxDB service:
 ```bash
 sudo apt-get update && sudo apt-get install influxdb
 sudo service influxdb start
+```
+
+Or if your operating system is using systemd (Ubuntu 15.04+, Debian 8+):
+
+```bash
+sudo apt-get update && sudo apt-get install influxdb
+sudo systemctl start influxdb
 ```
 
 ### RedHat & CentOS
@@ -82,6 +92,13 @@ you can install and start the InfluxDB service by running:
 ```bash
 sudo yum install influxdb
 sudo service influxdb start
+```
+
+Or if your operating system is using systemd (CentOS 7+, RHEL 7+):
+
+```bash
+sudo yum install influxdb
+sudo systemctl start influxdb
 ```
 
 ### SLES & openSUSE
