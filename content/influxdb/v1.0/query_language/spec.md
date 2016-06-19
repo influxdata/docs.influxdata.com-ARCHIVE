@@ -743,6 +743,9 @@ SHOW TAG VALUES WITH KEY = "region"
 -- show tag values from the cpu measurement for the region tag
 SHOW TAG VALUES FROM "cpu" WITH KEY = "region"
 
+-- show tag values across all measurements for all tag keys that do not include the letter c
+SHOW TAG VALUES WITH KEY !~ /.*c.*/
+
 -- show tag values from the cpu measurement for region & host tag keys where service = 'redis'
 SHOW TAG VALUES FROM "cpu" WITH KEY IN ("region", "host") WHERE "service" = 'redis'
 ```
@@ -821,7 +824,7 @@ where_clause    = "WHERE" expr .
 
 with_measurement_clause = "WITH MEASUREMENT" ( "=" measurement | "=~" regex_lit ) .
 
-with_tag_clause = "WITH KEY" ( "=" tag_key | "IN (" tag_keys ")" ) .
+with_tag_clause = "WITH KEY" ( "=" tag_key | "!=" tag_key | "=~" regex_lit | "IN (" tag_keys ")"  ) .
 ```
 
 ## Expressions

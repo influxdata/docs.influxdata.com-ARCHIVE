@@ -266,6 +266,7 @@ location
 
 ## Explore tag values with SHOW TAG VALUES
 The `SHOW TAG VALUES` query returns the set of [tag values](/influxdb/v1.0/concepts/glossary/#tag-value) for a specific tag key across all measurements in the database.
+`SHOW TAG VALUES` supports regular expressions in the `WITH KEY` clause.
 Syntax for specifying a single tag key:
 ```sql
 SHOW TAG VALUES [FROM <measurement_name>] WITH KEY = "<tag_key>"
@@ -333,6 +334,17 @@ name: h2o_temperature
 key		     value
 location	 coyote_creek
 location	 santa_monica
+```
+
+Return the tag values for all tag keys that do not include the letter `c`:
+```
+> SHOW TAG VALUES WITH KEY !~ /.*c.*/
+name: h2o_quality
+-----------------
+key       value
+randtag	  1
+randtag	  2
+randtag	  3
 ```
 
 Return the tag values for the tag key `randtag` for a specific measurement in the `NOAA_water_database` database:
