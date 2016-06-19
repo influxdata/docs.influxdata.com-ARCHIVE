@@ -11,7 +11,15 @@ menu:
 InfluxEnterprise offers highly scalable InfluxDB on your infrastructure with a
 management UI.
 
-*TODO:
-Link to the portal, to pricing information and to the sign up page.
-Document sign up steps and how to get a license key.
-Document how to access docs on cluster setup (also do this on the installation page)*
+To sign up for the InfluxEnterprise Beta:
+
+**1.** Go to https://portal.influxdata.com/  
+**2.** Click the `Get Started` button  
+**3.** Fill out the Sign Up form
+
+Once you fill out the Sign Up form, you'll receive an email that includes a
+license key.
+That license key allows you to use InfluxEnterprise Beta for a free 30
+day trial.
+
+For additional pricing information, see *[TODO: link here]*.

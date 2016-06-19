@@ -6,14 +6,21 @@ menu:
     parent: introduction
 ---
 
-The Enterprise web application is *TODO: cool description here*.
-This document gets you up and running with the Enterprise web application.
+InfluxEnterprise offers highly scalable InfluxDB on your infrastructure with a
+management UI.
+This document gets you up and running with the InfluxEnterprise web application.
 
 ### Requirements
 
 * Your InfluxEnterprise [license key](*TODO: LINK HERE*) or [license file](*TODO: LINK HERE*)
 * A functioning InfluxDB cluster (have your meta servers' IP addresses handy)
 * A server (the server can be part of the InfluxDB cluster or separate from the cluster)
+
+> **Note:** If you have yet to set up your InfluxDB cluster, access the private
+documentation at the
+[InfluxData Help Center](https://support.influxdb.com/hc/en-us) by signing in
+with the email you used to sign up for the
+[InfluxEnterprise Beta](https://portal.influxdata.com/).
 
 ### Install PostgreSQL and InfluxEnterprise
 
