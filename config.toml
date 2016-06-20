@@ -28,6 +28,18 @@ SectionPagesMenu = "products"
   identifier = "kapacitor"
   weight = 30
   url = "/kapacitor/"
+[[menu.products]]
+  name = "Enterprise"
+  identifier = "enterprise"
+  weight = 40
+  url = "/enterprise/"
+
+# Enterprise 1.0-beta Menu
+[[menu.enterprise_1b]]
+  name = "Introduction"
+  identifier = "introduction"
+  weight = 0
+  url = "/enterprise/v1.0b/introduction/"
 
 # Kapacitor v1.0 Sub-Menu - Introduction
 [[menu.kapacitor_1]]
