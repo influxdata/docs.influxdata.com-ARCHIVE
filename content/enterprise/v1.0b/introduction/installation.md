@@ -55,7 +55,7 @@ system's local `postgres` user
 
 ```
 url = "http://<your_server's_IP_address>:3000" #✨
-hostname = "enterprise-web"
+hostname = "localhost"
 port = "3000"
 license_key = "<your_license_key>" #✨
 
