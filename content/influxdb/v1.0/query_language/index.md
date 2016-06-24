@@ -6,7 +6,7 @@ This section introduces InfluxQL, InfluxDB's SQL-like query language for
 interacting with data in InfluxDB.
 
 ## InfluxQL Tutorial
-The first eight documents in this section provide a tutorial-style introduction
+The first seven documents in this section provide a tutorial-style introduction
 to InfluxQL.
 Feel free to download the dataset provided in
 [Sample Data](/influxdb/v1.0/query_language/data_download/) and follow along

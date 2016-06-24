@@ -4,19 +4,6 @@ title: Tools
 
 This section covers the available tools for interacting with InfluxDB.
 
-## [API Reference](/influxdb/v1.0/tools/api/)
-
-Reference documentation for InfluxDB's HTTP API.
-
-Go straight to the reference documentation on:
-
-* [Writing data with the HTTP API](/influxdb/v1.0/tools/api/#write)
-* [Querying data with the HTTP API](/influxdb/v1.0/tools/api/#query)
-
-For friendlier documentation, see the guides on
-[writing data](/influxdb/v1.0/guides/writing_data/) and
-[querying data](/influxdb/v1.0/guides/querying_data/) with the HTTP API.
-
 ## [CLI/Shell](/influxdb/v01.0/tools/shell/)
 
 InfluxDB's Command Line Interface (`influx`) is an interactive shell for the
@@ -30,6 +17,23 @@ Go straight to the documentation on:
 
 * [Launching `influx`](/influxdb/v1.0/tools/shell/#launch-influx)
 * [Writing data with `influx`](/influxdb/v1.0/tools/shell/#write-data-to-influxdb-with-insert)
+
+## [API Reference](/influxdb/v1.0/tools/api/)
+
+Reference documentation for InfluxDB's HTTP API.
+
+Go straight to the reference documentation on:
+
+* [Writing data with the HTTP API](/influxdb/v1.0/tools/api/#write)
+* [Querying data with the HTTP API](/influxdb/v1.0/tools/api/#query)
+
+For friendlier documentation, see the guides on
+[writing data](/influxdb/v1.0/guides/writing_data/) and
+[querying data](/influxdb/v1.0/guides/querying_data/) with the HTTP API.
+
+## [API Client Libraries](/influxdb/v1.0/tools/api_client_libraries/)
+
+The list of client libraries for interacting with InfluxDB.
 
 ## [Web Admin Interface](/influxdb/v01.0/tools/web_admin/)
 

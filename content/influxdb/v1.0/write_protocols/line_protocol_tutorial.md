@@ -10,7 +10,7 @@ menu:
 InfluxDB's Line Protocol is a text based format for writing points to the
 database.
 Points must be in Line Protocol format for InfluxDB to successfully parse and
-write points.
+write points (unless you're using a [service plugin](/influxdb/v1.0/tools/#service-plugins)).
 
 Using fictional temperature data, this page introduces Line Protocol.
 It covers:

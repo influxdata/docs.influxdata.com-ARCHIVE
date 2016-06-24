@@ -3,7 +3,7 @@ title: Sample Data
 newversionredirect: /sample_data/data_download/
 menu:
   influxdb_1:
-    weight: 0
+    weight: 90
     parent: query_language
 ---
 
