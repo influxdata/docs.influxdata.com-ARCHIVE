@@ -21,7 +21,8 @@ They are case sensitive.
 
 Numbers are typed and are either a `float64` or an `int64`.
 If the number contains a decimal it is considered to be a `float64` otherwise it is an `int64`.
-All numbers are considered to be base 10 numbers.
+All `float64` numbers are considered to be in base 10.
+If an integer is prefixed with a `0` then it is considered a base 8 (octal) number, otherwise it is considered base 10.
 
 Valid number literals:
 
@@ -30,22 +31,18 @@ Valid number literals:
 * 5 -- int64
 * 5.0 -- float64
 * 0.42 -- float64
+* 0400 -- octal int64
 
-Invalid number literals:
-
-* .1 -- decimals must have a leading zero
 
 ### Strings
 
 There are two ways to write string literals:
 
-1.
-Single quoted strings with backslash escaped single quotes.
+1. Single quoted strings with backslash escaped single quotes.
 
     This string `'single \' quoted'` becomes the literal `single ' quoted`.
 
-2.
-Triple single quoted strings with no escaping.
+2. Triple single quoted strings with no escaping.
 
     This string `'''triple \' quoted'''` becomes the literal `triple \' quoted`.
 
@@ -53,7 +50,7 @@ Triple single quoted strings with no escaping.
 
 TICKscript supports durations literals.
 They are of the form of an InfluxQL duration literals.
-See https://influxdb.com/docs/v0.9/query_language/spec.html#literals
+See https://docs.influxdata.com/influxdb/v1.0/query_language/spec/#literals
 
 Duration literals specify a length of time.
 An integer literal followed immediately (with no spaces) by a duration unit listed below is interpreted as a duration literal.
