@@ -84,7 +84,7 @@ InfluxDB will still attempt to write the points after that time out but there wi
 ---
 InfluxDB is a schemaless database.
 You can add new measurements, tags, and fields at any time.
-Note that if you attempt to write data with a different type than previously used (for example, writing a string to a field that previously accepted integers), InfluxDB will reject those data.
+Note that if you attempt to write data with a different type than previously used (for example, writing a string to a field that previously accepted integers), InfluxDB will reject that data.
 
 ### A note on REST...
 ---
