@@ -6,11 +6,11 @@
         var id, text;
 
         id = el.id;
-        el.id = null;
         text = el.innerText ? el.innerText : el.textContent;
 
-        if (el.firstChild.tagName!='A') {
-            el.innerHTML='<a class="offset-anchor" id="' + id + '"></a><a href="#'+id+'">'+text+'</a>';
+        if (el.firstChild.tagName != 'A') {
+            el.innerHTML = '<a class="offset-anchor" id="' + id + '"></a><a href="#'+id+'">'+text+'</a>';
+            el.id = "";
         }
     });
 </script>
