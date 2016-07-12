@@ -7,6 +7,9 @@ menu:
     parent: Clustering
 ---
 
+> **Note:** Clustering is now a commerial product called InfluxEnterprise.
+More information can be found [here](https://portal.influxdata.com/).
+
 The following sections describe the different node types in an InfluxDB cluster and show how to configure them.
 
 ### General node configuration

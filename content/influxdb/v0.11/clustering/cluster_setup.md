@@ -7,9 +7,8 @@ menu:
     parent: Clustering
 ---
 
-> **NOTE:** InfluxDB 0.11 is the last open source version that includes clustering.
-For more information, please see Paul Dix's blog post on [InfluxDB Clustering, High-Availability, and Monetization](https://influxdata.com/blog/update-on-influxdb-clustering-high-availability-and-monetization/).
-Please note that the 0.11 version of clustering is still considered experimental, and there are still quite a few rough edges.
+> **Note:** Clustering is now a commerial product called InfluxEnterprise.
+More information can be found [here](https://portal.influxdata.com/).
 
 This guide briefly introduces the InfluxDB cluster model and provides step-by-step instructions for setting up a cluster.
 

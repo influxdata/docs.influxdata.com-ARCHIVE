@@ -7,9 +7,8 @@ menu:
     parent: guides
 ---
 
-> **Note:** Clustering is in a alpha state right now.
-There are still a good number of rough edges.
-If you notice any issues please [report them](https://github.com/influxdb/influxdb/issues/new).
+> **Note:** Clustering is now a commerial product called InfluxEnterprise.
+More information can be found [here](https://portal.influxdata.com/).
 
 Starting with version 0.9.3, InfluxDB supports arbitrarily sized clusters that need not be fully replicated.
 Additionally new data nodes can be added to a cluster.
