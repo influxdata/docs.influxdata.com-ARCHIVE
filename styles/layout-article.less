@@ -99,6 +99,14 @@ a {
 		width: 100%;
 		color: @article-text-heading;
 
+		/* Offset trick to prevent anchors being obscured by the navbar */
+		a.offset-anchor {
+			display: block;
+			position: relative;
+			top: -120px;
+			visibility: hidden;
+		}
+
 		/* Maintain heading styles when anchors are present */
 		a:link,
 		a:active,
