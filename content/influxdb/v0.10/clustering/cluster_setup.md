@@ -8,8 +8,8 @@ menu:
     parent: Clustering
 ---
 
-> **NOTE:** Clustering is still considered _experimental_, and there are still quite a few rough edges.
-If you encounter any issues, please [report them](https://github.com/influxdata/influxdb/issues/new).
+> **Note:** Clustering is now a commerial product called InfluxEnterprise.
+More information can be found [here](https://portal.influxdata.com/).
 
 This guide briefly introduces the InfluxDB cluster model and provides step-by-step instructions for setting up a cluster.
 
