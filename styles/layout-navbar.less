@@ -98,7 +98,6 @@
 	opacity: 0;
 	transition: opacity 0.25s ease;
 	.gradient-v(@c-ocean,@c-pool);
-
 }
 .navbar--product-container {
 	width: 100%;
@@ -120,13 +119,13 @@
 .navbar--product-divider {
 	margin: 0.25em 0;
 	height: 2px;
-	background-color: fadeout(@c-sapphire, 70%);
+	background-color: fadeout(@g6-smoke, 90%);
 }
 .navbar--product {
 	&:link,
 	&:active,
 	&:visited {
-		color: @c-neutrino;
+		color: fadeout(@g20-white, 30%);
 		transition:
 			background-color 0.25s ease,
 			color 0.25s ease;
@@ -136,7 +135,7 @@
 		width: 100%;
 	}
 	&:hover {
-		background-color: @c-laser;
+		background-color: fadeout(@g20-white, 88%);
 		color: @g20-white;
 	}
 }
