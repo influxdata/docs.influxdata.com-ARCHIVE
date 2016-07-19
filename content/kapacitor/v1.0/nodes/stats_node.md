@@ -6,7 +6,7 @@ menu:
   kapacitor_1:
     name: Stats
     identifier: stats_node
-    weight: 170
+    weight: 190
     parent: nodes
 ---
 
@@ -53,11 +53,13 @@ Index
 
 ### Properties
 
+-	[Align](/kapacitor/v1.0/nodes/stats_node/#align)
 
 ### Chaining Methods
 
 -	[Alert](/kapacitor/v1.0/nodes/stats_node/#alert)
 -	[Bottom](/kapacitor/v1.0/nodes/stats_node/#bottom)
+-	[Combine](/kapacitor/v1.0/nodes/stats_node/#combine)
 -	[Count](/kapacitor/v1.0/nodes/stats_node/#count)
 -	[Deadman](/kapacitor/v1.0/nodes/stats_node/#deadman)
 -	[Default](/kapacitor/v1.0/nodes/stats_node/#default)
@@ -66,6 +68,7 @@ Index
 -	[Elapsed](/kapacitor/v1.0/nodes/stats_node/#elapsed)
 -	[Eval](/kapacitor/v1.0/nodes/stats_node/#eval)
 -	[First](/kapacitor/v1.0/nodes/stats_node/#first)
+-	[Flatten](/kapacitor/v1.0/nodes/stats_node/#flatten)
 -	[GroupBy](/kapacitor/v1.0/nodes/stats_node/#groupby)
 -	[HoltWinters](/kapacitor/v1.0/nodes/stats_node/#holtwinters)
 -	[HoltWintersWithFit](/kapacitor/v1.0/nodes/stats_node/#holtwinterswithfit)
@@ -89,6 +92,24 @@ Index
 -	[Union](/kapacitor/v1.0/nodes/stats_node/#union)
 -	[Where](/kapacitor/v1.0/nodes/stats_node/#where)
 -	[Window](/kapacitor/v1.0/nodes/stats_node/#window)
+
+Properties
+----------
+
+Property methods modify state on the calling node.
+They do not add another node to the pipeline, and always return a reference to the calling node.
+Property methods are marked using the `.` operator.
+
+
+### Align
+
+Round times to the [StatsNode.Interval](/kapacitor/v1.0/nodes/stats_node/#interval) value. 
+
+
+```javascript
+node.align()
+```
+
 
 Chaining Methods
 ----------------
@@ -120,6 +141,18 @@ node|bottom(num int64, field string, fieldsAndTags ...string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
+
+
+### Combine
+
+Combine this node with itself. The data is combine on timestamp. 
+
+
+```javascript
+node|combine(expressions ...ast.LambdaNode)
+```
+
+Returns: [CombineNode](/kapacitor/v1.0/nodes/combine_node/)
 
 
 ### Count
@@ -165,13 +198,14 @@ Example:
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
         |stats(10s)
+            .align()
         |derivative('emitted')
             .unit(10s)
             .nonNegative()
         |alert()
             .id('node \'stream0\' in task \'{{ .TaskName }}\'')
             .message('{{ .ID }} is {{ if eq .Level "OK" }}alive{{ else }}dead{{ end }}: {{ index .Fields "emitted" | printf "%0.3f" }} points/10s.')
-            .crit(lamdba: "emitted" <= 100.0)
+            .crit(lambda: "emitted" <= 100.0)
     //Do normal processing of data
     data...
 ```
@@ -185,7 +219,7 @@ Example:
 ```javascript
     var data = stream
         |from()...
-    // Trigger critical alert if the throughput drops below 100 points per 1s and checked every 10s.
+    // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
         |deadman(100.0, 10s)
             .slack()
@@ -290,6 +324,18 @@ node|first(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
+
+
+### Flatten
+
+Flatten points with similar times into a single point. 
+
+
+```javascript
+node|flatten()
+```
+
+Returns: [FlattenNode](/kapacitor/v1.0/nodes/flatten_node/)
 
 
 ### GroupBy

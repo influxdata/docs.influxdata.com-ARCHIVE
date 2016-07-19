@@ -6,7 +6,7 @@ menu:
   kapacitor_1:
     name: InfluxDBOut
     identifier: influx_d_b_out_node
-    weight: 90
+    weight: 110
     parent: nodes
 ---
 
@@ -197,13 +197,14 @@ Example:
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
         |stats(10s)
+            .align()
         |derivative('emitted')
             .unit(10s)
             .nonNegative()
         |alert()
             .id('node \'stream0\' in task \'{{ .TaskName }}\'')
             .message('{{ .ID }} is {{ if eq .Level "OK" }}alive{{ else }}dead{{ end }}: {{ index .Fields "emitted" | printf "%0.3f" }} points/10s.')
-            .crit(lamdba: "emitted" <= 100.0)
+            .crit(lambda: "emitted" <= 100.0)
     //Do normal processing of data
     data...
 ```
@@ -217,7 +218,7 @@ Example:
 ```javascript
     var data = stream
         |from()...
-    // Trigger critical alert if the throughput drops below 100 points per 1s and checked every 10s.
+    // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
         |deadman(100.0, 10s)
             .slack()
