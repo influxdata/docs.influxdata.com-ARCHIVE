@@ -153,7 +153,7 @@ The binary `kapacitor` exposes the API over the command line.
 Now use the CLI tool to define the `task` and the databases and retention policies it can access:
 
 ```bash
-kapacitor define cpu_alert \
+kapacitor define -name cpu_alert \
     -type stream \
     -tick cpu_alert.tick \
     -dbrp kapacitor_example.default
