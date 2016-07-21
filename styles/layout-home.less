@@ -26,6 +26,17 @@
 			background-color: @article-bg-heading;
 			text-align: center;
 			padding: 2rem 0;
+
+			a:link,
+			a:active,
+			a:visited {
+				color: @default-link-color;
+				transition: color 0.25s ease;
+				text-decoration: none;
+			}
+			a:hover {
+				color: @default-link-hover;
+			}
 		}
 		&-title {
 			font-size: 2em;

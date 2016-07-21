@@ -1,5 +1,5 @@
 ---
-title: Querying Data
+title: Querying Data with the HTTP API
 alias:
   -/docs/v1.0/query_language/querying_data/
 menu:

@@ -1,8 +1,8 @@
 ---
-title: InfluxDB Query Language Reference
+title: InfluxQL Reference
 menu:
   influxdb_1:
-    weight: 50
+    weight: 90
     parent: query_language
 ---
 
