@@ -3,7 +3,7 @@ title: Mathematical Operators
 
 menu:
   influxdb_1:
-    weight: 70
+    weight: 80
     parent: query_language
 ---
 

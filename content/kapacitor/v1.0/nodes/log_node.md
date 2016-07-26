@@ -6,7 +6,7 @@ menu:
   kapacitor_1:
     name: Log
     identifier: log_node
-    weight: 120
+    weight: 140
     parent: nodes
 ---
 
@@ -38,6 +38,7 @@ Index
 
 -	[Alert](/kapacitor/v1.0/nodes/log_node/#alert)
 -	[Bottom](/kapacitor/v1.0/nodes/log_node/#bottom)
+-	[Combine](/kapacitor/v1.0/nodes/log_node/#combine)
 -	[Count](/kapacitor/v1.0/nodes/log_node/#count)
 -	[Deadman](/kapacitor/v1.0/nodes/log_node/#deadman)
 -	[Default](/kapacitor/v1.0/nodes/log_node/#default)
@@ -46,6 +47,7 @@ Index
 -	[Elapsed](/kapacitor/v1.0/nodes/log_node/#elapsed)
 -	[Eval](/kapacitor/v1.0/nodes/log_node/#eval)
 -	[First](/kapacitor/v1.0/nodes/log_node/#first)
+-	[Flatten](/kapacitor/v1.0/nodes/log_node/#flatten)
 -	[GroupBy](/kapacitor/v1.0/nodes/log_node/#groupby)
 -	[HoltWinters](/kapacitor/v1.0/nodes/log_node/#holtwinters)
 -	[HoltWintersWithFit](/kapacitor/v1.0/nodes/log_node/#holtwinterswithfit)
@@ -132,6 +134,18 @@ node|bottom(num int64, field string, fieldsAndTags ...string)
 Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 
 
+### Combine
+
+Combine this node with itself. The data is combine on timestamp. 
+
+
+```javascript
+node|combine(expressions ...ast.LambdaNode)
+```
+
+Returns: [CombineNode](/kapacitor/v1.0/nodes/combine_node/)
+
+
 ### Count
 
 Count the number of points. 
@@ -175,13 +189,14 @@ Example:
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
         |stats(10s)
+            .align()
         |derivative('emitted')
             .unit(10s)
             .nonNegative()
         |alert()
             .id('node \'stream0\' in task \'{{ .TaskName }}\'')
             .message('{{ .ID }} is {{ if eq .Level "OK" }}alive{{ else }}dead{{ end }}: {{ index .Fields "emitted" | printf "%0.3f" }} points/10s.')
-            .crit(lamdba: "emitted" <= 100.0)
+            .crit(lambda: "emitted" <= 100.0)
     //Do normal processing of data
     data...
 ```
@@ -195,7 +210,7 @@ Example:
 ```javascript
     var data = stream
         |from()...
-    // Trigger critical alert if the throughput drops below 100 points per 1s and checked every 10s.
+    // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
         |deadman(100.0, 10s)
             .slack()
@@ -300,6 +315,18 @@ node|first(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
+
+
+### Flatten
+
+Flatten points with similar times into a single point. 
+
+
+```javascript
+node|flatten()
+```
+
+Returns: [FlattenNode](/kapacitor/v1.0/nodes/flatten_node/)
 
 
 ### GroupBy

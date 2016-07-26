@@ -2,29 +2,12 @@
 title: Write Protocols
 ---
 
-## [Line Protocol](/influxdb/v1.0/write_protocols/line/)
+InfluxDB's Line Protocol is a text based format for writing points to InfluxDB.
 
-The line protocol is a text based format for writing points to InfluxDB.
+## [Line Protocol](/influxdb/v1.0/write_protocols/line_protocol_tutorial/)
 
-## [Write Syntax](/influxdb/v1.0/write_protocols/write_syntax/)
+Tutorial-style documentation for the Line Protocol.
 
-Syntax reference for Line Protocol
+## [Write Syntax](/influxdb/v1.0/write_protocols/line_protocol_reference/)
 
-## [JSON Protocol(REMOVED)](/influxdb/v1.0/write_protocols/json/)
-
-## [UDP](/influxdb/v1.0/write_protocols/udp/)
-
-InfluxDB accepts writes over UDP.
-To configure InfluxDB to support writes over UDP you must adjust your config file.
-
-## [Graphite](/influxdb/v1.0/write_protocols/graphite/)
-
-InfluxDB provides an easy way to hook up Graphite as an input source.
-
-## [CollectD](/influxdb/v1.0/write_protocols/collectd/)
-
-InfluxDB provides an easy way to hook up CollectD as an input source.
-
-## [OpenTSDB](/influxdb/v1.0/write_protocols/opentsdb/)
-
-InfluxDB provides an easy way to hook up OpenTSDB as an input source.
+Reference documentation for the Line Protocol.

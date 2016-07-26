@@ -38,5 +38,9 @@
 	<script src="/js/docs-themes.js" type="text/javascript"></script>
 	<script type="text/javascript">set_style_from_cookie();</script>
     </head>
-    <body {{ $currentNode := . }}{{ range .Site.Menus.products }}{{ if (in $currentNode.Permalink .URL) }}class="docs-theme--{{ .Identifier }}"{{end}}{{end}}>
+    <body {{ $currentNode := . }}
+        {{ range .Site.Menus.products }}
+            {{ if (in $currentNode.Permalink .URL) }}class="docs-theme--{{ .Identifier }}"
+            {{end}}
+        {{end}}>
     {{ partial "navbar.html" . }}

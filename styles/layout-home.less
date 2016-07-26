@@ -8,57 +8,231 @@
 	-	Simple index view with links to the different products
 
 */
-
 .homepage {
+	overflow: auto;
+	position: absolute;
+	top: @nav-height;
+	height: ~"calc(100% - "@nav-height~")";
 	width: 100%;
-	display: inline-block;
+	z-index: 2;
+	.gradient-h(@g4-onyx,@g0-obsidian);
 	font-size: 0;
-	padding: 0.5rem;
+	
 
 	&--card {
-		font-size: 1rem;
-		width: 50%;
+		width: 100%;
 		display: inline-block;
-		padding: 0.5rem;
+		overflow: hidden;
+		position: relative;
+
+		&-mask {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0.1;
+			transition:
+				opacity 0.75s ease,
+				transform 0.75s ease;
+			z-index: 1;
+			background-attachment: scroll;
+			background-size: 100%;
+			background-position: center center;
+			background-repeat: no-repeat;
+		}
+		&:hover {
+			.homepage--card-mask {
+				opacity: 1;
+				transform: scale(1.2,1.2);
+			}
+			.homepage--card-title {
+				color: @g20-white !important;
+			}
+		}
 
 		&-container {
-			border-radius: @radius;
-			background-color: @article-bg-heading;
+			position: relative;
+			z-index: 2;
+			width: 100%;
+			display: inline-block;
 			text-align: center;
-			padding: 2rem 0;
+			padding: 4rem 4rem;
+			font-size: 0;
+
+			a:link,
+			a:active,
+			a:visited {
+				color: @default-link-color;
+				transition: color 0.25s ease;
+				text-decoration: none;
+			}
+			a:hover {
+				color: @default-link-hover;
+			}
+		}
+		&-title,
+		&-description {
+			text-align: left;
+			display: inline-block;
+			width: 100%;
+			vertical-align: middle;
 		}
 		&-title {
-			font-size: 2em;
-			display: inline-block;
+			font-size: 2.25rem;
 			font-family: Klavika-Light, sans-serif;
 			font-weight: 200;
 			font-style: italic;
 			color: @sidebar-title-color;
-			margin-bottom: 1em;
+			margin-bottom: 0.5em;
+			transition: color 0.75s ease;
 		}
 		&-description {
-			// text-align: left;
+			font-size: 1rem;
 			color: @article-text;
-			padding: 0 2em;
-			line-height: 1.2em;
+			line-height: 1.4em;
+			font-weight: 400;
+		}
+		&-link {
+			display: inline-block;
+			font-size: 0.875rem;
+			font-weight: 600;
+			margin-left: 0.25rem;
+			padding: 2px 11px;
+			border-radius: 3px;
+
+			&:first-of-type {
+				margin-top: 1rem;
+			}
+		}
+		// Themes
+		&.card-Telegraf {
+			.homepage--card-mask {
+				background-image: url(/img/home-telegraf.svg);
+				background-color: @c-curacao;
+			}
+			.homepage--card-description {
+				color: @g20-white;
+			}
+			.homepage--card-title {
+				color: @c-dreamsicle;
+			}
+			a.homepage--card-link:link,
+			a.homepage--card-link:active,
+			a.homepage--card-link:visited {
+				color: @g20-white;
+				transition:
+					background-color 0.25s ease,
+					color 0.25s ease;
+			}
+			a.homepage--card-link:hover {
+				color: @c-dreamsicle;
+				background-color: @g20-white;
+			}
+		}
+		&.card-InfluxDB {
+			.homepage--card-mask {
+				background-image: url(/img/home-influxdb.svg);
+				background-color: @c-ocean;
+			}
+			.homepage--card-description {
+				color: @g20-white;
+			}
+			.homepage--card-title {
+				color: @c-laser;
+			}
+			a.homepage--card-link:link,
+			a.homepage--card-link:active,
+			a.homepage--card-link:visited {
+				color: @g20-white;
+				transition:
+					background-color 0.25s ease,
+					color 0.25s ease;
+			}
+			a.homepage--card-link:hover {
+				color: @c-pool;
+				background-color: @g20-white;
+			}
+		}
+		&.card-Chronograf {
+			.homepage--card-mask {
+				background-image: url(/img/home-chronograf.svg);
+				background-color: @c-star;
+			}
+			.homepage--card-description {
+				color: @g20-white;
+			}
+			.homepage--card-title {
+				color: @c-comet;
+			}
+			a.homepage--card-link:link,
+			a.homepage--card-link:active,
+			a.homepage--card-link:visited {
+				color: @g20-white;
+				transition:
+					background-color 0.25s ease,
+					color 0.25s ease;
+			}
+			a.homepage--card-link:hover {
+				color: @c-comet;
+				background-color: @g20-white;
+			}
+		}
+		&.card-Kapacitor {
+			.homepage--card-mask {
+				background-image: url(/img/home-kapacitor.svg);
+				background-color: @c-rainforest;
+			}
+			.homepage--card-description {
+				color: @g20-white;
+			}
+			.homepage--card-title {
+				color: @c-rainforest;
+			}
+			a.homepage--card-link:link,
+			a.homepage--card-link:active,
+			a.homepage--card-link:visited {
+				color: @g20-white;
+				transition:
+					background-color 0.25s ease,
+					color 0.25s ease;
+			}
+			a.homepage--card-link:hover {
+				color: @c-rainforest;
+				background-color: @g20-white;
+			}
 		}
 	}
 }
 
-//
-// Media Queries
-// --------------------------------------------------
+/*
+	Media Queries
+	--------------------------------------------------
+*/
 @media (min-width: @breakpoint-small) {
 	.homepage--card {
-		width: 25%;
+		width: 50%;
+		height: 360px;
 	}
 }
 @media (min-width: @breakpoint-large) {
+	.homepage--card-container {
+		padding: 4rem 9rem;
+	}
 	.homepage--card-description {
-		font-size: 1.125em;
-		padding: 0 3.5em;
+		font-size: 1.125rem;
+	}
+	.homepage--card {
+		width: 50%;
+		height: 360px;
 	}
 }
 @media (min-width: @breakpoint-huge) {
 
+}
+@height-breakpoint: 700px;
+@media (min-height: @height-breakpoint) {
+	.homepage--card {
+		height: 50%;
+	}
 }

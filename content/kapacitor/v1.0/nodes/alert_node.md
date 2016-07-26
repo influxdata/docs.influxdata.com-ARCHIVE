@@ -16,7 +16,7 @@ an alert is specified via a [lambda expression](/kapacitor/latest/tick/expr/).
 See [AlertNode.Info,](/kapacitor/v1.0/nodes/alert_node/#info) [AlertNode.Warn,](/kapacitor/v1.0/nodes/alert_node/#warn) and [AlertNode.Crit](/kapacitor/v1.0/nodes/alert_node/#crit) below. 
 
 Different event handlers can be configured for each [AlertNode.](/kapacitor/v1.0/nodes/alert_node/) 
-Some handlers like Email, HipChat, Sensu, Slack, OpsGenie, VictorOps, PagerDuty and Talk have a configuration 
+Some handlers like Email, HipChat, Sensu, Slack, OpsGenie, VictorOps, PagerDuty, Telegram and Talk have a configuration 
 option &#39;global&#39; that indicates that all alerts implicitly use the handler. 
 
 Available event handlers: 
@@ -33,6 +33,7 @@ Available event handlers:
 * VictorOps -- Send alert to VictorOps. 
 * PagerDuty -- Send alert to PagerDuty. 
 * Talk -- Post alert message to Talk client. 
+* Telegram -- Post alert message to Telegram client. 
 
 See below for more details on configuring each handler. 
 
@@ -119,6 +120,7 @@ Index
 -	[Slack](/kapacitor/v1.0/nodes/alert_node/#slack)
 -	[StateChangesOnly](/kapacitor/v1.0/nodes/alert_node/#statechangesonly)
 -	[Talk](/kapacitor/v1.0/nodes/alert_node/#talk)
+-	[Telegram](/kapacitor/v1.0/nodes/alert_node/#telegram)
 -	[VictorOps](/kapacitor/v1.0/nodes/alert_node/#victorops)
 -	[Warn](/kapacitor/v1.0/nodes/alert_node/#warn)
 
@@ -126,6 +128,7 @@ Index
 
 -	[Alert](/kapacitor/v1.0/nodes/alert_node/#alert)
 -	[Bottom](/kapacitor/v1.0/nodes/alert_node/#bottom)
+-	[Combine](/kapacitor/v1.0/nodes/alert_node/#combine)
 -	[Count](/kapacitor/v1.0/nodes/alert_node/#count)
 -	[Deadman](/kapacitor/v1.0/nodes/alert_node/#deadman)
 -	[Default](/kapacitor/v1.0/nodes/alert_node/#default)
@@ -134,6 +137,7 @@ Index
 -	[Elapsed](/kapacitor/v1.0/nodes/alert_node/#elapsed)
 -	[Eval](/kapacitor/v1.0/nodes/alert_node/#eval)
 -	[First](/kapacitor/v1.0/nodes/alert_node/#first)
+-	[Flatten](/kapacitor/v1.0/nodes/alert_node/#flatten)
 -	[GroupBy](/kapacitor/v1.0/nodes/alert_node/#groupby)
 -	[HoltWinters](/kapacitor/v1.0/nodes/alert_node/#holtwinters)
 -	[HoltWintersWithFit](/kapacitor/v1.0/nodes/alert_node/#holtwinterswithfit)
@@ -446,6 +450,19 @@ Send email to &#39;oncall@example.com&#39; from &#39;kapacitor@example.com&#39;
 node.email(to ...string)
 ```
 
+#### Email To
+
+Define the To addresses for the email alert. 
+Multiple calls append to the existing list of addresses. 
+If empty uses the addresses from the configuration. 
+
+
+```javascript
+node.email(to ...string)
+      .to(to ...string)
+```
+
+
 
 ### Exec
 
@@ -698,6 +715,7 @@ node.log(filepath string)
 #### Log Mode
 
 File&#39;s mode and permissions, default is 0600 
+NOTE: The leading 0 is required to interpret the value as an octal integer. 
 
 
 ```javascript
@@ -1160,6 +1178,129 @@ node.talk()
 ```
 
 
+### Telegram
+
+Send the alert to Telegram. 
+To allow Kapacitor to post to Telegram, 
+
+Example: 
+
+
+```javascript
+    [telegram]
+      enabled = true
+      token = "123456789:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      chat-id = "xxxxxxxxx"
+      parse-mode = "Markdown"
+	disable-web-page-preview = true
+	disable-notification = false
+```
+
+In order to not post a message every alert interval 
+use [AlertNode.StateChangesOnly](/kapacitor/v1.0/nodes/alert_node/#statechangesonly) so that only events 
+where the alert changed state are posted to the chat-id. 
+
+Example: 
+
+
+```javascript
+    stream
+         |alert()
+             .telegram()
+```
+
+Send alerts to Telegram chat-id in the configuration file. 
+
+Example: 
+
+
+```javascript
+    stream
+         |alert()
+             .telegram()
+             .chatId('xxxxxxx')
+```
+
+Send alerts to Telegram user/group &#39;xxxxxx&#39; 
+
+If the &#39;telegram&#39; section in the configuration has the option: global = true 
+then all alerts are sent to Telegram without the need to explicitly state it 
+in the TICKscript. 
+
+Example: 
+
+
+```javascript
+    [telegram]
+      enabled = true
+      token = "123456789:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      chat-id = "xxxxxxxxx"
+      global = true
+      state-changes-only = true
+```
+
+Example: 
+
+
+```javascript
+    stream
+         |alert()
+```
+
+Send alert to Telegram using default chat-id &#39;xxxxxxxx&#39;. 
+
+
+```javascript
+node.telegram()
+```
+
+#### Telegram ChatId
+
+Telegram user/group ID to post messages to. 
+If empty uses the chati-d from the configuration. 
+
+
+```javascript
+node.telegram()
+      .chatId(value string)
+```
+
+
+#### Telegram DisableNotification
+
+Disables the Notification. If empty defaults to the configuration. 
+
+
+```javascript
+node.telegram()
+      .disableNotification()
+```
+
+
+#### Telegram DisableWebPagePreview
+
+Disables the WebPagePreview. If empty defaults to the configuration. 
+
+
+```javascript
+node.telegram()
+      .disableWebPagePreview()
+```
+
+
+#### Telegram ParseMode
+
+Parse node, defaults to Mardown 
+If empty uses the parse-mode from the configuration. 
+
+
+```javascript
+node.telegram()
+      .parseMode(value string)
+```
+
+
+
 ### VictorOps
 
 Send alert to VictorOps. 
@@ -1288,6 +1429,18 @@ node|bottom(num int64, field string, fieldsAndTags ...string)
 Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 
 
+### Combine
+
+Combine this node with itself. The data is combine on timestamp. 
+
+
+```javascript
+node|combine(expressions ...ast.LambdaNode)
+```
+
+Returns: [CombineNode](/kapacitor/v1.0/nodes/combine_node/)
+
+
 ### Count
 
 Count the number of points. 
@@ -1331,13 +1484,14 @@ Example:
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
         |stats(10s)
+            .align()
         |derivative('emitted')
             .unit(10s)
             .nonNegative()
         |alert()
             .id('node \'stream0\' in task \'{{ .TaskName }}\'')
             .message('{{ .ID }} is {{ if eq .Level "OK" }}alive{{ else }}dead{{ end }}: {{ index .Fields "emitted" | printf "%0.3f" }} points/10s.')
-            .crit(lamdba: "emitted" <= 100.0)
+            .crit(lambda: "emitted" <= 100.0)
     //Do normal processing of data
     data...
 ```
@@ -1351,7 +1505,7 @@ Example:
 ```javascript
     var data = stream
         |from()...
-    // Trigger critical alert if the throughput drops below 100 points per 1s and checked every 10s.
+    // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
         |deadman(100.0, 10s)
             .slack()
@@ -1456,6 +1610,18 @@ node|first(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
+
+
+### Flatten
+
+Flatten points with similar times into a single point. 
+
+
+```javascript
+node|flatten()
+```
+
+Returns: [FlattenNode](/kapacitor/v1.0/nodes/flatten_node/)
 
 
 ### GroupBy

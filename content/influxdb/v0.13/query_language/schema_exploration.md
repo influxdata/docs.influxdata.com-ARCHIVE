@@ -143,7 +143,7 @@ h2o_quality,location=coyote_creek,randtag=3
 ## Explore measurements with `SHOW MEASUREMENTS`
 The `SHOW MEASUREMENTS` query returns the [measurements](/influxdb/v0.13/concepts/glossary/#measurement) in your database and it takes the following form:
 ```sql
-SHOW MEASUREMENTS [WITH MEASUREMENT <regular_expression>] [WHERE <tag_key>=<'tag_value'>]
+SHOW MEASUREMENTS [WITH MEASUREMENT =~ <regular_expression>] [WHERE <tag_key>=<'tag_value'>]
 ```
 
 Return all measurements in the `NOAA_water_database` database:

@@ -117,7 +117,7 @@ InfluxDB.
 
 The `reporting-disabled` option toggles
 the reporting of data every 24 hours to `usage.influxdata.com`.
-Each report includes a randomly-generated identifier, OS, architecture, 
+Each report includes a randomly-generated identifier, OS, architecture,
 InfluxDB version, and the
 number of [databases](/influxdb/v1.0/concepts/glossary/#database),
 [measurements](/influxdb/v1.0/concepts/glossary/#measurement), and
@@ -417,6 +417,11 @@ The default port.
 ### database = "graphite"
 
 The name of the database that you want to write to.
+
+### retention-policy = ""
+
+The relevant retention policy.
+An empty string is equivalent to the database's `DEFAULT` retention policy.
 
 ### protocol = "tcp"
 

@@ -524,7 +524,7 @@ stream
         .measurement('cpu')
     @mirror()
     |alert()
-        .cirt(lambda: "usage_idle" < 30)
+        .crit(lambda: "usage_idle" < 30)
 ```
 
 Define the above alert from your terminal like so:

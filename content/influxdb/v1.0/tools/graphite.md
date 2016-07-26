@@ -1,9 +1,10 @@
 ---
-title: Service - Graphite
+title: Service Plugin - Graphite
+newversionredirect: /write_protocols/graphite/
 menu:
   influxdb_1:
-    weight: 40
-    parent: write_protocols
+    weight: 60
+    parent: tools
 ---
 
 InfluxDB provides an easy way to hook up Graphite as an input source.

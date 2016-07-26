@@ -1,11 +1,31 @@
 {{ partial "header.html" . }}
 <div class="homepage">
 	{{ range .Site.Menus.products }}
-		<div class="homepage--card">
+		<div class="homepage--card card-{{ .Name }}">
 			<div class="homepage--card-container">
 				<a class="homepage--card-title" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .Name }}</a>
-				<!-- <p class="homepage--card-description">Telegraf is a plugin-driven server agent for collecting & reporting metrics</p> -->
+				<p class="homepage--card-description">
+					{{ if eq .Identifier "telegraf" }}
+						Telegraf is a plugin-driven server agent for collecting and reporting metrics.
+					{{ end }}
+					{{ if eq .Identifier "influxdb" }}
+						InfluxDB is a time series database built from the ground up to handle high write and query loads.
+					{{ end }}
+					{{ if eq .Identifier "chronograf" }}
+						Chronograf is a graphing and visualization application for performing ad hoc exploration of InfluxDB data.
+					{{ end }}
+					{{ if eq .Identifier "kapacitor" }}
+						Kapacitor is a data processing framework that makes it easy to create alerts, run ETL jobs and detect anomalies.
+					{{ end }}
+					<br/>
+					<a class="homepage--card-link" href="https://influxdata.com/downloads/#{{ .Identifier }}" target=blank>Download</a>
+					<br/>
+					<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/introduction/getting_started/">Getting Started</a>
+					<br/>
+					<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">All Documentation</a>
+				</p>
 			</div>
+			<div class="homepage--card-mask"></div>
 		</div>
 	{{ end }}
 </div>
