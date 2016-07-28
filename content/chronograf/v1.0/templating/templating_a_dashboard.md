@@ -2,7 +2,7 @@
 title: Templating a Dashboard
 
 menu:
-  chronograf_1:
+  chronograf_1_0:
     name: Templating a Dashboard
     weight: 20
     parent: Templating

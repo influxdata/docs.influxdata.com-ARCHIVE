@@ -2,7 +2,7 @@
 title: Line Protocol Reference
 newversionredirect: /write_protocols/write_syntax/
 menu:
-  influxdb_1:
+  influxdb_1_0:
     weight: 10
     parent: write_protocols
 ---

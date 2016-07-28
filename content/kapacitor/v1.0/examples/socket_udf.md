@@ -2,7 +2,7 @@
 title: Writing a socket based UDF
 
 menu:
-  kapacitor_1:
+  kapacitor_1_0:
     name: Writing a socket based UDF
     identifier: socket_udf
     weight: 40

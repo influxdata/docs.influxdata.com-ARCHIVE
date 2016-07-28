@@ -2,7 +2,7 @@
 title: Differences between Telegraf 1.0 and 0.13
 
 menu:
-  telegraf_1:
+  telegraf_1_0:
     name: Differences between Telegraf 1.0 and 0.13
     weight: 0
     parent: administration

@@ -1,7 +1,7 @@
 ---
 title: Templating
 menu:
-  chronograf_1:
+  chronograf_1_0:
     name: Templating
     weight: 10
 ---

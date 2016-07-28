@@ -4,7 +4,7 @@ title: Kapacitor Version 1.0 Documentation
 menu:
   kapacitor:
     name: v1.0
-    identifier: kapacitor_1
+    identifier: kapacitor_1_0
     weight: 86
 ---
 

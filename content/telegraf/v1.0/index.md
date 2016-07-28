@@ -4,7 +4,7 @@ title: Telegraf Version 1.0 Documentation
 menu:
   telegraf:
     name: v1.0
-    identifier: telegraf_1
+    identifier: telegraf_1_0
     weight: 0
 ---
 

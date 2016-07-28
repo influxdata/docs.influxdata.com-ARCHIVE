@@ -2,7 +2,7 @@
  title: About the Project
 
  menu:
-   telegraf_1:
+   telegraf_1_0:
      name: About the Project
      identifier: about_the_project
      weight: 50

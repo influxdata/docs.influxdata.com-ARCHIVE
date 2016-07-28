@@ -2,7 +2,7 @@
 title: Differences between InfluxDB 1.0 and versions prior to 0.13
 newversionredirect: /administration/013_vs_previous/
 menu:
-  influxdb_1:
+  influxdb_1_0:
     weight: 50
     parent: administration
 ---

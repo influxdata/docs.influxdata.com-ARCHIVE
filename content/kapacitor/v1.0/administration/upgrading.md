@@ -2,7 +2,7 @@
 title: Upgrading to Kapacitor v1.0
 
 menu:
-  kapacitor_1:
+  kapacitor_1_0:
     weight: 30
     parent: administration
 ---

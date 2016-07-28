@@ -2,7 +2,7 @@
 title: API Client Libraries
 newversionredirect: /clients/api/
 menu:
-  influxdb_1:
+  influxdb_1_0:
     weight: 20
     parent: tools
 ---

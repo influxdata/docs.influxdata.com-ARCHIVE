@@ -2,7 +2,7 @@
 title: Administration
 
 menu:
-  chronograf_1:
+  chronograf_1_0:
     name: Administration
     weight: 30
 ---

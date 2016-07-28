@@ -2,7 +2,7 @@
 title: Line Protocol Tutorial
 newversionredirect: /write_protocols/line/
 menu:
-  influxdb_1:
+  influxdb_1_0:
     weight: 0
     parent: write_protocols
 ---

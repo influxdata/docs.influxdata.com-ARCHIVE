@@ -2,7 +2,7 @@
 title: Introduction
 
 menu:
-  kapacitor_1:
+  kapacitor_1_0:
     name: Introduction
     identifier: introduction
     weight: 0

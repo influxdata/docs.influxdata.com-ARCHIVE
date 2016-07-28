@@ -2,7 +2,7 @@
 title: Tag Value Template
 
 menu:
-  chronograf_1:
+  chronograf_1_0:
     name: Tag Value Template
     weight: 10
     parent: Templating

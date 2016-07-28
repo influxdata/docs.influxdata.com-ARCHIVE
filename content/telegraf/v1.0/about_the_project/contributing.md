@@ -2,7 +2,7 @@
  title: Contributing
 
  menu:
-   telegraf_1:
+   telegraf_1_0:
      name: Contributing
      parent: about_the_project
      weight: 10

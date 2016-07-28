@@ -4,7 +4,7 @@ title: InfluxDB Version 1.0 Documentation
 menu:
   influxdb:
     name: v1.0
-    identifier: influxdb_1
+    identifier: influxdb_1_0
     weight: 0
 ---
 

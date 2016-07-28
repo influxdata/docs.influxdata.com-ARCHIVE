@@ -2,7 +2,7 @@
 title: Configuration
 
 menu:
-  telegraf_1:
+  telegraf_1_0:
     name: Configuration
     weight: 20
     parent: administration

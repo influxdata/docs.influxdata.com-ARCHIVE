@@ -2,7 +2,7 @@
 title: Database Management
 
 menu:
-  influxdb_1:
+  influxdb_1_0:
     weight: 30
     parent: query_language
 ---

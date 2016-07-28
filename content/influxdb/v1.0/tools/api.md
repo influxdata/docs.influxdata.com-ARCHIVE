@@ -2,7 +2,7 @@
 title: API Reference
 newversionredirect: /concepts/api/
 menu:
-  influxdb_1:
+  influxdb_1_0:
     weight: 10
     parent: tools
 ---
