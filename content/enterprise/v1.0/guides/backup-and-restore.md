@@ -1,7 +1,7 @@
 ---
 title: Backup and Restore
 menu:
-  enterprise_1:
+  enterprise_1_0:
     weight: 0
     parent: Guides
 ---

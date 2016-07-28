@@ -1,7 +1,7 @@
 ---
 title: Web Console
 menu:
-  enterprise_1:
+  enterprise_1_0:
     weight: 10
     parent: Features
 ---

@@ -1,7 +1,7 @@
 ---
 title: Reporting Issues
 menu:
-  enterprise_1:
+  enterprise_1_0:
     weight: 0
     parent: Troubleshooting
 ---

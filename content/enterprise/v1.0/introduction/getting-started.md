@@ -1,7 +1,7 @@
 ---
 title: Getting Started
 menu:
-  enterprise_1:
+  enterprise_1_0:
     weight: 20
     parent: Introduction
 ---

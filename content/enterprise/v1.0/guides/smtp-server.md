@@ -1,7 +1,7 @@
 ---
 title: SMTP Server Setup
 menu:
-  enterprise_1:
+  enterprise_1_0:
     weight: 20
     parent: Guides
 ---

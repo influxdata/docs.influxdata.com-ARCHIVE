@@ -1,7 +1,7 @@
 ---
 title: Features
 menu:
-  enterprise_1:
+  enterprise_1_0:
     weight: 40
 ---
 

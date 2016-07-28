@@ -1,7 +1,7 @@
 ---
 title: Release Notes/Changelog
 menu:
-  enterprise_1:
+  enterprise_1_0:
     weight: 0
     parent: About the Project
 ---
