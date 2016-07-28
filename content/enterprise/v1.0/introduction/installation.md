@@ -20,8 +20,14 @@ To get started, you'll need the license key that you received at
 The steps below set up a five server cluster; three servers are
 [meta nodes](/enterprise/v1.0/concepts/glossary/#meta-node) and
 two serve as [data nodes](/enterprise/v1.0/concepts/glossary#data-node).
-Please note that there is no requirement to use that many servers or limit your
-installation to that size.
+
+Please note that there is no requirement to use that number of servers.
+The meta and data processes can run on the same or different servers.
+Your cluster **must** have:
+
+* at least three meta nodes
+* an odd number of meta nodes
+* at least two data nodes
 
 > **Note:** By default, data and meta nodes communicate with each other on
 ports `8091` and `8088`.
@@ -44,8 +50,6 @@ file (the hostnames are representative):
 <Data_1_IP> enterprise-beta-data-01
 <Data_2_IP> enterprise-beta-data-02
 ```
-
-Note that the meta and data processes can run on the same or different servers.
 
 ### Set up, configure, and start the meta servers
 
@@ -189,7 +193,7 @@ purge-interval = "1h0m0s"
 > **Note:** If you’re using a license file instead of a license key, set the
 `license-path` setting to the path of the license file.
 
-#### Start the data node
+#### 3. Start the data node
 ```
 /etc/init.d/influxdb start
 ```
@@ -205,9 +209,9 @@ influxdb process was started [ OK ]
 
 Move on to the next section to join all servers to a cluster.
 
-### Join the servers to the cluster
+### Join the nodes to the cluster
 
-#### Connect the meta servers to the cluster
+#### 1. Connect the meta nodes to the cluster
 
 From `enterprise-beta-meta-01`, enter:
 ```
@@ -227,7 +231,27 @@ Added meta node x at enterprise-beta-meta-0x:8091
 the meta node during the join process.
 Please do not specify `localhost` as this can cause cluster connection issues.
 
-#### Connect the data servers to the cluster
+#### 2. Verify that the meta nodes are part of the cluster
+Issue the following command on any meta node:
+```
+influxd-ctl show
+```
+
+The expected output is:
+```
+Meta Nodes
+==========
+TCP Address
+enterprise-beta-meta-01:8091
+enterprise-beta-meta-02:8091
+enterprise-beta-meta-03:8091
+```
+
+Note that your cluster must have at least three meta nodes.
+If you do not see your meta nodes in the output, please retry adding them to
+the cluster.
+
+#### 3. Connect the data nodes to the cluster
 
 From `enterprise-beta-meta-01`, enter:
 ```
@@ -241,9 +265,9 @@ The expected output of those commands is:
 Added data node y at enterprise-beta-data-0x:8088
 ```
 
-#### Verify the cluster configuration
+#### 4. Verify that the data nodes are part of the cluster
 
-Issue the following command on any meta server:
+Issue the following command on any meta node:
 ```
 influxd-ctl show
 ```
@@ -263,6 +287,10 @@ enterprise-beta-meta-01:8091
 enterprise-beta-meta-02:8091
 enterprise-beta-meta-03:8091
 ```
+
+Note that your cluster must have at least two data nodes.
+If you do not see your data nodes in the output, please retry adding them
+to the cluster.
 
 ## Web Console setup
 

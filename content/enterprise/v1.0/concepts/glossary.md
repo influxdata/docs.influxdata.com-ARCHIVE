@@ -10,7 +10,7 @@ menu:
 
 A node that runs the data service.
 
-For high availability, installations should have at least two data nodes.
+For high availability, installations must have at least two data nodes.
 The number of data nodes in your cluster must be the same as your highest
 replication factor.
 Any replication factor greater than two gives you additional fault tolerance and
@@ -31,10 +31,11 @@ Related entries: [data node](#data-node)
 
 A node that runs the meta service.
 
-For high availability, installations should have three meta nodes.
+For high availability, installations must have three meta nodes.
 Meta nodes can be very modestly sized instances like an EC2 t2.micro or even a
 nano.
-For additional fault tolerance we recommend using five meta nodes.
+For additional fault tolerance installations may use five meta nodes; the
+number of meta nodes must be an odd number.
 
 Related entries: [meta service](#meta-service)
 
