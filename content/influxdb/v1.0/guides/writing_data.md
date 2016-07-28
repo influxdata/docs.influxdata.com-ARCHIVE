@@ -16,7 +16,7 @@ The example below sends a request to InfluxDB running on `localhost` and creates
 <br>
 
 ```bash
-curl -POST http://localhost:8086/query --data-urlencode "q=CREATE DATABASE mydb"
+curl -i -XPOST http://localhost:8086/query --data-urlencode "q=CREATE DATABASE mydb"
 ```
 
 ## Writing data using the HTTP API
