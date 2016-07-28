@@ -2,7 +2,7 @@
 title: About the project
 
 menu:
-  kapacitor_1:
+  kapacitor_1_0:
     name: About the project
     identifier: about_the_project
     weight: 50

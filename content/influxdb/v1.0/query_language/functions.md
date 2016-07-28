@@ -2,7 +2,7 @@
 title: Functions
 
 menu:
-  influxdb_1:
+  influxdb_1_0:
     weight: 60
     parent: query_language
 ---

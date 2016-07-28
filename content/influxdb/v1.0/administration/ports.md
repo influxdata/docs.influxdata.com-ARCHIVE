@@ -2,7 +2,7 @@
 title: Ports
 
 menu:
-  influxdb_1:
+  influxdb_1_0:
     weight: 20
     parent: administration
 ---

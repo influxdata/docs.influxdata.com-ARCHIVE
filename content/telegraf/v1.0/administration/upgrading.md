@@ -2,7 +2,7 @@
 title: Upgrading from Previous Versions
 
 menu:
-  telegraf_1:
+  telegraf_1_0:
     name: Upgrading from Previous Versions
     weight: 10
     parent: administration

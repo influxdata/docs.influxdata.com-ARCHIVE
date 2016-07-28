@@ -2,7 +2,7 @@
 title: Time Range Template
 
 menu:
-  chronograf_1:
+  chronograf_1_0:
     name: Time Range Template
     weight: 0
     parent: Templating

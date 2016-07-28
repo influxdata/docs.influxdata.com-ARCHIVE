@@ -2,7 +2,7 @@
 title: Service Plugin - Graphite
 newversionredirect: /write_protocols/graphite/
 menu:
-  influxdb_1:
+  influxdb_1_0:
     weight: 60
     parent: tools
 ---

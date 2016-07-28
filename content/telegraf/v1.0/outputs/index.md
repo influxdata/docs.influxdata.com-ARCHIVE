@@ -2,7 +2,7 @@
 title: Supported Outputs
 
 menu:
-  telegraf_1:
+  telegraf_1_0:
     name: Output Plugins
     identifier: outputs
     weight: 10

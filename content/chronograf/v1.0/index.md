@@ -4,7 +4,7 @@ title: Chronograf Version 1.0 Documentation
 menu:
   chronograf:
     name: v1.0
-    identifier: chronograf_1
+    identifier: chronograf_1_0
     weight: 0
 ---
 

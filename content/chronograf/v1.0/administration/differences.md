@@ -2,7 +2,7 @@
 title: Differences between Chronograf 0.13 and 1.0
 
 menu:
-  chronograf_1:
+  chronograf_1_0:
     name: Differences between Chronograf 0.13 and 1.0
     weight: 0
     parent: Administration

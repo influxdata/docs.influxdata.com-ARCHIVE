@@ -2,7 +2,7 @@
 title: Custom Anomaly Detection
 
 menu:
-  kapacitor_1:
+  kapacitor_1_0:
     name: Custom Anomaly Detection
     identifier: anomaly_detection
     weight: 20

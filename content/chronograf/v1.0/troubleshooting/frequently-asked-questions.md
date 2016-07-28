@@ -2,7 +2,7 @@
 title: Frequently Asked Questions
 
 menu:
-  chronograf_1:
+  chronograf_1_0:
     name:  Frequently Asked Questions
     weight: 0
     parent: Troubleshooting

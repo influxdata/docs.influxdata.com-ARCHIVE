@@ -2,7 +2,7 @@
 title: Upgrading from Previous Versions
 
 menu:
-  chronograf_1:
+  chronograf_1_0:
     name: Upgrading from Previous Versions
     weight: 10
     parent: Administration

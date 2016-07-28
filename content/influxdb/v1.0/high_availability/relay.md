@@ -2,7 +2,7 @@
 title: Relay
 
 menu:
-  influxdb_1:
+  influxdb_1_0:
     weight: 10
     parent: high_availability
 ---

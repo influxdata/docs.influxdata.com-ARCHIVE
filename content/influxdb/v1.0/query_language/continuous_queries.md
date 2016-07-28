@@ -2,7 +2,7 @@
 title: Continuous Queries
 
 menu:
-  influxdb_1:
+  influxdb_1_0:
     weight: 70
     parent: query_language
 ---

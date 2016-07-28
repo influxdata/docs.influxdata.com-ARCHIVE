@@ -2,7 +2,7 @@
 title: Release Notes/Changelog
 
 menu:
-  telegraf_1:
+  telegraf_1_0:
     name: Release Notes/Changelog
     parent: about_the_project
     weight: 0

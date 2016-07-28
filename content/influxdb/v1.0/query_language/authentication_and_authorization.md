@@ -2,7 +2,7 @@
 title: Authentication and Authorization
 newversionredirect: /administration/authentication_and_authorization/
 menu:
-  influxdb_1:
+  influxdb_1_0:
     weight: 90
     parent: query_language
 ---

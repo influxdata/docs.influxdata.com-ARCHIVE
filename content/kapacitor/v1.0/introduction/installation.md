@@ -2,7 +2,7 @@
 title: Installation
 
 menu:
-  kapacitor_1:
+  kapacitor_1_0:
     weight: 10
     parent: introduction
 ---

@@ -2,7 +2,7 @@
 title: Supported Input Plugins
 
 menu:
-  telegraf_1:
+  telegraf_1_0:
     name: Input Plugins
     identifier: inputs
     weight: 20

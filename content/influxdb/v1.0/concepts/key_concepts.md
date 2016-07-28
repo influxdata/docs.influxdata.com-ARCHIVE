@@ -1,7 +1,7 @@
 ---
 title: Key Concepts
 menu:
-  influxdb_1:
+  influxdb_1_0:
     weight: 0
     parent: concepts
 ---

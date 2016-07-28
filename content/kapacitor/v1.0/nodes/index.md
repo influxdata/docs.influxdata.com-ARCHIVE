@@ -2,7 +2,7 @@
 title: TICKscript Node Overview
 
 menu:
-  kapacitor_1:
+  kapacitor_1_0:
     name: TICKscript Nodes
     identifier: nodes
     weight: 4
