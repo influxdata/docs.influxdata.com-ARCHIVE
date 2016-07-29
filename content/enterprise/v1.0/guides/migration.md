@@ -141,7 +141,7 @@ purge-interval = "1h0m0s"
 sudo service influxdb start
 ```
 
-### Add the node to the cluster
+### 7. Add the node to the cluster
 
 From a **meta** node in the cluster, run:
 ```
