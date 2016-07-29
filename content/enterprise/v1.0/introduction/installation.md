@@ -108,7 +108,7 @@ Enter:
 ```
 or:
 ```
-$ service influxdb-meta start
+service influxdb-meta start
 ```
 
 Check to see that the process is running by entering:
