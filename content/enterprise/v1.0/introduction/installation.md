@@ -102,24 +102,28 @@ hostname = "<enterprise-beta-meta-0x>" #✨
 
 #### 3. Start the meta node
 
+Enter:
 ```
 /etc/init.d/influxdb-meta start
 ```
-or
+or:
 ```
 $ service influxdb-meta start
 ```
 
-The expected output of this command is:
+Check to see that the process is running by entering:
 ```
-Starting the process influxdb-meta [ OK ]
-influxdb-meta process was started [ OK ]
+ps aux | grep influxdb-meta
+```
+You should see output similar to:
+```
+influxdb  3207  0.8  4.4 483000 22168 ?        Ssl  17:05   0:08 /usr/bin/influxd-meta -config /etc/influxdb/influxdb-meta.conf
 ```
 
 > **Note:** It is possible to start the cluster with a single meta node but you
 must pass the `-single-server flag` when starting the single meta node.
-A cluster with only one meta node is not recommended for production
-environments.
+Please note that a cluster with only one meta node is **not** recommended for
+production environments.
 
 Move on to the next section to set up the data servers.
 
@@ -194,17 +198,21 @@ purge-interval = "1h0m0s"
 `license-path` setting to the path of the license file.
 
 #### 3. Start the data node
+Enter:
 ```
 /etc/init.d/influxdb start
 ```
-or
+or:
 ```
 service influxdb start
 ```
-The expected output of the command is:
+Check to see that the process is running by entering:
 ```
-Starting the process influxdb [ OK ]
-influxdb process was started [ OK ]
+ps aux | grep influxdb
+```
+You should see output similar to:
+```
+influxdb  2706  0.2  7.0 571008 35376 ?        Sl   15:37   0:16 /usr/bin/influxd -config /etc/influxdb/influxdb.conf
 ```
 
 Move on to the next section to join all servers to a cluster.
@@ -425,12 +433,16 @@ CREATE DATABASE enterprise;
 service influx-enterprise start
 ```
 
-Output:
+Check to see that the process is running by entering:
 ```
-[OK] Service successfully started.
+ps aux | grep influx-enterprise
+```
+You should see output similar to:
+```
+influx-+  4557  1.2  7.4 421600 37108 ?        Ssl  17:34   0:00 /usr/bin/influx-enterprise run -c /etc/influx-enterprise/influx-enterprise.conf
 ```
 
 You're all set!
 Visit `http://<your_web_console_server's_IP_address>:3000` to access your
-InfluxEnterprise web console and check out the
+InfluxEnterprise web console, and check out the
 next section to [get started](/enterprise/v1.0/introduction/getting-started/).
