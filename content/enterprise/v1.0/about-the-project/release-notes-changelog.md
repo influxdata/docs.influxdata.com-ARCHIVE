@@ -6,16 +6,16 @@ menu:
     parent: About the Project
 ---
 
-The following sections describe the new features aviable in InfluxEnterprise
-Clustering version 0.7.1 and InfluxEnterprise Web Console version 0.7.0.
+The following sections describe the new features available in InfluxEnterprise
+Clustering version 0.7.3 and InfluxEnterprise Web Console version 0.7.0.
 
 ### Clustering
 
-Version 0.7.1 offers backup and restore functionality.
-Create a copy of your cluster’s data at a point in time and restore that
-backed-up data to the cluster when desired.
-
-See [Backup and Restore](/enterprise/v1.0/guides/backup-and-restore/) for additional information.
+Version 0.7.3 features several bug fixes.
+Starting  with version 0.7.3, migrating an OSS instance will transfer users
+from the OSS instance to the InfluxEnterprise cluster.
+See [OSS to Cluster Migration](/enterprise/v1.0/guides/migration) for more
+information.
 
 ### Web Console
 

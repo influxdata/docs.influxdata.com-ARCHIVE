@@ -45,10 +45,20 @@ The cluster will import the meta store and data shards from the new node.
 (Subsequent nodes will not import their existing meta store or data, only the first node added to a cluster will import existing meta store or data.)
 Importing an OSS meta store will overwrite the existing cluster meta store so any existing databases, users, etc. will be overwritten.
 
+See [OSS to Cluster Migration](/enterprise/v1.0/guides/migration/) for
+step-by-step instructions.
+
 ## Query Routing
 
 The query engine skips failed nodes that hold a shard needed for queries.
 If there is a replica on another node, it will retry on that node.
+
+## Backup and Restore
+
+InfluxEnterprise clusters support backup and restore functionality starting with
+version 0.7.1.
+See [Backup and Restore](/enterprise/v1.0/guides/backup-and-restore/) for
+more information.
 
 ## Features Under Development
 

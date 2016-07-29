@@ -21,7 +21,7 @@ Currently, users can perform backups and restores for all data in the cluster.
 They can be carried out on down clusters or on running clusters.
 Note that this feature does not support conflict resolution; any backed up data that conflict with existing data will not overwrite the existing data during the restore.
 
-As of version 0.7.1, InfluxEnterprise Clustering does not support backups or restores:
+As of version 0.7.3, InfluxEnterprise Clustering does not support backups or restores:
 
 * Per database
 * Per database and retention policy

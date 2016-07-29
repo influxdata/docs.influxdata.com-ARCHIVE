@@ -11,9 +11,16 @@ instance into and InfluxEnterprise cluster.
 
 Before following the steps below, please note that this process:
 
-* Does **NOT** transfer any users from the OSS instance to the InfluxEnterprise Cluster
+* Transfers any users from the OSS instance to the InfluxEnterprise Cluster*
+* Does **not** transfer any users from the OSS instance to the InfluxEnterprise Web Console
 * Deletes all data from any data nodes that are already part of the InfluxEnterprise Cluster
 * Requires downtime for the OSS instance
+
+<dt>
+\* If you're using an InfluxEnterprise cluster version prior to 0.7.3, the
+following steps will **not** transfer users from the OSS instance to the
+InfluxEnterprise Cluster.
+</dt>
 
 In addition, please refrain from creating a Global Admin user in the InfluxEnterprise Web Console before implementing these steps. If you’ve already created a Global Admin user, contact support at <enterprise-beta@influxdb.com>.
 
@@ -70,14 +77,14 @@ If you have settings that you’d like to keep, please make a copy of your confi
 
 #### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data_1.0.0-beta2-c0.7.1_amd64.deb
-sudo dpkg -i influxdb-data_1.0.0-beta2-c0.7.1_amd64.deb
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data_1.0.0-beta2-c0.7.3_amd64.deb
+sudo dpkg -i influxdb-data_1.0.0-beta2-c0.7.3_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data-1.0.0_beta2_c0.7.1.x86_64.rpm
-sudo yum localinstall influxdb-data-1.0.0_beta2_c0.7.1.x86_64.rpm
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data-1.0.0_beta2_c0.7.3.x86_64.rpm
+sudo yum localinstall influxdb-data-1.0.0_beta2_c0.7.3.x86_64.rpm
 ```
 
 ### 5. Update the configuration file

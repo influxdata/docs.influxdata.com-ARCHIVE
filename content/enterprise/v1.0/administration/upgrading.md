@@ -6,52 +6,81 @@ menu:
     parent: Administration
 ---
 
-The following sections include instructions for upgrading InfluxEnterprise to
-Clustering version 0.7.1 and Web Console version 0.7.0.
+The following sections include instructions for upgrading to InfluxEnterprise
+Clustering version 0.7.3 and InfluxEnterprise Web Console version 0.7.0.
 
-## Download and install the new versions of InfluxEnterprise
+Before you start, please review the section at the
+[bottom of this page](#configuration-settings) to ensure that you have the most
+up-to-date configuration settings.
 
-### Meta nodes
+## Upgrading to Clustering version 0.7.3 and Web Console 0.7.0
 
-#### Ubuntu & Debian (64-bit)
+### 1. Download and install the new versions of InfluxEnterprise
+
+#### Meta nodes
+
+##### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta_1.0.0-beta2-c0.7.1_amd64.deb
-sudo dpkg -i influxdb-meta_1.0.0-beta2-c0.7.1_amd64.deb
-```
-#### RedHat & CentOS (64-bit)
-```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta-1.0.0_beta2_c0.7.1.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.0.0_beta2_c0.7.1.x86_64.rpm
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta_1.0.0-beta2-c0.7.3_amd64.deb
+sudo dpkg -i influxdb-meta_1.0.0-beta2-c0.7.3_amd64.deb
 ```
 
-### Data nodes
+> **Note:** If you're running Ubuntu 16.04.1, you may need to enter
+`sudo systemctl disable influxdb-meta` before executing the `dpkg` step.
 
-#### Ubuntu & Debian (64-bit)
+##### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data_1.0.0-beta2-c0.7.1_amd64.deb
-sudo dpkg -i influxdb-data_1.0.0-beta2-c0.7.1_amd64.deb
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta-1.0.0_beta2_c0.7.3.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.0.0_beta2_c0.7.3.x86_64.rpm
 ```
-#### RedHat & CentOS (64-bit)
-```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data-1.0.0_beta2_c0.7.1.x86_64.rpm
-sudo yum localinstall influxdb-data-1.0.0_beta2_c0.7.1.x86_64.rpm
-```
-### Web console
 
-#### Ubuntu & Debian (64-bit)
+#### Data nodes
+
+##### Ubuntu & Debian (64-bit)
+```
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data_1.0.0-beta2-c0.7.3_amd64.deb
+sudo dpkg -i influxdb-data_1.0.0-beta2-c0.7.3_amd64.deb
+```
+##### RedHat & CentOS (64-bit)
+```
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data-1.0.0_beta2_c0.7.3.x86_64.rpm
+sudo yum localinstall influxdb-data-1.0.0_beta2_c0.7.3.x86_64.rpm
+```
+#### Web console
+
+##### Ubuntu & Debian (64-bit)
 ```
 wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise_0.7.0_amd64.deb
 sudo dpkg -i influx-enterprise_0.7.0_amd64.deb
 ```
-#### RedHat & CentOS (64-bit)
+##### RedHat & CentOS (64-bit)
 ```
 wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise-0.7.0.x86_64.rpm
 sudo yum localinstall influx-enterprise-0.7.0.x86_64.rpm
 ```
 
-## Update the relevant configuration files
+### 2. Restart all services
+Meta nodes:
+```
+$ service influxdb-meta restart
+```
+Data nodes:
+```
+$ service influxdb restart
+```
+Web console:
+```
+$ service influx-enterprise restart
+```
 
-Upgrading to InfluxEnterprise Clustering 0.7.1 and Web Console 0.7.0 requires users to update their configuration settings. The new settings ensure that the cluster registers with the web console.
+## Configuration settings
+
+In older versions of InfluxEnterprise, configuration settings ensured that
+the Web Console registered with the Cluster.
+Those settings are no longer supported.
+If you're working with InfluxEnterprise versions 0.7.2 and up, please be sure
+to update your configuration settings as outlined below.
+The updated settings ensure that the Cluster registers with the Web Console.
 
 In each meta node’s configuration file (`/etc/influxdb/influxdb-meta.conf`), set:
 
@@ -82,18 +111,4 @@ port = "3000"
 ❌urls = ["<meta_server_IP_address_1>:8091","<meta_server_IP_address_2>:8091","<meta_server_IP_address_3>:8091"]❌
 
 [...]
-```
-
-## Restart all services
-Meta nodes:
-```
-$ service influxdb-meta restart
-```
-Data nodes:
-```
-$ service influxdb restart
-```
-Web console:
-```
-$ service influx-enterprise restart
 ```
