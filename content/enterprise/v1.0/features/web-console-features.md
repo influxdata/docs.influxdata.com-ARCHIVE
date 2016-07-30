@@ -72,6 +72,22 @@ The Global Admin role includes every permission. All permissions in the Global A
 <br>
 The Admin role includes every permission except the Manage Shards permission and the Add/Remove Nodes permission. All permissions in the Admin role are global; they are not scoped by cluster or database.
 
+## Cluster rebalancing
+
+The Web Console version 0.7.0+ allows users to easily rebalance data across all
+data nodes in the InfluxEnterprise Cluster.
+The `Rebalance` button is available on the `Tasks` page.
+
+Rebalancing a cluster allocates existing
+[shards](https://docs.influxdata.com/influxdb/v1.0/concepts/glossary/#shard)
+such that each data node has roughly the same number of shards.
+Perform a rebalance if you've recently added a data node to a cluster and would
+like to evenly redistribute shards across that cluster.
+
+Note that performing a rebalance can result in temporarily inconsistent data
+across data nodes.
+That inconsistency is not permanent and the cluster will resolve it over time.
+
 ## Features Under Development
 
 * Additional support for raw InfluxQL queries

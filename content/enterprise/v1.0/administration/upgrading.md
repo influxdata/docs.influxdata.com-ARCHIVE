@@ -7,13 +7,13 @@ menu:
 ---
 
 The following sections include instructions for upgrading to InfluxEnterprise
-Clustering version 0.7.3 and InfluxEnterprise Web Console version 0.7.0.
+Clustering version 0.7.3 and InfluxEnterprise Web Console version 0.7.1.
 
 Before you start, please review the section at the
 [bottom of this page](#configuration-settings) to ensure that you have the most
 up-to-date configuration settings.
 
-## Upgrading to Clustering version 0.7.3 and Web Console 0.7.0
+## Upgrading to Clustering version 0.7.3 and Web Console 0.7.1
 
 ### 1. Download and install the new versions of InfluxEnterprise
 
@@ -50,16 +50,71 @@ sudo yum localinstall influxdb-data-1.0.0_beta2_c0.7.3.x86_64.rpm
 
 ##### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise_0.7.0_amd64.deb
-sudo dpkg -i influx-enterprise_0.7.0_amd64.deb
+wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise_0.7.1_amd64.deb
+sudo dpkg -i influx-enterprise_0.7.1_amd64.deb
 ```
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise-0.7.0.x86_64.rpm
-sudo yum localinstall influx-enterprise-0.7.0.x86_64.rpm
+wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise-0.7.1.x86_64.rpm
+sudo yum localinstall influx-enterprise-0.7.1.x86_64.rpm
 ```
 
-### 2. Restart all services
+> **Notes:**
+>
+* The Web Console Version 0.7.1 features a new configuration file.
+Please opt to overwrite the old configuration file with the new configuration
+file.
+* If you're running Ubuntu 16.04.1, you may need to enter
+`sudo systemctl disable influxdb-enterprise` before executing the `dpkg` step.
+
+### 2. Edit the Web Console's configuration file
+The Web Console version 0.7.1 features a new configuration file.
+In `/etc/influx-enterprise/influx-enterprise.conf`, set:
+
+* the first `url` setting to your server’s IP address
+* `license_key` to the license key you received on [InfluxPortal](https://portal.influxdata.com/)
+* `shared-secret` in the `[influxdb]` section to the same pass phrase that you used in your data servers’ configuration files
+
+In addition to updating those settings:
+
+* uncomment the first `url` setting in the `[database]` section
+* update the password in that first `url` setting to the password for the system's local postgres user
+* comment out the second `url` setting in the `[database]` section
+
+```
+
+url = "http://<your_server's_IP_address>:3000" #✨
+
+hostname = "localhost"
+port = "3000"
+
+license-key = "<your_license_key>" #✨
+license-file = "/path/to/license"
+
+[influxdb]
+shared-secret = "long pass phrase used for signing tokens" #✨
+
+[smtp]
+host = "localhost"
+port = "25"
+username = ""
+password = ""
+from_email = "donotreply@example.com"
+
+[database]
+# Where is your database?
+# NOTE: This version of Enterprise Web currently only supports Postgres >= 9.3 or SQLite3
+url = "postgres://postgres:password@localhost:5432/enterprise" # ENV: DATABASE_URL ✨
+# url = "sqlite3:///var/lib/influx-enterprise/enterprise.db" #✨
+```
+
+>**Note:** The Web Console version 0.7.1 no longer uses PostgreSQL as its
+default database.
+The steps above allow you to continue using PostgreSQL if you initially
+installed the Web Console prior to version 0.7.1.
+If you'd prefer to use SQLite, the new default database, see [Installation](/enterprise/v1.0/introduction/installation/#web-console-setup).
+
+### 3. Restart all services
 Meta nodes:
 ```
 $ service influxdb-meta restart
