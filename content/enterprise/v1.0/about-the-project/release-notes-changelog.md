@@ -27,4 +27,4 @@ See [Installation](/enterprise/v1.0/introduction/installation/#web-console-setup
 for the updated setup instructions.
 The Web Console will continue to support PostgreSQL.
 See [Upgrading from Previous Versions](/enterprise/v1.0/administration/upgrading/)
-for how to upgrade to version 0.7.1 and maintain current PostgreSQL setup.
+for how to upgrade to version 0.7.1 and maintain current your PostgreSQL setup.
