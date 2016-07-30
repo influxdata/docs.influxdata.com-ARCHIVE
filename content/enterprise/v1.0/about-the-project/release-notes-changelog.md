@@ -19,6 +19,8 @@ information.
 
 ### Web Console
 
+Version 0.7.1 features various bug fixes and UI improvements.
+
 Version 0.7.1 uses SQLite as its default database in order to simplify the
 installation process.
 See [Installation](/enterprise/v1.0/introduction/installation/#web-console-setup)
