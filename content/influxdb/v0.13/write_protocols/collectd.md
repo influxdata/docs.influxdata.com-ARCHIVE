@@ -1,5 +1,6 @@
 ---
 title: Service - CollectD
+newversionredirect: /tools/collectd/
 menu:
   influxdb_013:
     weight: 50
