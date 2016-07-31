@@ -1016,6 +1016,11 @@ Return all points that occur 6 minutes after `2015-09-18 21:24:00`:
 > SELECT * FROM "h2o_feet" WHERE time > 24043524m + 6m
 ```
 
+> **Note**: Currently, InfluxDB does not support using `OR` with absolute time
+in the `WHERE` clause.
+See [Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#using-or-with-absolute-time-in-the-where-clause/)
+for more information.
+
 ## Regular expressions in queries
 
 Regular expressions are surrounded by `/` characters and use [Golang's regular expression syntax](http://golang.org/pkg/regexp/syntax/).

@@ -26,6 +26,7 @@ Where applicable, it links to outstanding issues on GitHub.
 * [Single quoting and double quoting in queries](#single-quoting-and-double-quoting-in-queries)  
 * [Missing data after creating a new `DEFAULT` retention policy](#missing-data-after-creating-a-new-default-retention-policy)
 * [Querying for series cardinality](#querying-for-series-cardinality)
+* [Using `OR` with absolute time in the `WHERE` clause](#using-or-with-absolute-time-in-the-where-clause)
 
 **Writing data**  
 
@@ -313,6 +314,23 @@ SELECT sum(numSeries) AS “total_series" FROM “_internal".."database" WHERE t
 
 > **Note:** Changes to the [`[monitor]`](/influxdb/v1.0/administration/config/#monitor)
 section in the configuration file may affect query results.
+
+## Using `OR` with absolute time in the `WHERE` clause
+
+Currently, InfluxQL does not support using `OR` with
+[absolute time](/influxdb/v1.0/query_language/data_exploration/#absolute-time)
+in the `WHERE` clause.
+InfluxDB returns an empty response if the query's `WHERE` clause uses `OR`
+with absolute time.
+
+Example:
+```
+> SELECT * FROM "absolutismus" WHERE time = '2016-07-31T20:07:00Z' OR time = '2016-07-31T23:07:17Z'
+>
+```
+
+<dt> [GitHub Issue #3290](https://github.com/influxdata/influxdb/issues/3290)
+</dt>
 
 # Writing data
 ## Writing integers
