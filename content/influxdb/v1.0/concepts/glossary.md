@@ -166,10 +166,41 @@ The collection of data in InfluxDB's data structure that share a measurement, ta
 Related entries: [field set](/influxdb/v1.0/concepts/glossary/#field-set), [measurement](/influxdb/v1.0/concepts/glossary/#measurement), [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp), [tag set](/influxdb/v1.0/concepts/glossary/#tag-set)
 
 ## series cardinality
-The count of all combinations of measurements and tags within a given data set.
-For example, take measurement `mem_available` with tags `host` and `total_mem`.
-If there are 35 different `host`s and 15 different `total_mem` values then series cardinality for that measurement is `35 * 15 = 525`.
-To calculate series cardinality for a database add the series cardinalities for the individual measurements together.
+The number of unique database, measurement, and tag set combinations in an InfluxDB instance.
+
+For example, assume that an InfluxDB instance has a single database and one measurement.
+The single measurement has two tag keys: `email` and `status`.
+If there are three different `email`s, and each email address is associated with two
+different `status`es then the series cardinality for the measurement is 6
+(3 * 2 = 6):
+
+| email                 | status |
+| :-------------------- | :----- |
+| lorr@influxdata.com | start  |
+| lorr@influxdata.com | finish |
+| marv@influxdata.com     | start  |
+| marv@influxdata.com     | finish |
+| cliff@influxdata.com | start  |
+| cliff@influxdata.com | finish |
+
+Note that, in some cases, simply performing that multiplication may overestimate series cardinality because of the presence of dependent tags.
+Dependent tags are tags that are scoped by another tag and do not increase series
+cardinality.
+If we add the tag `firstname` to the example above, the series cardinality
+would not be 18 (3 * 2 * 3 = 18).
+It would remain unchanged at 6, as `firstname` is already scoped by the `email` tag:
+
+| email                 | status | firstname |
+| :-------------------- | :----- | :-------- |
+| lorr@influxdata.com | start  | lorraine  |
+| lorr@influxdata.com | finish | lorraine  |
+| marv@influxdata.com     | start  | marvin      |
+| marv@influxdata.com     | finish | marvin      |
+| cliff@influxdata.com | start  | clifford  |
+| cliff@influxdata.com | finish | clifford  |
+
+See [Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#querying-for-series-cardinality) for how to query InfluxDB for series
+cardinality.
 
 Related entries: [tag set](/influxdb/v1.0/concepts/glossary/#tag-set), [measurement](/influxdb/v1.0/concepts/glossary/#measurement), [tag key](/influxdb/v1.0/concepts/glossary/#tag-key)
 
