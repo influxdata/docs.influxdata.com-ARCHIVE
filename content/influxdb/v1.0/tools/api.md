@@ -86,7 +86,7 @@ Those `SELECT` queries require a `POST` request.
 
 | Query String Parameter | Optional/Required | Definition |
 | :--------------------- | :---------------- |:---------- |
-| chunk_size=\<number_of_points> | Optional | Set the number of points returned per batch. By default, InfluxDB returns points in batches of 10,000 points. |
+| chunked=[true \| \<number_of_points>] | Optional | Returns points in streamed batches instead of in a single response. If set to `true`, InfluxDB chunks responses by series or by every 10,000 points, whichever occurs first. If set to a specific value, InfluxDB chunks responses by series or by that number of points.  |
 | db=\<database_name> | Required for database-dependent queries (most [`SELECT`](/influxdb/v1.0/query_language/spec/#select) queries and [`SHOW`](/influxdb/v1.0/query_language/spec/#show-continuous-queries) queries require this parameter). | Sets the target [database](/influxdb/v1.0/concepts/glossary/#database) for the query. |
 | epoch=[h,m,s,ms,u,ns] | Optional | Returns epoch timestamps with the specified precision. By default, InfluxDB returns timestamps in RFC3339 format with nanosecond precision. |
 | p=\<password> | Optional if you haven't [enabled authentication](/influxdb/v1.0/administration/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication. | Sets the password for authentication if you've enabled authentication. Use with the query string parameter `u`. |

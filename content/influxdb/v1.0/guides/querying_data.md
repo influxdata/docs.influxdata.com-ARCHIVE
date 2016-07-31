@@ -134,12 +134,17 @@ curl -G 'http://localhost:8086/query' --data-urlencode "db=mydb" --data-urlencod
 Authentication in InfluxDB is disabled by default.
 See [Authentication and Authorization](/influxdb/v1.0/administration/authentication_and_authorization/) for how to enable and set up authentication.
 
-#### Chunk size
-For large queries, results are returned in batches of 10,000 points unless you use the query string parameter `chunk_size` to explicitly set the batch size.
+#### Maximum Row Limit
+InfluxDB will limit the maximum number of returned results to prevent itself from running out of memory while it aggregates the results. This is set to 10,000 by default and can be configured by modifying `max-row-limit` in the `http` section of the configuration file.
+
+The maximum row limit only applies to non-chunked queries. Chunked queries can return an unlimited number of points.
+
+#### Chunking
+Chunking can be used to return results in streamed batches rather than as a single response by setting the query string parameter `chunked=true`. Responses will be chunked by series or by every 10,000 points, whichever occurs first. To change the maximum chunk size to a different value, set the query string parameter `chunk_size` to a different value.
 For example, get your results in batches of 20,000 points with:  
 <br>
 ```bash
-curl -G 'http://localhost:8086/query' --data-urlencode "db=deluge" --data-urlencode "chunk_size=20000" --data-urlencode "q=SELECT * FROM \"liters\""
+curl -G 'http://localhost:8086/query' --data-urlencode "db=deluge" --data-urlencode="chunked=true" --data-urlencode "chunk_size=20000" --data-urlencode "q=SELECT * FROM liters"
 ```
 
 ### InfluxQL
