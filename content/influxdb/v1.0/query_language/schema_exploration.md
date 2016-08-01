@@ -74,7 +74,7 @@ three_days_only	 72h0m0s		 24h0m0s			          1		       true
 The `SHOW SERIES` query returns the distinct [series](/influxdb/v1.0/concepts/glossary/#series) in your database and takes the following form, where the `FROM` and `WHERE` clauses are optional:
 
 ```sql
-SHOW SERIES [FROM <measurement_name> [WHERE <tag_key>='<tag_value>']]
+SHOW SERIES [FROM <measurement_name> [WHERE <tag_key> [= '<tag_value>' | =~ <regular_expression>]]]
 ```
 
 Return all series in the database `NOAA_water_database`:
@@ -142,7 +142,7 @@ h2o_quality,location=coyote_creek,randtag=3
 ## Explore measurements with `SHOW MEASUREMENTS`
 The `SHOW MEASUREMENTS` query returns the [measurements](/influxdb/v1.0/concepts/glossary/#measurement) in your database and it takes the following form:
 ```sql
-SHOW MEASUREMENTS [WITH MEASUREMENT <regular_expression>] [WHERE <tag_key>=<'tag_value'>]
+SHOW MEASUREMENTS [WITH MEASUREMENT <regular_expression>] [WHERE <tag_key> [= '<tag_value>' | =~ <regular_expression>]]
 ```
 
 Return all measurements in the `NOAA_water_database` database:
@@ -266,15 +266,14 @@ location
 
 ## Explore tag values with SHOW TAG VALUES
 The `SHOW TAG VALUES` query returns the set of [tag values](/influxdb/v1.0/concepts/glossary/#tag-value) for a specific tag key across all measurements in the database.
-`SHOW TAG VALUES` supports regular expressions in the `WITH KEY` clause.
-Syntax for specifying a single tag key:
 ```sql
-SHOW TAG VALUES [FROM <measurement_name>] WITH KEY = "<tag_key>"
+SHOW TAG VALUES [FROM <measurement_name>] [WITH KEY [ = "<tag_key>" | IN ("<tag_key1>","<tag_key2")]] [WHERE <tag_key> [= '<tag_value>' | =~ <regular_expression>]]
 ```
-Syntax for specifying more than one tag key:
-```sql
-SHOW TAG VALUES [FROM <measurement_name>] WITH KEY IN ("<tag_key1>","<tag_key2")
-```
+
+Syntax notes:
+
+* `SHOW TAG VALUES` supports regular expressions in the `WITH KEY` clause
+* `SHOW TAG VALUES` requires a `WITH` clause if the query includes a `WHERE` clause
 
 Return the tag values for a single tag key (`randtag`) across all measurements in the database `NOAA_water_database`:
 ```sql
@@ -291,49 +290,21 @@ randtag	 3
 randtag	 2
 ```
 
-Return the tag values for two tag keys (`location` and `randtag`) across all measurements in the database `NOAA_water_database`:
+Return the tag values for the tag keys `location` or `randtag` for all measurements where the tag key `randtag` has tag values:
 ```sql
-> SHOW TAG VALUES WITH KEY IN ("location","randtag")
+> SHOW TAG VALUES WITH KEY IN ("location","randtag") WHERE "randtag" =~ /./
 ```
 
 CLI response:
 ```bash
-name: average_temperature
--------------------------
-key		     value
-location	 coyote_creek
-location	 santa_monica
-
-
-name: h2o_feet
---------------
-key		     value
-location	 coyote_creek
-location	 santa_monica
-
-
-name: h2o_pH
-------------
-key		     value
-location	 coyote_creek
-location	 santa_monica
-
-
 name: h2o_quality
 -----------------
-key		     value
-location	 coyote_creek
-randtag		 1
-randtag		 3
-randtag		 2
-location	 santa_monica
-
-
-name: h2o_temperature
----------------------
-key		     value
-location	 coyote_creek
-location	 santa_monica
+key       value
+location  coyote_creek
+randtag   1
+randtag   2
+randtag   3
+location  santa_monica
 ```
 
 Return the tag values for all tag keys that do not include the letter `c`:
