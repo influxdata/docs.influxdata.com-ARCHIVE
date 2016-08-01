@@ -20,10 +20,10 @@ which retention policies are enabled. While a node is running, you can
 create a backup of your instance's metastore by running the command:
 
 ```
-influxd backup /path/to/backup
+influxd backup <path-to-backup>
 ```
 
-Where `/path/to/backup` can be replaced with the directory where you
+Where `path-to-backup` can be replaced with the directory where you
 would like the backup to be written to. Without any other arguments,
 the backup will only record the current state of the system
 metastore. For example, the command:
@@ -42,11 +42,11 @@ directory will be created if it doesn't already exist).
 To backup a database, you will need to add the `-database` flag:
 
 ```bash
-influxd backup -database mydatabase /path/to/backup
+influxd backup -database <mydatabase> <path-to-backup>
 ```
 
 Where `mydatabase` is the name of the database you would like to
-backup, and `/path/to/backup` is where the backup data should be
+backup, and `path-to-backup` is where the backup data should be
 stored. Optional flags also include:
 
 - `-retention <retention policy name>` - This flag can be used to
@@ -101,25 +101,27 @@ To restore a backup, you will need to use the `influxd restore` command.
 
 > **Note:** Restoring from backup is only supported while the InfluxDB daemon is stopped.
 
-In order to restore from a backup, you will need to provide the path
-to the backup. The command:
+To restore from a backup you will need to specify the type of backup,
+the path to where the backup should be restored, and the path to the backup.
+The command:
 
 ```
-influxd restore /tmp/backup
+influxd restore [ -metadir | -datadir ] <path-to-meta-or-data-directory> <path-to-backup>
 ```
 
-Will attempt to restore the contents of the `/tmp/backup`. The
-optional flags for restoring a backup are:
+The required flags for restoring a backup are:
 
-- `-metadir <path to meta directory>` - This is the path to the meta
+- `-metadir <path-to-meta-directory>` - This is the path to the meta
   directory where you would like the metastore backup recovered
   to. For packaged installations, this should be specified as
   `/var/lib/influxdb/meta`.
 
-- `-datadir <path to data directory>` - This is the path to the data
+- `-datadir <path-to-data-directory>` - This is the path to the data
   directory where you would like the database backup recovered to. For
   packaged installations, this should be specified as
   `/var/lib/influxdb/data`.
+
+The optional flags for restoring a backup are:
 
 - `-database <database>` - This is the database that you would like to
   restore the data to. This option is required if no `-metadir` option
