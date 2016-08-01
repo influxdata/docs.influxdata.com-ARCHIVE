@@ -126,6 +126,11 @@ this option to `true` will disable reporting.
 
 >**Note:** No data from user databases is ever transmitted.
 
+### bind-address = ":8088"
+
+This setting is for clusters only.
+Please disregard this setting if you are using the OSS version of InfluxDB.
+
 ## [meta]
 
 This section controls parameters for InfluxDB's metastore,
@@ -156,12 +161,6 @@ The name of the auto-created retention policy.
 ### logging-enabled = true
 
 Meta logging toggles the logging of messages from the meta service.
-
-### pprof-enabled = false
-
-### lease-duration = "1m0s"
-
-The default duration for leases.
 
 ## [data]
 
@@ -213,14 +212,12 @@ The compact full write cold duration is the duration at which the engine will co
 The maximum points per block is the maximum number of points in an encoded block in a TSM file.
 Larger numbers may yield better compression but could incur a performance penalty when querying.
 
-### data-logging-enabled = true
+### trace-logging-enabled = false
 
 ## [coordinator]
 
 This section contains configuration options for query management.
 For more on managing queries, see [Query Management](/influxdb/v1.0/troubleshooting/query_management/).
-
-### force-remote-mapping = false
 
 ### write-timeout = "10s"
 
@@ -316,8 +313,6 @@ Set to `true` to enable HTTPS for the admin interface.
 
 The path of the certificate file.
 
-### Version = ""
-
 ## [monitor]
 
 This section controls InfluxDB's [system self-monitoring](https://github.com/influxdb/influxdb/blob/master/monitor/README.md).
@@ -375,10 +370,6 @@ Set to `false` to disable logging.
 Set to `true` to enable logging for the write payload.
 If set to `true`, this will duplicate every write statement in the logs and is thus not recommended for general use.
 
-### pprof-enabled = false
-
-Set to `true` to enable [pprof](http://blog.golang.org/profiling-go-programs) on InfluxDB so that it gathers detailed performance information.
-
 ### https-enabled = false
 
 Set to `true` to enable HTTPS.
@@ -400,6 +391,8 @@ the private key from the `https-private-key` file.
 ### max-connection-limit = 0
 
 ### shared-secret = ""
+
+### realm = "InfluxDB"
 
 ## [[graphite]]
 
@@ -592,14 +585,14 @@ The input will flush if this many points get buffered.
 
 The number of batches that may be pending in memory.
 
-### batch-timeout = "1s"
-
-The input will flush at least this often even if it hasn't reached the configured batch-size.
-
 ### read-buffer = 0
 
 UDP read buffer size, 0 means OS default.
 UDP listener will fail if set above OS max.
+
+### batch-timeout = "1s"
+
+The input will flush at least this often even if it hasn't reached the configured batch-size.
 
 ### precision = ""
 
