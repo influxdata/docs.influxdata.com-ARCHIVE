@@ -17,7 +17,7 @@ for detailed release notes.
 
 ### New plugins
 
-Telegraf 1.0 offers five new input plugins:
+Telegraf 1.0 offers several new input plugins:
 
 * The
 [Graylog plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/graylog)
@@ -32,6 +32,13 @@ collects stats from Netfilter's conntrack-tools.
 [VMStat plugin](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/KERNEL_VMSTAT_README.md)
 gathers virtual memory statistics by reading /proc/vmstat.
 * The
-[Rollbar plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/rollbar_webhooks)
-is a Telegraf service plugin that listens for events kicked off by Rollbar
-Webhooks service and persists data from them into configured outputs.
+[logparser plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/logparser)
+streams and parses logfiles.
+* [Webhooks](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/webhooks)
+is a Telegraf service plugin that starts an HTTP server and registers multiple webhook listeners. Webhooks includes the
+[Rollbar Webhook plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/webhooks/rollbar)
+and the [Mandrill Webhook plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/webhooks/mandrill).
+* The [CGroup plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/cgroup)
+captures specific statistics per CGroup.
+* The [NSQ consumer plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/nsq_consumer)
+polls a specific NSQD topic and adds messages to InfluxDB.
