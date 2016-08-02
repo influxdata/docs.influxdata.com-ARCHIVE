@@ -6,8 +6,8 @@ menu:
     parent: Troubleshooting
 ---
 
-When you have challenges with the InfluxEnterprise product, we ask you to
-contact us at <enterprise-beta@influxdb.com>.
+When you have challenges with the InfluxEnterprise product, please contact support
+using the email we provided at the time of the signup.
 That will ensure your support tickets are routed directly to our private release
 support team.
 

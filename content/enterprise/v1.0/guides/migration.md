@@ -22,7 +22,7 @@ following steps will **not** transfer users from the OSS instance to the
 InfluxEnterprise Cluster.
 </dt>
 
-In addition, please refrain from creating a Global Admin user in the InfluxEnterprise Web Console before implementing these steps. If you’ve already created a Global Admin user, contact support at <enterprise-beta@influxdb.com>.
+In addition, please refrain from creating a Global Admin user in the InfluxEnterprise Web Console before implementing these steps. If you’ve already created a Global Admin user, contact support.
 
 ## Modify the /etc/hosts file
 
@@ -169,4 +169,6 @@ Added data node y at the-hostname:8088
 Increase the [replication factor](http://localhost:1313/enterprise/v1.0/concepts/glossary/#replication-factor) on all existing retention polices to the number of data nodes in your cluster.
 You can do this with [ALTER RETENTION POLICY](https://docs.influxdata.com/influxdb/v1.0/query_language/database_management/#modify-retention-policies-with-alter-retention-policy).
 
-The increased replication factor applies to all new data new data in the cluster. For old data, you must manually copy shards to other data nodes in the cluster using the available [influxd-ctl commands](http://localhost:1313/enterprise/v1.0/features/clustering-features/#influxenterprise-cluster-commands).
+The increased replication factor applies to all new shards in the cluster.
+You may need to truncate shards that are currently accepting writes.
+For those truncated shards and for older shards, you must manually copy the shards to other data nodes in the cluster using the available [influxd-ctl commands](http://localhost:1313/enterprise/v1.0/features/clustering-features/#influxenterprise-cluster-commands).

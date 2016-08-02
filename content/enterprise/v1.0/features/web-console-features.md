@@ -54,7 +54,7 @@ A permission is a grant for access. They can be global, cluster specific, or dat
 
 **View Admin**: The right to view the admin screen and diagnostics dashboard.
 
-**View Chronograf**: The right to view Chronograf screens.
+**View Chronograf**: The right to view Chronograf/Data Explorer screens.
 
 **Write Data**: The right to write data.
 

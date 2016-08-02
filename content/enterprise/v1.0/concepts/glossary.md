@@ -62,9 +62,8 @@ number of unavailable data nodes.
 * Data may be unavailable when the replication factor is less than the number of
 unavailable data nodes.
 
-Note that there are no query performance benefits from replication.
-Replication is for ensuring data availability when a data node or nodes are
-unavailable.
+Any replication factor greater than two gives you additional fault tolerance and
+query capacity within the cluster.
 
 ## web console
 

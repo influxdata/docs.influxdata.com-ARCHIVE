@@ -23,7 +23,7 @@ two serve as [data nodes](/enterprise/v1.0/concepts/glossary#data-node).
 
 Please note that there is no requirement to use that number of servers.
 The meta and data processes can run on the same or different servers.
-Your cluster **must** have:
+For high availability and redundancy your cluster should have:
 
 * at least three meta nodes
 * an odd number of meta nodes
