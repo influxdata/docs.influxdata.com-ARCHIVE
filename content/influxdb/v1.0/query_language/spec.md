@@ -326,7 +326,7 @@ END;
 ### CREATE DATABASE
 
 ```
-create_database_stmt = "CREATE DATABASE" ["IF NOT EXISTS"] db_name
+create_database_stmt = "CREATE DATABASE" db_name
                        [ WITH
                        [ retention_policy_duration ]
                        [ retention_policy_replication ]
@@ -442,7 +442,7 @@ DROP CONTINUOUS QUERY "myquery" ON "mydb"
 ### DROP DATABASE
 
 ```
-drop_database_stmt = "DROP DATABASE" ["IF EXISTS"] db_name .
+drop_database_stmt = "DROP DATABASE" db_name .
 ```
 
 #### Example:
