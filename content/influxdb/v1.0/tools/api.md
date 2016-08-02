@@ -123,7 +123,7 @@ $ curl -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * F
 
 Query data with a `SELECT` statement and an `INTO` clause:
 ```
-$ curl -POST 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * INTO "newmeas" FROM "mymeas"'
+$ curl -XPOST 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * INTO "newmeas" FROM "mymeas"'
 
 {"results":[{"series":[{"name":"result","columns":["time","written"],"values":[["1970-01-01T00:00:00Z",4]]}]}]}
 ```
@@ -187,21 +187,21 @@ $ curl -GET 'http://localhost:8086/query?db=mydb&epoch=s' --data-urlencode 'q=SE
 
 Create a database:
 ```
-$ curl -POST 'http://localhost:8086/query' --data-urlencode 'q=CREATE DATABASE "mydb"'
+$ curl -XPOST 'http://localhost:8086/query' --data-urlencode 'q=CREATE DATABASE "mydb"'
 
 {"results":[{}]}
 ```
 
 Create a database using HTTP authentication:
 ```
-$ curl -POST 'http://localhost:8086/query?u=myusername&p=mypassword' --data-urlencode 'q=CREATE DATABASE "mydb"'
+$ curl -XPOST 'http://localhost:8086/query?u=myusername&p=mypassword' --data-urlencode 'q=CREATE DATABASE "mydb"'
 
 {"results":[{}]}
 ```
 
 <a name=basic-auth-query></a>Create a database using basic authentication:
 ```
-$ curl -POST -u myusername:mypassword 'http://localhost:8086/query' --data-urlencode 'q=CREATE DATABASE "mydb"'
+$ curl -XPOST -u myusername:mypassword 'http://localhost:8086/query' --data-urlencode 'q=CREATE DATABASE "mydb"'
 
 {"results":[{}]}
 ```
@@ -315,43 +315,43 @@ Smaller batches, and more HTTP requests, will result in sub-optimal performance.
 
 Write a point to the database `mydb` with a nanosecond timestamp:
 ```
-$ curl -i -POST "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=1 myfield=90 1463683075000000000'
+$ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=1 myfield=90 1463683075000000000'
 ```
 
 Write a point to the database `mydb` with the local server's nanosecond timestamp:
 ```
-$ curl -i -POST "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=1 myfield=90'
+$ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=1 myfield=90'
 ```
 
 Write a point to the database `mydb` with a timestamp in seconds:
 ```
-$ curl -i -POST "http://localhost:8086/write?db=mydb&precision=s" --data-binary 'mymeas,mytag=1 myfield=90 1463683075'
+$ curl -i -XPOST "http://localhost:8086/write?db=mydb&precision=s" --data-binary 'mymeas,mytag=1 myfield=90 1463683075'
 ```
 
 Write a point to the database `mydb` and the retention policy `myrp`:
 ```
-$ curl -i -POST "http://localhost:8086/write?db=mydb&rp=myrp" --data-binary 'mymeas,mytag=1 myfield=90'
+$ curl -i -XPOST "http://localhost:8086/write?db=mydb&rp=myrp" --data-binary 'mymeas,mytag=1 myfield=90'
 ```
 
 Write a point to the database `mydb` using HTTP authentication:
 ```
-$ curl -i -POST "http://localhost:8086/write?db=mydb&u=myusername&p=mypassword" --data-binary 'mymeas,mytag=1 myfield=91'
+$ curl -i -XPOST "http://localhost:8086/write?db=mydb&u=myusername&p=mypassword" --data-binary 'mymeas,mytag=1 myfield=91'
 ```
 
 <a name=basic-auth-write></a>Write a point to the database `mydb` using basic authentication:
 ```
-$ curl -i -POST -u myusername:mypassword "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=1 myfield=91'
+$ curl -i -XPOST -u myusername:mypassword "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=1 myfield=91'
 ```
 
 Write several points to the database `mydb` by separating points with a new line:
 ```
-$ curl -i -POST "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=3 myfield=89
+$ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=3 myfield=89
 mymeas,mytag=2 myfield=34 1463689152000000000'
 ```
 
 Write several points to the database `mydb` from the file `data.txt`:
 ```
-$ curl -i -POST "http://localhost:8086/write?db=mydb" --data-binary @data.txt
+$ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary @data.txt
 ```
 
 A sample of the data in `data.txt`:
