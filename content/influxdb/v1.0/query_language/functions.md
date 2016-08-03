@@ -16,9 +16,9 @@ Use InfluxQL functions to aggregate, select, transform, and predict data.
 | [INTEGRAL()](#integral)  | [LAST()](#last)  | [DIFFERENCE()](#difference)  
 | [MEAN()](#mean) | [MAX()](#max)  | [ELAPSED()](#elapsed)
 | [MEDIAN()](#median)  | [MIN()](#min)  |  [FLOOR()](#floor)
-| [SPREAD()](#spread) | [PERCENTILE()](#percentile) | [HISTOGRAM()](#histogram)
-| [SUM()](#sum)  | [TOP()](#top) | [MOVING_AVERAGE()](#moving-average) |
-|   |  | [NON_NEGATIVE_DERIVATIVE()](#non-negative-derivative) |
+| [MODE()](#mode) | [PERCENTILE()](#percentile) | [HISTOGRAM()](#histogram)
+| [SPREAD()](#spread)  | [TOP()](#top) | [MOVING_AVERAGE()](#moving-average) |
+| [SUM()](#sum)  |  | [NON_NEGATIVE_DERIVATIVE()](#non-negative-derivative) |
 |   |  | [STDDEV()](#stddev)
 
 
@@ -298,6 +298,56 @@ time			               median
 ----			               ------
 2015-08-18T00:00:00Z	 2.0575
 ```
+
+## MODE()
+Returns the most frequent value in a single [field](/influxdb/v1.0/concepts/glossary/#field).
+
+```sql
+SELECT MODE(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+```
+
+> **Note:** `MODE()` will return the earliest metric value in case of a tie between two or more value for maximum occurrences
+
+Examples:
+
+* Select the mode value in the field `water_level`:
+
+```sql
+> SELECT MODE("water_level") FROM "h2o_feet"
+```
+
+CLI response:
+```bash
+name: h2o_feet
+--------------
+time			               mode
+1970-01-01T00:00:00Z	        4
+```
+
+> **Note:** Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
+
+* Select the mode value of `water_level` between August 18, 2015 at 00:00:00 and August 18, 2015 at 00:30:00 grouped by the `location` tag:
+
+```sql
+> SELECT MODE("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time < '2015-08-18T00:36:00Z' GROUP BY "location"
+```
+
+CLI response:
+```bash
+name: h2o_feet
+tags: location = coyote_creek
+time			               mode
+----			               ------
+2015-08-18T00:00:00Z	        7
+
+name: h2o_feet
+tags: location = santa_monica
+time			               mode
+----			               ------
+2015-08-18T00:00:00Z	        2
+```
+
+
 
 ## SPREAD()
 Returns the difference between the minimum and maximum values of a [field](/influxdb/v1.0/concepts/glossary/#field).
