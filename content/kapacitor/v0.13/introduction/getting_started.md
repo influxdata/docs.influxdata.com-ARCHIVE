@@ -153,7 +153,7 @@ The binary `kapacitor` exposes the API over the command line.
 Now use the CLI tool to define the `task` and the databases and retention policies it can access:
 
 ```bash
-kapacitor define cpu_alert \
+kapacitor define -name cpu_alert \
     -type stream \
     -tick cpu_alert.tick \
     -dbrp kapacitor_example.default
@@ -167,7 +167,7 @@ Before we enable the task, we should test it first so we do not spam ourselves w
 Record the current data stream for a bit so we can use it to test our task with:
 
 ```bash
-kapacitor record stream -task cpu_alert -duration 20s
+kapacitor record stream -name cpu_alert -duration 20s
 ```
 
 Since we defined the task with a database and retention policy pair, the recording knows to
@@ -203,7 +203,7 @@ The `replay` action replays data only to a specific task.
 This way we can test the task in complete isolation:
 
 ```bash
-kapacitor replay -recording $rid -task cpu_alert
+kapacitor replay -id $rid -name cpu_alert
 ```
 
 Since we already have the data recorded, we can just replay the data as fast as possible instead of waiting for real time to pass.
