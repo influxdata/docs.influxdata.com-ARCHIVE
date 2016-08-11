@@ -20,6 +20,8 @@ To get started, you'll need the license key that you received at
 The steps below set up a five server cluster; three servers are
 [meta nodes](/enterprise/v1.0/concepts/glossary/#meta-node) and
 two serve as [data nodes](/enterprise/v1.0/concepts/glossary#data-node).
+The data nodes servers will need to be able to reach `portal.influxdata.com` 
+on port `80` or `443`.
 
 Please note that there is no requirement to use that number of servers.
 The meta and data processes can run on the same or different servers.
