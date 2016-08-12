@@ -7,13 +7,13 @@ menu:
 ---
 
 The following sections include instructions for upgrading to InfluxEnterprise
-Clustering version 0.7.3 and InfluxEnterprise Web Console version 0.7.1.
+Clustering version 0.7.4 and InfluxEnterprise Web Console version 0.7.1.
 
 Before you start, please review the section at the
 [bottom of this page](#configuration-settings) to ensure that you have the most
 up-to-date configuration settings.
 
-## Upgrading to Clustering version 0.7.3 and Web Console 0.7.1
+## Upgrading to Clustering version 0.7.4 and Web Console 0.7.1
 
 ### 1. Download and install the new versions of InfluxEnterprise
 
@@ -21,8 +21,8 @@ up-to-date configuration settings.
 
 ##### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta_1.0.0-beta2-c0.7.3_amd64.deb
-sudo dpkg -i influxdb-meta_1.0.0-beta2-c0.7.3_amd64.deb
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta_1.0.0-beta2-c0.7.4_amd64.deb
+sudo dpkg -i influxdb-meta_1.0.0-beta2-c0.7.4_amd64.deb
 ```
 
 > **Note:** If you're running Ubuntu 16.04.1, you may need to enter
@@ -30,21 +30,21 @@ sudo dpkg -i influxdb-meta_1.0.0-beta2-c0.7.3_amd64.deb
 
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta-1.0.0_beta2_c0.7.3.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.0.0_beta2_c0.7.3.x86_64.rpm
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta-1.0.0_beta2_c0.7.4.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.0.0_beta2_c0.7.4.x86_64.rpm
 ```
 
 #### Data nodes
 
 ##### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data_1.0.0-beta2-c0.7.3_amd64.deb
-sudo dpkg -i influxdb-data_1.0.0-beta2-c0.7.3_amd64.deb
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data_1.0.0-beta2-c0.7.4_amd64.deb
+sudo dpkg -i influxdb-data_1.0.0-beta2-c0.7.4_amd64.deb
 ```
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data-1.0.0_beta2_c0.7.3.x86_64.rpm
-sudo yum localinstall influxdb-data-1.0.0_beta2_c0.7.3.x86_64.rpm
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data-1.0.0_beta2_c0.7.4.x86_64.rpm
+sudo yum localinstall influxdb-data-1.0.0_beta2_c0.7.4.x86_64.rpm
 ```
 #### Web console
 
