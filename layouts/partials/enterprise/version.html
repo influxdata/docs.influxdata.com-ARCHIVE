@@ -1,0 +1,7 @@
+{{ if (or (in .RelPermalink .Site.Data.default_versions.enterprise_semver) (eq .RelPermalink "/enterprise/")) }}
+<div class="old-version">
+{{ if in .RelPermalink "v1.0"}}
+    <strong>Warning!</strong> This page documents InfluxEnterprise 1.0-beta. Please note that this documentation is subject to change.
+{{ end }}
+</div>
+{{ end }}
