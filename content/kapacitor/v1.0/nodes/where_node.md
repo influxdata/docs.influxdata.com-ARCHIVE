@@ -6,7 +6,7 @@ menu:
   kapacitor_1_0:
     name: Where
     identifier: where_node
-    weight: 230
+    weight: 240
     parent: nodes
 ---
 
@@ -44,6 +44,7 @@ Index
 -	[Count](/kapacitor/v1.0/nodes/where_node/#count)
 -	[Deadman](/kapacitor/v1.0/nodes/where_node/#deadman)
 -	[Default](/kapacitor/v1.0/nodes/where_node/#default)
+-	[Delete](/kapacitor/v1.0/nodes/where_node/#delete)
 -	[Derivative](/kapacitor/v1.0/nodes/where_node/#derivative)
 -	[Distinct](/kapacitor/v1.0/nodes/where_node/#distinct)
 -	[Elapsed](/kapacitor/v1.0/nodes/where_node/#elapsed)
@@ -225,6 +226,18 @@ node|default()
 ```
 
 Returns: [DefaultNode](/kapacitor/v1.0/nodes/default_node/)
+
+
+### Delete
+
+Create a node that can delete tags or fields. 
+
+
+```javascript
+node|delete()
+```
+
+Returns: [DeleteNode](/kapacitor/v1.0/nodes/delete_node/)
 
 
 ### Derivative

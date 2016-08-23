@@ -6,7 +6,7 @@ menu:
   kapacitor_1_0:
     name: Union
     identifier: union_node
-    weight: 220
+    weight: 230
     parent: nodes
 ---
 
@@ -52,6 +52,7 @@ Index
 -	[Count](/kapacitor/v1.0/nodes/union_node/#count)
 -	[Deadman](/kapacitor/v1.0/nodes/union_node/#deadman)
 -	[Default](/kapacitor/v1.0/nodes/union_node/#default)
+-	[Delete](/kapacitor/v1.0/nodes/union_node/#delete)
 -	[Derivative](/kapacitor/v1.0/nodes/union_node/#derivative)
 -	[Distinct](/kapacitor/v1.0/nodes/union_node/#distinct)
 -	[Elapsed](/kapacitor/v1.0/nodes/union_node/#elapsed)
@@ -253,6 +254,18 @@ node|default()
 ```
 
 Returns: [DefaultNode](/kapacitor/v1.0/nodes/default_node/)
+
+
+### Delete
+
+Create a node that can delete tags or fields. 
+
+
+```javascript
+node|delete()
+```
+
+Returns: [DeleteNode](/kapacitor/v1.0/nodes/delete_node/)
 
 
 ### Derivative

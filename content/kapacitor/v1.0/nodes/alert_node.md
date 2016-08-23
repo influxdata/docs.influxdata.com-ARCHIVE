@@ -68,17 +68,40 @@ Example:
            .crit(lambda: "value" > 30)
            .post("http://example.com/api/alert")
            .post("http://another.example.com/api/alert")
-           .email().to('oncall@example.com')
+           .email('oncall@example.com')
 ```
 
 
-It is assumed that each successive level filters a subset 
-of the previous level. As a result, the filter will only be applied if 
-a data point passed the previous level. 
-In the above example, if value = 15 then the INFO and 
-WARNING expressions would be evaluated, but not the 
-CRITICAL expression. 
 Each expression maintains its own state. 
+The order of execution for the expressions is not considered to be deterministic. 
+For each point an expression may or may not be evaluated. 
+If no expression is true then the alert is considered to be in the OK state. 
+
+Kapacitor supports alert reset expressions. 
+This way when an alert enters a state, it can only be lowered in severity if its reset expression evaluates to true. 
+
+Example: 
+
+
+```javascript
+   stream
+       |from()
+           .measurement('cpu')
+           .where(lambda: "host" == 'serverA')
+           .groupBy('host')
+       |alert()
+           .info(lambda: "value" > 60)
+           .infoReset(lambda: "value" < 50)
+           .warn(lambda: "value" > 70)
+           .warnReset(lambda: "value" < 60)
+           .crit(lambda: "value" > 80)
+           .critReset(lambda: "value" < 70)
+```
+
+For example given the following values: 
+61 73 64 85 62 56 47 
+The corresponding alert states are: 
+INFO WARNING WARNING CRITICAL INFO INFO OK 
 
 Available Statistics: 
 
@@ -98,6 +121,7 @@ Index
 -	[Alerta](/kapacitor/v1.0/nodes/alert_node/#alerta)
 -	[All](/kapacitor/v1.0/nodes/alert_node/#all)
 -	[Crit](/kapacitor/v1.0/nodes/alert_node/#crit)
+-	[CritReset](/kapacitor/v1.0/nodes/alert_node/#critreset)
 -	[Details](/kapacitor/v1.0/nodes/alert_node/#details)
 -	[DurationField](/kapacitor/v1.0/nodes/alert_node/#durationfield)
 -	[Email](/kapacitor/v1.0/nodes/alert_node/#email)
@@ -109,10 +133,12 @@ Index
 -	[IdField](/kapacitor/v1.0/nodes/alert_node/#idfield)
 -	[IdTag](/kapacitor/v1.0/nodes/alert_node/#idtag)
 -	[Info](/kapacitor/v1.0/nodes/alert_node/#info)
+-	[InfoReset](/kapacitor/v1.0/nodes/alert_node/#inforeset)
 -	[LevelField](/kapacitor/v1.0/nodes/alert_node/#levelfield)
 -	[LevelTag](/kapacitor/v1.0/nodes/alert_node/#leveltag)
 -	[Log](/kapacitor/v1.0/nodes/alert_node/#log)
 -	[Message](/kapacitor/v1.0/nodes/alert_node/#message)
+-	[NoRecoveries](/kapacitor/v1.0/nodes/alert_node/#norecoveries)
 -	[OpsGenie](/kapacitor/v1.0/nodes/alert_node/#opsgenie)
 -	[PagerDuty](/kapacitor/v1.0/nodes/alert_node/#pagerduty)
 -	[Post](/kapacitor/v1.0/nodes/alert_node/#post)
@@ -123,6 +149,7 @@ Index
 -	[Telegram](/kapacitor/v1.0/nodes/alert_node/#telegram)
 -	[VictorOps](/kapacitor/v1.0/nodes/alert_node/#victorops)
 -	[Warn](/kapacitor/v1.0/nodes/alert_node/#warn)
+-	[WarnReset](/kapacitor/v1.0/nodes/alert_node/#warnreset)
 
 ### Chaining Methods
 
@@ -132,6 +159,7 @@ Index
 -	[Count](/kapacitor/v1.0/nodes/alert_node/#count)
 -	[Deadman](/kapacitor/v1.0/nodes/alert_node/#deadman)
 -	[Default](/kapacitor/v1.0/nodes/alert_node/#default)
+-	[Delete](/kapacitor/v1.0/nodes/alert_node/#delete)
 -	[Derivative](/kapacitor/v1.0/nodes/alert_node/#derivative)
 -	[Distinct](/kapacitor/v1.0/nodes/alert_node/#distinct)
 -	[Elapsed](/kapacitor/v1.0/nodes/alert_node/#elapsed)
@@ -288,6 +316,18 @@ node.alerta()
 ```
 
 
+#### Alerta Services
+
+List of effected services. 
+If not specified defaults to the Name of the stream. 
+
+
+```javascript
+node.alerta()
+      .services(service ...string)
+```
+
+
 #### Alerta Token
 
 Alerta authentication token. 
@@ -316,7 +356,7 @@ node.alerta()
 
 ### All
 
-Indicates an alert should trigger only if all points in a batch match the criteria 
+Indicates an alert should trigger only if all points in a batch match the criteria. 
 Does not apply to stream alerts. 
 
 
@@ -333,6 +373,16 @@ An empty value indicates the level is invalid and is skipped.
 
 ```javascript
 node.crit(value ast.LambdaNode)
+```
+
+
+### CritReset
+
+Filter expression for reseting the CRITICAL alert level to lower level. 
+
+
+```javascript
+node.critReset(value ast.LambdaNode)
 ```
 
 
@@ -455,6 +505,29 @@ node.email(to ...string)
 Define the To addresses for the email alert. 
 Multiple calls append to the existing list of addresses. 
 If empty uses the addresses from the configuration. 
+
+Example: 
+
+
+```javascript
+    |alert()
+       .id('{{ .Name }}')
+       // Email subject
+       .meassage('{{ .ID }}:{{ .Level }}')
+       //Email body as HTML
+       .details('''
+<h1>{{ .ID }}</h1>
+<b>{{ .Message }}</b>
+Value: {{ index .Fields "value" }}
+''')
+       .email('admin@example.com')
+         .to('oncall@example.com')
+         .to('support@example.com')
+```
+
+All three email addresses will receive the alert message. 
+
+Passing addresses to the `email` property directly or using the `email.to` property is the same. 
 
 
 ```javascript
@@ -662,6 +735,16 @@ node.info(value ast.LambdaNode)
 ```
 
 
+### InfoReset
+
+Filter expression for reseting the INFO alert level to lower level. 
+
+
+```javascript
+node.infoReset(value ast.LambdaNode)
+```
+
+
 ### LevelField
 
 Optional field key to add to the data, containing the alert level as a string. 
@@ -761,6 +844,16 @@ Default: {{ .ID }} is {{ .Level }}
 
 ```javascript
 node.message(value string)
+```
+
+
+### NoRecoveries
+
+Do not send recovery alerts. 
+
+
+```javascript
+node.noRecoveries()
 ```
 
 
@@ -1397,6 +1490,16 @@ node.warn(value ast.LambdaNode)
 ```
 
 
+### WarnReset
+
+Filter expression for reseting the WARNING alert level to lower level. 
+
+
+```javascript
+node.warnReset(value ast.LambdaNode)
+```
+
+
 Chaining Methods
 ----------------
 
@@ -1548,6 +1651,18 @@ node|default()
 ```
 
 Returns: [DefaultNode](/kapacitor/v1.0/nodes/default_node/)
+
+
+### Delete
+
+Create a node that can delete tags or fields. 
+
+
+```javascript
+node|delete()
+```
+
+Returns: [DeleteNode](/kapacitor/v1.0/nodes/delete_node/)
 
 
 ### Derivative

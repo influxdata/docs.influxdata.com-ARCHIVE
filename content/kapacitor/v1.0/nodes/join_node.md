@@ -6,7 +6,7 @@ menu:
   kapacitor_1_0:
     name: Join
     identifier: join_node
-    weight: 130
+    weight: 140
     parent: nodes
 ---
 
@@ -76,6 +76,7 @@ Index
 -	[Count](/kapacitor/v1.0/nodes/join_node/#count)
 -	[Deadman](/kapacitor/v1.0/nodes/join_node/#deadman)
 -	[Default](/kapacitor/v1.0/nodes/join_node/#default)
+-	[Delete](/kapacitor/v1.0/nodes/join_node/#delete)
 -	[Derivative](/kapacitor/v1.0/nodes/join_node/#derivative)
 -	[Distinct](/kapacitor/v1.0/nodes/join_node/#distinct)
 -	[Elapsed](/kapacitor/v1.0/nodes/join_node/#elapsed)
@@ -150,6 +151,47 @@ Options are:
 - null - fill missing points with null, full outer join. 
 - Any numerical value - fill fields with given value, full outer join. 
 
+When using a numerical or null fill, the fields names are determined by copying 
+the field names from another point. 
+This doesn&#39;t work well when different sources have different field names. 
+Use the [DefaultNode](/kapacitor/v1.0/nodes/default_node/) and [DeleteNode](/kapacitor/v1.0/nodes/delete_node/) to finalize the fill operation if necessary. 
+
+Example: 
+
+
+```javascript
+    var maintlock = stream
+        |from()
+            .measurement('maintlock')
+            .groupBy('service')
+    var requests = stream
+        |from()
+            .measurement('requests')
+            .groupBy('service')
+    // Join the maintlock and requests streams
+    // The intent it to drop any points in maintenance mode.
+    maintlock
+        |join(requests)
+            // Provide prefix names for the fields of the data points.
+            .as('maintlock', 'requests')
+            // points that are within 1 second are considered the same time.
+            .tolerance(1s)
+            // fill missing fields with null, implies outer join.
+            // a better default per field will be set later.
+            .fill('null')
+            // name the resulting stream.
+            .streamName('requests')
+        |default()
+            // default maintenance mode to false, overwriting the null value if present.
+            .field('maintlock.mode', false)
+            // default the requests to 0, again overwriting the null value if present.
+            .field('requests.value', 0.0)
+        // drop any points that are in maintenance mode.
+        |where(lambda: "maintlock.mode")
+        |...
+```
+
+
 
 ```javascript
 node.fill(value interface{})
@@ -170,7 +212,7 @@ Example:
 
 
 ```javascript
-    var buidling = stream
+    var building = stream
         |from()
             .measurement('building_power')
             .groupBy('building')
@@ -368,6 +410,18 @@ node|default()
 ```
 
 Returns: [DefaultNode](/kapacitor/v1.0/nodes/default_node/)
+
+
+### Delete
+
+Create a node that can delete tags or fields. 
+
+
+```javascript
+node|delete()
+```
+
+Returns: [DeleteNode](/kapacitor/v1.0/nodes/delete_node/)
 
 
 ### Derivative
