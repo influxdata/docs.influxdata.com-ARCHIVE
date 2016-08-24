@@ -54,7 +54,7 @@ The increase in RAM needs relative to series cardinality is exponential where th
 ![Series Cardinality](/img/influxdb/series-cardinality.png)
 
 ## What kind of storage do I need?
-InfluxDB is designed to run on SSDs.  Performance is lower on spinning disk drives and may not function properly under increasing loads.
+InfluxDB is designed to run on SSDs.  Performance is lower on spinning disk drives and may not function properly under increasing loads. For best results InfluxDB servers should have at least 1000 IOPS on the storage system.
 
 ## How much storage do I need?
 Database names, [measurements](/influxdb/v0.13/concepts/glossary/#measurement), [tag keys](/influxdb/v0.13/concepts/glossary/#tag-key), [field keys](/influxdb/v0.13/concepts/glossary/#field-key), and [tag values](/influxdb/v0.13/concepts/glossary/#tag-value) are stored only once and always as strings. Only [field values](/influxdb/v0.13/concepts/glossary/#field-value) and [timestamps](/influxdb/v0.13/concepts/glossary/#timestamp) are stored per-point.
