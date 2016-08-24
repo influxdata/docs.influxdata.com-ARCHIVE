@@ -10,37 +10,37 @@ Now that you successfully [installed and set up](/enterprise/v1.0/introduction/i
 `http://<your_web_console_server's_IP_address>:3000` to get started with the
 web console!
 
-When you first visit the web console, it prompts you to create a Global
-Admin user as well as your first database.
+When you first visit the web console, it prompts you to:
 
-#### 1. Create a Global Admin user
+#### 1. Name your cluster
 
-The first user that you create is assigned to the Global Admin role.
-The Global Admin role is one of InfluxEnterprise’s built-in roles.
-It comes with every permission available, including the ability to add and
-remove nodes, copy shards, read data, write data, delete data, and create users
-and roles.
+The first step is to name the cluster that you setup in the
+[previous document](/enterprise/v1.0/introduction/installation/).
+Here, we call our cluster `MyCluster`.
 
-![Create Global Admin](/img/enterprise/create_global_admin.png)
+![Name your cluster](/img/enterprise/name_cluster_1.png)
 
-#### 2. Create your first database
+#### 2. Create a Cluster Admin account
 
-Next, create your first InfluxEnterprise database.
-A database is a logical container for retention policies, continuous queries,
-and time series data.
+Next, create a Cluster Admin account.
+The Cluster Admin account has all [cluster-specific permissions](/enterprise/v1.0/features/users/#permissions).
 
-The first input sets the database name.
-Feel free to call your database anything you want.
+We recommend calling this account `ClusterAdmin`.
+Note that you will need to authenticate with the `ClusterAdmin` username and
+password if you're interacting with your InfluxEnterprise cluster [outside](https://docs.influxdata.com/influxdb/v1.0/tools/) of the
+web console.
 
-The next three inputs determine the `DEFAULT` retention policy for your
-database. A retention policy describes how long InfluxDB keeps your data
-(the Duration) and how many copies of your data are stored in the cluster
-(the Replication Factor).
-A database can have several retention policies; InfluxDB writes to the `DEFAULT`
-retention policy if the write does not specify a retention policy.
+![Create Cluster Admin](/img/enterprise/create_cluster_admin_1.png)
 
-Note that this step is optional. Click `Skip` if you’d like to hold off on
-creating a database.
-You can always create one later.
+#### 3. Create a Web Admin user
 
-![Create database](/img/enterprise/create_database.png)
+The final step is to create a Web Admin user.
+The Web Admin user has all [web-console-specific permissions](/enterprise/v1.0/features/users/#admin-users).
+
+After filling out the form with your name, email, and password, be sure to
+assign yourself to the `ClusterAdmin` account that you created in the previous
+step.
+This ensures that you have all web console permissions AND all cluster-specific
+permissions.
+
+![Create Web Admin](/img/enterprise/create_web_admin_1.png)

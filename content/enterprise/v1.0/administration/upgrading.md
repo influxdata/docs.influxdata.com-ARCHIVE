@@ -6,14 +6,23 @@ menu:
     parent: Administration
 ---
 
-The following sections include instructions for upgrading to InfluxEnterprise
-Clustering version 0.7.4 and InfluxEnterprise Web Console version 0.7.1.
+The following sections include instructions for upgrading from InfluxEnterprise
+Clustering version 0.7.4 and InfluxEnterprise Web Console version 0.7.1
+to InfluxEnterprise 1.0.
 
-Before you start, please review the section at the
+Please note that the upgrade process requires you to delete existing users
+from the web console due to [significant changes](/enterprise/v1.0/about-the-project/release-notes-changelog/#user-updates)
+to how users function in InfluxEnterprise.
+Once you've completed the upgrade process, any users created prior to version 1.0 will be
+[cluster accounts](/enterprise/v1.0/features/users/#cluster-user-information).
+Please see [InfluxEnterprise Users](/enterprise/v1.0/features/users/) for
+more information on how InfluxEnterprise organizes users in version 1.0.
+
+> **Note:** Before you start, please review the section at the
 [bottom of this page](#configuration-settings) to ensure that you have the most
 up-to-date configuration settings.
 
-## Upgrading to Clustering version 0.7.4 and Web Console 0.7.1
+## Upgrading to InfluxEnterprise 1.0
 
 ### 1. Download and install the new versions of InfluxEnterprise
 
@@ -21,8 +30,8 @@ up-to-date configuration settings.
 
 ##### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta_1.0.0-beta2-c0.7.4_amd64.deb
-sudo dpkg -i influxdb-meta_1.0.0-beta2-c0.7.4_amd64.deb
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta_1.0.0-beta3-c1.0.0rc1_amd64.deb
+sudo dpkg -i influxdb-meta_1.0.0-beta3-c1.0.0rc1_amd64.deb
 ```
 
 > **Note:** If you're running Ubuntu 16.04.1, you may need to enter
@@ -30,103 +39,71 @@ sudo dpkg -i influxdb-meta_1.0.0-beta2-c0.7.4_amd64.deb
 
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta-1.0.0_beta2_c0.7.4.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.0.0_beta2_c0.7.4.x86_64.rpm
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta-1.0.0_beta3_c1.0.0rc1.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.0.0_beta3_c1.0.0rc1.x86_64.rpm
 ```
 
 #### Data nodes
 
 ##### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data_1.0.0-beta2-c0.7.4_amd64.deb
-sudo dpkg -i influxdb-data_1.0.0-beta2-c0.7.4_amd64.deb
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data_1.0.0-beta3-c1.0.0rc1_amd64.deb
+sudo dpkg -i influxdb-data_1.0.0-beta3-c1.0.0rc1_amd64.deb
 ```
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data-1.0.0_beta2_c0.7.4.x86_64.rpm
-sudo yum localinstall influxdb-data-1.0.0_beta2_c0.7.4.x86_64.rpm
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data-1.0.0_beta3_c1.0.0rc1.x86_64.rpm
+sudo yum localinstall influxdb-data-1.0.0_beta3_c1.0.0rc1.x86_64.rpm
 ```
 #### Web console
 
 ##### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise_0.7.1_amd64.deb
-sudo dpkg -i influx-enterprise_0.7.1_amd64.deb
+wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise_1.0.0~rc1_amd64.deb
+sudo dpkg -i influx-enterprise_1.0.0~rc1_amd64.deb
 ```
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise-0.7.1.x86_64.rpm
-sudo yum localinstall influx-enterprise-0.7.1.x86_64.rpm
+wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise-1.0.0~rc1.x86_64.rpm
+sudo yum localinstall influx-enterprise-1.0.0~rc1.x86_64.rpm
 ```
 
-> **Notes:**
->
-* The Web Console Version 0.7.1 features a new configuration file.
-Please opt to overwrite the old configuration file with the new configuration
-file.
-* If you're running Ubuntu 16.04.1, you may need to enter
-`sudo systemctl disable influxdb-enterprise` before executing the `dpkg` step.
+> **Note:**
+If you're running Ubuntu 16.04.1, you may need to enter
+`sudo systemctl disable influx-enterprise` before executing the `dpkg` step.
 
-### 2. Edit the Web Console's configuration file
-The Web Console version 0.7.1 features a new configuration file.
-In `/etc/influx-enterprise/influx-enterprise.conf`, set:
-
-* the first `url` setting to your server’s IP address
-* `license_key` to the license key you received on [InfluxPortal](https://portal.influxdata.com/)
-* `shared-secret` in the `[influxdb]` section to the same pass phrase that you used in your data servers’ configuration files
-
-In addition to updating those settings:
-
-* uncomment the first `url` setting in the `[database]` section
-* update the password in that first `url` setting to the password for the system's local postgres user
-* comment out the second `url` setting in the `[database]` section
-
+### 2. Delete existing Web Console users
+The new user organization in InfluxEnterprise requires those looking to
+upgrade to version 1.0 to remove all existing users from the Web Console.
+On the server that's running InfluxEnterprise, enter:
+```
+rm -rf /var/lib/influx-enterprise/enterprise.db
 ```
 
-url = "http://<your_server's_IP_address>:3000" #✨
-
-hostname = "localhost"
-port = "3000"
-
-license-key = "<your_license_key>" #✨
-license-file = "/path/to/license"
-
-[influxdb]
-shared-secret = "long pass phrase used for signing tokens" #✨
-
-[smtp]
-host = "localhost"
-port = "25"
-username = ""
-password = ""
-from_email = "donotreply@example.com"
-
-[database]
-# Where is your database?
-# NOTE: This version of Enterprise Web currently only supports Postgres >= 9.3 or SQLite3
-url = "postgres://postgres:password@localhost:5432/enterprise" # ENV: DATABASE_URL ✨
-# url = "sqlite3:///var/lib/influx-enterprise/enterprise.db" #✨
+### 3. Migrate the Web Console configuration file
+Run the following command:
+```
+sudo -u influx-enterprise influx-enterprise migrate --config /etc/influx-enterprise/influx-enterprise.conf
 ```
 
->**Note:** The Web Console version 0.7.1 no longer uses PostgreSQL as its
-default database.
-The steps above allow you to continue using PostgreSQL if you initially
-installed the Web Console prior to version 0.7.1.
-If you'd prefer to use SQLite, the new default database, see [Installation](/enterprise/v1.0/introduction/installation/#web-console-setup).
-
-### 3. Restart all services
+### 4. Restart all services
 Meta nodes:
 ```
-$ service influxdb-meta restart
+service influxdb-meta restart
 ```
 Data nodes:
 ```
-$ service influxdb restart
+service influxdb restart
 ```
 Web console:
 ```
-$ service influx-enterprise restart
+service influx-enterprise restart
 ```
+
+### 5. Get started
+Now that you've upgraded to version 1.0, follow the steps in the
+updated [Getting Started](/enterprise/v1.0/introduction/getting-started/) guide to
+get up and running with InfluxEnterprise.
 
 ## Configuration settings
 

@@ -20,7 +20,7 @@ To get started, you'll need the license key that you received at
 The steps below set up a five server cluster; three servers are
 [meta nodes](/enterprise/v1.0/concepts/glossary/#meta-node) and
 two serve as [data nodes](/enterprise/v1.0/concepts/glossary#data-node).
-The data nodes servers will need to be able to reach `portal.influxdata.com` 
+The data nodes servers will need to be able to reach `portal.influxdata.com`
 on port `80` or `443`.
 
 Please note that there is no requirement to use that number of servers.
@@ -61,14 +61,14 @@ On all three meta servers:
 
 ##### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta_1.0.0-beta2-c0.7.4_amd64.deb
-sudo dpkg -i influxdb-meta_1.0.0-beta2-c0.7.4_amd64.deb
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta_1.0.0-beta3-c1.0.0rc1_amd64.deb
+sudo dpkg -i influxdb-meta_1.0.0-beta3-c1.0.0rc1_amd64.deb
 ```
 
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta-1.0.0_beta2_c0.7.4.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.0.0_beta2_c0.7.4.x86_64.rpm
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta-1.0.0_beta3_c1.0.0rc1.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.0.0_beta3_c1.0.0rc1.x86_64.rpm
 ```
 
 #### 2. Edit the configuration file
@@ -137,14 +137,14 @@ On each data server:
 
 ##### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data_1.0.0-beta2-c0.7.4_amd64.deb
-sudo dpkg -i influxdb-data_1.0.0-beta2-c0.7.4_amd64.deb
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data_1.0.0-beta3-c1.0.0rc1_amd64.deb
+sudo dpkg -i influxdb-data_1.0.0-beta3-c1.0.0rc1_amd64.deb
 ```
 
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data-1.0.0_beta2_c0.7.4.x86_64.rpm
-sudo yum localinstall influxdb-data-1.0.0_beta2_c0.7.4.x86_64.rpm
+wget https://s3.amazonaws.com/influxdb-data-1.0.0_beta3_c1.0.0rc1.x86_64.rpm
+sudo yum localinstall influxdb-data-1.0.0_beta3_c1.0.0rc1.x86_64.rpm
 ```
 
 #### 2. Edit the configuration file
@@ -315,13 +315,13 @@ a separate server.
 
 ##### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise_0.7.1_amd64.deb
-sudo dpkg -i influx-enterprise_0.7.1_amd64.deb
+wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise_1.0.0~rc1_amd64.deb
+sudo dpkg -i influx-enterprise_1.0.0~rc1_amd64.deb
 ```
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise-0.7.1.x86_64.rpm
-sudo yum localinstall influx-enterprise-0.7.1.x86_64.rpm
+wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise-1.0.0~rc1.x86_64.rpm
+sudo yum localinstall influx-enterprise-1.0.0~rc1.x86_64.rpm
 ```
 > **Notes:**
 >
