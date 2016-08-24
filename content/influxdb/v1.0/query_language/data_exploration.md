@@ -51,7 +51,7 @@ See the [Querying Data](/influxdb/v1.0/guides/querying_data/) guide for how to q
 
 #### Sample data
 <br>
-If you'd like to follow along with the queries in this document, see [Sample Data](/influxdb/v1.0/sample_data/data_download/) for how to download and write the data to InfluxDB.
+If you'd like to follow along with the queries in this document, see [Sample Data](/influxdb/v1.0/query_language/data_download/) for how to download and write the data to InfluxDB.
 
 This document uses publicly available data from the [National Oceanic and Atmospheric Administration's (NOAA) Center for Operational Oceanographic Products and Services](http://tidesandcurrents.noaa.gov/stations.html?type=Water+Levels).
 The data include water levels (ft) collected every six seconds at two stations (Santa Monica, CA (ID 9410840) and Coyote Creek, CA (ID 9414575)) over the period from August 18, 2015 through September 18, 2015.
@@ -1015,6 +1015,11 @@ Return all points that occur 6 minutes after `2015-09-18 21:24:00`:
 ```sql
 > SELECT * FROM "h2o_feet" WHERE time > 24043524m + 6m
 ```
+
+> **Note**: Currently, InfluxDB does not support using `OR` with absolute time
+in the `WHERE` clause.
+See [Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#using-or-with-absolute-time-in-the-where-clause/)
+for more information.
 
 ## Regular expressions in queries
 

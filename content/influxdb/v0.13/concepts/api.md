@@ -1,5 +1,6 @@
 ---
 title: API Reference
+newversionredirect: /tools/api/
 menu:
   influxdb_013:
     weight: 80

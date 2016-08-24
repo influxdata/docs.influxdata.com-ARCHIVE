@@ -37,10 +37,12 @@ See the documentation on [authentication and authorization](/influxdb/v1.0/admin
 ---
 The `CREATE DATABASE` query takes the following form:
 ```sql
-CREATE DATABASE [IF NOT EXISTS] <database_name> [WITH [DURATION <duration>] [REPLICATION <n>] [SHARD DURATION <duration>] [NAME <retention-policy-name>]]
+CREATE DATABASE <database_name> [WITH [DURATION <duration>] [REPLICATION <n>] [SHARD DURATION <duration>] [NAME <retention-policy-name>]]
 ```
 
-> **Note:** The `IF NOT EXISTS` clause does nothing, is deprecated, and will be removed in InfluxDB version 1.0.
+> **Note:** In previous versions InfluxQL supported the `IF NOT EXISTS` clause.
+The has been removed in InfluxDB version 1.0.
+If you attempt to create a database that already exists, InfluxDB does not return an error.
 
 Create the database `NOAA_water_database`:
 ```bash
@@ -64,10 +66,12 @@ If you attempt to create a database that already exists, InfluxDB does not retur
 The `DROP DATABASE` query deletes all of the data, measurements, series, continuous queries, and retention policies from the specified database.
 The query takes the following form:
 ```sql
-DROP DATABASE [IF EXISTS] <database_name>
+DROP DATABASE <database_name>
 ```
 
-> **Note:** The `IF EXISTS` clause does nothing, is deprecated, and will be removed in InfluxDB version 1.0.
+> **Note:** In previous versions InfluxQL supported the `IF EXISTS` clause.
+The has been removed in InfluxDB version 1.0.
+If you attempt to drop a database that does not exist, InfluxDB does not return an error.
 
 Drop the database NOAA_water_database:
 ```bash

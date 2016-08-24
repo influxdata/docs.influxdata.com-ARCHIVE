@@ -1,6 +1,5 @@
 ---
 title: API Client Libraries
-newversionredirect: /clients/api/
 menu:
   influxdb_1_0:
     weight: 20
@@ -35,9 +34,6 @@ Functionality will vary, and there are, as yet, no standard features that all li
 - [MyInfluxDbClient](https://github.com/danielwertheim/myinfluxdbclient) by [danielwertheim](https://github.com/danielwertheim)
 - [InfluxData.Net](https://github.com/pootzko/InfluxData.Net) by [pootzko](https://github.com/pootzko)
 - [InfluxDB Client for .NET](https://github.com/MikaelGRA/InfluxDB.Client) by [MikaelGRA](https://github.com/MikaelGRA)
-
-## Perfmon
-- [naf_windows_perfmon_to_influxdb](https://github.com/willemdh/naf_windows_perfmon_to_influxdb) by [willemdh](https://github.com/willemdh)
 
 ## Perl
 - [AnyEvent::InfluxDB](https://github.com/ajgb/anyevent-influxdb) by [ajgb](https://github.com/ajgb)

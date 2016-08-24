@@ -1,5 +1,6 @@
 ---
 title: Service - Graphite
+newversionredirect: /tools/graphite/
 menu:
   influxdb_013:
     weight: 40

@@ -1,5 +1,6 @@
 ---
 title: Service - UDP
+newversionredirect: /tools/udp/
 menu:
   influxdb_013:
     weight: 30
