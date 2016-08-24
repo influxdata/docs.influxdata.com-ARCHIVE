@@ -143,7 +143,7 @@ sudo dpkg -i influxdb-data_1.0.0-beta3-c1.0.0rc1_amd64.deb
 
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influxdb-data-1.0.0_beta3_c1.0.0rc1.x86_64.rpm
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data-1.0.0_beta3_c1.0.0rc1.x86_64.rpm
 sudo yum localinstall influxdb-data-1.0.0_beta3_c1.0.0rc1.x86_64.rpm
 ```
 
