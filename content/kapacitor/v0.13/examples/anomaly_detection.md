@@ -315,7 +315,7 @@ class TTestHandler(Handler):
 
         return response
 
-    def begin_batch(self):
+    def begin_batch(self, begin_req):
         # create new window for batch
         self._batch = MovingStats(-1)
 
