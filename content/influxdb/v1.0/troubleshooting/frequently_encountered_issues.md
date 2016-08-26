@@ -14,7 +14,6 @@ Where applicable, it links to outstanding issues on GitHub.
 
 * [Understanding the time intervals returned from `GROUP BY time()` queries](#understanding-the-time-intervals-returned-from-group-by-time-queries)    
 * [Querying after `now()`](#querying-after-now)  
-* [Querying a time range that spans epoch 0](#querying-a-time-range-that-spans-epoch-0)  
 * [Querying with booleans](#querying-with-booleans)  
 * [Querying `SELECT *` with field type discrepancies](#querying-select-with-field-type-discrepancies)
 * [Working with really big or really small integers](#working-with-really-big-or-really-small-integers)
@@ -97,12 +96,6 @@ The second query asks InfluxDB to return everything from `hillvalley` that occur
 
 `SELECT * FROM "hillvalley"`  
 `SELECT * FROM "hillvalley" WHERE time < now() + 1000d`
-
-## Querying a time range that spans epoch 0
-Currently, InfluxDB can return results for queries that cover either the time range before epoch 0 or the time range after epoch 0, not both.
-A query with a time range that spans epoch 0 returns partial results.
-
-<dt> [GitHub Issue #2703](https://github.com/influxdb/influxdb/issues/2703)  </dt>
 
 ## Querying with booleans
 Acceptable boolean syntax differs for data writes and data queries.
