@@ -7,24 +7,38 @@ menu:
 ---
 
 The following sections describe the new features available in InfluxEnterprise
-Clustering version 0.7.3 and InfluxEnterprise Web Console version 0.7.1.
+1.0.
 
 ### Clustering
 
-Version 0.7.3 features several bug fixes.
-Starting  with version 0.7.3, migrating an OSS instance will transfer users
-from the OSS instance to the InfluxEnterprise cluster.
-See [OSS to Cluster Migration](/enterprise/v1.0/guides/migration) for more
-information.
+Clustering version 1.0 features several bug fixes.
+Starting with version 1.0, clustering has full TLS support for intra-node
+cluster communication, including the use of self-signed certificates.
 
 ### Web Console
 
-Version 0.7.1 features various bug fixes and UI improvements.
+Version 1.0 features various bug fixes and UI improvements.
 
-Version 0.7.1 uses SQLite as its default database in order to simplify the
-installation process.
-See [Installation](/enterprise/v1.0/introduction/installation/#web-console-setup)
-for the updated setup instructions.
-The Web Console will continue to support PostgreSQL.
-See [Upgrading from Previous Versions](/enterprise/v1.0/administration/upgrading/)
-for how to upgrade to version 0.7.1 and maintain current your PostgreSQL setup.
+#### Rebalancing Updates
+
+With version 1.0 rebalancing ensures that all existing data adhere to the
+relevant replication factor.
+The replication factor is the part of the
+[retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp)
+that determines the number of copies of data that are stored in the cluster.
+See [Web Console Features](/enterprise/v1.0/features/web-console-features/#cluster-rebalancing)
+for more information.
+
+#### User Updates
+
+Version 1.0 also introduces a new way to allocate users across the
+InfluxEnterprise cluster and web console.
+
+In versions 0.7.2 and below, users were loosely synced between the cluster and
+web console. In version 1.0, users have web-console-specific functions and
+are given cluster-specific permissions by being associated with a
+separate cluster account.
+The document [InfluxEnterprise Users](/enterprise/v1.0/features/users/)
+describes the new user arrangement in more detail.
+Please note that this change requires additional steps if you are [upgrading](/enterprise/v1.0/administration/upgrading/)
+from a previous version of the web console.

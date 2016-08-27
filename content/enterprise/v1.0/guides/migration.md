@@ -17,7 +17,7 @@ Before following the steps below, please note that this process:
 * Requires downtime for the OSS instance
 
 <dt>
-\* If you're using an InfluxEnterprise cluster version prior to 0.7.3, the
+\* If you're using an InfluxEnterprise cluster version prior to 0.7.4, the
 following steps will **not** transfer users from the OSS instance to the
 InfluxEnterprise Cluster.
 </dt>
@@ -77,14 +77,14 @@ If you have settings that you’d like to keep, please make a copy of your confi
 
 #### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data_1.0.0-beta2-c0.7.3_amd64.deb
-sudo dpkg -i influxdb-data_1.0.0-beta2-c0.7.3_amd64.deb
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data_1.0.0-beta3-c1.0.0rc1_amd64.deb
+sudo dpkg -i influxdb-data_1.0.0-beta3-c1.0.0rc1_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data-1.0.0_beta2_c0.7.3.x86_64.rpm
-sudo yum localinstall influxdb-data-1.0.0_beta2_c0.7.3.x86_64.rpm
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data-1.0.0_beta3_c1.0.0rc1.x86_64.rpm
+sudo yum localinstall influxdb-data-1.0.0_beta3_c1.0.0rc1.x86_64.rpm
 ```
 
 ### 5. Update the configuration file
@@ -169,6 +169,4 @@ Added data node y at the-hostname:8088
 Increase the [replication factor](http://localhost:1313/enterprise/v1.0/concepts/glossary/#replication-factor) on all existing retention polices to the number of data nodes in your cluster.
 You can do this with [ALTER RETENTION POLICY](https://docs.influxdata.com/influxdb/v1.0/query_language/database_management/#modify-retention-policies-with-alter-retention-policy).
 
-The increased replication factor applies to all new shards in the cluster.
-You may need to truncate shards that are currently accepting writes.
-For those truncated shards and for older shards, you must manually copy the shards to other data nodes in the cluster using the available [influxd-ctl commands](http://localhost:1313/enterprise/v1.0/features/clustering-features/#influxenterprise-cluster-commands).
+Next, [rebalance](/enterprise/v1.0/features/web-console-features/#cluster-rebalancing) your cluster using the `Rebalance` button on the `Tasks` page.

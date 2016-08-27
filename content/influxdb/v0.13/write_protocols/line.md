@@ -1,5 +1,6 @@
 ---
 title: Line Protocol
+newversionredirect: /write_protocols/line_protocol_tutorial/
 menu:
   influxdb_013:
     weight: 0
@@ -23,8 +24,9 @@ Timestamps are assumed to be in nanoseconds unless a `precision` value is passed
 ## Key
 
 The key is the measurement name and any optional tags separated by commas.
-Measurement names, tag keys, and tag values must escape any spaces or commas using a backslash (`\`).
-For example: `\ ` and `\,`.
+Measurement names must escape commas and spaces.
+Tag keys and tag values must escape commas, spaces, and equal signs.
+Use a backslash (`\`) to escape characters, for example: `\ ` and `\,`.
 All tag values are stored as strings and should not be surrounded in quotes.
 
 

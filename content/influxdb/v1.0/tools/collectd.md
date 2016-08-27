@@ -1,6 +1,5 @@
 ---
 title: Service Plugin - CollectD
-newversionredirect: /write_protocols/collectd/
 menu:
   influxdb_1_0:
     weight: 70

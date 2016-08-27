@@ -25,6 +25,8 @@ Where applicable, it links to outstanding issues on GitHub.
 * [Identifying write precision from returned timestamps](#identifying-write-precision-from-returned-timestamps)  
 * [Single quoting and double quoting in queries](#single-quoting-and-double-quoting-in-queries)  
 * [Missing data after creating a new `DEFAULT` retention policy](#missing-data-after-creating-a-new-default-retention-policy)
+* [Querying for series cardinality](#querying-for-series-cardinality)
+* [Using `OR` with absolute time in the `WHERE` clause](#using-or-with-absolute-time-in-the-where-clause)
 
 **Writing data**  
 
@@ -296,6 +298,39 @@ name: fleeting
 time			               count
 1970-01-01T00:00:00Z	 8
 ```
+
+## Querying for series cardinality
+
+The following queries return [series cardinality](/influxdb/v1.0/concepts/glossary/#series-cardinality):
+
+#### Series cardinality per database:
+```
+SELECT numSeries FROM "_internal".."database" GROUP BY "database" ORDER BY desc LIMIT 1
+```
+#### Series cardinality across all database:
+```
+SELECT sum(numSeries) AS “total_series" FROM “_internal".."database" WHERE time > now() - 10s
+```
+
+> **Note:** Changes to the [`[monitor]`](/influxdb/v1.0/administration/config/#monitor)
+section in the configuration file may affect query results.
+
+## Using `OR` with absolute time in the `WHERE` clause
+
+Currently, InfluxQL does not support using `OR` with
+[absolute time](/influxdb/v1.0/query_language/data_exploration/#absolute-time)
+in the `WHERE` clause.
+InfluxDB returns an empty response if the query's `WHERE` clause uses `OR`
+with absolute time.
+
+Example:
+```
+> SELECT * FROM "absolutismus" WHERE time = '2016-07-31T20:07:00Z' OR time = '2016-07-31T23:07:17Z'
+>
+```
+
+<dt> [GitHub Issue #3290](https://github.com/influxdata/influxdb/issues/3290)
+</dt>
 
 # Writing data
 ## Writing integers

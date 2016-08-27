@@ -1,8 +1,8 @@
 ---
-title: Clustering
+title: Cluster Features
 menu:
   enterprise_1_0:
-    weight: 0
+    weight: 10
     parent: Features
 ---
 
