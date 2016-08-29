@@ -111,16 +111,16 @@ _cpu_stats
 ALL           ALTER         ANY           AS            ASC           BEGIN
 BY            CREATE        CONTINUOUS    DATABASE      DATABASES     DEFAULT
 DELETE        DESC          DESTINATIONS  DIAGNOSTICS   DISTINCT      DROP
-DURATION      END           EVERY         EXISTS        EXPLAIN       FIELD
-FOR           FORCE         FROM          GRANT         GRANTS        GROUP
-GROUPS        IF            IN            INF           INNER         INSERT
-INTO          KEY           KEYS          KILL          LIMIT         SHOW          
-MEASUREMENT   MEASUREMENTS  NAME          NOT           OFFSET        ON
-ORDER         PASSWORD      POLICY        POLICIES      PRIVILEGES    QUERIES       
-QUERY         READ          REPLICATION   RESAMPLE      RETENTION     REVOKE        
-SELECT        SERIES        SET           SHARD         SHARDS        SLIMIT        
-SOFFSET       STATS         SUBSCRIPTION  SUBSCRIPTIONS TAG           TO            
-USER          USERS         VALUES        WHERE         WITH          WRITE         
+DURATION      END           EVERY         EXPLAIN       FIELD         FOR
+FROM          GRANT         GRANTS        GROUP         GROUPS        IN
+INF           INSERT        INTO          KEY           KEYS          KILL
+LIMIT         SHOW          MEASUREMENT   MEASUREMENTS  NAME          OFFSET
+ON            ORDER         PASSWORD      POLICY        POLICIES      PRIVILEGES
+QUERIES       QUERY         READ          REPLICATION   RESAMPLE      RETENTION
+REVOKE        SELECT        SERIES        SET           SHARD         SHARDS
+SLIMIT        SOFFSET       STATS         SUBSCRIPTION  SUBSCRIPTIONS TAG
+TO            USER          USERS         VALUES        WHERE         WITH
+WRITE
 ```
 
 ## Literals
@@ -149,7 +149,7 @@ String literals must be surrounded by single quotes.
 Strings may contain `'` characters as long as they are escaped (i.e., `\'`).
 
 ```
-string_lit          = `'` { unicode_char } `'`' .
+string_lit          = `'` { unicode_char } `'` .
 ```
 
 ### Durations
@@ -184,7 +184,7 @@ The reference date time is:
 InfluxQL reference date time: January 2nd, 2006 at 3:04:05 PM
 
 ```
-time_lit            = "2006-01-02 15:04:05.999999" | "2006-01-02"
+time_lit            = "2006-01-02 15:04:05.999999" | "2006-01-02" .
 ```
 
 ### Booleans
@@ -199,8 +199,8 @@ bool_lit            = TRUE | FALSE .
 regex_lit           = "/" { unicode_char } "/" .
 ```
 
-**Comparators:**  
-`=~` matches against  
+**Comparators:**
+`=~` matches against
 `!~` doesn't match against
 
 > **Note:** Use regular expressions to match measurements and tags.
@@ -211,7 +211,7 @@ You cannot use regular expressions to match databases, retention policies, or fi
 A query is composed of one or more statements separated by a semicolon.
 
 ```
-query               = statement { ; statement } .
+query               = statement { ";" statement } .
 
 statement           = alter_retention_policy_stmt |
                       create_continuous_query_stmt |
@@ -328,10 +328,10 @@ END;
 ```
 create_database_stmt = "CREATE DATABASE" db_name
                        [ WITH
-                       [ retention_policy_duration ]
-                       [ retention_policy_replication ]
-                       [ retention_policy_shard_group_duration ]
-                       [ retention_policy_name ]
+                           [ retention_policy_duration ]
+                           [ retention_policy_replication ]
+                           [ retention_policy_shard_group_duration ]
+                           [ retention_policy_name ]
                        ] .
 ```
 
@@ -386,6 +386,7 @@ create_subscription_stmt = "CREATE SUBSCRIPTION" subscription_name "ON" db_name 
 ```
 
 #### Examples:
+
 ```sql
 -- Create a SUBSCRIPTION on database 'mydb' and retention policy 'autogen' that send data to 'example.com:9090' via UDP.
 CREATE SUBSCRIPTION "sub0" ON "mydb"."autogen" DESTINATIONS ALL 'udp://example.com:9090'
@@ -402,6 +403,7 @@ create_user_stmt = "CREATE USER" user_name "WITH PASSWORD" password
 ```
 
 #### Examples:
+
 ```sql
 -- Create a normal database user.
 CREATE USER "jdoe" WITH PASSWORD '1337password'
@@ -421,7 +423,7 @@ delete_stmt = "DELETE" ( from_clause | where_clause | from_clause where_clause )
 
 #### Examples:
 
-```
+```sql
 DELETE FROM "cpu"
 DELETE FROM "cpu" WHERE time < '2000-01-01T00:00:00Z'
 DELETE WHERE time < '2000-01-01T00:00:00Z'
@@ -430,7 +432,7 @@ DELETE WHERE time < '2000-01-01T00:00:00Z'
 ### DROP CONTINUOUS QUERY
 
 ```
-drop_continuous_query_stmt = "DROP CONTINUOUS QUERY" query_name "ON" db_name.
+drop_continuous_query_stmt = "DROP CONTINUOUS QUERY" query_name on_clause .
 ```
 
 #### Example:
@@ -486,6 +488,7 @@ drop_series_stmt = "DROP SERIES" ( from_clause | where_clause | from_clause wher
 #### Example:
 
 ```sql
+DROP SERIES FROM "telegraf"."autogen"."cpu" WHERE cpu = 'cpu8'
 
 ```
 
@@ -530,7 +533,7 @@ DROP USER "jdoe"
 > **NOTE:** Users can be granted privileges on databases that do not exist.
 
 ```
-grant_stmt = "GRANT" privilege [ on_clause ] to_clause
+grant_stmt = "GRANT" privilege [ on_clause ] to_clause .
 ```
 
 #### Examples:
@@ -619,6 +622,8 @@ SHOW GRANTS FOR "jdoe"
 show_measurements_stmt = "SHOW MEASUREMENTS" [ with_measurement_clause ] [ where_clause ] [ limit_clause ] [ offset_clause ] .
 ```
 
+#### Examples:
+
 ```sql
 -- show all measurements
 SHOW MEASUREMENTS
@@ -665,7 +670,7 @@ show_series_stmt = "SHOW SERIES" [ from_clause ] [ where_clause ] [ limit_clause
 #### Example:
 
 ```sql
-
+SHOW SERIES FROM "telegraf"."autogen"."cpu" WHERE cpu = 'cpu8'
 ```
 
 ### SHOW SHARD GROUPS
@@ -889,7 +894,9 @@ retention_policy_option      = retention_policy_duration |
                                "DEFAULT" .
 
 retention_policy_duration    = "DURATION" duration_lit .
+
 retention_policy_replication = "REPLICATION" int_lit .
+
 retention_policy_shard_group_duration = "SHARD DURATION" duration_lit .
 
 retention_policy_name = "NAME" identifier .
@@ -915,23 +922,35 @@ var_ref          = measurement .
 
 ## Query Engine Internals
 
-Once you understand the language itself, it's important to know how these language constructs are implemented in the query engine. This gives you an intuitive sense for how results will be processed and how to create efficient queries.
+Once you understand the language itself, it's important to know how these
+language constructs are implemented in the query engine. This gives you an
+intuitive sense for how results will be processed and how to create efficient
+queries.
 
 The life cycle of a query looks like this:
 
-1. InfluxQL query string is tokenized and then parsed into an abstract syntax tree (AST). This is the code representation of the query itself.
+1. InfluxQL query string is tokenized and then parsed into an abstract syntax
+   tree (AST). This is the code representation of the query itself.
 
-2. The AST is passed to the `QueryExecutor` which directs queries to the appropriate handlers. For example, queries related to meta data are executed by the meta service and `SELECT` statements are executed by the shards themselves.
+2. The AST is passed to the `QueryExecutor` which directs queries to the
+   appropriate handlers. For example, queries related to meta data are executed
+   by the meta service and `SELECT` statements are executed by the shards
+   themselves.
 
-3. The query engine then determines the shards that match the `SELECT` statement's time range. From these shards, iterators are created for each field in the statement.
+3. The query engine then determines the shards that match the `SELECT`
+   statement's time range. From these shards, iterators are created for each
+   field in the statement.
 
-4. Iterators are passed to the emitter which drains them and joins the resulting points. The emitter's job is to convert simple time/value points into the more complex result objects that are returned to the client.
+4. Iterators are passed to the emitter which drains them and joins the resulting
+   points. The emitter's job is to convert simple time/value points into the
+   more complex result objects that are returned to the client.
+
 
 ### Understanding Iterators
 
-Iterators are at the heart of the query engine. They provide a simple, strongly-typed interface for looping over a set of points. Each field in a query must be a single type (float, integer, string, boolean) and combining series of different types will cause them to be cast to a single type.
-
-For example, this is an iterator over Float points:
+Iterators are at the heart of the query engine. They provide a simple interface
+for looping over a set of points. For example, this is an iterator over Float
+points:
 
 ```
 type FloatIterator interface {
@@ -939,7 +958,7 @@ type FloatIterator interface {
 }
 ```
 
-These iterators are created through the IteratorCreator interface:
+These iterators are created through the `IteratorCreator` interface:
 
 ```
 type IteratorCreator interface {
@@ -947,25 +966,39 @@ type IteratorCreator interface {
 }
 ```
 
-The `IteratorOptions` provide arguments about field selection, time ranges, and dimensions that the iterator creator can use when planning an iterator. The `IteratorCreator` interface is used at many levels such as the `Shards`, `Shard`, and `Engine`. This allows optimizations to be performed when applicable such as returning a precomputed `COUNT()`.
+The `IteratorOptions` provide arguments about field selection, time ranges,
+and dimensions that the iterator creator can use when planning an iterator.
+The `IteratorCreator` interface is used at many levels such as the `Shards`,
+`Shard`, and `Engine`. This allows optimizations to be performed when applicable
+such as returning a precomputed `COUNT()`.
 
-Iterators aren't just for reading raw data from storage though. Iterators can be composed so that they provided additional functionality around an input iterator. For example, a `DistinctIterator` can compute the distinct values for each time window for an input iterator. Or a `FillIterator` can generate additional points that are missing from an input iterator.
+Iterators aren't just for reading raw data from storage though. Iterators can be
+composed so that they provided additional functionality around an input
+iterator. For example, a `DistinctIterator` can compute the distinct values for
+each time window for an input iterator. Or a `FillIterator` can generate
+additional points that are missing from an input iterator.
 
-This composition also lends itself well to aggregation. For example, a statement such as this:
+This composition also lends itself well to aggregation. For example, a statement
+such as this:
 
 ```
 SELECT MEAN(value) FROM cpu GROUP BY time(10m)
 ```
 
-In this case, `MEAN(value)` is a `MeanIterator` wrapping an iterator from the underlying shards. However, if we can add an additional iterator to determine the derivative of the mean:
+In this case, `MEAN(value)` is a `MeanIterator` wrapping an iterator from the
+underlying shards. However, if we can add an additional iterator to determine
+the derivative of the mean:
 
 ```
 SELECT DERIVATIVE(MEAN(value), 20m) FROM cpu GROUP BY time(10m)
 ```
 
+
 ### Understanding Auxiliary Fields
 
-Because InfluxQL allows users to use selector functions such as `FIRST()`, `LAST()`, `MIN()`, and `MAX()`, the engine must provide a way to return related data at the same time with the selected point.
+Because InfluxQL allows users to use selector functions such as `FIRST()`,
+`LAST()`, `MIN()`, and `MAX()`, the engine must provide a way to return related
+data at the same time with the selected point.
 
 For example, in this query:
 
@@ -973,32 +1006,66 @@ For example, in this query:
 SELECT FIRST(value), host FROM cpu GROUP BY time(1h)
 ```
 
-We are selecting the first `value` that occurs every hour but we also want to retrieve the `host` associated with that point. Since the `Point` types only specify a single typed `Value` for efficiency, we push the `host` into the auxiliary fields of the point. These auxiliary fields are attached to the point until it is passed to the emitter where the fields get split off to their own iterator.
+We are selecting the first `value` that occurs every hour but we also want to
+retrieve the `host` associated with that point. Since the `Point` types only
+specify a single typed `Value` for efficiency, we push the `host` into the
+auxiliary fields of the point. These auxiliary fields are attached to the point
+until it is passed to the emitter where the fields get split off to their own
+iterator.
+
 
 ### Built-in Iterators
 
 There are many helper iterators that let us build queries:
 
-* Merge Iterator - This iterator combines one or more iterators into a single new iterator of the same type. This iterator guarantees that all points within a window will be output before starting the next window but does not provide ordering guarantees within the window. This allows for fast access for aggregate queries which do not need stronger sorting guarantees.
+* Merge Iterator - This iterator combines one or more iterators into a single
+  new iterator of the same type. This iterator guarantees that all points
+  within a window will be output before starting the next window but does not
+  provide ordering guarantees within the window. This allows for fast access
+  for aggregate queries which do not need stronger sorting guarantees.
 
-* Sorted Merge Iterator - This iterator also combines one or more iterators into a new iterator of the same type. However, this iterator guarantees time ordering of every point. This makes it slower than the `MergeIterator` but this ordering guarantee is required for non-aggregate queries which return the raw data points.
+* Sorted Merge Iterator - This iterator also combines one or more iterators
+  into a new iterator of the same type. However, this iterator guarantees
+  time ordering of every point. This makes it slower than the `MergeIterator`
+  but this ordering guarantee is required for non-aggregate queries which
+  return the raw data points.
 
-* Limit Iterator - This iterator limits the number of points per name/tag group. This is the implementation of the `LIMIT` & `OFFSET` syntax.
+* Limit Iterator - This iterator limits the number of points per name/tag
+  group. This is the implementation of the `LIMIT` & `OFFSET` syntax.
 
-* Fill Iterator - This iterator injects extra points if they are missing from the input iterator. It can provide `null` points, points with the previous value, or points with a specific value.
+* Fill Iterator - This iterator injects extra points if they are missing from
+  the input iterator. It can provide `null` points, points with the previous
+  value, or points with a specific value.
 
-* Buffered Iterator - This iterator provides the ability to "unread" a point back onto a buffer so it can be read again next time. This is used extensively to provide lookahead for windowing.
+* Buffered Iterator - This iterator provides the ability to "unread" a point
+  back onto a buffer so it can be read again next time. This is used extensively
+  to provide lookahead for windowing.
 
-* Reduce Iterator - This iterator calls a reduction function for each point in a window. When the window is complete then all points for that window are output. This is used for simple aggregate functions such as `COUNT()`.
+* Reduce Iterator - This iterator calls a reduction function for each point in
+  a window. When the window is complete then all points for that window are
+  output. This is used for simple aggregate functions such as `COUNT()`.
 
-* Reduce Slice Iterator - This iterator collects all points for a window first and then passes them all to a reduction function at once. The results are returned from the iterator. This is used for aggregate functions such as `DERIVATIVE()`.
+* Reduce Slice Iterator - This iterator collects all points for a window first
+  and then passes them all to a reduction function at once. The results are
+  returned from the iterator. This is used for aggregate functions such as
+  `DERIVATIVE()`.
 
-* Transform Iterator - This iterator calls a transform function for each point from an input iterator. This is used for executing binary expressions.
+* Transform Iterator - This iterator calls a transform function for each point
+  from an input iterator. This is used for executing binary expressions.
 
-* Dedupe Iterator - This iterator only outputs unique points. It is resource intensive so it is only used for small queries such as meta query statements.
+* Dedupe Iterator - This iterator only outputs unique points. It is resource
+  intensive so it is only used for small queries such as meta query statements.
+
 
 ### Call Iterators
 
-Function calls in InfluxQL are implemented at two levels. Some calls can be wrapped at multiple layers to improve efficiency. For example, a `COUNT()` can be performed at the shard level and then multiple `CountIterators` can be wrapped with another CountIterator to compute the count of all shards. These iterators can be created using `NewCallIterator()`.
+Function calls in InfluxQL are implemented at two levels. Some calls can be
+wrapped at multiple layers to improve efficiency. For example, a `COUNT()` can
+be performed at the shard level and then multiple `CountIterator`s can be
+wrapped with another `CountIterator` to compute the count of all shards. These
+iterators can be created using `NewCallIterator()`.
 
-Some iterators are more complex or need to be implemented at a higher level. For example, the `DERIVATIVE()` needs to retrieve all points for a window first before performing the calculation. This iterator is created by the engine itself and is never requested to be created by the lower levels.
+Some iterators are more complex or need to be implemented at a higher level.
+For example, the `DERIVATIVE()` needs to retrieve all points for a window first
+before performing the calculation. This iterator is created by the engine itself
+and is never requested to be created by the lower levels.
