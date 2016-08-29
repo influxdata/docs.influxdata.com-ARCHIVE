@@ -6,7 +6,7 @@ menu:
   kapacitor_1_0:
     name: Query
     identifier: query_node
-    weight: 160
+    weight: 170
     parent: nodes
 ---
 
@@ -45,6 +45,7 @@ Index
 -	[Every](/kapacitor/v1.0/nodes/query_node/#every)
 -	[Fill](/kapacitor/v1.0/nodes/query_node/#fill)
 -	[GroupBy](/kapacitor/v1.0/nodes/query_node/#groupby)
+-	[GroupByMeasurement](/kapacitor/v1.0/nodes/query_node/#groupbymeasurement)
 -	[Offset](/kapacitor/v1.0/nodes/query_node/#offset)
 -	[Period](/kapacitor/v1.0/nodes/query_node/#period)
 
@@ -56,6 +57,7 @@ Index
 -	[Count](/kapacitor/v1.0/nodes/query_node/#count)
 -	[Deadman](/kapacitor/v1.0/nodes/query_node/#deadman)
 -	[Default](/kapacitor/v1.0/nodes/query_node/#default)
+-	[Delete](/kapacitor/v1.0/nodes/query_node/#delete)
 -	[Derivative](/kapacitor/v1.0/nodes/query_node/#derivative)
 -	[Distinct](/kapacitor/v1.0/nodes/query_node/#distinct)
 -	[Elapsed](/kapacitor/v1.0/nodes/query_node/#elapsed)
@@ -198,6 +200,31 @@ NOTE: Since [QueryNode.Offset](/kapacitor/v1.0/nodes/query_node/#offset) is inhe
 
 ```javascript
 node.groupBy(d ...interface{})
+```
+
+
+### GroupByMeasurement
+
+If set will include the measurement name in the group ID. 
+Along with any other group by dimensions. 
+
+Example: 
+
+
+```javascript
+ batch
+      |query('SELECT sum("value") FROM "telegraf"."autogen"./process_.*/')
+          .groupByMeasurement()
+          .groupBy('host')
+```
+
+The above example selects data from several measurements matching `/process_.*/` and 
+then each point is grouped by the host tag and measurement name. 
+Thus keeping measurements in their own groups. 
+
+
+```javascript
+node.groupByMeasurement()
 ```
 
 
@@ -378,6 +405,18 @@ node|default()
 ```
 
 Returns: [DefaultNode](/kapacitor/v1.0/nodes/default_node/)
+
+
+### Delete
+
+Create a node that can delete tags or fields. 
+
+
+```javascript
+node|delete()
+```
+
+Returns: [DeleteNode](/kapacitor/v1.0/nodes/delete_node/)
 
 
 ### Derivative

@@ -39,7 +39,6 @@ Index
 
 -	[Field](/kapacitor/v1.0/nodes/default_node/#field)
 -	[Tag](/kapacitor/v1.0/nodes/default_node/#tag)
--	[Tags](/kapacitor/v1.0/nodes/default_node/#tags)
 
 ### Chaining Methods
 
@@ -49,6 +48,7 @@ Index
 -	[Count](/kapacitor/v1.0/nodes/default_node/#count)
 -	[Deadman](/kapacitor/v1.0/nodes/default_node/#deadman)
 -	[Default](/kapacitor/v1.0/nodes/default_node/#default)
+-	[Delete](/kapacitor/v1.0/nodes/default_node/#delete)
 -	[Derivative](/kapacitor/v1.0/nodes/default_node/#derivative)
 -	[Distinct](/kapacitor/v1.0/nodes/default_node/#distinct)
 -	[Elapsed](/kapacitor/v1.0/nodes/default_node/#elapsed)
@@ -104,16 +104,6 @@ Define a tag default.
 
 ```javascript
 node.tag(name string, value string)
-```
-
-
-### Tags
-
-Set of tags to default 
-
-
-```javascript
-node.tags(value map[string]string)
 ```
 
 
@@ -268,6 +258,18 @@ node|default()
 ```
 
 Returns: [DefaultNode](/kapacitor/v1.0/nodes/default_node/)
+
+
+### Delete
+
+Create a node that can delete tags or fields. 
+
+
+```javascript
+node|delete()
+```
+
+Returns: [DeleteNode](/kapacitor/v1.0/nodes/delete_node/)
 
 
 ### Derivative

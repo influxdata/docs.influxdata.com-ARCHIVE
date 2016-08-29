@@ -6,7 +6,7 @@ menu:
   kapacitor_1_0:
     name: Eval
     identifier: eval_node
-    weight: 60
+    weight: 70
     parent: nodes
 ---
 
@@ -42,6 +42,7 @@ Index
 -	[As](/kapacitor/v1.0/nodes/eval_node/#as)
 -	[Keep](/kapacitor/v1.0/nodes/eval_node/#keep)
 -	[Quiet](/kapacitor/v1.0/nodes/eval_node/#quiet)
+-	[Tags](/kapacitor/v1.0/nodes/eval_node/#tags)
 
 ### Chaining Methods
 
@@ -51,6 +52,7 @@ Index
 -	[Count](/kapacitor/v1.0/nodes/eval_node/#count)
 -	[Deadman](/kapacitor/v1.0/nodes/eval_node/#deadman)
 -	[Default](/kapacitor/v1.0/nodes/eval_node/#default)
+-	[Delete](/kapacitor/v1.0/nodes/eval_node/#delete)
 -	[Derivative](/kapacitor/v1.0/nodes/eval_node/#derivative)
 -	[Distinct](/kapacitor/v1.0/nodes/eval_node/#distinct)
 -	[Elapsed](/kapacitor/v1.0/nodes/eval_node/#elapsed)
@@ -154,6 +156,49 @@ Suppress errors during evaluation.
 
 ```javascript
 node.quiet()
+```
+
+
+### Tags
+
+Convert the result of an expression into a tag. 
+The result must be a string. 
+Use the `string()` expression function to convert types. 
+
+
+Example: 
+
+
+```javascript
+    stream
+        |eval(lambda: string(floor("value" / 10.0)))
+            .as('value_bucket')
+            .tags('value_bucket')
+```
+
+The above example calculates a named bucket from the field `value`. 
+Then the `value_bucket` result is set as a tag &#39;value_bucket&#39; on the point, instead of as a field. 
+
+Example: 
+
+
+```javascript
+    stream
+        |eval(lambda: string(floor("value" / 10.0)))
+            .as('value_bucket')
+            .tags('value_bucket')
+            .keep('value') // keep the original field `value` as well
+```
+
+The above example calculates a named bucket from the field `value`. 
+Then the `value_bucket` result is set as a tag &#39;value_bucket&#39; on the point, instead of as a field. 
+The field `value` is also preserved on the point because of the `keep` property. 
+Tags are always kept since creating a tag implies you want to keep it. 
+
+
+
+```javascript
+node.tags(names ...string)
 ```
 
 
@@ -308,6 +353,18 @@ node|default()
 ```
 
 Returns: [DefaultNode](/kapacitor/v1.0/nodes/default_node/)
+
+
+### Delete
+
+Create a node that can delete tags or fields. 
+
+
+```javascript
+node|delete()
+```
+
+Returns: [DeleteNode](/kapacitor/v1.0/nodes/delete_node/)
 
 
 ### Derivative

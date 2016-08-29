@@ -6,7 +6,7 @@ menu:
   kapacitor_1_0:
     name: InfluxQL
     identifier: influx_q_l_node
-    weight: 120
+    weight: 130
     parent: nodes
 ---
 
@@ -50,6 +50,7 @@ Index
 -	[Count](/kapacitor/v1.0/nodes/influx_q_l_node/#count)
 -	[Deadman](/kapacitor/v1.0/nodes/influx_q_l_node/#deadman)
 -	[Default](/kapacitor/v1.0/nodes/influx_q_l_node/#default)
+-	[Delete](/kapacitor/v1.0/nodes/influx_q_l_node/#delete)
 -	[Derivative](/kapacitor/v1.0/nodes/influx_q_l_node/#derivative)
 -	[Distinct](/kapacitor/v1.0/nodes/influx_q_l_node/#distinct)
 -	[Elapsed](/kapacitor/v1.0/nodes/influx_q_l_node/#elapsed)
@@ -263,6 +264,18 @@ node|default()
 ```
 
 Returns: [DefaultNode](/kapacitor/v1.0/nodes/default_node/)
+
+
+### Delete
+
+Create a node that can delete tags or fields. 
+
+
+```javascript
+node|delete()
+```
+
+Returns: [DeleteNode](/kapacitor/v1.0/nodes/delete_node/)
 
 
 ### Derivative

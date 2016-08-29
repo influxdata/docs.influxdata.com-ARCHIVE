@@ -6,7 +6,7 @@ menu:
   kapacitor_1_0:
     name: GroupBy
     identifier: group_by_node
-    weight: 90
+    weight: 100
     parent: nodes
 ---
 
@@ -34,6 +34,7 @@ Index
 
 ### Properties
 
+-	[ByMeasurement](/kapacitor/v1.0/nodes/group_by_node/#bymeasurement)
 
 ### Chaining Methods
 
@@ -43,6 +44,7 @@ Index
 -	[Count](/kapacitor/v1.0/nodes/group_by_node/#count)
 -	[Deadman](/kapacitor/v1.0/nodes/group_by_node/#deadman)
 -	[Default](/kapacitor/v1.0/nodes/group_by_node/#default)
+-	[Delete](/kapacitor/v1.0/nodes/group_by_node/#delete)
 -	[Derivative](/kapacitor/v1.0/nodes/group_by_node/#derivative)
 -	[Distinct](/kapacitor/v1.0/nodes/group_by_node/#distinct)
 -	[Elapsed](/kapacitor/v1.0/nodes/group_by_node/#elapsed)
@@ -72,6 +74,48 @@ Index
 -	[Union](/kapacitor/v1.0/nodes/group_by_node/#union)
 -	[Where](/kapacitor/v1.0/nodes/group_by_node/#where)
 -	[Window](/kapacitor/v1.0/nodes/group_by_node/#window)
+
+Properties
+----------
+
+Property methods modify state on the calling node.
+They do not add another node to the pipeline, and always return a reference to the calling node.
+Property methods are marked using the `.` operator.
+
+
+### ByMeasurement
+
+If set will include the measurement name in the group ID. 
+Along with any other group by dimensions. 
+
+Example: 
+
+
+```javascript
+     ...
+     |groupBy('host')
+         .byMeasurement()
+```
+
+The above example groups points by their host tag and measurement name. 
+
+If you want to remove the measurement name from the group ID, 
+then groupBy all existing dimensions but without specifying &#39;byMeasurement&#39;. 
+
+Example: 
+
+
+```javascript
+    |groupBy(*)
+```
+
+The above removes the group by measurement name if any. 
+
+
+```javascript
+node.byMeasurement()
+```
+
 
 Chaining Methods
 ----------------
@@ -224,6 +268,18 @@ node|default()
 ```
 
 Returns: [DefaultNode](/kapacitor/v1.0/nodes/default_node/)
+
+
+### Delete
+
+Create a node that can delete tags or fields. 
+
+
+```javascript
+node|delete()
+```
+
+Returns: [DeleteNode](/kapacitor/v1.0/nodes/delete_node/)
 
 
 ### Derivative

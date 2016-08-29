@@ -6,7 +6,7 @@ menu:
   kapacitor_1_0:
     name: UDF
     identifier: u_d_f_node
-    weight: 210
+    weight: 220
     parent: nodes
 ---
 
@@ -71,6 +71,7 @@ Index
 -	[Count](/kapacitor/v1.0/nodes/u_d_f_node/#count)
 -	[Deadman](/kapacitor/v1.0/nodes/u_d_f_node/#deadman)
 -	[Default](/kapacitor/v1.0/nodes/u_d_f_node/#default)
+-	[Delete](/kapacitor/v1.0/nodes/u_d_f_node/#delete)
 -	[Derivative](/kapacitor/v1.0/nodes/u_d_f_node/#derivative)
 -	[Distinct](/kapacitor/v1.0/nodes/u_d_f_node/#distinct)
 -	[Elapsed](/kapacitor/v1.0/nodes/u_d_f_node/#elapsed)
@@ -267,6 +268,18 @@ node|default()
 ```
 
 Returns: [DefaultNode](/kapacitor/v1.0/nodes/default_node/)
+
+
+### Delete
+
+Create a node that can delete tags or fields. 
+
+
+```javascript
+node|delete()
+```
+
+Returns: [DeleteNode](/kapacitor/v1.0/nodes/delete_node/)
 
 
 ### Derivative

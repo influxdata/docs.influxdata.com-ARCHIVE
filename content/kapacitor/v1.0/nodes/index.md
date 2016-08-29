@@ -26,8 +26,12 @@ other available property methods are:
 
 * [Alert Node](/kapacitor/v1.0/nodes/alert_node)
 * [Batch Node](/kapacitor/v1.0/nodes/batch_node)
+* [Combine Node](/kapacitor/v1.0/nodes/combine_node)
+* [Default Node](/kapacitor/v1.0/nodes/default_node)
+* [Delete Node](/kapacitor/v1.0/nodes/delete_node)
 * [Derivative Node](/kapacitor/v1.0/nodes/derivative_node)
 * [Eval Node](/kapacitor/v1.0/nodes/eval_node)
+* [Flatten Node](/kapacitor/v1.0/nodes/flatten_node)
 * [From Node](/kapacitor/v1.0/nodes/from_node)
 * [Group By Node](/kapacitor/v1.0/nodes/group_by_node)
 * [HTTP Output Node](/kapacitor/v1.0/nodes/http_out_node)
