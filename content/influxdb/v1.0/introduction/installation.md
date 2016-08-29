@@ -224,8 +224,8 @@ It is an identical file to the internally generated configuration except that th
 
 We recommend using two SSD volumes.
 One for the `influxdb/wal` and one for the `influxdb/data`.
-Depending on your load each volume should have around 1k-3k provisioned IOPS.
-The `influxdb/data` volume should have more disk space with lower IOPS and the `influxdb/wal` volume should have less disk space with higher IOPS.
+Depending on your load, each volume should have around 1k-3k provisioned IOPS.
+The `influxdb/data` volume should have more disk space with lower IOPS, and the `influxdb/wal` volume should have less disk space with higher IOPS.
 
 Each machine should have a minimum of 8G RAM.
 
@@ -252,15 +252,15 @@ You'll have to update the config file appropriately for each InfluxDB instance y
 [data]
   dir = "/mnt/db/data"
   ...
-wal-dir = "/mnt/influx/wal"
+  wal-dir = "/mnt/influx/wal"
   ...
 
 ...
 
 [hinted-handoff]
-    ...
-dir = "/mnt/db/hh"
-    ...
+  ...
+  dir = "/mnt/db/hh"
+  ...
 ```
 
 ### Permissions
@@ -275,4 +275,4 @@ chown influxdb:influxdb /mnt/db
 ## Nightly and Development Versions
 
 Nightly packages are available for Linux through the InfluxData package repository by using the `nightly` channel.
-Other package options can be found on the [downloads page](https://influxdata.com/downloads/)
+Other package options can be found on the [downloads page](https://influxdata.com/downloads/).
