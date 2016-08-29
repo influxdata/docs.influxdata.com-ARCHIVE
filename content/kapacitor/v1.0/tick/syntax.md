@@ -26,12 +26,12 @@ If an integer is prefixed with a `0` then it is considered a base 8 (octal) numb
 
 Valid number literals:
 
-* 1 -- int64
-* 1.2 -- float64
-* 5 -- int64
-* 5.0 -- float64
-* 0.42 -- float64
-* 0400 -- octal int64
+* 1 — int64
+* 1.2 — float64
+* 5 — int64
+* 5.0 — float64
+* 0.42 — float64
+* 0400 — octal int64
 
 
 ### Strings
