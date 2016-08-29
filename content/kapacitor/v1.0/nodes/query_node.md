@@ -218,7 +218,7 @@ Example:
           .groupBy('host')
 ```
 
-The above example selects data from several measurements matching `/process_.*/ and 
+The above example selects data from several measurements matching `/process_.*/` and 
 then each point is grouped by the host tag and measurement name. 
 Thus keeping measurements in their own groups. 
 
