@@ -109,7 +109,7 @@ you don't have to define schemas up-front, and null values aren't stored.
 Points are written to InfluxDB using the Line Protocol, which follows the following format:
 
 ```
-<measurement>[,<tag-key>=<tag-value>...] <field-key>=<field-value>[,<field2-key>=<field2-value>...] [unix-nano-timestamp]
+<measurement>[,<tag-key>=<tag-value>]* <field-key>=<field-value>[,<field2-key>=<field2-value>]* [unix-nano-timestamp]
 ```
 
 The following lines are all examples of points that can be written to InfluxDB:
