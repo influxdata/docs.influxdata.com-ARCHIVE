@@ -151,7 +151,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 
 ### Combine
 
-Combine this node with itself. The data is combine on timestamp.
+Combine this node with itself. The data is combined on timestamp.
 
 
 ```javascript
