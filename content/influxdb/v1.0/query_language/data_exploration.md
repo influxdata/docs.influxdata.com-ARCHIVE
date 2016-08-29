@@ -238,7 +238,7 @@ Return data where the tag key `location` has the tag value `santa_monica` and th
 > SELECT * FROM "h2o_feet" WHERE "location" = 'santa_monica' AND "level description" = 'below 3 feet'
 ```
 Return data where the field values in `water_level` plus `2` are greater than `11.9`:
-```
+```sql
 > SELECT * FROM "h2o_feet" WHERE "water_level" + 2 > 11.9
 ```
 
@@ -342,7 +342,7 @@ time			               mean
 ### GROUP BY time intervals
 
 Users can group data by a given time interval with `GROUP BY time()`:
-```
+```sql
 SELECT <function>(<field_key>) FROM <measurement_name> WHERE <time_range> GROUP BY time(<time_interval>[,<offset_interval>])
 ```
 
@@ -432,7 +432,7 @@ August 27 - August 29
 `water_level` points between August 19, 2015 at midnight and August 27 at 5:00pm
 at three day intervals, and offset
 the time boundary by -2 days:
-```
+```sql
 > SELECT COUNT("water_level") FROM "h2o_feet" WHERE time >= '2015-08-19T00:00:00Z' AND time <= '2015-08-27T17:00:00Z' AND "location"='coyote_creek' GROUP BY time(3d,-2d)
 ```
 
@@ -856,7 +856,7 @@ time			               water_level
 ---
 
 For example, get the first three points from a single series:
-```
+```sql
 > SELECT "water_level" FROM "h2o_feet" GROUP BY * LIMIT 3 SLIMIT 1
 ```
 
@@ -872,7 +872,7 @@ time			               water_level
 ```
 
 Then get the first three points from the next series:
-```
+```sql
 > SELECT "water_level" FROM "h2o_feet" GROUP BY * LIMIT 3 SLIMIT 1 SOFFSET 1
 ```
 
