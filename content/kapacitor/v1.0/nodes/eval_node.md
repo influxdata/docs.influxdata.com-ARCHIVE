@@ -121,7 +121,8 @@ node.as(names ...string)
 
 If called the existing fields will be preserved in addition 
 to the new fields being set. 
-If not called then only new fields are preserved. 
+If not called then only new fields are preserved. (Tags are
+always preserved regardless how `keep` is used.)
 
 Optionally, intermediate values can be discarded 
 by passing a list of field names to be kept. 
@@ -176,8 +177,8 @@ Example:
             .tags('value_bucket')
 ```
 
-The above example calculates a named bucket from the field `value`. 
-Then the `value_bucket` result is set as a tag &#39;value_bucket&#39; on the point, instead of as a field. 
+The above example calculates an expression from the field `value`, casts it as a string, and names it `value_bucket`. 
+The `value_bucket` expression is then converted from a field on the point to a tag &#39;value_bucket&#39; on the point. 
 
 Example: 
 
@@ -190,9 +191,9 @@ Example:
             .keep('value') // keep the original field `value` as well
 ```
 
-The above example calculates a named bucket from the field `value`. 
-Then the `value_bucket` result is set as a tag &#39;value_bucket&#39; on the point, instead of as a field. 
-The field `value` is also preserved on the point because of the `keep` property. 
+The above example calculates an expression from the field `value`, casts it as a string, and names it `value_bucket`. 
+The `value_bucket` expression is then converted from a field on the point to a tag &#39;value_bucket&#39; on the point. 
+The `keep` property preserves the original field `value`. 
 Tags are always kept since creating a tag implies you want to keep it. 
 
 
