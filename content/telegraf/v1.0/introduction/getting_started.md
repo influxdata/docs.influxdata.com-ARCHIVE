@@ -30,7 +30,7 @@ Before starting the Telegraf server you need to edit and/or create an initial co
 Here, we'll generate a configuration file and simultaneously specify the desired inputs with the `-input-filter` flag and the desired output with the `-output-filter` flag.
 
 In the example below, we create a configuration file called `telegraf.conf` with two inputs:
-one that reads metrics about the system's cpu usage (`cpu`) and one that reads metrics about the system's memory usage (`mem`). `telegraf.conf` specifies InfluxDB as the desired output.
+one that reads metrics about the system's cpu usage (`cpu`) and one that reads metrics about the system's memory usage (`mem`). We specify InfluxDB as the desired output.
 
 ```bash
 telegraf -sample-config -input-filter cpu:mem -output-filter influxdb > telegraf.conf
@@ -54,7 +54,7 @@ systemctl start telegraf
 ```
 
 ## Results
-Once Telegraf is up and running it'll start collecting data and writing them to the desired output.
+Once Telegraf is up and running it will start collecting data and writing them to the desired output.
 
 Returning to our sample configuration, we show what the `cpu` and `mem` data look like in InfluxDB below.
 Note that we used the default input and output configuration settings to get these data.
@@ -76,29 +76,31 @@ mem
 > SHOW FIELD KEYS
 name: cpu
 ---------
-fieldKey
-usage_guest
-usage_guest_nice
-usage_idle
-usage_iowait
-usage_irq
-usage_nice
-usage_softirq
-usage_steal
-usage_system
-usage_user
+fieldKey            fieldType
+usage_guest         float
+usage_guest_nice	float
+usage_idle		    float
+usage_iowait		float
+usage_irq		    float
+usage_nice		    float
+usage_softirq		float
+usage_steal		    float
+usage_system		float
+usage_user		    float
 
 name: mem
 ---------
-fieldKey
-available
-available_percent
-buffered
-cached
-free
-total
-used
-used_percent
+fieldKey		    fieldType
+active			    integer
+available		    integer
+available_percent	float
+buffered		    integer
+cached			    integer
+free			    integer
+inactive		    integer
+total			    integer
+used			    integer
+used_percent		float
 ```
 
 * Select a sample of the data in the [field](/influxdb/v1.0/concepts/glossary/#field) `usage_idle` in the measurement `cpu_usage_idle`:
