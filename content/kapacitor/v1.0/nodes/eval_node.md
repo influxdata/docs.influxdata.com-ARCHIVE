@@ -94,8 +94,8 @@ Property methods are marked using the `.` operator.
 ### As
 
 List of names for each expression. 
-The expressions are evaluated in order and the result 
-of a previous expression will be available in later expressions 
+The expressions are evaluated in order. The result 
+of an expression may be referenced by later expressions 
 via the name provided. 
 
 Example: 
