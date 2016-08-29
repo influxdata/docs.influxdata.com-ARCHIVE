@@ -26,8 +26,14 @@ In addition, please refrain from creating a Global Admin user in the InfluxEnter
 
 ## Modify the /etc/hosts file
 
-Add the IP and hostname of the OSS instance to the `/etc/hosts` file on all nodes in the InfluxEnterprise Cluster.
-Ensure that all cluster IPs and hostnames are also in the OSS instance’s `/etc/hosts` file.
+Add the IP and hostname of the OSS instance to the
+`/etc/hosts` file on all nodes in the InfluxEnterprise Cluster.
+Ensure that all cluster IPs and hostnames are also in the OSS
+instance’s `/etc/hosts` file.
+
+**Note:** All node hostnames must be completely resolvable by all
+other nodes in the cluster. If you have DNS already setup in your
+environment, then this step can be skipped.
 
 ## For all existing InfluxEnterprise data nodes:
 
@@ -60,18 +66,36 @@ sudo chown -R influxdb:influxdb /var/lib/influxdb
 ### 1. Stop all writes to the OSS Instance
 
 ### 2. Stop the influxdb service on the OSS Instance
+
+On sysvinit systems, use the `service` command:
 ```
 sudo service influxdb stop
 ```
+
+On systemd systems, use the `systemctl` command:
+```
+sudo systemctl stop influxdb
+```
+
 Double check that the service is stopped (the following should return nothing):
 ```
 ps ax | grep influxd
 ```
+
 ### 3. Remove the OSS package
+
+On Debian/Ubuntu systems:
 ```
-dpkg --remove influxdb
+sudo apt-get uninstall influxdb
 ```
+
+On RHEL/CentOS systems:
+```
+sudo yum remove influxdb
+```
+
 ### 4. Update the binary
+
 > **Note:** This step will overwrite your current configuration file.
 If you have settings that you’d like to keep, please make a copy of your config file before running the following command.
 
@@ -137,8 +161,15 @@ purge-interval = "1h0m0s"
 ```
 
 ### 6. Start the data node
+
+On sysvinit systems, use the `service` command:
 ```
 sudo service influxdb start
+```
+
+On systemd systems, use the `systemctl` command:
+```
+sudo systemctl start influxdb
 ```
 
 ### 7. Add the node to the cluster
