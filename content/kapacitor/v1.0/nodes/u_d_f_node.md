@@ -10,7 +10,7 @@ menu:
     parent: nodes
 ---
 
-A [UDFNode](/kapacitor/v1.0/nodes/u_d_f_node/) is a node that can run a User Defined Function (UDF) in a separate process. 
+A UDFNode is a node that can run a User Defined Function (UDF) in a separate process. 
 
 A UDF is a custom script or binary that can communicate via Kapacitor&#39;s UDF RPC protocol. 
 The path and arguments to the UDF program are specified in Kapacitor&#39;s configuration. 
