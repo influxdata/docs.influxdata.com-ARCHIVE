@@ -11,7 +11,7 @@ menu:
 ---
 
 Evaluates expressions on each data point it receives. 
-A list of expressions must be provided and will be evaluated in the order they are given. 
+A list of expressions may be provided and will be evaluated in the order they are given. 
 The results of expressions are available to later expressions in the list. 
 See the property [EvalNode.As](/kapacitor/v1.0/nodes/eval_node/#as) for details on how to reference the results. 
 
@@ -407,8 +407,8 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 ### Eval
 
 Create an eval node that will evaluate the given transformation function to each data point. 
-A list of expressions may be provided and will be evaluated in the order they are given 
-and results of previous expressions are made available to later expressions. 
+A list of expressions may be provided and will be evaluated in the order they are given. 
+The results are available to later expressions. 
 
 
 ```javascript
