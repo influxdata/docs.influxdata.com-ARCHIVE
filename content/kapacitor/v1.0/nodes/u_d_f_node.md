@@ -190,7 +190,7 @@ Example:
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
         |deadman(100.0, 10s)
-    //Do normal processing of data
+    // Do normal processing of data
     data...
 ```
 
@@ -212,7 +212,7 @@ Example:
             .id('node \'stream0\' in task \'{{ .TaskName }}\'')
             .message('{{ .ID }} is {{ if eq .Level "OK" }}alive{{ else }}dead{{ end }}: {{ index .Fields "emitted" | printf "%0.3f" }} points/10s.')
             .crit(lambda: "emitted" <= 100.0)
-    //Do normal processing of data
+    // Do normal processing of data
     data...
 ```
 
@@ -230,7 +230,7 @@ Example:
         |deadman(100.0, 10s)
             .slack()
             .channel('#dead_tasks')
-    //Do normal processing of data
+    // Do normal processing of data
     data...
 ```
 
@@ -245,7 +245,7 @@ Example:
     // Only trigger the alert if the time of day is between 8am-5pm.
     data
         |deadman(100.0, 10s, lambda: hour("time") >= 8 AND hour("time") <= 17)
-    //Do normal processing of data
+    // Do normal processing of data
     data...
 ```
 
