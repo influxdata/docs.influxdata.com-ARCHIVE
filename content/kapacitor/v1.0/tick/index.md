@@ -19,7 +19,7 @@ These methods come in two flavors.
 * Property methods -- Modifies the node they are called on and returns a reference to the same node.
 * Chaining methods -- Creates a new node as a child of the node they are called on and returns a reference to the new node.
 
-The following reference documentation lists each node's `Property` and `Chaining` methods along with examples and descriptions.
+The reference documentation lists each node's `Property` and `Chaining` methods along with examples and descriptions.
 
 Every TICKscript will have either a `stream` or `batch` variable defined depending on the type of task you want to run.
 The `stream` and `batch` variables are an instance of a [StreamNode](/kapacitor/v1.0/nodes/stream_node/) or [SourceBatchNode](/kapacitor/v0.11/nodes/source_batch_node/) respectively.
