@@ -123,10 +123,10 @@ If called the existing fields will be preserved in addition
 to the new fields being set. 
 If not called then only new fields are preserved. 
 
-Optionally intermediate values can be discarded 
-by passing a list of field names. 
-Only fields in the list will be kept. 
-If no list is given then all fields, new and old, are kept. 
+Optionally, intermediate values can be discarded 
+by passing a list of field names to be kept. 
+Only fields in the list will be retained, the rest will be discarded. 
+If no list is given then all fields are retained. 
 
 Example: 
 
@@ -139,9 +139,9 @@ Example:
 ```
 
 In the above example the original field `value` is preserved. 
-In addition the new field `value2` is calculated and used in evaluating 
-`inv_value2` but is discarded before the point is sent on to children nodes. 
-The resulting point has only two fields `value` and `inv_value2`. 
+The new field `value2` is calculated and used in evaluating 
+`inv_value2` but is discarded before the point is sent on to child nodes. 
+The resulting point has only two fields: `value` and `inv_value2`. 
 
 
 ```javascript
