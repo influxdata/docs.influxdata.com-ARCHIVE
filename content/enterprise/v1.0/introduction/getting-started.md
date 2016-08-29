@@ -34,13 +34,14 @@ web console.
 
 #### 3. Create a Web Admin user
 
-The final step is to create a Web Admin user.
 The Web Admin user has all [web-console-specific permissions](/enterprise/v1.0/features/users/#admin-users).
 
-After filling out the form with your name, email, and password, be sure to
-assign yourself to the `ClusterAdmin` account that you created in the previous
-step.
-This ensures that you have all web console permissions AND all cluster-specific
+Fill out the form with the Web Admin user's first and last name, associated email address, and password.
+
+**Important**:  Associate the Web Admin user with the Cluster Admin (we used `ClusterAdmin` and `MyCluster` in examples above).
+To associate the Cluster Admin with Web Admin, choose `ClusterAdmin` in the menu adjacent to `MyCluster`.
+
+Associating the two accounts with one another ensures both admin accounts have all web console permissions AND all cluster-specific
 permissions.
 
 ![Create Web Admin](/img/enterprise/create_web_admin_1.png)
