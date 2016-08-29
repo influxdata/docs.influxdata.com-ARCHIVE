@@ -8,7 +8,7 @@ menu:
 ---
 
 There are many ways to write data into InfluxDB including the [command line interface](/influxdb/v1.0/tools/shell/), [client libraries](/influxdb/v1.0/clients/api/) and plugins for common data formats such as [Graphite](/influxdb/v1.0/write_protocols/graphite/).
-Here we'll show you how to create a database and write data to that database using the built-in HTTP API.
+Here we'll show you how to create a database and write data to it using the built-in HTTP API.
 
 ## Creating a database using the HTTP API
 To create a database send a `POST` request to the `/query` endpoint and set the URL parameter `q` to `CREATE DATABASE <new_database_name>`.
@@ -20,8 +20,7 @@ curl -i -XPOST http://localhost:8086/query --data-urlencode "q=CREATE DATABASE m
 ```
 
 ## Writing data using the HTTP API
-The HTTP API is the primary means of putting data into InfluxDB.
-To write data send a `POST` request to the `/write` endpoint.
+The HTTP API is the primary means of writing data into InfluxDB, by sending `POST` requests to the `/write` endpoint.
 The example below writes a single point to the `mydb` database.
 The data consist of the [measurement](/influxdb/v1.0/concepts/glossary/#measurement) `cpu_load_short`, the [tag keys](/influxdb/v1.0/concepts/glossary/#tag-key) `host` and `region` with the [tag values](/influxdb/v1.0/concepts/glossary/#tag-value) `server01` and `us-west`, the [field key](/influxdb/v1.0/concepts/glossary/#field-key) `value` with a [field value](/influxdb/v1.0/concepts/glossary/#field-value) of `0.64`, and the [timestamp](/influxdb/v1.0/concepts/glossary/#timestamp) `1434055562000000000`.
 <br>
@@ -98,12 +97,12 @@ This consistency is good for those developing and consuming the API: everyone in
 
 REST, however, is a convention.
 InfluxDB makes do with three API endpoints.
-This simple, easy to understand system uses HTTP as a transfer system for [InfluxQL](/influxdb/v1.0/query_language/spec/).
+This simple, easy to understand system uses HTTP as a transfer method for [InfluxQL](/influxdb/v1.0/query_language/spec/).
 The InfluxDB API makes no attempt to be RESTful.
 
 ### HTTP response summary
 ---
-* 2xx: If it's `HTTP 204 No Content`, success!
+* 2xx: If your write request received `HTTP 204 No Content`, it was a success!
 If it's  `HTTP 200 OK`, InfluxDB understood the request but couldn't complete it.
 The body of the response will contain additional error information.
 * 4xx: InfluxDB could not understand the request.
