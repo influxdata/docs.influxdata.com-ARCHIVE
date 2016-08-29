@@ -492,8 +492,8 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 Create an http output node that caches the most recent data it has received. 
 The cached data is available at the given endpoint. 
 The endpoint is the relative path from the API endpoint of the running task. 
-For example if the task endpoint is at &#34;/api/v1/task/&lt;task_name&gt;&#34; and endpoint is 
-&#34;top10&#34;, then the data can be requested from &#34;/api/v1/task/&lt;task_name&gt;/top10&#34;. 
+For example if the task endpoint is at `/api/v1/task/&lt;task_name&gt;` and endpoint is 
+`top10`, then the data can be requested from `/api/v1/task/&lt;task_name&gt;/top10`. 
 
 
 ```javascript
@@ -578,7 +578,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 ### Median
 
 Compute the median of the data. Note, this method is not a selector, 
-if you want the median point use .percentile(field, 50.0). 
+if you want the median point use `.percentile(field, 50.0)`. 
 
 
 ```javascript
