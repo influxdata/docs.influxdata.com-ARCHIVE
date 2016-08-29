@@ -92,7 +92,7 @@ Permission to add/remove nodes from a cluster.
 ##### Drop Databases
 Permission to drop databases.
 ##### Drop Data
-Permission to drop measurement and series queries.
+Permission to drop measurements and series.
 ##### Read
 Permission to read data.
 ##### Write

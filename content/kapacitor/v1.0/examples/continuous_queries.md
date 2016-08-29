@@ -16,7 +16,7 @@ Today we are going to explore reasons to use one over the other and the basics o
 
 First, lets take a simple CQ and rewrite it as a Kapacitor TICKscript.
 
-Here is a CQ that computes the mean of the `cpu.usage_idle` every 5m and stores it in the new measurement `mean_cpu_idle`.
+Here is a CQ that computes the mean of the `cpu.usage_idle` every 5 minutes and stores it in the new measurement `mean_cpu_idle`.
 
 ```
 CREATE CONTINUOUS QUERY cpu_idle_mean ON telegraf BEGIN SELECT mean("usage_idle") as usage_idle INTO mean_cpu_idle FROM cpu GROUP BY time(5m),* END
@@ -37,7 +37,7 @@ stream
     |mean('usage_idle')
         .as('usage_idle')
     |influxDBOut()
-        .database('telegratelegraff')
+        .database('telegraf')
         .retentionPolicy('default')
         .measurement('mean_cpu_idle')
         .precision('s')
