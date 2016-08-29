@@ -82,7 +82,7 @@ chmod +x ./scores.sh
 ./scores.sh
 ```
 
-Now we are spaming Kapacitor with our fake score data.
+Now we are spamming Kapacitor with our fake score data.
 We can just leave that running since Kapacitor will drop
 the incoming data until it has a task that wants it.
 
@@ -287,6 +287,6 @@ curl \
 ```
 
 Great!
-the hard work is done.
+The hard work is done.
 All that is left is to configure the game server to send score updates to Kapacitor and update the spectator dashboard to pull scores from Kapacitor.
 

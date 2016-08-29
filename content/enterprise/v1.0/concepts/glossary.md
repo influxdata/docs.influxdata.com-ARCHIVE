@@ -17,7 +17,7 @@ Any replication factor greater than two gives you additional fault tolerance and
 query capacity within the cluster.
 
 Data node sizes will depend on your needs.
-The m4.large or m4.xlarge are good starting points.
+The Amazon EC2 m4.large or m4.xlarge are good starting points.
 
 Related entries: [data service](#data-service), [replication factor](#replication-factor)
 
