@@ -7,11 +7,12 @@ menu:
     parent: troubleshooting
 ---
 
-With InfluxDB's query management features, users are able to identify
-currently-running queries and have the ability to kill queries that are
-overloading their system.
-Additionally, users can prevent and halt the execution of inefficient queries
-with several configuration settings.
+With InfluxDB's query management features, users are able to:
+
+1. Identify currently-running queries.
+2. Kill queries that are overloading their system.
+3. Prevent and halt the execution of inefficient queries with several configuration settings.
+
 
 * [List currently-running queries with `SHOW QUERIES`](/influxdb/v1.0/troubleshooting/query_management/#list-currently-running-queries-with-show-queries)
 * [Stop currently-running queries with `KILL QUERY`](/influxdb/v1.0/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query)
