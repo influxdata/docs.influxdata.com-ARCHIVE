@@ -27,7 +27,8 @@ Where applicable, it links to outstanding issues on GitHub.
 
 **Writing data**  
 
-* [Writing integers](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#writing-integers)   
+* [Writing integers](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#writing-integers)
+* [Writing data with negative timestamps](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#writing-data-with-negative-timestamps)     
 * [Writing duplicate points](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#writing-duplicate-points)  
 * [Getting an unexpected error when sending data over the HTTP API](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#getting-an-unexpected-error-when-sending-data-over-the-http-api)
 * [Words and characters to avoid](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#words-and-characters-to-avoid)  
@@ -248,6 +249,19 @@ If you do not provide the `i`, InfluxDB will treat the field value as a float.
 
 Writes an integer: `value=100i`  
 Writes a float: `value=100`
+
+## Writing data with negative timestamps
+InfluxDB accepts writes with negative timestamps but you will not be able
+to query those points.
+
+Example:
+```
+> INSERT waybackwhen value=1 -1
+> SELECT * FROM "waybackwhen"
+>
+```
+
+This issue has been fixed in version 1.0.
 
 ## Writing duplicate points
 In InfluxDB 0.13 a point is uniquely identified by the measurement name, [tag set](/influxdb/v0.13/concepts/glossary/#tag-set), and timestamp.
