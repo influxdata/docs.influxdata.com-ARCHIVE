@@ -53,32 +53,58 @@ stream
 Builtin Functions
 -----------------
 
-### Bool
+### Type Conversion functions
 
-Converts a string into a boolean via Go's [strconv.ParseBool](https://golang.org/pkg/strconv/#ParseBool)
+#### Bool
+
+Converts a string into a boolean via Go's [strconv.ParseBool](https://golang.org/pkg/strconv/#ParseBool) function.
+Numeric types can also be converted to a bool where a 0 -> false and 1 -> true.
 
 ```javascript
-bool(value string) bool
+bool(value) bool
 ```
 
-### Int
+#### Int
 
 Converts a string or float64 into an int64 via Go's [strconv.ParseInt](https://golang.org/pkg/strconv/#ParseInt) or simple `float64()` coercion.
 Strings are assumed to be decimal numbers.
+Durations are converted into an int64 with nanoseconds units.
+A boolean is converted to an int64 where false -> 0 and true -> 1.
 
 ```javascript
-int(value float64 or string) int64
+int(value) int64
 ```
 
-### Float
+#### Float
 
 Converts a string or int64 into an float64 via Go's [strconv.ParseFloat](https://golang.org/pkg/strconv/#ParseInt) or simple `int64()` coercion.
+A boolean is converted to an float64 where false -> 0.0 and true -> 1.0.
 
 ```javascript
-float(value int64 or string) float64
+float(value) float64
 ```
 
-### Sigma
+#### String
+
+Converts a bool, int64 or float64 into an string via Go's [strconv.Format*](https://golang.org/pkg/strconv/#FormatBool) functions.
+Durations are converted to a string representation of the duration.
+
+```javascript
+string(value) string
+```
+
+#### Duration
+
+Converts a int64 or float64 into an duration assuming nanoseconds units.
+Strings are converted to duration of the form as duration literals in TICKscript.
+
+```javascript
+duration(value) duration
+```
+
+### Stateful Functions
+
+#### Sigma
 
 Computes the number of standard deviations a given value is away from the running mean.
 Each time the expression is evaluated the running mean and standard deviation are updated.
@@ -87,7 +113,7 @@ Each time the expression is evaluated the running mean and standard deviation ar
 sigma(value float64) float64
 ```
 
-### Count
+#### Count
 
 Count takes no arguments but returns the number of times the expression has been evaluated.
 
@@ -171,4 +197,27 @@ for more details.
 | [y0](https://golang.org/pkg/math/#Y0) | Y0 returns the order-zero Bessel function of the second kind.  |
 | [y1](https://golang.org/pkg/math/#Y1) | Y1 returns the order-one Bessel function of the second kind.  |
 | [yn](https://golang.org/pkg/math/#Yn) | Yn returns the order-n Bessel function of the second kind.  |
+
+
+### Human String functions
+
+#### HumanBytes
+
+Converts a int64 or float64 with units bytes into a human readable string representing the number of bytes.
+
+```javascript
+humanBytes(value) string
+```
+
+
+### Conditional Functions
+
+#### If
+
+Returns the result of its operands depending on the value of the first argument.
+The second and third arguments must return the same type.
+
+```javascript
+if(condition, true expression, false expression) any
+```
 
