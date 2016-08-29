@@ -86,7 +86,7 @@ ps ax | grep influxd
 
 On Debian/Ubuntu systems:
 ```
-sudo apt-get uninstall influxdb
+sudo apt-get remove influxdb
 ```
 
 On RHEL/CentOS systems:
