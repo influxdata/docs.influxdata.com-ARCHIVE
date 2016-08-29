@@ -16,37 +16,33 @@ The Goal
 --------
 
 Add a new node to Kapacitor that can output data to a custom endpoint.
-For this guide lets say we want to output data to a fictitous in-house database called HouseDB.
+For this guide assume we want to output data to a fictitous in-house database called HouseDB.
 
 Overview
 --------
 
 Kapacitor processes data via a pipeline.
-A pipeline is formally a directed acyclic graph (DAG).
+A pipeline is formally a directed acyclic graph ([DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph)).
 The basic idea is that each node in the graph represents some form of processing on the data and each edge passes the data between nodes.
 In order to add a new type of node there are two components that need to be written:
 
-1.
-The API (TICKscript) for creating and configuring the node.
-2.
-The implementation of the data processing step.
-In this case, the implementation of outputting the data to HouseDB.
+1. The API (TICKscript) for creating and configuring the node, and
+2. The implementation of the data processing step.
+
+In our example the data processing step is outputting the data to HouseDB.
 
 The code mirrors these requirements with two Go packages.
 
-1.
-`pipeline` -- this package defines what types of nodes are available and how they are configured.
-2.
-`kapacitor` -- this package provides implementations of each of the nodes defined in the `pipeline` package.
+1. `pipeline` -- this package defines what types of nodes are available and how they are configured.
+2. `kapacitor` -- this package provides implementations of each of the nodes defined in the `pipeline` package.
 
 The reason for splitting out defining the node from the implementation of the node is to make the API (i.e.
-a TICKscript)
-clean and easy to follow.
+a TICKscript) clean and easy to follow.
 
 ### Updating TICKscript
 
 First things first, we need to update TICKscript so that users can define a our new node.
-What should the TICKscript look like in order to send data to a HouseDB instance?
+What should the TICKscript look like to send data to HouseDB?
 To connect to a HouseDB instance we need both a URL and a database name, so we need a way to provide that information.
 How about this?
 
@@ -61,9 +57,9 @@ In order to update TICKscript to support those new methods we need to write a Go
 The interface can be found [here](https://github.com/influxdb/kapacitor/blob/master/pipeline/node.go)
 as well as a complete implementation via the `pipeline.node` type.
 Since the implementation of the `Node` is done for us we just need to use it.
-First we need a name, `HouseDBOutNode` follows the convention.
+First we need a name. `HouseDBOutNode` follows the naming convention.
 Let's define a Go `struct` that will implement the interface via composition.
-Create a file called `housedb_out.go` in the `pipeline` directory with the contents below.
+Create a file in the `pipeline` directory called `housedb_out.go` with the following contents:
 
 ```go
 package pipeline
@@ -77,8 +73,10 @@ type HouseDBOutNode struct {
 ```
 
 Just like that we have a type in Go that implements the needed interface.
-In order to allow for the `.url` and `.database` methods we want, just define fields on the type with the same name.
-The first letter needs to capitalized so that it is exported the rest of the name should have the same case as the method name.
+In order to allow for the `.url` and `.database` methods we need, simply define fields on the type with the same name.
+The first letter needs to capitalized so that it is exported. 
+It's important that the fields be exported since they will be consumed by the node in the `kapacitor` package.
+The rest of the name should have the same capitaization as the method name.
 TICKscript will take care of matching the case at runtime.
 Update the `housedb_out.go` file.
 
@@ -99,15 +97,14 @@ type HouseDBOutNode struct {
 }
 ```
 
-It's important that the fields be exported since they will be consumed by the node in the `kapacitor` package.
-
 Next we need a consistent way to create a new instance of our node.
 But to do so we need to think about how this node connects to other nodes.
-Since we are an output node as far as Kapacitor is concerned we are the end of the pipeline and we do not provide any outbound edges.
-HouseDB is a flexible datastore and can store data in batches or as single data points,
-as a result we do not care what type of data the HouseDBOutNode node receives.
-With that in mind we can define a function to create a new HouseDBOutNode.
-Add this function to the end of the `housedb_out.go` file.
+Since we are an output node as far as Kapacitor is concerned this is the end of the pipeline. 
+We will not provide any outbound edges, the graph ends on this node.
+Out imaginary HouseDB is flexible and can store data in batches or as single data points. 
+As a result we do not care what type of data the HouseDBOutNode node receives.
+With these facts in mind we can define a function to create a new HouseDBOutNode.
+Add this function to the end of the `housedb_out.go` file:
 
 ```go
 // Create a new HouseDBOutNode that accepts any edge type.
@@ -122,13 +119,14 @@ func newHouseDBOutNode(wants EdgeType) *HouseDBOutNode {
 }
 ```
 
-By explicitly stating what types of edges the node `wants` and `provides` Kapacitor will do the necessary type checking so that users cannot define invalid pipelines.
+By explicitly stating the types of edges the node `wants` and `provides`, Kapacitor will do the necessary type checking to prevent invalid pipelines.
 
 Finally we need to add a new `chaining method` so that users can connect HouseDBOutNodes to their existing pipelines.
-A `chaining method` is one that creates a new node and adds it as a child of the calling node, in effect the method chains nodes together.
+A `chaining method` is one that creates a new node and adds it as a child of the calling node. 
+In effect the method chains nodes together.
 The `pipeline.chainnode` type contains the set of all methods that can be used for chaining nodes.
-By adding our method to that type automatically any other node can now chain with a HouseDBOutNode.
-Add this function to the end of the `pipeline/node.go` file.
+Once we add our method to that type any other node can now chain with a HouseDBOutNode.
+Add this function to the end of the `pipeline/node.go` file:
 
 ```go
 // Create a new HouseDBOutNode as a child of the calling node.
@@ -139,8 +137,7 @@ func (c *chainnode) HouseDBOut() *HouseDBOutNode {
 }
 ```
 
-That should do it.
-In review we now have defined all the necessary pieces so that TICKscripts can define HouseDBOutNodes.
+We have now defined all the necessary pieces so that TICKscripts can define HouseDBOutNodes:
 
 ```javascript
     node
@@ -156,7 +153,7 @@ Each node in the `pipeline` package has a node of the same name in the `kapacito
 Create a file called `housedb_out.go` and put it in the root of the repo.
 Put the contents below in the file.
 
-```
+```javascript
 package kapacitor
 
 import (
