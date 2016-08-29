@@ -144,7 +144,7 @@ Chunking can be used to return results in streamed batches rather than as a sing
 For example, get your results in batches of 20,000 points with:  
 <br>
 ```bash
-curl -G 'http://localhost:8086/query' --data-urlencode "db=deluge" --data-urlencode="chunked=true" --data-urlencode "chunk_size=20000" --data-urlencode "q=SELECT * FROM liters"
+curl -G 'http://localhost:8086/query' --data-urlencode "db=deluge" --data-urlencode "chunked=true" --data-urlencode "chunk_size=20000" --data-urlencode "q=SELECT * FROM liters"
 ```
 
 ### InfluxQL
