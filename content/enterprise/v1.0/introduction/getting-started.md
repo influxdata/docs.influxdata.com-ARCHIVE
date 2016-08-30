@@ -38,9 +38,9 @@ The Web Admin user has all [web-console-specific permissions](/enterprise/v1.0/f
 
 Fill out the form with the Web Admin user's first and last name, associated email address, and password.
 
-**Important**:  Associate the Web Admin user with the Cluster Admin (we used `ClusterAdmin` and `MyCluster` in examples above).
+> **Important**:  Associate the Web Admin user with the Cluster Admin (we used `ClusterAdmin` and `MyCluster` in the examples above).
 To associate the Cluster Admin with Web Admin, choose `ClusterAdmin` in the menu adjacent to `MyCluster`.
-
+>
 Associating the two accounts with one another ensures both admin accounts have all web console permissions AND all cluster-specific
 permissions.
 
