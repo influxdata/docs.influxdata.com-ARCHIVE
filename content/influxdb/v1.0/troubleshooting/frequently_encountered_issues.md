@@ -18,8 +18,7 @@ Where applicable, it links to outstanding issues on GitHub.
 * [Querying `SELECT *` with field type discrepancies](#querying-select-with-field-type-discrepancies)
 * [Working with really big or really small integers](#working-with-really-big-or-really-small-integers)
 * [Doing math on timestamps](#doing-math-on-timestamps)  
-* [Getting an unexpected epoch 0 timestamp in query returns](#getting-an-unexpected-epoch-0-timestamp-in-query-returns)  
-* [Getting large query returns in batches when using the HTTP API](#getting-large-query-returns-in-batches-when-using-the-http-api)  
+* [Getting an unexpected epoch 0 timestamp in query returns](#getting-an-unexpected-epoch-0-timestamp-in-query-returns)   
 * [Getting the `expected identifier` error, unexpectedly](#getting-the-expected-identifier-error-unexpectedly)
 * [Identifying write precision from returned timestamps](#identifying-write-precision-from-returned-timestamps)  
 * [Single quoting and double quoting in queries](#single-quoting-and-double-quoting-in-queries)  
@@ -178,17 +177,6 @@ All time calculations must be carried out by the client receiving the query resu
 ## Getting an unexpected epoch 0 timestamp in query returns
 In InfluxDB, epoch 0  (`1970-01-01T00:00:00Z`)  is often used as a null timestamp equivalent.
 If you request a query that has no timestamp to return, such as an aggregation function with an unbounded time range, InfluxDB returns epoch 0 as the timestamp.
-
-## Getting large query returns in batches when using the HTTP API
-InfluxDB returns large query results in batches of 10,000 points unless you use the query string parameter `chunk_size` to explicitly set the batch size.
-For example, get results in batches of 20,000 points with:
-
-```
-curl -G 'http://localhost:8086/query?db=deluge' --data-urlencode "chunk_size=20000" --data-urlencode 'q=SELECT * FROM "liters"'
-```
-
-<dt> See [GitHub Issue #3242](https://github.com/influxdb/influxdb/issues/3242) for more information on the challenges that this can cause, especially with Grafana visualization.
-</dt>
 
 ## Getting the `expected identifier` error, unexpectedly
 Receiving the error `ERR: error parsing query: found [WORD], expected identifier[, string, number, bool]` is often a gentle reminder that you forgot to include something in your query, as is the case in the following examples:

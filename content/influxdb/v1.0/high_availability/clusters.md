@@ -1,9 +1,9 @@
 ---
 title: Clustering
 menu:
-  influxdb_013:
-    weight: 100
-    parent: concepts
+  influxdb_1_0:
+    weight: 0
+    parent: high_availability
 ---
 
 Open-source InfluxDB does not support clustering.
