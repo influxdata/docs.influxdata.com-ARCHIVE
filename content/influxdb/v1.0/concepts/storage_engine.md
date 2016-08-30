@@ -40,35 +40,37 @@ The WAL is organized as a bunch of files that look like `_000001.wal`.
 The file numbers are monotonically increasing and referred to as WAL segments.
 When a segment reaches 10MB in size, it is closed and a new one is opened.  Each WAL segment stores multiple compressed blocks of writes and deletes.
 
-When a write comes in with points and optionally new series and fields defined, they are serialized, compressed using Snappy, and written to a WAL file.
-The file is fsync’d and the data added to an in-memory index before a success is returned.
-This means that batching points together will be required to achieve high throughput performance.
+When a write comes in the new points are serialized, compressed using Snappy, and written to a WAL file.
+The file is `fsync`’d and the data is added to an in-memory index before a success is returned.
+This means that batching points together is required to achieve high throughput performance.
+(Optimal batch size seems to be 5,000-10,000 points per batch for many use cases.)
 
-Each entry in the WAL follows a TLV standard with a single byte representing the type of entry (write or delete), a 4 byte `uint32` for the length of the compressed block, and then the compressed block.
+Each entry in the WAL follows a [TLV standard](https://en.wikipedia.org/wiki/Type-length-value) with a single byte representing the type of entry (write or delete), a 4 byte `uint32` for the length of the compressed block, and then the compressed block.
 
 #### Cache
 
 The Cache is an in-memory copy of all data points current stored in the WAL.
-The points are organized by the key, which is the measurement, tagset, and unique field.
-Each field is kept as its own time ordered range.
-The data isn’t compressed while in memory.
+The points are organized by the key, which is the measurement, [tag set](/influxdb/v1.0/concepts/glossary/#tag-set), and unique [field](/influxdb/v1.0/concepts/glossary/#field).
+Each field is kept as its own time-ordered range.
+The Cache data is not compressed while in memory.
 
 Queries to the storage engine will merge data from the Cache with data from the TSM files.
-When a query runs a copy of the data is made from the cache to be processed by the query engine.
-This way writes that come in while a query is happening won’t change the result.
+Queries execute on a copy of the data is made from the cache at query processing time.
+This way writes that come in while a query is running won’t affect the result.
 
-Deletes sent to the Cache will clear out given key or time range for the key.
+Deletes sent to the Cache will clear out the given key or the specific time range for the given key.
 
 The Cache exposes a few controls for snapshotting behavior.
 The two most important controls are the memory limits.
-There is a lower bound, which will trigger a snapshot to TSM files and remove the corresponding WAL segments.
-There is also an upper bound limit at which the Cache will start rejecting writes.
-This is useful to prevent out of memory situations and we need to apply back pressure to clients writing data.  The checks for memory thresholds occur on every write.
+There is a lower bound, [`cache-snapshot-memory-size`](/influxdb/v1.0/administration/config/#cache-snapshot-memory-size-26214400), which when exceeded will trigger a snapshot to TSM files and remove the corresponding WAL segments.
+There is also an upper bound, [`cache-max-memory-size`](/influxdb/v1.0/administration/config/#cache-max-memory-size-524288000), which when exceeded will cause the Cache to reject new writes.
+These configurations are useful to prevent out of memory situations and to apply back pressure to clients writing data faster than the instance can persist it.  
+The checks for memory thresholds occur on every write.
 
 The other snapshot controls are time based.
-The idle threshold will have the Cache snapshot to TSM files if it hasn’t received a write within a given amount of time.
+The idle threshold, [`cache-snapshot-write-cold-duration`](/influxdb/v1.0/administration/config/#cache-snapshot-write-cold-duration-1h0m0s), forces the Cache to snapshot to TSM files if it hasn’t received a write within the specified interval.
 
-Finally, the Cache is reloade on startup by re-reading the WAL from disk.
+The in-memory Cache is repopulated on startup by re-reading the WAL files on disk.
 
 #### TSM Files
 
