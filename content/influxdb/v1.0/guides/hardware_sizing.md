@@ -16,9 +16,9 @@ This guide offers general hardware recommendations for InfluxDB and addresses so
 
 ## General hardware guidelines for a single node
 
-We define the load that you'll be placing on InfluxDB by the number of writes per second, the number of queries per second, and the number of unique [series](/influxdb/v1.0/concepts/glossary/#series). Based on your load, we make general CPU, RAM, and IOPS recommendations.
+We define the load that you'll be placing on InfluxDB by the number of fields written per second, the number of queries per second, and the number of unique [series](/influxdb/v1.0/concepts/glossary/#series). Based on your load, we make general CPU, RAM, and IOPS recommendations.
 
-| Load         | Writes per second  | Queries per second | Unique series |
+| Load         | Field writes per second  | Queries per second | Unique series |
 |--------------|----------------|----------------|---------------|
 |  **Low**         |  < 5 thousand         |  < 5           |  < 100 thousand         |
 |  **Moderate**    |  < 100 thousand        |  < 25          |  < 1 million        |
@@ -55,7 +55,7 @@ The increase in RAM needs relative to series cardinality is exponential where th
 ![Series Cardinality](/img/influxdb/series-cardinality.png)
 
 ## What kind of storage do I need?
-InfluxDB is designed to run on SSDs.  Performance is lower on spinning disk drives and may not function properly under increasing loads.
+InfluxDB is designed to run on SSDs.  Performance is lower on spinning disk drives and may not function properly under increasing loads. For best results InfluxDB servers should have at least 1000 IOPS on the storage system.
 
 ## How much storage do I need?
 Database names, [measurements](/influxdb/v1.0/concepts/glossary/#measurement), [tag keys](/influxdb/v1.0/concepts/glossary/#tag-key), [field keys](/influxdb/v1.0/concepts/glossary/#field-key), and [tag values](/influxdb/v1.0/concepts/glossary/#tag-value) are stored only once and always as strings. Only [field values](/influxdb/v1.0/concepts/glossary/#field-value) and [timestamps](/influxdb/v1.0/concepts/glossary/#timestamp) are stored per-point.
