@@ -137,7 +137,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 
 ### Combine
 
-Combine this node with itself. The data is combine on timestamp. 
+Combine this node with itself. The data are combined on timestamp. 
 
 
 ```javascript
@@ -390,7 +390,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 ### HttpOut
 
 Create an http output node that caches the most recent data it has received. 
-The cached data is available at the given endpoint. 
+The cached data are available at the given endpoint. 
 The endpoint is the relative path from the API endpoint of the running task. 
 For example if the task endpoint is at &#34;/api/v1/task/&lt;task_name&gt;&#34; and endpoint is 
 &#34;top10&#34;, then the data can be requested from &#34;/api/v1/task/&lt;task_name&gt;/top10&#34;. 
@@ -417,7 +417,7 @@ Returns: [InfluxDBOutNode](/kapacitor/v1.0/nodes/influx_d_b_out_node/)
 
 ### Join
 
-Join this node with other nodes. The data is joined on timestamp. 
+Join this node with other nodes. The data are joined on timestamp. 
 
 
 ```javascript
