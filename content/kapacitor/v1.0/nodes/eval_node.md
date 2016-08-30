@@ -11,8 +11,8 @@ menu:
 ---
 
 Evaluates expressions on each data point it receives. 
-A list of expressions may be provided and will be evaluated in the order they are given 
-and results of previous expressions are made available to later expressions. 
+A list of expressions may be provided and will be evaluated in the order they are given. 
+The results of expressions are available to later expressions in the list. 
 See the property [EvalNode.As](/kapacitor/v1.0/nodes/eval_node/#as) for details on how to reference the results. 
 
 Example: 
@@ -94,8 +94,8 @@ Property methods are marked using the `.` operator.
 ### As
 
 List of names for each expression. 
-The expressions are evaluated in order and the result 
-of a previous expression will be available in later expressions 
+The expressions are evaluated in order. The result 
+of an expression may be referenced by later expressions 
 via the name provided. 
 
 Example: 
@@ -121,12 +121,13 @@ node.as(names ...string)
 
 If called the existing fields will be preserved in addition 
 to the new fields being set. 
-If not called then only new fields are preserved. 
+If not called then only new fields are preserved. (Tags are
+always preserved regardless how `keep` is used.)
 
-Optionally intermediate values can be discarded 
-by passing a list of field names. 
-Only fields in the list will be kept. 
-If no list is given then all fields, new and old, are kept. 
+Optionally, intermediate values can be discarded 
+by passing a list of field names to be kept. 
+Only fields in the list will be retained, the rest will be discarded. 
+If no list is given then all fields are retained. 
 
 Example: 
 
@@ -139,9 +140,9 @@ Example:
 ```
 
 In the above example the original field `value` is preserved. 
-In addition the new field `value2` is calculated and used in evaluating 
-`inv_value2` but is discarded before the point is sent on to children nodes. 
-The resulting point has only two fields `value` and `inv_value2`. 
+The new field `value2` is calculated and used in evaluating 
+`inv_value2` but is discarded before the point is sent on to child nodes. 
+The resulting point has only two fields: `value` and `inv_value2`. 
 
 
 ```javascript
@@ -176,8 +177,8 @@ Example:
             .tags('value_bucket')
 ```
 
-The above example calculates a named bucket from the field `value`. 
-Then the `value_bucket` result is set as a tag &#39;value_bucket&#39; on the point, instead of as a field. 
+The above example calculates an expression from the field `value`, casts it as a string, and names it `value_bucket`. 
+The `value_bucket` expression is then converted from a field on the point to a tag &#39;value_bucket&#39; on the point. 
 
 Example: 
 
@@ -190,9 +191,9 @@ Example:
             .keep('value') // keep the original field `value` as well
 ```
 
-The above example calculates a named bucket from the field `value`. 
-Then the `value_bucket` result is set as a tag &#39;value_bucket&#39; on the point, instead of as a field. 
-The field `value` is also preserved on the point because of the `keep` property. 
+The above example calculates an expression from the field `value`, casts it as a string, and names it `value_bucket`. 
+The `value_bucket` expression is then converted from a field on the point to a tag &#39;value_bucket&#39; on the point. 
+The `keep` property preserves the original field `value`. 
 Tags are always kept since creating a tag implies you want to keep it. 
 
 
@@ -303,7 +304,7 @@ Example:
 
 The `id` and `message` alert properties can be configured globally via the &#39;deadman&#39; configuration section. 
 
-Since the [AlertNode](/kapacitor/v1.0/nodes/alert_node/) is the last piece it can be further modified as normal. 
+Since the [AlertNode](/kapacitor/v1.0/nodes/alert_node/) is the last piece it can be further modified as usual. 
 Example: 
 
 
@@ -406,8 +407,8 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 ### Eval
 
 Create an eval node that will evaluate the given transformation function to each data point. 
-A list of expressions may be provided and will be evaluated in the order they are given 
-and results of previous expressions are made available to later expressions. 
+A list of expressions may be provided and will be evaluated in the order they are given. 
+The results are available to later expressions. 
 
 
 ```javascript
@@ -491,8 +492,8 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 Create an http output node that caches the most recent data it has received. 
 The cached data is available at the given endpoint. 
 The endpoint is the relative path from the API endpoint of the running task. 
-For example if the task endpoint is at &#34;/api/v1/task/&lt;task_name&gt;&#34; and endpoint is 
-&#34;top10&#34;, then the data can be requested from &#34;/api/v1/task/&lt;task_name&gt;/top10&#34;. 
+For example if the task endpoint is at `/api/v1/task/&lt;task_name&gt;` and endpoint is 
+`top10`, then the data can be requested from `/api/v1/task/&lt;task_name&gt;/top10`. 
 
 
 ```javascript
@@ -577,7 +578,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 ### Median
 
 Compute the median of the data. Note, this method is not a selector, 
-if you want the median point use .percentile(field, 50.0). 
+if you want the median point use `.percentile(field, 50.0)`. 
 
 
 ```javascript
