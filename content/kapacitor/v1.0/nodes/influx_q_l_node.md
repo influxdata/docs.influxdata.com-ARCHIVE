@@ -402,7 +402,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 Create an HTTP output node that caches the most recent data it has received.
 The cached data is available at the given endpoint.
 The endpoint is the relative path from the API endpoint of the running task.
-For example, if the task endpoint is at `/api/v1/task/<task_name>;` and endpoint is
+For example, if the task endpoint is at `/api/v1/task/<task_name>` and endpoint is
 `top10`, then the data can be requested from `/api/v1/task/<task_name>/top10`.
 
 
@@ -646,4 +646,3 @@ node|window()
 ```
 
 Returns: [WindowNode](/kapacitor/v1.0/nodes/window_node/)
-
