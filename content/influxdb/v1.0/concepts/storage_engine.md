@@ -7,34 +7,32 @@ menu:
     parent: concepts
 ---
 
-### The new InfluxDB storage engine and LSM refined
+### The InfluxDB Storage Engine and the Time-Structured Merge Tree (TSM) 
 
 The new InfluxDB storage engine looks very similar to a LSM Tree.
 It has a write ahead log and a collection of read-only data files which are  similar in concept to SSTables in an LSM Tree.
-These data files, TSM files, contain sorted, compressed series data.
+TSM files contain sorted, compressed series data.
 
-InfluxDB will create a shard for each block of time.
-For example, if you have a retention policy with an unlimited duration, shards will get created for each 7 day block of time.
+InfluxDB will create a [shard]((/influxdb/v1.0/concepts/glossary/#shard) for each block of time.
+For example, if you have a [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy) with an unlimited duration, shards will be created for each 7 day block of time.
 Each of these shards maps to an underlying storage engine database.
-Each of these databases has its own WAL and TSM files.
+Each of these databases has its own [WAL](/influxdb/v1.0/concepts/glossary/#wal-write-ahead-log) and TSM files.
 
 We’ll dig into each of these parts of the storage engine.
 
-
 #### Storage Engine
 
-The storage engine is ties a number components together as well as provides the external interface used for storing and querying series data.  It is composed of a number of components that each serve a particular role:
+The storage engine ties a number components together and provides the external interface for storing and querying series data. It is composed of a number of components that each serve a particular role:
 
-* In-Memory Index - The in-memory index is a shared index across shards that provides the quick access to measurements, tags and series.  The index is used by the engine, but is not specific to the storage engine itself.
-* WAL - The WAL is a write, optimized storage format that allows for writes to be durable, but not easily queryable.  Writes to the WAL are appended to  segments of a fixed size.
+* In-Memory Index - The in-memory index is a shared index across shards that provides the quick access to [measurements](/influxdb/v1.0/concepts/glossary/#measurement), [tags](/influxdb/v1.0/concepts/glossary/#tags), and [series](/influxdb/v1.0/concepts/glossary/#series).  The index is used by the engine, but is not specific to the storage engine itself.
+* WAL - The WAL is a write-optimized storage format that allows for writes to be durable, but not easily queryable.  Writes to the WAL are appended to segments of a fixed size.
 * Cache - The Cache is an in-memory representation of the data stored in the WAL.  It is queried at runtime and merged with the data stored in TSM files.
 * TSM Files - TSM files store compressed series data in a columnar format.
-* FileStore - The FileStore mediates access to all TSM files on disk.  It ensures that TSM files are installed atomially when existing ones are replaced as well as removing TSM files that are no longer used.
-* Compactor - The Compactor is responsible for converting less optimized Cache and TSM data into more read-optimized formats.  It does this by compressing series, removing deleted data, optimizing indes and combining smaller files into larger ones.
-* Compaction Planner - The Compaction Planner determines which TSM files are ready for a compaction and ensures that multiple, concurrent compactions do not interfere with each other.
-* Compression - Compression is handled by various Encoders and Decoders for a specific data types.  Some encoders are faily static and always encode the same type the same way, other switch their compression strategy based on the shape of the data.
-* Writers/Readers - Each file type (WAL segment, TSM files, tombstones, etc..) has writers and reader for working with the formats.
-
+* FileStore - The FileStore mediates access to all TSM files on disk.  It ensures that TSM files are installed atomically when existing ones are replaced as well as removing TSM files that are no longer used.
+* Compactor - The Compactor is responsible for converting less optimized Cache and TSM data into more read-optimized formats.  It does this by compressing series, removing deleted data, optimizing indices and combining smaller files into larger ones.
+* Compaction Planner - The Compaction Planner determines which TSM files are ready for a compaction and ensures that multiple concurrent compactions do not interfere with each other.
+* Compression - Compression is handled by various Encoders and Decoders for specific data types.  Some encoders are fairly static and always encode the same type the same way; others switch their compression strategy based on the shape of the data.
+* Writers/Readers - Each file type (WAL segment, TSM files, tombstones, etc..) has Writers and Readers for working with the formats.
 
 #### Write Ahead Log (WAL)
 
