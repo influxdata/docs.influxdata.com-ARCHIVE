@@ -70,14 +70,14 @@ The checks for memory thresholds occur on every write.
 The other snapshot controls are time based.
 The idle threshold, [`cache-snapshot-write-cold-duration`](/influxdb/v1.0/administration/config/#cache-snapshot-write-cold-duration-1h0m0s), forces the Cache to snapshot to TSM files if it hasn’t received a write within the specified interval.
 
-The in-memory Cache is repopulated on startup by re-reading the WAL files on disk.
+The in-memory Cache is recreated on restart by re-reading the WAL files on disk.
 
 #### TSM Files
 
 TSM files are a collection of read-only files that are memory mapped.
 The structure of these files looks very similar to an SSTable in LevelDB or other LSM Tree variants.
 
-A TSM file is composed for four sections: header, blocks, index and the footer.
+A TSM file is composed of four sections: header, blocks, index, and footer.
 
 ```
 ┌────────┬────────────────────────────────────┬─────────────┬──────────────┐
@@ -86,8 +86,7 @@ A TSM file is composed for four sections: header, blocks, index and the footer.
 └────────┴────────────────────────────────────┴─────────────┴──────────────┘
 ```
 
-Header is composed of a magic number to identify the file type and a version
-number.
+The Header is a magic number to identify the file type and a version number.
 
 ```
 ┌───────────────────┐
@@ -98,9 +97,10 @@ number.
 └─────────┴─────────┘
 ```
 
-Blocks are sequences of pairs of CRC32 checksums and data.  The block data is opaque to the
-file.  The CRC32 is used for block level error detection.  The length of the blocks
-is stored in the index.
+Blocks are sequences of pairs of CRC32 checksums and data.  
+The block data is opaque to the file.  
+The CRC32 is used for block level error detection.  
+The length of the blocks is stored in the index.
 
 ```
 ┌───────────────────────────────────────────────────────────┐
@@ -114,18 +114,13 @@ is stored in the index.
 ```
 
 Following the blocks is the index for the blocks in the file.
-The index is
-composed of a sequence of index entries ordered lexicographically by key and
-then by time.
-Each index entry starts with a key length and key followed by the block type (float, int, bool, string) and a count of the number of blocks in the file.  Each block entry is composed of the min and max time for the block, the offset into the file where the block is located and the the size of the block.
+The index is composed of a sequence of index entries ordered lexicographically by key and then by time.
+Each index entry starts with a key length and key followed by the block type (float, int, bool, string) and a count of the number of blocks in the file.  
+Each block entry is composed of the min and max time for the block, the offset into the file where the block is located and the the size of the block.
 
-The index structure can provide efficient access to all blocks as well as the
-ability to determine the cost associated with accessing a given key.
-Given a key and timestamp, we can determine whether a file contains the block for that
-timestamp as well as where that block resides and how much data to read to
-retrieve the block.
-If we know we need to read all or multiple blocks in a
-file, we can use the size to determine how much to read in a given IO.
+The index structure can provide efficient access to all blocks as well as the ability to determine the cost associated with accessing a given key.
+Given a key and timestamp, we can determine whether a file contains the block for that timestamp as well as where that block resides and how much data to read to retrieve the block.
+If we know we need to read all or multiple blocks in a file, we can use the size to determine how much to read in a given IO.
 
 ```
 ┌────────────────────────────────────────────────────────────────────────────┐
