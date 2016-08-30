@@ -61,7 +61,7 @@ Note that we used the default input and output configuration settings to get the
 
 * List all [measurements](/influxdb/v1.0/concepts/glossary/#measurement) in the `telegraf` [database](/influxdb/v1.0/concepts/glossary/#database):
 
-```bash
+```
 > SHOW MEASUREMENTS
 name: measurements
 ------------------
@@ -72,7 +72,7 @@ mem
 
 * List all [field keys](/influxdb/v1.0/concepts/glossary/#field-key) by measurement:
 
-```bash
+```
 > SHOW FIELD KEYS
 name: cpu
 ---------
@@ -92,7 +92,7 @@ name: mem
 ---------
 fieldKey		        fieldType
 active			        integer
-available		          integer
+available		        integer
 available_percent	    float
 buffered		        integer
 cached			        integer
