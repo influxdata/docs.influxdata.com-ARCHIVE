@@ -23,7 +23,9 @@ A CQ is an InfluxQL query that the system runs automatically and periodically wi
 
 CQs do not maintain any state. Each execution of a CQ is a standalone query that resamples all points in the database matching the conditions of the query.
 
-The time ranges of the CQ results have round-number boundaries that are set internally by the database. There is currently no way for users to alter the start or end times of the intervals.
+The time ranges of the CQ results have natural time boundaries that are set internally by the database.
+Users can use an [offset interval](/influxdb/v1.0/query_language/data_exploration/#configured-group-by-time-boundaries)
+to alter the start or end times of the intervals.
 
 Only admin users are allowed to work with continuous queries. For more on user privileges, see [Authentication and Authorization](/influxdb/v1.0/administration/authentication_and_authorization/#user-types-and-their-privileges).
 
@@ -39,8 +41,8 @@ The `CREATE CONTINUOUS QUERY` statement is essentially an InfluxQL query surroun
 The following discussion breaks the CQ statement into its meta portion (everything between `CREATE` and `BEGIN`) and query portion (everything between `BEGIN` and `END`).
 
 A successful `CREATE CONTINUOUS QUERY` statement returns an empty response.
-If you attempt to create a continuous query that already exists, InfluxDB does
-not return an error.
+If you attempt to create a continuous query that already exists and the body of the CQ hasn't changed, InfluxDB does not return an error.
+If you attempt to create a continuous query that already exists and the body of the CQ has changed, InfluxDB will return the error `continuous query already exists`.
 
 #### Meta syntax:
 ```
