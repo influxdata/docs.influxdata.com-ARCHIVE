@@ -7,155 +7,6 @@ menu:
     parent: concepts
 ---
 
-The 0.9 line of InfluxDB used BoltDB as the underlying storage engine.
-This writeup is about the Time Structured Merge Tree storage engine that was released in 0.9.5.
-There may be small discrepancies between the current implementation of TSM and this document.
-
-<a href="https://influxdata.com/blog/new-storage-engine-time-structured-merge-tree/" target="_">See the blog post announcement about the storage engine here</a>.
-
-## The new InfluxDB storage engine: from LSM Tree to B+Tree and back again to create the Time Structured Merge Tree
-
-The properties of the time series data use case make it challenging for many existing storage engines.
-Over the course of InfluxDB’s development we’ve tried a few of the more popular options.
-We started with LevelDB, an engine based on LSM Trees, which are optimized for write throughput.
-After that we tried BoltDB, an engine based on a memory mapped B+Tree, which is optimized for reads.
-Finally, we ended up building our own storage engine that is similar in many ways to LSM Trees.
-
-With our new storage engine we were able to achieve up to a 45x reduction in disk space usage from our B+Tree setup with even greater write throughput and compression than what we saw with LevelDB and its variants.
-Using batched writes, we were able to insert more than 300,000 points per second on a c3.8xlarge instance in AWS.
-This post will cover the details of that evolution and end with an in-depth look at our new storage engine and its inner workings.
-
-### Properties of Time Series Data
-
-The workload of time series data is quite different from normal database workloads.
-There are a number of factors that conspire to make it very difficult to get it to scale and perform well:
-
-* Billions of individual data points
-* High write throughput
-* High read throughput
-* Large deletes to free up disk space
-* Mostly an insert/append workload, very few updates
-
-The first and most obvious problem is one of scale.
-In DevOps, for instance, you can collect hundreds of millions or billions of unique data points every day.
-
-For example, let’s say we have 200 VMs or servers running, with each server collecting an average of 100 measurements every 10 seconds.
-Given there are 86,400 seconds in a day, a single measurement will generate 8,640 points in a day, per server.
-That gives us a total of 200 * 100 * 8,640 = 172,800,000 individual data points per day.
-We find similar or larger numbers in sensor data use cases.
-
-The volume of data means that the write throughput can be very high.
-We regularly get requests for setups than can handle hundreds of thousands of writes per second.
-Some larger companies will only consider systems that can handle millions of writes per second.
-
-At the same time, time series data can be a high read throughput use case.
-It’s true that if you’re tracking 700,000 unique metrics or time series, you can’t hope to visualize all of them, which is what leads many people to think that you don’t actually read most of the data that goes into the database.
-However, other than dashboards that people have up on their screens, there are automated systems for monitoring or combining the large volume of time series data with other types of data.
-
-Inside InfluxDB, we have aggregates that can get calculated on the fly that can combine tens of thousands of time series into a single view.
-Each one of those queries does a read on each data point, which means that for InfluxDB, the read throughput is often many times higher than the write throughput.
-
-Given that time series is mostly an append only workload, you might think that it’s possible to get great performance on a B+Tree.
-Appends in the keyspace are efficient and you can achieve greater than 100,000 per second.
-However, we have those appends happening in individual time series.
-So the inserts end up looking more like random inserts than append only inserts.
-
-One of the biggest problems we found with time series data is that it’s very common to delete all data after it gets past a certain age.
-The common pattern here is that you’ll have high precision data that is kept for a short period of time like a few hours or a few weeks.
-You’ll then downsample and aggregate that data into lower precision, which you’ll keep around for much longer.
-
-The naive implementation would be to simply delete each record once it gets past its expiration time.
-However, that means that once you’re up to your window of retention, you’ll be doing just as many deletes as you do writes, which is something most storage engines aren’t designed for.
-
-Let’s dig into the details of the two types of storage engines we tried and how these properties had a significant impact on our performance.
-
-### LevelDB and Log Structured Merge Trees
-
-When the InfluxDB project began, we picked LevelDB as the storage engine because it was what we used for time series data storage for the product that was the precursor to InfluxDB.
-We knew that it had great properties for write throughput and everything seemed to just work.
-
-LevelDB is an implementation of a Log Structured Merge Tree (or LSM Tree) that was built as an open source project at Google.
-It exposes an API for a key/value store where the key space is sorted.
-This last part is important for time series data as it would allow us to quickly go through ranges of time as long as the timestamp was in the key.
-
-LSM Trees are based on a log that takes writes and two structures known as Mem Tables and SSTables.
-These tables represent the sorted keyspace.
-SSTables are read only files that continuously get replaced by other SSTables that merge inserts and updates into the keyspace.
-
-The two biggest advantages that LevelDB had for us were high write throughput and built in compression.
-However, as we learned more about what people needed with time series data, we encountered a few insurmountable challenges.
-
-The first problem we had was that LevelDB doesn’t support hot backups.
-If you want to do a safe backup of the database, you have to close it and then copy it.
-The LevelDB variants RocksDB and HyperLevelDB fix this problem so we could have moved to them, but there was another problem that was more pressing that we didn’t think could be solved with either of them.
-
-We needed to give our users a way to automatically manage the data retention of their time series data.
-That meant that we’d have to do very large scale deletes.
-In LSM Trees a delete is as expensive, if not more so, than a write.
-A delete will write a new record known as a tombstone.
-After that queries will merge the result set with any tombstones to clear out the deletes.
-Later, a compaction will run that will remove the tombstone and the underlying record from the SSTable file.
-
-To get around doing deletes, we split data across what we call shards, which are contiguous blocks of time.
-Shards would typically hold either a day or 7 days worth of data.
-Each shard mapped to an underlying LevelDB.
-This meant that we could drop an entire day of data by just closing out the database and removing the underlying files.
-
-Users of RocksDB may at this point bring up a feature called ColumnFamilies.
-When putting time series data into Rocks, it’s common to split blocks of time into column families and then drop those when their time is up.
-It’s the same general idea that you create a separate area where you can just drop files instead of updating any indexes when you delete a large block of old data.
-Dropping a column family is a very efficient operation.
-However, column families are a fairly new feature and we had another use case for shards.
-
-Organizing data into shards meant that it could be moved within a cluster without having to examine billions of keys.
-At the time of this writing, it was not possible to move a column family in one RocksDB to another.
-Old shards are typically cold for writes so moving them around would be cheap and easy and we would have the added benefit of having a spot in the keyspace that is cold for writes so it would be easier to do consistency checks later.
-
-The organization of data into shards worked great for a little while until a large amount of data went into InfluxDB.
-For users that had 6 months or a year of data in large databases, they would run out of file handles.
-LevelDB splits the data out over many small files.
-Having dozens or hundreds of these databases open in a single process ended up creating a big problem.
-It’s not something we found with a large number of users, but for anyone that was stressing the database to its limits, they were hitting this problem and we had no fix for it.
-There were simply too many file handles open.
-
-### BoltDB and mmap B+Trees
-
-After struggling with LevelDB and its variants for a year we decided to move over to BoltDB, a pure Golang database heavily inspired by LMDB, a mmap B+Tree database written in C.
-It has the same API semantics as LevelDB: a key value store where the keyspace is ordered.
-Many of our users were surprised about this move after we posted some early testing results of the LevelDB variants vs.
-LMDB (a mmap B+Tree) that showed RocksDB as the best performer.
-
-However, there were other considerations that went into this decision outside of the pure write performance.
-At this point our most important goal was to get to something stable that could be run in production and backed up.
-BoltDB also had the advantage of being written in pure Go, which simplified our build chain immensely and made it easy to build for other OSes and platforms like Windows and ARM.
-
-The biggest win for us was that BoltDB used a single file as the database.
-At this point our most common source of bug reports were from people running out of file handles.
-Bolt solved the hot backup problem, made it easy to move a shard from one server to another, and the file limit problems all at the same time.
-
-We were willing to take a hit on write throughput if it meant that we’d have a system that was more reliable and stable that we could build on.
-Our reasoning was that for anyone pushing really big write loads, they’d be running a cluster anyway.
-
-We released versions 0.9.0 to 0.9.2 based on BoltDB.
-From a development perspective it was delightful.
-Clean API, fast and easy to build in our Go project, and reliable.
-However, after running for a while we found a big problem with write throughput falling over.
-After the database got to a certain size (over a few GB) writes would start spiking IOPS.
-
-Some users were able to get past this by putting it on big hardware with near unlimited IOPS.
-However, most users are on VMs with limited resources in the cloud.
-We had to figure out a way to reduce the impact of writing a bunch of points into hundreds of thousands of series at a time.
-
-With the 0.9.3 and 0.9.4 releases our plan was to put a write ahead log (WAL) in front of Bolt.
-That way we could reduce the number of random insertions into the keyspace.
-Instead, we’d buffer up multiple writes at once that were next to each other and then flush them.
-However, that only served to delay the problem.
-High IOPS still became an issue and it showed up very quickly for anyone operating at even moderate work loads.
-
-However, our experience building the first WAL implementation in front of Bolt gave us the confidence we needed that the write problem could be solved.
-The performance of the WAL itself was fantastic, the index simply could not keep up.
-At this point we started thinking again about how we could create something similar to an LSM Tree that could keep up with our write load.
-
 ### The new InfluxDB storage engine and LSM refined
 
 The new InfluxDB storage engine looks very similar to a LSM Tree.
@@ -414,3 +265,152 @@ If there are overlapping blocks of time, the indexe entries are sorted to ensure
 
 When iterating over the index entries, the blocks are read sequentially from the blocks section.
 The blocks is decompressed and we seek to that specific point.
+
+
+The 0.8 line of InfluxDB allowed multiple storage engines, including LevelDB, RocksDB, HyperLevelDB, and LMDB.
+The 0.9 line of InfluxDB used BoltDB as the underlying storage engine.
+This writeup is about the Time Structured Merge Tree storage engine that was released in 0.9.5.
+
+## The new InfluxDB storage engine: from LSM Tree to B+Tree and back again to create the Time Structured Merge Tree
+
+The properties of the time series data use case make it challenging for many existing storage engines.
+Over the course of InfluxDB’s development we’ve tried a few of the more popular options.
+We started with LevelDB, an engine based on LSM Trees, which are optimized for write throughput.
+After that we tried BoltDB, an engine based on a memory mapped B+Tree, which is optimized for reads.
+Finally, we ended up building our own storage engine that is similar in many ways to LSM Trees.
+
+With our new storage engine we were able to achieve up to a 45x reduction in disk space usage from our B+Tree setup with even greater write throughput and compression than what we saw with LevelDB and its variants.
+Using batched writes, we were able to insert more than 300,000 points per second on a c3.8xlarge instance in AWS.
+This post will cover the details of that evolution and end with an in-depth look at our new storage engine and its inner workings.
+
+### Properties of Time Series Data
+
+The workload of time series data is quite different from normal database workloads.
+There are a number of factors that conspire to make it very difficult to get it to scale and perform well:
+
+* Billions of individual data points
+* High write throughput
+* High read throughput
+* Large deletes to free up disk space
+* Mostly an insert/append workload, very few updates
+
+The first and most obvious problem is one of scale.
+In DevOps, for instance, you can collect hundreds of millions or billions of unique data points every day.
+
+For example, let’s say we have 200 VMs or servers running, with each server collecting an average of 100 measurements every 10 seconds.
+Given there are 86,400 seconds in a day, a single measurement will generate 8,640 points in a day, per server.
+That gives us a total of 200 * 100 * 8,640 = 172,800,000 individual data points per day.
+We find similar or larger numbers in sensor data use cases.
+
+The volume of data means that the write throughput can be very high.
+We regularly get requests for setups than can handle hundreds of thousands of writes per second.
+Some larger companies will only consider systems that can handle millions of writes per second.
+
+At the same time, time series data can be a high read throughput use case.
+It’s true that if you’re tracking 700,000 unique metrics or time series, you can’t hope to visualize all of them, which is what leads many people to think that you don’t actually read most of the data that goes into the database.
+However, other than dashboards that people have up on their screens, there are automated systems for monitoring or combining the large volume of time series data with other types of data.
+
+Inside InfluxDB, we have aggregates that can get calculated on the fly that can combine tens of thousands of time series into a single view.
+Each one of those queries does a read on each data point, which means that for InfluxDB, the read throughput is often many times higher than the write throughput.
+
+Given that time series is mostly an append only workload, you might think that it’s possible to get great performance on a B+Tree.
+Appends in the keyspace are efficient and you can achieve greater than 100,000 per second.
+However, we have those appends happening in individual time series.
+So the inserts end up looking more like random inserts than append only inserts.
+
+One of the biggest problems we found with time series data is that it’s very common to delete all data after it gets past a certain age.
+The common pattern here is that you’ll have high precision data that is kept for a short period of time like a few hours or a few weeks.
+You’ll then downsample and aggregate that data into lower precision, which you’ll keep around for much longer.
+
+The naive implementation would be to simply delete each record once it gets past its expiration time.
+However, that means that once you’re up to your window of retention, you’ll be doing just as many deletes as you do writes, which is something most storage engines aren’t designed for.
+
+Let’s dig into the details of the two types of storage engines we tried and how these properties had a significant impact on our performance.
+
+### LevelDB and Log Structured Merge Trees
+
+When the InfluxDB project began, we picked LevelDB as the storage engine because it was what we used for time series data storage for the product that was the precursor to InfluxDB.
+We knew that it had great properties for write throughput and everything seemed to just work.
+
+LevelDB is an implementation of a Log Structured Merge Tree (or LSM Tree) that was built as an open source project at Google.
+It exposes an API for a key/value store where the key space is sorted.
+This last part is important for time series data as it would allow us to quickly go through ranges of time as long as the timestamp was in the key.
+
+LSM Trees are based on a log that takes writes and two structures known as Mem Tables and SSTables.
+These tables represent the sorted keyspace.
+SSTables are read only files that continuously get replaced by other SSTables that merge inserts and updates into the keyspace.
+
+The two biggest advantages that LevelDB had for us were high write throughput and built in compression.
+However, as we learned more about what people needed with time series data, we encountered a few insurmountable challenges.
+
+The first problem we had was that LevelDB doesn’t support hot backups.
+If you want to do a safe backup of the database, you have to close it and then copy it.
+The LevelDB variants RocksDB and HyperLevelDB fix this problem so we could have moved to them, but there was another problem that was more pressing that we didn’t think could be solved with either of them.
+
+We needed to give our users a way to automatically manage the data retention of their time series data.
+That meant that we’d have to do very large scale deletes.
+In LSM Trees a delete is as expensive, if not more so, than a write.
+A delete will write a new record known as a tombstone.
+After that queries will merge the result set with any tombstones to clear out the deletes.
+Later, a compaction will run that will remove the tombstone and the underlying record from the SSTable file.
+
+To get around doing deletes, we split data across what we call shards, which are contiguous blocks of time.
+Shards would typically hold either a day or 7 days worth of data.
+Each shard mapped to an underlying LevelDB.
+This meant that we could drop an entire day of data by just closing out the database and removing the underlying files.
+
+Users of RocksDB may at this point bring up a feature called ColumnFamilies.
+When putting time series data into Rocks, it’s common to split blocks of time into column families and then drop those when their time is up.
+It’s the same general idea that you create a separate area where you can just drop files instead of updating any indexes when you delete a large block of old data.
+Dropping a column family is a very efficient operation.
+However, column families are a fairly new feature and we had another use case for shards.
+
+Organizing data into shards meant that it could be moved within a cluster without having to examine billions of keys.
+At the time of this writing, it was not possible to move a column family in one RocksDB to another.
+Old shards are typically cold for writes so moving them around would be cheap and easy and we would have the added benefit of having a spot in the keyspace that is cold for writes so it would be easier to do consistency checks later.
+
+The organization of data into shards worked great for a little while until a large amount of data went into InfluxDB.
+For users that had 6 months or a year of data in large databases, they would run out of file handles.
+LevelDB splits the data out over many small files.
+Having dozens or hundreds of these databases open in a single process ended up creating a big problem.
+It’s not something we found with a large number of users, but for anyone that was stressing the database to its limits, they were hitting this problem and we had no fix for it.
+There were simply too many file handles open.
+
+### BoltDB and mmap B+Trees
+
+After struggling with LevelDB and its variants for a year we decided to move over to BoltDB, a pure Golang database heavily inspired by LMDB, a mmap B+Tree database written in C.
+It has the same API semantics as LevelDB: a key value store where the keyspace is ordered.
+Many of our users were surprised about this move after we posted some early testing results of the LevelDB variants vs.
+LMDB (a mmap B+Tree) that showed RocksDB as the best performer.
+
+However, there were other considerations that went into this decision outside of the pure write performance.
+At this point our most important goal was to get to something stable that could be run in production and backed up.
+BoltDB also had the advantage of being written in pure Go, which simplified our build chain immensely and made it easy to build for other OSes and platforms like Windows and ARM.
+
+The biggest win for us was that BoltDB used a single file as the database.
+At this point our most common source of bug reports were from people running out of file handles.
+Bolt solved the hot backup problem, made it easy to move a shard from one server to another, and the file limit problems all at the same time.
+
+We were willing to take a hit on write throughput if it meant that we’d have a system that was more reliable and stable that we could build on.
+Our reasoning was that for anyone pushing really big write loads, they’d be running a cluster anyway.
+
+We released versions 0.9.0 to 0.9.2 based on BoltDB.
+From a development perspective it was delightful.
+Clean API, fast and easy to build in our Go project, and reliable.
+However, after running for a while we found a big problem with write throughput falling over.
+After the database got to a certain size (over a few GB) writes would start spiking IOPS.
+
+Some users were able to get past this by putting it on big hardware with near unlimited IOPS.
+However, most users are on VMs with limited resources in the cloud.
+We had to figure out a way to reduce the impact of writing a bunch of points into hundreds of thousands of series at a time.
+
+With the 0.9.3 and 0.9.4 releases our plan was to put a write ahead log (WAL) in front of Bolt.
+That way we could reduce the number of random insertions into the keyspace.
+Instead, we’d buffer up multiple writes at once that were next to each other and then flush them.
+However, that only served to delay the problem.
+High IOPS still became an issue and it showed up very quickly for anyone operating at even moderate work loads.
+
+However, our experience building the first WAL implementation in front of Bolt gave us the confidence we needed that the write problem could be solved.
+The performance of the WAL itself was fantastic, the index simply could not keep up.
+At this point we started thinking again about how we could create something similar to an LSM Tree that could keep up with our write load.
+
