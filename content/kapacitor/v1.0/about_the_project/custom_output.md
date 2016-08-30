@@ -101,7 +101,7 @@ Next we need a consistent way to create a new instance of our node.
 But to do so we need to think about how this node connects to other nodes.
 Since we are an output node as far as Kapacitor is concerned this is the end of the pipeline. 
 We will not provide any outbound edges, the graph ends on this node.
-Out imaginary HouseDB is flexible and can store data in batches or as single data points. 
+Our imaginary HouseDB is flexible and can store data in batches or as single data points. 
 As a result we do not care what type of data the HouseDBOutNode node receives.
 With these facts in mind we can define a function to create a new HouseDBOutNode.
 Add this function to the end of the `housedb_out.go` file:
@@ -491,7 +491,7 @@ func newMyCustomNode(e EdgeType, n Node) *MyCustomNode {
 }
 ```
 
-The second difference is that it is possible to define a method that sets fields on a pipeline Node and just return the same instance in order to create a `property method`.
+The second difference is that it is possible to define a method that sets fields on a pipeline Node and returns the same instance in order to create a `property method`.
 For example:
 
 ```go
