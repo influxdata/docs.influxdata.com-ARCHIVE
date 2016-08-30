@@ -10,10 +10,10 @@ menu:
     parent: nodes
 ---
 
-A `window` node batches data within a moving time range.
+A `window` node caches data within a moving time range.
 The `period` property of `window` defines the time range covered by `window`.
 
-The `every` property of `window` defines the frequency the window
+The `every` property of `window` defines the frequency at which the window
 is emitted to the next node in the pipeline.
 
 The `align` property of `window` defines how to align the window edges.
