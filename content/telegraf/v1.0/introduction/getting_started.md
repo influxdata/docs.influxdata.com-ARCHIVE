@@ -90,10 +90,10 @@ usage_user		            float
 
 name: mem
 ---------
-fieldKey                    fieldType
-active			            integer
-available		            integer
-available_percent	        float
+fieldKey                   fieldType
+active			                integer
+available		               integer
+available_percent	       float
 buffered		            integer
 cached			            integer
 free			            integer
