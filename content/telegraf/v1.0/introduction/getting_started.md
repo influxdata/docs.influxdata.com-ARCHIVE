@@ -76,31 +76,31 @@ mem
 > SHOW FIELD KEYS
 name: cpu
 ---------
-fieldKey            fieldType
-usage_guest         float
-usage_guest_nice	float
-usage_idle		    float
-usage_iowait		float
-usage_irq		    float
-usage_nice		    float
-usage_softirq		float
-usage_steal		    float
-usage_system		float
-usage_user		    float
+fieldKey                fieldType
+usage_guest             float
+usage_guest_nice	    float
+usage_idle		        float
+usage_iowait		    float
+usage_irq		        float
+usage_nice		        float
+usage_softirq		    float
+usage_steal		        float
+usage_system		    float
+usage_user		        float
 
 name: mem
 ---------
-fieldKey		    fieldType
-active			    integer
-available		    integer
-available_percent	float
-buffered		    integer
-cached			    integer
-free			    integer
-inactive		    integer
-total			    integer
-used			    integer
-used_percent		float
+fieldKey		        fieldType
+active			        integer
+available		          integer
+available_percent	    float
+buffered		        integer
+cached			        integer
+free			        integer
+inactive		        integer
+total			        integer
+used			        integer
+used_percent		    float
 ```
 
 * Select a sample of the data in the [field](/influxdb/v1.0/concepts/glossary/#field) `usage_idle` in the measurement `cpu_usage_idle`:
