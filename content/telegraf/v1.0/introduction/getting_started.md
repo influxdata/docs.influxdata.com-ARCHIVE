@@ -78,10 +78,10 @@ name: cpu
 ---------
 fieldKey                fieldType
 usage_guest             float
-usage_guest_nice	    float
-usage_idle		        float
-usage_iowait		    float
-usage_irq		        float
+usage_guest_nice	        float
+usage_idle		             float
+usage_iowait		           float
+usage_irq		                 float
 usage_nice		        float
 usage_softirq		    float
 usage_steal		        float
