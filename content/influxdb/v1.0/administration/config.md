@@ -292,7 +292,7 @@ this option to `true` will disable reporting.
 
 ### bind-address = ":8088"
 
-This is the port that backup/restore will use.
+This is the port that [backup/restore](/influxdb/v1.0/administration/backup_and_restore/) will use.
 
 ## [meta]
 
@@ -309,8 +309,8 @@ Files in the `meta` directory include `meta.db`.
 
 ### retention-autocreate = true
 
-Retention policy auto-creation automatically creates a [`DEFAULT` retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp) when a database is created named `autogen`.
-The retention policy is has a name of `autogen` with an infinite duration and is also set as the
+Retention policy auto-creation automatically creates the [`DEFAULT` retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp) `autogen` when a database is created.
+The retention policy `autogen` has an infinite duration and is also set as the
 database's `DEFAULT` retention policy, which is used when a write or query does
 not specify a retention policy.
 Disable this setting to prevent the creation of this retention policy when creating databases.
@@ -496,7 +496,7 @@ The interval at which InfluxDB records statistics.
 
 ## [subscriber]
 
-This section controls how [Kapacitor](https://github.com/influxdata/kapacitor) will receive data.
+This section controls how [Kapacitor](/kapacitor/v1.0/) will receive data.
 
 ### enabled = true
 
@@ -771,7 +771,7 @@ The input will flush at least this often even if it hasn't reached the configure
 
 ### precision = ""
 
-Time precision used when decoding time values.  Defaults to `nanoseconds` which is the default of the database.
+[Time precision](/influxdb/v1.0/query_language/spec/#durations) used when decoding time values.  Defaults to `nanoseconds` which is the default of the database.
 
 ## [continuous_queries]
 
