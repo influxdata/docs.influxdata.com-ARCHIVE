@@ -8,7 +8,7 @@ menu:
 
 ## Entitlements
 
-A valid license key is not required in order to start `influxd-meta` or `influxd`.
+A valid license key is required in order to start `influxd-meta` or `influxd`.
 License keys restrict the number of data nodes that can be added to a cluster as well as the number of CPU cores a data node can use.
 Without a valid license, the process will abort startup.
 
