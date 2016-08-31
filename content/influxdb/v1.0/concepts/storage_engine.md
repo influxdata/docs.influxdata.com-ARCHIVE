@@ -168,9 +168,9 @@ The four high bits store the compression type and the four low bits are used by 
 ##### Timestamps
 
 Timestamp encoding is adaptive and based on the structure of the timestamps that are encoded.
-It uses a combination of delta encoding, scaling and compression using simple8b, run-length encoding as well as falling back to no compression if needed.
+It uses a combination of delta encoding, scaling, and compression using simple8b run-length encoding, as well as falling back to no compression if needed.
 
-Timestamp resolution can be as granular as a nanosecond and, uncompressed, require 8 bytes to store.
+Timestamp resolution is variable but can be as granular as a nanosecond, requiring up to 8 bytes to store uncompressed.
 During encoding, the values are first delta-encoded.
 The first value is the starting timestamp and subsequent values are the differences from the prior value.
 This usually converts the values into much smaller integers that are easier to compress.
@@ -179,30 +179,31 @@ When timestamps have this structure, they are scaled by the largest common divis
 This has the effect of converting very large integer deltas into smaller ones that compress even better.
 
 Using these adjusted values, if all the deltas are the same, the time range is stored using run-length encoding.
-If run-length encoding is not possible and all values are less than 1 << 60 - 1 (~36.5 yrs in nanosecond resolution), then the timestamps are encoded using simple8b encoding which is a 64bit word-aligned integer encoding.
-This encoding packs up multiple integers into a single 64bit word.
-If any value exceeds the maximum values, the deltas are stored uncompressed using 8 bytes each for the block.
+If run-length encoding is not possible and all values are less than (1 << 60) - 1 ([~18.3 years](https://www.wolframalpha.com/input/?i=(1+%3C%3C+60)+-+1+nanoseconds+to+years) at nanosecond resolution), then the timestamps are encoded using [simple8b encoding](https://github.com/jwilder/encoding/tree/master/simple8b).
+Simple8b encoding is a 64bit word-aligned integer encoding that packs multiple integers into a single 64bit word.
+If any value exceeds the maximum the deltas are stored uncompressed using 8 bytes each for the block.
 Future encodings may use a patched scheme such as Patched Frame-Of-Reference (PFOR) to handle outliers more effectively.
 
 ##### Floats
 
-Floats are encoded using an implementation of the Facebook Gorilla paper.
-This encoding XORs consecutive values together which produces a small result when the values are close together.
-The delta is then stored using control bits to indicate how many leading and trailing zero are in the XOR value.
-Our version removes the timestamp encoding, as described in paper, and only encodes the float values.
+Floats are encoded using an implementation of the [Facebook Gorilla paper](http://www.vldb.org/pvldb/vol8/p1816-teller.pdf).
+The encoding XORs consecutive values together to produce a small result when the values are close together.
+The delta is then stored using control bits to indicate how many leading and trailing zeroes are in the XOR value.
+Our implementation removes the timestamp encoding described in paper and only encodes the float values.
 
 ##### Integers
 
 Integer encoding uses two different strategies depending on the range of values in the uncompressed data.
-Encoded values are first encoded using zig zag encoding which is also used for signed integers in Google Protocol Buffers.
+Encoded values are first encoded using [ZigZag encoding](https://developers.google.com/protocol-buffers/docs/encoding?hl=en#signed-integers).
 This interleaves positive and negative integers across a range of positive integers.
 
 For example, [-2,-1,0,1] becomes [3,1,0,2].
-See https://developers.google.com/protocol-buffers/docs/encoding?hl=en#signed-integers for more information.
+See Google's [Protocol Buffers documentation](https://developers.google.com/protocol-buffers/docs/encoding?hl=en#signed-integers) for more information.
 
-If all the zig zag encoded values less than 1 << 60 - 1, they are compressed using the simple8b encoding.
-If any values is larger than the maximum value, then values are stored uncompressed in the block.
-If all of the values are the same, run-length encoding is used.  This works very well for values are 0 or some constant value almost always.
+If all ZigZag encoded values are less than (1 << 60) - 1, they are compressed using simple8b encoding.
+If any values are larger than the maximum then all values are stored uncompressed in the block.
+If all values are identical, run-length encoding is used.  
+This works very well for values that are frequently constant.
 
 ##### Booleans
 
@@ -210,8 +211,8 @@ Booleans are encoded using a simple bit packing strategy where each boolean uses
 The number of booleans encoded is stored using variable-byte encoding at the beginning of the block.
 
 ##### Strings
-Strings are encoding using Snappy compression.
-Each string is packed next each other in order and compressed as one larger block.
+Strings are encoding using [Snappy](http://google.github.io/snappy/) compression.
+Each string is packed consecutively and they are compressed as one larger block.
 
 #### Compactions
 
