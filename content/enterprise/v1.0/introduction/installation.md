@@ -104,13 +104,14 @@ hostname = "<enterprise-beta-meta-0x>" #✨
 
 #### 3. Start the meta node
 
-Enter:
-```
-/etc/init.d/influxdb-meta start
-```
-or:
+On sysvinit systems, enter:
 ```
 service influxdb-meta start
+```
+
+On systemd systems, enter:
+```
+sudo systemctl start influxdb-meta
 ```
 
 Check to see that the process is running by entering:
@@ -200,14 +201,16 @@ purge-interval = "1h0m0s"
 `license-path` setting to the path of the license file.
 
 #### 3. Start the data node
-Enter:
-```
-/etc/init.d/influxdb start
-```
-or:
+On sysvinit systems, enter:
 ```
 service influxdb start
 ```
+
+On systemd systems, enter:
+```
+sudo systemctl start influxdb
+```
+
 Check to see that the process is running by entering:
 ```
 ps aux | grep influxdb
@@ -398,8 +401,15 @@ Output:
 ```
 
 #### 3. Start the InfluxEnterprise web console
+
+On sysvinit systems, enter:
 ```
 service influx-enterprise start
+```
+
+On systemd systems, enter:
+```
+sudo systemctl start influx-enterprise
 ```
 
 Check to see that the process is running by entering:
