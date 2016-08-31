@@ -46,6 +46,7 @@ Index
 -	[Default](/kapacitor/v1.0/nodes/where_node/#default)
 -	[Delete](/kapacitor/v1.0/nodes/where_node/#delete)
 -	[Derivative](/kapacitor/v1.0/nodes/where_node/#derivative)
+-	[Difference](/kapacitor/v1.0/nodes/where_node/#difference)
 -	[Distinct](/kapacitor/v1.0/nodes/where_node/#distinct)
 -	[Elapsed](/kapacitor/v1.0/nodes/where_node/#elapsed)
 -	[Eval](/kapacitor/v1.0/nodes/where_node/#eval)
@@ -63,6 +64,8 @@ Index
 -	[Mean](/kapacitor/v1.0/nodes/where_node/#mean)
 -	[Median](/kapacitor/v1.0/nodes/where_node/#median)
 -	[Min](/kapacitor/v1.0/nodes/where_node/#min)
+-	[Mode](/kapacitor/v1.0/nodes/where_node/#mode)
+-	[MovingAverage](/kapacitor/v1.0/nodes/where_node/#movingaverage)
 -	[Percentile](/kapacitor/v1.0/nodes/where_node/#percentile)
 -	[Sample](/kapacitor/v1.0/nodes/where_node/#sample)
 -	[Shift](/kapacitor/v1.0/nodes/where_node/#shift)
@@ -109,7 +112,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 
 ### Combine
 
-Combine this node with itself. The data is combine on timestamp. 
+Combine this node with itself. The data are combined on timestamp. 
 
 
 ```javascript
@@ -133,7 +136,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 
 ### Deadman
 
-Helper function for creating an alert on low throughput, aka deadman&#39;s switch. 
+Helper function for creating an alert on low throughput, a.k.a. deadman&#39;s switch. 
 
 - Threshold -- trigger alert if throughput drops below threshold in points/interval. 
 - Interval -- how often to check the throughput. 
@@ -176,7 +179,7 @@ Example:
 
 The `id` and `message` alert properties can be configured globally via the &#39;deadman&#39; configuration section. 
 
-Since the [AlertNode](/kapacitor/v1.0/nodes/alert_node/) is the last piece it can be further modified as normal. 
+Since the [AlertNode](/kapacitor/v1.0/nodes/alert_node/) is the last piece it can be further modified as usual. 
 Example: 
 
 
@@ -252,6 +255,18 @@ node|derivative(field string)
 Returns: [DerivativeNode](/kapacitor/v1.0/nodes/derivative_node/)
 
 
+### Difference
+
+Compute the difference between points independent of elapsed time. 
+
+
+```javascript
+node|difference(field string)
+```
+
+Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
+
+
 ### Distinct
 
 Produce batch of only the distinct points. 
@@ -279,8 +294,8 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 ### Eval
 
 Create an eval node that will evaluate the given transformation function to each data point. 
-A list of expressions may be provided and will be evaluated in the order they are given 
-and results of previous expressions are made available to later expressions. 
+A list of expressions may be provided and will be evaluated in the order they are given. 
+The results are available to later expressions. 
 
 
 ```javascript
@@ -350,6 +365,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 ### HoltWintersWithFit
 
 Compute the holt-winters forecast of a data set. 
+This method also outputs all the points used to fit the data in addition to the forecasted data. 
 
 
 ```javascript
@@ -361,11 +377,11 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 
 ### HttpOut
 
-Create an http output node that caches the most recent data it has received. 
-The cached data is available at the given endpoint. 
+Create an HTTP output node that caches the most recent data it has received. 
+The cached data are available at the given endpoint. 
 The endpoint is the relative path from the API endpoint of the running task. 
-For example if the task endpoint is at &#34;/api/v1/task/&lt;task_name&gt;&#34; and endpoint is 
-&#34;top10&#34;, then the data can be requested from &#34;/api/v1/task/&lt;task_name&gt;/top10&#34;. 
+For example, if the task endpoint is at `/kapacitor/v1/tasks/&lt;task_id&gt;` and endpoint is 
+`top10`, then the data can be requested from `/kapacitor/v1/tasks/&lt;task_id&gt;/top10`. 
 
 
 ```javascript
@@ -389,7 +405,7 @@ Returns: [InfluxDBOutNode](/kapacitor/v1.0/nodes/influx_d_b_out_node/)
 
 ### Join
 
-Join this node with other nodes. The data is joined on timestamp. 
+Join this node with other nodes. The data are joined on timestamp. 
 
 
 ```javascript
@@ -450,7 +466,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 ### Median
 
 Compute the median of the data. Note, this method is not a selector, 
-if you want the median point use .percentile(field, 50.0). 
+if you want the median point use `.percentile(field, 50.0)`. 
 
 
 ```javascript
@@ -467,6 +483,31 @@ Select the minimum point.
 
 ```javascript
 node|min(field string)
+```
+
+Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
+
+
+### Mode
+
+Compute the mode of the data. 
+
+
+```javascript
+node|mode(field string)
+```
+
+Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
+
+
+### MovingAverage
+
+Compute a moving average of the last window points. 
+No points are emitted until the window is full. 
+
+
+```javascript
+node|movingAverage(field string, window int64)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
@@ -512,7 +553,7 @@ Returns: [ShiftNode](/kapacitor/v1.0/nodes/shift_node/)
 
 ### Spread
 
-Compute the difference between min and max points. 
+Compute the difference between `min` and `max` points. 
 
 
 ```javascript
@@ -586,11 +627,11 @@ Returns: [UnionNode](/kapacitor/v1.0/nodes/union_node/)
 
 ### Where
 
-And another expression onto the existing expression. 
+Create a new node that filters the data stream by a given expression. 
 
 
 ```javascript
-node|where(lambda ast.LambdaNode)
+node|where(expression ast.LambdaNode)
 ```
 
 Returns: [WhereNode](/kapacitor/v1.0/nodes/where_node/)

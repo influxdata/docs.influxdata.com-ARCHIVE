@@ -11,8 +11,8 @@ menu:
 ---
 
 Evaluates expressions on each data point it receives. 
-A list of expressions may be provided and will be evaluated in the order they are given 
-and results of previous expressions are made available to later expressions. 
+A list of expressions may be provided and will be evaluated in the order they are given. 
+The results of expressions are available to later expressions in the list. 
 See the property [EvalNode.As](/kapacitor/v1.0/nodes/eval_node/#as) for details on how to reference the results. 
 
 Example: 
@@ -54,6 +54,7 @@ Index
 -	[Default](/kapacitor/v1.0/nodes/eval_node/#default)
 -	[Delete](/kapacitor/v1.0/nodes/eval_node/#delete)
 -	[Derivative](/kapacitor/v1.0/nodes/eval_node/#derivative)
+-	[Difference](/kapacitor/v1.0/nodes/eval_node/#difference)
 -	[Distinct](/kapacitor/v1.0/nodes/eval_node/#distinct)
 -	[Elapsed](/kapacitor/v1.0/nodes/eval_node/#elapsed)
 -	[Eval](/kapacitor/v1.0/nodes/eval_node/#eval)
@@ -71,6 +72,8 @@ Index
 -	[Mean](/kapacitor/v1.0/nodes/eval_node/#mean)
 -	[Median](/kapacitor/v1.0/nodes/eval_node/#median)
 -	[Min](/kapacitor/v1.0/nodes/eval_node/#min)
+-	[Mode](/kapacitor/v1.0/nodes/eval_node/#mode)
+-	[MovingAverage](/kapacitor/v1.0/nodes/eval_node/#movingaverage)
 -	[Percentile](/kapacitor/v1.0/nodes/eval_node/#percentile)
 -	[Sample](/kapacitor/v1.0/nodes/eval_node/#sample)
 -	[Shift](/kapacitor/v1.0/nodes/eval_node/#shift)
@@ -94,8 +97,8 @@ Property methods are marked using the `.` operator.
 ### As
 
 List of names for each expression. 
-The expressions are evaluated in order and the result 
-of a previous expression will be available in later expressions 
+The expressions are evaluated in order. The result 
+of an expression may be referenced by later expressions 
 via the name provided. 
 
 Example: 
@@ -121,12 +124,13 @@ node.as(names ...string)
 
 If called the existing fields will be preserved in addition 
 to the new fields being set. 
-If not called then only new fields are preserved. 
+If not called then only new fields are preserved. (Tags are 
+always preserved regardless how `keep` is used.) 
 
-Optionally intermediate values can be discarded 
-by passing a list of field names. 
-Only fields in the list will be kept. 
-If no list is given then all fields, new and old, are kept. 
+Optionally, intermediate values can be discarded 
+by passing a list of field names to be kept. 
+Only fields in the list will be retained, the rest will be discarded. 
+If no list is given then all fields are retained. 
 
 Example: 
 
@@ -139,9 +143,10 @@ Example:
 ```
 
 In the above example the original field `value` is preserved. 
-In addition the new field `value2` is calculated and used in evaluating 
-`inv_value2` but is discarded before the point is sent on to children nodes. 
-The resulting point has only two fields `value` and `inv_value2`. 
+The new field `value2` is calculated and used in evaluating 
+`inv_value2` but is discarded before the point is sent on to child nodes. 
+The resulting point has only two fields: `value` and `inv_value2`. 
+
 
 
 ```javascript
@@ -176,8 +181,8 @@ Example:
             .tags('value_bucket')
 ```
 
-The above example calculates a named bucket from the field `value`. 
-Then the `value_bucket` result is set as a tag &#39;value_bucket&#39; on the point, instead of as a field. 
+The above example calculates an expression from the field `value`, casts it as a string, and names it `value_bucket`. 
+The `value_bucket` expression is then converted from a field on the point to a tag `value_bucket` on the point. 
 
 Example: 
 
@@ -190,9 +195,9 @@ Example:
             .keep('value') // keep the original field `value` as well
 ```
 
-The above example calculates a named bucket from the field `value`. 
-Then the `value_bucket` result is set as a tag &#39;value_bucket&#39; on the point, instead of as a field. 
-The field `value` is also preserved on the point because of the `keep` property. 
+The above example calculates an expression from the field `value`, casts it as a string, and names it `value_bucket`. 
+The `value_bucket` expression is then converted from a field on the point to a tag `value_bucket` on the point. 
+The `keep` property preserves the original field `value`. 
 Tags are always kept since creating a tag implies you want to keep it. 
 
 
@@ -236,7 +241,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 
 ### Combine
 
-Combine this node with itself. The data is combine on timestamp. 
+Combine this node with itself. The data are combined on timestamp. 
 
 
 ```javascript
@@ -260,7 +265,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 
 ### Deadman
 
-Helper function for creating an alert on low throughput, aka deadman&#39;s switch. 
+Helper function for creating an alert on low throughput, a.k.a. deadman&#39;s switch. 
 
 - Threshold -- trigger alert if throughput drops below threshold in points/interval. 
 - Interval -- how often to check the throughput. 
@@ -303,7 +308,7 @@ Example:
 
 The `id` and `message` alert properties can be configured globally via the &#39;deadman&#39; configuration section. 
 
-Since the [AlertNode](/kapacitor/v1.0/nodes/alert_node/) is the last piece it can be further modified as normal. 
+Since the [AlertNode](/kapacitor/v1.0/nodes/alert_node/) is the last piece it can be further modified as usual. 
 Example: 
 
 
@@ -379,6 +384,18 @@ node|derivative(field string)
 Returns: [DerivativeNode](/kapacitor/v1.0/nodes/derivative_node/)
 
 
+### Difference
+
+Compute the difference between points independent of elapsed time. 
+
+
+```javascript
+node|difference(field string)
+```
+
+Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
+
+
 ### Distinct
 
 Produce batch of only the distinct points. 
@@ -406,8 +423,8 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 ### Eval
 
 Create an eval node that will evaluate the given transformation function to each data point. 
-A list of expressions may be provided and will be evaluated in the order they are given 
-and results of previous expressions are made available to later expressions. 
+A list of expressions may be provided and will be evaluated in the order they are given. 
+The results are available to later expressions. 
 
 
 ```javascript
@@ -477,6 +494,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 ### HoltWintersWithFit
 
 Compute the holt-winters forecast of a data set. 
+This method also outputs all the points used to fit the data in addition to the forecasted data. 
 
 
 ```javascript
@@ -488,11 +506,11 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 
 ### HttpOut
 
-Create an http output node that caches the most recent data it has received. 
-The cached data is available at the given endpoint. 
+Create an HTTP output node that caches the most recent data it has received. 
+The cached data are available at the given endpoint. 
 The endpoint is the relative path from the API endpoint of the running task. 
-For example if the task endpoint is at &#34;/api/v1/task/&lt;task_name&gt;&#34; and endpoint is 
-&#34;top10&#34;, then the data can be requested from &#34;/api/v1/task/&lt;task_name&gt;/top10&#34;. 
+For example, if the task endpoint is at `/kapacitor/v1/tasks/&lt;task_id&gt;` and endpoint is 
+`top10`, then the data can be requested from `/kapacitor/v1/tasks/&lt;task_id&gt;/top10`. 
 
 
 ```javascript
@@ -516,7 +534,7 @@ Returns: [InfluxDBOutNode](/kapacitor/v1.0/nodes/influx_d_b_out_node/)
 
 ### Join
 
-Join this node with other nodes. The data is joined on timestamp. 
+Join this node with other nodes. The data are joined on timestamp. 
 
 
 ```javascript
@@ -577,7 +595,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
 ### Median
 
 Compute the median of the data. Note, this method is not a selector, 
-if you want the median point use .percentile(field, 50.0). 
+if you want the median point use `.percentile(field, 50.0)`. 
 
 
 ```javascript
@@ -594,6 +612,31 @@ Select the minimum point.
 
 ```javascript
 node|min(field string)
+```
+
+Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
+
+
+### Mode
+
+Compute the mode of the data. 
+
+
+```javascript
+node|mode(field string)
+```
+
+Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
+
+
+### MovingAverage
+
+Compute a moving average of the last window points. 
+No points are emitted until the window is full. 
+
+
+```javascript
+node|movingAverage(field string, window int64)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.0/nodes/influx_q_l_node/)
@@ -639,7 +682,7 @@ Returns: [ShiftNode](/kapacitor/v1.0/nodes/shift_node/)
 
 ### Spread
 
-Compute the difference between min and max points. 
+Compute the difference between `min` and `max` points. 
 
 
 ```javascript

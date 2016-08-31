@@ -59,7 +59,7 @@ Chaining methods are marked using the `|` operator.
 
 ### Deadman
 
-Helper function for creating an alert on low throughput, aka deadman&#39;s switch. 
+Helper function for creating an alert on low throughput, a.k.a. deadman&#39;s switch. 
 
 - Threshold -- trigger alert if throughput drops below threshold in points/interval. 
 - Interval -- how often to check the throughput. 
@@ -102,7 +102,7 @@ Example:
 
 The `id` and `message` alert properties can be configured globally via the &#39;deadman&#39; configuration section. 
 
-Since the [AlertNode](/kapacitor/v1.0/nodes/alert_node/) is the last piece it can be further modified as normal. 
+Since the [AlertNode](/kapacitor/v1.0/nodes/alert_node/) is the last piece it can be further modified as usual. 
 Example: 
 
 
