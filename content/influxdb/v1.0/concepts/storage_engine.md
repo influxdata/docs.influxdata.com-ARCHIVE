@@ -115,12 +115,15 @@ The length of the blocks is stored in the index.
 
 Following the blocks is the index for the blocks in the file.
 The index is composed of a sequence of index entries ordered lexicographically by key and then by time.
-Each index entry starts with a key length and key followed by the block type (float, int, bool, string) and a count of the number of blocks in the file.  
-Each block entry is composed of the min and max time for the block, the offset into the file where the block is located and the the size of the block.
+The key includes the measurement name, tag set, and one field. 
+Multiple fields per point creates multiple indices in the TSM file.
+Each index entry starts with a key length and the key, followed by the block type (float, int, bool, string) and a count of the number of blocks in the file.  
+Each index block entry is composed of the min and max time for the block, the offset into the file where the block is located and the the size of the block.
 
 The index structure can provide efficient access to all blocks as well as the ability to determine the cost associated with accessing a given key.
-Given a key and timestamp, we can determine whether a file contains the block for that timestamp as well as where that block resides and how much data to read to retrieve the block.
-If we know we need to read all or multiple blocks in a file, we can use the size to determine how much to read in a given IO.
+Given a key and timestamp, we can determine whether a file contains the block for that timestamp. 
+We can also determine where that block resides and how much data must be read to retrieve the block.
+Knowing the size of the block, we can efficiently provision our IO statements.
 
 ```
 ┌────────────────────────────────────────────────────────────────────────────┐
@@ -155,9 +158,8 @@ Each block has one byte header, followed by the compressed timestamps and then t
 └───────┴─────┴─────────────────┴──────────────────┘
 ```
 
-The timestamps and values are stored separately as two compressed parts using different encodings depending on the data type and its shape.
-Storing them independently allows timestamp encoding to be used with different field types more easily.
-It also allows for different encodings to be used depending on the type of the data.
+The timestamps and values are compressed and stored separately using encodings dependent on the data type and its shape.
+Storing them independently allows timestamp encoding to be used for all timestamps, while allowing different encodings for different field types.
 For example, some points may be able to use run-length encoding whereas other may not.
 
 Each value type also contains a 1 byte header indicating the type of compression for the remaining bytes.
