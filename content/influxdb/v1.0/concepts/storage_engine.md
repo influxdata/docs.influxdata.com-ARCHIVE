@@ -216,39 +216,54 @@ Each string is packed consecutively and they are compressed as one larger block.
 
 #### Compactions
 
-Compactions are a peridoc process that migrates data stored in write optimized format into a more read optimized format.  The are a number of compactions that take place while a shard is hot for writes:
+Compactions are recurring processes that migrate data stored in a write-optimized format into a more read-optimized format.
+There are a number of stages of compaction that take place while a shard is hot for writes:
 
-* Snapshots - Values in the Cache and WAL need to be converted to TSM files to free memory and disk space used by the WAL segments.  These occur based on the cache memory and time thresholds.
-* Level Compactions - Level compactions (1-4) occur as the shape of data on disk in TSM files grows.  TSM files are compacted from snapshots to level 1 files.  Multiple level 1 files are compacted to produce level 2 files.  The process continues until files level 4 and reach a max size where they remain until deletes or later compactions optimized them further.  Lower level compactions are use compactions strategies that avoid decompressing and combining blocks which is CPU intensive.  Higher levels will re-combine blocks to full pack them and increase the compression ratio.
-* Index Optimization - When many level 4 TSM files accumulate, the internal indexes start to become larger and more costly to access.  An index optimization compaction will run to split the series and indexes across a new set of TSM files.
-* Full Compactions - Full compactions run when a shard has become cold for writes for long time or deletes have occurred on the shard.  Full compactions produce an optimal set of TSM files.  Once a shard is fully compacted, no other compactions will run on it unless new writes or deletes are stored.
-
+* Snapshots - Values in the Cache and WAL must be converted to TSM files to free memory and disk space used by the WAL segments.
+These compactions occur based on the cache memory and time thresholds.
+* Level Compactions - Level compactions (levels 1-4) occur as the TSM files grow.
+TSM files are compacted from snapshots to level 1 files.
+Multiple level 1 files are compacted to produce level 2 files.
+The process continues until files reach level 4 and the max size for a TSM file.  
+They will not be compacted further unless deletes, index optimization compactions, or full compactions need to run.
+Lower level compactions use strategies that avoid CPU-intensive activities like decompressing and combining blocks.
+Higher level (and thus less frequent) compactions will re-combine blocks to fully compact them and increase the compression ratio.
+* Index Optimization - When many level 4 TSM files accumulate, the internal indexes become larger and more costly to access.
+An index optimization compaction splits the series and indices across a new set of TSM files, sorting all points for a given series into one TSM file.
+Before an index iptimization, each TSM file contained points for most or all series, and thus each contains the same series index.
+After an index optimzation, each TSM file contains points from a minimum of series and there is little series overlap between files.
+Each TSM file thus has a smaller unique series index, instead of a duplicate of the full series list. 
+In addition, all points from a particular series are contiguous in a TSM file rather than spread across multiple TSM files.
+* Full Compactions - Full compactions run when a shard has become cold for writes for long time, or when deletes have occurred on the shard.
+Full compactions produce an optimal set of TSM files and include all optimizations from Level and Index Optimization compactions.
+Once a shard is fully compacted, no other compactions will run on it unless new writes or deletes are stored.
 
 #### Writes
 
 Writes are appended to the current WAL segment and are also added to the Cache.
-Each WAL segment is size bounded and rolls-over to a new file after it fills up.
+Each WAL segment has a maximum size. 
+Writes roll over to a new file once the current file fills up.
 The cache is also size bounded; snapshots are taken and WAL compactions are initiated when the cache becomes too full.
-If the inbound write rate exceeds the WAL compaction rate for a sustained period, the cache may become too full in which case new writes will fail until the snapshot process catches up.
+If the inbound write rate exceeds the WAL compaction rate for a sustained period, the cache may become too full, in which case new writes will fail until the snapshot process catches up.
 
-When WAL segments fill up and have been closed, the Compactor snapshosts the Cache and writes the data to a new TSM file.
-When the TSM file is successfully written and fsync'd, it is loaded and referenced by the FileStore.
+When WAL segments fill up and are closed, the Compactor snapshots the Cache and writes the data to a new TSM file.
+When the TSM file is successfully written and `fsync`'d, it is loaded and referenced by the FileStore.
 
 #### Updates
 
 Updates (writing a newer value for a point that already exists) occur as normal writes.
 Since cached values overwrite existing values, newer writes take precedence.
-If a write is would overwrite a point in a prior TSM file, the points are merged at runtime and the newer write takes precedenc.
+If a write would overwrite a point in a prior TSM file, the points are merged at runtime and the newer write takes precedence.
 
 
 #### Deletes
 
-Deletes occur by writing a delete entry for the measurement or series to the WAL and then updating the Cache and FileStore.
+Deletes occur by writing a delete entry to the WAL for the measurement or series and then updating the Cache and FileStore.
 The Cache evicts all relevant entries.
 The FileStore writes a tombstone file for each TSM file that contains relevant data.
 These tombstone files are used at startup time to ignore blocks as well as during compactions to remove deleted entries.
 
-Queries agains partially deleted series are handled at query time until a compaction removes the data fully from the TSM files.
+Queries against partially deleted series are handled at query time until a compaction removes the data fully from the TSM files.
 
 #### Queries
 
