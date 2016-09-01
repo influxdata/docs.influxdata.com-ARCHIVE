@@ -8,8 +8,12 @@ menu:
     parent: Administration
 ---
 
+If you're using Chronograf versions 0.11, 0.12 or 0.13 there's no need to
+upgrade version 1.0.
+Versions 0.11 through 1.0 are the same.
+
 Users looking to upgrade from versions prior to 0.10 to version 1.0 need to
-take a few additional steps.
+take a few additional steps:
 
 ### For users who wish to maintain their dashboards and visualizations
 
