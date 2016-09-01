@@ -13,7 +13,7 @@ The new InfluxDB storage engine looks very similar to a LSM Tree.
 It has a write ahead log and a collection of read-only data files which are  similar in concept to SSTables in an LSM Tree.
 TSM files contain sorted, compressed series data.
 
-InfluxDB will create a [shard]((/influxdb/v1.0/concepts/glossary/#shard) for each block of time.
+InfluxDB will create a [shard](/influxdb/v1.0/concepts/glossary/#shard) for each block of time.
 For example, if you have a [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy) with an unlimited duration, shards will be created for each 7 day block of time.
 Each of these shards maps to an underlying storage engine database.
 Each of these databases has its own [WAL](/influxdb/v1.0/concepts/glossary/#wal-write-ahead-log) and TSM files.
@@ -179,7 +179,7 @@ When timestamps have this structure, they are scaled by the largest common divis
 This has the effect of converting very large integer deltas into smaller ones that compress even better.
 
 Using these adjusted values, if all the deltas are the same, the time range is stored using run-length encoding.
-If run-length encoding is not possible and all values are less than (1 << 60) - 1 ([~18.3 years](https://www.wolframalpha.com/input/?i=(1+%3C%3C+60)+-+1+nanoseconds+to+years) at nanosecond resolution), then the timestamps are encoded using [simple8b encoding](https://github.com/jwilder/encoding/tree/master/simple8b).
+If run-length encoding is not possible and all values are less than (1 << 60) - 1 ([~36.5 years](https://www.wolframalpha.com/input/?i=(1+%3C%3C+60)+-+1+nanoseconds+to+years) at nanosecond resolution), then the timestamps are encoded using [simple8b encoding](https://github.com/jwilder/encoding/tree/master/simple8b).
 Simple8b encoding is a 64bit word-aligned integer encoding that packs multiple integers into a single 64bit word.
 If any value exceeds the maximum the deltas are stored uncompressed using 8 bytes each for the block.
 Future encodings may use a patched scheme such as Patched Frame-Of-Reference (PFOR) to handle outliers more effectively.
