@@ -373,7 +373,7 @@ it can cause
 Now that you know all about Line Protocol, how do you actually get the
 Line Protocol to InfluxDB?
 Here, we'll give two quick examples and then point you to the
-[Tools](http://localhost:1313/influxdb/v1.0/tools/) sections for further
+[Tools](/influxdb/v1.0/tools/) sections for further
 information.
 
 #### HTTP API
@@ -403,7 +403,7 @@ You can also use the CLI to
 Protocol from a file.
 
 There are several ways to write data to InfluxDB.
-See the [Tools](http://localhost:1313/influxdb/v1.0/tools/) section for more
+See the [Tools](/influxdb/v1.0/tools/) section for more
 on the [HTTP API](/influxdb/v1.0/tools/api/#write), the
 [CLI](/influxdb/v1.0/tools/shell/), and the available Service Plugins (
 [UDP](/influxdb/v1.0/tools/udp/),

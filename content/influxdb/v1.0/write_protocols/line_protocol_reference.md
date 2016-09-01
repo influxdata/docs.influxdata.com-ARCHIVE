@@ -224,7 +224,7 @@ it can cause
 
 ## Line Protocol in Practice
 
-See the [Tools](http://localhost:1313/influxdb/v1.0/tools/) section for how to
+See the [Tools](/influxdb/v1.0/tools/) section for how to
 write Line Protocol to the database.
 
 ### Duplicate points

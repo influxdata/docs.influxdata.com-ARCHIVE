@@ -34,8 +34,8 @@ A single database can have several RPs and RPs are unique per database.
 This guide will not go into detail about the syntax for creating and managing
 CQs and RPs.
 If you're new to both concepts, we recommend looking over the detailed
-[CQ documentation](/influxdb/v/influxdb/v1.0//query_language/continuous_queries/) and
-[RP documentation](http://localhost:1313/influxdb/v1.0/query_language/database_management/#retention-policy-management).
+[CQ documentation](/influxdb/v1.0/query_language/continuous_queries/) and
+[RP documentation](/influxdb/v1.0/query_language/database_management/#retention-policy-management).
 
 ### Sample data
 This section uses fictional real-time data that track the number of food orders
