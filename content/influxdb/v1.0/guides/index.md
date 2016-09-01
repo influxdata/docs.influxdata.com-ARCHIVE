@@ -8,4 +8,4 @@ title: Guides
 
 ## [Downsampling and Data Retention](/influxdb/v1.0/guides/downsampling_and_retention/)
 
-## [Hardware Sizing Guidelines](http://localhost:1313/influxdb/v1.0/guides/hardware_sizing/)
+## [Hardware Sizing Guidelines](/influxdb/v1.0/guides/hardware_sizing/)
