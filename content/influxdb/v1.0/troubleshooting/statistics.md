@@ -32,3 +32,15 @@ To find the number of points per second being written to the instance. Must have
 ```bash
 $ influx -execute 'select derivative(pointReq, 1s) from "write" where time > now() - 5m' -database '_internal' -precision 'rfc3339'
 ```
+
+To find the number of writes separated by database since the beginnning of the log file:
+
+```bash
+grep 'POST' /var/log/influxdb/influxd.log | awk '{ print $10 }' | sort | uniq -c
+```
+
+Or, for systemd systems logging to journald:
+
+```bash
+journalctl -u influxdb.service | awk '/POST/ { print $10 }' | sort | uniq -c
+```
