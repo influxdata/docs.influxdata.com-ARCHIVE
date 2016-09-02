@@ -7,7 +7,7 @@ menu:
 ---
 
 The InfluxDB API provides a simple way interact with the database.
-It uses HTTP response codes, HTTP authentication and basic authentication, and
+It uses HTTP response codes, HTTP authentication, JWT Tokens, and basic authentication, and
 responses are returned in JSON.
 
 The following sections assume your InfluxDB instance is running on `localhost`

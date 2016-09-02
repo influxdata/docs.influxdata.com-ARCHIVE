@@ -35,10 +35,14 @@ For friendlier documentation, see the guides on
 
 The list of client libraries for interacting with InfluxDB.
 
-## [Web Admin Interface](/influxdb/v01.0/tools/web_admin/)
+## [Web Admin Interface](/influxdb/v1.0/tools/web_admin/)
 
 InfluxDB's built-in web administration GUI.
 We recommend using the HTTP API or the CLI instead of the Web Admin.
+
+## [Influx Inspect](/influxdb/v1.0/tools/influx_inspect/)
+
+Influx Inspect is a tool designed to view detailed information about on disk shards, as well as export data from a shard to line protocol that can be inserted back into the database.
 
 ## [Grafana Graphs and Dashboards](http://docs.grafana.org/datasources/influxdb/)
 

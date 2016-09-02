@@ -2,7 +2,7 @@
 title: Service Plugin - OpenTSDB
 menu:
   influxdb_1_0:
-    weight: 80
+    weight: 90
     parent: tools
 ---
 

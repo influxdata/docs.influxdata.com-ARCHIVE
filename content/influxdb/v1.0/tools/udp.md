@@ -2,7 +2,7 @@
 title: Service Plugin - UDP
 menu:
   influxdb_1_0:
-    weight: 50
+    weight: 60
     parent: tools
 ---
 
