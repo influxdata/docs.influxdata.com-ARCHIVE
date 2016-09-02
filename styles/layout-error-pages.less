@@ -1,0 +1,77 @@
+/*
+
+	ERROR PAGES
+
+	____________________________________________________________
+
+	Notes:
+	-	Simple index view with links to the different products
+
+*/
+.error-page {
+	overflow: hidden;
+	position: absolute;
+	left: 0;
+	top: @nav-height;
+	height: ~"calc(100% - "@nav-height~")";
+	width: 100%;
+	z-index: 2;
+	.gradient-v(@error-bg,@error-bg-accent);
+}
+.error-content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	max-width: 70%;
+	min-width: 240px;
+	transform: translate(-50%,-50%);
+	font-size: 15px;
+	line-height: 19px;
+	color: @error-text;
+
+	h1 {
+		color: @error-decor;
+		display: inline-block;
+		width: 100%;
+		border-radius: @radius;
+		text-align: center;
+		margin-top: 50px;
+		font-size: 90px;
+		font-weight: 200;
+		line-height: 180px;
+		position: relative;
+
+		&:after {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 212px;
+			height: 212px;
+			transform: translate(-50%,-50%);
+			border-radius: 50%;
+			border: 2px solid @error-decor;
+		}
+	}
+}
+
+/*
+	Media Queries
+	--------------------------------------------------
+*/
+@media (min-width: @breakpoint-small) {
+	.error-content {
+		max-width: 30%;
+		font-size: 17px;
+		line-height: 22px;
+	}
+}
+@media (min-width: @breakpoint-large) {
+}
+@media (min-width: @breakpoint-huge) {
+	.error-content {
+		max-width: 32%;
+		font-size: 21px;
+		line-height: 32px;
+	}
+}
