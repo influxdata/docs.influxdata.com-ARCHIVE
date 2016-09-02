@@ -36,6 +36,7 @@ Where applicable, it links to outstanding issues on GitHub.
 
 **Administration**  
 
+* [Process consuming too much memory](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#process-consuming-too-much-memory)
 * [Single quoting the password string](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#single-quoting-the-password-string)
 * [Escaping the single quote in a password](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#escaping-the-single-quote-in-a-password)  
 * [Identifying your version of InfluxDB](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#identifying-your-version-of-influxdb)  
@@ -429,6 +430,13 @@ Identifiers are database names, retention policy names, user names, measurement 
 See the [Line Protocol Syntax](/influxdb/v1.0/write_protocols/write_syntax/) page for more information.
 
 # Administration
+## Process consuming too much memory
+InfluxDB maintains an in-memory index of every [series](/influxdb/v1.0/concepts/glossary/#series) in the system. As the number of unique series grows, so does the RAM usage. High [series cardinality](/influxdb/v1.0/concepts/glossary/#series-cardinality) can lead to the operating system killing the InfluxDB process with an out of memory (OOM) exception. See [Querying for series cardinality](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#querying-for-series-cardinality) to learn how to query for series cardinality.
+
+To reduce series cardinality, series must be dropped from the index. [`DROP DATABASE`], [`DROP MEASUREMENT`], and [`DROP SERIES`] will all remove series from the index and reduce the overall series cardinality. 
+
+> **Note:** `DROP` commands are usually CPU-intensive, as they frequently trigger a TSM compaction. Issuing `DROP` queries at a high frequency may significantly impact write and other query throughput.
+
 ## Single quoting the password string
 The `CREATE USER <user> WITH PASSWORD '<password>'` query requires single quotation marks around the password string.
 Do not include the single quotes when authenticating requests.
