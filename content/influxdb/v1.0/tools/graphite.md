@@ -2,7 +2,7 @@
 title: Service Plugin - Graphite
 menu:
   influxdb_1_0:
-    weight: 60
+    weight: 70
     parent: tools
 ---
 

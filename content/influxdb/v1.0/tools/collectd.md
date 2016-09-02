@@ -2,7 +2,7 @@
 title: Service Plugin - CollectD
 menu:
   influxdb_1_0:
-    weight: 70
+    weight: 80
     parent: tools
 ---
 
