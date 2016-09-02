@@ -8,12 +8,23 @@ menu:
 
 This guide offers general hardware recommendations for InfluxDB and addresses some frequently asked questions about hardware sizing. The recommendations are only for the [Time Structured Merge](/influxdb/v1.0/concepts/storage_engine/#the-new-influxdb-storage-engine-from-lsm-tree-to-b-tree-and-back-again-to-create-the-time-structured-merge-tree) tree (`TSM`) storage engine, the only storage engine available with InfluxDB 1.0. Users running older versions of InfluxDB with [unconverted](/influxdb/v0.10/administration/upgrading/#convert-b1-and-bz1-shards-to-tsm1) `b1` or `bz1` shards may have different performance characteristics. See the [InfluxDB 0.9 sizing guide](/influxdb/v0.9/guides/hardware_sizing/) for more detail.
 
+* [Single node or Cluster?](/influxdb/v1.0/guides/hardware_sizing/#single-node-or-cluster)
 * [General hardware guidelines for a single node](/influxdb/v1.0/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node)
 * [General hardware guidelines for a cluster](/influxdb/v1.0/guides/hardware_sizing/#general-hardware-guidelines-for-a-cluster)
 * [When do I need more RAM?](/influxdb/v1.0/guides/hardware_sizing/#when-do-i-need-more-ram)
 * [What kind of storage do I need?](/influxdb/v1.0/guides/hardware_sizing/#what-kind-of-storage-do-i-need)
 * [How much storage do I need?](/influxdb/v1.0/guides/hardware_sizing/#how-much-storage-do-i-need)
 * [How should I configure my hardware?](/influxdb/v1.0/guides/hardware_sizing/#how-should-i-configure-my-hardware)
+
+## Single node or Cluster?
+InfluxDB single node instances are fully open source. 
+InfluxDB clustering requires our closed-source commercial product.
+Single node instances offer no redundancy. If the server is unavailable, writes and queries will fail immediately.
+Clustering offers high-availability and redundancy. 
+Multiple copies of data are distributed across multiple servers, and the loss of any one server will not significantly impact the cluster. 
+
+If your performance requirements fall into the Moderate or Low load ranges then you can likely use a single node instance of InfluxDB.
+If at least one of your performance requirements falls into the Probably infeasible category, then you will likely need to use a cluster to distribute the load among multiple servers.
 
 ## General hardware guidelines for a single node
 
@@ -27,12 +38,15 @@ We define the load that you'll be placing on InfluxDB by the number of fields wr
 | **Probably infeasible**  |  > 750 thousand        |  > 100         |  > 10 million       |
 
 > **Note:** Queries vary widely in their impact on the system. 
+
 Simple queries have few if any functions and no regular expressions.
 Simple queries are bounded in time to a few minutes, hours, or maybe a day. 
 Simple queries typically execute in a few milliseconds to a few dozen milliseconds. 
+
 Moderate queries have multiple functions and one or two regular expressions. 
 Moderate queries may also have complex GROUP BY clauses or sample a time range of multiple weeks.
 Moderate queries typically execute in a few hundred or a few thousand milliseconds. 
+
 Complex queries involve multiple aggregation or transformation functions or multiple regular expressions.
 Complex queries may sample a very large time range of months or years.
 Complex queries typically take multiple seconds to execute. 
@@ -81,12 +95,15 @@ The hardware recommendations for cluster data nodes are similar to the standalon
 | **Probably infeasible**  |  > 500 thousand        |  > 100         |  > 10 million       |
 
 > **Note:** Queries vary widely in their impact on the system. 
+
 Simple queries have few if any functions and no regular expressions.
 Simple queries are bounded in time to a few minutes, hours, or maybe a day. 
 Simple queries typically execute in a few milliseconds to a few dozen milliseconds. 
+
 Moderate queries have multiple functions and one or two regular expressions. 
 Moderate queries may also have complex GROUP BY clauses or sample a time range of multiple weeks.
 Moderate queries typically execute in a few hundred or a few thousand milliseconds. 
+
 Complex queries involve multiple aggregation or transformation functions or multiple regular expressions.
 Complex queries may sample a very large time range of months or years.
 Complex queries typically take multiple seconds to execute. 
