@@ -37,9 +37,10 @@
 				transform 0.75s ease;
 			z-index: 1;
 			background-attachment: scroll;
-			background-size: 100%;
+			background-size: cover;
 			background-position: center center;
 			background-repeat: no-repeat;
+			transform: scale(1,1);
 		}
 		&:hover {
 			.homepage--card-mask {
@@ -202,6 +203,30 @@
 				background-color: @g20-white;
 			}
 		}
+		&.card-Enterprise {
+			.homepage--card-mask {
+				background-image: url(/img/home-enterprise.svg);
+				background-color: @g5-pepper;
+			}
+			.homepage--card-description {
+				color: @g20-white;
+			}
+			.homepage--card-title {
+				color: @g14-chromium;
+			}
+			a.homepage--card-link:link,
+			a.homepage--card-link:active,
+			a.homepage--card-link:visited {
+				color: @g20-white;
+				transition:
+					background-color 0.25s ease,
+					color 0.25s ease;
+			}
+			a.homepage--card-link:hover {
+				color: @c-pool;
+				background-color: @g20-white;
+			}
+		}
 	}
 }
 
@@ -217,22 +242,25 @@
 }
 @media (min-width: @breakpoint-large) {
 	.homepage--card-container {
-		padding: 4rem 9rem;
+		padding: 4rem;
 	}
 	.homepage--card-description {
 		font-size: 1.125rem;
 	}
 	.homepage--card {
-		width: 50%;
-		height: 360px;
+		width: 33.3333%;
+		height: 50%;
 	}
 }
 @media (min-width: @breakpoint-huge) {
-
-}
-@height-breakpoint: 700px;
-@media (min-height: @height-breakpoint) {
+	.homepage--card-container {
+		padding: 4rem;
+	}
+	.homepage--card-description {
+		font-size: 1.125rem;
+	}
 	.homepage--card {
-		height: 50%;
+		width: 20%;
+		height: 100%;
 	}
 }
