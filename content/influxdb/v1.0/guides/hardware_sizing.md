@@ -110,8 +110,8 @@ Complex queries typically take multiple seconds to execute.
 
 
 #### Low load recommendations
-* CPU: 2-4   
-* RAM: 4-8 GB   
+* CPU: 2   
+* RAM: 2-4 GB   
 * IOPS: 1000   
 
 #### Moderate load recommendations
