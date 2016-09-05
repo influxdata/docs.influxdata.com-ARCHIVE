@@ -82,6 +82,29 @@ POST http://localhost:8086/query
 \* The only exceptions are `SELECT` queries that include an [`INTO` clause](/influxdb/v1.0/query_language/data_exploration/#the-into-clause).
 Those `SELECT` queries require a `POST` request.
 
+##### Examples
+<br>
+Query data with a `SELECT` statement:
+```
+$ curl -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas"'
+
+{"results":[{"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[["2016-05-20T21:30:00Z",12,"1",null],["2016-05-20T21:30:20Z",11,"2",null],["2016-05-20T21:30:40Z",18,null,"1"],["2016-05-20T21:31:00Z",19,null,"3"]]}]}]}
+```
+
+Query data with a `SELECT` statement and an `INTO` clause:
+```
+$ curl -XPOST 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * INTO "newmeas" FROM "mymeas"'
+
+{"results":[{"series":[{"name":"result","columns":["time","written"],"values":[["1970-01-01T00:00:00Z",4]]}]}]}
+```
+
+Create a database:
+```
+$ curl -XPOST 'http://localhost:8086/query' --data-urlencode 'q=CREATE DATABASE "mydb"'
+
+{"results":[{}]}
+```
+
 #### Query String Parameters
 
 | Query String Parameter | Optional/Required | Definition |
@@ -99,35 +122,8 @@ Use basic authentication if you've [enabled authentication](/influxdb/v1.0/query
 and aren't using the query string parameters `u` and `p`.
 See below for an <td><a href="/influxdb/v1.0/tools/api/#basic-auth-query">example</a></td> of basic authentication.
 
-#### Request Body
-
-```
---data-urlencode "q=<InfluxQL query>"
-```
-
-All queries must be URL encoded and follow
-[InfluxQL](/influxdb/v1.0/query_language/) syntax.
-Our example shows the `--data-urlencode` parameter from `curl`, which we will
-use in all examples on this page.
-
-Delimit multiple queries with a semicolon.
-
-#### Examples
-
-Query data with a `SELECT` statement:
-```
-$ curl -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas"'
-
-{"results":[{"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[["2016-05-20T21:30:00Z",12,"1",null],["2016-05-20T21:30:20Z",11,"2",null],["2016-05-20T21:30:40Z",18,null,"1"],["2016-05-20T21:31:00Z",19,null,"3"]]}]}]}
-```
-
-Query data with a `SELECT` statement and an `INTO` clause:
-```
-$ curl -XPOST 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * INTO "newmeas" FROM "mymeas"'
-
-{"results":[{"series":[{"name":"result","columns":["time","written"],"values":[["1970-01-01T00:00:00Z",4]]}]}]}
-```
-
+##### Examples
+<br>
 Query data with a `SELECT` statement and return pretty-printed JSON:
 ```
 $ curl -GET 'http://localhost:8086/query?db=mydb&pretty=true' --data-urlencode 'q=SELECT * FROM "mymeas"'
@@ -185,13 +181,6 @@ $ curl -GET 'http://localhost:8086/query?db=mydb&epoch=s' --data-urlencode 'q=SE
 {"results":[{"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[[1463779800,12,"1",null],[1463779820,11,"2",null],[1463779840,18,null,"1"],[1463779860,19,null,"3"]]}]}]}
 ```
 
-Create a database:
-```
-$ curl -XPOST 'http://localhost:8086/query' --data-urlencode 'q=CREATE DATABASE "mydb"'
-
-{"results":[{}]}
-```
-
 Create a database using HTTP authentication:
 ```
 $ curl -XPOST 'http://localhost:8086/query?u=myusername&p=mypassword' --data-urlencode 'q=CREATE DATABASE "mydb"'
@@ -206,11 +195,66 @@ $ curl -XPOST -u myusername:mypassword 'http://localhost:8086/query' --data-urle
 {"results":[{}]}
 ```
 
+#### Request Body
+
+```
+--data-urlencode "q=<InfluxQL query>"
+```
+
+All queries must be URL encoded and follow
+[InfluxQL](/influxdb/v1.0/query_language/) syntax.
+Our example shows the `--data-urlencode` parameter from `curl`, which we will
+use in all examples on this page.
+
+Delimit multiple queries with a semicolon `;`.
+
+##### Bind Parameters
+<br>
+The API supports binding parameters to particular field values or tag values in
+the `WHERE` clause.
+Use the syntax `$<placeholder_key>` as a placeholder in the query, and URL
+encode the map of placeholder keys to placeholder values in the request body:
+
+Query syntax:
+```
+--data-urlencode 'q= SELECT [...] WHERE [ <field_key> | <tag_key> ] = $<placeholder_key>'
+```
+
+Map syntax:
+```
+--data-urlencode 'params={"<placeholder_key>":[ <placeholder_float_field_value> | <placeholder_integer_field_value> | "<placeholder_string_field_value>" | <placeholder_boolean_field_value> | "<placeholder_tag_value>" ]}'
+```
+
+Delimit multiple placeholder key-value pairs with comma `,`.
+
+##### Examples
+<br>
 Send multiple queries:
 ```
 $ curl -GET 'http://localhost:8086/query?db=mydb&epoch=s' --data-urlencode 'q=SELECT * FROM "mymeas";SELECT mean("myfield") FROM "mymeas"'
 
 {"results":[{"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[[1463779800,12,"1",null],[1463779820,11,"2",null],[1463779840,18,null,"1"],[1463779860,19,null,"3"]]}]},{"series":[{"name":"mymeas","columns":["time","mean"],"values":[[0,15]]}]}]}
+```
+
+Bind a parameter in the `WHERE` clause to specific tag value:
+```
+curl -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas" WHERE "mytagkey" = $tag_value' --data-urlencode 'params={"tag_value":"mytagvalue1"}'
+
+{"results":[{"series":[{"name":"mymeas","columns":["time","myfieldkey","mytagkey"],"values":[["2016-09-05T18:25:08.479629934Z",9,"mytagvalue1"],["2016-09-05T18:25:20.892472038Z",8,"mytagvalue1"],["2016-09-05T18:25:30.408555195Z",10,"mytagvalue1"],["2016-09-05T18:25:39.108978991Z",111,"mytagvalue1"]]}]}]}
+```
+
+Bind a parameter in the `WHERE` clause to a numerical field value:
+```
+curl -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas" WHERE "myfieldkey" > $field_value' --data-urlencode 'params={"field_value":9}'
+
+{"results":[{"series":[{"name":"mymeas","columns":["time","myfieldkey","mytagkey"],"values":[["2016-09-05T18:25:30.408555195Z",10,"mytagvalue1"],["2016-09-05T18:25:39.108978991Z",111,"mytagvalue1"],["2016-09-05T18:25:46.587728107Z",111,"mytagvalue2"]]}]}]}
+```
+
+Bind two parameters in the `WHERE` clause to a specific tag value and numerical field value:
+```
+curl -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas" WHERE "mytagkey" = $tag_value AND  "myfieldkey" > $field_value' --data-urlencode 'params={"tag_value":"mytagvalue2","field_value":9}'
+
+{"results":[{"series":[{"name":"mymeas","columns":["time","myfieldkey","mytagkey"],"values":[["2016-09-05T18:25:46.587728107Z",111,"mytagvalue2"]]}]}]}
 ```
 
 #### Status codes and responses
@@ -284,6 +328,28 @@ See below for an <td><a href="/influxdb/v1.0/tools/api/#basic-auth-write">exampl
 \*\* We recommend using the least precise precision possible as this can result
 in significant improvements in compression.
 
+##### Examples
+<br>
+Write a point to the database `mydb` with a timestamp in seconds:
+```
+$ curl -i -XPOST "http://localhost:8086/write?db=mydb&precision=s" --data-binary 'mymeas,mytag=1 myfield=90 1463683075'
+```
+
+Write a point to the database `mydb` and the retention policy `myrp`:
+```
+$ curl -i -XPOST "http://localhost:8086/write?db=mydb&rp=myrp" --data-binary 'mymeas,mytag=1 myfield=90'
+```
+
+Write a point to the database `mydb` using HTTP authentication:
+```
+$ curl -i -XPOST "http://localhost:8086/write?db=mydb&u=myusername&p=mypassword" --data-binary 'mymeas,mytag=1 myfield=91'
+```
+
+<a name=basic-auth-write></a>Write a point to the database `mydb` using basic authentication:
+```
+$ curl -i -XPOST -u myusername:mypassword "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=1 myfield=91'
+```
+
 #### Request Body
 
 ```
@@ -311,8 +377,8 @@ Files containing carriage returns will cause parser errors.
     We recommend writing points in batches of 5,000 to 10,000 points.
 Smaller batches, and more HTTP requests, will result in sub-optimal performance.
 
-#### Examples
-
+##### Examples
+<br>
 Write a point to the database `mydb` with a nanosecond timestamp:
 ```
 $ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=1 myfield=90 1463683075000000000'
@@ -321,26 +387,6 @@ $ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,myt
 Write a point to the database `mydb` with the local server's nanosecond timestamp:
 ```
 $ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=1 myfield=90'
-```
-
-Write a point to the database `mydb` with a timestamp in seconds:
-```
-$ curl -i -XPOST "http://localhost:8086/write?db=mydb&precision=s" --data-binary 'mymeas,mytag=1 myfield=90 1463683075'
-```
-
-Write a point to the database `mydb` and the retention policy `myrp`:
-```
-$ curl -i -XPOST "http://localhost:8086/write?db=mydb&rp=myrp" --data-binary 'mymeas,mytag=1 myfield=90'
-```
-
-Write a point to the database `mydb` using HTTP authentication:
-```
-$ curl -i -XPOST "http://localhost:8086/write?db=mydb&u=myusername&p=mypassword" --data-binary 'mymeas,mytag=1 myfield=91'
-```
-
-<a name=basic-auth-write></a>Write a point to the database `mydb` using basic authentication:
-```
-$ curl -i -XPOST -u myusername:mypassword "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=1 myfield=91'
 ```
 
 Write several points to the database `mydb` by separating points with a new line:
