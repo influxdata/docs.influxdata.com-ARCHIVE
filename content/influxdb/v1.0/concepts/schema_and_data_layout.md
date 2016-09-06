@@ -1,4 +1,4 @@
-  ---
+---
 title: Schema Design
 menu:
   influxdb_1_0:
@@ -13,100 +13,109 @@ There are, however, general guidelines to follow and pitfalls to avoid when desi
 
 In no particular order, we recommend that you:
 
-* *Encode meta data in tags*
+### *Encode meta data in tags*
 
-    [Tags](/influxdb/v1.0/concepts/glossary/#tag) are indexed and [fields](/influxdb/v1.0/concepts/glossary/#field) are not indexed.
-    This means that queries on tags are more performant than those on fields.
+[Tags](/influxdb/v1.0/concepts/glossary/#tag) are indexed and [fields](/influxdb/v1.0/concepts/glossary/#field) are not indexed.
+This means that queries on tags are more performant than those on fields.
 
-    In general, your queries should guide what gets stored as a tag and what gets stored as a field:
-      * Store data in tags if they're commonly-queried meta data
-      * Store data in tags if you plan to use them with `GROUP BY()`
-      * Store data in fields if you plan to use them with an [InfluxQL function](/influxdb/v1.0/query_language/functions/)
-      * Store data in fields if you *need* them to be something other than a string - [tag values](/influxdb/v1.0/concepts/glossary/#tag-value) are always interpreted as strings
+In general, your queries should guide what gets stored as a tag and what gets stored as a field:
 
-* *Avoid using InfluxQL Keywords as identifier names*
+* Store data in tags if they're commonly-queried meta data
+* Store data in tags if you plan to use them with `GROUP BY()`
+* Store data in fields if you plan to use them with an [InfluxQL function](/influxdb/v1.0/query_language/functions/)
+* Store data in fields if you *need* them to be something other than a string - [tag values](/influxdb/v1.0/concepts/glossary/#tag-value) are always interpreted as strings
 
-    This isn't necessary, but it simplifies writing queries; you won't have to wrap those identifiers in double quotes.
-    Identifiers are database names, [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp) names, [user](/influxdb/v1.0/concepts/glossary/#user) names, [measurement](/influxdb/v1.0/concepts/glossary/#measurement) names, [tag keys](/influxdb/v1.0/concepts/glossary/#tag-key), and [field keys](/influxdb/v1.0/concepts/glossary/#field-key).
-    See [InfluxQL Keywords](https://github.com/influxdata/influxdb/blob/master/influxql/README.md#keywords) for words to avoid.
+### *Avoid using InfluxQL Keywords as identifier names*
 
-    Note that you will also need to wrap identifiers in double quotes in queries if they contain characters other than `[A-z,_]`.
+This isn't necessary, but it simplifies writing queries; you won't have to wrap those identifiers in double quotes.
+Identifiers are database names, [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp) names, [user](/influxdb/v1.0/concepts/glossary/#user) names, [measurement](/influxdb/v1.0/concepts/glossary/#measurement) names, [tag keys](/influxdb/v1.0/concepts/glossary/#tag-key), and [field keys](/influxdb/v1.0/concepts/glossary/#field-key).
+See [InfluxQL Keywords](https://github.com/influxdata/influxdb/blob/master/influxql/README.md#keywords) for words to avoid.
+
+Note that you will also need to wrap identifiers in double quotes in queries if they contain characters other than `[A-z,_]`.
 
 ## Discouraged Schema Design
 
 In no particular order, we recommend that you:
 
-* *Don't have too many series*
+### *Don't have too many series*
 
-    See [Hardware Sizing Guidelines](/influxdb/v1.0/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node) for [series cardinality](/influxdb/v1.0/concepts/glossary/#series-cardinality) recommendations based on your hardware.
+[Tags](/influxdb/v1.0/concepts/glossary/#tag) containing highly variable information like UUIDs, hashes, and random strings will lead to a large number of series in the database, known colloquially as high series cardinality.
+High series cardinality is a primary driver of high memory usage for many database workloads.
 
-    [Tags](/influxdb/v1.0/concepts/glossary/#tag) that specify highly variable information like UUIDs, hashes, and random strings can increase your series cardinality to uncomfortable levels.
-    If you need that information in your database, consider storing the high-cardinality data as a field rather than a tag (note that query performance will be slower).
+See [Hardware Sizing Guidelines](/influxdb/v1.0/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node) for [series cardinality](/influxdb/v1.0/concepts/glossary/#series-cardinality) recommendations based on your hardware. If the system has memory constraints, consider storing high-cardinality data as a field rather than a tag.
 
-* *Don't differentiate data with measurement names*
+### *Don't encode data in measurement names*
 
-    In general, taking this step will simplify your queries.
-    InfluxDB queries merge data that fall within the same [measurement](/influxdb/v1.0/concepts/glossary/#measurement); it's better to differentiate data with [tags](/influxdb/v1.0/concepts/glossary/#tag) than with detailed measurement names.
+In general, taking this step will simplify your queries.
+InfluxDB queries merge data that fall within the same [measurement](/influxdb/v1.0/concepts/glossary/#measurement); it's better to differentiate data with [tags](/influxdb/v1.0/concepts/glossary/#tag) than with detailed measurement names.
 
-    Example:
+_Example:_
 
-    Schema 1  | Schema 2
-    ------------- | -------------
-    *Measurement:* `blueberries.field-1.region-north` | *Measurement:* `blueberries`; *Tags:* `field = 1` and `region = north`
-    *Measurement:*  `blueberries.field-2.region-midwest` | *Measurement:* `blueberries`; *Tags:* `field = 2` and `region = midwest`
+Consider the following schema represented by line protocol.
 
-    Assume that each measurement contains a single field key called `value`.
-    The following queries calculate the average of `value` across all fields and all regions.
-    Notice that, even at this small scale, this is harder to do under Schema 1.
+```
+Schema 1 - Data encoded in the measurement name
+-------------
+blueberries.plot-1.north temp=50.1 1472515200000000000
+blueberries.plot-2.midwest temp=49.8 1472515200000000000
+```
 
-    *Schema 1*
-    ```
-    > SELECT mean("value") FROM /^blueberries/
-    name: blueberries.field-1.region-north
-    --------------------------------------
-    time			        mean
-    1970-01-01T00:00:00Z	444
+The long measurement names (`blueberries.plot-1.north`) with no tags are similar to Graphite metrics.
+Encoding information like `plot` and `region` in the measurement name will make the data much harder to query.
 
-    name: blueberries.field-2.region-midwest
-    ----------------------------------------
-    time			        mean
-    1970-01-01T00:00:00Z	33766.666666666664
-    ```
-    Then calculate the mean yourself.
+For instance, calculating the average temperature of both plots 1 and 2 would not be possible with schema 1.
+Compare this to the following schema represented in line protocol.
 
+```
+Schema 2 - Data encoded in tags
+-------------
+weather_sensor,crop=blueberries,plot=1,region=north temp=50.1 1472515200000000000
+weather_sensor,crop=blueberries,plot=2,region=midwest temp=49.8 1472515200000000000
+```
 
-    *Schema 2*
-    ```
-    > SELECT mean("value") FROM "blueberries"
-    name: blueberries
-    -----------------
-    time			        mean
-    1970-01-01T00:00:00Z	17105.333333333332
-    ```
+The following queries calculate the average of `temp` for blueberries that fall in the `north` region.
+While both queries are relatively simple, use of the regular expression make certain queries much more complicated or impossible.
 
-* *Don't put more than one piece of information in one tag*
+```
+# Schema 1 - Query for data encoded in the measurement name
+> SELECT mean("temp") FROM /\.north$/
 
-    Similar to the point above, taking this step will simplify your queries.
-    It will reduce your need for regular expressions.
+# Schema 2 - Query for data encoded in tags
+> SELECT mean("temp") FROM "weather_sensor" WHERE "region" = 'north'
+```
 
-    Example:
+### *Don't put more than one piece of information in one tag*
 
-    Tagset 1  | Tagset 2
-    ------------- | -------------
-    `location = field-1.region-north` | `field = 1` and `region = north`
-    `location = field-2.region-north` | `field = 2` and `region = north`
-    `location = field-2.region-midwest` | `field = 2` and `region = midwest`
+Similar to the point above, splitting a single tag with multiple pieces into separate tags will simplify your queries and reduce the need for regular expressions.
 
-    Assume that each [tag set](/influxdb/v1.0/concepts/glossary/#tag-set) falls in the [measurement](/influxdb/v1.0/concepts/glossary/#measurement) `blueberries` and is associated with a [field](/influxdb/v1.0/concepts/glossary/#field) called `value`.
-    The following queries calculate the average of `value` for blueberries that fall in the `north`.
-    While both queries are relatively simple, you can imagine that the regex could get much more complicated if Schema 1 contained a more complex tag value.
+_Example:_
 
-    *Schema 1*
-    ```
-    > SELECT mean("value") FROM "blueberries" WHERE location =~ /north/
-    ```
+Consider the following schema represented by line protocol.
 
-    *Schema 2*
-    ```
-    > SELECT mean("value") FROM "blueberries" WHERE region = 'north'
-    ```
+```
+Schema 2 - Multiple data encoded in a single tag
+-------------
+weather_sensor,crop=blueberries,location=plot-1.north temp=50.1 1472515200000000000
+weather_sensor,crop=blueberries,location=plot-2.midwest temp=49.8 1472515200000000000
+```
+
+The above data encodes multiple separate parameters, the `plot` and `region` into a long tag value (`plot-1.north`).
+Compare this to the following schema represented in line protocol.
+
+```
+Schema 2 - Data encoded in multiple tags
+-------------
+weather_sensor,crop=blueberries,plot=1,region=north temp=50.1 1472515200000000000
+weather_sensor,crop=blueberries,plot=2,region=midwest temp=49.8 1472515200000000000
+```
+
+The following queries calculate the average of `temp` for blueberries that fall in the `north` region.
+While both queries are similar, the use of multiple tags in Schema 2 avoids the use of a regular expressions.
+
+```
+# Schema 1 - Query for multiple data encoded in a single tag
+> SELECT mean("temp") FROM "weather_sensor" WHERE location =~ /\.north$/
+
+# Schema 2 - Query for data encoded in multiple tags
+> SELECT mean("temp") FROM "weather_sensor" WHERE region = 'north'
+```
