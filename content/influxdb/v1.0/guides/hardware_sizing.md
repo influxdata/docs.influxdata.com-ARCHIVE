@@ -52,17 +52,17 @@ Complex queries may sample a very large time range of months or years.
 Complex queries typically take multiple seconds to execute. 
 
 #### Low load recommendations
-* CPU: 2-4   
+* CPU: 2-4 cores
 * RAM: 2-4 GB   
 * IOPS: 500   
 
 #### Moderate load recommendations
-* CPU: 4-6  
-* RAM: 8-32GB  
+* CPU: 4-6 cores
+* RAM: 8-32 GB  
 * IOPS: 500-1000  
 
 #### High load recommendations
-* CPU: 8+  
+* CPU: 8+ cores
 * RAM: 32+ GB  
 * IOPS: 1000+  
 
@@ -78,8 +78,8 @@ A cluster must have at least three indepenent meta nodes to survive the loss of 
 Meta nodes do not need very much computing power. Regardless of the cluster load, we recommend the following for the meta nodes:
 
 #### Universal recommendation
-* CPU: 1-2
-* RAM: 2-4 GB
+* CPU: 1-2 cores
+* RAM: 512 MB - 1 GB
 * IOPS: 50
 
 ### Data Nodes
@@ -110,7 +110,7 @@ Complex queries typically take multiple seconds to execute.
 
 
 #### Low load recommendations
-* CPU: 2   
+* CPU: 2 cores
 * RAM: 2-4 GB   
 * IOPS: 1000   
 
@@ -130,8 +130,8 @@ The Enterprise Web server is primarily an HTTP server with similar load requirem
 > **Note:** Production clusters should not use the SQLite database as it does not allow for redundant Web servers, nor can it handle high loads as gracefully as Postgres.
 
 #### Universal recommendation
-* CPU: 1-4
-* RAM: 4-8 GB
+* CPU: 1-4 cores
+* RAM: 1-2 GB
 * IOPS: 50
 
 ## When do I need more RAM?
