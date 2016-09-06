@@ -39,7 +39,7 @@ time			               count
 1970-01-01T00:00:00Z	 15258
 ```
 
-Select the first ten observations in the measurement h2o_feet:
+Select the first five observations in the measurement h2o_feet:
 
 ```bash
 > SELECT * FROM h2o_feet LIMIT 5
