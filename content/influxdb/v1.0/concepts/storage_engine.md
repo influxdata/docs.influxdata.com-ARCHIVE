@@ -279,7 +279,6 @@ If there are overlapping blocks of time, the index entries are sorted to ensure 
 When iterating over the index entries the blocks are read sequentially from the blocks section.
 The block is decompressed and we seek to the specific point.
 
-===============
 
 ## The new InfluxDB storage engine: from LSM Tree to B+Tree and back again to create the Time Structured Merge Tree
 
