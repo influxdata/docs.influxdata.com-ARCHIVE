@@ -45,29 +45,32 @@ Telegraf has a few options you can configure under the `agent` section of the
 config.
 
 * **interval**: Default data collection interval for all inputs
-* **round_interval**: Rounds collection interval to 'interval'
-ie, if interval="10s" then always collect on :00, :10, :20, etc.
-* **metric_batch_size**: Telegraf will send metrics to output in batch of at
-most metric_batch_size metrics.
-* **metric_buffer_limit**: Telegraf will cache metric_buffer_limit metrics
-for each output, and will flush this buffer on a successful write.
-This should be a multiple of metric_batch_size and could not be less
-than 2 times metric_batch_size.
-* **collection_jitter**: Collection jitter is used to jitter
-the collection by a random amount.
-Each plugin will sleep for a random time within jitter before collecting.
-This can be used to avoid many plugins querying things like sysfs at the
+* **round_interval**: Rounds collection interval to `interval`
+ie, if `interval="10s"` then always collect on :00, :10, :20, etc.
+* **metric_batch_size**: Telegraf will output collected metrics in batches 
+no larger than `metric_batch_size` .
+* **metric_buffer_limit**: Telegraf will cache metrics
+for each output up to the `metric_buffer_limit` and flushs the buffer on a successful write.
+If the bugger fills, the oldest metrics are dropped first.
+Raising this value increases the tolerance for connectivity outages
+but will also raise the potential memory footprint for Telegraf.
+This setting should be a multiple of `metric_batch_size` and must not be less
+than 2 times `metric_batch_size`.
+* **collection_jitter**: Jitter
+the collection time by a random amount.
+Each plugin will sleep for a random time less than `collection_jitter` before collecting.
+This can be used to avoid multiple plugins querying things like `sysfs` at the
 same time, which can have a measurable effect on the system.
 * **flush_interval**: Default data flushing interval for all outputs.
 You should not set this below
-interval. Maximum flush_interval will be flush_interval + flush_jitter
+`interval`. The maximum time before data is flushed to output 
+is `flush_interval` + `flush_jitter`
 * **flush_jitter**: Jitter the flush interval by a random amount.
-This is primarily to avoid
-large write spikes for users running a large number of telegraf instances.
-ie, a jitter of 5s and flush_interval 10s means flushes will happen every 10-15s.
+This is primarily to avoid large write spikes when running a large number of telegraf instances.
+e.g., `jitter=5s` and `flush_interval=10s` means flushes will happen every 10-15 seconds.
 * **debug**: Run telegraf in debug mode.
 * **quiet**: Run telegraf in quiet mode.
-* **hostname**: Override default hostname, if empty use os.Hostname().
+* **hostname**: Override default hostname, if empty use `os.Hostname()`.
 
 #### Measurement Filtering
 
