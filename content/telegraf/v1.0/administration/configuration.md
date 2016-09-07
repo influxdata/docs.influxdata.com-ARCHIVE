@@ -47,10 +47,10 @@ config.
 * **interval**: Default data collection interval for all inputs
 * **round_interval**: Rounds collection interval to `interval`
 ie, if `interval="10s"` then always collect on :00, :10, :20, etc.
-* **metric_batch_size**: Telegraf will output collected metrics in batches 
+* **metric_batch_size**: Telegraf will output collected metrics in batches
 no larger than `metric_batch_size` .
 * **metric_buffer_limit**: Telegraf will cache metrics
-for each output up to the `metric_buffer_limit` and flushs the buffer on a successful write.
+for each output up to the `metric_buffer_limit` and flushes the buffer on a successful write.
 If the bugger fills, the oldest metrics are dropped first.
 Raising this value increases the tolerance for connectivity outages
 but will also raise the potential memory footprint for Telegraf.
@@ -63,7 +63,7 @@ This can be used to avoid multiple plugins querying things like `sysfs` at the
 same time, which can have a measurable effect on the system.
 * **flush_interval**: Default data flushing interval for all outputs.
 You should not set this below
-`interval`. The maximum time before data is flushed to output 
+`interval`. The maximum time before data is flushed to output
 is `flush_interval` + `flush_jitter`
 * **flush_jitter**: Jitter the flush interval by a random amount.
 This is primarily to avoid large write spikes when running a large number of telegraf instances.
@@ -97,6 +97,8 @@ can be used on inputs & outputs, but it is _recommended_ to be used on inputs,
 as it is more efficient to filter out tags at the ingestion point.
 * **taginclude**: taginclude is the inverse of tagexclude. It will only include
 the tag keys in the final measurement.
+
+> **NOTE:** The `tagpass` and `tagdrop` parameters must be defined at the *end* of the plugin definition, otherwise subsequent plugin config options will be interpreted as part of the tagpass/tagdrop map.
 
 ## Input Configuration
 
@@ -140,6 +142,8 @@ fields which begin with `time_`.
 ```
 
 #### Input Config: tagpass and tagdrop
+
+> **NOTE:** The `tagpass` and `tagdrop` parameters must be defined at the *end* of the plugin definition, otherwise subsequent plugin config options will be interpreted as part of the tagpass/tagdrop map.
 
 ```toml
 [[inputs.cpu]]
