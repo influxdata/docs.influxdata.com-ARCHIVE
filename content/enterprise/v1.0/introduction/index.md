@@ -10,4 +10,4 @@ and running with InfluxEnterprise.
 
 ## [Downloads](/enterprise/v1.0/introduction/download/)
 ## [Installation](/enterprise/v1.0/introduction/installation/)
-## [Getting Started](/enterprise/v1.0/introduction/getting-started/)
+## [Getting Started](/enterprise/v1.0/introduction/getting_started/)
