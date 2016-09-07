@@ -39,11 +39,6 @@ The `control.Client` provides a Go client to access this functionality as well.
 ## OSS Conversion
 
 Importing a OSS single server as the first data node is supported.
-To import data and metadata from an existing OSS InfluxDB 0.13+ server, you need to first install the enterprise InfluxDB package on top of the OSS installation and then restart the server.
-Add the modified server as the first data node in the cluster.
-The cluster will import the meta store and data shards from the new node.
-(Subsequent nodes will not import their existing meta store or data, only the first node added to a cluster will import existing meta store or data.)
-Importing an OSS meta store will overwrite the existing cluster meta store so any existing databases, users, etc. will be overwritten.
 
 See [OSS to Cluster Migration](/enterprise/v1.0/guides/migration/) for
 step-by-step instructions.
