@@ -17,39 +17,45 @@ This guide offers general hardware recommendations for InfluxDB and addresses so
 * [How should I configure my hardware?](/influxdb/v1.0/guides/hardware_sizing/#how-should-i-configure-my-hardware)
 
 ## Single node or Cluster?
-InfluxDB single node instances are fully open source. 
+InfluxDB single node instances are fully open source.
 InfluxDB clustering requires our closed-source commercial product.
 Single node instances offer no redundancy. If the server is unavailable, writes and queries will fail immediately.
-Clustering offers high-availability and redundancy. 
-Multiple copies of data are distributed across multiple servers, and the loss of any one server will not significantly impact the cluster. 
+Clustering offers high-availability and redundancy.
+Multiple copies of data are distributed across multiple servers, and the loss of any one server will not significantly impact the cluster.
 
-If your performance requirements fall into the Moderate or Low load ranges then you can likely use a single node instance of InfluxDB.
-If at least one of your performance requirements falls into the Probably infeasible category, then you will likely need to use a cluster to distribute the load among multiple servers.
+If your performance requirements fall into the [Moderate](#general-hardware-guidelines-for-a-single-node) or [Low load](#general-hardware-guidelines-for-a-single-node) ranges then you can likely use a single node instance of InfluxDB.
+If at least one of your performance requirements falls into the [Probably infeasible category](#general-hardware-guidelines-for-a-single-node), then you will likely need to use a cluster to distribute the load among multiple servers.
 
 ## General hardware guidelines for a single node
 
 We define the load that you'll be placing on InfluxDB by the number of fields written per second, the number of queries per second, and the number of unique [series](/influxdb/v1.0/concepts/glossary/#series). Based on your load, we make general CPU, RAM, and IOPS recommendations.
 
-| Load         | Field writes per second  | moderate queries per second | Unique series |
+| Load         | Field writes per second  | Moderate queries per second | Unique series |
 |--------------|----------------|----------------|---------------|
 |  **Low**         |  < 5 thousand         |  < 5           |  < 100 thousand         |
 |  **Moderate**    |  < 250 thousand        |  < 25          |  < 1 million        |
 |  **High**        |  > 250 thousand        |  > 25          |  > 1 million        |
 | **Probably infeasible**  |  > 750 thousand        |  > 100         |  > 10 million       |
 
-> **Note:** Queries vary widely in their impact on the system. 
-
-Simple queries have few if any functions and no regular expressions.
-Simple queries are bounded in time to a few minutes, hours, or maybe a day. 
-Simple queries typically execute in a few milliseconds to a few dozen milliseconds. 
-
-Moderate queries have multiple functions and one or two regular expressions. 
-Moderate queries may also have complex GROUP BY clauses or sample a time range of multiple weeks.
-Moderate queries typically execute in a few hundred or a few thousand milliseconds. 
-
-Complex queries involve multiple aggregation or transformation functions or multiple regular expressions.
-Complex queries may sample a very large time range of months or years.
-Complex queries typically take multiple seconds to execute. 
+> **Note:** Queries vary widely in their impact on the system.
+>
+Simple queries:
+>
+* Have few if any functions and no regular expressions
+* Are bounded in time to a few minutes, hours, or maybe a day
+* Typically execute in a few milliseconds to a few dozen milliseconds
+>
+Moderate queries:
+>
+* Have multiple functions and one or two regular expressions
+* May also have complex `GROUP BY` clauses or sample a time range of multiple weeks
+* Typically execute in a few hundred or a few thousand milliseconds
+>
+Complex queries:
+>
+* Have multiple aggregation or transformation functions or multiple regular expressions
+* May sample a very large time range of months or years
+* Typically take multiple seconds to execute
 
 #### Low load recommendations
 * CPU: 2-4 cores
@@ -73,7 +79,7 @@ Performance at this scale is a significant challenge and may not be achievable. 
 ## General hardware guidelines for a cluster
 
 ### Meta Nodes
-A cluster must have at least three indepenent meta nodes to survive the loss of a server. A cluster with `2n + 1` meta nodes can tolerate the loss of `n` meta nodes. Clusters should have an odd number of meta nodes. There is no reason to have an even number of meta nodes, and it can lead to issues in certain configurations. 
+A cluster must have at least three independent meta nodes to survive the loss of a server. A cluster with `2n + 1` meta nodes can tolerate the loss of `n` meta nodes. Clusters should have an odd number of meta nodes. There is no reason to have an even number of meta nodes, and it can lead to issues in certain configurations.
 
 Meta nodes do not need very much computing power. Regardless of the cluster load, we recommend the following for the meta nodes:
 
@@ -83,7 +89,7 @@ Meta nodes do not need very much computing power. Regardless of the cluster load
 * IOPS: 50
 
 ### Data Nodes
-A cluster with only one data node is valid but has no data redundancy. The redundancy is set by the [replication factor](/influxdb/v0.13/concepts/glossary/#replication-factor) on the retention policy to which the data is written. A cluster can lose `n - 1` data nodes and still return complete query results, where `n` is the replication factor. For optimal data distribution within the cluster, InfluxData recommends using an even number of data nodes. 
+A cluster with only one data node is valid but has no data redundancy. The redundancy is set by the [replication factor](/influxdb/v0.13/concepts/glossary/#replication-factor) on the retention policy to which the data is written. A cluster can lose `n - 1` data nodes and still return complete query results, where `n` is the replication factor. For optimal data distribution within the cluster, InfluxData recommends using an even number of data nodes.
 
 The hardware recommendations for cluster data nodes are similar to the standalone instance recommendations. Data nodes should always have at least 2 CPU cores, as they must handle regular read and write traffic, as well as intra-cluster read and write traffic. Due to the cluster communication overhead, data nodes in a cluster handle less throughput than a standalone instance on the same hardware.
 
@@ -94,20 +100,25 @@ The hardware recommendations for cluster data nodes are similar to the standalon
 |  **High**        |  > 100 thousand        |  > 25          |  > 1 million        |
 | **Probably infeasible**  |  > 500 thousand        |  > 100         |  > 10 million       |
 
-> **Note:** Queries vary widely in their impact on the system. 
-
-Simple queries have few if any functions and no regular expressions.
-Simple queries are bounded in time to a few minutes, hours, or maybe a day. 
-Simple queries typically execute in a few milliseconds to a few dozen milliseconds. 
-
-Moderate queries have multiple functions and one or two regular expressions. 
-Moderate queries may also have complex GROUP BY clauses or sample a time range of multiple weeks.
-Moderate queries typically execute in a few hundred or a few thousand milliseconds. 
-
-Complex queries involve multiple aggregation or transformation functions or multiple regular expressions.
-Complex queries may sample a very large time range of months or years.
-Complex queries typically take multiple seconds to execute. 
-
+> **Note:** Queries vary widely in their impact on the system.
+>
+Simple queries:
+>
+* Have few if any functions and no regular expressions
+* Are bounded in time to a few minutes, hours, or maybe a day
+* Typically execute in a few milliseconds to a few dozen milliseconds
+>
+Moderate queries:
+>
+* Have multiple functions and one or two regular expressions
+* May also have complex `GROUP BY` clauses or sample a time range of multiple weeks
+* Typically execute in a few hundred or a few thousand milliseconds
+>
+Complex queries:
+>
+* Have multiple aggregation or transformation functions or multiple regular expressions
+* May sample a very large time range of months or years
+* Typically take multiple seconds to execute
 
 #### Low load recommendations
 * CPU: 2 cores
