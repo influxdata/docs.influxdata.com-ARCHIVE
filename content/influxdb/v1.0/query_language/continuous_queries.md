@@ -15,7 +15,7 @@ When writing large amounts of data to InfluxDB, you may often want to downsample
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[CQs with backreferencing](/influxdb/v1.0/query_language/continuous_queries/#cqs-with-backreferencing)  
 * [List CQs with `SHOW`](/influxdb/v1.0/query_language/continuous_queries/#list-cqs-with-show)
 * [Delete CQs with `DROP`](/influxdb/v1.0/query_language/continuous_queries/#delete-cqs-with-drop)
-* [Backfilling](/influxdb/v1.0/query_language/continuous_queries/#backfilling)
+* [Substitute CQs for nested functions and HAVING clauses](/influxdb/v1.0/query_language/continuous_queries/#substitute-cqs-for-nested-functions-and-having-clauses)
 * [Further reading](/influxdb/v1.0/query_language/continuous_queries/#further-reading)
 
 ## CQ definition
@@ -228,38 +228,99 @@ DROP CONTINUOUS QUERY <cq_name> ON <database_name>
 
 A successful `DROP CONTINUOUS QUERY` returns an empty response.
 
-## Backfilling
+## Substitute CQs for nested functions and HAVING clauses
 
-CQs do not backfill data, that is, they do not compute results for data written to the database before the CQ existed. Instead, users can backfill data with the `INTO` clause. Unlike CQs, backfill queries require a `WHERE` clause with a `time` restriction.
+InfluxQL is a SQL-like query language for interacting with InfluxDB.
+While InfluxQL resembles SQL in functionality it does not always have similar
+syntax.
 
-### Examples
+By the end of this section you will know how to use InfluxDB's CQs to get the
+same functionality as nested functions and SQL's `HAVING` clauses.
 
-Here is a basic backfill example:
-```sql
-> SELECT min("temp") AS "min_temp", max("temp") AS "max_temp" INTO "reading.minmax.5m" FROM "reading"
-WHERE time >= '2015-12-14 00:05:20' AND time < '2015-12-15 00:05:20'
-GROUP BY time(5m)
+### Nested functions
+
+Most InfluxQL functions do not support nesting.
+Get the same functionality as a nested function by creating a CQ to calculate
+the inner-most function and querying the CQ results to calculate the outer-most
+function.
+
+> **InfluxQL functions that support nesting:**
+>
+> * [`count()` with `distinct()`](/influxdb/v1.0/query_language/functions/#distinct)
+> * [`derivative()`](/influxdb/v1.0/query_language/functions/#derivative)
+> * [`difference()`](/influxdb/v1.0/query_language/functions/#difference)
+> * [`moving_average()`](/influxdb/v1.0/query_language/functions/#moving-average)
+> * [`non_negative_derivative()`](/influxdb/v1.0/query_language/functions/#non-negative-derivative)
+> * [`holt_winters()`](/influxdb/v1.0/query_language/functions/#holt-winters)
+
+#### Example
+
+InfluxDB does not accept the following query with a nested function.
+The query calculates the average number
+of `bees` at `30` minute intervals and the sum of those averages:
+```
+SELECT sum(mean("bees")) FROM "farm" GROUP BY time(30m)
 ```
 
-Tags (`sensor_id` in the example below) can be used optionally in the same way as in CQs:
-```sql
-> SELECT min("temp") AS "min_temp", max("temp") AS "max_temp" INTO "reading.minmax.5m" FROM "reading"
-WHERE time >= '2015-12-14 00:05:20' AND time < '2015-12-15 00:05:20'
-GROUP BY time(5m), "sensor_id"
+To get the same results:
+
+##### 1. Create a CQ
+<br>
+This step performs the `mean("bees")` part of the nested function above.
+Because this step creates a CQ you only need to execute it once.
+
+The following CQ automatically calculates the average number of `bees` at `30` minute intervals
+and writes those averages to the `mean_bees` field in the `aggregate_bees` measurement.
+```
+CREATE CONTINUOUS QUERY "bee_cq" ON "mydb" BEGIN SELECT mean("bees") AS "mean_bees" INTO "aggregate_bees" FROM "farm" GROUP BY time(30m) END
 ```
 
-To prevent the backfill from creating a huge number of "empty" points containing only `null` values, [fill()](/influxdb/v1.0/query_language/data_exploration/#the-group-by-clause-and-fill) can be used at the end of the query:
-```sql
-> SELECT min("temp") AS "min_temp", max("temp") AS "max_temp" INTO "reading.minmax.5m" FROM "reading"
-WHERE time >= '2015-12-14 00:05:20' AND time < '2015-12-15 00:05:20'
-GROUP BY time(5m), fill(none)
+##### 2. Query the CQ results
+<br>
+This step performs the `sum([...])` part of the nested function above.
+
+Query the data in the measurement `aggregate_bees` to calculate the sum of the `mean_bees` field:
+```
+SELECT sum("mean_bees") FROM "aggregate_bees" WHERE time >= <start_time> AND time <= <end_time>
 ```
 
-If you would like to further break down the queries and run them with even more control, you can add additional `WHERE` clauses:
-```sql
-> SELECT min("temp") AS "min_temp", max("temp") AS "max_temp" INTO "reading.minmax.5m" FROM "reading"
-WHERE "sensor_id"='EG-21442' AND time >= '2015-12-14 00:05:20' AND time < '2015-12-15 00:05:20'
-GROUP BY time(5m)
+### `HAVING` clauses
+
+InfluxQL does not support [`HAVING` clauses](https://en.wikipedia.org/wiki/Having_(SQL).
+Get the same functionality by creating a CQ to aggregate the data and querying the CQ results to apply the `HAVING` clause.
+
+#### Example
+
+InfluxDB does not accept the following query with a `HAVING` clause.
+The query calculates the average number of `bees` at `30` minute intervals and
+requests averages that are greater than `20`.
+```
+SELECT mean("bees") FROM "farm" GROUP BY time(30m) HAVING mean("bees") > 20
+```
+
+To get the same results:
+
+##### 1. Create a CQ
+<br>
+This step performs the `mean("bees")` part of the query above.
+Because this step creates CQ you only need to execute it once.
+
+The following CQ automatically calculates the average number of `bees` at
+`30` minutes intervals and writes those averages to the `mean_bees` field in the `aggregate_bees`
+measurement.
+
+```
+CREATE CONTINUOUS QUERY "bee_cq" ON "mydb" BEGIN SELECT mean("bees") AS "mean_bees" INTO "aggregate_bees" FROM "farm" GROUP BY time(30m) END
+```
+
+##### 2. Query the CQ results
+<br>
+This step performs the `HAVING mean("bees") > 20` part of the query above.
+
+Query the data in the measurement `aggregate_bees` and request values of the `mean_bees` field that are greater than `20` in the `WHERE` clause:
+
+```
+SELECT "mean_bees" FROM "aggregate_bees" WHERE "mean_bees" > 20
 ```
 
 ## Further reading
