@@ -455,6 +455,8 @@ For example, if you're using 1.0.0 `curl -i 'http://localhost:8086/ping'` return
 ✨`X-Influxdb-Version: 1.0.0`✨  
 `Date: Fri, 04 Mar 2016 19:23:08 GMT`
 
+If authentication is enabled you will need to use `https` in the URL.
+
 * Check the text that appears when you [launch](/influxdb/v1.0/tools/shell/) the CLI:
 
 `Connected to http://localhost:8086`✨`version 1.0.0`✨  
