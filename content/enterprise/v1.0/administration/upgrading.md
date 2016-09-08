@@ -140,7 +140,7 @@ To view your existing cluster accounts, visit the `Cluster Accounts` page locate
 in the `CLUSTER` section in the sidebar.
 
 The example below shows three cluster accounts.
-The first acccount (`ClusterAdmin`) is the account we created in the new signup flow.
+The first account (`ClusterAdmin`) is the account we created in the new signup flow.
 The last two (`paul` and `todd`) are users that existed prior to the
 upgrade.
 
