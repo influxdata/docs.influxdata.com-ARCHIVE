@@ -30,8 +30,8 @@ up-to-date configuration settings.
 
 ##### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta_1.0.0-beta3-c1.0.0rc1_amd64.deb
-sudo dpkg -i influxdb-meta_1.0.0-beta3-c1.0.0rc1_amd64.deb
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta_1.0.0-c1.0.0_amd64.deb
+sudo dpkg -i influxdb-meta_1.0.0-c1.0.0_amd64.deb
 ```
 
 > **Note:** If you're running Ubuntu 16.04.1, you may need to enter
@@ -39,33 +39,33 @@ sudo dpkg -i influxdb-meta_1.0.0-beta3-c1.0.0rc1_amd64.deb
 
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta-1.0.0_beta3_c1.0.0rc1.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.0.0_beta3_c1.0.0rc1.x86_64.rpm
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta-1.0.0_c1.0.0.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.0.0_c1.0.0.x86_64.rpm
 ```
 
 #### Data nodes
 
 ##### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data_1.0.0-beta3-c1.0.0rc1_amd64.deb
-sudo dpkg -i influxdb-data_1.0.0-beta3-c1.0.0rc1_amd64.deb
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data_1.0.0-c1.0.0_amd64.deb
+sudo dpkg -i influxdb-data_1.0.0-c1.0.0_amd64.deb
 ```
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data-1.0.0_beta3_c1.0.0rc1.x86_64.rpm
-sudo yum localinstall influxdb-data-1.0.0_beta3_c1.0.0rc1.x86_64.rpm
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data-1.0.0_c1.0.0.x86_64.rpm
+sudo yum localinstall influxdb-data-1.0.0_c1.0.0.x86_64.rpm
 ```
 #### Web console
 
 ##### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise_1.0.0~rc1_amd64.deb
-sudo dpkg -i influx-enterprise_1.0.0~rc1_amd64.deb
+wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise_1.0.0_amd64.deb
+sudo dpkg -i influx-enterprise_1.0.0_amd64.deb
 ```
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise-1.0.0~rc1.x86_64.rpm
-sudo yum localinstall influx-enterprise-1.0.0~rc1.x86_64.rpm
+wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise-1.0.0.x86_64.rpm
+sudo yum localinstall influx-enterprise-1.0.0.x86_64.rpm
 ```
 
 > **Note:**
@@ -87,17 +87,35 @@ sudo -u influx-enterprise influx-enterprise migrate --config /etc/influx-enterpr
 ```
 
 ### 4. Restart all services
-Meta nodes:
+#### Meta nodes:
+On sysvinit systems, enter:
 ```
-service influxdb-meta restart
+service influxdb-meta start
 ```
-Data nodes:
+
+On systemd systems, enter:
 ```
-service influxdb restart
+sudo systemctl start influxdb-meta
 ```
-Web console:
+#### Data nodes:
+On sysvinit systems, enter:
 ```
-service influx-enterprise restart
+service influxdb start
+```
+
+On systemd systems, enter:
+```
+sudo systemctl start influxdb
+```
+#### Web console:
+On sysvinit systems, enter:
+```
+service influx-enterprise start
+```
+
+On systemd systems, enter:
+```
+sudo systemctl start influx-enterprise
 ```
 
 ### 5. Get started
