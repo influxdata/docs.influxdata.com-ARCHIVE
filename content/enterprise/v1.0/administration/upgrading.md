@@ -118,10 +118,68 @@ On systemd systems, enter:
 sudo systemctl start influx-enterprise
 ```
 
-### 5. Get started
-Now that you've upgraded to version 1.0, follow the steps in the
-updated [Getting Started](/enterprise/v1.0/introduction/getting_started/) guide to
-get up and running with InfluxEnterprise.
+### 5. Complete the signup flow
+Now that you've upgraded to version 1.0, visit `http://<your_web_console_server's_IP_address>:3000`
+to complete the new signup flow.
+
+The [Getting Started](/enterprise/v1.0/introduction/getting_started/) guide offers
+detailed instructions for how to complete the signup process.
+Don't worry about any existing cluster users for now - we'll take care of
+them in the next step.
+
+### 6. Link existing cluster accounts to web console users
+In version 1.0 web console users are given cluster-specific permissions by being associated with a separate cluster account.
+The upgrade process turned all existing users into cluster accounts with no
+associated web console user.
+The following steps document how to link those existing cluster accounts
+to web console users.
+
+First, view existing cluster accounts to identify the users you'll need
+to invite to the web console.
+To view your existing cluster accounts, visit the `Cluster Accounts` page located
+in the `CLUSTER` section in the sidebar.
+
+The example below shows three cluster accounts.
+The first acccount (`ClusterAdmin`) is the account we created in the new signup flow.
+The last two (`paul` and `todd`) are users that existed prior to the
+upgrade.
+
+![Cluster Accounts](/img/enterprise/cluster_accounts_1.png)
+
+Next, invite the cluster account users that existed prior to the upgrade to be web console users.
+Visit the `Users` page located in the `WEB ADMIN` section in the sidebar, and
+click on the `Invite User` button in the top right corner.
+Once you've filled out the `Invite User` form with the relevant information, link the new
+web console user with the existing cluster account by selecting the relevant
+cluster account from the `Account` dropdown.
+
+The example below shows a web console invite for the user `Paul`.
+The last input links the new web console user `Paul` with the existing cluster
+account `paul`.
+
+![Invite web console user](/img/enterprise/invite_user_1.png)
+
+Repeat this process for each cluster account user that existed prior to the upgrade.
+Once you've completed this step, all pre-existing cluster accounts will be linked
+to web console users and those users will have access to both the cluster and the
+web console.
+
+> **Note:** Web console users can be admin users or non-admin users.
+In addition to having access to the web console, admin users are able to invite users, manage web console users,
+manage cluster accounts, and edit cluster names.
+>
+By default, new web console users are non-admin users.
+To make a web console user an admin user, visit the `Users` page located in the `WEB ADMIN` section in the sidebar
+and click on the name of the relevant user.
+In the `Account Details` section, click the checkbox next to `Admin` and click
+`Update User`.
+>
+![Web Console Admin User](/img/enterprise/admin_user_1.png)
+
+
+You've completed the upgrade process for version 1.0.
+Next, check out the [release notes](/enterprise/v1.0/about-the-project/release-notes-changelog/) to
+see what's new!
 
 ## Configuration settings
 
