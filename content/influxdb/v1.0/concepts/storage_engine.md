@@ -7,7 +7,7 @@ menu:
     parent: concepts
 ---
 
-### The InfluxDB Storage Engine and the Time-Structured Merge Tree (TSM) 
+# The InfluxDB Storage Engine and the Time-Structured Merge Tree (TSM) 
 
 The new InfluxDB storage engine looks very similar to a LSM Tree.
 It has a write ahead log and a collection of read-only data files which are  similar in concept to SSTables in an LSM Tree.
@@ -20,7 +20,7 @@ Each of these databases has its own [WAL](/influxdb/v1.0/concepts/glossary/#wal-
 
 We'll dig into each of these parts of the storage engine.
 
-#### Storage Engine
+## Storage Engine
 
 The storage engine ties a number components together and provides the external interface for storing and querying series data. It is composed of a number of components that each serve a particular role:
 
@@ -34,7 +34,7 @@ The storage engine ties a number components together and provides the external i
 * Compression - Compression is handled by various Encoders and Decoders for specific data types.  Some encoders are fairly static and always encode the same type the same way; others switch their compression strategy based on the shape of the data.
 * Writers/Readers - Each file type (WAL segment, TSM files, tombstones, etc..) has Writers and Readers for working with the formats.
 
-#### Write Ahead Log (WAL)
+### Write Ahead Log (WAL)
 
 The WAL is organized as a bunch of files that look like `_000001.wal`.
 The file numbers are monotonically increasing and referred to as WAL segments.
@@ -47,7 +47,7 @@ This means that batching points together is required to achieve high throughput 
 
 Each entry in the WAL follows a [TLV standard](https://en.wikipedia.org/wiki/Type-length-value) with a single byte representing the type of entry (write or delete), a 4 byte `uint32` for the length of the compressed block, and then the compressed block.
 
-#### Cache
+### Cache
 
 The Cache is an in-memory copy of all data points current stored in the WAL.
 The points are organized by the key, which is the measurement, [tag set](/influxdb/v1.0/concepts/glossary/#tag-set), and unique [field](/influxdb/v1.0/concepts/glossary/#field).
@@ -72,7 +72,7 @@ The idle threshold, [`cache-snapshot-write-cold-duration`](/influxdb/v1.0/admini
 
 The in-memory Cache is recreated on restart by re-reading the WAL files on disk.
 
-#### TSM Files
+### TSM Files
 
 TSM files are a collection of read-only files that are memory mapped.
 The structure of these files looks very similar to an SSTable in LevelDB or other LSM Tree variants.
@@ -145,7 +145,7 @@ The last section is the footer that stores the offset of the start of the index.
 └─────────┘
 ```
 
-#### Compression
+### Compression
 
 Each block is compressed to reduce storage space and disk IO when querying.
 A block contains the timestamps and values for a given series and field.
@@ -165,7 +165,7 @@ For example, some points may be able to use run-length encoding whereas other ma
 Each value type also contains a 1 byte header indicating the type of compression for the remaining bytes.
 The four high bits store the compression type and the four low bits are used by the encoder if needed.
 
-##### Timestamps
+#### Timestamps
 
 Timestamp encoding is adaptive and based on the structure of the timestamps that are encoded.
 It uses a combination of delta encoding, scaling, and compression using simple8b run-length encoding, as well as falling back to no compression if needed.
@@ -184,14 +184,14 @@ Simple8b encoding is a 64bit word-aligned integer encoding that packs multiple i
 If any value exceeds the maximum the deltas are stored uncompressed using 8 bytes each for the block.
 Future encodings may use a patched scheme such as Patched Frame-Of-Reference (PFOR) to handle outliers more effectively.
 
-##### Floats
+#### Floats
 
 Floats are encoded using an implementation of the [Facebook Gorilla paper](http://www.vldb.org/pvldb/vol8/p1816-teller.pdf).
 The encoding XORs consecutive values together to produce a small result when the values are close together.
 The delta is then stored using control bits to indicate how many leading and trailing zeroes are in the XOR value.
 Our implementation removes the timestamp encoding described in paper and only encodes the float values.
 
-##### Integers
+#### Integers
 
 Integer encoding uses two different strategies depending on the range of values in the uncompressed data.
 Encoded values are first encoded using [ZigZag encoding](https://developers.google.com/protocol-buffers/docs/encoding?hl=en#signed-integers).
@@ -205,16 +205,16 @@ If any values are larger than the maximum then all values are stored uncompresse
 If all values are identical, run-length encoding is used.  
 This works very well for values that are frequently constant.
 
-##### Booleans
+#### Booleans
 
 Booleans are encoded using a simple bit packing strategy where each boolean uses 1 bit.
 The number of booleans encoded is stored using variable-byte encoding at the beginning of the block.
 
-##### Strings
+#### Strings
 Strings are encoding using [Snappy](http://google.github.io/snappy/) compression.
 Each string is packed consecutively and they are compressed as one larger block.
 
-#### Compactions
+### Compactions
 
 Compactions are recurring processes that migrate data stored in a write-optimized format into a more read-optimized format.
 There are a number of stages of compaction that take place while a shard is hot for writes:
@@ -238,7 +238,7 @@ In addition, all points from a particular series are contiguous in a TSM file ra
 Full compactions produce an optimal set of TSM files and include all optimizations from Level and Index Optimization compactions.
 Once a shard is fully compacted, no other compactions will run on it unless new writes or deletes are stored.
 
-#### Writes
+### Writes
 
 Writes are appended to the current WAL segment and are also added to the Cache.
 Each WAL segment has a maximum size. 
@@ -249,14 +249,14 @@ If the inbound write rate exceeds the WAL compaction rate for a sustained period
 When WAL segments fill up and are closed, the Compactor snapshots the Cache and writes the data to a new TSM file.
 When the TSM file is successfully written and `fsync`'d, it is loaded and referenced by the FileStore.
 
-#### Updates
+### Updates
 
 Updates (writing a newer value for a point that already exists) occur as normal writes.
 Since cached values overwrite existing values, newer writes take precedence.
 If a write would overwrite a point in a prior TSM file, the points are merged at runtime and the newer write takes precedence.
 
 
-#### Deletes
+### Deletes
 
 Deletes occur by writing a delete entry to the WAL for the measurement or series and then updating the Cache and FileStore.
 The Cache evicts all relevant entries.
@@ -265,7 +265,7 @@ These tombstone files are used at startup time to ignore blocks as well as durin
 
 Queries against partially deleted series are handled at query time until a compaction removes the data fully from the TSM files.
 
-#### Queries
+### Queries
 
 When a query is executed by the storage engine, it is essentially a seek to a given time associated with a specific series key and field.
 First, we do a search on the data files to find the files that contain a time range matching the query as well containing matching series.
@@ -280,7 +280,7 @@ When iterating over the index entries the blocks are read sequentially from the 
 The block is decompressed and we seek to the specific point.
 
 
-## The new InfluxDB storage engine: from LSM Tree to B+Tree and back again to create the Time Structured Merge Tree
+# The new InfluxDB storage engine: from LSM Tree to B+Tree and back again to create the Time Structured Merge Tree
 
 Writing a new storage format should be a last resort.
 So how did InfluxData end up writing our own engine?
@@ -299,7 +299,7 @@ Finally, we ended up building our own storage engine that is similar in many way
 With our new storage engine we were able to achieve up to a 45x reduction in disk space usage from our B+Tree setup with even greater write throughput and compression than what we saw with LevelDB and its variants.
 This post will cover the details of that evolution and end with an in-depth look at our new storage engine and its inner workings.
 
-### Properties of Time Series Data
+## Properties of Time Series Data
 
 The workload of time series data is quite different from normal database workloads.
 There are a number of factors that conspire to make it very difficult to scale and remain performant:
@@ -344,7 +344,7 @@ However, that means that once the first points written reach their expiration da
 
 Let's dig into the details of the two types of storage engines we tried and how these properties had a significant impact on our performance.
 
-### LevelDB and Log Structured Merge Trees
+## LevelDB and Log Structured Merge Trees
 
 When the InfluxDB project began, we picked LevelDB as the storage engine because we had used it for time series data storage in the product that was the precursor to InfluxDB.
 We knew that it had great properties for write throughput and everything seemed to "just work".
@@ -394,7 +394,7 @@ Users that had six months or a year of data would run out of file handles.
 It's not something we found with the majority of users, but anyone pushing the database to its limits would hit this problem and we had no fix for it.
 There were simply too many file handles open.
 
-### BoltDB and mmap B+Trees
+## BoltDB and mmap B+Trees
 
 After struggling with LevelDB and its variants for a year we decided to move over to BoltDB, a pure Golang database heavily inspired by LMDB, a mmap B+Tree database written in C.
 It has the same API semantics as LevelDB: a key value store where the keyspace is ordered.
