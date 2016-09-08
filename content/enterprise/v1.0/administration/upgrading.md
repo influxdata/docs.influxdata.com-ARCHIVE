@@ -120,7 +120,7 @@ sudo systemctl start influx-enterprise
 
 ### 5. Get started
 Now that you've upgraded to version 1.0, follow the steps in the
-updated [Getting Started](/enterprise/v1.0/introduction/getting-started/) guide to
+updated [Getting Started](/enterprise/v1.0/introduction/getting_started/) guide to
 get up and running with InfluxEnterprise.
 
 ## Configuration settings

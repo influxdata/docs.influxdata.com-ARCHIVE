@@ -1,5 +1,7 @@
 ---
 title: Getting Started
+alias:
+  /enterprise/v1.0/introduction/getting-started/
 menu:
   enterprise_1_0:
     weight: 20

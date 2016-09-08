@@ -12,7 +12,7 @@ Download and write to any InfluxDB installation the sample data used in [Data Ex
 
 From your terminal, download the text file that contains the data in [line protocol](../../write_protocols/line/) format:
 ```
-curl https://s3-us-west-1.amazonaws.com/noaa.water.database.0.9/NOAA_data.txt > NOAA_data.txt
+curl https://s3.amazonaws.com/noaa.water-database/NOAA_data.txt
 ```
 
 Write the data to InfluxDB via the [CLI](../../tools/shell/):
@@ -43,7 +43,7 @@ time			               count
 1970-01-01T00:00:00Z	 15258
 ```
 
-Select the first ten observations in the measurement h2o_feet:
+Select the first five observations in the measurement h2o_feet:
 
 ```bash
 > SELECT * FROM h2o_feet LIMIT 5

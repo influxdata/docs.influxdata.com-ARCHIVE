@@ -8,151 +8,173 @@ menu:
 
 ## Overview
 
-Backup and restore is available starting with InfluxEnterprise Clustering version 0.7.1.
-Please note that this feature is considered experimental and is subject to change.
-
 The primary use cases for backup/restore are:
 
 * Disaster recovery
 * Debugging
 * Restoring clusters to a consistent state
 
-Currently, users can perform backups and restores for all data in the cluster.
-They can be carried out on down clusters or on running clusters.
-Note that this feature does not support conflict resolution; any backed up data that conflict with existing data will not overwrite the existing data during the restore.
-
-As of version 0.7.4, InfluxEnterprise Clustering does not support backups or restores:
-
-* Per database
-* Per database and retention policy
-* Per shard
-* For specific time ranges (incremental backups are not currently available)
+Currently, InfluxEnterprise supports backups and restores for all data in the
+cluster; a single database; a single database and retention policy; and a
+single [shard](/influxdb/v0.13/concepts/glossary/#shard).
 
 ## Terminology and behavior
 
 A **backup** creates a copy of the cluster’s data and meta data at that point in time and stores the copy in the specified directory.
+The backup also includes a manifest, a JSON file describing what was collected during the backup.
+
 The filenames reflect the UTC timestamp of when the backup was created, for example:
 
-Data backup: `20060102T150405Z.<shard_id>.<shard_owner>.tar.gz`  
-Meta backup: `20060102T150405Z.manifest` and `20060102T150405Z.meta`
+* Data backup: `20060102T150405Z.<shard_id>.tar.gz`
+* Meta backup: `20060102T150405Z.meta`
+* Manifest: `20060102T150405Z.manifest`
 
 A **restore** adds the backed-up data to the cluster.
-A restore does not rebalance the cluster.
-If the user creates a backup of a two node cluster with a replication factor of two and restores that backup to a three node cluster, the data will be distributed to two of three data nodes in the cluster.
-Similarly, if the user creates a backup of a three node cluster with a replication factor of three and restores that backup to a two node cluster, the data will be distributed to as many nodes as possible (in this case, to two data nodes).
+By default, a restore attempts to write databases using backed-up data's replication factor.
+An alternate replication factor can be specified with the `-newrf` flag when restoring a single database.
 
 ## Syntax
 
 ### Backup
 ```
-influxd-ctl backup [options] <backup-directory>
+influxd-ctl [-bind <hostname>:8091] backup [options] <backup-directory>
 ```
 Options:
 
-`-addr <hostname>:8088`: specifies the hostname and TCP port of the data node to backup
+* `-bind <hostname>:8091`: the hostname and HTTP port of a running meta server (defaults to `localhost:8091`)
+* `-db <string>`: the name of the single database to back up
+* `-from <TCP-address>`: the data node TCP address to prefer when backing up
+* `-rp <string>`: the name of the single retention policy to back up (must specify `-db` with `-rp`)
+* `-shard <unit>`: the ID of the single shard to back up
+
+#### Examples
+
+##### Back up all data
+<br>
+To perform a full backup into the current directory:
+```
+influxd-ctl backup .
+```
+
+Output:
+```
+$ influxd-ctl backup .
+Backing up meta data... Done. 421 bytes transferred
+Backing up node 7ba671c7644b:8088, db telegraf, rp autogen, shard 4... Done. Backed up in 903.539567ms, 307712 bytes transferred
+Backing up node bf5a5f73bad8:8088, db _internal, rp monitor, shard 1... Done. Backed up in 138.694402ms, 53760 bytes transferred
+Backing up node 9bf0fa0c302a:8088, db _internal, rp monitor, shard 2... Done. Backed up in 101.791148ms, 40448 bytes transferred
+Backing up node 7ba671c7644b:8088, db _internal, rp monitor, shard 3... Done. Backed up in 144.477159ms, 39424 bytes transferred
+Backed up to . in 1.293710883s, transferred 441765 bytes
+$ ls
+20160803T222310Z.manifest  20160803T222310Z.s1.tar.gz  20160803T222310Z.s3.tar.gz
+20160803T222310Z.meta      20160803T222310Z.s2.tar.gz  20160803T222310Z.s4.tar.gz
+```
+
+##### Back up a single database
+<br>
+Point at a remote meta server and back up only one database into a given directory (the directory must already exist):
+```
+influxd-ctl -bind <metahost>:8091 backup -db <db-name> <path-to-directory>
+```
+
+Output:
+```
+$ influxd-ctl -bind 2a1b7a338184:8091 backup -db telegraf ./telegrafbackup
+Backing up meta data... Done. 318 bytes transferred
+Backing up node 7ba671c7644b:8088, db telegraf, rp autogen, shard 4... Done. Backed up in 997.168449ms, 399872 bytes transferred
+Backed up to ./telegrafbackup in 1.002358077s, transferred 400190 bytes
+$ ls ./telegrafbackup
+20160803T222811Z.manifest  20160803T222811Z.meta  20160803T222811Z.s4.tar.gz
+```
 
 ### Restore
 ```
-influxd-ctl restore [options] <backup-directory>
+influxd-ctl [-bind <hostname>:8091] restore [options] <path-to-manifest-file>
 ```
 Options:
 
-* `-manifest <manifest-file>`: specifies the manifest file to restore
-* `-addr <hostname>:8088`: specifies the hostname and TCP port of the data node to restore to
-* `-from <hostname>:8088`: specifies the hostname and TCP port of the relevant backed up data node
+* `-bind <hostname>:8091`: the hostname and HTTP port of a running meta server (defaults to `localhost:8091`)
+* `-db <string>`: the name of the single database to restore
 * `-list`: shows the contents of the backup
+* `-newdb <string>`: the name of the new database to restore to (must specify with `-db`)
+* `-newrf <int>`: the new replication factor to restore to (this is capped to the number of data nodes in the cluster)
+* `-newrp <string>`: the name of the new retention policy to restore to (must specify with `-rp`)
+* `-rp <string>`: the name of the single retention policy to restore
+* `-shard <unit>`: the shard ID to restore
 
-## Example
+#### Examples
 
-In the following example, we create a backup of a running cluster, drop data from the cluster that are in that backup, and add those data back into the cluster with a restore.
+##### Restore a full backup
+<br>
+A full restore requires that the cluster hardware has the same hostnames as during the backup.
+If the hostnames have changed, you will need to restore the databases one-by-one.
 
-### 1. Create a backup directory
+`influxd-ctl restore <path-to-manifest>`
 
-From a meta node in the InfluxEnterprise Cluster, run:
-```
-mkdir /tmp/backup
-```
-### 2. Create a backup
-
-From the same meta node in the InfluxEnterprise Cluster, run:
-```
-influxd-ctl backup /tmp/backup
-```
 Output:
 ```
-Backing up meta data... Done. Backed up in 16.422251ms, 845 bytes transferred
-Backing up node enterprise-beta-data-01:8088, db _internal, rp monitor, shard 1... Done. Backed up in 58.935179ms, 138752 bytes transferred
-Backing up node enterprise-beta-data-01:8088, db _internal, rp monitor, shard 5... Done. Backed up in 4.365603ms, 0 bytes transferred
-Backing up node enterprise-beta-data-02:8088, db _internal, rp monitor, shard 5... Done. Backed up in 6.633594ms, 0 bytes transferred
-Backing up node enterprise-beta-data-02:8088, db telegraf, rp autogen, shard 4... Done. Backed up in 57.37225ms, 50176 bytes transferred
-Backing up node enterprise-beta-data-01:8088, db telegraf, rp autogen, shard 4... Done. Backed up in 54.302327ms, 50176 bytes transferred
-Backed up to /tmp/backup in 202.083765ms, transferred 239949 bytes
+$ influxd-ctl restore ./20160803T225759Z.manifest
+Using manifest: ./20160803T225759Z.manifest
+Restoring meta data... Done. Restored in 76.049631ms, 4 shards mapped
+Restoring db telegraf, rp autogen, shard 4 to shard 4...
+Copying data to bdb2c4b56071:8088... Copying data to 95bc5959b985:8088... Copying data to a9f8bbb35cad:8088... Done. Restored shard 4 into shard 4 in 96.756767ms, 198144 bytes transferred
+Restoring db _internal, rp monitor, shard 1 to shard 1...
+Copying data to bdb2c4b56071:8088... Done. Restored shard 1 into shard 1 in 34.089374ms, 25088 bytes transferred
+Restoring db _internal, rp monitor, shard 2 to shard 2...
+Copying data to 95bc5959b985:8088... Done. Restored shard 2 into shard 2 in 1.618344596s, 38912 bytes transferred
+Restoring db _internal, rp monitor, shard 3 to shard 3...
+Copying data to a9f8bbb35cad:8088... Done. Restored shard 3 into shard 3 in 36.137453ms, 19456 bytes transferred
+Restored from . in 1.864106729s, transferred 281600 bytes
 ```
-Files in /tmp/backup:
-```
-20160708T234243Z.manifest
-20160708T234243Z.meta
-20160708T234243Z.s1.n4.tar.gz
-20160708T234243Z.s4.n4.tar.gz
-20160708T234243Z.s4.n7.tar.gz
-20160708T234243Z.s5.n4.tar.gz
-20160708T234243Z.s5.n7.tar.gz
-```
-### 3. Drop some data
 
-In this step, we drop data from the telegraf database that are older than 2016-07-08 23:42:43 (the time at which we created the backup).
+##### Restore a single database and give it a new name
+<br>
+`influxd-ctl restore -db <src> -newdb <dest> <path-to-manifest>`
 
-From the [CLI](https://docs.influxdata.com/influxdb/v1.0/tools/shell/):
-```
-> USE telegraf
-Using database telegraf
-
-> SELECT "cpu","usage_idle" FROM "cpu" WHERE time < '2016-07-08T23:42:43Z'
-name: cpu
----------
-time                   cpu         usage_idle
-2016-07-08T23:10:50Z   cpu-total   98.29999999999927
-2016-07-08T23:10:50Z   cpu0        98.29999999999927
-[...]
-2016-07-08T23:42:40Z   cpu-total   96.49298597195832
-2016-07-08T23:42:40Z   cpu0        96.49298597195832
-
-> DELETE FROM "cpu" WHERE time < '2016-07-08T23:42:43Z'
-
-> SELECT "cpu","usage_idle" FROM "cpu" WHERE time < '2016-07-08T23:42:43Z'
->
-```
-### 4. Restore the backup
-
-From a meta node in the InfluxEnterprise Cluster, run:
-```
-influxd-ctl restore /tmp/backup
-```
 Output:
 ```
-Using manifest: /tmp/backup/20160708T234243Z.manifest
-Restoring meta data... Done. Restored in 10.364389ms, 845 bytes transferred
-Restoring node enterprise-beta-data-01:8088 from node enterprise-beta-data-01:8088 db _internal, rp monitor, shard 1... Done. Restored into shard 1 in 670.744498ms, 138752 bytes transferred
-Restoring node enterprise-beta-data-01:8088 from node enterprise-beta-data-01:8088 db _internal, rp monitor, shard 5... Done. Restored into shard 5 in 23.896962ms, 0 bytes transferred
-Restoring node enterprise-beta-data-02:8088 from node enterprise-beta-data-02:8088 db _internal, rp monitor, shard 5... Done. Restored into shard 5 in 16.545994ms, 0 bytes transferred
-Restoring node enterprise-beta-data-02:8088 from node enterprise-beta-data-02:8088 db telegraf, rp autogen, shard 4... Done. Restored into shard 4 in 1.012699974s, 50176 bytes transferred
-Restoring node enterprise-beta-data-01:8088 from node enterprise-beta-data-01:8088 db telegraf, rp autogen, shard 4... Done. Restored into shard 4 in 1.081072281s, 50176 bytes transferred
-Restored from /tmp/backup in 2.816704644s, transferred 239104 bytes
+$ influxd-ctl restore -db telegraf -newdb restored_telegraf ./20160803T225759Z.manifest
+Using manifest: ./20160803T225759Z.manifest
+Restoring meta data... Done. Restored in 57.729885ms, 1 shards mapped
+Restoring db telegraf, rp autogen, shard 4 to shard 5...
+Copying data to bdb2c4b56071:8088... Copying data to 95bc5959b985:8088... Copying data to a9f8bbb35cad:8088... Done. Restored shard 4 into shard 5 in 93.415749ms, 198144 bytes transferred
+Restored from . in 151.33582ms, transferred 198144 bytes
 ```
-### 5. Query the restored data
 
-From the CLI:
+##### Restore a backed up database and merge it into an existing database
+<br>
+Your `telegraf` database was mistakenly dropped, but you have a recent backup so you've only lost a small amount of data.
+
+If [Telegraf](/telegraf/v1.0/) is still running, it will recreate the `telegraf` database shortly after the database is dropped.
+You might try to directly restore your `telegraf` backup just to find that you can't restore:
+
 ```
-> USE telegraf
-Using database telegraf
+$ influxd-ctl restore -db telegraf ./20160803T225759Z.manifest
+Using manifest: ./20160803T225759Z.manifest
+Restoring meta data... Error.
+restore: operation exited with error: problem setting snapshot: database already exists
+```
 
-> SELECT "cpu","usage_idle" FROM "cpu" WHERE time < '2016-07-08T23:42:43Z'
-name: cpu
----------
-time                   cpu         usage_idle
-2016-07-08T23:10:50Z   cpu-total   98.29999999999927
-2016-07-08T23:10:50Z   cpu0        98.29999999999927
-[...]
-2016-07-08T23:42:40Z   cpu-total   96.49298597195832
-2016-07-08T23:42:40Z   cpu0        96.49298597195832
+To work around this, you can restore your telegraf backup into a new database by specifying the `-db` flag for the source and the `-newdb` flag for the new destination:
+
+```
+$ # influxd-ctl restore -db telegraf -newdb restored_telegraf ./20160803T225759Z.manifest
+Using manifest: ./20160803T225759Z.manifest
+Restoring meta data... Done. Restored in 119.785611ms, 1 shards mapped
+Restoring db telegraf, rp autogen, shard 4 to shard 5...
+Copying data to 13787a2bf2c6:8088... Copying data to cc8d090d7a5c:8088... Copying data to b0e32efdfda7:8088... Done. Restored shard 4 into shard 5 in 73.217002ms, 198144 bytes transferred
+Restored from . in 193.480371ms, transferred 198144 bytes
+```
+
+Then, in the [`influx` client](/influxdb/v1.0/tools/shell/), use an [`INTO` query](/influxdb/v1.0/query_language/data_exploration/#relocate-data) to copy the data from the new database into the existing `telegraf` database:
+
+```
+$ influx
+> use restored_telegraf
+Using database restored_telegraf
+> SELECT * INTO telegraf..:MEASUREMENT FROM /.*/ GROUP BY *
+name: result
+------------
+time                  written
+1970-01-01T00:00:00Z  471
 ```

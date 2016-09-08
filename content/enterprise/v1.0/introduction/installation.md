@@ -424,7 +424,7 @@ influx-+  4557  1.2  7.4 421600 37108 ?        Ssl  17:34   0:00 /usr/bin/influx
 You're all set!
 Visit `http://<your_web_console_server's_IP_address>:3000` to access your
 InfluxEnterprise web console, and check out the
-next section to [get started](/enterprise/v1.0/introduction/getting-started/).
+next section to [get started](/enterprise/v1.0/introduction/getting_started/).
 
 > ### Install the InfluxEnterprise Web Console with PostgreSQL
 >
