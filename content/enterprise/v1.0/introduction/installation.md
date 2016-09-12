@@ -53,6 +53,21 @@ file (the hostnames are representative):
 <Data_2_IP> enterprise-data-02
 ```
 
+> **Verify:** Before proceeding with the installation, verify on each server that the other 
+servers are resolvable. Here is an example set of shell commands using `ping`:
+
+```sh
+ping -qc 1 enterprise-meta-01
+ping -qc 1 enterprise-meta-02
+ping -qc 1 enterprise-meta-03
+ping -qc 1 enterprise-data-01
+ping -qc 1 enterprise-data-02
+```
+
+If there are any connectivity issues resolve them before proceeding with the 
+installation.
+A healthy cluster requires that every meta and data node can communicate
+with every other meta and data node.
 ### Set up, configure, and start the meta servers
 
 On all three meta servers:
@@ -114,9 +129,9 @@ On systemd systems, enter:
 sudo systemctl start influxdb-meta
 ```
 
-Check to see that the process is running by entering:
+> **Verify:** Check to see that the process is running by entering:
 ```
-ps aux | grep influxdb-meta
+ps aux | grep -v grep | grep influxdb-meta
 ```
 You should see output similar to:
 ```
@@ -211,9 +226,9 @@ On systemd systems, enter:
 sudo systemctl start influxdb
 ```
 
-Check to see that the process is running by entering:
+> **Verify:** Check to see that the process is running by entering:
 ```
-ps aux | grep influxdb
+ps aux | grep -v grep | grep influxdb
 ```
 You should see output similar to:
 ```
@@ -235,7 +250,7 @@ influxd-ctl join enterprise-meta-02:8091
 influxd-ctl join enterprise-meta-03:8091
 ```
 
-The expected output of those commands is:
+> **Verify:** The expected output of those commands is:
 ```
 Added meta node x at enterprise-meta-0x:8091
 ```
@@ -245,7 +260,8 @@ the meta node during the join process.
 Please do not specify `localhost` as this can cause cluster connection issues.
 
 #### 2. Verify that the meta nodes are part of the cluster
-Issue the following command on any meta node:
+
+> **Verify:** Issue the following command on any meta node:
 ```
 influxd-ctl show
 ```
@@ -273,14 +289,14 @@ influxd-ctl add-data enterprise-data-01:8088
 influxd-ctl add-data enterprise-data-02:8088
 ```
 
-The expected output of those commands is:
+> **Verify:** The expected output of those commands is:
 ```
 Added data node y at enterprise-data-0x:8088
 ```
 
 #### 4. Verify that the data nodes are part of the cluster
 
-Issue the following command on any meta node:
+> **Verify:** Issue the following command on any meta node:
 ```
 influxd-ctl show
 ```
@@ -381,7 +397,8 @@ Run the following command:
 sudo -u influx-enterprise influx-enterprise migrate --config /etc/influx-enterprise/influx-enterprise.conf
 ```
 
-Output:
+> **Verify:** The expected output:
+
 ```
 2016/07/29 15:43:24 Loading config at /etc/influx-enterprise/influx-enterprise.conf
 [POP] Create /var/lib/influx-enterprise/enterprise.db (/var/lib/influx-enterprise/enterprise.db?cache=shared&mode=rwc)
@@ -400,6 +417,7 @@ Output:
 0.0340 seconds
 ```
 
+
 #### 3. Start the InfluxEnterprise web console
 
 On sysvinit systems, enter:
@@ -412,9 +430,9 @@ On systemd systems, enter:
 sudo systemctl start influx-enterprise
 ```
 
-Check to see that the process is running by entering:
+> **Verify:** Check to see that the process is running by entering:
 ```
-ps aux | grep influx-enterprise
+ps aux | grep -v grep | grep influx-enterprise
 ```
 You should see output similar to:
 ```
@@ -445,7 +463,7 @@ sudo apt-get -y install postgresql postgresql-contrib
 sudo -u postgres psql
 ```
 >
-Output:
+> **Verify:** Output:
 ```
 -> psql (9.3.12)
 -> Type "help" for help.
@@ -456,7 +474,7 @@ Output:
 ALTER USER postgres PASSWORD '<your_password>';
 ```
 >
-Output:
+> **Verify:** Output:
 ```
 -> ALTER ROLE
 ```
@@ -499,7 +517,7 @@ prompted:
 influx-enterprise migrate --config /etc/influx-enterprise/influx-enterprise.conf
 ```
 >
-Output:
+> **Verify:** Output:
 ```
 2016/06/15 17:16:15 Loading config at /etc/influx-enterprise/influx-enterprise.conf
 CREATE DATABASE enterprise;
