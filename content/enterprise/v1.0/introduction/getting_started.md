@@ -22,6 +22,11 @@ Here, we call our cluster `MyCluster`.
 
 ![Name your cluster](/img/enterprise/name_cluster_1.png)
 
+> **Note:** If instead you see a message that your cluster does not appear to be set up, 
+double-check the `registration-enabled` and `registration-server-url` settings in the 
+configuration files for each meta node. 
+The `registration-server-url` setting must be a full URL with protocol and port. 
+
 #### 2. Create a Cluster Admin account
 
 Next, create a Cluster Admin account.
