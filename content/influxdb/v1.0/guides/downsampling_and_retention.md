@@ -175,7 +175,7 @@ two measurements: `orders` and `downsampled_orders`.
 
 ```bash
 > SELECT * FROM "orders" LIMIT 5
-name: cpu
+name: orders
 ---------
 time			                phone  website
 2016-05-13T23:00:00Z	  10     30
@@ -185,7 +185,7 @@ time			                phone  website
 2016-05-13T23:00:40Z	  17     32
 
 > SELECT * FROM "a_year"."downsampled_orders" LIMIT 5
-name: downsampled_cpu
+name: downsampled_orders
 ---------------------
 time			                mean_phone  mean_website
 2016-05-13T15:00:00Z	  12          23
