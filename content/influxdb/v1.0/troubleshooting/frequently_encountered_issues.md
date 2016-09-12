@@ -25,6 +25,7 @@ Where applicable, it links to outstanding issues on GitHub.
 * [Missing data after creating a new `DEFAULT` retention policy](#missing-data-after-creating-a-new-default-retention-policy)
 * [Querying for series cardinality](#querying-for-series-cardinality)
 * [Using `OR` with absolute time in the `WHERE` clause](#using-or-with-absolute-time-in-the-where-clause)
+* [Getting empty results with `fill(previous)`](#getting-empty-results-with-fill-previous)
 
 **Writing data**  
 
@@ -314,6 +315,37 @@ Example:
 <dt> [GitHub Issue #3290](https://github.com/influxdata/influxdb/issues/3290)
 </dt>
 
+## Getting empty results with `fill(previous)`
+
+`fill(previous)` doesn't fill the result for a time bucket if the previous value is outside the query's time range.
+
+In the following example, InfluxDB doesn't fill the `2016-07-12T16:50:20Z`-`2016-07-12T16:50:30Z` time bucket with the results from the `2016-07-12T16:50:00Z`-`2016-07-12T16:50:10Z` time bucket because the query’s time range does not include the earlier time bucket.
+
+Raw data:
+```
+> SELECT * FROM "cupcakes"
+name: cupcakes
+--------------
+time                   chocolate
+2016-07-12T16:50:00Z   3
+2016-07-12T16:50:10Z   2
+2016-07-12T16:50:40Z   12
+2016-07-12T16:50:50Z   11
+```
+
+`GROUP BY time()` query:
+```
+> SELECT max("chocolate") FROM "cupcakes" WHERE time >= '2016-07-12T16:50:20Z' AND time <= '2016-07-12T16:51:10Z' GROUP BY time(20s) fill(previous)
+name: cupcakes
+--------------
+time                   max
+2016-07-12T16:50:20Z
+2016-07-12T16:50:40Z   12
+2016-07-12T16:51:00Z   12
+```
+
+While this is the expected behavior of `fill(previous)`, an [open feature request](https://github.com/influxdata/influxdb/issues/6878) on GitHub proposes that `fill(previous)` should fill results even when previous values fall outside the query’s time range.
+
 # Writing data
 ## Writing integers
 Add a trailing `i` to the end of the field value when writing an integer.
@@ -433,7 +465,7 @@ See the [Line Protocol Syntax](/influxdb/v1.0/write_protocols/write_syntax/) pag
 ## Process consuming too much memory
 InfluxDB maintains an in-memory index of every [series](/influxdb/v1.0/concepts/glossary/#series) in the system. As the number of unique series grows, so does the RAM usage. High [series cardinality](/influxdb/v1.0/concepts/glossary/#series-cardinality) can lead to the operating system killing the InfluxDB process with an out of memory (OOM) exception. See [Querying for series cardinality](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#querying-for-series-cardinality) to learn how to query for series cardinality.
 
-To reduce series cardinality, series must be dropped from the index. [`DROP DATABASE`], [`DROP MEASUREMENT`], and [`DROP SERIES`] will all remove series from the index and reduce the overall series cardinality. 
+To reduce series cardinality, series must be dropped from the index. [`DROP DATABASE`], [`DROP MEASUREMENT`], and [`DROP SERIES`] will all remove series from the index and reduce the overall series cardinality.
 
 > **Note:** `DROP` commands are usually CPU-intensive, as they frequently trigger a TSM compaction. Issuing `DROP` queries at a high frequency may significantly impact write and other query throughput.
 

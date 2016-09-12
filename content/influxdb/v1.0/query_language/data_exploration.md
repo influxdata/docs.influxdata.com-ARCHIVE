@@ -529,7 +529,10 @@ time			                 mean
 ✨
 ```
 
-> **Note:** If you're `GROUP(ing) BY` several things (for example, both tags and a time interval) `fill()` must go at the end of the `GROUP BY` clause.
+> **Notes:**
+>
+* `fill()` must go at the end of the `GROUP BY` clause if you're `GROUP(ing) BY` several things (for example, both tags and a time interval).
+* `fill(previous)` doesn’t fill the result for a time bucket if the previous value is outside the query’s time range. See [Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#getting-empty-results-with-fill-previous) for more information.
 
 ## The INTO clause
 ### Relocate data
