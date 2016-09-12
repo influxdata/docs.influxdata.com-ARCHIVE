@@ -53,18 +53,18 @@ file (the hostnames are representative):
 <Data_2_IP> enterprise-data-02
 ```
 
-> **Verify:** Before proceeding with the installation, verify on each server that the other 
+> **Verification steps:**
+>
+Before proceeding with the installation, verify on each server that the other
 servers are resolvable. Here is an example set of shell commands using `ping`:
+>
+    ping -qc 1 enterprise-meta-01
+    ping -qc 1 enterprise-meta-02
+    ping -qc 1 enterprise-meta-03
+    ping -qc 1 enterprise-data-01
+    ping -qc 1 enterprise-data-02
 
-```sh
-ping -qc 1 enterprise-meta-01
-ping -qc 1 enterprise-meta-02
-ping -qc 1 enterprise-meta-03
-ping -qc 1 enterprise-data-01
-ping -qc 1 enterprise-data-02
-```
-
-If there are any connectivity issues resolve them before proceeding with the 
+If there are any connectivity issues resolve them before proceeding with the
 installation.
 A healthy cluster requires that every meta and data node can communicate
 with every other meta and data node.
@@ -129,14 +129,18 @@ On systemd systems, enter:
 sudo systemctl start influxdb-meta
 ```
 
-> **Verify:** Check to see that the process is running by entering:
-```
-ps aux | grep -v grep | grep influxdb-meta
-```
+> **Verification steps:**
+>
+Check to see that the process is running by entering:
+>
+    ps aux | grep -v grep | grep influxdb-meta
+>
 You should see output similar to:
-```
-influxdb  3207  0.8  4.4 483000 22168 ?        Ssl  17:05   0:08 /usr/bin/influxd-meta -config /etc/influxdb/influxdb-meta.conf
-```
+>
+    influxdb  3207  0.8  4.4 483000 22168 ?        Ssl  17:05   0:08 /usr/bin/influxd-meta -config /etc/influxdb/influxdb-meta.conf
+
+<br>
+
 
 > **Note:** It is possible to start the cluster with a single meta node but you
 must pass the `-single-server flag` when starting the single meta node.
@@ -226,14 +230,16 @@ On systemd systems, enter:
 sudo systemctl start influxdb
 ```
 
-> **Verify:** Check to see that the process is running by entering:
-```
-ps aux | grep -v grep | grep influxdb
-```
+> **Verification steps:**
+>
+Check to see that the process is running by entering:
+>
+    ps aux | grep -v grep | grep influxdb
+>
 You should see output similar to:
-```
-influxdb  2706  0.2  7.0 571008 35376 ?        Sl   15:37   0:16 /usr/bin/influxd -config /etc/influxdb/influxdb.conf
-```
+>
+    influxdb  2706  0.2  7.0 571008 35376 ?        Sl   15:37   0:16 /usr/bin/influxd -config /etc/influxdb/influxdb.conf
+
 
 Move on to the next section to join all servers to a cluster.
 
@@ -250,37 +256,35 @@ influxd-ctl join enterprise-meta-02:8091
 influxd-ctl join enterprise-meta-03:8091
 ```
 
-> **Verify:** The expected output of those commands is:
-```
-Added meta node x at enterprise-meta-0x:8091
-```
-
 > **Note:** Please make sure that you specify the fully qualified host name of
 the meta node during the join process.
 Please do not specify `localhost` as this can cause cluster connection issues.
 
-#### 2. Verify that the meta nodes are part of the cluster
-
-> **Verify:** Issue the following command on any meta node:
-```
-influxd-ctl show
-```
-
 The expected output is:
 ```
-Meta Nodes
-==========
-TCP Address
-enterprise-meta-01:8091
-enterprise-meta-02:8091
-enterprise-meta-03:8091
+Added meta node x at enterprise-meta-0x:8091
 ```
+
+> **Verification steps:**
+>
+Issue the following command on any meta node:
+>
+    influxd-ctl show
+>
+The expected output is:
+>
+    Meta Nodes
+    ==========
+    TCP Address
+    enterprise-meta-01:8091
+    enterprise-meta-02:8091
+    enterprise-meta-03:8091
 
 Note that your cluster must have at least three meta nodes.
 If you do not see your meta nodes in the output, please retry adding them to
 the cluster.
 
-#### 3. Connect the data nodes to the cluster
+#### 2. Connect the data nodes to the cluster
 
 From `enterprise-meta-01`, enter:
 ```
@@ -289,33 +293,31 @@ influxd-ctl add-data enterprise-data-01:8088
 influxd-ctl add-data enterprise-data-02:8088
 ```
 
-> **Verify:** The expected output of those commands is:
+The expected output is:
 ```
 Added data node y at enterprise-data-0x:8088
 ```
 
-#### 4. Verify that the data nodes are part of the cluster
-
-> **Verify:** Issue the following command on any meta node:
-```
-influxd-ctl show
-```
-
+> **Verification steps:**
+>
+Issue the following command on any meta node:
+>
+    influxd-ctl show
+>
 The expected output is:
-```
-Data Nodes
-==========
-ID   TCP Address
-4    enterprise-data-01:8088
-5    enterprise-data-02:8088
-
-Meta Nodes
-==========
-TCP Address
-enterprise-meta-01:8091
-enterprise-meta-02:8091
-enterprise-meta-03:8091
-```
+>
+    Data Nodes
+    ==========
+    ID   TCP Address
+    4    enterprise-data-01:8088
+    5    enterprise-data-02:8088    
+>
+    Meta Nodes
+    ==========
+    TCP Address
+    enterprise-meta-01:8091
+    enterprise-meta-02:8091
+    enterprise-meta-03:8091
 
 Note that your cluster must have at least two data nodes.
 If you do not see your data nodes in the output, please retry adding them
@@ -397,8 +399,7 @@ Run the following command:
 sudo -u influx-enterprise influx-enterprise migrate --config /etc/influx-enterprise/influx-enterprise.conf
 ```
 
-> **Verify:** The expected output:
-
+The expected output is:
 ```
 2016/07/29 15:43:24 Loading config at /etc/influx-enterprise/influx-enterprise.conf
 [POP] Create /var/lib/influx-enterprise/enterprise.db (/var/lib/influx-enterprise/enterprise.db?cache=shared&mode=rwc)
@@ -412,11 +413,10 @@ sudo -u influx-enterprise influx-enterprise migrate --config /etc/influx-enterpr
 > 0008_rename_product_id_to_node_id.up.sql
 > 0009_create_explorers.up.sql
 > 0010_add_name_to_explorers.up.sql
-> 0011_add_name_to_products.up.sql
+> 0011_add_name_to_products.up.sql     
 
 0.0340 seconds
 ```
-
 
 #### 3. Start the InfluxEnterprise web console
 
@@ -430,14 +430,16 @@ On systemd systems, enter:
 sudo systemctl start influx-enterprise
 ```
 
-> **Verify:** Check to see that the process is running by entering:
-```
-ps aux | grep -v grep | grep influx-enterprise
-```
+> **Verification steps:**
+>
+Check to see that the process is running by entering:
+>
+    ps aux | grep -v grep | grep influx-enterprise
+>
 You should see output similar to:
-```
-influx-+  4557  1.2  7.4 421600 37108 ?        Ssl  17:34   0:00 /usr/bin/influx-enterprise run -c /etc/influx-enterprise/influx-enterprise.conf
-```
+>
+    influx-+  4557  1.2  7.4 421600 37108 ?        Ssl  17:34   0:00 /usr/bin/influx-enterprise run -c /etc/influx-enterprise/influx-enterprise.conf
+
 
 You're all set!
 Visit `http://<your_web_console_server's_IP_address>:3000` to access your
@@ -451,38 +453,32 @@ The following steps document how to install the Web Console if you'd prefer to
 use PostgreSQL.
 >
 #### Install PostgreSQL
-```
-sudo apt-get update
-sudo apt-get -y install postgresql postgresql-contrib
-```
+>
+    sudo apt-get update
+    sudo apt-get -y install postgresql postgresql-contrib
 >
 #### Set the password for the system's local postgres user
 >
 ##### Login to PostgreSQL:
-```
-sudo -u postgres psql
-```
 >
-> **Verify:** Output:
-```
--> psql (9.3.12)
--> Type "help" for help.
-```
+    sudo -u postgres psql
+>
+The expected output is:
+>
+    -> psql (9.3.12)
+    -> Type "help" for help.
 >
 ##### Set the password, replacing `<your_password>` with your password:
-```
-ALTER USER postgres PASSWORD '<your_password>';
-```
 >
-> **Verify:** Output:
-```
--> ALTER ROLE
-```
+    ALTER USER postgres PASSWORD '<your_password>';
+>
+The expected output is:
+>
+    -> ALTER ROLE
 >
 ##### Exit PostgreSQL:
-```
-\q
-```
+>
+    \q
 >
 ### Setup Steps
 >
@@ -491,47 +487,43 @@ In addition to updating the first `url` setting, `license-key`, and
 `shared-secret` (see [above](#1-edit-the-configuration-file)), in
 `/etc/influx-enterprise/influx-enterprise.conf`:
 >
-* Uncomment the first `url` setting in the `[database]` section
-* Update the password in that first `url` setting to the password for the system's local postgres user
-* Comment out the second `url` setting in the `[database]` section
+\* Uncomment the first `url` setting in the `[database]` section  
+\* Update the password in that first `url` setting to the password for the system's local postgres user  
+\* Comment out the second `url` setting in the `[database]` section
 >
-```
-[...]
-[database]
-# Where is your database?
-# NOTE: This version of Enterprise Web currently only supports Postgres >= 9.3 or SQLite3
-url = "postgres://postgres:password@localhost:5432/enterprise" # ENV: DATABASE_URL ✨
-# url = "sqlite3:///var/lib/influx-enterprise/enterprise.db" ✨
-```
+    [...]
+    [database]
+    # Where is your database?
+    # NOTE: This version of Enterprise Web currently only supports Postgres >= 9.3 or SQLite3
+    url = "postgres://postgres:password@localhost:5432/enterprise" # ENV: DATABASE_URL ✨
+    # url = "sqlite3:///var/lib/influx-enterprise/enterprise.db" ✨
 >
 If you’re using a non-SSL version of Postgres, add the `?sslmode=disable`
 option to the first `url` setting in the `[database]` section:
-```
- url = "postgres://postgres:<your_password>@localhost:5432/enterprise?sslmode=disable"
-```
+>
+    url = "postgres://postgres:<your_password>@localhost:5432/enterprise?sslmode=disable"
 >
 #### 2. Migrate the configuration file
 Run the following command and enter your postgres Admin User's password when
 prompted:
-```
-influx-enterprise migrate --config /etc/influx-enterprise/influx-enterprise.conf
-```
 >
-> **Verify:** Output:
-```
-2016/06/15 17:16:15 Loading config at /etc/influx-enterprise/influx-enterprise.conf
-CREATE DATABASE enterprise;
-> 0001_create_users.up.sql
-> 0002_create_products.up.sql
-> 0003_create_authentications.up.sql
-> 0004_create_clusters_view.up.sql
-> 0005_add_password.up.sql
-> 0006_add_invite_nonce.up.sql
-> 0007_drop_token_from_products.up.sql
-> 0008_rename_product_id_to_node_id.up.sql
-> 0009_create_explorers.up.sql
-> 0010_add_name_to_explorers.up.sql
-> 0011_add_name_to_products.up.sql
-```
+    influx-enterprise migrate --config /etc/influx-enterprise/influx-enterprise.conf
+>
+The expected output is:
+>
+    2016/06/15 17:16:15 Loading config at /etc/influx-enterprise/influx-enterprise.conf
+    CREATE DATABASE enterprise;
+    > 0001_create_users.up.sql
+    > 0002_create_products.up.sql
+    > 0003_create_authentications.up.sql
+    > 0004_create_clusters_view.up.sql
+    > 0005_add_password.up.sql
+    > 0006_add_invite_nonce.up.sql
+    > 0007_drop_token_from_products.up.sql
+    > 0008_rename_product_id_to_node_id.up.sql
+    > 0009_create_explorers.up.sql
+    > 0010_add_name_to_explorers.up.sql
+    > 0011_add_name_to_products.up.sql
+>
 Now, follow the [last step](#3-start-the-influxenterprise-web-console) in the
 previous section to complete the installation.
