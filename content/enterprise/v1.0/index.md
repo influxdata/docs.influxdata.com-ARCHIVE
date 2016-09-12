@@ -1,5 +1,5 @@
 ---
-title: Enterprise Beta Documentation
+title: Enterprise Documentation
 
 menu:
   enterprise:
