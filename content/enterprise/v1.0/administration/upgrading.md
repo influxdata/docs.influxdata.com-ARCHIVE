@@ -198,7 +198,7 @@ In each meta node’s configuration file (`/etc/influxdb/influxdb-meta.conf`), s
 ```
 reporting-disabled = false
 bind-address = ""
-hostname = "rk-enterprise-beta-meta-01"
+hostname = "rk-enterprise-meta-01"
 
 [enterprise]
   registration-enabled = true #✨
