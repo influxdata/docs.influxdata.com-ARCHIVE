@@ -53,6 +53,23 @@ file (the hostnames are representative):
 <Data_2_IP> enterprise-data-02
 ```
 
+Before proceeding with the installation, verify on each server that the other 
+servers are resolvable. Here is an example set of shell commands using `ping`:
+
+```sh
+ping -qc 1 enterprise-meta-01
+ping -qc 1 enterprise-meta-02
+ping -qc 1 enterprise-meta-03
+ping -qc 1 enterprise-data-01
+ping -qc 1 enterprise-data-02
+```
+
+If there are any connectivity issues resolve them before proceeding with the 
+installation.
+A healthy cluster requires that every meta and data node can communicate
+with every other meta and data node.
+
+
 ### Set up, configure, and start the meta servers
 
 On all three meta servers:
