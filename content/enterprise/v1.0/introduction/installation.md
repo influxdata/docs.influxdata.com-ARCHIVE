@@ -46,11 +46,11 @@ Add your servers' hostnames and IP addresses to **each** server's `/etc/hosts`
 file (the hostnames are representative):
 
 ```
-<Meta_1_IP> enterprise-beta-meta-01
-<Meta_2_IP> enterprise-beta-meta-02
-<Meta_3_IP> enterprise-beta-meta-03
-<Data_1_IP> enterprise-beta-data-01
-<Data_2_IP> enterprise-beta-data-02
+<Meta_1_IP> enterprise-meta-01
+<Meta_2_IP> enterprise-meta-02
+<Meta_3_IP> enterprise-meta-03
+<Data_1_IP> enterprise-data-01
+<Data_2_IP> enterprise-data-02
 ```
 
 ### Set up, configure, and start the meta servers
@@ -83,7 +83,7 @@ In `/etc/influxdb/influxdb-meta.conf`, set:
 ```
 reporting-disabled = false
 bind-address = ""
-hostname = "<enterprise-beta-meta-0x>" #✨
+hostname = "<enterprise-meta-0x>" #✨
 
 [enterprise]
  registration-enabled = true #✨
@@ -160,7 +160,7 @@ In `/etc/influxdb/influxdb.conf`, set:
 ```
 # Change this option to true to disable reporting.
 reporting-disabled = false
-hostname="enterprise-beta-data-0x" #✨
+hostname="enterprise-data-0x" #✨
 meta-tls-enabled = false
 
 [enterprise]
@@ -226,18 +226,18 @@ Move on to the next section to join all servers to a cluster.
 
 #### 1. Connect the meta nodes to the cluster
 
-From `enterprise-beta-meta-01`, enter:
+From `enterprise-meta-01`, enter:
 ```
-influxd-ctl join enterprise-beta-meta-01:8091
+influxd-ctl join enterprise-meta-01:8091
 
-influxd-ctl join enterprise-beta-meta-02:8091
+influxd-ctl join enterprise-meta-02:8091
 
-influxd-ctl join enterprise-beta-meta-03:8091
+influxd-ctl join enterprise-meta-03:8091
 ```
 
 The expected output of those commands is:
 ```
-Added meta node x at enterprise-beta-meta-0x:8091
+Added meta node x at enterprise-meta-0x:8091
 ```
 
 > **Note:** Please make sure that you specify the fully qualified host name of
@@ -255,9 +255,9 @@ The expected output is:
 Meta Nodes
 ==========
 TCP Address
-enterprise-beta-meta-01:8091
-enterprise-beta-meta-02:8091
-enterprise-beta-meta-03:8091
+enterprise-meta-01:8091
+enterprise-meta-02:8091
+enterprise-meta-03:8091
 ```
 
 Note that your cluster must have at least three meta nodes.
@@ -266,16 +266,16 @@ the cluster.
 
 #### 3. Connect the data nodes to the cluster
 
-From `enterprise-beta-meta-01`, enter:
+From `enterprise-meta-01`, enter:
 ```
-influxd-ctl add-data enterprise-beta-data-01:8088
+influxd-ctl add-data enterprise-data-01:8088
 
-influxd-ctl add-data enterprise-beta-data-02:8088
+influxd-ctl add-data enterprise-data-02:8088
 ```
 
 The expected output of those commands is:
 ```
-Added data node y at enterprise-beta-data-0x:8088
+Added data node y at enterprise-data-0x:8088
 ```
 
 #### 4. Verify that the data nodes are part of the cluster
@@ -290,15 +290,15 @@ The expected output is:
 Data Nodes
 ==========
 ID   TCP Address
-4    enterprise-beta-data-01:8088
-5    enterprise-beta-data-02:8088
+4    enterprise-data-01:8088
+5    enterprise-data-02:8088
 
 Meta Nodes
 ==========
 TCP Address
-enterprise-beta-meta-01:8091
-enterprise-beta-meta-02:8091
-enterprise-beta-meta-03:8091
+enterprise-meta-01:8091
+enterprise-meta-02:8091
+enterprise-meta-03:8091
 ```
 
 Note that your cluster must have at least two data nodes.
