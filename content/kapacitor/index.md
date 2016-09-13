@@ -1,4 +1,4 @@
-+++
-title = "Kapacitor"
-
-+++
+---
+type: kapacitor
+layout: list
+---

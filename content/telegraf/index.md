@@ -1,5 +1,4 @@
 ---
-title: Telegraf Documentation
+type: telegraf
+layout: list
 ---
-
-The Telegraf documentation is currently under construction.

@@ -1,3 +1,4 @@
 ---
-title: InfluxDB Documentation
+type: influxdb
+layout: list
 ---

@@ -1,3 +1,4 @@
 ---
-title: Enterprise Documentation
+type: enterprise
+layout: list
 ---
