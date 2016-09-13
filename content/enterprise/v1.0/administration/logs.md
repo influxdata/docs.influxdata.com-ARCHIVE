@@ -32,7 +32,7 @@ as a service, `stderr` is redirected to
 that file.  You can override this location by setting the variable
 `STDERR` in the file `/etc/default/<node-type>`.
 
-For example, if on a Data node `/etc/default/influxdb` contains:
+For example, if on a data node `/etc/default/influxdb` contains:
 
 ```bash
 STDERR=/dev/null
