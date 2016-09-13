@@ -79,7 +79,7 @@ In `/etc/influxdb/influxdb-meta.conf`, set:
 * `registration-enabled` to `true`
 * `registration-server-url` to the full URL of the server that will run the InfluxEnterprise web console. 
 You must fully specify the protocol, IP or hostname, and port.
-Entering the IP or Hostname alone will lead to errors.
+Entering the IP or hostname alone will lead to errors.
 * `license-key` to the license key you received on [InfluxPortal](https://portal.influxdata.com/)
 
 ```
