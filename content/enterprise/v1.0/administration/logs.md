@@ -59,9 +59,9 @@ The service configuration file is `/etc/default/influxdb`.
 
 #### Enterprise Web
 
-For Enterprise Web nodes the <node-type> is `influxdb-enterprise`.
-The default log file is `/var/log/influxdb/influxdb-enterprise.log`
-The service configuration file is `/etc/default/influxdb-enterprise`.
+For Enterprise Web nodes the <node-type> is `influx-enterprise`.
+The default log file is `/var/log/influxdb/influx-enterprise.log`
+The service configuration file is `/etc/default/influx-enterprise`.
 
 ### systemd
 
@@ -92,9 +92,9 @@ The service configuration file is `/etc/default/influxdb`.
 
 #### Enterprise Web
 
-For data nodes the <node-type> is `influxdb-enterprise`.
-The default log command is `sudo journalctl -u influxdb-enterprise.service`
-The service configuration file is `/etc/default/influxdb-enterprise`.
+For data nodes the <node-type> is `influx-enterprise`.
+The default log command is `sudo journalctl -u influx-enterprise.service`
+The service configuration file is `/etc/default/influx-enterprise`.
 
 ## Using logrotate
 
