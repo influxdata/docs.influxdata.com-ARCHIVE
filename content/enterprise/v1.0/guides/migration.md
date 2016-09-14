@@ -15,7 +15,7 @@ of three or more meta nodes and zero or more data nodes.
 Please note that this migration process:
 
 * Deletes all data from any data nodes that are already part of the InfluxEnterprise Cluster
-* Will transfers all users from the OSS instance to the InfluxEnterprise Cluster*
+* Will transfer all users from the OSS instance to the InfluxEnterprise Cluster*
 * Will **not** transfer any users from the OSS instance to the InfluxEnterprise Web Console
 * Requires downtime for writes and reads for the OSS instance
 
