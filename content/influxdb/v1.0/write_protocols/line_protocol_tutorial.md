@@ -171,6 +171,7 @@ Field values can be floats, integers, strings, or booleans:
 * Floats - by default, InfluxDB assumes all numerical field values are floats.
 
     Store the field value `82` as a float:
+
     ```
 weather,location=us-midwest temperature=82 1465839830100400200
     ```
@@ -179,6 +180,7 @@ weather,location=us-midwest temperature=82 1465839830100400200
 number as an integer.
 
     Store the field value `82` as an integer:
+
     ```
 weather,location=us-midwest temperature=82i 1465839830100400200
     ```
@@ -187,6 +189,7 @@ weather,location=us-midwest temperature=82i 1465839830100400200
 [below](#quoting)).
 
     Store the field value `too warm` as a string:
+
     ```
 weather,location=us-midwest temperature="too warm" 1465839830100400200
     ```
@@ -195,6 +198,7 @@ weather,location=us-midwest temperature="too warm" 1465839830100400200
 FALSE with `f`, `F`, `false`, `False`, or `FALSE`.
 
     Store the field value `true` as a boolean:
+    
     ```
 weather,location=us-midwest too_hot=true 1465839830100400200
     ```
@@ -237,6 +241,7 @@ Moving from never quote to please do quote:
 It's not valid Line Protocol.
 
     Example:
+
     ```
 > INSERT weather,location=us-midwest temperature=82 "1465839830100400200"
 ERR: {"error":"unable to parse 'weather,location=us-midwest temperature=82 \"1465839830100400200\"': bad timestamp"}
@@ -246,6 +251,7 @@ ERR: {"error":"unable to parse 'weather,location=us-midwest temperature=82 \"146
 It's also not valid Line Protocol.
 
     Example:
+
     ```
 > INSERT weather,location=us-midwest temperature='too warm'
 ERR: {"error":"unable to parse 'weather,location=us-midwest temperature='too warm'': invalid boolean"}
@@ -257,6 +263,7 @@ It is valid Line Protocol but InfluxDB assumes that the quotes are part of the
 name.
 
     Example:
+
     ```
 > INSERT weather,location=us-midwest temperature=82 1465839830100400200
 > INSERT "weather",location=us-midwest temperature=87 1465839830100400200
@@ -270,6 +277,7 @@ weather
 
     To query data in `"weather"` you need to double quote the measurement name and
 escape the measurement's double quotes:
+
     ```
 > SELECT * FROM "\"weather\""
 name: "weather"
@@ -282,6 +290,7 @@ time				            location	 temperature
 InfluxDB will assume that those values are strings.
 
     Example:
+
     ```
 > INSERT weather,location=us-midwest temperature="82"
 > SELECT * FROM weather WHERE temperature >= 70
@@ -291,6 +300,7 @@ InfluxDB will assume that those values are strings.
 * Do double quote field values that are strings.
 
     Example:
+
     ```
 > INSERT weather,location=us-midwest temperature="too warm"
 > SELECT * FROM weather
