@@ -19,17 +19,22 @@ We've provided a list below of all the terms we'll cover, but we recommend readi
   <tr>
     <td><a href="/influxdb/v1.0/concepts/key_concepts/#field-value">field value</a></td>
     <td><a href="/influxdb/v1.0/concepts/key_concepts/#measurement">measurement</a></td>
-    <td><a href="/influxdb/v1.0/concepts/key_concepts/#point">point</a></td>
+    <td><a href="/influxdb/v1.0/concepts/key_concepts/#metaseries">metaseries</a></td>
   </tr>
-    <tr>
+  <tr>
+    <td><a href="/influxdb/v1.0/concepts/key_concepts/#point">point</a></td>
     <td><a href="/influxdb/v1.0/concepts/key_concepts/#retention-policy">retention policy</a></td>
     <td><a href="/influxdb/v1.0/concepts/key_concepts/#series">series</a></td>
-    <td><a href="/influxdb/v1.0/concepts/key_concepts/#tag-key">tag key</a></td>
   </tr>
-    <tr>
+  <tr>
+    <td><a href="/influxdb/v1.0/concepts/key_concepts/#tag-key">tag key</a></td>
     <td><a href="/influxdb/v1.0/concepts/key_concepts/#tag-set">tag set</a></td>
     <td><a href="/influxdb/v1.0/concepts/key_concepts/#tag-value">tag value</a></td>
+  </tr>
+  <tr>
     <td><a href="/influxdb/v1.0/concepts/key_concepts/#timestamp">timestamp</a></td>
+    <td><a href=""></a></td>
+    <td><a href=""></a></td>
   </tr>
 </table>
 
@@ -60,13 +65,13 @@ Now that you've seen some sample data in InfluxDB this section covers what it al
 
 InfluxDB is a time series database so it makes sense to start with what is at the root of everything we do: time.
 In the data above there's a column called `time` - all data in InfluxDB have that column.
-`time` stores timestamps, and the <a name="timestamp"></a>*timestamp* shows the date and time, in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) UTC, associated with particular data.
+`time` stores timestamps, and the <a name="timestamp"></a>**timestamp** shows the date and time, in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) UTC, associated with particular data.
 
 The next two columns, called `butterflies` and `honeybees`, are fields.
 Fields are made up of field keys and field values.
-<a name="field-key"></a>*Field keys* (`butterflies` and `honeybees`) are strings and they store metadata; the field key `butterflies` tells us that the field values `12`-`7` refer to butterflies and the field key `honeybees` tells us that the field values `23`-`22` refer to, well, honeybees.
+<a name="field-key"></a>**Field keys** (`butterflies` and `honeybees`) are strings and they store metadata; the field key `butterflies` tells us that the field values `12`-`7` refer to butterflies and the field key `honeybees` tells us that the field values `23`-`22` refer to, well, honeybees.
 
-<a name="field-value"></a>*Field values* are your data; they can be strings, floats, integers, or booleans, and, because InfluxDB is a time series database, a field value is always associated with a timestamp.
+<a name="field-value"></a>**Field values** are your data; they can be strings, floats, integers, or booleans, and, because InfluxDB is a time series database, a field value is always associated with a timestamp.
 The field values in the sample data are:
 
 ```
@@ -80,7 +85,7 @@ The field values in the sample data are:
 7    22
 ```
 
-In the data above, the collection of field-key and field-value pairs make up a <a name="field-set"></a>*field set*.
+In the data above, the collection of field-key and field-value pairs make up a <a name="field-set"></a>**field set**.
 Here are all eight field sets in the sample data:
 
 * `butterflies = 12   honeybees = 23`
@@ -93,20 +98,19 @@ Here are all eight field sets in the sample data:
 * `butterflies = 7    honeybees = 22`
 
 Fields are a required piece of InfluxDB's data structure - you cannot have data in InfluxDB without fields.
-It's also important to note that fields are not indexed.
+It's also important to note that field values are not indexed.
 [Queries](/influxdb/v1.0/concepts/glossary/#query) that use field values as filters must scan all values that match the other conditions in the query.
 As a result, those queries are not performant relative to queries on tags (more on tags below).
 In general, fields should not contain commonly-queried metadata.
 
-
 The last two columns in the sample data, called `location` and `scientist`, are tags.
 Tags are made up of tag keys and tag values.
-Both <a name="tag-key"></a>*tag keys* and <a name="tag-value"></a>*tag values* are stored as strings and record metadata.
+Both <a name="tag-key"></a>**tag keys** and <a name="tag-value"></a>**tag values** are stored as strings and record metadata.
 The tag keys in the sample data are `location` and `scientist`.
 The tag key `location` has two tag values: `1` and `2`.
 The tag key `scientist` also has two tag values: `langstroth` and `perpetua`.
 
-In the data above, the <a name="tag-set"></a>*tag set* is the different combinations of all the tag key-value pairs.
+In the data above, the <a name="tag-set"></a>**tag set** is the different combinations of all the tag key-value pairs.
 The four tag sets in the sample data are:
 
 * `location = 1`, `scientist = langstroth`
@@ -125,7 +129,7 @@ This means that queries on tags are faster and that tags are ideal for storing c
 > `SELECT * FROM "census" WHERE "butterflies" = 1`  
 > `SELECT * FROM "census" WHERE "honeybees" = 23`
 
-> Because fields aren't indexed, InfluxDB scans every value of `butterflies`  in the first query and every value of `honeybees` in the second query before it provides a response.
+> Because field values aren't indexed, InfluxDB scans every value of `butterflies`  in the first query and every value of `honeybees` in the second query before it provides a response.
 That behavior can hurt query response times - especially on a much larger scale.
 To optimize your queries, it may be beneficial to rearrange your [schema](/influxdb/v1.0/concepts/glossary/#schema) such that the fields (`butterflies` and `honeybees`) become the tags and the tags (`location` and `scientist`) become the fields:
 
@@ -143,48 +147,60 @@ time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 
 > Now that `butterflies` and `honeybees` are tags, InfluxDB won't have to scan every one of their values when it performs the queries above - this means that your queries are even faster.
 
-The <a name=measurement></a>*measurement* acts as a container for tags, fields, and the `time` column, and the measurement name is the description of the data that are stored in the associated fields.
+The <a name=measurement></a>**measurement** acts as a container for tags, fields, and the `time` column, and the measurement name is the description of the data that are stored in the associated fields.
 Measurement names are strings, and, for any SQL users out there, a measurement is conceptually similar to a table.
 The only measurement in the sample data is `census`.
 The name `census` tells us that the field values record the number of `butterflies` and `honeybees` - not their size, direction, or some sort of happiness index.
 
 A single measurement can belong to different retention policies.
-A <a name="retention-policy"></a>*retention policy* describes how long InfluxDB keeps data (`DURATION`) and how many copies of those data are stored in the cluster (`REPLICATION`).
+A <a name="retention-policy"></a>**retention policy** describes how long InfluxDB keeps data (`DURATION`).
+If you're working with a [cluster](https://docs.influxdata.com/enterprise/v1.0/) the retention policy also determines how many copies of those data are stored in the cluster (`REPLICATION`).
 If you're interested in reading more about retention policies, check out [Database Management](/influxdb/v1.0/query_language/database_management/#retention-policy-management).
 
-<dt> Replication factors do not serve a purpose with single node instances.
-</dt>
-
 In the sample data, everything in the `census` measurement belongs to the `autogen` retention policy.
-InfluxDB automatically creates that retention policy; it has an infinite duration and a replication factor set to one.
+InfluxDB automatically creates that retention policy; it has an infinite duration and a replication factor set to one
+or to the number of data nodes in the cluster.
 
-Now that you're familiar with measurements, tag sets, and retention policies it's time to discuss series.
-In InfluxDB, a <a name=series></a>*series* is the collection of data that share a retention policy, measurement, and tag set.
-The data above consist of four series:
+Now that you're familiar with measurements, tag sets, and field keys it's time to discuss metaseries and series.
+In InfluxDB, a <a name=metaseries></a>**metaseries** is the collection of data that share a measurement and tag set.
+The data above consist of four metaseries:
 
-| Arbitrary series number  |  Retention policy | Measurement  |  Tag set |
+| Arbitrary metaseries number | Measurement  |  Tag set |
+|---|---|---|
+| series 1  | `census`  | `location = 1`,`scientist = langstroth` |
+| series 2 |  `census` |  `location = 2`,`scientist = langstroth` |
+| series 3 | `census`  | `location = 1`,`scientist = perpetua` |
+| series 4 |  `census` |  `location = 2`,`scientist = perpetua` |
+
+A <a name=series></a>**series** is the collection of data that share a measurement, tag set, and field key.
+The data above consist of eight series:
+
+| Arbitrary series number | Measurement  |  Tag set | Field key |
 |---|---|---|---|
-| series 1  | `autogen` | `census`  | `location = 1`,`scientist = langstroth` |
-| series 2 | `autogen` |  `census` |  `location = 2`,`scientist = langstroth` |
-| series 3  | `autogen` | `census`  | `location = 1`,`scientist = perpetua` |
-| series 4 | `autogen` |  `census` |  `location = 2`,`scientist = perpetua` |
+| series 1  | `census`  | `location = 1`,`scientist = langstroth` | `butterflies` |
+| series 2  | `census`  | `location = 1`,`scientist = langstroth` | `honeybees` |
+| series 3 |  `census` |  `location = 2`,`scientist = langstroth` | `butterflies` |
+| series 4 |  `census` |  `location = 2`,`scientist = langstroth` | `honeybees` |
+| series 5 | `census`  | `location = 1`,`scientist = perpetua` | `butterflies` |
+| series 6 | `census`  | `location = 1`,`scientist = perpetua` | `honeybees` |
+| series 7 |  `census` |  `location = 2`,`scientist = perpetua` | `butterflies` |
+| series 8 |  `census` |  `location = 2`,`scientist = perpetua` | `honeybees` |
 
 Understanding the concept of a series is essential when designing your [schema](/influxdb/v1.0/concepts/glossary/#schema) and when working with your data in InfluxDB.
+Having a [very large](/influxdb/v1.0/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node) number of series in your database can lead to [unsustainable RAM usage](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#process-consuming-too-much-memory).
 
-Finally, a <a name="point"></a>*point* is the field set in the same series with the same timestamp.
+Finally, a <a name="point"></a>**point** is a single observation identified by its series and timestamp.
 For example, here's a single point:
 ```
-name: census
------------------
-time			               butterflies	 honeybees	 location	 scientist
-2015-08-18T00:00:00Z	 1		          30		       1		       perpetua
+time                   butterflies   location   scientist
+2015-08-18T00:00:00Z   1             1          perpetua
 ```
 
-The series in the example is defined by the retention policy (`autogen`), the measurement (`census`), and the tag set (`location = 1`, `scientist = perpetua`).
+The series in the example is defined by the measurement (`census`), tag set (`location = 1`, `scientist = perpetua`), and `field key` (`butterflies`).
 The timestamp for the point is `2015-08-18T00:00:00Z`.
 
 All of the stuff we've just covered is stored in a database - the sample data are in the database `my_database`.
-An InfluxDB <a name=database></a>*database* is similar to traditional relational databases and serves as a logical container for users, retention policies, continuous queries, and, of course, your time series data.
+An InfluxDB <a name=database></a>**database** is similar to traditional relational databases and serves as a logical container for users, retention policies, continuous queries, and, of course, your time series data.
 See [Authentication and Authorization](/influxdb/v1.0/administration/authentication_and_authorization/) and [Continuous Queries](/influxdb/v1.0/query_language/continuous_queries/) for more on those topics.
 
 Databases can have several users, continuous queries, retention policies, and measurements.

@@ -28,16 +28,17 @@ The basics:
 Limit and sort your results:
 
 * [Limit query returns with `LIMIT` and `SLIMIT`](/influxdb/v1.0/query_language/data_exploration/#limit-query-returns-with-limit-and-slimit)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Limit results per series with `LIMIT`](/influxdb/v1.0/query_language/data_exploration/#limit-the-number-of-results-returned-per-series-with-limit)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Limit the number of series returned with `SLIMIT`](/influxdb/v1.0/query_language/data_exploration/#limit-the-number-of-series-returned-with-slimit)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Limit the number of points and series returned with `LIMIT` and `SLIMIT`](/influxdb/v1.0/query_language/data_exploration/#limit-the-number-of-points-and-series-returned-with-limit-and-slimit)
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Limit results per metaseries with `LIMIT`](/influxdb/v1.0/query_language/data_exploration/#limit-the-number-of-results-returned-per-metaseries-with-limit)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Limit the number of metaseries returned with `SLIMIT`](/influxdb/v1.0/query_language/data_exploration/#limit-the-number-of-metaseries-returned-with-slimit)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Limit the number of points and metaseries returned with `LIMIT` and `SLIMIT`](/influxdb/v1.0/query_language/data_exploration/#limit-the-number-of-points-and-metaseries-returned-with-limit-and-slimit)
 * [Sort query returns with `ORDER BY time DESC`](/influxdb/v1.0/query_language/data_exploration/#sort-query-returns-with-order-by-time-desc)
 * [Paginate query returns with `OFFSET` and `SOFFSET`](/influxdb/v1.0/query_language/data_exploration/#paginate-query-returns-with-offset-and-soffset)
 
 General tips on query syntax:
 
 * [Multiple statements in queries](/influxdb/v1.0/query_language/data_exploration/#multiple-statements-in-queries)
-* [Merge series in queries](/influxdb/v1.0/query_language/data_exploration/#merge-series-in-queries)
+Finally, use `GROUP BY` with `ORDER BY time DESC` to return the last five points from each measuremnt and tag set combination  
+* [Merge metaseries in queries](/influxdb/v1.0/query_language/data_exploration/#merge-metaseries-in-queries)
 * [Time syntax in queries](/influxdb/v1.0/query_language/data_exploration/#time-syntax-in-queries)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Relative time](/influxdb/v1.0/query_language/data_exploration/#relative-time)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Absolute time](/influxdb/v1.0/query_language/data_exploration/#absolute-time)
@@ -73,7 +74,7 @@ time			                level description	      location	       water_level
 2015-08-18T00:24:00Z	  below 3 feet		          santa_monica	   2.041
 ```
 
-The [series](/influxdb/v1.0/concepts/glossary/#series) are made up of the [measurement](/influxdb/v1.0/concepts/glossary/#measurement) `h2o_feet` and the [tag key](/influxdb/v1.0/concepts/glossary/#tag-key) `location` with the [tag values](/influxdb/v1.0/concepts/glossary/#tag-value) `santa_monica` and `coyote_creek`.
+The data are made up of the [measurement](/influxdb/v1.0/concepts/glossary/#measurement) `h2o_feet` and the [tag key](/influxdb/v1.0/concepts/glossary/#tag-key) `location` with the [tag values](/influxdb/v1.0/concepts/glossary/#tag-value) `santa_monica` and `coyote_creek`.
 There are two [fields](/influxdb/v1.0/concepts/glossary/#field): `water_level` which stores floats and `level description` which stores strings.
 All of the data are in the `NOAA_water_database` database.
 
@@ -129,7 +130,7 @@ In addition, you can specify a field's [type](/influxdb/v1.0/write_protocols/wri
 We'll go into detail about this functionality in the
 [casting section](#data-types-and-cast-operations-in-queries) of this document.
 
-Query **D** selects everything form `h2o_feet` by fully qualifying the measurement
+Query **D** selects everything from `h2o_feet` by fully qualifying the measurement
 `h2o_feet`.
 Fully qualify a measurement by specifying its database and
 [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp) in
@@ -667,15 +668,15 @@ Use [fill()](/influxdb/v1.0/query_language/data_exploration/#the-group-by-clause
 ## Limit query returns with LIMIT and SLIMIT
 InfluxQL supports two different clauses to limit your query results:
 
-* `LIMIT <N>` returns the first \<N> [points](/influxdb/v1.0/concepts/glossary/#point) from each [series](/influxdb/v1.0/concepts/glossary/#series) in the specified measurement.
-* `SLIMIT <N>` returns every point from \<N> series in the specified measurement.
-* `LIMIT <N>` followed by `SLIMIT <N>` returns the first \<N> points from \<N> series in the specified measurement.
+* `LIMIT <N>` returns the first \<N> [points](/influxdb/v1.0/concepts/glossary/#point) from each [metaseries](/influxdb/v1.0/concepts/glossary/#metaseries) in the specified measurement.
+* `SLIMIT <N>` returns every point from \<N> metaseries in the specified measurement.
+* `LIMIT <N>` followed by `SLIMIT <N>` returns the first \<N> points from \<N> metaseries in the specified measurement.
 
-### Limit the number of results returned per series with `LIMIT`
+### Limit the number of results returned per metaseries with `LIMIT`
 ---
-Use `LIMIT <N>` with `SELECT` and `GROUP BY *` to return the first \<N> points from each series.
+Use `LIMIT <N>` with `SELECT` and `GROUP BY *` to return the first \<N> points from each [metaseries](/influxdb/v1.0/concepts/glossary/#metaseries).
 
-Return the three oldest points from each series associated with the measurement `h2o_feet`:
+Return the three oldest points from each metaseries associated with the measurement `h2o_feet`:
 ```sql
 > SELECT "water_level" FROM "h2o_feet" GROUP BY * LIMIT 3
 ```
@@ -699,13 +700,13 @@ time			              water_level
 2015-08-18T00:12:00Z	2.028
 ```
 
-> **Note:** If \<N> is greater than the number of points in the series, InfluxDB returns all points in the series.
+> **Note:** If \<N> is greater than the number of points in the metaseries, InfluxDB returns all points in the metaseries.
 
-### Limit the number of series returned with `SLIMIT`
+### Limit the number of metaseries returned with `SLIMIT`
 ---
-Use `SLIMIT <N>` with `SELECT` and `GROUP BY *` to return every point from \<N> series.
+Use `SLIMIT <N>` with `SELECT` and `GROUP BY *` to return every point from \<N> [metaseries](/influxdb/v1.0/concepts/glossary/#metaseries).
 
-Return everything from one of the series associated with the measurement `h2o_feet`:
+Return everything from one of the metaseries associated with the measurement `h2o_feet`:
 ```sql
 > SELECT "water_level" FROM "h2o_feet" GROUP BY * SLIMIT 1
 ```
@@ -725,13 +726,13 @@ time			              water_level
 2015-09-18T16:24:00Z	3.235
 ```
 
-> **Note:** If \<N> is greater than the number of series associated with the specified measurement, InfluxDB returns all points from every series.
+> **Note:** If \<N> is greater than the number of metaseries associated with the specified measurement, InfluxDB returns all points from every metaseries.
 
-### Limit the number of points and series returned with `LIMIT` and `SLIMIT`
+### Limit the number of points and metaseries returned with `LIMIT` and `SLIMIT`
 ---
-Use `LIMIT <N1>` followed by `SLIMIT <N2>` with `GROUP BY *` to return \<N1> points from \<N2> series.
+Use `LIMIT <N1>` followed by `SLIMIT <N2>` with `GROUP BY *` to return \<N1> points from \<N2> [metaseries](/influxdb/v1.0/concepts/glossary/#metaseries).
 
-Return the three oldest points from one of the series associated with the measurement `h2o_feet`:
+Return the three oldest points from one of the metaseries associated with the measurement `h2o_feet`:
 ```sql
 > SELECT "water_level" FROM "h2o_feet" GROUP BY * LIMIT 3 SLIMIT 1
 ```
@@ -747,8 +748,8 @@ time			               water_level
 2015-08-18T00:12:00Z	 7.887
 ```
 
-> **Note:** If \<N1> is greater than the number of points in the series, InfluxDB returns all points in the series.
-If \<N2> is greater than the number of series associated with the specified measurement, InfluxDB returns points from every series.
+> **Note:** If \<N1> is greater than the number of points in the metaseries, InfluxDB returns all points in the metaseries.
+If \<N2> is greater than the number of metaseries associated with the specified measurement, InfluxDB returns points from every metaseries.
 
 ## Sort query returns with ORDER BY time DESC
 By default, InfluxDB returns results in ascending time order - so the first points that are returned are the oldest points by timestamp.
@@ -852,10 +853,10 @@ time			               water_level
 2015-08-18T00:30:00Z	 7.5
 ```
 
-### Use `SOFFSET` to paginate the series returned
+### Use `SOFFSET` to paginate the metaseries returned
 ---
 
-For example, get the first three points from a single series:
+For example, get the first three points from one [metaseries](/influxdb/v1.0/concepts/glossary/#metaseries):
 ```sql
 > SELECT "water_level" FROM "h2o_feet" GROUP BY * LIMIT 3 SLIMIT 1
 ```
@@ -871,7 +872,7 @@ time			               water_level
 2015-08-18T00:12:00Z	 7.887
 ```
 
-Then get the first three points from the next series:
+Then get the first three points from the next metaseries:
 ```sql
 > SELECT "water_level" FROM "h2o_feet" GROUP BY * LIMIT 3 SLIMIT 1 SOFFSET 1
 ```
@@ -897,15 +898,15 @@ For example:
 > SELECT MEAN("water_level") FROM "h2o_feet" WHERE time > now() - 2w GROUP BY "location",time(24h) fill(none); SELECT COUNT("water_level") FROM "h2o_feet" WHERE time > now() - 2w GROUP BY "location",time(24h) fill(80)
 ```
 
-## Merge series in queries
+## Merge metaseries in queries
 
-In InfluxDB, queries merge series automatically.
+In InfluxDB, queries merge [metaseries](/influxdb/v1.0/concepts/glossary/#metaseries) automatically.
 
-The `NOAA_water_database` database has two [series](/influxdb/v1.0/concepts/glossary/#series).
-The first series is made up of the measurement `h2o_feet` and the tag key `location` with the tag value `coyote_creek`.
-The second series is made of up the measurement `h2o_feet` and the tag key `location` with the tag value `santa_monica`.
+The `NOAA_water_database` database has two metaseries.
+The first metaseries is made up of the measurement `h2o_feet` and the tag key `location` with the tag value `coyote_creek`.
+The second metaseries is made of up the measurement `h2o_feet` and the tag key `location` with the tag value `santa_monica`.
 
-The following query automatically merges those two series when it calculates the [average](/influxdb/v1.0/query_language/functions/#mean) `water_level`:
+The following query automatically merges those two metaseries when it calculates the [average](/influxdb/v1.0/query_language/functions/#mean) `water_level`:
 
 ```sql
 > SELECT MEAN("water_level") FROM "h2o_feet"
@@ -919,7 +920,7 @@ time			               mean
 1970-01-01T00:00:00Z	 4.442107025822521
 ```
 
-If you only want the `MEAN()` `water_level` for the first series, specify the tag set in the `WHERE` clause:
+If you only want the `MEAN()` `water_level` for the first metaseries, specify the tag set in the `WHERE` clause:
 ```sql
 > SELECT MEAN("water_level") FROM "h2o_feet" WHERE "location" = 'coyote_creek'
 ```

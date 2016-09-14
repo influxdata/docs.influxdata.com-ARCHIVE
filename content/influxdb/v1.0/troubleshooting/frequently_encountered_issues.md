@@ -23,7 +23,6 @@ Where applicable, it links to outstanding issues on GitHub.
 * [Identifying write precision from returned timestamps](#identifying-write-precision-from-returned-timestamps)  
 * [Single quoting and double quoting in queries](#single-quoting-and-double-quoting-in-queries)  
 * [Missing data after creating a new `DEFAULT` retention policy](#missing-data-after-creating-a-new-default-retention-policy)
-* [Querying for series cardinality](#querying-for-series-cardinality)
 * [Using `OR` with absolute time in the `WHERE` clause](#using-or-with-absolute-time-in-the-where-clause)
 
 **Writing data**  
@@ -281,22 +280,6 @@ time			               count
 1970-01-01T00:00:00Z	 8
 ```
 
-## Querying for series cardinality
-
-The following queries return [series cardinality](/influxdb/v1.0/concepts/glossary/#series-cardinality):
-
-#### Series cardinality per database:
-```
-SELECT numSeries FROM "_internal".."database" GROUP BY "database" ORDER BY desc LIMIT 1
-```
-#### Series cardinality across all database:
-```
-SELECT sum(numSeries) AS “total_series" FROM “_internal".."database" WHERE time > now() - 10s
-```
-
-> **Note:** Changes to the [`[monitor]`](/influxdb/v1.0/administration/config/#monitor)
-section in the configuration file may affect query results.
-
 ## Using `OR` with absolute time in the `WHERE` clause
 
 Currently, InfluxQL does not support using `OR` with
@@ -323,56 +306,66 @@ Writes an integer: `value=100i`
 Writes a float: `value=100`
 
 ## Writing duplicate points
-A point is uniquely identified by the measurement name, [tag set](/influxdb/v1.0/concepts/glossary/#tag-set), and timestamp.
-If you submit a new point with the same measurement, tag set, and timestamp as an existing point, the field set becomes the union of the old field set and the new field set, where any ties go to the new field set.
+A point is uniquely identified by the measurement name, [tag set](/influxdb/v1.0/concepts/glossary/#tag-set), [field key](/influxdb/v1.0/concepts/glossary/#field-key), and timestamp.
+If you submit a new point with the same measurement, tag set, field key, and timestamp as an existing point, InfluxDB overwrites the existing point with the new point.
 This is the intended behavior.
 
 For example:
 
-Old point: `cpu_load,hostname=server02,az=us_west val_1=24.5,val_2=7 1234567890000000`
+Old point: `cpu_load,hostname=server02,az=us_west val_1=51 1234567890000000`
 
-New point: `cpu_load,hostname=server02,az=us_west val_1=5.24 1234567890000000`
+New point: `cpu_load,hostname=server02,az=us_west val_1=89 1234567890000000`
 
-After you submit the new point, InfluxDB overwrites `val_1` with the new field value and leaves the field `val_2` alone:
+After you submit the new point, InfluxDB overwrites `val_1` with the new field value:
 ```
 > SELECT * FROM "cpu_load" WHERE time = 1234567890000000
 name: cpu_load
 --------------
-time			                  az	      hostname	 val_1	 val_2
-1970-01-15T06:56:07.89Z	 us_west	 server02	 5.24	  7
+time               az        hostname   val_1
+1234567890000000   us_west   server02   51
+
+> INSERT cpu_load,hostname=server02,az=us_west val_1=89 1234567890000000
+
+> SELECT * FROM "cpu_load" WHERE time = 1234567890000000
+name: cpu_load
+--------------
+time               az        hostname   val_1
+1234567890000000   us_west   server02   89
 ```
 
 To store both points:
 
 * Introduce an arbitrary new tag to enforce uniqueness.
 
-    Old point: `cpu_load,hostname=server02,az=us_west,uniq=1 val_1=24.5,val_2=7 1234567890000000`
+    Old point: `cpu_load,hostname=server02,az=us_west,uniq=1 val_1=51 1234567890000000`
 
-    New point: `cpu_load,hostname=server02,az=us_west,uniq=2 val_1=5.24 1234567890000000`
+    New point: `cpu_load,hostname=server02,az=us_west,uniq=2 val_1=89 1234567890000000`
 
     After writing the new point to InfluxDB:
+
     ```
-  > SELECT * FROM "cpu_load" WHERE time = 1234567890000000
-  name: cpu_load
-  --------------
-  time			            az	     hostname	uniq	val_1	val_2
-  1970-01-15T06:56:07.89Z	us_west	 server02	1	    24.5	7
-  1970-01-15T06:56:07.89Z	us_west	 server02	2	    5.24
+    > SELECT * FROM "cpu_load" WHERE time = 1234567890000000
+    name: cpu_load
+    --------------
+    time               az        hostname   uniq   val_1
+    1234567890000000   us_west   server02   1      51
+    1234567890000000   us_west   server02   2      89
     ```
 * Increment the timestamp by a nanosecond.
 
-    Old point: `cpu_load,hostname=server02,az=us_west val_1=24.5,val_2=7 1234567890000000`
+    Old point: `cpu_load,hostname=server02,az=us_west val_1=51 1234567890000000`
 
-    New point: `cpu_load,hostname=server02,az=us_west val_1=5.24 1234567890000001`
+    New point: `cpu_load,hostname=server02,az=us_west val_1=89 1234567890000001`
 
     After writing the new point to InfluxDB:
+    
     ```
     > SELECT * FROM "cpu_load" WHERE time >= 1234567890000000 and time <= 1234567890000001
     name: cpu_load
     --------------
-    time				             az	      hostname	 val_1	val_2
-    1970-01-15T06:56:07.89Z		     us_west  server02	 24.5	 7
-    1970-01-15T06:56:07.890000001Z	 us_west  server02	 5.24
+    time               az        hostname   val_1
+    1234567890000000   us_west   server02   51
+    1234567890000001   us_west   server02   89
     ```
 
 ## Getting an unexpected error when sending data over the HTTP API
@@ -431,9 +424,9 @@ See the [Line Protocol Syntax](/influxdb/v1.0/write_protocols/write_syntax/) pag
 
 # Administration
 ## Process consuming too much memory
-InfluxDB maintains an in-memory index of every [series](/influxdb/v1.0/concepts/glossary/#series) in the system. As the number of unique series grows, so does the RAM usage. High [series cardinality](/influxdb/v1.0/concepts/glossary/#series-cardinality) can lead to the operating system killing the InfluxDB process with an out of memory (OOM) exception. See [Querying for series cardinality](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#querying-for-series-cardinality) to learn how to query for series cardinality.
+InfluxDB maintains an in-memory index of every [series](/influxdb/v1.0/concepts/glossary/#series) in the system. As the number of unique series grows, so does the RAM usage. High [series cardinality](/influxdb/v1.0/concepts/glossary/#series-cardinality) can lead to the operating system killing the InfluxDB process with an out of memory (OOM) exception.
 
-To reduce series cardinality, series must be dropped from the index. [`DROP DATABASE`], [`DROP MEASUREMENT`], and [`DROP SERIES`] will all remove series from the index and reduce the overall series cardinality. 
+To reduce series cardinality, series must be dropped from the index. [`DROP DATABASE`], [`DROP MEASUREMENT`], and [`DROP SERIES`] will all remove series from the index and reduce the overall series cardinality.
 
 > **Note:** `DROP` commands are usually CPU-intensive, as they frequently trigger a TSM compaction. Issuing `DROP` queries at a high frequency may significantly impact write and other query throughput.
 
