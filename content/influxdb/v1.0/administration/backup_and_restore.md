@@ -7,16 +7,25 @@ menu:
     parent: administration
 ---
 
-InfluxDB has the ability to snapshot a single
-data node at a point-in-time and restore it.
-
 ## Backups
+
+InfluxDB has the ability to snapshot an instance at a point-in-time and restore it.
+All backups are full backups. 
+InfluxDB does not yet support incremental backups.
+There are two types of data to backup, the metastore and the metrics themselves.
+The [metastore](/influxdb/v1.0/concepts/glossary/#metastore) is backed up in its entirety.
+The metrics are backed up per-database in a separate operation from the metastore backup.
+
+> **Note:** Backups are not interchangeable between OSS InfluxDB and InfluxEnterprise. 
+You cannot restore an OSS backup to an InfluxEnterprise data node, nor can you restore
+an InfluxEnterprise backup to an OSS instance.
+
 
 ### Backing up the Metastore
 
 InfluxDB's metastore contains internal information about the status of
-the system, including: user information, database/shard metadata, and
-which retention policies are enabled. While a node is running, you can
+the system, including user information, database/shard metadata, CQs, RPs, 
+and subscriptions. While a node is running, you can
 create a backup of your instance's metastore by running the command:
 
 ```
@@ -38,6 +47,8 @@ Will create a metastore backup in the directory `/tmp/backup` (the
 directory will be created if it doesn't already exist).
 
 ### Backing up a Database
+
+Each database must be backed up individually.
 
 To backup a database, you will need to add the `-database` flag:
 
