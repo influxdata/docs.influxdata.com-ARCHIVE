@@ -18,6 +18,10 @@ Currently, InfluxEnterprise supports backups and restores for all data in the
 cluster; a single database; a single database and retention policy; and a
 single [shard](/influxdb/v0.13/concepts/glossary/#shard).
 
+> **Note:** Backups are not interchangeable between OSS InfluxDB and InfluxEnterprise. 
+You cannot restore an OSS backup to an InfluxEnterprise data node, nor can you restore
+an InfluxEnterprise backup to an OSS instance.
+
 ## Terminology and behavior
 
 A **backup** creates a copy of the cluster’s data and meta data at that point in time and stores the copy in the specified directory.
