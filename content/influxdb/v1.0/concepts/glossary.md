@@ -93,7 +93,7 @@ Related entries: [field](/influxdb/v1.0/concepts/glossary/#field), [series](/inf
 
 ## metastore
 Contains internal information about the status of the system. 
-The metastore containts the user information, databases, retention policies, shard metadata, continuous queries, and subscriptions.
+The metastore contains the user information, databases, retention policies, shard metadata, continuous queries, and subscriptions.
 
 Related entries: [database](/influxdb/v1.0/concepts/glossary/#database), [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp), [user](/influxdb/v1.0/concepts/glossary/#user)
 
