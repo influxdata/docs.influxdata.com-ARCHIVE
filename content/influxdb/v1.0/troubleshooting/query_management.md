@@ -7,16 +7,16 @@ menu:
     parent: troubleshooting
 ---
 
-With InfluxDB's query management features, users are able to:
+With InfluxDB's query management features, users are able to
+identify currently-running queries,
+kill queries that are overloading their system,
+and prevent and halt the execution of inefficient queries with several configuration settings.
 
-1. Identify currently-running queries.
-2. Kill queries that are overloading their system.
-3. Prevent and halt the execution of inefficient queries with several configuration settings.
-
+This document covers how to:
 
 * [List currently-running queries with `SHOW QUERIES`](/influxdb/v1.0/troubleshooting/query_management/#list-currently-running-queries-with-show-queries)
 * [Stop currently-running queries with `KILL QUERY`](/influxdb/v1.0/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query)
-* [Configuration settings for query management](/influxdb/v1.0/troubleshooting/query_management/#configuration-settings-for-query-management)
+* [Configure query management](/influxdb/v1.0/troubleshooting/query_management/#configuration-settings-for-query-management)
     * [Limit the number of running queries with `max-concurrent-queries`](/influxdb/v1.0/troubleshooting/query_management/#max-concurrent-queries)
     * [Set a query timeout with `query-timeout`](/influxdb/v1.0/troubleshooting/query_management/#query-timeout)
     * [Log queries if they run longer than specified time with `log-queries-after`](/influxdb/v1.0/troubleshooting/query_management/#log-queries-after)
