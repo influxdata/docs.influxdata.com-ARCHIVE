@@ -9,12 +9,15 @@ menu:
 The following guide has step-by-step instructions for migrating an OSS InfluxDB
 instance into and InfluxEnterprise cluster.
 
-Before following the steps below, please note that this process:
+The process assumes that you already have a fully configured InfluxEnterprise cluster
+of three or more meta nodes and zero or more data nodes.
 
-* Transfers any users from the OSS instance to the InfluxEnterprise Cluster*
-* Does **not** transfer any users from the OSS instance to the InfluxEnterprise Web Console
+Please note that this migration process:
+
 * Deletes all data from any data nodes that are already part of the InfluxEnterprise Cluster
-* Requires downtime for the OSS instance
+* Will transfer all users from the OSS instance to the InfluxEnterprise Cluster*
+* Will **not** transfer any users from the OSS instance to the InfluxEnterprise Web Console
+* Requires downtime for writes and reads for the OSS instance
 
 <dt>
 \* If you're using an InfluxEnterprise cluster version prior to 0.7.4, the

@@ -42,8 +42,8 @@ Related entries: [meta service](#meta-service)
 ## meta service
 
 The consistent data store that keeps state about the cluster, including which
-servers, databases, users, continuous queries, retention policies, and blocks of
-time exist.
+servers, databases, users, continuous queries, retention policies, subscriptions, 
+and blocks of time exist.
 
 Related entries: [meta node](#meta-node)
 
