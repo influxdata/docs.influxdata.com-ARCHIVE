@@ -6,14 +6,14 @@ menu:
     parent: Introduction
 ---
 
-## Introduction
+# Introduction
 
 InfluxEnterprise offers highly scalable clusters on your infrastructure
 and a management UI for working with clusters.
 This guide will get you up and running with an InfluxEnterprise cluster and
 [web console](/enterprise/v1.0/concepts/glossary/#web-console).
 
-### Requirements
+## Requirements
 
 To get started, you'll need the license key that you received at
 [InfluxPortal](https://portal.influxdata.com/) as well as several servers.
@@ -38,9 +38,9 @@ data nodes on port `8086`, the default port for the
 [HTTP API](https://docs.influxdata.com/influxdb/v1.0/tools/api/) for writing and
 querying data.
 
-## Cluster setup
+# Cluster setup
 
-### Modify the /etc/hosts file
+## Modify the /etc/hosts file
 
 Add your servers' hostnames and IP addresses to **each** server's `/etc/hosts`
 file (the hostnames are representative):
@@ -72,21 +72,21 @@ with every other meta and data node.
 
 On all three meta servers:
 
-#### 1. Download and install the meta server package
+### 1. Download and install the meta server package
 
-##### Ubuntu & Debian (64-bit)
+#### Ubuntu & Debian (64-bit)
 ```
 wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta_1.0.0-c1.0.0_amd64.deb
 sudo dpkg -i influxdb-meta_1.0.0-c1.0.0_amd64.deb
 ```
 
-##### RedHat & CentOS (64-bit)
+#### RedHat & CentOS (64-bit)
 ```
 wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta-1.0.0_c1.0.0.x86_64.rpm
 sudo yum localinstall influxdb-meta-1.0.0_c1.0.0.x86_64.rpm
 ```
 
-#### 2. Edit the configuration file
+### 2. Edit the configuration file
 
 In `/etc/influxdb/influxdb-meta.conf`, set:
 
@@ -119,7 +119,7 @@ hostname = "<enterprise-meta-0x>" #✨
 > **Note:** If you’re using a license file instead of a license key, set the
 `license-path` setting to the path of the license file.
 
-#### 3. Start the meta node
+### 3. Start the meta node
 
 On sysvinit systems, enter:
 ```
@@ -145,31 +145,31 @@ You should see output similar to:
 
 
 > **Note:** It is possible to start the cluster with a single meta node but you
-must pass the `-single-server flag` when starting the single meta node.
+must pass the `-single-server` flag when starting the single meta node.
 Please note that a cluster with only one meta node is **not** recommended for
 production environments.
 
 Move on to the next section to set up the data servers.
 
-### Set up, configure, and start the data servers
+## Set up, configure, and start the data servers
 
 On each data server:
 
-#### 1. Download and install the data server package
+### 1. Download and install the data server package
 
-##### Ubuntu & Debian (64-bit)
+#### Ubuntu & Debian (64-bit)
 ```
 wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data_1.0.0-c1.0.0_amd64.deb
 sudo dpkg -i influxdb-data_1.0.0-c1.0.0_amd64.deb
 ```
 
-##### RedHat & CentOS (64-bit)
+#### RedHat & CentOS (64-bit)
 ```
 wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data-1.0.0_c1.0.0.x86_64.rpm
 sudo yum localinstall influxdb-data-1.0.0_c1.0.0.x86_64.rpm
 ```
 
-#### 2. Edit the configuration file
+### 2. Edit the configuration file
 
 In `/etc/influxdb/influxdb.conf`, set:
 
@@ -221,7 +221,7 @@ purge-interval = "1h0m0s"
 > **Note:** If you’re using a license file instead of a license key, set the
 `license-path` setting to the path of the license file.
 
-#### 3. Start the data node
+### 3. Start the data node
 On sysvinit systems, enter:
 ```
 service influxdb start
@@ -245,9 +245,9 @@ You should see output similar to:
 
 Move on to the next section to join all servers to a cluster.
 
-### Join the nodes to the cluster
+## Join the nodes to the cluster
 
-#### 1. Connect the meta nodes to the cluster
+### 1. Connect the meta nodes to the cluster
 
 From `enterprise-meta-01`, enter:
 ```
@@ -286,7 +286,7 @@ Note that your cluster must have at least three meta nodes.
 If you do not see your meta nodes in the output, please retry adding them to
 the cluster.
 
-#### 2. Connect the data nodes to the cluster
+### 2. Connect the data nodes to the cluster
 
 From `enterprise-meta-01`, enter:
 ```
@@ -325,23 +325,23 @@ Note that your cluster must have at least two data nodes.
 If you do not see your data nodes in the output, please retry adding them
 to the cluster.
 
-## Web Console setup
+# Web Console setup
 
 <dt> Please set up the web console **after** you've set up your cluster.
 Installing the web console before your cluster can cause unexpected behaviors.
 </dt>
 
-### Install the InfluxEnterprise Web Console
+## Install the InfluxEnterprise Web Console
 
 Install the InfluxEnterprise web console on one of your cluster's servers or on
 a separate server.
 
-##### Ubuntu & Debian (64-bit)
+#### Ubuntu & Debian (64-bit)
 ```
 wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise_1.0.0_amd64.deb
 sudo dpkg -i influx-enterprise_1.0.0_amd64.deb
 ```
-##### RedHat & CentOS (64-bit)
+#### RedHat & CentOS (64-bit)
 ```
 wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise-1.0.0.x86_64.rpm
 sudo yum localinstall influx-enterprise-1.0.0.x86_64.rpm
@@ -356,9 +356,9 @@ If you'd prefer to use PostgreSQL, please see
 [Install the InfluxEnterprise Web Console with PostgreSQL](#install-the-influxenterprise-web-console-with-postgresql).
 Note that using PostgreSQL requires additional steps.
 
-### Setup Steps
+## Setup Steps
 
-#### 1. Edit the configuration file
+### 1. Edit the configuration file
 
 In `/etc/influx-enterprise/influx-enterprise.conf`, set:
 
@@ -395,7 +395,7 @@ url = "sqlite3:///var/lib/influx-enterprise/enterprise.db"
 >**Note:** If you're using a license file instead of a license key, set the
 `license-file` setting to the path of the license file.
 
-#### 2. Migrate the configuration file
+### 2. Migrate the configuration file
 Run the following command:
 ```
 sudo -u influx-enterprise influx-enterprise migrate --config /etc/influx-enterprise/influx-enterprise.conf
@@ -420,7 +420,7 @@ The expected output is:
 0.0340 seconds
 ```
 
-#### 3. Start the InfluxEnterprise web console
+### 3. Start the InfluxEnterprise web console
 
 On sysvinit systems, enter:
 ```
@@ -448,20 +448,20 @@ Visit `http://<your_web_console_server's_IP_address>:3000` to access your
 InfluxEnterprise web console, and check out the
 next section to [get started](/enterprise/v1.0/introduction/getting_started/).
 
-> ### Install the InfluxEnterprise Web Console with PostgreSQL
+> ## Install the InfluxEnterprise Web Console with PostgreSQL
 >
 By default, the InfluxEnterprise Web Console uses SQLite for installations.
 The following steps document how to install the Web Console if you'd prefer to
 use PostgreSQL.
 >
-#### Install PostgreSQL
+### Install PostgreSQL
 >
     sudo apt-get update
     sudo apt-get -y install postgresql postgresql-contrib
 >
-#### Set the password for the system's local postgres user
+### Set the password for the system's local postgres user
 >
-##### Login to PostgreSQL:
+#### Login to PostgreSQL:
 >
     sudo -u postgres psql
 >
@@ -470,7 +470,7 @@ The expected output is:
     -> psql (9.3.12)
     -> Type "help" for help.
 >
-##### Set the password, replacing `<your_password>` with your password:
+#### Set the password, replacing `<your_password>` with your password:
 >
     ALTER USER postgres PASSWORD '<your_password>';
 >
@@ -478,13 +478,13 @@ The expected output is:
 >
     -> ALTER ROLE
 >
-##### Exit PostgreSQL:
+#### Exit PostgreSQL:
 >
     \q
 >
-### Setup Steps
+## Setup Steps
 >
-#### 1. Edit the web console configuration file
+### 1. Edit the web console configuration file
 In addition to updating the first `url` setting, `license-key`, and
 `shared-secret` (see [above](#1-edit-the-configuration-file)), in
 `/etc/influx-enterprise/influx-enterprise.conf`:
@@ -505,7 +505,7 @@ option to the first `url` setting in the `[database]` section:
 >
     url = "postgres://postgres:<your_password>@localhost:5432/enterprise?sslmode=disable"
 >
-#### 2. Migrate the configuration file
+### 2. Migrate the configuration file
 Run the following command and enter your postgres Admin User's password when
 prompted:
 >
