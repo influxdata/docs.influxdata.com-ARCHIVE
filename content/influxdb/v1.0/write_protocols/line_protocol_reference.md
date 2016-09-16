@@ -54,7 +54,7 @@ This can result in significant improvements in compression.
 #### Boolean syntax for writes vs. queries
 Acceptable boolean syntax differs for data writes and data queries.
 See
-[Frequently Encountered Issues](/influxdb/v0.13/troubleshooting/frequently_encountered_issues/#querying-with-booleans)
+[Frequently Asked Questions](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#why-can-t-i-query-boolean-field-values)
 for more information.
 
 #### Field type discrepancies
@@ -62,7 +62,7 @@ Within a measurement, a field's type cannot differ within a
 [shard](/influxdb/v1.0/concepts/glossary/#shard), but it can differ across
 shards.
 See
-[Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#querying-select-with-field-type-discrepancies)
+[Frequently Asked Questions](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-field-type-discrepancies-across-shards)
 for how field value type discrepancies can affect `SELECT *` queries.
 
 ### Examples
@@ -220,7 +220,7 @@ Line Protocol accepts
 as [identifier](/influxdb/v1.0/concepts/glossary/#identifier) names.
 In general, we recommend avoiding using InfluxQL keywords in your schema as
 it can cause
-[confusion](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#getting-the-expected-identifier-error-unexpectedly) when querying the data.
+[confusion](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#why-am-i-getting-an-expected-identifier-error) when querying the data.
 
 ## Line Protocol in Practice
 
@@ -235,5 +235,5 @@ but with a different field set, the field set becomes the union of the old
 field set and the new field set, where any conflicts favor the new field set.
 
 See
-[Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#writing-duplicate-points)
+[Frequently Asked Questions](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points)
 for a complete example of this behavior and how to avoid it.

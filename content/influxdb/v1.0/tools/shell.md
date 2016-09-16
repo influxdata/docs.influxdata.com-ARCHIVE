@@ -230,20 +230,17 @@ Results:
 
 > **Note:** For large datasets, `influx` writes out a status message every 100,000 points.
 For example:
-<br>
-<br>
-> ```
-2015/08/21 14:48:01 Processed 3100000 lines.
-Time elapsed: 56.740578415s.
-Points per second (PPS): 54634
-```
+>
+    2015/08/21 14:48:01 Processed 3100000 lines.
+    Time elapsed: 56.740578415s.
+    Points per second (PPS): 54634
 
 Things to note about `-import`:
 
 * Allow the database to ingest points by using `-pps` to set the number of points per second allowed by the import.
 By default, pps is zero and `influx` does not throttle importing.
 * Imports work with `.gz` files, just include `-compressed` in the command.
-* Include timestamps in the data file. InfluxDB will assign the same timestamp to points without a timestamp. This can lead to unintended [overwrite behavior](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#writing-duplicate-points).
+* Include timestamps in the data file. InfluxDB will assign the same timestamp to points without a timestamp. This can lead to unintended [overwrite behavior](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points).
 * If your data file has more than 5,000 points, it may be necessary to split that file into several files in order to write your data in batches to InfluxDB.
 We recommend writing points in batches of 5,000 to 10,000 points.
 Smaller batches, and more HTTP requests, will result in sub-optimal performance.

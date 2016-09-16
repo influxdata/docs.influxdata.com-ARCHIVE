@@ -1,5 +1,7 @@
 ---
-title: Frequently Encountered Issues
+title: Frequently Asked Questions
+aliases:
+  - /influxdb/v1.0/troubleshooting/frequently_encountered_issues/
 
 menu:
   influxdb_1_0:
@@ -12,40 +14,41 @@ Where applicable, it links to outstanding issues on GitHub.
 
 **Querying data**  
 
-* [Understanding the time intervals returned from `GROUP BY time()` queries](#understanding-the-time-intervals-returned-from-group-by-time-queries)    
-* [Querying after `now()`](#querying-after-now)  
-* [Querying with booleans](#querying-with-booleans)  
-* [Querying `SELECT *` with field type discrepancies](#querying-select-with-field-type-discrepancies)
-* [Working with really big or really small integers](#working-with-really-big-or-really-small-integers)
-* [Doing math on timestamps](#doing-math-on-timestamps)  
-* [Getting an unexpected epoch 0 timestamp in query returns](#getting-an-unexpected-epoch-0-timestamp-in-query-returns)   
-* [Getting the `expected identifier` error, unexpectedly](#getting-the-expected-identifier-error-unexpectedly)
-* [Identifying write precision from returned timestamps](#identifying-write-precision-from-returned-timestamps)  
-* [Single quoting and double quoting in queries](#single-quoting-and-double-quoting-in-queries)  
-* [Missing data after creating a new `DEFAULT` retention policy](#missing-data-after-creating-a-new-default-retention-policy)
-* [Querying for series cardinality](#querying-for-series-cardinality)
-* [Using `OR` with absolute time in the `WHERE` clause](#using-or-with-absolute-time-in-the-where-clause)
-* [Getting empty results with `fill(previous)`](#getting-empty-results-with-fill-previous)
+* [What determines the time intervals returned by `GROUP BY time()` queries?](#what-determines-the-time-intervals-returned-by-group-by-time-queries)    
+* [Why don't my queries return timestamps that occur after `now()`?](#why-don-t-my-queries-return-timestamps-that-occur-after-now)  
+* [Why can't I query boolean field values?](#why-can-t-i-query-boolean-field-values)  
+* [How does InfluxDB handle field type discrepancies across shards?](#how-does-influxdb-handle-field-type-discrepancies-across-shards)
+* [What are the minimum and maximum integers that InfluxDB can store?](#what-are-the-minimum-and-maximum-integers-that-influxdb-can-store)
+* [Can I perform mathematical operations against timestamps?](#can-i-perform-mathematical-operations-against-timestamps)  
+* [Why does my query return epoch 0 as the timestamp?](#why-does-my-query-return-epoch-0-as-the-timestamp)   
+* [Why am I getting an `expected identifier error`?](#why-am-i-getting-an-expected-identifier-error)
+* [Can I identify write precision from returned timestamps?](#can-i-identify-write-precision-from-returned-timestamps)  
+* [When should I single quote and when should I double quote in queries?](#when-should-i-single-quote-and-when-should-i-double-quote-in-queries)  
+* [Why am I missing data after creating a new `DEFAULT` retention policy?](#why-am-i-missing-data-after-creating-a-new-default-retention-policy)
+* [How can I query for series cardinality?](#how-can-i-query-for-series-cardinality)
+* [Why is my query with a `WHERE OR` time clause returning empty results?](#why-is-my-query-with-a-where-or-time-clause-returning-empty-results)
+* [Why does `fill(previous)` return empty results?](#why-does-fill-previous-return-empty-results)
 
 **Writing data**  
 
-* [Writing integers](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#writing-integers)   
-* [Writing duplicate points](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#writing-duplicate-points)  
-* [Getting an unexpected error when sending data over the HTTP API](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#getting-an-unexpected-error-when-sending-data-over-the-http-api)
-* [Words and characters to avoid](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#words-and-characters-to-avoid)  
-* [Single quoting and double quoting when writing data](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#single-quoting-and-double-quoting-when-writing-data)  
+* [How do I write integer field values?](#how-do-i-write-integer-field-values)   
+* [How does InfluxDB handle duplicate points?](#how-does-influxdb-handle-duplicate-points)  
+* [What newline character does the HTTP API require?](#what-newline-character-does-the-http-api-require)
+* [What words and characters should I avoid when writing data to InfluxDB?](#what-words-and-characters-should-i-avoid-when-writing-data-to-influxdb)  
+* [When should I single quote and when should I double quote when writing data?](#when-should-i-single-quote-and-when-should-i-double-quote-when-writing-data)  
 
 **Administration**  
 
-* [Process consuming too much memory](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#process-consuming-too-much-memory)
-* [Single quoting the password string](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#single-quoting-the-password-string)
-* [Escaping the single quote in a password](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#escaping-the-single-quote-in-a-password)  
-* [Identifying your version of InfluxDB](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#identifying-your-version-of-influxdb)  
-* [Data aren't dropped after altering a retention policy](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#data-aren-t-dropped-after-altering-a-retention-policy)
+* [Why does series cardinality matter?](#why-does-series-cardinality-matter)
+* [How can I remove series from the index?](#how-can-i-remove-series-from-the-index)
+* [Why is `CREATE USER` returning `error parsing query`?](#why-is-create-user-returning-error-parsing-query)
+* [How do I include a single quote in a password?](#how-do-i-include-a-single-quote-in-a-password)  
+* [How can I identify my version of InfluxDB?](#how-can-i-identify-my-version-of-influxdb)  
+* [Why aren't data dropped after I've altered a retention policy?](#why-aren-t-data-dropped-after-i-ve-altered-a-retention-policy)
 
 # Querying data
 
-## Understanding the time intervals returned from `GROUP BY time()` queries
+## What determines the time intervals returned by `GROUP BY time()` queries?
 With some `GROUP BY time()` queries, the returned time intervals may not reflect the time range specified in the `WHERE` clause.
 In the example below the first [timestamp](/influxdb/v1.0/concepts/glossary/#timestamp) in the results occurs before the lower bound of the query:
 
@@ -88,7 +91,7 @@ Users may offset the default rounded calendar time boundaries by including an
 [offset interval](/influxdb/v1.0/query_language/data_exploration/#configured-group-by-time-boundaries)
 in their query.
 
-## Querying after `now()`
+## Why don't my queries return timestamps that occur after now()?
 By default, InfluxDB uses `now()` (the current nanosecond timestamp of the node that is processing the query) as the upper bound in queries.
 You must provide explicit directions in the `WHERE` clause to query points that occur after `now()`.
 
@@ -98,7 +101,7 @@ The second query asks InfluxDB to return everything from `hillvalley` that occur
 `SELECT * FROM "hillvalley"`  
 `SELECT * FROM "hillvalley" WHERE time < now() + 1000d`
 
-## Querying with booleans
+## Why can't I query boolean field values?
 Acceptable boolean syntax differs for data writes and data queries.
 
 | Boolean syntax |  Writes | Queries  |
@@ -113,7 +116,7 @@ For example, `SELECT * FROM "hamlet" WHERE "bool"=True` returns all points with 
 
 <dt> [GitHub Issue #3939](https://github.com/influxdb/influxdb/issues/3939) </dt>
 
-## Querying SELECT * with field type discrepancies
+## How does InfluxDB handle field type discrepancies across shards?
 
 Field values can be floats, integers, strings, or booleans.
 Field value types cannot differ within a
@@ -165,22 +168,25 @@ time			               my_field	 my_field_1	 my_field_2		 my_field_3
 2016-06-03T18:45:00Z					                                true
 ```
 
-## Working with really big or really small integers
+## What are the minimum and maximum integers that InfluxDB can store?
 InfluxDB stores all integers as signed int64 data types.
 The minimum and maximum valid values for int64 are `-9023372036854775808` and `9023372036854775807`.
 See [Go builtins](http://golang.org/pkg/builtin/#int64) for more information.
 
 Values close to but within those limits may lead to unexpected results; some functions and operators convert the int64 data type to float64 during calculation which can cause overflow issues.
 
-## Doing math on timestamps
+## Can I perform mathematical operations against timestamps?
 Currently, it is not possible to execute mathematical operators or functions against timestamp values in InfluxDB.
 All time calculations must be carried out by the client receiving the query results.
 
-## Getting an unexpected epoch 0 timestamp in query returns
+See [Data Exploration](/influxdb/v1.0/query_language/data_exploration/#time-syntax-in-queries)
+for more on valid time syntax in queries.
+
+## Why does my query return epoch 0 as the timestamp?
 In InfluxDB, epoch 0  (`1970-01-01T00:00:00Z`)  is often used as a null timestamp equivalent.
 If you request a query that has no timestamp to return, such as an aggregation function with an unbounded time range, InfluxDB returns epoch 0 as the timestamp.
 
-## Getting the `expected identifier` error, unexpectedly
+## Why am I getting an `expected identifier error`?
 Receiving the error `ERR: error parsing query: found [WORD], expected identifier[, string, number, bool]` is often a gentle reminder that you forgot to include something in your query, as is the case in the following examples:
 
 * `SELECT FROM "logic" WHERE "rational" = 5` should be `SELECT "something" FROM "logic" WHERE "rational" = 5`  
@@ -203,7 +209,7 @@ To successfully query data that use a keyword as an identifier enclose that iden
 While using double quotes is an acceptable workaround, we recommend that you avoid using InfluxQL keywords as identifiers for simplicity's sake.
 The InfluxQL documentation has a comprehensive list of all [InfluxQL keywords](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords).
 
-## Identifying write precision from returned timestamps
+## Can I identify write precision from returned timestamps?
 InfluxDB stores all timestamps as nanosecond values regardless of the write precision supplied.
 It is important to note that when returning query results, the database silently drops trailing zeros from timestamps which obscures the initial write precision.
 
@@ -222,7 +228,7 @@ time                  value	 precision_supplied  timestamp_supplied
 
 <dt> [GitHub Issue #2977](https://github.com/influxdb/influxdb/issues/2977) </dt>
 
-## Single quoting and double quoting in queries
+## When should I single quote and when should I double quote in queries?
 Single quote string values (for example, tag values) but do not single quote identifiers (database names, retention policy names, user names, measurement names, tag keys, and field keys).
 
 Double quote identifiers if they start with a digit, contain characters other than `[A-z,0-9,_]`, or if they are an [InfluxQL keyword](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords).
@@ -253,7 +259,7 @@ No: `SELECT "water_level" FROM "h2o_feet" WHERE time > "2015-08-18T23:00:01.2320
 
 See [Data Exploration](/influxdb/v1.0/query_language/data_exploration/#time-syntax-in-queries) for more on time syntax in queries.
 
-## Missing data after creating a new `DEFAULT` retention policy
+## Why am I missing data after creating a new DEFAULT retention policy?
 When you create a new `DEFAULT` retention policy (RP) on a database, the data written to the old `DEFAULT` RP remain in the old RP.
 Queries that do not specify an RP automatically query the new `DEFAULT` RP so the old data may appear to be missing.
 To query the old data you must fully qualify the relevant data in the query.
@@ -282,7 +288,7 @@ time			               count
 1970-01-01T00:00:00Z	 8
 ```
 
-## Querying for series cardinality
+## How can I query for series cardinality?
 
 The following queries return [series cardinality](/influxdb/v1.0/concepts/glossary/#series-cardinality):
 
@@ -298,9 +304,9 @@ SELECT sum(numSeries) AS “total_series" FROM “_internal".."database" WHERE t
 > **Note:** Changes to the [`[monitor]`](/influxdb/v1.0/administration/config/#monitor)
 section in the configuration file may affect query results.
 
-## Using `OR` with absolute time in the `WHERE` clause
+## Why is my query with a `WHERE OR` time clause returning empty results?
 
-Currently, InfluxQL does not support using `OR` with
+Currently, InfluxDB does not support using `OR` with
 [absolute time](/influxdb/v1.0/query_language/data_exploration/#absolute-time)
 in the `WHERE` clause.
 InfluxDB returns an empty response if the query's `WHERE` clause uses `OR`
@@ -315,7 +321,7 @@ Example:
 <dt> [GitHub Issue #3290](https://github.com/influxdata/influxdb/issues/3290)
 </dt>
 
-## Getting empty results with `fill(previous)`
+## Why does `fill(previous)` return empty results?
 
 `fill(previous)` doesn't fill the result for a time bucket if the previous value is outside the query's time range.
 
@@ -347,14 +353,14 @@ time                   max
 While this is the expected behavior of `fill(previous)`, an [open feature request](https://github.com/influxdata/influxdb/issues/6878) on GitHub proposes that `fill(previous)` should fill results even when previous values fall outside the query’s time range.
 
 # Writing data
-## Writing integers
+## How do I write integer field values?
 Add a trailing `i` to the end of the field value when writing an integer.
 If you do not provide the `i`, InfluxDB will treat the field value as a float.
 
 Writes an integer: `value=100i`  
 Writes a float: `value=100`
 
-## Writing duplicate points
+## How does InfluxDB handle duplicate points?
 A point is uniquely identified by the measurement name, [tag set](/influxdb/v1.0/concepts/glossary/#tag-set), and timestamp.
 If you submit a new point with the same measurement, tag set, and timestamp as an existing point, the field set becomes the union of the old field set and the new field set, where any ties go to the new field set.
 This is the intended behavior.
@@ -370,8 +376,8 @@ After you submit the new point, InfluxDB overwrites `val_1` with the new field v
 > SELECT * FROM "cpu_load" WHERE time = 1234567890000000
 name: cpu_load
 --------------
-time			                  az	      hostname	 val_1	 val_2
-1970-01-15T06:56:07.89Z	 us_west	 server02	 5.24	  7
+time                      az        hostname   val_1   val_2
+1970-01-15T06:56:07.89Z   us_west   server02   5.24    7
 ```
 
 To store both points:
@@ -383,14 +389,16 @@ To store both points:
     New point: `cpu_load,hostname=server02,az=us_west,uniq=2 val_1=5.24 1234567890000000`
 
     After writing the new point to InfluxDB:
-    ```
-  > SELECT * FROM "cpu_load" WHERE time = 1234567890000000
-  name: cpu_load
-  --------------
-  time			            az	     hostname	uniq	val_1	val_2
-  1970-01-15T06:56:07.89Z	us_west	 server02	1	    24.5	7
-  1970-01-15T06:56:07.89Z	us_west	 server02	2	    5.24
-    ```
+
+```
+> SELECT * FROM "cpu_load" WHERE time = 1234567890000000
+name: cpu_load
+--------------
+time                      az        hostname   uniq   val_1   val_2
+1970-01-15T06:56:07.89Z   us_west   server02   1      24.5    7
+1970-01-15T06:56:07.89Z   us_west   server02   2      5.24
+```
+
 * Increment the timestamp by a nanosecond.
 
     Old point: `cpu_load,hostname=server02,az=us_west val_1=24.5,val_2=7 1234567890000000`
@@ -398,26 +406,24 @@ To store both points:
     New point: `cpu_load,hostname=server02,az=us_west val_1=5.24 1234567890000001`
 
     After writing the new point to InfluxDB:
-    ```
-    > SELECT * FROM "cpu_load" WHERE time >= 1234567890000000 and time <= 1234567890000001
-    name: cpu_load
-    --------------
-    time				             az	      hostname	 val_1	val_2
-    1970-01-15T06:56:07.89Z		     us_west  server02	 24.5	 7
-    1970-01-15T06:56:07.890000001Z	 us_west  server02	 5.24
-    ```
 
-## Getting an unexpected error when sending data over the HTTP API
-First, double check your [line protocol](/influxdb/v1.0/write_protocols/line/) syntax.
-Second, if you continue to receive errors along the lines of `bad timestamp` or `unable to parse`, verify that your newline character is line feed (`\n`, which is ASCII `0x0A`).
-InfluxDB's line protocol relies on `\n` to indicate the end of a line and the beginning of a new line; files or data that use a newline character other than `\n` will encounter parsing issues.
-Convert the newline character and try sending the data again.
+```
+> SELECT * FROM "cpu_load" WHERE time >= 1234567890000000 and time <= 1234567890000001
+name: cpu_load
+--------------
+time				             az	      hostname	 val_1	val_2
+1970-01-15T06:56:07.89Z		     us_west  server02	 24.5	 7
+1970-01-15T06:56:07.890000001Z	 us_west  server02	 5.24
+```    
 
-> **Note:** If you generated your data file on a Windows machine, Windows uses carriage return and line feed (`\r\n`) as the newline character.
+## What newline character does the HTTP API require?
+InfluxDB's line protocol relies on line feed (`\n`, which is ASCII `0x0A`) to indicate the end of a line and the beginning of a new line. Files or data that use a newline character other than `\n` will result in the following errors: `bad timestamp`, `unable to parse`.
 
-## Words and characters to avoid
+Note that Windows uses carriage return and line feed (`\r\n`) as the newline character.
+
+## What words and characters should I avoid when writing data to InfluxDB?
 If you use any of the [InfluxQL keywords](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords) as an identifier you will need to double quote that identifier in every query.
-This can lead to [non-intuitive errors](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#getting-the-expected-identifier-error-unexpectedly).
+This can lead to [non-intuitive errors](#why-am-i-getting-an-expected-identifier-error).
 Identifiers are database names, retention policy names, user names, measurement names, tag keys, and field keys.
 
 To keep regular expressions and quoting simple, avoid using the following characters in identifiers:  
@@ -429,7 +435,7 @@ To keep regular expressions and quoting simple, avoid using the following charac
  `"` double quotation mark  
  `,` comma
 
-## Single quoting and double quoting when writing data
+## When should I single quote and when should I double quote when writing data?
 * Avoid single quoting and double quoting identifiers when writing data via the line protocol; see the examples below for how writing identifiers with quotes can complicate queries.
 Identifiers are database names, retention policy names, user names, measurement names, tag keys, and field keys.
 <br>
@@ -462,21 +468,30 @@ Identifiers are database names, retention policy names, user names, measurement 
 See the [Line Protocol Syntax](/influxdb/v1.0/write_protocols/write_syntax/) page for more information.
 
 # Administration
-## Process consuming too much memory
-InfluxDB maintains an in-memory index of every [series](/influxdb/v1.0/concepts/glossary/#series) in the system. As the number of unique series grows, so does the RAM usage. High [series cardinality](/influxdb/v1.0/concepts/glossary/#series-cardinality) can lead to the operating system killing the InfluxDB process with an out of memory (OOM) exception. See [Querying for series cardinality](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#querying-for-series-cardinality) to learn how to query for series cardinality.
 
-To reduce series cardinality, series must be dropped from the index. [`DROP DATABASE`], [`DROP MEASUREMENT`], and [`DROP SERIES`] will all remove series from the index and reduce the overall series cardinality.
+## Why does series cardinality matter?
+
+InfluxDB maintains an in-memory index of every [series](/influxdb/v1.0/concepts/glossary/#series) in the system. As the number of unique series grows, so does the RAM usage. High [series cardinality](/influxdb/v1.0/concepts/glossary/#series-cardinality) can lead to the operating system killing the InfluxDB process with an out of memory (OOM) exception. See [Querying for series cardinality](#querying-for-series-cardinality) to learn how to query for series cardinality.
+
+## How can I remove series from the index?
+
+To reduce series cardinality, series must be dropped from the index.
+[`DROP DATABASE`](/influxdb/v1.0/query_language/database_management/#delete-a-database-with-drop-database),
+[`DROP MEASUREMENT`](/influxdb/v1.0/query_language/database_management/#delete-measurements-with-drop-measurement), and
+[`DROP SERIES`](/influxdb/v1.0/query_language/database_management/#drop-series-from-the-index-with-drop-series) will all remove series from the index and reduce the overall series cardinality.
 
 > **Note:** `DROP` commands are usually CPU-intensive, as they frequently trigger a TSM compaction. Issuing `DROP` queries at a high frequency may significantly impact write and other query throughput.
 
-## Single quoting the password string
+## Why is CREATE USER returning error parsing query?
+In most cases, the query is missing single quotes around the password string.
 The `CREATE USER <user> WITH PASSWORD '<password>'` query requires single quotation marks around the password string.
-Do not include the single quotes when authenticating requests.
+Note that you should not include the single quotes when authenticating requests.
 
-## Escaping the single quote in a password
-For passwords that include a single quote, escape the single quote with a backslash both when creating the password and when authenticating requests.
+## How do I include a single quote in a password?
+Escape the single quote with a backslash (`\`) both when creating the password
+and when authentication requests.
 
-## Identifying your version of InfluxDB
+## How can I identify my version of InfluxDB?
 There a number of ways to identify the version of InfluxDB that you're using:
 
 * Check the return when you `curl` the `/ping` endpoint.
@@ -498,7 +513,7 @@ If authentication is enabled you will need to use `https` in the URL.
 
 `[http] 2016/03/04 11:25:13 ::1 - - [04/Mar/2016:11:25:13 -0800] GET /query?db=&epoch=ns&q=show+databases HTTP/1.1 200 98 -`     ✨`InfluxDBShell/1.0.0`✨`d16e7a83-e23e-11e5-80a7-000000000000 529.543µs`
 
-## Data aren't dropped after altering a retention policy
+## Why aren't data dropped after I've altered a retention policy?
 After [shortening](/influxdb/v1.0/query_language/database_management/#modify-retention-policies-with-alter-retention-policy) the `DURATION` of a [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp) (RP), you may notice that InfluxDB keeps some data that are older than the `DURATION` of the modified RP.
 This behavior is a result of the relationship between the time interval covered by a shard group and the `DURATION` of a retention policy.
 
