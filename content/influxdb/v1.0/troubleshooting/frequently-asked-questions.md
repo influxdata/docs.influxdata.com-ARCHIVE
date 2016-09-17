@@ -28,6 +28,16 @@ Where applicable, it links to outstanding issues on GitHub.
 * [How can I query for series cardinality?](#how-can-i-query-for-series-cardinality)
 * [Why is my query with a `WHERE OR` time clause returning empty results?](#why-is-my-query-with-a-where-or-time-clause-returning-empty-results)
 * [Why does `fill(previous)` return empty results?](#why-does-fill-previous-return-empty-results)
+* [How do I make InfluxDB’s CLI return human readable timestamps?](#how-do-i-make-influxdb-s-cli-return-human-readable-timestamps)
+* [How do I perform mathematical operations within a function?](#how-do-i-perform-mathematical-operations-within-a-function)
+* [How can a non-admin user `USE` a database in InfluxDB's CLI?](#how-can-a-non-admin-user-use-a-database-in-influxdb-s-cli)
+* [Why are my `INTO` queries missing data?](#why-are-my-into-queries-missing-data)
+* [How can I tell what type of data  in a field?](#how-can-i-tell-what-type-of-data-are-stored-in-a-field)
+* [How do I query data with an identical tag key and field key?](#how-do-i-query-data-with-an-identical-tag-key-and-field-key)
+* [How do I query data across measurements?](#how-do-i-query-data-across-measurements)
+* [Does the order of the timestamps matter?](#does-the-order-of-the-timestamps-matter)
+* [How do I `SELECT` data with a tag that has no value?](#how-do-i-select-data-with-a-tag-that-has-no-value)
+* [How do I write to a non-`DEFAULT` retention policy with InfluxDB's CLI?](#how-do-i-write-to-a-non-default-retention-policy-with-influxdb-s-cli)
 
 **Writing data**  
 
@@ -36,6 +46,7 @@ Where applicable, it links to outstanding issues on GitHub.
 * [What newline character does the HTTP API require?](#what-newline-character-does-the-http-api-require)
 * [What words and characters should I avoid when writing data to InfluxDB?](#what-words-and-characters-should-i-avoid-when-writing-data-to-influxdb)  
 * [When should I single quote and when should I double quote when writing data?](#when-should-i-single-quote-and-when-should-i-double-quote-when-writing-data)  
+* [Does the precision of the timestamp matter?](#does-the-precision-of-the-timestamp-matter)
 
 **Administration**  
 
@@ -46,50 +57,117 @@ Where applicable, it links to outstanding issues on GitHub.
 * [How can I identify my version of InfluxDB?](#how-can-i-identify-my-version-of-influxdb)  
 * [Why aren't data dropped after I've altered a retention policy?](#why-aren-t-data-dropped-after-i-ve-altered-a-retention-policy)
 
+
 # Querying data
 
 ## What determines the time intervals returned by `GROUP BY time()` queries?
-With some `GROUP BY time()` queries, the returned time intervals may not reflect the time range specified in the `WHERE` clause.
-In the example below the first [timestamp](/influxdb/v1.0/concepts/glossary/#timestamp) in the results occurs before the lower bound of the query:
 
-Query with a two day `GROUP BY time()` interval:
-<pre><code class="language-sh">
-> SELECT count("water_level") FROM "h2o_feet" WHERE time >= <u><b>'2015-08-20T00:00:00Z'</b></u> AND time <= '2015-08-24T00:00:00Z' AND "location" = 'santa_monica' GROUP BY time(2d)
-</code></pre>
+The time intervals returned by `GROUP BY time()` queries conform to InfluxDB's preset time
+buckets or to the user-specified [offset interval](/influxdb/v1.0/query_language/data_exploration/#configured-group-by-time-boundaries).
 
-Results:
+#### Example
 
-<pre><code class="language-sh">name: h2o_feet
---------------
-time			         count
-<u><b>2015-08-19T00:00:00Z</b></u>	   240
-2015-08-21T00:00:00Z	 480
-2015-08-23T00:00:00Z	 241
-</code></pre>
+##### Preset time buckets:
+<br>
+The following query calculates the average value of `sunflowers` between
+6:15pm and 7:45pm and groups those averages into one hour intervals:
+```
+SELECT mean("sunflowers")
+FROM "flower_orders"
+WHERE time >= '2016-08-29T18:15:00Z' AND time <= '2016-08-29T19:45:00Z' GROUP BY time(1h)
+```
+The results below show how InfluxDB maintains its preset time buckets.
 
-InfluxDB queries the `GROUP BY time()` intervals that fall within the `WHERE time` clause.
-Default `GROUP BY time()` intervals fall on rounded calendar time boundaries.
-Because they're rounded time boundaries, the start and end timestamps may appear to include more data than those covered by the query's `WHERE time` clause.
+In this example, the 6pm hour is a preset bucket and the 7pm hour is a preset bucket.
+The average for the 6pm time bucket does not include data prior to 6:15pm because of the `WHERE` time clause,
+but any data included in the average for the 6pm time bucket must occur in the 6pm hour.
+The same goes for the 7pm time bucket; any data included in the average for the 7pm
+time bucket must occur in the 7pm hour.
+The dotted lines show the points that make up each average.
 
-For the example above, InfluxDB works with two day intervals based on round number calendar days.
-The rounded two day buckets in August are as follows (explanation continues below):
+Note that while the first timestamp in the results is `2016-08-29T18:00:00Z`,
+that time bucket does **not** include data with timestamps that occur before the start of the
+`WHERE` time clause (`2016-08-29T18:15:00Z`).
+
+Raw data:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Results:                
+```
+name: flower_orders                                name: flower_orders
+—————————                                          -------------------
+time                    sunflowers                 time                  mean
+2016-08-29T18:00:00Z    34                         2016-08-29T18:00:00Z  22.332
+                       |--|                        2016-08-29T19:00:00Z  62.75
+2016-08-29T18:15:00Z   |28|
+2016-08-29T18:30:00Z   |19|                    
+2016-08-29T18:45:00Z   |20|
+                       |--|
+                       |--|
+2016-08-29T19:00:00Z   |56|
+2016-08-29T19:15:00Z   |76|
+2016-08-29T19:30:00Z   |29|
+2016-08-29T19:45:00Z   |90|
+                       |--|
+2016-08-29T20:00:00Z    70
 
 ```
-August 1st-2nd
-August 3rd-4th
-[...]
-August 19th-20th
-August 21st-22nd
-August 23rd-24th
-[...]
+
+##### Offset interval
+<br>
+The following query calculates the average value of `sunflowers` between
+6:15pm and 7:45pm and groups those averages into one hour intervals.
+It also offsets InfluxDB's preset time buckets by `15` minutes.
+```
+SELECT mean("sunflowers")
+FROM "flower_orders"
+WHERE time >= '2016-08-29T18:15:00Z' AND time <= '2016-08-29T19:45:00Z' GROUP BY time(1h,15m)
+                                                                                         ---
+                                                                                          |
+                                                                                   offset interval
 ```
 
-Because InfluxDB groups together August 19th and August 20th by default, August 19th is the first timestamp to appear in the results despite not being within the query's time range.
-The number in the `count` column, however, only includes data that occur on or after August 20th as that is the time range specified by the query's `WHERE` clause.
-
-Users may offset the default rounded calendar time boundaries by including an
+In this example, the user-specified
 [offset interval](/influxdb/v1.0/query_language/data_exploration/#configured-group-by-time-boundaries)
-in their query.
+shifts InfluxDB's preset time buckets forward by `15` minutes.
+The average for the 6pm time bucket now includes data between 6:15pm and 7pm, and
+the average for the 7pm time bucket includes data between 7:15pm and 8pm.
+The dotted lines show the points that make up each average.
+
+Note that the first timestamp in the result is `2016-08-29T18:15:00Z`
+instead of `2016-08-29T18:00:00Z`.
+
+Raw data:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Results:  
+```
+name: flower_orders                                name: flower_orders
+—————————                                          -------------------
+time                    sunflowers                 time                  mean
+2016-08-29T18:00:00Z    34                         2016-08-29T18:15:00Z  30.75
+                       |--|                        2016-08-29T19:15:00Z  65
+2016-08-29T18:15:00Z   |28|
+2016-08-29T18:30:00Z   |19|
+2016-08-29T18:45:00Z   |20|
+2016-08-29T19:00:00Z   |56|
+                       |--|
+                       |--|
+2016-08-29T19:15:00Z   |76|
+2016-08-29T19:30:00Z   |29|
+2016-08-29T19:45:00Z   |90|
+2016-08-29T20:00:00Z   |70|
+                       |--|
+```
+
 
 ## Why don't my queries return timestamps that occur after now()?
 By default, InfluxDB uses `now()` (the current nanosecond timestamp of the node that is processing the query) as the upper bound in queries.
@@ -352,6 +430,242 @@ time                   max
 
 While this is the expected behavior of `fill(previous)`, an [open feature request](https://github.com/influxdata/influxdb/issues/6878) on GitHub proposes that `fill(previous)` should fill results even when previous values fall outside the query’s time range.
 
+## How do I make InfluxDB’s CLI return human readable timestamps?
+
+When you first connect to the CLI, specify the [rfc3339](https://www.ietf.org/rfc/rfc3339.txt) precision:
+
+```
+$ influx -precision rfc3339
+```
+
+Alternatively, specify the precision once you’ve already connected to the CLI:
+
+```
+$ influx
+Connected to http://localhost:8086 version 0.xx.x
+InfluxDB shell 0.xx.x
+> precision rfc3339
+>
+```
+
+Check out [CLI/Shell](/influxdb/v1.0/tools/shell/) for more useful CLI options.
+
+## How do I perform mathematical operations within a function?
+
+Currently, InfluxDB does not support mathematical operations within functions.
+We recommend using InfluxQL's [`INTO` queries](/influxdb/v1.0/query_language/data_exploration/#the-into-clause)
+as a workaround.
+
+#### Example
+
+Split the following invalid query into two steps:
+```
+SELECT mean("dogs" - "cats") from "pet_daycare"
+```
+
+First, calculate the difference between `dogs` and `cats` and write the results to the same measurement using an `INTO` query:
+```
+SELECT "dogs" - "cats" AS "diff" INTO "pet_daycare" FROM "pet_daycare"
+```
+
+Second, calculate the average of the new field (`diff`):
+```
+SELECT mean("diff") FROM "pet_daycare"
+```
+
+## How can a non-admin user `USE` a database in InfluxDB's CLI?
+
+Currently, non-admin users cannot execute a `USE <database>` query within the
+CLI even if they have read and write permissions on that database:
+
+```
+> USE special_db
+ERR: error authorizing query: <username> not authorized to execute statement 'SHOW DATABASES', requires admin privilege
+```
+
+The workaround is for the user to explicitly connect to the relevant database when launching the CLI:
+
+```
+> influx -username 'username' -password 'password' -database 'special_db'
+```
+
+All operations for the duration of that CLI session will go against the `special_db` database.
+
+## Why are my INTO queries missing data?
+
+By default, `INTO` queries convert any tags in the initial data to fields in
+the newly written data.
+This can cause InfluxDB to overwrite [points](/influxdb/v1.0/concepts/glossary/#point) that were previously differentiated by a tag.
+Include `GROUP BY *` in all `INTO` queries to preserve tags in the newly written data.
+
+#### Example
+
+##### Initial data
+<br>
+The `french_bulldogs` measurement includes the `color` tag and the `name` field.
+```
+> SELECT * FROM "french_bulldogs"
+name: french_bulldogs
+---------------------
+time                  color  name
+2016-05-25T00:05:00Z  peach  nugget
+2016-05-25T00:05:00Z  grey   rumple
+2016-05-25T00:10:00Z  black  prince
+```
+
+##### `INTO` query without `GROUP BY *`
+<br>
+An `INTO` query without a `GROUP BY *` clause turns the `color` tag into
+a field in the newly written data.
+In the initial data the `nugget` point and the `rumple` points are differentiated only by the `color` tag.
+Once `color` becomes a field, InfluxDB assumes that the `nugget` point and the
+`rumple` point are duplicate points and it overwrites the `nugget` point with
+the `rumple` point.
+
+```
+> SELECT * INTO "all_dogs" FROM "french_bulldogs"
+name: result
+------------
+time                  written
+1970-01-01T00:00:00Z  3
+
+> SELECT * FROM "all_dogs"
+name: all_dogs
+--------------
+time                  color  name
+2016-05-25T00:05:00Z  grey   rumple                <---- no more nugget 🐶
+2016-05-25T00:10:00Z  black  prince
+```
+
+##### `INTO` query with `GROUP BY *`
+<br>
+An `INTO` query with a `GROUP BY *` clause preserves `color` as a tag in the newly written data.
+In this case, the `nugget` point and the `rumple` point remain unique points and InfluxDB does not overwrite any data.
+
+```
+> SELECT "name" INTO "all_dogs" FROM "french_bulldogs" GROUP BY *
+name: result
+------------
+time                  written
+1970-01-01T00:00:00Z  3
+
+> SELECT * FROM "all_dogs"
+name: all_dogs
+--------------
+time                  color  name
+2016-05-25T00:05:00Z  peach  nugget
+2016-05-25T00:05:00Z  grey   rumple
+2016-05-25T00:10:00Z  black  prince
+```
+
+## How can I tell what type of data are stored in a field?
+
+The [`SHOW FIELD KEYS`](/influxdb/v1.0/query_language/schema_exploration/#explore-field-keys-with-show-field-keys) query also returns the field's type.
+
+#### Example
+
+```
+> SHOW FIELD KEYS FROM all_the_types
+name: all_the_types
+-------------------
+fieldKey  fieldType
+blue      string
+green     boolean
+orange    integer
+yellow    float
+```
+
+## How do I query data with an identical tag key and field key?
+
+Use the `::` syntax to specify if the key is a field key or tag key.
+
+#### Examples
+
+##### Sample data:
+<br>
+```
+> INSERT candied,almonds=true almonds=50,half_almonds=51 1465317610000000000
+> INSERT candied,almonds=true almonds=55,half_almonds=56 1465317620000000000
+
+> SELECT * FROM "candied"
+name: candied
+-------------
+time                   almonds  almonds_1  half_almonds
+2016-06-07T16:40:10Z   50       true       51
+2016-06-07T16:40:20Z   55       true       56
+```
+
+##### Specify that the key is a field:
+<br>
+```
+> SELECT * FROM "candied" WHERE "almonds"::field > 51
+name: candied
+-------------
+time                   almonds  almonds_1  half_almonds
+2016-06-07T16:40:20Z   55       true       56
+```
+
+##### Specify that the key is a tag:
+<br>
+```
+> SELECT * FROM "candied" WHERE "almonds"::tag='true'
+name: candied
+-------------
+time                   almonds  almonds_1  half_almonds
+2016-06-07T16:40:10Z   50       true       51
+2016-06-07T16:40:20Z   55       true       56
+```
+
+## How do I query data across measurements?
+
+Currently, there is no way to perform cross-measurement math or grouping.
+All data must be under a single measurement to query it together.  InfluxDB is not a relational database and mapping data across measurements is not a great [schema](/influxdb/v1.0/concepts/glossary/#schema).
+
+## Does the order of the timestamps matter?
+
+No.
+Our tests indicate that there is a only a negligible difference between the times
+it takes InfluxDB to complete the following queries:
+
+```
+SELECT ... FROM ... WHERE time > 'timestamp1' AND time < 'timestamp2'
+SELECT ... FROM ... WHERE time < 'timestamp2' AND time > 'timestamp1'
+```
+
+## How do I SELECT data with a tag that has no value?
+
+Specify an empty tag value with `''`. For example:
+
+```
+> SELECT * FROM "vases" WHERE priceless=''
+name: vases
+-----------
+time                   origin   priceless
+2016-07-20T18:42:00Z   8
+```
+
+## How do I write to a non-DEFAULT retention policy with InfluxDB's CLI?
+
+Use the syntax `INSERT INTO <retention_policy> <line_protocol>` to write data to a non-`DEFAULT` retention policy using the CLI.
+
+For example:
+
+```
+> INSERT INTO one_day mortality bool=true
+Using retention policy one_day
+> SELECT * FROM "mydb"."one_day"."mortality"
+name: mortality
+---------------
+time                             bool
+2016-09-13T22:29:43.229530864Z   true
+```
+
+Note that you will need to fully qualify the measurement to query data in the non-`DEFAULT` retention policy. Fully qualify the measurement with the syntax:
+
+```
+"<database>"."<retention_policy>"."<measurement>"
+```
+
 # Writing data
 ## How do I write integer field values?
 Add a trailing `i` to the end of the field value when writing an integer.
@@ -466,6 +780,19 @@ Identifiers are database names, retention policy names, user names, measurement 
 	Applicable query: `SELECT "va\"ue" FROM "wacky"`
 
 See the [Line Protocol Syntax](/influxdb/v1.0/write_protocols/write_syntax/) page for more information.
+
+
+## Does the precision of the timestamp matter?
+
+Yes.
+To maximize performance we recommend using the coarsest possible timestamp precision when writing data to InfluxDB.
+
+For example, we recommend using the second of the following two requests:
+```
+curl -i -XPOST "http://localhost:8086/write?db=weather" --data-binary 'temperature,location=1 value=90 1472666050000000000'
+
+curl -i -XPOST "http://localhost:8086/write?db=weather&precision=s" --data-binary 'temperature,location=1 value=90 1472666050'
+```
 
 # Administration
 
