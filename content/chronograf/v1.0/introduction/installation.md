@@ -30,28 +30,13 @@ Follow the instructions in the Chronograf Downloads section on the [Downloads pa
 To run Chronograf manually, you can specify the configuration file on the
 command line:
 ```
-chronograf -config=/usr/local/etc/chronograf.toml
-```
-
-To have launchd start homebrew/binary/chronograf at login:
-```
-ln -sfv /usr/local/opt/chronograf/*.plist ~/Library/LaunchAgents
-```
-Then to load homebrew/binary/chronograf now:
-```
-launchctl load ~/Library/LaunchAgents/homebrew.mxcl.chronograf.plist
+chronograf -sample-config > chronograf.toml
+chronograf -config=chronograf.toml
 ```
 
 #### Linux DEB or RPM package:
 ```
 sudo service chronograf start
-```
-
-#### Standalone OS X binary
-Assuming you’re working with Chronograf version 0.13, from the
-`chronograf-0.13/`` directory:
-```
-./chronograf-0.13-darwin_amd64
 ```
 
 ## Configuration
