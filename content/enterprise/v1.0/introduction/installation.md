@@ -92,7 +92,7 @@ In `/etc/influxdb/influxdb-meta.conf`, set:
 
 * `hostname` to the meta node’s hostname
 * `registration-enabled` to `true`
-* `registration-server-url` to the full URL of the server that will run the InfluxEnterprise web console. 
+* `registration-server-url` to the full URL of the server that will run the InfluxEnterprise web console.
 You must fully specify the protocol, IP or hostname, and port.
 Entering the IP or hostname alone will lead to errors.
 * `license-key` to the license key you received on [InfluxPortal](https://portal.influxdata.com/)
@@ -338,13 +338,13 @@ a separate server.
 
 ##### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise_1.0.0_amd64.deb
-sudo dpkg -i influx-enterprise_1.0.0_amd64.deb
+wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise_1.0.1_amd64.deb
+sudo dpkg -i influx-enterprise_1.0.1_amd64.deb
 ```
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise-1.0.0.x86_64.rpm
-sudo yum localinstall influx-enterprise-1.0.0.x86_64.rpm
+wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise-1.0.1.x86_64.rpm
+sudo yum localinstall influx-enterprise-1.0.1.x86_64.rpm
 ```
 > **Notes:**
 >
