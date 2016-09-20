@@ -68,7 +68,7 @@ If there are any connectivity issues resolve them before proceeding with the
 installation.
 A healthy cluster requires that every meta and data node can communicate
 with every other meta and data node.
-### Set up, configure, and start the meta servers
+## Set up, configure, and start the meta servers
 
 On all three meta servers:
 
@@ -92,7 +92,7 @@ In `/etc/influxdb/influxdb-meta.conf`, set:
 
 * `hostname` to the meta node’s hostname
 * `registration-enabled` to `true`
-* `registration-server-url` to the full URL of the server that will run the InfluxEnterprise web console. 
+* `registration-server-url` to the full URL of the server that will run the InfluxEnterprise web console.
 You must fully specify the protocol, IP or hostname, and port.
 Entering the IP or hostname alone will lead to errors.
 * `license-key` to the license key you received on [InfluxPortal](https://portal.influxdata.com/)
