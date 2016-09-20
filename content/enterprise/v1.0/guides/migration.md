@@ -186,6 +186,8 @@ You should see:
 Added data node y at data-node-hostname:8088
 ```
 
+Note: it may take a few minutes before the existing data become available in the cluster.
+
 ## Final steps
 
 ### 1. Add any data nodes that you removed from cluster back into the cluster
@@ -198,6 +200,13 @@ Output:
 ```
 Added data node y at the-hostname:8088
 ```
+
+Finally verify that all nodes are now members of the cluster as expected:
+
+```
+influxd-ctl show
+```
+
 ### 2. Rebalance the cluster
 
 Increase the [replication factor](/enterprise/v1.0/concepts/glossary/#replication-factor) on all existing retention polices to the number of data nodes in your cluster.
