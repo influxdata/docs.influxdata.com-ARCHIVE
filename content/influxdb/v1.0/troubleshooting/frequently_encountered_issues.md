@@ -98,6 +98,20 @@ The second query asks InfluxDB to return everything from `hillvalley` that occur
 `SELECT * FROM "hillvalley"`  
 `SELECT * FROM "hillvalley" WHERE time < now() + 1000d`
 
+It is required that the default upper bound be explicitly replaced. 
+A query that resets the lower bound without changing the upper bound will not return any points after `now()`. 
+For example: 
+
+`SELECT * FROM "hillvalley" WHERE time > now()` 
+
+resets the lower bound of the query from `epoch=0` to `> now()`. 
+However, the default upper bound for the query is still `now()`. 
+Internally, the query expands to 
+
+`SELECT * FROM "hillvalley" WHERE time > now() AND time < now()`
+
+which cannot match any points.
+
 ## Querying with booleans
 Acceptable boolean syntax differs for data writes and data queries.
 
