@@ -409,8 +409,9 @@ a {
 		pre,
 		p,
 		ol,
-		ul {
-			width: calc(100% - @indented-element-size);
+		ul,
+		.vertical-tabs-container {
+			width: ~"calc(100% - "@indented-element-size~")";
 			margin-left: @indented-element-size;
 		}
 		table {
