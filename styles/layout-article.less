@@ -207,6 +207,7 @@ a {
 	th {
 		border: @border-small-screen solid @article-line-color;
 		font-size: 0.875em;
+		line-height: 1.2em;
 		padding: 0.75em 1.5em;
 	}
 	tr:nth-child(even) {
@@ -272,7 +273,7 @@ a {
 		border-style: solid;
 		padding: 0.1em 0.5em;
 		position: relative;
-		top:-0.1em;
+		top: -0.1em;
 		-webkit-font-smoothing: subpixel-antialiased !important;
 		-moz-osx-font-smoothing: auto !important;
 		font-weight: 400 !important;
@@ -288,11 +289,12 @@ a {
 		border-width: @border-small-screen @border-small-screen @border-small-screen @thick-left-border;
 		background-color: @article-code-bg;
 		border-color: @article-code-border;
-	    position: relative;
-	    z-index: 99;
+    position: relative;
+    z-index: 99;
+		line-height: 1.1em !important;
 
 		code {
-			white-space: pre;
+			white-space: pre-line;;
 			word-spacing: normal;
 			word-break: normal;
 			border: none;
