@@ -92,7 +92,7 @@ Measurements are strings.
 Related entries: [field](/influxdb/v1.0/concepts/glossary/#field), [series](/influxdb/v1.0/concepts/glossary/#series)
 
 ## metastore
-Contains internal information about the status of the system. 
+Contains internal information about the status of the system.
 The metastore contains the user information, databases, retention policies, shard metadata, continuous queries, and subscriptions.
 
 Related entries: [database](/influxdb/v1.0/concepts/glossary/#database), [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp), [user](/influxdb/v1.0/concepts/glossary/#user)
@@ -101,6 +101,9 @@ Related entries: [database](/influxdb/v1.0/concepts/glossary/#database), [retent
 An independent `influxd` process.
 
 Related entries: [server](/influxdb/v1.0/concepts/glossary/#server)
+
+## now()
+The local server's nanosecond timestamp.
 
 ## point   
 The part of InfluxDB's data structure that consists of a single collection of fields in a series.
