@@ -25,6 +25,7 @@ Functionality will vary, and there are, as yet, no standard features that all li
 ## JavaScript/Node.js
 - [node-influx](https://github.com/node-influx/node-influx) by [node-influx](https://github.com/node-influx)
 - [Influent](https://github.com/gobwas/influent) by [gobwas](https://github.com/gobwas)
+- [influx-nodejs](https://github.com/vicanso/influxdb-nodejs) by [vicanso](https://github.com/vicanso)
 
 ## Lisp
 - [cl-influxdb](https://github.com/mmaul/cl-influxdb) by [mmaul](https://github.com/mmaul)
