@@ -408,7 +408,7 @@ To store both points:
     ```
 
 ## Getting an unexpected error when sending data over the HTTP API
-First, double check your [line protocol](/influxdb/v1.0/write_protocols/line/) syntax.
+First, double check your [line protocol](/influxdb/v1.0/concepts/glossary/#line-protocol) syntax.
 Second, if you continue to receive errors along the lines of `bad timestamp` or `unable to parse`, verify that your newline character is line feed (`\n`, which is ASCII `0x0A`).
 InfluxDB's line protocol relies on `\n` to indicate the end of a line and the beginning of a new line; files or data that use a newline character other than `\n` will encounter parsing issues.
 Convert the newline character and try sending the data again.
