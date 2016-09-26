@@ -35,7 +35,6 @@ This document covers setting up and managing authentication and authorization in
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Re`SET` a user's password](#re-set-a-user-s-password)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`DROP` a user](#drop-a-user)  
 
-
 [Authentication and authorization HTTP errors](#authentication-and-authorization-http-errors)
 
 > **Note:** Authentication and authorization should not be relied upon to prevent access and protect data from malicious actors.
@@ -52,10 +51,12 @@ Plugins do not currently have the ability to authenticate requests and service e
 
 ### Set up authentication
 ---
+
 1. Create at least one [admin user](#admin-users).
 See the [authorization section](#authorization) for how to create an admin user.
 
     > **Note:** If you enable authentication and have no users, InfluxDB will **not** enforce authentication and will only accept the [query](#create-a-new-admin-user) that creates a new admin user.
+
     InfluxDB will enforce authentication once there is an admin user.
 
 2. By default, authentication is disabled in the configuration file.
@@ -132,6 +133,7 @@ influx -username todd -password influxdb4ever
     ```
 
 ## Authorization
+
 Authorization is only enforced once you've [enabled authentication](#set-up-authentication).
 By default, authentication is disabled, all credentials are silently ignored, and all users have all privileges.
 
@@ -164,8 +166,7 @@ Non-admin users can have one of the following three privileges per database:
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`WRITE`  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ALL` (both `READ` and `WRITE` access)
 
-`READ`, `WRITE`, and `ALL` privileges are controlled per user per database.
-A new non-admin user has no access to any database until they are specifically [granted privileges to a database](#grant-read-write-or-all-database-privileges-to-an-existing-user) by an admin user.
+`READ`, `WRITE`, and `ALL` privileges are controlled per user per database. A new non-admin user has no access to any database until they are specifically [granted privileges to a database](#grant-read-write-or-all-database-privileges-to-an-existing-user) by an admin user.
 
 ### User management commands
 ---
