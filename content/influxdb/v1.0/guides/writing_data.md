@@ -28,10 +28,10 @@ The data consist of the [measurement](/influxdb/v1.0/concepts/glossary/#measurem
 ```bash
 curl -i -XPOST 'http://localhost:8086/write?db=mydb' --data-binary 'cpu_load_short,host=server01,region=us-west value=0.64 1434055562000000000'
 ```
-When writing points, you must specify an existing database in the `db` query parameter.
+When writing data, you must specify an existing database in the `db` query parameter.
 See the [HTTP section](/influxdb/v1.0/write_protocols/write_syntax/#http) on the Write Syntax page for a complete list of the available query parameters.
 
-The body of the POST - we call this the [Line Protocol](/influxdb/v1.0/concepts/glossary/#line-protocol) - contains the time-series data that you wish to store.
+The body of the POST - we call this the [Line Protocol](/influxdb/v1.0/concepts/glossary/#line-protocol) - contains the data that you wish to store.
 They consist of a measurement, tags, fields, and a timestamp.
 InfluxDB requires a measurement name.
 Strictly speaking, tags are optional but most series include tags to differentiate data sources and to make querying both easy and efficient.
@@ -43,13 +43,15 @@ Anything that has to do with time in InfluxDB is always UTC.
 
 ### Writing multiple points
 ---
-Post multiple points to multiple series at the same time by separating each point with a new line.
+Post multiple points at the same time by separating each point with a new line.
 Batching points in this manner results in much higher performance.
 
 The following example writes three points to the database `mydb`.
-The first point belongs to the series with the measurement `cpu_load_short` and tag set `host=server02` and has the server's local timestamp.
-The second point belongs to the series with the measurement `cpu_load_short` and tag set `host=server02,region=us-west` and has the specified timestamp `1422568543702900257`.
-The third point has the same specified timestamp as the second point, but it is written to the series with the measurement `cpu_load_short` and tag set `direction=in,host=server01,region=us-west`.
+The first point belongs to the series with the measurement `cpu_load_short`, tag set `host=server02`, and field key `value`.
+It has the server's local timestamp.
+The second point belongs to the series with the measurement `cpu_load_short`, tag set `host=server02,region=us-west`, and field key `value`.
+It has the specified timestamp `1422568543702900257`.
+The third point has the same specified timestamp as the second point, but it's written to the series with the measurement `cpu_load_short`, tag set `direction=in,host=server01,region=us-west`, and field key `value`.
 <br>
 
 ```bash
@@ -58,9 +60,9 @@ cpu_load_short,host=server02,region=us-west value=0.55 1422568543702900257
 cpu_load_short,direction=in,host=server01,region=us-west value=2.0 1422568543702900257'
 ```
 
-### Writing points from a file
+### Writing data from a file
 ---
-Write points from a file by passing `@filename` to `curl`.
+Write data from a file by passing `@filename` to `curl`.
 The data in the file should follow InfluxDB's [line protocol syntax](/influxdb/v1.0/write_protocols/write_syntax/).
 
 Example of a properly-formatted file (`cpu_data.txt`):  

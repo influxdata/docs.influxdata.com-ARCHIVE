@@ -963,7 +963,7 @@ In the case of a tie, InfluxDB returns the value with the earlier timestamp.
 </dt>
 
 ## DERIVATIVE()
-Returns the rate of change for the values in a single [field](/influxdb/v1.0/concepts/glossary/#field) in a [series](/influxdb/v1.0/concepts/glossary/#series).
+Returns the rate of change for the values in a single [field](/influxdb/v1.0/concepts/glossary/#field).
 InfluxDB calculates the difference between chronological field values and converts those results into the rate of change per `unit`.
 The `unit` argument is optional and, if not specified, defaults to one second (`1s`).
 
@@ -1413,7 +1413,7 @@ values; the first result in the `moving_average` column the average of `2.064`
 and `2.028`, and the second result is the average of `2.028` and `2.041`.
 
 ## NON_NEGATIVE_DERIVATIVE()
-Returns the non-negative rate of change for the values in a single [field](/influxdb/v1.0/concepts/glossary/#field) in a [series](/influxdb/v1.0/concepts/glossary/#series).
+Returns the non-negative rate of change for the values in a single [field](/influxdb/v1.0/concepts/glossary/#field).
 InfluxDB calculates the difference between chronological field values and converts those results into the rate of change per `unit`.
 The `unit` argument is optional and, if not specified, defaults to one second (`1s`).
 

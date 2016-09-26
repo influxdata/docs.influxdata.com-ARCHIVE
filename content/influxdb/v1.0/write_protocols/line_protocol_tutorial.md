@@ -423,10 +423,9 @@ on the [HTTP API](/influxdb/v1.0/tools/api/#write), the
 
 ### Duplicate points
 
-A point is uniquely identified by the measurement name, tag set, and timestamp.
-If you submit Line Protocol with the same measurement, tag set, and timestamp,
-but with a different field set, the field set becomes the union of the old
-field set and the new field set, where any conflicts favor the new field set.
+A point is uniquely identified by the measurement name, tag set, field key, and timestamp.
+If you submit Line Protocol with the same measurement, tag set, field key, and timestamp,
+InfluxDB will overwrite the existing point with the new point.
 
 See
 [Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#writing-duplicate-points)

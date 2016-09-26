@@ -12,8 +12,8 @@ InfluxQL offers a full suite of administrative commands.
 * [Data management](/influxdb/v1.0/query_language/database_management/#data-management)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Create a database with `CREATE DATABASE`](/influxdb/v1.0/query_language/database_management/#create-a-database-with-create-database)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete a database with `DROP DATABASE`](/influxdb/v1.0/query_language/database_management/#delete-a-database-with-drop-database)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Drop series from the index with `DROP SERIES`](/influxdb/v1.0/query_language/database_management/#drop-series-from-the-index-with-drop-series)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete series with `DELETE`](/influxdb/v1.0/query_language/database_management/#delete-series-with-delete)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Drop metaseries from the index with `DROP SERIES`](/influxdb/v1.0/query_language/database_management/#drop-metaseries-from-the-index-with-drop-series)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete data with `DELETE`](/influxdb/v1.0/query_language/database_management/#delete-data-with-delete)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete measurements with `DROP MEASUREMENT`](/influxdb/v1.0/query_language/database_management/#delete-measurements-with-drop-measurement)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete a shard with `DROP SHARD`](/influxdb/v1.0/query_language/database_management/#delete-a-shard-with-drop-shard)
 
@@ -82,14 +82,14 @@ Drop the database NOAA_water_database:
 A successful `DROP DATABASE` query returns an empty result.
 If you attempt to drop a database that does not exist, InfluxDB does not return an error.
 
-### Drop series from the index with DROP SERIES
+### Drop metaseries from the index with DROP SERIES
 ---
-The `DROP SERIES` query deletes all points from a [series](/influxdb/v1.0/concepts/glossary/#series) in a database,
-and it drops the series from the index.
+The `DROP SERIES` query deletes all points from a [metaseries](/influxdb/v1.0/concepts/glossary/#metaseries) in a database,
+and it drops the metaseries from the index.
 
 > **Note:** `DROP SERIES` does not support time intervals in the `WHERE` clause.
 See
-[`DELETE`](/influxdb/v1.0/query_language/database_management/#delete-series-with-delete)
+[`DELETE`](/influxdb/v1.0/query_language/database_management/#delete-data-with-delete)
 for that functionality.
 
 The query takes the following form, where you must specify either the `FROM` clause or the `WHERE` clause:
@@ -97,29 +97,28 @@ The query takes the following form, where you must specify either the `FROM` cla
 DROP SERIES FROM <measurement_name[,measurement_name]> WHERE <tag_key>='<tag_value>'
 ```
 
-Drop all series from a single measurement:
+Drop all metaseries from a single measurement:
 ```sql
 > DROP SERIES FROM "h2o_feet"
 ```
 
-Drop series with a specific tag pair from a single measurement:
+Drop metaseries with a specific tag pair from a single measurement:
 ```sql
 > DROP SERIES FROM "h2o_feet" WHERE "location" = 'santa_monica'
 ```
 
-Drop all points in the series that have a specific tag pair from all measurements in the database:
+Drop all points in the metaseries that have a specific tag pair from all measurements in the database:
 ```sql
 > DROP SERIES WHERE "location" = 'santa_monica'
 ```
 
 A successful `DROP SERIES` query returns an empty result.
 
-### Delete series with DELETE
+### Delete data with DELETE
 ---
-The `DELETE` query deletes all points from a
-[series](/influxdb/v1.0/concepts/glossary/#series) in a database.
+The `DELETE` query deletes all specified data from a database.
 Unlike
-[`DROP SERIES`](/influxdb/v1.0/query_language/database_management/#drop-series-from-the-index-with-drop-series), it does not drop the series from the index and it supports time intervals
+[`DROP SERIES`](/influxdb/v1.0/query_language/database_management/#drop-metaseries-from-the-index-with-drop-series), `DELETE` does not drop the [metaseries](/influxdb/v1.0/concepts/glossary/#metaseries) from the index and it supports time intervals
 in the `WHERE` clause.
 
 The query takes the following form where you must include either the `FROM`

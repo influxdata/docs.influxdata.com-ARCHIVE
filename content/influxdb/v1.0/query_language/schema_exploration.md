@@ -11,7 +11,7 @@ The following sections cover useful query syntax for exploring your schema (that
 
 * [See all databases with `SHOW DATABASES`](/influxdb/v1.0/query_language/schema_exploration/#see-all-databases-with-show-databases)
 * [Explore retention policies with `SHOW RETENTION POLICIES`](/influxdb/v1.0/query_language/schema_exploration/#explore-retention-policies-with-show-retention-policies)
-* [Explore series with `SHOW SERIES`](/influxdb/v1.0/query_language/schema_exploration/#explore-series-with-show-series)
+* [Explore metaseries with `SHOW SERIES`](/influxdb/v1.0/query_language/schema_exploration/#explore-metaseries-with-show-series)
 * [Explore measurements with `SHOW MEASUREMENTS`](/influxdb/v1.0/query_language/schema_exploration/#explore-measurements-with-show-measurements)
 * [Explore tag keys with `SHOW TAG KEYS`](/influxdb/v1.0/query_language/schema_exploration/#explore-tag-keys-with-show-tag-keys)
 * [Explore tag values with `SHOW TAG VALUES`](/influxdb/v1.0/query_language/schema_exploration/#explore-tag-values-with-show-tag-values)
@@ -70,14 +70,14 @@ one_day_only	    24h0m0s		 1h0m0s			           1		       false
 three_days_only	 72h0m0s		 24h0m0s			          1		       true
 ```
 
-## Explore series with `SHOW SERIES`
-The `SHOW SERIES` query returns the distinct [series](/influxdb/v1.0/concepts/glossary/#series) in your database and takes the following form, where the `FROM` and `WHERE` clauses are optional:
+## Explore metaseries with `SHOW SERIES`
+The `SHOW SERIES` query returns the distinct [metaseries](/influxdb/v1.0/concepts/glossary/#metaseries) in your database and takes the following form, where the `FROM` and `WHERE` clauses are optional:
 
 ```sql
 SHOW SERIES [FROM <measurement_name> [WHERE <tag_key> [= '<tag_value>' | =~ <regular_expression>]]]
 ```
 
-Return all series in the database `NOAA_water_database`:
+Return all metaseries in the database `NOAA_water_database`:
 ```sql
 > SHOW SERIES
 ```
@@ -101,16 +101,16 @@ h2o_temperature,location=coyote_creek
 h2o_temperature,location=santa_monica
 ```
 
-`SHOW SERIES` organizes its output similar to the [line protocol](/influxdb/v1.0/write_protocols/line/) format.
+`SHOW SERIES` organizes its output similar to the [line protocol](/influxdb/v1.0/concepts/glossary/#line-protocol) format.
 Everything before the first comma is the [measurement](/influxdb/v1.0/concepts/glossary/#measurement) name.
 Everything after the first comma is either a [tag key](/influxdb/v1.0/concepts/glossary/#tag-key) or a [tag value](/influxdb/v1.0/concepts/glossary/#tag-value).
 
-From the output above you can see that the data in the database `NOAA_water_database` have five different measurements and 14 different series.
+From the output above you can see that the data in the database `NOAA_water_database` have five different measurements and 14 different metaseries.
 The measurements are `average_temperature`, `h2o_feet`, `h2o_pH`, `h2o_quality`, and `h2o_temperature`.
-Every measurement has the tag key `location` with the tag values `coyote_creek` and `santa_monica` - that makes 10 series.
-The measurement `h2o_quality` has the additional tag key `randtag` with the tag values `1`,`2`, and `3` - that makes 14 series.
+Every measurement has the tag key `location` with the tag values `coyote_creek` and `santa_monica` - that makes 10 metaseries.
+The measurement `h2o_quality` has the additional tag key `randtag` with the tag values `1`,`2`, and `3` - that makes 14 metaseries.
 
-Return series for a specific measurement:
+Return metaseries for a specific measurement:
 ```sql
 > SHOW SERIES FROM "h2o_quality"
 ```
@@ -126,7 +126,7 @@ h2o_quality,location=santa_monica,randtag=2
 h2o_quality,location=santa_monica,randtag=3
 ```
 
-Return series for a specific measurement and tag set:
+Return metaseries for a specific measurement and tag set:
 ```sql
 > SHOW SERIES FROM "h2o_quality" WHERE "location" = 'coyote_creek'
 ```
