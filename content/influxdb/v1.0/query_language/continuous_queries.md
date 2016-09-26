@@ -27,7 +27,7 @@ The time ranges of the CQ results have natural time boundaries that are set inte
 Users can use an [offset interval](/influxdb/v1.0/query_language/data_exploration/#configured-group-by-time-boundaries)
 to alter the start or end times of the intervals.
 
-Only admin users are allowed to work with continuous queries. For more on user privileges, see [Authentication and Authorization](/influxdb/v1.0/administration/authentication_and_authorization/#user-types-and-their-privileges).
+Only admin users are allowed to work with continuous queries. For more on user privileges, see [Authentication and Authorization](/influxdb/v1.0/query_language/authentication_and_authorization/#user-types-and-their-privileges).
 
 > **Note:** CQs only execute on data received after the CQ's creation. If you'd like to downsample data written to InfluxDB before the CQ was created, see the examples in [Data Exploration](/influxdb/v1.0/query_language/data_exploration/#downsample-data).
 

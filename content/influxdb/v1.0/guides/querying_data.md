@@ -132,7 +132,7 @@ curl -G 'http://localhost:8086/query' --data-urlencode "db=mydb" --data-urlencod
 
 #### Authentication
 Authentication in InfluxDB is disabled by default.
-See [Authentication and Authorization](/influxdb/v1.0/administration/authentication_and_authorization/) for how to enable and set up authentication.
+See [Authentication and Authorization](/influxdb/v1.0/query_language/authentication_and_authorization/) for how to enable and set up authentication.
 
 #### Maximum Row Limit
 InfluxDB will limit the maximum number of returned results to prevent itself from running out of memory while it aggregates the results. This is set to 10,000 by default and can be configured by modifying `max-row-limit` in the `http` section of the configuration file.
