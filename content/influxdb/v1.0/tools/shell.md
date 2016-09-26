@@ -326,4 +326,4 @@ Restarting the CLI will revert to using the `DEFAULT` retention policy.
 
 ### Queries
 Execute all InfluxQL queries in `influx`.
-See [Data Exploration](/influxdb/v1.0/query_language/data_exploration/), [Schema Exploration](/influxdb/v1.0/query_language/schema_exploration/), [Database Management](/influxdb/v1.0/query_language/database_management/), [Authentication and Authorization](/influxdb/v1.0/administration/authentication_and_authorization/) for InfluxQL documentation.
+See [Data Exploration](/influxdb/v1.0/query_language/data_exploration/), [Schema Exploration](/influxdb/v1.0/query_language/schema_exploration/), [Database Management](/influxdb/v1.0/query_language/database_management/), [Authentication and Authorization](/influxdb/v1.0/query_language/authentication_and_authorization/) for InfluxQL documentation.

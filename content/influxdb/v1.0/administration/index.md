@@ -3,7 +3,7 @@ title: Database Administration
 ---
 The administration documentation contains all the information needed to administer a working InfluxDB installation.
 
-## [Authentication and Authorization](/influxdb/v1.0/administration/authentication_and_authorization/)
+## [Authentication and Authorization](/influxdb/v1.0/query_language/authentication_and_authorization/)
 
 This section covers setting up and managing authentication and authorization in InfluxDB.
 
