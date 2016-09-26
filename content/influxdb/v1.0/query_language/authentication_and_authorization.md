@@ -8,35 +8,35 @@ menu:
 
 This document covers setting up and managing authentication and authorization in InfluxDB.
 
-[Authentication](/influxdb/v1.0/administration/authentication_and_authorization/#authentication)
+[Authentication](/influxdb/v1.0/query_language/authentication_and_authorization/#authentication)
 
-* [Set up authentication](/influxdb/v1.0/administration/authentication_and_authorization/#set-up-authentication)
-* [Authenticating requests](/influxdb/v1.0/administration/authentication_and_authorization/#authenticating-requests)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Authenticate using the HTTP API](/influxdb/v1.0/administration/authentication_and_authorization/#authenticate-using-the-http-api)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Authenticate using the CLI](/influxdb/v1.0/administration/authentication_and_authorization/#authenticate-using-the-cli)  
+* [Set up authentication](/influxdb/v1.0/query_language/authentication_and_authorization/#set-up-authentication)
+* [Authenticating requests](/influxdb/v1.0/query_language/authentication_and_authorization/#authenticating-requests)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Authenticate using the HTTP API](/influxdb/v1.0/query_language/authentication_and_authorization/#authenticate-using-the-http-api)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Authenticate using the CLI](/influxdb/v1.0/query_language/authentication_and_authorization/#authenticate-using-the-cli)  
 
-[Authorization](/influxdb/v1.0/administration/authentication_and_authorization/#authorization)
+[Authorization](/influxdb/v1.0/query_language/authentication_and_authorization/#authorization)
 
-* [User types and their privileges](/influxdb/v1.0/administration/authentication_and_authorization/#user-types-and-their-privileges)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Admin users](/influxdb/v1.0/administration/authentication_and_authorization/#admin-users)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Non-admin users](/influxdb/v1.0/administration/authentication_and_authorization/#non-admin-users)  
-* [User management commands](/influxdb/v1.0/administration/authentication_and_authorization/#user-management-commands)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Admin user management](/influxdb/v1.0/administration/authentication_and_authorization/#admin-user-management)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`CREATE` a new admin user](/influxdb/v1.0/administration/authentication_and_authorization/#create-a-new-admin-user)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`GRANT` administrative privileges to an existing user](/influxdb/v1.0/administration/authentication_and_authorization/#grant-administrative-privileges-to-an-existing-user)   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`REVOKE` administrative privileges from an admin user](/influxdb/v1.0/administration/authentication_and_authorization/#revoke-administrative-privileges-from-an-admin-user)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`SHOW` all existing users and their admin status](/influxdb/v1.0/administration/authentication_and_authorization/#show-all-existing-users-and-their-admin-status)    
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Non-admin user management](/influxdb/v1.0/administration/authentication_and_authorization/#non-admin-user-management)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`CREATE` a new non-admin user](/influxdb/v1.0/administration/authentication_and_authorization/#create-a-new-non-admin-user)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`GRANT` `READ`,`WRITE`, or `ALL` database privileges to an existing user](/influxdb/v1.0/administration/authentication_and_authorization/#grant-read-write-or-all-database-privileges-to-an-existing-user)   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`REVOKE` `READ`,`WRITE`, or `ALL` database privileges from an existing user](/influxdb/v1.0/administration/authentication_and_authorization/#revoke-read-write-or-all-database-privileges-from-an-existing-user)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`SHOW` a user's database privileges](/influxdb/v1.0/administration/authentication_and_authorization/#show-a-user-s-database-privileges)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[General admin and non-admin user management](/influxdb/v1.0/administration/authentication_and_authorization/#show-a-user-s-database-privileges)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Re`SET` a user's password](/influxdb/v1.0/administration/authentication_and_authorization/#re-set-a-user-s-password)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`DROP` a user](/influxdb/v1.0/administration/authentication_and_authorization/#drop-a-user)  
+* [User types and their privileges](/influxdb/v1.0/query_language/authentication_and_authorization/#user-types-and-their-privileges)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Admin users](/influxdb/v1.0/query_language/authentication_and_authorization/#admin-users)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Non-admin users](/influxdb/v1.0/query_language/authentication_and_authorization/#non-admin-users)  
+* [User management commands](/influxdb/v1.0/query_language/authentication_and_authorization/#user-management-commands)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Admin user management](/influxdb/v1.0/query_language/authentication_and_authorization/#admin-user-management)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`CREATE` a new admin user](/influxdb/v1.0/query_language/authentication_and_authorization/#create-a-new-admin-user)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`GRANT` administrative privileges to an existing user](/influxdb/v1.0/query_language/authentication_and_authorization/#grant-administrative-privileges-to-an-existing-user)   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`REVOKE` administrative privileges from an admin user](/influxdb/v1.0/query_language/authentication_and_authorization/#revoke-administrative-privileges-from-an-admin-user)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`SHOW` all existing users and their admin status](/influxdb/v1.0/query_language/authentication_and_authorization/#show-all-existing-users-and-their-admin-status)    
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Non-admin user management](/influxdb/v1.0/query_language/authentication_and_authorization/#non-admin-user-management)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`CREATE` a new non-admin user](/influxdb/v1.0/query_language/authentication_and_authorization/#create-a-new-non-admin-user)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`GRANT` `READ`,`WRITE`, or `ALL` database privileges to an existing user](/influxdb/v1.0/query_language/authentication_and_authorization/#grant-read-write-or-all-database-privileges-to-an-existing-user)   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`REVOKE` `READ`,`WRITE`, or `ALL` database privileges from an existing user](/influxdb/v1.0/query_language/authentication_and_authorization/#revoke-read-write-or-all-database-privileges-from-an-existing-user)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`SHOW` a user's database privileges](/influxdb/v1.0/query_language/authentication_and_authorization/#show-a-user-s-database-privileges)  
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[General admin and non-admin user management](/influxdb/v1.0/query_language/authentication_and_authorization/#show-a-user-s-database-privileges)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Re`SET` a user's password](/influxdb/v1.0/query_language/authentication_and_authorization/#re-set-a-user-s-password)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;□&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`DROP` a user](/influxdb/v1.0/query_language/authentication_and_authorization/#drop-a-user)  
 
 
-[Authentication and authorization HTTP errors](/influxdb/v1.0/administration/authentication_and_authorization/#authentication-and-authorization-http-errors)
+[Authentication and authorization HTTP errors](/influxdb/v1.0/query_language/authentication_and_authorization/#authentication-and-authorization-http-errors)
 
 > **Note:** Authentication and authorization should not be relied upon to prevent access and protect data from malicious actors.
 If additional security or compliance features are desired, InfluxDB should be run behind a third-party service.
@@ -52,10 +52,10 @@ Plugins do not currently have the ability to authenticate requests and service e
 
 ### Set up authentication
 ---
-1. Create at least one [admin user](/influxdb/v1.0/administration/authentication_and_authorization/#admin-users).
-See the [authorization section](/influxdb/v1.0/administration/authentication_and_authorization/#authorization) for how to create an admin user.
+1. Create at least one [admin user](/influxdb/v1.0/query_language/authentication_and_authorization/#admin-users).
+See the [authorization section](/influxdb/v1.0/query_language/authentication_and_authorization/#authorization) for how to create an admin user.
 
-    > **Note:** If you enable authentication and have no users, InfluxDB will **not** enforce authentication and will only accept the [query](/influxdb/v1.0/administration/authentication_and_authorization/#create-a-new-admin-user) that creates a new admin user.
+    > **Note:** If you enable authentication and have no users, InfluxDB will **not** enforce authentication and will only accept the [query](/influxdb/v1.0/query_language/authentication_and_authorization/#create-a-new-admin-user) that creates a new admin user.
     InfluxDB will enforce authentication once there is an admin user.
 
 2. By default, authentication is disabled in the configuration file.
@@ -101,8 +101,8 @@ Example:
 curl -G http://localhost:8086/query --data-urlencode "u=todd" --data-urlencode "p=influxdb4ever" --data-urlencode "q=SHOW DATABASES"
 ```
 
-The queries in both examples assume that the user is an [admin user](/influxdb/v1.0/administration/authentication_and_authorization/#admin-users).
-See the section on [authorization](/influxdb/v1.0/administration/authentication_and_authorization/#authorization) for the different user types, their privileges, and more on user management.
+The queries in both examples assume that the user is an [admin user](/influxdb/v1.0/query_language/authentication_and_authorization/#admin-users).
+See the section on [authorization](/influxdb/v1.0/query_language/authentication_and_authorization/#authorization) for the different user types, their privileges, and more on user management.
 
 If you authenticate with both Basic Authentication **and** the URL query parameters, the user credentials specified in the query parameters take precedence.
 
@@ -132,7 +132,7 @@ influx -username todd -password influxdb4ever
     ```
 
 ## Authorization
-Authorization is only enforced once you've [enabled authentication](/influxdb/v1.0/administration/authentication_and_authorization/#set-up-authentication).
+Authorization is only enforced once you've [enabled authentication](/influxdb/v1.0/query_language/authentication_and_authorization/#set-up-authentication).
 By default, authentication is disabled, all credentials are silently ignored, and all users have all privileges.
 
 ### User types and their privileges
@@ -150,13 +150,13 @@ See the [database management](/influxdb/v1.0/query_language/database_management/
 
 User management:  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin user management:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`CREATE USER`](/influxdb/v1.0/administration/authentication_and_authorization/#create-a-new-admin-user), [`GRANT ALL PRIVILEGES`](/influxdb/v1.0/administration/authentication_and_authorization/#grant-administrative-privileges-to-an-existing-user), [`REVOKE ALL PRIVILEGES`](/influxdb/v1.0/administration/authentication_and_authorization/#revoke-administrative-privileges-from-an-admin-user), and [`SHOW USERS`](/influxdb/v1.0/administration/authentication_and_authorization/#show-all-existing-users-and-their-admin-status)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`CREATE USER`](/influxdb/v1.0/query_language/authentication_and_authorization/#create-a-new-admin-user), [`GRANT ALL PRIVILEGES`](/influxdb/v1.0/query_language/authentication_and_authorization/#grant-administrative-privileges-to-an-existing-user), [`REVOKE ALL PRIVILEGES`](/influxdb/v1.0/query_language/authentication_and_authorization/#revoke-administrative-privileges-from-an-admin-user), and [`SHOW USERS`](/influxdb/v1.0/query_language/authentication_and_authorization/#show-all-existing-users-and-their-admin-status)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Non-admin user management:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`CREATE USER`](/influxdb/v1.0/administration/authentication_and_authorization/#create-a-new-non-admin-user), [`GRANT [READ,WRITE,ALL]`](/influxdb/v1.0/administration/authentication_and_authorization/#grant-read-write-or-all-database-privileges-to-an-existing-user), [`REVOKE [READ,WRITE,ALL]`](/influxdb/v1.0/administration/authentication_and_authorization/#revoke-read-write-or-all-database-privileges-from-an-existing-user), and [`SHOW GRANTS`](/influxdb/v1.0/administration/authentication_and_authorization/#show-a-user-s-database-privileges)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`CREATE USER`](/influxdb/v1.0/query_language/authentication_and_authorization/#create-a-new-non-admin-user), [`GRANT [READ,WRITE,ALL]`](/influxdb/v1.0/query_language/authentication_and_authorization/#grant-read-write-or-all-database-privileges-to-an-existing-user), [`REVOKE [READ,WRITE,ALL]`](/influxdb/v1.0/query_language/authentication_and_authorization/#revoke-read-write-or-all-database-privileges-from-an-existing-user), and [`SHOW GRANTS`](/influxdb/v1.0/query_language/authentication_and_authorization/#show-a-user-s-database-privileges)  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;General user management:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`SET PASSWORD`](/influxdb/v1.0/administration/authentication_and_authorization/#re-set-a-user-s-password) and [`DROP USER`](/influxdb/v1.0/administration/authentication_and_authorization/#drop-a-user)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`SET PASSWORD`](/influxdb/v1.0/query_language/authentication_and_authorization/#re-set-a-user-s-password) and [`DROP USER`](/influxdb/v1.0/query_language/authentication_and_authorization/#drop-a-user)  
 
-See [below](/influxdb/v1.0/administration/authentication_and_authorization/#user-management-commands) for a complete discussion of the user management commands.
+See [below](/influxdb/v1.0/query_language/authentication_and_authorization/#user-management-commands) for a complete discussion of the user management commands.
 
 #### Non-admin users
 Non-admin users can have one of the following three privileges per database:  
@@ -165,7 +165,7 @@ Non-admin users can have one of the following three privileges per database:
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ALL` (both `READ` and `WRITE` access)
 
 `READ`, `WRITE`, and `ALL` privileges are controlled per user per database.
-A new non-admin user has no access to any database until they are specifically [granted privileges to a database](/influxdb/v1.0/administration/authentication_and_authorization/#grant-read-write-or-all-database-privileges-to-an-existing-user) by an admin user.
+A new non-admin user has no access to any database until they are specifically [granted privileges to a database](/influxdb/v1.0/query_language/authentication_and_authorization/#grant-read-write-or-all-database-privileges-to-an-existing-user) by an admin user.
 
 ### User management commands
 ---

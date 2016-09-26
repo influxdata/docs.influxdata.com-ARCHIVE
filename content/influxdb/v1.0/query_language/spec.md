@@ -9,7 +9,7 @@ menu:
 ## Introduction
 
 This is a reference for the Influx Query Language ("InfluxQL").
-If you're looking for less formal documentation see [Data Exploration](/influxdb/v1.0/query_language/data_exploration/), [Schema Exploration](/influxdb/v1.0/query_language/schema_exploration/), [Database Management](/influxdb/v1.0/query_language/database_management/), and [Authentication and Authorization](/influxdb/v1.0/administration/authentication_and_authorization/).
+If you're looking for less formal documentation see [Data Exploration](/influxdb/v1.0/query_language/data_exploration/), [Schema Exploration](/influxdb/v1.0/query_language/schema_exploration/), [Database Management](/influxdb/v1.0/query_language/database_management/), and [Authentication and Authorization](/influxdb/v1.0/query_language/authentication_and_authorization/).
 
 InfluxQL is a SQL-like query language for interacting with InfluxDB.
 It has been lovingly crafted to feel familiar to those coming from other SQL or SQL-like environments while providing features specific to storing and analyzing time series data.

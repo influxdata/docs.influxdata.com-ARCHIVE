@@ -511,7 +511,7 @@ Controls how long an http request for the subscriber service will run before it 
 This section controls how InfluxDB configures the HTTP endpoints.
 These are the primary mechanisms for getting data into and out of InfluxDB.
 Edit the options in this section to enable HTTPS and authentication.
-See [Authentication and Authorization](/influxdb/v1.0/administration/authentication_and_authorization/).
+See [Authentication and Authorization](/influxdb/v1.0/query_language/authentication_and_authorization/).
 
 ### enabled = true
 
