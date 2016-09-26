@@ -12,7 +12,7 @@ Download and write to any InfluxDB installation the sample data used in [Data Ex
 
 From your terminal, download the text file that contains the data in [line protocol](../../write_protocols/line/) format:
 ```
-curl https://s3.amazonaws.com/noaa.water-database/NOAA_data.txt
+curl https://s3.amazonaws.com/noaa.water-database/NOAA_data.txt -o NOAA_data.txt
 ```
 
 Write the data to InfluxDB via the [CLI](../../tools/shell/):
