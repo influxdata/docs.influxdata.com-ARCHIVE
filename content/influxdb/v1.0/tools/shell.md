@@ -230,13 +230,10 @@ Results:
 
 > **Note:** For large datasets, `influx` writes out a status message every 100,000 points.
 For example:
-<br>
-<br>
-> ```
-2015/08/21 14:48:01 Processed 3100000 lines.
-Time elapsed: 56.740578415s.
-Points per second (PPS): 54634
-```
+>
+    2015/08/21 14:48:01 Processed 3100000 lines.
+    Time elapsed: 56.740578415s.
+    Points per second (PPS): 54634
 
 Things to note about `-import`:
 
