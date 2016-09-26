@@ -23,6 +23,7 @@ Where applicable, it links to outstanding issues on GitHub.
 * [Identifying write precision from returned timestamps](#identifying-write-precision-from-returned-timestamps)  
 * [Single quoting and double quoting in queries](#single-quoting-and-double-quoting-in-queries)  
 * [Missing data after creating a new `DEFAULT` retention policy](#missing-data-after-creating-a-new-default-retention-policy)
+* [Querying for metaseries cardinality](#querying-for-metaseries-cardinality)
 * [Using `OR` with absolute time in the `WHERE` clause](#using-or-with-absolute-time-in-the-where-clause)
 
 **Writing data**  
@@ -280,6 +281,26 @@ time			               count
 1970-01-01T00:00:00Z	 8
 ```
 
+## Querying for metaseries cardinality
+
+The following queries return
+[metaseries](/influxdb/v1.0/concepts/glossary/#metaseries) cardinality:
+
+#### Metaseries cardinality per database:
+
+```
+SELECT numSeries FROM "_internal".."database" GROUP BY "database" ORDER BY desc LIMIT 1
+```
+
+#### Metaseries cardinality across all databases:
+
+```
+SELECT sum(numSeries) AS “total_series" FROM “_internal".."database" WHERE time > now() - 10s
+```
+
+> **Note:** Changes to the [`[monitor]`](/influxdb/v1.0/administration/config/#monitor) section in the configuration file may affect query results.
+
+
 ## Using `OR` with absolute time in the `WHERE` clause
 
 Currently, InfluxQL does not support using `OR` with
@@ -358,7 +379,7 @@ To store both points:
     New point: `cpu_load,hostname=server02,az=us_west val_1=89 1234567890000001`
 
     After writing the new point to InfluxDB:
-    
+
     ```
     > SELECT * FROM "cpu_load" WHERE time >= 1234567890000000 and time <= 1234567890000001
     name: cpu_load

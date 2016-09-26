@@ -222,7 +222,7 @@ Related entries:
 ## series cardinality
 The number of unique database, measurement, tag set, and field key combinations in an InfluxDB instance.
 
-For example, assume that an InfluxDB instance has a single datbase and one measurement.
+For example, assume that an InfluxDB instance has a single database and one measurement.
 The single measurement has two tag keys (`email` and `status`) and one field key (`mood_index`).
 The tag key `email` has three tag values (`lorr@influxdata.com`,`marv@influxdata.com`,`cliff@influxdata.com`) and
 the tag key `status` has two tag values (`start`,`finish`).
