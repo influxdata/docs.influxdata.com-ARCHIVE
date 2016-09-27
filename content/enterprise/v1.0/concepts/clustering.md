@@ -37,11 +37,11 @@ An InfluxEnterprise installation consists of three separate software processes: 
   └───────┘          └───────┘   
 ```
 
-The meta nodes communicate with each other via a TCP protocol and the Raft consensus protocol that all use port `8089` by default. This port should be reachable between the meta nodes. The meta nodes also expose an HTTP API bound to port `8091` by default that the `influxd-ctl` command uses.
+The meta nodes communicate with each other via a TCP protocol and the Raft consensus protocol that all use port `8089` by default. This port must be reachable between the meta nodes. The meta nodes also expose an HTTP API bound to port `8091` by default that the `influxd-ctl` command uses.
 
-Data nodes communicate with each other through a TCP protocol that is bound to port `8088`. Data nodes communicate with the meta nodes through their HTTP API bound to `8091`.
+Data nodes communicate with each other through a TCP protocol that is bound to port `8088`. Data nodes communicate with the meta nodes through their HTTP API bound to `8091`. These ports must be reachable between the meta and data nodes.
 
-Within a cluster, all meta nodes communicate with all other meta nodes. All data nodes communicate with each other and all other meta nodes.
+Within a cluster, all meta nodes must communicate with all other meta nodes. All data nodes must communicate with all other data nodes and all meta nodes.
 
 The meta nodes keep a consistent view of the metadata that describes the cluster. The meta cluster uses the [HashiCorp implementation of Raft](https://github.com/hashicorp/raft) as the underlying consensus protocol. This is the same implementation that they use in Consul.
 
@@ -49,24 +49,37 @@ The data nodes replicate data and query each other via a Protobuf protocol over 
 
 ## Where Data Lives
 
-The meta and data nodes are each responsible for different parts of the database. Meta nodes hold all of the following meta data:
+The meta and data nodes are each responsible for different parts of the database. 
 
-* What servers exist in the cluster and their role
-* What databases exist in the cluster
-* What retention policies exist in the cluster
-* What Shard Groups & Shards exist in the cluster
-* Users
-* Continuous Queries
+### Meta nodes 
 
-The meta nodes keep this data in the Raft database on disk, backed by BoltDB.
+Meta nodes hold all of the following meta data:
 
-Data nodes hold all of the raw time series data and metadata about what measurements, tags, and fields exist in each database. On disk, the data is organized by `<database>/<retention_policy>/<shard_id>`.
+* all nodes in the cluster and their role
+* all databases and retention policies that exist in the cluster
+* all shards and shard groups, and on what nodes they exist
+* cluster users and their permissions
+* all continuous queries 
+
+The meta nodes keep this data in the Raft database on disk, backed by BoltDB. By default the Raft database is  `/var/lib/influxdb/meta/raft.db`.
+
+### Data nodes
+
+Data nodes hold all of the raw time series data and metadata, including:
+
+* measurements
+* tag keys and values
+* field keys and values
+
+On disk, the data is always organized by `<database>/<retention_policy>/<shard_id>`. By default the parent directory is `/var/lib/influxdb/data`.
+
+> **Note:** Meta nodes only require the `/meta` directory, but Data nodes require all four subdirectories of `/var/lib/influxdb/`: `/meta`, `/data`, `/wal`, and `/hh`.
 
 ## Optimal Server Counts
 
-When creating and configuring a cluster you'll need to decide how many of each kind of server you should have. You can think of InfluxEnterprise as two separate clusters that communicate with each other: one of meta nodes and one of data nodes. The meta nodes scale up based on the number of failures they need to be able to handle, while the data nodes scale based on your storage and query needs.
+When creating a cluster you'll need to choose how meta and data nodes to configure and connect. You can think of InfluxEnterprise as two separate clusters that communicate with each other: a cluster of meta nodes and one of data nodes. The number of meta nodes is driven by the number of meta node failures they need to be able to handle, while the number of data nodes scales based on your storage and query needs.
 
-The number of meta nodes should be either 3, 5, or 7. The consensus protocol requires quorums to perform any operations, so the correct number of nodes is always odd. These configurations will operate after the failure of 1, 2, or 3 meta nodes respectively.
+The consensus protocol requires a quorum to perform any operation, so there should always be an odd number of meta nodes, generally 3, 5, or 7. These configurations will operate after the failure of 1, 2, or 3 meta nodes respectively. A cluster with 4 meta nodes can still only survive the loss of one node. Losing a second node means the remaining two nodes can only gather two votes out of a possible four, which does not achieve a majority consensus. Since a cluster of 3 meta nodes can also survive the loss of a single meta node, adding the 4th node achieves no extra redundancy and only complicates cluster maintenance.
 
 Data nodes hold the actual time series data. The minimum number of data nodes to run is 1 and can scale up from there. Generally, you'll want to run a number of data nodes that is evenly divisible by your replication factor. For instance, if you have a replication factor of 2, you'll want to run 2, 4, 6, 8, 10, etc. data nodes. However, that's not a rule, particularly because you can have different replication factors in different retention policies.
 
@@ -74,15 +87,19 @@ Data nodes hold the actual time series data. The minimum number of data nodes to
 
 The Enterprise Web Server serves the UI web application for managing and working with the InfluxDB cluster. It talks directly to the data and meta nodes over their HTTP protocols, which are bound by default to port 8086 for data nodes and 8088 for meta nodes.
 
-The web server isn't required to run and operate an InfluxDB cluster.
+The web server isn't required to run and operate an InfluxDB cluster but some InfluxEnterprise features do require it.
 
 ## Writes in a Cluster
 
 This section describes how writes in a cluster work. We'll work through some examples using a cluster of four data nodes: `A`, `B`, `C`, and `D`. Assume that we have a retention policy with a replication factor of 2 with shard durations of 1 day.
 
+### Shard Groups
+
+The cluster will create shards within a shard group to maximize the number of data nodes utilized. If there are N data nodes in the cluster and the replication factor is X, then N/X shards will be created in each shard group, discarding any fractions.
+
 This means that a new shard group will get created for each day of data that gets written in. Within each shard group 2 shards will be created. Because of the replication factor of 2, each of those two shards will be copied on 2 servers. For example we have a shard group for `2016-09-19` that has two shards `1` and `2`. Shard `1` will be replicated to servers `A` and `B` while shard `2` will be copied to servers `C` and `D`.
 
-When a write comes in with values that have a timestamp in `2016-09-19` we must first determine which shard within the shard group should receive the write. This is done by taking a hash of the `measurement` + `tagset` and bucketing into the correct shard. In Go this looks like:
+When a write comes in with values that have a timestamp in `2016-09-19` the cluster must first determine which shard within the shard group should receive the write. This is done by taking a hash of the `measurement` + sorted `tagset` (the [metaseries](/influxdb/v1.0/concepts/glossary/#metaseries)) and bucketing into the correct shard. In Go this looks like:
 
 ```go
 // key is measurement + tagset
@@ -91,33 +108,35 @@ When a write comes in with values that have a timestamp in `2016-09-19` we must 
 shard := shardGroup.shards[fnv.New64a(key) % len(shardGroup.Shards)]
 ```
 
-There are multiple implications to this scheme for determining where data lives in a cluster. First, the data for any given measurement + tagset key for a given day will exist in a single shard (and thus only those servers that keep a copy of it). Second, once a shard group is created, adding new servers to the cluster won't scale out write capacity.
+There are multiple implications to this scheme for determining where data lives in a cluster. First, for any given metaseries all data on any given day will exist in a single shard, and thus only on those servers hosting a copy of that shard. Second, once a shard group is created, adding new servers to the cluster won't scale out write capacity for that shard group. The replication is fixed when the shard group is created. 
 
-However, there is a method for expanding writes in the current shard group (i.e. today) when growing a cluster. The current shard group can be truncated to stop at the current time, forcing a new shard group to get created, which will fan out to all available data nodes. The command `influxd-ctl truncate-shards help` will show how to use it.
+However, there is a method for expanding writes in the current shard group (i.e. today) when growing a cluster. The current shard group can be truncated to stop at the current time using `influxd-ctl truncate-shards`. This immediately closes the current shard group, forcing a new shard group to be created. That new shard group will inherit the latest retention policy and data node changes and will then copy itself appropriately to the newly available data nodes. Run `influxd-ctl truncate-shards help` for more information on the command.
 
-Each request to the HTTP API can specify the consistency level via the `consistency` query parameter. For this example let's assume that we're writing to server `D` to shard `1` so the data would need to be replicated to shard one's owners: `A` and `B`. When a write comes into `D` it will see that the write needs to be replicated to the other two servers and it will immediately try to write to both. Depending on the consistency level chosen, here will be the behavior:
+### Write Consistency
 
-* `any` - return success to the client as soon as any server has responded or server D has written to the local disk queue
-* `one` - return success to the client when either server A or B has accepted the write
-* `quorum` - return success when both A and B return success. This option only useful is replication factors that are greater than 2.
-* `all` - return success only when both A and B return success.
+Each request to the HTTP API can specify the consistency level via the `consistency` query parameter. For this example let's assume that an HTTP write is being sent to server `D` and the data belongs in shard `1`. The write needs to be replicated to the owners of shard `1`: data nodes `A` and `B`. When the write comes into `D`, that node will determine from its local cache of the metastore that the write needs to be replicated to the `A` and `B`, and it will immediately try to write to both. The subsequent behavior depends on the consistency level chosen:
+
+* `any` - return success to the client as soon as any node has responded with a write success, or the receiving node has written the data to its hinted handoff queue. In our example, if `A` or `B` return a successful write response to `D`, or if `D` has cached the write in its local hinted handoff, `D` will return a write success to the client.
+* `one` - return success to the client as soon as any node has responded with a write success, but not if the write is only in hinted handoff. In our example, if `A` or `B` return a successful write response to `D`, `D` will return a write success to the client. If `D` could not send the data to either `A` or `B` but instead put the data in hinted handoff, `D` will return a write failure to the client. Note that this means writes may return a failure and yet the data may eventually persist successfully when hinted handoff drains.
+* `quorum` - return success when a majority of nodes return success. This option is only useful if the replication factor is greater than 2, otherwise it is equivalent to `all`. In our example, if both `A` and `B` return a successful write response to `D`, `D` will return a write success to the client. If either `A` or `B` does not return success, then a majority of nodes have not successfully persisted the write and `D` will return a write failure to the client. If we assume for a moment the data were bound for three nodes, `A`, `B`, and `C`, then if any two of those nodes respond with a write success, `D` will return a write success to the client. If one or fewer nodes respond with a success, `D` will return a write failure to the client. Note that this means writes may return a failure and yet the data may eventually persist successfully when hinted handoff drains.
+* `all` - return success only when all nodes return success. In our example, if both `A` and `B` return a successful write response to `D`, `D` will return a write success to the client. If either `A` or `B` does not return success, then `D` will return a write failure to the client. If we again assume three destination nodes `A`, `B`, and `C`, then all if three nodes respond with a write success, `D` will return a write success to the client. Otherwise, `D` will return a write failure to the client. Note that this means writes may return a failure and yet the data may eventually persist successfully when hinted handoff drains.
 
 The important thing to note is how failures are handled. In the case of failures, the database will use the hinted handoff system.
 
 ### Hinted Handoff
 
-Hinted handoff is how InfluxEnterprise deals with data node failures while writes are happening. Hinted handoff is essentially a durable disk based queue. In the case of `any`, `one` or `quorum` writes, hinted handoff will be used if one or more replicas return an error after a success has already been returned to the client.
+Hinted handoff is how InfluxEnterprise deals with data node outages while writes are happening. Hinted handoff is essentially a durable disk based queue. When writing at `any`, `one` or `quorum` consistency, hinted handoff is used when one or more replicas return an error after a success has already been returned to the client. When writing at `all` consistency, writes cannot return success unless all nodes return success, so hinted handoff is not used. 
 
-Let's use the previous example of writing to D something that should go to shard 1 owned by `A` and `B`. If we specified a consistency level of `one` and server A returned success, we'll immediately return success to the client even though the write to `B` is still in progress.
+Let's again use the example of a write coming to `D` that should go to shard `1` on `A` and `B`. If we specified a consistency level of `one` and node `A` returns success, `D` will immediately return success to the client even though the write to `B` is still in progress.
 
-Now let's assume that `B` returns an error. Server `D` will then put the write in its hinted handoff queue for shard `1` to go to server `B`. In the background server `D` will continue to attempt to empty the hinted handoff queue by writing the data to server `B`.
+Now let's assume that `B` returns an error. Node `D` then puts the write into its hinted handoff queue for shard `1` on node `B`. In the background, node `D` will continue to attempt to empty the hinted handoff queue by writing the data to node `B`. The configuration file has settings for the maximum size and age of data in hinted handoff queues.
 
-If server D is restarted it will check if there are any writes sitting in hinted handoff and continue to attempt to replicate those. The important thing to note is that the hinted handoff queue is durable and will survive server restarts.
+If a data node is restarted it will check for pending writes in the hinted handoff queues and resume attempts to replicate the writes. The important thing to note is that the hinted handoff queue is durable and does survive a process restart.
 
-When doing restarts of servers within an active cluster it's expected that other servers will store hinted handoff writes and replicate them when the server comes back up. Because of this, it's best to operate a cluster at less than full 100% utilization. A healthy cluster should have headroom to handle burst write and query traffic or recovery from temporary outages in any part of the cluster.
+When restarting nodes within an active cluster, during upgrades or maintenance, for example, other nodes in the cluster will store hinted handoff writes to the offline node and replicate them when the node is again available. Thus, a healthy cluster should have enough resource headroom on each data node to handle the burst of hinted handoff writes following a node outage. The returning node will need to handle both the steady state traffic and the queued hinted handoff writes from other nodes, meaning its write traffic will have a significant spike following any outage of more than a few seconds.
 
 ## Queries in a Cluster
 
-Queries in a cluster are distributed based on the time range being queried and replication factor. For example if we have a replication factor of 4 and shard durations of one day, for each day the query hits, any one of the 4 servers that stores a replica of that shard can be queried.
+Queries in a cluster are distributed based on the time range being queried and the replication factor of the data. For example if the retention policy has a replication factor of 4 and shard durations of one day, for each day of time covered by a query, the node receiving the query randomly picks any of the 4 servers that store a replica of that shard to receive the query.
 
 A query that hits multiple shard groups (i.e. days) will run those individual shard queries in parallel while fanning out to the other servers in the cluster that must be hit. As the results come in from each shard, they will be combined together to form the final result that gets returned to the user.
