@@ -1,5 +1,7 @@
 ---
 title: Line Protocol Reference
+aliases:
+    - influxdb/v1.0/write_protocols/write_syntax/
 menu:
   influxdb_1_0:
     weight: 10

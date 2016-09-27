@@ -1,5 +1,7 @@
 ---
 title: Service Plugin - UDP
+aliases:
+    - /influxdb/v1.0/write_protocols/udp/
 menu:
   influxdb_1_0:
     weight: 60

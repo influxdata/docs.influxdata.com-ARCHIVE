@@ -1,5 +1,7 @@
 ---
 title: API Reference
+aliases:
+    - influxdb/v1.0/concepts/api/
 menu:
   influxdb_1_0:
     weight: 10

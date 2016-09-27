@@ -1,5 +1,8 @@
 ---
 title: Tools
+aliases:
+    - influxdb/v1.0/clients/
+    - influxdb/v1.0/write_protocols/json/
 ---
 
 This section covers the available tools for interacting with InfluxDB.
