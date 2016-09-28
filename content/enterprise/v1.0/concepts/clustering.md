@@ -125,7 +125,7 @@ The important thing to note is how failures are handled. In the case of failures
 
 ### Hinted Handoff
 
-Hinted handoff is how InfluxEnterprise deals with data node outages while writes are happening. Hinted handoff is essentially a durable disk based queue. When writing at `any`, `one` or `quorum` consistency, hinted handoff is used when one or more replicas return an error after a success has already been returned to the client. When writing at `all` consistency, writes cannot return success unless all nodes return success, so hinted handoff is not used. 
+Hinted handoff is how InfluxEnterprise deals with data node outages while writes are happening. Hinted handoff is essentially a durable disk based queue. When writing at `any`, `one` or `quorum` consistency, hinted handoff is used when one or more replicas return an error after a success has already been returned to the client. When writing at `all` consistency, writes cannot return success unless all nodes return success. Temporarily stalled or failed writes may still go to the hinted handoff queues but the cluster would have already returned a failure respose to the write.
 
 Let's again use the example of a write coming to `D` that should go to shard `1` on `A` and `B`. If we specified a consistency level of `one` and node `A` returns success, `D` will immediately return success to the client even though the write to `B` is still in progress.
 
@@ -137,6 +137,6 @@ When restarting nodes within an active cluster, during upgrades or maintenance, 
 
 ## Queries in a Cluster
 
-Queries in a cluster are distributed based on the time range being queried and the replication factor of the data. For example if the retention policy has a replication factor of 4 and shard durations of one day, for each day of time covered by a query, the node receiving the query randomly picks any of the 4 servers that store a replica of that shard to receive the query.
+Queries in a cluster are distributed based on the time range being queried and the replication factor of the data. For example if the retention policy has a replication factor of 4, the coordinating data node receiving the query randomly picks any of the 4 data nodes that store a replica of the shard(s) to receive the query. If we assume that the system has shard durations of one day, then for each day of time covered by a query the coordinating node will select one data node to receive the query for that day.
 
-A query that hits multiple shard groups (i.e. days) will run those individual shard queries in parallel while fanning out to the other servers in the cluster that must be hit. As the results come in from each shard, they will be combined together to form the final result that gets returned to the user.
+If a query must scan multiple shard groups (multiple days in our example above), the coordinating node execute the query locally whenever possible. It will will send queries for shard(s) it does not have in parallel to scanning its own local data. The queries are distributed in parallel to as many nodes as required to query each shard group once. As the results come back from each data node, the coordinating data node combines them into the final result that gets returned to the user.
