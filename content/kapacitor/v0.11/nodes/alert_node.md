@@ -317,7 +317,7 @@ Example:
     .alert()
        .id('{{ .Name }}')
        // Email subject
-       .meassage('{{ .ID }}:{{ .Level }}')
+       .message('{{ .ID }}:{{ .Level }}')
        //Email body as HTML
        .details('''
 <h1>{{ .ID }}</h1>
