@@ -1,5 +1,7 @@
 ---
 title: Templating
+aliases:
+    - chronograf/v1.0/introduction/templating/
 menu:
   chronograf_1_0:
     name: Templating
