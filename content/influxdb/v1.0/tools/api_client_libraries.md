@@ -3,6 +3,7 @@ title: API Client Libraries
 aliases:
     - influxdb/v1.0/clients/api_client_libraries/
     - influxdb/v1.0/clients/
+    - influxdb/v1.0/clients/api
 menu:
   influxdb_1_0:
     weight: 20

@@ -1,5 +1,10 @@
 ---
 title: Clustering
+aliases:
+    - influxdb/v1.0/clustering/
+    - influxdb/v1.0/clustering/cluster_setup/
+    - influxdb/v1.0/clustering/cluster_node_config/
+    - influxdb/v1.0/guides/clustering/
 menu:
   influxdb_1_0:
     weight: 0
