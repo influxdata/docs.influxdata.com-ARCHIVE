@@ -14,7 +14,7 @@ responses are returned in JSON.
 
 The following sections assume your InfluxDB instance is running on `localhost`
 port `8086` and HTTPS is not enabled.
-Those settings [are configurable](/influxdb/v1.0/administration/config/).
+Those settings [are configurable](/influxdb/v1.0/administration/config/#http).
 
 ## Endpoints
 
