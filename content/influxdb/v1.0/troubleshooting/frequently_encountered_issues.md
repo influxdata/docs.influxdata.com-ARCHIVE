@@ -473,7 +473,7 @@ Identifiers are database names, retention policy names, user names, measurement 
 	Write: `INSERT wacky va\"ue=4`  
 	Applicable query: `SELECT "va\"ue" FROM "wacky"`
 
-See the [Line Protocol Syntax](/influxdb/v1.0/write_protocols/write_syntax/) page for more information.
+See the [Line Protocol](/influxdb/v1.0/write_protocols/) documentation for more information.
 
 # Administration
 ## Process consuming too much memory

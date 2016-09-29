@@ -1,5 +1,7 @@
 ---
 title: Service Plugin - UDP
+aliases:
+    - /influxdb/v1.0/write_protocols/udp/
 menu:
   influxdb_1_0:
     weight: 60
@@ -8,7 +10,7 @@ menu:
 
 InfluxDB accepts writes over UDP.
 By default, no ports are open to UDP.
-To configure InfluxDB to support writes over UDP you must adjust your [config file](influxdb/v1.0/administration/config/#udp).
+To configure InfluxDB to support writes over UDP you must adjust your [config file](/influxdb/v1.0/administration/config/#udp).
 
 ## A note on UDP/IP OS Buffer sizes
 

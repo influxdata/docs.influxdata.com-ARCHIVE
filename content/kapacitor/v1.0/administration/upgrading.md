@@ -1,6 +1,7 @@
 ---
 title: Upgrading to Kapacitor v1.0
-
+aliases:
+    - kapacitor/v1.0/introduction/upgrading/
 menu:
   kapacitor_1_0:
     weight: 30

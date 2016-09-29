@@ -22,10 +22,6 @@ A brief treatment of some of the performance tradeoffs made during the design ph
 
 A useful overview of the InfluxDB time series data structure and how it affects performance.
 
-## [HTTP API Endpoints](/influxdb/v1.0/concepts/api/)
-
-The list of InfluxDB's HTTP API endpoints and the parameters they accept.
-
 ## [Storage Engine](/influxdb/v1.0/concepts/storage_engine/)
 
 A overview of how InfluxDB to stores data on disk.

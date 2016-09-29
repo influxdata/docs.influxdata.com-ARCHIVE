@@ -369,6 +369,25 @@ The compact full write cold duration is the duration at which the engine will co
 The maximum points per block is the maximum number of points in an encoded block in a TSM file.
 Larger numbers may yield better compression but could incur a performance penalty when querying.
 
+### max-series-per-database = 1000000
+
+The maximum number of [series](/influxdb/v1.0/concepts/glossary/#series) allowed
+per database.
+The default setting is one million.
+Change the setting to `0` to allow an unlimited number of series per database.
+
+If a point causes the number of series in a database to exceed
+`max-series-per-database` InfluxDB will not write the point, and it returns a
+`500` with the following error:
+
+```
+{"error":"max series per database exceeded: <series>"}
+```
+
+> **Note:** Any existing databases with a series count that exceeds `max-series-per-database`
+will continue to accept writes to existing series, but writes that create a
+new series will fail.
+
 ### trace-logging-enabled = false
 
 Toggles logging of additional debug information within the TSM engine and WAL.
