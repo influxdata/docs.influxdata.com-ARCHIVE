@@ -130,7 +130,7 @@ dir = "/var/lib/influxdb/data"
 [http]
  enabled = true
  bind-address = ":8086"
- auth-enabled = true #✨ this recommended but not required
+ auth-enabled = true #✨ this is recommended but not required
  log-enabled = true
  write-tracing = false
  pprof-enabled = false
