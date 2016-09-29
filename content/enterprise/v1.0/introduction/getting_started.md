@@ -52,3 +52,15 @@ Associating the two accounts with one another ensures both admin accounts have a
 permissions.
 
 ![Create Web Admin](/img/enterprise/create_web_admin_1.png)
+
+### Where to from here?
+
+Check out the [Features](/enterprise/v1.0/features/) section to see all that
+InfluxEnterprise can do.
+
+Note that the web console requires a functioning SMTP server to email invites
+to new web console users.
+If you're working on Ubuntu 14.04 and are looking for an SMTP server to use for
+development purposes, see the
+[SMTP Server Setup](/enterprise/v1.0/guides/smtp-server/) guide for how to get up
+and running with [MailCatcher](https://mailcatcher.me/).

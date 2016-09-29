@@ -11,7 +11,7 @@ and a management UI for working with clusters.
 The next steps will get you up and running with the first essential component of
 your InfluxEnterprise cluster: the meta nodes.
 
-### Requirements
+# Requirements
 
 To get started, you'll need the license key that you received at
 [InfluxPortal](https://portal.influxdata.com/) as well as several servers.
@@ -23,13 +23,16 @@ Please note that there is no requirement to use that number of servers.
 The meta process can run on the same or different servers.
 For high availability and redundancy your cluster should have at least three
 meta nodes and an odd number of meta nodes.
+See the
+[Clustering Guide](/enterprise/v1.0/concepts/clustering.md#optimal-server-counts)
+for more on cluster architecture.
 
 > **Note:** By default, data and meta nodes communicate with each other on
 ports `8091` and `8088`.
 
-## Meta Node Setup
+# Meta Node Setup
 
-### Modify the /etc/hosts file
+## Modify the /etc/hosts file
 
 Add your servers' hostnames and IP addresses to **each** cluster server's `/etc/hosts`
 file (the hostnames are representative):
@@ -55,34 +58,37 @@ installation.
 A healthy cluster requires that every meta node can communicate with every other
 meta node.
 
-### Set up, configure, and start the meta servers
+## Set up, configure, and start the meta servers
 
 On all three meta servers:
 
-#### 1. Download and install the meta server package
+### 1. Download and install the meta server package
 
-##### Ubuntu & Debian (64-bit)
+#### Ubuntu & Debian (64-bit)
 ```
 wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta_1.0.0-c1.0.0_amd64.deb
 sudo dpkg -i influxdb-meta_1.0.0-c1.0.0_amd64.deb
 ```
 
-##### RedHat & CentOS (64-bit)
+#### RedHat & CentOS (64-bit)
 ```
 wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta-1.0.0_c1.0.0.x86_64.rpm
 sudo yum localinstall influxdb-meta-1.0.0_c1.0.0.x86_64.rpm
 ```
 
-#### 2. Edit the configuration file
+### 2. Edit the configuration file
 
 In `/etc/influxdb/influxdb-meta.conf`, set:
 
-* `hostname` to the meta node’s hostname
-* `registration-enabled` to `true`
-* `registration-server-url` to the full URL of the server that will run the InfluxEnterprise web console.
+* `hostname` to the full hostname of the data node
+* `registration-enabled` in the `[enterprise]` section to `true`
+* `registration-server-url` in the `[enterprise]` section to the full URL of the server that will run the InfluxEnterprise web console.
 You must fully specify the protocol, IP or hostname, and port.
 Entering the IP or hostname alone will lead to errors.
-* `license-key` to the license key you received on [InfluxPortal](https://portal.influxdata.com/)
+* `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal, OR
+* `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData
+
+> **Note:** `license-key` and `license-path` are mutually exclusive and one must remain set to the empty string.
 
 ```
 reporting-disabled = false
@@ -92,21 +98,11 @@ hostname = "<enterprise-meta-0x>" #✨
 [enterprise]
  registration-enabled = true #✨
  registration-server-url = "http://<web-console-server-IP>:3000" #✨
- license-key = "<your_license_key>" #✨
- license-path = ""
-
-[meta]
- dir = "/var/lib/influxdb/meta"
- bind-address = ":8089"
- [...]
- pprof-enabled = false
- lease-duration = "1m0s"
+ license-key = "<your_license_key>" #✨ mutually exclusive with license-path
+ license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
 ```
 
-> **Note:** If you’re using a license file instead of a license key, set the
-`license-path` setting to the path of the license file.
-
-#### 3. Start the meta node
+### 3. Start the meta node
 
 On sysvinit systems, enter:
 ```
@@ -136,9 +132,10 @@ must pass the `-single-server flag` when starting the single meta node.
 Please note that a cluster with only one meta node is **not** recommended for
 production environments.
 
-### Join the meta nodes to the cluster
+## Join the meta nodes to the cluster
 
-From `enterprise-meta-01`, enter:
+From one and only one meta node, join all meta nodes including itself.
+In our example, from `enterprise-meta-01`, run:
 ```
 influxd-ctl join enterprise-meta-01:8091
 

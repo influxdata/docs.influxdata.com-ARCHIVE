@@ -42,7 +42,7 @@ Options:
       Config file path
 ```
 
-###  influx -help
+###  influx
 
 Usage of influx:
 ```

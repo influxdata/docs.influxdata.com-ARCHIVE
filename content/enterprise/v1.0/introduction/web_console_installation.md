@@ -14,23 +14,22 @@ and
 [Data Node Installation](/enterprise/v1.0/introduction/data_node_installation/)
 if you have yet to set up your InfluxEnterprise Cluster.
 
-## Web Console setup
+# Web Console setup
 
-<dt> Please set up the web console **after** you've set up your cluster.
+Please set up the web console **after** you've set up your cluster.
 Installing the web console before your cluster can cause unexpected behaviors.
-</dt>
 
-### Install the InfluxEnterprise Web Console
+## Install the InfluxEnterprise Web Console
 
 Install the InfluxEnterprise web console on one of your cluster's servers or on
 a separate server.
 
-##### Ubuntu & Debian (64-bit)
+#### Ubuntu & Debian (64-bit)
 ```
 wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise_1.0.1_amd64.deb
 sudo dpkg -i influx-enterprise_1.0.1_amd64.deb
 ```
-##### RedHat & CentOS (64-bit)
+#### RedHat & CentOS (64-bit)
 ```
 wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise-1.0.1.x86_64.rpm
 sudo yum localinstall influx-enterprise-1.0.1.x86_64.rpm
@@ -45,15 +44,19 @@ If you'd prefer to use PostgreSQL, please see
 [Install the InfluxEnterprise Web Console with PostgreSQL](#install-the-influxenterprise-web-console-with-postgresql).
 Note that using PostgreSQL requires additional steps.
 
-### Setup Steps
+## Setup Steps
 
-#### 1. Edit the configuration file
+### 1. Edit the configuration file
 
 In `/etc/influx-enterprise/influx-enterprise.conf`, set:
 
-* the first `url` setting to your server’s IP address
-* `license_key` to the license key you received on [InfluxPortal](https://portal.influxdata.com/)
-* `shared-secret` in the `[influxdb]` section to the same pass phrase that you used in your data servers' configuration files
+* the `url` setting at the top of the file to the node's full URL, including protocol (`http://`) and port (`:3000`)
+* `license-key` to the license key you received on InfluxPortal, OR
+* `license-file` to the local path to the JSON license file you received from InfluxData
+
+> **Note:** `license-key` and `license-file` are mutually exclusive and one must remain set to the empty string.
+
+* `shared-secret` in the `[influxdb]` section to the same pass phrase that you used in your data node configuration files
 
 ```
 url = "http://<your_server's_IP_address>:3000" #✨
@@ -61,8 +64,8 @@ url = "http://<your_server's_IP_address>:3000" #✨
 hostname = "localhost"
 port = "3000"
 
-license-key = "<your_license_key>" #✨
-license-file = "/path/to/license"
+license-key = "<your_license_key>" #✨ mutually exclusive with license-file
+license-file = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
 
 [influxdb]
 shared-secret = "long pass phrase used for signing tokens" #✨
@@ -81,10 +84,14 @@ from_email = "donotreply@example.com"
 url = "sqlite3:///var/lib/influx-enterprise/enterprise.db"
 ```
 
->**Note:** If you're using a license file instead of a license key, set the
-`license-file` setting to the path of the license file.
+> **Note:** The web console requires a functioning SMTP server to email invites
+to new web console users.
+If you're working on Ubuntu 14.04 and are looking for an SMTP server to use for
+development purposes, see the
+[SMTP Server Setup](/enterprise/v1.0/guides/smtp-server/) guide for how to get up
+and running with [MailCatcher](https://mailcatcher.me/).
 
-#### 2. Migrate the configuration file
+### 2. Migrate the configuration file
 Run the following command:
 ```
 sudo -u influx-enterprise influx-enterprise migrate --config /etc/influx-enterprise/influx-enterprise.conf
@@ -109,7 +116,7 @@ The expected output is:
 0.0340 seconds
 ```
 
-#### 3. Start the InfluxEnterprise web console
+### 3. Start the InfluxEnterprise web console
 
 On sysvinit systems, enter:
 ```
@@ -137,20 +144,20 @@ Visit `http://<your_web_console_server's_IP_address>:3000` to access your
 InfluxEnterprise web console, and check out the
 next section to [get started](/enterprise/v1.0/introduction/getting_started/).
 
-> ### Install the InfluxEnterprise Web Console with PostgreSQL
+> ## Install the InfluxEnterprise Web Console with PostgreSQL
 >
 By default, the InfluxEnterprise Web Console uses SQLite for installations.
 The following steps document how to install the Web Console if you'd prefer to
 use PostgreSQL.
 >
-#### Install PostgreSQL
+### Install PostgreSQL
 >
     sudo apt-get update
     sudo apt-get -y install postgresql postgresql-contrib
 >
-#### Set the password for the system's local postgres user
+### Set the password for the system's local postgres user
 >
-##### Login to PostgreSQL:
+#### Login to PostgreSQL:
 >
     sudo -u postgres psql
 >
@@ -159,7 +166,7 @@ The expected output is:
     -> psql (9.3.12)
     -> Type "help" for help.
 >
-##### Set the password, replacing `<your_password>` with your password:
+#### Set the password, replacing `<your_password>` with your password:
 >
     ALTER USER postgres PASSWORD '<your_password>';
 >
@@ -167,13 +174,13 @@ The expected output is:
 >
     -> ALTER ROLE
 >
-##### Exit PostgreSQL:
+#### Exit PostgreSQL:
 >
     \q
 >
-### Setup Steps
+## Setup Steps
 >
-#### 1. Edit the web console configuration file
+### 1. Edit the web console configuration file
 In addition to updating the first `url` setting, `license-key`, and
 `shared-secret` (see [above](#1-edit-the-configuration-file)), in
 `/etc/influx-enterprise/influx-enterprise.conf`:
@@ -194,7 +201,7 @@ option to the first `url` setting in the `[database]` section:
 >
     url = "postgres://postgres:<your_password>@localhost:5432/enterprise?sslmode=disable"
 >
-#### 2. Migrate the configuration file
+### 2. Migrate the configuration file
 Run the following command and enter your postgres Admin User's password when
 prompted:
 >

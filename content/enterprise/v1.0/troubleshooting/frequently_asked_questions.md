@@ -22,7 +22,7 @@ In the `Account Details` section, select the checkbox next to `Admin` and click
 
 ## Why am I seeing a `503 Service Unavailable` error in my meta node logs?
 
-This is the expected behavior if you have yet to join the meta node to the
+This is the expected behavior if you haven't joined the meta node to the
 cluster.
 The `503` errors should stop showing up in the logs once you
 [join](/enterprise/v1.0/introduction/meta_node_installation/#join-the-meta-nodes-to-the-cluster)
