@@ -132,7 +132,7 @@ systemctl start Telegraf
 ```
 
 #### Windows
-Installing Telegraf as a Windows service:
+Installing Telegraf as a Windows service (Windows support is still experimental:
 ```
 telegraf.exe -service install -config <path_to_config>
 ```
