@@ -8,13 +8,15 @@ menu:
     parent: Administration
 ---
 
-### Configuration file location by installation type
+## Using Configuration Files
 
-> * Debian or RPM package: `/opt/chronograf/config.toml`
-> * OS X via Homebrew: `/usr/local/etc/chronograf.toml`
-> * Standalone OS X binary: `chronograf-0.x.x/chronograf.toml`
+A default TOML-formatted Chronograf config file can be generated using the `-sample-config` flag:
 
-### Chronograf configuration file
+```
+chronograf -sample-config > chronograf.generated.conf
+```
+
+The generated sample configuration file has pretty clear inline comments, like this:
 
 ```
 # Chronograf configuration
@@ -38,3 +40,15 @@ LocalDatabase = "/opt/chronograf/chronograf.db"
 # Can be overridden with environment variable CHRONOGRAF_QUERY_RESPONSE_BYTES_LIMIT.
 QueryResponseBytesLimit = 2500000
 ```
+
+To launch Chronograf with your configuration file, use the `-config` option:
+
+```
+chronograf -config chronograf.generated.conf
+```
+
+By default, Chronograf will look for configuration files in these locations:
+
+* Debian or RPM package: `/opt/chronograf/config.toml`
+* OS X via Homebrew: `/usr/local/etc/chronograf.toml`
+* Standalone OS X binary: `chronograf-0.x.x/chronograf.toml`
