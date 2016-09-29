@@ -125,7 +125,7 @@ The important thing to note is how failures are handled. In the case of failures
 
 ### Hinted Handoff
 
-Hinted handoff is how InfluxEnterprise deals with data node outages while writes are happening. Hinted handoff is essentially a durable disk based queue. When writing at `any`, `one` or `quorum` consistency, hinted handoff is used when one or more replicas return an error after a success has already been returned to the client. When writing at `all` consistency, writes cannot return success unless all nodes return success. Temporarily stalled or failed writes may still go to the hinted handoff queues but the cluster would have already returned a failure respose to the write.
+Hinted handoff is how InfluxEnterprise deals with data node outages while writes are happening. Hinted handoff is essentially a durable disk based queue. When writing at `any`, `one` or `quorum` consistency, hinted handoff is used when one or more replicas return an error after a success has already been returned to the client. When writing at `all` consistency, writes cannot return success unless all nodes return success. Temporarily stalled or failed writes may still go to the hinted handoff queues but the cluster would have already returned a failure response to the write.
 
 Let's again use the example of a write coming to `D` that should go to shard `1` on `A` and `B`. If we specified a consistency level of `one` and node `A` returns success, `D` will immediately return success to the client even though the write to `B` is still in progress.
 
