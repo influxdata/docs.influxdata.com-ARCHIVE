@@ -373,7 +373,7 @@ Larger numbers may yield better compression but could incur a performance penalt
 
 The maximum number of [series](/influxdb/v1.0/concepts/glossary/#series) allowed
 per database.
-The default is setting is `1M`.
+The default setting is one million.
 Change the setting to `0` to allow an unlimited number of series per database.
 
 If a point causes the number of series in a database to exceed
