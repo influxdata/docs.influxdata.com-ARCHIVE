@@ -101,7 +101,7 @@ h2o_temperature,location=coyote_creek
 h2o_temperature,location=santa_monica
 ```
 
-`SHOW SERIES` organizes its output similar to the [line protocol](/influxdb/v1.0/write_protocols/line/) format.
+`SHOW SERIES` organizes its output similar to the [line protocol](/influxdb/v1.0/concepts/glossary/#line-protocol) format.
 Everything before the first comma is the [measurement](/influxdb/v1.0/concepts/glossary/#measurement) name.
 Everything after the first comma is either a [tag key](/influxdb/v1.0/concepts/glossary/#tag-key) or a [tag value](/influxdb/v1.0/concepts/glossary/#tag-value).
 
