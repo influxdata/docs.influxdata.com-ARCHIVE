@@ -1,6 +1,7 @@
 ---
 title: Configuration
-
+aliases:
+    - telegraf/v1.0/introduction/configuration/
 menu:
   telegraf_1_0:
     name: Configuration

@@ -1,5 +1,7 @@
 ---
 title: Service Plugin - Graphite
+aliases:
+    - influxdb/v1.0/write_protocols/graphite/
 menu:
   influxdb_1_0:
     weight: 70

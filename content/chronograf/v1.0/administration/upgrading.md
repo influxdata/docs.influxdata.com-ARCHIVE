@@ -1,6 +1,8 @@
 ---
 title: Upgrading from Previous Versions
-
+aliases:
+    - chronograf/v1.0/administration/new_features_in_chronograf_0.11/
+    - chronograf/v1.0/administration/upgrading_to_chronograf_0.11_from_previous_versions/
 menu:
   chronograf_1_0:
     name: Upgrading from Previous Versions

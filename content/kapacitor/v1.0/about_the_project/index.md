@@ -1,6 +1,7 @@
 ---
 title: About the project
-
+aliases:
+    - kapacitor/v1.0/contributing/
 menu:
   kapacitor_1_0:
     name: About the project

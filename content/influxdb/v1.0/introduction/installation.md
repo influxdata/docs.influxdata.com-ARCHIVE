@@ -271,8 +271,3 @@ When using non-standard directories for InfluxDB data and configurations, also b
 chown influxdb:influxdb /mnt/influx
 chown influxdb:influxdb /mnt/db
 ```
-
-## Nightly and Development Versions
-
-Nightly packages are available for Linux through the InfluxData package repository by using the `nightly` channel.
-Other package options can be found on the [downloads page](https://influxdata.com/downloads/)

@@ -1,5 +1,6 @@
 ---
 title: Write Syntax
+newversionredirect: /write_protocols/line_protocol_reference/
 menu:
   influxdb_012:
     weight: 10

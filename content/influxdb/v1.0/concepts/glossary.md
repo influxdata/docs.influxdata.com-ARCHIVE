@@ -83,7 +83,7 @@ See [Query Language Specification](/influxdb/v1.0/query_language/spec/#identifie
 Related entries: [database](/influxdb/v1.0/concepts/glossary/#database), [field key](/influxdb/v1.0/concepts/glossary/#field-key), [measurement](/influxdb/v1.0/concepts/glossary/#measurement), [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp), [tag key](/influxdb/v1.0/concepts/glossary/#tag-key), [user](/influxdb/v1.0/concepts/glossary/#user)
 
 ## line protocol
-The text based format for writing points to InfluxDB. See [Line Protocol](/influxdb/v1.0/write_protocols/line/).
+The text based format for writing points to InfluxDB. See [Line Protocol](/influxdb/v1.0/write_protocols/).
 
 ## measurement  
 The part of InfluxDB's structure that describes the data stored in the associated fields.
@@ -92,7 +92,7 @@ Measurements are strings.
 Related entries: [field](/influxdb/v1.0/concepts/glossary/#field), [series](/influxdb/v1.0/concepts/glossary/#series)
 
 ## metastore
-Contains internal information about the status of the system. 
+Contains internal information about the status of the system.
 The metastore contains the user information, databases, retention policies, shard metadata, continuous queries, and subscriptions.
 
 Related entries: [database](/influxdb/v1.0/concepts/glossary/#database), [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp), [user](/influxdb/v1.0/concepts/glossary/#user)

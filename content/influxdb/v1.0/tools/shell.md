@@ -195,7 +195,7 @@ The import file has two sections:
 
 * **DDL (Data Definition Language)**: Contains the [InfluxQL commands](/influxdb/v1.0/query_language/database_management/) for creating the relevant [database](/influxdb/v1.0/concepts/glossary/) and managing the [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp).
 If your database and retention policy already exist, your file can skip this section.
-* **DML (Data Manipulation Language)**: Lists the relevant database and (if desired) retention policy and contains the data in [line protocol](/influxdb/v1.0/write_protocols/line/).
+* **DML (Data Manipulation Language)**: Lists the relevant database and (if desired) retention policy and contains the data in [line protocol](/influxdb/v1.0/concepts/glossary/#line-protocol).
 
 Example:
 
@@ -230,13 +230,10 @@ Results:
 
 > **Note:** For large datasets, `influx` writes out a status message every 100,000 points.
 For example:
-<br>
-<br>
-> ```
-2015/08/21 14:48:01 Processed 3100000 lines.
-Time elapsed: 56.740578415s.
-Points per second (PPS): 54634
-```
+>
+    2015/08/21 14:48:01 Processed 3100000 lines.
+    Time elapsed: 56.740578415s.
+    Points per second (PPS): 54634
 
 Things to note about `-import`:
 
@@ -303,7 +300,7 @@ Once `influx` sets the current database, there is no need to specify that databa
 `influx` automatically queries the current database and its `DEFAULT` retention policy.
 
 #### Write data to InfluxDB with `insert`
-Enter `insert` followed by the data in [line protocol](/influxdb/v1.0/write_protocols/line/) to write data to InfluxDB.
+Enter `insert` followed by the data in [line protocol](/influxdb/v1.0/concepts/glossary/#line-protocol) to write data to InfluxDB.
 Use `insert into <retention policy> <line protocol>` to write data to a specific [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp).
 
 Write data to a single field in the measurement `treasures` with the tag `captain_id = pirate_king`.

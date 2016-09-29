@@ -57,3 +57,32 @@ $(function(){
 	var imagePathString = "/img/header-images/header-image-"+getRandomIntInclusive(1,14)+".jpg";
 	$('#page-title').css('background-image','url('+imagePathString+')');
 });
+
+/**
+ * Behavior for the vertical tab widget.
+ */
+$(function() {
+	const tab = '.vertical-tabs a';
+	const content = '.vertical-tab-content';
+
+	// Add the active class to the first tab, in case it wasn't already set in the markup.
+	$(tab).removeClass('is-active');
+	$(tab + ':first').addClass('is-active');
+
+	$(tab).on('click', function(e) {
+		e.preventDefault();
+
+		// Make sure the tab being clicked is marked as active, and make the rest inactive.
+		$(this).addClass('is-active').siblings().removeClass('is-active');
+
+		// Render the correct tab content based on the position of the tab being clicked.
+		const activeIndex = $(tab).index(this);
+		$(content).each(function(i) {
+			if (i === activeIndex) {
+				$(this).show();
+			} else {
+				$(this).hide();
+			}
+		});
+	});
+});

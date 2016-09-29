@@ -1,6 +1,7 @@
 ---
 title: How to contribute a new output to Kapacitor
-
+aliases:
+    - kapacitor/v1.0/contributing/custom_output/
 menu:
   kapacitor_1_0:
     name: Writing your own Output node
@@ -74,7 +75,7 @@ type HouseDBOutNode struct {
 
 Just like that we have a type in Go that implements the needed interface.
 In order to allow for the `.url` and `.database` methods we need, simply define fields on the type with the same name.
-The first letter needs to capitalized so that it is exported. 
+The first letter needs to capitalized so that it is exported.
 It's important that the fields be exported since they will be consumed by the node in the `kapacitor` package.
 The rest of the name should have the same capitaization as the method name.
 TICKscript will take care of matching the case at runtime.
@@ -99,9 +100,9 @@ type HouseDBOutNode struct {
 
 Next we need a consistent way to create a new instance of our node.
 But to do so we need to think about how this node connects to other nodes.
-Since we are an output node as far as Kapacitor is concerned this is the end of the pipeline. 
+Since we are an output node as far as Kapacitor is concerned this is the end of the pipeline.
 We will not provide any outbound edges, the graph ends on this node.
-Our imaginary HouseDB is flexible and can store data in batches or as single data points. 
+Our imaginary HouseDB is flexible and can store data in batches or as single data points.
 As a result we do not care what type of data the HouseDBOutNode node receives.
 With these facts in mind we can define a function to create a new HouseDBOutNode.
 Add this function to the end of the `housedb_out.go` file:
@@ -122,7 +123,7 @@ func newHouseDBOutNode(wants EdgeType) *HouseDBOutNode {
 By explicitly stating the types of edges the node `wants` and `provides`, Kapacitor will do the necessary type checking to prevent invalid pipelines.
 
 Finally we need to add a new `chaining method` so that users can connect HouseDBOutNodes to their existing pipelines.
-A `chaining method` is one that creates a new node and adds it as a child of the calling node. 
+A `chaining method` is one that creates a new node and adds it as a child of the calling node.
 In effect the method chains nodes together.
 The `pipeline.chainnode` type contains the set of all methods that can be used for chaining nodes.
 Once we add our method to that type any other node can now chain with a HouseDBOutNode.
@@ -316,7 +317,7 @@ func (h *HouseDBOutNode) write(batch models.Batch) error {
 }
 ```
 
-Once we have implemented the `write` method we are done. 
+Once we have implemented the `write` method we are done.
 As the data arrives at the `HouseDBOutNode`, it will be written to the specified HouseDB instance.
 
 ### Summary
@@ -453,7 +454,7 @@ func (et *ExecutingTask) createNode(p pipeline.Node, l *log.Logger) (n Node, err
 
 ### Documenting your new node
 
-Since TICKscript is its own language we have built a small utility similiar to [godoc](https://godoc.org/golang.org/x/tools/cmd/godoc) named [tickdoc](https://github.com/influxdb/kapacitor/tree/master/tick/cmd/tickdoc). 
+Since TICKscript is its own language we have built a small utility similiar to [godoc](https://godoc.org/golang.org/x/tools/cmd/godoc) named [tickdoc](https://github.com/influxdb/kapacitor/tree/master/tick/cmd/tickdoc).
 `tickdoc` generates documentation from comments in the code.
 The `tickdoc` utility understands two special comments to help it generate clean documentation.
 

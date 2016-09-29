@@ -98,6 +98,20 @@ The second query asks InfluxDB to return everything from `hillvalley` that occur
 `SELECT * FROM "hillvalley"`  
 `SELECT * FROM "hillvalley" WHERE time < now() + 1000d`
 
+It is required that the default upper bound be explicitly replaced. 
+A query that resets the lower bound without changing the upper bound will not return any points after `now()`. 
+For example: 
+
+`SELECT * FROM "hillvalley" WHERE time > now()` 
+
+resets the lower bound of the query from `epoch=0` to `> now()`. 
+However, the default upper bound for the query is still `now()`. 
+Internally, the query expands to 
+
+`SELECT * FROM "hillvalley" WHERE time > now() AND time < now()`
+
+which cannot match any points.
+
 ## Querying with booleans
 Acceptable boolean syntax differs for data writes and data queries.
 
@@ -408,7 +422,7 @@ To store both points:
     ```
 
 ## Getting an unexpected error when sending data over the HTTP API
-First, double check your [line protocol](/influxdb/v1.0/write_protocols/line/) syntax.
+First, double check your [line protocol](/influxdb/v1.0/concepts/glossary/#line-protocol) syntax.
 Second, if you continue to receive errors along the lines of `bad timestamp` or `unable to parse`, verify that your newline character is line feed (`\n`, which is ASCII `0x0A`).
 InfluxDB's line protocol relies on `\n` to indicate the end of a line and the beginning of a new line; files or data that use a newline character other than `\n` will encounter parsing issues.
 Convert the newline character and try sending the data again.
@@ -459,7 +473,7 @@ Identifiers are database names, retention policy names, user names, measurement 
 	Write: `INSERT wacky va\"ue=4`  
 	Applicable query: `SELECT "va\"ue" FROM "wacky"`
 
-See the [Line Protocol Syntax](/influxdb/v1.0/write_protocols/write_syntax/) page for more information.
+See the [Line Protocol](/influxdb/v1.0/write_protocols/) documentation for more information.
 
 # Administration
 ## Process consuming too much memory
