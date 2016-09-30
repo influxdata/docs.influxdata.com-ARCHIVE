@@ -674,7 +674,7 @@ time			               last
 ```
 
 > **Note:** `LAST()` does not return points that occur after `now()` unless the `WHERE` clause specifies that time range.
-See [Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#querying-after-now) for how to query after `now()`.
+See [Frequently Asked Questions](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#why-don-t-my-queries-return-timestamps-that-occur-after-now) for how to query after `now()`.
 
 ## MAX()
 Returns the highest value in a single [field](/influxdb/v1.0/concepts/glossary/#field).

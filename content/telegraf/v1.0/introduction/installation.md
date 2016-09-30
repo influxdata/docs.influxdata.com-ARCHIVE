@@ -131,6 +131,12 @@ sudo service telegraf start
 systemctl start Telegraf
 ```
 
+#### Windows
+Installing Telegraf as a Windows service (Windows support is still experimental:
+```
+telegraf.exe -service install -config <path_to_config>
+```
+
 ## Configuration
 
 ### Create a configuration file with default input and output plugins.

@@ -35,3 +35,7 @@ Learn how to write a simple socket based UDF.
 
 Use task templates to reduce the amount of TICKscripts you need to write.
 
+### [Reference TICKscripts](/kapacitor/v1.0/examples/reference_scripts/)
+
+Some examples of TICKscripts built against common Telegraf plugin data.
+

@@ -11,8 +11,7 @@ This page provides directions for installing, starting, and configuring Kapacito
 
 ## Requirements
 
-For packaged installations, root or sudo access may be required to
-complete the installation.
+Installation of the InfluxDB package may require `root` or administrator privileges in order to complete successfully.
 
 ### Networking
 
@@ -29,14 +28,8 @@ Kapacitor has two binaries:
 * kapacitor -- a CLI program for calling the Kapacitor API.
 * kapacitord -- the Kapacitor server daemon.
 
-You can either download the binaries directly from the
-[downloads](https://influxdata.com/downloads/#kapacitor) page or by
-using the Go command `go get`:
-
-```bash
-go get github.com/influxdb/kapacitor/cmd/kapacitor
-go get github.com/influxdb/kapacitor/cmd/kapacitord
-```
+You can download the binaries directly from the
+[downloads](https://influxdata.com/downloads/#kapacitor) page.
 
 ### Start the Kapacitor Service
 

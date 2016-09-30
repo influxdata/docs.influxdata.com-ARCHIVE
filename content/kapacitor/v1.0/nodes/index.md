@@ -1,6 +1,10 @@
 ---
 title: TICKscript Node Overview
-
+aliases:
+    - kapacitor/v1.0/nodes/source_batch_node/
+    - kapacitor/v1.0/nodes/source_stream_node/
+    - kapacitor/v1.0/nodes/map_node/
+    - kapacitor/v1.0/nodes/reduce_node/
 menu:
   kapacitor_1_0:
     name: TICKscript Nodes

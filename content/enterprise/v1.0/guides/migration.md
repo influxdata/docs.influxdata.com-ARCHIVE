@@ -104,14 +104,14 @@ If you have settings that you’d like to keep, please make a copy of your confi
 
 #### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data_1.0.0-c1.0.0_amd64.deb
-sudo dpkg -i influxdb-data_1.0.0-c1.0.0_amd64.deb
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data_1.0.1-c1.0.1_amd64.deb
+sudo dpkg -i influxdb-data_1.0.1-c1.0.1_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data-1.0.0_c1.0.0.x86_64.rpm
-sudo yum localinstall influxdb-data-1.0.0_c1.0.0.x86_64.rpm
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data-1.0.1_c1.0.1.x86_64.rpm
+sudo yum localinstall influxdb-data-1.0.1_c1.0.1.x86_64.rpm
 ```
 
 ### 5. Update the configuration file
@@ -186,6 +186,8 @@ You should see:
 Added data node y at data-node-hostname:8088
 ```
 
+Note: it may take a few minutes before the existing data become available in the cluster.
+
 ## Final steps
 
 ### 1. Add any data nodes that you removed from cluster back into the cluster
@@ -198,6 +200,13 @@ Output:
 ```
 Added data node y at the-hostname:8088
 ```
+
+Finally verify that all nodes are now members of the cluster as expected:
+
+```
+influxd-ctl show
+```
+
 ### 2. Rebalance the cluster
 
 Increase the [replication factor](/enterprise/v1.0/concepts/glossary/#replication-factor) on all existing retention polices to the number of data nodes in your cluster.

@@ -83,7 +83,7 @@ See [Query Language Specification](/influxdb/v1.0/query_language/spec/#identifie
 Related entries: [database](/influxdb/v1.0/concepts/glossary/#database), [field key](/influxdb/v1.0/concepts/glossary/#field-key), [measurement](/influxdb/v1.0/concepts/glossary/#measurement), [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp), [tag key](/influxdb/v1.0/concepts/glossary/#tag-key), [user](/influxdb/v1.0/concepts/glossary/#user)
 
 ## line protocol
-The text based format for writing points to InfluxDB. See [Line Protocol](/influxdb/v1.0/write_protocols/line/).
+The text based format for writing points to InfluxDB. See [Line Protocol](/influxdb/v1.0/write_protocols/).
 
 ## measurement  
 The part of InfluxDB's structure that describes the data stored in the associated fields.
@@ -111,7 +111,7 @@ Each point is uniquely identified by its series and timestamp.
 
 You cannot store more than one point with the same timestamp in the same series.
 Instead, when you write a new point to the same series with the same timestamp as an existing point in that series, the field set becomes the union of the old field set and the new field set, where any ties go to the new field set.
-For an example, see [Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#writing-duplicate-points).
+For an example, see [Frequently Asked Questions](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points).
 
 Related entries: [field set](/influxdb/v1.0/concepts/glossary/#field-set), [series](/influxdb/v1.0/concepts/glossary/#series), [timestamp](/influxdb/v1.0/concepts/glossary/#timestamp)
 
@@ -203,7 +203,7 @@ It would remain unchanged at 6, as `firstname` is already scoped by the `email` 
 | cliff@influxdata.com | start  | clifford  |
 | cliff@influxdata.com | finish | clifford  |
 
-See [Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#querying-for-series-cardinality) for how to query InfluxDB for series
+See [Frequently Asked Questions](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#how-can-i-query-for-series-cardinality) for how to query InfluxDB for series
 cardinality.
 
 Related entries: [tag set](/influxdb/v1.0/concepts/glossary/#tag-set), [measurement](/influxdb/v1.0/concepts/glossary/#measurement), [tag key](/influxdb/v1.0/concepts/glossary/#tag-key)
@@ -292,7 +292,7 @@ There are two kinds of users in InfluxDB:
 * *Non-admin users* have `READ`, `WRITE`, or `ALL` (both `READ` and `WRITE`) access per database.
 
 When authentication is enabled, InfluxDB only executes HTTP requests that are sent with a valid username and password.
-See [Authentication and Authorization](/influxdb/v1.0/administration/authentication_and_authorization/).
+See [Authentication and Authorization](/influxdb/v1.0/query_language/authentication_and_authorization/).
 
 ## values per second
 The preferred measurement of the rate at which data are persisted to InfluxDB. Write speeds are generally quoted in values per second.

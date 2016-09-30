@@ -1,10 +1,13 @@
 ---
 title: Tools
+aliases:
+    - influxdb/v1.0/clients/
+    - influxdb/v1.0/write_protocols/json/
 ---
 
 This section covers the available tools for interacting with InfluxDB.
 
-## [CLI/Shell](/influxdb/v01.0/tools/shell/)
+## [CLI/Shell](/influxdb/v1.0/tools/shell/)
 
 InfluxDB's Command Line Interface (`influx`) is an interactive shell for the
 HTTP API that comes with every InfluxDB package.

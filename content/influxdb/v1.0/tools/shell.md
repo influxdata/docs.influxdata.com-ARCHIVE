@@ -195,7 +195,7 @@ The import file has two sections:
 
 * **DDL (Data Definition Language)**: Contains the [InfluxQL commands](/influxdb/v1.0/query_language/database_management/) for creating the relevant [database](/influxdb/v1.0/concepts/glossary/) and managing the [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp).
 If your database and retention policy already exist, your file can skip this section.
-* **DML (Data Manipulation Language)**: Lists the relevant database and (if desired) retention policy and contains the data in [line protocol](/influxdb/v1.0/write_protocols/line/).
+* **DML (Data Manipulation Language)**: Lists the relevant database and (if desired) retention policy and contains the data in [line protocol](/influxdb/v1.0/concepts/glossary/#line-protocol).
 
 Example:
 
@@ -230,20 +230,17 @@ Results:
 
 > **Note:** For large datasets, `influx` writes out a status message every 100,000 points.
 For example:
-<br>
-<br>
-> ```
-2015/08/21 14:48:01 Processed 3100000 lines.
-Time elapsed: 56.740578415s.
-Points per second (PPS): 54634
-```
+>
+    2015/08/21 14:48:01 Processed 3100000 lines.
+    Time elapsed: 56.740578415s.
+    Points per second (PPS): 54634
 
 Things to note about `-import`:
 
 * Allow the database to ingest points by using `-pps` to set the number of points per second allowed by the import.
 By default, pps is zero and `influx` does not throttle importing.
 * Imports work with `.gz` files, just include `-compressed` in the command.
-* Include timestamps in the data file. InfluxDB will assign the same timestamp to points without a timestamp. This can lead to unintended [overwrite behavior](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#writing-duplicate-points).
+* Include timestamps in the data file. InfluxDB will assign the same timestamp to points without a timestamp. This can lead to unintended [overwrite behavior](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points).
 * If your data file has more than 5,000 points, it may be necessary to split that file into several files in order to write your data in batches to InfluxDB.
 We recommend writing points in batches of 5,000 to 10,000 points.
 Smaller batches, and more HTTP requests, will result in sub-optimal performance.
@@ -303,7 +300,7 @@ Once `influx` sets the current database, there is no need to specify that databa
 `influx` automatically queries the current database and its `DEFAULT` retention policy.
 
 #### Write data to InfluxDB with `insert`
-Enter `insert` followed by the data in [line protocol](/influxdb/v1.0/write_protocols/line/) to write data to InfluxDB.
+Enter `insert` followed by the data in [line protocol](/influxdb/v1.0/concepts/glossary/#line-protocol) to write data to InfluxDB.
 Use `insert into <retention policy> <line protocol>` to write data to a specific [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp).
 
 Write data to a single field in the measurement `treasures` with the tag `captain_id = pirate_king`.
@@ -326,4 +323,4 @@ Restarting the CLI will revert to using the `DEFAULT` retention policy.
 
 ### Queries
 Execute all InfluxQL queries in `influx`.
-See [Data Exploration](/influxdb/v1.0/query_language/data_exploration/), [Schema Exploration](/influxdb/v1.0/query_language/schema_exploration/), [Database Management](/influxdb/v1.0/query_language/database_management/), [Authentication and Authorization](/influxdb/v1.0/administration/authentication_and_authorization/) for InfluxQL documentation.
+See [Data Exploration](/influxdb/v1.0/query_language/data_exploration/), [Schema Exploration](/influxdb/v1.0/query_language/schema_exploration/), [Database Management](/influxdb/v1.0/query_language/database_management/), [Authentication and Authorization](/influxdb/v1.0/query_language/authentication_and_authorization/) for InfluxQL documentation.

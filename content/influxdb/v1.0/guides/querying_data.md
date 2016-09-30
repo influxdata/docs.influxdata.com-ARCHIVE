@@ -9,7 +9,7 @@ menu:
 ---
 
 ## Querying data using the HTTP API
-The HTTP API is the primary means for querying data in InfluxDB (see the [command line interface](/influxdb/v1.0/tools/shell/) and [client libraries](/influxdb/v1.0/clients/api/) for alternative ways to query the database).
+The HTTP API is the primary means for querying data in InfluxDB (see the [command line interface](/influxdb/v1.0/tools/shell/) and [client libraries](/influxdb/v1.0/tools/api_client_libraries/) for alternative ways to query the database).
 
 To perform a query send a `GET` request to the `/query` endpoint, set the URL parameter `db` as the target database, and set the URL parameter `q` as your query.
 The example below uses the HTTP API to query the same database that you encountered in [Writing Data](/influxdb/v1.0/guides/writing_data/).
@@ -132,7 +132,7 @@ curl -G 'http://localhost:8086/query' --data-urlencode "db=mydb" --data-urlencod
 
 #### Authentication
 Authentication in InfluxDB is disabled by default.
-See [Authentication and Authorization](/influxdb/v1.0/administration/authentication_and_authorization/) for how to enable and set up authentication.
+See [Authentication and Authorization](/influxdb/v1.0/query_language/authentication_and_authorization/) for how to enable and set up authentication.
 
 #### Maximum Row Limit
 InfluxDB will limit the maximum number of returned results to prevent itself from running out of memory while it aggregates the results. This is set to 10,000 by default and can be configured by modifying `max-row-limit` in the `http` section of the configuration file.

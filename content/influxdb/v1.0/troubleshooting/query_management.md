@@ -16,13 +16,7 @@ This document covers how to:
 
 * [List currently-running queries with `SHOW QUERIES`](/influxdb/v1.0/troubleshooting/query_management/#list-currently-running-queries-with-show-queries)
 * [Stop currently-running queries with `KILL QUERY`](/influxdb/v1.0/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query)
-* [Configure query management](/influxdb/v1.0/troubleshooting/query_management/#configuration-settings-for-query-management)
-    * [Limit the number of running queries with `max-concurrent-queries`](/influxdb/v1.0/troubleshooting/query_management/#max-concurrent-queries)
-    * [Set a query timeout with `query-timeout`](/influxdb/v1.0/troubleshooting/query_management/#query-timeout)
-    * [Log queries if they run longer than specified time with `log-queries-after`](/influxdb/v1.0/troubleshooting/query_management/#log-queries-after)
-    * [Limit the number of points that a `SELECT` statement can process with `max-select-point`](/influxdb/v1.0/troubleshooting/query_management/#max-select-point)
-    * [Limit the number of series that a `SELECT` statement can process with `max-select-series`](/influxdb/v1.0/troubleshooting/query_management/#max-select-series)
-    * [Limit the number of `GROUP BY time()` buckets a query can process with `max-select-buckets`](/influxdb/v1.0/troubleshooting/query_management/#max-select-buckets)
+* [Configuration settings for query management](/influxdb/v1.0/troubleshooting/query_management/#configuration-settings-for-query-management)
 
 ## List currently-running queries with `SHOW QUERIES`
 `SHOW QUERIES` lists the query id, query text, relevant database, and duration

@@ -694,7 +694,7 @@ time                   mean
 
 > **Note:** `fill(previous)` doesn’t fill the result for a time interval if the
 previous value is outside the query’s time range.
-See [Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#getting-empty-results-with-fill-previous)
+See [Frequently Asked Questions](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#why-does-fill-previous-return-empty-results)
 for more information.
 
 ## CQ Management

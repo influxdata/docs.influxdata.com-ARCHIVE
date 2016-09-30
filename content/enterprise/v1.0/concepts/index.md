@@ -5,4 +5,5 @@ menu:
     weight: 20
 ---
 
+## [Clustering](/enterprise/v1.0/concepts/clustering)
 ## [Glossary](/enterprise/v1.0/concepts/glossary/)

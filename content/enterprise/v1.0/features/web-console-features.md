@@ -2,7 +2,7 @@
 title: Web Console Features
 menu:
   enterprise_1_0:
-    weight: 20
+    weight: 30
     parent: Features
 ---
 

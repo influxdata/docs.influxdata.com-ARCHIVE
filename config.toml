@@ -157,7 +157,7 @@ SectionPagesMenu = "products"
  name = "NSQ"
  identifier = "nsq_output"
  weight = 130
- url = "ghttps://ithub.com/influxdata/telegraf/tree/master/plugins/outputs/nsq"
+ url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/nsq"
  parent = "outputs"
 [[menu.telegraf_1_0]]
  name = "OpenTSDB"

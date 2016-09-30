@@ -2,7 +2,7 @@
 title: Troubleshooting
 ---
 
-## [Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/)
+## [Frequently Asked Questions](/influxdb/v1.0/troubleshooting/frequently-asked-questions/)
 
 This page addresses frequent sources of confusion and places where InfluxDB behaves in an unexpected way relative to other database systems.
 Where applicable, it links to outstanding issues on GitHub.
