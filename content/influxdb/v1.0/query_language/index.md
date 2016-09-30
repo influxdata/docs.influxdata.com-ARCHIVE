@@ -46,11 +46,19 @@ Covers all InfluxQL functions.
 
 #### [Continuous Queries](/influxdb/v1.0/query_language/continuous_queries/)
 
-Covers the syntax for
-[creating](/influxdb/v1.0/query_language/continuous_queries/#influxql-for-creating-a-cq),
-[showing](/influxdb/v1.0/query_language/continuous_queries/#list-cqs-with-show),
-and [deleting](/influxdb/v1.0/query_language/continuous_queries/#delete-cqs-with-drop) InfluxDB's
+Covers the
+[basic syntax](/influxdb/v1.0/query_language/continuous_queries/#basic-syntax)
+,
+[advanced syntax](/influxdb/v1.0/query_language/continuous_queries/#advanced-syntax)
+,
+and
+[common use cases](/influxdb/v1.0/query_language/continuous_queries/#cq-use-cases)
+for
 [Continuous Queries](/influxdb/v1.0/concepts/glossary/#continuous-query-cq).
+This page also describes how to
+[`SHOW`](/influxdb/v1.0/query_language/continuous_queries/#list-cqs) and
+[`DROP`](/influxdb/v1.0/query_language/continuous_queries/#delete-cqs)
+Continuous Queries.
 
 #### [Mathematical Operators](/influxdb/v1.0/query_language/math_operators/)
 
