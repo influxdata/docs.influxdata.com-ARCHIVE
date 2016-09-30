@@ -231,7 +231,7 @@ statement           = alter_retention_policy_stmt |
                       grant_stmt |
                       kill_query_statement |
                       revoke_stmt |
-                      select_stmt .
+                      select_stmt |
                       show_continuous_queries_stmt |
                       show_databases_stmt |
                       show_field_keys_stmt |
