@@ -108,7 +108,7 @@ Each point is uniquely identified by its series and timestamp.
 
 You cannot store more than one point with the same timestamp in the same series.
 Instead, when you write a new point to the same series with the same timestamp as an existing point in that series, the field set becomes the union of the old field set and the new field set, where any ties go to the new field set.
-For an example, see [Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#writing-duplicate-points).
+For an example, see [Frequently Asked Questions](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points).
 
 Related entries: [field set](/influxdb/v1.0/concepts/glossary/#field-set), [series](/influxdb/v1.0/concepts/glossary/#series), [timestamp](/influxdb/v1.0/concepts/glossary/#timestamp)
 
@@ -200,7 +200,7 @@ It would remain unchanged at 6, as `firstname` is already scoped by the `email` 
 | cliff@influxdata.com | start  | clifford  |
 | cliff@influxdata.com | finish | clifford  |
 
-See [Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#querying-for-series-cardinality) for how to query InfluxDB for series
+See [Frequently Asked Questions](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#how-can-i-query-for-series-cardinality) for how to query InfluxDB for series
 cardinality.
 
 Related entries: [tag set](/influxdb/v1.0/concepts/glossary/#tag-set), [measurement](/influxdb/v1.0/concepts/glossary/#measurement), [tag key](/influxdb/v1.0/concepts/glossary/#tag-key)

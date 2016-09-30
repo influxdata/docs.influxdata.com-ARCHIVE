@@ -200,14 +200,14 @@ weather,location=us-midwest temperature="too warm" 1465839830100400200
 FALSE with `f`, `F`, `false`, `False`, or `FALSE`.
 
     Store the field value `true` as a boolean:
-    
+
     ```
 weather,location=us-midwest too_hot=true 1465839830100400200
     ```
 
     > **Note:** Acceptable boolean syntax differs for data writes and data
     queries. See
-    [Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#querying-with-booleans)
+    [Frequently Asked Questions](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#why-can-t-i-query-boolean-field-values)
     for more information.
 
 Within a measurement, a field's type cannot differ within a
@@ -230,7 +230,7 @@ InfluxDB stores the integer in a new shard:
 ```
 
 See
-[Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#querying-select-with-field-type-discrepancies)
+[Frequently Asked Questions](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-field-type-discrepancies-across-shards)
 for how field value type discrepancies can affect `SELECT *` queries.
 
 ## Quoting
@@ -377,7 +377,7 @@ Line Protocol accepts
 as [identifier](/influxdb/v1.0/concepts/glossary/#identifier) names.
 In general, we recommend avoiding using InfluxQL keywords in your schema as
 it can cause
-[confusion](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#getting-the-expected-identifier-error-unexpectedly) when querying the data.
+[confusion](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#why-am-i-getting-an-expected-identifier-error) when querying the data.
 
 ## Writing data to InfluxDB
 
@@ -431,5 +431,5 @@ but with a different field set, the field set becomes the union of the old
 field set and the new field set, where any conflicts favor the new field set.
 
 See
-[Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#writing-duplicate-points)
+[Frequently Asked Questions](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points)
 for a complete example of this behavior and how to avoid it.

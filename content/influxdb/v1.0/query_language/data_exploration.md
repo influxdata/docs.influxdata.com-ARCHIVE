@@ -107,8 +107,7 @@ While they all return the same result, they get to that result in slightly diffe
  > SELECT * FROM "NOAA_water_database"."autogen"."h2o_feet"
  ```
 
-Query **A** selects [everything](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#querying-select-with-field-type-discrepancies)
-from `h2o_feet` with `*`.
+Query **A** selects everything from `h2o_feet` with `*`.
 
 Queries **B** and **C** select everything from `h2o_feet` by specifying each tag
 key and field key in the measurement.
@@ -191,14 +190,14 @@ time
 ```
 
 > **Note:** When performing arithmetic on fields that store integers be aware that InfluxDB casts those integers to floats for all mathematical operations.
-This can lead to [overflow issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#working-with-really-big-or-really-small-integers) for some numbers.
+This can lead to [overflow issues](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#what-are-the-minimum-and-maximum-integers-that-influxdb-can-store) for some numbers.
 
 ### The `WHERE` clause
 ---
 Use a `WHERE` clause to filter your data based on tags, time ranges, and/or field values.
 
 > **Note:** The quoting syntax for queries differs from the [line protocol](/influxdb/v1.0/concepts/glossary/#line-protocol).
-Please review the [rules for single and double-quoting](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#single-quoting-and-double-quoting-in-queries) in queries.
+Please review the [rules for single and double-quoting](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#when-should-i-single-quote-and-when-should-i-double-quote-in-queries) in queries.
 
 **Tags**  
 Return data where the tag key `location` has the tag value `santa_monica`:  
@@ -390,7 +389,7 @@ This is because default `GROUP BY time()` intervals fall on rounded
 calendar time boundaries.
 The `count` results where `time` is `2015-08-18T00:00:00Z`, however, only
 include data from `2015-08-19T00:00:00Z`.
-See [Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#understanding-the-time-intervals-returned-from-group-by-time-queries) for more detailed explanation of the default
+See [Frequently Asked Questions](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#what-determines-the-time-intervals-returned-by-group-by-time-queries) for a more detailed explanation of the default
 `GROUP BY time()` behavior.
 
 #### Configured `GROUP BY time()` boundaries
@@ -532,7 +531,7 @@ time			                 mean
 > **Notes:**
 >
 * `fill()` must go at the end of the `GROUP BY` clause if you're `GROUP(ing) BY` several things (for example, both tags and a time interval).
-* `fill(previous)` doesn’t fill the result for a time bucket if the previous value is outside the query’s time range. See [Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#getting-empty-results-with-fill-previous) for more information.
+* `fill(previous)` doesn’t fill the result for a time bucket if the previous value is outside the query’s time range. See [Frequently Asked Questions](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#why-does-fill-previous-return-empty-results) for more information.
 
 ## The INTO clause
 ### Relocate data
@@ -1021,7 +1020,7 @@ Return all points that occur 6 minutes after `2015-09-18 21:24:00`:
 
 > **Note**: Currently, InfluxDB does not support using `OR` with absolute time
 in the `WHERE` clause.
-See [Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#using-or-with-absolute-time-in-the-where-clause)
+See [Frequently Asked Questions](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#why-is-my-query-with-a-where-or-time-clause-returning-empty-results)
 for more information.
 
 ## Regular expressions in queries
@@ -1061,7 +1060,7 @@ time		                	water_level
 
 > **Note:**  It is possible for field value types to differ across shards.
 Please see
-[Frequently Encountered Issues](/influxdb/v1.0/troubleshooting/frequently_encountered_issues/#querying-select-with-field-type-discrepancies)
+[Frequently Asked Questions](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-field-type-discrepancies-across-shards)
 for more information on how InfluxDB handles field value type discrepancies.
 
 #### Cast Operations
