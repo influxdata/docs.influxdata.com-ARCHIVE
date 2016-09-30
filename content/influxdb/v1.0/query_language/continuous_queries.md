@@ -18,12 +18,12 @@ specified measurement.
   <tr>
     <td><a href="#basic-syntax">Basic Syntax</a></td>
     <td><a href="#advanced-syntax">Advanced Syntax</a></td>
-    <td><a href="#cq-management">CQ Management</a></td>
+    <td><a href="#continuous-query-management">CQ Management</a></td>
   </tr>
   <tr>
     <td><a href="#examples-of-basic-syntax">Examples of Basic Syntax</a></td>
     <td><a href="#examples-of-advanced-syntax">Examples of Advanced Syntax</a></td>
-    <td><a href="#cq-use-cases">CQ Use Cases</a></td>
+    <td><a href="#continuous-query-use-cases">CQ Use Cases</a></td>
   </tr>
   <tr>
     <td><a href="#common-issues-with-basic-syntax">Common Issues with Basic Syntax</a></td>
@@ -36,8 +36,9 @@ specified measurement.
 ### Basic Syntax
 
 ```
-CREATE CONTINUOUS QUERY <cq_name> ON <database_name> BEGIN
-<cq_query>
+CREATE CONTINUOUS QUERY <cq_name> ON <database_name>
+BEGIN
+  <cq_query>
 END
 ```
 
@@ -54,7 +55,7 @@ and a [`GROUP BY time()` clause](/influxdb/v1.0/query_language/spec/#clauses):
 SELECT <function[s]> INTO <destination_measurement> FROM <measurement> [WHERE <stuff>] GROUP BY time(<interval>)[,<tag_key[s]>]
 ```
 
-Notice that the `cq_query` does not require a time range in a `WHERE` clause.
+>**Note:** Notice that the `cq_query` does not require a time range in a `WHERE` clause.
 InfluxDB automatically generates a time range for the `cq_query` when it executes the CQ.
 Any user-specified time ranges in the `cq_query`'s `WHERE` clause will be ignored
 by the system.
@@ -105,8 +106,9 @@ Use a simple CQ to automatically downsample data from a single field
 and write the results to another measurement in the same database.
 
 ```
-CREATE CONTINUOUS QUERY "cq_basic" ON "transportation" BEGIN
-SELECT mean("passengers") INTO "average_passengers" FROM "bus_data" GROUP BY time(1h)
+CREATE CONTINUOUS QUERY "cq_basic" ON "transportation"
+BEGIN
+  SELECT mean("passengers") INTO "average_passengers" FROM "bus_data" GROUP BY time(1h)
 END
 ```
 
@@ -156,8 +158,9 @@ the destination measurement to store the downsampled data in a non-`DEFAULT`
 [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp) (RP).
 
 ```
-CREATE CONTINUOUS QUERY "cq_basic_rp" ON "transportation" BEGIN
-SELECT mean("passengers") INTO "transportation"."three_weeks"."average_passengers" FROM "bus_data" GROUP BY time(1h)
+CREATE CONTINUOUS QUERY "cq_basic_rp" ON "transportation"
+BEGIN
+  SELECT mean("passengers") INTO "transportation"."three_weeks"."average_passengers" FROM "bus_data" GROUP BY time(1h)
 END
 ```
 
@@ -214,8 +217,9 @@ to automatically downsample data from all measurements and numerical fields in
 a database.
 
 ```
-CREATE CONTINUOUS QUERY "cq_basic_br" ON "transportation" BEGIN
-SELECT mean(*) INTO "downsampled_transportation"."autogen".:MEASUREMENT FROM /.*/ GROUP BY time(30m),*
+CREATE CONTINUOUS QUERY "cq_basic_br" ON "transportation"
+BEGIN
+  SELECT mean(*) INTO "downsampled_transportation"."autogen".:MEASUREMENT FROM /.*/ GROUP BY time(30m),*
 END
 ```
 
@@ -282,8 +286,9 @@ in the `GROUP BY time()` clause to alter both the CQ's default execution time an
 preset time boundaries.
 
 ```
-CREATE CONTINUOUS QUERY "cq_basic_offset" ON "transportation" BEGIN
-SELECT mean("passengers") INTO "average_passengers" FROM "bus_data" GROUP BY time(1h,15m)
+CREATE CONTINUOUS QUERY "cq_basic_offset" ON "transportation"
+BEGIN
+  SELECT mean("passengers") INTO "average_passengers" FROM "bus_data" GROUP BY time(1h,15m)
 END
 ```
 
@@ -356,7 +361,7 @@ time range.
 ##### Issue 3: Backfilling results for older data
 <br>
 CQs operate on realtime data, that is, data with timestamps that occur
-after the time at which you create the CQ.
+relative to [`now()`](/influxdb/v1.0/concepts/glossary/#now).
 Use a basic
 [`INTO` query](/influxdb/v1.0/query_language/data_exploration/#the-into-clause)
 to backfill results for data with older timestamps.
@@ -374,8 +379,9 @@ Include `GROUP BY *` in the CQ to preserve tags in the destination measurement.
 
 ```
 CREATE CONTINUOUS QUERY <cq_name> ON <database_name>
-RESAMPLE EVERY <interval> FOR <interval> BEGIN
-<cq_query>
+RESAMPLE EVERY <interval> FOR <interval>
+BEGIN
+  <cq_query>
 END
 ```
 
@@ -394,8 +400,8 @@ cover in the query.
 
 CQs execute at the same interval as the `EVERY` interval in the `RESAMPLE`
 clause, and they run at the start of InfluxDB’s preset time boundaries.
-If the `EVERY` interval is two hours, InfluxDB executes the CQ at the start of
-every two hours.
+If the `EVERY` interval is two hours, InfluxDB executes the CQ at the top of
+every other hour.
 
 When the CQ executes, it runs a single query for the time range between
 [`now()`](/influxdb/v1.0/concepts/glossary/#now) and `now()` minus the `FOR` interval in the `RESAMPLE` clause.
@@ -404,8 +410,8 @@ time range is between 15:00 and 16:59.
 
 Both the `EVERY` interval and the `FOR` interval accept
 [duration literals](/influxdb/v1.0/query_language/spec/#durations).
-The `RESAMPLE` clause works with only the `EVERY` interval, only the `FOR`
-interval, or both the `EVERY` and `FOR` interval.
+The `RESAMPLE` clause works with either or both of the `EVERY` and `FOR` intervals
+configured.
 CQs default to the relevant
 [basic syntax behavior](/influxdb/v1.0/query_language/cq_revised/#description-of-basic-syntax)
 if the `EVERY` interval or `FOR` interval is not provided.
@@ -439,8 +445,9 @@ interval.
 
 ```
 CREATE CONTINUOUS QUERY "cq_advanced_every" ON "transportation"
-RESAMPLE EVERY 1h BEGIN
-SELECT mean("passengers") INTO "average_passengers" FROM "bus_data" GROUP BY time(30m)
+RESAMPLE EVERY 1h
+BEGIN
+  SELECT mean("passengers") INTO "average_passengers" FROM "bus_data" GROUP BY time(30m)
 END
 ```
 
@@ -496,8 +503,9 @@ time range.
 
 ```
 CREATE CONTINUOUS QUERY "cq_advanced_for" ON "transportation"
-RESAMPLE FOR 1h BEGIN
-SELECT mean("passengers") INTO "average_passengers" FROM "bus_data" GROUP BY time(30m)
+RESAMPLE FOR 1h
+BEGIN
+  SELECT mean("passengers") INTO "average_passengers" FROM "bus_data" GROUP BY time(30m)
 END
 ```
 
@@ -566,8 +574,9 @@ the CQ's execution interval and the length of the CQ's time range.
 
 ```
 CREATE CONTINUOUS QUERY "cq_advanced_every_for" ON "transportation"
-RESAMPLE EVERY 1h FOR 90m BEGIN
-SELECT mean("passengers") INTO "average_passengers" FROM "bus_data" GROUP BY time(30m)
+RESAMPLE EVERY 1h FOR 90m
+BEGIN
+  SELECT mean("passengers") INTO "average_passengers" FROM "bus_data" GROUP BY time(30m)
 END
 ```
 
@@ -632,8 +641,9 @@ destination measurement.
 
 ```
 CREATE CONTINUOUS QUERY "cq_advanced_for_fill" ON "transportation"
-RESAMPLE FOR 2h BEGIN
-SELECT mean("passengers") INTO "average_passengers" FROM "bus_data" GROUP BY time(1h) fill(1000)
+RESAMPLE FOR 2h
+BEGIN
+  SELECT mean("passengers") INTO "average_passengers" FROM "bus_data" GROUP BY time(1h) fill(1000)
 END
 ```
 
@@ -697,7 +707,7 @@ previous value is outside the query’s time range.
 See [Frequently Asked Questions](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#why-does-fill-previous-return-empty-results)
 for more information.
 
-## CQ Management
+## Continuous Query Management
 
 Only admin users are allowed to work with CQs. For more on user privileges, see [Authentication and Authorization](/influxdb/v1.0/query_language/authentication_and_authorization/#user-types-and-their-privileges).
 
@@ -751,7 +761,12 @@ Drop the `idle_hands` CQ from the `telegraf` database:
 >
 ```
 
-## CQ Use Cases
+### Alter CQs
+
+CQs cannot be altered once they're created.
+To change a CQ, you must `DROP` and re`CREATE` it with the updated settings.
+
+## Continuous Query Use Cases
 
 ### Downsampling and Data Retention
 
@@ -817,50 +832,44 @@ SELECT "mean_bees" FROM "aggregate_bees" WHERE "mean_bees" > 20
 
 ### Substituting for Nested Functions
 
-Most InfluxQL functions do not support nesting.
-Get the same functionality as a nested function by creating a CQ to calculate
-the inner-most function and querying the CQ results to calculate the outer-most
-function.
-
-> **InfluxQL functions that support nesting:**
->
-> * [`count()` with `distinct()`](/influxdb/v1.0/query_language/functions/#distinct)
-> * [`derivative()`](/influxdb/v1.0/query_language/functions/#derivative)
-> * [`difference()`](/influxdb/v1.0/query_language/functions/#difference)
-> * [`moving_average()`](/influxdb/v1.0/query_language/functions/#moving-average)
-> * [`non_negative_derivative()`](/influxdb/v1.0/query_language/functions/#non-negative-derivative)
-> * [`holt_winters()`](/influxdb/v1.0/query_language/functions/#holt-winters)
+Some InfluxQL functions
+[support nesting](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#which-influxql-functions-support-nesting)
+of other functions.
+Most do not.
+If your function does not support nesting, you can get the same functionality using a CQ to calculate
+the inner-most function.
+Then simply query the CQ results to calculate the outer-most function.
 
 ##### Example
 <br>
 InfluxDB does not accept the following query with a nested function.
-The query calculates the average number
-of `bees` at `30` minute intervals and the sum of those averages:
+The query calculates the number of non-null values
+of `bees` at `30` minute intervals and the average of those counts:
 ```
-SELECT sum(mean("bees")) FROM "farm" GROUP BY time(30m)
+SELECT mean(count("bees")) FROM "farm" GROUP BY time(30m)
 ```
 
 To get the same results:
 
 **1. Create a CQ**  
 <br>
-This step performs the `mean("bees")` part of the nested function above.
+This step performs the `count("bees")` part of the nested function above.
 Because this step creates a CQ you only need to execute it once.
 
-The following CQ automatically calculates the average number of `bees` at `30` minute intervals
-and writes those averages to the `mean_bees` field in the `aggregate_bees` measurement.
+The following CQ automatically calculates the number of non-null values of `bees` at `30` minute intervals
+and writes those counts to the `count_bees` field in the `aggregate_bees` measurement.
 ```
-CREATE CONTINUOUS QUERY "bee_cq" ON "mydb" BEGIN SELECT mean("bees") AS "mean_bees" INTO "aggregate_bees" FROM "farm" GROUP BY time(30m) END
+CREATE CONTINUOUS QUERY "bee_cq" ON "mydb" BEGIN SELECT count("bees") AS "count_bees" INTO "aggregate_bees" FROM "farm" GROUP BY time(30m) END
 ```
 
 **2. Query the CQ results**  
 <br>
-This step performs the `sum([...])` part of the nested function above.
+This step performs the `mean([...])` part of the nested function above.
 
-Query the data in the measurement `aggregate_bees` to calculate the sum of the
-`mean_bees` field:
+Query the data in the measurement `aggregate_bees` to calculate the average of the
+`count_bees` field:
 ```
-SELECT sum("mean_bees") FROM "aggregate_bees" WHERE time >= <start_time> AND time <= <end_time>
+SELECT mean("count_bees") FROM "aggregate_bees" WHERE time >= <start_time> AND time <= <end_time>
 ```
 
 ## Further Reading
