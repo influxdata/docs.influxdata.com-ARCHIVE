@@ -1,5 +1,6 @@
 ---
 title: Line Protocol
+newversionredirect: /write_protocols/line_protocol_tutorial/
 menu:
   influxdb_012:
     weight: 0

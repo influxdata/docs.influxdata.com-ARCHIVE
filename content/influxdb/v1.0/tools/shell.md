@@ -195,7 +195,7 @@ The import file has two sections:
 
 * **DDL (Data Definition Language)**: Contains the [InfluxQL commands](/influxdb/v1.0/query_language/database_management/) for creating the relevant [database](/influxdb/v1.0/concepts/glossary/) and managing the [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp).
 If your database and retention policy already exist, your file can skip this section.
-* **DML (Data Manipulation Language)**: Lists the relevant database and (if desired) retention policy and contains the data in [line protocol](/influxdb/v1.0/write_protocols/line/).
+* **DML (Data Manipulation Language)**: Lists the relevant database and (if desired) retention policy and contains the data in [line protocol](/influxdb/v1.0/concepts/glossary/#line-protocol).
 
 Example:
 
@@ -300,7 +300,7 @@ Once `influx` sets the current database, there is no need to specify that databa
 `influx` automatically queries the current database and its `DEFAULT` retention policy.
 
 #### Write data to InfluxDB with `insert`
-Enter `insert` followed by the data in [line protocol](/influxdb/v1.0/write_protocols/line/) to write data to InfluxDB.
+Enter `insert` followed by the data in [line protocol](/influxdb/v1.0/concepts/glossary/#line-protocol) to write data to InfluxDB.
 Use `insert into <retention policy> <line protocol>` to write data to a specific [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp).
 
 Write data to a single field in the measurement `treasures` with the tag `captain_id = pirate_king`.
@@ -323,4 +323,4 @@ Restarting the CLI will revert to using the `DEFAULT` retention policy.
 
 ### Queries
 Execute all InfluxQL queries in `influx`.
-See [Data Exploration](/influxdb/v1.0/query_language/data_exploration/), [Schema Exploration](/influxdb/v1.0/query_language/schema_exploration/), [Database Management](/influxdb/v1.0/query_language/database_management/), [Authentication and Authorization](/influxdb/v1.0/administration/authentication_and_authorization/) for InfluxQL documentation.
+See [Data Exploration](/influxdb/v1.0/query_language/data_exploration/), [Schema Exploration](/influxdb/v1.0/query_language/schema_exploration/), [Database Management](/influxdb/v1.0/query_language/database_management/), [Authentication and Authorization](/influxdb/v1.0/query_language/authentication_and_authorization/) for InfluxQL documentation.

@@ -1,5 +1,5 @@
 ---
-title: Videos
+title: Meetup Videos
 menu:
   influxdb_1_0:
     weight: 20

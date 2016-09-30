@@ -1,5 +1,9 @@
 ---
 title: Differences between InfluxDB 1.0 and versions prior to 0.13
+aliases:
+    - influxdb/v1.0/concepts/012_vs_previous/
+    - influxdb/v1.0/concepts/011_vs_previous/
+    - influxdb/v1.0/concepts/010_vs_previous/
 menu:
   influxdb_1_0:
     weight: 50

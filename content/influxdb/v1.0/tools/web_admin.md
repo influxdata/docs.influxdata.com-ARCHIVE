@@ -33,7 +33,7 @@ If you have recently created a database you will need to refresh the Admin UI pa
 ## Writing Data
 
 The Admin UI has a "Write Data" link in the top menu bar.
-This link pops up a modal dialog that will accept points in the [line protocol](/influxdb/v1.0/write_protocols/line/) format.
+This link pops up a modal dialog that will accept points in the [line protocol](/influxdb/v1.0/concepts/glossary/#line-protocol) format.
 
 ## Querying Data
 

@@ -83,7 +83,7 @@ See [Query Language Specification](/influxdb/v1.0/query_language/spec/#identifie
 Related entries: [database](/influxdb/v1.0/concepts/glossary/#database), [field key](/influxdb/v1.0/concepts/glossary/#field-key), [measurement](/influxdb/v1.0/concepts/glossary/#measurement), [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp), [tag key](/influxdb/v1.0/concepts/glossary/#tag-key), [user](/influxdb/v1.0/concepts/glossary/#user)
 
 ## line protocol
-The text based format for writing points to InfluxDB. See [Line Protocol](/influxdb/v1.0/write_protocols/line/).
+The text based format for writing points to InfluxDB. See [Line Protocol](/influxdb/v1.0/write_protocols/).
 
 ## measurement  
 The part of InfluxDB's structure that describes the data stored in the associated fields.
@@ -289,7 +289,7 @@ There are two kinds of users in InfluxDB:
 * *Non-admin users* have `READ`, `WRITE`, or `ALL` (both `READ` and `WRITE`) access per database.
 
 When authentication is enabled, InfluxDB only executes HTTP requests that are sent with a valid username and password.
-See [Authentication and Authorization](/influxdb/v1.0/administration/authentication_and_authorization/).
+See [Authentication and Authorization](/influxdb/v1.0/query_language/authentication_and_authorization/).
 
 ## values per second
 The preferred measurement of the rate at which data are persisted to InfluxDB. Write speeds are generally quoted in values per second.

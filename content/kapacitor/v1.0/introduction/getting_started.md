@@ -148,7 +148,7 @@ stream
         .log('/tmp/alerts.log')
 ```
 
-Kapacitor has an HTTP API with which all communcation happens.
+Kapacitor has an HTTP API with which all communication happens.
 The binary `kapacitor` exposes the API over the command line.
 Now use the CLI tool to define the `task` and the databases and retention policies it can access:
 

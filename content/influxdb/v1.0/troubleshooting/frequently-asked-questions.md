@@ -168,7 +168,6 @@ time                    sunflowers                 time                  mean
                        |--|
 ```
 
-
 ## Why don't my queries return timestamps that occur after now()?
 By default, InfluxDB uses `now()` (the current nanosecond timestamp of the node that is processing the query) as the upper bound in queries.
 You must provide explicit directions in the `WHERE` clause to query points that occur after `now()`.
@@ -178,6 +177,20 @@ The second query asks InfluxDB to return everything from `hillvalley` that occur
 
 `SELECT * FROM "hillvalley"`  
 `SELECT * FROM "hillvalley" WHERE time < now() + 1000d`
+
+It is required that the default upper bound be explicitly replaced.
+A query that resets the lower bound without changing the upper bound will not return any points after `now()`.
+For example:
+
+`SELECT * FROM "hillvalley" WHERE time > now()`
+
+resets the lower bound of the query from `epoch=0` to `> now()`.
+However, the default upper bound for the query is still `now()`.
+Internally, the query expands to
+
+`SELECT * FROM "hillvalley" WHERE time > now() AND time < now()`
+
+which cannot match any points.
 
 ## Why can't I query boolean field values?
 Acceptable boolean syntax differs for data writes and data queries.
@@ -725,9 +738,9 @@ time                      az        hostname   uniq   val_1   val_2
 > SELECT * FROM "cpu_load" WHERE time >= 1234567890000000 and time <= 1234567890000001
 name: cpu_load
 --------------
-time				             az	      hostname	 val_1	val_2
-1970-01-15T06:56:07.89Z		     us_west  server02	 24.5	 7
-1970-01-15T06:56:07.890000001Z	 us_west  server02	 5.24
+time                             az        hostname   val_1   val_2
+1970-01-15T06:56:07.89Z          us_west   server02   24.5    7
+1970-01-15T06:56:07.890000001Z   us_west   server02   5.24
 ```    
 
 ## What newline character does the HTTP API require?
@@ -779,7 +792,7 @@ Identifiers are database names, retention policy names, user names, measurement 
 	Write: `INSERT wacky va\"ue=4`  
 	Applicable query: `SELECT "va\"ue" FROM "wacky"`
 
-See the [Line Protocol Syntax](/influxdb/v1.0/write_protocols/write_syntax/) page for more information.
+See the [Line Protocol](/influxdb/v1.0/write_protocols/) documentation for more information.
 
 
 ## Does the precision of the timestamp matter?

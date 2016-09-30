@@ -2,7 +2,7 @@
 title: Reporting Issues
 menu:
   enterprise_1_0:
-    weight: 0
+    weight: 10
     parent: Troubleshooting
 ---
 
@@ -13,7 +13,7 @@ support team.
 
 Please include the following in your email:
 
-* the version of InfluxEnterprise, e.g. 1.0.0-c1.0.0
+* the version of InfluxEnterprise, e.g. 1.0.1-c1.0.1
 * the version of Telegraf or Kapacitor, if applicable
 * what you expected to happen
 * what did happen

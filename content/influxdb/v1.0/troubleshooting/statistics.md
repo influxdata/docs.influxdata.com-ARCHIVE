@@ -1,6 +1,7 @@
 ---
 title: Server Monitoring
-
+aliases:
+    - influxdb/v1.0/administration/statistics/
 menu:
   influxdb_1_0:
     weight: 10

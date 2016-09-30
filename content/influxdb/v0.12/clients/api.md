@@ -1,5 +1,6 @@
 ---
 title: HTTP API Client Libraries
+newversionredirect: /tools/api_client_libraries/
 menu:
   influxdb_012:
     weight: 0

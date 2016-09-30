@@ -1,5 +1,4 @@
 ---
-title: "Chronograf"
+type: chronograf
+layout: list
 ---
-
-The Chronograf documentation is currently under construction.
