@@ -258,7 +258,8 @@ Create the same retention policy as the one in the example above, but set it as 
 ```
 
 A successful `CREATE RETENTION POLICY` query returns an empty response.
-If you attempt to create a retention policy that already exists, InfluxDB does not return an error.
+If you attempt to create a retention policy identical to one that already exists, InfluxDB does not return an error.
+If you attempt to create a retention policy with the same name as an existing retention policy but with differing attributes, InfluxDB returns an error.
 
 > **Note:** You can also specify a new retention policy in the `CREATE DATABASE` query.
 See [Create a database with CREATE DATABASE](/influxdb/v1.0/query_language/database_management/#create-a-database-with-create-database).
