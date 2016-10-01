@@ -27,6 +27,7 @@ specified measurement.
   </tr>
   <tr>
     <td><a href="#common-issues-with-basic-syntax">Common Issues with Basic Syntax</a></td>
+    <td><a href="#common-issues-with-advanced-syntax">Common Issues with Advanced Syntax</a></td>
     <td><a href="#further-reading">Further Reading</a></td>
   </tr>
 </table>
@@ -414,7 +415,9 @@ The `RESAMPLE` clause works with either or both of the `EVERY` and `FOR` interva
 configured.
 CQs default to the relevant
 [basic syntax behavior](/influxdb/v1.0/query_language/cq_revised/#description-of-basic-syntax)
-if the `EVERY` interval or `FOR` interval is not provided.
+if the `EVERY` interval or `FOR` interval is not provided (see the first issue in
+[Common Issues with Advanced Syntax](/influxdb/v1.0/query_language/continuous_queries/#common-issues-with-advanced-syntax)
+for an anomalistic case).
 
 #### Examples of Advanced Syntax
 
@@ -445,40 +448,49 @@ interval.
 
 ```
 CREATE CONTINUOUS QUERY "cq_advanced_every" ON "transportation"
-RESAMPLE EVERY 1h
+RESAMPLE EVERY 30m
 BEGIN
-  SELECT mean("passengers") INTO "average_passengers" FROM "bus_data" GROUP BY time(30m)
+  SELECT mean("passengers") INTO "average_passengers" FROM "bus_data" GROUP BY time(1h)
 END
 ```
 
-`cq_advanced_every` calculates the 30-minute average of `passengers`
+`cq_advanced_every` calculates the one-hour average of `passengers`
 from the `bus_data` measurement and stores the results in the
 `average_passengers` measurement in the `transportation` database.
 
-`cq_advanced_every` executes at one-hour intervals, the same interval as the
+`cq_advanced_every` executes at 30-minute intervals, the same interval as the
 `EVERY` interval.
-Every hour, `cq_advanced_every` runs a single query that covers the time range
-between `now()` and `now()` minus the `GROUP BY time()` interval, that is, the
-time range between `now()` and 30 minutes prior to `now()`.
+Every 30 minutes, `cq_advanced_every` runs a single query that covers the time
+range for the current time bucket, that is, the one-hour time bucket that
+intersects with `now()`.
 
 Annotated log output on the morning of August 28, 2016:
 
 >
-At **8:00**, `cq_advanced_every` executes a query with the time range `WHERE time >= '7:30' AND time < '8:00'`.  
+At **8:00**, `cq_advanced_every` executes a query with the time range `WHERE time >= '7:00' AND time < '8:00'`.  
 `cq_advanced_every` writes one point to the `average_passengers` measurement:
 >
     name: average_passengers
     ------------------------
     time                   mean
-    2016-08-28T07:30:00Z   7.5
+    2016-08-28T07:00:00Z   7
 >
-At **9:00**, `cq_advanced_every` executes a query with the time range `WHERE time >= '8:30' AND time < '9:00'`.  
+At **8:30**, `cq_advanced_every` executes a query with the time range `WHERE time >= '8:00' AND time < '9:00'`.  
 `cq_advanced_every` writes one point to the `average_passengers` measurement:
 >
     name: average_passengers
     ------------------------
     time                   mean
-    2016-08-28T08:30:00Z   16
+    2016-08-28T08:00:00Z   12.6667
+>
+At **9:00**, `cq_advanced_every` executes a query with the time range `WHERE time >= '8:00' AND time < '9:00'`.  
+`cq_advanced_every` writes one point to the `average_passengers` measurement:
+>
+    name: average_passengers
+    ------------------------
+    time                   mean
+    2016-08-28T08:00:00Z   13.75
+
 
 Results:
 ```
@@ -486,15 +498,19 @@ Results:
 name: average_passengers
 ------------------------
 time                   mean
-2016-08-28T07:30:00Z   7.5
-2016-08-28T08:30:00Z   16
+2016-08-28T07:00:00Z   7
+2016-08-28T08:00:00Z   13.75
 ```
 
-Notice that there are no results for the 8:00 interval
-(`WHERE time >= '8:00' AND time < '8:30'`).
-`cq_advanced_every` executes at the start of every hour and calculates the
-average for the previous half hour.
-By design, every other half hour interval will be missing from the CQ results.
+Notice that `cq_advanced_every` calculates the result for the 8:00 time interval
+twice.
+First, it runs at 8:30 and calculates the average for every available data point
+between 8:00 and 9:00 (`8`,`15`, and `15`).
+Second, it runs at 9:00 and calculates the average for every available data
+point between 8:00 and 9:00 (`8`, `15`, `15`, and `17`).
+Because of the way InfluxDB
+[handles duplicate points](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points)
+, the second result simply overwrites the first result.
 
 ##### Example 2: Configure the CQ's time range for resampling
 <br>
@@ -706,6 +722,41 @@ time                   mean
 previous value is outside the query’s time range.
 See [Frequently Asked Questions](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#why-does-fill-previous-return-empty-results)
 for more information.
+
+#### Common Issues with Advanced Syntax
+
+##### Issue 1: If the `EVERY` interval is greater than the `GROUP BY time()` interval
+<br>
+If the `EVERY` interval is greater than the `GROUP BY time()` interval, the CQ
+executes at the same interval as the `EVERY` interval and runs a single query
+that covers the time range between `now()` and `now()` minus the `EVERY`
+interval (not between `now()` and `now()` minus the `GROUP BY time()` interval).
+
+For example, if the `GROUP BY time()` interval is `5m` and the `EVERY` interval
+is `10m`, the CQ executes every ten minutes.
+Every ten minutes, the CQ runs a single query that covers the time range
+between `now()` and `now()` minus the `EVERY` interval, that is, the time
+range between `now()` and ten minutes prior to `now()`.
+
+This behavior is intentional and prevents the CQ from missing data between
+execution times.
+
+##### Issue 2: If the `FOR` interval is less than the execution interval
+<br>
+If the `FOR` interval is less than the `GROUP BY time()` interval or, if
+specified, the `EVERY` interval, InfluxDB returns the following error:
+
+```
+error parsing query: FOR duration must be >= GROUP BY time duration: must be a minimum of <minimum-allowable-interval> got <user-specified-interval>
+```
+
+To avoid missing data between execution times, the `FOR` interval must be equal
+to or greater than the `GROUP BY time()` interval or, if specified, the `EVERY`
+interval.
+
+Currently, this is the intended behavior.
+GitHub Issue [#6963](https://github.com/influxdata/influxdb/issues/6963)
+outlines a feature request for CQs to support gaps in data coverage.
 
 ## Continuous Query Management
 
