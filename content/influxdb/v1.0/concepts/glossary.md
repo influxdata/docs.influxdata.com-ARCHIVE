@@ -102,6 +102,9 @@ An independent `influxd` process.
 
 Related entries: [server](/influxdb/v1.0/concepts/glossary/#server)
 
+## now()
+The local server's nanosecond timestamp.
+
 ## point   
 The part of InfluxDB's data structure that consists of a single collection of fields in a series.
 Each point is uniquely identified by its series and timestamp.

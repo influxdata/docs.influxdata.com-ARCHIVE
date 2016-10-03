@@ -38,6 +38,7 @@ Where applicable, it links to outstanding issues on GitHub.
 * [Does the order of the timestamps matter?](#does-the-order-of-the-timestamps-matter)
 * [How do I `SELECT` data with a tag that has no value?](#how-do-i-select-data-with-a-tag-that-has-no-value)
 * [How do I write to a non-`DEFAULT` retention policy with InfluxDB's CLI?](#how-do-i-write-to-a-non-default-retention-policy-with-influxdb-s-cli)
+* [Which InfluxQL functions support nesting?](#which-influxql-functions-support-nesting)
 
 **Writing data**  
 
@@ -678,6 +679,21 @@ Note that you will need to fully qualify the measurement to query data in the no
 ```
 "<database>"."<retention_policy>"."<measurement>"
 ```
+
+## Which InfluxQL functions support nesting?
+
+The following InfluxQL functions support nesting:
+
+* [`count()` with `distinct()`](/influxdb/v1.0/query_language/functions/#distinct)
+* [`derivative()`](/influxdb/v1.0/query_language/functions/#derivative)
+* [`difference()`](/influxdb/v1.0/query_language/functions/#difference)
+* [`moving_average()`](/influxdb/v1.0/query_language/functions/#moving-average)
+* [`non_negative_derivative()`](/influxdb/v1.0/query_language/functions/#non-negative-derivative)
+* [`holt_winters()`](/influxdb/v1.0/query_language/functions/#holt-winters)
+
+See
+[Continuous Queries](/influxdb/v1.0/query_language/continuous_queries/#continuous-query-use-cases)
+for how to use InfluxDB's CQs as a substitute for nested functions.
 
 # Writing data
 ## How do I write integer field values?
