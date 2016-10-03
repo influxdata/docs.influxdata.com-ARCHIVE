@@ -135,6 +135,8 @@ If a data node is restarted it will check for pending writes in the hinted hando
 
 When restarting nodes within an active cluster, during upgrades or maintenance, for example, other nodes in the cluster will store hinted handoff writes to the offline node and replicate them when the node is again available. Thus, a healthy cluster should have enough resource headroom on each data node to handle the burst of hinted handoff writes following a node outage. The returning node will need to handle both the steady state traffic and the queued hinted handoff writes from other nodes, meaning its write traffic will have a significant spike following any outage of more than a few seconds.
 
+If a node with pending hinted handoff writes for another data node receives a write destined for that node, it will add the write to the end of the hinted handoff queue rather than attempt a direct write. This ensures that data nodes receive data in mostly chronological order, as well as preventing unnecessary connection attempts while the other node is offline. 
+
 ## Queries in a Cluster
 
 Queries in a cluster are distributed based on the time range being queried and the replication factor of the data. For example if the retention policy has a replication factor of 4, the coordinating data node receiving the query randomly picks any of the 4 data nodes that store a replica of the shard(s) to receive the query. If we assume that the system has shard durations of one day, then for each day of time covered by a query the coordinating node will select one data node to receive the query for that day.
