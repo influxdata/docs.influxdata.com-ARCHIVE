@@ -595,36 +595,6 @@ SELECT mean("value") FROM "cpu" WHERE "region" = 'uswest' GROUP BY time(10m) fil
 SELECT mean("value") INTO "cpu_1h".:MEASUREMENT FROM /cpu.*/
 ```
 
-## Clauses
-
-```
-from_clause     = "FROM" measurements .
-
-group_by_clause = "GROUP BY" dimensions fill(fill_option).
-
-into_clause     = "INTO" ( measurement | back_ref ).
-
-limit_clause    = "LIMIT" int_lit .
-
-offset_clause   = "OFFSET" int_lit .
-
-slimit_clause   = "SLIMIT" int_lit .
-
-soffset_clause  = "SOFFSET" int_lit .
-
-on_clause       = "ON" db_name .
-
-order_by_clause = "ORDER BY" sort_fields .
-
-to_clause       = "TO" user_name .
-
-where_clause    = "WHERE" expr .
-
-with_measurement_clause = "WITH MEASUREMENT" ( "=" measurement | "=~" regex_lit ) .
-
-with_tag_clause = "WITH KEY" ( "=" tag_key | "!=" tag_key | "=~" regex_lit | "IN (" tag_keys ")"  ) .
-```
-
 ### SHOW CONTINUOUS QUERIES
 
 ```
@@ -830,6 +800,36 @@ show_users_stmt = "SHOW USERS" .
 ```sql
 -- show all users
 SHOW USERS
+```
+
+## Clauses
+
+```
+from_clause     = "FROM" measurements .
+
+group_by_clause = "GROUP BY" dimensions fill(fill_option).
+
+into_clause     = "INTO" ( measurement | back_ref ).
+
+limit_clause    = "LIMIT" int_lit .
+
+offset_clause   = "OFFSET" int_lit .
+
+slimit_clause   = "SLIMIT" int_lit .
+
+soffset_clause  = "SOFFSET" int_lit .
+
+on_clause       = "ON" db_name .
+
+order_by_clause = "ORDER BY" sort_fields .
+
+to_clause       = "TO" user_name .
+
+where_clause    = "WHERE" expr .
+
+with_measurement_clause = "WITH MEASUREMENT" ( "=" measurement | "=~" regex_lit ) .
+
+with_tag_clause = "WITH KEY" ( "=" tag_key | "!=" tag_key | "=~" regex_lit | "IN (" tag_keys ")"  ) .
 ```
 
 ## Expressions
