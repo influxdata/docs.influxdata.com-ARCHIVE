@@ -230,6 +230,8 @@ statement           = alter_retention_policy_stmt |
                       drop_user_stmt |
                       grant_stmt |
                       kill_query_statement |
+                      revoke_stmt |
+                      select_stmt |
                       show_continuous_queries_stmt |
                       show_databases_stmt |
                       show_field_keys_stmt |
@@ -243,9 +245,7 @@ statement           = alter_retention_policy_stmt |
                       show_subscriptions_stmt|
                       show_tag_keys_stmt |
                       show_tag_values_stmt |
-                      show_users_stmt |
-                      revoke_stmt |
-                      select_stmt .
+                      show_users_stmt .
 ```
 
 ## Statements
@@ -561,6 +561,40 @@ KILL QUERY 36
 
 > **NOTE:** Identify the `query_id` from the [`SHOW QUERIES`](/influxdb/v1.0/query_language/spec/#show-queries) output.
 
+### REVOKE
+
+```
+revoke_stmt = "REVOKE" privilege [ on_clause ] "FROM" user_name .
+```
+
+#### Examples:
+
+```sql
+-- revoke admin privileges from jdoe
+REVOKE ALL PRIVILEGES FROM "jdoe"
+
+-- revoke read privileges from jdoe on mydb
+REVOKE READ ON "mydb" FROM "jdoe"
+```
+
+### SELECT
+
+```
+select_stmt = "SELECT" fields from_clause [ into_clause ] [ where_clause ]
+              [ group_by_clause ] [ order_by_clause ] [ limit_clause ]
+              [ offset_clause ] [ slimit_clause ] [ soffset_clause ] .
+```
+
+#### Examples:
+
+```sql
+-- select mean value from the cpu measurement where region = 'uswest' grouped by 10 minute intervals
+SELECT mean("value") FROM "cpu" WHERE "region" = 'uswest' GROUP BY time(10m) fill(0)
+
+-- select from all measurements beginning with cpu into the same measurement name in the cpu_1h retention policy
+SELECT mean("value") INTO "cpu_1h".:MEASUREMENT FROM /cpu.*/
+```
+
 ### SHOW CONTINUOUS QUERIES
 
 ```
@@ -766,40 +800,6 @@ show_users_stmt = "SHOW USERS" .
 ```sql
 -- show all users
 SHOW USERS
-```
-
-### REVOKE
-
-```
-revoke_stmt = "REVOKE" privilege [ on_clause ] "FROM" user_name .
-```
-
-#### Examples:
-
-```sql
--- revoke admin privileges from jdoe
-REVOKE ALL PRIVILEGES FROM "jdoe"
-
--- revoke read privileges from jdoe on mydb
-REVOKE READ ON "mydb" FROM "jdoe"
-```
-
-### SELECT
-
-```
-select_stmt = "SELECT" fields from_clause [ into_clause ] [ where_clause ]
-              [ group_by_clause ] [ order_by_clause ] [ limit_clause ]
-              [ offset_clause ] [ slimit_clause ] [ soffset_clause ] .
-```
-
-#### Examples:
-
-```sql
--- select mean value from the cpu measurement where region = 'uswest' grouped by 10 minute intervals
-SELECT mean("value") FROM "cpu" WHERE "region" = 'uswest' GROUP BY time(10m) fill(0)
-
--- select from all measurements beginning with cpu into the same measurement name in the cpu_1h retention policy
-SELECT mean("value") INTO "cpu_1h".:MEASUREMENT FROM /cpu.*/
 ```
 
 ## Clauses
