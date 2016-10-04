@@ -30,16 +30,26 @@ For users who don't want to install any software and are ready to use InfluxDB,
 you may want to check out our
 [managed hosted InfluxDB offering](https://cloud.influxdata.com).
 
-### Ubuntu & Debian
+{{< vertical-tabs >}}
+{{% tabs %}}
+[Ubuntu & Debian](#)
+[RedHat & CentOS](#)
+[SLES & openSUSE](#)
+[FreeBSD/PC-BSD](#)
+[MAC OS X](#)
+{{% /tabs %}}
+{{< tab-content-container >}}
 
+{{% tab-content %}}
 For instructions on how to install the Debian package from a file,
 please see the
-[downloads page](https://influxdata.com/downloads/). Debian and Ubuntu
+[downloads page](https://influxdata.com/downloads/).
+
+Debian and Ubuntu
 users can install the latest stable version of InfluxDB using the
 `apt-get` package manager.
 
-For Ubuntu users, you can add the InfluxData repository by using the
-following commands:
+For Ubuntu users, add the InfluxData repository with the following commands:
 
 ```bash
 curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
@@ -47,7 +57,7 @@ source /etc/lsb-release
 echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
 ```
 
-For Debian users, you can add the InfluxData repository by using the following commands:
+For Debian users, add the InfluxData repository:
 
 ```bash
 curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
@@ -56,7 +66,7 @@ test $VERSION_ID = "7" && echo "deb https://repos.influxdata.com/debian wheezy s
 test $VERSION_ID = "8" && echo "deb https://repos.influxdata.com/debian jessie stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
 ```
 
-And then to install and start the InfluxDB service:
+Then, install and start the InfluxDB service:
 
 ```bash
 sudo apt-get update && sudo apt-get install influxdb
@@ -70,7 +80,9 @@ sudo apt-get update && sudo apt-get install influxdb
 sudo systemctl start influxdb
 ```
 
-### RedHat & CentOS
+{{% /tab-content %}}
+
+{{% tab-content %}}
 
 For instructions on how to install the RPM package from a file, please see the [downloads page](https://influxdata.com/downloads/).
 
@@ -87,8 +99,7 @@ gpgkey = https://repos.influxdata.com/influxdb.key
 EOF
 ```
 
-Once repository is added to the `yum` configuration,
-you can install and start the InfluxDB service by running:
+Once repository is added to the `yum` configuration, install and start the InfluxDB service by running:
 
 ```bash
 sudo yum install influxdb
@@ -102,7 +113,10 @@ sudo yum install influxdb
 sudo systemctl start influxdb
 ```
 
-### SLES & openSUSE
+{{% /tab-content %}}
+
+{{% tab-content %}}
+
 There are RPM packages provided by openSUSE Build Service for SUSE Linux users:
 
 ```bash
@@ -112,7 +126,9 @@ zypper ar -f obs://devel:languages:go/ go
 zypper in influxdb
 ```
 
-### FreeBSD/PC-BSD
+{{% /tab-content %}}
+
+{{% tab-content %}}
 
 InfluxDB is part of the FreeBSD package system.
 It can be installed by running:
@@ -131,7 +147,9 @@ sudo service influxd onestart
 
 To have InfluxDB start at system boot, add `influxd_enable="YES"` to `/etc/rc.conf`.
 
-### Mac OS X
+{{% /tab-content %}}
+
+{{% tab-content %}}
 
 Users of OS X 10.8 and higher can install InfluxDB using the [Homebrew](http://brew.sh/) package manager.
 Once `brew` is installed, you can install InfluxDB by running:
@@ -158,6 +176,11 @@ Or, if you don't want/need launchctl, in a separate terminal window you can just
 ```bash
 influxd -config /usr/local/etc/influxdb.conf
 ```
+
+{{% /tab-content %}}
+
+{{< /tab-content-container >}}
+{{< /vertical-tabs >}}
 
 ## Configuration
 
