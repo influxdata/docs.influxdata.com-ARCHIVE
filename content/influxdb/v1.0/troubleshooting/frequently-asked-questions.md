@@ -481,11 +481,12 @@ Internally, the query expands to
 which cannot match any points.
 
 ## Can I perform mathematical operations against timestamps?
-Currently, it is not possible to execute mathematical operators or functions against timestamp values in InfluxDB.
-All time calculations must be carried out by the client receiving the query results.
+Currently, it is not possible to execute mathematical operators against timestamp values in InfluxDB.
+Most time calculations must be carried out by the client receiving the query results.
 
-See [Data Exploration](/influxdb/v1.0/query_language/data_exploration/#time-syntax-in-queries)
-for more on valid time syntax in queries.
+There is limited support for using InfluxQL functions against timestamp values.
+The function [ELAPSED()](/influxdb/v1.0/query_language/functions/#elapsed)
+returns the difference between subsequent timestamps in a single field.
 
 ## Why am I getting an `expected identifier error`?
 Receiving the error `ERR: error parsing query: found [WORD], expected identifier[, string, number, bool]` is often a gentle reminder that you forgot to include something in your query, as is the case in the following examples:
