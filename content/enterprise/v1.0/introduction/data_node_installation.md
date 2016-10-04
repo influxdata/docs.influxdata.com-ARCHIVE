@@ -91,24 +91,25 @@ sudo yum localinstall influxdb-data-1.0.1_c1.0.1.x86_64.rpm
 
 ### 2. Edit the configuration file
 
-In `/etc/influxdb/influxdb.conf`, set:
+First, in `/etc/influxdb/influxdb.conf`, uncomment:
 
-* `auth-enabled` in the `[http]` section to `true`
+* `hostname` at the top of the file and set it to the full hostname of the data node
+* the header of the `[http]` section
+* `auth-enabled` in the `[http]` section and set it to `true`
+* `shared-secret` in the `[http]` section and set it to a long pass phrase that will be used to sign tokens for intra-cluster communication. The Enterprise Web console requires this to be consistent across all data nodes.
+
+Second, in `/etc/influxdb/influxdb.conf`, set:
+
 * `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal, OR
 * `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData
 
 > **Note:** `license-key` and `license-path` are mutually exclusive and one must remain set to the empty string.
 
-In `/etc/influxdb/influxdb.conf`, add:
-
-* `hostname` at the top of the file, set to the full hostname of the data node
-* `shared-secret` in the `[http]` section, set to a long pass phrase that will be used to sign tokens for intra-cluster communication. The Enterprise Web console requires this to be consistent across all data nodes.
-
 ```
 # Change this option to true to disable reporting.
-reporting-disabled = false
+# reporting-disabled = false
+# bind-address = ":8088"
 hostname="enterprise-data-0x" #✨
-meta-tls-enabled = false
 
 [enterprise]
 
@@ -118,25 +119,24 @@ license-key = "<your_license_key>" #✨ mutually exclusive with license-path
 license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
 
 [meta]
-enabled = false # data nodes should not attempt to run any metaprocessing
 dir = "/var/lib/influxdb/meta" # data nodes do require a local meta directory
-
-[data]
-enabled = true
-dir = "/var/lib/influxdb/data"
 
 [...]
 
-[http]
- enabled = true
- bind-address = ":8086"
- auth-enabled = true #✨ this is recommended but not required
- log-enabled = true
- write-tracing = false
- pprof-enabled = false
- https-enabled = false
- https-certificate = "/etc/ssl/influxdb.pem"
- shared-secret = "long pass phrase used for signing tokens" #✨
+[http] #✨
+# enabled = true
+# bind-address = ":8086"
+auth-enabled = true #✨ this is recommended but not required
+# log-enabled = true
+# write-tracing = false
+# pprof-enabled = false
+# https-enabled = false
+# https-certificate = "/etc/ssl/influxdb.pem"
+#  https-private-key = ""
+#  max-row-limit = 10000
+#  max-connection-limit = 0
+shared-secret = "long pass phrase used for signing tokens" #✨
+#  realm = "InfluxDB"
 ```
 
 ### 3. Start the data node
