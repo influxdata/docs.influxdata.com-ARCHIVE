@@ -24,7 +24,7 @@ The meta process can run on the same or different servers.
 For high availability and redundancy your cluster should have at least three
 meta nodes and an odd number of meta nodes.
 See the
-[Clustering Guide](/enterprise/v1.0/concepts/clustering.md#optimal-server-counts)
+[Clustering Guide](/enterprise/v1.0/concepts/clustering#optimal-server-counts)
 for more on cluster architecture.
 
 > **Note:** By default, data and meta nodes communicate with each other on
