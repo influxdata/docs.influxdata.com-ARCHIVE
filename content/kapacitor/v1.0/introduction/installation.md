@@ -16,7 +16,7 @@ Installation of the InfluxDB package may require `root` or administrator privile
 ### Networking
 
 Kapacitor listens on TCP port `9092` for all API and write
-calls. 
+calls.
 
 Kapacitor may also bind to randomized UDP ports
 for handling of InfluxDB data via subscriptions.
@@ -91,4 +91,22 @@ kapacitord config
 To generate a new configuration file, run:
 ```
 kapacitord config > kapacitor.generated.conf
+```
+
+### Previous Releases and Nightly Builds
+
+#### Previous Releases
+Previous releases are available at `dl.influxdata.com/kapacitor/releases`.
+
+For example, the Ubuntu and Debian 0.13.0 build is available at:
+```
+wget https://dl.influxdata.com/kapacitor/releases/kapacitor_0.13.0_amd64.deb
+```
+
+#### Nightly Builds
+Nightly builds are available at `dl.influxdata.com/kapacitor/nightlies`.
+
+For example, the Ubuntu and Debian nightly build is available at:
+```
+wget https://dl.influxdata.com/kapacitor/nightlies/kapacitor_nightly_amd64.deb
 ```
