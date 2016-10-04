@@ -1,5 +1,7 @@
 ---
 title: Step 1 - Meta Node Installation
+aliases:
+    - enterprise/v1.0/introduction/installation/
 menu:
   enterprise_1_0:
     weight: 10
