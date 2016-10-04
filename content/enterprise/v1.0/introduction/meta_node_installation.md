@@ -80,7 +80,7 @@ sudo yum localinstall influxdb-meta-1.0.1_c1.0.1.x86_64.rpm
 
 In `/etc/influxdb/influxdb-meta.conf`, set:
 
-* `hostname` to the full hostname of the data node
+* `hostname` to the full hostname of the meta node
 * `registration-enabled` in the `[enterprise]` section to `true`
 * `registration-server-url` in the `[enterprise]` section to the full URL of the server that will run the InfluxEnterprise web console.
 You must fully specify the protocol, IP or hostname, and port.
