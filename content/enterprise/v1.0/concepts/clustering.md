@@ -125,7 +125,7 @@ The important thing to note is how failures are handled. In the case of failures
 
 ### Hinted Handoff
 
-Hinted handoff is how InfluxEnterprise deals with data node outages while writes are happening. Hinted handoff is essentially a durable disk based queue. When writing at `any`, `one` or `quorum` consistency, hinted handoff is used when one or more replicas return an error after a success has already been returned to the client. When writing at `all` consistency, writes cannot return success unless all nodes return success. Temporarily stalled or failed writes may still go to the hinted handoff queues but the cluster would have already returned a failure response to the write.
+Hinted handoff is how InfluxEnterprise deals with data node outages while writes are happening. Hinted handoff is essentially a durable disk based queue. When writing at `any`, `one` or `quorum` consistency, hinted handoff is used when one or more replicas return an error after a success has already been returned to the client. When writing at `all` consistency, writes cannot return success unless all nodes return success. Temporarily stalled or failed writes may still go to the hinted handoff queues but the cluster would have already returned a failure response to the write. The receiving node will create a separate queue on disk for each data node it cannot reach.
 
 Let's again use the example of a write coming to `D` that should go to shard `1` on `A` and `B`. If we specified a consistency level of `one` and node `A` returns success, `D` will immediately return success to the client even though the write to `B` is still in progress.
 
@@ -134,6 +134,8 @@ Now let's assume that `B` returns an error. Node `D` then puts the write into it
 If a data node is restarted it will check for pending writes in the hinted handoff queues and resume attempts to replicate the writes. The important thing to note is that the hinted handoff queue is durable and does survive a process restart.
 
 When restarting nodes within an active cluster, during upgrades or maintenance, for example, other nodes in the cluster will store hinted handoff writes to the offline node and replicate them when the node is again available. Thus, a healthy cluster should have enough resource headroom on each data node to handle the burst of hinted handoff writes following a node outage. The returning node will need to handle both the steady state traffic and the queued hinted handoff writes from other nodes, meaning its write traffic will have a significant spike following any outage of more than a few seconds.
+
+If a node with pending hinted handoff writes for another data node receives a write destined for that node, it will add the write to the end of the hinted handoff queue rather than attempt a direct write. This ensures that data nodes receive data in mostly chronological order, as well as preventing unnecessary connection attempts while the other node is offline. 
 
 ## Queries in a Cluster
 
