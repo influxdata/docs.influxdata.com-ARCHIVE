@@ -37,7 +37,7 @@ If the data nodes cannot reach `portal.influxdata.com` on port `80` or `443`,
 the configuration section describes how to use a license file.
 
 > **Note:** By default, data and meta nodes communicate with each other on
-ports `8091` and `8088`.
+ports `8088`, `8089`, and `8091`.
 In a clustered setup you’ll want to configure a load balancer to send client
 traffic to the data nodes on port `8086`, the default port for the
 [HTTP API](https://docs.influxdata.com/influxdb/v1.0/tools/api/) for writing and
