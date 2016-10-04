@@ -28,7 +28,7 @@ See the
 for more on cluster architecture.
 
 > **Note:** By default, data and meta nodes communicate with each other on
-ports `8091` and `8088`.
+ports `8088`, `8089`, and `8091`.
 
 # Meta Node Setup
 
