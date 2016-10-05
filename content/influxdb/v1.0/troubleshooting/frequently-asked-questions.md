@@ -17,6 +17,7 @@ Where applicable, it links to outstanding issues on GitHub.
 * [Why is `CREATE USER` returning `error parsing query`?](#why-is-create-user-returning-error-parsing-query)
 * [How do I include a single quote in a password?](#how-do-i-include-a-single-quote-in-a-password)  
 * [How can I identify my version of InfluxDB?](#how-can-i-identify-my-version-of-influxdb)  
+* [What is the relationship between shard group durations and retention policies?](#what-is-the-relationship-between-shard-group-durations-and-retention-policies)
 * [Why aren't data dropped after I've altered a retention policy?](#why-aren-t-data-dropped-after-i-ve-altered-a-retention-policy)
 
 **Command Line Interface (CLI)**
@@ -103,13 +104,11 @@ If authentication is enabled you will need to use `https` in the URL.
 
 `[http] 2016/03/04 11:25:13 ::1 - - [04/Mar/2016:11:25:13 -0800] GET /query?db=&epoch=ns&q=show+databases HTTP/1.1 200 98 -`     ✨`InfluxDBShell/1.0.0`✨`d16e7a83-e23e-11e5-80a7-000000000000 529.543µs`
 
-## Why aren't data dropped after I've altered a retention policy?
-After [shortening](/influxdb/v1.0/query_language/database_management/#modify-retention-policies-with-alter-retention-policy) the `DURATION` of a [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp) (RP), you may notice that InfluxDB keeps some data that are older than the `DURATION` of the modified RP.
-This behavior is a result of the relationship between the time interval covered by a shard group and the `DURATION` of a retention policy.
+## What is the relationship between shard group durations and retention policies?
 
 InfluxDB stores data in shard groups.
-A single shard group covers a specific time interval; InfluxDB determines that time interval by looking at the `DURATION` of the relevant RP.
-The table below outlines the relationship between the `DURATION` of an RP and the time interval of a shard group:
+A single shard group covers a specific time interval; InfluxDB determines that time interval by looking at the `DURATION` of the relevant retention policy (RP).
+The table below outlines the default relationship between the `DURATION` of an RP and the time interval of a shard group:
 
 | RP duration  | Shard group interval  |
 |---|---|
@@ -117,43 +116,35 @@ The table below outlines the relationship between the `DURATION` of an RP and th
 | >= 2 days and <= 6 months  | 1 day  |
 | > 6 months  | 7 days  |
 
-If you shorten the `DURATION` of an RP and the shard group interval also shrinks, InfluxDB may be forced to keep data that are older than the new `DURATION`.
-This happens because InfluxDB cannot divide the old, longer shard group into new, shorter shard groups; it must keep all of the data in the longer shard group even if only a small part of those data overlaps with the new `DURATION`.
 
-*Example: Moving from an infinite RP to a three day RP*
+Users can also configure the shard group duration with the
+[`CREATE RETENTION POLICY`](/influxdb/v1.0/query_language/database_management/#create-retention-policies-with-create-retention-policy)
+and
+[`ALTER RETENTION POLICY`](http://localhost:1313/influxdb/v1.0/query_language/database_management/#modify-retention-policies-with-alter-retention-policy)
+statements.
+Check your retention policy's shard group duration with the
+[`SHOW RETENTION POLICY`](/influxdb/v1.0/query_language/schema_exploration/#explore-retention-policies-with-show-retention-policies)
+statement.
 
-Figure 1 shows the shard groups for our example database (`example_db`) after 11 days.
-The database uses the automatically generated `autogen` retention policy with an infinite (`INF`) `DURATION` so each shard group interval is seven days.
-On day 11, InfluxDB is no longer writing to `Shard Group 1` and `Shard Group 2` has four days worth of data:
+## Why aren't data dropped after I've altered a retention policy?
+Several factors explain why data may not be immediately dropped after a
+retention policy (RP) change.
 
-> **Figure 1**
-![Retention policy duration infinite](/img/influxdb/fei/alter-rp-inf.png)
+First, by default, InfluxDB checks to enforce a RP every 30 minutes.
+You may need to wait for the next RP check for InfluxDB to drop data that are
+outside the RP's new `DURATION` setting.
+The 30 minute interval is
+[configurable](/influxdb/v1.0/administration/config/#check-interval-30m0s).
 
-On day 11, we notice that `example_db` is accruing data too fast; we want to delete, and keep deleting, all data older than three days.
-We do this by [altering](/influxdb/v1.0/query_language/database_management/#modify-retention-policies-with-alter-retention-policy) the retention policy:
-<br>
-<br>
-```
-> ALTER RETENTION POLICY autogen ON example_db DURATION 3d
-```
-
-At the next [retention policy enforcement check](/influxdb/v1.0/administration/config/#retention), InfluxDB immediately drops `Shard Group 1` because all of its data are older than 3 days.
-InfluxDB does not drop `Shard Group 2`.
-This is because InfluxDB cannot divide existing shard groups and some data in `Shard Group 2` still fall within the new three day retention policy.
-
-Figure 2 shows the shard groups for `example_db` five days after the retention policy change.
-Notice that the new shard groups span one day intervals.
-All of the data in `Shard Group 2` remain in the database because the shard group still has data within the retention policy's three day `DURATION`:
-
-> **Figure 2**
-![Retention policy duration three days](/img/influxdb/fei/alter-rp-3d.png)
-
-After day 17, all data within the past 3 days will be in one day shard groups.
-InfluxDB will then be able to drop `Shard Group 2` and `example_db` will have only 3 days worth of data.
-
-> **Note:** The time it takes for InfluxDB to adjust to the new retention policy may be longer depending on your shard precreation configuration setting.
-See [Database Configuration](/influxdb/v1.0/administration/config/#shard-precreation) for more on that setting.
-See [Database Management](/influxdb/v1.0/query_language/database_management/#delete-a-shard-with-drop-shard) for how to delete a shard.
+Second,
+changing an RP's `DURATION` [may cause](#what-is-the-relationship-between-shard-group-durations-and-retention-policies)
+the [shard group's](/influxdb/v1.0/concepts/glossary/#shard-group) duration to shrink.
+InfluxDB cannot divide the old, longer shard groups.
+If any data in an old, longer shard group fall within the
+RP's new `DURATION` setting, InfluxDB will need to keep **all** of the data in
+that shard group.
+InfluxDB will drop that shard group once all data in that shard group are outside
+the RP's new `DURATION` setting.
 
 ## How do I make InfluxDB’s CLI return human readable timestamps?
 
