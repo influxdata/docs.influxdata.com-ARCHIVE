@@ -1,3 +1,31 @@
+---
+title: InfluxEnterprise Internal Statistics
+menu:
+  influxdb_1_0:
+    weight: 90
+    parent: troubleshooting
+---
+
+# Introduction
+
+InfluxEnterprise periodically samples and stores metrics about its own operations. 
+The metrics are stored in the `_internal` database and can be queried, downsampled, passed to Kapacitor, etc. just like any other data in the system.
+
+# Using `_internal`
+
+## Important numbers to watch
+
+list the ones that matter, linking to their definition below.
+
+## Examples queries on `_internal`
+
+a few examples showing good and problematic query responses for some or all of the above numbers
+
+# Metric definitions
+
+These are the metrics that are unique to InfluxEnterprise. 
+For metrics shared by both InfluxDB and InfluxEnterprise, please refer to the [InfluxDB `_internal` documentation](/influxdb/v1.0/troubleshooting/internal_statistics).
+
 ## cluster
 
 | fieldKey | fieldType | units |
