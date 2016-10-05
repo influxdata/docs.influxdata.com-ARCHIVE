@@ -408,7 +408,7 @@ time bucket must occur in the 7pm hour.
 The dotted lines show the points that make up each average.
 
 Note that while the first timestamp in the results is `2016-08-29T18:00:00Z`,
-that time bucket does **not** include data with timestamps that occur before the start of the
+the query results in that bucket do **not** include data with timestamps that occur before the start of the
 `WHERE` time clause (`2016-08-29T18:15:00Z`).
 
 Raw data:
