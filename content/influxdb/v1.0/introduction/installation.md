@@ -271,21 +271,3 @@ When using non-standard directories for InfluxDB data and configurations, also b
 chown influxdb:influxdb /mnt/influx
 chown influxdb:influxdb /mnt/db
 ```
-
-### Previous Releases and Nightly Builds
-
-#### Previous Releases
-Previous releases are available at `dl.influxdata.com/influxdb/releases`.
-
-For example, the Ubuntu and Debian 0.13.0 build is available at:
-```
-wget https://dl.influxdata.com/influxdb/releases/influxdb_0.13.0_amd64.deb
-```
-
-#### Nightly Builds
-Nightly builds are available at `dl.influxdata.com/influxdb/nightlies`.
-
-For example, the Ubuntu and Debian nightly build is available at:
-```
-wget https://dl.influxdata.com/influxdb/nightlies/influxdb_nightly_amd64.deb
-```

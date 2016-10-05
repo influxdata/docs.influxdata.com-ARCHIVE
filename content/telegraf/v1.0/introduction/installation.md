@@ -154,21 +154,3 @@ telegraf -sample-config -input-filter <pluginname>[:<pluginname>] -output-filter
 
 For more advanced configuration details, see the
 [configuration documentation](/telegraf/v1.0/administration/configuration/).
-
-### Previous Releases and Nightly Builds
-
-#### Previous Releases
-Previous releases are available at `dl.influxdata.com/telegraf/releases`.
-
-For example, the Ubuntu and Debian 0.13.0 build is available at:
-```
-wget https://dl.influxdata.com/telegraf/releases/telegraf_0.13.0_amd64.deb
-```
-
-#### Nightly Builds
-Nightly builds are available at `dl.influxdata.com/telegraf/nightlies`.
-
-For example, the Ubuntu and Debian nightly build is available at:
-```
-wget https://dl.influxdata.com/telegraf/nightlies/telegraf_nightly_amd64.deb
-```

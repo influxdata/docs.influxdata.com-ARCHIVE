@@ -44,21 +44,3 @@ sudo service chronograf start
 See the
 [configuration documentation](/chronograf/v1.0/administration/configuration/)
 for more information.
-
-### Previous Releases and Nightly Builds
-
-#### Previous Releases
-Previous releases are available at `dl.influxdata.com/chronograf/releases`.
-
-For example, the Ubuntu and Debian 0.13.0 build is available at:
-```
-wget https://dl.influxdata.com/chronograf/releases/chronograf_0.13.0_amd64.deb
-```
-
-#### Nightly Builds
-Nightly builds are available at `dl.influxdata.com/chronograf/nightlies`.
-
-For example, the Ubuntu and Debian nightly build is available at:
-```
-wget https://dl.influxdata.com/chronograf/nightlies/chronograf_nightly_amd64.deb
-```
