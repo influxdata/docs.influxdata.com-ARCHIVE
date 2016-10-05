@@ -16,7 +16,7 @@ The following sections assume your InfluxDB instance is running on `localhost`
 port `8086` and HTTPS is not enabled.
 Those settings [are configurable](/influxdb/v1.0/administration/config/#http).
 
-## Endpoints
+# Endpoints
 
 | Endpoint    | Description |
 | :---------- | :---------- |
@@ -24,13 +24,13 @@ Those settings [are configurable](/influxdb/v1.0/administration/config/#http).
 | [/query](#query) | Use `/query` to query data and manage databases, retention policies, and users. |
 | [/write](#write) | Use `/write` to write data to a pre-existing database. |
 
-### /ping
+## /ping
 
 The ping endpoint accepts both `GET` and `HEAD` HTTP requests.
 Use this endpoint to check the status of your InfluxDB instance and your version
 of InfluxDB.
 
-#### Definition
+### Definition
 ```
 GET http://localhost:8086/ping
 ```
@@ -38,7 +38,7 @@ GET http://localhost:8086/ping
 HEAD http://localhost:8086/ping
 ```
 
-#### Example
+### Example
 
 Extract the version of your InfluxDB instance in the `X-Influxdb-Version` field
 of the header:
@@ -51,7 +51,7 @@ X-Influxdb-Version: 1.0.x
 Date: Fri, 04 Mar 2016 19:01:23 GMT
 ```
 
-#### Status Codes and Responses
+### Status Codes and Responses
 
 The response body is empty.
 
@@ -59,13 +59,13 @@ The response body is empty.
 | :----------------- | :------------- |
 | 204      | Success! Your InfluxDB instance is up and running.      |
 
-### /query
+## /query
 
 The `/query` endpoint accepts `GET` and `POST` HTTP requests.
 Use this endpoint to query data and manage databases, retention policies,
 and users.
 
-#### Definition
+### Definition
 
 ```
 GET http://localhost:8086/query
@@ -74,7 +74,7 @@ GET http://localhost:8086/query
 POST http://localhost:8086/query
 ```
 
-#### Verb usage
+### Verb usage
 
 | Verb  | Query Type |
 | :---- | :--------- |
@@ -84,7 +84,7 @@ POST http://localhost:8086/query
 \* The only exceptions are `SELECT` queries that include an [`INTO` clause](/influxdb/v1.0/query_language/data_exploration/#the-into-clause).
 Those `SELECT` queries require a `POST` request.
 
-##### Examples
+#### Examples
 <br>
 Query data with a `SELECT` statement:
 ```
@@ -107,7 +107,7 @@ $ curl -XPOST 'http://localhost:8086/query' --data-urlencode 'q=CREATE DATABASE 
 {"results":[{}]}
 ```
 
-#### Query String Parameters
+### Query String Parameters
 
 | Query String Parameter | Optional/Required | Definition |
 | :--------------------- | :---------------- |:---------- |
@@ -124,7 +124,7 @@ Use basic authentication if you've [enabled authentication](/influxdb/v1.0/query
 and aren't using the query string parameters `u` and `p`.
 See below for an <td><a href="/influxdb/v1.0/tools/api/#basic-auth-query">example</a></td> of basic authentication.
 
-##### Examples
+#### Examples
 <br>
 Query data with a `SELECT` statement and return pretty-printed JSON:
 ```
@@ -197,7 +197,7 @@ $ curl -XPOST -u myusername:mypassword 'http://localhost:8086/query' --data-urle
 {"results":[{}]}
 ```
 
-#### Request Body
+### Request Body
 
 ```
 --data-urlencode "q=<InfluxQL query>"
@@ -210,7 +210,7 @@ use in all examples on this page.
 
 Delimit multiple queries with a semicolon `;`.
 
-##### Bind Parameters
+#### Bind Parameters
 <br>
 The API supports binding parameters to particular field values or tag values in
 the `WHERE` clause.
@@ -229,7 +229,7 @@ Map syntax:
 
 Delimit multiple placeholder key-value pairs with comma `,`.
 
-##### Examples
+#### Examples
 <br>
 Send multiple queries:
 ```
@@ -259,12 +259,12 @@ curl -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FRO
 {"results":[{"series":[{"name":"mymeas","columns":["time","myfieldkey","mytagkey"],"values":[["2016-09-05T18:25:46.587728107Z",111,"mytagvalue2"]]}]}]}
 ```
 
-#### Status codes and responses
+### Status codes and responses
 
 Responses are returned in JSON.
 Enable pretty-print JSON by including the query string parameter `pretty=true`.
 
-##### Summary Table
+#### Summary Table
 <br>
 
 | HTTP status code | Description |
@@ -272,7 +272,7 @@ Enable pretty-print JSON by including the query string parameter `pretty=true`.
 | 200 OK | Success! The returned JSON offers further information. |
 | 400 Bad Request | Unacceptable request. Can occur with a syntactically incorrect query. The returned JSON offers further information. |
 
-##### Examples
+#### Examples
 <br>
 A successful request that returns data:
 ```
@@ -301,18 +301,18 @@ HTTP/1.1 400 Bad Request
 {"error":"error parsing query: found EOF, expected FROM at line 1, char 9"}
 ```
 
-### /write
+## /write
 
 The `/write` endpoint accepts `POST` HTTP requests.
 Use this endpoint to write data to a pre-existing database.
 
-#### Definition
+### Definition
 
 ```
 POST http://localhost:8086/write
 ```
 
-#### Query String Parameters
+### Query String Parameters
 
 | Query String Parameter | Optional/Required | Description |
 | :--------------------- | :---------------- | :---------- |
@@ -330,7 +330,7 @@ See below for an <td><a href="/influxdb/v1.0/tools/api/#basic-auth-write">exampl
 \*\* We recommend using the least precise precision possible as this can result
 in significant improvements in compression.
 
-##### Examples
+#### Examples
 <br>
 Write a point to the database `mydb` with a timestamp in seconds:
 ```
@@ -352,7 +352,7 @@ $ curl -i -XPOST "http://localhost:8086/write?db=mydb&u=myusername&p=mypassword"
 $ curl -i -XPOST -u myusername:mypassword "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=1 myfield=91'
 ```
 
-#### Request Body
+### Request Body
 
 ```
 --data-binary '<Data in Line Protocol format>'
@@ -379,7 +379,7 @@ Files containing carriage returns will cause parser errors.
     We recommend writing points in batches of 5,000 to 10,000 points.
 Smaller batches, and more HTTP requests, will result in sub-optimal performance.
 
-##### Examples
+#### Examples
 <br>
 Write a point to the database `mydb` with a nanosecond timestamp:
 ```
@@ -410,14 +410,14 @@ mymeas,mytag2=8 value=78 1463689700000000000
 mymeas,mytag3=9 value=89 1463689710000000000
 ```
 
-#### Status codes and responses
+### Status codes and responses
 
 In general, status codes of the form `2xx` indicate success, `4xx` indicate
 that InfluxDB could not understand the request, and `5xx` indicate that the
 system is overloaded or significantly impaired.
 Errors are returned in JSON.
 
-##### Summary Table
+#### Summary Table
 <br>
 
 | HTTP status code | Description    |
@@ -427,7 +427,7 @@ Errors are returned in JSON.
 | 404 Not Found    | Unacceptable request. Can occur if a user attempts to write to a database that does not exist. The returned JSON offers further information. |
 | 500 Internal Server Error  | The system is overloaded or significantly impaired. Can occur if a user attempts to write to a retention policy that does not exist. The returned JSON offers further information. |
 
-##### Examples
+#### Examples
 <br>
 A successful write:
 ```
