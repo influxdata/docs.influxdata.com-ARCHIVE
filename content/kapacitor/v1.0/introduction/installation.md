@@ -16,7 +16,7 @@ Installation of the InfluxDB package may require `root` or administrator privile
 ### Networking
 
 Kapacitor listens on TCP port `9092` for all API and write
-calls. 
+calls.
 
 Kapacitor may also bind to randomized UDP ports
 for handling of InfluxDB data via subscriptions.
