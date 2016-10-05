@@ -420,7 +420,7 @@ time bucket must occur in the 7pm hour.
 The dotted lines show the points that make up each average.
 
 Note that while the first timestamp in the results is `2016-08-29T18:00:00Z`,
-that time bucket does **not** include data with timestamps that occur before the start of the
+the query results in that bucket do **not** include data with timestamps that occur before the start of the
 `WHERE` time clause (`2016-08-29T18:15:00Z`).
 
 Raw data:
@@ -796,7 +796,9 @@ time                   almonds  almonds_1  half_almonds
 ## How do I query data across measurements?
 
 Currently, there is no way to perform cross-measurement math or grouping.
-All data must be under a single measurement to query it together.  InfluxDB is not a relational database and mapping data across measurements is not a great [schema](/influxdb/v1.0/concepts/glossary/#schema).
+All data must be under a single measurement to query it together.
+InfluxDB is not a relational database and mapping data across measurements is not currently a recommended [schema](/influxdb/v1.0/concepts/glossary/#schema).
+See GitHub Issue [#3552](https://github.com/influxdata/influxdb/issues/3552) for a discussion of implementing JOIN in InfluxDB.
 
 ## Does the order of the timestamps matter?
 
