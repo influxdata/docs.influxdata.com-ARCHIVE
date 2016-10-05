@@ -784,7 +784,9 @@ time                   almonds  almonds_1  half_almonds
 ## How do I query data across measurements?
 
 Currently, there is no way to perform cross-measurement math or grouping.
-All data must be under a single measurement to query it together.  InfluxDB is not a relational database and mapping data across measurements is not a great [schema](/influxdb/v1.0/concepts/glossary/#schema).
+All data must be under a single measurement to query it together.
+InfluxDB is not a relational database and mapping data across measurements is not currently a recommended [schema](/influxdb/v1.0/concepts/glossary/#schema).
+See GitHub Issue [#3552](https://github.com/influxdata/influxdb/issues/3552) for a discussion of implementing JOIN in InfluxDB.
 
 ## Does the order of the timestamps matter?
 
