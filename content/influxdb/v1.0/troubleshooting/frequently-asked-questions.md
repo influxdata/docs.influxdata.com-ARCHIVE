@@ -31,6 +31,7 @@ Where applicable, it links to outstanding issues on GitHub.
 * [How does InfluxDB handle field type discrepancies across shards?](#how-does-influxdb-handle-field-type-discrepancies-across-shards)  
 * [What are the minimum and maximum integers that InfluxDB can store?](#what-are-the-minimum-and-maximum-integers-that-influxdb-can-store)  
 * [How can I tell what type of data are stored in a field?](#how-can-i-tell-what-type-of-data-are-stored-in-a-field)
+* [Can I change a field's data type?](#can-i-change-a-field-s-data-type)
 
 **InfluxQL Functions**
 
@@ -305,6 +306,39 @@ green     boolean
 orange    integer
 yellow    float
 ```
+
+## Can I change a field's data type?
+
+Currently, InfluxDB offers very limited support for changing a field's data type.
+
+The `<field_key>::<type>` syntax supports casting field values from integers to
+floats or from floats to integers.
+See [Cast Operations](/influxdb/v1.0/query_language/data_exploration/#data-types-and-cast-operations-in-queries)
+for an example.
+There is no way to cast a float or integer to a string or boolean (or vice versa).
+
+We list possible workarounds for changing a field's data type below.
+Note that these workarounds will not update data that have already been
+written to the database.
+
+#### Write the Data to a Different Field
+
+The simplest workaround is to begin writing the new data type to a different field in the same
+[series](/influxdb/v1.0/concepts/glossary/#series).
+
+#### Work the Shard System
+Field value types cannot differ within a
+[shard](/influxdb/v1.0/concepts/glossary/#shard) but they can differ across
+shards.
+
+Users looking to change a field's data type can use the `SHOW SHARDS` query
+to identify the `end_time` of the current shard.
+InfluxDB will accept writes with a different data type to an existing field if the point has a timestamp
+that occurs after that `end_time`.
+
+Note that this will not change the field's data type on prior shards.
+For how this will affect your queries, please see
+[How does InfluxDB handle field type discrepancies across shards](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-field-type-discrepancies-across-shards).
 
 ## How do I perform mathematical operations within a function?
 
