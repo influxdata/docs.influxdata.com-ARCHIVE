@@ -176,13 +176,34 @@ CLI even if they have read and write permissions on that database:
 ERR: error authorizing query: <username> not authorized to execute statement 'SHOW DATABASES', requires admin privilege
 ```
 
-The workaround is for the user to explicitly connect to the relevant database when launching the CLI:
+### Workaround Option 1:
+Explicitly connect to the relevant database when launching the CLI:
 
 ```
 > influx -username 'username' -password 'password' -database 'special_db'
 ```
 
 All operations for the duration of that CLI session will go against the `special_db` database.
+
+### Workaround Option 2:
+Specify the database in every query.
+For example, rather than the following query, which requires a database to have been set:
+
+```
+> SELECT value FROM measurement
+ERR: database name required
+Warning: It is possible this error is due to not setting a database.
+Please set a database with the command "use <database>".
+```
+
+Issue the query with the database specified, using the `<database>.[<retention_policy].<measurement>` syntax.
+If you do not specify a retention policy, the query will issue against the `DEFAULT` retention policy.
+
+```
+SELECT value FROM special_db.autogen.measurement
+# OR
+SELECT value FROM special_db..measurement
+```
 
 ## How do I write to a non-DEFAULT retention policy with InfluxDB's CLI?
 
@@ -806,7 +827,7 @@ The following queries return [series cardinality](/influxdb/v1.0/concepts/glossa
 
 #### Series cardinality per database:
 ```
-SELECT numSeries FROM "_internal".."database" GROUP BY "database" ORDER BY desc LIMIT 1
+SELECT numSeries FROM "_internal".."database" WHERE time > now() - 10s GROUP BY "database" ORDER BY desc LIMIT 1
 ```
 #### Series cardinality across all database:
 ```
