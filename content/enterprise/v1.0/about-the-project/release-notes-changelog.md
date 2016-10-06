@@ -8,6 +8,17 @@ menu:
 
 # Clustering
 
+## v1.0.2 [2016-10-06]
+This release builds off of the 1.0.2 release of InfluxDB.  Please see the [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v102-2016-10-05) for specific changes.
+
+### Cluster-specific Features
+
+### Cluster-specific Bugfixes
+
+- Prevent double read-lock in Meta Client.
+- Corrupted hinted handoff file prevents `influxd` from starting
+- Fix systemd package upgrade symlink failure
+
 ## v1.0.1 [2016-09-28]
 This release builds off of the 1.0.1 OSS release of InfluxDB.
 Please see the [OSS release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v101-2016-09-26)
@@ -84,6 +95,14 @@ Backup and restore has been updated to fix issues and refine existing capabiliti
 - Drop writes if they contain field type inconsistencies
 
 # Web Console
+
+## v1.0.2 [2016-10-06]
+
+### Features
+
+### Bugfixes
+
+- Fix systemd package upgrade symlink failure
 
 ## v1.0.1
 
