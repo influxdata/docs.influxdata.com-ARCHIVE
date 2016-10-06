@@ -676,7 +676,6 @@ time                   max
 
 While this is the expected behavior of `fill(previous)`, an [open feature request](https://github.com/influxdata/influxdb/issues/6878) on GitHub proposes that `fill(previous)` should fill results even when previous values fall outside the query’s time range.
 
-
 ## Why are my INTO queries missing data?
 
 By default, `INTO` queries convert any tags in the initial data to fields in

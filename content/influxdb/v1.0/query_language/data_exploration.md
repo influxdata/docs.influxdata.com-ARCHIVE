@@ -480,6 +480,9 @@ Use `fill()` to change the value reported for intervals that have no data.
 * `previous` - copies the value from the previous interval for intervals with no data
 * `none` - skips intervals with no data to report
 
+> **Note:**
+`fill()` must go at the end of the `GROUP BY` clause if you're `GROUP(ing) BY` several things (for example, both tags and a time interval).
+
 Follow the ✨ in the examples below to see what `fill()` can do.
 
 **GROUP BY without fill()**
@@ -528,9 +531,13 @@ time			                 mean
 ✨
 ```
 
-> **Notes:**
->
-* `fill()` must go at the end of the `GROUP BY` clause if you're `GROUP(ing) BY` several things (for example, both tags and a time interval).
+#### Common issues with `fill()`
+
+* Currently, queries ignore `fill()` if no data fall within the query's time range.
+This is the expected behavior. An open
+[feature request](https://github.com/influxdata/influxdb/issues/6967) on GitHub
+proposes that `fill()` should force a return of values even if the query's time
+range covers no data.
 * `fill(previous)` doesn’t fill the result for a time bucket if the previous value is outside the query’s time range. See [Frequently Asked Questions](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#why-does-fill-previous-return-empty-results) for more information.
 
 ## The INTO clause
