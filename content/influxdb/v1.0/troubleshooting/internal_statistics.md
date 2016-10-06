@@ -1,10 +1,10 @@
----
-title: InfluxDB Internal Statistics
-menu:
-  influxdb_1_0:
-    weight: 90
-    parent: troubleshooting
----
+#---
+#title: InfluxDB Internal Statistics
+#menu:
+#  influxdb_1_0:
+#    weight: 90
+#    parent: troubleshooting
+#---
 
 # Introduction
 
