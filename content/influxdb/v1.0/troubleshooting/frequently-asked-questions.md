@@ -127,24 +127,16 @@ Check your retention policy's shard group duration with the
 statement.
 
 ## Why aren't data dropped after I've altered a retention policy?
-Several factors explain why data may not be immediately dropped after a
-retention policy (RP) change.
 
-First, by default, InfluxDB checks to enforce a RP every 30 minutes.
+By default, InfluxDB checks to enforce a RP every 30 minutes.
 You may need to wait for the next RP check for InfluxDB to drop data that are
 outside the RP's new `DURATION` setting.
 The 30 minute interval is
 [configurable](/influxdb/v1.0/administration/config/#check-interval-30m0s).
 
-Second,
-changing an RP's `DURATION` [may cause](#what-is-the-relationship-between-shard-group-durations-and-retention-policies)
-the [shard group's](/influxdb/v1.0/concepts/glossary/#shard-group) duration to shrink.
-InfluxDB cannot divide the old, longer shard groups.
-If any data in an old, longer shard group fall within the
-RP's new `DURATION` setting, InfluxDB will need to keep **all** of the data in
-that shard group.
-InfluxDB will drop that shard group once all data in that shard group are outside
-the RP's new `DURATION` setting.
+> **Note:** In versions prior to 1.0.2 altering an RP automatically reset
+the `SHARD GROUP DURATION`.
+In some cases, that behavior resulted in unexpected data retention.
 
 ## How do I make InfluxDB’s CLI return human readable timestamps?
 
