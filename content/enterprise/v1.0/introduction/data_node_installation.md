@@ -79,14 +79,14 @@ On each data server:
 
 #### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data_1.0.3-c1.0.3_amd64.deb
-sudo dpkg -i influxdb-data_1.0.3-c1.0.3_amd64.deb
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data_1.0.2-c1.0.3_amd64.deb
+sudo dpkg -i influxdb-data_1.0.2-c1.0.3_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data-1.0.3_c1.0.3.x86_64.rpm
-sudo yum localinstall influxdb-data-1.0.3_c1.0.3.x86_64.rpm
+wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data-1.0.2_c1.0.3.x86_64.rpm
+sudo yum localinstall influxdb-data-1.0.2_c1.0.3.x86_64.rpm
 ```
 
 ### 2. Edit the configuration file
