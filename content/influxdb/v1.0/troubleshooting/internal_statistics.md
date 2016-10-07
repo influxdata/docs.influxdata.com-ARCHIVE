@@ -22,6 +22,54 @@ TODO: a few examples showing good and problematic query responses for some or al
 
 # Metric definitions
 
+## collectd
+
+The `collectd` measurement tracks statistics about the collectd service.
+This measurement will only be present if the collectd service plugin is enabled.
+
+| fieldKey | fieldType | units |
+| :---- | :---- | :---- |
+| batchesTx | integer | none |
+| batchesTxFail | integer | none |
+| bytesRx | integer | bytes |
+| droppedPointsInvalid | integer | none |
+| pointsParseFail | integer | none |
+| pointsRx | integer | none |
+| pointsTx | integer | none |
+| readFail | integer | none |
+
+### batchesTx
+
+The `batchesTx` statistic is incremented for every batch of points the collectd service successfully sends to the InfluxDB write layer.
+
+### batchesTxFail
+
+The `batchesTxFail` statistic is incremented for every batch of points the collectd service fails to send to the InfluxDB write layer.
+
+### bytesRx
+
+The `bytesRx` statistic is incremented for every byte that the collectd service successfully reads via its UDP connection.
+
+### droppedPointsInvalid
+
+The `droppedPointsInvalid` statistic is incremented for every point that was received by the collectd service but unable to be converted to an InfluxDB point successfully.
+
+### pointsParseFail
+
+The `pointsParseFail` statistic is incremented any time the collectd service receives a packet that could not be parsed into the collectd format.
+
+### pointsRx
+
+The `pointsRx` statistic is incremented for every point accepted by the collectd service.
+
+### pointsTx
+
+The `pointsTx` statistic is incremented for every point the collectd service successfully sends to the InfluxDB write layer.
+
+### readFail
+
+The `readFail` statistic is incremented any time the collectd service fails to correctly read a packet from its UDP connection.
+
 ## cq
 
 The `cq` measurement tracks statistics about the continuous query executor.
@@ -58,6 +106,59 @@ This number should always be the same as if you were to manually count the outpu
 
 The `numSeries` statistic indicates the number of series in the database identified by the `database` tag.
 This number should always be the same as if you were to manually count the output of `SHOW SERIES` against the given database.
+
+## graphite
+
+The `graphite` measurement tracks statistics about the graphite service.
+This measurement will only be present if the graphite service plugin is enabled.
+
+| fieldKey | fieldType | units |
+| :---- | :---- | :---- |
+| batchesTx | integer | none |
+| batchesTxFail | integer | none |
+| bytesRx | integer | bytes |
+| connsActive | integer | none |
+| connsHandled | integer | none |
+| pointsNanFail | integer | none |
+| pointsParseFail | integer | none |
+| pointsRx | integer | none |
+| pointsTx | integer | none |
+
+### batchesTx
+
+The `batchesTx` statistic is incremented for every batch of points the graphite service successfully sends to the InfluxDB write layer.
+
+### batchesTxFail
+
+The `batchesTxFail` statistic is incremented for every batch of points the graphite service fails to send to the InfluxDB write layer.
+
+### bytesRx
+
+The `bytesRx` statistic is incremented for every byte that the collectd service successfully reads over TCP or UDP.
+
+### connsActive
+
+The `connsActive` statistic is incremented every time a TCP connection to a client is opened and decremented when the connection is closed.
+
+### connsHandled
+
+The `connsHandled` statistic is incremented every time a TCP connection to a client is opened.
+
+### pointsNanFail
+
+The `pointsNanFail` statistic is incremented any time the graphite service rejects a point whose value is _NaN_.
+
+### pointsParseFail
+
+The `pointsParseFail` statistic is incremented any time the graphite service receives a packet that could not be parsed into the graphite format.
+
+### pointsRx
+
+The `pointsRx` statistic is incremented for every point accepted by the graphite service.
+
+### pointsTx
+
+The `pointsTx` statistic is incremented for every point the graphite service successfully sends to the InfluxDB write layer.
 
 ## httpd
 
@@ -193,6 +294,94 @@ The `queryDurationNs` statistic tracks the cumulative [wall time](https://en.wik
 
 Concurrently executed writes contribute to this statistic independently.
 If one query took 1000 ns from start to finish, and another query took 500 ns from start to finish and ran before the first query finished, the statistic would increase by 1500.
+
+## opentsdb
+
+The `opentsdb` measurement tracks statistics about the opentsdb service.
+This measurement will only be present if the opentsdb service plugin is enabled.
+
+| fieldKey | fieldType | units |
+| :---- | :---- | :---- |
+| batchesTx | integer | none |
+| batchesTxFail | integer | none |
+| connsActive | integer | none |
+| connsHandled | integer | none |
+| droppedPointsInvalid | integer | none |
+| httpConnsHandled | integer | none |
+| pointsTx | integer | none |
+| tlBadFloat | integer | none |
+| tlBadLine | integer | none |
+| tlBadTag | integer | none |
+| tlBadTime | integer | none |
+| tlBytesRx | integer | bytes |
+| tlConnsActive | integer | none |
+| tlConnsHandled | integer | none |
+| tlPointsRx | integer | none |
+| tlReadErr | integer | none |
+
+### batchesTx
+
+The `batchesTx` statistic is incremented for every batch of points the opentsdb service successfully sends to the InfluxDB write layer.
+
+### batchesTxFail
+
+The `batchesTxFail` statistic is incremented for every batch of points the opentsdb service fails to send to the InfluxDB write layer.
+
+### connsActive
+
+The `connsActive` statistic is incremented every time a TCP connection to a client is opened and decremented when the connection is closed.
+
+### connsHandled
+
+The `connsHandled` statistic is incremented every time a TCP connection to a client is opened.
+
+### droppedPointsInvalid
+
+The `droppedPointsInvalid` statistic is unused and will be removed in a future version of InfluxDB.
+
+### httpConnsHandled
+
+The `httpConnsHandled` statistic is incremented for every TCP connection that is parsed as HTTP.
+
+### pointsTx
+
+The `pointsTx` statistic is incremented for every point the opentsdb service successfully sends to the InfluxDB write layer.
+
+### tlBadFloat
+
+The `tlBadFloat` statistic is incremented for every value that arrives over telnet and is rejected for not being correctly parsed as a float or converted to an InfluxDB point.
+
+### tlBadLine
+
+The `tlBadLine` statistic is incremented for every line that arrives over telnet and is rejected for not being an OpenTSDB `put`.
+
+### tlBadTag
+
+The `tlBadTag` statistic is incremented for every line that arrives over telnet and is rejected for containing a malformed tag.
+
+### tlBadTime
+
+The `tlBadTime` statistic is incremented for every line that arrives over telnet and is rejected for containing a malformed time.
+
+### tlBytesRx
+
+The `tlBytesRx` statistic is incremented for every byte that arrives over telnet.
+
+### tlConnsActive
+
+The `tlConnsActive` statistic is incremented every time a telnet connection is opened and decremented every time a telnet connection is closed.
+
+### tlConnsHandled
+
+The `tlConnsHandled` statistic is incremented every time a telnet connection is opened.
+
+### tlPointsRx
+
+The `tlPointsRx` statistic is incremented for every line that arrives over telnet.
+
+### tlReadErr
+
+The `tlReadErr` statistic is incremented every time there is an error reading telnet data from the TCP connection.
 
 ## runtime
 
@@ -399,6 +588,49 @@ The `writeErr` statistic is incremented every time a batch of points is failed t
 ### writeOk
 
 The `writeOk` statistic is incremented every time a batch of points is successfully written into the WAL.
+
+## udp
+
+The `udp` measurement tracks statistics about the udp service.
+This measurement will only be present if the udp service plugin is enabled.
+
+| fieldKey | fieldType | units |
+| :---- | :---- | :---- |
+| batchesTx | integer | none |
+| batchesTxFail | integer | none |
+| bytesRx | integer | bytes |
+| pointsParseFail | integer | none |
+| pointsRx | integer | none |
+| pointsTx | integer | none |
+| readFail | integer | none |
+
+### batchesTx
+
+The `batchesTx` statistic is incremented for every batch of points the udp service successfully sends to the InfluxDB write layer.
+
+### batchesTxFail
+
+The `batchesTxFail` statistic is incremented for every batch of points the udp service fails to send to the InfluxDB write layer.
+
+### bytesRx
+
+The `bytesRx` statistic is incremented for every byte that the udp service successfully reads via its UDP connection.
+
+### pointsParseFail
+
+The `pointsParseFail` statistic is incremented any time the udp service receives a packet that could not be parsed successfully.
+
+### pointsRx
+
+The `pointsRx` statistic is incremented for every point accepted by the udp service.
+
+### pointsTx
+
+The `pointsTx` statistic is incremented for every point the udp service successfully sends to the InfluxDB write layer.
+
+### readFail
+
+The `readFail` statistic is incremented any time the udp service fails to correctly read a packet from its UDP connection.
 
 ## write
 
