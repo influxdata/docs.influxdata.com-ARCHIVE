@@ -30,7 +30,7 @@ up-to-date configuration settings.
 
 ##### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta_1.0.2-c1.0.3_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.0.2-c1.0.3_amd64.deb
 sudo dpkg -i influxdb-meta_1.0.2-c1.0.3_amd64.deb
 ```
 
@@ -39,7 +39,7 @@ sudo dpkg -i influxdb-meta_1.0.2-c1.0.3_amd64.deb
 
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-meta-1.0.2_c1.0.3.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.0.2_c1.0.3.x86_64.rpm
 sudo yum localinstall influxdb-meta-1.0.2_c1.0.3.x86_64.rpm
 ```
 
@@ -47,12 +47,12 @@ sudo yum localinstall influxdb-meta-1.0.2_c1.0.3.x86_64.rpm
 
 ##### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data_1.0.2-c1.0.3_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.0.2-c1.0.3_amd64.deb
 sudo dpkg -i influxdb-data_1.0.2-c1.0.3_amd64.deb
 ```
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influxdb-data-1.0.2_c1.0.3.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.0.2_c1.0.3.x86_64.rpm
 sudo yum localinstall influxdb-data-1.0.2_c1.0.3.x86_64.rpm
 ```
 #### Web console
