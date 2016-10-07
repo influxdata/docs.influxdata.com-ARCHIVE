@@ -8,6 +8,14 @@ menu:
 
 # Clustering
 
+## v1.0.3 [2016-10-07]
+
+This release builds off of the 1.0.2 release of InfluxDB.  Please see the [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v102-2016-10-05) for specific changes.
+
+### Cluster-specific Bugfixes
+
+- Fix panic in hinted handoff: lastModified
+
 ## v1.0.2 [2016-10-06]
 This release builds off of the 1.0.2 release of InfluxDB.  Please see the [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v102-2016-10-05) for specific changes.
 
@@ -95,6 +103,15 @@ Backup and restore has been updated to fix issues and refine existing capabiliti
 - Drop writes if they contain field type inconsistencies
 
 # Web Console
+
+## v1.0.3 [2016-10-07]
+
+There are no new features or bugfixes in version 1.0.3.
+This release is for maintaining version parity with clustering.
+
+### Features
+
+### Bugfixes
 
 ## v1.0.2 [2016-10-06]
 
