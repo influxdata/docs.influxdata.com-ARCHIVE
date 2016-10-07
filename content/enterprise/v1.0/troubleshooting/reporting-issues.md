@@ -13,7 +13,7 @@ support team.
 
 Please include the following in your email:
 
-* the version of InfluxEnterprise, e.g. 1.0.2-c1.0.2
+* the version of InfluxEnterprise, e.g. 1.0.3-c1.0.3
 * the version of Telegraf or Kapacitor, if applicable
 * what you expected to happen
 * what did happen
