@@ -341,4 +341,7 @@ DROP USER <username>
     ```
 
 ## Authentication and authorization HTTP errors
-Requests with invalid credentials and requests by unauthorized users yield the `HTTP 401 Unauthorized` response.
+
+Requests with no authentication credentials or incorrect credentials yield the `HTTP 401 Unauthorized` response.
+
+Requests by unauthorized users yield the `HTTP 403 Forbidden` response.
