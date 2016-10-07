@@ -50,11 +50,11 @@ For metrics shared by both InfluxDB and InfluxEnterprise, please refer to the [I
 
 ## cq  
 
-See \<link to influxdb doc\>
+See [InfluxDB `_internal` documentation](/influxdb/v1.0/troubleshooting/internal_statistics).
 
 ## database  
 
-See \<link to influxdb doc\>
+See [InfluxDB `_internal` documentation](/influxdb/v1.0/troubleshooting/internal_statistics).
 
 ## hh
 
@@ -98,39 +98,39 @@ See \<link to influxdb doc\>
 
 ## httpd  
 
-See \<link to influxdb doc\>
+See [InfluxDB `_internal` documentation](/influxdb/v1.0/troubleshooting/internal_statistics).
 
 ## queryExecutor  
 
-See \<link to influxdb doc\>
+See [InfluxDB `_internal` documentation](/influxdb/v1.0/troubleshooting/internal_statistics).
 
 ## runtime  
 
-See \<link to influxdb doc\>
+See [InfluxDB `_internal` documentation](/influxdb/v1.0/troubleshooting/internal_statistics).
 
 ## shard  
 
-See \<link to influxdb doc\>
+See [InfluxDB `_internal` documentation](/influxdb/v1.0/troubleshooting/internal_statistics).
 
 ## subscriber  
 
-See \<link to influxdb doc\>
+See [InfluxDB `_internal` documentation](/influxdb/v1.0/troubleshooting/internal_statistics).
 
 ## tsm1_cache  
 
-See \<link to influxdb doc\>
+See [InfluxDB `_internal` documentation](/influxdb/v1.0/troubleshooting/internal_statistics).
 
 ## tsm1_engine  
 
-See \<link to influxdb doc\>
+See [InfluxDB `_internal` documentation](/influxdb/v1.0/troubleshooting/internal_statistics).
 
 ## tsm1_filestore  
 
-See \<link to influxdb doc\>
+See [InfluxDB `_internal` documentation](/influxdb/v1.0/troubleshooting/internal_statistics).
 
 ## tsm1_wal  
 
-See \<link to influxdb doc\>
+See [InfluxDB `_internal` documentation](/influxdb/v1.0/troubleshooting/internal_statistics).
 
 
 ## write  
