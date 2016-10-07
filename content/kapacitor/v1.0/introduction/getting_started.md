@@ -156,7 +156,7 @@ Now use the CLI tool to define the `task` and the databases and retention polici
 kapacitor define cpu_alert \
     -type stream \
     -tick cpu_alert.tick \
-    -dbrp kapacitor_example.default
+    -dbrp kapacitor_example.autogen
 ```
 
 That's it, Kapacitor now knows how to trigger our alert.
@@ -255,7 +255,7 @@ Executing: true
 Created: 04 May 16 21:01 MDT
 Modified: 04 May 16 21:04 MDT
 LastEnabled: 04 May 16 21:03 MDT
-Databases Retention Policies: ["kapacitor_example"."default"]
+Databases Retention Policies: ["kapacitor_example"."autogen"]
 TICKscript:
 stream
     // Select just the cpu measurement from our example database.
@@ -309,7 +309,7 @@ Note the following example:
 var data = stream
     |from()
         .database('telegraf')
-        .retentionPolicy('default')
+        .retentionPolicy('autogen')
         .measurement('cpu')
         // NOTE: Double quotes on server1
         .where(lambda: "host" == "server1")
@@ -324,7 +324,7 @@ We were probably searching for series where tag "host" has value "server1", so w
 var data = stream
     |from()
         .database('telegraf')
-        .retentionPolicy('default')
+        .retentionPolicy('autogen')
         .measurement('cpu')
         // NOTE: Single quotes on server1
         .where(lambda: "host" == 'server1')
@@ -449,7 +449,7 @@ This TICKscript does the same thing as the earlier stream task, but as a batch t
 batch
     |query('''
         SELECT mean(usage_idle)
-        FROM "kapacitor_example"."default"."cpu"
+        FROM "kapacitor_example"."autogen"."cpu"
     ''')
         .period(5m)
         .every(5m)
@@ -462,7 +462,7 @@ batch
 To define this task do:
 
 ```bash
-kapacitor define batch_cpu_alert -type batch -tick batch_cpu_alert.tick -dbrp kapacitor_example.default
+kapacitor define batch_cpu_alert -type batch -tick batch_cpu_alert.tick -dbrp kapacitor_example.autogen
 ```
 
 You can record the result of the query in the task like so (again, your ID will differ):
