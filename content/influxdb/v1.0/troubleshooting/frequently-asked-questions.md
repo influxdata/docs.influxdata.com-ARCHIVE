@@ -56,6 +56,7 @@ Where applicable, it links to outstanding issues on GitHub.
 * [How do I query data across measurements?](#how-do-i-query-data-across-measurements)
 * [Does the order of the timestamps matter?](#does-the-order-of-the-timestamps-matter)
 * [How do I `SELECT` data with a tag that has no value?](#how-do-i-select-data-with-a-tag-that-has-no-value)
+* [Why am I getting the error `mixing aggregate and non-aggregate queries is not supported`?](#why-am-i-getting-the-error-mixing-aggregate-and-non-aggregate-queries-is-not-supported)
 
 **Series and series cardinality**
 
@@ -813,6 +814,55 @@ name: vases
 time                   origin   priceless
 2016-07-20T18:42:00Z   8
 ```
+
+## Why am I getting the error `mixing aggregate and non-aggregate queries is not supported`?
+
+InfluxDB does not support an
+[aggregate function](/influxdb/v1.0/query_language/functions/) and a standalone
+[field key](/influxdb/v1.0/concepts/glossary/#field-key) or
+[tag key](/influxdb/v1.0/concepts/glossary/#tag-key) in the same `SELECT`
+statement.
+Aggregate functions return a single calculated value and there is no obvious
+single value to return for any unaggregated fields or keys.
+
+#### Example
+
+The `peg` measurement has two fields (`square` and `round`) and one tag
+(`force`):
+```
+name: peg
+---------
+time                   square   round   force
+2016-10-07T18:50:00Z   2        8       1
+2016-10-07T18:50:10Z   4        12      2
+2016-10-07T18:50:20Z   6        14      4
+2016-10-07T18:50:30Z   7        15      3
+```
+
+The query below includes an aggregate function and a standalone field, and
+InfluxDB returns an error.
+
+`mean("square")` returns a single aggregated value calculated from the four values
+of `square` in the `peg` measurement, and there is no obvious single field value
+to return from the four unaggregated values of the `round` field.
+
+```
+> SELECT mean("square"),"round" FROM "peg"
+ERR: error parsing query: mixing aggregate and non-aggregate queries is not supported
+```
+
+InfluxDB returns the same error if the query includes an aggregate function and
+a standalone tag.
+
+`mean("square")` returns a single aggregated value calculated from the four values
+of `square` in the `peg` measurement, and there is no obvious single tag value
+to return from the four unaggregated values of the `force` tag.
+
+```
+> SELECT mean("square"),"force" FROM "peg"
+ERR: error parsing query: mixing aggregate and non-aggregate queries is not supported
+```
+
 
 ## How can I query for series cardinality?
 
