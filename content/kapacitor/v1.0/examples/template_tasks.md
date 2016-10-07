@@ -102,7 +102,7 @@ Create a file `cpu_vars.json` with these contents.
 Now define the task using the vars for the task.
 
 ```
-kapacitor define cpu_alert -template generic_mean_alert -vars cpu_vars.json -dbrp telegraf.default
+kapacitor define cpu_alert -template generic_mean_alert -vars cpu_vars.json -dbrp telegraf.autogen
 ```
 
 The `show` command will display the `vars` associated with this task.
@@ -143,7 +143,7 @@ Create a `mem_vars.json` and use this snippet.
 ```
 
 ```
-kapacitor define mem_alert -template generic_mean_alert -vars mem_vars.json -dbrp telegraf.default
+kapacitor define mem_alert -template generic_mean_alert -vars mem_vars.json -dbrp telegraf.autogen
 ```
 
 Running `show` will display the `vars` associated with this task which are unique to our `mem_alert` task.

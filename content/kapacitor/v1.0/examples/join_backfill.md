@@ -17,7 +17,7 @@ Let's say we have two measurements:
 * `errors` -- the number of page views that had an error.
 * `views` -- the number of page views that had no errror.
 
-Both measurements exist in a database called `pages` and in the retention policy `default`.
+Both measurements exist in a database called `pages` and in the retention policy `autogen`.
 
 We want to know the percent of page views that resulted in an error.
 The process is to select both existing measurements join them and calculate the percentage.
@@ -29,7 +29,7 @@ We need to query the two measurements, `errors` and `views`.
 ```javascript
 // Get errors batch data
 var errors = batch
-    |query('SELECT sum(value) FROM "pages"."default".errors')
+    |query('SELECT sum(value) FROM "pages"."autogen".errors')
         .period(1h)
         .every(1h)
         .groupBy(time(1m), *)
@@ -37,7 +37,7 @@ var errors = batch
 
 // Get views batch data
 var views = batch
-    |query('SELECT sum(value) FROM "pages"."default".views')
+    |query('SELECT sum(value) FROM "pages"."autogen".views')
         .period(1h)
         .every(1h)
         .groupBy(time(1m), *)
@@ -91,7 +91,7 @@ Here is the complete TICKscript for the batch task:
 ```javascript
 // Get errors batch data
 var errors = batch
-    |query('SELECT sum(value) FROM "pages"."default".errors')
+    |query('SELECT sum(value) FROM "pages"."autogen".errors')
         .period(1h)
         .every(1h)
         .groupBy(time(1m), *)
@@ -99,7 +99,7 @@ var errors = batch
 
 // Get views batch data
 var views = batch
-    |query('SELECT sum(value) FROM "pages"."default".views')
+    |query('SELECT sum(value) FROM "pages"."autogen".views')
         .period(1h)
         .every(1h)
         .groupBy(time(1m), *)
@@ -129,7 +129,7 @@ Then create a recording for the past time frame we want.
 kapacitor define error_percent \
     -type batch \
     -tick error_percent.tick \
-    -dbrp pages.default
+    -dbrp pages.autogen
 kapacitor record batch -task error_percent -past 1d
 ```
 
@@ -184,4 +184,3 @@ errors
         .database('pages')
         .measurement('error_percent')
 ```
-

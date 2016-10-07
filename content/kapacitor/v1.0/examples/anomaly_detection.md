@@ -537,7 +537,7 @@ Save this script as `/tmp/kapacitor_udf/print_temps.tick` and define
 the Kapacitor task:
 
 ```bash
-kapacitor define print_temps -type stream -dbrp printer.default -tick print_temps.tick
+kapacitor define print_temps -type stream -dbrp printer.autogen -tick print_temps.tick
 ```
 
 ### Generating Test Data
@@ -568,7 +568,7 @@ bed_t = 90
 air_t = 70
 
 # Connection info
-write_url = 'http://localhost:9092/write?db=printer&rp=default&precision=s'
+write_url = 'http://localhost:9092/write?db=printer&rp=autogen&precision=s'
 measurement = 'temperatures'
 
 def temp(target, sigma):
@@ -737,5 +737,3 @@ There are a few things that we have left as exercises to the reader:
    and change the `TTestHandler` to maintain historical data and
    batches for each field instead of just the one.  That way only one
    ttest.py process needs to be running.
-
-

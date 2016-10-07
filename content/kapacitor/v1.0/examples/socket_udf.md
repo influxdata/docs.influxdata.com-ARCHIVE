@@ -182,7 +182,7 @@ func main() {
 }
 ```
 
-Now let's add in each of the methods needed to initialize the UDF. 
+Now let's add in each of the methods needed to initialize the UDF.
 These next methods implement the behavior described in Step 3 of the UDF Lifecycle above,
 where Kapacitor connects to the socket in order to query basic information about the UDF.
 
@@ -238,7 +238,7 @@ func (h *mirrorHandler) Point(p *udf.Point) error {
 Notice that the `agent` has a channel for responses, this is because your UDF can send data to Kapacitor
 at any time, so it does not need to be in a response to receive a point.
 
-As a result, we need to close the channel to let the `agent` know 
+As a result, we need to close the channel to let the `agent` know
 that we will not be sending any more data, which can be done via the `Stop` method.
 Once the `agent` calls `Stop` on the `handler`, no other methods will be called and the `agent` won't stop until
 the channel is closed.
@@ -291,7 +291,7 @@ type Accepter interface {
 }
 ```
 
-Here is a simple `accepter` that creates a new `agent` and `mirrorHandler` 
+Here is a simple `accepter` that creates a new `agent` and `mirrorHandler`
 for each new connection. Add this to the `main.go` file:
 
 ```go
@@ -490,8 +490,8 @@ func main() {
 }
 ```
 
-Run `go run main.go` to start the UDF. 
-If you get an error about the socket being in use, 
+Run `go run main.go` to start the UDF.
+If you get an error about the socket being in use,
 just delete the socket file and try running the UDF again.
 
 ## Configure Kapacitor to Talk to the UDF
@@ -530,7 +530,7 @@ stream
 Define the above alert from your terminal like so:
 
 ```sh
-kapacitor define mirror_udf_example -type stream -dbrp telegraf.default -tick path/to/above/script.tick
+kapacitor define mirror_udf_example -type stream -dbrp telegraf.autogen -tick path/to/above/script.tick
 ```
 
 Start the task:
@@ -649,5 +649,3 @@ If you want to learn more, here are a few places to start:
 * Change the mirror UDF to work on batches instead of streams.
 	This requires changing the edge type in the `Info` method as well as implementing the `BeginBatch` and `EndBatch` methods.
 * Take a look at the other [examples](https://github.com/influxdata/kapacitor/tree/master/udf/agent/examples) and modify one to do something similar to one of your existing requirements.
-
-
