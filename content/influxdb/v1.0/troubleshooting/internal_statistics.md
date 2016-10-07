@@ -337,7 +337,7 @@ The `connsHandled` statistic is incremented every time a TCP connection to a cli
 
 ### droppedPointsInvalid
 
-The `droppedPointsInvalid` statistic is unused and will be removed in a future version of InfluxDB.
+The `droppedPointsInvalid` statistic is incremented for every point that arrives over HTTP and could not be parsed into an InfluxDB point.
 
 ### httpConnsHandled
 
