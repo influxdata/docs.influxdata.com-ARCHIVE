@@ -17,8 +17,6 @@ This release builds off of the 1.0.2 release of InfluxDB.  Please see the [relea
 - Fix panic in hinted handoff: lastModified
 
 ## v1.0.2 [2016-10-06]
-
-## v1.0.2 [2016-10-06]
 This release builds off of the 1.0.2 release of InfluxDB.  Please see the [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v102-2016-10-05) for specific changes.
 
 ### Cluster-specific Features
