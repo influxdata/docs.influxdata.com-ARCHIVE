@@ -125,14 +125,11 @@ which is located at `/etc/telegraf/telegraf.conf` for default installations.
   brew install telegraf
   ```
 
-  ### Start the Telegraf service
-
-  #### OS X (via Homebrew)
-  To have launchd start telegraf at login:
+  To have launchd start telegraf at next login:
   ```
   ln -sfv /usr/local/opt/telegraf/*.plist ~/Library/LaunchAgents
   ```
-  Then to load telegraf now:
+  To load telegraf now:
   ```
   launchctl load ~/Library/LaunchAgents/homebrew.mxcl.telegraf.plist
   ```
@@ -143,7 +140,7 @@ which is located at `/etc/telegraf/telegraf.conf` for default installations.
   ```
 {{% /tab-content %}}
 {{% tab-content %}}
-  Install Telegraf as a Windows service (Windows support is still experimental):
+  Install Telegraf as a [Windows service](https://github.com/influxdata/telegraf/blob/master/docs/WINDOWS_SERVICE.md) (Windows support is still experimental):
   ```
   telegraf.exe -service install -config <path_to_config>
   ```
