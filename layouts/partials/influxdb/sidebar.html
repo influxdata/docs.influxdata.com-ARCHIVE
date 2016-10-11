@@ -4,8 +4,8 @@
 </div>
 <aside class="sidebar" id="sidebar">
 	<section class="sidebar--section">
-		<p class="sidebar--support-desc"><strong>Need immediate answers?</strong><br/>Get support from the experts</p>
-		<a class="sidebar--support-ad" href="https://influxdata.com/pricing/#product-subscriptions" target="_blank">Get Support</a>
+		<p class="sidebar--support-desc">Collect, store, and retreive time-series data in 90 seconds or less:</p>
+		<a class="sidebar--support-ad" href="https://cloud.influxdata.com/" target="_blank">Try InfluxCloud</a>
 	</section>
 	{{ $currentNode := . }}
 	{{ if (eq $currentNode.RelPermalink "/influxdb/") }}
@@ -32,7 +32,7 @@
 					{{ if .HasChildren }}
 						{{ range .Children }}
                         {{ if in .URL "internal_statistics" }}
-                    
+
                         {{ else }}
 						  <a class="sidebar--page{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}" {{ if eq .Identifier "download" }} target="blank" {{ end }}>{{ .Name }}</a>
 						{{ end }}
