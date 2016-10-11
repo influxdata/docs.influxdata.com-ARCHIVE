@@ -37,11 +37,11 @@ Add this configuration section to the end of your Kapacitor configuration.
     enabled = true
     bind-address = ":9100"
     database = "game"
-    retention-policy = "default"
+    retention-policy = "autogen"
 ```
 
 This configuration tells Kapacitor to listen on port `9100` for UDP packets in the line protocol format.
-It will scope in incoming data to be in the `game.default` database and retention policy.
+It will scope in incoming data to be in the `game.autogen` database and retention policy.
 Start Kapacitor running with that added to the configuration.
 
 Here is a simple bash script to generate random score data so we can test it without
@@ -261,7 +261,7 @@ max
 Define and enable our task to see it in action:
 
 ```bash
-kapacitor define top_scores -tick top_scores.tick -type stream -dbrp game.default
+kapacitor define top_scores -tick top_scores.tick -type stream -dbrp game.autogen
 kapacitor enable top_scores
 ```
 
@@ -289,4 +289,3 @@ curl \
 Great!
 The hard work is done.
 All that is left is to configure the game server to send score updates to Kapacitor and update the spectator dashboard to pull scores from Kapacitor.
-

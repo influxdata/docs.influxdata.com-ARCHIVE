@@ -38,7 +38,7 @@ stream
         .as('usage_idle')
     |influxDBOut()
         .database('telegraf')
-        .retentionPolicy('default')
+        .retentionPolicy('autogen')
         .measurement('mean_cpu_idle')
         .precision('s')
 ```
@@ -47,13 +47,13 @@ The same thing can also be done as a batch task in Kapacitor.
 
 ```javascript
 batch
-    |query('SELECT mean(usage_idle) as usage_idle FROM "telegraf"."default".cpu')
+    |query('SELECT mean(usage_idle) as usage_idle FROM "telegraf"."autogen".cpu')
         .period(5m)
         .every(5m)
         .groupBy(*)
     |influxDBOut()
         .database('telegraf')
-        .retentionPolicy('default')
+        .retentionPolicy('autogen')
         .measurement('mean_cpu_idle')
         .precision('s')
 ```
@@ -101,7 +101,7 @@ If you are using a batch task it is still possible for a point to arrive late an
 Create a continuous query to down sample across retention policies.
 
 ```
-CREATE CONTINUOUS QUERY cpu_idle_median ON telegraf BEGIN SELECT median("usage_idle") as usage_idle INTO "telegraf"."sampled_5m"."median_cpu_idle" FROM "telegraf"."default"."cpu" GROUP BY time(5m),* END
+CREATE CONTINUOUS QUERY cpu_idle_median ON telegraf BEGIN SELECT median("usage_idle") as usage_idle INTO "telegraf"."sampled_5m"."median_cpu_idle" FROM "telegraf"."autogen"."cpu" GROUP BY time(5m),* END
 ```
 
 The stream TICKscript:
@@ -110,7 +110,7 @@ The stream TICKscript:
 stream
     |from()
         .database('telegraf')
-        .retentionPolicy('default')
+        .retentionPolicy('autogen')
         .measurement('cpu')
         .groupBy(*)
     |window()
@@ -130,7 +130,7 @@ And the batch TICKscript:
 
 ```javascript
 batch
-    |query('SELECT median(usage_idle) as usage_idle FROM "telegraf"."default"."cpu"')
+    |query('SELECT median(usage_idle) as usage_idle FROM "telegraf"."autogen"."cpu"')
         .period(5m)
         .every(5m)
         .groupBy(*)
@@ -148,6 +148,3 @@ Kapacitor is a powerful tool, if you need more power use it.
 If not keep using CQs until you do.
 For more information and help writing TICKscripts from InfluxQL queries take a looks at these [docs](https://docs.influxdata.com/kapacitor/latest/nodes/influx_q_l_node/) on the InfluxQL node in Kapacitor.
 Every function available in the InfluxDB query language is available in Kapacitor, so you can convert any query into a Kapacitor TICKscript.
-
-
-
