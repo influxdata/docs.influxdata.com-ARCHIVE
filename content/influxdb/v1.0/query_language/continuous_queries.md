@@ -390,7 +390,7 @@ END
 
 ##### The cq_query
 <br>
-See [ Description of Basic Syntax](/influxdb/v1.0/query_language/cq_revised/#description-of-basic-syntax).
+See [ Description of Basic Syntax](/influxdb/v1.0/query_language/continuous_queries/#description-of-basic-syntax).
 
 ##### Schedule and Coverage
 <br>
@@ -414,7 +414,7 @@ Both the `EVERY` interval and the `FOR` interval accept
 The `RESAMPLE` clause works with either or both of the `EVERY` and `FOR` intervals
 configured.
 CQs default to the relevant
-[basic syntax behavior](/influxdb/v1.0/query_language/cq_revised/#description-of-basic-syntax)
+[basic syntax behavior](/influxdb/v1.0/query_language/continuous_queries/#description-of-basic-syntax)
 if the `EVERY` interval or `FOR` interval is not provided (see the first issue in
 [Common Issues with Advanced Syntax](/influxdb/v1.0/query_language/continuous_queries/#common-issues-with-advanced-syntax)
 for an anomalistic case).
