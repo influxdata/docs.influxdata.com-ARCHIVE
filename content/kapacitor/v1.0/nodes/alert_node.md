@@ -1225,7 +1225,7 @@ Example:
            .slack()
 ```
 
-The abvove usage will only trigger alerts to slack on state changes or at least every 10 minutes.
+The above usage will only trigger alerts to slack on state changes or at least every 10 minutes.
 
 
 
