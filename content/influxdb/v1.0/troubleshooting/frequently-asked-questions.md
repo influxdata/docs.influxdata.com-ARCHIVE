@@ -846,7 +846,7 @@ InfluxDB does not support an
 [tag key](/influxdb/v1.0/concepts/glossary/#tag-key) in the same `SELECT`
 statement.
 Aggregate functions return a single calculated value and there is no obvious
-single value to return for any unaggregated fields or keys.
+single value to return for any unaggregated fields or tags.
 
 #### Example
 
