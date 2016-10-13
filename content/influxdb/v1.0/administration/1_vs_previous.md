@@ -10,6 +10,8 @@ menu:
     parent: administration
 ---
 
+If you're using version 0.13, please see [Differences Between InfluxDB 1.0 and 0.13](/influxdb/v1.0/administration/013_vs_1/).
+
 Users looking to upgrade to InfluxDB 1.0 from versions prior to 0.13 should view the following pages in our documentation.
 
 ##### 0.12 users:
