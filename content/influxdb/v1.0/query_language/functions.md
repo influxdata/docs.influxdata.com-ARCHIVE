@@ -18,8 +18,8 @@ Use InfluxQL functions to aggregate, select, transform, and predict data.
 | [MEDIAN()](#median)  | [MIN()](#min)  |  [FLOOR()](#floor)
 | [MODE()](#mode) | [PERCENTILE()](#percentile) | [HISTOGRAM()](#histogram)
 | [SPREAD()](#spread)  | [TOP()](#top) | [MOVING_AVERAGE()](#moving-average) |
-| [SUM()](#sum)  |  | [NON_NEGATIVE_DERIVATIVE()](#non-negative-derivative) |
-| [STDDEV()](#stddev)  |  |  |
+| [STDDEV()](#stddev)  |  | [NON_NEGATIVE_DERIVATIVE()](#non-negative-derivative) |
+| [SUM()](#sum)  |  |  |
 
 
 Useful InfluxQL for functions:  
