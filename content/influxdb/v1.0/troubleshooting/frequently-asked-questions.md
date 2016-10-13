@@ -14,7 +14,6 @@ Where applicable, it links to outstanding issues on GitHub.
 
 **Administration**  
 
-* [Why is `CREATE USER` returning `error parsing query`?](#why-is-create-user-returning-error-parsing-query)
 * [How do I include a single quote in a password?](#how-do-i-include-a-single-quote-in-a-password)  
 * [How can I identify my version of InfluxDB?](#how-can-i-identify-my-version-of-influxdb)  
 * [What is the relationship between shard group durations and retention policies?](#what-is-the-relationship-between-shard-group-durations-and-retention-policies)
@@ -45,7 +44,6 @@ Where applicable, it links to outstanding issues on GitHub.
 * [What determines the time intervals returned by `GROUP BY time()` queries?](#what-determines-the-time-intervals-returned-by-group-by-time-queries)  
 * [Why don't my queries return timestamps that occur after `now()`?](#why-don-t-my-queries-return-timestamps-that-occur-after-now)  
 * [Can I perform mathematical operations against timestamps?](#can-i-perform-mathematical-operations-against-timestamps)  
-* [Why am I getting an `expected identifier error`?](#why-am-i-getting-an-expected-identifier-error)
 * [Can I identify write precision from returned timestamps?](#can-i-identify-write-precision-from-returned-timestamps)  
 * [When should I single quote and when should I double quote in queries?](#when-should-i-single-quote-and-when-should-i-double-quote-in-queries)  
 * [Why am I missing data after creating a new `DEFAULT` retention policy?](#why-am-i-missing-data-after-creating-a-new-default-retention-policy)
@@ -56,7 +54,6 @@ Where applicable, it links to outstanding issues on GitHub.
 * [How do I query data across measurements?](#how-do-i-query-data-across-measurements)
 * [Does the order of the timestamps matter?](#does-the-order-of-the-timestamps-matter)
 * [How do I `SELECT` data with a tag that has no value?](#how-do-i-select-data-with-a-tag-that-has-no-value)
-* [Why am I getting the error `mixing aggregate and non-aggregate queries is not supported`?](#why-am-i-getting-the-error-mixing-aggregate-and-non-aggregate-queries-is-not-supported)
 
 **Series and series cardinality**
 
@@ -72,12 +69,6 @@ Where applicable, it links to outstanding issues on GitHub.
 * [What words and characters should I avoid when writing data to InfluxDB?](#what-words-and-characters-should-i-avoid-when-writing-data-to-influxdb)  
 * [When should I single quote and when should I double quote when writing data?](#when-should-i-single-quote-and-when-should-i-double-quote-when-writing-data)  
 * [Does the precision of the timestamp matter?](#does-the-precision-of-the-timestamp-matter)
-
-
-## Why is CREATE USER returning error parsing query?
-In most cases, the query is missing single quotes around the password string.
-The `CREATE USER <user> WITH PASSWORD '<password>'` query requires single quotation marks around the password string.
-Note that you should not include the single quotes when authenticating requests.
 
 ## How do I include a single quote in a password?
 Escape the single quote with a backslash (`\`) both when creating the password
@@ -550,29 +541,6 @@ There is limited support for using InfluxQL functions against timestamp values.
 The function [ELAPSED()](/influxdb/v1.0/query_language/functions/#elapsed)
 returns the difference between subsequent timestamps in a single field.
 
-## Why am I getting an `expected identifier error`?
-Receiving the error `ERR: error parsing query: found [WORD], expected identifier[, string, number, bool]` is often a gentle reminder that you forgot to include something in your query, as is the case in the following examples:
-
-* `SELECT FROM "logic" WHERE "rational" = 5` should be `SELECT "something" FROM "logic" WHERE "rational" = 5`  
-* `SELECT * FROM WHERE "rational" = 5` should be `SELECT * FROM "logic" WHERE "rational" = 5`
-
-In other cases, your query seems complete but you receive the same error:
-
-* `SELECT field FROM why`  
-* `SELECT * FROM why WHERE tag = '1'`  
-* `SELECT * FROM grant WHERE why = 9`
-
-In the last three queries, and in most unexpected `expected identifier` errors, at least one of the identifiers in the query is an InfluxQL keyword.
-Identifiers are database names, retention policy names, user names, measurement names, tag keys, and field keys.
-To successfully query data that use a keyword as an identifier enclose that identifier in double quotes, so the examples above become:
-
-* `SELECT "field" FROM why`  
-* `SELECT * FROM why WHERE "tag" = '1'`  
-* `SELECT * FROM "grant" WHERE why = 9`
-
-While using double quotes is an acceptable workaround, we recommend that you avoid using InfluxQL keywords as identifiers for simplicity's sake.
-The InfluxQL documentation has a comprehensive list of all [InfluxQL keywords](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords).
-
 ## Can I identify write precision from returned timestamps?
 InfluxDB stores all timestamps as nanosecond values regardless of the write precision supplied.
 It is important to note that when returning query results, the database silently drops trailing zeros from timestamps which obscures the initial write precision.
@@ -838,55 +806,6 @@ time                   origin   priceless
 2016-07-20T18:42:00Z   8
 ```
 
-## Why am I getting the error `mixing aggregate and non-aggregate queries is not supported`?
-
-InfluxDB does not support an
-[aggregate function](/influxdb/v1.0/query_language/functions/) and a standalone
-[field key](/influxdb/v1.0/concepts/glossary/#field-key) or
-[tag key](/influxdb/v1.0/concepts/glossary/#tag-key) in the same `SELECT`
-statement.
-Aggregate functions return a single calculated value and there is no obvious
-single value to return for any unaggregated fields or tags.
-
-#### Example
-
-The `peg` measurement has two fields (`square` and `round`) and one tag
-(`force`):
-```
-name: peg
----------
-time                   square   round   force
-2016-10-07T18:50:00Z   2        8       1
-2016-10-07T18:50:10Z   4        12      2
-2016-10-07T18:50:20Z   6        14      4
-2016-10-07T18:50:30Z   7        15      3
-```
-
-The query below includes an aggregate function and a standalone field, and
-InfluxDB returns an error.
-
-`mean("square")` returns a single aggregated value calculated from the four values
-of `square` in the `peg` measurement, and there is no obvious single field value
-to return from the four unaggregated values of the `round` field.
-
-```
-> SELECT mean("square"),"round" FROM "peg"
-ERR: error parsing query: mixing aggregate and non-aggregate queries is not supported
-```
-
-InfluxDB returns the same error if the query includes an aggregate function and
-a standalone tag.
-
-`mean("square")` returns a single aggregated value calculated from the four values
-of `square` in the `peg` measurement, and there is no obvious single tag value
-to return from the four unaggregated values of the `force` tag.
-
-```
-> SELECT mean("square"),"force" FROM "peg"
-ERR: error parsing query: mixing aggregate and non-aggregate queries is not supported
-```
-
-
 ## How can I query for series cardinality?
 
 The following queries return [series cardinality](/influxdb/v1.0/concepts/glossary/#series-cardinality):
@@ -986,7 +905,7 @@ Note that Windows uses carriage return and line feed (`\r\n`) as the newline cha
 
 ## What words and characters should I avoid when writing data to InfluxDB?
 If you use any of the [InfluxQL keywords](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords) as an identifier you will need to double quote that identifier in every query.
-This can lead to [non-intuitive errors](#why-am-i-getting-an-expected-identifier-error).
+This can lead to [non-intuitive errors](/influxdb/v1.0/troubleshooting/errors/#error-parsing-query-found-expected-identifier-at-line-char).
 Identifiers are database names, retention policy names, user names, measurement names, tag keys, and field keys.
 
 To keep regular expressions and quoting simple, avoid using the following characters in identifiers:  

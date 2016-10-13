@@ -77,7 +77,7 @@ See [InfluxQL Functions](/influxdb/v1.0/query_language/functions/) for a complet
 Related entries: [aggregation](/influxdb/v1.0/concepts/glossary/#aggregation), [selector](/influxdb/v1.0/concepts/glossary/#selector), [transformation](/influxdb/v1.0/concepts/glossary/#transformation)  
 
 ## identifier
-Tokens which refer to database names, retention policy names, user names, measurement names, tag keys, and field keys.
+Tokens which refer to database names, retention policy names, continuous query names, user names, measurement names, tag keys, and field keys.
 See [Query Language Specification](/influxdb/v1.0/query_language/spec/#identifiers).
 
 Related entries: [database](/influxdb/v1.0/concepts/glossary/#database), [field key](/influxdb/v1.0/concepts/glossary/#field-key), [measurement](/influxdb/v1.0/concepts/glossary/#measurement), [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp), [tag key](/influxdb/v1.0/concepts/glossary/#tag-key), [user](/influxdb/v1.0/concepts/glossary/#user)

@@ -222,7 +222,7 @@ Line Protocol accepts
 as [identifier](/influxdb/v1.0/concepts/glossary/#identifier) names.
 In general, we recommend avoiding using InfluxQL keywords in your schema as
 it can cause
-[confusion](/influxdb/v1.0/troubleshooting/frequently-asked-questions/#why-am-i-getting-an-expected-identifier-error) when querying the data.
+[confusion](/influxdb/v1.0/troubleshooting/errors/#error-parsing-query-found-expected-identifier-at-line-char) when querying the data.
 
 ## Line Protocol in Practice
 
