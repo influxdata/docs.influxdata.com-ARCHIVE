@@ -86,3 +86,42 @@ $(function() {
 		});
 	});
 });
+
+
+// Randomize advertisement content on page load
+// Ad content stored in object
+
+$advertContent = [
+  {
+    ctaText: "Try InfluxCloud",
+    ctaLink: "https://cloud.influxdata.com/",
+    advertText: "Collect, store, and retrieve time-series data in one minute.",
+    style: "support-ad--cloud",
+  },
+  {
+    ctaText: "Try InfluxEnterprise",
+    ctaLink: "https://portal.influxdata.com/",
+    advertText: "Unlock powerful insights that help you delight your customers.",
+    style: "support-ad--enterprise",
+  },
+]
+$(document).on('ready', function(){
+  $numAdverts = $advertContent.length;
+  $randomizer = Math.floor(Math.random() * $numAdverts);
+  $contentToInject = $advertContent[$randomizer];
+
+  $ctaButton = $('<a />')
+  	.addClass('sidebar--support-ad--cta')
+  	.attr({
+  		'href': $contentToInject.ctaLink,
+  		'target': '_blank'
+  	})
+  	.text($contentToInject.ctaText);
+  $advertText = $('<p />')
+  	.addClass('sidebar--support-ad--desc')
+  	.text($contentToInject.advertText);
+
+  $('#support-ad')
+  	.addClass($contentToInject.style)
+  	.append($advertText,$ctaButton);
+});
