@@ -10,8 +10,7 @@ This page documents parsing errors, their descriptions, and, where applicable,
 common resolutions.
 
 <dt>
-**Disclaimer:** This document is under development and does not contain a
-comprehensive list of all InfluxDB errors.
+**Disclaimer:** This document does not contain an exhaustive list of all possible InfluxDB errors.
 </dt>
 
 ## error parsing query: found < >, expected identifier at line < >, char < >
@@ -19,8 +18,9 @@ comprehensive list of all InfluxDB errors.
 ### InfluxQL Syntax
 The `expected identifier` error occurs when InfluxDB anticipates an identifier
 in a query but doesn't find it.
-Identifiers are tokens that refer to database names, retention policy names,
-continuous query names, user names, measurement names, tag keys, and field keys.
+Identifiers are tokens that refer to continuous query names, database names,
+field keys, measurement names, retention policy names, subscription names,
+tag keys, and user names.
 The error is often a gentle reminder to double-check your query's syntax.
 
 **Examples**
@@ -44,7 +44,7 @@ Query 2 is missing a measurement name between `FROM` and `WHERE`.
 In some cases the `expected identifier` error occurs when one of the
 [identifiers](/influxdb/v1.0/concepts/glossary/#identifier) in the query is an
 [InfluxQL Keyword](/influxdb/v1.0/query_language/spec/#keywords).
-To successfully query an identifier that's also a keyword enclose that
+To successfully query an identifier that's also a keyword, enclose that
 identifier in double quotes.
 
 **Examples**
