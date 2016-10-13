@@ -19,6 +19,11 @@ a few examples showing good and problematic query responses for some or all of t
 These are the metrics that are unique to InfluxEnterprise. 
 For metrics shared by both InfluxDB and InfluxEnterprise, please refer to the [InfluxDB `_internal` documentation](/influxdb/v1.0/troubleshooting/internal_statistics).
 
+In a cluster, each measurement in `_internal` has three tags:
+* `clusterID` - the UUID of the cluster recording the `_internal` metrics
+* `hostname` - the hostname of the node reporting the metrics
+* `nodeID` - the hostname and port of the node reporting the metrics
+
 ## cluster
 
 The `cluster` measurement tracks statistics related to the clustering features of the data nodes in InfluxEnterprise.
