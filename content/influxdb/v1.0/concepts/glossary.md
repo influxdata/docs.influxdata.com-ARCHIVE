@@ -216,17 +216,17 @@ Related entries: [node](/influxdb/v1.0/concepts/glossary/#node)
 
 ## shard
 
-A shard is represented by a TSM file on disk.
+A shard contains the actual encoded and compressed data, and is represented by a TSM file on disk.
 Every shard belongs to one and only one shard group.
 Multiple shards may exist in a single shard group.
 Each shard contains a specific set of series.
-All points falling on a given series in the relevant time range will be stored in the same shard on disk.
+All points falling on a given series in a given shard group will be stored in the same shard (TSM file) on disk.
 
 Related entries: [series](/influxdb/v1.0/concepts/glossary/#series), [shard duration](/influxdb/v1.0/concepts/glossary/#shard-duration), [shard group](/influxdb/v1.0/concepts/glossary/#shard-group), [tsm](/influxdb/v1.0/concepts/glossary/#tsm)
 
 ## shard duration
 
-Every shard group has a single fixed duration for all shards in the group.
+The shard duration determines how much time each shard group spans.
 The specific interval is determined by the `SHARD DURATION` of the retention policy.
 See [Retention Policy management](/influxdb/v1.0/query_language/database_management/#retention-policy-management) for more information.
 
@@ -236,13 +236,11 @@ Related entries: [database](/influxdb/v1.0/concepts/glossary/#database), [retent
 
 ## shard group
 
-Data on disk are organized into shard groups, logical containers organized by time and retention policy.
+Shard groups are logical containers for shards.
+Shard groups are organized by time and retention policy.
 Every retention policy that contains data has at least one associated shard group.
 A given shard group contains all shards with data for the interval covered by the shard group.
 The interval spanned by each shard group is the shard duration.
-See [Retention Policy management](/influxdb/v1.0/query_language/database_management/#retention-policy-management) for more information.
-
-Shard groups are logical containers for shards, which are actual files on disk.
 
 Related entries: [database](/influxdb/v1.0/concepts/glossary/#database), [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy), [series](/influxdb/v1.0/concepts/glossary/#series), [shard](/influxdb/v1.0/concepts/glossary/#shard), [shard duration](/influxdb/v1.0/concepts/glossary/#shard-duration)
 
