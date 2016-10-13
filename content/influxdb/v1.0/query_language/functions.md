@@ -18,8 +18,8 @@ Use InfluxQL functions to aggregate, select, transform, and predict data.
 | [MEDIAN()](#median)  | [MIN()](#min)  |  [FLOOR()](#floor)
 | [MODE()](#mode) | [PERCENTILE()](#percentile) | [HISTOGRAM()](#histogram)
 | [SPREAD()](#spread)  | [TOP()](#top) | [MOVING_AVERAGE()](#moving-average) |
-| [SUM()](#sum)  |  | [NON_NEGATIVE_DERIVATIVE()](#non-negative-derivative) |
-|   |  | [STDDEV()](#stddev)
+| [STDDEV()](#stddev)  |  | [NON_NEGATIVE_DERIVATIVE()](#non-negative-derivative) |
+| [SUM()](#sum)  |  |  |
 
 
 Useful InfluxQL for functions:  
@@ -465,6 +465,60 @@ name: h2o_feet
 --------------
 time                   sum_water_level
 1970-01-01T00:00:00Z   67777.66900000005
+```
+
+## STDDEV()
+Returns the standard deviation of the values in a single [field](/influxdb/v1.0/concepts/glossary/#field).
+The field must be of type int64 or float64.
+```
+SELECT STDDEV(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+```
+
+Examples:
+
+* Calculate the standard deviation for the `water_level` field in the measurement `h2o_feet`:
+
+```
+> SELECT STDDEV("water_level") FROM "h2o_feet"
+name: h2o_feet
+--------------
+time			               stddev
+1970-01-01T00:00:00Z	 2.279144584196145
+```
+
+> **Notes:**
+>
+* Aggregation functions returns epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
+* Executing `stddev()` on the same set of float64 points may yield slightly
+different results.
+InfluxDB does not sort points before it applies the function which results in
+those small discrepancies.
+
+* Calculate the standard deviation for the `water_level` field between August 18, 2015 at midnight and September 18, 2015 at noon grouped at one week intervals and by the `location` tag:
+
+```
+> SELECT STDDEV("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' and time < '2015-09-18T12:06:00Z' GROUP BY time(1w), "location"
+name: h2o_feet
+tags: location = coyote_creek
+time			               stddev
+----			               ------
+2015-08-13T00:00:00Z	 2.2437263080193985
+2015-08-20T00:00:00Z	 2.121276150144719
+2015-08-27T00:00:00Z	 3.0416122170786215
+2015-09-03T00:00:00Z	 2.5348065025435207
+2015-09-10T00:00:00Z	 2.584003954882673
+2015-09-17T00:00:00Z	 2.2587514836274414
+
+name: h2o_feet
+tags: location = santa_monica
+time			               stddev
+----			               ------
+2015-08-13T00:00:00Z	 1.11156344587553
+2015-08-20T00:00:00Z	 1.0909849279082366
+2015-08-27T00:00:00Z	 1.9870116180096962
+2015-09-03T00:00:00Z	 1.3516778450902067
+2015-09-10T00:00:00Z	 1.4960573811500588
+2015-09-17T00:00:00Z	 1.075701669442093
 ```
 
 # Selectors
@@ -1444,60 +1498,6 @@ SELECT NON_NEGATIVE_DERIVATIVE(AGGREGATION_FUNCTION(<field_key>),[<unit>]) FROM 
 
 See [`DERIVATIVE()`](/influxdb/v1.0/query_language/functions/#derivative) for example queries.
 All query results are the same for `DERIVATIVE()` and `NON_NEGATIVE_DERIVATIVE` except that `NON_NEGATIVE_DERIVATIVE()` returns only the positive values.
-
-## STDDEV()
-Returns the standard deviation of the values in a single [field](/influxdb/v1.0/concepts/glossary/#field).
-The field must be of type int64 or float64.
-```
-SELECT STDDEV(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
-```
-
-Examples:
-
-* Calculate the standard deviation for the `water_level` field in the measurement `h2o_feet`:
-
-```
-> SELECT STDDEV("water_level") FROM "h2o_feet"
-name: h2o_feet
---------------
-time			               stddev
-1970-01-01T00:00:00Z	 2.279144584196145
-```
-
-> **Notes:**
->
-* `stddev()` returns epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then it returns the lower bound as the timestamp.
-* Executing `stddev()` on the same set of float64 points may yield slightly
-different results.
-InfluxDB does not sort points before it applies the function which results in
-those small discrepancies.
-
-* Calculate the standard deviation for the `water_level` field between August 18, 2015 at midnight and September 18, 2015 at noon grouped at one week intervals and by the `location` tag:
-
-```
-> SELECT STDDEV("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' and time < '2015-09-18T12:06:00Z' GROUP BY time(1w), "location"
-name: h2o_feet
-tags: location = coyote_creek
-time			               stddev
-----			               ------
-2015-08-13T00:00:00Z	 2.2437263080193985
-2015-08-20T00:00:00Z	 2.121276150144719
-2015-08-27T00:00:00Z	 3.0416122170786215
-2015-09-03T00:00:00Z	 2.5348065025435207
-2015-09-10T00:00:00Z	 2.584003954882673
-2015-09-17T00:00:00Z	 2.2587514836274414
-
-name: h2o_feet
-tags: location = santa_monica
-time			               stddev
-----			               ------
-2015-08-13T00:00:00Z	 1.11156344587553
-2015-08-20T00:00:00Z	 1.0909849279082366
-2015-08-27T00:00:00Z	 1.9870116180096962
-2015-09-03T00:00:00Z	 1.3516778450902067
-2015-09-10T00:00:00Z	 1.4960573811500588
-2015-09-17T00:00:00Z	 1.075701669442093
-```
 
 ## Include multiple functions in a single query
 Separate multiple functions in one query with a `,`.
