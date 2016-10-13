@@ -83,6 +83,8 @@ See [InfluxDB `_internal` documentation](/influxdb/v1.0/troubleshooting/internal
 ## hh
 
 The `hh` measurement tracks events resulting in new hinted handoff processors for remote nodes.
+The `hh` measurement has one additional tag:
+* `path` - the path to the durable hinted handoff queue on disk
 
 | fieldKey | fieldType | units |
 | :---- | :---- | :---- |
