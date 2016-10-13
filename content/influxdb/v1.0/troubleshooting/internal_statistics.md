@@ -22,6 +22,9 @@ TODO: a few examples showing good and problematic query responses for some or al
 
 # Metric definitions
 
+Every measurement in `_internal` has one tag:
+* `hostname` - the hostname of the instance reporting the metrics
+
 ## collectd
 
 The `collectd` measurement tracks statistics about the collectd service.
