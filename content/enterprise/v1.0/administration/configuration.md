@@ -48,7 +48,10 @@ influxd config > /etc/influxdb/influxdb-generated.conf
 ```
 
 Preserve custom settings from older configuration files when generating a new
-configuration file with the `-config` option. For example:
+configuration file with the `-config` option.
+For example, this overwrites any default configuration settings in the output
+file (`/etc/influxdb/influxdb.conf.new`) with the configuration settings from
+the file (`/etc/influxdb/influxdb.conf.old`) passed to `-config`:
 
 ```
 influxd config -config /etc/influxdb/influxdb.conf.old > /etc/influxdb/influxdb.conf.new
@@ -56,31 +59,32 @@ influxd config -config /etc/influxdb/influxdb.conf.old > /etc/influxdb/influxdb.
 
 #### Launch the process with a configuration file
 
-There are two ways to launch the meta process or the data process with your
+There are two ways to launch the meta or data processes using your customized
 configuration file.
 
 * Point the process to the desired configuration file with the `-config` option.
 
-    Start the meta node process with `/etc/influxdb/influxdb-meta-generate.conf`:
+    To start the meta node process with `/etc/influxdb/influxdb-meta-generate.conf`:
 
-        influxd-meta -config `/etc/influxdb/influxdb-meta-generate.conf`
+        influxd-meta -config /etc/influxdb/influxdb-meta-generate.conf
 
-    Start the data node process with `/etc/influxdb/influxdb-generated.conf`
+    To start the data node process with `/etc/influxdb/influxdb-generated.conf`:
 
         influxd -config /etc/influxdb/influxdb-generated.conf
 
 
 * Set the environment variables `INFLUXDB_CONFIG_PATH` and `META_CONFIG_PATH`
-to the path of your configuration file and start the process. For example:
+to the path of your configuration file and start the process.
 
+    To set the `INFLUXDB_CONFIG_PATH` environment variable and launch the data
+    process using `INFLUXDB_CONFIG_PATH` for the configuration file path:
+
+        INFLUXDB_CONFIG_PATH=/root/influxdb.generated.conf
         echo $INFLUXDB_CONFIG_PATH
-        /root/influxdb.generated.conf        
-
-
+        /root/influxdb.generated.conf
         influxd
 
-The meta and data processes first check for the `-config` option and then for
-the environment variable.
+If set, the command line `-config` path overrides any environment variable path.
 If you do not supply a configuration file, InfluxDB uses an internal default
 configuration (equivalent to the output of `influxd config` and `influxd-meta
 config`).
@@ -89,7 +93,8 @@ update.
 
 ### Environment variables
 
-Set any configuration with an environment variable.
+All configuration options can be specified in the configuration file or in an
+environment variable.
 The environment variable overrides the equivalent option in the configuration
 file.
 
@@ -97,10 +102,13 @@ In the sections below we name the relevant environment variable in the
 description for the configuration setting.
 
 > **Note:**
-To set any configuration that allows multiple configurations (such as collectd,
-Graphite, etc), the system expects them to be prefixed by number.
-For example, the first set of InfluxDB's Graphite environment variables would
-look like this:
+To set or override settings in a config section that allows multiple
+configurations (any section with [[`double_brackets`]] in the header supports
+multiple configurations), the desired configuration must be specified by ordinal
+number.
+For example, for the first set of `[[graphite]]` environment variables,
+prefix the configuration setting name in the environment variable with the
+relevant position number (in this case: `0`):
 >
     INFLUXDB_GRAPHITE_0_BATCH_PENDING
     INFLUXDB_GRAPHITE_0_BATCH_SIZE
@@ -116,7 +124,9 @@ look like this:
     INFLUXDB_GRAPHITE_0_TEMPLATES
     INFLUXDB_GRAPHITE_0_UDP_READ_BUFFER
 
-
+For the Nth Graphite configuration in the configuration file, the relevant
+environment variables would be of the form `INFLUXDB_GRAPHITE_(N-1)_BATCH_PENDING`.
+For each section of the configuration file the numbering restarts at zero.
 <br>
 <br>
 # Meta Node Configuration
@@ -142,55 +152,45 @@ Setting this option to `true` will disable reporting.
 ### hostname = ""
 
 The hostname of the [meta node](/enterprise/v1.0/concepts/glossary/#meta-node).
+This must be resolvable and reachable by all other members of the cluster.
 
 ## [enterprise]
 
-Controls the parameters for the data node's registration with the web console
-and [https://portal.influxdata.com](https://portal.influxdata.com).
+The `[enterprise]` section contains the parameters for the meta node's
+registration with the InfluxEnterprise Web Console and the
+[InfluxEnterprise License Portal](https://portal.influxdata.com/).
 
 ###  registration-enabled = true
 
 Set to `true` to enable registration with the InfluxEnterprise web console.
-Setting `registration-enabled` to `true` in the meta node configuration file
-is required if using the web console with an InfluxEnterprise cluster.
+All meta nodes must have `registration-enabled` set to `true` for the
+InfluxEnterprise Web Console to function properly.
 
 Environment variable: `META_ENTERPRISE_REGISTRATION_ENABLED`
 
 ###  registration-server-url = "http://IP_or_hostname:3000"
 
 The full URL of the server that runs the InfluxEnterprise web console.
-`registration-server-url` requires the protocol, IP or hostname, and port.
-This setting is required if using the web console with an InfluxEnterprise
-cluster.
+All meta nodes must have `registration-server-url` set to the full protocol,
+hostname, and port for the InfluxEnterprise Web Console to function properly.
 
 Environment variable: `META_ENTERPRISE_REGISTRATION_SERVER_URL`
 
 ###  license-key = ""
 
 The license key that you created on [InfluxPortal](https://portal.influxdata.com).
-The license key registers with
-[https://portal.influxdata.com](https://portal.influxdata.com) and allows the
-meta process to run.
-See the [`license-path` setting](#license-path) if your server cannot
-communicate with [https://portal.influxdata.com](https://portal.influxdata.com).
-
-Either the `license-key` setting or the `license-path` setting is required when
-installing the cluster and web console.
-The `license-key` and `license-path` settings are mutually exclusive; one
-must remain set to the empty string.
+The meta node transmits the license key to [portal.influxdata.com](https://portal.influxdata.com) over port 80 or port 443 and receives a temporary JSON license file in return.
+The server caches the license file locally.
+You must use the [`license-path` setting](#license-path) if your server cannot communicate with [https://portal.influxdata.com](https://portal.influxdata.com).
 
 Environment variable: `META_ENTERPRISE_LICENSE_KEY`
 
 ###  license-path = ""
 
-The local path to the JSON license file that you received from InfluxData.
-Contact support to receive a license file.
-The license file allows the meta process to run.
-
-Either the `license-key` setting or the `license-path` setting is required when
-installing the cluster and web console.
-The `license-key` and `license-path` settings are mutually exclusive; one
-must remain set to the empty string.
+The local path to the permanent JSON license file that you received from InfluxData.
+Permanent license files are not available for subscribers on a monthly plan.
+If you are a monthly subscriber, your cluster must use the `license-key` setting.
+Contact [sales@influxdb.com](mailto:sales@influxdb.com) to become an annual subscriber.
 
 Environment variable: `META_ENTERPRISE_LICENSE_PATH`
 
@@ -216,7 +216,7 @@ Environment variable: `META_META_HTTP_BIND_ADDRESS`
 
 ###  https-enabled = false
 
-Set to `true` to if the Cluster API is using TLS.
+Set to `true` to if the meta and data nodes are communicating over TLS.
 
 Environment variable: `META_META_HTTPS_ENABLED`
 
@@ -236,15 +236,15 @@ Environment variable: `META_META_ANNOUNCEMENT_EXPIRATION`
 
 ###  retention-autocreate = true
 
-Set to `false` to disable the autocreation of the `autogen` [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp).
+Set to `false` to disable the automatic creation of an `autogen` [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp) for new databases.
 
 If set to `true`, InfluxDB automatically creates a `DEFAULT` retention policy
 when a database is created.
 That retention policy is called `autogen`, has an infinite
-[duration](/influxdb/v1.0/concepts/glossary/#duration), and a
+[duration](/influxdb/v1.0/concepts/glossary/#duration), a one week [shard duration](/influxdb/v1.0/concepts/glossary/#shard-duration), and a
 [replication factor](/influxdb/v1.0/concepts/glossary/#replication-factor) set
 to the number of nodes in the cluster.
-InfluxDB uses `autogen` if a write or query does not specify a retention policy.
+If set to `false`, you must explicitly create a `DEFAULT` retention policy on every new database before that database can accept any writes.
 
 Environment variable: `META_META_RETENTION_AUTOCREATE`
 
@@ -252,8 +252,8 @@ Environment variable: `META_META_RETENTION_AUTOCREATE`
 
 The duration a Raft candidate spends in the candidate state without a leader
 before it starts an election.
-The election timeout is slightly randomized on each Raft node to a value between
-one to two times the election timeout duration.
+The election timeout is slightly randomized on each Raft node each time it is called.
+An additional jitter is added to the `election-timeout` duration of between zero and the `election-timeout`.
 The default setting should work for most systems.
 
 Environment variable: `META_META_ELECTION_TIMEOUT`
@@ -262,7 +262,8 @@ Environment variable: `META_META_ELECTION_TIMEOUT`
 
 The heartbeat timeout is the amount of time a Raft follower remains in the
 follower state without a leader before it starts an election.
-Clusters with high latency between nodes may want to increase this parameter.
+Clusters with high latency between nodes may want to increase this parameter to
+avoid unnecessary Raft elections.
 
 Environment variable: `META_META_HEARTBEAT_TIMEOUT`
 
@@ -271,7 +272,8 @@ Environment variable: `META_META_HEARTBEAT_TIMEOUT`
 The leader lease timeout is the amount of time a Raft leader will remain leader
 if it does not hear from a majority of nodes.
 After the timeout the leader steps down to the follower state.
-The default setting should work for most systems.
+Clusters with high latency between nodes may want to increase this parameter to
+avoid unnecessary Raft elections.
 
 Environment variable: `META_META_LEADER_LEASE_TIMEOUT`
 
@@ -292,9 +294,7 @@ Environment variable: `META_META_CLUSTER_TRACING`
 
 ###  raft-promotion-enabled = true
 
-Raft promotion automatically promotes a node to a Raft node when needed.
-Disabling Raft promotion is desirable only when specific meta nodes should be
-participating in Raft consensus.
+Disable Raft promotion if a meta node should never participate in Raft consensus.
 
 Environment variable: `META_META_RAFT_PROMOTION_ENABLED`
 
@@ -362,8 +362,7 @@ Environment variable: `INFLUXDB_ENTERPRISE_REGISTRATION_ENABLED`
 
 ### registration-server-url = "http://IP_or_hostname:3000"
 
-The full URL of the server that runs the InfluxEnterprise web console.
-`registration-server-url` requires the protocol, IP or hostname, and port.
+The full URL of the server that runs the InfluxEnterprise Web Console, including the protocol, hostname or IP address, and port.
 This setting is **not** required when installing the cluster and web console.
 
 Environment variable: `INFLUXDB_ENTERPRISE_REGISTRATION_SERVER_URL`
@@ -371,29 +370,20 @@ Environment variable: `INFLUXDB_ENTERPRISE_REGISTRATION_SERVER_URL`
 ### license-key = ""
 
 The license key that you created on [InfluxPortal](https://portal.influxdata.com).
-The license key registers with
-[https://portal.influxdata.com](https://portal.influxdata.com) and allows the
-data process to run.
-See the [`license-path` setting](#license-path) if your server cannot
-communicate with [https://portal.influxdata.com](https://portal.influxdata.com).
-
-Either the `license-key` setting or the `license-path` setting is required when
-installing the cluster and web console.
-The `license-key` and `license-path` settings are mutually exclusive; one
-must remain set to the empty string.
+The data node transmits the license key to [portal.influxdata.com](https://portal.influxdata.com) over port 80 or port 443 and receives a temporary JSON license file in return.
+The server caches the license file locally.
+The data process will only function for a limited time without a valid license file.
+You must use the [`license-path` setting](#license-path-1) if your server cannot communicate with [https://portal.influxdata.com](https://portal.influxdata.com).
 
 Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_KEY`
 
 ### license-path = ""
 
-The local path to the JSON license file that you received from InfluxData.
-Contact support to receive a license file.
-The license file allows the data process to run.
-
-Either the `license-key` setting or the `license-path` setting is required when
-installing the cluster and web console.
-The `license-key` and `license-path` settings are mutually exclusive; one
-must remain set to the empty string.
+The local path to the permanent JSON license file that you received from InfluxData.
+The data process will only function for a limited time without a valid license file.
+Permanent license files are not available for subscribers on a monthly plan.
+If you are a monthly subscriber, your cluster must use the `license-key` setting.
+Contact [sales@influxdb.com](mailto:sales@influxdb.com) to become an annual subscriber.
 
 Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_PATH`
 
@@ -410,14 +400,14 @@ Environment variable: `INFLUXDB_META_DIR`
 
 ###  meta-tls-enabled = false
 
-Set to `true` if the Cluster API is using TLS.
+Set to `true` to if the meta and data nodes are communicating over TLS.
 
 Environment variable: `INFLUXDB_META_META_TLS_ENABLED`
 
 ###  meta-insecure-tls = false
 
-Set to `true` if the Cluster API is using TLS and to allow the data node to
-accept self-signed certificates.
+Set to `true` to allow the data node to accept self-signed certificates when
+the meta nodes and data nodes are communicating over TLS.
 
 Environment variable: `INFLUXDB_META_META_INSECURE_TLS`
 
@@ -516,9 +506,14 @@ Environment variable: `INFLUXDB_CLUSTER_SHARD_READER_TIMEOUT`
 
 ###  max-remote-write-connections = 50
 
+The maximum number of concurrent write connections to other data nodes.
+This can be raised to allow for greater intra-cluster write throughput, provided there are sufficient resources for the additional network connections.
+
 Environment variable: `INFLUXDB_CLUSTER_MAX_REMOTE_WRITE_CONNECTIONS`
 
 ###  cluster-tracing = false
+
+Set to `true` to enable logging of cluster communications.
 
 Environment variable: `INFLUXDB_CLUSTER_CLUSTER_TRACING`
 
@@ -740,6 +735,8 @@ Environment variable: `INFLUXDB_HTTP_MAX_CONNECTION_LIMIT`
 
 See the [OSS documentation](/influxdb/v1.0/administration/config/#shared-secret).
 
+This setting is required and must match on each data node if the cluster is using the InfluxEnterprise Web Console.
+
 Environment variable: `INFLUXDB_HTTP_SHARED_SECRET`
 
 ###  realm = "InfluxDB"
@@ -788,34 +785,33 @@ Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_RUN_INTERVAL`
 
 ## [hinted-handoff]
 
-Controls the hinted handoff feature which allows nodes to temporarily store
-queued data when one node of a cluster is down for a short period of time.
+Controls the hinted handoff feature, which allows data nodes to temporarily cache writes destined for another data node when that data node is unreachable.
 
 ###  dir = "/var/lib/influxdb/hh"
 
-The hinted handoff directory.
+The hinted handoff directory where the durable queue will be stored on disk.
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_DIR`
 
 ###  enabled = true
 
 Set to `false` to disable hinted handoff.
+Disabling hinted handoff is not recommended and can lead to data loss if another data node is unreachable for any length of time.
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_ENABLED`
 
 ###  max-size = 10737418240
 
-The maximum size of the hinted handoff queue for a node.
-If the queue is full, new writes are rejected and an error is returned to the
-client.
-The queue is drained when either the writes are retried successfully or the
-writes expire.
+The maximum size of the hinted handoff queue.
+Each queue is for one and only one other data node in the cluster.
+If there are N data nodes in the cluster, each data node may have up to N-1 hinted handoff queues.
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_MAX_SIZE`
 
 ###  max-age = "168h0m0s"  
 
 The time writes sit in the queue before they are purged. The time is determined by how long the batch has been in the queue, not by the timestamps in the data.
+If another data node is unreachable for more than the `max-age` it can lead to data loss.
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_MAX_AGE`
 
@@ -825,8 +821,8 @@ Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_CONCURRENCY`
 
 ###  retry-rate-limit = 0
 
-The rate (in bytes per second) per node at which the hinted handoff retries
-writes.
+The rate (in bytes per second) at which the hinted handoff retries writes.
+The limit applies per remote node queue.
 Set to `0` to disable the rate limit.
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_RATE_LIMIT`
@@ -835,7 +831,7 @@ Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_RATE_LIMIT`
 
 The initial interval at which the hinted handoff retries a write after it fails.
 
-> **Note:** Hinted handoff begins retrying writes to down nodes at the interval defined by the `retry-interval`. If any error occurs, it will backoff exponentially until it reaches the interval defined by the `retry-max-interval`. Hinted handoff then retries writes at that interval until it succeeds. The interval resets to the `retry-interval` once hinted handoff successfully completes writes to all nodes.
+> **Note:** Hinted handoff begins retrying writes to unreachable nodes at the interval defined by the `retry-interval`. If any error occurs, it will backoff exponentially until it reaches the interval defined by the `retry-max-interval`. Hinted handoff then retries writes at that interval until it succeeds. The interval resets to the `retry-interval` once hinted handoff successfully completes writes to all nodes.
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_INTERVAL`
 
@@ -876,29 +872,18 @@ Environment variable: `PORT`
 ### license-key = ""
 
 The license key that you created on [InfluxPortal](https://portal.influxdata.com).
-The license key registers with
-[https://portal.influxdata.com](https://portal.influxdata.com) and allows the
-web console process to run.
-See the [`license-file` setting](#license-file-Environment variable:-license-file) if your server cannot
-communicate with [https://portal.influxdata.com](https://portal.influxdata.com).
-
-Either the `license-key` setting or the `license-file` setting is required when
-installing the cluster and web console.
-The `license-key` and `license-file` settings are mutually exclusive; one
-must remain set to the empty string.
+The influx-enterprise node transmits the license key to [portal.influxdata.com](https://portal.influxdata.com) over port 80 or port 443 and receives a temporary JSON license file in return.
+The server caches the license file locally.
+You must use the [`license-file` setting](#license-file) if your server cannot communicate with [https://portal.influxdata.com](https://portal.influxdata.com).
 
 Environment variable: `LICENSE_KEY`
 
 ### license-file = ""
 
-The local path to the JSON license file that you received from InfluxData.
-Contact support to receive a license file.
-The license file allows the data process to run.
-
-Either the `license-key` setting or the `license-file` setting is required when
-installing the cluster and web console.
-The `license-key` and `license-file` settings are mutually exclusive; one
-must remain set to the empty string.
+The local path to the permanent JSON license file that you received from InfluxData.
+Permanent license files are not available for subscribers on a monthly plan.
+If you are a monthly subscriber, your cluster must use the `license-key` setting.
+Contact [sales@influxdb.com](mailto:sales@influxdb.com) to become an annual subscriber.
 
 Environment variable: `LICENSE_FILE`
 
@@ -906,7 +891,7 @@ Environment variable: `LICENSE_FILE`
 ### shared-secret = "long pass phrase used for signing tokens"
 
 Allows the web console to authenticate users with the cluster.
-This setting must match the
+This setting is required and must match the
 [`shared-secret` setting](/enterprise/v1.0/administration/configuration/#shared-secret)
 in the data node configuration files.
 
@@ -917,10 +902,6 @@ Environment variable: `SHARED_SECRET`
 Controls how the web console sends emails to invite users to the application.
 Note that the web console requires a functioning SMTP server to email invites to
 new web console users.
-If you’re working on Ubuntu 14.04 and are looking for an SMTP server to use for
-development purposes, see the
-[SMTP Server Setup guide](/enterprise/v1.0/guides/smtp-server/) for how to get
-up and running with [MailCatcher](https://mailcatcher.me/).
 
 ### host = "localhost"
 
