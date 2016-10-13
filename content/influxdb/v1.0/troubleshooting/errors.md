@@ -6,7 +6,7 @@ menu:
     parent: troubleshooting
 ---
 
-This page documents parsing errors, their descriptions, and, where applicable,
+This page documents errors, their descriptions, and, where applicable,
 common resolutions.
 
 <dt>
@@ -218,3 +218,22 @@ Use a comma instead of a space between the two fields to avoid the error:
 **Resources:**
 [Line Protocol Tutorial](/influxdb/v1.0/write_protocols/line_protocol_tutorial/),
 [Line Protocol Reference](/influxdb/v1.0/write_protocols/line_protocol_reference/)
+
+## write failed for shard < >: engine: cache maximum memory size exceeded
+
+The `cache maximum memory size exceeded` error occurs when the cached
+memory size increases beyond the
+[`cache-max-memory-size` setting](/influxdb/v1.0/administration/config/#cache-max-memory-size-524288000)
+in the configuration file.
+
+By default, `cache-max-memory-size` is set to 512mb.
+This value is fine for most workloads, but is too small for larger write volumes
+or for datasets with higher [series cardinality](/influxdb/v1.0/concepts/glossary/#series-cardinality).
+If you have lots of RAM you could set it to `0` to disable the cached memory
+limit and never get this error.
+You can also examine the `memBytes` field in the`cache` measurement in the
+[`_internal` database](/influxdb/v1.0/troubleshooting/statistics/#internal-monitoring)
+to get a sense of how big the caches are in memory.
+
+**Resources:**
+[Database Configuration](/influxdb/v1.0/administration/config/)
