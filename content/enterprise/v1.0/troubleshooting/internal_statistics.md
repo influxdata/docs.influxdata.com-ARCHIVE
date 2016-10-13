@@ -104,7 +104,9 @@ Subsequent write requests to this node, destined for the same remote node, do no
 ## hh_processor
 
 The `hh_processor` tracks statistics about hinted handoff processors, one for each remote node.
-The tags indicate the destination node.
+The `hh_processor` measurement has two additional tags:
+* `node` - the destination node for the recorded metrics
+* `path` - the path to the durable hinted handoff queue on disk
 
 | fieldKey | fieldType | units |
 | :---- | :---- | :---- |
