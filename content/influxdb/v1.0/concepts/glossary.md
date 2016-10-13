@@ -232,7 +232,7 @@ See [Retention Policy management](/influxdb/v1.0/query_language/database_managem
 
 For example, given a retention policy with `SHARD DURATION` set to `1w`, each shard group will span a single week and contain all points with timestamps in that week.
 
-Related entries: [database](/influxdb/v1.0/concepts/glossary/#database), [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy), [series](/influxdb/v1.0/concepts/glossary/#series), [shard](/influxdb/v1.0/concepts/glossary/#shard), [shard group](/influxdb/v1.0/concepts/glossary/#shard-group)
+Related entries: [database](/influxdb/v1.0/concepts/glossary/#database), [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp), [series](/influxdb/v1.0/concepts/glossary/#series), [shard](/influxdb/v1.0/concepts/glossary/#shard), [shard group](/influxdb/v1.0/concepts/glossary/#shard-group)
 
 ## shard group
 
