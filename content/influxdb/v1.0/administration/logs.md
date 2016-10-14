@@ -27,11 +27,11 @@ If InfluxDB was installed using a pre-built package, and then launched
 as a service, `stderr` is redirected to
 `/var/log/influxdb/influxd.log`, and all log data will be written to
 that file.  You can override this location by setting the variable
-`STDERR` in the file `/etc/default/influxdb`.
+`STDERR` in the file `/etc/influxdb/influxdb.conf`.
 
 >**Note:** On OS X the logs, by default, are stored in the file `/usr/local/var/log/influxdb.log`
 
-For example, if `/etc/default/influxdb` contains:
+For example, if `/etc/influxdb/influxdb.conf` contains:
 
 ```bash
 STDERR=/dev/null
@@ -41,7 +41,7 @@ all log data will be discarded.  You can similarly direct output to
 `stdout` by setting `STDOUT` in the same file.  Output to `stdout` is
 sent to `/dev/null` by default when InfluxDB is launched as a service.
 
-InfluxDB must be restarted to pick up any changes to `/etc/default/influxdb`.
+InfluxDB must be restarted to pick up any changes to `/etc/influxdb/influxdb.conf`.
 
 ### systemd
 
