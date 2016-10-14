@@ -29,6 +29,7 @@ The data consist of the [measurement](/influxdb/v1.0/concepts/glossary/#measurem
 curl -i -XPOST 'http://localhost:8086/write?db=mydb' --data-binary 'cpu_load_short,host=server01,region=us-west value=0.64 1434055562000000000'
 ```
 When writing points, you must specify an existing database in the `db` query parameter.
+Points will be written to `db`'s default retention policy if you do not supply a retention policy via the `rp` query parameter.
 See the [API Reference](/influxdb/v1.0/tools/api/#write) documentation for a complete list of the available query parameters.
 
 The body of the POST - we call this the [Line Protocol](/influxdb/v1.0/concepts/glossary/#line-protocol) - contains the time-series data that you wish to store.

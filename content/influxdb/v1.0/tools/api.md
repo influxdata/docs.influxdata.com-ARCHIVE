@@ -116,7 +116,7 @@ $ curl -XPOST 'http://localhost:8086/query' --data-urlencode 'q=CREATE DATABASE 
 | epoch=[h,m,s,ms,u,ns] | Optional | Returns epoch timestamps with the specified precision. By default, InfluxDB returns timestamps in RFC3339 format with nanosecond precision. |
 | p=\<password> | Optional if you haven't [enabled authentication](/influxdb/v1.0/query_language/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication.* | Sets the password for authentication if you've enabled authentication. Use with the query string parameter `u`. |
 | pretty=true | Optional | Enables pretty-printed JSON output. While this is useful for debugging it is not recommended for production use as it consumes unnecessary network bandwidth. |
-| rp=\<retention_policy_name> | Optional | Sets the target [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp) for the query. InfluxDB queries the `DEFAULT` retention policy if you do not specify a retention policy.  |
+| rp=\<retention_policy_name> | Optional | Sets the target [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp) for the query. InfluxDB queries the database's default retention policy if you do not specify a retention policy.  |
 | u=\<username> | Optional if you haven't [enabled authentication](/influxdb/v1.0/query_language/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication.* | Sets the username for authentication if you've enabled authentication. The user must have read access to the database. Use with the query string parameter `p`. |
 
 \* The HTTP API also supports basic authentication.
