@@ -9,6 +9,17 @@ menu:
 Every InfluxDB use case is special and your [schema](/influxdb/v1.0/concepts/glossary/#schema) will reflect that uniqueness.
 There are, however, general guidelines to follow and pitfalls to avoid when designing your schema.
 
+<table style="width:100%">
+  <tr>
+    <td><a href="#general-recommendations">General Recommendations</a></td>
+    <td><a href="#encouraged-schema-design">Encouraged Schema Design</a></td>
+    <td><a href="#discouraged-schema-design">Discouraged Schema Design</a></td>
+    <td><a href="#shard-group-duration-management">Shard Group Duration Management</a></td>
+  </tr>
+</table>
+
+# General Recommendations
+
 ## Encouraged Schema Design
 
 In no particular order, we recommend that you:
@@ -119,3 +130,39 @@ While both queries are similar, the use of multiple tags in Schema 2 avoids the 
 # Schema 2 - Query for data encoded in multiple tags
 > SELECT mean("temp") FROM "weather_sensor" WHERE region = 'north'
 ```
+
+# Shard Group Duration Management
+
+## Shard Group Duration Overview
+
+InfluxDB stores data in shard groups.
+Shard groups are organized by [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp) (RP) and store data with timestamps that fall within a specific time interval.
+The length of that time interval is called the [shard group duration](/influxdb/v1.0/concepts/glossary/#shard-duration).
+
+By default, the shard group duration is determined by the RP's [duration](/influxdb/v1.0/concepts/glossary/#duration):
+
+| RP Duration  | Shard Group Duration  |
+|---|---|
+| < 2 days  | 1 hour  |
+| >= 2 days and <= 6 months  | 1 day  |
+| > 6 months  | 7 days  |
+
+The shard group duration is also configurable per RP.
+See [Retention Policy Management](/influxdb/v1.0/query_language/database_management/#retention-policy-management) for how to configure the
+shard group duration.
+
+## Shard Group Duration Recommendations
+
+In general, shorter shard group durations allow the system to efficiently drop data.
+When InfluxDB enforces an RP it drops entire shard groups, not individual data points.
+For example, if your RP has a duration of one day, it makes sense to have a shard group duration of one hour; InfluxDB will drop an hour worth of data every hour.
+
+If your RP's duration is greater than six months, there's no need to have a short shard group duration.
+In fact, increasing the shard group duration beyond the default seven day value can improve compression, improve write speed, and decrease the fixed iterator overhead per shard group.
+Shard group durations of 50 years and over, for example, are acceptable configurations.
+
+We recommend configuring the shard group duration such that:
+
+* it is two times your longest typical query's time range
+* each shard group has at least 100,000 [points](/influxdb/v1.0/concepts/glossary/#point) per shard group
+* each shard group had at least 1,000 points per [series](/influxdb/v1.0/concepts/glossary/#series)
