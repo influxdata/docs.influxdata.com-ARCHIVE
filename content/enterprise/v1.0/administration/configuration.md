@@ -73,13 +73,13 @@ configuration file.
         influxd -config /etc/influxdb/influxdb-generated.conf
 
 
-* Set the environment variables `INFLUXDB_CONFIG_PATH` and `META_CONFIG_PATH`
-to the path of your configuration file and start the process.
+* Set the environment variable `INFLUXDB_CONFIG_PATH` to the path of your
+configuration file and start the process.
 
     To set the `INFLUXDB_CONFIG_PATH` environment variable and launch the data
     process using `INFLUXDB_CONFIG_PATH` for the configuration file path:
 
-        INFLUXDB_CONFIG_PATH=/root/influxdb.generated.conf
+        export INFLUXDB_CONFIG_PATH=/root/influxdb.generated.conf
         echo $INFLUXDB_CONFIG_PATH
         /root/influxdb.generated.conf
         influxd
@@ -88,8 +88,6 @@ If set, the command line `-config` path overrides any environment variable path.
 If you do not supply a configuration file, InfluxDB uses an internal default
 configuration (equivalent to the output of `influxd config` and `influxd-meta
 config`).
-A new configuration file should be generated with every version
-update.
 
 ### Environment variables
 
@@ -97,9 +95,14 @@ All configuration options can be specified in the configuration file or in an
 environment variable.
 The environment variable overrides the equivalent option in the configuration
 file.
+If a configuration option is not specified in either the configuration file
+or in an environment variable, InfluxDB uses its internal default
+configuration.
 
 In the sections below we name the relevant environment variable in the
 description for the configuration setting.
+Environment variables can be set in `/etc/default/influxdb-meta` and
+`/etc/default/influxdb`.
 
 > **Note:**
 To set or override settings in a config section that allows multiple
@@ -123,10 +126,11 @@ relevant position number (in this case: `0`):
     INFLUXDB_GRAPHITE_0_TAGS
     INFLUXDB_GRAPHITE_0_TEMPLATES
     INFLUXDB_GRAPHITE_0_UDP_READ_BUFFER
-
+>
 For the Nth Graphite configuration in the configuration file, the relevant
 environment variables would be of the form `INFLUXDB_GRAPHITE_(N-1)_BATCH_PENDING`.
 For each section of the configuration file the numbering restarts at zero.
+
 <br>
 <br>
 # Meta Node Configuration
@@ -148,6 +152,8 @@ Setting this option to `true` will disable reporting.
 > **Note:** No data from user databases are ever transmitted.
 
 ### bind-address = ""
+This setting is not intended for use.
+It will be removed in future versions.
 
 ### hostname = ""
 
@@ -166,7 +172,7 @@ Set to `true` to enable registration with the InfluxEnterprise web console.
 All meta nodes must have `registration-enabled` set to `true` for the
 InfluxEnterprise Web Console to function properly.
 
-Environment variable: `META_ENTERPRISE_REGISTRATION_ENABLED`
+Environment variable: `INFLUXDB_ENTERPRISE_REGISTRATION_ENABLED`
 
 ###  registration-server-url = "http://IP_or_hostname:3000"
 
@@ -174,7 +180,7 @@ The full URL of the server that runs the InfluxEnterprise web console.
 All meta nodes must have `registration-server-url` set to the full protocol,
 hostname, and port for the InfluxEnterprise Web Console to function properly.
 
-Environment variable: `META_ENTERPRISE_REGISTRATION_SERVER_URL`
+Environment variable: `INFLUXDB_ENTERPRISE_REGISTRATION_SERVER_URL`
 
 ###  license-key = ""
 
@@ -183,7 +189,7 @@ The meta node transmits the license key to [portal.influxdata.com](https://porta
 The server caches the license file locally.
 You must use the [`license-path` setting](#license-path) if your server cannot communicate with [https://portal.influxdata.com](https://portal.influxdata.com).
 
-Environment variable: `META_ENTERPRISE_LICENSE_KEY`
+Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_KEY`
 
 ###  license-path = ""
 
@@ -192,47 +198,61 @@ Permanent license files are not available for subscribers on a monthly plan.
 If you are a monthly subscriber, your cluster must use the `license-key` setting.
 Contact [sales@influxdb.com](mailto:sales@influxdb.com) to become an annual subscriber.
 
-Environment variable: `META_ENTERPRISE_LICENSE_PATH`
+Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_PATH`
 
 ## [meta]
 
 ###  dir = "/var/lib/influxdb/meta"
 
-The location of the meta directory which contains the [metastore](/influxdb/v1.0/concepts/glossary/#metastore).
+The location of the meta directory which stores the [metastore](/influxdb/v1.0/concepts/glossary/#metastore).
 
-Environment variable: `META_META_DIR`
+Environment variable: `INFLUXDB_META_DIR`
 
 ###  bind-address = ":8089"
 
-The bind address/port for cluster-wide communication.
+The bind address/port for meta node communication.
+For simplicity we recommend using the same port on all meta nodes, but this
+is not necessary.
 
-Environment variable: `META_META_BIND_ADDRESS`
+Environment variable: `INFLUXDB_META_BIND_ADDRESS`
 
 ###  http-bind-address = ":8091"
 
-The bind address/port for meta node communication.
+The port used by the [`influxd-ctl` tool](/enterprise/v1.0/features/cluster-commands/) and by data nodes to access the
+meta APIs.
+For simplicity we recommend using the same port on all meta nodes, but this
+is not necessary.
 
-Environment variable: `META_META_HTTP_BIND_ADDRESS`
+Environment variable: `INFLUXDB_META_HTTP_BIND_ADDRESS`
 
 ###  https-enabled = false
 
-Set to `true` to if the meta and data nodes are communicating over TLS.
+Set to `true` to if using HTTPS over the `8091` API port.
+Currently, the `8089` and `8088` ports do not support TLS.
 
-Environment variable: `META_META_HTTPS_ENABLED`
+Environment variable: `INFLUXDB_META_HTTPS_ENABLED`
 
 ###  https-certificate = ""
 
 The path of the certificate file.
+This is required if [`https-enabled`](#https-enabled-false) is set to `true`.
 
-Environment variable: `META_META_HTTPS_CERTIFICATE`
+Environment variable: `INFLUXDB_META_HTTPS_CERTIFICATE`
 
 ###  gossip-frequency = "5s"
 
-Environment variable: `META_META_GOSSIP_FREQUENCY`
+The frequency at which meta nodes communicate the cluster membership state.
+
+Environment variable: `INFLUXDB_META_GOSSIP_FREQUENCY`
 
 ###  announcement-expiration = "30s"
 
-Environment variable: `META_META_ANNOUNCEMENT_EXPIRATION`
+The rate at which the results of `influxd-ctl show` are updated when a meta
+node leaves the cluster.
+Note that in version 1.0, configuring this setting provides no change from the
+user's perspective.
+
+Environment variable: `INFLUXDB_META_ANNOUNCEMENT_EXPIRATION`
 
 ###  retention-autocreate = true
 
@@ -246,7 +266,7 @@ That retention policy is called `autogen`, has an infinite
 to the number of nodes in the cluster.
 If set to `false`, you must explicitly create a `DEFAULT` retention policy on every new database before that database can accept any writes.
 
-Environment variable: `META_META_RETENTION_AUTOCREATE`
+Environment variable: `INFLUXDB_META_RETENTION_AUTOCREATE`
 
 ###  election-timeout = "1s"
 
@@ -256,7 +276,7 @@ The election timeout is slightly randomized on each Raft node each time it is ca
 An additional jitter is added to the `election-timeout` duration of between zero and the `election-timeout`.
 The default setting should work for most systems.
 
-Environment variable: `META_META_ELECTION_TIMEOUT`
+Environment variable: `INFLUXDB_META_ELECTION_TIMEOUT`
 
 ###  heartbeat-timeout = "1s"
 
@@ -265,7 +285,7 @@ follower state without a leader before it starts an election.
 Clusters with high latency between nodes may want to increase this parameter to
 avoid unnecessary Raft elections.
 
-Environment variable: `META_META_HEARTBEAT_TIMEOUT`
+Environment variable: `INFLUXDB_META_HEARTBEAT_TIMEOUT`
 
 ###  leader-lease-timeout = "500ms"
 
@@ -275,7 +295,7 @@ After the timeout the leader steps down to the follower state.
 Clusters with high latency between nodes may want to increase this parameter to
 avoid unnecessary Raft elections.
 
-Environment variable: `META_META_LEADER_LEASE_TIMEOUT`
+Environment variable: `INFLUXDB_META_LEADER_LEASE_TIMEOUT`
 
 ###  commit-timeout = "50ms"
 
@@ -283,36 +303,37 @@ The commit timeout is the amount of time a Raft node will tolerate between
 commands before issuing a heartbeat to tell the leader it is alive.
 The default setting should work for most systems.
 
-Environment variable: `META_META_COMMIT_TIMEOUT`
+Environment variable: `INFLUXDB_META_COMMIT_TIMEOUT`
 
 ###  cluster-tracing = false
 
 Cluster tracing toggles the logging of Raft logs on Raft nodes.
 Enable this setting when debugging Raft consensus issues.
 
-Environment variable: `META_META_CLUSTER_TRACING`
-
-###  raft-promotion-enabled = true
-
-Disable Raft promotion if a meta node should never participate in Raft consensus.
-
-Environment variable: `META_META_RAFT_PROMOTION_ENABLED`
+Environment variable: `INFLUXDB_META_CLUSTER_TRACING`
 
 ###  logging-enabled = true
 
 Meta logging toggles the logging of messages from the meta service.
 
-Environment variable: `META_META_LOGGING_ENABLED`
+Environment variable: `INFLUXDB_META_LOGGING_ENABLED`
 
 ###  pprof-enabled = false
 
-Environment variable: `META_META_PPROF_ENABLED`
+Set to `true` to enable the `/debug/pprof` endpoint for troubleshooting.
+
+Environment variable: `INFLUXDB_META_PPROF_ENABLED`
 
 ###  lease-duration = "1m0s"
 
-The default duration for leases.
+The default duration of the leases that data nodes acquire from the meta nodes.
+Leases automatically expire after the `lease-duration` is met.
 
-Environment variable: `META_META_LEASE_DURATION`
+Leases ensure that only one data node is running something at a given time.
+For example, [Continuous Queries](/influxdb/v1.0/concepts/glossary/#continuous-query-cq)
+(CQ) use a lease so that all data nodes aren't running the same CQs at once.
+
+Environment variable: `INFLUXDB_META_LEASE_DURATION`
 
 <br>
 <br>
@@ -400,14 +421,14 @@ Environment variable: `INFLUXDB_META_DIR`
 
 ###  meta-tls-enabled = false
 
-Set to `true` to if the meta and data nodes are communicating over TLS.
+Set to `true` to if [`https-enabled`](#https-enabled-false) is set to `true`.
 
 Environment variable: `INFLUXDB_META_META_TLS_ENABLED`
 
 ###  meta-insecure-tls = false
 
-Set to `true` to allow the data node to accept self-signed certificates when
-the meta nodes and data nodes are communicating over TLS.
+Set to `true` to allow the data node to accept self-signed certificates if
+[`https-enabled`](#https-enabled-false) is set to `true`.
 
 Environment variable: `INFLUXDB_META_META_INSECURE_TLS`
 
@@ -494,13 +515,29 @@ management](/influxdb/v1.0/troubleshooting/query_management/).
 
 ###  dial-timeout = "1s"
 
+The duration for which the meta node waits for a connection to a remote data
+node before the meta node attempts to connect to a different remote data node.
+This setting applies to queries only.
+
 Environment variable: `INFLUXDB_CLUSTER_DIAL_TIMEOUT`
 
 ###  shard-writer-timeout = "5s"
 
+The time in which a remote write to a single data node must complete after which
+the system returns a timeout error.
+
+For clusters with contention, increasing `shard-writer-timeout` may reduce
+points sent via the
+[hinted handoff](/enterprise/v1.0/concepts/clustering/#hinted-handoff), but
+increasing this setting also raises the time it takes for a receiving node to
+respond to a write client.
+
 Environment variable: `INFLUXDB_CLUSTER_SHARD_WRITER_TIMEOUT`
 
 ###  shard-reader-timeout = "0"
+
+The time in which a query connection must return its response after which the
+system returns an error.
 
 Environment variable: `INFLUXDB_CLUSTER_SHARD_READER_TIMEOUT`
 
@@ -514,6 +551,7 @@ Environment variable: `INFLUXDB_CLUSTER_MAX_REMOTE_WRITE_CONNECTIONS`
 ###  cluster-tracing = false
 
 Set to `true` to enable logging of cluster communications.
+Enable this setting to verify connectivity issues between data nodes.
 
 Environment variable: `INFLUXDB_CLUSTER_CLUSTER_TRACING`
 
