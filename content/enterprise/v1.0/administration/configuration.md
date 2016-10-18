@@ -375,16 +375,15 @@ and [https://portal.influxdata.com](https://portal.influxdata.com).
 
 ### registration-enabled = false
 
-Set to `true` to enable registration with the InfluxEnterprise web console.
-Setting `registration-enabled` to `true` in the data node configuration file
-is **not** required when installing the cluster and web console.
+This setting is not intended for use in the data node configuration file.
+It will be removed in future versions.
 
 Environment variable: `INFLUXDB_ENTERPRISE_REGISTRATION_ENABLED`
 
 ### registration-server-url = "http://IP_or_hostname:3000"
 
-The full URL of the server that runs the InfluxEnterprise Web Console, including the protocol, hostname or IP address, and port.
-This setting is **not** required when installing the cluster and web console.
+This setting is not intended for use in the data node configuration file.
+It will be removed in future versions.
 
 Environment variable: `INFLUXDB_ENTERPRISE_REGISTRATION_SERVER_URL`
 
