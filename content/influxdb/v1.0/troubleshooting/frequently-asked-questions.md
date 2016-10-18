@@ -214,7 +214,9 @@ SELECT value FROM special_db..measurement
 
 ## How do I write to a non-DEFAULT retention policy with InfluxDB's CLI?
 
-Use the syntax `INSERT INTO <retention_policy> <line_protocol>` to write data to a non-`DEFAULT` retention policy using the CLI.
+Use the syntax `INSERT INTO [<database>.]<retention_policy> <line_protocol>` to write data to a non-`DEFAULT` retention policy using the CLI.
+(Specifying the database and retention policy this way is only allowed with the CLI.
+Writes over HTTP must specify the database and optionally the retention policy with the `db` and `rp` query parameters.)
 
 For example:
 
@@ -915,6 +917,7 @@ To keep regular expressions and quoting simple, avoid using the following charac
  `$` dollar sign  
  `'` single quotation mark  
  `"` double quotation mark  
+ `=` equal sign  
  `,` comma
 
 ## When should I single quote and when should I double quote when writing data?
