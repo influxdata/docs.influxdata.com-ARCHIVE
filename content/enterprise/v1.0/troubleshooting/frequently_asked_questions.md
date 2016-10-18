@@ -51,9 +51,20 @@ Log output for the data node that accepts the lease:
 
 ## Why am I seeing `hinted handoff queue not empty` errors in my data node logs?
 
-This error is informational only and does not necessarily indicate a problem in the cluster. It indiacates that the node handling the write request currently has data in its local [hinted handoff](/enterprise/v1.0/concepts/clustering/#hinted-handoff) queue for the destination node. Coordinating nodes will not attempt direct writes to other nodes until the hinted handoff queue for the destination node has fully drained. New data is instead appended to the hinted handoff queue. This helps data arrive in chronological order for consistency of graphs and alerts and also prevents unnecessary failed connection attempts between the data nodes. Until the hinted handoff queue is empty this message will continue to display in the logs. Monitor the size of the hinted handoff queues with `ls -lRh /var/lib/influxdb/hh` to ensure that they are decreasing in size.
+```
+[write] 2016/10/18 10:35:21 write failed for shard 2382 on node 4: hinted handoff queue not empty 
+```
+
+This error is informational only and does not necessarily indicate a problem in the cluster. It indicates that the node handling the write request currently has data in its local [hinted handoff](/enterprise/v1.0/concepts/clustering/#hinted-handoff) queue for the destination node. Coordinating nodes will not attempt direct writes to other nodes until the hinted handoff queue for the destination node has fully drained. New data is instead appended to the hinted handoff queue. This helps data arrive in chronological order for consistency of graphs and alerts and also prevents unnecessary failed connection attempts between the data nodes. Until the hinted handoff queue is empty this message will continue to display in the logs. Monitor the size of the hinted handoff queues with `ls -lRh /var/lib/influxdb/hh` to ensure that they are decreasing in size.
 
 Note that for some [write consistency](/enterprise/v1.0/concepts/clustering/#write-consistency) settings, InfluxDB may return a write error (500) for the write attempt, even if the points are successfully queued in hinted handoff. Some write clients may attempt to resend those points, leading to duplicate points being added to the hinted handoff queue and lengthening the time it takes for the queue to drain. If the queues are not draining, consider temporarily downgrading the write consistency setting, or pause retries on the write clients until the hinted handoff queues fully drain.
+
+The `_internal` database collects information per-node and also cluster-wide. The cluster metrics are replicated to other nodes using `consistency=all`. Thus, if there are points still in hinted handoff, the writes will fail the consistency check, even though the data will most likely eventually persist. 
+
+```
+[stats] 2016/10/18 10:35:21 error writing count stats for FOO_grafana: partial write 
+```
+
 
 ## Why am I seeing `queue is full` errors in my data node logs?
 
