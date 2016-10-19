@@ -59,11 +59,13 @@ This error is informational only and does not necessarily indicate a problem in 
 
 Note that for some [write consistency](/enterprise/v1.0/concepts/clustering/#write-consistency) settings, InfluxDB may return a write error (500) for the write attempt, even if the points are successfully queued in hinted handoff. Some write clients may attempt to resend those points, leading to duplicate points being added to the hinted handoff queue and lengthening the time it takes for the queue to drain. If the queues are not draining, consider temporarily downgrading the write consistency setting, or pause retries on the write clients until the hinted handoff queues fully drain.
 
-The `_internal` database collects information per-node and also cluster-wide. The cluster metrics are replicated to other nodes using `consistency=all`. Thus, if there are points still in hinted handoff, the writes will fail the consistency check, even though the data will most likely eventually persist. 
+## Why am I seeing `error writing count stats ...: partial write` errors in my data node logs?
 
 ```
 [stats] 2016/10/18 10:35:21 error writing count stats for FOO_grafana: partial write 
 ```
+
+The `_internal` database collects per-node and also cluster-wide information about the InfluxEnterprise cluster. The cluster metrics are replicated to other nodes using `consistency=all`. For a [write consistency](/enterprise/v1.0/concepts/clustering/#write-consistency) of `all`, InfluxDB returns a write error (500) for the write attempt even if the points are successfully queued in hinted handoff. Thus, if there are points still in hinted handoff, the `_internal` writes will fail the consistency check and log the error, even though the data is in the durable hinted handoff queue and should eventually persist. 
 
 
 ## Why am I seeing `queue is full` errors in my data node logs?
