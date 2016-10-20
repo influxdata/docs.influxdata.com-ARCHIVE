@@ -27,6 +27,8 @@ Connected to http://localhost:8086 version 1.0.x
 InfluxDB shell 1.0.x
 ```
 
+> **Note:** The CLI and InfluxDB versions should be identical. If not, it can lead to parsing issues with queries.
+
 ## `influx` Arguments
 There are several arguments you can pass into `influx` when starting.
 List them with `$ influx --help`.
