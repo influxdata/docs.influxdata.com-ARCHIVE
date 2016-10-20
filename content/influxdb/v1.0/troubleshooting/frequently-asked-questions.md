@@ -30,6 +30,7 @@ Where applicable, it links to outstanding issues on GitHub.
 * [Why can't I query boolean field values?](#why-can-t-i-query-boolean-field-values)  
 * [How does InfluxDB handle field type discrepancies across shards?](#how-does-influxdb-handle-field-type-discrepancies-across-shards)  
 * [What are the minimum and maximum integers that InfluxDB can store?](#what-are-the-minimum-and-maximum-integers-that-influxdb-can-store)  
+* [What are the minimum and maximum timestamps that InfluxDB can store?](#what-are-the-minimum-and-maximum-timestamps-that-influxdb-can-store)
 * [How can I tell what type of data are stored in a field?](#how-can-i-tell-what-type-of-data-are-stored-in-a-field)
 * [Can I change a field's data type?](#can-i-change-a-field-s-data-type)
 
@@ -310,6 +311,11 @@ See [Go builtins](http://golang.org/pkg/builtin/#int64) for more information.
 
 Values close to but within those limits may lead to unexpected results; some functions and operators convert the int64 data type to float64 during calculation which can cause overflow issues.
 
+## What are the minimum and maximum timestamps that InfluxDB can store?
+The minimum timestamp is `-9223372036854775806` or `1677-09-21T00:12:43.145224194Z`.
+The maximum timestamp is `9223372036854775806` or `2262-04-11T23:47:16.854775806Z`.
+
+Timestamps outside that range return a [parsing error](/influxdb/v1.0/troubleshooting/errors/#unable-to-parse-time-outside-range).
 
 ## How can I tell what type of data are stored in a field?
 

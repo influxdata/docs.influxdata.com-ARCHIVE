@@ -163,6 +163,8 @@ It's a good idea to take into account that information when designing your
 [schema](/influxdb/v1.0/concepts/glossary/#schema).
 
 Timestamps are UNIX timestamps.
+The minimum valid timestamp is `-9223372036854775806` or `1677-09-21T00:12:43.145224194Z`.
+The maximum valid timestamp is `9223372036854775806` or `2262-04-11T23:47:16.854775806Z`.
 As mentioned above, by default, InfluxDB assumes that timestamps have
 nanosecond precision.
 See the [API Reference](/influxdb/v1.0/tools/api/#write) for how to specify

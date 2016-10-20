@@ -219,6 +219,19 @@ Use a comma instead of a space between the two fields to avoid the error:
 [Line Protocol Tutorial](/influxdb/v1.0/write_protocols/line_protocol_tutorial/),
 [Line Protocol Reference](/influxdb/v1.0/write_protocols/line_protocol_reference/)
 
+## unable to parse < >: time outside range
+
+The `time outside range` error occurs when the timestamp in the
+[line protocol](/influxdb/v1.0/concepts/glossary/#line-protocol)
+falls outside the valid time range for InfluxDB.
+
+The minimum valid timestamp is `-9223372036854775806` or `1677-09-21T00:12:43.145224194Z`.
+The maximum valid timestamp is `9223372036854775806` or `2262-04-11T23:47:16.854775806Z`.
+
+**Resources:**
+[Line Protocol Tutorial](/influxdb/v1.0/write_protocols/line_protocol_tutorial/#data-types),
+[Line Protocol Reference](/influxdb/v1.0/write_protocols/line_protocol_reference/#data-types)
+
 ## write failed for shard < >: engine: cache maximum memory size exceeded
 
 The `cache maximum memory size exceeded` error occurs when the cached
