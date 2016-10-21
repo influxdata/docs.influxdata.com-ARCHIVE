@@ -13,6 +13,23 @@ common resolutions.
 **Disclaimer:** This document does not contain an exhaustive list of all possible InfluxDB errors.
 </dt>
 
+## error: max series per database exceeded: < >
+The `max series per database exceeded` error occurs when a write causes the
+number of [series](/influxdb/v1.0/concepts/glossary/#series) in a database to
+exceed the maximum allowable series per database.
+The maximum allowable series per database is controlled by the
+`max-series-per-database` setting in the `[data]` section of the configuration
+file.
+
+The information in the `< >` shows the measurement and the tag set of the series
+that exceeded `max-series-per-database`.
+
+By default `max-series-per-database` is set to one million.
+Changing the setting to `0` allows an unlimited number of series per database.
+
+**Resources:**
+[Database Configuration](/influxdb/v1.0/administration/config/#max-series-per-database-1000000)
+
 ## error parsing query: found < >, expected identifier at line < >, char < >
 
 ### InfluxQL Syntax
