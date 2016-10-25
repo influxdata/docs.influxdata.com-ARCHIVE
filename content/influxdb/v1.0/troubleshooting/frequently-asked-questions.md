@@ -818,7 +818,7 @@ SELECT numSeries FROM "_internal".."database" WHERE time > now() - 10s GROUP BY 
 ```
 #### Series cardinality across all database:
 ```
-SELECT sum(numSeries) AS “total_series" FROM “_internal".."database" WHERE time > now() - 10s
+SELECT sum(numSeries) AS "total_series" FROM "_internal".."database" WHERE time > now() - 10s
 ```
 
 > **Note:** Changes to the [`[monitor]`](/influxdb/v1.0/administration/config/#monitor)

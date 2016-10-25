@@ -262,7 +262,7 @@ The first thing that happens when the WAL flushes a block of writes to the index
 Most IDs should simply be the fnv64-a hash of the series key and the field name.
 However, we need to ensure that we keep track of any collisions.
 
-The index keeps a file called “names” that keeps a compressed JSON map of key to ID.
+The index keeps a file called "names" that keeps a compressed JSON map of key to ID.
 When a flush happens we ensure that any of the keys coming in have an ID in the map that is equal to the fnv64-a hash.
 If it is present in the map and the same we move on.
 If it isn’t present in the map, we add it.
@@ -330,7 +330,7 @@ Then it will persist any new data (for this series or any others), remove the to
 
 #### Metadata
 
-Metadata for all the series and fields in the shard are kept in 2 files named “names” and “fields”.
+Metadata for all the series and fields in the shard are kept in 2 files named "names" and "fields".
 These two files contain a single Snappy compressed block of the serialized JSON of any names or fields in the shard.
 
 This means that any flush from the WAL that contains either new fields or series, will force the old file to be read in, decompressed, marshalled, merged with the new series and a new file to be written.
