@@ -77,12 +77,12 @@ Compress the output.
 
 Export entire database and compress the output:
 ```
-influx_inspect export --compress
+influx_inspect export -compress
 ```
 
 Export data from a specific database and retention policy:
 ```
-influx_inspect export --db mydb --rp autogen
+influx_inspect export -db mydb -rp autogen
 ```
 
 #### Sample Data
