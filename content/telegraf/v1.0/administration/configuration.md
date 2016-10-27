@@ -9,7 +9,7 @@ menu:
     parent: administration
 ---
 
-## Generating a Configuration File
+# Generating a Configuration File
 
 A default Telegraf config file can be generated using the `-sample-config` flag:
 
@@ -27,20 +27,20 @@ telegraf -sample-config -input-filter cpu:mem:net:swap -output-filter influxdb:k
 You can see the latest config file with all available plugins here:
 [telegraf.conf](https://github.com/influxdata/telegraf/blob/master/etc/telegraf.conf).
 
-## Environment Variables
+# Environment Variables
 
 Environment variables can be used anywhere in the config file, simply prepend
 them with `$`.
 For strings the variable must be within quotes (ie, `"$STR_VAR"`),
 for numbers and booleans they should be plain (ie, `$INT_VAR`, `$BOOL_VAR`)
 
-## `[global_tags]` Configuration
+# `[global_tags]` Configuration
 
 Global tags can be specified in the `[global_tags]` section of the config file
 in key="value" format. All metrics being gathered on this host will be tagged
 with the tags specified here.
 
-## `[agent]` Configuration
+# `[agent]` Configuration
 
 Telegraf has a few options you can configure under the `agent` section of the
 config.
@@ -73,7 +73,7 @@ e.g., `jitter=5s` and `flush_interval=10s` means flushes will happen every 10-15
 * **quiet**: Run telegraf in quiet mode.
 * **hostname**: Override default hostname, if empty use `os.Hostname()`.
 
-#### Measurement Filtering
+### Measurement Filtering
 
 Filters can be configured per input or output, see below for examples.
 
@@ -101,7 +101,7 @@ the tag keys in the final measurement.
 
 > **NOTE:** The `tagpass` and `tagdrop` parameters must be defined at the *end* of the plugin definition, otherwise subsequent plugin config options will be interpreted as part of the tagpass/tagdrop map.
 
-## Input Configuration
+# Input Configuration
 
 Some configuration options are configurable per input:
 
@@ -114,7 +114,7 @@ Some configuration options are configurable per input:
 global interval, but if one particular input should be run less or more often,
 you can configure that here.
 
-#### Input Configuration Examples
+### Input Configuration Examples
 
 This is a full working config that will output CPU data to an InfluxDB instance
 at 192.168.59.103:8086, tagging measurements with dc="denver-1". It will output
@@ -142,7 +142,7 @@ fields which begin with `time_`.
   fielddrop = ["time_*"]
 ```
 
-#### Input Config: tagpass and tagdrop
+### Input Config: tagpass and tagdrop
 
 > **NOTE:** The `tagpass` and `tagdrop` parameters must be defined at the *end* of the plugin definition, otherwise subsequent plugin config options will be interpreted as part of the tagpass/tagdrop map.
 
@@ -165,7 +165,7 @@ fields which begin with `time_`.
     path = [ "/opt", "/home*" ]
 ```
 
-#### Input Config: fieldpass and fielddrop
+### Input Config: fieldpass and fielddrop
 
 ```toml
 # Drop all metrics for guest & steal CPU usage
@@ -179,7 +179,7 @@ fields which begin with `time_`.
   fieldpass = ["inodes*"]
 ```
 
-#### Input Config: namepass and namedrop
+### Input Config: namepass and namedrop
 
 ```toml
 # Drop all metrics about containers for kubelet
@@ -193,7 +193,7 @@ fields which begin with `time_`.
   namepass = ["rest_client_*"]
 ```
 
-#### Input Config: taginclude and tagexclude
+### Input Config: taginclude and tagexclude
 
 ```toml
 # Only include the "cpu" tag in the measurements for the cpu plugin.
@@ -207,7 +207,7 @@ fields which begin with `time_`.
   tagexclude = ["fstype"]
 ```
 
-#### Input config: prefix, suffix, and override
+### Input config: prefix, suffix, and override
 
 This plugin will emit measurements with the name `cpu_total`
 
@@ -227,7 +227,7 @@ This will emit measurements with the name `foobar`
   totalcpu = true
 ```
 
-#### Input config: tags
+### Input config: tags
 
 This plugin will emit measurements with two additional tags: `tag1=foo` and
 `tag2=bar`
@@ -244,7 +244,7 @@ plugin definition.
     tag2 = "bar"
 ```
 
-#### Multiple inputs of the same type
+### Multiple inputs of the same type
 
 Additional inputs (or outputs) of the same type can be specified,
 just define more instances in the config file. It is highly recommended that
@@ -263,7 +263,7 @@ to avoid measurement collisions:
   fielddrop = ["cpu_time*"]
 ```
 
-## Output Configuration
+# Output Configuration
 
 Telegraf also supports specifying multiple output sinks to send data to,
 configuring each output sink is different, but examples can be
