@@ -404,7 +404,7 @@ for how to use InfluxDB's CQs as a substitute for nested functions.
 ## What determines the time intervals returned by `GROUP BY time()` queries?
 
 The time intervals returned by `GROUP BY time()` queries conform to InfluxDB's preset time
-buckets or to the user-specified [offset interval](/influxdb/v1.0/query_language/data_exploration/#configured-group-by-time-boundaries).
+buckets or to the user-specified [offset interval](/influxdb/v1.0/query_language/data_exploration/#advanced-group-by-time-syntax).
 
 #### Example
 
@@ -473,7 +473,7 @@ WHERE time >= '2016-08-29T18:15:00Z' AND time <= '2016-08-29T19:45:00Z' GROUP BY
 ```
 
 In this example, the user-specified
-[offset interval](/influxdb/v1.0/query_language/data_exploration/#configured-group-by-time-boundaries)
+[offset interval](/influxdb/v1.0/query_language/data_exploration/#advanced-group-by-time-syntax)
 shifts InfluxDB's preset time buckets forward by `15` minutes.
 The average for the 6pm time bucket now includes data between 6:15pm and 7pm, and
 the average for the 7pm time bucket includes data between 7:15pm and 8pm.
@@ -634,7 +634,7 @@ Example:
 >
 ```
 
-<dt> [GitHub Issue #3290](https://github.com/influxdata/influxdb/issues/3290)
+<dt> [GitHub Issue #7530](https://github.com/influxdata/influxdb/issues/7530)
 </dt>
 
 ## Why does `fill(previous)` return empty results?
