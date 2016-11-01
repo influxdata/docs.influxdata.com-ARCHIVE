@@ -34,6 +34,97 @@ SectionPagesMenu = "products"
   weight = 40
   url = "/enterprise/"
 
+# InfluxDB v1.1 Menu
+[[menu.influxdb_1_1]]
+  name = "Introduction"
+  identifier = "introduction"
+  weight = 0
+  url = "/influxdb/v1.0/introduction/"
+[[menu.influxdb_1_1]]
+  name = "Guides"
+  identifier = "guides"
+  weight = 10
+  url = "/influxdb/v1.0/guides/"
+[[menu.influxdb_1_1]]
+  name = "Concepts"
+  identifier = "concepts"
+  weight = 20
+  url = "/influxdb/v1.0/concepts/"
+[[menu.influxdb_1_1]]
+  name = "Troubleshooting"
+  identifier = "troubleshooting"
+  weight = 30
+  url = "/influxdb/v1.0/troubleshooting/"
+[[menu.influxdb_1_1]]
+  name = "Tools"
+  identifier = "tools"
+  weight = 40
+  url = "/influxdb/v1.0/tools/"
+[[menu.influxdb_1_1]]
+  name = "Write Protocol"
+  identifier = "write_protocols"
+  weight = 50
+  url = "/influxdb/v1.0/write_protocols/"
+[[menu.influxdb_1_1]]
+  name = "Query Language"
+  identifier = "query_language"
+  weight = 60
+  url = "/influxdb/v1.0/query_language/"
+[[menu.influxdb_1_1]]
+  name = "High availability"
+  identifier = "high_availability"
+  weight = 70
+  url = "/influxdb/v1.0/high_availability/"
+[[menu.influxdb_1_1]]
+  name = "Administration"
+  identifier = "administration"
+  weight = 80
+  url = "/influxdb/v1.0/administration/"
+[[menu.influxdb_1_1]]
+  name = "About the Project"
+  identifier = "about"
+  weight = 100
+  url = "/influxdb/v1.0/about/"
+[[menu.influxdb_1_1]]
+  name = "External Resources"
+  identifier = "external_resources"
+  weight = 110
+  url = "/influxdb/v1.0/external_resources/"
+
+#InfluxDB v1.1 Sub-Menu - Introduction
+[[menu.influxdb_1_1]]
+  name = "Download"
+  identifier = "download"
+  weight = 0
+  url = "https://influxdata.com/downloads/#influxdb"
+  parent = "introduction"
+
+# InfluxDB v1.1 Sub-Menu - About
+[[menu.influxdb_1_1]]
+  name = "Release Notes/Changelog"
+  identifier = "changelog"
+  weight = 0
+  url = "https://github.com/influxdb/influxdb/blob/master/CHANGELOG.md"
+  parent = "about"
+[[menu.influxdb_1_1]]
+  name = "Contributing"
+  identifier = "contributing"
+  weight = 10
+  url = "https://github.com/influxdb/influxdb/blob/master/CONTRIBUTING.md"
+  parent = "about"
+[[menu.influxdb_1_1]]
+  name = "CLA"
+  identifier = "cla"
+  weight = 20
+  url = "https://influxdata.com/community/cla/"
+  parent = "about"
+[[menu.influxdb_1_1]]
+  name = "Licenses"
+  identifier = "licenses"
+  weight = 30
+  url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
+  parent = "about"
+
 # Kapacitor v1.0 Sub-Menu - Introduction
 [[menu.kapacitor_1_0]]
   name = "Download"
