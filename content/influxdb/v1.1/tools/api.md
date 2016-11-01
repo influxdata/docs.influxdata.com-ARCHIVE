@@ -85,22 +85,25 @@ POST http://localhost:8086/query
 Those `SELECT` queries require a `POST` request.
 
 #### Examples
+
+##### Example 1: Query data with a `SELECT` statement
 <br>
-Query data with a `SELECT` statement:
 ```
 $ curl -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas"'
 
 {"results":[{"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[["2016-05-20T21:30:00Z",12,"1",null],["2016-05-20T21:30:20Z",11,"2",null],["2016-05-20T21:30:40Z",18,null,"1"],["2016-05-20T21:31:00Z",19,null,"3"]]}]}]}
 ```
 
-Query data with a `SELECT` statement and an `INTO` clause:
+##### Example 2: Query data with a `SELECT` statement and an `INTO` clause
+<br>
 ```
 $ curl -XPOST 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * INTO "newmeas" FROM "mymeas"'
 
 {"results":[{"series":[{"name":"result","columns":["time","written"],"values":[["1970-01-01T00:00:00Z",4]]}]}]}
 ```
 
-Create a database:
+##### Example 3: Create a database
+<br>
 ```
 $ curl -XPOST 'http://localhost:8086/query' --data-urlencode 'q=CREATE DATABASE "mydb"'
 
@@ -122,11 +125,12 @@ $ curl -XPOST 'http://localhost:8086/query' --data-urlencode 'q=CREATE DATABASE 
 \* The HTTP API also supports basic authentication.
 Use basic authentication if you've [enabled authentication](/influxdb/v1.1/query_language/authentication_and_authorization/#set-up-authentication)
 and aren't using the query string parameters `u` and `p`.
-See below for an <td><a href="/influxdb/v1.1/tools/api/#basic-auth-query">example</a></td> of basic authentication.
+See below for an [example](#example-4-create-a-database-using-basic-authentication) of basic authentication.
 
 #### Examples
+
+##### Example 1: Query data with a `SELECT` statement and return pretty-printed JSON
 <br>
-Query data with a `SELECT` statement and return pretty-printed JSON:
 ```
 $ curl -GET 'http://localhost:8086/query?db=mydb&pretty=true' --data-urlencode 'q=SELECT * FROM "mymeas"'
 
@@ -175,22 +179,24 @@ $ curl -GET 'http://localhost:8086/query?db=mydb&pretty=true' --data-urlencode '
 }
 ```
 
-Query data with a `SELECT` statement and return second precision epoch
-timestamps:
+##### Example 2: Query data with a `SELECT` statement and return second precision epoch timestamps
+<br>
 ```
 $ curl -GET 'http://localhost:8086/query?db=mydb&epoch=s' --data-urlencode 'q=SELECT * FROM "mymeas"'
 
 {"results":[{"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[[1463779800,12,"1",null],[1463779820,11,"2",null],[1463779840,18,null,"1"],[1463779860,19,null,"3"]]}]}]}
 ```
 
-Create a database using HTTP authentication:
+##### Example 3: Create a database using HTTP authentication
+<br>
 ```
 $ curl -XPOST 'http://localhost:8086/query?u=myusername&p=mypassword' --data-urlencode 'q=CREATE DATABASE "mydb"'
 
 {"results":[{}]}
 ```
 
-<a name=basic-auth-query></a>Create a database using basic authentication:
+##### Example 4: Create a database using basic authentication
+<br>
 ```
 $ curl -XPOST -u myusername:mypassword 'http://localhost:8086/query' --data-urlencode 'q=CREATE DATABASE "mydb"'
 
@@ -208,9 +214,33 @@ All queries must be URL encoded and follow
 Our example shows the `--data-urlencode` parameter from `curl`, which we will
 use in all examples on this page.
 
+#### Options
+
+##### Request Multiple Queries
+<br>
 Delimit multiple queries with a semicolon `;`.
 
-#### Bind Parameters
+##### Submit Queries from a File
+<br>
+The API supports submitting queries from a file using a multipart `POST`
+request.
+The queries in the file must be separated a semicolon (`;`).
+
+Syntax:
+```
+curl -F "q=@<path_to_file>" -F "async=true" http://localhost:8086/query
+```
+
+##### Request Query Results in CSV format
+<br>
+The API can return query results in CSV format.
+
+Syntax:
+```
+curl -H "Accept: application/csv" -GET 'http://localhost:8086/query [...]
+```
+
+##### Bind Parameters
 <br>
 The API supports binding parameters to particular field values or tag values in
 the `WHERE` clause.
@@ -230,29 +260,55 @@ Map syntax:
 Delimit multiple placeholder key-value pairs with comma `,`.
 
 #### Examples
+##### Example 1: Send multiple queries
 <br>
-Send multiple queries:
 ```
 $ curl -GET 'http://localhost:8086/query?db=mydb&epoch=s' --data-urlencode 'q=SELECT * FROM "mymeas";SELECT mean("myfield") FROM "mymeas"'
 
 {"results":[{"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[[1463779800,12,"1",null],[1463779820,11,"2",null],[1463779840,18,null,"1"],[1463779860,19,null,"3"]]}]},{"series":[{"name":"mymeas","columns":["time","mean"],"values":[[0,15]]}]}]}
 ```
 
-Bind a parameter in the `WHERE` clause to specific tag value:
+##### Example 2: Request query results in CSV format
+<br>
+```
+curl -H "Accept: application/csv" -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas" LIMIT 3'
+
+name,tags,time,tag1,tag2,value
+mymeas,,1478030187213306198,blue,tag2,23
+mymeas,,1478030189872408710,blue,tag2,44
+mymeas,,1478030203683809554,blue,yellow,101
+```
+
+##### Example 3: Submit queries from a file
+<br>
+```
+curl -F "q=@queries.txt" -F "async=true" 'http://localhost:8086/query'
+```
+
+A sample of the queries in `queries.txt`:
+```
+CREATE DATABASE mydb;
+CREATE RETENTION POLICY four_weeks ON mydb DURATION 4w REPLICATION 1;
+```
+
+##### Example 4: Bind a parameter in the `WHERE` clause to specific tag value
+<br>
 ```
 curl -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas" WHERE "mytagkey" = $tag_value' --data-urlencode 'params={"tag_value":"mytagvalue1"}'
 
 {"results":[{"series":[{"name":"mymeas","columns":["time","myfieldkey","mytagkey"],"values":[["2016-09-05T18:25:08.479629934Z",9,"mytagvalue1"],["2016-09-05T18:25:20.892472038Z",8,"mytagvalue1"],["2016-09-05T18:25:30.408555195Z",10,"mytagvalue1"],["2016-09-05T18:25:39.108978991Z",111,"mytagvalue1"]]}]}]}
 ```
 
-Bind a parameter in the `WHERE` clause to a numerical field value:
+##### Example 5: Bind a parameter in the `WHERE` clause to a numerical field value
+<br>
 ```
 curl -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas" WHERE "myfieldkey" > $field_value' --data-urlencode 'params={"field_value":9}'
 
 {"results":[{"series":[{"name":"mymeas","columns":["time","myfieldkey","mytagkey"],"values":[["2016-09-05T18:25:30.408555195Z",10,"mytagvalue1"],["2016-09-05T18:25:39.108978991Z",111,"mytagvalue1"],["2016-09-05T18:25:46.587728107Z",111,"mytagvalue2"]]}]}]}
 ```
 
-Bind two parameters in the `WHERE` clause to a specific tag value and numerical field value:
+##### Example 6: Bind two parameters in the `WHERE` clause to a specific tag value and numerical field value
+<br>
 ```
 curl -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas" WHERE "mytagkey" = $tag_value AND  "myfieldkey" > $field_value' --data-urlencode 'params={"tag_value":"mytagvalue2","field_value":9}'
 
@@ -265,7 +321,6 @@ Responses are returned in JSON.
 Enable pretty-print JSON by including the query string parameter `pretty=true`.
 
 #### Summary Table
-<br>
 
 | HTTP status code | Description |
 | :--------------- | :---------- |
@@ -273,8 +328,8 @@ Enable pretty-print JSON by including the query string parameter `pretty=true`.
 | 400 Bad Request | Unacceptable request. Can occur with a syntactically incorrect query. The returned JSON offers further information. |
 
 #### Examples
+##### Example 1: A successful request that returns data
 <br>
-A successful request that returns data:
 ```
 $ curl -i -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas"'
 
@@ -283,7 +338,8 @@ HTTP/1.1 200 OK
 {"results":[{"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[["2016-05-20T21:30:00Z",12,"1",null],["2016-05-20T21:30:20Z",11,"2",null],["2016-05-20T21:30:40Z",18,null,"1"],["2016-05-20T21:31:00Z",19,null,"3"]]}]}]}
 ```
 
-A successful request that returns an error:
+##### Example 2: A successful request that returns an error
+<br>
 ```
 $ curl -i -GET 'http://localhost:8086/query?db=mydb1' --data-urlencode 'q=SELECT * FROM "mymeas"'
 
@@ -292,7 +348,8 @@ HTTP/1.1 200 OK
 {"results":[{"error":"database not found: mydb1"}]}
 ```
 
-An incorrectly formatted query:
+##### Example 3: An incorrectly formatted query
+<br>
 ```
 $ curl -i -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT *'
 
@@ -326,29 +383,33 @@ POST http://localhost:8086/write
 \* The HTTP API also supports basic authentication.
 Use basic authentication if you've [enabled authentication](/influxdb/v1.1/query_language/authentication_and_authorization/#set-up-authentication)
 and aren't using the query string parameters `u` and `p`.
-See below for an <td><a href="/influxdb/v1.1/tools/api/#basic-auth-write">example</a></td> of basic authentication.
+See below for an [example](#example-4-write-a-point-to-the-database-mydb-using-basic-authentication) of basic authentication.
 
 \*\* We recommend using the least precise precision possible as this can result
 in significant improvements in compression.
 
 #### Examples
+
+##### Example 1: Write a point to the database `mydb` with a timestamp in seconds
 <br>
-Write a point to the database `mydb` with a timestamp in seconds:
 ```
 $ curl -i -XPOST "http://localhost:8086/write?db=mydb&precision=s" --data-binary 'mymeas,mytag=1 myfield=90 1463683075'
 ```
 
-Write a point to the database `mydb` and the retention policy `myrp`:
+##### Example 2: Write a point to the database `mydb` and the retention policy `myrp`
+<br>
 ```
 $ curl -i -XPOST "http://localhost:8086/write?db=mydb&rp=myrp" --data-binary 'mymeas,mytag=1 myfield=90'
 ```
 
-Write a point to the database `mydb` using HTTP authentication:
+##### Example 3: Write a point to the database `mydb` using HTTP authentication
+<br>
 ```
 $ curl -i -XPOST "http://localhost:8086/write?db=mydb&u=myusername&p=mypassword" --data-binary 'mymeas,mytag=1 myfield=91'
 ```
 
-<a name=basic-auth-write></a>Write a point to the database `mydb` using basic authentication:
+##### Example 4: Write a point to the database `mydb` using basic authentication
+<br>
 ```
 $ curl -i -XPOST -u myusername:mypassword "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=1 myfield=91'
 ```
@@ -381,24 +442,28 @@ Files containing carriage returns will cause parser errors.
 Smaller batches, and more HTTP requests, will result in sub-optimal performance.
 
 #### Examples
+
+##### Example 1: Write a point to the database `mydb` with a nanosecond timestamp
 <br>
-Write a point to the database `mydb` with a nanosecond timestamp:
 ```
 $ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=1 myfield=90 1463683075000000000'
 ```
 
-Write a point to the database `mydb` with the local server's nanosecond timestamp:
+##### Example 2: Write a point to the database `mydb` with the local server's nanosecond timestamp
+<br>
 ```
 $ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=1 myfield=90'
 ```
 
-Write several points to the database `mydb` by separating points with a new line:
+##### Example 3: Write several points to the database `mydb` by separating points with a new line
+<br>
 ```
 $ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=3 myfield=89
 mymeas,mytag=2 myfield=34 1463689152000000000'
 ```
 
-Write several points to the database `mydb` from the file `data.txt`:
+##### Example 4: Write several points to the database `mydb` from the file `data.txt`
+<br>
 ```
 $ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary @data.txt
 ```
@@ -419,7 +484,6 @@ system is overloaded or significantly impaired.
 Errors are returned in JSON.
 
 #### Summary Table
-<br>
 
 | HTTP status code | Description    |
 | :--------------- | :------------- |
@@ -429,34 +493,39 @@ Errors are returned in JSON.
 | 500 Internal Server Error  | The system is overloaded or significantly impaired. Can occur if a user attempts to write to a retention policy that does not exist. The returned JSON offers further information. |
 
 #### Examples
+
+##### Example 1: A successful write
 <br>
-A successful write:
 ```
 HTTP/1.1 204 No Content
 ```
 
-Write a point with an incorrect timestamp:
+##### Example 2: Write a point with an incorrect timestamp
+<br>
 ```
 HTTP/1.1 400 Bad Request
 [...]
 {"error":"unable to parse 'mymeas,mytag=1 myfield=91 abc123': bad timestamp"}
 ```
 
-Write an integer to a field that previously accepted a float:
+##### Example 3: Write an integer to a field that previously accepted a float
+<br>
 ```
 HTTP/1.1 400 Bad Request
 [...]
 {"error":"field type conflict: input field \"myfield\" on measurement \"mymeas\" is type int64, already exists as type float"}
 ```
 
-Write a point to a database that doesn't exist:
+##### Example 4: Write a point to a database that doesn't exist
+<br>
 ```
 HTTP/1.1 404 Not Found
 [...]
 {"error":"database not found: \"mydb1\""}
 ```
 
-Write a point to a retention policy that doesn't exist:
+##### Example 5: Write a point to a retention policy that doesn't exist
+<br>
 ```
 HTTP/1.1 500 Internal Server Error
 [...]
