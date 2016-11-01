@@ -50,198 +50,45 @@ A new configuration file should be generated every time InfluxDB is upgraded.
 
 See the [installation documentation](/influxdb/v1.1/introduction/installation/#generate-a-configuration-file) for more detail on generating and using configuration files.
 
-## Environment variables
+### Environment variables
 
-Set any configuration option with an environment variable.
-When the process launches, InfluxDB checks for environment variables of the
-form below.
+All configuration options can be specified in the configuration file or in an
+environment variable.
 The environment variable overrides the equivalent option in the configuration
 file.
+If a configuration option is not specified in either the configuration file
+or in an environment variable, InfluxDB uses its internal default
+configuration.
 
-```
-INFLUXDB_<CONFIG_SECTION_NAME>_<OPTION_NAME>
-```
+In the sections below we name the relevant environment variable in the
+description for the configuration setting.
 
-To set any configuration that allows multiple configurations (such as collectd, graphite, etc), the system expects them to be prefixed by number.  So the first set of graphite environment variables would look like this:
-
-```
-INFLUXDB_GRAPHITE_0_BATCH_PENDING
-INFLUXDB_GRAPHITE_0_BATCH_SIZE
-INFLUXDB_GRAPHITE_0_BATCH_TIMEOUT
-INFLUXDB_GRAPHITE_0_BIND_ADDRESS
-INFLUXDB_GRAPHITE_0_CONSISTENCY_LEVEL
-INFLUXDB_GRAPHITE_0_DATABASE
-INFLUXDB_GRAPHITE_0_ENABLED
-INFLUXDB_GRAPHITE_0_PROTOCOL
-INFLUXDB_GRAPHITE_0_RETENTION_POLICY
-INFLUXDB_GRAPHITE_0_SEPARATOR
-INFLUXDB_GRAPHITE_0_TAGS
-INFLUXDB_GRAPHITE_0_TEMPLATES
-INFLUXDB_GRAPHITE_0_UDP_READ_BUFFER
-```
-
-### Current Environment Variables
-
-```
-INFLUXDB_ADMIN_BIND_ADDRESS
-INFLUXDB_ADMIN_ENABLED
-INFLUXDB_ADMIN_HTTPS_CERTIFICATE
-INFLUXDB_ADMIN_HTTPS_ENABLED
-INFLUXDB_BIND_ADDRESS
-INFLUXDB_COLLECTD_0_BATCH_PENDING
-INFLUXDB_COLLECTD_0_BATCH_SIZE
-INFLUXDB_COLLECTD_0_BATCH_TIMEOUT
-INFLUXDB_COLLECTD_0_BIND_ADDRESS
-INFLUXDB_COLLECTD_0_DATABASE
-INFLUXDB_COLLECTD_0_ENABLED
-INFLUXDB_COLLECTD_0_READ_BUFFER
-INFLUXDB_COLLECTD_0_RETENTION_POLICY
-INFLUXDB_COLLECTD_0_TYPESDB
-INFLUXDB_COLLECTD_BATCH_PENDING
-INFLUXDB_COLLECTD_BATCH_SIZE
-INFLUXDB_COLLECTD_BATCH_TIMEOUT
-INFLUXDB_COLLECTD_BIND_ADDRESS
-INFLUXDB_COLLECTD_DATABASE
-INFLUXDB_COLLECTD_ENABLED
-INFLUXDB_COLLECTD_READ_BUFFER
-INFLUXDB_COLLECTD_RETENTION_POLICY
-INFLUXDB_COLLECTD_TYPESDB
-INFLUXDB_CONTINUOUS_QUERIES
-INFLUXDB_CONTINUOUS_QUERIES_ENABLED
-INFLUXDB_CONTINUOUS_QUERIES_LOG_ENABLED
-INFLUXDB_CONTINUOUS_QUERIES_RUN_INTERVAL
-INFLUXDB_COORDINATOR_LOG_QUERIES_AFTER
-INFLUXDB_COORDINATOR_MAX_CONCURRENT_QUERIES
-INFLUXDB_COORDINATOR_MAX_SELECT_BUCKETS
-INFLUXDB_COORDINATOR_MAX_SELECT_POINT
-INFLUXDB_COORDINATOR_MAX_SELECT_SERIES
-INFLUXDB_COORDINATOR_QUERY_TIMEOUT
-INFLUXDB_COORDINATOR_WRITE_TIMEOUT
-INFLUXDB_DATA_CACHE_MAX_MEMORY_SIZE
-INFLUXDB_DATA_CACHE_SNAPSHOT_MEMORY_SIZE
-INFLUXDB_DATA_CACHE_SNAPSHOT_WRITE_COLD_DURATION
-INFLUXDB_DATA_COMPACT_FULL_WRITE_COLD_DURATION
-INFLUXDB_DATA_DIR
-INFLUXDB_DATA_ENGINE
-INFLUXDB_DATA_MAX_POINTS_PER_BLOCK
-INFLUXDB_DATA_MAX_SERIES_PER_DATABASE
-INFLUXDB_DATA_QUERY_LOG_ENABLED
-INFLUXDB_DATA_TRACE_LOGGING_ENABLED
-INFLUXDB_DATA_WAL_DIR
-INFLUXDB_DATA_WAL_LOGGING_ENABLED
-INFLUXDB_GRAPHITE_0_BATCH_PENDING
-INFLUXDB_GRAPHITE_0_BATCH_SIZE
-INFLUXDB_GRAPHITE_0_BATCH_TIMEOUT
-INFLUXDB_GRAPHITE_0_BIND_ADDRESS
-INFLUXDB_GRAPHITE_0_CONSISTENCY_LEVEL
-INFLUXDB_GRAPHITE_0_DATABASE
-INFLUXDB_GRAPHITE_0_ENABLED
-INFLUXDB_GRAPHITE_0_PROTOCOL
-INFLUXDB_GRAPHITE_0_RETENTION_POLICY
-INFLUXDB_GRAPHITE_0_SEPARATOR
-INFLUXDB_GRAPHITE_0_TAGS
-INFLUXDB_GRAPHITE_0_TEMPLATES
-INFLUXDB_GRAPHITE_0_UDP_READ_BUFFER
-INFLUXDB_GRAPHITE_BATCH_PENDING
-INFLUXDB_GRAPHITE_BATCH_SIZE
-INFLUXDB_GRAPHITE_BATCH_TIMEOUT
-INFLUXDB_GRAPHITE_BIND_ADDRESS
-INFLUXDB_GRAPHITE_CONSISTENCY_LEVEL
-INFLUXDB_GRAPHITE_DATABASE
-INFLUXDB_GRAPHITE_ENABLED
-INFLUXDB_GRAPHITE_PROTOCOL
-INFLUXDB_GRAPHITE_RETENTION_POLICY
-INFLUXDB_GRAPHITE_SEPARATOR
-INFLUXDB_GRAPHITE_TAGS
-INFLUXDB_GRAPHITE_TEMPLATES
-INFLUXDB_GRAPHITE_UDP_READ_BUFFER
-INFLUXDB_HTTP_AUTH_ENABLED
-INFLUXDB_HTTP_BIND_ADDRESS
-INFLUXDB_HTTP_BIND_SOCKET
-INFLUXDB_HTTP_ENABLED
-INFLUXDB_HTTP_HTTPS_CERTIFICATE
-INFLUXDB_HTTP_HTTPS_ENABLED
-INFLUXDB_HTTP_HTTPS_PRIVATE_KEY
-INFLUXDB_HTTP_LOG_ENABLED
-INFLUXDB_HTTP_MAX_CONNECTION_LIMIT
-INFLUXDB_HTTP_MAX_ROW_LIMIT
-INFLUXDB_HTTP_REALM
-INFLUXDB_HTTP_SHARED_SECRET
-INFLUXDB_HTTP_UNIX_SOCKET_ENABLED
-INFLUXDB_HTTP_WRITE_TRACING
-INFLUXDB_META_DIR
-INFLUXDB_META_LOGGING_ENABLED
-INFLUXDB_META_RETENTION_AUTOCREATE
-INFLUXDB_MONITOR_STORE_DATABASE
-INFLUXDB_MONITOR_STORE_ENABLED
-INFLUXDB_MONITOR_STORE_INTERVAL
-INFLUXDB_OPENTSDB_0_BATCH_PENDING
-INFLUXDB_OPENTSDB_0_BATCH_SIZE
-INFLUXDB_OPENTSDB_0_BATCH_TIMEOUT
-INFLUXDB_OPENTSDB_0_BIND_ADDRESS
-INFLUXDB_OPENTSDB_0_CERTIFICATE
-INFLUXDB_OPENTSDB_0_CONSISTENCY_LEVEL
-INFLUXDB_OPENTSDB_0_DATABASE
-INFLUXDB_OPENTSDB_0_ENABLED
-INFLUXDB_OPENTSDB_0_LOG_POINT_ERRORS
-INFLUXDB_OPENTSDB_0_RETENTION_POLICY
-INFLUXDB_OPENTSDB_0_TLS_ENABLED
-INFLUXDB_OPENTSDB_BATCH_PENDING
-INFLUXDB_OPENTSDB_BATCH_SIZE
-INFLUXDB_OPENTSDB_BATCH_TIMEOUT
-INFLUXDB_OPENTSDB_BIND_ADDRESS
-INFLUXDB_OPENTSDB_CERTIFICATE
-INFLUXDB_OPENTSDB_CONSISTENCY_LEVEL
-INFLUXDB_OPENTSDB_DATABASE
-INFLUXDB_OPENTSDB_ENABLED
-INFLUXDB_OPENTSDB_LOG_POINT_ERRORS
-INFLUXDB_OPENTSDB_RETENTION_POLICY
-INFLUXDB_OPENTSDB_TLS_ENABLED
-INFLUXDB_REPORTING_DISABLED
-INFLUXDB_RETENTION_CHECK_INTERVAL
-INFLUXDB_RETENTION_ENABLED
-INFLUXDB_SHARD_PRECREATION
-INFLUXDB_SHARD_PRECREATION_ADVANCE_PERIOD
-INFLUXDB_SHARD_PRECREATION_CHECK_INTERVAL
-INFLUXDB_SHARD_PRECREATION_ENABLED
-INFLUXDB_SUBSCRIBER_ENABLED
-INFLUXDB_SUBSCRIBER_HTTP_TIMEOUT
-INFLUXDB_UDP_0_BATCH_PENDING
-INFLUXDB_UDP_0_BATCH_SIZE
-INFLUXDB_UDP_0_BATCH_TIMEOUT
-INFLUXDB_UDP_0_BIND_ADDRESS
-INFLUXDB_UDP_0_DATABASE
-INFLUXDB_UDP_0_ENABLED
-INFLUXDB_UDP_0_PRECISION
-INFLUXDB_UDP_0_READ_BUFFER
-INFLUXDB_UDP_0_RETENTION_POLICY
-INFLUXDB_UDP_BATCH_PENDING
-INFLUXDB_UDP_BATCH_SIZE
-INFLUXDB_UDP_BATCH_TIMEOUT
-INFLUXDB_UDP_BIND_ADDRESS
-INFLUXDB_UDP_DATABASE
-INFLUXDB_UDP_ENABLED
-INFLUXDB_UDP_PRECISION
-INFLUXDB_UDP_READ_BUFFER
-INFLUXDB_UDP_RETENTION_POLICY
-```
-
-Example:
-
-InfluxDB will use `~/mydataz` as the
-[data directory](#dir-var-lib-influxdb-data):
-```
-$ echo $INFLUXDB_DATA_DIR
-~/mydataz
-```
-
-> **Note:** Replace any dashes in option names with underscores. For example,
-this is the valid environment variable for the `store-database` option in the
-`[monitor]` section:
+> **Note:**
+To set or override settings in a config section that allows multiple
+configurations (any section with [[`double_brackets`]] in the header supports
+multiple configurations), the desired configuration must be specified by ordinal
+number.
+For example, for the first set of `[[graphite]]` environment variables,
+prefix the configuration setting name in the environment variable with the
+relevant position number (in this case: `0`):
 >
-```
-INFLUXDB_MONITOR_STORE_DATABASE
-```
+    INFLUXDB_GRAPHITE_0_BATCH_PENDING
+    INFLUXDB_GRAPHITE_0_BATCH_SIZE
+    INFLUXDB_GRAPHITE_0_BATCH_TIMEOUT
+    INFLUXDB_GRAPHITE_0_BIND_ADDRESS
+    INFLUXDB_GRAPHITE_0_CONSISTENCY_LEVEL
+    INFLUXDB_GRAPHITE_0_DATABASE
+    INFLUXDB_GRAPHITE_0_ENABLED
+    INFLUXDB_GRAPHITE_0_PROTOCOL
+    INFLUXDB_GRAPHITE_0_RETENTION_POLICY
+    INFLUXDB_GRAPHITE_0_SEPARATOR
+    INFLUXDB_GRAPHITE_0_TAGS
+    INFLUXDB_GRAPHITE_0_TEMPLATES
+    INFLUXDB_GRAPHITE_0_UDP_READ_BUFFER
+>
+For the Nth Graphite configuration in the configuration file, the relevant
+environment variables would be of the form `INFLUXDB_GRAPHITE_(N-1)_BATCH_PENDING`.
+For each section of the configuration file the numbering restarts at zero.
 
 ## Configuration Sections
 
@@ -290,9 +137,13 @@ this option to `true` will disable reporting.
 
 >**Note:** No data from user databases is ever transmitted.
 
+Environment variable: `INFLUXDB_REPORTING_DISABLED`
+
 ### bind-address = ":8088"
 
 This is the port that [backup/restore](/influxdb/v1.1/administration/backup_and_restore/) will use.
+
+Environment variable: `INFLUXDB_BIND_ADDRESS`
 
 ## [meta]
 
@@ -307,6 +158,8 @@ Files in the `meta` directory include `meta.db`.
 
 >**Note:** The default directory for OS X installations is `/Users/<username>/.influxdb/meta`
 
+Environment variable: `INFLUXDB_META_DIR`
+
 ### retention-autocreate = true
 
 Retention policy auto-creation automatically creates the [`DEFAULT` retention policy](/influxdb/v1.1/concepts/glossary/#retention-policy-rp) `autogen` when a database is created.
@@ -315,9 +168,13 @@ database's `DEFAULT` retention policy, which is used when a write or query does
 not specify a retention policy.
 Disable this setting to prevent the creation of this retention policy when creating databases.
 
+Environment variable: `INFLUXDB_META_RETENTION_AUTOCREATE`
+
 ### logging-enabled = true
 
 Meta logging toggles the logging of messages from the meta service.
+
+Environment variable: `INFLUXDB_META_LOGGING_ENABLED`
 
 ## [data]
 
@@ -330,44 +187,64 @@ This directory may be changed.
 
 >**Note:** The default directory for OS X installations is `/Users/<username>/.influxdb/data`
 
+Environment variable: `INFLUXDB_DATA_DIR`
+
 ### engine = "tsm1"
 
 The storage engine. This is the only option for version 1.0.
 
+Environment variable: `INFLUXDB_DATA_ENGINE`
+
 ### wal-dir = "/var/lib/influxdb/wal"
 
 The WAL directory is the location of the [write ahead log](/influxdb/v1.1/concepts/glossary/#wal-write-ahead-log).
+
+Environment variable: `INFLUXDB_DATA_WAL_DIR`
 
 ### wal-logging-enabled = true
 
 The WAL logging enabled toggles the logging of WAL operations such as WAL
 flushes to disk.
 
+Environment variable: `INFLUXDB_DATA_WAL_LOGGING_ENABLED`
+
 ### query-log-enabled = true
 
 The query log enabled setting toggles the logging of parsed queries before execution.
 Very useful for troubleshooting, but will log any sensitive data contained within a query.
 
+Environment variable: `INFLUXDB_DATA_QUERY_LOG_ENABLED`
+
 ### cache-max-memory-size = 524288000
 
 The cache maximum memory size is the maximum size (in bytes) a shard's cache can reach before it starts rejecting writes.
+
+Environment variable: `INFLUXDB_DATA_CACHE_MAX_MEMORY_SIZE`
 
 ### cache-snapshot-memory-size = 26214400
 
 The cache snapshot memory size is the size at which the engine will snapshot the cache and write it to a TSM file, freeing up memory.
 
+Environment variable: `INFLUXDB_DATA_CACHE_SNAPSHOT_MEMORY_SIZE`
+
 ### cache-snapshot-write-cold-duration = "1h0m0s"
 
 The cache snapshot write cold duration is the length of time at which the engine will snapshot the cache and write it to a new TSM file if the shard hasn't received writes or deletes.
+
+Environment variable: `INFLUXDB_DATA_CACHE_SNAPSHOT_WRITE_COLD_DURATION`
 
 ### compact-full-write-cold-duration = "24h0m0s"
 
 The compact full write cold duration is the duration at which the engine will compact all TSM files in a shard if it hasn't received a write or delete.
 
+Environment variable: `INFLUXDB_DATA_COMPACT_FULL_WRITE_COLD_DURATION`
+
 ### max-points-per-block = 0
 
 The maximum points per block is the maximum number of points in an encoded block in a TSM file.
 Larger numbers may yield better compression but could incur a performance penalty when querying.
+
+Environment variable: `INFLUXDB_DATA_MAX_POINTS_PER_BLOCK`
 
 ### max-series-per-database = 1000000
 
@@ -388,9 +265,13 @@ If a point causes the number of series in a database to exceed
 will continue to accept writes to existing series, but writes that create a
 new series will fail.
 
+Environment variable: `INFLUXDB_DATA_MAX_SERIES_PER_DATABASE`
+
 ### trace-logging-enabled = false
 
 Toggles logging of additional debug information within the TSM engine and WAL.
+
+Environment variable: `INFLUXDB_DATA_TRACE_LOGGING_ENABLED`
 
 ## [coordinator]
 
@@ -401,10 +282,14 @@ For more on managing queries, see [Query Management](/influxdb/v1.1/troubleshoot
 
 The time within which a write request must complete on the cluster.
 
+Environment variable: `INFLUXDB_COORDINATOR_WRITE_TIMEOUT`
+
 ### max-concurrent-queries = 0
 
 The maximum number of running queries allowed on your instance.
 The default setting (`0`) allows for an unlimited number of queries.
+
+Environment variable: `INFLUXDB_COORDINATOR_MAX_CONCURRENT_QUERIES`
 
 ### query-timeout = "0"
 
@@ -412,6 +297,8 @@ The maximum time for which a query can run on your instance before InfluxDB
 kills the query.
 The default setting (`0`) allows queries to run with no time restrictions.
 This setting is a [duration literal](/influxdb/v1.1/query_language/spec/#durations).
+
+Environment variable: `INFLUXDB_COORDINATOR_QUERY_TIMEOUT`
 
 ### log-queries-after = "0"
 
@@ -421,12 +308,16 @@ The default setting (`"0"`) will never tell InfluxDB to log the query.
 This setting is a
 [duration literal](/influxdb/v1.1/query_language/spec/#durations).
 
+Environment variable: `INFLUXDB_COORDINATOR_LOG_QUERIES_AFTER`
+
 ### max-select-point = 0
 
 The maximum number of [points](/influxdb/v1.1/concepts/glossary/#point) that a
 `SELECT` statement can process.
 The default setting (`0`) allows the `SELECT` statement to process an unlimited
 number of points.
+
+Environment variable: `INFLUXDB_COORDINATOR_MAX_SELECT_POINT`
 
 ### max-select-series = 0
 
@@ -435,11 +326,15 @@ The maximum number of [series](/influxdb/v1.1/concepts/glossary/#series) that a
 The default setting (`0`) allows the `SELECT` statement to process an unlimited
 number of series.
 
+Environment variable: `INFLUXDB_COORDINATOR_MAX_SELECT_SERIES`
+
 ### max-select-buckets = 0
 
 The maximum number of `GROUP BY time()` buckets that a query can process.
 The default setting (`0`) allows a query to process an unlimited number of
 buckets.
+
+Environment variable: `INFLUXDB_COORDINATOR_MAX_SELECT_BUCKETS`
 
 ## [retention]
 
@@ -449,9 +344,13 @@ This section controls the enforcement of retention policies for evicting old dat
 
 Set to `false` to prevent InfluxDB from enforcing retention policies.
 
+Environment variable: `INFLUXDB_RETENTION_ENABLED`
+
 ### check-interval = "30m0s"
 
 The rate at which InfluxDB checks to enforce a retention policy.
+
+Environment variable: `INFLUXDB_RETENTION_CHECK_INTERVAL`
 
 ## [shard-precreation]
 
@@ -461,13 +360,19 @@ Shards that would be wholly or partially in the past are never precreated.
 
 ### enabled = true
 
+Environment variable: `INFLUXDB_SHARD_PRECREATION_ENABLED`
+
 ### check-interval = "10m0s"
+
+Environment variable: `INFLUXDB_SHARD_PRECREATION_CHECK_INTERVAL`
 
 ### advance-period = "30m0s"
 
 The maximum period in the future for which InfluxDB precreates shards.
 The `30m` default should work for most systems.
 Increasing this setting too far in the future can cause inefficiencies.
+
+Environment variable: `INFLUXDB_SHARD_PRECREATION_ADVANCE_PERIOD`
 
 ## [admin]
 
@@ -477,9 +382,13 @@ Controls the availability of the built-in, web-based admin interface.
 
 Set to `false` to disable the admin interface.
 
+Environment variable: `INFLUXDB_ADMIN_ENABLED`
+
 ### bind-address = ":8083"
 
 The port used by the admin interface.
+
+Environment variable: `INFLUXDB_ADMIN_BIND_ADDRESS`
 
 ### https-enabled = false
 
@@ -487,9 +396,13 @@ Set to `true` to enable HTTPS for the admin interface.
 
 >**Note:** HTTPS must be enable for the [[http]](/influxdb/v1.1/administration/config/#http) service for the admin UI to function properly using HTTPS.
 
+Environment variable: `INFLUXDB_ADMIN_HTTPS_ENABLED`
+
 ### https-certificate = "/etc/ssl/influxdb.pem"
 
 The path of the certificate file.
+
+Environment variable: `INFLUXDB_ADMIN_HTTPS_CERTIFICATE`
 
 ## [monitor]
 
@@ -505,13 +418,19 @@ If you want to use a retention policy other than the seven-day retention policy,
 Set to `false` to disable recording statistics internally.
 If set to `false` it will make it substantially more difficult to diagnose issues with your installation.
 
+Environment variable: `INFLUXDB_MONITOR_STORE_ENABLED`
+
 ### store-database = "\_internal"
 
 The destination database for recorded statistics.
 
+Environment variable: `INFLUXDB_MONITOR_STORE_DATABASE`
+
 ### store-interval = "10s"
 
 The interval at which InfluxDB records statistics.
+
+Environment variable: `INFLUXDB_MONITOR_STORE_INTERVAL`
 
 ## [subscriber]
 
@@ -521,9 +440,13 @@ This section controls how [Kapacitor](/kapacitor/v1.1/) will receive data.
 
 Set to `false` to disable the subscriber service.
 
+Environment variable: `INFLUXDB_SUBSCRIBER_ENABLED`
+
 ### http-timeout = "30s"
 
 Controls how long an http request for the subscriber service will run before it times out.
+
+Environment variable: `INFLUXDB_SUBSCRIBER_HTTP_TIMEOUT`
 
 ## [http]
 
@@ -537,30 +460,44 @@ See [Authentication and Authorization](/influxdb/v1.1/query_language/authenticat
 Set to `false` to disable HTTP.
 Note that the InfluxDB [command line interface (CLI)](/influxdb/v1.1/tools/shell/) connects to the database using the HTTP API.
 
+Environment variable: `INFLUXDB_HTTP_ENABLED`
+
 ### bind-address = ":8086"
 
 The port used by the HTTP API.
+
+Environment variable: `INFLUXDB_HTTP_BIND_ADDRESS`
 
 ### auth-enabled = false
 
 Set to `true` to require authentication.
 
+Environment variable: `INFLUXDB_HTTP_AUTH_ENABLED`
+
 ### log-enabled = true
 
 Set to `false` to disable logging.
+
+Environment variable: `INFLUXDB_HTTP_LOG_ENABLED`
 
 ### write-tracing = false
 
 Set to `true` to enable logging for the write payload.
 If set to `true`, this will duplicate every write statement in the logs and is thus not recommended for general use.
 
+Environment variable: `INFLUXDB_HTTP_WRITE_TRACING`
+
 ### https-enabled = false
 
 Set to `true` to enable HTTPS.
 
+Environment variable: `INFLUXDB_HTTP_HTTPS_ENABLED`
+
 ### https-certificate = "/etc/ssl/influxdb.pem"
 
 The path of the certificate file.
+
+Environment variable: `INFLUXDB_HTTP_HTTPS_CERTIFICATE`
 
 ### https-private-key = ""
 
@@ -570,21 +507,31 @@ the private key from the `https-certificate` file.
 If a separate `https-private-key` file is specified, the httpd service will load
 the private key from the `https-private-key` file.
 
+Environment variable: `INFLUXDB_HTTP_HTTPS_PRIVATE_KEY`
+
 ### max-row-limit = 10000
 
 This limits the number of rows that can be returned in a non-chunked query.
+
+Environment variable: `INFLUXDB_HTTP_MAX_ROW_LIMIT`
 
 ### max-connection-limit = 0
 
 Limit the number of connections for the http service.  0 is unlimited.
 
+Environment variable: `INFLUXDB_HTTP_MAX_CONNECTION_LIMIT`
+
 ### shared-secret = ""
 
 The shared secret used for JWT signing.
 
+Environment variable: `INFLUXDB_HTTP_SHARED_SECRET`
+
 ### realm = "InfluxDB"
 
 Realm is the JWT realm used by the http endpoint.
+
+Environment variable: `INFLUXDB_HTTP_REALM`
 
 ## [[graphite]]
 
@@ -595,22 +542,32 @@ See the [README](https://github.com/influxdb/influxdb/blob/master/services/graph
 
 Set to `true` to enable Graphite input.
 
+Environment variable: `INFLUXDB_GRAPHITE_0_ENABLED`
+
 ### bind-address = ":2003"
 
 The default port.
 
+Environment variable: `INFLUXDB_GRAPHITE_0_BIND_ADDRESS`
+
 ### database = "graphite"
 
 The name of the database that you want to write to.
+
+Environment variable: `INFLUXDB_GRAPHITE_0_DATABASE`
 
 ### retention-policy = ""
 
 The relevant retention policy.
 An empty string is equivalent to the database's `DEFAULT` retention policy.
 
+Environment variable: `INFLUXDB_GRAPHITE_0_RETENTION_POLICY`
+
 ### protocol = "tcp"
 
 Set to `tcp` or `udp`.
+
+Environment variable: `INFLUXDB_GRAPHITE_PROTOCOL`
 
 *The next three options control how batching works.
 You should have this enabled otherwise you could get dropped metrics or poor performance.
@@ -620,13 +577,19 @@ Batching will buffer points in memory if you have many coming in.*
 
 The input will flush if this many points get buffered.
 
+Environment variable: `INFLUXDB_GRAPHITE_BATCH_SIZE`
+
 ### batch-pending = 10
 
 The number of batches that may be pending in memory.
 
+Environment variable: `INFLUXDB_GRAPHITE_BATCH_PENDING`
+
 ### batch-timeout = "1s"
 
 The input will flush at least this often even if it hasn't reached the configured batch-size.
+
+Environment variable: `INFLUXDB_GRAPHITE_BATCH_TIMEOUT`
 
 ### consistency-level = "one"
 
@@ -634,14 +597,20 @@ The number of nodes that must confirm the write.
 If the requirement is not met the return value will be either `partial write` if some points in the batch fail or `write failure` if all points in the batch fail.
 For more information, see the Query String Parameters for Writes section in the [Line Protocol Syntax Reference ](/influxdb/v1.1/write_protocols/write_syntax/).
 
+Environment variable: `INFLUXDB_GRAPHITE_CONSISTENCY_LEVEL`
+
 ### separator = "."
 
 This string joins multiple matching 'measurement' values providing more control over the final measurement name.
+
+Environment variable: `INFLUXDB_GRAPHITE_SEPARATOR`
 
 ### udp-read-buffer = 0
 
 UDP Read buffer size, 0 means OS default.
 UDP listener will fail if set above OS max.
+
+Environment variable: `INFLUXDB_GRAPHITE_UDP_READ_BUFFER`
 
 ## [[collectd]]
 
@@ -653,14 +622,20 @@ on Github for more information.
 
 Set to `true` to enable collectd writes.
 
+Environment variable: `INFLUXDB_COLLECTD_ENABLED`
+
 ### bind-address = ":25826"
 
 The port.
+
+Environment variable: `INFLUXDB_COLLECTD_BIND_ADDRESS`
 
 ### database = "collectd"
 
 The name of the database that you want to write to.
 This defaults to `collectd`.
+
+Environment variable: `INFLUXDB_COLLECTD_DATABASE`
 
 *The next three options control how batching works.
 You should have this enabled otherwise you could get dropped metrics or poor performance.
@@ -671,28 +646,40 @@ Batching will buffer points in memory if you have many coming in.*
 The relevant retention policy.
 An empty string is equivalent to the database's `DEFAULT` retention policy.
 
+Environment variable: `INFLUXDB_COLLECTD_RETENTION_POLICY`
+
 ### batch-size = 5000
 
 The input will flush if this many points get buffered.
+
+Environment variable: `INFLUXDB_COLLECTD_BATCH_SIZE`
 
 ### batch-pending = 10
 
 The number of batches that may be pending in memory.
 
+Environment variable: `INFLUXDB_COLLECTD_BATCH_PENDING`
+
 ### batch-timeout = "10s"
 
 The input will flush at least this often even if it hasn't reached the configured batch-size.
+
+Environment variable: `INFLUXDB_COLLECTD_BATCH_TIMEOUT`
 
 ### read-buffer = 0
 
 UDP Read buffer size, 0 means OS default.
 UDP listener will fail if set above OS max.
 
+Environment variable: `INFLUXDB_COLLECTD_READ_BUFFER`
+
 ### typesdb = "/usr/share/collectd/types.db"
 
 Defaults to `/usr/share/collectd/types.db`. A sample `types.db` file
 can be found
 [here](https://github.com/collectd/collectd/blob/master/src/types.db).
+
+Environment variable: `INFLUXDB_COLLECTD_TYPESDB`
 
 ## [[opentsdb]]
 
@@ -703,27 +690,41 @@ See the [README](https://github.com/influxdb/influxdb/blob/master/services/opent
 
 Set to `true` to enable openTSDB writes.
 
+Environment variable: `INFLUXDB_OPENTSDB_0_ENABLED`
+
 ### bind-address = ":4242"
 
 The default port.
+
+Environment variable: `INFLUXDB_OPENTSDB_BIND_ADDRESS`
 
 ### database = "opentsdb"
 
 The name of the database that you want to write to.
 If the database does not exist, it will be created automatically when the input is initialized.
 
+Environment variable: `INFLUXDB_OPENTSDB_DATABASE`
+
 ### retention-policy = ""
 
 The relevant retention policy.
 An empty string is equivalent to the database's `DEFAULT` retention policy.
 
+Environment variable: `INFLUXDB_OPENTSDB_RETENTION_POLICY`
+
 ### consistency-level = "one"
 
 Sets the write consistency level: `any`, `one`, `quorum`, or `all` for writes.
 
+Environment variable: `INFLUXDB_OPENTSDB_CONSISTENCY_LEVEL`
+
 ### tls-enabled = false
 
+Environment variable: `INFLUXDB_OPENTSDB_TLS_ENABLED`
+
 ### certificate = "/etc/ssl/influxdb.pem"
+
+Environment variable: `INFLUXDB_OPENTSDB_CERTIFICATE`
 
 *The next three options control how batching works.
 You should have this enabled otherwise you could get dropped metrics or poor performance.
@@ -733,17 +734,25 @@ Only points metrics received over the telnet protocol undergo batching.*
 
 The input will flush if this many points get buffered.
 
+Environment variable: `INFLUXDB_OPENTSDB_BATCH_SIZE`
+
 ### batch-pending = 5
 
 The number of batches that may be pending in memory.
+
+Environment variable: `INFLUXDB_OPENTSDB_BATCH_PENDING`
 
 ### batch-timeout = "1s"
 
 The input will flush at least this often even if it hasn't reached the configured batch-size.
 
+Environment variable: `INFLUXDB_OPENTSDB_BATCH_TIMEOUT`
+
 ### log-point-errors = true
 
 Log an error for every malformed point.
+
+Environment variable: `INFLUXDB_OPENTSDB_0_LOG_POINT_ERRORS`
 
 ## [[udp]]
 
@@ -754,18 +763,26 @@ See the [UDP page](/influxdb/v1.1/write_protocols/udp/) for more information.
 
 Set to `true` to enable writes over UDP.
 
+Environment variable: `INFLUXDB_UDP_ENABLED`
+
 ### bind-address = ":8089"
 
 An empty string is equivalent to `0.0.0.0`.
+
+Environment variable: `INFLUXDB_UDP_BIND_ADDRESS`
 
 ### database = "udp"
 
 The name of the database that you want to write to.
 
+Environment variable: `INFLUXDB_UDP_DATABASE`
+
 ### retention-policy = ""
 
 The relevant retention policy for your data.
 An empty string is equivalent to the database's `DEFAULT` retention policy.
+
+Environment variable: `INFLUXDB_UDP_RETENTION_POLICY`
 
 *The next three options control how batching works.
 You should have this enabled otherwise you could get dropped metrics or poor performance.
@@ -775,22 +792,32 @@ Batching will buffer points in memory if you have many coming in.*
 
 The input will flush if this many points get buffered.
 
+Environment variable: `INFLUXDB_UDP_0_BATCH_SIZE`
+
 ### batch-pending = 10
 
 The number of batches that may be pending in memory.
+
+Environment variable: `INFLUXDB_UDP_0_BATCH_PENDING`
 
 ### read-buffer = 0
 
 UDP read buffer size, 0 means OS default.
 UDP listener will fail if set above OS max.
 
+Environment variable: `INFLUXDB_UDP_BATCH_SIZE`
+
 ### batch-timeout = "1s"
 
 The input will flush at least this often even if it hasn't reached the configured batch-size.
 
+Environment variable: `INFLUXDB_UDP_BATCH_TIMEOUT`
+
 ### precision = ""
 
 [Time precision](/influxdb/v1.1/query_language/spec/#durations) used when decoding time values.  Defaults to `nanoseconds` which is the default of the database.
+
+Environment variable: `INFLUXDB_UDP_PRECISION`
 
 ## [continuous_queries]
 
@@ -802,10 +829,16 @@ InfluxDB executes one auto-generated query per `GROUP BY time()` interval.
 
 Set to `false` to disable logging for CQ events.
 
+Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_LOG_ENABLED`
+
 ### enabled = true
 
 Set to `false` to disable CQs.
 
+Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_ENABLED`
+
 ### run-interval = "1s"
 
 The interval at which InfluxDB checks to see if a CQ needs to run. Set this option to the lowest interval at which your CQs run. For example, if your most frequent CQ runs every minute, set `run-interval` to `1m`.
+
+Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_RUN_INTERVAL`
