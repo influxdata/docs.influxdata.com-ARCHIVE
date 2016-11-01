@@ -58,8 +58,8 @@ This issue does not affect existing queries and dashboards or users working with
 ## Service Plugins
 
 InfluxDB accepts writes over
-[UDP](/influxdb/v1.1/tools/udp/)
+[UDP](https://github.com/influxdata/influxdb/blob/master/services/udp/README.md)
 and provides an easy way to set up
-[Graphite](/influxdb/v1.1/tools/graphite/),
-[CollectD](/influxdb/v1.1/tools/collectd/),
-and [OpenTSDB](/influxdb/v1.1/tools/opentsdb/) as input sources.
+[Graphite](https://github.com/influxdata/influxdb/blob/master/services/graphite/README.md),
+[CollectD](https://github.com/influxdata/influxdb/blob/master/services/collectd/README.md),
+and [OpenTSDB](https://github.com/influxdb/influxdb/blob/master/services/opentsdb/README.md) as input sources.

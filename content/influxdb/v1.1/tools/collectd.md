@@ -6,7 +6,7 @@ menu:
   influxdb_1_1:
     weight: 80
     parent: tools
+    url: https://github.com/influxdata/influxdb/blob/master/services/collectd/README.md
 ---
 
-InfluxDB provides an easy way to hook up CollectD as an input source.
-See the [README on GitHub](https://github.com/influxdata/influxdb/blob/master/services/collectd/README.md) for more information.
+See the [README](https://github.com/influxdata/influxdb/blob/master/services/collectd/README.md) on GitHub.
