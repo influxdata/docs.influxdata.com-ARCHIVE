@@ -15,10 +15,11 @@ that can be inserted back into the database.
 Will print usage for the tool.
 
 ### `influx_inspect report`
-Displays series meta-data for all shards.  Default location [$HOME/.influxdb]
+Displays series meta-data for all shards.
+The default location is [$HOME/.influxdb].
 
 ### `influx_inspect dumptsm`
-Dumps low-level details about [tsm](/influxdb/v1.1/concepts/glossary/#tsm-time-structured-merge-tree) files
+Dumps low-level details about [tsm](/influxdb/v1.1/concepts/glossary/#tsm-time-structured-merge-tree) files.
 
 #### Flags
 
@@ -48,25 +49,38 @@ the
 [influx](/influxdb/v1.1/tools/shell/#import-data-from-a-file-with-import)
 command.
 
-#### `-dir` string
-Root storage path.
+#### `-datadir` string
+Data storage path.
 
-`default` = "$HOME/.influxdb"
+`default` = "$HOME/.influxdb/data"
+
+#### `-waldir` string
+[WAL](/influxdb/v1.1/concepts/glossary/#wal-write-ahead-log) storage path.
+
+`default` =  "$HOME/.influxdb/wal"
 
 #### `-out` string
 Destination file to export to
 
 `default` = "$HOME/.influxdb/export"
 
-#### `-db` string (optional)
+#### `-database` string (optional)
 Database to export.
 
 `default` = ""
 
-#### `-rp` string (optional)
-Retention policy to export.
+#### `-retention` string (optional)
+[Retention policy](/influxdb/v1.1/concepts/glossary/#retention-policy-rp) to export.
 
 `default` = ""
+
+#### `-start` string (optional)
+The start of the time range.
+The date-time string must be [RFC3339 format](/influxdb/v1.1/query_language/data_exploration/#absolute-time).
+
+#### `-end` string (optional)
+The end of the time range.
+The date-time string must be [RFC3339 format](/influxdb/v1.1/query_language/data_exploration/#absolute-time).
 
 #### `-compress` bool (optional)
 Compress the output.
@@ -82,7 +96,7 @@ influx_inspect export -compress
 
 Export data from a specific database and retention policy:
 ```
-influx_inspect export -db mydb -rp autogen
+influx_inspect export -database mydb -retention autogen
 ```
 
 #### Sample Data
