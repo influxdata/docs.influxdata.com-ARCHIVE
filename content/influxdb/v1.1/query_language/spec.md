@@ -156,6 +156,7 @@ string_lit          = `'` { unicode_char } `'` .
 
 Duration literals specify a length of time.
 An integer literal followed immediately (with no spaces) by a duration unit listed below is interpreted as a duration literal.
+Durations can be specified with mixed units.
 
 #### Duration units
 
