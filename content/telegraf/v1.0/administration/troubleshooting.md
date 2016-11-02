@@ -7,7 +7,7 @@ menu:
     parent: administration
 ---
 
-This Troubleshooting guide will help you inspect Telegraf's output, submit sample metrics and watch how Telegraf reformats and outputs points to its output plugins.
+This Troubleshooting guide will help you inspect Telegraf's output, submit some sample metrics and watch how Telegraf formats and emits points to its output plugins.
 
 ### Capture output
 
