@@ -2,7 +2,7 @@
 title: Troubleshooting
 menu:
   telegraf_1_0:
-    name: Troubleshooting Telegraf
+    name: Troubleshooting
     weight: 10
     parent: administration
 ---
@@ -40,7 +40,7 @@ nc -lu 8089 > telegraf_dump.txt
 
 ## Submit test inputs
 
-Once you have access to Telegraf's output coming to your `nc` socket, you can enable the [inputs.tcp_listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/tcp_listener) or the [inputs.udp_listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/udp_listener) plugins.
+Once you have visibility to Telegraf's output arriving to your `nc` socket, you can enable the [inputs.tcp_listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/tcp_listener) or the [inputs.udp_listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/udp_listener) plugins.
 Append the TCP or UDP input section to Telegraf's config file and restart Telegraf for the change to take effect.
 
 ### TCP listener configuration:
