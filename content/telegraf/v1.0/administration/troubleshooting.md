@@ -9,7 +9,7 @@ menu:
 
 This guide will show you how to capture Telegraf's output, submit sample metrics and watch how Telegraf formats and emits points to its output plugins.
 
-### Capture output
+## Capture output
 
 A quick way to view Telegraf's output is by enabling a new UDP output plugin to run in parallel with the existing output plugins. Since each output plugin creates its own stream, the already existing outputs will not be affected. Traffic will be replicated to all active outputs.
 
@@ -38,11 +38,12 @@ You can also direct the output to a file for further inspection:
 nc -lu 8089 > telegraf_dump.txt
 ```
 
-### Submit test inputs
+## Submit test inputs
 
-Once you have access to Telegraf's output coming to your `nc` socket, you can enable the [inputs.tcp_listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/tcp_listener) or the [inputs.udp_listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/udp_listener) and submit some sample inputs.
+Once you have access to Telegraf's output coming to your `nc` socket, you can enable the [inputs.tcp_listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/tcp_listener) or the [inputs.udp_listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/udp_listener) plugins.
+Append the TCP or UDP input section to Telegraf's config file and restart Telegraf for the change to take effect.
 
-* TCP listener configuration example:
+### TCP listener configuration:
 
 ```
  [[inputs.tcp_listener]]
@@ -52,13 +53,7 @@ Once you have access to Telegraf's output coming to your `nc` socket, you can en
    data_format = "influx"
 ```
 
-Submitting data to Telegraf's TCP listener:
-
-```
-echo "mymeasurement,my_tag_key=mytagvalue my_field=\"my field value\"" | nc localhost 8094
-```
-
-* UDP listener configuration example:
+### UDP listener configuration:
 
 ```
  [[inputs.udp_listener]]
@@ -67,8 +62,13 @@ echo "mymeasurement,my_tag_key=mytagvalue my_field=\"my field value\"" | nc loca
    data_format = "influx"
 ```
 
+* Submitting sample data to Telegraf's TCP listener:
 
-Submitting data to Telegraf's UDP listener:
+```
+echo "mymeasurement,my_tag_key=mytagvalue my_field=\"my field value\"" | nc localhost 8094
+```
+
+* Submitting sample data to Telegraf's UDP listener:
 
 ```
 echo "mymeasurement,my_tag_key=mytagvalue my_field=\"my field value\"" | nc -u localhost 8092
@@ -80,7 +80,7 @@ In both cases the output from your netcat listener will look like the following:
 mymeasurement,host=kubuntu,my_tag_key=mytagvalue my_field="my field value" 1478106104713745634
 ```
 
-### Testing other plugins
+## Testing other plugins
 
 The same approach can be used to test other plugins, like the [inputs.statsd](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/statsd) plugin.
 
