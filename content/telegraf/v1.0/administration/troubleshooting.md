@@ -93,7 +93,7 @@ Here is a basic configuration exapmple of how to set up Telegraf's statsd input 
    allowed_pending_messages = 10000
 ```
 
-Send a sample metric to Telegraf's statsd port:
+Sending a sample metric to Telegraf's statsd port:
 
 ```
 echo "a.b.c:1|g" | nc -u localhost 8125
