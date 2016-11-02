@@ -7,7 +7,7 @@ menu:
     parent: administration
 ---
 
-This guide will show you how to capture Telegraf's output, submit sample metrics and watch how Telegraf formats and emits points to its output plugins.
+This guide will show you how to capture Telegraf's output, submit sample metrics, and see how Telegraf formats and emits points to its output plugins.
 
 ## Capture output
 
@@ -40,7 +40,7 @@ nc -lu 8089 > telegraf_dump.txt
 
 ## Submit test inputs
 
-Once you have visibility to Telegraf's output arriving to your `nc` socket, you can enable the [inputs.tcp_listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/tcp_listener) or the [inputs.udp_listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/udp_listener) plugins to submit some sample metrics.
+Once you have Telegraf's output arriving to your `nc` socket, you can enable the [inputs.tcp_listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/tcp_listener) or the [inputs.udp_listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/udp_listener) plugins to submit some sample metrics.
 
 Append the TCP or UDP input section to Telegraf's config file and restart Telegraf for the change to take effect.
 
