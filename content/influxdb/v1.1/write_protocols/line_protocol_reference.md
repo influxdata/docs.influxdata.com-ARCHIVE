@@ -50,6 +50,7 @@ This can result in significant improvements in compression.
 | Integer | Field values | Signed 64-bit integers (-9223372036854775808 to 9223372036854775807). Specify an integer with a trailing `i` on the number. |
 | String | Measurements, tag keys, tag values, field keys, field values | Length limit 64KB. |
 | Boolean | Field values | Stores TRUE or FALSE values.<br><br>TRUE write syntax:`[t, T, true, True, TRUE]`.<br><br>FALSE write syntax:`[f, F, false, False, FALSE]` |
+| Timestamp | Timestamps | Unix nanosecond timestamp. Specify alternative precisions with the [HTTP API](/influxdb/v1.1/tools/api/#write). The minimum valid timestamp is `-9223372036854775806` or `1677-09-21T00:12:43.145224194Z`. The maximum valid timestamp is `9223372036854775806` or `2262-04-11T23:47:16.854775806Z`. |
 
 ### More on field value types
 
