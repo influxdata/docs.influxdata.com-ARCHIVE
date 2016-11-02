@@ -13,6 +13,23 @@ common resolutions.
 **Disclaimer:** This document does not contain an exhaustive list of all possible InfluxDB errors.
 </dt>
 
+## error: max series per database exceeded: < >
+The `max series per database exceeded` error occurs when a write causes the
+number of [series](/influxdb/v1.0/concepts/glossary/#series) in a database to
+exceed the maximum allowable series per database.
+The maximum allowable series per database is controlled by the
+`max-series-per-database` setting in the `[data]` section of the configuration
+file.
+
+The information in the `< >` shows the measurement and the tag set of the series
+that exceeded `max-series-per-database`.
+
+By default `max-series-per-database` is set to one million.
+Changing the setting to `0` allows an unlimited number of series per database.
+
+**Resources:**
+[Database Configuration](/influxdb/v1.0/administration/config/#max-series-per-database-1000000)
+
 ## error parsing query: found < >, expected identifier at line < >, char < >
 
 ### InfluxQL Syntax
@@ -218,6 +235,19 @@ Use a comma instead of a space between the two fields to avoid the error:
 **Resources:**
 [Line Protocol Tutorial](/influxdb/v1.0/write_protocols/line_protocol_tutorial/),
 [Line Protocol Reference](/influxdb/v1.0/write_protocols/line_protocol_reference/)
+
+## unable to parse < >: time outside range
+
+The `time outside range` error occurs when the timestamp in the
+[line protocol](/influxdb/v1.0/concepts/glossary/#line-protocol)
+falls outside the valid time range for InfluxDB.
+
+The minimum valid timestamp is `-9223372036854775806` or `1677-09-21T00:12:43.145224194Z`.
+The maximum valid timestamp is `9223372036854775806` or `2262-04-11T23:47:16.854775806Z`.
+
+**Resources:**
+[Line Protocol Tutorial](/influxdb/v1.0/write_protocols/line_protocol_tutorial/#data-types),
+[Line Protocol Reference](/influxdb/v1.0/write_protocols/line_protocol_reference/#data-types)
 
 ## write failed for shard < >: engine: cache maximum memory size exceeded
 
