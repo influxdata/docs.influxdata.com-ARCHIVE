@@ -11,27 +11,27 @@ This guide will show you how to capture Telegraf's output, submit sample metrics
 
 ### Capture output
 
-A quick way to view Telegraf's output is to enable a UDP output plugin which will run in parallel with the existing output plugins. Since each output plugin creates its own output stream, the already existing outputs will not be affected. Traffic will be replicated to all the enabled outputs.
+A quick way to view Telegraf's output is by enabling a new UDP output plugin to run in parallel with the existing output plugins. Since each output plugin creates its own stream, the already existing outputs will not be affected. Traffic will be replicated to all active outputs.
 
-* NOTE: this approach requires Telegraf to be restarted which will cause a brief interruption to metrics collection
+* NOTE: this approach requires Telegraf to be restarted, which will cause a brief interruption to your metrics collection
 
-The minimal Telegraf configuration required to enable the Influx Line protocol UDP output is:
+The minimal Telegraf configuration required to enable a UDP output is:
 
 ```
 [[outputs.influxdb]]
   urls = ["udp://localhost:8089"] 
 ```
 
-This setup utilizes the UDP format of the [InfluxDB output plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/influxdb).
-You will need to append this to /etc/telegraf/telegraf.conf and then restart Telegraf for the change to take effect.
+This setup utilizes the UDP format of the [InfluxDB output plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/influxdb) and emits points formatted in Influx Line Protocol.
+You will need to append this section to Telegraf's configuration file and restart Telegraf for the change to take effect.
 
-Then, you are ready to start listening on the configured port (8089 in this example) using a simple tool like netcat:
+Now you are ready to start listening on the destination port (8089 in this example) using a simple tool like netcat:
 
 ```
 nc -lu 8089
 ```
 
-Netcat will print the exact Telegraf output on stdout.
+'nc' will print the exact Telegraf output on stdout.
 You can also direct the output to a file for further inspection:
 
 ```
@@ -40,7 +40,7 @@ nc -lu 8089 > telegraf_dump.txt
 
 ### Submit test inputs
 
-Once you are ready to inspect Telegraf's output from `nc`, you can use the [inputs.tcp_listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/tcp_listener) or the [inputs.udp_listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/udp_listener) to insert some sample inputs for testing purposes.
+Once you have access to Telegraf's output coming to your `nc` socket, you can enable the [inputs.tcp_listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/tcp_listener) or the [inputs.udp_listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/udp_listener) and submit some sample inputs.
 
 * TCP listener configuration example:
 
