@@ -42,6 +42,14 @@ SectionPagesMenu = "products"
   url = "https://influxdata.com/downloads/#kapacitor"
   parent = "introduction"
 
+# Kapacitor v1.1 Sub-Menu - Introduction
+[[menu.kapacitor_1_1]]
+  name = "Download"
+  identifier = "download"
+  weight = 0
+  url = "https://influxdata.com/downloads/#kapacitor"
+  parent = "introduction"
+
 # Kapacitor v0.13 Sub-Menu - Introduction
 [[menu.kapacitor_013]]
   name = "Download"
