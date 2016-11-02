@@ -189,24 +189,11 @@ This directory may be changed.
 
 Environment variable: `INFLUXDB_DATA_DIR`
 
-### engine = "tsm1"
-
-The storage engine. This is the only option for version 1.0.
-
-Environment variable: `INFLUXDB_DATA_ENGINE`
-
 ### wal-dir = "/var/lib/influxdb/wal"
 
 The WAL directory is the location of the [write ahead log](/influxdb/v1.1/concepts/glossary/#wal-write-ahead-log).
 
 Environment variable: `INFLUXDB_DATA_WAL_DIR`
-
-### wal-logging-enabled = true
-
-The WAL logging enabled toggles the logging of WAL operations such as WAL
-flushes to disk.
-
-Environment variable: `INFLUXDB_DATA_WAL_LOGGING_ENABLED`
 
 ### query-log-enabled = true
 
@@ -215,7 +202,7 @@ Very useful for troubleshooting, but will log any sensitive data contained withi
 
 Environment variable: `INFLUXDB_DATA_QUERY_LOG_ENABLED`
 
-### cache-max-memory-size = 524288000
+### cache-max-memory-size = 1048576000
 
 The cache maximum memory size is the maximum size (in bytes) a shard's cache can reach before it starts rejecting writes.
 
@@ -227,24 +214,17 @@ The cache snapshot memory size is the size at which the engine will snapshot the
 
 Environment variable: `INFLUXDB_DATA_CACHE_SNAPSHOT_MEMORY_SIZE`
 
-### cache-snapshot-write-cold-duration = "1h0m0s"
+### cache-snapshot-write-cold-duration = "10m"
 
 The cache snapshot write cold duration is the length of time at which the engine will snapshot the cache and write it to a new TSM file if the shard hasn't received writes or deletes.
 
 Environment variable: `INFLUXDB_DATA_CACHE_SNAPSHOT_WRITE_COLD_DURATION`
 
-### compact-full-write-cold-duration = "24h0m0s"
+### compact-full-write-cold-duration = "4h"
 
 The compact full write cold duration is the duration at which the engine will compact all TSM files in a shard if it hasn't received a write or delete.
 
 Environment variable: `INFLUXDB_DATA_COMPACT_FULL_WRITE_COLD_DURATION`
-
-### max-points-per-block = 0
-
-The maximum points per block is the maximum number of points in an encoded block in a TSM file.
-Larger numbers may yield better compression but could incur a performance penalty when querying.
-
-Environment variable: `INFLUXDB_DATA_MAX_POINTS_PER_BLOCK`
 
 ### max-series-per-database = 1000000
 
@@ -266,6 +246,23 @@ will continue to accept writes to existing series, but writes that create a
 new series will fail.
 
 Environment variable: `INFLUXDB_DATA_MAX_SERIES_PER_DATABASE`
+
+### max-values-per-tag = 100000
+
+The maximum number of [tag values](/influxdb/v1.1/concepts/glossary/#tag-values)
+allowed per [tag key]((/influxdb/v1.1/concepts/glossary/#tag-key).
+The default setting is `100000`.
+Change the setting to `0` to allow an unlimited number of tag values per tag
+key.
+If a tag value causes the number of tag values of a tag key to exceed
+`max-values-per-tag` InfluxDB will not write the point, and it returns
+a `partial write` error.
+
+Any existing tag keys with tag values that exceed `max-values-per-tag`
+will continue to accept writes, but writes that create a new tag value
+will fail.
+
+Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 
 ### trace-logging-enabled = false
 
@@ -448,6 +445,32 @@ Controls how long an http request for the subscriber service will run before it 
 
 Environment variable: `INFLUXDB_SUBSCRIBER_HTTP_TIMEOUT`
 
+### insecure-skip-verify = false
+
+Allows insecure HTTPS connections to subscribers.
+This is useful when testing with self-signed certificates.
+
+Environment variable: `INFLUXDB_SUBSCRIBER_INSECURE_SKIP_VERIFY`
+
+### ca-certs = ""
+
+The path to the PEM encoded CA certs file.
+If the empty string, the default system certs will be used.
+
+Environment variable: `INFLUXDB_SUBSCRIBER_CA_CERTS`
+
+### write-concurrency = 40
+
+The number of writer goroutines processing the write channel.
+
+Environment variable: `INFLUXDB_SUBSCRIBER_WRITE_CONCURRENCY`
+
+### write-buffer-size = 1000
+
+The number of in-flight writes buffered in the write channel.
+
+Environment variable: `INFLUXDB_SUBSCRIBER_WRITE_BUFFER_SIZE`
+
 ## [http]
 
 This section controls how InfluxDB configures the HTTP endpoints.
@@ -486,6 +509,13 @@ Set to `true` to enable logging for the write payload.
 If set to `true`, this will duplicate every write statement in the logs and is thus not recommended for general use.
 
 Environment variable: `INFLUXDB_HTTP_WRITE_TRACING`
+
+### pprof-enabled = true
+
+Determines whether the pprof endpoint is enabled.  This endpoint is used for
+troubleshooting and monitoring.
+
+Environment variable: `INFLUXDB_HTTP_PPROF_ENABLED`
 
 ### https-enabled = false
 
@@ -532,6 +562,18 @@ Environment variable: `INFLUXDB_HTTP_SHARED_SECRET`
 Realm is the JWT realm used by the http endpoint.
 
 Environment variable: `INFLUXDB_HTTP_REALM`
+
+### unix-socket-enabled = false
+
+Set to `true` to enable http service over unix domain socket.
+
+Environment variable: `INFLUXDB_HTTP_UNIX_SOCKET_ENABLED`
+
+### bind-socket = "/var/run/influxdb.sock"
+
+The path of the unix domain socket.
+
+Environment variable: `INFLUXDB_HTTP_UNIX_BIND_SOCKET`
 
 ## [[graphite]]
 
