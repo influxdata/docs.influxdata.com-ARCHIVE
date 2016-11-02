@@ -5,5 +5,5 @@ menu:
   kapacitor:
     name: v0.2
     identifier: kapacitor_02
-    weight: 98
+    weight: 99
 ---
