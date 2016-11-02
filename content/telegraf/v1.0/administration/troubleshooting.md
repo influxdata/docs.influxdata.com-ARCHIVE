@@ -31,7 +31,7 @@ Now you are ready to start listening on the destination port (8089 in this examp
 nc -lu 8089
 ```
 
-'nc' will print the exact Telegraf output on stdout.
+`nc` will print the exact Telegraf output on stdout.
 You can also direct the output to a file for further inspection:
 
 ```
