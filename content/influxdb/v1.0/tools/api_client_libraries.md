@@ -24,7 +24,7 @@ Functionality will vary, and there are, as yet, no standard features that all li
 - [InfluxDB Java](https://github.com/influxdb/influxdb-java) by [majst01](https://github.com/majst01)
 
 ## JavaScript/Node.js
-- [node-influx](https://github.com/node-influx/node-influx) by [node-influx](https://github.com/node-influx)
+- [influx](https://github.com/node-influx/node-influx) by [node-influx](https://github.com/node-influx)
 
 ## Lisp
 - [cl-influxdb](https://github.com/mmaul/cl-influxdb) by [mmaul](https://github.com/mmaul)

@@ -173,7 +173,7 @@ kapacitor record stream -task cpu_alert -duration 20s
 Since we defined the task with a database and retention policy pair, the recording knows to
 only record data from that database and retention policy.
 
-Now grab that ID that was returned and lets put it in a bash variable for easy use later (your ID will be different):
+Now grab that ID that was returned and let's put it in a bash variable for easy use later (your ID will be different):
 
 ```bash
 rid=cd158f21-02e6-405c-8527-261ae6f26153
