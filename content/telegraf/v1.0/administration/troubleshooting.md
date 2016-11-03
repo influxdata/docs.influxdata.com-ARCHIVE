@@ -13,19 +13,19 @@ This guide will show you how to capture Telegraf's output, submit sample metrics
 
 A quick way to view Telegraf's output is by enabling a new UDP output plugin to run in parallel with the existing output plugins. Since each output plugin creates its own stream, the already existing outputs will not be affected. Traffic will be replicated to all active outputs.
 
-* NOTE: this approach requires Telegraf to be restarted, which will cause a brief interruption to your metrics collection
+> **NOTE:** This approach requires Telegraf to be restarted, which will cause a brief interruption to your metrics collection.
 
 The minimal Telegraf configuration required to enable a UDP output is:
 
 ```
 [[outputs.influxdb]]
-  urls = ["udp://localhost:8089"] 
+  urls = ["udp://localhost:8089"]
 ```
 
-This setup utilizes the UDP format of the [InfluxDB output plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/influxdb) and emits points formatted in Influx Line Protocol.
+This setup utilizes the UDP format of the [InfluxDB output plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/influxdb) and emits points formatted in InfluxDB's [line protocol](/influxdb/v1.0/concepts/glossary/#line-protocol).
 You will need to append this section to Telegraf's configuration file and restart Telegraf for the change to take effect.
 
-Now you are ready to start listening on the destination port (8089 in this example) using a simple tool like netcat:
+Now you are ready to start listening on the destination port (`8089` in this example) using a simple tool like `netcat`:
 
 ```
 nc -lu 8089
@@ -75,7 +75,7 @@ echo "mymeasurement,my_tag_key=mytagvalue my_field=\"my field value\"" | nc loca
 echo "mymeasurement,my_tag_key=mytagvalue my_field=\"my field value\"" | nc -u localhost 8092
 ```
 
-In both cases the output from your netcat listener will look like the following:
+In both cases the output from your `netcat` listener will look like the following:
 
 ```
 mymeasurement,host=kubuntu,my_tag_key=mytagvalue my_field="my field value" 1478106104713745634
@@ -85,7 +85,7 @@ mymeasurement,host=kubuntu,my_tag_key=mytagvalue my_field="my field value" 14781
 
 The same approach can be used to test other plugins, like the [inputs.statsd](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/statsd) plugin.
 
-Here is a basic configuration exapmple of how to set up Telegraf's statsd input plugin:
+Here is a basic configuration example of how to set up Telegraf's statsd input plugin:
 
 ```
  [[inputs.statsd]]
@@ -100,7 +100,7 @@ Sending a sample metric to Telegraf's statsd port:
 echo "a.b.c:1|g" | nc -u localhost 8125
 ```
 
-The output from nc will look like the following:
+The output from `nc` will look like the following:
 
 ```
 a_b_c,host=myserver,metric_type=gauge value=1 1478106500000000000
