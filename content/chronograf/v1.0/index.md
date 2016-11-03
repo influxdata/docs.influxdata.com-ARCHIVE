@@ -5,7 +5,7 @@ menu:
   chronograf:
     name: v1.0
     identifier: chronograf_1_0
-    weight: 0
+    weight: 2
 ---
 
 Chronograf is a graphing and visualization application that you use to perform
