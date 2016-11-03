@@ -114,7 +114,7 @@ time			               count
 2015-09-18T21:30:00Z	 1
 ```
 
-> For a more general discussion of `fill()`, see [Data Exploration](/influxdb/v1.1/query_language/data_exploration/#the-group-by-clause-and-fill).
+> For a more general discussion of `fill()`, see [Data Exploration](/influxdb/v1.1/query_language/data_exploration/#group-by-time-intervals-and-fill).
 
 ## DISTINCT()
 Returns the unique values of a single [field](/influxdb/v1.1/concepts/glossary/#field).
@@ -1514,7 +1514,7 @@ time			               min	   max
 ## Change the value reported for intervals with no data with `fill()`
 By default, queries with an InfluxQL function report `null` values for intervals with no data.
 Append `fill()` to the end of your query to alter that value.
-For a complete discussion of `fill()`, see [Data Exploration](/influxdb/v1.1/query_language/data_exploration/#the-group-by-clause-and-fill).
+For a complete discussion of `fill()`, see [Data Exploration](/influxdb/v1.1/query_language/data_exploration/#group-by-time-intervals-and-fill).
 
 > **Note:** `fill()` works differently with `COUNT()`.
 See [the documentation on `COUNT()`](/influxdb/v1.1/query_language/functions/#count-and-controlling-the-values-reported-for-intervals-with-no-data) for a function-specific use of `fill()`.
@@ -1620,7 +1620,7 @@ Focusing on the `GROUP BY time()` arguments in the query below, the first
 argument (`379m`) matches the length of time that occurs between each peak and
 trough of the `water_level` data.
 The second argument (`348m`) is the
-[offset interval](/influxdb/v1.1/query_language/data_exploration/#configured-group-by-time-boundaries).
+[offset interval](/influxdb/v1.1/query_language/data_exploration/#advanced-group-by-time-syntax).
 The offset interval alters InfluxDB's default `GROUP BY time()` boundaries to
 match the time range of the raw data.
 

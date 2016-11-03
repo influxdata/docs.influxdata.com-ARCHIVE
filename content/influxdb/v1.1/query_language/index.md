@@ -15,10 +15,9 @@ with the documentation.
 #### [Data Exploration](/influxdb/v1.1/query_language/data_exploration/)
 
 Covers the query language basics for InfluxQL, including the
-[`SELECT`](/influxdb/v1.1/query_language/data_exploration/#the-select-statement-and-the-where-clause)
-statement,
-[`GROUP BY`](/influxdb/v1.1/query_language/data_exploration/#the-group-by-clause) clauses,
-[`INTO`](/influxdb/v1.1/query_language/data_exploration/#the-into-clause) queries, and more.
+[`SELECT` statement](/influxdb/v1.1/query_language/data_exploration/#the-basic-select-statement),
+[`GROUP BY` clauses](/influxdb/v1.1/query_language/data_exploration/#the-group-by-clause),
+[`INTO` clauses](/influxdb/v1.1/query_language/data_exploration/#the-into-clause), and more.
 See Data Exploration to learn about
 [time syntax](/influxdb/v1.1/query_language/data_exploration/#time-syntax-in-queries) and
 [regular expressions](/influxdb/v1.1/query_language/data_exploration/#regular-expressions-in-queries) in

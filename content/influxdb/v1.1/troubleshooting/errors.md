@@ -173,6 +173,34 @@ to return from the four unaggregated values of the `force` tag.
 **Resources:**
 [Functions](/influxdb/v1.1/query_language/functions/)
 
+## invalid operation: time and \*influxql.VarRef are not compatible
+The `time and \*influxql.VarRef are not compatible` error occurs when
+date-time strings are double quoted in queries.
+Date-time strings require single quotes.
+
+### Examples
+
+Double quoted date-time strings:
+```
+> SELECT "water_level" FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= "2015-08-18T00:00:00Z" AND time <= "2015-08-18T00:12:00Z"
+ERR: invalid operation: time and *influxql.VarRef are not compatible
+```
+
+Single quoted date-time strings:
+```
+> SELECT "water_level" FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:12:00Z'
+
+name: h2o_feet
+time                   water_level
+----                   -----------
+2015-08-18T00:00:00Z   2.064
+2015-08-18T00:06:00Z   2.116
+2015-08-18T00:12:00Z   2.028
+```
+
+**Resources:**
+[Data Exploration](/influxdb/v1.0/query_language/data_exploration/#time-syntax-in-queries)
+
 ## unable to parse < >: bad timestamp
 
 ### Timestamp Syntax
