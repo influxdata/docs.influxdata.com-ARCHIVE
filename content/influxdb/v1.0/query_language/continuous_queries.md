@@ -213,7 +213,7 @@ guide for an in-depth discussion about this CQ use case.
 ##### Example 3: Automatically downsample a database with backreferencing
 <br>
 Use a function with a wildcard (`*`) and `INTO` query's
-[backreferencing syntax](/influxdb/v1.0/query_language/data_exploration/#downsample-data)
+[backreferencing syntax](/influxdb/v1.0/query_language/data_exploration/#the-into-clause)
 to automatically downsample data from all measurements and numerical fields in
 a database.
 
@@ -282,7 +282,7 @@ time                   mean_complaints   mean_passengers
 ##### Example 4: Automatically downsample data and configure the CQ time boundaries
 <br>
 Use an
-[offset interval](/influxdb/v1.0/query_language/data_exploration/#configured-group-by-time-boundaries)
+[offset interval](/influxdb/v1.0/query_language/data_exploration/#advanced-group-by-time-syntax)
 in the `GROUP BY time()` clause to alter both the CQ's default execution time and
 preset time boundaries.
 
@@ -346,7 +346,7 @@ CQs do not write any results for a time interval if no data fall within that
 time range.
 
 Note that the basic syntax does not support using
-[`fill()`](/influxdb/v1.0/query_language/data_exploration/#the-group-by-clause-and-fill)
+[`fill()`](/influxdb/v1.0/query_language/data_exploration/#group-by-time-intervals-and-fill)
 to change the value reported for intervals with no data.
 Basic syntax CQs ignore `fill()` if it's included in the CQ query.
 A possible workaround is to use the
