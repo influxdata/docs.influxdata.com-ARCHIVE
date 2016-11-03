@@ -74,6 +74,14 @@ SectionPagesMenu = "products"
    url = "https://influxdata.com/downloads/#telegraf"
    parent = "introduction"
 
+# Telegraf v1.1 Sub-Menu - Introduction
+  [[menu.telegraf_1_1]]
+  name = "Download"
+  identifier = "download"
+  weight = 0
+  url = "https://influxdata.com/downloads/#telegraf"
+  parent = "introduction"
+
 # Telegraf v1.0 Sub-Menu - Output Plugins
 [[menu.telegraf_1_0]]
  name = "InfluxDB"
