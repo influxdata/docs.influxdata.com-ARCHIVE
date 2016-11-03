@@ -1,11 +1,11 @@
 ---
-title: Chronograf Version 1.0 Documentation
+title: Chronograf Version 1.1 Documentation
 
 menu:
   chronograf:
-    name: v1.0
-    identifier: chronograf_1_0
-    weight: 1
+    name: v1.1
+    identifier: chronograf_1_1
+    weight: 0
 ---
 
 Chronograf is a graphing and visualization application that you use to perform
