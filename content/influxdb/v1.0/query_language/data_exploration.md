@@ -2042,6 +2042,8 @@ SELECT_clause [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_
 ### Description of Syntax
 `N` specifies the number of [points](/influxdb/v1.0/concepts/glossary/#point) to paginate.
 The `OFFSET` clause requires a [`LIMIT` clause](#the-limit-clause).
+Using the `OFFSET` clause without a `LIMIT` clause can cause [inconsistent
+query results](https://github.com/influxdata/influxdb/issues/7577).
 
 > **Note:** InfluxDB returns no results if the `WHERE` clause includes a time
 range and the `OFFSET` clause would cause InfluxDB to return points with
@@ -2109,6 +2111,8 @@ SELECT_clause [INTO_clause] FROM_clause [WHERE_clause] GROUP BY *[,time(time_int
 ### Description of Syntax
 `N` specifies the number of [series](/influxdb/v1.0/concepts/glossary/#series) to paginate.
 The `SOFFSET` clause requires an [`SLIMIT` clause](#the-slimit-clause).
+Using the `SOFFSET` clause without an `SLIMIT` clause can cause [inconsistent
+query results](https://github.com/influxdata/influxdb/issues/7578).
 There is an [ongoing issue](https://github.com/influxdata/influxdb/issues/7571) that requires queries with `SLIMIT` to include `GROUP BY *`.
 
 > **Note:** InfluxDB returns no results if the `SOFFSET` clause paginates
