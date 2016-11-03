@@ -64,6 +64,8 @@ See [-import](/influxdb/v1.1/tools/shell/#import-data-from-a-file-with-import).
 `-password 'password'`  
 The password `influx` uses to connect to the server.
 `influx` will prompt for a password if you leave it blank (`-password ''`).
+Alternatively, set the password for the CLI with the `INFLUX_PASSWORD` environment
+variable.
 
 `-path`  
 The path to the file to import.
@@ -94,6 +96,8 @@ Use https for requests.
 
 `-username 'username'`  
 The username `influx` uses to connect to the server.
+Alternatively, set the username for the CLI with the `INFLUX_USERNAME` environment
+variable.
 
 `-version`  
 Display the InfluxDB version and exit.
@@ -261,6 +265,8 @@ We provide detailed information on `insert` at the end of this section.
 `auth`  
 Prompts you for your username and password.
 `influx` uses those credentials when querying a database.
+Alternatively, set the username and password for the CLI with the
+`INFLUX_USERNAME` and `INFLUX_PASSWORD` environment variables.
 
 `connect <host:port>`  
 Connect to a different server without exiting the shell.
