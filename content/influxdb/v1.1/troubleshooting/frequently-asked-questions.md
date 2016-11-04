@@ -43,7 +43,7 @@ Where applicable, it links to outstanding issues on GitHub.
 **Querying data**  
 
 * [What determines the time intervals returned by `GROUP BY time()` queries?](#what-determines-the-time-intervals-returned-by-group-by-time-queries)  
-* [Why don't my queries return timestamps that occur after `now()`?](#why-don-t-my-queries-return-timestamps-that-occur-after-now)  
+* [Why don't my `GROUP BY time()` queries return timestamps that occur after `now()`?](#why-don-t-my-group-by-time-queries-return-timestamps-that-occur-after-now)  
 * [Can I perform mathematical operations against timestamps?](#can-i-perform-mathematical-operations-against-timestamps)  
 * [Can I identify write precision from returned timestamps?](#can-i-identify-write-precision-from-returned-timestamps)  
 * [When should I single quote and when should I double quote in queries?](#when-should-i-single-quote-and-when-should-i-double-quote-in-queries)  
@@ -517,29 +517,36 @@ time                    sunflowers                 time                  mean
                        |--|
 ```
 
-## Why don't my queries return timestamps that occur after now()?
-By default, InfluxDB uses `now()` (the current nanosecond timestamp of the node that is processing the query) as the upper bound in queries.
-You must provide explicit directions in the `WHERE` clause to query points that occur after `now()`.
+## Why don't my GROUP BY time() queries return timestamps that occur after now()?
+Most `SELECT` statements have a default time range between [`1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC](#what-are-the-minimum-and-maximum-timestamps-that-influxdb-can-store).
+For `SELECT` statements with a [`GROUP BY time()` clause](/influxdb/v1.1/query_language/data_exploration/#group-by-time-intervals), the default time
+range is between `1677-09-21 00:12:43.145224194` UTC and [`now()`](/influxdb/v1.1/concepts/glossary/#now).
 
-The first query below asks InfluxDB to return everything from `hillvalley` that occurs between epoch 0 (`1970-01-01T00:00:00Z`) and `now()`.
-The second query asks InfluxDB to return everything from `hillvalley` that occurs between epoch 0 and 1,000 days from `now()`.
+To query data with timestamps that occur after `now()`, `SELECT` statements with
+a `GROUP BY time()` clause must provide an alternative upper bound in the
+[`WHERE` clause](/influxdb/v1.1/query_language/data_exploration/#the-where-clause).
 
-`SELECT * FROM "hillvalley"`  
-`SELECT * FROM "hillvalley" WHERE time < now() + 1000d`
+In the following codeblock, the first query covers data with timestamps between
+`2015-09-18T21:30:00Z` and `now()`.
+The second query covers data with timestamps between `2015-09-18T21:30:00Z` and 180 weeks from `now()`.
+```
+> SELECT MEAN("boards") FROM "hillvalley" WHERE time >= '2015-09-18T21:30:00Z' GROUP BY time(12m) fill(none)
 
-It is required that the default upper bound be explicitly replaced.
-A query that resets the lower bound without changing the upper bound will not return any points after `now()`.
-For example:
 
-`SELECT * FROM "hillvalley" WHERE time > now()`
+> SELECT MEAN("boards") FROM "hillvalley" WHERE time >= '2015-09-18T21:30:00Z' AND time <= now() + 180w GROUP BY time(12m) fill(none)
+```
 
-resets the lower bound of the query from `epoch=0` to `> now()`.
-However, the default upper bound for the query is still `now()`.
-Internally, the query expands to
+Note that the `WHERE` clause must provide an alternative **upper** bound to
+override the default `now()` upper bound. The following query merely resets
+the lower bound to `now()` such that the query's time range is between
+`now()` and `now()`:
+```
+> SELECT MEAN("boards") FROM "hillvalley" WHERE time >= now() GROUP BY time(12m) fill(none)
+>
+```
 
-`SELECT * FROM "hillvalley" WHERE time > now() AND time < now()`
-
-which cannot match any points.
+See the [Data Exploration](/influxdb/v1.1/query_language/data_exploration/#time-syntax-in-queries)
+document for more on time syntax in queries.
 
 ## Can I perform mathematical operations against timestamps?
 Currently, it is not possible to execute mathematical operators against timestamp values in InfluxDB.

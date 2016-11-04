@@ -442,8 +442,10 @@ Other supported features:
 
 #### timestamps
 
-By default, a query's time range is between [`1677-09-21 00:12:43.145224194` UTC](/influxdb/v1.1/troubleshooting/frequently-asked-questions/#what-are-the-minimum-and-maximum-timestamps-that-influxdb-can-store)
-and [`now()`](/influxdb/v1.1/concepts/glossary/#now).
+For most `SELECT` statements, the default time range is between [`1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC](/influxdb/v1.1/troubleshooting/frequently-asked-questions/#what-are-the-minimum-and-maximum-timestamps-that-influxdb-can-store).
+For `SELECT` statements with a [`GROUP BY time()` clause](#group-by-time-intervals), the default time
+range is between `1677-09-21 00:12:43.145224194` UTC and [`now()`](/influxdb/v1.1/concepts/glossary/#now).
+
 The [Time Syntax in Queries](#time-syntax-in-queries) section on this page
 details how to specify alternative time ranges in the `WHERE` clause.
 
@@ -2178,8 +2180,9 @@ time                   mean
 <br>
 # Time Syntax in Queries
 
-By default, a query's time range is between [`1677-09-21 00:12:43.145224194` UTC](/influxdb/v1.1/troubleshooting/frequently-asked-questions/#what-are-the-minimum-and-maximum-timestamps-that-influxdb-can-store)
-and [`now()`](/influxdb/v1.1/concepts/glossary/#now).
+For most `SELECT` statements, the default time range is between [`1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC](/influxdb/v1.1/troubleshooting/frequently-asked-questions/#what-are-the-minimum-and-maximum-timestamps-that-influxdb-can-store).
+For `SELECT` statements with a [`GROUP BY time()` clause](#group-by-time-intervals), the default time
+range is between `1677-09-21 00:12:43.145224194` UTC and [`now()`](/influxdb/v1.1/concepts/glossary/#now).
 The following sections detail how to specify alternative time ranges in the `SELECT`
 statement's [`WHERE` clause](#the-where-clause).
 
@@ -2422,44 +2425,64 @@ The whitespace between `+` and `1000d` is required.
 
 ## Common Issues with Time Syntax
 
-### Issue 1: Querying data that occur after `now()`
-
-By default, InfluxDB uses [`now()`](/influxdb/v1.1/concepts/glossary/#now) as
-the upper bound on a query's time range.
-The `WHERE` clause must provide an alternative upper bound to query data with
-timestamps that occur after `now()`.
-
-#### Examples
-
-Select everything from the `h2o_feet` measurement between
-`1677-09-21 00:12:43.145224194` (the [minimum possible timestamp](/influxdb/v1.1/troubleshooting/frequently-asked-questions/#what-are-the-minimum-and-maximum-timestamps-that-influxdb-can-store)) and `now()`.
-Note that InfluxDB only returns points where the `water_level` field has
-data.
-```
-> SELECT "water_level" FROM "h2o_feet"
-```
-
-Select everything from the `h2o_feet` measurement between
-`1677-09-21 00:12:43.145224194` and 1000 days after `now()`:
-```
-> SELECT "water_level" FROM "h2o_feet" WHERE time < now() + 1000d
-```
-
-Note that the `WHERE` clause must provide an alternative **upper** bound to override
-the default `now()` upper bound.
-The following query merely resets the lower bound to `now()` such that the query's time
-range is between `now()` and `now()`:
-```
-> SELECT "water_level" FROM "h2o_feet" WHERE time > now()
-```
-
-### Issue 2: Using `OR` with absolute time
+### Issue 1: Using `OR` with absolute time
 
 Currently, InfluxDB does not support using `OR` with absolute time
 in the `WHERE` clause.
 
 See the [Frequently Asked Questions](/influxdb/v1.1/troubleshooting/frequently-asked-questions/#why-is-my-query-with-a-where-or-time-clause-returning-empty-results)
 document for more information.
+
+### Issue 2: Querying data that occur after `now()` with a `GROUP BY time()` clause
+
+Most `SELECT` statements have a default time range between [`1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC](/influxdb/v1.1/troubleshooting/frequently-asked-questions/#what-are-the-minimum-and-maximum-timestamps-that-influxdb-can-store).
+For `SELECT` statements with a [`GROUP BY time()` clause](#group-by-time-intervals), the default time
+range is between `1677-09-21 00:12:43.145224194` UTC and [`now()`](/influxdb/v1.1/concepts/glossary/#now).
+
+To query data with timestamps that occur after `now()`, `SELECT` statements with
+a `GROUP BY time()` clause must provide an alternative upper bound in the
+`WHERE` clause.
+
+#### Example
+
+Use the [CLI](/influxdb/v1.1/tools/shell/) to write a point to the `NOAA_water_database` that occurs after `now()`:
+```
+> INSERT h2o_feet,location=santa_monica water_level=3.1 1587074400000000000
+```
+
+Run a `GROUP BY time()` query that covers data with timestamps between
+`2015-09-18T21:30:00Z` and `now()`:
+```
+> SELECT MEAN("water_level") FROM "h2o_feet" WHERE "location"='santa_monica' AND time >= '2015-09-18T21:30:00Z' GROUP BY time(12m) fill(none)
+
+name: h2o_feet
+time                   mean
+----                   ----
+2015-09-18T21:24:00Z   5.01
+2015-09-18T21:36:00Z   5.002
+```
+
+Run a `GROUP BY time()` query that covers data with timestamps between
+`2015-09-18T21:30:00Z` and 180 weeks from `now()`:
+```
+> SELECT MEAN("water_level") FROM "h2o_feet" WHERE "location"='santa_monica' AND time >= '2015-09-18T21:30:00Z' AND time <= now() + 180w GROUP BY time(12m) fill(none)
+
+name: h2o_feet
+time                   mean
+----                   ----
+2015-09-18T21:24:00Z   5.01
+2015-09-18T21:36:00Z   5.002
+2020-04-16T22:00:00Z   3.1
+```
+
+Note that the `WHERE` clause must provide an alternative **upper** bound to
+override the default `now()` upper bound. The following query merely resets
+the lower bound to `now()` such that the query's time range is between
+`now()` and `now()`:
+```
+> SELECT MEAN("water_level") FROM "h2o_feet" WHERE "location"='santa_monica' AND time >= now() GROUP BY time(12m) fill(none)
+>
+```
 
 ### Issue 3: Configuring the returned timestamps
 
