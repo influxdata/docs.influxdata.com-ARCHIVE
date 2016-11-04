@@ -70,7 +70,7 @@ SectionPagesMenu = "products"
 [[menu.telegraf_1_1]]
  name = "InfluxDB"
  identifier = "influxdb_output"
- weight = 0
+ weight = 1
  url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/influxdb"
  parent = "outputs"
 [[menu.telegraf_1_1]]
@@ -187,7 +187,7 @@ SectionPagesMenu = "products"
   [[menu.telegraf_1_1]]
   name = "AWS CloudWatch"
   identifier = "aws cloudwatch"
-  weight = 0
+  weight = 1
   url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/cloudwatch"
   parent = "inputs"
 
@@ -636,13 +636,13 @@ SectionPagesMenu = "products"
 [[menu.telegraf_1_1]]
  name = "HTTP Listener"
  identifier = "http_listener_input"
- weight = 0
+ weight = 1
  url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/http_listener"
  parent = "services"
 [[menu.telegraf_1_1]]
  name = "Kafka Consumer"
  identifier = "kafka_consumer_input"
- weight = 1
+ weight = 2
  url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/kafka_consumer"
  parent = "services"
 [[menu.telegraf_1_1]]
