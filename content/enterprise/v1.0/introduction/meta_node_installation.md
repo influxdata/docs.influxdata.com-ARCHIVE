@@ -21,10 +21,12 @@ The steps below set up three
 [meta nodes](/enterprise/v1.0/concepts/glossary/#meta-node) with each meta node
 on its own server.
 
-Please note that there is no requirement to use that number of servers.
-The meta process can run on the same or different servers.
-For high availability and redundancy your cluster should have at least three
-meta nodes and an odd number of meta nodes.
+You **must** add 3 meta nodes at minimum while setting up the cluster.
+
+There is no requirement to use exactly that number of servers, but
+for high availability and redundancy your cluster should have at least three
+meta nodes and an odd number of meta nodes. 
+More than three meta nodes is not recommended unless the servers are unreliable.
 See the
 [Clustering Guide](/enterprise/v1.0/concepts/clustering#optimal-server-counts)
 for more on cluster architecture.
