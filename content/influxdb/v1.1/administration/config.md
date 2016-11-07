@@ -375,9 +375,11 @@ Environment variable: `INFLUXDB_SHARD_PRECREATION_ADVANCE_PERIOD`
 
 Controls the availability of the built-in, web-based admin interface.
 
-### enabled = true
+> **Note:** The Admin UI is deprecated as of InfluxDB 1.1 and will be removed entirely in a subsequent version. 
 
-Set to `false` to disable the admin interface.
+### enabled = false
+
+Set to `true` to enable the admin interface. 
 
 Environment variable: `INFLUXDB_ADMIN_ENABLED`
 
