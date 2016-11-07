@@ -1,11 +1,11 @@
 ---
-title: Enterprise Documentation
+title: Enterprise Version 1.1 Documentation
 
 menu:
   enterprise:
-    name: v1.0
-    identifier: enterprise_1_0
-    weight: 10
+    name: v1.1
+    identifier: enterprise_1_1
+    weight: 0
 ---
 
 InfluxEnterprise offers highly scalable InfluxDB clusters on your infrastructure
