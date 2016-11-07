@@ -7,16 +7,19 @@ menu:
     parent: tools
 ---
 
-The built-in web administration GUI is a simple way to interact with InfluxDB.
-For any significant use, whether writing or querying data, direct use of the HTTP API ([reading](/influxdb/v1.1/guides/querying_data/), [writing](/influxdb/v1.1/guides/writing_data/)) or the [command line interface](/influxdb/v1.1/tools/shell/) are better options.
+# Deprecated as of InfluxDB 1.1
+
+The built-in web administration GUI is deprecated in InfluxDB 1.1 and is disabled by default. We recommend using the [HTTP API](/influxdb/v1.1/tools/api/) or the [Command Line Interface](/influxdb/v1.1/tools/shell/) to interact with InfluxDB.
 
 ## Accessing the UI
 
-The Admin UI is available by default at port 8083, i.e. [http://localhost:8083](http://localhost:8083).
+To enable the Admin UI, [edit the configuration file](/influxdb/v1.1/administration/config/#enabled-false) to set `enabled = true` in the `[admin]` section. You must restart the process for any configuration changes to take effect.
+
+Once enabled, the Admin UI is available by default at port `8083`, i.e. [http://localhost:8083](http://localhost:8083).
 You can control the port in the InfluxDB config file using the `port` option in the `[admin]` section.
 
 You can also access remote InfluxDB instances, although you may only connect to one instance at a time.
-To access an instance at a location other than than http://localhost:8083, click the Settings icon in the upper right and enter the proper connection settings for the target InfluxDB instance.
+To access an instance at a location other than than http://localhost:8083, click the `Settings` icon in the upper right and enter the proper connection settings for the target InfluxDB instance.
 
 ### HTTP vs HTTPS
 

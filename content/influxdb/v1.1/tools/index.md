@@ -41,7 +41,7 @@ The list of client libraries for interacting with InfluxDB.
 ## [Web Admin Interface](/influxdb/v1.1/tools/web_admin/)
 
 InfluxDB's built-in web administration GUI.
-We recommend using the HTTP API or the CLI instead of the Web Admin.
+The built-in web administration GUI is deprecated in InfluxDB 1.1 and is disabled by default. We recommend using the [HTTP API](/influxdb/v1.1/tools/api/) or the [Command Line Interface](/influxdb/v1.1/tools/shell/) to interact with InfluxDB.
 
 ## [Influx Inspect](/influxdb/v1.1/tools/influx_inspect/)
 
