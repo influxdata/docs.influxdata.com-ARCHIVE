@@ -86,4 +86,4 @@ If you are getting an error message while attempting to `influxd-ctl join` a new
 
 ## Why am I getting a Basic Authentication pop-up window from my InfluxEnterprise Web Console?
 
-The InfluxEnterprise Web Console will create a popup requesting for Authentication credentials when the `shared-secret` configured under the `[influxdb]` section in `influx-enterprise.conf` does not match with the `shared-secret` configured under the `[http]` section in your data node configuration files. All data nodes and the InfluxEnteprise Web Console must share the same passphrase.
+The InfluxEnterprise Web Console will create a popup requesting for Authentication credentials when the `shared-secret` configured under the `[influxdb]` section in the `influx-enterprise.conf` Web Console configuration file does not match with the `shared-secret` configured under the `[http]` section in all data node `influxdb.conf` configuration files. All data nodes and the InfluxEnteprise Web Console must share the same passphrase.
