@@ -3,7 +3,8 @@ title: Step 2 - Data Node Installation
 menu:
   enterprise_1_1:
     weight: 20
-    parent: Introduction
+    parent: production_installation
+    identifier: data_production
 ---
 
 InfluxEnterprise offers highly scalable clusters on your infrastructure

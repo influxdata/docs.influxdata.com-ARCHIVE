@@ -3,7 +3,8 @@ title: Step 3 - Web Console Installation
 menu:
   enterprise_1_1:
     weight: 30
-    parent: Introduction
+    parent: quickstart_installation
+    identifier: web_quickstart
 ---
 
 The next steps will get you up and running with the InfluxEnterprise's

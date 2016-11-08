@@ -1,11 +1,11 @@
 ---
 title: Step 1 - Meta Node Installation
-aliases:
-    - enterprise/v1.1/introduction/installation/
+
 menu:
   enterprise_1_1:
     weight: 10
-    parent: Introduction
+    parent: quickstart_installation
+    identifier: meta_quickstart
 ---
 
 InfluxEnterprise offers highly scalable clusters on your infrastructure
