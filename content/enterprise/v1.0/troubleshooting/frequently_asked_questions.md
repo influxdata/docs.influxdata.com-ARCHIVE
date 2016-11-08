@@ -75,13 +75,13 @@ This error indicates that the coordinating node that received the write cannot a
 The controlling configuration settings are in the `[hinted-handoff]` section of the file. `max-size` is the total size in bytes per hinted handoff queue. When `max-size` is exceeded, all new writes for that node are rejected until the queue drops below `max-size`. `max-age` is the maximum length of time a point will persist in the queue. Once this limit has been reached, points expire from the queue. The age is calculated from the write time of the point, not the timestamp of the point. 
 
 
-## Why am I seeing `unable to determine if "hostname" is a meta node` when I try to add a meta node with `influxd-ctl join` ?
+## Why am I seeing `unable to determine if "<hostname>" is a meta node` when I try to add a meta node with `influxd-ctl join` ?
 
-Meta nodes use the `/status` endpoint to determine the current state of a candidate peer metanode. A healthy meta node that is ready to join the cluster will respond with a `200` HTTP response code and a JSON string with the following format:
+Meta nodes use the `/status` endpoint to determine the current state of another metanode. A healthy meta node that is ready to join the cluster will respond with a `200` HTTP response code and a JSON string with the following format (assuming the default ports):
 
-`"nodeType":"meta","leader":"","httpAddr":"hostname:8091","raftAddr":"hostname:8089","peers":null}`
+`"nodeType":"meta","leader":"","httpAddr":"<hostname>:8091","raftAddr":"<hostname>:8089","peers":null}`
 
-If you are getting an error message while attempting to `influxd-ctl join` a new meta node, it means that the JSON string returned from the `/status` endpoint is incorrect. Inspect the HTTP response with `curl -v "http://hostname:8091/status"` and make sure that the `hostname`, the `bind-address`, the `http-bind-address` and the `license-key` or `license-path` are all properly configured. Also make sure that you specify the `http-bind-address` port (default is 8091) in the join command, e.g. `influxd-ctl join hostname:8091`.
+If you are getting an error message while attempting to `influxd-ctl join` a new meta node, it means that the JSON string returned from the `/status` endpoint is incorrect. This generally indicates that the meta node configuration file is incomplete or incorrect. Inspect the HTTP response with `curl -v "http://<hostname>:8091/status"` and make sure that the `hostname`, the `bind-address`, the `http-bind-address`, and the `license-key` or `license-path` are all properly configured. Also make sure that you specify the `http-bind-address` port in the join command, e.g. `influxd-ctl join hostname:8091`.
 
 
 ## Why am I getting a Basic Authentication pop-up window from my InfluxEnterprise Web Console?
