@@ -3,7 +3,8 @@ title: Step 2 - Data Node Installation
 menu:
   enterprise_1_1:
     weight: 20
-    parent: Introduction
+    parent: production_installation
+    identifier: data_production
 ---
 
 InfluxEnterprise offers highly scalable clusters on your infrastructure
@@ -12,40 +13,49 @@ The next steps will get you up and running with the second essential component o
 your InfluxEnterprise cluster: the data nodes.
 
 If you have not set up your meta nodes, please visit
-[Meta Node Installation](/enterprise/v1.1/introduction/meta_node_installation/).
+[Meta Node Installation](/enterprise/v1.1/production_installation/meta_node_installation/).
 Bad things can happen if you complete the following steps without meta nodes.
 
-# Requirements
+<br>
+# Data Node Setup Description and Requirements
 
-To get started, you'll need the license key that you received at
-[InfluxPortal](https://portal.influxdata.com/) as well as several servers.
-The steps below set up two
-[data nodes](/enterprise/v1.1/concepts/glossary#data-node) with each data node
-on its own server.
+The Production Installation process sets up two [data nodes](/enterprise/v1.1/concepts/glossary#data-node)
+and each data node runs on its own server.
+You **must** have a minimum of two data in a cluster.
+InfluxEnterprise clusters require at least two data nodes for high
+availability and redundancy.
+Note that there is no requirement for each data node to run on its own
+server.
 
-Please note that there is no requirement to use that number of servers.
-The data processes can run on the same or different servers.
-For high availability and redundancy your cluster should have at least two
-data nodes.
 See the
 [Clustering Guide](/enterprise/v1.1/concepts/clustering.md#optimal-server-counts)
 for more on cluster architecture.
 
-The data node servers will need to be able to reach `portal.influxdata.com`
+### Other Requirements
+
+#### License Key
+The Production Installation process requires the license key that you received at
+[InfluxPortal](https://portal.influxdata.com/).
+
+#### Networking
+
+Data nodes communicate over ports `8088`, `8089`, and `8091`.
+
+For licensing purposes, data nodes must also be able to reach `portal.influxdata.com`
 on port `80` or `443`.
 If the data nodes cannot reach `portal.influxdata.com` on port `80` or `443`,
-the configuration section describes how to use a license file.
+you'll need to set the `license-path` setting instead of the `license-key`
+setting in the data node configuration file.
 
-> **Note:** By default, data and meta nodes communicate with each other on
-ports `8088`, `8089`, and `8091`.
-In a clustered setup you’ll want to configure a load balancer to send client
-traffic to the data nodes on port `8086`, the default port for the
-[HTTP API](https://docs.influxdata.com/influxdb/v1.1/tools/api/) for writing and
-querying data.
+#### Load Balancer
 
+InfluxEnterprise does not function as a load balancer.
+You will need to configure your own load balancer to send client traffic to the
+data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.1/tools/api/)).
+
+<br>
 # Data Node Setup
-
-## Modify the /etc/hosts file
+## Step 1: Modify the /etc/hosts File
 
 Add your servers' hostnames and IP addresses to **each** cluster server's `/etc/hosts`
 file (the hostnames are representative):
@@ -71,11 +81,11 @@ installation.
 A healthy cluster requires that every meta and data node can communicate
 with every other meta and data node.
 
-## Set up, configure, and start the data servers
+## Step 2: Set up, Configure, and start the Data Services
 
-On each data server:
+Perform the following steps on each data server.
 
-### 1. Download and install the data server package
+### I. Download and Install the Data Service
 
 #### Ubuntu & Debian (64-bit)
 ```
@@ -89,7 +99,7 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.0.2_c1.0.4.x8
 sudo yum localinstall influxdb-data-1.0.2_c1.0.4.x86_64.rpm
 ```
 
-### 2. Edit the configuration file
+### II. Edit the Configuration File
 
 First, in `/etc/influxdb/influxdb.conf`, uncomment:
 
@@ -100,46 +110,49 @@ First, in `/etc/influxdb/influxdb.conf`, uncomment:
 
 Second, in `/etc/influxdb/influxdb.conf`, set:
 
-* `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal, OR
-* `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData
-
-> **Note:** `license-key` and `license-path` are mutually exclusive and one must remain set to the empty string.
+`license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
 
 ```
 # Change this option to true to disable reporting.
 # reporting-disabled = false
 # bind-address = ":8088"
-hostname="enterprise-data-0x" #✨
+hostname="<enterprise-data-0x>" #✨
 
 [enterprise]
+  registration-enabled = false
 
-registration-enabled = false
-registration-server-url = ""
-license-key = "<your_license_key>" #✨ mutually exclusive with license-path
-license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
+  registration-server-url = ""
+
+  # license-key and license-path are mutually exclusive, use only one and leave the other blank
+  license-key = "<your_license_key>" #✨ mutually exclusive with license-path
+
+  # The path to a valid license file.  license-key and license-path are mutually exclusive,
+  # use only one and leave the other blank.
+  license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
 
 [meta]
-dir = "/var/lib/influxdb/meta" # data nodes do require a local meta directory
+  # Where the cluster metadata is stored
+  dir = "/var/lib/influxdb/meta" # data nodes do require a local meta directory
 
 [...]
 
 [http] #✨
-# enabled = true
-# bind-address = ":8086"
-auth-enabled = true #✨ this is recommended but not required
-# log-enabled = true
-# write-tracing = false
-# pprof-enabled = false
-# https-enabled = false
-# https-certificate = "/etc/ssl/influxdb.pem"
-#  https-private-key = ""
-#  max-row-limit = 10000
-#  max-connection-limit = 0
-shared-secret = "long pass phrase used for signing tokens" #✨
-#  realm = "InfluxDB"
+  # Determines whether HTTP endpoint is enabled.
+  # enabled = true
+
+  # The bind address used by the HTTP service.
+  # bind-address = ":8086"
+
+  # Determines whether HTTP authentication is enabled.
+  auth-enabled = true #✨ this is recommended but not required
+
+[...]
+
+  # The JWT auth shared secret to validate requests using JSON web tokens.
+  shared-secret = "long pass phrase used for signing tokens" #✨
 ```
 
-### 3. Start the data node
+### 3. Start the Data Service
 On sysvinit systems, enter:
 ```
 service influxdb start
@@ -166,7 +179,7 @@ If you do not see the expected output, the process is either not launching or is
 If you see the expected output, repeat for the remaining data nodes.
 Once all data nodes have been installed, configured, and launched, move on to the next section to join the data nodes to the cluster.
 
-## Join the data nodes to the cluster
+## Join the Data Nodes to the Cluster
 
 On one and only one of the meta nodes that you set up in the
 [previous document](/enterprise/v1.1/introduction/meta_node_installation/), run:
@@ -215,4 +228,4 @@ If you do not see your data nodes in the output, please retry adding them
 to the cluster.
 
 Once your data nodes are part of your cluster move on to [the final step
-to set up the InfluxEnterprise web console](/enterprise/v1.1/introduction/web_console_installation/).
+to set up the InfluxEnterprise web console](/enterprise/v1.1/production_installation/web_console_installation/).

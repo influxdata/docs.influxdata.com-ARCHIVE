@@ -1,20 +1,19 @@
 ---
-title: Step 3 - Web Console Installation
+title: Step 2 - Web Console Installation
 menu:
   enterprise_1_1:
-    weight: 30
-    parent: Introduction
+    weight: 20
+    parent: quickstart_installation
+    identifier: web_quickstart
 ---
 
 The next steps will get you up and running with the InfluxEnterprise's
 management UI for working with clusters.
 Please visit
-[Meta Node Installation](/enterprise/v1.1/introduction/meta_node_installation/)
-and
-[Data Node Installation](/enterprise/v1.1/introduction/data_node_installation/)
+[Cluster Installation](/enterprise/v1.1/quickstart_installation/cluster_installation/)
 if you have yet to set up your InfluxEnterprise Cluster.
 
-# Web Console setup
+# Web Console Setup
 
 Please set up the web console **after** you've set up your cluster.
 Installing the web console before your cluster can cause unexpected behaviors.
@@ -46,7 +45,7 @@ Note that using PostgreSQL requires additional steps.
 
 ## Setup Steps
 
-### 1. Edit the configuration file
+### 1. Edit the Configuration File
 
 In `/etc/influx-enterprise/influx-enterprise.conf`, set:
 
@@ -91,7 +90,7 @@ development purposes, see the
 [SMTP Server Setup](/enterprise/v1.1/guides/smtp-server/) guide for how to get up
 and running with [MailCatcher](https://mailcatcher.me/).
 
-### 2. Migrate the configuration file
+### 2. Migrate the Configuration File
 Run the following command:
 ```
 sudo -u influx-enterprise influx-enterprise migrate --config /etc/influx-enterprise/influx-enterprise.conf
@@ -116,7 +115,7 @@ The expected output is:
 0.0340 seconds
 ```
 
-### 3. Start the InfluxEnterprise web console
+### 3. Start the InfluxEnterprise Web Console
 
 On sysvinit systems, enter:
 ```
@@ -139,10 +138,11 @@ You should see output similar to:
     influx-+  4557  1.2  7.4 421600 37108 ?        Ssl  17:34   0:00 /usr/bin/influx-enterprise run -c /etc/influx-enterprise/influx-enterprise.conf
 
 
+### 4. Access the Web Console
 You're all set!
 Visit `http://<your_web_console_server's_IP_address>:3000` to access your
 InfluxEnterprise web console, and check out the
-next section to [get started](/enterprise/v1.1/introduction/getting_started/).
+[Getting Started](/enterprise/v1.1/introduction/getting_started/) document.
 
 > ## Install the InfluxEnterprise Web Console with PostgreSQL
 >
@@ -223,5 +223,5 @@ The expected output is:
     > 0010_add_name_to_explorers.up.sql
     > 0011_add_name_to_products.up.sql
 >
-Now, follow the [last step](#3-start-the-influxenterprise-web-console) in the
+Now, follow the [third step](#3-start-the-influxenterprise-web-console) in the
 previous section to complete the installation.
