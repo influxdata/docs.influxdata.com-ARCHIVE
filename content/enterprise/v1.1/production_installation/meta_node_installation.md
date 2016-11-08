@@ -10,31 +10,53 @@ menu:
 
 InfluxEnterprise offers highly scalable clusters on your infrastructure
 and a management UI for working with clusters.
-The next steps will get you up and running with the first essential component of
+The Production Installation process is designed for users looking to
+deploy InfluxEnterprise in a production environment.
+The following steps will get you up and running with the first essential component of
 your InfluxEnterprise cluster: the meta nodes.
 
-# Requirements
+> If you wish to evaluate InfluxEnterprise in a non-production
+environment, feel free to follow the instructions outlined in the
+[QuickStart Installation](/enterprise/v1.1/quickstart_installation) section.
+Please note that if you install InfluxEnterprise with the QuickStart Installation process you
+will need to reinstall InfluxEnterprise with the Production Installation
+process before using the product in a production environment.
 
-To get started, you'll need the license key that you received at
-[InfluxPortal](https://portal.influxdata.com/) as well as several servers.
-The steps below set up three
-[meta nodes](/enterprise/v1.1/concepts/glossary/#meta-node) with each meta node
-on its own server.
+<br>
+# Meta Node Setup Description and Requirements
 
-Please note that there is no requirement to use that number of servers.
-The meta process can run on the same or different servers.
-For high availability and redundancy your cluster should have at least three
-meta nodes and an odd number of meta nodes.
+The Production Installation process sets up three [meta nodes](/enterprise/v1.1/concepts/glossary/#meta-node)
+and each meta node runs on its own server.
+You **must** have a minimum of three meta nodes in a cluster.
+InfluxEnterprise clusters require at least three meta nodes and an odd number
+of meta nodes for high availability and redundancy.
+We do not recommend having more than three meta nodes unless your servers
+are unreliable.
+Note that there is no requirement for each meta node to run on its own server.
+
 See the
 [Clustering Guide](/enterprise/v1.1/concepts/clustering#optimal-server-counts)
 for more on cluster architecture.
 
-> **Note:** By default, data and meta nodes communicate with each other on
-ports `8088`, `8089`, and `8091`.
+### Other Requirements
 
+#### License Key
+The Production Installation process requires the license key that you received at
+[InfluxPortal](https://portal.influxdata.com/).
+
+#### Ports
+
+Meta nodes communicate over ports `8088`, `8089`, and `8091`.
+
+For licensing purposes, meta nodes must also be able to reach `portal.influxdata.com`
+on port `80` or `443`.
+If the meta nodes cannot reach `portal.influxdata.com` on port `80` or `443`,
+you'll need to set the `license-path` setting instead of the `license-key`
+setting in the meta node configuration file.
+
+<br>
 # Meta Node Setup
-
-## Modify the /etc/hosts file
+## Step 1: Modify the /etc/hosts File
 
 Add your servers' hostnames and IP addresses to **each** cluster server's `/etc/hosts`
 file (the hostnames are representative):
@@ -60,11 +82,11 @@ installation.
 A healthy cluster requires that every meta node can communicate with every other
 meta node.
 
-## Set up, configure, and start the meta servers
+## Step 2: Set up, Configure, and Start the Meta Services
 
-On all three meta servers:
+Perform the following steps on each meta server.
 
-### 1. Download and install the meta server package
+### I. Download and Install the Meta Service
 
 #### Ubuntu & Debian (64-bit)
 ```
@@ -78,7 +100,7 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.0.2_c1.0.4.x8
 sudo yum localinstall influxdb-meta-1.0.2_c1.0.4.x86_64.rpm
 ```
 
-### 2. Edit the configuration file
+### II. Edit the Configuration File
 
 In `/etc/influxdb/influxdb-meta.conf`, set:
 
@@ -87,24 +109,29 @@ In `/etc/influxdb/influxdb-meta.conf`, set:
 * `registration-server-url` in the `[enterprise]` section to the full URL of the server that will run the InfluxEnterprise web console.
 You must fully specify the protocol, IP or hostname, and port.
 Entering the IP or hostname alone will lead to errors.
-* `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal, OR
-* `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData
+* `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
 
-> **Note:** `license-key` and `license-path` are mutually exclusive and one must remain set to the empty string.
 
 ```
-reporting-disabled = false
-bind-address = ""
-hostname = "<enterprise-meta-0x>" #✨
+# Hostname advertised by this host for remote addresses.  This must be resolvable by all
+# other nodes in the cluster
+hostname="<enterprise-meta-0x>" #✨
 
 [enterprise]
- registration-enabled = true #✨
- registration-server-url = "http://<web-console-server-IP>:3000" #✨
- license-key = "<your_license_key>" #✨ mutually exclusive with license-path
- license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
+  # Must be set to true to use the Enterprise Web UI
+  registration-enabled = true #✨
+
+  # Must include the protocol (http://)
+  registration-server-url = "http://<web-console-server-IP>:3000" #✨
+
+  # license-key and license-path are mutually exclusive, use only one and leave the other blank
+  license-key = "<your_license_key>" #✨ mutually exclusive with license-path
+
+  # license-key and license-path are mutually exclusive, use only one and leave the other blank
+  license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
 ```
 
-### 3. Start the meta node
+### III. Start the Meta Service
 
 On sysvinit systems, enter:
 ```
@@ -134,7 +161,7 @@ must pass the `-single-server flag` when starting the single meta node.
 Please note that a cluster with only one meta node is **not** recommended for
 production environments.
 
-## Join the meta nodes to the cluster
+## Step 3: Join the Meta Nodes to the Cluster
 
 From one and only one meta node, join all meta nodes including itself.
 In our example, from `enterprise-meta-01`, run:
@@ -175,6 +202,6 @@ If you do not see your meta nodes in the output, please retry adding them to
 the cluster.
 
 Once your meta nodes are part of your cluster move on to [the next steps to
-set up your data nodes](/enterprise/v1.1/introduction/data_node_installation/).
+set up your data nodes](/enterprise/v1.1/production_installation/data_node_installation/).
 Please do not continue to the next steps if your meta nodes are not part of the
 cluster.

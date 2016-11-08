@@ -22,6 +22,5 @@ process before using the product in a production environment.
 
 Follow the links below to get up and running with InfluxEnterprise.
 
-### Step 1 - Meta Node Installation
-### Step 2 - Data Node Installation
-### Step 3 - Web Console Installation
+### Step 1 - Cluster Installation
+### Step 2 - Web Console Installation
