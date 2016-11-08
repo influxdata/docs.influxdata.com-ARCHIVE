@@ -79,7 +79,7 @@ The controlling configuration settings are in the `[hinted-handoff]` section of 
 
 Meta nodes use the `/status` endpoint to determine the current state of a candidate peer metanode. A healthy meta node that is ready to join the cluster will respond with a `200` HTTP response code and a JSON string with the following format:
 `"nodeType":"meta","leader":"","httpAddr":"hostname:8091","raftAddr":"hostname:8089","peers":null}`
-If you are getting this error message while attempting to `influxd-ctl join` a new meta node, it means that the JSON string returned from the `/status` endpoint is problematic. Inspect the HTTP response with `curl -v "http://hostname:8091/status"` and make sure that the `hostname`, the `bind-address`, the `http-bind-address` and the `license-key` or `license-path` are all properly configured. You can also manually run the meta server with `influxd-meta -config /path/to/influxdb-meta.conf` and look for errors in the standard output.
+If you are getting an error message while attempting to `influxd-ctl join` a new meta node, it means that the JSON string returned from the `/status` endpoint is incorrect. Inspect the HTTP response with `curl -v "http://hostname:8091/status"` and make sure that the `hostname`, the `bind-address`, the `http-bind-address` and the `license-key` or `license-path` are all properly configured. Also make sure that you specify the `http-bind-address` port (default is 8091) in the join command, e.g. `influxd-ctl join hostname:8091`.
 
 
 ## Why am I getting a Basic Authentication pop-up window from my InfluxEnterprise Web Console?
