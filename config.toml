@@ -235,6 +235,13 @@ SectionPagesMenu = "products"
   parent = "inputs"
 
   [[menu.telegraf_1_1]]
+  name = "cgroup"
+  identifier = "cgroup"
+  weight = 51
+  url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/cgroup"
+  parent = "inputs"
+
+  [[menu.telegraf_1_1]]
   name = "Chrony"
   identifier = "chrony"
   weight = 60
@@ -316,6 +323,13 @@ SectionPagesMenu = "products"
   identifier = "filestat"
   weight = 170
   url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/filestat"
+  parent = "inputs"
+
+  [[menu.telegraf_1_1]]
+  name = "Graylog"
+  identifier = "graylog_input"
+  weight = 171
+  url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/graylog"
   parent = "inputs"
 
   [[menu.telegraf_1_1]]
@@ -589,6 +603,13 @@ SectionPagesMenu = "products"
   identifier = "sql server"
   weight = 550
   url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/sqlserver"
+  parent = "inputs"
+
+  [[menu.telegraf_1_1]]
+  name = "Trig"
+  identifier = "trig"
+  weight = 551
+  url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/trig"
   parent = "inputs"
 
   [[menu.telegraf_1_1]]
