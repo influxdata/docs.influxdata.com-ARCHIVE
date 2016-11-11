@@ -184,22 +184,16 @@ influxd -config /usr/local/etc/influxdb.conf
 
 ## Configuration
 
-For non-packaged installations, it is a best practice to generate a new configuration
-for each upgrade to ensure you have the latest features and settings.
-Any changes made in the old file will need to be manually ported to the newly generated file.
-Packaged installations will come with a configuration pre-installed,
-so this step may not be needed if you installed InfluxDB using a
-package manager (though it is handy to know either way).
+The system has internal defaults for every configuration file setting.
+View the default configuration settings with the `influxd config` command.
 
-> Note: Newly generated configuration files have no knowledge of any local customizations or settings.
-Please make sure to double-check any configuration changes prior to deploying them.
-
-To generate a new configuration file run the following command and edit the
-`influxdb.generated.conf` file to have the desired configuration settings:
-
-```bash
-influxd config > influxdb.generated.conf
-```
+Most of the settings in the local configuration file
+(`/etc/influxdb/influxdb.conf`) are commented out; all
+commented-out settings will be determined by the internal defaults.
+Any uncommented settings in the local configuration file override the
+internal defaults.
+Note that the local configuration file does not need to include every
+configuration setting.
 
 There are two ways to launch InfluxDB with your configuration file:
 
@@ -207,7 +201,7 @@ There are two ways to launch InfluxDB with your configuration file:
 option:
 
     ```bash
-    influxd -config influxdb.generated.conf
+    influxd -config /etc/influxdb/influxdb.conf
     ```
 * Set the environment variable `INFLUXDB_CONFIG_PATH` to the path of your
 configuration file and start the process.
@@ -215,31 +209,15 @@ For example:
 
     ```
     echo $INFLUXDB_CONFIG_PATH
-    /root/influxdb.generated.conf
+    /etc/influxdb/influxdb.conf
 
     influxd
     ```
 
 InfluxDB first checks for the `-config` option and then for the environment
 variable.
-If you do not supply a configuration file, InfluxDB uses an internal default
-configuration (equivalent to the output of `influxd config`).
 
-> Note: The `influxd` command has two similarly named flags.
-The `config` flag prints a generated default configuration file to STDOUT but does not launch the `influxd` process.
-The `-config` flag takes a single argument, which is the path to the InfluxDB configuration file to use when launching the process.
-
-The `config` and `-config` flags can be combined to output the union of the internal default configuration and the configuration file passed to `-config`.
-The options specified in the configuration file will overwrite any internally generated configuration.
-
-```bash
-influxd config -config /etc/influxdb/influxdb.partial.conf
-```
-
-The output will show every option configured in the `influxdb.partial.conf` file and will substitute internal defaults for any configuration options not specified in that file.
-
-The example configuration file shipped with the installer is for information only.
-It is an identical file to the internally generated configuration except that the example file has comments.
+See the [Configuration](/influxdb/v1.1/administration/config/) documentation for more information.
 
 ## Hosting on AWS
 
