@@ -635,7 +635,7 @@ SHOW DATABASES
 ### SHOW FIELD KEYS
 
 ```
-show_field_keys_stmt = "SHOW FIELD KEYS" [ from_clause ] .
+show_field_keys_stmt = "SHOW FIELD KEYS" [on_clause] [ from_clause ] .
 ```
 
 #### Examples:
@@ -664,7 +664,7 @@ SHOW GRANTS FOR "jdoe"
 ### SHOW MEASUREMENTS
 
 ```
-show_measurements_stmt = "SHOW MEASUREMENTS" [ with_measurement_clause ] [ where_clause ] [ limit_clause ] [ offset_clause ] .
+show_measurements_stmt = "SHOW MEASUREMENTS" [on_clause] [ with_measurement_clause ] [ where_clause ] [ limit_clause ] [ offset_clause ] .
 ```
 
 #### Examples:
@@ -696,7 +696,7 @@ SHOW QUERIES
 ### SHOW RETENTION POLICIES
 
 ```
-show_retention_policies = "SHOW RETENTION POLICIES" on_clause .
+show_retention_policies = "SHOW RETENTION POLICIES" [on_clause] .
 ```
 
 #### Example:
@@ -709,7 +709,7 @@ SHOW RETENTION POLICIES ON "mydb"
 ### SHOW SERIES
 
 ```
-show_series_stmt = "SHOW SERIES" [ from_clause ] [ where_clause ] [ limit_clause ] [ offset_clause ] .
+show_series_stmt = "SHOW SERIES" [on_clause] [ from_clause ] [ where_clause ] [ limit_clause ] [ offset_clause ] .
 ```
 
 #### Example:
@@ -757,7 +757,7 @@ SHOW SUBSCRIPTIONS
 ### SHOW TAG KEYS
 
 ```
-show_tag_keys_stmt = "SHOW TAG KEYS" [ from_clause ] [ where_clause ] [ group_by_clause ]
+show_tag_keys_stmt = "SHOW TAG KEYS" [on_clause] [ from_clause ] [ where_clause ]
                      [ limit_clause ] [ offset_clause ] .
 ```
 
@@ -780,8 +780,8 @@ SHOW TAG KEYS WHERE "host" = 'serverA'
 ### SHOW TAG VALUES
 
 ```
-show_tag_values_stmt = "SHOW TAG VALUES" [ from_clause ] with_tag_clause [ where_clause ]
-                       [ group_by_clause ] [ limit_clause ] [ offset_clause ] .
+show_tag_values_stmt = "SHOW TAG VALUES" [on_clause] [ from_clause ] with_tag_clause [ where_clause ]
+                       [ limit_clause ] [ offset_clause ] .
 ```
 
 #### Examples:

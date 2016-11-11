@@ -13,6 +13,20 @@ common resolutions.
 **Disclaimer:** This document does not contain an exhaustive list of all possible InfluxDB errors.
 </dt>
 
+## error: database name required
+The `database name required` error occurs when certain `SHOW` queries do
+not specify a [database](/influxdb/v1.1/concepts/glossary/#database).
+Specify a database with an `ON` clause in the `SHOW` query, with `USE <database_name>` in the
+[CLI](/influxdb/v1.1/tools/shell/), or with the `db` query string parameter in
+the [HTTP API](/influxdb/v1.1/tools/api/#query-string-parameters) request.
+
+The relevant `SHOW` queries include `SHOW RETENTION POLICIES`, `SHOW SERIES`,
+`SHOW MEASUREMENTS`, `SHOW TAG KEYS`, `SHOW TAG VALUES`, and `SHOW FIELD KEYS`.
+
+**Resources:**
+[Schema Exploration](/influxdb/v1.1/query_language/schema_exploration/),
+[InfluxQL Reference](/influxdb/v1.1/query_language/spec/)
+
 ## error: max series per database exceeded: < >
 The `max series per database exceeded` error occurs when a write causes the
 number of [series](/influxdb/v1.1/concepts/glossary/#series) in a database to
