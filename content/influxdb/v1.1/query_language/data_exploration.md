@@ -1319,6 +1319,10 @@ Any numerical value
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  Reports the given numerical value for time intervals with no data.
 
+`linear`
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Reports the results of [linear interpolation](https://en.wikipedia.org/wiki/Linear_interpolation) for time intervals with no data.
+
 `none`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1342,9 +1346,10 @@ Reports the value from the previous time interval for time intervals with no dat
 {{< vertical-tabs >}}
 {{% tabs %}}
 [Example 1: fill(100)](#)
-[Example 2: fill(none)](#)
-[Example 3: fill(null)](#)
-[Example 4: fill(previous)](#)
+[Example 2: fill(linear)](#)
+[Example 3: fill(none)](#)
+[Example 4: fill(null)](#)
+[Example 5: fill(previous)](#)
 {{% /tabs %}}
 {{< tab-content-container >}}
 
@@ -1377,6 +1382,47 @@ time                   max
 ```
 
 `fill(100)` changes the value reported for the time interval with no data to `100`.
+
+{{% /tab-content %}}
+
+{{% tab-content %}}
+
+Without `fill(linear)`:
+
+```
+> SELECT MEAN("tadpoles") FROM "pond" WHERE time >= '2016-11-11T21:00:00Z' AND time <= '2016-11-11T22:06:00Z' GROUP BY time(12m)
+
+name: pond
+time                   mean
+----                   ----
+2016-11-11T21:00:00Z   1
+2016-11-11T21:12:00Z
+2016-11-11T21:24:00Z   3
+2016-11-11T21:36:00Z
+2016-11-11T21:48:00Z
+2016-11-11T22:00:00Z   6
+```
+
+With `fill(linear)`:
+```
+> SELECT MEAN("tadpoles") FROM "pond" WHERE time >= '2016-11-11T21:00:00Z' AND time <= '2016-11-11T22:06:00Z' GROUP BY time(12m) fill(linear)
+
+name: pond
+time                   mean
+----                   ----
+2016-11-11T21:00:00Z   1
+2016-11-11T21:12:00Z   2
+2016-11-11T21:24:00Z   3
+2016-11-11T21:36:00Z   4
+2016-11-11T21:48:00Z   5
+2016-11-11T22:00:00Z   6
+```
+
+`fill(linear)` changes the value reported for the time interval with no data
+to the results of [linear interpolation](https://en.wikipedia.org/wiki/Linear_interpolation).
+
+> **Note:** The data in Example 2 are not in `NOAA_water_database`.
+We had to create a dataset with less regular data to work with `fill(linear)`.
 
 {{% /tab-content %}}
 
@@ -1536,6 +1582,51 @@ time                   max
 2015-09-18T16:36:00Z
 2015-09-18T16:48:00Z   4
 ```
+
+##### Issue 3: `fill(linear)` when the previous or following result falls outside the query's time range
+<br>
+`fill(linear)` doesn't fill the result for a time interval with no data if the
+previous result or the following result is outside the query's time range.
+
+**Example**
+
+The following query covers the time range between `2016-11-11T21:24:00Z` and
+`2016-11-11T22:06:00Z`. Note that `fill(linear)` fills the results for the
+`2016-11-11T21:36:00Z` time interval and the `2016-11-11T21:48:00Z` time interval
+using the values from the `2016-11-11T21:24:00Z` time interval and the
+`2016-11-11T22:00:00Z` time interval.
+
+```
+> SELECT MEAN("tadpoles") FROM "pond" WHERE time > '2016-11-11T21:24:00Z' AND time <= '2016-11-11T22:06:00Z' GROUP BY time(12m) fill(linear)
+
+name: pond
+time                   mean
+----                   ----
+2016-11-11T21:24:00Z   3
+2016-11-11T21:36:00Z   4
+2016-11-11T21:48:00Z   5
+2016-11-11T22:00:00Z   6
+```
+
+The next query shortens the time range in the previous query.
+It now covers the time between `2016-11-11T21:36:00Z` and `2016-11-11T22:06:00Z`.
+Note that `fill()` previous doesn't fill the results for the `2016-11-11T21:36:00Z`
+time interval and the `2016-11-11T21:48:00Z` time interval; the result for
+`2016-11-11T21:24:00Z` is outside the query's shorter time range and InfluxDB
+cannot perform the linear interpolation.
+
+```
+> SELECT MEAN("tadpoles") FROM "pond" WHERE time >= '2016-11-11T21:36:00Z' AND time <= '2016-11-11T22:06:00Z' GROUP BY time(12m) fill(linear)
+name: pond
+time                   mean
+----                   ----
+2016-11-11T21:36:00Z
+2016-11-11T21:48:00Z
+2016-11-11T22:00:00Z   6
+```
+
+> **Note:** The data in Issue 3 are not in `NOAA_water_database`.
+We had to create a dataset with less regular data to work with `fill(linear)`.
 
 <br>
 <br>
