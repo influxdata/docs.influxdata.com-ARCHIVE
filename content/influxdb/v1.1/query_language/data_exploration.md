@@ -156,7 +156,8 @@ Use this syntax to differentiate between field keys and tag keys that have the s
 Other supported features:
 [Arithmetic Operations](/influxdb/v1.1/query_language/math_operators/),
 [Functions](/influxdb/v1.1/query_language/functions/),
-[Basic Cast Operations](#data-types-and-cast-operations-in-queries)
+[Basic Cast Operations](#data-types-and-cast-operations-in-queries),
+[Regular Expressions](#regular-expressions-in-queries)
 
 #### `FROM` clause
 The `FROM` clause supports several formats for specifying a [measurement(s)](/influxdb/v1.1/concepts/glossary/#measurement):
@@ -2500,16 +2501,17 @@ Specify alternative formats with the
 # Regular Expressions in Queries
 
 InfluxQL supports using regular expressions when specifying
+[field keys](/influxdb/v1.1/concepts/glossary/#field-key) and [tag keys](/influxdb/v1.1/concepts/glossary/#tag-key) in the
+[`SELECT` clause](/influxdb/v1.1/query_language/data_exploration/#the-basic-select-statement);
 [measurements](/influxdb/v1.1/concepts/glossary/#measurement) in the
-[`FROM` clause](#the-from-clause)
-, [tag values](/influxdb/v1.1/concepts/glossary/#tag-value) in the
-[`WHERE` clause](#the-where-clause),
-and string [field values](/influxdb/v1.1/concepts/glossary/#field-value)
-in the [`WHERE` clause](#the-where-clause).
+[`FROM` clause](/influxdb/v1.1/query_language/data_exploration/#the-basic-select-statement)
+; and [tag values](/influxdb/v1.1/concepts/glossary/#tag-value) and string [field values](/influxdb/v1.1/concepts/glossary/#field-value) in the
+[`WHERE` clause](/influxdb/v1.1/query_language/data_exploration/#the-where-clause).
 Currently, InfluxQL does not support using regular expressions to match
-[databases](/influxdb/v1.1/concepts/glossary/#database),
-[retention polices](/influxdb/v1.1/concepts/glossary/#retention-policy-rp), and
-non-string [fields](/influxdb/v1.1/concepts/glossary/#field).
+non-string field values in the
+`WHERE` clause,
+[databases](/influxdb/v1.1/concepts/glossary/#database), and
+[retention polices](/influxdb/v1.1/concepts/glossary/#retention-policy-rp).
 
 Regular expression comparisons are more computationally intensive than exact
 string comparisons and thus queries with regular expressions are not as performant
@@ -2517,7 +2519,7 @@ as those without.
 
 ### Syntax
 ```
-SELECT_clause FROM /<regular_expression_measurement>/ WHERE [<tag_key> <operator> /<regular_expression_tag_value>/ | <field_key> <operator> /<regular_expression_field_value>/]
+SELECT /<regular_expression_field_key>/ FROM /<regular_expression_measurement>/ WHERE [<tag_key> <operator> /<regular_expression_tag_value>/ | <field_key> <operator> /<regular_expression_field_value>/]
 ```
 
 ### Description of Syntax
@@ -2531,7 +2533,43 @@ Supported operators:
 
 ### Examples
 
-#### Example 1: Use a regular expression to specify measurements
+#### Example 1: Use a regular expression to specify field keys and tag keys
+```
+> SELECT /l/ FROM "h2o_feet" LIMIT 1
+
+name: h2o_feet
+time                   level description      location       water_level
+----                   -----------------      --------       -----------
+2015-08-18T00:00:00Z   between 6 and 9 feet   coyote_creek   8.12
+```
+
+The query selects all [field keys](/influxdb/v1.1/concepts/glossary/#field-key)
+and [tag keys](/influxdb/v1.1/concepts/glossary/#tag-key) that include an `l`.
+Note that the regular expression in the `SELECT` clause must match at least one
+field key in order to return results for a tag key that matches the regular
+expression.
+
+Currently, there is no syntax to distinguish between regular expressions for
+field keys and regular expressions for tag keys in the `SELECT` clause.
+The syntax `/<regular_expression>/::[field | tag]` is not supported.
+
+#### Example 2: Use a regular expression to specify field keys with a function
+```
+> SELECT DISTINCT(/level/) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00.000000000Z' AND time <= '2015-08-18T00:12:00Z'
+
+name: h2o_feet
+time                   distinct_level description   distinct_water_level
+----                   --------------------------   --------------------
+2015-08-18T00:00:00Z   below 3 feet                 2.064
+2015-08-18T00:00:00Z                                2.116
+2015-08-18T00:00:00Z                                2.028
+```
+
+The query uses an InfluxQL [function](/influxdb/v1.1/query_language/functions/)
+to return the distinct [field values](/influxdb/v1.1/concepts/glossary/#field-value)
+for every field key that contains the word `level`.
+
+#### Example 3: Use a regular expression to specify measurements
 ```
 > SELECT MEAN("degrees") FROM /temperature/
 
@@ -2550,7 +2588,7 @@ The query uses an InfluxQL [function](/influxdb/v1.1/query_language/functions/)
 to calculate the average `degrees` for every [measurement](/influxdb/v1.1/concepts/glossary#measurement) in the `NOAA_water_database`
 [database](/influxdb/v1.1/concepts/glossary#database) that contains the word `temperature`.
 
-#### Example 2: Use a regular expression to specify tag values
+#### Example 4: Use a regular expression to specify tag values
 
 ```
 > SELECT MEAN(water_level) FROM "h2o_feet" WHERE "location" =~ /[m]/ AND "water_level" > 3
@@ -2565,7 +2603,7 @@ The query uses an InfluxQL [function](/influxdb/v1.1/query_language/functions/)
 to calculate the average `water_level` where the [tag value](/influxdb/v1.1/concepts/glossary#tag-value) of `location`
 includes an `m` and `water_level` is greater than three.
 
-#### Example 3: Use a regular expression to specify a tag with no value
+#### Example 5: Use a regular expression to specify a tag with no value
 
 ```
 > SELECT * FROM "h2o_feet" WHERE "location" !~ /./
@@ -2581,7 +2619,7 @@ See the
 [Frequently Asked Questions](/influxdb/v1.1/troubleshooting/frequently-asked-questions/#how-do-i-select-data-with-a-tag-that-has-no-value)
 document for more information.
 
-#### Example 4: Use a regular expression to specify a tag with a value
+#### Example 6: Use a regular expression to specify a tag with a value
 
 ```
 > SELECT MEAN("water_level") FROM "h2o_feet" WHERE "location" =~ /./
@@ -2596,7 +2634,7 @@ The query uses an InfluxQL [function](/influxdb/v1.1/query_language/functions/)
 to calculate the average `water_level` across all data that have a tag value for
 `location`.
 
-#### Example 5: Use a regular expression to specify a field value
+#### Example 7: Use a regular expression to specify a field value
 ```
 > SELECT MEAN("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' AND "level description" =~ /between/
 

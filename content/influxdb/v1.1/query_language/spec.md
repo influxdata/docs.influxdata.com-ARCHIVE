@@ -204,8 +204,18 @@ regex_lit           = "/" { unicode_char } "/" .
 `=~` matches against
 `!~` doesn't match against
 
-> **Note:** Use regular expressions to match measurements and tags.
-You cannot use regular expressions to match databases, retention policies, or fields.
+> **Note:** InfluxQL supports using regular expressions when specifying
+[field keys](/influxdb/v1.1/concepts/glossary/#field-key) and [tag keys](/influxdb/v1.1/concepts/glossary/#tag-key) in the
+[`SELECT` clause](/influxdb/v1.1/query_language/data_exploration/#the-basic-select-statement);
+[measurements](/influxdb/v1.1/concepts/glossary/#measurement) in the
+[`FROM` clause](/influxdb/v1.1/query_language/data_exploration/#the-basic-select-statement)
+; and [tag values](/influxdb/v1.1/concepts/glossary/#tag-value) and string [field values](/influxdb/v1.1/concepts/glossary/#field-value) in the
+[`WHERE` clause](/influxdb/v1.1/query_language/data_exploration/#the-where-clause).
+Currently, InfluxQL does not support using regular expressions to match
+non-string field values in the
+`WHERE` clause,
+[databases](/influxdb/v1.1/concepts/glossary/#database), and
+[retention polices](/influxdb/v1.1/concepts/glossary/#retention-policy-rp).
 
 ## Queries
 
