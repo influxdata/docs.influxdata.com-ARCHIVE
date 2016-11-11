@@ -50,14 +50,8 @@ Functionality will vary, and there are, as yet, no standard features that all li
 - [InfluxDB Ruby](https://github.com/influxdb/influxdb-ruby)
 - [Influxer](https://github.com/palkan/influxer) by [palkan](https://github.com/palkan)
 
-## Rust
-- [Influent.rs](https://github.com/gobwas/influent.rs) by [gobwas](https://github.com/gobwas)
-
 ## Scala
 - [scala-influxdb-client](https://github.com/paulgoldbaum/scala-influxdb-client) by [paulgoldbaum](https://github.com/paulgoldbaum)
 
 ## Sensu
 - [sensu-influxdb-extension](https://github.com/jhrv/sensu-influxdb-extension) by [jhrv](https://github.com/jhrv)
-
-## SNMP
-- [influxsnmp](https://github.com/paulstuart/influxsnmp) by [paulstuart](https://github.com/paulstuart)
