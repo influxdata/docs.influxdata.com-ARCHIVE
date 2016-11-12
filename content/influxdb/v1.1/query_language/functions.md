@@ -11,15 +11,15 @@ Use InfluxQL functions to aggregate, select, transform, and predict data.
 
 | Aggregations | Selectors | Transformations | Predictors |
 |--------------|-----------|-----------------|------------|
-| [COUNT()](#count)  | [BOTTOM()](#bottom)  | [CEILING()](#ceiling) | [HOLT_WINTERS()](#holt-winters)  
-| [DISTINCT()](#distinct)  | [FIRST()](#first)  | [DERIVATIVE()](#derivative)  
-| [INTEGRAL()](#integral)  | [LAST()](#last)  | [DIFFERENCE()](#difference)  
-| [MEAN()](#mean) | [MAX()](#max)  | [ELAPSED()](#elapsed)
-| [MEDIAN()](#median)  | [MIN()](#min)  |  [FLOOR()](#floor)
-| [MODE()](#mode) | [PERCENTILE()](#percentile) | [HISTOGRAM()](#histogram)
-| [SPREAD()](#spread)  | [SAMPLE()](#sample) | [MOVING_AVERAGE()](#moving-average) |
-| [STDDEV()](#stddev)  | [TOP()](#top)  | [NON_NEGATIVE_DERIVATIVE()](#non-negative-derivative) |
-| [SUM()](#sum)  |  |  |
+| [COUNT()](#count)        | [BOTTOM()](#bottom)         | [CEILING()](#ceiling)                                 | [HOLT_WINTERS()](#holt-winters)  
+| [DISTINCT()](#distinct)  | [FIRST()](#first)           | [CUMULATIVE_SUM()](#cumulative-sum)                     |
+| [INTEGRAL()](#integral)  | [LAST()](#last)             | [DERIVATIVE()](#derivative)                           |
+| [MEAN()](#mean)          | [MAX()](#max)               | [DIFFERENCE()](#difference)                           |
+| [MEDIAN()](#median)      | [MIN()](#min)               | [ELAPSED()](#elapsed)                                 |
+| [MODE()](#mode)          | [PERCENTILE()](#percentile) | [FLOOR()](#floor)                                     |
+| [SPREAD()](#spread)      | [SAMPLE()](#sample)         | [HISTOGRAM()](#histogram)                             |
+| [STDDEV()](#stddev)      | [TOP()](#top)               | [MOVING_AVERAGE()](#moving-average)                   |
+| [SUM()](#sum)            |                             | [NON_NEGATIVE_DERIVATIVE()](#non-negative-derivative) |
 
 
 Useful InfluxQL for functions:  
@@ -1092,6 +1092,100 @@ In the case of a tie, InfluxDB returns the value with the earlier timestamp.
 
 <dt> See GitHub Issue [#5930](https://github.com/influxdata/influxdb/issues/5930) for more information.
 </dt>
+
+## CUMULATIVE_SUM()
+Returns the cumulative sum of consecutive field values for a single
+[field](/influxdb/v1.1/concepts/glossary/#field).
+The field type must be int64 or float64.
+
+### Basic CUMULATIVE_SUM() Syntax
+```
+SELECT CUMULATIVE_SUM(<field_key>) FROM_clause WHERE_clause
+```
+
+### Advanced CUMULATIVE_SUM() Syntax
+```
+SELECT CUMULATIVE_SUM(<function>(<field_key>)) FROM_clause WHERE_clause GROUP BY time(<interval>)[,<tag_key>]
+```
+
+Supported functions:
+[`COUNT()`](#count),
+[`MEAN()`](#mean),
+[`MEDIAN()`](#median),
+[`MODE()`](#mode),
+[`SUM()`](#sum),
+[`FIRST()`](#first),
+[`LAST()`](#last),
+[`MIN()`](#min),
+[`MAX()`](#max), and
+[`PERCENTILE()`](#percentile).
+
+### Examples
+
+The examples below work with the following subsample of the `NOAA_water_database`
+data:
+```
+> SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+
+name: h2o_feet
+time                   water_level
+----                   -----------
+2015-08-18T00:00:00Z   2.064
+2015-08-18T00:06:00Z   2.116
+2015-08-18T00:12:00Z   2.028
+2015-08-18T00:18:00Z   2.126
+2015-08-18T00:24:00Z   2.041
+2015-08-18T00:30:00Z   2.051
+```
+
+#### Example 1: Use cumulative sum on a single time range
+```
+> SELECT CUMULATIVE_SUM("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+
+name: h2o_feet
+time                   cumulative_sum
+----                   --------------
+2015-08-18T00:00:00Z   2.064
+2015-08-18T00:06:00Z   4.18
+2015-08-18T00:12:00Z   6.208
+2015-08-18T00:18:00Z   8.334
+2015-08-18T00:24:00Z   10.375
+2015-08-18T00:30:00Z   12.426
+```
+
+The query returns the cumulative sum of `water_level`'s field values.
+The second point in the results is the sum of `2.064` and `2.116`, the third point is the sum of `2.064`, `2.116`, and `2.028`, and so on.
+
+#### Example 2: Use cumulative sum with a `GROUP BY time()` clause
+```
+> SELECT CUMULATIVE_SUM(MEAN("water_level")) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
+
+name: h2o_feet
+time                   cumulative_sum
+----                   --------------
+2015-08-18T00:00:00Z   2.09
+2015-08-18T00:12:00Z   4.167
+2015-08-18T00:24:00Z   6.213
+```
+
+The query returns the cumulative sum of average `water_level`s that are calculated at 12-minute intervals between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z`.
+
+To get those results, InfluxDB first calculates average `water_level`s at 12-minute intervals.
+This step is the same as using the raw `MEAN()` function:
+```
+> SELECT MEAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
+
+name: h2o_feet
+time                   mean
+----                   ----
+2015-08-18T00:00:00Z   2.09
+2015-08-18T00:12:00Z   2.077
+2015-08-18T00:24:00Z   2.0460000000000003
+```
+
+Next, InfluxDB calculates the cumulative sum of those averages.
+The second point in the final results is the sum of `2.09` and `2.077`
+and the third point is the sum of `2.09`, `2.077`, and `2.0460000000000003`.
 
 ## DERIVATIVE()
 Returns the rate of change for the values in a single [field](/influxdb/v1.1/concepts/glossary/#field) in a [series](/influxdb/v1.1/concepts/glossary/#series).
