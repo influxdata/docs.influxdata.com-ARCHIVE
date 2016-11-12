@@ -17,8 +17,8 @@ Use InfluxQL functions to aggregate, select, transform, and predict data.
 | [MEAN()](#mean) | [MAX()](#max)  | [ELAPSED()](#elapsed)
 | [MEDIAN()](#median)  | [MIN()](#min)  |  [FLOOR()](#floor)
 | [MODE()](#mode) | [PERCENTILE()](#percentile) | [HISTOGRAM()](#histogram)
-| [SPREAD()](#spread)  | [TOP()](#top) | [MOVING_AVERAGE()](#moving-average) |
-| [STDDEV()](#stddev)  |  | [NON_NEGATIVE_DERIVATIVE()](#non-negative-derivative) |
+| [SPREAD()](#spread)  | [SAMPLE()](#sample) | [MOVING_AVERAGE()](#moving-average) |
+| [STDDEV()](#stddev)  | [TOP()](#top)  | [NON_NEGATIVE_DERIVATIVE()](#non-negative-derivative) |
 | [SUM()](#sum)  |  |  |
 
 
@@ -897,6 +897,83 @@ See GitHub Issue [#4418](https://github.com/influxdata/influxdb/issues/4418) for
 </dt>
 
 > **Note**: `PERCENTILE(<field_key>, 50)` is nearly equivalent to `MEDIAN()`, except `MEDIAN()` returns the average of the two middle values if the field contains an even number of points.
+
+## SAMPLE()
+Returns a random sample of `N` points for the specified [field key](/influxdb/v1.1/concepts/glossary/#field).
+InfluxDB uses [reservoir sampling](https://en.wikipedia.org/wiki/Reservoir_sampling) to generate the random points.
+`SAMPLE()` supports all [field types](/influxdb/v1.1/write_protocols/line_protocol_reference/#data-types).
+```
+SELECT SAMPLE(<field_key>,<N>) FROM_clause [WHERE_clause] [GROUP_BY_clause]
+```
+
+### Examples
+
+#### Example 1: Select a random sample of two points
+```
+> SELECT SAMPLE("water_level",2) FROM "h2o_feet"
+
+name: h2o_feet
+time                   sample
+----                   ------
+2015-09-09T21:48:00Z   5.659
+2015-09-18T10:00:00Z   6.939
+```
+
+The query returns two randomly selected points from the `water_level` field
+in the `h2o_feet` measurement.
+
+#### Example 2: Select a random sample of two points per `GROUP BY time()` interval
+```
+> SELECT SAMPLE("water_level",1) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(18m)
+
+name: h2o_feet
+time                   sample
+----                   ------
+2015-08-18T00:12:00Z   2.028
+2015-08-18T00:30:00Z   2.051
+```
+
+The query returns one randomly selected point per 18-minute `GROUP BY time()`
+interval.
+Note that the timestamps returned are the points' original timestamps.
+
+### Common Issues with `SAMPLE()`
+
+#### Issue 1: `SAMPLE()` with a `GROUP BY time()` clause
+Queries with `SAMPLE()` and a `GROUP BY time()` clause return the specified
+number of points (`N`) per `GROUP BY time()` interval.
+For
+[most `GROUP BY time()` queries](/influxdb/v1.1/query_language/data_exploration/#group-by-time-intervals),
+the returned timestamps mark the start of the `GROUP BY time()` interval.
+`GROUP BY time()` queries with the `SAMPLE()` function behave differently;
+they maintain the timestamp of the original data point.
+
+The query below returns two randomly selected points per 18-minute
+`GROUP BY time()` interval.
+Notice that the returned timestamps are the original timestamps; they
+are not forced to match the start of the `GROUP BY time()` intervals.
+
+```
+> SELECT SAMPLE("water_level",2) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(18m)
+
+name: h2o_feet
+time                   sample
+----                   ------
+                           __
+2015-08-18T00:06:00Z   2.116 |
+2015-08-18T00:12:00Z   2.028 | <------- Randomly-selected points for the first time interval
+                           --
+                           __
+2015-08-18T00:18:00Z   2.126 |
+2015-08-18T00:30:00Z   2.051 | <------- Randomly-selected points for the second time interval
+                           --
+```
+
+#### Issue 2: `SAMPLE()` with `*`
+
+Currently, `SAMPLE(*,<N>)` ignores fields with string values.
+See GitHub Issue [#7621](https://github.com/influxdata/influxdb/issues/7621)
+for more information.
 
 ## TOP()
 Returns the largest `N` values in a single [field](/influxdb/v1.1/concepts/glossary/#field).
