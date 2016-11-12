@@ -17,29 +17,42 @@ Usage: influxd-ctl [options] <command> [options] [<args>]
 
 The available commands are:
 ```
-add-data          Add a data node  
-copy-shard        Copy a shard between data nodes  
-copy-shard-status Show all active copy shard tasks  
-join              Join a meta node  
-kill-copy-shard   Abort an in-progress shard copy  
-leave             Remove a meta node  
-force-leave       Forcefully remove a meta node  
-remove-data       Remove a data node  
-remove-shard      Remove a shard from a data node  
-show              Show cluster members  
-show-shards       Shows the shards in a cluster  
-update-data       Update a data node  
-truncate-shards   Truncate current shards  
+add-data            Add a data node
+add-meta            Add a meta node
+backup              Backup a cluster
+copy-shard          Copy a shard between data nodes
+copy-shard-status   Show all active copy shard tasks
+join                Join a meta or data node
+kill-copy-shard     Abort an in-progress shard copy
+leave               Remove a meta node
+remove-data         Remove a data node
+remove-meta         Remove a meta node
+remove-shard        Remove a shard from a data node
+restore             Restore a backup of a cluster
+show                Show cluster members
+show-shards         Shows the shards in a cluster
+update-data         Update a data node
+token               Generates a signed JWT token
+truncate-shards     Truncate current shards
 ```
 
 Options:
 ```
+-auth-type string
+    Type of authentication to use (none, basic, jwt) (default "none")
 -bind string
-      Bind HTTP address of a meta node (default "localhost:8091")
+    Bind HTTP address of a meta node (default "localhost:8091")
 -bind-tls
-      Use TLS
+    Use TLS
 -config string
-      Config file path
+    Config file path
+-k	Skip certficate verification (ignored without -bind-tls)
+-pwd string
+    Password (ignored without -auth-type jwt)
+-secret string
+    JWT shared secret (ignored without -auth-type jwt)
+-user string
+    User name (ignored without -auth-type basic | jwt)
 ```
 
 ###  influx

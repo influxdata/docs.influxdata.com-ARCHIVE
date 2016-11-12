@@ -104,63 +104,45 @@ If you have settings that you’d like to keep, please make a copy of your confi
 
 #### Ubuntu & Debian (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.0.2-c1.0.4_amd64.deb
-sudo dpkg -i influxdb-data_1.0.2-c1.0.4_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.1.0-c1.1.0_amd64.deb
+sudo dpkg -i influxdb-data_1.1.0-c1.1.0_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.0.2_c1.0.4.x86_64.rpm
-sudo yum localinstall influxdb-data-1.0.2_c1.0.4.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.1.0_c1.1.0.x86_64.rpm
+sudo yum localinstall influxdb-data-1.1.0_c1.1.0.x86_64.rpm
 ```
 
 ### 5. Update the configuration file
 
-For the following settings in `/etc/influxdb/influxdb.conf`, set:
+In `/etc/influxdb/influxdb-meta.conf`, set:
 
-* `hostname` to the server’s hostname (you must manually add this setting)
-* `license-key` in the `[enterprise]` section to your license key
-* `auth-enabled` in the `[http]` section to true
-* `shared-secret` in the `[http]` section to your shared secret (you must manually add this setting for the Enterprise Web console to function)
+* `hostname` to the full hostname of the meta node
+* `registration-enabled` in the `[enterprise]` section to `true`
+* `registration-server-url` in the `[enterprise]` section to the full URL of the server that will run the InfluxEnterprise web console.
+You must fully specify the protocol, IP or hostname, and port.
+Entering the IP or hostname alone will lead to errors.
+* `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
+
 
 ```
-# Change this option to true to disable reporting.
-reporting-disabled = false
-hostname="your-hostname" #✨
-meta-tls-enabled = false
+# Hostname advertised by this host for remote addresses.  This must be resolvable by all
+# other nodes in the cluster
+hostname="<enterprise-meta-0x>" #✨
 
 [enterprise]
+  # Must be set to true to use the Enterprise Web UI
+  registration-enabled = true #✨
 
-registration-enabled = false
-registration-server-url = ""
-license-key = "<your_license_key>" #✨
-license-path = ""
+  # Must include the protocol (http://)
+  registration-server-url = "http://<web-console-server-IP>:3000" #✨
 
-[meta]
-enabled = false
-dir = "/var/lib/influxdb/meta"
+  # license-key and license-path are mutually exclusive, use only one and leave the other blank
+  license-key = "<your_license_key>" #✨ mutually exclusive with license-path
 
-[data]
-enabled = true
-dir = "/var/lib/influxdb/data"
-
-[...]
-
-[http]
- enabled = true
- bind-address = ":8086"
- auth-enabled = true #✨
- log-enabled = true
- write-tracing = false
- pprof-enabled = false
- https-enabled = false
- https-certificate = "/etc/ssl/influxdb.pem"
- shared-secret = "long pass phrase used for signing tokens" #✨
-
-[...]
-
-retry-max-interval = "1m0s"
-purge-interval = "1h0m0s"
+  # license-key and license-path are mutually exclusive, use only one and leave the other blank
+  license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
 ```
 
 ### 6. Start the data node

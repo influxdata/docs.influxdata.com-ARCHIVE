@@ -6,23 +6,36 @@ menu:
     parent: Administration
 ---
 
+<table style="width:100%">
+  <tr>
+    <td><a href="#upgrading-from-version-1-0-to-1-1">Upgrading from version 1.0 to 1.1</a></td>
+    <td><a href="#upgrading-from-version-0-7-to-1-1">Upgrading from version 0.7 to 1.1</a></td>
+  </tr>
+</table>
+
+## Upgrading from version 1.0 to 1.1
+
+The `influxd-ctl join` command has been renamed to `influxd-ctl add-meta`. If you have existing scripts that use `influxd-ctl join`, they will need to use `influxd-ctl add-meta` or be updated to use the new cluster setup command.
+
+This release should be a drop-in replacement for 1.0 with no data migration required. There are some configuration changes that may need to be updated prior to upgrading to avoid downtime. Please review the [Changelog](/enterprise/v1.1/about-the-project/release-notes-changelog/) prior to upgrading.
+
+## Upgrading from version 0.7 to 1.1
+
 The following sections include instructions for upgrading from InfluxEnterprise
 Clustering version 0.7.4 and InfluxEnterprise Web Console version 0.7.1
-to InfluxEnterprise 1.0.
+to InfluxEnterprise 1.1.
 
 Please note that the upgrade process requires you to delete existing users
-from the web console due to [significant changes](/enterprise/v1.1/about-the-project/release-notes-changelog/#user-updates)
+from the web console due to [significant changes](/enterprise/v1.1/about-the-project/release-notes-changelog/#v1-0-0)
 to how users function in InfluxEnterprise.
-Once you've completed the upgrade process, any users created prior to version 1.0 will be
+Once you've completed the upgrade process, any users created prior to version 1.1 will be
 [cluster accounts](/enterprise/v1.1/features/users/#cluster-user-information).
 Please see [InfluxEnterprise Users](/enterprise/v1.1/features/users/) for
-more information on how InfluxEnterprise organizes users in version 1.0.
+more information on how InfluxEnterprise organizes users in version 1.1.
 
 > **Note:** Before you start, please review the section at the
 [bottom of this page](#configuration-settings) to ensure that you have the most
 up-to-date configuration settings.
-
-## Upgrading to InfluxEnterprise 1.0
 
 ### 1. Download and install the new versions of InfluxEnterprise
 
@@ -30,8 +43,8 @@ up-to-date configuration settings.
 
 ##### Ubuntu & Debian (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.0.2-c1.0.4_amd64.deb
-sudo dpkg -i influxdb-meta_1.0.2-c1.0.4_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.1.0-c1.1.0_amd64.deb
+sudo dpkg -i influxdb-meta_1.1.0-c1.1.0_amd64.deb
 ```
 
 > **Note:** If you're running Ubuntu 16.04.1, you may need to enter
@@ -39,33 +52,33 @@ sudo dpkg -i influxdb-meta_1.0.2-c1.0.4_amd64.deb
 
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.0.2_c1.0.4.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.0.2_c1.0.4.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.1.0_c1.1.0.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.1.0_c1.1.0.x86_64.rpm
 ```
 
 #### Data nodes
 
 ##### Ubuntu & Debian (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.0.2-c1.0.4_amd64.deb
-sudo dpkg -i influxdb-data_1.0.2-c1.0.4_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.1.0-c1.1.0_amd64.deb
+sudo dpkg -i influxdb-data_1.1.0-c1.1.0_amd64.deb
 ```
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.0.2_c1.0.4.x86_64.rpm
-sudo yum localinstall influxdb-data-1.0.2_c1.0.4.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.1.0_c1.1.0.x86_64.rpm
+sudo yum localinstall influxdb-data-1.1.0_c1.1.0.x86_64.rpm
 ```
 #### Web console
 
 ##### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise_1.0.3_amd64.deb
-sudo dpkg -i influx-enterprise_1.0.3_amd64.deb
+wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise_1.1.0_amd64.deb
+sudo dpkg -i influx-enterprise_1.1.0_amd64.deb
 ```
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise-1.0.3.x86_64.rpm
-sudo yum localinstall influx-enterprise-1.0.3.x86_64.rpm
+wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise-1.1.0.x86_64.rpm
+sudo yum localinstall influx-enterprise-1.1.0.x86_64.rpm
 ```
 
 > **Note:**
@@ -74,7 +87,7 @@ If you're running Ubuntu 16.04.1, you may need to enter
 
 ### 2. Delete existing Web Console users
 The new user organization in InfluxEnterprise requires those looking to
-upgrade to version 1.0 to remove all existing users from the Web Console.
+upgrade to version 1.1 to remove all existing users from the Web Console.
 On the server that's running InfluxEnterprise, enter:
 ```
 rm -rf /var/lib/influx-enterprise/enterprise.db
@@ -119,7 +132,7 @@ sudo systemctl start influx-enterprise
 ```
 
 ### 5. Complete the signup flow
-Now that you've upgraded to version 1.0, visit `http://<your_web_console_server's_IP_address>:3000`
+Now that you've upgraded to version 1.1, visit `http://<your_web_console_server's_IP_address>:3000`
 to complete the new signup flow.
 
 The [Getting Started](/enterprise/v1.1/introduction/getting_started/) guide offers
@@ -128,7 +141,7 @@ Don't worry about any existing cluster users for now - we'll take care of
 them in the next step.
 
 ### 6. Link existing cluster accounts to web console users
-In version 1.0 web console users are given cluster-specific permissions by being associated with a separate cluster account.
+In version 1.1 web console users are given cluster-specific permissions by being associated with a separate cluster account.
 The upgrade process turned all existing users into cluster accounts with no
 associated web console user.
 The following steps document how to link those existing cluster accounts
@@ -177,7 +190,7 @@ In the `Account Details` section, click the checkbox next to `Admin` and click
 ![Web Console Admin User](/img/enterprise/admin_user_1.png)
 
 
-You've completed the upgrade process for version 1.0.
+You've completed the upgrade process for version 1.1.
 Next, check out the [release notes](/enterprise/v1.1/about-the-project/release-notes-changelog/) to
 see what's new!
 

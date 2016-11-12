@@ -90,14 +90,14 @@ Perform the following steps on each meta server.
 
 #### Ubuntu & Debian (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.0.2-c1.0.4_amd64.deb
-sudo dpkg -i influxdb-meta_1.0.2-c1.0.4_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.1.0-c1.1.0_amd64.deb
+sudo dpkg -i influxdb-meta_1.1.0-c1.1.0_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.0.2_c1.0.4.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.0.2_c1.0.4.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.1.0_c1.1.0.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.1.0_c1.1.0.x86_64.rpm
 ```
 
 ### II. Edit the Configuration File
@@ -166,11 +166,11 @@ production environments.
 From one and only one meta node, join all meta nodes including itself.
 In our example, from `enterprise-meta-01`, run:
 ```
-influxd-ctl join enterprise-meta-01:8091
+influxd-ctl add-meta enterprise-meta-01:8091
 
-influxd-ctl join enterprise-meta-02:8091
+influxd-ctl add-meta enterprise-meta-02:8091
 
-influxd-ctl join enterprise-meta-03:8091
+influxd-ctl add-meta enterprise-meta-03:8091
 ```
 
 > **Note:** Please make sure that you specify the fully qualified host name of

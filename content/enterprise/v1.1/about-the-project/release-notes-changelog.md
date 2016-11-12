@@ -8,7 +8,59 @@ menu:
 
 # Clustering
 
-## v1.1.3 [2016-10-07]
+## v1.1.0 [2016-11-14]
+
+### Release Notes
+
+### Upgrading
+
+* The `influxd-ctl join` command has been renamed to `influxd-ctl add-meta`.  If you have existing scripts that use `influxd-ctl join`, they will need to use `influxd-ctl add-meta` or be updated to use the new cluster setup command.
+
+#### Cluster Setup
+
+The `influxd-ctl join` command has been changed to simplify cluster setups.  To join a node to a cluster, you can run `influxd-ctl join <meta:8091>`, and we will attempt to detect and add any meta or data node process running on the hosts automatically.  The previous `join` command exists as `add-meta` now.  If it's the first node of a cluster, the meta address argument is optional.
+
+#### Logging
+
+Switches to journald logging for on systemd systems. Logs will no longer be sent to `/var/log/influxdb` on systemd systems.
+
+#### Features
+
+- Adds configuration option for setting gossiping frequency on data nodes.
+- Add queueBytes stat to hh\_processor, to indicate bytes in hh queue.
+- Adds auth to meta service API.
+- Update go dependencies, fix go vet, update circle go vet command.
+- Simplified join processes
+- query for versions running on all nodes
+- "influxd-ctl show shards" should trigger an error, if possible
+
+#### Bugfixes
+
+- Getting latest snapshot will now timeout with an error after 30 seconds.
+- Don't include expired shards in the /show-shards output.
+- Ensure pprof-enabled config option is respected and profiling on meta nodes is enabled by default.
+- Respect pprof-enabled flag on data node.
+- For performance, use data reference instead of clone during read-only operations.
+- show stats: cluster reported twice
+- Ensure meta API redirects on all ErrNotLeader errors.
+- Don't overwrite Plutonium users when importing OSS users.
+- Fix data race in raft store.
+- Fix HH issue with large segments blocking HH progress.
+- kill-copy-shard reports success but does not interrupt the copy operation.
+- Adding data node with meta traffic blocked hangs forever
+
+## v1.0.4 [2016-10-19]
+
+#### OSS
+
+This release builds off of the 1.0.2 release of InfluxDB.  Please see the [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v102-2016-10-05) for specific changes.
+
+#### Bugfixes
+
+- Respect hinted handoff configuration settings.
+- Fix expanding regular expressions when not all shards exist on node handling request.
+
+## v1.0.3 [2016-10-07]
 
 This release builds off of the 1.0.2 release of InfluxDB.  Please see the [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v102-2016-10-05) for specific changes.
 
@@ -16,7 +68,7 @@ This release builds off of the 1.0.2 release of InfluxDB.  Please see the [relea
 
 - Fix panic in hinted handoff: lastModified
 
-## v1.1.2 [2016-10-06]
+## v1.0.2 [2016-10-06]
 This release builds off of the 1.0.2 release of InfluxDB.  Please see the [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v102-2016-10-05) for specific changes.
 
 ### Cluster-specific Features
@@ -27,7 +79,7 @@ This release builds off of the 1.0.2 release of InfluxDB.  Please see the [relea
 - Corrupted hinted handoff file prevents `influxd` from starting
 - Fix systemd package upgrade symlink failure
 
-## v1.1.1 [2016-09-28]
+## v1.0.1 [2016-09-28]
 This release builds off of the 1.0.1 OSS release of InfluxDB.
 Please see the [OSS release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v101-2016-09-26)
 for specific changes.
@@ -42,7 +94,7 @@ for specific changes.
 * Fix panic in hinted handoff: `runtime error: makeslice: len out of range`
 * Update sample config for data nodes
 
-## v1.1.0 [2016-09-07]
+## v1.0.0 [2016-09-07]
 
 This release builds on the latest 1.0 master branch based off of 1.0beta3 + latest.  Please see the [release notes](https://github.com/influxdata/influxdb/blob/master/CHANGELOG.md#v100-unreleased) for specific changes.
 
@@ -104,7 +156,12 @@ Backup and restore has been updated to fix issues and refine existing capabiliti
 
 # Web Console
 
-## v1.1.3 [2016-10-07]
+## v1.1.0 [2016-11-14]
+
+There are no new features or bugfixes in version 1.1.0.
+This release is for maintaining version parity with clustering.
+
+## v1.0.3 [2016-10-07]
 
 There are no new features or bugfixes in version 1.0.3.
 This release is for maintaining version parity with clustering.
@@ -113,7 +170,7 @@ This release is for maintaining version parity with clustering.
 
 ### Bugfixes
 
-## v1.1.2 [2016-10-06]
+## v1.0.2 [2016-10-06]
 
 ### Features
 
@@ -121,7 +178,7 @@ This release is for maintaining version parity with clustering.
 
 - Fix systemd package upgrade symlink failure
 
-## v1.1.1
+## v1.0.1
 
 ### Features
 
@@ -131,7 +188,7 @@ This release is for maintaining version parity with clustering.
 
 * Fix bug where users cannot log out of the Web Console
 
-## v1.1.0
+## v1.0.0
 
 ### Features
 

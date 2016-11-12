@@ -101,11 +101,11 @@ Perform the following steps on all three servers.
 
 Download:
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.0.2-c1.0.4_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.1.0-c1.1.0_amd64.deb
 ```
 Install:
 ```
-sudo dpkg -i influxdb-meta_1.0.2-c1.0.4_amd64.deb
+sudo dpkg -i influxdb-meta_1.1.0-c1.1.0_amd64.deb
 ```
 
 {{% /tab-content %}}
@@ -114,11 +114,11 @@ sudo dpkg -i influxdb-meta_1.0.2-c1.0.4_amd64.deb
 
 Download:
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.0.2_c1.0.4.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.1.0_c1.1.0.x86_64.rpm
 ```
 Install:
 ```
-sudo yum localinstall influxdb-meta-1.0.2_c1.0.4.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.1.0_c1.1.0.x86_64.rpm
 ```
 
 {{% /tab-content %}}
@@ -195,11 +195,11 @@ Perform the following steps on all three servers.
 
 Download:
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.0.2-c1.0.4_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.1.0-c1.1.0_amd64.deb
 ```
 Install:
 ```
-sudo dpkg -i influxdb-data_1.0.2-c1.0.4_amd64.deb
+sudo dpkg -i influxdb-data_1.1.0-c1.1.0_amd64.deb
 ```
 
 {{% /tab-content %}}
@@ -208,11 +208,11 @@ sudo dpkg -i influxdb-data_1.0.2-c1.0.4_amd64.deb
 
 Download:
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.0.2_c1.0.4.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.1.0_c1.1.0.x86_64.rpm
 ```
 Install:
 ```
-sudo yum localinstall influxdb-data-1.0.2_c1.0.4.x86_64.rpm
+sudo yum localinstall influxdb-data-1.1.0_c1.1.0.x86_64.rpm
 ```
 
 {{% /tab-content %}}
