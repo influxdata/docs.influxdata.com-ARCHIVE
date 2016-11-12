@@ -5,7 +5,7 @@ menu:
   kapacitor:
     name: v0.13
     identifier: kapacitor_013
-    weight: 87
+    weight: 88
 ---
 
 Kapacitor is an open source data processing framework that makes it easy to create

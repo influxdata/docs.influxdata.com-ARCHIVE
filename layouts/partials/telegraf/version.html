@@ -3,7 +3,7 @@
 {{ if or (in .RelPermalink "v0.10") (in .RelPermalink "v0.11") (in .RelPermalink "v0.12") (in .RelPermalink "v0.13") }}
     <strong>Warning!</strong> This page documents an old version of Telegraf, which is no longer actively developed. <a href="/telegraf/{{ .Site.Data.default_versions.telegraf_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ substr .RelPermalink 16 }}{{end}}">Telegraf {{ .Site.Data.default_versions.telegraf_semver }}</a> is the most recent stable version of Telegraf.
 {{ end }}
-{{ if or (in .RelPermalink "v0.2") }}
+{{ if or (in .RelPermalink "v0.2") (in .RelPermalink "v1.0") }}
     <strong>Warning!</strong> This page documents an old version of Telegraf, which is no longer actively developed. <a href="/telegraf/{{ .Site.Data.default_versions.telegraf_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ substr .RelPermalink 15 }}{{end}}">Telegraf {{ .Site.Data.default_versions.telegraf_semver }}</a> is the most recent stable version of Telegraf.
 {{ end }}
 </div>
