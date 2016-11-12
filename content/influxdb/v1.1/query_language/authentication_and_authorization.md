@@ -194,6 +194,19 @@ CLI example:
 >
 ```
 
+> **Note:** Repeating the exact `CREATE USER` statement is idempotent. If any values change the database will return a duplicate user error. See GitHub Issue [#6890](https://github.com/influxdata/influxdb/pull/6890) for details.
+>
+CLI example:
+>
+    > CREATE USER "todd" WITH PASSWORD '123456' WITH ALL PRIVILEGES
+    > CREATE USER "todd" WITH PASSWORD '123456' WITH ALL PRIVILEGES
+    > CREATE USER "todd" WITH PASSWORD '123' WITH ALL PRIVILEGES
+    ERR: user already exists
+    > CREATE USER "todd" WITH PASSWORD '123456'
+    ERR: user already exists
+    > CREATE USER "todd" WITH PASSWORD '123456' WITH ALL PRIVILEGES
+    >
+
 ##### `GRANT` administrative privileges to an existing user:
 <br>
 ```
@@ -251,9 +264,26 @@ CLI example:
 >
 ```
 
-> **Note:** The password [string](/influxdb/v1.1/query_language/spec/#strings) must be wrapped in single quotes.
+> **Notes:**
+>
+* The password [string](/influxdb/v1.1/query_language/spec/#strings) must be wrapped in single quotes.
 Do not include the single quotes when authenticating requests.
 > For passwords that include a single quote or a newline character, escape the single quote or newline character with a backslash both when creating the password and when submitting authentication requests.
+>
+* Repeating the exact `CREATE USER` statement is idempotent. If any values change the database will return a duplicate user error. See GitHub Issue [#6890](https://github.com/influxdata/influxdb/pull/6890) for details.
+>
+CLI example:
+>
+    > CREATE USER "todd" WITH PASSWORD '123456'
+    > CREATE USER "todd" WITH PASSWORD '123456'
+    > CREATE USER "todd" WITH PASSWORD '123'
+    ERR: user already exists
+    > CREATE USER "todd" WITH PASSWORD '123456'
+    > CREATE USER "todd" WITH PASSWORD '123456' WITH ALL PRIVILEGES
+    ERR: user already exists
+    > CREATE USER "todd" WITH PASSWORD '123456'
+    >
+
 
 ##### `GRANT` `READ`, `WRITE` or `ALL` database privileges to an existing user:
 <br>
