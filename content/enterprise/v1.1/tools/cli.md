@@ -1,5 +1,5 @@
 ---
-title: 
+title: CLI (shell)
 menu:
   influxdb_1_1:
     weight: 20
