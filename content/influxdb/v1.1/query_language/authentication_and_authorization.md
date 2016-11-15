@@ -57,7 +57,7 @@ Enable authentication by setting the `auth-enabled` option to `true` in the `[ht
 [http]  
   enabled = true  
   bind-address = ":8086"  
- auth-enabled = true # ✨
+  auth-enabled = true # ✨
   log-enabled = true  
   write-tracing = false  
   pprof-enabled = false  
