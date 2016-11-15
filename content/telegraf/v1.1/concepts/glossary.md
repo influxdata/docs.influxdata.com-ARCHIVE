@@ -17,7 +17,7 @@ Related entries: [input plugin](/telegraf/v1.1/concepts/glossary/#input-plugin),
 Aggregator Plugins receive raw metrics from input plugins and create aggregate metrics from them. 
 The aggregate metrics are then passed to the configured output plugins.
 
-Related entries: [input plugin](/telegraf/v1.1/concepts/glossary/#input-plugin), [output plugin](/telegraf/v1.1/concepts/glossary/#output-plugin)
+Related entries: [input plugin](/telegraf/v1.1/concepts/glossary/#input-plugin), [output plugin](/telegraf/v1.1/concepts/glossary/#output-plugin), [processor plugin](/telegraf/v1.1/concepts/glossary/#processor-plugin)
 
 ## batch size 
 
@@ -57,21 +57,24 @@ Related entries: [flush interval](/telegraf/v1.1/concepts/glossary/#flush-interv
 
 ## input plugin
 
-Input plugins gather metrics and deliver them to the core agent. In order to activate an input plugin, it needs to be enabled and configured in the corresponding section in the given config file.
+Input plugins actively gather metrics and deliver them to the core agent, where aggregator, processor, and output plugins can operate on the metrics. 
+In order to activate an input plugin, it needs to be enabled and configured in the Telegraf configuration file. 
 
-Related entries: 
+Related entries: [aggregator plugin](/telegraf/v1.1/concepts/glossary/#aggregator-plugin), [collection interval](/telegraf/v1.1/concepts/glossary/#collection-interval), [output plugin](/telegraf/v1.1/concepts/glossary/#output-plugin), [processor plugin](/telegraf/v1.1/concepts/glossary/#processor-plugin)
 
 ## metric buffer
 
-The Telegraf agent will individually cache metrics for each output when writes are failing for the output plugin. Telegraf will flush this buffer upon a successful write. Oldest metrics are dropped first when this buffer fills.
+The metric buffer caches individual metrics when writes are failing for an output plugin. 
+Telegraf will attempt to flush the buffer upon a successful write to the output. 
+The oldest metrics are dropped first when this buffer fills.
 
-Related entries: 
+Related entries: [output plugin](/telegraf/v1.1/concepts/glossary/#output-plugin)
 
 ## output plugin
 
 Output plugins deliver metrics to their configured destination. In order to activate an output plugin, it needs to be enabled and configured in the corresponding section in the given config file.
 
-Related entries: 
+Related entries: [aggregator plugin](/telegraf/v1.1/concepts/glossary/#aggregator-plugin), [flush interval](/telegraf/v1.1/concepts/glossary/#flush-interval), [input plugin](/telegraf/v1.1/concepts/glossary/#input-plugin), [processor plugin](/telegraf/v1.1/concepts/glossary/#processor-plugin)
 
 ## precision
 
@@ -84,11 +87,11 @@ Related entries:
 
 Processor Plugins transform, decorate, and/or filter metrics and run in between input and output plugins.
 
-Related entries: 
+Related entries: [aggregator plugin](/telegraf/v1.1/concepts/glossary/#aggregator-plugin), [input plugin](/telegraf/v1.1/concepts/glossary/#input-plugin), [output plugin](/telegraf/v1.1/concepts/glossary/#output-plugin)
 
 ## service input plugin
 
-Service input plugins are a special type of input plugins that run in a backgrounded/detached mode while the Telegraf agent is up and running. They can implement a known protocol while listening for inputs on a socket, or actively apply their own logic to collect metrics and deliver them to the Telegraf agent at will.
+Service input plugins are input plugins that run in a passive collection mode while the Telegraf agent is running. 
+Service input plugins listen on a socket for known protocol inputs, or actively apply their own logic to collect metrics and deliver them to the Telegraf agent at will.
 
 Related entries: 
-
