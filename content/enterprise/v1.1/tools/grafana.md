@@ -5,4 +5,4 @@ menu:
     weight: 20
     parent: tools
     url: http://docs.grafana.org/datasources/influxdb/
-—--
+---
