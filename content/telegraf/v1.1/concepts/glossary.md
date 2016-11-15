@@ -85,7 +85,7 @@ Related entries:
 
 ## processor plugin 
 
-Processor Plugins transform, decorate, and/or filter metrics and run in between input and output plugins.
+Processor Plugins transform, decorate, and/or filter metrics collected by input plugins, passing the transformed metrics to output plugins.
 
 Related entries: [aggregator plugin](/telegraf/v1.1/concepts/glossary/#aggregator-plugin), [input plugin](/telegraf/v1.1/concepts/glossary/#input-plugin), [output plugin](/telegraf/v1.1/concepts/glossary/#output-plugin)
 
