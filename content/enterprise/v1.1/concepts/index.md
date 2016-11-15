@@ -7,3 +7,6 @@ menu:
 
 ## [Clustering](/enterprise/v1.1/concepts/clustering)
 ## [Glossary](/enterprise/v1.1/concepts/glossary/)
+## [Key Concepts](/influxdb/v1.1/concepts/key_concepts/)
+## [Schema and Data Layout](/influxdb/v1.1/concepts/schema_and_data_layout/)
+## [Storage Engine](/influxdb/v1.1/concepts/storage_engine/)
