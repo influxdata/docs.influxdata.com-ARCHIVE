@@ -17,6 +17,9 @@ Please read the [blog post from Paul Dix](https://www.influxdata.com/announcing-
 Note that the new [open source version of Chronograf](https://github.com/influxdata/chronograf) is not a continuation of the previous closed source product.
 They address similar needs, so we have kept the name, but the code is all new.
 
+Please see the [Chronograf Product FAQ](/chronograf/v1.1/administration/chronograf-product-faq/) for additional information
+about the Chronograf 1.1-alpha release.
+
 ## Getting Started
 
 To get up and running with the new Chronograf, please visit the [README](https://github.com/influxdata/chronograf/blob/master/README.md) in the GitHub repository.
@@ -33,6 +36,3 @@ develop this product.
 
 Users can continue to use the deprecated, closed source Chronograf product (versions 0.4 through 1.0).
 The documentation is available under `Chronograf Versions` in the left hand navigation bar.
-
-Please see the [Chronograf Product FAQ](/chronograf/v1.1/administration/chronograf-product-faq/) for additional information
-about the Chronograf 1.1-alpha release.
