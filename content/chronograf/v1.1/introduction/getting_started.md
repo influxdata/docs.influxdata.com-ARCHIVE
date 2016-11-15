@@ -23,7 +23,7 @@ about the Chronograf 1.1-alpha release.
 
 ## Getting Started
 
-To get up and running with the new Chronograf, please visit the the [Getting Started Guide](https://github.com/influxdata/chronograf/blob/master/docs/GETTING_STARTED.md) in the GitHub repository.
+To get up and running with the new Chronograf, please visit the [README](https://github.com/influxdata/chronograf/blob/master/README.md) in the GitHub repository.
 All documentation will live in that repository during the 1.1-alpha release.
 
 ## Bug Reports and Feature Contributions
@@ -36,5 +36,4 @@ develop this product.
 # The Old Chronograf
 
 Users can continue to use the deprecated, closed source Chronograf product (versions 0.4 through 1.0).
-The documentation is available under [Chronograf Versions](https://docs.influxdata.com/chronograf/latest/) at the bottom of the the left navigation bar.
-
+The documentation is available under `Chronograf Versions` at the bottom of the the left navigation bar.
