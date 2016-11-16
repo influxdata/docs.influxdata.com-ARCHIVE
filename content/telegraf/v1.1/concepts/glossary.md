@@ -78,10 +78,16 @@ Related entries: [aggregator plugin](/telegraf/v1.1/concepts/glossary/#aggregato
 
 ## precision
 
-Precision is the timestamp order with valid values being "ns", "us" (or "µs"), "ms", "s".
-Precision settings are not used for service input plugins.
+The precision configuration setting determines how much timestamp precision is retained by the input plugins.
+All incoming timestamps are truncated to the given precision and then padded with zeroes to create a nanosecond timestamp.
+Valid values are `ns`, `us` or `µs`, `ms`, and `s`.
+For example, if the precision is set to `ms`, the nanosecond epoch timestamp 1480000000123456789 would be truncated to 1480000000123 in millisecond precision and then padded with zeroes to make a new, less precise nanosecond timestamp of 1480000000123000000.
+See 
+Processor, aggregator, and output plugins do not alter the timestamp further.
+Telegraf output plugins emit all timestamps in nanoseconds. 
+The precision setting is ignored for service input plugins.
 
-Related entries: 
+Related entries:  [aggregator plugin](/telegraf/v1.1/concepts/glossary/#aggregator-plugin), [input plugin](/telegraf/v1.1/concepts/glossary/#input-plugin), [output plugin](/telegraf/v1.1/concepts/glossary/#output-plugin), [processor plugin](/telegraf/v1.1/concepts/glossary/#processor-plugin), [service input plugin](/telegraf/v1.1/concepts/glossary/#service-input-plugin)
 
 ## processor plugin 
 
