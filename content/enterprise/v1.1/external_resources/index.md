@@ -1,5 +1,8 @@
 ---
 title: External Resources
+menu:
+  enterprise_1_1:
+    weight: 90
 ---
 
 But wait, there's more!

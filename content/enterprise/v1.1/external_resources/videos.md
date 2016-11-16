@@ -3,6 +3,6 @@ title: Meetup Videos
 menu:
   enterprise_1_1:
     weight: 20
-    parent: external_resources
+    parent: External Resources
     url: https://influxdata.com/videos/
 ---

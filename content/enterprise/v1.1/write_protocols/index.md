@@ -1,5 +1,8 @@
 ---
 title: Write Protocols
+menu:
+  enterprise_1_1:
+    weight: 50
 ---
 
 InfluxDB's Line Protocol is a text based format for writing points to InfluxDB and InfluxEnterprise.

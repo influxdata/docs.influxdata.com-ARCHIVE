@@ -1,5 +1,8 @@
 ---
 title: Query Language
+menu:
+  enterprise_1_1:
+    weight: 60
 ---
 
 This section introduces InfluxQL, InfluxDB's SQL-like query language for
