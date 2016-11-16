@@ -223,7 +223,8 @@ Each function is implemented via the equivalent Go function.
 | [strTrimRight(s, cutset string) string](https://golang.org/pkg/strings/#TrimRight)                        | StrTrimRight returns a slice of the string s, with all trailing Unicode code points contained in cutset removed.                                                                                                                       |
 | [strTrimSpace(s string) string](https://golang.org/pkg/strings/#TrimSpace)                                | StrTrimSpace returns a slice of the string s, with all leading and trailing white space removed, as defined by Unicode.                                                                                                                |
 | [strTrimSuffix(s, suffix string) string)](https://golang.org/pkg/strings/#TrimSuffix)                     | StrTrimSuffix returns s without the provided trailing suffix string. If s doesn't end with suffix, s is returned unchanged.                                                                                                            |
-| [regexReplace(r regex, s, pattern string) string](https://golang.org/pkg/regexp/#Regexp.ReplaceAllString) | RegexReplace replaces matches of the regular expression in the input string with the output string. For example regexReplace(/a(b*)c/, 'abbbc', 'group is $1') -> 'group is bbb'. An empty string is returned if no matches are found. |
+| [regexReplace(r regex, s, pattern string) string](https://golang.org/pkg/regexp/#Regexp.ReplaceAllString) | RegexReplace replaces matches of the regular expression in the input string with the output string. For example regexReplace(/a(b*)c/, 'abbbc', 'group is $1') -> 'group is bbb'. The original string is returned if no matches are found. |
+
 
 
 ### Human String functions
