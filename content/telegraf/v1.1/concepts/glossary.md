@@ -92,6 +92,6 @@ Related entries: [aggregator plugin](/telegraf/v1.1/concepts/glossary/#aggregato
 ## service input plugin
 
 Service input plugins are input plugins that run in a passive collection mode while the Telegraf agent is running. 
-Service input plugins listen on a socket for known protocol inputs, or actively apply their own logic to collect metrics and deliver them to the Telegraf agent at will.
+They listen on a socket for known protocol inputs, or apply their own logic to ingested metrics before delivering them to the Telegraf agent.
 
 Related entries: [aggregator plugin](/telegraf/v1.1/concepts/glossary/#aggregator-plugin), [input plugin](/telegraf/v1.1/concepts/glossary/#input-plugin), [output plugin](/telegraf/v1.1/concepts/glossary/#output-plugin), [processor plugin](/telegraf/v1.1/concepts/glossary/#processor-plugin)
