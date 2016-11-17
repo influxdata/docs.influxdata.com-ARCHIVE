@@ -17,6 +17,9 @@
 					{{ if eq .Identifier "kapacitor" }}
 						Kapacitor is a data processing framework that makes it easy to create alerts, run ETL jobs and detect anomalies.
 					{{ end }}
+					{{ if eq .Identifier "enterprise" }}
+						InfluxEnterprise offers highly-scalable InfluxDB clusters on your infrastructure with a beautiful management UI.
+					{{ end }}
 					<br/>
 					<a class="homepage--card-link" href="https://influxdata.com/downloads/#{{ .Identifier }}" target=blank>Download</a>
 					<br/>

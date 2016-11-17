@@ -14,4 +14,4 @@ cd docs.influxdata.com/
 * Check it out at [localhost:1313](http://localhost:1313/)
 * Sign the [CLA](https://influxdb.com/community/cla.html)
 * Submit a pull request
-* Earn the respect, admiration, and eternal love of the entire InfluxDB community
+* Earn the respect, admiration, and eternal love of the entire InfluxData community
