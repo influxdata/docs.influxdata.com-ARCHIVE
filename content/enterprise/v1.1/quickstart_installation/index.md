@@ -22,5 +22,5 @@ process before using the product in a production environment.
 
 Follow the links below to get up and running with InfluxEnterprise.
 
-### Step 1 - Cluster Installation
-### Step 2 - Web Console Installation
+### [Step 1 - Cluster Installation](/enterprise/v1.1/quickstart_installation/cluster_installation/)
+### [Step 2 - Web Console Installation](/enterprise/v1.1/quickstart_installation/web_console_installation/)
