@@ -15,7 +15,7 @@ To perform a query send a `GET` request to the `/query` endpoint, set the URL pa
 The example below uses the HTTP API to query the same database that you encountered in [Writing Data](/influxdb/v1.1/guides/writing_data/).
 <br>
 ```bash
-curl -GET 'http://localhost:8086/query?pretty=true' --data-urlencode "db=mydb" --data-urlencode "q=SELECT \"value\" FROM \"cpu_load_short\" WHERE \"region\"='us-west'"
+curl -G 'http://localhost:8086/query?pretty=true' --data-urlencode "db=mydb" --data-urlencode "q=SELECT \"value\" FROM \"cpu_load_short\" WHERE \"region\"='us-west'"
 ```
 
 InfluxDB returns JSON.
