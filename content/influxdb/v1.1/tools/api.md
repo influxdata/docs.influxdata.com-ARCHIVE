@@ -89,7 +89,7 @@ Those `SELECT` queries require a `POST` request.
 ##### Example 1: Query data with a `SELECT` statement
 <br>
 ```
-$ curl -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas"'
+$ curl -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas"'
 
 {"results":[{"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[["2016-05-20T21:30:00Z",12,"1",null],["2016-05-20T21:30:20Z",11,"2",null],["2016-05-20T21:30:40Z",18,null,"1"],["2016-05-20T21:31:00Z",19,null,"3"]]}]}]}
 ```
@@ -132,7 +132,7 @@ See below for an [example](#example-4-create-a-database-using-basic-authenticati
 ##### Example 1: Query data with a `SELECT` statement and return pretty-printed JSON
 <br>
 ```
-$ curl -GET 'http://localhost:8086/query?db=mydb&pretty=true' --data-urlencode 'q=SELECT * FROM "mymeas"'
+$ curl -G 'http://localhost:8086/query?db=mydb&pretty=true' --data-urlencode 'q=SELECT * FROM "mymeas"'
 
 {
     "results": [
@@ -182,7 +182,7 @@ $ curl -GET 'http://localhost:8086/query?db=mydb&pretty=true' --data-urlencode '
 ##### Example 2: Query data with a `SELECT` statement and return second precision epoch timestamps
 <br>
 ```
-$ curl -GET 'http://localhost:8086/query?db=mydb&epoch=s' --data-urlencode 'q=SELECT * FROM "mymeas"'
+$ curl -G 'http://localhost:8086/query?db=mydb&epoch=s' --data-urlencode 'q=SELECT * FROM "mymeas"'
 
 {"results":[{"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[[1463779800,12,"1",null],[1463779820,11,"2",null],[1463779840,18,null,"1"],[1463779860,19,null,"3"]]}]}]}
 ```
@@ -237,7 +237,7 @@ The API can return query results in CSV format.
 
 Syntax:
 ```
-curl -H "Accept: application/csv" -GET 'http://localhost:8086/query [...]
+curl -H "Accept: application/csv" -G 'http://localhost:8086/query [...]
 ```
 
 ##### Bind Parameters
@@ -263,7 +263,7 @@ Delimit multiple placeholder key-value pairs with comma `,`.
 ##### Example 1: Send multiple queries
 <br>
 ```
-$ curl -GET 'http://localhost:8086/query?db=mydb&epoch=s' --data-urlencode 'q=SELECT * FROM "mymeas";SELECT mean("myfield") FROM "mymeas"'
+$ curl -G 'http://localhost:8086/query?db=mydb&epoch=s' --data-urlencode 'q=SELECT * FROM "mymeas";SELECT mean("myfield") FROM "mymeas"'
 
 {"results":[{"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[[1463779800,12,"1",null],[1463779820,11,"2",null],[1463779840,18,null,"1"],[1463779860,19,null,"3"]]}]},{"series":[{"name":"mymeas","columns":["time","mean"],"values":[[0,15]]}]}]}
 ```
@@ -271,7 +271,7 @@ $ curl -GET 'http://localhost:8086/query?db=mydb&epoch=s' --data-urlencode 'q=SE
 ##### Example 2: Request query results in CSV format
 <br>
 ```
-curl -H "Accept: application/csv" -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas" LIMIT 3'
+curl -H "Accept: application/csv" -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas" LIMIT 3'
 
 name,tags,time,tag1,tag2,value
 mymeas,,1478030187213306198,blue,tag2,23
@@ -294,7 +294,7 @@ CREATE RETENTION POLICY four_weeks ON mydb DURATION 4w REPLICATION 1;
 ##### Example 4: Bind a parameter in the `WHERE` clause to specific tag value
 <br>
 ```
-curl -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas" WHERE "mytagkey" = $tag_value' --data-urlencode 'params={"tag_value":"mytagvalue1"}'
+curl -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas" WHERE "mytagkey" = $tag_value' --data-urlencode 'params={"tag_value":"mytagvalue1"}'
 
 {"results":[{"series":[{"name":"mymeas","columns":["time","myfieldkey","mytagkey"],"values":[["2016-09-05T18:25:08.479629934Z",9,"mytagvalue1"],["2016-09-05T18:25:20.892472038Z",8,"mytagvalue1"],["2016-09-05T18:25:30.408555195Z",10,"mytagvalue1"],["2016-09-05T18:25:39.108978991Z",111,"mytagvalue1"]]}]}]}
 ```
@@ -302,7 +302,7 @@ curl -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FRO
 ##### Example 5: Bind a parameter in the `WHERE` clause to a numerical field value
 <br>
 ```
-curl -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas" WHERE "myfieldkey" > $field_value' --data-urlencode 'params={"field_value":9}'
+curl -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas" WHERE "myfieldkey" > $field_value' --data-urlencode 'params={"field_value":9}'
 
 {"results":[{"series":[{"name":"mymeas","columns":["time","myfieldkey","mytagkey"],"values":[["2016-09-05T18:25:30.408555195Z",10,"mytagvalue1"],["2016-09-05T18:25:39.108978991Z",111,"mytagvalue1"],["2016-09-05T18:25:46.587728107Z",111,"mytagvalue2"]]}]}]}
 ```
@@ -310,7 +310,7 @@ curl -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FRO
 ##### Example 6: Bind two parameters in the `WHERE` clause to a specific tag value and numerical field value
 <br>
 ```
-curl -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas" WHERE "mytagkey" = $tag_value AND  "myfieldkey" > $field_value' --data-urlencode 'params={"tag_value":"mytagvalue2","field_value":9}'
+curl -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas" WHERE "mytagkey" = $tag_value AND  "myfieldkey" > $field_value' --data-urlencode 'params={"tag_value":"mytagvalue2","field_value":9}'
 
 {"results":[{"series":[{"name":"mymeas","columns":["time","myfieldkey","mytagkey"],"values":[["2016-09-05T18:25:46.587728107Z",111,"mytagvalue2"]]}]}]}
 ```
@@ -331,7 +331,7 @@ Enable pretty-print JSON by including the query string parameter `pretty=true`.
 ##### Example 1: A successful request that returns data
 <br>
 ```
-$ curl -i -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas"'
+$ curl -i -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas"'
 
 HTTP/1.1 200 OK
 [...]
@@ -341,7 +341,7 @@ HTTP/1.1 200 OK
 ##### Example 2: A successful request that returns an error
 <br>
 ```
-$ curl -i -GET 'http://localhost:8086/query?db=mydb1' --data-urlencode 'q=SELECT * FROM "mymeas"'
+$ curl -i -G 'http://localhost:8086/query?db=mydb1' --data-urlencode 'q=SELECT * FROM "mymeas"'
 
 HTTP/1.1 200 OK
 [...]
@@ -351,7 +351,7 @@ HTTP/1.1 200 OK
 ##### Example 3: An incorrectly formatted query
 <br>
 ```
-$ curl -i -GET 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT *'
+$ curl -i -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT *'
 
 HTTP/1.1 400 Bad Request
 [...]
