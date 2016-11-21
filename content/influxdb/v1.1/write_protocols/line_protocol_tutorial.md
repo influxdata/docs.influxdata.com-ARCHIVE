@@ -396,7 +396,7 @@ Send a `POST` request to the `/write` endpoint and provide your Line Protocol in
 the request body:
 
 ```
-curl -i -POST "http://localhost:8086/write?db=science_is_cool" --data-binary 'weather,location=us-midwest temperature=82 1465839830100400200'
+curl -i -XPOST "http://localhost:8086/write?db=science_is_cool" --data-binary 'weather,location=us-midwest temperature=82 1465839830100400200'
 ```
 
 For in-depth descriptions of query string parameters, status codes, responses,
