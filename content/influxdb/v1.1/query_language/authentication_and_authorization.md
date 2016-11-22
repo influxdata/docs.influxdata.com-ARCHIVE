@@ -90,11 +90,17 @@ Example:
 curl -G http://localhost:8086/query -u todd:influxdb4ever --data-urlencode "q=SHOW DATABASES"
 ```
 
-##### Authenticate by providing query parameters in the URL
+##### Authenticate by providing query parameters in the URL or request body
 <br>
 Set `u` as the username and `p` as the password.
 
-Example:
+Example using query parameters:
+
+```bash
+curl -G http://localhost:8086/query?u=todd&p=influxdb4ever --data-urlencode "q=SHOW DATABASES"
+```
+
+Example using request body:
 
 ```bash
 curl -G http://localhost:8086/query --data-urlencode "u=todd" --data-urlencode "p=influxdb4ever" --data-urlencode "q=SHOW DATABASES"
