@@ -97,7 +97,7 @@ Set `u` as the username and `p` as the password.
 Example using query parameters:
 
 ```bash
-curl -G http://localhost:8086/query?u=todd&p=influxdb4ever --data-urlencode "q=SHOW DATABASES"
+curl -G "http://localhost:8086/query?u=todd&p=influxdb4ever" --data-urlencode "q=SHOW DATABASES"
 ```
 
 Example using request body:
