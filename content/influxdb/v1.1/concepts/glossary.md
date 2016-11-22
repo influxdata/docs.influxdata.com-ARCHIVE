@@ -252,6 +252,11 @@ The interval spanned by each shard group is the shard duration.
 
 Related entries: [database](/influxdb/v1.1/concepts/glossary/#database), [retention policy](/influxdb/v1.1/concepts/glossary/#retention-policy), [series](/influxdb/v1.1/concepts/glossary/#series), [shard](/influxdb/v1.1/concepts/glossary/#shard), [shard duration](/influxdb/v1.1/concepts/glossary/#shard-duration)
 
+## subscription
+Subscriptions allow [Kapacitor](/kapacitor/latest/) to receive data from InfluxDB in a push model rather than the pull model based on querying data. 
+When Kapacitor is configured to work with InfluxDB, the subscription will automatically push every write for the subscribed database from InfluxDB to Kapacitor.
+Subscriptions can use TCP or UDP for transmitting the writes.
+
 ## tag  
 The key-value pair in InfluxDB's data structure that records metadata.
 Tags are an optional part of InfluxDB's data structure but they are useful for storing commonly-queried metadata; tags are indexed so queries on tags are performant.
