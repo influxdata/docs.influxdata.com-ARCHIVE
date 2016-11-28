@@ -165,4 +165,4 @@ We recommend configuring the shard group duration such that:
 
 * it is two times your longest typical query's time range
 * each shard group has at least 100,000 [points](/influxdb/v1.0/concepts/glossary/#point) per shard group
-* each shard group had at least 1,000 points per [series](/influxdb/v1.0/concepts/glossary/#series)
+* each shard group has at least 1,000 points per [series](/influxdb/v1.0/concepts/glossary/#series)
