@@ -12,6 +12,6 @@
 
 ## [Output Plugin Formats](/telegraf/v1.1/concepts/data_formats_output/)
 
-## [Aggregators and Processor Plugins](/telegraf/v1.1/concepts/aggregators_and_processor_plugins/)
+## [Aggregators and Processor Plugins](/telegraf/v1.1/concepts/aggregator_and_processor_plugins/)
 
 ## [Glossary](/telegraf/v1.1/concepts/glossary/)
