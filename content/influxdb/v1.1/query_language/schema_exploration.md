@@ -119,7 +119,7 @@ autogen   0s         168h0m0s             1          true
 
 Specify the database with the `db` query string parameter:
 ```
-~# curl -GET "http://localhost:8086/query?db=NOAA_water_database&pretty=true" --data-urlencode "q=SHOW RETENTION POLICIES"
+~# curl -G "http://localhost:8086/query?db=NOAA_water_database&pretty=true" --data-urlencode "q=SHOW RETENTION POLICIES"
 
 {
     "results": [
@@ -258,7 +258,7 @@ h2o_temperature,location=santa_monica
 
 Specify the database with the `db` query string parameter:
 ```
-~# curl -GET "http://localhost:8086/query?db=NOAA_water_database&pretty=true" --data-urlencode "q=SHOW SERIES"
+~# curl -G "http://localhost:8086/query?db=NOAA_water_database&pretty=true" --data-urlencode "q=SHOW SERIES"
 
 {
     "results": [
@@ -424,7 +424,7 @@ h2o_temperature
 
 Specify the database with the `db` query string parameter:
 ```
-~# curl -GET "http://localhost:8086/query?db=NOAA_water_database&pretty=true" --data-urlencode "q=SHOW MEASUREMENTS"
+~# curl -G "http://localhost:8086/query?db=NOAA_water_database&pretty=true" --data-urlencode "q=SHOW MEASUREMENTS"
 
 {
     "results": [
@@ -616,7 +616,7 @@ location
 
 Specify the database with the `db` query string parameter:
 ```
-~# curl -GET "http://localhost:8086/query?db=NOAA_water_database&pretty=true" --data-urlencode "q=SHOW TAG KEYS"
+~# curl -G "http://localhost:8086/query?db=NOAA_water_database&pretty=true" --data-urlencode "q=SHOW TAG KEYS"
 
 {
     "results": [
@@ -792,7 +792,7 @@ randtag   3
 
 Specify the database with the `db` query string parameter:
 ```
-~# curl -GET "http://localhost:8086/query?db=NOAA_water_database&pretty=true" --data-urlencode 'q=SHOW TAG VALUES WITH KEY = "randtag"'
+~# curl -G "http://localhost:8086/query?db=NOAA_water_database&pretty=true" --data-urlencode 'q=SHOW TAG VALUES WITH KEY = "randtag"'
 
 {
     "results": [
@@ -957,7 +957,7 @@ degrees             float
 
 Specify the database with the `db` query string parameter:
 ```
-~# curl -GET "http://localhost:8086/query?db=NOAA_water_database&pretty=true" --data-urlencode 'q=SHOW FIELD KEYS'
+~# curl -G "http://localhost:8086/query?db=NOAA_water_database&pretty=true" --data-urlencode 'q=SHOW FIELD KEYS'
 
 {
     "results": [
