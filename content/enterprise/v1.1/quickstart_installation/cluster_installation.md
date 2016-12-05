@@ -38,8 +38,13 @@ documentation if you'd like to set up a cluster with a different server-node con
 
 ### Requirements
 
-To get started, you'll need the license key that you received at
-[InfluxPortal](https://portal.influxdata.com/).
+#### License Key or File
+
+InfluxEnterprise requires a license key **OR** a license file to run.
+Your license key is available at [InfluxPortal](https://portal.influxdata.com/licenses).
+Contact support at the email we provided at signup to receive a license file.
+License files are required only if the nodes in your cluster cannot reach
+`portal.influxdata.com` on port `80` or `443`.
 
 #### Networking
 
