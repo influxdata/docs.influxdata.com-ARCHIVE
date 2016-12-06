@@ -3,7 +3,7 @@ title: Glossary of Terms
 menu:
   telegraf_1_1:
     weight: 30
-    parent: Concepts
+    parent: concepts
 ---
 
 ## agent
