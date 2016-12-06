@@ -2,7 +2,7 @@
 title: Glossary of Terms
 menu:
   telegraf_1_1:
-    weight: 30
+    weight: 10
     parent: concepts
 ---
 
