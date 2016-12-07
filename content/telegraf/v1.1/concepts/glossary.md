@@ -78,9 +78,8 @@ Related entries: [aggregator plugin](/telegraf/v1.1/concepts/glossary/#aggregato
 
 ## precision
 
-The precision configuration setting determines how much timestamp precision is retained by the input plugins.
-All incoming timestamps are truncated to the given precision.
-Telegraf then pads the truncated timestamps with zeros to create a nanosecond timestamp; input plugins must emit all timestamps in nanoseconds.
+The precision configuration setting determines how much timestamp precision is retained in the points received from input plugins. All incoming timestamps are truncated to the given precision.
+Telegraf then pads the truncated timestamps with zeros to create a nanosecond timestamp; output plugins will emit timestamps in nanoseconds.
 Valid precisions are `ns`, `us` or `µs`, `ms`, and `s`.
 
 For example, if the precision is set to `ms`, the nanosecond epoch timestamp `1480000000123456789` would be truncated to `1480000000123` in millisecond precision and then padded with zeroes to make a new, less precise nanosecond timestamp of `1480000000123000000`.
