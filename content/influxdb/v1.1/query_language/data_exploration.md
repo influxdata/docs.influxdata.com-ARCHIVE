@@ -123,6 +123,11 @@ All of these data are in the `NOAA_water_database` [database](/influxdb/v1.1/con
 
 The `SELECT` statement queries data from a particular [measurement](/influxdb/v1.1/concepts/glossary/#measurement) or measurements.
 
+Tired of reading? Check out this InfluxQL Short:
+<br>
+<br>
+<iframe src="https://player.vimeo.com/video/192712451?title=0&byline=0&portrait=0" width="60%" height="250px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 ### Syntax
 ```sql
 SELECT <field_key>[,<field_key>,<tag_key>] FROM <measurement_name>[,<measurement_name>]
