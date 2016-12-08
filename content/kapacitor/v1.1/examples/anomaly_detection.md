@@ -441,7 +441,7 @@ Add this snippet to your Kapacitor configuration file (typically located at `/et
         timeout = "10s"
         # Define env vars for the process, in this case the PYTHONPATH
         [udf.functions.tTest.env]
-            PYTHONPATH = "/tmp/kapacitor_udf/kapacitor/udf/agent/py"
+            PYTHONPATH = "/tmp/kapacitor_udf/kapacitor/udf/agent/py/kapacitor/udf"
 ```
 
 In the configuration we called the function `tTest`. That is also how
