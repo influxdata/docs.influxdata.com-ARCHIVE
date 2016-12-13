@@ -77,7 +77,7 @@ When the CQ executes, it runs a single query for the time range between
 [`now()`](/influxdb/v1.1/concepts/glossary/#now) and `now()` minus the
 `GROUP BY time()` interval.
 If the `GROUP BY time()` interval is one hour and the current time is 17:00,
-the query's time range is between 16:00 and 16:59.
+the query's time range is between 16:00 and 16:59.999999999.
 
 #### Examples of Basic Syntax
 
@@ -306,7 +306,7 @@ Every hour, `cq_basic_offset` runs a single query that covers the time range
 between `now()` and `now()` minus the `GROUP BY time()` interval, that is, the
 time range between `now()` and one hour prior to `now()`.
 The 15 minute offset interval shifts forward the generated preset time boundaries in the
-CQ's `WHERE` clause; `cq_basic_offset` queries between 7:15 and 8:14 instead of 7:00 and 7:59 .
+CQ's `WHERE` clause; `cq_basic_offset` queries between 7:15 and 8:14.999999999 instead of 7:00 and 7:59.999999999.
 
 Annotated log output on the morning of August 28, 2016:
 
@@ -407,7 +407,7 @@ every other hour.
 When the CQ executes, it runs a single query for the time range between
 [`now()`](/influxdb/v1.1/concepts/glossary/#now) and `now()` minus the `FOR` interval in the `RESAMPLE` clause.
 If the `FOR` interval is two hours and the current time is 17:00, the query's
-time range is between 15:00 and 16:59.
+time range is between 15:00 and 16:59.999999999.
 
 Both the `EVERY` interval and the `FOR` interval accept
 [duration literals](/influxdb/v1.1/query_language/spec/#durations).
