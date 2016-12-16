@@ -388,6 +388,11 @@ The `WHERE` filters data based on
 [tags](/influxdb/v1.1/concepts/glossary/#tag), and/or
 [timestamps](/influxdb/v1.1/concepts/glossary/#timestamp).
 
+Tired of reading? Check out this InfluxQL Short:
+<br>
+<br>
+<iframe src="https://player.vimeo.com/video/195058724?title=0&byline=0&portrait=0" width="60%" height="250px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 ### Syntax
 
 ```
