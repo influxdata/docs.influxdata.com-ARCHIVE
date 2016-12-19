@@ -104,8 +104,6 @@ The InfluxDB API makes no attempt to be RESTful.
 ### HTTP response summary
 ---
 * 2xx: If your write request received `HTTP 204 No Content`, it was a success!
-If it's  `HTTP 200 OK`, InfluxDB understood the request but couldn't complete it.
-The body of the response will contain additional error information.
 * 4xx: InfluxDB could not understand the request.
 * 5xx: The system is overloaded or significantly impaired.
 
