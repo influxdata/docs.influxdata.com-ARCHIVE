@@ -14,4 +14,4 @@
 
 ## [Configuration](/telegraf/v1.1/administration/configuration/)
 
-## [Running as a Windows Service](/telegraf/1.1/administration/windows_service/)
+## [Running as a Windows Service](/telegraf/v1.1/administration/windows_service/)

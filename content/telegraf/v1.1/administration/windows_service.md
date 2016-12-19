@@ -1,11 +1,11 @@
 ---
- title: Running Telegraf as a Windows Service
+title: Running Telegraf as a Windows Service
 
- menu:
-   telegraf_1_1:
-     name: Run as Windows Service
-     identifier: administration
-     weight: 40
+menu:
+  telegraf_1_1:
+    name: Run as Windows Service
+    weight: 40
+    parent: administration
 ---
 
 # Running Telegraf as a Windows Service
@@ -46,4 +46,3 @@ Telegraf can manage its own service through the --service flag:
 | `telegraf.exe --service uninstall` | Remove the telegraf service   |
 | `telegraf.exe --service start`     | Start the telegraf service    |
 | `telegraf.exe --service stop`      | Stop the telegraf service     |
-

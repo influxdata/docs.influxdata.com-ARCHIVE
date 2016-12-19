@@ -4,9 +4,10 @@ title: Aggregator and Processor Plugins
 menu:
   telegraf_1_1:
     name: Aggregator and Processor Plugins
-    weight: 40
-    parent: concepts
+    weight: 20
+    parent: Concepts
 ---
+
 
 # Telegraf Aggregator & Processor Plugins
 
