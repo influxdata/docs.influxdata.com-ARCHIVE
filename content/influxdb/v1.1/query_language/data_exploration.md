@@ -1141,7 +1141,7 @@ The time boundaries and returned timestamps for the query **with** the
 | 1  | `time >= 2015-08-18T00:06:00Z AND time < 2015-08-18T00:24:00Z` | <--- same | `8.005`,`7.887`,`7.762` | `2015-08-18T00:06:00Z` |
 | 2  | `time >= 2015-08-18T00:24:00Z AND time < 2015-08-18T00:42:00Z` | <--- same | `7.635`,`7.5`,`7.372` | `2015-08-18T00:24:00Z` |
 | 3  | `time >= 2015-08-18T00:42:00Z AND time < 2015-08-18T01:00:00Z` | <--- same | `7.234`,`7.11`,`6.982` | `2015-08-18T00:42:00Z` |
-| 4  | `time >= 2015-08-18T01:00:00Z AND time < 2015-08-18T01:12:00Z` | NA | NA | NA |
+| 4  | `time >= 2015-08-18T01:00:00Z AND time < 2015-08-18T01:18:00Z` | NA | NA | NA |
 
 The six-minute offset interval shifts forward the preset boundary's time range
 such that the boundary time ranges and the relevant `GROUP BY time()` interval time ranges are
@@ -1222,7 +1222,7 @@ The time boundaries and returned timestamps for the query **with** the
 
 | Time Interval Number | Offset Time Boundary |`GROUP BY time()` Interval | Points Included | Returned Timestamp |
 | :------------- | :------------- | :------------- | :------------- | ------------- |
-| 1  | `time >= 2015-08-17T23:54:00Z AND time < 2015-08-18T00:06:00Z` | NA | NA | NA |
+| 1  | `time >= 2015-08-17T23:48:00Z AND time < 2015-08-18T00:06:00Z` | NA | NA | NA |
 | 2  | `time >= 2015-08-18T00:06:00Z AND time < 2015-08-18T00:24:00Z` | <--- same | `8.005`,`7.887`,`7.762` | `2015-08-18T00:06:00Z` |
 | 3  | `time >= 2015-08-18T00:24:00Z AND time < 2015-08-18T00:42:00Z` | <--- same | `7.635`,`7.5`,`7.372` | `2015-08-18T00:24:00Z` |
 | 4  | `time >= 2015-08-18T00:42:00Z AND time < 2015-08-18T01:00:00Z` | <--- same | `7.234`,`7.11`,`6.982` | `2015-08-18T00:42:00Z` |
@@ -1291,8 +1291,8 @@ The time boundaries and returned timestamps for the query **with** the
 
 | Time Interval Number | Offset Time Boundary |`GROUP BY time()` Interval | Points Included | Returned Timestamp |
 | :------------- | :------------- | :------------- | :------------- | :------------- |
-| 1  | `time >= 2015-08-18T00:06:00Z AND time < 2015-08-18T00:24:00Z` | <--- same | `8.005`,`7.887` | `2015-08-18T00:06:00Z` |
-| 2  | `time >= 2015-08-18T00:24:00Z AND time < 2015-08-18T00:36:00Z` | NA | NA | NA |
+| 1  | `time >= 2015-08-18T00:06:00Z AND time < 2015-08-18T00:18:00Z` | <--- same | `8.005`,`7.887` | `2015-08-18T00:06:00Z` |
+| 2  | `time >= 2015-08-18T00:18:00Z AND time < 2015-08-18T00:30:00Z` | NA | NA | NA |
 
 The six-minute offset interval shifts forward the preset boundary's time range
 such that the preset boundary time range and the relevant `GROUP BY time()` interval time range are the
