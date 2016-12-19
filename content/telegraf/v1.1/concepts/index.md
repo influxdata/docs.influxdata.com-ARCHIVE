@@ -4,9 +4,14 @@
  menu:
    telegraf_1_1:
      name: Concepts
-     identifier: concepts
-     weight: 5
+     identifier: Concepts
+     weight: 10
 ---
 
-## [Glossary of Terms](/telegraf/v1.1/concepts/glossary/)
-Understanding the concepts in the [Glossary of Terms](/telegraf/v1.1/concepts/glossary/) will help you get the most out of Telegraf.
+## [Input Plugin Formats](/telegraf/v1.1/concepts/data_formats_input/)
+
+## [Output Plugin Formats](/telegraf/v1.1/concepts/data_formats_output/)
+
+## [Aggregators and Processor Plugins](/telegraf/v1.1/concepts/aggregator_processor_plugins/)
+
+## [Glossary](/telegraf/v1.1/concepts/glossary/)

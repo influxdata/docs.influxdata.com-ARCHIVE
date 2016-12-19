@@ -4,8 +4,8 @@ title: Output Data Formats
 menu:
   telegraf_1_1:
     name: Output Data Formats
-    weight: 0
-    parent: outputs
+    weight: 10
+    parent: Concepts
 ---
 
 Telegraf is able to serialize metrics into the following output data formats:

@@ -5,7 +5,7 @@ menu:
   telegraf_1_1:
     name: Input Data Formats
     weight: 0
-    parent: inputs
+    parent: Concepts
 ---
 
 Telegraf is able to parse the following input data formats into metrics:
