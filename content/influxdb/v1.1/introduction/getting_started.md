@@ -23,15 +23,19 @@ Executing `influx` will start the CLI and automatically connect to the local Inf
 The output should look like this:
 
 ```bash
-$ influx
+$ influx -precision rfc3339
 Connected to http://localhost:8086 version 1.1.x
 InfluxDB shell 1.1.x
 >
 ```
 
-> **Note:** The InfluxDB HTTP API runs on port `8086` by default.
+> **Notes:**
+>
+* The InfluxDB HTTP API runs on port `8086` by default.
 Therefore, `influx` will connect to port `8086` and `localhost` by default.
 If you need to alter these defaults, run `influx --help`.
+* The [`-precision` argument](/influxdb/v1.1/tools/shell/#influx-arguments) specifies the format/precision of any returned timestamps.
+In the example above, `rfc3339` tells InfluxDB to return timestamps in [RFC3339 format](https://www.ietf.org/rfc/rfc3339.txt) (`YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ`).
 
 The command line is now ready to take input in the form of the Influx Query Language (a.k.a InfluxQL) statements.
 To exit the InfluxQL shell, type `exit` and hit return.

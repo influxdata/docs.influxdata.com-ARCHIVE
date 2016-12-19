@@ -2,7 +2,7 @@
 title: InfluxDB Concepts
 ---
 
-Understanding the important the following concepts will help you get the most out of InfluxDB.
+Understanding the following concepts will help you get the most out of InfluxDB.
 
 ## [Key Concepts](/influxdb/v1.1/concepts/key_concepts/)
 

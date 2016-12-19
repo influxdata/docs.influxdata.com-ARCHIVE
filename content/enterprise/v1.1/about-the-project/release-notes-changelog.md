@@ -8,6 +8,15 @@ menu:
 
 # Clustering
 
+## v1.1.1 [2016-12-06]
+
+This release builds off of the 1.1.1 release of InfluxDB.
+Please see the [release notes](https://github.com/influxdata/influxdb/blob/1.1/CHANGELOG.md#v111-unreleased) for specific changes.
+
+This release is built with Go 1.7.4.
+It resolves a security vulnerability reported in Go version 1.7.3 which impacts all
+users currently running on the Mac OS X platform, powered by the Darwin operating system.
+
 ## v1.1.0 [2016-11-14]
 
 ### Release Notes
@@ -155,6 +164,14 @@ Backup and restore has been updated to fix issues and refine existing capabiliti
 - Drop writes if they contain field type inconsistencies
 
 # Web Console
+
+## v1.1.1 [2016-12-06]
+
+There are no new features in version 1.1.1.
+
+This release is built with Go 1.7.4.
+It resolves a security vulnerability reported in Go version 1.7.3 which impacts all
+users currently running on the Mac OS X platform, powered by the Darwin operating system.
 
 ## v1.1.0 [2016-11-14]
 

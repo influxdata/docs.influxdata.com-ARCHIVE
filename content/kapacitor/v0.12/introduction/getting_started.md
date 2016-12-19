@@ -222,7 +222,7 @@ cat /tmp/alerts.log
 
 Depending on how busy the server was, maybe not.
 Let's modify the task to be really sensitive so that we know the alerts are working.
-Change the `.crit(lambda: "value" < 70)` line in the TICKscript to `.crit(lambda: "value" < 100)`.
+Change the `.crit(lambda: "usage_idle" < 70)` line in the TICKscript to `.crit(lambda: "usage_idle" < 100)`.
 Now every data point that was received during
 the recording will trigger an alert.
 
