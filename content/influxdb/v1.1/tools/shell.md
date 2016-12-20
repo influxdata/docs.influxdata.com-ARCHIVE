@@ -268,6 +268,21 @@ Prompts you for your username and password.
 Alternatively, set the username and password for the CLI with the
 `INFLUX_USERNAME` and `INFLUX_PASSWORD` environment variables.
 
+`clear [<database>|<retention policy>]`
+Clear will clear the current context for the database or retention policy.
+
+Possible commands for 'clear' are:
+
+```
+# Clear the database context
+clear database
+clear db
+
+# Clear the retention policy context
+clear retention policy
+clear rp
+```
+
 `connect <host:port>`  
 Connect to a different server without exiting the shell.
 By default, `influx` connects to `localhost:8086`.
@@ -300,12 +315,43 @@ Precision defaults to nanoseconds.
 Turns on pretty print for the `json` format.
 
 `settings`  
-Outputs the current settings for the shell including the `Host`, `Username`, `Database`, `Pretty` status, `Format`, and `Write Consistency`.
+Outputs the current settings for the shell including the `Host`, `Username`, `Database`, `Retention Policy`, `Pretty` status, `Format`, and `Write Consistency`.
 
-`use <db_name>`  
-Sets the current database.
-Once `influx` sets the current database, there is no need to specify that database in queries.
+example output of settings:
+
+```
+Setting           Value
+--------          --------
+Host              localhost:8086
+Username
+Database          foo
+RetentionPolicy   bar
+Pretty            false
+Format            column
+Write Consistency all
+```
+
+`use <db_name>.<retention policy[optional]>`
+Sets the current database and/or the retention policy.
+Once `influx` sets the current database and/or retention policy, there is no need to specify that database and/or retention policy in queries.
 `influx` automatically queries the current database and its `DEFAULT` retention policy.
+
+Set just the database to `foo`
+```
+use foo
+```
+
+Set the database to `foo` and retention policy to `bar`
+
+```
+use foo.bar
+```
+
+Setting the database and retention policy for names with special characters requiers you to quote the database and/or retention policy names.
+
+```
+use "crazy.db"."funny.rp"
+```
 
 #### Write data to InfluxDB with `insert`
 Enter `insert` followed by the data in [line protocol](/influxdb/v1.1/concepts/glossary/#line-protocol) to write data to InfluxDB.
