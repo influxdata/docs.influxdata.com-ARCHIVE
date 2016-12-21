@@ -235,10 +235,10 @@ What follows is the complete UDF implementation with our `info`,
 
 ```python
 
-from agent import Agent, Handler
+from kapacitor.udf.agent import Agent, Handler
 from scipy import stats
 import math
-import udf_pb2
+import kapacitor.udf.udf_pb2
 import sys
 
 class TTestHandler(Handler):
@@ -441,7 +441,7 @@ Add this snippet to your Kapacitor configuration file (typically located at `/et
         timeout = "10s"
         # Define env vars for the process, in this case the PYTHONPATH
         [udf.functions.tTest.env]
-            PYTHONPATH = "/tmp/kapacitor_udf/kapacitor/udf/agent/py/kapacitor/udf"
+            PYTHONPATH = "/tmp/kapacitor_udf/kapacitor/udf/agent/py"
 ```
 
 In the configuration we called the function `tTest`. That is also how
