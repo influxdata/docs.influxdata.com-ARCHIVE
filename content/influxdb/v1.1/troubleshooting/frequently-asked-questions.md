@@ -43,6 +43,7 @@ Where applicable, it links to outstanding issues on GitHub.
 **Querying data**  
 
 * [What determines the time intervals returned by `GROUP BY time()` queries?](#what-determines-the-time-intervals-returned-by-group-by-time-queries)  
+* [Why do my queries return no data or partial data?](#why-do-my-queries-return-no-data-or-partial-data)
 * [Why don't my `GROUP BY time()` queries return timestamps that occur after `now()`?](#why-don-t-my-group-by-time-queries-return-timestamps-that-occur-after-now)  
 * [Can I perform mathematical operations against timestamps?](#can-i-perform-mathematical-operations-against-timestamps)  
 * [Can I identify write precision from returned timestamps?](#can-i-identify-write-precision-from-returned-timestamps)  
@@ -511,6 +512,24 @@ time                    sunflowers                 time                  mean
 2016-08-29T20:00:00Z   |70|
                        |--|
 ```
+
+## Why do my queries return no data or partial data?
+
+There are several possible explanations for why a query returns no data or partial data.
+We list some of the most frequent cases below:
+
+The first and most common explanation involves [retention policies](/influxdb/v1.1/concepts/glossary/#retention-policy-rp) (RP).
+InfluxDB automatically queries data in a database’s `DEFAULT` RP.
+If your data are stored in an RP other than the `DEFAULT` RP, InfluxDB won’t return any results unless you [specify](/influxdb/v1.1/query_language/data_exploration/#example-7-select-all-data-from-a-fully-qualified-measurement) the alternative RP.
+
+Another possible explanation has to do with your query’s time range.
+By default, most [`SELECT` queries](/influxdb/v1.1/query_language/data_exploration/#the-basic-select-statement) cover the time range between `1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC. `SELECT` queries that also include a [`GROUP BY time()` clause](/influxdb/v1.1/query_language/data_exploration/#group-by-time-intervals), however, cover the time range between `1677-09-21 00:12:43.145224194` and [`now()`](/influxdb/v1.1/concepts/glossary/#now).
+If any of your data occur after `now()` a `GROUP BY time()` query will not cover those data points.
+Your query will need to provide [an alternative upper bound](/influxdb/v1.1/query_language/data_exploration/#time-syntax-in-queries) for the time range if the query includes a `GROUP BY time()` clause and if any of your data occur after `now()`.
+
+The final common explanation involves [schemas](/influxdb/v1.1/concepts/glossary/#schema) with [fields](/influxdb/v1.1/concepts/glossary/#field) and [tags](/influxdb/v1.1/concepts/glossary/#tag) that have the same key.
+If a field and tag have the same key, the field will take precedence in all queries.
+You’ll need to use the [`::tag` syntax](/influxdb/v1.1/query_language/data_exploration/#description-of-syntax) to specify the tag key in queries.
 
 ## Why don't my GROUP BY time() queries return timestamps that occur after now()?
 Most `SELECT` statements have a default time range between [`1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC](#what-are-the-minimum-and-maximum-timestamps-that-influxdb-can-store).
