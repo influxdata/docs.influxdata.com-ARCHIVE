@@ -200,7 +200,7 @@ two-hour RP.
 The data in `downsampled_orders` are the aggregated, 30-minute resolution data
 that are subject to the 52-week RP.
 
-Notice that the first timestamps in `downsample_orders` are older than the first
+Notice that the first timestamps in `downsampled_orders` are older than the first
 timestamps in `orders`.
 This is because InfluxDB has already deleted data from `orders` with timestamps
 that are older than our local server's timestamp minus two hours (assume we
