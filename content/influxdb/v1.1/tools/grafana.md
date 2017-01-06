@@ -7,3 +7,5 @@ menu:
     weight: 50
     parent: tools
 ---
+
+Please see [Grafana's InfluxDB documentation](http://docs.grafana.org/datasources/influxdb/).
