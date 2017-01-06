@@ -104,7 +104,7 @@ _Example:_
 Consider the following schema represented by line protocol.
 
 ```
-Schema 2 - Multiple data encoded in a single tag
+Schema 1 - Multiple data encoded in a single tag
 -------------
 weather_sensor,crop=blueberries,location=plot-1.north temp=50.1 1472515200000000000
 weather_sensor,crop=blueberries,location=plot-2.midwest temp=49.8 1472515200000000000
