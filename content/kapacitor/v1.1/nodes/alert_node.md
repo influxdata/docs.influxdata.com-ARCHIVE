@@ -982,9 +982,10 @@ From https://developer.pagerduty.com/documentation/integration/events
 1. In your account, under the Services tab, click &#34;Add New Service&#34;. 
 2. Enter a name for the service and select an escalation policy. Then, select &#34;Generic API&#34; for the Service Type. 
 3. Click the &#34;Add Service&#34; button. 
-4. Once the service is created, you&#39;ll be taken to the service page. On this page, you&#39;ll see the &#34;Service key&#34;, which is needed to access the API 
+4. Once the service is created click the 'Integrations' tab and +New Integration.
+5. Give the integration a name and select 'Generic API' for the integration type.
 
-Place the &#39;service key&#39; into the &#39;pagerduty&#39; section of the Kapacitor configuration as the option &#39;service-key&#39;. 
+Place the &#39;integration key&#39; into the &#39;pagerduty&#39; section of the Kapacitor configuration as the option &#39;service-key&#39;. 
 
 Example: 
 
