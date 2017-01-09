@@ -125,6 +125,44 @@ SectionPagesMenu = "products"
   url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
   parent = "about"
 
+# InfluxDB v1.1 Sub-Menu - External Resources
+[[menu.influxdb_1_1]]
+  name = "InfluxData Blog"
+  identifier = "infludatablog"
+  weight = 0
+  url = "https://www.influxdata.com/blog/"
+  parent = "external_resources"
+[[menu.influxdb_1_1]]
+  name = "Technical Papers"
+  identifier = "technicalpapers"
+  weight = 10
+  url = "https://www.influxdata.com/technical-papers/"
+  parent = "external_resources"
+[[menu.influxdb_1_1]]
+  name = "Meetup Videos"
+  identifier = "meetupvideos"
+  weight = 20
+  url = "https://www.influxdata.com/videos/"
+  parent = "external_resources"
+[[menu.influxdb_1_1]]
+  name = "Virtual Training Videos"
+  identifier = "virtualtrainingvideos"
+  weight = 30
+  url = "https://www.influxdata.com/videos-training/"
+  parent = "external_resources"
+[[menu.influxdb_1_1]]
+  name = "Virtual Training Schedule"
+  identifier = "virtualtrainingschedule"
+  weight = 40
+  url = "https://www.influxdata.com/virtual-training-courses/"
+  parent = "external_resources"
+[[menu.influxdb_1_1]]
+  name = "Events"
+  identifier = "events"
+  weight = 50
+  url = "https://www.influxdata.com/events/"
+  parent = "external_resources"
+
 # Kapacitor v1.0 Sub-Menu - Introduction
 [[menu.kapacitor_1_0]]
   name = "Download"
