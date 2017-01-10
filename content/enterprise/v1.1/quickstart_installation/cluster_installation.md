@@ -31,11 +31,6 @@ a [data node](/enterprise/v1.1/concepts/glossary/#data-node), that is, each serv
 runs both the [meta service](/enterprise/v1.1/concepts/glossary/#meta-service)
 and the [data service](/enterprise/v1.1/concepts/glossary/#data-service).
 
-In a production environment there is no need to use three servers; meta nodes and data
-nodes can run on separate servers.
-Please see the [Production Installation](/enterprise/v1.1/production_installation/)
-documentation if you'd like to set up a cluster with a different server-node configuration.
-
 ### Requirements
 
 #### License Key or File
