@@ -13,7 +13,8 @@ The built-in web administration GUI is deprecated in InfluxDB 1.1 and is disable
 
 ## Accessing the UI
 
-To enable the Admin UI, [edit the configuration file](/influxdb/v1.1/administration/config/#enabled-false) to set `enabled = true` in the `[admin]` section. You must restart the process for any configuration changes to take effect.
+To enable the Admin UI, [edit the configuration file](/influxdb/v1.1/administration/config/#enabled-false) to set `enabled = true` in the `[admin]` section. Be sure to uncomment both the `[admin]` section header and the `enabled = true` setting.
+You must restart the process for any configuration changes to take effect.
 
 Once enabled, the Admin UI is available by default at port `8083`, i.e. [http://localhost:8083](http://localhost:8083).
 You can control the port in the InfluxDB config file using the `port` option in the `[admin]` section.
