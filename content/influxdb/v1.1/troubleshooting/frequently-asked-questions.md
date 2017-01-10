@@ -18,6 +18,7 @@ Where applicable, it links to outstanding issues on GitHub.
 * [How can I identify my version of InfluxDB?](#how-can-i-identify-my-version-of-influxdb)  
 * [What is the relationship between shard group durations and retention policies?](#what-is-the-relationship-between-shard-group-durations-and-retention-policies)
 * [Why aren't data dropped after I've altered a retention policy?](#why-aren-t-data-dropped-after-i-ve-altered-a-retention-policy)
+* [Why doesn't InfluxDB acknowledge my local configuration settings?](#why-doesn-t-influxdb-acknowledge-my-local-configuration-settings)
 
 **Command Line Interface (CLI)**
 
@@ -149,6 +150,26 @@ InfluxDB will drop that shard group once all of its data are outside the new
 `DURATION`.
 The system will then begin writing data to shard groups that have the new,
 shorter `SHARD DURATION` preventing any further unexpected data retention.
+
+## Why doesn't InfluxDB acknowledge my local configuration settings?
+
+In version 1.1.x, if you uncomment and configure a configuration setting you
+will also need to uncomment that setting's section header for those changes
+to take effect.
+
+#### Example
+
+To enable the [admin interface](/influxdb/v1.1/tools/web_admin/), uncomment the `[admin]` section header, the
+`enabled = false` setting, and change `enabled = false` to `enabled = true`:
+
+```
+[admin]
+  # Determines whether the admin service is enabled.
+  enabled = true
+```
+
+Once you've saved your changes, restart InfluxDB for your local configuration settings
+to take effect.
 
 ## How do I make InfluxDB’s CLI return human readable timestamps?
 

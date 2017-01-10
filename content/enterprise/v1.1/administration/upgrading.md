@@ -17,7 +17,8 @@ menu:
 
 The `influxd-ctl join` command has been renamed to `influxd-ctl add-meta`. If you have existing scripts that use `influxd-ctl join`, they will need to use `influxd-ctl add-meta` or be updated to use the new cluster setup command.
 
-This release should be a drop-in replacement for 1.0 with no data migration required. There are some configuration changes that may need to be updated prior to upgrading to avoid downtime. Please review the [Changelog](/enterprise/v1.1/about-the-project/release-notes-changelog/) prior to upgrading.
+This release should be a drop-in replacement for 1.0 with no data migration required. There are some configuration changes that need to be updated prior to upgrading to avoid downtime.
+Please review the [Changelog](/enterprise/v1.1/about-the-project/release-notes-changelog/) prior to upgrading.
 
 ## Upgrading from version 0.7 to 1.1
 

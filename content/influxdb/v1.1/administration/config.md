@@ -18,6 +18,9 @@ Most of the settings in the local configuration file
 commented-out settings will be determined by the internal defaults.
 Any uncommented settings in the local configuration file override the
 internal defaults.
+If you uncomment and configure a setting you will also need to
+[uncomment that setting's section header](/influxdb/v1.1/troubleshooting/frequently-asked-questions/#why-doesn-t-influxdb-acknowledge-my-local-configuration-settings)
+for that setting to take effect.
 Note that the local configuration file does not need to include every
 configuration setting.
 
