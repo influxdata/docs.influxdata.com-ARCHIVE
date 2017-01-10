@@ -21,7 +21,7 @@ Bad things can happen if you complete the following steps without meta nodes.
 
 The Production Installation process sets up two [data nodes](/enterprise/v1.1/concepts/glossary#data-node)
 and each data node runs on its own server.
-You **must** have a minimum of two data in a cluster.
+You **must** have a minimum of two data nodes in a cluster.
 InfluxEnterprise clusters require at least two data nodes for high
 availability and redundancy.
 Note that there is no requirement for each data node to run on its own
