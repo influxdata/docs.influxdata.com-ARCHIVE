@@ -167,16 +167,19 @@ Backup and restore has been updated to fix issues and refine existing capabiliti
 
 ## v1.1.1 [2016-12-06]
 
-There are no new features in version 1.1.1.
-
 This release is built with Go 1.7.4.
 It resolves a security vulnerability reported in Go version 1.7.3 which impacts all
 users currently running on the Mac OS X platform, powered by the Darwin operating system.
 
+### Features
+
+- Add the [`autologout` configuration setting](/enterprise/v1.1/administration/configuration/#autologout-false) to enable a forced logout on browser close
+
 ## v1.1.0 [2016-11-14]
 
-There are no new features or bugfixes in version 1.1.0.
-This release is for maintaining version parity with clustering.
+### Features
+
+- Add the [`session-lifetime` configuration setting](/enterprise/v1.1/administration/configuration/#session-lifetime-24h) to configure the time after which users are automatically logged out
 
 ## v1.0.3 [2016-10-07]
 
