@@ -1,11 +1,11 @@
 ---
-title: Telegraf Version 1.0 Documentation
+title: Telegraf Version 1.2 Documentation
 
 menu:
   telegraf:
-    name: v1.0
-    identifier: telegraf_1_0
-    weight: 2
+    name: v1.2
+    identifier: telegraf_1_2
+    weight: 0
 ---
 
 Telegraf is a plugin-driven server agent for collecting & reporting metrics,
