@@ -6,9 +6,17 @@ menu:
     parent: About the Project
 ---
 
-# Clustering
+<table style="width:100%">
+  <tr>
+    <td><a href="#clustering">Clustering Release Notes/Changelog</a></td>
+    <td><a href="#web-console">Web Console Release Notes/Changelog</a></td>
+  </tr>
+</table>
 
-## v1.2.1 [2016-12-06]
+<br>
+<br>
+# Clustering
+## v1.1.1 [2016-12-06]
 
 This release builds off of the 1.1.1 release of InfluxDB.
 Please see the [release notes](https://github.com/influxdata/influxdb/blob/1.1/CHANGELOG.md#v111-unreleased) for specific changes.
@@ -17,7 +25,7 @@ This release is built with Go 1.7.4.
 It resolves a security vulnerability reported in Go version 1.7.3 which impacts all
 users currently running on the Mac OS X platform, powered by the Darwin operating system.
 
-## v1.2.0 [2016-11-14]
+## v1.1.0 [2016-11-14]
 
 ### Release Notes
 
@@ -163,9 +171,11 @@ Backup and restore has been updated to fix issues and refine existing capabiliti
 - Hinted handoff panic
 - Drop writes if they contain field type inconsistencies
 
+<br>
+<br>
 # Web Console
 
-## v1.2.1 [2016-12-06]
+## v1.1.1 [2016-12-06]
 
 This release is built with Go 1.7.4.
 It resolves a security vulnerability reported in Go version 1.7.3 which impacts all
@@ -175,7 +185,7 @@ users currently running on the Mac OS X platform, powered by the Darwin operatin
 
 - Add the [`autologout` configuration setting](/enterprise/v1.2/administration/configuration/#autologout-false) to enable a forced logout on browser close
 
-## v1.2.0 [2016-11-14]
+## v1.1.0 [2016-11-14]
 
 ### Features
 

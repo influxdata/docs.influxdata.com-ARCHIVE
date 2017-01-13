@@ -101,11 +101,11 @@ Perform the following steps on all three servers.
 
 Download:
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.1.1-c1.1.1_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.2.0-c1.2.0_amd64.deb
 ```
 Install:
 ```
-sudo dpkg -i influxdb-meta_1.1.1-c1.1.1_amd64.deb
+sudo dpkg -i influxdb-meta_1.2.0-c1.2.0_amd64.deb
 ```
 
 {{% /tab-content %}}
@@ -114,11 +114,11 @@ sudo dpkg -i influxdb-meta_1.1.1-c1.1.1_amd64.deb
 
 Download:
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.1.1_c1.1.1.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.2.0_c1.2.0.x86_64.rpm
 ```
 Install:
 ```
-sudo yum localinstall influxdb-meta-1.1.1_c1.1.1.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.2.0_c1.2.0.x86_64.rpm
 ```
 
 {{% /tab-content %}}
@@ -195,11 +195,11 @@ Perform the following steps on all three servers.
 
 Download:
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.1.1-c1.1.1_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.2.0-c1.2.0_amd64.deb
 ```
 Install:
 ```
-sudo dpkg -i influxdb-data_1.1.1-c1.1.1_amd64.deb
+sudo dpkg -i influxdb-data_1.2.0-c1.2.0_amd64.deb
 ```
 
 {{% /tab-content %}}
@@ -208,11 +208,11 @@ sudo dpkg -i influxdb-data_1.1.1-c1.1.1_amd64.deb
 
 Download:
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.1.1_c1.1.1.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.2.0_c1.2.0.x86_64.rpm
 ```
 Install:
 ```
-sudo yum localinstall influxdb-data-1.1.1_c1.1.1.x86_64.rpm
+sudo yum localinstall influxdb-data-1.2.0_c1.2.0.x86_64.rpm
 ```
 
 {{% /tab-content %}}
@@ -257,7 +257,7 @@ hostname="<quickstart-cluster-0x>" #✨
 
 [...]
 
-[http] 
+[http]
   # Determines whether HTTP endpoint is enabled.
   # enabled = true
 
@@ -370,16 +370,16 @@ The expected output is:
 Data Nodes
 ==========
 ID   TCP Address                  Version
-2    quickstart-cluster-01:8088   1.1.1-c1.1.1rc1
-4    quickstart-cluster-02:8088   1.1.1-c1.1.1rc1
-6    quickstart-cluster-03:8088   1.1.1-c1.1.1rc1
+2    quickstart-cluster-01:8088   1.2.0-c1.2.0
+4    quickstart-cluster-02:8088   1.2.0-c1.2.0
+6    quickstart-cluster-03:8088   1.2.0-c1.2.0
 
 Meta Nodes
 ==========
 TCP Address                  Version
-quickstart-cluster-01:8091   1.1.1-c1.1.1rc1
-quickstart-cluster-02:8091   1.1.1-c1.1.1rc1
-quickstart-cluster-03:8091   1.1.1-c1.1.1rc1
+quickstart-cluster-01:8091   1.2.0-c1.2.0
+quickstart-cluster-02:8091   1.2.0-c1.2.0
+quickstart-cluster-03:8091   1.2.0-c1.2.0
 ```
 
 Your cluster should have three data nodes and three meta nodes.

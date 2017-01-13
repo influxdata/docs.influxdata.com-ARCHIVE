@@ -94,14 +94,14 @@ Perform the following steps on each meta server.
 
 #### Ubuntu & Debian (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.1.1-c1.1.1_amd64.deb
-sudo dpkg -i influxdb-meta_1.1.1-c1.1.1_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.2.0-c1.2.0_amd64.deb
+sudo dpkg -i influxdb-meta_1.2.0-c1.2.0_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.1.1_c1.1.1.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.1.1_c1.1.1.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.2.0_c1.2.0.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.2.0_c1.2.0.x86_64.rpm
 ```
 
 ### II. Edit the Configuration File
