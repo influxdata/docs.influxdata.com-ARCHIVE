@@ -362,7 +362,9 @@ See the [OSS documentation](/influxdb/v1.2/administration/config/#reporting-disa
 
 ### bind-address = ":8088"
 
-See the [OSS documentation](/influxdb/v1.2/administration/config/#bind-address-8088).
+The bind address to use for the RPC service for [backup and restore](/enterprise/v1.2/guides/backup-and-restore/).
+
+Environment variable: `INFLUXDB_BIND_ADDRESS`
 
 ### hostname = "localhost"
 
