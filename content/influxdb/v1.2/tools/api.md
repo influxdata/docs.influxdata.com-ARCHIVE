@@ -114,15 +114,20 @@ $ curl -XPOST 'http://localhost:8086/query' --data-urlencode 'q=CREATE DATABASE 
 
 | Query String Parameter | Optional/Required | Definition |
 | :--------------------- | :---------------- |:---------- |
-| chunked=[true \| \<number_of_points>] | Optional | Returns points in streamed batches instead of in a single response. If set to `true`, InfluxDB chunks responses by series or by every 10,000 points, whichever occurs first. If set to a specific value, InfluxDB chunks responses by series or by that number of points.  |
+| chunked=[true \| \<number_of_points>] | Optional | Returns points in streamed batches instead of in a single response. If set to `true`, InfluxDB chunks responses by series or by every 10,000 points, whichever occurs first. If set to a specific value, InfluxDB chunks responses by series or by that number of points.*  |
 | db=\<database_name> | Required for database-dependent queries (most [`SELECT`](/influxdb/v1.2/query_language/spec/#select) queries and [`SHOW`](/influxdb/v1.2/query_language/spec/#show-continuous-queries) queries require this parameter). | Sets the target [database](/influxdb/v1.2/concepts/glossary/#database) for the query. |
 | epoch=[h,m,s,ms,u,ns] | Optional | Returns epoch timestamps with the specified precision. By default, InfluxDB returns timestamps in RFC3339 format with nanosecond precision. |
-| p=\<password> | Optional if you haven't [enabled authentication](/influxdb/v1.2/query_language/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication.* | Sets the password for authentication if you've enabled authentication. Use with the query string parameter `u`. |
+| p=\<password> | Optional if you haven't [enabled authentication](/influxdb/v1.2/query_language/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication.** | Sets the password for authentication if you've enabled authentication. Use with the query string parameter `u`. |
 | pretty=true | Optional | Enables pretty-printed JSON output. While this is useful for debugging it is not recommended for production use as it consumes unnecessary network bandwidth. |
 | rp=\<retention_policy_name> | Optional | Sets the target [retention policy](/influxdb/v1.2/concepts/glossary/#retention-policy-rp) for the query. InfluxDB queries the database's default retention policy if you do not specify a retention policy.  |
 | u=\<username> | Optional if you haven't [enabled authentication](/influxdb/v1.2/query_language/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication.* | Sets the username for authentication if you've enabled authentication. The user must have read access to the database. Use with the query string parameter `p`. |
 
-\* The HTTP API also supports basic authentication.
+\* InfluxDB automatically truncates the number of rows returned for requests without the `chunked` parameter.
+By default, the maximum number of rows returned is set to 10,000.
+If a query has more than 10,000 rows to return, InfluxDB includes a `"partial":true` tag in the response body.
+The [`max-row-limit` setting](/influxdb/v1.2/administration/config/#max-row-limit-10000) is configurable in the `[http]` section of the configuration file.
+
+\** The HTTP API also supports basic authentication.
 Use basic authentication if you've [enabled authentication](/influxdb/v1.2/query_language/authentication_and_authorization/#set-up-authentication)
 and aren't using the query string parameters `u` and `p`.
 See below for an [example](#example-4-create-a-database-using-basic-authentication) of basic authentication.
