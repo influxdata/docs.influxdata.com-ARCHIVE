@@ -108,7 +108,6 @@ sudo yum localinstall influxdb-data-1.1.1_c1.1.1.x86_64.rpm
 First, in `/etc/influxdb/influxdb.conf`, uncomment:
 
 * `hostname` at the top of the file and set it to the full hostname of the data node
-* the header of the `[http]` section
 * `auth-enabled` in the `[http]` section and set it to `true`
 * `shared-secret` in the `[http]` section and set it to a long pass phrase that will be used to sign tokens for intra-cluster communication. The Enterprise Web console requires this to be consistent across all data nodes.
 
@@ -140,7 +139,7 @@ hostname="<enterprise-data-0x>" #✨
 
 [...]
 
-[http] #✨
+[http] 
   # Determines whether HTTP endpoint is enabled.
   # enabled = true
 
