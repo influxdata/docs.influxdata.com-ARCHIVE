@@ -10,13 +10,13 @@ menu:
 ## Backups
 
 InfluxDB has the ability to snapshot an instance at a point-in-time and restore it.
-All backups are full backups. 
+All backups are full backups.
 InfluxDB does not yet support incremental backups.
 There are two types of data to backup, the metastore and the metrics themselves.
 The [metastore](/influxdb/v1.2/concepts/glossary/#metastore) is backed up in its entirety.
 The metrics are backed up per-database in a separate operation from the metastore backup.
 
-> **Note:** Backups are not interchangeable between OSS InfluxDB and InfluxEnterprise. 
+> **Note:** Backups are not interchangeable between OSS InfluxDB and InfluxEnterprise.
 You cannot restore an OSS backup to an InfluxEnterprise data node, nor can you restore
 an InfluxEnterprise backup to an OSS instance.
 
@@ -24,7 +24,7 @@ an InfluxEnterprise backup to an OSS instance.
 ### Backing up the Metastore
 
 InfluxDB's metastore contains internal information about the status of
-the system, including user information, database/shard metadata, CQs, RPs, 
+the system, including user information, database/shard metadata, CQs, RPs,
 and subscriptions. While a node is running, you can
 create a backup of your instance's metastore by running the command:
 
@@ -96,6 +96,9 @@ Which will send the resulting backup to `/tmp/backup`, where it can
 then be compressed and sent to long-term storage.
 
 ### Remote Backups
+
+The default port for remote backups is set to `8088`.
+That setting is [configurable](/influxdb/v1.2/administration/config/#bind-address-8088).
 
 To capture a backup from a remote node, specify the host and port of
 the remote instance using the `-host` configuration switch:

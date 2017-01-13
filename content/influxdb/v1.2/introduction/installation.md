@@ -16,11 +16,11 @@ Installation of the InfluxDB package may require `root` or administrator privile
 
 By default, InfluxDB uses the following network ports:
 
-- TCP port `8083` is used for InfluxDB's [Admin panel](/influxdb/v1.2/tools/web_admin/)
 - TCP port `8086` is used for client-server communication over InfluxDB's HTTP API
+- TCP port `8088` is used for the RPC service for backup and restore
 
 In addition to the ports above, InfluxDB also offers multiple plugins that may
-require custom ports.
+require [custom ports](/influxdb/v1.2/administration/ports/).
 All port mappings can be modified through the [configuration file](/influxdb/v1.2/administration/config),
 which is located at `/etc/influxdb/influxdb.conf` for default installations.
 

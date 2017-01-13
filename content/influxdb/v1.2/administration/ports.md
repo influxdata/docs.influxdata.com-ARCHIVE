@@ -7,26 +7,60 @@ menu:
     parent: administration
 ---
 
-## HTTP API PORT
-By default the [InfluxDB HTTP API](/influxdb/v1.2/concepts/api/) listens on port
-`8086`.
-The `/ping`, `/write`, and `/query` endpoints are all part of the HTTP API.
+## Enabled Ports
 
-## Admin interface port
-The [admin interface](/influxdb/v1.2/tools/web_admin/) for InfluxDB runs on port
-`8083` and exposes web UI for the server.
+### `8086`
+The default port that runs the InfluxDB HTTP service.
+[Configure this port](/influxdb/v1.2/administration/config/#bind-address-8086)
+in the configuration file.
 
-## Secondary Ports
-InfluxDB also supports communication through
-[UDP](/influxdb/v1.2/write_protocols/udp/),
-[Graphite](/influxdb/v1.2/write_protocols/graphite/),
-[Collectd](/influxdb/v1.2/write_protocols/collectd/),
-and
-[OpenTSDB](/influxdb/v1.2/write_protocols/opentsdb/).
+**Resources** [API Reference](/influxdb/v1.2/tools/api/)
 
-Default ports:
+### 8088
+The default port that runs the RPC service for backup and restore.
+[Configure this port](/influxdb/v1.2/administration/config/#bind-address-8088)
+in the configuration file.
 
-* UDP: `8089`
-* Graphite: `2003`
-* Collectd: `25826`
-* OpenTSDB: `4242`
+**Resources** [Backup and Restore](/influxdb/v1.2/administration/backup_and_restore/)
+
+## Disabled Ports
+
+### 2003
+
+The default port that runs the Graphite service.
+[Enable and configure this port](/influxdb/v1.2/administration/config/#bind-address-2003)
+in the configuration file.
+
+**Resources** [Graphite README](https://github.com/influxdata/influxdb/blob/master/services/graphite/README.md)
+
+### 4242
+
+The default port that runs the OpenTSDB service.
+[Enable and configure this port](/influxdb/v1.2/administration/config/#bind-address-4242)
+in the configuration file.
+
+**Resources** [OpenTSDB README](https://github.com/influxdata/influxdb/blob/master/services/opentsdb/README.md)
+
+### 8083
+
+The default port that runs the web admin service.
+[Enable and configure this port](/influxdb/v1.2/administration/config/#bind-address-8083)
+in the configuration file.
+
+**Resources** [Web Admin Interface](/influxdb/v1.2/tools/web_admin/)
+
+### 8089
+
+The default port that runs the UDP service.
+[Enable and configure this port](/influxdb/v1.2/administration/config/#bind-address-8089)
+in the configuration file.
+
+**Resources** [UDP README](https://github.com/influxdata/influxdb/blob/master/services/udp/README.md)
+
+### 25826
+
+The default port that runs the Collectd service.
+[Enable and configure this port](/influxdb/v1.2/administration/config/#bind-address-25826)
+in the configuration file.
+
+**Resources** [Collectd README](https://github.com/influxdata/influxdb/blob/master/services/collectd/README.md)
