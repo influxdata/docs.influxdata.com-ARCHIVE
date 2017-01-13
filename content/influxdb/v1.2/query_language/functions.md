@@ -969,12 +969,6 @@ time                   sample
                            --
 ```
 
-#### Issue 2: `SAMPLE()` with `*`
-
-Currently, `SAMPLE(*,<N>)` ignores fields with string values.
-See GitHub Issue [#7621](https://github.com/influxdata/influxdb/issues/7621)
-for more information.
-
 ## TOP()
 Returns the largest `N` values in a single [field](/influxdb/v1.2/concepts/glossary/#field).
 The field type must be int64 or float64.
