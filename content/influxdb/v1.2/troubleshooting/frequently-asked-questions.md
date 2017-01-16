@@ -336,7 +336,7 @@ Currently, InfluxDB offers very limited support for changing a field's data type
 
 The `<field_key>::<type>` syntax supports casting field values from integers to
 floats or from floats to integers.
-See [Cast Operations](/influxdb/v1.2/query_language/data_exploration/#data-types-and-cast-operations-in-queries)
+See [Cast Operations](/influxdb/v1.2/query_language/data_exploration/#data-types-and-cast-operations)
 for an example.
 There is no way to cast a float or integer to a string or boolean (or vice versa).
 
@@ -366,25 +366,24 @@ For how this will affect your queries, please see
 ## How do I perform mathematical operations within a function?
 
 Currently, InfluxDB does not support mathematical operations within functions.
-We recommend using InfluxQL's [`INTO` queries](/influxdb/v1.2/query_language/data_exploration/#the-into-clause)
+We recommend using InfluxQL's [subqueries](/influxdb/v1.2/query_language/data_exploration/#subqueries)
 as a workaround.
 
-#### Example
+### Example
 
-Split the following invalid query into two steps:
+InfluxQL does not support the following syntax:
 ```
-SELECT mean("dogs" - "cats") from "pet_daycare"
-```
-
-First, calculate the difference between `dogs` and `cats` and write the results to the same measurement using an `INTO` query:
-```
-SELECT "dogs" - "cats" AS "diff" INTO "pet_daycare" FROM "pet_daycare"
+SELECT MEAN("dogs" - "cats") from "pet_daycare"
 ```
 
-Second, calculate the average of the new field (`diff`):
+Instead, use a subquery to get the same result:
 ```
-SELECT mean("diff") FROM "pet_daycare"
+> SELECT MEAN("difference") FROM (SELECT "dogs" - "cat" AS "difference" FROM "pet_daycare")
 ```
+
+See the
+[Data Exploration](/influxdb/v1.2/query_language/data_exploration/#subqueries)
+page for more information.
 
 ## Why does my query return epoch 0 as the timestamp?
 In InfluxDB, epoch 0  (`1970-01-01T00:00:00Z`)  is often used as a null timestamp equivalent.
@@ -401,9 +400,9 @@ The following InfluxQL functions support nesting:
 * [`non_negative_derivative()`](/influxdb/v1.2/query_language/functions/#non-negative-derivative)
 * [`holt_winters()`](/influxdb/v1.2/query_language/functions/#holt-winters)
 
-See
-[Continuous Queries](/influxdb/v1.2/query_language/continuous_queries/#continuous-query-use-cases)
-for how to use InfluxDB's CQs as a substitute for nested functions.
+See the
+[Data Exploration](/influxdb/v1.2/query_language/data_exploration/#subqueries)
+page for how to use a subquery as a substitute for nested functions.
 
 ## What determines the time intervals returned by `GROUP BY time()` queries?
 
@@ -525,7 +524,7 @@ If your data are stored in an RP other than the `DEFAULT` RP, InfluxDB won’t r
 Another possible explanation has to do with your query’s time range.
 By default, most [`SELECT` queries](/influxdb/v1.2/query_language/data_exploration/#the-basic-select-statement) cover the time range between `1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC. `SELECT` queries that also include a [`GROUP BY time()` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals), however, cover the time range between `1677-09-21 00:12:43.145224194` and [`now()`](/influxdb/v1.2/concepts/glossary/#now).
 If any of your data occur after `now()` a `GROUP BY time()` query will not cover those data points.
-Your query will need to provide [an alternative upper bound](/influxdb/v1.2/query_language/data_exploration/#time-syntax-in-queries) for the time range if the query includes a `GROUP BY time()` clause and if any of your data occur after `now()`.
+Your query will need to provide [an alternative upper bound](/influxdb/v1.2/query_language/data_exploration/#time-syntax) for the time range if the query includes a `GROUP BY time()` clause and if any of your data occur after `now()`.
 
 The final common explanation involves [schemas](/influxdb/v1.2/concepts/glossary/#schema) with [fields](/influxdb/v1.2/concepts/glossary/#field) and [tags](/influxdb/v1.2/concepts/glossary/#tag) that have the same key.
 If a field and tag have the same key, the field will take precedence in all queries.
@@ -559,7 +558,7 @@ the lower bound to `now()` such that the query's time range is between
 >
 ```
 
-See the [Data Exploration](/influxdb/v1.2/query_language/data_exploration/#time-syntax-in-queries)
+See the [Data Exploration](/influxdb/v1.2/query_language/data_exploration/#time-syntax)
 document for more on time syntax in queries.
 
 ## Can I perform mathematical operations against timestamps?
@@ -618,7 +617,7 @@ Yes: `SELECT "water_level" FROM "h2o_feet" WHERE time > '2015-08-18T23:00:01.232
 
 No: `SELECT "water_level" FROM "h2o_feet" WHERE time > "2015-08-18T23:00:01.232000000Z" AND time < "2015-09-19"`
 
-See [Data Exploration](/influxdb/v1.2/query_language/data_exploration/#time-syntax-in-queries) for more on time syntax in queries.
+See [Data Exploration](/influxdb/v1.2/query_language/data_exploration/#time-syntax) for more on time syntax in queries.
 
 ## Why am I missing data after creating a new DEFAULT retention policy?
 When you create a new `DEFAULT` retention policy (RP) on a database, the data written to the old `DEFAULT` RP remain in the old RP.

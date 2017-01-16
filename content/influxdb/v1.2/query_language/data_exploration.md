@@ -20,27 +20,32 @@ for exploring your data.
   <tr>
     <td><a href="#the-basic-select-statement">The SELECT statement</a></td>
     <td><a href="#order-by-time-desc">ORDER BY time DESC</a></td>
-    <td><a href="#time-syntax-in-queries">Time Syntax in Queries</a></td>
+    <td><a href="#time-syntax">Time Syntax</a></td>
   </tr>
   <tr>
     <td><a href="#the-where-clause">The WHERE clause</a></td>
     <td><a href="#the-limit-and-slimit-clauses">The LIMIT and SLIMIT Clauses</a></td>
-    <td><a href="#regular-expressions-in-queries">Regular Expressions in Queries</a></td>
+    <td><a href="#regular-expressions">Regular Expressions</a></td>
   </tr>
   <tr>
     <td><a href="#the-group-by-clause">The GROUP BY clause</a></td>
     <td><a href="#the-offset-and-soffset-clauses">The OFFSET and SOFFSET Clauses</a></td>
-    <td><a href="#data-types-and-cast-operations-in-queries">Data Types and Cast Operations in Queries</a></td>
+    <td><a href="#data-types-and-cast-operations">Data Types and Cast Operations</a></td>
   </tr>
   <tr>
     <td><a href="#the-into-clause">The INTO clause</a></td>
     <td><a href="#"></a></td>
-    <td><a href="#merge-series-in-queries">Merge Series in Queries</a></td>
+    <td><a href="#merge-behavior">Merge Behavior</a></td>
   </tr>
   <tr>
     <td><a href="#"></a></td>
     <td><a href="#"></a></td>
-    <td><a href="#multiple-statements-in-queries">Multiple Statements in Queries</a></td>
+    <td><a href="#multiple-statements">Multiple Statements</a></td>
+  </tr>
+  <tr>
+    <td><a href="#"></a></td>
+    <td><a href="#"></a></td>
+    <td><a href="#subqueries">Subqueries</a></td>
   </tr>
 </table>
 
@@ -161,8 +166,8 @@ Use this syntax to differentiate between field keys and tag keys that have the s
 Other supported features:
 [Arithmetic Operations](/influxdb/v1.2/query_language/math_operators/),
 [Functions](/influxdb/v1.2/query_language/functions/),
-[Basic Cast Operations](#data-types-and-cast-operations-in-queries),
-[Regular Expressions](#regular-expressions-in-queries)
+[Basic Cast Operations](#data-types-and-cast-operations),
+[Regular Expressions](#regular-expressions)
 
 #### `FROM` clause
 The `FROM` clause supports several formats for specifying a [measurement(s)](/influxdb/v1.2/concepts/glossary/#measurement):
@@ -192,7 +197,7 @@ Returns data from a measurement in a user-specified [database](/influxdb/v1.2/co
 [retention policy](/influxdb/v1.2/concepts/glossary/#retention-policy-rp).
 
 Other supported features:
-[Regular Expressions](#regular-expressions-in-queries)
+[Regular Expressions](#regular-expressions)
 
 #### Quoting
 [Identifiers](/influxdb/v1.2/concepts/glossary/#identifiers) **must** be double quoted if they contain characters other than `[A-z,0-9,_]`, if they
@@ -429,7 +434,7 @@ Supported operators:
 
 Other supported features:
 [Arithmetic Operations](/influxdb/v1.2/query_language/math_operators/),
-[Regular Expressions](#regular-expressions-in-queries)
+[Regular Expressions](#regular-expressions)
 
 #### tags
 
@@ -449,7 +454,7 @@ Supported operators:
 `!=`&emsp;not equal to  
 
 Other supported features:
-[Regular Expressions](#regular-expressions-in-queries)
+[Regular Expressions](#regular-expressions)
 
 #### timestamps
 
@@ -457,7 +462,7 @@ For most `SELECT` statements, the default time range is between [`1677-09-21 00:
 For `SELECT` statements with a [`GROUP BY time()` clause](#group-by-time-intervals), the default time
 range is between `1677-09-21 00:12:43.145224194` UTC and [`now()`](/influxdb/v1.2/concepts/glossary/#now).
 
-The [Time Syntax in Queries](#time-syntax-in-queries) section on this page
+The [Time Syntax](#time-syntax) section on this page
 details how to specify alternative time ranges in the `WHERE` clause.
 
 ### Examples
@@ -571,7 +576,7 @@ separating logic with parentheses.
 
 The query returns data from the `h2o_feet` measurement that have [timestamps](/influxdb/v1.2/concepts/glossary/#timestamp)
 within the past seven days.
-The [Time Syntax in Queries](#time-syntax-in-queries) section on this page
+The [Time Syntax](#time-syntax) section on this page
 offers in-depth information on supported time syntax in the `WHERE` clause.
 
 ### Common Issues with the `WHERE` Clause
@@ -679,7 +684,7 @@ The order of the [tag keys](/influxdb/v1.2/concepts/glossary/#tag-key) is irrele
 If the query includes a [`WHERE` clause](#the-where-clause) the `GROUP BY`
 clause must appear after the `WHERE` clause.
 
-Other supported features: [Regular Expressions](#regular-expressions-in-queries)
+Other supported features: [Regular Expressions](#regular-expressions)
 
 #### Examples
 
@@ -1678,7 +1683,7 @@ retention policy.
 `INTO <database_name>.<retention_policy_name>.:MEASUREMENT FROM /<regular_expression>/`  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 Writes data to all measurements in the user-specified database and
-retention policy that match the [regular expression](#regular-expressions-in-queries) in the `FROM` clause.
+retention policy that match the [regular expression](#regular-expressions) in the `FROM` clause.
 `:MEASUREMENT` is a backreference to each measurement matched in the `FROM` clause.
 
 ### Examples
@@ -1823,7 +1828,7 @@ time                   mean_degrees   mean_index   mean_pH   mean_water_level
 The query aggregates data using an
 InfluxQL [function](/influxdb/v1.2/query_language/functions) and a [`GROUP BY
 time()` clause](#group-by-time-intervals).
-It aggregates data in every measurement that matches the [regular expression](#regular-expressions-in-queries)
+It aggregates data in every measurement that matches the [regular expression](#regular-expressions)
 in the `FROM` clause and writes the results to measurements with the same name in the
 `where_else` database and the `autogen` retention policy.
 Note that both `where_else` and `autogen` must exist prior to running the `INTO`
@@ -2282,7 +2287,7 @@ time                   mean
 
 <br>
 <br>
-# Time Syntax in Queries
+# Time Syntax
 
 For most `SELECT` statements, the default time range is between [`1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC](/influxdb/v1.2/troubleshooting/frequently-asked-questions/#what-are-the-minimum-and-maximum-timestamps-that-influxdb-can-store).
 For `SELECT` statements with a [`GROUP BY time()` clause](#group-by-time-intervals), the default time
@@ -2601,7 +2606,7 @@ Specify alternative formats with the
 
 <br>
 <br>
-# Regular Expressions in Queries
+# Regular Expressions
 
 InfluxQL supports using regular expressions when specifying:
 
@@ -2774,7 +2779,7 @@ in its tag key.
 
 <br>
 <br>
-# Data Types and Cast Operations in Queries
+# Data Types and Cast Operations
 
 The [`SELECT` clause](#the-basic-select-statement) supports specifying a [field's](/influxdb/v1.2/concepts/glossary/#field) type and basic cast
 operations with the `::` syntax.
@@ -2877,7 +2882,7 @@ yet supported.
 
 <br>
 <br>
-# Merge Series in Queries
+# Merge Behavior
 In InfluxDB, queries merge [series](/influxdb/v1.2/concepts/glossary/#series)
 automatically.
 
@@ -2928,7 +2933,7 @@ time                   mean
 
 <br>
 <br>
-# Multiple Statements in Queries
+# Multiple Statements
 Separate multiple [`SELECT` statements](#the-basic-select-statement) in a query with a semicolon (`;`).
 
 ### Examples:
@@ -3016,3 +3021,163 @@ With InfluxDB's [HTTP API](/influxdb/v1.2/tools/api/):
 
 {{< /tab-content-container >}}
 {{< /vertical-tabs >}}
+
+<br>
+<br>
+# Subqueries
+
+A subquery is a query that is nested in the `FROM` clause of another query.
+Use a subquery to apply a query as a condition in the enclosing query.
+Subqueries offer functionality similar to nested functions and SQL
+[`HAVING` clauses](https://en.wikipedia.org/wiki/Having_(SQL\)).
+
+### Syntax
+```
+SELECT_clause FROM ( SELECT_statement ) [...]
+```
+
+### Description of Syntax
+InfluxDB performs the subquery first and the main query second.
+
+The main query surrounds the subquery and requires at least the [`SELECT` clause](#the-basic-select-statement) and the [`FROM` clause](#the-basic-select-statement).
+The main query supports all clauses listed in this document.
+
+The subquery appears in the main query's `FROM` clause, and it requires surrounding parentheses.
+The subquery supports all clauses listed in this document.
+Note that there can be multiple subqueries per main query.
+
+### Examples
+
+#### Example 1: Calculate the [`SUM()`](/influxdb/v1.2/query_language/functions/#sum) of several [`MAX()`](/influxdb/v1.2/query_language/functions/#max) values
+```
+> SELECT SUM("max") FROM (SELECT MAX("water_level") FROM "h2o_feet" GROUP BY "location")
+
+name: h2o_feet
+time                   sum
+----                   ---
+1970-01-01T00:00:00Z   17.169
+```
+
+The query returns the sum of the maximum `water_level` values across every tag value of `location`.
+
+InfluxDB first performs the subquery; it calculates the maximum value of `water_level` for each tag value of `location`:
+```
+> SELECT MAX("water_level") FROM "h2o_feet" GROUP BY "location"
+name: h2o_feet
+
+tags: location=coyote_creek
+time                   max
+----                   ---
+2015-08-29T07:24:00Z   9.964
+
+name: h2o_feet
+tags: location=santa_monica
+time                   max
+----                   ---
+2015-08-29T03:54:00Z   7.205
+```
+
+Next, InfluxDB performs the main query and calculates the sum of those maximum values: `9.964` + `7.205` = `17.169`.
+Notice that the main query specifies `max`, not `water_level`, as the field key in the `SUM()` function.
+
+#### Example 2: Calculate the [`MEAN()`](/influxdb/v1.2/query_language/functions/#mean) difference between two fields
+```
+> SELECT MEAN("difference") FROM (SELECT "cats" - "dogs" AS "difference" FROM "pet_daycare")
+
+name: pet_daycare
+time                   mean
+----                   ----
+1970-01-01T00:00:00Z   1.75
+```
+
+The query returns the average of the differences between the number of `cats` and `dogs` in the `pet_daycare` measurement.
+
+InfluxDB first performs the subquery.
+The subquery calculates the difference between the values in the `cats` field and the values in the `dogs` field,
+and it names the output column `difference`:
+```
+> SELECT "cats" - "dogs" AS "difference" FROM "pet_daycare"
+
+name: pet_daycare
+time                   difference
+----                   ----------
+2017-01-20T00:55:56Z   -1
+2017-01-21T00:55:56Z   -49
+2017-01-22T00:55:56Z   66
+2017-01-23T00:55:56Z   -9
+```
+
+Next, InfluxDB performs the main query and calculates the average of those differences.
+Notice that the main query specifies `difference` as the field key in the `MEAN()` function.
+
+#### Example 3: Calculate several [`MEAN()`](/influxdb/v1.2/query_language/functions/#mean) values and place a condition on those mean values
+```
+> SELECT "all_the_means" FROM (SELECT MEAN("water_level") AS "all_the_means" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m) ) WHERE "all_the_means" > 5
+
+name: h2o_feet
+time                   all_the_means
+----                   -------------
+2015-08-18T00:00:00Z   5.07625
+```
+
+The query returns all mean values of the `water_level` field that are greater than five.
+
+InfluxDB first performs the subquery.
+The subquery calculates `MEAN()` values of `water_level` from `2015-08-18T00:00:00Z` through `2015-08-18T00:30:00Z` and groups the results into 12-minute intervals.
+It also names the output column `all_the_means`:
+```
+> SELECT MEAN("water_level") AS "all_the_means" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
+
+name: h2o_feet
+time                   all_the_means
+----                   -------------
+2015-08-18T00:00:00Z   5.07625
+2015-08-18T00:12:00Z   4.950749999999999
+2015-08-18T00:24:00Z   4.80675
+```
+
+Next, InfluxDB performs the main query and returns only those mean values that are greater than five.
+Notice that the main query specifies `all_the_means` as the field key in the `SELECT` clause.
+
+#### Example 4: Calculate the [`SUM()`](/influxdb/v1.2/query_language/functions/#sum) of several [`DERIVATIVE()`](/influxdb/v1.2/query_language/functions/#derivative) values
+```
+> SELECT SUM("water_level_derivative") AS "sum_derivative" FROM (SELECT DERIVATIVE(MEAN("water_level")) AS "water_level_derivative" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m),"location") GROUP BY "location"
+
+name: h2o_feet
+tags: location=coyote_creek
+time                   sum_derivative
+----                   --------------
+1970-01-01T00:00:00Z   -0.4950000000000001
+
+name: h2o_feet
+tags: location=santa_monica
+time                   sum_derivative
+----                   --------------
+1970-01-01T00:00:00Z   -0.043999999999999595
+```
+
+The query returns the sum of the derivative of average `water_level` values for each tag value of `location`.
+
+InfluxDB first performs the subquery.
+The subquery calculates the derivative of average `water_level` values taken at 12-minute intervals.
+It performs that calculation for each tag value of `location` and names the output column `water_level_derivative`:
+```
+> SELECT DERIVATIVE(MEAN("water_level")) AS "water_level_derivative" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m),"location"
+
+name: h2o_feet
+tags: location=coyote_creek
+time                   water_level_derivative
+----                   ----------------------
+2015-08-18T00:12:00Z   -0.23800000000000043
+2015-08-18T00:24:00Z   -0.2569999999999997
+
+name: h2o_feet
+tags: location=santa_monica
+time                   water_level_derivative
+----                   ----------------------
+2015-08-18T00:12:00Z   -0.0129999999999999
+2015-08-18T00:24:00Z   -0.030999999999999694
+```
+
+Next, InfluxDB performs the main query and calculates the sum of the `water_level_derivative` values for each tag value of `location`.
+Notice that the main query specifies `water_level_derivative`, not `water_level` or `derivative`, as the field key in the `SUM()` function.

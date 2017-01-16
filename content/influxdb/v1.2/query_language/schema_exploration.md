@@ -184,7 +184,7 @@ See the Data Exploration page for documentation on the
 [`FROM` clause](/influxdb/v1.2/query_language/data_exploration/#the-basic-select-statement),
 [`LIMIT` clause](/influxdb/v1.2/query_language/data_exploration/#the-limit-clause),
 [`OFFSET` clause](/influxdb/v1.2/query_language/data_exploration/#the-offset-clause),
-and on [Regular Expressions in Queries](/influxdb/v1.2/query_language/data_exploration/#regular-expressions-in-queries).
+and on [Regular Expressions in Queries](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
 
 ### Examples
 
@@ -368,7 +368,7 @@ Supported operators in the `WHERE` clause:
 See the Data Exploration page for documentation on the
 [`LIMIT` clause](/influxdb/v1.2/query_language/data_exploration/#the-limit-clause),
 [`OFFSET` clause](/influxdb/v1.2/query_language/data_exploration/#the-offset-clause),
-and on [Regular Expressions in Queries](/influxdb/v1.2/query_language/data_exploration/#regular-expressions-in-queries).
+and on [Regular Expressions in Queries](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
 
 ### Examples
 
@@ -525,7 +525,7 @@ See the Data Exploration page for documentation on the
 [`FROM` clause](/influxdb/v1.2/query_language/data_exploration/#the-basic-select-statement),
 [`LIMIT` clause](/influxdb/v1.2/query_language/data_exploration/#the-limit-clause),
 [`OFFSET` clause](/influxdb/v1.2/query_language/data_exploration/#the-offset-clause),
-and on [Regular Expressions in Queries](/influxdb/v1.2/query_language/data_exploration/#regular-expressions-in-queries).
+and on [Regular Expressions in Queries](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
 
 ### Examples
 
@@ -740,7 +740,7 @@ See the Data Exploration page for documentation on the
 [`FROM` clause](/influxdb/v1.2/query_language/data_exploration/#the-basic-select-statement),
 [`LIMIT` clause](/influxdb/v1.2/query_language/data_exploration/#the-limit-clause),
 [`OFFSET` clause](/influxdb/v1.2/query_language/data_exploration/#the-offset-clause),
-and on [Regular Expressions in Queries](/influxdb/v1.2/query_language/data_exploration/#regular-expressions-in-queries).
+and on [Regular Expressions in Queries](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
 
 ### Examples
 

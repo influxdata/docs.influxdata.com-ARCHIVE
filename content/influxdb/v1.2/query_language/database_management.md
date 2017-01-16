@@ -167,7 +167,7 @@ A successful `DELETE` query returns an empty result.
 Things to note about `DELETE`:
 
 * `DELETE` supports
-[regular expressions](/influxdb/v1.2/query_language/data_exploration/#regular-expressions-in-queries)
+[regular expressions](/influxdb/v1.2/query_language/data_exploration/#regular-expressions)
 in the `FROM` clause when specifying measurement names and in the `WHERE` clause
 when specifying tag values.
 * `DELETE` does not support [fields](/influxdb/v1.2/concepts/glossary/#field) in the `WHERE` clause.

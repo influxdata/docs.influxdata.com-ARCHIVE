@@ -213,7 +213,7 @@ time                   water_level
 ```
 
 **Resources:**
-[Data Exploration](/influxdb/v1.2/query_language/data_exploration/#time-syntax-in-queries)
+[Data Exploration](/influxdb/v1.2/query_language/data_exploration/#time-syntax)
 
 ## unable to parse < >: bad timestamp
 

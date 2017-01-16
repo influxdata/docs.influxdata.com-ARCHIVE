@@ -55,7 +55,7 @@ A number of new query capabilities are now available:
 All `SHOW` commands support the `ON` clause in version 1.1.
 See the [Schema Exploration](/influxdb/v1.2/query_language/schema_exploration/)
 page for the updated syntax.
-Finally, the `SELECT` clause now support [regular expressions for specifying field keys](/influxdb/v1.2/query_language/data_exploration/#regular-expressions-in-queries).
+Finally, the `SELECT` clause now support [regular expressions for specifying field keys](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
 
 ### Deprecations
 

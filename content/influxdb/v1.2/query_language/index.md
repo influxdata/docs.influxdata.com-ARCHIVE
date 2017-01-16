@@ -19,8 +19,8 @@ Covers the query language basics for InfluxQL, including the
 [`GROUP BY` clauses](/influxdb/v1.2/query_language/data_exploration/#the-group-by-clause),
 [`INTO` clauses](/influxdb/v1.2/query_language/data_exploration/#the-into-clause), and more.
 See Data Exploration to learn about
-[time syntax](/influxdb/v1.2/query_language/data_exploration/#time-syntax-in-queries) and
-[regular expressions](/influxdb/v1.2/query_language/data_exploration/#regular-expressions-in-queries) in
+[time syntax](/influxdb/v1.2/query_language/data_exploration/#time-syntax) and
+[regular expressions](/influxdb/v1.2/query_language/data_exploration/#regular-expressions) in
 queries.
 
 #### [Schema Exploration](/influxdb/v1.2/query_language/schema_exploration/)

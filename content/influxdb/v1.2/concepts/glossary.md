@@ -253,7 +253,7 @@ The interval spanned by each shard group is the shard duration.
 Related entries: [database](/influxdb/v1.2/concepts/glossary/#database), [retention policy](/influxdb/v1.2/concepts/glossary/#retention-policy), [series](/influxdb/v1.2/concepts/glossary/#series), [shard](/influxdb/v1.2/concepts/glossary/#shard), [shard duration](/influxdb/v1.2/concepts/glossary/#shard-duration)
 
 ## subscription
-Subscriptions allow [Kapacitor](/kapacitor/latest/) to receive data from InfluxDB in a push model rather than the pull model based on querying data. 
+Subscriptions allow [Kapacitor](/kapacitor/latest/) to receive data from InfluxDB in a push model rather than the pull model based on querying data.
 When Kapacitor is configured to work with InfluxDB, the subscription will automatically push every write for the subscribed database from InfluxDB to Kapacitor.
 Subscriptions can use TCP or UDP for transmitting the writes.
 
@@ -291,7 +291,7 @@ The date and time associated with a point.
 All time in InfluxDB is UTC.
 
 For how to specify time when writing data, see [Write Syntax](/influxdb/v1.2/write_protocols/write_syntax/).
-For how to specify time when querying data, see [Data Exploration](/influxdb/v1.2/query_language/data_exploration/#time-syntax-in-queries).
+For how to specify time when querying data, see [Data Exploration](/influxdb/v1.2/query_language/data_exploration/#time-syntax).
 
 Related entries: [point](/influxdb/v1.2/concepts/glossary/#point)
 

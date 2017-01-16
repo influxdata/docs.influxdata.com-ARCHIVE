@@ -847,6 +847,9 @@ InfluxQL does not support [`HAVING` clauses](https://en.wikipedia.org/wiki/Havin
 Get the same functionality by creating a CQ to aggregate the data and querying
 the CQ results to apply the `HAVING` clause.
 
+> **Note:** Starting with version 1.2, InfluxQL supports [subqueries](/influxdb/v1.2/query_language/data_exploration/#subqueries) which also offer similar functionality to `HAVING` clauses.
+See [Data Exploration](/influxdb/v1.2/query_language/data_exploration/#subqueries) for more information.
+
 ##### Example
 <br>
 InfluxDB does not accept the following query with a `HAVING` clause.
@@ -890,6 +893,9 @@ Most do not.
 If your function does not support nesting, you can get the same functionality using a CQ to calculate
 the inner-most function.
 Then simply query the CQ results to calculate the outer-most function.
+
+> **Note:** Starting with version 1.2, InfluxQL supports [subqueries](/influxdb/v1.2/query_language/data_exploration/#subqueries) which also offer the same functionality as nested functions.
+See [Data Exploration](/influxdb/v1.2/query_language/data_exploration/#subqueries) for more information.
 
 ##### Example
 <br>
