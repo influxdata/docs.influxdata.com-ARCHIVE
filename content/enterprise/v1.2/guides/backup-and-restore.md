@@ -18,14 +18,16 @@ Currently, InfluxEnterprise supports backups and restores for all data in the
 cluster; a single database; a single database and retention policy; and a
 single [shard](/influxdb/v0.13/concepts/glossary/#shard).
 
-> **Note:** Backups are not interchangeable between OSS InfluxDB and InfluxEnterprise. 
+> **Note:** Backups are not interchangeable between OSS InfluxDB and InfluxEnterprise.
 You cannot restore an OSS backup to an InfluxEnterprise data node, nor can you restore
 an InfluxEnterprise backup to an OSS instance.
 
 ## Terminology and behavior
 
 A **backup** creates a copy of the cluster’s data and meta data at that point in time and stores the copy in the specified directory.
-The backup also includes a manifest, a JSON file describing what was collected during the backup.
+Backups are incremental by default; they backup only the shards that have changed since the last backup.
+If there are no existing backups, the system automatically performs a full backup.
+All backups also include a manifest, a JSON file describing what was collected during the backup.
 
 The filenames reflect the UTC timestamp of when the backup was created, for example:
 
@@ -48,6 +50,7 @@ Options:
 * `-bind <hostname>:8091`: the hostname and HTTP port of a running meta server (defaults to `localhost:8091`)
 * `-db <string>`: the name of the single database to back up
 * `-from <TCP-address>`: the data node TCP address to prefer when backing up
+* `-full`: peform a full backup
 * `-rp <string>`: the name of the single retention policy to back up (must specify `-db` with `-rp`)
 * `-shard <unit>`: the ID of the single shard to back up
 
@@ -55,7 +58,9 @@ Options:
 
 ##### Back up all data
 <br>
-To perform a full backup into the current directory:
+Perform a backup into the current directory with the command below.
+If there are any existing backups the current directory, the system performs an incremental backup.
+If there aren't any existing backups in the current directory, the systems performs a full backup.
 ```
 influxd-ctl backup .
 ```
