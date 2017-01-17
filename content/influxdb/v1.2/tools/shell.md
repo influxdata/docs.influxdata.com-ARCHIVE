@@ -268,6 +268,9 @@ Prompts you for your username and password.
 Alternatively, set the username and password for the CLI with the
 `INFLUX_USERNAME` and `INFLUX_PASSWORD` environment variables.
 
+`clear [ database | db | retention policy | rp ]`  
+Clears the current context for the [database](/influxdb/v1.2/concepts/glossary/#database) or [retention policy](/influxdb/v1.2/concepts/glossary/#retention-policy-rp).
+
 `connect <host:port>`  
 Connect to a different server without exiting the shell.
 By default, `influx` connects to `localhost:8086`.
@@ -300,12 +303,12 @@ Precision defaults to nanoseconds.
 Turns on pretty print for the `json` format.
 
 `settings`  
-Outputs the current settings for the shell including the `Host`, `Username`, `Database`, `Pretty` status, `Format`, and `Write Consistency`.
+Outputs the current settings for the shell including the `Host`, `Username`, `Database`, `Retention Policy`, `Pretty` status, `Format`, and `Write Consistency`.
 
-`use <db_name>`  
-Sets the current database.
-Once `influx` sets the current database, there is no need to specify that database in queries.
-`influx` automatically queries the current database and its `DEFAULT` retention policy.
+`use [ "<database_name>" | "<database_name>"."<retention policy_name>" ]`  
+Sets the current [database](/influxdb/v1.2/concepts/glossary/#database) and/or [retention policy](/influxdb/v1.2/concepts/glossary/#retention-policy-rp).
+Once `influx` sets the current database and/or retention policy, there is no need to specify that database and/or retention policy in queries.
+If you do not specify the retention policy, `influx` automatically queries the `use`d database's `DEFAULT` retention policy.
 
 #### Write data to InfluxDB with `insert`
 Enter `insert` followed by the data in [line protocol](/influxdb/v1.2/concepts/glossary/#line-protocol) to write data to InfluxDB.
