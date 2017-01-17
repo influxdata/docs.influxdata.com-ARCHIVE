@@ -128,14 +128,14 @@ sudo yum localinstall influxdb-meta-1.2.0_c1.2.0.x86_64.rpm
 
 ### II. Edit the Meta Service Configuration File
 
-In `/etc/influxdb/influxdb-meta.conf`, set:
+In `/etc/influxdb/influxdb-meta.conf`:
 
-* `hostname` to the full hostname of the meta node
-* `registration-enabled` in the `[enterprise]` section to `true`
-* `registration-server-url` in the `[enterprise]` section to the full URL of the server that will run the InfluxEnterprise web console.
+* uncomment and set `hostname` to the full hostname of the meta node
+* set `registration-enabled` in the `[enterprise]` section to `true`
+* set `registration-server-url` in the `[enterprise]` section to the full URL of the server that will run the InfluxEnterprise web console.
 You must fully specify the protocol, IP or hostname, and port.
 Entering the IP or hostname alone will lead to errors.
-* `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
+* set `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
 
 ```
 # Hostname advertised by this host for remote addresses.  This must be resolvable by all

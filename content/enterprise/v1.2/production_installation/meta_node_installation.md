@@ -106,14 +106,14 @@ sudo yum localinstall influxdb-meta-1.2.0_c1.2.0.x86_64.rpm
 
 ### II. Edit the Configuration File
 
-In `/etc/influxdb/influxdb-meta.conf`, set:
+In `/etc/influxdb/influxdb-meta.conf`:
 
-* `hostname` to the full hostname of the meta node
-* `registration-enabled` in the `[enterprise]` section to `true`
-* `registration-server-url` in the `[enterprise]` section to the full URL of the server that will run the InfluxEnterprise web console.
+* uncomment and set `hostname` to the full hostname of the meta node
+* set `registration-enabled` in the `[enterprise]` section to `true`
+* set `registration-server-url` in the `[enterprise]` section to the full URL of the server that will run the InfluxEnterprise web console.
 You must fully specify the protocol, IP or hostname, and port.
 Entering the IP or hostname alone will lead to errors.
-* `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
+* set `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
 
 
 ```
@@ -194,12 +194,16 @@ Issue the following command on any meta node:
 >
 The expected output is:
 >
+    Data Nodes
+    ==========
+    ID      TCP Address      Version
+>
     Meta Nodes
     ==========
-    TCP Address
-    enterprise-meta-01:8091
-    enterprise-meta-02:8091
-    enterprise-meta-03:8091
+    TCP Address               Version
+    enterprise-meta-01:8091   1.2.0-c1.2.0
+    enterprise-meta-02:8091   1.2.0-c1.2.0
+    enterprise-meta-03:8091   1.2.0-c1.2.0
 
 Note that your cluster must have at least three meta nodes.
 If you do not see your meta nodes in the output, please retry adding them to

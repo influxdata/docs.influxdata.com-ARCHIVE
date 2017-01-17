@@ -210,16 +210,16 @@ The expected output is:
 >
     Data Nodes
     ==========
-    ID   TCP Address
-    4    enterprise-data-01:8088
-    5    enterprise-data-02:8088    
+    ID   TCP Address               Version
+    4    enterprise-data-01:8088   1.2.0-c1.2.0
+    5    enterprise-data-02:8088   1.2.0-c1.2.0    
 >
     Meta Nodes
     ==========
-    TCP Address
-    enterprise-meta-01:8091
-    enterprise-meta-02:8091
-    enterprise-meta-03:8091
+    TCP Address               Version
+    enterprise-meta-01:8091   1.2.0-c1.2.0
+    enterprise-meta-02:8091   1.2.0-c1.2.0
+    enterprise-meta-03:8091   1.2.0-c1.2.0
 
 The output should include every data node that was added to the cluster.
 The first data node added should have `ID=N`, where `N` is equal to one plus the number of meta nodes.
