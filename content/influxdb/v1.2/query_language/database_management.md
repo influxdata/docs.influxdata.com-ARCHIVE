@@ -260,6 +260,10 @@ By default, the shard group duration is determined by the retention policy's
 | >= 2 days and <= 6 months  | 1 day  |
 | > 6 months  | 7 days  |
 
+The minimum allowable `SHARD GROUP DURATION` is `1h`.
+If the `CREATE RETENTION POLICY` query attempts to set the `SHARD GROUP DURATION` to less than `1h` and greater than `0s`, InfluxDB automatically sets the `SHARD GROUP DURATION` to `1h`.
+If the `CREATE RETENTION POLICY` query attempts to set the `SHARD GROUP DURATION` to `0s`, InfluxDB automatically sets the `SHARD GROUP DURATION` according to the default settings listed above.
+
 See
 [Shard Group Duration Management](/influxdb/v1.2/concepts/schema_and_data_layout/#shard-group-duration-management)
 for recommended configurations.
