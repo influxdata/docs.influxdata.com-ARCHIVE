@@ -16,6 +16,46 @@ menu:
 <br>
 <br>
 # Clustering
+
+## v1.2.0 [2017-01-24]
+
+### Release Notes
+
+This release builds off of the 1.2.0 release of OSS InfluxDB.
+Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/master/CHANGELOG.md) for more information about the OSS release.
+
+### Upgrading
+
+* If you previously had [`retention-autocreate`](/enterprise/v1.2/administration/configuration/#retention-autocreate-true) set to `false` on your meta nodes, you will now also have to disable it [on the data nodes](/enterprise/v1.2/administration/configuration/#retention-autocreate-true-1) as well, since these operations are now done on the data nodes.
+* The previously deprecated `influxd-ctl force-leave` command has been removed. The replacement command to remove a meta node which is never coming back online is [`influxd-ctl remove-meta -force`](/enterprise/v1.2/features/cluster-commands/).
+
+#### Features
+
+- Improve the meta store: any meta store changes are done via a compare and swap
+- Add support for [incremental backups](/enterprise/v1.2/guides/backup-and-restore/)
+- Automatically remove any deleted shard groups from the data store
+- Uncomment the section headers in the default [configuration file](/enterprise/v1.2/administration/configuration/)
+- Add InfluxQL support for [subqueries](/influxdb/v1.2/query_language/data_exploration/#subqueries)
+
+#### Bugfixes
+
+- Update dependencies with Godeps
+- Fix a data race in meta client
+- Ensure that the system removes the relevant [user permissions and roles](/enterprise/v1.2/features/users/) when a database is dropped
+- Fix a couple typos in demo [configuration file](/enterprise/v1.2/administration/configuration/)
+- Make optional the version protobuf field for the meta store
+- Remove the override of GOMAXPROCS
+- Remove an unused configuration option (`dir`) from the backend
+- Fix a panic around processing remote writes
+- Return an error if a remote write has a field conflict
+- Drop points in the hinted handoff that (1) have field conflict errors (2) have [`max-values-per-tag`](/influxdb/v1.2/administration/config/#max-values-per-tag-100000) errors
+- Remove the deprecated `influxd-ctl force-leave` command
+- Fix issue where CQs would stop running if the first meta node in the cluster stops
+- Fix logging in the meta httpd handler service
+- Fix issue where subscriptions send duplicate data for [Continuous Query](/influxdb/v1.2/query_language/continuous_queries/) results
+- Fix the output for `influxd-ctl show-shards`
+- Send the correct RPC response for `ExecuteStatementRequestMessage`
+
 ## v1.1.1 [2016-12-06]
 
 This release builds off of the 1.1.1 release of InfluxDB.
@@ -174,6 +214,11 @@ Backup and restore has been updated to fix issues and refine existing capabiliti
 <br>
 <br>
 # Web Console
+
+## v1.2.0 [2017-01-24]
+
+There are no new features or bugfixes in version 1.2.0.
+This release is for maintaining version parity with clustering.
 
 ## v1.1.1 [2016-12-06]
 
