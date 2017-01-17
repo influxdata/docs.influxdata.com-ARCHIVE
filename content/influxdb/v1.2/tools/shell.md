@@ -328,10 +328,6 @@ Using retention policy oneday
 >
 ```
 
-Note that once you specify a retention policy with `INSERT INTO`, `influx` automatically writes data to that retention policy.
-This occurs even for later `INSERT` entries that do not include an `INTO` clause.
-Restarting the CLI will revert to using the `DEFAULT` retention policy.
-
 ### Queries
 Execute all InfluxQL queries in `influx`.
 See [Data Exploration](/influxdb/v1.2/query_language/data_exploration/), [Schema Exploration](/influxdb/v1.2/query_language/schema_exploration/), [Database Management](/influxdb/v1.2/query_language/database_management/), [Authentication and Authorization](/influxdb/v1.2/query_language/authentication_and_authorization/) for InfluxQL documentation.
