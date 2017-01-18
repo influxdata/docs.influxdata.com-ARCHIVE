@@ -369,6 +369,12 @@ SectionPagesMenu = "products"
  url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/datadog"
  parent = "outputs"
 [[menu.telegraf_1_2]]
+ name = "Discard"
+ identifier = "discard"
+ weight = 51
+ url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/discard"
+ parent = "outputs"
+[[menu.telegraf_1_2]]
  name = "File"
  identifier = "file"
  weight = 60
@@ -440,7 +446,7 @@ SectionPagesMenu = "products"
  weight = 160
  url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/riemann"
  parent = "outputs"
-# Telegraf v1.2 Sub-Menu - Introduction
+# Telegraf v1.2 Sub-Menu - Introduction and Input plugins
   [[menu.telegraf_1_2]]
   name = "Download"
   identifier = "download"
@@ -596,6 +602,12 @@ SectionPagesMenu = "products"
   identifier = "influxdb"
   weight = 220
   url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/influxdb"
+  parent = "inputs"
+  [[menu.telegraf_1_2]]
+  name = "Internal"
+  identifier = "interal"
+  weight = 221
+  url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/internal"
   parent = "inputs"
   [[menu.telegraf_1_2]]
   name = "IPMI_sensor"
