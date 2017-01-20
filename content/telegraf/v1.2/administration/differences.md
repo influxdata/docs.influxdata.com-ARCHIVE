@@ -1,14 +1,14 @@
 ---
-title: Differences between Telegraf 1.1 and 1.0
+title: Differences between Telegraf 1.2 and 1.1
 
 menu:
   telegraf_1_2:
-    name: Differences between Telegraf 1.1 and 1.0
+    name: Differences between Telegraf 1.2 and 1.1
     weight: 0
     parent: administration
 ---
 
-This page aims to ease the transition from Telegraf 1.0 to Telegraf 1.1.
+This page aims to ease the transition from Telegraf 1.1 to Telegraf 1.2.
 It is not intended to be a comprehensive list of the differences between the
 versions.
 See
@@ -17,16 +17,23 @@ for detailed release notes.
 
 ### Release Notes
 
-Telegraf 1.1 supports [processor](/telegraf/v1.2/administration/configuration/#processor-configuration) and [aggregator](/telegraf/v1.2/administration/configuration/#aggregator-configuration) plugins.
+The
+[StatsD plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/statsd)
+now sets all `delete_` configuration options to `true` by default.
+This changes the default behavior for users who are not specifying those
+parameters in their [configuration file](/telegraf/v1.2/administration/configuration/).
 
-On systemd Telegraf will no longer redirect it's stdout to `/var/log/telegraf/telegraf.log`.
-On most systems, the logs will be directed to the systemd journal and can be accessed by `journalctl -u telegraf.service`.
-Consult the systemd journal documentation for configuring journald.
-There is also a [logfile config option](https://github.com/influxdata/telegraf/blob/master/etc/telegraf.conf#L70) available in version 1.1, which will allow users to easily configure `telegraf` to continue sending logs to `/var/log/telegraf/telegraf.log`.
+The StatsD plugin also no longer save its state on a service reload.
+Essentially we have reverted PR [#887](https://github.com/influxdata/telegraf/pull/887).
+The reason for this is that saving the state in a global variable is not
+thread-safe (see [#1975](https://github.com/influxdata/telegraf/issues/1975) & [#2102](https://github.com/influxdata/telegraf/issues/2102)),
+and this creates issues if users want to define multiple instances
+of the StatsD plugin.
+Saving state on reload may be considered in the future,
+but this would need to be implemented at a higher level and applied to all
+plugins, not just StatsD.
 
 ### New Plugins
 
-* [HTTP Listener service input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/http_listener)
-* [IPtables input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/iptables)
-* [Kubernetes input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/kubernetes)
-* [NATS output plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/nats)
+* [Internal Input Plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/internal)
+* [Discard Output Plugin](https://github.com/influxdata/telegraf/tree/release-1.2/plugins/outputs/discard)
