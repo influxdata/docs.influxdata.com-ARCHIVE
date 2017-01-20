@@ -15,7 +15,7 @@ InfluxQL offers a full suite of administrative commands.
     <td><b>Retention Policy Management:</br></td>
   </tr>
   <tr>
-    <td><a href="#create-a-database-with-create-database">CREATE DATABASE</a></td>
+    <td><a href="#create-database">CREATE DATABASE</a></td>
     <td><a href="#create-retention-policies-with-create-retention-policy">CREATE RETENTION POLICY</a></td>
   </tr>
   <tr>
@@ -51,33 +51,48 @@ See the documentation on [authentication and authorization](/influxdb/v1.2/query
 
 ## Data Management
 
-### Create a database with CREATE DATABASE
+### CREATE DATABASE
 
-The `CREATE DATABASE` query takes the following form:
+Creates a new database.
+
+#### Syntax
 ```sql
 CREATE DATABASE <database_name> [WITH [DURATION <duration>] [REPLICATION <n>] [SHARD DURATION <duration>] [NAME <retention-policy-name>]]
 ```
 
-> **Note:** In previous versions InfluxQL supported the `IF NOT EXISTS` clause.
-The has been removed in InfluxDB version 1.0.
-If you attempt to create a database that already exists, InfluxDB does not return an error.
+#### Description of Syntax
 
-Create the database `NOAA_water_database`:
-```bash
+`CREATE DATABASE` requires a database [name](/influxdb/v1.2/troubleshooting/frequently-asked-questions/#what-words-and-characters-should-i-avoid-when-writing-data-to-influxdb).
+
+The `WITH`, `DURATION`, `REPLICATION`, `SHARD DURATION`, and `NAME` clauses are optional and create a single [retention policy](/influxdb/v1.2/concepts/glossary/#retention-policy-rp) associated with the created database.
+If you do not specify one of the clauses after `WITH`, the relevant behavior defaults to the `autogen` retention policy settings.
+The created retention policy automatically serves as the database's default retention policy.
+For more information about those clauses, see [Retention Policy Management](/influxdb/v1.2/query_language/database_management/#retention-policy-management).
+
+A successful `CREATE DATABASE` query returns an empty result.
+If you attempt to create a database that already exists, InfluxDB does nothing and does not return an error.
+
+#### Examples
+
+##### Example 1: Create a database
+<br>
+```
 > CREATE DATABASE "NOAA_water_database"
 >
 ```
 
-Create the database `NOAA_water_database` with a new `DEFAULT` retention policy called `liquid`:
-```bash
-> CREATE DATABASE "NOAA_water_database" WITH DURATION 3d REPLICATION 3 SHARD DURATION 30m NAME "liquid"
+The query creates a database called `NOAA_water_database`.
+[By default](/influxdb/v1.2/administration/config/#retention-autocreate-true), InfluxDB also creates the `autogen` retention policy and associates it with the `NOAA_water_database`.
+
+##### Example 2: Create a database with a specific retention policy
+<br>
+```
+> CREATE DATABASE "NOAA_water_database" WITH DURATION 3d REPLICATION 1 SHARD DURATION 1h NAME "liquid"
 >
 ```
-When specifying a retention policy you can include one or more of the attributes `DURATION`, `REPLICATION`, `SHARD DURATION`, and `NAME`.
-For more on retention policies, see [Retention Policy Management](/influxdb/v1.2/query_language/database_management/#retention-policy-management)
 
-A successful `CREATE DATABASE` query returns an empty result.
-If you attempt to create a database that already exists, InfluxDB does not return an error.
+The query creates a database called `NOAA_water_database`.
+It also creates a default retention policy for `NOAA_water_database` with a `DURATION` of three days, a [replication factor](/influxdb/v1.2/concepts/glossary/#replication-factor) of one, a [shard group](/influxdb/v1.2/concepts/glossary/#shard-group) duration of one hour, and with the name `liquid`.
 
 ### Delete a database with DROP DATABASE
 
@@ -86,10 +101,6 @@ The query takes the following form:
 ```sql
 DROP DATABASE <database_name>
 ```
-
-> **Note:** In previous versions InfluxQL supported the `IF EXISTS` clause.
-The has been removed in InfluxDB version 1.0.
-If you attempt to drop a database that does not exist, InfluxDB does not return an error.
 
 Drop the database NOAA_water_database:
 ```bash
