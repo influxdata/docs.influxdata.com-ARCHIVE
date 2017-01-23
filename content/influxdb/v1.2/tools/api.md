@@ -45,7 +45,7 @@ of the header:
 ```bash
 $ curl -sl -I localhost:8086/ping
 
-HTTP/1.1 204 No Content
+HTTP/1.2 204 No Content
 Request-Id: 7d641f0b-e23b-11e5-8005-000000000000
 X-Influxdb-Version: 1.0.x
 Date: Fri, 04 Mar 2016 19:01:23 GMT
@@ -338,7 +338,7 @@ Enable pretty-print JSON by including the query string parameter `pretty=true`.
 ```
 $ curl -i -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas"'
 
-HTTP/1.1 200 OK
+HTTP/1.2 200 OK
 [...]
 {"results":[{"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[["2016-05-20T21:30:00Z",12,"1",null],["2016-05-20T21:30:20Z",11,"2",null],["2016-05-20T21:30:40Z",18,null,"1"],["2016-05-20T21:31:00Z",19,null,"3"]]}]}]}
 ```
@@ -348,7 +348,7 @@ HTTP/1.1 200 OK
 ```
 $ curl -i -G 'http://localhost:8086/query?db=mydb1' --data-urlencode 'q=SELECT * FROM "mymeas"'
 
-HTTP/1.1 200 OK
+HTTP/1.2 200 OK
 [...]
 {"results":[{"error":"database not found: mydb1"}]}
 ```
@@ -358,7 +358,7 @@ HTTP/1.1 200 OK
 ```
 $ curl -i -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT *'
 
-HTTP/1.1 400 Bad Request
+HTTP/1.2 400 Bad Request
 [...]
 {"error":"error parsing query: found EOF, expected FROM at line 1, char 9"}
 ```
@@ -502,13 +502,13 @@ Errors are returned in JSON.
 ##### Example 1: A successful write
 <br>
 ```
-HTTP/1.1 204 No Content
+HTTP/1.2 204 No Content
 ```
 
 ##### Example 2: Write a point with an incorrect timestamp
 <br>
 ```
-HTTP/1.1 400 Bad Request
+HTTP/1.2 400 Bad Request
 [...]
 {"error":"unable to parse 'mymeas,mytag=1 myfield=91 abc123': bad timestamp"}
 ```
@@ -516,7 +516,7 @@ HTTP/1.1 400 Bad Request
 ##### Example 3: Write an integer to a field that previously accepted a float
 <br>
 ```
-HTTP/1.1 400 Bad Request
+HTTP/1.2 400 Bad Request
 [...]
 {"error":"field type conflict: input field \"myfield\" on measurement \"mymeas\" is type int64, already exists as type float"}
 ```
@@ -524,7 +524,7 @@ HTTP/1.1 400 Bad Request
 ##### Example 4: Write a point to a database that doesn't exist
 <br>
 ```
-HTTP/1.1 404 Not Found
+HTTP/1.2 404 Not Found
 [...]
 {"error":"database not found: \"mydb1\""}
 ```
@@ -532,7 +532,7 @@ HTTP/1.1 404 Not Found
 ##### Example 5: Write a point to a retention policy that doesn't exist
 <br>
 ```
-HTTP/1.1 500 Internal Server Error
+HTTP/1.2 500 Internal Server Error
 [...]
 {"error":"retention policy not found: myrp"}
 ```

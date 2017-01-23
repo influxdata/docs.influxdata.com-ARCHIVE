@@ -121,7 +121,7 @@ returns:
 <br>
 
 ```bash
-HTTP/1.1 400 Bad Request
+HTTP/1.2 400 Bad Request
 [...]
 write failed: field type conflict: input field "booleanonly" on measurement "tobeornottobe" is type float64, already exists as type boolean
 ```
@@ -136,7 +136,7 @@ returns:
 <br>
 
 ```bash
-HTTP/1.1 404 Not Found
+HTTP/1.2 404 Not Found
 [...]
 database not found: "atlantis"
 ```

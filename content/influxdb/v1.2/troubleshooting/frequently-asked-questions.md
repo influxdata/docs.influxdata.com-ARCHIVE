@@ -80,23 +80,23 @@ and when authentication requests.
 There a number of ways to identify the version of InfluxDB that you're using:
 
 * Check the return when you `curl` the `/ping` endpoint.
-For example, if you're using 1.1.0 `curl -i 'http://localhost:8086/ping'` returns:  
+For example, if you're using 1.2.0 `curl -i 'http://localhost:8086/ping'` returns:  
 
-`HTTP/1.1 204 No Content`  
+`HTTP/1.2 204 No Content`  
 `Request-Id: 874101f6-e23e-11e5-8097-000000000000`  
-✨`X-Influxdb-Version: 1.1.0`✨  
+✨`X-Influxdb-Version: 1.2.0`✨  
 `Date: Fri, 04 Mar 2016 19:23:08 GMT`
 
 If authentication is enabled you will need to use `https` in the URL.
 
 * Check the text that appears when you [launch](/influxdb/v1.2/tools/shell/) the CLI:
 
-`Connected to http://localhost:8086`✨`version 1.1.0`✨  
-`InfluxDB shell 1.1.0`
+`Connected to http://localhost:8086`✨`version 1.2.0`✨  
+`InfluxDB shell 1.2.0`
 
 * Check the HTTP response in your logs:  
 
-`[http] 2016/03/04 11:25:13 ::1 - - [04/Mar/2016:11:25:13 -0800] GET /query?db=&epoch=ns&q=show+databases HTTP/1.1 200 98 -`     ✨`InfluxDBShell/1.1.0`✨`d16e7a83-e23e-11e5-80a7-000000000000 529.543µs`
+`[http] 2016/03/04 11:25:13 ::1 - - [04/Mar/2016:11:25:13 -0800] GET /query?db=&epoch=ns&q=show+databases HTTP/1.2 200 98 -`     ✨`InfluxDBShell/1.2.0`✨`d16e7a83-e23e-11e5-80a7-000000000000 529.543µs`
 
 ## What is the relationship between shard group durations and retention policies?
 

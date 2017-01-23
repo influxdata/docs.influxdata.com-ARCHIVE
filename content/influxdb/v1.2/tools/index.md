@@ -41,7 +41,7 @@ The list of client libraries for interacting with InfluxDB.
 ## [Web Admin Interface](/influxdb/v1.2/tools/web_admin/)
 
 InfluxDB's built-in web administration GUI.
-The built-in web administration GUI is deprecated in InfluxDB 1.1 and is disabled by default. We recommend using the [HTTP API](/influxdb/v1.2/tools/api/) or the [Command Line Interface](/influxdb/v1.2/tools/shell/) to interact with InfluxDB.
+The built-in web administration GUI is deprecated in InfluxDB 1.2 and is disabled by default. We recommend using the [HTTP API](/influxdb/v1.2/tools/api/) or the [Command Line Interface](/influxdb/v1.2/tools/shell/) to interact with InfluxDB.
 
 ## [Influx Inspect](/influxdb/v1.2/tools/influx_inspect/)
 
@@ -52,7 +52,7 @@ Influx Inspect is a tool designed to view detailed information about on disk sha
 Grafana is a convenient dashboard tool for visualizing time series data.
 It was originally built for Graphite, modeled after Kibana, and since been updated to support InfluxDB.
 
-<dt> Because of the [changes](/influxdb/v0.11/concepts/010_vs_011/#breaking-api-changes) to the `SHOW SERIES` and `SHOW TAG VALUES` formats in InfluxDB 0.11, InfluxDB 1.1 will not work with the Query Editor in Grafana 2.6.
+<dt> Because of the [changes](/influxdb/v0.11/concepts/010_vs_011/#breaking-api-changes) to the `SHOW SERIES` and `SHOW TAG VALUES` formats in InfluxDB 0.11, InfluxDB 1.2 will not work with the Query Editor in Grafana 2.6.
 This issue does not affect existing queries and dashboards or users working with Grafana 3.0. </dt>
 
 ## Service Plugins
