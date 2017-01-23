@@ -1533,6 +1533,11 @@ node.telegram()
 
 ### Topic
 
+Topic specifies the name of an alert topic to which, 
+alerts will be published. 
+Alert handlers can be configured per topic, see the API documentation. 
+
+
 ```javascript
 node.topic(value string)
 ```
