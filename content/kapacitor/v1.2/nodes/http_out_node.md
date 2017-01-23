@@ -14,8 +14,8 @@ An [HTTPOutNode](/kapacitor/v1.2/nodes/http_out_node/) caches the most recent da
 
 The cached data is available at the given endpoint. 
 The endpoint is the relative path from the API endpoint of the running task. 
-For example if the task endpoint is at `/kapacitor/v1/tasks/<task_id>` and endpoint is 
-`top10`, then the data can be requested from `/kapacitor/v1/tasks/<task_id>/top10`. 
+For example if the task endpoint is at `/kapacitor/v1/tasks/&lt;task_id&gt;` and endpoint is 
+`top10`, then the data can be requested from `/kapacitor/v1/tasks/&lt;task_id&gt;/top10`. 
 
 Example: 
 
@@ -397,8 +397,8 @@ Returns: [InfluxQLNode](/kapacitor/v1.2/nodes/influx_q_l_node/)
 Create an HTTP output node that caches the most recent data it has received. 
 The cached data are available at the given endpoint. 
 The endpoint is the relative path from the API endpoint of the running task. 
-For example, if the task endpoint is at `/kapacitor/v1/tasks/<task_id>` and endpoint is 
-`top10`, then the data can be requested from `/kapacitor/v1/tasks/<task_id>/top10`. 
+For example, if the task endpoint is at `/kapacitor/v1/tasks/&lt;task_id&gt;` and endpoint is 
+`top10`, then the data can be requested from `/kapacitor/v1/tasks/&lt;task_id&gt;/top10`. 
 
 
 ```javascript

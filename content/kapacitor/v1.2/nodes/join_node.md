@@ -159,7 +159,7 @@ Options are:
 When using a numerical or null fill, the fields names are determined by copying 
 the field names from another point. 
 This doesn&#39;t work well when different sources have different field names. 
-Use the [DefaultNode](/kapacitor/v1.2/nodes/default_node/) and [DeleteNode](/kapacitor/v1.1/nodes/delete_node/) to finalize the fill operation if necessary. 
+Use the [DefaultNode](/kapacitor/v1.2/nodes/default_node/) and [DeleteNode](/kapacitor/v1.2/nodes/delete_node/) to finalize the fill operation if necessary. 
 
 Example: 
 

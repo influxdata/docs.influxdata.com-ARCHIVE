@@ -40,6 +40,7 @@ Index
 ### Properties
 
 -	[Align](/kapacitor/v1.2/nodes/query_node/#align)
+-	[AlignGroup](/kapacitor/v1.2/nodes/query_node/#aligngroup)
 -	[Cluster](/kapacitor/v1.2/nodes/query_node/#cluster)
 -	[Cron](/kapacitor/v1.2/nodes/query_node/#cron)
 -	[Every](/kapacitor/v1.2/nodes/query_node/#every)
@@ -108,6 +109,16 @@ Does not apply if using the [QueryNode.Cron](/kapacitor/v1.2/nodes/query_node/#c
 
 ```javascript
 node.align()
+```
+
+
+### AlignGroup
+
+Align the group by time intervals with the start time of the query 
+
+
+```javascript
+node.alignGroup()
 ```
 
 
@@ -202,8 +213,32 @@ Example:
             .offset(5s)
 ```
 
-It is recommended to use [QueryNode.Align](/kapacitor/v1.2/nodes/query_node/#align) and [QueryNode.Offset](/kapacitor/v1.1/nodes/query_node/#offset) in conjunction with 
+It is recommended to use [QueryNode.Align](/kapacitor/v1.2/nodes/query_node/#align) and [QueryNode.Offset](/kapacitor/v1.2/nodes/query_node/#offset) in conjunction with 
 group by time dimensions so that the time bounds match up with the group by intervals. 
+To automatically align the group by intervals to the start of the query time, 
+use [QueryNode.AlignGroup.](/kapacitor/v1.2/nodes/query_node/#aligngroup) This is useful in more complex situations, such as when 
+the groupBy time period is longer than the query frequency. 
+
+Example: 
+
+
+```javascript
+    batch
+        |query(...)
+            .period(5m)
+            .every(30s)
+            .groupBy(time(1m), 'tag1', 'tag2')
+            .align()
+            .alignGroup()
+```
+
+For the above example, without [QueryNode.AlignGroup,](/kapacitor/v1.2/nodes/query_node/#aligngroup) every other query issued by Kapacitor 
+(at :30 past the minute) will align to :00 seconds instead of the desired :30 seconds, 
+which would create 6 group by intervals instead of 5, the first and last of which 
+would only have 30 seconds of data instead of a full minute. 
+If the group by time offset (i.e. time(t, offset)) is used in conjunction with 
+[QueryNode.AlignGroup,](/kapacitor/v1.2/nodes/query_node/#aligngroup) the alignment will occur first, and will be offset 
+the specified amount after. 
 
 NOTE: Since [QueryNode.Offset](/kapacitor/v1.2/nodes/query_node/#offset) is inherently a negative property the second &#34;offset&#34; argument to the &#34;time&#34; function is negative to match. 
 

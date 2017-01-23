@@ -32,7 +32,7 @@ Example:
 ```
 
 Keep only samples that land on the 10s boundary. 
-See [FromNode.Truncate,](/kapacitor/v1.2/nodes/from_node/#truncate) [QueryNode.GroupBy](/kapacitor/v1.1/nodes/query_node/#groupby) time or [WindowNode.Align](/kapacitor/v1.1/nodes/window_node/#align) 
+See [FromNode.Truncate,](/kapacitor/v1.2/nodes/from_node/#truncate) [QueryNode.GroupBy](/kapacitor/v1.2/nodes/query_node/#groupby) time or [WindowNode.Align](/kapacitor/v1.2/nodes/window_node/#align) 
 for ensuring data is aligned with a boundary. 
 
 

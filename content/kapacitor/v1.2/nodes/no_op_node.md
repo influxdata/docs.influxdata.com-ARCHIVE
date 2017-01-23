@@ -17,7 +17,7 @@ A node that does not perform any operation.
 If a node does not have any children, then its emitted count remains zero. 
 Using a [NoOpNode](/kapacitor/v1.2/nodes/no_op_node/) is a work around so that statistics are accurately reported 
 for nodes with no real children. 
-A [NoOpNode](/kapacitor/v1.2/nodes/no_op_node/) is automatically appended to any node that is a source for a [StatsNode](/kapacitor/v1.1/nodes/stats_node/) 
+A [NoOpNode](/kapacitor/v1.2/nodes/no_op_node/) is automatically appended to any node that is a source for a [StatsNode](/kapacitor/v1.2/nodes/stats_node/) 
 and does not have any children. 
 
 

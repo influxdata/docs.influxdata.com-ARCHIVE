@@ -10,7 +10,7 @@ menu:
     parent: nodes
 ---
 
-A [FromNode](/kapacitor/v1.2/nodes/from_node/) selects a subset of the data flowing through a [StreamNode.](/kapacitor/v1.1/nodes/stream_node/) 
+A [FromNode](/kapacitor/v1.2/nodes/from_node/) selects a subset of the data flowing through a [StreamNode.](/kapacitor/v1.2/nodes/stream_node/) 
 The stream node allows you to select which portion of the stream you want to process. 
 
 Example: 

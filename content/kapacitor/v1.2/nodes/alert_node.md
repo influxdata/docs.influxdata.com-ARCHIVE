@@ -13,7 +13,7 @@ menu:
 An [AlertNode](/kapacitor/v1.2/nodes/alert_node/) can trigger an event of varying severity levels, 
 and pass the event to alert handlers. The criteria for triggering 
 an alert is specified via a [lambda expression](/kapacitor/latest/tick/expr/). 
-See [AlertNode.Info,](/kapacitor/v1.2/nodes/alert_node/#info) [AlertNode.Warn,](/kapacitor/v1.1/nodes/alert_node/#warn) and [AlertNode.Crit](/kapacitor/v1.1/nodes/alert_node/#crit) below. 
+See [AlertNode.Info,](/kapacitor/v1.2/nodes/alert_node/#info) [AlertNode.Warn,](/kapacitor/v1.2/nodes/alert_node/#warn) and [AlertNode.Crit](/kapacitor/v1.2/nodes/alert_node/#crit) below. 
 
 Different event handlers can be configured for each [AlertNode.](/kapacitor/v1.2/nodes/alert_node/) 
 Some handlers like Email, HipChat, Sensu, Slack, OpsGenie, VictorOps, PagerDuty, Telegram and Talk have a configuration 
@@ -30,6 +30,7 @@ Available event handlers:
 * Alerta -- Post alert message to Alerta. 
 * Sensu -- Post alert message to Sensu client. 
 * Slack -- Post alert message to Slack channel. 
+* SNMPTraps -- Trigger SNMP traps. 
 * OpsGenie -- Send alert to OpsGenie. 
 * VictorOps -- Send alert to VictorOps. 
 * PagerDuty -- Send alert to PagerDuty. 
@@ -147,10 +148,12 @@ Index
 -	[Post](/kapacitor/v1.2/nodes/alert_node/#post)
 -	[Sensu](/kapacitor/v1.2/nodes/alert_node/#sensu)
 -	[Slack](/kapacitor/v1.2/nodes/alert_node/#slack)
+-	[SnmpTrap](/kapacitor/v1.2/nodes/alert_node/#snmptrap)
 -	[StateChangesOnly](/kapacitor/v1.2/nodes/alert_node/#statechangesonly)
 -	[Talk](/kapacitor/v1.2/nodes/alert_node/#talk)
 -	[Tcp](/kapacitor/v1.2/nodes/alert_node/#tcp)
 -	[Telegram](/kapacitor/v1.2/nodes/alert_node/#telegram)
+-	[Topic](/kapacitor/v1.2/nodes/alert_node/#topic)
 -	[VictorOps](/kapacitor/v1.2/nodes/alert_node/#victorops)
 -	[Warn](/kapacitor/v1.2/nodes/alert_node/#warn)
 -	[WarnReset](/kapacitor/v1.2/nodes/alert_node/#warnreset)
@@ -464,7 +467,7 @@ Example:
     |alert()
        .id('{{ .Name }}')
        // Email subject
-       .meassage('{{ .ID }}:{{ .Level }}')
+       .message('{{ .ID }}:{{ .Level }}')
        //Email body as HTML
        .details('''
 <h1>{{ .ID }}</h1>
@@ -522,7 +525,7 @@ Example:
     |alert()
        .id('{{ .Name }}')
        // Email subject
-       .meassage('{{ .ID }}:{{ .Level }}')
+       .message('{{ .ID }}:{{ .Level }}')
        //Email body as HTML
        .details('''
 <h1>{{ .ID }}</h1>
@@ -982,10 +985,9 @@ From https://developer.pagerduty.com/documentation/integration/events
 1. In your account, under the Services tab, click &#34;Add New Service&#34;. 
 2. Enter a name for the service and select an escalation policy. Then, select &#34;Generic API&#34; for the Service Type. 
 3. Click the &#34;Add Service&#34; button. 
-4. Once the service is created click the 'Integrations' tab and +New Integration.
-5. Give the integration a name and select 'Generic API' for the integration type.
+4. Once the service is created, you&#39;ll be taken to the service page. On this page, you&#39;ll see the &#34;Service key&#34;, which is needed to access the API 
 
-Place the &#39;integration key&#39; into the &#39;pagerduty&#39; section of the Kapacitor configuration as the option &#39;service-key&#39;. 
+Place the &#39;service key&#39; into the &#39;pagerduty&#39; section of the Kapacitor configuration as the option &#39;service-key&#39;. 
 
 Example: 
 
@@ -1212,6 +1214,76 @@ If empty uses the username from the configuration.
 ```javascript
 node.slack()
       .username(value string)
+```
+
+
+
+### SnmpTrap
+
+Send the alert using SNMP traps. 
+To allow Kapacitor to post SNMP traps, 
+
+Example: 
+
+
+```javascript
+    [snmptrap]
+      enabled = true
+      addr = "127.0.0.1:9162"
+      community = "public"
+```
+
+Example: 
+
+
+```javascript
+    stream
+         |alert()
+             .snmpTrap('1.1.1.')
+                 .data('1.3.6.1.2.1.1.7', 'i', '{{ index .Field "value" }}')
+```
+
+Send alerts to `target-ip:target-port` on OID &#39;1.3.6.1.2.1.1.7&#39; 
+
+
+
+```javascript
+node.snmpTrap(trapOid string)
+```
+
+#### SnmpTrap Data
+
+Define Data for SNMP Trap alert. 
+Multiple calls append to the existing list of data. 
+
+Available types: 
+
+| Abbreviation | Datatype | 
+| ------------ | -------- | 
+| c | Counter | 
+| i | Integer | 
+| n | Null | 
+| s | String | 
+| t | Time ticks | 
+
+Example: 
+
+
+```javascript
+    |alert()
+       .message('{{ .ID }}:{{ .Level }}')
+       .snmpTrap('1.3.6.1.4.1.1')
+          .data('1.3.6.1.4.1.1.5', 's', '{{ .Level }}' )
+          .data('1.3.6.1.4.1.1.6', 'i', '50' )
+          .data('1.3.6.1.4.1.1.7', 'c', '{{ index .Fields "num_requests" }}' )
+          .data('1.3.6.1.4.1.1.8', 's', '{{ .Message }}' )
+```
+
+
+
+```javascript
+node.snmpTrap(trapOid string)
+      .data(oid string, typ string, value string)
 ```
 
 
@@ -1457,6 +1529,13 @@ node.telegram()
       .parseMode(value string)
 ```
 
+
+
+### Topic
+
+```javascript
+node.topic(value string)
+```
 
 
 ### VictorOps

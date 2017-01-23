@@ -45,7 +45,10 @@ Index
 
 -	[Align](/kapacitor/v1.2/nodes/window_node/#align)
 -	[Every](/kapacitor/v1.2/nodes/window_node/#every)
+-	[EveryCount](/kapacitor/v1.2/nodes/window_node/#everycount)
+-	[FillPeriod](/kapacitor/v1.2/nodes/window_node/#fillperiod)
 -	[Period](/kapacitor/v1.2/nodes/window_node/#period)
+-	[PeriodCount](/kapacitor/v1.2/nodes/window_node/#periodcount)
 
 ### Chaining Methods
 
@@ -117,10 +120,33 @@ node.align()
 ### Every
 
 How often the current window is emitted into the pipeline. 
+If equal to zero, then every new point will emit the current window. 
 
 
 ```javascript
 node.every(value time.Duration)
+```
+
+
+### EveryCount
+
+EveryCount determines how often the window is emitted based on the count of points. 
+A value of 1 means that every new point will emit the window. 
+
+
+```javascript
+node.everyCount(value int64)
+```
+
+
+### FillPeriod
+
+FillPeriod instructs the [WindowNode](/kapacitor/v1.2/nodes/window_node/) to wait till the period has elapsed before emitting the first batch. 
+This only applies if the period is greater than the every value. 
+
+
+```javascript
+node.fillPeriod()
 ```
 
 
@@ -131,6 +157,16 @@ The period, or length in time, of the window.
 
 ```javascript
 node.period(value time.Duration)
+```
+
+
+### PeriodCount
+
+PeriodCount is the number of points per window. 
+
+
+```javascript
+node.periodCount(value int64)
 ```
 
 
