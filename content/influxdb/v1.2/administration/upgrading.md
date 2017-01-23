@@ -12,30 +12,32 @@ This page outlines process for upgrading from:
 
 <table style="width:100%">
   <tr>
-    <td><a href="#upgrade-from-0-12-0-13-or-1-0-to-1-1">Version 0.12, 0.13, or 1.0 to 1.1</a></td>
-    <td><a href="#upgrade-from-0-10-or-0-11-to-1-1">Version 0.10 or 0.11 to 1.1</a></td>
+    <td><a href="#upgrade-from-0-12-1-1-to-1-2">Version 0.12-1.1 to 1.2</a></td>
+    <td><a href="#upgrade-from-0-10-or-0-11-to-1-2">Version 0.10 or 0.11 to 1.2</a></td>
   </tr>
 </table>
 
-## Upgrade from 0.12, 0.13, or 1.0 to 1.1
+## Upgrade from 0.12-1.1 to 1.2
 
 1. [Download](https://influxdata.com/downloads/#influxdb) InfluxDB version
-1.1
+1.2
 
 2. Update the configuration file
 
-    Migrate any customizations in the 1.0 configuration file to the [1.1 configuration file](/influxdb/v1.2/administration/config/).
+    Migrate any customizations in the 1.1 configuration file to the [1.2 configuration file](/influxdb/v1.2/administration/config/).
 
-3. Check out the new features outlined in
-[Differences between InfluxDB 1.1 and 1.0](/influxdb/v1.2/administration/differences/)
+3. Restart the process
 
-## Upgrade from 0.10 or 0.11 to 1.1
+4. Check out the new features outlined in
+[Differences between InfluxDB 1.2 and 1.1](/influxdb/v1.2/administration/differences/)
+
+## Upgrade from 0.10 or 0.11 to 1.2
 
 > **Note:** 0.10 users will need to
 [convert](/influxdb/v0.10/administration/upgrading/#convert-b1-and-bz1-shards-to-tsm1)
 any remaining `b1` and `bz1` shards to `TSM` format before following the
 instructions below.
-InfluxDB 1.1 cannot read non-`TSM` shards.
+InfluxDB 1.2 cannot read non-`TSM` shards.
 Check for non-`TSM` shards in your data directory:
 >
 * Non-`TSM` shards are files of the form: `data/<database>/<retention_policy>/<shard_id>``
@@ -49,13 +51,13 @@ protobuf file.
 
 The following steps outline how to transfer metastore information to the new
 format.
-They also outline when to upgrade the binary to 1.1 and when to generate a
+They also outline when to upgrade the binary to 1.2 and when to generate a
 new configuration file.
 
 To start out, you must be working with version 0.10 or 0.11 (don't upgrade the
 `influxd` binary yet!).
-If you've already upgraded the binary to 1.1, [reinstall 0.11.1](/influxdb/v0.12/administration/upgrading/#urls-for-influxdb-0-11);
-InfluxDB 1.1 will yield an error
+If you've already upgraded the binary to 1.2, [reinstall 0.11.1](/influxdb/v0.12/administration/upgrading/#urls-for-influxdb-0-11);
+InfluxDB 1.2 will yield an error
 (`run: create server: detected /var/lib/influxdb/meta/raft.db. [...]`) if you
 attempt to start the process without completing the steps below.
 The examples below assume you are working with a version of linux.
@@ -100,13 +102,13 @@ sudo service influxdb stop
 ```
 
 **3.** [Upgrade](https://influxdata.com/downloads/#influxdb) the `influxd`
-binary to 1.1. but do not start the service.
+binary to 1.2. but do not start the service.
 
-**4.** Upgrade your metastore to the 1.1 store by performing a `restore` with
+**4.** Upgrade your metastore to the 1.2 store by performing a `restore` with
 the backup you created in step 1.
 
 ```
-influxd restore -metadir=<path_to_1.1_meta_directory> <path_to_metastore_backup>
+influxd restore -metadir=<path_to_1.2_meta_directory> <path_to_metastore_backup>
 ```
 
 Example:
@@ -119,10 +121,10 @@ Using metastore snapshot: /tmp/backup/meta.00
 
 **5.** Update the configuration file.
 
-Compare your old configuration file against the [1.1 configuration file](/influxdb/v1.2/administration/config/)
+Compare your old configuration file against the [1.2 configuration file](/influxdb/v1.2/administration/config/)
 and manually update any defaults with your localized settings.
 
-**6.** Start the 1.1 service:
+**6.** Start the 1.2 service:
 
 ```
 sudo service influxdb start
@@ -130,7 +132,7 @@ sudo service influxdb start
 
 **7.** Confirm that your metastore data are present.
 
-The 1.1 output from the queries `SHOW DATABASES`,`SHOW USERS` and
+The 1.2 output from the queries `SHOW DATABASES`,`SHOW USERS` and
 `SHOW RETENTION POLICIES ON <database_name>` should match the 0.10 or 0.11
 output.
 
@@ -139,4 +141,4 @@ InfluxDB 0.10 or 0.11, restore the copy you made of the entire 0.10 or 0.11 `met
 the `meta` directory, and try working through these steps again.
 
 **8.** Check out the new features outlined in
-[Differences between InfluxDB 1.1 and 1.0](/influxdb/v1.2/administration/differences/).
+[Differences between InfluxDB 1.2 and 1.1](/influxdb/v1.2/administration/differences/).

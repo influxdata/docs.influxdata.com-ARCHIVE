@@ -12,9 +12,12 @@ menu:
     parent: administration
 ---
 
-If you're using version 1.0, please see [Differences Between InfluxDB 1.1 and 1.0](/influxdb/v1.2/administration/differences/).
+If you're using version 1.1, please see [Differences Between InfluxDB 1.2 and 1.1](/influxdb/v1.2/administration/differences/).
 
-Users looking to upgrade to InfluxDB 1.1 from versions prior to 1.0 should view the following pages in our documentation.
+Users looking to upgrade to InfluxDB 1.2 from versions prior to 1.1 should view the following pages in our documentation.
+
+##### 1.0 users:
+[Differences Between InfluxDB 1.1 and 1.0](/influxdb/v1.1/administration/differences/)
 
 ##### 0.13 users:
 [Differences Between InfluxDB 1.0 and 0.13](/influxdb/v1.0/administration/013_vs_1/)
