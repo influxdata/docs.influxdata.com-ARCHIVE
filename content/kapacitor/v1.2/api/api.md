@@ -2,7 +2,7 @@
 title: HTTP API Reference
 
 menu:
-  kapacitor_1_1:
+  kapacitor_1_2:
     weight: 10
     parent: api
 ---

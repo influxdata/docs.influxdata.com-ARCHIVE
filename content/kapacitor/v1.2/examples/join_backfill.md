@@ -2,7 +2,7 @@
 title: Calculate Rates across joined series + Backfill
 
 menu:
-  kapacitor_1_1:
+  kapacitor_1_2:
     name: Calculate Rates Across Series
     identifier: join_backfill
     weight: 0

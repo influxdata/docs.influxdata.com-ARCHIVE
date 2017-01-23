@@ -1,9 +1,9 @@
 ---
 title: How to contribute a new output to Kapacitor
 aliases:
-    - kapacitor/v1.1/contributing/custom_output/
+    - kapacitor/v1.2/contributing/custom_output/
 menu:
-  kapacitor_1_1:
+  kapacitor_1_2:
     name: Writing your own Output node
     identifier: custom_output
     weight: 20

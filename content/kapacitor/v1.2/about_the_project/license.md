@@ -2,7 +2,7 @@
 title: License
 
 menu:
-  kapacitor_1_1:
+  kapacitor_1_2:
     name: License
     weight: 40
     parent: about_the_project

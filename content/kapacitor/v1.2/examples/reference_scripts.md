@@ -2,7 +2,7 @@
 title: Reference TICKscripts
 
 menu:
-  kapacitor_1_1:
+  kapacitor_1_2:
     name: Reference TICKscripts
     identifier: reference_scripts
     weight: 20
