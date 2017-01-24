@@ -6,7 +6,8 @@ menu:
     parent: administration
 ---
 
-Exposing InfluxDB to the open internet also exposes your data.
+Some customers may choose to install InfluxDB with public internet access, however 
+doing so can inadvertently expose your data and invite unwelcome attacks on your database. 
 Check out the sections below for how protect the data in your InfluxDB instance.
 
 ## Enable Authentication
@@ -19,8 +20,8 @@ Resources:
 
 ## Manage Users and their Permissions
 
-Prevent unintentional mishaps by creating individual users and assigning them
-the relevant read and/or write permissions.
+Restrict access by creating individual users and assigning them relevant 
+read and/or write permissions.
 
 Resources:
 [User Types and Privileges](/influxdb/v1.2/query_language/authentication_and_authorization/#user-types-and-privileges),
@@ -28,8 +29,8 @@ Resources:
 
 ## Set up HTTPS
 
-HTTPS secures the communication between clients and the InfluxDB server, and, in
-some cases, HTTPS verifies the authenticity of the InfluxDB server to clients.
+Using HTTPS secures the communication between clients and the InfluxDB server, and, in
+some cases, HTTPS verifies the authenticity of the InfluxDB server to clients (bi-directional authentication).
 
 Resources:
 [HTTPS Setup](/influxdb/v1.2/administration/https_setup/)
