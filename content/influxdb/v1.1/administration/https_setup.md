@@ -23,16 +23,14 @@ and a Transport Layer Security (TLS) certificate (also known as a
 Secured Sockets Layer (SSL) certificate).
 InfluxDB supports three types of TLS/SSL certificates:
 
-* **Single domain certificates signed by a Certificate Authority**
+* **Single domain certificates signed by a [Certificate Authority](https://en.wikipedia.org/wiki/Certificate_authority)**
 
-    Single domain certificates signed by a [Certificate Authority](https://en.wikipedia.org/wiki/Certificate_authority) (CA) are available from CAs.
-    The certificates provide cryptographic security to HTTPS requests and allow clients to verify the identity of the InfluxDB server.
+    These certificates provide cryptographic security to HTTPS requests and allow clients to verify the identity of the InfluxDB server.
     With this certificate option, every InfluxDB instance requires a unique single domain certificate.
 
 * **Wildcard certificates signed by a Certificate Authority**
 
-    Wildcard certificates signed by a CA are available from CAs.
-    The certificates provide cryptographic security to HTTPS requests and allow clients to verify the identity of the InfluxDB server.
+    These certificates provide cryptographic security to HTTPS requests and allow clients to verify the identity of the InfluxDB server.
     Wildcard certificates can be used across multiple InfluxDB instances on different servers.
 
 * **Self-signed certificates**
@@ -40,16 +38,17 @@ InfluxDB supports three types of TLS/SSL certificates:
     Self-signed certificates are not signed by a CA and you can [generate](#step-1-generate-a-self-signed-certificate) them on your own machine.
     Unlike CA-signed certificates, self-signed certificates only provide cryptographic security to HTTPS requests.
     They do not allow clients to verify the identity of the InfluxDB server.
-    While not as secure as CA-signed certificates, we recommend using a self-signed certificate if you are unable to obtain a CA-signed certificate.
+    We recommend using a self-signed certificate if you are unable to obtain a CA-signed certificate.
     With this certificate option, every InfluxDB instance requires a unique self-signed certificate.
 
-Regardless of your certificate's type, InfluxDB supports certificates separated
-into a private key file (`.key`) and a signed certificate file (`.crt`) file, as well as certificates
+Regardless of your certificate's type, InfluxDB supports certificates composed of
+a private key file (`.key`) and a signed certificate file (`.crt`) file pair, as well as certificates
 that combine the private key file and the signed certificate file into a single bundled file (`.pem`).
 
 The following two sections outline how to set up HTTPS with InfluxDB [using a CA-signed
-certificate](#setup-https-with-a-ca-signed-certificate) and [using a self-signed certificate](#setup-https-with-a-self-signed-certificate).
-Please note that this guide assumes you are using InfluxDB on Ubuntu 16.04.
+certificate](#setup-https-with-a-ca-signed-certificate) and [using a self-signed certificate](#setup-https-with-a-self-signed-certificate)
+on Ubuntu 16.04.
+Specific steps may be different for other operating systems.
 
 ## Setup HTTPS with a CA-Signed Certificate
 
@@ -76,8 +75,6 @@ Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc
 * `https-enabled` to `true`
 * `http-certificate` to `/etc/ssl/<signed-certificate-file>.crt` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
 * `http-private-key` to `/etc/ssl/<private-key-file>.key` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
-
-Be sure to uncomment the `[http]` section header in addition to uncommenting those three settings.
 
 ```
 [http]
@@ -144,8 +141,6 @@ Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc
 * `https-enabled` to `true`
 * `http-certificate` to `/etc/ssl/influxdb-selfsigned.crt`
 * `http-private-key` to `/etc/ssl/influxdb-selfsigned.key`
-
-Be sure to uncomment the `[http]` section header in addition to uncommenting those three settings.
 
 ```
 [http]

@@ -36,12 +36,14 @@ Resources:
 
 ## Secure your Host
 
-Keep InfluxDB safe by securing its host.
-
 ### Ports
 If you're only running InfluxDB, close all ports on the host except for port `8086`.
 You can also use a proxy to port `8086`.
 
+InfluxDB uses port `8088` for remote [backups and restores](/influxdb/v1.1/administration/backup_and_restore/).
+We highly recommend closing that port and, if performing a remote backup,
+giving specific permission only to the remote machine.
+
 ### AWS Recommendations
 
-If you're hosting InfluxDB on AWS, be sure to encrypt the disk/volume.
+We recommend implementing on-disk encryption; InfluxDB does not offer built-in support to encrypt the data.
