@@ -61,7 +61,8 @@ data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.2/to
 ## Step 1: Modify the /etc/hosts file
 
 Add your three servers' hostnames and IP addresses to **each** server's `/etc/hosts`
-file (the hostnames are representative):
+file (the hostnames below are representative).
+Currently, hostnames **must** be all lowercase.
 
 ```
 <Server_1_IP> quickstart-cluster-01
