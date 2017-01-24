@@ -217,8 +217,23 @@ Backup and restore has been updated to fix issues and refine existing capabiliti
 
 ## v1.2.0 [2017-01-24]
 
-There are no new features or bugfixes in version 1.2.0.
-This release is for maintaining version parity with clustering.
+As of version 1.2, the `Rebalance` button on the Web Consoles `Tasks` page
+is deprecated and no longer available.
+We based this decision on customer and support feedback regarding the feature.
+For the time being, you will need to rebalance clusters manually.
+The [Cluster Rebalance](/enterprise/v1.2/guides/rebalance/) guide offers
+detailed instructions for performing a manual rebalance of your InfluxEnterprise cluster.
+Please contact support with any questions or concerns you may have about this
+development.
+
+### Features
+
+* Remove the `Tasks` page from the Web Console
+
+### Bug Fixes
+
+* Fix the [`autologout` configuration setting](/enterprise/v1.2/administration/configuration/#autologout-false)
+* Fix the series and measurement counts on the `Database Manager` page
 
 ## v1.1.1 [2016-12-06]
 

@@ -17,23 +17,14 @@ The Web Console provides a user interface for interacting with your InfluxEnterp
 
 ## Cluster rebalancing
 
-The Web Console version 0.7.0+ allows users to easily rebalance data across all
-data nodes in the InfluxEnterprise Cluster.
-The `Rebalance` button is available on the `Tasks` page.
-
-Performing a rebalance is useful if you've recently adjusted a retention policy's
-[replication factor](/enterprise/v1.2/concepts/glossary/#replication-factor) or if you've added a data node to a cluster.
-Rebalancing a cluster:
-
-* Allocates existing
-[shards](https://docs.influxdata.com/influxdb/v1.2/concepts/glossary/#shard)
-such that each data node has roughly the same number of shards.
-* Ensures that all existing data adhere to the
-relevant replication factor.
-
-Note that performing a rebalance can result in temporarily inconsistent data
-across data nodes.
-That inconsistency is not permanent and the cluster will resolve it over time.
+As of version 1.2, the `Rebalance` button on the Web Consoles `Tasks` page
+is deprecated and no longer available.
+We based this decision on customer and support feedback regarding the feature.
+For the time being, you will need to rebalance clusters manually.
+The [Cluster Rebalance](/enterprise/v1.2/guides/rebalance/) guide offers
+detailed instructions for performing a manual rebalance of your InfluxEnterprise cluster.
+Please contact support with any questions or concerns you may have about this
+development.
 
 ## Features Under Development
 
