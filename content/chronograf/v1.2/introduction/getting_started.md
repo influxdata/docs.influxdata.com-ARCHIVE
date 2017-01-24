@@ -1,12 +1,13 @@
 ---
-title: Chronograf Version 1.1 Documentation
+title: Getting Started with Chronograf
 
 menu:
-  chronograf:
-    name: v1.1
-    identifier: chronograf_1_1
-    weight: 1
+  chronograf_1_2:
+    name: Getting Started
+    weight: 20
+    parent: Introduction
 ---
+
 
 # A New Chronograf
 
@@ -17,7 +18,7 @@ Please read the [blog post from Paul Dix](https://www.influxdata.com/announcing-
 Note that the new [open source version of Chronograf](https://github.com/influxdata/chronograf) is not a continuation of the previous closed source product.
 They address similar needs, so we have kept the name, but the code is all new.
 
-Please see the [Chronograf Product FAQ](/chronograf/v1.1/administration/chronograf-product-faq/) for additional information
+Please see the [Chronograf Product FAQ](/chronograf/v1.2/administration/chronograf-product-faq/) for additional information
 about the Chronograf 1.1-alpha and beta releases.
 
 ## Getting Started
@@ -35,4 +36,4 @@ develop this product.
 # The Old Chronograf
 
 Users can continue to use the deprecated, closed source Chronograf product (versions 0.4 through 1.0).
-The documentation is available under `Chronograf Versions` in the left hand navigation bar.
+The documentation is available under `Chronograf Versions` at the bottom of the the left navigation bar.
