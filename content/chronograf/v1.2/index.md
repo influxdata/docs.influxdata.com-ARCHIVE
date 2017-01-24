@@ -11,19 +11,19 @@ menu:
 # A New Chronograf
 
 We are excited to announce the release of the first open source version of Chronograf, the user interface component of the TICK stack.
-With the 1.1-alpha and beta releases, we now provide the entire stack as a fully open source monitoring solution.
+With the alpha and beta releases, we now provide the entire stack as a fully open source monitoring solution.
 Please read the [blog post from Paul Dix](https://www.influxdata.com/announcing-the-new-chronograf-a-ui-for-the-tick-stack-and-a-complete-open-source-monitoring-solution), our CTO, to understand how Chronograf is evolving and what to expect in the coming releases.
 
 Note that the new [open source version of Chronograf](https://github.com/influxdata/chronograf) is not a continuation of the previous closed source product.
 They address similar needs, so we have kept the name, but the code is all new.
 
 Please see the [Chronograf Product FAQ](/chronograf/v1.2/administration/chronograf-product-faq/) for additional information
-about the Chronograf 1.1-alpha and beta releases.
+about the Chronograf 1.2-beta release.
 
 ## Getting Started
 
 To get up and running with the new Chronograf, please visit the [README](https://github.com/influxdata/chronograf/blob/master/README.md) in the GitHub repository.
-All documentation will live in that repository during the 1.1-alpha and beta releases.
+All documentation will live in that repository during the alpha and beta releases.
 
 ## Bug Reports and Feature Contributions
 

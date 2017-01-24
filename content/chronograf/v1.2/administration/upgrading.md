@@ -24,7 +24,7 @@ to the [open source Chronograf product](https://github.com/influxdata/chronograf
 To get up and running with the new open source Chronograf, please visit the [README](https://github.com/influxdata/chronograf/blob/master/README.md) in the GitHub repository.
 All documentation will live in that repository during the alpha and beta releases.
 
-Future releases of the new Chronograf product will be drop-in upgrades. During the initial 1.1-alpha and beta releases there will be multiple patch releases every 2 weeks with bug fixes and new features based on what early adopters are requesting. We know this is breaking with semantic versioning, but felt it was best for the platform as a whole. Future versions of this new Chronograf will have a superset of functionality from the closed source 1.0 release.
+Future releases of the new Chronograf product will be drop-in upgrades. During the initial alpha and beta releases there will be multiple patch releases every 2 weeks with bug fixes and new features based on what early adopters are requesting. We know this is breaking with semantic versioning, but felt it was best for the platform as a whole. Future versions of this new Chronograf will have a superset of functionality from the closed source 1.0 release.
 
 <br>
 # The Old Chronograf is Deprecated
