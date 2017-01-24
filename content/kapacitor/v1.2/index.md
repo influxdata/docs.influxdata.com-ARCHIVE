@@ -1,11 +1,11 @@
 ---
-title: Kapacitor Version 1.1 Documentation
+title: Kapacitor Version 1.2 Documentation
 
 menu:
   kapacitor:
-    name: v1.1
-    identifier: kapacitor_1_1
-    weight: 1
+    name: v1.2
+    identifier: kapacitor_1_2
+    weight: 0
 ---
 
 Kapacitor is an open source data processing framework that makes it easy to create
@@ -19,8 +19,8 @@ great choice for data processing.
 
 * Process both streaming data and batch data.
 * Query data from InfluxDB on a schedule, and receive data via the
-[line protocol](/influxdb/v1.1/write_protocols/line/) and any other method InfluxDB supports.
-* Perform any transformation currently possible in [InfluxQL](/influxdb/v1.1/query_language/spec/).
+[line protocol](/influxdb/v1.2/write_protocols/line/) and any other method InfluxDB supports.
+* Perform any transformation currently possible in [InfluxQL](/influxdb/v1.2/query_language/spec/).
 * Store transformed data back in InfluxDB.
 * Add custom user defined functions to detect anomalies.
 * Integrate with HipChat, OpsGenie, Alerta, Sensu, PagerDuty, Slack, and more.
