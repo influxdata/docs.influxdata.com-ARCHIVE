@@ -128,6 +128,9 @@ SELECT mean(10 * "value") FROM "cpu"
 ```
 will yield a parse error.
 
+> **Note:** Starting with version 1.2, InfluxQL supports [subqueries](/influxdb/v1.2/query_language/data_exploration/#subqueries) which offer similar functionality to using mathematical operators inside a function call.
+See [Data Exploration](/influxdb/v1.2/query_language/data_exploration/#subqueries) for more information.
+
 ## Unsupported Operators
 
 ### Inequalities
