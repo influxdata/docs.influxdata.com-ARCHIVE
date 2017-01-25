@@ -17,6 +17,12 @@ menu:
 <br>
 # Clustering
 
+## v1.2.1 [2017-01-25]
+
+#### Bugfixes
+
+- Fix panic: slice bounds out of range
+
 ## v1.2.0 [2017-01-24]
 
 ### Release Notes
