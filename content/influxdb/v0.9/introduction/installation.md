@@ -86,7 +86,7 @@ Start the backend by executing
 ```bash
 sudo service influxd onestart
 ```
-and/or adding `influxd_enable="YES"` to `/etc/rc.conf` for launch influxd during system boot.
+and/or adding `influxd_enable="YES"` to `/etc/rc.conf` to launch influxd during system boot.
 
 ### OS X
 
