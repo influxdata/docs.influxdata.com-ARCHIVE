@@ -17,6 +17,12 @@ menu:
 <br>
 # Clustering
 
+## v1.2.2 [2017-01-27]
+
+#### Bugfixes
+
+- TODO
+
 ## v1.2.1 [2017-01-25]
 
 #### Bugfixes
