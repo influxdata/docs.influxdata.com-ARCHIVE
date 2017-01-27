@@ -11,7 +11,9 @@ menu:
 
 The Line Protocol is a text based format for writing points to InfluxDB.
 
-## Line Protocol Syntax
+## Line Protocol
+
+### Syntax
 ```
 <measurement>[,<tag_key>=<tag_value>[,<tag_key>=<tag_value>]] <field_key>=<field_value>[,<field_key>=<field_value>] [<timestamp>]
 ```
@@ -20,7 +22,7 @@ Each line, separated by the newline character `\n`, represents a single point
 in InfluxDB.
 Line Protocol is whitespace sensitive.
 
-## Line Protocol Elements
+### Description of Syntax
 
 Line Protocol informs InfluxDB of the data's measurement, tag set, field set,
 and timestamp.
@@ -32,12 +34,11 @@ and timestamp.
 | [Field set](/influxdb/v1.2/concepts/glossary/#field-set) | Required. Points must have at least one field. | All field key-value pairs for the point. | [Field keys](/influxdb/v1.2/concepts/glossary/#field-key) are strings. [Field values](/influxdb/v1.2/concepts/glossary/#field-value) can be floats, integers, strings, or booleans.
 | [Timestamp](/influxdb/v1.2/concepts/glossary/#timestamp) | Optional. InfluxDB uses the server's local nanosecond timestamp in UTC if the timestamp is not included with the point. | The timestamp for the data point. InfluxDB accepts one timestamp per point. | Unix nanosecond timestamp. Specify alternative precisions with the [HTTP API](/influxdb/v1.2/tools/api/#write).
 
-> **Performance tips:**
+> #### Performance tips:
 >
 * Sort tags by key before sending them to the database.
 The sort should match the results from the
 [Go bytes.Compare function](http://golang.org/pkg/bytes/#Compare).
->
 * Use the coarsest
 [precision](/influxdb/v1.2/tools/api/#write) possible for timestamps.
 This can result in significant improvements in compression.
@@ -46,13 +47,11 @@ This can result in significant improvements in compression.
 
 | Datatype     | Element(s)  | Description  |
 | :----------- | :------------------------ |:------------ |
-| Float | Field values |  IEEE-754 64-bit floating-point numbers. This is the default numerical type. |
-| Integer | Field values | Signed 64-bit integers (-9223372036854775808 to 9223372036854775807). Specify an integer with a trailing `i` on the number. |
+| Float | Field values |  IEEE-754 64-bit floating-point numbers. This is the default numerical type. Examples: `1`, `1.0`, `1.e+78`, `1.E+78`. |
+| Integer | Field values | Signed 64-bit integers (-9223372036854775808 to 9223372036854775807). Specify an integer with a trailing `i` on the number. Example: `1i`. |
 | String | Measurements, tag keys, tag values, field keys, field values | Length limit 64KB. |
 | Boolean | Field values | Stores TRUE or FALSE values.<br><br>TRUE write syntax:`[t, T, true, True, TRUE]`.<br><br>FALSE write syntax:`[f, F, false, False, FALSE]` |
 | Timestamp | Timestamps | Unix nanosecond timestamp. Specify alternative precisions with the [HTTP API](/influxdb/v1.2/tools/api/#write). The minimum valid timestamp is `-9223372036854775806` or `1677-09-21T00:12:43.145224194Z`. The maximum valid timestamp is `9223372036854775806` or `2262-04-11T23:47:16.854775806Z`. |
-
-### More on field value types
 
 #### Boolean syntax for writes vs. queries
 Acceptable boolean syntax differs for data writes and data queries.
@@ -70,48 +69,53 @@ for how field value type discrepancies can affect `SELECT *` queries.
 
 ### Examples
 
-Write the field value `1.0` as a float to InfluxDB:
+#### Example 1: Write the field value `1.0` as a float to InfluxDB
 ```
 > INSERT mymeas value=1.0
 ```
 
-Write the field value `1` as a float to InfluxDB:
+#### Example 2: Write the field value `1` as a float to InfluxDB
 ```
 > INSERT mymeas value=1
 ```
 
-Write the field value `1` as an integer to InfluxDB:
+#### Example 3: Write the field value `-1.234456e+78` as a float to InfluxDB
+```
+> INSERT mymeas value=-1.234456e+78
+```
+InfluxDB supports field values specified in scientific notation.
+
+#### Example 4: Write the field value `1` as an integer to InfluxDB
 ```
 > INSERT mymeas value=1i
 ```
 
-Write the field value `stringing along` as a string to InfluxDB.
-Always double quote string field values. More on quoting [below](#quoting).
+#### Example 5: Write the field value `stringing along` as a string to InfluxDB
 ```
 > INSERT mymeas value="stringing along"
 ```
+Always double quote string field values. More on quoting [below](#quoting).
 
-Write the field value `true` as a boolean to InfluxDB.
-Do not quote boolean field values.
+#### Example 6: Write the field value `true` as a boolean to InfluxDB
 ```
 > INSERT mymeas value=true
 ```
-
-Write the field value `true` as a string to InfluxDB:
+Do not quote boolean field values.
+The following statement writes `true` as a string field value to InfluxDB:
 ```
 > INSERT mymeas value="true"
 ```
 
-Attempt to write a string to a field that previous accepted floats.
-The float and string would live in the same shard.
+#### Example 7: Attempt to write a string to a field that previously accepted floats
+
+If the timestamps on the float and string are stored in the same shard:
 ```
 > INSERT mymeas value=3 1465934559000000000
 > INSERT mymeas value="stringing along" 1465934559000000001
 ERR: {"error":"field type conflict: input field \"value\" on measurement \"mymeas\" is type string, already exists as type float"}
 ```
 
-Attempt to write a string to a field that previous accepted floats.
-The float and string are not in the same shard.
+If the timestamps on the float and string are not stored in the same shard:
 ```
 > INSERT mymeas value=3 1465934559000000000
 > INSERT mymeas value="stringing along" 1466625759000000000
@@ -128,20 +132,25 @@ The float and string are not in the same shard.
 | Measurements, tag keys, tag values, field keys | Never* | Never* |
 | Field values | Double quote string field values. Do not double quote floats, integers, or booleans. | Never |
 
-\* Line Protocol allows users to double and single quoting measurements, tag
+\* Line Protocol allows users to double and single quote measurement names, tag
 keys, tag values, and field keys.
-It will, however, assume that the double or single quotes are part of the name.
+It will, however, assume that the double or single quotes are part of the name,
+key, or value.
 This can complicate query syntax (see the example below).
 
 #### Examples
 
-Double quote the timestamp. This is invalid Line Protocol:
+##### Example 1: Invalid Line Protocol - Double quote the timestamp
+<br>
 ```
 > INSERT mymeas value=9 "1466625759000000000"
 ERR: {"error":"unable to parse 'mymeas value=9 \"1466625759000000000\"': bad timestamp"}
 ```
+Double quoting (or single quoting) the timestamp yields a `bad timestamp`
+error.
 
-Double quote a boolean field value. InfluxDB assumes that the value is a string:
+##### Example 2: Semantic error - Double quote a boolean field value
+<br>
 ```
 > INSERT mymeas value="true"
 > SHOW FIELD KEYS FROM "mymeas"
@@ -151,34 +160,28 @@ fieldKey	 fieldType
 value		   string
 ```
 
-Write to `mymeas` and `"mymeas"` and query their data:
+InfluxDB assumes that all double quoted field values are strings.
+
+##### Example 3: Semantic error - Double quote a measurement name
+<br>
 ```
-> INSERT mymeas value=2
 > INSERT "mymeas" value=200
 > SHOW MEASUREMENTS
 name: measurements
 ------------------
 name
 "mymeas"
-mymeas
 > SELECT * FROM mymeas
-name: mymeas
-------------
-time				                        value
-2016-06-14T20:36:11.939713972Z	 2
-
 > SELECT * FROM "mymeas"
-name: mymeas
-------------
-time				                        value
-2016-06-14T20:36:11.939713972Z	 2
-
 > SELECT * FROM "\"mymeas\""
 name: "mymeas"
 --------------
 time				                        value
 2016-06-14T20:36:21.836131014Z	 200
 ```
+If you double quote a measurement in Line Protocol, any queries on that
+measurement require both double quotes and escaped (`\`) double quotes in the
+`FROM` clause.
 
 ### Special Characters
 
@@ -201,14 +204,15 @@ For string field values use a backslash character `\` to escape:
 Line Protocol does not require users to escape the backslash character `\`.
 Users do not need to escape all other special characters.
 
-#### Example
+#### Examples
 
-Write a point where the measurement is `"measurement with quo⚡️es and emoji"`, the tag key is `tag key with sp🚀ces`, the
-tag value is `tag,value,with"commas"`, the field key is `field_k\ey` and the field value is `string field value, only " need be esc🍭ped`.
-
+##### Example 1: Write a point with special characters
+<br>
 ```
 > INSERT "measurement\ with\ quo⚡️es\ and\ emoji",tag\ key\ with\ sp🚀ces=tag\,value\,with"commas" field_k\ey="string field value, only \" need be esc🍭ped"
 ```
+The system writes a point where the measurement is `"measurement with quo⚡️es and emoji"`, the tag key is `tag key with sp🚀ces`, the
+tag value is `tag,value,with"commas"`, the field key is `field_k\ey` and the field value is `string field value, only " need be esc🍭ped`.
 
 ### Additional Naming Guidelines
 
