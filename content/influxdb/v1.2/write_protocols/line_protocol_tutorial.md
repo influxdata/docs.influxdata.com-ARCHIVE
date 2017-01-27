@@ -16,10 +16,14 @@ write points (unless you're using a [service plugin](/influxdb/v1.2/tools/#servi
 Using fictional temperature data, this page introduces Line Protocol.
 It covers:
 
-* [Syntax](#syntax)
-* [Data types](#data-types)
-* [Quoting](#quoting)
-* [Special characters and keywords](#special-characters-and-keywords)
+<table style="width:100%">
+  <tr>
+    <td><a href="#syntax">Syntax</a></td>
+    <td><a href="#data-types">Data Types</a></td>
+    <td><a href="#quoting">Quoting</a></td>
+    <td><a href="#special-characters-and-keywords">Special Characters and Keywords</a></td>
+  </tr>
+</table>
 
 The final section, [Writing data to InfluxDB](#writing-data-to-influxdb),
 describes how to get data into InfluxDB and how InfluxDB handles Line

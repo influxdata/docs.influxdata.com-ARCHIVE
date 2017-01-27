@@ -252,21 +252,22 @@ For example, `SELECT * FROM "hamlet" WHERE "bool"=True` returns all points with 
 
 Field values can be floats, integers, strings, or booleans.
 Field value types cannot differ within a
-[shard](/influxdb/v1.2/concepts/glossary/#shard), but they can differ across
-shards.
+[shard](/influxdb/v1.2/concepts/glossary/#shard), but they can [differ](/influxdb/v1.2/write_protocols/line_protocol_reference/#example-7-attempt-to-write-a-string-to-a-field-that-previously-accepted-floats) across shards.
 
-A `SELECT * FROM <measurement_name>` query returns all field values **if** all
-values have the same type.
+### The SELECT statement
+
+The
+[`SELECT` statement](/influxdb/v1.2/query_language/data_exploration/#the-basic-select-statement)
+returns all field values **if** all values have the same type.
 If field value types differ across shards, InfluxDB first performs any
-applicable
-[cast](/influxdb/v1.2/query_language/data_exploration/#cast-operations)
+applicable [cast](/influxdb/v1.2/query_language/data_exploration/#cast-operations)
 operations and then returns all values with the type that occurs first in the
 following list: float, integer, string, boolean.
 
 If your data have field value type discrepancies, use the syntax
 `<field_key>::<type>` to query the different data types.
 
-Example:
+#### Example:
 
 The measurement `just_my_type` has a single field called `my_field`.
 `my_field` has four field values across four different shards, and each value has
@@ -276,6 +277,7 @@ a different data type (float, integer, string, and boolean).
 Note that InfluxDB casts the integer value to a float in the response.
 ```
 SELECT * FROM just_my_type
+
 name: just_my_type
 ------------------
 time		                	my_field
@@ -291,6 +293,7 @@ casts the float `9.879034` to an integer in the second column.
 InfluxDB cannot cast floats or integers to strings or booleans.
 ```
 SELECT "my_field"::float,"my_field"::integer,"my_field"::string,"my_field"::boolean FROM just_my_type
+
 name: just_my_type
 ------------------
 time			               my_field	 my_field_1	 my_field_2		 my_field_3
@@ -298,6 +301,30 @@ time			               my_field	 my_field_1	 my_field_2		 my_field_3
 2016-06-03T16:45:00Z	 7	        7
 2016-06-03T17:45:00Z			                     a string
 2016-06-03T18:45:00Z					                                true
+```
+
+### The SHOW FIELD KEYS query
+
+`SHOW FIELD KEYS` returns every data type, across every shard, associated with
+the field key.
+
+#### Example
+
+The measurement `just_my_type` has a single field called `my_field`.
+`my_field` has four field values across four different shards, and each value has
+a different data type (float, integer, string, and boolean).
+`SHOW FIELD KEYS` returns all four data types:
+
+```
+> SHOW FIELD KEYS
+
+name: just_my_type
+fieldKey   fieldType
+--------   ---------
+my_field   float
+my_field   string
+my_field   integer
+my_field   boolean
 ```
 
 ## What are the minimum and maximum integers that InfluxDB can store?
