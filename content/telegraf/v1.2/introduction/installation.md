@@ -19,6 +19,12 @@ require custom ports.
 All port mappings can be modified through the configuration file
 which is located at `/etc/telegraf/telegraf.conf` for default installations.
 
+### NTP
+
+Telegraf uses a host's local time in UTC to assign timestamps to data.
+Use the Network Time Protocol (NTP) to synchronize time between hosts; if hosts' clocks
+aren't synchronized with NTP, the timestamps on the data can be inaccurate.
+
 ## Installation
 
 {{< vertical-tabs >}}

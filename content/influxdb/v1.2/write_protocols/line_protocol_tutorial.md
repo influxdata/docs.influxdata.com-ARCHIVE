@@ -145,6 +145,13 @@ We recommend using the coarsest precision possible as this can result in
 significant improvements in compression.
 See the [API Reference](/influxdb/v1.2/tools/api/#write) for more information.
 
+> #### Setup Tip:
+>
+Use the Network Time Protocol (NTP) to synchronize time between hosts.
+InfluxDB uses a host's local time in UTC to assign timestamps to data; if
+hosts' clocks aren't synchronized with NTP, the timestamps on the data written
+to InfluxDB can be inaccurate.
+
 ## Data types
 
 This section covers the data types of Line Protocol's major components:

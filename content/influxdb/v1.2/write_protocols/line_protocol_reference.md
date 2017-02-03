@@ -34,7 +34,7 @@ and timestamp.
 | [Field set](/influxdb/v1.2/concepts/glossary/#field-set) | Required. Points must have at least one field. | All field key-value pairs for the point. | [Field keys](/influxdb/v1.2/concepts/glossary/#field-key) are strings. [Field values](/influxdb/v1.2/concepts/glossary/#field-value) can be floats, integers, strings, or booleans.
 | [Timestamp](/influxdb/v1.2/concepts/glossary/#timestamp) | Optional. InfluxDB uses the server's local nanosecond timestamp in UTC if the timestamp is not included with the point. | The timestamp for the data point. InfluxDB accepts one timestamp per point. | Unix nanosecond timestamp. Specify alternative precisions with the [HTTP API](/influxdb/v1.2/tools/api/#write).
 
-> #### Performance tips:
+> #### Performance and Setup Tips:
 >
 * Sort tags by key before sending them to the database.
 The sort should match the results from the
@@ -42,6 +42,10 @@ The sort should match the results from the
 * Use the coarsest
 [precision](/influxdb/v1.2/tools/api/#write) possible for timestamps.
 This can result in significant improvements in compression.
+* Use the Network Time Protocol (NTP) to synchronize time between hosts.
+InfluxDB uses a host's local time in UTC to assign timestamps to data; if
+hosts' clocks aren't synchronized with NTP, the timestamps on the data written
+to InfluxDB can be inaccurate.
 
 ## Data Types
 
