@@ -29,6 +29,10 @@ These four parts are easily defined when using InfluxDB line-protocol as a
 data format. But there are other data formats that users may want to use which
 require more advanced configuration to create usable Telegraf metrics.
 
+Telegraf uses a host's local time in UTC to assign timestamps to data.
+Use the Network Time Protocol (NTP) to synchronize time between hosts; if hosts' clocks
+aren't synchronized with NTP, the timestamps on the data can be inaccurate.
+
 Plugins such as `exec` and `kafka_consumer` parse textual data. Up until now,
 these plugins were statically configured to parse just a single
 data format. `exec` mostly only supported parsing JSON, and `kafka_consumer` only

@@ -24,6 +24,14 @@ require [custom ports](/influxdb/v1.2/administration/ports/).
 All port mappings can be modified through the [configuration file](/influxdb/v1.2/administration/config),
 which is located at `/etc/influxdb/influxdb.conf` for default installations.
 
+### NTP
+
+InfluxDB uses a host's local time in UTC to assign timestamps to data and for
+coordination purposes.
+Use the Network Time Protocol (NTP) to synchronize time between hosts; if hosts'
+clocks aren't synchronized with NTP, the timestamps on the data written to InfluxDB
+can be inaccurate.
+
 ## Installation
 
 For users who don't want to install any software and are ready to use InfluxDB,
