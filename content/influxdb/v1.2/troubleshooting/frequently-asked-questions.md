@@ -959,10 +959,86 @@ InfluxDB's line protocol relies on line feed (`\n`, which is ASCII `0x0A`) to in
 Note that Windows uses carriage return and line feed (`\r\n`) as the newline character.
 
 ## What words and characters should I avoid when writing data to InfluxDB?
-If you use any of the [InfluxQL keywords](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords) as an identifier you will need to double quote that identifier in every query.
-This can lead to [non-intuitive errors](/influxdb/v1.2/troubleshooting/errors/#error-parsing-query-found-expected-identifier-at-line-char).
-Identifiers are database names, retention policy names, user names, measurement names, tag keys, and field keys.
 
+### InfluxQL Keywords
+If you use an [InfluxQL keyword](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords) as an identifier you will need to double quote that identifier in every query.
+This can lead to [non-intuitive errors](/influxdb/v1.2/troubleshooting/errors/#error-parsing-query-found-expected-identifier-at-line-char).
+Identifiers are continuous query names, database names, field keys, measurement names, retention policy names, subscription names, tag keys, and user names.
+
+### time
+
+The keyword `time` is a special case.
+`time` can be a
+[continuous query](/influxdb/v1.2/concepts/glossary/#continuous-query-cq) name,
+database name,
+[measurement](/influxdb/v1.2/concepts/glossary/#measurement) name,
+[retention policy](/influxdb/v1.2/concepts/glossary/#retention-policy-rp) name,
+[subscription](/influxdb/v1.2/concepts/glossary/#subscription) name, and
+[user](/influxdb/v1.2/concepts/glossary/#user) name.
+In those cases, `time` does not require double quotes in queries.
+`time` cannot be a [field key](/influxdb/v1.2/concepts/glossary/#field-key) or
+[tag key](/influxdb/v1.2/concepts/glossary/#tag-key).
+If [Line Protocol](/influxdb/v1.2/concepts/glossary/#line-protocol) includes
+`time` as a field key or tag key, InfluxDB accepts the write and returns a `204`,
+but InfluxDB silently drops that field key or tag key and its associated value.
+
+#### Examples
+
+##### Example 1: Write `time` as a measurement and query it
+<br>
+```
+> INSERT time value=1
+
+> SELECT * FROM time
+
+name: time
+time                            value
+----                            -----
+2017-02-07T18:28:27.349785384Z  1
+```
+`time` is a valid measurement name in InfluxDB.
+
+##### Example 2: Write `time` as a field key and attempt to query it
+<br>
+```
+> INSERT mymeas time=1
+
+> SELECT time FROM mymeas
+ERR: error parsing query: at least 1 non-time field must be queried
+
+> SELECT "time" FROM mymeas
+ERR: error parsing query: at least 1 non-time field must be queried
+
+> SELECT * FROM mymeas
+>
+```
+`time` is not a valid field key in InfluxDB.
+The system does not return an error and does not write `time=1` to the database.
+
+##### Example 3: Write `time` as a tag key and attempt to query it
+<br>
+```
+> INSERT mymeas,time=1 value=1
+
+> SELECT value,time FROM mymeas
+
+name: mymeas
+time                           value
+----                           -----
+2017-02-07T18:39:41.69433731Z  1
+
+> SELECT * FROM mymeas
+
+name: mymeas
+time                           value
+----                           -----
+2017-02-07T18:39:41.69433731Z  1
+```
+
+`time` is not a valid tag key in InfluxDB.
+The system does not return an error and does not write `time=1` to the database.
+
+### Characters
 To keep regular expressions and quoting simple, avoid using the following characters in identifiers:  
 
 `\` backslash   

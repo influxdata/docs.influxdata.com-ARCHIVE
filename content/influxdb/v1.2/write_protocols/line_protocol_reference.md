@@ -233,6 +233,22 @@ In general, we recommend avoiding using InfluxQL keywords in your schema as
 it can cause
 [confusion](/influxdb/v1.2/troubleshooting/errors/#error-parsing-query-found-expected-identifier-at-line-char) when querying the data.
 
+The keyword `time` is a special case.
+`time` can be a
+[continuous query](/influxdb/v1.2/concepts/glossary/#continuous-query-cq) name,
+database name,
+[measurement](/influxdb/v1.2/concepts/glossary/#measurement) name,
+[retention policy](/influxdb/v1.2/concepts/glossary/#retention-policy-rp) name,
+[subscription](/influxdb/v1.2/concepts/glossary/#subscription) name, and
+[user](/influxdb/v1.2/concepts/glossary/#user) name.
+In those cases, `time` does not require double quotes in queries.
+`time` cannot be a [field key](/influxdb/v1.2/concepts/glossary/#field-key) or
+[tag key](/influxdb/v1.2/concepts/glossary/#tag-key).
+If [Line Protocol](/influxdb/v1.2/concepts/glossary/#line-protocol) includes
+`time` as a field key or tag key, InfluxDB accepts the write and returns a `204`,
+but InfluxDB silently drops that field key or tag key and its associated value.
+See [Frequently Asked Questions](/influxdb/v1.2/troubleshooting/frequently-asked-questions/#time) for more information.
+
 ## Line Protocol in Practice
 
 See the [Tools](/influxdb/v1.2/tools/) section for how to
