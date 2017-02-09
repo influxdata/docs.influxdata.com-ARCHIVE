@@ -66,6 +66,7 @@ options (for example: they specify a different database with `-db` or a
 different retention policy with `-rp`) must be stored in different directories.
 If a single backup directory stores several different incremental backups, a
 restore only restores the most recent incremental backup.
+This issue will be fixed in the next point release.
 
 ##### Examples
 <br>
@@ -173,7 +174,7 @@ the new cluster.
 #### Restore from an incremental backup
 Use the syntax below to restore an incremental backup to a new cluster or an existing cluster.
 Note that the existing cluster must contain no data in the affected databases.*
-Performing an restore from an incremental backup requires the path to the incremental backup's directory.
+Performing a restore from an incremental backup requires the path to the incremental backup's directory.
 
 <dt> In version 1.2.1, restoring from an incremental backup requires users to `cd` into
 the backup directory and run `influxd-ctl restore [options] .` from that directory.
@@ -186,7 +187,7 @@ influxd-ctl [-bind <hostname>:8091] restore [options] <path-to-backup-directory>
 
 \* The existing cluster can have data in the `_internal` database, the database
 that the system creates by default.
-The system automatically drops the `_internal` database when it performs an incremental restore.
+The system automatically drops the `_internal` database when it performs a complete restore.
 
 Options:
 
@@ -212,7 +213,7 @@ influxd-ctl [-bind <hostname>:8091] restore [options] -full <path-to-manifest-fi
 \* The existing cluster can have data in the `_internal` database, the database
 that the system creates by default.
 The system automatically drops the `_internal` database when it performs a
-full restore.
+complete restore.
 
 Options:
 
@@ -241,13 +242,8 @@ This issue will be fixed in the next point release.
 
 Output:
 ```
-$ cd cd my-incremental-backup/
+$ cd my-incremental-backup/
 $ influxd-ctl restore .
-Using backup directory: .
-Using meta backup: 20170130T231333Z.meta
-Restoring meta data... Error.
-restore: operation exited with error: problem setting snapshot: cannot restore into non-empty cluster
-<hostname>:~/my-incremental-backup# influxd-ctl restore .
 Using backup directory: .
 Using meta backup: 20170130T231333Z.meta
 Restoring meta data... Done. Restored in 21.373019ms, 1 shards mapped
@@ -279,7 +275,7 @@ cd <path-to-backup-directory>
 influxd-ctl restore -db <src> -newdb <dest> .
 ```
 
-<dt> In version 1.2.1, an incremental restore requires users to `cd` into
+<dt> In version 1.2.1, a restore from an incremental backup requires users to `cd` into
 the backup directory and run `influxd-ctl restore [options] .` from that directory.
 This issue will be fixed in the next point release.
 </dt>
@@ -303,7 +299,7 @@ Your `telegraf` database was mistakenly dropped, but you have a recent backup so
 If [Telegraf](/telegraf/v1.2/) is still running, it will recreate the `telegraf` database shortly after the database is dropped.
 You might try to directly restore your `telegraf` backup just to find that you can't restore:
 
-<dt> In version 1.2.1, an incremental restore requires users to `cd` into
+<dt> In version 1.2.1, a restore from an incremental backup requires users to `cd` into
 the backup directory and run `influxd-ctl restore [options] .` from that directory.
 This issue will be fixed in the next point release.
 </dt>
