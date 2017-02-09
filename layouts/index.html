@@ -3,7 +3,12 @@
 	{{ range .Site.Menus.products }}
 		<div class="homepage--card card-{{ .Name }}">
 			<div class="homepage--card-container">
-				<a class="homepage--card-title" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .Name }}</a>
+				{{ if or (in .Identifier "telegraf") (in .Identifier "influxdb") (in .Identifier "chronograf") (in .Identifier "kapacitor") (in .Identifier "enterprise") }}
+				  <a class="homepage--card-title" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .Name }}</a>
+				{{ end }}
+				{{ if in .Identifier "cloud" }}
+					<a class="homepage--card-title" href="https://help.influxcloud.net/index.html" target=blank>{{ .Name }}</a>
+				{{ end }}
 				<p class="homepage--card-description">
 					{{ if eq .Identifier "telegraf" }}
 						Telegraf is a plugin-driven server agent for collecting and reporting metrics.
@@ -20,12 +25,25 @@
 					{{ if eq .Identifier "enterprise" }}
 						InfluxEnterprise offers highly-scalable InfluxDB clusters on your infrastructure with a beautiful management UI.
 					{{ end }}
-					<br/>
-					<a class="homepage--card-link" href="https://influxdata.com/downloads/#{{ .Identifier }}" target=blank>Download</a>
-					<br/>
-					<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/introduction/getting_started/">Getting Started</a>
-					<br/>
-					<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">All Documentation</a>
+					{{ if eq .Identifier "cloud" }}
+						InfluxCloud offers managed InfluxDB clusters and Grafana on AWS.
+					{{ end }}
+					{{ if or (in .Identifier "telegraf") (in .Identifier "influxdb") (in .Identifier "chronograf") (in .Identifier "kapacitor") (in .Identifier "enterprise") }}
+						<br/>
+						<a class="homepage--card-link" href="https://influxdata.com/downloads/#{{ .Identifier }}" target=blank>Download</a>
+						<br/>
+						<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/introduction/getting_started/">Getting Started</a>
+						<br/>
+						<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">All Documentation</a>
+					{{ end }}
+					{{ if in .Identifier "cloud" }}
+						<br/>
+						<a class="homepage--card-link" href="https://cloud.influxdata.com/" target=blank>Free Trial</a>
+						<br/>
+						<a class="homepage--card-link" href="https://help.influxcloud.net/getting_started/" target=blank>Getting Started</a>
+						<br/>
+						<a class="homepage--card-link" href="https://help.influxcloud.net/index.html" target=blank>All Documentation</a>
+					{{ end }}
 				</p>
 			</div>
 			<div class="homepage--card-mask"></div>

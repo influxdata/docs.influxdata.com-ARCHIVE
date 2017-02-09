@@ -33,6 +33,11 @@ SectionPagesMenu = "products"
   identifier = "enterprise"
   weight = 40
   url = "/enterprise/"
+[[menu.products]]
+  name = "Cloud"
+  identifier = "cloud"
+  weight = 40
+  url = "/cloud/"
 
 # InfluxDB v1.2 Menu
 [[menu.influxdb_1_2]]
