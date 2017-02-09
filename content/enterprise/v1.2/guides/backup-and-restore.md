@@ -26,8 +26,8 @@ an InfluxEnterprise backup to an OSS instance.
 
 A **backup** creates a copy of the cluster’s data and meta data at that point in time and stores the copy in the specified directory.
 Backups are incremental by default; they backup only the shards that have changed since the last backup.
-If there are no existing backups, the system automatically performs a full backup.
-All backups also include a manifest, a JSON file describing what was collected during the backup.
+If there are no existing backups, the system automatically performs a complete backup of the cluster.
+All backups include a manifest, a JSON file describing what was collected during the backup.
 
 The filenames reflect the UTC timestamp of when the backup was created, for example:
 
@@ -36,8 +36,10 @@ The filenames reflect the UTC timestamp of when the backup was created, for exam
 * Manifest: `20060102T150405Z.manifest`
 
 A **restore** adds the backed-up data to the cluster.
-By default, a restore is incremental and writes to databases using the backed-up data's replication factor.
+By default, a restore writes to databases using the backed-up data's replication factor.
 An alternate replication factor can be specified with the `-newrf` flag when restoring a single database.
+Restore supports both `-full` backups and incremental backups; the syntax for
+a restore differs depending on the backup type.
 
 ## Syntax
 
@@ -56,6 +58,34 @@ Options:
 
 Restoring a `-full` backup and restoring an incremental backup require different syntax.
 To prevent issues with restore, keep `-full` backups and incremental backups in separate directories.
+
+<dt> In version 1.2, there is a known issue with restores from a backup directory
+that stores several **different** incremental backups.
+For a restore to function properly, incremental backups that specify different
+options (for example: they specify a different database with `-db` or a
+different retention policy with `-rp`) must be stored in different directories.
+If a single backup directory stores several different incremental backups, a
+restore only restores the most recent incremental backup.
+
+##### Examples
+<br>
+Store the following incremental backups in different directories.
+The first backup specifies `-db myfirstdb` and the second backup specifies
+different options: `-db myfirstdb` and `-rp autogen`.
+```
+influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
+
+influxd-ctl backup -db myfirstdb -rp autogen ./myfirstdb-autogen-backup
+```
+
+Store the following incremental backups in the same directory.
+Both backups specify the same `-db` flag and the same database.
+```
+influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
+
+influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
+```
+</dt>
 
 #### Examples
 
@@ -123,12 +153,29 @@ $ ls ./telegrafbackup
 
 ### Restore
 
-#### Incremental Restore
-Use a incremental restore to restore an incremental backup to a new cluster or an existing cluster.
-Note that the existing cluster must contain no data in the affected databases.*
-Performing an incremental restore from an incremental backup requires the path to the incremental backup's directory.
+Restore a backup to an existing cluster or a new cluster.
+Restore supports both `-full` backups and incremental backups; the syntax for
+a restore differs depending on the type of backup.
 
-<dt> In version 1.2.1, an incremental restore requires users to `cd` into
+> #### Restores from an existing cluster to a new cluster
+Restores from an existing cluster to a new cluster restore the existing cluster's
+[users](/influxdb/v1.2/concepts/glossary/#user), roles,
+[databases](/influxdb/v1.2/concepts/glossary/#database), and
+[continuous queries](/influxdb/v1.2/concepts/glossary/#continuous-query-cq) to
+the new cluster.
+>
+They do not restore Kapacitor [subscriptions](/influxdb/v1.2/concepts/glossary/#subscription).
+In addition, restores to a new cluster drop any data in the new cluster's
+`_internal` database and begin writing to that database anew.
+The restore does not write the existing cluster's `_internal` database to
+the new cluster.
+
+#### Restore from an incremental backup
+Use the syntax below to restore an incremental backup to a new cluster or an existing cluster.
+Note that the existing cluster must contain no data in the affected databases.*
+Performing an restore from an incremental backup requires the path to the incremental backup's directory.
+
+<dt> In version 1.2.1, restoring from an incremental backup requires users to `cd` into
 the backup directory and run `influxd-ctl restore [options] .` from that directory.
 This issue will be fixed in the next point release.
 </dt>
@@ -152,14 +199,11 @@ Options:
 * `-rp <string>`: the name of the single retention policy to restore
 * `-shard <unit>`: the shard ID to restore
 
-> **Note:**
-An incremental restore requires that the cluster hardware has the same hostnames as during the backup.
-If the hostnames have changed, you will need to restore the databases one-by-one.
-
-#### Full Restore
-Use a full restore to restore a full backup to a new cluster or an existing cluster.
+#### Restore from a full backup
+Use the syntax below to restore a backup that you made with the `-full` flag.
+Restore the `-full` backup to a new cluster or an existing cluster.
 Note that the existing cluster must contain no data in the affected databases.*
-Performing a full restore from a full backup requires the `-full` flag and the path to the full backup's manifest file.
+Performing a restore from a `-full` backup requires the `-full` flag and the path to the full backup's manifest file.
 
 ```
 influxd-ctl [-bind <hostname>:8091] restore [options] -full <path-to-manifest-file>
@@ -181,20 +225,16 @@ Options:
 * `-rp <string>`: the name of the single retention policy to restore
 * `-shard <unit>`: the shard ID to restore
 
-> **Note:**
-A full restore requires that the cluster hardware has the same hostnames as during the backup.
-If the hostnames have changed, you will need to restore the databases one-by-one.
-
 #### Examples
 
-##### Example 1: Perform an incremental restore
+##### Example 1: Perform a restore from an incremental backup
 <br>
 ```
 cd <path-to-backup-directory>
 influxd-ctl restore .
 ```
 
-<dt> In version 1.2.1, an incremental restore requires users to `cd` into
+<dt> In version 1.2.1, restoring from an incremental backup requires users to `cd` into
 the backup directory and run `influxd-ctl restore [options] .` from that directory.
 This issue will be fixed in the next point release.
 </dt>
@@ -216,7 +256,7 @@ Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Rest
 Restored from . in 83.892591ms, transferred 588800 bytes
 ```
 
-##### Example 2: Perform a full restore
+##### Example 2: Perform a restore from a `-full` backup
 <br>
 ```
 influxd-ctl restore -full <path-to-manifest-file>
@@ -232,7 +272,7 @@ Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Rest
 Restored from my-full-backup in 58.58301ms, transferred 569344 bytes
 ```
 
-##### Example 3: Perform an incremental restore for a single database and give the database a new name
+##### Example 3: Perform a restore from an incremental backup for a single database and give the database a new name
 <br>
 ```
 cd <path-to-backup-directory>
@@ -256,7 +296,7 @@ Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Rest
 Restored from . in 66.715524ms, transferred 588800 bytes
 ```
 
-##### Example 4: Perform an incremental restore for a backed up database and merge that database into an existing database
+##### Example 4: Perform a restore from an incremental backup for a database and merge that database into an existing database
 <br>
 Your `telegraf` database was mistakenly dropped, but you have a recent backup so you've only lost a small amount of data.
 
