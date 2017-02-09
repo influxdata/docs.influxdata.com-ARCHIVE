@@ -235,10 +235,10 @@ What follows is the complete UDF implementation with our `info`,
 
 ```python
 
-from agent import Agent, Handler
+from kapacitor.udf.agent import Agent, Handler
 from scipy import stats
 import math
-import udf_pb2
+import kapacitor.udf.udf_pb2
 import sys
 
 class TTestHandler(Handler):

@@ -17,7 +17,8 @@ menu:
 
 The `influxd-ctl join` command has been renamed to `influxd-ctl add-meta`. If you have existing scripts that use `influxd-ctl join`, they will need to use `influxd-ctl add-meta` or be updated to use the new cluster setup command.
 
-This release should be a drop-in replacement for 1.0 with no data migration required. There are some configuration changes that may need to be updated prior to upgrading to avoid downtime. Please review the [Changelog](/enterprise/v1.1/about-the-project/release-notes-changelog/) prior to upgrading.
+This release should be a drop-in replacement for 1.0 with no data migration required. There are some configuration changes that need to be updated prior to upgrading to avoid downtime.
+Please review the [Changelog](/enterprise/v1.1/about-the-project/release-notes-changelog/) prior to upgrading.
 
 ## Upgrading from version 0.7 to 1.1
 
@@ -43,8 +44,8 @@ up-to-date configuration settings.
 
 ##### Ubuntu & Debian (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.1.0-c1.1.0_amd64.deb
-sudo dpkg -i influxdb-meta_1.1.0-c1.1.0_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.1.1-c1.1.1_amd64.deb
+sudo dpkg -i influxdb-meta_1.1.1-c1.1.1_amd64.deb
 ```
 
 > **Note:** If you're running Ubuntu 16.04.1, you may need to enter
@@ -52,33 +53,33 @@ sudo dpkg -i influxdb-meta_1.1.0-c1.1.0_amd64.deb
 
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.1.0_c1.1.0.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.1.0_c1.1.0.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.1.1_c1.1.1.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.1.1_c1.1.1.x86_64.rpm
 ```
 
 #### Data nodes
 
 ##### Ubuntu & Debian (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.1.0-c1.1.0_amd64.deb
-sudo dpkg -i influxdb-data_1.1.0-c1.1.0_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.1.1-c1.1.1_amd64.deb
+sudo dpkg -i influxdb-data_1.1.1-c1.1.1_amd64.deb
 ```
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.1.0_c1.1.0.x86_64.rpm
-sudo yum localinstall influxdb-data-1.1.0_c1.1.0.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.1.1_c1.1.1.x86_64.rpm
+sudo yum localinstall influxdb-data-1.1.1_c1.1.1.x86_64.rpm
 ```
 #### Web console
 
 ##### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise_1.1.0_amd64.deb
-sudo dpkg -i influx-enterprise_1.1.0_amd64.deb
+wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise_1.1.1_amd64.deb
+sudo dpkg -i influx-enterprise_1.1.1_amd64.deb
 ```
 ##### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise-1.1.0.x86_64.rpm
-sudo yum localinstall influx-enterprise-1.1.0.x86_64.rpm
+wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise-1.1.1.x86_64.rpm
+sudo yum localinstall influx-enterprise-1.1.1.x86_64.rpm
 ```
 
 > **Note:**

@@ -924,6 +924,14 @@ Contact [sales@influxdb.com](mailto:sales@influxdb.com) to become an annual subs
 
 Environment variable: `LICENSE_FILE`
 
+### session-lifetime  = "24h"
+
+The time after which users are automatically logged out of the web console.
+
+### autologout = false
+
+Set to `true` to force a logout when the browser session ends.
+
 ## [influxdb]
 ### shared-secret = "long pass phrase used for signing tokens"
 

@@ -31,15 +31,15 @@ a [data node](/enterprise/v1.1/concepts/glossary/#data-node), that is, each serv
 runs both the [meta service](/enterprise/v1.1/concepts/glossary/#meta-service)
 and the [data service](/enterprise/v1.1/concepts/glossary/#data-service).
 
-In a production environment there is no need to use three servers; meta nodes and data
-nodes can run on separate servers.
-Please see the [Production Installation](/enterprise/v1.1/production_installation/)
-documentation if you'd like to set up a cluster with a different server-node configuration.
-
 ### Requirements
 
-To get started, you'll need the license key that you received at
-[InfluxPortal](https://portal.influxdata.com/).
+#### License Key or File
+
+InfluxEnterprise requires a license key **OR** a license file to run.
+Your license key is available at [InfluxPortal](https://portal.influxdata.com/licenses).
+Contact support at the email we provided at signup to receive a license file.
+License files are required only if the nodes in your cluster cannot reach
+`portal.influxdata.com` on port `80` or `443`.
 
 #### Networking
 
@@ -101,11 +101,11 @@ Perform the following steps on all three servers.
 
 Download:
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.1.0-c1.1.0_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.1.1-c1.1.1_amd64.deb
 ```
 Install:
 ```
-sudo dpkg -i influxdb-meta_1.1.0-c1.1.0_amd64.deb
+sudo dpkg -i influxdb-meta_1.1.1-c1.1.1_amd64.deb
 ```
 
 {{% /tab-content %}}
@@ -114,11 +114,11 @@ sudo dpkg -i influxdb-meta_1.1.0-c1.1.0_amd64.deb
 
 Download:
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.1.0_c1.1.0.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.1.1_c1.1.1.x86_64.rpm
 ```
 Install:
 ```
-sudo yum localinstall influxdb-meta-1.1.0_c1.1.0.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.1.1_c1.1.1.x86_64.rpm
 ```
 
 {{% /tab-content %}}
@@ -195,11 +195,11 @@ Perform the following steps on all three servers.
 
 Download:
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.1.0-c1.1.0_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.1.1-c1.1.1_amd64.deb
 ```
 Install:
 ```
-sudo dpkg -i influxdb-data_1.1.0-c1.1.0_amd64.deb
+sudo dpkg -i influxdb-data_1.1.1-c1.1.1_amd64.deb
 ```
 
 {{% /tab-content %}}
@@ -208,11 +208,11 @@ sudo dpkg -i influxdb-data_1.1.0-c1.1.0_amd64.deb
 
 Download:
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.1.0_c1.1.0.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.1.1_c1.1.1.x86_64.rpm
 ```
 Install:
 ```
-sudo yum localinstall influxdb-data-1.1.0_c1.1.0.x86_64.rpm
+sudo yum localinstall influxdb-data-1.1.1_c1.1.1.x86_64.rpm
 ```
 
 {{% /tab-content %}}
@@ -371,16 +371,16 @@ The expected output is:
 Data Nodes
 ==========
 ID   TCP Address                  Version
-2    quickstart-cluster-01:8088   1.1.0-c1.1.0rc1
-4    quickstart-cluster-02:8088   1.1.0-c1.1.0rc1
-6    quickstart-cluster-03:8088   1.1.0-c1.1.0rc1
+2    quickstart-cluster-01:8088   1.1.1-c1.1.1rc1
+4    quickstart-cluster-02:8088   1.1.1-c1.1.1rc1
+6    quickstart-cluster-03:8088   1.1.1-c1.1.1rc1
 
 Meta Nodes
 ==========
 TCP Address                  Version
-quickstart-cluster-01:8091   1.1.0-c1.1.0rc1
-quickstart-cluster-02:8091   1.1.0-c1.1.0rc1
-quickstart-cluster-03:8091   1.1.0-c1.1.0rc1
+quickstart-cluster-01:8091   1.1.1-c1.1.1rc1
+quickstart-cluster-02:8091   1.1.1-c1.1.1rc1
+quickstart-cluster-03:8091   1.1.1-c1.1.1rc1
 ```
 
 Your cluster should have three data nodes and three meta nodes.

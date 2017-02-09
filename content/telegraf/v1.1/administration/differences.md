@@ -19,7 +19,7 @@ for detailed release notes.
 
 Telegraf 1.1 supports [processor](/telegraf/v1.1/administration/configuration/#processor-configuration) and [aggregator](/telegraf/v1.1/administration/configuration/#aggregator-configuration) plugins.
 
-On systemd Telegraf will no longer redirect it's stdout to `/var/log/telegraf/telegraf.log`.
+On systemd Telegraf will no longer redirect its stdout to `/var/log/telegraf/telegraf.log`.
 On most systems, the logs will be directed to the systemd journal and can be accessed by `journalctl -u telegraf.service`.
 Consult the systemd journal documentation for configuring journald.
 There is also a [logfile config option](https://github.com/influxdata/telegraf/blob/master/etc/telegraf.conf#L70) available in version 1.1, which will allow users to easily configure `telegraf` to continue sending logs to `/var/log/telegraf/telegraf.log`.

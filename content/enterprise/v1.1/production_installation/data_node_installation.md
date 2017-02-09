@@ -21,7 +21,7 @@ Bad things can happen if you complete the following steps without meta nodes.
 
 The Production Installation process sets up two [data nodes](/enterprise/v1.1/concepts/glossary#data-node)
 and each data node runs on its own server.
-You **must** have a minimum of two data in a cluster.
+You **must** have a minimum of two data nodes in a cluster.
 InfluxEnterprise clusters require at least two data nodes for high
 availability and redundancy.
 Note that there is no requirement for each data node to run on its own
@@ -33,9 +33,13 @@ for more on cluster architecture.
 
 ### Other Requirements
 
-#### License Key
-The Production Installation process requires the license key that you received at
-[InfluxPortal](https://portal.influxdata.com/).
+#### License Key or File
+
+InfluxEnterprise requires a license key **OR** a license file to run.
+Your license key is available at [InfluxPortal](https://portal.influxdata.com/licenses).
+Contact support at the email we provided at signup to receive a license file.
+License files are required only if the nodes in your cluster cannot reach
+`portal.influxdata.com` on port `80` or `443`.
 
 #### Networking
 
@@ -89,14 +93,14 @@ Perform the following steps on each data server.
 
 #### Ubuntu & Debian (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.1.0-c1.1.0_amd64.deb
-sudo dpkg -i influxdb-data_1.1.0-c1.1.0_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.1.1-c1.1.1_amd64.deb
+sudo dpkg -i influxdb-data_1.1.1-c1.1.1_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.1.0_c1.1.0.x86_64.rpm
-sudo yum localinstall influxdb-data-1.1.0_c1.1.0.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.1.1_c1.1.1.x86_64.rpm
+sudo yum localinstall influxdb-data-1.1.1_c1.1.1.x86_64.rpm
 ```
 
 ### II. Edit the Configuration File
