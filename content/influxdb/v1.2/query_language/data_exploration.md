@@ -663,6 +663,11 @@ set of [tags](/influxdb/v1.2/concepts/glossary/#tag) or a time interval.
 
 `GROUP BY <tag>` queries group query results by a user-specified set of [tags](/influxdb/v1.2/concepts/glossary/#tag).
 
+Tired of reading? Check out this InfluxQL Short:
+<br>
+<br>
+<iframe src="https://player.vimeo.com/video/200898048?title=0&byline=0&portrait=0" width="60%" height="250px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 #### Syntax
 
 ```
@@ -2302,6 +2307,11 @@ statement's [`WHERE` clause](#the-where-clause).
     <td><a href="#common-issues-with-time-syntax">Common Issues with Time Syntax</a></td>
   </tr>
 </table>
+
+Tired of reading? Check out this InfluxQL Short:
+<br>
+<br>
+<iframe src="https://player.vimeo.com/video/198723778?title=0&byline=0&portrait=0" width="60%" height="250px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 ## Absolute Time
 
