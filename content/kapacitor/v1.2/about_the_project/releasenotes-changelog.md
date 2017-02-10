@@ -1,18 +1,14 @@
 ---
 title: Release Notes/Changelog
 menu:
-  Kapacitor_1_2:
+  kapacitor_1_2:
     weight: 0
-    parent: About the Project
+    parent: about_the_project
 ---
 
 ## v1.2.0 [2017-01-23]
 
 ### Release Notes
-
-This release builds off of the 1.2.0 release of OSS Kapacitor.
-Please see the OSS [release notes](https://github.com/influxdata/kapacitor/blob/master/CHANGELOG.md) for more information about the OSS release.
-Release Notes
 
 A new system for working with alerts has been introduced.
 This alerting system allows you to configure topics for alert events and then configure handlers for various topics.
