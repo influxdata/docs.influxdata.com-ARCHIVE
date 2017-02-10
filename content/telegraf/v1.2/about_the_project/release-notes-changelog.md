@@ -1,9 +1,9 @@
 ---
 title: Release Notes/Changelog
 menu:
-  Telegraf_1_2:
+  telegraf_1_2:
     weight: 0
-    parent: About the Project
+    parent: about_the_project
 ---
 
 ## v1.2.1 [2017-02-01]
@@ -17,7 +17,7 @@ menu:
 
 - GoLang version update 1.7.4 -> 1.7.5
 
-## v1.2 [2017-01-00]
+## v1.2 [2017-01-24]
 
 ### Release Notes
 
@@ -248,7 +248,7 @@ consistent with the behavior of `collection_jitter`.
 - Support setting per-device and total metrics for Docker network and blockio.
 - MongoDB input plugin: adding per DB stats from db.stats()
 - Add tls support for certs to RabbitMQ input plugin.
-- Webhooks input plugin. 
+- Webhooks input plugin.
 - Rollbar webhook plugin.
 - Mandrill webhook plugin.
 - docker-machine/boot2docker no longer required for unit tests.
@@ -267,13 +267,13 @@ consistent with the behavior of `collection_jitter`.
 - Logparser input plugin for parsing grok-style log patterns.
 - ElasticSearch: now supports connecting to ElasticSearch via SSL.
 - Add graylog input pluging.
-- Consul input plugin. 
-- conntrack input plugin. 
-- vmstat input plugin. 
-- Standardized AWS credentials evaluation & wildcard CloudWatch dimensions. 
+- Consul input plugin.
+- conntrack input plugin.
+- vmstat input plugin.
+- Standardized AWS credentials evaluation & wildcard CloudWatch dimensions.
 - Add SSL config options to http_response plugin.
 - Graphite parser: add ability to specify multiple tag keys, for consistency with influxdb parser.
-- Make DNS lookups for chrony configurable. 
+- Make DNS lookups for chrony configurable.
 - Allow wildcard filtering of varnish stats.
 - Support for glob patterns in exec plugin commands configuration.
 - RabbitMQ input: made url parameter optional by using DefaultURL (http://localhost:15672) if not specified.
@@ -320,7 +320,7 @@ consistent with the behavior of `collection_jitter`.
 - Change "default" retention policy to "".
 - Graphite output mangling '%' character.
 - Prometheus input plugin now supports x509 certs authentication.
-- Fix systemd service. 
+- Fix systemd service.
 - Fix influxdb n_shards counter.
 - Fix potential kernel plugin integer parse error.
 - Fix potential influxdb input type assertion panic.
@@ -335,4 +335,3 @@ consistent with the behavior of `collection_jitter`.
 - Fix ntpq panic when field is missing.
 - Sanitize graphite output field names.
 - Fix MySQL plugin not sending 0 value fields.
-
