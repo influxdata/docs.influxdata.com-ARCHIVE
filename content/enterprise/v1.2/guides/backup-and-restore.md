@@ -26,8 +26,8 @@ an InfluxEnterprise backup to an OSS instance.
 
 A **backup** creates a copy of the cluster’s data and meta data at that point in time and stores the copy in the specified directory.
 Backups are incremental by default; they backup only the shards that have changed since the last backup.
-If there are no existing backups, the system automatically performs a full backup.
-All backups also include a manifest, a JSON file describing what was collected during the backup.
+If there are no existing backups, the system automatically performs a complete backup of the cluster.
+All backups include a manifest, a JSON file describing what was collected during the backup.
 
 The filenames reflect the UTC timestamp of when the backup was created, for example:
 
@@ -36,31 +36,65 @@ The filenames reflect the UTC timestamp of when the backup was created, for exam
 * Manifest: `20060102T150405Z.manifest`
 
 A **restore** adds the backed-up data to the cluster.
-By default, a restore attempts to write databases using backed-up data's replication factor.
+By default, a restore writes to databases using the backed-up data's replication factor.
 An alternate replication factor can be specified with the `-newrf` flag when restoring a single database.
+Restore supports both `-full` backups and incremental backups; the syntax for
+a restore differs depending on the backup type.
 
 ## Syntax
 
 ### Backup
 ```
-influxd-ctl [-bind <hostname>:8091] backup [options] <backup-directory>
+influxd-ctl [-bind <hostname>:8091] backup [options] <path-to-backup-directory>
 ```
 Options:
 
 * `-bind <hostname>:8091`: the hostname and HTTP port of a running meta server (defaults to `localhost:8091`)
 * `-db <string>`: the name of the single database to back up
 * `-from <TCP-address>`: the data node TCP address to prefer when backing up
-* `-full`: peform a full backup
+* `-full`: perform a full backup
 * `-rp <string>`: the name of the single retention policy to back up (must specify `-db` with `-rp`)
 * `-shard <unit>`: the ID of the single shard to back up
 
+Restoring a `-full` backup and restoring an incremental backup require different syntax.
+To prevent issues with restore, keep `-full` backups and incremental backups in separate directories.
+
+<dt> In version 1.2, there is a known issue with restores from a backup directory
+that stores several **different** incremental backups.
+For a restore to function properly, incremental backups that specify different
+options (for example: they specify a different database with `-db` or a
+different retention policy with `-rp`) must be stored in different directories.
+If a single backup directory stores several different incremental backups, a
+restore only restores the most recent incremental backup.
+This issue will be fixed in the next point release.
+
+##### Examples
+<br>
+Store the following incremental backups in different directories.
+The first backup specifies `-db myfirstdb` and the second backup specifies
+different options: `-db myfirstdb` and `-rp autogen`.
+```
+influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
+
+influxd-ctl backup -db myfirstdb -rp autogen ./myfirstdb-autogen-backup
+```
+
+Store the following incremental backups in the same directory.
+Both backups specify the same `-db` flag and the same database.
+```
+influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
+
+influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
+```
+</dt>
+
 #### Examples
 
-##### Back up all data
+##### Example 1: Perform an incremental backup
 <br>
-Perform a backup into the current directory with the command below.
+Perform an incremental backup into the current directory with the command below.
 If there are any existing backups the current directory, the system performs an incremental backup.
-If there aren't any existing backups in the current directory, the systems performs a full backup.
+If there aren't any existing backups in the current directory, the system performs a backup of all data in InfluxDB.
 ```
 influxd-ctl backup .
 ```
@@ -78,12 +112,34 @@ $ ls
 20160803T222310Z.manifest  20160803T222310Z.s1.tar.gz  20160803T222310Z.s3.tar.gz
 20160803T222310Z.meta      20160803T222310Z.s2.tar.gz  20160803T222310Z.s4.tar.gz
 ```
+##### Example 2: Perform a full backup
+<br>
+Perform a full backup into a specific directory with the command below.
+The directory must already exist.
 
-##### Back up a single database
+```
+influxd-ctl backup -full <path-to-backup-directory>
+```
+
+Output:
+```
+$ influxd-ctl backup -full backup_dir
+Backing up meta data... Done. 481 bytes transferred
+Backing up node <hostname>:8088, db _internal, rp monitor, shard 1... Done. Backed up in 33.207375ms, 238080 bytes transferred
+Backing up node <hostname>:8088, db telegraf, rp autogen, shard 2... Done. Backed up in 15.184391ms, 95232 bytes transferred
+Backed up to backup_dir in 51.388233ms, transferred 333793 bytes
+~# ls backup_dir
+20170130T184058Z.manifest
+20170130T184058Z.meta
+20170130T184058Z.s1.tar.gz
+20170130T184058Z.s2.tar.gz
+```
+
+##### Example 3: Perform an incremental backup on a single database
 <br>
 Point at a remote meta server and back up only one database into a given directory (the directory must already exist):
 ```
-influxd-ctl -bind <metahost>:8091 backup -db <db-name> <path-to-directory>
+influxd-ctl -bind <metahost>:8091 backup -db <db-name> <path-to-backup-directory>
 ```
 
 Output:
@@ -97,9 +153,68 @@ $ ls ./telegrafbackup
 ```
 
 ### Restore
+
+Restore a backup to an existing cluster or a new cluster.
+Restore supports both `-full` backups and incremental backups; the syntax for
+a restore differs depending on the type of backup.
+
+> #### Restores from an existing cluster to a new cluster
+Restores from an existing cluster to a new cluster restore the existing cluster's
+[users](/influxdb/v1.2/concepts/glossary/#user), roles,
+[databases](/influxdb/v1.2/concepts/glossary/#database), and
+[continuous queries](/influxdb/v1.2/concepts/glossary/#continuous-query-cq) to
+the new cluster.
+>
+They do not restore Kapacitor [subscriptions](/influxdb/v1.2/concepts/glossary/#subscription).
+In addition, restores to a new cluster drop any data in the new cluster's
+`_internal` database and begin writing to that database anew.
+The restore does not write the existing cluster's `_internal` database to
+the new cluster.
+
+#### Restore from an incremental backup
+Use the syntax below to restore an incremental backup to a new cluster or an existing cluster.
+Note that the existing cluster must contain no data in the affected databases.*
+Performing a restore from an incremental backup requires the path to the incremental backup's directory.
+
+<dt> In version 1.2.1, restoring from an incremental backup requires users to `cd` into
+the backup directory and run `influxd-ctl restore [options] .` from that directory.
+This issue will be fixed in the next point release.
+</dt>
+
 ```
-influxd-ctl [-bind <hostname>:8091] restore [options] <path-to-manifest-file>
+influxd-ctl [-bind <hostname>:8091] restore [options] <path-to-backup-directory>
 ```
+
+\* The existing cluster can have data in the `_internal` database, the database
+that the system creates by default.
+The system automatically drops the `_internal` database when it performs a complete restore.
+
+Options:
+
+* `-bind <hostname>:8091`: the hostname and HTTP port of a running meta server (defaults to `localhost:8091`)
+* `-db <string>`: the name of the single database to restore
+* `-list`: shows the contents of the backup
+* `-newdb <string>`: the name of the new database to restore to (must specify with `-db`)
+* `-newrf <int>`: the new replication factor to restore to (this is capped to the number of data nodes in the cluster)
+* `-newrp <string>`: the name of the new retention policy to restore to (must specify with `-rp`)
+* `-rp <string>`: the name of the single retention policy to restore
+* `-shard <unit>`: the shard ID to restore
+
+#### Restore from a full backup
+Use the syntax below to restore a backup that you made with the `-full` flag.
+Restore the `-full` backup to a new cluster or an existing cluster.
+Note that the existing cluster must contain no data in the affected databases.*
+Performing a restore from a `-full` backup requires the `-full` flag and the path to the full backup's manifest file.
+
+```
+influxd-ctl [-bind <hostname>:8091] restore [options] -full <path-to-manifest-file>
+```
+
+\* The existing cluster can have data in the `_internal` database, the database
+that the system creates by default.
+The system automatically drops the `_internal` database when it performs a
+complete restore.
+
 Options:
 
 * `-bind <hostname>:8091`: the hostname and HTTP port of a running meta server (defaults to `localhost:8091`)
@@ -113,73 +228,109 @@ Options:
 
 #### Examples
 
-##### Restore a full backup
+##### Example 1: Perform a restore from an incremental backup
 <br>
-A full restore requires that the cluster hardware has the same hostnames as during the backup.
-If the hostnames have changed, you will need to restore the databases one-by-one.
+```
+cd <path-to-backup-directory>
+influxd-ctl restore .
+```
 
-`influxd-ctl restore <path-to-manifest>`
+<dt> In version 1.2.1, restoring from an incremental backup requires users to `cd` into
+the backup directory and run `influxd-ctl restore [options] .` from that directory.
+This issue will be fixed in the next point release.
+</dt>
 
 Output:
 ```
-$ influxd-ctl restore ./20160803T225759Z.manifest
-Using manifest: ./20160803T225759Z.manifest
-Restoring meta data... Done. Restored in 76.049631ms, 4 shards mapped
-Restoring db telegraf, rp autogen, shard 4 to shard 4...
-Copying data to bdb2c4b56071:8088... Copying data to 95bc5959b985:8088... Copying data to a9f8bbb35cad:8088... Done. Restored shard 4 into shard 4 in 96.756767ms, 198144 bytes transferred
-Restoring db _internal, rp monitor, shard 1 to shard 1...
-Copying data to bdb2c4b56071:8088... Done. Restored shard 1 into shard 1 in 34.089374ms, 25088 bytes transferred
-Restoring db _internal, rp monitor, shard 2 to shard 2...
-Copying data to 95bc5959b985:8088... Done. Restored shard 2 into shard 2 in 1.618344596s, 38912 bytes transferred
-Restoring db _internal, rp monitor, shard 3 to shard 3...
-Copying data to a9f8bbb35cad:8088... Done. Restored shard 3 into shard 3 in 36.137453ms, 19456 bytes transferred
-Restored from . in 1.864106729s, transferred 281600 bytes
+$ cd my-incremental-backup/
+$ influxd-ctl restore .
+Using backup directory: .
+Using meta backup: 20170130T231333Z.meta
+Restoring meta data... Done. Restored in 21.373019ms, 1 shards mapped
+Restoring db telegraf, rp autogen, shard 2 to shard 2...
+Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Restored shard 2 into shard 2 in 61.046571ms, 588800 bytes transferred
+Restored from . in 83.892591ms, transferred 588800 bytes
 ```
 
-##### Restore a single database and give it a new name
+##### Example 2: Perform a restore from a `-full` backup
 <br>
-`influxd-ctl restore -db <src> -newdb <dest> <path-to-manifest>`
+```
+influxd-ctl restore -full <path-to-manifest-file>
+```
 
 Output:
 ```
-$ influxd-ctl restore -db telegraf -newdb restored_telegraf ./20160803T225759Z.manifest
-Using manifest: ./20160803T225759Z.manifest
-Restoring meta data... Done. Restored in 57.729885ms, 1 shards mapped
-Restoring db telegraf, rp autogen, shard 4 to shard 5...
-Copying data to bdb2c4b56071:8088... Copying data to 95bc5959b985:8088... Copying data to a9f8bbb35cad:8088... Done. Restored shard 4 into shard 5 in 93.415749ms, 198144 bytes transferred
-Restored from . in 151.33582ms, transferred 198144 bytes
+$ influxd-ctl restore -full my-full-backup/20170131T020341Z.manifest
+Using manifest: my-full-backup/20170131T020341Z.manifest
+Restoring meta data... Done. Restored in 9.585639ms, 1 shards mapped
+Restoring db telegraf, rp autogen, shard 2 to shard 2...
+Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Restored shard 2 into shard 2 in 48.095082ms, 569344 bytes transferred
+Restored from my-full-backup in 58.58301ms, transferred 569344 bytes
 ```
 
-##### Restore a backed up database and merge it into an existing database
+##### Example 3: Perform a restore from an incremental backup for a single database and give the database a new name
+<br>
+```
+cd <path-to-backup-directory>
+influxd-ctl restore -db <src> -newdb <dest> .
+```
+
+<dt> In version 1.2.1, a restore from an incremental backup requires users to `cd` into
+the backup directory and run `influxd-ctl restore [options] .` from that directory.
+This issue will be fixed in the next point release.
+</dt>
+
+Output:
+```
+$ cd my-incremental-backup
+$ influxd-ctl restore -db telegraf -newdb restored_telegraf .
+Using backup directory: .
+Using meta backup: 20170130T231333Z.meta
+Restoring meta data... Done. Restored in 8.119655ms, 1 shards mapped
+Restoring db telegraf, rp autogen, shard 2 to shard 4...
+Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Restored shard 2 into shard 4 in 57.89687ms, 588800 bytes transferred
+Restored from . in 66.715524ms, transferred 588800 bytes
+```
+
+##### Example 4: Perform a restore from an incremental backup for a database and merge that database into an existing database
 <br>
 Your `telegraf` database was mistakenly dropped, but you have a recent backup so you've only lost a small amount of data.
 
 If [Telegraf](/telegraf/v1.2/) is still running, it will recreate the `telegraf` database shortly after the database is dropped.
 You might try to directly restore your `telegraf` backup just to find that you can't restore:
 
+<dt> In version 1.2.1, a restore from an incremental backup requires users to `cd` into
+the backup directory and run `influxd-ctl restore [options] .` from that directory.
+This issue will be fixed in the next point release.
+</dt>
+
 ```
-$ influxd-ctl restore -db telegraf ./20160803T225759Z.manifest
-Using manifest: ./20160803T225759Z.manifest
+$ cd my-incremental-backup
+$ influxd-ctl restore -db telegraf .
+Using backup directory: .
+Using meta backup: 20170130T231333Z.meta
 Restoring meta data... Error.
-restore: operation exited with error: problem setting snapshot: database already exists
+restore: operation exited with error: problem setting snapshot: cannot restore into non-empty cluster
 ```
 
 To work around this, you can restore your telegraf backup into a new database by specifying the `-db` flag for the source and the `-newdb` flag for the new destination:
 
 ```
-$ # influxd-ctl restore -db telegraf -newdb restored_telegraf ./20160803T225759Z.manifest
-Using manifest: ./20160803T225759Z.manifest
-Restoring meta data... Done. Restored in 119.785611ms, 1 shards mapped
-Restoring db telegraf, rp autogen, shard 4 to shard 5...
-Copying data to 13787a2bf2c6:8088... Copying data to cc8d090d7a5c:8088... Copying data to b0e32efdfda7:8088... Done. Restored shard 4 into shard 5 in 73.217002ms, 198144 bytes transferred
-Restored from . in 193.480371ms, transferred 198144 bytes
+$ cd my-incremental-backup
+$ influxd-ctl restore -db telegraf -newdb restored_telegraf .
+Using backup directory: .
+Using meta backup: 20170130T231333Z.meta
+Restoring meta data... Done. Restored in 19.915242ms, 1 shards mapped
+Restoring db telegraf, rp autogen, shard 2 to shard 7...
+Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Restored shard 2 into shard 7 in 36.417682ms, 588800 bytes transferred
+Restored from . in 56.623615ms, transferred 588800 bytes
 ```
 
 Then, in the [`influx` client](/influxdb/v1.2/tools/shell/), use an [`INTO` query](/influxdb/v1.2/query_language/data_exploration/#relocate-data) to copy the data from the new database into the existing `telegraf` database:
 
 ```
 $ influx
-> use restored_telegraf
+> USE restored_telegraf
 Using database restored_telegraf
 > SELECT * INTO telegraf..:MEASUREMENT FROM /.*/ GROUP BY *
 name: result
