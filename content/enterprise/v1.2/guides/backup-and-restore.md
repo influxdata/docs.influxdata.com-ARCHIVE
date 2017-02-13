@@ -63,14 +63,14 @@ Options:
 Restoring a `-full` backup and restoring an incremental backup require different syntax.
 To prevent issues with restore, keep `-full` backups and incremental backups in separate directories.
 
-<dt> In version 1.2, there is a known issue with restores from a backup directory
+<dt> In version 1.2.1, there is a known issue with restores from a backup directory
 that stores several **different** incremental backups.
 For a restore to function properly, incremental backups that specify different
 options (for example: they specify a different database with `-db` or a
 different retention policy with `-rp`) must be stored in different directories.
 If a single backup directory stores several different incremental backups, a
 restore only restores the most recent incremental backup.
-This issue will be fixed in the next point release.
+This issue is fixed in version 1.2.2.
 
 ##### Examples
 <br>
@@ -342,3 +342,20 @@ name: result
 time                  written
 1970-01-01T00:00:00Z  471
 ```
+
+#### Common Issues with Restore
+
+##### Issue 1: Restore writes information not part of the original backup
+<br>
+In some cases, a restore may appear to restore information that was not part of the relevant backup.
+Backups consist of a general data backup and a metastore backup.
+The **general data backup** contains the actual time series data: the measurements, tags, fields, and so on.
+The **metastore backup** contains user information, database names, retention policy names, shard metadata, continuous queries, and subscriptions.
+
+When the system creates a backup, the backup includes:
+
+* the relevant general data determined by the specified backup options
+* all of the metastore information in the cluster regardless of the specified backup options
+
+Because a backup always includes the complete metastore information, the restore may appear to restore data that were not included in the original backup command.
+The unintended data, however, include only the metastore information, not the general data associated with that metastore information.
