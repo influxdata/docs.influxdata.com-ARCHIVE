@@ -524,6 +524,10 @@ Environment variable: `INFLUXDB_CLUSTER_DIAL_TIMEOUT`
 
 ###  shard-writer-timeout = "5s"
 
+> In version 1.2.2+, `shard-writer-timeout` is no longer a configuration option.
+InfluxDB automatically sets `shard-writer-timeout` using the value defined by the [`write-timeout` setting](#write-timeout-10s).
+It is safe to remove this configuration for InfluxEnterprise versions 1.2.2+.
+
 The time in which a remote write to a single data node must complete after which
 the system returns a timeout error.
 
