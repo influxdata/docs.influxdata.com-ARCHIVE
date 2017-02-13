@@ -252,21 +252,22 @@ For example, `SELECT * FROM "hamlet" WHERE "bool"=True` returns all points with 
 
 Field values can be floats, integers, strings, or booleans.
 Field value types cannot differ within a
-[shard](/influxdb/v1.2/concepts/glossary/#shard), but they can differ across
-shards.
+[shard](/influxdb/v1.2/concepts/glossary/#shard), but they can [differ](/influxdb/v1.2/write_protocols/line_protocol_reference/#example-7-attempt-to-write-a-string-to-a-field-that-previously-accepted-floats) across shards.
 
-A `SELECT * FROM <measurement_name>` query returns all field values **if** all
-values have the same type.
+### The SELECT statement
+
+The
+[`SELECT` statement](/influxdb/v1.2/query_language/data_exploration/#the-basic-select-statement)
+returns all field values **if** all values have the same type.
 If field value types differ across shards, InfluxDB first performs any
-applicable
-[cast](/influxdb/v1.2/query_language/data_exploration/#cast-operations)
+applicable [cast](/influxdb/v1.2/query_language/data_exploration/#cast-operations)
 operations and then returns all values with the type that occurs first in the
 following list: float, integer, string, boolean.
 
 If your data have field value type discrepancies, use the syntax
 `<field_key>::<type>` to query the different data types.
 
-Example:
+#### Example:
 
 The measurement `just_my_type` has a single field called `my_field`.
 `my_field` has four field values across four different shards, and each value has
@@ -276,6 +277,7 @@ a different data type (float, integer, string, and boolean).
 Note that InfluxDB casts the integer value to a float in the response.
 ```
 SELECT * FROM just_my_type
+
 name: just_my_type
 ------------------
 time		                	my_field
@@ -291,6 +293,7 @@ casts the float `9.879034` to an integer in the second column.
 InfluxDB cannot cast floats or integers to strings or booleans.
 ```
 SELECT "my_field"::float,"my_field"::integer,"my_field"::string,"my_field"::boolean FROM just_my_type
+
 name: just_my_type
 ------------------
 time			               my_field	 my_field_1	 my_field_2		 my_field_3
@@ -298,6 +301,30 @@ time			               my_field	 my_field_1	 my_field_2		 my_field_3
 2016-06-03T16:45:00Z	 7	        7
 2016-06-03T17:45:00Z			                     a string
 2016-06-03T18:45:00Z					                                true
+```
+
+### The SHOW FIELD KEYS query
+
+`SHOW FIELD KEYS` returns every data type, across every shard, associated with
+the field key.
+
+#### Example
+
+The measurement `just_my_type` has a single field called `my_field`.
+`my_field` has four field values across four different shards, and each value has
+a different data type (float, integer, string, and boolean).
+`SHOW FIELD KEYS` returns all four data types:
+
+```
+> SHOW FIELD KEYS
+
+name: just_my_type
+fieldKey   fieldType
+--------   ---------
+my_field   float
+my_field   string
+my_field   integer
+my_field   boolean
 ```
 
 ## What are the minimum and maximum integers that InfluxDB can store?
@@ -517,15 +544,25 @@ time                    sunflowers                 time                  mean
 There are several possible explanations for why a query returns no data or partial data.
 We list some of the most frequent cases below:
 
+### Retention Policies
 The first and most common explanation involves [retention policies](/influxdb/v1.2/concepts/glossary/#retention-policy-rp) (RP).
 InfluxDB automatically queries data in a database’s `DEFAULT` RP.
 If your data are stored in an RP other than the `DEFAULT` RP, InfluxDB won’t return any results unless you [specify](/influxdb/v1.2/query_language/data_exploration/#example-7-select-all-data-from-a-fully-qualified-measurement) the alternative RP.
 
+### Tag Keys in the SELECT clause
+A query requires at least one [field key](/influxdb/v1.2/concepts/glossary/#field-key)
+in the `SELECT` clause to return data.
+If the `SELECT` clause only includes a single [tag key](/influxdb/v1.2/concepts/glossary/#tag-key) or several tag keys, the
+query returns an empty response.
+Please see the [Data Exploration](/influxdb/v1.2/query_language/data_exploration/#common-issues-with-the-select-statement) page for additional information.
+
+### Query Time Range
 Another possible explanation has to do with your query’s time range.
 By default, most [`SELECT` queries](/influxdb/v1.2/query_language/data_exploration/#the-basic-select-statement) cover the time range between `1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC. `SELECT` queries that also include a [`GROUP BY time()` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals), however, cover the time range between `1677-09-21 00:12:43.145224194` and [`now()`](/influxdb/v1.2/concepts/glossary/#now).
 If any of your data occur after `now()` a `GROUP BY time()` query will not cover those data points.
 Your query will need to provide [an alternative upper bound](/influxdb/v1.2/query_language/data_exploration/#time-syntax) for the time range if the query includes a `GROUP BY time()` clause and if any of your data occur after `now()`.
 
+### Identifier Names
 The final common explanation involves [schemas](/influxdb/v1.2/concepts/glossary/#schema) with [fields](/influxdb/v1.2/concepts/glossary/#field) and [tags](/influxdb/v1.2/concepts/glossary/#tag) that have the same key.
 If a field and tag have the same key, the field will take precedence in all queries.
 You’ll need to use the [`::tag` syntax](/influxdb/v1.2/query_language/data_exploration/#description-of-syntax) to specify the tag key in queries.
@@ -932,10 +969,86 @@ InfluxDB's line protocol relies on line feed (`\n`, which is ASCII `0x0A`) to in
 Note that Windows uses carriage return and line feed (`\r\n`) as the newline character.
 
 ## What words and characters should I avoid when writing data to InfluxDB?
-If you use any of the [InfluxQL keywords](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords) as an identifier you will need to double quote that identifier in every query.
-This can lead to [non-intuitive errors](/influxdb/v1.2/troubleshooting/errors/#error-parsing-query-found-expected-identifier-at-line-char).
-Identifiers are database names, retention policy names, user names, measurement names, tag keys, and field keys.
 
+### InfluxQL Keywords
+If you use an [InfluxQL keyword](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords) as an identifier you will need to double quote that identifier in every query.
+This can lead to [non-intuitive errors](/influxdb/v1.2/troubleshooting/errors/#error-parsing-query-found-expected-identifier-at-line-char).
+Identifiers are continuous query names, database names, field keys, measurement names, retention policy names, subscription names, tag keys, and user names.
+
+### time
+
+The keyword `time` is a special case.
+`time` can be a
+[continuous query](/influxdb/v1.2/concepts/glossary/#continuous-query-cq) name,
+database name,
+[measurement](/influxdb/v1.2/concepts/glossary/#measurement) name,
+[retention policy](/influxdb/v1.2/concepts/glossary/#retention-policy-rp) name,
+[subscription](/influxdb/v1.2/concepts/glossary/#subscription) name, and
+[user](/influxdb/v1.2/concepts/glossary/#user) name.
+In those cases, `time` does not require double quotes in queries.
+`time` cannot be a [field key](/influxdb/v1.2/concepts/glossary/#field-key) or
+[tag key](/influxdb/v1.2/concepts/glossary/#tag-key).
+If [Line Protocol](/influxdb/v1.2/concepts/glossary/#line-protocol) includes
+`time` as a field key or tag key, InfluxDB accepts the write and returns a `204`,
+but InfluxDB silently drops that field key or tag key and its associated value.
+
+#### Examples
+
+##### Example 1: Write `time` as a measurement and query it
+<br>
+```
+> INSERT time value=1
+
+> SELECT * FROM time
+
+name: time
+time                            value
+----                            -----
+2017-02-07T18:28:27.349785384Z  1
+```
+`time` is a valid measurement name in InfluxDB.
+
+##### Example 2: Write `time` as a field key and attempt to query it
+<br>
+```
+> INSERT mymeas time=1
+
+> SELECT time FROM mymeas
+ERR: error parsing query: at least 1 non-time field must be queried
+
+> SELECT "time" FROM mymeas
+ERR: error parsing query: at least 1 non-time field must be queried
+
+> SELECT * FROM mymeas
+>
+```
+`time` is not a valid field key in InfluxDB.
+The system does not return an error and does not write `time=1` to the database.
+
+##### Example 3: Write `time` as a tag key and attempt to query it
+<br>
+```
+> INSERT mymeas,time=1 value=1
+
+> SELECT value,time FROM mymeas
+
+name: mymeas
+time                           value
+----                           -----
+2017-02-07T18:39:41.69433731Z  1
+
+> SELECT * FROM mymeas
+
+name: mymeas
+time                           value
+----                           -----
+2017-02-07T18:39:41.69433731Z  1
+```
+
+`time` is not a valid tag key in InfluxDB.
+The system does not return an error and does not write `time=1` to the database.
+
+### Characters
 To keep regular expressions and quoting simple, avoid using the following characters in identifiers:  
 
 `\` backslash   

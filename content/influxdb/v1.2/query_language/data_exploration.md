@@ -387,6 +387,37 @@ In the CLI, specify the database to query data in a database other than the
 In the HTTP API, specify the database in place of using the `db` query
 string parameter if desired.
 
+### Common Issues with the SELECT statement
+
+#### Issue 1: Selecting tag keys in the SELECT clause
+A query requires at least one [field key](/influxdb/v1.2/concepts/glossary/#field-key)
+in the `SELECT` clause to return data.
+If the `SELECT` clause only includes a single [tag key](/influxdb/v1.2/concepts/glossary/#tag-key) or several tag keys, the
+query returns an empty response.
+This behavior is a result of how the system stores data.
+
+##### Example
+<br>
+The following query returns no data because it specifies a single tag key (`location`) in
+the `SELECT` clause:
+```
+> SELECT "location" FROM "h2o_feet"
+>
+```
+To return any data associated with the `location` tag key, the query's `SELECT`
+clause must include at least one field key (`water_level`):
+```
+> SELECT "water_level","location" FROM "h2o_feet" LIMIT 3
+name: h2o_feet
+time                   water_level  location
+----                   -----------  --------
+2015-08-18T00:00:00Z   8.12         coyote_creek
+2015-08-18T00:00:00Z   2.064        santa_monica
+[...]
+2015-09-18T21:36:00Z   5.066        santa_monica
+2015-09-18T21:42:00Z   4.938        santa_monica
+```
+
 ## The `WHERE` clause
 The `WHERE` filters data based on
 [fields](/influxdb/v1.2/concepts/glossary/#field),
@@ -662,6 +693,11 @@ set of [tags](/influxdb/v1.2/concepts/glossary/#tag) or a time interval.
 ## GROUP BY tags
 
 `GROUP BY <tag>` queries group query results by a user-specified set of [tags](/influxdb/v1.2/concepts/glossary/#tag).
+
+Tired of reading? Check out this InfluxQL Short:
+<br>
+<br>
+<iframe src="https://player.vimeo.com/video/200898048?title=0&byline=0&portrait=0" width="60%" height="250px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 #### Syntax
 
@@ -2302,6 +2338,11 @@ statement's [`WHERE` clause](#the-where-clause).
     <td><a href="#common-issues-with-time-syntax">Common Issues with Time Syntax</a></td>
   </tr>
 </table>
+
+Tired of reading? Check out this InfluxQL Short:
+<br>
+<br>
+<iframe src="https://player.vimeo.com/video/198723778?title=0&byline=0&portrait=0" width="60%" height="250px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 ## Absolute Time
 

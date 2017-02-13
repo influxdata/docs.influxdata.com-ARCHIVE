@@ -16,10 +16,14 @@ write points (unless you're using a [service plugin](/influxdb/v1.2/tools/#servi
 Using fictional temperature data, this page introduces Line Protocol.
 It covers:
 
-* [Syntax](#syntax)
-* [Data types](#data-types)
-* [Quoting](#quoting)
-* [Special characters and keywords](#special-characters-and-keywords)
+<table style="width:100%">
+  <tr>
+    <td><a href="#syntax">Syntax</a></td>
+    <td><a href="#data-types">Data Types</a></td>
+    <td><a href="#quoting">Quoting</a></td>
+    <td><a href="#special-characters-and-keywords">Special Characters and Keywords</a></td>
+  </tr>
+</table>
 
 The final section, [Writing data to InfluxDB](#writing-data-to-influxdb),
 describes how to get data into InfluxDB and how InfluxDB handles Line
@@ -140,6 +144,13 @@ such as microseconds, milliseconds, or seconds.
 We recommend using the coarsest precision possible as this can result in
 significant improvements in compression.
 See the [API Reference](/influxdb/v1.2/tools/api/#write) for more information.
+
+> #### Setup Tip:
+>
+Use the Network Time Protocol (NTP) to synchronize time between hosts.
+InfluxDB uses a host's local time in UTC to assign timestamps to data; if
+hosts' clocks aren't synchronized with NTP, the timestamps on the data written
+to InfluxDB can be inaccurate.
 
 ## Data types
 
@@ -380,6 +391,22 @@ as [identifier](/influxdb/v1.2/concepts/glossary/#identifier) names.
 In general, we recommend avoiding using InfluxQL keywords in your schema as
 it can cause
 [confusion](/influxdb/v1.2/troubleshooting/errors/#error-parsing-query-found-expected-identifier-at-line-char) when querying the data.
+
+The keyword `time` is a special case.
+`time` can be a
+[continuous query](/influxdb/v1.2/concepts/glossary/#continuous-query-cq) name,
+database name,
+[measurement](/influxdb/v1.2/concepts/glossary/#measurement) name,
+[retention policy](/influxdb/v1.2/concepts/glossary/#retention-policy-rp) name,
+[subscription](/influxdb/v1.2/concepts/glossary/#subscription) name, and
+[user](/influxdb/v1.2/concepts/glossary/#user) name.
+In those cases, `time` does not require double quotes in queries.
+`time` cannot be a [field key](/influxdb/v1.2/concepts/glossary/#field-key) or
+[tag key](/influxdb/v1.2/concepts/glossary/#tag-key).
+If [Line Protocol](/influxdb/v1.2/concepts/glossary/#line-protocol) includes
+`time` as a field key or tag key, InfluxDB accepts the write and returns a `204`,
+but InfluxDB silently drops that field key or tag key and its associated value.
+See [Frequently Asked Questions](/influxdb/v1.2/troubleshooting/frequently-asked-questions/#time) for more information.
 
 ## Writing data to InfluxDB
 

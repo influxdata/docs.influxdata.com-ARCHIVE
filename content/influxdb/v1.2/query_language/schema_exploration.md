@@ -12,7 +12,7 @@ The following sections cover useful query syntax for exploring your [schema](/in
 <table style="width:100%">
   <tr>
     <td><a href="#show-databases">SHOW DATABASES</a></td>
-    <td><a href="#Show-retention-policies">SHOW RETENTION POLICIES</a></td>
+    <td><a href="#show-retention-policies">SHOW RETENTION POLICIES</a></td>
     <td><a href="#show-series">SHOW SERIES</a></td>
   </tr>
   <tr>
@@ -1057,3 +1057,35 @@ water_level         float
 
 The query returns the fields keys and field value data types for the `h2o_feet`
 measurement in the `NOAA_water_database` database.
+
+### Common Issues with SHOW FIELD KEYS
+
+#### Issue 1: SHOW FIELD KEYS and field type discrepancies
+Field value
+[data types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types)
+cannot differ within a [shard](/influxdb/v1.2/concepts/glossary/#shard) but they
+can differ across shards.
+`SHOW FIELD KEYS` returns every data type, across every shard, associated with
+the field key.
+
+##### Example
+<br>
+The `all_the_types` field stores four different data types:
+
+```
+> SHOW FIELD KEYS
+
+name: mymeas
+fieldKey        fieldType
+--------        ---------
+all_the_types   integer
+all_the_types   float
+all_the_types   string
+all_the_types   boolean
+```
+
+Note that `SHOW FIELD KEYS` handles field type discrepancies differently from
+`SELECT` statements.
+See the
+[FAQ](/influxdb/v1.2/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-field-type-discrepancies-across-shards)
+page for more information.

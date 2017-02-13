@@ -227,9 +227,9 @@ Backup and restore has been updated to fix issues and refine existing capabiliti
 <br>
 # Web Console
 
-## v1.2.0 [2017-01-24]
+## v1.2.1 [2017-01-31]
 
-As of version 1.2, the `Rebalance` button on the Web Consoles `Tasks` page
+As of version 1.2.1, the `Rebalance` button on the Web Consoles `Tasks` page
 is deprecated and no longer available.
 We based this decision on customer and support feedback regarding the feature.
 For the time being, you will need to rebalance clusters manually.
