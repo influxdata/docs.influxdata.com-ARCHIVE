@@ -359,3 +359,9 @@ When the system creates a backup, the backup includes:
 
 Because a backup always includes the complete metastore information, the restore may appear to restore data that were not included in the original backup command.
 The unintended data, however, include only the metastore information, not the general data associated with that metastore information.
+
+##### Issue 2: Restore a backup created prior to version 1.2.0
+<br>
+InfluxEnterprise introduced incremental backups in version 1.2.0.
+To restore a backup created prior to version 1.2.0, be sure to follow the syntax
+for [restoring from a full backup](#restore-from-a-full-backup).
