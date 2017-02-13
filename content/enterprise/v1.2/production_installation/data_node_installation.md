@@ -63,7 +63,7 @@ data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.2/to
 
 Add your servers' hostnames and IP addresses to **each** cluster server's `/etc/hosts`
 file (the hostnames below are representative).
-Currently, hostnames **must** be all lowercase.
+Note that in versions prior to v1.2.2, hostnames **must** be all lowercase.
 
 ```
 <Data_1_IP> enterprise-data-01
