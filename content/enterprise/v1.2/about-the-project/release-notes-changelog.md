@@ -19,23 +19,26 @@ menu:
 
 ## v1.2.1 [2017-01-25]
 
-#### Bugfixes
+#### Cluster-specific Bugfixes
 
-- Fix panic: slice bounds out of range
+- Fix panic: Slice bounds out of range  
+&emsp;Fix how the system removes expired shards.
+- Remove misplaced newlines from cluster logs
 
 ## v1.2.0 [2017-01-24]
 
 ### Release Notes
 
 This release builds off of the 1.2.0 release of OSS InfluxDB.
-Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/master/CHANGELOG.md) for more information about the OSS release.
+Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.2/CHANGELOG.md#v120-2017-01-24) for more information about the OSS release.
 
 ### Upgrading
 
-* If you previously had [`retention-autocreate`](/enterprise/v1.2/administration/configuration/#retention-autocreate-true) set to `false` on your meta nodes, you will now also have to disable it [on the data nodes](/enterprise/v1.2/administration/configuration/#retention-autocreate-true-1) as well, since these operations are now done on the data nodes.
+* The [`retention-autocreate`](/enterprise/v1.2/administration/configuration/#retention-autocreate-true) setting now appears on data nodes as well as meta nodes.
+If you set `retention-autocreate` to `false` on your meta nodes, you now need to disable it in the [data node configuration files](/enterprise/v1.2/administration/configuration/#retention-autocreate-true-1) as well.
 * The previously deprecated `influxd-ctl force-leave` command has been removed. The replacement command to remove a meta node which is never coming back online is [`influxd-ctl remove-meta -force`](/enterprise/v1.2/features/cluster-commands/).
 
-#### Features
+#### Cluster-specific Features
 
 - Improve the meta store: any meta store changes are done via a compare and swap
 - Add support for [incremental backups](/enterprise/v1.2/guides/backup-and-restore/)
@@ -43,7 +46,7 @@ Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/m
 - Uncomment the section headers in the default [configuration file](/enterprise/v1.2/administration/configuration/)
 - Add InfluxQL support for [subqueries](/influxdb/v1.2/query_language/data_exploration/#subqueries)
 
-#### Bugfixes
+#### Cluster-specific Bugfixes
 
 - Update dependencies with Godeps
 - Fix a data race in meta client
@@ -64,24 +67,29 @@ Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/m
 
 ## v1.1.1 [2016-12-06]
 
-This release builds off of the 1.1.1 release of InfluxDB.
-Please see the [release notes](https://github.com/influxdata/influxdb/blob/1.1/CHANGELOG.md#v111-unreleased) for specific changes.
+### Release Notes
 
-This release is built with Go 1.7.4.
-It resolves a security vulnerability reported in Go version 1.7.3 which impacts all
+This release builds off of the 1.1.1 release of OSS InfluxDB.
+Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.1/CHANGELOG.md#v111-2016-12-06) for more information about the OSS release.
+
+This release is built with Go (golang) 1.7.4.
+It resolves a security vulnerability reported in Go (golang) version 1.7.3 which impacts all
 users currently running on the Mac OS X platform, powered by the Darwin operating system.
 
-#### Bugfixes
+#### Cluster-specific Bugfixes
 
-- Fix hinted-handoff issue: Fix record size larger than max size.
-    If a Hinted Handoff write appended a block that was larger than the maximum file size, the queue would get stuck because       the maximum size was not updated. When reading the block back out during processing, the system would return an error         because the block size was larger than the file size -- which indicates a corrupted block.
+- Fix hinted-handoff issue: Fix record size larger than max size  
+&emsp;If a Hinted Handoff write appended a block that was larger than the maximum file size, the queue would get stuck because       the maximum size was not updated. When reading the block back out during processing, the system would return an error         because the block size was larger than the file size -- which indicates a corrupted block.
 
 ## v1.1.0 [2016-11-14]
 
 ### Release Notes
+This release builds off of the 1.1.0 release of OSS InfluxDB.
+Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.1/CHANGELOG.md#v110-2016-11-14) for more information about the OSS release.
 
 ### Upgrading
 
+* The 1.1.0 release of OSS InfluxDB has some important [configuration changes](https://github.com/influxdata/influxdb/blob/1.1/CHANGELOG.md#configuration-changes) that may affect existing clusters.
 * The `influxd-ctl join` command has been renamed to `influxd-ctl add-meta`.  If you have existing scripts that use `influxd-ctl join`, they will need to use `influxd-ctl add-meta` or be updated to use the new cluster setup command.
 
 #### Cluster Setup
@@ -90,75 +98,75 @@ The `influxd-ctl join` command has been changed to simplify cluster setups.  To 
 
 #### Logging
 
-Switches to journald logging for on systemd systems. Logs will no longer be sent to `/var/log/influxdb` on systemd systems.
+Switches to journald logging for on systemd systems. Logs are no longer sent to `/var/log/influxdb` on systemd systems.
 
-#### Features
+#### Cluster-specific Features
 
-- Adds configuration option for setting gossiping frequency on data nodes.
-- Add queueBytes stat to hh\_processor, to indicate bytes in hh queue.
-- Adds auth to meta service API.
-- Update go dependencies, fix go vet, update circle go vet command.
-- Simplified join processes
-- query for versions running on all nodes
-- "influxd-ctl show shards" should trigger an error, if possible
+- Add a configuration option for setting gossiping frequency on data nodes
+- Allow for detailed insight into the Hinted Handoff queue size by adding `queueBytes` to the hh\_processor statistics
+- Add authentication to the meta service API
+- Update Go (golang) dependencies: Fix Go Vet and update circle Go Vet command
+- Simplify the process for joining nodes to a cluster
+- Include the node's version number in the `influxd-ctl show` output
+- Return and error if there are additional arguments after `influxd-ctl show`  
+&emsp;Fixes any confusion between the correct command for showing detailed shard information (`influxd-ctl show-shards`) and the incorrect command (`influxd-ctl show shards`)
 
-#### Bugfixes
+#### Cluster-specific Bugfixes
 
-- Getting latest snapshot will now timeout with an error after 30 seconds.
-- Don't include expired shards in the /show-shards output.
-- Ensure pprof-enabled config option is respected and profiling on meta nodes is enabled by default.
-- Respect pprof-enabled flag on data node.
-- For performance, use data reference instead of clone during read-only operations.
-- show stats: cluster reported twice
-- Ensure meta API redirects on all ErrNotLeader errors.
-- Don't overwrite Plutonium users when importing OSS users.
-- Fix data race in raft store.
-- Fix HH issue with large segments blocking HH progress.
-- kill-copy-shard reports success but does not interrupt the copy operation.
-- Adding data node with meta traffic blocked hangs forever
+- Return an error if getting latest snapshot takes longer than 30 seconds
+- Remove any expired shards from the `/show-shards` output
+- Respect the [`pprof-enabled` configuration setting](/enterprise/v1.2/administration/configuration/#pprof-enabled-true) and enable it by default on meta nodes
+- Respect the [`pprof-enabled` configuration setting](/enterprise/v1.2/administration/configuration/#pprof-enabled-true-1) on data nodes
+- Use the data reference instead of `Clone()` during read-only operations for performance purposes
+- Prevent the system from double-collecting cluster statistics
+- Ensure that the meta API redirects to the cluster leader when it gets the `ErrNotLeader` error
+- Don't overwrite cluster users with existing OSS InfluxDB users when migrating an OSS instance into a cluster
+- Fix a data race in the raft store
+- Allow large segment files (> 10MB) in the Hinted Handoff
+- Prevent `copy-shard` from retrying if the `copy-shard` command was killed
+- Prevent a hanging `influxd-ctl add-data` command by making data nodes check for meta nodes before they join a cluster
 
 ## v1.0.4 [2016-10-19]
 
-This release builds off of the 1.0.2 release of InfluxDB.  Please see the [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v102-2016-10-05) for specific changes.
+#### Cluster-specific Bugfixes
 
-#### Bugfixes
-
-- Respect hinted handoff configuration settings.
-- Fix expanding regular expressions when not all shards exist on node handling request.
+- Respect the [Hinted Handoff settings](/enterprise/v1.2/administration/configuration/#hinted-handoff) in the configuration file
+- Fix expanding regular expressions when all shards do not exist on node that's handling the request
 
 ## v1.0.3 [2016-10-07]
 
-This release builds off of the 1.0.2 release of InfluxDB.  Please see the [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v102-2016-10-05) for specific changes.
+#### Cluster-specific Bugfixes
 
-### Cluster-specific Bugfixes
-
-- Fix panic in hinted handoff: lastModified
+- Fix a panic in the Hinted Handoff: `lastModified`
 
 ## v1.0.2 [2016-10-06]
-This release builds off of the 1.0.2 release of InfluxDB.  Please see the [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v102-2016-10-05) for specific changes.
+### Release Notes
+This release builds off of the 1.0.2 release of OSS InfluxDB.  Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v102-2016-10-05) for more information about the OSS release.
 
-### Cluster-specific Bugfixes
+#### Cluster-specific Bugfixes
 
-- Prevent double read-lock in Meta Client.
-- Corrupted hinted handoff file prevents `influxd` from starting
-- Fix systemd package upgrade symlink failure
+- Prevent double read-lock in the meta client
+- Fix a panic around a corrupt block in Hinted Handoff
+- Fix  issue where `systemctl enable` would throw an error if the symlink already exists
 
 ## v1.0.1 [2016-09-28]
-This release builds off of the 1.0.1 OSS release of InfluxDB.
-Please see the [OSS release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v101-2016-09-26)
-for specific changes.
+### Release Notes
+This release builds off of the 1.0.1 release of OSS InfluxDB.
+Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v101-2016-09-26)
+for more information about the OSS release.
 
-### Cluster-specific Bugfixes
+#### Cluster-specific Bugfixes
 
 * Balance shards correctly with a restore
-* Fix panic in hinted handoff: `runtime error: invalid memory address or nil pointer dereference`
+* Fix a panic in the Hinted Handoff: `runtime error: invalid memory address or nil pointer dereference`
 * Ensure meta node redirects to leader when removing data node
-* Fix panic in hinted handoff: `runtime error: makeslice: len out of range`
-* Update sample config for data nodes
+* Fix a panic in the Hinted Handoff: `runtime error: makeslice: len out of range`
+* Update the data node configuration file so that only the minimum configuration options are uncommented
 
 ## v1.0.0 [2016-09-07]
-
-This release builds on the latest 1.0 master branch based off of 1.0beta3 + latest.  Please see the [release notes](https://github.com/influxdata/influxdb/blob/master/CHANGELOG.md#v100-unreleased) for specific changes.
+### Release Notes
+This release builds off of the 1.0.0 release of OSS InfluxDB.
+Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v100-2016-09-07) for more information about the OSS release.
 
 Breaking Changes:
 
@@ -169,14 +177,14 @@ Breaking Changes:
 
 A number of changes to hinted handoff are included in this release:
 
-* Truncating only the corrupt block in a corrupted segment to minimize data loss.
-* Immediately queue writes in hinted handoff if there are still writes pending to prevent inconsistencies in shards.
-* Remove hinted handoff queues when data nodes are removed to eliminate manual cleanup tasks.
+* Truncating only the corrupt block in a corrupted segment to minimize data loss
+* Immediately queue writes in hinted handoff if there are still writes pending to prevent inconsistencies in shards
+* Remove hinted handoff queues when data nodes are removed to eliminate manual cleanup tasks
 
 ### Performance
 
-* `SHOW MEASUREMENT` and `SHOW TAG VALUES` have been optimized to work better for multiple nodes and shards.
-* `DROP` and `DELETE` statements run in parallel and more efficiently and should not leave the system in an inconsistent state.
+* `SHOW MEASUREMENTS` and `SHOW TAG VALUES` have been optimized to work better for multiple nodes and shards
+* `DROP` and `DELETE` statements run in parallel and more efficiently and should not leave the system in an inconsistent state
 
 ### Security
 
@@ -188,33 +196,33 @@ Data nodes that can no longer be restarted can now be forcefully removed from th
 
 Backup and restore has been updated to fix issues and refine existing capabilities.  
 
-### Features
+#### Cluster-specific Features
 
-- Add Users method to control client
-- Force Removal Of Data Node
-- Disable logging stats queries
-- Optimize `SHOW MEASUREMENTS` and `SHOW TAG VALUES`
-- Update go package library dependencies
-- Minimize amount of data-loss in corrupted hinted handoff file by repairing it
-- Log a write error when hinted handoff queue is full for a node
-- Remove hinted handoff queues when data nodes are removed from the cluster
-- Add tests around import for meta store
-- Adds full TLS support to Plutonium's Cluster API, including the use of self-signed certificates
-- Improved backup/restore
-- Update shard group creation logic to be balanced
+- Add the Users method to control client
+- Add a `-force` option to the `influxd-ctl remove-data` command
+- Disable the logging of `stats` service queries
+- Optimize the `SHOW MEASUREMENTS` and `SHOW TAG VALUES` queries
+- Update the Go (golang) package library dependencies
+- Minimize the amount of data-loss in a corrupted Hinted Handoff file by truncating only the last corrupted segment instead of the entire file
+- Log a write error when the Hinted Handoff queue is full for a node
+- Remove Hinted Handoff queues on data nodes when the target data nodes are removed from the cluster
+- Add unit testing around restore in the meta store
+- Add full TLS support to the cluster API, including the use of self-signed certificates
+- Improve backup/restore to allow for partial restores to a different cluster or to a database with a different database name
+- Update the shard group creation logic to be balanced
 - Keep raft log to a minimum to prevent replaying large raft logs on startup
 
-### Bugfixes
+#### Cluster-specific Bugfixes
 
-- Remove bad connection from meta executor connection pool
-- Fix panic in meta store
-- Fix panic caused when shard group is not found
-- Corrupted Hinted Handoff
-- Ensure imported OSS admin users have all privileges
-- Ensure max-select-series is respected
-- Handle peer already known error
-- Hinted handoff panic
-- Drop writes if they contain field type inconsistencies
+- Remove bad connections from the meta executor connection pool
+- Fix a panic in the meta store
+- Fix a panic caused when a shard group is not found
+- Fix a corrupted Hinted Handoff
+- Ensure that any imported OSS admin users have all privileges in the cluster
+- Ensure that `max-select-series` is respected
+- Handle the `peer already known` error
+- Fix Hinted handoff panic around segment size check
+- Drop Hinted Handoff writes if they contain field type inconsistencies
 
 <br>
 <br>
@@ -242,8 +250,8 @@ development.
 
 ## v1.1.1 [2016-12-06]
 
-This release is built with Go 1.7.4.
-It resolves a security vulnerability reported in Go version 1.7.3 which impacts all
+This release is built with Go (golang) 1.7.4.
+It resolves a security vulnerability reported in Go (golang) version 1.7.3 which impacts all
 users currently running on the Mac OS X platform, powered by the Darwin operating system.
 
 ### Features
@@ -283,4 +291,3 @@ This release is for maintaining version parity with clustering.
 
 * **Rebalancing:** Rebalancing now ensures that all existing data adhere to the relevant [replication factor](/influxdb/v1.2/concepts/glossary/#replication-factor). See [Web Console Features](/enterprise/v1.2/features/web-console-features/#cluster-rebalancing) for more information.
 * **User updates:** In versions 0.7.2 and below, users were loosely synced between the cluster and web console. In version 1.0, users have web-console-specific functions and are given cluster-specific permissions by being associated with a separate cluster account. The document [InfluxEnterprise Users](/enterprise/v1.2/features/users/) describes the new user arrangement in more detail. Please note that this change requires additional steps if you are [upgrading](/enterprise/v1.2/administration/upgrading/) from a previous version of the web console.
-
