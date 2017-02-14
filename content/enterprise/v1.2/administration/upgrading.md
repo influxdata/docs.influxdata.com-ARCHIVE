@@ -16,11 +16,15 @@ We recommend that you review the
 to upgrading.
 
 Because of
-[a small change](/enterprise/v1.2/about-the-project/release-notes-changelog/#features)
+[some changes](/enterprise/v1.2/about-the-project/release-notes-changelog/)
 to the data node's configuration file, installing the new data package will
 prompt you to either keep or overwrite your current configuration file.
 We recommend that you keep a copy of your current configuration file and
 migrate any customizations to the new 1.2 configuration file.
+
+<dt>Please note that upgrading meta nodes to version 1.2.2 is a one-way process.
+Because of changes to the [meta service](/enterprise/v1.2/concepts/glossary/#meta-service), reverting a meta node from version 1.2.2 to a previous version is not supported.
+</dt>
 
 ## Upgrading from versions prior to 1.1 to 1.2
 
