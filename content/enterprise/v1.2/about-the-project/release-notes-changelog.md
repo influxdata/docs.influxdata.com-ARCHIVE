@@ -73,13 +73,8 @@ users currently running on the Mac OS X platform, powered by the Darwin operatin
 
 #### Bugfixes
 
-##### Fix hinted-handoff issue: Fix record size larger than max size
-<br>
-If a Hinted Handoff write appended a block that was larger than the maximum
-file size, the queue would get stuck because the maximum size was
-not updated. When reading the block back out during processing,
-the system would return an error because the block size was larger than the
-file size could be which indicates a corrupted block.
+- Fix hinted-handoff issue: Fix record size larger than max size.
+    If a Hinted Handoff write appended a block that was larger than the maximum file size, the queue would get stuck because       the maximum size was not updated. When reading the block back out during processing, the system would return an error         because the block size was larger than the file size -- which indicates a corrupted block.
 
 ## v1.1.0 [2016-11-14]
 
@@ -124,8 +119,6 @@ Switches to journald logging for on systemd systems. Logs will no longer be sent
 
 ## v1.0.4 [2016-10-19]
 
-#### OSS
-
 This release builds off of the 1.0.2 release of InfluxDB.  Please see the [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v102-2016-10-05) for specific changes.
 
 #### Bugfixes
@@ -144,8 +137,6 @@ This release builds off of the 1.0.2 release of InfluxDB.  Please see the [relea
 ## v1.0.2 [2016-10-06]
 This release builds off of the 1.0.2 release of InfluxDB.  Please see the [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v102-2016-10-05) for specific changes.
 
-### Cluster-specific Features
-
 ### Cluster-specific Bugfixes
 
 - Prevent double read-lock in Meta Client.
@@ -156,8 +147,6 @@ This release builds off of the 1.0.2 release of InfluxDB.  Please see the [relea
 This release builds off of the 1.0.1 OSS release of InfluxDB.
 Please see the [OSS release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v101-2016-09-26)
 for specific changes.
-
-### Cluster-specific Features
 
 ### Cluster-specific Bugfixes
 
@@ -272,13 +261,7 @@ users currently running on the Mac OS X platform, powered by the Darwin operatin
 There are no new features or bugfixes in version 1.0.3.
 This release is for maintaining version parity with clustering.
 
-### Features
-
-### Bugfixes
-
 ## v1.0.2 [2016-10-06]
-
-### Features
 
 ### Bugfixes
 
@@ -301,4 +284,3 @@ This release is for maintaining version parity with clustering.
 * **Rebalancing:** Rebalancing now ensures that all existing data adhere to the relevant [replication factor](/influxdb/v1.2/concepts/glossary/#replication-factor). See [Web Console Features](/enterprise/v1.2/features/web-console-features/#cluster-rebalancing) for more information.
 * **User updates:** In versions 0.7.2 and below, users were loosely synced between the cluster and web console. In version 1.0, users have web-console-specific functions and are given cluster-specific permissions by being associated with a separate cluster account. The document [InfluxEnterprise Users](/enterprise/v1.2/features/users/) describes the new user arrangement in more detail. Please note that this change requires additional steps if you are [upgrading](/enterprise/v1.2/administration/upgrading/) from a previous version of the web console.
 
-### Bugfixes
