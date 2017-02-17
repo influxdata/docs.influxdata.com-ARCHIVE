@@ -49,11 +49,16 @@ a restore differs depending on the backup type.
 
 ### Backup
 ```
-influxd-ctl [-bind <hostname>:8091] backup [options] <path-to-backup-directory>
+influxd-ctl [global-options] backup [backup-options] <path-to-backup-directory>
 ```
-Options:
 
-* `-bind <hostname>:8091`: the hostname and HTTP port of a running meta server (defaults to `localhost:8091`)
+Global options:
+
+Please see the [influxd-ctl documentation](/enterprise/v1.2/features/cluster-commands/#influxd-ctl-options)
+for a complete list of the global `influxd-ctl` options.
+
+Backup options:
+
 * `-db <string>`: the name of the single database to back up
 * `-from <TCP-address>`: the data node TCP address to prefer when backing up
 * `-full`: perform a full backup
@@ -186,16 +191,20 @@ This issue is fixed in version 1.2.2.
 </dt>
 
 ```
-influxd-ctl [-bind <hostname>:8091] restore [options] <path-to-backup-directory>
+influxd-ctl [global-options] restore [restore-options] <path-to-backup-directory>
 ```
 
 \* The existing cluster can have data in the `_internal` database, the database
 that the system creates by default.
 The system automatically drops the `_internal` database when it performs a complete restore.
 
-Options:
+Global options:
 
-* `-bind <hostname>:8091`: the hostname and HTTP port of a running meta server (defaults to `localhost:8091`)
+Please see the [influxd-ctl documentation](/enterprise/v1.2/features/cluster-commands/#influxd-ctl-options)
+for a complete list of the global `influxd-ctl` options.
+
+Restore options:
+
 * `-db <string>`: the name of the single database to restore
 * `-list`: shows the contents of the backup
 * `-newdb <string>`: the name of the new database to restore to (must specify with `-db`)
