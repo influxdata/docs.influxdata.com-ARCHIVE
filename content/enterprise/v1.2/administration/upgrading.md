@@ -9,16 +9,15 @@ menu:
 ## Upgrading from version 1.1 to 1.2
 
 For users currently on clustering version 1.1.x, please do not upgrade to clustering version 1.2.x.
-We are currently addressing and testing several issues identified in the 1.2.x release.
-We've include a list of those issues below.
+**We are currently addressing and testing several issues identified in the 1.2.x release.
+We've include a list of those issues below.**
 
-For users currently on clustering version 1.2.0, please upgrade to version 1.2.1 immediately.
-Clustering version 1.2.1 fixes [two issues](/enterprise/v1.2/about-the-project/release-notes-changelog/#v1-2-1-2017-01-25) that were identified in clustering version 1.2.0.
-The relevant 1.2.1 packages are listed below.
+For users currently on clustering version 1.2.0, please upgrade to version 1.2.1 **immediately**.
+Clustering version 1.2.1 fixes [two issues](/enterprise/v1.2/about-the-project/release-notes-changelog/#v1-2-1-2017-01-25) that were identified in clustering version 1.2.0. The relevant 1.2.1 packages are listed below.
+<br>
+If you have already upgraded to 1.2.x, please do **not** attempt to downgrade your cluster from version 1.2.x to 1.1.x; reverting from version 1.2.x to version 1.1.x is not a supported process.
+<br>
 
-We are currently addressing and testing several issues in the clustering version 1.2.1 release.
-We've include a list of those issues below.
-Please do not attempt to downgrade your cluster from version 1.2.x to 1.1.x; reverting from version 1.2.x to version 1.1.x is not a supported process.
 If you have any issues with your cluster, please do not hesitate to contact support at the email provided to you when you received your InfluxEnterprise license.
 
 ## Clustering version 1.2.1 packages
@@ -90,3 +89,5 @@ sudo yum localinstall influxdb-data-1.2.0_c1.2.1.x86_64.rpm
 - The `retryCAS` code doesn't wait for a newer snapshot before retrying.
 - Raft log buildup occurs on meta nodes.
 - RPM packages include sysvinit package dependency.
+
+**The InfluxData engineering team is working to address these issues as rapidly as possible. Look for a 1.2.x update shortly.**
