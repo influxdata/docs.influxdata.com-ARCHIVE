@@ -180,20 +180,20 @@ Durations can be specified with mixed units.
 
 #### Duration units
 
- Units  | Meaning
---------|-----------------------------------------
- u or µ | microseconds (1 millionth of a second)
- ms     | milliseconds (1 thousandth of a second)
- s      | second
- m      | minute
- h      | hour
- d      | day
- w      | week
+ Units    | Meaning
+----------|-----------------------------------------
+ us or µs | microseconds (1 millionth of a second)
+ ms       | milliseconds (1 thousandth of a second)
+ s        | second
+ m        | minute
+ h        | hour
+ d        | day
+ w        | week
 
 
 ```
 duration_lit        = int_lit duration_unit .
-duration_unit       = "u" | "µ" | "ms" | "s" | "m" | "h" | "d" | "w" .
+duration_unit       = "us" | "µs" | "ms" | "s" | "m" | "h" | "d" | "w" .
 ```
 
 ### Dates & Times
