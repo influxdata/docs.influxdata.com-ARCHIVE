@@ -1192,12 +1192,13 @@ SELECT DERIVATIVE(<field_key>, [<unit>]) FROM <measurement_name> [WHERE <stuff>]
 ```
 
 Valid time specifications for `unit` are:  
-`u` microseconds  
-`s` seconds  
-`m` minutes  
-`h` hours  
-`d` days  
-`w` weeks  
+`u` or `µ`&emsp;microseconds  
+`ms`&nbsp;&nbsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;milliseconds  
+`s`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;seconds  
+`m`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;minutes  
+`h`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;hours  
+`d`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;days  
+`w`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;weeks
 
 `DERIVATIVE()` also works with a nested function coupled with a `GROUP BY time()` clause.
 For queries that include those options, InfluxDB first performs the aggregation, selection, or transformation across the time interval specified in the `GROUP BY time()` clause.
@@ -1642,12 +1643,13 @@ SELECT NON_NEGATIVE_DERIVATIVE(<field_key>, [<unit>]) FROM <measurement_name> [W
 ```
 
 Valid time specifications for `unit` are:  
-`u` microseconds  
-`s` seconds  
-`m` minutes  
-`h` hours  
-`d` days  
-`w` weeks  
+`u` or `µ`&emsp;microseconds  
+`ms`&nbsp;&nbsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;milliseconds  
+`s`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;seconds  
+`m`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;minutes  
+`h`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;hours  
+`d`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;days  
+`w`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;weeks
 
 `NON_NEGATIVE_DERIVATIVE()` also works with a nested function coupled with a `GROUP BY time()` clause.
 For queries that include those options, InfluxDB first performs the aggregation, selection, or transformation across the time interval specified in the `GROUP BY time()` clause.

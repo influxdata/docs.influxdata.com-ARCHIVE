@@ -2538,13 +2538,13 @@ The whitespace between `-` or `+` and the [duration literal](/influxdb/v1.2/quer
 
 #### duration_literal
 
-`u`&emsp;microseconds  
-`ms`&nbsp;&nbsp;milliseconds  
-`s`&emsp;seconds  
-`m`&emsp;minutes  
-`h`&emsp;hours  
-`d`&emsp;days  
-`w`&emsp;weeks
+`u` or `µ`&emsp;microseconds  
+`ms`&nbsp;&nbsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;milliseconds  
+`s`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;seconds  
+`m`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;minutes  
+`h`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;hours  
+`d`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;days  
+`w`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;weeks
 
 ### Examples
 
