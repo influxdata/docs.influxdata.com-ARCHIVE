@@ -18,6 +18,7 @@ Where applicable, it links to outstanding issues on GitHub.
 * [How can I identify my version of InfluxDB?](#how-can-i-identify-my-version-of-influxdb)  
 * [What is the relationship between shard group durations and retention policies?](#what-is-the-relationship-between-shard-group-durations-and-retention-policies)
 * [Why aren't data dropped after I've altered a retention policy?](#why-aren-t-data-dropped-after-i-ve-altered-a-retention-policy)
+* [Why does InfluxDB fail to parse microsecond units in the configuration file?](#why-does-influxdb-fail-to-parse-microsecond-units-in-the-configuration-file)
 
 **Command Line Interface (CLI)**
 
@@ -40,7 +41,7 @@ Where applicable, it links to outstanding issues on GitHub.
 * [Why does my query return epoch 0 as the timestamp?](#why-does-my-query-return-epoch-0-as-the-timestamp)   
 * [Which InfluxQL functions support nesting?](#which-influxql-functions-support-nesting)
 
-**Querying data**  
+**Querying Data**  
 
 * [What determines the time intervals returned by `GROUP BY time()` queries?](#what-determines-the-time-intervals-returned-by-group-by-time-queries)  
 * [Why do my queries return no data or partial data?](#why-do-my-queries-return-no-data-or-partial-data)
@@ -57,13 +58,13 @@ Where applicable, it links to outstanding issues on GitHub.
 * [Does the order of the timestamps matter?](#does-the-order-of-the-timestamps-matter)
 * [How do I `SELECT` data with a tag that has no value?](#how-do-i-select-data-with-a-tag-that-has-no-value)
 
-**Series and series cardinality**
+**Series and Series Cardinality**
 
 * [How can I query for series cardinality?](#how-can-i-query-for-series-cardinality)  
 * [Why does series cardinality matter?](#why-does-series-cardinality-matter)  
 * [How can I remove series from the index?](#how-can-i-remove-series-from-the-index)
 
-**Writing data**  
+**Writing Data**  
 
 * [How do I write integer field values?](#how-do-i-write-integer-field-values)   
 * [How does InfluxDB handle duplicate points?](#how-does-influxdb-handle-duplicate-points)  
@@ -149,6 +150,23 @@ InfluxDB will drop that shard group once all of its data are outside the new
 `DURATION`.
 The system will then begin writing data to shard groups that have the new,
 shorter `SHARD DURATION` preventing any further unexpected data retention.
+
+## Why does InfluxDB fail to parse microsecond units in the configuration file?
+The syntax for specifying microsecond duration units differs for [configuration](/influxdb/v1.2/administration/config/) settings, writes, queries, and setting the precision in InfluxDB's [Command Line Interface](/influxdb/v1.2/tools/shell/) (CLI).
+The table below shows the supported syntax for each category:
+
+| |  Configuration File | HTTP API Writes | All Queries  | CLI Precision Command |
+|---|---|---|---|---|
+| u  | ❌ | 👍  |  👍 |  👍  |
+| us |  👍  | ❌ | ❌ |  ❌ |
+|  µ  | ❌ | ❌ |  👍  | ❌ |  
+|  µs  | 👍  | ❌ | ❌ |  ❌ |  
+
+
+If a configuration option specifies the `u` or `µ` syntax, InfluxDB fails to start and reports the following error in the logs:
+```
+run: parse config: time: unknown unit [µ|u] in duration [<integer>µ|<integer>u]
+```
 
 ## How do I make InfluxDB’s CLI return human readable timestamps?
 

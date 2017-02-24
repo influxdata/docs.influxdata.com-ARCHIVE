@@ -103,10 +103,20 @@ For each section of the configuration file the numbering restarts at zero.
 
 ## Configuration Options
 
-Every configuration section has configuration options.
-Every configuration option is optional.
-If a configuration option is not provided, its default value will be used.
-All configuration options listed below are set to their default value.
+Every configuration section has configuration options and every configuration option is optional.
+If you do not uncomment a configuration option, the system uses its default setting.
+The configuration options in this document are set to their default settings.
+
+Configuration options that specify a duration support the following duration units:
+
+`ns`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;nanoseconds  
+`us` or `µs`&emsp;microseconds  
+`ms`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;milliseconds  
+`s`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;seconds  
+`m`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;minutes  
+`h`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;hours  
+`d`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;days  
+`w`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;weeks
 
 >**Note:** This page documents configuration options for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/master/etc/config.sample.toml) will always be slightly ahead of what is documented here.
 
@@ -286,7 +296,7 @@ Environment variable: `INFLUXDB_COORDINATOR_MAX_CONCURRENT_QUERIES`
 The maximum time for which a query can run on your instance before InfluxDB
 kills the query.
 The default setting (`0`) allows queries to run with no time restrictions.
-This setting is a [duration literal](/influxdb/v1.2/query_language/spec/#durations).
+This setting is a [duration](#configuration-options).
 
 Environment variable: `INFLUXDB_COORDINATOR_QUERY_TIMEOUT`
 
@@ -296,7 +306,7 @@ The maximum time a query can run after which InfluxDB logs the query with a
 `Detected slow query` message.
 The default setting (`"0"`) will never tell InfluxDB to log the query.
 This setting is a
-[duration literal](/influxdb/v1.2/query_language/spec/#durations).
+[duration](#configuration-options).
 
 Environment variable: `INFLUXDB_COORDINATOR_LOG_QUERIES_AFTER`
 
