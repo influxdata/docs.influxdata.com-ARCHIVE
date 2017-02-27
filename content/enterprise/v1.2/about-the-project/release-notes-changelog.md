@@ -34,8 +34,8 @@ Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1
 
 ### Upgrading
 
-* The [`retention-autocreate`](/enterprise/v1.2/administration/configuration/#retention-autocreate-true) setting now appears on data nodes as well as meta nodes.
-If you set `retention-autocreate` to `false` on your meta nodes, you now need to disable it in the [data node configuration files](/enterprise/v1.2/administration/configuration/#retention-autocreate-true-1) as well.
+* The `retention-autocreate` configuration option has moved from the meta node configuration file to the [data node configuration file](/enterprise/v1.2/administration/configuration/#retention-autocreate-true).
+To disable the auto-creation of retention policies, set `retention-autocreate` to `false` in your data node configuration files.
 * The previously deprecated `influxd-ctl force-leave` command has been removed. The replacement command to remove a meta node which is never coming back online is [`influxd-ctl remove-meta -force`](/enterprise/v1.2/features/cluster-commands/).
 
 #### Cluster-specific Features
