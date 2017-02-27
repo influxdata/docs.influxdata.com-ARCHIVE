@@ -254,20 +254,6 @@ user's perspective.
 
 Environment variable: `INFLUXDB_META_ANNOUNCEMENT_EXPIRATION`
 
-###  retention-autocreate = true
-
-Set to `false` to disable the automatic creation of an `autogen` [retention policy](/influxdb/v1.2/concepts/glossary/#retention-policy-rp) for new databases.
-
-If set to `true`, InfluxDB automatically creates a `DEFAULT` retention policy
-when a database is created.
-That retention policy is called `autogen`, has an infinite
-[duration](/influxdb/v1.2/concepts/glossary/#duration), a one week [shard duration](/influxdb/v1.2/concepts/glossary/#shard-duration), and a
-[replication factor](/influxdb/v1.2/concepts/glossary/#replication-factor) set
-to the number of nodes in the cluster.
-If set to `false`, you must explicitly create a `DEFAULT` retention policy on every new database before that database can accept any writes.
-
-Environment variable: `INFLUXDB_META_RETENTION_AUTOCREATE`
-
 ###  election-timeout = "1s"
 
 The duration a Raft candidate spends in the candidate state without a leader
