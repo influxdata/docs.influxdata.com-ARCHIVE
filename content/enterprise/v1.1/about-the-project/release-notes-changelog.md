@@ -17,6 +17,16 @@ This release is built with Go 1.7.4.
 It resolves a security vulnerability reported in Go version 1.7.3 which impacts all
 users currently running on the Mac OS X platform, powered by the Darwin operating system.
 
+#### Bugfixes
+
+##### Fix hinted-handoff issue: Fix record size larger than max size
+<br>
+If a Hinted Handoff write appended a block that was larger than the maximum
+file size, the queue would get stuck because the maximum size was
+not updated. When reading the block back out during processing,
+the system would return an error because the block size was larger than the
+file size could be which indicates a corrupted block.
+
 ## v1.1.0 [2016-11-14]
 
 ### Release Notes

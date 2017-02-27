@@ -162,7 +162,8 @@ The options for specifying time durations with `now()` are:
 
 |Letter|Meaning|
 |:---:|:---:|
-|u|microseconds|
+|u or µ|microseconds|
+| ms | milliseconds |
 |s | seconds   		|
 | m        | minutes   		|
 | h        | hours   		|

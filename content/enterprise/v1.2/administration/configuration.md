@@ -304,9 +304,9 @@ Meta logging toggles the logging of messages from the meta service.
 
 Environment variable: `INFLUXDB_META_LOGGING_ENABLED`
 
-###  pprof-enabled = false
+###  pprof-enabled = true
 
-Set to `true` to enable the `/debug/pprof` endpoint for troubleshooting.
+Set to `false` to disable the `/debug/pprof` endpoint for troubleshooting.
 
 Environment variable: `INFLUXDB_META_PPROF_ENABLED`
 
@@ -729,6 +729,12 @@ Environment variable: `INFLUXDB_HTTP_LOG_ENABLED`
 See the [OSS documentation](/influxdb/v1.2/administration/config/#write-tracing-false).
 
 Environment variable: `INFLUXDB_HTTP_WRITE_TRACING`
+
+### pprof-enabled = true
+
+See the [OSS documentation](/influxdb/v1.2/administration/config/#pprof-enabled-true).
+
+Environment variable: `INFLUXDB_HTTP_PPROF_ENABLED`
 
 ###  https-enabled = false
 

@@ -27,14 +27,17 @@ a separate server.
 
 #### Ubuntu & Debian (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise_1.2.1_amd64.deb
-sudo dpkg -i influx-enterprise_1.2.1_amd64.deb
+wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise_1.1.1_amd64.deb
+sudo dpkg -i influx-enterprise_1.1.1_amd64.deb
 ```
 #### RedHat & CentOS (64-bit)
 ```
-wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise-1.2.1.x86_64.rpm
-sudo yum localinstall influx-enterprise-1.2.1.x86_64.rpm
+wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise-1.1.1.x86_64.rpm
+sudo yum localinstall influx-enterprise-1.1.1.x86_64.rpm
 ```
+
+<dt>For users looking to upgrade to version 1.2.x, please see the [Upgrading](/enterprise/v1.2/administration/upgrading/) document for important information about that release.</dt>
+
 > **Notes:**
 >
 * For other distributions, visit

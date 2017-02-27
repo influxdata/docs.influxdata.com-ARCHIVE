@@ -127,6 +127,8 @@ sudo yum localinstall influxdb-meta-1.2.1_c1.2.2.x86_64.rpm
 {{< /tab-content-container >}}
 {{< /vertical-tabs >}}
 
+<dt>For users looking to upgrade to version 1.2.x, please see the [Upgrading](/enterprise/v1.2/administration/upgrading/) document for important information about that release.</dt>
+
 ### II. Edit the Meta Service Configuration File
 
 In `/etc/influxdb/influxdb-meta.conf`:
@@ -221,6 +223,7 @@ sudo yum localinstall influxdb-data-1.2.1_c1.2.2.x86_64.rpm
 {{< /tab-content-container >}}
 {{< /vertical-tabs >}}
 
+<dt>For users looking to upgrade to version 1.2.x, please see the [Upgrading](/enterprise/v1.2/administration/upgrading/) document for important information about that release.</dt>
 
 ### II. Edit the Data Service Configuration File
 
