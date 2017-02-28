@@ -59,3 +59,7 @@ Functionality will vary, and there are, as yet, no standard features that all li
 
 ## Sensu
 - [sensu-influxdb-extension](https://github.com/jhrv/sensu-influxdb-extension) by [jhrv](https://github.com/jhrv)
+
+## SNMP agent 
+- [snmpcollector](https://github.com/toni-moreno/snmpcollector)  by [toni-moreno](https://github.com/toni-moreno) A full featured Generic SNMP data collector with Web Administration Interface for InfluxDB.
+
