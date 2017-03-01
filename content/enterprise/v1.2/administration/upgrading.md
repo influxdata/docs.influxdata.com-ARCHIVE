@@ -10,7 +10,7 @@ menu:
 
 For users currently on clustering version 1.1.x, please do not upgrade to clustering version 1.2.x.
 **We are currently addressing and testing several issues identified in the 1.2.x release.
-We've include a list of those issues below.**
+We've included a list of those issues below.**
 
 For users currently on clustering version 1.2.0, please upgrade to version 1.2.1 **immediately**.
 Clustering version 1.2.1 fixes [two issues](/enterprise/v1.2/about-the-project/release-notes-changelog/#v1-2-1-2017-01-25) that were identified in clustering version 1.2.0. The relevant 1.2.1 packages are listed below.
