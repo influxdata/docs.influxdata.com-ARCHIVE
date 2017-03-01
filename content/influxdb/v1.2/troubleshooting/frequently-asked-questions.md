@@ -80,24 +80,41 @@ and when authentication requests.
 ## How can I identify my version of InfluxDB?
 There a number of ways to identify the version of InfluxDB that you're using:
 
-* Check the return when you `curl` the `/ping` endpoint.
-For example, if you're using 1.2.0 `curl -i 'http://localhost:8086/ping'` returns:  
+#### Run `influxd version` in your terminal:
+```
+$ influxd version
 
-`HTTP/1.2 204 No Content`  
-`Request-Id: 874101f6-e23e-11e5-8097-000000000000`  
-✨`X-Influxdb-Version: 1.2.0`✨  
-`Date: Fri, 04 Mar 2016 19:23:08 GMT`
+InfluxDB ✨ v1.2.0 ✨ (git: master b7bb7e8359642b6e071735b50ae41f5eb343fd42)
+```
 
-If authentication is enabled you will need to use `https` in the URL.
+#### `curl` the `/ping` endpoint:
 
-* Check the text that appears when you [launch](/influxdb/v1.2/tools/shell/) the CLI:
+```
+$ url -i 'http://localhost:8086/ping'
 
-`Connected to http://localhost:8086`✨`version 1.2.0`✨  
-`InfluxDB shell 1.2.0`
+HTTP/1.1 204 No Content
+Content-Type: application/json
+Request-Id: 1e08aeb6-fec0-11e6-8486-000000000000
+✨ X-Influxdb-Version: 1.2.0 ✨
+Date: Wed, 01 Mar 2017 20:46:17 GMT
+```
 
-* Check the HTTP response in your logs:  
+#### Launch InfluxDB's [Command Line Interface](/influxdb/v1.2/tools/shell/):
 
-`[http] 2016/03/04 11:25:13 ::1 - - [04/Mar/2016:11:25:13 -0800] GET /query?db=&epoch=ns&q=show+databases HTTP/1.2 200 98 -`     ✨`InfluxDBShell/1.2.0`✨`d16e7a83-e23e-11e5-80a7-000000000000 529.543µs`
+```
+$ influx
+
+Connected to http://localhost:8086✨ version 1.2.0 ✨  
+InfluxDB shell version: 1.2.0
+```
+
+#### Check the HTTP response in your logs:  
+
+```
+$ journald-ctl -u influxdb.service
+
+Mar 01 20:49:45 rk-api influxd[29560]: [httpd] 127.0.0.1 - - [01/Mar/2017:20:49:45 +0000] "POST /query?db=&epoch=ns&q=SHOW+DATABASES HTTP/1.1" 200 151 "-" ✨ "InfluxDBShell/1.2.0" ✨ 9a4371a1-fec0-11e6-84b6-000000000000 1709
+```
 
 ## What is the relationship between shard group durations and retention policies?
 

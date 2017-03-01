@@ -121,9 +121,14 @@ returns:
 <br>
 
 ```bash
-HTTP/1.2 400 Bad Request
-[...]
-write failed: field type conflict: input field "booleanonly" on measurement "tobeornottobe" is type float64, already exists as type boolean
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+Request-Id: [...]
+X-Influxdb-Version: 1.2.x
+Date: Wed, 01 Mar 2017 19:38:01 GMT
+Content-Length: 150
+
+{"error":"field type conflict: input field \"booleanonly\" on measurement \"tobeornottobe\" is type float, already exists as type boolean dropped=1"}
 ```
 
 * Writing a point to a database that doesn't exist:
@@ -136,11 +141,19 @@ returns:
 <br>
 
 ```bash
-HTTP/1.2 404 Not Found
-[...]
-database not found: "atlantis"
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+Request-Id: [...]
+X-Influxdb-Version: 1.2.x
+Date: Wed, 01 Mar 2017 19:38:35 GMT
+Content-Length: 45
+
+{"error":"database not found: \"atlantis\""}
 ```
 
 ### Next steps
 ---
 Now that you know how to write data with the built-in HTTP API discover how to query them with the [Querying Data](/influxdb/v1.2/guides/querying_data/) guide!
+For more information about writing data with the HTTP API, please see the [API reference documentation](/influxdb/v1.2/tools/api/#write).
+
+

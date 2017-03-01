@@ -23,10 +23,11 @@ The results of your query appear in the `"results"` array.
 If an error occurs, InfluxDB sets an `"error"` key with an explanation of the error.
 <br>
 
-```json
+```
 {
     "results": [
         {
+            "statement_id": 0,
             "series": [
                 {
                     "name": "cpu_load_short",
@@ -37,11 +38,11 @@ If an error occurs, InfluxDB sets an `"error"` key with an explanation of the er
                     "values": [
                         [
                             "2015-01-29T21:55:43.702900257Z",
-                            0.55
+                            2
                         ],
                         [
                             "2015-01-29T21:55:43.702900257Z",
-                            23422
+                            0.55
                         ],
                         [
                             "2015-06-11T20:46:02Z",
@@ -69,10 +70,11 @@ curl -G 'http://localhost:8086/query?pretty=true' --data-urlencode "db=mydb" --d
 
 returns:  
 <br>
-```json
+```
 {
     "results": [
         {
+            "statement_id": 0,
             "series": [
                 {
                     "name": "cpu_load_short",
@@ -83,11 +85,11 @@ returns:
                     "values": [
                         [
                             "2015-01-29T21:55:43.702900257Z",
-                            0.55
+                            2
                         ],
                         [
                             "2015-01-29T21:55:43.702900257Z",
-                            23422
+                            0.55
                         ],
                         [
                             "2015-06-11T20:46:02Z",
@@ -98,6 +100,7 @@ returns:
             ]
         },
         {
+            "statement_id": 1,
             "series": [
                 {
                     "name": "cpu_load_short",
@@ -152,3 +155,5 @@ curl -G 'http://localhost:8086/query' --data-urlencode "db=deluge" --data-urlenc
 ### InfluxQL
 ---
 Now that you know how to query data, check out the [Data Exploration page](/influxdb/v1.2/query_language/data_exploration/) to get acquainted with InfluxQL.
+For more information about querying data with the HTTP API, please see the [API reference documentation](/influxdb/v1.2/tools/api/#query).
+
