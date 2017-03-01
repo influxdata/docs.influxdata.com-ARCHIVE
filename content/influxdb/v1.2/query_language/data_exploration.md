@@ -3012,11 +3012,10 @@ time                   water_level
 With InfluxDB's [HTTP API](/influxdb/v1.2/tools/api/):
 
 ```
-~# curl -G 'http://localhost:8086/query?db=NOAA_water_database' --data-urlencode 'q=SELECT MEAN("water_level") FROM "h2o_feet"; SELECT "water_level" FROM "h2o_feet" LIMIT 2'
-
 {
     "results": [
         {
+            "statement_id": 0,
             "series": [
                 {
                     "name": "h2o_feet",
@@ -3027,13 +3026,14 @@ With InfluxDB's [HTTP API](/influxdb/v1.2/tools/api/):
                     "values": [
                         [
                             "1970-01-01T00:00:00Z",
-                            4.442107025822521
+                            4.442107025822522
                         ]
                     ]
                 }
             ]
         },
         {
+            "statement_id": 1,
             "series": [
                 {
                     "name": "h2o_feet",
