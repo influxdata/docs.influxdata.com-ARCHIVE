@@ -81,7 +81,7 @@ sudo yum localinstall influxdb-data-1.2.0_c1.2.1.x86_64.rpm
 
 #### Hinted Handoff
 - Dropped writes are not recorded when the hinted handoff queue reaches the maximum size.
-- The hinted handoff queue becomes blocked if it experiences field type errors.
+- The hinted handoff queue drops points encountering field type conflicts or hitting the max-values-per-tag limit.
 
 #### Other
 - A panic occurs when the system fails to process points.
