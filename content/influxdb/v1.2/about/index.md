@@ -1,8 +1,8 @@
 ---
-title: About InfluxDB
+title: About the Project
 ---
 
-## [Release Notes/Changelog](https://github.com/influxdata/influxdb/blob/master/CHANGELOG.md)
+## [Release Notes/Changelog](/influxdb/v1.2/about_the_project/release-notes-changelog/)
 
 ## [Contributing](https://github.com/influxdata/influxdb/blob/master/CONTRIBUTING.md)
 
