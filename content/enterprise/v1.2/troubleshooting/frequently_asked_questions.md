@@ -20,6 +20,19 @@ In the `Account Details` section, select the checkbox next to `Admin` and click
 
 ![Web Console Admin User](/img/enterprise/admin_user_1.png)
 
+## Where can I find InfluxEnterprise logs?
+
+On systemd operating systems service logs can be accessed using the `journalctl` command.
+
+Meta: `journalctl -u influxdb-meta`
+
+Data : `journalctl -u influxdb`
+
+Enterprise console: `journalctl -u influx-enterprise`
+
+The `journalctl` output can be redirected to print the logs to a text file. With systemd, log retention depends on the system's journald settings.
+
+
 # Known Errors
 
 ## Why am I seeing a `503 Service Unavailable` error in my meta node logs?
