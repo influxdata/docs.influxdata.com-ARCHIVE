@@ -119,9 +119,9 @@ Mar 01 20:49:45 rk-api influxd[29560]: [httpd] 127.0.0.1 - - [01/Mar/2017:20:49:
 
 ## Where can I find InfluxDB logs?
 
-On System V operating systems logs are stored under /var/log/influxdb/ .
+On System V operating systems logs are stored under `/var/log/influxdb/`.
 
-On systemd operating systems you can access the logs using journalctl.
+On systemd operating systems you can access the logs using `journalctl`.
 Use `journalctl -u influxdb` to view the logs in the journal or `journalctl -u influxdb > influxd.log` to print the logs to a text file. With systemd, log retention depends on your system's journald settings.
 
 ## What is the relationship between shard group durations and retention policies?
