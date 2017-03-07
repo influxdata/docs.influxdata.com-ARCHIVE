@@ -16,6 +16,7 @@ Where applicable, it links to outstanding issues on GitHub.
 
 * [How do I include a single quote in a password?](#how-do-i-include-a-single-quote-in-a-password)  
 * [How can I identify my version of InfluxDB?](#how-can-i-identify-my-version-of-influxdb)  
+* [Where can I find InfluxDB logs?](#where-can-i-find-influxdb-logs)
 * [What is the relationship between shard group durations and retention policies?](#what-is-the-relationship-between-shard-group-durations-and-retention-policies)
 * [Why aren't data dropped after I've altered a retention policy?](#why-aren-t-data-dropped-after-i-ve-altered-a-retention-policy)
 * [Why does InfluxDB fail to parse microsecond units in the configuration file?](#why-does-influxdb-fail-to-parse-microsecond-units-in-the-configuration-file)
@@ -115,6 +116,13 @@ $ journald-ctl -u influxdb.service
 
 Mar 01 20:49:45 rk-api influxd[29560]: [httpd] 127.0.0.1 - - [01/Mar/2017:20:49:45 +0000] "POST /query?db=&epoch=ns&q=SHOW+DATABASES HTTP/1.1" 200 151 "-" ✨ "InfluxDBShell/1.2.0" ✨ 9a4371a1-fec0-11e6-84b6-000000000000 1709
 ```
+
+## Where can I find InfluxDB logs?
+
+On System V operating systems logs are stored under `/var/log/influxdb/`.
+
+On systemd operating systems you can access the logs using `journalctl`.
+Use `journalctl -u influxdb` to view the logs in the journal or `journalctl -u influxdb > influxd.log` to print the logs to a text file. With systemd, log retention depends on your system's journald settings.
 
 ## What is the relationship between shard group durations and retention policies?
 
