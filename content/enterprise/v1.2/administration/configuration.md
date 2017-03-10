@@ -216,6 +216,16 @@ is not necessary.
 
 Environment variable: `INFLUXDB_META_BIND_ADDRESS`
 
+### auth-enabled = false
+
+Set to `true` to enable authentication.
+Meta nodes support JWT authentication and Basic authentication.
+For JWT authentication, also see the [`shared-secret`](#shared-secret) and [`internal-shared-secret`](#internal-shared-secret) configuration options.
+
+If set to `true`, also set the [`meta-auth-enabled` option](#meta-auth-enabled-false) to `true` in the `[meta]` section of the data node configuration file.
+
+Environment variable: `INFLUXDB_META_AUTH_ENABLED`
+
 ###  http-bind-address = ":8091"
 
 The port used by the [`influxd-ctl` tool](/enterprise/v1.2/features/cluster-commands/) and by data nodes to access the
@@ -238,6 +248,19 @@ The path of the certificate file.
 This is required if [`https-enabled`](#https-enabled-false) is set to `true`.
 
 Environment variable: `INFLUXDB_META_HTTPS_CERTIFICATE`
+
+### https-private-key = ""
+
+The path of the private key file.
+
+Environment variable: `INFLUXDB_META_HTTPS_PRIVATE_KEY`
+
+### https-insecure-tls = false
+
+Set to `true` to allow insecure HTTPS connections to meta nodes.
+Use this setting when testing with self-signed certificates.
+
+Environment variable: `INFLUXDB_META_HTTPS_INSECURE_TLS`
 
 ###  gossip-frequency = "5s"
 
@@ -283,6 +306,10 @@ avoid unnecessary Raft elections.
 
 Environment variable: `INFLUXDB_META_LEADER_LEASE_TIMEOUT`
 
+### consensus-timeout = "30s"
+
+Environment variable: `INFLUXDB_META_CONSENSUS_TIMEOUT`
+
 ###  commit-timeout = "50ms"
 
 The commit timeout is the amount of time a Raft node will tolerate between
@@ -320,6 +347,18 @@ For example, [Continuous Queries](/influxdb/v1.2/concepts/glossary/#continuous-q
 (CQ) use a lease so that all data nodes aren't running the same CQs at once.
 
 Environment variable: `INFLUXDB_META_LEASE_DURATION`
+ 
+### shared-secret = ""
+The shared secret used by the API for JWT authentication.
+Set [`auth-enabled`](#auth-enabled-false) to `true` if using this option.
+
+Environment variable: `INFLUXDB_META_SHARED_SECRET`
+
+### internal-shared-secret = ""
+The shared secret used by the internal API for JWT authentication.
+Set [`auth-enabled`](#auth-enabled-false) to `true` if using this option.
+
+Environment variable: `INFLUXDB_META_INTERNAL_SHARED_SECRET`
 
 <br>
 <br>
@@ -355,6 +394,14 @@ Environment variable: `INFLUXDB_BIND_ADDRESS`
 ### hostname = "localhost"
 
 The hostname of the [data node](/enterprise/v1.2/concepts/glossary/#data-node).
+
+Environment variable: `INFLUXDB_HOSTNAME`
+
+### gossip-frequency = "3s"
+
+How often to update the cluster with this node's internal status.
+
+Environment variable: `INFLUXDB_GOSSIP_FREQUENCY`
 
 ## [enterprise]
 
@@ -419,6 +466,20 @@ Set to `true` to allow the data node to accept self-signed certificates if
 
 Environment variable: `INFLUXDB_META_META_INSECURE_TLS`
 
+### meta-auth-enabled = false
+
+Set to `true` if [`auth-enabled`](#auth-enabled-false) is set to `true` in the meta node configuration files.
+For JWT authentication, also see the [`meta-internal-shared-secret`](#meta-internal-shared-secret) configuration option.
+
+Environment variable: `INFLUXDB_META_META_AUTH_ENABLED`
+
+### meta-internal-shared-secret = ""
+
+The shared secret used by the internal API for JWT authentication.
+Set to the [`internal-shared-secret`](#internal-shared-secret) specified in the meta node configuration file.
+
+Environment variable: `INFLUXDB_META_META_INTERNAL_SHARED_SECRET`
+
 ###  retention-autocreate = true
 
 See the [OSS documentation](/influxdb/v1.2/administration/config/#retention-autocreate-true).
@@ -446,12 +507,6 @@ Environment variable: `INFLUXDB_DATA_DIR`
 See the [OSS documentation](/influxdb/v1.2/administration/config/#wal-dir-var-lib-influxdb-wal).
 
 Environment variable: `INFLUXDB_DATA_WAL_DIR`
-
-###  wal-logging-enabled = true
-
-See the [OSS documentation](/influxdb/v1.2/administration/config/#wal-logging-enabled-true).
-
-Environment variable: `INFLUXDB_DATA_WAL_LOGGING_ENABLED`
 
 ###  query-log-enabled = true
 
@@ -488,6 +543,12 @@ Environment variable: `INFLUXDB_DATA_COMPACT_FULL_WRITE_COLD_DURATION`
 See the [OSS documentation](/influxdb/v1.2/administration/config/#max-series-per-database-1000000).
 
 Environment variable: `INFLUXDB_DATA_MAX_SERIES_PER_DATABASE`
+
+### max-values-per-tag = 100000
+
+See the [OSS documentation](/influxdb/v1.2/administration/config/#max-values-per-tag-100000).
+
+Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 
 ###  trace-logging-enabled = false
 
@@ -696,6 +757,27 @@ See the [OSS documentation](/influxdb/v1.2/administration/config/#http-timeout-3
 
 Environment variable: `INFLUXDB_SUBSCRIBER_HTTP_TIMEOUT`
 
+### insecure-skip-verify = false
+Allows insecure HTTPS connections to subscribers.
+Use this option when testing with self-signed certificates.
+
+Environment variable: `INFLUXDB_SUBSCRIBER_INSECURE_SKIP_VERIFY`
+
+### ca-certs = ""
+The path to the PEM encoded CA certs file. If the empty string, the default system certs will be used.
+
+Environment variable: `INFLUXDB_SUBSCRIBER_CA_CERTS`
+
+### write-concurrency = 40
+The number of writer Goroutines processing the write channel.
+
+Environment variable: `INFLUXDB_SUBSCRIBER_WRITE_CONCURRENCY`
+
+### write-buffer-size = 1000
+The number of in-flight writes buffered in the write channel.
+
+Environment variable: `INFLUXDB_SUBSCRIBER_WRITE_BUFFER_SIZE`
+
 ## [http]
 
 See the [OSS documentation](/influxdb/v1.2/administration/config/#http).
@@ -779,6 +861,16 @@ Environment variable: `INFLUXDB_HTTP_SHARED_SECRET`
 See the [OSS documentation](/influxdb/v1.2/administration/config/#realm-influxdb).
 
 Environment variable: `INFLUXDB_HTTP_REALM`
+
+### unix-socket-enabled = false
+Set to `true` to enable the http service over unix domain socket.
+
+Environment variable: `INFLUXDB_HTTP_UNIX_SOCKET_ENABLED`
+
+### bind-socket = "/var/run/influxdb.sock"
+The path of the unix domain socket.
+
+Environment variable: `INFLUXDB_HTTP_BIND_SOCKET`
 
 ## [[graphite]]
 
