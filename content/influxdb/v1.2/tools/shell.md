@@ -268,6 +268,12 @@ Prompts you for your username and password.
 Alternatively, set the username and password for the CLI with the
 `INFLUX_USERNAME` and `INFLUX_PASSWORD` environment variables.
 
+`chunked`
+Turns on chunked responses from the server when issuing queries.  This is on by default.
+
+`chunk size <size>`
+Sets the size of the chunked responses.  The default is 10,000.  Setting to 0 will reset it back to the default.
+
 `clear [ database | db | retention policy | rp ]`  
 Clears the current context for the [database](/influxdb/v1.2/concepts/glossary/#database) or [retention policy](/influxdb/v1.2/concepts/glossary/#retention-policy-rp).
 
@@ -303,7 +309,7 @@ Precision defaults to nanoseconds.
 Turns on pretty print for the `json` format.
 
 `settings`  
-Outputs the current settings for the shell including the `Host`, `Username`, `Database`, `Retention Policy`, `Pretty` status, `Format`, and `Write Consistency`.
+Outputs the current settings for the shell including the `Host`, `Username`, `Database`, `Retention Policy`, `Pretty` status, `Chunked` status, `Chunk Size`, `Format`, and `Write Consistency`.
 
 `use [ "<database_name>" | "<database_name>"."<retention policy_name>" ]`  
 Sets the current [database](/influxdb/v1.2/concepts/glossary/#database) and/or [retention policy](/influxdb/v1.2/concepts/glossary/#retention-policy-rp).
