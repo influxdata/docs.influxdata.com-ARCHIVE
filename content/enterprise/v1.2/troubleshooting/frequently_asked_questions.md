@@ -8,7 +8,7 @@ menu:
 
 **Known Issues**
 
-* [Why are my Grafana panels returning truncated data?](#why-are-my-grafana-panels-returning-truncated-data)
+* [Why are my Grafana panels returning truncated/partial data?](#why-are-my-grafana-panels-returning-truncated-partial-data)
 * [What should I do if I see the panic: `unexpected fault address xxxxxxxxxxxxxx`?](#what-should-i-do-if-i-see-the-panic-unexpected-fault-address-xxxxxxxxxxxxxx)
 
 **Log Errors**
@@ -25,9 +25,19 @@ menu:
 
 * [How do I make a web console user an admin web console user?](#how-do-i-make-a-web-console-user-an-admin-web-console-user)
 
-## Why are my Grafana panels returning truncated data?
+## Why are my Grafana panels returning truncated/partial data?
+
+In InfluxEnterprise version 1.2.x, the system sets the [`max-row-limit` configuration option](/enterprise/v1.2/administration/configuration/#max-row-limit-10000) to 10,000 by default.
+That option limits the number of rows returned per query to 10,000 rows.
+If a query in Grafana exceeds that 10,000 row limit, the panel appears to show [truncated data](https://github.com/influxdata/influxdb/issues/8050).
+
+To prevent that issue, set `max-row-limit` to `0` to allow an unlimited number of returned rows.
 
 ## What should I do if I see the panic: `unexpected fault address xxxxxxxxxxxxxx`?
+
+There is a [known issue](https://github.com/influxdata/influxdb/issues/8022) where the data node process stops and reports the panic `unexpected fault address xxxxxxxxxxxxxx` in the logs.
+If you experience this panic please restart the data node process.
+We are working to address this issue; see GitHub Issue [#8022](https://github.com/influxdata/influxdb/issues/8022) for additional information.
 
 ## Where can I find InfluxEnterprise logs?
 

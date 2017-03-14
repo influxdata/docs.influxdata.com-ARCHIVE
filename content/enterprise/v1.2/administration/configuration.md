@@ -840,7 +840,9 @@ Environment variable: `INFLUXDB_HTTP_HTTPS_PRIVATE_KEY`
 
 ###  max-row-limit = 10000
 
-See the [OSS documentation](/influxdb/v1.2/administration/config/#max-row-limit-10000).
+This limits the number of rows that can be returned in a non-chunked query.
+InfluxDB includes a `"partial":true` tag in the response body if query results exceed `max-row-limit`.
+Set this option to `0` to allow an unlimited number of returned rows.
 
 Environment variable: `INFLUXDB_HTTP_MAX_ROW_LIMIT`
 
