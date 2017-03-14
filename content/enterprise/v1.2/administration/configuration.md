@@ -279,6 +279,24 @@ user's perspective.
 
 Environment variable: `INFLUXDB_META_ANNOUNCEMENT_EXPIRATION`
 
+### retention-autocreate = true
+
+Automatically creates a default [retention policy](/influxdb/v1.2/concepts/glossary/#retention-policy-rp) (RP) when the system creates a database.
+The default RP (`autogen`) has an infinite duration, a shard group duration of seven days, and a replication factor set to the number of data nodes in the cluster.
+The system targets the `autogen` RP when a write or query does not specify an RP.
+Set this option to `false` to prevent the system from creating the `autogen` RP when the system creates a database.
+
+<dt>
+In versions 1.2.0 and 1.2.1, the `retention-autocreate` setting appears in both the meta node and data node configuration files.
+To disable retention policy auto-creation, users on version 1.2.0 and 1.2.1 must set `retention-autocreate` to `false` in both the meta node and data node configuration files.
+
+In version 1.2.2, we've removed the `retention-autocreate` setting from the data node configuration file.
+As of version 1.2.2, users may remove `retention-autocreate` from the data node configuration file.
+To disable retention policy auto-creation, set `retention-autocreate` to `false` in the meta node configuration file only.
+</dt>
+
+Environment variable: `INFLUXDB_META_RETENTION_AUTOCREATE`
+
 ###  election-timeout = "1s"
 
 The duration a Raft candidate spends in the candidate state without a leader
@@ -484,7 +502,19 @@ Environment variable: `INFLUXDB_META_META_INTERNAL_SHARED_SECRET`
 
 ###  retention-autocreate = true
 
-See the [OSS documentation](/influxdb/v1.2/administration/config/#retention-autocreate-true).
+Automatically creates a default [retention policy](/influxdb/v1.2/concepts/glossary/#retention-policy-rp) (RP) when the system creates a database.
+The default RP (`autogen`) has an infinite duration, a shard group duration of seven days, and a replication factor set to the number of data nodes in the cluster.
+The system targets the `autogen` RP when a write or query does not specify an RP.
+Set this option to `false` to prevent the system from creating the `autogen` RP when the system creates a database.
+
+<dt>
+In versions 1.2.0 and 1.2.1, the `retention-autocreate` setting appears in both the meta node and data node configuration files.
+To disable retention policy auto-creation, users on version 1.2.0 and 1.2.1 must set `retention-autocreate` to `false` in both the meta node and data node configuration files.
+
+In version 1.2.2, we've removed the `retention-autocreate` setting from the data node configuration file.
+As of version 1.2.2, users may remove `retention-autocreate` from the data node configuration file.
+To disable retention policy auto-creation, set `retention-autocreate` to `false` in the meta node configuration file only.
+</dt>
 
 Environment variable: `INFLUXDB_META_RETENTION_AUTOCREATE`
 
