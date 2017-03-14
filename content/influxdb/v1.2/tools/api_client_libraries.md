@@ -50,8 +50,16 @@ Functionality will vary, and there are, as yet, no standard features that all li
 - [InfluxDB Ruby](https://github.com/influxdb/influxdb-ruby)
 - [Influxer](https://github.com/palkan/influxer) by [palkan](https://github.com/palkan)
 
+## Rust
+- [Flux](https://crates.io/crates/flux)
+- [Influent](https://crates.io/crates/influent)
+
 ## Scala
 - [scala-influxdb-client](https://github.com/paulgoldbaum/scala-influxdb-client) by [paulgoldbaum](https://github.com/paulgoldbaum)
 
 ## Sensu
 - [sensu-influxdb-extension](https://github.com/jhrv/sensu-influxdb-extension) by [jhrv](https://github.com/jhrv)
+
+## SNMP agent 
+- [snmpcollector](https://github.com/toni-moreno/snmpcollector)  by [toni-moreno](https://github.com/toni-moreno) A full featured Generic SNMP data collector with Web Administration Interface for InfluxDB.
+

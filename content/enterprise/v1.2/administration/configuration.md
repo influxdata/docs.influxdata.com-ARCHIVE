@@ -160,6 +160,8 @@ It will be removed in future versions.
 The hostname of the [meta node](/enterprise/v1.2/concepts/glossary/#meta-node).
 This must be resolvable and reachable by all other members of the cluster.
 
+Environment variable: `INFLUXDB_HOSTNAME`
+
 ## [enterprise]
 
 The `[enterprise]` section contains the parameters for the meta node's

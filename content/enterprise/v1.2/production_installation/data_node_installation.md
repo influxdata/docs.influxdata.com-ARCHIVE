@@ -224,6 +224,7 @@ The expected output is:
     enterprise-meta-02:8091   1.2.1-c1.2.2
     enterprise-meta-03:8091   1.2.1-c1.2.2
 
+
 The output should include every data node that was added to the cluster.
 The first data node added should have `ID=N`, where `N` is equal to one plus the number of meta nodes.
 In a standard three meta node cluster, the first data node should have `ID=4`

@@ -124,6 +124,7 @@ Specify the database with the `db` query string parameter:
 {
     "results": [
         {
+            "statement_id": 0,
             "series": [
                 {
                     "columns": [
@@ -263,6 +264,7 @@ Specify the database with the `db` query string parameter:
 {
     "results": [
         {
+            "statement_id": 0,
             "series": [
                 {
                     "columns": [
@@ -427,36 +429,38 @@ Specify the database with the `db` query string parameter:
 ~# curl -G "http://localhost:8086/query?db=NOAA_water_database&pretty=true" --data-urlencode "q=SHOW MEASUREMENTS"
 
 {
-    "results": [
-        {
-            "series": [
-                {
-                    "name": "measurements",
-                    "columns": [
-                        "name"
-                    ],
-                    "values": [
-                        [
-                            "average_temperature"
-                        ],
-                        [
-                            "h2o_feet"
-                        ],
-                        [
-                            "h2o_pH"
-                        ],
-                        [
-                            "h2o_quality"
-                        ],
-                        [
-                            "h2o_temperature"
-                        ]
-                    ]
-                }
-            ]
-        }
-    ]
-}
+  {
+      "results": [
+          {
+              "statement_id": 0,
+              "series": [
+                  {
+                      "name": "measurements",
+                      "columns": [
+                          "name"
+                      ],
+                      "values": [
+                          [
+                              "average_temperature"
+                          ],
+                          [
+                              "h2o_feet"
+                          ],
+                          [
+                              "h2o_pH"
+                          ],
+                          [
+                              "h2o_quality"
+                          ],
+                          [
+                              "h2o_temperature"
+                          ]
+                      ]
+                  }
+              ]
+          }
+      ]
+  }
 ```
 
 {{% /tab-content %}}
@@ -621,6 +625,7 @@ Specify the database with the `db` query string parameter:
 {
     "results": [
         {
+            "statement_id": 0,
             "series": [
                 {
                     "name": "average_temperature",
@@ -797,6 +802,7 @@ Specify the database with the `db` query string parameter:
 {
     "results": [
         {
+            "statement_id": 0,
             "series": [
                 {
                     "name": "h2o_quality",
@@ -962,6 +968,7 @@ Specify the database with the `db` query string parameter:
 {
     "results": [
         {
+            "statement_id": 0,
             "series": [
                 {
                     "name": "average_temperature",

@@ -208,7 +208,6 @@ The expected output is:
     enterprise-meta-02:8091   1.2.1-c1.2.2
     enterprise-meta-03:8091   1.2.1-c1.2.2
 
-
 Note that your cluster must have at least three meta nodes.
 If you do not see your meta nodes in the output, please retry adding them to
 the cluster.

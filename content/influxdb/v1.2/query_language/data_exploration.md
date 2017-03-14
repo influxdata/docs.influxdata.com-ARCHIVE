@@ -3012,11 +3012,10 @@ time                   water_level
 With InfluxDB's [HTTP API](/influxdb/v1.2/tools/api/):
 
 ```
-~# curl -G 'http://localhost:8086/query?db=NOAA_water_database' --data-urlencode 'q=SELECT MEAN("water_level") FROM "h2o_feet"; SELECT "water_level" FROM "h2o_feet" LIMIT 2'
-
 {
     "results": [
         {
+            "statement_id": 0,
             "series": [
                 {
                     "name": "h2o_feet",
@@ -3027,13 +3026,14 @@ With InfluxDB's [HTTP API](/influxdb/v1.2/tools/api/):
                     "values": [
                         [
                             "1970-01-01T00:00:00Z",
-                            4.442107025822521
+                            4.442107025822522
                         ]
                     ]
                 }
             ]
         },
         {
+            "statement_id": 1,
             "series": [
                 {
                     "name": "h2o_feet",
@@ -3085,7 +3085,13 @@ The main query supports all clauses listed in this document.
 
 The subquery appears in the main query's `FROM` clause, and it requires surrounding parentheses.
 The subquery supports all clauses listed in this document.
-Note that there can be multiple subqueries per main query.
+
+InfluxQL supports multiple nested subqueries per main query.
+Sample syntax for multiple subqueries:
+
+```
+SELECT_clause FROM ( SELECT_clause FROM ( SELECT_statement ) [...] ) [...]
+```
 
 ### Examples
 
@@ -3222,3 +3228,20 @@ time                   water_level_derivative
 
 Next, InfluxDB performs the main query and calculates the sum of the `water_level_derivative` values for each tag value of `location`.
 Notice that the main query specifies `water_level_derivative`, not `water_level` or `derivative`, as the field key in the `SUM()` function.
+
+### Common Issues with Subqueries
+
+#### Issue 1: Multiple SELECT statements in a subquery
+
+InfluxQL supports multiple nested subqueries per main query:
+```
+SELECT_clause FROM ( SELECT_clause FROM ( SELECT_statement ) [...] ) [...]
+                     ------------------   ----------------
+                         Subquery 1          Subquery 2
+```
+
+InfluxQL does not support multiple [`SELECT` statements](#the-basic-select-statement) per subquery:
+```
+SELECT_clause FROM (SELECT_statement; SELECT_statement) [...]
+```
+The system returns a parsing error if a subquery includes multiple `SELECT` statements.

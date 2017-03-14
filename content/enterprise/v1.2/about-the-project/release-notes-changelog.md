@@ -71,6 +71,26 @@ To disable the auto-creation of retention policies, set `retention-autocreate` t
 - Fix the output for `influxd-ctl show-shards`
 - Send the correct RPC response for `ExecuteStatementRequestMessage`
 
+## v1.1.3 [2017-02-27]
+
+## Release Notes
+
+This release incorporates the changes in the 1.1.4 release of OSS InfluxDB.
+Please see the OSS [changelog](https://github.com/influxdata/influxdb/blob/v1.1.4/CHANGELOG.md) for more information about the OSS release.
+
+### Bugfixes
+
+- Delay when a node listens for network connections until after all requisite services are running. This prevents queries to the cluster from failing unnecessarily.
+- Allow users to set the `GOMAXPROCS` environment variable.
+
+## v1.1.2 [internal]
+
+## Release Notes
+
+This release was an internal release only.
+It incorporates the changes in the 1.1.3 release of OSS InfluxDB.
+Please see the OSS [changelog](https://github.com/influxdata/influxdb/blob/v1.1.3/CHANGELOG.md) for more information about the OSS release.
+
 ## v1.1.1 [2016-12-06]
 
 ### Release Notes
