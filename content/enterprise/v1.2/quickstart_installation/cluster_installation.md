@@ -62,7 +62,7 @@ data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.2/to
 
 Add your three servers' hostnames and IP addresses to **each** server's `/etc/hosts`
 file (the hostnames below are representative).
-Currently, hostnames **must** be all lowercase.
+Note that in versions prior to v1.2.2, hostnames **must** be all lowercase.
 
 ```
 <Server_1_IP> quickstart-cluster-01
@@ -102,11 +102,11 @@ Perform the following steps on all three servers.
 
 Download:
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.1.4-c1.1.3_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.2.1-c1.2.2_amd64.deb
 ```
 Install:
 ```
-sudo dpkg -i influxdb-meta_1.1.4-c1.1.3_amd64.deb
+sudo dpkg -i influxdb-meta_1.2.1-c1.2.2_amd64.deb
 ```
 
 {{% /tab-content %}}
@@ -115,11 +115,11 @@ sudo dpkg -i influxdb-meta_1.1.4-c1.1.3_amd64.deb
 
 Download:
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.1.4_c1.1.3.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.2.1_c1.2.2.x86_64.rpm
 ```
 Install:
 ```
-sudo yum localinstall influxdb-meta-1.1.4_c1.1.3.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.2.1_c1.2.2.x86_64.rpm
 ```
 
 {{% /tab-content %}}
@@ -198,11 +198,11 @@ Perform the following steps on all three servers.
 
 Download:
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.1.4-c1.1.3_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.2.1-c1.2.2_amd64.deb
 ```
 Install:
 ```
-sudo dpkg -i influxdb-data_1.1.4-c1.1.3_amd64.deb
+sudo dpkg -i influxdb-data_1.2.1-c1.2.2_amd64.deb
 ```
 
 {{% /tab-content %}}
@@ -211,11 +211,11 @@ sudo dpkg -i influxdb-data_1.1.4-c1.1.3_amd64.deb
 
 Download:
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.1.4_c1.1.3.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.2.1_c1.2.2.x86_64.rpm
 ```
 Install:
 ```
-sudo yum localinstall influxdb-data-1.1.4_c1.1.3.x86_64.rpm
+sudo yum localinstall influxdb-data-1.2.1_c1.2.2.x86_64.rpm
 ```
 
 {{% /tab-content %}}
@@ -374,16 +374,16 @@ The expected output is:
 Data Nodes
 ==========
 ID   TCP Address                  Version
-2    quickstart-cluster-01:8088   1.1.4-c1.1.3
-4    quickstart-cluster-02:8088   1.1.4-c1.1.3
-6    quickstart-cluster-03:8088   1.1.4-c1.1.3
+2    quickstart-cluster-01:8088   1.2.1-c1.2.2
+4    quickstart-cluster-02:8088   1.2.1-c1.2.2
+6    quickstart-cluster-03:8088   1.2.1-c1.2.2
 
 Meta Nodes
 ==========
 TCP Address                  Version
-quickstart-cluster-01:8091   1.1.4-c1.1.3
-quickstart-cluster-02:8091   1.1.4-c1.1.3
-quickstart-cluster-03:8091   1.1.4-c1.1.3
+quickstart-cluster-01:8091   1.2.1-c1.2.2
+quickstart-cluster-02:8091   1.2.1-c1.2.2
+quickstart-cluster-03:8091   1.2.1-c1.2.2
 ```
 
 Your cluster should have three data nodes and three meta nodes.

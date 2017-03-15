@@ -6,88 +6,160 @@ menu:
     parent: Administration
 ---
 
-## Upgrading from version 1.1 to 1.2
+## Upgrading from version 1.1 to 1.2.2
 
-For users currently on clustering version 1.1.x, please do not upgrade to clustering version 1.2.x.
-**We are currently addressing and testing several issues identified in the 1.2.x release.
-We've included a list of those issues below.**
+Version 1.2.2 is a drop-in replacement for version 1.1.x with no data migration required.
 
-For users currently on clustering version 1.2.0, please upgrade to version 1.2.1 **immediately**.
-Clustering version 1.2.1 fixes [two issues](/enterprise/v1.2/about-the-project/release-notes-changelog/#v1-2-1-2017-01-25) that were identified in clustering version 1.2.0. The relevant 1.2.1 packages are listed below.
-<br>
-If you have already upgraded to 1.2.x, please do **not** attempt to downgrade your cluster from version 1.2.x to 1.1.x; reverting from version 1.2.x to version 1.1.x is not a supported process.
-<br>
+Version 1.2.2 introduces changes to the meta node configuration file and the data node configuration file.
+Please update the configuration files prior to upgrading to avoid any unnecessary downtime.
+The steps below outline the upgrade process and include a list of the required configuration changes.
 
-If you have any issues with your cluster, please do not hesitate to contact support at the email provided to you when you received your InfluxEnterprise license.
+### Step 1: Download the 1.2.2 packages
 
-## Clustering version 1.2.1 packages
-
-### Ubuntu & Debian (64-bit)
-
-#### Meta nodes
+#### Meta node package download
+**Ubuntu & Debian (64-bit)**
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.2.0-c1.2.1_amd64.deb
-sudo dpkg -i influxdb-meta_1.2.0-c1.2.1_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.2.1-c1.2.2_amd64.deb
 ```
 
-#### Data nodes
+**RedHat & CentOS (64-bit)**
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.2.0-c1.2.1_amd64.deb
-sudo dpkg -i influxdb-data_1.2.0-c1.2.1_amd64.deb
-```
-
-### RedHat & CentOS (64-bit)
-
-#### Meta nodes
-```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.2.0_c1.2.1.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.2.0_c1.2.1.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.2.1_c1.2.2.x86_64.rpm
 ```
 
-#### Data nodes
+#### Data node package download
+**Ubuntu & Debian (64-bit)**
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.2.0_c1.2.1.x86_64.rpm
-sudo yum localinstall influxdb-data-1.2.0_c1.2.1.x86_64.rpm
+sudo dpkg -i influxdb-data_1.2.1-c1.2.2_amd64.deb
 ```
 
-## Known issues in clustering version 1.2.1
+**RedHat & CentOS (64-bit)**
+```
+sudo yum localinstall influxdb-data-1.2.1_c1.2.2.x86_64.rpm
+```
 
-### OSS issues (these issues also apply to InfluxEnterprise clusters)
+### Step 2: Install the 1.2.2 packages
 
-#### Regular expressions
-- [#7877](https://github.com/influxdata/influxdb/issues/7877): For some queries, the new shard mapper implementation ignores regular expressions.
-- [#7906](https://github.com/influxdata/influxdb/issues/7906): Regular expressions mistakenly use an exact match for case-insensitive expressions.
+#### Meta node package Install
 
-#### Subqueries
-- [#7885](https://github.com/influxdata/influxdb/issues/7885): The `LIMIT` and `OFFSET` clauses do not function correctly in subqueries.
-- [#7888](https://github.com/influxdata/influxdb/pull/7888): Some subqueries return duplicate columns and points in the wrong order.
-- [#7910](https://github.com/influxdata/influxdb/issues/7910): Subqueries with an expression in parentheses cause a Go (golang) stack overflow.
-- [#7946](https://github.com/influxdata/influxdb/issues/7946): Non-admin users cannot perform subqueries.
-- [#7966](https://github.com/influxdata/influxdb/pull/7966): Queries that include an aggregation function and a `GROUP BY <tag-key>` clause in the subquery, and reference that tag key in the main query result in a panic.
+When you run the install command, your terminal asks if you'd like to keep your current configuration file or overwrite your current configuration file with the file for version 1.2.2.
+Please keep your current configuration file by entering `N` or `O`;
+we update the configuration file with the necessary changes for version 1.2.2 in step 3.
 
-#### Other
-- [#7895](https://github.com/influxdata/influxdb/issues/7895): The system performs incorrect math when aggregate functions emit different timestamps.
-- [#7905](https://github.com/influxdata/influxdb/issues/7905): The `ORDER BY time DESC` clause sometimes returns results in the wrong order.
-- [#7929](https://github.com/influxdata/influxdb/issues/7929): Tags can become dereferenced during iteration which causes a segmentation fault.
+**Ubuntu & Debian (64-bit)**
+```
+sudo dpkg -i influxdb-meta_1.2.1-c1.2.2_amd64.de
+```
 
-### Cluster-specific issues
+**RedHat & CentOS (64-bit)**
+```
+sudo yum localinstall influxdb-meta-1.2.1_c1.2.2.x86_64.rpm
+```
 
-#### Backup and Restore
-- Backups return a `shard not found` error if they encounter an empty shard.
-- Restores return a `shard not found` error if they encounter an empty shard.
-- Restores from an incremental backup do not handle file paths correctly.
-- Incremental backups with restrictions (for example, they use the `-db` or `-rp` flags) cannot be stored in the same directory.
-- Restores from an incremental backup require the user to be on the meta node leader.
+#### Data node package install
 
-#### Hinted Handoff
-- Dropped writes are not recorded when the hinted handoff queue reaches the maximum size.
-- The hinted handoff queue becomes blocked if it experiences field type errors.
+When you run the install command, your terminal asks if you'd like to keep your current configuration file or overwrite your current configuration file with the file for version 1.2.2.
+Please keep your current configuration file by entering `N` or `O`;
+we update the configuration file with the necessary changes for version 1.2.2 in step 3.
 
-#### Other
-- A panic occurs when the system fails to process points.
-- Cluster hostnames must be lowercase.
-- The `retryCAS` code doesn't wait for a newer snapshot before retrying.
-- Raft log buildup occurs on meta nodes.
-- RPM packages include sysvinit package dependency.
+**Ubuntu & Debian (64-bit)**
+```
+sudo dpkg -i influxdb-data_1.2.1-c1.2.2_amd64.deb
+```
 
-**The InfluxData engineering team is working to address these issues as rapidly as possible. Look for a 1.2.x update shortly.**
+**RedHat & CentOS (64-bit)**
+```
+sudo yum localinstall influxdb-data-1.2.1_c1.2.2.x86_64.rpm
+```
+
+### Step 3: Update the meta node configuration file
+
+> The configuration options in this section are not new to version 1.2.2.
+They were, however, missing from the sample configuration file (`/etc/influxdb/influxdb-meta.conf`) in version 1.1.x.
+
+In the `[meta]` section of the configuration file (`/etc/influxdb/influxdb-meta.conf`), add the following options:
+
+* [auth-enabled = false](/enterprise/v1.2/administration/configuration/#auth-enabled-false)
+* [https-private-key = ""](/enterprise/v1.2/administration/configuration/#https-private-key)
+* [https-insecure-tls = false](/enterprise/v1.2/administration/configuration/#https-insecure-tls-false)
+* [consensus-timeout = "30s"](/enterprise/v1.2/administration/configuration/#consensus-timeout-30s)
+
+Those configuration options are set to their default settings.
+Follow the links for more information about those options.
+
+### Step 4: Update the data node configuration file
+
+> Most of the configuration options in this section are not new to version 1.2.2.
+They were, however, missing from the sample configuration file (`/etc/influxdb/influxdb.conf`) in version 1.1.x.
+The only actual configuration change in version 1.2.2 is the removal of the `shard-writer-timeout` option in the `[cluster]` section; in version 1.2.2, the system internally sets `shard-writer-timeout`.
+
+Uncomment all commented section headers: `[cluster]`, `[retention]`, `[shard-precreation]`, `[admin]`, `[monitor]`, `[subscriber]`, `[http]`, `[[graphite]]`, `[[collectd]]`, `[[opentsdb]]`, `[[udp]]`, and `[[continuous_queries]]`.
+That change ensures that any future configuration changes to those sections will take effect upon a restart with no additional steps.
+
+Under the `hostname` option at the top of the configuration file (`/etc/influxdb/influxdb.conf`), add [gossip-frequency = "3s"](/enterprise/v1.2/administration/configuration/#gossip-frequency-3s).
+
+In the `[meta]` section, add:
+
+* [meta-auth-enabled = false](/enterprise/v1.2/administration/configuration/#meta-auth-enabled-false)
+* [meta-internal-shared-secret = ""](/enterprise/v1.2/administration/configuration/#meta-internal-shared-secret)
+
+In the `[monitor]` section, add [remote-collect-interval = "10s"](/enterprise/v1.2/administration/configuration/#remote-collect-interval-10s).
+
+In the `[[collectd]]` section, add:
+
+* [security-level = "none"](/influxdb/v1.2/administration/config/#security-level-none)
+* [auth-file = "/etc/collectd/auth_file"](/influxdb/v1.2/administration/config/#auth-file-etc-collectd-auth-file)
+
+In the `[[udp]]` section, add [precision = ""](/influxdb/v1.2/administration/config/#precision).
+
+In the `[cluster]` section, **remove** [shard-writer-timeout = "5s"](/enterprise/v1.2/administration/configuration/#shard-writer-timeout-5s).
+
+The added configuration options are set to their default settings.
+Follow the links for more information about those options.
+
+### Step 5: Restart the processes
+
+#### Meta node restart
+**sysvinit systems**
+```
+service influxdb-meta restart
+```
+**systemd systems**
+```
+sudo systemctl restart influxdb-meta
+```
+
+#### Data node Restart
+**sysvinit systems**
+```
+service influxdb restart
+```
+**systemd systems**
+```
+sudo systemctl restart influxdb
+```
+
+### Step 6: Confirm the upgrade
+
+Check your nodes' version numbers using the `influxd-ctl show` command.
+The [`influxd-ctl` tool](/enterprise/v1.2/features/cluster-commands/) is available on all meta nodes.
+
+```
+~# influxd-ctl show
+
+Data Nodes
+==========
+ID	TCP Address		Version
+4	rk-upgrading-01:8088	1.2.1_c1.2.2   # 1.2.1_c1.2.2 = 👍
+5	rk-upgrading-02:8088	1.2.1_c1.2.2
+6	rk-upgrading-03:8088	1.2.1_c1.2.2
+
+Meta Nodes
+==========
+TCP Address		Version
+rk-upgrading-01:8091	1.2.1_c1.2.2
+rk-upgrading-02:8091	1.2.1_c1.2.2
+rk-upgrading-03:8091	1.2.1_c1.2.2
+```
+
+If you have any issues upgrading your cluster, please do not hesitate to contact support at the email provided to you when you received your InfluxEnterprise license.

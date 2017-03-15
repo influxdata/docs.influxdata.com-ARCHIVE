@@ -6,19 +6,38 @@ menu:
     parent: Troubleshooting
 ---
 
-## How do I make a web console user an admin web console user?
+**Known Issues**
 
-Web console users can be admin users or non-admin users.
-In addition to having access to the web console, admin users are able to invite
-users, manage web console users, manage cluster accounts, and edit cluster names.
+* [Why are my Grafana panels returning truncated/partial data?](#why-are-my-grafana-panels-returning-truncated-partial-data)
+* [What should I do if I see the panic: `unexpected fault address xxxxxxxxxxxxxx`?](#what-should-i-do-if-i-see-the-panic-unexpected-fault-address-xxxxxxxxxxxxxx)
 
-By default, new web console users are non-admin users.
-To make a web console user an admin user, visit the `Users` page located in the
-`WEB ADMIN` section in the sidebar and click on the name of the relevant user.
-In the `Account Details` section, select the checkbox next to `Admin` and click
-`Update User`.
+**Log Errors**
 
-![Web Console Admin User](/img/enterprise/admin_user_1.png)
+* [Why am I seeing a `503 Service Unavailable` error in my meta node logs?](#why-am-i-seeing-a-503-service-unavailable-error-in-my-meta-node-logs)
+* [Why am I seeing a `409` error in some of my data node logs?](#why-am-i-seeing-a-409-error-in-some-of-my-data-node-logs)
+* [Why am I seeing `hinted handoff queue not empty` errors in my data node logs?](#why-am-i-seeing-hinted-handoff-queue-not-empty-errors-in-my-data-node-logs)
+* [Why am I seeing `error writing count stats ...: partial write` errors in my data node logs?](#why-am-i-seeing-error-writing-count-stats-partial-write-errors-in-my-data-node-logs)
+* [Why am I seeing `queue is full` errors in my data node logs?](#why-am-i-seeing-queue-is-full-errors-in-my-data-node-logs)
+* [Why am I seeing `unable to determine if "hostname" is a meta node` when I try to add a meta node with `influxd-ctl join`?](#why-am-i-seeing-unable-to-determine-if-hostname-is-a-meta-node-when-i-try-to-add-a-meta-node-with-influxd-ctl-join)
+* [Why am I getting a Basic Authentication pop-up window from my InfluxEnterprise Web Console?](#why-am-i-getting-a-basic-authentication-pop-up-window-from-my-influxenterprise-web-console)
+
+**Other**
+
+* [How do I make a web console user an admin web console user?](#how-do-i-make-a-web-console-user-an-admin-web-console-user)
+
+## Why are my Grafana panels returning truncated/partial data?
+
+In InfluxEnterprise version 1.2.x, the system sets the [`max-row-limit` configuration option](/enterprise/v1.2/administration/configuration/#max-row-limit-10000) to 10,000 by default.
+That option limits the number of rows returned per query to 10,000 rows.
+If a query in Grafana exceeds that 10,000 row limit, the panel appears to show [truncated data](https://github.com/influxdata/influxdb/issues/8050).
+
+To prevent that issue, set `max-row-limit` to `0` to allow an unlimited number of returned rows.
+
+## What should I do if I see the panic: `unexpected fault address xxxxxxxxxxxxxx`?
+
+There is a [known issue](https://github.com/influxdata/influxdb/issues/8022) where the data node process stops and reports the panic `unexpected fault address xxxxxxxxxxxxxx` in the logs.
+If you experience this panic please restart the data node process.
+We are working to address this issue; see GitHub Issue [#8022](https://github.com/influxdata/influxdb/issues/8022) for additional information.
 
 ## Where can I find InfluxEnterprise logs?
 
@@ -31,9 +50,6 @@ Data : `journalctl -u influxdb`
 Enterprise console: `journalctl -u influx-enterprise`
 
 The `journalctl` output can be redirected to print the logs to a text file. With systemd, log retention depends on the system's journald settings.
-
-
-# Known Errors
 
 ## Why am I seeing a `503 Service Unavailable` error in my meta node logs?
 
@@ -99,3 +115,17 @@ If you are getting an error message while attempting to `influxd-ctl join` a new
 ## Why am I getting a Basic Authentication pop-up window from my InfluxEnterprise Web Console?
 
 The InfluxEnterprise Web Console will create a popup requesting Authentication credentials when the `shared-secret` configured under the `[influxdb]` section in the `influx-enterprise.conf` Web Console configuration file does not match with the `shared-secret` configured under the `[http]` section in all data node `influxdb.conf` configuration files. All data nodes and the InfluxEnteprise Web Console must share the same passphrase.
+
+## How do I make a web console user an admin web console user?
+
+Web console users can be admin users or non-admin users.
+In addition to having access to the web console, admin users are able to invite
+users, manage web console users, manage cluster accounts, and edit cluster names.
+
+By default, new web console users are non-admin users.
+To make a web console user an admin user, visit the `Users` page located in the
+`WEB ADMIN` section in the sidebar and click on the name of the relevant user.
+In the `Account Details` section, select the checkbox next to `Admin` and click
+`Update User`.
+
+![Web Console Admin User](/img/enterprise/admin_user_1.png)

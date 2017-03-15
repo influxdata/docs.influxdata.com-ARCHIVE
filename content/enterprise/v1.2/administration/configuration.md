@@ -218,6 +218,16 @@ is not necessary.
 
 Environment variable: `INFLUXDB_META_BIND_ADDRESS`
 
+### auth-enabled = false
+
+Set to `true` to enable authentication.
+Meta nodes support JWT authentication and Basic authentication.
+For JWT authentication, also see the [`shared-secret`](#shared-secret) and [`internal-shared-secret`](#internal-shared-secret) configuration options.
+
+If set to `true`, also set the [`meta-auth-enabled` option](#meta-auth-enabled-false) to `true` in the `[meta]` section of the data node configuration file.
+
+Environment variable: `INFLUXDB_META_AUTH_ENABLED`
+
 ###  http-bind-address = ":8091"
 
 The port used by the [`influxd-ctl` tool](/enterprise/v1.2/features/cluster-commands/) and by data nodes to access the
@@ -241,6 +251,19 @@ This is required if [`https-enabled`](#https-enabled-false) is set to `true`.
 
 Environment variable: `INFLUXDB_META_HTTPS_CERTIFICATE`
 
+### https-private-key = ""
+
+The path of the private key file.
+
+Environment variable: `INFLUXDB_META_HTTPS_PRIVATE_KEY`
+
+### https-insecure-tls = false
+
+Set to `true` to allow insecure HTTPS connections to meta nodes.
+Use this setting when testing with self-signed certificates.
+
+Environment variable: `INFLUXDB_META_HTTPS_INSECURE_TLS`
+
 ###  gossip-frequency = "5s"
 
 The frequency at which meta nodes communicate the cluster membership state.
@@ -255,6 +278,24 @@ Note that in version 1.0, configuring this setting provides no change from the
 user's perspective.
 
 Environment variable: `INFLUXDB_META_ANNOUNCEMENT_EXPIRATION`
+
+### retention-autocreate = true
+
+Automatically creates a default [retention policy](/influxdb/v1.2/concepts/glossary/#retention-policy-rp) (RP) when the system creates a database.
+The default RP (`autogen`) has an infinite duration, a shard group duration of seven days, and a replication factor set to the number of data nodes in the cluster.
+The system targets the `autogen` RP when a write or query does not specify an RP.
+Set this option to `false` to prevent the system from creating the `autogen` RP when the system creates a database.
+
+<dt>
+In versions 1.2.0 and 1.2.1, the `retention-autocreate` setting appears in both the meta node and data node configuration files.
+To disable retention policy auto-creation, users on version 1.2.0 and 1.2.1 must set `retention-autocreate` to `false` in both the meta node and data node configuration files.
+
+In version 1.2.2, we've removed the `retention-autocreate` setting from the data node configuration file.
+As of version 1.2.2, users may remove `retention-autocreate` from the data node configuration file.
+To disable retention policy auto-creation, set `retention-autocreate` to `false` in the meta node configuration file only.
+</dt>
+
+Environment variable: `INFLUXDB_META_RETENTION_AUTOCREATE`
 
 ###  election-timeout = "1s"
 
@@ -284,6 +325,10 @@ Clusters with high latency between nodes may want to increase this parameter to
 avoid unnecessary Raft elections.
 
 Environment variable: `INFLUXDB_META_LEADER_LEASE_TIMEOUT`
+
+### consensus-timeout = "30s"
+
+Environment variable: `INFLUXDB_META_CONSENSUS_TIMEOUT`
 
 ###  commit-timeout = "50ms"
 
@@ -322,6 +367,18 @@ For example, [Continuous Queries](/influxdb/v1.2/concepts/glossary/#continuous-q
 (CQ) use a lease so that all data nodes aren't running the same CQs at once.
 
 Environment variable: `INFLUXDB_META_LEASE_DURATION`
+ 
+### shared-secret = ""
+The shared secret used by the API for JWT authentication.
+Set [`auth-enabled`](#auth-enabled-false) to `true` if using this option.
+
+Environment variable: `INFLUXDB_META_SHARED_SECRET`
+
+### internal-shared-secret = ""
+The shared secret used by the internal API for JWT authentication.
+Set [`auth-enabled`](#auth-enabled-false) to `true` if using this option.
+
+Environment variable: `INFLUXDB_META_INTERNAL_SHARED_SECRET`
 
 <br>
 <br>
@@ -359,6 +416,12 @@ Environment variable: `INFLUXDB_BIND_ADDRESS`
 The hostname of the [data node](/enterprise/v1.2/concepts/glossary/#data-node).
 
 Environment variable: `INFLUXDB_HOSTNAME`
+
+### gossip-frequency = "3s"
+
+How often to update the cluster with this node's internal status.
+
+Environment variable: `INFLUXDB_GOSSIP_FREQUENCY`
 
 ## [enterprise]
 
@@ -423,9 +486,35 @@ Set to `true` to allow the data node to accept self-signed certificates if
 
 Environment variable: `INFLUXDB_META_META_INSECURE_TLS`
 
+### meta-auth-enabled = false
+
+Set to `true` if [`auth-enabled`](#auth-enabled-false) is set to `true` in the meta node configuration files.
+For JWT authentication, also see the [`meta-internal-shared-secret`](#meta-internal-shared-secret) configuration option.
+
+Environment variable: `INFLUXDB_META_META_AUTH_ENABLED`
+
+### meta-internal-shared-secret = ""
+
+The shared secret used by the internal API for JWT authentication.
+Set to the [`internal-shared-secret`](#internal-shared-secret) specified in the meta node configuration file.
+
+Environment variable: `INFLUXDB_META_META_INTERNAL_SHARED_SECRET`
+
 ###  retention-autocreate = true
 
-See the [OSS documentation](/influxdb/v1.2/administration/config/#retention-autocreate-true).
+Automatically creates a default [retention policy](/influxdb/v1.2/concepts/glossary/#retention-policy-rp) (RP) when the system creates a database.
+The default RP (`autogen`) has an infinite duration, a shard group duration of seven days, and a replication factor set to the number of data nodes in the cluster.
+The system targets the `autogen` RP when a write or query does not specify an RP.
+Set this option to `false` to prevent the system from creating the `autogen` RP when the system creates a database.
+
+<dt>
+In versions 1.2.0 and 1.2.1, the `retention-autocreate` setting appears in both the meta node and data node configuration files.
+To disable retention policy auto-creation, users on version 1.2.0 and 1.2.1 must set `retention-autocreate` to `false` in both the meta node and data node configuration files.
+
+In version 1.2.2, we've removed the `retention-autocreate` setting from the data node configuration file.
+As of version 1.2.2, users may remove `retention-autocreate` from the data node configuration file.
+To disable retention policy auto-creation, set `retention-autocreate` to `false` in the meta node configuration file only.
+</dt>
 
 Environment variable: `INFLUXDB_META_RETENTION_AUTOCREATE`
 
@@ -450,12 +539,6 @@ Environment variable: `INFLUXDB_DATA_DIR`
 See the [OSS documentation](/influxdb/v1.2/administration/config/#wal-dir-var-lib-influxdb-wal).
 
 Environment variable: `INFLUXDB_DATA_WAL_DIR`
-
-###  wal-logging-enabled = true
-
-See the [OSS documentation](/influxdb/v1.2/administration/config/#wal-logging-enabled-true).
-
-Environment variable: `INFLUXDB_DATA_WAL_LOGGING_ENABLED`
 
 ###  query-log-enabled = true
 
@@ -493,6 +576,12 @@ See the [OSS documentation](/influxdb/v1.2/administration/config/#max-series-per
 
 Environment variable: `INFLUXDB_DATA_MAX_SERIES_PER_DATABASE`
 
+### max-values-per-tag = 100000
+
+See the [OSS documentation](/influxdb/v1.2/administration/config/#max-values-per-tag-100000).
+
+Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
+
 ###  trace-logging-enabled = false
 
 See the [OSS documentation](/influxdb/v1.2/administration/config/#trace-logging-enabled-false).
@@ -513,6 +602,10 @@ This setting applies to queries only.
 Environment variable: `INFLUXDB_CLUSTER_DIAL_TIMEOUT`
 
 ###  shard-writer-timeout = "5s"
+
+> In version 1.2.2+, `shard-writer-timeout` is no longer a configuration option.
+InfluxDB automatically sets `shard-writer-timeout` using the value defined by the [`write-timeout` setting](#write-timeout-10s).
+It is safe to remove this configuration for InfluxEnterprise versions 1.2.2+.
 
 The time in which a remote write to a single data node must complete after which
 the system returns a timeout error.
@@ -696,6 +789,27 @@ See the [OSS documentation](/influxdb/v1.2/administration/config/#http-timeout-3
 
 Environment variable: `INFLUXDB_SUBSCRIBER_HTTP_TIMEOUT`
 
+### insecure-skip-verify = false
+Allows insecure HTTPS connections to subscribers.
+Use this option when testing with self-signed certificates.
+
+Environment variable: `INFLUXDB_SUBSCRIBER_INSECURE_SKIP_VERIFY`
+
+### ca-certs = ""
+The path to the PEM encoded CA certs file. If the empty string, the default system certs will be used.
+
+Environment variable: `INFLUXDB_SUBSCRIBER_CA_CERTS`
+
+### write-concurrency = 40
+The number of writer Goroutines processing the write channel.
+
+Environment variable: `INFLUXDB_SUBSCRIBER_WRITE_CONCURRENCY`
+
+### write-buffer-size = 1000
+The number of in-flight writes buffered in the write channel.
+
+Environment variable: `INFLUXDB_SUBSCRIBER_WRITE_BUFFER_SIZE`
+
 ## [http]
 
 See the [OSS documentation](/influxdb/v1.2/administration/config/#http).
@@ -756,7 +870,9 @@ Environment variable: `INFLUXDB_HTTP_HTTPS_PRIVATE_KEY`
 
 ###  max-row-limit = 10000
 
-See the [OSS documentation](/influxdb/v1.2/administration/config/#max-row-limit-10000).
+This limits the number of rows that can be returned in a non-chunked query.
+InfluxDB includes a `"partial":true` tag in the response body if query results exceed `max-row-limit`.
+Set this option to `0` to allow an unlimited number of returned rows.
 
 Environment variable: `INFLUXDB_HTTP_MAX_ROW_LIMIT`
 
@@ -779,6 +895,16 @@ Environment variable: `INFLUXDB_HTTP_SHARED_SECRET`
 See the [OSS documentation](/influxdb/v1.2/administration/config/#realm-influxdb).
 
 Environment variable: `INFLUXDB_HTTP_REALM`
+
+### unix-socket-enabled = false
+Set to `true` to enable the http service over unix domain socket.
+
+Environment variable: `INFLUXDB_HTTP_UNIX_SOCKET_ENABLED`
+
+### bind-socket = "/var/run/influxdb.sock"
+The path of the unix domain socket.
+
+Environment variable: `INFLUXDB_HTTP_BIND_SOCKET`
 
 ## [[graphite]]
 

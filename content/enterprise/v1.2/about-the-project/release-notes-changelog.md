@@ -17,6 +17,66 @@ menu:
 <br>
 # Clustering
 
+## v1.2.2 [2017-03-15]
+
+This release builds off of the 1.2.1 release of OSS InfluxDB.
+Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.2/CHANGELOG.md#v121-2017-03-08) for more information about the OSS release.
+
+### Release Notes
+
+### Configuration Changes
+
+The following configuration changes may need to changed before [upgrading](/enterprise/v1.2/administration/upgrading/) to 1.2.2 from prior versions.
+
+#### shard-writer-timeout
+
+We've removed the data node's `shard-writer-timeout` configuration option from the `[cluster]` section.
+As of version 1.2.2, the system sets `shard-writer-timeout` internally.
+The configuration option can be removed from the [data node configuration file](/enterprise/v1.2/administration/configuration/#data-node-configuration).
+
+#### retention-autocreate
+
+In versions 1.2.0 and 1.2.1, the `retention-autocreate` setting appears in both the meta node and data node configuration files.
+To disable retention policy auto-creation, users on version 1.2.0 and 1.2.1 must set `retention-autocreate` to `false` in both the meta node and data node configuration files.
+
+In version 1.2.2, we’ve removed the `retention-autocreate` setting from the data node configuration file.
+As of version 1.2.2, users may remove `retention-autocreate` from the data node configuration file.
+To disable retention policy auto-creation, set `retention-autocreate` to `false` in the meta node configuration file only.
+
+This change only affects users who have disabled the `retention-autocreate` option and have installed version 1.2.0 or 1.2.1.
+
+#### Bugfixes
+
+##### Backup and Restore
+<br>
+
+- Prevent the `shard not found` error by making [backups](/enterprise/v1.2/guides/backup-and-restore/#backup) skip empty shards
+- Prevent the `shard not found` error by making [restore](/enterprise/v1.2/guides/backup-and-restore/#restore) handle empty shards
+- Ensure that restores from an incremental backup correctly handle file paths
+- Allow incremental backups with restrictions (for example, they use the `-db` or `rp` flags) to be stores in the same directory
+- Support restores on meta nodes that are not the raft leader
+
+##### Hinted Handoff
+<br>
+
+- Fix issue where dropped writes were not recorded when the [hinted handoff](/enterprise/v1.2/concepts/clustering/#hinted-handoff) queue reached the maximum size
+- Prevent the hinted handoff from becoming blocked if it encounters field type errors
+
+##### Other
+<br>
+
+- Return partial results for the [`SHOW TAG VALUES` query](/influxdb/v1.2/query_language/schema_exploration/#show-tag-values) even if the cluster includes an unreachable data node
+- Return partial results for the [`SHOW MEASUREMENTS` query](/influxdb/v1.2/query_language/schema_exploration/#show-measurements) even if the cluster includes an unreachable data node
+- Prevent a panic when the system files to process points
+- Ensure that cluster hostnames can be case insensitive
+- Update the `retryCAS` code to wait for a newer snapshot before retrying
+- Serialize access to the meta client and meta store to prevent raft log buildup
+- Remove sysvinit package dependency for RPM packages
+- Make the default retention policy creation an atomic process instead of a two-step process
+- Prevent `influxd-ctl`'s [`join` argument](/enterprise/v1.2/features/cluster-commands/#join) from completing a join when the command also specifies the help flag (`-h`)
+- Fix the `influxd-ctl`'s [force removal](/enterprise/v1.2/features/cluster-commands/#remove-meta) of meta nodes
+- Update the meta node and data node sample configuration files
+
 ## v1.2.1 [2017-01-25]
 
 #### Cluster-specific Bugfixes
@@ -247,6 +307,14 @@ Backup and restore has been updated to fix issues and refine existing capabiliti
 <br>
 <br>
 # Web Console
+
+## v1.2.2 [2017-03-15]
+
+### Bug Fixes
+
+* Set a sane default (`24h`) for the [`session-lifetime` configuration setting](/enterprise/v1.2/administration/configuration/#session-lifetime-24h)
+* Fix node and shard reporting inaccurate information
+* Fix the retention policy page dropdown when selecting databases
 
 ## v1.2.1 [2017-01-31]
 

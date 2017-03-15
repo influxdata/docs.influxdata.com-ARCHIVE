@@ -64,7 +64,7 @@ setting in the meta node configuration file.
 
 Add your servers' hostnames and IP addresses to **each** cluster server's `/etc/hosts`
 file (the hostnames below are representative).
-Currently, hostnames **must** be all lowercase.
+Note that in versions prior to v1.2.2, hostnames **must** be all lowercase.
 
 ```
 <Meta_1_IP> enterprise-meta-01
@@ -95,14 +95,14 @@ Perform the following steps on each meta server.
 
 #### Ubuntu & Debian (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.1.4-c1.1.3_amd64.deb
-sudo dpkg -i influxdb-meta_1.1.4-c1.1.3_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.2.1-c1.2.2_amd64.deb
+sudo dpkg -i influxdb-meta_1.2.1-c1.2.2_amd64.de
 ```
 
 #### RedHat & CentOS (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.1.4_c1.1.3.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.1.4_c1.1.3.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.2.1_c1.2.2.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.2.1_c1.2.2.x86_64.rpm
 ```
 
 <dt>For users looking to upgrade to version 1.2.x, please see the [Upgrading](/enterprise/v1.2/administration/upgrading/) document for important information about that release.</dt>
@@ -204,9 +204,9 @@ The expected output is:
     Meta Nodes
     ==========
     TCP Address               Version
-    enterprise-meta-01:8091   1.1.4-c1.1.3
-    enterprise-meta-02:8091   1.1.4-c1.1.3
-    enterprise-meta-03:8091   1.1.4-c1.1.3
+    enterprise-meta-01:8091   1.2.1-c1.2.2
+    enterprise-meta-02:8091   1.2.1-c1.2.2
+    enterprise-meta-03:8091   1.2.1-c1.2.2
 
 Note that your cluster must have at least three meta nodes.
 If you do not see your meta nodes in the output, please retry adding them to
