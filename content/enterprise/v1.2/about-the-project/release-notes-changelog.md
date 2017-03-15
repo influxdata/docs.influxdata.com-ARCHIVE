@@ -308,6 +308,14 @@ Backup and restore has been updated to fix issues and refine existing capabiliti
 <br>
 # Web Console
 
+## v1.2.2 [2017-03-15]
+
+### Bug Fixes
+
+* Set a sane default (`24h`) for the [`session-lifetime` configuration setting](/enterprise/v1.2/administration/configuration/#session-lifetime-24h)
+* Fix node and shard reporting inaccurate information
+* Fix the retention policy page dropdown when selecting databases
+
 ## v1.2.1 [2017-01-31]
 
 As of version 1.2.1, the `Rebalance` button on the Web Consoles `Tasks` page
