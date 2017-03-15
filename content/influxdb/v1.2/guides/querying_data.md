@@ -138,9 +138,14 @@ Authentication in InfluxDB is disabled by default.
 See [Authentication and Authorization](/influxdb/v1.2/query_language/authentication_and_authorization/) for how to enable and set up authentication.
 
 #### Maximum Row Limit
-InfluxDB limits the maximum number of returned results to prevent itself from running out of memory while it aggregates the results.
-By default, InfluxDB truncates the number of rows returned to 10,000 and, if there are more than 10,000 rows to return, includes a `"partial":true` tag in the response body.
-The [`max-row-limit` setting](/influxdb/v1.2/administration/config/#max-row-limit-10000) is configurable in the `[http]` section of the configuration file.
+The [`max-row-limit` configuration option](/influxdb/v1.2/administration/config/#max-row-limit-0) allows users to limit the maximum number of returned results to prevent InfluxDB from running out of memory while it aggregates the results.
+
+In versions 1.2.0 and 1.2.1, InfluxDB truncates the number of rows returned to 10,000 by default.
+If there are more than 10,000 rows to return, the response body includes a `"partial":true` tag.
+That default setting can lead to unexpected behavior in [Grafana](https://grafana.com/) panels; if a panel's query returns more than 10,000 points, the panel appears to show [truncated/partial data](https://github.com/influxdata/influxdb/issues/8050).
+
+In version 1.2.2, the `max-row-limit` configuration option is set to `0` by default.
+That default setting allows for an unlimited number of rows returned per request.
 
 The maximum row limit only applies to non-chunked queries. Chunked queries can return an unlimited number of points.
 

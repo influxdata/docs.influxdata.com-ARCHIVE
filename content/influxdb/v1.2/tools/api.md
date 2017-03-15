@@ -142,10 +142,12 @@ A successful [`CREATE DATABASE` query](/influxdb/v1.2/query_language/database_ma
 | pretty=true | Optional | Enables pretty-printed JSON output. While this is useful for debugging it is not recommended for production use as it consumes unnecessary network bandwidth. |
 | u=\<username> | Optional if you haven't [enabled authentication](/influxdb/v1.2/query_language/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication.* | Sets the username for authentication if you've enabled authentication. The user must have read access to the database. Use with the query string parameter `p`. |
 
-\* InfluxDB automatically truncates the number of rows returned for requests without the `chunked` parameter.
+\* In versions 1.2.0 and 1.2.1, InfluxDB automatically truncates the number of rows returned for requests without the `chunked` parameter.
 By default, the maximum number of rows returned is set to 10,000.
 If a query has more than 10,000 rows to return, InfluxDB includes a `"partial":true` tag in the response body.
-The [`max-row-limit` setting](/influxdb/v1.2/administration/config/#max-row-limit-10000) is configurable in the `[http]` section of the configuration file.
+The [`max-row-limit` setting](/influxdb/v1.2/administration/config/#max-row-limit-0) is configurable in the `[http]` section of the configuration file.
+In version 1.2.2, the `max-row-limit` configuration option is set to `0` by default.
+That default setting allows for an unlimited number of rows returned per request.
 
 \** The HTTP API also supports basic authentication.
 Use basic authentication if you've [enabled authentication](/influxdb/v1.2/query_language/authentication_and_authorization/#set-up-authentication)
