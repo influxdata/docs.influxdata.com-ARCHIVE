@@ -30,12 +30,12 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.2.1_c1.2.2.x8
 #### Data node package download
 **Ubuntu & Debian (64-bit)**
 ```
-sudo dpkg -i influxdb-data_1.2.1-c1.2.2_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.2.1-c1.2.2_amd64.deb
 ```
 
 **RedHat & CentOS (64-bit)**
 ```
-sudo yum localinstall influxdb-data-1.2.1_c1.2.2.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.2.1_c1.2.2.x86_64.rpm
 ```
 
 ### Step 2: Install the 1.2.2 packages
@@ -48,7 +48,7 @@ we update the configuration file with the necessary changes for version 1.2.2 in
 
 **Ubuntu & Debian (64-bit)**
 ```
-sudo dpkg -i influxdb-meta_1.2.1-c1.2.2_amd64.de
+sudo dpkg -i influxdb-meta_1.2.1-c1.2.2_amd64.deb
 ```
 
 **RedHat & CentOS (64-bit)**
