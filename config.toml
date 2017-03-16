@@ -87,9 +87,9 @@ SectionPagesMenu = "products"
   url = "/influxdb/v1.2/administration/"
 [[menu.influxdb_1_2]]
   name = "About the Project"
-  identifier = "about"
+  identifier = "about_the_project"
   weight = 100
-  url = "/influxdb/v1.2/about/"
+  url = "/influxdb/v1.2/about_the_project/"
 [[menu.influxdb_1_2]]
   name = "External Resources"
   identifier = "external_resources"
@@ -109,19 +109,19 @@ SectionPagesMenu = "products"
   identifier = "contributing"
   weight = 10
   url = "https://github.com/influxdb/influxdb/blob/master/CONTRIBUTING.md"
-  parent = "about"
+  parent = "about_the_project"
 [[menu.influxdb_1_2]]
   name = "CLA"
   identifier = "cla"
   weight = 20
   url = "https://influxdata.com/community/cla/"
-  parent = "about"
+  parent = "about_the_project"
 [[menu.influxdb_1_2]]
   name = "Licenses"
   identifier = "licenses"
   weight = 30
   url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
-  parent = "about"
+  parent = "about_the_project"
 
 # InfluxDB v1.2 Sub-Menu - External Resources
 [[menu.influxdb_1_2]]

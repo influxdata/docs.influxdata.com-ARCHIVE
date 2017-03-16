@@ -3,8 +3,25 @@ title: Release Notes/Changelog
 menu:
   influxdb_1_2:
     weight: 0
-    parent: about
+    parent: about_the_project
 ---
+
+## v1.2.2 [2017-03-14]
+
+### Release Notes
+
+### Configuration Changes
+
+#### `[http]` Section
+
+* [`max-row-limit`](/influxdb/v1.2/administration/config/#max-row-limit-0) now defaults to `0`.
+In versions 1.0 and 1.1, the default setting was `10000`, but due to a bug, the value in use in versions 1.0 and 1.1 was effectively `0`.
+In versions 1.2.0 through 1.2.1, we fixed that bug, but the fix caused a breaking change for Grafana and Kapacitor users; users who had not set `max-row-limit` to `0` experienced truncated/partial data due to the `10000` row limit.
+In version 1.2.2, we've changed the default `max-row-limit` setting to `0` to match the behavior in versions 1.0 and 1.1.
+
+### Bugfixes
+
+- Change the default [`max-row-limit`](/influxdb/v1.2/administration/config/#max-row-limit-0) setting from `10000` to `0` to prevent the absence of data in Grafana or Kapacitor.
 
 ## v1.2.1 [2017-03-08]
 
