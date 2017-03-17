@@ -76,7 +76,7 @@ SectionPagesMenu = "products"
   weight = 60
   url = "/influxdb/v1.2/query_language/"
 [[menu.influxdb_1_2]]
-  name = "High availability"
+  name = "High Availability"
   identifier = "high_availability"
   weight = 70
   url = "/influxdb/v1.2/high_availability/"
@@ -87,9 +87,9 @@ SectionPagesMenu = "products"
   url = "/influxdb/v1.2/administration/"
 [[menu.influxdb_1_2]]
   name = "About the Project"
-  identifier = "about"
+  identifier = "about_the_project"
   weight = 100
-  url = "/influxdb/v1.2/about/"
+  url = "/influxdb/v1.2/about_the_project/"
 [[menu.influxdb_1_2]]
   name = "External Resources"
   identifier = "external_resources"
@@ -105,29 +105,23 @@ SectionPagesMenu = "products"
   parent = "introduction"
 # InfluxDB v1.2 Sub-Menu - About
 [[menu.influxdb_1_2]]
-  name = "Release Notes/Changelog"
-  identifier = "changelog"
-  weight = 0
-  url = "https://github.com/influxdb/influxdb/blob/master/CHANGELOG.md"
-  parent = "about"
-[[menu.influxdb_1_2]]
   name = "Contributing"
   identifier = "contributing"
   weight = 10
   url = "https://github.com/influxdb/influxdb/blob/master/CONTRIBUTING.md"
-  parent = "about"
+  parent = "about_the_project"
 [[menu.influxdb_1_2]]
   name = "CLA"
   identifier = "cla"
   weight = 20
   url = "https://influxdata.com/community/cla/"
-  parent = "about"
+  parent = "about_the_project"
 [[menu.influxdb_1_2]]
   name = "Licenses"
   identifier = "licenses"
   weight = 30
   url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
-  parent = "about"
+  parent = "about_the_project"
 
 # InfluxDB v1.2 Sub-Menu - External Resources
 [[menu.influxdb_1_2]]
@@ -204,7 +198,7 @@ SectionPagesMenu = "products"
   weight = 60
   url = "/influxdb/v1.1/query_language/"
 [[menu.influxdb_1_1]]
-  name = "High availability"
+  name = "High Availability"
   identifier = "high_availability"
   weight = 70
   url = "/influxdb/v1.1/high_availability/"
@@ -4215,7 +4209,7 @@ parent = "inputs"
   weight = 60
   url = "/influxdb/v1.0/query_language/"
 [[menu.influxdb_1_0]]
-  name = "High availability"
+  name = "High Availability"
   identifier = "high_availability"
   weight = 70
   url = "/influxdb/v1.0/high_availability/"
@@ -4301,7 +4295,7 @@ parent = "inputs"
     weight = 50
     url = "/influxdb/v0.13/query_language/"
     [[menu.influxdb_013]]
-      name = "High availability"
+      name = "High Availability"
       identifier = "high_availability"
       weight = 60
       url = "/influxdb/v0.13/high_availability/"
@@ -4392,7 +4386,7 @@ parent = "inputs"
     weight = 50
     url = "/influxdb/v0.12/query_language/"
     [[menu.influxdb_012]]
-      name = "High availability"
+      name = "High Availability"
       identifier = "high_availability"
       weight = 60
       url = "/influxdb/v0.12/high_availability/"
