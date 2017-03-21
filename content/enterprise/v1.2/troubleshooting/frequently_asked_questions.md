@@ -9,6 +9,7 @@ menu:
 **Known Issues**
 
 * [Why are my Grafana panels returning truncated/partial data?](#why-are-my-grafana-panels-returning-truncated-partial-data)
+* [Why do queries that use math on several selector functions return more than one point in versions 1.2.0-1.2.2?](#why-do-queries-that-use-math-on-several-selector-functions-return-more-than-one-point-in-versions-1-2-0-2-2-2)
 * [What should I do if I see the panic: `unexpected fault address xxxxxxxxxxxxxx`?](#what-should-i-do-if-i-see-the-panic-unexpected-fault-address-xxxxxxxxxxxxxx)
 
 **Log Errors**
@@ -32,6 +33,55 @@ That option limits the number of rows returned per query to 10,000 rows.
 If a query in Grafana exceeds that 10,000 row limit, the panel appears to show [truncated data](https://github.com/influxdata/influxdb/issues/8050).
 
 To prevent that issue, set `max-row-limit` to `0` to allow an unlimited number of returned rows.
+
+## Why do queries that use math on several selector functions return more than one point in versions 1.2.0-2.2.2?
+
+In versions prior to 1.2.0, queries that use [math](/influxdb/v1.2/query_language/math_operators/) on several [selector functions](/influxdb/v1.2/query_language/functions/#selectors) return one point with the epoch 0 (`1970-01-01T00:00:00Z`) timestamp.
+In versions 1.2.0-1.2.2, those queries return `N` points, where `N` is the number of unique timestamps returned by the individual selector functions.
+This is a [known issue](https://github.com/influxdata/influxdb/issues/8167) and it will be fixed in version 1.3.0.
+
+As a workaround, use InfluxQL's [subqueries](/influxdb/v1.2/query_language/data_exploration/#subqueries) in versions 1.2.0-1.2.2 to replicate the query behavior in versions prior to 1.2.0.
+
+### Example
+
+The queries below perform multiplication on two selector functions.
+
+#### Behavior in versions prior to 1.2.0:
+```
+> SELECT MIN("avocado")*2,MAX("avocado")*2 FROM "mycart"
+
+name: mycart
+time  min  max
+----  ---  ---
+0     24   46
+```
+
+The query returns a single point with the epoch 0 timestamp.
+
+#### Behavior in versions 1.2.0-1.2.2:
+```
+> SELECT MIN("avocado")*2,MAX("avocado")*2 FROM "mycart"
+
+name: mycart
+time                 min  max
+----                 ---  ---
+1490113486589201368  24
+1490113497387418180       46
+```
+
+The query returns two points; one point for each timestamp returned by the individual selector functions.
+
+#### Workaround for versions 1.2.0-1.2.2:
+```
+> SELECT "min"*2,"max"*2 FROM (SELECT MIN("avocado"),MAX("avocado") FROM "mycart")
+
+name: mycart
+time  min  max
+----  ---  ---
+0     24   46
+```
+
+The workaround uses InfluxQL's subqueries to replicate the query behavior in versions prior to 1.2.0.
 
 ## What should I do if I see the panic: `unexpected fault address xxxxxxxxxxxxxx`?
 
