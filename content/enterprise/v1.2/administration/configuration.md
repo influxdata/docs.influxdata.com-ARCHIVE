@@ -6,14 +6,37 @@ menu:
     parent: Administration
 ---
 
-<table style="width:100%">
-  <tr>
-    <td><a href="#using-configuration-files">Using Configuration Files</a></td>
-    <td><a href="#meta-node-configuration">Meta Node Configuration File</a></td>
-    <td><a href="#data-node-configuration">Data Node Configuration File</a></td>
-    <td><a href="#web-console-configuration">Web Console Configuration File</a></td>
-  </tr>
-</table>
+#### Content
+
+* [Using configuration files](#using-configuration-files)
+* [Meta node configuration sections](#meta-node-configuration)
+    * [Global options](#global-options)
+    * [[enterprise]](#enterprise)
+    * [[meta]](#meta)
+* [Data node configuration sections](#data-node-configuration)
+    * [Global options](#global-options-1)
+    * [[enterprise]](#enterprise-1)
+    * [[meta]](#meta-1)
+    * [[data]](#data)
+    * [[cluster]](#cluster)
+    * [[retention]](#retention)
+    * [[shard-precreation]](#shard-precreation)
+    * [[admin]](#admin)
+    * [[monitor]](#monitor)
+    * [[subscriber]](#subscriber)
+    * [[http]](#http)
+    * [[graphite]](#graphite)
+    * [[collectd]](#collectd)
+    * [[opentsdb]](#opentsdb)
+    * [[udp]](#udp)
+    * [[continuous-queries]](#continuous-queries)
+    * [[hinted-handoff]](#hinted-handoff)
+* [Web console configuration sections](#web-console-configuration)
+    * [Global options](#global-options-2)
+    * [[influxdb]](#influxdb)
+    * [[smtp]](#smtp)
+    * [[database]](#database)
+
 <br>
 # Using Configuration Files
 
@@ -1011,6 +1034,8 @@ Environment variable: `INFLUXDB_HINTED_HANDOFF_PURGE_INTERVAL`
 <br>
 <br>
 # Web Console Configuration
+
+## Global options
 
 ### url = "http://IP_or_hostname:3000"
 
