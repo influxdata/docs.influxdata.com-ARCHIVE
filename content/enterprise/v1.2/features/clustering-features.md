@@ -23,18 +23,17 @@ Subscriptions used by Kapacitor work in a cluster. Writes to any node will be fo
 
 ## PProf Endpoints
 
-The meta nodes now expose the /debug/pprof endpoints for profiling and troubleshooting.
+Meta nodes expose the /debug/pprof endpoints for profiling and troubleshooting.
 
 ## Shard Movement
 
-* Copy Shard support - copy a shard from one node to another
-* Copy Shard Status - query the status of a copy shard request
-* Kill Copy Shard - kill a running shard copy
-* Remove Shard - remove a shard from a node (this deletes data)
-* Truncate Shards - truncate all active shard groups and start new shards immediately (This is useful when adding nodes or changing replication factors.)
+* [Copy Shard](/enterprise/v1.2/features/cluster-commands/#copy-shard) support - copy a shard from one node to another
+* [Copy Shard Status](/enterprise/v1.2/features/cluster-commands/#copy-shard-status) - query the status of a copy shard request
+* [Kill Copy Shard](/enterprise/v1.2/features/cluster-commands/#kill-copy-shard) - kill a running shard copy
+* [Remove Shard](/enterprise/v1.2/features/cluster-commands/#remove-shard) - remove a shard from a node (this deletes data)
+* [Truncate Shards](/enterprise/v1.2/features/cluster-commands/#truncate-shards) - truncate all active shard groups and start new shards immediately (This is useful when adding nodes or changing replication factors.)
 
-This functionality is exposed via an API on the meta service and through `influxd-ctl` sub-commands.
-The `control.Client` provides a Go client to access this functionality as well.
+This functionality is exposed via an API on the meta service and through [`influxd-ctl` sub-commands](/enterprise/v1.2/features/cluster-commands/).
 
 ## OSS Conversion
 
@@ -54,7 +53,3 @@ InfluxEnterprise clusters support backup and restore functionality starting with
 version 0.7.1.
 See [Backup and Restore](/enterprise/v1.2/guides/backup-and-restore/) for
 more information.
-
-## Features Under Development
-
-HTTP API for performing all cluster and user management functions
