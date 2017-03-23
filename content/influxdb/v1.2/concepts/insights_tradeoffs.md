@@ -12,7 +12,7 @@ Below is a list of some of those design insights that lead to tradeoffs:
 
 1. For the time series use case, we assume that if the same data is sent multiple times, it is the exact same data that a client just sent several times.
   * *Pro:* Simplified [conflict resolution](/influxdb/v1.2/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points) increases write performance
-  * *Con:* May lose data in rare circumstances
+  * *Con:* Cannot store duplicate data; may overwrite data in rare circumstances
 1. Deletes are a rare occurrence.
 When they do occur it is almost always against large ranges of old data that are cold for writes.
   * *Pro:* Restricting access to deletes allows for increased query and write performance
