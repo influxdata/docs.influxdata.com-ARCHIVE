@@ -91,41 +91,17 @@ Perform the following steps on all three servers.
 
 ### I. Download and Install the Meta Service
 
-{{< vertical-tabs >}}
-{{% tabs %}}
-[Ubuntu & Debian (64-bit)](#)
-[RedHat & CentOS (64-bit)](#)
-{{% /tabs %}}
-{{< tab-content-container >}}
 
-{{% tab-content %}}
-
-Download:
+#### Ubuntu & Debian (64-bit)
 ```
 wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.2.1-c1.2.2_amd64.deb
-```
-Install:
-```
 sudo dpkg -i influxdb-meta_1.2.1-c1.2.2_amd64.deb
 ```
-
-{{% /tab-content %}}
-
-{{% tab-content %}}
-
-Download:
+#### RedHat & CentOS (64-bit)]
 ```
 wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.2.1_c1.2.2.x86_64.rpm
-```
-Install:
-```
 sudo yum localinstall influxdb-meta-1.2.1_c1.2.2.x86_64.rpm
 ```
-
-{{% /tab-content %}}
-
-{{< /tab-content-container >}}
-{{< /vertical-tabs >}}
 
 <dt>For users looking to upgrade to version 1.2.x, please see the [Upgrading](/enterprise/v1.2/administration/upgrading/) document for important information about that release.</dt>
 
@@ -187,41 +163,16 @@ Perform the following steps on all three servers.
 
 ### I. Download and Install the Data Service
 
-{{< vertical-tabs >}}
-{{% tabs %}}
-[Ubuntu & Debian (64-bit)](#)
-[RedHat & CentOS (64-bit)](#)
-{{% /tabs %}}
-{{< tab-content-container >}}
-
-{{% tab-content %}}
-
-Download:
+#### Ubuntu & Debian (64-bit)
 ```
 wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.2.1-c1.2.2_amd64.deb
-```
-Install:
-```
 sudo dpkg -i influxdb-data_1.2.1-c1.2.2_amd64.deb
 ```
-
-{{% /tab-content %}}
-
-{{% tab-content %}}
-
-Download:
+#### RedHat & CentOS (64-bit)
 ```
 wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.2.1_c1.2.2.x86_64.rpm
-```
-Install:
-```
 sudo yum localinstall influxdb-data-1.2.1_c1.2.2.x86_64.rpm
 ```
-
-{{% /tab-content %}}
-
-{{< /tab-content-container >}}
-{{< /vertical-tabs >}}
 
 <dt>For users looking to upgrade to version 1.2.x, please see the [Upgrading](/enterprise/v1.2/administration/upgrading/) document for important information about that release.</dt>
 
