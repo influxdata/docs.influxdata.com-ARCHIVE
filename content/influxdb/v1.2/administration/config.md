@@ -8,6 +8,128 @@ menu:
 
 The InfluxDB configuration file contains configuration settings specific to a local node.
 
+#### Content
+
+* [Using configuration files](#using-configuration-files)
+    * [Configuration options overview](#configuration-options-overview)
+    * [Environment variables](#environment-variables)
+* [Configuration options by section](#configuration-options-by-section)
+    * [Global options](#global-options)
+        * [reporting-disabled](#reporting-disabled-false)
+        * [bind-address](#bind-address-8088)
+    * [[meta]](#meta)
+        * [dir](#dir-var-lib-influxdb-meta)
+        * [retention-autocreate](#retention-autocreate-true)
+        * [logging-enabled](#logging-enabled-true)
+    * [[data]](#data)
+        * [dir](#dir-var-lib-influxdb-data)
+        * [wal-dir](#wal-dir-var-lib-influxdb-wal)
+        * [trace-logging-enabled](#trace-logging-enabled-false)
+        * [query-log-enabled](#query-log-enabled-true)
+        * [cache-max-memory-size](#cache-max-memory-size-1048576000)
+        * [cache-snapshot-memory-size](#cache-snapshot-memory-size-26214400)
+        * [cache-snapshot-write-cold-duration](#cache-snapshot-write-cold-duration-10m)
+        * [compact-full-write-cold-duration](#compact-full-write-cold-duration-4h)
+        * [max-series-per-database](#max-series-per-database-1000000)
+        * [max-values-per-tag](#max-values-per-tag-100000)
+    * [[coordinator]](#coordinator)
+        * [write-timeout](#write-timeout-10s)
+        * [max-concurrent-queries](#max-concurrent-queries-0)
+        * [query-timeout](#query-timeout-0s)
+        * [log-queries-after](#log-queries-after-0s)
+        * [max-select-point](#max-select-point-0)
+        * [max-select-series](#max-select-series-0)
+        * [max-select-buckets](#max-select-buckets-0)
+    * [[retention]](#retention)
+        * [enabled](#enabled-true)
+        * [check-interval](#check-interval-30m0s)
+    * [[shard-precreation]](#shard-precreation)
+        * [enabled](#enabled-true-1)
+        * [check-interval](#check-interval-10m)
+        * [advance-period](#advance-period-30m)
+    * [[admin]](#admin)
+        * [enabled](#enabled-false)
+        * [bind-address](#bind-address-8083)
+        * [https-enabled](#https-enabled-false)
+        * [https-certificate](#https-certificate-etc-ssl-influxdb-pem)
+    * [[monitor]](#monitor)
+        * [store-enabled](#store-enabled-true)
+        * [store-database](#store-database-internal)
+        * [store-interval](#store-interval-10s)
+    * [[subscriber]](#subscriber)
+        * [enabled](#enabled-true-3)
+        * [http-timeout](#http-timeout-30s)
+        * [insecure-skip-verify](#insecure-skip-verify-false)
+        * [ca-certs](#ca-certs)
+        * [write-concurrency](#write-concurrency-40)
+        * [write-buffer-size](#write-buffer-size-1000)
+    * [[http]](#http)
+        * [enabled](#enabled-true-2)
+        * [bind-address](#bind-address-8086)
+        * [auth-enabled](#auth-enabled-false)
+        * [realm](#realm-influxdb)
+        * [log-enabled](#log-enabled-true)
+        * [write-tracing](#write-tracing-false)
+        * [pprof-enabled](#pprof-enabled-true)
+        * [https-enabled](#https-enabled-false-1)
+        * [https-certificate](#https-certificate-etc-ssl-influxdb-pem-1)
+        * [https-private-key](#https-private-key)
+        * [shared-secret](#shared-secret)
+        * [max-row-limit](#max-row-limit-0)
+        * [max-connection-limit](#max-connection-limit-0)
+        * [unix-socket-enabled](#unix-socket-enabled-false)
+        * [bind-socket](#bind-socket-var-run-influxdb-sock)
+    * [[[graphite]]](#graphite)
+        * [enabled](#enabled-false-1)
+        * [database](#database-graphite)
+        * [retention-policy](#retention-policy)
+        * [bind-address](#bind-address-2003)
+        * [protocol](#protocol-tcp)
+        * [consistency-level](#consistency-level-one)
+        * [batch-size](#batch-size-5000)
+        * [batch-pending](#batch-pending-10)
+        * [batch-timeout](#batch-timeout-1s)
+        * [udp-read-buffer](#udp-read-buffer-0)
+        * [separator](#separator)
+    * [[[collectd]]](#collectd)
+        * [enabled](#enabled-false-2)
+        * [bind-address](#bind-address-25826)
+        * [database](#database-collectd)
+        * [retention-policy](#retention-policy-1)
+        * [typesdb](#typesdb-usr-local-share-collectd)
+        * [security-level](#security-level-none)
+        * [auth-file](#auth-file-etc-collectd-auth-file)
+        * [batch-size](#batch-size-5000-1)
+        * [batch-pending](#batch-pending-10-1)
+        * [batch-timeout](#batch-timeout-10s)
+        * [read-buffer](#read-buffer-0)
+    * [[[opentsdb]]](#opentsdb)
+        * [enabled](#enabled-false-3)
+        * [bind-address](#bind-address-4242)
+        * [database](#database-opentsdb)
+        * [retention-policy](#retention-policy-2)
+        * [consistency-level](#consistency-level-one-1)
+        * [tls-enabled](#tls-enabled-false)
+        * [certificate](#certificate-etc-ssl-influxdb-pem)
+        * [log-point-errors](#log-point-errors-true)
+        * [batch-size](#batch-size-1000)
+        * [batch-pending](#batch-pending-5)
+        * [batch-timeout](#batch-timeout-1s-1)
+    * [[[udp]]](#udp)
+        * [enabled](#enabled-false-4)
+        * [bind-address](#bind-address-8089)
+        * [database](#database-udp)
+        * [retention-policy](#retention-policy-3)
+        * [batch-size](#batch-size-5000-2)
+        * [batch-pending](#batch-pending-10-2)
+        * [batch-timeout](#batch-timeout-1s-2)
+        * [read-buffer](#read-buffer-0-1)
+        * [precision](#precision)
+    * [[continuous_queries]](#continuous-queries)
+        * [enabled](#enabled-true-4)
+        * [log-enabled](#log-enabled-true-1)
+        * [run-interval](#run-interval-1s)
+
 ## Using Configuration Files
 
 The system has internal defaults for every configuration file setting.
@@ -43,7 +165,26 @@ For example:
 InfluxDB first checks for the `-config` option and then for the environment
 variable.
 
-### Environment variables
+### Configuration Options Overview
+
+Every configuration section has configuration options and every configuration option is optional.
+If you do not uncomment a configuration option, the system uses its default setting.
+The configuration options in this document are set to their default settings.
+
+Configuration options that specify a duration support the following duration units:
+
+`ns`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;nanoseconds  
+`us` or `µs`&emsp;microseconds  
+`ms`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;milliseconds  
+`s`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;seconds  
+`m`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;minutes  
+`h`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;hours  
+`d`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;days  
+`w`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;weeks
+
+>**Note:** This page documents configuration options for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/master/etc/config.sample.toml) will always be slightly ahead of what is documented here.
+
+### Environment Variables
 
 All configuration options can be specified in the configuration file or in an
 environment variable.
@@ -82,43 +223,6 @@ relevant position number (in this case: `0`):
 For the Nth Graphite configuration in the configuration file, the relevant
 environment variables would be of the form `INFLUXDB_GRAPHITE_(N-1)_BATCH_PENDING`.
 For each section of the configuration file the numbering restarts at zero.
-
-## Configuration Sections
-
-* [Global Options](#global-options)
-* [[meta]](#meta)
-* [[data]](#data)
-* [[coordinator]](#coordinator)
-* [[retention]](#retention)
-* [[shard-precreation]](#shard-precreation)
-* [[admin]](#admin)
-* [[monitor]](#monitor)
-* [[subscriber]](#subscriber)
-* [[http]](#http)
-* [[[graphite]]](#graphite)
-* [[[collectd]]](#collectd)
-* [[[opentsdb]]](#opentsdb)
-* [[[udp]]](#udp)
-* [[continuous_queries]](#continuous-queries)
-
-## Configuration Options
-
-Every configuration section has configuration options and every configuration option is optional.
-If you do not uncomment a configuration option, the system uses its default setting.
-The configuration options in this document are set to their default settings.
-
-Configuration options that specify a duration support the following duration units:
-
-`ns`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;nanoseconds  
-`us` or `µs`&emsp;microseconds  
-`ms`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;milliseconds  
-`s`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;seconds  
-`m`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;minutes  
-`h`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;hours  
-`d`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;days  
-`w`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;weeks
-
->**Note:** This page documents configuration options for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/master/etc/config.sample.toml) will always be slightly ahead of what is documented here.
 
 ## Global Options
 

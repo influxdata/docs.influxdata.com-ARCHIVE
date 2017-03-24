@@ -34,8 +34,6 @@ wget https://s3.amazonaws.com/influx-enterprise/releases/influx-enterprise-1.2.2
 sudo yum localinstall influx-enterprise-1.2.2.x86_64.rpm
 ```
 
-<dt>For users looking to upgrade to version 1.2.x, please see the [Upgrading](/enterprise/v1.2/administration/upgrading/) document for important information about that release.</dt>
-
 > **Notes:**
 >
 * For other distributions, visit
