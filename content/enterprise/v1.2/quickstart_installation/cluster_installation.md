@@ -103,8 +103,6 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.2.1_c1.2.2.x8
 sudo yum localinstall influxdb-meta-1.2.1_c1.2.2.x86_64.rpm
 ```
 
-<dt>For users looking to upgrade to version 1.2.x, please see the [Upgrading](/enterprise/v1.2/administration/upgrading/) document for important information about that release.</dt>
-
 ### II. Edit the Meta Service Configuration File
 
 In `/etc/influxdb/influxdb-meta.conf`:
@@ -173,8 +171,6 @@ sudo dpkg -i influxdb-data_1.2.1-c1.2.2_amd64.deb
 wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.2.1_c1.2.2.x86_64.rpm
 sudo yum localinstall influxdb-data-1.2.1_c1.2.2.x86_64.rpm
 ```
-
-<dt>For users looking to upgrade to version 1.2.x, please see the [Upgrading](/enterprise/v1.2/administration/upgrading/) document for important information about that release.</dt>
 
 ### II. Edit the Data Service Configuration File
 
