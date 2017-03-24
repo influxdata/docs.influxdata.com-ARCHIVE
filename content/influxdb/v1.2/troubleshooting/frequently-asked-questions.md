@@ -73,6 +73,7 @@ Where applicable, it links to outstanding issues on GitHub.
 * [What words and characters should I avoid when writing data to InfluxDB?](#what-words-and-characters-should-i-avoid-when-writing-data-to-influxdb)  
 * [When should I single quote and when should I double quote when writing data?](#when-should-i-single-quote-and-when-should-i-double-quote-when-writing-data)  
 * [Does the precision of the timestamp matter?](#does-the-precision-of-the-timestamp-matter)
+* [What are the configuration recommendations and schema guidelines for writing sparse, historical data?](#what-are-the-configuration-recommendations-and-schema-guidelines-for-writing-sparse-historical-data)
 
 ## How do I include a single quote in a password?
 Escape the single quote with a backslash (`\`) both when creating the password
@@ -1146,3 +1147,16 @@ curl -i -XPOST "http://localhost:8086/write?db=weather" --data-binary 'temperatu
 
 curl -i -XPOST "http://localhost:8086/write?db=weather&precision=s" --data-binary 'temperature,location=1 value=90 1472666050'
 ```
+
+## What are the configuration recommendations and schema guidelines for writing sparse, historical data?
+
+For users who want to write sparse, historical data to InfluxDB, we recommend:
+
+First, lengthening your [retention policy](/influxdb/v1.2/concepts/glossary/#retention-policy-rp)‘s [shard group](/influxdb/v1.2/concepts/glossary/#shard-group) duration to cover several years.
+The default shard group duration is one week and if your data cover several hundred years – well, that’s a lot of shards!
+Having an extremely high number of shards is inefficient for InfluxDB.
+Increase the shard group duration for your data’s retention policy with the [`ALTER RETENTION POLICY` query](/influxdb/v1.2/query_language/database_management/#modify-retention-policies-with-alter-retention-policy).
+
+Second, temporarily lowering the [`cache-snapshot-write-cold-duration` configuration setting](/influxdb/v1.2/administration/config/#cache-snapshot-write-cold-duration-10m).
+If you’re writing a lot of historical data, the default setting (`10m`) can cause the system to hold all of your data in cache for every shard.
+Temporarily lowering the `cache-snapshot-write-cold-duration` setting to `10s` while you write the historical data makes the process more efficient.
