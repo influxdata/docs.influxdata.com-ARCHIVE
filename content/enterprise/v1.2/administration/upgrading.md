@@ -14,7 +14,17 @@ Version 1.2.2 introduces changes to the meta node configuration file and the dat
 Please update the configuration files prior to upgrading to avoid any unnecessary downtime.
 The steps below outline the upgrade process and include a list of the required configuration changes.
 
-### Step 1: Download the 1.2.2 packages
+### Step 1: Back up your cluster
+
+Back up your cluster before upgrading to version 1.2.
+You must have a backup to revert your cluster to an earlier version.
+The following command uses the [version 1.1 backup syntax](/enterprise/v1.1/guides/backup-and-restore/#syntax) to create a backup of your cluster and it stores that backup in the current directory.
+
+```
+influxd-ctl backup .
+```
+
+### Step 2: Download the 1.2.2 packages
 
 #### Meta node package download
 **Ubuntu & Debian (64-bit)**
@@ -38,7 +48,7 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.2.1-c1.2.2_am
 wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.2.1_c1.2.2.x86_64.rpm
 ```
 
-### Step 2: Install the 1.2.2 packages
+### Step 3: Install the 1.2.2 packages
 
 #### Meta node package Install
 
@@ -72,7 +82,7 @@ sudo dpkg -i influxdb-data_1.2.1-c1.2.2_amd64.deb
 sudo yum localinstall influxdb-data-1.2.1_c1.2.2.x86_64.rpm
 ```
 
-### Step 3: Update the meta node configuration file
+### Step 4: Update the meta node configuration file
 
 > The configuration options in this section are not new to version 1.2.2.
 They were, however, missing from the sample configuration file (`/etc/influxdb/influxdb-meta.conf`) in version 1.1.x.
@@ -87,7 +97,7 @@ In the `[meta]` section of the configuration file (`/etc/influxdb/influxdb-meta.
 Those configuration options are set to their default settings.
 Follow the links for more information about those options.
 
-### Step 4: Update the data node configuration file
+### Step 5: Update the data node configuration file
 
 > Most of the configuration options in this section are not new to version 1.2.2.
 They were, however, missing from the sample configuration file (`/etc/influxdb/influxdb.conf`) in version 1.1.x.
@@ -117,7 +127,7 @@ In the `[cluster]` section, **remove** [shard-writer-timeout = "5s"](/enterprise
 The added configuration options are set to their default settings.
 Follow the links for more information about those options.
 
-### Step 5: Restart the processes
+### Step 6: Restart the processes
 
 #### Meta node restart
 **sysvinit systems**
@@ -139,7 +149,7 @@ service influxdb restart
 sudo systemctl restart influxdb
 ```
 
-### Step 6: Confirm the upgrade
+## Confirmation steps
 
 Check your nodes' version numbers using the `influxd-ctl show` command.
 The [`influxd-ctl` tool](/enterprise/v1.2/features/cluster-commands/) is available on all meta nodes.
