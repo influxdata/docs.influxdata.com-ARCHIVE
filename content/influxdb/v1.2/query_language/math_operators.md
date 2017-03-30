@@ -114,9 +114,8 @@ SELECT 10 / ("A" + "B" + "C") FROM "mult"
 
 ### Bitwise And
 
-You can use this operator with any non-negative integers, whether they are fields or constants.
-It does not work with non-integer datatypes.
-If either side of the expression is negative then it will return zero.
+You can use this operator with any integers or booleans, whether they are fields or constants.
+It does not work with float or string datatypes, and you cannot mix integers and booleans.
 
 ```sql
 SELECT "A" & 255 FROM "bitfields"
@@ -130,11 +129,19 @@ SELECT "A" & "B" FROM "bitfields"
 SELECT * FROM "data" WHERE "bitfield" & 15 > 0
 ```
 
+```sql
+SELECT "A" & "B" FROM "booleans"
+```
+
+```sql
+SELECT ("A" ^ true) & "B" FROM "booleans"
+```
+
+
 ### Bitwise Or
 
-You can use this operator with any non-negative integers, whether they are fields or constants.
-It does not work with non-integer datatypes.
-If either side of the expression is negative then it will return zero.
+You can use this operator with any integers or booleans, whether they are fields or constants.
+It does not work with float or string datatypes, and you cannot mix integers and booleans.
 
 ```sql
 SELECT "A" | 5 FROM "bitfields"
@@ -150,9 +157,8 @@ SELECT * FROM "data" WHERE "bitfield" | 12 = 12
 
 ### Bitwise Exclusive-Or
 
-You can use this operator with any non-negative integers, whether they are fields or constants.
-It does not work with non-integer datatypes.
-If either side of the expression is negative then it will return zero.
+You can use this operator with any integers or booleans, whether they are fields or constants.
+It does not work with float or string datatypes, and you cannot mix integers and booleans.
 
 ```sql
 SELECT "A" ^ 255 FROM "bitfields"
@@ -196,7 +202,7 @@ See GitHub issue [3525](https://github.com/influxdb/influxdb/issues/3525).
 
 Using any of `!|`,`NAND`,`XOR`,`NOR` will yield parse error.
 
-Additionally using `AND`, `OR` in the `SELECT` clause of a query will not behave as mathematical operators and simply yield empty results, as they are tokens in InfluxQL.
+Additionally using `AND`, `OR` in the `SELECT` clause of a query will not behave as mathematical operators and simply yield empty results, as they are tokens in InfluxQL.  However, you can apply the bitwise operators `&`, `|` and `^` to boolean data.
 
 ### Bitwise Not
 
@@ -211,7 +217,7 @@ The bitwise-not of this should return the bits `1111 1111 1111 1110`, i.e. the i
 
 #### Solution
 
-You can easily implement a bitwise-not operation by using the `^` (bitwise xor) operator together with the number representing all-ones for your word-width:
+You can implement a bitwise-not operation by using the `^` (bitwise xor) operator together with the number representing all-ones for your word-width:
 
 For 8-bit data:
 
