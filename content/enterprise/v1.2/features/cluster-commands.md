@@ -8,12 +8,31 @@ menu:
 
 Use the command line tools [`influxd-ctl`](#influxd-ctl) and [`influx`](#influx) to interact with your cluster and data.
 
-<table style="width:100%">
-  <tr>
-    <td><a href="#influxd-ctl">influxd-ctl</a></td>
-    <td><a href="#influx">influx</a></td>
-  </tr>
-</table>
+#### Content
+
+* [influxd-ctl](#influxd-ctl)
+    * [Syntax](#syntax)
+    * [Global options](#global-options)
+    * [Arguments](#arguments)
+        * [add-data](#add-data)
+        * [add-meta](#add-meta)
+        * [backup](#backup)
+        * [copy-shard](#copy-shard)
+        * [copy-shard-status](#copy-shard-status)
+        * [join](#join)
+        * [kill-copy-shard](#kill-copy-shard)
+        * [leave](#leave)
+        * [remove-data](#remove-data)
+        * [remove-meta](#remove-meta)
+        * [remove-shard](#remove-shard)
+        * [restore](#restore)
+        * [show](#show)
+        * [show-shards](#show-shards)
+        * [update-data](#update-data)
+        * [token](#token)
+        * [truncate-shards](#truncate-shards)
+* [influx](#influx)
+    
 
 ## influxd-ctl
 
