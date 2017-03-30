@@ -457,6 +457,10 @@ The command aborts the `copy-shard` command that was copying shard `39` from `cl
 
 Removes a meta node and/or data node from the cluster.
 Use `leave` instead of the [`remove-meta`](#remove-meta) and [`remove-data`](#remove-data) arguments if you set up your InfluxEnterprise cluster with the [QuickStart Installation](/enterprise/v1.2/quickstart_installation/cluster_installation/) process.
+
+<dt>The `leave` argument is destructive; it erases all metastore information from meta nodes and all data from data nodes.
+Use `leave` only if you want to *permanently* remove a node from a cluster.</dt>
+
 ```
 leave [-y]
 ```
@@ -529,6 +533,10 @@ The system doesn't remove a data node from the cluster because it doesn't find a
 
 Removes a data node from a cluster.
 Use `remove-data` instead of the [`leave`](#leave) argument if you set up your InfluxEnterprise cluster with the [Production Installation](/enterprise/v1.2/production_installation/) process.
+
+<dt>The `remove-data` argument is destructive; it erases all data from the specified data node.
+Use `remove-data` only if you want to *permanently* remove a data node from a cluster.</dt>
+
 ```
 remove-data [-force] <data-node-TCP-bind-address>
 ```
@@ -553,6 +561,10 @@ The command removes a data node running at `cluster-data-node-03:8088` from an e
 
 Removes a meta node from the cluster.
 Use `remove-meta` instead of the [`leave`](#leave) argument if you set up your InfluxEnterprise cluster with the [Production Installation](/enterprise/v1.2/production_installation/) process.
+
+<dt>The `remove-meta` argument is destructive; it erases all metastore information from the specified meta node.
+Use `remove-meta` only if you want to *permanently* remove a meta node from a cluster.</dt>
+
 ```
 remove-meta [-force | -tcpAddr <meta-node-TCP-bind_address> | -y] <meta-node-HTTP-bind-address>
 ```
