@@ -8,12 +8,31 @@ menu:
 
 Use the command line tools [`influxd-ctl`](#influxd-ctl) and [`influx`](#influx) to interact with your cluster and data.
 
-<table style="width:100%">
-  <tr>
-    <td><a href="#influxd-ctl">influxd-ctl</a></td>
-    <td><a href="#influx">influx</a></td>
-  </tr>
-</table>
+#### Content
+
+* [influxd-ctl](#influxd-ctl)
+    * [Syntax](#syntax)
+    * [Global options](#global-options)
+    * [Arguments](#arguments)
+        * [add-data](#add-data)
+        * [add-meta](#add-meta)
+        * [backup](#backup)
+        * [copy-shard](#copy-shard)
+        * [copy-shard-status](#copy-shard-status)
+        * [join](#join)
+        * [kill-copy-shard](#kill-copy-shard)
+        * [leave](#leave)
+        * [remove-data](#remove-data)
+        * [remove-meta](#remove-meta)
+        * [remove-shard](#remove-shard)
+        * [restore](#restore)
+        * [show](#show)
+        * [show-shards](#show-shards)
+        * [update-data](#update-data)
+        * [token](#token)
+        * [truncate-shards](#truncate-shards)
+* [influx](#influx)
+    
 
 ## influxd-ctl
 
@@ -438,6 +457,10 @@ The command aborts the `copy-shard` command that was copying shard `39` from `cl
 
 Removes a meta node and/or data node from the cluster.
 Use `leave` instead of the [`remove-meta`](#remove-meta) and [`remove-data`](#remove-data) arguments if you set up your InfluxEnterprise cluster with the [QuickStart Installation](/enterprise/v1.2/quickstart_installation/cluster_installation/) process.
+
+<dt>The `leave` argument is destructive; it erases all metastore information from meta nodes and all data from data nodes.
+Use `leave` only if you want to *permanently* remove a node from a cluster.</dt>
+
 ```
 leave [-y]
 ```
@@ -510,6 +533,10 @@ The system doesn't remove a data node from the cluster because it doesn't find a
 
 Removes a data node from a cluster.
 Use `remove-data` instead of the [`leave`](#leave) argument if you set up your InfluxEnterprise cluster with the [Production Installation](/enterprise/v1.2/production_installation/) process.
+
+<dt>The `remove-data` argument is destructive; it erases all data from the specified data node.
+Use `remove-data` only if you want to *permanently* remove a data node from a cluster.</dt>
+
 ```
 remove-data [-force] <data-node-TCP-bind-address>
 ```
@@ -534,6 +561,10 @@ The command removes a data node running at `cluster-data-node-03:8088` from an e
 
 Removes a meta node from the cluster.
 Use `remove-meta` instead of the [`leave`](#leave) argument if you set up your InfluxEnterprise cluster with the [Production Installation](/enterprise/v1.2/production_installation/) process.
+
+<dt>The `remove-meta` argument is destructive; it erases all metastore information from the specified meta node.
+Use `remove-meta` only if you want to *permanently* remove a meta node from a cluster.</dt>
+
 ```
 remove-meta [-force | -tcpAddr <meta-node-TCP-bind_address> | -y] <meta-node-HTTP-bind-address>
 ```
