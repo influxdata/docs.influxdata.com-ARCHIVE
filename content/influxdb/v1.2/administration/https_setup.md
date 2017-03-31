@@ -65,6 +65,7 @@ commands:
 ```
 sudo chown root:root /etc/ssl/<CA-certificate-file>
 sudo chmod 644 /etc/ssl/<CA-certificate-file>
+sudo chmod 600 /etc/ssl/<private-key-file>.key>
 ```
 
 #### Step 3: Enable HTTPS in InfluxDB's configuration file
