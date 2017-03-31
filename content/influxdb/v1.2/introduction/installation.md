@@ -244,7 +244,7 @@ We’ve seen the best performance with the C3 class of machines.
 
 This example assumes that you are using two SSD volumes and that you have mounted them appropriately.
 This example also assumes that each of those volumes is mounted at `/mnt/influx` and `/mnt/db`.
-For more information on how to do that see the Amazon documentation on how to [Add a Volume to Your Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-add-volume-to-instance.html).
+For more information on how to do that see the Amazon documentation on how to [Add a Volume to Your Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html).
 
 ### Config File
 You'll have to update the config file appropriately for each InfluxDB instance you have.
