@@ -185,84 +185,152 @@ time                   count
 ```
 
 ## DISTINCT()
-Returns the unique values of a single [field](/influxdb/v1.2/concepts/glossary/#field).
-`DISTINCT())` accepts all field types; an `*` indicates all fields in the measurement.
+Returns the list of unique [field values](/influxdb/v1.2/concepts/glossary/#field-value).
+
+### Syntax
 ```
-SELECT DISTINCT(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+SELECT DISTINCT( [ * | <field_key> | /<regular_expression>/ ] ) FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-Examples:
+#### Nested Syntax
+```
+SELECT COUNT(DISTINCT( [ * | <field_key> | /<regular_expression>/ ] )) [...]
+```
 
-* Select the unique field values in the `level description` field:
+### Description of Syntax
 
+`DISTINCT(field_key)`  
+&emsp;&emsp;&emsp;
+Returns the unique field values associated with the [field key](/influxdb/v1.2/concepts/glossary/#field-key).
+
+`DISTINCT(/regular_expression/)`  
+&emsp;&emsp;&emsp;
+Returns the unique field values associated with each field key that matches the [regular expression](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
+
+`DISTINCT(*)`  
+&emsp;&emsp;&emsp;
+Returns the unique field values associated with each field key in the [measurement](/influxdb/v1.2/concepts/glossary/#measurement).
+
+`DISTINCT()` supports all field value [data types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types).
+InfluxQL supports nesting `DISTINCT()` with [`COUNT()`](#count).
+
+### Examples
+
+#### Example 1: List the distinct field values associated with a field key
 ```
 > SELECT DISTINCT("level description") FROM "h2o_feet"
+
 name: h2o_feet
---------------
-time			               distinct
-1970-01-01T00:00:00Z	 between 6 and 9 feet
-1970-01-01T00:00:00Z	 below 3 feet
-1970-01-01T00:00:00Z	 between 3 and 6 feet
-1970-01-01T00:00:00Z	 at or greater than 9 feet
+time                   distinct
+----                   --------
+1970-01-01T00:00:00Z   between 6 and 9 feet
+1970-01-01T00:00:00Z   below 3 feet
+1970-01-01T00:00:00Z   between 3 and 6 feet
+1970-01-01T00:00:00Z   at or greater than 9 feet
 ```
+The query returns a tabular list of the unique field values in the `level description` field key in the `h2o_feet` measurement.
 
-The response shows that `level description` has four distinct field values.
-The timestamp reflects the first time the field value appears in the data.
-
-> **Note:** Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
-
-* Select the unique field values in the `level description` field grouped by the `location` tag:
-
+#### Example 2: List the distinct field values associated with each field key in a measurement
 ```
-> SELECT DISTINCT("level description") FROM "h2o_feet" GROUP BY "location"
+> SELECT DISTINCT(*) FROM "h2o_feet"
+
+name: h2o_feet
+time                   distinct_level description   distinct_water_level
+----                   --------------------------   --------------------
+1970-01-01T00:00:00Z   between 6 and 9 feet         8.12
+1970-01-01T00:00:00Z   between 3 and 6 feet         8.005
+1970-01-01T00:00:00Z   at or greater than 9 feet    7.887
+1970-01-01T00:00:00Z   below 3 feet                 7.762
+[...]
+```
+The query returns a tabular list of the unique field values for each field key in the `h2o_feet` measurement.
+The `h2o_feet` measurement has two field keys: `level description` and `water_level`.
+
+#### Example 3: List the distinct field values associated with each field key that matches a regular expression
+```
+> SELECT DISTINCT(/description/) FROM "h2o_feet"
+
+name: h2o_feet
+time                   distinct_level description
+----                   --------------------------
+1970-01-01T00:00:00Z   below 3 feet
+1970-01-01T00:00:00Z   between 6 and 9 feet
+1970-01-01T00:00:00Z   between 3 and 6 feet
+1970-01-01T00:00:00Z   at or greater than 9 feet
+```
+The query returns a tabular list of the unique field values for each field key in the `h2o_feet` measurement that contains the word `description`.
+
+#### Example 4: List the distinct field values associated with a field key and include several clauses
+```
+>  SELECT DISTINCT("level description") FROM "h2o_feet" WHERE time >= '2015-08-17T23:48:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(12m),* SLIMIT 1
+
 name: h2o_feet
 tags: location=coyote_creek
-time			                distinct
-----			                --------
-1970-01-01T00:00:00Z	  between 6 and 9 feet
-1970-01-01T00:00:00Z	  between 3 and 6 feet
-1970-01-01T00:00:00Z	  below 3 feet
-1970-01-01T00:00:00Z	  at or greater than 9 feet
+time                   distinct
+----                   --------
+2015-08-18T00:00:00Z   between 6 and 9 feet
+2015-08-18T00:12:00Z   between 6 and 9 feet
+2015-08-18T00:24:00Z   between 6 and 9 feet
+2015-08-18T00:36:00Z   between 6 and 9 feet
+2015-08-18T00:48:00Z   between 6 and 9 feet
+```
+The query returns a tabular list of the unique field values in the `level description` field key.
+It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-syntax) between `2015-08-17T23:48:00Z` and `2015-08-18T00:54:00Z` and [groups](/influxdb/v1.2/query_language/data_exploration/#the-group-by-clause) results into 12-minute time intervals and per tag.
+The query also [limits](/influxdb/v1.2/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of series returned to one.
 
+#### Example 5: Count the distinct field values associated with a field key
+```
+> SELECT COUNT(DISTINCT("level description")) FROM "h2o_feet"
 
 name: h2o_feet
-tags: location=santa_monica
-time			                distinct
-----			                --------
-1970-01-01T00:00:00Z	  below 3 feet
-1970-01-01T00:00:00Z	  between 3 and 6 feet
-1970-01-01T00:00:00Z	  between 6 and 9 feet
+time                   count
+----                   -----
+1970-01-01T00:00:00Z   4
 ```
 
-* Nest `DISTINCT()` in [`COUNT()`](/influxdb/v1.2/query_language/functions/#count) to get the number of unique field values in `level description` grouped by the `location` tag:
+The query returns the number of unique field values in the `level description` field key and the `h2o_feet` measurement.
+
+### Common Issues with DISTINCT()
+
+#### Issue 1: DISTINCT() and the INTO clause
+
+Using `DISTINCT()` with the [`INTO` clause](/influxdb/v1.2/query_language/data_exploration/#the-into-clause) can cause InfluxDB to overwrite points in the destination measurement.
+`DISTINCT()` often returns several results with the same timestamp; InfluxDB assumes [points](/influxdb/v1.2/concepts/glossary/#point) with the same [series](/influxdb/v1.2/concepts/glossary/#series) and timestamp are duplicate points and simply overwrites any duplicate point with the most recent point in the destination measurement.
+
+##### Example
+<br>
+The first query in the codeblock below uses the `DISTINCT()` function and returns four results.
+Notice that each result has the same timestamp.
+The second query adds an `INTO` clause to the initial query and writes the query results to the `distincts` measurement.
+The last query in the codeblock selects all the data in the `distincts` measurement.
+
+The last query returns one point because the four initial results are duplicate points; they belong to the same series and have the same timestamp.
+When the system encounters duplicate points, it simply overwrites the previous point with the most recent point.
 
 ```
-> SELECT COUNT(DISTINCT("level description")) FROM "h2o_feet" GROUP BY "location"
+>  SELECT DISTINCT("level description") FROM "h2o_feet"
+
 name: h2o_feet
-tags: location = coyote_creek
-time			               count
-----			               -----
-1970-01-01T00:00:00Z	 4
+time                   distinct
+----                   --------
+1970-01-01T00:00:00Z   below 3 feet
+1970-01-01T00:00:00Z   between 6 and 9 feet
+1970-01-01T00:00:00Z   between 3 and 6 feet
+1970-01-01T00:00:00Z   at or greater than 9 feet
 
-name: h2o_feet
-tags: location = santa_monica
-time			               count
-----			               -----
-1970-01-01T00:00:00Z	 3
-```
+>  SELECT DISTINCT("level description") INTO "distincts" FROM "h2o_feet"
 
-* Select the distinct field values for all fields (`level description` and `water_level`) in the measurement `h2o_feet`:
+name: result
+time                   written
+----                   -------
+1970-01-01T00:00:00Z   4
 
-```
-> SELECT DISTINCT(*) FROM "h2o_feet" LIMIT 5
-name: h2o_feet
---------------
-time                   distinct_level description    distinct_water_level
-1970-01-01T00:00:00Z   below 3 feet                  2.064
-1970-01-01T00:00:00Z   between 6 and 9 feet          8.12
-1970-01-01T00:00:00Z                                 2.116
-1970-01-01T00:00:00Z                                 8.005
-1970-01-01T00:00:00Z                                 2.028
+> SELECT * FROM "distincts"
+
+name: distincts
+time                   distinct
+----                   --------
+1970-01-01T00:00:00Z   at or greater than 9 feet
 ```
 
 ## INTEGRAL()
