@@ -53,82 +53,136 @@ Aggregate, select, transform, and predict data with InfluxQL functions.
 # Aggregations
 
 ## COUNT()
-Returns the number of non-null values in a single [field](/influxdb/v1.2/concepts/glossary/#field).
-`COUNT()` accepts all field types; an `*` indicates all fields in the measurement.
+Returns the number of non-null [field values](/influxdb/v1.2/concepts/glossary/#field-value).
+
+### Syntax
+
 ```
-SELECT COUNT(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+SELECT COUNT( [ * | <field_key> | /<regular_expression>/ ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-Examples:
+#### Nested Syntax
+```
+SELECT COUNT(DISTINCT( [ * | <field_key> | /<regular_expression>/ ] )) [...]
+```
 
-* Count the number of non-null field values in the `water_level` field:
+### Description of Syntax
 
+`COUNT(field_key)`  
+&emsp;&emsp;&emsp;
+Returns the number of field values associated with the [field key](/influxdb/v1.2/concepts/glossary/#field-key).
+
+`COUNT(/regular_expression/)`  
+&emsp;&emsp;&emsp;
+Returns the number of field values associated with each field key that matches the [regular expression](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
+
+`COUNT(*)`  
+&emsp;&emsp;&emsp;
+Returns the number of field values associated with each field key in the [measurement](/influxdb/v1.2/concepts/glossary/#measurement).
+
+`COUNT()` supports all field value [data types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types).
+InfluxQL supports nesting [`DISTINCT()`](#distinct) with `COUNT()`.
+
+### Examples
+
+#### Example 1: Count the field values associated with a field key
 ```
 > SELECT COUNT("water_level") FROM "h2o_feet"
+
 name: h2o_feet
---------------
-time			               count
-1970-01-01T00:00:00Z	 15258
+time                   count
+----                   -----
+1970-01-01T00:00:00Z   15258
 ```
+The query returns the number of non-null field values in the `water_level` field key in the `h2o_feet` measurement.
 
-> **Note:** Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
-
-* Count the number of non-null field values in the `water_level` field at four-day intervals:
-
-```
-> SELECT COUNT("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time < '2015-09-18T17:00:00Z' GROUP BY time(4d)
-name: h2o_feet
---------------
-time			               count
-2015-08-17T00:00:00Z	 1440
-2015-08-21T00:00:00Z	 1920
-2015-08-25T00:00:00Z	 1920
-2015-08-29T00:00:00Z	 1920
-2015-09-02T00:00:00Z	 1915
-2015-09-06T00:00:00Z	 1920
-2015-09-10T00:00:00Z	 1920
-2015-09-14T00:00:00Z	 1920
-2015-09-18T00:00:00Z	 335
-```
-
-* Count the number of non-null field values for all fields (`level description` and `water_level`) in the measurement `h2o_feet`:
-
+#### Example 2: Count the field values associated with each field key in a measurement
 ```
 > SELECT COUNT(*) FROM "h2o_feet"
+
 name: h2o_feet
---------------
-time                   count_level description	    count_water_level
-1970-01-01T00:00:00Z   15258                       15258
+time                   count_level description   count_water_level
+----                   -----------------------   -----------------
+1970-01-01T00:00:00Z   15258                     15258
+```
+The query returns the number of non-null field values for each field key associated with the `h2o_feet` measurement.
+The `h2o_feet` measurement has two field keys: `level description` and `water_level`.
+
+#### Example 3: Count the field values associated with each field key that matches a regular expression
+```
+> SELECT COUNT(/water/) FROM "h2o_feet"
+
+name: h2o_feet
+time                   count_water_level
+----                   -----------------
+1970-01-01T00:00:00Z   15258
+```
+The query returns the number of non-null field values for every field key that contains the word `water` in the `h2o_feet` measurement.
+
+#### Example 4: Count the field values associated with a field key and include several clauses
+```
+> SELECT COUNT("water_level") FROM "h2o_feet" WHERE time >= '2015-08-17T23:48:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(12m),* fill(200) LIMIT 7 SLIMIT 1
+
+name: h2o_feet
+tags: location=coyote_creek
+time                   count
+----                   -----
+2015-08-17T23:48:00Z   200
+2015-08-18T00:00:00Z   2
+2015-08-18T00:12:00Z   2
+2015-08-18T00:24:00Z   2
+2015-08-18T00:36:00Z   2
+2015-08-18T00:48:00Z   2
+```
+The query returns the number of non-null field values in the `water_level` field key.
+It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-syntax) between `2015-08-17T23:48:00Z` and `2015-08-18T00:54:00Z` and [groups](/influxdb/v1.2/query_language/data_exploration/#the-group-by-clause) results into 12-minute time intervals and per tag.
+The query [fills](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals-and-fill) empty time intervals with `200` and [limits](/influxdb/v1.2/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points and series returned to seven and one.
+
+#### Example 5: Count the distinct field values associated with a field key
+```
+> SELECT COUNT(DISTINCT("level description")) FROM "h2o_feet"
+
+name: h2o_feet
+time                   count
+----                   -----
+1970-01-01T00:00:00Z   4
 ```
 
-> #### `COUNT()` and controlling the values reported for intervals with no data
-> <br>
-> Other InfluxQL functions report `null` values for intervals with no data, and appending `fill(<stuff>)` to queries with those functions replaces `null` values in the output with `<stuff>`.
-`COUNT()`, however, reports `0`s for intervals with no data, so appending `fill(<stuff>)` to queries with `COUNT()` replaces `0`s in the output with `<stuff>`.
+The query returns the number of unique field values for the `level description` field key and the `h2o_feet` measurement.
 
-> Example: Use `fill(none)` to suppress intervals with `0` data
+### Common Issues with COUNT()
 
-> `COUNT()` without `fill(none)`:
-```bash
-> SELECT COUNT("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-09-18T21:41:00Z' AND time <= '2015-09-18T22:41:00Z' GROUP BY time(30m)
-name: h2o_feet
---------------
-time			               count
-2015-09-18T21:30:00Z	 1
-2015-09-18T22:00:00Z	 0
-2015-09-18T22:30:00Z	 0
+#### Issue 1: COUNT() and fill()
+Most InfluxQL functions report `null` values for time intervals with no data, and
+[`fill(<fill_option>)`](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals-and-fill)
+replaces that `null` value with the `fill_option`.
+`COUNT()` reports `0` for time intervals with no data, and `fill(<fill_option>)` replaces any `0` values with the `fill_option`.
+
+##### Example
+<br>
+The first query in the codeblock below does not include `fill()`.
+The last time interval has no data so the reported value for that time interval is zero.
+The second query includes `fill(800000)`; it replaces the zero in the last interval with `800000`.
+
 ```
+> SELECT COUNT("water_level") FROM "h2o_feet" WHERE time >= '2015-09-18T21:24:00Z' AND time <= '2015-09-18T21:54:00Z' GROUP BY time(12m)
 
-> `COUNT()` with `fill(none)`:
-```bash
-> SELECT COUNT("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-09-18T21:41:00Z' AND time <= '2015-09-18T22:41:00Z' GROUP BY time(30m) fill(none)
 name: h2o_feet
---------------
-time			               count
-2015-09-18T21:30:00Z	 1
-```
+time                   count
+----                   -----
+2015-09-18T21:24:00Z   2
+2015-09-18T21:36:00Z   2
+2015-09-18T21:48:00Z   0
 
-> For a more general discussion of `fill()`, see [Data Exploration](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals-and-fill).
+> SELECT COUNT("water_level") FROM "h2o_feet" WHERE time >= '2015-09-18T21:24:00Z' AND time <= '2015-09-18T21:54:00Z' GROUP BY time(12m) fill(800000)
+
+name: h2o_feet
+time                   count
+----                   -----
+2015-09-18T21:24:00Z   2
+2015-09-18T21:36:00Z   2
+2015-09-18T21:48:00Z   800000
+```
 
 ## DISTINCT()
 Returns the unique values of a single [field](/influxdb/v1.2/concepts/glossary/#field).
