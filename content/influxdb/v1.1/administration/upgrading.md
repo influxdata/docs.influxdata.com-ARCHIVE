@@ -117,18 +117,30 @@ Restore `/tmp/backup` to the meta directory in `/var/lib/influxdb/meta`:
 Using metastore snapshot: /tmp/backup/meta.00
 ```
 
-**5.** Update the configuration file.
+**5.** Update the permissions on the meta database:
+
+```
+chown influxdb:influxdb <path_to_1.2_meta_directory>/meta.db
+```
+
+Example:
+
+```
+~# chown influxdb:influxdb /var/lib/influxdb/meta/meta.db
+```
+
+**6.** Update the configuration file.
 
 Compare your old configuration file against the [1.1 configuration file](/influxdb/v1.1/administration/config/)
 and manually update any defaults with your localized settings.
 
-**6.** Start the 1.1 service:
+**7.** Start the 1.1 service:
 
 ```
 sudo service influxdb start
 ```
 
-**7.** Confirm that your metastore data are present.
+**8.** Confirm that your metastore data are present.
 
 The 1.1 output from the queries `SHOW DATABASES`,`SHOW USERS` and
 `SHOW RETENTION POLICIES ON <database_name>` should match the 0.10 or 0.11
@@ -138,5 +150,5 @@ If your metastore data do not appear to be present, stop the service, reinstall
 InfluxDB 0.10 or 0.11, restore the copy you made of the entire 0.10 or 0.11 `meta` directory to
 the `meta` directory, and try working through these steps again.
 
-**8.** Check out the new features outlined in
+**9.** Check out the new features outlined in
 [Differences between InfluxDB 1.1 and 1.0](/influxdb/v1.1/administration/differences/).
