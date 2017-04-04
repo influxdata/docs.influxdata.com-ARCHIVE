@@ -212,7 +212,12 @@ Non-admin users can have one of the following three privileges per database:
 ### User Management Commands
 
 #### Admin user management
-##### `CREATE` a new admin user:  
+
+Before you being able manage the database when HTTP authentication is enabled, you will first need to create the `admin` user:
+
+`CREATE USER admin WITH PASSWORD '<password>' WITH ALL PRIVILEGES`
+
+##### `CREATE` another admin user:
 <br>
 ```
 CREATE USER <username> WITH PASSWORD '<password>' WITH ALL PRIVILEGES
@@ -221,7 +226,7 @@ CREATE USER <username> WITH PASSWORD '<password>' WITH ALL PRIVILEGES
 CLI example:
 
 ```bash
-> CREATE USER "paul" WITH PASSWORD 'timeseries4days' WITH ALL PRIVILEGES
+> CREATE USER paul WITH PASSWORD 'timeseries4days' WITH ALL PRIVILEGES
 >
 ```
 
@@ -229,13 +234,13 @@ CLI example:
 >
 CLI example:
 >
-    > CREATE USER "todd" WITH PASSWORD '123456' WITH ALL PRIVILEGES
-    > CREATE USER "todd" WITH PASSWORD '123456' WITH ALL PRIVILEGES
-    > CREATE USER "todd" WITH PASSWORD '123' WITH ALL PRIVILEGES
+    > CREATE USER todd WITH PASSWORD '123456' WITH ALL PRIVILEGES
+    > CREATE USER todd WITH PASSWORD '123456' WITH ALL PRIVILEGES
+    > CREATE USER todd WITH PASSWORD '123' WITH ALL PRIVILEGES
     ERR: user already exists
-    > CREATE USER "todd" WITH PASSWORD '123456'
+    > CREATE USER todd WITH PASSWORD '123456'
     ERR: user already exists
-    > CREATE USER "todd" WITH PASSWORD '123456' WITH ALL PRIVILEGES
+    > CREATE USER todd WITH PASSWORD '123456' WITH ALL PRIVILEGES
     >
 
 ##### `GRANT` administrative privileges to an existing user:
@@ -291,14 +296,20 @@ CREATE USER <username> WITH PASSWORD '<password>'
 CLI example:
 
 ```bash
-> CREATE USER "todd" WITH PASSWORD 'influxdb41yf3'
+> CREATE USER todd WITH PASSWORD 'influxdb41yf3'
+> CREATE USER alice WITH PASSWORD 'wonder\'land'
+> CREATE USER "rachel_smith" WITH PASSWORD 'asdf1234!'
+> CREATE USER "monitoring-robot" WITH PASSWORD 'XXXXX'
+> CREATE USER "$savyadmin" WITH PASSWORD 'm3tr1cL0v3r'
 >
 ```
 
 > **Notes:**
 >
+* The user value must be wrapped in double quotes if starts with a digit, contains a hyphen and or includes any special characters, for example: `!@#$%^&*()-`
 * The password [string](/influxdb/v1.2/query_language/spec/#strings) must be wrapped in single quotes.
-Do not include the single quotes when authenticating requests.
+* Do not include the single quotes when authenticating requests.
+
 > For passwords that include a single quote or a newline character, escape the single quote or newline character with a backslash both when creating the password and when submitting authentication requests.
 >
 * Repeating the exact `CREATE USER` statement is idempotent. If any values change the database will return a duplicate user error. See GitHub Issue [#6890](https://github.com/influxdata/influxdb/pull/6890) for details.
@@ -380,7 +391,7 @@ yet_another_database_name   ALL PRIVILEGES
 
 #### General admin and non-admin user management
 
-##### Re`SET` a user's password:  
+##### Re`SET` a user's password:
 <br>
 ```
 SET PASSWORD FOR <username> = '<password>'
