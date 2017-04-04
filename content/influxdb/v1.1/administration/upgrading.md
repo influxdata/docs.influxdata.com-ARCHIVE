@@ -120,7 +120,7 @@ Using metastore snapshot: /tmp/backup/meta.00
 **5.** Update the permissions on the meta database:
 
 ```
-chown influxdb:influxdb <path_to_1.2_meta_directory>/meta.db
+chown influxdb:influxdb <path_to_1.1_meta_directory>/meta.db
 ```
 
 Example:
