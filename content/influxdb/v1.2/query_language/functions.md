@@ -340,60 +340,83 @@ time                   distinct
 </dt>
 
 ## MEAN()
-Returns the arithmetic mean (average) for the values in a single [field](/influxdb/v1.2/concepts/glossary/#field).
-The field type must be int64 or float64; an `*` indicates all int64 or float64
-fields in the measurement.
+Returns the arithmetic mean (average) of [field values](/influxdb/v1.2/concepts/glossary/#field-value).
+
+### Syntax
 ```
-SELECT MEAN(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+SELECT MEAN( [ * | <field_key> | /<regular_expression>/ ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-Examples:
+### Description of Syntax
 
-* Calculate the average value of the `water_level` field:
+`MEAN(field_key)`  
+&emsp;&emsp;&emsp;
+Returns the average field value associated with the [field key](/influxdb/v1.2/concepts/glossary/#field-key).
 
+`MEAN(/regular_expression/)`  
+&emsp;&emsp;&emsp;
+Returns the average field value associated with each field key that matches the [regular expression](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
+
+`MEAN(*)`  
+&emsp;&emsp;&emsp;
+Returns the average field value associated with each field key in the [measurement](/influxdb/v1.2/concepts/glossary/#measurement).
+
+`MEAN()` supports int64 and float64 field value [data types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types).
+
+### Examples
+
+#### Example 1: Calculate the mean field value associated with a field key
 ```
 > SELECT MEAN("water_level") FROM "h2o_feet"
+
 name: h2o_feet
---------------
-time			               mean
-1970-01-01T00:00:00Z	 4.286791371454075
+time                   mean
+----                   ----
+1970-01-01T00:00:00Z   4.442107025822522
 ```
+The query returns the average field value in the `water_level` field key in the `h2o_feet` measurement.
 
-> **Notes:**
->
-* Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
-* Executing `mean()` on the same set of float64 points may yield slightly
-different results.
-InfluxDB does not sort points before it applies the function which results in
-those small discrepancies.
-
-* Calculate the average value in the field `water_level` at four-day intervals:
-
-```
-> SELECT MEAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time < '2015-09-18T17:00:00Z' GROUP BY time(4d)
-name: h2o_feet
---------------
-time                     mean
-2015-08-17T00:00:00Z     4.322029861111125
-2015-08-21T00:00:00Z     4.251395512375667
-2015-08-25T00:00:00Z     4.285036458333324
-2015-08-29T00:00:00Z     4.469495801899061
-2015-09-02T00:00:00Z     4.382785378590083
-2015-09-06T00:00:00Z     4.28849666349042
-2015-09-10T00:00:00Z     4.658127604166656
-2015-09-14T00:00:00Z     4.763504687500006
-2015-09-18T00:00:00Z     4.232829850746268
-```
-
-* Calculate the average value for all integer or float fields (in this case, just `water_level`) in the measurement `h2o_feet`:
-
+#### Example 2: Calculate the mean field value associated with each field key in a measurement
 ```
 > SELECT MEAN(*) FROM "h2o_feet"
+
 name: h2o_feet
---------------
-time                    mean_water_level
-1970-01-01T00:00:00Z    4.44210702582251
+time                   mean_water_level
+----                   ----------------
+1970-01-01T00:00:00Z   4.442107025822522
 ```
+The query returns the average field value for every field key that stores numerical values in the `h2o_feet` measurement.
+The `h2o_feet` measurement has one numerical field: `water_level`.
+
+#### Example 3: Calculate the mean field value associated with each field key that matches a regular expression
+```
+> SELECT MEAN(/water/) FROM "h2o_feet"
+
+name: h2o_feet
+time                   mean_water_level
+----                   ----------------
+1970-01-01T00:00:00Z   4.442107025822523
+```
+The query returns the average field value for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement.
+
+#### Example 4: Calculate the mean field value associated with a field key and include several clauses
+```
+> SELECT MEAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-17T23:48:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(12m),* fill(9.01) LIMIT 7 SLIMIT 1
+
+name: h2o_feet
+tags: location=coyote_creek
+time                   mean
+----                   ----
+2015-08-17T23:48:00Z   9.01
+2015-08-18T00:00:00Z   8.0625
+2015-08-18T00:12:00Z   7.8245
+2015-08-18T00:24:00Z   7.5675
+2015-08-18T00:36:00Z   7.303
+2015-08-18T00:48:00Z   7.046
+```
+The query returns the average of the values in the `water_level` field key.
+It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-syntax) between `2015-08-17T23:48:00Z` and `2015-08-18T00:54:00Z` and [groups](/influxdb/v1.2/query_language/data_exploration/#the-group-by-clause) results into 12-minute time intervals and per tag.
+The query [fills](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals-and-fill) empty time intervals with `9.01` and [limits](/influxdb/v1.2/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points and series returned to seven and one.
 
 ## MEDIAN()
 Returns the middle value from the sorted values in a single [field](/influxdb/v1.2/concepts/glossary/#field).
