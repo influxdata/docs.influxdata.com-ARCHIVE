@@ -182,6 +182,7 @@ Things to note about `DELETE`:
 in the `FROM` clause when specifying measurement names and in the `WHERE` clause
 when specifying tag values.
 * `DELETE` does not support [fields](/influxdb/v1.2/concepts/glossary/#field) in the `WHERE` clause.
+* If you need to delete points in the future, you must specify that time period as `DELETE SERIES` runs for `time < now()` by default. [Syntax](https://github.com/influxdata/influxdb/issues/8007)
 
 ### Delete measurements with DROP MEASUREMENT
 
