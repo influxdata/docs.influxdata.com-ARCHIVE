@@ -500,52 +500,82 @@ It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-
 The query [fills](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals-and-fill) empty time intervals with `700 `, [limits](/influxdb/v1.2/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points and series returned to seven and one, and [offsets](/influxdb/v1.2/query_language/data_exploration/#the-offset-and-soffset-clauses) the series returned by one.
 
 ## MODE()
-Returns the most frequent value in a single [field](/influxdb/v1.2/concepts/glossary/#field).
+Returns the most frequent value in a list of [field values](/influxdb/v1.2/concepts/glossary/#field-value).
 
+### Syntax
 ```
-SELECT MODE(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
-```
-
-> **Note:** `MODE()` will return the earliest metric value in case of a tie between two or more value for maximum occurrences
-
-Examples:
-
-* Select the mode value in the field `water_level`:
-
-```
-> SELECT MODE("water_level") FROM "h2o_feet"
+SELECT MODE( [ * | <field_key> | /<regular_expression>/ ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-CLI response:
-```
-name: h2o_feet
---------------
-time			               mode
-1970-01-01T00:00:00Z	 4
-```
+### Description of Syntax
 
-> **Note:** Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
+`MODE(field_key)`  
+&emsp;&emsp;&emsp;
+Returns the most frequent field value associated with the [field key](/influxdb/v1.2/concepts/glossary/#field-key).
 
-* Select the mode value of `water_level` between August 18, 2015 at 00:00:00 and August 18, 2015 at 00:30:00 grouped by the `location` tag:
+`MODE(/regular_expression/)`  
+&emsp;&emsp;&emsp;
+Returns the most frequent field value associated with each field key that matches the [regular expression](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
 
-```
-> SELECT MODE("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time < '2015-08-18T00:36:00Z' GROUP BY "location"
-```
+`MODE(*)`  
+&emsp;&emsp;&emsp;
+Returns the most frequent field value associated with each field key in the [measurement](/influxdb/v1.2/concepts/glossary/#measurement).
 
-CLI response:
+`MODE()` supports all field value [data types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types).
+
+> **Note:** `MODE()` returns the field value with the earliest [timestamp](/influxdb/v1.2/concepts/glossary/#timestamp) if  there's a tie between two or more values for the maximum number of occurrences.
+
+### Examples
+
+#### Example 1: Calculate the mode field value associated with a field key
 ```
-name: h2o_feet
-tags: location = coyote_creek
-time			               mode
-----			               ------
-2015-08-18T00:00:00Z	 7
+> SELECT MODE("level description") FROM "h2o_feet"
 
 name: h2o_feet
-tags: location = santa_monica
-time			               mode
-----			               ------
-2015-08-18T00:00:00Z	 2
+time                   mode
+----                   ----
+1970-01-01T00:00:00Z   between 3 and 6 feet
 ```
+The query returns the most frequent field value in the `level description` field key and in the `h2o_feet` measurement.
+
+#### Example 2: Calculate the mode field value associated with each field key in a measurement
+```
+> SELECT MODE(*) FROM "h2o_feet"
+
+name: h2o_feet
+time                   mode_level description   mode_water_level
+----                   ----------------------   ----------------
+1970-01-01T00:00:00Z   between 3 and 6 feet     2.69
+```
+The query returns the most frequent field value for every field key in the `h2o_feet` measurement.
+The `h2o_feet` measurement has two field keys: `level description` and `water_level`.
+
+#### Example 3: Calculate the mode field value associated with each field key that matches a regular expression
+```
+> SELECT MODE(/water/) FROM "h2o_feet"
+
+name: h2o_feet
+time                   mode_water_level
+----                   ----------------
+1970-01-01T00:00:00Z   2.69
+```
+The query returns the most frequent field value for every field key that includes the word `/water/` in the `h2o_feet` measurement.
+
+#### Example 4: Calculate the mode field value associated with a field key and include several clauses
+```
+> SELECT MODE("level description") FROM "h2o_feet" WHERE time >= '2015-08-17T23:48:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(12m),* LIMIT 3 SLIMIT 1 SOFFSET 1
+
+name: h2o_feet
+tags: location=santa_monica
+time                   mode
+----                   ----
+2015-08-17T23:48:00Z
+2015-08-18T00:00:00Z   below 3 feet
+2015-08-18T00:12:00Z   below 3 feet
+```
+The query returns the mode of the values associated with the `water_level` field key.
+It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-syntax) between `2015-08-17T23:48:00Z` and `2015-08-18T00:54:00Z` and [groups](/influxdb/v1.2/query_language/data_exploration/#the-group-by-clause) results into 12-minute time intervals and per tag.
+The query [limits](/influxdb/v1.2/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points and series returned to three and one, and it [offsets](/influxdb/v1.2/query_language/data_exploration/#the-offset-and-soffset-clauses) the series returned by one.
 
 ## SPREAD()
 Returns the difference between the minimum and maximum values of a [field](/influxdb/v1.2/concepts/glossary/#field).
