@@ -34,6 +34,10 @@
 						<br/>
 						<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/introduction/getting_started/">Getting Started</a>
 						<br/>
+						{{ if or (in .Identifier "influxdb") (in .Identifier "enterprise") }}
+							<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/troubleshooting/frequently-asked-questions/">Frequently Asked Questions</a>
+							<br/>
+						{{ end }}
 						<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">All Documentation</a>
 					{{ end }}
 					{{ if in .Identifier "cloud" }}
@@ -41,6 +45,8 @@
 						<a class="homepage--card-link" href="https://cloud.influxdata.com/" target=blank>Free Trial</a>
 						<br/>
 						<a class="homepage--card-link" href="https://help.influxcloud.net/getting_started/" target=blank>Getting Started</a>
+						<br/>
+						<a class="homepage--card-link" href="https://help.influxcloud.net/tips_and_faqs/" target=blank>Frequently Asked Questions</a>
 						<br/>
 						<a class="homepage--card-link" href="https://help.influxcloud.net/index.html" target=blank>All Documentation</a>
 					{{ end }}

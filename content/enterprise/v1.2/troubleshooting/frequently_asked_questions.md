@@ -1,5 +1,7 @@
 ---
 title: Frequently Asked Questions
+aliases:
+    - enterprise/v1.2/troubleshooting/frequently-asked-questions/
 menu:
   enterprise_1_2:
     weight: 0
