@@ -578,58 +578,84 @@ It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-
 The query [limits](/influxdb/v1.2/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points and series returned to three and one, and it [offsets](/influxdb/v1.2/query_language/data_exploration/#the-offset-and-soffset-clauses) the series returned by one.
 
 ## SPREAD()
-Returns the difference between the minimum and maximum values of a [field](/influxdb/v1.2/concepts/glossary/#field).
-The field must be of type int64 or float64; an `*` indicates all int64 or float64
-fields in the measurement.
+Returns the difference between the minimum and maximum [field values](/influxdb/v1.2/concepts/glossary/#field-value).
+
+### Syntax
 ```
-SELECT SPREAD(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+SELECT SPREAD( [ * | <field_key> | /<regular_expression>/ ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-Examples:
+### Description of Syntax
 
-* Calculate the difference between the minimum and maximum values across all values in the `water_level` field:
+`SPREAD(field_key)`  
+&emsp;&emsp;&emsp;
+Returns the difference between the minimum and maximum field values associated with the [field key](/influxdb/v1.2/concepts/glossary/#field-key).
 
+`SPREAD(/regular_expression/)`  
+&emsp;&emsp;&emsp;
+Returns the difference between the minimum and maximum field values associated with each field key that matches the [regular expression](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
+
+`SPREAD(*)`  
+&emsp;&emsp;&emsp;
+Returns the difference between the minimum and maximum field values associated with each field key in the [measurement](/influxdb/v1.2/concepts/glossary/#measurement).
+
+`SPREAD()` supports int64 and float64 field value [data types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types).
+
+### Examples
+
+#### Example 1: Calculate the spread for the field values associated with a field key
 ```
 > SELECT SPREAD("water_level") FROM "h2o_feet"
+
 name: h2o_feet
---------------
-time			                spread
-1970-01-01T00:00:00Z	  10.574
-```
-
-> **Notes:**
->
-* Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
-* Executing `spread()` on the same set of float64 points may yield slightly
-different results.
-InfluxDB does not sort points before it applies the function which results in
-those small discrepancies.
-
-* Calculate the difference between the minimum and maximum values in the field `water_level` for a specific tag and time range and at 30 minute intervals:
-
-```
-> SELECT SPREAD("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-09-18T17:00:00Z' AND time < '2015-09-18T20:30:00Z' GROUP BY time(30m)
-name: h2o_feet
---------------
-time			                spread
-2015-09-18T17:00:00Z	  0.16699999999999982
-2015-09-18T17:30:00Z	  0.5469999999999997
-2015-09-18T18:00:00Z	  0.47499999999999964
-2015-09-18T18:30:00Z	  0.2560000000000002
-2015-09-18T19:00:00Z	  0.23899999999999988
-2015-09-18T19:30:00Z	  0.1609999999999996
-2015-09-18T20:00:00Z	  0.16800000000000015
-```
-
-* Calculate the difference between the minimum and maximum values for all integer or float fields (in this case, just `water_level`) in the measurement `h2o_feet`:
-
-```
-> SELECT SPREAD(*) FROM "h2o_feet"
-name: h2o_feet
---------------
-time                   spread_water_level
+time                   spread
+----                   ------
 1970-01-01T00:00:00Z   10.574
 ```
+
+The query returns the difference between the minimum and maximum field values in the `water_level` field key and in the `h2o_feet` measurement.
+
+#### Example 2: Calculate the spread for the field values associated with each field key in a measurement
+```
+> SELECT SPREAD(*) FROM "h2o_feet"
+
+name: h2o_feet
+time                   spread_water_level
+----                   ------------------
+1970-01-01T00:00:00Z   10.574
+```
+
+The query returns the difference between the minimum and maximum field values for every field key that stores numerical values in the `h2o_feet` measurement.
+The `h2o_feet` measurement has one numerical field: `water_level`.
+
+#### Example 3: Calculate the spread for the field values associated with each field key that matches a regular expression
+```
+> SELECT SPREAD(/water/) FROM "h2o_feet"
+
+name: h2o_feet
+time                   spread_water_level
+----                   ------------------
+1970-01-01T00:00:00Z   10.574
+```
+
+The query returns the difference between the minimum and maximum field values for every field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement.
+
+#### Example 4: Calculate the spread for the field values associated with a field key and include several clauses
+```
+> SELECT SPREAD("water_level") FROM "h2o_feet" WHERE time >= '2015-08-17T23:48:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(12m),* fill(18) LIMIT 3 SLIMIT 1 SOFFSET 1
+
+name: h2o_feet
+tags: location=santa_monica
+time                   spread
+----                   ------
+2015-08-17T23:48:00Z   18
+2015-08-18T00:00:00Z   0.052000000000000046
+2015-08-18T00:12:00Z   0.09799999999999986
+```
+
+The query returns the difference between the minimum and maximum field values in the `water_level` field key.
+It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-syntax) between `2015-08-17T23:48:00Z` and `2015-08-18T00:54:00Z `and [groups](/influxdb/v1.2/query_language/data_exploration/#the-group-by-clause) results into 12-minute time intervals and per tag.
+The query [fills](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals-and-fill) empty time intervals with `18`, [limits](/influxdb/v1.2/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points and series returned to three and one, and [offsets](/influxdb/v1.2/query_language/data_exploration/#the-offset-and-soffset-clauses) the series returned by one.
 
 ## SUM()
 Returns the sum of the all values in a single [field](/influxdb/v1.2/concepts/glossary/#field).
