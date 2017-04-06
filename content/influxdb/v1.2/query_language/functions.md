@@ -419,56 +419,85 @@ It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-
 The query [fills](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals-and-fill) empty time intervals with `9.01` and [limits](/influxdb/v1.2/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points and series returned to seven and one.
 
 ## MEDIAN()
-Returns the middle value from the sorted values in a single [field](/influxdb/v1.2/concepts/glossary/#field).
-The field values must be of type int64 or float64; an `*` indicates all int64 or float64
-fields in the measurement.
+Returns the middle value from a sorted list of [field values](/influxdb/v1.2/concepts/glossary/#field-value).
 
+### Syntax
 ```
-SELECT MEDIAN(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+SELECT MEDIAN( [ * | <field_key> | /<regular_expression>/ ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-> **Note:** `MEDIAN()` is nearly equivalent to [`PERCENTILE(field_key, 50)`](/influxdb/v1.2/query_language/functions/#percentile), except `MEDIAN()` returns the average of the two middle values if the field contains an even number of points.
+### Description of Syntax
 
-Examples:
+`MEDIAN(field_key)`  
+&emsp;&emsp;&emsp;
+Returns the middle field value associated with the [field key](/influxdb/v1.2/concepts/glossary/#field-key).
 
-* Select the median value in the field `water_level`:
+`MEDIAN(/regular_expression/)`  
+&emsp;&emsp;&emsp;
+Returns the middle field value associated with each field key that matches the [regular expression](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
 
+`MEDIAN(*)`  
+&emsp;&emsp;&emsp;
+Returns the middle field value associated with each field key in the [measurement](/influxdb/v1.2/concepts/glossary/#measurement).
+
+`MEDIAN()` supports int64 and float64 field value [data types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types).
+
+> **Note:** `MEDIAN()` is nearly equivalent to [`PERCENTILE(field_key, 50)`](#percentile), except `MEDIAN()` returns the average of the two middle field values if the field contains an even number of values.
+
+### Examples
+
+#### Example 1: Calculate the median field value associated with a field key
 ```
 > SELECT MEDIAN("water_level") FROM "h2o_feet"
-name: h2o_feet
---------------
-time			               median
-1970-01-01T00:00:00Z	 4.124
-```
-
-> **Note:** Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
-
-* Select the median value of `water_level` between August 18, 2015 at 00:00:00 and August 18, 2015 at 00:30:00 grouped by the `location` tag:
-
-```
-> SELECT MEDIAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time < '2015-08-18T00:36:00Z' GROUP BY "location"
-name: h2o_feet
-tags: location = coyote_creek
-time			               median
-----			               ------
-2015-08-18T00:00:00Z	 7.8245
 
 name: h2o_feet
-tags: location = santa_monica
-time			               median
-----			               ------
-2015-08-18T00:00:00Z	 2.0575
-```
-
-* Calculate the median value for all integer or float fields (in this case, just `water_level`) in the measurement `h2o_feet`:
-
-```
-> SELECT MEDIAN(*) FROM "h2o_feet"
-name: h2o_feet
---------------
-time                   median_water_level
+time                   median
+----                   ------
 1970-01-01T00:00:00Z   4.124
 ```
+The query returns the middle field value in the `water_level` field key and in the `h2o_feet` measurement.
+
+#### Example 2: Calculate the median field value associated with each field key in a measurement
+```
+> SELECT MEDIAN(*) FROM "h2o_feet"
+
+name: h2o_feet
+time                   median_water_level
+----                   ------------------
+1970-01-01T00:00:00Z   4.124
+```
+The query returns the middle field value for every field key that stores numerical values in the `h2o_feet` measurement.
+The `h2o_feet` measurement has one numerical field: `water_level`.
+
+#### Example 3: Calculate the median field value associated with each field key that matches a regular expression
+```
+> SELECT MEDIAN(/water/) FROM "h2o_feet"
+
+name: h2o_feet
+time                   median_water_level
+----                   ------------------
+1970-01-01T00:00:00Z   4.124
+```
+The query returns the middle field value for every field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement.
+
+#### Example 4: Calculate the median field value associated with a field key and include several clauses
+```
+> SELECT MEDIAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-17T23:48:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(12m),* fill(700) LIMIT 7 SLIMIT 1 SOFFSET 1
+
+name: h2o_feet
+tags: location=santa_monica
+time                   median
+----                   ------
+2015-08-17T23:48:00Z   700
+2015-08-18T00:00:00Z   2.09
+2015-08-18T00:12:00Z   2.077
+2015-08-18T00:24:00Z   2.0460000000000003
+2015-08-18T00:36:00Z   2.0620000000000003
+2015-08-18T00:48:00Z   700
+```
+The query returns the middle field value in the `water_level` field key.
+It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-syntax) between `2015-08-17T23:48:00Z` and `2015-08-18T00:54:00Z` and [groups](/influxdb/v1.2/query_language/data_exploration/#the-group-by-clause) results into 12-minute time intervals and per tag.
+The query [fills](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals-and-fill) empty time intervals with `700 `, [limits](/influxdb/v1.2/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points and series returned to seven and one, and [offsets](/influxdb/v1.2/query_language/data_exploration/#the-offset-and-soffset-clauses) the series returned by one.
 
 ## MODE()
 Returns the most frequent value in a single [field](/influxdb/v1.2/concepts/glossary/#field).
