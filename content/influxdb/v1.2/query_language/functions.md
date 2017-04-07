@@ -737,58 +737,84 @@ It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-
 The query [fills](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals-and-fill) empty time intervals with `18000`, [limits](/influxdb/v1.2/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points and series returned to two and one, and [offsets](/influxdb/v1.2/query_language/data_exploration/#the-offset-and-soffset-clauses) the series returned by one.
 
 ## SUM()
-Returns the sum of the all values in a single [field](/influxdb/v1.2/concepts/glossary/#field).
-The field must be of type int64 or float64; an `*` indicates all int64 or float64
-fields in the measurement.
+Returns the sum of [field values](/influxdb/v1.2/concepts/glossary/#field-value).
+
+### Syntax
 ```
-SELECT SUM(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+SELECT SUM( [ * | <field_key> | /<regular_expression>/ ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-Examples:
+### Description of Syntax
 
-* Calculate the sum of the values in the `water_level` field:
+`SUM(field_key)`  
+&emsp;&emsp;&emsp;
+Returns the sum of field values associated with the [field key](/influxdb/v1.2/concepts/glossary/#field-key).
 
+`SUM(/regular_expression/)`  
+&emsp;&emsp;&emsp;
+Returns the sum of field values associated with each field key that matches the [regular expression](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
+
+`SUM(*)`  
+&emsp;&emsp;&emsp;
+Returns the sums of field values associated with each field key in the [measurement](/influxdb/v1.2/concepts/glossary/#measurement).
+
+`SUM()` supports int64 and float64 field value [data types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types).
+
+### Examples:
+
+#### Example 1: Calculate the sum of the field values associated with a field key
 ```
 > SELECT SUM("water_level") FROM "h2o_feet"
+
 name: h2o_feet
---------------
-time			               sum
-1970-01-01T00:00:00Z	 67777.66900000002
+time                   sum
+----                   ---
+1970-01-01T00:00:00Z   67777.66900000004
 ```
 
-> **Notes:**
->
-* Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
-* Executing `sum()` on the same set of float64 points may yield slightly
-different results.
-InfluxDB does not sort points before it applies the function which results in
-those small discrepancies.
+The query returns the summed total of the field values in the `water_level` field key and in the `h2o_feet` measurement.
 
-* Calculate the sum of the `water_level` field grouped by five-day intervals:
-
-```
-> SELECT SUM("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time < '2015-09-18T17:00:00Z' GROUP BY time(5d)
-name: h2o_feet
---------------
-time			               sum
-2015-08-18T00:00:00Z	 10334.908999999983
-2015-08-23T00:00:00Z	 10113.356999999995
-2015-08-28T00:00:00Z	 10663.683000000006
-2015-09-02T00:00:00Z	 10451.321
-2015-09-07T00:00:00Z	 10871.817999999994
-2015-09-12T00:00:00Z	 11459.00099999999
-2015-09-17T00:00:00Z	 3627.762000000003
-```
-
-* Calculate the sum for all integer or float fields (in this case, just `water_level`) in the measurement `h2o_feet`:
-
+#### Example 2: Calculate the sum of the field values associated with each field key in a measurement
 ```
 > SELECT SUM(*) FROM "h2o_feet"
+
 name: h2o_feet
---------------
 time                   sum_water_level
-1970-01-01T00:00:00Z   67777.66900000005
+----                   ---------------
+1970-01-01T00:00:00Z   67777.66900000004
 ```
+
+The query returns the summed total of the field values for each field key that stores numerical values in the `h2o_feet` measurement.
+The `h2o_feet` measurement has one numerical field: `water_level`.
+
+#### Example 3: Calculate the sum of the field values associated with each field key that matches a regular expression
+```
+> SELECT SUM(/water/) FROM "h2o_feet"
+
+name: h2o_feet
+time                   sum_water_level
+----                   ---------------
+1970-01-01T00:00:00Z   67777.66900000004
+```
+
+The query returns the summed total of the field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement.
+
+#### Example 4: Calculate the sum of the field values associated with a field key and include several clauses
+```
+> SELECT SUM("water_level") FROM "h2o_feet" WHERE time >= '2015-08-17T23:48:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(12m),* fill(18000) LIMIT 4 SLIMIT 1
+
+name: h2o_feet
+tags: location=coyote_creek
+time                   sum
+----                   ---
+2015-08-17T23:48:00Z   18000
+2015-08-18T00:00:00Z   16.125
+2015-08-18T00:12:00Z   15.649
+2015-08-18T00:24:00Z   15.135
+```
+
+The query returns the summed total of the field values in the `water_level` field key.
+It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-syntax) between `2015-08-17T23:48:00Z` and `2015-08-18T00:54:00Z` and [groups](/influxdb/v1.2/query_language/data_exploration/#the-group-by-clause) results into 12-minute time intervals and per tag. The query [fills](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals-and-fill) empty time intervals with 18000, and it [limits](/influxdb/v1.2/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points and series returned to four and one.
 
 # Selectors
 
