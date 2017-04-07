@@ -974,51 +974,100 @@ time                   bottom   location
 ```
 
 ## FIRST()
-Returns the oldest value (determined by the timestamp) of a single [field](/influxdb/v1.2/concepts/glossary/#field).
-```
-SELECT FIRST(<field_key>)[,<tag_key(s)>] FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
-```
+Returns the [field value ](/influxdb/v1.2/concepts/glossary/#field-value) with the oldest timestamp.
 
-Examples:
-
-* Select the oldest value of the field `water_level` where the `location` is `santa_monica`:
-
+### Syntax
 ```
-> SELECT FIRST("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica'
-name: h2o_feet
---------------
-time			               first
-2015-08-18T00:00:00Z	 2.064
+SELECT FIRST(<field_key>)[,<tag_key(s)>|<field_key(s)>] [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-* Select the oldest value of the field `water_level` between
-`2015-08-18T00:42:00Z` and `2015-08-18T00:54:00Z`, and output the relevant
-`location` tag:
+### Description of Syntax
 
-```
-> SELECT FIRST("water_level"),"location" FROM "h2o_feet" WHERE time >= '2015-08-18T00:42:00Z' and time <= '2015-08-18T00:54:00Z'
-name: h2o_feet
---------------
-time			               first	 location
-2015-08-18T00:42:00Z	 7.234	 coyote_creek
-```
+`FIRST(field_key)`  
+&emsp;&emsp;&emsp;
+Returns the oldest field value (determined by timestamp) associated with the field key.
 
-* Select the oldest values of the field `water_level` grouped by the `location` tag:
+`FIRST(/regular_expression/)`  
+&emsp;&emsp;&emsp;
+Returns the oldest field value (determined by timestamp) associated with each field key that matches the [regular expression](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
 
+`FIRST(*)`  
+&emsp;&emsp;&emsp;
+Returns the oldest field value (determined by timestamp) associated with each field key in the [measurement](/influxdb/v1.2/concepts/glossary/#measurement).
+
+`FIRST(field_key),tag_key(s),field_key(s)`  
+&emsp;&emsp;&emsp;
+Returns the oldest field value (determined by timestamp) associated with the field key in the parentheses and the relevant [tag](/influxdb/v1.2/concepts/glossary/#tag) and/or [field](/influxdb/v1.2/concepts/glossary/#field).
+
+`FIRST()` supports all field value [data types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types).
+
+### Examples
+
+#### Example 1: Select the first field value associated with a field key
 ```
-> SELECT FIRST("water_level") FROM "h2o_feet" GROUP BY "location"
-name: h2o_feet
-tags: location = coyote_creek
-time			               first
-----			               -----
-2015-08-18T00:00:00Z	 8.12
+> SELECT FIRST("level description") FROM "h2o_feet"
 
 name: h2o_feet
-tags: location = santa_monica
-time			               first
-----			               -----
-2015-08-18T00:00:00Z	 2.064
+time                   first
+----                   -----
+2015-08-18T00:00:00Z   between 6 and 9 feet
 ```
+The query returns the oldest field value (determined by timestamp) associated with the `level description` field key and in the `h2o_feet` measurement.
+
+#### Example 2: Select the first field value associated with each field key in a measurement
+```
+> SELECT FIRST(*) FROM "h2o_feet"
+
+name: h2o_feet
+time                   first_level description   first_water_level
+----                   -----------------------   -----------------
+1970-01-01T00:00:00Z   between 6 and 9 feet      8.12
+```
+The query returns the oldest field value (determined by timestamp) for each field key in the `h2o_feet` measurement.
+The `h2o_feet` measurement has two field keys: `level description` and `water_level`.
+
+#### Example 3: Select the first field value associated with each field key that matches a regular expression
+```
+> SELECT FIRST(/level/) FROM "h2o_feet"
+
+name: h2o_feet
+time                   first_level description   first_water_level
+----                   -----------------------   -----------------
+1970-01-01T00:00:00Z   between 6 and 9 feet      8.12
+```
+The query returns the oldest field value for each field key that includes the word `level` in the `h2o_feet` measurement.
+
+#### Example 4: Select the first value associated with a field key and the relevant tags and fields
+```
+> SELECT FIRST("level description"),"location","water_level" FROM "h2o_feet"
+
+name: h2o_feet
+time                  first                 location      water_level
+----                  -----                 --------      -----------
+2015-08-18T00:00:00Z  between 6 and 9 feet  coyote_creek  8.12
+```
+The query returns the oldest field value (determined by timestamp) in the `level description` field key and the relevant values of the `location` tag key and the `water_level` field key.
+
+#### Example 5: Select the first field value associated with a field key and include several clauses
+```
+> SELECT FIRST("water_level") FROM "h2o_feet" WHERE time >= '2015-08-17T23:48:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(12m),* fill(9.01) LIMIT 4 SLIMIT 1
+
+name: h2o_feet
+tags: location=coyote_creek
+time                   first
+----                   -----
+2015-08-17T23:48:00Z   9.01
+2015-08-18T00:00:00Z   8.12
+2015-08-18T00:12:00Z   7.887
+2015-08-18T00:24:00Z   7.635
+```
+The query returns the oldest field value (determined by timestamp) in the `water_level` field key.
+It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-syntax) between `2015-08-17T23:48:00Z` and `2015-08-18T00:54:00Z` and [groups](/influxdb/v1.2/query_language/data_exploration/#the-group-by-clause) results into 12-minute time intervals and per tag.
+The query [fills](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals-and-fill) empty time intervals with `9.01`, and it [limits](/influxdb/v1.2/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points and series returned to four and one.
+
+Notice that the [`GROUP BY time()` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals) overrides the points' original timestamps.
+The timestamps in the results indicate the the start of each 12-minute time interval;
+the first point in the results covers the time interval between `2015-08-17T23:48:00Z` and just before `2015-08-18T00:00:00Z` and the last point in the results covers the time interval between `2015-08-18T00:24:00Z` and just before `2015-08-18T00:36:00Z`.
 
 ## LAST()
 Returns the newest value (determined by the timestamp) of a single [field](/influxdb/v1.2/concepts/glossary/#field).
