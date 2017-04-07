@@ -819,114 +819,159 @@ It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-
 # Selectors
 
 ## BOTTOM()
-Returns the smallest `N` values in a single [field](/influxdb/v1.2/concepts/glossary/#field).
-The field type must be int64 or float64.
+Returns the smallest `N` [field values](/influxdb/v1.2/concepts/glossary/#field-value).
+
+### Syntax
 ```
-SELECT BOTTOM(<field_key>[,<tag_keys>],<N>)[,<tag_keys>] FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+SELECT BOTTOM(<field_key>[,<tag_key(s)>],<N> )[,<tag_key(s)>|<field_key(s)>] [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-Examples:
+### Description of Syntax
 
-* Select the smallest three values of `water_level`:
+`BOTTOM(field_key,N)`  
+&emsp;&emsp;&emsp;
+Returns the smallest N field values associated with the [field key](/influxdb/v1.2/concepts/glossary/#field-key).
 
+`BOTTOM(field_key,tag_key(s),N)`  
+&emsp;&emsp;&emsp;
+Returns the smallest field value for N tag values of the [tag key](/influxdb/v1.2/concepts/glossary/#tag-key).
+
+`BOTTOM(field_key,N),tag_key(s),field_key(s)`  
+&emsp;&emsp;&emsp;
+Returns the smallest N field values associated with the field key in the parentheses and the relevant [tag](/influxdb/v1.2/concepts/glossary/#tag) and/or [field](/influxdb/v1.2/concepts/glossary/#field).
+
+`BOTTOM()` supports int64 and float64 field value [data types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types).
+
+> **Note:** `BOTTOM()` returns the field value with the earliest timestamp if there's a tie between two or more values for the smallest value.
+
+### Examples
+
+#### Example 1: Select the bottom three field values associated with a field key
 ```
 > SELECT BOTTOM("water_level",3) FROM "h2o_feet"
+
 name: h2o_feet
---------------
-time			               bottom
-2015-08-29T14:30:00Z	 -0.61
-2015-08-29T14:36:00Z	 -0.591
-2015-08-30T15:18:00Z	 -0.594
+time                   bottom
+----                   ------
+2015-08-29T14:30:00Z   -0.61
+2015-08-29T14:36:00Z   -0.591
+2015-08-30T15:18:00Z   -0.594
 ```
+The query returns the smallest three field values in the `water_level` field key and in the `h2o_feet` [measurement](/influxdb/v1.2/concepts/glossary/#measurement).
 
-* Select the smallest three values of `water_level` and include the relevant `location` tag in the output:
-
-```
-> SELECT BOTTOM("water_level",3),"location" FROM "h2o_feet"
-name: h2o_feet
---------------
-time			               bottom	 location
-2015-08-29T14:30:00Z	 -0.61	  coyote_creek
-2015-08-29T14:36:00Z	 -0.591	 coyote_creek
-2015-08-30T15:18:00Z	 -0.594	 coyote_creek
-```
-
-* Select the smallest value of `water_level` within each tag value of `location`:
-
+#### Example 2: Select the bottom field value associated with a field key for two tags
 ```
 > SELECT BOTTOM("water_level","location",2) FROM "h2o_feet"
-name: h2o_feet
---------------
-time			               bottom	 location
-2015-08-29T10:36:00Z	 -0.243	 santa_monica
-2015-08-29T14:30:00Z	 -0.61	  coyote_creek
-```
-
-The output shows the bottom values of `water_level` for each tag value of `location` (`santa_monica` and `coyote_creek`).
-
-> **Note:** Queries with the syntax `SELECT BOTTOM(<field_key>,<tag_key>,<N>)`, where the tag has `X` distinct values, return `N` or `X` field values, whichever is smaller, and each returned point has a unique tag value.
-To demonstrate this behavior, see the results of the above example query where `N` equals `3` and `N` equals `1`.
-
-> * `N` = `3`
-
->
-```
-SELECT BOTTOM("water_level","location",3) FROM "h2o_feet"
-name: h2o_feet
---------------
-time			               bottom	 location
-2015-08-29T10:36:00Z	 -0.243	 santa_monica
-2015-08-29T14:30:00Z	 -0.61	  coyote_creek
-```
-
-> InfluxDB returns two values instead of three because the `location` tag has only two values (`santa_monica` and `coyote_creek`).
-
-> * `N` = `1`
-
->
-```
-> SELECT BOTTOM("water_level","location",1) FROM "h2o_feet"
-name: h2o_feet
---------------
-time			               bottom	 location
-2015-08-29T14:30:00Z	 -0.61	  coyote_creek
-```
-
-> InfluxDB compares the bottom values of `water_level` within each tag value of `location` and returns the smaller value of `water_level`.
-
-* Select the smallest two values of `water_level` between August 18, 2015 at 4:00:00 and August 18, 2015 at 4:18:00 for every tag value of `location`:
-
-```
-> SELECT BOTTOM("water_level",2) FROM "h2o_feet" WHERE time >= '2015-08-18T04:00:00Z' AND time < '2015-08-18T04:24:00Z' GROUP BY "location"
-name: h2o_feet
-tags: location=coyote_creek
-time			               bottom
-----			               ------
-2015-08-18T04:12:00Z	 2.717
-2015-08-18T04:18:00Z	 2.625
-
 
 name: h2o_feet
-tags: location=santa_monica
-time			               bottom
-----			               ------
-2015-08-18T04:00:00Z	 3.911
-2015-08-18T04:06:00Z	 4.055
+time                   bottom   location
+----                   ------   --------
+2015-08-29T10:36:00Z   -0.243   santa_monica
+2015-08-29T14:30:00Z   -0.61    coyote_creek
 ```
+The query returns the smallest field values in the `water_level` field key for two tag values associated with the `location` tag key.
 
-* Select the smallest two values of `water_level` between August 18, 2015 at 4:00:00 and August 18, 2015 at 4:18:00 in `santa_monica`:
-
+#### Example 3: Select the bottom four field values associated with a field key and the relevant tags and fields
 ```
-> SELECT BOTTOM("water_level",2) FROM "h2o_feet" WHERE time >= '2015-08-18T04:00:00Z' AND time < '2015-08-18T04:24:00Z' AND "location" = 'santa_monica'
+> SELECT BOTTOM("water_level",4),"location","level description" FROM "h2o_feet"
+
 name: h2o_feet
---------------
-time			               bottom
-2015-08-18T04:00:00Z	 3.911
-2015-08-18T04:06:00Z	 4.055
+time                  bottom  location      level description
+----                  ------  --------      -----------------
+2015-08-29T14:24:00Z  -0.587  coyote_creek  below 3 feet
+2015-08-29T14:30:00Z  -0.61   coyote_creek  below 3 feet
+2015-08-29T14:36:00Z  -0.591  coyote_creek  below 3 feet
+2015-08-30T15:18:00Z  -0.594  coyote_creek  below 3 feet
+```
+The query returns the smallest four field values in the `water_level` field key and the relevant values of the `location` tag key and the `level description` field key.
+
+#### Example 4: Select the bottom three field values associated with a field key and include several clauses
+```
+> SELECT BOTTOM("water_level",3),"location" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(24m) ORDER BY time DESC
+
+name: h2o_feet
+time                   bottom   location
+----                   ------   --------
+2015-08-18T00:48:00Z   1.991    santa_monica
+2015-08-18T00:48:00Z   2.054    santa_monica
+2015-08-18T00:48:00Z   6.982    coyote_creek
+2015-08-18T00:24:00Z   2.041    santa_monica
+2015-08-18T00:24:00Z   2.051    santa_monica
+2015-08-18T00:24:00Z   2.057    santa_monica
+2015-08-18T00:00:00Z   2.028    santa_monica
+2015-08-18T00:00:00Z   2.064    santa_monica
+2015-08-18T00:00:00Z   2.116    santa_monica
+```
+The query returns the smallest three values in the `water_level` field key for each 24-minute [interval](/influxdb/v1.2/query_language/data_exploration/#basic-group-by-time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:54:00Z`.
+It also returns results in [descending timestamp](/influxdb/v1.2/query_language/data_exploration/#order-by-time-desc) order.
+
+Notice that the [`GROUP BY time()` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals) overrides the points' original timestamps.
+The timestamps in the results indicate the the start of each 24-minute time interval;
+the last three points in the results are for the time interval between `2015-08-18T00:00:00Z` and just before `2015-08-18T00:24:00Z`.
+
+### Common Issues with `BOTTOM()`
+
+#### Issue 1: BOTTOM(), the INTO clause, and the GROUP BY time() clause
+
+Using the `BOTTOM()` function with the [`INTO` clause](/influxdb/v1.2/query_language/data_exploration/#the-into-clause)
+and the [`GROUP BY time()` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals) can cause InfluxDB to overwrite points in the destination measurement.
+Using `BOTTOM()` with the `GROUP BY time()` clause often returns several results with the same timestamp; InfluxDB assumes [points](/influxdb/v1.2/concepts/glossary/#point) with the same series and timestamp are duplicate points and simply overwrites any duplicate point with the most recent point in the destination measurement.
+
+##### Example
+<br>
+The first query in the codeblock below uses the `BOTTOM()` function with a `GROUP BY time()` clause, and it returns four results.
+Notice that the first two results have the same timestamp and the last two results have the same timestamp.
+The second query adds an `INTO` clause to the initial query and writes the query results to the `bottom_dweller` measurement.
+The last query in the codeblock selects all the data in the `bottom_dweller` measurement.
+
+The last query returns two points instead of four points, because two of the initial results are duplicate points; they belong to the same series and have the same timestamp.
+When the system encounters duplicate points, it simply overwrites the previous point with the most recent point.
+
+```
+> SELECT BOTTOM("water_level",2),"location" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:24:00Z' GROUP BY time(24m)
+
+name: h2o_feet
+time                   bottom   location
+----                   ------   --------
+2015-08-18T00:00:00Z   2.028    santa_monica
+2015-08-18T00:00:00Z   2.064    santa_monica
+2015-08-18T00:24:00Z   2.041    santa_monica
+2015-08-18T00:24:00Z   7.635    coyote_creek
+
+> SELECT BOTTOM("water_level",2),"location" INTO "bottom_dweller" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:24:00Z' GROUP BY time(24m)
+
+name: result
+time                   written
+----                   -------
+1970-01-01T00:00:00Z   4
+
+> SELECT * FROM "bottom_dweller"
+
+name: bottom_dweller
+time                   bottom   location
+----                   ------   --------
+2015-08-18T00:00:00Z   2.064    santa_monica
+2015-08-18T00:24:00Z   7.635    coyote_creek
 ```
 
-Note that in the raw data, `water_level` equals `4.055` at `2015-08-18T04:06:00Z` and at `2015-08-18T04:12:00Z`.
-In the case of a tie, InfluxDB returns the value with the earlier timestamp.
+#### Issue 2: BOTTOM() and a tag key with fewer than N tag values
+
+Queries with the syntax `SELECT BOTTOM(<field_key>,<tag_key>,<N>)` can return fewer points than expected.
+If the tag key has `X` tag values, the query specifies `N` values, and `X` is smaller than `N`, then the query returns `X` points.
+
+##### Example
+<br>
+The query below asks for the smallest field values of `water_level` for three tag values of the `location` tag key.
+Because the `location` tag key has two tag values (`santa_monica` and `coyote_creek`), the query returns two points instead of three.
+```
+> SELECT BOTTOM("water_level","location",3) FROM "h2o_feet"
+
+name: h2o_feet
+time                   bottom   location
+----                   ------   --------
+2015-08-29T10:36:00Z   -0.243   santa_monica
+2015-08-29T14:30:00Z   -0.61    coyote_creek
+```
 
 ## FIRST()
 Returns the oldest value (determined by the timestamp) of a single [field](/influxdb/v1.2/concepts/glossary/#field).
