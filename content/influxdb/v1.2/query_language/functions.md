@@ -657,6 +657,85 @@ The query returns the difference between the minimum and maximum field values in
 It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-syntax) between `2015-08-17T23:48:00Z` and `2015-08-18T00:54:00Z `and [groups](/influxdb/v1.2/query_language/data_exploration/#the-group-by-clause) results into 12-minute time intervals and per tag.
 The query [fills](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals-and-fill) empty time intervals with `18`, [limits](/influxdb/v1.2/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points and series returned to three and one, and [offsets](/influxdb/v1.2/query_language/data_exploration/#the-offset-and-soffset-clauses) the series returned by one.
 
+## STDDEV()
+Returns the standard deviation of [field values](/influxdb/v1.2/concepts/glossary/#field-value).
+
+### Syntax
+```
+SELECT STDDEV( [ * | <field_key> | /<regular_expression>/ ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+
+### Description of Syntax
+
+`STDDEV(field_key)`  
+&emsp;&emsp;&emsp;
+Returns the standard deviation of field values associated with the [field key](/influxdb/v1.2/concepts/glossary/#field-key).
+
+`STDDEV(/regular_expression/)`  
+&emsp;&emsp;&emsp;
+Returns the standard deviation of field values associated with each field key that matches the [regular expression](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
+
+`STDDEV(*)`  
+&emsp;&emsp;&emsp;
+Returns the standard deviation of field values associated with each field key in the [measurement](/influxdb/v1.2/concepts/glossary/#measurement).
+
+`STDDEV()` supports int64 and float64 field value [data types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types).
+
+### Examples
+
+#### Example 1: Calculate the standard deviation for the field values associated with a field key
+```
+> SELECT STDDEV("water_level") FROM "h2o_feet"
+
+name: h2o_feet
+time                   stddev
+----                   ------
+1970-01-01T00:00:00Z   2.279144584196141
+```
+
+The query returns the standard deviation of the field values in the `water_level` field key and in the `h2o_feet` measurement.
+
+#### Example 2: Calculate the standard deviation for the field values associated with each field key in a measurement
+```
+> SELECT STDDEV(*) FROM "h2o_feet"
+
+name: h2o_feet
+time                   stddev_water_level
+----                   ------------------
+1970-01-01T00:00:00Z   2.279144584196141
+```
+
+The query returns the standard deviation of the field values for each field key that stores numerical values in the `h2o_feet` measurement.
+The `h2o_feet` measurement has one numerical field: `water_level`.
+
+#### Example 3: Calculate the standard deviation for the field values associated with each field key that matches a regular expression
+```
+> SELECT STDDEV(/water/) FROM "h2o_feet"
+
+name: h2o_feet
+time                   stddev_water_level
+----                   ------------------
+1970-01-01T00:00:00Z   2.279144584196141
+```
+
+The query returns the standard deviation of the field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement. 
+
+#### Example 4: Calculate the standard deviation for the field values associated with a field key and include several clauses
+```
+> SELECT STDDEV("water_level") FROM "h2o_feet" WHERE time >= '2015-08-17T23:48:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(12m),* fill(18000) LIMIT 2 SLIMIT 1 SOFFSET 1
+
+name: h2o_feet
+tags: location=santa_monica
+time                   stddev
+----                   ------
+2015-08-17T23:48:00Z   18000
+2015-08-18T00:00:00Z   0.03676955262170051
+```
+
+The query returns the standard deviation of the field values in the `water_level` field key.
+It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-syntax) between `2015-08-17T23:48:00Z` and `2015-08-18T00:54:00Z` and [groups](/influxdb/v1.2/query_language/data_exploration/#the-group-by-clause) results into 12-minute time intervals and per tag.
+The query [fills](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals-and-fill) empty time intervals with `18000`, [limits](/influxdb/v1.2/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points and series returned to two and one, and [offsets](/influxdb/v1.2/query_language/data_exploration/#the-offset-and-soffset-clauses) the series returned by one.
+
 ## SUM()
 Returns the sum of the all values in a single [field](/influxdb/v1.2/concepts/glossary/#field).
 The field must be of type int64 or float64; an `*` indicates all int64 or float64
@@ -709,60 +788,6 @@ name: h2o_feet
 --------------
 time                   sum_water_level
 1970-01-01T00:00:00Z   67777.66900000005
-```
-
-## STDDEV()
-Returns the standard deviation of the values in a single [field](/influxdb/v1.2/concepts/glossary/#field).
-The field must be of type int64 or float64.
-```
-SELECT STDDEV(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
-```
-
-Examples:
-
-* Calculate the standard deviation for the `water_level` field in the measurement `h2o_feet`:
-
-```
-> SELECT STDDEV("water_level") FROM "h2o_feet"
-name: h2o_feet
---------------
-time			               stddev
-1970-01-01T00:00:00Z	 2.279144584196145
-```
-
-> **Notes:**
->
-* Aggregation functions returns epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
-* Executing `stddev()` on the same set of float64 points may yield slightly
-different results.
-InfluxDB does not sort points before it applies the function which results in
-those small discrepancies.
-
-* Calculate the standard deviation for the `water_level` field between August 18, 2015 at midnight and September 18, 2015 at noon grouped at one week intervals and by the `location` tag:
-
-```
-> SELECT STDDEV("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' and time < '2015-09-18T12:06:00Z' GROUP BY time(1w), "location"
-name: h2o_feet
-tags: location = coyote_creek
-time			               stddev
-----			               ------
-2015-08-13T00:00:00Z	 2.2437263080193985
-2015-08-20T00:00:00Z	 2.121276150144719
-2015-08-27T00:00:00Z	 3.0416122170786215
-2015-09-03T00:00:00Z	 2.5348065025435207
-2015-09-10T00:00:00Z	 2.584003954882673
-2015-09-17T00:00:00Z	 2.2587514836274414
-
-name: h2o_feet
-tags: location = santa_monica
-time			               stddev
-----			               ------
-2015-08-13T00:00:00Z	 1.11156344587553
-2015-08-20T00:00:00Z	 1.0909849279082366
-2015-08-27T00:00:00Z	 1.9870116180096962
-2015-09-03T00:00:00Z	 1.3516778450902067
-2015-09-10T00:00:00Z	 1.4960573811500588
-2015-09-17T00:00:00Z	 1.075701669442093
 ```
 
 # Selectors
