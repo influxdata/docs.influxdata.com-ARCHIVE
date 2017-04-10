@@ -1460,16 +1460,38 @@ The timestamps in the results indicate the the start of each 24-minute time inte
 * `PERCENTILE(<field_key>,0)` is not equivalent to [`MIN(<field_key>)`](#min). This is a known [issue](https://github.com/influxdata/influxdb/issues/4418).
 
 ## SAMPLE()
-Returns a random sample of `N` points for the specified [field key](/influxdb/v1.2/concepts/glossary/#field).
-InfluxDB uses [reservoir sampling](https://en.wikipedia.org/wiki/Reservoir_sampling) to generate the random points.
-`SAMPLE()` supports all [field types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types).
+Returns a random sample of `N` [field values](/influxdb/v1.2/concepts/glossary/#field-value).
+`SAMPLE()` uses [reservoir sampling](https://en.wikipedia.org/wiki/Reservoir_sampling) to generate the random points.
+
+### Syntax
 ```
-SELECT SAMPLE(<field_key>,<N>) FROM_clause [WHERE_clause] [GROUP_BY_clause]
+SELECT SAMPLE(<field_key>, <N>)[,<tag_key(s)>|<field_key(s)>] [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
+
+### Description of Syntax
+
+`SAMPLE(field_key,N)`  
+&emsp;&emsp;&emsp;
+Returns N randomly selected field values associated with the [field key](/influxdb/v1.2/concepts/glossary/#field-key).
+
+`SAMPLE(/regular_expression/,N)`  
+&emsp;&emsp;&emsp;
+Returns N randomly selected field values associated with each field key that matches the [regular expression](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
+
+`SAMPLE(*,N)`  
+&emsp;&emsp;&emsp;
+Returns N randomly selected field values associated with each field key in the [measurement](/influxdb/v1.2/concepts/glossary/#measurement).
+
+`SAMPLE(field_key,N),tag_key(s),field_key(s)`  
+&emsp;&emsp;&emsp;
+Returns N randomly selected field values associated with the field key in the parentheses and the relevant [tag](/influxdb/v1.2/concepts/glossary/#tag) and/or [field](/influxdb/v1.2/concepts/glossary/#field).
+
+`N` must be an integer.
+`SAMPLE()` supports all field value [data types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types).
 
 ### Examples
 
-#### Example 1: Select a random sample of two points
+#### Example 1: Select a sample of the field values associated with a field key
 ```
 > SELECT SAMPLE("water_level",2) FROM "h2o_feet"
 
@@ -1479,11 +1501,50 @@ time                   sample
 2015-09-09T21:48:00Z   5.659
 2015-09-18T10:00:00Z   6.939
 ```
+The query returns two randomly selected points from the `water_level` field key and in the `h2o_feet` measurement.
 
-The query returns two randomly selected points from the `water_level` field
-in the `h2o_feet` measurement.
+### Example 2: Select a sample of the field values associated with each field key in a measurement
+```
+> SELECT SAMPLE(*,2) FROM "h2o_feet"
 
-#### Example 2: Select a random sample of two points per `GROUP BY time()` interval
+name: h2o_feet
+time                   sample_level description   sample_water_level
+----                   ------------------------   ------------------
+2015-08-25T17:06:00Z                              3.284
+2015-09-03T04:30:00Z   below 3 feet
+2015-09-03T20:06:00Z   between 3 and 6 feet
+2015-09-08T21:54:00Z                              3.412
+```
+The query returns two randomly selected points for each field key in the `h2o_feet` measurement.
+The `h2o_feet` measurement has two field keys: `level description` and `water_level`.
+
+#### Example 3: Select a sample of the field values associated with each field key that matches a regular expression
+```
+> SELECT SAMPLE(/level/,2) FROM "h2o_feet"
+
+name: h2o_feet
+time                   sample_level description   sample_water_level
+----                   ------------------------   ------------------
+2015-08-30T05:54:00Z   between 6 and 9 feet
+2015-09-07T01:18:00Z                              7.854
+2015-09-09T20:30:00Z                              7.32
+2015-09-13T19:18:00Z   between 3 and 6 feet
+```
+The query returns two randomly selected points for each field key that includes the word `level` in the `h2o_feet` measurement.
+
+#### Example 4: Select a sample of the field values associated with a field key and the relevant tags and fields
+```
+> SELECT SAMPLE("water_level",2),"location","level description" FROM "h2o_feet"
+
+name: h2o_feet
+time                  sample  location      level description
+----                  ------  --------      -----------------
+2015-08-29T10:54:00Z  5.689   coyote_creek  between 3 and 6 feet
+2015-09-08T15:48:00Z  6.391   coyote_creek  between 6 and 9 feet
+```
+The query returns two randomly selected points from the `water_level` field key and the relevant values of the `location` tag and the `level description` field.
+
+#### Example 5: Select a sample of the field values associated with a field key and include several clauses
 ```
 > SELECT SAMPLE("water_level",1) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(18m)
 
@@ -1494,9 +1555,11 @@ time                   sample
 2015-08-18T00:30:00Z   2.051
 ```
 
-The query returns one randomly selected point per 18-minute `GROUP BY time()`
-interval.
-Note that the timestamps returned are the points' original timestamps.
+The query returns one randomly selected point from the `water_level` field key.
+It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and [groups](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals) results into 18-minute intervals.
+
+Notice that the [`GROUP BY time()` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals) does not override the points' original timestamps.
+See [Issue 1](#issue-1-sample-with-a-group-by-time-clause) in the section below for a more detailed explanation of that behavior.
 
 ### Common Issues with `SAMPLE()`
 
@@ -1509,9 +1572,11 @@ the returned timestamps mark the start of the `GROUP BY time()` interval.
 `GROUP BY time()` queries with the `SAMPLE()` function behave differently;
 they maintain the timestamp of the original data point.
 
+##### Example
+<br>
 The query below returns two randomly selected points per 18-minute
 `GROUP BY time()` interval.
-Notice that the returned timestamps are the original timestamps; they
+Notice that the returned timestamps are the points' original timestamps; they
 are not forced to match the start of the `GROUP BY time()` intervals.
 
 ```
