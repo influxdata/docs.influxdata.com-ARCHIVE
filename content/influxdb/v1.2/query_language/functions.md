@@ -1263,59 +1263,100 @@ The timestamps in the results indicate the the start of each 12-minute time inte
 the first point in the results covers the time interval between `2015-08-17T23:48:00Z` and just before `2015-08-18T00:00:00Z` and the last point in the results covers the time interval between `2015-08-18T00:24:00Z` and just before `2015-08-18T00:36:00Z`.
 
 ## MIN()
-Returns the lowest value in a single [field](/influxdb/v1.2/concepts/glossary/#field).
-The field must be an int64, float64, or boolean.
+Returns the lowest [field value](/influxdb/v1.2/concepts/glossary/#field-value).
+
+### Syntax
 ```
-SELECT MIN(<field_key>)[,<tag_key(s)>] FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+SELECT MIN(<field_key>)[,<tag_key(s)>|<field_key(s)>] [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-Examples:
+### Description of Syntax
 
-* Select the minimum `water_level` in the measurement `h2o_feet`:
+`MIN(field_key)`  
+&emsp;&emsp;&emsp;
+Returns the lowest field value associated with the [field key](/influxdb/v1.2/concepts/glossary/#field-key).
 
+`MIN(/regular_expression/)`  
+&emsp;&emsp;&emsp;
+Returns the lowest field value associated with each field key that matches the [regular expression](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
+
+`MIN(*)`  
+&emsp;&emsp;&emsp;
+Returns the lowest field value associated with each field key in the [measurement](/influxdb/v1.2/concepts/glossary/#measurement).
+
+`MIN(field_key),tag_key(s),field_key(s)`  
+&emsp;&emsp;&emsp;
+Returns the lowest field value associated with the field key in the parentheses and the relevant [tag](/influxdb/v1.2/concepts/glossary/#tag) and/or [field](/influxdb/v1.2/concepts/glossary/#field).
+
+`MIN()` supports int64 and float64 field value [data types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types).
+
+### Examples
+
+#### Example 1: Select the minimum field value associated with a field key
 ```
 > SELECT MIN("water_level") FROM "h2o_feet"
-name: h2o_feet
---------------
-time			               min
-2015-08-29T14:30:00Z	 -0.61
-```
-
-* Select the minimum `water_level` in the measurement `h2o_feet` and output the
-relevant `location` tag:
-
-```
-> SELECT MIN("water_level"),"location" FROM "h2o_feet"
-name: h2o_feet
---------------
-time			              min	   location
-2015-08-29T14:30:00Z	-0.61	 coyote_creek
-```
-
-* Select the minimum `water_level` in the measurement `h2o_feet` between August 18, 2015 at midnight and August 18, at 00:48 grouped at 12 minute intervals and by the `location` tag:
-
-```
-> SELECT MIN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time < '2015-08-18T00:54:00Z' GROUP BY time(12m), "location"
-name: h2o_feet
-tags: location = coyote_creek
-time			                 min
-----			                 ---
-2015-08-18T00:00:00Z	   8.005
-2015-08-18T00:12:00Z	   7.762
-2015-08-18T00:24:00Z	   7.5
-2015-08-18T00:36:00Z	   7.234
-2015-08-18T00:48:00Z	   7.11
 
 name: h2o_feet
-tags: location = santa_monica
-time			                 min
-----			                 ---
-2015-08-18T00:00:00Z	   2.064
-2015-08-18T00:12:00Z	   2.028
-2015-08-18T00:24:00Z	   2.041
-2015-08-18T00:36:00Z	   2.057
-2015-08-18T00:48:00Z	   1.991
+time                   min
+----                   ---
+2015-08-29T14:30:00Z   -0.61
 ```
+The query returns the lowest field value in the `water_level` field key and in the `h2o_feet` measurement.
+
+#### Example 2: Select the minimum field value associated with each field key in a measurement
+```
+> SELECT MIN(*) FROM "h2o_feet"
+
+name: h2o_feet
+time                   min_water_level
+----                   ---------------
+2015-08-29T14:30:00Z   -0.61
+```
+The query returns the lowest field value for each field key that stores numerical values in the `h2o_feet` measurement.
+The `h2o_feet` measurement has one numerical field: `water_level`.
+
+#### Example 3: Select the minimum field value associated with each field key that matches a regular expression
+```
+> SELECT MIN(/level/) FROM "h2o_feet"
+
+name: h2o_feet
+time                   min_water_level
+----                   ---------------
+2015-08-29T14:30:00Z   -0.61
+```
+The query returns the lowest field value for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement.
+
+#### Example 4: Select the minimum field value associated with a field key and the relevant tags and fields
+```
+> SELECT MIN("water_level"),"location","level description" FROM "h2o_feet"
+
+name: h2o_feet
+time                  min    location      level description
+----                  ---    --------      -----------------
+2015-08-29T14:30:00Z  -0.61  coyote_creek  below 3 feet
+```
+The query returns the lowest field value in the `water_level` field key and the relevant values of the `location` tag key and the `level description` field key.
+
+#### Example 5: Select the minimum field value associated with a field key and include several clauses
+```
+> SELECT MIN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-17T23:48:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(12m),* fill(9.01) LIMIT 4 SLIMIT 1
+
+name: h2o_feet
+tags: location=coyote_creek
+time                   min
+----                   ---
+2015-08-17T23:48:00Z   9.01
+2015-08-18T00:00:00Z   8.005
+2015-08-18T00:12:00Z   7.762
+2015-08-18T00:24:00Z   7.5
+```
+The query returns the lowest field value in the `water_level` field key.
+It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-syntax) between `2015-08-17T23:48:00Z` and `2015-08-18T00:54:00Z` and [groups](/influxdb/v1.2/query_language/data_exploration/#the-group-by-clause) results in to 12-minute time intervals and per tag.
+The query [fills](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals-and-fill) empty time intervals with `9.01`, and it [limits](/influxdb/v1.2/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points and series returned to four and one.
+
+Notice that the [`GROUP BY time()` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals) overrides the points’ original timestamps.
+The timestamps in the results indicate the the start of each 12-minute time interval;
+the first point in the results covers the time interval between `2015-08-17T23:48:00Z` and just before `2015-08-18T00:00:00Z` and the last point in the results covers the time interval between `2015-08-18T00:24:00Z` and just before `2015-08-18T00:36:00Z`.
 
 ## PERCENTILE()
 Returns the `N`th percentile value for the sorted values of a single [field](/influxdb/v1.2/concepts/glossary/#field).
