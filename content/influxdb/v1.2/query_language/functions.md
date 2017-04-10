@@ -1596,114 +1596,160 @@ time                   sample
 ```
 
 ## TOP()
-Returns the largest `N` values in a single [field](/influxdb/v1.2/concepts/glossary/#field).
-The field type must be int64 or float64.
+
+Returns the greatest `N` [field values](/influxdb/v1.2/concepts/glossary/#field-value).
+
+### Syntax
 ```
-SELECT TOP(<field_key>[,<tag_keys>],<N>)[,<tag_keys>] FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+SELECT TOP( <field_key>[,<tag_key(s)>],<N> )[,<tag_key(s)>|<field_key(s)>] [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-Examples:
+### Description of Syntax
 
-* Select the largest three values of `water_level`:
+`TOP(field_key,N)`  
+&emsp;&emsp;&emsp;
+Returns the greatest N field values associated with the [field key](/influxdb/v1.2/concepts/glossary/#field-key).
 
+`TOP(field_key,tag_key(s),N)`  
+&emsp;&emsp;&emsp;
+Returns the greatest field value for N tag values of the [tag key](/influxdb/v1.2/concepts/glossary/#tag-key).
+
+`TOP(field_key,N),tag_key(s),field_key(s)`  
+&emsp;&emsp;&emsp;
+Returns the greatest N field values associated with the field key in the parentheses and the relevant [tag](/influxdb/v1.2/concepts/glossary/#tag) and/or [field](/influxdb/v1.2/concepts/glossary/#field).
+
+`TOP()` supports int64 and float64 field value [data types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types).
+
+> **Note:** `TOP()` returns the field value with the earliest timestamp if there's a tie between two or more values for the greatest value.
+
+### Examples
+
+#### Example 1: Select the top three field values associated with a field key
 ```
 > SELECT TOP("water_level",3) FROM "h2o_feet"
+
 name: h2o_feet
---------------
-time			               top
-2015-08-29T07:18:00Z	 9.957
-2015-08-29T07:24:00Z	 9.964
-2015-08-29T07:30:00Z	 9.954
+time                   top
+----                   ---
+2015-08-29T07:18:00Z   9.957
+2015-08-29T07:24:00Z   9.964
+2015-08-29T07:30:00Z   9.954
 ```
+The query returns the greatest three field values in the `water_level` field key and in the `h2o_feet` [measurement](/influxdb/v1.2/concepts/glossary/#measurement).
 
-* Select the largest three values of `water_level` and include the relevant `location` tag in the output:
-
-```
-> SELECT TOP("water_level",3),"location" FROM "h2o_feet"
-name: h2o_feet
---------------
-time			               top	   location
-2015-08-29T07:18:00Z	 9.957	 coyote_creek
-2015-08-29T07:24:00Z	 9.964	 coyote_creek
-2015-08-29T07:30:00Z	 9.954	 coyote_creek
-```
-
-* Select the largest value of `water_level` within each tag value of `location`:
-
+#### Example 2: Select the top field value associated with a field key for two tags
 ```
 > SELECT TOP("water_level","location",2) FROM "h2o_feet"
+
 name: h2o_feet
---------------
-time			               top	   location
-2015-08-29T03:54:00Z	 7.205	 santa_monica
-2015-08-29T07:24:00Z	 9.964	 coyote_creek
+time                   top     location
+----                   ---     --------
+2015-08-29T03:54:00Z   7.205   santa_monica
+2015-08-29T07:24:00Z   9.964   coyote_creek
+```
+The query returns the greatest field values in the `water_level` field key for two tag values associated with the `location` tag key.
+
+#### Example 3: Select the top four field values associated with a field key and the relevant tags and fields
+```
+> SELECT TOP("water_level",4),"location","level description" FROM "h2o_feet"
+
+name: h2o_feet
+time                  top    location      level description
+----                  ---    --------      -----------------
+2015-08-29T07:18:00Z  9.957  coyote_creek  at or greater than 9 feet
+2015-08-29T07:24:00Z  9.964  coyote_creek  at or greater than 9 feet
+2015-08-29T07:30:00Z  9.954  coyote_creek  at or greater than 9 feet
+2015-08-29T07:36:00Z  9.941  coyote_creek  at or greater than 9 feet
+```
+The query returns the greatest four field values in the `water_level` field key and the relevant values of the `location` tag key and the `level description` field key.
+
+#### Example 4: Select the top three field values associated with a field key and include several clauses
+```
+> SELECT TOP("water_level",3),"location" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(24m) ORDER BY time DESC
+
+name: h2o_feet
+time                   top     location
+----                   ---     --------
+2015-08-18T00:48:00Z   7.11    coyote_creek
+2015-08-18T00:48:00Z   6.982   coyote_creek
+2015-08-18T00:48:00Z   2.054   santa_monica
+2015-08-18T00:24:00Z   7.635   coyote_creek
+2015-08-18T00:24:00Z   7.5     coyote_creek
+2015-08-18T00:24:00Z   7.372	 coyote_creek
+2015-08-18T00:00:00Z   8.12    coyote_creek
+2015-08-18T00:00:00Z   8.005   coyote_creek
+2015-08-18T00:00:00Z   7.887   coyote_creek
+```
+The query returns the greatest three values in the `water_level` field key for each 24-minute [interval](/influxdb/v1.2/query_language/data_exploration/#basic-group-by-time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:54:00Z`.
+It also returns results in [descending timestamp](/influxdb/v1.2/query_language/data_exploration/#order-by-time-desc) order.
+
+Notice that the [`GROUP BY time()` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals) overrides the points' original timestamps.
+The timestamps in the results indicate the the start of each 24-minute time interval;
+the last three points in the results are for the time interval between `2015-08-18T00:00:00Z` and just before `2015-08-18T00:24:00Z`.
+
+### Common Issues with `TOP()`
+
+#### Issue 1: TOP(), the INTO clause, and the GROUP BY time() clause
+
+Using the `TOP()` function with the [`INTO` clause](/influxdb/v1.2/query_language/data_exploration/#the-into-clause)
+and the [`GROUP BY time()` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals) can cause InfluxDB to overwrite points in the destination measurement.
+Using `TOP()` with the `GROUP BY time()` clause often returns several results with the same timestamp; InfluxDB assumes [points](/influxdb/v1.2/concepts/glossary/#point) with the same series and timestamp are duplicate points and simply overwrites any duplicate point with the most recent point in the destination measurement.
+
+##### Example
+<br>
+The first query in the codeblock below uses the `TOP()` function with a `GROUP BY time()` clause, and it returns four results.
+Notice that the first two results have the same timestamp and the last two results have the same timestamp.
+The second query adds an `INTO` clause to the initial query and writes the query results to the `top_dweller` measurement.
+The last query in the codeblock selects all the data in the `top_dweller` measurement.
+
+The last query returns two points instead of four points, because two of the initial results are duplicate points; they belong to the same series and have the same timestamp.
+When the system encounters duplicate points, it simply overwrites the previous point with the most recent point.
+
+```
+> SELECT TOP("water_level",2),"location" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:24:00Z' GROUP BY time(24m)
+
+name: h2o_feet
+time                  top    location
+----                  ---    --------
+2015-08-18T00:00:00Z  8.12   coyote_creek
+2015-08-18T00:00:00Z  8.005  coyote_creek
+2015-08-18T00:24:00Z  7.635  coyote_creek
+2015-08-18T00:24:00Z  2.041  santa_monica
+
+> SELECT TOP("water_level",2),"location" INTO "top_dweller" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:24:00Z' GROUP BY time(24m)
+
+name: result
+time                  written
+----                  -------
+1970-01-01T00:00:00Z  4
+
+> SELECT * FROM "top_dweller"
+
+name: top_dweller
+time                  location      top
+----                  --------      ---
+2015-08-18T00:00:00Z  coyote_creek  8.005
+2015-08-18T00:24:00Z  santa_monica  2.041
 ```
 
-The output shows the top values of `water_level` for each tag value of `location` (`santa_monica` and `coyote_creek`).
+#### Issue 2: TOP() and a tag key with fewer than N tag values
 
-> **Note:** Queries with the syntax `SELECT TOP(<field_key>,<tag_key>,<N>)`, where the tag has `X` distinct values, return `N` or `X` field values, whichever is smaller, and each returned point has a unique tag value.
-To demonstrate this behavior, see the results of the above example query where `N` equals `3` and `N` equals `1`.
+Queries with the syntax `SELECT TOP(<field_key>,<tag_key>,<N>)` can return fewer points than expected.
+If the tag key has `X` tag values, the query specifies `N` values, and `X` is smaller than `N`, then the query returns `X` points.
 
-> * `N` = `3`
-
->
+##### Example
+<br>
+The query below asks for the greatest field values of `water_level` for three tag values of the `location` tag key.
+Because the `location` tag key has two tag values (`santa_monica` and `coyote_creek`), the query returns two points instead of three.
 ```
 > SELECT TOP("water_level","location",3) FROM "h2o_feet"
-name: h2o_feet
---------------
-time			               top	   location
-2015-08-29T03:54:00Z	 7.205	 santa_monica
-2015-08-29T07:24:00Z	 9.964	 coyote_creek
-```
-
-> InfluxDB returns two values instead of three because the `location` tag has only two values (`santa_monica` and `coyote_creek`).
-
-> * `N` = `1`
-
->
-```
-> SELECT TOP("water_level","location",1) FROM "h2o_feet"
-name: h2o_feet
---------------
-time			               top	   location
-2015-08-29T07:24:00Z	 9.964	 coyote_creek
-```
-
-> InfluxDB compares the top values of `water_level` within each tag value of `location` and returns the larger value of `water_level`.
-
-* Select the largest two values of `water_level` between August 18, 2015 at 4:00:00 and August 18, 2015 at 4:18:00 for every tag value of `location`:
-
-```
-> SELECT TOP("water_level",2) FROM "h2o_feet" WHERE time >= '2015-08-18T04:00:00Z' AND time < '2015-08-18T04:24:00Z' GROUP BY "location"
-name: h2o_feet
-tags: location=coyote_creek
-time			               top
-----			               ---
-2015-08-18T04:00:00Z	 2.943
-2015-08-18T04:06:00Z	 2.831
-
 
 name: h2o_feet
-tags: location=santa_monica
-time			               top
-----			               ---
-2015-08-18T04:06:00Z	 4.055
-2015-08-18T04:18:00Z	 4.124
+time                  top    location
+----                  ---    --------
+2015-08-29T03:54:00Z  7.205  santa_monica
+2015-08-29T07:24:00Z  9.964  coyote_creek
 ```
-
-* Select the largest two values of `water_level` between August 18, 2015 at 4:00:00 and August 18, 2015 at 4:18:00 in `santa_monica`:
-
-```
-> SELECT TOP("water_level",2) FROM "h2o_feet" WHERE time >= '2015-08-18T04:00:00Z' AND time < '2015-08-18T04:24:00Z' AND "location" = 'santa_monica'
-name: h2o_feet
---------------
-time			               top
-2015-08-18T04:06:00Z	 4.055
-2015-08-18T04:18:00Z	 4.124
-```
-
-Note that in the raw data, `water_level` equals `4.055` at `2015-08-18T04:06:00Z` and at `2015-08-18T04:12:00Z`.
-In the case of a tie, InfluxDB returns the value with the earlier timestamp.
 
 # Transformations
 
