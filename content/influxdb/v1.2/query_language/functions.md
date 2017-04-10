@@ -1359,62 +1359,105 @@ The timestamps in the results indicate the the start of each 12-minute time inte
 the first point in the results covers the time interval between `2015-08-17T23:48:00Z` and just before `2015-08-18T00:00:00Z` and the last point in the results covers the time interval between `2015-08-18T00:24:00Z` and just before `2015-08-18T00:36:00Z`.
 
 ## PERCENTILE()
-Returns the `N`th percentile value for the sorted values of a single [field](/influxdb/v1.2/concepts/glossary/#field).
-The field must be of type int64 or float64.
-The percentile `N` must be an integer or floating point number between 0 and 100, inclusive.
-```
-SELECT PERCENTILE(<field_key>, <N>)[,<tag_key(s)>] FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
-```
+Returns the `N`th percentile [field value](/influxdb/v1.2/concepts/glossary/#field-value).
 
-Examples:
-
-* Calculate the fifth percentile of the field `water_level` where the tag `location` equals `coyote_creek`:
-
+### Syntax
 ```
-> SELECT PERCENTILE("water_level",5) FROM "h2o_feet" WHERE "location" = 'coyote_creek'
-name: h2o_feet
---------------
-time			               percentile
-2015-09-09T11:42:00Z	 1.148
+SELECT PERCENTILE(<field_key>, <N>)[,<tag_key(s)>|<field_key(s)>] [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
- The value `1.148` is larger than 5% of the values in `water_level` where `location` equals `coyote_creek`.
+### Description of Syntax
 
-* Calculate the fifth percentile of the field `water_level` and output the
-relevant `location` tag:
+`PERCENTILE(field_key,N)`  
+&emsp;&emsp;&emsp;
+Returns the Nth percentile field value associated with the [field key](/influxdb/v1.2/concepts/glossary/#field-key).
 
+`PERCENTILE(/regular_expression/,N)`  
+&emsp;&emsp;&emsp;
+Returns the Nth percentile field value associated with each field key that matches the [regular expression](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
+
+`PERCENTILE(*,N)`  
+&emsp;&emsp;&emsp;
+Returns the Nth percentile field value associated with each field key in the [measurement](/influxdb/v1.2/concepts/glossary/#measurement).
+
+`PERCENTILE(field_key,N),tag_key(s),field_key(s)`  
+&emsp;&emsp;&emsp;
+Returns the Nth percentile field value associated with the field key in the parentheses and the relevant [tag](/influxdb/v1.2/concepts/glossary/#tag) and/or [field](/influxdb/v1.2/concepts/glossary/#field).
+
+`N` must be an integer or floating point number between `0` and `100`, inclusive.
+`PERCENTILE()` supports int64 and float64 field value [data types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types).
+
+### Examples
+
+#### Example 1: Select the fifth percentile field value associated with a field key
 ```
-> SELECT PERCENTILE("water_level",5),"location" FROM "h2o_feet"
-name: h2o_feet
---------------
-time	                  percentile	 location
-2015-08-28T12:06:00Z	  1.122		     santa_monica
-```
-
-* Calculate the 100th percentile of the field `water_level` grouped by the `location` tag:
-
-```
-> SELECT PERCENTILE("water_level", 100) FROM "h2o_feet" GROUP BY "location"
-name: h2o_feet
-tags: location = coyote_creek
-time			               percentile
-----			               ----------
-2015-08-29T07:24:00Z	 9.964
+> SELECT PERCENTILE("water_level",5) FROM "h2o_feet"
 
 name: h2o_feet
-tags: location = santa_monica
-time			               percentile
-----			               ----------
-2015-08-29T03:54:00Z	 7.205
+time                   percentile
+----                   ----------
+2015-08-31T03:42:00Z   1.122
 ```
+The query returns the field value that is larger than five percent of the field values in the `water_level` field key and in the `h2o_feet` measurement.
 
-Notice that `PERCENTILE(<field_key>,100)` is equivalent to `MAX(<field_key>)`.
+#### Example 2: Select the fifth percentile field value associated with each field key in a measurement
+```
+> SELECT PERCENTILE(*,5) FROM "h2o_feet"
 
-<dt> Currently, `PERCENTILE(<field_key>,0)` is not equivalent to `MIN(<field_key>)`.
-See GitHub Issue [#4418](https://github.com/influxdata/influxdb/issues/4418) for more information.
-</dt>
+name: h2o_feet
+time                   percentile_water_level
+----                   ----------------------
+2015-08-31T03:42:00Z   1.122
+```
+The query returns the field value that is larger than five percent of the field values in each field key that stores numerical values in the `h2o_feet` measurement.
+The `h2o_feet` measurement has one numerical field: `water_level`.
 
-> **Note**: `PERCENTILE(<field_key>, 50)` is nearly equivalent to `MEDIAN()`, except `MEDIAN()` returns the average of the two middle values if the field contains an even number of points.
+#### Example 3: Select fifth percentile field value associated with each field key that matches a regular expression
+```
+> SELECT PERCENTILE(/level/,5) FROM "h2o_feet"
+
+name: h2o_feet
+time                   percentile_water_level
+----                   ----------------------
+2015-08-31T03:42:00Z   1.122
+```
+The query returns the field value that is larger than five percent of the field values in each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement.
+
+#### Example 4: Select the fifth percentile field values associated with a field key and the relevant tags and fields
+```
+> SELECT PERCENTILE("water_level",5),"location","level description" FROM "h2o_feet"
+
+name: h2o_feet
+time                  percentile  location      level description
+----                  ----------  --------      -----------------
+2015-08-31T03:42:00Z  1.122       coyote_creek  below 3 feet
+```
+The query returns the field value that is larger than five percent of the field values in the `water_level` field key and the relevant values of the `location` tag key and the `level description` field key.
+
+#### Example 5: Select the twentieth percentile field value associated with a field key and include several clauses
+```
+> SELECT PERCENTILE("water_level",20) FROM "h2o_feet" WHERE time >= '2015-08-17T23:48:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(24m) fill(15) LIMIT 2
+
+name: h2o_feet
+time                   percentile
+----                   ----------
+2015-08-17T23:36:00Z   15
+2015-08-18T00:00:00Z   2.064
+```
+The query returns the field value that is larger than 20 percent of the values in the `water_level` field key.
+It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-syntax) between `2015-08-17T23:48:00Z` and `2015-08-18T00:54:00Z` and [groups](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals) results into 24-minute intervals.
+It [fills](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals-and-fill) empty time intervals with `15` and it [limits](/influxdb/v1.2/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to two.
+
+Notice that the [`GROUP BY time()` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals) overrides the points’ original timestamps.
+The timestamps in the results indicate the the start of each 24-minute time interval; the first point in the results covers the time interval between `2015-08-17T23:36:00Z` and just before `2015-08-18T00:00:00Z` and the last point in the results covers the time interval between `2015-08-18T00:00:00Z` and just before `2015-08-18T00:24:00Z`.
+
+### Common Issues with PERCENTILE()
+
+#### Issue 1: PERCENTILE() vs. other InfluxQL functions
+
+* `PERCENTILE(<field_key>,100)` is equivalent to [`MAX(<field_key>)`](#max).
+* `PERCENTILE(<field_key>, 50)` is nearly equivalent to [`MEDIAN(<field_key>)`](#median), except the `MEDIAN()` function returns the average of the two middle values if the field key contains an even number of field values.
+* `PERCENTILE(<field_key>,0)` is not equivalent to [`MIN(<field_key>)`](#min). This is a known [issue](https://github.com/influxdata/influxdb/issues/4418).
 
 ## SAMPLE()
 Returns a random sample of `N` points for the specified [field key](/influxdb/v1.2/concepts/glossary/#field).
