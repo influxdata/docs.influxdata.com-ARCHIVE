@@ -24,12 +24,12 @@ Use InfluxQL functions to aggregate, select, transform, and predict data.
 
 InfluxQL also supports the following "value transform" functions:
 
-* [ABS()](#abs), [POW()](#pow), [SQRT()](#sqrt)
-* [EXP()](#exp), [LOG()](#log), [LOG10()](#log10)
-* [SIN(), COS(), TAN()](#sin)
-* [ASIN(), ACOS(), ATAN()](#asin)
-* [DEG2RAD(), RAD2DEG()](#deg2rad)
-* [FLOOR()](#floor), [CEILING()](#ceiling), [ROUND()](#round)
+* [ABS()](#abs-value), [POW()](#pow-value-exponent), [SQRT()](#sqrt-value)
+* [EXP()](#exp-value), [LOG()](#log-value), [LOG10()](#log10-value)
+* [SIN(), COS(), TAN()](#sin-value-cos-value-tan-value)
+* [ASIN(), ACOS(), ATAN()](#asin-value-acos-value-atan-value)
+* [DEG2RAD(), RAD2DEG()](#deg2rad-value-rad2deg-value)
+* [FLOOR()](#floor-value-precision), [CEILING()](#ceiling-value-precision), [ROUND()](#round-value-n-decimal-places)
 
 Useful InfluxQL for functions:  
 
@@ -1843,10 +1843,13 @@ Unlike other functions, value transforms can be nested, and can operate on the r
 The following queries are all valid:
 
 ```
-select water_level, 3 * abs(water_level - 100.4) as wl from h2o_feet limit 3
-select max(water_level),  sqrt(abs(water_level)) from h2o_feet
-select abs(wl) from (select mean(water_level) as wl from h2o_feet)
-select mean(*) from (select water_level, abs(water_level) from h2o_feet)
+SELECT water_level, 3 * abs(water_level - 100.4) as wl FROM h2o_feet limit 3
+
+SELECT max(water_level), sqrt(abs(water_level)) FROM h2o_feet
+
+SELECT abs(wl) FROM (SELECT mean(water_level) as wl FROM h2o_feet)
+
+SELECT mean(*) FROM (SELECT water_level, abs(water_level) FROM h2o_feet)
 ```
 
 ## ABS(value)
