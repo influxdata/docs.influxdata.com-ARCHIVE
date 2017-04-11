@@ -1928,202 +1928,290 @@ The second point in the final results (`4.167`) is the sum of `2.09` and `2.077`
 and the third point (`6.213`) is the sum of `2.09`, `2.077`, and `2.0460000000000003`.
 
 ## DERIVATIVE()
-Returns the rate of change for the values in a single [field](/influxdb/v1.2/concepts/glossary/#field) in a [series](/influxdb/v1.2/concepts/glossary/#series).
-InfluxDB calculates the difference between chronological field values and converts those results into the rate of change per `unit`.
-The `unit` argument is optional and, if not specified, defaults to one second (`1s`).
+Returns the rate of change between subsequent [field values](/influxdb/v1.2/concepts/glossary/#field-value).
 
-The basic `DERIVATIVE()` query:
+### Basic Syntax
 ```
-SELECT DERIVATIVE(<field_key>, [<unit>]) FROM <measurement_name> [WHERE <stuff>]
+SELECT DERIVATIVE( [ * | <field_key> | /<regular_expression>/ ] [ , <unit> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-Valid time specifications for `unit` are:  
-`u` or `µ`&emsp;microseconds  
-`ms`&nbsp;&nbsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;milliseconds  
-`s`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;seconds  
-`m`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;minutes  
-`h`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;hours  
-`d`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;days  
-`w`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;weeks
+### Description of Basic Syntax
+InfluxDB calculates the difference between subsequent field values and converts those results into the rate of change per `unit`.
+The `unit` argument is an integer followed by a [duration literal](/influxdb/v1.2/query_language/spec/#literals) and it is optional.
+If the query does not specify the `unit` the unit defaults to one second (`1s`).
 
-`DERIVATIVE()` also works with a nested function coupled with a `GROUP BY time()` clause.
-For queries that include those options, InfluxDB first performs the aggregation, selection, or transformation across the time interval specified in the `GROUP BY time()` clause.
-It then calculates the difference between chronological field values and
-converts those results into the rate of change per `unit`.
-The `unit` argument is optional and, if not specified, defaults to the same
-interval as the `GROUP BY time()` interval.
+`DERIVATIVE(field_key)`  
+&emsp;&emsp;&emsp;
+Returns the rate of change between subsequent field values associated with the [field key](/influxdb/v1.2/concepts/glossary/#field-key).
 
+`DERIVATIVE(/regular_expression/)`  
+&emsp;&emsp;&emsp;
+Returns the rate of change between subsequent field values associated with each field key that matches the [regular expression](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
 
-The `DERIVATIVE()` query with an aggregation function and `GROUP BY time()` clause:
+`DERIVATIVE(*)`  
+&emsp;&emsp;&emsp;
+Returns the rate of change between subsequent field values associated with each field key in the [measurement](/influxdb/v1.2/concepts/glossary/#measurement).
+
+`DERIVATIVE()` supports int64 and float64 field value [data types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types).
+
+The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.2/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals).
+See the [Advanced Syntax](#advanced-syntax-1) section for how to use `DERIVATIVE()` with a `GROUP BY time()` clause.
+
+### Examples of Basic Syntax
+
+Examples 1-5 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.2/query_language/data_download/):
+
 ```
-SELECT DERIVATIVE(AGGREGATION_FUNCTION(<field_key>),[<unit>]) FROM <measurement_name> WHERE <stuff> GROUP BY time(<aggregation_interval>)
-```
+> SELECT "water_level" FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
 
-Examples:
-
-The following examples work with the first six observations of the `water_level` field in the measurement `h2o_feet` with the tag set `location = santa_monica`:
-```bash
 name: h2o_feet
---------------
-time			               water_level
-2015-08-18T00:00:00Z	 2.064
-2015-08-18T00:06:00Z	 2.116
-2015-08-18T00:12:00Z	 2.028
-2015-08-18T00:18:00Z	 2.126
-2015-08-18T00:24:00Z	 2.041
-2015-08-18T00:30:00Z	 2.051
+time                   water_level
+----                   -----------
+2015-08-18T00:00:00Z   2.064
+2015-08-18T00:06:00Z   2.116
+2015-08-18T00:12:00Z   2.028
+2015-08-18T00:18:00Z   2.126
+2015-08-18T00:24:00Z   2.041
+2015-08-18T00:30:00Z   2.051
 ```
 
-* `DERIVATIVE()` with a single argument:  
-Calculate the rate of change per one second
-
+#### Example 1: Calculate the derivative between the field values associated with a field key
 ```
-> SELECT DERIVATIVE("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' LIMIT 5
+> SELECT DERIVATIVE("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
+
 name: h2o_feet
---------------
-time			               derivative
-2015-08-18T00:06:00Z	 0.00014444444444444457
-2015-08-18T00:12:00Z	 -0.00024444444444444465
-2015-08-18T00:18:00Z	 0.0002722222222222218
-2015-08-18T00:24:00Z	 -0.000236111111111111
-2015-08-18T00:30:00Z	 2.777777777777842e-05
+time                   derivative
+----                   ----------
+2015-08-18T00:06:00Z   0.00014444444444444457
+2015-08-18T00:12:00Z   -0.00024444444444444465
+2015-08-18T00:18:00Z   0.0002722222222222218
+2015-08-18T00:24:00Z   -0.000236111111111111
+2015-08-18T00:30:00Z   2.777777777777842e-05
 ```
 
-Notice that the first field value (`0.00014`) in the `derivative` column is **not** `0.052` (the difference between the first two field values in the raw data: `2.116` - `2.604` = `0.052`).
-Because the query does not specify the `unit` option, InfluxDB automatically calculates the rate of change per one second, not the rate of change per six minutes.
-The calculation of the first value in the `derivative` column looks like this:
-<br>
-<br>
+The query returns the one-second rate of change between the field values associated with the `water_level` field key and in the `h2o_feet` measurement.
+
+The first result (`0.00014444444444444457`) is the one-second rate of change between the first two subsequent field values in the raw data.
+InfluxDB calculates the difference between the field values and normalizes that value to the one-second rate of change:
+
 ```
 (2.116 - 2.064) / (360s / 1s)
+--------------    ----------
+       |               |
+       |          the difference between the field values' timestamps / the default unit
+second field value - first field value
 ```
 
-The numerator is the difference between chronological field values.
-The denominator is the difference between the relevant timestamps in seconds (`2015-08-18T00:06:00Z` - `2015-08-18T00:00:00Z` = `360s`) divided by `unit` (`1s`).
-This returns the rate of change per second from `2015-08-18T00:00:00Z` to `2015-08-18T00:06:00Z`.
-
-* `DERIVATIVE()` with two arguments:  
-Calculate the rate of change per six minutes
-
+#### Example 2: Calculate the derivative between the field values associated with a field key and specify the unit option
 ```
-> SELECT DERIVATIVE("water_level",6m) FROM "h2o_feet" WHERE "location" = 'santa_monica' LIMIT 5
+> SELECT DERIVATIVE("water_level",6m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
+
 name: h2o_feet
---------------
-time			               derivative
-2015-08-18T00:06:00Z	 0.052000000000000046
-2015-08-18T00:12:00Z	 -0.08800000000000008
-2015-08-18T00:18:00Z	 0.09799999999999986
-2015-08-18T00:24:00Z	 -0.08499999999999996
-2015-08-18T00:30:00Z	 0.010000000000000231
+time			derivative
+----			----------
+2015-08-18T00:06:00Z	0.052000000000000046
+2015-08-18T00:12:00Z	-0.08800000000000008
+2015-08-18T00:18:00Z	0.09799999999999986
+2015-08-18T00:24:00Z	-0.08499999999999996
+2015-08-18T00:30:00Z	0.010000000000000231
 ```
 
-The calculation of the first value in the `derivative` column looks like this:
-<br>
-<br>
+The query returns the six-minute rate of change between the field values associated with the `water_level` field key and in the `h2o_feet` measurement.
+
+The first result (`0.052000000000000046`) is the six-minute rate of change between the first two subsequent field values in the raw data.
+InfluxDB calculates the difference between the field values and normalizes that value to the six-minute rate of change:
+
 ```
 (2.116 - 2.064) / (6m / 6m)
+--------------    ----------
+       |              |
+       |          the difference between the field values' timestamps / the specified unit
+second field value - first field value
 ```
 
-The numerator is the difference between chronological field values.
-The denominator is the difference between the relevant timestamps in minutes (`2015-08-18T00:06:00Z` - `2015-08-18T00:00:00Z` = `6m`) divided by `unit` (`6m`).
-This returns the rate of change per six minutes from `2015-08-18T00:00:00Z` to `2015-08-18T00:06:00Z`.
-
-* `DERIVATIVE()` with two arguments:  
-Calculate the rate of change per 12 minutes
-
+#### Example 3: Calculate the derivative between the field values associated with each field key in a measurement and specify the unit option
 ```
-> SELECT DERIVATIVE("water_level",12m) FROM "h2o_feet" WHERE "location" = 'santa_monica' LIMIT 5
+> SELECT DERIVATIVE(*,3m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
+
+
 name: h2o_feet
---------------
-time			               derivative
-2015-08-18T00:06:00Z	 0.10400000000000009
-2015-08-18T00:12:00Z	 -0.17600000000000016
-2015-08-18T00:18:00Z	 0.19599999999999973
-2015-08-18T00:24:00Z	 -0.16999999999999993
-2015-08-18T00:30:00Z	 0.020000000000000462
+time                   derivative_water_level
+----                   ----------------------
+2015-08-18T00:06:00Z   0.026000000000000023
+2015-08-18T00:12:00Z   -0.04400000000000004
+2015-08-18T00:18:00Z   0.04899999999999993
+2015-08-18T00:24:00Z   -0.04249999999999998
+2015-08-18T00:30:00Z   0.0050000000000001155
 ```
 
-The calculation of the first value in the `derivative` column looks like this:
-<br>
-<br>
-```
-(2.116 - 2.064 / (6m / 12m)
-```
+The query returns the three-minute rate of change between the field values associated with each field key that stores numerical values in the `h2o_feet` measurement.
+The `h2o_feet` measurement has one numerical field: `water_level`.
 
-The numerator is the difference between chronological field values.
-The denominator is the difference between the relevant timestamps in minutes (`2015-08-18T00:06:00Z` - `2015-08-18T00:00:00Z` = `6m`) divided by `unit` (`12m`).
-This returns the rate of change per 12 minutes from `2015-08-18T00:00:00Z` to `2015-08-18T00:06:00Z`.
-
-> **Note:** Specifying `12m` as the `unit` **does not** mean that InfluxDB calculates the rate of change for every 12 minute interval of data.
-Instead, InfluxDB calculates the rate of change per 12 minutes for each interval of valid data.
-
-* `DERIVATIVE()` with one argument, a function, and a `GROUP BY time()` clause:  
-Select the `MAX()` value at 12 minute intervals and calculate the rate of change per 12 minutes
+The first result (`0.026000000000000023`) is the three-minute rate of change between the first two subsequent field values in the raw data.
+InfluxDB calculates the difference between the field values and normalizes that value to the three-minute rate of change:
 
 ```
-> SELECT DERIVATIVE(MAX("water_level")) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time < '2015-08-18T00:36:00Z' GROUP BY time(12m)
+(2.116 - 2.064) / (6m / 3m)
+--------------    ----------
+       |              |
+       |          the difference between the field values' timestamps / the specified unit
+second field value - first field value
+```
+
+#### Example 4: Calculate the derivative between the field values associated with each field key that matches a regular expression and specify the unit option
+```
+> SELECT DERIVATIVE(/water/,2m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
+
 name: h2o_feet
---------------
-time			               derivative
-2015-08-18T00:12:00Z	 0.009999999999999787
-2015-08-18T00:24:00Z	 -0.07499999999999973
+time                   derivative_water_level
+----                   ----------------------
+2015-08-18T00:06:00Z   0.01733333333333335
+2015-08-18T00:12:00Z   -0.02933333333333336
+2015-08-18T00:18:00Z   0.03266666666666662
+2015-08-18T00:24:00Z   -0.02833333333333332
+2015-08-18T00:30:00Z   0.0033333333333334103
 ```
 
-To get those results, InfluxDB first aggregates the data by calculating the `MAX()` `water_level` at the time interval specified in the `GROUP BY time()` clause (`12m`).
-Those results look like this:
-```bash
+The query returns the two-minute rate of change between the field values associated with each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement.
+
+The first result (`0.01733333333333335`) is the two-minute rate of change between the first two subsequent field values in the raw data.
+InfluxDB calculates the difference between the field values and normalizes that value to the two-minute rate of change:
+
+```
+(2.116 - 2.064) / (6m / 2m)
+--------------    ----------
+       |              |
+       |          the difference between the field values' timestamps / the specified unit
+second field value - first field value
+```
+
+#### Example 5: Calculate the derivative between the field values associated with a field key and include several clauses
+```
+> SELECT DERIVATIVE("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' ORDER BY time DESC LIMIT 1 OFFSET 2
+
 name: h2o_feet
---------------
-time			               max
-2015-08-18T00:00:00Z	 2.116
-2015-08-18T00:12:00Z	 2.126
-2015-08-18T00:24:00Z	 2.051
+time                   derivative
+----                   ----------
+2015-08-18T00:12:00Z   -0.0002722222222222218
 ```
 
-Second, InfluxDB calculates the rate of change per `12m` (the same interval as the `GROUP BY time()` interval) to get the results in the `derivative` column above.
-The calculation of the first value in the `derivative` column looks like this:
-<br>
-<br>
-```
-(2.126 - 2.116) / (12m / 12m)
-```
+The query returns the one-second rate of change between the field values associated with the `water_level` field key and in the `h2o_feet` measurement.
+It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.2/query_language/data_exploration/#order-by-time-desc).
+The query also [limits](/influxdb/v1.2/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to one and [offsets](/influxdb/v1.2/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-The numerator is the difference between chronological field values.
-The denominator is the difference between the relevant timestamps in minutes (`2015-08-18T00:12:00Z` - `2015-08-18T00:00:00Z` = `12m`) divided by `unit` (`12m`).
-This returns rate of change per 12 minutes for the aggregated data from `2015-08-18T00:00:00Z` to `2015-08-18T00:12:00Z`.
-
-* `DERIVATIVE()` with two arguments, a function, and a `GROUP BY time()` clause:  
-Aggregate the data to 18 minute intervals and calculate the rate of change per six minutes
+The only result (`-0.0002722222222222218`) is the one-second rate of change between the relevant subsequent field values in the raw data.
+InfluxDB calculates the difference between the field values and normalizes that value to the one-second rate of change:
 
 ```
-> SELECT DERIVATIVE(SUM("water_level"),6m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time < '2015-08-18T00:36:00Z' GROUP BY time(18m)
+(2.126 - 2.028) / (360s / 1s)
+--------------    ----------
+       |              |
+       |          the difference between the field values' timestamps / the default unit
+second field value - first field value
+```
+
+### Advanced Syntax
+```
+SELECT DERIVATIVE(<function> ([ * | <field_key> | /<regular_expression>/ ]) [ , <unit> ] ) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+
+### Description of Advanced Syntax
+
+The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
+The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `DERIVATIVE()` function to those results.
+
+The `unit` argument is an integer followed by a [duration literal](/influxdb/v1.2/query_language/spec/#literals) and it is optional.
+If the query does not specify the `unit` the `unit` defaults to the `GROUP BY time()` interval.
+Note that this behavior is different from the [basic syntax's](#basic-syntax-1) default behavior.
+
+`DERIVATIVE()` supports the following nested functions:
+[`COUNT()`](#count),
+[`MEAN()`](#mean),
+[`MEDIAN()`](#median),
+[`MODE()`](#mode),
+[`SUM()`](#sum),
+[`FIRST()`](#first),
+[`LAST()`](#last),
+[`MIN()`](#min),
+[`MAX()`](#max), and
+[`PERCENTILE()`](#percentile).
+
+### Examples of Advanced Syntax
+
+#### Example 1: Calculate the derivative of mean values
+```
+> SELECT DERIVATIVE(MEAN("water_level")) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
+
 name: h2o_feet
---------------
-time			               derivative
-2015-08-18T00:18:00Z	 0.0033333333333332624
+time                   derivative
+----                   ----------
+2015-08-18T00:12:00Z   -0.0129999999999999
+2015-08-18T00:24:00Z   -0.030999999999999694
 ```
 
-To get those results, InfluxDB first aggregates the data by calculating the `SUM()` of `water_level` at the time interval specified in the `GROUP BY time()` clause (`18m`).
-The aggregated results look like this:
-```bash
+The query returns the 12-minute rate of change between [average](#mean) `water_level`s that are calculated at 12-minute intervals.
+
+To get those results, InfluxDB first calculates the average `water_level`s at 12-minute intervals.
+This step is the same as using the `MEAN()` function with the `GROUP BY time()` clause and without `DERIVATIVE()`:
+
+```
+> SELECT MEAN("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
+
 name: h2o_feet
---------------
-time			               sum
-2015-08-18T00:00:00Z	 6.208
-2015-08-18T00:18:00Z	 6.218
+time                   mean
+----                   ----
+2015-08-18T00:00:00Z   2.09
+2015-08-18T00:12:00Z   2.077
+2015-08-18T00:24:00Z   2.0460000000000003
+```
+Next, InfluxDB calculates the 12-minute rate of change between those averages.
+The first result (`-0.0129999999999999`) is the 12-minute rate of change between the first two averages.
+InfluxDB calculates the difference between the field values and normalizes that value to the 12-minute rate of change.
+
+```
+(2.077 - 2.09) / (12m / 12m)
+-------------    ----------
+       |               |
+       |          the difference between the field values' timestamps / the default unit
+second field value - first field value
 ```
 
-Second, InfluxDB calculates the rate of change per `unit` (`6m`) to get the results in the `derivative` column above.
-The calculation of the first value in the `derivative` column looks like this:
-<br>
-<br>
+#### Example 2: Calculate the derivative of mean values and specify the unit option
 ```
-(6.218 - 6.208) / (18m / 6m)
+> SELECT DERIVATIVE(MEAN("water_level"),6m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
+
+name: h2o_feet
+time                   derivative
+----                   ----------
+2015-08-18T00:12:00Z   -0.00649999999999995
+2015-08-18T00:24:00Z   -0.015499999999999847
 ```
 
-The numerator is the difference between chronological field values.
-The denominator is the difference between the relevant timestamps in minutes (`2015-08-18T00:18:00Z` - `2015-08-18T00:00:00Z` = `18m`) divided by `unit` (`6m`).
-This returns the rate of change per six minutes for the aggregated data from `2015-08-18T00:00:00Z` to `2015-08-18T00:18:00Z`.
+The query returns the six-minute rate of change between average `water_level`s that are calculated at 12-minute intervals.
+
+To get those results, InfluxDB first calculates the average `water_level`s at 12-minute intervals.
+This step is the same as using the `MEAN()` function with the `GROUP BY time()` clause and without `DERIVATIVE()`:
+```
+> SELECT MEAN("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
+
+name: h2o_feet
+time                   mean
+----                   ----
+2015-08-18T00:00:00Z   2.09
+2015-08-18T00:12:00Z   2.077
+2015-08-18T00:24:00Z   2.0460000000000003
+```
+Next, InfluxDB calculates the six-minute rate of change between those averages.
+The first result (`-0.00649999999999995`) is the six-minute rate of change between the first two averages.
+InfluxDB calculates the difference between the field values and normalizes that value to the six-minute rate of change.
+
+```
+(2.077 - 2.09) / (12m / 6m)
+-------------    ----------
+       |               |
+       |          the difference between the field values' timestamps / the specified unit
+second field value - first field value
+```
 
 ## DIFFERENCE()
 Returns the difference between consecutive chronological values in a single [field](/influxdb/v1.2/concepts/glossary/#field).
