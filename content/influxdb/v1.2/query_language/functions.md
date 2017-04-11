@@ -1760,36 +1760,35 @@ time                  top    location
 </dt>
 
 ## CUMULATIVE_SUM()
-Returns the cumulative sum of consecutive field values for a single
-[field](/influxdb/v1.2/concepts/glossary/#field).
-The field type must be int64 or float64.
+Returns the running total of subsequent [field values](/influxdb/v1.2/concepts/glossary/#field-value).
 
-### Basic CUMULATIVE_SUM() Syntax
+### Basic Syntax
 ```
-SELECT CUMULATIVE_SUM(<field_key>) FROM_clause WHERE_clause
+SELECT CUMULATIVE_SUM( [ * | <field_key> | /<regular_expression>/ ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Advanced CUMULATIVE_SUM() Syntax
-```
-SELECT CUMULATIVE_SUM(<function>(<field_key>)) FROM_clause WHERE_clause GROUP BY time(<interval>)[,<tag_key>]
-```
+### Description of Basic Syntax
 
-Supported functions:
-[`COUNT()`](#count),
-[`MEAN()`](#mean),
-[`MEDIAN()`](#median),
-[`MODE()`](#mode),
-[`SUM()`](#sum),
-[`FIRST()`](#first),
-[`LAST()`](#last),
-[`MIN()`](#min),
-[`MAX()`](#max), and
-[`PERCENTILE()`](#percentile).
+`CUMULATIVE_SUM(field_key)`  
+&emsp;&emsp;&emsp;
+Returns the running total of subsequent field values associated with the [field key](/influxdb/v1.2/concepts/glossary/#field-key).
 
-### Examples
+`CUMULATIVE_SUM(/regular_expression/)`  
+&emsp;&emsp;&emsp;
+Returns the running total of subsequent field values associated with each field key that matches the [regular expression](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
 
-The examples below work with the following subsample of the `NOAA_water_database`
-data:
+`CUMULATIVE_SUM(*)`  
+&emsp;&emsp;&emsp;
+Returns the running total of subsequent field values associated with each field key in the [measurement](/influxdb/v1.2/concepts/glossary/#measurement).
+
+`CUMULATIVE_SUM()` supports int64 and float64 field value [data types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types).
+
+The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.2/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals).
+See the [Advanced Syntax](#advanced-syntax) section for how to use `CUMULATIVE_SUM()` with a `GROUP BY time()` clause.
+
+### Examples of Basic Syntax
+
+Examples 1-4 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.2/query_language/data_download/):
 ```
 > SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -1804,7 +1803,7 @@ time                   water_level
 2015-08-18T00:30:00Z   2.051
 ```
 
-#### Example 1: Use cumulative sum on a single time range
+#### Example 1: Calculate the cumulative sum of the field values associated with a field key
 ```
 > SELECT CUMULATIVE_SUM("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -1819,10 +1818,85 @@ time                   cumulative_sum
 2015-08-18T00:30:00Z   12.426
 ```
 
-The query returns the cumulative sum of `water_level`'s field values.
-The second point in the results is the sum of `2.064` and `2.116`, the third point is the sum of `2.064`, `2.116`, and `2.028`, and so on.
+The query returns the running total of the field values in the `water_level` field key and in the `h2o_feet` measurement.
 
-#### Example 2: Use cumulative sum with a `GROUP BY time()` clause
+#### Example 2: Calculate the cumulative sum of the field values associated with each field key in a measurement
+```
+> SELECT CUMULATIVE_SUM(*) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+
+name: h2o_feet
+time                   cumulative_sum_water_level
+----                   --------------------------
+2015-08-18T00:00:00Z   2.064
+2015-08-18T00:06:00Z   4.18
+2015-08-18T00:12:00Z   6.208
+2015-08-18T00:18:00Z   8.334
+2015-08-18T00:24:00Z   10.375
+2015-08-18T00:30:00Z   12.426
+```
+
+The query returns the running total of the field values for each field key that stores numerical values in the `h2o_feet` measurement.
+The `h2o_feet` measurement has one numerical field: `water_level`.
+
+#### Example 3: Calculate the cumulative sum of the field values associated with each field key that matches a regular expression
+```
+> SELECT CUMULATIVE_SUM(/water/) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+
+name: h2o_feet
+time                   cumulative_sum_water_level
+----                   --------------------------
+2015-08-18T00:00:00Z   2.064
+2015-08-18T00:06:00Z   4.18
+2015-08-18T00:12:00Z   6.208
+2015-08-18T00:18:00Z   8.334
+2015-08-18T00:24:00Z   10.375
+2015-08-18T00:30:00Z   12.426
+```
+
+The query returns the running total of the field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement.
+
+#### Example 4: Calculate the cumulative sum of the field values associated with a field key and include several clauses
+```
+> SELECT CUMULATIVE_SUM("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' ORDER BY time DESC LIMIT 4 OFFSET 2
+
+name: h2o_feet
+time                  cumulative_sum
+----                  --------------
+2015-08-18T00:18:00Z  6.218
+2015-08-18T00:12:00Z  8.246
+2015-08-18T00:06:00Z  10.362
+2015-08-18T00:00:00Z  12.426
+```
+
+The query returns the running total of the field values associated with the `water_level` field key.
+It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.2/query_language/data_exploration/#order-by-time-desc).
+The query also [limits](/influxdb/v1.2/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.2/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
+
+### Advanced Syntax
+```
+SELECT CUMULATIVE_SUM(<function>( [ * | <field_key> | /<regular_expression>/ ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+
+### Description of Advanced Syntax
+
+The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
+The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `CUMULATIVE_SUM()` function to those results.
+
+`CUMULATIVE_SUM()` supports the following nested functions:
+[`COUNT()`](#count),
+[`MEAN()`](#mean),
+[`MEDIAN()`](#median),
+[`MODE()`](#mode),
+[`SUM()`](#sum),
+[`FIRST()`](#first),
+[`LAST()`](#last),
+[`MIN()`](#min),
+[`MAX()`](#max), and
+[`PERCENTILE()`](#percentile).
+
+### Examples of Advanced Syntax
+
+#### Example 1: Calculate the cumulative sum of mean values
 ```
 > SELECT CUMULATIVE_SUM(MEAN("water_level")) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
 
@@ -1834,10 +1908,10 @@ time                   cumulative_sum
 2015-08-18T00:24:00Z   6.213
 ```
 
-The query returns the cumulative sum of average `water_level`s that are calculated at 12-minute intervals between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z`.
+The query returns the running total of [average](#mean) `water_level`s that are calculated at 12-minute intervals.
 
-To get those results, InfluxDB first calculates average `water_level`s at 12-minute intervals.
-This step is the same as using the raw `MEAN()` function:
+To get those results, InfluxDB first calculates the average `water_level`s at 12-minute intervals.
+This step is the same as using the `MEAN()` function with the `GROUP BY time()` clause and without `CUMULATIVE_SUM()`:
 ```
 > SELECT MEAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
 
@@ -1849,9 +1923,9 @@ time                   mean
 2015-08-18T00:24:00Z   2.0460000000000003
 ```
 
-Next, InfluxDB calculates the cumulative sum of those averages.
-The second point in the final results is the sum of `2.09` and `2.077`
-and the third point is the sum of `2.09`, `2.077`, and `2.0460000000000003`.
+Next, InfluxDB calculates the running total of those averages.
+The second point in the final results (`4.167`) is the sum of `2.09` and `2.077`
+and the third point (`6.213`) is the sum of `2.09`, `2.077`, and `2.0460000000000003`.
 
 ## DERIVATIVE()
 Returns the rate of change for the values in a single [field](/influxdb/v1.2/concepts/glossary/#field) in a [series](/influxdb/v1.2/concepts/glossary/#series).
