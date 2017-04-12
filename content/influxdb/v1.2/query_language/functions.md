@@ -2371,61 +2371,175 @@ Next, InfluxDB calculates the difference between those maximum values.
 The first point in the final results (`0.009999999999999787`) is the difference between `2.126` and `2.116`, and the second point in the final results (`-0.07499999999999973`) is the difference between `2.051` and `2.126`.
 
 ## ELAPSED()
-Returns the difference between subsequent timestamps in a single
-[field](/influxdb/v1.2/concepts/glossary/#field).
-The `unit` argument is an optional
-[duration literal](/influxdb/v1.2/query_language/spec/#durations)
-and, if not specified, defaults to one nanosecond.
+Returns the difference between subsequent [field value's](/influxdb/v1.2/concepts/glossary/#field-value) timestamps.
 
+### Syntax
 ```
-SELECT ELAPSED(<field_key>, <unit>) FROM <measurement_name> [WHERE <stuff>]
+SELECT ELAPSED( [ * | <field_key> | /<regular_expression>/ ] [ , <unit> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-Examples:
+### Description of Syntax
+InfluxDB calculates the difference between subsequent timestamps.
+The `unit` option is an integer followed by a [duration literal](/influxdb/v1.2/query_language/spec/#literals) and it determines the unit of the returned difference.
+If the query does not specify the `unit` option the query returns the difference between timestamps in nanoseconds.
 
-* Calculate the difference (in nanoseconds) between the timestamps in the field
-`h2o_feet`:
+`ELAPSED(field_key)`  
+&emsp;&emsp;&emsp;
+Returns the difference between subsequent timestamps associated with the [field key](/influxdb/v1.2/concepts/glossary/#field-key).
+
+`ELAPSED(/regular_expression/)`  
+&emsp;&emsp;&emsp;
+Returns the difference between subsequent timestamps associated with each field key that matches the [regular expression](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
+
+`ELAPSED(*)`  
+&emsp;&emsp;&emsp;
+Returns the difference between subsequent timestamps associated with each field key in the [measurement](/influxdb/v1.2/concepts/glossary/#measurement).
+
+`ELAPSED()` supports all field value [data types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types).
+
+### Examples
+
+Examples 1-5 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.2/query_language/data_download/):
 
 ```
-> SELECT ELAPSED("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:24:00Z'
+> SELECT "water_level" FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:12:00Z'
+
 name: h2o_feet
---------------
-time			                elapsed
-2015-08-18T00:06:00Z	  360000000000
-2015-08-18T00:12:00Z	  360000000000
-2015-08-18T00:18:00Z	  360000000000
-2015-08-18T00:24:00Z	  360000000000
+time                   water_level
+----                   -----------
+2015-08-18T00:00:00Z   2.064
+2015-08-18T00:06:00Z   2.116
+2015-08-18T00:12:00Z   2.028
 ```
 
-* Calculate the number of one minute intervals between the timestamps in the
-field `h2o_feet`:
-
+#### Example 1: Calculate the elapsed time between field values associated with a field key
 ```
-> SELECT ELAPSED("water_level",1m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:24:00Z'
+> SELECT ELAPSED("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:12:00Z'
+
 name: h2o_feet
---------------
-time			                elapsed
-2015-08-18T00:06:00Z	  6
-2015-08-18T00:12:00Z	  6
-2015-08-18T00:18:00Z	  6
-2015-08-18T00:24:00Z	  6
+time                   elapsed
+----                   -------
+2015-08-18T00:06:00Z   360000000000
+2015-08-18T00:12:00Z   360000000000
 ```
 
-> **Note:** InfluxDB returns `0` if `unit` is greater than the difference
-between the timestamps.
-For example, the timestamps in `h2o_feet` occur at six minute intervals.
-If the query asks for the number of one hour intervals between the
-timestamps, InfluxDB returns `0`:
->
+The query returns the difference (in nanoseconds) between subsequent timestamps in the `water_level` field key and in the `h2o_feet` measurement.
+
+#### Example 2: Calculate the elapsed time between field values associated with a field key and specify the unit option
 ```
-> SELECT ELAPSED("water_level",1h) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:24:00Z'
+> SELECT ELAPSED("water_level",1m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:12:00Z'
+
 name: h2o_feet
---------------
-time			                elapsed
-2015-08-18T00:06:00Z	  0
-2015-08-18T00:12:00Z	  0
-2015-08-18T00:18:00Z	  0
-2015-08-18T00:24:00Z	  0
+time                   elapsed
+----                   -------
+2015-08-18T00:06:00Z   6
+2015-08-18T00:12:00Z   6
+```
+
+The query returns the difference (in minutes) between subsequent timestamps in the `water_level` field key and in the `h2o_feet` measurement.
+
+#### Example 3: Calculate the elapsed time between field values associated with each field key in a measurement and specify the unit option
+```
+> SELECT ELAPSED(*,1m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:12:00Z'
+
+name: h2o_feet
+time                   elapsed_level description   elapsed_water_level
+----                   -------------------------   -------------------
+2015-08-18T00:06:00Z   6                           6
+2015-08-18T00:12:00Z   6                           6
+```
+
+The query returns the difference (in minutes) between subsequent timestamps associated with each field key in the `h2o_feet`
+measurement.
+The `h2o_feet` measurement has two field keys: `level description` and `water_level`.
+ 
+#### Example 4: Calculate the elapsed time between field values associated with each field key that matches a regular expression and specify the unit option
+```
+> SELECT ELAPSED(/level/,1s) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:12:00Z'
+
+name: h2o_feet
+time                   elapsed_level description   elapsed_water_level
+----                   -------------------------   -------------------
+2015-08-18T00:06:00Z   360                         360
+2015-08-18T00:12:00Z   360                         360
+```
+
+The query returns the difference (in seconds) between subsequent timestamps associated with each field key that includes the word `level` in the `h2o_feet` measurement.
+
+#### Example 5: Calculate the elapsed time between field values associated with a field key and include several clauses
+```
+> SELECT ELAPSED("water_level",1ms) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:12:00Z' ORDER BY time DESC LIMIT 1 OFFSET 1
+
+name: h2o_feet
+time                   elapsed
+----                   -------
+2015-08-18T00:00:00Z   -360000
+```
+
+The query returns the difference (in milliseconds) between subsequent timestamps in the `water_level` field key and in the `h2o_feet` measurement.
+It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:12:00Z` and sorts timestamps in [descending order](/influxdb/v1.2/query_language/data_exploration/#order-by-time-desc).
+The query also [limits](/influxdb/v1.2/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to one and [offsets](/influxdb/v1.2/query_language/data_exploration/#the-offset-and-soffset-clauses) results by one point.
+
+Notice that the result is negative; the [`ORDER BY time DESC` clause](/influxdb/v1.2/query_language/data_exploration/#order-by-time-desc) sorts timestamps in descending order so `ELAPSED()` calculates the difference between timestamps in reverse order.
+
+### Common Issues with ELAPSED()
+
+#### Issue 1: ELAPSED() and units greater than the elapsed time
+
+InfluxDB returns `0` if the `unit` option is greater than the difference between the timestamps.
+
+##### Example
+<br>
+The timestamps in the `h2o_feet` measurement occur at six-minute intervals.
+If the query sets the `unit` option to one hour, InfluxDB returns `0`:
+
+```
+> SELECT ELAPSED("water_level",1h) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:12:00Z'
+
+name: h2o_feet
+time                   elapsed
+----                   -------
+2015-08-18T00:06:00Z   0
+2015-08-18T00:12:00Z   0
+```
+
+#### Issue 2: ELAPSED() with GROUP BY time() clauses
+
+The `ELAPSED()` function supports the [`GROUP BY time()` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals) but the query results aren't particularly useful.
+Currently, an `ELAPSED()` query with a nested function and a `GROUP BY time()` clause simply returns the interval specified in the `GROUP BY time()` clause.
+
+The `GROUP BY time()` clause determines the timestamps in the results; each timestamp marks the start of a time interval.
+That behavior also applies to nested selector functions (like [`FIRST()`](#first) or [`MAX()`](#max)) which would, in all other cases, return a specific timestamp from the raw data.
+Because the `GROUP BY time()` clause overrides the original timestamps, the `ELAPSED()` calculation always returns the same value as the `GROUP BY time()` interval.
+
+##### Example
+<br>
+In the codeblock below, the first query attempts to use the `ELAPSED()` function with a `GROUP BY time()` clause to find the time elapsed (in minutes) between [minimum](#min) `water_level`s.
+The query returns 12 minutes for both time intervals.
+
+To get those results, InfluxDB first calculates the minimum `water_level`s at 12-minute intervals.
+The second query in the codeblock shows the results of that step.
+The step is the same as using the `MIN()` function with the `GROUP BY time()` clause and without the `ELAPSED()` function.
+Notice that the timestamps returned by the second query are 12 minutes apart.
+In the raw data, the first result (`2.057`) occurs at `2015-08-18T00:42:00Z` but the `GROUP BY time()` clause overrides that original timestamp.
+Because the timestamps are determined by the `GROUP BY time()` interval and not by the original data, the `ELAPSED()` calculation always returns the same value as the `GROUP BY time()` interval.
+
+```
+> SELECT ELAPSED(MIN("water_level"),1m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:36:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(12m)
+
+name: h2o_feet
+time                   elapsed
+----                   -------
+2015-08-18T00:36:00Z   12
+2015-08-18T00:48:00Z   12
+
+> SELECT MIN("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:36:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(12m)
+
+name: h2o_feet
+time                   min
+----                   ---
+2015-08-18T00:36:00Z   2.057    <--- Actually occurs at 2015-08-18T00:42:00Z
+2015-08-18T00:48:00Z   1.991
 ```
 
 ## FLOOR()
