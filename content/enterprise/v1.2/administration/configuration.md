@@ -1001,6 +1001,16 @@ Environment variable: `INFLUXDB_HINTED_HANDOFF_MAX_AGE`
 
 ###  retry-concurrency = 20
 
+The maximum number of hinted handoff blocks that the source data node attempts to write to each destination data node.
+Hinted handoff blocks are sets of data that belong to the same shard and have the same destination data node.
+
+If `retry-concurrency` is 20 and the source data node's hinted handoff has 25 blocks for destination data node A, then the source data node attempts to concurrently write 20 blocks to node A.
+If `retry-concurrency` is 20 and the source data node's hinted handoff has 25 blocks for destination data node A and 30 blocks for destination data node B, then the source data node attempts to concurrently write 20 blocks to node A and 20 blocks to node B.
+If the source data node successfully writes 20 blocks to a destination data node, it continues to write the remaining hinted handoff data to that destination node in sets of 20 blocks.
+
+If the source data node successfully writes data to destination data nodes, a higher `retry-concurrency` setting can accelerate the rate at which the source data node empties its hinted handoff queue.
+Note that increasing `retry-concurrency` also increases network traffic.
+
 Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_CONCURRENCY`
 
 ###  retry-rate-limit = 0
