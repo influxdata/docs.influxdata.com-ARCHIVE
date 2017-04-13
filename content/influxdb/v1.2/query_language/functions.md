@@ -2555,95 +2555,166 @@ time                   min
 </dt>
 
 ## MOVING_AVERAGE()
-Returns the moving average across a `window` of consecutive chronological field values for a single [field](/influxdb/v1.2/concepts/glossary/#field).
-The field type must be int64 or float64.
+Returns the rolling average across a window of subsequent [field values](/influxdb/v1.2/concepts/glossary/#field-value).
 
-The basic `MOVING_AVERAGE()` query:
+### Basic Syntax
 ```
-SELECT MOVING_AVERAGE(<field_key>,<window>) FROM <measurement_name> [WHERE <stuff>]
-```
-
-The `MOVING_AVERAGE()` query with a nested function and a `GROUP BY time()` clause:
-```
-SELECT MOVING_AVERAGE(<function>(<field_key>),<window>) FROM <measurement_name> WHERE <stuff> GROUP BY time(<time_interval>)
+SELECT MOVING_AVERAGE( [ * | <field_key> | /<regular_expression>/ ] , <N> ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-Functions that work with `MOVING_AVERAGE()` include
-[`COUNT()`](/influxdb/v1.2/query_language/functions/#count),
-[`MEAN()`](/influxdb/v1.2/query_language/functions/#mean),
-[`MEDIAN()`](/influxdb/v1.2/query_language/functions/#median),
-[`SUM()`](/influxdb/v1.2/query_language/functions/#sum),
-[`FIRST()`](/influxdb/v1.2/query_language/functions/#first),
-[`LAST()`](/influxdb/v1.2/query_language/functions/#last),
-[`MIN()`](/influxdb/v1.2/query_language/functions/#min),
-[`MAX()`](/influxdb/v1.2/query_language/functions/#max), and
-[`PERCENTILE()`](/influxdb/v1.2/query_language/functions/#percentile).
+### Description of Basic Syntax
+`MOVING_AVERAGE()` calculates the rolling average across a window of `N` subsequent field values.
+The `N` argument is an integer and it is required.
 
-Examples:
+`MOVING_AVERAGE(field_key,N)`  
+&emsp;&emsp;&emsp;
+Returns the rolling average across `N` field values associated with the [field key](/influxdb/v1.2/concepts/glossary/#field-key).
 
-The following examples focus on the field `water_level` in `santa_monica`
-between `2015-08-18T00:00:00Z` and `2015-08-18T00:36:00Z`:
+`MOVING_AVERAGE(/regular_expression/,N)`  
+&emsp;&emsp;&emsp;
+Returns the rolling average across `N` field values associated with each field key that matches the [regular expression](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
+
+`MOVING_AVERAGE(*,N)`  
+&emsp;&emsp;&emsp;
+Returns the rolling average across `N` field values associated with each field key in the [measurement](/influxdb/v1.2/concepts/glossary/#measurement).
+
+`MOVING_AVERAGE()` int64 and float64 field value [data types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types).
+
+The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.2/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals).
+See the [Advanced Syntax](#advanced-syntax-3) section for how to use `MOVING_AVERAGE()` with a `GROUP BY time()` clause.
+
+### Examples of Basic Syntax
+Examples 1-4 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.2/query_language/data_download/):
+
 ```
-> SELECT "water_level" FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:36:00Z'
+> SELECT "water_level" FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
+
 name: h2o_feet
---------------
-time			                water_level
-2015-08-18T00:00:00Z	  2.064
-2015-08-18T00:06:00Z	  2.116
-2015-08-18T00:12:00Z	  2.028
-2015-08-18T00:18:00Z	  2.126
-2015-08-18T00:24:00Z	  2.041
-2015-08-18T00:30:00Z	  2.051
-2015-08-18T00:36:00Z	  2.067
+time                   water_level
+----                   -----------
+2015-08-18T00:00:00Z   2.064
+2015-08-18T00:06:00Z   2.116
+2015-08-18T00:12:00Z   2.028
+2015-08-18T00:18:00Z   2.126
+2015-08-18T00:24:00Z   2.041
+2015-08-18T00:30:00Z   2.051
 ```
 
-* Calculate the moving average across every 2 field values:
-
+#### Example 1: Calculate the moving average of the field values associated with a field key
 ```
-> SELECT MOVING_AVERAGE("water_level",2) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:36:00Z'
+> SELECT MOVING_AVERAGE("water_level",2) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
+
 name: h2o_feet
---------------
-time			                moving_average
-2015-08-18T00:06:00Z	  2.09
-2015-08-18T00:12:00Z	  2.072
-2015-08-18T00:18:00Z	  2.077
-2015-08-18T00:24:00Z	  2.0835
-2015-08-18T00:30:00Z	  2.0460000000000003
-2015-08-18T00:36:00Z	  2.059
+time                   moving_average
+----                   --------------
+2015-08-18T00:06:00Z   2.09
+2015-08-18T00:12:00Z   2.072
+2015-08-18T00:18:00Z   2.077
+2015-08-18T00:24:00Z   2.0835
+2015-08-18T00:30:00Z   2.0460000000000003
 ```
 
-The first value in the `moving_average` column is the average of `2.064` and
-`2.116`, the second value in the `moving_average` column is the average of
-`2.116` and `2.028`.
+The query returns the rolling average across a two-field-value window for the `water_level` field key and the `h2o_feet` measurement.
+The first result (`2.09`) is the average of the first two points in the raw data: (`2.064 + 2.116) / 2`).
+The second result (`2.072`) is the average of the second two points in the raw data: (`2.116 + 2.028) / 2`). 
 
-* Select the minimum `water_level` at 12 minute intervals and calculate the
-moving average across every 2 field values:
-
+#### Example 2: Calculate the moving average of the field values associated with each field key in a measurement
 ```
-> SELECT MOVING_AVERAGE(MIN("water_level"),2) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:36:00Z' GROUP BY time(12m)
+> SELECT MOVING_AVERAGE(*,3) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
+
 name: h2o_feet
---------------
-time			                moving_average
-2015-08-18T00:12:00Z	  2.0460000000000003
-2015-08-18T00:24:00Z	  2.0345000000000004
-2015-08-18T00:36:00Z	  2.0540000000000003
+time                   moving_average_water_level
+----                   --------------------------
+2015-08-18T00:12:00Z   2.0693333333333332
+2015-08-18T00:18:00Z   2.09
+2015-08-18T00:24:00Z   2.065
+2015-08-18T00:30:00Z   2.0726666666666667
 ```
 
-To get those results, InfluxDB first selects the `MIN()` `water_level` for every
-12 minute interval:
+The query returns the rolling average across a three-field-value window for each field key that stores numerical values in the `h2o_feet` measurement.
+The `h2o_feet` measurement has one numerical field: `water_level`.
+
+#### Example 3: Calculate the moving average of the field values associated with each field key that matches a regular expression
 ```
+> SELECT MOVING_AVERAGE(/level/,4) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
+
 name: h2o_feet
---------------
-time			                min
-2015-08-18T00:00:00Z	  2.064
-2015-08-18T00:12:00Z	  2.028
-2015-08-18T00:24:00Z	  2.041
-2015-08-18T00:36:00Z	  2.067
+time                    moving_average_water_level
+----                    --------------------------
+2015-08-18T00:18:00Z    2.0835
+2015-08-18T00:24:00Z    2.07775
+2015-08-18T00:30:00Z    2.0615
 ```
 
-It then uses those values to calculate the moving average across every 2 field
-values; the first result in the `moving_average` column the average of `2.064`
-and `2.028`, and the second result is the average of `2.028` and `2.041`.
+The query returns the rolling average across a four-field-value window for each field key that stores numerical values and includes the word `level` in the `h2o_feet` measurement.
+
+#### Example 4: Calculate the moving average of the field values associated with a field key and include several clauses
+```
+> SELECT MOVING_AVERAGE("water_level",2) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' ORDER BY time DESC LIMIT 2 OFFSET 3
+
+name: h2o_feet
+time                   moving_average
+----                   --------------
+2015-08-18T00:06:00Z   2.072
+2015-08-18T00:00:00Z   2.09
+```
+
+The query returns the rolling average across a two-field-value window for the `water_level` field key in the `h2o_feet` measurement.
+It covers the [time range](/influxdb/v1.2/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.2/query_language/data_exploration/#order-by-time-desc).
+The query also [limits](/influxdb/v1.2/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to two and [offsets](/influxdb/v1.2/query_language/data_exploration/#the-offset-and-soffset-clauses) results by three points.
+
+### Advanced Syntax
+
+```
+SELECT MOVING_AVERAGE(<function> ([ * | <field_key> | /<regular_expression>/ ]) , N ) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+
+### Description of Advanced Syntax
+The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
+The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `MOVING_AVERAGE()` function to those results.
+
+`MOVING_AVERAGE()` supports the following nested functions:
+[`COUNT()`](#count),
+[`MEAN()`](#mean),
+[`MEDIAN()`](#median),
+[`MODE()`](#mode),
+[`SUM()`](#sum),
+[`FIRST()`](#first),
+[`LAST()`](#last),
+[`MIN()`](#min),
+[`MAX()`](#max), and
+[`PERCENTILE()`](#percentile).
+
+### Examples of Advanced Syntax
+
+#### Example 1: Calculate the moving average of maximum values
+```
+> SELECT MOVING_AVERAGE(MAX("water_level"),2) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
+
+name: h2o_feet
+time                   moving_average
+----                   --------------
+2015-08-18T00:12:00Z   2.121
+2015-08-18T00:24:00Z   2.0885
+```
+
+The query returns the rolling average across a two-value window of [maximum](#max) `water_level`s that are calculated at 12-minute intervals.
+
+To get those results, InfluxDB first calculates the maximum `water_level`s at 12-minute intervals.
+This step is the same as using the `MAX()` function with the `GROUP BY time()` clause and without `MOVING_AVERAGE()`:
+```
+> SELECT MAX("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
+
+name: h2o_feet
+time                   max
+----                   ---
+2015-08-18T00:00:00Z   2.116
+2015-08-18T00:12:00Z   2.126
+2015-08-18T00:24:00Z   2.051
+```
+
+Next, InfluxDB calculates the rolling average across a two-value window using those maximum values.
+The first final result (`2.121`) is the average of the first two maximum values (`(2.116 + 2.126) / 2`).
 
 ## NON_NEGATIVE_DERIVATIVE()
 Returns the non-negative rate of change for the values in a single [field](/influxdb/v1.2/concepts/glossary/#field) in a [series](/influxdb/v1.2/concepts/glossary/#series).
