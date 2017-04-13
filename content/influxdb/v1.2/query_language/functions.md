@@ -2717,38 +2717,74 @@ Next, InfluxDB calculates the rolling average across a two-value window using th
 The first final result (`2.121`) is the average of the first two maximum values (`(2.116 + 2.126) / 2`).
 
 ## NON_NEGATIVE_DERIVATIVE()
-Returns the non-negative rate of change for the values in a single [field](/influxdb/v1.2/concepts/glossary/#field) in a [series](/influxdb/v1.2/concepts/glossary/#series).
-InfluxDB calculates the difference between chronological field values and converts those results into the rate of change per `unit`.
-The `unit` argument is optional and, if not specified, defaults to one second (`1s`).
 
-The basic `NON_NEGATIVE_DERIVATIVE()` query:
+Returns the non-negative rate of change between subsequent [field values](/influxdb/v1.2/concepts/glossary/#field-value).
+Non-negative rates of change include positive rates of change and rates of change that equal zero.
+
+### Basic Syntax
 ```
-SELECT NON_NEGATIVE_DERIVATIVE(<field_key>, [<unit>]) FROM <measurement_name> [WHERE <stuff>]
-```
-
-Valid time specifications for `unit` are:  
-`u` or `µ`&emsp;microseconds  
-`ms`&nbsp;&nbsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;milliseconds  
-`s`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;seconds  
-`m`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;minutes  
-`h`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;hours  
-`d`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;days  
-`w`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;weeks
-
-`NON_NEGATIVE_DERIVATIVE()` also works with a nested function coupled with a `GROUP BY time()` clause.
-For queries that include those options, InfluxDB first performs the aggregation, selection, or transformation across the time interval specified in the `GROUP BY time()` clause.
-It then calculates the difference between chronological field values and
-converts those results into the rate of change per `unit`.
-The `unit` argument is optional and, if not specified, defaults to the same
-interval as the `GROUP BY time()` interval.
-
-The `NON_NEGATIVE_DERIVATIVE()` query with an aggregation function and `GROUP BY time()` clause:
-```
-SELECT NON_NEGATIVE_DERIVATIVE(AGGREGATION_FUNCTION(<field_key>),[<unit>]) FROM <measurement_name> WHERE <stuff> GROUP BY time(<aggregation_interval>)
+SELECT NON_NEGATIVE_DERIVATIVE( [ * | <field_key> | /<regular_expression>/ ] [ , <unit> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-See [`DERIVATIVE()`](/influxdb/v1.2/query_language/functions/#derivative) for example queries.
-All query results are the same for `DERIVATIVE()` and `NON_NEGATIVE_DERIVATIVE` except that `NON_NEGATIVE_DERIVATIVE()` returns only the positive values.
+### Description of Basic Syntax
+InfluxDB calculates the difference between subsequent field values and converts those results into the rate of change per `unit`.
+The `unit` argument is an integer followed by a [duration literal](/influxdb/v1.2/query_language/spec/#literals) and it is optional.
+If the query does not specify the `unit`, the unit defaults to one second (`1s`).
+`NON_NEGATIVE_DERIVATIVE()` returns only positive rates of change or rates of change that equal zero.
+
+`NON_NEGATIVE_DERIVATIVE(field_key)`  
+&emsp;&emsp;&emsp;
+Returns the non-negative rate of change between subsequent field values associated with the [field key](/influxdb/v1.2/concepts/glossary/#field-key).
+
+`NON_NEGATIVE_DERIVATIVE(/regular_expression/)`  
+&emsp;&emsp;&emsp;
+Returns the non-negative rate of change between subsequent field values associated with each field key that matches the [regular expression](/influxdb/v1.2/query_language/data_exploration/#regular-expressions).
+
+`NON_NEGATIVE_DERIVATIVE(*)`  
+&emsp;&emsp;&emsp;
+Returns the non-negative rate of change between subsequent field values associated with each field key in the [measurement](/influxdb/v1.2/concepts/glossary/#measurement).
+
+`NON_NEGATIVE_DERIVATIVE()` supports int64 and float64 field value [data types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types).
+
+The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.2/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals).
+See the [Advanced Syntax](#advanced-syntax-4) section for how to use `NON_NEGATIVE_DERIVATIVE()` with a `GROUP BY time()` clause.
+
+### Examples of Basic Syntax
+
+See the examples in the [`DERIVATIVE()` documentation](#examples-of-basic-syntax-1).
+`NON_NEGATIVE_DERIVATIVE()` behaves the same as the `DERIVATIVE()` function but `NON_NEGATIVE_DERIVATIVE()` returns only positive rates of change or rates of change that equal zero.
+
+### Advanced Syntax
+```
+SELECT NON_NEGATIVE_DERIVATIVE(<function> ([ * | <field_key> | /<regular_expression>/ ]) [ , <unit> ] ) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+
+### Description of Advanced Syntax
+
+The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
+The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `NON_NEGATIVE_DERIVATIVE()` function to those results.
+
+The `unit` argument is an integer followed by a [duration literal](/influxdb/v1.2/query_language/spec/#literals) and it is optional.
+If the query does not specify the `unit`, the `unit` defaults to the `GROUP BY time()` interval.
+Note that this behavior is different from the [basic syntax's](#basic-syntax-4) default behavior.
+`NON_NEGATIVE_DERIVATIVE()` returns only positive rates of change or rates of change that equal zero.
+
+`NON_NEGATIVE_DERIVATIVE()` supports the following nested functions:
+[`COUNT()`](#count),
+[`MEAN()`](#mean),
+[`MEDIAN()`](#median),
+[`MODE()`](#mode),
+[`SUM()`](#sum),
+[`FIRST()`](#first),
+[`LAST()`](#last),
+[`MIN()`](#min),
+[`MAX()`](#max), and
+[`PERCENTILE()`](#percentile).
+
+### Examples of Advanced Syntax
+
+See the examples in the [`DERIVATIVE()` documentation](#examples-of-advanced-syntax-1).
+`NON_NEGATIVE_DERIVATIVE()` behaves the same as the `DERIVATIVE()` function but `NON_NEGATIVE_DERIVATIVE()` returns only positive rates of change or rates of change that equal zero.
 
 ## Include multiple functions in a single query
 Separate multiple functions in one query with a `,`.
