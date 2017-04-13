@@ -2786,6 +2786,119 @@ Note that this behavior is different from the [basic syntax's](#basic-syntax-4) 
 See the examples in the [`DERIVATIVE()` documentation](#examples-of-advanced-syntax-1).
 `NON_NEGATIVE_DERIVATIVE()` behaves the same as the `DERIVATIVE()` function but `NON_NEGATIVE_DERIVATIVE()` returns only positive rates of change or rates of change that equal zero.
 
+# Predictors
+
+## HOLT_WINTERS()
+Returns N number of predicted [field values](/influxdb/v1.2/concepts/glossary/#field-value) using the
+[Holt-Winters](https://www.otexts.org/fpp/7/5) seasonal method.
+
+Use `HOLT_WINTERS()` to:
+
+* Predict when data values will cross a given threshold
+* Compare predicted values with actual values to detect anomalies in your data
+
+### Syntax
+```
+SELECT HOLT_WINTERS[_WITH-FIT](<function>(<field_key>),<N>,<S>) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+
+### Description of Syntax
+
+`HOLT_WINTERS(function(field_key),N,S)` returns `N` seasonally adjusted
+predicted field values for the specified [field key](/influxdb/v1.2/concepts/glossary/#field-key).
+
+The `N` predicted values occur at the same interval as the [`GROUP BY time()` interval](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals).
+If your `GROUP BY time()` interval is `6m` and `N` is `3` you'll
+receive three predicted values that are each six minutes apart.
+
+`S` is the seasonal pattern parameter and delimits the length of a seasonal
+pattern according to the `GROUP BY time()` interval.
+If your `GROUP BY time()` interval is `2m` and `S` is `3`, then the
+seasonal pattern occurs every six minutes, that is, every three data points.
+If you do not want to seasonally adjust your predicted values, set `S` to `0`
+or `1.`
+
+`HOLT_WINTERS_WITH_FIT(function(field_key),N,S)` returns the fitted values in
+addition to `N` seasonally adjusted predicted field values for the specified field key.
+
+`HOLT_WINTERS()` and `HOLT_WINTERS_WITH_FIT()` work with data that occur at
+consistent time intervals; the nested InfluxQL function and the
+`GROUP BY time()` clause ensure that the Holt-Winters functions operate on regular data.
+
+`HOLT_WINTERS()` and `HOLT_WINTERS_WITH_FIT()` support int64 and float64 field value [data types](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types).
+
+### Examples
+
+#### Example 1: Predict field values associated with a field key
+
+##### Raw Data
+<br>
+Example 1 uses [Chronograf](https://github.com/influxdata/chronograf) to visualize the data.
+The example focuses the following subsample of the [`NOAA_water_database` data](/influxdb/v1.2/query_language/data_download/):
+
+```
+SELECT "water_level" FROM "NOAA_water_database"."autogen"."h2o_feet" WHERE "location"='santa_monica' AND time >= '2015-08-22 22:12:00' AND time <= '2015-08-28 03:00:00'
+```
+
+![Raw Data](/img/influxdb/hw-raw-data-1-2.png)
+
+##### Step 1: Match the Trends of the Raw Data
+<br>
+Write a `GROUP BY time()` query that matches the general trends of the raw `water_level` data.
+Here, we use the [`FIRST()`](#first) function:
+
+```
+SELECT FIRST("water_level") FROM "NOAA_water_database"."autogen"."h2o_feet" WHERE "location"='santa_monica' and time >= '2015-08-22 22:12:00' and time <= '2015-08-28 03:00:00' GROUP BY time(379m,348m)
+```
+
+In the `GROUP BY time()` clause, the first argument (`379m`) matches
+the length of time that occurs between each peak and trough in the `water_level` data.
+The second argument (`348m`) is the
+[offset interval](/influxdb/v1.2/query_language/data_exploration/#advanced-group-by-time-syntax).
+The offset interval alters InfluxDB's default `GROUP BY time()` boundaries to
+match the time range of the raw data.
+
+The blue line shows the results of the query:
+
+![First step](/img/influxdb/hw-first-step-1-2.png)
+
+##### Step 2: Determine the Seasonal Pattern
+<br>
+Identify the seasonal pattern in the data using the information from the
+query in step 1.
+
+Focusing on the blue line in the graph below, the pattern in the `water_level` data repeats about every 25 hours and 15 minutes.
+There are four data points per season, so `4` is the seasonal pattern argument.
+
+![Second step](/img/influxdb/hw-second-step-1-2.png)
+
+##### Step 3: Apply the HOLT_WINTERS() function
+<br>
+Add the Holt-Winters function to the query.
+Here, we use `HOLT_WINTERS_WITH_FIT()` to view both the fitted values and the predicted values:
+
+```
+SELECT HOLT_WINTERS_WITH_FIT(FIRST("water_level"),10,4) FROM "NOAA_water_database"."autogen"."h2o_feet" WHERE "location"='santa_monica' AND time >= '2015-08-22 22:12:00' AND time <= '2015-08-28 03:00:00' GROUP BY time(379m,348m)
+```
+
+In the `HOLT_WINTERS_WITH_FIT()` function, the first argument (`10`) requests 10 predicted field values.
+Each predicted point is `379m` apart, the same interval as the first argument in the `GROUP BY time()` clause.
+The second argument in the `HOLT_WINTERS_WITH_FIT()` function (`4`) is the seasonal pattern that we determined in the previous step.
+
+The blue line shows the results of the query:
+
+![Third step](/img/influxdb/hw-third-step-1-2.png)
+
+### Common Issues with `HOLT_WINTERS()`
+
+#### Issue 1: `HOLT_WINTERS()` and receiving fewer than `N` points 
+In some cases, users may receive fewer predicted points than
+requested by the `N` parameter.
+That behavior occurs when the math becomes unstable and cannot forecast more
+points.
+It implies that either `HOLT_WINTERS()` is not suited for the dataset or that
+the seasonal adjustment parameter is invalid and is confusing the algorithm.
+
 ## Include multiple functions in a single query
 Separate multiple functions in one query with a `,`.
 
@@ -2829,131 +2942,6 @@ time			               dream_name
 1970-01-01T00:00:00Z	 4.442107025822521
 ```
 
-# Predictors
-
-## HOLT_WINTERS()
-Returns N number of predicted values for a single
-[field](/influxdb/v1.2/concepts/glossary/#field) using the
-[Holt-Winters](https://www.otexts.org/fpp/7/5) seasonal method.
-The seasonal adjustment of the predicted values is optional.
-The field must be of type int64 or float64.
-
-Use `HOLT_WINTERS()` to:
-
-* Predict when data values will cross a given threshold.
-* Compare predicted values with actual values to detect anomalies in your data.
-
-Returns only the predicted values:
-```
-SELECT HOLT_WINTERS(FUNCTION(<field_key>),<N>,<S>) FROM <measurement_name> WHERE <stuff> GROUP BY time(<interval>)[,<stuff>]
-```
-
-Returns the fitted values and the predicted values:
-```
-SELECT HOLT_WINTERS_WITH_FIT(FUNCTION(<field_key>),<N>,<S>) FROM <measurement_name> WHERE <stuff> GROUP BY time(<interval>)[,<stuff>]
-```
-
-Syntax explanation:
-
-`N` is the number of predicted values.
-Those values occur at the same interval as the `GROUP BY time()` interval.
-If your `GROUP BY time()` interval is `6m` and `N` is `3` you'll
-receive three predicted values that are each six minutes apart.
-
-`S` is the seasonal pattern parameter.
-The parameter delimits the length of a seasonal pattern according to the
-`GROUP BY time()` interval.
-If your `GROUP BY time()` interval is `2m` and `S` is `3`, then the
-seasonal pattern occurs every six minutes, that is, every three data points.
-If you do not want to seasonally adjust your predicted values, set `S` to `0`
-or `1.`
-
-Notice that `HOLT_WINTERS()` requires the use of another InfluxQL function and a
-`GROUP BY time()` clause.
-That ensures that the function receives data that occur at consistent time
-intervals.
-
-> **Note:** In some cases, users may receive fewer predicted points than
-requested by the `N` parameter.
-That behavior occurs when the math becomes unstable and cannot forecast more
-points.
-It implies that either `HOLT_WINTERS()` is not suited for the dataset or that
-the seasonal adjustment parameter is invalid and is confusing the algorithm.
-
-**Example:**
-
-In the following example we'll apply `HOLT_WINTERS()` to the data in the
-`NOAA_water_database`, and we'll show the results using
-[Chronograf](https://docs.influxdata.com/chronograf/v1.2/) visualizations.
-
-**Raw Data**
-
-Our query focuses on the raw `water_level` data in `santa_monica` between August
-22, 2015 at 22:12 and August 28, 2015 at 03:00:
-```
-SELECT "water_level" FROM "h2o_feet" WHERE "location"='santa_monica' AND time >= '2015-08-22 22:12:00' AND time <= '2015-08-28 03:00:00'
-```
-
-![Raw Data](/img/influxdb/hw_raw_data.png)
-
-**Step 1: Create a Query to Match the Trends of the Raw Data**
-
-We start by writing a `GROUP BY time()` query to match the general trends of the
-raw `water_level` data.
-We could do this with almost any InfluxQL function, but here we use
-[`FIRST()`](#first).
-
-Focusing on the `GROUP BY time()` arguments in the query below, the first
-argument (`379m`) matches the length of time that occurs between each peak and
-trough of the `water_level` data.
-The second argument (`348m`) is the
-[offset interval](/influxdb/v1.2/query_language/data_exploration/#advanced-group-by-time-syntax).
-The offset interval alters InfluxDB's default `GROUP BY time()` boundaries to
-match the time range of the raw data.
-
-The green line shows the results of the query:
-```
-SELECT first("water_level") FROM "h2o_feet" WHERE "location"='santa_monica' and time >= '2015-08-22 22:12:00' and time <= '2015-08-28 03:00:00' GROUP BY time(379m,348m)
-```
-
-![First step](/img/influxdb/hw_first_step.png)
-
-**Step 2: Determine the Seasonal Pattern**
-
-Now that we have a query that matches the trends of the raw `water_level` data
-it's time to determine the seasonal pattern in the data.
-We'll use this information when we implement the `HOLT_WINTERS()` function in
-the next step.
-
-Focusing on the green line in the chart below, notice the pattern that repeats
-about every 25 hours and 15 minutes.
-That's four data points per season, so `4` is our seasonal pattern argument.
-
-![Second step](/img/influxdb/hw_second_step.png)
-
-**Step 3: Include the HOLT_WINTERS() function**
-
-Now we add the `HOLT_WINTERS()` function to our query.
-Here, we'll use `HOLT_WINTERS_WITH_FIT()` so that the query results show both
-the fitted values and the predicted values.
-
-Focusing on the `HOLT_WINTERS_WITH_FIT()` arguments in the query below, the
-first argument (`10`) tells the function to predict 10 data points.
-Each point will be `379m` apart, the same interval as the first argument in the
-`GROUP BY time()` clause.
-
-The second argument (`4`) is the seasonal pattern that we determined in the
-previous step.
-
-```
-SELECT holt_winters_with_fit(first(water_level),10,4) FROM h2o_feet where location='santa_monica' and time >= '2015-08-22 22:12:00' and time <= '2015-08-28 03:00:00' group by time(379m,348m)
-```
-
-![Third step](/img/influxdb/hw_third_step.png)
-
-And that's it!
-We've successfully predicted water levels in Santa Monica between August 28,
-2015 at 04:32 and August 28, 2015 at 13:23.
 
 # Other
 ### Sample Data
