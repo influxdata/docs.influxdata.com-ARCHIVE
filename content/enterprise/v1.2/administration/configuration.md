@@ -1016,23 +1016,22 @@ Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_CONCURRENCY`
 ###  retry-rate-limit = 0
 
 The rate (in bytes per second) at which the hinted handoff retries writes.
-The limit applies per remote node queue.
-Set to `0` to disable the rate limit.
+The `retry-rate-limit` option is no longer in use and will be removed from the configuration file in a future release.
+Changing the `retry-rate-limit` setting has no effect on your cluster.
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_RATE_LIMIT`
 
 ###  retry-interval = "1s"
 
-The initial interval at which the hinted handoff retries a write after it fails.
-
-> **Note:** Hinted handoff begins retrying writes to an unreachable node at the interval defined by the `retry-interval`. If any error occurs, it will backoff exponentially until it reaches the interval defined by the `retry-max-interval`. Hinted handoff then retries writes at that interval until it succeeds. The interval resets to the `retry-interval` once hinted handoff successfully completes writes to the node.
+The time period after which the hinted handoff retries a write after the write fails.
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_INTERVAL`
 
 ###  retry-max-interval = "10s"  
 
-The maximum interval at which the hinted handoff retries a write after it fails.
-It retries at this interval until it succeeds.
+The maximum interval after which the hinted handoff retries a write after the write fails.
+The `retry-max-interval` option is no longer in use and will be removed from the configuration file in a future release.
+Changing the `retry-max-interval` setting has no effect on your cluster.
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_MAX_INTERVAL`
 
