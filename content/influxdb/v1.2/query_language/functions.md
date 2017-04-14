@@ -11,16 +11,25 @@ Use InfluxQL functions to aggregate, select, transform, and predict data.
 
 | Aggregations | Selectors | Transformations | Predictors |
 |--------------|-----------|-----------------|------------|
-| [COUNT()](#count)        | [BOTTOM()](#bottom)         | [CEILING()](#ceiling)                                 | [HOLT_WINTERS()](#holt-winters)  
-| [DISTINCT()](#distinct)  | [FIRST()](#first)           | [CUMULATIVE_SUM()](#cumulative-sum)                     |
-| [INTEGRAL()](#integral)  | [LAST()](#last)             | [DERIVATIVE()](#derivative)                           |
-| [MEAN()](#mean)          | [MAX()](#max)               | [DIFFERENCE()](#difference)                           |
-| [MEDIAN()](#median)      | [MIN()](#min)               | [ELAPSED()](#elapsed)                                 |
-| [MODE()](#mode)          | [PERCENTILE()](#percentile) | [FLOOR()](#floor)                                     |
-| [SPREAD()](#spread)      | [SAMPLE()](#sample)         | [HISTOGRAM()](#histogram)                             |
-| [STDDEV()](#stddev)      | [TOP()](#top)               | [MOVING_AVERAGE()](#moving-average)                   |
-| [SUM()](#sum)            |                             | [NON_NEGATIVE_DERIVATIVE()](#non-negative-derivative) |
+| [COUNT()](#count)        | [BOTTOM()](#bottom)         | [CUMULATIVE_SUM()](#cumulative-sum)                   | [HOLT_WINTERS()](#holt-winters)  
+| [DISTINCT()](#distinct)  | [FIRST()](#first)           | [DERIVATIVE()](#derivative)                           |
+| [INTEGRAL()](#integral)  | [LAST()](#last)             | [DIFFERENCE()](#difference)                           |
+| [MEAN()](#mean)          | [MAX()](#max)               | [ELAPSED()](#elapsed)                                 |
+| [MEDIAN()](#median)      | [MIN()](#min)               | [HISTOGRAM()](#histogram)                             |
+| [MODE()](#mode)          | [PERCENTILE()](#percentile) | [MOVING_AVERAGE()](#moving-average)                   |
+| [SPREAD()](#spread)      | [SAMPLE()](#sample)         | [NON_NEGATIVE_DERIVATIVE()](#non-negative-derivative) |
+| [STDDEV()](#stddev)      | [TOP()](#top)               |                                                       |
+| [SUM()](#sum)            |                             |                                                       |
 
+
+InfluxQL also supports the following "value transform" functions:
+
+* [ABS()](#abs-value), [POW()](#pow-value-exponent), [SQRT()](#sqrt-value)
+* [EXP()](#exp-value), [LOG()](#log-value), [LOG10()](#log10-value)
+* [SIN(), COS(), TAN()](#sin-value-cos-value-tan-value)
+* [ASIN(), ACOS(), ATAN()](#asin-value-acos-value-atan-value)
+* [DEG2RAD(), RAD2DEG()](#deg2rad-value-rad2deg-value)
+* [FLOOR()](#floor-value-precision), [CEILING()](#ceiling-value-precision), [ROUND()](#round-value-n-decimal-places)
 
 Useful InfluxQL for functions:  
 
@@ -1081,12 +1090,6 @@ In the case of a tie, InfluxDB returns the value with the earlier timestamp.
 
 # Transformations
 
-## CEILING()
-`CEILING()` is not yet functional.
-
-<dt> See GitHub Issue [#5930](https://github.com/influxdata/influxdb/issues/5930) for more information.
-</dt>
-
 ## CUMULATIVE_SUM()
 Returns the cumulative sum of consecutive field values for a single
 [field](/influxdb/v1.2/concepts/glossary/#field).
@@ -1529,12 +1532,6 @@ time			                elapsed
 2015-08-18T00:24:00Z	  0
 ```
 
-## FLOOR()
-`FLOOR()` is not yet functional.
-
-<dt> See GitHub Issue [#5930](https://github.com/influxdb/influxdb/issues/5930) for more information.
-</dt>
-
 ## HISTOGRAM()
 `HISTOGRAM()` is not yet functional.
 
@@ -1834,3 +1831,107 @@ SELECT holt_winters_with_fit(first(water_level),10,4) FROM h2o_feet where locati
 And that's it!
 We've successfully predicted water levels in Santa Monica between August 28,
 2015 at 04:32 and August 28, 2015 at 13:23.
+
+# Value Transforms
+
+Value transform functions operate on one datapoint at a time and just transform the value in some way, leaving the timestamps unchanged.
+
+These only operate on integer and float data, not on booleans or strings.
+Where a transform cannot return a real number for a particular input value (such as `asin(2)` or `sqrt(-2)`), no value is returned.
+
+Unlike other functions, value transforms can be nested, and can operate on the results of arithmetic operators.  
+The following queries are all valid:
+
+```
+SELECT water_level, 3 * abs(water_level - 100.4) as wl FROM h2o_feet limit 3
+
+SELECT max(water_level), sqrt(abs(water_level)) FROM h2o_feet
+
+SELECT abs(wl) FROM (SELECT mean(water_level) as wl FROM h2o_feet)
+
+SELECT mean(*) FROM (SELECT water_level, abs(water_level) FROM h2o_feet)
+```
+
+## ABS(value)
+
+Return the absolute value of each input.
+The returned data has the same datatype as the input.
+
+## ASIN(value) / ACOS(value) / ATAN(value)
+
+Return the arcsine/arccosine/arctangent of each input value, in radians.
+If you require output in degrees, convert it using e.g. `atan(rad2deg(value))`.
+The returned data is always floats.
+
+## CEILING(value, [precision])
+
+Round values upwards.
+The optional second argument specifies the precision to round to and defaults to 1, which rounds up to the next integer value.
+The *precision* argument (if specified) must be a literal positive number like `3` or `0.1`.
+
+`SELECT ceiling(x) FROM ...` returns the smallest integer value which is greater than or equal to each value of x. 
+
+`SELECT ceiling(x, 5) FROM ...` returns the smallest integer multiple of 5 which is greater than or equal to each value of x.
+
+Where the `precision` argument is an integer (or unspecified), this function returns integers.  Otherwise it returns floats.
+
+## DEG2RAD(degree_value) / RAD2DEG(radian_value)
+
+Convert between radians and degrees.
+The returned data is always floats.
+
+## EXP(value)
+
+Return the base-e exponential of the input values (`e**value`).
+The returned data is always floats.
+
+## FLOOR(value, [precision])
+
+Round values downwards.
+The optional second argument specifies the precision to round to and defaults to 1, which rounds down to the next integer value.
+The *precision* argument (if specified) must be a literal positive number like `3` or `0.1`.
+
+`SELECT floor(x) FROM ...` returns the greatest integer value which is less than or equal to each value of x. 
+
+`SELECT floor(x, 5) FROM ...` returns the greatest integer multiple of 5 which is less than or equal to each value of x.
+
+Where the `precision` argument is an integer (or unspecified), this function returns integers.  Otherwise it returns floats. 
+
+## LOG(value)
+
+Return the natural (base e) logerithm of each input value.
+The returned data is always floats.
+
+## LOG10(value)
+
+Return the decimal logerithm of each input value.
+The returned data is always floats.
+
+## POW(value, exponent)
+
+Raises each value of the input to the specified power.  The *exponent* argument must be a literal number like `3` or `-2.3`.
+
+The returned data is floats, unless the input data is integers **and** the exponent is a positive integer. 
+
+## SQRT(value)
+
+Return the square root of each input value.
+The returned data is always floats.
+
+## SIN(value) / COS(value) / TAN(value)
+
+Return the sine/cosine/tangent of each radian input value.
+If your data is in degrees, convert it to radians using e.g. `sin(deg2rad(value))`.
+The returned data is always floats.
+
+## ROUND(value, [n_decimal_places])
+
+Round values to a certain number of decimal places (default 0).  The *n_decimal_places* argument (if specified) must be a literal integer like `3` or `-2`.
+
+`SELECT round(x) FROM ...` returns the closest integer value to each value of x. 
+
+`SELECT floor(x, 3) FROM ...` returns each value of x rounded to 3 decimal places.
+
+`SELECT floor(x, -2) FROM ...` returns each value of x rounded to the nearest hundred.
+
+Where *n_decimal_places* is unspecified, zero or negative, this function returns integers.  Otherwise it returns floats.
