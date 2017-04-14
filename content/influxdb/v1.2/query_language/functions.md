@@ -2899,50 +2899,152 @@ points.
 It implies that either `HOLT_WINTERS()` is not suited for the dataset or that
 the seasonal adjustment parameter is invalid and is confusing the algorithm.
 
-## Include multiple functions in a single query
-Separate multiple functions in one query with a `,`.
+# Other
+## Sample Data
+The data used in this document are available for download on the [Sample Data](/influxdb/v1.2/query_language/data_download/) page.
 
-Calculate the [minimum](/influxdb/v1.2/query_language/functions/#min) `water_level` and the [maximum](/influxdb/v1.2/query_language/functions/#max) `water_level` with a single query:
+## General Syntax for Functions
+
+### Specify Multiple Functions in the SELECT Clause
+
+#### Syntax
+
 ```
-> SELECT MIN("water_level"), MAX("water_level") FROM "h2o_feet"
+SELECT <function>(),<function>() FROM_clause [...]
+```
+
+#### Description of Syntax
+
+Separate multiple functions in one `SELECT` statement with a comma (`,`).
+
+#### Examples
+
+##### Example 1: Calculate the mean and median field values in one query
+<br>
+```
+> SELECT MEAN("water_level"),MEDIAN("water_level") FROM "h2o_feet"
+
 name: h2o_feet
---------------
-time			               min	   max
-1970-01-01T00:00:00Z	 -0.61	 9.964
+time                  mean               median
+----                  ----               ------
+1970-01-01T00:00:00Z  4.442107025822522  4.124
 ```
+The query returns the [average](#mean) and [median](#median) field values in the `water_level` field key.
 
-## Change the value reported for intervals with no data with `fill()`
-By default, queries with an InfluxQL function report `null` values for intervals with no data.
-Append `fill()` to the end of your query to alter that value.
-For a complete discussion of `fill()`, see [Data Exploration](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals-and-fill).
-
-> **Note:** `fill()` works differently with `COUNT()`.
-See [the documentation on `COUNT()`](/influxdb/v1.2/query_language/functions/#count-and-controlling-the-values-reported-for-intervals-with-no-data) for a function-specific use of `fill()`.
-
-## Rename the output column's title with `AS`
-
-By default, queries that include a function output a column that has the same name as that function.
-If you'd like a different column name change it with an `AS` clause.
-
-Before:
+##### Example 2: Calculate the mode of two fields in one query
+<br>
 ```
-> SELECT MEAN("water_level") FROM "h2o_feet"
+> SELECT MODE("water_level"),MODE("level description") FROM "h2o_feet"
+
 name: h2o_feet
---------------
-time			               mean
-1970-01-01T00:00:00Z	 4.442107025822521
+time                  mode  mode_1
+----                  ----  ------
+1970-01-01T00:00:00Z  2.69  between 3 and 6 feet
+```
+The query returns the [mode](#mode) field values for the `water_level` field key and for the `level description` field key.
+The `water_level` mode is in the `mode` column and the `level description` mode is in the `mode_1` column.
+The system can't return more than one column with the same name so it renames the second `mode` column to `mode_1`.
+
+See [Rename the Output Field Key](#rename-the-output-field-key) for how to configure the output column headers.
+
+##### Example 3: Calculate the minimum and maximum field values in one query
+<br>
+```
+> SELECT MIN("water_level"), MAX("water_level") [...]
+
+name: h2o_feet
+time                  min    max
+----                  ---    ---
+1970-01-01T00:00:00Z  -0.61  9.964
 ```
 
-After:
+The query returns the [minimum](#min) and [maximum](#max) field values in the `water_level` field key.
+
+Notice that the query returns `1970-01-01T00:00:00Z`, InfluxDB's null-timestamp equivalent, as the timestamp.
+`MIN()` and `MAX()` are [selector](#selectors) functions; when a selector function is the only function in the `SELECT` clause, it returns a specific timestamp.
+Because `MIN()` and `MAX()` return two different timestamps (see below), the system overrides those timestamps with the null timestamp equivalent.
+
+```
+>  SELECT MIN("water_level") FROM "h2o_feet"
+
+name: h2o_feet
+time                  min
+----                  ---
+2015-08-29T14:30:00Z  -0.61    <--- Timestamp 1
+
+>  SELECT MAX("water_level") FROM "h2o_feet"
+
+name: h2o_feet
+time                  max
+----                  ---
+2015-08-29T07:24:00Z  9.964    <--- Timestamp 2
+```
+
+### Rename the Output Field Key
+#### Syntax
+
+```
+SELECT <function>() AS <field_key> [...]
+```
+
+#### Description of Syntax
+
+By default, functions return results under a field key that matches the function name.
+Include an `AS` clause to specify the name of the output field key.
+
+#### Examples
+
+##### Example 1: Specify the output field key
+<br>
 ```
 > SELECT MEAN("water_level") AS "dream_name" FROM "h2o_feet"
+
 name: h2o_feet
---------------
-time			               dream_name
-1970-01-01T00:00:00Z	 4.442107025822521
+time                  dream_name
+----                  ----------
+1970-01-01T00:00:00Z  4.442107025822522
 ```
 
+The query returns the [average](#mean) field value of the `water_level` field key and renames the output field key to `dream_name`.
+Without the `AS` clause, the  query returns `mean` as the output field key:
 
-# Other
-### Sample Data
-The data used in this document are available for download on the [Sample Data](/influxdb/v1.2/query_language/data_download/) page.
+```
+> SELECT MEAN("water_level") FROM "h2o_feet"
+
+name: h2o_feet
+time                  mean
+----                  ----
+1970-01-01T00:00:00Z  4.442107025822522
+```
+
+##### Example 2: Specify the output field key for multiple functions
+<br>
+```
+> SELECT MEDIAN("water_level") AS "med_wat",MODE("water_level") AS "mode_wat" FROM "h2o_feet"
+
+name: h2o_feet
+time                  med_wat  mode_wat
+----                  -------  --------
+1970-01-01T00:00:00Z  4.124    2.69
+```
+
+The query returns the [median](#median) and [mode](#mode) field values for the `water_level` field key and renames the output field keys to `med_wat` and `mode_wat`.
+Without the `AS` clauses, the  query returns `median` and `mode` as the output field keys:
+
+```
+> SELECT MEDIAN("water_level"),MODE("water_level") FROM "h2o_feet"
+
+name: h2o_feet
+time                  median  mode
+----                  ------  ----
+1970-01-01T00:00:00Z  4.124   2.69
+```
+
+### Change the Values Reported for Intervals with no Data 
+
+By default, queries with an InfluxQL function and a [`GROUP BY time()` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals) report null values for intervals with no data.
+Include `fill()` at the end of the `GROUP BY` clause to change that value.
+See [Data Exploration](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals-and-fill) for a complete discussion of `fill()`.
+
+
+
