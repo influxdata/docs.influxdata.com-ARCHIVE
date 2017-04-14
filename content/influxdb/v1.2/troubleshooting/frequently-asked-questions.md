@@ -464,12 +464,14 @@ If you request a query that has no timestamp to return, such as an aggregation f
 
 The following InfluxQL functions support nesting:
 
-* [`count()` with `distinct()`](/influxdb/v1.2/query_language/functions/#distinct)
-* [`derivative()`](/influxdb/v1.2/query_language/functions/#derivative)
-* [`difference()`](/influxdb/v1.2/query_language/functions/#difference)
-* [`moving_average()`](/influxdb/v1.2/query_language/functions/#moving-average)
-* [`non_negative_derivative()`](/influxdb/v1.2/query_language/functions/#non-negative-derivative)
-* [`holt_winters()`](/influxdb/v1.2/query_language/functions/#holt-winters)
+* [`COUNT()`](#count) with [`DISTINCT()`](#distinct)
+* [`CUMULATIVE_SUM()`](#cumulative-sum)
+* [`DERIVATIVE()`](#derivative)
+* [`DIFFERENCE()`](#difference)
+* [`ELAPSED()`](#elapsed)
+* [`MOVING_AVERAGE()`](#moving-average)
+* [`NON_NEGATIVE_DERIVATIVE()`](#non-negative-derivative)
+* [`HOLT_WINTERS()`](#holt-winters) and [`HOLT_WINTERS_WITH_FIT()`](#holt-winters)
 
 See the
 [Data Exploration](/influxdb/v1.2/query_language/data_exploration/#subqueries)
