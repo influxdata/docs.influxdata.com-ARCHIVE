@@ -3046,5 +3046,209 @@ By default, queries with an InfluxQL function and a [`GROUP BY time()` clause](/
 Include `fill()` at the end of the `GROUP BY` clause to change that value.
 See [Data Exploration](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals-and-fill) for a complete discussion of `fill()`.
 
+## Common Issues with Functions
+
+The following sections describe frequent sources of confusion with all functions, aggregation functions, and selector functions.
+See the function-specific documentation for common issues with individual functions:
+
+* [DISTINCT()](#common-issues-with-distinct)
+* [BOTTOM()](#common-issues-with-bottom)
+* [PERCENTILE()](#common-issues-with-percentile)
+* [SAMPLE()](#common-issues-with-sample)
+* [TOP()](#common-issues-with-top)
+* [ELAPSED()](#common-issues-with-elapsed)
+* [HOLT_WINTERS()](#common-issues-with-holt-winters)
+
+### All Functions
+
+#### Issue 1: Nesting functions
+Some InfluxQL functions support nesting in the [`SELECT` clause](/influxdb/v1.2/query_language/data_exploration/#select-clause):
+
+* [`COUNT()`](#count) with [`DISTINCT()`](#distinct)
+* [`CUMULATIVE_SUM()`](#cumulative-sum)
+* [`DERIVATIVE()`](#derivative)
+* [`DIFFERENCE()`](#difference)
+* [`ELAPSED()`](#elapsed)
+* [`MOVING_AVERAGE()`](#moving-average)
+* [`NON_NEGATIVE_DERIVATIVE()`](#non-negative-derivative)
+* [`HOLT_WINTERS()`](#holt-winters) and [`HOLT_WINTERS_WITH_FIT()`](#holt-winters)
+
+For other functions, use InfluxQL's [subqueries](/influxdb/v1.2/query_language/data_exploration/#subqueries) to nest functions in the [`FROM` clause](/influxdb/v1.2/query_language/data_exploration/#from-clause).
+See the [Data Exploration](/influxdb/v1.2/query_language/data_exploration/#subqueries) page more on using subqueries.
+
+#### Issue 2: Querying time ranges after now()
+Most `SELECT` statements have a default time range between [`1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC](/influxdb/v1.2/troubleshooting/frequently-asked-questions/#what-are-the-minimum-and-maximum-timestamps-that-influxdb-can-store).
+For `SELECT` statements with an InfluxQL function and a [`GROUP BY time()` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals), the default time
+range is between `1677-09-21 00:12:43.145224194` UTC and [`now()`](/influxdb/v1.2/concepts/glossary/#now).
+
+To query data with timestamps that occur after `now()`, `SELECT` statements with
+an InfluxQL function and a `GROUP BY time()` clause must provide an alternative upper bound in the
+[`WHERE` clause](/influxdb/v1.2/query_language/data_exploration/#the-where-clause).
+See the [Frequently Asked Questions](/influxdb/v1.2/troubleshooting/frequently-asked-questions/#why-don-t-my-group-by-time-queries-return-timestamps-that-occur-after-now) page for an example.
+
+### Aggregation Functions
+
+#### Issue 1: Understanding the returned timestamp
+
+A query with an [aggregation function](#aggregations) and no time range in the [`WHERE` clause](/influxdb/v1.2/query_language/data_exploration/#the-where-clause) returns epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp.
+InfluxDB uses epoch 0 as the null timestamp equivalent.
+A query with an aggregate function that includes a time range in the `WHERE` clause returns the lower time bound as the timestamp.
+
+##### Examples
+<br>
+##### Example 1: Use an aggregate function without a specified time range
+<br>
+```
+> SELECT SUM("water_level") FROM "h2o_feet"
+
+name: h2o_feet
+time                   sum
+----                   ---
+1970-01-01T00:00:00Z   67777.66900000004
+```
+The query returns InfluxDB's null timestamp equivalent (epoch 0: `1970-01-01T00:00:00Z`) as the timestamp.
+[`SUM()`](#sum) aggregates points across several timestamps and has no single timestamp to return.
+
+##### Example 2: Use an aggregate function with a specified time range
+<br>
+```
+> SELECT SUM("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z'
+
+name: h2o_feet
+time                  sum
+----                  ---
+2015-08-18T00:00:00Z  67777.66900000004
+```
+The query returns the lower time bound (`WHERE time >= '2015-08-18T00:00:00Z'`) as the timestamp.
+
+##### Example 3: Use an aggregate function with a specified time range and a GROUP BY time() clause
+<br>
+```
+> SELECT SUM("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:18:00Z' GROUP BY time(12m)
+
+name: h2o_feet
+time                  sum
+----                  ---
+2015-08-18T00:00:00Z  20.305
+2015-08-18T00:12:00Z  19.802999999999997
+```
+The query returns the lower time bound for each [`GROUP BY time()`](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals) interval as the timestamps.
+
+#### Issue 2: Mixing aggregation functions with non-aggregates
+Aggregation functions do not support specifying standalone [field keys](/influxdb/v1.2/concepts/glossary/#field-key) or [tag keys](/influxdb/v1.2/concepts/glossary/#tag-key) in the [`SELECT` clause](/influxdb/v1.2/query_language/data_exploration/#select-clause).
+Aggregation functions return a single calculated value and there is no obvious single value to return for any unaggregated fields or tags.
+Including a standalone field key or tag key with an aggregation function in the `SELECT` clause returns an error:
+
+```
+> SELECT SUM("water_level"),"location" FROM "h2o_feet"
+
+ERR: error parsing query: mixing aggregate and non-aggregate queries is not supported
+```
+
+#### Issue 3: Getting slightly different results
+
+For some aggregation functions, executing the same function on the same set of [float64](/influxdb/v1.2/write_protocols/line_protocol_reference/#data-types) points may yield slightly different results.
+InfluxDB does not sort points before it applies the aggregation function; that behavior can cause small discrepancies in the query results.
+
+### Selector Functions
+
+#### Issue 1: Understanding the returned timestamp
+
+The timestamps returned by [selector functions](#selectors) depend on the number of functions in the query and on the other clauses in the query:
+
+A query with a single selector function, a single [field key](/influxdb/v1.2/concepts/glossary/#field-key) argument, and no [`GROUP BY time()` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals) returns the timestamp for the point that appears in the raw data.
+A query with a single selector function, multiple field key arguments, and no [`GROUP BY time()` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-time-intervals) returns the timestamp for the point that appears in the raw data or InfluxDB's null timestamp equivalent (epoch 0: `1970-01-01T00:00:00Z`).
+
+A query with more than one function and no time range in the [`WHERE` clause](/influxdb/v1.2/query_language/data_exploration/#the-where-clause) returns InfluxDB's null timestamp equivalent (epoch 0: `1970-01-01T00:00:00Z`).
+A query with more than one function and a time range in the `WHERE` clause returns the lower time bound as the timestamp.
+
+A query with a selector function and a `GROUP BY time()` clause returns the lower time bound for each `GROUP BY time()` interval.
+Note that the `SAMPLE()` function behaves differently from other selector functions when paired with the `GROUP BY time()` clause. 
+See [Common Issues with `SAMPLE()`](#common-issues-with-sample) for more information. 
+
+##### Examples
+<br>
+
+##### Example 1: Use a single selector function with a single field key and without a specified time range
+<br> 
+```
+> SELECT MAX("water_level") FROM "h2o_feet"
+
+name: h2o_feet
+time                  max
+----                  ---
+2015-08-29T07:24:00Z  9.964
+
+> SELECT MAX("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z'
+
+name: h2o_feet
+time                  max
+----                  ---
+2015-08-29T07:24:00Z  9.964
+```
+The queries return the timestamp for the [maximum](#max) point that appears in the raw data.
+
+##### Example 2: Use a single selector function with multiple field keys and without a specified time range
+<br>
+```
+> SELECT FIRST(*) FROM "h2o_feet"
+
+name: h2o_feet
+time                  first_level description  first_water_level
+----                  -----------------------  -----------------
+1970-01-01T00:00:00Z  between 6 and 9 feet     8.12
+
+> SELECT MAX(*) FROM "h2o_feet"
+
+name: h2o_feet
+time                  max_water_level
+----                  ---------------
+2015-08-29T07:24:00Z  9.964
+```
+The first query returns InfluxDB's null timestamp equivalent (epoch 0: `1970-01-01T00:00:00Z`) as the timestamp.
+`FIRST(*)` returns two timestamps (one for each field key in the `h2o_feet` [measurement](/influxdb/v1.2/concepts/glossary/#measurement)) so the system overrides those timestamps with the null timestamp equivalent.
+
+The second query returns the timestamp for the maximum point that appears in the raw data.
+`MAX(*)` returns one timestamp (the `h2o-feet` measurement has only one numerical field) so the system does not overwrite the original timestamp.
+
+##### Example 3: Use a selector function with another function and without a specified time range
+<br>
+```
+> SELECT MAX("water_level"),MIN("water_level") FROM "h2o_feet"
+
+name: h2o_feet
+time                  max    min
+----                  ---    ---
+1970-01-01T00:00:00Z  9.964  -0.61
+```
+The query returns InfluxDB's null timestamp equivalent (epoch 0: `1970-01-01T00:00:00Z`) as the timestamp.
+The `MAX()` and [`MIN()`](#min) functions return different timestamps so the system has no single timestamp to return.
+
+##### Example 4: Use a selector function with another function and with a specified time range
+<br>
+```
+> SELECT MAX("water_level"),MIN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z'
+
+name: h2o_feet
+time                  max    min
+----                  ---    ---
+2015-08-18T00:00:00Z  9.964  -0.61
+```
+The query returns the lower time bound (`WHERE time >= '2015-08-18T00:00:00Z'`) as the timestamp.
+
+##### Example 5: Use a selector function with a GROUP BY time() clause
+<br>
+```
+> SELECT MAX("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:18:00Z' GROUP BY time(12m)
+
+name: h2o_feet
+time                  max
+----                  ---
+2015-08-18T00:00:00Z  8.12
+2015-08-18T00:12:00Z  7.887
+```
+The query returns the lower time bound for each `GROUP BY time()` interval as the timestamp.
+
+
 
 
