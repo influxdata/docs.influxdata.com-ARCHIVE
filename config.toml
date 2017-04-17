@@ -322,17 +322,25 @@ SectionPagesMenu = "products"
   weight = 0
   url = "https://influxdata.com/downloads/#kapacitor"
   parent = "introduction"
-
-# Chronograf v0.13 Sub-Menu - Introduction
-  [[menu.chronograf_013]]
+  
+# Chronograf v1.2 Sub-Menu - Introduction
+  [[menu.chronograf_1_2]]
   name = "Download"
   identifier = "download"
   weight = 0
-  url = "https://influxdata.com/downloads/#chronograf"
+  url = "https://influxdata.com/downloads/"
   parent = "Introduction"
 
 # Chronograf v1.0 Sub-Menu - Introduction
   [[menu.chronograf_1_0]]
+  name = "Download"
+  identifier = "download"
+  weight = 0
+  url = "https://influxdata.com/downloads/"
+  parent = "Introduction"
+
+# Chronograf v0.13 Sub-Menu - Introduction
+  [[menu.chronograf_013]]
   name = "Download"
   identifier = "download"
   weight = 0
