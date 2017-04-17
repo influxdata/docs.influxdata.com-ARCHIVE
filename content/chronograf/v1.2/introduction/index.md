@@ -6,5 +6,3 @@ menu:
     name: Introduction
     weight: 0
 ---
-
-## [Getting Started](/chronograf/v1.2/introduction/getting_started/)
