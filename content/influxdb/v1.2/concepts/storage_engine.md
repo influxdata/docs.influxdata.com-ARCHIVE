@@ -116,9 +116,9 @@ The length of the blocks is stored in the index.
 Following the blocks is the index for the blocks in the file.
 The index is composed of a sequence of index entries ordered lexicographically by key and then by time.
 The key includes the measurement name, tag set, and one field. 
-Multiple fields per point creates multiple indices in the TSM file.
-Each index entry starts with a key length and the key, followed by the block type (float, int, bool, string) and a count of the number of blocks in the file.  
-Each index block entry is composed of the min and max time for the block, the offset into the file where the block is located and the the size of the block.
+Multiple fields per point creates multiple index entries in the TSM file.
+Each index entry starts with a key length and the key, followed by the block type (float, int, bool, string) and a count of the number of index block entries that follow for that key.
+Each index block entry is composed of the min and max time for the block, the offset into the file where the block is located and the the size of the block. There is one index block entry for each block in the TSM file that contains the key.
 
 The index structure can provide efficient access to all blocks as well as the ability to determine the cost associated with accessing a given key.
 Given a key and timestamp, we can determine whether a file contains the block for that timestamp. 
@@ -253,7 +253,7 @@ When the TSM file is successfully written and `fsync`'d, it is loaded and refere
 
 Updates (writing a newer value for a point that already exists) occur as normal writes.
 Since cached values overwrite existing values, newer writes take precedence.
-If a write would overwrite a point in a prior TSM file, the points are merged at runtime and the newer write takes precedence.
+If a write would overwrite a point in a prior TSM file, the points are merged at query runtime and the newer write takes precedence.
 
 
 ### Deletes
