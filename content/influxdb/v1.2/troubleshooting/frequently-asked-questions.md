@@ -92,7 +92,7 @@ InfluxDB ✨ v1.2.0 ✨ (git: master b7bb7e8359642b6e071735b50ae41f5eb343fd42)
 #### `curl` the `/ping` endpoint:
 
 ```
-$ url -i 'http://localhost:8086/ping'
+$ curl -i 'http://localhost:8086/ping'
 
 HTTP/1.1 204 No Content
 Content-Type: application/json
