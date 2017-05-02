@@ -1,10 +1,10 @@
 ---
-title: Chronograf Product FAQ
+title: Upgrading
 
 menu:
   chronograf_deprecated:
-    name: Chronograf Product FAQ
+    name: Upgrading
     weight: 0
     parent: Administration
-    url: /chronograf/v1.1/administration/chronograf-product-faq/
+    url: /chronograf/v1.2/administration/upgrading/
 ---
