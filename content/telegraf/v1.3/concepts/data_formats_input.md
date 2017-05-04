@@ -15,9 +15,10 @@ Telegraf is able to parse the following input data formats into metrics:
 1. [Graphite](#graphite)
 1. [Value](#value), ie: 45 or "booyah"
 1. [Nagios](#nagios) (exec input only)
+1. [Collectd](#collectd)
 
 Telegraf metrics, like InfluxDB
-[points](/influxdb/latest/concepts/glossary/#point),
+[points](https://docs.influxdata.com/influxdb/v0.10/write_protocols/line/),
 are a combination of four basic parts:
 
 1. Measurement Name
@@ -28,10 +29,6 @@ are a combination of four basic parts:
 These four parts are easily defined when using InfluxDB line-protocol as a
 data format. But there are other data formats that users may want to use which
 require more advanced configuration to create usable Telegraf metrics.
-
-Telegraf uses a host's local time in UTC to assign timestamps to data.
-Use the Network Time Protocol (NTP) to synchronize time between hosts; if hosts' clocks
-aren't synchronized with NTP, the timestamps on the data can be inaccurate.
 
 Plugins such as `exec` and `kafka_consumer` parse textual data. Up until now,
 these plugins were statically configured to parse just a single
@@ -52,7 +49,7 @@ example, in the exec plugin:
   name_suffix = "_mycollector"
 
   ## Data format to consume.
-  ## Each data format has it's own unique set of configuration options, read
+  ## Each data format has its own unique set of configuration options, read
   ## more about them here:
   ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
   data_format = "json"
@@ -79,7 +76,7 @@ metrics are parsed directly into Telegraf metrics.
   name_suffix = "_mycollector"
 
   ## Data format to consume.
-  ## Each data format has it's own unique set of configuration options, read
+  ## Each data format has its own unique set of configuration options, read
   ## more about them here:
   ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
   data_format = "influx"
@@ -88,8 +85,7 @@ metrics are parsed directly into Telegraf metrics.
 # JSON:
 
 The JSON data format flattens JSON into metric _fields_.
-
-> **NOTE:** Only numerical values are converted to fields, and they are converted
+NOTE: Only numerical values are converted to fields, and they are converted
 into a float. strings are ignored unless specified as a tag_key (see below).
 
 So for example, this JSON:
@@ -130,7 +126,7 @@ For example, if you had this configuration:
   name_suffix = "_mycollector"
 
   ## Data format to consume.
-  ## Each data format has it's own unique set of configuration options, read
+  ## Each data format has its own unique set of configuration options, read
   ## more about them here:
   ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
   data_format = "json"
@@ -174,7 +170,7 @@ For example, if the following configuration:
   name_suffix = "_mycollector"
 
   ## Data format to consume.
-  ## Each data format has it's own unique set of configuration options, read
+  ## Each data format has its own unique set of configuration options, read
   ## more about them here:
   ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
   data_format = "json"
@@ -232,7 +228,7 @@ You **must** tell Telegraf what type of metric to collect by using the
 3. string
 4. boolean
 
-> **NOTE:** It is also recommended that you set `name_override` to a measurement
+**Note:** It is also recommended that you set `name_override` to a measurement
 name that makes sense for your metric, otherwise it will just be set to the
 name of the plugin.
 
@@ -245,7 +241,7 @@ name of the plugin.
   name_override = "entropy_available"
 
   ## Data format to consume.
-  ## Each data format has it's own unique set of configuration options, read
+  ## Each data format has its own unique set of configuration options, read
   ## more about them here:
   ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
   data_format = "value"
@@ -281,7 +277,7 @@ correspond to the field name.
 Any part of the template that is not a keyword is treated as a tag key. This
 can also be specified multiple times.
 
-> **NOTE:** `field*` cannot be used in conjunction with `measurement*`!
+NOTE: `field*` cannot be used in conjunction with `measurement*`!
 
 #### Measurement & Tag Templates:
 
@@ -389,8 +385,8 @@ cpu.usage.idle.eu-east 100
 => cpu_usage,region=eu-east,datacenter=1a idle=100
 ```
 
-There are many more options available;
-[more details can be found here](https://github.com/influxdata/influxdb/tree/master/services/graphite#templates)
+There are many more options available,
+[More details can be found here](https://github.com/influxdata/influxdb/tree/master/services/graphite#templates)
 
 #### Graphite Configuration:
 
@@ -403,7 +399,7 @@ There are many more options available;
   name_suffix = "_mycollector"
 
   ## Data format to consume.
-  ## Each data format has it's own unique set of configuration options, read
+  ## Each data format has its own unique set of configuration options, read
   ## more about them here:
   ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
   data_format = "graphite"
@@ -433,21 +429,61 @@ There are many more options available;
 There are no additional configuration options for Nagios line-protocol. The
 metrics are parsed directly into Telegraf metrics.
 
-> **NOTE:** Nagios Input Data Formats is only supported in `exec` input plugin.
+Note: Nagios Input Data Formats is only supported in `exec` input plugin.
 
 #### Nagios Configuration:
 
 ```toml
 [[inputs.exec]]
   ## Commands array
-  commands = ["/usr/lib/nagios/plugins/check_load", "-w 5,6,7 -c 7,8,9"]
+  commands = ["/usr/lib/nagios/plugins/check_load -w 5,6,7 -c 7,8,9"]
 
   ## measurement name suffix (for separating different commands)
   name_suffix = "_mycollector"
 
   ## Data format to consume.
-  ## Each data format has it's own unique set of configuration options, read
+  ## Each data format has its own unique set of configuration options, read
   ## more about them here:
   ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
   data_format = "nagios"
+```
+
+# Collectd:
+
+The collectd format parses the collectd binary network protocol.  Tags are
+created for host, instance, type, and type instance.  All collectd values are
+added as float64 fields.
+
+For more information about the binary network protocol see
+[here](https://collectd.org/wiki/index.php/Binary_protocol).
+
+You can control the cryptographic settings with parser options.  Create an
+authentication file and set `collectd_auth_file` to the path of the file, then
+set the desired security level in `collectd_security_level`.
+
+Additional information including client setup can be found
+[here](https://collectd.org/wiki/index.php/Networking_introduction#Cryptographic_setup).
+
+You can also change the path to the typesdb or add additional typesdb using
+`collectd_typesdb`.
+
+#### Collectd Configuration:
+
+```toml
+[[inputs.socket_listener]]
+  service_address = "udp://127.0.0.1:25826"
+  name_prefix = "collectd_"
+
+  ## Data format to consume.
+  ## Each data format has its own unique set of configuration options, read
+  ## more about them here:
+  ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
+  data_format = "collectd"
+
+  ## Authentication file for cryptographic security levels
+  collectd_auth_file = "/etc/collectd/auth_file"
+  ## One of none (default), sign, or encrypt
+  collectd_security_level = "encrypt"
+  ## Path of to TypesDB specifications
+  collectd_typesdb = ["/usr/share/collectd/types.db"]
 ```

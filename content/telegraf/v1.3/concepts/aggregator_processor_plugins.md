@@ -8,9 +8,6 @@ menu:
     parent: Concepts
 ---
 
-
-# Telegraf Aggregator & Processor Plugins
-
 As of release 1.1.0, Telegraf has the concept of Aggregator and Processor Plugins.
 
 These plugins sit in-between Input & Output plugins, aggregating and processing

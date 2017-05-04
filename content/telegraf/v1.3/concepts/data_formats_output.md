@@ -15,7 +15,7 @@ Telegraf is able to serialize metrics into the following output data formats:
 1. [Graphite](#graphite)
 
 Telegraf metrics, like InfluxDB
-[points](/influxdb/latest/concepts/glossary/#point),
+[points](https://docs.influxdata.com/influxdb/v0.10/write_protocols/line/),
 are a combination of four basic parts:
 
 1. Measurement Name
@@ -44,7 +44,7 @@ config option, for example, in the `file` output plugin:
   files = ["stdout"]
 
   ## Data format to output.
-  ## Each data format has it's own unique set of configuration options, read
+  ## Each data format has its own unique set of configuration options, read
   ## more about them here:
   ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_OUTPUT.md
   data_format = "influx"
@@ -52,7 +52,7 @@ config option, for example, in the `file` output plugin:
   ## Additional configuration options go here
 ```
 
-Each `data_format` has an additional set of configuration options available, which
+Each data_format has an additional set of configuration options available, which
 I'll go over below.
 
 # Influx:
@@ -68,7 +68,7 @@ metrics are serialized directly into InfluxDB line-protocol.
   files = ["stdout", "/tmp/metrics.out"]
 
   ## Data format to output.
-  ## Each data format has it's own unique set of configuration options, read
+  ## Each data format has its own unique set of configuration options, read
   ## more about them here:
   ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_OUTPUT.md
   data_format = "influx"
@@ -112,7 +112,7 @@ tars.cpu-total.us-east-1.cpu.usage_idle 98.09 1455320690
   files = ["stdout", "/tmp/metrics.out"]
 
   ## Data format to output.
-  ## Each data format has it's own unique set of configuration options, read
+  ## Each data format has its own unique set of configuration options, read
   ## more about them here:
   ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_OUTPUT.md
   data_format = "graphite"
@@ -151,8 +151,18 @@ The JSON data format serialized Telegraf metrics in json format. The format is:
   files = ["stdout", "/tmp/metrics.out"]
 
   ## Data format to output.
-  ## Each data format has it's own unique set of configuration options, read
+  ## Each data format has its own unique set of configuration options, read
   ## more about them here:
   ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_OUTPUT.md
   data_format = "json"
+  json_timestamp_units = "1ns"
 ```
+
+By default, the timestamp that is output in JSON data format serialized Telegraf
+metrics is in seconds. The precision of this timestamp can be adjusted for any output
+by adding the optional `json_timestamp_units` parameter to the configuration for
+that output. This parameter can be used to set the timestamp units to  nanoseconds (`ns`),
+microseconds (`us` or `µs`), milliseconds (`ms`), or seconds (`s`). Note that this
+parameter will be truncated to the nearest power of 10 that, so if the `json_timestamp_units`
+are set to `15ms` the timestamps for the JSON format serialized Telegraf metrics will be
+output in hundredths of a second (`10ms`).
