@@ -40,42 +40,23 @@ nc -lu 8089 > telegraf_dump.txt
 
 ## Submit test inputs
 
-Once you have Telegraf's output arriving to your `nc` socket, you can enable the [inputs.tcp_listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/tcp_listener) or the [inputs.udp_listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/udp_listener) plugins to submit some sample metrics.
+Once you have Telegraf's output arriving to your `nc` socket, you can enable the [inputs.socket_listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/socket_listener) plugins to submit some sample metrics.
 
 Append the TCP or UDP input section to Telegraf's config file and restart Telegraf for the change to take effect.
 
-### TCP listener configuration:
-
 ```
- [[inputs.tcp_listener]]
-   service_address = ":8094"
-   allowed_pending_messages = 10000
-   max_tcp_connections = 250
+ [[inputs.socket_listener]]
+   service_address = "tcp://:8094"
    data_format = "influx"
 ```
 
-### UDP listener configuration:
+Submit sample data to Telegraf's socket listener:
 
 ```
- [[inputs.udp_listener]]
-   service_address = ":8092"
-   allowed_pending_messages = 10000
-   data_format = "influx"
+echo 'mymeasurement,my_tag_key=mytagvalue my_field="my field value"' | nc localhost 8094
 ```
 
-* Submitting sample data to Telegraf's TCP listener:
-
-```
-echo "mymeasurement,my_tag_key=mytagvalue my_field=\"my field value\"" | nc localhost 8094
-```
-
-* Submitting sample data to Telegraf's UDP listener:
-
-```
-echo "mymeasurement,my_tag_key=mytagvalue my_field=\"my field value\"" | nc -u localhost 8092
-```
-
-In both cases the output from your `netcat` listener will look like the following:
+The output from your `netcat` listener will look like the following:
 
 ```
 mymeasurement,host=kubuntu,my_tag_key=mytagvalue my_field="my field value" 1478106104713745634
