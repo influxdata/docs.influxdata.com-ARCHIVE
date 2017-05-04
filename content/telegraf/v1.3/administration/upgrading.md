@@ -8,7 +8,6 @@ menu:
     parent: administration
 ---
 
-Users looking to upgrade from Telegraf 1.1 to 1.2 should review the
-Telegraf
-[Changelog](https://github.com/influxdata/telegraf/blob/master/CHANGELOG.md)
-available on GitHub.
+Users looking to upgrade from Telegraf 1.2 to 1.3 should review the
+Telegraf's
+[Changelog](/telegraf/v1.3/about_the_project/release-notes-changelog/).

@@ -6,7 +6,133 @@ menu:
     parent: about_the_project
 ---
 
-## v1.3.1 [2017-02-01]
+## v1.3 [2017-05-09]
+
+### Release Notes
+
+#### Changes to the Windows ping plugin
+
+Users of the windows [ping plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ping) will need to drop or migrate their measurements to continue using the plugin.
+The reason for this is that the windows plugin was outputting a different type than the linux plugin.
+This made it impossible to use the `ping` plugin for both windows and linux machines.
+
+#### Changes to the Ceph plugin
+
+For the [Ceph plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ceph), the `ceph_pgmap_state` metric content has been modified to use a unique field `count`, with each state expressed as a `state` tag.
+
+Telegraf < 1.3:
+
+```
+# field_name             value
+active+clean             123
+active+clean+scrubbing   3
+```
+
+Telegraf >= 1.3:
+
+```
+# field_name    value       tag
+count           123         state=active+clean
+count           3           state=active+clean+scrubbing
+```
+
+#### Rewritten Riemann plugin
+
+The [Riemann output plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/riemann) has been rewritten
+and the [previous riemann plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/riemann_legacy) is _incompatible_ with the new one.
+The reasons for this are outlined in issue [#1878](https://github.com/influxdata/telegraf/issues/1878).
+The previous Riemann output will still be available using `outputs.riemann_legacy` if needed, but that will eventually be deprecated.
+It is highly recommended that all users migrate to the new Riemann output plugin.
+
+#### New Socket Listener and Socket Writer plugins
+
+Generic [Socket Listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/socket_listener) and [Socket Writer](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/socket_writer) plugins have been implemented for receiving and sending UDP, TCP, unix, & unix-datagram data.
+These plugins will replace [udp_listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/udp_listener) and [tcp_listener](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/tcp_listener), which are still available but will be deprecated eventually.
+
+### Features
+
+- Add SASL options for the [Kafka output plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/kafka).
+- Add SSL configuration for [HAproxy input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/haproxy).
+- Add the [Interrupts input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/interrupts).
+- Add generic [Socket Listener input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/socket_listener) and [socket writer output plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/socket_writer).
+- Extend the [HTTP Response input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/http_response) to support searching for a substring in response. Return 1 if found, else 0.
+- Add userstats to the [MySQL input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/mysql).
+- Add more InnoDB metric to the [MySQL input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/mysql).
+- For the [Ceph input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ceph), `ceph_pgmap_state` metric now uses a single field `count`, with PG state published as `state` tag.
+- Use own client for improved through-put and less allocations in the [InfluxDB output plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/influxdb).
+- Keep -config-directory when running as Windows service.
+- Rewrite the [Riemann output plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/riemann).
+- Add support for name templates and udev tags to the [DiskIO input plugin](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/DISK_README.md#diskio-input-plugin).
+- Add integer metrics for [Consul](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/consul) check health state.
+- Add lock option to the [IPtables input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/iptables).
+- Support [ipmi_sensor input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ipmi_sensor) querying local ipmi sensors.
+- Increment gather_errors for all errors emitted by inputs.
+- Use the official docker SDK.
+- Add [AMQP consumer input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/amqp_consumer).
+- Add pprof tool.
+- Support DEAD(X) state in the [system input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system).
+- Add support for [MongoDB](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/mongodb) client certificates.
+- Support adding [SNMP](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/snmp) table indexes as tags.
+- Add [Elasticsearch 5.x output plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/elasticsearch).
+- Add json timestamp units configurability.
+- Add support for Linux sysctl-fs metrics.
+- Support to include/exclude docker container labels as tags.
+- Add [DMCache input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/dmcache).
+- Add support for precision in [HTTP Listener input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/http_listener).
+- Add `message_len_max` option to the [Kafka consumer input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/kafka_consumer).
+- Add collectd parser.
+- Simplify plugin testing without outputs.
+- Check signature in the [GitHub webhook input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/webhooks/github).
+- Add [papertrail](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/webhooks/papertrail) support to webhooks.
+- Change [jolokia input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/jolokia) to use bulk requests.
+- Add [DiskIO input plugin](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/DISK_README.md#diskio-input-plugin) for Darwin.
+- Add use_random_partitionkey option to the [Kinesis output plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/kinesis).
+- Add tcp keep-alive to [Socket Listener input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/socket_listener) and [Socket Writer output plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/socket_writer).
+- Add [Kapacitor input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/kapacitor).
+- Use Go (golang) 1.8.1.
+- Add documentation for the [RabbitMQ input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/rabbitmq).
+
+### Bugfixes
+
+- Allow `@` symbol in password for the ipmi_sensor plugin.
+- Fix arithmetic overflow error converting numeric to data type int in SQL Server input.
+- Flush jitter can inhibit metric collection.
+- Add missing fields for HAproxy input.
+- Handle null startTime for stopped pods for the Kubernetes input.
+- Fix cpu input panic when /proc/stat is empty.
+- Fix telegraf swallowing panics in --test mode.
+- Create pidfile with 644 permissions & defer file deletion.
+- Fix install/remove of telegraf on non-systemd Debian/Ubuntu systems.
+- Fix for reloading telegraf freezes prometheus output.
+- Fix when empty tag value causes error on InfluxDB output.
+- buffer_size field value is negative number from "internal" plugin.
+- Missing error handling in the MySQL plugin leads to segmentation violation.
+- Fix type conflict in windows ping plugin.
+- logparser: regexp with lookahead.
+- Telegraf can crash in LoadDirectory on 0600 files.
+- Iptables input: document better that rules without a comment are ignored.
+- Fix win_perf_counters capping values at 100.
+- Exporting Ipmi.Path to be set by config.
+- Remove warning if parse empty content.
+- Update default value for Cloudwatch rate limit.
+- create /etc/telegraf/telegraf.d directory in tarball.
+- Return error on unsupported serializer data format.
+- Fix Windows Performance Counters multi instance identifier.
+- Add write timeout to Riemann output.
+- fix timestamp parsing on prometheus plugin.
+- Fix deadlock when output cannot write.
+- Fix connection leak in postgresql.
+- Set default measurement name for snmp input.
+- Improve performance of diskio with many disks.
+- The internal input plugin uses the wrong units for `heap_objects`.
+- Fix ipmi_sensor config is shared between all plugin instances.
+- Network statistics not collected when system has alias interfaces.
+- Sysstat plugin needs LANG=C or similar locale.
+- File output closes standard streams on reload.
+- AMQP output disconnect blocks all outputs.
+- Improve documentation for redis input plugin.
+
+## v1.2.1 [2017-02-01]
 
 ### Bugfixes
 
@@ -15,9 +141,9 @@ menu:
 
 ### Features
 
-- GoLang version update 1.7.4 -> 1.7.5
+- Go (golang) version update 1.7.4 -> 1.7.5
 
-## v1.3 [2017-01-24]
+## v1.2 [2017-01-24]
 
 ### Release Notes
 
