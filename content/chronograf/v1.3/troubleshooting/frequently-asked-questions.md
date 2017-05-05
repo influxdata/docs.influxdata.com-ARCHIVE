@@ -1,7 +1,7 @@
 ---
 title: Frequently Asked Questions (FAQ)
 menu:
-  chronograf_1_2:
+  chronograf_1_3:
     weight: 0
     parent: Troubleshooting
 ---
@@ -32,12 +32,12 @@ Chronograf supports the following event handlers:
 * TCP
 * VictorOps
 
-To configure a Kapacitor event handler in Chronograf, [install Kapacitor](/chronograf/v1.2/introduction/getting-started/#kapacitor-setup) and [connect it to Chronograf](/chronograf/v1.2/introduction/getting-started/#4-connect-chronograf-to-kapacitor).
-The Configure Kapacitor page includes the event handler configuration options; see the [Configure Kapacitor Event Handlers](/chronograf/v1.2/guides/configure-kapacitor-event-handlers/) guide for more information.
+To configure a Kapacitor event handler in Chronograf, [install Kapacitor](/chronograf/v1.3/introduction/getting-started/#kapacitor-setup) and [connect it to Chronograf](/chronograf/v1.3/introduction/getting-started/#4-connect-chronograf-to-kapacitor).
+The Configure Kapacitor page includes the event handler configuration options; see the [Configure Kapacitor Event Handlers](/chronograf/v1.3/guides/configure-kapacitor-event-handlers/) guide for more information.
 
 ## What applications are supported in Chronograf?
 
-Chronograf offers pre-created dashboards for several [Telegraf](/telegraf/v1.2/) input plugins/applications.
+Chronograf offers pre-created dashboards for several [Telegraf](/telegraf/v1.3/) input plugins/applications.
 We list those applications below and link to their Telegraf documentation:
 
 * [Apache](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/apache)
@@ -86,11 +86,11 @@ When you enter InfluxDB's HTTP bind address in the `Connection String` input, Ch
 If it is a data node, Chronograf automatically adds the `Meta Service Connection URL` input to the connection details form.
 Enter the HTTP bind address of one of your cluster's meta nodes into that input and Chronograf takes care of the rest.
 
-![Cluster connection details](/img/chronograf/v1.2/faq-cluster-connection.png)
+![Cluster connection details](/img/chronograf/v1.3/faq-cluster-connection.png)
 
 Note that the example above assumes that you do not have authentication enabled.
 If you have authentication enabled, the form requires username and password information.
-For more details about monitoring an InfluxEnterprise cluster, see the [Monitor an InfluxEnterprise Cluster](/chronograf/v1.2/guides/monitor-an-influxenterprise-cluster/) guide.
+For more details about monitoring an InfluxEnterprise cluster, see the [Monitor an InfluxEnterprise Cluster](/chronograf/v1.3/guides/monitor-an-influxenterprise-cluster/) guide.
 
 ## What visualization types does Chronograf support?
 
@@ -99,22 +99,22 @@ Chronograf's dashboards support five visualization types.
 ### Line
 Show time-series in a line graph.
 
-![Cluster connection details](/img/chronograf/v1.2/faq-viz-line.png)
+![Cluster connection details](/img/chronograf/v1.3/faq-viz-line.png)
 
 ### Stacked
 Show time-series arranged on top of each other.
 
-![Cluster connection details](/img/chronograf/v1.2/faq-viz-stacked.png)
+![Cluster connection details](/img/chronograf/v1.3/faq-viz-stacked.png)
 
 ### Step-Plot
 Show time-series in a staircase graph.
 
-![Cluster connection details](/img/chronograf/v1.2/faq-viz-step.png)
+![Cluster connection details](/img/chronograf/v1.3/faq-viz-step.png)
  
 ### SingleStat
 Show the time-series' single most recent value.
 
-![Cluster connection details](/img/chronograf/v1.2/faq-viz-single.png)
+![Cluster connection details](/img/chronograf/v1.3/faq-viz-single.png)
 
 If a cell's query includes a [`GROUP BY` tag](/influxdb/v1.2/query_language/data_exploration/#group-by-tags) clause, Chronograf sorts the different [series](/influxdb/v1.2/concepts/glossary/#series) lexicographically and shows the most recent [field value](/influxdb/v1.2/concepts/glossary/#field-value) associated with the first series.
 For example, if a query groups by the `name` [tag key](/influxdb/v1.2/concepts/glossary/#tag-key) and `name` has two [tag values](/influxdb/v1.2/concepts/glossary/#tag-value) (`chronelda` and `chronz`), Chronograf shows the most recent field value associated with the `chronelda` series.
@@ -125,7 +125,7 @@ For example, if a query's `SELECT` clause is `SELECT "chronogiraffe","chronelda"
 ### Line+Stat
 Show time-series in a line graph and overlay the time-series' single most recent value.
 
-![Cluster connection details](/img/chronograf/v1.2/faq-viz-linesingle.png)
+![Cluster connection details](/img/chronograf/v1.3/faq-viz-linesingle.png)
 
 
 ## What does the status column indicate on the Host List page?
@@ -143,7 +143,7 @@ Use the Network Time Protocol (NTP) to synchronize time between hosts; if hostsâ
 
 The status icon turns red when Chronograf has not received data from a host for the past minute.
 Chronograf uses data from Telegraf to perform that calculation.
-By default, Telegraf sends data in ten-second intervals; you can change that interval setting in Telegraf's [configuration file](/telegraf/v1.2/administration/configuration/).
+By default, Telegraf sends data in ten-second intervals; you can change that interval setting in Telegraf's [configuration file](/telegraf/v1.3/administration/configuration/).
 If you configure the setting to an interval that's greater than one minute, Chronograf assumes that the host is not reporting data and changes the status icon to red.
 
 

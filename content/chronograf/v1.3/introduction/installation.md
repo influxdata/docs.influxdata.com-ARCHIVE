@@ -1,7 +1,7 @@
 ---
 title: Installation
 menu:
-  chronograf_1_2:
+  chronograf_1_3:
     weight: 10
     parent: Introduction
 ---

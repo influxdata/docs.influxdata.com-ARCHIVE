@@ -1,7 +1,7 @@
 ---
 title: Licenses
 menu:
-  chronograf_1_2:
+  chronograf_1_3:
     weight: 30
     parent: About the Project
     url: https://github.com/influxdata/chronograf/blob/master/LICENSE

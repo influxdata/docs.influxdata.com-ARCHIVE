@@ -1,17 +1,17 @@
 ---
-title: Chronograf Version 1.2 Documentation
+title: Chronograf Version 1.3 Documentation
 
 menu:
   chronograf:
-    name: v1.2
-    identifier: chronograf_1_2
+    name: v1.3
+    identifier: chronograf_1_3
     weight: 0
 ---
 
 Chronograf is InfluxData's open source web application.
 Use Chronograf with the other components of the [TICK stack](https://www.influxdata.com/products/) to visualize your monitoring data and easily create alerting and automation rules.
 
-![Chronograf Collage](/img/chronograf/v1.2/chronograf-collage.png)
+![Chronograf Collage](/img/chronograf/v1.3/chronograf-collage.png)
 
 ## Key Features
  
@@ -19,7 +19,7 @@ Use Chronograf with the other components of the [TICK stack](https://www.influxd
 
 * View all hosts and their statuses in your infrastructure
 * View the configured applications on each host
-* Monitor your applications with Chronograf's [pre-created dashboards](/chronograf/v1.2/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf)
+* Monitor your applications with Chronograf's [pre-created dashboards](/chronograf/v1.3/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf)
 
 ### Alert Management
 
@@ -28,11 +28,11 @@ Chronograf offers a UI for [Kapacitor](https://github.com/influxdata/kapacitor),
 * Generate threshold, relative, and deadman alerts on your data
 * Easily enable and disable existing alert rules
 * View all active alerts on an alert dashboard
-* Send alerts to the supported event handlers, including Slack, PagerDuty, HipChat, and [more](/chronograf/v1.2/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf) 
+* Send alerts to the supported event handlers, including Slack, PagerDuty, HipChat, and [more](/chronograf/v1.3/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf) 
 
 ### Data Visualization
 
-* Monitor your application data with Chronograf's [pre-created dashboards](/chronograf/v1.2/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf)
+* Monitor your application data with Chronograf's [pre-created dashboards](/chronograf/v1.3/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf)
 * Create your own customized dashboards complete with various graph types and template variables
 * Investigate your data with Chronograf's data explorer and query templates
 

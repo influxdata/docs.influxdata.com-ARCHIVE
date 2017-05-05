@@ -6,5 +6,5 @@ menu:
     name: Upgrading
     weight: 0
     parent: Administration
-    url: /chronograf/v1.2/administration/upgrading/
+    url: /chronograf/v1.3/administration/upgrading/
 ---

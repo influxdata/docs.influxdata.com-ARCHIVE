@@ -1,7 +1,7 @@
 ---
 title: Transition from InfluxDB's Web Admin Interface
 menu:
-  chronograf_1_2:
+  chronograf_1_3:
     weight: 50
     parent: Guides
 ---
@@ -22,7 +22,7 @@ The next sections describe the Chronograf features that relate to the web admin 
 In the web admin interface, users chose the target database in the top right corner and selected from a set of query templates in the `Query Templates` dropdown.
 The templates included queries with no user-provided values (example: [`SHOW MEASUREMENTS`](/influxdb/v1.2/query_language/schema_exploration/#show-measurements)) and queries with user-provided values (example: [`SHOW TAG KEYS FROM "<measurement_name>"`](/influxdb/v1.2/query_language/schema_exploration/#show-tag-keys)).
 
-![WAI Query Templates](/img/chronograf/v1.2/g-admin-webtemplates.png)
+![WAI Query Templates](/img/chronograf/v1.3/g-admin-webtemplates.png)
 
 ### Chronograf
 
@@ -30,7 +30,7 @@ In Chronograf, the same `Query Templates` dropdown appears in the Data Explorer 
 To use query templates, select a query from the set of available queries and insert the relevant user-provided values.
 Note that unlike the web admin interface, Chronograf does not have a database dropdown; the query must specify the target database.
 
-![Chronograf Query Templates](/img/chronograf/v1.2/g-admin-chronotemplates.png)
+![Chronograf Query Templates](/img/chronograf/v1.3/g-admin-chronotemplates.png)
 
 > **Note:** Chronograf's `Query Templates` dropdown does not support the `SHOW CONTINUOUS QUERIES` query.
 
@@ -40,7 +40,7 @@ Note that unlike the web admin interface, Chronograf does not have a database dr
 
 In the web admin interface, the `Query Template` dropdown was the only way to manage databases and [retention policies](/influxdb/v1.2/concepts/glossary/#retention-policy-rp) (RP):
 
-![WAI DBRP Management](/img/chronograf/v1.2/g-admin-webdbrp.png)
+![WAI DBRP Management](/img/chronograf/v1.3/g-admin-webdbrp.png)
 
 ### Chronograf
 
@@ -48,7 +48,7 @@ In Chronograf, the `Admin` page includes a complete user interface for database 
 The `Admin` page allows users to view, create, and delete databases and RPs without having to learn the relevant query syntax.
 The GIF below shows the process of creating a database, creating an RP, and deleting that database.
 
-![Chronograf DBRP Management](/img/chronograf/v1.2/g-admin-chronodbrp.gif)
+![Chronograf DBRP Management](/img/chronograf/v1.3/g-admin-chronodbrp.gif)
 
 Note that, like the web admin interface, Chronograf's [`Query Templates` dropdown](#chronograf) includes the database- and RP-related queries.
 
@@ -58,12 +58,12 @@ Note that, like the web admin interface, Chronograf's [`Query Templates` dropdow
 
 In the web admin interface, the `Query Template` dropdown was the only way to manage users:
 
-![WAI User Management](/img/chronograf/v1.2/g-admin-webuser.png)
+![WAI User Management](/img/chronograf/v1.3/g-admin-webuser.png)
 
 ### Chronograf
 
 In Chronograf, the `Admin` page includes a complete interface for user management.
-The `Admin` page supports both OSS InfluxDB users and InfluxEnterprise users; see the [User Management](/chronograf/v1.2/administration/user-management/) page for more information.
+The `Admin` page supports both OSS InfluxDB users and InfluxEnterprise users; see the [User Management](/chronograf/v1.3/administration/user-management/) page for more information.
 The `Admin` page allows users to:
 
 * View, create, and delete users
@@ -72,6 +72,6 @@ The `Admin` page allows users to:
 * Create, edit, and delete roles (available in InfluxEnterprise only)
 * Assign and remove roles to or from a user (available in InfluxEnterprise only)
 
-![Chronograf User Management i](/img/chronograf/v1.2/g-admin-chronousers1.png)
+![Chronograf User Management i](/img/chronograf/v1.3/g-admin-chronousers1.png)
 
 Note that, like the web admin interface, Chronograf's [`Query Templates` dropdown](#chronograf) includes the user-related queries.

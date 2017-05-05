@@ -1,7 +1,7 @@
 ---
 title: Advanced Kapacitor Usage
 menu:
-  chronograf_1_2:
+  chronograf_1_3:
     weight: 60
     parent: Guides
 ---
@@ -28,7 +28,7 @@ In the DB Management tab:
 
 #### Step 1: Locate the `chronograf` database and click on the infinity symbol (∞)
 
-![RP in practice](/img/chronograf/v1.2/g-advkap-dur.png)
+![RP in practice](/img/chronograf/v1.3/g-advkap-dur.png)
 
 #### Step 2: Enter a different duration
 

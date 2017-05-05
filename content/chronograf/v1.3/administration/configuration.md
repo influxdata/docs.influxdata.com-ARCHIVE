@@ -1,7 +1,7 @@
 ---
 title: Configuration
 menu:
-  chronograf_1_2:
+  chronograf_1_3:
     weight: 30
     parent: Administration
 ---
@@ -85,12 +85,12 @@ Example: `http:///0.0.0.0:8086`.
 **Environment Variable:** `$INFLUXDB_URL`
 
 ### \--influxdb-username=
-The [username](/chronograf/v1.2/administration/user-management/) for your InfluxDB instance.
+The [username](/chronograf/v1.3/administration/user-management/) for your InfluxDB instance.
 
 **Environment Variable:** `$INFLUXDB_USERNAME`
 
 ### \--influxdb-password=
-The [password](/chronograf/v1.2/administration/user-management/) for your InfluxDB instance.
+The [password](/chronograf/v1.3/administration/user-management/) for your InfluxDB instance.
 
 **Environment Variable:** `$INFLUXDB_PASSWORD`
 
@@ -121,7 +121,7 @@ The file path to the boltDB file (default: `/var/lib/chronograf/chronograf-v1-.d
 **Environment Variable:** `$BOLT_PATH`
 
 ### -c, \--canned-path=                          
-The path to the directory for [pre-created dashboards](/chronograf/v1.2/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf) (default: `/usr/share/chronograf/canned`).
+The path to the directory for [pre-created dashboards](/chronograf/v1.3/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf) (default: `/usr/share/chronograf/canned`).
 
 **Environment Variable:** `$CANNED_PATH`
 
