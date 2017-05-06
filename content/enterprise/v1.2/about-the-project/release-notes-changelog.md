@@ -17,6 +17,21 @@ menu:
 <br>
 # Clustering
 
+## v1.2.5 [2017-05-16]
+
+This release builds off of the 1.2.4 release of OSS InfluxDB.
+Please see the OSS [release notes](/influxdb/v1.2/about_the_project/releasenotes-changelog/#v1-2-4-2017-05-08) for more information about the OSS releases.
+
+#### Bugfixes
+
+- Fix issue where the [`ALTER RETENTION POLICY` query](/influxdb/v1.2/query_language/database_management/#modify-retention-policies-with-alter-retention-policy) does not update the default retention policy.
+- Hinted-handoff: remote write errors containing `partial write` are considered droppable.
+- Fix the broken `influxd-ctl remove-data -force` command.
+- Fix security escalation bug in subscription management.
+- Prevent certain user permissions from having a database-specific scope.
+- Reduce the cost of the admin user check for clusters with large numbers of users.
+- Fix hinted-handoff remote write batching.
+
 ## v1.2.2 [2017-03-15]
 
 This release builds off of the 1.2.1 release of OSS InfluxDB.
@@ -124,6 +139,13 @@ To disable the auto-creation of retention policies, set `retention-autocreate` t
 - Fix issue where subscriptions send duplicate data for [Continuous Query](/influxdb/v1.2/query_language/continuous_queries/) results
 - Fix the output for `influxd-ctl show-shards`
 - Send the correct RPC response for `ExecuteStatementRequestMessage`
+
+## v1.1.5 [2017-04-28]
+
+### Bugfixes
+
+- Prevent certain user permissions from having a database-specific scope.
+- Fix security escalation bug in subscription management.
 
 ## v1.1.3 [2017-02-27]
 

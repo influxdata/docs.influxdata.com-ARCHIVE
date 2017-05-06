@@ -316,6 +316,8 @@ To disable retention policy auto-creation, users on version 1.2.0 and 1.2.1 must
 In version 1.2.2, we've removed the `retention-autocreate` setting from the data node configuration file.
 As of version 1.2.2, users may remove `retention-autocreate` from the data node configuration file.
 To disable retention policy auto-creation, set `retention-autocreate` to `false` in the meta node configuration file only.
+
+This change only affects users who have disabled the `retention-autocreate` option and have installed version 1.2.0 or 1.2.1.
 </dt>
 
 Environment variable: `INFLUXDB_META_RETENTION_AUTOCREATE`
@@ -891,11 +893,17 @@ See the [OSS documentation](/influxdb/v1.2/administration/config/#https-private-
 
 Environment variable: `INFLUXDB_HTTP_HTTPS_PRIVATE_KEY`
 
-###  max-row-limit = 10000
+###  max-row-limit = 0
 
 This limits the number of rows that can be returned in a non-chunked query.
-InfluxDB includes a `"partial":true` tag in the response body if query results exceed `max-row-limit`.
-Set this option to `0` to allow an unlimited number of returned rows.
+The default setting (`0`) allows for an unlimited number of rows.
+InfluxDB includes a `"partial":true` tag in the response body if query results exceed the `max-row-limit` setting.
+
+<dt>
+In InfluxEnterprise Cluster versions 1.2.0 through 1.2.2, the `max-row-limit` option is set to `10,000` by default.
+That default setting can lead to unexpected behavior in [Grafana](https://grafana.com/) panels; if a panel’s query returns more than 10,000 points, the panel appears to show [truncated/partial data](https://github.com/influxdata/influxdb/issues/8050).
+In version 1.2.5, the configuration file sets `max-row-limit` to `0` by default; that setting allows an unlimited number of returned rows.
+</dt>
 
 Environment variable: `INFLUXDB_HTTP_MAX_ROW_LIMIT`
 

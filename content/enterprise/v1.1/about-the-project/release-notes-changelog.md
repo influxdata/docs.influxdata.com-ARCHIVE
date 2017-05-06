@@ -8,6 +8,13 @@ menu:
 
 # Clustering
 
+## v1.1.5 [2017-04-28]
+
+### Bugfixes
+
+- Prevent certain user permissions from having a database-specific scope.
+- Fix security escalation bug in subscription management.
+
 ## v1.1.3 [2017-02-27]
 
 ## Release Notes
