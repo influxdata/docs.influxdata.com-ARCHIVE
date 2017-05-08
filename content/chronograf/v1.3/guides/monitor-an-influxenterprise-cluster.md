@@ -9,7 +9,7 @@ menu:
 [InfluxEnterprise](/enterprise/v1.2/) offers high availability and a highly-scalable clustering solution for your time-series data needs.
 Use Chronograf to assess your cluster's health and monitor the infrastructure behind your project.
 
-This guides offers step-by-step instructions for using Chronograf, [InfluxDB](/influxdb/v1.2/), and [Telegraf](/telegraf/v1.3/) to monitor the data nodes in your InfluxEnteprise cluster.
+This guides offers step-by-step instructions for using Chronograf, [InfluxDB](/influxdb/v1.2/), and [Telegraf](/telegraf/v1.2/) to monitor the data nodes in your InfluxEnteprise cluster.
 
 ## Requirements
 
@@ -30,7 +30,7 @@ Before we begin, here's an overview of the final monitoring setup:
 ![Architecture diagram](/img/chronograf/v1.3/g-cluster-diagram.png)
 
 The diagram above shows an InfluxEnterprise cluster that consists of three meta nodes (M) and three data nodes (D).
-Every data node has its own [Telegraf](/telegraf/v1.3/) instance (T).
+Every data node has its own [Telegraf](/telegraf/v1.2/) instance (T).
 
 Each Telegraf instance is configured to collect its node's CPU, disk, and memory data using Telegraf's [system stats](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) input plugin.
 The Telegraf instances are also configured to send those data to a single [OSS InfluxDB](/influxdb/v1.2/) instance that lives on a separate server.

@@ -37,7 +37,7 @@ The Configure Kapacitor page includes the event handler configuration options; s
 
 ## What applications are supported in Chronograf?
 
-Chronograf offers pre-created dashboards for several [Telegraf](/telegraf/v1.3/) input plugins/applications.
+Chronograf offers pre-created dashboards for several [Telegraf](/telegraf/v1.2/) input plugins/applications.
 We list those applications below and link to their Telegraf documentation:
 
 * [Apache](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/apache)
@@ -143,7 +143,7 @@ Use the Network Time Protocol (NTP) to synchronize time between hosts; if hostsâ
 
 The status icon turns red when Chronograf has not received data from a host for the past minute.
 Chronograf uses data from Telegraf to perform that calculation.
-By default, Telegraf sends data in ten-second intervals; you can change that interval setting in Telegraf's [configuration file](/telegraf/v1.3/administration/configuration/).
+By default, Telegraf sends data in ten-second intervals; you can change that interval setting in Telegraf's [configuration file](/telegraf/v1.2/administration/configuration/).
 If you configure the setting to an interval that's greater than one minute, Chronograf assumes that the host is not reporting data and changes the status icon to red.
 
 
