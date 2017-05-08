@@ -2,7 +2,7 @@
 title: Template Tasks
 
 menu:
-  kapacitor_1_2:
+  kapacitor_1_3:
     name: Template Tasks
     identifier: template_tasks
     weight: 50

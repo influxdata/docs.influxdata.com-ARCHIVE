@@ -2,7 +2,7 @@
 title: Getting Started
 
 menu:
-  kapacitor_1_2:
+  kapacitor_1_3:
     weight: 20
     parent: introduction
 ---

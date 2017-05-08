@@ -2,7 +2,7 @@
 title: Examples
 
 menu:
-  kapacitor_1_2:
+  kapacitor_1_3:
     identifier: examples
     weight: 20
 ---

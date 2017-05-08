@@ -2,7 +2,7 @@
 title: Live Leaderboard of game scores
 
 menu:
-  kapacitor_1_2:
+  kapacitor_1_3:
     name: Live Leaderboard
     identifier: live_leaderboard
     weight: 10
