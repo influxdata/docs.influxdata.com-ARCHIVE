@@ -1062,16 +1062,25 @@ node.pagerDuty()
 ### Post
 
 HTTP POST JSON alert data to a specified URL. 
-Example with endpoint: 
-stream 
-|alert() 
-.post() 
-.endpoint(&#39;example&#39;) 
 
-Example with url: 
-stream 
-|alert() 
-.post(&#39;http://example.com&#39;) 
+Example: 
+
+
+```javascript
+    stream
+         |alert()
+             .post()
+                 .endpoint('example')
+```
+
+Example: 
+
+
+```javascript
+    stream
+         |alert()
+             .post('http://example.com')
+```
 
 
 
@@ -1092,6 +1101,10 @@ node.post(urls ...string)
 
 #### Post Header
 
+Set a header key and value on the post request. 
+Setting the Authenticate header is not allowed from within TICKscript, 
+please use the configuration file to specify sensitive headers. 
+
 Example: 
 
 
@@ -1099,8 +1112,8 @@ Example:
     stream
          |alert()
              .post()
-              .endpoint('example')
-              .header('a','b')
+                 .endpoint('example')
+                 .header('a','b')
 ```
 
 
@@ -1108,14 +1121,6 @@ Example:
 ```javascript
 node.post(urls ...string)
       .header(k string, v string)
-```
-
-
-#### Post Headers
-
-```javascript
-node.post(urls ...string)
-      .headers(value map[string]string)
 ```
 
 
