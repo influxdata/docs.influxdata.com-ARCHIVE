@@ -1,7 +1,7 @@
 ---
-title: Upgrading to Kapacitor v1.2
+title: Upgrading to Kapacitor v1.3
 aliases:
-    - kapacitor/v1.2/introduction/upgrading/
+    - kapacitor/v1.3/introduction/upgrading/
 menu:
   kapacitor_1_2:
     weight: 30

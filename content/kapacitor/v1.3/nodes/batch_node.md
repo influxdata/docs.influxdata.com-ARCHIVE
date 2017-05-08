@@ -12,9 +12,9 @@ menu:
 
 A node that handles creating several child QueryNodes. 
 Each call to `query` creates a child batch node that 
-can further be configured. See [QueryNode](/kapacitor/v1.2/nodes/query_node/) 
+can further be configured. See [QueryNode](/kapacitor/v1.3/nodes/query_node/) 
 The `batch` variable in batch tasks is an instance of 
-a [BatchNode.](/kapacitor/v1.2/nodes/batch_node/) 
+a [BatchNode.](/kapacitor/v1.3/nodes/batch_node/) 
 
 Example: 
 
@@ -44,9 +44,9 @@ Index
 
 ### Chaining Methods
 
--	[Deadman](/kapacitor/v1.2/nodes/batch_node/#deadman)
--	[Query](/kapacitor/v1.2/nodes/batch_node/#query)
--	[Stats](/kapacitor/v1.2/nodes/batch_node/#stats)
+-	[Deadman](/kapacitor/v1.3/nodes/batch_node/#deadman)
+-	[Query](/kapacitor/v1.3/nodes/batch_node/#query)
+-	[Stats](/kapacitor/v1.3/nodes/batch_node/#stats)
 
 Chaining Methods
 ----------------
@@ -101,7 +101,7 @@ Example:
 
 The `id` and `message` alert properties can be configured globally via the &#39;deadman&#39; configuration section. 
 
-Since the [AlertNode](/kapacitor/v1.2/nodes/alert_node/) is the last piece it can be further modified as usual. 
+Since the [AlertNode](/kapacitor/v1.3/nodes/alert_node/) is the last piece it can be further modified as usual. 
 Example: 
 
 
@@ -138,7 +138,7 @@ Example:
 node|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
 ```
 
-Returns: [AlertNode](/kapacitor/v1.2/nodes/alert_node/)
+Returns: [AlertNode](/kapacitor/v1.3/nodes/alert_node/)
 
 
 ### Query
@@ -154,7 +154,7 @@ passed to the `groupBy` method.
 node|query(q string)
 ```
 
-Returns: [QueryNode](/kapacitor/v1.2/nodes/query_node/)
+Returns: [QueryNode](/kapacitor/v1.3/nodes/query_node/)
 
 
 ### Stats
@@ -168,5 +168,5 @@ This means the interval time is independent of the times of the data points the 
 node|stats(interval time.Duration)
 ```
 
-Returns: [StatsNode](/kapacitor/v1.2/nodes/stats_node/)
+Returns: [StatsNode](/kapacitor/v1.3/nodes/stats_node/)
 
