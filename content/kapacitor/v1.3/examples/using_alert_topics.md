@@ -22,7 +22,7 @@ If you do not please take a second to setup both.
 
 ## The Task
 
-We are going to demonstrate how to setup a `slack` alert topic and send alerts to that topic.
+We are going to demonstrate how to setup a `cpu` alert topic and send alerts to that topic.
 
 First let's define our simple cpu alert.
 
@@ -34,11 +34,11 @@ stream
     |alert()
         .warn(lambda: "usage_idle" < 20)
         .crit(lambda: "usage_idle" < 10)
-        // Send alerts to the `slack` topic
-        .topic('slack')
+        // Send alerts to the `cpu` topic
+        .topic('cpu')
 ```
 
-The above TICKscript creates a threshold alert for cpu usage and sends the alerts to the `slack` topic.
+The above TICKscript creates a threshold alert for cpu usage and sends the alerts to the `cpu` topic.
 
 Save the above script as `cpu_alert.tick`.
 Create and start the task by running the following commands:
@@ -50,18 +50,18 @@ $ kapacitor enable cpu_alert
 
 ## The Slack handler
 
-At this point we have a Kapacitor task which is generating alerts and sending them to the `slack` topic, but since the topic does not have any handlers nothing happens with the alerts.
+At this point we have a Kapacitor task which is generating alerts and sending them to the `cpu` topic, but since the topic does not have any handlers nothing happens with the alerts.
 
 We can confirm there are no handlers by checking the topic:
 
 ```sh
-$ kapacitor show-topic slack
+$ kapacitor show-topic cpu
 ```
 
 The output should look something like:
 
 ```
-ID: slack
+ID: cpu
 Level: OK
 Collected: 27
 Handlers: []
@@ -75,42 +75,40 @@ If you get an error about the topic not existing, cause an alert to be triggered
 Either change the thresholds on the task or create some cpu load.
 
 To configure a handler we must first define the handler.
-A handler definition has three parts:
+A handler definition has a few parts:
 
 * ID - The unique ID of the handler.
-* Topics - The list of topics the handler subscribes to.
-* Actions - The list of actions to take.
-
-Each action has two properties:
-
-* Kind - The kind of action, in this case `slack`.
+* Kind - The kind of handler, in this case it will be a `slack` handler
+* Match - A lambda expression to filter matching alerts. By default all alerts match.
 * Options - A map of values to pass to the action, differs by kind.
 
 The slack handler can be defined as either yaml or json, here we use yaml:
 
 ```yaml
-id: slack
-
-topics:
-  - slack
-
-actions:
-  - kind: slack
-    options:
-      channel: '#alerts'
+kind: slack
+options:
+  channel: '#alerts'
 ```
 
+The above handler definition defines a handler that sends alerts to the slack channel `#alerts`.
+
 Save the above text as `slack.yaml`.
-Now we can define our new handler via the `kapacitor` cli:
+Now we can define our new handler via the `kapacitor` cli.
+To do this we use the `define-topic-handler` command which takes three arguments.
+
+```
+$ kapacitor define-topic-handler
+Usage: kapacitor define-topic-handler <topic id> <handler id> <path to handler spec file>
+```
 
 ```sh
-$ kapacitor define-handler slack.yaml
+$ kapacitor define-topic-handler cpu slack ./slack.yaml
 ```
 
 Validate the handler was defined as expected:
 
 ```sh
-$ kapacitor show-handler slack
+$ kapacitor show-topic-handler cpu slack
 ```
 
 Finally confirm the topic is configured as expected:
@@ -122,7 +120,7 @@ $ kapacitor show-topic slack
 The output should look something like:
 
 ```
-ID: slack
+ID: cpu
 Level: OK
 Collected: 27
 Handlers: [slack]
@@ -131,13 +129,13 @@ Event                            Level    Message                               
 cpu:cpu=cpu3,host=localhost      OK       cpu:cpu=cpu3,host=localhost is OK      23 Jan 17 14:04 MST
 ```
 
-We are done, future alerts triggered by the `cpu_alert` task will be send to Slack.
+We are done, future alerts triggered by the `cpu_alert` task will be send to Slack via the `cpu` topic.
 
 ## Conclusion
 
 While it is simple to define alert handlers directly in the TICkscript it can become burdensome once you have many tasks.
 Using topics decouples the definition of the alert from the handling of the alert.
-Now to changing the slack channel is a single API call to update the slack handler and no TICKscripts have to change.
+Now to change the slack channel is a single API call to update the slack handler and no TICKscripts have to change.
 
 ## Going further
 
@@ -146,7 +144,7 @@ Now to changing the slack channel is a single API call to update the slack handl
 Topics can be chained together using the `publish` action.
 This allows you to further group your alerts into various topics.
 
-For example the above task could be modified to send alerts to the `system` topic instead of the `slack` topic.
+For example the above task could be modified to send alerts to the `system` topic instead of the `cpu` topic.
 This way all system related alerts can be handled in a consitent manner.
 
 The new TICKscript:
@@ -166,52 +164,50 @@ stream
 To send all system alerts to Slack, create a new handler for the system topic.
 
 ```yaml
-id: system
-
-topics:
-  - system
-
-actions:
-  - kind: publish
-    options:
-      topics:
-        - slack
+kind: publish
+options:
+  topics:
+    - ops_team
 ```
 
-Alternatively you could modify the `slack` handler to listen to the `system` topic, instead of creating a separate system handler.
+```sh
+kapacitor define-topic-handler system publish-to-ops_team ./publish-to-ops_team.yaml
+```
+
+Since the operations team has a on-call rotation you can setup handling of alerts on the `ops_team` topic accordingly.
+
 
 ```yaml
-id: slack
-
-topics:
-  - slack
-  - system
-
-actions:
-  - kind: slack
-    options:
-      channel: '#alerts'
+kind: victorops
+options:
+  routing-key: ops_team
 ```
 
-### Chaining actions
+```sh
+kapacitor define-topic-handler ops_team victorops ./victorops.yaml
+```
 
-More than one action can be defined for a given handler.
-Typically a user would configure a slack handler to only notify a user of state changes.
-By making use of the `stateChangesOnly` action, we can modify the definition of the slack handler to always use the state changes only behavior.
+Now all `system` related alerts get sent to the `ops_team` topic which in turn get handled in Victor Ops.
+
+### Match Conditions
+
+Match conditions can be applied to handlers.
+Only alerts matching the conditions will be handled by that handler.
+
+For example it is typical to only send Slack messages when alerts change state instead of every time an alert is evaluated.
+Modifing the slack handler definition from the first example we get:
 
 ```yaml
-id: slack
-
-topics:
-  - slack
-
-actions:
-  - kind: stateChangesOnly
-  - kind: slack
-    options:
-      channel: '#alerts'
+kind: slack
+match: changed() == TRUE
+options:
+  channel: '#alerts'
 ```
 
-Now the `stateChangesOnly` behavior is defined along side the action to send alerts to slack.
-This decoupling of the alert definitions from handlers  enables making small atmoic changes without needing to worry about side effects.
+
+Now update the handler and only alerts that changed state will be sent to Slack.
+
+```
+kapacitor define-topic-handler cpu slack ./slack.yaml
+```
 
