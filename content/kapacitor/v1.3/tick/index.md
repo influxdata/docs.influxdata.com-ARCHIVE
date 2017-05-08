@@ -2,7 +2,7 @@
 title: TICKscript Language Reference
 
 menu:
-  kapacitor_1_2:
+  kapacitor_1_3:
     name: TICKscript
     identifier: tick
     weight: 3

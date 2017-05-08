@@ -6,7 +6,7 @@ aliases:
     - kapacitor/v1.3/nodes/map_node/
     - kapacitor/v1.3/nodes/reduce_node/
 menu:
-  kapacitor_1_2:
+  kapacitor_1_3:
     name: TICKscript Nodes
     identifier: nodes
     weight: 4

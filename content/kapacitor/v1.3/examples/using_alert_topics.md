@@ -2,7 +2,7 @@
 title: Using Alert Topics
 
 menu:
-  kapacitor_1_2:
+  kapacitor_1_3:
     name: Using Alert Topics
     identifier: using_alert_topics
     weight: 60

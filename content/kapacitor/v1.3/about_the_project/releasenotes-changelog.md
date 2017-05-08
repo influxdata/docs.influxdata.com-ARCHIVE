@@ -1,12 +1,12 @@
 ---
 title: Release Notes/Changelog
 menu:
-  kapacitor_1_2:
+  kapacitor_1_3:
     weight: 0
     parent: about_the_project
 ---
 
-## v1.3.0 [2017-01-23]
+## v1.2.0 [2017-01-23]
 
 ### Release Notes
 
@@ -62,7 +62,7 @@ As a result existing alert nodes will now remember the state of alerts after res
 
 >NOTE: The new alerting features are being released under technical preview.
 This means breaking changes may be made in later releases until the feature is considered complete.
-See the [API docs on technical preview](https://docs.influxdata.com/kapacitor/v1.3/api/api/#technical-preview) for specifics of how this effects the API.
+See the [API docs on technical preview](https://docs.influxdata.com/kapacitor/v1.2/api/api/#technical-preview) for specifics of how this effects the API.
 
 ### Features
 
