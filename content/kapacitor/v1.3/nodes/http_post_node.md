@@ -110,6 +110,8 @@ Property methods are marked using the `.` operator.
 
 ### Endpoint
 
+Name of the endpoint to be used, as is defined in the configuration file. 
+
 Example: 
 
 
@@ -124,17 +126,6 @@ Example:
 ```javascript
 node.endpoint(endpoint string)
 ```
-
-#### Endpoint Endpoint
-
-Name of the endpoint to be used, as is defined in the configuration file 
-
-
-```javascript
-node.endpoint(endpoint string)
-      .endpoint(value string)
-```
-
 
 
 ### Header
