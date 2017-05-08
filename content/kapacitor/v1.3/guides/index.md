@@ -8,4 +8,4 @@ menu:
     weight: 1
 ---
 
-## [Event Handler Setup](/kapacitor/v1.2/guides/event-handler-setup/)
+## [Event Handler Setup](/kapacitor/v1.3/guides/event-handler-setup/)

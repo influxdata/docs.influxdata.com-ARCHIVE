@@ -9,7 +9,7 @@ menu:
     parent: examples
 ---
 
-In [another example](/kapacitor/v1.2/examples/anomaly_detection/) we saw how to write a process based UDF for custom anomaly detection workloads.
+In [another example](/kapacitor/v1.3/examples/anomaly_detection/) we saw how to write a process based UDF for custom anomaly detection workloads.
 In this example we are going to learn how to write a simple socket based UDF.
 
 ## What is a UDF?
@@ -643,7 +643,7 @@ custom anomaly detection algorithms, or simply a system to "massage" your data a
 
 If you want to learn more, here are a few places to start:
 
-* Modify the mirror UDF, to function like the [DefaultNode](https://docs.influxdata.com/kapacitor/v1.2/nodes/default_node/).
+* Modify the mirror UDF, to function like the [DefaultNode](https://docs.influxdata.com/kapacitor/v1.3/nodes/default_node/).
 	Instead of always overwriting a field, only set it if the field is not absent.
 	Also add support for setting tags as well as fields.
 * Change the mirror UDF to work on batches instead of streams.
