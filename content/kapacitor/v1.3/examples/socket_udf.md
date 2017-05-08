@@ -113,20 +113,20 @@ The interface we need to implement is as follows:
 // To write Points/Batches back to the Agent/Kapacitor use the Agent.Responses channel.
 type Handler interface {
     // Return the InfoResponse. Describing the properties of this Handler
-    Info() (*udf.InfoResponse, error)
+    Info() (*agent.InfoResponse, error)
     // Initialize the Handler with the provided options.
-    Init(*udf.InitRequest) (*udf.InitResponse, error)
+    Init(*agent.InitRequest) (*agent.InitResponse, error)
     // Create a snapshot of the running state of the handler.
-    Snaphost() (*udf.SnapshotResponse, error)
+    Snapshot() (*agent.SnapshotResponse, error)
     // Restore a previous snapshot.
-    Restore(*udf.RestoreRequest) (*udf.RestoreResponse, error)
+    Restore(*agent.RestoreRequest) (*agent.RestoreResponse, error)
 
     // A batch has begun.
-    BeginBatch(*udf.BeginBatch) error
+    BeginBatch(*agent.BeginBatch) error
     // A point has arrived.
-    Point(*udf.Point) error
+    Point(*agent.Point) error
     // The batch is complete.
-    EndBatch(*udf.EndBatch) error
+    EndBatch(*agent.EndBatch) error
 
     // Gracefully stop the Handler.
     // No other methods will be called.
@@ -191,23 +191,23 @@ Add these methods to the `main.go` file:
 ```go
 
 // Return the InfoResponse. Describing the properties of this UDF agent.
-func (*mirrorHandler) Info() (*udf.InfoResponse, error) {
-    info := &udf.InfoResponse{
+func (*mirrorHandler) Info() (*agent.InfoResponse, error) {
+    info := &agent.InfoResponse{
         // We want a stream edge
-        Wants:    udf.EdgeType_STREAM,
+        Wants:    agent.EdgeType_STREAM,
         // We provide a stream edge
-        Provides: udf.EdgeType_STREAM,
+        Provides: agent.EdgeType_STREAM,
         // We expect no options.
-        Options:  map[string]*udf.OptionInfo{},
+        Options:  map[string]*agent.OptionInfo{},
     }
     return info, nil
 }
 
 // Initialze the handler based of the provided options.
-func (*mirrorHandler) Init(r *udf.InitRequest) (*udf.InitResponse, error) {
+func (*mirrorHandler) Init(r *agent.InitRequest) (*agent.InitResponse, error) {
     // Since we expected no options this method is trivial
     // and we return success.
-    init := &udf.InitResponse{
+    init := &agent.InitResponse{
         Success: true,
         Error:   "",
     }
@@ -224,10 +224,10 @@ for handling data.
 Add this method to the `main.go` file which sends back every point it receives to Kapacitor via the agent:
 
 ```go
-func (h *mirrorHandler) Point(p *udf.Point) error {
+func (h *mirrorHandler) Point(p *agent.Point) error {
     // Send back the point we just received
-    h.agent.Responses <- &udf.Response{
-        Message: &udf.Response_Point{
+    h.agent.Responses <- &agent.Response{
+        Message: &agent.Response_Point{
             Point: p,
         },
     }
@@ -257,21 +257,21 @@ Specifically, the methods around batching and snapshot/restores are missing, but
 
 ```go
 // Create a snapshot of the running state of the process.
-func (*mirrorHandler) Snaphost() (*udf.SnapshotResponse, error) {
-    return &udf.SnapshotResponse{}, nil
+func (*mirrorHandler) Snapshot() (*agent.SnapshotResponse, error) {
+    return &agent.SnapshotResponse{}, nil
 }
 // Restore a previous snapshot.
-func (*mirrorHandler) Restore(req *udf.RestoreRequest) (*udf.RestoreResponse, error) {
-    return &udf.RestoreResponse{
+func (*mirrorHandler) Restore(req *agent.RestoreRequest) (*agent.RestoreResponse, error) {
+    return &agent.RestoreResponse{
         Success: true,
     }, nil
 }
 
 // Start working with the next batch
-func (*mirrorHandler) BeginBatch(begin *udf.BeginBatch) error {
+func (*mirrorHandler) BeginBatch(begin *agent.BeginBatch) error {
     return errors.New("batching not supported")
 }
-func (*mirrorHandler) EndBatch(end *udf.EndBatch) error {
+func (*mirrorHandler) EndBatch(end *agent.EndBatch) error {
     return nil
 }
 ```
@@ -368,7 +368,6 @@ import (
     "os"
     "syscall"
 
-    "github.com/influxdata/kapacitor/udf"
     "github.com/influxdata/kapacitor/udf/agent"
 )
 
@@ -382,18 +381,18 @@ func newMirrorHandler(agent *agent.Agent) *mirrorHandler {
 }
 
 // Return the InfoResponse. Describing the properties of this UDF agent.
-func (*mirrorHandler) Info() (*udf.InfoResponse, error) {
-    info := &udf.InfoResponse{
-        Wants:    udf.EdgeType_STREAM,
-        Provides: udf.EdgeType_STREAM,
-        Options:  map[string]*udf.OptionInfo{},
+func (*mirrorHandler) Info() (*agent.InfoResponse, error) {
+    info := &agent.InfoResponse{
+        Wants:    agent.EdgeType_STREAM,
+        Provides: agent.EdgeType_STREAM,
+        Options:  map[string]*agent.OptionInfo{},
     }
     return info, nil
 }
 
 // Initialze the handler based of the provided options.
-func (*mirrorHandler) Init(r *udf.InitRequest) (*udf.InitResponse, error) {
-    init := &udf.InitResponse{
+func (*mirrorHandler) Init(r *agent.InitRequest) (*agent.InitResponse, error) {
+    init := &agent.InitResponse{
         Success: true,
         Error:   "",
     }
@@ -401,33 +400,33 @@ func (*mirrorHandler) Init(r *udf.InitRequest) (*udf.InitResponse, error) {
 }
 
 // Create a snapshot of the running state of the process.
-func (*mirrorHandler) Snaphost() (*udf.SnapshotResponse, error) {
-    return &udf.SnapshotResponse{}, nil
+func (*mirrorHandler) Snapshot() (*agent.SnapshotResponse, error) {
+    return &agent.SnapshotResponse{}, nil
 }
 
 // Restore a previous snapshot.
-func (*mirrorHandler) Restore(req *udf.RestoreRequest) (*udf.RestoreResponse, error) {
-    return &udf.RestoreResponse{
+func (*mirrorHandler) Restore(req *agent.RestoreRequest) (*agent.RestoreResponse, error) {
+    return &agent.RestoreResponse{
         Success: true,
     }, nil
 }
 
 // Start working with the next batch
-func (*mirrorHandler) BeginBatch(begin *udf.BeginBatch) error {
+func (*mirrorHandler) BeginBatch(begin *agent.BeginBatch) error {
     return errors.New("batching not supported")
 }
 
-func (h *mirrorHandler) Point(p *udf.Point) error {
+func (h *mirrorHandler) Point(p *agent.Point) error {
     // Send back the point we just received
-    h.agent.Responses <- &udf.Response{
-        Message: &udf.Response_Point{
+    h.agent.Responses <- &agent.Response{
+        Message: &agent.Response_Point{
             Point: p,
         },
     }
     return nil
 }
 
-func (*mirrorHandler) EndBatch(end *udf.EndBatch) error {
+func (*mirrorHandler) EndBatch(end *agent.EndBatch) error {
     return nil
 }
 
@@ -562,14 +561,14 @@ type mirrorHandler struct {
 }
 
 // Return the InfoResponse. Describing the properties of this UDF agent.
-func (*mirrorHandler) Info() (*udf.InfoResponse, error) {
-    info := &udf.InfoResponse{
-        Wants:    udf.EdgeType_STREAM,
-        Provides: udf.EdgeType_STREAM,
-        Options: map[string]*udf.OptionInfo{
-            "field": {ValueTypes: []udf.ValueType{
-                udf.ValueType_STRING,
-                udf.ValueType_DOUBLE,
+func (*mirrorHandler) Info() (*agent.InfoResponse, error) {
+    info := &agent.InfoResponse{
+        Wants:    agent.EdgeType_STREAM,
+        Provides: agent.EdgeType_STREAM,
+        Options: map[string]*agent.OptionInfo{
+            "field": {ValueTypes: []agent.ValueType{
+                agent.ValueType_STRING,
+                agent.ValueType_DOUBLE,
             }},
         },
     }
@@ -577,16 +576,16 @@ func (*mirrorHandler) Info() (*udf.InfoResponse, error) {
 }
 
 // Initialze the handler based of the provided options.
-func (h *mirrorHandler) Init(r *udf.InitRequest) (*udf.InitResponse, error) {
-    init := &udf.InitResponse{
+func (h *mirrorHandler) Init(r *agent.InitRequest) (*agent.InitResponse, error) {
+    init := &agent.InitResponse{
         Success: true,
         Error:   "",
     }
     for _, opt := range r.Options {
         switch opt.Name {
         case "field":
-            h.name = opt.Values[0].Value.(*udf.OptionValue_StringValue).StringValue
-            h.value = opt.Values[1].Value.(*udf.OptionValue_DoubleValue).DoubleValue
+            h.name = opt.Values[0].Value.(*agent.OptionValue_StringValue).StringValue
+            h.value = opt.Values[1].Value.(*agent.OptionValue_DoubleValue).DoubleValue
         }
     }
 
@@ -602,15 +601,15 @@ Now we can set the field with its name and value on the points.
 Update the `Point` method:
 
 ```go
-func (h *mirrorHandler) Point(p *udf.Point) error {
+func (h *mirrorHandler) Point(p *agent.Point) error {
     // Send back the point we just received
     if p.FieldsDouble == nil {
         p.FieldsDouble = make(map[string]float64)
     }
     p.FieldsDouble[h.name] = h.value
 
-    h.agent.Responses <- &udf.Response{
-        Message: &udf.Response_Point{
+    h.agent.Responses <- &agent.Response{
+        Message: &agent.Response_Point{
             Point: p,
         },
     }
