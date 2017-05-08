@@ -13,6 +13,10 @@ menu:
 * [What does the status column indicate on the Host List page?](#what-does-the-status-column-indicate-on-the-host-list-page)
 * [Why is my host's status red when data are still arriving?](#why-is-my-host-s-status-red-when-data-are-still-arriving)
 
+### Known Issues
+
+* [Why is my query's field key order inconsistent?](#why-is-my-query-s-field-key-order-inconsistent)
+
 ## What Kapacitor event handlers are supported in Chronograf?
 
 Chronograf integrates with [Kapacitor](/kapacitor/v1.2/), InfluxData's data processing platform, to send alert messages to event handlers.
@@ -120,7 +124,7 @@ If a cell's query includes a [`GROUP BY` tag](/influxdb/v1.2/query_language/data
 For example, if a query groups by the `name` [tag key](/influxdb/v1.2/concepts/glossary/#tag-key) and `name` has two [tag values](/influxdb/v1.2/concepts/glossary/#tag-value) (`chronelda` and `chronz`), Chronograf shows the most recent field value associated with the `chronelda` series.
 
 If a cell's query includes more than one [field key](/influxdb/v1.2/concepts/glossary/#field-key) in the [`SELECT` clause](/influxdb/v1.2/query_language/data_exploration/#select-clause), Chronograf returns the most recent field value associated with the first field key in the `SELECT` clause.
-For example, if a query's `SELECT` clause is `SELECT "chronogiraffe","chronelda"`, Chronograf show the most recent field value associated with the `chronogiraffe` field key.
+For example, if a query's `SELECT` clause is `SELECT "chronogiraffe","chronelda"`, Chronograf shows the most recent field value associated with the `chronogiraffe` field key.
 
 ### Line+Stat
 Show time-series in a line graph and overlay the time-series' single most recent value.
@@ -146,6 +150,16 @@ Chronograf uses data from Telegraf to perform that calculation.
 By default, Telegraf sends data in ten-second intervals; you can change that interval setting in Telegraf's [configuration file](/telegraf/v1.2/administration/configuration/).
 If you configure the setting to an interval that's greater than one minute, Chronograf assumes that the host is not reporting data and changes the status icon to red.
 
+## Why is my query's field key order inconsistent?
+
+In query editor mode, Chronograf doesn't preserve the order of the items in the [`SELECT` clause](/influxdb/v1.2/query_language/data_exploration/#the-basic-select-statement).
+Chronograf may change the order of the items in the `SELECT` clause after it executes the query and populates the cell with the query results.
+
+This issue affects the [SingleStat](#singlestat) and [Line+Stat](#line-stat) graph types.
+If a cell's query includes more than one [field key](/influxdb/v1.2/concepts/glossary/#field-key) in the `SELECT` clause, Chronograf returns the most recent stat associated with the first field key in the `SELECT` clause.
+If you sorted the field keys in your query to rely on that behavior, it is important to note that Chronograf may change that order when it executes your query.
+
+This is a [known issue](https://github.com/influxdata/chronograf/issues/1158) and it will be fixed in a future release.
 
 
 
