@@ -25,6 +25,10 @@ menu:
 ### Configuration
 Configure the JWT signature and the OAuth provider to use authentication in Chronograf.
 
+>**Note:**
+If you're using the [`--basepath` option](/chronograf/v1.3/administration/configuration/#p-basepath) when starting Chronograf,
+add the same basepath to the callback URL of any OAuth provider that you configure.
+
 ### JWT Signature
 Set a [JWT](https://tools.ietf.org/html/rfc7519) signature to a random string.
 This is needed for all OAuth2 providers that you choose to configure.
