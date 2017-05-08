@@ -10,7 +10,7 @@ menu:
 ---
 
 Kapacitor's alert system follows a publish subscribe design pattern.
-Alerts are published to a `topic` and handlers subscribe to various topics.
+Alerts are published to a `topic` and `handlers` subscribe to a topic.
 
 This example will walk you through setting up a simple cpu threshold alert that sends alerts to Slack.
 
@@ -80,7 +80,7 @@ A handler definition has a few parts:
 * ID - The unique ID of the handler.
 * Kind - The kind of handler, in this case it will be a `slack` handler
 * Match - A lambda expression to filter matching alerts. By default all alerts match.
-* Options - A map of values to pass to the action, differs by kind.
+* Options - A map of values, differs by kind.
 
 The slack handler can be defined as either yaml or json, here we use yaml:
 
