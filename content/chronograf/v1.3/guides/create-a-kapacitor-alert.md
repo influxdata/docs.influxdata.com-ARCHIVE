@@ -24,7 +24,7 @@ See the [Configure Kapacitor Event Handlers](/chronograf/v1.3/guides/configure-k
 
 ## Configure a Kapacitor alert rule
 
-Before you start, navigate to the Rule Configuration page by visiting the Kapacitor Rules page and clicking on the `Create Rule` button in the top right corner.
+Before you start, navigate to the Rule Configuration page by visiting the Alert Rules page and clicking on the `Create Rule` button in the top right corner.
 
 ![Navigate to Rule Configuration](/img/chronograf/v1.3/g-kap-rule-page.png)
 
@@ -55,7 +55,7 @@ Don't worry about that for now; we'll discuss that time range in step four.
 
 ### Step 3: Select the alert type
 
-Choose from three alert types in the `Values` section of the Rule Configuration page.
+Choose from three alert types in the `Rule Conditions` section of the Rule Configuration page.
 The three alert types are:
 
 * Threshold - alert if the data cross a boundary
@@ -64,7 +64,7 @@ The three alert types are:
 
 Here, we select the `Threshold` alert type.
 
-### Step 4: Define the alert condition
+### Step 4: Define the rule condition
 
 Next, define the threshold condition:
 
@@ -80,8 +80,6 @@ The graph shows a preview of the relevant data and the threshold number.
 By default, the graph shows data within the past 15 minutes.
 The time range selector in the top right corner adjusts the graph's time range.
 Use this feature when determining a reasonable threshold number based on your data.
-
-![Change the time range](/img/chronograf/v1.3/g-kap-timerange.gif)
 
 > **Note:**
 We set the threshold number to `80` for demonstration purposes.
