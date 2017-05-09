@@ -48,7 +48,7 @@ Alternatively, manually enter and edit a query.
 Chronograf allows you to move seamlessly between using the builder and manually editing the query; when possible, the interface automatically populates the builder with the information from your raw query.
 
 Here, we use the builder to generate a query that shows the average idle CPU usage grouped by host (in this case, there are three hosts).
-By default, Chronograf shows data from the past one hour.
+By default, Chronograf shows data from the past one hour; that time range is [configurable on the dashboard](#step-6-configure-your-dashboard).
 
 ![Build your query](/img/chronograf/v1.3/g-dashboard-builder.png)
 

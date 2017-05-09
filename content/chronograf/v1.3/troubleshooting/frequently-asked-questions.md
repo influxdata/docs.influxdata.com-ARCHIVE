@@ -16,6 +16,7 @@ menu:
 ### Known Issues
 
 * [Why is my query's field key order inconsistent?](#why-is-my-query-s-field-key-order-inconsistent)
+* [Why does the query builder break after I add my template variable to a query?](#why-does-the-query-builder-break-after-i-add-my-template-variable-to-a-query)
 
 ## What Kapacitor event handlers are supported in Chronograf?
 
@@ -161,7 +162,10 @@ If you sorted the field keys in your query to rely on that behavior, it is impor
 
 This is a [known issue](https://github.com/influxdata/chronograf/issues/1158) and it will be fixed in a future release.
 
+## Why does the query builder break after I add my template variable to a query?
 
+Currently, adding a [template variable](/chronograf/v1.3/guides/dashboard-template-variables/) to a cell's query renders the query builder unusable.
+If you click on a database in the builder's `Databases` column after adding a template variable to your query, Chronograf simply overwrites your existing query.
+Note that this behavior does not apply to Chronograf's pre-created template variable: `:dashboardTime:`.
 
-
-
+This is a known issue and it will be fixed in a future release.
