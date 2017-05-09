@@ -475,7 +475,7 @@ At **8:00**, `cq_advanced_every` executes a query with the time range `WHERE tim
     time                   mean
     2016-08-28T07:00:00Z   7
 >
-At **8:30**, `cq_advanced_every` executes a query with the time range `WHERE time >= '8:00' AND time < '9:00'`.  
+At **8:30**, `cq_advanced_every` executes a query with the time range `WHERE time >= '7:30' AND time < '8:30'`.  
 `cq_advanced_every` writes one point to the `average_passengers` measurement:
 >
     name: average_passengers
