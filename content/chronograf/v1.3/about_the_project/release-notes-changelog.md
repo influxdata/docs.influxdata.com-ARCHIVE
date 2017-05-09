@@ -19,6 +19,9 @@ menu:
   1. Show red indicator on Hosts Page for an offline host
   1. Support escaping from presentation mode in Safari
   1. Re-implement level colors on the alerts page
+  1. Fix router bug introduced by upgrading to react-router v3.0
+  1. Show legend on [Line+Stat](/chronograf/v1.3/troubleshooting/frequently-asked-questions/#line-stat) visualization type
+  1. Prevent queries with `:dashboardTime:` from breaking the query builder
 
 ### Features
   1. Add line-protocol proxy for InfluxDB/InfluxEnterprise Cluster data sources
@@ -33,5 +36,6 @@ menu:
   1. Normalize the terminology in Chronograf
   1. Make overlays full-screen
   1. Change the default global time range to past 1 hour
+  1. Add the Source Indicator icon to the Configuration and Admin pages
   
 > See Chronograf's [CHANGELOG](https://github.com/influxdata/chronograf/blob/master/CHANGELOG.md) on GitHub for information about the 1.2.0-beta releases.
