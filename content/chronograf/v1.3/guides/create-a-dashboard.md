@@ -92,7 +92,7 @@ Note that Chronograf does not save your cell if you navigate away from this page
 * **Reset** your cell by double-clicking your mouse in the cell window 
 
 > Note:
-These tips only apply to the line, stacked, and step-plot [visualization types](/chronograf/v1.3/troubleshooting/frequently-asked-questions/#what-visualization-types-does-chronograf-support).
+These tips only apply to the line, stacked, step-plot, and line+stat [visualization types](/chronograf/v1.3/troubleshooting/frequently-asked-questions/#what-visualization-types-does-chronograf-support).
 
 #### Configure dashboard-wide settings:
 * Set the dashboard's **auto-refresh interval** at the top of the page - the default interval is every 15 seconds
