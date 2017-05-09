@@ -26,13 +26,11 @@ The templates included queries with no user-provided values (example: [`SHOW MEA
 
 ### Chronograf
 
-In Chronograf, the same `Query Templates` dropdown appears in the Data Explorer and in the Dashboard Cell Editor.
+In Chronograf, the same `Query Templates` dropdown appears in the Data Explorer.
 To use query templates, select a query from the set of available queries and insert the relevant user-provided values.
 Note that unlike the web admin interface, Chronograf does not have a database dropdown; the query must specify the target database.
 
 ![Chronograf Query Templates](/img/chronograf/v1.3/g-admin-chronotemplates.png)
-
-> **Note:** Chronograf's `Query Templates` dropdown does not support the `SHOW CONTINUOUS QUERIES` query.
 
 ## Database and Retention Policy Management
 
