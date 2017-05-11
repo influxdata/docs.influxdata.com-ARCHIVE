@@ -7,10 +7,10 @@ menu:
     weight: 17
 ---
 
-Kapacitor supports discoverying and scraping remote targets.
-Currently only Prometheues style targets are supported.
+Kapacitor supports discovering and scraping remote targets.
+Currently only Prometheus style targets are supported.
 
->NOTE: Scraping and Discovery is curently under technical preview.
+>NOTE: Scraping and Discovery is currently under technical preview.
 This means that there may be changes to the configuration and behavior in subsequent releases.
 
 ## Scraping
