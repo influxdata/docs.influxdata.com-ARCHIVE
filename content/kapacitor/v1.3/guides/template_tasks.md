@@ -1,12 +1,13 @@
 ---
 title: Template Tasks
-
+aliases:
+    - kapacitor/v1.3/examples/template_tasks/
 menu:
   kapacitor_1_3:
     name: Template Tasks
     identifier: template_tasks
     weight: 50
-    parent: examples
+    parent: guides
 ---
 
 Kapacitor has a template system that lets you define a template and reuse it for multiple tasks.
