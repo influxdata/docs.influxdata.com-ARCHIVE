@@ -1,12 +1,13 @@
 ---
 title: Using Alert Topics
-
+aliases:
+    - kapacitor/v1.3/examples/using_alert_topics/
 menu:
   kapacitor_1_3:
     name: Using Alert Topics
     identifier: using_alert_topics
     weight: 60
-    parent: examples
+    parent: guides
 ---
 
 Kapacitor's alert system follows a publish subscribe design pattern.

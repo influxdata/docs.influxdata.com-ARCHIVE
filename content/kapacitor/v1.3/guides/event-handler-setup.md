@@ -3,7 +3,7 @@ title: Event Handler Setup
 
 menu:
   kapacitor_1_3:
-    weight: 0
+    weight: 70
     parent: guides
 ---
 

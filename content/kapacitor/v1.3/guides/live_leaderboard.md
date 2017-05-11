@@ -1,12 +1,13 @@
 ---
 title: Live Leaderboard of game scores
-
+aliases:
+    - kapacitor/v1.3/examples/live_leaderboard/
 menu:
   kapacitor_1_3:
     name: Live Leaderboard
     identifier: live_leaderboard
     weight: 10
-    parent: examples
+    parent: guides
 ---
 
 **If you do not have a running Kapacitor instance check out the [getting started guide](/kapacitor/v1.3/introduction/getting_started/)
