@@ -213,5 +213,5 @@ actions:
 ```
 
 Now the `stateChangesOnly` behavior is defined along side the action to send alerts to slack.
-This decoupling of the alert definitions from handlers  enables making small atmoic changes without needing to worry about side effects.
+This decoupling of the alert definitions from handlers  enables making small atomic changes without needing to worry about side effects.
 
