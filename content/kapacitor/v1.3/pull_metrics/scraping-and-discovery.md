@@ -3,8 +3,8 @@ title: Scraping and Discovery
 
 menu:
   kapacitor_1_3:
-    identifier: scraping
-    weight: 17
+    weight: 0
+    parent: pull_metrics
 ---
 
 Kapacitor supports discovering and scraping remote targets.
@@ -84,4 +84,3 @@ Kapacitor supports the following service for discovery:
 
 
 See the example [configuration file](https://github.com/influxdata/kapacitor/blob/master/etc/kapacitor/kapacitor.conf) for details on configuring each discoverer.
-
