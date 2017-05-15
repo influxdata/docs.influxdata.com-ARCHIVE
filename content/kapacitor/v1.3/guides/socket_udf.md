@@ -1,12 +1,13 @@
 ---
 title: Writing a socket based UDF
-
+aliases:
+    - kapacitor/v1.3/examples/socket_udf/
 menu:
   kapacitor_1_3:
     name: Writing a socket based UDF
     identifier: socket_udf
     weight: 40
-    parent: examples
+    parent: guides
 ---
 
 In [another example](/kapacitor/v1.3/examples/anomaly_detection/) we saw how to write a process based UDF for custom anomaly detection workloads.

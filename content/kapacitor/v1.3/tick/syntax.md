@@ -50,7 +50,7 @@ There are two ways to write string literals:
 
 TICKscript supports durations literals.
 They are of the form of InfluxQL duration literals.
-See https://docs.influxdata.com/influxdb/v1.3/query_language/spec/#literals
+See https://docs.influxdata.com/influxdb/v1.2/query_language/spec/#literals
 
 Duration literals specify a length of time.
 An integer literal followed immediately (with no spaces) by a duration unit listed below is interpreted as a duration literal.

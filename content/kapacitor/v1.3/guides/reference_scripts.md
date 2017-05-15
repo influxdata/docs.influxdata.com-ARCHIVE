@@ -1,12 +1,13 @@
 ---
 title: Reference TICKscripts
-
+aliases:
+    - kapacitor/v1.3/examples/reference_scripts/
 menu:
   kapacitor_1_3:
     name: Reference TICKscripts
     identifier: reference_scripts
     weight: 20
-    parent: examples
+    parent: guides
 ---
 
 The Kapacitor repository has a number of [example TICKscripts](https://github.com/influxdata/kapacitor/tree/master/examples/telegraf). 

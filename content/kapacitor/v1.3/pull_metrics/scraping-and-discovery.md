@@ -3,36 +3,49 @@ title: Scraping and Discovery
 
 menu:
   kapacitor_1_3:
-    identifier: scraping
-    weight: 17
+    weight: 0
+    parent: pull_metrics
 ---
 
-Kapacitor supports discoverying and scraping remote targets.
-Currently only Prometheues style targets are supported.
+Pull data from a dynamic list of remote targets with Kapacitor's discovery and scraping features.
+Use those features with Kapacitor's [TICKscripts](/kapacitor/v1.3/tick/) to monitor targets, process the data, and write data to [InfluxDB](/influxdb/v1.2/).
+Currently, Kapacitor supports only Prometheus style targets.
 
->NOTE: Scraping and Discovery is curently under technical preview.
-This means that there may be changes to the configuration and behavior in subsequent releases.
+>**Note**: Scraping and discovery is currently under technical preview.
+There may be changes to the configuration and behavior in subsequent releases.
 
-## Scraping
+### Content
 
-Scraping is the action of making a request to a target for metrics about the target.
-As an example your application could expose a `/metrics` endpoint on its HTTP API that returns statistics about the running application.
+* [Overview](#overview)
+* [Configuring Scrapers and Discoverers](#configuring-scrapers-and-discoverers)
 
-## Discovery
+## Overview
 
-Discovery is the action of querying a system for a list of known targets to scrape.
-For example DNS can be used for discovery.
+![image](/img/kapacitor/pull-metrics.png)
 
-## Pulling metrics
+The diagram above outlines the infrastructure for discovering and scraping data with Kapacitor.
 
-By combining discovery with scraping Kapacitor enables your metrics gathering infrastructure to pull metrics off target instead of requiring them to push metrics out to InfluxDB.
-Pulling metrics has various advantages in very dynamic environments where a target may have a very short lifecycle.
+First, Kapacitor implements the discovery process to identify the available targets in your infrastructure.
+It requests that information at regular intervals and receives that information from an [authority](#available-discoverers).
+In the diagram, the authority informs Kapacitor of three targets: `A`, `B`, and `C`.
 
+Next, Kapacitor implements the scraping process to pull metrics data from the existing targets.
+It runs the scraping process at regular intervals.
+Here, Kapacitor requests metrics from targets `A`, `B`, and `C`.
+The application running on `A`, `B`, and `C` exposes a `/metrics` endpoint on its HTTP API which returns application-specific statistics.
+
+Finally, Kapacitor processes the data according to your configured [TICKscripts](/kapacitor/v1.3/tick/).
+Use TICKscripts to filter, transform, and perform other tasks on your metrics data.
+In addition, if you'd like to store your data, configure a TICKscript to send them to [InfluxDB](/influxdb/v1.2/).
+
+### Pushing vs. Pulling Metrics
+
+By combining discovery with scraping, Kapacitor enables your metrics gathering infrastructure to pull metrics off of targets instead of requiring them to push metrics out to InfluxDB.
+Pulling metrics has several advantages in dynamic environments where a target may have a short lifecycle.
 
 ## Configuring Scrapers and Discoverers
 
-
-A single scraper will scrape the targets from a single discoverer.
+A single scraper scrapes the targets from a single discoverer.
 Configuring both scrapers and discoverers comes down to configuring each individually and then informing the scraper about the discoverer.
 
 Below are all the configuration options for a scraper.
@@ -84,4 +97,3 @@ Kapacitor supports the following service for discovery:
 
 
 See the example [configuration file](https://github.com/influxdata/kapacitor/blob/master/etc/kapacitor/kapacitor.conf) for details on configuring each discoverer.
-
