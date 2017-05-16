@@ -91,6 +91,7 @@ These plugins will replace [udp_listener](https://github.com/influxdata/telegraf
 - Add [Kapacitor input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/kapacitor).
 - Use Go (golang) 1.8.1.
 - Add documentation for the [RabbitMQ input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/rabbitmq).
+- Make the [Logparser input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/logparser) check for newly-created files.
 
 ### Bugfixes
 
