@@ -31,8 +31,8 @@ For a complete list of the installation requirements, see the [Installation](/ch
 
 #### 1. Download and Install InfluxDB
 ```
-wget https://dl.influxdata.com/influxdb/releases/influxdb_1.2.2_amd64.deb
-sudo dpkg -i influxdb_1.2.2_amd64.deb
+wget https://dl.influxdata.com/influxdb/releases/influxdb_1.2.4_amd64.deb
+sudo dpkg -i influxdb_1.2.4_amd64.deb
 ```
 
 #### 2. Start InfluxDB
@@ -94,8 +94,8 @@ Ultimately, you will configure a Telegraf input plugin for each application that
 
 #### 1. Download and Install Telegraf
 ```
-wget https://dl.influxdata.com/telegraf/releases/telegraf_1.2.1_amd64.deb
-sudo dpkg -i telegraf_1.2.1_amd64.deb
+wget https://dl.influxdata.com/telegraf/releases/telegraf_1.3.0-1_amd64.deb
+sudo dpkg -i telegraf_1.3.0-1_amd64.deb
 ```
 
 #### 2. Start Telegraf
