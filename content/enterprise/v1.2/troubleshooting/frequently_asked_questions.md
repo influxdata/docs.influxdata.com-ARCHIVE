@@ -11,7 +11,7 @@ menu:
 **Known Issues**
 
 * [Why are my Grafana panels returning truncated/partial data?](#why-are-my-grafana-panels-returning-truncated-partial-data)
-* [Why do queries that use math on several selector functions return more than one point in versions 1.2.0-1.2.2?](#why-do-queries-that-use-math-on-several-selector-functions-return-more-than-one-point-in-versions-1-2-0-2-2-2)
+* [Why do queries that use math on several selector functions return more than one point?](#why-do-queries-that-use-math-on-several-selector-functions-return-more-than-one-point)
 * [What should I do if I see the panic: `unexpected fault address xxxxxxxxxxxxxx`?](#what-should-i-do-if-i-see-the-panic-unexpected-fault-address-xxxxxxxxxxxxxx)
 
 **Log Errors**
@@ -30,19 +30,21 @@ menu:
 
 ## Why are my Grafana panels returning truncated/partial data?
 
-In InfluxEnterprise version 1.2.x, the system sets the [`max-row-limit` configuration option](/enterprise/v1.2/administration/configuration/#max-row-limit-10000) to 10,000 by default.
+In InfluxEnterprise versions 1.2.0-1.2.2, the system sets the [`max-row-limit` configuration option](/enterprise/v1.2/administration/configuration/#max-row-limit-0) to 10,000 by default.
 That option limits the number of rows returned per query to 10,000 rows.
 If a query in Grafana exceeds that 10,000 row limit, the panel appears to show [truncated data](https://github.com/influxdata/influxdb/issues/8050).
-
 To prevent that issue, set `max-row-limit` to `0` to allow an unlimited number of returned rows.
 
-## Why do queries that use math on several selector functions return more than one point in versions 1.2.0-2.2.2?
+This issue is fixed in version 1.2.5.
+In version 1.2.5, the configuration file sets `max-row-limit` to `0` by default.
 
-In versions prior to 1.2.0, queries that use [math](/influxdb/v1.2/query_language/math_operators/) on several [selector functions](/influxdb/v1.2/query_language/functions/#selectors) return one point with the epoch 0 (`1970-01-01T00:00:00Z`) timestamp.
+## Why do queries that use math on several selector functions return more than one point?
+
+In InfluxEnterprise versions prior to 1.2.0, queries that use [math](/influxdb/v1.2/query_language/math_operators/) on several [selector functions](/influxdb/v1.2/query_language/functions/#selectors) return one point with the epoch 0 (`1970-01-01T00:00:00Z`) timestamp.
 In versions 1.2.0-1.2.2, those queries return `N` points, where `N` is the number of unique timestamps returned by the individual selector functions.
-This is a [known issue](https://github.com/influxdata/influxdb/issues/8167) and it will be fixed in version 1.3.0.
-
 As a workaround, use InfluxQL's [subqueries](/influxdb/v1.2/query_language/data_exploration/#subqueries) in versions 1.2.0-1.2.2 to replicate the query behavior in versions prior to 1.2.0.
+
+This issue is fixed in version 1.2.5.
 
 ### Example
 
@@ -87,9 +89,11 @@ The workaround uses InfluxQL's subqueries to replicate the query behavior in ver
 
 ## What should I do if I see the panic: `unexpected fault address xxxxxxxxxxxxxx`?
 
-There is a [known issue](https://github.com/influxdata/influxdb/issues/8022) where the data node process stops and reports the panic `unexpected fault address xxxxxxxxxxxxxx` in the logs.
+In InfluxEnterprise versions 1.2.0-1.2.2, there is a [known issue](https://github.com/influxdata/influxdb/issues/8022) where the data node process stops and reports the panic `unexpected fault address xxxxxxxxxxxxxx` in the logs.
 If you experience this panic please restart the data node process.
 We are working to address this issue; see GitHub Issue [#8022](https://github.com/influxdata/influxdb/issues/8022) for additional information.
+
+This issue is fixed in version 1.2.5.
 
 ## Where can I find InfluxEnterprise logs?
 

@@ -6,6 +6,24 @@ menu:
     parent: about_the_project
 ---
 
+## v1.2.4 [2017-05-08]
+
+### Bugfixes
+
+- Prefix partial write errors with `partial write:` to generalize identification in other subsystems.
+
+## v1.2.3 [2017-04-17]
+
+### Bugfixes
+
+- Redact passwords before saving them to the history file.
+- Add the missing DefaultDatabase method to several InfluxQL statements.
+- Fix segment violation in models.Tags.Get.
+- Simplify the admin user check.
+- Fix a regression when math was used with selectors.
+- Ensure the input for certain functions in the query engine are ordered.
+- Fix issue where deleted `time` field keys created unparseable points.
+
 ## v1.2.2 [2017-03-14]
 
 ### Release Notes
@@ -112,6 +130,13 @@ The stress tool `influx_stress` will be removed in a subsequent release. We reco
 - Ensure Subscriber service can be disabled.
 - Fix race in storage engine.
 - InfluxDB should do a partial write on mismatched type errors.
+
+## v1.1.5 [2017-05-08]
+
+### Bugfixes
+
+- Redact passwords before saving them to the history file.
+- Add the missing DefaultDatabase method to several InfluxQL statements.
 
 ## v1.1.4 [2017-02-27]
 
