@@ -27,7 +27,7 @@ You do not need to install every component of the TICK stack to use Chronograf.
 The following sections give a brief description of the other TICK stack components, how they fit within Chronograf, and if they are necessary for your setup.
 
 #### Telegraf (required)
-[Telegraf](/telegraf/v1.2/) is InfluxData's plugin-driven server agent for collecting & reporting metrics.
+[Telegraf](/telegraf/v1.3/) is InfluxData's plugin-driven server agent for collecting & reporting metrics.
 Telegraf collects data and writes data to the InfluxDB instance or InfluxEnterprise cluster that's connected to Chronograf.
 Chronograf is designed to work with Telegraf data and offers [pre-created dashboards](/chronograf/v1.3/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf) for several Telegraf input plugins.
 
@@ -38,7 +38,7 @@ At a minimum, the Telegraf instance must have enabled the [system statistics](ht
 
 * [Getting Started](/chronograf/v1.3/introduction/getting-started/) offers setup instructions for using Chronograf and InfluxDB with one Telegraf instance
 * [Monitor an InfluxEnterprise Cluster](/chronograf/v1.3/guides/monitor-an-influxenterprise-cluster/) offers setup instructions for using Chronograf and an InfluxEnterprise Cluster with several Telegraf instances
-* [Telegraf Documentation](/telegraf/v1.2/) 
+* [Telegraf Documentation](/telegraf/v1.3/) 
 
 #### InfluxDB/InfluxEnterprise cluster (required)
 [InfluxDB](/influxdb/v1.2/) is InfluxData's open source time-series database built from the ground up to handle high write and query loads.
