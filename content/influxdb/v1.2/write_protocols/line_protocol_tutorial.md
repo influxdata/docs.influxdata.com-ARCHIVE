@@ -403,7 +403,7 @@ database name,
 In those cases, `time` does not require double quotes in queries.
 `time` cannot be a [field key](/influxdb/v1.2/concepts/glossary/#field-key) or
 [tag key](/influxdb/v1.2/concepts/glossary/#tag-key).
-IIn versions 1.2.0-1.2.3,
+In versions 1.2.0-1.2.3,
 InfluxDB accepts writes with `time` as a field or tag key but it silently drops the field key or tag key and its associated value.
 In version 1.2.4, InfluxDB rejects writes with `time` as a field key or tag key and returns an error.
 See [Frequently Asked Questions](/influxdb/v1.2/troubleshooting/frequently-asked-questions/#time) for more information.
