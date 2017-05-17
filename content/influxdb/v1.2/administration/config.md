@@ -796,10 +796,6 @@ This defaults to `collectd`.
 
 Environment variable: `INFLUXDB_COLLECTD_DATABASE`
 
-*The next three options control how batching works.
-You should have this enabled otherwise you could get dropped metrics or poor performance.
-Batching will buffer points in memory if you have many coming in.*
-
 ### retention-policy = ""
 
 The relevant retention policy.
@@ -824,6 +820,10 @@ Environment variable: `INFLUXDB_COLLECTD_SECURITY_LEVEL`
 ### auth-file = "/etc/collectd/auth_file"
 
 Environment variable: `INFLUXDB_COLLECTD_AUTH_FILE`
+
+*The next three options control how batching works.
+You should have this enabled otherwise you could get dropped metrics or poor performance.
+Batching will buffer points in memory if you have many coming in.*
 
 ### batch-size = 5000
 
