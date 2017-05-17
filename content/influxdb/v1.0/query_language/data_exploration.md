@@ -691,7 +691,7 @@ The query uses an InfluxQL [function](/influxdb/v1.0/query_language/functions/)
 to calculate the average `water_level` for each
 [tag value](/influxdb/v1.0/concepts/glossary/#tag-value) of `location` in
 the `h2o_feet` [measurement](/influxdb/v1.0/concepts/glossary/#measurement).
-InfluxDB returns results in two tables: one for each tag value of `location`.
+InfluxDB returns results in two [series](/influxdb/v1.0/concepts/glossary/#series): one for each tag value of `location`.
 
 >**Note:** In InfluxDB, [epoch 0](https://en.wikipedia.org/wiki/Unix_time) (`1970-01-01T00:00:00Z`) is often used as a null timestamp equivalent.
 If you request a query that has no timestamp to return, such as an [aggregation function](/influxdb/v1.0/query_language/functions/) with an unbounded time range, InfluxDB returns epoch 0 as the timestamp.
@@ -913,7 +913,7 @@ It groups results by the `location` tag and into 12 minute intervals.
 Note that the time interval and the tag key are separated by a comma in the
 `GROUP BY` clause.
 
-The query returns two tables of results: one for each
+The query returns two [series](/influxdb/v1.0/concepts/glossary/#series) of results: one for each
 [tag value](/influxdb/v1.0/concepts/glossary/#tag-value) of the `location` tag.
 The result for each timestamp represents a single 12 minute interval.
 The count for the first timestamp covers the raw data between `2015-08-18T00:00:00Z`
