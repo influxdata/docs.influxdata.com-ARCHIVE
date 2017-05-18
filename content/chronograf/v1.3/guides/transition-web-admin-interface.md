@@ -6,7 +6,7 @@ menu:
     parent: Guides
 ---
 
-Versions 1.3+ of [InfluxDB](/influxdb/v1.2/) and [InfluxEnterprise](/enterprise/v1.2/) no longer support the [web admin interface](/influxdb/v1.2/tools/web_admin/), the builtin user interface for writing and querying data in InfluxDB.
+Versions 1.3+ of [InfluxDB](/influxdb/v1.2/) and [InfluxEnterprise](/enterprise_influxdb/v1.2/) no longer support the [web admin interface](/influxdb/v1.2/tools/web_admin/), the builtin user interface for writing and querying data in InfluxDB.
 Chronograf replaces the web admin interface with improved tooling for querying data and database management.
 
 The next sections describe the Chronograf features that relate to the web admin interface:

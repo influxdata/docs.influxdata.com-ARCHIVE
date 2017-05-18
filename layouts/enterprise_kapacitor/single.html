@@ -1,0 +1,19 @@
+{{ partial "header.html" . }}
+<article class="article">
+	{{ if .Title }}
+	<section class="article-section article-heading">
+		<div class="article-content">
+			<h1>{{ .Title }}</h1>
+		</div>
+	</section>
+	{{ end }}
+	<section class="article-section">
+		<div class="article-content">
+			{{ partial "enterprise_kapacitor/version.html" . }}
+			{{ .Content }}
+		</div>
+	</section>
+	{{ partial "enterprise_kapacitor/contribute.html" . }}
+</article>
+{{ partial "enterprise_kapacitor/sidebar.html" . }}
+{{ partial "footer.html" . }}

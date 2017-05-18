@@ -1,0 +1,17 @@
+{{ partial "header.html" . }}
+<article class="article">
+	<section class="article-section article-heading">
+		<div class="article-content">
+			<h1>{{ .Title }} Section</h1>
+		</div>
+	</section>
+	<section class="article-section">
+		<div class="article-content">
+			{{ range .Pages }}
+				{{ .Render "list"}}
+			{{ end }}
+		</div>
+	</section>
+</article>
+{{ partial "enterprise_kapacitor/sidebar.html" . }}
+{{ partial "footer.html" . }}

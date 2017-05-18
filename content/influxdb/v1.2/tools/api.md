@@ -456,7 +456,7 @@ POST http://localhost:8086/write
 
 | Query String Parameter | Optional/Required | Description |
 | :--------------------- | :---------------- | :---------- |
-| consistency=[any,one,quorum,all] | Optional, available with [InfluxEnterprise clusters](/enterprise/v1.2/) only. | Sets the write consistency for the point. InfluxDB assumes that the write consistency is `one` if you do not specify `consistency`. See the [InfluxEnterprise documentation](https://docs.influxdata.com/enterprise/v1.2/concepts/clustering#write-consistency) for detailed descriptions of each consistency option. |
+| consistency=[any,one,quorum,all] | Optional, available with [InfluxEnterprise clusters](/enterprise_influxdb/v1.2/) only. | Sets the write consistency for the point. InfluxDB assumes that the write consistency is `one` if you do not specify `consistency`. See the [InfluxEnterprise documentation](https://docs.influxdata.com/enterprise_influxdb/v1.2/concepts/clustering#write-consistency) for detailed descriptions of each consistency option. |
 | db=\<database> | Required | Sets the target [database](/influxdb/v1.2/concepts/glossary/#database) for the write. |
 | p=\<password> | Optional if you haven't [enabled authentication](/influxdb/v1.2/query_language/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication.* | Sets the password for authentication if you've enabled authentication. Use with the query string parameter `u`. |
 | precision=[ns,u,ms,s,m,h] | Optional | Sets the precision for the supplied Unix time values. InfluxDB assumes that timestamps are in nanoseconds if you do not specify `precision`.** |

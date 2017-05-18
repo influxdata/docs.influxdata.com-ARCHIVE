@@ -29,15 +29,15 @@ SectionPagesMenu = "products"
   weight = 30
   url = "/kapacitor/"
 [[menu.products]]
-  name = "Enterprise"
-  identifier = "enterprise"
+  name = "Enterprise InfluxDB"
+  identifier = "enterprise_influxdb"
   weight = 40
-  url = "/enterprise/"
+  url = "/enterprise_influxdb/"
 [[menu.products]]
-  name = "Cloud"
-  identifier = "cloud"
-  weight = 40
-  url = "/cloud/"
+  name = "Enterprise Kapacitor"
+  identifier = "enterprise_kapacitor"
+  weight = 50
+  url = "/enterprise_kapacitor/"
 
 # InfluxDB v1.2 Menu
 [[menu.influxdb_1_2]]

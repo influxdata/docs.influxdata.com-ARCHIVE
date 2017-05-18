@@ -1,59 +1,55 @@
 {{ partial "header.html" . }}
 <div class="homepage">
 	{{ range .Site.Menus.products }}
-		<div class="homepage--card card-{{ .Name }}">
-			<div class="homepage--card-container">
-				{{ if or (in .Identifier "telegraf") (in .Identifier "influxdb") (in .Identifier "chronograf") (in .Identifier "kapacitor") (in .Identifier "enterprise") }}
-				  <a class="homepage--card-title" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .Name }}</a>
-				{{ end }}
-				{{ if in .Identifier "cloud" }}
-					<a class="homepage--card-title" href="https://help.influxcloud.net/index.html" target=blank>{{ .Name }}</a>
-				{{ end }}
-				<p class="homepage--card-description">
-					{{ if eq .Identifier "telegraf" }}
-						Telegraf is a plugin-driven server agent for collecting and reporting metrics.
+		{{ if or (eq .Identifier "telegraf") (eq .Identifier "influxdb") (eq .Identifier "chronograf") (eq .Identifier "kapacitor") (eq .Identifier "enterprise_influxdb") }}
+			<div class="homepage--card card-{{ .Name }}">
+				<div class="homepage--card-container">
+					{{ if or (eq .Identifier "telegraf") (eq .Identifier "influxdb") (eq .Identifier "chronograf") (eq .Identifier "kapacitor") }}
+					  <a class="homepage--card-title" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .Name }}</a>
 					{{ end }}
-					{{ if eq .Identifier "influxdb" }}
-						InfluxDB is a time series database built from the ground up to handle high write and query loads.
+					{{ if eq .Identifier "enterprise_influxdb" }}
+					  <a class="homepage--card-title" href="">Enterprise</a>
 					{{ end }}
-					{{ if eq .Identifier "chronograf" }}
-						Chronograf is a graphing and visualization application for performing ad hoc exploration of InfluxDB data.
-					{{ end }}
-					{{ if eq .Identifier "kapacitor" }}
-						Kapacitor is a data processing framework that makes it easy to create alerts, run ETL jobs and detect anomalies.
-					{{ end }}
-					{{ if eq .Identifier "enterprise" }}
-						InfluxEnterprise offers highly-scalable InfluxDB clusters on your infrastructure with a beautiful management UI.
-					{{ end }}
-					{{ if eq .Identifier "cloud" }}
-						InfluxCloud offers managed InfluxDB clusters and Grafana on AWS.
-					{{ end }}
-					{{ if or (in .Identifier "telegraf") (in .Identifier "influxdb") (in .Identifier "chronograf") (in .Identifier "kapacitor") (in .Identifier "enterprise") }}
-						<br/>
-						<a class="homepage--card-link" href="https://influxdata.com/downloads/#{{ .Identifier }}" target=blank>Download</a>
-						<br/>
-						<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/introduction/getting_started/">Getting Started</a>
-						<br/>
-						{{ if or (in .Identifier "influxdb") (in .Identifier "enterprise") }}
-							<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/troubleshooting/frequently-asked-questions/">Frequently Asked Questions</a>
-							<br/>
+					<p class="homepage--card-description">
+						{{ if eq .Identifier "telegraf" }}
+							Telegraf is InfluxData's open source plugin-driven server agent for collecting and reporting metrics.
 						{{ end }}
-						<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">All Documentation</a>
-					{{ end }}
-					{{ if in .Identifier "cloud" }}
-						<br/>
-						<a class="homepage--card-link" href="https://cloud.influxdata.com/" target=blank>Free Trial</a>
-						<br/>
-						<a class="homepage--card-link" href="https://help.influxcloud.net/getting_started/" target=blank>Getting Started</a>
-						<br/>
-						<a class="homepage--card-link" href="https://help.influxcloud.net/tips_and_faqs/" target=blank>Frequently Asked Questions</a>
-						<br/>
-						<a class="homepage--card-link" href="https://help.influxcloud.net/index.html" target=blank>All Documentation</a>
-					{{ end }}
-				</p>
+						{{ if eq .Identifier "influxdb" }}
+							InfluxDB is InfluxData's open source time series database built from the ground up to handle high write and query loads.
+						{{ end }}
+						{{ if eq .Identifier "chronograf" }}
+							Chronograf is InfluxData's open source web application for infrastrucutre monitoring, alert management, data visualization, and database management.
+						{{ end }}
+						{{ if eq .Identifier "kapacitor" }}
+							Kapacitor is InfluxData's open source data processing framework that makes it easy to create alerts, run ETL jobs and detect anomalies.
+						{{ end }}
+						{{ if eq .Identifier "enterprise_influxdb" }}
+							InfluxData's enterprise products offer closed source extensions to the open source components of the TICK stack.
+						{{ end }}
+						{{ if or (eq .Identifier "telegraf") (eq .Identifier "influxdb") (eq .Identifier "chronograf") (eq .Identifier "kapacitor") }}
+							<br/>
+							<a class="homepage--card-link" href="https://influxdata.com/downloads/#{{ .Identifier }}" target=blank>Download</a>
+							<br/>
+							<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/introduction/getting_started/">Getting Started</a>
+							<br/>
+							{{ if or (eq .Identifier "influxdb") (eq .Identifier "chronograf") }}
+								<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/troubleshooting/frequently-asked-questions/">FAQ</a>
+								<br/>
+							{{ end }}
+							<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">All Documentation</a>
+						{{ end }}
+						{{ if eq .Identifier "enterprise_influxdb" }}
+							<br/>
+							<a class="homepage--card-link" href={{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/>Enterprise InfluxDB On Premises</a>
+							<br/>
+						  <a class="homepage--card-link" href=/enterprise_kapacitor/{{ index $.Site.Data.default_versions (print "enterprise_kapacitor" "_semver") }}/>Enterprise Kapacitor</a>
+						  <br/>
+						{{ end }}
+					</p>
+				</div>
+				<div class="homepage--card-mask"></div>
 			</div>
-			<div class="homepage--card-mask"></div>
-		</div>
+		{{ end }}
 	{{ end }}
 </div>
 {{ partial "footer.html" . }}
