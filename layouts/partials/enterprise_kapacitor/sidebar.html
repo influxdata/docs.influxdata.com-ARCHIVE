@@ -1,0 +1,48 @@
+<div class="sidebar--toggle" id="sidebar--toggle"><span class="icon search"></span> &nbsp;Browse Enterprise Kapacitor Documentation</div>
+<div class="sidebar--mask-container" id="sidebar--mask-container">
+  <div class="sidebar--mask" id="sidebar--mask"></div>
+</div>
+<aside class="sidebar" id="sidebar">
+  <section class="sidebar--section">
+    {{ partial "support-ad.html" . }}
+  </section>
+  {{ $currentNode := . }}
+  {{ if (eq $currentNode.RelPermalink "/enterprise_kapacitor/") }}
+    {{ range (index $.Site.Menus .Site.Data.default_versions.enterprise_kapacitor) }}
+      <section class="sidebar--section">
+        <div class="sidebar--section-title">
+          <a class="{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{.URL}}">{{ .Name }}</a>
+        </div>
+        {{ if .HasChildren }}
+            {{ range .Children }}
+            <a class="sidebar--page{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
+            {{ end }}
+        {{end}}
+      </section>
+    {{end}}
+  {{end}}
+  {{ range .Site.Menus.enterprise_kapacitor }}
+    {{ if (in $currentNode.Permalink .URL) }}
+      {{ range (index $.Site.Menus .Identifier) }}
+        <section class="sidebar--section">
+          <div class="sidebar--section-title">
+            <a class="{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{.URL}}">{{ .Name }}</a>
+          </div>
+          {{ if .HasChildren }}
+            {{ range .Children }}
+              <a class="sidebar--page{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}" {{ if eq .Identifier "download" }} target="blank" {{ end }}>{{ .Name }}</a>
+            {{ end }}
+          {{end}}
+        </section>
+      {{end}}
+    {{end}}
+  {{end}}
+  <section class="sidebar--section">
+    <div class="sidebar--section-title">
+      <a href="/enterprise_kapacitor/">Enterprise Kapacitor Versions</a>
+    </div>
+    {{ range .Site.Menus.enterprise_kapacitor }}
+    <a class="sidebar--page{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
+    {{end}}
+  </section>
+</aside>

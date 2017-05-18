@@ -1,4 +1,0 @@
----
-type: enterprise
-layout: list
----

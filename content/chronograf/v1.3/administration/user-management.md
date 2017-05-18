@@ -7,7 +7,7 @@ menu:
 ---
 
 Chronograf's `Admin` page includes a complete interface for database user management.
-The `Admin` page supports both OSS InfluxDB users and [InfluxEnterprise](/enterprise/v1.2/) users.
+The `Admin` page supports both OSS InfluxDB users and [InfluxEnterprise](/enterprise_influxdb/v1.2/) users.
 
 This page covers user management specific to OSS InfluxDB and InfluxEnterprise clusters.
 See [Security Best Practices](/chronograf/v1.3/administration/security-best-practices/) for more information about Chronograf's authentication and user management features.
@@ -150,12 +150,12 @@ Assign permissions and roles to both admin and non-admin users.
 Permission to add or remove nodes from a cluster.
 
 **Relevant `influxd-ctl` arguments**:
-[`add-data`](/enterprise/v1.2/features/cluster-commands/#add-data),
-[`add-meta`](/enterprise/v1.2/features/cluster-commands/#add-meta),
-[`join`](/enterprise/v1.2/features/cluster-commands/#join),
-[`remove-data`](/enterprise/v1.2/features/cluster-commands/#remove-data),
-[`remove-meta`](/enterprise/v1.2/features/cluster-commands/#remove-meta), and
-[`leave`](/enterprise/v1.2/features/cluster-commands/#leave)
+[`add-data`](/enterprise_influxdb/v1.2/features/cluster-commands/#add-data),
+[`add-meta`](/enterprise_influxdb/v1.2/features/cluster-commands/#add-meta),
+[`join`](/enterprise_influxdb/v1.2/features/cluster-commands/#join),
+[`remove-data`](/enterprise_influxdb/v1.2/features/cluster-commands/#remove-data),
+[`remove-meta`](/enterprise_influxdb/v1.2/features/cluster-commands/#remove-meta), and
+[`leave`](/enterprise_influxdb/v1.2/features/cluster-commands/#leave)
 
 **Pages in Chronograf that require this permission**: NA
 
@@ -163,7 +163,7 @@ Permission to add or remove nodes from a cluster.
 Permission to copy shards.
 
 **Relevant `influxd-ctl` arguments**:
-[copy-shard](/enterprise/v1.2/features/cluster-commands/#copy-shard)
+[copy-shard](/enterprise_influxdb/v1.2/features/cluster-commands/#copy-shard)
 
 **Pages in Chronograf that require this permission**: NA
 

@@ -11,7 +11,7 @@
 {{ range $product := .Site.Menus.products }}
 {{ range $version := (index $.Site.Data.versions $product.Identifier) }}
 {{ if in $current.RelPermalink (print "/" $product.Identifier "/" $version) }}
-{{$product.Identifier}} {{$version}}
+{{$product.Name}} {{$version}}
 {{end}}
 {{end}}
 {{end}}
@@ -22,11 +22,8 @@
     <div class="navbar--dropdown-dismiss" id="navbar--dropdown-dismiss"></div>
     <ul class="navbar--product-menu" id="navbar--product-menu">
         {{ range .Site.Menus.products }}
-          {{ if or (in .Identifier "telegraf") (in .Identifier "influxdb") (in .Identifier "chronograf") (in .Identifier "kapacitor") (in .Identifier "enterprise") }}
+          {{ if or (in .Identifier "telegraf") (in .Identifier "influxdb") (in .Identifier "chronograf") (in .Identifier "kapacitor") (in .Identifier "enterprise_influxdb") (in .Identifier "enterprise_kapacitor") }}
             <li><a class="navbar--product{{if or ($currentNode.IsMenuCurrent "products" .) ($currentNode.HasMenuCurrent "products" .) }} active{{end}}" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .Name }}</a></li>
-          {{ end }}
-          {{ if in .Identifier "cloud" }}
-            <li><a class="navbar--product{{if or ($currentNode.IsMenuCurrent "products" .) ($currentNode.HasMenuCurrent "products" .) }} active{{end}}" href="https://help.influxcloud.net/index.html">{{ .Name }}</a></li>
           {{ end }}
         {{ end }}
         <li class="navbar--product-divider"></li>
@@ -49,11 +46,8 @@
     <div class="navbar--dropdown-dismiss" id="navbar--dropdown-dismiss"></div>
     <ul class="navbar--product-menu" id="navbar--product-menu">
         {{ range .Site.Menus.products }}
-          {{ if or (in .Identifier "telegraf") (in .Identifier "influxdb") (in .Identifier "chronograf") (in .Identifier "kapacitor") (in .Identifier "enterprise") }}
+          {{ if or (in .Identifier "telegraf") (in .Identifier "influxdb") (in .Identifier "chronograf") (in .Identifier "kapacitor") (in .Identifier "enterprise_influxdb") (in .Identifier "enterprise_kapacitor") }}
             <li><a class="navbar--product{{if or ($currentNode.IsMenuCurrent "products" .) ($currentNode.HasMenuCurrent "products" .) }} active{{end}}" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .Name }}</a></li>
-          {{ end }}
-          {{ if in .Identifier "cloud" }}
-            <li><a class="navbar--product{{if or ($currentNode.IsMenuCurrent "products" .) ($currentNode.HasMenuCurrent "products" .) }} active{{end}}" href="https://help.influxcloud.net/index.html">{{ .Name }}</a></li>
           {{ end }}
         {{ end }}
         <li class="navbar--product-divider"></li>
