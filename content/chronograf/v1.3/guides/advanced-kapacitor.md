@@ -24,7 +24,7 @@ Users who expect to have a large number of alerts and users who do not want to s
 ### Modify the RP in Chronograf
 
 Use Chronograf’s Admin page to modify the retention policy in the `chronograf` database.
-In the DB Management tab:
+In the Databases tab:
 
 #### Step 1: Locate the `chronograf` database and click on the infinity symbol (∞)
 

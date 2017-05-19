@@ -176,7 +176,7 @@ Permission to create databases, create [retention policies](/influxdb/v1.2/conce
 [`ALTER RETENTION POLICY`](/influxdb/v1.2/query_language/database_management/#modify-retention-policies-with-alter-retention-policy), and
 [`SHOW RETENTION POLICIES`](/influxdb/v1.2/query_language/schema_exploration/#show-retention-policies)
 
-**Pages in Chronograf that require this permission**: Dashboards, Data Explorer, and DB Management on the Admin page 
+**Pages in Chronograf that require this permission**: Dashboards, Data Explorer, and Databases on the Admin page 
 
 #### CreateUserAndRole
 Permission to manage users and roles; create users, drop users, grant admin status to users, grant permissions to users, revoke admin status from users, revoke permissions from users, change user's passwords, view user permissions, and view users and their admin status.
@@ -211,7 +211,7 @@ Permission to drop databases and retention policies.
 [`DROP DATABASE`](/influxdb/v1.2/query_language/database_management/#delete-a-database-with-drop-database) and
 [`DROP RETENTION POLICY`](/influxdb/v1.2/query_language/database_management/#delete-retention-policies-with-drop-retention-policy)
 
-**Pages in Chronograf that require this permission**: Data Explorer, Dashboards, DB Management on the Admin page 
+**Pages in Chronograf that require this permission**: Data Explorer, Dashboards, Databases on the Admin page 
 
 #### KapacitorAPI
 Permission to access the API for InfluxEnterprise Kapacitor.
