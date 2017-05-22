@@ -55,13 +55,13 @@ So far so good! You're ready to move on to the next section. Note that there's n
 
 ## Kapacitor Setup
 
-[Kapacitor](https://docs.influxdata.com/kapacitor/v1.2/) is the data processing platform of the TICK stack.
+[Kapacitor](https://docs.influxdata.com/kapacitor/v1.3/) is the data processing platform of the TICK stack.
 Kapacitor is responsible for creating and sending alerts in Chronograf.
 
 #### 1. Download and Install Kapacitor
 ```
-wget https://dl.influxdata.com/kapacitor/releases/kapacitor_1.2.0_amd64.deb
-sudo dpkg -i kapacitor_1.2.0_amd64.deb
+wget https://dl.influxdata.com/kapacitor/releases/kapacitor_1.3.0_amd64.deb
+sudo dpkg -i kapacitor_1.3.0_amd64.deb
 ```
 
 #### 2. Start Kapacitor

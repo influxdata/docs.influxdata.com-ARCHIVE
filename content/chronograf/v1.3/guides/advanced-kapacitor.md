@@ -6,7 +6,7 @@ menu:
     parent: Guides
 ---
 
-Chronograf provides a user interface for [Kapacitor](/kapacitor/v1.2/), InfluxData's processing framework for creating alerts, running ETL jobs, and detecting anomalies in your data.
+Chronograf provides a user interface for [Kapacitor](/kapacitor/v1.3/), InfluxData's processing framework for creating alerts, running ETL jobs, and detecting anomalies in your data.
 This guide offers a lower-level insight into how Kapacitor interacts with Chronograf and introduces advanced Kapacitor usage within Chronograf.
 
 ### Content
@@ -53,7 +53,7 @@ The fourth alert, which occurred on the same day at 16:58:50, is outside the pre
 
 Chronograf creates Kapacitor tasks using the information that you provide on the Rule Configuration page.
 It uses that information to communicate with Kapacitor and populate Chronograf's alert pages.
-Pre-existing tasks, that is, [TICKscripts](/kapacitor/v1.2/tick/) that you created and enabled on your Kapacitor instance without using Chronograf, have limited functionality in the user interface.
+Pre-existing tasks, that is, [TICKscripts](/kapacitor/v1.3/tick/) that you created and enabled on your Kapacitor instance without using Chronograf, have limited functionality in the user interface.
 
 In Chronograf, you can:
 

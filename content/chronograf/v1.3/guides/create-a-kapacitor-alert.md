@@ -7,7 +7,7 @@ menu:
 ---
 
 
-Chronograf provides a user interface for [Kapacitor](/kapacitor/v1.2/), InfluxData's processing framework for creating alerts, running ETL jobs, and detecting anomalies in your data.
+Chronograf provides a user interface for [Kapacitor](/kapacitor/v1.3/), InfluxData's processing framework for creating alerts, running ETL jobs, and detecting anomalies in your data.
 
 This guide offers step-by-step instructions for creating a Kapacitor alert in Chronograf.
 By the end of this guide, you'll have an alert rule that sends a message to an existing [Slack](https://slack.com/) channel whenever your idle CPU usage crosses the 80% threshold.
