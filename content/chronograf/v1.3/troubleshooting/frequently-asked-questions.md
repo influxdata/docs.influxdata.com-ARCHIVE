@@ -27,7 +27,7 @@ Chronograf supports the following event handlers:
 * Exec
 * HipChat
 * HTTP/Post
-* Log
+* Log (available in versions 1.3.1.0+)
 * OpsGenie
 * PagerDuty
 * Sensu
