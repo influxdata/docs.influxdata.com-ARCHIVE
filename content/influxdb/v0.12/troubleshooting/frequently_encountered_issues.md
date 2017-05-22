@@ -17,8 +17,7 @@ Where applicable, it links to outstanding issues on GitHub.
 * [Querying outside the min/max time range](/influxdb/v0.12/troubleshooting/frequently_encountered_issues/#querying-outside-the-min-max-time-range)  
 * [Querying a time range that spans epoch 0](/influxdb/v0.12/troubleshooting/frequently_encountered_issues/#querying-a-time-range-that-spans-epoch-0)  
 * [Querying with booleans](/influxdb/v0.12/troubleshooting/frequently_encountered_issues/#querying-with-booleans)  
-* [Working with really big or really small integers](/influxdb/v0.12/troubleshooting/frequently_encountered_issues/#working-with-really-big-or-really-small-integers)
-* [Doing math on timestamps](/influxdb/v0.12/troubleshooting/frequently_encountered_issues/#doing-math-on-timestamps)  
+* [Working with really big or really small integers](/influxdb/v0.12/troubleshooting/frequently_encountered_issues/#working-with-really-big-or-really-small-integers)  
 * [Getting an unexpected epoch 0 timestamp in query returns](/influxdb/v0.12/troubleshooting/frequently_encountered_issues/#getting-an-unexpected-epoch-0-timestamp-in-query-returns)  
 * [Getting large query returns in batches when using the HTTP API](/influxdb/v0.12/troubleshooting/frequently_encountered_issues/#getting-large-query-returns-in-batches-when-using-the-http-api)  
 * [Getting the `expected identifier` error, unexpectedly](/influxdb/v0.12/troubleshooting/frequently_encountered_issues/#getting-the-expected-identifier-error-unexpectedly)
@@ -133,10 +132,6 @@ See [Go builtins](http://golang.org/pkg/builtin/#int64) for more information.
 Values close to but within those limits may lead to unexpected results; some functions and operators convert the int64 data type to float64 during calculation which can cause overflow issues.
 
 <dt> [GitHub Issue #3130](https://github.com/influxdb/influxdb/issues/3130)  </dt>
-
-## Doing math on timestamps
-Currently, it is not possible to execute mathematical operators or functions against timestamp values in InfluxDB.
-All time calculations must be carried out by the client receiving the query results.
 
 ## Getting an unexpected epoch 0 timestamp in query returns
 In InfluxDB, epoch 0  (`1970-01-01T00:00:00Z`)  is often used as a null timestamp equivalent.
