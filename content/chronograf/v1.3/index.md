@@ -33,7 +33,7 @@ Chronograf offers a UI for [Kapacitor](https://github.com/influxdata/kapacitor),
 ### Data Visualization
 
 * Monitor your application data with Chronograf's [pre-created dashboards](/chronograf/v1.3/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf)
-* Create your own customized dashboards complete with various graph types and template variables
+* Create your own customized dashboards complete with various graph types and [template variables](/chronograf/v1.3/guides/dashboard-template-variables/)
 * Investigate your data with Chronograf's data explorer and query templates
 
 ### Database Management

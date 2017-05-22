@@ -6,6 +6,36 @@ menu:
     parent: About the Project
 ---
 
+## v1.3.1 [2017-05-22]
+
+### Release notes
+
+In versions 1.3.1+, installing a new version of Chronograf automatically clears the localStorage settings.
+
+### Bug Fixes
+  1. Fix infinite spinner when `/chronograf` is a [basepath](/chronograf/v1.3/administration/configuration/#p-basepath)
+  1. Remove the query templates dropdown from dashboard cell editor mode
+  1. Fix the backwards sort arrows in table column headers
+  1. Make the logout button consistent with design
+  1. Fix the loading spinner on graphs
+  1. Filter out any template variable values that are empty, whitespace, or duplicates
+  1. Allow users to click the add query button after selecting singleStat as the [visualization type](/chronograf/v1.3/troubleshooting/frequently-asked-questions/#what-visualization-types-does-chronograf-support)
+  1. Add a query for windows uptime - thank you, @brianbaker!
+
+### Features
+  1. Add log [event handler](/chronograf/v1.3/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf) - thank you, @mpchadwick!
+  1. Update Go (golang) vendoring to dep and committed vendor directory
+  1. Add autocomplete functionality to [template variable](/chronograf/v1.3/guides/dashboard-template-variables/) dropdowns
+
+### UI Improvements
+  1. Refactor scrollbars to support non-webkit browsers
+  1. Increase the query builder's default height in cell editor mode and in the data explorer
+  1. Make the [template variables](/chronograf/v1.3/guides/dashboard-template-variables/) manager more space efficient
+  1. Add page spinners to pages that did not have them
+  1. Denote which source is connected in the sources table
+  1. Use milliseconds in the InfluxDB dashboard instead of nanoseconds
+  1. Notify users when local settings are cleared
+
 ## v1.3.0 [2017-05-09]
 
 ### Bug Fixes

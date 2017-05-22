@@ -16,6 +16,7 @@ menu:
 
 Version 1.3.0 is a drop-in upgrade for the 1.2.0-beta releases.
 Just [download and install](https://portal.influxdata.com/downloads) the most recent version and restart the process.
+Note that in versions 1.3.1+, installing a new version of Chronograf automatically clears the localStorage settings.
 
 ## Upgrade from older versions
 ### Versions: 0.4, 0.10 through 0.13, and 1.0
