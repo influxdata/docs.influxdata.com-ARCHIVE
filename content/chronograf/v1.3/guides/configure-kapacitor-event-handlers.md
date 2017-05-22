@@ -6,7 +6,7 @@ menu:
     parent: Guides
 ---
 
-Chronograf works with [Kapacitor](/kapacitor/v1.2/) to send alert messages to supported event handlers.
+Chronograf works with [Kapacitor](/kapacitor/v1.3/) to send alert messages to supported event handlers.
 Use Chronograf to send alert messages to specific URLs as well as to applications like [Slack](https://slack.com/) and [HipChat](https://www.hipchat.com/).
 
 This guide offers step-by-step instructions for setting up event handlers in Chronograf.
