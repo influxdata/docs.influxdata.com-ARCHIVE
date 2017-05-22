@@ -20,7 +20,7 @@ menu:
 
 ## What Kapacitor event handlers are supported in Chronograf?
 
-Chronograf integrates with [Kapacitor](/kapacitor/v1.2/), InfluxData's data processing platform, to send alert messages to event handlers.
+Chronograf integrates with [Kapacitor](/kapacitor/v1.3/), InfluxData's data processing platform, to send alert messages to event handlers.
 Chronograf supports the following event handlers:
 
 * Alerta

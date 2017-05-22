@@ -56,7 +56,7 @@ A single Chronograf instance can support several InfluxDB instances or InfluxEnt
 * [InfluxEnterprise Documentation](/enterprise_influxdb/v1.2/) 
 
 #### Kapacitor (optional)
-[Kapacitor](/kapacitor/v1.2/) is InfluxData’s processing framework for creating alerts, running ETL jobs, and detecting anomalies in your data.
+[Kapacitor](/kapacitor/v1.3/) is InfluxData’s processing framework for creating alerts, running ETL jobs, and detecting anomalies in your data.
 Kapacitor is responsible for creating and sending alerts in Chronograf.
 
 Chronograf requires at least one Kapacitor instance if you plan on using Chronograf for creating, sending, and managing alerts.
@@ -69,7 +69,7 @@ You do not need a Kapacitor instance if you plan on only using Chronograf's host
 
 * [Getting Started](/chronograf/v1.3/introduction/getting-started/) offers setup instructions for using Chronograf with a Kapacitor instance
 * [Configure Kapacitor Event Handlers](/chronograf/v1.3/guides/configure-kapacitor-event-handlers/) offers setup instructions for Kapacitor event handlers in Chronograf
-* [Kapacitor Documentation](/kapacitor/v1.2/) 
+* [Kapacitor Documentation](/kapacitor/v1.3/) 
 
 ### Networking
 
