@@ -6,7 +6,7 @@ menu:
     parent: about_the_project
 ---
 
-## v1.3.0 [2017-05-16]
+## v1.3.0 [2017-05-22]
 
 ### Release Notes
 
@@ -100,16 +100,16 @@ For more details on the alerting system see the full documentation [here](https:
 
 ### Features
 
-- [#1299](https://github.com/influxdata/kapacitor/pull/1299): Allowing sensu handler to be specified 
+- [#1299](https://github.com/influxdata/kapacitor/pull/1299): Allowing sensu handler to be specified. 
 - [#1284](https://github.com/influxdata/kapacitor/pull/1284): Add type signatures to Kapacitor functions.
 - [#1203](https://github.com/influxdata/kapacitor/issues/1203): Add `isPresent` operator for verifying whether a value is present (part of [#1284](https://github.com/influxdata/kapacitor/pull/1284)).
 - [#1354](https://github.com/influxdata/kapacitor/pull/1354): Add Kubernetes scraping support.
 - [#1359](https://github.com/influxdata/kapacitor/pull/1359): Add groupBy exclude and Add dropOriginalFieldName to flatten.
 - [#1360](https://github.com/influxdata/kapacitor/pull/1360): Add KapacitorLoopback node to be able to send data from a task back into Kapacitor.
 - [#117](https://github.com/influxdata/kapacitor/issues/117): Add headers to alert POST requests.
-- [#1322](https://github.com/influxdata/kapacitor/pull/1322): TLS configuration in Slack service for Mattermost compatibility
-- [#1330](https://github.com/influxdata/kapacitor/issues/1330): Generic HTTP Post node
-- [#1159](https://github.com/influxdata/kapacitor/pulls/1159): Go version 1.7.4 -> 1.7.5
+- [#1322](https://github.com/influxdata/kapacitor/pull/1322): TLS configuration in Slack service for Mattermost compatibility.
+- [#1330](https://github.com/influxdata/kapacitor/issues/1330): Generic HTTP Post node.
+- [#1159](https://github.com/influxdata/kapacitor/pulls/1159): Go version 1.7.4 -> 1.7.5.
 - [#1175](https://github.com/influxdata/kapacitor/pull/1175): BREAKING: Add generic error counters to every node type.
     Renamed `query_errors` to `errors` in batch node.
     Renamed `eval_errors` to `errors` in eval node.
@@ -123,13 +123,21 @@ For more details on the alerting system see the full documentation [here](https:
     Alert handlers now only ever have a single action and belong to a single topic.
     An automatic migration from old to new handler definitions will be performed during startup.
     See the updated API docs.
-- [#1286](https://github.com/influxdata/kapacitor/issues/1286): Default HipChat URL should be blank
+- [#1286](https://github.com/influxdata/kapacitor/issues/1286): Default HipChat URL should be blank.
 - [#507](https://github.com/influxdata/kapacitor/issues/507): Add API endpoint for performing Kapacitor database backups.
-- [#1132](https://github.com/influxdata/kapacitor/issues/1132): Adding source for sensu alert as parameter
+- [#1132](https://github.com/influxdata/kapacitor/issues/1132): Adding source for sensu alert as parameter.
 - [#1346](https://github.com/influxdata/kapacitor/pull/1346): Add discovery and scraping services.
 
 ### Bugfixes
 
+- [#1396](https://github.com/influxdata/kapacitor/pull/1396): Fix broken ENV var config overrides for the kubernetes section.
+- [#1379](https://github.com/influxdata/kapacitor/issues/1379): Copy batch points slice before modification, fixes potential panics and data corruption.
+- [#1394](https://github.com/influxdata/kapacitor/pull/1394): Use the Prometheus metric name as the measurement name by default for scrape data.
+- [#1392](https://github.com/influxdata/kapacitor/pull/1392): Fix possible deadlock for scraper configuration updating.
+- [#1369](https://github.com/influxdata/kapacitor/issues/1369): Fix panic with concurrent writes to same points in state tracking nodes.
+- [#1387](https://github.com/influxdata/kapacitor/pull/1387): static-discovery configuration simplified.
+- [#1378](https://github.com/influxdata/kapacitor/issues/1378): Fix panic in InfluxQL node with missing field.
+- [#1370](https://github.com/influxdata/kapacitor/issues/1370): Fix missing working_cardinality stats on stateDuration and stateCount nodes.
 - [#1329](https://github.com/influxdata/kapacitor/issues/1329): BREAKING: A bug was fixed around missing fields in the derivative node.
     The behavior of the node changes slightly in order to provide a consistent fix to the bug.
     The breaking change is that now, the time of the points returned are from the right hand or current point time, instead of the left hand or previous point time.
@@ -138,7 +146,7 @@ For more details on the alerting system see the full documentation [here](https:
 - [#1294](https://github.com/influxdata/kapacitor/issues/1294): Fix bug where batch queries would be missing all fields after the first nil field.
 - [#1343](https://github.com/influxdata/kapacitor/issues/1343): BREAKING: The UDF agent Go API has changed, the changes now make it so that the agent package is self contained.
 - [#1133](https://github.com/influxdata/kapacitor/issues/1133): Fix case-sensitivity for Telegram `parseMode` value. 
-- [#1147](https://github.com/influxdata/kapacitor/issues/1147): Fix pprof debug endpoint
+- [#1147](https://github.com/influxdata/kapacitor/issues/1147): Fix pprof debug endpoint.
 - [#1164](https://github.com/influxdata/kapacitor/pull/1164): Fix hang in config API to update a config section.
     Now if the service update process takes too long the request will timeout and return an error.
     Previously the request would block forever.
