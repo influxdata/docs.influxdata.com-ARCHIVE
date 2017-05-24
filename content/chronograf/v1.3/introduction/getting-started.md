@@ -231,7 +231,7 @@ mkdir ~/.chronograf
 
 When starting up Chronograf use the ```-b``` option to specify the location of this directory for the local datastore:
 ```
-./chrongraf-<version>/usr/bin/chronograf -b ~/.chronograf/chronograf-v1.db
+./chronograf-<version>/usr/bin/chronograf -b ~/.chronograf/chronograf-v1.db
 ```
 
 The next time you un-TAR a new version of Chronograf, you can simply change the <version> portion of the command string and re-point to your existing ```chronograf-v1.db``` datastore.
