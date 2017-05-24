@@ -213,9 +213,14 @@ sudo systemctl start chronograf
 ##### Using the TAR packages
 If you choose to use the TAR packages, as opposed to the operating system package management tools (such as yum, wget, etc.), there are a couple of things that you should be aware of.
 
-First, when you start-up Chronograf, we recommend that you specify a location for the underlying datastore as a default location is not specified.  If you do NOT specify a location for the underlying datastore, a datastore named chronograf-v1.db will be created in the directory from which you start Chronograf.
+First, when you start-up Chronograf, we recommend that you specify a location for the underlying datastore as a default location is not specified.  
+If you do NOT specify a location for the underlying datastore, a datastore named ```chronograf-v1.db``` will be created in the directory from which you start Chronograf.
 
-Second, specifying the location of the underlying datastore is important because as you take advantage of future release of Chronograf (maintenance releases or feature bearing), you will want to refer to this underlying datastore to preserve your dashboards and datasource configuration.  If you simply un-TAR the downloaded package and restart Chronograf, you will reinitalize the local datastore -- and it will appear as though all of your previous configurations and dashboards have "disappeared."  The package management tools provided by the operating system deal with the "version" changes in the underlying software, but when usint TAR, the version number is embedded in the directory stucture and you end up with multiple side-by-side versions of the software.
+Second, specifying the location of the underlying datastore is important because as you take advantage of future release of Chronograf (maintenance releases or feature bearing), you will want to refer to this underlying datastore to preserve your dashboards and datasource configuration.  
+
+If you simply un-TAR the downloaded package and restart Chronograf, you will reinitalize the local datastore -- and it will appear as though all of your previous configurations and dashboards have "disappeared."  
+
+The package management tools provided by the operating system deal with the "version" changes in the underlying software, but when using TAR, the version number is embedded in the directory stucture and you end up with multiple side-by-side versions of the software.
 
 The recommended way to address this issue when using the TAR package is to do the following:
 
@@ -224,12 +229,12 @@ In your home directory, create a sub-directory called .chronograf
 mkdir ~/.chronograf
 ```
 
-When starting up Chronograf use the -b option to specify the location of this directory for the local datastore:
+When starting up Chronograf use the ```-b``` option to specify the location of this directory for the local datastore:
 ```
 ./chrongraf-<version>/usr/bin/chronograf -b ~/.chronograf/chronograf-v1.db
 ```
 
-The next time you un-TAR a new version of Chronograf, you can simply change the <version> portion of the command string and re-point to your existing chronograf-v1.db datastore.
+The next time you un-TAR a new version of Chronograf, you can simply change the <version> portion of the command string and re-point to your existing ```chronograf-v1.db``` datastore.
 
 #### 3. Connect to Chronograf
 Assuming everything is up and running we should be able to connect to and configure Chronograf.
