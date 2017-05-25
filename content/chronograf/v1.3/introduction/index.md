@@ -17,6 +17,6 @@ See the [downloads page](https://portal.influxdata.com/downloads) page for links
 The [installation page](/chronograf/v1.3/introduction/installation/) lists the requirements for installing, starting, and configuring Chronograf.
 
 ## Getting Started
-The [getting started guide](http://localhost:1313/chronograf/v1.3/introduction/getting-started/) gets you up and running with Chronograf with as little configuration and code as possible.
+The [getting started guide](/chronograf/v1.3/introduction/getting-started/) gets you up and running with Chronograf with as little configuration and code as possible.
 By the end of the guide, you will have downloaded, installed, and configured all four packages of the
 TICK stack ([Telegraf](https://github.com/influxdata/telegraf), [InfluxDB](https://github.com/influxdata/influxdb), Chronograf, and [Kapacitor](https://github.com/influxdata/kapacitor)), and you will be all set to monitor your infrastructure.
