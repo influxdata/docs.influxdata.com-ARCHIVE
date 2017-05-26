@@ -1724,7 +1724,49 @@ retention policy that match the [regular expression](#regular-expressions) in th
 
 ### Examples
 
-#### Example 1: Write the results of a query to a measurement
+#### Example 1: Renaming a Database
+
+Directly renaming a database in InfluxDB is not possible, so a common use for `INTO` is to move data from one database to another.
+
+If you execute a command like this:
+
+```
+SELECT * INTO <my_newDB> FROM <my_oldDB>
+```
+
+does NOT maintain the series context for tags. This means that tags will be stored as fields in the destination database ( `<my_newDB>` in this example). In order to maintain series context (tags), you must to run the command like this:
+
+```
+SELECT * 
+INTO <my_newDB>.<RP>.<MEASUREMENT> 
+FROM <my_oldDB>.<RP>.<MEASUREMENT> 
+GROUP BY  *
+```
+
+this preserves series context and tag values will be stored as tags in the destination database.
+
+In addition, when moving large measurements around with similar queries, it is  HIGHLY recommended to run those queries sequentially using time boundaries (where time > ... and time < ... ) in order to avoid running out of memory.
+Therefore, you would end up with a series of queries to effectively move data from on database to another. Such as:
+```
+SELECT * 
+INTO <my_newDB>.<RP>.<MEASUREMENT> 
+FROM <my_oldDB>.<RP>.<MEASUREMENT>
+WHERE time > now() - 100w and time < now() - 90w GROUP BY *
+
+SELECT * 
+INTO <my_newDB>.<RP>.<MEASUREMENT> 
+FROM <my_oldDB>.<RP>.<MEASUREMENT>} 
+WHERE time > now() - 90w  and time < now() - 80w GROUP BY *
+
+SELECT * 
+INTO <my_newDB>.<RP>.<MEASUREMENT> 
+FROM <my_oldDB>.<RP>.<MEASUREMENT>
+WHERE time > now() - 80w  and time < now() - 70w GROUP BY *
+
+...
+```
+
+#### Example 2: Write the results of a query to a measurement
 
 ```
 > SELECT "water_level" INTO "h2o_feet_copy_1" FROM "h2o_feet" WHERE "location" = 'coyote_creek'
@@ -1757,7 +1799,7 @@ The response shows the number of points (`7605`) that InfluxDB writes to `h2o_fe
 The timestamp in the response is meaningless; InfluxDB uses epoch 0
 (`1970-01-01T00:00:00Z`) as a null timestamp equivalent.
 
-#### Example 2: Write the results of a query to a fully qualified measurement
+#### Example 3: Write the results of a query to a fully qualified measurement
 
 ```
 > SELECT "water_level" INTO "where_else"."autogen"."h2o_feet_copy_2" FROM "h2o_feet" WHERE "location" = 'coyote_creek'
@@ -1789,7 +1831,7 @@ The response shows the number of points (`7605`) that InfluxDB writes to `h2o_fe
 The timestamp in the response is meaningless; InfluxDB uses epoch 0
 (`1970-01-01T00:00:00Z`) as a null timestamp equivalent.
 
-#### Example 3: Write aggregated results to a measurement (downsampling)
+#### Example 4: Write aggregated results to a measurement (downsampling)
 
 ```
 > SELECT MEAN("water_level") INTO "all_my_averages" FROM "h2o_feet" WHERE "location" = 'coyote_creek' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
@@ -1823,7 +1865,7 @@ aggregating those data to a lower precision, and storing the lower precision
 data in the database.
 Downsampling is a common use case for the `INTO` clause.
 
-#### Example 4: Write aggregated results for more than one measurement to a different database (downsampling with backreferencing)
+#### Example 5: Write aggregated results for more than one measurement to a different database (downsampling with backreferencing)
 
 ```
 > SELECT MEAN(*) INTO "where_else"."autogen".:MEASUREMENT FROM /.*/ WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:06:00Z' GROUP BY time(12m)
