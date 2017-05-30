@@ -10,7 +10,7 @@ menu:
     parent: guides
 ---
 
-In [another example](/kapacitor/v1.3/examples/anomaly_detection/) we saw how to write a process based UDF for custom anomaly detection workloads.
+In [another example](/kapacitor/v1.3/guides/anomaly_detection/) we saw how to write a process based UDF for custom anomaly detection workloads.
 In this example we are going to learn how to write a simple socket based UDF.
 
 ## What is a UDF?
