@@ -488,5 +488,5 @@ Play around until you are comfortable updating, testing, and running tasks in Ka
 
 ### What's next?
 
-Take a look at the [examples](/kapacitor/v1.3/examples/) page for more guides on how to use Kapacitor.
+Take a look at the [example guides](/kapacitor/v1.3/guides/) for how to use Kapacitor.
 These use cases demonstrate some of the more rich features of Kapacitor.
