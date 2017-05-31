@@ -230,7 +230,7 @@ Multiple shards may exist in a single shard group.
 Each shard contains a specific set of series.
 All points falling on a given series in a given shard group will be stored in the same shard (TSM file) on disk.
 
-Related entries: [series](/influxdb/v1.2/concepts/glossary/#series), [shard duration](/influxdb/v1.2/concepts/glossary/#shard-duration), [shard group](/influxdb/v1.2/concepts/glossary/#shard-group), [tsm](/influxdb/v1.2/concepts/glossary/#tsm)
+Related entries: [series](/influxdb/v1.2/concepts/glossary/#series), [shard duration](/influxdb/v1.2/concepts/glossary/#shard-duration), [shard group](/influxdb/v1.2/concepts/glossary/#shard-group), [tsm](/influxdb/v1.2/concepts/glossary/#tsm-time-structured-merge-tree)
 
 ## shard duration
 
@@ -325,7 +325,7 @@ The temporary cache for recently written points. To reduce the frequency with wh
 
 Points in the WAL can be queried, and they persist through a system reboot. On process start, all points in the WAL must be flushed before the system accepts new writes.
 
-Related entries: [tsm](/influxdb/v1.2/concepts/glossary/#tsm)
+Related entries: [tsm](/influxdb/v1.2/concepts/glossary/#tsm-time-structured-merge-tree)
 
 <!--
 
