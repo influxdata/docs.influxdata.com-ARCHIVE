@@ -1724,49 +1724,7 @@ retention policy that match the [regular expression](#regular-expressions) in th
 
 ### Examples
 
-#### Example 1: Renaming a Database
-
-Directly renaming a database in InfluxDB is not possible, so a common use for `INTO` is to move data from one database to another.
-
-If you execute a command like this:
-
-```
-SELECT * INTO <my_newDB> FROM <my_oldDB>
-```
-
-does NOT maintain the series context for tags. This means that tags will be stored as fields in the destination database ( `<my_newDB>` in this example). In order to maintain series context (tags), you must to run the command like this:
-
-```
-SELECT * 
-INTO <my_newDB>.<RP>.<MEASUREMENT> 
-FROM <my_oldDB>.<RP>.<MEASUREMENT> 
-GROUP BY  *
-```
-
-this preserves series context and tag values will be stored as tags in the destination database.
-
-In addition, when moving large measurements around with similar queries, it is  HIGHLY recommended to run those queries sequentially using time boundaries (where time > ... and time < ... ) in order to avoid running out of memory.
-Therefore, you would end up with a series of queries to effectively move data from on database to another. Such as:
-```
-SELECT * 
-INTO <my_newDB>.<RP>.<MEASUREMENT> 
-FROM <my_oldDB>.<RP>.<MEASUREMENT>
-WHERE time > now() - 100w and time < now() - 90w GROUP BY *
-
-SELECT * 
-INTO <my_newDB>.<RP>.<MEASUREMENT> 
-FROM <my_oldDB>.<RP>.<MEASUREMENT>} 
-WHERE time > now() - 90w  and time < now() - 80w GROUP BY *
-
-SELECT * 
-INTO <my_newDB>.<RP>.<MEASUREMENT> 
-FROM <my_oldDB>.<RP>.<MEASUREMENT>
-WHERE time > now() - 80w  and time < now() - 70w GROUP BY *
-
-...
-```
-
-#### Example 2: Write the results of a query to a measurement
+#### Example 1: Write the results of a query to a measurement
 
 ```
 > SELECT "water_level" INTO "h2o_feet_copy_1" FROM "h2o_feet" WHERE "location" = 'coyote_creek'
@@ -1799,7 +1757,7 @@ The response shows the number of points (`7605`) that InfluxDB writes to `h2o_fe
 The timestamp in the response is meaningless; InfluxDB uses epoch 0
 (`1970-01-01T00:00:00Z`) as a null timestamp equivalent.
 
-#### Example 3: Write the results of a query to a fully qualified measurement
+#### Example 2: Write the results of a query to a fully qualified measurement
 
 ```
 > SELECT "water_level" INTO "where_else"."autogen"."h2o_feet_copy_2" FROM "h2o_feet" WHERE "location" = 'coyote_creek'
@@ -1831,7 +1789,7 @@ The response shows the number of points (`7605`) that InfluxDB writes to `h2o_fe
 The timestamp in the response is meaningless; InfluxDB uses epoch 0
 (`1970-01-01T00:00:00Z`) as a null timestamp equivalent.
 
-#### Example 4: Write aggregated results to a measurement (downsampling)
+#### Example 3: Write aggregated results to a measurement (downsampling)
 
 ```
 > SELECT MEAN("water_level") INTO "all_my_averages" FROM "h2o_feet" WHERE "location" = 'coyote_creek' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
@@ -1865,7 +1823,7 @@ aggregating those data to a lower precision, and storing the lower precision
 data in the database.
 Downsampling is a common use case for the `INTO` clause.
 
-#### Example 5: Write aggregated results for more than one measurement to a different database (downsampling with backreferencing)
+#### Example 4: Write aggregated results for more than one measurement to a different database (downsampling with backreferencing)
 
 ```
 > SELECT MEAN(*) INTO "where_else"."autogen".:MEASUREMENT FROM /.*/ WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:06:00Z' GROUP BY time(12m)
@@ -1924,6 +1882,53 @@ It takes higher precision data from more than one measurement,
 aggregates those data to a lower precision, and stores the lower precision
 data in the database.
 Downsampling with backreferencing is a common use case for the `INTO` clause.
+
+#### Example 5: Rename a database
+
+```
+> SELECT * INTO "copy_NOAA_water_database"."autogen".:MEASUREMENT FROM "NOAA_water_database"."autogen"./.*/ GROUP BY *
+
+name: result
+time written
+---- -------
+0    76290
+```
+
+Directly renaming a database in InfluxDB is not possible, so a common use for the `INTO` clause is to move data from one database to another.
+The query above writes all data in the `NOAA_water_database` and `autogen` retention policy to the `copy_NOAA_water_database` database and the `autogen` retention policy.
+
+The [backreference](#example-4-write-aggregated-results-for-more-than-one-measurement-to-a-different-database-downsampling-with-backreferencing) syntax (`:MEASUREMENT`) maintains the source measurement names in the destination database.
+Note that both the `copy_NOAA_water_database` database and its `autogen` retention policy must exist prior to running the `INTO` query.
+See [Database Management](/influxdb/v1.2/query_language/database_management/)
+for how to manage databases and retention policies.
+
+The `GROUP BY *` clause [preserves tags](#issue-1-missing-data) in the source database as tags in the destination database.
+The following query does not maintain the series context for tags; tags will be stored as fields in the destination database (`copy_NOAA_water_database`):
+
+```
+SELECT * INTO "copy_NOAA_water_database"."autogen".:MEASUREMENT FROM "NOAA_water_database"."autogen"./.*/
+```
+
+When moving large amounts of data, we recommend sequentially running `INTO` queries for different measurements and using time boundaries in the [`WHERE` clause](#time-syntax).
+This prevents your system from running out of memory.
+The codeblock below provides sample syntax for those queries:
+
+```
+SELECT * 
+INTO <destination_database>.<retention_policy_name>.<measurement_name> 
+FROM <source_database>.<retention_policy_name>.<measurement_name>
+WHERE time > now() - 100w and time < now() - 90w GROUP BY *
+
+SELECT * 
+INTO <destination_database>.<retention_policy_name>.<measurement_name> 
+FROM <source_database>.<retention_policy_name>.<measurement_name>} 
+WHERE time > now() - 90w  and time < now() - 80w GROUP BY *
+
+SELECT * 
+INTO <destination_database>.<retention_policy_name>.<measurement_name> 
+FROM <source_database>.<retention_policy_name>.<measurement_name>
+WHERE time > now() - 80w  and time < now() - 70w GROUP BY *
+```
 
 ### Common Issues with the `INTO` clause
 
