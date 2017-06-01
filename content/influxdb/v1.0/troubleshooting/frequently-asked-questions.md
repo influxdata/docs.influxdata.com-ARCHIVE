@@ -113,7 +113,7 @@ The table below outlines the default relationship between the `DURATION` of an R
 Users can also configure the shard group duration with the
 [`CREATE RETENTION POLICY`](/influxdb/v1.0/query_language/database_management/#create-retention-policies-with-create-retention-policy)
 and
-[`ALTER RETENTION POLICY`](http://localhost:1313/influxdb/v1.0/query_language/database_management/#modify-retention-policies-with-alter-retention-policy)
+[`ALTER RETENTION POLICY`](/influxdb/v1.0/query_language/database_management/#modify-retention-policies-with-alter-retention-policy)
 statements.
 Check your retention policy's shard group duration with the
 [`SHOW RETENTION POLICY`](/influxdb/v1.0/query_language/schema_exploration/#explore-retention-policies-with-show-retention-policies)
