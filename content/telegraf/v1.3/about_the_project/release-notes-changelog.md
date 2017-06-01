@@ -6,7 +6,19 @@ menu:
     parent: about_the_project
 ---
 
-## v1.3 [2017-05-09]
+## v1.3.1 [2017-05-31]
+
+### Bugfixes
+
+- Fixed sqlserver input to work with case-sensitive server collation.
+- Reuse transports in input plugins.
+- Process input fails with `no such process`.
+- Fix InfluxDB output database quoting.
+- Fix net input on older Linux kernels.
+- Fix panic in mongo input.
+- Fix length calculation of split metric buffer.
+
+## v1.3.0 [2017-05-09]
 
 ### Release Notes
 
