@@ -5,8 +5,29 @@ menu:
     weight: 0
     parent: About the Project
 ---
+## v1.3.2.0 [2017-06-05]
 
-## v1.3.1 [2017-05-22]
+### Bug Fixes
+1. Update the query config's field ordering to always match the input query
+1. Allow users to add functions to existing Kapacitor rules
+1. Fix logout menu item regression
+1. Fix InfluxQL parsing with multiple tag values for a tag key
+1. Fix load localStorage and warning UX on fresh Chronograf install
+1. Show submenus when the alert notification is present
+
+### Features
+  1. Add UI to the Data Explorer for [writing data to InfluxDB](/chronograf/v1.3/guides/transition-web-admin-interface/#writing-data)
+
+### UI Improvements
+  1. Make the enter and escape keys perform as expected when renaming dashboards
+  1. Improve copy on the Kapacitor configuration page
+  1. Reset graph zoom when the user selects a new time range
+  1. Upgrade to new version of Influx Theme, and remove excess stylesheets
+  1. Replace the user icon with a solid style
+  1. Disable query save in cell editor mode if the query does not have a database, measurement, and field
+  1. Improve UX of applying functions to fields in the query builder
+  
+## v1.3.1.0 [2017-05-22]
 
 ### Release notes
 
