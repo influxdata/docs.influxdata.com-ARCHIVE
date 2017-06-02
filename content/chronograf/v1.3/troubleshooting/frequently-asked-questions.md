@@ -154,14 +154,14 @@ If you configure the setting to an interval that's greater than one minute, Chro
 
 ## Why is my query's field key order inconsistent?
 
-In query editor mode, Chronograf doesn't preserve the order of the items in the [`SELECT` clause](/influxdb/v1.2/query_language/data_exploration/#the-basic-select-statement).
+In versions 1.3.0-1.3.1, Chronograf doesn't preserve the order of the items in the [`SELECT` clause](/influxdb/v1.2/query_language/data_exploration/#the-basic-select-statement) in query editor mode.
 Chronograf may change the order of the items in the `SELECT` clause after it executes the query and populates the cell with the query results.
 
 This issue affects the [SingleStat](#singlestat) and [Line+Stat](#line-stat) graph types.
 If a cell's query includes more than one [field key](/influxdb/v1.2/concepts/glossary/#field-key) in the `SELECT` clause, Chronograf returns the most recent stat associated with the first field key in the `SELECT` clause.
 If you sorted the field keys in your query to rely on that behavior, it is important to note that Chronograf may change that order when it executes your query.
 
-This is a [known issue](https://github.com/influxdata/chronograf/issues/1158) and it will be fixed in a future release.
+This is a [known issue](https://github.com/influxdata/chronograf/issues/1158) and it is fixed in versions 1.3.2.0+.
 
 ## Why does the query builder break after I add my template variable to a query?
 
