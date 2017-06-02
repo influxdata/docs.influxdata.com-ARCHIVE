@@ -60,8 +60,8 @@ Kapacitor is responsible for creating and sending alerts in Chronograf.
 
 #### 1. Download and Install Kapacitor
 ```
-wget https://dl.influxdata.com/kapacitor/releases/kapacitor_1.3.0_amd64.deb
-sudo dpkg -i kapacitor_1.3.0_amd64.deb
+wget https://dl.influxdata.com/kapacitor/releases/kapacitor_1.3.1_amd64.deb
+sudo dpkg -i kapacitor_1.3.1_amd64.deb
 ```
 
 #### 2. Start Kapacitor
@@ -94,8 +94,8 @@ Ultimately, you will configure a Telegraf input plugin for each application that
 
 #### 1. Download and Install Telegraf
 ```
-wget https://dl.influxdata.com/telegraf/releases/telegraf_1.3.0-1_amd64.deb
-sudo dpkg -i telegraf_1.3.0-1_amd64.deb
+wget https://dl.influxdata.com/telegraf/releases/telegraf_1.3.1-1_amd64.deb
+sudo dpkg -i telegraf_1.3.1-1_amd64.deb
 ```
 
 #### 2. Start Telegraf
