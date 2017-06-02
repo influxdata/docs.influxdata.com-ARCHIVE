@@ -7,11 +7,12 @@ menu:
 ---
 
 Versions 1.3+ of [InfluxDB](/influxdb/v1.2/) and [InfluxEnterprise](/enterprise_influxdb/v1.2/) no longer support the [web admin interface](/influxdb/v1.2/tools/web_admin/), the builtin user interface for writing and querying data in InfluxDB.
-Chronograf replaces the web admin interface with improved tooling for querying data and database management.
+Chronograf replaces the web admin interface with improved tooling for querying data, writing data, and database management.
 
 The next sections describe the Chronograf features that relate to the web admin interface:
 
 * [Query Templates](#query-templates)
+* [Writing Data](#writing-data)
 * [Database and Retention Policy Management](#database-and-retention-policy-management)
 * [User Management](#user-management)
 
@@ -31,6 +32,22 @@ To use query templates, select a query from the set of available queries and ins
 Note that unlike the web admin interface, Chronograf does not have a database dropdown; the query must specify the target database.
 
 ![Chronograf Query Templates](/img/chronograf/v1.3/g-admin-chronotemplates.png)
+
+## Writing Data
+
+### Web Admin Interface
+
+To write data to InfluxDB, users selected the target database in the top right corner, clicked the `Write Data` icon, and entered their [line protocol](/influxdb/v1.2/concepts/glossary/#line-protocol) in the text input:
+
+![WAI Writing Data](/img/chronograf/v1.3/g-admin-write.png)
+
+### Chronograf
+
+In versions 1.3.2.0+, Chronograf's Data Explorer offers the same write functionality.
+To write data to InfluxDB, click the `Write Data` icon at the top of the Data Explorer page and select your target database.
+Next, enter your line protocol in the main text box and click the `Write` button.
+
+![Chronograf Writing Data](/img/chronograf/v1.3/g-admin-chronowrite.png)
 
 ## Database and Retention Policy Management
 
