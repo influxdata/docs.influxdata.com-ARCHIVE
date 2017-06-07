@@ -148,6 +148,30 @@ password:
 >
 ```
 
+>
+## Authenticate Telegraf requests to InfluxDB
+>
+Authenticating [Telegraf](/telegraf/v1.1/) requests to an InfluxDB instance with
+authentication enabled requires some additional steps.
+In Telegraf's configuration file (`/etc/telegraf/telegraf.conf`), uncomment
+and edit the `username` and `password` settings:
+>
+    ###############################################################################
+    #                            OUTPUT PLUGINS                                   #
+    ###############################################################################
+>
+    [...]
+>
+    ## Write timeout (for the InfluxDB client), formatted as a string.
+    ## If not provided, will default to 5s. 0s means no timeout (not recommended).
+    timeout = "5s"
+    username = "telegraf" #💥
+    password = "metricsmetricsmetricsmetrics" #💥
+>
+    [...]
+>
+Next, restart Telegraf and you're all set!
+
 ## Authorization
 
 Authorization is only enforced once you've [enabled authentication](#set-up-authentication).

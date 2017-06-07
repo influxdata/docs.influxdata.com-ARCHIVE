@@ -2,7 +2,7 @@
 title: Stability and Compatibility
 menu:
   influxdb_1_1:
-    weight: 80
+    weight: 90
     parent: administration
 ---
 
