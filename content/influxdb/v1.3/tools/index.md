@@ -40,8 +40,10 @@ The list of client libraries for interacting with InfluxDB.
 
 ## [Web Admin Interface](/influxdb/v1.3/tools/web_admin/)
 
-InfluxDB's built-in web administration GUI.
-The built-in web administration GUI is deprecated in InfluxDB 1.2 and is disabled by default. We recommend using the [HTTP API](/influxdb/v1.3/tools/api/) or the [Command Line Interface](/influxdb/v1.3/tools/shell/) to interact with InfluxDB.
+In version 1.3, the web admin interface is no longer available in InfluxDB.
+The interface does not run on port `8083` and InfluxDB ignores the `[admin]` section in the configuration file if that section is present.
+[Chronograf](/chronograf/v1.3/) replaces the web admin interface with improved tooling for querying data, writing data, and database management.
+See [Chronograf's transition guide](/chronograf/v1.3/guides/transition-web-admin-interface/) for more information.
 
 ## [Influx Inspect](/influxdb/v1.3/tools/influx_inspect/)
 

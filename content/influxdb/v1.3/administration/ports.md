@@ -41,14 +41,6 @@ in the configuration file.
 
 **Resources** [OpenTSDB README](https://github.com/influxdata/influxdb/blob/master/services/opentsdb/README.md)
 
-### 8083
-
-The default port that runs the web admin service.
-[Enable and configure this port](/influxdb/v1.3/administration/config/#bind-address-8083)
-in the configuration file.
-
-**Resources** [Web Admin Interface](/influxdb/v1.3/tools/web_admin/)
-
 ### 8089
 
 The default port that runs the UDP service.
