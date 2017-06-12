@@ -39,7 +39,8 @@ Aggregate, select, transform, and predict data with InfluxQL functions.
     * [FLOOR()](#floor)                                    
     * [HISTOGRAM()](#histogram)                            
     * [MOVING_AVERAGE()](#moving-average)                  
-    * [NON_NEGATIVE_DERIVATIVE()](#non-negative-derivative) 
+    * [NON_NEGATIVE_DERIVATIVE()](#non-negative-derivative)
+    * [NON_NEGATIVE_DIFFERENCE()](#non-negative-difference) 
 * [Predictors](#predictors)
     * [HOLT_WINTERS()](#holt-winters)
 * [Other](#other)
@@ -2785,6 +2786,65 @@ Note that this behavior is different from the [basic syntax's](#basic-syntax-4) 
 
 See the examples in the [`DERIVATIVE()` documentation](#examples-of-advanced-syntax-1).
 `NON_NEGATIVE_DERIVATIVE()` behaves the same as the `DERIVATIVE()` function but `NON_NEGATIVE_DERIVATIVE()` returns only positive rates of change or rates of change that equal zero.
+
+## NON_NEGATIVE_DIFFERENCE()
+
+Returns the non-negative result of subtraction between subsequent [field values](/influxdb/v1.3/concepts/glossary/#field-value).
+Non-negative results of subtraction include positive differences and differences that equal zero.
+
+### Basic Syntax
+```
+SELECT NON_NEGATIVE_DIFFERENCE( [ * | <field_key> | /<regular_expression>/ ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+
+### Description of Basic Syntax
+`NON_NEGATIVE_DIFFERENCE(field_key)`  
+&emsp;&emsp;&emsp;
+Returns the non-negative difference between subsequent field values associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
+
+`NON_NEGATIVE_DIFFERENCE(/regular_expression/)`  
+&emsp;&emsp;&emsp;
+Returns the non-negative difference between subsequent field values associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
+
+`NON_NEGATIVE_DIFFERENCE(*)`  
+&emsp;&emsp;&emsp;
+Returns the non-negative difference between subsequent field values associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
+
+`NON_NEGATIVE_DIFFERENCE()` supports int64 and float64 field value [data types](/influxdb/v1.3/write_protocols/line_protocol_reference/#data-types).
+
+The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.3/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals).
+See the [Advanced Syntax](#advanced-syntax-5) section for how to use `NON_NEGATIVE_DIFFERENCE()` with a `GROUP BY time()` clause.
+
+### Examples of Basic Syntax
+
+See the examples in the [`DIFFERENCE()` documentation](#examples-of-basic-syntax-2).
+`NON_NEGATIVE_DIFFERENCE()` behaves the same as the `DIFFERENCE()` function but `NON_NEGATIVE_DIFFERENCE()` returns only positive differences or differences that equal zero.
+
+### Advanced Syntax
+```
+SELECT NON_NEGATIVE_DIFFERENCE(<function>( [ * | <field_key> | /<regular_expression>/ ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+
+#### Description of Advanced Syntax
+The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
+The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `NON_NEGATIVE_DIFFERENCE()` function to those results.
+
+`NON_NEGATIVE_DIFFERENCE()` supports the following nested functions:
+[`COUNT()`](#count),
+[`MEAN()`](#mean),
+[`MEDIAN()`](#median),
+[`MODE()`](#mode),
+[`SUM()`](#sum),
+[`FIRST()`](#first),
+[`LAST()`](#last),
+[`MIN()`](#min),
+[`MAX()`](#max), and
+[`PERCENTILE()`](#percentile).
+
+### Examples of Advanced Syntax
+
+See the examples in the [`DIFFERENCE()` documentation](#examples-of-advanced-syntax-2).
+`NON_NEGATIVE_DIFFERENCE()` behaves the same as the `DIFFERENCE()` function but `NON_NEGATIVE_DIFFERENCE()` returns only positive differences or differences that equal zero.
 
 # Predictors
 
