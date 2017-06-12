@@ -14,27 +14,27 @@ for exploring your data.
 <table style="width:100%">
   <tr>
     <td><b>The Basics:</b></td>
-    <td><b>Limit and Sort Query Results:</b></td>
+    <td><b>Configure Query Results:</b></td>
     <td><b>General Tips on Query Syntax:</b></td>
   </tr>
   <tr>
-    <td><a href="#the-basic-select-statement">The SELECT statement</a></td>
+    <td><a href="#the-basic-select-statement">The SELECT Statement</a></td>
     <td><a href="#order-by-time-desc">ORDER BY time DESC</a></td>
     <td><a href="#time-syntax">Time Syntax</a></td>
   </tr>
   <tr>
-    <td><a href="#the-where-clause">The WHERE clause</a></td>
+    <td><a href="#the-where-clause">The WHERE Clause</a></td>
     <td><a href="#the-limit-and-slimit-clauses">The LIMIT and SLIMIT Clauses</a></td>
     <td><a href="#regular-expressions">Regular Expressions</a></td>
   </tr>
   <tr>
-    <td><a href="#the-group-by-clause">The GROUP BY clause</a></td>
+    <td><a href="#the-group-by-clause">The GROUP BY Clause</a></td>
     <td><a href="#the-offset-and-soffset-clauses">The OFFSET and SOFFSET Clauses</a></td>
     <td><a href="#data-types-and-cast-operations">Data Types and Cast Operations</a></td>
   </tr>
   <tr>
-    <td><a href="#the-into-clause">The INTO clause</a></td>
-    <td><a href="#"></a></td>
+    <td><a href="#the-into-clause">The INTO Clause</a></td>
+    <td><a href="#the-time-zone-clause">The Time Zone Clause</a></td>
     <td><a href="#merge-behavior">Merge Behavior</a></td>
   </tr>
   <tr>
@@ -2320,6 +2320,42 @@ time                   mean
 2015-08-18T00:12:00Z   7.8245
 2015-08-18T00:00:00Z   8.0625
 ```
+
+<br>
+<br>
+# The Time Zone Clause
+
+The `tz()` clause returns the UTC offset for the specified timezone.
+
+### Syntax
+
+```
+SELECT_clause [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause] tz('<time_zone>')
+```
+
+### Description of Syntax
+
+By default, InfluxDB stores and returns timestamps in UTC.
+The `tz()` clause includes the UTC offset or, if applicable, the UTC Daylight Savings Time (DST) offset to the query's returned timestamps.
+The returned timestamps must be in [RFC3339 format](/influxdb/v1.3/query_language/data_exploration/#issue-3-configuring-the-returned-timestamps) for the UTC offset or UTC DST to appear.
+The `time_zone` parameter follows the TZ syntax in the [Internet Assigned Numbers Authority time zone database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) and it requires single quotes.
+
+### Examples
+
+#### Example 1: Return the UTC offset for Chicago's time zone
+```
+> SELECT "water_level" FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:18:00Z' tz('America/Chicago')
+
+name: h2o_feet
+time                       water_level
+----                       -----------
+2015-08-17T19:00:00-05:00  2.064
+2015-08-17T19:06:00-05:00  2.116
+2015-08-17T19:12:00-05:00  2.028
+2015-08-17T19:18:00-05:00  2.126
+```
+
+The query results include the UTC offset (`-05:00`) for the `America/Chicago` time zone in the timestamps.
 
 <br>
 <br>
