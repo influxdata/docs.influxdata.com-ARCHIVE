@@ -2976,6 +2976,8 @@ SELECT <function>(),<function>() FROM_clause [...]
 #### Description of Syntax
 
 Separate multiple functions in one `SELECT` statement with a comma (`,`).
+The syntax applies to all InfluxQL functions except [`TOP()`](#top) and [`BOTTOM()`](#bottom).
+The `SELECT` clause does not support specifying `TOP()` or `BOTTOM()` with another function.
 
 #### Examples
 
