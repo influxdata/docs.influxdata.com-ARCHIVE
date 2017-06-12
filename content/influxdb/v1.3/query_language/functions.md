@@ -335,10 +335,109 @@ time                   distinct
 ```
 
 ## INTEGRAL()
-`INTEGRAL()` is not yet functional.
 
-<dt> See GitHub Issue [#5930](https://github.com/influxdata/influxdb/issues/5930) for more information.
-</dt>
+Returns the area under the curve for subsequent [field values](/influxdb/v1.3/concepts/glossary/#field-value).
+
+### Syntax
+
+```
+SELECT INTEGRAL( [ * | <field_key> | /<regular_expression>/ ] [ , <unit> ]  ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+
+### Description of Syntax
+
+InfluxDB calculates the area under the curve for subsequent field values and converts those results into the summed area per `unit`.
+The `unit` argument is an integer followed by a [duration literal](/influxdb/v1.3/query_language/spec/#literals) and it is optional.
+If the query does not specify the `unit`, the unit defaults to one second (`1s`).
+
+`INTEGRAL(field_key)`  
+&emsp;&emsp;&emsp;
+Returns the area under the curve for subsequent field values assoicated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
+
+`INTEGRAL(/regular_expression/)`  
+&emsp;&emsp;&emsp;
+Returns the are under the curve for subsequent field values associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
+
+`INTEGRAL(*)`  
+&emsp;&emsp;&emsp;
+Returns the average field value associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
+
+`INTEGRAL()` does not support [`fill()`](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals-and-fill). `INTEGRAL()` supports int64 and float64 field value [data types](/influxdb/v1.3/write_protocols/line_protocol_reference/#data-types).
+
+### Examples
+
+Examples 1-5 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.3/query_language/data_download/):
+
+```
+> SELECT "water_level" FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
+
+name: h2o_feet
+time                   water_level
+----                   -----------
+2015-08-18T00:00:00Z   2.064
+2015-08-18T00:06:00Z   2.116
+2015-08-18T00:12:00Z   2.028
+2015-08-18T00:18:00Z   2.126
+2015-08-18T00:24:00Z   2.041
+2015-08-18T00:30:00Z   2.051
+```
+
+#### Example 1: Calculate the integral for the field values associated with a field key
+```
+> SELECT INTEGRAL("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
+
+name: h2o_feet
+time                 integral
+----                 --------
+1970-01-01T00:00:00Z 3732.66
+```
+The query returns the area under the curve (in seconds) for the field values associated with the `water_level` field key and in the `h2o_feet` measurement.
+
+#### Example 2: Calculate the integral for the field values associated with a field key and specify the unit option
+```
+> SELECT INTEGRAL("water_level",1m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
+
+name: h2o_feet
+time                 integral
+----                 --------
+1970-01-01T00:00:00Z 62.211
+```
+The query returns the area under the curve (in minutes) for the field values associated with the `water_level` field key and in the `h2o_feet` measurement.
+
+#### Example 3: Calculate the integral for the field values associated with each field key in a measurement and specify the unit option
+```
+> SELECT INTEGRAL(*,1m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
+
+name: h2o_feet
+time                 integral_water_level
+----                 --------------------
+1970-01-01T00:00:00Z 62.211
+```
+The query returns the area under the curve (in minutes) for the field values associated with each field key that stores numerical values in the `h2o_feet` measurement.
+The `h2o_feet` measurement has on numerical field: `water_level`.
+
+#### Example 4: Calculate the integral for the field values associated with each field key that matches a regular expression and specify the unit option
+```
+> SELECT INTEGRAL(/water/,1m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
+
+name: h2o_feet
+time                 integral_water_level
+----                 --------------------
+1970-01-01T00:00:00Z 62.211
+```
+The query returns the area under the curve (in minutes) for the field values associated with each field key that stores numerical values includes the word `water` in the `h2o_feet` measurement.
+
+#### Example 5: Calculate the integral for the field values associated with a field key and include several clauses
+```
+> SELECT INTEGRAL("water_level",1m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m) LIMIT 1
+
+name: h2o_feet
+time                 integral
+----                 --------
+2015-08-18T00:00:00Z 24.972
+```
+The query returns the area under the curve (in minutes) for the field values associated with the `water_level` field key and in the `h2o_feet` measurement.
+It covers the [time range](/influxdb/v1.3/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z`, [groups](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals) results into 12-minute intervals, and [limits](/influxdb/v1.3/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of results returned to one.
 
 ## MEAN()
 Returns the arithmetic mean (average) of [field values](/influxdb/v1.3/concepts/glossary/#field-value).
