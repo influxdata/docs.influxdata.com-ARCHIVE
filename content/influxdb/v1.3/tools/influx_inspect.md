@@ -114,6 +114,42 @@ randset value=97.9296104805 1439856000000000000
 randset value=25.3849066842 1439856100000000000
 ```
 
+### influx_inspect dumptsi
+Dumps low-level details about tsi1 files.
+`dumptsi` returns summary stats for each file if the command does not specify any flags.
+
+#### Usage
+
+```
+influx_inspect dumptsi [<flags>] <path>
+```
+
+#### Flags
+
+##### `-series`
+Dump raw series data.
+
+##### `-measurements`
+Dump raw [measurement](/influxdb/v1.3/concepts/glossary/#measurement) data.
+
+##### `-tag-keys`
+Dump raw [tag keys](/influxdb/v1.3/concepts/glossary/#tag-key).
+
+##### `-tag-values`
+ Dump raw [tag values](/influxdb/v1.3/concepts/glossary/#tag-value).
+
+##### `-tag-value-series`
+Dump raw series for each tag value.
+
+##### `-measurement-filter` <regular_expression>
+Filters data by measurement regular expression.
+
+##### `-tag-key-filter` <regular_expression>
+Filters data by tag key regular expression.
+
+##### `-tag-value-filter` <regular_expresssion>
+Filters data by tag value regular expression.
+
 # Caveats
 
 The system does not have access to the meta store when exporting TSM shards.
