@@ -15,7 +15,7 @@ For example `5 / 2 + 3 * 2 =  (5 / 2) + (3 * 2)` and `5 + 2 * 3 - 2 = 5 + (2 * 3
 
 ### Addition
 
-You can add a constant.
+Perform addition with a constant.
 
 ```sql
 SELECT "A" + 5 FROM "add"
@@ -24,7 +24,7 @@ SELECT "A" + 5 FROM "add"
 SELECT * FROM "add" WHERE "A" + 5 > 10
 ```
 
-You can add together other field keys.
+Perform addition on two fields.
 
 ```sql
 SELECT "A" + "B" FROM "add"
@@ -35,7 +35,7 @@ SELECT * FROM "add" WHERE "A" + "B" >= 10
 
 ### Subtraction
 
-You can subtract a constant.
+Perform subtraction with a constant.
 
 ```sql
 SELECT 1 - "A" FROM "sub"
@@ -44,7 +44,7 @@ SELECT 1 - "A" FROM "sub"
 SELECT * FROM "sub" WHERE 1 - "A" <= 3
 ```
 
-You can subtract one field key from another field key.
+Perform subtraction with two fields.
 
 ```sql
 SELECT "A" - "B" FROM "sub"
@@ -55,7 +55,7 @@ SELECT * FROM "sub" WHERE "A" - "B" <= 1
 
 ### Multiplication
 
-You can multiply by a constant.
+Perform multiplication with a constant.
 
 ```sql
 SELECT 10 * "A" FROM "mult"
@@ -64,7 +64,7 @@ SELECT 10 * "A" FROM "mult"
 SELECT * FROM "mult" WHERE "A" * 10 >= 20
 ```
 
-You can multiply by other field keys.
+Perform multiplication with two fields.
 
 ```sql
 SELECT "A" * "B" * "C" FROM "mult"
@@ -73,7 +73,7 @@ SELECT "A" * "B" * "C" FROM "mult"
 SELECT * FROM "mult" WHERE "A" * "B" <= 80
 ```
 
-Multiplication distributes across other operators
+Multiplication distributes across other operators.
 
 ```sql
 SELECT 10 * ("A" + "B" + "C") FROM "mult"
@@ -88,7 +88,7 @@ SELECT 10 * ("A" + "B" - "C") FROM "mult"
 ```
 
 ### Division
-You can divide by a constant.
+Perform division with a constant.
 
 ```sql
 SELECT 10 / "A" FROM "div"
@@ -97,7 +97,7 @@ SELECT 10 / "A" FROM "div"
 SELECT * FROM "div" WHERE "A" / 10 <= 2
 ```
 
-You can divide by other field keys.
+Perform division with two fields.
 
 ```sql
 SELECT "A" / "B" FROM "div"
@@ -106,12 +106,32 @@ SELECT "A" / "B" FROM "div"
 SELECT * FROM "div" WHERE "A" / "B" >= 10
 ```
 
-Division distributes across other operators
+Division distributes across other operators.
 
 ```sql
 SELECT 10 / ("A" + "B" + "C") FROM "mult"
 ```
 
+### Modulo
+
+Perform modulo arithmetic with a constant.
+
+```
+SELECT "B" % 2 FROM "modulo"
+```
+```
+SELECT "B" FROM "modulo" WHERE "B" % 2 = 0
+```
+
+Perform modulo arithmetic on two fields.
+
+```
+SELECT "A" % "B" FROM "modulo"
+```
+```
+SELECT "A" FROM "modulo" WHERE "A" % "B" = 0
+```
+ 
 ## Operators with Functions
 
 The use of mathematical operators inside of function calls is currently unsupported.
@@ -140,8 +160,8 @@ See GitHub issue [3525](https://github.com/influxdb/influxdb/issues/3525).
 
 ### Miscellaneous
 
-Using any of `%`, `^` will yield a parse error.
-If you would like to see support for these operators open an [issue](https://github.com/influxdb/influxdb/issues/new).
+Using `^` yields a parse error.
+If you would like support for that operator, please open an [issue](https://github.com/influxdb/influxdb/issues/new).
 
 ## Logical Operators are Unsupported
 
