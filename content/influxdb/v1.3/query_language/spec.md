@@ -180,6 +180,7 @@ Durations can be specified with mixed units.
 
  Units  | Meaning
 --------|-----------------------------------------
+ ns     | nanoseconds (1 billionth of a second)
  u or µ | microseconds (1 millionth of a second)
  ms     | milliseconds (1 thousandth of a second)
  s      | second
@@ -191,7 +192,7 @@ Durations can be specified with mixed units.
 
 ```
 duration_lit        = int_lit duration_unit .
-duration_unit       = "u" | "µ" | "ms" | "s" | "m" | "h" | "d" | "w" .
+duration_unit       = "ns" | "u" | "µ" | "ms" | "s" | "m" | "h" | "d" | "w" .
 ```
 
 ### Dates & Times
