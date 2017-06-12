@@ -208,6 +208,7 @@ Non-admin users can have one of the following three privileges per database:
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ALL` (both `READ` and `WRITE` access)
 
 `READ`, `WRITE`, and `ALL` privileges are controlled per user per database. A new non-admin user has no access to any database until they are specifically [granted privileges to a database](#grant-read-write-or-all-database-privileges-to-an-existing-user) by an admin user.
+Non-admin users can [`SHOW`](/influxdb/v1.3/query_language/schema_exploration/#show-databases) the databases on which they have `READ` and/or `WRITE` permissions.
 
 ### User Management Commands
 

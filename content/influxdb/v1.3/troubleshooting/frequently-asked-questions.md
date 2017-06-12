@@ -216,42 +216,14 @@ Check out [CLI/Shell](/influxdb/v1.3/tools/shell/) for more useful CLI options.
 
 ## How can a non-admin user `USE` a database in InfluxDB's CLI?
 
-Currently, non-admin users cannot execute a `USE <database>` query within the
-CLI even if they have read and write permissions on that database:
+In versions prior to v1.3, [non-admin users](/influxdb/v1.3/query_language/authentication_and_authorization/#user-types-and-privileges) could not execute a `USE <database_name>` query in the CLI even if they had `READ` and/or `WRITE` permissions on that database.
 
+Starting with version 1.3, non-admin users can execute the `USE <database_name>` query for databases on which they have `READ` and/or `WRITE` permissions.
+If a non-admin user attempts to `USE` a database on which the user doesn't have `READ` and/or `WRITE` permissions, the system returns an error:
 ```
-> USE special_db
-ERR: error authorizing query: <username> not authorized to execute statement 'SHOW DATABASES', requires admin privilege
+ERR: Database <database_name> doesn't exist. Run SHOW DATABASES for a list of existing databases.
 ```
-
-### Workaround Option 1:
-Explicitly connect to the relevant database when launching the CLI:
-
-```
-> influx -username 'username' -password 'password' -database 'special_db'
-```
-
-All operations for the duration of that CLI session will go against the `special_db` database.
-
-### Workaround Option 2:
-Specify the database in every query.
-For example, rather than the following query, which requires a database to have been set:
-
-```
-> SELECT value FROM measurement
-ERR: database name required
-Warning: It is possible this error is due to not setting a database.
-Please set a database with the command "use <database>".
-```
-
-Issue the query with the database specified, using the `<database>.[<retention_policy].<measurement>` syntax.
-If you do not specify a retention policy, the query will issue against the `DEFAULT` retention policy.
-
-```
-SELECT value FROM special_db.autogen.measurement
-# OR
-SELECT value FROM special_db..measurement
-```
+Note that the [`SHOW DATABASES` query](/influxdb/v1.3/query_language/schema_exploration/#show-databases) returns only those databases on which the non-admin user has `READ` and/or `WRITE` permissions.
 
 ## How do I write to a non-DEFAULT retention policy with InfluxDB's CLI?
 
