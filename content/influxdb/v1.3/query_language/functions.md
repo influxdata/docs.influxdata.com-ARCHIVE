@@ -993,68 +993,56 @@ The query returns the smallest four field values in the `water_level` field key 
 > SELECT BOTTOM("water_level",3),"location" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(24m) ORDER BY time DESC
 
 name: h2o_feet
-time                   bottom   location
-----                   ------   --------
-2015-08-18T00:48:00Z   1.991    santa_monica
-2015-08-18T00:48:00Z   2.054    santa_monica
-2015-08-18T00:48:00Z   6.982    coyote_creek
-2015-08-18T00:24:00Z   2.041    santa_monica
-2015-08-18T00:24:00Z   2.051    santa_monica
-2015-08-18T00:24:00Z   2.057    santa_monica
-2015-08-18T00:00:00Z   2.028    santa_monica
-2015-08-18T00:00:00Z   2.064    santa_monica
-2015-08-18T00:00:00Z   2.116    santa_monica
+time                  bottom  location
+----                  ------  --------
+2015-08-18T00:48:00Z  1.991   santa_monica
+2015-08-18T00:54:00Z  2.054   santa_monica
+2015-08-18T00:54:00Z  6.982   coyote_creek
+2015-08-18T00:24:00Z  2.041   santa_monica
+2015-08-18T00:30:00Z  2.051   santa_monica
+2015-08-18T00:42:00Z  2.057   santa_monica
+2015-08-18T00:00:00Z  2.064   santa_monica
+2015-08-18T00:06:00Z  2.116   santa_monica
+2015-08-18T00:12:00Z  2.028   santa_monica
 ```
 The query returns the smallest three values in the `water_level` field key for each 24-minute [interval](/influxdb/v1.3/query_language/data_exploration/#basic-group-by-time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:54:00Z`.
 It also returns results in [descending timestamp](/influxdb/v1.3/query_language/data_exploration/#order-by-time-desc) order.
 
-Notice that the [`GROUP BY time()` clause](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals) overrides the points' original timestamps.
-The timestamps in the results indicate the the start of each 24-minute time interval;
-the last three points in the results are for the time interval between `2015-08-18T00:00:00Z` and just before `2015-08-18T00:24:00Z`.
+Notice that the [GROUP BY time() clause](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals) does not override the points’ original timestamps. See [Issue 1](#issue-1-bottom-with-a-group-by-time-clause) in the section below for a more detailed explanation of that behavior.
 
 ### Common Issues with `BOTTOM()`
 
-#### Issue 1: BOTTOM(), the INTO clause, and the GROUP BY time() clause
+#### Issue 1: `BOTTOM()` with a `GROUP BY time()` clause
 
-Using the `BOTTOM()` function with the [`INTO` clause](/influxdb/v1.3/query_language/data_exploration/#the-into-clause)
-and the [`GROUP BY time()` clause](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals) can cause InfluxDB to overwrite points in the destination measurement.
-Using `BOTTOM()` with the `GROUP BY time()` clause often returns several results with the same timestamp; InfluxDB assumes [points](/influxdb/v1.3/concepts/glossary/#point) with the same series and timestamp are duplicate points and simply overwrites any duplicate point with the most recent point in the destination measurement.
+Queries with `BOTTOM()` and a `GROUP BY time()` clause return the specified
+number of points per `GROUP BY time()` interval.
+For
+[most `GROUP BY time()` queries](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals),
+the returned timestamps mark the start of the `GROUP BY time()` interval.
+`GROUP BY time()` queries with the `BOTTOM()` function behave differently;
+they maintain the timestamp of the original data point.
 
 ##### Example
 <br>
-The first query in the codeblock below uses the `BOTTOM()` function with a `GROUP BY time()` clause, and it returns four results.
-Notice that the first two results have the same timestamp and the last two results have the same timestamp.
-The second query adds an `INTO` clause to the initial query and writes the query results to the `bottom_dweller` measurement.
-The last query in the codeblock selects all the data in the `bottom_dweller` measurement.
-
-The last query returns two points instead of four points, because two of the initial results are duplicate points; they belong to the same series and have the same timestamp.
-When the system encounters duplicate points, it simply overwrites the previous point with the most recent point.
+The query below returns two points per 18-minute
+`GROUP BY time()` interval.
+Notice that the returned timestamps are the points' original timestamps; they
+are not forced to match the start of the `GROUP BY time()` intervals.
 
 ```
-> SELECT BOTTOM("water_level",2),"location" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:24:00Z' GROUP BY time(24m)
+> SELECT BOTTOM("water_level",2) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(18m)
 
 name: h2o_feet
-time                   bottom   location
-----                   ------   --------
-2015-08-18T00:00:00Z   2.028    santa_monica
-2015-08-18T00:00:00Z   2.064    santa_monica
-2015-08-18T00:24:00Z   2.041    santa_monica
-2015-08-18T00:24:00Z   7.635    coyote_creek
-
-> SELECT BOTTOM("water_level",2),"location" INTO "bottom_dweller" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:24:00Z' GROUP BY time(24m)
-
-name: result
-time                   written
-----                   -------
-1970-01-01T00:00:00Z   4
-
-> SELECT * FROM "bottom_dweller"
-
-name: bottom_dweller
-time                   bottom   location
-----                   ------   --------
-2015-08-18T00:00:00Z   2.064    santa_monica
-2015-08-18T00:24:00Z   7.635    coyote_creek
+time                   bottom
+----                   ------
+                           __
+2015-08-18T00:00:00Z  2.064 |
+2015-08-18T00:12:00Z  2.028 | <------- Smallest points for the first time interval
+                           --
+                           __
+2015-08-18T00:24:00Z  2.041 |
+2015-08-18T00:30:00Z  2.051 | <------- Smallest points for the second time interval
+                           --
 ```
 
 #### Issue 2: BOTTOM() and a tag key with fewer than N tag values
@@ -1803,68 +1791,58 @@ The query returns the greatest four field values in the `water_level` field key 
 > SELECT TOP("water_level",3),"location" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(24m) ORDER BY time DESC
 
 name: h2o_feet
-time                   top     location
-----                   ---     --------
-2015-08-18T00:48:00Z   7.11    coyote_creek
-2015-08-18T00:48:00Z   6.982   coyote_creek
-2015-08-18T00:48:00Z   2.054   santa_monica
-2015-08-18T00:24:00Z   7.635   coyote_creek
-2015-08-18T00:24:00Z   7.5     coyote_creek
-2015-08-18T00:24:00Z   7.372	 coyote_creek
-2015-08-18T00:00:00Z   8.12    coyote_creek
-2015-08-18T00:00:00Z   8.005   coyote_creek
-2015-08-18T00:00:00Z   7.887   coyote_creek
+time                  top    location
+----                  ---    --------
+2015-08-18T00:48:00Z  7.11   coyote_creek
+2015-08-18T00:54:00Z  6.982  coyote_creek
+2015-08-18T00:54:00Z  2.054  santa_monica
+2015-08-18T00:24:00Z  7.635  coyote_creek
+2015-08-18T00:30:00Z  7.5    coyote_creek
+2015-08-18T00:36:00Z  7.372  coyote_creek
+2015-08-18T00:00:00Z  8.12   coyote_creek
+2015-08-18T00:06:00Z  8.005  coyote_creek
+2015-08-18T00:12:00Z  7.887  coyote_creek
 ```
+
 The query returns the greatest three values in the `water_level` field key for each 24-minute [interval](/influxdb/v1.3/query_language/data_exploration/#basic-group-by-time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:54:00Z`.
 It also returns results in [descending timestamp](/influxdb/v1.3/query_language/data_exploration/#order-by-time-desc) order.
 
-Notice that the [`GROUP BY time()` clause](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals) overrides the points' original timestamps.
-The timestamps in the results indicate the the start of each 24-minute time interval;
-the last three points in the results are for the time interval between `2015-08-18T00:00:00Z` and just before `2015-08-18T00:24:00Z`.
+Notice that the [GROUP BY time() clause](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals) does not override the points’ original timestamps.
+See [Issue 1](#issue-1-top-with-a-group-by-time-clause) in the section below for a more detailed explanation of that behavior.
 
 ### Common Issues with `TOP()`
 
-#### Issue 1: TOP(), the INTO clause, and the GROUP BY time() clause
+#### Issue 1: `TOP()` with a `GROUP BY time()` clause
 
-Using the `TOP()` function with the [`INTO` clause](/influxdb/v1.3/query_language/data_exploration/#the-into-clause)
-and the [`GROUP BY time()` clause](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals) can cause InfluxDB to overwrite points in the destination measurement.
-Using `TOP()` with the `GROUP BY time()` clause often returns several results with the same timestamp; InfluxDB assumes [points](/influxdb/v1.3/concepts/glossary/#point) with the same series and timestamp are duplicate points and simply overwrites any duplicate point with the most recent point in the destination measurement.
+Queries with `TOP()` and a `GROUP BY time()` clause return the specified
+number of points per `GROUP BY time()` interval.
+For
+[most `GROUP BY time()` queries](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals),
+the returned timestamps mark the start of the `GROUP BY time()` interval.
+`GROUP BY time()` queries with the `TOP()` function behave differently;
+they maintain the timestamp of the original data point.
 
 ##### Example
 <br>
-The first query in the codeblock below uses the `TOP()` function with a `GROUP BY time()` clause, and it returns four results.
-Notice that the first two results have the same timestamp and the last two results have the same timestamp.
-The second query adds an `INTO` clause to the initial query and writes the query results to the `top_dweller` measurement.
-The last query in the codeblock selects all the data in the `top_dweller` measurement.
-
-The last query returns two points instead of four points, because two of the initial results are duplicate points; they belong to the same series and have the same timestamp.
-When the system encounters duplicate points, it simply overwrites the previous point with the most recent point.
+The query below returns two points per 18-minute
+`GROUP BY time()` interval.
+Notice that the returned timestamps are the points' original timestamps; they
+are not forced to match the start of the `GROUP BY time()` intervals.
 
 ```
-> SELECT TOP("water_level",2),"location" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:24:00Z' GROUP BY time(24m)
+> SELECT TOP("water_level",2) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(18m)
 
 name: h2o_feet
-time                  top    location
-----                  ---    --------
-2015-08-18T00:00:00Z  8.12   coyote_creek
-2015-08-18T00:00:00Z  8.005  coyote_creek
-2015-08-18T00:24:00Z  7.635  coyote_creek
-2015-08-18T00:24:00Z  2.041  santa_monica
-
-> SELECT TOP("water_level",2),"location" INTO "top_dweller" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:24:00Z' GROUP BY time(24m)
-
-name: result
-time                  written
-----                  -------
-1970-01-01T00:00:00Z  4
-
-> SELECT * FROM "top_dweller"
-
-name: top_dweller
-time                  location      top
-----                  --------      ---
-2015-08-18T00:00:00Z  coyote_creek  8.005
-2015-08-18T00:24:00Z  santa_monica  2.041
+time                   top
+----                   ------
+                           __
+2015-08-18T00:00:00Z  2.064 |
+2015-08-18T00:06:00Z  2.116 | <------- Greatest points for the first time interval
+                           --
+                           __
+2015-08-18T00:18:00Z  2.126 |
+2015-08-18T00:30:00Z  2.051 | <------- Greatest points for the second time interval
+                           --
 ```
 
 #### Issue 2: TOP() and a tag key with fewer than N tag values
