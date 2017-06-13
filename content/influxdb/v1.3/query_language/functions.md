@@ -942,7 +942,10 @@ Returns the smallest N field values associated with the field key in the parenth
 
 `BOTTOM()` supports int64 and float64 field value [data types](/influxdb/v1.3/write_protocols/line_protocol_reference/#data-types).
 
-> **Note:** `BOTTOM()` returns the field value with the earliest timestamp if there's a tie between two or more values for the smallest value.
+> **Notes:**
+>
+* `BOTTOM()` returns the field value with the earliest timestamp if there's a tie between two or more values for the smallest value.
+* `BOTTOM()` differs from other InfluxQL functions when combined with an [`INTO` clause](/influxdb/v1.3/query_language/data_exploration/#the-into-clause). See the [Common Issues](#common-issues-with-bottom) section for more information.
 
 ### Examples
 
@@ -1071,6 +1074,34 @@ time                   bottom   location
 ----                   ------   --------
 2015-08-29T10:36:00Z   -0.243   santa_monica
 2015-08-29T14:30:00Z   -0.61    coyote_creek
+```
+
+#### Issue 3: BOTTOM(), tags, and the INTO clause
+
+When combined with an [`INTO` clause](/influxdb/v1.3/query_language/data_exploration/#the-into-clause) and no [`GROUP BY tag` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-tags), most InfluxQL functions [convert](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#why-are-my-into-queries-missing-data) any tags in the initial data to fields in the newly written data.
+This behavior also applies to the `BOTTOM()` function unless `BOTTOM()` includes a tag key as an argument: `BOTTOM(field_key,tag_key(s),N)`.
+In those cases, the system preserves the specified tag as a tag in the newly written data.
+
+##### Example
+<br>
+The first query in the codeblock below returns the smallest field values in the `water_level` field key for two tag values associated with the `location` tag key.
+It also writes those results to the `bottom_water_levels` measurement.
+
+The second query [shows](/influxdb/v1.3/query_language/schema_exploration/#show-tag-keys) that InfluxDB preserved the `location` tag as a tag in the `bottom_water_levels` measurement. 
+```
+> SELECT BOTTOM("water_level","location",2) INTO "bottom_water_levels" FROM "h2o_feet"
+
+name: result
+time                 written
+----                 -------
+1970-01-01T00:00:00Z 2
+
+> SHOW TAG KEYS FROM "bottom_water_levels"
+
+name: bottom_water_levels
+tagKey
+------
+location
 ```
 
 ## FIRST()
@@ -1720,7 +1751,11 @@ Returns the greatest N field values associated with the field key in the parenth
 
 `TOP()` supports int64 and float64 field value [data types](/influxdb/v1.3/write_protocols/line_protocol_reference/#data-types).
 
-> **Note:** `TOP()` returns the field value with the earliest timestamp if there's a tie between two or more values for the greatest value.
+> **Notes:**
+>
+* `TOP()` returns the field value with the earliest timestamp if there's a tie between two or more values for the greatest value.
+* `TOP()` differs from other InfluxQL functions when combined with an [`INTO` clause](/influxdb/v1.3/query_language/data_exploration/#the-into-clause).
+See the [Common Issues](#common-issues-with-top) section for more information.
 
 ### Examples
 
@@ -1849,6 +1884,34 @@ time                  top    location
 ----                  ---    --------
 2015-08-29T03:54:00Z  7.205  santa_monica
 2015-08-29T07:24:00Z  9.964  coyote_creek
+```
+
+#### Issue 3: TOP(), tags, and the INTO clause
+
+When combined with an [`INTO` clause](/influxdb/v1.3/query_language/data_exploration/#the-into-clause) and no [`GROUP BY tag` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-tags), most InfluxQL functions [convert](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#why-are-my-into-queries-missing-data) any tags in the initial data to fields in the newly written data.
+This behavior also applies to the `TOP()` function unless `TOP()` includes a tag key as an argument: `TOP(field_key,tag_key(s),N)`.
+In those cases, the system preserves the specified tag as a tag in the newly written data.
+
+##### Example
+<br>
+The first query in the codeblock below returns the greatest field values in the `water_level` field key for two tag values associated with the `location` tag key.
+It also writes those results to the `top_water_levels` measurement.
+
+The second query [shows](/influxdb/v1.3/query_language/schema_exploration/#show-tag-keys) that InfluxDB preserved the `location` tag as a tag in the `top_water_levels` measurement. 
+```
+> SELECT TOP("water_level","location",2) INTO "top_water_levels" FROM "h2o_feet"
+
+name: result
+time                 written
+----                 -------
+1970-01-01T00:00:00Z 2
+
+> SHOW TAG KEYS FROM "top_water_levels"
+
+name: top_water_levels
+tagKey
+------
+location
 ```
 
 # Transformations

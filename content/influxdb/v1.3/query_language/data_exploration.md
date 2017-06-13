@@ -1891,6 +1891,7 @@ If an `INTO` query includes a [tag key](/influxdb/v1.3/concepts/glossary#tag-key
 measurement to [fields](/influxdb/v1.3/concepts/glossary#field) in the destination measurement.
 This can cause InfluxDB to overwrite [points](/influxdb/v1.3/concepts/glossary#point) that were previously differentiated
 by a [tag value](/influxdb/v1.3/concepts/glossary#tag-value).
+Note that this behavior does not apply to queries that use the [`TOP()`](/influxdb/v1.3/query_language/functions/#top) or [`BOTTOM()`](/influxdb/v1.3/query_language/functions/#bottom) functions.
 The
 [Frequently Asked Questions](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#why-are-my-into-queries-missing-data)
 document describes that behavior in detail.
