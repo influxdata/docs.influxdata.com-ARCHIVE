@@ -8,8 +8,20 @@ menu:
 ---
 
 Mathematical operators follow the standard order of operations.
-That is, *parentheses* take precedence to *division* and *multiplication*, which takes precedence to *addition* and *substraction*.
+That is, *parentheses* take precedence to *division* and *multiplication*, which takes precedence to *addition* and *subtraction*.
 For example `5 / 2 + 3 * 2 =  (5 / 2) + (3 * 2)` and `5 + 2 * 3 - 2 = 5 + (2 * 3) - 2`.
+
+### Content
+
+* [Supported Operators](#supported-operators)
+  * [Addition](#addition)
+  * [Subtraction](#subtraction)
+  * [Multiplication](#multiplication)
+  * [Division](#division)
+  * [Modulo](#modulo)
+  * [Common Issues with Operators](#common-issues-with-operators)
+* [Operators with Functions](#operators-with-functions)
+* [Unsupported Operators](#unsupported-operators)
 
 ## Supported Operators
 
@@ -131,6 +143,35 @@ SELECT "A" % "B" FROM "modulo"
 ```
 SELECT "A" FROM "modulo" WHERE "A" % "B" = 0
 ```
+
+### Common Issues with Operators
+
+InfluxDB does not support combining mathematical operations with a wildcard (`*`) or [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions) in the `SELECT` clause.
+The following queries are invalid and the system returns an error:
+
+Perform a mathematical operation on a wildcard.
+```
+> SELECT * + 2 FROM "nope"
+ERR: unsupported expression with wildcard: * + 2
+```
+
+Perform a mathematical operation on a wildcard within a function.
+```
+> SELECT COUNT(*) / 2 FROM "nope"
+ERR: unsupported expression with wildcard: count(*) / 2
+```
+
+Perform a mathematical operation on a regular expression.
+```
+> SELECT /A/ + 2 FROM "nope"
+ERR: error parsing query: found +, expected FROM at line 1, char 12
+```
+
+Perform a mathematical operation on a regular expression within a function.
+```
+> SELECT COUNT(/A/) + 2 FROM "nope"
+ERR: unsupported expression with regex field: count(/A/) + 2
+```
  
 ## Operators with Functions
 
@@ -163,7 +204,7 @@ See GitHub issue [3525](https://github.com/influxdb/influxdb/issues/3525).
 Using `^` yields a parse error.
 If you would like support for that operator, please open an [issue](https://github.com/influxdb/influxdb/issues/new).
 
-## Logical Operators are Unsupported
+### Logical Operators
 
 Using any of `&`,`|`,`!|`,`NAND`,`XOR`,`NOR` will yield parse error.
 
