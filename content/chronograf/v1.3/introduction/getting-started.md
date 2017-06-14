@@ -133,7 +133,7 @@ The `OUTPUT PLUGINS` section should have the following settings for the InfluxDB
   ## Set UDP payload size, defaults to InfluxDB UDP Client default (512 bytes)
   # udp_payload = 512
 ```
-Next, the `INTPUT PLUGINS` section should have the following settings for the system stats input:
+Next, the `INPUT PLUGINS` section should have the following settings for the system stats input:
 ```
 # Read metrics about cpu usage
 [[inputs.cpu]]
