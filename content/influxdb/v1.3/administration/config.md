@@ -16,7 +16,7 @@ The InfluxDB configuration file contains configuration settings specific to a lo
 * [Configuration options by section](#configuration-options-by-section)
     * [Global options](#global-options)
         * [reporting-disabled](#reporting-disabled-false)
-        * [bind-address](#bind-address-8088)
+        * [bind-address](#bind-address-127-0-0-1-8088)
     * [[meta]](#meta)
         * [dir](#dir-var-lib-influxdb-meta)
         * [retention-autocreate](#retention-autocreate-true)
@@ -48,10 +48,6 @@ The InfluxDB configuration file contains configuration settings specific to a lo
         * [check-interval](#check-interval-10m)
         * [advance-period](#advance-period-30m)
     * [[admin]](#admin)
-        * [enabled](#enabled-false)
-        * [bind-address](#bind-address-8083)
-        * [https-enabled](#https-enabled-false)
-        * [https-certificate](#https-certificate-etc-ssl-influxdb-pem)
     * [[monitor]](#monitor)
         * [store-enabled](#store-enabled-true)
         * [store-database](#store-database-internal)
@@ -246,7 +242,7 @@ this option to `true` will disable reporting.
 
 Environment variable: `INFLUXDB_REPORTING_DISABLED`
 
-### bind-address = ":8088"
+### bind-address = "127.0.0.1:8088"
 
 The bind address to use for the RPC service for [backup and restore](/influxdb/v1.3/administration/backup_and_restore/).
 
@@ -296,11 +292,29 @@ This directory may be changed.
 
 Environment variable: `INFLUXDB_DATA_DIR`
 
+### index-version = "inmem"
+
+The type of shard index to use for new shards.
+The default is an in-memory index that is recreated at startup.
+A value of `tsi1` will use a disk based index that supports higher cardinality datasets.
+
+Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
+
 ### wal-dir = "/var/lib/influxdb/wal"
 
 The WAL directory is the location of the [write ahead log](/influxdb/v1.3/concepts/glossary/#wal-write-ahead-log).
 
 Environment variable: `INFLUXDB_DATA_WAL_DIR`
+
+
+### wal-fsync-delay = "0s"
+
+The amount of time that a write waits before fsyncing. Use a duration greater than `0` to batch up multiple fsync calls.
+This is useful for slower disks or when experiencing [WAL](LINK) write contention.
+A value of `0s` fsyncs every write to the WAL.
+We recommend values in the range of `0ms`-`100ms` for non-SSD disks.
+
+Environment variable: `INFLUXDB_DATA_WAL_FSYNC_DELAY`
 
 ### trace-logging-enabled = false
 
@@ -315,7 +329,7 @@ Very useful for troubleshooting, but will log any sensitive data contained withi
 
 Environment variable: `INFLUXDB_DATA_QUERY_LOG_ENABLED`
 
-### cache-max-memory-size = 1048576000
+### cache-max-memory-size = 1073741824
 
 The cache maximum memory size is the maximum size (in bytes) a shard's cache can reach before it starts rejecting writes.
 
@@ -508,35 +522,11 @@ Environment variable: `INFLUXDB_MONITOR_STORE_INTERVAL`
 
 ## [admin]
 
-Controls the availability of the built-in, web-based [admin interface](/influxdb/v1.3/tools/web_admin/).
-
-> **Note:** The Admin UI is deprecated as of InfluxDB 1.2.
-
-### enabled = false
-
-Set to `true` to enable the admin interface.
-
-Environment variable: `INFLUXDB_ADMIN_ENABLED`
-
-### bind-address = ":8083"
-
-The port used by the admin interface.
-
-Environment variable: `INFLUXDB_ADMIN_BIND_ADDRESS`
-
-### https-enabled = false
-
-Set to `true` to enable HTTPS for the admin interface.
-
->**Note:** HTTPS must be enable for the [[http]](/influxdb/v1.3/administration/config/#http) service for the admin UI to function properly using HTTPS.
-
-Environment variable: `INFLUXDB_ADMIN_HTTPS_ENABLED`
-
-### https-certificate = "/etc/ssl/influxdb.pem"
-
-The path of the certificate file.
-
-Environment variable: `INFLUXDB_ADMIN_HTTPS_CERTIFICATE`
+<dt> In version 1.3, the web admin interface is no longer available in InfluxDB.
+The interface does not run on port `8083` and InfluxDB ignores the `[admin]` section in the configuration file if that section is present.
+[Chronograf](/chronograf/v1.3/) replaces the web admin interface with improved tooling for querying data, writing data, and database management.
+See [Chronograf's transition guide](/chronograf/v1.3/guides/transition-web-admin-interface/) for more information.
+</dt>
 
 ## [http]
 
@@ -649,6 +639,7 @@ Environment variable: `INFLUXDB_HTTP_UNIX_SOCKET_ENABLED`
 The path of the unix domain socket.
 
 Environment variable: `INFLUXDB_HTTP_UNIX_BIND_SOCKET`
+
 
 ## [subscriber]
 

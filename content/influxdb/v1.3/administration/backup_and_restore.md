@@ -100,17 +100,15 @@ then be compressed and sent to long-term storage.
 
 ### Remote Backups
 
-The default port for remote backups is set to `8088`.
-That setting is [configurable](/influxdb/v1.3/administration/config/#bind-address-8088).
+To capture a backup from a remote node:
 
-To capture a backup from a remote node, specify the host and port of
-the remote instance using the `-host` configuration switch:
+**1.** Uncomment the [`bind-address` configuration setting](/influxdb/v1.3/administration/config/#bind-address-127-0-0-1-8088) on the remote node  
+**2.** Update the `bind-address` setting to `<remote-node-IP>:8088`  
+**3.** Run the following command from your local node:
 
-```bash
-$ influxd backup -database mydatabase -host 10.0.0.1:8088 /tmp/mysnapshot
 ```
-
-Where all of the flags above still apply to remote hosts.
+$ influxd backup -database mydatabase -host <remote-node-IP>:8088 /tmp/mysnapshot
+```
 
 ## Restore
 
