@@ -6,13 +6,130 @@ menu:
     parent: about_the_project
 ---
 
-## v1.3.4 [2017-05-08]
+## v1.3.0 [TK]
+
+### Release Notes
+
+#### Continuous Query Statistics
+
+When enabled, each time a continuous query is completed, a number of details regarding the execution are written to the `cq_query` measurement of the internal monitor database (`_internal` by default). The tags and fields of interest are
+
+| tag / field       | description                                        |
+|:----------------- |:-------------------------------------------------- |
+| `db`              | name of database                                   |
+| `cq`              | name of continuous query                           |
+| `durationNS`      | query execution time in nanoseconds                |
+| `startTime`       | lower bound of time range                          |
+| `endTime`         | upper bound of time range                          |
+| `pointsWrittenOK` | number of points written to the target measurement |
+
+
+* `startTime` and `endTime` are UNIX timestamps, in nanoseconds.
+* The number of points written is also included in CQ log messages.
+
+### Removals
+
+The admin UI is removed and unusable in this release. The `[admin]` configuration section will be ignored.
+
+### Configuration Changes
+
+* The top-level config `bind-address` now defaults to `localhost:8088`.
+  The previous default was just `:8088`, causing the backup and restore port to be bound on all available interfaces (i.e. including interfaces on the public internet).
+  
+The following new configuration options are available.
+
+#### `[http]` Section
+
+* `max-body-size` was added with a default of 25,000,000, but can be disabled by setting it to 0. 
+  Specifies the maximum size (in bytes) of a client request body. When a client sends data that exceeds
+  the configured maximum size, a `413 Request Entity Too Large` HTTP response is returned. 
+  
+#### `[continuous_queries]` Section
+
+* `query-stats-enabled` was added with a default of `false`. When set to `true`, continuous query execution statistics are written to the default monitor store.
+
+### Features
+
+- Add WAL sync delay
+- Add chunked request processing back into the Go client v2
+- Allow non-admin users to execute SHOW DATABASES.
+- Reduce memory allocations by reusing gzip.Writers across requests
+- Add system information to /debug/vars.
+- Add modulo operator to the query language.
+- Failed points during an import now result in a non-zero exit code.
+- Expose some configuration settings via SHOW DIAGNOSTICS
+- Support single and multiline comments in InfluxQL.
+- Support timezone offsets for queries.
+- Add "integral" function to InfluxQL.
+- Add "non_negative_difference" function to InfluxQL.
+- Add bitwise AND, OR and XOR operators to the query language.
+- Write throughput/concurrency improvements
+- Remove the admin UI.
+- Update to go1.8.1
+- Add max concurrent compaction limits
+- Add TSI support tooling.
+- Track HTTP client requests for /write and /query with /debug/requests.
+- Write and compaction stability
+- Add new profile endpoint for gathering all debug profiles and querues in single archive.
+- Add nanosecond duration literal support.
+- Optimize top() and bottom() using an incremental aggregator.
+- Maintain the tags of points selected by top() or bottom() when writing the results.
+- Write CQ stats to _internal
+
+### Bugfixes
+
+- Several statements were missing the DefaultDatabase method
+- Fix spelling mistake in HTTP section of config -- shared-sercret
+- History file should redact passwords before saving to history.
+- Suppress headers in output for influx cli when they are the same.
+- Add chunked/chunk size as setting/options in cli.
+- Do not increment the continuous query statistic if no query is run.
+- Forbid wildcards in binary expressions.
+- Fix fill(linear) when multiple series exist and there are null values.
+- Update liner dependency to handle docker exec.
+- Bind backup and restore port to localhost by default
+- Kill query not killing query
+- KILL QUERY should work during all phases of a query
+- Simplify admin user check.
+- Significantly improve DROP DATABASE speed.
+- Return an error when an invalid duration literal is parsed.
+- Fix the time range when an exact timestamp is selected.
+- Fix query parser when using addition and subtraction without spaces.
+- Fix a regression when math was used with selectors.
+- Ensure the input for certain functions in the query engine are ordered.
+- Significantly improve shutdown speed for high cardinality databases.
+- Fix racy integration test.
+- Prevent overflowing or underflowing during window computation.
+- Enabled golint for admin, httpd, subscriber, udp. @karlding
+- Implicitly cast null to false in binary expressions with a boolean.
+- Restrict fill(none) and fill(linear) to be usable only with aggregate queries.
+- Restrict top() and bottom() selectors to be used with no other functions.
+- top() and bottom() now returns the time for every point.
+- Remove default upper time bound on DELETE queries.
+- Fix LIMIT and OFFSET for certain aggregate queries.
+- Refactor the subquery code and fix outer condition queries.
+- Fix compaction aborted log messages
+- TSM compaction does not remove .tmp on error
+- Set the CSV output to an empty string for null values.
+- Compaction exhausting disk resources in InfluxDB
+- Small edits to the etc/config.sample.toml file.
+- Points beyond retention policy scope are dropped silently
+- Fix TSM tmp file leaked on disk
+- Fix large field keys preventing snapshot compactions
+- URL query parameter credentials take priority over Authentication header.
+- TSI branch has duplicate tag values.
+- Out of memory when using HTTP API
+- Check file count before attempting a TSI level compaction.
+- index file fd leak in tsi branch
+- Fix TSI non-contiguous compaction panic.
+
+## v1.2.4 [2017-05-08]
 
 ### Bugfixes
 
 - Prefix partial write errors with `partial write:` to generalize identification in other subsystems.
 
-## v1.3.3 [2017-04-17]
+## v1.2.3 [2017-04-17]
 
 ### Bugfixes
 
@@ -24,7 +141,7 @@ menu:
 - Ensure the input for certain functions in the query engine are ordered.
 - Fix issue where deleted `time` field keys created unparseable points.
 
-## v1.3.2 [2017-03-14]
+## v1.2.2 [2017-03-14]
 
 ### Release Notes
 
@@ -41,7 +158,7 @@ In version 1.2.2, we've changed the default `max-row-limit` setting to `0` to ma
 
 - Change the default [`max-row-limit`](/influxdb/v1.3/administration/config/#max-row-limit-0) setting from `10000` to `0` to prevent the absence of data in Grafana or Kapacitor.
 
-## v1.3.1 [2017-03-08]
+## v1.2.1 [2017-03-08]
 
 ### Release Notes
 
@@ -69,7 +186,7 @@ In version 1.2.2, we've changed the default `max-row-limit` setting to `0` to ma
 -	 Dividing aggregate functions with different outputs doesn't panic.
 -	 Anchors not working as expected with case-insensitive regular expression.
  
-## v1.3.0 [2017-01-24]
+## v1.2.0 [2017-01-24]
 
 ### Release Notes
 

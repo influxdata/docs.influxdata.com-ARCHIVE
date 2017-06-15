@@ -1066,7 +1066,7 @@ time                   bottom   location
 
 #### Issue 3: BOTTOM(), tags, and the INTO clause
 
-When combined with an [`INTO` clause](/influxdb/v1.3/query_language/data_exploration/#the-into-clause) and no [`GROUP BY tag` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-tags), most InfluxQL functions [convert](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#why-are-my-into-queries-missing-data) any tags in the initial data to fields in the newly written data.
+When combined with an [`INTO` clause](/influxdb/v1.3/query_language/data_exploration/#the-into-clause) and no [`GROUP BY tag` clause](/influxdb/v1.3/query_language/data_exploration/#group-by-tags), most InfluxQL functions [convert](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#why-are-my-into-queries-missing-data) any tags in the initial data to fields in the newly written data.
 This behavior also applies to the `BOTTOM()` function unless `BOTTOM()` includes a tag key as an argument: `BOTTOM(field_key,tag_key(s),N)`.
 In those cases, the system preserves the specified tag as a tag in the newly written data.
 
@@ -1866,7 +1866,7 @@ time                  top    location
 
 #### Issue 3: TOP(), tags, and the INTO clause
 
-When combined with an [`INTO` clause](/influxdb/v1.3/query_language/data_exploration/#the-into-clause) and no [`GROUP BY tag` clause](/influxdb/v1.2/query_language/data_exploration/#group-by-tags), most InfluxQL functions [convert](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#why-are-my-into-queries-missing-data) any tags in the initial data to fields in the newly written data.
+When combined with an [`INTO` clause](/influxdb/v1.3/query_language/data_exploration/#the-into-clause) and no [`GROUP BY tag` clause](/influxdb/v1.3/query_language/data_exploration/#group-by-tags), most InfluxQL functions [convert](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#why-are-my-into-queries-missing-data) any tags in the initial data to fields in the newly written data.
 This behavior also applies to the `TOP()` function unless `TOP()` includes a tag key as an argument: `TOP(field_key,tag_key(s),N)`.
 In those cases, the system preserves the specified tag as a tag in the newly written data.
 
