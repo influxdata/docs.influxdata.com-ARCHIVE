@@ -1,5 +1,5 @@
 ---
-title: Differences between InfluxDB 1.2 and versions prior to 1.1
+title: Differences between InfluxDB 1.3 and versions prior to 1.2
 aliases:
     - influxdb/v1.3/concepts/012_vs_previous/
     - influxdb/v1.3/concepts/011_vs_previous/
@@ -12,9 +12,12 @@ menu:
     parent: administration
 ---
 
-If you're using version 1.1, please see [Differences Between InfluxDB 1.2 and 1.1](/influxdb/v1.3/administration/differences/).
+If you're using version 1.2, please see [Differences Between InfluxDB 1.3 and 1.2](/influxdb/v1.3/administration/differences/).
 
-Users looking to upgrade to InfluxDB 1.2 from versions prior to 1.1 should view the following pages in our documentation.
+Users looking to upgrade to InfluxDB 1.3 from versions prior to 1.2 should view the following pages in our documentation.
+
+##### 1.1 users:
+[Differences Between InfluxDB 1.2 and 1.1](/influxdb/v1.2/administration/differences/)
 
 ##### 1.0 users:
 [Differences Between InfluxDB 1.1 and 1.0](/influxdb/v1.1/administration/differences/)

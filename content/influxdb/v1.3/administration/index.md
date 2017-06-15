@@ -13,9 +13,9 @@ Information on how to direct InfluxDB log output.
 
 Procedures to backup data created by InfluxDB and to restore from a backup.
 
-## [Differences between InfluxDB 1.2 and 1.1](/influxdb/v1.3/administration/differences/)
+## [Differences between InfluxDB 1.3 and 1.2](/influxdb/v1.3/administration/differences/)
 
-## [Differences between InfluxDB 1.2 and versions prior to 1.1](/influxdb/v1.3/administration/previous_differences/)
+## [Differences between InfluxDB 1.3 and versions prior to 1.2](/influxdb/v1.3/administration/previous_differences/)
 
 ## [Upgrading](/influxdb/v1.3/administration/upgrading/)
 

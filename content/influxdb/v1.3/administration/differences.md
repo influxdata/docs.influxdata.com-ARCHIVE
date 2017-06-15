@@ -1,5 +1,5 @@
 ---
-title: Differences Between InfluxDB 1.2 and 1.1
+title: Differences Between InfluxDB 1.3 and 1.2
 aliases:
     - influxdb/v1.3/concepts/013_vs_1/
     - influxdb/v1.3/concepts/012_vs_013/
@@ -13,37 +13,164 @@ menu:
     parent: administration
 ---
 
-This page aims to ease the transition from InfluxDB 1.1 to InfluxDB 1.2.
+This page aims to ease the transition from InfluxDB 1.2 to InfluxDB 1.3.
 For a comprehensive list of the differences between the versions
-see [InfluxDB's Changelog](https://github.com/influxdata/influxdb/blob/master/CHANGELOG.md).
+see [InfluxDB's Changelog](/influxdb/v1.3/about_the_project/releasenotes-changelog/).
 
-### Performance Improvements
+### Content
+* [Web Admin UI Removal](#web-admin-ui-removal)
+* [Duration Unit Updates](#duration-unit-updates)
+* [InfluxQL Updates](#influxql-updates)
+  * [Operators](#operators)
+  * [Functions](#functions)
+  * [Other](#other)
 
-Version 1.2 offers a significantly improved underlying data cache.
-The improvements yield a 50% write performance boost under load, allowing users to rapidly store even more data than before.
+## Web Admin UI Removal
 
-### New Query Capabilities
+In version 1.3, the web admin interface is no longer available in InfluxDB.
+The interface does not run on port `8083` and InfluxDB ignores the `[admin]` section in the configuration file if that section is present.
+[Chronograf](/chronograf/v1.3/) replaces the web admin interface with improved tooling for querying data, writing data, and database management.
+See [Chronograf's transition guide](/chronograf/v1.3/guides/transition-web-admin-interface/) for more information.
 
-InfluxDB has extended its query language to support subqueries.
-Subqueries allow users to be more efficient in finding insights into their data.
-See the [Data Exploration](/influxdb/v1.3/query_language/data_exploration/#subqueries) page for a detailed syntax description and practical examples.
+## Duration Unit Updates
 
-### CLI Improvements
+Duration units specify the time precision in InfluxQL queries and when writing data to InfluxDB.
+Version 1.3 introduces two updates to duration units.
 
-With version 1.2, the [Command Line Interface (CLI)](/influxdb/v1.3/tools/shell/) offers new functionality that simplifies writing and querying data in InfluxDB.
+InfluxDB now supports the nanosecond (`ns`) duration literal.
+The query below uses a [`GROUP BY time()` clause](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals) to group [averages](/influxdb/v1.3/query_language/functions/#mean) into `1000000000` nanosecond buckets:
+```
+> SELECT MEAN("value") FROM "gopher" WHERE time >= 1497481480598711679 AND time <= 1497481484005926368 GROUP BY time(1000000000ns)
+```
 
-* `USE` supports specifying a target retention policy with `USE "database_name"."retention policy_name"`
-* `CLEAR` clears the current target database or retention policy
-* `INSERT INTO "retention policy"` no longer resets the target retention policy for every subsequent write
+Version 1.3 also changes the way InfluxDB handles queries with an invalid duration unit.
+In versions prior to 1.3, the system ignored invalid duration units and did not return an error.
+In version 1.3, the system returns an error if the query includes an invalid duration unit.
+The following query erroneously specifies oranges as a duration unit:
 
-### Deprecations
+```
+> SELECT MEAN("value") FROM "gopher" WHERE time >= 1497481480598711679 AND time <= 1497481484005926368 GROUP BY time(2oranges)
+ERR: error parsing query: invalid duration
+```
 
-The admin UI (port `8083`) remains officially deprecated and disabled in this release.
-It can be [re-enabled](/influxdb/v1.3/administration/config/#admin) in the configuration file, but will be removed in a future release.
-We recommend using [Chrongraf](https://github.com/influxdata/chronograf) or [Grafana](https://github.com/grafana/grafana) as a replacement.
+## InfluxQL Updates
 
-### Upgrading
+### Operators
 
-This release is a drop-in replacement for 1.1 with no data migration required.
-There are some configuration changes that may need to be updated prior to upgrading to avoid downtime.
-Be sure to read the [CHANGELOG](https://github.com/influxdata/influxdb/blob/master/CHANGELOG.md) prior to upgrading.
+Version 1.3 introduces several new mathematical operators.
+Follow the links below to learn more:
+
+* [Modulo (`%`)](/influxdb/v1.3/query_language/math_operators/#modulo)
+* [Bitwise AND (`&`)](/influxdb/v1.3/query_language/math_operators/#bitwise-and)
+* [Bitwise OR (`|`)](/influxdb/v1.3/query_language/math_operators/#bitwise-or)
+* [Bitwise Exclusive-OR (`^`)](/influxdb/v1.3/query_language/math_operators/#bitwise-exclusive-or)
+
+### Functions
+
+InfluxDB version 1.3 introduces two new functions and updates the behavior for the existing `TOP()` and `BOTTOM()` functions.
+
+#### New function: `INTEGRAL()`
+
+The `INTEGRAL()` function returns the area under the curve for subsequent [field values](/influxdb/v1.3/concepts/glossary/#field-value).
+The query below returns the area under the curve (in seconds) for the field values associated with the `water_level` field key and in the `h2o_feet` measurement:
+
+```
+> SELECT INTEGRAL("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
+
+name: h2o_feet
+time                  integral
+----                  --------
+1970-01-01T00:00:00Z  3732.66
+```
+
+See the [functions page](/influxdb/v1.3/query_language/functions/#integral) for detailed documentation.
+
+#### New function: `NON_NEGATIVE_DIFFERENCE()`
+
+The `NON_NEGATIVE_DIFFERENCE()` function returns the non-negative result of subtraction between subsequent [field values](/influxdb/v1.3/concepts/glossary/#field-value).
+Non-negative results of subtraction include positive differences and differences that equal zero.
+The query below returns the non-negative difference between subsequent field values in the `water_level` field key and in the `h2o_feet` measurement:
+
+```
+> SELECT NON_NEGATIVE_DIFFERENCE("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+
+name: h2o_feet
+time                  non_negative_difference
+----                  -----------------------
+2015-08-18T00:06:00Z  0.052000000000000046
+2015-08-18T00:18:00Z  0.09799999999999986
+2015-08-18T00:30:00Z  0.010000000000000231
+```
+
+See the [functions page](/influxdb/v1.3/query_language/functions/#non-negative-difference) for detailed documentation.
+
+#### Updated functions: `TOP()` and `BOTTOM()`
+
+Version 1.3 introduces three major changes to the `TOP()` and `BOTTOM` functions:
+
+* `TOP()` and `BOTTOM()` no longer support other functions in the [`SELECT` clause](/influxdb/v1.3/query_language/data_exploration/#description-of-syntax).
+The following query returns an error:
+```
+> SELECT TOP(value,1),MEAN(value) FROM "gopher"
+  
+ERR: error parsing query: selector function top() cannot be combined with other functions
+```
+* `TOP()` and `BOTTOM()` now maintain tags as tags if the query includes a [tag key](/influxdb/v1.3/concepts/glossary/#tag-key) as an argument.
+The [query below](/influxdb/v1.3/query_language/functions/#issue-3-bottom-tags-and-the-into-clause) preserves `location` as a tag in the newly-written data:
+```
+> SELECT BOTTOM("water_level","location",2) INTO "bottom_water_levels" FROM "h2o_feet"
+
+name: result
+time                 written
+----                 -------
+1970-01-01T00:00:00Z 2
+
+> SHOW TAG KEYS FROM "bottom_water_levels"
+
+name: bottom_water_levels
+tagKey
+------
+location
+```
+* `TOP()` and `BOTTOM()` now preserve the timestamps in the original data when they're used with the [`GROUP BY time()` clause](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals).
+The [following query](/influxdb/v1.3/query_language/functions/#issue-1-top-with-a-group-by-time-clause) returns the points' original timestamps; the timestamps are not forced to match the start of the `GROUP BY time()` intervals:
+```
+> SELECT TOP("water_level",2) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(18m)
+
+name: h2o_feet
+time                   top
+----                   ------
+                           __
+2015-08-18T00:00:00Z  2.064 |
+2015-08-18T00:06:00Z  2.116 | <------- Greatest points for the first time interval
+                           --
+                           __
+2015-08-18T00:18:00Z  2.126 |
+2015-08-18T00:30:00Z  2.051 | <------- Greatest points for the second time interval
+                           --
+```
+
+Review the functions page for a complete discussion of the [`TOP()` function](/influxdb/v1.3/query_language/functions/#top) and the [`BOTTOM()` function](/influxdb/v1.3/query_language/functions/#bottom).
+
+### Other
+
+#### Time zone clause
+InfluxQL's new time zone clause returns the UTC offset for the specified timezone.
+The query below returns the UTC offset for Chicago’s time zone:
+```
+> SELECT "water_level" FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:18:00Z' tz('America/Chicago')
+
+name: h2o_feet
+time                       water_level
+----                       -----------
+2015-08-17T19:00:00-05:00  2.064
+2015-08-17T19:06:00-05:00  2.116
+2015-08-17T19:12:00-05:00  2.028
+2015-08-17T19:18:00-05:00  2.126
+```
+See the [data exploration page](/influxdb/v1.3/query_language/data_exploration/#the-time-zone-clause) for more information.
+
+#### CLI non-admin user updates
+In versions prior to v1.3, [non-admin users](/influxdb/v1.3/query_language/authentication_and_authorization/#user-types-and-privileges) could not execute a `USE <database_name>` query in the [CLI](/influxdb/v1.3/tools/shell/) even if they had `READ` and/or `WRITE` permissions on that database.
+Starting with version 1.3, non-admin users can execute the `USE <database_name>` query for databases on which they have `READ` and/or `WRITE` permissions.
+See the [FAQ page](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#how-can-a-non-admin-user-use-a-database-in-influxdb-s-cli) for more information.
