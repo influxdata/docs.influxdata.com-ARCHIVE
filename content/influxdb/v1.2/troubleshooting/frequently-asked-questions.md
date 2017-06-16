@@ -684,6 +684,8 @@ Yes: `SELECT bikes_available FROM bikes WHERE station_id='9'`
 
 Yes: `SELECT "bikes_available" FROM "bikes" WHERE "station_id"='9'`
 
+Yes: `SELECT min("avgrq-sz") as "min_avgrq-sz" FROM telegraf ... `  
+
 Yes: `SELECT * from "cr@zy" where "p^e"='2'`
 
 No: `SELECT 'bikes_available' FROM 'bikes' WHERE 'station_id'="9"`
