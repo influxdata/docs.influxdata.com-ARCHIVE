@@ -18,12 +18,32 @@ For a comprehensive list of the differences between the versions
 see [InfluxDB's Changelog](/influxdb/v1.3/about_the_project/releasenotes-changelog/).
 
 ### Content
+* [TSI Release](#tsi-release)
 * [Web Admin UI Removal](#web-admin-ui-removal)
 * [Duration Unit Updates](#duration-unit-updates)
 * [InfluxQL Updates](#influxql-updates)
   * [Operators](#operators)
   * [Functions](#functions)
   * [Other](#other)
+
+## TSI Release
+Version 1.3.0 marks the first official release of InfluxDB's new time series index (TSI) engine.
+
+The TSI engine is a significant technical advancement in InfluxDB.
+It offers a solution to the [time-structured merge tree](https://docs.influxdata.com/influxdb/v1.2/concepts/storage_engine/) engine's [high series cardinality issue](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#why-does-series-cardinality-matter).
+With TSI, the number of series should be unbounded by the memory on the server hardware and the number of existing series will have a negligible impact on database startup time.
+See Paul Dix's blogpost [Path to 1 Billion Time Series: InfluxDB High Cardinality Indexing Ready for Testing](https://www.influxdata.com/path-1-billion-time-series-influxdb-high-cardinality-indexing-ready-testing/) for additional information.
+
+TSI is disabled by default in version 1.3.
+To enable TSI, uncomment the [`index-version` setting](/influxdb/v1.3/administration/config/#index-version-inmem) and set it to `tsi1`.
+The `index-version` setting is in the `[data]` section of the configuration file.
+Next, restart your InfluxDB instance.
+
+```
+[data]
+  dir = "/var/lib/influxdb/data"
+  index-version = "tsi1"
+```
 
 ## Web Admin UI Removal
 

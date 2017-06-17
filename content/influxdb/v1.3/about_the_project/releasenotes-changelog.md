@@ -10,6 +10,26 @@ menu:
 
 ### Release Notes
 
+#### TSI
+
+Version 1.3.0 marks the first official release of InfluxDB's new time series index (TSI) engine.
+
+The TSI engine is a significant technical advancement in InfluxDB.
+It offers a solution to the [time-structured merge tree](https://docs.influxdata.com/influxdb/v1.2/concepts/storage_engine/) engine's [high series cardinality issue](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#why-does-series-cardinality-matter).
+With TSI, the number of series should be unbounded by the memory on the server hardware and the number of existing series will have a negligible impact on database startup time.
+See Paul Dix's blogpost [Path to 1 Billion Time Series: InfluxDB High Cardinality Indexing Ready for Testing](https://www.influxdata.com/path-1-billion-time-series-influxdb-high-cardinality-indexing-ready-testing/) for additional information.
+
+TSI is disabled by default in version 1.3.
+To enable TSI, uncomment the [`index-version` setting](/influxdb/v1.3/administration/config/#index-version-inmem) and set it to `tsi1`.
+The `index-version` setting is in the `[data]` section of the configuration file.
+Next, restart your InfluxDB instance.
+
+```
+[data]
+  dir = "/var/lib/influxdb/data"
+  index-version = "tsi1"
+```
+
 #### Continuous Query Statistics
 
 When enabled, each time a continuous query is completed, a number of details regarding the execution are written to the `cq_query` measurement of the internal monitor database (`_internal` by default). The tags and fields of interest are
@@ -52,76 +72,76 @@ The following new configuration options are available.
 
 - Add WAL sync delay
 - Add chunked request processing back into the Go client v2
-- Allow non-admin users to execute SHOW DATABASES.
+- Allow non-admin users to execute SHOW DATABASES
 - Reduce memory allocations by reusing gzip.Writers across requests
-- Add system information to /debug/vars.
+- Add system information to /debug/vars
 - Add modulo operator to the query language.
-- Failed points during an import now result in a non-zero exit code.
+- Failed points during an import now result in a non-zero exit code
 - Expose some configuration settings via SHOW DIAGNOSTICS
-- Support single and multiline comments in InfluxQL.
-- Support timezone offsets for queries.
-- Add "integral" function to InfluxQL.
-- Add "non_negative_difference" function to InfluxQL.
-- Add bitwise AND, OR and XOR operators to the query language.
+- Support single and multiline comments in InfluxQL
+- Support timezone offsets for queries
+- Add "integral" function to InfluxQL
+- Add "non_negative_difference" function to InfluxQL
+- Add bitwise AND, OR and XOR operators to the query language
 - Write throughput/concurrency improvements
-- Remove the admin UI.
+- Remove the admin UI
 - Update to go1.8.1
 - Add max concurrent compaction limits
-- Add TSI support tooling.
-- Track HTTP client requests for /write and /query with /debug/requests.
+- Add TSI support tooling
+- Track HTTP client requests for /write and /query with /debug/requests
 - Write and compaction stability
-- Add new profile endpoint for gathering all debug profiles and querues in single archive.
-- Add nanosecond duration literal support.
-- Optimize top() and bottom() using an incremental aggregator.
+- Add new profile endpoint for gathering all debug profiles and queries in single archive
+- Add nanosecond duration literal support
+- Optimize top() and bottom() using an incremental aggregator
 - Maintain the tags of points selected by top() or bottom() when writing the results.
-- Write CQ stats to _internal
+- Write CQ stats to the `_internal` database
 
 ### Bugfixes
 
 - Several statements were missing the DefaultDatabase method
 - Fix spelling mistake in HTTP section of config -- shared-sercret
-- History file should redact passwords before saving to history.
-- Suppress headers in output for influx cli when they are the same.
-- Add chunked/chunk size as setting/options in cli.
-- Do not increment the continuous query statistic if no query is run.
-- Forbid wildcards in binary expressions.
-- Fix fill(linear) when multiple series exist and there are null values.
-- Update liner dependency to handle docker exec.
+- History file should redact passwords before saving to history
+- Suppress headers in output for influx cli when they are the same
+- Add chunked/chunk size as setting/options in cli
+- Do not increment the continuous query statistic if no query is run
+- Forbid wildcards in binary expressions
+- Fix fill(linear) when multiple series exist and there are null values
+- Update liner dependency to handle docker exec
 - Bind backup and restore port to localhost by default
 - Kill query not killing query
 - KILL QUERY should work during all phases of a query
 - Simplify admin user check.
-- Significantly improve DROP DATABASE speed.
-- Return an error when an invalid duration literal is parsed.
-- Fix the time range when an exact timestamp is selected.
-- Fix query parser when using addition and subtraction without spaces.
-- Fix a regression when math was used with selectors.
-- Ensure the input for certain functions in the query engine are ordered.
-- Significantly improve shutdown speed for high cardinality databases.
-- Fix racy integration test.
-- Prevent overflowing or underflowing during window computation.
-- Enabled golint for admin, httpd, subscriber, udp. @karlding
-- Implicitly cast null to false in binary expressions with a boolean.
-- Restrict fill(none) and fill(linear) to be usable only with aggregate queries.
-- Restrict top() and bottom() selectors to be used with no other functions.
-- top() and bottom() now returns the time for every point.
-- Remove default upper time bound on DELETE queries.
-- Fix LIMIT and OFFSET for certain aggregate queries.
-- Refactor the subquery code and fix outer condition queries.
+- Significantly improve DROP DATABASE speed
+- Return an error when an invalid duration literal is parsed
+- Fix the time range when an exact timestamp is selected
+- Fix query parser when using addition and subtraction without spaces
+- Fix a regression when math was used with selectors
+- Ensure the input for certain functions in the query engine are ordered
+- Significantly improve shutdown speed for high cardinality databases
+- Fix racy integration test
+- Prevent overflowing or underflowing during window computation
+- Enabled golint for admin, httpd, subscriber, udp, thanks @karlding
+- Implicitly cast null to false in binary expressions with a boolean
+- Restrict fill(none) and fill(linear) to be usable only with aggregate queries
+- Restrict top() and bottom() selectors to be used with no other functions
+- top() and bottom() now returns the time for every point
+- Remove default upper time bound on DELETE queries
+- Fix LIMIT and OFFSET for certain aggregate queries
+- Refactor the subquery code and fix outer condition queries
 - Fix compaction aborted log messages
 - TSM compaction does not remove .tmp on error
-- Set the CSV output to an empty string for null values.
+- Set the CSV output to an empty string for null values
 - Compaction exhausting disk resources in InfluxDB
-- Small edits to the etc/config.sample.toml file.
+- Small edits to the etc/config.sample.toml file
 - Points beyond retention policy scope are dropped silently
 - Fix TSM tmp file leaked on disk
 - Fix large field keys preventing snapshot compactions
-- URL query parameter credentials take priority over Authentication header.
-- TSI branch has duplicate tag values.
+- URL query parameter credentials take priority over Authentication header
+- TSI branch has duplicate tag values
 - Out of memory when using HTTP API
 - Check file count before attempting a TSI level compaction.
 - index file fd leak in tsi branch
-- Fix TSI non-contiguous compaction panic.
+- Fix TSI non-contiguous compaction panic
 
 ## v1.2.4 [2017-05-08]
 
