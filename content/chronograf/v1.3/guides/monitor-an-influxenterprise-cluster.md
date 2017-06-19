@@ -48,8 +48,8 @@ Chronograf uses the hostnames in the Telegraf data to populate the Host List pag
 On a server that's separate from your InfluxEnterprise cluster, download and install OSS InfluxDB:
 
 ```
-~# wget https://dl.influxdata.com/influxdb/releases/influxdb_1.2.2_amd64.deb
-~# sudo dpkg -i influxdb_1.2.2_amd64.deb
+~# wget https://dl.influxdata.com/influxdb/releases/influxdb_1.2.4_amd64.deb
+~# sudo dpkg -i influxdb_1.2.4_amd64.deb
 ```
 
 #### Step 2: Enable authentication
@@ -103,8 +103,8 @@ You'll return to your OSS InfluxDB instance at the end of this section.
 #### Step 1: Download and install Telegraf
 
 ```
-~# wget https://dl.influxdata.com/telegraf/releases/telegraf_1.2.1_amd64.deb
-~# sudo dpkg -i telegraf_1.2.1_amd64.deb
+~# wget https://dl.influxdata.com/telegraf/releases/telegraf_1.3.2-1_amd64.deb
+~# sudo dpkg -i telegraf_1.3.2-1_amd64.deb
 ```
 
 #### Step 2: Configure Telegraf
@@ -225,8 +225,8 @@ Here, we download and install Chronograf on the same server as the OSS InfluxDB 
 This is not a requirement; you may host Chronograf on a separate server.
 
 ```
-~# wget https://dl.influxdata.com/chronograf/releases/chronograf_1.2.0~beta9_amd64.deb
-~# sudo dpkg -i chronograf_1.2.0~beta9_amd64.deb
+~# wget https://dl.influxdata.com/chronograf/releases/chronograf_1.3.3.0_amd64.deb
+~# sudo dpkg -i chronograf_1.3.3.0_amd64.deb
 ```
 
 #### Step 2: Start Chronograf

@@ -94,8 +94,8 @@ Ultimately, you will configure a Telegraf input plugin for each application that
 
 #### 1. Download and Install Telegraf
 ```
-wget https://dl.influxdata.com/telegraf/releases/telegraf_1.3.1-1_amd64.deb
-sudo dpkg -i telegraf_1.3.1-1_amd64.deb
+wget https://dl.influxdata.com/telegraf/releases/telegraf_1.3.2-1_amd64.deb
+sudo dpkg -i telegraf_1.3.2-1_amd64.deb
 ```
 
 #### 2. Start Telegraf
@@ -201,8 +201,8 @@ Now that we're collecting data with Telegraf and storing data with InfluxDB, it'
 
 #### 1. Download and Install Chronograf
 ```
-wget https://dl.influxdata.com/chronograf/releases/chronograf_1.3.2.1_amd64.deb
-sudo dpkg -i chronograf_1.3.2.1_amd64.deb
+wget https://dl.influxdata.com/chronograf/releases/chronograf_1.3.3.0_amd64.deb
+sudo dpkg -i chronograf_1.3.3.0_amd64.deb
 ```
 
 #### 2. Start Chronograf
