@@ -135,6 +135,7 @@ Show time-series in a line graph and overlay the time-series' single most recent
 
 ### Bar
 Show time-series in a bar chart.
+Bar graphs are available in versions 1.3.3.0+.
 
 ![Cluster connection details](/img/chronograf/v1.3/faq-viz-bar.png)
 
