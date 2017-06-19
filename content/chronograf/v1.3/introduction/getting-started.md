@@ -237,7 +237,7 @@ your host:
 #### 4. Connect Chronograf to Kapacitor
 
 The final step in the installation process is to connect Chronograf to Kapacitor.
-Navigate to the Configuration page (the last item in the sidebar) and click `Add Kapacitor`.
+Navigate to the Configuration page (the last item in the sidebar) and click `Add Config` in the `Active Kapacitor` column.
 
 ![Configure Kapacitor](/img/chronograf/v1.3/gs-configure-kapacitor.png)
 
