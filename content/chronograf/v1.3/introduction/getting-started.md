@@ -94,8 +94,8 @@ Ultimately, you will configure a Telegraf input plugin for each application that
 
 #### 1. Download and Install Telegraf
 ```
-wget https://dl.influxdata.com/telegraf/releases/telegraf_1.3.1-1_amd64.deb
-sudo dpkg -i telegraf_1.3.1-1_amd64.deb
+wget https://dl.influxdata.com/telegraf/releases/telegraf_1.3.2-1_amd64.deb
+sudo dpkg -i telegraf_1.3.2-1_amd64.deb
 ```
 
 #### 2. Start Telegraf
@@ -201,8 +201,8 @@ Now that we're collecting data with Telegraf and storing data with InfluxDB, it'
 
 #### 1. Download and Install Chronograf
 ```
-wget https://dl.influxdata.com/chronograf/releases/chronograf_1.3.2.1_amd64.deb
-sudo dpkg -i chronograf_1.3.2.1_amd64.deb
+wget https://dl.influxdata.com/chronograf/releases/chronograf_1.3.3.0_amd64.deb
+sudo dpkg -i chronograf_1.3.3.0_amd64.deb
 ```
 
 #### 2. Start Chronograf
@@ -237,7 +237,7 @@ your host:
 #### 4. Connect Chronograf to Kapacitor
 
 The final step in the installation process is to connect Chronograf to Kapacitor.
-Navigate to the Configuration page (the last item in the sidebar) and click `Add Kapacitor`.
+Navigate to the Configuration page (the last item in the sidebar) and click `Add Config` in the `Active Kapacitor` column.
 
 ![Configure Kapacitor](/img/chronograf/v1.3/gs-configure-kapacitor.png)
 
