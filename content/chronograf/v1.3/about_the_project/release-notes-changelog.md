@@ -5,6 +5,26 @@ menu:
     weight: 0
     parent: About the Project
 ---
+
+## v1.3.3.0 [2017-06-19]
+
+### Bug Fixes
+1. Prevent legend from flowing over window bottom bound
+1. Prevent Kapacitor configurations from having the same name
+1. Limit Kapacitor configuration names to 33 characters to fix display bug
+
+### Features
+1. Synchronize vertical crosshair at same time across all graphs in a dashboard
+1. Add automatic `GROUP BY (time)` functionality to dashboards
+1. Add a Status Page with Recent Alerts bar graph, Recent Alerts table, News Feed, and Getting Started widgets
+
+### UI Improvements
+1. When dashboard time range is changed, reset graphs that are zoomed in
+1. Bar graph option added to dashboard
+1. Redesign source management table to be more intuitive
+1. Redesign Line + Single Stat cells to appear more like a sparkline, and improve legibility
+
+
 ## v1.3.2.0 [2017-06-05]
 
 ### Bug Fixes
