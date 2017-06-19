@@ -100,7 +100,7 @@ For more details about monitoring an InfluxEnterprise cluster, see the [Monitor 
 
 ## What visualization types does Chronograf support?
 
-Chronograf's dashboards support five visualization types.
+Chronograf's dashboards support six visualization types.
 
 ### Line
 Show time-series in a line graph.
@@ -133,6 +133,10 @@ Show time-series in a line graph and overlay the time-series' single most recent
 
 ![Cluster connection details](/img/chronograf/v1.3/faq-viz-linesingle.png)
 
+### Bar
+Show time-series in a bar chart.
+
+![Cluster connection details](/img/chronograf/v1.3/faq-viz-bar.png)
 
 ## What does the status column indicate on the Host List page?
 
