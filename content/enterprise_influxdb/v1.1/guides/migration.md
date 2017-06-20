@@ -1,5 +1,7 @@
 ---
 title: OSS to Cluster Migration
+aliases:
+    - /enterprise/v1.1/guides/migration/
 menu:
   enterprise_influxdb_1_1:
     weight: 10

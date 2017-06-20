@@ -1,5 +1,7 @@
 ---
 title: Cluster Features
+aliases:
+    - /enterprise/v1.1/features/clustering-features/
 menu:
   enterprise_influxdb_1_1:
     weight: 20

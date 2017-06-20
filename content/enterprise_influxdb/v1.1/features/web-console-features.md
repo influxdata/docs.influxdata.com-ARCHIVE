@@ -1,5 +1,7 @@
 ---
 title: Web Console Features
+aliases:
+    - /enterprise/v1.1/features/web-console-features/
 menu:
   enterprise_influxdb_1_1:
     weight: 30

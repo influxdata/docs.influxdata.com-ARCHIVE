@@ -1,5 +1,7 @@
 ---
 title: SMTP Server Setup
+aliases:
+    - /enterprise/v1.1/guides/smtp-server/
 menu:
   enterprise_influxdb_1_1:
     weight: 20

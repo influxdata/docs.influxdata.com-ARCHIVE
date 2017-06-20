@@ -1,5 +1,7 @@
 ---
 title: Cluster Commands
+aliases:
+    - /enterprise/v1.1/features/cluster-commands/
 menu:
   enterprise_influxdb_1_1:
     weight: 10

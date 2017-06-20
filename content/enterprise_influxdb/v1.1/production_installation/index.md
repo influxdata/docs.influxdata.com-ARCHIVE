@@ -1,5 +1,7 @@
 ---
 title: Production Installation
+aliases:
+    - /enterprise/v1.1/production_installation/
 menu:
   enterprise_influxdb_1_1:
     weight: 2

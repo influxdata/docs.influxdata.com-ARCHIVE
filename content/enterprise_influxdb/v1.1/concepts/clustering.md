@@ -1,5 +1,7 @@
 ---
 title: Clustering
+aliases:
+    - /enterprise/v1.1/concepts/clustering/
 menu:
   enterprise_influxdb_1_1:
     weight: 0

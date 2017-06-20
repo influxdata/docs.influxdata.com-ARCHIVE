@@ -1,5 +1,7 @@
 ---
 title: Step 2 - Data Node Installation
+aliases:
+    - /enterprise/v1.1/production_installation/data_node_installation/
 menu:
   enterprise_influxdb_1_1:
     weight: 20

@@ -1,5 +1,7 @@
 ---
 title: Introduction
+aliases:
+    - /enterprise/v1.1/introduction/
 menu:
   enterprise_influxdb_1_1:
     weight: 0

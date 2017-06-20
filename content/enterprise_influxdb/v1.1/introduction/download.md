@@ -1,5 +1,7 @@
 ---
 title: Downloads
+aliases:
+    - /enterprise/v1.1/introduction/download/
 menu:
   enterprise_influxdb_1_1:
     weight: 0

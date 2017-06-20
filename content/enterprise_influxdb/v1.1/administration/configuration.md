@@ -1,5 +1,7 @@
 ---
 title: Configuration
+aliases:
+    - /enterprise/v1.1/administration/configuration/
 menu:
   enterprise_influxdb_1_1:
     weight: 20

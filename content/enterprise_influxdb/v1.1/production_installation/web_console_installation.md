@@ -1,5 +1,7 @@
 ---
 title: Step 3 - Web Console Installation
+aliases:
+    - /enterprise/v1.1/production_installation/web_console_installation/
 menu:
   enterprise_influxdb_1_1:
     weight: 30

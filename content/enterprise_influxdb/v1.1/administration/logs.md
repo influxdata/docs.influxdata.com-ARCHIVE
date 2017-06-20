@@ -1,5 +1,7 @@
 ---
 title: Logs
+aliases:
+    - /enterprise/v1.1/administration/logs/
 menu:
   enterprise_influxdb_1_1:
     weight: 0
