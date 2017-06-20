@@ -3,9 +3,9 @@ title: Fine Grained Authorization
 alias:
   -/docs/v1.3/administration/fga
 menu:
-  influxdb_1_3:
+  enterprise_influxdb_1_3:
     weight: 10
-    parent: guides
+    parent: Guides
 ---
 
 ## Controlling access to data with Enterprise's Fine-Grained Authorization
