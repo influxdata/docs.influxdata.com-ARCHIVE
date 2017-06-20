@@ -19,7 +19,7 @@ menu:
 <br>
 # Clustering
 
-## v1.3.5 [2017-05-16]
+## v1.2.5 [2017-05-16]
 
 This release builds off of the 1.2.4 release of OSS InfluxDB.
 Please see the OSS [release notes](/influxdb/v1.3/about_the_project/releasenotes-changelog/#v1-2-4-2017-05-08) for more information about the OSS releases.
@@ -34,7 +34,7 @@ Please see the OSS [release notes](/influxdb/v1.3/about_the_project/releasenotes
 - Reduce the cost of the admin user check for clusters with large numbers of users.
 - Fix hinted-handoff remote write batching.
 
-## v1.3.2 [2017-03-15]
+## v1.2.2 [2017-03-15]
 
 This release builds off of the 1.2.1 release of OSS InfluxDB.
 Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.2/CHANGELOG.md#v121-2017-03-08) for more information about the OSS release.
@@ -94,7 +94,7 @@ This change only affects users who have disabled the `retention-autocreate` opti
 - Fix the `influxd-ctl`'s [force removal](/enterprise_influxdb/v1.3/features/cluster-commands/#remove-meta) of meta nodes
 - Update the meta node and data node sample configuration files
 
-## v1.3.1 [2017-01-25]
+## v1.2.1 [2017-01-25]
 
 #### Cluster-specific Bugfixes
 
@@ -102,7 +102,7 @@ This change only affects users who have disabled the `retention-autocreate` opti
 &emsp;Fix how the system removes expired shards.
 - Remove misplaced newlines from cluster logs
 
-## v1.3.0 [2017-01-24]
+## v1.2.0 [2017-01-24]
 
 ### Release Notes
 
@@ -332,7 +332,7 @@ Backup and restore has been updated to fix issues and refine existing capabiliti
 <br>
 # Web Console
 
-## v1.3.2 [2017-03-15]
+## v1.2.2 [2017-03-15]
 
 ### Bug Fixes
 
@@ -340,7 +340,7 @@ Backup and restore has been updated to fix issues and refine existing capabiliti
 * Fix node and shard reporting inaccurate information
 * Fix the retention policy page dropdown when selecting databases
 
-## v1.3.1 [2017-01-31]
+## v1.2.1 [2017-01-31]
 
 As of version 1.2.1, the `Rebalance` button on the Web Consoles `Tasks` page
 is deprecated and no longer available.
