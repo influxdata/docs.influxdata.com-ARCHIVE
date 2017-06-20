@@ -1,5 +1,7 @@
 ---
 title: Frequently Asked Questions
+aliases:
+    - /enterprise/v1.0/troubleshooting/frequently_asked_questions/
 menu:
   enterprise_influxdb_1_0:
     weight: 0

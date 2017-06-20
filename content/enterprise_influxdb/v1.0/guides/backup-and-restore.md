@@ -1,5 +1,7 @@
 ---
 title: Backup and Restore
+aliases:
+    - /enterprise/v1.0/guides/backup-and-restore/
 menu:
   enterprise_influxdb_1_0:
     weight: 0

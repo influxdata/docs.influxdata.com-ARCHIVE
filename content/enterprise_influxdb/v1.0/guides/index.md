@@ -1,5 +1,7 @@
 ---
 title: Guides
+aliases:
+    - /enterprise/v1.0/guides/
 menu:
   enterprise_influxdb_1_0:
     weight: 10

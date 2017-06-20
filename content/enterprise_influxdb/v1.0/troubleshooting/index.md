@@ -1,5 +1,7 @@
 ---
 title: Troubleshooting
+aliases:
+    - /enterprise/v1.0/troubleshooting/
 menu:
   enterprise_influxdb_1_0:
     weight: 30

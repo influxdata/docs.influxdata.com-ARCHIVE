@@ -1,5 +1,7 @@
 ---
 title: Concepts
+aliases:
+    - /enterprise/v1.0/concepts/
 menu:
   enterprise_influxdb_1_0:
     weight: 20

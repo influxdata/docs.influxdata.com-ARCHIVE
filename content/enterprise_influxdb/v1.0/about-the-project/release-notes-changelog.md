@@ -1,5 +1,7 @@
 ---
 title: Release Notes/Changelog
+aliases:
+    - /enterprise/v1.0/about-the-project/release-notes-changelog/
 menu:
   enterprise_influxdb_1_0:
     weight: 0

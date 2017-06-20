@@ -2,6 +2,7 @@
 title: Step 1 - Meta Node Installation
 aliases:
     - enterprise_influxdb/v1.0/introduction/installation/
+    - /enterprise/v1.0/introduction/meta_node_installation/
 menu:
   enterprise_influxdb_1_0:
     weight: 10
