@@ -41,7 +41,7 @@ At a minimum, the Telegraf instance must have enabled the [system statistics](ht
 * [Telegraf Documentation](/telegraf/v1.3/) 
 
 #### InfluxDB/InfluxEnterprise cluster (required)
-[InfluxDB](/influxdb/v1.2/) is InfluxData's open source time-series database built from the ground up to handle high write and query loads.
+[InfluxDB](/influxdb/v1.3/) is InfluxData's open source time-series database built from the ground up to handle high write and query loads.
 [InfluxEnterprise](/enterprise/v1.2/) is InfluxData's closed source time-series database with clustering.
 InfluxDB instances and InfluxEnterprise clusters store the time-series data that populate the Chronograf interface.
 
@@ -52,7 +52,7 @@ A single Chronograf instance can support several InfluxDB instances or InfluxEnt
 
 * [Getting Started](/chronograf/v1.3/introduction/getting-started/) offers setup instructions for using Chronograf with an InfluxDB instance
 * [Monitor an InfluxEnterprise Cluster](/chronograf/v1.3/guides/monitor-an-influxenterprise-cluster/) offers setup instructions for using Chronograf with an InfluxEnterprise Cluster
-* [InfluxDB Documentation](/influxdb/v1.2/) 
+* [InfluxDB Documentation](/influxdb/v1.3/) 
 * [InfluxEnterprise Documentation](/enterprise/v1.2/) 
 
 #### Kapacitor (optional)

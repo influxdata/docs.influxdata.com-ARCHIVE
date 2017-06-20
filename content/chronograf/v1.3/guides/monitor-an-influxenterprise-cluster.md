@@ -9,7 +9,7 @@ menu:
 [InfluxEnterprise](/enterprise/v1.2/) offers high availability and a highly-scalable clustering solution for your time-series data needs.
 Use Chronograf to assess your cluster's health and monitor the infrastructure behind your project.
 
-This guides offers step-by-step instructions for using Chronograf, [InfluxDB](/influxdb/v1.2/), and [Telegraf](/telegraf/v1.3/) to monitor the data nodes in your InfluxEnteprise cluster.
+This guides offers step-by-step instructions for using Chronograf, [InfluxDB](/influxdb/v1.3/), and [Telegraf](/telegraf/v1.3/) to monitor the data nodes in your InfluxEnteprise cluster.
 
 ## Requirements
 
@@ -33,8 +33,8 @@ The diagram above shows an InfluxEnterprise cluster that consists of three meta 
 Every data node has its own [Telegraf](/telegraf/v1.3/) instance (T).
 
 Each Telegraf instance is configured to collect its node's CPU, disk, and memory data using Telegraf's [system stats](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) input plugin.
-The Telegraf instances are also configured to send those data to a single [OSS InfluxDB](/influxdb/v1.2/) instance that lives on a separate server.
-When Telegraf sends data to InfluxDB, it automatically [tags](/influxdb/v1.2/concepts/glossary/#tag) those data with the hostname of the relevant data node.
+The Telegraf instances are also configured to send those data to a single [OSS InfluxDB](/influxdb/v1.3/) instance that lives on a separate server.
+When Telegraf sends data to InfluxDB, it automatically [tags](/influxdb/v1.3/concepts/glossary/#tag) those data with the hostname of the relevant data node.
 
 The OSS InfluxDB instance that stores the Telegraf data is connected to Chronograf.
 Chronograf uses the hostnames in the Telegraf data to populate the Host List page and provide other hostname-specific information in the user interface.
@@ -54,7 +54,7 @@ On a server that's separate from your InfluxEnterprise cluster, download and ins
 
 #### Step 2: Enable authentication
 
-For security purposes, enable authentication in InfluxDB's [configuration file](/influxdb/v1.2/administration/config/).
+For security purposes, enable authentication in InfluxDB's [configuration file](/influxdb/v1.3/administration/config/).
 The configuration file is located in `/etc/influxdb/influxdb.conf`.
 
 In the `[http]` section, uncomment the `auth-enabled` option and set it to `true`:
@@ -81,7 +81,7 @@ Next, start the InfluxDB process:
 
 #### Step 4: Create an admin user
 
-Create an [admin user](/influxdb/v1.2/query_language/authentication_and_authorization/#user-types-and-privileges) on your InfluxDB instance.
+Create an [admin user](/influxdb/v1.3/query_language/authentication_and_authorization/#user-types-and-privileges) on your InfluxDB instance.
 Because you enabled authentication, you must perform this step before moving on to the next section.
 Run the command below to create an admin user, replacing `chronothan` and `supersecret` with your own username and password.
 Note that the password requires single quotes.
@@ -182,7 +182,7 @@ Replace the `chronothan` and `supersecret` values with your actual username and 
 ```
 
 The expected output is similar to the JSON in the codeblock below.
-In this case, the `telegraf` database has three different [tag values](/influxdb/v1.2/concepts/glossary/#tag-value) for the `host` [tag key](/influxdb/v1.2/concepts/glossary/#tag-key): `data-node-01`, `data-node-02`, and `data-node-03`.
+In this case, the `telegraf` database has three different [tag values](/influxdb/v1.3/concepts/glossary/#tag-value) for the `host` [tag key](/influxdb/v1.3/concepts/glossary/#tag-key): `data-node-01`, `data-node-02`, and `data-node-03`.
 Those values match the hostnames of the three data nodes in the cluster; this means Telegraf is successfully writing monitoring data from those hosts to the OSS InfluxDB instance!
 ```
 {

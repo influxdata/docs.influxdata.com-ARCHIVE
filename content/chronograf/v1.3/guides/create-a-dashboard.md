@@ -42,7 +42,7 @@ This step takes you to cell editor mode.
 
 ### Step 3: Create your query
 
-Click on the blue `Add a Query` button to create and edit an [InfluxQL](/influxdb/v1.2/query_language/) query.
+Click on the blue `Add a Query` button to create and edit an [InfluxQL](/influxdb/v1.3/query_language/) query.
 In query editor mode, use the builder to select from your existing data and allow Chronograf to format the query for you.
 Alternatively, manually enter and edit a query.
 Chronograf allows you to move seamlessly between using the builder and manually editing the query; when possible, the interface automatically populates the builder with the information from your raw query.

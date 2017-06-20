@@ -27,7 +27,7 @@ For a complete list of the installation requirements, see the [Installation](/ch
 
 ## InfluxDB Setup
 
-[InfluxDB](https://docs.influxdata.com/influxdb/v1.2/) is the time series database that serves as the data storage component of the TICK stack.
+[InfluxDB](https://docs.influxdata.com/influxdb/v1.3/) is the time series database that serves as the data storage component of the TICK stack.
 
 #### 1. Download and Install InfluxDB
 ```
@@ -36,7 +36,7 @@ sudo dpkg -i influxdb_1.2.4_amd64.deb
 ```
 
 #### 2. Start InfluxDB
-There's no need to edit InfluxDB's default [configuration](https://docs.influxdata.com/influxdb/v1.2/administration/config/) for the purposes of this guide.
+There's no need to edit InfluxDB's default [configuration](https://docs.influxdata.com/influxdb/v1.3/administration/config/) for the purposes of this guide.
 Just start InfluxDB with:
 ```
 sudo systemctl start influxdb
@@ -221,7 +221,7 @@ You should see a welcome page:
 The next steps connect Chronograf to your InfluxDB instance.
 For the `Connection String`, enter the hostname or IP of the machine that InfluxDB is running on, and be sure to include InfluxDB's default port: `8086`.
 Next, name the connection string; this can be anything you want.
-There's no need to edit the last three inputs; [authorization is disabled](https://docs.influxdata.com/influxdb/v1.2/administration/config/#auth-enabled-false) in InfluxDB's default configuration so `Username` and `Password` can remain blank, and Telegraf's [default database name](https://github.com/influxdata/telegraf/blob/master/etc/telegraf.conf#L89) is `telegraf`.
+There's no need to edit the last three inputs; [authorization is disabled](https://docs.influxdata.com/influxdb/v1.3/administration/config/#auth-enabled-false) in InfluxDB's default configuration so `Username` and `Password` can remain blank, and Telegraf's [default database name](https://github.com/influxdata/telegraf/blob/master/etc/telegraf.conf#L89) is `telegraf`.
 
 Click `Connect New Source` to move on to the `HOST LIST` page:
 
