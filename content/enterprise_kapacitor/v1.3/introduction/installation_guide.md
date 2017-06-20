@@ -3,7 +3,7 @@ title: Installation Guide
 menu:
   enterprise_kapacitor_1_3:
     weight: 20
-    parent: Introduction
+    parent: introduction
 ---
 
 # Overview
