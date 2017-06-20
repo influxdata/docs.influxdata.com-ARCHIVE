@@ -1,5 +1,7 @@
 ---
 title: InfluxEnterprise Users
+aliases:
+    - /enterprise/v1.2/features/users/
 menu:
   enterprise_influxdb_1_2:
     weight: 0

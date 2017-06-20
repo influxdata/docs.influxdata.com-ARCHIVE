@@ -1,5 +1,7 @@
 ---
 title: Cluster Rebalance
+aliases:
+    - /enterprise/v1.2/guides/rebalance/
 menu:
   enterprise_influxdb_1_2:
     weight: 19

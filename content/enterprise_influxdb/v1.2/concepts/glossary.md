@@ -1,5 +1,7 @@
 ---
 title: Glossary
+aliases:
+    - /enterprise/v1.2/concepts/glossary/
 menu:
   enterprise_influxdb_1_2:
     weight: 0

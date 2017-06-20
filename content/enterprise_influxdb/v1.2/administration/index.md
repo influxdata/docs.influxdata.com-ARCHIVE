@@ -1,5 +1,7 @@
 ---
 title: Administration
+aliases:
+    - /enterprise/v1.2/administration/
 menu:
   enterprise_influxdb_1_2:
     weight: 50

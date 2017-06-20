@@ -1,5 +1,7 @@
 ---
 title: Features
+aliases:
+    - /enterprise/v1.2/features/
 menu:
   enterprise_influxdb_1_2:
     weight: 40

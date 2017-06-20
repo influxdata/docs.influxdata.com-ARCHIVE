@@ -1,5 +1,7 @@
 ---
 title: Step 2 - Web Console Installation
+aliases:
+    - /enterprise/v1.2/quickstart_installation/web_console_installation/
 menu:
   enterprise_influxdb_1_2:
     weight: 20

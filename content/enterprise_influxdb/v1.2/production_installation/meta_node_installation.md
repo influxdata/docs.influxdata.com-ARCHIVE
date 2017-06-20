@@ -1,5 +1,7 @@
 ---
 title: Step 1 - Meta Node Installation
+aliases:
+    - /enterprise/v1.2/production_installation/meta_node_installation/
 
 menu:
   enterprise_influxdb_1_2:

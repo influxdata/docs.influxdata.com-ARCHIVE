@@ -1,5 +1,7 @@
 ---
 title: Step 1 - Cluster Installation
+aliases:
+    - /enterprise/v1.2/quickstart_installation/cluster_installation/
 
 menu:
   enterprise_influxdb_1_2:

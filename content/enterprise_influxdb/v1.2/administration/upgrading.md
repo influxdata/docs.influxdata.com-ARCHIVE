@@ -1,5 +1,7 @@
 ---
 title: Upgrading from Previous Versions
+aliases:
+    - /enterprise/v1.2/administration/upgrading/
 menu:
   enterprise_influxdb_1_2:
     weight: 0

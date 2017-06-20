@@ -1,9 +1,10 @@
 ---
 title: Installation Guidelines (⏰ Please Read!)
 aliases:
-  /enterprise_influxdb/v1.2/introduction/meta_node_installation/
-  /enterprise_influxdb/v1.2/introduction/data_node_installation/
-  /enterprise_influxdb/v1.2/introduction/web_console_installation/
+  - /enterprise_influxdb/v1.2/introduction/meta_node_installation/
+  - /enterprise_influxdb/v1.2/introduction/data_node_installation/
+  - /enterprise_influxdb/v1.2/introduction/web_console_installation/
+  - /enterprise/v1.2/introduction/installation_guidelines/
 menu:
   enterprise_influxdb_1_2:
     weight: 20

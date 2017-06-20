@@ -1,7 +1,8 @@
 ---
 title: Getting Started
-alias:
-  /enterprise_influxdb/v1.2/introduction/getting-started/
+aliases:
+  - /enterprise_influxdb/v1.2/introduction/getting-started/
+  - /enterprise/v1.2/introduction/getting_started/
 menu:
   enterprise_influxdb_1_2:
     weight: 40

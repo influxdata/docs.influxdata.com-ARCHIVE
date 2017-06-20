@@ -1,6 +1,9 @@
 ---
 title: Enterprise InfluxDB Version 1.2 Documentation
 
+aliases:
+    - /enterprise/v1.2/
+
 menu:
   enterprise_influxdb:
     name: v1.2

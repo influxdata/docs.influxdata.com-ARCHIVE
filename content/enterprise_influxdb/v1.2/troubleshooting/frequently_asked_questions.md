@@ -2,6 +2,7 @@
 title: Frequently Asked Questions
 aliases:
     - enterprise_influxdb/v1.2/troubleshooting/frequently-asked-questions/
+    - /enterprise/v1.2/troubleshooting/frequently_asked_questions/
 menu:
   enterprise_influxdb_1_2:
     weight: 0
