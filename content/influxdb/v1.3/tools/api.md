@@ -20,9 +20,53 @@ Those settings [are configurable](/influxdb/v1.3/administration/config/#http).
 
 | Endpoint    | Description |
 | :---------- | :---------- |
+| [/debug/requests](#debug-requests) | Use `/debug/requests/` to track HTTP client requests to the `/write` and `/query` endpoints. |
 | [/ping](#ping) | Use `/ping` to check the status of your InfluxDB instance and your version of InfluxDB. |
 | [/query](#query) | Use `/query` to query data and manage databases, retention policies, and users. |
 | [/write](#write) | Use `/write` to write data to a pre-existing database. |
+
+## /debug/requests
+Use this endpoint to track HTTP client requests to the `/write` and `/query` endpoints.
+`/debug/requests` returns the number of writes and queries to InfluxDB per username and IP address.
+
+### Definition
+```
+curl http://localhost:8086/debug/requests
+```
+
+### Query String Parameters
+
+| Query String Parameter | Optional/Required | Definition |
+| :--------------------- | :---------------- |:---------- |
+| seconds=\<integer>      | Optional          | Sets the duration (in seconds) over which the client collects information. The default duration is ten seconds. | 
+
+#### Examples
+
+##### Example 1: Track requests over a ten-second interval
+<br>
+```
+$ curl http://localhost:8086/debug/requests
+
+{
+"user1:123.45.678.91": {"writes":1,"queries":0},
+}
+```
+
+The response shows that, over the past ten seconds, the `user1` user sent one request to the `/write` endpoint and no requests to the `/query` endpoint from the `123.45.678.91` IP address. 
+
+##### Example 2: Track requests over a one-minute interval
+<br>
+```
+$ curl http://localhost:8086/debug/requests?seconds=60
+
+{
+"user1:123.45.678.91": {"writes":3,"queries":0},
+"user1:000.0.0.0": {"writes":0,"queries":16},
+"user2:xx.xx.xxx.xxx": {"writes":4,"queries":0}
+}
+```
+The response shows that, over the past minute, `user1` sent three requests to the `/write` endpoint from `123.45.678.91`, `user1` sent 16 requests to the `/query` endpoint from `000.0.0.0`, and `user2` sent four requests to the `/write` endpoint from `xx.xx.xxx.xxx`.
+
 
 ## /ping
 
