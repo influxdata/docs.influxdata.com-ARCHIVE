@@ -19,17 +19,17 @@ To use fine-grained authorization (hereafter "FGA"), you must first enable authe
 Then the admin user needs to create users through the query API and grant those users explicit read and/or write privileges per database.
 So far, this is the same as how you would configure authorization on an open source InfluxDB instance.
 
-To continue setting up fine-grained authorization, the admin user must first set _restrictions_ which define a combination of database, measurement, and series which cannot be accessed without an explicit _grant_.
-A _grant_ enables access to entities that were previously restricted.
+To continue setting up fine-grained authorization, the admin user must first set _restrictions_ which define a combination of database, measurement, and tags which cannot be accessed without an explicit _grant_.
+A _grant_ enables access to series that were previously restricted.
 
-Restrictions specify _permissions_ defining whether reads and/or writes are being restricted, and they specify _selectors_ defining the combination of database, measurement, and tags.
-Grants also specify permissions and selectors, but unlike restrictions, grants are able to specify _users_ and _roles_.
+Restrictions limit access to the series that match the database, measurement, and tags specified.
+The different access permissions (currently just "read" and "write") can be restricted independently depending on the scenario.
+Grants will allow access, according to the listed permissions, to restricted series for the users and roles specified.
 Users are the same as the users created in InfluxQL, and roles, an Enterprise feature, are created separately through the Meta HTTP API.
-(Roles are not covered in this guide.)
 
 ### Modifying grants and restrictions
 
-To configure FGA, you will need access to the meta nodes' HTTP ports (which run on port 8089 by default).
+To configure FGA, you will need access to the meta nodes' HTTP ports (which run on port 8091 by default).
 Note that in a typical cluster configuration, the data nodes' HTTP ports (8086 by default) are exposed to clients but the meta nodes' HTTP ports are not.
 You may need to work with your network administrator to gain access to the meta nodes' HTTP ports.
 
@@ -71,11 +71,11 @@ curl -L -XPOST "http://localhost:8091/influxdb/v2/acl/restrictions" \
   }'
 ```
 
-After applying this restriction and before applying any grants, the east and west users will not be authorized to write to the database.
+After applying this restriction and before applying any grants, the east and west users will not be authorized to read from or write to the database.
 
 ##### Restriction option 2: one measurement within the database
 
-Restricting a single measurement will disallow writes within that measurement, but access to other measurements within the database will be decided by standard permissions.
+Restricting a single measurement will disallow reads and writes within that measurement, but access to other measurements within the database will be decided by standard permissions.
 
 ```
 curl -L -XPOST "http://localhost:8091/influxdb/v2/acl/restrictions" \
@@ -113,10 +113,9 @@ This is probably not what you want, as it would allow writes to `network` withou
 ##### Restriction summary
 
 These options were simple matchers on exact patterns.
-Remember that you will achieve the best performance by having few, coarse-grained restrictions as opposed to many fine-grained restrictions.
+Remember that you will achieve the best performance by having few, broad restrictions as opposed to many narrow restrictions.
 
 We only used the matcher `exact` above, but you can also match with `prefix` if you want to restrict based on a common prefix on your database, measurements, or tags.
-The other matcher option is `regex` to use a regular expression.
 
 #### Grants
 
