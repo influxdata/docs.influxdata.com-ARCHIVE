@@ -616,12 +616,6 @@ Limits the number of rows that the system can return in a [non-chunked](/influxd
 The default setting (`0`) allows for an unlimited number of rows.
 InfluxDB includes a `"partial":true` tag in the response body if query results exceed the `max-row-limit` setting.
 
-<dt>
-In versions 1.2.0 and 1.2.1, the `max-row-limit` option is set to 10,000 by default.
-That default setting can lead to unexpected behavior in [Grafana](https://grafana.com/) panels; if a panel's query returns more than 10,000 points, the panel appears to show [truncated/partial data](https://github.com/influxdata/influxdb/issues/8050).
-In versions 1.2.2+, `max-row-limit` is set to `0` by default and allows an unlimited number of returned rows.
-</dt>
-
 Environment variable: `INFLUXDB_HTTP_MAX_ROW_LIMIT`
 
 ### max-connection-limit = 0

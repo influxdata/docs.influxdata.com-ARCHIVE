@@ -97,7 +97,7 @@ $ curl -i 'http://localhost:8086/ping'
 HTTP/1.1 204 No Content
 Content-Type: application/json
 Request-Id: 1e08aeb6-fec0-11e6-8486-000000000000
-✨ X-Influxdb-Version: 1.2.0 ✨
+✨ X-Influxdb-Version: 1.3.x ✨
 Date: Wed, 01 Mar 2017 20:46:17 GMT
 ```
 
@@ -106,8 +106,8 @@ Date: Wed, 01 Mar 2017 20:46:17 GMT
 ```
 $ influx
 
-Connected to http://localhost:8086✨ version 1.2.0 ✨  
-InfluxDB shell version: 1.2.0
+Connected to http://localhost:8086✨ version 1.3.x ✨  
+InfluxDB shell version: 1.3.x
 ```
 
 #### Check the HTTP response in your logs:  
@@ -115,7 +115,7 @@ InfluxDB shell version: 1.2.0
 ```
 $ journald-ctl -u influxdb.service
 
-Mar 01 20:49:45 rk-api influxd[29560]: [httpd] 127.0.0.1 - - [01/Mar/2017:20:49:45 +0000] "POST /query?db=&epoch=ns&q=SHOW+DATABASES HTTP/1.1" 200 151 "-" ✨ "InfluxDBShell/1.2.0" ✨ 9a4371a1-fec0-11e6-84b6-000000000000 1709
+Mar 01 20:49:45 rk-api influxd[29560]: [httpd] 127.0.0.1 - - [01/Mar/2017:20:49:45 +0000] "POST /query?db=&epoch=ns&q=SHOW+DATABASES HTTP/1.1" 200 151 "-" ✨ "InfluxDBShell/1.3.x" ✨ 9a4371a1-fec0-11e6-84b6-000000000000 1709
 ```
 
 ## Where can I find InfluxDB logs?
@@ -1029,23 +1029,6 @@ time                            value
 
 ##### Example 2: Write `time` as a field key and attempt to query it
 <br>
-Versions 1.2.0-1.2.3:
-```
-> INSERT mymeas time=1
-
-> SELECT time FROM mymeas
-ERR: error parsing query: at least 1 non-time field must be queried
-
-> SELECT "time" FROM mymeas
-ERR: error parsing query: at least 1 non-time field must be queried
-
-> SELECT * FROM mymeas
->
-```
-`time` is not a valid field key in InfluxDB.
-The system does not return an error and does not write `time=1` to the database.
-
-Version 1.2.4:
 ```
 > INSERT mymeas time=1
 ERR: {"error":"partial write: invalid field name: input field \"time\" on measurement \"mymeas\" is invalid dropped=1"}
@@ -1055,29 +1038,6 @@ The system does does not write the point and returns a `400`.
 
 ##### Example 3: Write `time` as a tag key and attempt to query it
 <br>
-Versions 1.2.0-1.2.3:
-```
-> INSERT mymeas,time=1 value=1
-
-> SELECT value,time FROM mymeas
-
-name: mymeas
-time                           value
-----                           -----
-2017-02-07T18:39:41.69433731Z  1
-
-> SELECT * FROM mymeas
-
-name: mymeas
-time                           value
-----                           -----
-2017-02-07T18:39:41.69433731Z  1
-```
-
-`time` is not a valid tag key in InfluxDB.
-The system does not return an error and does not write `time=1` to the database.
-
-Version 1.2.4:
 ```
 > INSERT mymeas,time=1 value=1
 ERR: {"error":"partial write: invalid tag key: input tag \"time\" on measurement \"mymeas\" is invalid dropped=1"}

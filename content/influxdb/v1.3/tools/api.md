@@ -48,7 +48,7 @@ $ curl -sl -I localhost:8086/ping
 HTTP/1.1 204 No Content
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.2.x
+X-Influxdb-Version: 1.3.x
 Date: Wed, 01 Mar 2017 00:09:52 GMT
 ```
 
@@ -142,12 +142,8 @@ A successful [`CREATE DATABASE` query](/influxdb/v1.3/query_language/database_ma
 | pretty=true | Optional | Enables pretty-printed JSON output. While this is useful for debugging it is not recommended for production use as it consumes unnecessary network bandwidth. |
 | u=\<username> | Optional if you haven't [enabled authentication](/influxdb/v1.3/query_language/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication.* | Sets the username for authentication if you've enabled authentication. The user must have read access to the database. Use with the query string parameter `p`. |
 
-\* In versions 1.2.0 and 1.2.1, InfluxDB automatically truncates the number of rows returned for requests without the `chunked` parameter.
-By default, the maximum number of rows returned is set to 10,000.
-If a query has more than 10,000 rows to return, InfluxDB includes a `"partial":true` tag in the response body.
-The [`max-row-limit` setting](/influxdb/v1.3/administration/config/#max-row-limit-0) is configurable in the `[http]` section of the configuration file.
-In version 1.2.2, the `max-row-limit` configuration option is set to `0` by default.
-That default setting allows for an unlimited number of rows returned per request.
+\* InfluxDB does not truncate the number of rows returned for requests without the `chunked` parameter.
+That behavior is configurable; see the [`max-row-limit`](/influxdb/v1.3/administration/config/#max-row-limit-0) configuration option for more information.
 
 \** The HTTP API also supports basic authentication.
 Use basic authentication if you've [enabled authentication](/influxdb/v1.3/query_language/authentication_and_authorization/#set-up-authentication)
@@ -387,7 +383,7 @@ HTTP/1.1 200 OK
 Connection: close
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.2.x
+X-Influxdb-Version: 1.3.x
 Date: Wed, 01 Mar 2017 19:22:54 GMT
 Transfer-Encoding: chunked
 
@@ -403,7 +399,7 @@ HTTP/1.1 200 OK
 Connection: close
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.2.x
+X-Influxdb-Version: 1.3.x
 Date: Wed, 01 Mar 2017 19:23:48 GMT
 Transfer-Encoding: chunked
 
@@ -418,7 +414,7 @@ $ curl -i -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT *'
 HTTP/1.1 400 Bad Request
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.2.x
+X-Influxdb-Version: 1.3.x
 Date: Wed, 01 Mar 2017 19:24:25 GMT
 Content-Length: 76
 
@@ -434,7 +430,7 @@ HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 Request-Id: [...]
 Www-Authenticate: Basic realm="InfluxDB"
-X-Influxdb-Version: 1.2.x
+X-Influxdb-Version: 1.3.x
 Date: Wed, 01 Mar 2017 19:11:26 GMT
 Content-Length: 33
 
@@ -481,7 +477,7 @@ $ curl -i -XPOST "http://localhost:8086/write?db=mydb&precision=s" --data-binary
 HTTP/1.1 204 No Content
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.2.x
+X-Influxdb-Version: 1.3.x
 Date: Wed, 01 Mar 2017 17:33:23 GMT
 ```
 
@@ -493,7 +489,7 @@ $ curl -i -XPOST "http://localhost:8086/write?db=mydb&rp=myrp" --data-binary 'my
 HTTP/1.1 204 No Content
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.2.x
+X-Influxdb-Version: 1.3.x
 Date: Wed, 01 Mar 2017 17:34:31 GMT
 ```
 
@@ -506,7 +502,7 @@ $ curl -i -XPOST "http://localhost:8086/write?db=mydb&u=myusername&p=mypassword"
 HTTP/1.1 204 No Content
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.2.x
+X-Influxdb-Version: 1.3.x
 Date: Wed, 01 Mar 2017 17:34:56 GMT
 ```
 
@@ -518,7 +514,7 @@ HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 Request-Id: [...]
 Www-Authenticate: Basic realm="InfluxDB"
-X-Influxdb-Version: 1.2.x
+X-Influxdb-Version: 1.3.x
 Date: Wed, 01 Mar 2017 17:40:30 GMT
 Content-Length: 33
 
@@ -534,7 +530,7 @@ $ curl -i -XPOST -u myusername:mypassword "http://localhost:8086/write?db=mydb" 
 HTTP/1.1 204 No Content
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.2.x
+X-Influxdb-Version: 1.3.x
 Date: Wed, 01 Mar 2017 17:36:40 GMT
 ```
 
@@ -546,7 +542,7 @@ HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 Request-Id: [...]
 Www-Authenticate: Basic realm="InfluxDB"
-X-Influxdb-Version: 1.2.x
+X-Influxdb-Version: 1.3.x
 Date: Wed, 01 Mar 2017 17:46:40 GMT
 Content-Length: 33
 
@@ -590,7 +586,7 @@ $ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,myt
 HTTP/1.1 204 No Content
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.2.x
+X-Influxdb-Version: 1.3.x
 Date: Wed, 01 Mar 2017 18:02:57 GMT
 ```
 
@@ -602,7 +598,7 @@ $ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,myt
 HTTP/1.1 204 No Content
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.2.x
+X-Influxdb-Version: 1.3.x
 Date: Wed, 01 Mar 2017 18:03:44 GMT
 ```
 
@@ -615,7 +611,7 @@ mymeas,mytag=2 myfield=34 1463689152000000000'
 HTTP/1.1 204 No Content
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.2.x
+X-Influxdb-Version: 1.3.x
 Date: Wed, 01 Mar 2017 18:04:02 GMT
 ```
 
@@ -627,7 +623,7 @@ $ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary @data.txt
 HTTP/1.1 204 No Content
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.2.x
+X-Influxdb-Version: 1.3.x
 Date: Wed, 01 Mar 2017 18:08:11 GMT
 ```
 

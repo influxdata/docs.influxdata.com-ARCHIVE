@@ -124,7 +124,7 @@ returns:
 HTTP/1.1 400 Bad Request
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.2.x
+X-Influxdb-Version: 1.3.x
 Date: Wed, 01 Mar 2017 19:38:01 GMT
 Content-Length: 150
 
@@ -144,7 +144,7 @@ returns:
 HTTP/1.1 404 Not Found
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.2.x
+X-Influxdb-Version: 1.3.x
 Date: Wed, 01 Mar 2017 19:38:35 GMT
 Content-Length: 45
 
