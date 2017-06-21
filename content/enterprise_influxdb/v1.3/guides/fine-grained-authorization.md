@@ -50,8 +50,8 @@ CREATE USER west WITH PASSWORD 'west'
 GRANT ALL ON datacenters TO west
 ```
 
-At this point, the east and west users have unrestricted write access to the `datacenters` database and the ops user has unrestricted read access.
-We'll need to use curl to set up the restrictions first, and we'll need to decide how to apply the restrictions.
+At this point, the east and west users have unrestricted read and write access to the `datacenters` database.
+We'll need to decide what restrictions to apply in order to limit their access.
 
 #### Restrictions
 
