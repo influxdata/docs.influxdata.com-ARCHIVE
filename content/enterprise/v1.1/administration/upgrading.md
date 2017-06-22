@@ -2,7 +2,7 @@
 title: Upgrading from Previous Versions
 menu:
   enterprise_1_1:
-    weight: 0
+    weight: 10
     parent: Administration
 ---
 

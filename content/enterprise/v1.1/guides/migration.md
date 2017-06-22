@@ -2,7 +2,7 @@
 title: OSS to Cluster Migration
 menu:
   enterprise_1_1:
-    weight: 10
+    weight: 40
     parent: Guides
 ---
 

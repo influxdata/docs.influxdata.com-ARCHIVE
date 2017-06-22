@@ -2,7 +2,7 @@
 title: Glossary
 menu:
   enterprise_1_1:
-    weight: 0
+    weight: 10
     parent: Concepts
 ---
 
@@ -42,7 +42,7 @@ Related entries: [meta service](#meta-service)
 ## meta service
 
 The consistent data store that keeps state about the cluster, including which
-servers, databases, users, continuous queries, retention policies, subscriptions, 
+servers, databases, users, continuous queries, retention policies, subscriptions,
 and blocks of time exist.
 
 Related entries: [meta node](#meta-node)
