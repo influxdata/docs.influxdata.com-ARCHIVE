@@ -198,10 +198,54 @@ time                   distinct_level description    distinct_water_level
 ```
 
 ## INTEGRAL()
-`INTEGRAL()` is not yet functional.
 
-<dt> See GitHub Issue [#5930](https://github.com/influxdata/influxdb/issues/5930) for more information.
-</dt>
+Returns the time-integral of the values in a single [field](/influxdb/v1.0/concepts/glossary/#field), using linear interpolation between values.  The field type must be int64 or float64; an `*` indicates all int64 or float64 fields in the measurement.
+
+```
+SELECT INTEGRAL(<field_key>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+```
+
+You can optionally specify the units of time for the integral as a second argument - they default to units of one second.
+
+```
+SELECT INTEGRAL(<field_key>, <time_units>) FROM <measurement_name> [WHERE <stuff>] [GROUP BY <stuff>]
+```
+
+Examples:
+
+* Time-integrals are not really applicable to the example data series, but in principle you would do something like this:
+
+```
+> SELECT INTEGRAL("water_level") FROM "h2o_feet"
+name: h2o_feet
+--------------
+time			               integral
+1970-01-01T00:00:00Z	 12249794.879999982
+```
+
+* A more realistic example is integrating power measurements to estimate energy.  This query will use the default time units of seconds, so will return results in kilowatt-seconds (i.e. kJ):
+
+```
+> SELECT INTEGRAL(power_in_kilowatts) FROM my_data
+```
+
+* To change the units of time into hours, and thereby give results in kWh, specify a second argument like this:
+
+```
+> SELECT INTEGRAL(power_in_kilowatts, 1h) FROM my_data
+```
+
+The INTEGRAL function only analyses the datapoints contained within the specified time interval (or group-by-time interval).  It does not interpolate to points outside the interval, so the integral does not include the time between the start of the interval and the first datapoint, nor the time between the last datapoint and the end of the interval.  
+
+This means that (for example) the sum of the daily energy values returned by:
+
+    SELECT INTEGRAL(power) FROM my_data WHERE time > now() - 7d GROUP BY time(1d)
+
+will be slightly different to the weekly total returned by:
+
+    SELECT INTEGRAL(power) FROM my_data WHERE time > now() - 7d
+
+> **Note:** Aggregation functions return epoch 0 (`1970-01-01T00:00:00Z`) as the timestamp unless you specify a lower bound on the time range. Then they return the lower bound as the timestamp.
 
 ## MEAN()
 Returns the arithmetic mean (average) for the values in a single [field](/influxdb/v1.0/concepts/glossary/#field).
