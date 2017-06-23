@@ -312,7 +312,7 @@ Environment variable: `INFLUXDB_DATA_WAL_DIR`
 ### wal-fsync-delay = "0s"
 
 The amount of time that a write waits before fsyncing. Use a duration greater than `0` to batch up multiple fsync calls.
-This is useful for slower disks or when experiencing [WAL](LINK) write contention.
+This is useful for slower disks or when experiencing [WAL](/influxdb/v1.3/concepts/glossary/#wal-write-ahead-log) write contention.
 A value of `0s` fsyncs every write to the WAL.
 We recommend values in the range of `0ms`-`100ms` for non-SSD disks.
 
