@@ -218,10 +218,18 @@ Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_KEY`
 
 ###  license-path = ""
 
-The local path to the permanent JSON license file that you received from InfluxData.
-Permanent license files are not available for subscribers on a monthly plan.
-If you are a monthly subscriber, your cluster must use the `license-key` setting.
-Contact [sales@influxdb.com](mailto:sales@influxdb.com) to become an annual subscriber.
+The local path to the permanent JSON license file that you received from InfluxData
+for instances that do not have access to the internet.
+Contact [sales@influxdb.com](mailto:sales@influxdb.com) if a licence file is required.
+
+The license file should be saved on every server in the cluster, including Meta,
+Data, and Enterprise nodes. The file contains the JSON-formatted license, and must
+be readable by the influxd user. Each server in the cluster independently verifies
+its license. We recommended performing rolling restarts on the nodes after the
+license file update. Restart one Meta, Data, or Enterprise service at a time and
+wait for it to come back up successfully. The cluster should remain unaffected
+as long as only one node is restarting at a time as long as there are two or more
+data nodes.
 
 Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_PATH`
 
@@ -392,7 +400,7 @@ For example, [Continuous Queries](/influxdb/v1.2/concepts/glossary/#continuous-q
 (CQ) use a lease so that all data nodes aren't running the same CQs at once.
 
 Environment variable: `INFLUXDB_META_LEASE_DURATION`
- 
+
 ### shared-secret = ""
 The shared secret used by the API for JWT authentication.
 Set [`auth-enabled`](#auth-enabled-false) to `true` if using this option.
