@@ -6,7 +6,7 @@ menu:
     parent: Guides
 ---
 
-[InfluxEnterprise](/enterprise/v1.2/) offers high availability and a highly-scalable clustering solution for your time-series data needs.
+[InfluxEnterprise](/enterprise_influxdb/v1.2/) offers high availability and a highly-scalable clustering solution for your time-series data needs.
 Use Chronograf to assess your cluster's health and monitor the infrastructure behind your project.
 
 This guides offers step-by-step instructions for using Chronograf, [InfluxDB](/influxdb/v1.2/), and [Telegraf](/telegraf/v1.3/) to monitor the data nodes in your InfluxEnteprise cluster.
@@ -14,7 +14,7 @@ This guides offers step-by-step instructions for using Chronograf, [InfluxDB](/i
 ## Requirements
 
 The sections below assume you have a fully-functioning InfluxEnterprise cluster with authentication enabled.
-See the InfluxEnterprise documentation for [detailed setup instructions](/enterprise/v1.2/production_installation/).
+See the InfluxEnterprise documentation for [detailed setup instructions](/enterprise_influxdb/v1.2/production_installation/).
 This guide uses a cluster with three meta nodes and three data nodes; the steps are also applicable to other cluster arrangements.
 
 We recommend having a separate server to store your monitoring data.

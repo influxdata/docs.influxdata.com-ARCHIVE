@@ -1,7 +1,0 @@
-{{ if not (or (in .RelPermalink .Site.Data.default_versions.enterprise_semver) (eq .RelPermalink "/enterprise/")) }}
-<div class="old-version">
-{{ if or (in .RelPermalink "v1.0") (in .RelPermalink "v1.1") }}
-    <strong>Warning!</strong> This page documents an old version of InfluxEnterprise, which is no longer actively developed. <a href="/enterprise/{{ .Site.Data.default_versions.enterprise_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ substr .RelPermalink 16 }}{{end}}">InfluxEnteprise {{ .Site.Data.default_versions.enterprise_semver }}</a> is the most recent stable version of InfluxEnterprise.
-{{ end }}
-</div>
-{{ end }}
