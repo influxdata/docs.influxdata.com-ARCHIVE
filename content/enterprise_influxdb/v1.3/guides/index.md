@@ -8,5 +8,7 @@ menu:
 ---
 
 ## [Backup and Restore](/enterprise_influxdb/v1.3/guides/backup-and-restore/)
+## [Fine Grained Authorization](/enterprise_influxdb/v1.3/guides/fine-grained-authorization/)
 ## [OSS to Cluster Migration](/enterprise_influxdb/v1.3/guides/migration/)
+## [Cluster Rebalance](http://localhost:1313/enterprise_influxdb/v1.3/guides/rebalance/)
 ## [SMTP Server Setup](/enterprise_influxdb/v1.3/guides/smtp-server/)
