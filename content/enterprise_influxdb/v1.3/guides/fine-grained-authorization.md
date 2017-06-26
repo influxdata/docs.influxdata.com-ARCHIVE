@@ -15,7 +15,7 @@ In Enterprise, fine-grained authorization can be used to control access at a mea
 
 ### Concepts
 
-To use fine-grained authorization (hereafter "FGA"), you must first enable authentication in your configuration file.
+To use fine-grained authorization (hereafter "FGA"), you must first [enable authentication](/influxdb/v1.3/query_language/authentication_and_authorization/#set-up-authentication) in your configuration file.
 Then the admin user needs to create users through the query API and grant those users explicit read and/or write privileges per database.
 So far, this is the same as how you would configure authorization on an open source InfluxDB instance.
 
@@ -25,7 +25,7 @@ A _grant_ enables access to series that were previously restricted.
 Restrictions limit access to the series that match the database, measurement, and tags specified.
 The different access permissions (currently just "read" and "write") can be restricted independently depending on the scenario.
 Grants will allow access, according to the listed permissions, to restricted series for the users and roles specified.
-Users are the same as the users created in InfluxQL, and roles, an Enterprise feature, are created separately through the Meta HTTP API.
+Users are the same as the users created in InfluxQL, and [roles](/enterprise_influxdb/v1.3/features/users/#cluster-user-information), an Enterprise feature, are created separately through the Meta HTTP API.
 
 ### Modifying grants and restrictions
 
