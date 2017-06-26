@@ -10,13 +10,13 @@ menu:
 
 ## Introduction
 
-The anti-entropy service tries to ensure that the replication factor of a shard is respected as new data nodes are introduced to a cluster.
+The anti-entropy service tries to ensure that each data node has all the shards that it needs according to the meta store.
 This guide covers some of the basic situations where the anti-entropy service takes effect.
 
 ## Concepts
 
-The anti-entropy service examines whether existing nodes are present on as many nodes as required by their replication factor,
-and if the actual number of copies is less than indicated by the replication factor, the service will copy existing shards from shard owner nodes to nodes that do not have a copy of the shard.
+The anti-entropy service examines each node to see whether it has all the shards that the meta store says it should have,
+and if any shards are missing, the service will copy existing shards from owners to the node that is missing the shard.
 
 By default, the service checks every 30 seconds, as configured in the `anti-entropy.check-interval` setting.
 
@@ -65,74 +65,48 @@ ID  Database   Retention Policy  Desired Replicas  Shard Group  Start           
 6   foo        autogen           2                 4            2017-06-19T00:00:00Z  2017-06-26T00:00:00Z                        [{5 stable.example:8088} {4 offline.example:8088}]
 ```
 
-Although you could remove the offline data node first, it is better to bring the new node online first in case any new shards must be created.
-Follow the [Data Node Installation Guide](/enterprise_influxdb/v1.3/production_installation/data_node_installation/) to completion, and verify that the new node is listed in `influxd-ctl show`:
+We will replace the offline node with a new data node.
+Follow the [Data Node Installation Guide](/enterprise_influxdb/v1.3/production_installation/data_node_installation/) to start the new data node's `influxdb` service, but do not join the data node to the cluster.
+Then use `influxd-ctl update-data` to tell the meta service that we're replacing the offline node with the new node:
 
 ```
-$ influxd-ctl show
-Data Nodes
-==========
-ID	TCP Address		Version
-5	stable.example:8088	1.3.0-c1.3.0
-4	offline.example:8088
-6	new.example:8088		1.3.0-c1.3.0
-
-Meta Nodes
-==========
-TCP Address		Version
-meta-0.example:8091		1.3.0-c1.3.0
-meta-1.example:8091		1.3.0-c1.3.0
-meta-2.example:8091		1.3.0-c1.3.0
+$ influxd-ctl update-data offline.example:8088 new.example:8088
+updated data node 4 to new.example:8088
 ```
 
-If you check the output of `influxd-ctl show-shards` now, you will see that the new node doesn't own any of the shards that existed before
-(but if a new shard was created, the new node may be an owner).
-We need to instruct the meta service to remove the offline node.
-The data node is no longer present to communicate with the meta servers, so we must use `influxd-ctl remove-data -force`:
-
-```
-$ influxd-ctl remove-data -force offline.example:8088
-Removed data node at offline.example:8088
-```
-
-The next anti-entropy service check will see that some of the shards with replication factor of 2 only have one owner, and it will begin copying shards to the new node.
-This should happen fairly quickly, but depending on many shards need to be copied and how large they are, it may take a while.
+The output of `influxd-ctl show-shards` will immediately reflect the new address of the node:
 
 ```
 $ influxd-ctl show-shards
 Shards
 ==========
 ID  Database   Retention Policy  Desired Replicas  Shard Group  Start                 End                   Expires               Owners
-3   telegraf   autogen           2                 2            2017-06-19T00:00:00Z  2017-06-26T00:00:00Z                        [{5 stable.example:8088} {6 new.example:8088}]
+3   telegraf   autogen           2                 2            2017-06-19T00:00:00Z  2017-06-26T00:00:00Z                        [{5 stable.example:8088} {4 new.example:8088}]
 1   _internal  monitor           2                 1            2017-06-22T00:00:00Z  2017-06-23T00:00:00Z  2017-06-30T00:00:00Z  [{5 stable.example:8088}]
-2   _internal  monitor           2                 1            2017-06-22T00:00:00Z  2017-06-23T00:00:00Z  2017-06-30T00:00:00Z  [{6 new.example:8088}]
+2   _internal  monitor           2                 1            2017-06-22T00:00:00Z  2017-06-23T00:00:00Z  2017-06-30T00:00:00Z  [{4 new.example:8088}]
 4   _internal  monitor           2                 3            2017-06-23T00:00:00Z  2017-06-24T00:00:00Z  2017-07-01T00:00:00Z  [{5 stable.example:8088}]
-5   _internal  monitor           2                 3            2017-06-23T00:00:00Z  2017-06-24T00:00:00Z  2017-07-01T00:00:00Z  [{6 new.example:8088}]
-6   foo        autogen           2                 4            2017-06-19T00:00:00Z  2017-06-26T00:00:00Z                        [{5 stable.example:8088} {6 new.example:8088}]
+5   _internal  monitor           2                 3            2017-06-23T00:00:00Z  2017-06-24T00:00:00Z  2017-07-01T00:00:00Z  [{4 new.example:8088}]
+6   foo        autogen           2                 4            2017-06-19T00:00:00Z  2017-06-26T00:00:00Z                        [{5 stable.example:8088} {4 new.example:8088}]
 ```
 
-Once you see that the old data node ID doesn't own any more shards, the anti-entropy job is complete.
+Within the duration defined by `anti-entropy.check-interval`, the anti-entropy service will begin copying the shards from the other shard owners to the new node.
+The time it takes for the copying to complete is determined by the number of shards to be copied and how much data is stored in the shards.
 
 ### Scenario 2: Replacing a machine that is running a data node
 
 Perhaps you're replacing a machine that's being decommissioned, upgrading hardware, or something else entirely.
 The anti-entropy service will automatically copy shards to the new machines.
 
-The procedure is nearly identical to previous scenario.
+The steps to replace a live node are identical to replacing an offline node, demonstrated in the previous scenario.
 
-We'll start by bringing the new node online, following the instructions in the [Data Node Installation Guide](/enterprise_influxdb/v1.3/production_installation/data_node_installation/) to completion.
+We'll start by running the `influxdb` service on the new node without yet joining the cluster.
+Follow the instructions in the [Data Node Installation Guide](/enterprise_influxdb/v1.3/production_installation/data_node_installation/), but do not join the data node to the cluster.
 
-Then we will log on to a meta node and confirm that the new node is part of the cluster by checking the output of `influxd-ctl show`.
-Next, remove the node that we no longer want to be part of the cluster:
+Then we will log on to a meta node and change the address with `influxd-ctl update-data`.
 
 ```
-$ influxd-ctl remove-data retired-data.example:8088
-[I] 2017-06-22T21:33:19Z Error: dial tcp retired-data.example:8088: getsockopt: connection refused. Retrying after 20ms
-[I] 2017-06-22T21:33:19Z Error: dial tcp retired-data.example:8088: getsockopt: connection refused. Retrying after 400ms
-Removed data node at retired-data.example:8088
+$ influxd-ctl update-data retired-data.example:8088 new-data.example:8088
+updated data node 4 to new-data.example:8088
 ```
 
-It's common to see some intermittent network errors when removing a data node.
-However, if the command only prints errors and doesn't say that it removed the data node, use `influxd-ctl remove-data -force ADDRESS` to ensure that the node is removed from the cluster.
-
-Finally, the anti-entropy service will begin to copy shards to the new owner within the configured `anti-entropy.check-interval` duration.
+Once you have successfully run the `influxd-ctl update-data` command, you are free to shut down the retired node without causing any interruption to the cluster.
