@@ -224,7 +224,7 @@ Contact [sales@influxdb.com](mailto:sales@influxdb.com) if a licence file is req
 
 The license file should be saved on every server in the cluster, including Meta,
 Data, and Enterprise nodes. The file contains the JSON-formatted license, and must
-be readable by the influxd user. Each server in the cluster independently verifies
+be readable by the influxdb user. Each server in the cluster independently verifies
 its license. We recommended performing rolling restarts on the nodes after the
 license file update. Restart one Meta, Data, or Enterprise service at a time and
 wait for it to come back up successfully. The cluster should remain unaffected
