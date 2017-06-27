@@ -66,7 +66,7 @@ ID  Database   Retention Policy  Desired Replicas  Shard Group  Start           
 ```
 
 We will replace the offline node with a new data node.
-Follow the [Data Node Installation Guide](/enterprise_influxdb/v1.3/production_installation/data_node_installation/) to start the new data node's `influxdb` service, but do not join the data node to the cluster.
+Follow the [Data Node Installation Guide](/enterprise_influxdb/v1.3/production_installation/data_node_installation/) to start the new data node's `influxdb` service, but **do not join the data node to the cluster**.
 Then use `influxd-ctl update-data` to tell the meta service that we're replacing the offline node with the new node:
 
 ```
@@ -100,7 +100,7 @@ The anti-entropy service will automatically copy shards to the new machines.
 The steps to replace a live node are identical to replacing an offline node, demonstrated in the previous scenario.
 
 We'll start by running the `influxdb` service on the new node without yet joining the cluster.
-Follow the instructions in the [Data Node Installation Guide](/enterprise_influxdb/v1.3/production_installation/data_node_installation/), but do not join the data node to the cluster.
+Follow the instructions in the [Data Node Installation Guide](/enterprise_influxdb/v1.3/production_installation/data_node_installation/), but **do not join the data node to the cluster**.
 
 Then we will log on to a meta node and change the address with `influxd-ctl update-data`.
 
