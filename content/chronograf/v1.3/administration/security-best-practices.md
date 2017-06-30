@@ -35,8 +35,8 @@ Set a [JWT](https://tools.ietf.org/html/rfc7519) signature to a random string.
 This is needed for all OAuth2 providers that you choose to configure.
 *Keep this random string around!*
 
-You'll need it each time you start a chronograf server because it is used to verify user authorization.
-If you are running multiple chronograf servers in an HA configuration set the `TOKEN_SECRET` environment variable on each server to allow users to stay logged in.
+You'll need it each time you start a Chronograf server because it is used to verify user authorization.
+If you are running multiple Chronograf servers in an HA configuration set the `TOKEN_SECRET` environment variable on each server to allow users to stay logged in.
 If you want to log all users out every time the server restarts, change the value of `TOKEN_SECRET` to a different value on each restart.
 
 ```sh
@@ -187,7 +187,7 @@ However, it is limited to a single organization and does not accept a comma-sepa
 The generic OAuth2 provider is very similar to the Github provider, but,
 you are able to set your own authentication, token, and API URLs.
 The callback URL path will be `/oauth/generic/callback`.
-So, if your chronograf is hosted at `https://localhost:8888` then the full callback URL would be  `https://localhost:8888/oauth/generic/callback`.
+So, if your Chronograf is hosted at `https://localhost:8888` then the full callback URL would be  `https://localhost:8888/oauth/generic/callback`.
 
 The generic OAuth2 provider requires several settings:  
 
@@ -199,7 +199,7 @@ The generic OAuth2 provider requires several settings:
 
 #### Optional Scopes
 
-By default chronograf will ask for the `user:email` [scope](https://tools.ietf.org/html/rfc6749#section-3.3) of the client.
+By default Chronograf will ask for the `user:email` [scope](https://tools.ietf.org/html/rfc6749#section-3.3) of the client.
 If your provider scopes email access under a different scope or scopes provide them as comma-separated values in the `GENERIC_SCOPES` environment variable.
 ```sh
 export GENERIC_SCOPES="openid,email" # Requests access to openid and email scopes
@@ -280,7 +280,7 @@ docker run -v /host/path/to/certs:/certs -e TLS_CERTIFICATE=/certs/my.crt -e TLS
 In a production environment you should not use self-signed certificates.  However,
 for testing it is fast to create your own certs.
 
-To create a cert and key in one file with openssl:
+To create a cert and key in one file with OpenSSL:
 
 ```sh
 openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout testing.pem -out testing.pem -subj "/CN=localhost" -days 365
@@ -291,7 +291,7 @@ Next, set the environment variable `TLS_CERTIFICATE`:
 export TLS_CERTIFICATE=$PWD/testing.pem
 ```
 
-Run chronograf:
+Run Chronograf:
 
 ```sh
 ./chronograf
