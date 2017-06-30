@@ -14,6 +14,7 @@ menu:
         * [GitHub](#github)
         * [Google](#google)
         * [Heroku](#heroku)
+        * [Auth0](#auth0)
         * [Generic Provider](#generic-provider)
         * [Optional: Configure an Authentication Duration](#optional-configure-an-authentication-duration)
 * [TLS](#tls)
@@ -139,6 +140,46 @@ If we wanted to permit access from the `hill-valley-preservation-society` organi
 ```sh
 export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 ```
+
+### Auth0
+
+#### Creating an Auth0 Application
+
+To begin authenticating Chronograf users with Auth0, you will need to have an Auth0 account and [register an Auth0 client](https://auth0.com/docs/clients) within their dashboard.
+
+Auth0 clients should be configured as "Regular Web Applications" with the "Token Endpoint Authentication" set to "None".
+Clients must have the "Allowed Callback URLs" set to "https://www.example.com/oauth/auth0/callback" and the "Allowed Logout URLs" to "https://www.example.com", substituting "example.com" for the [`PUBLIC_URL`](/chronograf/v1.3/administration/configuration/#public-url) of your Chronograf instance.
+
+Finally, clients must be set to be ["OIDC Conformant"](https://auth0.com/docs/api-auth/intro#how-to-use-the-new-flows).
+
+Click save, and then take note of your Domain, Client ID, and Secret at the top of the page.
+These should be inserted into the following environment variables:
+
+* `AUTH0_DOMAIN`
+* `AUTH0_CLIENT_ID`
+* `AUTH0_CLIENT_SECRET`
+
+The equivalent command line switches are:
+
+* [`--auth0-domain`](/chronograf/v1.3/administration/configuration/#auth0-domain)
+* [`--auth0-client-id`](/chronograf/v1.3/administration/configuration/#auth0-client-id)
+* [`--auth0-client-secret`](/chronograf/v1.3/administration/configuration/#auth0-client-secret)
+
+#### Optional Auth0 Organizations
+
+Auth0 can be customized to operators' requirements, so it has no official concept of an "organization."
+Organizations are supported in Chronograf using a lightweight "app_metadata" key that can be inserted into Auth0 users' profiles automatically or manually.
+
+To assign a user to an organization, add an "organization" key to the user's "app_metadata" field with the value corresponding to the user's organization.
+For example, we can assign the user Marty McFly to the "time-travelers" organization by setting the "app_metadata" to `{"organization": "time-travelers"}`.
+This can be done either manually by an operator or automatically through the use of an [Auth0 Rule](https://auth0.com/docs/rules/metadata-in-rules#updating-app_metadata) or a [pre-user registration Auth0 Hook](https://auth0.com/docs/hooks/extensibility-points/pre-user-registration)
+
+Next, you will need to set Chronograf's [`AUTH0_ORGS`](/chronograf/v1.3/administration/configuration/#auth0-client-secret) environment variable to a comma-separated list of the allowed organizations.
+For example, if you have one group of users with an "organization" key set to "biffs-gang" and another group with an "organization" key set to "time-travelers" you can permit access to both with the environment variable: `AUTH0_ORGS=biffs-gang,time-travelers`.
+
+An `--auth0-organizations` command line switch is also available.
+However, it is limited to a single organization and does not accept a comma-separated list like its environment variable equivalent.
+
 ### Generic Provider
 
 #### Creating OAuth Application using your own provider
