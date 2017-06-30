@@ -223,7 +223,7 @@ the button text will be `Login with Hill Valley Preservation Society`.
 
 ### Optional: Configure an Authentication Duration
 
-By default, auth will remain valid for 30 days via a cookie stored in the browser.
+By default, authentication will remain valid for 30 days via a cookie stored in the browser.
 Configure that duration with the `AUTH_DURATION` environment variable.
 For example, to change it to 1 hour, use:
 ```sh
