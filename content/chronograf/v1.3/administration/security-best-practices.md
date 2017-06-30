@@ -135,7 +135,7 @@ The equivalent command line switches are:
 #### Optional Heroku Organizations
 
 Like the other OAuth2 providers, access to Chronograf via Heroku can be restricted to members of specific Heroku organizations. 
-his is controlled using the `HEROKU_ORGS` environment variable or the [`--heroku-organizations`](/chronograf/v1.3/administration/configuration/#heroku-organization) switch and is comma-separated.
+This is controlled using the `HEROKU_ORGS` environment variable or the [`--heroku-organizations`](/chronograf/v1.3/administration/configuration/#heroku-organization) switch and is comma-separated.
 If we wanted to permit access from the `hill-valley-preservation-society` organization and `the-pinheads` organization, we would use the following environment variable:
 ```sh
 export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
