@@ -5,8 +5,19 @@ menu:
     weight: 0
     parent: about_the_project
 ---
+## v1.3.1 [2017-07-20]
 
-## v1.3.0 [TK]
+### Release Notes
+Minor bug fixes were identified via Community and InfluxCloud. 
+
+### Bugfixes
+
+- Ensure temporary TSM files get cleaned up when compaction aborted.
+- InfluxDB goes unresponsive
+- Duplicate points generated via INSERT after DELETE
+
+
+## v1.3.0 [2017-06-21]
 
 ### Release Notes
 
