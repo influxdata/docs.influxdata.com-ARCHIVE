@@ -33,7 +33,127 @@ SectionPagesMenu = "products"
   identifier = "enterprise_influxdb"
   weight = 40
   url = "/enterprise_influxdb/"
-[[menu.products]]
+  
+# InfluxDB v1.3 Menu
+[[menu.influxdb_1_3]]
+  name = "Introduction"
+  identifier = "introduction"
+  weight = 0
+  url = "/influxdb/v1.3/introduction/"
+[[menu.influxdb_1_3]]
+  name = "Guides"
+  identifier = "guides"
+  weight = 10
+  url = "/influxdb/v1.3/guides/"
+[[menu.influxdb_1_3]]
+  name = "Concepts"
+  identifier = "concepts"
+  weight = 20
+  url = "/influxdb/v1.3/concepts/"
+[[menu.influxdb_1_3]]
+  name = "Troubleshooting"
+  identifier = "troubleshooting"
+  weight = 30
+  url = "/influxdb/v1.3/troubleshooting/"
+[[menu.influxdb_1_3]]
+  name = "Tools"
+  identifier = "tools"
+  weight = 40
+  url = "/influxdb/v1.3/tools/"
+[[menu.influxdb_1_3]]
+  name = "Write Protocol"
+  identifier = "write_protocols"
+  weight = 50
+  url = "/influxdb/v1.3/write_protocols/"
+[[menu.influxdb_1_3]]
+  name = "Query Language"
+  identifier = "query_language"
+  weight = 60
+  url = "/influxdb/v1.3/query_language/"
+[[menu.influxdb_1_3]]
+  name = "High Availability"
+  identifier = "high_availability"
+  weight = 70
+  url = "/influxdb/v1.3/high_availability/"
+[[menu.influxdb_1_3]]
+  name = "Administration"
+  identifier = "administration"
+  weight = 80
+  url = "/influxdb/v1.3/administration/"
+[[menu.influxdb_1_3]]
+  name = "About the Project"
+  identifier = "about_the_project"
+  weight = 100
+  url = "/influxdb/v1.3/about_the_project/"
+[[menu.influxdb_1_3]]
+  name = "External Resources"
+  identifier = "external_resources"
+  weight = 110
+  url = "/influxdb/v1.3/external_resources/"
+#InfluxDB v1.3 Sub-Menu - Introduction
+[[menu.influxdb_1_3]]
+  name = "Download"
+  identifier = "download"
+  weight = 0
+  url = "https://influxdata.com/downloads/#influxdb"
+  parent = "introduction"
+# InfluxDB v1.3 Sub-Menu - About
+[[menu.influxdb_1_3]]
+  name = "Contributing"
+  identifier = "contributing"
+  weight = 10
+  url = "https://github.com/influxdb/influxdb/blob/master/CONTRIBUTING.md"
+  parent = "about_the_project"
+[[menu.influxdb_1_3]]
+  name = "CLA"
+  identifier = "cla"
+  weight = 20
+  url = "https://influxdata.com/community/cla/"
+  parent = "about_the_project"
+[[menu.influxdb_1_3]]
+  name = "Licenses"
+  identifier = "licenses"
+  weight = 30
+  url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
+  parent = "about_the_project"
+# InfluxDB v1.3 Sub-Menu - External Resources
+[[menu.influxdb_1_3]]
+  name = "InfluxData Blog"
+  identifier = "infludatablog"
+  weight = 0
+  url = "https://www.influxdata.com/blog/"
+  parent = "external_resources"
+[[menu.influxdb_1_3]]
+  name = "Technical Papers"
+  identifier = "technicalpapers"
+  weight = 10
+  url = "https://www.influxdata.com/technical-papers/"
+  parent = "external_resources"
+[[menu.influxdb_1_3]]
+  name = "Meetup Videos"
+  identifier = "meetupvideos"
+  weight = 20
+  url = "https://www.influxdata.com/videos/"
+  parent = "external_resources"
+[[menu.influxdb_1_3]]
+  name = "Virtual Training Videos"
+  identifier = "virtualtrainingvideos"
+  weight = 30
+  url = "https://www.influxdata.com/videos-training/"
+  parent = "external_resources"
+[[menu.influxdb_1_3]]
+  name = "Virtual Training Schedule"
+  identifier = "virtualtrainingschedule"
+  weight = 40
+  url = "https://www.influxdata.com/virtual-training-courses/"
+  parent = "external_resources"
+[[menu.influxdb_1_3]]
+  name = "Events"
+  identifier = "events"
+  weight = 50
+  url = "https://www.influxdata.com/events/"
+  parent = "external_resources"
+
   name = "Enterprise Kapacitor"
   identifier = "enterprise_kapacitor"
   weight = 50

@@ -46,9 +46,9 @@ Here, we call it `Idle CPU Usage`:
 Next, choose the data that you want the alert rule to work with.
 Navigate through the `Databases`, `Measurements`, `Fields`, and `Tags` tabs to select the relevant data.
 
-In this example, we select the `telegraf` [database](/influxdb/v1.2/concepts/glossary/#database) and the `autogen` [retention policy](/influxdb/v1.2/concepts/glossary/#retention-policy-rp), the `cpu` [measurement](/influxdb/v1.2/concepts/glossary/#measurement), the `usage_idle` [field](/influxdb/v1.2/concepts/glossary/#field), and no [tags](/influxdb/v1.2/concepts/glossary/#tag).
-The result is the InfluxQL [query](/influxdb/v1.2/concepts/glossary/#query) in the image below.
-Notice that Chronograf automatically sets a time range in the [`WHERE` clause](/influxdb/v1.2/query_language/data_exploration/#the-where-clause).
+In this example, we select the `telegraf` [database](/influxdb/v1.3/concepts/glossary/#database) and the `autogen` [retention policy](/influxdb/v1.3/concepts/glossary/#retention-policy-rp), the `cpu` [measurement](/influxdb/v1.3/concepts/glossary/#measurement), the `usage_idle` [field](/influxdb/v1.3/concepts/glossary/#field), and no [tags](/influxdb/v1.3/concepts/glossary/#tag).
+The result is the InfluxQL [query](/influxdb/v1.3/concepts/glossary/#query) in the image below.
+Notice that Chronograf automatically sets a time range in the [`WHERE` clause](/influxdb/v1.3/query_language/data_exploration/#the-where-clause).
 Don't worry about that for now; we'll discuss that time range in step four.
  
 ![Select your data](/img/chronograf/v1.3/g-kap-ts.png)
@@ -95,7 +95,7 @@ Here, we choose to send alerts to Slack, specifically to the existing `#chronoca
 The alert message is the text that accompanies an alert.
 In this example, the alert message is `Your idle CPU usage is {{.Level}} at {{ index .Fields "value" }}. 😸`.
 `{{.Level}}` is a template that evaluates to `CRITICAL` when the `usage_idle` data initially dip below 80% and `OK` when the `usage_idle` data first return to 80% or above.
-The `{{ index .Fields "value" }}` template prints the relevant [field value](/influxdb/v1.2/concepts/glossary/#field-value) that triggered the alert.
+The `{{ index .Fields "value" }}` template prints the relevant [field value](/influxdb/v1.3/concepts/glossary/#field-value) that triggered the alert.
 
 ![Specify event handler and alert message](/img/chronograf/v1.3/g-kap-alertmessage.png)
 
@@ -135,7 +135,7 @@ In this example, it's the `#chronocats` channel.
 Assuming step one was successful, `#chronograf` should reveal at least two alert messages:
 
 * The first alert message indicates that your idle CPU usage was `CRITICAL`, that is, it dipped below `80%`.
-The specific [field value](/influxdb/v1.2/concepts/glossary/#field-value) that triggered the alert is `69.59999999998138`.
+The specific [field value](/influxdb/v1.3/concepts/glossary/#field-value) that triggered the alert is `69.59999999998138`.
 * The second alert message indicates that your idle CPU usage returned to an `OK` level, that is, it returned to `80%` or above.
 The specific field value that triggered the alert is `99.0981963931105`.
 
