@@ -16,12 +16,12 @@ There are two types of data to backup, the metastore and the metrics themselves.
 The [metastore](/influxdb/v1.2/concepts/glossary/#metastore) is backed up in its entirety.
 The metrics are backed up per-database in a separate operation from the metastore backup.
 
-> **Note:** Backups are not interchangeable between OSS InfluxDB and [InfluxEnterprise](/enterprise/v1.2/).
+> **Note:** Backups are not interchangeable between OSS InfluxDB and [InfluxEnterprise](/enterprise_influxdb/v1.2/).
 You cannot restore an OSS backup to an InfluxEnterprise data node, nor can you restore
 an InfluxEnterprise backup to an OSS instance.
 >
 If you are working with an InfluxEnterprise cluster, please see the [Backup
-and Restore Guide](/enterprise/v1.2/guides/backup-and-restore/) in the
+and Restore Guide](/enterprise_influxdb/v1.2/guides/backup-and-restore/) in the
 InfluxEnterprise documentation.
 
 ### Backing up the Metastore

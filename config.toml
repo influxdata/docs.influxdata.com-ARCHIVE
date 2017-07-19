@@ -29,15 +29,10 @@ SectionPagesMenu = "products"
   weight = 30
   url = "/kapacitor/"
 [[menu.products]]
-  name = "Enterprise"
-  identifier = "enterprise"
+  name = "Enterprise InfluxDB"
+  identifier = "enterprise_influxdb"
   weight = 40
-  url = "/enterprise/"
-[[menu.products]]
-  name = "Cloud"
-  identifier = "cloud"
-  weight = 40
-  url = "/cloud/"
+  url = "/enterprise_influxdb/"
   
 # InfluxDB v1.3 Menu
 [[menu.influxdb_1_3]]
@@ -158,6 +153,11 @@ SectionPagesMenu = "products"
   weight = 50
   url = "https://www.influxdata.com/events/"
   parent = "external_resources"
+
+  name = "Enterprise Kapacitor"
+  identifier = "enterprise_kapacitor"
+  weight = 50
+  url = "/enterprise_kapacitor/"
 
 # InfluxDB v1.2 Menu
 [[menu.influxdb_1_2]]

@@ -7,8 +7,8 @@ menu:
     parent: guides
 ---
 
-> **Note:** Clustering is now a commerial product called InfluxEnterprise.
-More information can be found [here](https://portal.influxdata.com/).
+> **Clustering is now a commercial product.
+Please visit [our website](https://www.influxdata.com/products/) for more information.**
 
 Starting with version 0.9.3, InfluxDB supports arbitrarily sized clusters that need not be fully replicated.
 Additionally new data nodes can be added to a cluster.

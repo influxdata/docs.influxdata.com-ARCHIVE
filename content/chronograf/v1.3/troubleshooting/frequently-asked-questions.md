@@ -86,7 +86,7 @@ See the [Telegraf Configuration](https://github.com/influxdata/telegraf/blob/mas
 
 ## How do I connect Chronograf to an InfluxEnterprise cluster?
 
-The connection details form requires additional information when connecting Chronograf to an [InfluxEnterprise cluster](https://docs.influxdata.com/enterprise/v1.2/).
+The connection details form requires additional information when connecting Chronograf to an [InfluxEnterprise cluster](https://docs.influxdata.com/enterprise_influxdb/v1.2/).
 
 When you enter InfluxDB's HTTP bind address in the `Connection String` input, Chronograf automatically checks if that InfluxDB instance is a data node.
 If it is a data node, Chronograf automatically adds the `Meta Service Connection URL` input to the connection details form.
@@ -100,7 +100,7 @@ For more details about monitoring an InfluxEnterprise cluster, see the [Monitor 
 
 ## What visualization types does Chronograf support?
 
-Chronograf's dashboards support five visualization types.
+Chronograf's dashboards support six visualization types.
 
 ### Line
 Show time-series in a line graph.
@@ -133,6 +133,11 @@ Show time-series in a line graph and overlay the time-series' single most recent
 
 ![Cluster connection details](/img/chronograf/v1.3/faq-viz-linesingle.png)
 
+### Bar
+Show time-series in a bar chart.
+Bar graphs are available in versions 1.3.3.0+.
+
+![Cluster connection details](/img/chronograf/v1.3/faq-viz-bar.png)
 
 ## What does the status column indicate on the Host List page?
 
