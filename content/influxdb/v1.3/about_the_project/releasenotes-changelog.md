@@ -13,8 +13,9 @@ Minor bug fixes were identified via Community and InfluxCloud.
 ### Bugfixes
 
 - Ensure temporary TSM files get cleaned up when compaction aborted.
-- InfluxDB goes unresponsive
-- Duplicate points generated via INSERT after DELETE
+- Address deadlock issue causing 1.3.0 to become unresponsive.
+- Duplicate points generated via INSERT after DELETE.
+- Fix the CQ start and end times to use Unix timestamps.
 
 
 ## v1.3.0 [2017-06-21]
