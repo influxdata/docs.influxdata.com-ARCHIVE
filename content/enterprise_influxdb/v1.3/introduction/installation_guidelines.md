@@ -3,7 +3,7 @@ title: Installation Guidelines (⏰ Please Read!)
 aliases:
   - /enterprise_influxdb/v1.3/introduction/meta_node_installation/
   - /enterprise_influxdb/v1.3/introduction/data_node_installation/
-  - /enterprise_influxdb/v1.3/introduction/web_console_installation/
+  - /chronograf/latest/introduction/installation
   - /enterprise/v1.3/introduction/installation_guidelines/
 menu:
   enterprise_influxdb_1_3:
@@ -71,13 +71,12 @@ any customers running on SSDs.
 
 #### Use three and only three Meta nodes
 
-Although technically the cluster can function with any number of meta nodes, there are
-very few if any reasons to run with anything other than three meta nodes. One or two
-meta nodes offer very little redundancy.
-The loss of one meta node will render a single meta node cluster non-functional,
-and will prevent a two meta node cluster from functioning more than a few hours, at best.
+Although technically the cluster can function with any number of meta nodes, the best pratice is to ALWAYS 
+have an odd number of meta nodes.  This allows the meta nodes to reach consensus.  An even number of meta nodes cannot achieve consensus because there can be no "deciding vote" cast between the nodes if they disagree. 
 
-In contrast, a three meta node cluster can tolerate the permanent loss of a single
+Therefore, the minumum number of meta nodes for a high availability (HA) installation is three (3). So, the typical HA installation for InfluxEnterprise is to deploy three meta nodes.
+
+Aside from three being a magic number, a three meta node cluster can tolerate the permanent loss of a single
 meta node with no degradation in any function or performance.
 A replacement meta node can be added to restore the cluster to full redundancy.
 A three meta node cluster that loses two meta nodes will still be able to handle
@@ -101,10 +100,7 @@ or for there to be a meta process per data node.
 Three meta nodes is enough for an arbitrary number of data nodes, and for best
 redundancy, all nodes should run on independent servers.
 
-#### Install the Web Console last
+#### Install Chronograf last
 
-The Enterprise Web Console should not be installed or configured until the
+Chronograf should not be installed or configured until the
 InfluxEnterprise cluster is fully functional.
-Attempting to connect the Web Console before the cluster is installed
-and fully functional, successfully processing writes and queries, will
-lead to user permission and data retrieval issues.
