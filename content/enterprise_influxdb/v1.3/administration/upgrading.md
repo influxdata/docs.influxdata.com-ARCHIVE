@@ -18,7 +18,7 @@ Version 1.3.1 introduces changes to the data node configuration file.
 Please update that configuration file to avoid any unnecessary downtime.
 The steps below outline the upgrade process and include a list of the required configuration changes.
 
-### Step 1: Download the 1.3.0 packages
+### Step 1: Download the 1.3.1 packages
 
 #### Meta node package download
 **Ubuntu & Debian (64-bit)**
