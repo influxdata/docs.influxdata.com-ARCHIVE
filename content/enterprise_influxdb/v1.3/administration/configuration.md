@@ -311,17 +311,6 @@ The default RP (`autogen`) has an infinite duration, a shard group duration of s
 The system targets the `autogen` RP when a write or query does not specify an RP.
 Set this option to `false` to prevent the system from creating the `autogen` RP when the system creates a database.
 
-<dt>
-In versions 1.2.0 and 1.2.1, the `retention-autocreate` setting appears in both the meta node and data node configuration files.
-To disable retention policy auto-creation, users on version 1.2.0 and 1.2.1 must set `retention-autocreate` to `false` in both the meta node and data node configuration files.
-
-In version 1.2.2, we've removed the `retention-autocreate` setting from the data node configuration file.
-As of version 1.2.2, users may remove `retention-autocreate` from the data node configuration file.
-To disable retention policy auto-creation, set `retention-autocreate` to `false` in the meta node configuration file only.
-
-This change only affects users who have disabled the `retention-autocreate` option and have installed version 1.2.0 or 1.2.1.
-</dt>
-
 Environment variable: `INFLUXDB_META_RETENTION_AUTOCREATE`
 
 ###  election-timeout = "1s"
@@ -533,15 +522,6 @@ Automatically creates a default [retention policy](/influxdb/v1.3/concepts/gloss
 The default RP (`autogen`) has an infinite duration, a shard group duration of seven days, and a replication factor set to the number of data nodes in the cluster.
 The system targets the `autogen` RP when a write or query does not specify an RP.
 Set this option to `false` to prevent the system from creating the `autogen` RP when the system creates a database.
-
-<dt>
-In versions 1.2.0 and 1.2.1, the `retention-autocreate` setting appears in both the meta node and data node configuration files.
-To disable retention policy auto-creation, users on version 1.2.0 and 1.2.1 must set `retention-autocreate` to `false` in both the meta node and data node configuration files.
-
-In version 1.2.2, we've removed the `retention-autocreate` setting from the data node configuration file.
-As of version 1.2.2, users may remove `retention-autocreate` from the data node configuration file.
-To disable retention policy auto-creation, set `retention-autocreate` to `false` in the meta node configuration file only.
-</dt>
 
 Environment variable: `INFLUXDB_META_RETENTION_AUTOCREATE`
 
@@ -900,12 +880,6 @@ Environment variable: `INFLUXDB_HTTP_HTTPS_PRIVATE_KEY`
 This limits the number of rows that can be returned in a non-chunked query.
 The default setting (`0`) allows for an unlimited number of rows.
 InfluxDB includes a `"partial":true` tag in the response body if query results exceed the `max-row-limit` setting.
-
-<dt>
-In InfluxEnterprise Cluster versions 1.2.0 through 1.2.2, the `max-row-limit` option is set to `10,000` by default.
-That default setting can lead to unexpected behavior in [Grafana](https://grafana.com/) panels; if a panel’s query returns more than 10,000 points, the panel appears to show [truncated/partial data](https://github.com/influxdata/influxdb/issues/8050).
-In version 1.2.5, the configuration file sets `max-row-limit` to `0` by default; that setting allows an unlimited number of returned rows.
-</dt>
 
 Environment variable: `INFLUXDB_HTTP_MAX_ROW_LIMIT`
 
