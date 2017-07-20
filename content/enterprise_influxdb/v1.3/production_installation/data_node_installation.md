@@ -187,6 +187,11 @@ Once all data nodes have been installed, configured, and launched, move on to th
 
 ## Join the Data Nodes to the Cluster
 
+<dt>You should join your data nodes to the cluster only when you are adding a brand new node,
+either during the initial creation of your cluster or when growing the number of data nodes.
+If you are replacing an existing data node with `influxd-ctl update-data`, skip the rest of this guide.
+</dt>
+
 On one and only one of the meta nodes that you set up in the
 [previous document](/enterprise_influxdb/v1.3/introduction/meta_node_installation/), run:
 ```
