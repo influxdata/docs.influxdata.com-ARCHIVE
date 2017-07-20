@@ -921,7 +921,7 @@ A recording has these read only properties.
 | size     | Size of the recording on disk in bytes.                                      |
 | date     | Date the recording finished.                                                 |
 | error    | Any error encountered when creating the recording.                           |
-| status   | One of `recording` or `finished`.                                            |
+| status   | One of `running`, `failed` or `finished`.                                    |
 | progress | Number between 0 and 1 indicating the approximate progress of the recording. |
 
 
@@ -1232,7 +1232,7 @@ A replay has these read only properties in addition to the properties listed [ab
 
 | Property | Description                                                               |
 | -------- | -----------                                                               |
-| status   | One of `replaying` or `finished`.                                           |
+| status   | One of `running`, `failed` or `finished`.                                 |
 | progress | Number between 0 and 1 indicating the approximate progress of the replay. |
 | error    | Any error that occured while perfoming the replay                         |
 
