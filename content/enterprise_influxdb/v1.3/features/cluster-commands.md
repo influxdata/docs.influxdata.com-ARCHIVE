@@ -317,7 +317,7 @@ Example 1: Show all in-progress copy-shard operations
 $ influxd-ctl copy-shard-status
 
 Source                     Dest                       Database  Policy   ShardID  TotalSize  CurrentSize  StartedAt
-cluster-data-node-02:8088  cluster-data-node-03:8088  telegraf  autogen  34       119624324  119624324    {63624516464 596207779 12108032}
+cluster-data-node-02:8088  cluster-data-node-03:8088  telegraf  autogen  34       119624324  119624324    2017-06-22 23:45:09.470696179 +0000 UTC
 ```
 
 The command returns one in-progress copy-shard operation.
