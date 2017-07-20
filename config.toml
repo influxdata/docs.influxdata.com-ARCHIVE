@@ -33,7 +33,12 @@ SectionPagesMenu = "products"
   identifier = "enterprise_influxdb"
   weight = 40
   url = "/enterprise_influxdb/"
-  
+[[menu.products]]
+  name = "Enterprise Kapacitor"
+  identifier = "enterprise_kapacitor"
+  weight = 50
+  url = "/enterprise_kapacitor/"
+
 # InfluxDB v1.3 Menu
 [[menu.influxdb_1_3]]
   name = "Introduction"
@@ -153,11 +158,6 @@ SectionPagesMenu = "products"
   weight = 50
   url = "https://www.influxdata.com/events/"
   parent = "external_resources"
-
-  name = "Enterprise Kapacitor"
-  identifier = "enterprise_kapacitor"
-  weight = 50
-  url = "/enterprise_kapacitor/"
 
 # InfluxDB v1.2 Menu
 [[menu.influxdb_1_2]]
@@ -449,7 +449,7 @@ SectionPagesMenu = "products"
   weight = 0
   url = "https://influxdata.com/downloads/#kapacitor"
   parent = "introduction"
-  
+
 # Chronograf v1.3 Sub-Menu - Introduction
   [[menu.chronograf_1_3]]
   name = "Download"
@@ -473,7 +473,7 @@ SectionPagesMenu = "products"
   weight = 0
   url = "https://influxdata.com/downloads/#chronograf"
   parent = "Introduction"
-  
+
   # Telegraf v1.3 Sub-Menu - Output Plugins
   [[menu.telegraf_1_3]]
   name = "Amon"
@@ -1022,7 +1022,7 @@ SectionPagesMenu = "products"
   identifier = "twemproxy"
   weight = 780
   url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/twemproxy"
-  parent = "inputs" 
+  parent = "inputs"
   [[menu.telegraf_1_3]]
   name = "Varnish"
   identifier = "varnish"
@@ -1120,7 +1120,7 @@ SectionPagesMenu = "products"
   identifier = "webhooks"
   weight = 110
   url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/webhooks"
-  parent = "services"   
+  parent = "services"
 
 
 # Telegraf v1.2 Sub-Menu - Output Plugins
@@ -1238,7 +1238,7 @@ SectionPagesMenu = "products"
  weight = 160
  url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/riemann"
  parent = "outputs"
- 
+
 # Telegraf v1.2 Sub-Menu - Introduction and Input plugins
   [[menu.telegraf_1_2]]
   name = "Download"
