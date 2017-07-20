@@ -13,11 +13,9 @@ menu:
 * [Using configuration files](#using-configuration-files)
 * [Meta node configuration sections](#meta-node-configuration)
     * [Global options](#global-options)
-    * [[enterprise]](#enterprise)
     * [[meta]](#meta)
 * [Data node configuration sections](#data-node-configuration)
     * [Global options](#global-options-1)
-    * [[enterprise]](#enterprise-1)
     * [[meta]](#meta-1)
     * [[data]](#data)
     * [[cluster]](#cluster)
@@ -33,11 +31,7 @@ menu:
     * [[udp]](#udp)
     * [[continuous-queries]](#continuous-queries)
     * [[hinted-handoff]](#hinted-handoff)
-* [Web console configuration sections](#web-console-configuration)
-    * [Global options](#global-options-2)
-    * [[influxdb]](#influxdb)
-    * [[smtp]](#smtp)
-    * [[database]](#database)
+    * [[anti-entropy]](#anti-entropy)
 
 <br>
 # Using Configuration Files
@@ -186,46 +180,6 @@ The hostname of the [meta node](/enterprise_influxdb/v1.3/concepts/glossary/#met
 This must be resolvable and reachable by all other members of the cluster.
 
 Environment variable: `INFLUXDB_HOSTNAME`
-
-## [enterprise]
-
-The `[enterprise]` section contains the parameters for the meta node's
-registration with the InfluxEnterprise Web Console and the
-[InfluxEnterprise License Portal](https://portal.influxdata.com/).
-
-###  registration-enabled = true
-
-Set to `true` to enable registration with the InfluxEnterprise web console.
-All meta nodes must have `registration-enabled` set to `true` for the
-InfluxEnterprise Web Console to function properly.
-
-Environment variable: `INFLUXDB_ENTERPRISE_REGISTRATION_ENABLED`
-
-###  registration-server-url = "http://IP_or_hostname:3000"
-
-The full URL of the server that runs the InfluxEnterprise web console.
-All meta nodes must have `registration-server-url` set to the full protocol,
-hostname, and port for the InfluxEnterprise Web Console to function properly.
-
-Environment variable: `INFLUXDB_ENTERPRISE_REGISTRATION_SERVER_URL`
-
-###  license-key = ""
-
-The license key that you created on [InfluxPortal](https://portal.influxdata.com).
-The meta node transmits the license key to [portal.influxdata.com](https://portal.influxdata.com) over port 80 or port 443 and receives a temporary JSON license file in return.
-The server caches the license file locally.
-You must use the [`license-path` setting](#license-path) if your server cannot communicate with [https://portal.influxdata.com](https://portal.influxdata.com).
-
-Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_KEY`
-
-###  license-path = ""
-
-The local path to the permanent JSON license file that you received from InfluxData.
-Permanent license files are not available for subscribers on a monthly plan.
-If you are a monthly subscriber, your cluster must use the `license-key` setting.
-Contact [sales@influxdb.com](mailto:sales@influxdb.com) to become an annual subscriber.
-
-Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_PATH`
 
 ## [meta]
 
@@ -439,45 +393,6 @@ How often to update the cluster with this node's internal status.
 
 Environment variable: `INFLUXDB_GOSSIP_FREQUENCY`
 
-## [enterprise]
-
-Controls the parameters for the data node's registration with the web console
-and [https://portal.influxdata.com](https://portal.influxdata.com).
-
-### registration-enabled = false
-
-This setting is not intended for use in the data node configuration file.
-It will be removed in future versions.
-
-Environment variable: `INFLUXDB_ENTERPRISE_REGISTRATION_ENABLED`
-
-### registration-server-url = "http://IP_or_hostname:3000"
-
-This setting is not intended for use in the data node configuration file.
-It will be removed in future versions.
-
-Environment variable: `INFLUXDB_ENTERPRISE_REGISTRATION_SERVER_URL`
-
-### license-key = ""
-
-The license key that you created on [InfluxPortal](https://portal.influxdata.com).
-The data node transmits the license key to [portal.influxdata.com](https://portal.influxdata.com) over port 80 or port 443 and receives a temporary JSON license file in return.
-The server caches the license file locally.
-The data process will only function for a limited time without a valid license file.
-You must use the [`license-path` setting](#license-path-1) if your server cannot communicate with [https://portal.influxdata.com](https://portal.influxdata.com).
-
-Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_KEY`
-
-### license-path = ""
-
-The local path to the permanent JSON license file that you received from InfluxData.
-The data process will only function for a limited time without a valid license file.
-Permanent license files are not available for subscribers on a monthly plan.
-If you are a monthly subscriber, your cluster must use the `license-key` setting.
-Contact [sales@influxdb.com](mailto:sales@influxdb.com) to become an annual subscriber.
-
-Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_PATH`
-
 ## [meta]
 
 See the [OSS documentation](/influxdb/v1.3/administration/config/#meta).
@@ -547,15 +462,23 @@ See the [OSS documentation](/influxdb/v1.3/administration/config/#wal-dir-var-li
 
 Environment variable: `INFLUXDB_DATA_WAL_DIR`
 
+### wal-fsync-delay = "0s"
+
+The amount of time that a write waits before fsyncing. Use a duration greater than 0 to batch 
+up multiple fsync calls. This is useful for slower disks or when experiencing WAL write contention. 
+A value of 0s fsyncs every write to the WAL. We recommend values in the range of 0ms-100ms for non-SSD disks.
+
+Environment variable: `INFLUXDB_DATA_WAL_FSYNC_DELAY`
+
 ###  query-log-enabled = true
 
 See the [OSS documentation](/influxdb/v1.3/administration/config/#query-log-enabled-true).
 
 Environment variable: `INFLUXDB_DATA_QUERY_LOG_ENABLED`
 
-###  cache-max-memory-size = 524288000
+###  cache-max-memory-size = 1073741824
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#cache-max-memory-size-524288000).
+See the [OSS documentation](/influxdb/v1.3/administration/config/#cache-max-memory-size-1073741824).
 
 Environment variable: `INFLUXDB_DATA_CACHE_MAX_MEMORY_SIZE`
 
@@ -565,15 +488,15 @@ See the [OSS documentation](/influxdb/v1.3/administration/config/#cache-snapshot
 
 Environment variable: `INFLUXDB_DATA_CACHE_SNAPSHOT_MEMORY_SIZE`
 
-###  cache-snapshot-write-cold-duration = "1h0m0s"
+###  cache-snapshot-write-cold-duration = "10m0s"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#cache-snapshot-write-cold-duration-1h0m0s).
+See the [OSS documentation](/influxdb/v1.3/administration/config/#cache-snapshot-write-cold-duration-10m).
 
 Environment variable: `INFLUXDB_DATA_CACHE_SNAPSHOT_WRITE_COLD_DURATION`
 
-###  compact-full-write-cold-duration = "24h0m0s"
+###  compact-full-write-cold-duration = "4h0m0s"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#compact-full-write-cold-duration-24h0m0s).
+See the [OSS documentation](/influxdb/v1.3/administration/config/#compact-full-write-cold-duration-4h).
 
 Environment variable: `INFLUXDB_DATA_COMPACT_FULL_WRITE_COLD_DURATION`
 
@@ -583,11 +506,23 @@ See the [OSS documentation](/influxdb/v1.3/administration/config/#max-series-per
 
 Environment variable: `INFLUXDB_DATA_MAX_SERIES_PER_DATABASE`
 
-### max-values-per-tag = 100000
+###  max-values-per-tag = 100000
 
 See the [OSS documentation](/influxdb/v1.3/administration/config/#max-values-per-tag-100000).
 
 Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
+
+### index-version = inmem 
+
+The type of shard index to use for new shards. The default is an in-memory index that is recreated at startup. A value of tsi1 will use a disk based index that supports higher cardinality datasets.
+
+Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
+
+### max-concurrent-compactions = 0
+
+Sets the maximum number of compactions that can run concurrently. A value of 0 is unlimited.
+
+Environment variable: `INFLUXDB_DATA_MAX_CONCURRENT_COMPACTIONS`
 
 ###  trace-logging-enabled = false
 
@@ -608,36 +543,12 @@ This setting applies to queries only.
 
 Environment variable: `INFLUXDB_CLUSTER_DIAL_TIMEOUT`
 
-###  shard-writer-timeout = "5s"
-
-> In version 1.2.2+, `shard-writer-timeout` is no longer a configuration option.
-InfluxDB automatically sets `shard-writer-timeout` using the value defined by the [`write-timeout` setting](#write-timeout-10s).
-It is safe to remove this configuration for InfluxEnterprise versions 1.2.2+.
-
-The time in which a remote write to a single data node must complete after which
-the system returns a timeout error.
-
-For clusters with contention, increasing `shard-writer-timeout` may reduce
-points sent via the
-[hinted handoff](/enterprise_influxdb/v1.3/concepts/clustering/#hinted-handoff), but
-increasing this setting also raises the time it takes for a receiving node to
-respond to a write client.
-
-Environment variable: `INFLUXDB_CLUSTER_SHARD_WRITER_TIMEOUT`
-
 ###  shard-reader-timeout = "0"
 
 The time in which a query connection must return its response after which the
 system returns an error.
 
 Environment variable: `INFLUXDB_CLUSTER_SHARD_READER_TIMEOUT`
-
-###  max-remote-write-connections = 50
-
-The maximum number of concurrent write connections to other data nodes.
-This can be raised to allow for greater intra-cluster write throughput, provided there are sufficient resources for the additional network connections.
-
-Environment variable: `INFLUXDB_CLUSTER_MAX_REMOTE_WRITE_CONNECTIONS`
 
 ###  cluster-tracing = false
 
@@ -688,6 +599,18 @@ See the [OSS documentation](/influxdb/v1.3/administration/config/#max-select-buc
 
 Environment variable: `INFLUXDB_CLUSTER_MAX_SELECT_BUCKETS`
 
+### pool-max-idle-time = "60s" 
+
+The time a stream remains idle in the connection pool after which it's reaped.
+
+Environment variable: `INFLUXDB_CLUSTER_POOL_MAX_IDLE_TIME`
+
+### pool-max-idle-streams = 100
+
+The maximum number of streams that can be idle in a pool, per node. The number of active streams can exceed the maximum, but they will not return to the pool when released.
+
+Environment variable: `INFLUXDB_CLUSTER_POOL_MAX_IDLE_STREAMS`
+
 ## [retention]
 
 See the [OSS documentation](/influxdb/v1.3/administration/config/#retention).
@@ -728,31 +651,12 @@ Environment variable: `INFLUXDB_SHARD_PRECREATION_ADVANCE_PERIOD`
 
 ## [admin]
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#admin).
-
-###  enabled = true
-
-See the [OSS documentation](/influxdb/v1.3/administration/config/#enabled-true-2).
-
-Environment variable: `INFLUXDB_ADMIN_ENABLED`
-
-###  bind-address = ":8083"
-
-See the [OSS documentation](/influxdb/v1.3/administration/config/#bind-address-8083).
-
-Environment variable: `INFLUXDB_ADMIN_BIND_ADDRESS`
-
-###  https-enabled = false
-
-See the [OSS documentation](/influxdb/v1.3/administration/config/#https-enabled-false).
-
-Environment variable: `INFLUXDB_ADMIN_HTTPS_ENABLED`
-
-###  https-certificate = "/etc/ssl/influxdb.pem"  
-
-See the [OSS documentation](/influxdb/v1.3/administration/config/#https-certificate-etc-ssl-influxdb-pem).
-
-Environment variable: `INFLUXDB_ADMIN_HTTPS_ENABLED`
+In version 1.3, the web admin interface is no longer available in InfluxDB.
+The interface does not run on port 8083 and InfluxDB ignores the [admin] section in the configuration file
+if that section is present.
+[Chronograf](/chronograf/latest) replaces the web admin interface with improved tooling for querying data, 
+writing data, and database management.
+See [Chronograf's transition guide](/chronograf/latest/guides/transition-web-admin-interface/) for more information.
 
 ## [monitor]
 
@@ -955,6 +859,12 @@ Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_RUN_INTERVAL`
 
 Controls the hinted handoff feature, which allows data nodes to temporarily cache writes destined for another data node when that data node is unreachable.
 
+### batch-size = 512000
+
+The maximum number of bytes to write to a shard in a single request.
+
+Environment variable: `INFLUXDB_HINTED_HANDOFF_BATCH_SIZE`
+
 ###  dir = "/var/lib/influxdb/hh"
 
 The hinted handoff directory where the durable queue will be stored on disk.
@@ -1024,107 +934,26 @@ Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_MAX_INTERVAL`
 The interval at which InfluxDB checks to purge data that are above `max-age`.
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_PURGE_INTERVAL`
+
+## [anti-entropy]
+
+### enabled = true
+
+Set to true to enable the anti-entropy service.
+
+Environment variable: `INFLUXDB_ANTI_ENTROPY_ENABLED`
+
+### check-interval = "30s"
+
+The interval of time when anti-entropy checks run on each data node.
+
+Environment variable: `INFLUXDB_ANTI_ENTROPY_CHECK_INTERVAL`
+
+### max-fetch = 10
+
+The maximum number of shards that a single data node will copy or repair in parallel.
+
+Environment variable: `INFLUXDB_ANTI_ENTROPY_MAX_FETCH`
+
 <br>
-<br>
-# Web Console Configuration
 
-## Global options
-
-### url = "http://IP_or_hostname:3000"
-
-The "pretty" URL that users will see for this app.
-
-Environment variable: `URL`
-
-### hostname = "localhost"
-
-The hostname that you want to bind the application to.
-
-Environment variable: `HOSTNAME`
-
-### port = "3000"
-
-The port that you want to bind the application to.
-
-Environment variable: `PORT`
-
-### license-key = ""
-
-The license key that you created on [InfluxPortal](https://portal.influxdata.com).
-The influx-enterprise node transmits the license key to [portal.influxdata.com](https://portal.influxdata.com) over port 80 or port 443 and receives a temporary JSON license file in return.
-The server caches the license file locally.
-You must use the [`license-file` setting](#license-file) if your server cannot communicate with [https://portal.influxdata.com](https://portal.influxdata.com).
-
-Environment variable: `LICENSE_KEY`
-
-### license-file = ""
-
-The local path to the permanent JSON license file that you received from InfluxData.
-Permanent license files are not available for subscribers on a monthly plan.
-If you are a monthly subscriber, your cluster must use the `license-key` setting.
-Contact [sales@influxdb.com](mailto:sales@influxdb.com) to become an annual subscriber.
-
-Environment variable: `LICENSE_FILE`
-
-### session-lifetime  = "24h"
-
-The time after which users are automatically logged out of the web console.
-
-### autologout = false
-
-Set to `true` to force a logout when the browser session ends.
-
-## [influxdb]
-### shared-secret = "long pass phrase used for signing tokens"
-
-Allows the web console to authenticate users with the cluster.
-This setting is required and must match the
-[`shared-secret` setting](/enterprise_influxdb/v1.3/administration/configuration/#shared-secret)
-in the data node configuration files.
-
-Environment variable: `SHARED_SECRET`
-
-## [smtp]
-
-Controls how the web console sends emails to invite users to the application.
-Note that the web console requires a functioning SMTP server to email invites to
-new web console users.
-
-### host = "localhost"
-
-Environment variable: `SMTP_HOST`
-
-### port = "25"
-
-Environment variable: `SMTP_PORT`
-
-### username = ""
-
-Environment variable: `SMTP_USERNAME`
-
-### password = ""
-
-Environment variable: `SMTP_PASSWORD`
-
-### from_email = "donotreply@example.com"
-
-Environment variable: `SMTP_FROM_EMAIL`
-
-## [database]
-
-Controls the location of the web console's database.
-The web console currently only supports Postgres >= 9.3 or SQLite3.
-
-### url = "postgres://postgres:password@localhost:5432/enterprise"
-
-The location of the PostgreSQL database for the web console.
-By default, the web console uses SQLite for installations.
-See
-[Step 3 - Web Console Installation](/enterprise_influxdb/v1.3/introduction/web_console_installation/#install-the-influxenterprise-web-console-with-postgresql) for instructions on using PostgreSQL.
-
-Environment variable: `DATABASE_URL`
-
-### url = "sqlite3:///var/lib/influx-enterprise/enterprise.db"
-
-The location of the SQLite database for the web console.
-By default, the web console uses SQLite for installations.
