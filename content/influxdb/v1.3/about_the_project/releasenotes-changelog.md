@@ -13,6 +13,7 @@ Minor bug fixes were identified via Community and InfluxCloud.
 ### Bugfixes
 
 - Ensure temporary TSM files get cleaned up when compaction aborted.
+- Ensure temporary TSM files get cleaned up when compaction aborted.
 - InfluxDB goes unresponsive
 - Duplicate points generated via INSERT after DELETE
 
