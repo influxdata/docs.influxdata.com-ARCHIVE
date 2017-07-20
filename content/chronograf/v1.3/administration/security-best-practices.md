@@ -14,6 +14,7 @@ menu:
         * [GitHub](#github)
         * [Google](#google)
         * [Heroku](#heroku)
+        * [Auth0](#auth0)
         * [Generic Provider](#generic-provider)
         * [Optional: Configure an Authentication Duration](#optional-configure-an-authentication-duration)
 * [TLS](#tls)
@@ -34,8 +35,8 @@ Set a [JWT](https://tools.ietf.org/html/rfc7519) signature to a random string.
 This is needed for all OAuth2 providers that you choose to configure.
 *Keep this random string around!*
 
-You'll need it each time you start a chronograf server because it is used to verify user authorization.
-If you are running multiple chronograf servers in an HA configuration set the `TOKEN_SECRET` environment variable on each server to allow users to stay logged in.
+You'll need it each time you start a Chronograf server because it is used to verify user authorization.
+If you are running multiple Chronograf servers in an HA configuration set the `TOKEN_SECRET` environment variable on each server to allow users to stay logged in.
 If you want to log all users out every time the server restarts, change the value of `TOKEN_SECRET` to a different value on each restart.
 
 ```sh
@@ -134,11 +135,51 @@ The equivalent command line switches are:
 #### Optional Heroku Organizations
 
 Like the other OAuth2 providers, access to Chronograf via Heroku can be restricted to members of specific Heroku organizations. 
-his is controlled using the `HEROKU_ORGS` environment variable or the [`--heroku-organizations`](/chronograf/v1.3/administration/configuration/#heroku-organization) switch and is comma-separated.
+This is controlled using the `HEROKU_ORGS` environment variable or the [`--heroku-organizations`](/chronograf/v1.3/administration/configuration/#heroku-organization) switch and is comma-separated.
 If we wanted to permit access from the `hill-valley-preservation-society` organization and `the-pinheads` organization, we would use the following environment variable:
 ```sh
 export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 ```
+
+### Auth0
+
+#### Creating an Auth0 Application
+
+To begin authenticating Chronograf users with Auth0, you will need to have an Auth0 account and [register an Auth0 client](https://auth0.com/docs/clients) within their dashboard.
+
+Auth0 clients should be configured as "Regular Web Applications" with the "Token Endpoint Authentication" set to "None".
+Clients must have the "Allowed Callback URLs" set to "https://www.example.com/oauth/auth0/callback" and the "Allowed Logout URLs" to "https://www.example.com", substituting "example.com" for the [`PUBLIC_URL`](/chronograf/v1.3/administration/configuration/#public-url) of your Chronograf instance.
+
+Finally, clients must be set to be ["OIDC Conformant"](https://auth0.com/docs/api-auth/intro#how-to-use-the-new-flows).
+
+Click save, and then take note of your Domain, Client ID, and Secret at the top of the page.
+These should be inserted into the following environment variables:
+
+* `AUTH0_DOMAIN`
+* `AUTH0_CLIENT_ID`
+* `AUTH0_CLIENT_SECRET`
+
+The equivalent command line switches are:
+
+* [`--auth0-domain`](/chronograf/v1.3/administration/configuration/#auth0-domain)
+* [`--auth0-client-id`](/chronograf/v1.3/administration/configuration/#auth0-client-id)
+* [`--auth0-client-secret`](/chronograf/v1.3/administration/configuration/#auth0-client-secret)
+
+#### Optional Auth0 Organizations
+
+Auth0 can be customized to operators' requirements, so it has no official concept of an "organization."
+Organizations are supported in Chronograf using a lightweight "app_metadata" key that can be inserted into Auth0 users' profiles automatically or manually.
+
+To assign a user to an organization, add an "organization" key to the user's "app_metadata" field with the value corresponding to the user's organization.
+For example, we can assign the user Marty McFly to the "time-travelers" organization by setting the "app_metadata" to `{"organization": "time-travelers"}`.
+This can be done either manually by an operator or automatically through the use of an [Auth0 Rule](https://auth0.com/docs/rules/metadata-in-rules#updating-app_metadata) or a [pre-user registration Auth0 Hook](https://auth0.com/docs/hooks/extensibility-points/pre-user-registration)
+
+Next, you will need to set Chronograf's [`AUTH0_ORGS`](/chronograf/v1.3/administration/configuration/#auth0-client-secret) environment variable to a comma-separated list of the allowed organizations.
+For example, if you have one group of users with an "organization" key set to "biffs-gang" and another group with an "organization" key set to "time-travelers" you can permit access to both with the environment variable: `AUTH0_ORGS=biffs-gang,time-travelers`.
+
+An `--auth0-organizations` command line switch is also available.
+However, it is limited to a single organization and does not accept a comma-separated list like its environment variable equivalent.
+
 ### Generic Provider
 
 #### Creating OAuth Application using your own provider
@@ -146,7 +187,7 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 The generic OAuth2 provider is very similar to the Github provider, but,
 you are able to set your own authentication, token, and API URLs.
 The callback URL path will be `/oauth/generic/callback`.
-So, if your chronograf is hosted at `https://localhost:8888` then the full callback URL would be  `https://localhost:8888/oauth/generic/callback`.
+So, if your Chronograf is hosted at `https://localhost:8888` then the full callback URL would be  `https://localhost:8888/oauth/generic/callback`.
 
 The generic OAuth2 provider requires several settings:  
 
@@ -158,7 +199,7 @@ The generic OAuth2 provider requires several settings:
 
 #### Optional Scopes
 
-By default chronograf will ask for the `user:email` [scope](https://tools.ietf.org/html/rfc6749#section-3.3) of the client.
+By default Chronograf will ask for the `user:email` [scope](https://tools.ietf.org/html/rfc6749#section-3.3) of the client.
 If your provider scopes email access under a different scope or scopes provide them as comma-separated values in the `GENERIC_SCOPES` environment variable.
 ```sh
 export GENERIC_SCOPES="openid,email" # Requests access to openid and email scopes
@@ -182,7 +223,7 @@ the button text will be `Login with Hill Valley Preservation Society`.
 
 ### Optional: Configure an Authentication Duration
 
-By default, auth will remain valid for 30 days via a cookie stored in the browser.
+By default, authentication will remain valid for 30 days via a cookie stored in the browser.
 Configure that duration with the `AUTH_DURATION` environment variable.
 For example, to change it to 1 hour, use:
 ```sh
@@ -239,7 +280,7 @@ docker run -v /host/path/to/certs:/certs -e TLS_CERTIFICATE=/certs/my.crt -e TLS
 In a production environment you should not use self-signed certificates.  However,
 for testing it is fast to create your own certs.
 
-To create a cert and key in one file with openssl:
+To create a cert and key in one file with OpenSSL:
 
 ```sh
 openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout testing.pem -out testing.pem -subj "/CN=localhost" -days 365
@@ -250,7 +291,7 @@ Next, set the environment variable `TLS_CERTIFICATE`:
 export TLS_CERTIFICATE=$PWD/testing.pem
 ```
 
-Run chronograf:
+Run Chronograf:
 
 ```sh
 ./chronograf
