@@ -39,15 +39,15 @@ $ influxd-ctl show
 Data Nodes
 ==========
 ID	TCP Address		Version
-5	stable.example:8088	1.3.0-c1.3.0
+5	stable.example:8088	1.3.1-c1.3.1
 4	offline.example:8088
 
 Meta Nodes
 ==========
 TCP Address		Version
-meta-0.example:8091		1.3.0-c1.3.0
-meta-1.example:8091		1.3.0-c1.3.0
-meta-2.example:8091		1.3.0-c1.3.0
+meta-0.example:8091		1.3.1-c1.3.1
+meta-1.example:8091		1.3.1-c1.3.1
+meta-2.example:8091		1.3.1-c1.3.1
 ```
 
 However, there will still be shards listed with 4 (the ID of the missing node) as the owner, when you run `influxd-ctl show-shards`:
