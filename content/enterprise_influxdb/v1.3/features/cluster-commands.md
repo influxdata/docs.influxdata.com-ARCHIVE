@@ -221,16 +221,6 @@ Options:
 > Restoring a `-full` backup and restoring an incremental backup require different syntax.
 To prevent issues with [`restore`](#restore), keep `-full` backups and incremental backups in separate directories.
 
-<dt> In versions 1.2.0 and 1.2.1, there is a known issue with restores from a backup directory
-that stores several **different** incremental backups.
-For a [restore](#restore) to function properly, incremental backups that specify different
-options (for example: they specify a different database with `-db` or a
-different retention policy with `-rp`) must be stored in different directories.
-If a single backup directory stores several different incremental backups, a
-restore only restores the most recent incremental backup.
-This issue is fixed in version 1.2.2.
-</dt>
-
 Resources: [Backup and Restore](/enterprise_influxdb/v1.3/guides/backup-and-restore/)
 
 ##### Examples
@@ -681,10 +671,6 @@ A restore command with the `-full` flag requires the `path-to-backup-manifest-fi
 
 Resources: [Backup and Restore](/enterprise_influxdb/v1.3/guides/backup-and-restore/#restore)
 
-<dt>
-In versions 1.2.0 and 1.2.1, a restore without the `-full` option requires users to `cd` into the backup directory and run `influxd-ctl restore [options] .` from that directory. This issue is fixed in version 1.2.2.
-</dt>
-
 ##### Examples
 <br>
 Example 1: Restore from an incremental backup
@@ -735,19 +721,19 @@ $ influxd-ctl show
 Data Nodes
 ==========
 ID	 TCP Address		        Version
-2   cluster-node-01:8088	1.2.4-c1.2.5
-4   cluster-node-02:8088	1.2.4-c1.2.5
+2   cluster-node-01:8088	1.3.1-c1.3.1
+4   cluster-node-02:8088	1.3.1-c1.3.1
 
 Meta Nodes
 ==========
 TCP Address		        Version
-cluster-node-01:8091	1.2.4-c1.2.5
-cluster-node-02:8091	1.2.4-c1.2.5
-cluster-node-03:8091	1.2.4-c1.2.5
+cluster-node-01:8091	1.3.1-c1.3.1
+cluster-node-02:8091	1.3.1-c1.3.1
+cluster-node-03:8091	1.3.1-c1.3.1
 ```
 
 The output shows that the cluster includes three meta nodes and two data nodes.
-Every node is using InfluxEnterprise version `1.2.4-c1.2.5`.
+Every node is using InfluxEnterprise version `1.3.1-c1.3.1`.
 
 #### show-shards      
 
