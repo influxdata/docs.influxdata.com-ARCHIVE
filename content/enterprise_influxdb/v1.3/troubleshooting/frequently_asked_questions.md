@@ -97,20 +97,3 @@ Meta nodes use the `/status` endpoint to determine the current state of another 
 If you are getting an error message while attempting to `influxd-ctl join` a new meta node, it means that the JSON string returned from the `/status` endpoint is incorrect. This generally indicates that the meta node configuration file is incomplete or incorrect. Inspect the HTTP response with `curl -v "http://<hostname>:8091/status"` and make sure that the `hostname`, the `bind-address`, and the `http-bind-address` are correctly populated. Also check the `license-key` or `license-path` in the configuration file of the meta nodes. Finally, make sure that you specify the `http-bind-address` port in the join command, e.g. `influxd-ctl join hostname:8091`.
 
 
-## Why am I getting a Basic Authentication pop-up window from my InfluxEnterprise Web Console?
-
-The InfluxEnterprise Web Console will create a popup requesting Authentication credentials when the `shared-secret` configured under the `[influxdb]` section in the `influx-enterprise.conf` Web Console configuration file does not match with the `shared-secret` configured under the `[http]` section in all data node `influxdb.conf` configuration files. All data nodes and the InfluxEnteprise Web Console must share the same passphrase.
-
-## How do I make a web console user an admin web console user?
-
-Web console users can be admin users or non-admin users.
-In addition to having access to the web console, admin users are able to invite
-users, manage web console users, manage cluster accounts, and edit cluster names.
-
-By default, new web console users are non-admin users.
-To make a web console user an admin user, visit the `Users` page located in the
-`WEB ADMIN` section in the sidebar and click on the name of the relevant user.
-In the `Account Details` section, select the checkbox next to `Admin` and click
-`Update User`.
-
-![Web Console Admin User](/img/enterprise/admin_user_1.png)
