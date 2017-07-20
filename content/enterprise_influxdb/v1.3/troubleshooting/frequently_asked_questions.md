@@ -11,9 +11,6 @@ menu:
 
 **Known Issues**
 
-* [Why are my Grafana panels returning truncated/partial data?](#why-are-my-grafana-panels-returning-truncated-partial-data)
-* [Why do queries that use math on several selector functions return more than one point?](#why-do-queries-that-use-math-on-several-selector-functions-return-more-than-one-point)
-* [What should I do if I see the panic: `unexpected fault address xxxxxxxxxxxxxx`?](#what-should-i-do-if-i-see-the-panic-unexpected-fault-address-xxxxxxxxxxxxxx)
 
 **Log Errors**
 
