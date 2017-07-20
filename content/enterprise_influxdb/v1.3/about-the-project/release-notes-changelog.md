@@ -11,13 +11,56 @@ menu:
 <table style="width:100%">
   <tr>
     <td><a href="#clustering">Clustering Release Notes/Changelog</a></td>
-    <td><a href="#web-console">Web Console Release Notes/Changelog</a></td>
+    <td><a href="#web-console">DEPRECATED: Web Console Release Notes/Changelog</a></td>
   </tr>
 </table>
 
 <br>
 <br>
 # Clustering
+
+## v1.3.1 [2017-07-20]
+
+#### Bugfixes
+
+- Show a subset of config settings in SHOW DIAGNOSTICS.
+- Switch back to using cluster-tracing config option to enable meta HTTP request logging.
+- Fix remove-data error.
+
+## v1.3.0 [2017-06-21]
+
+### Configuration Changes
+
+#### `[cluster]` Section
+
+* `max-remote-write-connections` is deprecated and can be removed.
+* NEW: `pool-max-idle-streams` and `pool-max-idle-time` configure the RPC connection pool. 
+  See `config.sample.toml` for descriptions of these new options. 
+
+### Removals
+
+The admin UI is removed and unusable in this release. The `[admin]` configuration section will be ignored.
+
+#### Features
+
+- Allow non-admin users to execute SHOW DATABASES
+- Add default config path search for influxd-meta.
+- Reduce cost of admin user check for clusters with large numbers of users.
+- Store HH segments by node and shard
+- Remove references to the admin console.
+- Refactor RPC connection pool to multiplex multiple streams over single connection.
+- Report RPC connection pool statistics.
+
+#### Bugfixes
+
+- Fix security escalation bug in subscription management.
+- Certain permissions should not be allowed at the database context.
+- Make the time in `influxd-ctl`'s `copy-shard-status` argument human readable.
+- Fix `influxd-ctl remove-data -force`.
+- Ensure replaced data node correctly joins meta cluster.
+- Delay metadata restriction on restore.
+- Writing points outside of retention policy does not return error
+- Decrement internal database's replication factor when a node is removed.
 
 ## v1.2.5 [2017-05-16]
 
@@ -329,77 +372,11 @@ Backup and restore has been updated to fix issues and refine existing capabiliti
 - Drop Hinted Handoff writes if they contain field type inconsistencies
 
 <br>
-<br>
 # Web Console
 
-## v1.2.2 [2017-03-15]
+## DEPRECATED: Enterprise Web Console 
 
-### Bug Fixes
+The Enterprise Web Console has officially been deprecated and will be eliminated entirely by the end of 2017.  
+No additional features will be added and no additional bug fix releases are planned.
 
-* Set a sane default (`24h`) for the [`session-lifetime` configuration setting](/enterprise_influxdb/v1.3/administration/configuration/#session-lifetime-24h)
-* Fix node and shard reporting inaccurate information
-* Fix the retention policy page dropdown when selecting databases
-
-## v1.2.1 [2017-01-31]
-
-As of version 1.2.1, the `Rebalance` button on the Web Consoles `Tasks` page
-is deprecated and no longer available.
-We based this decision on customer and support feedback regarding the feature.
-For the time being, you will need to rebalance clusters manually.
-The [Cluster Rebalance](/enterprise_influxdb/v1.3/guides/rebalance/) guide offers
-detailed instructions for performing a manual rebalance of your InfluxEnterprise cluster.
-Please contact support with any questions or concerns you may have about this
-development.
-
-### Features
-
-* Remove the `Tasks` page from the Web Console
-
-### Bug Fixes
-
-* Fix the [`autologout` configuration setting](/enterprise_influxdb/v1.3/administration/configuration/#autologout-false)
-* Fix the series and measurement counts on the `Database Manager` page
-
-## v1.1.1 [2016-12-06]
-
-This release is built with Go (golang) 1.7.4.
-It resolves a security vulnerability reported in Go (golang) version 1.7.3 which impacts all
-users currently running on the Mac OS X platform, powered by the Darwin operating system.
-
-### Features
-
-- Add the [`autologout` configuration setting](/enterprise_influxdb/v1.3/administration/configuration/#autologout-false) to enable a forced logout on browser close
-
-## v1.1.0 [2016-11-14]
-
-### Features
-
-- Add the [`session-lifetime` configuration setting](/enterprise_influxdb/v1.3/administration/configuration/#session-lifetime-24h) to configure the time after which users are automatically logged out
-
-## v1.0.3 [2016-10-07]
-
-There are no new features or bugfixes in version 1.0.3.
-This release is for maintaining version parity with clustering.
-
-## v1.0.2 [2016-10-06]
-
-### Bugfixes
-
-- Fix systemd package upgrade symlink failure
-
-## v1.0.1
-
-### Features
-
-* Log error messages from the InfluxEnterprise cluster
-
-### Bugfixes
-
-* Fix bug where users cannot log out of the Web Console
-
-## v1.0.0
-
-### Features
-
-* **Rebalancing:** Rebalancing now ensures that all existing data adhere to the relevant [replication factor](/influxdb/v1.3/concepts/glossary/#replication-factor). See [Web Console Features](/enterprise_influxdb/v1.3/features/web-console-features/#cluster-rebalancing) for more information.
-* **User updates:** In versions 0.7.2 and below, users were loosely synced between the cluster and web console. In version 1.0, users have web-console-specific functions and are given cluster-specific permissions by being associated with a separate cluster account. The document [InfluxEnterprise Users](/enterprise_influxdb/v1.3/features/users/) describes the new user arrangement in more detail. Please note that this change requires additional steps if you are [upgrading](/enterprise_influxdb/v1.3/administration/upgrading/) from a previous version of the web console.
+For Browser-based access to InfluxEnterprise, [Chronograf](/chronograf/latest/introduction) is now the recommended tool to use.
