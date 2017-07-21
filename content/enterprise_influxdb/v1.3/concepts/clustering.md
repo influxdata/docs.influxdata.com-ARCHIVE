@@ -85,11 +85,10 @@ The consensus protocol requires a quorum to perform any operation, so there shou
 
 Data nodes hold the actual time series data. The minimum number of data nodes to run is 1 and can scale up from there. Generally, you'll want to run a number of data nodes that is evenly divisible by your replication factor. For instance, if you have a replication factor of 2, you'll want to run 2, 4, 6, 8, 10, etc. data nodes. However, that's not a hard and fast rule, particularly because you can have different replication factors in different retention policies.
 
-## Enterprise Web Console
+## Chronograf
 
-The Enterprise Web Console serves the UI web application for managing and working with the InfluxDB cluster. It talks directly to the data and meta nodes over their HTTP protocols, which are bound by default to ports `8086` and `8088` for data nodes and port `8091` for meta nodes.
-
-The web server isn't required to run and operate an InfluxDB cluster but some InfluxEnterprise features do require it.
+[Chronograf](/chronograf/latest/introduction/getting-started/)
+Chronograf is the user interface component of InfluxData’s TICK stack. It makes owning the monitoring and alerting for your infrastructure easy to setup and maintain. It talks directly to the data and meta nodes over their HTTP protocols, which are bound by default to ports `8086` and `8088` for data nodes and port `8091` for meta nodes.
 
 ## Writes in a Cluster
 
