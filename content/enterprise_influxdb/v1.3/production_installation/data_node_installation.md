@@ -240,4 +240,4 @@ If you do not see your data nodes in the output, please retry adding them
 to the cluster.
 
 Once your data nodes are part of your cluster move on to [the final step
-to set up Chronograf](/chronograf/v1.3/introduction/installation/).
+to set up Chronograf](/chronograf/latest/introduction/installation/).
