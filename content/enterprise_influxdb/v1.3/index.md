@@ -1,13 +1,14 @@
 ---
-title: Enterprise InfluxDB Version 1.0 Documentation
+title: Enterprise InfluxDB Version 1.3 Documentation
+
 aliases:
-    - /enterprise/v1.0/
+    - /enterprise/v1.3/
 
 menu:
   enterprise_influxdb:
-    name: v1.0
-    identifier: enterprise_influxdb_1_0
-    weight: 30
+    name: v1.3
+    identifier: enterprise_influxdb_1_3
+    weight: 0
 ---
 
 InfluxEnterprise offers highly scalable InfluxDB clusters on your infrastructure
@@ -16,19 +17,19 @@ Use InfluxEnterprise to:
 
 * Monitor your cluster
 
-    ![Overview Page](/img/enterprise/overview.png)
+    ![Overview Page](/img/enterprise/overview-chrono.png)
 
 * Manage queries
 
-    ![Query Management](/img/enterprise/query-management.png)
+    ![Query Management](/img/enterprise/manage-queries-chrono.png)
 
 * Manage users
 
-    ![User page](/img/enterprise/user.png)
+    ![User page](/img/enterprise/manage-users-chrono.png)
 
 * Explore and visualize your data
 
-    ![Data Explorer](/img/enterprise/data-explorer.gif)
+    ![Data Explorer](/img/enterprise/data-explorer-chrono.png)
 
 If you're interested in working with InfluxEnterprise, visit
 [InfluxPortal](https://portal.influxdata.com/) to sign up, get a license key,
