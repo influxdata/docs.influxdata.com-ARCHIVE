@@ -1,5 +1,5 @@
 ---
-title: Configuration
+title: Host Rename
 aliases:
     - /enterprise/v1.3/administration/renaming/
 menu:
