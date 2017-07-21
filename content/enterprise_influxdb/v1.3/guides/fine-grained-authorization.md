@@ -1,5 +1,5 @@
 ---
-title: Fine Grained Authorization
+title: Fine-Grained Authorization
 alias:
   -/docs/v1.3/administration/fga
 menu:
