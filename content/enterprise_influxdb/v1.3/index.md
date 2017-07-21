@@ -17,19 +17,19 @@ Use InfluxEnterprise to:
 
 * Monitor your cluster
 
-    ![Overview Page](/img/enterprise/overview.png)
+    ![Overview Page](/img/enterprise/overview-chrono.png)
 
 * Manage queries
 
-    ![Query Management](/img/enterprise/query-management.png)
+    ![Query Management](/img/enterprise/manage-queries-chrono.png)
 
 * Manage users
 
-    ![User page](/img/enterprise/user.png)
+    ![User page](/img/enterprise/manage-users-chrono.png)
 
 * Explore and visualize your data
 
-    ![Data Explorer](/img/enterprise/data-explorer.gif)
+    ![Data Explorer](/img/enterprise/data-explorer-chrono.png)
 
 If you're interested in working with InfluxEnterprise, visit
 [InfluxPortal](https://portal.influxdata.com/) to sign up, get a license key,
