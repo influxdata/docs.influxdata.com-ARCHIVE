@@ -108,6 +108,14 @@ If you do not supply a configuration file, InfluxDB uses an internal default
 configuration (equivalent to the output of `influxd config` and `influxd-meta
 config`).
 
+<dt> Note for 1.3, the influxd-meta binary, if no configuration is specified, will check the INFLUXDB_META_CONFIG_PATH. 
+If that environment variable is set, the path will be used as the configuration file. 
+If unset, the binary will check the ~/.influxdb and /etc/influxdb folder for an influxdb-meta.conf file. 
+If it finds that file at either of the two locations, the first will be loaded as the configuration file automatically.
+<br>
+This matches a similar behavior that the open source and data node versions of InfluxDB already follow.
+</dt>
+
 ### Environment variables
 
 All configuration options can be specified in the configuration file or in an
