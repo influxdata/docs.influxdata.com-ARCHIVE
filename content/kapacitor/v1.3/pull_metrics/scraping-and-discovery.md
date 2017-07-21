@@ -8,7 +8,7 @@ menu:
 ---
 
 Pull data from a dynamic list of remote targets with Kapacitor's discovery and scraping features.
-Use those features with Kapacitor's [TICKscripts](/kapacitor/v1.3/tick/) to monitor targets, process the data, and write data to [InfluxDB](/influxdb/v1.2/).
+Use those features with Kapacitor's [TICKscripts](/kapacitor/v1.3/tick/) to monitor targets, process the data, and write data to [InfluxDB](/influxdb/v1.3/).
 Currently, Kapacitor supports only Prometheus style targets.
 
 >**Note**: Scraping and discovery is currently under technical preview.
@@ -36,7 +36,7 @@ The application running on `A`, `B`, and `C` exposes a `/metrics` endpoint on it
 
 Finally, Kapacitor processes the data according to your configured [TICKscripts](/kapacitor/v1.3/tick/).
 Use TICKscripts to filter, transform, and perform other tasks on your metrics data.
-In addition, if you'd like to store your data, configure a TICKscript to send them to [InfluxDB](/influxdb/v1.2/).
+In addition, if you'd like to store your data, configure a TICKscript to send them to [InfluxDB](/influxdb/v1.3/).
 
 ### Pushing vs. Pulling Metrics
 

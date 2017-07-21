@@ -107,7 +107,7 @@ Property methods are marked using the `.` operator.
 
 ### Align
 
-Align start and stop times for quiries with even boundaries of the [QueryNode.Every](/kapacitor/v1.3/nodes/query_node/#every) property. 
+Align start and stop times for queries with even boundaries of the [QueryNode.Every](/kapacitor/v1.3/nodes/query_node/#every) property. 
 Does not apply if using the [QueryNode.Cron](/kapacitor/v1.3/nodes/query_node/#cron) property. 
 
 

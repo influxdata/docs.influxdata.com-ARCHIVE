@@ -42,34 +42,21 @@ This step takes you to cell editor mode.
 
 ### Step 3: Create your query
 
-Click on the blue `Add a Query` button to create and edit an [InfluxQL](/influxdb/v1.2/query_language/) query.
+Click on the blue `Add a Query` button to create and edit an [InfluxQL](/influxdb/v1.3/query_language/) query.
 In query editor mode, use the builder to select from your existing data and allow Chronograf to format the query for you.
 Alternatively, manually enter and edit a query.
 Chronograf allows you to move seamlessly between using the builder and manually editing the query; when possible, the interface automatically populates the builder with the information from your raw query.
 
 Here, we use the builder to generate a query that shows the average idle CPU usage grouped by host (in this case, there are three hosts).
-By default, Chronograf shows data from the past one hour; that time range is [configurable on the dashboard](#step-6-configure-your-dashboard).
+By default, Chronograf applies the [`MEAN()` function](/influxdb/v1.2/query_language/functions/#mean) to the data, groups averages into auto-generated time intervals (`:interval:`), and shows data for the past one hour (`:dashboardTime:`).
+Those defaults are configurable via the builder or by manually editing the query.
+In addition, the time range (`:dashboardTime:`) is [configurable on the dashboard](#step-6-configure-your-dashboard).
 
 ![Build your query](/img/chronograf/v1.3/g-dashboard-builder.png)
 
 ### Step 4: Choose your visualization type
 
 Chronograf supports several [visualization types](/chronograf/v1.3/troubleshooting/frequently-asked-questions/#what-visualization-types-does-chronograf-support):
-
-**Line**  
-Show time-series in a line graph.
-
-**Stacked**  
-Show time-series arranged on top of each other.
-
-**Step-Plot**  
-Show time-series in a staircase graph.
- 
-**SingleStat**  
-Show the time-series' single most recent value.
- 
-**Line+Stat**  
-Show time-series in a line graph and overlay the time-series' single most recent value.
 
 Here, we choose the Step-Plot:
 

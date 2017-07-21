@@ -20,9 +20,9 @@ menu:
 
 ### UI Improvements
 1. When dashboard time range is changed, reset graphs that are zoomed in
-1. Bar graph option added to dashboard
+1. [Bar graph](/chronograf/v1.3/troubleshooting/frequently-asked-questions/#bar) option added to dashboard
 1. Redesign source management table to be more intuitive
-1. Redesign Line + Single Stat cells to appear more like a sparkline, and improve legibility
+1. Redesign [Line + Single Stat](/chronograf/v1.3/troubleshooting/frequently-asked-questions/#line-stat) cells to appear more like a sparkline, and improve legibility
 
 
 ## v1.3.2.0 [2017-06-05]

@@ -35,6 +35,10 @@ menu:
   * [heroku-client-id](#heroku-client-id)
   * [heroku-secret](#heroku-secret)
   * [heroku-organization](#heroku-organization)
+  * [auth0-domain](#auth0-domain)
+  * [auth0-client-id](#auth0-client-id)
+  * [auth0-client-secret](#auth0-client-secret)
+  * [auth0-organizations](#heroku-organization)
   * [generic-name](#generic-name)
   * [generic-client-id](#generic-client-id)
   * [generic-client-secret](#generic-client-secret)
@@ -168,7 +172,7 @@ The Google email domain user is required to have an active membership.
 
 ### \--public-url=                               
 The full public URL used to access Chronograf from a web browser (default: `http://localhost:8888`).
-Used for Google OAuth2 authentication.
+Used for Google, Auth0, and some Generic OAuth2 authentication providers.
 
 **Environment Variable:** `$PUBLIC_URL`
 
@@ -187,6 +191,31 @@ The Heroku Organization Memberships a user is required to have for access to Chr
 Lists are comma-separated.
 
 **Environment Variable:** `$HEROKU_ORGS`
+
+### \--auth0-domain=                      
+The subdomain of your Auth0 client.
+This is available on the configuration page for your Auth0 client.
+It should look something like https://myauth0client.auth0.com
+
+**Environment Variable:** `$AUTH0_DOMAIN`
+
+### \--auth0-client-id=                      
+The Client ID supplied by Auth0 for OAuth 2 support.
+
+**Environment Variable:** `$AUTH0_CLIENT_ID`
+
+### \--auth0-client-secret=                      
+The Client Secret supplied by Auth0 for OAuth 2 support.
+
+**Environment Variable:** `$AUTH0_CLIENT_SECRET`
+
+### \--auth0-organizations=                      
+The Auth0 Organization that a user must belong to for access to Chronograf.
+Organizations are set using an "organization" key in the user's "app_metadata".
+
+Lists are comma-separated and only available when using environment variables.
+
+**Environment Variable:** `$AUTH0_ORGS`
 
 ### \--generic-name=                             
 The generic OAuth 2 name presented on the login page.

@@ -8,4 +8,11 @@ menu:
     weight: 0
 ---
 
-Content
+The introductory documentation includes all the information you need to get up
+and running with Enterprise Kapacitor.
+
+## [Downloads](/enterprise_kapacitor/v1.3/introduction/downloads/)
+
+## [Installation](/enterprise_kapacitor/v1.3/introduction/installation_guide/)
+
+
