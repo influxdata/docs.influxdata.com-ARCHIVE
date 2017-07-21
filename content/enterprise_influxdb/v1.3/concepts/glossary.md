@@ -69,11 +69,8 @@ query capacity within the cluster.
 
 ## web console
 
-The user interface for the InfluxEnterprise cluster.
-Use the web console to:
+Legacy user interface for the InfluxEnterprise cluster.
 
-* monitor clusters
-* manage databases, retention policies, queries, users, and user
-permissions/roles
-* rebalance your cluster
-* explore and visualize your data
+This has been deprecated and the suggestion is to use [Chronograf](/chronograf/latest/introduction/).
+
+If you are transitioning from the Enterprise Web Console to Chronograf and helpful [transition guide](/chronograf/latest/guides/transition-web-admin-interface/) is available.
