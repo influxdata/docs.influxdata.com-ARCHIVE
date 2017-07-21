@@ -1,5 +1,5 @@
 ---
-title: Database Configuration
+title: Configuration
 menu:
   influxdb_1_3:
     weight: 70

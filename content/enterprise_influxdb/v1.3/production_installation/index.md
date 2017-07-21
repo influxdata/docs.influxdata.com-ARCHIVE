@@ -25,4 +25,4 @@ Follow the links below to get up and running with InfluxEnterprise.
 
 ### [Step 1 - Meta Node Installation](/enterprise_influxdb/v1.3/production_installation/meta_node_installation/)
 ### [Step 2 - Data Node Installation](/enterprise_influxdb/v1.3/production_installation/data_node_installation/)
-### [Step 3 - Chronograf Installation](/chronograf/latest/introduction/installation/)
+### [Step 3 - Chronograf Installation](/enterprise_influxdb/v1.3/production_installation/chrono_install/)

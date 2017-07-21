@@ -13,7 +13,7 @@ It makes owning the monitoring and alerting for your infrastructure easy to setu
 
 The next sections will get you up and running with Chronograf with as little configuration and code as possible.
 By the end of this document, you will have downloaded, installed, and configured all four packages of the
-TICK stack ([Telegraf](https://github.com/influxdata/telegraf), [InfluxDB](https://github.com/influxdata/influxdb), Chronograf, and [Kapacitor](https://github.com/influxdata/kapacitor)), and you will be all set to monitor your infrastructure.
+TICK stack ([Telegraf](https://github.com/influxdata/telegraf), [InfluxDB](https://github.com/influxdata/influxdb), [Chronograf](https://github.com/influxdata/chronograf), and [Kapacitor](https://github.com/influxdata/kapacitor)), and you will be all set to monitor your infrastructure.
 
 ![Getting started setup](/img/chronograf/v1.3/intro-gs-diagram.png)
 

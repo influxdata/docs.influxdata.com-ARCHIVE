@@ -21,7 +21,7 @@ Procedures to backup data created by InfluxDB and to restore from a backup.
 
 Information about upgrading from previous versions of InfluxDB
 
-## [Database Configuration](/influxdb/v1.3/administration/config/)
+## [Configuration](/influxdb/v1.3/administration/config/)
 
 Information about the config file `influx.conf`
 

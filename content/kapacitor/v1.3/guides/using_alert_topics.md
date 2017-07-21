@@ -115,7 +115,7 @@ $ kapacitor show-topic-handler cpu slack
 Finally confirm the topic is configured as expected:
 
 ```sh
-$ kapacitor show-topic slack
+$ kapacitor show-topic cpu
 ```
 
 The output should look something like:

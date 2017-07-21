@@ -112,6 +112,8 @@ Example log output with `log-queries-after` set to `"1s"`:
 `qid` is the id number of the query.
 Use this value with [`KILL QUERY`](/influxdb/v1.3/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query).
 
+The default location for the log output file is `/var/log/influxdb/influxdb.log`. However on systems that use systemd (most modern Linux distributions) those logs are output to `journalctl`. You should be able to view the InfluxDB logs using the following command: `journalctl -u influxdb`
+
 
 ### max-select-point
 
