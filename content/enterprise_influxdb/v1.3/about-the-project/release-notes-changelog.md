@@ -379,4 +379,4 @@ Backup and restore has been updated to fix issues and refine existing capabiliti
 The Enterprise Web Console has officially been deprecated and will be eliminated entirely by the end of 2017.  
 No additional features will be added and no additional bug fix releases are planned.
 
-For Browser-based access to InfluxEnterprise, [Chronograf](/chronograf/latest/introduction) is now the recommended tool to use.
+For browser-based access to InfluxEnterprise, [Chronograf](/chronograf/latest/introduction) is now the recommended tool to use.
