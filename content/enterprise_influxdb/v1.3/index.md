@@ -25,7 +25,7 @@ Use InfluxEnterprise to:
 
 * Manage users
 
-    ![User page](/img/enterprise/manage-users-chrono.png)
+    ![User page](/img/enterprise/admin-usermanagement-cluster.png)
 
 * Explore and visualize your data
 
