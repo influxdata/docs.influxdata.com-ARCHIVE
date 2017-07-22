@@ -40,7 +40,7 @@ With version 1.2, the [Command Line Interface (CLI)](/influxdb/v1.2/tools/shell/
 
 The admin UI (port `8083`) remains officially deprecated and disabled in this release.
 It can be [re-enabled](/influxdb/v1.2/administration/config/#admin) in the configuration file, but will be removed in a future release.
-We recommend using [Chrongraf](https://github.com/influxdata/chronograf) or [Grafana](https://github.com/grafana/grafana) as a replacement.
+We recommend using [Chronograf](https://github.com/influxdata/chronograf) or [Grafana](https://github.com/grafana/grafana) as a replacement.
 
 ### Upgrading
 
