@@ -22,7 +22,7 @@ We'll dig into each of these parts of the storage engine.
 
 ## Storage Engine
 
-The storage engine ties a number components together and provides the external interface for storing and querying series data. It is composed of a number of components that each serve a particular role:
+The storage engine ties a number of components together and provides the external interface for storing and querying series data. It is composed of a number of components that each serve a particular role:
 
 * In-Memory Index - The in-memory index is a shared index across shards that provides the quick access to [measurements](/influxdb/v1.3/concepts/glossary/#measurement), [tags](/influxdb/v1.3/concepts/glossary/#tags), and [series](/influxdb/v1.3/concepts/glossary/#series).  The index is used by the engine, but is not specific to the storage engine itself.
 * WAL - The WAL is a write-optimized storage format that allows for writes to be durable, but not easily queryable.  Writes to the WAL are appended to segments of a fixed size.
@@ -55,7 +55,7 @@ Each field is kept as its own time-ordered range.
 The Cache data is not compressed while in memory.
 
 Queries to the storage engine will merge data from the Cache with data from the TSM files.
-Queries execute on a copy of the data is made from the cache at query processing time.
+Queries execute on a copy of the data that is made from the cache at query processing time.
 This way writes that come in while a query is running won't affect the result.
 
 Deletes sent to the Cache will clear out the given key or the specific time range for the given key.
@@ -118,7 +118,7 @@ The index is composed of a sequence of index entries ordered lexicographically b
 The key includes the measurement name, tag set, and one field. 
 Multiple fields per point creates multiple index entries in the TSM file.
 Each index entry starts with a key length and the key, followed by the block type (float, int, bool, string) and a count of the number of index block entries that follow for that key.
-Each index block entry is composed of the min and max time for the block, the offset into the file where the block is located and the the size of the block. There is one index block entry for each block in the TSM file that contains the key.
+Each index block entry is composed of the min and max time for the block, the offset into the file where the block is located and the size of the block. There is one index block entry for each block in the TSM file that contains the key.
 
 The index structure can provide efficient access to all blocks as well as the ability to determine the cost associated with accessing a given key.
 Given a key and timestamp, we can determine whether a file contains the block for that timestamp. 
@@ -179,7 +179,7 @@ When timestamps have this structure, they are scaled by the largest common divis
 This has the effect of converting very large integer deltas into smaller ones that compress even better.
 
 Using these adjusted values, if all the deltas are the same, the time range is stored using run-length encoding.
-If run-length encoding is not possible and all values are less than (1 << 60) - 1 ([~36.5 years](https://www.wolframalpha.com/input/?i=(1+%3C%3C+60)+-+1+nanoseconds+to+years) at nanosecond resolution), then the timestamps are encoded using [simple8b encoding](https://github.com/jwilder/encoding/tree/master/simple8b).
+If run-length encoding is not possible and all values are less than (1 << 60) - 1 ([~36.5 years](https://www.wolframalpha.com/input/?i=\(1+%3C%3C+60\)+-+1+nanoseconds+to+years) at nanosecond resolution), then the timestamps are encoded using [simple8b encoding](https://github.com/jwilder/encoding/tree/master/simple8b).
 Simple8b encoding is a 64bit word-aligned integer encoding that packs multiple integers into a single 64bit word.
 If any value exceeds the maximum the deltas are stored uncompressed using 8 bytes each for the block.
 Future encodings may use a patched scheme such as Patched Frame-Of-Reference (PFOR) to handle outliers more effectively.
