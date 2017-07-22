@@ -27,7 +27,7 @@ see [InfluxDB's Changelog](/influxdb/v1.3/about_the_project/releasenotes-changel
   * [Other](#other)
 
 ## TSI Release
-Version 1.3.0 marks the first official release of InfluxDB's new time series index (TSI) engine.
+Version 1.3.0 marked the first official release of InfluxDB's new time series index (TSI) engine.
 
 The TSI engine is a significant technical advancement in InfluxDB.
 It offers a solution to the [time-structured merge tree](https://docs.influxdata.com/influxdb/v1.2/concepts/storage_engine/) engine's [high series cardinality issue](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#why-does-series-cardinality-matter).
@@ -189,6 +189,16 @@ time                       water_level
 2015-08-17T19:18:00-05:00  2.126
 ```
 See the [data exploration page](/influxdb/v1.3/query_language/data_exploration/#the-time-zone-clause) for more information.
+
+#### Continuous Queries
+
+The adoption of the time zone clause exposed a defect in the way that continuous queries were previously 
+handling time ranges.  The result of that defect is that for certain time scales (1w or 7d) the range of data being 
+processed was less than expected.
+
+This has been addressed -- but may impact continuous queries which process data in time ranges larger than 1w.
+Additional details [can be found here].(https://github.com/influxdata/influxdb/issues/8569)
+
 
 #### CLI non-admin user updates
 In versions prior to v1.3, [non-admin users](/influxdb/v1.3/query_language/authentication_and_authorization/#user-types-and-privileges) could not execute a `USE <database_name>` query in the [CLI](/influxdb/v1.3/tools/shell/) even if they had `READ` and/or `WRITE` permissions on that database.
