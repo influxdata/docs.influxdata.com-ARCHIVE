@@ -46,6 +46,9 @@ Functionality will vary, and there are, as yet, no standard features that all li
 ## Python
 - [InfluxDB Python](https://github.com/influxdb/influxdb-python)
 
+## R
+- [Influxdbr](https://CRAN.R-project.org/package=influxdbr) by [dleutant](https://github.com/dleutnant)
+
 ## Ruby
 - [InfluxDB Ruby](https://github.com/influxdb/influxdb-ruby)
 - [Influxer](https://github.com/palkan/influxer) by [palkan](https://github.com/palkan)
