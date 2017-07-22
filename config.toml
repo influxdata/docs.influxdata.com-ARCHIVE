@@ -986,7 +986,7 @@ SectionPagesMenu = "products"
   identifier = "webhooks"
   weight = 110
   url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/inputs/webhooks"
-  parent = "services"/release-1.3/
+  parent = "services"
 
 # Telegraf v1.2 Sub-Menu - Output Plugins
 [[menu.telegraf_1_2]]
