@@ -474,6 +474,140 @@ SectionPagesMenu = "products"
   url = "https://influxdata.com/downloads/#chronograf"
   parent = "Introduction"
 
+# Telegraf v1.3 Sub-Menu - Output Plugins
+  [[menu.telegraf_1_3]]
+  name = "Amon"
+  identifier = "amon_output"
+  weight = 0
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/amon"
+  parent = "outputs"
+  [[menu.telegraf_1_3]]
+  name = "AMQP"
+  identifier = "amqp_output"
+  weight = 10
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/amqp"
+  parent = "outputs"
+  [[menu.telegraf_1_3]]
+  name = "CloudWatch"
+  identifier = "cloudwatch_output"
+  weight = 20
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/cloudwatch"
+  parent = "outputs"
+  [[menu.telegraf_1_3]]
+  name = "Datadog"
+  identifier = "datadog_output"
+  weight = 30
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/datadog"
+  parent = "outputs"
+  [[menu.telegraf_1_3]]
+  name = "Discard"
+  identifier = "discard"
+  weight = 40
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/discard"
+  parent = "outputs"
+  [[menu.telegraf_1_3]]
+  name = "Elasticsearch"
+  identifier = "elasticsearch_output"
+  weight = 50
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/elasticsearch"
+  parent = "outputs"
+  [[menu.telegraf_1_3]]
+  name = "File"
+  identifier = "file"
+  weight = 60
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/file"
+  parent = "outputs"
+  [[menu.telegraf_1_3]]
+  name = "Graphite"
+  identifier = "graphite_output"
+  weight = 70
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/graphite"
+  parent = "outputs"
+  [[menu.telegraf_1_3]]
+  name = "Graylog"
+  identifier = "graylog_output"
+  weight = 80
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/graylog"
+  parent = "outputs"
+  [[menu.telegraf_1_3]]
+  name = "InfluxDB"
+  identifier = "influxdb_output"
+  weight = 90
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/influxdb"
+  parent = "outputs"
+  [[menu.telegraf_1_3]]
+  name = "Instrumental"
+  identifier = "instrumental_output"
+  weight = 100
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/instrumental"
+  parent = "outputs"
+  [[menu.telegraf_1_3]]
+  name = "Kafka"
+  identifier = "kafka_output"
+  weight = 110
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/kafka"
+  parent = "outputs"
+  [[menu.telegraf_1_3]]
+  name = "Kinesis"
+  identifier = "kinesis_output"
+  weight = 120
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/kinesis"
+  parent = "outputs"
+  [[menu.telegraf_1_3]]
+  name = "Librato"
+  identifier = "librato_output"
+  weight = 130
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/librato"
+  parent = "outputs"
+  [[menu.telegraf_1_3]]
+  name = "MQTT"
+  identifier = "mqtt_output"
+  weight = 140
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/mqtt"
+  parent = "outputs"
+  [[menu.telegraf_1_3]]
+  name = "NATS"
+  identifier = "nats_output"
+  weight = 150
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/nats"
+  parent = "outputs"
+  [[menu.telegraf_1_3]]
+  name = "NSQ"
+  identifier = "nsq_output"
+  weight = 160
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/nsq"
+  parent = "outputs"
+  [[menu.telegraf_1_3]]
+  name = "OpenTSDB"
+  identifier = "opentsdb_output"
+  weight = 170
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/opentsdb"
+  parent = "outputs"
+  [[menu.telegraf_1_3]]
+  name = "Prometheus Client"
+  identifier = "prometheus_client_output"
+  weight = 180
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/prometheus_client"
+  parent = "outputs"
+  [[menu.telegraf_1_3]]
+  name = "Riemann"
+  identifier = "riemann_output"
+  weight = 190
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/riemann"
+  parent = "outputs"
+  [[menu.telegraf_1_3]]
+  name = "Riemann Legacy"
+  identifier = "riemann_legacy_output"
+  weight = 200
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/riemann_legacy"
+  parent = "outputs"
+  [[menu.telegraf_1_3]]
+  name = "Socket Writer"
+  identifier = "socket_writer_output"
+  weight = 210
+  url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/socket_writer"
+  parent = "outputs"
+
 # Telegraf v1.3 Sub-Menu - Introduction and Input plugins
   [[menu.telegraf_1_3]]
   name = "Download"
