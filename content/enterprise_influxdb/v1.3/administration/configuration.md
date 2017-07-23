@@ -203,8 +203,9 @@ The meta node transmits the license key to [portal.influxdata.com](https://porta
 The server caches the license file locally.
 You must use the [`license-path` setting](#license-path) if your server cannot communicate with [https://portal.influxdata.com](https://portal.influxdata.com).
 
-Use the same key for all nodes in the same cluster.  The `license-key` and `license-path` settings are
-mutually exclusive and one must remain set to the empty string.
+Use the same key for all nodes in the same cluster.  
+<dt>The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
+</dt>
 
 We recommended performing rolling restarts on the nodes after the
 license key update. Restart one Meta, Data, or Enterprise service at a time and
@@ -223,13 +224,17 @@ Contact [sales@influxdb.com](mailto:sales@influxdb.com) if a licence file is req
 The license file should be saved on every server in the cluster, including Meta,
 Data, and Enterprise nodes. The file contains the JSON-formatted license, and must
 be readable by the influxdb user. Each server in the cluster independently verifies
-its license. We recommended performing rolling restarts on the nodes after the
+its license. 
+
+<dt>
+The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
+</dt>
+
+We recommended performing rolling restarts on the nodes after the
 license file update. Restart one Meta, Data, or Enterprise service at a time and
 wait for it to come back up successfully. The cluster should remain unaffected
 as long as only one node is restarting at a time as long as there are two or more
 data nodes.
-
-The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
 
 Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_PATH`
 
