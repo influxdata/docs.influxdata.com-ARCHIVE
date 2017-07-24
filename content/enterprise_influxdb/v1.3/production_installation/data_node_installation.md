@@ -24,10 +24,10 @@ Bad things can happen if you complete the following steps without meta nodes.
 The Production Installation process sets up two [data nodes](/enterprise_influxdb/v1.3/concepts/glossary#data-node)
 and each data node runs on its own server.
 You **must** have a minimum of two data nodes in a cluster.
-InfluxEnterprise clusters require at least two data nodes for high
-availability and redundancy.
-Note that there is no requirement for each data node to run on its own
-server.
+InfluxEnterprise clusters require at least two data nodes for high availability and redundancy.
+<br>
+Note: that there is no requirement for each data node to run on its own
+server.  However, best practices are to deploy each data node on a dedicated server.  
 
 See the
 [Clustering Guide](/enterprise_influxdb/v1.3/concepts/clustering.md#optimal-server-counts)
@@ -112,11 +112,15 @@ First, in `/etc/influxdb/influxdb.conf`, uncomment:
 
 * `hostname` at the top of the file and set it to the full hostname of the data node
 * `auth-enabled` in the `[http]` section and set it to `true`
-* `shared-secret` in the `[http]` section and set it to a long pass phrase that will be used to sign tokens for intra-cluster communication. The Enterprise Web console requires this to be consistent across all data nodes.
+* `shared-secret` in the `[http]` section and set it to a long pass phrase that will be used to sign tokens for intra-cluster communication. This value must be consistent across all data nodes.
 
 Second, in `/etc/influxdb/influxdb.conf`, set:
 
-`license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
+`license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. 
+
+<dt>
+The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
+</dt>
 
 ```
 # Change this option to true to disable reporting.
@@ -125,10 +129,6 @@ Second, in `/etc/influxdb/influxdb.conf`, set:
 hostname="<enterprise-data-0x>" #✨
 
 [enterprise]
-  registration-enabled = false
-
-  registration-server-url = ""
-
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
   license-key = "<your_license_key>" #✨ mutually exclusive with license-path
 
@@ -240,4 +240,4 @@ If you do not see your data nodes in the output, please retry adding them
 to the cluster.
 
 Once your data nodes are part of your cluster move on to [the final step
-to set up Chronograf](/chronograf/latest/introduction/installation/).
+to set up Chronograf](/enterprise_influxdb/v1.3/production_installation/chrono_install).
