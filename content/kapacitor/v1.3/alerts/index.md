@@ -31,4 +31,4 @@ A handler definition has a few properties:
 
 ## Example
 
-See the [Using Alert Topics](../guides/using_alert_topics) example for a walk through defining and using alert topics.
+See the [Using Alert Topics](/kapacitor/v1.3/guides/using_alert_topics) example for a walk through defining and using alert topics.
