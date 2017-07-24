@@ -29,12 +29,16 @@ process before using the product in a production environment.
 
 The Production Installation process sets up three [meta nodes](/enterprise_influxdb/v1.3/concepts/glossary/#meta-node)
 and each meta node runs on its own server.
+<br>
 You **must** have a minimum of three meta nodes in a cluster.
-InfluxEnterprise clusters require at least three meta nodes and an odd number
+InfluxEnterprise clusters require at least three meta nodes and an __**odd number**__
 of meta nodes for high availability and redundancy.
 We do not recommend having more than three meta nodes unless your servers
-are unreliable.
-Note that there is no requirement for each meta node to run on its own server.
+and/or the communication between the servers have chornic reliability issues.
+<br>
+Note: that there is no requirement for each meta node to run on its own server.  But, obviously, deploying 
+multiple meta nodes on the same server creates a larger point of potential failure if that particular node is unresponsive.
+Best practice is to deploy the meta nodes on relatively small footprint servers.
 
 See the
 [Clustering Guide](/enterprise_influxdb/v1.3/concepts/clustering#optimal-server-counts)
@@ -112,12 +116,11 @@ sudo yum localinstall influxdb-meta-1.3.1_c1.3.1.x86_64.rpm
 In `/etc/influxdb/influxdb-meta.conf`:
 
 * uncomment and set `hostname` to the full hostname of the meta node
-* set `registration-enabled` in the `[enterprise]` section to `true`
-* set `registration-server-url` in the `[enterprise]` section to the full URL of the server that will run the InfluxEnterprise web console.
-You must fully specify the protocol, IP or hostname, and port.
-Entering the IP or hostname alone will lead to errors.
-* set `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
+* set `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. 
 
+<dt>
+The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
+</dt>
 
 ```
 # Hostname advertised by this host for remote addresses.  This must be resolvable by all
@@ -125,12 +128,6 @@ Entering the IP or hostname alone will lead to errors.
 hostname="<enterprise-meta-0x>" #✨
 
 [enterprise]
-  # Must be set to true to use the Enterprise Web UI
-  registration-enabled = true #✨
-
-  # Must include the protocol (http://)
-  registration-server-url = "http://<web-console-server-IP>:3000" #✨
-
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
   license-key = "<your_license_key>" #✨ mutually exclusive with license-path
 
