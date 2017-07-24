@@ -109,24 +109,16 @@ sudo yum localinstall influxdb-meta-1.3.1_c1.3.1.x86_64.rpm
 In `/etc/influxdb/influxdb-meta.conf`:
 
 * uncomment and set `hostname` to the full hostname of the meta node
-* set `registration-enabled` in the `[enterprise]` section to `true`
-* set `registration-server-url` in the `[enterprise]` section to the full URL of the server that will run the InfluxEnterprise web console.
-You must fully specify the protocol, IP or hostname, and port.
-Entering the IP or hostname alone will lead to errors.
-* set `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
-
+* set `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. 
+<dt>
+The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
+</dt>
 ```
 # Hostname advertised by this host for remote addresses.  This must be resolvable by all
 # other nodes in the cluster
 hostname="<quickstart-cluster-0x>" #✨
 
 [enterprise]
-  # Must be set to true to use the Enterprise Web UI
-  registration-enabled = true #✨
-
-  # Must include the protocol (http://)
-  registration-server-url = "http://<web-console-server-IP>:3000" #✨
-
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
   license-key = "<your_license_key>" #✨ mutually exclusive with license-path
 
@@ -179,7 +171,7 @@ First, in `/etc/influxdb/influxdb.conf`, uncomment:
 
 * `hostname` at the top of the file and set it to the full hostname of the data node
 * `auth-enabled` in the `[http]` section and set it to `true`
-* `shared-secret` in the `[http]` section and set it to a long pass phrase that will be used to sign tokens for intra-cluster communication. The Enterprise Web console requires this to be consistent across all data nodes.
+* `shared-secret` in the `[http]` section and set it to a long pass phrase that will be used to sign tokens for intra-cluster communication. This value needs to be consistent across all data nodes.
 
 Second, in `/etc/influxdb/influxdb.conf`, set:
 
@@ -192,10 +184,6 @@ Second, in `/etc/influxdb/influxdb.conf`, set:
 hostname="<quickstart-cluster-0x>" #✨
 
 [enterprise]
-  registration-enabled = false
-
-  registration-server-url = ""
-
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
   license-key = "<your_license_key>" #✨ mutually exclusive with license-path
 
@@ -338,5 +326,5 @@ Your cluster should have three data nodes and three meta nodes.
 If you do not see your meta or data nodes in the output, please retry
 adding them to the cluster.
 
-Once all of your nodes are joined to the cluster, move on to the [next step](/enterprise_influxdb/v1.3/quickstart_installation/web_console_installation/)
-in the QuickStart Installation to set up the InfluxEnterprise web console.
+Once all of your nodes are joined to the cluster, move on to the [next step](/enterprise_influxdb/v1.3/quickstart_installation/chrono_install)
+in the QuickStart Installation to set up Chronograf.
