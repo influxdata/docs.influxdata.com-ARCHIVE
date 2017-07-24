@@ -77,7 +77,7 @@ Where applicable, it links to outstanding issues on GitHub.
 
 ## How do I include a single quote in a password?
 Escape the single quote with a backslash (`\`) both when creating the password
-and when authentication requests.
+and when sending authentication requests.
 
 ## How can I identify my version of InfluxDB?
 There a number of ways to identify the version of InfluxDB that you're using:
