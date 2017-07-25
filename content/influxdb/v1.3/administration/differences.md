@@ -129,12 +129,11 @@ See the [functions page](/influxdb/v1.3/query_language/functions/#non-negative-d
 Version 1.3 introduces three major changes to the `TOP()` and `BOTTOM` functions:
 
 * `TOP()` and `BOTTOM()` no longer support other functions in 
-the [`SELECT` clause](/influxdb/v1.3/query_language/data_exploration/#description-of-syntax).
+the `SELECT` [clause](/influxdb/v1.3/query_language/data_exploration/#description-of-syntax).
 The following query returns an error:
 <br>
 ```
 > SELECT TOP(value,1),MEAN(value) FROM "gopher"
-  
 ERR: error parsing query: selector function top() cannot be combined with other functions
 ```
 <br>
@@ -143,14 +142,12 @@ The [query below](/influxdb/v1.3/query_language/functions/#issue-3-bottom-tags-a
 <br>
 ```
 > SELECT BOTTOM("water_level","location",2) INTO "bottom_water_levels" FROM "h2o_feet"
-
 name: result
 time                 written
 ----                 -------
 1970-01-01T00:00:00Z 2
 
 > SHOW TAG KEYS FROM "bottom_water_levels"
-
 name: bottom_water_levels
 tagKey
 ------
