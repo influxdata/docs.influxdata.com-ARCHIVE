@@ -135,8 +135,10 @@ The following query returns an error:
   
 ERR: error parsing query: selector function top() cannot be combined with other functions
 ```
+<br>
 * `TOP()` and `BOTTOM()` now maintain tags as tags if the query includes a [tag key](/influxdb/v1.3/concepts/glossary/#tag-key) as an argument.
 The [query below](/influxdb/v1.3/query_language/functions/#issue-3-bottom-tags-and-the-into-clause) preserves `location` as a tag in the newly-written data:
+<br>
 ```
 > SELECT BOTTOM("water_level","location",2) INTO "bottom_water_levels" FROM "h2o_feet"
 
@@ -152,8 +154,10 @@ tagKey
 ------
 location
 ```
+<br>
 * `TOP()` and `BOTTOM()` now preserve the timestamps in the original data when they're used with the [`GROUP BY time()` clause](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals).
 The [following query](/influxdb/v1.3/query_language/functions/#issue-1-top-with-a-group-by-time-clause) returns the points' original timestamps; the timestamps are not forced to match the start of the `GROUP BY time()` intervals:
+<br>
 ```
 > SELECT TOP("water_level",2) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(18m)
 
@@ -169,7 +173,7 @@ time                   top
 2015-08-18T00:30:00Z  2.051 | <------- Greatest points for the second time interval
                            --
 ```
-
+<br>
 Review the functions page for a complete discussion of the [`TOP()` function](/influxdb/v1.3/query_language/functions/#top) and the [`BOTTOM()` function](/influxdb/v1.3/query_language/functions/#bottom).
 
 ### Other
