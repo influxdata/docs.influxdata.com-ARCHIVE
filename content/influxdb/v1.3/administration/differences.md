@@ -126,7 +126,7 @@ See the [functions page](/influxdb/v1.3/query_language/functions/#non-negative-d
 
 #### Updated functions: `TOP()` and `BOTTOM()`
 
-Version 1.3 introduces three major changes to the `TOP()` and `BOTTOM()` functions:
+##### Version 1.3 introduces three major changes to the `TOP()` and `BOTTOM()` functions:
 
 - `TOP()` and `BOTTOM()` no longer support other functions in 
 the `SELECT` [clause](/influxdb/v1.3/query_language/data_exploration/#description-of-syntax). 
