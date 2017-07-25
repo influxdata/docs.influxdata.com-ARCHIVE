@@ -9,7 +9,7 @@ includes documentation for the following InfluxData projects:
 * [Kapacitor](https://docs.influxdata.com/kapacitor/latest/)
 * Enterprise Editions
     * [InfluxDB](https://docs.influxdata.com/enterprise_influxdb/latest/)
-    * [Kapacitor](https://docs.influxdata.com/enterprise_kapacitor/) 
+    * [Kapacitor](https://docs.influxdata.com/enterprise_kapacitor/latest) 
     
 
 ## Contributing
