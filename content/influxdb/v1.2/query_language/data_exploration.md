@@ -55,6 +55,16 @@ This document uses publicly available data from the
 [National Oceanic and Atmospheric Administration's (NOAA) Center for Operational Oceanographic Products and Services](http://tidesandcurrents.noaa.gov/stations.html?type=Water+Levels).
 See the [Sample Data](/influxdb/v1.2/query_language/data_download/) page to download
 the data and follow along with the example queries in the sections below.
+
+Start by logging into the Influx CLI:
+```bash
+$ influx -precision rfc3339 -database NOAA_water_database
+Connected to http://localhost:8086 version 1.2.x
+InfluxDB shell 1.2.x
+>
+```
+
+
 To start out, feel free to get acquainted with this subsample of the data in
 the `h2o_feet` measurement:
 
