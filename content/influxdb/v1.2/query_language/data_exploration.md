@@ -65,7 +65,7 @@ InfluxDB shell 1.2.x
 ```
 
 
-Next get acquainted with this subsample of the data in the `h2o_feet` measurement:
+Next, get acquainted with this subsample of the data in the `h2o_feet` measurement:
 
 name: <span class="tooltip" data-tooltip-text="Measurement">h2o_feet</span>  
 \------------------------------------  
