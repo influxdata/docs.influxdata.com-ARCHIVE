@@ -196,11 +196,12 @@ See the [data exploration page](/influxdb/v1.3/query_language/data_exploration/#
 
 #### Continuous Queries
 
-The adoption of the time zone clause exposed a defect in the way that continuous queries were previously 
-handling time ranges.  The result of that defect is that for certain time scales (1w or 7d) the range of data being 
-processed was less than expected.
+A defect was identified in the way that continuous queries were previously handling time ranges.  The result of that 
+defect is that for certain time scales, the continuous queries had their time ranges miscalculated and 
+were run at the incorrect time.
 
-This has been addressed -- but may impact continuous queries which process data in time ranges larger than 1w.
+This has been addressed -- but this change may impact existing continuous queries which process data in time 
+ranges larger than 1w.
 Additional details [can be found here].(https://github.com/influxdata/influxdb/issues/8569)
 
 
