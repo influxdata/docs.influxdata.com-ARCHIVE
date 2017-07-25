@@ -128,7 +128,7 @@ See the [functions page](/influxdb/v1.3/query_language/functions/#non-negative-d
 
 Version 1.3 introduces three major changes to the `TOP()` and `BOTTOM()` functions:
 
-- The `TOP()` and `BOTTOM()` functions no longer support other functions in 
+> * The `TOP()` and `BOTTOM()` functions no longer support other functions in 
 the `SELECT` [clause](/influxdb/v1.3/query_language/data_exploration/#description-of-syntax). 
 The following query now returns an error:
 
@@ -137,7 +137,7 @@ The following query now returns an error:
     ERR: error parsing query: selector function top() cannot be combined with other functions
     ```
     
-- The `TOP()` and `BOTTOM()` functions now maintain `tags` as `tags` if the query includes a
+> * The `TOP()` and `BOTTOM()` functions now maintain `tags` as `tags` if the query includes a
 [tag key](/influxdb/v1.3/concepts/glossary/#tag-key) as an argument. 
 The [query below](/influxdb/v1.3/query_language/functions/#issue-3-bottom-tags-and-the-into-clause) 
 preserves `location` as a tag in the newly-written data:
@@ -156,7 +156,7 @@ preserves `location` as a tag in the newly-written data:
     location
     ```
 
-- The `TOP()` and `BOTTOM()` functions now preserve the timestamps in the original data when they're 
+> * The `TOP()` and `BOTTOM()` functions now preserve the timestamps in the original data when they're 
 used with the [`GROUP BY time()` clause](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals).
 The [following query](/influxdb/v1.3/query_language/functions/#issue-1-top-with-a-group-by-time-clause) returns 
 the points' original timestamps; the timestamps are not forced to match the start of the `GROUP BY time()` intervals:
