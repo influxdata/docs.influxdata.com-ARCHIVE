@@ -24,9 +24,9 @@ Please note that this migration process:
 * Requires downtime for writes and reads for the OSS instance
 
 <dt>
-\* If you're using an InfluxEnterprise cluster version prior to 0.7.4, the
+If you're using an InfluxEnterprise cluster version prior to 0.7.4, the
 following steps will **not** transfer users from the OSS instance to the
-InfluxEnterprise Cluster.
+InfluxEnterprise Cluster. 
 </dt>
 
 In addition, please refrain from creating a Global Admin user in the InfluxEnterprise Web Console before implementing these steps. If you’ve already created a Global Admin user, contact support.
@@ -123,12 +123,17 @@ sudo yum localinstall influxdb-data-1.3.1_c1.3.1.x86_64.rpm
 In `/etc/influxdb/influxdb.conf`, set:
 
 * `hostname` to the full hostname of the data node
-* `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
+* `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` 
+in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. 
+
+<dt>
+The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
+</dt>
 
 ```
 # Hostname advertised by this host for remote addresses.  This must be resolvable by all
 # other nodes in the cluster
-hostname="<enterprise-data-0x>" #✨
+hostname="<data-node-hostname>" #✨
 
 [enterprise]
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
