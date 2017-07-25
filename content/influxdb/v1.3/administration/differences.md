@@ -27,7 +27,7 @@ see [InfluxDB's Changelog](/influxdb/v1.3/about_the_project/releasenotes-changel
   * [Other](#other)
 
 ## TSI Release
-Version 1.3.0 marks the first official release of InfluxDB's new time series index (TSI) engine.
+Version 1.3.0 marked the first official release of InfluxDB's new time series index (TSI) engine.
 
 The TSI engine is a significant technical advancement in InfluxDB.
 It offers a solution to the [time-structured merge tree](https://docs.influxdata.com/influxdb/v1.2/concepts/storage_engine/) engine's [high series cardinality issue](https://docs.influxdata.com/influxdb/v1.3/troubleshooting/frequently-asked-questions/#why-does-series-cardinality-matter).
@@ -135,8 +135,10 @@ The following query returns an error:
   
 ERR: error parsing query: selector function top() cannot be combined with other functions
 ```
+<br>
 * `TOP()` and `BOTTOM()` now maintain tags as tags if the query includes a [tag key](/influxdb/v1.3/concepts/glossary/#tag-key) as an argument.
 The [query below](/influxdb/v1.3/query_language/functions/#issue-3-bottom-tags-and-the-into-clause) preserves `location` as a tag in the newly-written data:
+<br>
 ```
 > SELECT BOTTOM("water_level","location",2) INTO "bottom_water_levels" FROM "h2o_feet"
 
@@ -152,8 +154,10 @@ tagKey
 ------
 location
 ```
+<br>
 * `TOP()` and `BOTTOM()` now preserve the timestamps in the original data when they're used with the [`GROUP BY time()` clause](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals).
 The [following query](/influxdb/v1.3/query_language/functions/#issue-1-top-with-a-group-by-time-clause) returns the points' original timestamps; the timestamps are not forced to match the start of the `GROUP BY time()` intervals:
+<br>
 ```
 > SELECT TOP("water_level",2) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(18m)
 
@@ -169,7 +173,7 @@ time                   top
 2015-08-18T00:30:00Z  2.051 | <------- Greatest points for the second time interval
                            --
 ```
-
+<br>
 Review the functions page for a complete discussion of the [`TOP()` function](/influxdb/v1.3/query_language/functions/#top) and the [`BOTTOM()` function](/influxdb/v1.3/query_language/functions/#bottom).
 
 ### Other
@@ -189,6 +193,17 @@ time                       water_level
 2015-08-17T19:18:00-05:00  2.126
 ```
 See the [data exploration page](/influxdb/v1.3/query_language/data_exploration/#the-time-zone-clause) for more information.
+
+#### Continuous Queries
+
+A defect was identified in the way that continuous queries were previously handling time ranges.  The result of that 
+defect is that for certain time scales, the continuous queries had their time ranges miscalculated and 
+were run at the incorrect time.
+
+This has been addressed -- but this change may impact existing continuous queries which process data in time 
+ranges larger than 1w.
+Additional details [can be found here].(https://github.com/influxdata/influxdb/issues/8569)
+
 
 #### CLI non-admin user updates
 In versions prior to v1.3, [non-admin users](/influxdb/v1.3/query_language/authentication_and_authorization/#user-types-and-privileges) could not execute a `USE <database_name>` query in the [CLI](/influxdb/v1.3/tools/shell/) even if they had `READ` and/or `WRITE` permissions on that database.
