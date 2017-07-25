@@ -131,48 +131,49 @@ Version 1.3 introduces three major changes to the `TOP()` and `BOTTOM` functions
 * `TOP()` and `BOTTOM()` no longer support other functions in 
 the `SELECT` [clause](/influxdb/v1.3/query_language/data_exploration/#description-of-syntax).
 The following query returns an error:
-<br>
-```
-> SELECT TOP(value,1),MEAN(value) FROM "gopher"
-ERR: error parsing query: selector function top() cannot be combined with other functions
-```
-<br>
+
+    ```
+    > SELECT TOP(value,1),MEAN(value) FROM "gopher"
+    ERR: error parsing query: selector function top() cannot be combined with other functions
+    ```
+    
 * `TOP()` and `BOTTOM()` now maintain tags as tags if the query includes a [tag key](/influxdb/v1.3/concepts/glossary/#tag-key) as an argument.
 The [query below](/influxdb/v1.3/query_language/functions/#issue-3-bottom-tags-and-the-into-clause) preserves `location` as a tag in the newly-written data:
-<br>
-```
-> SELECT BOTTOM("water_level","location",2) INTO "bottom_water_levels" FROM "h2o_feet"
-name: result
-time                 written
-----                 -------
-1970-01-01T00:00:00Z 2
 
-> SHOW TAG KEYS FROM "bottom_water_levels"
-name: bottom_water_levels
-tagKey
-------
-location
-```
-<br>
+    ```
+    > SELECT BOTTOM("water_level","location",2) INTO "bottom_water_levels" FROM "h2o_feet"
+    name: result
+    time                 written
+    ----                 -------
+    1970-01-01T00:00:00Z 2
+
+    > SHOW TAG KEYS FROM "bottom_water_levels"
+    name: bottom_water_levels
+    tagKey
+    ------
+    location
+    ```
+
 * `TOP()` and `BOTTOM()` now preserve the timestamps in the original data when they're used with the [`GROUP BY time()` clause](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals).
 The [following query](/influxdb/v1.3/query_language/functions/#issue-1-top-with-a-group-by-time-clause) returns the points' original timestamps; the timestamps are not forced to match the start of the `GROUP BY time()` intervals:
-<br>
-```
-> SELECT TOP("water_level",2) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(18m)
 
-name: h2o_feet
-time                   top
-----                   ------
-                           __
-2015-08-18T00:00:00Z  2.064 |
-2015-08-18T00:06:00Z  2.116 | <------- Greatest points for the first time interval
-                           --
-                           __
-2015-08-18T00:18:00Z  2.126 |
-2015-08-18T00:30:00Z  2.051 | <------- Greatest points for the second time interval
-                           --
-```
-<br>
+    ```
+    > SELECT TOP("water_level",2) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND     "location" = 'santa_monica' GROUP BY time(18m)
+
+    name: h2o_feet
+    time                   top
+    ----                   ------
+                                 __
+    2015-08-18T00:00:00Z  2.064 |
+    2015-08-18T00:06:00Z  2.116 | <------- Greatest points for the first time interval
+                                 __
+                                 __
+    2015-08-18T00:18:00Z  2.126 |
+    2015-08-18T00:30:00Z  2.051 | <------- Greatest points for the second time interval
+                                 __
+    ```                             
+                                
+
 Review the functions page for a complete discussion of the [`TOP()` function](/influxdb/v1.3/query_language/functions/#top) and the [`BOTTOM()` function](/influxdb/v1.3/query_language/functions/#bottom).
 
 ### Other
@@ -181,15 +182,15 @@ Review the functions page for a complete discussion of the [`TOP()` function](/i
 InfluxQL's new time zone clause returns the UTC offset for the specified timezone.
 The query below returns the UTC offset for Chicago’s time zone:
 ```
-> SELECT "water_level" FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:18:00Z' tz('America/Chicago')
+    > SELECT "water_level" FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <=      '2015-08-18T00:18:00Z' tz('America/Chicago')
 
-name: h2o_feet
-time                       water_level
-----                       -----------
-2015-08-17T19:00:00-05:00  2.064
-2015-08-17T19:06:00-05:00  2.116
-2015-08-17T19:12:00-05:00  2.028
-2015-08-17T19:18:00-05:00  2.126
+    name: h2o_feet
+    time                       water_level
+    ----                       -----------
+    2015-08-17T19:00:00-05:00  2.064
+    2015-08-17T19:06:00-05:00  2.116
+    2015-08-17T19:12:00-05:00  2.028
+    2015-08-17T19:18:00-05:00  2.126
 ```
 See the [data exploration page](/influxdb/v1.3/query_language/data_exploration/#the-time-zone-clause) for more information.
 
