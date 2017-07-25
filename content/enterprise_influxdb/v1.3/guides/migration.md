@@ -9,16 +9,18 @@ menu:
 ---
 
 The following guide has step-by-step instructions for migrating an OSS InfluxDB
-instance into and InfluxEnterprise cluster.
+instance into an InfluxEnterprise cluster.
 
+<dt>
 The process assumes that you already have a fully configured InfluxEnterprise cluster
-of three or more meta nodes and zero or more data nodes.
+of three or more meta nodes and zero or more data nodes. If you need instructions for meta node installation:
+- [Production Installation of Meta Nodes](/enterprise_influxdb/v1.3/production_installation/meta_node_installation/) 
+</dt>
 
 Please note that this migration process:
 
 * Deletes all data from any data nodes that are already part of the InfluxEnterprise Cluster
 * Will transfer all users from the OSS instance to the InfluxEnterprise Cluster*
-* Will **not** transfer any users from the OSS instance to the InfluxEnterprise Web Console
 * Requires downtime for writes and reads for the OSS instance
 
 <dt>
@@ -118,15 +120,15 @@ sudo yum localinstall influxdb-data-1.3.1_c1.3.1.x86_64.rpm
 
 ### 5. Update the configuration file
 
-In `/etc/influxdb/influxdb-meta.conf`, set:
+In `/etc/influxdb/influxdb.conf`, set:
 
-* `hostname` to the full hostname of the meta node
+* `hostname` to the full hostname of the data node
 * `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
 
 ```
 # Hostname advertised by this host for remote addresses.  This must be resolvable by all
 # other nodes in the cluster
-hostname="<enterprise-meta-0x>" #✨
+hostname="<enterprise-data-0x>" #✨
 
 [enterprise]
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
