@@ -128,8 +128,10 @@ See the [functions page](/influxdb/v1.3/query_language/functions/#non-negative-d
 
 Version 1.3 introduces three major changes to the `TOP()` and `BOTTOM` functions:
 
-* `TOP()` and `BOTTOM()` no longer support other functions in the [`SELECT` clause](/influxdb/v1.3/query_language/data_exploration/#description-of-syntax).
+* `TOP()` and `BOTTOM()` no longer support other functions in 
+the [`SELECT` clause](/influxdb/v1.3/query_language/data_exploration/#description-of-syntax).
 The following query returns an error:
+<br>
 ```
 > SELECT TOP(value,1),MEAN(value) FROM "gopher"
   
@@ -197,11 +199,11 @@ See the [data exploration page](/influxdb/v1.3/query_language/data_exploration/#
 #### Continuous Queries
 
 A defect was identified in the way that continuous queries were previously handling time ranges.  The result of that 
-defect is that for certain time scales, the continuous queries had their time ranges miscalculated and 
+defect is that for certain time scales larger than 1d, the continuous queries had their time ranges miscalculated and 
 were run at the incorrect time.
 
 This has been addressed -- but this change may impact existing continuous queries which process data in time 
-ranges larger than 1w.
+ranges larger than 1d.
 Additional details [can be found here].(https://github.com/influxdata/influxdb/issues/8569)
 
 
