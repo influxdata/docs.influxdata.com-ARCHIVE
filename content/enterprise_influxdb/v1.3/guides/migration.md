@@ -121,12 +121,7 @@ sudo yum localinstall influxdb-data-1.3.1_c1.3.1.x86_64.rpm
 In `/etc/influxdb/influxdb-meta.conf`, set:
 
 * `hostname` to the full hostname of the meta node
-* `registration-enabled` in the `[enterprise]` section to `true`
-* `registration-server-url` in the `[enterprise]` section to the full URL of the server that will run the InfluxEnterprise web console.
-You must fully specify the protocol, IP or hostname, and port.
-Entering the IP or hostname alone will lead to errors.
 * `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
-
 
 ```
 # Hostname advertised by this host for remote addresses.  This must be resolvable by all
@@ -134,12 +129,6 @@ Entering the IP or hostname alone will lead to errors.
 hostname="<enterprise-meta-0x>" #✨
 
 [enterprise]
-  # Must be set to true to use the Enterprise Web UI
-  registration-enabled = true #✨
-
-  # Must include the protocol (http://)
-  registration-server-url = "http://<web-console-server-IP>:3000" #✨
-
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
   license-key = "<your_license_key>" #✨ mutually exclusive with license-path
 
@@ -193,7 +182,14 @@ influxd-ctl show
 
 ### 2. Rebalance the cluster
 
-Increase the [replication factor](/enterprise_influxdb/v1.3/concepts/glossary/#replication-factor) on all existing retention polices to the number of data nodes in your cluster.
+Increase the [replication factor](/enterprise_influxdb/v1.3/concepts/glossary/#replication-factor) 
+on all existing retention polices to the number of data nodes in your cluster.
 You can do this with [ALTER RETENTION POLICY](https://docs.influxdata.com/influxdb/v1.3/query_language/database_management/#modify-retention-policies-with-alter-retention-policy).
 
-Next, [rebalance](/enterprise_influxdb/v1.3/guides/rebalance/) your cluster manually to meet the desired replication factor for existing shards.
+Next, [rebalance](/enterprise_influxdb/v1.3/guides/rebalance/) your cluster manually to meet the desired 
+replication factor for existing shards.
+
+Finally, if you were using [Chronograf](https://docs.influxdata.com/chronograf/latest/), you can 
+add your Enterprise instance as a new data source.  If you were not using 
+[Chronograf](https://docs.influxdata.com/chronograf/latest/introduction/installation/), we recommend going through 
+the installation instructions and using it as your primary management UI for the instance.
