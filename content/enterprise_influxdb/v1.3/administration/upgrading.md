@@ -8,8 +8,6 @@ menu:
     parent: Administration
 ---
 
-Content for `/administration/upgrading/`. The steps below assume the new version number is 1.3.1-c1.3.1. 
-
 ## Upgrading from version 1.2.5 to 1.3.1
 
 Version 1.3.1 is a drop-in replacement for version 1.2.5 with no data migration required.
@@ -17,6 +15,28 @@ Version 1.3.1 is a drop-in replacement for version 1.2.5 with no data migration 
 Version 1.3.1 introduces changes to the data node configuration file.
 Please update that configuration file to avoid any unnecessary downtime.
 The steps below outline the upgrade process and include a list of the required configuration changes.
+
+### Step 0: Back up your cluster before upgrading to version 1.3.
+It is recommended to create a full backup of your cluster prior to executing the upgrade. If you are 
+already have incremental backups being created as part of your standard operating procedures, you should 
+trigger a final incremental backup before proceeding with the upgrade.
+<dt>
+Note that you need to ensure you have sufficient disk space before triggering the backup.
+</dt>
+The following command uses the [version 1.2 backup syntax](https://docs.influxdata.com/enterprise_influxdb/v1.2/guides/backup-and-restore/#syntax) 
+to create an incremental backup of your cluster and it stores that backup in the current directory.
+
+```
+influxd-ctl backup .
+```
+
+Otherwise, you should create a full backup before proceeding. 
+The following command uses the [version 1.2 backup syntax](https://docs.influxdata.com/enterprise_influxdb/v1.2/guides/backup-and-restore/#syntax) 
+to create a full backup of your cluster and it stores that backup in the current directory. 
+
+```
+influxd-ctl backup -full .
+```
 
 ### Step 1: Download the 1.3.1 packages
 
