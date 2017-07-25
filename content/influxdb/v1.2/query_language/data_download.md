@@ -16,7 +16,7 @@ Executing `influx` will start the CLI and automatically connect to the local Inf
 The output should look like this:
 
 ```bash
-$ influx -precision rfc3339 -database NOAA_water_database
+$ influx -precision rfc3339 
 Connected to http://localhost:8086 version 1.2.x
 InfluxDB shell 1.2.x
 >
