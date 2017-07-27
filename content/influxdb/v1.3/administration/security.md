@@ -13,7 +13,7 @@ Check out the sections below for how protect the data in your InfluxDB instance.
 ## Enable Authentication
 
 Password protect your InfluxDB instance to keep any unauthorized individuals
-from accessing you data.
+from accessing your data.
 
 Resources:
 [Set up Authentication](/influxdb/v1.3/query_language/authentication_and_authorization/#set-up-authentication)
