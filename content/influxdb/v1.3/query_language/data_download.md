@@ -2,7 +2,7 @@
 title: Sample Data
 menu:
   influxdb_1_3:
-    weight: 90
+    weight: 5
     parent: query_language
 ---
 
