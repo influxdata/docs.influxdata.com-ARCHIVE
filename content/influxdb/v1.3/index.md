@@ -23,9 +23,11 @@ The TSM engine allows for high ingest speed and data compression.
 It compiles into a single binary with no external dependencies.
 * Simple, high performing write and query HTTP(S) APIs.
 * Plugins support for other data ingestion protocols such as Graphite, collectd, and OpenTSDB.
-* High availability setup available with [Relay](/influxdb/v1.3/high_availability/relay/).
 * Expressive SQL-like query language tailored to easily query aggregated data.
 * Tags allow series to be indexed for fast and efficient queries.
 * Retention policies efficiently auto-expire stale data.
 * Continuous queries automatically compute aggregate data to make frequent queries more efficient.
 * Built in web admin interface.
+
+However, the open source edition of InfluxDB runs on a single node. If your requirements dictate a high-availability setup 
+to eliminate a single point of failure, you should explore [InfluxDB Enterprise Edition] (/high_availability/).
