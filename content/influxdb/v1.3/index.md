@@ -30,4 +30,4 @@ It compiles into a single binary with no external dependencies.
 * Built in web admin interface.
 
 However, the open source edition of InfluxDB runs on a single node. If your requirements dictate a high-availability setup 
-to eliminate a single point of failure, you should explore [InfluxDB Enterprise Edition](/high_availability/).
+to eliminate a single point of failure, you should explore [InfluxDB Enterprise Edition](https://docs.influxdata.com/influxdb/v1.3/high_availability/).
