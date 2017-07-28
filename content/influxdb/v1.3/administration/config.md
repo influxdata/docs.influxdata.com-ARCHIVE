@@ -32,6 +32,7 @@ The InfluxDB configuration file contains configuration settings specific to a lo
         * [cache-snapshot-memory-size](#cache-snapshot-memory-size-26214400)
         * [cache-snapshot-write-cold-duration](#cache-snapshot-write-cold-duration-10m)
         * [compact-full-write-cold-duration](#compact-full-write-cold-duration-4h)
+        * [max-concurrent-compactions](#max-concurrent-compactions-0)
         * [max-series-per-database](#max-series-per-database-1000000)
         * [max-values-per-tag](#max-values-per-tag-100000)
     * [[coordinator]](#coordinator)
@@ -354,6 +355,10 @@ Environment variable: `INFLUXDB_DATA_CACHE_SNAPSHOT_WRITE_COLD_DURATION`
 The compact full write cold duration is the duration at which the engine will compact all TSM files in a shard if it hasn't received a write or delete.
 
 Environment variable: `INFLUXDB_DATA_COMPACT_FULL_WRITE_COLD_DURATION`
+
+### max-concurrent-compactions = 0
+
+The maximum number of concurrent full and level [compactions](/influxdb/v1.3/concepts/storage_engine/#compactions) that can run at one time.  A value of 0 results in runtime.GOMAXPROCS(0) used at runtime.  This setting does not apply to cache snapshotting.
 
 ### max-series-per-database = 1000000
 
