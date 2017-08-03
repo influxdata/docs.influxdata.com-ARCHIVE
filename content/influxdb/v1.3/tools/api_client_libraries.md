@@ -33,6 +33,7 @@ Functionality will vary, and there are, as yet, no standard features that all li
 - [InfluxDB.Client.Net](https://github.com/AdysTech/InfluxDB.Client.Net) by [mvadu](https://github.com/mvadu)
 - [InfluxData.Net](https://github.com/pootzko/InfluxData.Net) by [pootzko](https://github.com/pootzko)
 - [InfluxDB Client for .NET](https://github.com/MikaelGRA/InfluxDB.Client) by [MikaelGRA](https://github.com/MikaelGRA)
+- [InfluxClient](https://github.com/danesparza/InfluxClient) by [danesparza](https://github.com/danesparza)
 
 ## Perl
 - [AnyEvent::InfluxDB](https://github.com/ajgb/anyevent-influxdb) by [ajgb](https://github.com/ajgb)
