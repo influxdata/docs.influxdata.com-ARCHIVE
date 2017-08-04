@@ -1,9 +1,9 @@
 ---
 title: Writing a socket based UDF
 aliases:
-    - kapacitor/v1.3/examples/socket_udf/
+    - kapacitor/v1.4/examples/socket_udf/
 menu:
-  kapacitor_1_3:
+  kapacitor_1_4:
     name: Writing a socket based UDF
     identifier: socket_udf
     weight: 40
@@ -518,7 +518,9 @@ Take an existing task and add `@mirror()` at any point in the TICKscript pipelin
 
 Here is an example TICKscript, which will need to be saved to a file:
 
-```go
+```javascript
+dbrp "telegraf"."autogen"
+
 stream
     |from()
         .measurement('cpu')
@@ -530,7 +532,7 @@ stream
 Define the above alert from your terminal like so:
 
 ```sh
-kapacitor define mirror_udf_example -type stream -dbrp telegraf.autogen -tick path/to/above/script.tick
+kapacitor define mirror_udf_example -tick path/to/above/script.tick
 ```
 
 Start the task:
@@ -622,7 +624,9 @@ Restart the UDF process and try it out again.
 Specify which field name and value to use with the `.field(name, value)` method.
 You can add a `|log()` after the `mirror` UDF to see that the new field has indeed been created.
 
-```go
+```javascript
+dbrp "telegraf"."autogen"
+
 stream
     |from()
         .measurement('cpu')
