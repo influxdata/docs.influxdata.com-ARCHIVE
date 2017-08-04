@@ -77,6 +77,9 @@ The InfluxDB configuration file contains configuration settings specific to a lo
         * [max-connection-limit](#max-connection-limit-0)
         * [unix-socket-enabled](#unix-socket-enabled-false)
         * [bind-socket](#bind-socket-var-run-influxdb-sock)
+        * [max-body-size](#max-body-size)
+    * [[continuous-query]](#continuous-query)
+        * [query-stats-enabled](#query-stats-enabled)
     * [[[graphite]]](#graphite)
         * [enabled](#enabled-false-1)
         * [database](#database-graphite)
@@ -636,6 +639,20 @@ The path of the unix domain socket.
 
 Environment variable: `INFLUXDB_HTTP_UNIX_BIND_SOCKET`
 
+### max-body-size = 25000000
+
+Specifies the maximum size (in bytes) of a client request body. When a client sends data that exceeds the configured 
+maximum size, a 413 Request Entity Too Large HTTP response is returned. This can be disabled by setting it to 0. 
+
+Environment variable: `INFLUXDB_HTTP_MAX_BODY_SIZE`
+
+## [continuous_queries] 
+
+### query-stats-enabled = false. 
+
+When set to true, continuous query execution statistics are written to the default monitor store.
+
+Environment variable: `INFLUXDB_CQ_QUERY_STATS_ENABLED`
 
 ## [subscriber]
 
