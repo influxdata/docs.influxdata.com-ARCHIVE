@@ -3,7 +3,7 @@ title: Kapacitor as a Continous Query engine
 aliases:
     - kapacitor/v1.3/examples/continuous_queries/
 menu:
-  kapacitor_1_3:
+  kapacitor_1_4:
     name: Kapacitor as a Continuous Query engine
     identifier: continuous_queries
     weight: 30
@@ -26,6 +26,8 @@ CREATE CONTINUOUS QUERY cpu_idle_mean ON telegraf BEGIN SELECT mean("usage_idle"
 To do the same with Kapacitor here is a streaming TICKscript.
 
 ```javascript
+dbrp "telegraf"."autogen"
+
 stream
     |from()
         .database('telegraf')
@@ -47,6 +49,8 @@ stream
 The same thing can also be done as a batch task in Kapacitor.
 
 ```javascript
+dbrp "telegraf"."autogen"
+
 batch
     |query('SELECT mean(usage_idle) as usage_idle FROM "telegraf"."autogen".cpu')
         .period(5m)
@@ -108,6 +112,8 @@ CREATE CONTINUOUS QUERY cpu_idle_median ON telegraf BEGIN SELECT median("usage_i
 The stream TICKscript:
 
 ```javascript
+dbrp "telegraf"."autogen"
+
 stream
     |from()
         .database('telegraf')
@@ -130,6 +136,8 @@ stream
 And the batch TICKscript:
 
 ```javascript
+dbrp "telegraf"."autogen"
+
 batch
     |query('SELECT median(usage_idle) as usage_idle FROM "telegraf"."autogen"."cpu"')
         .period(5m)
