@@ -619,13 +619,16 @@ Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 
 ### index-version = inmem 
 
-The type of shard index to use for new shards. The default is an in-memory index that is recreated at startup. A value of tsi1 will use a disk based index that supports higher cardinality datasets.
+The type of shard index to use for new shards. The default is an in-memory index that is recreated at startup. 
+A value of tsi1 will use a disk based index that supports higher cardinality datasets.
 
 Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 
 ### max-concurrent-compactions = 0
 
-Sets the maximum number of compactions that can run concurrently. A value of 0 is unlimited.
+The maximum number of concurrent full and level [compactions](/influxdb/v1.3/concepts/storage_engine/#compactions) 
+that can run at one time.  A value of 0 results in runtime.GOMAXPROCS(0) used at runtime.  
+This setting does not apply to cache snapshotting.
 
 Environment variable: `INFLUXDB_DATA_MAX_CONCURRENT_COMPACTIONS`
 
