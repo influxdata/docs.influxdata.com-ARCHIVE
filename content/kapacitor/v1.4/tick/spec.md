@@ -2,7 +2,7 @@
 title: TICKscript Specification
 
 menu:
-  kapacitor_1_3:
+  kapacitor_1_4:
     name: Specification
     identifier: specification
     weight: 10
@@ -67,9 +67,10 @@ operator_lit       = "+" | "-" | "*" | "/" | "==" | "!=" |
                      "AND" | "OR" .
 
 Program      = Statement { Statement } .
-Statement    = Declaration | Expression .
+Statement    = Declaration | Expression | DBRP.
 Declaration  = "var" identifier "=" Expression .
 Expression   = identifier { Chain } | Function { Chain } | Primary .
+DBRP         = "dbrp" Reference "." Reference
 Chain        = "@" Function | "|" Function { Chain } | "." Function { Chain} | "." identifier { Chain } .
 Function     = identifier "(" Parameters ")" .
 Parameters   = { Parameter "," } [ Parameter ] .

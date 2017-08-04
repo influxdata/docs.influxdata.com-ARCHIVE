@@ -76,6 +76,8 @@ The result of a statement can be assigned to a variable using the `var` keyword 
 Example:
 
 ```javascript
+dbrp "telegraf"."autogen"
+
 var errors = stream
     |from()
         .measurement('errors')
