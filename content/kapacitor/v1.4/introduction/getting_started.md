@@ -2,7 +2,7 @@
 title: Getting Started
 
 menu:
-  kapacitor_1_3:
+  kapacitor_1_4:
     weight: 20
     parent: introduction
 ---
@@ -138,6 +138,8 @@ Now that we know what we want to do, let's write it in a way the Kapacitor under
 Put the script below into a file called `cpu_alert.tick` in your working directory:
 
 ```javascript
+dbrp "kapacitor_example"."autogen"
+
 stream
     // Select just the cpu measurement from our example database.
     |from()
@@ -153,10 +155,7 @@ The binary `kapacitor` exposes the API over the command line.
 Now use the CLI tool to define the `task` and the databases and retention policies it can access:
 
 ```bash
-kapacitor define cpu_alert \
-    -type stream \
-    -tick cpu_alert.tick \
-    -dbrp kapacitor_example.autogen
+kapacitor define cpu_alert -tick cpu_alert.tick
 ```
 
 That's it, Kapacitor now knows how to trigger our alert.
@@ -257,6 +256,8 @@ Modified: 04 May 16 21:04 MDT
 LastEnabled: 04 May 16 21:03 MDT
 Databases Retention Policies: ["kapacitor_example"."autogen"]
 TICKscript:
+dbrp "kapacitor_example"."autogen"
+
 stream
     // Select just the cpu measurement from our example database.
     |from()
@@ -337,6 +338,8 @@ It will then trigger an alert if the values are more than 3 standard deviations 
 Replace the `cpu_alert.tick` script with the TICKscript below:
 
 ```javascript
+dbrp "kapacitor_example"."autogen"
+
 stream
     |from()
         .measurement('cpu')
@@ -446,6 +449,8 @@ of how `batch` tasks work by following the same use case.
 This TICKscript does the same thing as the earlier stream task, but as a batch task:
 
 ```javascript
+dbrp "kapacitor_example"."autogen"
+
 batch
     |query('''
         SELECT mean(usage_idle)
@@ -462,7 +467,7 @@ batch
 To define this task do:
 
 ```bash
-kapacitor define batch_cpu_alert -type batch -tick batch_cpu_alert.tick -dbrp kapacitor_example.autogen
+kapacitor define batch_cpu_alert -tick batch_cpu_alert.tick
 ```
 
 You can record the result of the query in the task like so (again, your ID will differ):
@@ -488,5 +493,5 @@ Play around until you are comfortable updating, testing, and running tasks in Ka
 
 ### What's next?
 
-Take a look at the [example guides](/kapacitor/v1.3/guides/) for how to use Kapacitor.
+Take a look at the [example guides](/kapacitor/v1.4/guides/) for how to use Kapacitor.
 These use cases demonstrate some of the more rich features of Kapacitor.
