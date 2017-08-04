@@ -1,9 +1,9 @@
 ---
 title: Using Alert Topics
 aliases:
-    - kapacitor/v1.3/examples/using_alert_topics/
+    - kapacitor/v1.4/examples/using_alert_topics/
 menu:
-  kapacitor_1_3:
+  kapacitor_1_4:
     name: Using Alert Topics
     identifier: using_alert_topics
     weight: 60
@@ -28,6 +28,8 @@ We are going to demonstrate how to setup a `cpu` alert topic and send alerts to 
 First let's define our simple cpu alert.
 
 ```go
+dbrp "telegraf"."autogen"
+
 stream
     |from()
         .measurement('cpu')
@@ -45,7 +47,7 @@ Save the above script as `cpu_alert.tick`.
 Create and start the task by running the following commands:
 
 ```sh
-$ kapacitor define cpu_alert -type stream -tick cpu_alert.tick -dbrp telegraf.autogen
+$ kapacitor define cpu_alert -tick cpu_alert.tick
 $ kapacitor enable cpu_alert
 ```
 
@@ -78,6 +80,7 @@ Either change the thresholds on the task or create some cpu load.
 To configure a handler we must first define the handler.
 A handler definition has a few parts:
 
+* Topic - The topic ID.
 * ID - The unique ID of the handler.
 * Kind - The kind of handler, in this case it will be a `slack` handler
 * Match - A lambda expression to filter matching alerts. By default all alerts match.
@@ -86,6 +89,8 @@ A handler definition has a few parts:
 The slack handler can be defined as either yaml or json, here we use yaml:
 
 ```yaml
+topic: cpu
+id: slack
 kind: slack
 options:
   channel: '#alerts'
@@ -99,11 +104,11 @@ To do this we use the `define-topic-handler` command which takes three arguments
 
 ```
 $ kapacitor define-topic-handler
-Usage: kapacitor define-topic-handler <topic id> <handler id> <path to handler spec file>
+Usage: kapacitor define-topic-handler <path to handler spec file>
 ```
 
 ```sh
-$ kapacitor define-topic-handler cpu slack ./slack.yaml
+$ kapacitor define-topic-handler ./slack.yaml
 ```
 
 Validate the handler was defined as expected:
@@ -165,6 +170,8 @@ stream
 To send all system alerts to Slack, create a new handler for the system topic.
 
 ```yaml
+topic: system
+id: publish-to-ops_team
 kind: publish
 options:
   topics:
@@ -172,20 +179,22 @@ options:
 ```
 
 ```sh
-kapacitor define-topic-handler system publish-to-ops_team ./publish-to-ops_team.yaml
+kapacitor define-topic-handler ./publish-to-ops_team.yaml
 ```
 
 Since the operations team has a on-call rotation you can setup handling of alerts on the `ops_team` topic accordingly.
 
 
 ```yaml
+topic: ops_team
+id: victorops
 kind: victorops
 options:
   routing-key: ops_team
 ```
 
 ```sh
-kapacitor define-topic-handler ops_team victorops ./victorops.yaml
+kapacitor define-topic-handler ./victorops.yaml
 ```
 
 Now all `system` related alerts get sent to the `ops_team` topic which in turn get handled in Victor Ops.
@@ -199,6 +208,8 @@ For example it is typical to only send Slack messages when alerts change state i
 Modifing the slack handler definition from the first example we get:
 
 ```yaml
+topic: cpu
+id: slack
 kind: slack
 match: changed() == TRUE
 options:
@@ -209,6 +220,6 @@ options:
 Now update the handler and only alerts that changed state will be sent to Slack.
 
 ```
-kapacitor define-topic-handler cpu slack ./slack.yaml
+kapacitor define-topic-handler ./slack.yaml
 ```
 
