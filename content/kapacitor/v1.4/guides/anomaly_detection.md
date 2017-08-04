@@ -479,6 +479,8 @@ If everything was started correctly, then it's time to write our
 TICKscript to use the `tTest` UDF method:
 
 ```javascript
+dbrp "printer"."autogen"
+
 // This TICKscript monitors the three temperatures for a 3d printing job,
 // and triggers alerts if the temperatures start to experience abnormal behavior.
 
@@ -538,7 +540,7 @@ Save this script as `/tmp/kapacitor_udf/print_temps.tick` and define
 the Kapacitor task:
 
 ```bash
-kapacitor define print_temps -type stream -dbrp printer.autogen -tick print_temps.tick
+kapacitor define print_temps -tick print_temps.tick
 ```
 
 ### Generating Test Data
