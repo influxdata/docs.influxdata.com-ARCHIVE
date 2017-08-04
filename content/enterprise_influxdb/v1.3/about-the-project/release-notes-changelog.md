@@ -19,6 +19,18 @@ menu:
 <br>
 # Clustering
 
+## v1.3.2 [2017-08-04]
+
+#### Bugfixes
+- `influxd-ctl restore -newdb` unable to restore data.
+- Improve performance of SHOW TAG VALUES.
+
+#### Bugfixes
+
+- Show a subset of config settings in SHOW DIAGNOSTICS.
+- Switch back to using cluster-tracing config option to enable meta HTTP request logging.
+- Fix remove-data error.
+
 ## v1.3.1 [2017-07-20]
 
 #### Bugfixes
