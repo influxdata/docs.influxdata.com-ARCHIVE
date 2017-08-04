@@ -1,9 +1,9 @@
 ---
 title: Template Tasks
 aliases:
-    - kapacitor/v1.3/examples/template_tasks/
+    - kapacitor/v1.4/examples/template_tasks/
 menu:
-  kapacitor_1_3:
+  kapacitor_1_4:
     name: Template Tasks
     identifier: template_tasks
     weight: 50
@@ -12,7 +12,7 @@ menu:
 
 Kapacitor has a template system that lets you define a template and reuse it for multiple tasks.
 Each task can define its own value for various vars within the template.
-Templates can be consumed via the CLI and [API](/kapacitor/v1.3/api/api).
+Templates can be consumed via the CLI and [API](/kapacitor/v1.4/api/api).
 
 The following is a simple example that defines a template that computes the mean of a field and triggers an alert.
 
@@ -56,7 +56,7 @@ This allows you to customize the usage of the template completely.
 To use this template, first define the template like so:
 
 ```
-kapacitor define-template generic_mean_alert -tick path/to/above/script.tick -type stream
+kapacitor define-template generic_mean_alert -tick path/to/above/script.tick
 ```
 
 At this point you can run `show-template` to see more information about our template.
@@ -177,3 +177,116 @@ You can define any number of tasks that use the same template.
 Vars work with normal tasks as well and can be used to overwrite any defaults in the script.
 Since at any point a TICKscript could come in handy as a template we recommend always using `var` declarations in your scripts.
 This way your normal tasks work and if you decide that you want to create another similar task its now trivial to define a template and then multiple tasks.
+
+## Using the `-file` flag
+
+Starting with version 1.4 of Kapacitor, tasks may be specified using a task template file.
+This file may be either JSON or YAML.
+
+We can also create a task for a memory based alert, using the same template.
+Create a `mem_template_task.json` and use this snippet.
+
+```json
+{
+  "template-id": "generic_mean_alert",
+  "dbrps": ["telegraf.autogen"],
+  "vars": {
+    "measurement": {"type" : "string", "value" : "mem" },
+    "groups": {"type": "list", "value": [{"type":"star", "value":"*"}]},
+    "field": {"type" : "string", "value" : "used_percent" },
+    "warn": {"type" : "lambda", "value" : "\"mean\" > 80.0" },
+    "crit": {"type" : "lambda", "value" : "\"mean\" > 90.0" },
+    "window": {"type" : "duration", "value" : "10m" },
+    "slack_channel": {"type" : "string", "value" : "#alerts_testing" }
+  }
+}
+```
+
+```
+kapacitor define mem_alert -file mem_template_task.json
+```
+
+Or, using YAML, create a `mem_template_task.yaml` and use this snipper
+
+```yaml
+template-id: generic_mean_alert
+dbrps:
+  - telegraf.autogen
+vars: {
+  "measurement": {"type" : "string", "value" : "mem" },
+    "groups": {"type": "list", "value": [{"type":"star", "value":"*"}]},
+    "field": {"type" : "string", "value" : "used_percent" },
+    "warn": {"type" : "lambda", "value" : "\"mean\" > 80.0" },
+    "crit": {"type" : "lambda", "value" : "\"mean\" > 90.0" },
+    "window": {"type" : "duration", "value" : "10m" },
+    "slack_channel": {"type" : "string", "value" : "#alerts_testing" }
+}
+```
+```
+kapacitor define mem_alert -file mem_template_task.yaml
+```
+
+## Specifying `dbrp` implicitly
+The following is a simple example that defines a template that computes the mean of a field and triggers an alert, where the `dbrp` is specified in the template.
+
+```js
+dbrp "telegraf"."autogen"
+
+// Which measurement to consume
+var measurement string
+// Optional where filter
+var where_filter = lambda: TRUE
+// Optional list of group by dimensions
+var groups = [*]
+// Which field to process
+var field string
+// Warning criteria, has access to 'mean' field
+var warn lambda
+// Critical criteria, has access to 'mean' field
+var crit lambda
+// How much data to window
+var window = 5m
+// The slack channel for alerts
+var slack_channel = '#alerts'
+
+stream
+    |from()
+        .measurement(measurement)
+        .where(where_filter)
+        .groupBy(groups)
+    |window()
+        .period(window)
+        .every(window)
+    |mean(field)
+    |alert()
+         .warn(warn)
+         .crit(crit)
+         .slack()
+         .channel(slack_channel)
+```
+
+To use this template, first define the template like so:
+
+```
+kapacitor define-template implicit_generic_mean_alert -tick path/to/above/script.tick
+```
+
+A task may then be defined by creating a `implicit_mem_template_task.yaml`
+
+```yaml
+template-id: implicit_generic_mean_alert
+vars: {
+  "measurement": {"type" : "string", "value" : "mem" },
+    "groups": {"type": "list", "value": [{"type":"star", "value":"*"}]},
+    "field": {"type" : "string", "value" : "used_percent" },
+    "warn": {"type" : "lambda", "value" : "\"mean\" > 80.0" },
+    "crit": {"type" : "lambda", "value" : "\"mean\" > 90.0" },
+    "window": {"type" : "duration", "value" : "10m" },
+    "slack_channel": {"type" : "string", "value" : "#alerts_testing" }
+}
+```
+```
+kapacitor define mem_alert -file implicit_mem_template_task.yaml
+```
+
+>NOTE: The `implicit_mem_template_task.yaml` must not specify `dbrps`. This will cause an error.
