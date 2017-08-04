@@ -358,7 +358,11 @@ Environment variable: `INFLUXDB_DATA_COMPACT_FULL_WRITE_COLD_DURATION`
 
 ### max-concurrent-compactions = 0
 
-The maximum number of concurrent full and level [compactions](/influxdb/v1.3/concepts/storage_engine/#compactions) that can run at one time.  A value of 0 results in runtime.GOMAXPROCS(0) used at runtime.  This setting does not apply to cache snapshotting.
+The maximum number of concurrent full and level [compactions](/influxdb/v1.3/concepts/storage_engine/#compactions) that can run at one time.  
+A value of 0 results in runtime.GOMAXPROCS(0) used at runtime -- which means use all processors.  
+This setting does not apply to cache snapshotting.
+
+Environment variable: `INFLUXDB_DATA_MAX_CONCURRENT_COMPACTIONS`
 
 ### max-series-per-database = 1000000
 
