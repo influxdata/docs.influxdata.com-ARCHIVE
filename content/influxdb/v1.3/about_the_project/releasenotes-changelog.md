@@ -5,6 +5,17 @@ menu:
     weight: 0
     parent: about_the_project
 ---
+## v1.3.2 [2017-08-04]
+
+### Release Notes
+Minor bug fixes were identified via Community and InfluxCloud. 
+
+### Bugfixes
+
+- Interrupt "in-progress" TSM compactions.
+- Prevent excessive memory usage when dropping series.
+- Significantly improve performance of SHOW TAG VALUES.
+
 ## v1.3.1 [2017-07-20]
 
 ### Release Notes
