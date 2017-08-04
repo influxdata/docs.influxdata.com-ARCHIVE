@@ -199,6 +199,8 @@ curl -G 'http://localhost:8086/query?' --data-urlencode 'q=CREATE DATABASE game'
 Here is the complete task TICKscript if you don't want to copy paste as much :)
 
 ```javascript
+dbrp "game"."autogen"
+
 // Define a result that contains the most recent score per player.
 var topPlayerScores = stream
     |from()
@@ -262,7 +264,7 @@ max
 Define and enable our task to see it in action:
 
 ```bash
-kapacitor define top_scores -tick top_scores.tick -type stream -dbrp game.autogen
+kapacitor define top_scores -tick top_scores.tick
 kapacitor enable top_scores
 ```
 
