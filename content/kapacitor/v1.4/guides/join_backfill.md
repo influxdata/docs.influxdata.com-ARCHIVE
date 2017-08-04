@@ -1,9 +1,9 @@
 ---
 title: Calculate Rates across joined series + Backfill
 aliases:
-    - kapacitor/v1.3/examples/join_backfill/
+    - kapacitor/v1.4/examples/join_backfill/
 menu:
-  kapacitor_1_3:
+  kapacitor_1_4:
     name: Calculate Rates Across Series
     identifier: join_backfill
     weight: 0
@@ -90,6 +90,8 @@ Using the new names for the fields we can write this expression to calculate our
 Here is the complete TICKscript for the batch task:
 
 ```javascript
+dbrp "pages"."autogen"
+
 // Get errors batch data
 var errors = batch
     |query('SELECT sum(value) FROM "pages"."autogen".errors')
@@ -127,10 +129,7 @@ First save the above script as `error_percent.tick` and define it.
 Then create a recording for the past time frame we want.
 
 ```bash
-kapacitor define error_percent \
-    -type batch \
-    -tick error_percent.tick \
-    -dbrp pages.autogen
+kapacitor define error_percent -tick error_percent.tick
 kapacitor record batch -task error_percent -past 1d
 ```
 
@@ -161,6 +160,8 @@ If you would like to try out this example case there are scripts [here](https://
 To do the same for the streaming case the TICKscript is very similar:
 
 ```javascript
+dbrp "pages"."autogen"
+
 // Get errors stream data
 var errors = stream
     |from()
