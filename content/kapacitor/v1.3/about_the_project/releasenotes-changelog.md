@@ -6,6 +6,12 @@ menu:
     parent: about_the_project
 ---
 
+## v1.3.2 [2017-08-08]
+
+### Bugfixes
+
+- Use details field from alert node in PagerDuty.
+
 ## v1.3.1 [2017-06-02]
 
 ### Bugfixes
