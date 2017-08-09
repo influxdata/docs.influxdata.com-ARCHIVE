@@ -30,8 +30,6 @@ Jim
 ### Cluster User Information
 In the cluster, individual users are assigned to an account.
 Cluster accounts have permissions and roles.
-Web console Admin users can create cluster accounts and assign permissions
-and roles to those accounts.
 
 In the diagram above, Penelope is assigned to the  Dev Account and
 Jim is assigned to the Marketing Account.
@@ -44,7 +42,6 @@ view Chronograf.
 #### Roles
 Roles are groups of permissions.
 A single role can belong to several cluster accounts.
-Only web console Admin users can manage roles.
 
 InfluxEnterprise clusters have two built-in roles:
 
