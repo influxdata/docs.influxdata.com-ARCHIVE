@@ -94,3 +94,66 @@ Permission to show, add, and drop subscriptions.
 Permission to show stats and diagnostics.
 ##### Copy Shard
 Permission to copy shards.
+
+#### Permission to Statement
+The following table describes permissions required to execute the associated database statement.  It also describes whether these permissions apply just to InfluxDB (Database) or InfluxEnterprise (Cluster).
+
+|Permission|Statement|
+|---|---|
+|CreateDatabasePermission|AlterRetentionPolicyStatement, CreateDatabaseStatement, CreateRetentionPolicyStatement, ShowRetentionPoliciesStatement|
+|ManageContinuousQueryPermission|CreateContinuousQueryStatement, DropContinuousQueryStatement, ShowContinuousQueriesStatement|
+|ManageSubscriptionPermission|CreateSubscriptionStatement, DropSubscriptionStatement, ShowSubscriptionsStatement|
+|CreateUserAndRolePermission|CreateUserStatement, DropUserStatement, GrantAdminStatement, GrantStatement, RevokeAdminStatement, RevokeStatement, SetPasswordUserStatement, ShowGrantsForUserStatement, ShowUsersStatement|
+|DropDataPermission|DeleteSeriesStatement, DeleteStatement, DropMeasurementStatement, DropSeriesStatement|
+|DropDatabasePermission|DropDatabaseStatement, DropRetentionPolicyStatement|
+|ManageShardPermission|DropShardStatement,ShowShardGroupsStatement, ShowShardsStatement|
+|ManageQueryPermission|KillQueryStatement, ShowQueriesStatement|
+|MonitorPermission|ShowDiagnosticsStatement, ShowStatsStatement|
+|ReadDataPermission|ShowFieldKeysStatement, ShowMeasurementsStatement, ShowSeriesStatement, ShowTagKeysStatement, ShowTagValuesStatement|
+|NoPermissions|ShowDatabasesStatement|
+|Determined by type of select statement|SelectStatement|
+
+#### Statement to Permission
+The following table describes database statements and the permissions required to execute them.  It also describes whether these permissions apply just to InfluxDB (Database) or InfluxEnterprise (Cluster).
+
+|Statment|Permissions|Scope|
+|---|---|---|
+|AlterRetentionPolicyStatement|CreateDatabasePermission|Database|
+|CreateContinuousQueryStatement|ManageContinuousQueryPermission|Database|
+|CreateDatabaseStatement|CreateDatabasePermission|Cluster|
+|CreateRetentionPolicyStatement|CreateDatabasePermission|Database|
+|CreateSubscriptionStatement|ManageSubscriptionPermission|Database|
+|CreateUserStatement|CreateUserAndRolePermission|Database|
+|DeleteSeriesStatement|DropDataPermission|Database|
+|DeleteStatement|DropDataPermission|Database|
+|DropContinuousQueryStatement|ManageContinuousQueryPermission|Database|
+|DropDatabaseStatement|DropDatabasePermission|Cluster|
+|DropMeasurementStatement|DropDataPermission|Database|
+|DropRetentionPolicyStatement|DropDatabasePermission|Database|
+|DropSeriesStatement|DropDataPermission|Database|
+|DropShardStatement|ManageShardPermission|Cluster|
+|DropSubscriptionStatement|ManageSubscriptionPermission|Database|
+|DropUserStatement|CreateUserAndRolePermission|Database|
+|GrantAdminStatement|CreateUserAndRolePermission|Database|
+|GrantStatement|CreateUserAndRolePermission|Database|
+|KillQueryStatement|ManageQueryPermission|Database|
+|RevokeAdminStatement|CreateUserAndRolePermission|Database|
+|RevokeStatement|CreateUserAndRolePermission|Database|
+|SelectStatement|Determined by type of select statement|n/a|
+|SetPasswordUserStatement|CreateUserAndRolePermission|Database|
+|ShowContinuousQueriesStatement|ManageContinuousQueryPermission|Database|
+|ShowDatabasesStatement|NoPermissions|Cluster|The user's grants determine which databases are returned in the results.|
+|ShowDiagnosticsStatement|MonitorPermission|Database|
+|ShowFieldKeysStatement|ReadDataPermission|Database|
+|ShowGrantsForUserStatement|CreateUserAndRolePermission|Database|
+|ShowMeasurementsStatement|ReadDataPermission|Database|
+|ShowQueriesStatement|ManageQueryPermission|Database|
+|ShowRetentionPoliciesStatement|CreateDatabasePermission|Database|
+|ShowSeriesStatement|ReadDataPermission|Database|
+|ShowShardGroupsStatement|ManageShardPermission|Cluster|
+|ShowShardsStatement|ManageShardPermission|Cluster|
+|ShowStatsStatement|MonitorPermission|Database|
+|ShowSubscriptionsStatement|ManageSubscriptionPermission|Database|
+|ShowTagKeysStatement|ReadDataPermission|Database|
+|ShowTagValuesStatement|ReadDataPermission|Database|
+|ShowUsersStatement|CreateUserAndRolePermission|Database|
