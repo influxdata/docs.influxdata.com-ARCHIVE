@@ -27,7 +27,7 @@ Jim
                                                   ---> View Chronograf                                                             
 ```
 
-### Cluster User Information
+## Cluster User Information
 In the cluster, individual users are assigned to an account.
 Cluster accounts have permissions and roles.
 
@@ -39,17 +39,17 @@ The Marketing Account includes the permission to view and edit the admin screens
 as well as the Graph Role which contains the permissions to read data and
 view Chronograf.
 
-#### Roles
+### Roles
 Roles are groups of permissions.
 A single role can belong to several cluster accounts.
 
 InfluxEnterprise clusters have two built-in roles:
 
-##### Global Admin
+#### Global Admin
 
 The Global Admin role has all 16 [cluster permissions](#permissions).
 
-##### Admin
+#### Admin
 
 The Admin role has all [cluster permissions](#permissions) except for the
 permissions to:
@@ -59,40 +59,40 @@ permissions to:
 * Manage Shards
 * Rebalance
 
-#### Permissions
+### Permissions
 InfluxEnterprise clusters have 16 permissions:
 
-##### View Admin
+#### View Admin
 Permission to view or edit admin screens.
-##### View Chronograf
+#### View Chronograf
 Permission to use Chronograf tools.
-##### Create Databases
+#### Create Databases
 Permission to create databases.
-##### Create Users & Roles
+#### Create Users & Roles
 Permission to create users and roles.
-##### Add/Remove Nodes
+#### Add/Remove Nodes
 Permission to add/remove nodes from a cluster.
-##### Drop Databases
+#### Drop Databases
 Permission to drop databases.
-##### Drop Data
+#### Drop Data
 Permission to drop measurements and series.
-##### Read
+#### Read
 Permission to read data.
-##### Write
+#### Write
 Permission to write data.
-##### Rebalance
+#### Rebalance
 Permission to rebalance a cluster.
-##### Manage Shards
+#### Manage Shards
 Permission to copy and delete shards.
-##### Manage Continuous Queries
+#### Manage Continuous Queries
 Permission to create, show, and drop continuous queries.
-##### Manage Queries
+#### Manage Queries
 Permission to show and kill queries.
-##### Manage Subscriptions
+#### Manage Subscriptions
 Permission to show, add, and drop subscriptions.
-##### Monitor
+#### Monitor
 Permission to show stats and diagnostics.
-##### Copy Shard
+#### Copy Shard
 Permission to copy shards.
 
 ### Permission to Statement
