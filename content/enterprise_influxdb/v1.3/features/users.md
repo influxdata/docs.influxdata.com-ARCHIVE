@@ -95,7 +95,7 @@ Permission to show stats and diagnostics.
 ##### Copy Shard
 Permission to copy shards.
 
-#### Permission to Statement
+### Permission to Statement
 The following table describes permissions required to execute the associated database statement.  It also describes whether these permissions apply just to InfluxDB (Database) or InfluxEnterprise (Cluster).
 
 |Permission|Statement|
@@ -113,7 +113,7 @@ The following table describes permissions required to execute the associated dat
 |NoPermissions|ShowDatabasesStatement|
 |Determined by type of select statement|SelectStatement|
 
-#### Statement to Permission
+### Statement to Permission
 The following table describes database statements and the permissions required to execute them.  It also describes whether these permissions apply just to InfluxDB (Database) or InfluxEnterprise (Cluster).
 
 |Statment|Permissions|Scope|
