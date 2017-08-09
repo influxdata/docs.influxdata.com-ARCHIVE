@@ -11,37 +11,21 @@ menu:
 InfluxEnterprise users have functions that are either specific to the web
 console or specific to the cluster:
 ```
-Users              Web Console              Cluster
+Users                            Cluster              Permissions
 
 Penelope
-   O    ---------> Admin                                           
+   O                                            
   \|/                                                                 
-   |    ----------------------------------> Dev Account ---> Manage Queries Permission
-  / \                                                   ---> Monitor Permission                                 
-                                                        ---> Add/Remove Nodes Permission
+   |    ----------------------> Dev Account  --------> Manage Queries 
+  / \                                        --------> Monitor                                  
+                                             --------> Add/Remove Nodes 
 Jim
-   O    ---------> Non-Admin
+   O    
   \|/                                                            
-   |    ----------------------------------> Marketing Account ---> View Admin
-  / \                                                         ---> Graph Role ---> Read Permission
-                                                                              ---> View Chronograf Permission                                                            
+   |    ----------------------> Marketing Account ---> View Admin
+  / \                                             ---> Graph Role ---> Read 
+                                                  ---> View Chronograf                                                             
 ```
-
-### Web Console User Information
-In the web console, users can be Admin users or Non-Admin users.
-In the diagram above, Penelope is an Admin web console user and Jim is
-a Non-Admin web console user.
-
-#### Admin Users
-In addition to having access to the console, web console Admin users are able to:
-
-* Invite users
-* Manage web console users
-* Manage cluster accounts
-* Edit cluster names
-
-#### Non-Admin Users
-Web console Non-Admin users have access to the web console.
 
 ### Cluster User Information
 In the cluster, individual users are assigned to an account.
