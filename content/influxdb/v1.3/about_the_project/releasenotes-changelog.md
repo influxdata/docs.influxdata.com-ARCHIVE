@@ -5,6 +5,15 @@ menu:
     weight: 0
     parent: about_the_project
 ---
+## v1.3.3 [2017-08-10]
+
+### Release Notes
+Bug fix identified via Community and InfluxCloud. 
+
+### Bugfixes
+
+- Resolves a memory leak when NewReaderIterator creates a nilFloatIterator, the reader is not closed.
+
 ## v1.3.2 [2017-08-04]
 
 ### Release Notes
@@ -27,7 +36,6 @@ Minor bug fixes were identified via Community and InfluxCloud.
 - Address deadlock issue causing 1.3.0 to become unresponsive.
 - Duplicate points generated via INSERT after DELETE.
 - Fix the CQ start and end times to use Unix timestamps.
-
 
 ## v1.3.0 [2017-06-21]
 
