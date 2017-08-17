@@ -36,8 +36,8 @@ The Process
 2. Start InfluxDB and send it data from Telegraf.
 3. Configure Kapacitor.
 4. Start Kapacitor.
-5. Define and run a streaming task to trigger cpu alerts.
-6. Define and run a batching task to trigger cpu alerts.
+5. Define and run a streaming task to trigger CPU alerts.
+6. Define and run a batching task to trigger CPU alerts.
 
 Installation
 ------------
