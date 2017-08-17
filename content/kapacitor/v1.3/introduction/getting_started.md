@@ -43,10 +43,13 @@ Installation
 ------------
 
 Install [Kapacitor](/kapacitor/v1.3/introduction/installation/),
-[InfluxDB](/docs/v0.9/introduction/installation.html)
-and [Telegraf](https://github.com/influxdb/telegraf#installation) on the same host.
+[InfluxDB](https://docs.influxdata.com/influxdb/latest/introduction/installation/)
+and [Telegraf](https://docs.influxdata.com/telegraf/latest/introduction/installation/) on the same host.
 
 All examples will assume that Kapacitor is running on `http://localhost:9092` and InfluxDB on `http://localhost:8086`.
+
+
+If you would like to explore using Docker deployments of these components, [check out these instructions.](/kapacitor/v1.3/introduction/install-docker/)
 
 InfluxDB + Telegraf
 -------------------
