@@ -13,7 +13,7 @@ The following is a list of available alert handlers and their options.
 
 ## Aggregate
 
-Aggreate multiple events into a single event.
+Aggregate multiple events into a single event.
 
 Options:
 
