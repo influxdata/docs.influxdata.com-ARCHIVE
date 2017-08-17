@@ -237,7 +237,7 @@ kind: sensu
 
 ## Slack
 
-Send alert events to Sensu.
+Send alert events to Slack.
 
 Options:
 
@@ -347,7 +347,7 @@ Example:
 kind: telegram
 ```
 
-## Victorops
+## VictorOps
 
 Send alert events to a VictorOps instance.
 
