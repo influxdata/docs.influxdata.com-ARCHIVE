@@ -1,7 +1,7 @@
 
 ## Getting Started with TICK and Docker Compose
 
-This short tutorial will demonstrate starting TICK stack applications (InfluxDB, Telegraf, Kapacitor) with Docker Compose and then using that stack to learn the rudiments of working with Kapacitor and the TICK script domain specific language (DSL). It will create a running deployment of these applications that  can be used for an initial evaluation and testing of Kapacitor.  Chronograf is currently not included in the package.
+This short tutorial will demonstrate starting TICK stack components (InfluxDB, Telegraf, Kapacitor) with Docker Compose and then using that stack to learn the rudiments of working with Kapacitor and the TICKscript domain specific language (DSL). It will create a running deployment of these applications that  can be used for an initial evaluation and testing of Kapacitor.  Chronograf is currently not included in the package.
 
 This tutorial depends on Docker Compose 3.0 to deploy the latest Docker 17.0+ compatible images of InfluxDB, Telegraf and Kapacitor.
 
@@ -118,22 +118,22 @@ retention_policy name                                           mode destination
 monitor          kapacitor-dc455e9d-b306-4687-aa39-f146a250dd76 ANY  [http://kapacitor:9092]
 > exit
 ```
-## Kapacitor Alerts and the TICK Script
+## Kapacitor Alerts and the TICKscript
 
-The top level nodes of a TICK script define the mode by which the underlying node chain is to be executed.  They can be setup so that Kapacitor receives processed data in a steady stream, or so that it triggers the processing of a batch of data points, from which it will receive the results.
+The top level nodes of a TICKscript define the mode by which the underlying node chain is to be executed.  They can be setup so that Kapacitor receives processed data in a steady stream, or so that it triggers the processing of a batch of data points, from which it will receive the results.
 
 ### Setting up a live stream CPU alert
 
 To create an alert stream it is necessary to:
 
-   * declare the desired functionality in a TICK Script
-   * define the actual alert task in Kapacitor.  
+   * declare the desired functionality in a TICKscript
+   * define the actual alert task in Kapacitor  
    * test the alert task by recording a sample of stream activity and then playing it back
    * enable the alert
 
 An initial script has been prepared in the `home/kapacitor` directory, which is mapped as a volume into the Kapacitor container (`home/kapacitor/cpu_alert_stream.tick`).
 
-This simple script touches upon just the basics of the rich domain specific TICK language.  It is self-descriptive and should be easily understood.
+This simple script touches upon just the basics of the rich domain specific TICKscript language.  It is self-descriptive and should be easily understood.
 
 *cpu_alert_stream.tick*
 ```
@@ -149,7 +149,7 @@ stream
 ```
 Note that the `alerts-stream.log` file is written to a volume mapped back to the package directory tree `./var/log/kapacitor`.  This will simplify log inspection.
 
-The TICK script can then be used over Docker to define a new alert in the Kapacitor container.
+The TICKscript can then be used over Docker to define a new alert in the Kapacitor container.
 ```
 $ docker exec tik_kapacitor_1 sh -c "cd /home/kapacitor && kapacitor define cpu_alert_stream -type stream -tick ./cpu_alert_stream.tick -dbrp telegraf.autogen"
 ```
@@ -255,18 +255,18 @@ $ docker exec tik_kapacitor_1 kapacitor disable cpu_alert_stream
 
 ### Setting up a batch CPU alert
 
-The second mode for setting up a TICK script node chain is batch processing.  A batch process can be executed periodically over a window of time series data points.
+The second mode for setting up a TICKscript node chain is batch processing.  A batch process can be executed periodically over a window of time series data points.
 
 To create a batch process it is necessary to:
 
-   * declare the desired functionality, window or time period to be sampled, and run frequency in a TICK Script
-   * define the actual alert task in Kapacitor.  
+   * declare the desired functionality, window or time period to be sampled, and run frequency in a TICKscript
+   * define the actual alert task in Kapacitor  
    * test the alert task by recording a data point sample and then playing it back
    * enable the alert
 
-It may have already been noted that an example batch TICK script has been created in the directory `home/kapacitor`.
+It may have already been noted that an example batch TICKscript has been created in the directory `home/kapacitor`.
 
-As with the stream based TICK script, the contents are self-descriptive and should be easily understood.
+As with the stream based TICKscript, the contents are self-descriptive and should be easily understood.
 
 *cpu_alert_batch.tick*
 ```
@@ -283,7 +283,7 @@ batch
 ```
 Here again the `alerts-batch.log` will be written to a directory mapped as a volume into the Kapacitor container.
 
-The TICK script can then be used over Docker to define a new alert in the Kapacitor container.
+The TICKscript can then be used over Docker to define a new alert in the Kapacitor container.
 
 ```
 $ docker exec tik_kapacitor_1 sh -c "cd /home/kapacitor && kapacitor define cpu_alert_batch -type batch -tick ./cpu_alert_batch.tick -dbrp telegraf.autogen"
