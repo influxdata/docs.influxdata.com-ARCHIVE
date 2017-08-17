@@ -1,7 +1,7 @@
 
 ## Getting Started with TICK and Docker Compose
 
-This short tutorial will demonstrate starting TICK stack components (InfluxDB, Telegraf, Kapacitor) with Docker Compose and then using that stack to learn the rudiments of working with Kapacitor and the TICKscript domain specific language (DSL). It will create a running deployment of these applications that  can be used for an initial evaluation and testing of Kapacitor.  Chronograf is currently not included in the package.
+This short tutorial will demonstrate starting TICK stack components (InfluxDB, Telegraf, Kapacitor) with Docker Compose and then using that stack to learn the rudiments of working with Kapacitor and the [TICKscript](/kapacitor/v1.3/tick/) domain specific language (DSL). It will create a running deployment of these applications that  can be used for an initial evaluation and testing of Kapacitor.  Chronograf is currently not included in the package.
 
 This tutorial depends on Docker Compose 3.0 to deploy the latest Docker 17.0+ compatible images of InfluxDB, Telegraf and Kapacitor.
 
@@ -88,7 +88,7 @@ f1ba76bcbbcc        telegraf:latest     "/entrypoint.sh te..."   43 minutes ago 
 ```
 Take note of the container names, especially for Kapacitor.  If the Kapacitor container name in the current deployment is not the same(i.e. `tik_kapacitor_1`), be sure to replace it in the Docker command line examples below.  This also applies to the InfluxDB container name (`tik_influxdb_1`) which is used in the next example.  
 
-### What is running
+### What is running?
 
 At this point there should be running on the host machine: InfluxDB, Telegraf and Kapacitor.  Telegraf is configured using the configuration file `etc/telegraf/telegraf.conf`.  Kapacitor is configured using the file `etc/kapacitor/kapacitor.conf`.  A bridge network has been defined in the `docker-compose.yml` file.  Each application has been assigned a static IP address and these addresses are reflected in the configuration files just mentioned.
 
