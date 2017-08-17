@@ -30,7 +30,7 @@ InfluxDB shell 1.3.x
 * The InfluxDB HTTP API runs on port `8086` by default.
 Therefore, `influx` will connect to port `8086` and `localhost` by default.
 If you need to alter these defaults, run `influx --help`.
-* The [`-precision` argument](/influxdb/v1.2/tools/shell/#influx-arguments) specifies the format/precision of any returned timestamps.
+* The [`-precision` argument](/influxdb/latest/tools/shell/#influx-arguments) specifies the format/precision of any returned timestamps.
 In the example above, `rfc3339` tells InfluxDB to return timestamps in [RFC3339 format](https://www.ietf.org/rfc/rfc3339.txt) (`YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ`).
 
 The command line is now ready to take input in the form of the Influx Query Language (a.k.a InfluxQL) statements.
@@ -86,7 +86,7 @@ h2o_temperature
 
 Count the number of non-null values of `water_level` in `h2o_feet`:
 ```bash
-> SELECT COUNT(water_level) FROM h2o_feet
+> SELECT COUNT("water_level") FROM h2o_feet
 name: h2o_feet
 --------------
 time			               count
