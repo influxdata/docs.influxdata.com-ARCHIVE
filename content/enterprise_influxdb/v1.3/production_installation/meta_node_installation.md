@@ -102,7 +102,7 @@ Perform the following steps on each meta server.
 #### Ubuntu & Debian (64-bit)
 ```
 wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.3.3-c1.3.3_amd64.deb
-sudo dpkg -i influxdb-meta_1.3.3-c1.3.3_amd64.de
+sudo dpkg -i influxdb-meta_1.3.3-c1.3.3_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
