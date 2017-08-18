@@ -12,4 +12,4 @@ Telegraf is entirely input driven. It gathers all metrics from the inputs specif
 
 ## Usage Instructions
 
-View usage instructions for each service input by running `telegraf -usage <service-input-name>`.
+View usage instructions for each service input by running `telegraf --usage <service-input-name>`.

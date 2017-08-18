@@ -57,6 +57,7 @@ aren't synchronized with NTP, the timestamps on the data can be inaccurate.
   source /etc/os-release
   test $VERSION_ID = "7" && echo "deb https://repos.influxdata.com/debian wheezy stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
   test $VERSION_ID = "8" && echo "deb https://repos.influxdata.com/debian jessie stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+  test $VERSION_ID = "9" && echo "deb https://repos.influxdata.com/debian stretch stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
   ```
 
   Then, install and start the Telegraf service:
@@ -161,12 +162,12 @@ aren't synchronized with NTP, the timestamps on the data can be inaccurate.
 Every plugin will be in the file, but most will be commented.
 
 ```
-telegraf -sample-config > telegraf.conf
+telegraf config > telegraf.conf
 ```
 
 ### Create a configuration file with specific inputs and outputs
 ```
-telegraf -sample-config -input-filter <pluginname>[:<pluginname>] -output-filter <outputname>[:<outputname>] > telegraf.conf
+telegraf --input-filter <pluginname>[:<pluginname>] --output-filter <outputname>[:<outputname>] config > telegraf.conf
 ```
 
 For more advanced configuration details, see the
