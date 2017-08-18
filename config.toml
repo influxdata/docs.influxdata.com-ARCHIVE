@@ -736,10 +736,22 @@ SectionPagesMenu = "products"
   url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/inputs/exec"
   parent = "inputs"
   [[menu.telegraf_1_4]]
+  name = "Fail2ban"
+  identifier = "fail2ban"
+  weight = 205
+  url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/inputs/fail2ban"
+  parent = "inputs"
+  [[menu.telegraf_1_4]]
   name = "Filestat"
   identifier = "filestat"
   weight = 210
   url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/inputs/filestat"
+  parent = "inputs"
+  [[menu.telegraf_1_4]]
+  name = "Fluentd"
+  identifier = "fluentd"
+  weight = 215
+  url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/inputs/fluentd"
   parent = "inputs"
   [[menu.telegraf_1_4]]
   name = "Graylog"
@@ -850,6 +862,12 @@ SectionPagesMenu = "products"
   url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/inputs/mesos"
   parent = "inputs"
   [[menu.telegraf_1_4]]
+  name = "Minecraft"
+  identifier = "minecraft"
+  weight = 425
+  url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/inputs/minecraft"
+  parent = "inputs"
+  [[menu.telegraf_1_4]]
   name = "MongoDB"
   identifier = "mongodb"
   weight = 430
@@ -890,6 +908,12 @@ SectionPagesMenu = "products"
   identifier = "ntpq"
   weight = 520
   url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/inputs/ntpq"
+  parent = "inputs"
+  [[menu.telegraf_1_4]]
+  name = "OpenLDAP"
+  identifier = "openldap"
+  weight = 525
+  url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/inputs/openldap"
   parent = "inputs"
   [[menu.telegraf_1_4]]
   name = "Passenger"
@@ -944,6 +968,12 @@ SectionPagesMenu = "products"
   identifier = "puppetagent"
   weight = 610
   url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/inputs/puppetagent"
+  parent = "inputs"
+  [[menu.telegraf_1_4]]
+  name = "Salesforce"
+  identifier = "salesforce"
+  weight = 610
+  url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/inputs/salesforce"
   parent = "inputs"
   [[menu.telegraf_1_4]]
   name = "RabbitMQ"
@@ -1012,6 +1042,12 @@ SectionPagesMenu = "products"
   url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/inputs/system"
   parent = "inputs"
   [[menu.telegraf_1_4]]
+  name = "Tomcat"
+  identifier = "tomcat"
+  weight = 750
+  url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/inputs/tomcat"
+  parent = "inputs"
+  [[menu.telegraf_1_4]]
   name = "Trig"
   identifier = "trig"
   weight = 770
@@ -1036,10 +1072,22 @@ SectionPagesMenu = "products"
   url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/inputs/win_perf_counters"
   parent = "inputs"
   [[menu.telegraf_1_4]]
+  name = "Win_services"
+  identifier = "win_services"
+  weight = 825
+  url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/inputs/win_services"
+  parent = "inputs"
+  [[menu.telegraf_1_4]]
   name = "ZFS"
   identifier = "zfs"
   weight = 830
   url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/inputs/zfs"
+  parent = "inputs"
+  [[menu.telegraf_1_4]]
+  name = "Zipkin"
+  identifier = "zipkin"
+  weight = 835
+  url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/inputs/zipkin"
   parent = "inputs"
   [[menu.telegraf_1_4]]
   name = "Zookeeper"
@@ -1121,6 +1169,26 @@ SectionPagesMenu = "products"
   weight = 110
   url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/inputs/webhooks"
   parent = "services"
+
+# Telegraf v1.4 Processors and Aggregators
+  [[menu.telegraf_1_4]]
+  name = "Printer"
+  identifier = "printer"
+  weight = 0
+  url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/processors/printer"
+  parent = "processors"
+  [[menu.telegraf_1_4]]
+  name = "Histogram"
+  identifier = "histogram"
+  weight = 0
+  url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/aggregators/histogram"
+  parent = "aggregators"
+  [[menu.telegraf_1_4]]
+  name = "MinMax"
+  identifier = "minmax"
+  weight = 10
+  url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/aggregators/minmax"
+  parent = "aggregators"
 
 # Telegraf v1.3 Sub-Menu - Output Plugins
   [[menu.telegraf_1_3]]
