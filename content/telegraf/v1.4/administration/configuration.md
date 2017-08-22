@@ -35,13 +35,16 @@ for numbers and booleans they should be plain (ie, $INT_VAR, $BOOL_VAR)
 
 Environment variables can be set via the 'export' command in Linux
 (ie, "export password=mypassword"). Using enviroment variables for sensitive
-information is considered a best practice.   
+information is considered a best practice.
 
 ## Configuration file locations
 
 The location of the configuration file can be set via the `--config` command
-line flag. Telegraf will also pick up all files matching the pattern `*.conf` if
-the `-config-directory` command line flag is used.
+line flag.
+
+When the `--config-directory` command line flag is used files ending with
+`.conf` in the specified directory will also be included in the Telegraf
+configuration.
 
 On most systems, the default locations are `/etc/telegraf/telegraf.conf` for
 the main configuration file and `/etc/telegraf/telegraf.d` for the directory of
