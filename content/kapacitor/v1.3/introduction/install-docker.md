@@ -1,7 +1,6 @@
-
 ## Getting Started with TICK and Docker Compose
 
-This short tutorial will demonstrate starting TICK stack components (InfluxDB, Telegraf, Kapacitor) with Docker Compose and then using that stack to learn the rudiments of working with Kapacitor and the [TICKscript](/kapacitor/v1.3/tick/) domain specific language (DSL). It will create a running deployment of these applications that  can be used for an initial evaluation and testing of Kapacitor.  Chronograf is currently not included in the package.
+This short tutorial will demonstrate starting TICK stack components (InfluxDB, Telegraf, Kapacitor) with Docker Compose and then using that stack to learn the rudiments of working with Kapacitor and the [TICKscript](/kapacitor/v1.3/tick/) domain specific language (DSL).  The following discussion is based on the tutorial project package that can be checked out from [Location to be decided](http://github.com). It will create a running deployment of these applications that can be used for an initial evaluation and testing of Kapacitor.  Chronograf is currently not included in the package.
 
 This tutorial depends on Docker Compose 3.0 to deploy the latest Docker 17.0+ compatible images of InfluxDB, Telegraf and Kapacitor.
 
@@ -11,17 +10,40 @@ Docker installation is covered at the [Docker website](https://docs.docker.com/e
 
 Docker Compose installation is also covered at the [Docker website](https://docs.docker.com/compose/install/).
 
-In order to keep an eye on the log files, this document will describe running this package in two separate consoles. In the first console Docker Compose will be run.  The second will be used to issue commands to demonstrate basic Kapacitor functionality.
+In order to keep an eye on the log files, this document will describe running the reference package in two separate consoles. In the first console Docker Compose will be run.  The second will be used to issue commands to demonstrate basic Kapacitor functionality.
 
-As of this writing, this package has only been tested on Linux(Ubuntu 16.04).
+As of this writing, the package has only been tested on Linux(Ubuntu 16.04).  It contains a `docker-compose.yml` and directories for configuration a test files.
+
+*Demo Package Contents*
+```
+.
+├── docker-compose.yml
+├── etc
+│   ├── kapacitor
+│   │   └── kapacitor.conf
+│   └── telegraf
+│       └── telegraf.conf
+├── home
+│   └── kapacitor
+│       ├── cpu_alert_batch.tick
+│       └── cpu_alert_stream.tick
+├── README.md
+└── var
+    └── log
+        └── kapacitor
+            └── README.md
+
+```  
+
+Please clone or copy the package to the host machine and open two consoles to its install location before continuing.
 
 ### Loading the stack with Docker Compose
 
-The core of this package is the `docker-compose.yml` file, which Docker Compose uses to pull the Docker images and then create and run the Docker containers.  
+The core of the package is the `docker-compose.yml` file, which Docker Compose uses to pull the Docker images and then create and run the Docker containers.  
 
-Standard Unix style directories have also been prepared.  These are mapped into the docker containers to make it easy to access scripts and logs in the demonstrations that follow.  One important directory is the volume `var/log/kapacitor`.  Here the `kapacitor.log` and later the `alert.log` will be made available for inspection.
+Standard Unix style directories have also been prepared.  These are mapped into the docker containers to make it easy to access scripts and logs in the demonstrations that follow.  One important directory is the volume `var/log/kapacitor`.  Here the `kapacitor.log` and later the `alert-*.log` files will be made available for inspection.
 
- In the first console, in the root directory of this package, to start the stack and leave the logs visible run the following:
+ In the first console, in the root directory of the package, to start the stack and leave the logs visible run the following:
 
  ```
  $ docker-compose up
@@ -90,7 +112,7 @@ Take note of the container names, especially for Kapacitor.  If the Kapacitor co
 
 ### What is running?
 
-At this point there should be running on the host machine: InfluxDB, Telegraf and Kapacitor.  Telegraf is configured using the configuration file `etc/telegraf/telegraf.conf`.  Kapacitor is configured using the file `etc/kapacitor/kapacitor.conf`.  A bridge network has been defined in the `docker-compose.yml` file.  Each application has been assigned a static IP address and these addresses are reflected in the configuration files just mentioned.
+At this point there should be running on the host machine: InfluxDB, Telegraf and Kapacitor.  Telegraf is configured using the configuration file `etc/telegraf/telegraf.conf`.  Kapacitor is configured using the file `etc/kapacitor/kapacitor.conf`.  A bridge network has been defined in the `docker-compose.yml` file.  This bridge network features a simple name resolution service, that allows the container names to be used as the server names in the configuration files just mentioned.
 
 The running configuration can be further inspected by using the `influx` command line client directly from the InfluxDB Container.
 
@@ -186,7 +208,7 @@ from1 -> alert2;
 ```
 #### Test the stream alert using 'record'
 
-Before an alert is enabled, it is prudent to check its behavior.  A test run of how the alert stream will behave can be done using the Kapacitor record command.  This will return a UUID that can then be used as a reference to list and replay what was captured in the test run.
+Before an alert is enabled, it is prudent to check its behavior.  A test run of how the alert stream will behave can be done using the Kapacitor 'record' command.  This will return a UUID that can then be used as a reference to list and replay what was captured in the test run.
 
 ```
 $ docker exec tik_kapacitor_1 kapacitor record stream -task cpu_alert_stream -duration 60s
@@ -397,6 +419,6 @@ This short tutorial has covered the most basic steps in starting up the TICK sta
 
 ### Shutting down the stack
 
-There are to ways in which the stack can be taken down.
+There are two ways in which the stack can be taken down.
    * Either, in the first console hit CTRL + C
    * Or, in the second console run `$ docker-compose down --volumes`
