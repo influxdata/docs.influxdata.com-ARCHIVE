@@ -96,11 +96,13 @@ Perform the following steps on all three servers.
 #### Ubuntu & Debian (64-bit)
 ```
 wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.3.3-c1.3.3_amd64.deb
+echo "1f532428fc4088209da9470ac46baebbb8ec91419f8d428dc9088b39dacb54d9 influxdb-meta_1.3.3-c1.3.3_amd64.deb" | sha256sum -c
 sudo dpkg -i influxdb-meta_1.3.3-c1.3.3_amd64.deb
 ```
 #### RedHat & CentOS (64-bit)]
 ```
 wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.3.3_c1.3.3.x86_64.rpm
+echo "4683ec724f53b2ca717436e2e8034a85342e226a4f988a74df37d8cfe6f0d52a influxdb-meta-1.3.3_c1.3.3.x86_64.rpm" | sha256sum -c
 sudo yum localinstall influxdb-meta-1.3.3_c1.3.3.x86_64.rpm
 ```
 
@@ -154,16 +156,18 @@ You should see output similar to:
 
 Perform the following steps on all three servers.
 
-### I. Download and Install the Data Service
+### I. Download, Verify and Install the Data Service
 
 #### Ubuntu & Debian (64-bit)
 ```
 wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.3.3-c1.3.3_amd64.deb
+echo "4ee4eab05f44bec1ffd71c09c5c1b66aa785b4ce7c44bbd5d0e8c5a99ddfa042 influxdb-data_1.3.3-c1.3.3_amd64.deb" | sha256sum -c
 sudo dpkg -i influxdb-data_1.3.3-c1.3.3_amd64.deb
 ```
 #### RedHat & CentOS (64-bit)
 ```
 wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.3.3_c1.3.3.x86_64.rpm
+echo "b239b4627e47eb5931851ca31f4f7a7e1c5feb934c982f49572557171b4c08d9 influxdb-data-1.3.3_c1.3.3.x86_64.rpm" | sha256sum -c
 sudo yum localinstall influxdb-data-1.3.3_c1.3.3.x86_64.rpm
 ```
 

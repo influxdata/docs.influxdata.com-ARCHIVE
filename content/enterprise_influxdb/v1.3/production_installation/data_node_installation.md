@@ -91,17 +91,19 @@ with every other meta and data node.
 
 Perform the following steps on each data server.
 
-### I. Download and Install the Data Service
+### I. Download, Verify and Install the Data Service
 
 #### Ubuntu & Debian (64-bit)
 ```
 wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.3.3-c1.3.3_amd64.deb
+echo "4ee4eab05f44bec1ffd71c09c5c1b66aa785b4ce7c44bbd5d0e8c5a99ddfa042 influxdb-data_1.3.3-c1.3.3_amd64.deb" | sha256sum -c
 sudo dpkg -i influxdb-data_1.3.3-c1.3.3_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
 ```
 wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.3.3_c1.3.3.x86_64.rpm
+echo "b239b4627e47eb5931851ca31f4f7a7e1c5feb934c982f49572557171b4c08d9 influxdb-data-1.3.3_c1.3.3.x86_64.rpm" | sha256sum -c
 sudo yum localinstall influxdb-data-1.3.3_c1.3.3.x86_64.rpm
 ```
 
