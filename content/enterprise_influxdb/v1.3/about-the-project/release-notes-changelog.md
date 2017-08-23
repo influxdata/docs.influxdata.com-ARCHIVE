@@ -19,6 +19,14 @@ menu:
 <br>
 # Clustering
 
+## v1.3.4 [2017-08-23]
+
+This release builds off of the 1.3.4 release of OSS InfluxDB. Please see the [OSS release notes](https://docs.influxdata.com/influxdb/v1.3/about_the_project/releasenotes-changelog/) for more information about the OSS releases.
+
+#### Bugfixes
+
+- Close connection for remote iterators after EOF to avoid writer hanging indefinitely
+
 ## v1.3.3 [2017-08-10]
 
 This release builds off of the 1.3.3 release of OSS InfluxDB. Please see the [OSS release notes](https://docs.influxdata.com/influxdb/v1.3/about_the_project/releasenotes-changelog/) for more information about the OSS releases.
