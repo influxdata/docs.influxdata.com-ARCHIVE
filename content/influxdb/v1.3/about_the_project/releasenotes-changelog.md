@@ -5,6 +5,23 @@ menu:
     weight: 0
     parent: about_the_project
 ---
+
+## v1.3.4 [2017-08-23]
+
+### Release Notes
+Bug fix identified via Community and InfluxCloud. 
+
+### Bugfixes
+- Fixed time boundaries for continuous queries with time zones.
+- Fix time zone shifts when the shift happens on a time zone boundary.
+- Parse time literals using the time zone in the select statement.
+- Fix drop measurement not dropping all data.
+- Fix backups when snapshot is empty.
+- Eliminated cursor leak, resulting in an accumulation of .tsm.tmp files after compactions.
+- Fix Deadlock when dropping measurement and writing.
+- Ensure inputs are closed on error. Add runtime GC finalizer as additional guard to close iterators.
+- Fix leaking tmp file when large compaction aborted.
+
 ## v1.3.3 [2017-08-10]
 
 ### Release Notes
