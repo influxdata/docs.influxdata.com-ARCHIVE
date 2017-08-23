@@ -95,13 +95,13 @@ Perform the following steps on all three servers.
 
 #### Ubuntu & Debian (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.3.3-c1.3.3_amd64.deb
-sudo dpkg -i influxdb-meta_1.3.3-c1.3.3_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.3.4-c1.3.4_amd64.deb
+sudo dpkg -i influxdb-meta_1.3.4-c1.3.4_amd64.deb
 ```
 #### RedHat & CentOS (64-bit)]
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.3.3_c1.3.3.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.3.3_c1.3.3.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.3.4_c1.3.4.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.3.4_c1.3.4.x86_64.rpm
 ```
 
 ### II. Edit the Meta Service Configuration File
