@@ -97,17 +97,19 @@ meta node.
 
 Perform the following steps on each meta server.
 
-### I. Download and Install the Meta Service
+### I. Download, Verify and Install the Meta Service
 
 #### Ubuntu & Debian (64-bit)
 ```
 wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.3.3-c1.3.3_amd64.deb
+echo "1f532428fc4088209da9470ac46baebbb8ec91419f8d428dc9088b39dacb54d9 influxdb-meta_1.3.3-c1.3.3_amd64.deb" | sha256sum -c
 sudo dpkg -i influxdb-meta_1.3.3-c1.3.3_amd64.de
 ```
 
 #### RedHat & CentOS (64-bit)
 ```
 wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.3.3_c1.3.3.x86_64.rpm
+echo "4683ec724f53b2ca717436e2e8034a85342e226a4f988a74df37d8cfe6f0d52a influxdb-meta-1.3.3_c1.3.3.x86_64.rpm" | sha256sum -c
 sudo yum localinstall influxdb-meta-1.3.3_c1.3.3.x86_64.rpm
 ```
 
