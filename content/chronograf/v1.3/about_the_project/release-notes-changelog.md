@@ -6,6 +6,109 @@ menu:
     parent: About the Project
 ---
 
+## v1.3.7.0 [2017-08-23]
+
+### Bug Fixes
+- Chronograf now renders on Internet Explorer (IE) 11.
+- Resolve Kapacitor config for PagerDuty via the UI.
+- Fix Safari display issues in the Cell Editor display options.
+- Fix uptime status on Windows hosts running Telegraf.
+- Fix console error for 'placing prop on div'.
+- Fix Write Data form upload button and add `onDragExit` handler.
+- Fix missing cell type (and consequently single-stat).
+- Fix regression and redesign drag & drop interaction.
+- Prevent stats in the legend from wrapping line.
+- Fix raw query editor in Data Explorer, not using selected time.
+
+### Features
+- Improve 'new-sources' server flag example by adding 'type' key.
+- Add an input and validation to custom time range calendar dropdowns.
+- Add support for selecting template variables with URL params.
+
+### UI Improvements
+- Show "Add Graph" button on cells with no queries.
+
+## v1.3.6.1 [2017-08-14]
+**Upgrade Note** This release (1.3.6.1) fixes a possibly data corruption issue with dashboard cells' graph types. If you upgraded to 1.3.6.0 and visited any dashboard, once you have then upgraded to this release (1.3.6.1) you will need to manually reset the graph type for every cell via the cell's caret --> Edit --> Display Options. If you upgraded directly to 1.3.6.1, you should not experience this issue.
+
+### Bug Fixes
+- Fix inaccessible scroll bar in Data Explorer table.
+- Fix non-persistence of dashboard graph types.
+
+### Features
+- Add y-axis controls to the API for layouts.
+
+### UI Improvements
+- Increase screen real estate of Query Maker in the Cell Editor Overlay.
+
+## v1.3.6.0 [2017-08-08]
+
+### Bug Fixes
+- Fix domain not updating in visualizations when changing time range manually.
+- Prevent console error spam from Dygraph's synchronize method when a dashboard has only one graph.
+- Guarantee UUID for each Alert Table key to prevent dropping items when keys overlap.
+
+### Features
+- Add a few time range shortcuts to the custom time range menu.
+- Add ability to edit a dashboard graph's y-axis bounds.
+- Add ability to edit a dashboard graph's y-axis label.
+
+### UI Improvements
+- Add spinner in write data modal to indicate data is being written.
+- Fix bar graphs overlapping.
+- Assign a series consistent coloring when it appears in multiple cells.
+- Increase size of line protocol manual entry in Data Explorer's Write Data overlay.
+- Improve error message when request for Status Page News Feed fails.
+- Provide affirmative UI choice for 'auto' in DisplayOptions with new toggle-based component.
+
+## v1.3.5.0 [2017-07-27]
+
+### Bug Fixes
+- Fix z-index issue in dashboard cell context menu.
+- Clarify BoltPath server flag help text by making example the default path.
+- Fix cell name cancel not reverting to original name.
+- Fix typo that may have affected PagerDuty node creation in Kapacitor.
+- Prevent 'auto' GROUP BY as option in Kapacitor rule builder when applying a function to a field.
+- Prevent clipped buttons in Rule Builder, Data Explorer, and Configuration pages.
+- Fix JWT for the write path.
+- Disentangle client Kapacitor rule creation from Data Explorer query creation.
+
+### Features
+- View server generated TICKscripts.
+- Add the ability to select Custom Time Ranges in the Hostpages, Data Explorer, and Dashboards.
+- Clarify BoltPath server flag help text by making example the default path
+- Add shared secret JWT authorization to InfluxDB.
+- Add Pushover alert support.
+- Restore all supported Kapacitor services when creating rules, and add most optional message parameters.
+
+### UI Improvements
+- Polish alerts table in status page to wrap text less.
+- Specify that version is for Chronograf on Configuration page.
+- Move custom time range indicator on cells into corner when in presentation mode.
+- Highlight legend "Snip" toggle when active.
+
+## v1.3.4.0 [2017-07-10]
+
+### Bug Fixes
+- Disallow writing to \_internal in the Data Explorer.
+- Add more than one color to Line+Stat graphs.
+- Fix updating Retention Policies in single-node InfluxDB instances.
+- Lock the width of Template Variable dropdown menus to the size of their longest option.
+
+### Features
+- Add Auth0 as a supported OAuth2 provider.
+- Add ability to add custom links to User menu via server CLI or ENV vars.
+- Allow users to configure custom links on startup that will appear under the User menu in the sidebar.
+- Add support for Auth0 organizations.
+- Allow users to configure InfluxDB and Kapacitor sources on startup.
+
+### UI Improvements
+- Redesign Alerts History table on Status Page to have sticky headers.
+- Refresh Template Variable values on Dashboard page load.
+- Display current version of Chronograf at the bottom of Configuration page.
+- Redesign Dashboards table and sort them alphabetically.
+- Bring design of navigation sidebar in line with Branding Documentation.
+
 ## v1.3.3.0 [2017-06-19]
 
 ### Bug Fixes
