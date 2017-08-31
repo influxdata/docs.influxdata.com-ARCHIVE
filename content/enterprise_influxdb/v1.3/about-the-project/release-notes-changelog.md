@@ -19,6 +19,10 @@ menu:
 <br>
 # Clustering
 
+## v1.3.5 [2017-08-29]
+This release builds off of the 1.3.5 release of OSS InfluxDB.
+Please see the OSS [release notes](/influxdb/v1.3/about_the_project/releasenotes-changelog/#v1-3-5-2017-08-29) for more information about the OSS releases.
+
 ## v1.3.4 [2017-08-23]
 
 This release builds off of the 1.3.4 release of OSS InfluxDB. Please see the [OSS release notes](https://docs.influxdata.com/influxdb/v1.3/about_the_project/releasenotes-changelog/) for more information about the OSS releases.
