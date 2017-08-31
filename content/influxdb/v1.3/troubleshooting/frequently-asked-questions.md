@@ -912,7 +912,7 @@ section in the configuration file may affect query results.
 
 ## Why does series cardinality matter?
 
-InfluxDB maintains an in-memory index of every [series](/influxdb/v1.3/concepts/glossary/#series) in the system. As the number of unique series grows, so does the RAM usage. High [series cardinality](/influxdb/v1.3/concepts/glossary/#series-cardinality) can lead to the operating system killing the InfluxDB process with an out of memory (OOM) exception. See [Querying for series cardinality](#querying-for-series-cardinality) to learn how to query for series cardinality.
+InfluxDB maintains an in-memory index of every [series](/influxdb/v1.3/concepts/glossary/#series) in the system. As the number of unique series grows, so does the RAM usage. High [series cardinality](/influxdb/v1.3/concepts/glossary/#series-cardinality) can lead to the operating system killing the InfluxDB process with an out of memory (OOM) exception. See [Querying for series cardinality](#how-can-i-query-for-series-cardinality) to learn how to query for series cardinality.
 
 ## How can I remove series from the index?
 
