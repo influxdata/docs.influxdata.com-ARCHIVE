@@ -41,8 +41,8 @@ In general the steps for upgrading Kapacitor are as follows:
       **Important note** - When upgrading Kapacitor simply download the package using `wget`, do not proceed directly with the installation/upgrade until the following instructions and recommendations have been understood and put to use.
 
    1. Stop the running Kapacitor service, if it is not already stopped.
-   1. Backup the configuration file (e.g. `/etc/kapacitor/kapacitor.conf` - n.b. the default location.).
-   1. (Optional) Back up a copy of the contents of the Kapacitor data directory (e.g `/var/lib/kapacitor/*` - n.b. the default location.).
+   1. Backup the configuration file (e.g. `/etc/kapacitor/kapacitor.conf` - n.b. the default location).
+   1. (Optional) Back up a copy of the contents of the Kapacitor data directory (e.g `/var/lib/kapacitor/*` - n.b. the default location).
    1. Perform the upgrade.
    1. If during the upgrade the current configuration was not preserved, manually migrate the values in the backup configuration file to the new one.
    1. Restart the Kapacitor service.
@@ -129,8 +129,10 @@ If during the upgrade the configuration file was overwritten, open the new confi
 Restart is best handled through `systemctl`.
 
 ```
-sudo systemctl start kapacitor.service
+sudo systemctl restart kapacitor.service
 ```
+
+Note that `restart` is used here instead of `start`, in the event that Kapacitor was not shutdown properly.
 
 For tips on verifying the restart see the [Verifying the Restart](#verifying-the-restart) section below.
 
@@ -218,8 +220,10 @@ In the example from the previous section a warning concerning the `kapacitor.con
 Restart is best handled through `systemctl`.
 
 ```
-# systemctl start kapacitor.service
+# systemctl restart kapacitor.service
 ```
+
+Note that `restart` is used here instead of `start`, in the event that Kapacitor was not shutdown properly.
 
 For tips on verifying the restart see the [Verifying the Restart](#verifying-the-restart) section below.
 
@@ -387,8 +391,9 @@ $ sudo -u kapacitor vim kapacitor/etc/kapacitor/kapacitor.conf
 Restart is handled through `systemctl`.
 
 ```
-sudo systemctl start kapacitor.service
+sudo systemctl restart kapacitor.service
 ```
+Note that `restart` is used here instead of `start`, in the event that Kapacitor was not shutdown properly.
 
 ## Verifying the Restart
 
