@@ -5,6 +5,14 @@ menu:
     weight: 0
     parent: about_the_project
 ---
+## v1.3.5 [2017-08-29]
+
+### Release Notes
+Bug fix identified via Community and InfluxCloud. 
+
+### Bugfixes
+- Fix race condition accessing `seriesByID` map.
+- Fix deadlock when calling `SeriesIDsAllOrByExpr`.
 
 ## v1.3.4 [2017-08-23]
 
