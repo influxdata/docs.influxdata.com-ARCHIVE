@@ -41,8 +41,8 @@ In general the steps for upgrading Kapacitor are as follows:
       **Important note** - When upgrading Kapacitor simply download the package using `wget`, do not proceed directly with the installation/upgrade until the following instructions and recommendations have been understood and put to use.
 
    1. Stop the running Kapacitor service, if it is not already stopped.
-   1. Backup the configuration file (e.g. `/etc/kapacitor/kapacitor.conf`).
-   1. (Optional) Back up a copy of the contents of the Kapacitor data directory (e.g `/var/lib/kapacitor/*`).
+   1. Backup the configuration file (e.g. `/etc/kapacitor/kapacitor.conf` - n.b. the default location.).
+   1. (Optional) Back up a copy of the contents of the Kapacitor data directory (e.g `/var/lib/kapacitor/*` - n.b. the default location.).
    1. Perform the upgrade.
    1. If during the upgrade the current configuration was not preserved, manually migrate the values in the backup configuration file to the new one.
    1. Restart the Kapacitor service.
