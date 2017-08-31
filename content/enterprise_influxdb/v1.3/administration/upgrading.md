@@ -7,12 +7,12 @@ menu:
     weight: 0
     parent: Administration
 ---
+## Upgrading from version 1.3.x to 1.3.4
+Version 1.3.4 is a drop-in replacement for earlier releases of 1.3.x with no data migration required.
 
-## Upgrading from version 1.2.5 to 1.3.3
+## Upgrading from version 1.2.5 to 1.3.x
 
-Version 1.3.3 is a drop-in replacement for version 1.2.5 with no data migration required.
-
-Version 1.3.3 introduces changes to the data node configuration file.
+Version 1.3.x introduces changes to the data node configuration file.
 Please update that configuration file to avoid any unnecessary downtime.
 The steps below outline the upgrade process and include a list of the required configuration changes.
 
@@ -31,65 +31,65 @@ influxd-ctl backup .
 ```
 
 Otherwise, you should create a full backup before proceeding. 
-The following command uses the [version 1.2 backup syntax](https://docs.influxdata.com/enterprise_influxdb/v1.2/guides/backup-and-restore/#syntax) 
+The following command uses the [backup syntax originally introduced in version 1.2](https://docs.influxdata.com/enterprise_influxdb/v1.3/guides/backup-and-restore/#syntax) 
 to create a full backup of your cluster and it stores that backup in the current directory. 
 
 ```
 influxd-ctl backup -full .
 ```
 
-### Step 1: Download the 1.3.3 packages
+### Step 1: Download the 1.3.4 packages
 
 #### Meta node package download
 **Ubuntu & Debian (64-bit)**
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.3.3-c1.3.3_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.3.4-c1.3.4_amd64.deb
 ```
 
 **RedHat & CentOS (64-bit)**
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.3.3_c1.3.3.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.3.4_c1.3.4.x86_64.rpm
 ```
 
 #### Data node package download
 **Ubuntu & Debian (64-bit)**
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.3.3-c1.3.3_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.3.4-c1.3.4_amd64.deb
 ```
 
 **RedHat & CentOS (64-bit)**
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.3.3_c1.3.3.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.3.4_c1.3.4.x86_64.rpm
 ```
 
-### Step 2: Install the 1.3.3 packages
+### Step 2: Install the 1.3.4 packages
 
 #### Meta node package Install
 
 **Ubuntu & Debian (64-bit)**
 ```
-sudo dpkg -i influxdb-meta_1.3.3-c1.3.3_amd64.deb
+sudo dpkg -i influxdb-meta_1.3.4-c1.3.4_amd64.deb
 ```
 
 **RedHat & CentOS (64-bit)**
 ```
-sudo yum localinstall influxdb-meta-1.3.3_c1.3.3.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.3.4_c1.3.4.x86_64.rpm
 ```
 
 #### Data node package install
 
-When you run the install command, your terminal asks if you'd like to keep your current configuration file or overwrite your current configuration file with the file for version 1.3.3.
+When you run the install command, your terminal asks if you'd like to keep your current configuration file or overwrite your current configuration file with the file for version 1.3.4.
 Please keep your current configuration file by entering `N` or `O`;
-we update the configuration file with the necessary changes for version 1.3.2 in step 3.
+we update the configuration file with the necessary changes for version 1.3.4 in step 3.
 
 **Ubuntu & Debian (64-bit)**
 ```
-sudo dpkg -i influxdb-data_1.3.3-c1.3.3_amd64.deb
+sudo dpkg -i influxdb-data_1.3.4-c1.3.4_amd64.deb
 ```
 
 **RedHat & CentOS (64-bit)**
 ```
-sudo yum localinstall influxdb-data-1.3.3_c1.3.3.x86_64.rpm
+sudo yum localinstall influxdb-data-1.3.4_c1.3.4.x86_64.rpm
 ```
 
 ### Step 3: Update the data node configuration file
@@ -154,16 +154,16 @@ The [`influxd-ctl` tool](/enterprise_influxdb/v1.3/features/cluster-commands/) i
 Data Nodes
 ==========
 ID	TCP Address		Version
-4	rk-upgrading-01:8088	1.3.3_c1.3.3   # 1.3.3_c1.3.3 = 👍
-5	rk-upgrading-02:8088	1.3.3_c1.3.3
-6	rk-upgrading-03:8088	1.3.3_c1.3.3
+4	rk-upgrading-01:8088	1.3.4_c1.3.4   # 1.3.4_c1.3.4 = 👍
+5	rk-upgrading-02:8088	1.3.4_c1.3.4
+6	rk-upgrading-03:8088	1.3.4_c1.3.4
 
 Meta Nodes
 ==========
 TCP Address		Version
-rk-upgrading-01:8091	1.3.3_c1.3.3
-rk-upgrading-02:8091	1.3.3_c1.3.3
-rk-upgrading-03:8091	1.3.3_c1.3.3
+rk-upgrading-01:8091	1.3.4_c1.3.4
+rk-upgrading-02:8091	1.3.4_c1.3.4
+rk-upgrading-03:8091	1.3.4_c1.3.4
 ```
 
 If you have any issues upgrading your cluster, please do not hesitate to contact support at the email 
