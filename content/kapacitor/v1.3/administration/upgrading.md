@@ -24,7 +24,7 @@ How Kapacitor was installed will determine how Kapacitor should be upgraded.
 
 The application may have been installed directly using the package management mechanisms of the OS or it may have been installed by unpackging the `.zip` or `.tar.gz` distributions.  This document will cover upgrading Kapacitor from release 1.2.1 to release 1.3.1 on Linux(Ubuntu 16.04 and CentOS 7.3).  This document presents some specifics of upgrading using the `.deb` package; some similar specifics of upgrading using the `.rpm` package; and then more generally upgrading using the `.tar.gz` binary distribution.  The binary package upgrade should serve as an example offering hints as to how to upgrade using the binary distributions on other operating systems, for example on Windows using the `.zip` file.  On other operating systems the general steps presented here will be roughly the same.
 
-Before proceeding with the Kapacitor upgrade please ensure that InfluxDB and Telegraf (if used) have been upgraded to a release compatible with the latest release of Kapacitor.  Currently this means:
+Before proceeding with the Kapacitor upgrade please ensure that InfluxDB and Telegraf (if used) have been upgraded to a release compatible with the latest release of Kapacitor.  In this example we will use:
 
    * InfluxDB 1.3.2
    * Telegraf 1.3.5-1
