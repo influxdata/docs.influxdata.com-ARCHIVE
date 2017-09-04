@@ -7,9 +7,7 @@ menu:
     parent: introduction
 ---
 
-Kapacitor is a data processing engine.
-It can process both stream and batch data.
-This guide will walk through both workflows and teach the basics of using
+Kapacitor is a data processing engine. It can process both stream and batch data. This guide will walk through both workflows and teach the basics of using
 and running a Kapacitor daemon.
 
 What will be needed
@@ -17,11 +15,13 @@ What will be needed
 
 Do not worry about installing anything at this point.  Instructions are found below.
 
-* [InfluxDB](/docs/v0.9/introduction/installation.html)  - While Kapacitor does not require InfluxDB it is the easiest to setup and so it will be used in this guide.
+The following applications will be required:
+
+* [InfluxDB](/docs/v0.9/introduction/installation.html)  - While Kapacitor does not require InfluxDB, it is the easiest integration to setup and so it will be used in this guide.
 InfluxDB >= 1.3.x will be needed.
 * [Telegraf](https://github.com/influxdb/telegraf#installation) - Telegraf >= 1.3.x will be required.
-* [Kapacitor](https://github.com/influxdb/kapacitor) - The latest Kapacitor binaries for most OSes can be found at the [downloads](https://influxdata.com/downloads/#kapacitor) page.
-* Terminal - Kapacitor's interface is via a CLI and so you will need a basic terminal to issue commands.
+* [Kapacitor](https://github.com/influxdb/kapacitor) - The latest Kapacitor binary and installation packages for most OSes can be found at the [downloads](https://influxdata.com/downloads/#kapacitor) page.
+* Terminal - The Kapacitor client application works using the CLI and so a basic terminal will be needed to issue commands.
 
 The Use Case
 ------------
@@ -31,26 +31,30 @@ This guide will follow the classic use case of triggering an alert for high cpu 
 The Process
 -----------
 
-1. Install the three key TICKStack services: InfluxDB, Telegraf and Kapacitor.
+1. Install InfluxDB and Telegraf.
 2. Start InfluxDB and send it data from Telegraf.
-3. Configure Kapacitor.
+3. Install Kapacitor.
 4. Start Kapacitor.
-5. Define and run a streaming task to trigger CPU alerts.
-6. Define and run a batching task to trigger CPU alerts.
+5. Define and run a stream task to trigger CPU alerts.
+6. Define and run a batch task to trigger CPU alerts.
 
 Installation
 ------------
 
-The TICKStack services can be installed to run on the host machine as a part of Systemd, or they can be run from Docker containers. This guide will focus on installing and running them all on the same host.  
+The TICKStack services can be installed to run on the host machine as a part of Systemd, or they can be run from Docker containers. This guide will focus on installing and running them all on the same host as Systemd services.  
 
 If you would like to explore using Docker deployments of these components, [check out these instructions.](/kapacitor/v1.3/introduction/install-docker/).
 
-Install [InfluxDB](https://docs.influxdata.com/influxdb/latest/introduction/installation/), [Telegraf](https://docs.influxdata.com/telegraf/latest/introduction/installation/) and [Kapacitor](/kapacitor/v1.3/introduction/installation/), on the same host, using Linux the system packages (`.deb`,`.rpm`) if available.
+<!-- Install [InfluxDB](https://docs.influxdata.com/influxdb/latest/introduction/installation/), [Telegraf](https://docs.influxdata.com/telegraf/latest/introduction/installation/) and [Kapacitor](/kapacitor/v1.3/introduction/installation/), on the same host, using the Linux system packages (`.deb`,`.rpm`) if available. -->
+
+The applications InfluxDB, Telegraf and Kapacitor will need to be installed in that order and on the same host.
 
 All examples will assume that Kapacitor is running on `http://localhost:9092` and InfluxDB on `http://localhost:8086`.
 
 InfluxDB + Telegraf
 -------------------
+
+Install [InfluxDB](https://docs.influxdata.com/influxdb/latest/introduction/installation/) using the Linux system packages (`.deb`,`.rpm`) if available.
 
 Start InfluxDB using systemctl:
 
@@ -62,8 +66,6 @@ Verify InfluxDB startup:
 
 ```bash
 $ sudo journalctl -f -n 128 -u influxdb
--- Logs begin at Pá 2017-09-01 09:59:06 CEST. --
-zář 01 14:12:05 algonquin systemd[1]: Stopped InfluxDB is an open-source, distributed, time series database.
 zář 01 14:47:43 algonquin systemd[1]: Started InfluxDB is an open-source, distributed, time series database.
 zář 01 14:47:43 algonquin influxd[14778]:  8888888           .d888 888                   8888888b.  888888b.
 zář 01 14:47:43 algonquin influxd[14778]:    888            d88P"  888                   888  "Y88b 888  "88b
@@ -96,14 +98,16 @@ zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z Storing sta
 ...
 ```
 
-The following is a simple Telegraf configuration file that will send just cpu metrics to InfluxDB:
+<!--- The following is a simple Telegraf configuration file that will send just cpu metrics to InfluxDB: -->
 
-Once Telegraf is installed and started, it will, as configured by default, send system metrics to InfluxDB, which automatically creates an internal 'telegraf' database.
+Next install [Telegraf](https://docs.influxdata.com/telegraf/latest/introduction/installation/) using the Linux system packages (`.deb`,`.rpm`) if available.
+
+Once Telegraf is installed and started, it will, as configured by default, send system metrics to InfluxDB, which automatically creates the 'telegraf' database.
 
 The Telegraf configuration file can be found at its default location: `/etc/telegraf/telegraf.conf`.  For this introduction it is worth noting some values that will be relevant to the Kapacitor tasks that will be shown below. Namely:
 
    * `[agent]\interval` - declares the frequency at which system metrics will be sent to InfluxDB
-   * `[outputs]\[outputs.influxd]` - declares how to connect to InfluxDB and the destination database, which is the default 'telegraf' DB.
+   * `[[outputs.influxd]]` - declares how to connect to InfluxDB and the destination database, which is the default 'telegraf' database.
    * `[[inputs.cpu]]` - declares how to collect the system cpu metrics to be sent to InfluxDB.     
 
 *Example - relevant sections of /etc/telegraf/telegraf.conf*
@@ -160,7 +164,7 @@ zář 01 14:52:11 algonquin telegraf[15068]: 2017-09-01T12:52:11Z I! Tags enable
 zář 01 14:52:11 algonquin telegraf[15068]: 2017-09-01T12:52:11Z I! Agent Config: Interval:10s, Quiet:false, Hostname:"algonquin", Flush Interval:10s
  ```
 
-If Telegraf is inactive start it as follows:
+If Telegraf is 'inactive' start it as follows:
 
 ```
 $ sudo systemctl start telegraf
@@ -185,12 +189,20 @@ InfluxDB and Telegraf are now running and listening on localhost.  Wait about a 
 This can be achieved with the following query:  
 
 ```bash
-$ curl -G 'http://localhost:8086/query?db=telegraf' --data-urlencode 'q=SELECT count(usage_idle) FROM cpu'
-{"results":[{"statement_id":0,"series":[{"name":"cpu","columns":["time","count"],"values":[["1970-01-01T00:00:00Z",1593]]}]}]}
+$ curl -G 'http://localhost:8086/query?db=telegraf' --data-urlencode 'q=SELECT mean(usage_idle) FROM cpu'
 ```
 
-Starting Kapacitor
+This should return results similar to the following example.
+
+*Example - results from InfluxDB REST query*
+```
+{"results":[{"statement_id":0,"series":[{"name":"cpu","columns":["time","mean"],"values":[["1970-01-01T00:00:00Z",91.82304336748372]]}]}]}
+```
+
+Installing and Starting Kapacitor
 ------------------
+
+Install [Kapacitor](/kapacitor/v1.3/introduction/installation/) using the Linux system packages (`.deb`,`.rpm`) if available.
 
 The default Kapacitor configuration file is unpacked to `/etc/kapacitor/kapacitor.conf`.  A copy of the current configuration can be extracted from the Kapacitor daemon as follows:
 
@@ -238,7 +250,7 @@ zář 01 15:34:16 algonquin kapacitord[18526]: 2017/09/01 15:34:16 Using configu
 Since InfluxDB is running on `http://localhost:8086` Kapacitor finds it during start up and creates several [subscriptions](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#create-subscription) on InfluxDB.
 These subscriptions tell InfluxDB to send all the data it receives to Kapacitor.
 
-For more log data check the log file at
+For more log data check the log file in the traditional `/var/log/kapacitor` directory.
 
 ```
 $ sudo tail -f -n 128 /var/log/kapacitor/kapacitor.log
@@ -263,22 +275,19 @@ At this point InfluxDB is streaming the data it is receiving from Telegraf to Ka
 Trigger Alert from Stream data
 ------------------------------
 
-That was a bit of setup, but from this point this guide will introduce actually using Kapacitor.
+The TICKStack is now setup (excluding Chronograf, which is not covered here).  This guide will now introduce the fundamentals of actually working with Kapacitor.
 
-A `task` in Kapacitor represents an amount of work to do on a set of data.
-There are two types of tasks, `stream` and `batch` tasks.
-The `stream` task will be introduced first, and next the same items will be covered with a `batch` task.
+A `task` in Kapacitor represents an amount of work to do on a set of data. There are two types of tasks: `stream` and `batch`. A simple `stream` task will be used first to present core Kapacitor features.  Then there will be presented some more sophisticated use cases.  Finally the first simple use case will be covered as a `batch` task.
 
 Kapacitor uses a DSL called [TICKscript](/kapacitor/v1.3/tick/) to define tasks.
 Each TICKscript defines a pipeline that tells Kapacitor which data to process and how.
 
 So what should Kapacitor be instructed to do?
 
-The most common task in Kapacitor is triggering alerts. The example that follows will set up an alert on high cpu usage.
-How to define high cpu usage?  Telegraf writes to InfluxDB a cpu metric on the percentage of time a cpu spent in an idle state. For demonstration purposes, when idle usage drops below 70% a critical alert will be triggered.    
+The most common Kapacitor use case is triggering alerts. The example that follows will set up an alert on high cpu usage.
+How to define high cpu usage?  Telegraf writes to InfluxDB a cpu metric on the percentage of time a cpu spent in an idle state. For demonstration purposes assume that when idle usage drops below 70% a critical alert should be triggered.    
 
-Given these criteria a TICKscript can be written to cover this use case.
-Put the script below into a file called `cpu_alert.tick`:
+A TICKscript can now be written to cover these criteria.  Copy the script below into a file called `cpu_alert.tick`:
 
 ```javascript
 stream
@@ -293,7 +302,7 @@ stream
 
 Kapacitor has an HTTP API with which all communication happens.
 The `kapacitor` client application exposes the API over the command line.
-Now use this CLI tool to define the `task` and the databases and retention policies it can access:
+Now use this CLI tool to define the `task` and the database&mdash;including retention policy&mdash;that it can access:
 
 ```bash
 kapacitor define cpu_alert \
@@ -302,21 +311,40 @@ kapacitor define cpu_alert \
     -dbrp telegraf.autogen
 ```
 
-That's it, Kapacitor now knows how to trigger the alert.
+Verify that the alert has been created using the `list` command.
 
+```
+$ kapacitor list tasks
+ID        Type      Status    Executing Databases and Retention Policies
+cpu_alert stream    disabled  false     ["telegraf"."autogen"]
+```
 
-However nothing is going to happen until the task has been enable.
-Before enabling the task, it should first be tested to ensure that it does not do spam the log files or communication channels with alerts.
-Record the current data stream for a bit so it can be used to test the new task:
+View details about the task using the `show` command.
+
+```
+$ kapacitor show cpu_alert
+ID: cpu_alert
+Error:
+Template:
+Type: stream
+Status: disabled
+Executing: false
+...
+```
+This command will be covered in more detail below.
+
+Kapacitor now knows how to trigger the alert.
+
+However, nothing is going to happen until the task has been enabled.  Before being enabled it should first be tested to ensure that it does not do spam the log files or communication channels with alerts.  Record the current data stream for a bit so it can be used to test the new task:
 
 ```bash
-kapacitor record stream -task cpu_alert -duration 20s
+kapacitor record stream -task cpu_alert -duration 60s
 ```
 
 Since the task was defined with a database and retention policy pair, the recording knows to
 only record data from that database and retention policy.
 
-Now grab that ID that was returned and put it in a bash variable for easy use later (the UUID returned will be different):
+Now grab the ID that was returned and put it in a bash variable for easy use later on (the actual UUID returned will be different):
 
 ```bash
 rid=cd158f21-02e6-405c-8527-261ae6f26153
@@ -332,14 +360,20 @@ The output should appear like:
 
 ```
 ID                                      Type    Status    Size      Date
-cd158f21-02e6-405c-8527-261ae6f26153    stream  finished  1.6 MB    04 May 16 11:44 MDT
+cd158f21-02e6-405c-8527-261ae6f26153    stream  finished  2.2 kB    04 May 16 11:44 MDT
 ```
 
 As long as the size is more than a few bytes it is certain that some data was captured.
-If Kapacitor is not receiving data yet, check each layer: Telegraf -> InfluxDB -> Kapacitor.
+If Kapacitor is not receiving data yet, check each layer: Telegraf &rarr; InfluxDB &rarr; Kapacitor.
 Telegraf will log errors if it cannot communicate to InfluxDB.
 InfluxDB will log an error about `connection refused` if it cannot send data to Kapacitor.
 Run the query `SHOW SUBSCRIPTIONS` to find the endpoint that InfluxDB is using to send data to Kapacitor.
+
+```
+$ curl -G 'http://localhost:8086/query?db=telegraf' --data-urlencode 'q=SHOW SUBSCRIPTIONS'
+
+{"results":[{"statement_id":0,"series":[{"name":"_internal","columns":["retention_policy","name","mode","destinations"],"values":[["monitor","kapacitor-ef3b3f9d-0997-4c0b-b1b6-5d0fb37fe509","ANY",["http://localhost:9092"]]]},{"name":"telegraf","columns":["retention_policy","name","mode","destinations"],"values":[["autogen","kapacitor-ef3b3f9d-0997-4c0b-b1b6-5d0fb37fe509","ANY",["http://localhost:9092"]]]}]}]}
+```
 
 With a snapshot of data recorded from the stream, that data can then be replayed to the new task.
 The `replay` action replays data only to a specific task.
@@ -350,20 +384,21 @@ kapacitor replay -recording $rid -task cpu_alert
 ```
 
 Since the data has already been recorded, it can be replayed as fast as possible instead of waiting for real time to pass.
-If the flag `-real` was set, then the data would be replayed by waiting for the deltas between the timestamps to pass, though the result is identical whether real time passes or not. This is because time is measured on each node by the data points it receives.
+When the flag `-real-clock` is set, the data will be replayed by waiting for the deltas between the timestamps to pass, though the result is identical whether real time passes or not. This is because time is measured on each node by the data points it receives.
 
-Check the log using the command below.  Were any alerts received?
+Check the log using the command below.  
+
+```bash
+sudo cat /tmp/alerts.log
+```
+Were any alerts received?
 The file should contain lines of JSON, where each line represents one alert.
 The JSON line contains the alert level and the data that triggered the alert.
 
-```bash
-cat /tmp/alerts.log
-```
-
-Depending on how busy the server was, maybe not.
+Depending on how busy the host machine was, maybe not.
 
 The task can be modify to be really sensitive to ensure that the alerts are working.
-Change the `.crit(lambda: "usage_idle" < 70)` line in the TICKscript to `.crit(lambda: "usage_idle" < 100)`, and define the task once more.
+In the TICKscript change the lamda function `.crit(lambda: "usage_idle" < 70)` to `.crit(lambda: "usage_idle" < 100)`, and define the task once more.
 
 Any time you want to update a task change the TICKscript and then run the `define` command again with just the `TASK_NAME` and `-tick` arguments:
 
@@ -373,15 +408,15 @@ Now every data point that was received during the recording will trigger an aler
 kapacitor define cpu_alert -tick cpu_alert.tick
 ```
 
-Let's replay it again and verify the results.
+Replay it again and verify the results.
 
 ```bash
 kapacitor replay -recording $rid -task cpu_alert
 ```
 
-Once the `alerts.log` results verify that it is working, change the `usage_idle` threshold back to a more reasonable level.
+Once the `alerts.log` results verify that it is working, change the `usage_idle` threshold back to a more reasonable level and redefine the task once more using the `define` command as shown above.
 
-Enable the task so it can start processing the live data stream with:
+Enable the task, so it can start processing the live data stream, with:
 
 ```bash
 kapacitor enable cpu_alert
@@ -389,11 +424,10 @@ kapacitor enable cpu_alert
 
 Now alerts will be written to the log in real time.
 
-To see that the task is receiving data and behaving as expected run the `show` command to get more information about it:
+To see that the task is receiving data and behaving as expected run the `show` command once again to get more information about it:
 
 ```bash
 $ kapacitor show cpu_alert
-asurement from our example database.
 |from()
 ID: cpu_alert
 Error:
@@ -428,13 +462,13 @@ alert2 [alerts_triggered="0" avg_exec_time_ns="0" ];
 ```
 
 The first part has information about the state of the task and any error it may have encountered.
-The `TICKscript` section displays the version of the TICKscript that Kapacitor has stored in its local db.
+The `TICKscript` section displays the version of the TICKscript that Kapacitor has stored in its local database.
 
-The last section `DOT` is a [graphviz dot](http://www.graphviz.org) formatted string that contains information about the data processing pipeline defined by the TICKscript.
-The *key=value* pairs are stats about each node or edge. The *processed* key indicates the number of data points that have passed along the specified edge of the graph.
+The last section, `DOT`, is a [graphviz dot](http://www.graphviz.org) formatted tree that contains information about the data processing pipeline defined by the TICKscript.  Its members are key-value associative array entries containing statistics about each node and links along an edge to the next node also including associative array statistical information.  The *processed* key in the link/edge members indicates the number of data points that have passed along the specified edge of the graph.
 For example in the above the `stream0` node (aka the `stream` var from the TICKscript) has sent 12 points to the `from1` node.
-The `from1` node has also sent 12 points on to the `alert2` node.
-Since Telegraf is configured to send `cpu` data all 12 points match the from/measurement criteria of the `from1` node and are passed on.
+The `from1` node has also sent 12 points on to the `alert2` node.  Since Telegraf is configured to send `cpu` data, all 12 points match the from/measurement criteria of the `from1` node and are passed on.
+
+>NOTE: When installing graphviz on Debian or RedHat (if not already installed) use the package provided by the OS provider.  The packages offered in the download section of the graphviz site are not up-to-date.
 
 Now that the task is running with live data, here is a quick hack to use 100% of one core to generate some artificial cpu activity:
 
@@ -445,9 +479,9 @@ while true; do i=0; done
 There are plenty of ways to get a threshold alert.  So, why all this pipeline TICKscript stuff?
 In short because TICKscripts can quickly be extended to become *much* more powerful.
 
-### Keep the quotes in mind
+### Gotcha - single versus double quotes
 
-Single quotes and double quotes in kapacitor do very different things:
+Single quotes and double quotes in TICKscripts do very different things:
 
 Note the following example:
 
@@ -461,10 +495,7 @@ var data = stream
         .where(lambda: "host" == "server1")
 ```
 
-The result of this search will always be empty, because double quotes were used around server1.
-This means that Kapacitor will search for a series where the field "host" is equal to _the field_ "server1".
-This is probably not what was intended.
-More likely the intention was to search for a series where tag "host" has _the value_ "server1", so single quotes should be used. Double quotes denote data fields, single quotes string values.  To match the value, the tick script above should look like this:
+The result of this search will always be empty, because double quotes were used around "server1". This means that Kapacitor will search for a series where the field "host" is equal to the value held in _the field_ "server1". This is probably not what was intended. More likely the intention was to search for a series where tag "host" has _the value_ 'server1', so single quotes should be used. Double quotes denote data fields, single quotes string values.  To match the _value_, the tick script above should look like this:
 
 ```javascript
 var data = stream
@@ -492,7 +523,7 @@ stream
         .log('/tmp/alerts.log')
 ```
 
-Just like that, a dynamic threshold has been created, and, if cpu usage drops in the day or spikes at night, an alert will be issued.
+Just like that, a dynamic threshold can be created, and, if cpu usage drops in the day or spikes at night, an alert will be issued.
 Try it out.
 Use `define` to update the task TICKscript.
 
@@ -500,26 +531,26 @@ Use `define` to update the task TICKscript.
 kapacitor define cpu_alert -tick cpu_alert.tick
 ```
 
->NOTE: If a task is already enabled `define`ing the task again will automatically `reload` it.
+>NOTE: If a task is already enabled, redefining the task with the `define` command will automatically `reload` it.
 To define a task without reloading it use `-no-reload`
 
 Now tail the alert log:
 
 ```bash
-tail -f /tmp/alerts.log
+sudo tail -f /tmp/alerts.log
 ```
 
-There shouldn't be any alerts triggering just yet.
-Next, start a few while loops to add some load:
+There should not be any alerts triggering just yet.
+Next, start a while loop to add some load:
 
 ```bash
 while true; do i=0; done
 ```
 
 An alert trigger should be written to the log shortly, once enough artificial load has been created.
-Leave the loops running for a few minutes.
-After canceling the loops, another alert should be issued indicating that cpu usage has again changed.
-Using this technique alerts can be generated for the raising and falling edges of cpu usage, as well as any outliers.
+Leave the loop running for a few minutes.
+After canceling the loop, another alert should be issued indicating that cpu usage has again changed.
+Using this technique, alerts can be generated for the raising and falling edges of cpu usage, as well as any outliers.
 
 ### A Real-World Example
 
@@ -528,11 +559,11 @@ Once the metrics from several hosts are streaming to Kapacitor, it is possible t
 the cpu usage for each service running in each datacenter, and then trigger an alert
 based off the 95th percentile.
 In addition to just writing the alert to a log, Kapacitor can
-integrate with third-party utilities: currently Slack, PagerDuty and VictorOps are supported, as well as
-posting the alert to a custom endpoint or executing a custom script.
+integrate with third-party utilities: currently Slack, PagerDuty, HipChat, VictorOps and more are supported. The alert can also be sent by email, be posted to a custom endpoint or can trigger the execution of a custom script.
 Custom message formats can also be defined so that alerts have the right context and meaning.
-The TICKscript for this would look like:
+The TICKscript for this would look like the following example.
 
+*Example - TICKscript for stream on multiple service cpus and alert on 95th percentile*
 ```javascript
 stream
     |from()
@@ -577,7 +608,7 @@ stream
 
 Something so simple as defining an alert can quickly be extended to apply to a much larger scope.
 With the above script, an alert will be triggered if any service in any datacenter deviates more than 3
-standard deviations away from normal behavior as defined by the historical 95th percentile of cpu usage, within 1 minute!
+standard deviations away from normal behavior as defined by the historical 95th percentile of cpu usage, and will do so within 1 minute!
 
 For more information on how alerting works, see the [AlertNode](/kapacitor/v1.3/nodes/alert_node/) docs.
 
@@ -589,7 +620,7 @@ InfluxDB and then process that data in batches.
 While triggering an alert based off cpu usage is more suited for the streaming case, the basic idea
 of how `batch` tasks work is demonstrated here by following the same use case.
 
-This TICKscript does the same thing as the earlier stream task, but as a batch task:
+This TICKscript does roughly the same thing as the earlier stream task, but as a batch task:
 
 ```javascript
 batch
@@ -599,16 +630,25 @@ batch
     ''')
         .period(5m)
         .every(5m)
-        .groupBy(time(1m))
+        .groupBy(time(1m), 'cpu')
     |alert()
         .crit(lambda: "mean" < 70)
-        .log('/tmp/alerts.log')
+        .log('/tmp/batch_alerts.log')
 ```
+Copy the script above into the file `batch_cpu_alert.tick`.
 
-To define this task do:
+Define this task:
 
 ```bash
 kapacitor define batch_cpu_alert -type batch -tick batch_cpu_alert.tick -dbrp telegraf.autogen
+```
+Verify its creation:
+
+```bash
+$ kapacitor list tasks
+ID              Type      Status    Executing Databases and Retention Policies
+batch_cpu_alert batch     disabled  false     ["telegraf"."autogen"]
+cpu_alert       stream    enabled   true      ["telegraf"."autogen"]
 ```
 
 The result of the query in the task can be recorded like so (again, the actual UUID will differ):
@@ -629,10 +669,10 @@ kapacitor replay -recording $rid -task batch_cpu_alert
 ```
 
 Check the alert log to make sure alerts were generated as expected.
-The `sigma` based alert above can also be adapted for working with batch data as well.
+The `sigma` based alert above can also be adapted for working with batch data.
 Play around and get comfortable with updating, testing, and running tasks in Kapacitor.
 
 ### What's next?
 
 Take a look at the [example guides](/kapacitor/v1.3/guides/) for how to use Kapacitor.
-These use cases demonstrate some of the more rich features of Kapacitor.
+The use cases demonstrated there explore some of the richer features of Kapacitor.
