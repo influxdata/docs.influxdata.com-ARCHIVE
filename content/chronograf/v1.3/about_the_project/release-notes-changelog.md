@@ -6,6 +6,31 @@ menu:
     parent: About the Project
 ---
 
+## v1.3.8.0 [2017-09-07]
+
+### Bug Fixes
+1. Fix the limit of 100 alert rules on alert rules page.
+1. Fix graphs when y-values are constant.
+1. Fix crosshair not being removed when user leaves graph.
+1. Fix inability to add kapacitor from source page on fresh install.
+1. Fix DataExplorer crashing if a field property is not present in the queryConfig.
+1. Fix the max y value of stacked graphs preventing display of the upper bounds of the chart.
+1. Fix for delayed selection of template variables using URL query params.
+
+### Features
+1. Add prefix, suffix, scale, and other y-axis formatting for cells in dashboards.
+1. Update the group by time when zooming in graphs.
+1. Add the ability to link directly to presentation mode in dashboards with the `present` boolean query parameter in the URL.
+1. Add the ability to select a template variable via a URL parameter.
+
+### UI Improvements
+1. Use line-stacked graph type for memory information.
+1. Improve cell sizes in Admin Database tables.
+1. Polish appearance of optional alert parameters in Kapacitor rule builder.
+1. Add active state for Status page navbar icon.
+1. Improve UX of navigation to a sub-nav item in the navbar.
+
+
 ## v1.3.7.0 [2017-08-23]
 
 ### Bug Fixes
