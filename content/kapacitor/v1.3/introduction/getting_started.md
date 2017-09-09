@@ -43,7 +43,7 @@ Installation
 
 The TICKStack services can be installed to run on the host machine as a part of Systemd, or they can be run from Docker containers. This guide will focus on installing and running them all on the same host as Systemd services.  
 
-If you would like to explore using Docker deployments of these components, [check out these instructions.](/kapacitor/v1.3/introduction/install-docker/).
+If you would like to explore using Docker deployments of these components, [check out these instructions.](/kapacitor/v1.3/introduction/install-docker/)
 
 <!-- Install [InfluxDB](https://docs.influxdata.com/influxdb/latest/introduction/installation/), [Telegraf](https://docs.influxdata.com/telegraf/latest/introduction/installation/) and [Kapacitor](/kapacitor/v1.3/introduction/installation/), on the same host, using the Linux system packages (`.deb`,`.rpm`) if available. -->
 
