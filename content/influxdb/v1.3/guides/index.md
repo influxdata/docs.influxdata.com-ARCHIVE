@@ -9,3 +9,5 @@ title: Guides
 ## [Downsampling and Data Retention](/influxdb/v1.3/guides/downsampling_and_retention/)
 
 ## [Hardware Sizing Guidelines](/influxdb/v1.3/guides/hardware_sizing/)
+
+## [HTTPS Setup](/influxdb/v1.3/administration/https_setup/)
