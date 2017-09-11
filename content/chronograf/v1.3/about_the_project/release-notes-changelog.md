@@ -6,6 +6,12 @@ menu:
     parent: About the Project
 ---
 
+## v1.3.8.1 [2017-09-08]
+
+### Bug Fixes
+1. Fix return code on meta nodes when raft redirects to leader.
+1. Reduce points per graph to one point per 3 pixels.
+
 ## v1.3.8.0 [2017-09-07]
 
 ### Bug Fixes
