@@ -52,13 +52,11 @@ stream
 
 **Note on inadvertant type casting**
 
-Beware that numerical values declared in the TICKScript may not be of a suitable type for the function or operation in which they will be used.  Numerical values that include a decimal will be interpreted as floats.  Numerical values without a decimal will be interpreted as integers.  When integers and floats are used within the same expression the integer values will be coerced into becoming type float.  Failure to observe this rule can result in unexpected results.  For example, when using a lambda expression to calculate percentages from fields of type integer, multiplication by 100 (an integer) will result in 0, while multiplication by 100.0 (a float) will result in a valid percentage value.  Correctly written, such an operation should look like this: `eval(lambda "total_error_responses"/"total_responses" * 100.0)`
+Beware that numerical values declared in the TICKscript may not be of a suitable type for the function or operation in which they will be used.  Numerical values that include a decimal will be interpreted as floats.  Numerical values without a decimal will be interpreted as integers.  When integers and floats are used within the same expression the integer values will be coerced into becoming type float.  Failure to observe this rule can yield unexpected results.  For example, when using a lambda expression to calculate percentages from fields of type integer, multiplication by 100 (an integer) will result in 0, while multiplication by 100.0 (a float) will result in a valid percentage value.  Correctly written, such an operation should look like this: `eval(lambda "total_error_responses"/"total_responses" * 100.0)`
 
-To ensure that the type of a field value is correct, use the built-in type conversion functions.   
+To ensure that the type of a field value is correct, use the built-in type conversion functions (see below).   
 
-
-
-Builtin Functions
+Built-in Functions
 -----------------
 
 ### Type Conversion functions
