@@ -27,18 +27,18 @@ Stateful
 
 These lambda expressions are stateful, meaning that each time they are evaluated internal state can change and will persist until the next evaluation.
 This may seem odd as part of an expression language but it has a powerful use case.
-You can define a function within the language that is essentially a online/streaming algorithm and with each call the function state is updated.
+You can define a function within the language that is essentially an on-line/streaming algorithm and with each call the function state is updated.
 For example the built-in function `sigma` that calculates a running mean and standard deviation and returns the number of standard deviations the current data point is away from the mean.
 
 Example:
 
 ```javascript
-sigma("value") > 3
+sigma("value") > 3.0
 ```
 
-Each time that the expression is evaluated the new value it updates the running statistics and then returns the deviation.
-This simple expression evaluates to `false` while the stream of data points it has received remains within `3` standard deviations of the running mean.
-As soon as a value is processed that is more than 3 standard deviation it evaluates to `true`.
+Each time that the expression is evaluated it updates the running statistics and then returns the deviation.
+This simple expression evaluates to `false` while the stream of data points it has received remains within `3.0` standard deviations of the running mean.
+As soon as a value is processed that is more than `3.0` standard deviations it evaluates to `true`.
 Now you can use that expression inside of a TICKscript to define powerful alerts.
 
 TICKscript with lambda expression:
@@ -47,10 +47,16 @@ TICKscript with lambda expression:
 stream
     |alert()
         // use an expression to define when an alert should go critical.
-        .crit(lambda: sigma("value") > 3)
+        .crit(lambda: sigma("value") > 3.0)
 ```
 
-Builtin Functions
+**Note on inadvertant type casting**
+
+Beware that numerical values declared in the TICKscript may not be of a suitable type for the function or operation in which they will be used.  Numerical values that include a decimal will be interpreted as floats.  Numerical values without a decimal will be interpreted as integers.  When integers and floats are used within the same expression the integer values will be coerced into becoming type float.  Failure to observe this rule can yield unexpected results.  For example, when using a lambda expression to calculate percentages from fields of type integer, multiplication by 100 (an integer) will result in 0, while multiplication by 100.0 (a float) will result in a valid percentage value.  Correctly written, such an operation should look like this: `eval(lambda "total_error_responses"/"total_responses" * 100.0)`
+
+To ensure that the type of a field value is correct, use the built-in type conversion functions (see below).   
+
+Built-in Functions
 -----------------
 
 ### Type Conversion functions
@@ -260,4 +266,3 @@ The `if` function's return type is the same type as its second and third argumen
 ```javascript
 if(condition, true expression, false expression)
 ```
-
