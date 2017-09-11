@@ -17,6 +17,7 @@ The InfluxDB configuration file contains configuration settings specific to a lo
     * [Global options](#global-options)
         * [reporting-disabled](#reporting-disabled-false)
         * [bind-address](#bind-address-127-0-0-1-8088)
+        * [GOMAXPROCS](#GOMAXPROCS)
     * [[meta]](#meta)
         * [dir](#dir-var-lib-influxdb-meta)
         * [retention-autocreate](#retention-autocreate-true)
@@ -253,6 +254,20 @@ Environment variable: `INFLUXDB_REPORTING_DISABLED`
 The bind address to use for the RPC service for [backup and restore](/influxdb/v1.3/administration/backup_and_restore/).
 
 Environment variable: `INFLUXDB_BIND_ADDRESS`
+
+### GOMAXPROCS
+
+GOMAXPROCS is a GoLang 
+
+The default value of GOMAXPROCS is the number of CPUs (whatever your operating system considers to be a CPU -- 
+this could be the number of cores i.e. GOMAXPROCS=32 for a 32 core machine) visible to the program *at startup.*  
+However, you can override this value to be less than the maxium value.  
+This can be important in cases where you are running the database alongside other processes on the same machine and
+want to ensure that the database doesn't completely starve those those processes. 
+
+Keep in mind that setting GOMAXPROCS=1 will eliminate all parallelization.  
+
+Environment variable: `GOMAXPROCS`
 
 ## [meta]
 
