@@ -344,6 +344,9 @@ kapacitor record stream -task cpu_alert -duration 60s
 Since the task was defined with a database and retention policy pair, the recording knows to
 only record data from that database and retention policy.
 
+   * **NOTE &ndash; connection refused** - If, when running the record command, an error is returned of the type `getsockopt: connection refused` (Linux) or `connectex: No connection could be made...` (Windows), please ensure that the Kapacitor service is running.  See the section above [Installing and Starting Kapacitor](#installing-and-starting-kapacitor).  If Kapacitor is started and this error is still encountered, check the firewall settings of the host machine and ensure that port `9092` is accessible.  If the Kapacitor service is running on another host machine, set the `KAPACITOR_URL` environment variable in the local shell to the Kapacitor endpoint on the remote machine.  
+
+
 Now grab the ID that was returned and put it in a bash variable for easy use later on (the actual UUID returned will be different):
 
 ```bash
