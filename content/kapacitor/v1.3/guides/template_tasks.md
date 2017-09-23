@@ -51,7 +51,7 @@ stream
 ```
 
 Notice how everything about the task is a `var` except for the structure of the task pipeline itself.
-This allows substaintial flexibility in customization of the template.
+This allows substantial flexibility in customization of the template.
 
 To use this template, first define the template like so:
 
