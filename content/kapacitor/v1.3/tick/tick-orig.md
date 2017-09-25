@@ -1,11 +1,12 @@
 ---
-title: TICKscript Language Reference
+title: TICKscript Language Original Introduction
 
 menu:
   kapacitor_1_3:
-    name: TICKscript
-    identifier: tick
-    weight: 2 
+    name: Original TICK base
+    identifier: tick_intro_orig
+    parent: tick
+    weight: 99 
 ---
 
 Kapacitor uses a DSL named `TICKscript`.
