@@ -721,19 +721,19 @@ $ influxd-ctl show
 Data Nodes
 ==========
 ID	 TCP Address		        Version
-2   cluster-node-01:8088	1.3.5-c1.3.5
-4   cluster-node-02:8088	1.3.5-c1.3.5
+2   cluster-node-01:8088	1.3.6-c1.3.6
+4   cluster-node-02:8088	1.3.6-c1.3.6
 
 Meta Nodes
 ==========
 TCP Address		        Version
-cluster-node-01:8091	1.3.5-c1.3.5
-cluster-node-02:8091	1.3.5-c1.3.5
-cluster-node-03:8091	1.3.5-c1.3.5
+cluster-node-01:8091	1.3.6-c1.3.6
+cluster-node-02:8091	1.3.6-c1.3.6
+cluster-node-03:8091	1.3.6-c1.3.6
 ```
 
 The output shows that the cluster includes three meta nodes and two data nodes.
-Every node is using InfluxEnterprise version `1.3.5-c1.3.5`.
+Every node is using InfluxEnterprise version `1.3.6-c1.3.6`.
 
 #### show-shards      
 
