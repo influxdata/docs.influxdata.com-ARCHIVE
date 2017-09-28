@@ -56,7 +56,7 @@ influxd-ctl [global-options] <command> [arguments]
 &emsp;&emsp;&emsp;Specify the bind HTTP address of a meta node to connect to. The default is `localhost:8091`.
 
 `-bind-tls`  
-&emsp;&emsp;&emsp;Use TLS.
+&emsp;&emsp;&emsp;Use TLS.  If you have enabled HTTPS, you MUST use this option in order for influxd-ctl to connect to the meta node.
 
 `-config '<path-to-configuration-file>'`  
 &emsp;&emsp;&emsp;Specify the path to the configuration file.
