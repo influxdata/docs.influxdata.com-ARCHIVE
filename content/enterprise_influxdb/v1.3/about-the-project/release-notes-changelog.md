@@ -19,6 +19,16 @@ menu:
 <br>
 # Clustering
 
+## v1.3.6 [2017-09-28]
+
+#### Bugfixes
+
+- Fix "group by" marshaling in the IteratorOptions.
+- Address meta service data race condition.
+- Fix race condition when writing points to remote nodes.
+- Use InfluxData fork of yamux. This update reduces overall memory usage when streaming large amounts of data.  
+  Contributed back to the yamux project via: https://github.com/hashicorp/yamux/pull/50
+
 ## v1.3.5 [2017-08-29]
 This release builds off of the 1.3.5 release of OSS InfluxDB.
 Please see the OSS [release notes](/influxdb/v1.3/about_the_project/releasenotes-changelog/#v1-3-5-2017-08-29) for more information about the OSS releases.

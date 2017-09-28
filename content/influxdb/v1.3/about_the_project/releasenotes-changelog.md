@@ -5,6 +5,26 @@ menu:
     weight: 0
     parent: about_the_project
 ---
+## v1.3.6 [2017-09-28]
+
+### Release Notes
+Bug fix identified via Community and InfluxCloud. 
+
+### Bugfixes
+- Reduce how long it takes to walk the varrefs in an expression.
+- Address panic: runtime error: invalid memory address or nil pointer dereference.
+- Fix increased memory usage in cache and WAL readers for clusters with a large number of shards.
+- Prevent deadlock when doing math on the result of a subquery.
+- Fix several race conditions present in the shard and storage engine.
+- Fix race condition on cache entry.
+
+### Release Notes
+Bug fix identified via Community and InfluxCloud. 
+
+### Bugfixes
+- Fix race condition accessing `seriesByID` map.
+- Fix deadlock when calling `SeriesIDsAllOrByExpr`.
+
 ## v1.3.5 [2017-08-29]
 
 ### Release Notes

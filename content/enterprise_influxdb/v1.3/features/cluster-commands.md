@@ -56,7 +56,7 @@ influxd-ctl [global-options] <command> [arguments]
 &emsp;&emsp;&emsp;Specify the bind HTTP address of a meta node to connect to. The default is `localhost:8091`.
 
 `-bind-tls`  
-&emsp;&emsp;&emsp;Use TLS.
+&emsp;&emsp;&emsp;Use TLS.  If you have enabled HTTPS, you MUST use this option in order for influxd-ctl to connect to the meta node.
 
 `-config '<path-to-configuration-file>'`  
 &emsp;&emsp;&emsp;Specify the path to the configuration file.
@@ -721,19 +721,19 @@ $ influxd-ctl show
 Data Nodes
 ==========
 ID	 TCP Address		        Version
-2   cluster-node-01:8088	1.3.5-c1.3.5
-4   cluster-node-02:8088	1.3.5-c1.3.5
+2   cluster-node-01:8088	1.3.6-c1.3.6
+4   cluster-node-02:8088	1.3.6-c1.3.6
 
 Meta Nodes
 ==========
 TCP Address		        Version
-cluster-node-01:8091	1.3.5-c1.3.5
-cluster-node-02:8091	1.3.5-c1.3.5
-cluster-node-03:8091	1.3.5-c1.3.5
+cluster-node-01:8091	1.3.6-c1.3.6
+cluster-node-02:8091	1.3.6-c1.3.6
+cluster-node-03:8091	1.3.6-c1.3.6
 ```
 
 The output shows that the cluster includes three meta nodes and two data nodes.
-Every node is using InfluxEnterprise version `1.3.5-c1.3.5`.
+Every node is using InfluxEnterprise version `1.3.6-c1.3.6`.
 
 #### show-shards      
 
