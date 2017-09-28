@@ -7,8 +7,8 @@ menu:
     weight: 0
     parent: Administration
 ---
-## Upgrading from version 1.3.x to 1.3.5
-Version 1.3.5 is a drop-in replacement for earlier releases of 1.3.x with no data migration required.
+## Upgrading from version 1.3.x to 1.3.6
+Version 1.3.6 is a drop-in replacement for earlier releases of 1.3.x with no data migration required.
 
 ## Upgrading from version 1.2.5 to 1.3.x
 
