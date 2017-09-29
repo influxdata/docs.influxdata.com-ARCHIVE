@@ -28,6 +28,7 @@ menu:
 - Fix race condition when writing points to remote nodes.
 - Use InfluxData fork of yamux. This update reduces overall memory usage when streaming large amounts of data.  
   Contributed back to the yamux project via: https://github.com/hashicorp/yamux/pull/50
+- Address data race reading Len() in connection pool.
 
 ## v1.3.5 [2017-08-29]
 This release builds off of the 1.3.5 release of OSS InfluxDB.
