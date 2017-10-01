@@ -205,7 +205,7 @@ were run at the incorrect time.
 
 This has been addressed -- but this change may impact existing continuous queries which process data in time 
 ranges larger than 1d.
-Additional details [can be found here].(https://github.com/influxdata/influxdb/issues/8569)
+Additional details [can be found here](https://github.com/influxdata/influxdb/issues/8569).
 
 
 #### CLI non-admin user updates
