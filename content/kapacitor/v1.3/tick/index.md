@@ -5,56 +5,51 @@ menu:
   kapacitor_1_3:
     name: TICKscript
     identifier: tick
-    weight: 2 
+    weight: 2
 ---
 
-Kapacitor uses a DSL named `TICKscript`.
-The DSL is used to define the pipelines for processing data in Kapacitor.
+## What is in this section?
 
-The TICKscript language is an invocation chaining language.
-Each script has a flat scope and each variable in the scope
-defines methods that can be called on it.
-These methods come in two flavors.
+This section provides introductory information on working with TICKscript.  
 
-* Property methods -- Modifies the node they are called on and returns a reference to the same node.
-* Chaining methods -- Creates a new node as a child of the node they are called on and returns a reference to the new node.
+   * [Introduction](introduction/) - this document presents the fundamental concepts of working with TICKscript in Kapacitor and Chronograf.
+   * [Syntax](syntax/) - this covers the essentials of how TICKscript statements and structures are organized.
+   * [Lamda Expressions](expr/) - this section provides essential information about working with these argument types, which are commonly provided to TICKscript nodes.
+   * [Specification](spec/) - this introduces the specification defining TICKscript.
 
-The reference documentation lists each node's `Property` and `Chaining` methods along with examples and descriptions.
+Outside of this section the following articles may also be of interest.
 
-Every TICKscript will have either a `stream` or `batch` variable defined depending on the type of task you want to run.
-The `stream` and `batch` variables are an instance of a [StreamNode](/kapacitor/v1.3/nodes/stream_node/) or [BatchNode](/kapacitor/v1.3/nodes/batch_node/) respectively.
+   * [Getting Started](/kapacitor/v1.3/introduction/getting_started/) - an introduction to Kapacitor, which presents TICKscript basics.
+   * [Node Overview](/kapacitor/v1.3/nodes/) - a catalog of the types of nodes available in TICKscript.
+   * [Guides](/kapacitor/v1.3/guides/) - a collection of intermediate to advanced solutions using the TICKscript language.
 
-Pipelines
----------
+   <br/>
 
-Kapacitor uses TICKscripts to define data processing pipelines.
-A pipeline is set of nodes that process data and edges that connect the nodes.
-Pipelines in Kapacitor are directed acyclic graphs ([DAGs](https://en.wikipedia.org/wiki/Directed_acyclic_graph)) meaning 
-each edge has a direction that data flows and there cannot be any cycles in the pipeline.
+### Checkout the Influxdata blog as well.
 
-Each edge has a type, one of the following:
+Influxdata blog for [Kapacitor](https://www.influxdata.com/blog/category/tech/kapacitor/) latest content:
 
-* StreamEdge -- an edge that transfers data a single data point at a time.
-* BatchEdge -- an edge that transfers data in chunks instead of one point at a time.
+<script  type="text/javascript" src="/js/vendor/jquery-2.1.4.min.js"></script>
+<script>
+console.log('ahoj')
 
-When connecting nodes the TICKscript language will not prevent you from connecting edges of the wrong type but rather the check will be performed at runtime.
-So just be aware that a syntactically correct script may define a pipeline that is invalid.
+$.get('/feed', function (data) {
+    let count = 0;
+    $(data).find("item").each(function () { // or "item" or whatever suits your feed
+        var el = $(this);
+        if(count < 3){
+           $(".article-content:eq(1)").append('<div><h4><a href="' + el.find("link").text() + '">' +
+                                           el.find("title").text() + '</a></h4></p><p>' +
+                                           el.find("pubDate").text() + '</p><p>' +
+                                           el.find("description").text() +
+                                           '</p></div>');
 
-Example
--------
-
-```javascript
-stream
-    |from()
-        .measurement('app')
-    |eval(lambda: "errors" / "total")
-        .as('error_percent')
-    // Write the transformed data to InfluxDB
-    |influxDBOut()
-        .database('mydb')
-        .retentionPolicy('myrp')
-        .measurement('errors')
-        .tag('kapacitor', 'true')
-        .tag('version', '0.2')
-```
-
+           count++;
+           console.log("------------------------");
+           console.log("title      : " + el.find("title").text());
+           console.log("author     : " + el.find("author").text());
+           console.log("description: " + el.find("description").text());
+        }
+    });
+});
+</script>
