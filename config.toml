@@ -972,7 +972,7 @@ SectionPagesMenu = "products"
   [[menu.telegraf_1_4]]
   name = "Salesforce"
   identifier = "salesforce"
-  weight = 610
+  weight = 665
   url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/inputs/salesforce"
   parent = "inputs"
   [[menu.telegraf_1_4]]
