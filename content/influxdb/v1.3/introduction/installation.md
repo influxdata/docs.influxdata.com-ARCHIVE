@@ -41,7 +41,7 @@ you may want to check out our
 {{< vertical-tabs >}}
 {{% tabs %}}
 [Ubuntu & Debian](#)
-[RedHat & CentOS](#)
+[Red Hat & CentOS](#)
 [SLES & openSUSE](#)
 [FreeBSD/PC-BSD](#)
 [MAC OS X](#)
@@ -94,7 +94,7 @@ sudo systemctl start influxdb
 
 For instructions on how to install the RPM package from a file, please see the [downloads page](https://influxdata.com/downloads/).
 
-RedHat and CentOS users can install the latest stable version of InfluxDB using the `yum` package manager:
+Red Hat and CentOS users can install the latest stable version of InfluxDB using the `yum` package manager:
 
 ```bash
 cat <<EOF | sudo tee /etc/yum.repos.d/influxdb.repo

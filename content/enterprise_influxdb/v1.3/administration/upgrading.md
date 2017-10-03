@@ -7,8 +7,8 @@ menu:
     weight: 0
     parent: Administration
 ---
-## Upgrading from version 1.3.x to 1.3.5
-Version 1.3.5 is a drop-in replacement for earlier releases of 1.3.x with no data migration required.
+## Upgrading from version 1.3.x to 1.3.6
+Version 1.3.6 is a drop-in replacement for earlier releases of 1.3.x with no data migration required.
 
 ## Upgrading from version 1.2.5 to 1.3.x
 
@@ -38,58 +38,58 @@ to create a full backup of your cluster and it stores that backup in the current
 influxd-ctl backup -full .
 ```
 
-### Step 1: Download the 1.3.5 packages
+### Step 1: Download the 1.3.6 packages
 
 #### Meta node package download
 **Ubuntu & Debian (64-bit)**
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.3.5-c1.3.5_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.3.6-c1.3.6_amd64.deb
 ```
 
 **RedHat & CentOS (64-bit)**
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.3.5_c1.3.5.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.3.6_c1.3.6.x86_64.rpm
 ```
 
 #### Data node package download
 **Ubuntu & Debian (64-bit)**
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.3.5-c1.3.5_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.3.6-c1.3.6_amd64.deb
 ```
 
 **RedHat & CentOS (64-bit)**
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.3.5_c1.3.5.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.3.6_c1.3.6.x86_64.rpm
 ```
 
-### Step 2: Install the 1.3.5 packages
+### Step 2: Install the 1.3.6 packages
 
 #### Meta node package Install
 
 **Ubuntu & Debian (64-bit)**
 ```
-sudo dpkg -i influxdb-meta_1.3.5-c1.3.5_amd64.deb
+sudo dpkg -i influxdb-meta_1.3.6-c1.3.6_amd64.deb
 ```
 
 **RedHat & CentOS (64-bit)**
 ```
-sudo yum localinstall influxdb-meta-1.3.5_c1.3.5.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.3.6_c1.3.6.x86_64.rpm
 ```
 
 #### Data node package install
 
-When you run the install command, your terminal asks if you'd like to keep your current configuration file or overwrite your current configuration file with the file for version 1.3.5.
+When you run the install command, your terminal asks if you'd like to keep your current configuration file or overwrite your current configuration file with the file for version 1.3.6.
 Please keep your current configuration file by entering `N` or `O`;
-we update the configuration file with the necessary changes for version 1.3.5 in step 3.
+we update the configuration file with the necessary changes for version 1.3.6 in step 3.
 
 **Ubuntu & Debian (64-bit)**
 ```
-sudo dpkg -i influxdb-data_1.3.5-c1.3.5_amd64.deb
+sudo dpkg -i influxdb-data_1.3.6-c1.3.6_amd64.deb
 ```
 
 **RedHat & CentOS (64-bit)**
 ```
-sudo yum localinstall influxdb-data-1.3.5_c1.3.5.x86_64.rpm
+sudo yum localinstall influxdb-data-1.3.6_c1.3.6.x86_64.rpm
 ```
 
 ### Step 3: Update the data node configuration file
@@ -154,16 +154,16 @@ The [`influxd-ctl` tool](/enterprise_influxdb/v1.3/features/cluster-commands/) i
 Data Nodes
 ==========
 ID	TCP Address		Version
-4	rk-upgrading-01:8088	1.3.5_c1.3.5   # 1.3.5_c1.3.5 = 👍
-5	rk-upgrading-02:8088	1.3.5_c1.3.5
-6	rk-upgrading-03:8088	1.3.5_c1.3.5
+4	rk-upgrading-01:8088	1.3.6_c1.3.6   # 1.3.6_c1.3.6 = 👍
+5	rk-upgrading-02:8088	1.3.6_c1.3.6
+6	rk-upgrading-03:8088	1.3.6_c1.3.6
 
 Meta Nodes
 ==========
 TCP Address		Version
-rk-upgrading-01:8091	1.3.5_c1.3.5
-rk-upgrading-02:8091	1.3.5_c1.3.5
-rk-upgrading-03:8091	1.3.5_c1.3.5
+rk-upgrading-01:8091	1.3.6_c1.3.6
+rk-upgrading-02:8091	1.3.6_c1.3.6
+rk-upgrading-03:8091	1.3.6_c1.3.6
 ```
 
 If you have any issues upgrading your cluster, please do not hesitate to contact support at the email 

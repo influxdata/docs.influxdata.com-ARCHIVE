@@ -14,6 +14,9 @@ This is a list of the client libraries which have some support for InfluxDB vers
 Most should be fully compatible with InfluxDB version 1.3.
 Functionality will vary, and there are, as yet, no standard features that all libraries must implement in order to be listed here.
 
+## Elixir
+- [Instream](https://github.com/mneudert/instream) by [mneudert](https://github.com/mneudert)
+
 ## Go
 - [InfluxDB Go](https://github.com/influxdb/influxdb/blob/master/client/README.md) by [InfluxData](https://github.com/influxdata)
 

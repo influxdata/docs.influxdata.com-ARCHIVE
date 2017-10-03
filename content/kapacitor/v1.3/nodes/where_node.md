@@ -10,9 +10,9 @@ menu:
     parent: nodes
 ---
 
-The [WhereNode](/kapacitor/v1.3/nodes/where_node/) filters the data stream by a given expression. 
+The [WhereNode](/kapacitor/v1.3/nodes/where_node/) filters the data stream by a given expression.
 
-Example: 
+Example:
 
 
 ```javascript
@@ -94,7 +94,7 @@ Chaining methods are marked using the `|` operator.
 
 ### Alert
 
-Create an alert node, which can trigger alerts. 
+Create an alert node, which can trigger alerts.
 
 
 ```javascript
@@ -106,7 +106,7 @@ Returns: [AlertNode](/kapacitor/v1.3/nodes/alert_node/)
 
 ### Bottom
 
-Select the bottom `num` points for `field` and sort by any extra tags or fields. 
+Select the bottom `num` points for `field` and sort by any extra tags or fields.
 
 
 ```javascript
@@ -118,7 +118,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
 
 ### Combine
 
-Combine this node with itself. The data are combined on timestamp. 
+Combine this node with itself. The data are combined on timestamp.
 
 
 ```javascript
@@ -130,7 +130,7 @@ Returns: [CombineNode](/kapacitor/v1.3/nodes/combine_node/)
 
 ### Count
 
-Count the number of points. 
+Count the number of points.
 
 
 ```javascript
@@ -142,8 +142,8 @@ Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
 
 ### CumulativeSum
 
-Compute a cumulative sum of each point that is received. 
-A point is emitted for every point collected. 
+Compute a cumulative sum of each point that is received.
+A point is emitted for every point collected.
 
 
 ```javascript
@@ -155,13 +155,13 @@ Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
 
 ### Deadman
 
-Helper function for creating an alert on low throughput, a.k.a. deadman&#39;s switch. 
+Helper function for creating an alert on low throughput, a.k.a. deadman&#39;s switch.
 
-- Threshold -- trigger alert if throughput drops below threshold in points/interval. 
-- Interval -- how often to check the throughput. 
-- Expressions -- optional list of expressions to also evaluate. Useful for time of day alerting. 
+- Threshold -- trigger alert if throughput drops below threshold in points/interval.
+- Interval -- how often to check the throughput.
+- Expressions -- optional list of expressions to also evaluate. Useful for time of day alerting.
 
-Example: 
+Example:
 
 
 ```javascript
@@ -174,8 +174,8 @@ Example:
     data...
 ```
 
-The above is equivalent to this 
-Example: 
+The above is equivalent to this
+Example:
 
 
 ```javascript
@@ -196,10 +196,10 @@ Example:
     data...
 ```
 
-The `id` and `message` alert properties can be configured globally via the &#39;deadman&#39; configuration section. 
+The `id` and `message` alert properties can be configured globally via the &#39;deadman&#39; configuration section.
 
-Since the [AlertNode](/kapacitor/v1.3/nodes/alert_node/) is the last piece it can be further modified as usual. 
-Example: 
+Since the [AlertNode](/kapacitor/v1.3/nodes/alert_node/) is the last piece it can be further modified as usual.
+Example:
 
 
 ```javascript
@@ -214,8 +214,8 @@ Example:
     data...
 ```
 
-You can specify additional lambda expressions to further constrain when the deadman&#39;s switch is triggered. 
-Example: 
+You can specify additional lambda expressions to further constrain when the deadman&#39;s switch is triggered.
+Example:
 
 
 ```javascript
@@ -240,7 +240,7 @@ Returns: [AlertNode](/kapacitor/v1.3/nodes/alert_node/)
 
 ### Default
 
-Create a node that can set defaults for missing tags or fields. 
+Create a node that can set defaults for missing tags or fields.
 
 
 ```javascript
@@ -252,7 +252,7 @@ Returns: [DefaultNode](/kapacitor/v1.3/nodes/default_node/)
 
 ### Delete
 
-Create a node that can delete tags or fields. 
+Create a node that can delete tags or fields.
 
 
 ```javascript
@@ -264,7 +264,7 @@ Returns: [DeleteNode](/kapacitor/v1.3/nodes/delete_node/)
 
 ### Derivative
 
-Create a new node that computes the derivative of adjacent points. 
+Create a new node that computes the derivative of adjacent points.
 
 
 ```javascript
@@ -276,7 +276,7 @@ Returns: [DerivativeNode](/kapacitor/v1.3/nodes/derivative_node/)
 
 ### Difference
 
-Compute the difference between points independent of elapsed time. 
+Compute the difference between points independent of elapsed time.
 
 
 ```javascript
@@ -288,7 +288,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
 
 ### Distinct
 
-Produce batch of only the distinct points. 
+Produce batch of only the distinct points.
 
 
 ```javascript
@@ -300,7 +300,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
 
 ### Elapsed
 
-Compute the elapsed time between points 
+Compute the elapsed time between points
 
 
 ```javascript
@@ -312,9 +312,9 @@ Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
 
 ### Eval
 
-Create an eval node that will evaluate the given transformation function to each data point. 
-A list of expressions may be provided and will be evaluated in the order they are given. 
-The results are available to later expressions. 
+Create an eval node that will evaluate the given transformation function to each data point.
+A list of expressions may be provided and will be evaluated in the order they are given.
+The results are available to later expressions.
 
 
 ```javascript
@@ -326,7 +326,7 @@ Returns: [EvalNode](/kapacitor/v1.3/nodes/eval_node/)
 
 ### First
 
-Select the first point. 
+Select the first point.
 
 
 ```javascript
@@ -338,7 +338,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
 
 ### Flatten
 
-Flatten points with similar times into a single point. 
+Flatten points with similar times into a single point.
 
 
 ```javascript
@@ -350,10 +350,10 @@ Returns: [FlattenNode](/kapacitor/v1.3/nodes/flatten_node/)
 
 ### GroupBy
 
-Group the data by a set of tags. 
+Group the data by a set of tags.
 
-Can pass literal * to group by all dimensions. 
-Example: 
+Can pass literal * to group by all dimensions.
+Example:
 
 
 ```javascript
@@ -371,11 +371,16 @@ Returns: [GroupByNode](/kapacitor/v1.3/nodes/group_by_node/)
 
 ### HoltWinters
 
-Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set. 
+Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
 
+Arguments:
+
+   * field (string) - source of data over which HoltWinters forecast will be run.
+   * h (int64) - the number of data points to be generated.
+   * m (int64) - number of data points in a season.
 
 ```javascript
-node|holtWinters(field string, h int64, m int64, interval time.Duration)
+node|holtWinters(field string, h int64, m int64)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
@@ -383,12 +388,17 @@ Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
 
 ### HoltWintersWithFit
 
-Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set. 
-This method also outputs all the points used to fit the data in addition to the forecasted data. 
+Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
+This method also returns all the points used to fit the data in addition to the forecasted data.
 
+Arguments:
+
+   * field (string) - source of data over which HoltWinters forecast will be run.
+   * h (int64) - the number of data points to be generated.
+   * m (int64) - number of data points in a season.
 
 ```javascript
-node|holtWintersWithFit(field string, h int64, m int64, interval time.Duration)
+node|holtWintersWithFit(field string, h int64, m int64)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
@@ -396,11 +406,11 @@ Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
 
 ### HttpOut
 
-Create an HTTP output node that caches the most recent data it has received. 
-The cached data are available at the given endpoint. 
-The endpoint is the relative path from the API endpoint of the running task. 
-For example, if the task endpoint is at `/kapacitor/v1/tasks/&lt;task_id&gt;` and endpoint is 
-`top10`, then the data can be requested from `/kapacitor/v1/tasks/&lt;task_id&gt;/top10`. 
+Create an HTTP output node that caches the most recent data it has received.
+The cached data are available at the given endpoint.
+The endpoint is the relative path from the API endpoint of the running task.
+For example, if the task endpoint is at `/kapacitor/v1/tasks/&lt;task_id&gt;` and endpoint is
+`top10`, then the data can be requested from `/kapacitor/v1/tasks/&lt;task_id&gt;/top10`.
 
 
 ```javascript
@@ -412,9 +422,9 @@ Returns: [HTTPOutNode](/kapacitor/v1.3/nodes/http_out_node/)
 
 ### HttpPost
 
-Creates an HTTP Post node that POSTS received data to the provided HTTP endpoint. 
-HttpPost expects 0 or 1 arguments. If 0 arguments are provided, you must specify an 
-endpoint property method. 
+Creates an HTTP Post node that POSTS received data to the provided HTTP endpoint.
+HttpPost expects 0 or 1 arguments. If 0 arguments are provided, you must specify an
+endpoint property method.
 
 
 ```javascript
@@ -426,7 +436,7 @@ Returns: [HTTPPostNode](/kapacitor/v1.3/nodes/http_post_node/)
 
 ### InfluxDBOut
 
-Create an influxdb output node that will store the incoming data into InfluxDB. 
+Create an influxdb output node that will store the incoming data into InfluxDB.
 
 
 ```javascript
@@ -438,7 +448,7 @@ Returns: [InfluxDBOutNode](/kapacitor/v1.3/nodes/influx_d_b_out_node/)
 
 ### Join
 
-Join this node with other nodes. The data are joined on timestamp. 
+Join this node with other nodes. The data are joined on timestamp.
 
 
 ```javascript
@@ -450,7 +460,7 @@ Returns: [JoinNode](/kapacitor/v1.3/nodes/join_node/)
 
 ### K8sAutoscale
 
-Create a node that can trigger autoscale events for a kubernetes cluster. 
+Create a node that can trigger autoscale events for a kubernetes cluster.
 
 
 ```javascript
@@ -462,7 +472,7 @@ Returns: [K8sAutoscaleNode](/kapacitor/v1.3/nodes/k8s_autoscale_node/)
 
 ### KapacitorLoopback
 
-Create an kapacitor loopback node that will send data back into Kapacitor as a stream. 
+Create an kapacitor loopback node that will send data back into Kapacitor as a stream.
 
 
 ```javascript
@@ -474,7 +484,7 @@ Returns: [KapacitorLoopbackNode](/kapacitor/v1.3/nodes/kapacitor_loopback_node/)
 
 ### Last
 
-Select the last point. 
+Select the last point.
 
 
 ```javascript
@@ -486,7 +496,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
 
 ### Log
 
-Create a node that logs all data it receives. 
+Create a node that logs all data it receives.
 
 
 ```javascript
@@ -498,7 +508,7 @@ Returns: [LogNode](/kapacitor/v1.3/nodes/log_node/)
 
 ### Max
 
-Select the maximum point. 
+Select the maximum point.
 
 
 ```javascript
@@ -510,7 +520,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
 
 ### Mean
 
-Compute the mean of the data. 
+Compute the mean of the data.
 
 
 ```javascript
@@ -522,8 +532,8 @@ Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
 
 ### Median
 
-Compute the median of the data. Note, this method is not a selector, 
-if you want the median point use `.percentile(field, 50.0)`. 
+Compute the median of the data. Note, this method is not a selector,
+if you want the median point use `.percentile(field, 50.0)`.
 
 
 ```javascript
@@ -535,7 +545,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
 
 ### Min
 
-Select the minimum point. 
+Select the minimum point.
 
 
 ```javascript
@@ -547,7 +557,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
 
 ### Mode
 
-Compute the mode of the data. 
+Compute the mode of the data.
 
 
 ```javascript
@@ -559,8 +569,8 @@ Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
 
 ### MovingAverage
 
-Compute a moving average of the last window points. 
-No points are emitted until the window is full. 
+Compute a moving average of the last window points.
+No points are emitted until the window is full.
 
 
 ```javascript
@@ -572,7 +582,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
 
 ### Percentile
 
-Select a point at the given percentile. This is a selector function, no interpolation between points is performed. 
+Select a point at the given percentile. This is a selector function, no interpolation between points is performed.
 
 
 ```javascript
@@ -584,9 +594,9 @@ Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
 
 ### Sample
 
-Create a new node that samples the incoming points or batches. 
+Create a new node that samples the incoming points or batches.
 
-One point will be emitted every count or duration specified. 
+One point will be emitted every count or duration specified.
 
 
 ```javascript
@@ -598,7 +608,7 @@ Returns: [SampleNode](/kapacitor/v1.3/nodes/sample_node/)
 
 ### Shift
 
-Create a new node that shifts the incoming points or batches in time. 
+Create a new node that shifts the incoming points or batches in time.
 
 
 ```javascript
@@ -610,7 +620,7 @@ Returns: [ShiftNode](/kapacitor/v1.3/nodes/shift_node/)
 
 ### Spread
 
-Compute the difference between `min` and `max` points. 
+Compute the difference between `min` and `max` points.
 
 
 ```javascript
@@ -622,7 +632,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
 
 ### StateCount
 
-Create a node that tracks number of consecutive points in a given state. 
+Create a node that tracks number of consecutive points in a given state.
 
 
 ```javascript
@@ -634,7 +644,7 @@ Returns: [StateCountNode](/kapacitor/v1.3/nodes/state_count_node/)
 
 ### StateDuration
 
-Create a node that tracks duration in a given state. 
+Create a node that tracks duration in a given state.
 
 
 ```javascript
@@ -646,9 +656,9 @@ Returns: [StateDurationNode](/kapacitor/v1.3/nodes/state_duration_node/)
 
 ### Stats
 
-Create a new stream of data that contains the internal statistics of the node. 
-The interval represents how often to emit the statistics based on real time. 
-This means the interval time is independent of the times of the data points the source node is receiving. 
+Create a new stream of data that contains the internal statistics of the node.
+The interval represents how often to emit the statistics based on real time.
+This means the interval time is independent of the times of the data points the source node is receiving.
 
 
 ```javascript
@@ -660,7 +670,7 @@ Returns: [StatsNode](/kapacitor/v1.3/nodes/stats_node/)
 
 ### Stddev
 
-Compute the standard deviation. 
+Compute the standard deviation.
 
 
 ```javascript
@@ -672,7 +682,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
 
 ### Sum
 
-Compute the sum of all values. 
+Compute the sum of all values.
 
 
 ```javascript
@@ -684,7 +694,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
 
 ### Top
 
-Select the top `num` points for `field` and sort by any extra tags or fields. 
+Select the top `num` points for `field` and sort by any extra tags or fields.
 
 
 ```javascript
@@ -696,7 +706,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
 
 ### Union
 
-Perform the union of this node and all other given nodes. 
+Perform the union of this node and all other given nodes.
 
 
 ```javascript
@@ -708,7 +718,7 @@ Returns: [UnionNode](/kapacitor/v1.3/nodes/union_node/)
 
 ### Where
 
-Create a new node that filters the data stream by a given expression. 
+Create a new node that filters the data stream by a given expression.
 
 
 ```javascript
@@ -720,9 +730,9 @@ Returns: [WhereNode](/kapacitor/v1.3/nodes/where_node/)
 
 ### Window
 
-Create a new node that windows the stream by time. 
+Create a new node that windows the stream by time.
 
-NOTE: Window can only be applied to stream edges. 
+NOTE: Window can only be applied to stream edges.
 
 
 ```javascript
@@ -730,4 +740,3 @@ node|window()
 ```
 
 Returns: [WindowNode](/kapacitor/v1.3/nodes/window_node/)
-

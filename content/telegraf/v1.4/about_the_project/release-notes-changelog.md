@@ -5,8 +5,20 @@ menu:
     weight: 0
     parent: about_the_project
 ---
+## v1.4.1 [2017-09-26]
 
-## v1.4 [2017-09-05]
+### Bugfixes
+
+- Fix MQTT input exits if Broker is not available on startup.
+- Fix optional field value conversions in fluentd input.
+- Whitelist allowed char classes for opentsdb output.
+- Fix counter and gauge metric types.
+- Fix skipped line with empty target in iptables.
+- Fix duplicate keys in perf counters sqlserver query.
+- Fix panic in statsd p100 calculation.
+- Fix arm64 packages contain 32-bit executable.
+
+## v1.4.0 [2017-09-05]
 
 ### Release Notes
 

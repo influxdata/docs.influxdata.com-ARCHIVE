@@ -6,6 +6,17 @@ menu:
     parent: About the Project
 ---
 
+## v1.3.8.3 [2017-09-29]
+### Bug Fixes
+1. Fix duration for single value and custom time ranges.
+1. Fix Data Explorer query templates dropdown disappearance.
+1. Fix no alert for duplicate db name.
+1. Fix unresponsive display options and query builder in dashboards.
+
+## v1.3.8.2 [2017-09-22]
+### Bug Fixes
+1. Fix duration for custom time ranges.
+
 ## v1.3.8.1 [2017-09-08]
 
 ### Bug Fixes
