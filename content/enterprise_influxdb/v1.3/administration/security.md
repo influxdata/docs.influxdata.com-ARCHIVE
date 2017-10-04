@@ -38,10 +38,10 @@ Resources:
 ## Secure your Host
 
 ### Ports
-If you're only running InfluxDB, close all ports on the host except for port `8086`.
+If you're only running InfluxEnterprise, close all ports on the host except for port `8086`.
 You can also use a proxy to port `8086`.
 
-InfluxDB uses port `8088` for remote [backups and restores](/influxdb/v1.3/administration/backup_and_restore/).
+InfluxEnterprise uses port `8088` for remote [backups and restores](/influxdb/v1.3/administration/backup_and_restore/).
 We highly recommend closing that port and, if performing a remote backup,
 giving specific permission only to the remote machine.
 
