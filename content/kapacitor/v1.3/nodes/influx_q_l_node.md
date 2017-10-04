@@ -10,7 +10,7 @@ menu:
     parent: nodes
 ---
 
-An [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/) performs the available function from the InfluxQL language. 
+An InfluxQLNode performs any of the available functions from the InfluxQL language. 
 These function can be performed on a stream or batch edge. 
 The resulting edge is dependent on the function. 
 For a stream edge, all points with the same time are accumulated into the function. 
