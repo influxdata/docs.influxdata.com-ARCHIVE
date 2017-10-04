@@ -1,18 +1,18 @@
 ---
 title: Security Best Practices
 menu:
-  influxdb_1_3:
-    weight: 80
-    parent: administration
+  enterprise_influxdb_1_3:
+    weight: 90
+    parent: Administration
 ---
 
-Some customers may choose to install InfluxDB with public internet access, however 
+Some customers may choose to install InfluxEnterprise with public internet access, however 
 doing so can inadvertently expose your data and invite unwelcome attacks on your database. 
-Check out the sections below for how protect the data in your InfluxDB instance.
+Check out the sections below for how protect the data in your InfluxEnterprise instance.
 
 ## Enable Authentication
 
-Password protect your InfluxDB instance to keep any unauthorized individuals
+Password protect your InfluxEnterprise instance to keep any unauthorized individuals
 from accessing your data.
 
 Resources:
