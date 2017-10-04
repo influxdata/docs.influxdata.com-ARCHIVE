@@ -27,13 +27,148 @@ TICKscript is case sensitive and uses Unicode. The TICKscript parser scans TICKs
 
 ## Code Representation
 
-As the TICKScript parser is built on GO, source files should be encoded using UTF-8.  A script is broken into declarations and expressions that terminate with a newline character.  
+As the TICKScript parser is built on GO, source files should be encoded using **UTF-8**.  A script is broken into **declarations** and **expressions** that terminate with a newline character.  
 
-Whitespace is used in declarations to separate variable names from operators and literal values.  It is also used before expressions to create indentations, which indicate the hierarchy of method calls.  This also helps to make the script more readable.  Whitespace can be used in method calls in much the same way it is used in GO.  That is, it can be used to separate and to name method call arguments.  Argument naming is especially common in passing lambda expressions.  
+**Whitespace** is used in declarations to separate variable names from operators and literal values.  It is also used before expressions to create indentations, which indicate the hierarchy of method calls.  This also helps to make the script more readable.  Whitespace can be used in method calls in much the same way it is used in GO.  That is, it can be used to separate and to name method call arguments.  Argument naming is especially common in passing lambda expressions.  
 
-Comments can be created by using a pair of forward slashes "//" before the text.  Comment forward slashes can be preceded by whitespace and need not be the first characters of a newline. However comments should not follow after a declaration or expression.
+**Comments** can be created on a single line by using a pair of forward slashes "//" before the text.  Comment forward slashes can be preceded by whitespace and need not be the first characters of a newline. However comments should not follow after a declaration or expression.
 
+### Keywords
 
+TICKscript is compact and contains only a small set of keywords compared to less specific languages.
+
+| **Word** | **Usage** |
+| :----|:------|
+| **AND**  | Standard boolean conjunction operator. |
+| **FALSE** | The literal boolean value "false". |
+| **lambda** | Flags that what follows is to be interpreted as a lambda expression. |
+| **OR** | Standard boolean disjunction operator. |
+| **TRUE** | The literal boolean value "true". |
+| **var** | Starts a variable declaration. |
+
+Since the set of native node types available in TICKscript is limited, each node type, such as `batch` or `stream`, could be considered key.  However, node types and their taxonomy are discussed in detail below.  
+
+### Operators
+
+TICKscript borrows many operators from GO and adds a few which make sense in its data processing domain.
+
+**Standard Operators**
+
+| **Operator** | **Type** | **Usage** | **Examples** |
+|:-------------|:---------|:----------|:-------------|
+| **+** | Binary | Addition and concatenating strings | `3 + 6`, `total + count` and `'foo' + 'bar'` |
+| **-** | Binary | Subtraction | `10 - 1`, `total - errs` |
+| **\*** | Binary | Multiplication | `3 * 6`, `ratio * 100.0` |
+| **/** | Binary |  Division | `36 / 4`, `errs / total` |
+| **==** | Binary | Comparison of equality |  `1 == 1`, `date == today` |
+| **!=** | Binary | Comparison of inequality | `result != 0`, `id != "testbed"` |
+| **<** | Binary | Comparison less than | `4 < 5`, `timestamp < today` |
+| **<=** | Binary | Comparison less than or equal to | `3 <= 6`, `flow <= mean` |
+| **>** | Binary | Comparison greater than | `6 > 3.0`, `delta > sigma` |
+| **>=** | Binary | Comparison greater than or equal to | `9.0 >= 8.1`, `quantity >= threshold` |
+| **=~** | Binary | Regular expression equality.  Right value must be a regular expression <br/>or a variable holding such an expression. | `tag =~ /^cz\d+/` |
+| **!~** | Binary | Negative regular expression equality. Right value must be a regular expression <br/>or a variable holding such an expression. | `tag !~ /^sn\d+/` |
+| **!** | Unary | Logical not | `!TRUE`, `!cpu_idle > 70` |
+| **AND** | Binary | Logical conjunction |  `rate < 20.0 AND rate >= 10` |
+| **OR** | Binary | Logical disjunction | `status > warn OR delta > signma` |
+
+Standard operators are used in TICKscript and in Lambda expressions.
+
+**Chaining Operators**
+
+| **Operator** | **Usage** | **Examples** |
+|:-------------|:----------|:------------|
+| **\|** |  Creates an instance of a new node and chains it to the node above it | `stream`<br/>&nbsp;&nbsp;&nbsp;\|`from()` |
+| **.** | Invokes a property method, setting or changing an internal property in the node above | `from()`<br/>&nbsp;&nbsp;&nbsp;`.database(mydb)` |
+| **@** | Invokes a user defined function (UDF) | `from()`<br/>`...`<br/>`@MyFunc()` |
+
+Chaining operators are used to create pipeline statements.
+
+## Variables and Literals
+
+No scripting language would be of much use without the ability to declare variables to hold values and to initialize them with literals.  Variables in TICKscript are useful for storing and reusing values and for providing a friendly mnemonic for quickly understanding intended meaning.
+
+### Variables
+
+#### Naming Variables
+
+Variables are declared using the keyword `var` at the start of the declaration and then assigning them a literal value.  Variable identifiers must begin with a standard ASCII letter and can be followed by any number of letters, digits and underscores.  Both upper and lower cases can be used.  The type the variable will hold depends upon what it is assigned when it is declared.  
+
+**Example 1 &ndash; variable declarations**
+```
+var my_var = 'foo'
+var my_float = 2.71
+var my_int = 1
+var my_node = stream
+```
+
+Variables are immutable and cannot be reassigned new values later on in the script, though they can be passed into methods.
+
+### Literal values
+
+Literal values are parsed into type instances and are then either passed into method arguments or assigned to variables.  The parser interprets types based on context and creates instances of the following: boolean, string, float, integer, regular expression and array.  Lambda expressions, GO Duration structures and nodes are also recognized.  The rules the parser uses to recognize a type are discussed in the following Types section.
+
+#### Types
+
+##### Booleans
+**Booleans**. Boolean values are generated using the boolean keywords: `TRUE` and `FALSE`.  Note that these keywords use all upper case letters.  The parser will throw an error when values using lower case are used, e.g. `True` or `true`.
+
+**Example 2 &ndash; Boolean literals**
+```
+var true_bool = TRUE
+...
+   |flatten()
+       .on('host','port')
+       .dropOriginalFieldName(FALSE)
+```
+##### Numerical Types
+Any token beginning with a digit will lead to the generation of a numerical type instance.  TICKscript understands two numerical types based on GO: `int64` and `float64`.  Any numerical token containing a decimal point will result in the creation of a `float64` value.  Any numerical token that ends without containing a decimal point will result in the creation of an `int64` value.  
+
+**Example 3 &ndash; Numerical literals**
+```
+var my_int = 6
+var my_float = 2.71828
+...
+
+```
+##### Strings
+Strings begin with either one or three single single quotation marks: `'` or `'''`.  Strings can be concatenated using the addition `+` operator.  To escape quotation marks within a string delimited by a single quotation mark use the backslash character.  If it is to be anticipated that many quotation marks will be encountered inside the string delimit it using triple single quotation marks.
+
+**Example 4 &ndash; Basic strings**
+
+```
+var region1 = 'EMEA'
+var old_standby = 'foo' + 'bar'
+var query1 =   'SELECT mean("sequestr") FROM "co2accumulator"."autogen".co2 WHERE "location" = \'50.0675, 14.471667\' '
+var query2 = '''SELECT mean("sequestr") FROM "co2accumulator"."autogen".co2 WHERE "location" = '50.0675, 14.471667' '''
+...
+batch
+   |query('SELECT count(sequestr) FROM "co2accumulator"."autogen".co2 WHERE sequestr < 0.25 GROUP BY location')
+...   
+```
+To make long complex strings more readable newlines are permitted within the string.
+
+**Example 5 &ndash; Multiline string**
+```
+batch
+   |query('
+      SELECT mean("sequestr") AS stat
+      FROM "co2accumulator"."autogen".co2
+      WHERE "location" = \'50.0675, 14.471667\'
+      ')
+```
+
+##### Regular Expressions
+
+| **/.../**| Unary | Between the two slashes, defines a regular expression |  /[A\|a]lbatross/, /^abc.*/ |
+
+##### Lambda Expressions
+
+##### Arrays
+
+##### GO Structures
+
+##### Nodes
 
 
 
