@@ -324,22 +324,26 @@ InfluxDB shell version: 1.x.y
 
 That's it! You've successfully set up HTTPS with InfluxEnterprise.
 
->
+
 ## Connect Telegraf to a secured InfluxEnterprise instance
->
+
 Connecting [Telegraf](/telegraf/v1.3/) to an InfluxEnterprise instance that's using
 HTTPS requires some additional steps.
->
+
 In Telegraf's configuration file (`/etc/telegraf/telegraf.conf`), edit the `urls`
 setting to indicate `https` instead of `http` and change `localhost` to the
 relevant domain name.
+>
+The best practice in terms of security is to transfer the cert to the client and make it trusted (e.g. by putting in OS cert repo or using `ssl_ca` option).  The alternative is to sign the cert using an internal CA and then trust the CA cert.
+
+
 If you're using a self-signed certificate, uncomment the `insecure_skip_verify`
 setting and set it to `true`.
->
+```
     ###############################################################################
     #                            OUTPUT PLUGINS                                   #
     ###############################################################################
->
+
     # Configuration for influxdb server to send metrics to
     [[outputs.influxdb]]
       ## The full HTTP or UDP endpoint URL for your InfluxEnterprise instance.
@@ -347,11 +351,12 @@ setting and set it to `true`.
       ## this means that only ONE of the urls will be written to each interval.
       # urls = ["udp://localhost:8089"] # UDP endpoint example
       urls = ["https://<domain_name>.com:8086"]
->
+
     [...]
->
+
       ## Optional SSL Config
       [...]
       insecure_skip_verify = true # <-- Update only if you're using a self-signed certificate
->
+```
+
 Next, restart Telegraf and you're all set!
