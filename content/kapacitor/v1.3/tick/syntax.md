@@ -25,7 +25,7 @@ The sections [Introduction](/tbd) and [Getting Started](/tbd) already presented 
 
 TICKscript is case sensitive and uses Unicode. The TICKscript parser scans TICKscript code from top to bottom and left to right instantiating variables and nodes and then chaining or linking them together into pipelines as they are encountered.  When loading a TICKscript the parser does not check for compatibility between nodes.  Edges between incompatible nodes will result in log error messages when a task is first run.
 
-## Code Representation
+## Code representation
 
 As the TICKScript parser is built on GO, source files should be encoded using **UTF-8**.  A script is broken into **declarations** and **expressions** that terminate with a newline character.  
 
@@ -84,13 +84,13 @@ Standard operators are used in TICKscript and in Lambda expressions.
 
 Chaining operators are used to create pipeline statements.
 
-## Variables and Literals
+## Variables and literals
 
 No scripting language would be of much use without the ability to declare variables to hold values and to initialize them with literals.  Variables in TICKscript are useful for storing and reusing values and for providing a friendly mnemonic for quickly understanding intended meaning.
 
 ### Variables
 
-#### Naming Variables
+#### Naming variables
 
 Variables are declared using the keyword `var` at the start of the declaration and then assigning them a literal value.  Variable identifiers must begin with a standard ASCII letter and can be followed by any number of letters, digits and underscores.  Both upper and lower cases can be used.  The type the variable will hold depends upon what it is assigned when it is declared.  
 
@@ -121,18 +121,23 @@ var true_bool = TRUE
        .on('host','port')
        .dropOriginalFieldName(FALSE)
 ```
-##### Numerical Types
-Any token beginning with a digit will lead to the generation of a numerical type instance.  TICKscript understands two numerical types based on GO: `int64` and `float64`.  Any numerical token containing a decimal point will result in the creation of a `float64` value.  Any numerical token that ends without containing a decimal point will result in the creation of an `int64` value.  
+
+In Example 2 above the first line shows a simple assignment using a boolean literal.  The second example shows using the boolean literal `FALSE` in a method call.
+
+##### Numerical types
+Any literal token beginning with a digit will lead to the generation of a numerical type instance.  TICKscript understands two numerical types based on GO: `int64` and `float64`.  Any numerical token containing a decimal point will result in the creation of a `float64` value.  Any numerical token that ends without containing a decimal point will result in the creation of an `int64` value.  If an integer is prefixed with the zero character, `0`. it is interpreted as an octal.
 
 **Example 3 &ndash; Numerical literals**
 ```
 var my_int = 6
 var my_float = 2.71828
+var my_octal = 0400
 ...
-
 ```
+In Example 3 above `my_int` is of type `int64`, `my_float` is of type `float64` and my_octal is of type int64 octal.
+
 ##### Strings
-Strings begin with either one or three single single quotation marks: `'` or `'''`.  Strings can be concatenated using the addition `+` operator.  To escape quotation marks within a string delimited by a single quotation mark use the backslash character.  If it is to be anticipated that many quotation marks will be encountered inside the string delimit it using triple single quotation marks.
+Strings begin with either one or three single single quotation marks: `'` or `'''`.  Strings can be concatenated using the addition `+` operator.  To escape quotation marks within a string delimited by a single quotation mark use the backslash character.  If it is to be anticipated that many quotation marks will be encountered inside the string delimit it using triple single quotation marks instead.
 
 **Example 4 &ndash; Basic strings**
 
@@ -146,6 +151,8 @@ batch
    |query('SELECT count(sequestr) FROM "co2accumulator"."autogen".co2 WHERE sequestr < 0.25 GROUP BY location')
 ...   
 ```
+In Example 4 above the first line shows a simple string assignment using a string literal.  The second line shows use of the concatenation operator.  Lines three and four show two different approaches to declaring complex string literals with and without internally escaped single quotation marks.  The final example shows using a string literally directly in a method call.
+
 To make long complex strings more readable newlines are permitted within the string.
 
 **Example 5 &ndash; Multiline string**
@@ -157,18 +164,186 @@ batch
       WHERE "location" = \'50.0675, 14.471667\'
       ')
 ```
+In Example 5 above the string is broken up to make the query more easily understood.
 
-##### Regular Expressions
+##### String lists
 
-| **/.../**| Unary | Between the two slashes, defines a regular expression |  /[A\|a]lbatross/, /^abc.*/ |
+A string list is a collection of strings declared between two brackets.
 
-##### Lambda Expressions
+**Example 6 &ndash; String list**
+```
+var my_str_list = [ 'cz', 'sk', 'pl', 'hu', 'at' ]
+```
+<p style="color: red">FIXME COMMENT - I see that I can create this in a script, but cannot derefence the internal elements.  I also see in the code base, that there is a String List node (tick/ast/parser.go:366) which creates a list of String nodes.  However, I cannot seem to find an example, even in tests, where this is used.  Is there a use case for this?</p>
 
-##### Arrays
+##### Regular expressions
 
-##### GO Structures
+As in Javascript regular expressions begin and end with a forward slash: `/`.  The expression content should be compatible with the GO [regular expression library](https://golang.org/pkg/regexp/syntax/) (`regexp`).
+
+**Example 7 &ndash; Regular expressions**
+```
+var cz_turbines = /^cz\d+/
+var adr_senegal = /\.sn$/
+var local_ips = /^192\.168\..*/
+...
+var locals = stream
+   |from()
+      .measurement('responses')
+      .where(lambda: "node" =~ local_ips )
+
+var south_afr = stream
+   |from()
+      .measurement('responses')
+      .where(lambda: "dns_node" =~ /\.za$/ )       
+```
+In Example 7 the first three examples show the assignment of regular expressions to variables.  The `local` stream reuses the regular expression assigned to the variable `local_ips`. The `south_afr` stream uses a regular expression comparison, with the regular expression declared literally as a part of the lambda expression.
+
+##### Lambda functions
+
+A lambda expression is a parameter representing a short easily understood function to be passed into a method call or held in a variable. It can wrap a boolean expression, a mathematical expression or a call to an internal stateful function.  As of the latest release three internal functions are provided.
+
+   * `sigma` - counts the number of standard deviations a give value is from the running mean.
+   * `count` - counts the number of values processed.
+   * `spread`- computes the running range of all values.
+
+<p style="color: red">FIXME COMMENT - is this correct?  Have not found time to test this.  Suspect other functions might exist</p>
+
+Lambda expressions begin with the token `lambda` followed by a colon, ':'.  
+
+**Example 8 &ndash; Lambda expressions**
+```
+var my_lambda = lambda: "value" > 0
+...
+var data = stream
+  |from()
+...
+var alert = data
+  |eval(lambda: sigma("stat"))
+    .as('sigma')
+    .keep()
+  |alert()
+    .id('{{ index .Tags "host"}}/cpu_used')
+    .message('{{ .ID }}:{{ index .Fields "stat" }}')
+    .info(lambda: "stat" > info OR "sigma" > infoSig)
+    .warn(lambda: "stat" > warn OR "sigma" > warnSig)
+    .crit(lambda: "stat" > crit OR "sigma" > critSig)
+
+```
+Example 8 above shows that a lambda expression can be directly assigned to a variable.  In the eval node a lamda statement is used which calls the sigma function. The alert node uses lambda expressions to define the log levels of given events.  
+
+##### GO Duration structures
+
+GO duration structures are generated internally whenever a duration literal is encountered in the script in a context to which a time duration can be applied.  This syntax follows the same syntax present in [InfluxQL](https://docs.influxdata.com/influxdb/v1.3/query_language/spec/#literals).  A duration literal is comprised of two parts: an integer and a duration unit.  It is essentially an integer terminated by one or a pair of reserved characters, which represent a unit of time.
+
+**Unit**  | **Meaning**
+-------|-----------------------------------------
+u or µ | microseconds (1 millionth of a second)
+ms     | milliseconds (1 thousandth of a second)
+s      | second
+m      | minute
+h      | hour
+d      | day
+w      | week
+
+**Example 9 &ndash; Duration expressions**
+```
+var period = 10s
+var every = 10s
+...
+var views = batch
+    |query('SELECT sum(value) FROM "pages"."default".views')
+        .period(1h)
+        .every(1h)
+        .groupBy(time(1m), *)
+        .fill(0)
+```
+
+In Example 9 above the first two lines show the declaration of Duration types.  The first represent a period of 10 seconds and the second a time frame of 10 seconds.  The final example shows declaring duration literals directly in method calls.
 
 ##### Nodes
+
+Like the simpler types Node types are declared and can be assigned to variables.  More often they are added to pipelines using chaining methods.
+
+**Example 10 &ndash; Node expressions**
+```
+var data = stream
+  |from()
+    .database('telegraf')
+    .retentionPolicy('autogen')
+    .measurement('cpu')
+    .groupBy('host')
+    .where(lambda: "cpu" == 'cpu-total')
+  |eval(lambda: 100.0 - "usage_idle")
+    .as('used')
+  |window()
+    .period(period)
+    .every(every)
+  |mean('used')
+    .as('stat')
+...
+var alert = data
+  |eval(lambda: sigma("stat"))
+    .as('sigma')
+    .keep()
+...    
+```
+In Example 10 above, in the first section, five nodes are created.  The top level node `stream` is assigned to the variable `data`.  `stream` is then used as the root of the pipeline to which the nodes `from`, `eval`, `window` and `mean` are chained in order. In the second section the pipeline is then "forked" using assignment to the variable `alert`, so that a second `eval` node can be applied to the data.  
+
+#### Working with arguments and variables
+
+##### Dereferencing values
+
+##### Type casting issues
+
+##### Numerical precision
+
+##### Time precision
+
+##### Regular expressions
+
+## Statements
+
+### Node instantiation
+
+With two exceptions (`stream` and `batch`) nodes always occur in chains, where they are instantiated through chaining methods.  For each node type, the method that creates an instance of that type uses the same signature.  So if a `query` node instantiate an `eval` node and add it to the chain, and if a `from` node can also create an `eval` node and add it to the chain, the chaining method creating a new `eval` will accept the same arguments (e.g. one or more lamdba expressions) regardless of which node created it.   
+
+### Declarations
+
+### Expressions
+
+### Pipelines
+
+# InfluxQL in TICKscript
+
+## How InfluxQL is encountered
+
+## Some InfluxQL essentials
+
+# Lambda expressions
+
+## How lambda expressions are encountered
+
+## Declaration
+
+## Variables
+
+## Operators
+
+# Summary of variable use between syntactical domains
+
+# Taxonomy of node types
+
+# Gotchas
+
+## Incompatible node types
+
+## Circular rewrites
+
+
+
+
+
+
 
 
 
