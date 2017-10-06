@@ -166,6 +166,18 @@ batch
 ```
 In Example 5 above the string is broken up to make the query more easily understood.
 
+##### String templates
+
+String templates allow node properties, tags and fields to be added to a string. This is useful when writing alert messages.  To add a property, tag or field value to a string template, it needs to be wrapped inside of double curly braces: "{{}}".
+
+**Example 6 &ndash; Variables inside of string templates**
+```
+|alert()
+  .id('{{ index .Tags "host"}}/mem_used')
+  .message('{{ .ID }}:{{ index .Fields "stat" }}')
+```    
+In Example 6 three values are added to two string templates.  In the call to the setter `id()` the tag `"host"` is added to the start of the string.  The call to the setter `message()` then adds the `id` and then the field `"stat"`.  This is currently applicable with the [Alert](/tbd) node and is discussed further in the section [Accessing values in string templates](#accessing-values-in-string-templates) below.
+
 ##### String lists
 
 A string list is a collection of strings declared between two brackets.
@@ -208,7 +220,7 @@ A lambda expression is a parameter representing a short easily understood functi
 
 <p style="color: red">FIXME COMMENT - is this correct?  Have not found time to test this.  Suspect other functions might exist</p>
 
-Lambda expressions begin with the token `lambda` followed by a colon, ':'.  
+Lambda expressions begin with the token `lambda` followed by a colon, ':' &ndash; `lambda:`.  
 
 **Example 8 &ndash; Lambda expressions**
 ```
@@ -258,7 +270,7 @@ var views = batch
         .fill(0)
 ```
 
-In Example 9 above the first two lines show the declaration of Duration types.  The first represent a period of 10 seconds and the second a time frame of 10 seconds.  The final example shows declaring duration literals directly in method calls.
+In Example 9 above the first two lines show the declaration of Duration types.  The first represents a period of 10 seconds and the second a time frame of 10 seconds.  The final example shows declaring duration literals directly in method calls.
 
 ##### Nodes
 
@@ -287,17 +299,110 @@ var alert = data
     .keep()
 ...    
 ```
-In Example 10 above, in the first section, five nodes are created.  The top level node `stream` is assigned to the variable `data`.  `stream` is then used as the root of the pipeline to which the nodes `from`, `eval`, `window` and `mean` are chained in order. In the second section the pipeline is then "forked" using assignment to the variable `alert`, so that a second `eval` node can be applied to the data.  
+In Example 10 above, in the first section, five nodes are created.  The top level node `stream` is assigned to the variable `data`.  `stream` is then used as the root of the pipeline to which the nodes `from`, `eval`, `window` and `mean` are chained in order. In the second section the pipeline is then extended using assignment to the variable `alert`, so that a second `eval` node can be applied to the data.  
 
 #### Working with arguments and variables
 
-##### Dereferencing values
+While it is possible to declare and use variables in TICKscript, it is also possible to work with fields drawn from InfluxDB data series. This is most evident in the examples presented so far. The following section explores working not only with variables but also with field values, that should be found in the data.    
+
+##### Accessing values
+
+As was pointed out in the [Getting started guide](http://localhost:1414/kapacitor/v1.3/introduction/getting_started/#gotcha-single-versus-double-quotes) accessing data fields, using string literals and accessing TICKscript variables involves different syntax, which can lead to confusion.  Additionally it is possible to access the results of lambda expressions used with certain nodes.  
+
+   * **Variables** &ndash; To access a _TICKscript variable_ simply use its identifier.  
+
+   **Example 11 &ndash; Variable access**
+   ```
+   var db = 'website'
+   ...
+   var data = stream
+    |from()
+        .database(db)
+   ...
+   ```
+   In Example 11 the variable `db` is assigned the literal value `'website'`.  This is then used in the setter `.database()` under the chaining method `from()`.
+
+   * **String literals** &ndash; To declare a _string literal_ use single quotation marks as discussed in the section [Strings](#strings) above.
+
+   * **Field values** &ndash; To access a _field value_ from the data set use double quotation marks.
+
+   **Example 12 &ndash; Field access**
+   ```
+   // Data frame
+  var data = stream
+     |from()
+        .database('telegraf')
+        .retentionPolicy('autogen')
+        .measurement('cpu')
+        .groupBy('host')
+        .where(lambda: "cpu" == 'cpu-total')
+     |eval(lambda: 100.0 - "usage_idle")
+        .as('used')
+   ...        
+   ```
+   In Example 12 two fields from the data frame are accessed.  In the `where()` method call the lambda expression uses the field `"cpu"` to filter the data frame down to only datapoints whose "cpu" tag equals the literal value of `'cpu-total'`.  The chaining method `eval()` also takes a lambda expression that accesses the field `"usage-idle"` to calculate cpu processing power 'used'.
+
+   * **Named lambda expression results** &ndash; Lambda expression results get named using an `as()` method.  Think of the `as()` method functioning just like the 'AS' keyword in InfluxQL.  See the `eval()` method in Example 12 above.  The results of lambda expressions can be accessed with double quotation marks, just like data fields.  
+
+  **Example 13 &ndash; Name lambda expression access**
+
+  ```
+  ...
+      |window()
+        .period(period)
+        .every(every)
+      |mean("used")
+        .as('stat')
+
+    // Thresholds
+    var alert = data
+      |eval(lambda: sigma("stat"))
+        .as('sigma')
+        .keep()
+      |alert()
+        .id('{{ index .Tags "host"}}/cpu_used')
+        .message('{{ .ID }}:{{ index .Fields "stat" }}')
+        .info(lambda: "stat" > info OR "sigma" > infoSig)
+        .warn(lambda: "stat" > warn OR "sigma" > warnSig)
+        .crit(lambda: "stat" > crit OR "sigma" > critSig)
+  ```
+  Example 13 above continues the pipeline from Example 12.  In Example 12, the results of the lambda expression named as `'used'` under the `eval()` method are then accessed, in Example 13, as an argument to the method `'mean()'`, which then names its result _as_ `'stat'`.  A new statement then begins.  This contains a new call to the method `'eval()'`, which has a lambda expression that access `"stat"` and sets its result _as_ `'sigma'`.  `"stat"` is also accessed in the `message()` method and the threshold methods under the `alert()` chaining method.  The named result `"sigma"` is also used in the lambda expressions of these methods.
+
+##### Accessing values in string templates
+
+As mentioned in the section [String templates](#string-templates) it is possible to add values from node specific properties, tags and fields to output strings.  This can be seen under the alert node in Example 13.  The accessor expression is wrapped in two curly braces.  To access a property a period, `.`, is used before th identifier.  To access a value from tags or fields the token 'index' is used, followed by a period and then the part of the data series to be accessed (e.g. `.Tag` or `.Field`), the actual name is then specified in double quotes.      
+
+```
+|alert()
+  .id('{{ index .Tags "host"}}/mem_used')
+  .message('{{ .ID }}:{{ index .Fields "stat" }}')
+```    
+
+For more specific information see the [Alert](/tbd) node documentation.
 
 ##### Type casting issues
 
+Mixing Integers and floats.  And what about strings and numericals?
+
+TODO: elaborate
+
 ##### Numerical precision
 
+When writing floating point values in messages, or to InfluxDB it might be helpful to specify the decimal precision in order to make the values more readable or better comparable.  For example in the `messsage()` method of an `alert` node it is possible to "pipe" a value to a `printf` statement.  
+
+```
+|alert()
+  .id('{{ index .Tags "host"}}/mem_used')
+  .message('{{ .ID }}:{{ index .Fields "stat" | printf "%0.2f" }}')
+```   
+
+When writing floating point values to InfluxDB, for example when down sampling data, see https://groups.google.com/forum/#!topic/influxdb/yv3yQ2lJyh8
+
+TODO: elaborate from here
+
 ##### Time precision
+
+As Kapacitor and TICKscripts refer eventually to values stored in an Influx time series database, it will be necessary, in some cases, to specify the precision used with datapoints generated by the TICKscript.  
 
 ##### Regular expressions
 
