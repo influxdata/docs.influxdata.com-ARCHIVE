@@ -12,7 +12,7 @@ menu:
 - Fix error if int larger than 32-bit in `/proc/vmstat`.
 - Fix parsing of JSON with a UTF8 BOM in `httpjson`.
 - Allow JSON data format to contain zero metrics.
-- Fix format of connection_timeout in mqtt_consumer.
+- Fix format of connection_timeout in `mqtt_consumer`.
 - Fix case sensitivity error in SQLserver input.
 - Add support for proxy environment variables to `http_response`.
 - Add support for standard proxy env vars in outputs.
