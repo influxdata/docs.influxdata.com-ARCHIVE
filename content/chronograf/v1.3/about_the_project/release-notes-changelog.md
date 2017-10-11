@@ -6,6 +6,36 @@ menu:
     parent: About the Project
 ---
 
+## v1.3.9.0 [2017-10-06]
+
+### Bug Fixes
+1. Fix Data Explorer disappearing query templates in dropdown.
+1. Fix missing alert for duplicate db name.
+1. Chronograf shows real status for Windows hosts when metrics are saved in non-default db.
+1. Fix false error warning for duplicate Kapacitor name1. Fix unresponsive display options and query builder in dashboards.
+
+### Features
+1. Add `fill` options to data explorer and dashboard queries.
+1. Support editing kapacitor TICKScript.
+1. Introduce the TICKscript editor UI.
+1. Add .csv download button to the Data Explorer.
+1. Add Data Explorer InfluxQL query and location query synchronization, so queries can be shared via a URL.
+1. Able to switch InfluxDB sources on a per graph basis.
+
+### UI Improvements
+1. Require a second click when deleting a dashboard cell.
+1. Sort database list in Schema Explorer alphabetically.
+1. Improve usability of dashboard cell context menus.
+1. Move dashboard cell renaming UI into Cell Editor Overlay.
+1. Prevent the legend from overlapping graphs at the bottom of the screen.
+1. Add a "Plus" icon to every button with an Add or Create action for clarity and consistency.
+1. Make hovering over series smoother.
+1. Reduce the number of pixels per cell to one point per 3 pixels.
+1. Remove tabs from Data Explorer.
+1. Improve appearance of placeholder text in inputs.
+1. Add ability to use "Default" values in Source Connection form.
+1. Display name & port in SourceIndicator tool tip.
+
 ## v1.3.8.3 [2017-09-29]
 ### Bug Fixes
 1. Fix duration for single value and custom time ranges.
