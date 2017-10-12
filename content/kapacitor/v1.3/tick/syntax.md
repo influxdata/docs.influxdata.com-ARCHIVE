@@ -48,7 +48,7 @@ As mentioned in Getting Started, a pipeline is a Directed Acylic Graph (DAG). (F
 
 # TICKscript syntax
 
-TICKscript is case sensitive and uses Unicode. The TICKscript parser scans TICKscript code from top to bottom and left to right instantiating variables and nodes and then chaining or linking them together into pipelines as they are encountered.  When loading a TICKscript the parser does not check for compatibility between nodes.  Edges between incompatible nodes will result in log error messages when a task is first run.
+TICKscript is case sensitive and uses Unicode. The TICKscript parser scans TICKscript code from top to bottom and left to right instantiating variables and nodes and then chaining or linking them together into pipelines as they are encountered.  When loading a TICKscript the parser checks that a chaining method called on a node is valid.  If an invalid node is encountered the parser will throw an error with the message "no method or property <identifier> on <node type>".
 
 ## Code representation
 
@@ -867,12 +867,14 @@ Example 28 contains four lambda expressions.  The first expression is passed to 
 
 ## Literals versus field values
 
-Please keep in mind that literal string values are declared using single quotes.  Double quotes are reserved for accessing the values of tags, of fields and of named results.  In most instances using double quotes in place of single quotes will be caught as an error: `unsupported literal type`.  On the other hand, using single quotes when double quotes were intended, i.e. accessing a field value, will not be caught and the node will use the literal value instead of the desired value of a tag, of a field or of a named result.
+Please keep in mind that literal string values are declared using single quotes.  Double quotes are reserved for accessing the values of tags, of fields and of named results.  In most instances using double quotes in place of single quotes will be caught as an error: `unsupported literal type`.  On the other hand, using single quotes when double quotes were intended, i.e. accessing a field value, will not be caught and, if this occurs in a lambda expression, may use the literal value instead of the desired value of a tag, of a field or of a named result.
 
-As of Kapacitor 1.3 it is possible to declare a variable using double quotes and the parser will not flag it as an error.  For example `var my_var = "foo"` will pass so long as it is not used.  However, when this variable is used in a Lambda expression, query string or other method call, it will trigger a compilation error.
+As of Kapacitor 1.3 it is possible to declare a variable using double quotes and the parser will not flag it as an error.  For example `var my_var = "foo"` will pass so long as it is not used.  However, when this variable is used in a Lambda expression or other method call, it will trigger a compilation error.
 
+<!--
 ## Incompatible node types
-
+FIXME: not sure what was intended now by this heading.
+-->
 ## Circular rewrites
 <!-- defect 589 -->
 
