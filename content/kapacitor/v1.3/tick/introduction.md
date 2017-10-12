@@ -9,20 +9,22 @@ menu:
     weight: 1
 ---
 # Contents
-1. [Overview](#overview)
-1. [Nodes](#nodes)
-2. [Pipelines](#pipelines)
-3. [Basic Examples](#basic-examples)
-4. [TICKscript in Kapacitor](#tickscript-in-kapacitor)
-6. [TICKscript in Chronograf](#tickscript-in-chronograf)
+* [Overview](#overview)
+* [Nodes](#nodes)
+* [Pipelines](#pipelines)
+* [Basic Examples](#basic-examples)
+* [TICKscript in Kapacitor](#tickscript-in-kapacitor)
+* [TICKscript in Chronograf](#tickscript-in-chronograf)
 
 # Overview
+
+Kapacitor is used to extract, transform and load data into, out of, and within the TICK stack.  Kapacitor breaks complex extraction, transformation and load jobs into tasks, which get defined through its REST API.  The command line client to this API includes a `define` command that appears as follow: `kapacitor define cpu_alert -type stream -tick cpu_alert_stream.tick  -dbrp telegraf.autogen`.  Key to creating this task is the script `cpu_alert_stream.tick`.       
 
 Kapacitor uses a Domain Specific Language(DSL) named **TICKscript**.  TICKscript is used in `.tick` files to define **pipelines** for processing data.  The TICKscript language is designed to chain together the invocation of data processing operations defined in **nodes**.  The Kapacitor [Getting Started](getting_started/) guide introduces TICKscript basics in the context of that product.  For a better understanding of what follows, it is recommended that the reader review that document first.
 
 # Nodes
 
-In TICKscript the fundamental type is the processing **node**.  A processing node has **properties** and **chaining methods**.  A new processing node can be instantiated from a parent node using a chaining method of that parent node.  For each **node type** the signature of this method will be the same, regardless of the parent node type.  The chaining method can accept zero or more arguments used to initialize internal properties of the new node instance.  The most common argument types used during instantiation are:
+In TICKscript the fundamental type is the processing **node**.  A processing node has **properties** and **chaining methods**.  A new processing node can be instantiated from a parent or sibling node using a chaining method of that parent or sibling node.  For each **node type** the signature of this method will be the same, regardless of the parent or sibling node type.  The chaining method can accept zero or more arguments used to initialize internal properties of the new node instance.  The most common argument types used during instantiation are:
 
    * Strings representing usually a query expression, a measurement name, a data series tag or field.
       * example: `query('SELECT mean("sequestr") AS stat FROM "co2accumulator"."autogen".co2 WHERE "location" = \'50.0675, 14.471667\'')`
@@ -31,24 +33,24 @@ In TICKscript the fundamental type is the processing **node**.  A processing nod
    * GO time constructs.
       * example: `shift(6h)`
    * Other nodes and their pipelines captured in variables within the script.
-      * example: `var lows = batch... join(lows)`
+      * example: `var lows = batch... ...|join(lows)`
 
 The top level nodes that establish the processing style, `stream` and `batch`, are simply declared and take no arguments.  Nodes with more complex sets of properties rely on **Property methods** for their internal configuration.   
 
-Each script has a flat scope and each variable in the scope can reference a primitive value, such as a string, an integer or a float value, or a node instance with methods that can then be called.
+Each script has a flat scope and each variable in the scope can reference a literal value, such as a string, an integer or a float value, or a node instance with methods that can then be called.
 
 As mentioned, these methods come in two forms.
 
 * **Property methods** &ndash; A property method modifies the internal properties of a node and returns a reference to the same node.  Property methods are called using dot ('.') notation.
 * **Chaining methods** &ndash; A chaining method creates a new child node and returns a reference to it.  Chaining methods are called using pipe ('|') notation.
 
-The [reference documentation](tbd/) lists the property and chaining methods of each node along with examples and descriptions.
+The [node reference documentation](/kapacitor/v1.3/nodes/) lists the property and chaining methods of each node along with examples and descriptions.
 
 <!-- The `stream` and `batch` variables are an instance of a [StreamNode](/kapacitor/v1.3/nodes/stream_node/) or [BatchNode](/kapacitor/v1.3/nodes/batch_node/) respectively. -->
 
 # Pipelines
 
-Every TICKscript is broken into one or more **pipelines**.  A pipeline and its top node can be assigned to a variable allowing the results of different pipelines to be combined.  Alternately a simple TICKscript can use only one anonymous pipeline.  The pipeline processing style is set as either `stream` or `batch`.  These two types of pipelines cannot be combined.
+Every TICKscript is broken into one or more **pipelines**.  The nodes within a pipeline can be assigned to variables allowing the results of different pipelines to be combined or for sections of the pipeline to broken into reasonably understandable functional units.  Alternately a simple TICKscript can use only one anonymous pipeline.  The pipeline processing style is set as either `stream` or `batch`.  These two types of pipelines cannot be combined.
 
 <!-- Kapacitor uses TICKscripts to define data processing pipelines.
 A pipeline is set of nodes that process data and edges that connect the nodes. -->
@@ -62,9 +64,7 @@ At the start of any pipeline will be declared one of two fundamental edges.  Thi
 * `stream`&rarr;`from()`&ndash; an edge that transfers data a single data point at a time.
 * `batch`&rarr;`query()`&ndash; an edge that transfers data in chunks instead of one point at a time.  
 
-When connecting nodes and then creating a new Kapacitor task, Kapacitor will check whether or not the TICKscript syntax is well formed, however it will not inform the user of the existence of edges connecting incompatible node types.  Rather all edges will be validated at runtime.
-
-Be aware that a syntactically correct script may define a pipeline that is invalid.
+When connecting nodes and then creating a new Kapacitor task, Kapacitor will check whether or not the TICKscript syntax is well formed, and if the new edges are applicable to the most recent node.  However full functionality of the pipeline will not be validated until runtime, when error messages can appear in the Kapacitor log.  The default location for the Kapacitor log on Linux is `/var/log/kapacitor/kapacitor.log`.
 
 # Basic Examples
 
@@ -76,7 +76,9 @@ stream
     |httpOut('dump')
 ```
 
-When used to create a task called `sf_task` with the default Telegraf database, the TICKscript in Example 1 will simply dump the latest cpu datapoint as JSON to the HTTP REST endpoint(e.g http://localhost:9092/kapacitor/v1/tasks/sf_task/dump).  This example contains three nodes:
+When used to create a task called `sf_task` with the default Telegraf database, the TICKscript in Example 1 will simply dump the latest cpu datapoint as JSON to the HTTP REST endpoint(e.g http://localhost:9092/kapacitor/v1/tasks/sf_task/dump).  
+
+This example contains three nodes:
 
    * The base `stream` node.
    * The requisite `from()` node, that defines the stream of data points.
@@ -99,7 +101,9 @@ batch
     |httpOut('dump')
 ```
 
-When used to create a task called `bq_task` with the default Telegraf database, the TICKscript in Example 2 will simply dump the last cpu datapoint of the batch of measurements representing the last 10 seconds of activity to the HTTP REST endpoint(e.g. http://localhost:9092/kapacitor/v1/tasks/bq_task/dump). This example contains three nodes:
+When used to create a task called `bq_task` with the default Telegraf database, the TICKscript in Example 2 will simply dump the last cpu datapoint of the batch of measurements representing the last 10 seconds of activity to the HTTP REST endpoint(e.g. http://localhost:9092/kapacitor/v1/tasks/bq_task/dump).
+
+This example contains three nodes:
 
    * The base `batch` node.
    * The requisite `query()` node, that defines the data set.
@@ -129,8 +133,9 @@ If a task needs to be deleted:
 ```
 $ kapacitor delete tasks <TASKNAME>
 ```
-
+<!-- FIXME: uncomment this line once the Working with Kapacitor document is ready.
 For more information see the section [Working with Kapacitor](tbd/)   
+-->
 
 # TICKscript in Chronograf
 
@@ -148,7 +153,7 @@ chronograf-v1-af6eeb07-f3ca-4ac8-a533-df2ca50f619d stream    enabled   true     
 cpu_alert                                          stream    enabled   true      ["telegraf"."autogen"]
 ...
 ```
-The task ID stands out as being generated from the chronograf token, a version tag and a UUID.
+The task ID, which is formed from the "chronograf" token, a version tag and a UUID, stands out as being generated in Chronograf.
 
 To inspect the generated TICKscript use the show command, which will list the generated script in the section TICKscript.
 
@@ -228,6 +233,7 @@ trigger
     |httpOut('output')
 ...
 ```
+Example 4 shows how Chronograf has generated user friendly variable identifiers for the database name, the measurement name, fields, tags and literals to be used in the pipeline.  The pipeline is then broken up using additional variables to make its functional units more easily understandable.  
 
 <!-- TODO - get correct link -->
 The next section covers [TICKscript syntax](/kapacitor/v1.3/tick/syntax/) in more detail. [Continue...](/kapacitor/v1.3/tick/syntax/)

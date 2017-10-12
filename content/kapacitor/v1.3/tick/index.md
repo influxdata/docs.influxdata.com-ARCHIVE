@@ -14,7 +14,7 @@ This section provides introductory information on working with TICKscript.
 
    * [Introduction](introduction/) - this document presents the fundamental concepts of working with TICKscript in Kapacitor and Chronograf.
    * [Syntax](syntax/) - this covers the essentials of how TICKscript statements and structures are organized.
-   * [Lamda Expressions](expr/) - this section provides essential information about working with these argument types, which are commonly provided to TICKscript nodes.
+   * [Lambda Expressions](expr/) - this section provides essential information about working with these argument types, which are commonly provided to TICKscript nodes.
    * [Specification](spec/) - this introduces the specification defining TICKscript.
 
 Outside of this section the following articles may also be of interest.
@@ -27,7 +27,8 @@ Outside of this section the following articles may also be of interest.
 
 ### Checkout the Influxdata blog as well.
 
-Influxdata blog for [Kapacitor](https://www.influxdata.com/blog/category/tech/kapacitor/) latest content:
+   * Influxdata blog for [Kapacitor](https://www.influxdata.com/blog/category/tech/kapacitor/)
+   * Influxdata blog latest content:
 
 <script  type="text/javascript" src="/js/vendor/jquery-2.1.4.min.js"></script>
 <script>
