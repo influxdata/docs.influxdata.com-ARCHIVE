@@ -873,126 +873,37 @@ As of Kapacitor 1.3 it is possible to declare a variable using double quotes and
 
 <!--
 ## Incompatible node types
-FIXME: not sure what was intended now by this heading.
+FIXME: not sure now what was intended by this heading.
 -->
 ## Circular rewrites
+
+When using the InfluxDBOut node, be careful not to create circular rewrites to the same database and the same measurement from which data is being read.
+
+**Example 29 &ndash; A circular rewrite**
+```javascript
+stream
+   |from()
+      .measurement('system')
+   |eval(lambda: "n_cpus" + 1).as('n_cpus')
+   |InfluxDBOut()
+      .database('telegraf')
+      .measurement('system')
+```
+
+The script in Example 29 could be used to define a task on the database `telegraf` with the retention policy `autogen`.  For example:
+
+```
+kapacitor define circular_task -type stream -tick circular_rewrite.tick  -dbrp telegraf.autogen
+```
+In such a case the above script will loop infinitely adding a new data point with a new value for the field `n_cpus` until the task is stopped.  
+
 <!-- defect 589 -->
 
 ## Alerts and ids
 <!--  see email TICKscript - .id() - 2017-10-10 -->
 
-# Where next?
+When using the `deadman` method along with one or more `alert` nodes or when using more than one `alert` node in a pipeline, be sure to set the ID property with the property method `id()`.  The value of ID must be unique on each node.  Failure to do so will lead Kapacitor to assume that they are all the same group of alerts, and so some alerts may not appear as expected.
+
+# Where to next?
 
 See the [examples](https://github.com/influxdata/kapacitor/tree/master/examples) in the code base on Github.  See also the detailed use case solutions in the section [Guides](/kapacitor/v1.3/guides).  
-
-
-
-
-
-
-**===================================================================================**
-<br/>Previous documentation below<br/>
-**===================================================================================**
-
-Literals
---------
-
-### Booleans
-
-Boolean literals are the keywords `TRUE` and `FALSE`.
-They are case sensitive.
-
-### Numbers
-
-Numbers are typed and are either a `float64` or an `int64`.
-If the number contains a decimal it is considered to be a `float64` otherwise it is an `int64`.
-All `float64` numbers are considered to be in base 10.
-If an integer is prefixed with a `0` then it is considered a base 8 (octal) number, otherwise it is considered base 10.
-
-Valid number literals:
-
-* 1 -- int64
-* 1.2 -- float64
-* 5 -- int64
-* 5.0 -- float64
-* 0.42 -- float64
-* 0400 -- octal int64
-
-
-### Strings
-
-There are two ways to write string literals:
-
-1. Single quoted strings with backslash escaped single quotes.
-
-    This string `'single \' quoted'` becomes the literal `single ' quoted`.
-
-2. Triple single quoted strings with no escaping.
-
-    This string `'''triple \' quoted'''` becomes the literal `triple \' quoted`.
-
-### Durations
-
-TICKscript supports durations literals.
-They are of the form of InfluxQL duration literals.
-See https://docs.influxdata.com/influxdb/v1.3/query_language/spec/#literals
-
-Duration literals specify a length of time.
-An integer literal followed immediately (with no spaces) by a duration unit listed below is interpreted as a duration literal.
-
-#### Duration unit definitions
-
- Units  | Meaning
---------|-----------------------------------------
- u or µ | microseconds (1 millionth of a second)
- ms     | milliseconds (1 thousandth of a second)
- s      | second
- m      | minute
- h      | hour
- d      | day
- w      | week
-
-Statements
-----------
-
-A statement begins with an identifier and any number of chaining function calls.
-The result of a statement can be assigned to a variable using the `var` keyword and assignment operator `=`.
-
-Example:
-
-```javascript
-var errors = stream
-    |from()
-        .measurement('errors')
-var requests = stream
-    |from()
-    .measurement('requests')
-// Join the errors and requests stream
-errors
-    |join(requests)
-        .as('errors', 'requests')
-    |eval(lambda: "errors.value" / "requests.value")
-```
-
-Format
-------
-
-### Whitespace
-
-Whitespace is ignored and can be used to format the code as you like.
-
-Typically property methods are indented in from their calling node.
-This way methods along the left edge are chaining methods.
-
-For example:
-
-```javascript
-stream
-    |eval(lambda: "views" + "errors")
-        .as('total_views') // Increase indent for property method.
-    |httpOut('example') // Decrease indent for chaining method.
-```
-
-### Comments
-
- Basic `//` style single line comments are supported.
