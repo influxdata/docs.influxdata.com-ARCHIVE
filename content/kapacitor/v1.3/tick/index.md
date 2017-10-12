@@ -12,10 +12,10 @@ menu:
 
 This section provides introductory information on working with TICKscript.  
 
-   * [Introduction](introduction/) - this document presents the fundamental concepts of working with TICKscript in Kapacitor and Chronograf.
-   * [Syntax](syntax/) - this covers the essentials of how TICKscript statements and structures are organized.
-   * [Lambda Expressions](expr/) - this section provides essential information about working with these argument types, which are commonly provided to TICKscript nodes.
-   * [Specification](spec/) - this introduces the specification defining TICKscript.
+   * [Introduction](/kapacitor/v1.3/tick/introduction/) - this document presents the fundamental concepts of working with TICKscript in Kapacitor and Chronograf.
+   * [Syntax](/kapacitor/v1.3/tick/syntax/) - this covers the essentials of how TICKscript statements and structures are organized.
+   * [Lambda Expressions](/kapacitor/v1.3/tick/expr/) - this section provides essential information about working with these argument types, which are commonly provided to TICKscript nodes.
+   * [Specification](/kapacitor/v1.3/tick/spec/) - this introduces the specification defining TICKscript.
 
 Outside of this section the following articles may also be of interest.
 
@@ -32,7 +32,6 @@ Outside of this section the following articles may also be of interest.
 
 <script  type="text/javascript" src="/js/vendor/jquery-2.1.4.min.js"></script>
 <script>
-console.log('ahoj')
 
 $.get('/feed', function (data) {
     let count = 0;
@@ -46,10 +45,6 @@ $.get('/feed', function (data) {
                                            '</p></div>');
 
            count++;
-           console.log("------------------------");
-           console.log("title      : " + el.find("title").text());
-           console.log("author     : " + el.find("author").text());
-           console.log("description: " + el.find("description").text());
         }
     });
 });

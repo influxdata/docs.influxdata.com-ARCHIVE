@@ -20,7 +20,7 @@ menu:
 
 Kapacitor is used to extract, transform and load data into, out of, and within the TICK stack.  Kapacitor breaks complex extraction, transformation and load jobs into tasks, which get defined through its REST API.  The command line client to this API includes a `define` command that appears as follow: `kapacitor define cpu_alert -type stream -tick cpu_alert_stream.tick  -dbrp telegraf.autogen`.  Key to creating this task is the script `cpu_alert_stream.tick`.       
 
-Kapacitor uses a Domain Specific Language(DSL) named **TICKscript**.  TICKscript is used in `.tick` files to define **pipelines** for processing data.  The TICKscript language is designed to chain together the invocation of data processing operations defined in **nodes**.  The Kapacitor [Getting Started](getting_started/) guide introduces TICKscript basics in the context of that product.  For a better understanding of what follows, it is recommended that the reader review that document first.
+Kapacitor uses a Domain Specific Language(DSL) named **TICKscript**.  TICKscript is used in `.tick` files to define **pipelines** for processing data.  The TICKscript language is designed to chain together the invocation of data processing operations defined in **nodes**.  The Kapacitor [Getting Started](/kapacitor/v1.3/introduction/getting_started/) guide introduces TICKscript basics in the context of that product.  For a better understanding of what follows, it is recommended that the reader review that document first.
 
 # Nodes
 

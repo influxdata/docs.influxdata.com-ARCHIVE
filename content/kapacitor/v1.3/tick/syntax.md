@@ -24,7 +24,7 @@ menu:
 
 # Concepts
 
-The sections [Introduction](/tbd) and [Getting Started](/tbd) already presented the key concepts of **nodes** and **pipelines**.  Nodes represent process invocation units, that either take data as a batch, or in a point by point stream, and then alter that data, store that data, or based on changes in that data trigger some other activity  such as an alert.  Pipelines are simply logically organized chains of nodes.    
+The sections [Introduction](/kapacitor/v1.3/tick/introduction/) and [Getting Started](/kapacitor/v1.3/introduction/getting_started/) already presented the key concepts of **nodes** and **pipelines**.  Nodes represent process invocation units, that either take data as a batch, or in a point by point stream, and then alter that data, store that data, or based on changes in that data trigger some other activity  such as an alert.  Pipelines are simply logically organized chains of nodes.    
 
 **Built on GO**
 
@@ -204,7 +204,7 @@ String templates allow node properties, tags and fields to be added to a string.
 ```    
 In Example 6 three values are added to two string templates.  In the call to the setter `id()` the value of the tag `"host"` is added to the start of the string.  The call to the setter `message()` then adds the `id` and then the value of the field `"stat"`.  
 
-String templates are currently applicable with the [Alert](/tbd) node and are discussed further in the section [Accessing values in string templates](#accessing-values-in-string-templates) below.
+String templates are currently applicable with the [Alert](/kapacitor/v1.3/nodes/alert_node/) node and are discussed further in the section [Accessing values in string templates](#accessing-values-in-string-templates) below.
 
 String templates can also include flow statements such as `if...else` as well as calls to internal formating methods.
 
@@ -340,7 +340,7 @@ While it is possible to declare and use variables in TICKscript, it is also poss
 
 ##### Accessing values
 
-As was pointed out in the [Getting started guide](http://localhost:1414/kapacitor/v1.3/introduction/getting_started/#gotcha-single-versus-double-quotes) accessing data tags and fields, using string literals and accessing TICKscript variables each involves different syntax.  Additionally it is possible to access the results of lambda expressions used with certain nodes.  
+As was pointed out in the [Getting started guide](/kapacitor/v1.3/introduction/getting_started/#gotcha-single-versus-double-quotes) accessing data tags and fields, using string literals and accessing TICKscript variables each involves different syntax.  Additionally it is possible to access the results of lambda expressions used with certain nodes.  
 
    * **Variables** &ndash; To access a _TICKscript variable_ simply use its identifier.  
 
@@ -400,7 +400,7 @@ As was pointed out in the [Getting started guide](http://localhost:1414/kapacito
   ```
   Example 13 above continues the pipeline from Example 12.  In Example 12, the results of the lambda expression named as `'used'` under the `eval()` method are then accessed in Example 13 as an argument to the method `'mean()'`, which then names its result _as_ `'stat'`.  A new statement then begins.  This contains a new call to the method `'eval()'`, which has a lambda expression that accesses `"stat"` and sets its result _as_ `'sigma'`.  The named result `"stat"` is also accessed in the `message()` method and the threshold methods (`info()`,`warn()`,`crit()`) under the `alert()` chaining method.  The named result `"sigma"` is also used in the lambda expressions of these methods.
 
-  **Note &ndash; InfluxQL nodes and tag or field access** &ndash; [InfluxQL nodes](kapacitor/v1.3/nodes/influx_q_l_node/), such as `mean()` in Example 13, are special nodes that wrap InfluxQL functions. See the section [Taxonomy of node types](#taxonomy-of-node-types) below.  When accessing field values, tag values or named results with this node type single quotes are used.
+  **Note &ndash; InfluxQL nodes and tag or field access** &ndash; [InfluxQL nodes](/kapacitor/v1.3/nodes/influx_q_l_node/), such as `mean()` in Example 13, are special nodes that wrap InfluxQL functions. See the section [Taxonomy of node types](#taxonomy-of-node-types) below.  When accessing field values, tag values or named results with this node type single quotes are used.
 
   **Example 14 &ndash; Field access with an InfluxQL node**
   ```javascript
@@ -433,7 +433,7 @@ As mentioned in the section [String templates](#string-templates) it is possible
   .message('{{ .ID }}:{{ index .Fields "stat" }}')
 ```    
 
-For more specific information see the [Alert](/tbd) node documentation.
+For more specific information see the [Alert](/kapacitor/v1.3/nodes/alert_node/) node documentation.
 
 ##### Type conversion
 
@@ -689,7 +689,7 @@ To aid in understanding the roles that different nodes play in a pipeline, a sho
 These nodes are special because they can be instantiated and returned using identifiers other than their type names.  An alias representing an aspect of their functionality can be used.  This may apply in all instances, as with the InfluxQL node, or only in one, as with the Alert node.
 
    * [`alert`](/kapacitor/v1.3/nodes/alert_node/) - can be returned as a `deadman` switch
-   * [`influxQL`](kapacitor/v1.3/nodes/influx_q_l_node/) - directly calls functions in InfluxQL, so can be returned when a TICKScript chaining method using the name of the InfluxQL method is called.
+   * [`influxQL`](/kapacitor/v1.3/nodes/influx_q_l_node/) - directly calls functions in InfluxQL, so can be returned when a TICKScript chaining method using the name of the InfluxQL method is called.
       * example 1: `From()|Mean()` - calls the mean function on a data stream defined in the from node and returns an InfluxQL node.
       * example 2: `Query()|Mode()` - calls the mode function on the data frame defined in the Query node and returns an InfluxQL node.
 
@@ -698,7 +698,7 @@ These nodes are special because they can be instantiated and returned using iden
 The first node in a TICKscript pipeline is either `batch` or `stream`. They define the _mode_ used in processing the data.
 
    * [`batch`](/kapacitor/v1.3/nodes/batch_node/) - chaining method call syntax is not used in the declaration.
-   * [`stream`](kapacitor/v1.3/nodes/stream_node/) - chaining method call syntax is not used in the declaration.
+   * [`stream`](/kapacitor/v1.3/nodes/stream_node/) - chaining method call syntax is not used in the declaration.
 
 **Data definition nodes**
 
@@ -739,7 +739,7 @@ Once the data set has been defined and filtered it can be passed to other nodes,
 
 * Nodes for triggering events, processes:
    * [`Alert`](/kapacitor/v1.3/nodes/alert_node/) - empty chaining method. It relies on a number of properties for configuring the emission of alerts.  
-   * [`Deadman`](kapacitor/v1.3//nodes/stream_node/#deadman) - actually a helper function on the stream node.  It is an alias for an `alert` that gets triggered when data flow falls below a specified threshold.
+   * [`Deadman`](/kapacitor/v1.3//nodes/stream_node/#deadman) - actually a helper function on the stream node.  It is an alias for an `alert` that gets triggered when data flow falls below a specified threshold.
    * [`HTTPOut`](/kapacitor/v1.3/nodes/http_out_node/) - chaining method takes a string. It caches the most recent data for each group it receives, making it available over the Kapicator http server using the string argument as the final locator context.
    * [`HTTPPost`](/kapacitor/v1.3/nodes/http_post_node/) - chaining method takes an array of strings.  It can also be empty. It posts data to HTTP endpoints specified in the string array.
    * [`InfluxDBOut`](/kapacitor/v1.3/nodes/influx_d_b_out_node/) - empty chaining method &ndash; configured through property setters.  It  writes data to InfluxDB as it is received.
