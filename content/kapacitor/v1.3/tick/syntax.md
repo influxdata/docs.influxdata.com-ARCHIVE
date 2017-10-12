@@ -48,7 +48,7 @@ As mentioned in Getting Started, a pipeline is a Directed Acylic Graph (DAG). (F
 
 # TICKscript syntax
 
-TICKscript is case sensitive and uses Unicode. The TICKscript parser scans TICKscript code from top to bottom and left to right instantiating variables and nodes and then chaining or linking them together into pipelines as they are encountered.  When loading a TICKscript the parser checks that a chaining method called on a node is valid.  If an invalid node is encountered the parser will throw an error with the message "no method or property <identifier> on <node type>".
+TICKscript is case sensitive and uses Unicode. The TICKscript parser scans TICKscript code from top to bottom and left to right instantiating variables and nodes and then chaining or linking them together into pipelines as they are encountered.  When loading a TICKscript the parser checks that a chaining method called on a node is valid.  If an invalid node is encountered the parser will throw an error with the message "no method or property &lt;identifier&gt; on &lt;node type&gt;".
 
 ## Code representation
 
