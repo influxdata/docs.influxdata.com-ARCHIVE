@@ -27,7 +27,7 @@ Kapacitor uses a Domain Specific Language(DSL) named **TICKscript**.  TICKscript
 In TICKscript the fundamental type is the processing **node**.  A processing node has **properties** and **chaining methods**.  A new processing node can be instantiated from a parent or sibling node using a chaining method of that parent or sibling node.  For each **node type** the signature of this method will be the same, regardless of the parent or sibling node type.  The chaining method can accept zero or more arguments used to initialize internal properties of the new node instance.  The most common argument types used during instantiation are:
 
    * Strings representing usually a query expression, a measurement name, a data series tag or field.
-      * example: `query('SELECT mean("sequestr") AS stat FROM "co2accumulator"."autogen".co2 WHERE "location" = \'50.0675, 14.471667\'')`
+      * example: `query('SELECT sum(value) FROM "pages"."default".errors')`
    * **lambda expressions** representing small function blocks to be applied to the data.
       * example: `eval(lambda: "lows.count"/("norms.count" + "lows.count" ))`
    * GO time constructs.

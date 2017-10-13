@@ -170,11 +170,11 @@ Strings begin with either one or three single single quotation marks: `'` or `''
 ```javascript
 var region1 = 'EMEA'
 var old_standby = 'foo' + 'bar'
-var query1 =   'SELECT mean("sequestr") FROM "co2accumulator"."autogen".co2 WHERE "location" = \'50.0675, 14.471667\' '
-var query2 = '''SELECT mean("sequestr") FROM "co2accumulator"."autogen".co2 WHERE "location" = '50.0675, 14.471667' '''
+var query1 = 'SELECT 100 - mean(usage_idle) AS stat FROM "telegraf"."autogen"."cpu" WHERE cpu = \'cpu-total\' '
+var query2 = '''SELECT 100 - mean(usage_idle) AS stat FROM "telegraf"."autogen"."cpu" WHERE cpu = 'cpu-total' '''
 ...
 batch
-   |query('SELECT count(sequestr) FROM "co2accumulator"."autogen".co2 WHERE sequestr < 0.25 GROUP BY location')
+   |query('''SELECT 100 - mean(usage_idle) AS stat FROM "telegraf"."autogen"."cpu" WHERE cpu = 'cpu-total' ''')
 ...   
 ```
 In Example 4 above the first line shows a simple string assignment using a string literal.  The second line uses the concatenation operator.  Lines three and four show two different approaches to declaring complex string literals with and without internally escaped single quotation marks.  The final example shows using a string literal directly in a method call.
@@ -184,11 +184,11 @@ To make long complex strings more readable newlines are permitted within the str
 **Example 5 &ndash; Multiline string**
 ```javascript
 batch
-   |query('
-      SELECT mean("sequestr") AS stat
-      FROM "co2accumulator"."autogen".co2
-      WHERE "location" = \'50.0675, 14.471667\'
-      ')
+   |query('SELECT 100 - mean(usage_idle)
+           AS stat
+           FROM "telegraf"."autogen"."cpu"
+           WHERE cpu = \'cpu-total\'
+           ')
 ```
 In Example 5 above the string is broken up to make the query more easily understood.
 
@@ -493,16 +493,14 @@ As Kapacitor and TICKscripts can be used to write values into an InfluxDB databa
 **Example 17 &ndash; Setting time precision with InfluxDBOut**
 ```javascript
 ...
-   |influxDBOut()
-      .database('co2accumulator')
-      .retentionPolicy('autogen')
-      .measurement('testvals')
-      .precision('m')
-      .tag('test','true')
-      .tag('version','0.1')
+|influxDBOut()
+    .database('telegraf')
+    .retentionPolicy('autogen')
+    .measurement('mean_cpu_idle')
+    .precision('s')
 ...      
 ```
-In Example 17 the time precision of the series to be written to the database "co2accumulator" as measurement "testvals" is set to the unit minutes.  
+In Example 17, taken from the guide topic [Continuous Query](/kapacitor/v1.3/guides/continuous_queries/), the time precision of the series to be written to the database "telegraf" as measurement "mean_cpu_idle" is set to the unit seconds.  
 
 Valid values for precision are the same as those used in InfluxDB.
 
@@ -560,11 +558,13 @@ An expression ends with the last setter of the last node in the pipeline.
 
 **Example 20 &ndash; Single line expressions**
 ```javascript
-stream|from().measurement('co2')|window().period(1m).every(30s).align()
-   |eval(lambda: sqrt("mofcap") ).as('sqrt')
-   |influxDBOut().database('co2accumulator').retentionPolicy('autogen').measurement('testvals')
-       .tag('test','true').tag('version','0.1')
+...
+// Dataframe
+var data = batch|query('''SELECT mean(used_percent) AS stat FROM "telegraf"."autogen"."mem" ''').period(period).every(every).groupBy('host')
 
+// Thresholds
+var alert = data|eval(lambda: sigma("stat")).as('sigma').keep()|alert().id('{{ index .Tags "host"}}/mem_used').message('{{ .ID }}:{{ index .Fields "stat" }}')
+   .info(lambda: "stat" > info OR "sigma" > infoSig).warn(lambda: "stat" > warn OR "sigma" > warnSig).crit(lambda: "stat" > crit OR "sigma" > critSig)
 ...
 ```
 Example 20 shows an expression with a number of nodes and setters declared all on the same line.  While this is possible, it is not the recommended style.    
