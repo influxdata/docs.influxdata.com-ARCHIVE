@@ -157,7 +157,7 @@ hostname="<enterprise-data-0x>" #✨
   shared-secret = "long pass phrase used for signing tokens" #✨
 ```
 
-### 3. Start the Data Service
+### III. Start the Data Service
 On sysvinit systems, enter:
 ```
 service influxdb start
