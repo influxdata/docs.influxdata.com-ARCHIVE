@@ -18,7 +18,7 @@ menu:
       * [Statements](#statements)
    * [Taxonomy of node types](#taxonomy-of-node-types)
    * [InfluxQL in TICKscript](#influxql-in-tickscript)
-   * [Lamdba expressions](#lambda-expressions)
+   * [Lambda expressions](#lambda-expressions)
    * [Summary of variable use between syntactic domains](#summary-of-variable-use-between-syntactic-domains)
    * [Gotchas](#gotchas)
 
@@ -248,7 +248,7 @@ In Example 7 the first three lines show the assignment of regular expressions to
 
 ##### Lambda expressions as literals
 
-A lambda expression is a parameter representing a short easily understood function to be passed into a method call or held in a variable. It can wrap a boolean expression, a mathematical expression, a call to an internal function or a combination of these three.  Functions that can be used in Lambda expressions are discussed in the sections [Type converversion](#type-conversion) and [Lambda Expressions](#lambda-expressions) below.  Lambda expressions are presented in detail in the topic [Lambda Expressions](/kapacitor/v1.3/tick/expr/).   
+A lambda expression is a parameter representing a short easily understood function to be passed into a method call or held in a variable. It can wrap a boolean expression, a mathematical expression, a call to an internal function or a combination of these three.  Functions that can be used in Lambda expressions are discussed in the sections [Type conversion](#type-conversion) and [Lambda Expressions](#lambda-expressions) below.  Lambda expressions are presented in detail in the topic [Lambda Expressions](/kapacitor/v1.3/tick/expr/).   
 
 Lambda expressions begin with the token `lambda` followed by a colon, ':' &ndash; `lambda:`.  
 
@@ -267,9 +267,9 @@ var alert = data
   |alert()
     .id('{{ index .Tags "host"}}/cpu_used')
     .message('{{ .ID }}:{{ index .Fields "stat" }}')
-    .info(lambda: "stat" > info OR "sigma" > infoSig)
-    .warn(lambda: "stat" > warn OR "sigma" > warnSig)
-    .crit(lambda: "stat" > crit OR "sigma" > critSig)
+    .info(lambda: "stat" > 70 OR "sigma" > 2.5)
+    .warn(lambda: "stat" > 80 OR "sigma" > 3.0)
+    .crit(lambda: "stat" > 90 OR "sigma" > 3.5)
 
 ```
 Example 8 above shows that a lambda expression can be directly assigned to a variable.  In the eval node a lambda statement is used which calls the sigma function. The alert node uses lambda expressions to define the log levels of given events.  
@@ -292,8 +292,8 @@ w      | week
 
 **Example 9 &ndash; Duration expressions**
 ```javascript
-var period = 10s
-var every = 10s
+var span = 10s
+var frequency = 10s
 ...
 var views = batch
     |query('SELECT sum(value) FROM "pages"."default".views')
@@ -303,7 +303,7 @@ var views = batch
         .fill(0)
 ```
 
-In Example 9 above the first two lines show the declaration of Duration types.  The first represents a period of 10 seconds and the second a time frame of 10 seconds.  The final example shows declaring duration literals directly in method calls.
+In Example 9 above the first two lines show the declaration of Duration types.  The first represents a time span of 10 seconds and the second a time frame of 10 seconds.  The final example shows declaring duration literals directly in method calls.
 
 ##### Nodes
 
@@ -321,8 +321,8 @@ var data = stream
   |eval(lambda: 100.0 - "usage_idle")
     .as('used')
   |window()
-    .period(period)
-    .every(every)
+    .period(span)
+    .every(frequency)
   |mean('used')
     .as('stat')
 ...
@@ -602,7 +602,7 @@ Example 21, taken from the example [mem_alert_batch.tick](https://github.com/inf
 
 With two exceptions (`stream` and `batch`) nodes always occur in pipeline expressions (chains), where they are instantiated through chaining methods.  Chaining methods are generally identified using the node type name.  One notable exception to this is the InfluxQL node, which uses aliases.  See the section [Taxonomy of node types](#taxonomy-of-node-types) below.   
 
-For each node type, the method that creates an instance of that type uses the same signature.  So if a `query` node instantiates an `eval` node and adds it to the chain, and if a `from` node can also create an `eval` node and add it to the chain, the chaining method creating a new `eval` node will accept the same arguments (e.g. one or more lamdba expressions) regardless of which node created it.  
+For each node type, the method that creates an instance of that type uses the same signature.  So if a `query` node instantiates an `eval` node and adds it to the chain, and if a `from` node can also create an `eval` node and add it to the chain, the chaining method creating a new `eval` node will accept the same arguments (e.g. one or more lambda expressions) regardless of which node created it.  
 
 **Example 22 &ndash; Instantiate eval node in stream**
 ```javascript
@@ -867,11 +867,13 @@ Example 28 contains four lambda expressions.  The first expression is passed to 
 
 # Summary of variable use between syntactic domains
 
+The following table summarizes how to access variables, named results and values in data series in the different syntactic domains.
+
 <!-- see defect 1238 -->
 |            | TICKscript | Query String | Lambda | InfluxQL Node|
 |:-----------|:-----------|:-------------|:-------|:-------------|
-| TICKscript variable <br/><br/>declaration examples: <br/><br/> `var my_var = 'foo'` <br/> `var my_num = 2.71` | Simply use the identifier<br/><br/> examples: <br/><br/> `var my_other_num = my_num + 3.14` <br/>`...`<br/>&nbsp;&nbsp;&nbsp;\|`default()`</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`.tag('bar', my_var)` | Simply use the identifier  with string concatentation.  Note that strings will be interpreted as field and tag names.<br/><br/>example:<br/><br/>`query('SELECT ' + my_var + ' FROM "telegraf"."autogen".cpu)` | Simply use the identifier<br/><br/>example:<br/><br/> `.info(lambda: "stat" > my_num )` | Use the identifier - Note that strings will be interpreted as field names<br/><br/>example:</br></br>\|`mean(my_var)` |
-| Field, Tag name or Named result<br/><br/>example:<br/><br/> \|`eval(lambda: sigma("stat"))`<br/>&nbsp;&nbsp;&nbsp;`.as('sigma')`<br/><br/> \|`query('SELECT mean(usage_idle) AS mean ...')` |In method calls use single quotes <br/><br/>example:<br/><br/>\|`derivative('malloc')`| Use the identifier directly in the string<br/><br/>example:<br/><br/>\|`query('SELECT cpu, usage_idle FROM "telegraf"."autogen".cpu')`|Use double quotes<br/><br/>examples:<br/><br/>\|` eval(lambda: 100.0 - "usage_idle")`<br/><br/>\|`.info(lambda: "sigma" > 2 )`|Use single quotes <br/><br/>example:<br/><br/>\|`mean('used')`<br/><br/>|
+| TICKscript variable <br/><br/>declaration examples: <br/><br/> `var my_var = 'foo'` <br/> `var my_num = 2.71` | Simply use the identifier.<br/><br/> examples: <br/><br/> `var my_other_num = my_num + 3.14` <br/>`...`<br/>&nbsp;&nbsp;&nbsp;\|`default()`</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`.tag('bar', my_var)` | Simply use the identifier  with string concatentation.  Note that strings will be interpreted as field and tag names.<br/><br/>example:<br/><br/>`query('SELECT ' + my_var + ' FROM "telegraf"."autogen".cpu)` | Simply use the identifier.<br/><br/>example:<br/><br/> `.info(lambda: "stat" > my_num )` | Use the identifier - Note that strings will be interpreted as field names.<br/><br/>example:</br></br>\|`mean(my_var)` |
+| Field, Tag name or Named result<br/><br/>example:<br/><br/> \|`eval(lambda: sigma("stat"))`<br/>&nbsp;&nbsp;&nbsp;`.as('sigma')`<br/><br/> \|`query('SELECT mean(usage_idle) AS mean ...')` |In method calls use single quotes. <br/><br/>example:<br/><br/>\|`derivative('malloc')`| Use the identifier directly in the string.<br/><br/>example:<br/><br/>\|`query('SELECT cpu, usage_idle FROM "telegraf"."autogen".cpu')`|Use double quotes.<br/><br/>examples:<br/><br/>\|` eval(lambda: 100.0 - "usage_idle")`<br/><br/>\|`.info(lambda: "sigma" > 2 )`|Use single quotes. <br/><br/>example:<br/><br/>\|`mean('used')`<br/><br/>|
 
 # Gotchas
 
