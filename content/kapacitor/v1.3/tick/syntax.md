@@ -24,15 +24,15 @@ menu:
 
 # Concepts
 
-The sections [Introduction](/kapacitor/v1.3/tick/introduction/) and [Getting Started](/kapacitor/v1.3/introduction/getting_started/) already presented the key concepts of **nodes** and **pipelines**.  Nodes represent process invocation units, that either take data as a batch, or in a point by point stream, and then alter that data, store that data, or based on changes in that data trigger some other activity  such as an alert.  Pipelines are simply logically organized chains of nodes.    
+The sections [Introduction](/kapacitor/v1.3/tick/introduction/) and [Getting Started](/kapacitor/v1.3/introduction/getting_started/) present the key concepts of **nodes** and **pipelines**.  Nodes represent process invocation units, that either take data as a batch, or in a point by point stream, and then alter that data, store that data, or based on changes in that data trigger some other activity  such as an alert.  Pipelines are simply logically organized chains of nodes.    
 
-**Built on GO**
+**Built on Golang**
 
-One important thing to keep in mind is that the TICKscript parser is built on GO.  Some arguments get passed from TICKscript into underlying GO API's, and some methods accept arguments that can be directly used to instantiate underlying GO structures, especially using the Duration type of the GO Time library.  
+One important thing to keep in mind is that the TICKscript parser is built on Golang.  Some arguments get passed from TICKscript into underlying Golang API's.  
 
 **Three Syntax domains**  
 
-When working with TICKscript, three syntax domains will be encountered.  Overarching is the TICKscript syntax of the TICKscript file.  This is primarily composed of nodes chained together in pipelines.  Some nodes on instantiation use strings representing InfluxQL statements.  So, InlfuxQL represents the second syntax domain that can be found.  Other nodes and methods use Lambda expressions, which represents the third syntax domain that will be met. The syntax between these domains, such as when accessing variable values, can differ, and this can sometimes lead to confusion.
+When working with TICKscript, three syntax domains will be encountered.  Overarching is the TICKscript syntax of the TICKscript file.  This is primarily composed of nodes chained together in pipelines.  The `batch` node on instantiation use strings representing InfluxQL statements.  So, InlfuxQL represents the second syntax domain that can be found.  Other nodes and methods use Lambda expressions, which represents the third syntax domain that will be met. The syntax between these domains, such as when accessing variable values, can differ, and this can sometimes lead to confusion.
 
 To summarize the three syntax domains found in TICKscript are:
 
@@ -44,8 +44,6 @@ To summarize the three syntax domains found in TICKscript are:
 
 As mentioned in Getting Started, a pipeline is a Directed Acylic Graph (DAG). (For more information see [Wolfram](http://mathworld.wolfram.com/AcyclicDigraph.html) or [Wikipedia](https://en.wikipedia.org/wiki/Directed_acyclic_graph)). It contains a finite number of nodes (a.k.a. vertices) and edges.  Each edge is directed from one node to another.  No edge path can lead back to an earlier node in the path, which would result in a cycle or loop.  TICKscript paths (a.k.a pipelines and chains) typically begin with a processing mode definition node with an edge to a data set definition node and then pass their results down to filtering and processing nodes.
 
-<!-- img src="/img/kapacitor/dag.png" width="120" height="75"  style="height: 200px; width: 320px"></img -->
-
 # TICKscript syntax
 
 TICKscript is case sensitive and uses Unicode. The TICKscript parser scans TICKscript code from top to bottom and left to right instantiating variables and nodes and then chaining or linking them together into pipelines as they are encountered.  When loading a TICKscript the parser checks that a chaining method called on a node is valid.  If an invalid chaining method is encountered the parser will throw an error with the message "no method or property &lt;identifier&gt; on &lt;node type&gt;".
@@ -54,9 +52,9 @@ TICKscript is case sensitive and uses Unicode. The TICKscript parser scans TICKs
 
 As the TICKScript parser is built on GO, source files should be encoded using **UTF-8**.  A script is broken into **declarations** and **expressions**.  Declarations result in the creation of a variable and occur on one line.  Expressions can cover more than one line and result in the creation of a pipeline or a subsection of a pipeline.
 
-**Whitespace** is used in declarations to separate variable names from operators and literal values.  It is also used within expressions to create indentations, which indicate the hierarchy of method calls.  This also helps to make the script more readable.  Whitespace can be used in method calls in much the same way it is used in GO.  
+**Whitespace** is used in declarations to separate variable names from operators and literal values.  It is also used within expressions to create indentations, which indicate the hierarchy of method calls.  This also helps to make the script more readable.  
 
-**Comments** can be created on a single line by using a pair of forward slashes "//" before the text.  Comment forward slashes can be preceded by whitespace and need not be the first characters of a newline. However comments should not follow after a declaration or method call within an expression.
+**Comments** can be created on a single line by using a pair of forward slashes "//" before the text.  Comment forward slashes can be preceded by whitespace and need not be the first characters of a newline.
 
 ### Keywords
 
@@ -274,9 +272,9 @@ var alert = data
 ```
 Example 8 above shows that a lambda expression can be directly assigned to a variable.  In the eval node a lambda statement is used which calls the sigma function. The alert node uses lambda expressions to define the log levels of given events.  
 
-##### GO Duration structures
+##### Duration literals
 
-GO duration structures are generated internally whenever a duration literal is encountered in the script in a context to which a time duration can be applied.  This syntax follows the same syntax present in [InfluxQL](https://docs.influxdata.com/influxdb/v1.3/query_language/spec/#literals).  A duration literal is comprised of two parts: an integer and a duration unit.  It is essentially an integer terminated by one or a pair of reserved characters, which represents a unit of time.
+Duration literals define a span of time or a set interval.  Their syntax follows the same syntax present in [InfluxQL](https://docs.influxdata.com/influxdb/v1.3/query_language/spec/#literals).  A duration literal is comprised of two parts: an integer and a duration unit.  It is essentially an integer terminated by one or a pair of reserved characters, which represents a unit of time.
 
 The following table presents the time units used in declaring duration types.
 
@@ -330,17 +328,19 @@ var alert = data
   |eval(lambda: sigma("stat"))
     .as('sigma')
     .keep()
+  |alert()
+    .id('{{ index .Tags "host"}}/cpu_used')    
 ...    
 ```
 In Example 10 above, in the first section, five nodes are created.  The top level node `stream` is assigned to the variable `data`. The `stream` node is then used as the root of the pipeline to which the nodes `from`, `eval`, `window` and `mean` are chained in order. In the second section the pipeline is then extended using assignment to the variable `alert`, so that a second `eval` node can be applied to the data.  
 
 #### Working with tags, fields and variables
 
-While it is possible to declare and use variables in TICKscript, it is also possible to work with tags and fields drawn from InfluxDB data series. This is most evident in the examples presented so far. The following section explores working not only with variables but also with tag and field values, that can be extracted from the data.    
+While it is possible to use variables in TICKscript, it is also possible to work with tags and fields drawn from InfluxDB data series. This is most evident in the examples presented so far. The following section explores working not only with variables but also with tag and field values, that can be extracted from the data.    
 
 ##### Accessing values
 
-As was pointed out in the [Getting started guide](/kapacitor/v1.3/introduction/getting_started/#gotcha-single-versus-double-quotes) accessing data tags and fields, using string literals and accessing TICKscript variables each involves different syntax.  Additionally it is possible to access the results of lambda expressions used with certain nodes.  
+Accessing data tags and fields, using string literals and accessing TICKscript variables each involves a different syntax.  Additionally it is possible to access the results of lambda expressions used with certain nodes.  
 
    * **Variables** &ndash; To access a _TICKscript variable_ simply use its identifier.  
 
@@ -512,10 +512,6 @@ Valid values for precision are the same as those used in InfluxDB.
 | "m" | minutes |
 | "h" | hours |
 
-<!--
-##### Regular expressions
-TODO:  Is there more to be said about regular expression?
--->
 ## Statements
 
 There are two types of statements in TICKscript: Declarations and Expressions.  Declarations declare variables.  Expressions express a pipeline (a.k.a chain) of method calls, which instantiate and set the properties of processing nodes.   
@@ -596,7 +592,7 @@ alert
   .log('/tmp/mem_alert_log.txt')
 ...  
 ```
-Example 21, taken from the example [mem_alert_batch.tick](https://github.com/influxdata/kapacitor/blob/master/examples/telegraf/mem/mem_alert_batch.tick) in the code base, shows the recommended style for writing expressions.  This example contains three expression statements.  The first begins with the declaration of the batch node for the data frame.  This gets assigned to the variable `data`.  The second expression takes the `data` variable and defines thresholds for warning messages.  This gets assigned to the `alert` variable.  The third expression sets the `log` property of the `alert` node.  
+Example 21, taken from the example [mem_alert_batch.tick](https://github.com/influxdata/kapacitor/blob/03267847561b6261798407e62e5245bc54a7cf0c/examples/telegraf/mem/mem_alert_batch.tick) in the code base, shows the recommended style for writing expressions.  This example contains three expression statements.  The first begins with the declaration of the batch node for the data frame.  This gets assigned to the variable `data`.  The second expression takes the `data` variable and defines thresholds for warning messages.  This gets assigned to the `alert` variable.  The third expression sets the `log` property of the `alert` node.  
 
 ### Node instantiation
 
