@@ -65,7 +65,7 @@ The [node reference documentation](/kapacitor/v1.3/nodes/) lists the property an
 
 # Pipelines
 
-Every TICKscript is broken into one or more **pipelines**.  The nodes within a pipeline can be assigned to variables allowing the results of different pipelines to be combined or for sections of the pipeline to broken into reasonably understandable functional units.  Alternately a simple TICKscript can use only one anonymous pipeline.  The pipeline processing style is set as either `stream` or `batch`.  These two types of pipelines cannot be combined.
+Every TICKscript is broken into one or more **pipelines**.  The nodes within a pipeline can be assigned to variables allowing the results of different pipelines to be combined or for sections of the pipeline to broken into reasonably understandable functional units.  Alternately a simple TICKscript can use only one anonymous pipeline.  The pipeline processing style is set as either `stream` or `batch`.  These two types of pipelines cannot be combined.  With `stream` processing, datapoints are read, as in a classic data stream, point by point as they arrive.  With `batch` processing a frame of 'historic' data is read from the database and then processed.  With `stream` processing data can be transformed before being written to InfluxDB.  With `batch` processing, the data should already be stored in InfluxDB.  
 
 Pipelines in Kapacitor are directed acyclic graphs ([DAGs](https://en.wikipedia.org/wiki/Directed_acyclic_graph)).  This means that
 each edge has a direction down which data flows, and that there cannot be any cycles in the pipeline.  An edge can also be thought of as the data-flow relationship that exists between a parent node and its child or between a child and its sibling.  
