@@ -131,7 +131,7 @@ batch
     |httpOut('dump')
 ```
 
-When used to create a task called `bq_task` with the default Telegraf database, the TICKscript in Example 3 will simply dump the last cpu datapoint of the batch of measurements representing the last 10 seconds of activity to the HTTP REST endpoint(e.g. http://localhost:9092/kapacitor/v1/tasks/bq_task/dump).
+When used to create a task called `bq_task` with the default Telegraf database, the TICKscript in Example 3 will simply dump the last cpu datapoint of the batch of measurements representing the last 10 seconds of activity to the HTTP REST endpoint(e.g. <span>http</span>:<span>//</span>localhost<span>:9092</span><span>/kapacitor/v1/tasks/bq_task/dump</span>).
 
 This example contains three nodes:
 
