@@ -18,9 +18,7 @@ menu:
 
 # Overview
 
-Kapacitor is used to extract, transform and load data into, out of, and within the TICK stack.  Kapacitor breaks complex extraction, transformation and load jobs into tasks, which get defined through its REST API.  The command line client to this API includes a `define` command that appears as follow: `kapacitor define cpu_alert -type stream -tick cpu_alert_stream.tick  -dbrp telegraf.autogen`.  Key to creating this task is the script `cpu_alert_stream.tick`.       
-
-Kapacitor uses a Domain Specific Language(DSL) named **TICKscript**.  TICKscript is used in `.tick` files to define **pipelines** for processing data.  The TICKscript language is designed to chain together the invocation of data processing operations defined in **nodes**.  The Kapacitor [Getting Started](/kapacitor/v1.3/introduction/getting_started/) guide introduces TICKscript basics in the context of that product.  For a better understanding of what follows, it is recommended that the reader review that document first.
+Kapacitor uses a Domain Specific Language(DSL) named **TICKscript** to define **tasks** involving the extraction, transformation and loading of data.  TICKscript is used in `.tick` files to define **pipelines** for processing data.  The TICKscript language is designed to chain together the invocation of data processing operations defined in **nodes**.  The Kapacitor [Getting Started](/kapacitor/v1.3/introduction/getting_started/) guide introduces TICKscript basics in the context of that product.  For a better understanding of what follows, it is recommended that the reader review that document first.
 
 Each script has a flat scope and each variable in the scope can reference a literal value, such as a string, an integer or a float value, or a node instance with methods that can then be called.
 
@@ -43,7 +41,7 @@ In TICKscript the fundamental type is the **node**.  A node has **properties** a
    * Other nodes and their pipelines captured in variables within the script.
 
 **Example 1 &ndash; chaining method takes a node variable**
-```
+```javascript
 var errors = batch
     |query('SELECT sum(value) FROM "pages"."default".errors')
 ...
@@ -59,13 +57,28 @@ errors
 
 Example 1 shows how the variable `views` is used in the call to the chaining method that instantiates a new `join` node.
 
-The top level nodes that establish the processing style, `stream` and `batch`, are simply declared and take no arguments.  Nodes with more complex sets of properties rely on **Property methods** for their internal configuration.   
+The top level nodes that establish the processing style, `stream` and `batch`, are simply declared and take no arguments.  Nodes with more complex sets of properties rely on **Property methods** for their internal configuration.  
+
+Each node type **wants** data in either batch or stream mode.  Some can handle both. Each node type also **provides** data in batch or stream mode.  Some can provide both.  This _wants/provides_ pattern is key to understanding how nodes work together.  Taking into consideration the _wants/provides_ pattern, four general node use cases can be defined:
+
+   * _want_ a batch and _provide_ a stream - for example, when computing an average or a minimum or a maximum.
+   * _want_ a batch and _provide_ a batch - for example, when identifying outliers in a batch of data.
+   * _want_ a stream and _provide_ a batch - for example, when grouping together similar data points.
+   * _want_ a stream and _provide_ a stream - for example, when applying a mathematical function like a logarithm to a value in a point.
 
 The [node reference documentation](/kapacitor/v1.3/nodes/) lists the property and chaining methods of each node along with examples and descriptions.
 
 # Pipelines
 
-Every TICKscript is broken into one or more **pipelines**.  The nodes within a pipeline can be assigned to variables allowing the results of different pipelines to be combined or for sections of the pipeline to broken into reasonably understandable functional units.  Alternately a simple TICKscript can use only one anonymous pipeline.  The pipeline processing style is set as either `stream` or `batch`.  These two types of pipelines cannot be combined.  With `stream` processing, datapoints are read, as in a classic data stream, point by point as they arrive.  With `batch` processing a frame of 'historic' data is read from the database and then processed.  With `stream` processing data can be transformed before being written to InfluxDB.  With `batch` processing, the data should already be stored in InfluxDB.  
+Every TICKscript is broken into one or more **pipelines**.  The nodes within a pipeline can be assigned to variables allowing the results of different pipelines to be combined or for sections of the pipeline to broken into reasonably understandable functional units.  Alternately a simple TICKscript can use only one anonymous pipeline.  The pipeline processing style is initially set as either `stream` or `batch`.  These two types of pipelines cannot be combined.  
+
+### Stream or Batch?
+
+With `stream` processing, datapoints are read, as in a classic data stream, point by point as they arrive.  With `stream` Kapacitor subscribes to all writes of interest in InfluxDB.  With `batch` processing a frame of 'historic' data is read from the database and then processed.  With `stream` processing data can be transformed before being written to InfluxDB.  With `batch` processing, the data should already be stored in InfluxDB.  After processing, it can also be written back to it.  
+
+Which to use depends upon system resources and the kind of computation being undertaken.  When working with a large set of data over a long time frame `batch` is preferred.  It leaves data stored on the disk until it is required, though the query, when triggered, will result in a sudden high load on the database.  Processing a large set of data over a long time frame with `stream` means needlessly holding potentially billions of data points in memory.  When working with smaller time frames  `stream` is preferred.  It lowers the query load on InfluxDB.  
+
+### Pipelines as graphs
 
 Pipelines in Kapacitor are directed acyclic graphs ([DAGs](https://en.wikipedia.org/wiki/Directed_acyclic_graph)).  This means that
 each edge has a direction down which data flows, and that there cannot be any cycles in the pipeline.  An edge can also be thought of as the data-flow relationship that exists between a parent node and its child or between a child and its sibling.  

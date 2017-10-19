@@ -24,28 +24,3 @@ Outside of this section the following articles may also be of interest.
    * [Guides](/kapacitor/v1.3/guides/) - a collection of intermediate to advanced solutions using the TICKscript language.
 
    <br/>
-
-### Checkout the Influxdata blog as well.
-
-   * Influxdata blog for [Kapacitor](https://www.influxdata.com/blog/category/tech/kapacitor/)
-   * Influxdata blog latest content:
-
-<script  type="text/javascript" src="/js/vendor/jquery-2.1.4.min.js"></script>
-<script>
-
-$.get('/feed', function (data) {
-    let count = 0;
-    $(data).find("item").each(function () { // or "item" or whatever suits your feed
-        var el = $(this);
-        if(count < 3){
-           $(".article-content:eq(1)").append('<div><h4><a href="' + el.find("link").text() + '">' +
-                                           el.find("title").text() + '</a></h4></p><p>' +
-                                           el.find("pubDate").text() + '</p><p>' +
-                                           el.find("description").text() +
-                                           '</p></div>');
-
-           count++;
-        }
-    });
-});
-</script>
