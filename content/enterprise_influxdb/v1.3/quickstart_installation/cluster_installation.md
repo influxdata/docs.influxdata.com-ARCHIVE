@@ -190,7 +190,7 @@ First, in `/etc/influxdb/influxdb.conf`, uncomment:
 * `shared-secret` in the `[http]` section and set it to a long pass phrase that will be used to sign tokens for intra-cluster communication. This value needs to be consistent across all data nodes.
 
 > **Note:** When you enable authentication, InfluxDB only executes HTTP requests that are sent with valid credentials.
-See the [authentication section](/influxdb/v0.10/administration/authentication_and_authorization/#authentication) for more information.
+See the [authentication section](/influxdb/latest/administration/authentication_and_authorization/#authentication) for more information.
 
 Second, in `/etc/influxdb/influxdb.conf`, set:
 
