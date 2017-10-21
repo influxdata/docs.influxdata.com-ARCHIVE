@@ -51,14 +51,14 @@ Specific steps may be different for other operating systems.
 
 ## Setup HTTPS with a CA-Signed Certificate
 
-#### Step 1: Install the SSL/TLS certificate
+#### Step 1: Install the SSL/TLS certificate in each Data Node
 
 Place the private key file (`.key`) and the signed certificate file (`.crt`)
-or the single bundled file (`.pem`) in the `/etc/ssl` directory.
+or the single bundled file (`.pem`) in the `/etc/ssl` directory of each Data Node.
 
-#### Step 2: Ensure file permissions
+#### Step 2: Ensure file permissions for each Data Node
 Certificate files require read and write access by the `root` user.
-Ensure that you have the correct file permissions by running the following
+Ensure that you have the correct file permissions in each Data Node by running the following
 commands:
 
 ```
@@ -69,7 +69,7 @@ sudo chmod 600 /etc/ssl/<private-key-file>
 #### Step 3: Enable HTTPS within the configuration file for each Meta Node
 
 HTTPS is disabled by default.
-Enable HTTPS for each Meta Node within the `[http]` section of the configuration file (`/etc/influxdb/influxdb-meta.conf`) by setting:
+Enable HTTPS for each Meta Node within the `[meta]` section of the configuration file (`/etc/influxdb/influxdb-meta.conf`) by setting:
 
 * `https-enabled` to `true`
 * `http-certificate` to `/etc/ssl/<signed-certificate-file>.crt` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
@@ -94,6 +94,7 @@ Enable HTTPS for each Meta Node within the `[http]` section of the configuration
 #### Step 4: Enable HTTPS within the configuration file for each Data Node
 
 HTTPS is disabled by default. There are two sets of configuration changes required.
+
 First, enable HTTPS for each Data Node within the `[http]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
 
 * `https-enabled` to `true`
@@ -198,14 +199,14 @@ When you execute the command, it will prompt you for more information.
 You can choose to fill out that information or leave it blank;
 both actions generate valid certificate files.
 
-#### Step 3: Enable HTTPS within the configuration file for each Meta Node
+#### Step 2: Enable HTTPS within the configuration file for each Meta Node
 
 HTTPS is disabled by default.
-Enable HTTPS for each Meta Node within the `[http]` section of the configuration file (`/etc/influxdb/influxdb-meta.conf`) by setting:
+Enable HTTPS for each Meta Node within the `[meta]` section of the configuration file (`/etc/influxdb/influxdb-meta.conf`) by setting:
 
 * `https-enabled` to `true`
-* `http-certificate` to `/etc/ssl/influxdb-selfsigned.crt`
-* `http-private-key` to `/etc/ssl/influxdb-selfsigned.key`
+* `https-certificate` to `/etc/ssl/influxdb-selfsigned.crt`
+* `https-private-key` to `/etc/ssl/influxdb-selfsigned.key`
 * `https-insecure-tls` to `true` to indicate a self-signed key
 
 
@@ -229,7 +230,7 @@ Enable HTTPS for each Meta Node within the `[http]` section of the configuration
   https-insecure-tls = true 
 ```
 
-#### Step 4: Enable HTTPS within the configuration file for each Data Node
+#### Step 3: Enable HTTPS within the configuration file for each Data Node
 
 HTTPS is disabled by default.  There are two sets of configuration changes required.
 
@@ -271,11 +272,11 @@ Second, Configure the Data Nodes to use HTTPS when communicating with the Meta N
     meta-insecure-tls = true 
 ```
 
-#### Step 5: Restart InfluxEnterprise
+#### Step 4: Restart InfluxEnterprise
 
 Restart the InfluxEnterprise meta node processes for the configuration changes to take effect:
 ```
-sudo systemctl start influxdb-meta
+sudo systemctl restart influxdb-meta
 ```
 
 Restart the InfluxEnterprise data node processes for the configuration changes to take effect:
@@ -283,7 +284,7 @@ Restart the InfluxEnterprise data node processes for the configuration changes t
 sudo systemctl restart influxdb
 ```
 
-#### Step 6: Verify the HTTPS Setup
+#### Step 5: Verify the HTTPS Setup
 
 Verify that HTTPS is working on the meta nodes by using `influxd-ctl`.
 ```
@@ -330,7 +331,7 @@ That's it! You've successfully set up HTTPS with InfluxEnterprise.
 Connecting [Telegraf](/telegraf/v1.3/) to an InfluxEnterprise instance that's using
 HTTPS requires some additional steps.
 
-In Telegraf's configuration file (`/etc/telegraf/telegraf.conf`), edit the `urls`
+In Telegraf's configuration file (`/etc/telegraf/telegraf.conf`), under the OUTPUT PLUGINS section, edit the `urls`
 setting to indicate `https` instead of `http` and change `localhost` to the
 relevant domain name.
 >
@@ -360,3 +361,6 @@ setting and set it to `true`.
 ```
 
 Next, restart Telegraf and you're all set!
+```
+sudo systemctl restart telegraf
+```
