@@ -3,7 +3,7 @@ title: HTTPS Setup
 menu:
   enterprise_influxdb_1_3:
     weight: 100
-    parent: guides
+    parent: Guides
 ---
 
 This guide describes how to enable HTTPS with InfluxEnterprise.
