@@ -35,7 +35,7 @@ some cases, HTTPS verifies the authenticity of the InfluxDB server to clients (b
 The communicatio between the meta nodes and the data nodes are also secured via HTTPS.
 
 Resources:
-[HTTPS Setup](/enterprise_influxdb/v1.3/administration/https_setup/)
+[HTTPS Setup](/enterprise_influxdb/v1.3/guides/https_setup/)
 
 ## Secure your Host
 
