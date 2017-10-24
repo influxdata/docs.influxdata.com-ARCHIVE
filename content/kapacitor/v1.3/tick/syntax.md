@@ -42,7 +42,7 @@ To summarize the three syntax domains found in TICKscript are:
 
 **Directed Acyclic Graphs**  
 
-As mentioned in Getting Started, a pipeline is a Directed Acylic Graph (DAG). (For more information see [Wolfram](http://mathworld.wolfram.com/AcyclicDigraph.html) or [Wikipedia](https://en.wikipedia.org/wiki/Directed_acyclic_graph)). It contains a finite number of nodes (a.k.a. vertices) and edges.  Each edge is directed from one node to another.  No edge path can lead back to an earlier node in the path, which would result in a cycle or loop.  TICKscript paths (a.k.a pipelines and chains) typically begin with a processing mode definition node with an edge to a data set definition node and then pass their results down to filtering and processing nodes.
+As mentioned in Getting Started, a pipeline is a Directed Acylic Graph (DAG). (For more information see [Wolfram](http://mathworld.wolfram.com/AcyclicDigraph.html) or [Wikipedia](https://en.wikipedia.org/wiki/Directed_acyclic_graph)). It contains a finite number of nodes (a.k.a. vertices) and edges.  Each edge is directed from one node to another.  No edge path can lead back to an earlier node in the path, which would result in a cycle or loop.  TICKscript paths (a.k.a pipelines and chains) typically begin with a data source definition node with an edge to a data set definition node and then pass their results down to filtering and processing nodes.
 
 # TICKscript syntax
 
@@ -50,9 +50,9 @@ TICKscript is case sensitive and uses Unicode. The TICKscript parser scans TICKs
 
 ## Code representation
 
-Source files should be encoded using **UTF-8**.  A script is broken into **declarations** and **expressions**.  Declarations result in the creation of a variable and occur on one line.  Expressions can cover more than one line and result in the creation of a pipeline or a subsection of a pipeline.
+Source files should be encoded using **UTF-8**.  A script is broken into **declarations** and **expressions**.  Declarations result in the creation of a variable and occur on one line.  Expressions can cover more than one line and result in the creation of an entire pipeline, a pipeline **chain** or a pipeline **branch**.
 
-**Whitespace** is used in declarations to separate variable names from operators and literal values.  It is also used within expressions to create indentations, which indicate the hierarchy of method calls.  This also helps to make the script more readable.  
+**Whitespace** is used in declarations to separate variable names from operators and literal values.  It is also used within expressions to create indentations, which indicate the hierarchy of method calls.  This also helps to make the script more readable.  Otherwise, whitespace is ignored.   
 
 **Example 1 &ndash; Whitespace**
 ```javascript
@@ -86,9 +86,6 @@ In Example 1 whitespace is used in the variable declarations to separate the key
 //   totalcpu = true
 //   fielddrop = ["time_*"]
 
-// DEFINE: kapacitor define cpu_alert_batch -type batch -tick cpu/cpu_alert_batch.tick -dbrp telegraf.autogen
-// ENABLE: kapacitor enable cpu_alert_batch
-
 // Parameters
 var period = 10s
 var every = 10s
@@ -121,42 +118,48 @@ Example 2 shows comments used to provide meta information about the data series 
 
 ### Keywords
 
-TICKscript is compact and contains only a small set of keywords compared to less specific languages.
+Keywords are tokens that have special meaning within a language and therefore cannot be used as identifiers for functions or variables.  TICKscript is compact and contains only a small set of keywords.
 
 | **Word** | **Usage** |
 | :----|:------|
-| **AND**  | Standard boolean conjunction operator. |
-| **FALSE** | The literal boolean value "false". |
-| **lambda** | Flags that what follows is to be interpreted as a lambda expression. |
-| **OR** | Standard boolean disjunction operator. |
 | **TRUE** | The literal boolean value "true". |
+| **FALSE** | The literal boolean value "false". |
+| **AND**  | Standard boolean conjunction operator. |
+| **OR** | Standard boolean disjunction operator. |
+| **lambda:** | Flags that what follows is to be interpreted as a lambda expression. |
 | **var** | Starts a variable declaration. |
+| **string** | Declare a variable as type `string` in a template. | `var my_string string` |
+| **duration** | Declare a variable as type `duration` in a template. | `var my_period duration` |
+| **int64** | Declare a variable as type `int64` in a template. | `var my_count int64` |
+| **float64** | Declare a variable as type `float64` in a template. | `var my_ratio float64` |
 
 Since the set of native node types available in TICKscript is limited, each node type, such as `batch` or `stream`, could be considered key.  Node types and their taxonomy are discussed in detail in the section [Taxonomy of node types](#taxonomy-of-node-types) below.  
 
 ### Operators
 
-TICKscript borrows many operators from Golang and adds a few which make sense in its data processing domain.
+TICKscript has support for traditional mathematical operators as well as a few which make sense in its data processing domain.
 
 **Standard Operators**
 
-| **Operator** | **Type** | **Usage** | **Examples** |
-|:-------------|:---------|:----------|:-------------|
-| **+** | Binary | Addition and string concatenation | `3 + 6`, `total + count` and `'foo' + 'bar'` |
-| **-** | Binary | Subtraction | `10 - 1`, `total - errs` |
-| **\*** | Binary | Multiplication | `3 * 6`, `ratio * 100.0` |
-| **/** | Binary |  Division | `36 / 4`, `errs / total` |
-| **==** | Binary | Comparison of equality |  `1 == 1`, `date == today` |
-| **!=** | Binary | Comparison of inequality | `result != 0`, `id != "testbed"` |
-| **<** | Binary | Comparison less than | `4 < 5`, `timestamp < today` |
-| **<=** | Binary | Comparison less than or equal to | `3 <= 6`, `flow <= mean` |
-| **>** | Binary | Comparison greater than | `6 > 3.0`, `delta > sigma` |
-| **>=** | Binary | Comparison greater than or equal to | `9.0 >= 8.1`, `quantity >= threshold` |
-| **=~** | Binary | Regular expression equality.  Right value must be a regular expression <br/>or a variable holding such an expression. | `tag =~ /^cz\d+/` |
-| **!~** | Binary | Negative regular expression equality. Right value must be a regular expression <br/>or a variable holding such an expression. | `tag !~ /^sn\d+/` |
-| **!** | Unary | Logical not | `!TRUE`, `!cpu_idle > 70` |
-| **AND** | Binary | Logical conjunction |  `rate < 20.0 AND rate >= 10` |
-| **OR** | Binary | Logical disjunction | `status > warn OR delta > signma` |
+| **Operator** | **Usage** | **Examples** |
+|:-------------|:----------|:-------------|
+| **+** | Addition and string concatenation | `3 + 6`, `total + count` and `'foo' + 'bar'` |
+| **-** | Subtraction | `10 - 1`, `total - errs` |
+| **\*** | Multiplication | `3 * 6`, `ratio * 100.0` |
+| **/** | Division | `36 / 4`, `errs / total` |
+| **==** | Comparison of equality |  `1 == 1`, `date == today` |
+| **!=** | Comparison of inequality | `result != 0`, `id != "testbed"` |
+| **<** | Comparison less than | `4 < 5`, `timestamp < today` |
+| **<=** | Comparison less than or equal to | `3 <= 6`, `flow <= mean` |
+| **>** | Comparison greater than | `6 > 3.0`, `delta > sigma` |
+| **>=** | Comparison greater than or equal to | `9.0 >= 8.1`, `quantity >= threshold` |
+| **=~** | Regular expression match.  Right value must be a regular expression <br/>or a variable holding such an expression. | `tag =~ /^cz\d+/` |
+| **!~** | Regular expression not match. Right value must be a regular expression <br/>or a variable holding such an expression. | `tag !~ /^sn\d+/` |
+| **!** | Logical not | `!TRUE`, `!(cpu_idle > 70)` |
+| **AND** | Logical conjunction |  `rate < 20.0 AND rate >= 10` |
+| **OR** | Logical disjunction | `status > warn OR delta > sigma` |
+
+
 
 Standard operators are used in TICKscript and in Lambda expressions.
 
@@ -166,7 +169,7 @@ Standard operators are used in TICKscript and in Lambda expressions.
 |:-------------|:----------|:------------|
 | **\|** |  Declares a chaining method call which creates an instance of a new node and chains it to the node above it. | `stream`<br/>&nbsp;&nbsp;&nbsp;\|`from()` |
 | **.** | Declares a property method call, setting or changing an internal property in the node to which it belongs. | `from()`<br/>&nbsp;&nbsp;&nbsp;`.database(mydb)` |
-| **@** | Declares a user defined function (UDF) call. | `from()`<br/>`...`<br/>`@MyFunc()` |
+| **@** | Declares a user defined function (UDF) call.  Essentially a chaining method that adds a new UDF node to the pipeline. | `from()`<br/>`...`<br/>`@MyFunc()` |
 
 Chaining operators are used within expressions to define pipelines or pipeline segments.
 
@@ -178,7 +181,7 @@ Variables in TICKscript are useful for storing and reusing values and for provid
 
 #### Naming variables
 
-Variables are declared using the keyword `var` at the start of a declaration.  Variable identifiers must begin with a standard ASCII letter and can be followed by any number of letters, digits and underscores.  Both upper and lower case can be used.  The type the variable will hold depends upon either the type identifier that follows its identifier, as can be written in a template, or the literal value it is assigned when it is declared, as is the standard usage in a standard TICKscript.  
+Variables are declared using the keyword `var` at the start of a declaration.  Variable identifiers must begin with a standard ASCII letter and can be followed by any number of letters, digits and underscores.  Both upper and lower case can be used.  In a standard TICKscript the type the variable holds depends on the literal value it is assigned.  In a TICKscript written for a task template type can also be set using the keyword for the type the variable will hold.
 
 **Example 3 &ndash; variable declarations**
 ```javascript
@@ -801,9 +804,9 @@ These nodes are special because they can be instantiated and returned using iden
       * example 1: `From()|Mean()` - calls the mean function on a data stream defined in the from node and returns an InfluxQL node.
       * example 2: `Query()|Mode()` - calls the mode function on the data frame defined in the Query node and returns an InfluxQL node.
 
-**Mode definition nodes**
+**Data source definition nodes**
 
-The first node in a TICKscript pipeline is either `batch` or `stream`. They define the _mode_ used in processing the data.
+The first node in a TICKscript pipeline is either `batch` or `stream`. They define the _data source_ used in processing the data.
 
    * [`batch`](/kapacitor/v1.3/nodes/batch_node/) - chaining method call syntax is not used in the declaration.
    * [`stream`](/kapacitor/v1.3/nodes/stream_node/) - chaining method call syntax is not used in the declaration.
