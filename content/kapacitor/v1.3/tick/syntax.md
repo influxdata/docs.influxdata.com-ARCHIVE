@@ -577,7 +577,7 @@ When writing floating point values in messages, or to InfluxDB it might be helpf
   .message('{{ .ID }}:{{ index .Fields "stat" | printf "%0.2f" }}')
 ```   
 
-When working with floating point values in lambda expressions, it is possible to use the floor function and powers of ten to round to a less precise value.  Note that since values are written as 64bit, this has no effect on storage.  If this were to be used with the `InfluxDBOUt` node, for example when downsizing data, it could lead to a needless loss of information.   
+When working with floating point values in lambda expressions, it is also possible to use the floor function and powers of ten to round to a less precise value.  Note that using `printf` in a string template is much faster.  Note as well that since values are written as 64bit, this has no effect on storage.  If this were to be used with the `InfluxDBOUt` node, for example when downsizing data, it could lead to a needless loss of information.   
 
 **Example 22 &ndash; Rendering floating points less precise**
 ```javascript
