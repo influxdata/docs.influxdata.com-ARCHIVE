@@ -34,7 +34,7 @@ You **must** have a minimum of three meta nodes in a cluster.
 InfluxEnterprise clusters require at least three meta nodes and an __**odd number**__
 of meta nodes for high availability and redundancy.
 We do not recommend having more than three meta nodes unless your servers
-and/or the communication between the servers have chornic reliability issues.
+and/or the communication between the servers have chronic reliability issues.
 <br>
 Note: that there is no requirement for each meta node to run on its own server.  But, obviously, deploying 
 multiple meta nodes on the same server creates a larger point of potential failure if that particular node is unresponsive.

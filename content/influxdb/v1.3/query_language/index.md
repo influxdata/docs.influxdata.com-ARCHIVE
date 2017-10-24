@@ -41,7 +41,7 @@ policies as well as deleting and dropping data.
 
 #### [Functions](/influxdb/v1.3/query_language/functions/)
 
-Covers all InfluxQL functions.
+Covers all [InfluxQL functions](/influxdb/v1.3/query_language/functions/).
 
 #### [Continuous Queries](/influxdb/v1.3/query_language/continuous_queries/)
 
