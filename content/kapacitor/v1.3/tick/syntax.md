@@ -24,11 +24,13 @@ menu:
 
 # Concepts
 
-The sections [Introduction](/kapacitor/v1.3/tick/introduction/) and [Getting Started](/kapacitor/v1.3/introduction/getting_started/) present the key concepts of **nodes** and **pipelines**.  Nodes represent process invocation units, that either take data as a batch, or in a point by point stream, and then alter that data, store that data, or based on changes in that data trigger some other activity  such as an alert.  Pipelines are simply logically organized chains of nodes.    
+The sections [Introduction](/kapacitor/v1.3/tick/introduction/) and [Getting Started](/kapacitor/v1.3/introduction/getting_started/) present the key concepts of **nodes** and **pipelines**.  Nodes represent process invocation units, that either take data as a batch, or in a point by point stream, and then alter that data, store that data, or based on changes in that data trigger some other activity  such as an alert.  Pipelines are simply logically organized chains of nodes.
 
-**Built on Golang**
+In Kapacitor TICKscript is used to define tasks directly and to define template tasks, which act as templates that can be reused to generate new tasks.
 
-One important thing to keep in mind is that the TICKscript parser is built on Golang.  Some syntax elements are borrowed from this language.    
+**Go**
+
+TICKscript Syntax was inspired by many different languages.  Among the most influential is Go.  This can be seen, for example, in the variable declaration idiom, in string templates, in types such as `duration`, in functions used in lambda expressions, and its influence is also apparent elsewhere in the documentation.     
 
 **Three Syntax domains**  
 
@@ -128,10 +130,11 @@ Keywords are tokens that have special meaning within a language and therefore ca
 | **OR** | Standard boolean disjunction operator. |
 | **lambda:** | Flags that what follows is to be interpreted as a lambda expression. |
 | **var** | Starts a variable declaration. |
-| **string** | Declare a variable as type `string` in a template. | `var my_string string` |
-| **duration** | Declare a variable as type `duration` in a template. | `var my_period duration` |
-| **int64** | Declare a variable as type `int64` in a template. | `var my_count int64` |
-| **float64** | Declare a variable as type `float64` in a template. | `var my_ratio float64` |
+| **string** | In a template task, declare a variable as type `string`. | `var my_string string` |
+| **duration** | In a template task, declare a variable as type `duration` . | `var my_period duration` |
+| **int** | In a template task, declare a variable as type `int64`. | `var my_count int` |
+| **float** | In a template task, declare a variable as type `float64`. | `var my_ratio float` |
+| **lambda** | In a template task, declare a variable as a Lambda expression type. | `var crit lambda` |
 
 Since the set of native node types available in TICKscript is limited, each node type, such as `batch` or `stream`, could be considered key.  Node types and their taxonomy are discussed in detail in the section [Taxonomy of node types](#taxonomy-of-node-types) below.  
 
@@ -159,8 +162,6 @@ TICKscript has support for traditional mathematical operators as well as a few w
 | **AND** | Logical conjunction |  `rate < 20.0 AND rate >= 10` |
 | **OR** | Logical disjunction | `status > warn OR delta > sigma` |
 
-
-
 Standard operators are used in TICKscript and in Lambda expressions.
 
 **Chaining Operators**
@@ -175,15 +176,21 @@ Chaining operators are used within expressions to define pipelines or pipeline s
 
 ## Variables and literals
 
-Variables in TICKscript are useful for storing and reusing values and for providing a friendly mnemonic for quickly understanding what a variable represents. They are typically declared along with the assignment of a literal value.  In a TICKscript intended to be used as a [Task Template](/kapacitor/v1.3/guides/template_tasks/) they can also be declared with simply a type identifier.  
+Variables in TICKscript are useful for storing and reusing values and for providing a friendly mnemonic for quickly understanding what a variable represents. They are typically declared along with the assignment of a literal value.  In a TICKscript intended to be used as a [Template Task](/kapacitor/v1.3/guides/template_tasks/) they can also be declared with simply a type identifier.  
 
 ### Variables
 
+Variables are declared using the keyword `var` at the start of a declaration.
+Variables are immutable and cannot be reassigned new values later on in the script, though they can be used in other declarations and can be passed into methods.
+Variables are also used in template tasks as placeholders to be filled when the template is used to create a new task.  
+For a detailed presentation on working with **template tasks** see the guide [Template tasks](/kapacitor/v1.3/guides/template_tasks/).
+If a TICKscript proves useful, it may be desirable to reuse it as a template task in order to quickly create other similar tasks.  For this reason it is recommended to use variables as much as possible.
+
 #### Naming variables
 
-Variables are declared using the keyword `var` at the start of a declaration.  Variable identifiers must begin with a standard ASCII letter and can be followed by any number of letters, digits and underscores.  Both upper and lower case can be used.  In a standard TICKscript the type the variable holds depends on the literal value it is assigned.  In a TICKscript written for a task template type can also be set using the keyword for the type the variable will hold.
+Variable identifiers must begin with a standard ASCII letter and can be followed by any number of letters, digits and underscores.  Both upper and lower case can be used.  In a TICKscript to be used to define a task directly, the type the variable holds depends on the literal value it is assigned.  In a TICKscript written for a task template, the type can also be set using the keyword for the type the variable will hold.  In a TICKscript to be used to define a task directly, using the variable keyword will result in a compile time error `invalid TICKscript: missing value for var "<VARNAME>".`.
 
-**Example 3 &ndash; variable declarations**
+**Example 3 &ndash; variable declarations for a task**
 ```javascript
 var my_var = 'foo'
 var MY_VAR = 'BAR'
@@ -191,20 +198,20 @@ var my_float = 2.71
 var my_int = 1
 var my_node = stream
 ```
-Variable declarations in templates do not require a literal assignment, as is shown in Example 4 below. For a detailed presentation on work working with **template tasks** see the guide [Template tasks](/kapacitor/v1.3/guides/template_tasks/).
+Variable declarations in templates do not require a literal assignment, as is shown in Example 4 below.
 
-**Example 4 &ndash; variable declarations in a template**
+**Example 4 &ndash; variable declarations in a task template**
 ```javascript
 var measurement string
 var frame duration
+var warn = float
 var period = 12h
 var critical = 3.0
 ```
-Variables are immutable and cannot be reassigned new values later on in the script, though they can be used in other declarations and can be passed into methods.
 
 ### Literal values
 
-Literal values are parsed into type instances.  They can be declared directly in method arguments or can be assigned to variables.  The parser interprets types based on context and creates instances of the following: boolean, string, float, integer, regular expression.  Lists, lambda expressions, duration structures and nodes are also recognized.  The rules the parser uses to recognize a type are discussed in the following Types section.
+Literal values are parsed into instances of the types available in TICKscript.  They can be declared directly in method arguments or can be assigned to variables.  The parser interprets types based on context and creates instances of the following primitives: boolean, string, float, integer. Regular expressions, lists, lambda expressions, duration structures and nodes are also recognized.  The rules the parser uses to recognize a type are discussed in the following Types section.
 
 #### Types
 
@@ -218,12 +225,13 @@ var true_bool = TRUE
    |flatten()
        .on('host','port')
        .dropOriginalFieldName(FALSE)
+...       
 ```
 
 In Example 5 above the first line shows a simple assignment using a boolean literal.  The second example shows using the boolean literal `FALSE` in a method call.
 
 ##### Numerical types
-Any literal token beginning with a digit will lead to the generation of a numerical type instance.  TICKscript understands two numerical types based on GO: `int64` and `float64`.  Any numerical token containing a decimal point will result in the creation of a `float64` value.  Any numerical token that ends without containing a decimal point will result in the creation of an `int64` value.  If an integer is prefixed with the zero character, `0`, it is interpreted as an octal.
+Any literal token containing only digits and optionally a decimal will lead to the generation of an instance of a numerical type.  TICKscript understands two numerical types based on GO: `int64` and `float64`.  Any numerical token containing a decimal point will result in the creation of a `float64` value.  Any numerical token that ends without containing a decimal point will result in the creation of an `int64` value.  If an integer is prefixed with the zero character, `0`, it is interpreted as an octal.
 
 **Example 6 &ndash; Numerical literals**
 ```javascript
@@ -266,7 +274,7 @@ In Example 8 above the string is broken up to make the query more easily underst
 
 ##### String templates
 
-String templates allow node properties, tags and fields to be added to a string.  The format follows the same format provided by the Golang [text.template](https://golang.org/pkg/text/template/) package.  This is useful when writing alert messages.  To add a property, tag or field value to a string template, it needs to be wrapped inside of double curly braces: "{{}}".
+String templates allow node properties, tags and fields to be added to a string.  The format follows the same format provided by the Go [text.template](https://golang.org/pkg/text/template/) package.  This is useful when writing alert messages.  To add a property, tag or field value to a string template, it needs to be wrapped inside of double curly braces: "{{}}".
 
 **Example 9 &ndash; Variables inside of string templates**
 ```javascript
@@ -285,15 +293,14 @@ String templates can also include flow statements such as `if...else` as well as
 ```
 ##### String lists
 
-A string list is a collection of strings declared between two brackets.  They can be declared with literals, identifiers for other variables, or with the asterisk wild card, "\*".  They can be passed into methods that take multiple string parameters.  They are especially useful in templates.
+A string list is a collection of strings declared between two brackets.  They can be declared with literals, identifiers for other variables, or with the asterisk wild card, "\*".  They can be passed into methods that take multiple string parameters.  They are especially useful in template tasks.  Note that when used in function calls, list contents get exploded and the elements are used as all the arguments to the function.  When a list is given, it is understood that the list contains all the arguments to the function.  
 
-**Example 10 &ndash; String lists**
+**Example 10 &ndash; String lists in a standard task**
 ```javascript
 var foo = 'foo'
 var bar = 'bar'
 var foobar_list = [foo, bar]
 var cpu_groups = [ 'host', 'cpu' ]
-var lambda_names = [*]
 ...
 stream
    |from()
@@ -301,9 +308,9 @@ stream
       .groupBy(cpu_groups)
 ...      
 ```
-Example 10 declares three string lists. The first contains identifiers for other variables.  The second contains string literals.  The third uses the wild card.  The list `cpu_groups` is used in the method `from.groupBy()`.
+Example 10 declares two string lists. The first contains identifiers for other variables.  The second contains string literals.  The list `cpu_groups` is used in the method `from.groupBy()`.
 
-**Example 11 &ndash; String lists in a template**
+**Example 11 &ndash; String list in a template task**
 ```javascript
 brp "telegaf"."not_autogen"
 
@@ -332,11 +339,11 @@ stream
          .channel(slack_channel)
 ```
 
-Example 11, taken from the examples in the [code repository](https://github.com/influxdata/kapacitor/blob/1de435db363fa8ece4b50e26d618fc225b38c70f/examples/load/templates/implicit_template.tick), defines `implicit_template.tick`.  It uses the groups list to hold a variable arguments to be passed to the `from.groupBy()` method.  
+Example 11, taken from the examples in the [code repository](https://github.com/influxdata/kapacitor/blob/1de435db363fa8ece4b50e26d618fc225b38c70f/examples/load/templates/implicit_template.tick), defines `implicit_template.tick`.  It uses the `groups` list to hold a variable arguments to be passed to the `from.groupBy()` method.  The contents of the `groups` list will be determined when the template is used to create a new task.    
 
 ##### Regular expressions
 
-As in Javascript regular expressions begin and end with a forward slash: `/`.  The expression content should be compatible with the Golang [regular expression library](https://golang.org/pkg/regexp/syntax/) (`regexp`).
+Regular expressions begin and end with a forward slash: `/`. The regular expression syntax is the same as Perl, Python and other languages. For details on the syntax see the Go [regular expression library](https://golang.org/pkg/regexp/syntax/).
 
 **Example 12 &ndash; Regular expressions**
 ```javascript
@@ -354,7 +361,7 @@ var south_afr = stream
       .measurement('responses')
       .where(lambda: "dns_node" =~ /\.za$/ )       
 ```
-In Example 12 the first three lines show the assignment of regular expressions to variables.  The `locals` stream reuses the regular expression assigned to the variable `local_ips`. The `south_afr` stream uses a regular expression comparison with the regular expression declared literally as a part of the lambda expression.
+In Example 12 the first three lines show the assignment of regular expressions to variables.  The `locals` stream uses the regular expression assigned to the variable `local_ips`. The `south_afr` stream uses a regular expression comparison with the regular expression declared literally as a part of the lambda expression.
 
 ##### Lambda expressions as literals
 
@@ -678,7 +685,7 @@ var alert = data|eval(lambda: sigma("stat")).as('sigma').keep()|alert().id('{{ i
    .info(lambda: "stat" > info OR "sigma" > infoSig).warn(lambda: "stat" > warn OR "sigma" > warnSig).crit(lambda: "stat" > crit OR "sigma" > critSig)
 ...
 ```
-Example 26 shows an expression with a number of nodes and setters declared all on the same line.  While this is possible, it is not the recommended style.    
+Example 26 shows an expression with a number of nodes and setters declared all on the same line.  While this is possible, it is not the recommended style.  Note also that the command line utility `tickfmt`, that comes with the Kapacitor distribution, can be used to reformat a TICKscript to follow the recommended style.     
 
 **Example 27 &ndash; Recommended expression syntax**
 ```javascript
