@@ -69,7 +69,7 @@ The [node reference documentation](/kapacitor/v1.3/nodes/) lists the property an
 
 # Pipelines
 
-Every TICKscript is broken into one or more **pipelines**.  Pipelines are chains of nodes logically organized edges that cannot cycle back to earlier nodes in the chain.  The nodes within a pipeline can be assigned to variables. This allows the results of different pipelines to be combined using, for example, a `join` or a `union` node.  It also allows for sections of the pipeline to be broken into reasonably understandable self-descriptive functional units.  In a simple TICKscript there may be no need to assign pipeline nodes to variables.  The initial node in the pipeline sets the processing type for the Kapacitor task they define.  These can be either `stream` or `batch`.  These two types of pipelines cannot be combined.  
+Every TICKscript is broken into one or more **pipelines**.  Pipelines are chains of nodes logically organized along edges that cannot cycle back to earlier nodes in the chain.  The nodes within a pipeline can be assigned to variables. This allows the results of different pipelines to be combined using, for example, a `join` or a `union` node.  It also allows for sections of the pipeline to be broken into reasonably understandable self-descriptive functional units.  In a simple TICKscript there may be no need to assign pipeline nodes to variables.  The initial node in the pipeline sets the processing type for the Kapacitor task they define.  These can be either `stream` or `batch`.  These two types of pipelines cannot be combined.  
 
 ### Stream or Batch?
 
