@@ -5,6 +5,22 @@ menu:
     weight: 0
     parent: about_the_project
 ---
+## v1.3.7 [2017-10-26]
+
+### Release Notes
+Bug fix identified via Community and InfluxCloud. The build artifacts are now consistnent with v1.3.5.
+
+### Bugfixes
+
+- Don't assume `which` is present in package post-install script.
+- Fix use of `INFLUXD_OPTS` in service file.
+- Fix missing man pages in new packaging output.
+- Add RPM dependency on shadow-utils for `useradd`.
+- Fix data deleted outside of specified time range when using `delete`
+- Fix data dropped incorrectly during compaction.
+- Return `query.ErrQueryInterrupted` for a successful read on `InterruptCh`.
+- Copy returned bytes from TSI meta functions.
+
 ## v1.3.6 [2017-09-28]
 
 ### Release Notes
