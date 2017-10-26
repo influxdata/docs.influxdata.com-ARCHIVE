@@ -5,6 +5,23 @@ menu:
     weight: 0
     parent: about_the_project
 ---
+
+## v1.4.3 [2017-10-25]
+
+### Bugfixes
+
+- Fix container name filters in Docker input.
+- Fix snmpwalk address format in leofs input.
+- Fix case sensitivity issue in SQL Server query.
+- Fix CPU input plugin stuck after suspend on Linux.
+- Fix MongoDB input panic when restarting MongoDB.
+- Preserve URL path prefix in InfluxDB output.
+- Fix TELEGRAF_OPTS expansion in systemd service unit.
+- Remove warning when JSON contains null value.
+- Fix ACL token usage in consul input plugin.
+- Fix unquoting error with Tomcat 6.
+- Fix syscall panic in diskio on some Linux systems.
+
 ## v1.4.2 [2017-10-10]
 
 ### Bugfixes
