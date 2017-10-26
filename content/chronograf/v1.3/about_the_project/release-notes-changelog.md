@@ -6,6 +6,30 @@ menu:
     parent: About the Project
 ---
 
+## v1.3.10.0 [2017-10-24]
+### Bug Fixes
+1. Improve the copy in the retention policy edit page.
+1. Fix 'Could not connect to source' bug on source creation with unsafe-ssl.
+1. Fix when exporting `SHOW DATABASES` CSV has bad data.
+1. Fix not-equal-to highlighting in Kapacitor Rule Builder.
+1. Fix undescriptive error messages for database and retention policy creation.
+1. Fix drag and drop cancel button when writing data in the data explorer.
+1. Fix persistence of "SELECT AS" statements in queries.
+
+### Features
+1. Every dashboard can now have its own time range.
+1. Add CSV download option in dashboard cells.
+1. Implicitly prepend source urls with http://
+1. Add support for graph zooming and point display on the millisecond-level.
+1. Add manual refresh button for Dashboard, Data Explorer, and Host Pages.
+
+### UI Improvements
+1. Increase size of Cell Editor query tabs to reveal more of their query strings.
+1. Improve appearance of Admin Page tabs on smaller screens.
+1. Add cancel button to TICKscript editor.
+1. Redesign dashboard naming & renaming interaction.
+1. Redesign dashboard switching dropdown.
+
 ## v1.3.9.0 [2017-10-06]
 
 ### Bug Fixes
