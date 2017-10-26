@@ -19,6 +19,12 @@ menu:
 <br>
 # Clustering
 
+## v1.3.7 [2017-10-26]
+
+ - Read for the interrupt signal from the stream before creating the iterators.
+ - Address Deadlock issue in meta server on 1.3.6
+ - Fix logger panic associated with anti-entropy service and manually removed shards.
+
 ## v1.3.6 [2017-09-28]
 
 #### Bugfixes
