@@ -23,7 +23,7 @@ menu:
 
 ### Upgrading -- for users of the TSI preview
 The 1.3.7 release resolves a defect that created duplicate tag values in TSI indexes See Issues 
-[#8995] (https://github.com/influxdata/influxdb/pull/8995), and [#8998](https://github.com/influxdata/influxdb/pull/8998). 
+[#8995](https://github.com/influxdata/influxdb/pull/8995), and [#8998](https://github.com/influxdata/influxdb/pull/8998). 
 However, upgrading to 1.3.7 cause compactions to fail, see [Issue #9025](https://github.com/influxdata/influxdb/issues/9025). 
 We will provide a utility that will allow TSI indexes to be rebuilt, 
 resolving the corruption possible in releases prior to 1.3.7. If you are using the TSI preview, 
