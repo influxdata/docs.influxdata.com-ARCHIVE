@@ -19,6 +19,24 @@ menu:
 <br>
 # Clustering
 
+## v1.3.7 [2017-10-26]
+
+### Upgrading -- for users of the TSI preview
+The 1.3.7 release resolves a defect that created duplicate tag values in TSI indexes See Issues 
+[#8995](https://github.com/influxdata/influxdb/pull/8995), and [#8998](https://github.com/influxdata/influxdb/pull/8998). 
+However, upgrading to 1.3.7 cause compactions to fail, see [Issue #9025](https://github.com/influxdata/influxdb/issues/9025). 
+We will provide a utility that will allow TSI indexes to be rebuilt, 
+resolving the corruption possible in releases prior to 1.3.7. If you are using the TSI preview, 
+**you should not upgrade to 1.3.7 until this utility is available**. 
+We will update this release note with operational steps once the utility is available.
+
+
+#### Bugfixes
+
+ - Read for the interrupt signal from the stream before creating the iterators.
+ - Address Deadlock issue in meta server on 1.3.6
+ - Fix logger panic associated with anti-entropy service and manually removed shards.
+
 ## v1.3.6 [2017-09-28]
 
 #### Bugfixes
@@ -31,6 +49,7 @@ menu:
 - Address data race reading Len() in connection pool.
 
 ## v1.3.5 [2017-08-29]
+
 This release builds off of the 1.3.5 release of OSS InfluxDB.
 Please see the OSS [release notes](/influxdb/v1.3/about_the_project/releasenotes-changelog/#v1-3-5-2017-08-29) for more information about the OSS releases.
 

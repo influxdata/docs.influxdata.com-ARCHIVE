@@ -60,26 +60,38 @@ InfluxEnterprise does not function as a load balancer.
 You will need to configure your own load balancer to send client traffic to the
 data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.3/tools/api/)).
 
-## Step 1: Modify the /etc/hosts file
+## Step 1: Modify the /etc/hosts file in each of your servers
 
-Add your three servers' hostnames and IP addresses to **each** server's `/etc/hosts`
-file (the hostnames below are representative).
+Add your three servers' hostnames and IP addresses to **each** of your server's `/etc/hosts`
+file. 
+
+The hostnames below are representative:
 
 ```
-<Server_1_IP> quickstart-cluster-01
-<Server_2_IP> quickstart-cluster-02
-<Server_3_IP> quickstart-cluster-03
+<Server_1_IP_Address> quickstart-cluster-01
+<Server_2_IP_Address> quickstart-cluster-02
+<Server_3_IP_Address> quickstart-cluster-03
 ```
 
 > **Verification steps:**
 >
 Before proceeding with the installation, verify on each server that the other
-servers are resolvable. Here is an example set of shell commands using `ping`:
+servers are resolvable. Here is an example set of shell commands using `ping` and the
+output for `quickstart-cluster-01`:
 >
+
+```
     ping -qc 1 quickstart-cluster-01
     ping -qc 1 quickstart-cluster-02
     ping -qc 1 quickstart-cluster-03
 
+    > ping -qc 1 quickstart-cluster-01
+    PING quickstart-cluster-01 (Server_1_IP_Address) 56(84) bytes of data.
+    
+    --- quickstart-cluster-01 ping statistics ---
+    1 packets transmitted, 1 received, 0% packet loss, time 0ms
+    rtt min/avg/max/mdev = 0.064/0.064/0.064/0.000 ms
+```
 
 If there are any connectivity issues please resolve them before proceeding with the
 installation.
@@ -95,13 +107,13 @@ Perform the following steps on all three servers.
 
 #### Ubuntu & Debian (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.3.6-c1.3.6_amd64.deb
-sudo dpkg -i influxdb-meta_1.3.6-c1.3.6_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.3.7-c1.3.7_amd64.deb
+sudo dpkg -i influxdb-meta_1.3.7-c1.3.7_amd64.deb
 ```
 #### RedHat & CentOS (64-bit)]
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.3.6_c1.3.6.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.3.6_c1.3.6.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.3.7_c1.3.7.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.3.7_c1.3.7.x86_64.rpm
 ```
 
 ### II. Edit the Meta Service Configuration File
@@ -127,6 +139,8 @@ hostname="<quickstart-cluster-0x>" #✨
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
   license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
 ```
+
+> **Note:** The `hostname` in the configuration file must match the `hostname` in your server's `/etc/hosts` file.
 
 ### III. Start the Meta Service
 
@@ -158,13 +172,13 @@ Perform the following steps on all three servers.
 
 #### Ubuntu & Debian (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.3.6-c1.3.6_amd64.deb
-sudo dpkg -i influxdb-data_1.3.6-c1.3.6_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.3.7-c1.3.7_amd64.deb
+sudo dpkg -i influxdb-data_1.3.7-c1.3.7_amd64.deb
 ```
 #### RedHat & CentOS (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.3.6_c1.3.6.x86_64.rpm
-sudo yum localinstall influxdb-data-1.3.6_c1.3.6.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.3.7_c1.3.7.x86_64.rpm
+sudo yum localinstall influxdb-data-1.3.7_c1.3.7.x86_64.rpm
 ```
 
 ### II. Edit the Data Service Configuration File
@@ -174,6 +188,9 @@ First, in `/etc/influxdb/influxdb.conf`, uncomment:
 * `hostname` at the top of the file and set it to the full hostname of the data node
 * `auth-enabled` in the `[http]` section and set it to `true`
 * `shared-secret` in the `[http]` section and set it to a long pass phrase that will be used to sign tokens for intra-cluster communication. This value needs to be consistent across all data nodes.
+
+> **Note:** When you enable authentication, InfluxDB only executes HTTP requests that are sent with valid credentials.
+See the [authentication section](/influxdb/latest/administration/authentication_and_authorization/#authentication) for more information.
 
 Second, in `/etc/influxdb/influxdb.conf`, set:
 
@@ -218,6 +235,8 @@ hostname="<quickstart-cluster-0x>" #✨
   # The JWT auth shared secret to validate requests using JSON web tokens.
   shared-secret = "long pass phrase used for signing tokens" #✨
 ```
+> **Note:** The `hostname` in the configuration file must match the `hostname` in your server's `/etc/hosts` file.
+
 
 ### III. Start the Data Service
 On sysvinit systems, enter:
@@ -266,6 +285,12 @@ Successfully created cluster
 
   influxd-ctl join quickstart-cluster-01:8091
 ```
+
+>**Note:** `influxd-ctl` takes the flag `-v` as an option to print verbose information about the join.
+The flag must be right after the influxd-ctl join command:
+`influxd-ctl join -v quickstart-cluster-01:8091`
+
+>To confirm that the node was successfully joined, run `influxd-ctl show` and verify that the node's hostname shows in the output. 
 
 ### II. Join the second Server to the Cluster
 On the second server (`quickstart-cluster-02`), join its meta node and data node
@@ -316,16 +341,16 @@ The expected output is:
 Data Nodes
 ==========
 ID   TCP Address                  Version
-2    quickstart-cluster-01:8088   1.3.6-c1.3.6
-4    quickstart-cluster-02:8088   1.3.6-c1.3.6
-6    quickstart-cluster-03:8088   1.3.6-c1.3.6
+2    quickstart-cluster-01:8088   1.3.7-c1.3.7
+4    quickstart-cluster-02:8088   1.3.7-c1.3.7
+6    quickstart-cluster-03:8088   1.3.7-c1.3.7
 
 Meta Nodes
 ==========
 TCP Address                  Version
-quickstart-cluster-01:8091   1.3.6-c1.3.6
-quickstart-cluster-02:8091   1.3.6-c1.3.6
-quickstart-cluster-03:8091   1.3.6-c1.3.6
+quickstart-cluster-01:8091   1.3.7-c1.3.7
+quickstart-cluster-02:8091   1.3.7-c1.3.7
+quickstart-cluster-03:8091   1.3.7-c1.3.7
 ```
 
 Your cluster should have three data nodes and three meta nodes.

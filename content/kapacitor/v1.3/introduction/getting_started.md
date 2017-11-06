@@ -295,7 +295,7 @@ stream
     |from()
         .measurement('cpu')
     |alert()
-        .crit(lambda: "usage_idle" <  70)
+        .crit(lambda: int("usage_idle") <  70)
         // Whenever we get an alert write it to a file.
         .log('/tmp/alerts.log')
 ```

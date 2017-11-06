@@ -370,7 +370,33 @@ For string field values use a backslash character `\` to escape:
 weather,location=us-midwest temperature="too\"hot\"" 1465839830100400200
     ```
 
-Line Protocol does not require users to escape the backslash character `\`.
+Line Protocol does not require users to escape the backslash character `\` but
+will not complain if you do. For example, inserting the following:
+
+```
+weather,location=us-midwest temperature_str="too hot/cold" 1465839830100400201
+weather,location=us-midwest temperature_str="too hot\cold" 1465839830100400202
+weather,location=us-midwest temperature_str="too hot\\cold" 1465839830100400203
+weather,location=us-midwest temperature_str="too hot\\\cold" 1465839830100400204
+weather,location=us-midwest temperature_str="too hot\\\\cold" 1465839830100400205
+weather,location=us-midwest temperature_str="too hot\\\\\cold" 1465839830100400206
+```
+
+Will be interpreted as follows (notice that a single and double backslash produce the same record):
+
+```
+> SELECT * FROM "weather"
+name: weather
+time                location   temperature_str
+----                --------   ---------------
+1465839830100400201 us-midwest too hot/cold
+1465839830100400202 us-midwest too hot\cold
+1465839830100400203 us-midwest too hot\cold
+1465839830100400204 us-midwest too hot\\cold
+1465839830100400205 us-midwest too hot\\cold
+1465839830100400206 us-midwest too hot\\\cold
+```
+
 All other special characters also do not require escaping.
 For example, Line Protocol handles emojis with no problem:
 
