@@ -28,33 +28,7 @@ These methods come in two forms.
 
 # Nodes
 
-In TICKscript the fundamental type is the **node**.  A node has **properties** and, as mentioned, chaining methods.  A new node can be instantiated from a parent or sibling node using a chaining method of that parent or sibling node.  For each **node type** the signature of this method will be the same, regardless of the parent or sibling node type.  The chaining method can accept zero or more arguments used to initialize internal properties of the new node instance.  Common node types are `batch`, `query`, `stream`, `from`, `eval` and `alert`, though there are dozens of others.  The most common argument types used during instantiation are:
-
-   * Strings representing usually a query expression, but can also represent some other property of the node, for example an endpoint context.
-      * example: `query('SELECT sum(value) FROM "pages"."default".errors')`
-      * example: `httpOut('top10')`
-   * **lambda expressions** representing small function blocks to be applied to the data.
-      * example: `eval(lambda: "lows.count"/("norms.count" + "lows.count" ))`
-   * Duration literals.
-      * example: `shift(6h)`
-   * Other nodes and their pipelines captured in variables within the script.
-
-**Example 1 &ndash; chaining method takes a node variable**
-```javascript
-var errors = batch
-    |query('SELECT sum(value) FROM "pages"."default".errors')
-...
-// Get views batch data
-var views = batch
-    |query('SELECT sum(value) FROM "pages"."default".views')
-...
-// Join errors and views
-errors
-    |join(views)
-        .as('errors', 'views')
-```
-
-Example 1 shows how the variable `views` is used in the call to the chaining method that instantiates a new `join` node.
+In TICKscript the fundamental type is the **node**.  A node has **properties** and, as mentioned, chaining methods.  A new node can be created from a parent or sibling node using a chaining method of that parent or sibling node.  For each **node type** the signature of this method will be the same, regardless of the parent or sibling node type.  The chaining method can accept zero or more arguments used to initialize internal properties of the new node instance.  Common node types are `batch`, `query`, `stream`, `from`, `eval` and `alert`, though there are dozens of others.
 
 The top level nodes, which establish the processing type of the task to be defined, `stream` and `batch`, are simply declared and take no arguments.  Nodes with more complex sets of properties rely on **Property methods** for their internal configuration.  
 
@@ -91,18 +65,18 @@ At the start of any pipeline will be declared one of two fundamental edges.  Thi
 
 When connecting nodes and then creating a new Kapacitor task, Kapacitor will check whether or not the TICKscript syntax is well formed, and if the new edges are applicable to the most recent node.  However full functionality of the pipeline will not be validated until runtime, when error messages can appear in the Kapacitor log.
 
-**Example 2 &ndash; a runtime error**
+**Example 1 &ndash; a runtime error**
 ```bash
 ...
 [cpu_alert:alert4] 2017/10/24 14:42:59 E! error evaluating expression for level CRITICAL: left reference value "usage_idle" is missing value
 [cpu_alert:alert4] 2017/10/24 14:42:59 E! error evaluating expression for level CRITICAL: left reference value "usage_idle" is missing value
 ...
 ```
-Example 2 shows a runtime error that is thrown because a field value has gone missing from the pipeline.  This can often happen following an `eval` node when the `eval` node's property `keep()` is not set.  In general, Kapacitor cannot anticipate all the modalities of the data that the task will encounter at runtime.  Some tasks may not be written to handle all deviations or exceptions from the norm, such as when fields or tags go missing.  In these cases Kapacitor will log an error.   
+Example 1 shows a runtime error that is thrown because a field value has gone missing from the pipeline.  This can often happen following an `eval` node when the property `keep()` of the `eval` node has not been set.  In general Kapacitor cannot anticipate all the modalities of the data that the task will encounter at runtime.  Some tasks may not be written to handle all deviations or exceptions from the norm, such as when fields or tags go missing.  In these cases Kapacitor will log an error.   
 
 # Basic Examples
 
-**Example 3 &ndash; An elementary stream &rarr; from() pipeline**
+**Example 2 &ndash; An elementary stream &rarr; from() pipeline**
 ```javascript
 stream
     |from()
@@ -110,7 +84,7 @@ stream
     |httpOut('dump')
 ```
 
-The simple script in Example 3 can be used to create a task with the default Telegraf database.
+The simple script in Example 2 can be used to create a task with the default Telegraf database.
 
 ```
 $ kapacitor define sf_task -type stream -tick sf.tick -dbrp telegraf.autogen
@@ -131,7 +105,7 @@ It contains two edges.
 
 It contains one property method, which is the call on the `from()` node to `.measurement('cpu')` defining the measurement to be used for further processing.  
 
-**Example 4 &ndash; An elementary batch &rarr; query() pipeline**
+**Example 3 &ndash; An elementary batch &rarr; query() pipeline**
 
 ```javascript
 batch
@@ -141,7 +115,7 @@ batch
     |httpOut('dump')
 ```
 
-When used to create a task called `bq_task` with the default Telegraf database, the TICKscript in Example 4 will simply dump the last cpu datapoint of the batch of measurements representing the last 10 seconds of activity to the HTTP REST endpoint(e.g. <span>http</span>:<span>//</span>localhost<span>:9092</span><span>/kapacitor/v1/tasks/bq_task/dump</span>).
+When used to create a task called `bq_task` with the default Telegraf database, the TICKscript in Example 3 will simply dump the last cpu datapoint of the batch of measurements representing the last 10 seconds of activity to the HTTP REST endpoint(e.g. <span>http</span>:<span>//</span>localhost<span>:9092</span><span>/kapacitor/v1/tasks/bq_task/dump</span>).
 
 This example contains three nodes:
 
