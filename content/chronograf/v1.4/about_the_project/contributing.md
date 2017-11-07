@@ -1,7 +1,7 @@
 ---
 title: Contributing
 menu:
-  chronograf_1_3:
+  chronograf_1_4:
     weight: 10
     parent: About the Project
     url: https://github.com/influxdata/chronograf/blob/master/CONTRIBUTING.md
