@@ -1,8 +1,8 @@
 ---
 title: Security Best Practices
 menu:
-  chronograf_1_3:
-    weight: 20
+  chronograf_1_4:
+    weight: 50
     parent: Administration
 ---
 
@@ -27,7 +27,7 @@ menu:
 Configure the JWT signature and the OAuth provider to use authentication in Chronograf.
 
 >**Note:**
-If you're using the [`--basepath` option](/chronograf/v1.3/administration/configuration/#p-basepath) when starting Chronograf,
+If you're using the [`--basepath` option](/chronograf/v1.4/administration/configuration/#p-basepath) when starting Chronograf,
 add the same basepath to the callback URL of any OAuth provider that you configure.
 
 ### JWT Signature
@@ -103,9 +103,9 @@ This information should be set in the following environment variables:
 
 Alternatively, this can also be set using the command line switches:
 
-* [`--google-client-id`](/chronograf/v1.3/administration/configuration/#google-client-id)
-* [`--google-client-secret`](/chronograf/v1.3/administration/configuration/#google-client-secret)
-* [`--public-url`](/chronograf/v1.3/administration/configuration/#public-url)
+* [`--google-client-id`](/chronograf/v1.4/administration/configuration/#google-client-id)
+* [`--google-client-secret`](/chronograf/v1.4/administration/configuration/#google-client-secret)
+* [`--public-url`](/chronograf/v1.4/administration/configuration/#public-url)
 
 #### Optional Google Domains
 
@@ -129,8 +129,8 @@ Once your application has been created, those two values should be inserted into
 
 The equivalent command line switches are:
 
-* [`--heroku-client-id`](/chronograf/v1.3/administration/configuration/#heroku-client-id)
-* [`--heroku-secret`](/chronograf/v1.3/administration/configuration/#heroku-secret)
+* [`--heroku-client-id`](/chronograf/v1.4/administration/configuration/#heroku-client-id)
+* [`--heroku-secret`](/chronograf/v1.4/administration/configuration/#heroku-secret)
 
 #### Optional Heroku Organizations
 
@@ -161,9 +161,9 @@ These should be inserted into the following environment variables:
 
 The equivalent command line switches are:
 
-* [`--auth0-domain`](/chronograf/v1.3/administration/configuration/#auth0-domain)
-* [`--auth0-client-id`](/chronograf/v1.3/administration/configuration/#auth0-client-id)
-* [`--auth0-client-secret`](/chronograf/v1.3/administration/configuration/#auth0-client-secret)
+* [`--auth0-domain`](/chronograf/v1.4/administration/configuration/#auth0-domain)
+* [`--auth0-client-id`](/chronograf/v1.4/administration/configuration/#auth0-client-id)
+* [`--auth0-client-secret`](/chronograf/v1.4/administration/configuration/#auth0-client-secret)
 
 #### Optional Auth0 Organizations
 
