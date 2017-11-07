@@ -2,17 +2,20 @@
 title: Administration
 
 menu:
-  chronograf_1_3:
+  chronograf_1_4:
     name: Administration
     weight: 30
 ---
 
 Follow the links below for more information.
 
-## [User Management](/chronograf/v1.3/administration/user-management/)
+## [Upgrading](/chronograf/v1.4/administration/upgrading/)
 
-## [Upgrading](/chronograf/v1.3/administration/upgrading/)
+## [Configuration](/chronograf/v1.4/administration/configuration/)
 
-## [Security Best Practices](/chronograf/v1.3/administration/security-best-practices/)
+## [User Management](/chronograf/v1.4/administration/user-management/)
 
-## [Configuration](/chronograf/v1.3/administration/configuration/)
+## [Multi-Tenant Setup](/chronograf/v1.4/administration/multi-tenant/)
+
+## [Security Best Practices](/chronograf/v1.4/administration/security-best-practices/)
+
