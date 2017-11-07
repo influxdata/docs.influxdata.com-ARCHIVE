@@ -110,7 +110,7 @@ Alternatively, this can also be set using the command line switches:
 #### Optional Google Domains
 
 Similar to Github's organization restriction, Google authentication can be restricted to permit access to Chronograf from only specific domains.
-These are configured using the `GOOGLE_DOMAINS` environment variable or the [`--google-domains`](/chronograf/v1.3/administration/configuration/#google-domains) switch.
+These are configured using the `GOOGLE_DOMAINS` environment variable or the [`--google-domains`](/chronograf/v1.4/administration/configuration/#google-domains) switch.
 Multiple domains are separated with a comma.
 For example, if we wanted to permit access only from biffspleasurepalace.com and savetheclocktower.com the environment variable would be set as follows:
 ```sh
@@ -135,7 +135,7 @@ The equivalent command line switches are:
 #### Optional Heroku Organizations
 
 Like the other OAuth2 providers, access to Chronograf via Heroku can be restricted to members of specific Heroku organizations. 
-This is controlled using the `HEROKU_ORGS` environment variable or the [`--heroku-organizations`](/chronograf/v1.3/administration/configuration/#heroku-organization) switch and is comma-separated.
+This is controlled using the `HEROKU_ORGS` environment variable or the [`--heroku-organizations`](/chronograf/v1.4/administration/configuration/#heroku-organization) switch and is comma-separated.
 If we wanted to permit access from the `hill-valley-preservation-society` organization and `the-pinheads` organization, we would use the following environment variable:
 ```sh
 export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
@@ -148,7 +148,7 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 To begin authenticating Chronograf users with Auth0, you will need to have an Auth0 account and [register an Auth0 client](https://auth0.com/docs/clients) within their dashboard.
 
 Auth0 clients should be configured as "Regular Web Applications" with the "Token Endpoint Authentication" set to "None".
-Clients must have the "Allowed Callback URLs" set to "https://www.example.com/oauth/auth0/callback" and the "Allowed Logout URLs" to "https://www.example.com", substituting "example.com" for the [`PUBLIC_URL`](/chronograf/v1.3/administration/configuration/#public-url) of your Chronograf instance.
+Clients must have the "Allowed Callback URLs" set to "https://www.example.com/oauth/auth0/callback" and the "Allowed Logout URLs" to "https://www.example.com", substituting "example.com" for the [`PUBLIC_URL`](/chronograf/v1.4/administration/configuration/#public-url) of your Chronograf instance.
 
 Finally, clients must be set to be ["OIDC Conformant"](https://auth0.com/docs/api-auth/intro#how-to-use-the-new-flows).
 
@@ -174,7 +174,7 @@ To assign a user to an organization, add an "organization" key to the user's "ap
 For example, we can assign the user Marty McFly to the "time-travelers" organization by setting the "app_metadata" to `{"organization": "time-travelers"}`.
 This can be done either manually by an operator or automatically through the use of an [Auth0 Rule](https://auth0.com/docs/rules/metadata-in-rules#updating-app_metadata) or a [pre-user registration Auth0 Hook](https://auth0.com/docs/hooks/extensibility-points/pre-user-registration)
 
-Next, you will need to set Chronograf's [`AUTH0_ORGS`](/chronograf/v1.3/administration/configuration/#auth0-client-secret) environment variable to a comma-separated list of the allowed organizations.
+Next, you will need to set Chronograf's [`AUTH0_ORGS`](/chronograf/v1.4/administration/configuration/#auth0-client-secret) environment variable to a comma-separated list of the allowed organizations.
 For example, if you have one group of users with an "organization" key set to "biffs-gang" and another group with an "organization" key set to "time-travelers" you can permit access to both with the environment variable: `AUTH0_ORGS=biffs-gang,time-travelers`.
 
 An `--auth0-organizations` command line switch is also available.
