@@ -1,7 +1,7 @@
 ---
 title: CLA
 menu:
-  chronograf_1_3:
+  chronograf_1_4:
     weight: 20
     parent: About the Project
     url: https://www.influxdata.com/legal/cla/
