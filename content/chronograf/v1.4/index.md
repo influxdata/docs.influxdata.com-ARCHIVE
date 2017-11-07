@@ -1,10 +1,10 @@
 ---
-title: Chronograf Version 1.3 Documentation
+title: Chronograf Version 1.4 Documentation
 
 menu:
   chronograf:
-    name: v1.3
-    identifier: chronograf_1_3
+    name: v1.4
+    identifier: chronograf_1_4
     weight: 0
 ---
 
@@ -43,5 +43,9 @@ Chronograf offers a UI for [Kapacitor](https://github.com/influxdata/kapacitor),
 * Create, delete, and assign permissions to users (Chronograf supports [OSS InfluxDB](/influxdb/v1.3/query_language/authentication_and_authorization/#authorization) and InfluxEnterprise user management)
 
 
+### Multi-Tenant Support
 
+* Create organizations and assign users to those organizations
+* Restrict access to administrative functions
+* Allow users to setup and maintain unique dashboards for their organizations
 
