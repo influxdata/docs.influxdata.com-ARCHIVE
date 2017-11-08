@@ -1,7 +1,7 @@
 ---
 title: Installation
 menu:
-  influxdb_1_3:
+  influxdb_1_4:
     weight: 10
     parent: introduction
 ---
@@ -20,8 +20,8 @@ By default, InfluxDB uses the following network ports:
 - TCP port `8088` is used for the RPC service for backup and restore
 
 In addition to the ports above, InfluxDB also offers multiple plugins that may
-require [custom ports](/influxdb/v1.3/administration/ports/).
-All port mappings can be modified through the [configuration file](/influxdb/v1.3/administration/config),
+require [custom ports](/influxdb/v1.4/administration/ports/).
+All port mappings can be modified through the [configuration file](/influxdb/v1.4/administration/config),
 which is located at `/etc/influxdb/influxdb.conf` for default installations.
 
 ### NTP
@@ -225,7 +225,7 @@ For example:
 InfluxDB first checks for the `-config` option and then for the environment
 variable.
 
-See the [Configuration](/influxdb/v1.3/administration/config/) documentation for more information.
+See the [Configuration](/influxdb/v1.4/administration/config/) documentation for more information.
 
 ## Hosting on AWS
 
