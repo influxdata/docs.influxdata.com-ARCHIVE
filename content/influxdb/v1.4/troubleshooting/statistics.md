@@ -1,9 +1,9 @@
 ---
 title: Server Monitoring
 aliases:
-    - influxdb/v1.3/administration/statistics/
+    - influxdb/v1.4/administration/statistics/
 menu:
-  influxdb_1_3:
+  influxdb_1_4:
     weight: 10
     parent: troubleshooting
 ---
