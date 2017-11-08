@@ -1,7 +1,7 @@
 ---
 title: InfluxQL Reference
 menu:
-  influxdb_1_3:
+  influxdb_1_4:
     weight: 90
     parent: query_language
 ---
@@ -9,25 +9,25 @@ menu:
 ## Introduction
 
 This is a reference for the Influx Query Language ("InfluxQL").
-If you're looking for less formal documentation see [Data Exploration](/influxdb/v1.3/query_language/data_exploration/), [Schema Exploration](/influxdb/v1.3/query_language/schema_exploration/), [Database Management](/influxdb/v1.3/query_language/database_management/), and [Authentication and Authorization](/influxdb/v1.3/query_language/authentication_and_authorization/).
+If you're looking for less formal documentation see [Data Exploration](/influxdb/v1.4/query_language/data_exploration/), [Schema Exploration](/influxdb/v1.4/query_language/schema_exploration/), [Database Management](/influxdb/v1.4/query_language/database_management/), and [Authentication and Authorization](/influxdb/v1.4/query_language/authentication_and_authorization/).
 
 InfluxQL is a SQL-like query language for interacting with InfluxDB.
 It has been lovingly crafted to feel familiar to those coming from other SQL or SQL-like environments while providing features specific to storing and analyzing time series data.
 
 Sections:
 
-* [Notation](/influxdb/v1.3/query_language/spec/#notation)
-* [Query representation](/influxdb/v1.3/query_language/spec/#query-representation)
-* [Letters and digits](/influxdb/v1.3/query_language/spec/#letters-and-digits)
-* [Identifiers](/influxdb/v1.3/query_language/spec/#identifiers)
-* [Keywords](/influxdb/v1.3/query_language/spec/#keywords)
-* [Literals](/influxdb/v1.3/query_language/spec/#literals)
-* [Queries](/influxdb/v1.3/query_language/spec/#queries)
-* [Statements](/influxdb/v1.3/query_language/spec/#statements)
-* [Clauses](/influxdb/v1.3/query_language/spec/#clauses)
-* [Expressions](/influxdb/v1.3/query_language/spec/#expressions)
-* [Other](/influxdb/v1.3/query_language/spec/#other)
-* [Query Engine Internals](/influxdb/v1.3/query_language/spec/#query-engine-internals)
+* [Notation](/influxdb/v1.4/query_language/spec/#notation)
+* [Query representation](/influxdb/v1.4/query_language/spec/#query-representation)
+* [Letters and digits](/influxdb/v1.4/query_language/spec/#letters-and-digits)
+* [Identifiers](/influxdb/v1.4/query_language/spec/#identifiers)
+* [Keywords](/influxdb/v1.4/query_language/spec/#keywords)
+* [Literals](/influxdb/v1.4/query_language/spec/#literals)
+* [Queries](/influxdb/v1.4/query_language/spec/#queries)
+* [Statements](/influxdb/v1.4/query_language/spec/#statements)
+* [Clauses](/influxdb/v1.4/query_language/spec/#clauses)
+* [Expressions](/influxdb/v1.4/query_language/spec/#expressions)
+* [Other](/influxdb/v1.4/query_language/spec/#other)
+* [Query Engine Internals](/influxdb/v1.4/query_language/spec/#query-engine-internals)
 
 ## Notation
 
@@ -79,13 +79,13 @@ digit               = "0" … "9" .
 
 ## Identifiers
 
-Identifiers are tokens which refer to [database](/influxdb/v1.3/concepts/glossary/#database) names, [retention policy](/influxdb/v1.3/concepts/glossary/#retention-policy-rp) names, [user](/influxdb/v1.3/concepts/glossary/#user) names, [measurement](/influxdb/v1.3/concepts/glossary/#measurement) names, [tag keys](/influxdb/v1.3/concepts/glossary/#tag-key), and [field keys](/influxdb/v1.3/concepts/glossary/#field-key).
+Identifiers are tokens which refer to [database](/influxdb/v1.4/concepts/glossary/#database) names, [retention policy](/influxdb/v1.4/concepts/glossary/#retention-policy-rp) names, [user](/influxdb/v1.4/concepts/glossary/#user) names, [measurement](/influxdb/v1.4/concepts/glossary/#measurement) names, [tag keys](/influxdb/v1.4/concepts/glossary/#tag-key), and [field keys](/influxdb/v1.4/concepts/glossary/#field-key).
 
 The rules:
 
 - double quoted identifiers can contain any unicode character other than a new line
 - double quoted identifiers can contain escaped `"` characters (i.e., `\"`)
-- double quoted identifiers can contain InfluxQL [keywords](/influxdb/v1.3/query_language/spec/#keywords)
+- double quoted identifiers can contain InfluxQL [keywords](/influxdb/v1.4/query_language/spec/#keywords)
 - unquoted identifiers must start with an upper or lowercase ASCII character or "_"
 - unquoted identifiers may contain only ASCII letters, decimal digits, and "_"
 
@@ -124,22 +124,22 @@ WRITE
 ```
 
 If you use an InfluxQL keywords as an
-[identifier](/influxdb/v1.3/concepts/glossary/#identifier) you will need to
+[identifier](/influxdb/v1.4/concepts/glossary/#identifier) you will need to
 double quote that identifier in every query.
 
 The keyword `time` is a special case.
 `time` can be a
-[continuous query](/influxdb/v1.3/concepts/glossary/#continuous-query-cq) name,
+[continuous query](/influxdb/v1.4/concepts/glossary/#continuous-query-cq) name,
 database name,
-[measurement](/influxdb/v1.3/concepts/glossary/#measurement) name,
-[retention policy](/influxdb/v1.3/concepts/glossary/#retention-policy-rp) name,
-[subscription](/influxdb/v1.3/concepts/glossary/#subscription) name, and
-[user](/influxdb/v1.3/concepts/glossary/#user) name.
+[measurement](/influxdb/v1.4/concepts/glossary/#measurement) name,
+[retention policy](/influxdb/v1.4/concepts/glossary/#retention-policy-rp) name,
+[subscription](/influxdb/v1.4/concepts/glossary/#subscription) name, and
+[user](/influxdb/v1.4/concepts/glossary/#user) name.
 In those cases, `time` does not require double quotes in queries.
-`time` cannot be a [field key](/influxdb/v1.3/concepts/glossary/#field-key) or
-[tag key](/influxdb/v1.3/concepts/glossary/#tag-key);
+`time` cannot be a [field key](/influxdb/v1.4/concepts/glossary/#field-key) or
+[tag key](/influxdb/v1.4/concepts/glossary/#tag-key);
 InfluxDB rejects writes with `time` as a field key or tag key and returns an error.
-See [Frequently Asked Questions](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#time) for more information.
+See [Frequently Asked Questions](/influxdb/v1.4/troubleshooting/frequently-asked-questions/#time) for more information.
 
 ## Literals
 
@@ -225,16 +225,16 @@ regex_lit           = "/" { unicode_char } "/" .
 
 > **Note:** InfluxQL supports using regular expressions when specifying:
 >
-* [field keys](/influxdb/v1.3/concepts/glossary/#field-key) and [tag keys](/influxdb/v1.3/concepts/glossary/#tag-key) in the [`SELECT` clause](/influxdb/v1.3/query_language/data_exploration/#the-basic-select-statement)
-* [measurements](/influxdb/v1.3/concepts/glossary/#measurement) in the [`FROM` clause](/influxdb/v1.3/query_language/data_exploration/#the-basic-select-statement)
-* [tag values](/influxdb/v1.3/concepts/glossary/#tag-value) and string [field values](/influxdb/v1.3/concepts/glossary/#field-value) in the [`WHERE` clause](/influxdb/v1.3/query_language/data_exploration/#the-where-clause).
-* [tag keys](/influxdb/v1.3/concepts/glossary/#tag-key) in the [`GROUP BY` clause](/influxdb/v1.3/query_language/data_exploration/#group-by-tags)
+* [field keys](/influxdb/v1.4/concepts/glossary/#field-key) and [tag keys](/influxdb/v1.4/concepts/glossary/#tag-key) in the [`SELECT` clause](/influxdb/v1.4/query_language/data_exploration/#the-basic-select-statement)
+* [measurements](/influxdb/v1.4/concepts/glossary/#measurement) in the [`FROM` clause](/influxdb/v1.4/query_language/data_exploration/#the-basic-select-statement)
+* [tag values](/influxdb/v1.4/concepts/glossary/#tag-value) and string [field values](/influxdb/v1.4/concepts/glossary/#field-value) in the [`WHERE` clause](/influxdb/v1.4/query_language/data_exploration/#the-where-clause).
+* [tag keys](/influxdb/v1.4/concepts/glossary/#tag-key) in the [`GROUP BY` clause](/influxdb/v1.4/query_language/data_exploration/#group-by-tags)
 >
 Currently, InfluxQL does not support using regular expressions to match
 non-string field values in the
 `WHERE` clause,
-[databases](/influxdb/v1.3/concepts/glossary/#database), and
-[retention polices](/influxdb/v1.3/concepts/glossary/#retention-policy-rp).
+[databases](/influxdb/v1.4/concepts/glossary/#database), and
+[retention polices](/influxdb/v1.4/concepts/glossary/#retention-policy-rp).
 
 ## Queries
 
@@ -409,7 +409,7 @@ CREATE RETENTION POLICY "10m.events" ON "somedb" DURATION 60m REPLICATION 2 SHAR
 
 ### CREATE SUBSCRIPTION
 
-Subscriptions tell InfluxDB to send all the data it receives to [Kapacitor](https://docs.influxdata.com/kapacitor/v1.3/introduction/).
+Subscriptions tell InfluxDB to send all the data it receives to [Kapacitor](https://docs.influxdata.com/kapacitor/v1.4/introduction/).
 
 ```
 create_subscription_stmt = "CREATE SUBSCRIPTION" subscription_name "ON" db_name "." retention_policy "DESTINATIONS" ("ANY"|"ALL") host { "," host} .
@@ -589,7 +589,7 @@ kill_query_statement = "KILL QUERY" query_id .
 KILL QUERY 36
 ```
 
-> **NOTE:** Identify the `query_id` from the [`SHOW QUERIES`](/influxdb/v1.3/query_language/spec/#show-queries) output.
+> **NOTE:** Identify the `query_id` from the [`SHOW QUERIES`](/influxdb/v1.4/query_language/spec/#show-queries) output.
 
 ### REVOKE
 
