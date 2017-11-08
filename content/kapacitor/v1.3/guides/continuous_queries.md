@@ -76,13 +76,19 @@ There are a few reasons to use Kapacitor instead of CQs.
     By using Kapacitor to perform the aggregations InfluxDB's performance profile can remain more stable and isolated from Kapacitor's.
 * You need to do more than just perform a query, for example maybe you only want to store only outliers from an aggregation instead of all of them.
     Kapacitor can do significantly more with the data than CQs so you have more flexibility in transforming your data.
+* Parallelization
+    You want your workloads to run in parallel.  This may occure when the aggregate execution time for your CQs is
+    sufficiently long (potentially due to complexity of the work they are performing) and 
+    causes issues in terms of the timeliness of other CQs.  This may be caused by a single "long running" CQ.  
+    In such as case, turning that CQ into a TICKscript and allowing the simpler CQs to remain in the database will allow for 
+    more reliable execution times.
 
 There are a few use cases where using CQs almost always makes sense.
 
-* Performing downsampling for retention policies.
+* Performing _simple_ downsampling for retention policies.
     This is what CQs are designed for and do well.
     No need to add another moving piece (i.e. Kapacitor) to your infrastructure if you do not need it.
-    Keep it simple.
+    But, keep it simple.  Complex downsampling queries should be moved to TICKscript.
 * You only have a handful of CQs, again keep it simple, do not add more moving parts to your setup unless you need it.
 
 ### When should we use stream tasks vs batch tasks in Kapacitor?
