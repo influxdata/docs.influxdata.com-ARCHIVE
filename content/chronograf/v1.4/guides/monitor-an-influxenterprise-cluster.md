@@ -1,7 +1,7 @@
 ---
 title: Monitor an InfluxEnterprise Cluster
 menu:
-  chronograf_1_3:
+  chronograf_1_4:
     weight: 30
     parent: Guides
 ---
@@ -9,16 +9,18 @@ menu:
 [InfluxEnterprise](/enterprise_influxdb/v1.2/) offers high availability and a highly-scalable clustering solution for your time-series data needs.
 Use Chronograf to assess your cluster's health and monitor the infrastructure behind your project.
 
-This guides offers step-by-step instructions for using Chronograf, [InfluxDB](/influxdb/v1.3/), and [Telegraf](/telegraf/v1.3/) to monitor the data nodes in your InfluxEnteprise cluster.
+This guides offers step-by-step instructions for using Chronograf, [InfluxDB](/influxdb/latest/), and [Telegraf](/telegraf/latest/) to monitor the data nodes in your InfluxEnteprise cluster.
 
 ## Requirements
 
 The sections below assume you have a fully-functioning InfluxEnterprise cluster with authentication enabled.
-See the InfluxEnterprise documentation for [detailed setup instructions](/enterprise_influxdb/v1.2/production_installation/).
-This guide uses a cluster with three meta nodes and three data nodes; the steps are also applicable to other cluster arrangements.
+See the InfluxEnterprise documentation for 
+[detailed setup instructions](/enterprise_influxdb/latest/production_installation/).
+This guide uses a cluster with three meta nodes and three data nodes; the steps are also applicable to 
+other cluster arrangements.
 
 We recommend having a separate server to store your monitoring data.
-It is possible to store the monitoring data in your cluster and [connect the cluster to Chronograf](/chronograf/v1.3/troubleshooting/frequently-asked-questions/#how-do-i-connect-chronograf-to-an-influxenterprise-cluster), but, in general, your monitoring data should live on a separate server.
+It is possible to store the monitoring data in your cluster and [connect the cluster to Chronograf](/chronograf/v1.4/troubleshooting/frequently-asked-questions/#how-do-i-connect-chronograf-to-an-influxenterprise-cluster), but, in general, your monitoring data should live on a separate server.
 
 Finally, this guide assumes that you're working on an Ubuntu 16.04 installation.
 Chronograf and the other components of the TICK stack are supported on several operating systems and hardware architectures. Check out the [downloads page](https://portal.influxdata.com/downloads) for links to the binaries of your choice.
@@ -27,14 +29,14 @@ Chronograf and the other components of the TICK stack are supported on several o
 
 Before we begin, here's an overview of the final monitoring setup:
 
-![Architecture diagram](/img/chronograf/v1.3/g-cluster-diagram.png)
+![Architecture diagram](/img/chronograf/v1.4/g-cluster-diagram.png)
 
 The diagram above shows an InfluxEnterprise cluster that consists of three meta nodes (M) and three data nodes (D).
-Every data node has its own [Telegraf](/telegraf/v1.3/) instance (T).
+Every data node has its own [Telegraf](/telegraf/latest/) instance (T).
 
 Each Telegraf instance is configured to collect its node's CPU, disk, and memory data using Telegraf's [system stats](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) input plugin.
-The Telegraf instances are also configured to send those data to a single [OSS InfluxDB](/influxdb/v1.3/) instance that lives on a separate server.
-When Telegraf sends data to InfluxDB, it automatically [tags](/influxdb/v1.3/concepts/glossary/#tag) those data with the hostname of the relevant data node.
+The Telegraf instances are also configured to send those data to a single [OSS InfluxDB](/influxdb/latest/) instance that lives on a separate server.
+When Telegraf sends data to InfluxDB, it automatically [tags](/influxdb/latest/concepts/glossary/#tag) those data with the hostname of the relevant data node.
 
 The OSS InfluxDB instance that stores the Telegraf data is connected to Chronograf.
 Chronograf uses the hostnames in the Telegraf data to populate the Host List page and provide other hostname-specific information in the user interface.
@@ -48,13 +50,13 @@ Chronograf uses the hostnames in the Telegraf data to populate the Host List pag
 On a server that's separate from your InfluxEnterprise cluster, download and install OSS InfluxDB:
 
 ```
-~# wget https://dl.influxdata.com/influxdb/releases/influxdb_1.2.4_amd64.deb
-~# sudo dpkg -i influxdb_1.2.4_amd64.deb
+~# wget https://dl.influxdata.com/influxdb/releases/influxdb_1.4.0_amd64.deb
+~# sudo dpkg -i influxdb_1.4.0_amd64.deb
 ```
 
 #### Step 2: Enable authentication
 
-For security purposes, enable authentication in InfluxDB's [configuration file](/influxdb/v1.3/administration/config/).
+For security purposes, enable authentication in InfluxDB's [configuration file](/influxdb/latest/administration/config/).
 The configuration file is located in `/etc/influxdb/influxdb.conf`.
 
 In the `[http]` section, uncomment the `auth-enabled` option and set it to `true`:
@@ -81,7 +83,7 @@ Next, start the InfluxDB process:
 
 #### Step 4: Create an admin user
 
-Create an [admin user](/influxdb/v1.3/query_language/authentication_and_authorization/#user-types-and-privileges) on your InfluxDB instance.
+Create an [admin user](/influxdb/latest/query_language/authentication_and_authorization/#user-types-and-privileges) on your InfluxDB instance.
 Because you enabled authentication, you must perform this step before moving on to the next section.
 Run the command below to create an admin user, replacing `chronothan` and `supersecret` with your own username and password.
 Note that the password requires single quotes.
@@ -103,8 +105,8 @@ You'll return to your OSS InfluxDB instance at the end of this section.
 #### Step 1: Download and install Telegraf
 
 ```
-~# wget https://dl.influxdata.com/telegraf/releases/telegraf_1.3.2-1_amd64.deb
-~# sudo dpkg -i telegraf_1.3.2-1_amd64.deb
+~# wget https://dl.influxdata.com/telegraf/releases/telegraf_1.4.3-1_amd64.deb
+~# sudo dpkg -i telegraf_1.4.3-1_amd64.deb
 ```
 
 #### Step 2: Configure Telegraf
@@ -182,7 +184,7 @@ Replace the `chronothan` and `supersecret` values with your actual username and 
 ```
 
 The expected output is similar to the JSON in the codeblock below.
-In this case, the `telegraf` database has three different [tag values](/influxdb/v1.3/concepts/glossary/#tag-value) for the `host` [tag key](/influxdb/v1.3/concepts/glossary/#tag-key): `data-node-01`, `data-node-02`, and `data-node-03`.
+In this case, the `telegraf` database has three different [tag values](/influxdb/latest/concepts/glossary/#tag-value) for the `host` [tag key](/influxdb/latest/concepts/glossary/#tag-key): `data-node-01`, `data-node-02`, and `data-node-03`.
 Those values match the hostnames of the three data nodes in the cluster; this means Telegraf is successfully writing monitoring data from those hosts to the OSS InfluxDB instance!
 ```
 {
@@ -225,8 +227,8 @@ Here, we download and install Chronograf on the same server as the OSS InfluxDB 
 This is not a requirement; you may host Chronograf on a separate server.
 
 ```
-~# wget https://dl.influxdata.com/chronograf/releases/chronograf_1.3.3.0_amd64.deb
-~# sudo dpkg -i chronograf_1.3.3.0_amd64.deb
+~# wget https://dl.influxdata.com/chronograf/releases/chronograf_1.4.0.0_amd64.deb
+~# sudo dpkg -i chronograf_1.4.0.0_amd64.deb
 ```
 
 #### Step 2: Start Chronograf
@@ -240,7 +242,7 @@ This is not a requirement; you may host Chronograf on a separate server.
 Visit `http://xxx.xx.xxx.xxx:8888` in your browser to access Chrongraf, replacing `xxx.xx.xxx.xxx` with the IP address of your OSS InfluxDB instance.
 The welcome page includes instructions for connecting Chronograf to that instance.
 
-![Connect Chronograf to InfluxDB](/img/chronograf/v1.3/g-cluster-welcome.png)
+![Connect Chronograf to InfluxDB](/img/chronograf/v1.4/g-cluster-welcome.png)
 
 For the `Connection String`, enter the hostname or IP of your OSS InfluxDB instance, and be sure to include the default port: `8086`.
 Next, name your data source; this can be anything you want.
@@ -249,23 +251,23 @@ Finally, enter your username and password and click `Add Source`.
 ### Step 4: Explore the monitoring data in Chronograf
 
 Chronograf works with the Telegraf data in your OSS InfluxDB instance.
-The `Host List` page, the first page that you see in Chronograf, shows your data node's hostnames, their statuses, CPU usage, load, and their configured [applications](/chronograf/v1.3/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf).
+The `Host List` page, the first page that you see in Chronograf, shows your data node's hostnames, their statuses, CPU usage, load, and their configured [applications](/chronograf/v1.4/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf).
 In this case, you've only enabled the system stats input plugin so `system` is the single application that appears in the `Apps` column.
 
-![Host List page](/img/chronograf/v1.3/g-cluster-hostlist.png)
+![Host List page](/img/chronograf/v1.4/g-cluster-hostlist.png)
 
 Click on `system` to see Chronograf's pre-created dashboard for that application.
 Keep an eye on your data nodes by viewing that dashboard for each hostname:
 
-![Pre-created dashboard](/img/chronograf/v1.3/g-cluster-predash.gif)
+![Pre-created dashboard](/img/chronograf/v1.4/g-cluster-predash.gif)
 
 Next, check out the Data Explorer to create a customized graph with the monitoring data.
 In the image below, we use Chronograf's query editor to visualize the idle CPU usage data for each data node:
 
-![Data Explorer](/img/chronograf/v1.3/g-cluster-de.png)
+![Data Explorer](/img/chronograf/v1.4/g-cluster-de.png)
 
 Create more customized graphs and save them to a dashboard on Chronograf's Dashboard page.
-See the [Create a Dashboard](/chronograf/v1.3/guides/create-a-dashboard/) guide for more information.
+See the [Create a Dashboard](/chronograf/v1.4/guides/create-a-dashboard/) guide for more information.
 
 That's it! You've successfully configured Telegraf to collect and write data, InfluxDB to store those data, and Chonograf to use those data for monitoring and visualization purposes.
 
