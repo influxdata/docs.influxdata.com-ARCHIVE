@@ -1,7 +1,7 @@
 ---
 title: Sample Data
 menu:
-  influxdb_1_3:
+  influxdb_1_4:
     weight: 5
     parent: query_language
 ---
@@ -20,8 +20,8 @@ The output should look like this:
 
 ```bash
 $ influx -precision rfc3339 
-Connected to http://localhost:8086 version 1.3.x
-InfluxDB shell 1.3.x
+Connected to http://localhost:8086 version 1.4.x
+InfluxDB shell 1.4.x
 >
 ```
 
@@ -53,7 +53,7 @@ Throughout the query language exploration, we'll use the database name `NOAA_wat
 
 ### Download and write the data to InfluxDB
 
-From your terminal, download the text file that contains the data in [line protocol](/influxdb/v1.3/concepts/glossary/#line-protocol) format:
+From your terminal, download the text file that contains the data in [line protocol](/influxdb/v1.4/concepts/glossary/#line-protocol) format:
 ```
 curl https://s3.amazonaws.com/noaa.water-database/NOAA_data.txt -o NOAA_data.txt
 ```
@@ -66,8 +66,8 @@ influx -import -path=NOAA_data.txt -precision=s -database=NOAA_water_database
 ### Test queries
 ```bash
 $ influx -precision rfc3339 -database NOAA_water_database
-Connected to http://localhost:8086 version 1.3.x
-InfluxDB shell 1.3.x
+Connected to http://localhost:8086 version 1.4.x
+InfluxDB shell 1.4.x
 >
 ```
 
