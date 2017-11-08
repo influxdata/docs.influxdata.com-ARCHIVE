@@ -1,7 +1,7 @@
 ---
 title: Key Concepts
 menu:
-  influxdb_1_3:
+  influxdb_1_4:
     weight: 0
     parent: concepts
 ---
@@ -12,28 +12,28 @@ We've provided a list below of all the terms we'll cover, but we recommend readi
 
 <table style="width:100%">
   <tr>
-    <td><a href="/influxdb/v1.3/concepts/key_concepts/#database">database</a></td>
-    <td><a href="/influxdb/v1.3/concepts/key_concepts/#field-key">field key</a></td>
-    <td><a href="/influxdb/v1.3/concepts/key_concepts/#field-set">field set</a></td>
+    <td><a href="/influxdb/v1.4/concepts/key_concepts/#database">database</a></td>
+    <td><a href="/influxdb/v1.4/concepts/key_concepts/#field-key">field key</a></td>
+    <td><a href="/influxdb/v1.4/concepts/key_concepts/#field-set">field set</a></td>
   </tr>
   <tr>
-    <td><a href="/influxdb/v1.3/concepts/key_concepts/#field-value">field value</a></td>
-    <td><a href="/influxdb/v1.3/concepts/key_concepts/#measurement">measurement</a></td>
-    <td><a href="/influxdb/v1.3/concepts/key_concepts/#point">point</a></td>
+    <td><a href="/influxdb/v1.4/concepts/key_concepts/#field-value">field value</a></td>
+    <td><a href="/influxdb/v1.4/concepts/key_concepts/#measurement">measurement</a></td>
+    <td><a href="/influxdb/v1.4/concepts/key_concepts/#point">point</a></td>
   </tr>
     <tr>
-    <td><a href="/influxdb/v1.3/concepts/key_concepts/#retention-policy">retention policy</a></td>
-    <td><a href="/influxdb/v1.3/concepts/key_concepts/#series">series</a></td>
-    <td><a href="/influxdb/v1.3/concepts/key_concepts/#tag-key">tag key</a></td>
+    <td><a href="/influxdb/v1.4/concepts/key_concepts/#retention-policy">retention policy</a></td>
+    <td><a href="/influxdb/v1.4/concepts/key_concepts/#series">series</a></td>
+    <td><a href="/influxdb/v1.4/concepts/key_concepts/#tag-key">tag key</a></td>
   </tr>
     <tr>
-    <td><a href="/influxdb/v1.3/concepts/key_concepts/#tag-set">tag set</a></td>
-    <td><a href="/influxdb/v1.3/concepts/key_concepts/#tag-value">tag value</a></td>
-    <td><a href="/influxdb/v1.3/concepts/key_concepts/#timestamp">timestamp</a></td>
+    <td><a href="/influxdb/v1.4/concepts/key_concepts/#tag-set">tag set</a></td>
+    <td><a href="/influxdb/v1.4/concepts/key_concepts/#tag-value">tag value</a></td>
+    <td><a href="/influxdb/v1.4/concepts/key_concepts/#timestamp">timestamp</a></td>
   </tr>
 </table>
 
-Check out the [Glossary](/influxdb/v1.3/concepts/glossary/) if you prefer the cold, hard facts.
+Check out the [Glossary](/influxdb/v1.4/concepts/glossary/) if you prefer the cold, hard facts.
 
 ### Sample data
 The next section references the data printed out below.
@@ -94,7 +94,7 @@ Here are all eight field sets in the sample data:
 
 Fields are a required piece of InfluxDB's data structure - you cannot have data in InfluxDB without fields.
 It's also important to note that fields are not indexed.
-[Queries](/influxdb/v1.3/concepts/glossary/#query) that use field values as filters must scan all values that match the other conditions in the query.
+[Queries](/influxdb/v1.4/concepts/glossary/#query) that use field values as filters must scan all values that match the other conditions in the query.
 As a result, those queries are not performant relative to queries on tags (more on tags below).
 In general, fields should not contain commonly-queried metadata.
 
@@ -127,7 +127,7 @@ This means that queries on tags are faster and that tags are ideal for storing c
 
 > Because fields aren't indexed, InfluxDB scans every value of `butterflies`  in the first query and every value of `honeybees` in the second query before it provides a response.
 That behavior can hurt query response times - especially on a much larger scale.
-To optimize your queries, it may be beneficial to rearrange your [schema](/influxdb/v1.3/concepts/glossary/#schema) such that the fields (`butterflies` and `honeybees`) become the tags and the tags (`location` and `scientist`) become the fields:
+To optimize your queries, it may be beneficial to rearrange your [schema](/influxdb/v1.4/concepts/glossary/#schema) such that the fields (`butterflies` and `honeybees`) become the tags and the tags (`location` and `scientist`) become the fields:
 
 > name: <span class="tooltip" data-tooltip-text="Measurement">census</span>  
 \-------------------------------------  
@@ -150,7 +150,7 @@ The name `census` tells us that the field values record the number of `butterfli
 
 A single measurement can belong to different retention policies.
 A <a name="retention-policy"></a>*retention policy* describes how long InfluxDB keeps data (`DURATION`) and how many copies of those data are stored in the cluster (`REPLICATION`).
-If you're interested in reading more about retention policies, check out [Database Management](/influxdb/v1.3/query_language/database_management/#retention-policy-management).
+If you're interested in reading more about retention policies, check out [Database Management](/influxdb/v1.4/query_language/database_management/#retention-policy-management).
 
 <dt> Replication factors do not serve a purpose with single node instances.
 </dt>
@@ -169,7 +169,7 @@ The data above consist of four series:
 | series 3  | `autogen` | `census`  | `location = 1`,`scientist = perpetua` |
 | series 4 | `autogen` |  `census` |  `location = 2`,`scientist = perpetua` |
 
-Understanding the concept of a series is essential when designing your [schema](/influxdb/v1.3/concepts/glossary/#schema) and when working with your data in InfluxDB.
+Understanding the concept of a series is essential when designing your [schema](/influxdb/v1.4/concepts/glossary/#schema) and when working with your data in InfluxDB.
 
 Finally, a <a name="point"></a>*point* is the field set in the same series with the same timestamp.
 For example, here's a single point:
@@ -185,7 +185,7 @@ The timestamp for the point is `2015-08-18T00:00:00Z`.
 
 All of the stuff we've just covered is stored in a database - the sample data are in the database `my_database`.
 An InfluxDB <a name=database></a>*database* is similar to traditional relational databases and serves as a logical container for users, retention policies, continuous queries, and, of course, your time series data.
-See [Authentication and Authorization](/influxdb/v1.3/query_language/authentication_and_authorization/) and [Continuous Queries](/influxdb/v1.3/query_language/continuous_queries/) for more on those topics.
+See [Authentication and Authorization](/influxdb/v1.4/query_language/authentication_and_authorization/) and [Continuous Queries](/influxdb/v1.4/query_language/continuous_queries/) for more on those topics.
 
 Databases can have several users, continuous queries, retention policies, and measurements.
 InfluxDB is a schemaless database which means it's easy to add new measurements, tags, and fields at any time.
@@ -193,5 +193,5 @@ It's designed to make working with time series data awesome.
 
 You made it!
 You've covered the fundamental concepts and terminology in InfluxDB.
-If you're just starting out, we recommend taking a look at [Getting Started](/influxdb/v1.3/introduction/getting_started/) and the [Writing Data](/influxdb/v1.3/guides/writing_data/) and [Querying Data](/influxdb/v1.3/guides/querying_data/) guides.
+If you're just starting out, we recommend taking a look at [Getting Started](/influxdb/v1.4/introduction/getting_started/) and the [Writing Data](/influxdb/v1.4/guides/writing_data/) and [Querying Data](/influxdb/v1.4/guides/querying_data/) guides.
 May our time series database serve you well 🕔.
