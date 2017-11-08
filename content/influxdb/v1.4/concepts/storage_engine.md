@@ -2,7 +2,7 @@
 title: Storage Engine
 
 menu:
-  influxdb_1_3:
+  influxdb_1_4:
     weight: 90
     parent: concepts
 ---
@@ -13,10 +13,10 @@ The new InfluxDB storage engine looks very similar to a LSM Tree.
 It has a write ahead log and a collection of read-only data files which are  similar in concept to SSTables in an LSM Tree.
 TSM files contain sorted, compressed series data.
 
-InfluxDB will create a [shard](/influxdb/v1.3/concepts/glossary/#shard) for each block of time.
-For example, if you have a [retention policy](/influxdb/v1.3/concepts/glossary/#retention-policy) with an unlimited duration, shards will be created for each 7 day block of time.
+InfluxDB will create a [shard](/influxdb/v1.4/concepts/glossary/#shard) for each block of time.
+For example, if you have a [retention policy](/influxdb/v1.4/concepts/glossary/#retention-policy) with an unlimited duration, shards will be created for each 7 day block of time.
 Each of these shards maps to an underlying storage engine database.
-Each of these databases has its own [WAL](/influxdb/v1.3/concepts/glossary/#wal-write-ahead-log) and TSM files.
+Each of these databases has its own [WAL](/influxdb/v1.4/concepts/glossary/#wal-write-ahead-log) and TSM files.
 
 We'll dig into each of these parts of the storage engine.
 
@@ -24,7 +24,7 @@ We'll dig into each of these parts of the storage engine.
 
 The storage engine ties a number of components together and provides the external interface for storing and querying series data. It is composed of a number of components that each serve a particular role:
 
-* In-Memory Index - The in-memory index is a shared index across shards that provides the quick access to [measurements](/influxdb/v1.3/concepts/glossary/#measurement), [tags](/influxdb/v1.3/concepts/glossary/#tags), and [series](/influxdb/v1.3/concepts/glossary/#series).  The index is used by the engine, but is not specific to the storage engine itself.
+* In-Memory Index - The in-memory index is a shared index across shards that provides the quick access to [measurements](/influxdb/v1.4/concepts/glossary/#measurement), [tags](/influxdb/v1.4/concepts/glossary/#tags), and [series](/influxdb/v1.4/concepts/glossary/#series).  The index is used by the engine, but is not specific to the storage engine itself.
 * WAL - The WAL is a write-optimized storage format that allows for writes to be durable, but not easily queryable.  Writes to the WAL are appended to segments of a fixed size.
 * Cache - The Cache is an in-memory representation of the data stored in the WAL.  It is queried at runtime and merged with the data stored in TSM files.
 * TSM Files - TSM files store compressed series data in a columnar format.
@@ -50,7 +50,7 @@ Each entry in the WAL follows a [TLV standard](https://en.wikipedia.org/wiki/Typ
 ### Cache
 
 The Cache is an in-memory copy of all data points current stored in the WAL.
-The points are organized by the key, which is the measurement, [tag set](/influxdb/v1.3/concepts/glossary/#tag-set), and unique [field](/influxdb/v1.3/concepts/glossary/#field).
+The points are organized by the key, which is the measurement, [tag set](/influxdb/v1.4/concepts/glossary/#tag-set), and unique [field](/influxdb/v1.4/concepts/glossary/#field).
 Each field is kept as its own time-ordered range.
 The Cache data is not compressed while in memory.
 
@@ -62,13 +62,13 @@ Deletes sent to the Cache will clear out the given key or the specific time rang
 
 The Cache exposes a few controls for snapshotting behavior.
 The two most important controls are the memory limits.
-There is a lower bound, [`cache-snapshot-memory-size`](/influxdb/v1.3/administration/config/#cache-snapshot-memory-size-26214400), which when exceeded will trigger a snapshot to TSM files and remove the corresponding WAL segments.
-There is also an upper bound, [`cache-max-memory-size`](/influxdb/v1.3/administration/config/#cache-max-memory-size-524288000), which when exceeded will cause the Cache to reject new writes.
+There is a lower bound, [`cache-snapshot-memory-size`](/influxdb/v1.4/administration/config/#cache-snapshot-memory-size-26214400), which when exceeded will trigger a snapshot to TSM files and remove the corresponding WAL segments.
+There is also an upper bound, [`cache-max-memory-size`](/influxdb/v1.4/administration/config/#cache-max-memory-size-524288000), which when exceeded will cause the Cache to reject new writes.
 These configurations are useful to prevent out of memory situations and to apply back pressure to clients writing data faster than the instance can persist it.  
 The checks for memory thresholds occur on every write.
 
 The other snapshot controls are time based.
-The idle threshold, [`cache-snapshot-write-cold-duration`](/influxdb/v1.3/administration/config/#cache-snapshot-write-cold-duration-1h0m0s), forces the Cache to snapshot to TSM files if it hasn't received a write within the specified interval.
+The idle threshold, [`cache-snapshot-write-cold-duration`](/influxdb/v1.4/administration/config/#cache-snapshot-write-cold-duration-1h0m0s), forces the Cache to snapshot to TSM files if it hasn't received a write within the specified interval.
 
 The in-memory Cache is recreated on restart by re-reading the WAL files on disk.
 
