@@ -1,9 +1,9 @@
 ---
 title: Getting Started
 aliases:
-    - chronograf/v1.3/introduction/getting_started/
+    - chronograf/v1.4/introduction/getting_started/
 menu:
-  chronograf_1_3:
+  chronograf_1_4:
     weight: 20
     parent: Introduction
 ---
@@ -23,20 +23,20 @@ This guide walks through getting set up on an Ubuntu 16.04 installation, and is 
 Chronograf and the other components of the TICK stack are supported on a large number of operating systems and hardware architectures.
 Check out the [downloads](https://www.influxdata.com/downloads/) page for links to the binaries of your choice.
 
-For a complete list of the installation requirements, see the [Installation](/chronograf/v1.3/introduction/installation/) page.
+For a complete list of the installation requirements, see the [Installation](/chronograf/v1.4/introduction/installation/) page.
 
 ## InfluxDB Setup
 
-[InfluxDB](https://docs.influxdata.com/influxdb/v1.3/) is the time series database that serves as the data storage component of the TICK stack.
+[InfluxDB](https://docs.influxdata.com/influxdb/latest/) is the time series database that serves as the data storage component of the TICK stack.
 
 #### 1. Download and Install InfluxDB
 ```
-wget https://dl.influxdata.com/influxdb/releases/influxdb_1.2.4_amd64.deb
-sudo dpkg -i influxdb_1.2.4_amd64.deb
+wget https://dl.influxdata.com/influxdb/releases/influxdb_1.4.0_amd64.deb
+sudo dpkg -i influxdb_1.4.0_amd64.deb
 ```
 
 #### 2. Start InfluxDB
-There's no need to edit InfluxDB's default [configuration](https://docs.influxdata.com/influxdb/v1.3/administration/config/) for the purposes of this guide.
+There's no need to edit InfluxDB's default [configuration](https://docs.influxdata.com/influxdb/latest/administration/config/) for the purposes of this guide.
 Just start InfluxDB with:
 ```
 sudo systemctl start influxdb
@@ -55,13 +55,13 @@ So far so good! You're ready to move on to the next section. Note that there's n
 
 ## Kapacitor Setup
 
-[Kapacitor](https://docs.influxdata.com/kapacitor/v1.3/) is the data processing platform of the TICK stack.
+[Kapacitor](https://docs.influxdata.com/kapacitor/latest/) is the data processing platform of the TICK stack.
 Kapacitor is responsible for creating and sending alerts in Chronograf.
 
 #### 1. Download and Install Kapacitor
 ```
-wget https://dl.influxdata.com/kapacitor/releases/kapacitor_1.3.1_amd64.deb
-sudo dpkg -i kapacitor_1.3.1_amd64.deb
+wget https://dl.influxdata.com/kapacitor/releases/kapacitor_1.4.0_amd64.deb
+sudo dpkg -i kapacitor_1.4.0_amd64.deb
 ```
 
 #### 2. Start Kapacitor
@@ -94,8 +94,8 @@ Ultimately, you will configure a Telegraf input plugin for each application that
 
 #### 1. Download and Install Telegraf
 ```
-wget https://dl.influxdata.com/telegraf/releases/telegraf_1.3.2-1_amd64.deb
-sudo dpkg -i telegraf_1.3.2-1_amd64.deb
+wget https://dl.influxdata.com/telegraf/releases/telegraf_1.4.3-1_amd64.deb
+sudo dpkg -i telegraf_1.4.3-1_amd64.deb
 ```
 
 #### 2. Start Telegraf
@@ -201,8 +201,8 @@ Now that we're collecting data with Telegraf and storing data with InfluxDB, it'
 
 #### 1. Download and Install Chronograf
 ```
-wget https://dl.influxdata.com/chronograf/releases/chronograf_1.3.3.0_amd64.deb
-sudo dpkg -i chronograf_1.3.3.0_amd64.deb
+wget https://dl.influxdata.com/chronograf/releases/chronograf_1.4.0.0_amd64.deb
+sudo dpkg -i chronograf_1.4.0.0_amd64.deb
 ```
 
 #### 2. Start Chronograf
@@ -225,7 +225,7 @@ There's no need to edit the last three inputs; [authorization is disabled](https
 
 Click `Connect New Source` to move on to the `HOST LIST` page:
 
-![Chronograf Host List Page](/img/chronograf/v1.3/gs-host-list.png)
+![Chronograf Host List Page](/img/chronograf/v1.4/gs-host-list.png)
 
 You should see your machine's hostname on the page along with information about its CPU usage and load.
 Assuming you've configured Telegraf's system stats input plugin, `system` should appear in the `Apps` column.
@@ -239,7 +239,7 @@ your host:
 The final step in the installation process is to connect Chronograf to Kapacitor.
 Navigate to the Configuration page (the last item in the sidebar) and click `Add Config` in the `Active Kapacitor` column.
 
-![Configure Kapacitor](/img/chronograf/v1.3/gs-configure-kapacitor.png)
+![Configure Kapacitor](/img/chronograf/v1.4/gs-configure-kapacitor.png)
 
 For the `Kapacitor URL`, enter the hostname or IP of the machine that Kapacitor is running on, and be sure to include Kapacitor's default port: `9092`.
 Next, name the connection string; this can be anything you want.
@@ -247,10 +247,10 @@ There's no need to enter any information for the `Username` and `Password` input
 Finally, click `Connect`.
 
 When Kapacitor successfully connects, Chronograf automatically opens the `Configure Alert Endpoints` section.
-Kapacitor supports several [alert endpoints/event handlers](/chronograf/v1.3/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf).
-See the [Configure Kapacitor Event Handlers](/chronograf/v1.3/guides/configure-kapacitor-event-handlers/) guide for more information.
+Kapacitor supports several [alert endpoints/event handlers](/chronograf/v1.4/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf).
+See the [Configure Kapacitor Event Handlers](/chronograf/v1.4/guides/configure-kapacitor-event-handlers/) guide for more information.
 
-![Alert Endpoints](/img/chronograf/v1.3/gs-alert-endpoints.png)
+![Alert Endpoints](/img/chronograf/v1.4/gs-alert-endpoints.png)
 
 That's it! You've successfully downloaded, installed, and configured each component of the TICK stack.
-Next, check out [our guides](/chronograf/v1.3/guides/) to get familiar with Chronograf and see all that it can do for you!
+Next, check out [our guides](/chronograf/v1.4/guides/) to get familiar with Chronograf and see all that it can do for you!
