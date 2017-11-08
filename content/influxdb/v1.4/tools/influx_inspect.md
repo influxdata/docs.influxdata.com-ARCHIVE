@@ -2,13 +2,13 @@
 title: Influx Inspect
 
 menu:
-  influxdb_1_3:
+  influxdb_1_4:
     weight: 40
     parent: tools
 ---
 
 Influx Inspect is a tool designed to view detailed information about on disk
-shards, as well as export data from a shard to [line protocol](/influxdb/v1.3/concepts/glossary/#line-protocol)
+shards, as well as export data from a shard to [line protocol](/influxdb/v1.4/concepts/glossary/#line-protocol)
 that can be inserted back into the database.
 
 ### `influx_inspect [[command] [arguments]]`
@@ -25,7 +25,7 @@ The commands are:
 ```
 
 ### `influx_inspect dumptsm`
-Dumps low-level details about [tsm](/influxdb/v1.3/concepts/glossary/#tsm-time-structured-merge-tree) files.
+Dumps low-level details about [tsm](/influxdb/v1.4/concepts/glossary/#tsm-time-structured-merge-tree) files.
 
 #### Usage
 ```
@@ -69,13 +69,13 @@ influx_inspect dumptsi [<flags>] <path>
 Dump raw series data.
 
 ##### `-measurements`
-Dump raw [measurement](/influxdb/v1.3/concepts/glossary/#measurement) data.
+Dump raw [measurement](/influxdb/v1.4/concepts/glossary/#measurement) data.
 
 ##### `-tag-keys`
-Dump raw [tag keys](/influxdb/v1.3/concepts/glossary/#tag-key).
+Dump raw [tag keys](/influxdb/v1.4/concepts/glossary/#tag-key).
 
 ##### `-tag-values`
- Dump raw [tag values](/influxdb/v1.3/concepts/glossary/#tag-value).
+ Dump raw [tag values](/influxdb/v1.4/concepts/glossary/#tag-value).
 
 ##### `-tag-value-series`
 Dump raw series for each tag value.
@@ -93,7 +93,7 @@ Filters data by tag value regular expression.
 ### `influx_inspect export`
 Exports all tsm files to line protocol.  This output file can be imported via
 the
-[influx](/influxdb/v1.3/tools/shell/#import-data-from-a-file-with-import)
+[influx](/influxdb/v1.4/tools/shell/#import-data-from-a-file-with-import)
 command.
 
 #### Usage
@@ -114,7 +114,7 @@ Database to export.
 `default` = ""
 
 #### `-retention` string (optional)
-[Retention policy](/influxdb/v1.3/concepts/glossary/#retention-policy-rp) to export.
+[Retention policy](/influxdb/v1.4/concepts/glossary/#retention-policy-rp) to export.
 
 `default` = ""
 
@@ -125,11 +125,11 @@ Data storage path.
 
 #### `-start` string (optional)
 The start of the time range.
-The date-time string must be [RFC3339 format](/influxdb/v1.3/query_language/data_exploration/#absolute-time).
+The date-time string must be [RFC3339 format](/influxdb/v1.4/query_language/data_exploration/#absolute-time).
 
 #### `-end` string (optional)
 The end of the time range.
-The date-time string must be [RFC3339 format](/influxdb/v1.3/query_language/data_exploration/#absolute-time).
+The date-time string must be [RFC3339 format](/influxdb/v1.4/query_language/data_exploration/#absolute-time).
 
 #### `-out` string
 Specifies location for export file 
@@ -137,7 +137,7 @@ Specifies location for export file
 `default` = "$HOME/.influxdb/export"
 
 #### `-waldir` string
-[WAL](/influxdb/v1.3/concepts/glossary/#wal-write-ahead-log) storage path.
+[WAL](/influxdb/v1.4/concepts/glossary/#wal-write-ahead-log) storage path.
 
 `default` =  "$HOME/.influxdb/wal"
 
@@ -206,7 +206,7 @@ Root storage path
 # Caveats
 
 The system does not have access to the meta store when exporting TSM shards.
-As such, it always creates the [retention policy](/influxdb/v1.3/concepts/glossary/#retention-policy-rp) with infinite duration and
+As such, it always creates the [retention policy](/influxdb/v1.4/concepts/glossary/#retention-policy-rp) with infinite duration and
 replication factor of 1.  End users may want to change this prior to
 re-importing if they are importing to a cluster or want a different duration
 for retention.
