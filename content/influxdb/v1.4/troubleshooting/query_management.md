@@ -2,7 +2,7 @@
 title: Query Management
 
 menu:
-  influxdb_1_3:
+  influxdb_1_4:
     weight: 20
     parent: troubleshooting
 ---
@@ -39,18 +39,18 @@ qid	  query															               database		  duration
 
 ##### Explanation of the output:
 <br>
-`qid`&emsp;&emsp;&emsp;&nbsp;The id number of the query. Use this value with [`KILL QUERY`](/influxdb/v1.3/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query).  
+`qid`&emsp;&emsp;&emsp;&nbsp;The id number of the query. Use this value with [`KILL QUERY`](/influxdb/v1.4/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query).  
 `query`&emsp;&emsp;&thinsp;&thinsp;The query text.  
 `database`&emsp;The database targeted by the query.  
 `duration`&emsp;The length of time that the query has been running.
-See [Query Language Reference](/influxdb/v1.3/query_language/spec/#durations)
+See [Query Language Reference](/influxdb/v1.4/query_language/spec/#durations)
 for an explanation of InfluxDB's time units.
 
 ## Stop currently-running queries with `KILL QUERY`
 `KILL QUERY` tells InfluxDB to stop running the relevant query.
 
 #### Syntax:
-Where `qid` is the id of the query from the [`SHOW QUERIES`](/influxdb/v1.3/troubleshooting/query_management/#list-currently-running-queries-with-show-queries) output:
+Where `qid` is the id of the query from the [`SHOW QUERIES`](/influxdb/v1.4/troubleshooting/query_management/#list-currently-running-queries-with-show-queries) output:
 ```
 KILL QUERY <qid>
 ```
@@ -67,7 +67,7 @@ A successful `KILL QUERY` query returns no results.
 ## Configuration settings for query management
 
 The following configuration settings are in the
-[[coordinator]](/influxdb/v1.3/administration/config/#coordinator) section of the
+[[coordinator]](/influxdb/v1.4/administration/config/#coordinator) section of the
 configuration file.
 
 ### max-concurrent-queries
@@ -87,7 +87,7 @@ ERR: max concurrent queries reached
 The maximum time for which a query can run on your instance before InfluxDB
 kills the query.
 The default setting (`"0"`) allows queries to run with no time restrictions.
-This setting is a [duration literal](/influxdb/v1.3/query_language/spec/#durations).
+This setting is a [duration literal](/influxdb/v1.4/query_language/spec/#durations).
 
 If your query exceeds the query timeout, InfluxDB kills the query and outputs
 the following error:
@@ -101,7 +101,7 @@ ERR: query timeout reached
 The maximum time a query can run after which InfluxDB logs the query with a
 `Detected slow query` message.
 The default setting (`"0"`) will never tell InfluxDB to log the query.
-This setting is a [duration literal](/influxdb/v1.3/query_language/spec/#durations).
+This setting is a [duration literal](/influxdb/v1.4/query_language/spec/#durations).
 
 Example log output with `log-queries-after` set to `"1s"`:
 
@@ -110,14 +110,14 @@ Example log output with `log-queries-after` set to `"1s"`:
 ```
 
 `qid` is the id number of the query.
-Use this value with [`KILL QUERY`](/influxdb/v1.3/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query).
+Use this value with [`KILL QUERY`](/influxdb/v1.4/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query).
 
 The default location for the log output file is `/var/log/influxdb/influxdb.log`. However on systems that use systemd (most modern Linux distributions) those logs are output to `journalctl`. You should be able to view the InfluxDB logs using the following command: `journalctl -u influxdb`
 
 
 ### max-select-point
 
-The maximum number of [points](/influxdb/v1.3/concepts/glossary/#point) that a
+The maximum number of [points](/influxdb/v1.4/concepts/glossary/#point) that a
 `SELECT` statement can process.
 The default setting (`0`) allows the `SELECT` statement to process an unlimited
 number of points.
@@ -131,7 +131,7 @@ ERR: max number of points reached
 
 ### max-select-series
 
-The maximum number of [series](/influxdb/v1.3/concepts/glossary/#series) that a
+The maximum number of [series](/influxdb/v1.4/concepts/glossary/#series) that a
 `SELECT` statement can process.
 The default setting (`0`) allows the `SELECT` statement to process an unlimited
 number of series.
