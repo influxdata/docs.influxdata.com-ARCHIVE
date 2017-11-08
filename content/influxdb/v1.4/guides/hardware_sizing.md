@@ -1,20 +1,20 @@
 ---
 title: Hardware Sizing Guidelines
 menu:
-  influxdb_1_3:
+  influxdb_1_4:
     weight: 12
     parent: guides
 ---
 
-This guide offers general hardware recommendations for InfluxDB and addresses some frequently asked questions about hardware sizing. The recommendations are only for the [Time Structured Merge](/influxdb/v1.3/concepts/storage_engine/#the-new-influxdb-storage-engine-from-lsm-tree-to-b-tree-and-back-again-to-create-the-time-structured-merge-tree) tree (`TSM`) storage engine, the only storage engine available with InfluxDB 1.3. Users running older versions of InfluxDB with [unconverted](/influxdb/v0.10/administration/upgrading/#convert-b1-and-bz1-shards-to-tsm1) `b1` or `bz1` shards may have different performance characteristics. See the [InfluxDB 0.9 sizing guide](/influxdb/v0.9/guides/hardware_sizing/) for more detail.
+This guide offers general hardware recommendations for InfluxDB and addresses some frequently asked questions about hardware sizing. The recommendations are only for the [Time Structured Merge](/influxdb/v1.4/concepts/storage_engine/#the-new-influxdb-storage-engine-from-lsm-tree-to-b-tree-and-back-again-to-create-the-time-structured-merge-tree) tree (`TSM`) storage engine, the only storage engine available with InfluxDB 1.4. Users running older versions of InfluxDB with [unconverted](/influxdb/v0.10/administration/upgrading/#convert-b1-and-bz1-shards-to-tsm1) `b1` or `bz1` shards may have different performance characteristics. See the [InfluxDB 0.9 sizing guide](/influxdb/v0.9/guides/hardware_sizing/) for more detail.
 
-* [Single node or Cluster?](/influxdb/v1.3/guides/hardware_sizing/#single-node-or-cluster)
-* [General hardware guidelines for a single node](/influxdb/v1.3/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node)
-* [General hardware guidelines for a cluster](/influxdb/v1.3/guides/hardware_sizing/#general-hardware-guidelines-for-a-cluster)
-* [When do I need more RAM?](/influxdb/v1.3/guides/hardware_sizing/#when-do-i-need-more-ram)
-* [What kind of storage do I need?](/influxdb/v1.3/guides/hardware_sizing/#what-kind-of-storage-do-i-need)
-* [How much storage do I need?](/influxdb/v1.3/guides/hardware_sizing/#how-much-storage-do-i-need)
-* [How should I configure my hardware?](/influxdb/v1.3/guides/hardware_sizing/#how-should-i-configure-my-hardware)
+* [Single node or Cluster?](/influxdb/v1.4/guides/hardware_sizing/#single-node-or-cluster)
+* [General hardware guidelines for a single node](/influxdb/v1.4/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node)
+* [General hardware guidelines for a cluster](/influxdb/v1.4/guides/hardware_sizing/#general-hardware-guidelines-for-a-cluster)
+* [When do I need more RAM?](/influxdb/v1.4/guides/hardware_sizing/#when-do-i-need-more-ram)
+* [What kind of storage do I need?](/influxdb/v1.4/guides/hardware_sizing/#what-kind-of-storage-do-i-need)
+* [How much storage do I need?](/influxdb/v1.4/guides/hardware_sizing/#how-much-storage-do-i-need)
+* [How should I configure my hardware?](/influxdb/v1.4/guides/hardware_sizing/#how-should-i-configure-my-hardware)
 
 # Single node or Cluster?
 InfluxDB single node instances are fully open source.
@@ -28,7 +28,7 @@ If at least one of your performance requirements falls into the [Probably infeas
 
 # General hardware guidelines for a single node
 
-We define the load that you'll be placing on InfluxDB by the number of fields written per second, the number of queries per second, and the number of unique [series](/influxdb/v1.3/concepts/glossary/#series). Based on your load, we make general CPU, RAM, and IOPS recommendations.
+We define the load that you'll be placing on InfluxDB by the number of fields written per second, the number of queries per second, and the number of unique [series](/influxdb/v1.4/concepts/glossary/#series). Based on your load, we make general CPU, RAM, and IOPS recommendations.
 
 InfluxDB should be run on locally attached SSDs. Any other storage configuration will have lower performance characteristics and may not be able to recover from even small interruptions in normal processing.
 
@@ -152,8 +152,8 @@ The Enterprise Web server is primarily an HTTP server with similar load requirem
 # When do I need more RAM?
 In general, having more RAM helps queries return faster. There is no known downside to adding more RAM.
 
-The major component that affects your RAM needs is [series cardinality](/influxdb/v1.3/concepts/glossary/#series-cardinality).
-A series cardinality around or above 10 million can cause OOM failures even with large amounts of RAM. If this is the case, you can usually address the problem by redesigning your [schema](/influxdb/v1.3/concepts/glossary/#schema).
+The major component that affects your RAM needs is [series cardinality](/influxdb/v1.4/concepts/glossary/#series-cardinality).
+A series cardinality around or above 10 million can cause OOM failures even with large amounts of RAM. If this is the case, you can usually address the problem by redesigning your [schema](/influxdb/v1.4/concepts/glossary/#schema).
 
 The increase in RAM needs relative to series cardinality is exponential where the exponent is between one and two:
 
@@ -165,7 +165,7 @@ InfluxDB is designed to run on SSDs. InfluxData does not test on HDDs or network
 Please note that cluster data nodes have very high IOPS requirements when the cluster is recovering from downtime. It is recommended that the storage system have at least 2000 IOPS to allow for rapid recovery. Below 1000 IOPS, the cluster may not be able to recover from even a brief outage.
 
 # How much storage do I need?
-Database names, [measurements](/influxdb/v1.3/concepts/glossary/#measurement), [tag keys](/influxdb/v1.3/concepts/glossary/#tag-key), [field keys](/influxdb/v1.3/concepts/glossary/#field-key), and [tag values](/influxdb/v1.3/concepts/glossary/#tag-value) are stored only once and always as strings. Only [field values](/influxdb/v1.3/concepts/glossary/#field-value) and [timestamps](/influxdb/v1.3/concepts/glossary/#timestamp) are stored per-point.
+Database names, [measurements](/influxdb/v1.4/concepts/glossary/#measurement), [tag keys](/influxdb/v1.4/concepts/glossary/#tag-key), [field keys](/influxdb/v1.4/concepts/glossary/#field-key), and [tag values](/influxdb/v1.4/concepts/glossary/#tag-value) are stored only once and always as strings. Only [field values](/influxdb/v1.4/concepts/glossary/#field-value) and [timestamps](/influxdb/v1.4/concepts/glossary/#timestamp) are stored per-point.
 
 Non-string values require approximately three bytes. String values require variable space as determined by string compression.
 
