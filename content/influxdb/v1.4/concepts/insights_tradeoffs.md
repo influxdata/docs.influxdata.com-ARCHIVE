@@ -1,7 +1,7 @@
 ---
 title: Design Insights and Tradeoffs in InfluxDB
 menu:
-  influxdb_1_3:
+  influxdb_1_4:
     weight: 60
     parent: concepts
 ---
@@ -11,7 +11,7 @@ Optimizing for this use-case entails some tradeoffs, primarily to increase perfo
 Below is a list of some of those design insights that lead to tradeoffs:
 
 1. For the time series use case, we assume that if the same data is sent multiple times, it is the exact same data that a client just sent several times.
-  * *Pro:* Simplified [conflict resolution](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points) increases write performance
+  * *Pro:* Simplified [conflict resolution](/influxdb/v1.4/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points) increases write performance
   * *Con:* Cannot store duplicate data; may overwrite data in rare circumstances
 1. Deletes are a rare occurrence.
 When they do occur it is almost always against large ranges of old data that are cold for writes.
@@ -31,7 +31,7 @@ The database must be able to handle a *high* volume of reads and writes.
 1. Being able to write and query the data is more important than having a strongly consistent view.
   * *Pro:* Writing and querying the database can be done by multiple clients and at high loads
   * *Con:* Query returns may not include the most recent points if database is under heavy load
-1. Many time [series](/influxdb/v1.3/concepts/glossary/#series) are ephemeral.
+1. Many time [series](/influxdb/v1.4/concepts/glossary/#series) are ephemeral.
 There are often time series that appear only for a few hours and then go away, e.g.
 a new host that gets started and reports for a while and then gets shut down.
   * *Pro:* InfluxDB is good at managing discontinuous data
