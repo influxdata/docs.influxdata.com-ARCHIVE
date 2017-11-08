@@ -2,7 +2,7 @@
 title: Backup and Restore
 
 menu:
-  influxdb_1_3:
+  influxdb_1_4:
     weight: 30
     parent: administration
 ---
@@ -13,15 +13,15 @@ InfluxDB has the ability to snapshot an instance at a point-in-time and restore 
 All backups are full backups.
 InfluxDB does not yet support incremental backups.
 There are two types of data to backup, the metastore and the metrics themselves.
-The [metastore](/influxdb/v1.3/concepts/glossary/#metastore) is backed up in its entirety.
+The [metastore](/influxdb/v1.4/concepts/glossary/#metastore) is backed up in its entirety.
 The metrics are backed up per-database in a separate operation from the metastore backup.
 
-> **Note:** Backups are not interchangeable between OSS InfluxDB and [InfluxEnterprise](/enterprise/v1.3/).
+> **Note:** Backups are not interchangeable between OSS InfluxDB and [InfluxEnterprise](/enterprise/latest/).
 You cannot restore an OSS backup to an InfluxEnterprise data node, nor can you restore
 an InfluxEnterprise backup to an OSS instance.
 >
 If you are working with an InfluxEnterprise cluster, please see the [Backup
-and Restore Guide](/enterprise/v1.3/guides/backup-and-restore/) in the
+and Restore Guide](/enterprise/latest/guides/backup-and-restore/) in the
 InfluxEnterprise documentation.
 
 ### Backing up the Metastore
@@ -66,7 +66,7 @@ stored. Optional flags also include:
 - `-retention <retention policy name>` - This flag can be used to
   backup a specific retention policy. For more information on
   retention policies, please see
-  [here](/influxdb/v1.3/query_language/database_management/#retention-policy-management). If
+  [here](/influxdb/v1.4/query_language/database_management/#retention-policy-management). If
   not specified, all retention policies will be backed up.
 
 - `-shard <shard ID>` - This flag can be used to backup a specific
@@ -102,7 +102,7 @@ then be compressed and sent to long-term storage.
 
 To capture a backup from a remote node:
 
-**1.** Uncomment the [`bind-address` configuration setting](/influxdb/v1.3/administration/config/#bind-address-127-0-0-1-8088) on the remote node  
+**1.** Uncomment the [`bind-address` configuration setting](/influxdb/v1.4/administration/config/#bind-address-127-0-0-1-8088) on the remote node  
 **2.** Update the `bind-address` setting to `<remote-node-IP>:8088`  
 **3.** Run the following command from your local node:
 
