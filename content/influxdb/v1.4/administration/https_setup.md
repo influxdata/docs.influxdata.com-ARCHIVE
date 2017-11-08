@@ -1,7 +1,7 @@
 ---
 title: HTTPS Setup
 menu:
-  influxdb_1_3:
+  influxdb_1_4:
     weight: 100
     parent: guides
 ---
@@ -13,7 +13,7 @@ and, in some cases, HTTPS verifies the authenticity of the InfluxDB server to
 clients.
 
 If you plan on sending requests to InfluxDB over a network, we
-[strongly recommend](/influxdb/v1.3/administration/security_best_practices/)
+[strongly recommend](/influxdb/v1.4/administration/security_best_practices/)
 that you set up HTTPS.
 
 ## Requirements
@@ -103,7 +103,7 @@ sudo systemctl restart influxdb
 
 #### Step 5: Verify the HTTPS Setup
 
-Verify that HTTPS is working by connecting to InfluxDB with the [CLI tool](/influxdb/v1.3/tools/shell/):
+Verify that HTTPS is working by connecting to InfluxDB with the [CLI tool](/influxdb/v1.4/tools/shell/):
 ```
 influx -ssl -host <domain_name>.com
 ```
@@ -169,7 +169,7 @@ sudo systemctl restart influxdb
 
 #### Step 4: Verify the HTTPS Setup
 
-Verify that HTTPS is working by connecting to InfluxDB with the [CLI tool](/influxdb/v1.3/tools/shell/):
+Verify that HTTPS is working by connecting to InfluxDB with the [CLI tool](/influxdb/v1.4/tools/shell/):
 ```
 influx -ssl -unsafeSsl -host <domain_name>.com
 ```
@@ -186,7 +186,7 @@ That's it! You've successfully set up HTTPS with InfluxDB.
 >
 ## Connect Telegraf to a secured InfluxDB instance
 >
-Connecting [Telegraf](/telegraf/v1.3/) to an InfluxDB instance that's using
+Connecting [Telegraf](/telegraf/latest/) to an InfluxDB instance that's using
 HTTPS requires some additional steps.
 >
 In Telegraf's configuration file (`/etc/telegraf/telegraf.conf`), edit the `urls`
