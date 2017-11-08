@@ -2,7 +2,7 @@
 title: Continuous Queries
 
 menu:
-  influxdb_1_3:
+  influxdb_1_4:
     weight: 40
     parent: query_language
 ---
@@ -48,9 +48,9 @@ END
 ##### The cq_query
 <br>
 The `cq_query` requires a
-[function](/influxdb/v1.3/concepts/glossary/#function),
-an [`INTO` clause](/influxdb/v1.3/query_language/spec/#clauses),
-and a [`GROUP BY time()` clause](/influxdb/v1.3/query_language/spec/#clauses):
+[function](/influxdb/v1.4/concepts/glossary/#function),
+an [`INTO` clause](/influxdb/v1.4/query_language/spec/#clauses),
+and a [`GROUP BY time()` clause](/influxdb/v1.4/query_language/spec/#clauses):
 
 ```
 SELECT <function[s]> INTO <destination_measurement> FROM <measurement> [WHERE <stuff>] GROUP BY time(<interval>)[,<tag_key[s]>]
@@ -74,7 +74,7 @@ If the `GROUP BY time()` interval is one hour, the CQ executes at the start of
 every hour.
 
 When the CQ executes, it runs a single query for the time range between
-[`now()`](/influxdb/v1.3/concepts/glossary/#now) and `now()` minus the
+[`now()`](/influxdb/v1.4/concepts/glossary/#now) and `now()` minus the
 `GROUP BY time()` interval.
 If the `GROUP BY time()` interval is one hour and the current time is 17:00,
 the query's time range is between 16:00 and 16:59.999999999.
@@ -154,9 +154,9 @@ time                   mean
 
 ##### Example 2: Automatically downsample data into another retention policy
 <br>
-[Fully qualify](/influxdb/v1.3/query_language/data_exploration/#the-basic-select-statement)
+[Fully qualify](/influxdb/v1.4/query_language/data_exploration/#the-basic-select-statement)
 the destination measurement to store the downsampled data in a non-`DEFAULT`
-[retention policy](/influxdb/v1.3/concepts/glossary/#retention-policy-rp) (RP).
+[retention policy](/influxdb/v1.4/concepts/glossary/#retention-policy-rp) (RP).
 
 ```
 CREATE CONTINUOUS QUERY "cq_basic_rp" ON "transportation"
@@ -207,13 +207,13 @@ time                   mean
 
 `cq_basic_rp` uses CQs and retention policies to automatically downsample data
 and keep those downsampled data for an alternative length of time.
-See the [Downsampling and Data Retention](/influxdb/v1.3/guides/downsampling_and_retention/)
+See the [Downsampling and Data Retention](/influxdb/v1.4/guides/downsampling_and_retention/)
 guide for an in-depth discussion about this CQ use case.
 
 ##### Example 3: Automatically downsample a database with backreferencing
 <br>
 Use a function with a wildcard (`*`) and `INTO` query's
-[backreferencing syntax](/influxdb/v1.3/query_language/data_exploration/#the-into-clause)
+[backreferencing syntax](/influxdb/v1.4/query_language/data_exploration/#the-into-clause)
 to automatically downsample data from all measurements and numerical fields in
 a database.
 
@@ -282,7 +282,7 @@ time                   mean_complaints   mean_passengers
 ##### Example 4: Automatically downsample data and configure the CQ time boundaries
 <br>
 Use an
-[offset interval](/influxdb/v1.3/query_language/data_exploration/#advanced-group-by-time-syntax)
+[offset interval](/influxdb/v1.4/query_language/data_exploration/#advanced-group-by-time-syntax)
 in the `GROUP BY time()` clause to alter both the CQ's default execution time and
 preset time boundaries.
 
@@ -346,7 +346,7 @@ CQs do not write any results for a time interval if no data fall within that
 time range.
 
 Note that the basic syntax does not support using
-[`fill()`](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals-and-fill)
+[`fill()`](/influxdb/v1.4/query_language/data_exploration/#group-by-time-intervals-and-fill)
 to change the value reported for intervals with no data.
 Basic syntax CQs ignore `fill()` if it's included in the CQ query.
 A possible workaround is to use the
@@ -362,15 +362,15 @@ time range.
 ##### Issue 3: Backfilling results for older data
 <br>
 CQs operate on realtime data, that is, data with timestamps that occur
-relative to [`now()`](/influxdb/v1.3/concepts/glossary/#now).
+relative to [`now()`](/influxdb/v1.4/concepts/glossary/#now).
 Use a basic
-[`INTO` query](/influxdb/v1.3/query_language/data_exploration/#the-into-clause)
+[`INTO` query](/influxdb/v1.4/query_language/data_exploration/#the-into-clause)
 to backfill results for data with older timestamps.
 
 ##### Issue 4: Missing tags in the CQ results
 <br>
 By default, all
-[`INTO` queries](/influxdb/v1.3/query_language/data_exploration/#the-into-clause)
+[`INTO` queries](/influxdb/v1.4/query_language/data_exploration/#the-into-clause)
 convert any tags in the source measurement to fields in the destination
 measurement.
 
@@ -390,7 +390,7 @@ END
 
 ##### The cq_query
 <br>
-See [ Description of Basic Syntax](/influxdb/v1.3/query_language/continuous_queries/#description-of-basic-syntax).
+See [ Description of Basic Syntax](/influxdb/v1.4/query_language/continuous_queries/#description-of-basic-syntax).
 
 ##### Schedule and Coverage
 <br>
@@ -405,18 +405,18 @@ If the `EVERY` interval is two hours, InfluxDB executes the CQ at the top of
 every other hour.
 
 When the CQ executes, it runs a single query for the time range between
-[`now()`](/influxdb/v1.3/concepts/glossary/#now) and `now()` minus the `FOR` interval in the `RESAMPLE` clause.
+[`now()`](/influxdb/v1.4/concepts/glossary/#now) and `now()` minus the `FOR` interval in the `RESAMPLE` clause.
 If the `FOR` interval is two hours and the current time is 17:00, the query's
 time range is between 15:00 and 16:59.999999999.
 
 Both the `EVERY` interval and the `FOR` interval accept
-[duration literals](/influxdb/v1.3/query_language/spec/#durations).
+[duration literals](/influxdb/v1.4/query_language/spec/#durations).
 The `RESAMPLE` clause works with either or both of the `EVERY` and `FOR` intervals
 configured.
 CQs default to the relevant
-[basic syntax behavior](/influxdb/v1.3/query_language/continuous_queries/#description-of-basic-syntax)
+[basic syntax behavior](/influxdb/v1.4/query_language/continuous_queries/#description-of-basic-syntax)
 if the `EVERY` interval or `FOR` interval is not provided (see the first issue in
-[Common Issues with Advanced Syntax](/influxdb/v1.3/query_language/continuous_queries/#common-issues-with-advanced-syntax)
+[Common Issues with Advanced Syntax](/influxdb/v1.4/query_language/continuous_queries/#common-issues-with-advanced-syntax)
 for an anomalistic case).
 
 #### Examples of Advanced Syntax
@@ -509,7 +509,7 @@ between 8:00 and 9:00 (`8`,`15`, and `15`).
 Second, it runs at 9:00 and calculates the average for every available data
 point between 8:00 and 9:00 (`8`, `15`, `15`, and `17`).
 Because of the way InfluxDB
-[handles duplicate points](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points)
+[handles duplicate points](/influxdb/v1.4/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points)
 , the second result simply overwrites the first result.
 
 ##### Example 2: Configure the CQ's time range for resampling
@@ -720,7 +720,7 @@ time                   mean
 
 > **Note:** `fill(previous)` doesn’t fill the result for a time interval if the
 previous value is outside the query’s time range.
-See [Frequently Asked Questions](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#why-does-fill-previous-return-empty-results)
+See [Frequently Asked Questions](/influxdb/v1.4/troubleshooting/frequently-asked-questions/#why-does-fill-previous-return-empty-results)
 for more information.
 
 #### Common Issues with Advanced Syntax
@@ -760,7 +760,7 @@ outlines a feature request for CQs to support gaps in data coverage.
 
 ## Continuous Query Management
 
-Only admin users are allowed to work with CQs. For more on user privileges, see [Authentication and Authorization](/influxdb/v1.3/query_language/authentication_and_authorization/#user-types-and-their-privileges).
+Only admin users are allowed to work with CQs. For more on user privileges, see [Authentication and Authorization](/influxdb/v1.4/query_language/authentication_and_authorization/#user-types-and-their-privileges).
 
 ### List CQs
 
@@ -822,13 +822,13 @@ To change a CQ, you must `DROP` and re`CREATE` it with the updated settings.
 ### Downsampling and Data Retention
 
 Use CQs with InfluxDB's
-[retention policies](/influxdb/v1.3/concepts/glossary/#retention-policy-rp)
+[retention policies](/influxdb/v1.4/concepts/glossary/#retention-policy-rp)
 (RPs) to mitigate storage concerns.
 Combine CQs and RPs to automatically downsample high precision data to a lower
 precision and remove the dispensable, high precision data from the database.
 
 See the
-[Downsampling and Data Retention](/influxdb/v1.3/guides/downsampling_and_retention/)
+[Downsampling and Data Retention](/influxdb/v1.4/guides/downsampling_and_retention/)
 guide for a detailed walkthrough of this common use case.
 
 ### Pre-calculating Expensive Queries
@@ -847,8 +847,8 @@ InfluxQL does not support [`HAVING` clauses](https://en.wikipedia.org/wiki/Havin
 Get the same functionality by creating a CQ to aggregate the data and querying
 the CQ results to apply the `HAVING` clause.
 
-> **Note:** InfluxQL supports [subqueries](/influxdb/v1.3/query_language/data_exploration/#subqueries) which also offer similar functionality to `HAVING` clauses.
-See [Data Exploration](/influxdb/v1.3/query_language/data_exploration/#subqueries) for more information.
+> **Note:** InfluxQL supports [subqueries](/influxdb/v1.4/query_language/data_exploration/#subqueries) which also offer similar functionality to `HAVING` clauses.
+See [Data Exploration](/influxdb/v1.4/query_language/data_exploration/#subqueries) for more information.
 
 ##### Example
 <br>
@@ -887,15 +887,15 @@ SELECT "mean_bees" FROM "aggregate_bees" WHERE "mean_bees" > 20
 ### Substituting for Nested Functions
 
 Some InfluxQL functions
-[support nesting](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#which-influxql-functions-support-nesting)
+[support nesting](/influxdb/v1.4/troubleshooting/frequently-asked-questions/#which-influxql-functions-support-nesting)
 of other functions.
 Most do not.
 If your function does not support nesting, you can get the same functionality using a CQ to calculate
 the inner-most function.
 Then simply query the CQ results to calculate the outer-most function.
 
-> **Note:** InfluxQL supports [subqueries](/influxdb/v1.3/query_language/data_exploration/#subqueries) which also offer the same functionality as nested functions.
-See [Data Exploration](/influxdb/v1.3/query_language/data_exploration/#subqueries) for more information.
+> **Note:** InfluxQL supports [subqueries](/influxdb/v1.4/query_language/data_exploration/#subqueries) which also offer the same functionality as nested functions.
+See [Data Exploration](/influxdb/v1.4/query_language/data_exploration/#subqueries) for more information.
 
 ##### Example
 <br>
@@ -932,7 +932,7 @@ SELECT mean("count_bees") FROM "aggregate_bees" WHERE time >= <start_time> AND t
 ## Further Reading
 
 We recommend visiting the
-[Downsampling and Data Retention](/influxdb/v1.3/guides/downsampling_and_retention/)
+[Downsampling and Data Retention](/influxdb/v1.4/guides/downsampling_and_retention/)
 guide to see how to combine two InfluxDB features, CQs and retention policies,
 to periodically downsample data and automatically expire the dispensable high
 precision data.
@@ -940,6 +940,6 @@ precision data.
 Kapacitor, InfluxData's data processing engine, can do the same work as
 InfluxDB's CQs.
 Check out the
-[Kapacitor documentation](/kapacitor/v1.3/examples/continuous_queries/) for when
+[Kapacitor documentation](/kapacitor/latest/examples/continuous_queries/) for when
 to use Kapacitor instead of InfluxDB and how to perform the same CQ
 functionality with a TICKscript.
