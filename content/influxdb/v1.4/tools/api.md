@@ -1,9 +1,9 @@
 ---
 title: API Reference
 aliases:
-    - influxdb/v1.3/concepts/api/
+    - influxdb/v1.4/concepts/api/
 menu:
-  influxdb_1_3:
+  influxdb_1_4:
     weight: 10
     parent: tools
 ---
@@ -14,7 +14,7 @@ responses are returned in JSON.
 
 The following sections assume your InfluxDB instance is running on `localhost`
 port `8086` and HTTPS is not enabled.
-Those settings [are configurable](/influxdb/v1.3/administration/config/#http).
+Those settings [are configurable](/influxdb/v1.4/administration/config/#http).
 
 # Endpoints
 
@@ -92,8 +92,8 @@ $ curl -sl -I localhost:8086/ping
 HTTP/1.1 204 No Content
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.3.x
-Date: Wed, 01 Mar 2017 00:09:52 GMT
+X-Influxdb-Version: 1.4.x
+Date: Wed, 08 Nov 2017 00:09:52 GMT
 ```
 
 ### Status Codes and Responses
@@ -123,10 +123,10 @@ POST http://localhost:8086/query
 
 | Verb  | Query Type |
 | :---- | :--------- |
-| GET   | Use for all queries that start with: <br><br> [`SELECT`](/influxdb/v1.3/query_language/spec/#select)* <br><br> [`SHOW`](/influxdb/v1.3/query_language/spec/#show-continuous-queries)   |
-| POST  | Use for all queries that start with: <br><br> [`ALTER`](/influxdb/v1.3/query_language/spec/#alter-retention-policy) <br><br> [`CREATE`](/influxdb/v1.3/query_language/spec/#create-continuous-query) <br><br> [`DELETE`](/influxdb/v1.3/query_language/spec/#delete) <br><br> [`DROP`](/influxdb/v1.3/query_language/spec/#drop-continuous-query) <br><br> [`GRANT`](/influxdb/v1.3/query_language/spec/#grant) <br><br> [`KILL`](/influxdb/v1.3/query_language/spec/#kill-query) <br><br> [`REVOKE`](/influxdb/v1.3/query_language/spec/#revoke) |
+| GET   | Use for all queries that start with: <br><br> [`SELECT`](/influxdb/v1.4/query_language/spec/#select)* <br><br> [`SHOW`](/influxdb/v1.4/query_language/spec/#show-continuous-queries)   |
+| POST  | Use for all queries that start with: <br><br> [`ALTER`](/influxdb/v1.4/query_language/spec/#alter-retention-policy) <br><br> [`CREATE`](/influxdb/v1.4/query_language/spec/#create-continuous-query) <br><br> [`DELETE`](/influxdb/v1.4/query_language/spec/#delete) <br><br> [`DROP`](/influxdb/v1.4/query_language/spec/#drop-continuous-query) <br><br> [`GRANT`](/influxdb/v1.4/query_language/spec/#grant) <br><br> [`KILL`](/influxdb/v1.4/query_language/spec/#kill-query) <br><br> [`REVOKE`](/influxdb/v1.4/query_language/spec/#revoke) |
 
-\* The only exceptions are `SELECT` queries that include an [`INTO` clause](/influxdb/v1.3/query_language/data_exploration/#the-into-clause).
+\* The only exceptions are `SELECT` queries that include an [`INTO` clause](/influxdb/v1.4/query_language/data_exploration/#the-into-clause).
 Those `SELECT` queries require a `POST` request.
 
 #### Examples
@@ -139,11 +139,11 @@ $ curl -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FRO
 {"results":[{"statement_id":0,"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[["2017-03-01T00:16:18Z",33.1,null,null],["2017-03-01T00:17:18Z",12.4,"12","14"]]}]}]}
 ```
 
-The `mymeas` [measurement](/influxdb/v1.3/concepts/glossary/#measurement) has two points.
-The first point has the [timestamp](/influxdb/v1.3/concepts/glossary/#timestamp) `2017-03-01T00:16:18Z`, a `myfield` value of `33.1`, and no tag values for the `mytag1` and `mytag2` [tag keys](/influxdb/v1.3/concepts/glossary/#tag-key).
+The `mymeas` [measurement](/influxdb/v1.4/concepts/glossary/#measurement) has two points.
+The first point has the [timestamp](/influxdb/v1.4/concepts/glossary/#timestamp) `2017-03-01T00:16:18Z`, a `myfield` value of `33.1`, and no tag values for the `mytag1` and `mytag2` [tag keys](/influxdb/v1.4/concepts/glossary/#tag-key).
 The second point has the timestamp `2017-03-01T00:17:18Z`, a `myfield` value of `12.4`, a `mytag1` value of `12`, and a `mytag2` value of `14`.
 
-The same query in InfluxDB's [Command Line Interface](/influxdb/v1.3/tools/shell/) (CLI) returns the following table:
+The same query in InfluxDB's [Command Line Interface](/influxdb/v1.4/tools/shell/) (CLI) returns the following table:
 ```
 name: mymeas
 time                  myfield  mytag1  mytag2
@@ -160,10 +160,10 @@ $ curl -XPOST 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT *
 {"results":[{"statement_id":0,"series":[{"name":"result","columns":["time","written"],"values":[["1970-01-01T00:00:00Z",2]]}]}]}
 ```
 
-`SELECT` queries that include and [`INTO` clause](/influxdb/v1.3/query_language/data_exploration/#the-into-clause) require a `POST` request.
+`SELECT` queries that include and [`INTO` clause](/influxdb/v1.4/query_language/data_exploration/#the-into-clause) require a `POST` request.
 
-The response shows that InfluxDB writes two points to the `newmeas` [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
-Note that the system uses epoch 0 (`1970-01-01T00:00:00Z`) as a [null timestamp equivalent](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#why-does-my-query-return-epoch-0-as-the-timestamp).
+The response shows that InfluxDB writes two points to the `newmeas` [measurement](/influxdb/v1.4/concepts/glossary/#measurement).
+Note that the system uses epoch 0 (`1970-01-01T00:00:00Z`) as a [null timestamp equivalent](/influxdb/v1.4/troubleshooting/frequently-asked-questions/#why-does-my-query-return-epoch-0-as-the-timestamp).
 
 ##### Example 3: Create a database
 <br>
@@ -173,24 +173,24 @@ $ curl -XPOST 'http://localhost:8086/query' --data-urlencode 'q=CREATE DATABASE 
 {"results":[{"statement_id":0}]}
 ```
 
-A successful [`CREATE DATABASE` query](/influxdb/v1.3/query_language/database_management/#create-database) returns no additional information.
+A successful [`CREATE DATABASE` query](/influxdb/v1.4/query_language/database_management/#create-database) returns no additional information.
 
 ### Query String Parameters
 
 | Query String Parameter | Optional/Required | Definition |
 | :--------------------- | :---------------- |:---------- |
 | chunked=[true \| \<number_of_points>] | Optional | Returns points in streamed batches instead of in a single response. If set to `true`, InfluxDB chunks responses by series or by every 10,000 points, whichever occurs first. If set to a specific value, InfluxDB chunks responses by series or by that number of points.*  |
-| db=\<database_name> | Required for database-dependent queries (most [`SELECT`](/influxdb/v1.3/query_language/spec/#select) queries and [`SHOW`](/influxdb/v1.3/query_language/spec/#show-continuous-queries) queries require this parameter). | Sets the target [database](/influxdb/v1.3/concepts/glossary/#database) for the query. |
+| db=\<database_name> | Required for database-dependent queries (most [`SELECT`](/influxdb/v1.4/query_language/spec/#select) queries and [`SHOW`](/influxdb/v1.4/query_language/spec/#show-continuous-queries) queries require this parameter). | Sets the target [database](/influxdb/v1.4/concepts/glossary/#database) for the query. |
 | epoch=[ns,u,µ,ms,s,m,h] | Optional | Returns epoch timestamps with the specified precision. By default, InfluxDB returns timestamps in RFC3339 format with nanosecond precision. Both `u` and `µ` indicate microseconds. |
-| p=\<password> | Optional if you haven't [enabled authentication](/influxdb/v1.3/query_language/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication.** | Sets the password for authentication if you've enabled authentication. Use with the query string parameter `u`. |
+| p=\<password> | Optional if you haven't [enabled authentication](/influxdb/v1.4/query_language/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication.** | Sets the password for authentication if you've enabled authentication. Use with the query string parameter `u`. |
 | pretty=true | Optional | Enables pretty-printed JSON output. While this is useful for debugging it is not recommended for production use as it consumes unnecessary network bandwidth. |
-| u=\<username> | Optional if you haven't [enabled authentication](/influxdb/v1.3/query_language/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication.* | Sets the username for authentication if you've enabled authentication. The user must have read access to the database. Use with the query string parameter `p`. |
+| u=\<username> | Optional if you haven't [enabled authentication](/influxdb/v1.4/query_language/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication.* | Sets the username for authentication if you've enabled authentication. The user must have read access to the database. Use with the query string parameter `p`. |
 
 \* InfluxDB does not truncate the number of rows returned for requests without the `chunked` parameter.
-That behavior is configurable; see the [`max-row-limit`](/influxdb/v1.3/administration/config/#max-row-limit-0) configuration option for more information.
+That behavior is configurable; see the [`max-row-limit`](/influxdb/v1.4/administration/config/#max-row-limit-0) configuration option for more information.
 
 \** The HTTP API also supports basic authentication.
-Use basic authentication if you've [enabled authentication](/influxdb/v1.3/query_language/authentication_and_authorization/#set-up-authentication)
+Use basic authentication if you've [enabled authentication](/influxdb/v1.4/query_language/authentication_and_authorization/#set-up-authentication)
 and aren't using the query string parameters `u` and `p`.
 See below for an [example](#example-4-create-a-database-using-basic-authentication) of basic authentication.
 
@@ -252,7 +252,7 @@ $ curl -XPOST 'http://localhost:8086/query?u=myusername&p=mypassword' --data-url
 {"results":[{"statement_id":0}]}
 ```
 
-A successful [`CREATE DATABASE` query](/influxdb/v1.3/query_language/database_management/#create-database) returns no additional information.
+A successful [`CREATE DATABASE` query](/influxdb/v1.4/query_language/database_management/#create-database) returns no additional information.
 
 Invalid credentials:
 ```
@@ -270,7 +270,7 @@ $ curl -XPOST -u myusername:mypassword 'http://localhost:8086/query' --data-urle
 {"results":[{"statement_id":0}]}
 ```
 
-A successful [`CREATE DATABASE` query](/influxdb/v1.3/query_language/database_management/#create-database) returns no additional information.
+A successful [`CREATE DATABASE` query](/influxdb/v1.4/query_language/database_management/#create-database) returns no additional information.
 
 Invalid credentials:
 ```
@@ -286,7 +286,7 @@ $ curl -XPOST -u myusername:notmypassword 'http://localhost:8086/query' --data-u
 ```
 
 All queries must be URL encoded and follow
-[InfluxQL](/influxdb/v1.3/query_language/) syntax.
+[InfluxQL](/influxdb/v1.4/query_language/) syntax.
 Our example shows the `--data-urlencode` parameter from `curl`, which we use in all examples on this page.
 
 #### Options
@@ -318,7 +318,7 @@ Note that when the request includes `-H "Accept: application/csv"`, the system r
 ##### Bind Parameters
 <br>
 The API supports binding parameters to particular field values or tag values in
-the [`WHERE` clause](/influxdb/v1.3/query_language/data_exploration/#the-where-clause).
+the [`WHERE` clause](/influxdb/v1.4/query_language/data_exploration/#the-where-clause).
 Use the syntax `$<placeholder_key>` as a placeholder in the query, and URL
 encode the map of placeholder keys to placeholder values in the request body:
 
@@ -357,7 +357,7 @@ mymeas,,1488327378000000000,33.1,mytag1,mytag2
 mymeas,,1488327438000000000,12.4,12,14
 ```
 
-The first point has no [tag values](/influxdb/v1.3/concepts/glossary/#tag-value) for the `mytag1` and `mytag2` [tag keys](/influxdb/v1.3/concepts/glossary/#tag-key).
+The first point has no [tag values](/influxdb/v1.4/concepts/glossary/#tag-value) for the `mytag1` and `mytag2` [tag keys](/influxdb/v1./concepts/glossary/#tag-key).
 
 ##### Example 3: Submit queries from a file
 <br>
@@ -380,7 +380,7 @@ $ curl -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FRO
 ```
 
 The request maps `$tag_value` to `12`.
-InfluxDB stores [tag values](/influxdb/v1.3/concepts/glossary/#tag-value) as strings they and must be double quoted in the request.
+InfluxDB stores [tag values](/influxdb/v1.4/concepts/glossary/#tag-value) as strings they and must be double quoted in the request.
 
 ##### Example 5: Bind a parameter in the `WHERE` clause to a numerical field value
 <br>
@@ -391,7 +391,7 @@ $ curl -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FRO
 ```
 
 The request maps `$field_value` to `30`.
-The value `30` does not require double quotes because `myfield` stores numerical [field values](/influxdb/v1.3/concepts/glossary/#field-value).
+The value `30` does not require double quotes because `myfield` stores numerical [field values](/influxdb/v1.4/concepts/glossary/#field-value).
 
 ##### Example 6: Bind two parameters in the `WHERE` clause to a specific tag value and numerical field value
 <br>
@@ -427,8 +427,8 @@ HTTP/1.1 200 OK
 Connection: close
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.3.x
-Date: Wed, 01 Mar 2017 19:22:54 GMT
+X-Influxdb-Version: 1.4.x
+Date: Wed, 08 Nov 2017 19:22:54 GMT
 Transfer-Encoding: chunked
 
 {"results":[{"statement_id":0,"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[["2017-03-01T00:16:18Z",33.1,null,null],["2017-03-01T00:17:18Z",12.4,"12","14"]]}]}]}
@@ -443,8 +443,8 @@ HTTP/1.1 200 OK
 Connection: close
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.3.x
-Date: Wed, 01 Mar 2017 19:23:48 GMT
+X-Influxdb-Version: 1.4.x
+Date: Wed, 08 Nov 2017 19:23:48 GMT
 Transfer-Encoding: chunked
 
 {"results":[{"statement_id":0,"error":"database not found: mydb1"}]}
@@ -458,8 +458,8 @@ $ curl -i -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT *'
 HTTP/1.1 400 Bad Request
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.3.x
-Date: Wed, 01 Mar 2017 19:24:25 GMT
+X-Influxdb-Version: 1.4.x
+Date: Wed, 08 Nov 2017 19:24:25 GMT
 Content-Length: 76
 
 {"error":"error parsing query: found EOF, expected FROM at line 1, char 9"}
@@ -474,8 +474,8 @@ HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 Request-Id: [...]
 Www-Authenticate: Basic realm="InfluxDB"
-X-Influxdb-Version: 1.3.x
-Date: Wed, 01 Mar 2017 19:11:26 GMT
+X-Influxdb-Version: 1.4.x
+Date: Wed, 08 Nov 2017 19:11:26 GMT
 Content-Length: 33
 
 {"error":"authorization failed"}
@@ -496,15 +496,15 @@ POST http://localhost:8086/write
 
 | Query String Parameter | Optional/Required | Description |
 | :--------------------- | :---------------- | :---------- |
-| consistency=[any,one,quorum,all] | Optional, available with [InfluxEnterprise clusters](/enterprise/v1.3/) only. | Sets the write consistency for the point. InfluxDB assumes that the write consistency is `one` if you do not specify `consistency`. See the [InfluxEnterprise documentation](https://docs.influxdata.com/enterprise/v1.3/concepts/clustering#write-consistency) for detailed descriptions of each consistency option. |
-| db=\<database> | Required | Sets the target [database](/influxdb/v1.3/concepts/glossary/#database) for the write. |
-| p=\<password> | Optional if you haven't [enabled authentication](/influxdb/v1.3/query_language/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication.* | Sets the password for authentication if you've enabled authentication. Use with the query string parameter `u`. |
+| consistency=[any,one,quorum,all] | Optional, available with [InfluxEnterprise clusters](/enterprise/v1.4/) only. | Sets the write consistency for the point. InfluxDB assumes that the write consistency is `one` if you do not specify `consistency`. See the [InfluxEnterprise documentation](https://docs.influxdata.com/enterprise/v1.4/concepts/clustering#write-consistency) for detailed descriptions of each consistency option. |
+| db=\<database> | Required | Sets the target [database](/influxdb/v1.4/concepts/glossary/#database) for the write. |
+| p=\<password> | Optional if you haven't [enabled authentication](/influxdb/v1.4/query_language/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication.* | Sets the password for authentication if you've enabled authentication. Use with the query string parameter `u`. |
 | precision=[ns,u,ms,s,m,h] | Optional | Sets the precision for the supplied Unix time values. InfluxDB assumes that timestamps are in nanoseconds if you do not specify `precision`.** |
-| rp=\<retention_policy_name> | Optional | Sets the target [retention policy](/influxdb/v1.3/concepts/glossary/#retention-policy-rp) for the write. InfluxDB writes to the `DEFAULT` retention policy if you do not specify a retention policy. |
-| u=\<username> | Optional if you haven't [enabled authentication](/influxdb/v1.3/query_language/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication.* | Sets the username for authentication if you've enabled authentication. The user must have write access to the database. Use with the query string parameter `p`. |
+| rp=\<retention_policy_name> | Optional | Sets the target [retention policy](/influxdb/v1.4/concepts/glossary/#retention-policy-rp) for the write. InfluxDB writes to the `DEFAULT` retention policy if you do not specify a retention policy. |
+| u=\<username> | Optional if you haven't [enabled authentication](/influxdb/v1.4/query_language/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication.* | Sets the username for authentication if you've enabled authentication. The user must have write access to the database. Use with the query string parameter `p`. |
 
 \* The HTTP API also supports basic authentication.
-Use basic authentication if you've [enabled authentication](/influxdb/v1.3/query_language/authentication_and_authorization/#set-up-authentication)
+Use basic authentication if you've [enabled authentication](/influxdb/v1.4/query_language/authentication_and_authorization/#set-up-authentication)
 and aren't using the query string parameters `u` and `p`.
 See below for an [example](#example-4-write-a-point-to-the-database-mydb-using-basic-authentication) of basic authentication.
 
@@ -521,8 +521,8 @@ $ curl -i -XPOST "http://localhost:8086/write?db=mydb&precision=s" --data-binary
 HTTP/1.1 204 No Content
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.3.x
-Date: Wed, 01 Mar 2017 17:33:23 GMT
+X-Influxdb-Version: 1.4.x
+Date: Wed, 08 Nov 2017 17:33:23 GMT
 ```
 
 ##### Example 2: Write a point to the database `mydb` and the retention policy `myrp`
@@ -533,8 +533,8 @@ $ curl -i -XPOST "http://localhost:8086/write?db=mydb&rp=myrp" --data-binary 'my
 HTTP/1.1 204 No Content
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.3.x
-Date: Wed, 01 Mar 2017 17:34:31 GMT
+X-Influxdb-Version: 1.4.x
+Date: Wed, 08 Nov 2017 17:34:31 GMT
 ```
 
 ##### Example 3: Write a point to the database `mydb` using HTTP authentication
@@ -546,8 +546,8 @@ $ curl -i -XPOST "http://localhost:8086/write?db=mydb&u=myusername&p=mypassword"
 HTTP/1.1 204 No Content
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.3.x
-Date: Wed, 01 Mar 2017 17:34:56 GMT
+X-Influxdb-Version: 1.4.x
+Date: Wed, 08 Nov 2017 17:34:56 GMT
 ```
 
 Invalid credentials:
@@ -558,8 +558,8 @@ HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 Request-Id: [...]
 Www-Authenticate: Basic realm="InfluxDB"
-X-Influxdb-Version: 1.3.x
-Date: Wed, 01 Mar 2017 17:40:30 GMT
+X-Influxdb-Version: 1.4.x
+Date: Wed, 08 Nov 2017 17:40:30 GMT
 Content-Length: 33
 
 {"error":"authorization failed"}
@@ -574,8 +574,8 @@ $ curl -i -XPOST -u myusername:mypassword "http://localhost:8086/write?db=mydb" 
 HTTP/1.1 204 No Content
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.3.x
-Date: Wed, 01 Mar 2017 17:36:40 GMT
+X-Influxdb-Version: 1.4.x
+Date: Wed, 08 Nov 2017 17:36:40 GMT
 ```
 
 Invalid credentials:
@@ -586,8 +586,8 @@ HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 Request-Id: [...]
 Www-Authenticate: Basic realm="InfluxDB"
-X-Influxdb-Version: 1.3.x
-Date: Wed, 01 Mar 2017 17:46:40 GMT
+X-Influxdb-Version: 1.4.x
+Date: Wed, 08 Nov 2017 17:46:40 GMT
 Content-Length: 33
 
 {"error":"authorization failed"}
@@ -600,7 +600,7 @@ Content-Length: 33
 ```
 
 All data must be binary encoded and in the
-[Line Protocol](/influxdb/v1.3/concepts/glossary/#line-protocol) format.
+[Line Protocol](/influxdb/v1.4/concepts/glossary/#line-protocol) format.
 Our example shows the `--data-binary` parameter from curl, which we will use in
 all examples on this page.
 Using any encoding method other than `--data-binary` will likely lead to issues;
@@ -630,8 +630,8 @@ $ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,myt
 HTTP/1.1 204 No Content
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.3.x
-Date: Wed, 01 Mar 2017 18:02:57 GMT
+X-Influxdb-Version: 1.4.x
+Date: Wed, 08 Nov 2017 18:02:57 GMT
 ```
 
 ##### Example 2: Write a point to the database `mydb` with the local server's nanosecond timestamp
@@ -642,8 +642,8 @@ $ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,myt
 HTTP/1.1 204 No Content
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.3.x
-Date: Wed, 01 Mar 2017 18:03:44 GMT
+X-Influxdb-Version: 1.4.x
+Date: Wed, 08 Nov 2017 18:03:44 GMT
 ```
 
 ##### Example 3: Write several points to the database `mydb` by separating points with a new line
@@ -655,8 +655,8 @@ mymeas,mytag=2 myfield=34 1463689152000000000'
 HTTP/1.1 204 No Content
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.3.x
-Date: Wed, 01 Mar 2017 18:04:02 GMT
+X-Influxdb-Version: 1.4.x
+Date: Wed, 08 Nov 2017 18:04:02 GMT
 ```
 
 ##### Example 4: Write several points to the database `mydb` from the file `data.txt`
@@ -667,8 +667,8 @@ $ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary @data.txt
 HTTP/1.1 204 No Content
 Content-Type: application/json
 Request-Id: [...]
-X-Influxdb-Version: 1.3.x
-Date: Wed, 01 Mar 2017 18:08:11 GMT
+X-Influxdb-Version: 1.4.x
+Date: Wed, 08 Nov 2017 18:08:11 GMT
 ```
 
 A sample of the data in `data.txt`:
