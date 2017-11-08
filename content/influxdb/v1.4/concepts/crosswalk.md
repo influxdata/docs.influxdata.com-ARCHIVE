@@ -1,7 +1,7 @@
 ---
 title: Comparison to SQL
 menu:
-  influxdb_1_3:
+  influxdb_1_4:
     weight: 20
     parent: concepts
 ---
@@ -22,7 +22,7 @@ In short, InfluxDB is made to store a large volume of time-series data and perfo
 In InfluxDB, a timestamp identifies a single point in any given data series.
 This is like an SQL database table where the primary key is pre-set by the system and is always time.
 
-InfluxDB also recognizes that your [schema](/influxdb/v1.3/concepts/glossary/#schema) preferences may change over time.
+InfluxDB also recognizes that your [schema](/influxdb/v1.4/concepts/glossary/#schema) preferences may change over time.
 In InfluxDB you don't have to define schemas up front.
 Data points can have one of the fields on a measurement, all of the fields on a measurement, or any number in-between.
 You can add new fields to a measurement simply by writing a point for that new field.
@@ -104,8 +104,8 @@ Referencing the example above, in general:
 * InfluxDB points (for example, `2015-04-16T12:00:00Z	5`) are similar to SQL rows.
 
 Building on this comparison of database terminology,
-InfluxDB's [continuous queries](/influxdb/v1.3/concepts/glossary/#continuous-query-cq)
-and [retention policies](/influxdb/v1.3/concepts/glossary/#retention-policy-rp) are
+InfluxDB's [continuous queries](/influxdb/v1.4/concepts/glossary/#continuous-query-cq)
+and [retention policies](/influxdb/v1.4/concepts/glossary/#retention-policy-rp) are
 similar to stored procedures in an SQL database.
 They're specified once and then performed regularly and automatically.
 
@@ -114,7 +114,7 @@ SQL `JOIN`s aren't available for InfluxDB measurements; your schema design shoul
 And, as we mentioned above, a measurement is like an SQL table where the primary index is always pre-set to time.
 InfluxDB timestamps must be in UNIX epoch (GMT) or formatted as a date-time string valid under RFC3339.
 
-For more detailed descriptions of the InfluxDB terms mentioned in this section see our [Glossary of Terms](/influxdb/v1.3/concepts/glossary/).
+For more detailed descriptions of the InfluxDB terms mentioned in this section see our [Glossary of Terms](/influxdb/v1.4/concepts/glossary/).
 
 ## InfluxQL and SQL
 
@@ -174,11 +174,11 @@ The options for specifying time durations with `now()` are:
 <br/>
 
 InfluxQL also supports regular expressions, arithmetic in expressions, `SHOW` statements, and `GROUP BY` statements.
-See our [data exploration](/influxdb/v1.3/query_language/data_exploration/) page for an in-depth discussion of those topics.
+See our [data exploration](/influxdb/v1.4/query_language/data_exploration/) page for an in-depth discussion of those topics.
 InfluxQL functions include `COUNT`, `MIN`, `MAX`, `MEDIAN`, `DERIVATIVE` and more.
-For a full list check out the [functions](/influxdb/v1.3/query_language/functions/) page.
+For a full list check out the [functions](/influxdb/v1.4/query_language/functions/) page.
 
-Now that you have the general idea, check out our [Getting Started Guide](/influxdb/v1.3/introduction/getting_started/).
+Now that you have the general idea, check out our [Getting Started Guide](/influxdb/v1.4/introduction/getting_started/).
 
 ## A note on why InfluxDB isn't CRUD...
 
