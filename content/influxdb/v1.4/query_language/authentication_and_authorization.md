@@ -1,9 +1,9 @@
 ---
 title: Authentication and Authorization
 aliases:
-    - influxdb/v1.3/administration/authentication_and_authorization/
+    - influxdb/v1.4/administration/authentication_and_authorization/
 menu:
-  influxdb_1_3:
+  influxdb_1_4:
     weight: 90
     parent: query_language
 ---
@@ -34,7 +34,7 @@ If additional security or compliance features are desired, InfluxDB should be ru
 
 ## Authentication
 
-InfluxDB's HTTP API and the [command line interface](/influxdb/v1.3/tools/shell/) (CLI), which connects to the database using the API, include simple, built-in authentication based on user credentials.
+InfluxDB's HTTP API and the [command line interface](/influxdb/v1.4/tools/shell/) (CLI), which connects to the database using the API, include simple, built-in authentication based on user credentials.
 When you enable authentication InfluxDB only executes HTTP requests that are sent with valid credentials.
 
 
@@ -72,7 +72,7 @@ Now InfluxDB will check user credentials on every request and will only process 
 ### Authenticate Requests
 
 #### Authenticate with the HTTP API
-There are two options for authenticating with the [HTTP API](/influxdb/v1.3/tools/api/).
+There are two options for authenticating with the [HTTP API](/influxdb/v1.4/tools/api/).
 
 If you authenticate with both Basic Authentication **and** the URL query parameters, the user credentials specified in the query parameters take precedence.
 The queries in the following examples assume that the user is an [admin user](#admin-users).
@@ -107,7 +107,7 @@ curl -G http://localhost:8086/query --data-urlencode "u=todd" --data-urlencode "
 ```
 
 #### Authenticate with the CLI
-There are three options for authenticating with the [CLI](/influxdb/v1.3/tools/shell/).
+There are three options for authenticating with the [CLI](/influxdb/v1.4/tools/shell/).
 
 ##### Authenticate with the `INFLUX_USERNAME` and `INFLUX_PASSWORD` environment variables
 <br>
@@ -120,8 +120,8 @@ echo $INFLUX_USERNAME $INFLUX_PASSWORD
 todd influxdb4ever
 
 influx
-Connected to http://localhost:8086 version 1.3.x
-InfluxDB shell 1.3.x
+Connected to http://localhost:8086 version 1.4.x
+InfluxDB shell 1.4.x
 ```
 
 ##### Authenticate by setting the `username` and `password` flags when you start the CLI
@@ -130,8 +130,8 @@ Example:
 
 ```bash
 influx -username todd -password influxdb4ever
-Connected to http://localhost:8086 version 1.3.x
-InfluxDB shell 1.3.x
+Connected to http://localhost:8086 version 1.4.x
+InfluxDB shell 1.4.x
 ```
 
 ##### Authenticate with `auth <username> <password>` after starting the CLI
@@ -140,8 +140,8 @@ Example:
 
 ```bash
 influx
-Connected to http://localhost:8086 version 1.3.x
-InfluxDB shell 1.3.x
+Connected to http://localhost:8086 version 1.4.x
+InfluxDB shell 1.4.x
 > auth
 username: todd
 password:
@@ -152,7 +152,7 @@ password:
 >
 ## Authenticate Telegraf requests to InfluxDB
 >
-Authenticating [Telegraf](/telegraf/v1.3/) requests to an InfluxDB instance with
+Authenticating [Telegraf](/telegraf/latest/) requests to an InfluxDB instance with
 authentication enabled requires some additional steps.
 In Telegraf's configuration file (`/etc/telegraf/telegraf.conf`), uncomment
 and edit the `username` and `password` settings:
@@ -189,7 +189,7 @@ Database management:
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`CREATE RETENTION POLICY`, `ALTER RETENTION POLICY`, and `DROP RETENTION POLICY`  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`CREATE CONTINUOUS QUERY` and `DROP CONTINUOUS QUERY`  
 
-See the [database management](/influxdb/v1.3/query_language/database_management/) and [continuous queries](/influxdb/v1.3/query_language/continuous_queries/) pages for a complete discussion of the commands listed above.
+See the [database management](/influxdb/v1.4/query_language/database_management/) and [continuous queries](/influxdb/v1.4/query_language/continuous_queries/) pages for a complete discussion of the commands listed above.
 
 User management:  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin user management:  
@@ -208,7 +208,7 @@ Non-admin users can have one of the following three privileges per database:
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ALL` (both `READ` and `WRITE` access)
 
 `READ`, `WRITE`, and `ALL` privileges are controlled per user per database. A new non-admin user has no access to any database until they are specifically [granted privileges to a database](#grant-read-write-or-all-database-privileges-to-an-existing-user) by an admin user.
-Non-admin users can [`SHOW`](/influxdb/v1.3/query_language/schema_exploration/#show-databases) the databases on which they have `READ` and/or `WRITE` permissions.
+Non-admin users can [`SHOW`](/influxdb/v1.4/query_language/schema_exploration/#show-databases) the databases on which they have `READ` and/or `WRITE` permissions.
 
 ### User Management Commands
 
@@ -308,7 +308,7 @@ CLI example:
 > **Notes:**
 >
 * The user value must be wrapped in double quotes if starts with a digit, is an InfluxQL keyword, contains a hyphen and or includes any special characters, for example: `!@#$%^&*()-`
-* The password [string](/influxdb/v1.3/query_language/spec/#strings) must be wrapped in single quotes.
+* The password [string](/influxdb/v1.4/query_language/spec/#strings) must be wrapped in single quotes.
 * Do not include the single quotes when authenticating requests.
 
 > For passwords that include a single quote or a newline character, escape the single quote or newline character with a backslash both when creating the password and when submitting authentication requests.
@@ -405,7 +405,7 @@ CLI example:
 >
 ```
 
-    > **Note:** The password [string](/influxdb/v1.3/query_language/spec/#strings) must be wrapped in single quotes.
+    > **Note:** The password [string](/influxdb/v1.4/query_language/spec/#strings) must be wrapped in single quotes.
 Do not include the single quotes when authenticating requests.
 > For passwords that include a single quote or a newline character, escape the single quote or newline character with a backslash both when creating the password and when submitting authentication requests.
 
