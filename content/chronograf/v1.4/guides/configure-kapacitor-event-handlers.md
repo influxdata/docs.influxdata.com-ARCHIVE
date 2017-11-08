@@ -1,17 +1,17 @@
 ---
 title: Configure Kapacitor Event Handlers
 menu:
-  chronograf_1_3:
+  chronograf_1_4:
     weight: 20
     parent: Guides
 ---
 
-Chronograf works with [Kapacitor](/kapacitor/v1.3/) to send alert messages to supported event handlers.
+Chronograf works with [Kapacitor](/kapacitor/latest/) to send alert messages to supported event handlers.
 Use Chronograf to send alert messages to specific URLs as well as to applications like [Slack](https://slack.com/) and [HipChat](https://www.hipchat.com/).
 
 This guide offers step-by-step instructions for setting up event handlers in Chronograf.
 Currently, the guide doesn't cover every supported event handler, but we will continue to add content to this page over time.
-See the FAQ page for a complete list of the supported [event handlers](/chronograf/v1.3/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf).
+See the FAQ page for a complete list of the supported [event handlers](/chronograf/v1.4/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf).
 
 ### Content
 
@@ -24,10 +24,10 @@ See the FAQ page for a complete list of the supported [event handlers](/chronogr
 
 The event handler configurations appear on Chronograf's Configure Kapacitor page.
 You must have a connected Kapacitor instance to access the configurations.
-See the Getting Started guide for [Kapacitor installation instructions](/chronograf/v1.3/introduction/getting-started/#kapacitor-setup) and how to [connect a Kapacitor instance](/chronograf/v1.3/introduction/getting-started/#4-connect-chronograf-to-kapacitor) to Chronograf.
+See the Getting Started guide for [Kapacitor installation instructions](/chronograf/v1.4/introduction/getting-started/#kapacitor-setup) and how to [connect a Kapacitor instance](/chronograf/v1.4/introduction/getting-started/#4-connect-chronograf-to-kapacitor) to Chronograf.
 
 Note that the configuration options in the `Configure Alert Endpoints` section are not all-inclusive.
-Some event handlers allow users to customize event handler configurations per [alert rule](/chronograf/v1.3/guides/create-a-kapacitor-alert/).
+Some event handlers allow users to customize event handler configurations per [alert rule](/chronograf/v1.4/guides/create-a-kapacitor-alert/).
 For example, Chronograf's Slack integration allows users to specify a default channel in the `Configure Alert Endpoints` section and a different channel for individual alert rules.
 
 ## HipChat
@@ -37,7 +37,7 @@ sharing.
 Configure Chronograf to send alert messages to a HipChat room.
 The sections below describe each configuration option.
 
-![HipChat configuration](/img/chronograf/v1.3/g-eventhandlers-hipchat.png)
+![HipChat configuration](/img/chronograf/v1.4/g-eventhandlers-hipchat.png)
 
 ### Subdomain
 
@@ -68,7 +68,7 @@ person icon in the top right corner.
 
 Your token appears in the table just above the `Create new token` section:
 
-![HipChat token](/img/chronograf/v1.3/g-eventhandlers-hipchattoken.png)
+![HipChat token](/img/chronograf/v1.4/g-eventhandlers-hipchattoken.png)
 
 ## Slack
 
@@ -76,7 +76,7 @@ Your token appears in the table just above the `Create new token` section:
 Configure Chronograf to send alerts to an existing Slack channel or as a [direct message (DM)](https://get.slack.help/hc/en-us/articles/201925108-About-channels-and-direct-messages).
 The sections below describe each configuration option.
 
-![Slack configuration](/img/chronograf/v1.3/g-eventhandlers-slack.png)
+![Slack configuration](/img/chronograf/v1.4/g-eventhandlers-slack.png)
 
 ### Slack WebHook URL
 
@@ -95,7 +95,7 @@ This step is necessary for creating the WebHook; note that you can configure Chr
 
 Your Slack WebHook URL appears next to `Webhook URL`:
 
-![Slack WebHook](/img/chronograf/v1.3/g-eventhandlers-slackwebhook.png)
+![Slack WebHook](/img/chronograf/v1.4/g-eventhandlers-slackwebhook.png)
 
 ### Slack Channel
 
@@ -103,7 +103,7 @@ Chronograf sends alert messages to this channel or DM by default.
 The channel or DM must already exist in Slack.
 Prefix a channel with `#` and a DM with `@`; for example, `#chronocats` is a channel and `@chronothan` is a DM.
 
-If you do not specify a channel or DM, Chronograf sends alert messages to the channel or DM that you selected for the WebHook URL or to the channel or DM specified in the [alert rule](/chronograf/v1.3/guides/create-a-kapacitor-alert/).
+If you do not specify a channel or DM, Chronograf sends alert messages to the channel or DM that you selected for the WebHook URL or to the channel or DM specified in the [alert rule](/chronograf/v1.4/guides/create-a-kapacitor-alert/).
 The channel or DM specified in the alert rule takes precedence over both the `Slack Channel` configuration option and the WebHook URL configuration.
 
 ## Telegram
@@ -112,7 +112,7 @@ The channel or DM specified in the alert rule takes precedence over both the `Sl
 Configure Chronograf to send alert messages to an existing Telegram bot.
 The sections below describe each configuration option.
 
-![Telegram configuration](/img/chronograf/v1.3/g-eventhandlers-telegram.png)
+![Telegram configuration](/img/chronograf/v1.4/g-eventhandlers-telegram.png)
 
 ### Telegram Bot
 
