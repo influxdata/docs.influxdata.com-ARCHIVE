@@ -1,10 +1,10 @@
 ---
 title: Frequently Asked Questions
 aliases:
-  - /influxdb/v1.3/troubleshooting/frequently_encountered_issues/
+  - /influxdb/v1.4/troubleshooting/frequently_encountered_issues/
 
 menu:
-  influxdb_1_3:
+  influxdb_1_4:
     weight: 0
     parent: troubleshooting
 ---
@@ -86,7 +86,7 @@ There a number of ways to identify the version of InfluxDB that you're using:
 ```
 $ influxd version
 
-InfluxDB ✨ v1.3.0 ✨ (git: master b7bb7e8359642b6e071735b50ae41f5eb343fd42)
+InfluxDB ✨ v1.4.0 ✨ (git: master b7bb7e8359642b6e071735b50ae41f5eb343fd42)
 ```
 
 #### `curl` the `/ping` endpoint:
@@ -97,17 +97,17 @@ $ curl -i 'http://localhost:8086/ping'
 HTTP/1.1 204 No Content
 Content-Type: application/json
 Request-Id: 1e08aeb6-fec0-11e6-8486-000000000000
-✨ X-Influxdb-Version: 1.3.x ✨
+✨ X-Influxdb-Version: 1.4.x ✨
 Date: Wed, 01 Mar 2017 20:46:17 GMT
 ```
 
-#### Launch InfluxDB's [Command Line Interface](/influxdb/v1.3/tools/shell/):
+#### Launch InfluxDB's [Command Line Interface](/influxdb/v1.4/tools/shell/):
 
 ```
 $ influx
 
-Connected to http://localhost:8086✨ version 1.3.x ✨  
-InfluxDB shell version: 1.3.x
+Connected to http://localhost:8086✨ version 1.4.x ✨  
+InfluxDB shell version: 1.4.x
 ```
 
 #### Check the HTTP response in your logs:  
@@ -115,7 +115,7 @@ InfluxDB shell version: 1.3.x
 ```
 $ journald-ctl -u influxdb.service
 
-Mar 01 20:49:45 rk-api influxd[29560]: [httpd] 127.0.0.1 - - [01/Mar/2017:20:49:45 +0000] "POST /query?db=&epoch=ns&q=SHOW+DATABASES HTTP/1.1" 200 151 "-" ✨ "InfluxDBShell/1.3.x" ✨ 9a4371a1-fec0-11e6-84b6-000000000000 1709
+Mar 01 20:49:45 rk-api influxd[29560]: [httpd] 127.0.0.1 - - [01/Mar/2017:20:49:45 +0000] "POST /query?db=&epoch=ns&q=SHOW+DATABASES HTTP/1.1" 200 151 "-" ✨ "InfluxDBShell/1.4.x" ✨ 9a4371a1-fec0-11e6-84b6-000000000000 1709
 ```
 
 ## Where can I find InfluxDB logs?
@@ -139,12 +139,12 @@ The table below outlines the default relationship between the `DURATION` of an R
 
 
 Users can also configure the shard group duration with the
-[`CREATE RETENTION POLICY`](/influxdb/v1.3/query_language/database_management/#create-retention-policies-with-create-retention-policy)
+[`CREATE RETENTION POLICY`](/influxdb/v1.4/query_language/database_management/#create-retention-policies-with-create-retention-policy)
 and
-[`ALTER RETENTION POLICY`](/influxdb/v1.3/query_language/database_management/#modify-retention-policies-with-alter-retention-policy)
+[`ALTER RETENTION POLICY`](/influxdb/v1.4/query_language/database_management/#modify-retention-policies-with-alter-retention-policy)
 statements.
 Check your retention policy's shard group duration with the
-[`SHOW RETENTION POLICY`](/influxdb/v1.3/query_language/schema_exploration/#explore-retention-policies-with-show-retention-policies)
+[`SHOW RETENTION POLICY`](/influxdb/v1.4/query_language/schema_exploration/#explore-retention-policies-with-show-retention-policies)
 statement.
 
 ## Why aren't data dropped after I've altered a retention policy?
@@ -157,7 +157,7 @@ an RP every 30 minutes.
 You may need to wait for the next RP check for InfluxDB to drop data that are
 outside the RP's new `DURATION` setting.
 The 30 minute interval is
-[configurable](/influxdb/v1.3/administration/config/#check-interval-30m0s).
+[configurable](/influxdb/v1.4/administration/config/#check-interval-30m0s).
 
 Second, altering both the `DURATION` and `SHARD DURATION` of an RP can result in
 unexpected data retention.
@@ -178,7 +178,7 @@ The system will then begin writing data to shard groups that have the new,
 shorter `SHARD DURATION` preventing any further unexpected data retention.
 
 ## Why does InfluxDB fail to parse microsecond units in the configuration file?
-The syntax for specifying microsecond duration units differs for [configuration](/influxdb/v1.3/administration/config/) settings, writes, queries, and setting the precision in InfluxDB's [Command Line Interface](/influxdb/v1.3/tools/shell/) (CLI).
+The syntax for specifying microsecond duration units differs for [configuration](/influxdb/v1.4/administration/config/) settings, writes, queries, and setting the precision in InfluxDB's [Command Line Interface](/influxdb/v1.4/tools/shell/) (CLI).
 The table below shows the supported syntax for each category:
 
 | |  Configuration File | HTTP API Writes | All Queries  | CLI Precision Command |
@@ -212,18 +212,18 @@ InfluxDB shell 0.xx.x
 >
 ```
 
-Check out [CLI/Shell](/influxdb/v1.3/tools/shell/) for more useful CLI options.
+Check out [CLI/Shell](/influxdb/v1.4/tools/shell/) for more useful CLI options.
 
 ## How can a non-admin user `USE` a database in InfluxDB's CLI?
 
-In versions prior to v1.3, [non-admin users](/influxdb/v1.3/query_language/authentication_and_authorization/#user-types-and-privileges) could not execute a `USE <database_name>` query in the CLI even if they had `READ` and/or `WRITE` permissions on that database.
+In versions prior to v1.3, [non-admin users](/influxdb/v1.4/query_language/authentication_and_authorization/#user-types-and-privileges) could not execute a `USE <database_name>` query in the CLI even if they had `READ` and/or `WRITE` permissions on that database.
 
 Starting with version 1.3, non-admin users can execute the `USE <database_name>` query for databases on which they have `READ` and/or `WRITE` permissions.
 If a non-admin user attempts to `USE` a database on which the user doesn't have `READ` and/or `WRITE` permissions, the system returns an error:
 ```
 ERR: Database <database_name> doesn't exist. Run SHOW DATABASES for a list of existing databases.
 ```
-Note that the [`SHOW DATABASES` query](/influxdb/v1.3/query_language/schema_exploration/#show-databases) returns only those databases on which the non-admin user has `READ` and/or `WRITE` permissions.
+> **Note** that the [`SHOW DATABASES` query](/influxdb/v1.4/query_language/schema_exploration/#show-databases) returns only those databases on which the non-admin user has `READ` and/or `WRITE` permissions.
 
 ## How do I write to a non-DEFAULT retention policy with InfluxDB's CLI?
 
@@ -268,15 +268,15 @@ For example, `SELECT * FROM "hamlet" WHERE "bool"=True` returns all points with 
 
 Field values can be floats, integers, strings, or booleans.
 Field value types cannot differ within a
-[shard](/influxdb/v1.3/concepts/glossary/#shard), but they can [differ](/influxdb/v1.3/write_protocols/line_protocol_reference/#example-7-attempt-to-write-a-string-to-a-field-that-previously-accepted-floats) across shards.
+[shard](/influxdb/v1.4/concepts/glossary/#shard), but they can [differ](/influxdb/v1.4/write_protocols/line_protocol_reference/#example-7-attempt-to-write-a-string-to-a-field-that-previously-accepted-floats) across shards.
 
 ### The SELECT statement
 
 The
-[`SELECT` statement](/influxdb/v1.3/query_language/data_exploration/#the-basic-select-statement)
+[`SELECT` statement](/influxdb/v1.4/query_language/data_exploration/#the-basic-select-statement)
 returns all field values **if** all values have the same type.
 If field value types differ across shards, InfluxDB first performs any
-applicable [cast](/influxdb/v1.3/query_language/data_exploration/#cast-operations)
+applicable [cast](/influxdb/v1.4/query_language/data_exploration/#cast-operations)
 operations and then returns all values with the type that occurs first in the
 following list: float, integer, string, boolean.
 
@@ -354,11 +354,11 @@ Values close to but within those limits may lead to unexpected results; some fun
 The minimum timestamp is `-9223372036854775806` or `1677-09-21T00:12:43.145224194Z`.
 The maximum timestamp is `9223372036854775806` or `2262-04-11T23:47:16.854775806Z`.
 
-Timestamps outside that range return a [parsing error](/influxdb/v1.3/troubleshooting/errors/#unable-to-parse-time-outside-range).
+Timestamps outside that range return a [parsing error](/influxdb/v1.4/troubleshooting/errors/#unable-to-parse-time-outside-range).
 
 ## How can I tell what type of data are stored in a field?
 
-The [`SHOW FIELD KEYS`](/influxdb/v1.3/query_language/schema_exploration/#explore-field-keys-with-show-field-keys) query also returns the field's type.
+The [`SHOW FIELD KEYS`](/influxdb/v1.4/query_language/schema_exploration/#explore-field-keys-with-show-field-keys) query also returns the field's type.
 
 #### Example
 
@@ -379,7 +379,7 @@ Currently, InfluxDB offers very limited support for changing a field's data type
 
 The `<field_key>::<type>` syntax supports casting field values from integers to
 floats or from floats to integers.
-See [Cast Operations](/influxdb/v1.3/query_language/data_exploration/#data-types-and-cast-operations)
+See [Cast Operations](/influxdb/v1.4/query_language/data_exploration/#data-types-and-cast-operations)
 for an example.
 There is no way to cast a float or integer to a string or boolean (or vice versa).
 
@@ -390,11 +390,11 @@ written to the database.
 #### Write the Data to a Different Field
 
 The simplest workaround is to begin writing the new data type to a different field in the same
-[series](/influxdb/v1.3/concepts/glossary/#series).
+[series](/influxdb/v1.4/concepts/glossary/#series).
 
 #### Work the Shard System
 Field value types cannot differ within a
-[shard](/influxdb/v1.3/concepts/glossary/#shard) but they can differ across
+[shard](/influxdb/v1.4/concepts/glossary/#shard) but they can differ across
 shards.
 
 Users looking to change a field's data type can use the `SHOW SHARDS` query
@@ -404,12 +404,12 @@ that occurs after that `end_time`.
 
 Note that this will not change the field's data type on prior shards.
 For how this will affect your queries, please see
-[How does InfluxDB handle field type discrepancies across shards](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-field-type-discrepancies-across-shards).
+[How does InfluxDB handle field type discrepancies across shards](/influxdb/v1.4/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-field-type-discrepancies-across-shards).
 
 ## How do I perform mathematical operations within a function?
 
 Currently, InfluxDB does not support mathematical operations within functions.
-We recommend using InfluxQL's [subqueries](/influxdb/v1.3/query_language/data_exploration/#subqueries)
+We recommend using InfluxQL's [subqueries](/influxdb/v1.4/query_language/data_exploration/#subqueries)
 as a workaround.
 
 ### Example
@@ -425,7 +425,7 @@ Instead, use a subquery to get the same result:
 ```
 
 See the
-[Data Exploration](/influxdb/v1.3/query_language/data_exploration/#subqueries)
+[Data Exploration](/influxdb/v1.4/query_language/data_exploration/#subqueries)
 page for more information.
 
 ## Why does my query return epoch 0 as the timestamp?
@@ -446,13 +446,13 @@ The following InfluxQL functions support nesting:
 * [`HOLT_WINTERS()`](#holt-winters) and [`HOLT_WINTERS_WITH_FIT()`](#holt-winters)
 
 See the
-[Data Exploration](/influxdb/v1.3/query_language/data_exploration/#subqueries)
+[Data Exploration](/influxdb/v1.4/query_language/data_exploration/#subqueries)
 page for how to use a subquery as a substitute for nested functions.
 
 ## What determines the time intervals returned by `GROUP BY time()` queries?
 
 The time intervals returned by `GROUP BY time()` queries conform to InfluxDB's preset time
-buckets or to the user-specified [offset interval](/influxdb/v1.3/query_language/data_exploration/#advanced-group-by-time-syntax).
+buckets or to the user-specified [offset interval](/influxdb/v1.4/query_language/data_exploration/#advanced-group-by-time-syntax).
 
 #### Example
 
@@ -521,7 +521,7 @@ WHERE time >= '2016-08-29T18:15:00Z' AND time <= '2016-08-29T19:45:00Z' GROUP BY
 ```
 
 In this example, the user-specified
-[offset interval](/influxdb/v1.3/query_language/data_exploration/#advanced-group-by-time-syntax)
+[offset interval](/influxdb/v1.4/query_language/data_exploration/#advanced-group-by-time-syntax)
 shifts InfluxDB's preset time buckets forward by `15` minutes.
 The average for the 6pm time bucket now includes data between 6:15pm and 7pm, and
 the average for the 7pm time bucket includes data between 7:15pm and 8pm.
@@ -563,36 +563,36 @@ There are several possible explanations for why a query returns no data or parti
 We list some of the most frequent cases below:
 
 ### Retention Policies
-The first and most common explanation involves [retention policies](/influxdb/v1.3/concepts/glossary/#retention-policy-rp) (RP).
+The first and most common explanation involves [retention policies](/influxdb/v1.4/concepts/glossary/#retention-policy-rp) (RP).
 InfluxDB automatically queries data in a database’s `DEFAULT` RP.
-If your data are stored in an RP other than the `DEFAULT` RP, InfluxDB won’t return any results unless you [specify](/influxdb/v1.3/query_language/data_exploration/#example-7-select-all-data-from-a-fully-qualified-measurement) the alternative RP.
+If your data are stored in an RP other than the `DEFAULT` RP, InfluxDB won’t return any results unless you [specify](/influxdb/v1.4/query_language/data_exploration/#example-7-select-all-data-from-a-fully-qualified-measurement) the alternative RP.
 
 ### Tag Keys in the SELECT clause
-A query requires at least one [field key](/influxdb/v1.3/concepts/glossary/#field-key)
+A query requires at least one [field key](/influxdb/v1.4/concepts/glossary/#field-key)
 in the `SELECT` clause to return data.
-If the `SELECT` clause only includes a single [tag key](/influxdb/v1.3/concepts/glossary/#tag-key) or several tag keys, the
+If the `SELECT` clause only includes a single [tag key](/influxdb/v1.4/concepts/glossary/#tag-key) or several tag keys, the
 query returns an empty response.
-Please see the [Data Exploration](/influxdb/v1.3/query_language/data_exploration/#common-issues-with-the-select-statement) page for additional information.
+Please see the [Data Exploration](/influxdb/v1.4/query_language/data_exploration/#common-issues-with-the-select-statement) page for additional information.
 
 ### Query Time Range
 Another possible explanation has to do with your query’s time range.
-By default, most [`SELECT` queries](/influxdb/v1.3/query_language/data_exploration/#the-basic-select-statement) cover the time range between `1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC. `SELECT` queries that also include a [`GROUP BY time()` clause](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals), however, cover the time range between `1677-09-21 00:12:43.145224194` and [`now()`](/influxdb/v1.3/concepts/glossary/#now).
+By default, most [`SELECT` queries](/influxdb/v1.4/query_language/data_exploration/#the-basic-select-statement) cover the time range between `1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC. `SELECT` queries that also include a [`GROUP BY time()` clause](/influxdb/v1.4/query_language/data_exploration/#group-by-time-intervals), however, cover the time range between `1677-09-21 00:12:43.145224194` and [`now()`](/influxdb/v1.4/concepts/glossary/#now).
 If any of your data occur after `now()` a `GROUP BY time()` query will not cover those data points.
-Your query will need to provide [an alternative upper bound](/influxdb/v1.3/query_language/data_exploration/#time-syntax) for the time range if the query includes a `GROUP BY time()` clause and if any of your data occur after `now()`.
+Your query will need to provide [an alternative upper bound](/influxdb/v1.4/query_language/data_exploration/#time-syntax) for the time range if the query includes a `GROUP BY time()` clause and if any of your data occur after `now()`.
 
 ### Identifier Names
-The final common explanation involves [schemas](/influxdb/v1.3/concepts/glossary/#schema) with [fields](/influxdb/v1.3/concepts/glossary/#field) and [tags](/influxdb/v1.3/concepts/glossary/#tag) that have the same key.
+The final common explanation involves [schemas](/influxdb/v1.4/concepts/glossary/#schema) with [fields](/influxdb/v1.4/concepts/glossary/#field) and [tags](/influxdb/v1.4/concepts/glossary/#tag) that have the same key.
 If a field and tag have the same key, the field will take precedence in all queries.
-You’ll need to use the [`::tag` syntax](/influxdb/v1.3/query_language/data_exploration/#description-of-syntax) to specify the tag key in queries.
+You’ll need to use the [`::tag` syntax](/influxdb/v1.4/query_language/data_exploration/#description-of-syntax) to specify the tag key in queries.
 
 ## Why don't my GROUP BY time() queries return timestamps that occur after now()?
 Most `SELECT` statements have a default time range between [`1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC](#what-are-the-minimum-and-maximum-timestamps-that-influxdb-can-store).
-For `SELECT` statements with a [`GROUP BY time()` clause](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals), the default time
-range is between `1677-09-21 00:12:43.145224194` UTC and [`now()`](/influxdb/v1.3/concepts/glossary/#now).
+For `SELECT` statements with a [`GROUP BY time()` clause](/influxdb/v1.4/query_language/data_exploration/#group-by-time-intervals), the default time
+range is between `1677-09-21 00:12:43.145224194` UTC and [`now()`](/influxdb/v1.4/concepts/glossary/#now).
 
 To query data with timestamps that occur after `now()`, `SELECT` statements with
 a `GROUP BY time()` clause must provide an alternative upper bound in the
-[`WHERE` clause](/influxdb/v1.3/query_language/data_exploration/#the-where-clause).
+[`WHERE` clause](/influxdb/v1.4/query_language/data_exploration/#the-where-clause).
 
 In the following codeblock, the first query covers data with timestamps between
 `2015-09-18T21:30:00Z` and `now()`.
@@ -613,7 +613,7 @@ the lower bound to `now()` such that the query's time range is between
 >
 ```
 
-See the [Data Exploration](/influxdb/v1.3/query_language/data_exploration/#time-syntax)
+See the [Data Exploration](/influxdb/v1.4/query_language/data_exploration/#time-syntax)
 document for more on time syntax in queries.
 
 ## Can I perform mathematical operations against timestamps?
@@ -621,7 +621,7 @@ Currently, it is not possible to execute mathematical operators against timestam
 Most time calculations must be carried out by the client receiving the query results.
 
 There is limited support for using InfluxQL functions against timestamp values.
-The function [ELAPSED()](/influxdb/v1.3/query_language/functions/#elapsed)
+The function [ELAPSED()](/influxdb/v1.4/query_language/functions/#elapsed)
 returns the difference between subsequent timestamps in a single field.
 
 ## Can I identify write precision from returned timestamps?
@@ -674,7 +674,7 @@ Yes: `SELECT "water_level" FROM "h2o_feet" WHERE time > '2015-08-18T23:00:01.232
 
 No: `SELECT "water_level" FROM "h2o_feet" WHERE time > "2015-08-18T23:00:01.232000000Z" AND time < "2015-09-19"`
 
-See [Data Exploration](/influxdb/v1.3/query_language/data_exploration/#time-syntax) for more on time syntax in queries.
+See [Data Exploration](/influxdb/v1.4/query_language/data_exploration/#time-syntax) for more on time syntax in queries.
 
 ## Why am I missing data after creating a new DEFAULT retention policy?
 When you create a new `DEFAULT` retention policy (RP) on a database, the data written to the old `DEFAULT` RP remain in the old RP.
@@ -691,7 +691,7 @@ name: fleeting
 time			               count
 1970-01-01T00:00:00Z	 8
 ```
-We [create](/influxdb/v1.3/query_language/database_management/#create-retention-policies-with-create-retention-policy) a new `DEFAULT` RP (`two_hour`) and perform the same query:
+We [create](/influxdb/v1.4/query_language/database_management/#create-retention-policies-with-create-retention-policy) a new `DEFAULT` RP (`two_hour`) and perform the same query:
 ```bash
 > SELECT count(flounders) FROM fleeting
 >
@@ -708,7 +708,7 @@ time			               count
 ## Why is my query with a `WHERE OR` time clause returning empty results?
 
 Currently, InfluxDB does not support using `OR` with
-[absolute time](/influxdb/v1.3/query_language/data_exploration/#absolute-time)
+[absolute time](/influxdb/v1.4/query_language/data_exploration/#absolute-time)
 in the `WHERE` clause.
 InfluxDB returns an empty response if the query's `WHERE` clause uses `OR`
 with absolute time.
@@ -757,11 +757,11 @@ While this is the expected behavior of `fill(previous)`, an [open feature reques
 
 By default, `INTO` queries convert any tags in the initial data to fields in
 the newly written data.
-This can cause InfluxDB to overwrite [points](/influxdb/v1.3/concepts/glossary/#point) that were previously differentiated by a tag.
+This can cause InfluxDB to overwrite [points](/influxdb/v1.4/concepts/glossary/#point) that were previously differentiated by a tag.
 Include `GROUP BY *` in all `INTO` queries to preserve tags in the newly written data.
 
-Note that this behavior does not apply to queries that use the [`TOP()`](/influxdb/v1.3/query_language/functions/#top) or [`BOTTOM()`](/influxdb/v1.3/query_language/functions/#bottom) functions.
-See the [`TOP()`](/influxdb/v1.3/query_language/functions/#issue-3-top-tags-and-the-into-clause) and [`BOTTOM()`](/influxdb/v1.3/query_language/functions/#issue-3-bottom-tags-and-the-into-clause) documentation for more information.
+Note that this behavior does not apply to queries that use the [`TOP()`](/influxdb/v1.4/query_language/functions/#top) or [`BOTTOM()`](/influxdb/v1.4/query_language/functions/#bottom) functions.
+See the [`TOP()`](/influxdb/v1.4/query_language/functions/#issue-3-top-tags-and-the-into-clause) and [`BOTTOM()`](/influxdb/v1.4/query_language/functions/#issue-3-bottom-tags-and-the-into-clause) documentation for more information.
 
 #### Example
 
@@ -868,7 +868,7 @@ time                   almonds  almonds_1  half_almonds
 
 Currently, there is no way to perform cross-measurement math or grouping.
 All data must be under a single measurement to query it together.
-InfluxDB is not a relational database and mapping data across measurements is not currently a recommended [schema](/influxdb/v1.3/concepts/glossary/#schema).
+InfluxDB is not a relational database and mapping data across measurements is not currently a recommended [schema](/influxdb/v1.4/concepts/glossary/#schema).
 See GitHub Issue [#3552](https://github.com/influxdata/influxdb/issues/3552) for a discussion of implementing JOIN in InfluxDB.
 
 ## Does the order of the timestamps matter?
@@ -896,7 +896,7 @@ time                   origin   priceless
 
 ## How can I query for series cardinality?
 
-The following queries return [series cardinality](/influxdb/v1.3/concepts/glossary/#series-cardinality):
+The following queries return [series cardinality](/influxdb/v1.4/concepts/glossary/#series-cardinality):
 
 #### Series cardinality per database:
 ```
@@ -907,19 +907,19 @@ SELECT numSeries FROM "_internal".."database" WHERE time > now() - 10s GROUP BY 
 SELECT sum(numSeries) AS "total_series" FROM "_internal".."database" WHERE time > now() - 10s
 ```
 
-> **Note:** Changes to the [`[monitor]`](/influxdb/v1.3/administration/config/#monitor)
+> **Note:** Changes to the [`[monitor]`](/influxdb/v1.4/administration/config/#monitor)
 section in the configuration file may affect query results.
 
 ## Why does series cardinality matter?
 
-InfluxDB maintains an in-memory index of every [series](/influxdb/v1.3/concepts/glossary/#series) in the system. As the number of unique series grows, so does the RAM usage. High [series cardinality](/influxdb/v1.3/concepts/glossary/#series-cardinality) can lead to the operating system killing the InfluxDB process with an out of memory (OOM) exception. See [Querying for series cardinality](#how-can-i-query-for-series-cardinality) to learn how to query for series cardinality.
+InfluxDB maintains an in-memory index of every [series](/influxdb/v1.4/concepts/glossary/#series) in the system. As the number of unique series grows, so does the RAM usage. High [series cardinality](/influxdb/v1.4/concepts/glossary/#series-cardinality) can lead to the operating system killing the InfluxDB process with an out of memory (OOM) exception. See [Querying for series cardinality](#how-can-i-query-for-series-cardinality) to learn how to query for series cardinality.
 
 ## How can I remove series from the index?
 
 To reduce series cardinality, series must be dropped from the index.
-[`DROP DATABASE`](/influxdb/v1.3/query_language/database_management/#delete-a-database-with-drop-database),
-[`DROP MEASUREMENT`](/influxdb/v1.3/query_language/database_management/#delete-measurements-with-drop-measurement), and
-[`DROP SERIES`](/influxdb/v1.3/query_language/database_management/#drop-series-from-the-index-with-drop-series) will all remove series from the index and reduce the overall series cardinality.
+[`DROP DATABASE`](/influxdb/v1.4/query_language/database_management/#delete-a-database-with-drop-database),
+[`DROP MEASUREMENT`](/influxdb/v1.4/query_language/database_management/#delete-measurements-with-drop-measurement), and
+[`DROP SERIES`](/influxdb/v1.4/query_language/database_management/#drop-series-from-the-index-with-drop-series) will all remove series from the index and reduce the overall series cardinality.
 
 > **Note:** `DROP` commands are usually CPU-intensive, as they frequently trigger a TSM compaction. Issuing `DROP` queries at a high frequency may significantly impact write and other query throughput.
 
@@ -931,7 +931,7 @@ Writes an integer: `value=100i`
 Writes a float: `value=100`
 
 ## How does InfluxDB handle duplicate points?
-A point is uniquely identified by the measurement name, [tag set](/influxdb/v1.3/concepts/glossary/#tag-set), and timestamp.
+A point is uniquely identified by the measurement name, [tag set](/influxdb/v1.4/concepts/glossary/#tag-set), and timestamp.
 If you submit a new point with the same measurement, tag set, and timestamp as an existing point, the field set becomes the union of the old field set and the new field set, where any ties go to the new field set.
 This is the intended behavior.
 
@@ -995,22 +995,22 @@ Note that Windows uses carriage return and line feed (`\r\n`) as the newline cha
 
 ### InfluxQL Keywords
 If you use an [InfluxQL keyword](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords) as an identifier you will need to double quote that identifier in every query.
-This can lead to [non-intuitive errors](/influxdb/v1.3/troubleshooting/errors/#error-parsing-query-found-expected-identifier-at-line-char).
+This can lead to [non-intuitive errors](/influxdb/v1.4/troubleshooting/errors/#error-parsing-query-found-expected-identifier-at-line-char).
 Identifiers are continuous query names, database names, field keys, measurement names, retention policy names, subscription names, tag keys, and user names.
 
 ### time
 
 The keyword `time` is a special case.
 `time` can be a
-[continuous query](/influxdb/v1.3/concepts/glossary/#continuous-query-cq) name,
+[continuous query](/influxdb/v1.4/concepts/glossary/#continuous-query-cq) name,
 database name,
-[measurement](/influxdb/v1.3/concepts/glossary/#measurement) name,
-[retention policy](/influxdb/v1.3/concepts/glossary/#retention-policy-rp) name,
-[subscription](/influxdb/v1.3/concepts/glossary/#subscription) name, and
-[user](/influxdb/v1.3/concepts/glossary/#user) name.
+[measurement](/influxdb/v1.4/concepts/glossary/#measurement) name,
+[retention policy](/influxdb/v1.4/concepts/glossary/#retention-policy-rp) name,
+[subscription](/influxdb/v1.4/concepts/glossary/#subscription) name, and
+[user](/influxdb/v1.4/concepts/glossary/#user) name.
 In those cases, `time` does not require double quotes in queries.
-`time` cannot be a [field key](/influxdb/v1.3/concepts/glossary/#field-key) or
-[tag key](/influxdb/v1.3/concepts/glossary/#tag-key);
+`time` cannot be a [field key](/influxdb/v1.4/concepts/glossary/#field-key) or
+[tag key](/influxdb/v1.4/concepts/glossary/#tag-key);
 InfluxDB rejects writes with `time` as a field key or tag key and returns an error.
 
 #### Examples
@@ -1089,7 +1089,7 @@ Identifiers are database names, retention policy names, user names, measurement 
 	Write: `INSERT wacky va\"ue=4`  
 	Applicable query: `SELECT "va\"ue" FROM "wacky"`
 
-See the [Line Protocol](/influxdb/v1.3/write_protocols/) documentation for more information.
+See the [Line Protocol](/influxdb/v1.4/write_protocols/) documentation for more information.
 
 
 ## Does the precision of the timestamp matter?
@@ -1108,11 +1108,11 @@ curl -i -XPOST "http://localhost:8086/write?db=weather&precision=s" --data-binar
 
 For users who want to write sparse, historical data to InfluxDB, we recommend:
 
-First, lengthening your [retention policy](/influxdb/v1.3/concepts/glossary/#retention-policy-rp)‘s [shard group](/influxdb/v1.3/concepts/glossary/#shard-group) duration to cover several years.
+First, lengthening your [retention policy](/influxdb/v1.4/concepts/glossary/#retention-policy-rp)‘s [shard group](/influxdb/v1.4/concepts/glossary/#shard-group) duration to cover several years.
 The default shard group duration is one week and if your data cover several hundred years – well, that’s a lot of shards!
 Having an extremely high number of shards is inefficient for InfluxDB.
-Increase the shard group duration for your data’s retention policy with the [`ALTER RETENTION POLICY` query](/influxdb/v1.3/query_language/database_management/#modify-retention-policies-with-alter-retention-policy).
+Increase the shard group duration for your data’s retention policy with the [`ALTER RETENTION POLICY` query](/influxdb/v1.4/query_language/database_management/#modify-retention-policies-with-alter-retention-policy).
 
-Second, temporarily lowering the [`cache-snapshot-write-cold-duration` configuration setting](/influxdb/v1.3/administration/config/#cache-snapshot-write-cold-duration-10m).
+Second, temporarily lowering the [`cache-snapshot-write-cold-duration` configuration setting](/influxdb/v1.4/administration/config/#cache-snapshot-write-cold-duration-10m).
 If you’re writing a lot of historical data, the default setting (`10m`) can cause the system to hold all of your data in cache for every shard.
 Temporarily lowering the `cache-snapshot-write-cold-duration` setting to `10s` while you write the historical data makes the process more efficient.
