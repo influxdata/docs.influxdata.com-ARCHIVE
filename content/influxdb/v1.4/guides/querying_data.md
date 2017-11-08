@@ -1,19 +1,19 @@
 ---
 title: Querying Data with the HTTP API
 alias:
-  -/docs/v1.3/query_language/querying_data/
+  -/docs/v1.4/query_language/querying_data/
 menu:
-  influxdb_1_3:
+  influxdb_1_4:
     weight: 10
     parent: guides
 ---
 
 ## Querying data using the HTTP API
-The HTTP API is the primary means for querying data in InfluxDB (see the [command line interface](/influxdb/v1.3/tools/shell/) and [client libraries](/influxdb/v1.3/tools/api_client_libraries/) for alternative ways to query the database).
+The HTTP API is the primary means for querying data in InfluxDB (see the [command line interface](/influxdb/v1.4/tools/shell/) and [client libraries](/influxdb/v1.4/tools/api_client_libraries/) for alternative ways to query the database).
 
 To perform a query send a `GET` request to the `/query` endpoint, set the URL parameter `db` as the target database, and set the URL parameter `q` as your query.
 You may also use a `POST` request by sending the same parameters either as URL parameters or as part of the body with `application/x-www-form-urlencoded`.
-The example below uses the HTTP API to query the same database that you encountered in [Writing Data](/influxdb/v1.3/guides/writing_data/).
+The example below uses the HTTP API to query the same database that you encountered in [Writing Data](/influxdb/v1.4/guides/writing_data/).
 <br>
 ```bash
 curl -G 'http://localhost:8086/query?pretty=true' --data-urlencode "db=mydb" --data-urlencode "q=SELECT \"value\" FROM \"cpu_load_short\" WHERE \"region\"='us-west'"
@@ -136,10 +136,10 @@ curl -G 'http://localhost:8086/query' --data-urlencode "db=mydb" --data-urlencod
 
 #### Authentication
 Authentication in InfluxDB is disabled by default.
-See [Authentication and Authorization](/influxdb/v1.3/query_language/authentication_and_authorization/) for how to enable and set up authentication.
+See [Authentication and Authorization](/influxdb/v1.4/query_language/authentication_and_authorization/) for how to enable and set up authentication.
 
 #### Maximum Row Limit
-The [`max-row-limit` configuration option](/influxdb/v1.3/administration/config/#max-row-limit-0) allows users to limit the maximum number of returned results to prevent InfluxDB from running out of memory while it aggregates the results.
+The [`max-row-limit` configuration option](/influxdb/v1.4/administration/config/#max-row-limit-0) allows users to limit the maximum number of returned results to prevent InfluxDB from running out of memory while it aggregates the results.
 The `max-row-limit` configuration option is set to `0` by default.
 That default setting allows for an unlimited number of rows returned per request.
 
@@ -155,6 +155,6 @@ curl -G 'http://localhost:8086/query' --data-urlencode "db=deluge" --data-urlenc
 
 ### InfluxQL
 ---
-Now that you know how to query data, check out the [Data Exploration page](/influxdb/v1.3/query_language/data_exploration/) to get acquainted with InfluxQL.
-For more information about querying data with the HTTP API, please see the [API reference documentation](/influxdb/v1.3/tools/api/#query).
+Now that you know how to query data, check out the [Data Exploration page](/influxdb/v1.4/query_language/data_exploration/) to get acquainted with InfluxQL.
+For more information about querying data with the HTTP API, please see the [API reference documentation](/influxdb/v1.4/tools/api/#query).
 
