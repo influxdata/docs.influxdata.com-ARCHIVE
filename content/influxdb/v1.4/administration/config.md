@@ -1,7 +1,7 @@
 ---
 title: Configuration
 menu:
-  influxdb_1_3:
+  influxdb_1_4:
     weight: 70
     parent: administration
 ---
@@ -240,9 +240,9 @@ The `reporting-disabled` option toggles
 the reporting of data every 24 hours to `usage.influxdata.com`.
 Each report includes a randomly-generated identifier, OS, architecture,
 InfluxDB version, and the
-number of [databases](/influxdb/v1.3/concepts/glossary/#database),
-[measurements](/influxdb/v1.3/concepts/glossary/#measurement), and
-unique [series](/influxdb/v1.3/concepts/glossary/#series).  Setting
+number of [databases](/influxdb/v1.4/concepts/glossary/#database),
+[measurements](/influxdb/v1.4/concepts/glossary/#measurement), and
+unique [series](/influxdb/v1.4/concepts/glossary/#series).  Setting
 this option to `true` will disable reporting.
 
 >**Note:** No data from user databases is ever transmitted.
@@ -251,7 +251,7 @@ Environment variable: `INFLUXDB_REPORTING_DISABLED`
 
 ### bind-address = "127.0.0.1:8088"
 
-The bind address to use for the RPC service for [backup and restore](/influxdb/v1.3/administration/backup_and_restore/).
+The bind address to use for the RPC service for [backup and restore](/influxdb/v1.4/administration/backup_and_restore/).
 
 Environment variable: `INFLUXDB_BIND_ADDRESS`
 
@@ -286,7 +286,7 @@ Environment variable: `INFLUXDB_META_DIR`
 
 ### retention-autocreate = true
 
-Retention policy auto-creation automatically creates the [`DEFAULT` retention policy](/influxdb/v1.3/concepts/glossary/#retention-policy-rp) `autogen` when a database is created.
+Retention policy auto-creation automatically creates the [`DEFAULT` retention policy](/influxdb/v1.4/concepts/glossary/#retention-policy-rp) `autogen` when a database is created.
 The retention policy `autogen` has an infinite duration and is also set as the
 database's `DEFAULT` retention policy, which is used when a write or query does
 not specify a retention policy.
@@ -323,7 +323,7 @@ Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 
 ### wal-dir = "/var/lib/influxdb/wal"
 
-The WAL directory is the location of the [write ahead log](/influxdb/v1.3/concepts/glossary/#wal-write-ahead-log).
+The WAL directory is the location of the [write ahead log](/influxdb/v1.4/concepts/glossary/#wal-write-ahead-log).
 
 Environment variable: `INFLUXDB_DATA_WAL_DIR`
 
@@ -331,7 +331,7 @@ Environment variable: `INFLUXDB_DATA_WAL_DIR`
 ### wal-fsync-delay = "0s"
 
 The amount of time that a write waits before fsyncing. Use a duration greater than `0` to batch up multiple fsync calls.
-This is useful for slower disks or when experiencing [WAL](/influxdb/v1.3/concepts/glossary/#wal-write-ahead-log) write contention.
+This is useful for slower disks or when experiencing [WAL](/influxdb/v1.4/concepts/glossary/#wal-write-ahead-log) write contention.
 A value of `0s` fsyncs every write to the WAL.
 We recommend values in the range of `0ms`-`100ms` for non-SSD disks.
 
@@ -376,7 +376,7 @@ Environment variable: `INFLUXDB_DATA_COMPACT_FULL_WRITE_COLD_DURATION`
 
 ### max-concurrent-compactions = 0
 
-The maximum number of concurrent full and level [compactions](/influxdb/v1.3/concepts/storage_engine/#compactions) that can run at one time.  
+The maximum number of concurrent full and level [compactions](/influxdb/v1.4/concepts/storage_engine/#compactions) that can run at one time.  
 A value of 0 results in runtime.GOMAXPROCS(0) used at runtime -- which means use all processors.  
 This setting does not apply to cache snapshotting.
 
@@ -384,7 +384,7 @@ Environment variable: `INFLUXDB_DATA_MAX_CONCURRENT_COMPACTIONS`
 
 ### max-series-per-database = 1000000
 
-The maximum number of [series](/influxdb/v1.3/concepts/glossary/#series) allowed
+The maximum number of [series](/influxdb/v1.4/concepts/glossary/#series) allowed
 per database.
 The default setting is one million.
 Change the setting to `0` to allow an unlimited number of series per database.
@@ -405,8 +405,8 @@ Environment variable: `INFLUXDB_DATA_MAX_SERIES_PER_DATABASE`
 
 ### max-values-per-tag = 100000
 
-The maximum number of [tag values](/influxdb/v1.3/concepts/glossary/#tag-values)
-allowed per [tag key]((/influxdb/v1.3/concepts/glossary/#tag-key).
+The maximum number of [tag values](/influxdb/v1.4/concepts/glossary/#tag-values)
+allowed per [tag key]((/influxdb/v1.4/concepts/glossary/#tag-key).
 The default setting is `100000`.
 Change the setting to `0` to allow an unlimited number of tag values per tag
 key.
@@ -423,7 +423,7 @@ Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 ## [coordinator]
 
 This section contains configuration options for query management.
-For more on managing queries, see [Query Management](/influxdb/v1.3/troubleshooting/query_management/).
+For more on managing queries, see [Query Management](/influxdb/v1.4/troubleshooting/query_management/).
 
 ### write-timeout = "10s"
 
@@ -459,7 +459,7 @@ Environment variable: `INFLUXDB_COORDINATOR_LOG_QUERIES_AFTER`
 
 ### max-select-point = 0
 
-The maximum number of [points](/influxdb/v1.3/concepts/glossary/#point) that a
+The maximum number of [points](/influxdb/v1.4/concepts/glossary/#point) that a
 `SELECT` statement can process.
 The default setting (`0`) allows the `SELECT` statement to process an unlimited
 number of points.
@@ -468,7 +468,7 @@ Environment variable: `INFLUXDB_COORDINATOR_MAX_SELECT_POINT`
 
 ### max-select-series = 0
 
-The maximum number of [series](/influxdb/v1.3/concepts/glossary/#series) that a
+The maximum number of [series](/influxdb/v1.4/concepts/glossary/#series) that a
 `SELECT` statement can process.
 The default setting (`0`) allows the `SELECT` statement to process an unlimited
 number of series.
@@ -528,7 +528,7 @@ This section controls InfluxDB's [system self-monitoring](https://github.com/inf
 By default, InfluxDB writes the data to the `_internal` database.
 If that database does not exist, InfluxDB creates it automatically.
 The `DEFAULT` retention policy on the `_internal` database is seven days.
-If you want to use a retention policy other than the seven-day retention policy, you must [create](/influxdb/v1.3/query_language/database_management/#retention-policy-management) it.
+If you want to use a retention policy other than the seven-day retention policy, you must [create](/influxdb/v1.4/query_language/database_management/#retention-policy-management) it.
 
 ### store-enabled = true
 
@@ -551,10 +551,10 @@ Environment variable: `INFLUXDB_MONITOR_STORE_INTERVAL`
 
 ## [admin]
 
-<dt> In version 1.3, the web admin interface is no longer available in InfluxDB.
+<dt> Starting with version 1.3, the web admin interface is no longer available in InfluxDB.
 The interface does not run on port `8083` and InfluxDB ignores the `[admin]` section in the configuration file if that section is present.
-[Chronograf](/chronograf/v1.3/) replaces the web admin interface with improved tooling for querying data, writing data, and database management.
-See [Chronograf's transition guide](/chronograf/v1.3/guides/transition-web-admin-interface/) for more information.
+[Chronograf](/chronograf/latest/) replaces the web admin interface with improved tooling for querying data, writing data, and database management.
+See [Chronograf's transition guide](/chronograf/latest/guides/transition-web-admin-interface/) for more information.
 </dt>
 
 ## [http]
@@ -562,12 +562,12 @@ See [Chronograf's transition guide](/chronograf/v1.3/guides/transition-web-admin
 This section controls how InfluxDB configures the HTTP endpoints.
 These are the primary mechanisms for getting data into and out of InfluxDB.
 Edit the options in this section to enable HTTPS and authentication.
-See [Authentication and Authorization](/influxdb/v1.3/query_language/authentication_and_authorization/).
+See [Authentication and Authorization](/influxdb/v1.4/query_language/authentication_and_authorization/).
 
 ### enabled = true
 
 Set to `false` to disable HTTP.
-Note that the InfluxDB [command line interface (CLI)](/influxdb/v1.3/tools/shell/) connects to the database using the HTTP API.
+Note that the InfluxDB [command line interface (CLI)](/influxdb/v1.4/tools/shell/) connects to the database using the HTTP API.
 
 Environment variable: `INFLUXDB_HTTP_ENABLED`
 
@@ -639,7 +639,7 @@ Environment variable: `INFLUXDB_HTTP_SHARED_SECRET`
 
 ### max-row-limit = 0
 
-Limits the number of rows that the system can return in a [non-chunked](/influxdb/v1.3/tools/api/#query-string-parameters) query.
+Limits the number of rows that the system can return in a [non-chunked](/influxdb/v1.4/tools/api/#query-string-parameters) query.
 The default setting (`0`) allows for an unlimited number of rows.
 InfluxDB includes a `"partial":true` tag in the response body if query results exceed the `max-row-limit` setting.
 
@@ -672,7 +672,7 @@ Environment variable: `INFLUXDB_HTTP_MAX_BODY_SIZE`
 
 ## [subscriber]
 
-This section controls how [Kapacitor](/kapacitor/v1.3/) will receive data.
+This section controls how [Kapacitor](/kapacitor/v1.4/) will receive data.
 
 ### enabled = true
 
@@ -752,7 +752,7 @@ Environment variable: `INFLUXDB_GRAPHITE_PROTOCOL`
 
 The number of nodes that must confirm the write.
 If the requirement is not met the return value will be either `partial write` if some points in the batch fail or `write failure` if all points in the batch fail.
-For more information, see the Query String Parameters for Writes section in the [Line Protocol Syntax Reference ](/influxdb/v1.3/write_protocols/write_syntax/).
+For more information, see the Query String Parameters for Writes section in the [Line Protocol Syntax Reference ](/influxdb/v1.4/write_protocols/write_syntax/).
 
 Environment variable: `INFLUXDB_GRAPHITE_CONSISTENCY_LEVEL`
 
@@ -947,7 +947,7 @@ Environment variable: `INFLUXDB_OPENTSDB_BATCH_TIMEOUT`
 ## [[udp]]
 
 This section controls the listeners for InfluxDB line protocol data via UDP.
-See the [UDP page](/influxdb/v1.3/write_protocols/udp/) for more information.
+See the [UDP page](/influxdb/v1.4/write_protocols/udp/) for more information.
 
 ### enabled = false
 
@@ -1005,13 +1005,13 @@ Environment variable: `INFLUXDB_UDP_BATCH_SIZE`
 
 ### precision = ""
 
-[Time precision](/influxdb/v1.3/query_language/spec/#durations) used when decoding time values.  Defaults to `nanoseconds` which is the default of the database.
+[Time precision](/influxdb/v1.4/query_language/spec/#durations) used when decoding time values.  Defaults to `nanoseconds` which is the default of the database.
 
 Environment variable: `INFLUXDB_UDP_PRECISION`
 
 ## [continuous_queries]
 
-This section controls how [continuous queries (CQs)](/influxdb/v1.3/concepts/glossary/#continuous-query-cq) run within InfluxDB.
+This section controls how [continuous queries (CQs)](/influxdb/v1.4/concepts/glossary/#continuous-query-cq) run within InfluxDB.
 CQs are automated batches of queries that execute over recent time intervals.
 InfluxDB executes one auto-generated query per `GROUP BY time()` interval.
 
