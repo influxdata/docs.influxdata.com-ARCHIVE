@@ -1,18 +1,18 @@
 ---
 title: Getting Started
 menu:
-  influxdb_1_3:
+  influxdb_1_4:
     weight: 20
     parent: introduction
 ---
 
-With InfluxDB [installed](/influxdb/v1.3/introduction/installation), you're ready to start doing some awesome things.
-In this section we'll use the `influx` [command line interface](/influxdb/v1.3/tools/shell/) (CLI), which is included in all
+With InfluxDB [installed](/influxdb/v1.4/introduction/installation), you're ready to start doing some awesome things.
+In this section we'll use the `influx` [command line interface](/influxdb/v1.4/tools/shell/) (CLI), which is included in all
 InfluxDB packages and is a lightweight and simple way to interact with the database.
 The CLI communicates with InfluxDB directly by making requests to the InfluxDB HTTP API over port `8086` by default.
 
 > **Note:** The database can also be used by making raw HTTP requests.
-See [Writing Data](/influxdb/v1.3/guides/writing_data/) and [Querying Data](/influxdb/v1.3/guides/querying_data/)
+See [Writing Data](/influxdb/v1.4/guides/writing_data/) and [Querying Data](/influxdb/v1.4/guides/querying_data/)
 for examples with the `curl` application.
 
 ## Creating a database
@@ -24,8 +24,8 @@ The output should look like this:
 
 ```bash
 $ influx -precision rfc3339
-Connected to http://localhost:8086 version 1.3.x
-InfluxDB shell 1.3.x
+Connected to http://localhost:8086 version 1.4.x
+InfluxDB shell 1.4.x
 >
 ```
 
@@ -34,7 +34,7 @@ InfluxDB shell 1.3.x
 * The InfluxDB HTTP API runs on port `8086` by default.
 Therefore, `influx` will connect to port `8086` and `localhost` by default.
 If you need to alter these defaults, run `influx --help`.
-* The [`-precision` argument](/influxdb/v1.3/tools/shell/#influx-arguments) specifies the format/precision of any returned timestamps.
+* The [`-precision` argument](/influxdb/v1.4/tools/shell/#influx-arguments) specifies the format/precision of any returned timestamps.
 In the example above, `rfc3339` tells InfluxDB to return timestamps in [RFC3339 format](https://www.ietf.org/rfc/rfc3339.txt) (`YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ`).
 
 The command line is now ready to take input in the form of the Influx Query Language (a.k.a InfluxQL) statements.
@@ -125,7 +125,7 @@ stock,symbol=AAPL bid=127.46,ask=127.48
 temperature,machine=unit42,type=assembly external=25,internal=37 1434067467000000000
 ```
 
-> **Note:** More information on the line protocol can be found on the [Write Syntax](/influxdb/v1.3/write_protocols/write_syntax/) page.
+> **Note:** More information on the line protocol can be found on the [Write Syntax](/influxdb/v1.4/write_protocols/write_syntax/) page.
 
 To insert a single time-series datapoint into InfluxDB using the CLI, enter `INSERT` followed by a point:
 
@@ -171,7 +171,7 @@ time		                        	 external	  internal	 machine	type
 >
 ```
 
-InfluxQL has many [features and keywords](/influxdb/v1.3/query_language/spec/) that are not covered here,
+InfluxQL has many [features and keywords](/influxdb/v1.4/query_language/spec/) that are not covered here,
 including support for Go-style regex. For example:
 
 ```sql
@@ -184,8 +184,8 @@ including support for Go-style regex. For example:
 
 This is all you need to know to write data into InfluxDB and query it back.
 To learn more about the InfluxDB write protocol,
-check out the guide on [Writing Data](/influxdb/v1.3/guides/writing_data/).
+check out the guide on [Writing Data](/influxdb/v1.4/guides/writing_data/).
 To futher explore the query language,
-check out the guide on [Querying Data](/influxdb/v1.3/guides/querying_data/).
+check out the guide on [Querying Data](/influxdb/v1.4/guides/querying_data/).
 For more information on InfluxDB concepts, check out the [Key Concepts]
-(/influxdb/v1.3/concepts/key_concepts/) page.
+(/influxdb/v1.4/concepts/key_concepts/) page.
