@@ -1,17 +1,17 @@
 ---
 title: API Client Libraries
 aliases:
-    - influxdb/v1.3/clients/api_client_libraries/
-    - influxdb/v1.3/clients/
-    - influxdb/v1.3/clients/api
+    - influxdb/v1.4/clients/api_client_libraries/
+    - influxdb/v1.4/clients/
+    - influxdb/v1.4/clients/api
 menu:
-  influxdb_1_3:
+  influxdb_1_4:
     weight: 20
     parent: tools
 ---
 
 This is a list of the client libraries which have some support for InfluxDB version 0.9.
-Most should be fully compatible with InfluxDB version 1.3.
+Most should be fully compatible with InfluxDB version 1.4.
 Functionality will vary, and there are, as yet, no standard features that all libraries must implement in order to be listed here.
 
 ## Elixir
