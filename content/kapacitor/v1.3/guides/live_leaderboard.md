@@ -91,14 +91,10 @@ the incoming data until it has a task that wants it.
 
 What does a leaderboard need to do?
 
-1.
-Get the most recent score per player per game.
-2.
-Calculate the top X player scores per game.
-3.
-Publish the results.
-4.
-Store the results.
+1. Get the most recent score per player per game.
+1. Calculate the top X player scores per game.
+1. Publish the results.
+1. Store the results.
 
 To complete step one we need to buffer the incoming stream and return the most recent score update per player per game.
 Our [TICKscript](/kapacitor/v1.3/tick/) will look like this:
