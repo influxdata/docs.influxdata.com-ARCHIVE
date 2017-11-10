@@ -3,7 +3,7 @@ title: Upgrading to Kapacitor v1.3
 aliases:
     - kapacitor/v1.3/introduction/upgrading/
 menu:
-  kapacitor_1_3:
+  kapacitor_1_4:
     weight: 30
     parent: administration
 ---

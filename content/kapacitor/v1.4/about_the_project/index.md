@@ -3,7 +3,7 @@ title: About the project
 aliases:
     - kapacitor/v1.3/contributing/
 menu:
-  kapacitor_1_3:
+  kapacitor_1_4:
     name: About the project
     identifier: about_the_project
     weight: 50

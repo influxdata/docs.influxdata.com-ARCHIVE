@@ -2,7 +2,7 @@
 title: Alerts
 
 menu:
-  kapacitor_1_3:
+  kapacitor_1_4:
     identifier: alerts
     weight: 15
 ---

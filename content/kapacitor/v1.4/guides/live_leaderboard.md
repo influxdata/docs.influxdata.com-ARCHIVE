@@ -3,7 +3,7 @@ title: Live Leaderboard of game scores
 aliases:
     - kapacitor/v1.3/examples/live_leaderboard/
 menu:
-  kapacitor_1_3:
+  kapacitor_1_4:
     name: Live Leaderboard
     identifier: live_leaderboard
     weight: 10

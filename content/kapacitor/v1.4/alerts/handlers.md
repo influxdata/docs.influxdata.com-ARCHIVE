@@ -2,7 +2,7 @@
 title: Alert Handlers
 
 menu:
-  kapacitor_1_3:
+  kapacitor_1_4:
     name: Alert Handlers
     identifier: handlers
     weight: 10

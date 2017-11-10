@@ -2,7 +2,7 @@
 title: Pull Metrics
 
 menu:
-  kapacitor_1_3:
+  kapacitor_1_4:
     identifier: pull_metrics
     weight: 17
 ---

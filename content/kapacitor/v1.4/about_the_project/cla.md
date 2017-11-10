@@ -2,7 +2,7 @@
 title: CLA
 
 menu:
- kapacitor_1_3:
+ kapacitor_1_4:
   name: CLA
   weight: 30
   parent: about_the_project

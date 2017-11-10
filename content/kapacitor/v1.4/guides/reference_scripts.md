@@ -3,7 +3,7 @@ title: Reference TICKscripts
 aliases:
     - kapacitor/v1.3/examples/reference_scripts/
 menu:
-  kapacitor_1_3:
+  kapacitor_1_4:
     name: Reference TICKscripts
     identifier: reference_scripts
     weight: 20

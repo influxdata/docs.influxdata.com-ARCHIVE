@@ -1,10 +1,10 @@
 ---
-title: Kapacitor Version 1.3 Documentation
+title: Kapacitor Version 1.4 Documentation
 
 menu:
   kapacitor:
-    name: v1.3
-    identifier: kapacitor_1_3
+    name: v1.4
+    identifier: kapacitor_1_4
     weight: 0
 ---
 

@@ -2,7 +2,7 @@
 title: Lambda Expressions
 
 menu:
-  kapacitor_1_3:
+  kapacitor_1_4:
     identifier: expr
     weight: 20
     parent: tick

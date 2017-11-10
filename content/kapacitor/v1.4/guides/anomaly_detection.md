@@ -3,7 +3,7 @@ title: Custom Anomaly Detection
 aliases:
     - kapacitor/v1.3/examples/anomaly_detection/
 menu:
-  kapacitor_1_3:
+  kapacitor_1_4:
     name: Custom Anomaly Detection
     identifier: anomaly_detection
     weight: 20

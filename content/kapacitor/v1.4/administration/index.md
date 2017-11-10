@@ -2,7 +2,7 @@
 title: Administration
 
 menu:
-  kapacitor_1_3:
+  kapacitor_1_4:
     name: Administration
     identifier: administration
     weight: 40
