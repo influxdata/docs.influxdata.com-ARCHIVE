@@ -5,6 +5,14 @@ menu:
     weight: 0
     parent: about_the_project
 ---
+## v1.4.4 [2017-11-08]
+
+### Bugfixes
+- Use schema specified in mqtt_consumer input.
+- Redact Datadog API key in log output.
+- Fix error getting PIDs in Netstat input.
+- Support HOST_VAR envvar to locate /var in system input.
+- Use current time if Docker container read time is zero value.
 
 ## v1.4.3 [2017-10-25]
 
