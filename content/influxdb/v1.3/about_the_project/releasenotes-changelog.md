@@ -111,7 +111,8 @@ It offers a solution to the [time-structured merge tree](https://docs.influxdata
 With TSI, the number of series should be unbounded by the memory on the server hardware and the number of existing series will have a negligible impact on database startup time.
 See Paul Dix's blogpost [Path to 1 Billion Time Series: InfluxDB High Cardinality Indexing Ready for Testing](https://www.influxdata.com/path-1-billion-time-series-influxdb-high-cardinality-indexing-ready-testing/) for additional information.
 
-TSI is disabled by default in version 1.3.
+TSI is disabled by default in version 1.3.  It should be considered an `experimental feature` and 
+is not recommended for production deployment at this time.
 To enable TSI, uncomment the [`index-version` setting](/influxdb/v1.3/administration/config/#index-version-inmem) and set it to `tsi1`.
 The `index-version` setting is in the `[data]` section of the configuration file.
 Next, restart your InfluxDB instance.
