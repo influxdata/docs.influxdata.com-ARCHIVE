@@ -6,7 +6,7 @@ menu:
   kapacitor_1_4:
     name: Guides
     identifier: guides
-    weight: 2
+    weight: 3
 ---
 
 The following is a list of examples in no particular order that demonstrate some of the features of Kapacitor.
