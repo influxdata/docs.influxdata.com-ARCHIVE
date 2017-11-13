@@ -1,4 +1,4 @@
-title = "InfluxData Documentation"
+title = "Gunnar's Documentation"
 baseurl = "https://docs.influxdata.com"
 
 languageCode = "en-us"
@@ -3091,7 +3091,7 @@ SectionPagesMenu = "products"
  weight = 91
  url = "https://github.com/influxdata/telegraf/tree/release-1.1.0/plugins/inputs/webhooks"
  parent = "services"
- 
+
 # Telegraf v1.0 Sub-Menu - Introduction
    [[menu.telegraf_1_0]]
    name = "Download"
