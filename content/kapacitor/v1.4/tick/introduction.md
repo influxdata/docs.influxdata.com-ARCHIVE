@@ -78,6 +78,8 @@ Example 1 shows a runtime error that is thrown because a field value has gone mi
 
 **Example 2 &ndash; An elementary stream &rarr; from() pipeline**
 ```javascript
+dbrp "telegraf"."autogen"
+
 stream
     |from()
         .measurement('cpu')
@@ -87,12 +89,14 @@ stream
 The simple script in Example 2 can be used to create a task with the default Telegraf database.
 
 ```
-$ kapacitor define sf_task -type stream -tick sf.tick -dbrp telegraf.autogen
+$ kapacitor define sf_task -tick sf.tick
 ```
 
 The task, `sf_task`, will simply cache the latest cpu datapoint as JSON to the HTTP REST endpoint(e.g http<span>://localhost:</span><span>9092/kapacitor/v1/tasks/sf_task/dump</span>).  
 
-This example contains three nodes:
+This example contains a database and retention policy statement: `dbrp`.
+
+This example also contains three nodes:
 
    * The base `stream` node.
    * The requisite `from()` node, that defines the stream of data points.
@@ -115,7 +119,13 @@ batch
     |httpOut('dump')
 ```
 
-When used to create a task called `bq_task` with the default Telegraf database, the TICKscript in Example 3 will simply dump the last cpu datapoint of the batch of measurements representing the last 10 seconds of activity to the HTTP REST endpoint(e.g. <span>http</span>:<span>//</span>localhost<span>:9092</span><span>/kapacitor/v1/tasks/bq_task/dump</span>).
+The script in Example 3 can be used to define a task with the default Telegraf database.
+
+```
+$ kapacitor define bq_task -tick bq.tick -dbrp "telegraf"."autogen"
+```
+
+When used to create the `bq_task` with the default Telegraf database, the TICKscript in Example 3 will simply cache the last cpu datapoint of the batch of measurements representing the last 10 seconds of activity to the HTTP REST endpoint(e.g. <span>http</span>:<span>//</span>localhost<span>:9092</span><span>/kapacitor/v1/tasks/bq_task/dump</span>).
 
 This example contains three nodes:
 
@@ -137,6 +147,6 @@ It contains two property methods, which are called from the `query()` node.
 
 For basic examples of working with TICKscript see the latest examples in the code base on [GitHub](https://github.com/influxdata/kapacitor/tree/master/examples).
 
-For TICKscript solutions for intermediate to advanced use cases, see the [Guides](/kapacitor/v1.3/guides/) documentation.
+For TICKscript solutions for intermediate to advanced use cases, see the [Guides](/kapacitor/v1.4/guides/) documentation.
 
-The next section covers [TICKscript syntax](/kapacitor/v1.3/tick/syntax/) in more detail. [Continue...](/kapacitor/v1.3/tick/syntax/)
+The next section covers [TICKscript syntax](/kapacitor/v1.4/tick/syntax/) in more detail. [Continue...](/kapacitor/v1.4/tick/syntax/)

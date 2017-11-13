@@ -71,6 +71,7 @@ Keywords are tokens that have special meaning within a language and therefore ca
 | **OR** | Standard boolean disjunction operator. |
 | **lambda:** | Flags that what follows is to be interpreted as a lambda expression. |
 | **var** | Starts a variable declaration. |
+| **dbrp** | Starts a database declaration |
 
 
 Since the set of native node types available in TICKscript is limited, each node type, such as `batch` or `stream`, could be considered key.  Node types and their taxonomy are discussed in detail in the section [Taxonomy of node types](#taxonomy-of-node-types) below.  
@@ -447,7 +448,7 @@ Accessing data tags and fields, using string literals and accessing TICKscript v
    ```
    In Example 15 two values from the data frame are accessed.  In the `where()` method call the lambda expression uses the tag `"cpu"` to filter the data frame down to only datapoints whose "cpu" tag equals the literal value of `'cpu-total'`.  The chaining method `eval()` also takes a lambda expression that accesses the field `"usage-idle"` to calculate cpu processing power 'used'.  Note that the `groupBy()` method uses a string literal `'host'` to be matched to a tag name in the data series.  It will then group the data by this tag.  
 
-   * **Named lambda expression results** &ndash; Lambda expression results get named and added as fields to the data set using an `as()` method.  Think of the `as()` method functioning just like the 'AS' keyword in InfluxQL.  See the `eval()` method in Example 17 above.  The results of lambda expressions can be accessed in other Lambda expressions with double quotation marks, and in method calls with single quotes, just like data tags and fields.  
+   * **Named lambda expression results** &ndash; Lambda expression results get named and added as fields to the data set using an `as()` method.  Think of the `as()` method functioning just like the 'AS' keyword in InfluxQL.  See the `eval()` method in Example 15 above.  The results of lambda expressions can be accessed in other Lambda expressions with double quotation marks, and in method calls with single quotes, just like data tags and fields.  
 
   **Example 16 &ndash; Named lambda expression access**
 
@@ -603,13 +604,24 @@ Valid values for precision are the same as those used in InfluxDB.
 
 ## Statements
 
-There are two types of statements in TICKscript: Declarations and Expressions.  Declarations declare variables.  Expressions express a pipeline (a.k.a chain) of method calls, which create and set the properties of processing nodes.   
+There are two types of statements in TICKscript: Declarations and Expressions.  A declaration can declare either a variable or a database, with which the TICKscript will work.  Expressions express a pipeline (a.k.a chain) of method calls, which create processing nodes and set their properties.   
 
 ### Declarations
 
-Declarations begin with the `var` keyword followed by an identifier for the variable being declared.  An assignment operator follows with a literal right side value, which will set the type and value for the new variable.
+TICKscript works with two types of declarations: Database declarations and Variable declarations.  
 
-**Example 22 &ndash; Typical declarations**
+A **Database declaration** begins with the keyword `dbrp` and is followed by two strings separated by a period.  The first string declares the default database, with which the script will be used.  The second string declares its retention policy.  Note that the database and retention policy can also be declared using the flag `-dbrp` when defining the task with the command `kapacitor define` on the command-line, so this statement is optional.  When used, the Database declaration statement should be the first declaration of a TICKscript.
+
+**Example 22 &ndash; A Database declaration.**
+```
+dbrp "telegraf"."autogen"
+...
+```
+Example 22 declares that the TICKscript is to be used against the database `telegraf` with its retention policy `autogen`.
+
+A **Variable declaration** begins with the `var` keyword followed by an identifier for the variable being declared.  An assignment operator follows with a literal right side value, which will set the type and value for the new variable.
+
+**Example 23 &ndash; Typical declarations**
 ```javascript
 ...
 var db = 'website'
@@ -620,18 +632,18 @@ var name = 'test rule'
 var idVar = name + ':{{.Group}}'
 ...
 ```
-Example 22 shows six declaration statements. Five of them create variables holding strings and one a lambda expression.
+Example 23 shows six declaration statements. Five of them create variables holding strings and one a lambda expression.
 
 A declaration can also be used to assign an expression to a variable.  
 
-**Example 23 &ndash; Declaring an expression to a variable**
+**Example 24 &ndash; Declaring an expression to a variable**
 ```javascript
 var data = stream
     |from()
         .database(db)
         .retentionPolicy(rp)
 ```
-In Example 23 the `data` variable holds the stream pipeline declared in the expression beginning with the node `stream`.
+In Example 24 the `data` variable holds the stream pipeline declared in the expression beginning with the node `stream`.
 
 ### Expressions
 
@@ -641,7 +653,7 @@ Expressions can be written all on a single line, but this can lead to readabilit
 
 An expression ends with the last setter of the last node in the pipeline.
 
-**Example 24 &ndash; Single line expressions**
+**Example 25 &ndash; Single line expressions**
 ```javascript
 ...
 // Dataframe
@@ -652,9 +664,9 @@ var alert = data|eval(lambda: sigma("stat")).as('sigma').keep()|alert().id('{{ i
    .info(lambda: "stat" > info OR "sigma" > infoSig).warn(lambda: "stat" > warn OR "sigma" > warnSig).crit(lambda: "stat" > crit OR "sigma" > critSig)
 ...
 ```
-Example 24 shows an expression with a number of nodes and setters declared all on the same line.  While this is possible, it is not the recommended style.  Note also that the command line utility `tickfmt`, that comes with the Kapacitor distribution, can be used to reformat a TICKscript to follow the recommended style.     
+Example 25 shows an expression with a number of nodes and setters declared all on the same line.  While this is possible, it is not the recommended style.  Note also that the command line utility `tickfmt`, that comes with the Kapacitor distribution, can be used to reformat a TICKscript to follow the recommended style.     
 
-**Example 25 &ndash; Recommended expression syntax**
+**Example 26 &ndash; Recommended expression syntax**
 ```javascript
 ...
 // Dataframe
@@ -681,7 +693,7 @@ alert
   .log('/tmp/mem_alert_log.txt')
 ...  
 ```
-Example 25, taken from the example [mem_alert_batch.tick](https://github.com/influxdata/kapacitor/blob/03267847561b6261798407e62e5245bc54a7cf0c/examples/telegraf/mem/mem_alert_batch.tick) in the code base, shows the recommended style for writing expressions.  This example contains three expression statements.  The first begins with the declaration of the batch node for the data frame.  This gets assigned to the variable `data`.  The second expression takes the `data` variable and defines thresholds for warning messages.  This gets assigned to the `alert` variable.  The third expression sets the `log` property of the `alert` node.  
+Example 26, taken from the example [mem_alert_batch.tick](https://github.com/influxdata/kapacitor/blob/03267847561b6261798407e62e5245bc54a7cf0c/examples/telegraf/mem/mem_alert_batch.tick) in the code base, shows the recommended style for writing expressions.  This example contains three expression statements.  The first begins with the declaration of the batch node for the data frame.  This gets assigned to the variable `data`.  The second expression takes the `data` variable and defines thresholds for warning messages.  This gets assigned to the `alert` variable.  The third expression sets the `log` property of the `alert` node.  
 
 ### Node creation
 
@@ -689,7 +701,7 @@ With two exceptions (`stream` and `batch`) nodes always occur in pipeline expres
 
 For each node type, the method that creates an instance of that type uses the same signature.  So if a `query` node creates an `eval` node and adds it to the chain, and if a `from` node can also create an `eval` node and add it to the chain, the chaining method creating a new `eval` node will accept the same arguments (e.g. one or more lambda expressions) regardless of which node created it.  
 
-**Example 26 &ndash; Instantiate eval node in stream**
+**Example 27 &ndash; Instantiate eval node in stream**
 ```javascript
 ...
 var data = stream
@@ -704,9 +716,9 @@ var data = stream
     .keep()
     ...
 ```  
-Example 26 creates three nodes: `stream`, `from` and `eval`.
+Example 27 creates three nodes: `stream`, `from` and `eval`.
 
-**Example 27 &ndash; Instantiate eval node in batch**
+**Example 28 &ndash; Instantiate eval node in batch**
 ```javascript
 ...
 var data = batch
@@ -719,9 +731,9 @@ var data = batch
     .keep()
     ...
 ```
-Example 27 also creates three nodes: `batch`,`query` and `eval`.
+Example 28 also creates three nodes: `batch`,`query` and `eval`.
 
-Both Examples 26 and 27 create an `eval` node.  Despite that `eval` is chained below a `from` node in Example 26 and below a `query` node in Example 27, the signature of the chaining method remains the same.  
+Both Examples 27 and 28 create an `eval` node.  Despite that `eval` is chained below a `from` node in Example 27 and below a `query` node in Example 28, the signature of the chaining method remains the same.  
 
 A short taxonomy of nodes is presented in the section [Taxonomy of node types](#taxonomy-of-node-types) below.  The catalog of node types is available under the topic [TICKscript nodes](/kapacitor/v1.3/nodes/).
 
@@ -738,7 +750,7 @@ Each node in the pipeline can alter the data passed along to the nodes that foll
 It is important to become familiar with the [reference documentation](/kapacitor/v1.3/nodes/) for each node type before using it in a TICKscript.
 
 
-**Example 28 &ndash; a typical pipeline**
+**Example 29 &ndash; a typical pipeline**
 ```javascript
 // Dataframe
 var data = batch
@@ -763,7 +775,7 @@ var alert = data
 alert
   .log('/tmp/cpu_alert_log.txt')
 ```
-Example 28 shows a `batch`&rarr;`query` pipeline broken into three expressions using two variables.  The first expression declares the data frame, the second expression the alert thresholds and the final expression sets the `log` property of the `alert` node.  The entire pipeline begins with the declaration of the `batch` node and ends with the call to the property method `log()`.    
+Example 29 shows a `batch`&rarr;`query` pipeline broken into three expressions using two variables.  The first expression declares the data frame, the second expression the alert thresholds and the final expression sets the `log` property of the `alert` node.  The entire pipeline begins with the declaration of the `batch` node and ends with the call to the property method `log()`.    
 
 # Taxonomy of node types
 
@@ -857,7 +869,7 @@ SELECT {<FIELD_KEY> | <TAG_KEY> | <FUNCTION>([<FIELD_KEY>|<TAG_KEY])} FROM <DATA
    * The `FROM` clause requires the database, retention policy and the measurement name from which the values will be selected.  Each of these tokens is separated by a dot. The values for the database and retention policy need to be set out using double quotes.
    * The `WHERE` clause requires a conditional expression.  This may include `AND` and `OR` boolean operators as well as mathematical operations.
 
-**Example 29 &ndash; A simple InfluxQL query statement**
+**Example 30 &ndash; A simple InfluxQL query statement**
 ```javascript
 batch
     |query('SELECT cpu, usage_idle FROM "telegraf"."autogen".cpu WHERE time > now() - 10s')
@@ -866,9 +878,9 @@ batch
     |httpOut('dump')
 ```
 
-Example 29 shows a simple `SELECT` statement that takes the `cpu` tag and the `usage_idle` field from the cpu measurement as recorded over the last ten seconds.
+Example 30 shows a simple `SELECT` statement that takes the `cpu` tag and the `usage_idle` field from the cpu measurement as recorded over the last ten seconds.
 
-**Example 30 &ndash; A simple InfluxQL query statement with variables**
+**Example 31 &ndash; A simple InfluxQL query statement with variables**
 ```javascript
 var my_field = 'usage_idle'
 var my_tag = 'cpu'
@@ -879,9 +891,9 @@ batch
         .every(10s)
     |httpOut('dump')
 ```
-Example 30 reiterates the same query from Example 29, but shows how to add variables to the query string.
+Example 31 reiterates the same query from Example 30, but shows how to add variables to the query string.
 
-**Example 31 &ndash; An InfluxQL query statement with a function call**
+**Example 32 &ndash; An InfluxQL query statement with a function call**
 ```javascript
 ...
 var data = batch
@@ -891,7 +903,7 @@ var data = batch
     .groupBy('host')
 ...
 ```
-Example 31 shows a `SELECT` statement that includes a function and mathematical operation in the `SELECT` clause, as well as the `AS` alias clause.
+Example 32 shows a `SELECT` statement that includes a function and mathematical operation in the `SELECT` clause, as well as the `AS` alias clause.
 
 Note that the select statement gets passed directly to the InfluxDB API.  Within the InfluxQL query string field and tag names do not need to be accessed using double quotes, as is the case elsewhere in TICKscript.  However, the database name, and retention policy do get wrapped in double quotes. String literals, such as `'cpu-total'` are expressed inside the query string with single quotation marks.
 
@@ -911,7 +923,7 @@ The full range of lambda expressions and their uses is presented in the topic [L
 
 Within lambda expressions TICKscript variables can be accessed using their plain identifiers.  Tag and field values from data series's can be accessed by surrounding them in double quotes.  Literals can also be used directly.  
 
-**Example 32 &ndash; Lambda expressions**
+**Example 33 &ndash; Lambda expressions**
 ```javascript
 ...
 // Parameters
@@ -947,7 +959,7 @@ var alert = data
 alert
   .log('/tmp/mem_alert_log.txt')
 ```
-Example 32 contains four lambda expressions.  The first expression is passed to the `eval` node.  It calls the internal stateful function `sigma`, into which it passes the named result `stat`, which is set using the `AS` clause in the query string of the `query` node.  Through the `.as()` setter of the `eval` node its result is named `sigma`.  Three other lambda expressions occur inside the threshold determining property methods of the `alert` node.  These lambda expressions also access the named results `stat` and `sigma` as well as variables declared at the start of the script.  They each define a series of boolean operations, which set the level of the alert message.  
+Example 33 contains four lambda expressions.  The first expression is passed to the `eval` node.  It calls the internal stateful function `sigma`, into which it passes the named result `stat`, which is set using the `AS` clause in the query string of the `query` node.  Through the `.as()` setter of the `eval` node its result is named `sigma`.  Three other lambda expressions occur inside the threshold determining property methods of the `alert` node.  These lambda expressions also access the named results `stat` and `sigma` as well as variables declared at the start of the script.  They each define a series of boolean operations, which set the level of the alert message.  
 
 
 # Summary of variable use between syntax sub-spaces
@@ -1066,7 +1078,7 @@ As of Kapacitor 1.3 it is possible to declare a variable using double quotes, wh
 
 When using the InfluxDBOut node, be careful not to create circular rewrites to the same database and the same measurement from which data is being read.
 
-**Example 33 &ndash; A circular rewrite**
+**Example 34 &ndash; A circular rewrite**
 ```javascript
 stream
    |from()
@@ -1077,9 +1089,9 @@ stream
       .database('telegraf')
       .measurement('system')
 ```
-> Note: Example 33 illustrates how an infinite loop might be created.  Please, DO NOT USE IT!    
+> Note: Example 34 illustrates how an infinite loop might be created.  Please, DO NOT USE IT!    
 
-The script in Example 33 could be used to define a task on the database `telegraf` with the retention policy `autogen`.  For example:
+The script in Example 34 could be used to define a task on the database `telegraf` with the retention policy `autogen`.  For example:
 
 ```
 kapacitor define circular_task -type stream -tick circular_rewrite.tick  -dbrp telegraf.autogen
