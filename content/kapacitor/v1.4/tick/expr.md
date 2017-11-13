@@ -4,7 +4,7 @@ title: Lambda Expressions
 menu:
   kapacitor_1_4:
     identifier: expr
-    weight: 20
+    weight: 10
     parent: tick
 ---
 
@@ -260,4 +260,3 @@ The `if` function's return type is the same type as its second and third argumen
 ```javascript
 if(condition, true expression, false expression)
 ```
-
