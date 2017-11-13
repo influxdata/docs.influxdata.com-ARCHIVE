@@ -257,7 +257,7 @@ Environment variable: `INFLUXDB_BIND_ADDRESS`
 
 ### GOMAXPROCS
 
-GOMAXPROCS is a GoLang 
+GOMAXPROCS is a GoLang setting.
 
 The default value of GOMAXPROCS is the number of CPUs (whatever your operating system considers to be a CPU -- 
 this could be the number of cores i.e. GOMAXPROCS=32 for a 32 core machine) visible to the program *at startup.*  
