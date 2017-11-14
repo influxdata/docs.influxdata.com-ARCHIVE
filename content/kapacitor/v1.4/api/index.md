@@ -8,4 +8,4 @@ menu:
     weight: 5
 ---
 
-## [HTTP API Reference](/kapacitor/v1.3/api/api/)
+## [HTTP API Reference](/kapacitor/v1.4/api/api/)

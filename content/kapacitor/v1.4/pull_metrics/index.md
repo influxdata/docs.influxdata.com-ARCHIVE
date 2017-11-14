@@ -7,4 +7,4 @@ menu:
     weight: 17
 ---
 
-## [Scraping and Discovery](/kapacitor/v1.3/pull_metrics/scraping-and-discovery/)
+## [Scraping and Discovery](/kapacitor/v1.4/pull_metrics/scraping-and-discovery/)

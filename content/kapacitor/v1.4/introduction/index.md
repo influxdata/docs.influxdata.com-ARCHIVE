@@ -13,8 +13,8 @@ The introductory documentation includes all the information you need to get up a
 ## [Download](https://influxdata.com/downloads/#kapacitor)
 Download Kapacitor.
 
-## [Installation](/kapacitor/v1.3/introduction/installation/)
+## [Installation](/kapacitor/v1.4/introduction/installation/)
 Directions for installing, starting, and configuring Kapacitor.
 
-## [Getting Started](/kapacitor/v1.3/introduction/getting_started/)
+## [Getting Started](/kapacitor/v1.4/introduction/getting_started/)
 This guide will walk you through how to process stream and batch data and teaches you the basics of using and running a Kapacitor daemon.

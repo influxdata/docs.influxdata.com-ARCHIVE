@@ -1,7 +1,7 @@
 ---
 title: How to contribute a new output to Kapacitor
 aliases:
-    - kapacitor/v1.3/contributing/custom_output/
+    - kapacitor/v1.4/contributing/custom_output/
 menu:
   kapacitor_1_4:
     name: Writing your own Output node

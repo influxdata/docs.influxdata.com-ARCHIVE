@@ -1,7 +1,7 @@
 ---
 title: Kapacitor as a Continous Query engine
 aliases:
-    - kapacitor/v1.3/examples/continuous_queries/
+    - kapacitor/v1.4/examples/continuous_queries/
 menu:
   kapacitor_1_4:
     name: Kapacitor as a Continuous Query engine

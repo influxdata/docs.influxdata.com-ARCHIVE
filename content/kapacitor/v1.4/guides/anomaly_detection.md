@@ -1,7 +1,7 @@
 ---
 title: Custom Anomaly Detection
 aliases:
-    - kapacitor/v1.3/examples/anomaly_detection/
+    - kapacitor/v1.4/examples/anomaly_detection/
 menu:
   kapacitor_1_4:
     name: Custom Anomaly Detection
@@ -18,7 +18,7 @@ Functions.  This guide will walk through the necessary steps for
 writing and using your own UDFs within Kapacitor.
 
 If you haven't already, we recommend following the [getting started
-guide](/kapacitor/v1.3/introduction/getting_started/) for Kapacitor
+guide](/kapacitor/v1.4/introduction/getting_started/) for Kapacitor
 prior to continuing.
 
 ## 3D Printing

@@ -1,7 +1,7 @@
 ---
 title: About the project
 aliases:
-    - kapacitor/v1.3/contributing/
+    - kapacitor/v1.4/contributing/
 menu:
   kapacitor_1_4:
     name: About the project
@@ -15,4 +15,4 @@ the code see [CONTRIBUTING.md](https://github.com/influxdb/kapacitor/blob/master
 
 We will also ask you to sign our CLA which can be found [here](http://influxdb.com/community/cla.html)
 
-If you want Kapacitor to be able to output to you own endpoint see this [How To](/kapacitor/v1.3/about_the_project/custom_output/).
+If you want Kapacitor to be able to output to you own endpoint see this [How To](/kapacitor/v1.4/about_the_project/custom_output/).

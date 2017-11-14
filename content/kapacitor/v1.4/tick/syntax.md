@@ -24,7 +24,7 @@ menu:
 
 # Concepts
 
-The sections [Introduction](/kapacitor/v1.3/tick/introduction/) and [Getting Started](/kapacitor/v1.3/introduction/getting_started/) present the key concepts of **nodes** and **pipelines**.  Nodes represent process invocation units, that either take data as a batch, or in a point by point stream, and then alter that data, store that data, or based on changes in that data trigger some other activity  such as an alert.  Pipelines are simply logically organized chains of nodes.
+The sections [Introduction](/kapacitor/v1.4/tick/introduction/) and [Getting Started](/kapacitor/v1.4/introduction/getting_started/) present the key concepts of **nodes** and **pipelines**.  Nodes represent process invocation units, that either take data as a batch, or in a point by point stream, and then alter that data, store that data, or based on changes in that data trigger some other activity  such as an alert.  Pipelines are simply logically organized chains of nodes.
 
 In Kapacitor TICKscript is used to define tasks directly and to define template tasks, which act as templates that can be reused to generate new tasks.
 
@@ -114,7 +114,7 @@ Chaining operators are used within expressions to define pipelines or pipeline s
 
 ## Variables and literals
 
-Variables in TICKscript are useful for storing and reusing values and for providing a friendly mnemonic for quickly understanding what a variable represents. They are typically declared along with the assignment of a literal value.  In a TICKscript intended to be used as a [Template Task](/kapacitor/v1.3/guides/template_tasks/) they can also be declared with simply a type identifier.  
+Variables in TICKscript are useful for storing and reusing values and for providing a friendly mnemonic for quickly understanding what a variable represents. They are typically declared along with the assignment of a literal value.  In a TICKscript intended to be used as a [Template Task](/kapacitor/v1.4/guides/template_tasks/) they can also be declared with simply a type identifier.  
 
 ### Variables
 
@@ -122,7 +122,7 @@ Variables are declared using the keyword `var` at the start of a declaration.
 Variables are immutable and cannot be reassigned new values later on in the script, though they can be used in other declarations and can be passed into methods.
 Variables are also used in template tasks as placeholders to be filled when the template is used to create a new task.
 
-For a detailed presentation on working with **template tasks** see the guide [Template tasks](/kapacitor/v1.3/guides/template_tasks/).
+For a detailed presentation on working with **template tasks** see the guide [Template tasks](/kapacitor/v1.4/guides/template_tasks/).
 If a TICKscript proves useful, it may be desirable to reuse it as a template task in order to quickly create other similar tasks.  For this reason it is recommended to use variables as much as possible.
 
 #### Naming variables
@@ -269,7 +269,7 @@ String templates allow node properties, tags and fields to be added to a string.
 ```    
 In Example 8 three values are added to two string templates.  In the call to the setter `id()` the value of the tag `"host"` is added to the start of the string.  The call to the setter `message()` then adds the `id` and then the value of the field `"stat"`.  
 
-String templates are currently applicable with the [Alert](/kapacitor/v1.3/nodes/alert_node/) node and are discussed further in the section [Accessing values in string templates](#accessing-values-in-string-templates) below.
+String templates are currently applicable with the [Alert](/kapacitor/v1.4/nodes/alert_node/) node and are discussed further in the section [Accessing values in string templates](#accessing-values-in-string-templates) below.
 
 String templates can also include flow statements such as `if...else` as well as calls to internal formating methods.
 
@@ -350,7 +350,7 @@ In Example 11 the first three lines show the assignment of regular expressions t
 
 ##### Lambda expressions as literals
 
-A lambda expression is a parameter representing a short easily understood function to be passed into a method call or held in a variable. It can wrap a boolean expression, a mathematical expression, a call to an internal function or a combination of these three.  Lambda expressions always operate on point data.  They are generally compact and as such are used as literals, which eventually get passed into node methods.  Internal functions that can be used in Lambda expressions are discussed in the sections [Type conversion](#type-conversion) and [Lambda Expressions](#lambda-expressions) below.  Lambda expressions are presented in detail in the topic [Lambda Expressions](/kapacitor/v1.3/tick/expr/).   
+A lambda expression is a parameter representing a short easily understood function to be passed into a method call or held in a variable. It can wrap a boolean expression, a mathematical expression, a call to an internal function or a combination of these three.  Lambda expressions always operate on point data.  They are generally compact and as such are used as literals, which eventually get passed into node methods.  Internal functions that can be used in Lambda expressions are discussed in the sections [Type conversion](#type-conversion) and [Lambda Expressions](#lambda-expressions) below.  Lambda expressions are presented in detail in the topic [Lambda Expressions](/kapacitor/v1.4/tick/expr/).   
 
 Lambda expressions begin with the token `lambda` followed by a colon, ':' &ndash; `lambda:`.  
 
@@ -474,7 +474,7 @@ Accessing data tags and fields, using string literals and accessing TICKscript v
   ```
   Example 16 above continues the pipeline from Example 15.  In Example 15, the results of the lambda expression named as `'used'` under the `eval()` method are then accessed in Example 16 as an argument to the method `'mean()'`, which then names its result _as_ `'stat'`.  A new statement then begins.  This contains a new call to the method `'eval()'`, which has a lambda expression that accesses `"stat"` and sets its result _as_ `'sigma'`.  The named result `"stat"` is also accessed in the `message()` method and the threshold methods (`info()`,`warn()`,`crit()`) under the `alert()` chaining method.  The named result `"sigma"` is also used in the lambda expressions of these methods.
 
-  **Note &ndash; InfluxQL nodes and tag or field access** &ndash; [InfluxQL nodes](/kapacitor/v1.3/nodes/influx_q_l_node/), such as `mean()` in Example 16, are special nodes that wrap InfluxQL functions. See the section [Taxonomy of node types](#taxonomy-of-node-types) below.  When accessing field values, tag values or named results with this node type single quotes are used.
+  **Note &ndash; InfluxQL nodes and tag or field access** &ndash; [InfluxQL nodes](/kapacitor/v1.4/nodes/influx_q_l_node/), such as `mean()` in Example 16, are special nodes that wrap InfluxQL functions. See the section [Taxonomy of node types](#taxonomy-of-node-types) below.  When accessing field values, tag values or named results with this node type single quotes are used.
 
   **Example 17 &ndash; Field access with an InfluxQL node**
   ```javascript
@@ -510,7 +510,7 @@ As mentioned in the section [String templates](#string-templates) it is possible
 ```
 In Example 18 above, the property method `.id()` uses the value of the tag in the data stream with the key `"host"` to set the part of the value of the id.  This value is then used in the property method `message()` as `.ID`.  This property method also access the value from the named result `"stat"`.    
 
-For more specific information see the [Alert](/kapacitor/v1.3/nodes/alert_node/) node documentation.
+For more specific information see the [Alert](/kapacitor/v1.4/nodes/alert_node/) node documentation.
 
 ##### Type conversion
 
@@ -588,7 +588,7 @@ stream
        .precision('s')
 ...      
 ```
-In Example 21, taken from the guide topic [Continuous Query](/kapacitor/v1.3/guides/continuous_queries/), the time precision of the series to be written to the database "telegraf" as measurement "mean_cpu_idle" is set to the unit seconds.  
+In Example 21, taken from the guide topic [Continuous Query](/kapacitor/v1.4/guides/continuous_queries/), the time precision of the series to be written to the database "telegraf" as measurement "mean_cpu_idle" is set to the unit seconds.  
 
 Valid values for precision are the same as those used in InfluxDB.
 
@@ -735,7 +735,7 @@ Example 28 also creates three nodes: `batch`,`query` and `eval`.
 
 Both Examples 27 and 28 create an `eval` node.  Despite that `eval` is chained below a `from` node in Example 27 and below a `query` node in Example 28, the signature of the chaining method remains the same.  
 
-A short taxonomy of nodes is presented in the section [Taxonomy of node types](#taxonomy-of-node-types) below.  The catalog of node types is available under the topic [TICKscript nodes](/kapacitor/v1.3/nodes/).
+A short taxonomy of nodes is presented in the section [Taxonomy of node types](#taxonomy-of-node-types) below.  The catalog of node types is available under the topic [TICKscript nodes](/kapacitor/v1.4/nodes/).
 
 ### Pipelines
 
@@ -747,7 +747,7 @@ Each node in the pipeline has internal properties that can be set using property
 
 Each node in the pipeline can alter the data passed along to the nodes that follow: filtering it, restructuring it, reducing it to a new measurement and more.  In some nodes, setting a property can significantly alter the data received by downstream siblings.  For example, with an `eval` node, setting the names of lambda functions with the `as` property effectively blocks field and tag names from being passed downstream.  For this reason it might be important to set the `keep` property, in order to keep them in the pipeline if they will be needed by a later node.  
 
-It is important to become familiar with the [reference documentation](/kapacitor/v1.3/nodes/) for each node type before using it in a TICKscript.
+It is important to become familiar with the [reference documentation](/kapacitor/v1.4/nodes/) for each node type before using it in a TICKscript.
 
 
 **Example 29 &ndash; a typical pipeline**
@@ -779,14 +779,14 @@ Example 29 shows a `batch`&rarr;`query` pipeline broken into three expressions u
 
 # Taxonomy of node types
 
-To aid in understanding the roles that different nodes play in a pipeline, a short taxonomy has been defined.  For complete documentation on each node type see the topic [TICKscript Nodes](/kapacitor/v1.3/nodes/).
+To aid in understanding the roles that different nodes play in a pipeline, a short taxonomy has been defined.  For complete documentation on each node type see the topic [TICKscript Nodes](/kapacitor/v1.4/nodes/).
 
 **Special nodes**
 
 These nodes are special because they can be created and returned using identifiers other than their type names.  An alias representing an aspect of their functionality can be used.  This may apply in all instances, as with the InfluxQL node, or only in one, as with the Alert node.
 
-   * [`alert`](/kapacitor/v1.3/nodes/alert_node/) - can be returned as a `deadman` switch
-   * [`influxQL`](/kapacitor/v1.3/nodes/influx_q_l_node/) - directly calls functions in InfluxQL, so can be returned when a TICKScript chaining method using the name of the InfluxQL method is called.
+   * [`alert`](/kapacitor/v1.4/nodes/alert_node/) - can be returned as a `deadman` switch
+   * [`influxQL`](/kapacitor/v1.4/nodes/influx_q_l_node/) - directly calls functions in InfluxQL, so can be returned when a TICKScript chaining method using the name of the InfluxQL method is called.
       * example 1: `from()|mean()` - calls the mean function on a data stream defined in the from node and returns an InfluxQL node.
       * example 2: `query()|mode()` - calls the mode function on the data frame defined in the Query node and returns an InfluxQL node.
 
@@ -794,65 +794,65 @@ These nodes are special because they can be created and returned using identifie
 
 The first node in a TICKscript pipeline is either `batch` or `stream`. They define the _data source_ used in processing the data.
 
-   * [`batch`](/kapacitor/v1.3/nodes/batch_node/) - chaining method call syntax is not used in the declaration.
-   * [`stream`](/kapacitor/v1.3/nodes/stream_node/) - chaining method call syntax is not used in the declaration.
+   * [`batch`](/kapacitor/v1.4/nodes/batch_node/) - chaining method call syntax is not used in the declaration.
+   * [`stream`](/kapacitor/v1.4/nodes/stream_node/) - chaining method call syntax is not used in the declaration.
 
 **Data definition nodes**
 
 Mode definition nodes are typically followed by nodes whose purpose is to define a _frame_ or _stream_ of data to be processed by other nodes.
 
-   * [`from`](/kapacitor/v1.3/nodes/from_node/) - has an empty chaining method.  Can follow only a `stream` node.  Configure using property methods.
-   * [`query`](/kapacitor/v1.3/nodes/query_node/) - chaining method takes a query string. Can follow only a `batch` node.
+   * [`from`](/kapacitor/v1.4/nodes/from_node/) - has an empty chaining method.  Can follow only a `stream` node.  Configure using property methods.
+   * [`query`](/kapacitor/v1.4/nodes/query_node/) - chaining method takes a query string. Can follow only a `batch` node.
 
 **Data manipulation nodes**
 
 Values within the data set can be altered or generated using manipulation nodes.
 
-   * [`default`](/kapacitor/v1.3/nodes/default_node/) - has an empty chaining method. Its `field` and `tag` properties can be used to set default values for fields and tags in the data series.
-   * [`sample`](/kapacitor/v1.3/nodes/sample_node/) - chaining method takes an int64 or a duration string.  It extracts a sample of data based on the count or the time period.
-   * [`shift`](/kapacitor/v1.3/nodes/shift_node/) - chaining method takes a duration string. It shifts datapoint time stamps.  The duration string can be proceeded by a minus sign to shift the stamps backward in time.
-   * [`where`](/kapacitor/v1.3/nodes/where_node/) - chaining method takes a lambda node. It works with a `stream` pipeline like the `WHERE` statement in InfluxQL.
-   * [`window`](/kapacitor/v1.3/nodes/window_node/) - has an empty chaining method.  It is configured using property methods. It works in a `stream` pipeline usually after the `from` node to cache data within a moving time range.
+   * [`default`](/kapacitor/v1.4/nodes/default_node/) - has an empty chaining method. Its `field` and `tag` properties can be used to set default values for fields and tags in the data series.
+   * [`sample`](/kapacitor/v1.4/nodes/sample_node/) - chaining method takes an int64 or a duration string.  It extracts a sample of data based on the count or the time period.
+   * [`shift`](/kapacitor/v1.4/nodes/shift_node/) - chaining method takes a duration string. It shifts datapoint time stamps.  The duration string can be proceeded by a minus sign to shift the stamps backward in time.
+   * [`where`](/kapacitor/v1.4/nodes/where_node/) - chaining method takes a lambda node. It works with a `stream` pipeline like the `WHERE` statement in InfluxQL.
+   * [`window`](/kapacitor/v1.4/nodes/window_node/) - has an empty chaining method.  It is configured using property methods. It works in a `stream` pipeline usually after the `from` node to cache data within a moving time range.
 
 **Processing nodes**
 
 Once the data set has been defined it can be passed to other nodes, which will process it, will transform it or will trigger other processes based on changes within.
 
 * Nodes for changing the structure of the data or for mixing together pipelines:
-   * [`combine`](/kapacitor/v1.3/nodes/combine_node/) - chaining method takes a list of one or more lambda expression. It can combine the data from a single node with itself.
-   * [`eval`](/kapacitor/v1.3/nodes/eval_node/) - chaining method takes a list of one or more lambda expressions. It evaluates expressions on each datapoint it receives and, using its `as` property, makes the results available to nodes that follow in the pipeline.  Note that when multiple lambda expressions are used, the `as` method can contain a list of strings to name the results of each lambda.
-   * [`groupBy`](/kapacitor/v1.3/nodes/group_by_node/) - chaining method takes a list of one or more strings representing the tags of the series. It groups incoming data by tags.
-   * [`join`](/kapacitor/v1.3/nodes/join_node/) - chaining method takes a list of one or more variables referencing pipeline expressions. It joins data from any number of pipelines based on matching time stamps.
-   * [`union`](/kapacitor/v1.3/nodes/union_node/) -  chaining method takes a list of one or more variables referencing pipeline expressions. It creates a union of any number of pipelines.
+   * [`combine`](/kapacitor/v1.4/nodes/combine_node/) - chaining method takes a list of one or more lambda expression. It can combine the data from a single node with itself.
+   * [`eval`](/kapacitor/v1.4/nodes/eval_node/) - chaining method takes a list of one or more lambda expressions. It evaluates expressions on each datapoint it receives and, using its `as` property, makes the results available to nodes that follow in the pipeline.  Note that when multiple lambda expressions are used, the `as` method can contain a list of strings to name the results of each lambda.
+   * [`groupBy`](/kapacitor/v1.4/nodes/group_by_node/) - chaining method takes a list of one or more strings representing the tags of the series. It groups incoming data by tags.
+   * [`join`](/kapacitor/v1.4/nodes/join_node/) - chaining method takes a list of one or more variables referencing pipeline expressions. It joins data from any number of pipelines based on matching time stamps.
+   * [`union`](/kapacitor/v1.4/nodes/union_node/) -  chaining method takes a list of one or more variables referencing pipeline expressions. It creates a union of any number of pipelines.
 
 * Nodes for transforming or processing the datapoints within the data set:
-   * [`delete`](/kapacitor/v1.3/nodes/delete_node/) - empty chaining method. It relies on properties (`field`, `tag`) to delete fields and tags from datapoints.
-   * [`derivative`](/kapacitor/v1.3/nodes/derivative_node/) - chaining method takes a string representing a field for which a derivative will be calculated.
-   * [`flatten`](/kapacitor/v1.3/nodes/flatten_node/) - empty chaining method.  It relies on properties to flatten a set of points on specific dimensions.
-   * [`influxQL`](/kapacitor/v1.3/nodes/influx_q_l_node/) - special node (see above). It provides access to InfluxQL functions. It cannot be created directly.
-   * [`stateCount`](/kapacitor/v1.3/nodes/state_count_node/) - chaining method takes a lambda expression. It computes the number of consecutive points that are in a given state.
-   * [`stateDuration`](/kapacitor/v1.3/nodes/state_duration_node/) - chaining method takes a lambda expression. It computes the duration of time that a given state lasts.
-   * [`stats`](/kapacitor/v1.3/nodes/stats_node/) - chaining method takes a duration expression. It emits internal stats about another node at the given interval.
+   * [`delete`](/kapacitor/v1.4/nodes/delete_node/) - empty chaining method. It relies on properties (`field`, `tag`) to delete fields and tags from datapoints.
+   * [`derivative`](/kapacitor/v1.4/nodes/derivative_node/) - chaining method takes a string representing a field for which a derivative will be calculated.
+   * [`flatten`](/kapacitor/v1.4/nodes/flatten_node/) - empty chaining method.  It relies on properties to flatten a set of points on specific dimensions.
+   * [`influxQL`](/kapacitor/v1.4/nodes/influx_q_l_node/) - special node (see above). It provides access to InfluxQL functions. It cannot be created directly.
+   * [`stateCount`](/kapacitor/v1.4/nodes/state_count_node/) - chaining method takes a lambda expression. It computes the number of consecutive points that are in a given state.
+   * [`stateDuration`](/kapacitor/v1.4/nodes/state_duration_node/) - chaining method takes a lambda expression. It computes the duration of time that a given state lasts.
+   * [`stats`](/kapacitor/v1.4/nodes/stats_node/) - chaining method takes a duration expression. It emits internal stats about another node at the given interval.
 
 * Nodes for triggering events, processes:
-   * [`alert`](/kapacitor/v1.3/nodes/alert_node/) - empty chaining method. It relies on a number of properties for configuring the emission of alerts.  
-   * [`deadman`](/kapacitor/v1.3//nodes/stream_node/#deadman) - actually a helper function, it is an alias for an `alert` that gets triggered when data flow falls below a specified threshold.
-   * [`httpOut`](/kapacitor/v1.3/nodes/http_out_node/) - chaining method takes a string. It caches the most recent data for each group it receives, making it available over the Kapicator http server using the string argument as the final locator context.
-   * [`httpPost`](/kapacitor/v1.3/nodes/http_post_node/) - chaining method takes an array of strings.  It can also be empty. It posts data to HTTP endpoints specified in the string array.
-   * [`influxDBOut`](/kapacitor/v1.3/nodes/influx_d_b_out_node/) - empty chaining method &ndash; configured through property setters.  It  writes data to InfluxDB as it is received.
-   * [`k8sAutoscale`](/kapacitor/v1.3/nodes/k8s_autoscale_node/) - empty chaining method. It relies on a number of properties for configuration. It triggers autoscale on Kubernetes&trade; resources.
-   * [`kapacitorLoopback`](/kapacitor/v1.3/nodes/kapacitor_loopback_node/) - empty chaining method &ndash;  configured through property setters. It writes data back into the Kapacitor stream.  
-   * [`log`](/kapacitor/v1.3/nodes/log_node/) - empty chaining method. It relies on `level` and `prefix` properties for configuration. It logs all data that passes through it.
+   * [`alert`](/kapacitor/v1.4/nodes/alert_node/) - empty chaining method. It relies on a number of properties for configuring the emission of alerts.  
+   * [`deadman`](/kapacitor/v1.4//nodes/stream_node/#deadman) - actually a helper function, it is an alias for an `alert` that gets triggered when data flow falls below a specified threshold.
+   * [`httpOut`](/kapacitor/v1.4/nodes/http_out_node/) - chaining method takes a string. It caches the most recent data for each group it receives, making it available over the Kapicator http server using the string argument as the final locator context.
+   * [`httpPost`](/kapacitor/v1.4/nodes/http_post_node/) - chaining method takes an array of strings.  It can also be empty. It posts data to HTTP endpoints specified in the string array.
+   * [`influxDBOut`](/kapacitor/v1.4/nodes/influx_d_b_out_node/) - empty chaining method &ndash; configured through property setters.  It  writes data to InfluxDB as it is received.
+   * [`k8sAutoscale`](/kapacitor/v1.4/nodes/k8s_autoscale_node/) - empty chaining method. It relies on a number of properties for configuration. It triggers autoscale on Kubernetes&trade; resources.
+   * [`kapacitorLoopback`](/kapacitor/v1.4/nodes/kapacitor_loopback_node/) - empty chaining method &ndash;  configured through property setters. It writes data back into the Kapacitor stream.  
+   * [`log`](/kapacitor/v1.4/nodes/log_node/) - empty chaining method. It relies on `level` and `prefix` properties for configuration. It logs all data that passes through it.
 
 **User Defined Functions**
 
 User defined functions are nodes that implement functionality defined by user programs or scripts that run as separate processes and that communicate with Kapacitor over sockets or standard system data streams.
 
-   * [`UDF`](/kapacitor/v1.3/nodes/u_d_f_node/) - signature, properties and functionality defined by the user.  To learn about writing User Defined Functions, see the [User Defined Functions Webinar](https://www.influxdata.com/training/advanced-kapacitor-training-user-defined-functions-udfs/?ao_campid=70137000000JiJA) available at [Influx on-line University](https://www.influxdata.com/university/).
+   * [`UDF`](/kapacitor/v1.4/nodes/u_d_f_node/) - signature, properties and functionality defined by the user.  To learn about writing User Defined Functions, see the [User Defined Functions Webinar](https://www.influxdata.com/training/advanced-kapacitor-training-user-defined-functions-udfs/?ao_campid=70137000000JiJA) available at [Influx on-line University](https://www.influxdata.com/university/).
 
 **Internally used nodes - Do Not use**
 
-   * [`noOp`](/kapacitor/v1.3/nodes/no_op_node/) - a helper node that performs no operations.  Do not use it!
+   * [`noOp`](/kapacitor/v1.4/nodes/no_op_node/) - a helper node that performs no operations.  Do not use it!
 
 
 # InfluxQL in TICKscript
@@ -919,7 +919,7 @@ The internal functions can be stateless, such as common mathematical and string 
  * `count` - counts the number of values processed.
  * `spread`- computes the running range of all values.
 
-The full range of lambda expressions and their uses is presented in the topic [Lambda Expressions](/kapacitor/v1.3/tick/expr/).
+The full range of lambda expressions and their uses is presented in the topic [Lambda Expressions](/kapacitor/v1.4/tick/expr/).
 
 Within lambda expressions TICKscript variables can be accessed using their plain identifiers.  Tag and field values from data series's can be accessed by surrounding them in double quotes.  Literals can also be used directly.  
 
@@ -1106,4 +1106,4 @@ When using the `deadman` method along with one or more `alert` nodes or when usi
 
 # Where to next?
 
-See the [examples](https://github.com/influxdata/kapacitor/tree/master/examples) in the code base on Github.  See also the detailed use case solutions in the section [Guides](/kapacitor/v1.3/guides).  
+See the [examples](https://github.com/influxdata/kapacitor/tree/master/examples) in the code base on Github.  See also the detailed use case solutions in the section [Guides](/kapacitor/v1.4/guides).  
