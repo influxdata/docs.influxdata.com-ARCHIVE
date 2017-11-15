@@ -6,7 +6,7 @@ menu:
   kapacitor_1_4:
     name: Window
     identifier: window_node
-    weight: 300
+    weight: 320
     parent: nodes
 ---
 
@@ -31,7 +31,7 @@ Example:
         |httpOut('recent')
 ```
 
-his example emits the last `10 minute` period every `5 minutes` to the pipeline&#39;s `httpOut` node. 
+This example emits the last `10 minute` period every `5 minutes` to the pipeline&#39;s `httpOut` node. 
 Because `every` is less than `period`, each time the window is emitted it contains `5 minutes` of 
 new data and `5 minutes` of the previous period&#39;s data. 
 
@@ -43,60 +43,62 @@ Index
 
 ### Properties
 
--	[Align](/kapacitor/v1.3/nodes/window_node/#align)
--	[Every](/kapacitor/v1.3/nodes/window_node/#every)
--	[EveryCount](/kapacitor/v1.3/nodes/window_node/#everycount)
--	[FillPeriod](/kapacitor/v1.3/nodes/window_node/#fillperiod)
--	[Period](/kapacitor/v1.3/nodes/window_node/#period)
--	[PeriodCount](/kapacitor/v1.3/nodes/window_node/#periodcount)
+-	[Align](/kapacitor/v1.4/nodes/window_node/#align)
+-	[Every](/kapacitor/v1.4/nodes/window_node/#every)
+-	[EveryCount](/kapacitor/v1.4/nodes/window_node/#everycount)
+-	[FillPeriod](/kapacitor/v1.4/nodes/window_node/#fillperiod)
+-	[Period](/kapacitor/v1.4/nodes/window_node/#period)
+-	[PeriodCount](/kapacitor/v1.4/nodes/window_node/#periodcount)
 
 ### Chaining Methods
 
--	[Alert](/kapacitor/v1.3/nodes/window_node/#alert)
--	[Bottom](/kapacitor/v1.3/nodes/window_node/#bottom)
--	[Combine](/kapacitor/v1.3/nodes/window_node/#combine)
--	[Count](/kapacitor/v1.3/nodes/window_node/#count)
--	[CumulativeSum](/kapacitor/v1.3/nodes/window_node/#cumulativesum)
--	[Deadman](/kapacitor/v1.3/nodes/window_node/#deadman)
--	[Default](/kapacitor/v1.3/nodes/window_node/#default)
--	[Delete](/kapacitor/v1.3/nodes/window_node/#delete)
--	[Derivative](/kapacitor/v1.3/nodes/window_node/#derivative)
--	[Difference](/kapacitor/v1.3/nodes/window_node/#difference)
--	[Distinct](/kapacitor/v1.3/nodes/window_node/#distinct)
--	[Elapsed](/kapacitor/v1.3/nodes/window_node/#elapsed)
--	[Eval](/kapacitor/v1.3/nodes/window_node/#eval)
--	[First](/kapacitor/v1.3/nodes/window_node/#first)
--	[Flatten](/kapacitor/v1.3/nodes/window_node/#flatten)
--	[GroupBy](/kapacitor/v1.3/nodes/window_node/#groupby)
--	[HoltWinters](/kapacitor/v1.3/nodes/window_node/#holtwinters)
--	[HoltWintersWithFit](/kapacitor/v1.3/nodes/window_node/#holtwinterswithfit)
--	[HttpOut](/kapacitor/v1.3/nodes/window_node/#httpout)
--	[HttpPost](/kapacitor/v1.3/nodes/window_node/#httppost)
--	[InfluxDBOut](/kapacitor/v1.3/nodes/window_node/#influxdbout)
--	[Join](/kapacitor/v1.3/nodes/window_node/#join)
--	[K8sAutoscale](/kapacitor/v1.3/nodes/window_node/#k8sautoscale)
--	[KapacitorLoopback](/kapacitor/v1.3/nodes/window_node/#kapacitorloopback)
--	[Last](/kapacitor/v1.3/nodes/window_node/#last)
--	[Log](/kapacitor/v1.3/nodes/window_node/#log)
--	[Max](/kapacitor/v1.3/nodes/window_node/#max)
--	[Mean](/kapacitor/v1.3/nodes/window_node/#mean)
--	[Median](/kapacitor/v1.3/nodes/window_node/#median)
--	[Min](/kapacitor/v1.3/nodes/window_node/#min)
--	[Mode](/kapacitor/v1.3/nodes/window_node/#mode)
--	[MovingAverage](/kapacitor/v1.3/nodes/window_node/#movingaverage)
--	[Percentile](/kapacitor/v1.3/nodes/window_node/#percentile)
--	[Sample](/kapacitor/v1.3/nodes/window_node/#sample)
--	[Shift](/kapacitor/v1.3/nodes/window_node/#shift)
--	[Spread](/kapacitor/v1.3/nodes/window_node/#spread)
--	[StateCount](/kapacitor/v1.3/nodes/window_node/#statecount)
--	[StateDuration](/kapacitor/v1.3/nodes/window_node/#stateduration)
--	[Stats](/kapacitor/v1.3/nodes/window_node/#stats)
--	[Stddev](/kapacitor/v1.3/nodes/window_node/#stddev)
--	[Sum](/kapacitor/v1.3/nodes/window_node/#sum)
--	[Top](/kapacitor/v1.3/nodes/window_node/#top)
--	[Union](/kapacitor/v1.3/nodes/window_node/#union)
--	[Where](/kapacitor/v1.3/nodes/window_node/#where)
--	[Window](/kapacitor/v1.3/nodes/window_node/#window)
+-	[Alert](/kapacitor/v1.4/nodes/window_node/#alert)
+-	[Bottom](/kapacitor/v1.4/nodes/window_node/#bottom)
+-	[Combine](/kapacitor/v1.4/nodes/window_node/#combine)
+-	[Count](/kapacitor/v1.4/nodes/window_node/#count)
+-	[CumulativeSum](/kapacitor/v1.4/nodes/window_node/#cumulativesum)
+-	[Deadman](/kapacitor/v1.4/nodes/window_node/#deadman)
+-	[Default](/kapacitor/v1.4/nodes/window_node/#default)
+-	[Delete](/kapacitor/v1.4/nodes/window_node/#delete)
+-	[Derivative](/kapacitor/v1.4/nodes/window_node/#derivative)
+-	[Difference](/kapacitor/v1.4/nodes/window_node/#difference)
+-	[Distinct](/kapacitor/v1.4/nodes/window_node/#distinct)
+-	[Elapsed](/kapacitor/v1.4/nodes/window_node/#elapsed)
+-	[Eval](/kapacitor/v1.4/nodes/window_node/#eval)
+-	[First](/kapacitor/v1.4/nodes/window_node/#first)
+-	[Flatten](/kapacitor/v1.4/nodes/window_node/#flatten)
+-	[GroupBy](/kapacitor/v1.4/nodes/window_node/#groupby)
+-	[HoltWinters](/kapacitor/v1.4/nodes/window_node/#holtwinters)
+-	[HoltWintersWithFit](/kapacitor/v1.4/nodes/window_node/#holtwinterswithfit)
+-	[HttpOut](/kapacitor/v1.4/nodes/window_node/#httpout)
+-	[HttpPost](/kapacitor/v1.4/nodes/window_node/#httppost)
+-	[InfluxDBOut](/kapacitor/v1.4/nodes/window_node/#influxdbout)
+-	[Join](/kapacitor/v1.4/nodes/window_node/#join)
+-	[K8sAutoscale](/kapacitor/v1.4/nodes/window_node/#k8sautoscale)
+-	[KapacitorLoopback](/kapacitor/v1.4/nodes/window_node/#kapacitorloopback)
+-	[Last](/kapacitor/v1.4/nodes/window_node/#last)
+-	[Log](/kapacitor/v1.4/nodes/window_node/#log)
+-	[Max](/kapacitor/v1.4/nodes/window_node/#max)
+-	[Mean](/kapacitor/v1.4/nodes/window_node/#mean)
+-	[Median](/kapacitor/v1.4/nodes/window_node/#median)
+-	[Min](/kapacitor/v1.4/nodes/window_node/#min)
+-	[Mode](/kapacitor/v1.4/nodes/window_node/#mode)
+-	[MovingAverage](/kapacitor/v1.4/nodes/window_node/#movingaverage)
+-	[Percentile](/kapacitor/v1.4/nodes/window_node/#percentile)
+-	[Sample](/kapacitor/v1.4/nodes/window_node/#sample)
+-	[Shift](/kapacitor/v1.4/nodes/window_node/#shift)
+-	[Sideload](/kapacitor/v1.4/nodes/window_node/#sideload)
+-	[Spread](/kapacitor/v1.4/nodes/window_node/#spread)
+-	[StateCount](/kapacitor/v1.4/nodes/window_node/#statecount)
+-	[StateDuration](/kapacitor/v1.4/nodes/window_node/#stateduration)
+-	[Stats](/kapacitor/v1.4/nodes/window_node/#stats)
+-	[Stddev](/kapacitor/v1.4/nodes/window_node/#stddev)
+-	[Sum](/kapacitor/v1.4/nodes/window_node/#sum)
+-	[SwarmAutoscale](/kapacitor/v1.4/nodes/window_node/#swarmautoscale)
+-	[Top](/kapacitor/v1.4/nodes/window_node/#top)
+-	[Union](/kapacitor/v1.4/nodes/window_node/#union)
+-	[Where](/kapacitor/v1.4/nodes/window_node/#where)
+-	[Window](/kapacitor/v1.4/nodes/window_node/#window)
 
 Properties
 ----------
@@ -145,7 +147,7 @@ node.everyCount(value int64)
 
 ### FillPeriod
 
-FillPeriod instructs the [WindowNode](/kapacitor/v1.3/nodes/window_node/) to wait till the period has elapsed before emitting the first batch. 
+FillPeriod instructs the [WindowNode](/kapacitor/v1.4/nodes/window_node/) to wait till the period has elapsed before emitting the first batch. 
 This only applies if the period is greater than the every value. 
 
 
@@ -191,7 +193,7 @@ Create an alert node, which can trigger alerts.
 node|alert()
 ```
 
-Returns: [AlertNode](/kapacitor/v1.3/nodes/alert_node/)
+Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
 
 ### Bottom
@@ -203,7 +205,7 @@ Select the bottom `num` points for `field` and sort by any extra tags or fields.
 node|bottom(num int64, field string, fieldsAndTags ...string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 
 ### Combine
@@ -215,7 +217,7 @@ Combine this node with itself. The data are combined on timestamp.
 node|combine(expressions ...ast.LambdaNode)
 ```
 
-Returns: [CombineNode](/kapacitor/v1.3/nodes/combine_node/)
+Returns: [CombineNode](/kapacitor/v1.4/nodes/combine_node/)
 
 
 ### Count
@@ -227,7 +229,7 @@ Count the number of points.
 node|count(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 
 ### CumulativeSum
@@ -240,7 +242,7 @@ A point is emitted for every point collected.
 node|cumulativeSum(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 
 ### Deadman
@@ -288,7 +290,7 @@ Example:
 
 The `id` and `message` alert properties can be configured globally via the &#39;deadman&#39; configuration section. 
 
-Since the [AlertNode](/kapacitor/v1.3/nodes/alert_node/) is the last piece it can be further modified as usual. 
+Since the [AlertNode](/kapacitor/v1.4/nodes/alert_node/) is the last piece it can be further modified as usual. 
 Example: 
 
 
@@ -325,7 +327,7 @@ Example:
 node|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
 ```
 
-Returns: [AlertNode](/kapacitor/v1.3/nodes/alert_node/)
+Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
 
 ### Default
@@ -337,7 +339,7 @@ Create a node that can set defaults for missing tags or fields.
 node|default()
 ```
 
-Returns: [DefaultNode](/kapacitor/v1.3/nodes/default_node/)
+Returns: [DefaultNode](/kapacitor/v1.4/nodes/default_node/)
 
 
 ### Delete
@@ -349,7 +351,7 @@ Create a node that can delete tags or fields.
 node|delete()
 ```
 
-Returns: [DeleteNode](/kapacitor/v1.3/nodes/delete_node/)
+Returns: [DeleteNode](/kapacitor/v1.4/nodes/delete_node/)
 
 
 ### Derivative
@@ -361,7 +363,7 @@ Create a new node that computes the derivative of adjacent points.
 node|derivative(field string)
 ```
 
-Returns: [DerivativeNode](/kapacitor/v1.3/nodes/derivative_node/)
+Returns: [DerivativeNode](/kapacitor/v1.4/nodes/derivative_node/)
 
 
 ### Difference
@@ -373,7 +375,7 @@ Compute the difference between points independent of elapsed time.
 node|difference(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 
 ### Distinct
@@ -385,7 +387,7 @@ Produce batch of only the distinct points.
 node|distinct(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 
 ### Elapsed
@@ -397,7 +399,7 @@ Compute the elapsed time between points
 node|elapsed(field string, unit time.Duration)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 
 ### Eval
@@ -411,7 +413,7 @@ The results are available to later expressions.
 node|eval(expressions ...ast.LambdaNode)
 ```
 
-Returns: [EvalNode](/kapacitor/v1.3/nodes/eval_node/)
+Returns: [EvalNode](/kapacitor/v1.4/nodes/eval_node/)
 
 
 ### First
@@ -423,7 +425,7 @@ Select the first point.
 node|first(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 
 ### Flatten
@@ -435,7 +437,7 @@ Flatten points with similar times into a single point.
 node|flatten()
 ```
 
-Returns: [FlattenNode](/kapacitor/v1.3/nodes/flatten_node/)
+Returns: [FlattenNode](/kapacitor/v1.4/nodes/flatten_node/)
 
 
 ### GroupBy
@@ -456,7 +458,7 @@ Example:
 node|groupBy(tag ...interface{})
 ```
 
-Returns: [GroupByNode](/kapacitor/v1.3/nodes/group_by_node/)
+Returns: [GroupByNode](/kapacitor/v1.4/nodes/group_by_node/)
 
 
 ### HoltWinters
@@ -468,7 +470,7 @@ Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_lang
 node|holtWinters(field string, h int64, m int64, interval time.Duration)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 
 ### HoltWintersWithFit
@@ -481,7 +483,7 @@ This method also outputs all the points used to fit the data in addition to the 
 node|holtWintersWithFit(field string, h int64, m int64, interval time.Duration)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 
 ### HttpOut
@@ -497,7 +499,7 @@ For example, if the task endpoint is at `/kapacitor/v1/tasks/&lt;task_id&gt;` an
 node|httpOut(endpoint string)
 ```
 
-Returns: [HTTPOutNode](/kapacitor/v1.3/nodes/http_out_node/)
+Returns: [HTTPOutNode](/kapacitor/v1.4/nodes/http_out_node/)
 
 
 ### HttpPost
@@ -511,7 +513,7 @@ endpoint property method.
 node|httpPost(url ...string)
 ```
 
-Returns: [HTTPPostNode](/kapacitor/v1.3/nodes/http_post_node/)
+Returns: [HTTPPostNode](/kapacitor/v1.4/nodes/http_post_node/)
 
 
 ### InfluxDBOut
@@ -523,7 +525,7 @@ Create an influxdb output node that will store the incoming data into InfluxDB.
 node|influxDBOut()
 ```
 
-Returns: [InfluxDBOutNode](/kapacitor/v1.3/nodes/influx_d_b_out_node/)
+Returns: [InfluxDBOutNode](/kapacitor/v1.4/nodes/influx_d_b_out_node/)
 
 
 ### Join
@@ -535,7 +537,7 @@ Join this node with other nodes. The data are joined on timestamp.
 node|join(others ...Node)
 ```
 
-Returns: [JoinNode](/kapacitor/v1.3/nodes/join_node/)
+Returns: [JoinNode](/kapacitor/v1.4/nodes/join_node/)
 
 
 ### K8sAutoscale
@@ -547,7 +549,7 @@ Create a node that can trigger autoscale events for a kubernetes cluster.
 node|k8sAutoscale()
 ```
 
-Returns: [K8sAutoscaleNode](/kapacitor/v1.3/nodes/k8s_autoscale_node/)
+Returns: [K8sAutoscaleNode](/kapacitor/v1.4/nodes/k8s_autoscale_node/)
 
 
 ### KapacitorLoopback
@@ -559,7 +561,7 @@ Create an kapacitor loopback node that will send data back into Kapacitor as a s
 node|kapacitorLoopback()
 ```
 
-Returns: [KapacitorLoopbackNode](/kapacitor/v1.3/nodes/kapacitor_loopback_node/)
+Returns: [KapacitorLoopbackNode](/kapacitor/v1.4/nodes/kapacitor_loopback_node/)
 
 
 ### Last
@@ -571,7 +573,7 @@ Select the last point.
 node|last(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 
 ### Log
@@ -583,7 +585,7 @@ Create a node that logs all data it receives.
 node|log()
 ```
 
-Returns: [LogNode](/kapacitor/v1.3/nodes/log_node/)
+Returns: [LogNode](/kapacitor/v1.4/nodes/log_node/)
 
 
 ### Max
@@ -595,7 +597,7 @@ Select the maximum point.
 node|max(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 
 ### Mean
@@ -607,7 +609,7 @@ Compute the mean of the data.
 node|mean(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 
 ### Median
@@ -620,7 +622,7 @@ if you want the median point use `.percentile(field, 50.0)`.
 node|median(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 
 ### Min
@@ -632,7 +634,7 @@ Select the minimum point.
 node|min(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 
 ### Mode
@@ -644,7 +646,7 @@ Compute the mode of the data.
 node|mode(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 
 ### MovingAverage
@@ -657,7 +659,7 @@ No points are emitted until the window is full.
 node|movingAverage(field string, window int64)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 
 ### Percentile
@@ -669,7 +671,7 @@ Select a point at the given percentile. This is a selector function, no interpol
 node|percentile(field string, percentile float64)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 
 ### Sample
@@ -683,7 +685,7 @@ One point will be emitted every count or duration specified.
 node|sample(rate interface{})
 ```
 
-Returns: [SampleNode](/kapacitor/v1.3/nodes/sample_node/)
+Returns: [SampleNode](/kapacitor/v1.4/nodes/sample_node/)
 
 
 ### Shift
@@ -695,7 +697,19 @@ Create a new node that shifts the incoming points or batches in time.
 node|shift(shift time.Duration)
 ```
 
-Returns: [ShiftNode](/kapacitor/v1.3/nodes/shift_node/)
+Returns: [ShiftNode](/kapacitor/v1.4/nodes/shift_node/)
+
+
+### Sideload
+
+Create a node that can load data from external sources 
+
+
+```javascript
+node|sideload()
+```
+
+Returns: [SideloadNode](/kapacitor/v1.4/nodes/sideload_node/)
 
 
 ### Spread
@@ -707,7 +721,7 @@ Compute the difference between `min` and `max` points.
 node|spread(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 
 ### StateCount
@@ -719,7 +733,7 @@ Create a node that tracks number of consecutive points in a given state.
 node|stateCount(expression ast.LambdaNode)
 ```
 
-Returns: [StateCountNode](/kapacitor/v1.3/nodes/state_count_node/)
+Returns: [StateCountNode](/kapacitor/v1.4/nodes/state_count_node/)
 
 
 ### StateDuration
@@ -731,7 +745,7 @@ Create a node that tracks duration in a given state.
 node|stateDuration(expression ast.LambdaNode)
 ```
 
-Returns: [StateDurationNode](/kapacitor/v1.3/nodes/state_duration_node/)
+Returns: [StateDurationNode](/kapacitor/v1.4/nodes/state_duration_node/)
 
 
 ### Stats
@@ -745,7 +759,7 @@ This means the interval time is independent of the times of the data points the 
 node|stats(interval time.Duration)
 ```
 
-Returns: [StatsNode](/kapacitor/v1.3/nodes/stats_node/)
+Returns: [StatsNode](/kapacitor/v1.4/nodes/stats_node/)
 
 
 ### Stddev
@@ -757,7 +771,7 @@ Compute the standard deviation.
 node|stddev(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 
 ### Sum
@@ -769,7 +783,19 @@ Compute the sum of all values.
 node|sum(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+
+
+### SwarmAutoscale
+
+Create a node that can trigger autoscale events for a docker swarm cluster. 
+
+
+```javascript
+node|swarmAutoscale()
+```
+
+Returns: [SwarmAutoscaleNode](/kapacitor/v1.4/nodes/swarm_autoscale_node/)
 
 
 ### Top
@@ -781,7 +807,7 @@ Select the top `num` points for `field` and sort by any extra tags or fields.
 node|top(num int64, field string, fieldsAndTags ...string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.3/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 
 ### Union
@@ -793,7 +819,7 @@ Perform the union of this node and all other given nodes.
 node|union(node ...Node)
 ```
 
-Returns: [UnionNode](/kapacitor/v1.3/nodes/union_node/)
+Returns: [UnionNode](/kapacitor/v1.4/nodes/union_node/)
 
 
 ### Where
@@ -805,7 +831,7 @@ Create a new node that filters the data stream by a given expression.
 node|where(expression ast.LambdaNode)
 ```
 
-Returns: [WhereNode](/kapacitor/v1.3/nodes/where_node/)
+Returns: [WhereNode](/kapacitor/v1.4/nodes/where_node/)
 
 
 ### Window
@@ -819,5 +845,5 @@ NOTE: Window can only be applied to stream edges.
 node|window()
 ```
 
-Returns: [WindowNode](/kapacitor/v1.3/nodes/window_node/)
+Returns: [WindowNode](/kapacitor/v1.4/nodes/window_node/)
 

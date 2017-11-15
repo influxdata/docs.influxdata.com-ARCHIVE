@@ -42,21 +42,21 @@ Index
 
 ### Properties
 
--	[Buffer](/kapacitor/v1.3/nodes/influx_d_b_out_node/#buffer)
--	[Cluster](/kapacitor/v1.3/nodes/influx_d_b_out_node/#cluster)
--	[Create](/kapacitor/v1.3/nodes/influx_d_b_out_node/#create)
--	[Database](/kapacitor/v1.3/nodes/influx_d_b_out_node/#database)
--	[FlushInterval](/kapacitor/v1.3/nodes/influx_d_b_out_node/#flushinterval)
--	[Measurement](/kapacitor/v1.3/nodes/influx_d_b_out_node/#measurement)
--	[Precision](/kapacitor/v1.3/nodes/influx_d_b_out_node/#precision)
--	[RetentionPolicy](/kapacitor/v1.3/nodes/influx_d_b_out_node/#retentionpolicy)
--	[Tag](/kapacitor/v1.3/nodes/influx_d_b_out_node/#tag)
--	[WriteConsistency](/kapacitor/v1.3/nodes/influx_d_b_out_node/#writeconsistency)
+-	[Buffer](/kapacitor/v1.4/nodes/influx_d_b_out_node/#buffer)
+-	[Cluster](/kapacitor/v1.4/nodes/influx_d_b_out_node/#cluster)
+-	[Create](/kapacitor/v1.4/nodes/influx_d_b_out_node/#create)
+-	[Database](/kapacitor/v1.4/nodes/influx_d_b_out_node/#database)
+-	[FlushInterval](/kapacitor/v1.4/nodes/influx_d_b_out_node/#flushinterval)
+-	[Measurement](/kapacitor/v1.4/nodes/influx_d_b_out_node/#measurement)
+-	[Precision](/kapacitor/v1.4/nodes/influx_d_b_out_node/#precision)
+-	[RetentionPolicy](/kapacitor/v1.4/nodes/influx_d_b_out_node/#retentionpolicy)
+-	[Tag](/kapacitor/v1.4/nodes/influx_d_b_out_node/#tag)
+-	[WriteConsistency](/kapacitor/v1.4/nodes/influx_d_b_out_node/#writeconsistency)
 
 ### Chaining Methods
 
--	[Deadman](/kapacitor/v1.3/nodes/influx_d_b_out_node/#deadman)
--	[Stats](/kapacitor/v1.3/nodes/influx_d_b_out_node/#stats)
+-	[Deadman](/kapacitor/v1.4/nodes/influx_d_b_out_node/#deadman)
+-	[Stats](/kapacitor/v1.4/nodes/influx_d_b_out_node/#stats)
 
 Properties
 ----------
@@ -231,7 +231,7 @@ Example:
 
 The `id` and `message` alert properties can be configured globally via the &#39;deadman&#39; configuration section. 
 
-Since the [AlertNode](/kapacitor/v1.3/nodes/alert_node/) is the last piece it can be further modified as usual. 
+Since the [AlertNode](/kapacitor/v1.4/nodes/alert_node/) is the last piece it can be further modified as usual. 
 Example: 
 
 
@@ -268,7 +268,7 @@ Example:
 node|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
 ```
 
-Returns: [AlertNode](/kapacitor/v1.3/nodes/alert_node/)
+Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
 
 ### Stats
@@ -282,5 +282,5 @@ This means the interval time is independent of the times of the data points the 
 node|stats(interval time.Duration)
 ```
 
-Returns: [StatsNode](/kapacitor/v1.3/nodes/stats_node/)
+Returns: [StatsNode](/kapacitor/v1.4/nodes/stats_node/)
 
