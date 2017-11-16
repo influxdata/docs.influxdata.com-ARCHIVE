@@ -1,7 +1,7 @@
 ---
 title: Frequently Asked Questions (FAQ)
 menu:
-  chronograf_1_3:
+  chronograf_1_4:
     weight: 0
     parent: Troubleshooting
 ---
