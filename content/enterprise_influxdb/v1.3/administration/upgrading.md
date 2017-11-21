@@ -27,7 +27,7 @@ It is recommended to create a full backup of your cluster prior to executing the
 already have incremental backups being created as part of your standard operating procedures, you should 
 trigger a final incremental backup before proceeding with the upgrade.
 <dt>
-Note that you need to ensure you have sufficient disk space before triggering the backup.
+__NOTE:__ You need to ensure you have sufficient disk space before triggering the backup!
 </dt>
 The following command uses the [version 1.2 backup syntax](https://docs.influxdata.com/enterprise_influxdb/v1.2/guides/backup-and-restore/#syntax) 
 to create an incremental backup of your cluster and it stores that backup in the current directory.
@@ -180,6 +180,20 @@ The new configuration options are set to their default settings.
 Follow the links for more information about those options.
 
 ### Step 5: Restart the influxdb process
+
+<dt>
+**NOTE: As part of the changes associated with InfluxEnterprise 1.3, the hinted handoff queue is now segmented by node and
+shard. See 
+[Release Notes/Change Log](https://docs.influxdata.com/enterprise_influxdb/v1.3/about-the-project/release-notes-changelog/#v1-3-0-2017-06-21).  
+As a result, when you restart data nodes, you will see log messages indicating that there is a "protocol" issue writing points 
+from the hinted handoff queue between 1.2 and 1.3 nodes. These will resolve themselves once all of the dat nodes have been
+upgraded.
+
+As a result of this change, if you need to downgrade to 1.2 for any reason, you must halt inbound writes while you downgrade
+the data nodes because the hinted handoff segmentation is not compatible from 1.3 to 1.2.  You can stop write traffic at the
+load balancer, by removing ALL data nodes temporarily while you downgrade the binaries and configuration files.  See Step 2
+above.
+</dt>
 
 #### Data node restart
 **sysvinit systems**
