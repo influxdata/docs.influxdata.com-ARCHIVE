@@ -63,7 +63,7 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.3.7_c1.3.7.x8
 
 ### Step 2: Install the 1.3.7 meta nodes packages
 
-#### Meta node package Install
+#### Meta node package install
 
 **Ubuntu & Debian (64-bit)**
 ```
@@ -99,16 +99,16 @@ The [`influxd-ctl` tool](/enterprise_influxdb/v1.3/features/cluster-commands/) i
 Data Nodes
 ==========
 ID	TCP Address		Version
-4	rk-upgrading-01:8088	1.3.7_c1.3.7   # 1.3.7_c1.3.7 = 👍
-5	rk-upgrading-02:8088	1.3.7_c1.3.7
-6	rk-upgrading-03:8088	1.3.7_c1.3.7
+4	rk-upgrading-01:8088	1.2.x_c1.2.y   
+5	rk-upgrading-02:8088	1.2.x_c1.2.y
+6	rk-upgrading-03:8088	1.2.x_c1.2.y
 
 Meta Nodes
 ==========
 TCP Address		Version
-rk-upgrading-01:8091	1.2.x_c1.2.y
-rk-upgrading-02:8091	1.2.x_c1.2.y
-rk-upgrading-03:8091	1.2.x_c1.2.y
+rk-upgrading-01:8091	1.3.7_c1.3.7   # 1.3.7_c1.3.7 = 👍
+rk-upgrading-02:8091	1.3.7_c1.3.7
+rk-upgrading-03:8091	1.3.7_c1.3.7
 ```
 
 ### Repeat the following steps for each data node in the cluster
@@ -181,7 +181,7 @@ Follow the links for more information about those options.
 
 ### Step 5: Restart the influxdb process
 
-#### Data node Restart
+#### Data node restart
 **sysvinit systems**
 ```
 service influxdb restart
@@ -211,14 +211,14 @@ The [`influxd-ctl` tool](/enterprise_influxdb/v1.3/features/cluster-commands/) i
 Data Nodes
 ==========
 ID	TCP Address		Version
-4	rk-upgrading-01:8088	1.3.7_c1.3.7   
+4	rk-upgrading-01:8088	1.3.7_c1.3.7   # 1.3.7_c1.3.7 = 👍
 5	rk-upgrading-02:8088	1.3.7_c1.3.7
 6	rk-upgrading-03:8088	1.3.7_c1.3.7
 
 Meta Nodes
 ==========
 TCP Address		Version
-rk-upgrading-01:8091	1.3.7_c1.3.7       # 1.3.7_c1.3.7 = 👍
+rk-upgrading-01:8091	1.3.7_c1.3.7       
 rk-upgrading-02:8091	1.3.7_c1.3.7
 rk-upgrading-03:8091	1.3.7_c1.3.7
 ```
