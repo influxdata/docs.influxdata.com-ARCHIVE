@@ -9,6 +9,61 @@ menu:
     weight: 10
     parent: nodes
 ---
+### Constructor 
+
+| Chaining Method | Description |
+|:---------|:---------|
+| **[alert](#descr)&nbsp;(&nbsp;)** | Create an alert node, which can trigger alerts.  |
+
+### Property Methods
+
+| Setters | Description |
+|:---|:---|
+| **[alerta](#alerta)&nbsp;(&nbsp;)** | Send the alert to Alerta.  |
+| **[all](#all)&nbsp;(&nbsp;)** | Indicates an alert should trigger only if all points in a batch match the criteria. Does not apply to stream alerts.  |
+| **[crit](#crit)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for the CRITICAL alert level. An empty value indicates the level is invalid and is skipped.  |
+| **[critReset](#critreset)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for reseting the CRITICAL alert level to lower level.  |
+| **[details](#details)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Template for constructing a detailed HTML message for the alert. The same template data is available as the AlertNode.Message property, in addition to a Message field that contains the rendered Message value.  |
+| **[durationField](#durationfield)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional field key to add the alert duration to the data. The duration is always in units of nanoseconds.  |
+| **[email](#email)&nbsp;(&nbsp;`to`&nbsp;`...string`)** | Email the alert data.  |
+| **[exec](#exec)&nbsp;(&nbsp;`executable`&nbsp;`string`,&nbsp;`args`&nbsp;`...string`)** | Execute a command whenever an alert is triggered and pass the alert data over STDIN in JSON format.  |
+| **[flapping](#flapping)&nbsp;(&nbsp;`low`&nbsp;`float64`,&nbsp;`high`&nbsp;`float64`)** | Perform flap detection on the alerts. The method used is similar method to Nagios: https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/flapping.html  |
+| **[hipChat](#hipchat)&nbsp;(&nbsp;)** | Send the alert to HipChat. For step-by-step instructions on setting up Kapacitor with HipChat, see the Event Handler Setup Guide (https://docs.influxdata.com//kapacitor/latest/guides/event-handler-setup/#hipchat-setup). To allow Kapacitor to post to HipChat, go to the URL https://www.hipchat.com/docs/apiv2 for information on how to get your room id and tokens.  |
+| **[history](#history)&nbsp;(&nbsp;`value`&nbsp;`int64`)** | Number of previous states to remember when computing flapping levels and checking for state changes. Minimum value is 2 in order to keep track of current and previous states.  |
+| **[id](#id)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Template for constructing a unique ID for a given alert.  |
+| **[idField](#idfield)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional field key to add to the data, containing the alert ID as a string.  |
+| **[idTag](#idtag)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional tag key to use when tagging the data with the alert ID.  |
+| **[info](#info)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for the INFO alert level. An empty value indicates the level is invalid and is skipped.  |
+| **[infoReset](#inforeset)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for reseting the INFO alert level to lower level.  |
+| **[levelField](#levelfield)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional field key to add to the data, containing the alert level as a string.  |
+| **[levelTag](#leveltag)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional tag key to use when tagging the data with the alert level.  |
+| **[log](#log)&nbsp;(&nbsp;`filepath`&nbsp;`string`)** | Log JSON alert data to file. One event per line. Must specify the absolute path to the log file. It will be created if it does not exist. Example: stream |alert() .log('/tmp/alert')  |
+| **[message](#message)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Template for constructing a meaningful message for the alert.  |
+| **[messageField](#messagefield)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional field key to add to the data, containing the alert message.  |
+| **[mqtt](#mqtt)&nbsp;(&nbsp;`topic`&nbsp;`string`)** | Send alert to an MQTT broker  |
+| **[noRecoveries](#norecoveries)&nbsp;(&nbsp;)** | Do not send recovery alerts.  |
+| **[opsGenie](#opsgenie)&nbsp;(&nbsp;)** | Send alert to OpsGenie. To use OpsGenie alerting you must first enable the 'Alert Ingestion API' in the 'Integrations' section of OpsGenie. Then place the API key from the URL into the 'opsgenie' section of the Kapacitor configuration.  |
+| **[pagerDuty](#pagerduty)&nbsp;(&nbsp;)** | Send the alert to PagerDuty. To use PagerDuty alerting you must first follow the steps to enable a new 'Generic API' service.  |
+| **[post](#post)&nbsp;(&nbsp;`urls`&nbsp;`...string`)** | HTTP POST JSON alert data to a specified URL.  |
+| **[pushover](#pushover)&nbsp;(&nbsp;)** | Send the alert to Pushover. Register your application with Pushover at https://pushover.net/apps/build to get a Pushover token.  |
+| **[sensu](#sensu)&nbsp;(&nbsp;)** | Send the alert to Sensu.  |
+| **[slack](#slack)&nbsp;(&nbsp;)** | Send the alert to Slack. To allow Kapacitor to post to Slack, go to the URL https://slack.com/services/new/incoming-webhook and create a new incoming webhook and place the generated URL in the 'slack' configuration section.  |
+| **[snmpTrap](#snmptrap)&nbsp;(&nbsp;`trapOid`&nbsp;`string`)** | Send the alert using SNMP traps. To allow Kapacitor to post SNMP traps,  |
+| **[stateChangesOnly](#statechangesonly)&nbsp;(&nbsp;`maxInterval`&nbsp;`...time.Duration`)** | Only sends events where the state changed. Each different alert level OK, INFO, WARNING, and CRITICAL are considered different states.  |
+| **[talk](#talk)&nbsp;(&nbsp;)** | Send the alert to Talk. To use Talk alerting you must first follow the steps to create a new incoming webhook.  |
+| **[tcp](#tcp)&nbsp;(&nbsp;`address`&nbsp;`string`)** | Send JSON alert data to a specified address over TCP.  |
+| **[telegram](#telegram)&nbsp;(&nbsp;)** | Send the alert to Telegram. For step-by-step instructions on setting up Kapacitor with Telegram, see the Event Handler Setup Guide (https://docs.influxdata.com//kapacitor/latest/guides/event-handler-setup/#telegram-setup). To allow Kapacitor to post to Telegram,  |
+| **[topic](#topic)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Topic specifies the name of an alert topic to which, alerts will be published. Alert handlers can be configured per topic, see the API documentation.  |
+| **[victorOps](#victorops)&nbsp;(&nbsp;)** | Send alert to VictorOps. To use VictorOps alerting you must first enable the 'Alert Ingestion API' in the 'Integrations' section of VictorOps. Then place the API key from the URL into the 'victorops' section of the Kapacitor configuration.  |
+| **[warn](#warn)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for the WARNING alert level. An empty value indicates the level is invalid and is skipped.  |
+| **[warnReset](#warnreset)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for reseting the WARNING alert level to lower level.  |
+
+
+
+### Chaining Methods
+[Alert](/kapacitor/v1.4/nodes/alert_node/#alert), [Bottom](/kapacitor/v1.4/nodes/alert_node/#bottom), [Combine](/kapacitor/v1.4/nodes/alert_node/#combine), [Count](/kapacitor/v1.4/nodes/alert_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/alert_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/alert_node/#deadman), [Default](/kapacitor/v1.4/nodes/alert_node/#default), [Delete](/kapacitor/v1.4/nodes/alert_node/#delete), [Derivative](/kapacitor/v1.4/nodes/alert_node/#derivative), [Difference](/kapacitor/v1.4/nodes/alert_node/#difference), [Distinct](/kapacitor/v1.4/nodes/alert_node/#distinct), [Elapsed](/kapacitor/v1.4/nodes/alert_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/alert_node/#eval), [First](/kapacitor/v1.4/nodes/alert_node/#first), [Flatten](/kapacitor/v1.4/nodes/alert_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/alert_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/alert_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/alert_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/alert_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/alert_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/alert_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/alert_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/alert_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/alert_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/alert_node/#last), [Max](/kapacitor/v1.4/nodes/alert_node/#max), [Mean](/kapacitor/v1.4/nodes/alert_node/#mean), [Median](/kapacitor/v1.4/nodes/alert_node/#median), [Min](/kapacitor/v1.4/nodes/alert_node/#min), [Mode](/kapacitor/v1.4/nodes/alert_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/alert_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/alert_node/#percentile), [Sample](/kapacitor/v1.4/nodes/alert_node/#sample), [Shift](/kapacitor/v1.4/nodes/alert_node/#shift), [Sideload](/kapacitor/v1.4/nodes/alert_node/#sideload), [Spread](/kapacitor/v1.4/nodes/alert_node/#spread), [StateCount](/kapacitor/v1.4/nodes/alert_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/alert_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/alert_node/#stats), [Stddev](/kapacitor/v1.4/nodes/alert_node/#stddev), [Sum](/kapacitor/v1.4/nodes/alert_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/alert_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/alert_node/#top), [Union](/kapacitor/v1.4/nodes/alert_node/#union), [Where](/kapacitor/v1.4/nodes/alert_node/#where), [Window](/kapacitor/v1.4/nodes/alert_node/#window)
+<a id='descr'/><hr/><br/>
+### Description
 
 An [AlertNode](/kapacitor/v1.4/nodes/alert_node/) can trigger an event of varying severity levels, 
 and pass the event to alert handlers. The criteria for triggering 
@@ -17,7 +72,7 @@ See [AlertNode.Info,](/kapacitor/v1.4/nodes/alert_node/#info) [AlertNode.Warn,](
 
 Different event handlers can be configured for each [AlertNode.](/kapacitor/v1.4/nodes/alert_node/) 
 Some handlers like Email, HipChat, Sensu, Slack, OpsGenie, VictorOps, PagerDuty, Telegram and Talk have a configuration 
-option &#39;global&#39; that indicates that all alerts implicitly use the handler. 
+option 'global' that indicates that all alerts implicitly use the handler. 
 
 Available event handlers: 
 
@@ -51,8 +106,8 @@ Each event that gets sent to a handler contains the following alert data:
 * Level -- one of OK, INFO, WARNING or CRITICAL. 
 * Data -- influxql.Result containing the data that triggered the alert. 
 
-Events are sent to handlers if the alert is in a state other than &#39;OK&#39; 
-or the alert just changed to the &#39;OK&#39; state from a non &#39;OK&#39; state (a.k.a. the alert recovered). 
+Events are sent to handlers if the alert is in a state other than 'OK' 
+or the alert just changed to the 'OK' state from a non 'OK' state (a.k.a. the alert recovered). 
 Using the [AlertNode.StateChangesOnly](/kapacitor/v1.4/nodes/alert_node/#statechangesonly) property events will only be sent to handlers 
 if the alert changed state. 
 
@@ -118,98 +173,7 @@ Available Statistics:
 
 
 
-Index
------
-
-### Properties
-
--	[Alerta](/kapacitor/v1.4/nodes/alert_node/#alerta)
--	[All](/kapacitor/v1.4/nodes/alert_node/#all)
--	[Crit](/kapacitor/v1.4/nodes/alert_node/#crit)
--	[CritReset](/kapacitor/v1.4/nodes/alert_node/#critreset)
--	[Details](/kapacitor/v1.4/nodes/alert_node/#details)
--	[DurationField](/kapacitor/v1.4/nodes/alert_node/#durationfield)
--	[Email](/kapacitor/v1.4/nodes/alert_node/#email)
--	[Exec](/kapacitor/v1.4/nodes/alert_node/#exec)
--	[Flapping](/kapacitor/v1.4/nodes/alert_node/#flapping)
--	[HipChat](/kapacitor/v1.4/nodes/alert_node/#hipchat)
--	[History](/kapacitor/v1.4/nodes/alert_node/#history)
--	[Id](/kapacitor/v1.4/nodes/alert_node/#id)
--	[IdField](/kapacitor/v1.4/nodes/alert_node/#idfield)
--	[IdTag](/kapacitor/v1.4/nodes/alert_node/#idtag)
--	[Info](/kapacitor/v1.4/nodes/alert_node/#info)
--	[InfoReset](/kapacitor/v1.4/nodes/alert_node/#inforeset)
--	[LevelField](/kapacitor/v1.4/nodes/alert_node/#levelfield)
--	[LevelTag](/kapacitor/v1.4/nodes/alert_node/#leveltag)
--	[Log](/kapacitor/v1.4/nodes/alert_node/#log)
--	[Message](/kapacitor/v1.4/nodes/alert_node/#message)
--	[MessageField](/kapacitor/v1.4/nodes/alert_node/#messagefield)
--	[Mqtt](/kapacitor/v1.4/nodes/alert_node/#mqtt)
--	[NoRecoveries](/kapacitor/v1.4/nodes/alert_node/#norecoveries)
--	[OpsGenie](/kapacitor/v1.4/nodes/alert_node/#opsgenie)
--	[PagerDuty](/kapacitor/v1.4/nodes/alert_node/#pagerduty)
--	[Post](/kapacitor/v1.4/nodes/alert_node/#post)
--	[Pushover](/kapacitor/v1.4/nodes/alert_node/#pushover)
--	[Sensu](/kapacitor/v1.4/nodes/alert_node/#sensu)
--	[Slack](/kapacitor/v1.4/nodes/alert_node/#slack)
--	[SnmpTrap](/kapacitor/v1.4/nodes/alert_node/#snmptrap)
--	[StateChangesOnly](/kapacitor/v1.4/nodes/alert_node/#statechangesonly)
--	[Talk](/kapacitor/v1.4/nodes/alert_node/#talk)
--	[Tcp](/kapacitor/v1.4/nodes/alert_node/#tcp)
--	[Telegram](/kapacitor/v1.4/nodes/alert_node/#telegram)
--	[Topic](/kapacitor/v1.4/nodes/alert_node/#topic)
--	[VictorOps](/kapacitor/v1.4/nodes/alert_node/#victorops)
--	[Warn](/kapacitor/v1.4/nodes/alert_node/#warn)
--	[WarnReset](/kapacitor/v1.4/nodes/alert_node/#warnreset)
-
-### Chaining Methods
-
--	[Alert](/kapacitor/v1.4/nodes/alert_node/#alert)
--	[Bottom](/kapacitor/v1.4/nodes/alert_node/#bottom)
--	[Combine](/kapacitor/v1.4/nodes/alert_node/#combine)
--	[Count](/kapacitor/v1.4/nodes/alert_node/#count)
--	[CumulativeSum](/kapacitor/v1.4/nodes/alert_node/#cumulativesum)
--	[Deadman](/kapacitor/v1.4/nodes/alert_node/#deadman)
--	[Default](/kapacitor/v1.4/nodes/alert_node/#default)
--	[Delete](/kapacitor/v1.4/nodes/alert_node/#delete)
--	[Derivative](/kapacitor/v1.4/nodes/alert_node/#derivative)
--	[Difference](/kapacitor/v1.4/nodes/alert_node/#difference)
--	[Distinct](/kapacitor/v1.4/nodes/alert_node/#distinct)
--	[Elapsed](/kapacitor/v1.4/nodes/alert_node/#elapsed)
--	[Eval](/kapacitor/v1.4/nodes/alert_node/#eval)
--	[First](/kapacitor/v1.4/nodes/alert_node/#first)
--	[Flatten](/kapacitor/v1.4/nodes/alert_node/#flatten)
--	[GroupBy](/kapacitor/v1.4/nodes/alert_node/#groupby)
--	[HoltWinters](/kapacitor/v1.4/nodes/alert_node/#holtwinters)
--	[HoltWintersWithFit](/kapacitor/v1.4/nodes/alert_node/#holtwinterswithfit)
--	[HttpOut](/kapacitor/v1.4/nodes/alert_node/#httpout)
--	[HttpPost](/kapacitor/v1.4/nodes/alert_node/#httppost)
--	[InfluxDBOut](/kapacitor/v1.4/nodes/alert_node/#influxdbout)
--	[Join](/kapacitor/v1.4/nodes/alert_node/#join)
--	[K8sAutoscale](/kapacitor/v1.4/nodes/alert_node/#k8sautoscale)
--	[KapacitorLoopback](/kapacitor/v1.4/nodes/alert_node/#kapacitorloopback)
--	[Last](/kapacitor/v1.4/nodes/alert_node/#last)
--	[Max](/kapacitor/v1.4/nodes/alert_node/#max)
--	[Mean](/kapacitor/v1.4/nodes/alert_node/#mean)
--	[Median](/kapacitor/v1.4/nodes/alert_node/#median)
--	[Min](/kapacitor/v1.4/nodes/alert_node/#min)
--	[Mode](/kapacitor/v1.4/nodes/alert_node/#mode)
--	[MovingAverage](/kapacitor/v1.4/nodes/alert_node/#movingaverage)
--	[Percentile](/kapacitor/v1.4/nodes/alert_node/#percentile)
--	[Sample](/kapacitor/v1.4/nodes/alert_node/#sample)
--	[Shift](/kapacitor/v1.4/nodes/alert_node/#shift)
--	[Sideload](/kapacitor/v1.4/nodes/alert_node/#sideload)
--	[Spread](/kapacitor/v1.4/nodes/alert_node/#spread)
--	[StateCount](/kapacitor/v1.4/nodes/alert_node/#statecount)
--	[StateDuration](/kapacitor/v1.4/nodes/alert_node/#stateduration)
--	[Stats](/kapacitor/v1.4/nodes/alert_node/#stats)
--	[Stddev](/kapacitor/v1.4/nodes/alert_node/#stddev)
--	[Sum](/kapacitor/v1.4/nodes/alert_node/#sum)
--	[SwarmAutoscale](/kapacitor/v1.4/nodes/alert_node/#swarmautoscale)
--	[Top](/kapacitor/v1.4/nodes/alert_node/#top)
--	[Union](/kapacitor/v1.4/nodes/alert_node/#union)
--	[Where](/kapacitor/v1.4/nodes/alert_node/#where)
--	[Window](/kapacitor/v1.4/nodes/alert_node/#window)
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 Properties
 ----------
@@ -272,8 +236,10 @@ NOTE: Alerta cannot be configured globally because of its required properties.
 
 
 ```javascript
-node.alerta()
+alert.alerta()
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 #### Alerta Environment
 
@@ -283,9 +249,11 @@ Defaut is set from the configuration.
 
 
 ```javascript
-node.alerta()
+alert.alerta()
       .environment(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Alerta Event
@@ -296,9 +264,11 @@ Default: {{ .ID }}
 
 
 ```javascript
-node.alerta()
+alert.alerta()
       .event(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Alerta Group
@@ -309,9 +279,11 @@ Default: {{ .Group }}
 
 
 ```javascript
-node.alerta()
+alert.alerta()
       .group(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Alerta Origin
@@ -321,9 +293,11 @@ If empty uses the origin from the configuration.
 
 
 ```javascript
-node.alerta()
+alert.alerta()
       .origin(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Alerta Resource
@@ -334,9 +308,11 @@ Default: {{ .Name }}
 
 
 ```javascript
-node.alerta()
+alert.alerta()
       .resource(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Alerta Services
@@ -346,9 +322,11 @@ If not specified defaults to the Name of the stream.
 
 
 ```javascript
-node.alerta()
+alert.alerta()
       .services(service ...string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Alerta Timeout
@@ -358,9 +336,11 @@ Default: 24h
 
 
 ```javascript
-node.alerta()
+alert.alerta()
       .timeout(value time.Duration)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Alerta Token
@@ -370,9 +350,11 @@ If empty uses the token from the configuration.
 
 
 ```javascript
-node.alerta()
+alert.alerta()
       .token(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Alerta Value
@@ -383,9 +365,11 @@ Default is an empty string.
 
 
 ```javascript
-node.alerta()
+alert.alerta()
       .value(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 
@@ -396,8 +380,10 @@ Does not apply to stream alerts.
 
 
 ```javascript
-node.all()
+alert.all()
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Crit
@@ -407,8 +393,10 @@ An empty value indicates the level is invalid and is skipped.
 
 
 ```javascript
-node.crit(value ast.LambdaNode)
+alert.crit(value ast.LambdaNode)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### CritReset
@@ -417,8 +405,10 @@ Filter expression for reseting the CRITICAL alert level to lower level.
 
 
 ```javascript
-node.critReset(value ast.LambdaNode)
+alert.critReset(value ast.LambdaNode)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Details
@@ -455,8 +445,10 @@ Default: {{ json . }}
 
 
 ```javascript
-node.details(value string)
+alert.details(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### DurationField
@@ -466,8 +458,10 @@ The duration is always in units of nanoseconds.
 
 
 ```javascript
-node.durationField(value string)
+alert.durationField(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Email
@@ -479,7 +473,7 @@ The email subject is the [AlertNode.Message](/kapacitor/v1.4/nodes/alert_node/#m
 The email body is the [AlertNode.Details](/kapacitor/v1.4/nodes/alert_node/#details) property. 
 The emails are sent as HTML emails and so the body can contain html markup. 
 
-If the &#39;smtp&#39; section in the configuration has the option: global = true 
+If the 'smtp' section in the configuration has the option: global = true 
 then all alerts are sent via email without the need to explicitly state it 
 in the TICKscript. 
 
@@ -527,13 +521,15 @@ Example:
          |alert()
 ```
 
-Send email to &#39;oncall@example.com&#39; from &#39;kapacitor@example.com&#39; 
+Send email to 'oncall@example.com' from 'kapacitor@example.com' 
 
 
 
 ```javascript
-node.email(to ...string)
+alert.email(to ...string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 #### Email To
 
@@ -566,9 +562,11 @@ Passing addresses to the `email` property directly or using the `email.to` prope
 
 
 ```javascript
-node.email(to ...string)
+alert.email(to ...string)
       .to(to ...string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 
@@ -578,8 +576,10 @@ Execute a command whenever an alert is triggered and pass the alert data over ST
 
 
 ```javascript
-node.exec(executable string, args ...string)
+alert.exec(executable string, args ...string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Flapping
@@ -599,14 +599,60 @@ state in half of the recorded history, and remained the same in the other half o
 
 
 ```javascript
-node.flapping(low float64, high float64)
+alert.flapping(low float64, high float64)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### HipChat
 
+Send the alert to HipChat. 
+For step-by-step instructions on setting up Kapacitor with HipChat, see the Event Handler Setup Guide (https://docs.influxdata.com//kapacitor/latest/guides/event-handler-setup/#hipchat-setup). 
+To allow Kapacitor to post to HipChat, 
+go to the URL https://www.hipchat.com/docs/apiv2 for 
+information on how to get your room id and tokens. 
 
-If the &#39;hipchat&#39; section in the configuration has the option: global = true 
+Example: 
+
+
+```javascript
+    [hipchat]
+      enabled = true
+      url = "https://orgname.hipchat.com/v2/room"
+      room = "4189212"
+      token = "9hiWoDOZ9IbmHsOTeST123ABciWTIqXQVFDo63h9"
+```
+
+In order to not post a message every alert interval 
+use [AlertNode.StateChangesOnly](/kapacitor/v1.4/nodes/alert_node/#statechangesonly) so that only events 
+where the alert changed state are posted to the room. 
+
+Example: 
+
+
+```javascript
+    stream
+         |alert()
+             .hipChat()
+```
+
+Send alerts to HipChat room in the configuration file. 
+
+Example: 
+
+
+```javascript
+    stream
+         |alert()
+             .hipChat()
+             .room('Kapacitor')
+```
+
+Send alerts to HipChat room 'Kapacitor' 
+
+
+If the 'hipchat' section in the configuration has the option: global = true 
 then all alerts are sent to HipChat without the need to explicitly state it 
 in the TICKscript. 
 
@@ -631,12 +677,14 @@ Example:
          |alert()
 ```
 
-Send alert to HipChat using default room &#39;Test Room&#39;. 
+Send alert to HipChat using default room 'Test Room'. 
 
 
 ```javascript
-node.hipChat()
+alert.hipChat()
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 #### HipChat Room
 
@@ -645,9 +693,11 @@ If empty uses the channel from the configuration.
 
 
 ```javascript
-node.hipChat()
+alert.hipChat()
       .room(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### HipChat Token
@@ -657,9 +707,11 @@ If empty uses the token from the configuration.
 
 
 ```javascript
-node.hipChat()
+alert.hipChat()
       .token(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 
@@ -673,8 +725,10 @@ Default: 21
 
 
 ```javascript
-node.history(value int64)
+alert.history(value int64)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Id
@@ -686,8 +740,8 @@ Available template data:
 * Name -- Measurement name. 
 * TaskName -- The name of the task 
 * Group -- Concatenation of all group-by tags of the form [key=value,]+. 
-If no groupBy is performed equal to literal &#39;nil&#39;. 
-* Tags -- Map of tags. Use &#39;{{ index .Tags &#34;key&#34; }}&#39; to get a specific tag value. 
+If no groupBy is performed equal to literal 'nil'. 
+* Tags -- Map of tags. Use '{{ index .Tags "key" }}' to get a specific tag value. 
 * ServerInfo -- Information about the running server. Available nested fields are: 
 Hostname, ClusterID and ServerID. 
 
@@ -737,8 +791,10 @@ Default: {{ .Name }}:{{ .Group }}
 
 
 ```javascript
-node.id(value string)
+alert.id(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### IdField
@@ -747,8 +803,10 @@ Optional field key to add to the data, containing the alert ID as a string.
 
 
 ```javascript
-node.idField(value string)
+alert.idField(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### IdTag
@@ -757,8 +815,10 @@ Optional tag key to use when tagging the data with the alert ID.
 
 
 ```javascript
-node.idTag(value string)
+alert.idTag(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Info
@@ -768,8 +828,10 @@ An empty value indicates the level is invalid and is skipped.
 
 
 ```javascript
-node.info(value ast.LambdaNode)
+alert.info(value ast.LambdaNode)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### InfoReset
@@ -778,8 +840,10 @@ Filter expression for reseting the INFO alert level to lower level.
 
 
 ```javascript
-node.infoReset(value ast.LambdaNode)
+alert.infoReset(value ast.LambdaNode)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### LevelField
@@ -788,8 +852,10 @@ Optional field key to add to the data, containing the alert level as a string.
 
 
 ```javascript
-node.levelField(value string)
+alert.levelField(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### LevelTag
@@ -798,8 +864,10 @@ Optional tag key to use when tagging the data with the alert level.
 
 
 ```javascript
-node.levelTag(value string)
+alert.levelTag(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Log
@@ -829,19 +897,23 @@ Example:
 
 
 ```javascript
-node.log(filepath string)
+alert.log(filepath string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 #### Log Mode
 
-File&#39;s mode and permissions, default is 0600 
+File's mode and permissions, default is 0600 
 NOTE: The leading 0 is required to interpret the value as an octal integer. 
 
 
 ```javascript
-node.log(filepath string)
+alert.log(filepath string)
       .mode(value int64)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 
@@ -855,10 +927,10 @@ Available template data:
 * Name -- Measurement name. 
 * TaskName -- The name of the task 
 * Group -- Concatenation of all group-by tags of the form [key=value,]+. 
-If no groupBy is performed equal to literal &#39;nil&#39;. 
-* Tags -- Map of tags. Use &#39;{{ index .Tags &#34;key&#34; }}&#39; to get a specific tag value. 
+If no groupBy is performed equal to literal 'nil'. 
+* Tags -- Map of tags. Use '{{ index .Tags "key" }}' to get a specific tag value. 
 * Level -- Alert Level, one of: INFO, WARNING, CRITICAL. 
-* Fields -- Map of fields. Use &#39;{{ index .Fields &#34;key&#34; }}&#39; to get a specific field value. 
+* Fields -- Map of fields. Use '{{ index .Fields "key" }}' to get a specific field value. 
 * Time -- The time of the point that triggered the event. 
 * Duration -- The duration of the alert. 
 
@@ -881,8 +953,10 @@ Default: {{ .ID }} is {{ .Level }}
 
 
 ```javascript
-node.message(value string)
+alert.message(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### MessageField
@@ -891,8 +965,10 @@ Optional field key to add to the data, containing the alert message.
 
 
 ```javascript
-node.messageField(value string)
+alert.messageField(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Mqtt
@@ -901,8 +977,10 @@ Send alert to an MQTT broker
 
 
 ```javascript
-node.mqtt(topic string)
+alert.mqtt(topic string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 #### Mqtt BrokerName
 
@@ -911,9 +989,11 @@ If empty defaults to the configured default broker.
 
 
 ```javascript
-node.mqtt(topic string)
+alert.mqtt(topic string)
       .brokerName(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Mqtt Qos
@@ -929,9 +1009,11 @@ Valid values are:
 
 
 ```javascript
-node.mqtt(topic string)
+alert.mqtt(topic string)
       .qos(value int64)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Mqtt Retained
@@ -941,9 +1023,11 @@ clients that were not connected to the broker at the time of the alert.
 
 
 ```javascript
-node.mqtt(topic string)
+alert.mqtt(topic string)
       .retained(value bool)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Mqtt Topic
@@ -952,9 +1036,11 @@ The topic where alerts will be dispatched to
 
 
 ```javascript
-node.mqtt(topic string)
+alert.mqtt(topic string)
       .topic(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 
@@ -964,16 +1050,18 @@ Do not send recovery alerts.
 
 
 ```javascript
-node.noRecoveries()
+alert.noRecoveries()
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### OpsGenie
 
 Send alert to OpsGenie. 
-To use OpsGenie alerting you must first enable the &#39;Alert Ingestion API&#39; 
-in the &#39;Integrations&#39; section of OpsGenie. 
-Then place the API key from the URL into the &#39;opsgenie&#39; section of the Kapacitor configuration. 
+To use OpsGenie alerting you must first enable the 'Alert Ingestion API' 
+in the 'Integrations' section of OpsGenie. 
+Then place the API key from the URL into the 'opsgenie' section of the Kapacitor configuration. 
 
 Example: 
 
@@ -1009,9 +1097,9 @@ Example:
              .teams('team_rocket','team_test')
 ```
 
-Send alerts to OpsGenie with team set to &#39;team_rocket&#39; and &#39;team_test&#39; 
+Send alerts to OpsGenie with team set to 'team_rocket' and 'team_test' 
 
-If the &#39;opsgenie&#39; section in the configuration has the option: global = true 
+If the 'opsgenie' section in the configuration has the option: global = true 
 then all alerts are sent to OpsGenie without the need to explicitly state it 
 in the TICKscript. 
 
@@ -1038,8 +1126,10 @@ Send alert to OpsGenie using the default recipients, found in the configuration.
 
 
 ```javascript
-node.opsGenie()
+alert.opsGenie()
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 #### OpsGenie Recipients
 
@@ -1047,9 +1137,11 @@ The list of recipients to be alerted. If empty defaults to the recipients from t
 
 
 ```javascript
-node.opsGenie()
+alert.opsGenie()
       .recipients(recipients ...string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### OpsGenie Teams
@@ -1058,25 +1150,27 @@ The list of teams to be alerted. If empty defaults to the teams from the configu
 
 
 ```javascript
-node.opsGenie()
+alert.opsGenie()
       .teams(teams ...string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 
 ### PagerDuty
 
 Send the alert to PagerDuty. 
-To use PagerDuty alerting you must first follow the steps to enable a new &#39;Generic API&#39; service. 
+To use PagerDuty alerting you must first follow the steps to enable a new 'Generic API' service. 
 
 From https://developer.pagerduty.com/documentation/integration/events 
 
-1. In your account, under the Services tab, click &#34;Add New Service&#34;. 
-2. Enter a name for the service and select an escalation policy. Then, select &#34;Generic API&#34; for the Service Type. 
-3. Click the &#34;Add Service&#34; button. 
-4. Once the service is created, you&#39;ll be taken to the service page. On this page, you&#39;ll see the &#34;Service key&#34;, which is needed to access the API 
+1. In your account, under the Services tab, click "Add New Service". 
+2. Enter a name for the service and select an escalation policy. Then, select "Generic API" for the Service Type. 
+3. Click the "Add Service" button. 
+4. Once the service is created, you'll be taken to the service page. On this page, you'll see the "Service key", which is needed to access the API 
 
-Place the &#39;service key&#39; into the &#39;pagerduty&#39; section of the Kapacitor configuration as the option &#39;service-key&#39;. 
+Place the 'service key' into the 'pagerduty' section of the Kapacitor configuration as the option 'service-key'. 
 
 Example: 
 
@@ -1098,7 +1192,7 @@ Example:
              .pagerDuty()
 ```
 
-If the &#39;pagerduty&#39; section in the configuration has the option: global = true 
+If the 'pagerduty' section in the configuration has the option: global = true 
 then all alerts are sent to PagerDuty without the need to explicitly state it 
 in the TICKscript. 
 
@@ -1124,8 +1218,10 @@ Send alert to PagerDuty.
 
 
 ```javascript
-node.pagerDuty()
+alert.pagerDuty()
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 #### PagerDuty ServiceKey
 
@@ -1134,9 +1230,11 @@ Defaults to the value in the configuration if empty.
 
 
 ```javascript
-node.pagerDuty()
+alert.pagerDuty()
       .serviceKey(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 
@@ -1166,8 +1264,10 @@ Example:
 
 
 ```javascript
-node.post(urls ...string)
+alert.post(urls ...string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 #### Post CaptureResponse
 
@@ -1176,9 +1276,11 @@ the status code was not an 2xx code.
 
 
 ```javascript
-node.post(urls ...string)
+alert.post(urls ...string)
       .captureResponse()
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Post Endpoint
@@ -1187,9 +1289,11 @@ Name of the endpoint to be used, as is defined in the configuration file
 
 
 ```javascript
-node.post(urls ...string)
+alert.post(urls ...string)
       .endpoint(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Post Header
@@ -1212,9 +1316,11 @@ Example:
 
 
 ```javascript
-node.post(urls ...string)
+alert.post(urls ...string)
       .header(k string, v string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Post Timeout
@@ -1223,9 +1329,11 @@ Timeout for HTTP Post
 
 
 ```javascript
-node.post(urls ...string)
+alert.post(urls ...string)
       .timeout(value time.Duration)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 
@@ -1272,43 +1380,51 @@ Send alerts to Pushover.
 
 
 ```javascript
-node.pushover()
+alert.pushover()
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 #### Pushover Device
 
 Users device name to send message directly to that device, 
-rather than all of a user&#39;s devices (multiple device names may 
+rather than all of a user's devices (multiple device names may 
 be separated by a comma) 
 
 
 ```javascript
-node.pushover()
+alert.pushover()
       .device(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Pushover Sound
 
 The name of one of the sounds supported by the device clients to override 
-the user&#39;s default sound choice 
+the user's default sound choice 
 
 
 ```javascript
-node.pushover()
+alert.pushover()
       .sound(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Pushover Title
 
-Your message&#39;s title, otherwise your apps name is used 
+Your message's title, otherwise your apps name is used 
 
 
 ```javascript
-node.pushover()
+alert.pushover()
       .title(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Pushover URL
@@ -1317,9 +1433,11 @@ A supplementary URL to show with your message
 
 
 ```javascript
-node.pushover()
+alert.pushover()
       .uRL(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Pushover URLTitle
@@ -1328,9 +1446,11 @@ A title for your supplementary URL, otherwise just URL is shown
 
 
 ```javascript
-node.pushover()
+alert.pushover()
       .uRLTitle(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Pushover UserKey
@@ -1342,9 +1462,11 @@ If empty uses the user from the configuration.
 
 
 ```javascript
-node.pushover()
+alert.pushover()
       .userKey(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 
@@ -1389,8 +1511,10 @@ Send alerts to Sensu specifying the handlers
 
 
 ```javascript
-node.sensu()
+alert.sensu()
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 #### Sensu Handlers
 
@@ -1399,9 +1523,11 @@ If not specified defaults to the Name of the stream.
 
 
 ```javascript
-node.sensu()
+alert.sensu()
       .handlers(handlers ...string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Sensu Source
@@ -1411,9 +1537,11 @@ If empty uses the Source from the configuration.
 
 
 ```javascript
-node.sensu()
+alert.sensu()
       .source(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 
@@ -1423,7 +1551,7 @@ Send the alert to Slack.
 To allow Kapacitor to post to Slack, 
 go to the URL https://slack.com/services/new/incoming-webhook 
 and create a new incoming webhook and place the generated URL 
-in the &#39;slack&#39; configuration section. 
+in the 'slack' configuration section. 
 
 Example: 
 
@@ -1460,7 +1588,7 @@ Example:
              .channel('#alerts')
 ```
 
-Send alerts to Slack channel &#39;#alerts&#39; 
+Send alerts to Slack channel '#alerts' 
 
 Example: 
 
@@ -1472,9 +1600,9 @@ Example:
              .channel('@jsmith')
 ```
 
-Send alert to user &#39;@jsmith&#39; 
+Send alert to user '@jsmith' 
 
-If the &#39;slack&#39; section in the configuration has the option: global = true 
+If the 'slack' section in the configuration has the option: global = true 
 then all alerts are sent to Slack without the need to explicitly state it 
 in the TICKscript. 
 
@@ -1498,12 +1626,14 @@ Example:
          |alert()
 ```
 
-Send alert to Slack using default channel &#39;#general&#39;. 
+Send alert to Slack using default channel '#general'. 
 
 
 ```javascript
-node.slack()
+alert.slack()
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 #### Slack Channel
 
@@ -1512,21 +1642,25 @@ If empty uses the channel from the configuration.
 
 
 ```javascript
-node.slack()
+alert.slack()
       .channel(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Slack IconEmoji
 
-IconEmoji is an emoji name surrounded in &#39;:&#39; characters. 
+IconEmoji is an emoji name surrounded in ':' characters. 
 The emoji image will replace the normal user icon for the slack bot. 
 
 
 ```javascript
-node.slack()
+alert.slack()
       .iconEmoji(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Slack Username
@@ -1536,9 +1670,11 @@ If empty uses the username from the configuration.
 
 
 ```javascript
-node.slack()
+alert.slack()
       .username(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 
@@ -1567,13 +1703,15 @@ Example:
                  .data('1.3.6.1.2.1.1.7', 'i', '{{ index .Field "value" }}')
 ```
 
-Send alerts to `target-ip:target-port` on OID &#39;1.3.6.1.2.1.1.7&#39; 
+Send alerts to `target-ip:target-port` on OID '1.3.6.1.2.1.1.7' 
 
 
 
 ```javascript
-node.snmpTrap(trapOid string)
+alert.snmpTrap(trapOid string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 #### SnmpTrap Data
 
@@ -1606,9 +1744,11 @@ Example:
 
 
 ```javascript
-node.snmpTrap(trapOid string)
+alert.snmpTrap(trapOid string)
       .data(oid string, typ string, value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 
@@ -1634,7 +1774,7 @@ Example:
            .slack()
 ```
 
-If the &#34;value&#34; is greater than 10 for a total of 60s, then 
+If the "value" is greater than 10 for a total of 60s, then 
 only two events will be sent. First, when the value crosses 
 the threshold, and second, when it falls back into an OK state. 
 Without stateChangesOnly, the alert would have triggered 7 times: 
@@ -1666,8 +1806,10 @@ The above usage will only trigger alerts to slack on state changes or at least e
 
 
 ```javascript
-node.stateChangesOnly(maxInterval ...time.Duration)
+alert.stateChangesOnly(maxInterval ...time.Duration)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Talk
@@ -1676,12 +1818,12 @@ Send the alert to Talk.
 To use Talk alerting you must first follow the steps to create a new incoming webhook. 
 
 1. Go to the URL https:/account.jianliao.com/signin. 
-2. Sign in with you account. under the Team tab, click &#34;Integrations&#34;. 
-3. Select &#34;Customize service&#34;, click incoming Webhook &#34;Add&#34; button. 
-4. After choose the topic to connect with &#34;xxx&#34;, click &#34;Confirm Add&#34; button. 
-5. Once the service is created, you&#39;ll see the &#34;Generate Webhook url&#34;. 
+2. Sign in with you account. under the Team tab, click "Integrations". 
+3. Select "Customize service", click incoming Webhook "Add" button. 
+4. After choose the topic to connect with "xxx", click "Confirm Add" button. 
+5. Once the service is created, you'll see the "Generate Webhook url". 
 
-Place the &#39;Generate Webhook url&#39; into the &#39;Talk&#39; section of the Kapacitor configuration as the option &#39;url&#39;. 
+Place the 'Generate Webhook url' into the 'Talk' section of the Kapacitor configuration as the option 'url'. 
 
 Example: 
 
@@ -1707,8 +1849,10 @@ Send alerts to Talk client.
 
 
 ```javascript
-node.talk()
+alert.talk()
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Tcp
@@ -1717,8 +1861,10 @@ Send JSON alert data to a specified address over TCP.
 
 
 ```javascript
-node.tcp(address string)
+alert.tcp(address string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 #### Tcp Address
 
@@ -1726,9 +1872,11 @@ The endpoint address.
 
 
 ```javascript
-node.tcp(address string)
+alert.tcp(address string)
       .address(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 
@@ -1776,9 +1924,9 @@ Example:
              .chatId('xxxxxxx')
 ```
 
-Send alerts to Telegram user/group &#39;xxxxxx&#39; 
+Send alerts to Telegram user/group 'xxxxxx' 
 
-If the &#39;telegram&#39; section in the configuration has the option: global = true 
+If the 'telegram' section in the configuration has the option: global = true 
 then all alerts are sent to Telegram without the need to explicitly state it 
 in the TICKscript. 
 
@@ -1802,12 +1950,14 @@ Example:
          |alert()
 ```
 
-Send alert to Telegram using default chat-id &#39;xxxxxxxx&#39;. 
+Send alert to Telegram using default chat-id 'xxxxxxxx'. 
 
 
 ```javascript
-node.telegram()
+alert.telegram()
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 #### Telegram ChatId
 
@@ -1816,9 +1966,11 @@ If empty uses the chati-d from the configuration.
 
 
 ```javascript
-node.telegram()
+alert.telegram()
       .chatId(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Telegram DisableNotification
@@ -1827,9 +1979,11 @@ Disables the Notification. If empty defaults to the configuration.
 
 
 ```javascript
-node.telegram()
+alert.telegram()
       .disableNotification()
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Telegram DisableWebPagePreview
@@ -1838,9 +1992,11 @@ Disables the WebPagePreview. If empty defaults to the configuration.
 
 
 ```javascript
-node.telegram()
+alert.telegram()
       .disableWebPagePreview()
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 #### Telegram ParseMode
@@ -1850,9 +2006,11 @@ If empty uses the parse-mode from the configuration.
 
 
 ```javascript
-node.telegram()
+alert.telegram()
       .parseMode(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 
@@ -1864,16 +2022,18 @@ Alert handlers can be configured per topic, see the API documentation.
 
 
 ```javascript
-node.topic(value string)
+alert.topic(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### VictorOps
 
 Send alert to VictorOps. 
-To use VictorOps alerting you must first enable the &#39;Alert Ingestion API&#39; 
-in the &#39;Integrations&#39; section of VictorOps. 
-Then place the API key from the URL into the &#39;victorops&#39; section of the Kapacitor configuration. 
+To use VictorOps alerting you must first enable the 'Alert Ingestion API' 
+in the 'Integrations' section of VictorOps. 
+Then place the API key from the URL into the 'victorops' section of the Kapacitor configuration. 
 
 Example: 
 
@@ -1908,9 +2068,9 @@ Example:
              .routingKey('team_rocket')
 ```
 
-Send alerts to VictorOps with routing key &#39;team_rocket&#39; 
+Send alerts to VictorOps with routing key 'team_rocket' 
 
-If the &#39;victorops&#39; section in the configuration has the option: global = true 
+If the 'victorops' section in the configuration has the option: global = true 
 then all alerts are sent to VictorOps without the need to explicitly state it 
 in the TICKscript. 
 
@@ -1937,8 +2097,10 @@ Send alert to VictorOps using the default routing key, found in the configuratio
 
 
 ```javascript
-node.victorOps()
+alert.victorOps()
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 #### VictorOps RoutingKey
 
@@ -1947,9 +2109,11 @@ Defaults to the value in the configuration if empty.
 
 
 ```javascript
-node.victorOps()
+alert.victorOps()
       .routingKey(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 
@@ -1960,8 +2124,10 @@ An empty value indicates the level is invalid and is skipped.
 
 
 ```javascript
-node.warn(value ast.LambdaNode)
+alert.warn(value ast.LambdaNode)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### WarnReset
@@ -1970,8 +2136,10 @@ Filter expression for reseting the WARNING alert level to lower level.
 
 
 ```javascript
-node.warnReset(value ast.LambdaNode)
+alert.warnReset(value ast.LambdaNode)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 Chaining Methods
@@ -1988,11 +2156,12 @@ Create an alert node, which can trigger alerts.
 
 
 ```javascript
-node|alert()
+alert|alert()
 ```
 
 Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Bottom
 
@@ -2000,11 +2169,12 @@ Select the bottom `num` points for `field` and sort by any extra tags or fields.
 
 
 ```javascript
-node|bottom(num int64, field string, fieldsAndTags ...string)
+alert|bottom(num int64, field string, fieldsAndTags ...string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Combine
 
@@ -2012,11 +2182,12 @@ Combine this node with itself. The data are combined on timestamp.
 
 
 ```javascript
-node|combine(expressions ...ast.LambdaNode)
+alert|combine(expressions ...ast.LambdaNode)
 ```
 
 Returns: [CombineNode](/kapacitor/v1.4/nodes/combine_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Count
 
@@ -2024,11 +2195,12 @@ Count the number of points.
 
 
 ```javascript
-node|count(field string)
+alert|count(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### CumulativeSum
 
@@ -2037,15 +2209,16 @@ A point is emitted for every point collected.
 
 
 ```javascript
-node|cumulativeSum(field string)
+alert|cumulativeSum(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Deadman
 
-Helper function for creating an alert on low throughput, a.k.a. deadman&#39;s switch. 
+Helper function for creating an alert on low throughput, a.k.a. deadman's switch. 
 
 - Threshold -- trigger alert if throughput drops below threshold in points/interval. 
 - Interval -- how often to check the throughput. 
@@ -2086,7 +2259,7 @@ Example:
     data...
 ```
 
-The `id` and `message` alert properties can be configured globally via the &#39;deadman&#39; configuration section. 
+The `id` and `message` alert properties can be configured globally via the 'deadman' configuration section. 
 
 Since the [AlertNode](/kapacitor/v1.4/nodes/alert_node/) is the last piece it can be further modified as usual. 
 Example: 
@@ -2104,7 +2277,7 @@ Example:
     data...
 ```
 
-You can specify additional lambda expressions to further constrain when the deadman&#39;s switch is triggered. 
+You can specify additional lambda expressions to further constrain when the deadman's switch is triggered. 
 Example: 
 
 
@@ -2122,11 +2295,12 @@ Example:
 
 
 ```javascript
-node|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
+alert|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
 ```
 
 Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Default
 
@@ -2134,11 +2308,12 @@ Create a node that can set defaults for missing tags or fields.
 
 
 ```javascript
-node|default()
+alert|default()
 ```
 
 Returns: [DefaultNode](/kapacitor/v1.4/nodes/default_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Delete
 
@@ -2146,11 +2321,12 @@ Create a node that can delete tags or fields.
 
 
 ```javascript
-node|delete()
+alert|delete()
 ```
 
 Returns: [DeleteNode](/kapacitor/v1.4/nodes/delete_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Derivative
 
@@ -2158,11 +2334,12 @@ Create a new node that computes the derivative of adjacent points.
 
 
 ```javascript
-node|derivative(field string)
+alert|derivative(field string)
 ```
 
 Returns: [DerivativeNode](/kapacitor/v1.4/nodes/derivative_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Difference
 
@@ -2170,11 +2347,12 @@ Compute the difference between points independent of elapsed time.
 
 
 ```javascript
-node|difference(field string)
+alert|difference(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Distinct
 
@@ -2182,11 +2360,12 @@ Produce batch of only the distinct points.
 
 
 ```javascript
-node|distinct(field string)
+alert|distinct(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Elapsed
 
@@ -2194,11 +2373,12 @@ Compute the elapsed time between points
 
 
 ```javascript
-node|elapsed(field string, unit time.Duration)
+alert|elapsed(field string, unit time.Duration)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Eval
 
@@ -2208,11 +2388,12 @@ The results are available to later expressions.
 
 
 ```javascript
-node|eval(expressions ...ast.LambdaNode)
+alert|eval(expressions ...ast.LambdaNode)
 ```
 
 Returns: [EvalNode](/kapacitor/v1.4/nodes/eval_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### First
 
@@ -2220,11 +2401,12 @@ Select the first point.
 
 
 ```javascript
-node|first(field string)
+alert|first(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Flatten
 
@@ -2232,11 +2414,12 @@ Flatten points with similar times into a single point.
 
 
 ```javascript
-node|flatten()
+alert|flatten()
 ```
 
 Returns: [FlattenNode](/kapacitor/v1.4/nodes/flatten_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### GroupBy
 
@@ -2253,11 +2436,12 @@ Example:
 
 
 ```javascript
-node|groupBy(tag ...interface{})
+alert|groupBy(tag ...interface{})
 ```
 
 Returns: [GroupByNode](/kapacitor/v1.4/nodes/group_by_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### HoltWinters
 
@@ -2265,11 +2449,12 @@ Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_lang
 
 
 ```javascript
-node|holtWinters(field string, h int64, m int64, interval time.Duration)
+alert|holtWinters(field string, h int64, m int64, interval time.Duration)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### HoltWintersWithFit
 
@@ -2278,27 +2463,29 @@ This method also outputs all the points used to fit the data in addition to the 
 
 
 ```javascript
-node|holtWintersWithFit(field string, h int64, m int64, interval time.Duration)
+alert|holtWintersWithFit(field string, h int64, m int64, interval time.Duration)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### HttpOut
 
 Create an HTTP output node that caches the most recent data it has received. 
 The cached data are available at the given endpoint. 
 The endpoint is the relative path from the API endpoint of the running task. 
-For example, if the task endpoint is at `/kapacitor/v1/tasks/&lt;task_id&gt;` and endpoint is 
-`top10`, then the data can be requested from `/kapacitor/v1/tasks/&lt;task_id&gt;/top10`. 
+For example, if the task endpoint is at `/kapacitor/v1/tasks/<task_id>` and endpoint is 
+`top10`, then the data can be requested from `/kapacitor/v1/tasks/<task_id>/top10`. 
 
 
 ```javascript
-node|httpOut(endpoint string)
+alert|httpOut(endpoint string)
 ```
 
 Returns: [HTTPOutNode](/kapacitor/v1.4/nodes/http_out_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### HttpPost
 
@@ -2308,11 +2495,12 @@ endpoint property method.
 
 
 ```javascript
-node|httpPost(url ...string)
+alert|httpPost(url ...string)
 ```
 
 Returns: [HTTPPostNode](/kapacitor/v1.4/nodes/http_post_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### InfluxDBOut
 
@@ -2320,11 +2508,12 @@ Create an influxdb output node that will store the incoming data into InfluxDB.
 
 
 ```javascript
-node|influxDBOut()
+alert|influxDBOut()
 ```
 
 Returns: [InfluxDBOutNode](/kapacitor/v1.4/nodes/influx_d_b_out_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Join
 
@@ -2332,11 +2521,12 @@ Join this node with other nodes. The data are joined on timestamp.
 
 
 ```javascript
-node|join(others ...Node)
+alert|join(others ...Node)
 ```
 
 Returns: [JoinNode](/kapacitor/v1.4/nodes/join_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### K8sAutoscale
 
@@ -2344,11 +2534,12 @@ Create a node that can trigger autoscale events for a kubernetes cluster.
 
 
 ```javascript
-node|k8sAutoscale()
+alert|k8sAutoscale()
 ```
 
 Returns: [K8sAutoscaleNode](/kapacitor/v1.4/nodes/k8s_autoscale_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### KapacitorLoopback
 
@@ -2356,11 +2547,12 @@ Create an kapacitor loopback node that will send data back into Kapacitor as a s
 
 
 ```javascript
-node|kapacitorLoopback()
+alert|kapacitorLoopback()
 ```
 
 Returns: [KapacitorLoopbackNode](/kapacitor/v1.4/nodes/kapacitor_loopback_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Last
 
@@ -2368,11 +2560,12 @@ Select the last point.
 
 
 ```javascript
-node|last(field string)
+alert|last(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Max
 
@@ -2380,11 +2573,12 @@ Select the maximum point.
 
 
 ```javascript
-node|max(field string)
+alert|max(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Mean
 
@@ -2392,11 +2586,12 @@ Compute the mean of the data.
 
 
 ```javascript
-node|mean(field string)
+alert|mean(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Median
 
@@ -2405,11 +2600,12 @@ if you want the median point use `.percentile(field, 50.0)`.
 
 
 ```javascript
-node|median(field string)
+alert|median(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Min
 
@@ -2417,11 +2613,12 @@ Select the minimum point.
 
 
 ```javascript
-node|min(field string)
+alert|min(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Mode
 
@@ -2429,11 +2626,12 @@ Compute the mode of the data.
 
 
 ```javascript
-node|mode(field string)
+alert|mode(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### MovingAverage
 
@@ -2442,11 +2640,12 @@ No points are emitted until the window is full.
 
 
 ```javascript
-node|movingAverage(field string, window int64)
+alert|movingAverage(field string, window int64)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Percentile
 
@@ -2454,11 +2653,12 @@ Select a point at the given percentile. This is a selector function, no interpol
 
 
 ```javascript
-node|percentile(field string, percentile float64)
+alert|percentile(field string, percentile float64)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Sample
 
@@ -2468,11 +2668,12 @@ One point will be emitted every count or duration specified.
 
 
 ```javascript
-node|sample(rate interface{})
+alert|sample(rate interface{})
 ```
 
 Returns: [SampleNode](/kapacitor/v1.4/nodes/sample_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Shift
 
@@ -2480,11 +2681,12 @@ Create a new node that shifts the incoming points or batches in time.
 
 
 ```javascript
-node|shift(shift time.Duration)
+alert|shift(shift time.Duration)
 ```
 
 Returns: [ShiftNode](/kapacitor/v1.4/nodes/shift_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Sideload
 
@@ -2492,11 +2694,12 @@ Create a node that can load data from external sources
 
 
 ```javascript
-node|sideload()
+alert|sideload()
 ```
 
 Returns: [SideloadNode](/kapacitor/v1.4/nodes/sideload_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Spread
 
@@ -2504,11 +2707,12 @@ Compute the difference between `min` and `max` points.
 
 
 ```javascript
-node|spread(field string)
+alert|spread(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### StateCount
 
@@ -2516,11 +2720,12 @@ Create a node that tracks number of consecutive points in a given state.
 
 
 ```javascript
-node|stateCount(expression ast.LambdaNode)
+alert|stateCount(expression ast.LambdaNode)
 ```
 
 Returns: [StateCountNode](/kapacitor/v1.4/nodes/state_count_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### StateDuration
 
@@ -2528,11 +2733,12 @@ Create a node that tracks duration in a given state.
 
 
 ```javascript
-node|stateDuration(expression ast.LambdaNode)
+alert|stateDuration(expression ast.LambdaNode)
 ```
 
 Returns: [StateDurationNode](/kapacitor/v1.4/nodes/state_duration_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Stats
 
@@ -2542,11 +2748,12 @@ This means the interval time is independent of the times of the data points the 
 
 
 ```javascript
-node|stats(interval time.Duration)
+alert|stats(interval time.Duration)
 ```
 
 Returns: [StatsNode](/kapacitor/v1.4/nodes/stats_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Stddev
 
@@ -2554,11 +2761,12 @@ Compute the standard deviation.
 
 
 ```javascript
-node|stddev(field string)
+alert|stddev(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Sum
 
@@ -2566,11 +2774,12 @@ Compute the sum of all values.
 
 
 ```javascript
-node|sum(field string)
+alert|sum(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### SwarmAutoscale
 
@@ -2578,11 +2787,12 @@ Create a node that can trigger autoscale events for a docker swarm cluster.
 
 
 ```javascript
-node|swarmAutoscale()
+alert|swarmAutoscale()
 ```
 
 Returns: [SwarmAutoscaleNode](/kapacitor/v1.4/nodes/swarm_autoscale_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Top
 
@@ -2590,11 +2800,12 @@ Select the top `num` points for `field` and sort by any extra tags or fields.
 
 
 ```javascript
-node|top(num int64, field string, fieldsAndTags ...string)
+alert|top(num int64, field string, fieldsAndTags ...string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Union
 
@@ -2602,11 +2813,12 @@ Perform the union of this node and all other given nodes.
 
 
 ```javascript
-node|union(node ...Node)
+alert|union(node ...Node)
 ```
 
 Returns: [UnionNode](/kapacitor/v1.4/nodes/union_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Where
 
@@ -2614,11 +2826,12 @@ Create a new node that filters the data stream by a given expression.
 
 
 ```javascript
-node|where(expression ast.LambdaNode)
+alert|where(expression ast.LambdaNode)
 ```
 
 Returns: [WhereNode](/kapacitor/v1.4/nodes/where_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Window
 
@@ -2628,8 +2841,9 @@ NOTE: Window can only be applied to stream edges.
 
 
 ```javascript
-node|window()
+alert|window()
 ```
 
 Returns: [WindowNode](/kapacitor/v1.4/nodes/window_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>

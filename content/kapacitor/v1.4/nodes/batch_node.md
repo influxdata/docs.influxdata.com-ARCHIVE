@@ -9,6 +9,19 @@ menu:
     weight: 4
     parent: nodes
 ---
+### Constructor 
+
+| Chaining Method | Description |
+|:---------|:---------|
+| **[batch](#descr)** | Has no constructor signature. |
+### Property Methods
+This node has no properties that can be set.
+
+
+### Chaining Methods
+[Deadman](/kapacitor/v1.4/nodes/batch_node/#deadman), [Query](/kapacitor/v1.4/nodes/batch_node/#query), [Stats](/kapacitor/v1.4/nodes/batch_node/#stats)
+<a id='descr'/><hr/><br/>
+### Description
 
 A node that handles creating several child QueryNodes. 
 Each call to `query` creates a child batch node that 
@@ -36,17 +49,7 @@ Available Statistics:
 
 
 
-Index
------
-
-### Properties
-
-
-### Chaining Methods
-
--	[Deadman](/kapacitor/v1.4/nodes/batch_node/#deadman)
--	[Query](/kapacitor/v1.4/nodes/batch_node/#query)
--	[Stats](/kapacitor/v1.4/nodes/batch_node/#stats)
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 Chaining Methods
 ----------------
@@ -58,7 +61,7 @@ Chaining methods are marked using the `|` operator.
 
 ### Deadman
 
-Helper function for creating an alert on low throughput, a.k.a. deadman&#39;s switch. 
+Helper function for creating an alert on low throughput, a.k.a. deadman's switch. 
 
 - Threshold -- trigger alert if throughput drops below threshold in points/interval. 
 - Interval -- how often to check the throughput. 
@@ -99,7 +102,7 @@ Example:
     data...
 ```
 
-The `id` and `message` alert properties can be configured globally via the &#39;deadman&#39; configuration section. 
+The `id` and `message` alert properties can be configured globally via the 'deadman' configuration section. 
 
 Since the [AlertNode](/kapacitor/v1.4/nodes/alert_node/) is the last piece it can be further modified as usual. 
 Example: 
@@ -117,7 +120,7 @@ Example:
     data...
 ```
 
-You can specify additional lambda expressions to further constrain when the deadman&#39;s switch is triggered. 
+You can specify additional lambda expressions to further constrain when the deadman's switch is triggered. 
 Example: 
 
 
@@ -135,11 +138,12 @@ Example:
 
 
 ```javascript
-node|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
+batch|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
 ```
 
 Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Query
 
@@ -151,11 +155,12 @@ passed to the `groupBy` method.
 
 
 ```javascript
-node|query(q string)
+batch|query(q string)
 ```
 
 Returns: [QueryNode](/kapacitor/v1.4/nodes/query_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Stats
 
@@ -165,8 +170,9 @@ This means the interval time is independent of the times of the data points the 
 
 
 ```javascript
-node|stats(interval time.Duration)
+batch|stats(interval time.Duration)
 ```
 
 Returns: [StatsNode](/kapacitor/v1.4/nodes/stats_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>

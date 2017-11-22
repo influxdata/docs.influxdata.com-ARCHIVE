@@ -9,6 +9,33 @@ menu:
     weight: 130
     parent: nodes
 ---
+### Constructor 
+
+| Chaining Method | Description |
+|:---------|:---------|
+| **[influxDBOut](#descr)&nbsp;(&nbsp;)** | Create an influxdb output node that will store the incoming data into InfluxDB.  |
+
+### Property Methods
+
+| Setters | Description |
+|:---|:---|
+| **[buffer](#buffer)&nbsp;(&nbsp;`value`&nbsp;`int64`)** | Number of points to buffer when writing to InfluxDB. Default: 1000  |
+| **[cluster](#cluster)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the InfluxDB instance to connect to. If empty the configured default will be used.  |
+| **[create](#create)&nbsp;(&nbsp;)** | Create indicates that both the database and retention policy will be created, when the task is started. If the retention policy name is empty than no retention policy will be specified and the default retention policy name will be created.  |
+| **[database](#database)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the database.  |
+| **[flushInterval](#flushinterval)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | Write points to InfluxDB after interval even if buffer is not full. Default: 10s  |
+| **[measurement](#measurement)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the measurement.  |
+| **[precision](#precision)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The precision to use when writing the data.  |
+| **[retentionPolicy](#retentionpolicy)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the retention policy.  |
+| **[tag](#tag)&nbsp;(&nbsp;`key`&nbsp;`string`,&nbsp;`value`&nbsp;`string`)** | Add a static tag to all data points. Tag can be called more than once.  |
+| **[writeConsistency](#writeconsistency)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The write consistency to use when writing the data.  |
+
+
+
+### Chaining Methods
+[Deadman](/kapacitor/v1.4/nodes/influx_d_b_out_node/#deadman), [Stats](/kapacitor/v1.4/nodes/influx_d_b_out_node/#stats)
+<a id='descr'/><hr/><br/>
+### Description
 
 Writes the data to InfluxDB as it is received. 
 
@@ -37,26 +64,7 @@ Available Statistics:
 
 
 
-Index
------
-
-### Properties
-
--	[Buffer](/kapacitor/v1.4/nodes/influx_d_b_out_node/#buffer)
--	[Cluster](/kapacitor/v1.4/nodes/influx_d_b_out_node/#cluster)
--	[Create](/kapacitor/v1.4/nodes/influx_d_b_out_node/#create)
--	[Database](/kapacitor/v1.4/nodes/influx_d_b_out_node/#database)
--	[FlushInterval](/kapacitor/v1.4/nodes/influx_d_b_out_node/#flushinterval)
--	[Measurement](/kapacitor/v1.4/nodes/influx_d_b_out_node/#measurement)
--	[Precision](/kapacitor/v1.4/nodes/influx_d_b_out_node/#precision)
--	[RetentionPolicy](/kapacitor/v1.4/nodes/influx_d_b_out_node/#retentionpolicy)
--	[Tag](/kapacitor/v1.4/nodes/influx_d_b_out_node/#tag)
--	[WriteConsistency](/kapacitor/v1.4/nodes/influx_d_b_out_node/#writeconsistency)
-
-### Chaining Methods
-
--	[Deadman](/kapacitor/v1.4/nodes/influx_d_b_out_node/#deadman)
--	[Stats](/kapacitor/v1.4/nodes/influx_d_b_out_node/#stats)
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 Properties
 ----------
@@ -73,8 +81,10 @@ Default: 1000
 
 
 ```javascript
-node.buffer(value int64)
+influxDBOut.buffer(value int64)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Cluster
@@ -84,8 +94,10 @@ If empty the configured default will be used.
 
 
 ```javascript
-node.cluster(value string)
+influxDBOut.cluster(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Create
@@ -101,8 +113,10 @@ If the database already exists nothing happens.
 
 
 ```javascript
-node.create()
+influxDBOut.create()
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Database
@@ -111,8 +125,10 @@ The name of the database.
 
 
 ```javascript
-node.database(value string)
+influxDBOut.database(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### FlushInterval
@@ -122,8 +138,10 @@ Default: 10s
 
 
 ```javascript
-node.flushInterval(value time.Duration)
+influxDBOut.flushInterval(value time.Duration)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Measurement
@@ -132,8 +150,10 @@ The name of the measurement.
 
 
 ```javascript
-node.measurement(value string)
+influxDBOut.measurement(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Precision
@@ -142,8 +162,10 @@ The precision to use when writing the data.
 
 
 ```javascript
-node.precision(value string)
+influxDBOut.precision(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### RetentionPolicy
@@ -152,8 +174,10 @@ The name of the retention policy.
 
 
 ```javascript
-node.retentionPolicy(value string)
+influxDBOut.retentionPolicy(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Tag
@@ -164,8 +188,10 @@ Tag can be called more than once.
 
 
 ```javascript
-node.tag(key string, value string)
+influxDBOut.tag(key string, value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### WriteConsistency
@@ -174,8 +200,10 @@ The write consistency to use when writing the data.
 
 
 ```javascript
-node.writeConsistency(value string)
+influxDBOut.writeConsistency(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 Chaining Methods
@@ -188,7 +216,7 @@ Chaining methods are marked using the `|` operator.
 
 ### Deadman
 
-Helper function for creating an alert on low throughput, a.k.a. deadman&#39;s switch. 
+Helper function for creating an alert on low throughput, a.k.a. deadman's switch. 
 
 - Threshold -- trigger alert if throughput drops below threshold in points/interval. 
 - Interval -- how often to check the throughput. 
@@ -229,7 +257,7 @@ Example:
     data...
 ```
 
-The `id` and `message` alert properties can be configured globally via the &#39;deadman&#39; configuration section. 
+The `id` and `message` alert properties can be configured globally via the 'deadman' configuration section. 
 
 Since the [AlertNode](/kapacitor/v1.4/nodes/alert_node/) is the last piece it can be further modified as usual. 
 Example: 
@@ -247,7 +275,7 @@ Example:
     data...
 ```
 
-You can specify additional lambda expressions to further constrain when the deadman&#39;s switch is triggered. 
+You can specify additional lambda expressions to further constrain when the deadman's switch is triggered. 
 Example: 
 
 
@@ -265,11 +293,12 @@ Example:
 
 
 ```javascript
-node|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
+influxDBOut|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
 ```
 
 Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Stats
 
@@ -279,8 +308,9 @@ This means the interval time is independent of the times of the data points the 
 
 
 ```javascript
-node|stats(interval time.Duration)
+influxDBOut|stats(interval time.Duration)
 ```
 
 Returns: [StatsNode](/kapacitor/v1.4/nodes/stats_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>

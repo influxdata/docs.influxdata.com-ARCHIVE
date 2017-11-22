@@ -9,6 +9,31 @@ menu:
     weight: 90
     parent: nodes
 ---
+### Constructor 
+
+| Chaining Method | Description |
+|:---------|:---------|
+| **[from](#descr)&nbsp;(&nbsp;)** | Creates a new stream node that can be further filtered using the Database, RetentionPolicy, Measurement and Where properties. From can be called multiple times to create multiple independent forks of the data stream.  |
+
+### Property Methods
+
+| Setters | Description |
+|:---|:---|
+| **[database](#database)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The database name. If empty any database will be used.  |
+| **[groupBy](#groupby)&nbsp;(&nbsp;`tag`&nbsp;`...interface{}`)** | Group the data by a set of tags.  |
+| **[groupByMeasurement](#groupbymeasurement)&nbsp;(&nbsp;)** | If set will include the measurement name in the group ID. Along with any other group by dimensions.  |
+| **[measurement](#measurement)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The measurement name If empty any measurement will be used.  |
+| **[retentionPolicy](#retentionpolicy)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The retention policy name If empty any retention policy will be used.  |
+| **[round](#round)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | Optional duration for rounding timestamps. Helpful to ensure data points land on specific boundaries Example: stream |from() .measurement('mydata') .round(1s)  |
+| **[truncate](#truncate)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | Optional duration for truncating timestamps. Helpful to ensure data points land on specific boundaries Example: stream |from() .measurement('mydata') .truncate(1s)  |
+| **[where](#where)&nbsp;(&nbsp;`lambda`&nbsp;`ast.LambdaNode`)** | Filter the current stream using the given expression. This expression is a Kapacitor expression. Kapacitor expressions are a superset of InfluxQL WHERE expressions. See the [expression](https://docs.influxdata.com/kapacitor/latest/tick/expr/) docs for more information.  |
+
+
+
+### Chaining Methods
+[Alert](/kapacitor/v1.4/nodes/from_node/#alert), [Bottom](/kapacitor/v1.4/nodes/from_node/#bottom), [Combine](/kapacitor/v1.4/nodes/from_node/#combine), [Count](/kapacitor/v1.4/nodes/from_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/from_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/from_node/#deadman), [Default](/kapacitor/v1.4/nodes/from_node/#default), [Delete](/kapacitor/v1.4/nodes/from_node/#delete), [Derivative](/kapacitor/v1.4/nodes/from_node/#derivative), [Difference](/kapacitor/v1.4/nodes/from_node/#difference), [Distinct](/kapacitor/v1.4/nodes/from_node/#distinct), [Elapsed](/kapacitor/v1.4/nodes/from_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/from_node/#eval), [First](/kapacitor/v1.4/nodes/from_node/#first), [Flatten](/kapacitor/v1.4/nodes/from_node/#flatten), [From](/kapacitor/v1.4/nodes/from_node/#from), [HoltWinters](/kapacitor/v1.4/nodes/from_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/from_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/from_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/from_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/from_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/from_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/from_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/from_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/from_node/#last), [Log](/kapacitor/v1.4/nodes/from_node/#log), [Max](/kapacitor/v1.4/nodes/from_node/#max), [Mean](/kapacitor/v1.4/nodes/from_node/#mean), [Median](/kapacitor/v1.4/nodes/from_node/#median), [Min](/kapacitor/v1.4/nodes/from_node/#min), [Mode](/kapacitor/v1.4/nodes/from_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/from_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/from_node/#percentile), [Sample](/kapacitor/v1.4/nodes/from_node/#sample), [Shift](/kapacitor/v1.4/nodes/from_node/#shift), [Sideload](/kapacitor/v1.4/nodes/from_node/#sideload), [Spread](/kapacitor/v1.4/nodes/from_node/#spread), [StateCount](/kapacitor/v1.4/nodes/from_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/from_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/from_node/#stats), [Stddev](/kapacitor/v1.4/nodes/from_node/#stddev), [Sum](/kapacitor/v1.4/nodes/from_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/from_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/from_node/#top), [Union](/kapacitor/v1.4/nodes/from_node/#union), [Window](/kapacitor/v1.4/nodes/from_node/#window)
+<a id='descr'/><hr/><br/>
+### Description
 
 A [FromNode](/kapacitor/v1.4/nodes/from_node/) selects a subset of the data flowing through a [StreamNode.](/kapacitor/v1.4/nodes/stream_node/) 
 The stream node allows you to select which portion of the stream you want to process. 
@@ -32,68 +57,7 @@ and retention policy `myrp` and measurement `mymeasurement` where
 the tag `host` matches the regex `logger\d+` 
 
 
-Index
------
-
-### Properties
-
--	[Database](/kapacitor/v1.4/nodes/from_node/#database)
--	[GroupBy](/kapacitor/v1.4/nodes/from_node/#groupby)
--	[GroupByMeasurement](/kapacitor/v1.4/nodes/from_node/#groupbymeasurement)
--	[Measurement](/kapacitor/v1.4/nodes/from_node/#measurement)
--	[RetentionPolicy](/kapacitor/v1.4/nodes/from_node/#retentionpolicy)
--	[Round](/kapacitor/v1.4/nodes/from_node/#round)
--	[Truncate](/kapacitor/v1.4/nodes/from_node/#truncate)
--	[Where](/kapacitor/v1.4/nodes/from_node/#where)
-
-### Chaining Methods
-
--	[Alert](/kapacitor/v1.4/nodes/from_node/#alert)
--	[Bottom](/kapacitor/v1.4/nodes/from_node/#bottom)
--	[Combine](/kapacitor/v1.4/nodes/from_node/#combine)
--	[Count](/kapacitor/v1.4/nodes/from_node/#count)
--	[CumulativeSum](/kapacitor/v1.4/nodes/from_node/#cumulativesum)
--	[Deadman](/kapacitor/v1.4/nodes/from_node/#deadman)
--	[Default](/kapacitor/v1.4/nodes/from_node/#default)
--	[Delete](/kapacitor/v1.4/nodes/from_node/#delete)
--	[Derivative](/kapacitor/v1.4/nodes/from_node/#derivative)
--	[Difference](/kapacitor/v1.4/nodes/from_node/#difference)
--	[Distinct](/kapacitor/v1.4/nodes/from_node/#distinct)
--	[Elapsed](/kapacitor/v1.4/nodes/from_node/#elapsed)
--	[Eval](/kapacitor/v1.4/nodes/from_node/#eval)
--	[First](/kapacitor/v1.4/nodes/from_node/#first)
--	[Flatten](/kapacitor/v1.4/nodes/from_node/#flatten)
--	[From](/kapacitor/v1.4/nodes/from_node/#from)
--	[HoltWinters](/kapacitor/v1.4/nodes/from_node/#holtwinters)
--	[HoltWintersWithFit](/kapacitor/v1.4/nodes/from_node/#holtwinterswithfit)
--	[HttpOut](/kapacitor/v1.4/nodes/from_node/#httpout)
--	[HttpPost](/kapacitor/v1.4/nodes/from_node/#httppost)
--	[InfluxDBOut](/kapacitor/v1.4/nodes/from_node/#influxdbout)
--	[Join](/kapacitor/v1.4/nodes/from_node/#join)
--	[K8sAutoscale](/kapacitor/v1.4/nodes/from_node/#k8sautoscale)
--	[KapacitorLoopback](/kapacitor/v1.4/nodes/from_node/#kapacitorloopback)
--	[Last](/kapacitor/v1.4/nodes/from_node/#last)
--	[Log](/kapacitor/v1.4/nodes/from_node/#log)
--	[Max](/kapacitor/v1.4/nodes/from_node/#max)
--	[Mean](/kapacitor/v1.4/nodes/from_node/#mean)
--	[Median](/kapacitor/v1.4/nodes/from_node/#median)
--	[Min](/kapacitor/v1.4/nodes/from_node/#min)
--	[Mode](/kapacitor/v1.4/nodes/from_node/#mode)
--	[MovingAverage](/kapacitor/v1.4/nodes/from_node/#movingaverage)
--	[Percentile](/kapacitor/v1.4/nodes/from_node/#percentile)
--	[Sample](/kapacitor/v1.4/nodes/from_node/#sample)
--	[Shift](/kapacitor/v1.4/nodes/from_node/#shift)
--	[Sideload](/kapacitor/v1.4/nodes/from_node/#sideload)
--	[Spread](/kapacitor/v1.4/nodes/from_node/#spread)
--	[StateCount](/kapacitor/v1.4/nodes/from_node/#statecount)
--	[StateDuration](/kapacitor/v1.4/nodes/from_node/#stateduration)
--	[Stats](/kapacitor/v1.4/nodes/from_node/#stats)
--	[Stddev](/kapacitor/v1.4/nodes/from_node/#stddev)
--	[Sum](/kapacitor/v1.4/nodes/from_node/#sum)
--	[SwarmAutoscale](/kapacitor/v1.4/nodes/from_node/#swarmautoscale)
--	[Top](/kapacitor/v1.4/nodes/from_node/#top)
--	[Union](/kapacitor/v1.4/nodes/from_node/#union)
--	[Window](/kapacitor/v1.4/nodes/from_node/#window)
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 Properties
 ----------
@@ -110,8 +74,10 @@ If empty any database will be used.
 
 
 ```javascript
-node.database(value string)
+from.database(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### GroupBy
@@ -131,8 +97,10 @@ Example:
 
 
 ```javascript
-node.groupBy(tag ...interface{})
+from.groupBy(tag ...interface{})
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### GroupByMeasurement
@@ -151,14 +119,16 @@ Example:
           .groupBy('host')
 ```
 
-The above example selects all measurements from the database &#39;mydb&#39; and 
+The above example selects all measurements from the database 'mydb' and 
 then each point is grouped by the host tag and measurement name. 
 Thus keeping measurements in their own groups. 
 
 
 ```javascript
-node.groupByMeasurement()
+from.groupByMeasurement()
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Measurement
@@ -168,8 +138,10 @@ If empty any measurement will be used.
 
 
 ```javascript
-node.measurement(value string)
+from.measurement(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### RetentionPolicy
@@ -179,8 +151,10 @@ If empty any retention policy will be used.
 
 
 ```javascript
-node.retentionPolicy(value string)
+from.retentionPolicy(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Round
@@ -201,8 +175,10 @@ All incoming data will be rounded to the nearest 1 second boundary.
 
 
 ```javascript
-node.round(value time.Duration)
+from.round(value time.Duration)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Truncate
@@ -223,8 +199,10 @@ All incoming data will be truncated to 1 second resolution.
 
 
 ```javascript
-node.truncate(value time.Duration)
+from.truncate(value time.Duration)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Where
@@ -312,8 +290,10 @@ If empty then all data points are considered to match.
 
 
 ```javascript
-node.where(lambda ast.LambdaNode)
+from.where(lambda ast.LambdaNode)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 Chaining Methods
@@ -330,11 +310,12 @@ Create an alert node, which can trigger alerts.
 
 
 ```javascript
-node|alert()
+from|alert()
 ```
 
 Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Bottom
 
@@ -342,11 +323,12 @@ Select the bottom `num` points for `field` and sort by any extra tags or fields.
 
 
 ```javascript
-node|bottom(num int64, field string, fieldsAndTags ...string)
+from|bottom(num int64, field string, fieldsAndTags ...string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Combine
 
@@ -354,11 +336,12 @@ Combine this node with itself. The data are combined on timestamp.
 
 
 ```javascript
-node|combine(expressions ...ast.LambdaNode)
+from|combine(expressions ...ast.LambdaNode)
 ```
 
 Returns: [CombineNode](/kapacitor/v1.4/nodes/combine_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Count
 
@@ -366,11 +349,12 @@ Count the number of points.
 
 
 ```javascript
-node|count(field string)
+from|count(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### CumulativeSum
 
@@ -379,15 +363,16 @@ A point is emitted for every point collected.
 
 
 ```javascript
-node|cumulativeSum(field string)
+from|cumulativeSum(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Deadman
 
-Helper function for creating an alert on low throughput, a.k.a. deadman&#39;s switch. 
+Helper function for creating an alert on low throughput, a.k.a. deadman's switch. 
 
 - Threshold -- trigger alert if throughput drops below threshold in points/interval. 
 - Interval -- how often to check the throughput. 
@@ -428,7 +413,7 @@ Example:
     data...
 ```
 
-The `id` and `message` alert properties can be configured globally via the &#39;deadman&#39; configuration section. 
+The `id` and `message` alert properties can be configured globally via the 'deadman' configuration section. 
 
 Since the [AlertNode](/kapacitor/v1.4/nodes/alert_node/) is the last piece it can be further modified as usual. 
 Example: 
@@ -446,7 +431,7 @@ Example:
     data...
 ```
 
-You can specify additional lambda expressions to further constrain when the deadman&#39;s switch is triggered. 
+You can specify additional lambda expressions to further constrain when the deadman's switch is triggered. 
 Example: 
 
 
@@ -464,11 +449,12 @@ Example:
 
 
 ```javascript
-node|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
+from|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
 ```
 
 Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Default
 
@@ -476,11 +462,12 @@ Create a node that can set defaults for missing tags or fields.
 
 
 ```javascript
-node|default()
+from|default()
 ```
 
 Returns: [DefaultNode](/kapacitor/v1.4/nodes/default_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Delete
 
@@ -488,11 +475,12 @@ Create a node that can delete tags or fields.
 
 
 ```javascript
-node|delete()
+from|delete()
 ```
 
 Returns: [DeleteNode](/kapacitor/v1.4/nodes/delete_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Derivative
 
@@ -500,11 +488,12 @@ Create a new node that computes the derivative of adjacent points.
 
 
 ```javascript
-node|derivative(field string)
+from|derivative(field string)
 ```
 
 Returns: [DerivativeNode](/kapacitor/v1.4/nodes/derivative_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Difference
 
@@ -512,11 +501,12 @@ Compute the difference between points independent of elapsed time.
 
 
 ```javascript
-node|difference(field string)
+from|difference(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Distinct
 
@@ -524,11 +514,12 @@ Produce batch of only the distinct points.
 
 
 ```javascript
-node|distinct(field string)
+from|distinct(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Elapsed
 
@@ -536,11 +527,12 @@ Compute the elapsed time between points
 
 
 ```javascript
-node|elapsed(field string, unit time.Duration)
+from|elapsed(field string, unit time.Duration)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Eval
 
@@ -550,11 +542,12 @@ The results are available to later expressions.
 
 
 ```javascript
-node|eval(expressions ...ast.LambdaNode)
+from|eval(expressions ...ast.LambdaNode)
 ```
 
 Returns: [EvalNode](/kapacitor/v1.4/nodes/eval_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### First
 
@@ -562,11 +555,12 @@ Select the first point.
 
 
 ```javascript
-node|first(field string)
+from|first(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Flatten
 
@@ -574,11 +568,12 @@ Flatten points with similar times into a single point.
 
 
 ```javascript
-node|flatten()
+from|flatten()
 ```
 
 Returns: [FlattenNode](/kapacitor/v1.4/nodes/flatten_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### From
 
@@ -612,11 +607,12 @@ Example:
 
 
 ```javascript
-node|from()
+from|from()
 ```
 
 Returns: [FromNode](/kapacitor/v1.4/nodes/from_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### HoltWinters
 
@@ -624,11 +620,12 @@ Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_lang
 
 
 ```javascript
-node|holtWinters(field string, h int64, m int64, interval time.Duration)
+from|holtWinters(field string, h int64, m int64, interval time.Duration)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### HoltWintersWithFit
 
@@ -637,27 +634,29 @@ This method also outputs all the points used to fit the data in addition to the 
 
 
 ```javascript
-node|holtWintersWithFit(field string, h int64, m int64, interval time.Duration)
+from|holtWintersWithFit(field string, h int64, m int64, interval time.Duration)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### HttpOut
 
 Create an HTTP output node that caches the most recent data it has received. 
 The cached data are available at the given endpoint. 
 The endpoint is the relative path from the API endpoint of the running task. 
-For example, if the task endpoint is at `/kapacitor/v1/tasks/&lt;task_id&gt;` and endpoint is 
-`top10`, then the data can be requested from `/kapacitor/v1/tasks/&lt;task_id&gt;/top10`. 
+For example, if the task endpoint is at `/kapacitor/v1/tasks/<task_id>` and endpoint is 
+`top10`, then the data can be requested from `/kapacitor/v1/tasks/<task_id>/top10`. 
 
 
 ```javascript
-node|httpOut(endpoint string)
+from|httpOut(endpoint string)
 ```
 
 Returns: [HTTPOutNode](/kapacitor/v1.4/nodes/http_out_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### HttpPost
 
@@ -667,11 +666,12 @@ endpoint property method.
 
 
 ```javascript
-node|httpPost(url ...string)
+from|httpPost(url ...string)
 ```
 
 Returns: [HTTPPostNode](/kapacitor/v1.4/nodes/http_post_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### InfluxDBOut
 
@@ -679,11 +679,12 @@ Create an influxdb output node that will store the incoming data into InfluxDB.
 
 
 ```javascript
-node|influxDBOut()
+from|influxDBOut()
 ```
 
 Returns: [InfluxDBOutNode](/kapacitor/v1.4/nodes/influx_d_b_out_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Join
 
@@ -691,11 +692,12 @@ Join this node with other nodes. The data are joined on timestamp.
 
 
 ```javascript
-node|join(others ...Node)
+from|join(others ...Node)
 ```
 
 Returns: [JoinNode](/kapacitor/v1.4/nodes/join_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### K8sAutoscale
 
@@ -703,11 +705,12 @@ Create a node that can trigger autoscale events for a kubernetes cluster.
 
 
 ```javascript
-node|k8sAutoscale()
+from|k8sAutoscale()
 ```
 
 Returns: [K8sAutoscaleNode](/kapacitor/v1.4/nodes/k8s_autoscale_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### KapacitorLoopback
 
@@ -715,11 +718,12 @@ Create an kapacitor loopback node that will send data back into Kapacitor as a s
 
 
 ```javascript
-node|kapacitorLoopback()
+from|kapacitorLoopback()
 ```
 
 Returns: [KapacitorLoopbackNode](/kapacitor/v1.4/nodes/kapacitor_loopback_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Last
 
@@ -727,11 +731,12 @@ Select the last point.
 
 
 ```javascript
-node|last(field string)
+from|last(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Log
 
@@ -739,11 +744,12 @@ Create a node that logs all data it receives.
 
 
 ```javascript
-node|log()
+from|log()
 ```
 
 Returns: [LogNode](/kapacitor/v1.4/nodes/log_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Max
 
@@ -751,11 +757,12 @@ Select the maximum point.
 
 
 ```javascript
-node|max(field string)
+from|max(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Mean
 
@@ -763,11 +770,12 @@ Compute the mean of the data.
 
 
 ```javascript
-node|mean(field string)
+from|mean(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Median
 
@@ -776,11 +784,12 @@ if you want the median point use `.percentile(field, 50.0)`.
 
 
 ```javascript
-node|median(field string)
+from|median(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Min
 
@@ -788,11 +797,12 @@ Select the minimum point.
 
 
 ```javascript
-node|min(field string)
+from|min(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Mode
 
@@ -800,11 +810,12 @@ Compute the mode of the data.
 
 
 ```javascript
-node|mode(field string)
+from|mode(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### MovingAverage
 
@@ -813,11 +824,12 @@ No points are emitted until the window is full.
 
 
 ```javascript
-node|movingAverage(field string, window int64)
+from|movingAverage(field string, window int64)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Percentile
 
@@ -825,11 +837,12 @@ Select a point at the given percentile. This is a selector function, no interpol
 
 
 ```javascript
-node|percentile(field string, percentile float64)
+from|percentile(field string, percentile float64)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Sample
 
@@ -839,11 +852,12 @@ One point will be emitted every count or duration specified.
 
 
 ```javascript
-node|sample(rate interface{})
+from|sample(rate interface{})
 ```
 
 Returns: [SampleNode](/kapacitor/v1.4/nodes/sample_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Shift
 
@@ -851,11 +865,12 @@ Create a new node that shifts the incoming points or batches in time.
 
 
 ```javascript
-node|shift(shift time.Duration)
+from|shift(shift time.Duration)
 ```
 
 Returns: [ShiftNode](/kapacitor/v1.4/nodes/shift_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Sideload
 
@@ -863,11 +878,12 @@ Create a node that can load data from external sources
 
 
 ```javascript
-node|sideload()
+from|sideload()
 ```
 
 Returns: [SideloadNode](/kapacitor/v1.4/nodes/sideload_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Spread
 
@@ -875,11 +891,12 @@ Compute the difference between `min` and `max` points.
 
 
 ```javascript
-node|spread(field string)
+from|spread(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### StateCount
 
@@ -887,11 +904,12 @@ Create a node that tracks number of consecutive points in a given state.
 
 
 ```javascript
-node|stateCount(expression ast.LambdaNode)
+from|stateCount(expression ast.LambdaNode)
 ```
 
 Returns: [StateCountNode](/kapacitor/v1.4/nodes/state_count_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### StateDuration
 
@@ -899,11 +917,12 @@ Create a node that tracks duration in a given state.
 
 
 ```javascript
-node|stateDuration(expression ast.LambdaNode)
+from|stateDuration(expression ast.LambdaNode)
 ```
 
 Returns: [StateDurationNode](/kapacitor/v1.4/nodes/state_duration_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Stats
 
@@ -913,11 +932,12 @@ This means the interval time is independent of the times of the data points the 
 
 
 ```javascript
-node|stats(interval time.Duration)
+from|stats(interval time.Duration)
 ```
 
 Returns: [StatsNode](/kapacitor/v1.4/nodes/stats_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Stddev
 
@@ -925,11 +945,12 @@ Compute the standard deviation.
 
 
 ```javascript
-node|stddev(field string)
+from|stddev(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Sum
 
@@ -937,11 +958,12 @@ Compute the sum of all values.
 
 
 ```javascript
-node|sum(field string)
+from|sum(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### SwarmAutoscale
 
@@ -949,11 +971,12 @@ Create a node that can trigger autoscale events for a docker swarm cluster.
 
 
 ```javascript
-node|swarmAutoscale()
+from|swarmAutoscale()
 ```
 
 Returns: [SwarmAutoscaleNode](/kapacitor/v1.4/nodes/swarm_autoscale_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Top
 
@@ -961,11 +984,12 @@ Select the top `num` points for `field` and sort by any extra tags or fields.
 
 
 ```javascript
-node|top(num int64, field string, fieldsAndTags ...string)
+from|top(num int64, field string, fieldsAndTags ...string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Union
 
@@ -973,11 +997,12 @@ Perform the union of this node and all other given nodes.
 
 
 ```javascript
-node|union(node ...Node)
+from|union(node ...Node)
 ```
 
 Returns: [UnionNode](/kapacitor/v1.4/nodes/union_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Window
 
@@ -987,8 +1012,9 @@ NOTE: Window can only be applied to stream edges.
 
 
 ```javascript
-node|window()
+from|window()
 ```
 
 Returns: [WindowNode](/kapacitor/v1.4/nodes/window_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>

@@ -9,6 +9,27 @@ menu:
     weight: 170
     parent: nodes
 ---
+### Constructor 
+
+| Chaining Method | Description |
+|:---------|:---------|
+| **[kapacitorLoopback](#descr)&nbsp;(&nbsp;)** | Create an kapacitor loopback node that will send data back into Kapacitor as a stream.  |
+
+### Property Methods
+
+| Setters | Description |
+|:---|:---|
+| **[database](#database)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the database.  |
+| **[measurement](#measurement)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the measurement.  |
+| **[retentionPolicy](#retentionpolicy)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the retention policy.  |
+| **[tag](#tag)&nbsp;(&nbsp;`key`&nbsp;`string`,&nbsp;`value`&nbsp;`string`)** | Add a static tag to all data points. Tag can be called more than once.  |
+
+
+
+### Chaining Methods
+[Deadman](/kapacitor/v1.4/nodes/kapacitor_loopback_node/#deadman), [Stats](/kapacitor/v1.4/nodes/kapacitor_loopback_node/#stats)
+<a id='descr'/><hr/><br/>
+### Description
 
 Writes the data back into the Kapacitor stream. 
 To write data to a remote Kapacitor instance use the InfluxDBOut node. 
@@ -35,20 +56,7 @@ Available Statistics:
 
 
 
-Index
------
-
-### Properties
-
--	[Database](/kapacitor/v1.4/nodes/kapacitor_loopback_node/#database)
--	[Measurement](/kapacitor/v1.4/nodes/kapacitor_loopback_node/#measurement)
--	[RetentionPolicy](/kapacitor/v1.4/nodes/kapacitor_loopback_node/#retentionpolicy)
--	[Tag](/kapacitor/v1.4/nodes/kapacitor_loopback_node/#tag)
-
-### Chaining Methods
-
--	[Deadman](/kapacitor/v1.4/nodes/kapacitor_loopback_node/#deadman)
--	[Stats](/kapacitor/v1.4/nodes/kapacitor_loopback_node/#stats)
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 Properties
 ----------
@@ -64,8 +72,10 @@ The name of the database.
 
 
 ```javascript
-node.database(value string)
+kapacitorLoopback.database(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Measurement
@@ -74,8 +84,10 @@ The name of the measurement.
 
 
 ```javascript
-node.measurement(value string)
+kapacitorLoopback.measurement(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### RetentionPolicy
@@ -84,8 +96,10 @@ The name of the retention policy.
 
 
 ```javascript
-node.retentionPolicy(value string)
+kapacitorLoopback.retentionPolicy(value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Tag
@@ -96,8 +110,10 @@ Tag can be called more than once.
 
 
 ```javascript
-node.tag(key string, value string)
+kapacitorLoopback.tag(key string, value string)
 ```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 Chaining Methods
@@ -110,7 +126,7 @@ Chaining methods are marked using the `|` operator.
 
 ### Deadman
 
-Helper function for creating an alert on low throughput, a.k.a. deadman&#39;s switch. 
+Helper function for creating an alert on low throughput, a.k.a. deadman's switch. 
 
 - Threshold -- trigger alert if throughput drops below threshold in points/interval. 
 - Interval -- how often to check the throughput. 
@@ -151,7 +167,7 @@ Example:
     data...
 ```
 
-The `id` and `message` alert properties can be configured globally via the &#39;deadman&#39; configuration section. 
+The `id` and `message` alert properties can be configured globally via the 'deadman' configuration section. 
 
 Since the [AlertNode](/kapacitor/v1.4/nodes/alert_node/) is the last piece it can be further modified as usual. 
 Example: 
@@ -169,7 +185,7 @@ Example:
     data...
 ```
 
-You can specify additional lambda expressions to further constrain when the deadman&#39;s switch is triggered. 
+You can specify additional lambda expressions to further constrain when the deadman's switch is triggered. 
 Example: 
 
 
@@ -187,11 +203,12 @@ Example:
 
 
 ```javascript
-node|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
+kapacitorLoopback|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
 ```
 
 Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 ### Stats
 
@@ -201,8 +218,9 @@ This means the interval time is independent of the times of the data points the 
 
 
 ```javascript
-node|stats(interval time.Duration)
+kapacitorLoopback|stats(interval time.Duration)
 ```
 
 Returns: [StatsNode](/kapacitor/v1.4/nodes/stats_node/)
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
