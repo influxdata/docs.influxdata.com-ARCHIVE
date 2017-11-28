@@ -1,10 +1,10 @@
 ---
-title: HTTP API Reference
+title: HTTP API 
 
 menu:
   kapacitor_1_4:
     weight: 10
-    parent: api
+    parent: work-w-kapacitor
 ---
 
 # Kapacitor API Reference Documentation

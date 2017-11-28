@@ -1,10 +1,10 @@
 ---
-title: APIs
+title: Working with Kapacitor
 
 menu:
   kapacitor_1_4:
-    name: APIs
-    identifier: api
+    name: Working with Kapacitor
+    identifier: work-w-kapacitor
     weight: 3
 ---
 
