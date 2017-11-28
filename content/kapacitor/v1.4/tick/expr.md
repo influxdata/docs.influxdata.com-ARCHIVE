@@ -4,125 +4,192 @@ title: Lambda Expressions
 menu:
   kapacitor_1_4:
     identifier: expr
-    weight: 10
+    weight: 5
     parent: tick
 ---
 
-TICKscript uses lambda expressions  to define transformations on data points as well as define boolean conditions that act as filters.
-TICKscript tries to be similar to InfluxQL in that most expressions that you would use in an InfluxQL `WHERE` clause will work as expressions
-in TICKscript.
-There are few exceptions:
+# Overview
+
+TICKscript uses lambda expressions  to define transformations on data points as
+well as define boolean conditions that act as filters.  Lambda expressions wrap
+mathematical operations, boolean operations, internal function calls or a
+combination of all three. TICKscript tries to be similar to InfluxQL in that
+most expressions that you would use in an InfluxQL `WHERE` clause will work as
+expressions in TICKscript, but with its own syntax:
 
 * All field or tag identifiers must be double quoted.
 * The comparison operator for equality is `==` not `=`.
 
-All expressions in TICKscript begin with the `lambda:` keyword.
+All lambda expressions in TICKscript begin with the `lambda:` keyword.
 
 ```javascript
 .where(lambda: "host" == 'server001.example.com')
 ```
 
+In some nodes the results of a lambda expression can be captured into a new
+field as a named result using the property setter `.as()`.
+In this way they can be used in other nodes further down the pipeline.  
+
+<!--
 Stateful
 --------
+-->
+The internal functions of lambda expressions can be either stateless or
+stateful.  Stateful means that each time the function is evaluated the internal
+state can change and will persist until the next evaluation.
+<!-- This may seem odd as part of an expression language but it has a powerful use
+case.  Within the language a function can be defined that is essentially an
+on-line/streaming algorithm and with each call the function state is updated. -->
+For example the built-in function `sigma` calculates a running mean and standard
+deviation and returns the number of standard deviations the current data point
+is away from the mean.
 
-These lambda expressions are stateful, meaning that each time they are evaluated internal state can change and will persist until the next evaluation.
-This may seem odd as part of an expression language but it has a powerful use case.
-You can define a function within the language that is essentially a online/streaming algorithm and with each call the function state is updated.
-For example the built-in function `sigma` that calculates a running mean and standard deviation and returns the number of standard deviations the current data point is away from the mean.
-
-Example:
+**Example 1 &ndash; the sigma function**
 
 ```javascript
-sigma("value") > 3
+sigma("value") > 3.0
 ```
 
-Each time that the expression is evaluated the new value it updates the running statistics and then returns the deviation.
-This simple expression evaluates to `false` while the stream of data points it has received remains within `3` standard deviations of the running mean.
-As soon as a value is processed that is more than 3 standard deviation it evaluates to `true`.
-Now you can use that expression inside of a TICKscript to define powerful alerts.
+Each time that the expression is evaluated it updates the running statistics and
+then returns the deviation. The simple expression in Example 1 evaluates to
+ `false` while the stream of data points it has received remains within `3.0`
+ standard deviations of the running mean.  As soon as a value is processed that
+ is more than `3.0` standard deviations from the mean it evaluates to `true`.
+ Such an expression can be used inside of a TICKscript to define powerful
+ alerts, as illustrated in Example 2 below.
 
-TICKscript with lambda expression:
+**Example 2 &ndash; TICKscript with lambda expression**
 
 ```javascript
 stream
+    |from()
+    ...
     |alert()
         // use an expression to define when an alert should go critical.
-        .crit(lambda: sigma("value") > 3)
+        .crit(lambda: sigma("value") > 3.0)
 ```
 
-Builtin Functions
------------------
+**Note on inadvertent type casting**
 
-### Type Conversion functions
+Beware that numerical values declared in the TICKscript follow the parsing rules
+for literals introduced in the
+[Syntax](/kapacitor/v1.3/tick/syntax/#literal-values) document.  They may not be
+of a suitable type for the function or operation in which they will be used.
+Numerical values that include a decimal will be interpreted as floats.
+Numerical values without a decimal will be interpreted as integers.  When
+integers and floats are used within the same expression the integer values need
+to use the `float()` type conversion function if a float result is desired.
+Failure to observe this rule can yield unexpected results.  For example, when
+using a lambda expression to calculate a ratio between 0 and 1 of type float to
+use in generating a percentage; and when the fields are of type integer, it might
+be assumed that a subset field can be divided by the total field to get the
+ratio( e.g. `subset/total * 100`).  Such an integer by integer division will
+result in an integer value of 0.  Furthermore multiplication of the result of
+such an operation by the literal `100` (an integer) will also result in 0.
+Casting the integer values to float will result in a valid ratio in the range
+between 0 and 1, and then multiplication by the literal `100.0` (a float) will
+result in a valid percentage value.  Correctly written, such an operation should
+look like this:
 
-#### Bool
+`eval(lambda: float("total_error_responses")/float("total_responses") * 100.0)`.
 
-Converts a string into a boolean via Go's [strconv.ParseBool](https://golang.org/pkg/strconv/#ParseBool) function.
-Numeric types can also be converted to a bool where a 0 -> false and 1 -> true.
+If in the logs an error appears of the type `E! mismatched type to binary
+operator...`, check to ensure that the fields on both sides of the operator are
+of the same and the desired type.   
+
+In short, to ensure that the type of a field value is correct, use the built-in
+type conversion functions (see [below](#above-header-type-conversion)).   
+
+# Built-in Functions
+
+### Stateful functions
+
+##### Count
+
+Count takes no arguments but returns the number of times the expression has been
+evaluated.
+
+```javascript
+count() int64
+```
+
+##### Sigma
+
+Computes the number of standard deviations a given value is away from the
+running mean.  Each time the expression is evaluated the running mean and
+standard deviation are updated.
+
+```javascript
+sigma(value float64) float64
+```
+
+##### Spread
+
+Computes the running range of all values passed into it.  The range is the
+difference between the maximum and minimum values received.  
+
+```javascript
+spread(value float64) float64
+```
+<a id="above-header-type-conversion"></a>
+### Stateless functions
+
+#### Type Conversion functions
+
+##### Bool
+
+Converts a string into a boolean via Golang's
+[strconv.ParseBool](https://golang.org/pkg/strconv/#ParseBool) function. Numeric
+types can also be converted to a bool where a 0 -> false and 1 -> true.
 
 ```javascript
 bool(value) bool
 ```
 
-#### Int
+##### Int
 
-Converts a string or float64 into an int64 via Go's [strconv.ParseInt](https://golang.org/pkg/strconv/#ParseInt) or simple `float64()` coercion.
-Strings are assumed to be decimal numbers.
-Durations are converted into an int64 with nanoseconds units.
-A boolean is converted to an int64 where false -> 0 and true -> 1.
+Converts a string or float64 into an int64 via Golang's
+[strconv.ParseInt](https://golang.org/pkg/strconv/#ParseInt) or simple
+`int64()` coercion.  Strings are assumed to be decimal numbers.  Durations are
+converted into an int64 with nanoseconds units.  A boolean is converted to an
+int64 where false -> 0 and true -> 1.
 
 ```javascript
 int(value) int64
 ```
 
-#### Float
+##### Float
 
-Converts a string or int64 into an float64 via Go's [strconv.ParseFloat](https://golang.org/pkg/strconv/#ParseInt) or simple `int64()` coercion.
-A boolean is converted to an float64 where false -> 0.0 and true -> 1.0.
+Converts a string or int64 into an float64 via Golang's
+[strconv.ParseFloat](https://golang.org/pkg/strconv/#ParseInt) or simple
+`float64()` coercion.
+A boolean is converted to a float64 where false -> 0.0 and true -> 1.0.
 
 ```javascript
 float(value) float64
 ```
 
-#### String
+##### String
 
-Converts a bool, int64 or float64 into an string via Go's [strconv.Format*](https://golang.org/pkg/strconv/#FormatBool) functions.
+Converts a bool, int64 or float64 into an string via Golang's
+[strconv.Format*](https://golang.org/pkg/strconv/#FormatBool) functions.
 Durations are converted to a string representation of the duration.
 
 ```javascript
 string(value) string
 ```
 
-#### Duration
+##### Duration
 
-Converts a int64 or float64 into an duration assuming nanoseconds units.
+Converts an int64 or a float64 into an duration assuming nanoseconds units.
 Strings are converted to duration of the form as duration literals in TICKscript.
 
 ```javascript
 duration(value) duration
 ```
 
-### Stateful Functions
 
-#### Sigma
-
-Computes the number of standard deviations a given value is away from the running mean.
-Each time the expression is evaluated the running mean and standard deviation are updated.
-
-```javascript
-sigma(value float64) float64
-```
-
-#### Count
-
-Count takes no arguments but returns the number of times the expression has been evaluated.
-
-```javascript
-count() int64
-```
-
-
-### Time functions
+#### Time functions
 
 Within each expression the `time` field contains the time of the current data point.
 The following functions can be used on the `time` field.
@@ -130,23 +197,24 @@ Each function returns an int64.
 
 | Function              | Description                                           |
 | ----------            | -------------                                         |
-| minute(t time) int64  | the minute within the hour: range [0,59]              |
-| hour(t time) int64    | the hour within the day: range [0,23]                 |
-| weekday(t time) int64 | the weekday within the week: range [0,6], 0 is Sunday |
-| day(t time) int64     | the day within the month: range [1,31]                |
-| month(t time) int64   | the month within the year: range [1,12]               |
-| year(t time) int64    | the year                                              |
+| `minute(t time) int64`  | the minute within the hour: range [0,59]              |
+| `hour(t time) int64`    | the hour within the day: range [0,23]                 |
+| `weekday(t time) int64` | the weekday within the week: range [0,6], 0 is Sunday |
+| `day(t time) int64`     | the day within the month: range [1,31]                |
+| `month(t time) int64`   | the month within the year: range [1,12]               |
+| `year(t time) int64`    | the year                                              |
 
 Example usage:
 
 ```javascript
-lambda: hour("time") == 9
+lambda: hour("time") >= 9 AND hour("time") < 19
 ```
 
-The above expression evaluates to `true` if the hour of the day for the data point is 9 AM, using local time.
+The above expression evaluates to `true` if the hour of the day for the data
+point falls between 0900 hours and 1900 hours.
 
 
-### Math functions
+#### Math functions
 
 The following mathematical functions are available.
 Each function is implemented via the equivalent Go function.
@@ -196,51 +264,51 @@ Each function is implemented via the equivalent Go function.
 | [y1(x float64) float64](https://golang.org/pkg/math/#Y1)          | Y1 returns the order-one Bessel function of the second kind.                                                                     |
 | [yn(n int64, x float64) float64](https://golang.org/pkg/math/#Yn) | Yn returns the order-n Bessel function of the second kind.                                                                       |
 
-### String functions
+#### String functions
 
 The following string manipulation functions are available.
 Each function is implemented via the equivalent Go function.
 
 | Function                                                                                                  | Description                                                                                                                                                                                                                            |
 | ----------                                                                                                | -------------                                                                                                                                                                                                                          |
-| [strContains(s, substr string) bool](https://golang.org/pkg/strings/#Contains)                            | StrContains reports whether substr is within s.                                                                                                                                                                                        |
-| [strContainsAny(s, chars string) bool](https://golang.org/pkg/strings/#ContainsAny)                       | StrContainsAny reports whether any Unicode code points in chars are within s.                                                                                                                                                          |
-| [strCount(,s sep string) int64](https://golang.org/pkg/strings/#Count)                                    | StrCount counts the number of non-overlapping instances of sep in s. If sep is an empty string, Count returns 1 + the number of Unicode code points in s.                                                                              |
-| [strHasPrefix(s, prefix string) bool](https://golang.org/pkg/strings/#HasPrefix)                          | StrHasPrefix tests whether the string s begins with prefix.                                                                                                                                                                            |
-| [strHasSuffix(s, suffix string) bool](https://golang.org/pkg/strings/#HasSuffix)                          | StrHasSuffix tests whether the string s ends with suffix.                                                                                                                                                                              |
-| [strIndex(s, sep string) int64](https://golang.org/pkg/strings/#Index)                                    | StrIndex returns the index of the first instance of sep in s, or -1 if sep is not present in s.                                                                                                                                        |
-| [strIndexAny(s, chars string) int64](https://golang.org/pkg/strings/#IndexAny)                            | StrIndexAny returns the index of the first instance of any Unicode code point from chars in s, or -1 if no Unicode code point from chars is present in s.                                                                              |
-| [strLastIndex(s, sep string) int64](https://golang.org/pkg/strings/#LastIndex)                            | StrLastIndex returns the index of the last instance of sep in s, or -1 if sep is not present in s.                                                                                                                                     |
-| [strLastIndexAny(s, chars string) int64](https://golang.org/pkg/strings/#LastIndexAny)                    | StrLastIndexAny returns the index of the last instance of any Unicode code point from chars in s, or -1 if no Unicode code point from chars is present in s.                                                                           |
+| [strContains(s,&nbsp;substr&nbsp;string)&nbsp;bool](https://golang.org/pkg/strings/#Contains)                            | StrContains reports whether substr is within s.                                                                                                                                                                                        |
+| [strContainsAny(s,&nbsp;chars&nbsp;string)&nbsp;bool](https://golang.org/pkg/strings/#ContainsAny)                       | StrContainsAny reports whether any Unicode code points in chars are within s.                                                                                                                                                          |
+| [strCount(s,&nbsp;sep&nbsp;string)&nbsp;int64](https://golang.org/pkg/strings/#Count)                                    | StrCount counts the number of non-overlapping instances of sep in s. If sep is an empty string, Count returns 1 + the number of Unicode code points in s.                                                                              |
+| [strHasPrefix(s,&nbsp;prefix&nbsp;string)&nbsp;bool](https://golang.org/pkg/strings/#HasPrefix)                          | StrHasPrefix tests whether the string s begins with prefix.                                                                                                                                                                            |
+| [strHasSuffix(s,&nbsp;suffix&nbsp;string)&nbsp;bool](https://golang.org/pkg/strings/#HasSuffix)                          | StrHasSuffix tests whether the string s ends with suffix.                                                                                                                                                                              |
+| [strIndex(s,&nbsp;sep&nbsp;string)&nbsp;int64](https://golang.org/pkg/strings/#Index)                                    | StrIndex returns the index of the first instance of sep in s, or -1 if sep is not present in s.                                                                                                                                        |
+| [strIndexAny(s,&nbsp;chars&nbsp;string)&nbsp;int64](https://golang.org/pkg/strings/#IndexAny)                            | StrIndexAny returns the index of the first instance of any Unicode code point from chars in s, or -1 if no Unicode code point from chars is present in s.                                                                              |
+| [strLastIndex(s,&nbsp;sep&nbsp;string)&nbsp;int64](https://golang.org/pkg/strings/#LastIndex)                            | StrLastIndex returns the index of the last instance of sep in s, or -1 if sep is not present in s.                                                                                                                                     |
+| [strLastIndexAny(s,&nbsp;chars&nbsp;string)&nbsp;int64](https://golang.org/pkg/strings/#LastIndexAny)                    | StrLastIndexAny returns the index of the last instance of any Unicode code point from chars in s, or -1 if no Unicode code point from chars is present in s.                                                                           |
 | [strLength(s string) int64](https://golang.org/ref/spec#Length_and_capacity)                              | StrLength returns the length of the string.                                                                                                                                                                                            |
-| [strReplace(s, old, new string, n int64) string](https://golang.org/pkg/strings/#Replace)                 | StrReplace returns a copy of the string s with the first n non-overlapping instances of old replaced by new.                                                                                                                           |
-| [strSubstring(s string, start, stop int64) string](https://golang.org/ref/spec#Index_expressions)         | StrSubstring returns a substring based on the given indexes, strSubstring(str, start, stop) is equivalent to str[start:stop] in Go.                                                                                                    |
-| [strToLower(s string) string](https://golang.org/pkg/strings/#ToLower)                                    | StrToLower returns a copy of the string s with all Unicode letters mapped to their lower case.                                                                                                                                         |
-| [strToUpper(s string) string](https://golang.org/pkg/strings/#ToUpper)                                    | StrToUpper returns a copy of the string s with all Unicode letters mapped to their upper case.                                                                                                                                         |
-| [strTrim(s, cutset string) string](https://golang.org/pkg/strings/#Trim)                                  | StrTrim returns a slice of the string s with all leading and trailing Unicode code points contained in cutset removed.                                                                                                                 |
-| [strTrimLeft(s, cutset string) string](https://golang.org/pkg/strings/#TrimLeft)                          | StrTrimLeft returns a slice of the string s with all leading Unicode code points contained in cutset removed.                                                                                                                          |
-| [strTrimPrefix(s, prefix string) string](https://golang.org/pkg/strings/#TrimPrefix)                      | StrTrimPrefix returns s without the provided leading prefix string. If s doesn't start with prefix, s is returned unchanged.                                                                                                           |
-| [strTrimRight(s, cutset string) string](https://golang.org/pkg/strings/#TrimRight)                        | StrTrimRight returns a slice of the string s, with all trailing Unicode code points contained in cutset removed.                                                                                                                       |
-| [strTrimSpace(s string) string](https://golang.org/pkg/strings/#TrimSpace)                                | StrTrimSpace returns a slice of the string s, with all leading and trailing white space removed, as defined by Unicode.                                                                                                                |
-| [strTrimSuffix(s, suffix string) string)](https://golang.org/pkg/strings/#TrimSuffix)                     | StrTrimSuffix returns s without the provided trailing suffix string. If s doesn't end with suffix, s is returned unchanged.                                                                                                            |
-| [regexReplace(r regex, s, pattern string) string](https://golang.org/pkg/regexp/#Regexp.ReplaceAllString) | RegexReplace replaces matches of the regular expression in the input string with the output string. For example regexReplace(/a(b*)c/, 'abbbc', 'group is $1') -> 'group is bbb'. The original string is returned if no matches are found. |
+| [strReplace(s,&nbsp;old,&nbsp;new&nbsp;string,&nbsp;n&nbsp;int64)&nbsp;string](https://golang.org/pkg/strings/#Replace)                 | StrReplace returns a copy of the string s with the first n non-overlapping instances of old replaced by new.                                                                                                                           |
+| [strSubstring(s&nbsp;string,&nbsp;start,&nbsp;stop&nbsp;int64)&nbsp;string](https://golang.org/ref/spec#Index_expressions)         | StrSubstring returns a substring based on the given indexes, strSubstring(str, start, stop) is equivalent to str[start:stop] in Go.                                                                                                    |
+| [strToLower(s&nbsp;string)&nbsp;string](https://golang.org/pkg/strings/#ToLower)                                    | StrToLower returns a copy of the string s with all Unicode letters mapped to their lower case.                                                                                                                                         |
+| [strToUpper(s&nbsp;string)&nbsp;string](https://golang.org/pkg/strings/#ToUpper)                                    | StrToUpper returns a copy of the string s with all Unicode letters mapped to their upper case.                                                                                                                                         |
+| [strTrim(s,&nbsp;cutset&nbsp;string)&nbsp;string](https://golang.org/pkg/strings/#Trim)                                  | StrTrim returns a slice of the string s with all leading and trailing Unicode code points contained in cutset removed.                                                                                                                 |
+| [strTrimLeft(s,&nbsp;cutset&nbsp;string)&nbsp;string](https://golang.org/pkg/strings/#TrimLeft)                          | StrTrimLeft returns a slice of the string s with all leading Unicode code points contained in cutset removed.                                                                                                                          |
+| [strTrimPrefix(s,&nbsp;prefix&nbsp;string)&nbsp;string](https://golang.org/pkg/strings/#TrimPrefix)                      | StrTrimPrefix returns s without the provided leading prefix string. If s doesn't start with prefix, s is returned unchanged.                                                                                                           |
+| [strTrimRight(s,&nbsp;cutset&nbsp;string)&nbsp;string](https://golang.org/pkg/strings/#TrimRight)                        | StrTrimRight returns a slice of the string s, with all trailing Unicode code points contained in cutset removed.                                                                                                                       |
+| [strTrimSpace(s&nbsp;string)&nbsp;string](https://golang.org/pkg/strings/#TrimSpace)                                | StrTrimSpace returns a slice of the string s, with all leading and trailing white space removed, as defined by Unicode.                                                                                                                |
+| [strTrimSuffix(s,&nbsp;suffix&nbsp;string)&nbsp;string)](https://golang.org/pkg/strings/#TrimSuffix)                     | StrTrimSuffix returns s without the provided trailing suffix string. If s doesn't end with suffix, s is returned unchanged.                                                                                                            |
+| [regexReplace(r&nbsp;regex,&nbsp;s,&nbsp;pattern&nbsp;string)&nbsp;string](https://golang.org/pkg/regexp/#Regexp.ReplaceAllString) | RegexReplace replaces matches of the regular expression in the input string with the output string. For example regexReplace(/a(b*)c/, 'abbbc', 'group is $1') -> 'group is bbb'. The original string is returned if no matches are found. |
 
 
 
-### Human String functions
+#### Human String functions
 
-#### HumanBytes
+##### HumanBytes
 
-Converts a int64 or float64 with units bytes into a human readable string representing the number of bytes.
+Converts an int64 or a float64 with units bytes into a human readable string representing the number of bytes.
 
 ```javascript
 humanBytes(value) string
 ```
 
 
-### Conditional Functions
+#### Conditional Functions
 
-#### If
+##### If
 
 Returns the result of its operands depending on the value of the first argument.
 The second and third arguments must return the same type.
