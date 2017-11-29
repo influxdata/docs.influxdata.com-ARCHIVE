@@ -12,7 +12,7 @@ Refer to the 1.4.0 breaking changes section if `influxd` fails to start with an 
 
 ### Bugfixes
 
-- Fix panic: runtime error: slice bounds out of range.
+- Fix `panic: runtime error: slice bounds out of range` when running `dep init`
 
 ## v1.4.1 [2017-11-13]
 
@@ -29,10 +29,14 @@ production use at this time.  We appreciate all the feedback on this feature.  P
 
 ### Breaking changes
 
-You can no longer specify a different `ORDER BY` clause in a subquery than the one in the top level query. This functionality never worked properly, but was not explicitly forbidden.
+You can no longer specify a different `ORDER BY` clause in a subquery than the one in the top level query. 
+This functionality never worked properly, 
+but was not explicitly forbidden.
 
-As part of the ongoing development of the `tsi1` index, the implementation of a Bloom Filter, used
-to efficiently determine if series are not present in the index, was altered in [#8857](https://github.com/influxdata/influxdb/pull/8857).
+As part of the ongoing development of the `tsi1` index, 
+the implementation of a Bloom Filter, 
+used to efficiently determine if series are not present in the index, 
+was altered.
 While this significantly increases the performance of the index and reduces its memory consumption,
 the existing `tsi1` indexes created while running previous versions of the database are not compatible with 1.4.0.
 
@@ -42,30 +46,29 @@ Users with databases using the `tsi1` index must go through the following proces
 2. Remove all `index` directories on databases using the `tsi1` index. With default configuration these can be found in
    `/var/lib/influxdb/data/DB_NAME/RP_NAME/SHARD_ID/index` or `~/.influxdb/data/DB_NAME/RP_NAME/SHARD_ID/index`.
    It's worth noting at this point how many different `shard_ids` you visit.
-3. Run the `influx_inspect inmem2tsi` tool using the shard's data and WAL directories for -datadir and -waldir, respectively.
+3. Run the `influx_inspect inmem2tsi` tool using the shard's data and WAL directories for `-datadir` and `-waldir`, respectively.
    Given the example in step (2) that would be
    `influx_inspect inmem2tsi -datadir /var/lib/influxdb/data/DB_NAME/RP_NAME/SHARD_ID -waldir /path/to/influxdb/wal/DB_NAME/RP_NAME/SHARD_ID`.
 4. Repeat step (3) for each shard that needs to be converted.
 5. Start `influxd`.
 
-Users with existing `tsi1` shards, who attempt to start version 1.4.0 without following the above steps, will find the shards
-refuse to open, and will most likely see the following error message:
-
-`incompatible tsi1 index MANIFEST`
+Users with existing `tsi1` shards, 
+who attempt to start version 1.4.0 without following the steps above, 
+will find the shards refuse to open and will most likely see the following error message: `incompatible tsi1 index MANIFEST`.
 
 ### Configuration Changes
 
 #### `[collectd]` Section
 
-* `parse-multivalue-plugin` was added with a default of `split`.  When set to `split`, multivalue plugin data (e.g. df free:5000,used:1000) will be split into separate measurements (e.g., (df_free, value=5000) (df_used, value=1000)).  When set to `join`, multivalue plugin will be stored as a single multi-value measurement (e.g., (df, free=5000,used=1000)).
+* `parse-multivalue-plugin` option was added with a default of `split`.  When set to `split`, multivalue plugin data (e.g. `df free:5000,used:1000`) will be split into separate measurements (e.g., `df_free, value=5000` and `df_used, value=1000`).  When set to `join`, multivalue plugin will be stored as a single multi-value measurement (e.g., `df, free=5000,used=1000`).
 
 ### Features
 
-- TSI Index Migration Tool.
+- Add `inmem2tsi` command to `influx_inspect` allowing for conversion of an in-memory index to a TSI index.
 - Add support for the Prometheus remote read and write APIs.
 - Support SHOW CARDINALITY queries.
 - EXACT and estimated CARDINALITY queries.
-- Improve SHOW TAG KEYS performance.
+- Improve `SHOW TAG KEYS` performance.
 - Add `EXPLAIN ANALYZE` command, which produces a detailed execution plan of a `SELECT` statement.
 - Improved compaction scheduling.
 - Support Ctrl+C to cancel a running query in the Influx CLI.
@@ -84,29 +87,29 @@ to server logs.
 - Use system cursors for measurement, series, and tag key meta queries.
 - Initial implementation of explain plan.
 - Include the number of scanned cached values in the iterator cost.
-- Improve performance of `Include` and `Exclude` functions
+- Improve performance of `Include` and `Exclude` functions.
 - Report the task status for a query.
 - Reduce allocations, improve `readEntries` performance by simplifying loop
 - Separate importer log statements to stdout and stderr.
 - Improve performance of Bloom Filter in TSI index.
 - Add message pack format for query responses.
 - Implicitly decide on a lower limit for fill queries when none is present.
-- Streaming inmem2tsi conversion.
+- Streaming `inmem2tsi` conversion.
 - Sort & validate TSI key value insertion. 
 - Handle nil MeasurementIterator.
 - Add long-line support to client importer.
-- Update to go 1.9.2
+- Update to go 1.9.2.
 - InfluxDB now uses MIT licensed version of BurntSushi/toml.
 
 ### Bugfixes
 
 - Change the default stats interval to 1 second instead of 10 seconds.
-- illumos build broken on syscall.Mmap.
+- illumos build broken on `syscall.Mmap`.
 - Prevent privileges on non-existent databases from being set.
-- Influxd backup tool will now separate out its logging to stdout and stderr. 
+- `influxd backup` tool now separates out logging to `stdout` and `stderr`. Thanks @xginn8! 
 - Dropping measurement used several GB disk space.
 - Fix the CQ start and end times to use Unix timestamps.
-- Make InfluxCLI case insensitive.
+- `influx` CLI case-sensitivity.
 - Fixed time boundaries for continuous queries with time zones.
 - Return query parsing errors in CSV formats.
 - Fix time zone shifts when the shift happens on a time zone boundary.
@@ -122,7 +125,7 @@ to server logs.
 - Fix deadlock when calling `SeriesIDsAllOrByExpr`.
 - Fix `influx_inspect export` so it skips missing files.
 - Reduce how long it takes to walk the varrefs in an expression.
-- Address panic: runtime error: invalid memory address or nil pointer dereference.
+- Address `panic: runtime error: invalid memory address or nil pointer dereference`.
 - Drop Series Cause Write Fail/Write Timeouts/High Memory Usage.
 - Fix increased memory usage in cache and wal readers.
 - An OSS read-only user should be able to list measurements on a database.
@@ -142,12 +145,12 @@ to server logs.
 - Fix race inside Measurement index.
 - Ensure retention service always removes local shards.
 - Handle utf16 files when reading the configuration file.
-- Fix panic: runtime error: slice bounds out of range.
+- Fix `panic: runtime error: slice bounds out of range`.
 
 ## v1.3.7 [2017-10-26]
 
 ### Release Notes
-Bug fix identified via Community and InfluxCloud. The build artifacts are now consistnent with v1.3.5.
+Bug fix identified via Community and InfluxCloud. The build artifacts are now consistent with v1.3.5.
 
 ### Bugfixes
 
@@ -167,7 +170,7 @@ Bug fix identified via Community and InfluxCloud.
 
 ### Bugfixes
 - Reduce how long it takes to walk the varrefs in an expression.
-- Address panic: runtime error: invalid memory address or nil pointer dereference.
+- Address `panic: runtime error: invalid memory address or nil pointer dereference`.
 - Fix increased memory usage in cache and WAL readers for clusters with a large number of shards.
 - Prevent deadlock when doing math on the result of a subquery.
 - Fix several race conditions present in the shard and storage engine.
