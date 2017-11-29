@@ -7,33 +7,53 @@ menu:
     parent: administration
 ---
 
-# Configuring the Kapacitor Service
+# Configuring Kapacitor
 
 ### Contents
- * [The Kapacitor Configuration File](the-kapacitor-configuration-file)
- * [Kapacitor Environment Variables](kapacitor-environment-variables)
- * [Configuration with REST](configuration-with-rest)
+ * [Startup](#startup)
+ * [The Kapacitor Configuration File](#the-kapacitor-configuration-file)
+ * [Kapacitor Environment Variables](#kapacitor-environment-variables)
+ * [Configuration with REST](#configuration-with-rest)
 
-The Kapacitor service is configured using key value pairs organized into groups,
-so that any key can be reached by following a tree-like path. The main means for
-declaring values for configuration keys is in the configuration file.
-On a POSIX system this file is by default located on the file system at the
-following location: `/etc/kapacitor/kapacitor.conf`.  The values declared in this
-file can be overridden by environment variables beginning with the token
-`KAPACITOR_`.  Some values can also be dynamically altered using the REST API.  
+Basic installation and startup of the Kapacitor service is covered in the
+[Getting Started](/kapacitor/v1.4/introduction/getting_started/) guide.  If new
+to Kapacitor, please refer to that document, to learn the basics.  This
+current document presents configuration in greater detail.
 
-#### Startup
+The Kapacitor service is configured using key value pairs organized into table
+groups. Any key can be located by following a tree-like path.  For example,
+`[http].https-enabled` or `[slack].channel`. The main means for declaring values
+for configuration keys is in the configuration file. On a POSIX system this file
+is by default located on the file system at the following location:
+`/etc/kapacitor/kapacitor.conf`.  On Windows systems the location of this file
+can be defined at startup with the `-config` argument. The path to the
+configuration file can also be declared using the environment variable
+`KAPACITOR_CONFIG_PATH`.  The values declared in this file can be overridden by
+environment variables beginning with the token`KAPACITOR_`.   Some values can
+also be dynamically altered using the HTTP API, when the key
+`[config-override].enabled` is set to `true`.
+
+Taken together, there are four basic means of configuring different aspects of
+the Kapacitor service.  They are listed here in the descending order by which
+they may be overridden:
+
+   * The configuration file.
+   * Environment variables.
+   * The HTTP API. Available only for optional services and the Influxdb connection.
+   * Command line arguments.  Available only for changing the hostname and logging.
+
+## Startup
 
 The Kapacitor daemon includes command line options that affect how it loads and
-runs.  These include
+runs.  These include:
 
-   * `-config` - the path to the configuration file.
-   * `-hostname` - override the hostname found in the configuration file.
-   * `-pidfile` - file into which the process ID will be written.
-   * `-logfile` - write logs to the file supplied by this flag.
-   * `-log-level` - set the log level. Acceptable values: debug, info, warn, error.
+   * `-config` &ndash; the path to the configuration file.
+   * `-hostname` &ndash; overrides the hostname found in the configuration file.
+   * `-pidfile` &ndash; file into which the process ID will be written.
+   * `-logfile` &ndash; file into which logs will be written.
+   * `-log-level` &ndash; set the log level. Accepted values: `debug, info, warn, error`.
 
-#### Systemd
+### Systemd
 
 On POSIX systems, when the Kapacitor daemon starts as part of Systemd, environment
 variables can be set in the file `/etc/default/kapacitor`.
@@ -46,6 +66,9 @@ Systemd service.
 KAPACITOR_OPTS="-pidfile=/home/kapacitor/kapacitor.pid -log-file=/home/kapacitor/logs/kapacitor.log"
 ```
 
+For more information on working with environment variables see the section
+[Kapacitor Environment Variables](#kapacitor-environment-variables) below.
+
 ## The Kapacitor Configuration File
 
 The current configuration can be extracted using the `config` command of the
@@ -56,25 +79,523 @@ kapacitor daemon application.
 A sample configuration file is also available in the Kapacitor code base. Its
 most current version can be accessed on [github](https://github.com/influxdata/kapacitor/blob/master/etc/kapacitor/kapacitor.conf).
 
+### TOML
+
 The configuration file is based on [TOML](https://github.com/toml-lang/toml).
-As such important configuration properties are identified by case sensitive keys
-to which values are assigned. Key value pairs are grouped into tables, whose
+As such, important configuration properties are identified by case sensitive keys
+to which values are assigned. Key value pairs are grouped into tables whose
 identifiers are delineated by brackets.  Tables can also be grouped into table
 arrays.
 
 The most common value types found in the Kapacitor configuration file  include
 the following:
 
-   * String - declared in double quotes.  Examples: `host = "localhost"`, `id = "myconsul"`, `refresh-interval = "30s"`.
-   * Integer - Examples: `port = 80`, `timeout = 0`, `udp-buffer = 1000`.
-   * Float - Example: `threshold = 0.0`.
-   * Boolean - Examples: `enabled = true`, `global = false`, `no-verify = false`.
-   * Array - Examples: `my_database = [ "default", "longterm" ]`, ` urls = ["http://localhost:8086"]`
+   * String &ndash; declared in double quotes.  Examples: `host = "localhost"`, `id = "myconsul"`, `refresh-interval = "30s"`.
+   * Integer &ndash; Examples: `port = 80`, `timeout = 0`, `udp-buffer = 1000`.
+   * Float &ndash; Example: `threshold = 0.0`.
+   * Boolean &ndash; Examples: `enabled = true`, `global = false`, `no-verify = false`.
+   * Array &ndash; Examples: `my_database = [ "default", "longterm" ]`, ` urls = ["http://localhost:8086"]`
+
+Table grouping identifiers are declared within brackets.  For example, `[http]`, `[deadman]`,`[kubernetes]`.
+
+An array of tables is declared within double brackets.  For example, `[[influxdb]]`. `[[mqtt]]`, `[[dns]]`.
 
 ### Organization
 
+Most keys are declared in the context of a table grouping.  However, four keys are in
+the root context of the configuration file.  These four define the basic
+properties of the Kapacitor service:
 
+   * `hostname` &ndash; A string declaring the DNS hostname where the Kapacitor daemon will run.
+   * `data_dir` &ndash; A string declaring the file system directory where core Kapacitor data will be stored.
+   * `skip-config-overrides` &ndash; A boolean indicating whether or not to skip configuration overrides.
+   * `default-retention-policy` &ndash; A string declaring the default retention policy to be used on the Influx database.
+
+These are followed by table groupings and arrays of tables some of which are
+essential and some of which enable optional features, such as specific alert
+handlers and service discovery mechanisms.
+
+#### Essential Tables
+
+##### HTTP
+
+The Kapacitor service cannot operate without an HTTP connection.  Such important
+HTTP properties as a bind address and the path to an HTTPS certificate get
+defined in this table.
+
+**Example 1 &ndash; The HTTP grouping**
+
+```toml
+...
+[http]
+  # HTTP API Server for Kapacitor
+  # This server is always on,
+  # it serves both as a write endpoint
+  # and as the API endpoint for all other
+  # Kapacitor calls.
+  bind-address = ":9092"
+  log-enabled = true
+  write-tracing = false
+  pprof-enabled = false
+  https-enabled = false
+  https-certificate = "/etc/ssl/influxdb-selfsigned.pem"
+...  
+```
+
+##### Config Override
+
+This table contains only one key, which enables or disables the ability to
+override certain values through the HTTP API. It is enabled by default.
+
+**Example 2 &ndash; The Config Override grouping**
+
+```toml
+...
+[config-override]
+  # Enable/Disable the service for overridding configuration via the HTTP API.
+  enabled = true
+...  
+```
+##### Logging
+
+The Kapacitor service also makes use of logging for monitoring and inspecting its
+behavior.  The path to the log and the log information level get set in
+this table.
+
+**Example 3 &ndash; The Logging grouping**
+
+```toml
+...
+[logging]
+    # Destination for logs
+    # Can be a path to a file or 'STDOUT', 'STDERR'.
+    file = "/var/log/kapacitor/kapacitor.log"
+    # Logging level can be one of:
+    # DEBUG, INFO, WARN, ERROR, or OFF
+    level = "INFO"
+...
+```
+##### Load
+
+As of Kapacitor release version 1.4, the Kapacitor service includes a feature
+that enables the loading of TICKscript tasks when the service loads.  The path
+to these scripts can be defined in this table.
+
+**Example 4 &ndash; The Load grouping**
+
+```toml
+...
+[load]
+  # Enable/Disable the service for loading tasks/templates/handlers
+  # from a directory
+  enabled = true
+  # Directory where task/template/handler files are set
+  dir = "/etc/kapacitor/load"
+...
+```
+##### Replay
+
+The Kapacitor client application can record data streams and batches for testing
+tasks before they are enabled.  This table contains one key, which declared the
+path to the directory where the replay files are to be stored.
+
+**Example 5 &ndash; The Replay grouping**
+
+```toml
+...
+[replay]
+  # Where to store replay files, aka recordings.
+  dir = "/var/lib/kapacitor/replay"
+...
+```
+
+##### Task
+
+In older releases of Kapacitor tasks were written to a special task database.
+This table and its associated keys are _deprecated_.  It remains though for
+migration purposes.
+
+##### Storage
+
+The Kapacitor service stores its configuration and other information in the key
+value pair optimized [Bolt](https://github.com/boltdb/bolt) database.  The
+location of this database on the file system is defined in the storage table
+grouping.
+
+**Example 6 &ndash; The Storage grouping**
+
+```toml
+...
+[storage]
+  # Where to store the Kapacitor boltdb database
+  boltdb = "/var/lib/kapacitor/kapacitor.db"
+...
+```
+
+##### Deadman
+
+Kapacitor provides a Deadman's switch alert, which can be configured globally
+in this table grouping.  For more information on the Deadman's switch see the
+[Deadman's switch](/kapacitor/v1.4/nodes/alert_node/#deadman) topic in the Alert
+node documentation.
+
+For a Deadman's switch to work it needs a threshold below which the switch will
+be triggered.  It also needs a polling interval as well as an id and message,
+which will be passed to the alert handler.
+
+**Example 7 &ndash; The Deadman grouping**
+
+```toml
+...
+[deadman]
+  # Configure a deadman's switch
+  # Globally configure deadman's switches on all tasks.
+  # NOTE: for this to be of use you must also globally configure at least one alerting method.
+  global = false
+  # Threshold, if globally configured the alert will be triggered if the throughput in points/interval is <= threshold.
+  threshold = 0.0
+  # Interval, if globally configured the frequency at which to check the throughput.
+  interval = "10s"
+  # Id -- the alert Id, NODE_NAME will be replaced with the name of the node being monitored.
+  id = "node 'NODE_NAME' in task '{{ .TaskName }}'"
+  # The message of the alert. INTERVAL will be replaced by the interval.
+  message = "{{ .ID }} is {{ if eq .Level \"OK\" }}alive{{ else }}dead{{ end }}: {{ index .Fields \"collected\" | printf \"%0.3f\" }} points/INTERVAL."
+...
+```
+
+#### InfluxDB
+
+The core purpose of Kapacitor is to process data from and to one or more Influx
+database clusters.  The configuration must include at least one InfluxDB table
+array defining an InfluxDB connection.  However, more than one can exist.
+At least one, and only one, such InfluxDB configuration must be flagged as the `default`.
+
+**Example 8 &ndash; An InfluxDB Connection grouping**
+
+```toml
+...
+[[influxdb]]
+  # Connect to an InfluxDB cluster
+  # Kapacitor can subscribe, query and write to this cluster.
+  # Using InfluxDB is not required and can be disabled.
+  enabled = true
+  default = true
+  name = "localhost"
+  urls = ["http://localhost:8086"]
+  username = ""
+  password = ""
+  timeout = 0
+  # Absolute path to pem encoded CA file.
+  # A CA can be provided without a key/cert pair
+  #   ssl-ca = "/etc/kapacitor/ca.pem"
+  # Absolutes paths to pem encoded key and cert files.
+  #   ssl-cert = "/etc/kapacitor/cert.pem"
+  #   ssl-key = "/etc/kapacitor/key.pem"
+
+  # Do not verify the TLS/SSL certificate.
+  # This is insecure.
+  insecure-skip-verify = false
+
+  # Maximum time to try and connect to InfluxDB during startup
+  startup-timeout = "5m"
+
+  # Turn off all subscriptions
+  disable-subscriptions = false
+
+  # Subscription mode is either "cluster" or "server"
+  subscription-mode = "server"
+
+  # Which protocol to use for subscriptions
+  # one of 'udp', 'http', or 'https'.
+  subscription-protocol = "http"
+
+  # Subscriptions resync time interval
+  # Useful if you want to subscribe to new created databases
+  # without restart Kapacitord
+  subscriptions-sync-interval = "1m0s"
+
+  # Override the global hostname option for this InfluxDB cluster.
+  # Useful if the InfluxDB cluster is in a separate network and
+  # needs special config to connect back to this Kapacitor instance.
+  # Defaults to `hostname` if empty.
+  kapacitor-hostname = ""
+
+  # Override the global http port option for this InfluxDB cluster.
+  # Useful if the InfluxDB cluster is in a separate network and
+  # needs special config to connect back to this Kapacitor instance.
+  # Defaults to the port from `[http] bind-address` if 0.
+  http-port = 0
+
+  # Host part of a bind address for UDP listeners.
+  # For example if a UDP listener is using port 1234
+  # and `udp-bind = "hostname_or_ip"`,
+  # then the UDP port will be bound to `hostname_or_ip:1234`
+  # The default empty value will bind to all addresses.
+  udp-bind = ""
+  # Subscriptions use the UDP network protocl.
+  # The following options of for the created UDP listeners for each subscription.
+  # Number of packets to buffer when reading packets off the socket.
+  udp-buffer = 1000
+  # The size in bytes of the OS read buffer for the UDP socket.
+  # A value of 0 indicates use the OS default.
+  udp-read-buffer = 0
+
+  [influxdb.subscriptions]
+    # Set of databases and retention policies to subscribe to.
+    # If empty will subscribe to all, minus the list in
+    # influxdb.excluded-subscriptions
+    #
+    # Format
+    # db_name = <list of retention policies>
+    #
+    # Example:
+    # my_database = [ "default", "longterm" ]
+  [influxdb.excluded-subscriptions]
+    # Set of databases and retention policies to exclude from the subscriptions.
+    # If influxdb.subscriptions is empty it will subscribe to all
+    # except databases listed here.
+    #
+    # Format
+    # db_name = <list of retention policies>
+    #
+    # Example:
+    # my_database = [ "default", "longterm" ]
+...
+```
+
+#### Internals
+
+Kapacitor also includes internal services that can be enabled or disabled and
+that have properties that need to be defined.  
+
+##### HTTP Post
+
+The HTTP Post service configuration is commented out by default. It is used for
+POSTing alerts to an HTTP endpoint.  
+
+##### Reporting
+
+Kapacitor will send usage statistics back to Influxdata.  This feature can be
+disable or enabled in the `[reporting]` table grouping.
+
+**Example 9 &ndash; Reporting configuration**
+```toml
+...
+[reporting]
+  # Send usage statistics
+  # every 12 hours to Enterprise.
+  enabled = true
+  url = "https://usage.influxdata.com"
+...
+```
+
+##### Stats
+
+Internal statistics about Kapacitor can also be emitted to an Influx database.
+How often and to where the statistics are emitted can be configured in the
+`[stats]` table grouping.
+
+**Example 10 &ndash; Stats configuration**
+
+```toml
+...
+[stats]
+  # Emit internal statistics about Kapacitor.
+  # To consume these stats create a stream task
+  # that selects data from the configured database
+  # and retention policy.
+  #
+  # Example:
+  #  stream|from().database('_kapacitor').retentionPolicy('autogen')...
+  #
+  enabled = true
+  stats-interval = "10s"
+  database = "_kapacitor"
+  retention-policy= "autogen"
+...
+```
+
+#### Optional Tables
+
+Optional tables relate to specific nodes that may be leveraged by TICKscript
+nodes or may be needed to discover a scrape information from remote locations.
+They are disabled by default.  Practically this means that they include a key
+ `enabled`, which is set to `false` by default, i.e. `enabled = false`.  A
+ feature defined by an optional table should be enabled whenever a relevant
+ node, or a handler for a relevant node, is required by a task or when an input
+ source is needed.  
+
+For example, if alerts are to be sent via email, then the SMTP service should
+be enabled and configured in the table `[smtp]`.   
+
+**Example 11 &ndash; Enabling SMTP**
+
+```toml
+...
+[smtp]
+  # Configure an SMTP email server
+  # Will use TLS and authentication if possible
+  # Only necessary for sending emails from alerts.
+  enabled = true
+  host = "192.168.1.24"
+  port = 25
+  username = "schwartz.pudel"
+  password = "f4usT!1808"
+  # From address for outgoing mail
+  from = "kapacitor@test.org"
+  # List of default To addresses.
+  # to = ["oncall@example.com"]
+
+  # Skip TLS certificate verify when connecting to SMTP server
+  no-verify = false
+  # Close idle connections after timeout
+  idle-timeout = "30s"
+
+  # If true the all alerts will be sent via Email
+  # without explicitly marking them in the TICKscript.
+  global = false
+  # Only applies if global is true.
+  # Sets all alerts in state-changes-only mode,
+  # meaning alerts will only be sent if the alert state changes.
+  state-changes-only = false
+...
+```
+
+Optional features can be broken down into supported alert handlers, third party
+client services, user defined, input services and discovery services.
+
+##### Alert Handlers
+
+Alert handlers manage communications from Kapacitor to third party services or
+across Internet standard messaging protocols.  They are activated through chaining
+methods on the [Alert](/kapacitor/v1.4/nodes/alert_node/) node.
+
+Most of the handler configurations cover the same or similar properties.  Every
+handler has the property `enabled`.  They also need an endpoint to which
+messages can be sent.  This is in the form of a property such as `url`, `addr` or
+a pair of properties such as `host` and `port`.  Most also include an
+authentication mechanism such as a `token`, or a pair of properties like
+`username` and `password`.  A sample SMTP configuration is shown in Example 11
+above.
+
+The specific properties can be found directly in the configuration file and are
+discussed alongside the specific handler in the [Alert](/kapacitor/v1.4/nodes/alert_node/)
+document.
+
+The following handlers are currently supported.
+
+* [SMTP](/kapacitor/v1.4/nodes/alert_node/#email) &ndash; To send alerts by email.
+* [SNMP Trap](/kapacitor/v1.4/nodes/alert_node/#snmptrap) &ndash; For posting to SNMP traps.
+* [OpsGenie](/kapacitor/v1.4/nodes/alert_node/#opsgenie) &ndash; For sending alerts to the OpsGenie service.
+* [VictorOps](/kapacitor/v1.4/nodes/alert_node/#victorops) &ndash; For sending alerts to the VictorOps service.
+* [PagerDuty](/kapacitor/v1.4/nodes/alert_node/#pagerduty)  &ndash; To send alerts to the PagerDuty service.
+* [Pushover](/kapacitor/v1.4/nodes/alert_node/#pushover) &ndash; For sending alerts to the Pushover service.
+* [Slack](/kapacitor/v1.4/nodes/alert_node/#slack) &ndash; For sending alerts to Slack.
+* [Telegram](/kapacitor/v1.4/nodes/alert_node/#telegram) &ndash; To send alerts to Telegram.
+* [HipChat](/kapacitor/v1.4/nodes/alert_node/#hipchat) &ndash; To send alerts to the HipChat service.
+* [Alerta](/kapacitor/v1.4/nodes/alert_node/#alerta) &ndash; For sending alerts to Alerta.
+* [Sensu](/kapacitor/v1.4/nodes/alert_node/#sensu) &ndash; To send alerts to Sensu.
+* [Talk](/kapacitor/v1.4/nodes/alert_node/#talk) &ndash; For sending alerts to the Talk service.
+* [MQTT](/kapacitor/v1.4/nodes/alert_node/#mqtt) &ndash; To publish alerts to an MQTT broker.
+
+##### Third party client services   
+
+With Kapacitor it is also possible to trigger changes in Docker clusters.  This
+is activated by the [SwarmAutoScale](/kapacitor/v1.4/nodes/swarm_autoscale_node/)
+and the [K8sAutoScale](/kapacitor/v1.4/nodes/k8s_autoscale_node/) nodes.  
+
+The following service configurations corresponding to these chaining methods can
+be found in the configuration file.   
+
+   * [Swarm](/kapacitor/v1.4/nodes/swarm_autoscale_node/)
+
+   **Example 12 &ndash; The Docker Swarm configuration**
+
+   ```
+   ...
+   [[swarm]]
+  # Enable/Disable the Docker Swarm service.
+  # Needed by the swarmAutoscale TICKscript node.
+  enabled = false
+  # Unique ID for this Swarm cluster
+  # NOTE: This is not the ID generated by Swarm rather a user defined
+  # ID for this cluster since Kapacitor can communicate with multiple clusters.
+  id = ""
+  # List of URLs for Docker Swarm servers.
+  servers = ["http://localhost:2376"]
+  # TLS/SSL Configuration for connecting to secured Docker daemons
+  ssl-ca = ""
+  ssl-cert = ""
+  ssl-key = ""
+  insecure-skip-verify = false
+  ...   
+   ```
+   * [Kubernetes](/kapacitor/v1.4/nodes/k8s_autoscale_node/)
+
+   **Example 13 &ndash; The Kubernetes configuration**
+
+   ```
+   ...
+   [kubernetes]
+  # Enable/Disable the kubernetes service.
+  # Needed by the k8sAutoscale TICKscript node.
+  enabled = false
+  # There are several ways to connect to the kubernetes API servers:
+  #
+  # Via the proxy, start the proxy via the `kubectl proxy` command:
+  #   api-servers = ["http://localhost:8001"]
+  #
+  # From within the cluster itself, in which case
+  # kubernetes secrets and DNS services are used
+  # to determine the needed configuration.
+  #   in-cluster = true
+  #
+  # Direct connection, in which case you need to know
+  # the URL of the API servers,  the authentication token and
+  # the path to the ca cert bundle.
+  # These value can be found using the `kubectl config view` command.
+  #   api-servers = ["http://192.168.99.100:8443"]
+  #   token = "..."
+  #   ca-path = "/path/to/kubernetes/ca.crt"
+  #
+  # Kubernetes can also serve as a discoverer for scrape targets.
+  # In that case the type of resources to discoverer must be specified.
+  # Valid values are: "node", "pod", "service", and "endpoint".
+  #   resource = "pod"
+   ...
+   ```
+
+##### User Defined
+
+   * UDF   
+
+##### Input Methods
+
+   * Collectd
+   * Opentsdb   
+   * Service Discovery and Metric Scraping
+      * Scraper
+
+##### Discovery services
+
+   * Azure
+   * Consul
+   * DNS
+   * EC2
+   * File Discovery
+   * GCE
+   * Marathon
+   * Nerve
+   * ServerSet
+   * Static Discovery
+   * Triton      
+   * UDP
 
 ## Kapacitor Environment Variables
+
+`KAPACITOR_URL`
+`KAPACITOR_SKIP_CONFIG_OVERRIDES`
+`KAPACITOR_UNSAFE_SSL`
+`KAPACITOR_CONFIG_PATH`
 
 ## Configuration with REST
