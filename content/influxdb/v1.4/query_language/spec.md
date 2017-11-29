@@ -178,16 +178,16 @@ Durations can be specified with mixed units.
 
 #### Duration units
 
- Units  | Meaning
---------|-----------------------------------------
- ns     | nanoseconds (1 billionth of a second)
- u or µ | microseconds (1 millionth of a second)
- ms     | milliseconds (1 thousandth of a second)
- s      | second
- m      | minute
- h      | hour
- d      | day
- w      | week
+| Units  | Meaning                                 |
+| ------ | --------------------------------------- |
+| ns     | nanoseconds (1 billionth of a second)   |
+| u or µ | microseconds (1 millionth of a second)  |
+| ms     | milliseconds (1 thousandth of a second) |
+| s      | second                                  |
+| m      | minute                                  |
+| h      | hour                                    |
+| d      | day                                     |
+| w      | week                                    |
 
 
 ```
@@ -230,11 +230,11 @@ regex_lit           = "/" { unicode_char } "/" .
 * [tag values](/influxdb/v1.4/concepts/glossary/#tag-value) and string [field values](/influxdb/v1.4/concepts/glossary/#field-value) in the [`WHERE` clause](/influxdb/v1.4/query_language/data_exploration/#the-where-clause).
 * [tag keys](/influxdb/v1.4/concepts/glossary/#tag-key) in the [`GROUP BY` clause](/influxdb/v1.4/query_language/data_exploration/#group-by-tags)
 >
-Currently, InfluxQL does not support using regular expressions to match
-non-string field values in the
-`WHERE` clause,
-[databases](/influxdb/v1.4/concepts/glossary/#database), and
-[retention polices](/influxdb/v1.4/concepts/glossary/#retention-policy-rp).
+>Currently, InfluxQL does not support using regular expressions to match
+>non-string field values in the
+>`WHERE` clause,
+>[databases](/influxdb/v1.4/concepts/glossary/#database), and
+>[retention polices](/influxdb/v1.4/concepts/glossary/#retention-policy-rp).
 
 ## Queries
 
@@ -557,6 +557,100 @@ drop_user_stmt = "DROP USER" user_name .
 ```sql
 DROP USER "jdoe"
 ```
+
+### EXPLAIN
+
+Parses and plans the query, and then prints a summary of estimated costs.
+
+Many SQL engines use the `EXPLAIN` statement to show join order, join algorithms, and predicate and expression pushdown. 
+Since InfluxQL does not support joins, the cost of a InfluxQL query is typically a function of the total series accessed, the number of iterator accesses to a TSM file, and the number of TSM blocks that need to be scanned. 
+
+The elements of `EXPLAIN` query plan include:
+
+- expression
+- auxillary fields
+- number of shards
+- number of series
+- cached values
+- number of files
+- number of blocks
+- size of blocks
+
+#### Example:
+
+```
+> explain select sum(pointReq) from "_internal"."monitor"."write" group by hostname;
+QUERY PLAN
+------
+EXPRESSION: sum(pointReq::integer)
+NUMBER OF SHARDS: 2
+NUMBER OF SERIES: 2
+CACHED VALUES: 110
+NUMBER OF FILES: 1
+NUMBER OF BLOCKS: 1
+SIZE OF BLOCKS: 931
+```
+
+
+### EXPLAIN ANALYZE
+
+Executes the query and counts the actual costs during runtime.
+
+#### Example:
+
+```
+> explain analyze select sum(pointReq) from "_internal"."monitor"."write" group by hostname;
+EXPLAIN ANALYZE
+-----------
+.
+└── select
+├── execution_time: 242.167µs
+├── planning_time: 2.165637ms
+├── total_time: 2.407804ms
+└── field_iterators
+├── labels
+│   └── statement: SELECT sum(pointReq::integer) FROM "_internal"."monitor"."write" GROUP BY hostname
+└── expression
+├── labels
+│   └── expr: sum(pointReq::integer)
+├── create_iterator
+│   ├── labels
+│   │   ├── measurement: write
+│   │   └── shard_id: 57
+│   ├── cursors_ref: 1
+│   ├── cursors_aux: 0
+│   ├── cursors_cond: 0
+│   ├── float_blocks_decoded: 0
+│   ├── float_blocks_size_bytes: 0
+│   ├── integer_blocks_decoded: 1
+│   ├── integer_blocks_size_bytes: 931
+│   ├── unsigned_blocks_decoded: 0
+│   ├── unsigned_blocks_size_bytes: 0
+│   ├── string_blocks_decoded: 0
+│   ├── string_blocks_size_bytes: 0
+│   ├── boolean_blocks_decoded: 0
+│   ├── boolean_blocks_size_bytes: 0
+│   └── planning_time: 1.401099ms
+└── create_iterator
+├── labels
+│   ├── measurement: write
+│   └── shard_id: 58
+├── cursors_ref: 1
+├── cursors_aux: 0
+├── cursors_cond: 0
+├── float_blocks_decoded: 0
+├── float_blocks_size_bytes: 0
+├── integer_blocks_decoded: 0
+├── integer_blocks_size_bytes: 0
+├── unsigned_blocks_decoded: 0
+├── unsigned_blocks_size_bytes: 0
+├── string_blocks_decoded: 0
+├── string_blocks_size_bytes: 0
+├── boolean_blocks_decoded: 0
+├── boolean_blocks_size_bytes: 0
+└── planning_time: 76.192µs
+```
+
 
 ### GRANT
 
@@ -960,9 +1054,9 @@ var_ref          = measurement .
 Use comments with InfluxQL statements to describe your queries.
 
 * A single line comment begins with two hyphens (`--`) and ends where InfluxDB detects a line break.
-This comment type cannot span several lines.
+  This comment type cannot span several lines.
 * A multi-line comment begins with `/*` and ends with `*/`. This comment type can span several lines.
-Multi-line comments do not support nested multi-line comments.
+  Multi-line comments do not support nested multi-line comments.
 
 ## Query Engine Internals
 
