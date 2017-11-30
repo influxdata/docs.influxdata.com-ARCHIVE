@@ -101,6 +101,7 @@ the following:
    * **Float** &ndash; Example: `threshold = 0.0`.
    * **Boolean** &ndash; Examples: `enabled = true`, `global = false`, `no-verify = false`.
    * **Array** &ndash; Examples: `my_database = [ "default", "longterm" ]`, ` urls = ["http://localhost:8086"]`
+   * **Inline Table** &ndash; Example: `basic-auth = { username = "my-user", password = "my-pass" }`
 
 Table grouping identifiers are declared within brackets.  For example, `[http]`, `[deadman]`,`[kubernetes]`.
 
@@ -746,8 +747,8 @@ which it will be bound to a scraper.
   id = "goethe-ec2"
   region = "us-east-1"
   access-key = "ABCD1234EFGH5678IJKL"
-  secret-key = "1nP00dl3N01rM45U1V1Ju5qU3ch3ZM01"
-  profile = ""
+  secret-key = "1nP00dl3N01rM4Su1v1Ju5qU3ch3ZM01"
+  profile = "mph"
   refresh-interval = "1m0s"
   port = 80
 ...
@@ -772,9 +773,43 @@ Configuration entries are prepared for the following discovery services:
 
 ## Kapacitor Environment Variables
 
-`KAPACITOR_URL`
-`KAPACITOR_SKIP_CONFIG_OVERRIDES`
-`KAPACITOR_UNSAFE_SSL`
-`KAPACITOR_CONFIG_PATH`
+Kapacitor can also use environment variables for high level properties or to
+override properties in the configuration file.
+
+### Environment only Variables
+
+These variables are not found in the configuration file.
+
+* `KAPACITOR_OPTS` &ndash; Found in the Systemd startup script and used to pass
+command line options to `kapacitord` when started by Systemd.
+* `KAPACITOR_CONFIG_PATH` &ndash; Sets the path to the configuration file.
+* `KAPACITOR_URL` &ndash; Used to by the client application `kapacitor` to locate
+the `kapacitord` service.
+* `KAPACITOR_UNSAFE_SSL` &ndash; A boolean used by the client application `kapacitor`
+to skip verification of the `kapacitord` certificate when connecting over SSL.
+
+### Mapping Properties to Environment Variables
+
+Kapacitor specifif environment variables begin with the token `KAPACITOR`
+followed by an underscore, `_`. Properties then follow their path through the
+configuration file tree with each node in the tree separated by an underscore.
+Dashes in configuration file identifiers are replaced as underscores. Table
+groupings in table arrays get identified by an integer token.
+
+Examples:
+
+* `KAPACITOR_SKIP_CONFIG_OVERRIDES` &ndash; could be used to set the value for
+`skip-config-overrides`.
+* `KAPACITOR_INFLUXDB_0_URLS_0` &ndash; could be used to set the value of the
+first URL item in the URLS array in the first Influxdb property grouping,
+i.e. `[infludxb][0].[urls][0]`.
+* `KAPACITOR_STORAGE_BOLTDB` &ndash; could be used to set the path to the boltdb
+directory used for storage, i.e. `[storage].botldb`.
+* `KAPACITOR_HTTPPOST_0_HEADERS_Authorization` &ndash; could be used to set the
+value of the `authorization` header for the first HTTPPost configuration,
+i.e. `[httppost][0].headers.{authorization:"some_value"}`.
+* `KAPACITOR_KUBERNETES_ENABLED` &ndash; could be used to enable the Kubernetes
+configuration service.  i.e. `[kubernetes].enabled.`
+
 
 ## Configuration with REST
