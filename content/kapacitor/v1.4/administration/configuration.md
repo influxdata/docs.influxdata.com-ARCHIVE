@@ -13,7 +13,7 @@ menu:
  * [Startup](#startup)
  * [The Kapacitor Configuration File](#the-kapacitor-configuration-file)
  * [Kapacitor Environment Variables](#kapacitor-environment-variables)
- * [Configuration with REST](#configuration-with-rest)
+ * [Configuration with The HTTP API](#configuration-with-the-http-api)
 
 Basic installation and startup of the Kapacitor service is covered in the
 [Getting Started](/kapacitor/v1.4/introduction/getting_started/) guide.  The
@@ -812,4 +812,53 @@ i.e. `[httppost][0].headers.{authorization:"some_value"}`.
 configuration service.  i.e. `[kubernetes].enabled.`
 
 
-## Configuration with REST
+## Configuration with the HTTP API
+
+Kapacitor's [HTTP API](kapacitor/v1.4/working/api/) can also be used to override
+certain parts of the configuration.  This can be useful when, for example, a
+property may contain security sensitive information, that should not be left in
+plain view in the file system; or when needing to reconfigure a service without
+restarting Kapacitor.  To view which part of the configuration are
+available pull the JSON file at the `/kapacitor/v1/config` endpoint.
+(e.g. http<span>:</span><span>//</span>localhost:9092<span>/</span>kapacitor<span>/</span>v1<span>/</span>config).
+
+Working with the HTTP API to override configuration properties is presented in
+detail in the [Configuration](/kapacitor/v1.4/working/api/#configuration) section
+of the HTTP API dodcument.  In order for overrides over the HTTP API to work,
+the `[config-override].enabled` property must be set to `true`.
+
+Generally, specific sections of the configuration can be viewed as JSON files by
+GETting them from the context path built from the `config` endpoint. For example,
+to get the table groupings of InfluxDB properties, use the context
+`/kapacitor/v1/config/influxdb`.  Security sensitive fields such as passwords,
+keys and security tokens are redacted when using GET.
+
+Properties can be altered by POSTing a JSON document to the endpoint.  The JSON
+document must contain a `set` field with a map of the properties to override and
+their new values.
+
+**Example 19 &ndash; JSON file for enabling the SMTP configuration**
+```json
+{
+    "set":{
+        "enabled": true
+    }
+}
+```
+
+By POSTing this document to the `/kapacitor/v1/config/smtp/` endpoint the SMTP
+service can be enabled.
+
+Property overrides can be removed with the `delete` field in the JSON document.
+
+**Example 20 &ndash; JSON file for removing an SMTP override**
+```json
+{
+    "delete":[
+        "enabled"
+    ]
+}
+```
+By POSTing this document to the `/kapacitor/v1/config/smtp/` endpoint the SMTP
+override is removed and Kapacitor reverts to the behavior defined on the
+configuration file. 
