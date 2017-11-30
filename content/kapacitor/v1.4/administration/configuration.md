@@ -424,13 +424,13 @@ can be configured in the `[stats]` table grouping.
 
 #### Optional Table Groupings
 
-Optional table groupings relate to specific nodes that may be leveraged by TICKscript
+Optional table groupings relate to specific features that may be leveraged by TICKscript
 nodes or may be needed to discover and scrape information from remote locations.
 They are disabled by default.  Practically this means that out of the box they
-include a key  `enabled`, which is set to `false`, i.e. `enabled = false`.  A
- feature defined by an optional table should be enabled whenever a relevant
- node, or a handler for a relevant node, is required by a task or when an input
- source is needed.  
+include a key  `enabled`, which is set to `false`, i.e. `enabled = false`.  They
+may also be simply commented out.  A feature defined by an optional table should
+be enabled whenever a relevant node, or a handler for a relevant node, is
+required by a task, or when an input source is needed.  
 
 For example, if alerts are to be sent via email, then the SMTP service should
 be enabled and configured in the table `[smtp]`.   
@@ -574,11 +574,12 @@ be found in the configuration file.
 
 ##### User Defined
 
-[UDF](/kapacitor/v1.4/nodes/u_d_f_node/) &ndash; Kapacitor nakes it possible to
-plug-in user defined functions, which can then be leveraged as chaining methods
-in TICKscript.  A User Defined Function is indicated by the declarating of a new
-grouping table with the following identifier: `[udf.functions.<UDF_NAME>]`. UDF
-configurations require a path to an executable identified by the following properties:
+Kapacitor makes it possible to plug-in User Defined Functions
+([UDF](/kapacitor/v1.4/nodes/u_d_f_node/)), which can then be leveraged as
+chaining methods in a TICKscript.  A User Defined Function is indicated by the
+declaration of a new grouping table with the following identifier:
+`[udf.functions.<UDF_NAME>]`. UDF configurations require a path to an executable
+identified by the following properties:
 
 * `prog` &ndash; A string indicating the path to the executable.
 * `args` &ndash; An array of string arguments to be passed to the executable.
@@ -634,7 +635,8 @@ Configuration of connections to third party input sources requires properties su
 the batch size has not been reached, then a short batch will be written.
 
 Each input source has additional properties specific to its configuration.  They
-follow the same configurations used in [Influxdb](https://github.com/influxdata/influxdb/blob/master/etc/config.sample.toml).
+follow the same configurations for these services used in
+[Influxdb](https://github.com/influxdata/influxdb/blob/master/etc/config.sample.toml).
 
 **Example 15 &ndash; Collectd configuration**
 
@@ -694,8 +696,8 @@ This is configured much like other input services.
 
 When the number and addresses of the hosts and services for which Kapacitor
 should collect information are not known at the time of configuring or booting
-the Kapacitor service, they can be determined, and the data collected at runtime
-with the help of a discovery services.  This process is known as metric
+the Kapacitor service, they can be determined, and the data collected, at runtime,
+with the help of discovery services.  This process is known as metric
 _Scraping and Discovery_.  It is described in greater detail in the
 [Scraping and Discovery](/kapacitor/v1.4/pull_metrics/scraping-and-discovery/)
 document.
@@ -756,7 +758,8 @@ which it will be bound to a scraper.
 
 The above example is illustrative.
 
-Configuration entries are prepared for the following discovery services:
+Configuration entries are prepared by default for the following discovery
+services:
 
 * Azure
 * Consul
@@ -790,10 +793,10 @@ to skip verification of the `kapacitord` certificate when connecting over SSL.
 
 ### Mapping Properties to Environment Variables
 
-Kapacitor specifif environment variables begin with the token `KAPACITOR`
+Kapacitor specific environment variables begin with the token `KAPACITOR`
 followed by an underscore, `_`. Properties then follow their path through the
 configuration file tree with each node in the tree separated by an underscore.
-Dashes in configuration file identifiers are replaced as underscores. Table
+Dashes in configuration file identifiers are replaced with underscores. Table
 groupings in table arrays get identified by an integer token.
 
 Examples:
@@ -816,9 +819,9 @@ configuration service.  i.e. `[kubernetes].enabled.`
 
 Kapacitor's [HTTP API](kapacitor/v1.4/working/api/) can also be used to override
 certain parts of the configuration.  This can be useful when, for example, a
-property may contain security sensitive information, that should not be left in
+property may contain security sensitive information that should not be left in
 plain view in the file system; or when needing to reconfigure a service without
-restarting Kapacitor.  To view which part of the configuration are
+restarting Kapacitor.  To view which parts of the configuration are
 available pull the JSON file at the `/kapacitor/v1/config` endpoint.
 (e.g. http<span>:</span><span>//</span>localhost:9092<span>/</span>kapacitor<span>/</span>v1<span>/</span>config).
 
@@ -828,10 +831,10 @@ of the HTTP API dodcument.  In order for overrides over the HTTP API to work,
 the `[config-override].enabled` property must be set to `true`.
 
 Generally, specific sections of the configuration can be viewed as JSON files by
-GETting them from the context path built from the `config` endpoint. For example,
-to get the table groupings of InfluxDB properties, use the context
-`/kapacitor/v1/config/influxdb`.  Security sensitive fields such as passwords,
-keys and security tokens are redacted when using GET.
+GETting them from the context path built by their identifier from the `config`
+endpoint. For example, to get the table groupings of InfluxDB properties, use the
+context `/kapacitor/v1/config/influxdb`.  Security sensitive fields such as
+passwords, keys and security tokens are redacted when using GET.
 
 Properties can be altered by POSTing a JSON document to the endpoint.  The JSON
 document must contain a `set` field with a map of the properties to override and
@@ -860,5 +863,5 @@ Property overrides can be removed with the `delete` field in the JSON document.
 }
 ```
 By POSTing this document to the `/kapacitor/v1/config/smtp/` endpoint the SMTP
-override is removed and Kapacitor reverts to the behavior defined on the
-configuration file. 
+override is removed and Kapacitor reverts to the behavior defined in the
+configuration file.
