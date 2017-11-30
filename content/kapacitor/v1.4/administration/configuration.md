@@ -16,20 +16,21 @@ menu:
  * [Configuration with REST](#configuration-with-rest)
 
 Basic installation and startup of the Kapacitor service is covered in the
-[Getting Started](/kapacitor/v1.4/introduction/getting_started/) guide.  If new
-to Kapacitor, please refer to that document, to learn the basics.  This
-current document presents configuration in greater detail.
+[Getting Started](/kapacitor/v1.4/introduction/getting_started/) guide.  The
+basic principles of working with Kapacitor presented in that document should be
+understood before referring to this one.  This current document presents
+configuration in greater detail.
 
-The Kapacitor service is configured using key value pairs organized into table
-groups. Any key can be located by following a tree-like path.  For example,
-`[http].https-enabled` or `[slack].channel`. The main means for declaring values
-for configuration keys is in the configuration file. On a POSIX system this file
-is by default located on the file system at the following location:
-`/etc/kapacitor/kapacitor.conf`.  On Windows systems the location of this file
-can be defined at startup with the `-config` argument. The path to the
+Kapacitor service properties are configured using key value pairs organized
+into groups. Any property key can be located by following a tree-like
+path.  For example: `[http].https-enabled` or `[slack].channel`. The main means
+for declaring values for configuration keys is in through the configuration file.
+On a POSIX system this file is located by default on the file system at the following
+location: `/etc/kapacitor/kapacitor.conf`.  On Windows systems the location of
+this file can be defined at startup with the `-config` argument. The path to the
 configuration file can also be declared using the environment variable
 `KAPACITOR_CONFIG_PATH`.  The values declared in this file can be overridden by
-environment variables beginning with the token`KAPACITOR_`.   Some values can
+environment variables beginning with the token `KAPACITOR_`.   Some values can
 also be dynamically altered using the HTTP API, when the key
 `[config-override].enabled` is set to `true`.
 
@@ -42,16 +43,19 @@ they may be overridden:
    * The HTTP API. Available only for optional services and the Influxdb connection.
    * Command line arguments.  Available only for changing the hostname and logging.
 
+Note that by setting the property `skip-config-overrides` in the configuration file
+to `true`, this override behavior will be disabled at startup.
+
 ## Startup
 
 The Kapacitor daemon includes command line options that affect how it loads and
 runs.  These include:
 
-   * `-config` &ndash; the path to the configuration file.
-   * `-hostname` &ndash; overrides the hostname found in the configuration file.
-   * `-pidfile` &ndash; file into which the process ID will be written.
-   * `-logfile` &ndash; file into which logs will be written.
-   * `-log-level` &ndash; set the log level. Accepted values: `debug, info, warn, error`.
+   * `-config` &ndash; The path to the configuration file.
+   * `-hostname` &ndash; Overrides the hostname found in the configuration file.
+   * `-pidfile` &ndash; File into which the process ID will be written.
+   * `-logfile` &ndash; File into which logs will be written.
+   * `-log-level` &ndash; The threshold for writing messages to the log file. Accepted values: `debug, info, warn, error`.
 
 ### Systemd
 
@@ -60,19 +64,21 @@ variables can be set in the file `/etc/default/kapacitor`.
 
 For example to define where the PID file and log file will be written add a line
 like the following into the `/etc/default/kapacitor` file and restart the
-Systemd service.
+Systemd service:
 
 ```
 KAPACITOR_OPTS="-pidfile=/home/kapacitor/kapacitor.pid -log-file=/home/kapacitor/logs/kapacitor.log"
 ```
 
-For more information on working with environment variables see the section
-[Kapacitor Environment Variables](#kapacitor-environment-variables) below.
+The environment variable `KAPACITOR_OPTS` is one of a few special variables used
+by Kapacitor at startup.  For more information on working with environment
+variables see the section [Kapacitor Environment Variables](#kapacitor-environment-variables)
+below.
 
 ## The Kapacitor Configuration File
 
 The current configuration can be extracted using the `config` command of the
-kapacitor daemon application.
+Kapacitor daemon.
 
 `$ kapacitord config`
 
@@ -90,11 +96,11 @@ arrays.
 The most common value types found in the Kapacitor configuration file  include
 the following:
 
-   * String &ndash; declared in double quotes.  Examples: `host = "localhost"`, `id = "myconsul"`, `refresh-interval = "30s"`.
-   * Integer &ndash; Examples: `port = 80`, `timeout = 0`, `udp-buffer = 1000`.
-   * Float &ndash; Example: `threshold = 0.0`.
-   * Boolean &ndash; Examples: `enabled = true`, `global = false`, `no-verify = false`.
-   * Array &ndash; Examples: `my_database = [ "default", "longterm" ]`, ` urls = ["http://localhost:8086"]`
+   * **String** &ndash; declared in double quotes.  Examples: `host = "localhost"`, `id = "myconsul"`, `refresh-interval = "30s"`.
+   * **Integer** &ndash; Examples: `port = 80`, `timeout = 0`, `udp-buffer = 1000`.
+   * **Float** &ndash; Example: `threshold = 0.0`.
+   * **Boolean** &ndash; Examples: `enabled = true`, `global = false`, `no-verify = false`.
+   * **Array** &ndash; Examples: `my_database = [ "default", "longterm" ]`, ` urls = ["http://localhost:8086"]`
 
 Table grouping identifiers are declared within brackets.  For example, `[http]`, `[deadman]`,`[kubernetes]`.
 
@@ -102,8 +108,8 @@ An array of tables is declared within double brackets.  For example, `[[influxdb
 
 ### Organization
 
-Most keys are declared in the context of a table grouping.  However, four keys are in
-the root context of the configuration file.  These four define the basic
+Most keys are declared in the context of a table grouping.  However, four keys are
+found in the root context of the configuration file.  These four define the basic
 properties of the Kapacitor service:
 
    * `hostname` &ndash; A string declaring the DNS hostname where the Kapacitor daemon will run.
@@ -113,7 +119,7 @@ properties of the Kapacitor service:
 
 These are followed by table groupings and arrays of tables some of which are
 essential and some of which enable optional features, such as specific alert
-handlers and service discovery mechanisms.
+handlers and service discovery and data scraping mechanisms.
 
 #### Essential Tables
 
@@ -158,8 +164,8 @@ override certain values through the HTTP API. It is enabled by default.
 ```
 ##### Logging
 
-The Kapacitor service also makes use of logging for monitoring and inspecting its
-behavior.  The path to the log and the log information level get set in
+The Kapacitor service also makes use of logging to make it possible to monitor
+and inspect its behavior.  The path to the log and the log threshold get set in
 this table.
 
 **Example 3 &ndash; The Logging grouping**
@@ -196,7 +202,7 @@ to these scripts can be defined in this table.
 ##### Replay
 
 The Kapacitor client application can record data streams and batches for testing
-tasks before they are enabled.  This table contains one key, which declared the
+tasks before they are enabled.  This table contains one key, which declares the
 path to the directory where the replay files are to be stored.
 
 **Example 5 &ndash; The Replay grouping**
@@ -268,7 +274,7 @@ which will be passed to the alert handler.
 The core purpose of Kapacitor is to process data from and to one or more Influx
 database clusters.  The configuration must include at least one InfluxDB table
 array defining an InfluxDB connection.  However, more than one can exist.
-At least one, and only one, such InfluxDB configuration must be flagged as the `default`.
+At least one _and only one_ such InfluxDB configuration must be flagged as the `default`.
 
 **Example 8 &ndash; An InfluxDB Connection grouping**
 
@@ -392,8 +398,8 @@ disable or enabled in the `[reporting]` table grouping.
 ##### Stats
 
 Internal statistics about Kapacitor can also be emitted to an Influx database.
-How often and to where the statistics are emitted can be configured in the
-`[stats]` table grouping.
+The collection frequency and the database to where the statistics are emitted
+can be configured in the `[stats]` table grouping.
 
 **Example 10 &ndash; Stats configuration**
 
@@ -415,12 +421,12 @@ How often and to where the statistics are emitted can be configured in the
 ...
 ```
 
-#### Optional Tables
+#### Optional Table Groupings
 
-Optional tables relate to specific nodes that may be leveraged by TICKscript
-nodes or may be needed to discover a scrape information from remote locations.
-They are disabled by default.  Practically this means that they include a key
- `enabled`, which is set to `false` by default, i.e. `enabled = false`.  A
+Optional table groupings relate to specific nodes that may be leveraged by TICKscript
+nodes or may be needed to discover and scrape information from remote locations.
+They are disabled by default.  Practically this means that out of the box they
+include a key  `enabled`, which is set to `false`, i.e. `enabled = false`.  A
  feature defined by an optional table should be enabled whenever a relevant
  node, or a handler for a relevant node, is required by a task or when an input
  source is needed.  
@@ -444,7 +450,7 @@ be enabled and configured in the table `[smtp]`.
   # From address for outgoing mail
   from = "kapacitor@test.org"
   # List of default To addresses.
-  # to = ["oncall@example.com"]
+  to = ["heinrich@urfaust.versuch.de","valentin@urfaust.versuch.de","wagner@urfaust.versuch.de"]
 
   # Skip TLS certificate verify when connecting to SMTP server
   no-verify = false
@@ -461,10 +467,10 @@ be enabled and configured in the table `[smtp]`.
 ...
 ```
 
-Optional features can be broken down into supported alert handlers, third party
-client services, user defined, input services and discovery services.
+Optional features can be classified as Supported alert handlers, Docker services,
+User defined, Input services and Discovery services.
 
-##### Alert Handlers
+##### Supported Alert Handlers
 
 Alert handlers manage communications from Kapacitor to third party services or
 across Internet standard messaging protocols.  They are activated through chaining
@@ -498,7 +504,7 @@ The following handlers are currently supported.
 * [Talk](/kapacitor/v1.4/nodes/alert_node/#talk) &ndash; For sending alerts to the Talk service.
 * [MQTT](/kapacitor/v1.4/nodes/alert_node/#mqtt) &ndash; To publish alerts to an MQTT broker.
 
-##### Third party client services   
+##### Docker services   
 
 With Kapacitor it is also possible to trigger changes in Docker clusters.  This
 is activated by the [SwarmAutoScale](/kapacitor/v1.4/nodes/swarm_autoscale_node/)
@@ -511,7 +517,7 @@ be found in the configuration file.
 
    **Example 12 &ndash; The Docker Swarm configuration**
 
-   ```
+   ```toml
    ...
    [[swarm]]
   # Enable/Disable the Docker Swarm service.
@@ -534,7 +540,7 @@ be found in the configuration file.
 
    **Example 13 &ndash; The Kubernetes configuration**
 
-   ```
+   ```toml
    ...
    [kubernetes]
   # Enable/Disable the kubernetes service.
@@ -567,29 +573,202 @@ be found in the configuration file.
 
 ##### User Defined
 
-   * UDF   
+[UDF](/kapacitor/v1.4/nodes/u_d_f_node/) &ndash; Kapacitor nakes it possible to
+plug-in user defined functions, which can then be leveraged as chaining methods
+in TICKscript.  A User Defined Function is indicated by the declarating of a new
+grouping table with the following identifier: `[udf.functions.<UDF_NAME>]`. UDF
+configurations require a path to an executable identified by the following properties:
+
+* `prog` &ndash; A string indicating the path to the executable.
+* `args` &ndash; An array of string arguments to be passed to the executable.
+* `timeout` &ndash; A timeout for waiting for communications from the executable.
+
+The UDF can also include a group of environment variables declared in a table
+identified by the string `udf.functions.<UDF_NAME>.env`.
+
+   **Example 14 &ndash; Configuring a User Defined Function**
+
+   ```toml
+   ...
+   [udf]
+# Configuration for UDFs (User Defined Functions)
+[udf.functions]
+    ...
+    # Example python UDF.
+    # Use in TICKscript like:
+    #   stream.pyavg()
+    #           .field('value')
+    #           .size(10)
+    #           .as('m_average')
+    #
+    [udf.functions.pyavg]
+       prog = "/usr/bin/python2"
+       args = ["-u", "./udf/agent/examples/moving_avg.py"]
+       timeout = "10s"
+       [udf.functions.pyavg.env]
+           PYTHONPATH = "./udf/agent/py"
+   ...
+   ```
+
+Additional examples can be found directly in the default configuration file.   
 
 ##### Input Methods
 
-   * Collectd
-   * Opentsdb   
-   * Service Discovery and Metric Scraping
-      * Scraper
+Kapacitor can also receive and then process data from sources other than Influxdb.
+The results of this processing can then be written to an Influxdb database.
 
-##### Discovery services
+Currently two sources external to Influxdb are formally supported.
 
-   * Azure
-   * Consul
-   * DNS
-   * EC2
-   * File Discovery
-   * GCE
-   * Marathon
-   * Nerve
-   * ServerSet
-   * Static Discovery
-   * Triton      
-   * UDP
+* **Collectd** &ndash; The POSIX daemon `collectd` for collecting system, network and service performance data.
+* **Opentsdb** &ndash; The Open Time Series Database (Opentsdb) and its daemon tsd.
+
+Configuration of connections to third party input sources requires properties such as:
+
+* `bind-address` &ndash; address at which Kapacitor will receive data.
+* `database` &ndash; database to which Kapacitor will write data.
+* `retention-policy` &ndash; retentiona policy for that database.
+* `batch-size` &ndash; number of datapoints to buffer before writing.
+* `batch-pending` &ndash; number of batches that may be pending in memory.
+* `batch-timeout` &ndash; length of time to wait before writing the batch.  If
+the batch size has not been reached, then a short batch will be written.
+
+Each input source has additional properties specific to its configuration.  They
+follow the same configurations used in [Influxdb](https://github.com/influxdata/influxdb/blob/master/etc/config.sample.toml).
+
+**Example 15 &ndash; Collectd configuration**
+
+```toml
+...
+[collectd]
+  enabled = false
+  bind-address = ":25826"
+  database = "collectd"
+  retention-policy = ""
+  batch-size = 1000
+  batch-pending = 5
+  batch-timeout = "10s"
+  typesdb = "/usr/share/collectd/types.db"
+...  
+```
+
+**Example 16 &ndash; Opentsdb configuration**
+
+```toml
+...
+[opentsdb]
+  enabled = false
+  bind-address = ":4242"
+  database = "opentsdb"
+  retention-policy = ""
+  consistency-level = "one"
+  tls-enabled = false
+  certificate = "/etc/ssl/influxdb.pem"
+  batch-size = 1000
+  batch-pending = 5
+  batch-timeout = "1s"
+...
+```
+
+**UDP**
+
+As demonstrated in the [Live Leaderboard](/kapacitor/v1.4/guides/live_leaderboard/)
+guide and the [Scores](https://github.com/influxdb/kapacitor/tree/master/examples/scores)
+example, Kapacitor can be configured to accept raw data from a UDP connection.
+
+This is configured much like other input services.
+
+**Example 17 &ndash; UDP configuration**
+
+```toml
+...
+[[udp]]
+  enabled = true
+  bind-address = ":9100"
+  database = "game"
+  retention-policy = "autogen"
+...
+```
+
+#### Service Discovery and Metric Scraping
+
+When the number and addresses of the hosts and services for which Kapacitor
+should collect information are not known at the time of configuring or booting
+the Kapacitor service, they can be determined, and the data collected at runtime
+with the help of a discovery services.  This process is known as metric
+_Scraping and Discovery_.  It is described in greater detail in the
+[Scraping and Discovery](/kapacitor/v1.4/pull_metrics/scraping-and-discovery/)
+document.
+
+For Scrapping and Discovery to work one or more scrapers must be configured. One
+scraper can be bound to one discovery service.
+
+**Example 18 &ndash; Scraper configuration**
+
+```toml
+...
+[[scraper]]
+  enabled = false
+  name = "myscraper"
+  # Specify the id of a discoverer service specified below
+  discoverer-id = "goethe-ec2"
+  # Specify the type of discoverer service being used.
+  discoverer-service = "ec2"
+  db = "prometheus_raw"
+  rp = "autogen"
+  type = "prometheus"
+  scheme = "http"
+  metrics-path = "/metrics"
+  scrape-interval = "1m0s"
+  scrape-timeout = "10s"
+  username = "schwartz.pudel"
+  password = "f4usT!1808"
+  bearer-token = ""
+  ssl-ca = ""
+  ssl-cert = ""
+  ssl-key = ""
+  ssl-server-name = ""
+  insecure-skip-verify = false
+...
+```
+The above example is illustrative only.
+
+###### Discovery services
+
+Kapacitor supports a dozen discovery services.  Each has an `id` property by
+which it will be bound to a scraper.  
+
+**Example 19 &ndash; EC2 Discovery Service configuration**
+
+```toml
+...
+[[ec2]]
+  enabled = false
+  id = "goethe-ec2"
+  region = "us-east-1"
+  access-key = "ABCD1234EFGH5678IJKL"
+  secret-key = "1nP00dl3N01rM45U1V1Ju5qU3ch3ZM01"
+  profile = ""
+  refresh-interval = "1m0s"
+  port = 80
+...
+```
+
+The above example is illustrative.
+
+Configuration entries are prepared for the following discovery services:
+
+* Azure
+* Consul
+* DNS
+* EC2
+* File Discovery
+* GCE
+* Marathon
+* Nerve
+* ServerSet
+* Static Discovery
+* Triton      
+* UDP
 
 ## Kapacitor Environment Variables
 
