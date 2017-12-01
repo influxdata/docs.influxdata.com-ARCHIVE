@@ -24,10 +24,10 @@ configuration in greater detail.
 Kapacitor service properties are configured using key value pairs organized
 into groups. Any property key can be located by following a tree-like
 path.  For example: `[http].https-enabled` or `[slack].channel`. The main means
-for declaring values for configuration keys is in through the configuration file.
-On a POSIX system this file is located by default on the file system at the following
-location: `/etc/kapacitor/kapacitor.conf`.  On Windows systems the location of
-this file can be defined at startup with the `-config` argument. The path to the
+for declaring values for configuration keys is through the configuration file.
+On a POSIX system this file is located by default at the following location:
+`/etc/kapacitor/kapacitor.conf`.  On Windows systems the location of this file
+can be defined at startup with the `-config` argument. The path to the
 configuration file can also be declared using the environment variable
 `KAPACITOR_CONFIG_PATH`.  The values declared in this file can be overridden by
 environment variables beginning with the token `KAPACITOR_`.   Some values can
@@ -151,7 +151,7 @@ defined in this table.
 
 ##### Config Override
 
-This table contains only one key, which enables or disables the ability to
+This table contains only one key which enables or disables the ability to
 override certain values through the HTTP API. It is enabled by default.
 
 **Example 2 &ndash; The Config Override grouping**
@@ -184,7 +184,7 @@ this table.
 ```
 ##### Load
 
-As of Kapacitor release version 1.4, the Kapacitor service includes a feature
+As of Kapacitor release version 1.4 the Kapacitor service includes a feature
 that enables the loading of TICKscript tasks when the service loads.  The path
 to these scripts can be defined in this table.
 
@@ -203,7 +203,7 @@ to these scripts can be defined in this table.
 ##### Replay
 
 The Kapacitor client application can record data streams and batches for testing
-tasks before they are enabled.  This table contains one key, which declares the
+tasks before they are enabled.  This table contains one key which declares the
 path to the directory where the replay files are to be stored.
 
 **Example 5 &ndash; The Replay grouping**
@@ -241,13 +241,13 @@ grouping.
 
 ##### Deadman
 
-Kapacitor provides a Deadman's switch alert, which can be configured globally
+Kapacitor provides a Deadman's switch alert which can be configured globally
 in this table grouping.  For more information on the Deadman's switch see the
 [Deadman's switch](/kapacitor/v1.4/nodes/alert_node/#deadman) topic in the Alert
 node documentation.
 
 For a Deadman's switch to work it needs a threshold below which the switch will
-be triggered.  It also needs a polling interval as well as an id and message,
+be triggered.  It also needs a polling interval as well as an id and message
 which will be passed to the alert handler.
 
 **Example 7 &ndash; The Deadman grouping**
@@ -399,7 +399,7 @@ disable or enabled in the `[reporting]` table grouping.
 ##### Stats
 
 Internal statistics about Kapacitor can also be emitted to an Influx database.
-The collection frequency and the database to where the statistics are emitted
+The collection frequency and the database to which the statistics are emitted
 can be configured in the `[stats]` table grouping.
 
 **Example 10 &ndash; Stats configuration**
@@ -427,12 +427,12 @@ can be configured in the `[stats]` table grouping.
 Optional table groupings relate to specific features that may be leveraged by TICKscript
 nodes or may be needed to discover and scrape information from remote locations.
 They are disabled by default.  Practically this means that out of the box they
-include a key  `enabled`, which is set to `false`, i.e. `enabled = false`.  They
+include a key  `enabled` which is set to `false`, i.e. `enabled = false`.  They
 may also be simply commented out.  A feature defined by an optional table should
 be enabled whenever a relevant node, or a handler for a relevant node, is
 required by a task, or when an input source is needed.  
 
-For example, if alerts are to be sent via email, then the SMTP service should
+For example, if alerts are to be sent via email, then, the SMTP service should
 be enabled and configured in the table `[smtp]`.   
 
 **Example 11 &ndash; Enabling SMTP**
@@ -481,7 +481,7 @@ Most of the handler configurations cover the same or similar properties.  Every
 handler has the property `enabled`.  They also need an endpoint to which
 messages can be sent.  This is in the form of a property such as `url`, `addr` or
 a pair of properties such as `host` and `port`.  Most also include an
-authentication mechanism such as a `token`, or a pair of properties like
+authentication mechanism such as a `token` or a pair of properties like
 `username` and `password`.  A sample SMTP configuration is shown in Example 11
 above.
 
@@ -574,8 +574,8 @@ be found in the configuration file.
 
 ##### User Defined
 
-Kapacitor makes it possible to plug-in User Defined Functions
-([UDF](/kapacitor/v1.4/nodes/u_d_f_node/)), which can then be leveraged as
+Kapacitor makes it possible to plug in User Defined Functions
+([UDF](/kapacitor/v1.4/nodes/u_d_f_node/)) which can then be leveraged as
 chaining methods in a TICKscript.  A User Defined Function is indicated by the
 declaration of a new grouping table with the following identifier:
 `[udf.functions.<UDF_NAME>]`. UDF configurations require a path to an executable
@@ -583,7 +583,7 @@ identified by the following properties:
 
 * `prog` &ndash; A string indicating the path to the executable.
 * `args` &ndash; An array of string arguments to be passed to the executable.
-* `timeout` &ndash; A timeout for waiting for communications from the executable.
+* `timeout` &ndash; A timeout monitored when waiting for communications from the executable.
 
 The UDF can also include a group of environment variables declared in a table
 identified by the string `udf.functions.<UDF_NAME>.env`.
@@ -626,13 +626,13 @@ Currently two sources external to Influxdb are formally supported.
 
 Configuration of connections to third party input sources requires properties such as:
 
-* `bind-address` &ndash; address at which Kapacitor will receive data.
-* `database` &ndash; database to which Kapacitor will write data.
-* `retention-policy` &ndash; retentiona policy for that database.
-* `batch-size` &ndash; number of datapoints to buffer before writing.
-* `batch-pending` &ndash; number of batches that may be pending in memory.
-* `batch-timeout` &ndash; length of time to wait before writing the batch.  If
-the batch size has not been reached, then a short batch will be written.
+* `bind-address` &ndash; Address at which Kapacitor will receive data.
+* `database` &ndash; Database to which Kapacitor will write data.
+* `retention-policy` &ndash; Retention policy for that database.
+* `batch-size` &ndash; Number of datapoints to buffer before writing.
+* `batch-pending` &ndash; Number of batches that may be pending in memory.
+* `batch-timeout` &ndash; Length of time to wait before writing the batch.  If
+the batch size has not been reached, then, a short batch will be written.
 
 Each input source has additional properties specific to its configuration.  They
 follow the same configurations for these services used in
@@ -804,7 +804,7 @@ Examples:
 * `KAPACITOR_SKIP_CONFIG_OVERRIDES` &ndash; could be used to set the value for
 `skip-config-overrides`.
 * `KAPACITOR_INFLUXDB_0_URLS_0` &ndash; could be used to set the value of the
-first URL item in the URLS array in the first Influxdb property grouping,
+first URL item in the URLS array in the first Influxdb property grouping table,
 i.e. `[infludxb][0].[urls][0]`.
 * `KAPACITOR_STORAGE_BOLTDB` &ndash; could be used to set the path to the boltdb
 directory used for storage, i.e. `[storage].botldb`.
