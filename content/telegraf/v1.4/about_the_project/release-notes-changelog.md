@@ -5,12 +5,20 @@ menu:
     weight: 0
     parent: about_the_project
 ---
+## v1.4.5 [2017-12-01]
+
+### Bugfixes
+
+- Fix global variable collection when using interval_slow option in MySQL input.
+- Fix error getting net connections info in netstat input.
+- Fix HOST_MOUNT_PREFIX in Docker with disk input.
+
 ## v1.4.4 [2017-11-08]
 
 ### Bugfixes
 - Use schema specified in mqtt_consumer input.
 - Redact Datadog API key in log output.
-- Fix error getting PIDs in Netstat input.
+- Fix error getting PIDs in netstat input.
 - Support HOST_VAR envvar to locate /var in system input.
 - Use current time if Docker container read time is zero value.
 
