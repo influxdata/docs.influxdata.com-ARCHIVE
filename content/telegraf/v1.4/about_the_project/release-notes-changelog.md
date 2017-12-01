@@ -46,7 +46,7 @@ menu:
 - Fix parsing of JSON with a UTF8 BOM in `httpjson`.
 - Allow JSON data format to contain zero metrics.
 - Fix format of connection_timeout in `mqtt_consumer`.
-- Fix case sensitivity error in `SQLserver` input.
+- Fix case sensitivity error in SQL Server input.
 - Add support for proxy environment variables to `http_response`.
 - Add support for standard proxy env vars in outputs.
 - Fix panic in CPU input if number of CPUs changes.
