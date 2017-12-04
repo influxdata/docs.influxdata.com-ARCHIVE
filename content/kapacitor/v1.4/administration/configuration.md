@@ -22,17 +22,18 @@ understood before referring to this one.  This current document presents
 configuration in greater detail.
 
 Kapacitor service properties are configured using key value pairs organized
-into groups. Any property key can be located by following a tree-like
-path.  For example: `[http].https-enabled` or `[slack].channel`. The main means
-for declaring values for configuration keys is through the configuration file.
-On a POSIX system this file is located by default at the following location:
-`/etc/kapacitor/kapacitor.conf`.  On Windows systems the location of this file
-can be defined at startup with the `-config` argument. The path to the
-configuration file can also be declared using the environment variable
-`KAPACITOR_CONFIG_PATH`.  The values declared in this file can be overridden by
-environment variables beginning with the token `KAPACITOR_`.   Some values can
-also be dynamically altered using the HTTP API, when the key
-`[config-override].enabled` is set to `true`.
+into groups. Any property key can be located by following its path in the
+configuration file.  For example: `[http].https-enabled` or `[slack].channel`.
+The main means for declaring values for configuration keys is through the
+configuration file.  On a POSIX system this file is located by default at the
+following location: `/etc/kapacitor/kapacitor.conf`.  On Windows systems a
+sample configuration file can be found in the same directory as the
+`kapacitord.exe`.  The location of this file can be defined at startup with the
+`-config` argument. The path to the configuration file can also be declared
+using the environment variable `KAPACITOR_CONFIG_PATH`.  The values declared in
+this file can be overridden by environment variables beginning with the
+token `KAPACITOR_`.   Some values can also be dynamically altered using the
+HTTP API, when the key `[config-override].enabled` is set to `true`.
 
 Taken together, there are four basic means of configuring different aspects of
 the Kapacitor service.  They are listed here in the descending order by which
@@ -433,7 +434,7 @@ be enabled whenever a relevant node, or a handler for a relevant node, is
 required by a task, or when an input source is needed.  
 
 For example, if alerts are to be sent via email, then, the SMTP service should
-be enabled and configured in the table `[smtp]`.   
+be enabled and configured in the `[smtp]` properties table.   
 
 **Example 11 &ndash; Enabling SMTP**
 
