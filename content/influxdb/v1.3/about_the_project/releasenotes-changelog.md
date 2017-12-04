@@ -5,6 +5,14 @@ menu:
     weight: 0
     parent: about_the_project
 ---
+## v1.3.8 [2017-12-04]
+
+### Bugfixes
+
+- Add 'influx_inspect inmem2tsi' command to allow for existing tsm-based shards to be converted to tsi format.
+- Fix race condition in the merge iterator close method.
+- Fix compaction aborting early and dropping remaining series.
+
 ## v1.3.7 [2017-10-26]
 
 ### Release Notes
