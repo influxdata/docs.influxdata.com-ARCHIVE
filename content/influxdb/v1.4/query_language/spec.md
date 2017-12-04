@@ -8,8 +8,8 @@ menu:
 
 ## Introduction
 
-This is a reference for the Influx Query Language ("InfluxQL").
-If you're looking for less formal documentation see [Data Exploration](/influxdb/v1.4/query_language/data_exploration/), [Schema Exploration](/influxdb/v1.4/query_language/schema_exploration/), [Database Management](/influxdb/v1.4/query_language/database_management/), and [Authentication and Authorization](/influxdb/v1.4/query_language/authentication_and_authorization/).
+This is the reference for the Influx Query Language ("InfluxQL").
+If you're looking for less formal documentation, see [Data Exploration](/influxdb/v1.4/query_language/data_exploration/), [Schema Exploration](/influxdb/v1.4/query_language/schema_exploration/), [Database Management](/influxdb/v1.4/query_language/database_management/), and [Authentication and Authorization](/influxdb/v1.4/query_language/authentication_and_authorization/).
 
 InfluxQL is a SQL-like query language for interacting with InfluxDB.
 It has been lovingly crafted to feel familiar to those coming from other SQL or SQL-like environments while providing features specific to storing and analyzing time series data.
@@ -258,23 +258,33 @@ statement           = alter_retention_policy_stmt |
                       drop_shard_stmt |
                       drop_subscription_stmt |
                       drop_user_stmt |
+                      explain_stmt |
+                      explain_analyze_stmt |
                       grant_stmt |
                       kill_query_statement |
                       revoke_stmt |
                       select_stmt |
                       show_continuous_queries_stmt |
                       show_databases_stmt |
+                      show_field_key_cardinality_stmt |
                       show_field_keys_stmt |
                       show_grants_stmt |
+                      show_measurement_cardinality_stmt |
+                      show_measurement_exact_cardinality_stmt |
                       show_measurements_stmt |
                       show_queries_stmt |
                       show_retention_policies |
+                      show_series_cardinality_stmt |
+                      show_series_exact_cardinality_stmt |
                       show_series_stmt |
                       show_shard_groups_stmt |
                       show_shards_stmt |
                       show_subscriptions_stmt|
+                      show_tag_key_cardinality_stmt |
+                      show_tag_key_exact_cardinality_stmt |
                       show_tag_keys_stmt |
                       show_tag_values_stmt |
+                      show_tag_values_cardinality_stmt |
                       show_users_stmt .
 ```
 
@@ -576,11 +586,15 @@ The elements of `EXPLAIN` query plan include:
 - number of blocks
 - size of blocks
 
+```
+explain_stmt = "EXPLAIN" select_stmt"
+```
+
 #### Example:
 
 ```
 > explain select sum(pointReq) from "_internal"."monitor"."write" group by hostname;
-QUERY PLAN
+> QUERY PLAN
 ------
 EXPRESSION: sum(pointReq::integer)
 NUMBER OF SHARDS: 2
@@ -596,11 +610,15 @@ SIZE OF BLOCKS: 931
 
 Executes the query and counts the actual costs during runtime.
 
+```
+explain_analyze_stmt = "EXPLAIN ANALYZE" select_stmt"
+```
+
 #### Example:
 
 ```
 > explain analyze select sum(pointReq) from "_internal"."monitor"."write" group by hostname;
-EXPLAIN ANALYZE
+> EXPLAIN ANALYZE
 -----------
 .
 └── select
@@ -662,7 +680,7 @@ grant_stmt = "GRANT" privilege [ on_clause ] to_clause .
 
 #### Examples:
 
-```sql
+​```sql
 -- grant admin privileges
 GRANT ALL TO "jdoe"
 
@@ -693,7 +711,7 @@ revoke_stmt = "REVOKE" privilege [ on_clause ] "FROM" user_name .
 
 #### Examples:
 
-```sql
+​```sql
 -- revoke admin privileges from jdoe
 REVOKE ALL PRIVILEGES FROM "jdoe"
 
@@ -722,6 +740,21 @@ SELECT mean("value") INTO "cpu_1h".:MEASUREMENT FROM /cpu.*/
 SELECT mean("value") FROM "cpu" GROUP BY region, time(1d) fill(0) tz('America/Chicago')
 ```
 
+###SHOW CARDINALITY
+
+Refers to the group of commands used to estimate or count exactly the cardinality of measurements, series, tag keys, tag key values, and field keys.
+
+The SHOW CARDINALITY commands are available in two variations: estimated and exact. Estimated values are calculated using sketches and are a safe default for all cardinality sizes. Exact values are counts directly from TSM (Time-Structured Merge Tree) data, but are expensive to run for high cardinality data.  Unless required, use the estimated variety. 
+
+Filtering by `time` is only supported when TSI (Time Series Index) is enabled on a database. 
+
+See the specific SHOW CARDINALITY commands for details:
+- [SHOW FIELD KEY CARDINALITY](###SHOW FIELD KEY CARDINALITY)
+- [SHOW MEASUREMENT CARDINALITY](###SHOW MEASUREMENT CARDINALITY)
+- [SHOW SERIES CARDINALITY](###SHOW SERIES CARDINALITY)
+- [SHOW TAG KEY CARDINALITY](###SHOW TAG KEY CARDINALITY)
+- [SHOW TAG VALUES CARDINALITY](###SHOW TAG VALUES CARDINALITY)
+
 ### SHOW CONTINUOUS QUERIES
 
 ```
@@ -730,7 +763,7 @@ show_continuous_queries_stmt = "SHOW CONTINUOUS QUERIES" .
 
 #### Example:
 
-```sql
+​```sql
 -- show all continuous queries
 SHOW CONTINUOUS QUERIES
 ```
@@ -739,13 +772,37 @@ SHOW CONTINUOUS QUERIES
 
 ```
 show_databases_stmt = "SHOW DATABASES" .
+
+```
+
+#### Example:
+
+​```sql
+-- show all databases
+SHOW DATABASES
+```
+###SHOW FIELD KEY CARDINALITY
+
+Estimates or counts exactly the cardinality of the field key set for the current database unless a database is specified using the `ON <database>` option.
+
+> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional. 
+> When using these query clauses, the query falls back to an exact count. 
+> Filtering by `time` is only supported when TSI (Time Series Index) is enabled on a
+> database.
+
+```
+show_field_key_cardinality_stmt = "SHOW FIELD KEY CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]
+
+show_field_key_exact_cardinality_stmt = "SHOW FIELD KEY EXACT CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]
 ```
 
 #### Example:
 
 ```sql
--- show all databases
-SHOW DATABASES
+-- show estimated cardinality of the field key set of current database
+SHOW FIELD KEY CARDINALITY
+-- show exact cardinality on field key set of specified database
+SHOW FIELD KEY EXACT CARDINALITY ON mydb
 ```
 
 ### SHOW FIELD KEYS
@@ -775,6 +832,29 @@ show_grants_stmt = "SHOW GRANTS FOR" user_name .
 ```sql
 -- show grants for jdoe
 SHOW GRANTS FOR "jdoe"
+```
+####SHOW MEASUREMENT CARDINALITY
+
+Estimates or counts exactly the cardinality of the measurement set for the current database unless a database is specified using the `ON <database>` option
+
+> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional. 
+> When using these query clauses, the query falls back to an exact count. 
+> Filtering by `time` is only supported when TSI (Time Series Index) is enabled on a
+> database.
+
+```
+show_measurement_cardinality_stmt = "SHOW MEASUREMENT CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]
+
+show_measurement_exact_cardinality_stmt = "SHOW MEASUREMENT EXACT CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]
+```
+
+#### Example:
+
+```sql
+-- show estimated cardinality of measurement set on current database
+SHOW MEASUREMENT CARDINALITY
+-- show exact cardinality of measurement set on specified database
+SHOW MEASUREMENT EXACT CARDINALITY ON mydb
 ```
 
 ### SHOW MEASUREMENTS
@@ -834,6 +914,34 @@ show_series_stmt = "SHOW SERIES" [on_clause] [ from_clause ] [ where_clause ] [ 
 SHOW SERIES FROM "telegraf"."autogen"."cpu" WHERE cpu = 'cpu8'
 ```
 
+####SHOW SERIES CARDINALITY
+
+Estimates or counts exactly the cardinality of the measurement set for the current database, unless a database is specified using the `ON <database>` option.
+
+> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional. 
+> When using these query clauses, the query falls back to an exact count. 
+> Filtering by `time` is only supported when TSI (Time Series Index) is enabled on a
+> database.
+
+```
+show_series_cardinality_stmt = "SHOW SERIES CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]
+
+show_series_exact_cardinality_stmt = "SHOW SERIES EXACT CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]
+```
+
+#### Examples:
+
+```sql
+-- show estimated measurement cardinality on current database
+SHOW SERIES CARDINALITY
+-- show estimated measurement cardinality on specified database
+SHOW SERIES CARDINALITY ON mydb
+-- show exact series cardinality
+SHOW SERIES EXACT CARDINALITY
+-- show exact series cardinality on specified database
+SHOW SERIES EXACT CARDINALITY ON mydb
+```
+
 ### SHOW SHARD GROUPS
 
 ```
@@ -868,6 +976,30 @@ show_subscriptions_stmt = "SHOW SUBSCRIPTIONS" .
 
 ```sql
 SHOW SUBSCRIPTIONS
+```
+
+####SHOW TAG KEY CARDINALITY 
+
+Estimates or counts exactly the cardinality of tag key set on the current database. 
+
+> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional. 
+> When using these query clauses, the query falls back to an exact count. 
+> Filtering by `time` is only supported when TSI (Time Series Index) is enabled on a
+> database.
+
+```
+show_tag_key_cardinality_stmt = "SHOW TAG KEY CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]
+
+show_tag_key_exact_cardinality_stmt = "SHOW TAG KEY EXACT CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]
+```
+
+#### Examples:
+
+```sql
+-- show estimated tag key cardinality
+SHOW TAG KEY CARDINALITY
+-- show exact tag key cardinality
+SHOW TAG KEY EXACT CARDINALITY
 ```
 
 ### SHOW TAG KEYS
@@ -914,6 +1046,33 @@ SHOW TAG VALUES WITH KEY !~ /.*c.*/
 
 -- show tag values from the cpu measurement for region & host tag keys where service = 'redis'
 SHOW TAG VALUES FROM "cpu" WITH KEY IN ("region", "host") WHERE "service" = 'redis'
+```
+####SHOW TAG VALUES CARDINALITY
+
+Estimates or counts exactly the cardinality of tag key values for the specified tag key on the current database.
+
+> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional. 
+> When using these query clauses, the query falls back to an exact count. 
+> Filtering by `time` is only supported when TSI (Time Series Index) is enabled on a
+> database.
+
+```
+show_tag_values_cardinality_stmt = "SHOW TAG VALUES CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ] with_key_clause
+
+show_tag_values_exact_cardinality_stmt = "SHOW TAG VALUES EXACT CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ] with_key_clause
+```
+
+#### Examples:
+
+```sql
+-- show estimated tag key values cardinality for a specified tag key
+SHOW TAG VALUES CARDINALITY WITH KEY = "myTagKey"
+-- show estimated tag key values cardinality for a specified tag key
+SHOW TAG VALUES CARDINALITY WITH KEY = "myTagKey"
+-- show exact tag key values cardinality for a specified tag key
+SHOW TAG VALUES EXACT CARDINALITY WITH KEY = "myTagKey"
+-- show exact tag key values cardinality for a specified tag key
+SHOW TAG VALUES EXACT CARDINALITY WITH KEY = "myTagKey"
 ```
 
 ### SHOW USERS
