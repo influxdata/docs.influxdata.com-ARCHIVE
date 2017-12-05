@@ -835,7 +835,7 @@ SHOW GRANTS FOR "jdoe"
 ```
 ####SHOW MEASUREMENT CARDINALITY
 
-Estimates or counts exactly the cardinality of the measurement set for the current database unless a database is specified using the `ON <database>` option
+Estimates or counts exactly the cardinality of the measurement set for the current database unless a database is specified using the `ON <database>` option.
 
 > **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional. 
 > When using these query clauses, the query falls back to an exact count. 
@@ -916,7 +916,12 @@ SHOW SERIES FROM "telegraf"."autogen"."cpu" WHERE cpu = 'cpu8'
 
 ####SHOW SERIES CARDINALITY
 
-Estimates or counts exactly the cardinality of the measurement set for the current database, unless a database is specified using the `ON <database>` option.
+Estimates or counts exactly the cardinality of the series for the current database unless a database is specified using the `ON <database>` option.
+
+[Series cardinality](/guides/1.4/guides/hardware_sizing) is the major factor that affects RAM requirements. For more information, see:
+
+- [When do I need more RAM?](/v1.3/guides/hardware_sizing/#when-do-i-need-more-ram) in [Hardware Sizing Guidelines](influxdb/v1.3/guides/hardware_sizing/)
+- [Don't have too many series](/influxdb/v1.3/concepts/schema_and_data_layout/#don-t-have-too-many-series)
 
 > **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional. 
 > When using these query clauses, the query falls back to an exact count. 
@@ -932,13 +937,13 @@ show_series_exact_cardinality_stmt = "SHOW SERIES EXACT CARDINALITY" [ on_clause
 #### Examples:
 
 ```sql
--- show estimated measurement cardinality on current database
+-- show estimated cardinality of the series on current database
 SHOW SERIES CARDINALITY
--- show estimated measurement cardinality on specified database
+-- show estimated cardinality of the series on specified database
 SHOW SERIES CARDINALITY ON mydb
 -- show exact series cardinality
 SHOW SERIES EXACT CARDINALITY
--- show exact series cardinality on specified database
+-- show series cardinality of the series on specified database
 SHOW SERIES EXACT CARDINALITY ON mydb
 ```
 
@@ -980,7 +985,7 @@ SHOW SUBSCRIPTIONS
 
 ####SHOW TAG KEY CARDINALITY 
 
-Estimates or counts exactly the cardinality of tag key set on the current database. 
+Estimates or counts exactly the cardinality of tag key set on the current database unless a database is specified using the `ON <database>` option.
 
 > **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional. 
 > When using these query clauses, the query falls back to an exact count. 
@@ -1049,7 +1054,7 @@ SHOW TAG VALUES FROM "cpu" WITH KEY IN ("region", "host") WHERE "service" = 'red
 ```
 ####SHOW TAG VALUES CARDINALITY
 
-Estimates or counts exactly the cardinality of tag key values for the specified tag key on the current database.
+Estimates or counts exactly the cardinality of tag key values for the specified tag key on the current database unless a database is specified using the `ON <database>` option.
 
 > **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional. 
 > When using these query clauses, the query falls back to an exact count. 

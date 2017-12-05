@@ -23,9 +23,9 @@ Refer to the 1.4.0 breaking changes section if `influxd` fails to start with an 
 ## v1.4.0 [2017-11-13]
 
 ### TSI Index
-This feature remains experimental in this release.  However, a number of improvements have been made and new meta query 
-changes will allow for this feature to be explored at more depth than previously possible.  It is not recommended for 
-production use at this time.  We appreciate all the feedback on this feature.  Please keep it coming!
+This feature remains experimental in this release.  
+However, a number of improvements have been made and new meta query changes will allow for this feature to be explored at more depth than previously possible.  It is not recommended for production use at this time. 
+We appreciate all of the feedback we receive on this feature.  Please keep it coming!
 
 ### Breaking changes
 
@@ -64,10 +64,9 @@ will find the shards refuse to open and will most likely see the following error
 
 ### Features
 
-- Add `inmem2tsi` command to `influx_inspect` allowing for conversion of an in-memory index to a TSI index.
+- Add `influx_inspect inmem2tsi` command to convert existing in-memory (TSM-based) shards to the TSI (Time Series Index) format.
 - Add support for the Prometheus remote read and write APIs.
-- Support SHOW CARDINALITY queries.
-- EXACT and estimated CARDINALITY queries.
+- Support estimated and exact SHOW CARDINALITY commands for measurements, series, tag keys, tag key values, and field keys.
 - Improve `SHOW TAG KEYS` performance.
 - Add `EXPLAIN ANALYZE` command, which produces a detailed execution plan of a `SELECT` statement.
 - Improved compaction scheduling.
@@ -76,11 +75,11 @@ will find the shards refuse to open and will most likely see the following error
 - Respect X-Request-Id/Request-Id headers.
 - Add 'X-Influxdb-Build' to http response headers so users can identify if a response is from an OSS or Enterprise service.
 - All errors from queries or writes are available via X-InfluxDB-Error header, and 5xx error messages will be written 
-to server logs.
+  to server logs.
 - Add `parse-multivalue-plugin` to allow users to choose how multivalue plugins should be handled by the collectd service.
 - Make client errors more helpful on downstream errors. 
 - Allow panic recovery to be disabled when investigating server issues.
-- Support http pipelining for /query endpoint.
+- Support http pipelining for `/query` endpoint.
 - Reduce allocations when reading data.
 - Mutex profiles are now available.
 - Batch up writes for monitor service.
@@ -268,13 +267,13 @@ Next, restart your InfluxDB instance.
 
 When enabled, each time a continuous query is completed, a number of details regarding the execution are written to the `cq_query` measurement of the internal monitor database (`_internal` by default). The tags and fields of interest are
 
-| tag / field       | description                                        |
-|:----------------- |:-------------------------------------------------- |
-| `db`              | name of database                                   |
-| `cq`              | name of continuous query                           |
-| `durationNS`      | query execution time in nanoseconds                |
-| `startTime`       | lower bound of time range                          |
-| `endTime`         | upper bound of time range                          |
+| tag / field       | description                              |
+| :---------------- | :--------------------------------------- |
+| `db`              | name of database                         |
+| `cq`              | name of continuous query                 |
+| `durationNS`      | query execution time in nanoseconds      |
+| `startTime`       | lower bound of time range                |
+| `endTime`         | upper bound of time range                |
 | `pointsWrittenOK` | number of points written to the target measurement |
 
 
@@ -289,7 +288,7 @@ The admin UI is removed and unusable in this release. The `[admin]` configuratio
 
 * The top-level config `bind-address` now defaults to `localhost:8088`.
   The previous default was just `:8088`, causing the backup and restore port to be bound on all available interfaces (i.e. including interfaces on the public internet).
-  
+
 The following new configuration options are available.
 
 #### `[http]` Section
@@ -297,7 +296,7 @@ The following new configuration options are available.
 * `max-body-size` was added with a default of 25,000,000, but can be disabled by setting it to 0. 
   Specifies the maximum size (in bytes) of a client request body. When a client sends data that exceeds
   the configured maximum size, a `413 Request Entity Too Large` HTTP response is returned. 
-  
+
 #### `[continuous_queries]` Section
 
 * `query-stats-enabled` was added with a default of `false`. When set to `true`, continuous query execution statistics are written to the default monitor store.
@@ -404,9 +403,9 @@ The following new configuration options are available.
 #### `[http]` Section
 
 * [`max-row-limit`](/influxdb/v1.3/administration/config/#max-row-limit-0) now defaults to `0`.
-In versions 1.0 and 1.1, the default setting was `10000`, but due to a bug, the value in use in versions 1.0 and 1.1 was effectively `0`.
-In versions 1.2.0 through 1.2.1, we fixed that bug, but the fix caused a breaking change for Grafana and Kapacitor users; users who had not set `max-row-limit` to `0` experienced truncated/partial data due to the `10000` row limit.
-In version 1.2.2, we've changed the default `max-row-limit` setting to `0` to match the behavior in versions 1.0 and 1.1.
+  In versions 1.0 and 1.1, the default setting was `10000`, but due to a bug, the value in use in versions 1.0 and 1.1 was effectively `0`.
+  In versions 1.2.0 through 1.2.1, we fixed that bug, but the fix caused a breaking change for Grafana and Kapacitor users; users who had not set `max-row-limit` to `0` experienced truncated/partial data due to the `10000` row limit.
+  In version 1.2.2, we've changed the default `max-row-limit` setting to `0` to match the behavior in versions 1.0 and 1.1.
 
 ### Bugfixes
 
@@ -419,27 +418,27 @@ In version 1.2.2, we've changed the default `max-row-limit` setting to `0` to ma
 ### Bugfixes
 
 -	 Treat non-reserved measurement names with underscores as normal measurements.
--	 Reduce the expression in a subquery to avoid a panic.
--	 Properly select a tag within a subquery.
--	 Prevent a panic when aggregates are used in an inner query with a raw query.
--	 Points missing after compaction.
--	 Point.UnmarshalBinary() bounds check.
--	 Interface conversion: tsm1.Value is tsm1.IntegerValue, not tsm1.FloatValue.
--	 Map types correctly when using a regex and one of the measurements is empty.
--	 Map types correctly when selecting a field with multiple measurements where one of the measurements is empty.
--	 Include IsRawQuery in the rewritten statement for meta queries.
--	 Fix race in WALEntry.Encode and Values.Deduplicate
--	 Fix panic in collectd when configured to read types DB from directory.
--	 Fix ORDER BY time DESC with ordering series keys.
--	 Fix mapping of types when the measurement uses a regular expression.
--	 Fix LIMIT and OFFSET when they are used in a subquery.
--	 Fix incorrect math when aggregates that emit different times are used.
--	 Fix EvalType when a parenthesis expression is used.
--	 Fix authentication when subqueries are present.
--	 Expand query dimensions from the subquery.
--	 Dividing aggregate functions with different outputs doesn't panic.
--	 Anchors not working as expected with case-insensitive regular expression.
- 
+  - Reduce the expression in a subquery to avoid a panic.
+  - Properly select a tag within a subquery.
+  - Prevent a panic when aggregates are used in an inner query with a raw query.
+  - Points missing after compaction.
+  - Point.UnmarshalBinary() bounds check.
+  - Interface conversion: tsm1.Value is tsm1.IntegerValue, not tsm1.FloatValue.
+  - Map types correctly when using a regex and one of the measurements is empty.
+  - Map types correctly when selecting a field with multiple measurements where one of the measurements is empty.
+  - Include IsRawQuery in the rewritten statement for meta queries.
+  - Fix race in WALEntry.Encode and Values.Deduplicate
+  - Fix panic in collectd when configured to read types DB from directory.
+  - Fix ORDER BY time DESC with ordering series keys.
+  - Fix mapping of types when the measurement uses a regular expression.
+  - Fix LIMIT and OFFSET when they are used in a subquery.
+  - Fix incorrect math when aggregates that emit different times are used.
+  - Fix EvalType when a parenthesis expression is used.
+  - Fix authentication when subqueries are present.
+  - Expand query dimensions from the subquery.
+  - Dividing aggregate functions with different outputs doesn't panic.
+  - Anchors not working as expected with case-insensitive regular expression.
+
 ## v1.2.0 [2017-01-24]
 
 ### Release Notes
