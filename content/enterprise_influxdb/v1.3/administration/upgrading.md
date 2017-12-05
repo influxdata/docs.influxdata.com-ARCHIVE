@@ -9,28 +9,28 @@ menu:
 ---
 
 ## Upgrading from version 1.3.x to 1.3.8
-Version 1.3.8 is a drop-in replacement for earlier releases of 1.3.x with no data migration required, unless you have been using the TSI preview with 1.3.6 or earlier releases.
+Version 1.3.8 is a drop-in replacement for earlier releases of 1.3.x with no data migration required, unless you have been using the TSI (Time Series Index) preview with 1.3.6 or earlier releases.
 
-### For users of the TSI preview
+### For users of the TSI (Time Series Index) preview
 If you have been using the TSI preview with 1.3.6 or earlier 1.3.x releases, you will need to follow the upgrade steps to 
 continue using the TSI preview.  Unfortunately, these steps cannot be executed while the cluster is operating -- so it will 
 result in downtime.  
 
-1. Stop the meta and data node processes
-1. Download and update bits to 1.3.8
-1. Delete all /index directories contained with the data nodes (default configuration is [data] dir = /var/lib/influxdb/data) 
+1. Stop the meta and data node processes.
+1. Download and update bits to 1.3.8.
+1. Delete all /index directories contained with the data nodes (default configuration is [data] dir = /var/lib/influxdb/data). 
 1. Rebuild the TSI indexes using the `influx_inspect` utility with the new `inmem2tsi` parameter.  More documentation
 describing this new parameter with `influx_inspect` [can be found here](https://docs.influxdata.com/influxdb/v1.3/tools/influx_inspect/).
-1. Restart meta nodes
-1. Restart data nodes
+1. Restart meta nodes.
+1. Restart data nodes.
 
 The 1.3.7 release resolved a defect that created duplicate tag values in TSI indexes.
 See Issues [#8995](https://github.com/influxdata/influxdb/pull/8995), and [#8998](https://github.com/influxdata/influxdb/pull/8998). 
-However, upgrading to 1.3.7 with the TSI preview on will cause compactions to fail, 
-see [Issue #9025](https://github.com/influxdata/influxdb/issues/9025). 
+However, upgrading to 1.3.7 with the TSI preview on will cause compactions to fail 
+-- see [Issue #9025](https://github.com/influxdata/influxdb/issues/9025). 
 
 If you are using the TSI preview, **you should not upgrade to 1.3.7** from any other 1.3.x release. 
-Instead, you should upgrade to 1.3.8 and execute the index rebuild process as described above using `influx_inspect` 
+Instead, upgrade to 1.3.8 and execute the index rebuild process as described above using `influx_inspect` 
 utility with the new `inmem2tsi` parameter.
 
 ## Upgrading from version 1.2.5 to 1.3.x
@@ -40,14 +40,14 @@ Please update that configuration file to avoid any unnecessary downtime.
 The steps below outline the upgrade process and include a list of the required configuration changes.
 
 ### Step 0: Back up your cluster before upgrading to version 1.3.
-It is recommended to create a full backup of your cluster prior to executing the upgrade. If you are 
-already have incremental backups being created as part of your standard operating procedures, you should 
-trigger a final incremental backup before proceeding with the upgrade.
+Create a full backup of your cluster prior to executing the upgrade. 
+If you already have incremental backups being created as part of your standard operating procedures, 
+you should trigger a final incremental backup before proceeding with the upgrade.
 <dt>
 Note that you need to ensure you have sufficient disk space before triggering the backup.
 </dt>
 The following command uses the [version 1.2 backup syntax](https://docs.influxdata.com/enterprise_influxdb/v1.2/guides/backup-and-restore/#syntax) 
-to create an incremental backup of your cluster and it stores that backup in the current directory.
+to create an incremental backup of your cluster and stores that backup in the current directory.
 
 ```
 influxd-ctl backup .
@@ -55,7 +55,7 @@ influxd-ctl backup .
 
 Otherwise, you should create a full backup before proceeding. 
 The following command uses the [backup syntax originally introduced in version 1.2](https://docs.influxdata.com/enterprise_influxdb/v1.3/guides/backup-and-restore/#syntax) 
-to create a full backup of your cluster and it stores that backup in the current directory. 
+to create a full backup of your cluster and to store that backup in the current directory. 
 
 ```
 influxd-ctl backup -full .
@@ -134,14 +134,14 @@ Add:
 
 Remove:
 
-* `max-remote-write-connections` from the `[cluster]` section
+* the `max-remote-write-connections` from the `[cluster]` section
 * the [[admin]](/enterprise_influxdb/v1.3/administration/configuration/#admin) section
 
 Update:
 
 * [cache-max-memory-size](/enterprise_influxdb/v1.3/administration/configuration/#cache-max-memory-size-1073741824) to `1073741824` in the `[data]` section
 
-The new configuration options are set to their default settings.
+The new configuration options are set to the default settings.
 Follow the links for more information about those options.
 
 ### Step 4: Restart the processes
@@ -168,7 +168,7 @@ sudo systemctl restart influxdb
 
 ### Step 5: Confirm the upgrade
 
-Check your nodes' version numbers using the `influxd-ctl show` command.
+Check your node version numbers using the `influxd-ctl show` command.
 The [`influxd-ctl` tool](/enterprise_influxdb/v1.3/features/cluster-commands/) is available on all meta nodes.
 
 ```
