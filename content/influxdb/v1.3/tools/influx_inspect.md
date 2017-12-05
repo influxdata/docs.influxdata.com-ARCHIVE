@@ -167,7 +167,8 @@ CREATE RETENTION POLICY autogen ON MY_DB_NAME DURATION inf REPLICATION 1
 randset value=97.9296104805 1439856000000000000
 randset value=25.3849066842 1439856100000000000
 ```
-###`influx_inspect inmem2tsi`
+
+### `influx_inspect inmem2tsi`
 Converts existing in-memory (TSM-based) shards to TSI (time series index) format. 
 The index is written to a temporary location until complete and then moved to a permanent location. 
 If an error occurs, then this operation will fall back to the original in-memory index.
