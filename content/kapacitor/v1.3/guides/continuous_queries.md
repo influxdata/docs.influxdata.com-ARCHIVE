@@ -73,16 +73,24 @@ At this point there are a few questions we should answer:
 There are a few reasons to use Kapacitor instead of CQs.
 
 * You are performing a significant number of CQs and want to isolate the work load.
-    By using Kapacitor to perform the aggregations InfluxDB's performance profile can remain more stable and isolated from Kapacitor's.
-* You need to do more than just perform a query, for example maybe you only want to store only outliers from an aggregation instead of all of them.
+    By using Kapacitor to perform the aggregations InfluxDB's performance profile can remain more stable and 
+    isolated from Kapacitor's.
+* You need to do more than just perform a query, for example maybe you only want to store only outliers from 
+an aggregation instead of all of them.
     Kapacitor can do significantly more with the data than CQs so you have more flexibility in transforming your data.
+* Parallelization
+    You want your workloads to run in parallel.  This may occure when the aggregate execution time for your CQs is
+    sufficiently long (potentially due to complexity of the work they are performing) and 
+    causes issues in terms of the timeliness of other CQs.  This may be caused by a single "long running" CQ.  
+    In such as case, turning that CQ into a TICKscript and allowing the simpler CQs to remain in the database will allow for 
+    more reliable execution times.
 
 There are a few use cases where using CQs almost always makes sense.
 
-* Performing downsampling for retention policies.
+* Performing _simple_ downsampling for retention policies.
     This is what CQs are designed for and do well.
     No need to add another moving piece (i.e. Kapacitor) to your infrastructure if you do not need it.
-    Keep it simple.
+    But, keep it simple.  Complex downsampling queries should be moved to TICKscript.
 * You only have a handful of CQs, again keep it simple, do not add more moving parts to your setup unless you need it.
 
 ### When should we use stream tasks vs batch tasks in Kapacitor?
@@ -90,9 +98,11 @@ There are a few use cases where using CQs almost always makes sense.
 Basically the answer boils down to two things, the available RAM and time period being used.
 
 A stream task will have to keep all data in RAM for the specified period.
-If this period is too long for the available RAM then you will first need to store the data in InfluxDB and then query using a batch task.
+If this period is too long for the available RAM then you will first need to store the data in InfluxDB and 
+then query using a batch task.
 
-A stream task does have one slight advantage in that since its watching the stream of data it understands time by the timestamps on the data.
+A stream task does have one slight advantage in that since its watching the stream of data it understands 
+time by the timestamps on the data.
 As such there are no race conditions for whether a given point will make it into a window or not.
 If you are using a batch task it is still possible for a point to arrive late and be missed in a window.
 
@@ -147,5 +157,7 @@ batch
 
 Kapacitor is a powerful tool, if you need more power use it.
 If not keep using CQs until you do.
-For more information and help writing TICKscripts from InfluxQL queries take a looks at these [docs](https://docs.influxdata.com/kapacitor/latest/nodes/influx_q_l_node/) on the InfluxQL node in Kapacitor.
-Every function available in the InfluxDB query language is available in Kapacitor, so you can convert any query into a Kapacitor TICKscript.
+For more information and help writing TICKscripts from InfluxQL queries take a looks at these 
+[docs](https://docs.influxdata.com/kapacitor/latest/nodes/influx_q_l_node/) on the InfluxQL node in Kapacitor.
+Every function available in the InfluxDB query language is available in Kapacitor, so you can convert any query 
+into a Kapacitor TICKscript.

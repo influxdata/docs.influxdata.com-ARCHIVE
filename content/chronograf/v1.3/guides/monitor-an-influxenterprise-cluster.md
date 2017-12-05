@@ -30,7 +30,7 @@ Before we begin, here's an overview of the final monitoring setup:
 ![Architecture diagram](/img/chronograf/v1.3/g-cluster-diagram.png)
 
 The diagram above shows an InfluxEnterprise cluster that consists of three meta nodes (M) and three data nodes (D).
-Every data node has its own [Telegraf](/telegraf/v1.3/) instance (T).
+Every data node has its own [Telegraf](/telegraf/latest/) instance (T).
 
 Each Telegraf instance is configured to collect its node's CPU, disk, and memory data using Telegraf's [system stats](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) input plugin.
 The Telegraf instances are also configured to send those data to a single [OSS InfluxDB](/influxdb/v1.3/) instance that lives on a separate server.
@@ -48,8 +48,8 @@ Chronograf uses the hostnames in the Telegraf data to populate the Host List pag
 On a server that's separate from your InfluxEnterprise cluster, download and install OSS InfluxDB:
 
 ```
-~# wget https://dl.influxdata.com/influxdb/releases/influxdb_1.2.4_amd64.deb
-~# sudo dpkg -i influxdb_1.2.4_amd64.deb
+~# wget https://dl.influxdata.com/influxdb/releases/influxdb_1.3.7_amd64.deb
+~# sudo dpkg -i influxdb_1.3.7_amd64.deb
 ```
 
 #### Step 2: Enable authentication
@@ -103,8 +103,8 @@ You'll return to your OSS InfluxDB instance at the end of this section.
 #### Step 1: Download and install Telegraf
 
 ```
-~# wget https://dl.influxdata.com/telegraf/releases/telegraf_1.3.2-1_amd64.deb
-~# sudo dpkg -i telegraf_1.3.2-1_amd64.deb
+~# wget https://dl.influxdata.com/telegraf/releases/telegraf_1.4.3-1_amd64.deb
+~# sudo dpkg -i telegraf_1.4.3-1_amd64.deb
 ```
 
 #### Step 2: Configure Telegraf
@@ -225,8 +225,8 @@ Here, we download and install Chronograf on the same server as the OSS InfluxDB 
 This is not a requirement; you may host Chronograf on a separate server.
 
 ```
-~# wget https://dl.influxdata.com/chronograf/releases/chronograf_1.3.3.0_amd64.deb
-~# sudo dpkg -i chronograf_1.3.3.0_amd64.deb
+~# wget https://dl.influxdata.com/chronograf/releases/chronograf_1.3.10.0_amd64.deb
+~# sudo dpkg -i chronograf_1.3.10.0_amd64.deb
 ```
 
 #### Step 2: Start Chronograf

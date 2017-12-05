@@ -5,6 +5,22 @@ menu:
     weight: 0
     parent: about_the_project
 ---
+## v1.4.5 [2017-12-01]
+
+### Bugfixes
+
+- Fix global variable collection when using interval_slow option in MySQL input.
+- Fix error getting net connections info in netstat input.
+- Fix HOST_MOUNT_PREFIX in Docker with disk input.
+
+## v1.4.4 [2017-11-08]
+
+### Bugfixes
+- Use schema specified in mqtt_consumer input.
+- Redact Datadog API key in log output.
+- Fix error getting PIDs in netstat input.
+- Support HOST_VAR envvar to locate /var in system input.
+- Use current time if Docker container read time is zero value.
 
 ## v1.4.3 [2017-10-25]
 
@@ -30,7 +46,7 @@ menu:
 - Fix parsing of JSON with a UTF8 BOM in `httpjson`.
 - Allow JSON data format to contain zero metrics.
 - Fix format of connection_timeout in `mqtt_consumer`.
-- Fix case sensitivity error in `SQLserver` input.
+- Fix case sensitivity error in SQL Server input.
 - Add support for proxy environment variables to `http_response`.
 - Add support for standard proxy env vars in outputs.
 - Fix panic in CPU input if number of CPUs changes.

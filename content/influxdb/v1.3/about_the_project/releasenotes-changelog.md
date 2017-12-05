@@ -5,10 +5,18 @@ menu:
     weight: 0
     parent: about_the_project
 ---
+## v1.3.8 [2017-12-04]
+
+### Bugfixes
+
+- Add `influx_inspect inmem2tsi` command to convert existing in-memory (TSM-based) shards to the TSI (Time Series Index) format.
+- Fix race condition in the merge iterator close method.
+- Fix compaction aborting early and dropping remaining series.
+
 ## v1.3.7 [2017-10-26]
 
 ### Release Notes
-Bug fix identified via Community and InfluxCloud. The build artifacts are now consistnent with v1.3.5.
+Bug fix identified via Community and InfluxCloud. The build artifacts are now consistent with v1.3.5.
 
 ### Bugfixes
 
@@ -16,7 +24,7 @@ Bug fix identified via Community and InfluxCloud. The build artifacts are now co
 - Fix use of `INFLUXD_OPTS` in service file.
 - Fix missing man pages in new packaging output.
 - Add RPM dependency on shadow-utils for `useradd`.
-- Fix data deleted outside of specified time range when using `delete`
+- Fix data deleted outside of specified time range when using `delete`.
 - Fix data dropped incorrectly during compaction.
 - Return `query.ErrQueryInterrupted` for a successful read on `InterruptCh`.
 - Copy returned bytes from TSI meta functions.
@@ -111,7 +119,8 @@ It offers a solution to the [time-structured merge tree](https://docs.influxdata
 With TSI, the number of series should be unbounded by the memory on the server hardware and the number of existing series will have a negligible impact on database startup time.
 See Paul Dix's blogpost [Path to 1 Billion Time Series: InfluxDB High Cardinality Indexing Ready for Testing](https://www.influxdata.com/path-1-billion-time-series-influxdb-high-cardinality-indexing-ready-testing/) for additional information.
 
-TSI is disabled by default in version 1.3.
+TSI is disabled by default in version 1.3.  It should be considered an `experimental feature` and 
+is not recommended for production deployment at this time.
 To enable TSI, uncomment the [`index-version` setting](/influxdb/v1.3/administration/config/#index-version-inmem) and set it to `tsi1`.
 The `index-version` setting is in the `[data]` section of the configuration file.
 Next, restart your InfluxDB instance.

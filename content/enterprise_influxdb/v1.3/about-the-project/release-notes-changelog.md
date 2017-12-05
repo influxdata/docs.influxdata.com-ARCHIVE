@@ -17,7 +17,24 @@ menu:
 
 <br>
 <br>
+
 # Clustering
+
+## v1.3.8 [2017-12-04]
+
+### Upgrading -- for users of the TSI preview
+If you have been using the TSI preview with 1.3.6 or earlier 1.3.x releases, you will need to follow the upgrade steps to 
+continue using the TSI preview.  Unfortunately, these steps cannot be executed while the cluster is operating -- so it will 
+result in downtime.  
+
+See more details here: [Upgrading from previous versions](/v1.3/administration/upgrading/) 
+
+### Bugfixes
+
+- Updated yamux resolves race condition when SYN is successfully sent and a write timeout occurs.
+- Re-send authentication credentials on redirect
+- Fix wildcard when one shard has no data for a measurement with partial replication.
+- Fix spurious "rpc error: i/o deadline exceeded" errors.
 
 ## v1.3.7 [2017-10-26]
 
@@ -29,7 +46,6 @@ We will provide a utility that will allow TSI indexes to be rebuilt,
 resolving the corruption possible in releases prior to 1.3.7. If you are using the TSI preview, 
 **you should not upgrade to 1.3.7 until this utility is available**. 
 We will update this release note with operational steps once the utility is available.
-
 
 #### Bugfixes
 
