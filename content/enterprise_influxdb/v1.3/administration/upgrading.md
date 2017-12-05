@@ -21,6 +21,8 @@ result in downtime.
 1. Delete all /index directories contained with the data nodes (default configuration is [data] dir = /var/lib/influxdb/data) 
 1. Rebuild the TSI indexes using the `influx_inspect` utility with the new `inmem2tsi` parameter.  More documentation
 describing this new parameter with `influx_inspect` [can be found here](link to inmem2tsi with influx_inspect).
+1. Restart meta nodes
+1. Restart data nodes
 
 The 1.3.7 release resolved a defect that created duplicate tag values in TSI indexes.
 See Issues [#8995](https://github.com/influxdata/influxdb/pull/8995), and [#8998](https://github.com/influxdata/influxdb/pull/8998). 
