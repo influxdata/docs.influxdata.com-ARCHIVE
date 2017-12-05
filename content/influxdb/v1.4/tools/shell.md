@@ -291,11 +291,11 @@ If you do not specify either the host or the port, `influx` assumes the default 
 `consistency <level>`  
 Sets the write consistency level: `any`, `one`, `quorum`, or `all`.
 
-`ctrl+c`
+`Ctrl+C`
 Terminates the currently running query. Useful when an interactive query is taking too long to respond
 because it is trying to return too much data.
 
-`exit` `quit` `ctrl+d`                
+`exit` `quit` `Ctrl+D`                
 Quits the `influx` shell.
 
 `format <format>`  
