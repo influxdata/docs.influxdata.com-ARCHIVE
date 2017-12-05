@@ -12,22 +12,22 @@ Version 1.3.7 is a drop-in replacement for earlier releases of 1.3.x with no dat
 
 ## Upgrading from version 1.2.5 to 1.3.x
 
-Version 1.3.x introduces changes to the data node configuration file and there are changes to the 
+Version 1.3.x introduces changes to the data node configuration file and changes to the 
 underlying communication protocols between the nodes used for hinted handoff.
 
 The impact of the hinted handoff protocol change means that you will be unable to perform a `downgrade` if there are
-points contained within the hinted handoff queue of the upgraded nodes.  There are recommendations below which describe
+points contained within the hinted handoff queue of the upgraded nodes.  There are recommendations below describing
 how to avoid building up hinted handoff queue points while upgrading.
 
 Please update that configuration file to avoid any unnecessary downtime.
 The steps below outline the upgrade process and include a list of the required configuration changes.
 
 ### Step 0: Back up your cluster before upgrading to version 1.3.
-It is recommended to create a full backup of your cluster prior to executing the upgrade. If you are 
-already have incremental backups being created as part of your standard operating procedures, you should 
+It is recommended that you create a full backup of your cluster before executing the upgrade. 
+If you already have incremental backups created as part of your standard operating procedures, make sure that you 
 trigger a final incremental backup before proceeding with the upgrade.
 <dt>
-__NOTE:__ You need to ensure you have sufficient disk space before triggering the backup!
+__NOTE:__ Ensure you have sufficient disk space before triggering the backup!
 </dt>
 The following command uses the [version 1.2 backup syntax](https://docs.influxdata.com/enterprise_influxdb/v1.2/guides/backup-and-restore/#syntax) 
 to create an incremental backup of your cluster and it stores that backup in the current directory.
@@ -36,14 +36,14 @@ to create an incremental backup of your cluster and it stores that backup in the
 influxd-ctl backup .
 ```
 
-Otherwise, you should create a full backup before proceeding. 
+Otherwise, create a full backup before proceeding. 
 The following command uses the [backup syntax originally introduced in version 1.2](https://docs.influxdata.com/enterprise_influxdb/v1.3/guides/backup-and-restore/#syntax) 
 to create a full backup of your cluster and it stores that backup in the current directory. 
 
 ```
 influxd-ctl backup -full .
 ```
-You should start by upgrading the meta nodes first ensuring that the meta cluster is healthy, before proceeding to the
+Upgrade the meta nodes first, ensuring that the meta cluster is healthy, before proceeding to the
 data nodes. 
 
 ### Repeat the following steps for each meta node in the cluster
@@ -89,7 +89,7 @@ sudo systemctl restart influxdb-meta
 
 ### Step 4: Confirm the upgrade
 
-Once you've performed the upgrade on ALL meta nodes, check your nodes' version numbers using the 
+After performing the upgrade on ALL meta nodes, check your node version numbers using the 
 `influxd-ctl show` command.
 The [`influxd-ctl` tool](/enterprise_influxdb/v1.3/features/cluster-commands/) is available on all meta nodes.
 
@@ -135,7 +135,7 @@ load balancer prior to performing the remaining steps.
 
 #### Data node package install
 
-When you run the install command, your terminal asks if you'd like to keep your 
+When you run the install command, your terminal asks if you want to keep your 
 current configuration file or overwrite your current configuration file with the file for version 1.3.7.
 Please keep your current configuration file by entering `N` or `O`;
 we update the configuration file with the necessary changes for version 1.3.7 in step 3.
@@ -176,7 +176,7 @@ Update:
 
 * [cache-max-memory-size](/enterprise_influxdb/v1.3/administration/configuration/#cache-max-memory-size-1073741824) to `1073741824` in the `[data]` section
 
-The new configuration options are set to their default settings.
+The new configuration options are set to the default settings.
 Follow the links for more information about those options.
 
 ### Step 5: Restart the influxdb process
@@ -186,12 +186,12 @@ Follow the links for more information about those options.
 shard. See 
 [Release Notes/Change Log](https://docs.influxdata.com/enterprise_influxdb/v1.3/about-the-project/release-notes-changelog/#v1-3-0-2017-06-21).  
 As a result, when you restart data nodes, you will see log messages indicating that there is a "protocol" issue writing points 
-from the hinted handoff queue between 1.2 and 1.3 nodes. These will resolve themselves once all of the dat nodes have been
+from the hinted handoff queue between 1.2 and 1.3 nodes. These will resolve themselves after all of the data nodes have been
 upgraded.
 
 As a result of this change, if you need to downgrade to 1.2 for any reason, you must halt inbound writes while you downgrade
 the data nodes because the hinted handoff segmentation is not compatible from 1.3 to 1.2.  You can stop write traffic at the
-load balancer, by removing ALL data nodes temporarily while you downgrade the binaries and configuration files.  See Step 2
+load balancer by removing ALL data nodes temporarily while you downgrade the binaries and configuration files.  See step 2
 above.
 </dt>
 
@@ -215,7 +215,7 @@ repeat the process for the remaining data nodes.
 
 ### Step 7: Confirm the upgrade
 
-Check your nodes' version numbers using the `influxd-ctl show` command.
+Check your node version numbers using the `influxd-ctl show` command.
 The [`influxd-ctl` tool](/enterprise_influxdb/v1.3/features/cluster-commands/) is available on all meta nodes.
 
 
@@ -237,5 +237,5 @@ rk-upgrading-02:8091	1.3.7_c1.3.7
 rk-upgrading-03:8091	1.3.7_c1.3.7
 ```
 
-If you have any issues upgrading your cluster, please do not hesitate to contact support at the email 
+If you have any issues upgrading your cluster, please do not hesitate to contact support at the email address
 provided to you when you received your InfluxEnterprise license.
