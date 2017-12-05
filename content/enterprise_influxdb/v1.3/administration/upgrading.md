@@ -7,8 +7,29 @@ menu:
     weight: 0
     parent: Administration
 ---
-## Upgrading from version 1.3.x to 1.3.7
-Version 1.3.7 is a drop-in replacement for earlier releases of 1.3.x with no data migration required.
+
+## Upgrading from version 1.3.x to 1.3.8
+Version 1.3.8 is a drop-in replacement for earlier releases of 1.3.x with no data migration required.
+
+### For users of the TSI preview
+If you have been using the TSI preview with 1.3.6 or earlier 1.3.x releases, you will need to follow the upgrade steps to 
+continue using the TSI preview.  Unfortunately, these steps cannot be executed while the cluster is operating -- so it will 
+result in downtime.  
+
+1. Stop the meta and data node processes
+1. Download and update bits to 1.3.8
+1. Delete all /index directories contained with the data nodes (default configuration is [data] dir = /var/lib/influxdb/data) 
+1. Rebuild the TSI indexes using the `influx_inspect` utility with the new `inmem2tsi` parameter.  More documentation
+describing this new parameter with `influx_inspect` [can be found here](link to inmem2tsi with influx_inspect).
+
+The 1.3.7 release resolved a defect that created duplicate tag values in TSI indexes.
+See Issues [#8995](https://github.com/influxdata/influxdb/pull/8995), and [#8998](https://github.com/influxdata/influxdb/pull/8998). 
+However, upgrading to 1.3.7 with the TSI preview on will cause compactions to fail, 
+see [Issue #9025](https://github.com/influxdata/influxdb/issues/9025). 
+
+If you are using the TSI preview, **you should not upgrade to 1.3.7** from any other 1.3.x release. 
+Instead, you should upgrade to 1.3.8 and execute the index rebuild process as described above using `influx_inspect` 
+utility with the new `inmem2tsi` parameter.
 
 ## Upgrading from version 1.2.5 to 1.3.x
 
