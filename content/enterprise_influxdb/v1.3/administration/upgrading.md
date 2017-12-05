@@ -20,7 +20,7 @@ result in downtime.
 1. Download and update bits to 1.3.8
 1. Delete all /index directories contained with the data nodes (default configuration is [data] dir = /var/lib/influxdb/data) 
 1. Rebuild the TSI indexes using the `influx_inspect` utility with the new `inmem2tsi` parameter.  More documentation
-describing this new parameter with `influx_inspect` [can be found here](link to inmem2tsi with influx_inspect).
+describing this new parameter with `influx_inspect` [can be found here](https://docs.influxdata.com/influxdb/v1.3/tools/influx_inspect/).
 1. Restart meta nodes
 1. Restart data nodes
 
