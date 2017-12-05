@@ -9,7 +9,7 @@ menu:
 ---
 
 ## Upgrading from version 1.3.x to 1.3.8
-Version 1.3.8 is a drop-in replacement for earlier releases of 1.3.x with no data migration required.
+Version 1.3.8 is a drop-in replacement for earlier releases of 1.3.x with no data migration required, unless you have been using the TSI preview.
 
 ### For users of the TSI preview
 If you have been using the TSI preview with 1.3.6 or earlier 1.3.x releases, you will need to follow the upgrade steps to 
