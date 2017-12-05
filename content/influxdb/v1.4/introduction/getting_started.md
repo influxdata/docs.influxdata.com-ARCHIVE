@@ -171,6 +171,9 @@ time		                        	 external	  internal	 machine	type
 >
 ```
 
+> **Warning:** Using `*` without a `LIMIT` clause on a large database can cause performance issues.
+You can use `ctrl-c` to cancel a query that is taking too long to respond.
+
 InfluxQL has many [features and keywords](/influxdb/v1.4/query_language/spec/) that are not covered here,
 including support for Go-style regex. For example:
 

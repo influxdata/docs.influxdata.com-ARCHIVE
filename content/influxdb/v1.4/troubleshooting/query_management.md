@@ -46,8 +46,8 @@ qid	  query															               database		  duration
 See [Query Language Reference](/influxdb/v1.4/query_language/spec/#durations)
 for an explanation of InfluxDB's time units.
 
-## Stop currently-running queries with `KILL QUERY`
-`KILL QUERY` tells InfluxDB to stop running the relevant query.
+## Stop currently-running queries with `KILL QUERY` or `ctrl+c`
+`KILL QUERY` tells InfluxDB to stop running the relevant background query. To stop an interactive query entered in the CLI, press `ctrl+c`.
 
 #### Syntax:
 Where `qid` is the id of the query from the [`SHOW QUERIES`](/influxdb/v1.4/troubleshooting/query_management/#list-currently-running-queries-with-show-queries) output:

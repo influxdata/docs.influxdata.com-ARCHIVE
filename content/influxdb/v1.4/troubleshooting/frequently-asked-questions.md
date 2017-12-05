@@ -26,6 +26,7 @@ Where applicable, it links to outstanding issues on GitHub.
 * [How do I make InfluxDB’s CLI return human readable timestamps?](#how-do-i-make-influxdb-s-cli-return-human-readable-timestamps)  
 * [How can a non-admin user `USE` a database in InfluxDB's CLI?](#how-can-a-non-admin-user-use-a-database-in-influxdb-s-cli)  
 * [How do I write to a non-`DEFAULT` retention policy with InfluxDB's CLI?](#how-do-i-write-to-a-non-default-retention-policy-with-influxdb-s-cli)
+* [How do I cancel a long-running query?](#how-do-i-cancel-a-long-running-query)
 
 **Data Types**
 
@@ -248,6 +249,10 @@ Note that you will need to fully qualify the measurement to query data in the no
 ```
 "<database>"."<retention_policy>"."<measurement>"
 ```
+
+## How do I cancel a long-running query?
+You can cancel a long-running interactive query from the CLI by hitting `ctrl+c`. If the query is running in the background,
+please see the [`KILL QUERY`](/influxdb/v1.4/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query) command in the documentation.
 
 ## Why can't I query boolean field values?
 Acceptable boolean syntax differs for data writes and data queries.
