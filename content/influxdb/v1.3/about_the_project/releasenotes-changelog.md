@@ -5,10 +5,18 @@ menu:
     weight: 0
     parent: about_the_project
 ---
+## v1.3.8 [2017-12-04]
+
+### Bugfixes
+
+- Add `influx_inspect inmem2tsi` command to convert existing in-memory (TSM-based) shards to the TSI (Time Series Index) format.
+- Fix race condition in the merge iterator close method.
+- Fix compaction aborting early and dropping remaining series.
+
 ## v1.3.7 [2017-10-26]
 
 ### Release Notes
-Bug fix identified via Community and InfluxCloud. The build artifacts are now consistnent with v1.3.5.
+Bug fix identified via Community and InfluxCloud. The build artifacts are now consistent with v1.3.5.
 
 ### Bugfixes
 
@@ -16,7 +24,7 @@ Bug fix identified via Community and InfluxCloud. The build artifacts are now co
 - Fix use of `INFLUXD_OPTS` in service file.
 - Fix missing man pages in new packaging output.
 - Add RPM dependency on shadow-utils for `useradd`.
-- Fix data deleted outside of specified time range when using `delete`
+- Fix data deleted outside of specified time range when using `delete`.
 - Fix data dropped incorrectly during compaction.
 - Return `query.ErrQueryInterrupted` for a successful read on `InterruptCh`.
 - Copy returned bytes from TSI meta functions.
