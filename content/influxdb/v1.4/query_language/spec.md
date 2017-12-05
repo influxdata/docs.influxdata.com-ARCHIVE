@@ -785,7 +785,7 @@ SHOW DATABASES
 
 Estimates or counts exactly the cardinality of the field key set for the current database unless a database is specified using the `ON <database>` option.
 
-> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional. 
+> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optionalgit fetc. 
 > When using these query clauses, the query falls back to an exact count. 
 > Filtering by `time` is only supported when TSI (Time Series Index) is enabled on a
 > database.
