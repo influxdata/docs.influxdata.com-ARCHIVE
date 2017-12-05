@@ -52,7 +52,7 @@ If you already have incremental backups created as part of your standard operati
 trigger a final incremental backup before proceeding with the upgrade.
 
 <dt>
-__NOTE:__ Ensure you have sufficient disk space before triggering the backup!
+**NOTE:** Ensure you have sufficient disk space before triggering the backup!
 </dt>
 The following command uses the [version 1.2 backup syntax](https://docs.influxdata.com/enterprise_influxdb/v1.2/guides/backup-and-restore/#syntax) 
 to create an incremental backup of your cluster and stores that backup in the current directory.
@@ -213,7 +213,7 @@ Follow the links for more information about those options.
 ### Step 5: Restart the influxdb process
 
 <dt>
-**NOTE: As part of the changes associated with InfluxEnterprise 1.3, the hinted handoff queue is now segmented by node and
+**NOTE:** As part of the changes associated with InfluxEnterprise 1.3, the hinted handoff queue is now segmented by node and
 shard. See 
 [Release Notes/Change Log](https://docs.influxdata.com/enterprise_influxdb/v1.3/about-the-project/release-notes-changelog/#v1-3-0-2017-06-21).  
 As a result, when you restart data nodes, you will see log messages indicating that there is a "protocol" issue writing points 
