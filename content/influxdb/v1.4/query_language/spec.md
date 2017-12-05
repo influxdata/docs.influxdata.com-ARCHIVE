@@ -740,7 +740,7 @@ SELECT mean("value") INTO "cpu_1h".:MEASUREMENT FROM /cpu.*/
 SELECT mean("value") FROM "cpu" GROUP BY region, time(1d) fill(0) tz('America/Chicago')
 ```
 
-###SHOW CARDINALITY
+### SHOW CARDINALITY
 
 Refers to the group of commands used to estimate or count exactly the cardinality of measurements, series, tag keys, tag key values, and field keys.
 
@@ -781,7 +781,7 @@ show_databases_stmt = "SHOW DATABASES" .
 -- show all databases
 SHOW DATABASES
 ```
-###SHOW FIELD KEY CARDINALITY
+### SHOW FIELD KEY CARDINALITY
 
 Estimates or counts exactly the cardinality of the field key set for the current database unless a database is specified using the `ON <database>` option.
 
@@ -833,7 +833,7 @@ show_grants_stmt = "SHOW GRANTS FOR" user_name .
 -- show grants for jdoe
 SHOW GRANTS FOR "jdoe"
 ```
-####SHOW MEASUREMENT CARDINALITY
+#### SHOW MEASUREMENT CARDINALITY
 
 Estimates or counts exactly the cardinality of the measurement set for the current database unless a database is specified using the `ON <database>` option.
 
@@ -914,7 +914,7 @@ show_series_stmt = "SHOW SERIES" [on_clause] [ from_clause ] [ where_clause ] [ 
 SHOW SERIES FROM "telegraf"."autogen"."cpu" WHERE cpu = 'cpu8'
 ```
 
-####SHOW SERIES CARDINALITY
+#### SHOW SERIES CARDINALITY
 
 Estimates or counts exactly the cardinality of the series for the current database unless a database is specified using the `ON <database>` option.
 
@@ -983,7 +983,7 @@ show_subscriptions_stmt = "SHOW SUBSCRIPTIONS" .
 SHOW SUBSCRIPTIONS
 ```
 
-####SHOW TAG KEY CARDINALITY 
+#### SHOW TAG KEY CARDINALITY 
 
 Estimates or counts exactly the cardinality of tag key set on the current database unless a database is specified using the `ON <database>` option.
 
@@ -1052,7 +1052,7 @@ SHOW TAG VALUES WITH KEY !~ /.*c.*/
 -- show tag values from the cpu measurement for region & host tag keys where service = 'redis'
 SHOW TAG VALUES FROM "cpu" WITH KEY IN ("region", "host") WHERE "service" = 'redis'
 ```
-####SHOW TAG VALUES CARDINALITY
+#### SHOW TAG VALUES CARDINALITY
 
 Estimates or counts exactly the cardinality of tag key values for the specified tag key on the current database unless a database is specified using the `ON <database>` option.
 
