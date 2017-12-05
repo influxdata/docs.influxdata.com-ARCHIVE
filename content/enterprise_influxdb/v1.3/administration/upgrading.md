@@ -35,16 +35,24 @@ utility with the new `inmem2tsi` parameter.
 
 ## Upgrading from version 1.2.5 to 1.3.x
 
-Version 1.3.x introduces changes to the data node configuration file.
+Version 1.3.x introduces changes to the data node configuration file and changes to the 
+underlying communication protocols between the nodes used for hinted handoff.
+
+The impact of the hinted handoff protocol change means that you will be unable to perform a `downgrade` if there are
+points contained within the hinted handoff queue of the upgraded nodes.  There are recommendations below describing
+how to avoid building up hinted handoff queue points while upgrading.
+
 Please update that configuration file to avoid any unnecessary downtime.
 The steps below outline the upgrade process and include a list of the required configuration changes.
 
 ### Step 0: Back up your cluster before upgrading to version 1.3.
-Create a full backup of your cluster prior to executing the upgrade. 
-If you already have incremental backups being created as part of your standard operating procedures, 
-you should trigger a final incremental backup before proceeding with the upgrade.
+
+It is recommended that you create a full backup of your cluster before executing the upgrade. 
+If you already have incremental backups created as part of your standard operating procedures, make sure that you 
+trigger a final incremental backup before proceeding with the upgrade.
+
 <dt>
-Note that you need to ensure you have sufficient disk space before triggering the backup.
+**NOTE:** Ensure you have sufficient disk space before triggering the backup!
 </dt>
 The following command uses the [version 1.2 backup syntax](https://docs.influxdata.com/enterprise_influxdb/v1.2/guides/backup-and-restore/#syntax) 
 to create an incremental backup of your cluster and stores that backup in the current directory.
@@ -53,15 +61,20 @@ to create an incremental backup of your cluster and stores that backup in the cu
 influxd-ctl backup .
 ```
 
-Otherwise, you should create a full backup before proceeding. 
+Otherwise, create a full backup before proceeding. 
 The following command uses the [backup syntax originally introduced in version 1.2](https://docs.influxdata.com/enterprise_influxdb/v1.3/guides/backup-and-restore/#syntax) 
 to create a full backup of your cluster and to store that backup in the current directory. 
 
 ```
 influxd-ctl backup -full .
 ```
+Upgrade the meta nodes first, ensuring that the meta cluster is healthy, before proceeding to the
+data nodes. 
 
-### Step 1: Download the 1.3.8 packages
+### Repeat the following steps for each meta node in the cluster
+
+### Step 1: Download the 1.3.8 meta node packages
+
 
 #### Meta node package download
 **Ubuntu & Debian (64-bit)**
@@ -74,20 +87,9 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.3.8-c1.3.8_am
 wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.3.8_c1.3.8.x86_64.rpm
 ```
 
-#### Data node package download
-**Ubuntu & Debian (64-bit)**
-```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.3.8-c1.3.8_amd64.deb
-```
+### Step 2: Install the 1.3.8 meta nodes packages
 
-**RedHat & CentOS (64-bit)**
-```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.3.8_c1.3.8.x86_64.rpm
-```
-
-### Step 2: Install the 1.3.8 packages
-
-#### Meta node package Install
+#### Meta node package install
 
 **Ubuntu & Debian (64-bit)**
 ```
@@ -99,9 +101,73 @@ sudo dpkg -i influxdb-meta_1.3.8-c1.3.8_amd64.deb
 sudo yum localinstall influxdb-meta-1.3.8_c1.3.8.x86_64.rpm
 ```
 
+### Step 3: Restart the influxdb-meta process
+
+#### Meta node restart
+
+**sysvinit systems**
+```
+service influxdb-meta restart
+```
+**systemd systems**
+```
+sudo systemctl restart influxdb-meta
+```
+
+### Step 4: Confirm the upgrade
+
+After performing the upgrade on ALL meta nodes, check your node version numbers using the 
+`influxd-ctl show` command.
+The [`influxd-ctl` tool](/enterprise_influxdb/v1.3/features/cluster-commands/) is available on all meta nodes.
+
+```
+~# influxd-ctl show
+
+Data Nodes
+==========
+ID	TCP Address		Version
+4	rk-upgrading-01:8088	1.2.x_c1.2.y   
+5	rk-upgrading-02:8088	1.2.x_c1.2.y
+6	rk-upgrading-03:8088	1.2.x_c1.2.y
+
+Meta Nodes
+==========
+TCP Address		Version
+rk-upgrading-01:8091	1.3.8_c1.3.8   # 1.3.8_c1.3.8 = 👍
+rk-upgrading-02:8091	1.3.8_c1.3.8
+rk-upgrading-03:8091	1.3.8_c1.3.8
+```
+
+### Repeat the following steps for each data node in the cluster
+
+### Step 1: Download the 1.3.8 data node packages
+
+#### Data node package download
+
+**Ubuntu & Debian (64-bit)**
+
+```
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.3.8-c1.3.8_amd64.deb
+```
+
+**RedHat & CentOS (64-bit)**
+
+```
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.3.8_c1.3.8.x86_64.rpm
+```
+
+### Step 2: Remove the data node from the load balancer
+
+In order to avoid downtime and allow for a smooth transition, remove the data node that you plan to upgrade from your
+load balancer prior to performing the remaining steps.
+
+### Step 3: Install the 1.3.8 data node packages
+
 #### Data node package install
 
-When you run the install command, your terminal asks if you'd like to keep your current configuration file or overwrite your current configuration file with the file for version 1.3.8.
+When you run the install command, your terminal asks if you want to keep your 
+current configuration file or overwrite your current configuration file with the file for version 1.3.8.
+
 Please keep your current configuration file by entering `N` or `O`;
 we update the configuration file with the necessary changes for version 1.3.8 in step 3.
 
@@ -115,7 +181,7 @@ sudo dpkg -i influxdb-data_1.3.8-c1.3.8_amd64.deb
 sudo yum localinstall influxdb-data-1.3.8_c1.3.8.x86_64.rpm
 ```
 
-### Step 3: Update the data node configuration file
+### Step 4: Update the data node configuration file
 
 Add:
 
@@ -144,19 +210,23 @@ Update:
 The new configuration options are set to the default settings.
 Follow the links for more information about those options.
 
-### Step 4: Restart the processes
+### Step 5: Restart the influxdb process
 
-#### Meta node restart
-**sysvinit systems**
-```
-service influxdb-meta restart
-```
-**systemd systems**
-```
-sudo systemctl restart influxdb-meta
-```
+<dt>
+**NOTE:** As part of the changes associated with InfluxEnterprise 1.3, the hinted handoff queue is now segmented by node and
+shard. See 
+[Release Notes/Change Log](https://docs.influxdata.com/enterprise_influxdb/v1.3/about-the-project/release-notes-changelog/#v1-3-0-2017-06-21).  
+As a result, when you restart data nodes, you will see log messages indicating that there is a "protocol" issue writing points 
+from the hinted handoff queue between 1.2 and 1.3 nodes. These will resolve themselves after all of the data nodes have been
+upgraded.
 
-#### Data node Restart
+As a result of this change, if you need to downgrade to 1.2 for any reason, you must halt inbound writes while you downgrade
+the data nodes because the hinted handoff segmentation is not compatible from 1.3 to 1.2.  You can stop write traffic at the
+load balancer by removing ALL data nodes temporarily while you downgrade the binaries and configuration files.  See step 2
+above.
+</dt>
+
+#### Data node restart
 **sysvinit systems**
 ```
 service influxdb restart
@@ -166,10 +236,18 @@ service influxdb restart
 sudo systemctl restart influxdb
 ```
 
-### Step 5: Confirm the upgrade
+### Step 6: Add the data node back into the load balancer
 
+Re-add the data node back into the load balancer to allow it to serve reads and writes.
+If this is the last data node to be upgraded, proceed to step 7.  
+
+Otherwise, return to step 1 for the data nodes and 
+repeat the process for the remaining data nodes.
+
+### Step 7: Confirm the upgrade
 Check your node version numbers using the `influxd-ctl show` command.
 The [`influxd-ctl` tool](/enterprise_influxdb/v1.3/features/cluster-commands/) is available on all meta nodes.
+
 
 ```
 ~# influxd-ctl show
@@ -189,5 +267,5 @@ rk-upgrading-02:8091	1.3.8_c1.3.8
 rk-upgrading-03:8091	1.3.8_c1.3.8
 ```
 
-If you have any issues upgrading your cluster, please do not hesitate to contact support at the email 
+If you have any issues upgrading your cluster, please do not hesitate to contact support at the email address
 provided to you when you received your InfluxEnterprise license.
