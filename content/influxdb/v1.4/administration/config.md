@@ -104,6 +104,7 @@ The InfluxDB configuration file contains configuration settings specific to a lo
         * [batch-pending](#batch-pending-10-1)
         * [batch-timeout](#batch-timeout-10s)
         * [read-buffer](#read-buffer-0)
+        * [parse-multivalue-plugin](#parse-multivalue-plugin-split)
     * [[[opentsdb]]](#opentsdb)
         * [enabled](#enabled-false-3)
         * [bind-address](#bind-address-4242)
@@ -259,11 +260,11 @@ Environment variable: `INFLUXDB_BIND_ADDRESS`
 
 GOMAXPROCS is a GoLang setting.
 
-The default value of GOMAXPROCS is the number of CPUs (whatever your operating system considers to be a CPU -- 
+The default value of GOMAXPROCS is the number of CPUs (whatever your operating system considers to be a CPU --
 this could be the number of cores i.e. GOMAXPROCS=32 for a 32 core machine) visible to the program *at startup.*  
 However, you can override this value to be less than the maxium value.  
 This can be important in cases where you are running the database alongside other processes on the same machine and
-want to ensure that the database doesn't completely starve those those processes. 
+want to ensure that the database doesn't completely starve those those processes.
 
 Keep in mind that setting GOMAXPROCS=1 will eliminate all parallelization.  
 
@@ -665,8 +666,8 @@ Environment variable: `INFLUXDB_HTTP_UNIX_BIND_SOCKET`
 
 ### max-body-size = 25000000
 
-Specifies the maximum size (in bytes) of a client request body. When a client sends data that exceeds the configured 
-maximum size, a 413 Request Entity Too Large HTTP response is returned. This can be disabled by setting it to 0. 
+Specifies the maximum size (in bytes) of a client request body. When a client sends data that exceeds the configured
+maximum size, a 413 Request Entity Too Large HTTP response is returned. This can be disabled by setting it to 0.
 
 Environment variable: `INFLUXDB_HTTP_MAX_BODY_SIZE`
 
@@ -870,6 +871,9 @@ UDP listener will fail if set above OS max.
 
 Environment variable: `INFLUXDB_COLLECTD_READ_BUFFER`
 
+### parse-multivalue-plugin = "split"
+
+When set to `split`, multi-value plugin data (e.g. df free:5000,used:1000) will be split into separate measurements (e.g., (df_free, value=5000) (df_used, value=1000)).  When set to `join`, multi-value plugin will be stored as a single multi-value measurement (e.g., (df, free=5000,used=1000)). Defaults to `split`.
 
 ## [[opentsdb]]
 
@@ -1027,7 +1031,7 @@ Set to `false` to disable logging for CQ events.
 
 Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_LOG_ENABLED`
 
-### query-stats-enabled = false. 
+### query-stats-enabled = false.
 
 When set to true, continuous query execution statistics are written to the default monitor store.
 
