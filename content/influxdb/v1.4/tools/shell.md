@@ -29,6 +29,9 @@ InfluxDB shell 1.4.x
 
 > **Note:** The CLI and InfluxDB versions should be identical. If not, it can lead to parsing issues with queries.
 
+You can now enter InfluxQL queries as well as some CLI-specific commands directly in your terminal. You
+can use `help` at any time to get a list of available commands. Use `Ctrl+C` to cancel if you want to cancel a long-running InfluxQL query.
+
 ## `influx` Arguments
 There are several arguments you can pass into `influx` when starting.
 List them with `$ influx --help`.
@@ -288,7 +291,11 @@ If you do not specify either the host or the port, `influx` assumes the default 
 `consistency <level>`  
 Sets the write consistency level: `any`, `one`, `quorum`, or `all`.
 
-`exit`                
+`Ctrl+C`
+Terminates the currently running query. Useful when an interactive query is taking too long to respond
+because it is trying to return too much data.
+
+`exit` `quit` `Ctrl+D`                
 Quits the `influx` shell.
 
 `format <format>`  
