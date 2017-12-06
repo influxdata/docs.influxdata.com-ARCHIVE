@@ -525,6 +525,8 @@ DROP RETENTION POLICY "1h.cpu" ON "mydb"
 drop_series_stmt = "DROP SERIES" ( from_clause | where_clause | from_clause where_clause ) .
 ```
 
+> ***Note:*** Filtering by time is not supported in the  WHERE clause.
+
 #### Example:
 
 ```sql
@@ -787,8 +789,7 @@ Estimates or counts exactly the cardinality of the field key set for the current
 
 > **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optionalgit fetc. 
 > When using these query clauses, the query falls back to an exact count. 
-> Filtering by `time` is only supported when TSI (Time Series Index) is enabled on a
-> database.
+> Filtering by `time` is only supported when TSI (Time Series Index) is enabled and `time` is not supported in the `WHERE` clause.
 
 ```
 show_field_key_cardinality_stmt = "SHOW FIELD KEY CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]
@@ -839,8 +840,7 @@ Estimates or counts exactly the cardinality of the measurement set for the curre
 
 > **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional. 
 > When using these query clauses, the query falls back to an exact count. 
-> Filtering by `time` is only supported when TSI (Time Series Index) is enabled on a
-> database.
+> Filtering by `time` is only supported when TSI (Time Series Index) is enabled and `time` is not supported in the `WHERE` clause.
 
 ```
 show_measurement_cardinality_stmt = "SHOW MEASUREMENT CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]
@@ -925,8 +925,7 @@ Estimates or counts exactly the cardinality of the series for the current databa
 
 > **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional. 
 > When using these query clauses, the query falls back to an exact count. 
-> Filtering by `time` is only supported when TSI (Time Series Index) is enabled on a
-> database.
+> Filtering by `time` is only supported when TSI (Time Series Index) is enabled and `time` is not supported in the `WHERE` clause.
 
 ```
 show_series_cardinality_stmt = "SHOW SERIES CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]
@@ -989,8 +988,7 @@ Estimates or counts exactly the cardinality of tag key set on the current databa
 
 > **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional. 
 > When using these query clauses, the query falls back to an exact count. 
-> Filtering by `time` is only supported when TSI (Time Series Index) is enabled on a
-> database.
+> Filtering by `time` is only supported when TSI (Time Series Index) is enabled and `time` is not supported in the `WHERE` clause.
 
 ```
 show_tag_key_cardinality_stmt = "SHOW TAG KEY CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]
@@ -1058,8 +1056,7 @@ Estimates or counts exactly the cardinality of tag key values for the specified 
 
 > **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional. 
 > When using these query clauses, the query falls back to an exact count. 
-> Filtering by `time` is only supported when TSI (Time Series Index) is enabled on a
-> database.
+> Filtering by `time` is only supported when TSI (Time Series Index) is enabled.
 
 ```
 show_tag_values_cardinality_stmt = "SHOW TAG VALUES CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ] with_key_clause
