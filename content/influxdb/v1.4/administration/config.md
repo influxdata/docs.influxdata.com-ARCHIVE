@@ -15,122 +15,123 @@ The InfluxDB configuration file contains configuration settings specific to a lo
     * [Environment variables](#environment-variables)
 * [Configuration options by section](#configuration-options-by-section)
     * [Global options](#global-options)
-        * [reporting-disabled](#reporting-disabled-false)
-        * [bind-address](#bind-address-127-0-0-1-8088)
-        * [GOMAXPROCS](#GOMAXPROCS)
+        * [reporting-disabled](#reporting-disabled--false)
+        * [bind-address](#bind-address--1270018088)
+        * [GOMAXPROCS](#gomaxprocs)
     * [[meta]](#meta)
-        * [dir](#dir-var-lib-influxdb-meta)
-        * [retention-autocreate](#retention-autocreate-true)
-        * [logging-enabled](#logging-enabled-true)
+        * [dir](#dir--varlibinfluxdbmeta)
+        * [retention-autocreate](#retention-autocreate--true)
+        * [logging-enabled](#logging-enabled--true)
     * [[data]](#data)
-        * [dir](#dir-var-lib-influxdb-data)
-        * [index-version](#index-version-inmem)
-        * [wal-dir](#wal-dir-var-lib-influxdb-wal)
-        * [wal-fsync-delay](#wal-fsync-delay-0s)
-        * [trace-logging-enabled](#trace-logging-enabled-false)
-        * [query-log-enabled](#query-log-enabled-true)
-        * [cache-max-memory-size](#cache-max-memory-size-1073741824)
-        * [cache-snapshot-memory-size](#cache-snapshot-memory-size-26214400)
-        * [cache-snapshot-write-cold-duration](#cache-snapshot-write-cold-duration-10m)
-        * [compact-full-write-cold-duration](#compact-full-write-cold-duration-4h)
-        * [max-concurrent-compactions](#max-concurrent-compactions-0)
-        * [max-series-per-database](#max-series-per-database-1000000)
-        * [max-values-per-tag](#max-values-per-tag-100000)
+      * [dir](#dir--varlibinfluxdbdata)
+        * [index-version](#index-version--inmem)
+        * [wal-dir](#wal-dir--varlibinfluxdbwal)
+        * [wal-fsync-delay](#wal-fsync-delay--0s)
+        * [trace-logging-enabled](#trace-logging-enabled--false)
+        * [query-log-enabled](#query-log-enabled--true)
+        * [cache-max-memory-size](#cache-max-memory-size--1073741824)
+        * [cache-snapshot-memory-size](#cache-snapshot-memory-size--26214400)
+        * [cache-snapshot-write-cold-duration](#cache-snapshot-write-cold-duration--10m)
+        * [compact-full-write-cold-duration](#compact-full-write-cold-duration--4h)
+        * [max-concurrent-compactions](#max-concurrent-compactions--0)
+        * [max-series-per-database](#max-series-per-database--1000000)
+        * [max-values-per-tag](#max-values-per-tag--100000)
     * [[coordinator]](#coordinator)
-        * [write-timeout](#write-timeout-10s)
-        * [max-concurrent-queries](#max-concurrent-queries-0)
-        * [query-timeout](#query-timeout-0s)
-        * [log-queries-after](#log-queries-after-0s)
-        * [max-select-point](#max-select-point-0)
-        * [max-select-series](#max-select-series-0)
-        * [max-select-buckets](#max-select-buckets-0)
+        * [write-timeout](#write-timeout--10s)
+        * [max-concurrent-queries](#max-concurrent-queries--0)
+        * [query-timeout](#query-timeout--0s)
+        * [log-queries-after](#log-queries-after--0s)
+        * [max-select-point](#max-select-point--0)
+        * [max-select-series](#max-select-series--0)
+        * [max-select-buckets](#max-select-buckets--0)
     * [[retention]](#retention)
-        * [enabled](#enabled-true)
-        * [check-interval](#check-interval-30m0s)
+        * [enabled](#enabled--true-1)
+        * [check-interval](#check-interval--30m0s)
     * [[shard-precreation]](#shard-precreation)
-        * [enabled](#enabled-true-1)
-        * [check-interval](#check-interval-10m)
-        * [advance-period](#advance-period-30m)
-    * [[admin]](#admin)
+        * [enabled](#enabled-true--1)
+        * [check-interval](#check-interval--10m)
+        * [advance-period](#advance-period--30m)
     * [[monitor]](#monitor)
-        * [store-enabled](#store-enabled-true)
-        * [store-database](#store-database-internal)
-        * [store-interval](#store-interval-10s)
-    * [[subscriber]](#subscriber)
-        * [enabled](#enabled-true-3)
-        * [http-timeout](#http-timeout-30s)
-        * [insecure-skip-verify](#insecure-skip-verify-false)
-        * [ca-certs](#ca-certs)
-        * [write-concurrency](#write-concurrency-40)
-        * [write-buffer-size](#write-buffer-size-1000)
+        * [store-enabled](#store-enabled--true)
+        * [store-database](#store-database--_internal)
+        * [store-interval](#store-interval--10s)
+    * [[admin]](#admin)
     * [[http]](#http)
-        * [enabled](#enabled-true-2)
-        * [bind-address](#bind-address-8086)
-        * [auth-enabled](#auth-enabled-false)
-        * [realm](#realm-influxdb)
-        * [log-enabled](#log-enabled-true)
-        * [write-tracing](#write-tracing-false)
-        * [pprof-enabled](#pprof-enabled-true)
-        * [https-enabled](#https-enabled-false-1)
-        * [https-certificate](#https-certificate-etc-ssl-influxdb-pem-1)
-        * [https-private-key](#https-private-key)
-        * [shared-secret](#shared-secret)
-        * [max-row-limit](#max-row-limit-0)
-        * [max-connection-limit](#max-connection-limit-0)
-        * [unix-socket-enabled](#unix-socket-enabled-false)
-        * [bind-socket](#bind-socket-var-run-influxdb-sock)
-        * [max-body-size](#max-body-size)
+        * [enabled](#enabled--true-2)
+        * [bind-address](#bind-address--8086)
+        * [auth-enabled](#auth-enabled--false)
+        * [realm](#realm--influxdb)
+        * [log-enabled](#log-enabled--true)
+        * [write-tracing](#write-tracing--false)
+        * [pprof-enabled](#pprof-enabled--true)
+        * [https-enabled](#https-enabled--false)
+        * [https-certificate](#https-certificate--etcsslinfluxdbpem)
+        * [https-private-key](#https-private-key--)
+        * [shared-secret](#shared-secret--)
+        * [max-row-limit](#max-row-limit--0)
+        * [max-connection-limit](#max-connection-limit--0)
+        * [unix-socket-enabled](#unix-socket-enabled--false)
+        * [bind-socket](#bind-socket--varruninfluxdbsock)
+        * [max-body-size](#max-body-size--25000000)
+    * [[subscriber]](#subscriber)
+        * [enabled](#enabled--true-3)
+        * [http-timeout](#http-timeout--30s)
+        * [insecure-skip-verify](#insecure-skip-verify--false)
+        * [ca-certs](#ca-certs--)
+        * [write-concurrency](#write-concurrency--40)
+        * [write-buffer-size](#write-buffer-size--1000)
     * [[[graphite]]](#graphite)
-        * [enabled](#enabled-false-1)
-        * [database](#database-graphite)
-        * [retention-policy](#retention-policy)
-        * [bind-address](#bind-address-2003)
-        * [protocol](#protocol-tcp)
-        * [consistency-level](#consistency-level-one)
-        * [batch-size](#batch-size-5000)
-        * [batch-pending](#batch-pending-10)
-        * [batch-timeout](#batch-timeout-1s)
-        * [udp-read-buffer](#udp-read-buffer-0)
-        * [separator](#separator)
+        * [enabled](#enabled--false)
+        * [database](#database--graphite)
+        * [retention-policy](#retention-policy--)
+        * [bind-address](#bind-address--2003)
+        * [protocol](#protocol--tcp)
+        * [consistency-level](#consistency-level--one)
+        * [batch-size](#batch-size--5000)
+        * [batch-pending](#batch-pending--10)
+        * [batch-timeout](#batch-timeout--1s)
+        * [udp-read-buffer](#udp-read-buffer--0)
+        * [separator](#separator--)
     * [[[collectd]]](#collectd)
-        * [enabled](#enabled-false-2)
-        * [bind-address](#bind-address-25826)
-        * [database](#database-collectd)
-        * [retention-policy](#retention-policy-1)
-        * [typesdb](#typesdb-usr-local-share-collectd)
-        * [security-level](#security-level-none)
-        * [auth-file](#auth-file-etc-collectd-auth-file)
-        * [batch-size](#batch-size-5000-1)
-        * [batch-pending](#batch-pending-10-1)
-        * [batch-timeout](#batch-timeout-10s)
-        * [read-buffer](#read-buffer-0)
+        * [enabled](#enabled--false-1)
+        * [bind-address](#bind-address--25826)
+        * [database](#database--collectd)
+        * [retention-policy](#retention-policy---1)
+        * [typesdb](#typesdb--usrlocalsharecollectd)
+        * [security-level](#security-level--none)
+        * [auth-file](#auth-file--etccollectdauth_file)
+        * [batch-size](#batch-size--5000-1)
+        * [batch-pending](#batch-pending--10-1)
+        * [batch-timeout](#batch-timeout--10s)
+        * [read-buffer](#read-buffer--0)
+        * [parse-multivalue-plugin](#parse-multivalue-plugin--split)
     * [[[opentsdb]]](#opentsdb)
-        * [enabled](#enabled-false-3)
-        * [bind-address](#bind-address-4242)
-        * [database](#database-opentsdb)
-        * [retention-policy](#retention-policy-2)
-        * [consistency-level](#consistency-level-one-1)
-        * [tls-enabled](#tls-enabled-false)
-        * [certificate](#certificate-etc-ssl-influxdb-pem)
-        * [log-point-errors](#log-point-errors-true)
-        * [batch-size](#batch-size-1000)
-        * [batch-pending](#batch-pending-5)
-        * [batch-timeout](#batch-timeout-1s-1)
+        * [enabled](#enabled--false-2)
+        * [bind-address](#bind-address--4242)
+        * [database](#database--opentsdb)
+        * [retention-policy](#retention-policy---2)
+        * [consistency-level](#consistency-level--one-1)
+        * [tls-enabled](#tls-enabled--false)
+        * [certificate](#certificate--etcsslinfluxdbpem)
+        * [log-point-errors](#log-point-errors--true)
+        * [batch-size](#batch-size--1000)
+        * [batch-pending](#batch-pending--5)
+        * [batch-timeout](#batch-timeout--1s-1)
     * [[[udp]]](#udp)
-        * [enabled](#enabled-false-4)
-        * [bind-address](#bind-address-8089)
-        * [database](#database-udp)
-        * [retention-policy](#retention-policy-3)
-        * [batch-size](#batch-size-5000-2)
-        * [batch-pending](#batch-pending-10-2)
-        * [batch-timeout](#batch-timeout-1s-2)
-        * [read-buffer](#read-buffer-0-1)
-        * [precision](#precision)
-     * [[continuous_queries]](#continuous-queries)
-        * [enabled](#continuous-queries-enabled)
-        * [query-stats-enabled](#query-stats-enabled)
-        * [log-enabled](#log-enabled-true-1)
-        * [run-interval](#run-interval-1s)
+        * [enabled](#enabled--false-3)
+        * [bind-address](#bind-address--8089)
+        * [database](#database--udp)
+        * [retention-policy](#retention-policy---3)
+        * [batch-size](#batch-size--5000-2)
+        * [batch-pending](#batch-pending--10-2)
+        * [batch-timeout](#batch-timeout--1s-2)
+        * [read-buffer](#read-buffer--0-1)
+        * [precision](#precision--)
+     * [[continuous_queries]](#continuous_queries)
+        * [enabled](#enabled--true-4)
+        * [log-enabled](#log-enabled--true-1)
+        * [query-stats-enabled](#query-stats-enabled--false)
+        * [run-interval](#run-interval--1s)
 
 
 ## Using Configuration Files
@@ -227,6 +228,8 @@ For the Nth Graphite configuration in the configuration file, the relevant
 environment variables would be of the form `INFLUXDB_GRAPHITE_(N-1)_BATCH_PENDING`.
 For each section of the configuration file the numbering restarts at zero.
 
+## Configuration Options by Section
+
 ## Global Options
 
 ### reporting-disabled = false
@@ -259,11 +262,11 @@ Environment variable: `INFLUXDB_BIND_ADDRESS`
 
 GOMAXPROCS is a GoLang setting.
 
-The default value of GOMAXPROCS is the number of CPUs (whatever your operating system considers to be a CPU -- 
+The default value of GOMAXPROCS is the number of CPUs (whatever your operating system considers to be a CPU --
 this could be the number of cores i.e. GOMAXPROCS=32 for a 32 core machine) visible to the program *at startup.*  
 However, you can override this value to be less than the maxium value.  
 This can be important in cases where you are running the database alongside other processes on the same machine and
-want to ensure that the database doesn't completely starve those those processes. 
+want to ensure that the database doesn't completely starve those those processes.
 
 Keep in mind that setting GOMAXPROCS=1 will eliminate all parallelization.  
 
@@ -665,8 +668,8 @@ Environment variable: `INFLUXDB_HTTP_UNIX_BIND_SOCKET`
 
 ### max-body-size = 25000000
 
-Specifies the maximum size (in bytes) of a client request body. When a client sends data that exceeds the configured 
-maximum size, a 413 Request Entity Too Large HTTP response is returned. This can be disabled by setting it to 0. 
+Specifies the maximum size (in bytes) of a client request body. When a client sends data that exceeds the configured
+maximum size, a 413 Request Entity Too Large HTTP response is returned. This can be disabled by setting it to 0.
 
 Environment variable: `INFLUXDB_HTTP_MAX_BODY_SIZE`
 
@@ -870,6 +873,9 @@ UDP listener will fail if set above OS max.
 
 Environment variable: `INFLUXDB_COLLECTD_READ_BUFFER`
 
+### parse-multivalue-plugin = "split"
+
+When set to `split`, multi-value plugin data (e.g. df free:5000,used:1000) will be split into separate measurements (e.g., (df_free, value=5000) (df_used, value=1000)).  When set to `join`, multi-value plugin will be stored as a single multi-value measurement (e.g., (df, free=5000,used=1000)). Defaults to `split`.
 
 ## [[opentsdb]]
 
@@ -1027,7 +1033,7 @@ Set to `false` to disable logging for CQ events.
 
 Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_LOG_ENABLED`
 
-### query-stats-enabled = false. 
+### query-stats-enabled = false.
 
 When set to true, continuous query execution statistics are written to the default monitor store.
 
