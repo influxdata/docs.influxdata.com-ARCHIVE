@@ -47,7 +47,7 @@ See [Query Language Reference](/influxdb/v1.4/query_language/spec/#durations)
 for an explanation of InfluxDB's time units.
 
 ## Stop currently-running queries with `KILL QUERY` or `Ctrl+C`
-Use the `KILL QUERY` command to stop any currently-running InfluxDB queries that are causing performance issues or running for too long. To stop an interactive query entered in the CLI, use `Ctrl+C`.
+Use the `KILL QUERY` command to stop any currently-running InfluxDB query that is causing performance issues or has been long-running. To stop an interactive query entered in the CLI, use `Ctrl+C`.
 
 #### Syntax:
 Where `qid` is the id of the query from the [`SHOW QUERIES`](/influxdb/v1.4/troubleshooting/query_management/#list-currently-running-queries-with-show-queries) output:
