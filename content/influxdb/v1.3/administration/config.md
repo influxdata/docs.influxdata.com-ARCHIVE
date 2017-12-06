@@ -316,8 +316,9 @@ Environment variable: `INFLUXDB_DATA_DIR`
 ### index-version = "inmem"
 
 The type of shard index to use for new shards.
-The default is an in-memory index that is recreated at startup.
-A value of `tsi1` will use a disk based index that supports higher cardinality datasets.
+The default is an in-memory (TSM-based) index that is recreated at startup.
+A value of `tsi1` will use a disk (TSI-based) index that supports higher cardinality datasets.
+Existing in-memory (TSM-based) shards will continue to be used unless converted using the [`influx_inspect inmem2tsi`](/influxdb/v1.3/tools/influx_inspect/#influx-inspect-inmem2tsi) command.
 
 Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 
