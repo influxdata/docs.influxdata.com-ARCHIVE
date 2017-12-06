@@ -15,7 +15,7 @@ and prevent and halt the execution of inefficient queries with several configura
 <table style="width:100%">
   <tr>
     <td><a href="#list-currently-running-queries-with-show-queries">SHOW QUERIES</a></td>
-    <td><a href="#stop-currently-running-queries-with-kill-query">KILL QUERY</a></td>
+    <td><a href="#stop-currently-running-queries-with-kill-query-or-ctrlc">KILL QUERY</a></td>
     <td><a href="#configuration-settings-for-query-management">Configuration Settings</a></td>
   </tr>
 </table>
@@ -46,8 +46,8 @@ qid	  query															               database		  duration
 See [Query Language Reference](/influxdb/v1.4/query_language/spec/#durations)
 for an explanation of InfluxDB's time units.
 
-## Stop currently-running queries with `KILL QUERY`
-`KILL QUERY` tells InfluxDB to stop running the relevant query.
+## Stop currently-running queries with `KILL QUERY` or `Ctrl+C`
+Use the `KILL QUERY` command to stop any currently-running InfluxDB query that is causing performance issues or has been long-running. To stop an interactive query entered in the CLI, use `Ctrl+C`.
 
 #### Syntax:
 Where `qid` is the id of the query from the [`SHOW QUERIES`](/influxdb/v1.4/troubleshooting/query_management/#list-currently-running-queries-with-show-queries) output:
