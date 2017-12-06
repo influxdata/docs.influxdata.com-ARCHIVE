@@ -259,11 +259,11 @@ Environment variable: `INFLUXDB_BIND_ADDRESS`
 
 GOMAXPROCS is a GoLang setting.
 
-The default value of GOMAXPROCS is the number of CPUs (whatever your operating system considers to be a CPU -- 
+The default value of GOMAXPROCS is the number of CPUs (whatever your operating system considers to be a CPU --
 this could be the number of cores i.e. GOMAXPROCS=32 for a 32 core machine) visible to the program *at startup.*  
 However, you can override this value to be less than the maxium value.  
 This can be important in cases where you are running the database alongside other processes on the same machine and
-want to ensure that the database doesn't completely starve those those processes. 
+want to ensure that the database doesn't completely starve those those processes.
 
 Keep in mind that setting GOMAXPROCS=1 will eliminate all parallelization.  
 
@@ -315,9 +315,10 @@ Environment variable: `INFLUXDB_DATA_DIR`
 
 ### index-version = "inmem"
 
-The type of shard index to use for new shards.
-The default is an in-memory index that is recreated at startup.
-A value of `tsi1` will use a disk based index that supports higher cardinality datasets.
+The type of shard index to use for new shards. 
+The default is an in-memory (TSM-based) index that is recreated at startup. 
+A value of `tsi1` will use a disk (TSI-based) index that supports higher cardinality datasets. 
+Existing in-memory (TSM-based) shards will continue to be used unless converted using the [`influx_inspect inmem2tsi`](/influxdb/v1.3/tools/influx_inspect/#influx-inspect-inmem2tsi) command.
 
 Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 
@@ -401,6 +402,8 @@ If a point causes the number of series in a database to exceed
 will continue to accept writes to existing series, but writes that create a
 new series will fail.
 
+> **Note:** This setting is ignored when [index-version](#index-version-inmem) is set to `tsi1`.
+
 Environment variable: `INFLUXDB_DATA_MAX_SERIES_PER_DATABASE`
 
 ### max-values-per-tag = 100000
@@ -417,6 +420,8 @@ a `partial write` error.
 Any existing tag keys with tag values that exceed `max-values-per-tag`
 will continue to accept writes, but writes that create a new tag value
 will fail.
+
+> **Note:** This setting is ignored when [index-version](#index-version-inmem) is set to `tsi1`.
 
 Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 
@@ -665,8 +670,8 @@ Environment variable: `INFLUXDB_HTTP_UNIX_BIND_SOCKET`
 
 ### max-body-size = 25000000
 
-Specifies the maximum size (in bytes) of a client request body. When a client sends data that exceeds the configured 
-maximum size, a 413 Request Entity Too Large HTTP response is returned. This can be disabled by setting it to 0. 
+Specifies the maximum size (in bytes) of a client request body. When a client sends data that exceeds the configured
+maximum size, a 413 Request Entity Too Large HTTP response is returned. This can be disabled by setting it to 0.
 
 Environment variable: `INFLUXDB_HTTP_MAX_BODY_SIZE`
 
@@ -1027,7 +1032,7 @@ Set to `false` to disable logging for CQ events.
 
 Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_LOG_ENABLED`
 
-### query-stats-enabled = false. 
+### query-stats-enabled = false.
 
 When set to true, continuous query execution statistics are written to the default monitor store.
 
