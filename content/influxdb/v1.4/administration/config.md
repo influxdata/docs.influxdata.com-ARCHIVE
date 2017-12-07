@@ -150,14 +150,14 @@ configuration setting.
 There are two ways to launch InfluxDB with your configuration file:
 
 * Point the process to the correct configuration file by using the `-config`
-option:
+  option:
 
     ```bash
     influxd -config /etc/influxdb/influxdb.conf
     ```
 * Set the environment variable `INFLUXDB_CONFIG_PATH` to the path of your
-configuration file and start the process.
-For example:
+  configuration file and start the process.
+  For example:
 
     ```
     echo $INFLUXDB_CONFIG_PATH
@@ -202,13 +202,13 @@ In the sections below we name the relevant environment variable in the
 description for the configuration setting.
 
 > **Note:**
-To set or override settings in a config section that allows multiple
-configurations (any section with [[`double_brackets`]] in the header supports
-multiple configurations), the desired configuration must be specified by ordinal
-number.
-For example, for the first set of `[[graphite]]` environment variables,
-prefix the configuration setting name in the environment variable with the
-relevant position number (in this case: `0`):
+> To set or override settings in a config section that allows multiple
+> configurations (any section with [[`double_brackets`]] in the header supports
+> multiple configurations), the desired configuration must be specified by ordinal
+> number.
+> For example, for the first set of `[[graphite]]` environment variables,
+> prefix the configuration setting name in the environment variable with the
+> relevant position number (in this case: `0`):
 >
     INFLUXDB_GRAPHITE_0_BATCH_PENDING
     INFLUXDB_GRAPHITE_0_BATCH_SIZE
@@ -224,9 +224,9 @@ relevant position number (in this case: `0`):
     INFLUXDB_GRAPHITE_0_TEMPLATES
     INFLUXDB_GRAPHITE_0_UDP_READ_BUFFER
 >
-For the Nth Graphite configuration in the configuration file, the relevant
-environment variables would be of the form `INFLUXDB_GRAPHITE_(N-1)_BATCH_PENDING`.
-For each section of the configuration file the numbering restarts at zero.
+>For the Nth Graphite configuration in the configuration file, the relevant
+>environment variables would be of the form `INFLUXDB_GRAPHITE_(N-1)_BATCH_PENDING`.
+>For each section of the configuration file the numbering restarts at zero.
 
 ## Configuration Options by Section
 
@@ -268,20 +268,19 @@ However, you can override this value to be less than the maxium value.
 This can be important in cases where you are running the database alongside other processes on the same machine and
 want to ensure that the database doesn't completely starve those those processes.
 
-Keep in mind that setting GOMAXPROCS=1 will eliminate all parallelization.  
+Keep in mind that setting `GOMAXPROCS=1`eliminates all parallelization.  
 
 Environment variable: `GOMAXPROCS`
 
 ## [meta]
 
 This section controls parameters for InfluxDB's metastore,
-which stores information on users, databases, retention policies, shards, and
-continuous queries.
+which stores information on users, databases, retention policies, shards, and continuous queries.
 
 ### dir = "/var/lib/influxdb/meta"
 
 The `meta` directory.
-Files in the `meta` directory include `meta.db`.
+Files in the `meta` directory include `meta.db`, the InfluxDB metastore file.
 
 >**Note:** The default directory for OS X installations is `/Users/<username>/.influxdb/meta`
 
@@ -328,6 +327,8 @@ Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 
 The WAL directory is the location of the [write ahead log](/influxdb/v1.4/concepts/glossary/#wal-write-ahead-log).
 
+>**Note:** The default WAL directory for OS X installations is `/Users/<username>/.influxdb/wal`
+
 Environment variable: `INFLUXDB_DATA_WAL_DIR`
 
 
@@ -355,13 +356,20 @@ Environment variable: `INFLUXDB_DATA_QUERY_LOG_ENABLED`
 
 ### cache-max-memory-size = 1073741824
 
-The cache maximum memory size is the maximum size (in bytes) a shard's cache can reach before it starts rejecting writes.
+The cache maximum memory size is the maximum size that a shard cache can reach before it starts rejecting writes.
+
+Valid memory size suffixes are: k, m, or g (case-insensitive, 1024 = 1k). 
+Values without a size suffix are in bytes.
 
 Environment variable: `INFLUXDB_DATA_CACHE_MAX_MEMORY_SIZE`
 
 ### cache-snapshot-memory-size = 26214400
 
 The cache snapshot memory size is the size at which the engine will snapshot the cache and write it to a TSM file, freeing up memory.
+
+Valid memory size suffixes are: k, m, or g (case-insensitive, 1024 = 1k). 
+Values without a size suffix are in bytes.
+
 
 Environment variable: `INFLUXDB_DATA_CACHE_SNAPSHOT_MEMORY_SIZE`
 
@@ -401,8 +409,8 @@ If a point causes the number of series in a database to exceed
 ```
 
 > **Note:** Any existing databases with a series count that exceeds `max-series-per-database`
-will continue to accept writes to existing series, but writes that create a
-new series will fail.
+> will continue to accept writes to existing series, but writes that create a
+> new series will fail.
 
 Environment variable: `INFLUXDB_DATA_MAX_SERIES_PER_DATABASE`
 
