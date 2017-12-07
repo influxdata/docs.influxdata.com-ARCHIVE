@@ -54,15 +54,19 @@ Where `qid` is the id of the query from the [`SHOW QUERIES`](/influxdb/v1.3/trou
 ```
 KILL QUERY <qid>
 ```
+A successful `KILL QUERY` query returns no results.
 
 #### Example:
+
 <br>
 ```
 > KILL QUERY 36
 >
 ```
-
-A successful `KILL QUERY` query returns no results.
+>***Enterprise Edition clusters:*** To kill queries on a cluster, you need to specify the query on the the originating host (for example, "myhost:8088):
+>```sql
+>KILL QUERY <qid> ON "<originating_host>" 
+>```
 
 ## Configuration settings for query management
 
