@@ -215,7 +215,7 @@ top_scores
 
 #### To delete a task through Chronograf:
 
-1. Locate th etask in the **Alert Rules** table.
+1. Locate the task in the **Alert Rules** table.
 1. Click on the **Delete** button in the final column of the table. A message
 indicating that the task was deleted will appear at the top of the page.
 
