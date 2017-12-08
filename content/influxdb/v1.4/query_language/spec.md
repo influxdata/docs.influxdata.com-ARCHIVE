@@ -337,7 +337,7 @@ BEGIN
   SELECT count("value")
   INTO "6_months"."events"
   FROM "events"
-  GROUP BY time(10m)
+  GROUP (10m)
 END;
 
 -- this selects from the output of one continuous query in one retention policy and outputs to another series in another retention policy
@@ -698,12 +698,12 @@ kill_query_statement = "KILL QUERY" query_id .
 
 #### Examples:
 
-```
+​```sql
 --- kill a query with the query_id 36
 KILL QUERY 36
 ```
 
-> **NOTE:** Identify the `query_id` from the [`SHOW QUERIES`](/influxdb/v1.4/query_language/spec/#show-queries) output.
+> **NOTE:** You can identify the `query_id` from the [`SHOW QUERIES`](#show-queries) output.
 
 ### REVOKE
 
@@ -731,7 +731,7 @@ select_stmt = "SELECT" fields from_clause [ into_clause ] [ where_clause ]
 
 #### Examples:
 
-```sql
+​```sql
 -- select mean value from the cpu measurement where region = 'uswest' grouped by 10 minute intervals
 SELECT mean("value") FROM "cpu" WHERE "region" = 'uswest' GROUP BY time(10m) fill(0)
 
@@ -887,6 +887,7 @@ show_queries_stmt = "SHOW QUERIES" .
 ```sql
 -- show all currently-running queries
 SHOW QUERIES
+-- 
 ```
 
 ### SHOW RETENTION POLICIES
