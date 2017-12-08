@@ -33,10 +33,10 @@ SHOW QUERIES
 #### Example:
 ```
 > SHOW QUERIES
-qid	query								database duration status
+qid query                               database duration status
 --- -----                               -------- -------- ------
-37	SHOW QUERIES							     100368u  running
-36	SELECT mean(myfield) FROM mymeas    mydb     3s       running
+37  SHOW QUERIES                                 100368u  running
+36  SELECT mean(myfield) FROM mymeas    mydb     3s       running
 ```
 
 ##### Explanation of the output:
