@@ -43,6 +43,13 @@ If you want to log all users out every time the server restarts, change the valu
 export TOKEN_SECRET=supersupersecret
 ```
 
+### JWKS Signature Verification
+To enable RS256 signature verification support, you need to export `JWKSURI`. This variable should point to your identity provider's JWKS document. This URI can be retrieved from the OpenID Configuration at `/.well-known/openid-configuration`.
+
+```sh
+export JWKSURI=https://example.com/adfs/discovery/keys
+```
+
 ### Github
 
 #### Overview
@@ -212,6 +219,10 @@ The generic OAuth2 provider has a few optional parameters.
 * `GENERIC_API_URL` : URL that returns [OpenID UserInfo JWT](https://connect2id.com/products/server/docs/api/userinfo) (specifically email address)
 * `GENERIC_DOMAINS` : Email domains user's email address must use.
 
+#### Processing id_tokens
+
+Some providers like Active Directory Federation Services (ADFS) provide the requested scopes as an extra `id_token` along with the access token (and not as userinfo document at APIURL). Processing id_tokens is currently only implemented for the `generic` provider and missing support will be logged.
+
 #### Configuring the look of the login page
 
 To configure the copy of the login page button text, set the `GENERIC_NAME` environment variable.
@@ -220,6 +231,29 @@ For example, with
 export GENERIC_NAME="Hill Valley Preservation Society"
 ```
 the button text will be `Login with Hill Valley Preservation Society`.
+
+#### Examples
+##### ADFS (Active Directory Federation Service)
+
+See [Enabling OpenId Connect with AD FS 2016](https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/development/enabling-openid-connect-with-ad-fs) for a walk through of the server configuration.
+
+Exports for chronograf:
+```sh
+export PUBLIC_URL="https://example.com:8888"
+export GENERIC_CLIENT_ID="chronograf"
+export GENERIC_CLIENT_SECRET="KW-TkvH7vzYeJMAKj-3T1PdHx5bxrZnoNck2KlX8"
+export GENERIC_AUTH_URL="https://example.com/adfs/oauth2/authorize"
+export GENERIC_TOKEN_URL="https://example.com/adfs/oauth2/token"
+export GENERIC_API_KEY="upn"
+export JWKS_URL="https://example.com/adfs/discovery/keys"
+export TOKEN_SECRET="ZNh2N9toMwUVQxTVEe2ZnnMtgkh3xqKZ"
+```
+hint: the CLIENTID may not include a colon, otherwise you'll get error MSIS9441
+
+Testing:
+```sh
+sudo -E -u chronograf /usr/bin/chronograf --host example.com --port 8888 -b /var/lib/chronograf/chronograf-v1.db -c /usr/share/chronograf/canned  --cert=/etc/ssl/private/machine.pem --key=/etc/ssl/private/machine.pem --log-level=debug
+```
 
 ### Optional: Configure an Authentication Duration
 
