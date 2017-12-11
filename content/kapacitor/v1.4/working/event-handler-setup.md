@@ -3,8 +3,9 @@ title: Event Handler Setup
 
 menu:
   kapacitor_1_4:
-    weight: 70
-    parent: guides
+    name: Alerts - Event Handler Setup
+    weight: 5
+    parent: work-w-kapacitor
 ---
 
 Integrate Kapacitor into your monitoring system by sending [alert messages](/kapacitor/v1.4/nodes/alert_node/#message) to supported event handlers.

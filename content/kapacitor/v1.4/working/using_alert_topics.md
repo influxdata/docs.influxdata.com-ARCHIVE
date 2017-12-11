@@ -4,10 +4,10 @@ aliases:
     - kapacitor/v1.4/examples/using_alert_topics/
 menu:
   kapacitor_1_4:
-    name: Using Alert Topics
+    name: Alerts - Using Topics
     identifier: using_alert_topics
-    weight: 60
-    parent: guides
+    weight: 4
+    parent: work-w-kapacitor
 ---
 
 Kapacitor's alert system follows a publish subscribe design pattern.
@@ -222,4 +222,3 @@ Now update the handler and only alerts that changed state will be sent to Slack.
 ```
 kapacitor define-topic-handler ./slack.yaml
 ```
-
