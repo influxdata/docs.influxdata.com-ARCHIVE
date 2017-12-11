@@ -462,7 +462,7 @@ be enabled and configured in the `[smtp]` properties table.
 
 Optional features include supported alert handlers, Docker services, user defined functions, input services, and discovery services.
 
-##### Supported Alert Handlers
+##### Supported alert handlers
 
 Alert handlers manage communications from Kapacitor to third party services or
 across Internet standard messaging protocols.

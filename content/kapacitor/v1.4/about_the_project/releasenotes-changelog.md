@@ -9,64 +9,63 @@ menu:
 ## v1.4.0 [2017-12-08]
 
 ### Release Notes
-Kapacitor v1.4.0  has many new features, here is a list of some of the highlights:
+Kapacitor v1.4.0 adds many new features, highlighted here:
 
-1. Load TICKscripts and alert handlers from a directory.
-2. Structed Logging  with a logging API endpoints to be able to tail logs for given tasks.
-3. Autoscale support for Docker Swarm and EC2 Autoscaling.
-4. Sideload data into your TICKscript streams from external sources.
-5. Fully customizable POST body for the alert POST handler and the httpPost node.
+- Load topic handlers, tasks, and templates from `dir`.
+- Structed Logging with logging API endpoints that can be used to tail logs for specified tasks.
+- Autoscale support for Docker Swarm and AWS EC2.
+- Sideload data into your TICKscript streams from external sources.
+- Fully customizable POST body for the alert POST handler and the httpPost node.
 
 ### Breaking Changes
 #### Change over internal API to use message passing semantics.
-    The breaking change is that the `Combine` and `Flatten` nodes previously, but erroneously, 
+    The `Combine` and `Flatten` nodes previously, but erroneously,
     operated across batch boundaries; this has been fixed.
 
 ### Features
+- Added load service for loading topic handlers, tasks, and templates from `dir`.
+- Topic handler file format modified to include TopicID and HandlerID.
+- TICKscript now allows task descriptions exclusively through a TICKscript.
+- Task types (batch or stream) no longer must be specified.
+- `dbrp` expressions were added to TICKscript.
 - Added support for AWS EC2 autoscaling services.
 - Added support for Docker Swarm autoscaling services.
 - Added `BarrierNode` to emit `BarrierMessage` periodically.
 - Added `Previous` state.
 - Added support to persist replay status after it finishes.
-- Added alert.post and https_post timeouts to ensure clean-up of hung connections.
+- Added `alert.post` and `https_post` timeouts to ensure cleanup of hung connections.
 - Added subscriptions modes to InfluxDB subscriptions.
 - Added linear fill support for `QueryNode`.
-- Added MQTT Alert Handler.
-- Added built-in functions to convert timestamps to integers.
+- Added MQTT alert handler.
+- Added built-in functions for converting timestamps to integers.
 - Added `bools` field types to UDFs.
 - Added `stateless now()` function to get the current local time.
-- Added support for timeout, tags and service template in the Alerta AlertNode.
+- Added support for timeout, tags, and service templates in the Alerta AlertNode.
 - Added support for custom HTTP Post bodies via a template system.
 - Added support allowing for the addition of the HTTP status code as a field when using httpPost.
 - Added `logfmt` support and refactor logging.
-- Added ability to load tasks/handlers from dir.
-    TICKscript was extended to be able to describe a task exclusively through a tickscript.
-      * tasks no longer need to specify their TaskType (Batch, Stream).
-      * `dbrp` expressions were added to tickscript.
-    Topic-Handler file format was modified to include the TopicID and HandlerID in the file.
-    Load service was added; the service can load tasks/handlers from a directory.
 - Added support for exposing logs via the API. API is released as a technical preview.
-- Added support for {{ .Duration }} on Alert Message property.
+- Added support for `{{ .Duration }}` on Alert Message property.
 - Added support for [JSON lines](https://en.wikipedia.org/wiki/JSON_Streaming#Line_delimited_JSON) for steaming HTTP logs.
-- Added new node `Sideload`, that allows loading data from files into the stream of data. Data can be loaded using a hierarchy.
+- Added new node `Sideload` that allows loading data from files into the stream of data. Data can be loaded using a hierarchy.
 - Promote Alert API to stable v1 path.
 - Change `WARN` level logs to `INFO` level.
-- Updated Go version to 1.9.1
+- Updated Go version to 1.9.2.
 
 ### Bugfixes
 
 - Fixed issues where log API checked the wrong header for the desired content type.
 - Fixed VictorOps "data" field being a string instead of actual JSON.
 - Fixed panic with MQTT.toml configuration generation.
-- Fix oddly generated TOML for MQTT & HTTPpost.
+- Fix oddly-generated TOML for MQTT & HTTPpost.
 - Address Idle Barrier dropping all messages when source has clock offset.
 - Address crash of Kapacitor on Windows x64 when starting a recording.
 - Allow for `.yml` file extensions in `define-topic-handler`.
 - Fix HTTP server error logging.
-- Fixed bugs with stopping running UDF agent.
+- Fixed bugs with stopping a running UDF agent.
 - Fixed error messages for missing fields which are arguments to functions are not clear.
 - Fixed bad PagerDuty test the required server info.
-- Add SNMP sysUpTime to SNMP Trap service.
+- Added SNMP sysUpTime to SNMP Trap service.
 - Fixed panic on recording replay with HTTPPostHandler.
 - Fixed Kubernetes incluster master API DNS resolution.
 - Remove the pidfile after the server has exited.
@@ -118,7 +117,7 @@ Next configure a scraper to use that discoverer.
  ##### File format is here https://prometheus.io/docs/operating/configuration/#%3Cfile_sd_config%3E
  files = ["/tmp/prom/*.json"]
 
-# Configure scraper 
+# Configure scraper
 [[scraper]]
  enabled = true
  name = "node_exporter"
@@ -188,35 +187,35 @@ For more details on the alerting system see the full documentation [here](https:
 
 ### Breaking Change
 #### Fixed inconsistency with JSON data from alerts.
-    The alert handlers Alerta, Log, OpsGenie, PagerDuty, Post and VictorOps allow extra opaque data to be 
+    The alert handlers Alerta, Log, OpsGenie, PagerDuty, Post and VictorOps allow extra opaque data to be
     attached to alert notifications. That opaque data was inconsistent and this change fixes that.
-    Depending on how that data was consumed this could result in a breaking change, since the original behavior 
+    Depending on how that data was consumed this could result in a breaking change, since the original behavior
     was inconsistent we decided it would be best to fix the issue now and make it consistent for all future builds.
-    Specifically in the JSON result data the old key `Series` is always `series`, and the old key `Err` is now 
+    Specifically in the JSON result data the old key `Series` is always `series`, and the old key `Err` is now
     always `error` instead of for only some of the outputs.
-    
+
 #### Refactor the Alerting service.
-    The change is completely breaking for the technical preview alerting service, a.k.a. the new alert topic 
-    handler features. The change boils down to simplifying how you define and interact with topics.  
+    The change is completely breaking for the technical preview alerting service, a.k.a. the new alert topic
+    handler features. The change boils down to simplifying how you define and interact with topics.
     Alert handlers now only ever have a single action and belong to a single topic.
     An automatic migration from old to new handler definitions will be performed during startup.
-    See the updated API docs.   
-    
+    See the updated API docs.
+
 #### Add generic error counters to every node type.
     Renamed `query_errors` to `errors` in batch node.
-    Renamed `eval_errors` to `errors` in eval node.    
+    Renamed `eval_errors` to `errors` in eval node.
 
-#### The UDF agent Go API has changed. 
+#### The UDF agent Go API has changed.
     The changes now make it so that the agent package is self contained.
 
 #### A bug was fixed around missing fields in the derivative node.
     The behavior of the node changes slightly in order to provide a consistent fix to the bug.
-    The breaking change is that now, the time of the points returned are from the right hand or current point time, 
+    The breaking change is that now, the time of the points returned are from the right hand or current point time,
     instead of the left hand or previous point time.
 
 ### Features
 
-- Allow Sensu handler to be specified. 
+- Allow Sensu handler to be specified.
 - Added type signatures to Kapacitor functions.
 - Added `isPresent` operator for verifying whether a value is present (part of [#1284](https://github.com/influxdata/kapacitor/pull/1284)).
 - Added Kubernetes scraping support.
@@ -228,7 +227,7 @@ For more details on the alerting system see the full documentation [here](https:
 - Expose server specific information in alert templates.
 - Added Pushover integration.
 - Added `working_cardinality` stat to each node type that tracks the number of groups per node.
-- Added StateDuration node. 
+- Added StateDuration node.
 - Default HipChat URL should be blank.
 - Add API endpoint for performing Kapacitor database backups.
 - Adding source for sensu alert as parameter.
@@ -248,7 +247,7 @@ For more details on the alerting system see the full documentation [here](https:
 - Fixed panic in scraping TargetManager.
 - Use ProxyFromEnvironment for all outgoing HTTP traffic.
 - Fixed bug where batch queries would be missing all fields after the first nil field.
-- Fix case-sensitivity for Telegram `parseMode` value. 
+- Fix case-sensitivity for Telegram `parseMode` value.
 - Fix pprof debug endpoint.
 - Fixed hang in config API to update a config section.
     Now if the service update process takes too long the request will timeout and return an error.
