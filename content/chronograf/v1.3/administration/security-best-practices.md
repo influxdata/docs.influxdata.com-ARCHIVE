@@ -237,23 +237,26 @@ the button text will be `Login with Hill Valley Preservation Society`.
 
 See [Enabling OpenId Connect with AD FS 2016](https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/development/enabling-openid-connect-with-ad-fs) for a walk through of the server configuration.
 
-Exports for chronograf:
+Exports for chronograf (e.g. in /etc/default.chronograf):
 ```sh
-export PUBLIC_URL="https://example.com:8888"
-export GENERIC_CLIENT_ID="chronograf"
-export GENERIC_CLIENT_SECRET="KW-TkvH7vzYeJMAKj-3T1PdHx5bxrZnoNck2KlX8"
-export GENERIC_AUTH_URL="https://example.com/adfs/oauth2/authorize"
-export GENERIC_TOKEN_URL="https://example.com/adfs/oauth2/token"
-export GENERIC_API_KEY="upn"
-export JWKS_URL="https://example.com/adfs/discovery/keys"
-export TOKEN_SECRET="ZNh2N9toMwUVQxTVEe2ZnnMtgkh3xqKZ"
+PUBLIC_URL="https://example.com:8888"
+GENERIC_CLIENT_ID="chronograf"
+GENERIC_CLIENT_SECRET="KW-TkvH7vzYeJMAKj-3T1PdHx5bxrZnoNck2KlX8"
+GENERIC_AUTH_URL="https://example.com/adfs/oauth2/authorize"
+GENERIC_TOKEN_URL="https://example.com/adfs/oauth2/token"
+GENERIC_SCOPES="openid"
+GENERIC_API_KEY="upn"
+JWKS_URL="https://example.com/adfs/discovery/keys"
+TOKEN_SECRET="ZNh2N9toMwUVQxTVEe2ZnnMtgkh3xqKZ"
+#TLS_CERTIFICATE=xxx
+#TLS_PRIVATE_KEY=xxx
+#LOG_LEVEL="debug"
 ```
-hint: the CLIENTID may not include a colon, otherwise you'll get error MSIS9441
 
-Testing:
-```sh
-sudo -E -u chronograf /usr/bin/chronograf --host example.com --port 8888 -b /var/lib/chronograf/chronograf-v1.db -c /usr/share/chronograf/canned  --cert=/etc/ssl/private/machine.pem --key=/etc/ssl/private/machine.pem --log-level=debug
-```
+Common errors and fixes:
+MSIS9605: request contains no redirect_uri; you need to set PUBLIC_URL
+MSIS9610: most likely a follow up issue when the token request failed
+MSIS9441: check if CLIENT_ID contains a colon; this breaks authentication for ADFS
 
 ### Optional: Configure an Authentication Duration
 
