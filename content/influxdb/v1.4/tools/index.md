@@ -56,12 +56,3 @@ It was originally built for Graphite, modeled after Kibana, and since been updat
 
 <dt> Because of the [changes](/influxdb/v0.11/concepts/010_vs_011/#breaking-api-changes) to the `SHOW SERIES` and `SHOW TAG VALUES` formats in InfluxDB 0.11, InfluxDB 1.3+ will not work with the Query Editor in Grafana 2.6.
 This issue does not affect existing queries and dashboards or users working with Grafana 3.0. </dt>
-
-## Service Plugins
-
-InfluxDB accepts writes over
-[UDP](https://github.com/influxdata/influxdb/blob/master/services/udp/README.md)
-and provides an easy way to set up
-[Graphite](https://github.com/influxdata/influxdb/blob/master/services/graphite/README.md),
-[CollectD](https://github.com/influxdata/influxdb/blob/master/services/collectd/README.md),
-and [OpenTSDB](https://github.com/influxdb/influxdb/blob/master/services/opentsdb/README.md) as input sources.
