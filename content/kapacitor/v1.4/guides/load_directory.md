@@ -1,22 +1,21 @@
 ---
-title: Load Directory
+title: Load directory service
 aliases:
     - kapacitor/v1.4/examples/load_directory/
 menu:
   kapacitor_1_4:
-    name: Load Directory
+    name: Load directory service
     identifier: load_directory
     weight: 20
     parent: guides
 ---
 
-# File based task/template/handler definition
+# File-based definitions of tasks, templates, and load handlers
 
-This proposal introduces directory based task, template, and handler definition.
+The load directory service enables file-based definitions of Kapacitor tasks, templates, and topic handlers that are loaded on startup or when a NOHUP signal is sent to the process.
 
 ## Configuration
-The load service configuration is specified under the `load` tag of the
-kapacitor configuration file.
+The load directory service configuration is specified in the `[load]` section of the Kapacitor configuration file.
 
 ```
 [load]
@@ -24,27 +23,26 @@ kapacitor configuration file.
  dir="/path/to/directory"
 ```
 
-`dir` specifies the directory where the definition files exist.
+`dir` specifies the directory where the definition files are located.
 
-The service will attempt to load data from three subdirectories.
+The service will attempt to load the definitions from three subdirectories.
 
-The `tasks` directory should contain task tickscripts and and the associated templated task
-definition files (either yaml or json).
+The `tasks` directory should contain task TICKscripts and the associated templated task definition files (either YAML or JSON).
 
-The `templates` directory should contain templated tickscripts.
+The `templates` directory should contain templated TICKscripts.
 
 The `handlers` directory will contain will contain topic handler definitions in yaml or json.
 
 ## Tasks
 
 Task files must be placed in the `tasks` subdirectory of the load service
-directory. Defining tasks explicitly will be done according to the following scheme:
+directory. Task TICKscripts are specified based on the following scheme:
 
-* `id` - the file name without the tick extension
-* `type` - determined by introspection of the task (stream, batch)
+* `id` - the file name without the `.tick` extension
+* `type` - determined by introspection of the task (stream or batch)
 * `dbrp` - defined using the `dbrp` keyword followed by a specified database and retention policy
 
-For example, the tickscript
+In the following example, the TICKscript will create a `stream` task named `my_task` for the dbrp `telegraf.autogen`.
 
 ```
 // /path/to/directory/tasks/my_task.tick
@@ -61,19 +59,18 @@ stream
         .topic('cpu')
 ```
 
-will create a `stream` task named `my_task` for the dbrp `telegraf.autogen`.
 
+## Task templates
 
-## Templates
-
-Template files must be placed in the `templates` subdirectory of the load service
-directory. Defining templated tasks is done according to the following scheme:
+Template files must be placed in the `templates` subdirectory of the load service directory.
+Task templates are defined according to the following scheme:
 
 * `id` - the file name without the tick extension
-* `type` - determined by introspection of the task (stream, batch)
+* `type` - determined by introspection of the task (stream or batch)
 * `dbrp` - defined using the `dbrp` keyword followed by a specified database and retention policy
 
-For example, the tickscript
+The following TICKscript example will create a `stream` template named `my_template` for the dbrp `telegaf.autogen`.
+
 ```
 // /path/to/directory/templates/my_template.tick
 dbrp "telegraf"."autogen"
@@ -103,19 +100,17 @@ stream
          .channel(slack_channel)
 ```
 
-will create a `stream` template named `my_template` for the dbrp `telegaf.autogen`.
+### Templated tasks
 
-### Templated Tasks
-
-Templated task files must be placed in the `tasks` subdirectory of the load service
-directory. Defining templated tasks will be done according to the following scheme:
+Templated task files must be placed in the `tasks` subdirectory of the load service directory.
+Templated tasks are defined according to the following scheme:
 
 * `id` - filename without the `yaml`, `yml`, or `json` extension
 * `dbrps` - required if not specified in template
 * `template-id` - required
 * `vars` - list of template vars
 
-For example, the templated task file
+In this example, the templated task YAML file creates a `stream` task, named `my_templated_task`, for the dbrp `telegraf.autogen`.
 
 ```yaml
 # /path/to/directory/tasks/my_templated_tas.tick
@@ -152,9 +147,8 @@ vars:
    type: string
    value: "#alerts_testing"
 ```
-will create a `stream` task named `my_templated_task` for the dbrp `telegraf.autogen`.
 
-The same task may be created using JSON like so:
+The same task can also be created using JSON, as in this example:
 
 ```json
 {
@@ -173,13 +167,12 @@ The same task may be created using JSON like so:
 }
 ```
 
-## Handlers
+## Topic handlers
 
-Topic Handler files must be placed in the `handlers` subdirectory of the load service
-directory.
+Topic handler files must be placed in the `handlers` subdirectory of the load service directory.
 
 ```
-id: hanlder-id
+id: handler-id
 topic: cpu
 kind: slack
 match: changed() == TRUE

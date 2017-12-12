@@ -11,19 +11,18 @@ menu:
 ### Release Notes
 Kapacitor v1.4.0 adds many new features, highlighted here:
 
-- Load topic handlers, tasks, and templates from `dir`.
+- Load directory service for adding topic handlers, tasks, and templates from `dir`.
 - Structed Logging with logging API endpoints that can be used to tail logs for specified tasks.
 - Autoscale support for Docker Swarm and AWS EC2.
 - Sideload data into your TICKscript streams from external sources.
-- Fully customizable POST body for the alert POST handler and the httpPost node.
+- Fully-customizable HTTP Post body for the alert Post handler and the HTTP Post node.
 
 ### Breaking Changes
 #### Change over internal API to use message passing semantics.
-    The `Combine` and `Flatten` nodes previously, but erroneously,
-    operated across batch boundaries; this has been fixed.
+The `Combine` and `Flatten` nodes previously operated (erroneously) across batch boundaries -- this has been fixed.
 
 ### Features
-- Added load service for loading topic handlers, tasks, and templates from `dir`.
+- Added service for loading topic handlers, tasks, and templates from `dir`.
 - Topic handler file format modified to include TopicID and HandlerID.
 - TICKscript now allows task descriptions exclusively through a TICKscript.
 - Task types (batch or stream) no longer must be specified.
@@ -39,10 +38,10 @@ Kapacitor v1.4.0 adds many new features, highlighted here:
 - Added MQTT alert handler.
 - Added built-in functions for converting timestamps to integers.
 - Added `bools` field types to UDFs.
-- Added `stateless now()` function to get the current local time.
+- Added stateless `now()` function to get the current local time.
 - Added support for timeout, tags, and service templates in the Alerta AlertNode.
 - Added support for custom HTTP Post bodies via a template system.
-- Added support allowing for the addition of the HTTP status code as a field when using httpPost.
+- Added support allowing for the addition of the HTTP status code as a field when using HTTP Post.
 - Added `logfmt` support and refactor logging.
 - Added support for exposing logs via the API. API is released as a technical preview.
 - Added support for `{{ .Duration }}` on Alert Message property.
@@ -56,7 +55,7 @@ Kapacitor v1.4.0 adds many new features, highlighted here:
 
 - Fixed issues where log API checked the wrong header for the desired content type.
 - Fixed VictorOps "data" field being a string instead of actual JSON.
-- Fixed panic with MQTT.toml configuration generation.
+- Fixed panic with `MQTT.toml` configuration generation.
 - Fix oddly-generated TOML for MQTT & HTTPpost.
 - Address Idle Barrier dropping all messages when source has clock offset.
 - Address crash of Kapacitor on Windows x64 when starting a recording.
@@ -91,7 +90,7 @@ Kapacitor v1.4.0 adds many new features, highlighted here:
 
 ### Bugfixes
 
-- Proxy from environment for HTTP request to slack
+- Proxy from environment for HTTP request to Slack
 - Fix derivative node preserving fields from previous point in stream tasks
 
 ## v1.3.0 [2017-05-22]
@@ -101,11 +100,11 @@ Kapacitor v1.4.0 adds many new features, highlighted here:
 This release has two major features.
 
 1. Addition of scraping and discovering for Prometheues style data collection.
-2. Updates to the Alert Topic system
+2. Updates to the Alert Topic system.
 
 Here is a quick example of how to configure Kapacitor to scrape discovered targets.
-First configure a discoverer, here we use the file-discovery discoverer.
-Next configure a scraper to use that discoverer.
+First, configure a discoverer, here we use the file-discovery discoverer.
+Next, configure a scraper to use that discoverer.
 
 ```
 # Configure file discoverer
@@ -132,7 +131,7 @@ Next configure a scraper to use that discoverer.
  scrape-timeout = "10s"
 ```
 
-Add the above snippet to your kapacitor.conf file.
+Add the above snippet to your `kapacitor.conf` file.
 
 Create the below snippet as the file `/tmp/prom/localhost.json`:
 
@@ -142,16 +141,16 @@ Create the below snippet as the file `/tmp/prom/localhost.json`:
 }]
 ```
 
-Start the Prometheues node_exporter locally.
+Start the Prometheues `node_exporter` locally.
 
-Now startup Kapacitor and it will discover the localhost:9100 node_exporter target and begin scrapping it for metrics.
-For more details on the scraping and discovery systems see the full documentation [here](https://docs.influxdata.com/kapacitor/v1.3/scraping).
+Now, startup Kapacitor and it will discover the `localhost:9100` `node_exporter` target and begin scrapping it for metrics.
+For more details on the scraping and discovery systems, see the full documentation [here](https://docs.influxdata.com/kapacitor/v1.3/scraping).
 
-The second major feature with this release, are changes to the alert topic system.
-The previous release introduce this new system as a technical preview, with this release the alerting service has been simplified.
-Alert handlers now only ever have a single action and belong to a single topic.
+The second major feature with this release are changes to the alert topic system.
+The previous release introduced this new system as a technical preview and with this release the alerting service has been simplified.
+Alert handlers now only have a single action and belong to a single topic.
 
-The handler defintion has been simplified as a result.
+The handler definition has been simplified as a result.
 Here are some example alert handlers using the new structure:
 
 ```yaml
@@ -177,18 +176,18 @@ options:
 ```
 
 To define a handler now you must specify which topic the handler belongs to.
-For example to define the above aggregate handler on the system topic use this command:
+For example, to define the above aggregate handler on the system topic, use this command:
 
 ```sh
 kapacitor define-handler system aggregate_by_1m.yaml
 ```
 
-For more details on the alerting system see the full documentation [here](https://docs.influxdata.com/kapacitor/v1.3/alerts).
+For more details on the alerting system, see the full documentation [here](https://docs.influxdata.com/kapacitor/v1.3/alerts).
 
 ### Breaking Change
 #### Fixed inconsistency with JSON data from alerts.
-    The alert handlers Alerta, Log, OpsGenie, PagerDuty, Post and VictorOps allow extra opaque data to be
-    attached to alert notifications. That opaque data was inconsistent and this change fixes that.
+    The alert handlers Alerta, Log, OpsGenie, PagerDuty, Post and VictorOps allow extra opaque data to beattached to alert notifications. 
+    That opaque data was inconsistent and this change fixes that.
     Depending on how that data was consumed this could result in a breaking change, since the original behavior
     was inconsistent we decided it would be best to fix the issue now and make it consistent for all future builds.
     Specifically in the JSON result data the old key `Series` is always `series`, and the old key `Err` is now

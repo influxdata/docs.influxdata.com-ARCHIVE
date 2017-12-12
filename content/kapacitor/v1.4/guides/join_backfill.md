@@ -59,16 +59,14 @@ errors
         .as('errors', 'views')
 ```
 
-The data is joined by time, meaning that as pairs of batches arrive from each source
-they will be combined into a single batch.
-As a result the fields from each source need to
-be renamed to properly namespace the fields.
+The data is joined by time, meaning that as pairs of batches arrive from each source they will be combined into a single batch.
+As a result the fields from each source need to be renamed to properly namespace the fields.
 This is done via the `.as('errors', 'views')` line.
-In this example each measurement has only one field named `sum`, the joined fields will be called
-`errors.sum` and `views.sum` respectively.
+In this example each measurement has only one field named `sum`,
+the joined fields will be called `errors.sum` and `views.sum` respectively.
 
 Now that the data is joined we can calculate the percentage.
-Using the new names for the fields we can write this expression to calculate our desired percentage.
+Using the new names for the fields, we can write this expression to calculate our desired percentage.
 
 ```javascript
     //Calculate percentage
@@ -78,7 +76,7 @@ Using the new names for the fields we can write this expression to calculate our
 
 ```
 
- Finally we want to store this data back into InfluxDB.
+ Finally, we want to store this data back into InfluxDB.
 
 ```javascript
     |influxDBOut()
@@ -124,9 +122,9 @@ errors
 
 ### Backfill
 Now for a fun little trick.
-Using Kapacitor's record/replay actions we can actually run this TICKscript on historical data.
-First save the above script as `error_percent.tick` and define it.
-Then create a recording for the past time frame we want.
+Using Kapacitor's record/replay actions, we can actually run this TICKscript on historical data.
+First, save the above script as `error_percent.tick` and define it.
+Then, create a recording for the past time frame we want.
 
 ```bash
 kapacitor define error_percent -tick error_percent.tick

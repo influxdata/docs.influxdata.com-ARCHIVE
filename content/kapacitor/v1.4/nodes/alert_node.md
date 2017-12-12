@@ -2151,7 +2151,7 @@ Chaining methods are marked using the `|` operator.
 
 ### Alert
 
-Create an alert node, which can trigger alerts.
+Create an alert node which can trigger alerts.
 
 
 ```javascript
@@ -2219,9 +2219,9 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 Helper function for creating an alert on low throughput, a.k.a. deadman's switch.
 
-- Threshold -- trigger alert if throughput drops below threshold in points/interval.
-- Interval -- how often to check the throughput.
-- Expressions -- optional list of expressions to also evaluate. Useful for time of day alerting.
+- Threshold: Trigger alert if throughput drops below threshold in points/interval.
+- Interval: How often to check the throughput.
+- Expressions: Optional list of expressions to also evaluate. Useful for time of day alerting.
 
 Example:
 
@@ -2236,7 +2236,8 @@ Example:
     data...
 ```
 
-The above is equivalent to this
+The above is equivalent to this.
+
 Example:
 
 
