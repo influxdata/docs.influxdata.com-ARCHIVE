@@ -10,22 +10,21 @@ menu:
     parent: guides
 ---
 
-Kapacitor's alert system follows a publish subscribe design pattern.
-Alerts are published to a `topic` and `handlers` subscribe to a topic.
+Kapacitor's alert system follows a publish-and-subscribe design pattern.
+Alerts are published to a `topic` and `handlers` subscribe to the topic.
 
-This example will walk you through setting up a simple cpu threshold alert that sends alerts to Slack.
+This example walks you through setting up a simple CPU threshold alert that sends alerts to Slack.
 
 ### Requirements
 
-It is expected that you have a working Telegraf and Kapacitor install to walk through this example.
-If you do not please take a second to setup both.
+You should have a working Telegraf and Kapacitor installed in order to complete this example.
 
 
 ## The Task
 
 We are going to demonstrate how to setup a `cpu` alert topic and send alerts to that topic.
 
-First let's define our simple cpu alert.
+First, let's define our simple CPU alert.
 
 ```go
 dbrp "telegraf"."autogen"
@@ -41,7 +40,7 @@ stream
         .topic('cpu')
 ```
 
-The above TICKscript creates a threshold alert for cpu usage and sends the alerts to the `cpu` topic.
+The above TICKscript creates a threshold alert for CPU usage and sends the alerts to the `cpu` topic.
 
 Save the above script as `cpu_alert.tick`.
 Create and start the task by running the following commands:
@@ -222,4 +221,3 @@ Now update the handler and only alerts that changed state will be sent to Slack.
 ```
 kapacitor define-topic-handler ./slack.yaml
 ```
-
