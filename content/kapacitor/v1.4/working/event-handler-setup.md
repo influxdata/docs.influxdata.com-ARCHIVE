@@ -8,20 +8,30 @@ menu:
     parent: work-w-kapacitor
 ---
 
-Integrate Kapacitor into your monitoring system by sending [alert messages](/kapacitor/v1.4/nodes/alert_node/#message) to supported event handlers.
-Currently, Kapacitor can send alert messages to specific log files and specific URLs, as well as to applications like [Slack](https://slack.com/) and [HipChat](https://www.hipchat.com/).
+Kapacitor can be integrated into a monitoring system by sending
+[alert messages](/kapacitor/v1.4/nodes/alert_node/#message) to supported event
+handlers. Currently, Kapacitor can send alert messages to specific log files and
+specific URLs, as well as to many third party applications like
+[Slack](https://slack.com/) and [HipChat](https://www.hipchat.com/).
 
 
-This document offers step-by-step instructions for setting up event handlers with Kapacitor, including the relevant configuration options and [TICKscript](/kapacitor/v1.4/tick/) syntax.
-Currently, this document doesn't cover every supported event handler, but we will continue to add content to this page over time.
-For a complete list of the supported event handlers and for additional information, please see the [event handler reference documentation](/kapacitor/v1.4/nodes/alert_node/).
+This document offers step-by-step instructions for setting up event handlers
+with Kapacitor, including the relevant configuration options and
+[TICKscript](/kapacitor/v1.4/tick/) syntax.  Currently, this document doesn't
+cover every supported event handler, but we will continue to add content to this
+page over time.  For a complete list of the supported event handlers and for
+additional information, please see the
+[event handler reference documentation](/kapacitor/v1.4/nodes/alert_node/).
 
-<table style="width:100%">
+* [HipChat Setup](#hipchat-setup)
+* [Telegram Setup](#telegram-setup)
+
+<!-- table style="width:100%">
   <tr>
     <td><a href="#hipchat-setup">HipChat Setup</a></td>
     <td><a href="#telegram-setup">Telegram Setup</a></td>
   </tr>
-</table>
+</table -->
 
 ## HipChat Setup
 
@@ -31,11 +41,11 @@ Configure Kapacitor to send alert messages to a HipChat room.
 
 ### Requirements
 
-To configure Kapacitor with HipChat, you need:
+To configure Kapacitor with HipChat, the following will be needed:
 
-* your HipChat subdomain name
-* your HipChat room name
-* a HipChat API access token for sending notifications
+* A HipChat subdomain name
+* A HipChat room name
+* A HipChat API access token for sending notifications
 
 > ##### HipChat API Access Token
 ><br>
@@ -46,7 +56,7 @@ person icon in the top right corner.
 >
 **2.** Select `API access` from the items in the left menu sidebar.
 >
-**3.** Under `Create new token`, enter a label for your token (it can be anything).
+**3.** Under `Create new token`, enter a label for the token (it can be anything).
 >
 **4.** Under `Create new token`, select `Send Notification` as the Scope.
 >
@@ -61,15 +71,15 @@ Your token appears in the table just above the `Create new token` section:
 In the `[hipchat]` section of Kapacitor's configuration file, set:
 
 * `enabled` to `true`
-* `subdomain` in the `url` setting to your HipChat subdomain
+* `subdomain` in the `url` setting to the HipChat subdomain
 
 The optional configuration settings are:
 
 `room`  
-&emsp;&emsp;Set to your HipChat room.
+&emsp;&emsp;Set to a HipChat room.
 This serves as the default chat id if the TICKscript doesn't specify a chat id.  
 `token`  
-&emsp;&emsp;Set to your HipChat [API access token](#hipchat-api-access-token).
+&emsp;&emsp;Set to a HipChat [API access token](#hipchat-api-access-token).
 This serves as the default token if the TICKscript doesn't specify an API access token.  
 `global`  
 &emsp;&emsp;Set to `true` to send all alerts to HipChat without needing to specify HipChat in TICKscripts.  
@@ -175,11 +185,11 @@ Configure Kapacitor to send alert messages to a Telegram bot.
 
 ### Requirements
 
-To configure Kapacitor with Telegraf, you need:
+To configure Kapacitor with Telegraf, the following will be needed:
 
 * a Telegram bot
 * a Telegram API access token
-* your Telegram chat id
+* a Telegram chat id
 
 >
 ##### Telegram Bot
@@ -283,14 +293,14 @@ In the example below, the chat id is `123456789`.
 In the `[telegram]` section of Kapacitor's configuration file set:
 
 * `enabled` to `true`
-* `token` to your [API access token](#telegram-api-access-token)
+* `token` to an [API access token](#telegram-api-access-token)
 
 The default `url` setting (`https://api.telegram.org/bot`) requires no additional configuration.
 
 The optional configuration settings are:
 
 `chat_id`  
-&emsp;&emsp;&emsp;Set to your Telegram [chat id](#telegram-chat-id). This serves as the default chat id if the TICKscript doesn't specify a chat id.  
+&emsp;&emsp;&emsp;Set to a Telegram [chat id](#telegram-chat-id). This serves as the default chat id if the TICKscript doesn't specify a chat id.  
 `parse-mode`  
 &emsp;&emsp;&emsp;Set to `Markdown` or `HTML` for markdown-formatted or HTML-formatted alert messages. The default `parse-mode` is `Markdown`.  
 `disable-web-page-preview`  

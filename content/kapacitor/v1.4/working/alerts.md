@@ -23,31 +23,36 @@ Alerts are published to a `topic` and `handlers` subscribe to a topic.
 No matter which approach is used, the handlers need to be enabled and configured
 in the [configuration](/kapacitor/v1.4/administration/configuration/#optional-table-groupings)
 file.  If the handler requires sensitive information such as tokens and
-passwords it can be configured over the [HTTP API](http://localhost:1414/kapacitor/v1.4/working/api/#configuration).
+passwords it can also be configured over the [HTTP API](/kapacitor/v1.4/working/api/#configuration).
 
 ## Push to Handler
 
-Pushing messages to a handler is the basic approach to working with alerts presented
-in the [Getting Stared](/kapacitor/v1.4/introduction/getting_started/#trigger-alert-from-stream-data)
+Pushing messages to a handler is the basic approach presented in the
+[Getting Stared](/kapacitor/v1.4/introduction/getting_started/#trigger-alert-from-stream-data)
 guide. This involves simply calling the relevant chaining method available
 through the `alert` node.  Messages can be pushed to `log()` files, the `email()`
 service, the `httpOut()` cache and more.  
 
-## Subscribe to Topic
+## Publish and Subscribe
 
 An alert topic is simply a namespace where alerts are grouped.
-When an alert event fires it is assigned to a topic.
-Multiple handlers can be bound to a topic and all handlers process each alert event for the topic.
-Handlers get bound to topics through the `kapacitor` command line client and handler binding files.
-Handler binding files can be written in `yaml` or `toml`.
- They contain four key fields.
+When an alert event fires it is published to a topic.
+Multiple handlers can subscribe (can be bound) to a topic and all handlers
+process each alert event for the topic.  Handlers get bound to topics through
+the `kapacitor` command line client and handler binding files.  Handler binding
+files can be written in `yaml` or `json`.  They contain four key fields and one
+optional one.
 
-* `topic` &ndash; declares the topic to which the handler will be bound.
+* `topic` &ndash; declares the topic to which the handler will subscribe.
 * `id` &ndash; declares the identity of the binding.
 * `kind` &ndash; declares the type of event handler to be used.  Note that this
 needs to be enabled in the `kapacitord` configuration.
+* `match` &ndash; (optional) declares a match expression used to filter which
+alert events will be processed. See the section [Match Expressions](#match-expressions)
+below.
 * `options` &ndash; options specific to the handler in question. These are
 listed below in the section [List of handlers](#list-of-handlers)
+
 
 **Example 1 &ndash; A handler binding file for slack and cpu**
 ```
@@ -67,7 +72,12 @@ line client.
 $ kapacitor define-topic-handler slack_cpu_handler.yaml
 ```
 
-See the [Using Alert Topics](/kapacitor/v1.4/working/using_alert_topics) example for a walk through defining and using alert topics.
+Handler bindings can also be created over the HTTP API.  See the
+[Create a Handler](/kapacitor/v1.4/working/api/#create-a-handler) section of
+the HTTP API document.
+
+For a walk through on defining and using alert topics see the
+[Using Alert Topics](/kapacitor/v1.4/working/using_alert_topics) example .
 
 ## Handlers
 
@@ -239,9 +249,9 @@ Options:
 | Name      | Type   | Description                                                                                                           |
 | ----      | ----   | -----------                                                                                                           |
 | device    | string | Specific list of user'devices rather than all of a user's devices (multiple device names may be separated by a comma) |
-| title     | string | Your message's title, otherwise your apps name is used.                                                               |
-| url       | string | A supplementary URL to show with your message.                                                                        |
-| url-title | string | A title for your supplementary URL, otherwise just URL is shown.                                                      |
+| title     | string | The message title, otherwise the apps name is used.                                                               |
+| url       | string | A supplementary URL to show with the message.                                                                        |
+| url-title | string | A title for a supplementary URL, otherwise just the URL is shown.                                                      |
 | sound     | string | The name of one of the sounds supported by the device clients to override the user's default sound choice.            |
 
 
@@ -443,7 +453,7 @@ options:
 
 ## Match Expressions
 
-Alert handlers support match expressions that filters which alert events the handler processes.
+Alert handlers support match expressions that filter which alert events the handler processes.
 
 A match expression is a TICKscript lambda expression.
 The data that triggered the alert is available to the match expression, including all fields and tags.
@@ -464,8 +474,8 @@ Additionally the vars `OK`, `INFO`, `WARNING`, and `CRITICAL` have been defined 
 
 For example to send only critical alerts to a handler, use this match expression:
 
-```
-level() == CRITICAL
+```yaml
+match: level() == CRITICAL
 ```
 
 
@@ -473,19 +483,19 @@ level() == CRITICAL
 
 Send only changed events to the handler:
 
-```
-changed() == TRUE
+```yaml
+match: changed() == TRUE
 ```
 
 
 Send only WARNING and CRITICAL events to the handler:
 
-```
-level() >= WARNING
+```yaml
+match: level() >= WARNING
 ```
 
 Send events with the tag "host" equal to `s001.example.com` to the handler:
 
-```
-"host" == 's001.example.com'
+```yaml
+match: "host" == 's001.example.com'
 ```

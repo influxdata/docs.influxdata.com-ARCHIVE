@@ -10,22 +10,27 @@ menu:
     parent: work-w-kapacitor
 ---
 
-Kapacitor's alert system follows a publish subscribe design pattern.
-Alerts are published to a `topic` and `handlers` subscribe to a topic.
+Kapacitor's alert system allows a publish subscribe design pattern to be used.
+Alerts are published to a `topic` and `handlers` subscribe to it.
 
-This example will walk you through setting up a simple cpu threshold alert that sends alerts to Slack.
+This example will walk the reader through setting up a simple cpu threshold alert that sends alerts to Slack.
 
 ### Requirements
 
-It is expected that you have a working Telegraf and Kapacitor install to walk through this example.
-If you do not please take a second to setup both.
+It is expected that the reader is already familiar the basics of Kapacitor
+presented in the [Getting Started](/kapacitor/v1.4/introduction/getting_started/)
+guide. The reader should also have a basic understanding of working with tasks
+and [TICKscripts](/kapacitor/v1.4/tick/introduction/).
 
+It is further expected that a working Telegraf and Kapacitor are installed to
+walk through this example. If these are not installed, please take a second to
+set both of them up.
 
 ## The Task
 
-We are going to demonstrate how to setup a `cpu` alert topic and send alerts to that topic.
+This walk-through is going to demonstrate how to setup a `cpu` alert topic and send alerts to that topic.
 
-First let's define our simple cpu alert.
+First define a simple cpu alert.
 
 ```go
 dbrp "telegraf"."autogen"
@@ -53,9 +58,11 @@ $ kapacitor enable cpu_alert
 
 ## The Slack handler
 
-At this point we have a Kapacitor task which is generating alerts and sending them to the `cpu` topic, but since the topic does not have any handlers nothing happens with the alerts.
+At this point a Kapacitor task which is generating alerts and sending them to
+the `cpu` topic, but since the topic does not have any handlers nothing happens
+with the alerts.
 
-We can confirm there are no handlers by checking the topic:
+Confirm that there are no handlers by checking the topic:
 
 ```sh
 $ kapacitor show-topic cpu
@@ -74,11 +81,11 @@ cpu:cpu=cpu3,host=localhost      OK       cpu:cpu=cpu3,host=localhost is OK     
 ```
 
 >NOTE: Topics are created only when needed, as such if the task has not triggered an alert yet, the topic will not exist.
-If you get an error about the topic not existing, cause an alert to be triggered.
+If an error about the topic not existing is returned, cause an alert to be triggered.
 Either change the thresholds on the task or create some cpu load.
 
-To configure a handler we must first define the handler.
-A handler definition has a few parts:
+To configure a handler first the handler binding must be defined.
+A handler binding has a few parts:
 
 * Topic - The topic ID.
 * ID - The unique ID of the handler.
@@ -86,7 +93,7 @@ A handler definition has a few parts:
 * Match - A lambda expression to filter matching alerts. By default all alerts match.
 * Options - A map of values, differs by kind.
 
-The slack handler can be defined as either yaml or json, here we use yaml:
+The slack handler binding can be defined in either yaml or json, here yaml is used:
 
 ```yaml
 topic: cpu
@@ -99,8 +106,8 @@ options:
 The above handler definition defines a handler that sends alerts to the slack channel `#alerts`.
 
 Save the above text as `slack.yaml`.
-Now we can define our new handler via the `kapacitor` cli.
-To do this we use the `define-topic-handler` command which takes three arguments.
+Now the new handler can be bound to the topic via the `kapacitor` client.
+To do this the `define-topic-handler` command is used.  It takes one argument.
 
 ```
 $ kapacitor define-topic-handler
@@ -135,11 +142,11 @@ Event                            Level    Message                               
 cpu:cpu=cpu3,host=localhost      OK       cpu:cpu=cpu3,host=localhost is OK      23 Jan 17 14:04 MST
 ```
 
-We are done, future alerts triggered by the `cpu_alert` task will be send to Slack via the `cpu` topic.
+That is it!  Future alerts triggered by the `cpu_alert` task will be sent to Slack via the `cpu` topic.
 
 ## Conclusion
 
-While it is simple to define alert handlers directly in the TICkscript it can become burdensome once you have many tasks.
+While it is simple to define alert handlers directly in the TICKscript, tracking and maintenance can become burdensome once many tasks have been created.
 Using topics decouples the definition of the alert from the handling of the alert.
 Now to change the slack channel is a single API call to update the slack handler and no TICKscripts have to change.
 
@@ -148,10 +155,10 @@ Now to change the slack channel is a single API call to update the slack handler
 ### Chaining topics
 
 Topics can be chained together using the `publish` action.
-This allows you to further group your alerts into various topics.
+This allows alerts to be further grouped into various topics.
 
 For example the above task could be modified to send alerts to the `system` topic instead of the `cpu` topic.
-This way all system related alerts can be handled in a consitent manner.
+This way all system related alerts can be handled in a consistent manner.
 
 The new TICKscript:
 
@@ -182,7 +189,7 @@ options:
 kapacitor define-topic-handler ./publish-to-ops_team.yaml
 ```
 
-Since the operations team has a on-call rotation you can setup handling of alerts on the `ops_team` topic accordingly.
+Since the operations team has an on-call rotation, handling of alerts on the `ops_team` topic can be set up accordingly.
 
 
 ```yaml
@@ -205,7 +212,7 @@ Match conditions can be applied to handlers.
 Only alerts matching the conditions will be handled by that handler.
 
 For example it is typical to only send Slack messages when alerts change state instead of every time an alert is evaluated.
-Modifing the slack handler definition from the first example we get:
+Modifing the slack handler definition from the first example results in the following:
 
 ```yaml
 topic: cpu
