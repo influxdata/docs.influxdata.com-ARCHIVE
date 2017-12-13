@@ -8,8 +8,8 @@ menu:
     parent: work-w-kapacitor
 ---
 
-Data can be pulled from a dynamic list of remote targets with Kapacitor's discovery and scraping features.
-Use those features with Kapacitor's [TICKscripts](/kapacitor/v1.4/tick/) to monitor targets, process the data, and write data to [InfluxDB](/influxdb/v1.3/).
+Data can be pulled from a dynamic list of remote targets with the discovery and scraping features of Kapacitor.
+Use those features with [TICKscripts](/kapacitor/v1.4/tick/) to monitor targets, process the data, and write data to [InfluxDB](/influxdb/v1.3/).
 Currently, Kapacitor supports only Prometheus style targets.
 
 >**Note**: Scraping and discovery is currently under technical preview.
@@ -28,16 +28,14 @@ The diagram below outlines the infrastructure for discovering and scraping data 
 
 <img src="/img/kapacitor/pull-metrics.png" alt="conifguration-open" style="max-width: 1050px;" />
 
-First, Kapacitor implements the discovery process to identify the available targets in your infrastructure.
+1. First, Kapacitor implements the discovery process to identify the available targets in your infrastructure.
 It requests that information at regular intervals and receives that information from an [authority](#available-discoverers).
 In the diagram, the authority informs Kapacitor of three targets: `A`, `B`, and `C`.
-
-Next, Kapacitor implements the scraping process to pull metrics data from the existing targets.
+1. Next, Kapacitor implements the scraping process to pull metrics data from the existing targets.
 It runs the scraping process at regular intervals.
 Here, Kapacitor requests metrics from targets `A`, `B`, and `C`.
 The application running on `A`, `B`, and `C` exposes a `/metrics` endpoint on its HTTP API which returns application-specific statistics.
-
-Finally, Kapacitor processes the data according to configured [TICKscripts](/kapacitor/v1.4/tick/).
+1. Finally, Kapacitor processes the data according to configured [TICKscripts](/kapacitor/v1.4/tick/).
 Use TICKscripts to filter, transform, and perform other tasks on the metrics data.
 In addition, if the data should be stored, configure a TICKscript to send it to [InfluxDB](/influxdb/v1.3/).
 

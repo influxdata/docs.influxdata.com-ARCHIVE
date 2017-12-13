@@ -29,15 +29,15 @@ passwords it can also be configured over the [HTTP API](/kapacitor/v1.4/working/
 
 Pushing messages to a handler is the basic approach presented in the
 [Getting Stared](/kapacitor/v1.4/introduction/getting_started/#trigger-alert-from-stream-data)
-guide. This involves simply calling the relevant chaining method available
+guide. This involves simply calling the relevant chaining method made available
 through the `alert` node.  Messages can be pushed to `log()` files, the `email()`
-service, the `httpOut()` cache and more.  
+service, the `httpOut()` cache and many [third party services](#list-of-handlers).  
 
 ## Publish and Subscribe
 
 An alert topic is simply a namespace where alerts are grouped.
-When an alert event fires it is published to a topic.
-Multiple handlers can subscribe (can be bound) to a topic and all handlers
+When an alert event fires it can be published to a topic.
+Multiple handlers can subscribe (can be bound) to that topic and all handlers
 process each alert event for the topic.  Handlers get bound to topics through
 the `kapacitor` command line client and handler binding files.  Handler binding
 files can be written in `yaml` or `json`.  They contain four key fields and one
@@ -56,7 +56,7 @@ below.
 listed below in the section [List of handlers](#list-of-handlers)
 
 
-**Example 1 &ndash; A handler binding file for slack and cpu**
+**Example 1 &ndash; A handler binding file for the _slack_ handler and _cpu_ topic**
 ```
 topic: cpu
 id: slack
@@ -79,7 +79,7 @@ Handler bindings can also be created over the HTTP API.  See the
 the HTTP API document.
 
 For a walk through on defining and using alert topics see the
-[Using Alert Topics](/kapacitor/v1.4/working/using_alert_topics) example .
+[Using Alert Topics](/kapacitor/v1.4/working/using_alert_topics) walk-through.
 
 ## Handlers
 
@@ -465,7 +465,7 @@ This alert metadata is available via various functions.
 
 | Name     | Type     | Description                                                                                                                |
 | ----     | ----     | -----------                                                                                                                |
-| level    | int      | The alert level of the alert event, one of '0', '1', '2', or '3' corresponding to 'OK', 'INFO', 'WARNING', and 'CRITICAL'. |
+| level    | int      | The alert level of the event, one of '0', '1', '2', or '3' corresponding to 'OK', 'INFO', 'WARNING', and 'CRITICAL'.       |
 | changed  | bool     | Indicates whether the alert level changed with this event.                                                                 |
 | name     | string   | Returns the measurement name of the triggering data.                                                                       |
 | taskName | string   | Returns the task name that generated the alert event.                                                                      |

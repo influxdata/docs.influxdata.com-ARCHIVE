@@ -24,11 +24,11 @@ and [TICKscripts](/kapacitor/v1.4/tick/introduction/).
 
 It is further expected that a working Telegraf and Kapacitor are installed to
 walk through this example. If these are not installed, please take a second to
-set both of them up.
+set up both of them.
 
 ## The Task
 
-This walk-through is going to demonstrate how to setup a `cpu` alert topic and send alerts to that topic.
+This walk-through is going to demonstrate how to set up a `cpu` alert topic and send alerts to that topic.
 
 First define a simple cpu alert.
 
@@ -146,17 +146,17 @@ cpu:cpu=cpu3,host=localhost      OK       cpu:cpu=cpu3,host=localhost is OK     
 
 That is it!  Future alerts triggered by the `cpu_alert` task will be sent to Slack via the `cpu` topic.
 
-## Conclusion
+## Summary
 
 While it is simple to define alert handlers directly in the TICKscript, tracking and maintenance can become burdensome once many tasks have been created.
 Using topics decouples the definition of the alert from the handling of the alert.
-Now to change the slack channel is a single API call to update the slack handler and no TICKscripts have to change.
+With topic and handler bindings defined, to change the slack channel is a single API call to update the slack handler. More importantly, no TICKscripts have to change.
 
 ## Going further
 
 ### Chaining topics
 
-Topics can be chained together using the `publish` action.
+Topics can be chained together using the `publish` action handler.
 This allows alerts to be further grouped into various topics.
 
 For example the above task could be modified to send alerts to the `system` topic instead of the `cpu` topic.
