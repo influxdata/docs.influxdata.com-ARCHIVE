@@ -5,7 +5,7 @@ aliases:
 menu:
   influxdb_1_4:
     weight: 90
-    parent: tools
+    parent: write_protocols
     url: https://github.com/influxdb/influxdb/blob/master/services/opentsdb/README.md
 ---
 
