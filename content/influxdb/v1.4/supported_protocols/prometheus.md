@@ -1,5 +1,5 @@
 ---
-title: Prometheus
+title: Prometheus remote read and write API
 
 menu:
   influxdb_1_4:
@@ -11,32 +11,31 @@ menu:
 
 ##Prometheus
 
-Adds two new endpoints to the `httpd` handler to support prometheus remote read at `/api/v1/prom/read` and remote write at `/api/v1/prom/write`.
+>***Note:*** InfluxDB support for the Prometheus remote read and write API is experimental for both Prometheus and InfluxDB.
+>Prometheus configuration documentation states that their remote_read and remote_write configuration settings are "experimental: breaking changes to configuration are likely in future releases."
+
+
+InfluxDB support for the Prometheus remote read and write API adds the following two HTTP endpoints to the InfluxDB `httpd` handler:
+- `/api/v1/prom/read`
+- `/api/v1/prom/write`
 
 ##Configuration
 
-To enable the use of the Prometheus read and write APIs with InfluxDB, you need to set remote read and write configurations in the following two sections of the [Prometheus configuration file](https://prometheus.io/docs/prometheus/latest/configuration/configuration/):
+To enable the use of the Prometheus remote read and write API with InfluxDB, you need to add URL values to the follwing settings in the [Prometheus configuration file](https://prometheus.io/docs/prometheus/latest/configuration/configuration/):
 - [`remote_write`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#<remote_write>)
 - [`remote_read`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#<remote_read>)
--
 
-Prometheus configuration example:
+
+Example (Prometheus configuration):
 
 ```
-[remote]
 # Remote write configuration (for Graphite, OpenTSDB, or InfluxDB).
 remote_write:
 - url: "http://localhost:8086/api/v1/prom/write?u=paul&p=foo&db=prometheus"
 # Remote read configuration (for InfluxDB only at the moment).
 remote_read:
 - url: "http://localhost:8086/api/v1/prom/read?u=paul&p=foo&db=prometheus"
-
 ```
-
-##Use
-AFter configuring InfluxDB to support the Prometheus read and write APIs, the new endpoints are:
-- `/api/v1/prom/read`
-- `/api/v1/prom/write`
 
 You can use query parameters to pass in the database to write data to and optional user and password.
 
