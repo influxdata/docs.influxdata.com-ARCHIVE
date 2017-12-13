@@ -39,4 +39,4 @@ remote_read:
 
 You can use query parameters to pass in the database to write data to and optional user and password.
 
->***Note:*** Including the password in the config file is not ideal so it would be nice to update Prometheus to be able to read this from an environment variable.
+>***Note:*** Including the password in the config file is not ideal.  See Prometheus issue: ["Support for environment variable substitution in configuration file"](https://github.com/prometheus/prometheus/issues/2357).
