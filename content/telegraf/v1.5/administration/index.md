@@ -8,10 +8,10 @@
      weight: 40
 ---
 
-## [Differences between Telegraf 1.4 and 1.3](/telegraf/v1.4/administration/differences/)
+## [Differences between Telegraf 1.5 and 1.4](/telegraf/v1.5/administration/differences/)
 
-## [Upgrading from Previous Versions](/telegraf/v1.4/administration/upgrading/)
+## [Upgrading from Previous Versions](/telegraf/v1.5/administration/upgrading/)
 
-## [Configuration](/telegraf/v1.4/administration/configuration/)
+## [Configuration](/telegraf/v1.5/administration/configuration/)
 
-## [Running as a Windows Service](/telegraf/v1.4/administration/windows_service/)
+## [Running as a Windows Service](/telegraf/v1.5/administration/windows_service/)

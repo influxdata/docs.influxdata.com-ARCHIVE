@@ -1,7 +1,7 @@
 ---
 title: Getting Started with Telegraf
 aliases:
-    - telegraf/v1.4/introduction/getting-started-telegraf/
+    - telegraf/v1.5/introduction/getting-started-telegraf/
 menu:
   telegraf_1_5:
     name: Getting Started
@@ -27,7 +27,7 @@ Follow the instructions in the Telegraf section on the [Downloads page](https://
 * Standalone Binary: see the next section for how to create a configuration file
 
 ### Creating and Editing the Configuration File
-Before starting the Telegraf server you need to edit and/or create an initial configuration that specifies your desired [inputs](/telegraf/v1.4/inputs/) (where the metrics come from) and [outputs](/telegraf/v1.4/outputs/) (where the metrics go). There are [several ways](/telegraf/v1.4/administration/configuration/) to create and edit the configuration file.
+Before starting the Telegraf server you need to edit and/or create an initial configuration that specifies your desired [inputs](/telegraf/v1.5/inputs/) (where the metrics come from) and [outputs](/telegraf/v1.5/outputs/) (where the metrics go). There are [several ways](/telegraf/v1.5/administration/configuration/) to create and edit the configuration file.
 Here, we'll generate a configuration file and simultaneously specify the desired inputs with the `-input-filter` flag and the desired output with the `-output-filter` flag.
 
 In the example below, we create a configuration file called `telegraf.conf` with two inputs:
@@ -60,7 +60,7 @@ Once Telegraf is up and running it will start collecting data and writing them t
 Returning to our sample configuration, we show what the `cpu` and `mem` data look like in InfluxDB below.
 Note that we used the default input and output configuration settings to get these data.
 
-* List all [measurements](/influxdb/v1.4/concepts/glossary/#measurement) in the `telegraf` [database](/influxdb/v1.3/concepts/glossary/#database):
+* List all [measurements](/influxdb/v1.5/concepts/glossary/#measurement) in the `telegraf` [database](/influxdb/v1.3/concepts/glossary/#database):
 
 ```
 > SHOW MEASUREMENTS
@@ -71,7 +71,7 @@ cpu
 mem
 ```
 
-* List all [field keys](/influxdb/v1.4/concepts/glossary/#field-key) by measurement:
+* List all [field keys](/influxdb/v1.5/concepts/glossary/#field-key) by measurement:
 
 ```
 > SHOW FIELD KEYS
@@ -104,7 +104,7 @@ used			                 integer
 used_percent		          float
 ```
 
-* Select a sample of the data in the [field](/influxdb/v1.4/concepts/glossary/#field) `usage_idle` in the measurement `cpu_usage_idle`:
+* Select a sample of the data in the [field](/influxdb/v1.5/concepts/glossary/#field) `usage_idle` in the measurement `cpu_usage_idle`:
 
 ```bash
 > SELECT usage_idle FROM cpu WHERE cpu = 'cpu-total' LIMIT 5
@@ -122,4 +122,4 @@ time			               usage_idle
 Notice that the timestamps occur at rounded ten second intervals (that is, `:00`, `:10`, `:20`, and so on) - this is a configurable setting.
 
 
-That's it! You now have the foundation for using Telegraf to collect metrics and write them to your output of choice.  
+That's it! You now have the foundation for using Telegraf to collect metrics and write them to your output of choice.

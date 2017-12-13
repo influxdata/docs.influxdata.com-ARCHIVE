@@ -1,10 +1,10 @@
 ---
-title: Telegraf Version 1.4 Documentation
+title: Telegraf Version 1.5 Documentation
 
 menu:
   telegraf:
-    name: v1.4
-    identifier: telegraf_1_4
+    name: v1.5
+    identifier: telegraf_1_5
     weight: 0
 ---
 

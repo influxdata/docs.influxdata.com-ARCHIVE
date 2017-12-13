@@ -8,10 +8,10 @@
      weight: 10
 ---
 
-## [Input Data Formats](/telegraf/v1.4/concepts/data_formats_input/)
+## [Input Data Formats](/telegraf/v1.5/concepts/data_formats_input/)
 
-## [Output Data Formats](/telegraf/v1.4/concepts/data_formats_output/)
+## [Output Data Formats](/telegraf/v1.5/concepts/data_formats_output/)
 
-## [Aggregators and Processor Plugins](/telegraf/v1.4/concepts/aggregator_processor_plugins/)
+## [Aggregators and Processor Plugins](/telegraf/v1.5/concepts/aggregator_processor_plugins/)
 
-## [Glossary](/telegraf/v1.4/concepts/glossary/)
+## [Glossary](/telegraf/v1.5/concepts/glossary/)

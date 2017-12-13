@@ -1,7 +1,7 @@
 ---
 title: Release Notes/Changelog
 menu:
-  telegraf_1_4:
+  telegraf_1_5:
     weight: 0
     parent: about_the_project
 ---
@@ -13,8 +13,7 @@ menu:
 - [bond](./plugins/inputs/bond/README.md) - Thanks to @ildarsv
 - DC/OS [dcos](./plugins/inputs/dcos/README.md) - Thanks to @influxdata
 - [jolokia2](./plugins/inputs/jolokia2/README.md) - Thanks to @dylanmei
-- NGINX Plus [nginx_plus](./plugins/inputs/nginx_plus/README.md) - Thanks to @mplonka &
-@poblahblahblah
+- NGINX Plus [nginx_plus](./plugins/inputs/nginx_plus/README.md) - Thanks to @mplonka & @poblahblahblah
 - [opensmtpd](./plugins/inputs/opensmtpd/README.md) - Thanks to @aromeyer
 - Particle Webhooks [particle](./plugins/inputs/webhooks/particle/README.md) - Thanks to @davidgs
 - OpenBSD/FreeBSD pf [pf](./plugins/inputs/pf/README.md) - Thanks to @nferch
