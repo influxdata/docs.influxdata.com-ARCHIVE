@@ -575,7 +575,7 @@ SectionPagesMenu = "products"
   [[menu.chronograf_1_3]]
   name = "Download"
   identifier = "download"
-  weight = 0
+  weight = 5
   url = "https://influxdata.com/downloads/"
   parent = "Introduction"
 
@@ -583,7 +583,7 @@ SectionPagesMenu = "products"
   [[menu.chronograf_1_0]]
   name = "Download"
   identifier = "download"
-  weight = 0
+  weight = 5
   url = "https://influxdata.com/downloads/"
   parent = "Introduction"
 
@@ -1295,13 +1295,13 @@ SectionPagesMenu = "products"
   [[menu.telegraf_1_4]]
   name = "Printer"
   identifier = "printer"
-  weight = 0
+  weight = 5
   url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/processors/printer"
   parent = "processors"
   [[menu.telegraf_1_4]]
   name = "Histogram"
   identifier = "histogram"
-  weight = 0
+  weight = 7
   url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/aggregators/histogram"
   parent = "aggregators"
   [[menu.telegraf_1_4]]
