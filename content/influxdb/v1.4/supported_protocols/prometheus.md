@@ -3,7 +3,7 @@ title: Prometheus
 
 menu:
   influxdb_1_4:
-    weight: 90
+    weight: 40
     parent: supported_protocols
 ---
 
