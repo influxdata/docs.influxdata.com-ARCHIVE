@@ -11,7 +11,7 @@ SectionPagesMenu = "products"
 [[menu.products]]
   name = "Telegraf"
   identifier = "telegraf"
-  weight = 0
+  weight = 5
   url = "/telegraf/"
 [[menu.products]]
   name = "InfluxDB"
@@ -43,7 +43,7 @@ SectionPagesMenu = "products"
   [[menu.influxdb_1_4]]
     name = "Introduction"
     identifier = "introduction"
-    weight = 0
+    weight = 5
     url = "/influxdb/v1.4/introduction/"
   [[menu.influxdb_1_4]]
     name = "Guides"
