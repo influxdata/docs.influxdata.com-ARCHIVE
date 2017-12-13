@@ -9,7 +9,7 @@ menu:
 ---
 
 
-##Prometheus remote read and write API support
+## Prometheus remote read and write API support
 
 >***Note:*** InfluxDB support for the Prometheus remote read and write API is experimental for both Prometheus and InfluxDB.
 >Prometheus configuration documentation states that their remote_read and remote_write configuration settings are "experimental: breaking changes to configuration are likely in future releases."
@@ -19,7 +19,7 @@ InfluxDB support for the Prometheus remote read and write API adds the following
 - `/api/v1/prom/read`
 - `/api/v1/prom/write`
 
-##Configuration
+## Configuration
 
 To enable the use of the Prometheus remote read and write API with InfluxDB, you need to add URL values to the following settings in the [Prometheus configuration file](https://prometheus.io/docs/prometheus/latest/configuration/configuration/):
 - [`remote_write`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#<remote_write>)
