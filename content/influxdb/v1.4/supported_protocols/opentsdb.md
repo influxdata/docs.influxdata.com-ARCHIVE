@@ -4,7 +4,7 @@ aliases:
     - influxdb/v1.4/supported_protocols/opentsdb/
 menu:
   influxdb_1_4:
-    weight: 90
+    weight: 30
     parent: supported_protocols
     url: https://github.com/influxdb/influxdb/blob/master/services/opentsdb/README.md
 ---
