@@ -100,11 +100,30 @@ SectionPagesMenu = "products"
     identifier = "external_resources"
     weight = 110
     url = "/influxdb/v1.4/external_resources/"
+  # InfluxDB v1.4 Sub-Menu - About
+[[menu.influxdb_1_4]]
+  name = "Contributing"
+  identifier = "contributing"
+  weight = 10
+  url = "https://github.com/influxdb/influxdb/blob/master/CONTRIBUTING.md"
+  parent = "about_the_project"
+[[menu.influxdb_1_4]]
+  name = "CLA"
+  identifier = "cla"
+  weight = 20
+  url = "https://influxdata.com/community/cla/"
+  parent = "about_the_project"
+[[menu.influxdb_1_4]]
+  name = "Licenses"
+  identifier = "licenses"
+  weight = 30
+  url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
+  parent = "about_the_project"
 # InfluxDB v1.4 Sub-Menu - External Resources
 [[menu.influxdb_1_4]]
   name = "InfluxData Blog"
   identifier = "infludatablog"
-  weight = 0
+  weight = 5
   url = "https://www.influxdata.com/blog/"
   parent = "external_resources"
 [[menu.influxdb_1_4]]
@@ -136,7 +155,7 @@ SectionPagesMenu = "products"
 [[menu.influxdb_1_3]]
   name = "Introduction"
   identifier = "introduction"
-  weight = 0
+  weight = 5
   url = "/influxdb/v1.3/introduction/"
 [[menu.influxdb_1_3]]
   name = "Guides"
@@ -192,7 +211,7 @@ SectionPagesMenu = "products"
 [[menu.influxdb_1_3]]
   name = "Download"
   identifier = "download"
-  weight = 0
+  weight = 5
   url = "https://influxdata.com/downloads/#influxdb"
   parent = "introduction"
 # InfluxDB v1.3 Sub-Menu - About
@@ -218,7 +237,7 @@ SectionPagesMenu = "products"
 [[menu.influxdb_1_3]]
   name = "InfluxData Blog"
   identifier = "infludatablog"
-  weight = 0
+  weight = 5
   url = "https://www.influxdata.com/blog/"
   parent = "external_resources"
 [[menu.influxdb_1_3]]
@@ -256,7 +275,7 @@ SectionPagesMenu = "products"
 [[menu.influxdb_1_2]]
   name = "Introduction"
   identifier = "introduction"
-  weight = 0
+  weight = 5
   url = "/influxdb/v1.2/introduction/"
 [[menu.influxdb_1_2]]
   name = "Guides"
@@ -313,7 +332,7 @@ SectionPagesMenu = "products"
 [[menu.influxdb_1_2]]
   name = "Download"
   identifier = "download"
-  weight = 0
+  weight = 5
   url = "https://influxdata.com/downloads/#influxdb"
   parent = "introduction"
 # InfluxDB v1.2 Sub-Menu - About
@@ -340,7 +359,7 @@ SectionPagesMenu = "products"
 [[menu.influxdb_1_2]]
   name = "InfluxData Blog"
   identifier = "infludatablog"
-  weight = 0
+  weight = 5
   url = "https://www.influxdata.com/blog/"
   parent = "external_resources"
 [[menu.influxdb_1_2]]
@@ -378,7 +397,7 @@ SectionPagesMenu = "products"
 [[menu.influxdb_1_1]]
   name = "Introduction"
   identifier = "introduction"
-  weight = 0
+  weight = 5
   url = "/influxdb/v1.1/introduction/"
 [[menu.influxdb_1_1]]
   name = "Guides"
@@ -435,7 +454,7 @@ SectionPagesMenu = "products"
 [[menu.influxdb_1_1]]
   name = "Download"
   identifier = "download"
-  weight = 0
+  weight = 5
   url = "https://influxdata.com/downloads/#influxdb"
   parent = "introduction"
 
@@ -443,7 +462,7 @@ SectionPagesMenu = "products"
 [[menu.influxdb_1_1]]
   name = "Release Notes/Changelog"
   identifier = "changelog"
-  weight = 0
+  weight = 5
   url = "https://github.com/influxdb/influxdb/blob/master/CHANGELOG.md"
   parent = "about"
 [[menu.influxdb_1_1]]
@@ -469,7 +488,7 @@ SectionPagesMenu = "products"
 [[menu.influxdb_1_1]]
   name = "InfluxData Blog"
   identifier = "infludatablog"
-  weight = 0
+  weight = 5
   url = "https://www.influxdata.com/blog/"
   parent = "external_resources"
 [[menu.influxdb_1_1]]
@@ -507,7 +526,7 @@ SectionPagesMenu = "products"
 [[menu.kapacitor_1_0]]
   name = "Download"
   identifier = "download"
-  weight = 0
+  weight = 5
   url = "https://influxdata.com/downloads/#kapacitor"
   parent = "introduction"
 
@@ -515,7 +534,7 @@ SectionPagesMenu = "products"
 [[menu.kapacitor_1_1]]
   name = "Download"
   identifier = "download"
-  weight = 0
+  weight = 5
   url = "https://influxdata.com/downloads/#kapacitor"
   parent = "introduction"
 
@@ -523,7 +542,7 @@ SectionPagesMenu = "products"
 [[menu.kapacitor_1_3]]
   name = "Download"
   identifier = "download"
-  weight = 0
+  weight = 5
   url = "https://influxdata.com/downloads/#kapacitor"
   parent = "introduction"
 
@@ -540,7 +559,7 @@ SectionPagesMenu = "products"
 [[menu.kapacitor_1_2]]
   name = "Download"
   identifier = "download"
-  weight = 0
+  weight = 5
   url = "https://influxdata.com/downloads/#kapacitor"
   parent = "introduction"
 
@@ -548,7 +567,7 @@ SectionPagesMenu = "products"
 [[menu.kapacitor_013]]
   name = "Download"
   identifier = "download"
-  weight = 0
+  weight = 5
   url = "https://influxdata.com/downloads/#kapacitor"
   parent = "introduction"
 
@@ -572,7 +591,7 @@ SectionPagesMenu = "products"
   [[menu.chronograf_013]]
   name = "Download"
   identifier = "download"
-  weight = 0
+  weight = 5
   url = "https://influxdata.com/downloads/#chronograf"
   parent = "Introduction"
 
@@ -580,7 +599,7 @@ SectionPagesMenu = "products"
   [[menu.telegraf_1_4]]
   name = "Amon"
   identifier = "amon_output"
-  weight = 0
+  weight = 5
   url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/outputs/amon"
   parent = "outputs"
   [[menu.telegraf_1_4]]
@@ -714,7 +733,7 @@ SectionPagesMenu = "products"
   [[menu.telegraf_1_4]]
   name = "Download"
   identifier = "download"
-  weight = 0
+  weight = 5
   url = "https://influxdata.com/downloads/#telegraf"
   parent = "introduction"
   [[menu.telegraf_1_4]]
@@ -1202,7 +1221,7 @@ SectionPagesMenu = "products"
   [[menu.telegraf_1_4]]
   name = "HTTP Listener"
   identifier = "http_listener"
-  weight = 0
+  weight = 5
   url = "https://github.com/influxdata/telegraf/tree/release-1.4/plugins/inputs/http_listener"
   parent = "services"
   [[menu.telegraf_1_4]]
@@ -1296,7 +1315,7 @@ SectionPagesMenu = "products"
   [[menu.telegraf_1_3]]
   name = "Amon"
   identifier = "amon_output"
-  weight = 0
+  weight = 5
   url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/outputs/amon"
   parent = "outputs"
   [[menu.telegraf_1_3]]
@@ -1430,7 +1449,7 @@ SectionPagesMenu = "products"
   [[menu.telegraf_1_3]]
   name = "Download"
   identifier = "download"
-  weight = 0
+  weight = 5
   url = "https://influxdata.com/downloads/#telegraf"
   parent = "introduction"
   [[menu.telegraf_1_3]]
@@ -1870,7 +1889,7 @@ SectionPagesMenu = "products"
   [[menu.telegraf_1_3]]
   name = "HTTP Listener"
   identifier = "http_listener"
-  weight = 0
+  weight = 5
   url = "https://github.com/influxdata/telegraf/tree/release-1.3/plugins/inputs/http_listener"
   parent = "services"
   [[menu.telegraf_1_3]]
@@ -2060,7 +2079,7 @@ SectionPagesMenu = "products"
   [[menu.telegraf_1_2]]
   name = "Download"
   identifier = "download"
-  weight = 0
+  weight = 5
   url = "https://influxdata.com/downloads/#telegraf"
   parent = "introduction"
   [[menu.telegraf_1_2]]
@@ -2653,14 +2672,14 @@ SectionPagesMenu = "products"
   [[menu.telegraf_1_1]]
   name = "Download"
   identifier = "download"
-  weight = 0
+  weight = 1
   url = "https://influxdata.com/downloads/#telegraf"
   parent = "introduction"
 
   [[menu.telegraf_1_1]]
   name = "AWS CloudWatch"
   identifier = "aws cloudwatch"
-  weight = 1
+  weight = 5
   url = "https://github.com/influxdata/telegraf/tree/release-1.1.0/plugins/inputs/cloudwatch"
   parent = "inputs"
 
@@ -3198,7 +3217,7 @@ SectionPagesMenu = "products"
    [[menu.telegraf_1_0]]
    name = "Download"
    identifier = "download"
-   weight = 0
+   weight = 5
    url = "https://influxdata.com/downloads/#telegraf"
    parent = "introduction"
 
@@ -3206,7 +3225,7 @@ SectionPagesMenu = "products"
 [[menu.telegraf_1_0]]
  name = "InfluxDB"
  identifier = "influxdb_output"
- weight = 0
+ weight = 5
  url = "https://github.com/influxdata/telegraf/tree/release-1.0.1/plugins/outputs/influxdb"
  parent = "outputs"
 [[menu.telegraf_1_0]]
@@ -3310,7 +3329,7 @@ SectionPagesMenu = "products"
 [[menu.telegraf_1_0]]
 name = "aws cloudwatch"
 identifier = "aws cloudwatch"
-weight = 0
+weight = 5
 url = "https://github.com/influxdata/telegraf/tree/release-1.0.1/plugins/inputs/cloudwatch"
 parent = "inputs"
 
@@ -3759,7 +3778,7 @@ parent = "inputs"
 [[menu.telegraf_1_0]]
  name = "Kafka Consumer"
  identifier = "kafka_consumer_input"
- weight = 0
+ weight = 5
  url = "https://github.com/influxdata/telegraf/tree/release-1.0.1/plugins/inputs/kafka_consumer"
  parent = "services"
 [[menu.telegraf_1_0]]
@@ -3821,7 +3840,7 @@ parent = "inputs"
    [[menu.telegraf_013]]
    name = "Download"
    identifier = "download"
-   weight = 0
+   weight = 5
    url = "https://influxdata.com/downloads/#telegraf"
    parent = "introduction"
 
@@ -3829,7 +3848,7 @@ parent = "inputs"
   [[menu.telegraf_013]]
     name = "InfluxDB"
     identifier = "influxdb_output"
-    weight = 0
+    weight = 5
     url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/influxdb"
     parent = "outputs"
   [[menu.telegraf_013]]
@@ -3933,7 +3952,7 @@ parent = "inputs"
   [[menu.telegraf_013]]
     name = "AWS CloudWatch"
     identifier = "aws_cloudwatch"
-    weight = 0
+    weight = 5
     url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/cloudwatch"
     parent = "inputs"
   [[menu.telegraf_013]]
@@ -4265,7 +4284,7 @@ parent = "inputs"
   [[menu.telegraf_013]]
     name = "Kafka Consumer"
     identifier = "kafka_consumer_input"
-    weight = 0
+    weight = 5
     url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/kafka_consumer"
     parent = "services"
   [[menu.telegraf_013]]
@@ -4309,7 +4328,7 @@ parent = "inputs"
   [[menu.telegraf_012]]
     name = "InfluxDB"
     identifier = "influxdb_output"
-    weight = 0
+    weight = 5
     url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/influxdb"
     parent = "outputs"
   [[menu.telegraf_012]]
@@ -4396,7 +4415,7 @@ parent = "inputs"
   [[menu.telegraf_012]]
     name = "Aerospike"
     identifier = "aerospike_input"
-    weight = 0
+    weight = 5
     url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/aerospike"
     parent = "inputs"
   [[menu.telegraf_012]]
@@ -4698,7 +4717,7 @@ parent = "inputs"
   [[menu.telegraf_012]]
     name = "Kafka Consumer"
     identifier = "kafka_consumer_input"
-    weight = 0
+    weight = 5
     url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/kafka_consumer"
     parent = "services"
   [[menu.telegraf_012]]
@@ -4742,7 +4761,7 @@ parent = "inputs"
   [[menu.telegraf_011]]
     name = "InfluxDB"
     identifier = "influxdb_output"
-    weight = 0
+    weight = 5
     url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/influxdb"
     parent = "outputs"
   [[menu.telegraf_011]]
@@ -4829,7 +4848,7 @@ parent = "inputs"
   [[menu.telegraf_011]]
     name = "Aerospike"
     identifier = "aerospike_input"
-    weight = 0
+    weight = 5
     url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/aerospike"
     parent = "inputs"
   [[menu.telegraf_011]]
@@ -5101,7 +5120,7 @@ parent = "inputs"
   [[menu.telegraf_011]]
     name = "Kafka Consumer"
     identifier = "kafka_consumer_input"
-    weight = 0
+    weight = 5
     url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/kafka_consumer"
     parent = "services"
   [[menu.telegraf_011]]
@@ -5145,7 +5164,7 @@ parent = "inputs"
 [[menu.telegraf_010]]
   name = "InfluxDB"
   identifier = "influxdb_output"
-  weight = 0
+  weight = 5
   url = "https://github.com/influxdata/telegraf/tree/master/plugins/outputs/influxdb"
   parent = "outputs"
 [[menu.telegraf_010]]
@@ -5232,7 +5251,7 @@ parent = "inputs"
 [[menu.telegraf_010]]
   name = "Aerospike"
   identifier = "aerospike_input"
-  weight = 0
+  weight = 5
   url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/aerospike"
   parent = "inputs"
 [[menu.telegraf_010]]
@@ -5486,7 +5505,7 @@ parent = "inputs"
 [[menu.telegraf_010]]
   name = "Kafka Consumer"
   identifier = "kafka_consumer_input"
-  weight = 0
+  weight = 5
   url = "https://github.com/influxdata/telegraf/tree/master/plugins/inputs/kafka_consumer"
   parent = "services"
 [[menu.telegraf_010]]
@@ -5518,7 +5537,7 @@ parent = "inputs"
 [[menu.telegraf_02]]
   name = "InfluxDB"
   identifier = "influxdb"
-  weight = 0
+  weight = 5
   url = "https://github.com/influxdb/telegraf/tree/master/plugins/outputs/influxdb"
   parent = "outputs"
 [[menu.telegraf_02]]
@@ -5587,7 +5606,7 @@ parent = "inputs"
 [[menu.telegraf_02]]
   name = "Aerospike"
   identifier = "aerospike"
-  weight = 0
+  weight = 5
   url = "https://github.com/influxdb/telegraf/tree/master/plugins/inputs/aerospike"
   parent = "plugins"
 [[menu.telegraf_02]]
@@ -5764,7 +5783,7 @@ parent = "inputs"
 [[menu.telegraf_02]]
   name = "StatsD"
   identifier = "statsd"
-  weight = 0
+  weight = 5
   url = "https://github.com/influxdb/telegraf/tree/master/plugins/inputs/statsd"
   parent = "services"
 [[menu.telegraf_02]]
@@ -5778,7 +5797,7 @@ parent = "inputs"
 [[menu.influxdb_1_0]]
   name = "Introduction"
   identifier = "introduction"
-  weight = 0
+  weight = 5
   url = "/influxdb/v1.0/introduction/"
 [[menu.influxdb_1_0]]
   name = "Guides"
@@ -5835,7 +5854,7 @@ parent = "inputs"
   [[menu.influxdb_1_0]]
     name = "Download"
     identifier = "download"
-    weight = 0
+    weight = 5
     url = "https://influxdata.com/downloads/#influxdb"
     parent = "introduction"
 
@@ -5843,7 +5862,7 @@ parent = "inputs"
   [[menu.influxdb_1_0]]
     name = "Release Notes/Changelog"
     identifier = "changelog"
-    weight = 0
+    weight = 5
     url = "https://github.com/influxdb/influxdb/blob/master/CHANGELOG.md"
     parent = "about"
   [[menu.influxdb_1_0]]
@@ -5869,7 +5888,7 @@ parent = "inputs"
   [[menu.influxdb_013]]
     name = "Introduction"
     identifier = "introduction"
-    weight = 0
+    weight = 5
     url = "/influxdb/v0.13/introduction/"
   [[menu.influxdb_013]]
     name = "Guides"
@@ -5926,7 +5945,7 @@ parent = "inputs"
   [[menu.influxdb_013]]
     name = "Download"
     identifier = "download"
-    weight = 0
+    weight = 5
     url = "https://influxdata.com/downloads/#influxdb"
     parent = "introduction"
 
@@ -5934,7 +5953,7 @@ parent = "inputs"
   [[menu.influxdb_013]]
     name = "Release Notes/Changelog"
     identifier = "changelog"
-    weight = 0
+    weight = 5
     url = "https://github.com/influxdb/influxdb/blob/master/CHANGELOG.md"
     parent = "about"
   [[menu.influxdb_013]]
@@ -5960,7 +5979,7 @@ parent = "inputs"
   [[menu.influxdb_012]]
     name = "Introduction"
     identifier = "introduction"
-    weight = 0
+    weight = 5
     url = "/influxdb/v0.12/introduction/"
   [[menu.influxdb_012]]
     name = "Guides"
@@ -6017,7 +6036,7 @@ parent = "inputs"
   [[menu.influxdb_012]]
     name = "Download"
     identifier = "download"
-    weight = 0
+    weight = 5
     url = "https://influxdata.com/downloads/#influxdb"
     parent = "introduction"
 
@@ -6025,7 +6044,7 @@ parent = "inputs"
   [[menu.influxdb_012]]
     name = "Release Notes/Changelog"
     identifier = "changelog"
-    weight = 0
+    weight = 5
     url = "https://github.com/influxdb/influxdb/blob/master/CHANGELOG.md"
     parent = "about"
   [[menu.influxdb_012]]
@@ -6051,7 +6070,7 @@ parent = "inputs"
 [[menu.influxdb_011]]
   name = "Introduction"
   identifier = "introduction"
-  weight = 0
+  weight = 5
   url = "/influxdb/v0.11/introduction/"
 [[menu.influxdb_011]]
   name = "Guides"
@@ -6103,7 +6122,7 @@ parent = "inputs"
 [[menu.influxdb_011]]
   name = "Download"
   identifier = "download"
-  weight = 0
+  weight = 5
   url = "https://influxdata.com/downloads/#influxdb"
   parent = "introduction"
 
@@ -6111,7 +6130,7 @@ parent = "inputs"
 [[menu.influxdb_011]]
   name = "Release Notes/Changelog"
   identifier = "changelog"
-  weight = 0
+  weight = 5
   url = "https://github.com/influxdb/influxdb/blob/master/CHANGELOG.md"
   parent = "about"
 [[menu.influxdb_011]]
@@ -6138,7 +6157,7 @@ parent = "inputs"
 [[menu.influxdb_010]]
   name = "Introduction"
   identifier = "introduction"
-  weight = 0
+  weight = 5
   url = "/influxdb/v0.10/introduction/"
 [[menu.influxdb_010]]
   name = "Guides"
@@ -6190,7 +6209,7 @@ parent = "inputs"
 [[menu.influxdb_010]]
   name = "Download"
   identifier = "download"
-  weight = 0
+  weight = 5
   url = "https://influxdata.com/downloads/#influxdb"
   parent = "introduction"
 
@@ -6198,7 +6217,7 @@ parent = "inputs"
 [[menu.influxdb_010]]
   name = "Release Notes/Changelog"
   identifier = "changelog"
-  weight = 0
+  weight = 5
   url = "https://github.com/influxdb/influxdb/blob/master/CHANGELOG.md"
   parent = "about"
 [[menu.influxdb_010]]
@@ -6225,7 +6244,7 @@ parent = "inputs"
 [[menu.influxdb_09]]
   name = "Introduction"
   identifier = "introduction"
-  weight = 0
+  weight = 5
   url = "/influxdb/v0.9/introduction/"
 [[menu.influxdb_09]]
   name = "Guides"
@@ -6277,7 +6296,7 @@ parent = "inputs"
 [[menu.influxdb_09]]
   name = "Download"
   identifier = "download"
-  weight = 0
+  weight = 5
   url = "https://influxdata.com/downloads/#influxdb"
   parent = "introduction"
 
@@ -6285,7 +6304,7 @@ parent = "inputs"
 [[menu.influxdb_09]]
   name = "Release Notes/Changelog"
   identifier = "changelog"
-  weight = 0
+  weight = 5
   url = "https://github.com/influxdb/influxdb/blob/master/CHANGELOG.md"
   parent = "about"
 [[menu.influxdb_09]]
@@ -6312,7 +6331,7 @@ parent = "inputs"
 [[menu.influxdb_08]]
   name = "Introduction"
   identifier = "introduction"
-  weight = 0
+  weight = 5
   url = "/influxdb/v0.8/introduction/"
 [[menu.influxdb_08]]
   name = "API"
@@ -6467,29 +6486,29 @@ parent = "inputs"
 # InfluxDB v0.8 Sub-Menu - Contributing
 [[menu.influxdb_08]]
   name = "Building and Contributing"
-  weight = 0
+  weight = 5
   url = "https://github.com/influxdb/influxdb/blob/master/docs/contributing.md"
   parent = "contributing"
 [[menu.influxdb_08]]
   name = "CLA"
-  weight = 0
+  weight = 10
   url = "https://influxdata.com/community/cla.html"
   parent = "contributing"
 [[menu.influxdb_08]]
   name = "To this Documentation"
-  weight = 0
+  weight = 20
   url = "https://github.com/influxdb/docs.influxdata.com.html"
   parent = "contributing"
 [[menu.influxdb_08]]
   name = "License (MIT)"
-  weight = 0
+  weight = 30
   url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
   parent = "contributing"
 
 # InfluxDB v0.8 Sub-Menu - Tools
 [[menu.influxdb_08]]
   name = "CLI (Go)"
-  weight = 0
+  weight = 5
   url = "https://github.com/Dieterbe/influx-cli"
   parent = "tools"
 [[menu.influxdb_08]]
@@ -6578,7 +6597,7 @@ parent = "inputs"
 [[menu.influxdb_07]]
   name = "Introduction"
   identifier = "introduction"
-  weight = 0
+  weight = 5
   url = "/influxdb/v0.7/introduction/"
 [[menu.influxdb_07]]
   name = "API"
@@ -6710,7 +6729,7 @@ parent = "inputs"
 # InfluxDB v0.7 Sub-Menu - Contributing
 [[menu.influxdb_07]]
   name = "CLA"
-  weight = 0
+  weight = 5
   url = "https://influxdata.com/community/cla.html"
   parent = "contributing"
 [[menu.influxdb_07]]
@@ -6727,7 +6746,7 @@ parent = "inputs"
 # InfluxDB v0.7 Sub-Menu - Tools
 [[menu.influxdb_07]]
   name = "CLI (Node)"
-  weight = 0
+  weight = 5
   url = "https://github.com/FGRibreau/influxdb-cli"
   parent = "tools"
 [[menu.influxdb_07]]
@@ -6786,7 +6805,7 @@ parent = "inputs"
 [[menu.influxdb_06]]
   name = "Introduction"
   identifier = "introduction"
-  weight = 0
+  weight = 5
   url = "/influxdb/v0.6/introduction/"
 [[menu.influxdb_06]]
   name = "API"
@@ -6896,7 +6915,7 @@ parent = "inputs"
 # InfluxDB v0.6 Sub-Menu - Contributing
 [[menu.influxdb_06]]
   name = "CLA"
-  weight = 0
+  weight = 5
   url = "https://influxdata.com/community/cla.html"
   parent = "contributing"
 [[menu.influxdb_06]]
@@ -6913,7 +6932,7 @@ parent = "inputs"
 # InfluxDB v0.6 Sub-Menu - Tools
 [[menu.influxdb_06]]
   name = "CLI (Node)"
-  weight = 0
+  weight = 5
   url = "https://github.com/FGRibreau/influxdb-cli"
   parent = "tools"
 [[menu.influxdb_06]]
