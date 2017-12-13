@@ -1,7 +1,7 @@
 ---
 title: Installation
 menu:
-  telegraf_1_4:
+  telegraf_1_5:
     weight: 10
     parent: introduction
 ---

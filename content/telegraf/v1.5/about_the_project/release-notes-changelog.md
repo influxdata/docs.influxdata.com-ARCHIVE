@@ -8,21 +8,29 @@ menu:
 ## v1.5 [unreleased]
 
 ### New Plugins
-- [basicstats](./plugins/aggregators/basicstats/README.md) - Thanks to @toni-moreno
+
+#### Input
 - [bond](./plugins/inputs/bond/README.md) - Thanks to @ildarsv
-- [cratedb](./plugins/outputs/wavefront/README.md) - Thanks to @felixge
-- [dcos](./plugins/inputs/dcos/README.md) - Thanks to @influxdata
+- DC/OS [dcos](./plugins/inputs/dcos/README.md) - Thanks to @influxdata
 - [jolokia2](./plugins/inputs/jolokia2/README.md) - Thanks to @dylanmei
-- [nginx_plus](./plugins/inputs/nginx_plus/README.md) - Thanks to @mplonka & @poblahblahblah
+- NGINX Plus [nginx_plus](./plugins/inputs/nginx_plus/README.md) - Thanks to @mplonka &
+@poblahblahblah
 - [opensmtpd](./plugins/inputs/opensmtpd/README.md) - Thanks to @aromeyer
-- [particle](./plugins/inputs/webhooks/particle/README.md) - Thanks to @davidgs
-- [pf](./plugins/inputs/pf/README.md) - Thanks to @nferch
+- Particle Webhooks [particle](./plugins/inputs/webhooks/particle/README.md) - Thanks to @davidgs
+- OpenBSD/FreeBSD pf [pf](./plugins/inputs/pf/README.md) - Thanks to @nferch
 - [postfix](./plugins/inputs/postfix/README.md) - Thanks to @phemmer
 - [smart](./plugins/inputs/smart/README.md) - Thanks to @rickard-von-essen
-- [solr](./plugins/inputs/solr/README.md) - Thanks to @ljagiello
-- [teamspeak](./plugins/inputs/teamspeak/README.md) - Thanks to @p4ddy1
-- [unbound](./plugins/inputs/unbound/README.md) - Thanks to @aromeyer
-- [wavefront](./plugins/outputs/wavefront/README.md) - Thanks to @puckpuck
+- Solr [solr](./plugins/inputs/solr/README.md) - Thanks to @ljagiello
+- Teamspeak [teamspeak](./plugins/inputs/teamspeak/README.md) - Thanks to @p4ddy1
+- Unbound [unbound](./plugins/inputs/unbound/README.md) - Thanks to @aromeyer
+
+#### Aggregator
+- [basicstats](./plugins/aggregators/basicstats/README.md) - Thanks to @toni-moreno
+
+#### Output
+- CrateDB [cratedb](./plugins/outputs/wavefront/README.md) - Thanks to @felixge
+- Wavefront [wavefront](./plugins/outputs/wavefront/README.md) - Thanks to @puckpuck
+
 
 ### Release Notes
 
@@ -47,18 +55,14 @@ menu:
 - Add resource limit monitoring to procstat.
 - Add support for k8s service DNS discovery to prometheus input.
 - Add configurable metrics endpoint to prometheus output.
-- Add new nginx_plus input plugin.
 - Add support for NSQLookupd to nsq_consumer.
-- Add redesigned Jolokia input plugin.
 - Add configurable separator for metrics and fields in opentsdb output.
 - Add support for the rollbar occurrence webhook event.
-- Add Wavefront output plugin.
 - Add extra wired tiger cache metrics to mongodb input.
 - Collect Docker Swarm service metrics in docker input plugin.
 - Add smart input plugin for collecting S.M.A.R.T. data.
 - Add cluster health level configuration to elasticsearch input.
 - Add ability to limit node stats in elasticsearch input.
-- Add new basicstats aggregator.
 - Add UDP IPv6 support to statsd input.
 - Use labels in prometheus output for string fields.
 - Add support for decimal timestamps to ts-epoch modifier.
@@ -67,23 +71,13 @@ menu:
 - Perform DNS lookup before ping and report result.
 - Add instance name option to varnish plugin.
 - Add support for SSL settings to ElasticSearch output plugin.
-- Add Teamspeak 3 input plugin.
 - Add modification_time field to filestat input plugin.
-- Add Solr input plugin.
-- Add CrateDB output plugin.
 - Add systemd unit pid and cgroup matching to procstat.
-- Add Particle Webhook Plugin.
 - Use MAX() instead of SUM() for latency measurements in sqlserver.
 - Add index by week number to Elasticsearch output.
-- Add unbound input plugin.
-- Add opensmtpd input plugin.
 - Add support for tags in the index name in elasticsearch output.
-- Add postfix input plugin.
-- Add bond input plugin.
 - Add slab to mem plugin.
-- Add input plugin for DC/OS.
 - Add support for glob patterns in net input plugin.
-- Add input plugin for OpenBSD/FreeBSD pf.
 - Add option to amqp output to publish persistent messages.
 - Support I (idle) process state on procfs+Linux.
 
@@ -102,7 +96,7 @@ menu:
 - Use deb-systemd-invoke to restart service.
 - Fix kafka_consumer outside range of offsets error.
 - Fix separation of multiple prometheus_client outputs.
-- *Don't add system input uptime_format as a counter.
+- Don't add system input uptime_format as a counter.
 
 ## v1.4.5 [2017-12-01]
 
