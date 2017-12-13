@@ -1,11 +1,11 @@
 ---
-title: Service Plugin - OpenTSDB
+title: OpenTSDB
 aliases:
-    - influxdb/v1.4/write_protocols/opentsdb/
+    - influxdb/v1.4/supported_protocols/opentsdb/
 menu:
   influxdb_1_4:
     weight: 90
-    parent: write_protocols
+    parent: supported_protocols
     url: https://github.com/influxdb/influxdb/blob/master/services/opentsdb/README.md
 ---
 

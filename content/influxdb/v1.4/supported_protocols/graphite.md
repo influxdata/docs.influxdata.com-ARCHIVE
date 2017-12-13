@@ -1,5 +1,5 @@
 ---
-title: Service Plugin - Graphite
+title: Graphite
 aliases:
     - influxdb/v1.4/supported_protocols/graphite/
 menu:
