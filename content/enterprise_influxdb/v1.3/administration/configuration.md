@@ -760,13 +760,18 @@ Environment variable: `INFLUXDB_SHARD_PRECREATION_ADVANCE_PERIOD`
 ## [admin]
 
 In version 1.3, the web admin interface is no longer available in InfluxDB.
-The interface does not run on port 8083 and InfluxDB ignores the [admin] section in the configuration file
-if that section is present.
-[Chronograf](/chronograf/latest) replaces the web admin interface with improved tooling for querying data, 
-writing data, and database management.
+The interface does not run on port 8083 and InfluxDB ignores the [admin] section in the configuration file if that section is present.
+[Chronograf](/chronograf/latest) replaces the web admin interface with improved tooling for querying data, writing data, and database management.
 See [Chronograf's transition guide](/chronograf/latest/guides/transition-web-admin-interface/) for more information.
 
 ## [monitor]
+
+By default, InfluxDB writes system monitoring data to the `_internal` database. If that database does not exist, InfluxDB creates it automatically. The `DEFAULT` retention policy on the `internal` database is seven days. To change the default seven-day retention policy, you must [create](/influxdb/v1.3/query_language/database_management/#retention-policy-management) it.
+
+For InfluxEnterprise production systems, InfluxData recommends including a dedicated InfluxDB (OSS) monitoring instance for monitoring InfluxEnterprise cluster nodes. 
+
+* On the dedicated InfluxDB monitoring instance, set `store-enabled = false` to avoid potential performance and storage issues.
+* On each InfluxDB cluster node, install a Telegraf input plugin and Telegraf output plugin configured to report data to the dedicated InfluxDB monitoring instance.
 
 See the [OSS documentation](/influxdb/v1.3/administration/config/#monitor).
 
