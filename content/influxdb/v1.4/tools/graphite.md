@@ -1,11 +1,11 @@
 ---
 title: Service Plugin - Graphite
 aliases:
-    - influxdb/v1.4/write_protocols/graphite/
+    - influxdb/v1.4/supported_protocols/graphite/
 menu:
   influxdb_1_4:
     weight: 70
-    parent: tools
+    parent: supported_protocols
     url: https://github.com/influxdata/influxdb/blob/master/services/graphite/README.md
 ---
 
