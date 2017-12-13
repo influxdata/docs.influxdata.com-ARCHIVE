@@ -74,7 +74,7 @@ SectionPagesMenu = "products"
       name = "Supported Protocols"
       identifier = "supported_protocols"
       weight = 60
-      url = "/influxdb/v1.4/write_protocols/"
+      url = "/influxdb/v1.4/supported_protocols/"
   [[menu.influxdb_1_4]]
     name = "Query Language"
     identifier = "query_language"
