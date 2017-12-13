@@ -100,6 +100,37 @@ SectionPagesMenu = "products"
     identifier = "external_resources"
     weight = 110
     url = "/influxdb/v1.4/external_resources/"
+# InfluxDB v1.4 Sub-Menu - External Resources
+[[menu.influxdb_1_4]]
+  name = "InfluxData Blog"
+  identifier = "infludatablog"
+  weight = 0
+  url = "https://www.influxdata.com/blog/"
+  parent = "external_resources"
+[[menu.influxdb_1_4]]
+  name = "Technical Papers"
+  identifier = "technicalpapers"
+  weight = 10
+  url = "https://www.influxdata.com/technical-papers/"
+  parent = "external_resources"
+[[menu.influxdb_1_4]]
+  name = "Meetup Videos"
+  identifier = "meetupvideos"
+  weight = 20
+  url = "https://www.influxdata.com/videos/"
+  parent = "external_resources"
+[[menu.influxdb_1_4]]
+  name = "Virtual Training Videos"
+  identifier = "virtualtrainingvideos"
+  weight = 30
+  url = "https://www.influxdata.com/videos-training/"
+  parent = "external_resources"
+[[menu.influxdb_1_4]]
+  name = "Virtual Training Schedule"
+  identifier = "virtualtrainingschedule"
+  weight = 40
+  url = "https://www.influxdata.com/virtual-training-courses/"
+  parent = "external_resources"
 
 # InfluxDB v1.3 Menu
 [[menu.influxdb_1_3]]
