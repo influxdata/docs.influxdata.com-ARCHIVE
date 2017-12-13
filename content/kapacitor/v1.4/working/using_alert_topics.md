@@ -80,8 +80,9 @@ Event                            Level    Message                               
 cpu:cpu=cpu3,host=localhost      OK       cpu:cpu=cpu3,host=localhost is OK      23 Jan 17 14:04 MST
 ```
 
->NOTE: Topics are created only when needed, as such if the task has not triggered an alert yet, the topic will not exist.
-If an error about the topic not existing is returned, cause an alert to be triggered.
+>NOTE: If the error message `unkown topic: "cpu"` is returned, please be aware,
+that topics are created only when needed, as such if the task has not triggered an alert yet, the topic will not exist.
+If this error about the topic not existing is returned, then, try and cause an alert to be triggered.
 Either change the thresholds on the task or create some cpu load.
 
 <!-- fixes defect 1003-->
@@ -176,7 +177,7 @@ stream
         .topic('system')
 ```
 
-To send all system alerts to Slack, create a new handler for the system topic.
+To send all system alerts to a new topic `ops_team`, create a new handler for the `system` topic.
 
 ```yaml
 topic: system
