@@ -1,5 +1,5 @@
 ---
-title: Prometheus remote read and write API
+title: Prometheus
 
 menu:
   influxdb_1_4:
@@ -9,7 +9,7 @@ menu:
 ---
 
 
-##Prometheus
+##Prometheus remote read and write API support
 
 >***Note:*** InfluxDB support for the Prometheus remote read and write API is experimental for both Prometheus and InfluxDB.
 >Prometheus configuration documentation states that their remote_read and remote_write configuration settings are "experimental: breaking changes to configuration are likely in future releases."
