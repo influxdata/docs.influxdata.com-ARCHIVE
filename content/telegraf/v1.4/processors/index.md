@@ -2,7 +2,7 @@
 title: Supported Processors
 
 menu:
-  telegraf_1_4:
+  telegraf_1_5:
     name: Processors
     identifier: processors
     weight: 20

@@ -3,7 +3,7 @@ title: Getting Started with Telegraf
 aliases:
     - telegraf/v1.4/introduction/getting-started-telegraf/
 menu:
-  telegraf_1_4:
+  telegraf_1_5:
     name: Getting Started
     weight: 20
     parent: introduction

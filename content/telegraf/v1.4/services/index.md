@@ -2,7 +2,7 @@
 title: Supported Service Inputs
 
 menu:
-  telegraf_1_4:
+  telegraf_1_5:
     name: Service Inputs
     identifier: services
     weight: 30
