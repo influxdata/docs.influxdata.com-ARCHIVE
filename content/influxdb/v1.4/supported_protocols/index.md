@@ -15,8 +15,8 @@ The Graphite plugin allows measurements to be saved using the Graphite line prot
 InfluxDB supports both the telnet and HTTP OpenTSDB protocol.
 This means that InfluxDB can act as a drop-in replacement for your OpenTSDB system.
 
-###[Prometheus](/supported_protocols/prometheus.md)
-InfluxDB provides native support for the Prometheus read and write API to convert remote reads and writes to InfluxDB queries and endpoints. 
+###[Prometheus](https://github.com/influxdb/influxdb/blob/master/supported_protocols/prometheus.md)
+InfluxDB provides native support for the Prometheus read and write API to convert remote reads and writes to InfluxDB queries and endpoints.
 
-###[UDP (User Datagram Protocol)](https://github.com/influxdata/influxdb/blob/master/services/udp/README.md)
+###[UDP](https://github.com/influxdata/influxdb/blob/master/services/udp/README.md)
 UDP (User Datagram Protocol) can be used to write to InfluxDB. The CollectD input accepts data transmitted in collectd native format over UDP.
