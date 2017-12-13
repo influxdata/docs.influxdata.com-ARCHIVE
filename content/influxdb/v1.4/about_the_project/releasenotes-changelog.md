@@ -2,7 +2,7 @@
 title: Release Notes/Changelog
 menu:
   influxdb_1_4:
-    weight: 0
+    weight: 1
     parent: about_the_project
 ---
 
