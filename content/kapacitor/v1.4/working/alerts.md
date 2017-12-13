@@ -43,6 +43,8 @@ the `kapacitor` command line client and handler binding files.  Handler binding
 files can be written in `yaml` or `json`.  They contain four key fields and one
 optional one.
 
+<!-- fixes defect 1003 -->
+
 * `topic` &ndash; declares the topic to which the handler will subscribe.
 * `id` &ndash; declares the identity of the binding.
 * `kind` &ndash; declares the type of event handler to be used.  Note that this

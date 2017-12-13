@@ -84,6 +84,8 @@ cpu:cpu=cpu3,host=localhost      OK       cpu:cpu=cpu3,host=localhost is OK     
 If an error about the topic not existing is returned, cause an alert to be triggered.
 Either change the thresholds on the task or create some cpu load.
 
+<!-- fixes defect 1003-->
+
 To configure a handler first the handler binding must be defined.
 A handler binding has a few parts:
 

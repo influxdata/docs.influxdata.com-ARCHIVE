@@ -30,7 +30,7 @@ Before proceeding with the Kapacitor upgrade please ensure that InfluxDB and Tel
    * Telegraf 1.4
    * Kapacitor 1.4
 
-For instructions on upgrading InfluxDB, please see the [InfluxDB upgrade](https://docs.influxdata.com/influxdb/latest/administration/upgrading/#main-nav) documentation. For instructions on upgrading Telegraf, please see the [Telegraf upgrade](https://docs.influxdata.com/telegraf/latest/administration/upgrading/#main-nav) documentation.
+For instructions on upgrading InfluxDB, please see the [InfluxDB upgrade](/influxdb/latest/administration/upgrading/#main-nav) documentation. For instructions on upgrading Telegraf, please see the [Telegraf upgrade](/telegraf/latest/administration/upgrading/#main-nav) documentation.
 
 For information about what is new in the latest Kapacitor release, please see the [Changelog](https://github.com/influxdata/kapacitor/blob/master/CHANGELOG.md) available on GitHub.
 
@@ -469,6 +469,6 @@ cpu_alert_batch  batch     disabled  false     ["telegraf"."autogen"]
 cpu_alert_stream stream    enabled   true      ["telegraf"."autogen"]
 ```
 
-Test recording existing tasks and replaying the results is also recommended for checking the status of the newly upgraded Kapacitor service.  Which tasks to record will depend on the specifics of the installation.  Please see the [Kapacitor API documentation](https://docs.influxdata.com/kapacitor/v1.4/api/api#recordings) for more details.  
+Test recording existing tasks and replaying the results is also recommended for checking the status of the newly upgraded Kapacitor service.  Which tasks to record will depend on the specifics of the installation.  Please see the [Kapacitor API documentation](/kapacitor/v1.4/working/api#recordings) for more details.  
 
 If these checks look correct, then the upgrade can be considered complete.
