@@ -100,3 +100,5 @@ Kapacitor supports the following services for discovery:
 
 
 See the example [configuration file](https://github.com/influxdata/kapacitor/blob/master/etc/kapacitor/kapacitor.conf) for details on configuring each discoverer.
+
+

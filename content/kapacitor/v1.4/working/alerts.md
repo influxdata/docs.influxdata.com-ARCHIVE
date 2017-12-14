@@ -501,3 +501,5 @@ Send events with the tag "host" equal to `s001.example.com` to the handler:
 ```yaml
 match: "host" == 's001.example.com'
 ```
+
+

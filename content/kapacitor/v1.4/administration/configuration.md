@@ -866,3 +866,4 @@ Property overrides can be removed with the `delete` field in the JSON document.
 By POSTing this document to the `/kapacitor/v1/config/smtp/` endpoint the SMTP
 override is removed and Kapacitor reverts to the behavior defined in the
 configuration file.
+ 

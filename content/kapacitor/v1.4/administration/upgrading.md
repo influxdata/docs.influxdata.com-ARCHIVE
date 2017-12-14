@@ -472,3 +472,4 @@ cpu_alert_stream stream    enabled   true      ["telegraf"."autogen"]
 Test recording existing tasks and replaying the results is also recommended for checking the status of the newly upgraded Kapacitor service.  Which tasks to record will depend on the specifics of the installation.  Please see the [Kapacitor API documentation](/kapacitor/v1.4/working/api#recordings) for more details.  
 
 If these checks look correct, then the upgrade can be considered complete.
+ 

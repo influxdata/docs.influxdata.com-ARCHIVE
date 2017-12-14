@@ -451,3 +451,5 @@ Also presented was how to enable Kapacitor tasks to write alerts to the
 `chronograf` database in InfluxDB, so that they will be visible in the
 _Alert History_ of Chronograf.  By adding Chronograf variables to a _simple_
 alert TICKscript, the task will be editable in Chronograf.
+
+
