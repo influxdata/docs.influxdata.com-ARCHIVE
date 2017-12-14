@@ -107,13 +107,13 @@ Perform the following steps on all three servers.
 
 #### Ubuntu & Debian (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.3.7-c1.3.7_amd64.deb
-sudo dpkg -i influxdb-meta_1.3.7-c1.3.7_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.3.8-c1.3.8_amd64.deb
+sudo dpkg -i influxdb-meta_1.3.8-c1.3.8_amd64.deb
 ```
 #### RedHat & CentOS (64-bit)]
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.3.7_c1.3.7.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.3.7_c1.3.7.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.3.8_c1.3.8.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.3.8_c1.3.8.x86_64.rpm
 ```
 
 ### II. Edit the Meta Service Configuration File
@@ -172,13 +172,13 @@ Perform the following steps on all three servers.
 
 #### Ubuntu & Debian (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.3.7-c1.3.7_amd64.deb
-sudo dpkg -i influxdb-data_1.3.7-c1.3.7_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.3.8-c1.3.8_amd64.deb
+sudo dpkg -i influxdb-data_1.3.8-c1.3.8_amd64.deb
 ```
 #### RedHat & CentOS (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.3.7_c1.3.7.x86_64.rpm
-sudo yum localinstall influxdb-data-1.3.7_c1.3.7.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.3.8_c1.3.8.x86_64.rpm
+sudo yum localinstall influxdb-data-1.3.8_c1.3.8.x86_64.rpm
 ```
 
 ### II. Edit the Data Service Configuration File
@@ -341,16 +341,16 @@ The expected output is:
 Data Nodes
 ==========
 ID   TCP Address                  Version
-2    quickstart-cluster-01:8088   1.3.7-c1.3.7
-4    quickstart-cluster-02:8088   1.3.7-c1.3.7
-6    quickstart-cluster-03:8088   1.3.7-c1.3.7
+2    quickstart-cluster-01:8088   1.3.8-c1.3.8
+4    quickstart-cluster-02:8088   1.3.8-c1.3.8
+6    quickstart-cluster-03:8088   1.3.8-c1.3.8
 
 Meta Nodes
 ==========
 TCP Address                  Version
-quickstart-cluster-01:8091   1.3.7-c1.3.7
-quickstart-cluster-02:8091   1.3.7-c1.3.7
-quickstart-cluster-03:8091   1.3.7-c1.3.7
+quickstart-cluster-01:8091   1.3.8-c1.3.8
+quickstart-cluster-02:8091   1.3.8-c1.3.8
+quickstart-cluster-03:8091   1.3.8-c1.3.8
 ```
 
 Your cluster should have three data nodes and three meta nodes.

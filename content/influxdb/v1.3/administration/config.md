@@ -4,6 +4,7 @@ menu:
   influxdb_1_3:
     weight: 70
     parent: administration
+
 ---
 
 The InfluxDB configuration file contains configuration settings specific to a local node.
@@ -176,13 +177,13 @@ The configuration options in this document are set to their default settings.
 
 Configuration options that specify a duration support the following duration units:
 
-`ns`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;nanoseconds  
-`us` or `µs`&emsp;microseconds  
-`ms`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;milliseconds  
-`s`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;seconds  
-`m`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;minutes  
-`h`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;hours  
-`d`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;days  
+`ns`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;nanoseconds
+`us` or `µs`&emsp;microseconds
+`ms`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;milliseconds
+`s`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;seconds
+`m`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;minutes
+`h`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;hours
+`d`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;days
 `w`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;weeks
 
 >**Note:** This page documents configuration options for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/master/etc/config.sample.toml) will always be slightly ahead of what is documented here.
@@ -234,7 +235,7 @@ For each section of the configuration file the numbering restarts at zero.
 InfluxData, the company, relies on reported data from running nodes
 primarily to track the adoption rates of different InfluxDB versions.
 This data helps InfluxData support the continuing development of
-InfluxDB.  
+InfluxDB.
 
 The `reporting-disabled` option toggles
 the reporting of data every 24 hours to `usage.influxdata.com`.
@@ -259,13 +260,13 @@ Environment variable: `INFLUXDB_BIND_ADDRESS`
 
 GOMAXPROCS is a GoLang setting.
 
-The default value of GOMAXPROCS is the number of CPUs (whatever your operating system considers to be a CPU -- 
-this could be the number of cores i.e. GOMAXPROCS=32 for a 32 core machine) visible to the program *at startup.*  
-However, you can override this value to be less than the maxium value.  
+The default value of GOMAXPROCS is the number of CPUs (whatever your operating system considers to be a CPU --
+this could be the number of cores i.e. GOMAXPROCS=32 for a 32 core machine) visible to the program *at startup.*
+However, you can override this value to be less than the maxium value.
 This can be important in cases where you are running the database alongside other processes on the same machine and
-want to ensure that the database doesn't completely starve those those processes. 
+want to ensure that the database doesn't completely starve those those processes.
 
-Keep in mind that setting GOMAXPROCS=1 will eliminate all parallelization.  
+Keep in mind that setting GOMAXPROCS=1 will eliminate all parallelization.
 
 Environment variable: `GOMAXPROCS`
 
@@ -316,8 +317,9 @@ Environment variable: `INFLUXDB_DATA_DIR`
 ### index-version = "inmem"
 
 The type of shard index to use for new shards.
-The default is an in-memory index that is recreated at startup.
-A value of `tsi1` will use a disk based index that supports higher cardinality datasets.
+The default is an in-memory (TSM-based) index that is recreated at startup.
+A value of `tsi1` will use a disk (TSI-based) index that supports higher cardinality datasets.
+Existing in-memory (TSM-based) shards will continue to be used unless converted using the [`influx_inspect inmem2tsi`](/influxdb/v1.3/tools/influx_inspect/#influx-inspect-inmem2tsi) command.
 
 Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 
@@ -376,8 +378,8 @@ Environment variable: `INFLUXDB_DATA_COMPACT_FULL_WRITE_COLD_DURATION`
 
 ### max-concurrent-compactions = 0
 
-The maximum number of concurrent full and level [compactions](/influxdb/v1.3/concepts/storage_engine/#compactions) that can run at one time.  
-A value of 0 results in runtime.GOMAXPROCS(0) used at runtime -- which means use all processors.  
+The maximum number of concurrent full and level [compactions](/influxdb/v1.3/concepts/storage_engine/#compactions) that can run at one time.
+A value of 0 results in runtime.GOMAXPROCS(0) used at runtime -- which means use all processors.
 This setting does not apply to cache snapshotting.
 
 Environment variable: `INFLUXDB_DATA_MAX_CONCURRENT_COMPACTIONS`
@@ -401,6 +403,8 @@ If a point causes the number of series in a database to exceed
 will continue to accept writes to existing series, but writes that create a
 new series will fail.
 
+> **Note:** This setting is ignored when [index-version](#index-version-inmem) is set to `tsi1`.
+
 Environment variable: `INFLUXDB_DATA_MAX_SERIES_PER_DATABASE`
 
 ### max-values-per-tag = 100000
@@ -417,6 +421,8 @@ a `partial write` error.
 Any existing tag keys with tag values that exceed `max-values-per-tag`
 will continue to accept writes, but writes that create a new tag value
 will fail.
+
+> **Note:** This setting is ignored when [index-version](#index-version-inmem) is set to `tsi1`.
 
 Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 
@@ -665,8 +671,8 @@ Environment variable: `INFLUXDB_HTTP_UNIX_BIND_SOCKET`
 
 ### max-body-size = 25000000
 
-Specifies the maximum size (in bytes) of a client request body. When a client sends data that exceeds the configured 
-maximum size, a 413 Request Entity Too Large HTTP response is returned. This can be disabled by setting it to 0. 
+Specifies the maximum size (in bytes) of a client request body. When a client sends data that exceeds the configured
+maximum size, a 413 Request Entity Too Large HTTP response is returned. This can be disabled by setting it to 0.
 
 Environment variable: `INFLUXDB_HTTP_MAX_BODY_SIZE`
 
@@ -1027,7 +1033,7 @@ Set to `false` to disable logging for CQ events.
 
 Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_LOG_ENABLED`
 
-### query-stats-enabled = false. 
+### query-stats-enabled = false.
 
 When set to true, continuous query execution statistics are written to the default monitor store.
 

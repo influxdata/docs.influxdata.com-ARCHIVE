@@ -10,7 +10,7 @@ menu:
     parent: work-w-kapacitor
 ---
 
-Kapacitor's alert system allows a publish subscribe design pattern to be used.
+Kapacitor's alert system allows a publish-and-subscribe design pattern to be used.
 Alerts are published to a `topic` and `handlers` subscribe to it.
 
 This example will walk the reader through setting up a simple cpu threshold alert that sends alerts to Slack.
@@ -46,7 +46,7 @@ stream
         .topic('cpu')
 ```
 
-The above TICKscript creates a threshold alert for cpu usage and sends the alerts to the `cpu` topic.
+The above TICKscript creates a threshold alert for CPU usage and sends the alerts to the `cpu` topic.
 
 Save the above script as `cpu_alert.tick`.
 Create and start the task by running the following commands:
@@ -232,5 +232,3 @@ Now update the handler and only alerts that changed state will be sent to Slack.
 ```
 kapacitor define-topic-handler ./slack.yaml
 ```
-
-

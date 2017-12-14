@@ -21,8 +21,9 @@ and prevent and halt the execution of inefficient queries with several configura
 </table>
 
 ## List currently-running queries with `SHOW QUERIES`
-`SHOW QUERIES` lists the query id, query text, relevant database, and duration
-of all currently-running queries on your InfluxDB instance.
+`SHOW QUERIES` lists the query ID, query text, relevant database, and duration
+of all currently-running queries on your InfluxDB instance. 
+For InfluxEnterprise clusters, the `SHOW QUERIES` output also includes the TCP host.
 
 #### Syntax:
 ```
@@ -32,37 +33,51 @@ SHOW QUERIES
 #### Example:
 ```
 > SHOW QUERIES
-qid	  query															               database		  duration
-37	   SHOW QUERIES																                	  100368u
-36	   SELECT mean(myfield) FROM mymeas   mydb        3s
+qid query                               database duration status
+--- -----                               -------- -------- ------
+37  SHOW QUERIES                                 100368u  running
+36  SELECT mean(myfield) FROM mymeas    mydb     3s       running
 ```
 
 ##### Explanation of the output:
-<br>
-`qid`&emsp;&emsp;&emsp;&nbsp;The id number of the query. Use this value with [`KILL QUERY`](/influxdb/v1.3/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query).  
-`query`&emsp;&emsp;&thinsp;&thinsp;The query text.  
-`database`&emsp;The database targeted by the query.  
-`duration`&emsp;The length of time that the query has been running.
-See [Query Language Reference](/influxdb/v1.3/query_language/spec/#durations)
-for an explanation of InfluxDB's time units.
+
+- `qid`: The ID number of the query. 
+- `query`: The query text.  
+- `database`: The database targeted by the query.  
+- `duration`: The length of time that the query has been running.
+- `status`: Current status of the query when SHOW QUERIES was executed.
+
+See [Query Language Reference](/influxdb/v1.3/query_language/spec/#durations) for an explanation of InfluxDB's time units.
 
 ## Stop currently-running queries with `KILL QUERY`
 `KILL QUERY` tells InfluxDB to stop running the relevant query.
 
 #### Syntax:
-Where `qid` is the id of the query from the [`SHOW QUERIES`](/influxdb/v1.3/troubleshooting/query_management/#list-currently-running-queries-with-show-queries) output:
+Where `qid` is the query ID, displayed in the [`SHOW QUERIES`](/influxdb/v1.3/troubleshooting/query_management/#list-currently-running-queries-with-show-queries) output:
 ```
 KILL QUERY <qid>
 ```
+>***InfluxEnterprise clusters:*** To kill queries on a cluster, you need to specify the query ID (qid) and the TCP host (for example, `myhost:8088`), 
+>available in the `SHOW QUERIES` output.
+>
+>```
+>KILL QUERY <qid> ON "<host>"
+>```
 
-#### Example:
-<br>
+A successful `KILL QUERY` query returns no results.
+
+#### Examples:
+
 ```
+-- kill query with qid of 36 on the local host
 > KILL QUERY 36
 >
 ```
-
-A successful `KILL QUERY` query returns no results.
+```
+-- kill query on InfluxEnterprise cluster
+> KILL QUERY 53 ON "myhost:8088"
+>
+```
 
 ## Configuration settings for query management
 

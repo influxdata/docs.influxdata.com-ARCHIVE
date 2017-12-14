@@ -20,6 +20,7 @@ The commands are:
     dumptsi              dumps low-level details about tsi1 files.
     export               exports raw data from a shard to line protocol
     help                 display this help message
+    inmem2tsi            convert existing in-memory (TSM-based) shards to TSI format
     report               displays a shard level report
     verify               verifies integrity of TSM files
 ```
@@ -166,6 +167,34 @@ CREATE RETENTION POLICY autogen ON MY_DB_NAME DURATION inf REPLICATION 1
 # CONTEXT-RETENTION-POLICY:autogen
 randset value=97.9296104805 1439856000000000000
 randset value=25.3849066842 1439856100000000000
+```
+
+### `influx_inspect inmem2tsi`
+Converts existing in-memory (TSM-based) shards to TSI (time series index) format. 
+The index is written to a temporary location until complete and then moved to a permanent location. 
+If an error occurs, then this operation will fall back to the original in-memory index.
+
+> ***Note:*** This tool is for offline conversion only.
+>  When TSI is enabled, new shards use the TSI format, but existing shards continue as TSM-based shards until converted offline.
+
+#### Usage
+```
+influx_inspect inmem2tsi [ flags ]
+```
+#### Flags
+
+#### `-datadir <data_directory>` string
+Path to the data directory.
+
+#### `-waldir <wal_directory>` string
+Path to the WAL directory.
+
+#### `-v` (optional)
+Verbose output
+
+#### Example
+```
+$ influx_inspect inmem2tsi -datadir ~/.influxdb/data/stress/autogen/1 -waldir ~/.influxdb/wal/stress/autogen/1
 ```
 
 ### `influx_inspect report`

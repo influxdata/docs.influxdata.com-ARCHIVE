@@ -17,7 +17,8 @@ Without a valid license, the process will abort startup.
 ## Query Management
 
 Query management works cluster wide. Specifically, `SHOW QUERIES` and `KILL QUERY <ID>` on `"<host>"` can be run on any data node. `SHOW QUERIES` will report all queries running across the cluster and the node which is running the query.
-`KILL QUERY` can abort queries running on the local node or any other remote data node.
+`KILL QUERY` can abort queries running on the local node or any other remote data node. For details on using the `SHOW QUERIES` and `KILL QUERY` on InfluxEnterprise clusters, 
+see [Query Management](/influxdb/v1.3/troubleshooting/query_management/).
 
 ## Subscriptions
 

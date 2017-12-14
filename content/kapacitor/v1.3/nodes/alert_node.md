@@ -1246,7 +1246,7 @@ node.pushover()
 
 ### Sensu
 
-Send the alert to Sensu. 
+Send the alert to Sensu client. 
 
 Example: 
 

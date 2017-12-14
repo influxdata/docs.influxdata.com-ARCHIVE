@@ -72,6 +72,7 @@ curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
 source /etc/os-release
 test $VERSION_ID = "7" && echo "deb https://repos.influxdata.com/debian wheezy stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
 test $VERSION_ID = "8" && echo "deb https://repos.influxdata.com/debian jessie stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+test $VERSION_ID = "9" && echo "deb https://repos.influxdata.com/debian stretch stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
 ```
 
 Then, install and start the InfluxDB service:

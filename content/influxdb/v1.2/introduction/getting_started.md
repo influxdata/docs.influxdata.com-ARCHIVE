@@ -185,7 +185,7 @@ including support for Go-style regex. For example:
 This is all you need to know to write data into InfluxDB and query it back.
 To learn more about the InfluxDB write protocol,
 check out the guide on [Writing Data](/influxdb/v1.2/guides/writing_data/).
-To futher explore the query language,
+To further explore the query language,
 check out the guide on [Querying Data](/influxdb/v1.2/guides/querying_data/).
 For more information on InfluxDB concepts, check out the [Key Concepts]
 (/influxdb/v1.2/concepts/key_concepts/) page.
