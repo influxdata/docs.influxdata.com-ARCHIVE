@@ -106,7 +106,7 @@ options:
   channel: '#alerts'
 ```
 
-The above handler definition defines a handler that sends alerts to the slack channel `#alerts`.
+The above handler binding definition defines a handler that sends alerts to the slack channel `#alerts`.
 
 Save the above text as `slack.yaml`.
 Now the new handler can be bound to the topic via the `kapacitor` client.
