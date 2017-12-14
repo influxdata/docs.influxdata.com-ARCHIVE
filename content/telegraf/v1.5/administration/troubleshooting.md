@@ -7,11 +7,11 @@ menu:
     parent: administration
 ---
 
-This guide will show you how to capture Telegraf's output, submit sample metrics, and see how Telegraf formats and emits points to its output plugins.
+This guide will show you how to capture Telegraf output, submit sample metrics, and see how Telegraf formats and emits points to its output plugins.
 
 ## Capture output
 
-A quick way to view Telegraf's output is by enabling a new UDP output plugin to run in parallel with the existing output plugins. Since each output plugin creates its own stream, the already existing outputs will not be affected. Traffic will be replicated to all active outputs.
+A quick way to view Telegraf output is by enabling a new UDP output plugin to run in parallel with the existing output plugins. Since each output plugin creates its own stream, the already existing outputs will not be affected. Traffic will be replicated to all active outputs.
 
 > **NOTE:** This approach requires Telegraf to be restarted, which will cause a brief interruption to your metrics collection.
 
@@ -23,7 +23,7 @@ The minimal Telegraf configuration required to enable a UDP output is:
 ```
 
 This setup utilizes the UDP format of the [InfluxDB output plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/influxdb) and emits points formatted in InfluxDB's [line protocol](/influxdb/v1.5/concepts/glossary/#line-protocol).
-You will need to append this section to Telegraf's configuration file and restart Telegraf for the change to take effect.
+You will need to append this section to the Telegraf configuration file and restart Telegraf for the change to take effect.
 
 Now you are ready to start listening on the destination port (`8089` in this example) using a simple tool like `netcat`:
 
@@ -50,7 +50,7 @@ Append the TCP or UDP input section to Telegraf's config file and restart Telegr
    data_format = "influx"
 ```
 
-Submit sample data to Telegraf's socket listener:
+Submit sample data to the Telegraf socket listener:
 
 ```
 echo 'mymeasurement,my_tag_key=mytagvalue my_field="my field value"' | nc localhost 8094
@@ -66,7 +66,7 @@ mymeasurement,host=kubuntu,my_tag_key=mytagvalue my_field="my field value" 14781
 
 The same approach can be used to test other plugins, like the [inputs.statsd](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/statsd) plugin.
 
-Here is a basic configuration example of how to set up Telegraf's statsd input plugin:
+Here is a basic configuration example of how to set up the Telegraf statsd input plugin:
 
 ```
  [[inputs.statsd]]
@@ -75,7 +75,7 @@ Here is a basic configuration example of how to set up Telegraf's statsd input p
    allowed_pending_messages = 10000
 ```
 
-Sending a sample metric to Telegraf's statsd port:
+Sending a sample metric to the Telegraf statsd port:
 
 ```
 echo "a.b.c:1|g" | nc -u localhost 8125
