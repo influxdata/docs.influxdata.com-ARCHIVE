@@ -2,7 +2,7 @@
 title: Output Data Formats
 
 menu:
-  telegraf_1_5:
+  telegraf_1_4:
     name: Output Data Formats
     weight: 10
     parent: Concepts

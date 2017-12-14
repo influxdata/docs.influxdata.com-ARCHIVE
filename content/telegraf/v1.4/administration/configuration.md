@@ -3,7 +3,7 @@ title: Configuration
 aliases:
     - telegraf/v1.4/introduction/configuration/
 menu:
-  telegraf_1_5:
+  telegraf_1_4:
     name: Configuration
     weight: 20
     parent: administration
