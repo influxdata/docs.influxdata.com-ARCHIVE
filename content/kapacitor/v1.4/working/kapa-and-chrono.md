@@ -113,7 +113,7 @@ More refined alerts and other tasks need to be defined directly in Kapacitor.
 #### To create a basic static threshold alert based on the CPU measurements provided by Telegraf:
 
 1. Open the Alert rules tab by clicking on the **Alerting** icon in the left
-navigation bar and then on **Alert Rules** in the pop up menu. A table of alert
+navigation bar and then on **Create** in the pop up menu. A table of alert
 rules (Kapacitor tasks) will load. These are queried from Kapacitor.  
 <br/><br/><img src="/img/kapacitor/chrono/CreateAlert01.png" alt="conifguration-open" style="max-width: 189px;" />
 1. Click on the **Create Rule** button. The Create/Edit rule page will load.
@@ -248,7 +248,7 @@ Chronograf Alerts are made visible in the Alert History page.
 To view the page.
 
 1. Click on the **Alerts** Icon in the left navigation bar. A menu will pop up.
-1. In the pop-up menu select the item **Alert History**.
+1. In the pop-up menu select the item **History**.
 <br/><br/><img src="/img/kapacitor/chrono/ViewAlertHistory01.png" alt="delete screenshot" style="max-width: 197px;" />
 1. The _Alert History_ page will load with a table showing the alerts posted
 within the time frame defined by the drop-down filter in the top right corner of
@@ -451,5 +451,3 @@ Also presented was how to enable Kapacitor tasks to write alerts to the
 `chronograf` database in InfluxDB, so that they will be visible in the
 _Alert History_ of Chronograf.  By adding Chronograf variables to a _simple_
 alert TICKscript, the task will be editable in Chronograf.
-
-
