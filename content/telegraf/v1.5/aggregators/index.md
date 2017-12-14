@@ -1,5 +1,5 @@
 ---
-title: Aggregator Plugins
+title: Telegraf aggregator plugins
 
 menu:
   telegraf_1_5:
@@ -15,7 +15,7 @@ input plugins.
 
 ### [Histogram (histogram)](https://github.com/influxdata/telegraf/tree/release-1.4/plugins/aggregators/histogram)
 
-The Histogram Aggregator plugin creates histograms containing the counts of field values within a range.
+The Histogram aggregator plugin creates histograms containing the counts of field values within a range.
 
 Values added to a bucket are also added to the larger buckets in the distribution. This creates a [cumulative histogram](https://en.wikipedia.org/wiki/Histogram#/media/File:Cumulative_vs_normal_histogram.svg).
 
