@@ -5,7 +5,7 @@
    telegraf_1_5:
      name: Administration
      identifier: administration
-     weight: 1
+     weight: 140
 
 ---
 
