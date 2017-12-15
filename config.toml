@@ -424,7 +424,6 @@ SectionPagesMenu = "products"
   identifier = "download"
   weight = 0
   url = "https://influxdata.com/downloads/#kapacitor"
-  parent = "introduction"
 
 # Kapacitor v1.3 Sub-Menu - Introduction
 [[menu.kapacitor_1_3]]
@@ -474,45 +473,33 @@ SectionPagesMenu = "products"
   url = "https://influxdata.com/downloads/#chronograf"
   parent = "Introduction"
 
-# Telegraf v1.5 Sub-Menu - Introduction
+# Telegraf v1.5 Menu
   [[menu.telegraf_1_5]]
-  name = "Download"
-  identifier = "download"
-  weight = 0
-  url = "https://influxdata.com/downloads/#telegraf"
-  parent = "Introduction"
-
-  # Telefraf v1.5 Sub-Menu - input plugins
-    [[menu.telegraf_1_5]]
-    name = "Input plugins"
-    identifier = "inputs"
-    weight = 0
-    url = "/telegraf/v1.5/plugins/inputs"
-    parent = "Plugins"
-
-# Telefraf v1.5 Sub-Menu - Output plugins
+  name = "Introduction"
+  identifier = "introduction"
+  weight = 110
+  url = "/telegraf/v1.5/introduction"
   [[menu.telegraf_1_5]]
-  name = "Output plugins"
-  identifier = "outputs"
-  weight = 0
-  url = "/telegraf/v1.5/plugins/outputs"
-  parent = "Plugins"
-
-# Telefraf v1.5 Sub-Menu - Processor plugins
+  name = "Concepts"
+  identifier = "concepts"
+  weight = 120
+  url = "/telegraf/v1.5/concepts"
   [[menu.telegraf_1_5]]
-  name = "Processor plugins"
-  identifier = "processors"
-  weight = 0
-  url = "/telegraf/v1.5/plugins/processors"
-  parent = "Plugins"
-
-  # Telefraf v1.5 Sub-Menu - Aggregrator plugins
+  name = "Plugins"
+  identifier = "plugins"
+  weight = 130
+  url = "/telegraf/v1.5/plugins"
   [[menu.telegraf_1_5]]
-  name = "Aggregator plugins"
-  identifier = "aggregators"
-  weight = 0
-  url = "/telegraf/v1.5/plugins/aggregators"
-  parent = "Plugins"
+  name = "Administration"
+  identifier = "administration"
+  weight = 140
+  url = "/telegraf/v1.5/administration"
+  [[menu.telegraf_1_5]]
+  name = "About the Project"
+  identifier = "about_the_project"
+  weight = 150
+  url = "/telegraf/v1.5/about_the_project"
+
 
 # Telegraf v1.4 Sub-Menu - Output Plugins
   [[menu.telegraf_1_4]]
