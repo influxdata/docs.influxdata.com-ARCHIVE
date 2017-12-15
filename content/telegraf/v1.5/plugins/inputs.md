@@ -198,7 +198,7 @@ capturing and storing these metrics locally within the `_internal` database for 
 
 
 
-### [Jolokia2 (jolokia2)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/jolokia2/README.md)
+### [Jolokia2 (jolokia2)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/jolokia2/README.md) -- NEW in v.1.5
 
 The [Jolokia](https://jolokia.org/) agent and proxy input plugins collect JMX metrics from an HTTP endpoint using 
 Jolokia's [JSON-over-HTTP protocol](https://jolokia.org/reference/html/protocol.html).
