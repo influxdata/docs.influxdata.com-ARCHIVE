@@ -13,7 +13,13 @@ input plugins.
 
 ## Supported aggregator plugins
 
-### [Histogram (histogram)](https://github.com/influxdata/telegraf/tree/release-1.4/plugins/aggregators/histogram)
+
+### [BasicStats (basicstats)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/aggregators/basicstats)
+
+The BasicStats aggregator plugin give us count,max,min,mean,s2(variance), stdev for a set of values, emitting the aggregate every period seconds.
+
+
+### [Histogram (histogram)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/aggregators/histogram)
 
 The Histogram aggregator plugin creates histograms containing the counts of field values within a range.
 

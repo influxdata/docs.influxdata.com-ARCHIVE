@@ -17,6 +17,7 @@ View usage instructions for each service input by running `telegraf --usage <ser
 
 ## Supported input plugins
 
+
 ### [Aerospike (aerospike)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/aerospike)
 
 
@@ -32,6 +33,9 @@ View usage instructions for each service input by running `telegraf --usage <ser
 ### [Bcache (bcache)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/bcache)
 
 
+### [Bond (bond)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/bond)
+
+The Bond input plugin collects network bond interface status, bond's slaves interfaces status and failures count of bond's slaves interfaces. The plugin collects these metrics from /proc/net/bonding/* files.
 
 ### [Cassandra (cassandra)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/cassandra)
 
@@ -65,6 +69,9 @@ View usage instructions for each service input by running `telegraf --usage <ser
 ### [CouchDB (couchdb)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/couchdb)
 
 
+### [DC/OS (dcos)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/dcos)
+
+This input plugin gathers metrics from a DC/OS cluster's [metrics component](https://docs.mesosphere.com/1.10/metrics/).
 
 ### [Disque (disque)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/disque)
 
@@ -147,9 +154,9 @@ The HTTP Listener service input plugin listens for messages sent via HTTP POST. 
 
 
 
-### [Jolokia (jolokia)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/jolokia)
+### [Jolokia2 (jolokia2)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/jolokia2/README.md)
 
-
+The [Jolokia](https://jolokia.org/) agent and proxy input plugins collect JMX metrics from an HTTP endpoint using Jolokia's [JSON-over-HTTP protocol](https://jolokia.org/reference/html/protocol.html).
 
 ### [Kafka Consumer (kafka_consumer)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/kafka_consumer)
 
@@ -215,6 +222,11 @@ The NATS Consumer plugin reads from specified NATS subjects and adds messages to
 ### [Nginx (nginx)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/nginx)
 
 
+### [Nginx Plus (nginx_plus)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/nginx_plus/README.md)
+
+Nginx Plus is a commercial version of the open source web server Nginx. To use this plugin you will need a license. For more information, see [What’s the Difference between Open Source NGINX and NGINX Plus?](https://www.nginx.com/blog/whats-difference-nginx-foss-nginx-plus/).
+
+Structures for Nginx Plus have been built based on history of [status module documentation](http://nginx.org/en/docs/http/ngx_http_status_module.html).
 
 ### [NSQ (nsq)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/nsq)
 
@@ -235,8 +247,21 @@ The NSQ Consumer plugin polls a specified NSQD topic and adds messages to Influx
 
 
 
+### [OpenSMTPD (opensmtpd)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/opensmtpd/README.md)
+
+This plugin gathers stats from OpenSMTPD - a FREE implementation of the server-side SMTP protocol.
+
+### [Particle Webhooks (particle)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/webhooks/particle/README.md)
+
+
+
+
 ### [Passenger (passenger)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/passenger)
 
+
+### [PF (pf)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/pf/README.md)
+
+The PF plugin gathers information from the FreeBSD/OpenBSD pf firewall. Currently it can retrive information about the state table: the number of current entries in the table, and counters for the number of searches, inserts, and removals to the table. The pf plugin retrieves this information by invoking the pfstat command.
 
 
 ### [PHP FPM (phpfpm)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/phpfpm)
@@ -246,6 +271,10 @@ The NSQ Consumer plugin polls a specified NSQD topic and adds messages to Influx
 ### [Ping (ping)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/ping)
 
 
+
+### [Postfix (postfix)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/postfix/README.md)
+
+The postfix plugin reports metrics on the postfix queues. For each of the active, hold, incoming, maildrop, and deferred [queues](http://www.postfix.org/QSHAPE_README.html#queues), it will report the queue length (number of items), size (bytes used by items), and age (age of oldest item in seconds).
 
 ### [PostgreSQL (postgresql)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/postgresql)
 
@@ -295,6 +324,9 @@ The NSQ Consumer plugin polls a specified NSQD topic and adds messages to Influx
 ### [Sensors (sensors)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/sensors)
 
 
+### [SMART (smart)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/smart/README.md)
+
+Get metrics using the command line utility smartctl for S.M.A.R.T. (Self-Monitoring, Analysis and Reporting Technology) storage devices. SMART is a monitoring system included in computer hard disk drives (HDDs) and solid-state drives (SSDs)[1] that detects and reports on various indicators of drive reliability, with the intent of enabling the anticipation of hardware failures. See [smartmontools](https://www.smartmontools.org/).
 
 ### [SNMP (snmp)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/snmp)
 
@@ -307,7 +339,9 @@ The NSQ Consumer plugin polls a specified NSQD topic and adds messages to Influx
 
 The Socket Listener is a service input plugin that listens for messages from streaming (tcp, unix) or datagram (udp, unixgram) protocols. Messages are expected in the [Telegraf Input Data Formats](https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md).
 
+### [Solr (solr)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/solr/README.md)
 
+The Solr plugin collects stats via the MBean Request Handler.
 
 ### [SQL Server (sql_server)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/sqlserver)
 
@@ -332,6 +366,9 @@ The StatsD plugin is a special type of plugin which runs a backgrounded statsd l
 The Tail plugin "tails" a logfile and parses each log message.
 
 
+### [Teamspeak 3 (teamspeak)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/teamspeak/README.md)
+
+This plugin uses the Teamspeak 3 ServerQuery interface of the Teamspeak server to collect statistics of one or more virtual servers.
 
 ### [Tomcat (tomcat)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/tomcat)
 
@@ -342,6 +379,10 @@ The Tail plugin "tails" a logfile and parses each log message.
 
 
 ### [Twemproxy (twemproxy)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/twemproxy)
+
+
+
+### [Unbound (unbound)](./plugins/inputs/unbound/README.md)
 
 
 
@@ -372,6 +413,10 @@ The Webhooks service plugin start an HTTPS server and registers multiple webhook
 
 
 ## Deprecated input plugins
+
+### [Jolokia (jolokia)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/jolokia)
+
+Deprecated in version 1.5: Please use the jolokia2 plugin.
 
 ### [TCP Listener](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/tcp_listener)
 
