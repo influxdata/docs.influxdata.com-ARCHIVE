@@ -19,7 +19,6 @@ input plugins.
 
 The BasicStats aggregator plugin give us count,max,min,mean,s2(variance), stdev for a set of values, emitting the aggregate every period seconds.
 
-
 ### [Histogram (histogram)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/aggregators/histogram)
 
 The Histogram aggregator plugin creates histograms containing the counts of field values within a range.
