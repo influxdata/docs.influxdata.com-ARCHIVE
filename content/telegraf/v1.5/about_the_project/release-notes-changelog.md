@@ -5,30 +5,30 @@ menu:
     weight: 1
     parent: about_the_project
 ---
-## v1.5 [unreleased]
+## v1.5 [2017-12-14]
 
 ### New Plugins
 
 #### Input
-- [bond](./plugins/inputs/bond/README.md) - Thanks to @ildarsv
-- DC/OS [dcos](./plugins/inputs/dcos/README.md) - Thanks to @influxdata
-- [jolokia2](./plugins/inputs/jolokia2/README.md) - Thanks to @dylanmei
-- NGINX Plus [nginx_plus](./plugins/inputs/nginx_plus/README.md) - Thanks to @mplonka & @poblahblahblah
-- [opensmtpd](./plugins/inputs/opensmtpd/README.md) - Thanks to @aromeyer
-- Particle Webhooks [particle](./plugins/inputs/webhooks/particle/README.md) - Thanks to @davidgs
-- OpenBSD/FreeBSD pf [pf](./plugins/inputs/pf/README.md) - Thanks to @nferch
-- [postfix](./plugins/inputs/postfix/README.md) - Thanks to @phemmer
-- [smart](./plugins/inputs/smart/README.md) - Thanks to @rickard-von-essen
-- Solr [solr](./plugins/inputs/solr/README.md) - Thanks to @ljagiello
-- Teamspeak [teamspeak](./plugins/inputs/teamspeak/README.md) - Thanks to @p4ddy1
-- Unbound [unbound](./plugins/inputs/unbound/README.md) - Thanks to @aromeyer
+- [Bond (bond)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/bond/README.md) - Thanks to @ildarsv
+- [DC/OS (dcos)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/dcos/README.md) - Thanks to @influxdata
+- [Joloki2 (jolokia2)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/jolokia2/README.md) - Thanks to @dylanmei
+- [Nginx Plus (nginx_plus)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/nginx_plus/README.md) - Thanks to @mplonka & @poblahblahblah
+- [OpenSMTPD (opensmtpd)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/opensmtpd/README.md) - Thanks to @aromeyer
+- [Particle.io Webhooks (particle)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/webhooks/particle/README.md) - Thanks to @davidgs
+- [PF (pf)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/pf/README.md) - Thanks to @nferch
+- [Postfix (postfix)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/postfix/README.md) - Thanks to @phemmer
+- [SMART (smart)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/smart/README.md) - Thanks to @rickard-von-essen
+- [Solr (solr)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/solr/README.md) - Thanks to @ljagiello
+- [Teamspeak (teamspeak)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/teamspeak/README.md) - Thanks to @p4ddy1
+- [Unbound (unbound)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/unbound/README.md) - Thanks to @aromeyer
 
 #### Aggregator
-- [basicstats](./plugins/aggregators/basicstats/README.md) - Thanks to @toni-moreno
+- [BasicStats (basicstats)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/aggregators/basicstats/README.md) - Thanks to @toni-moreno
 
 #### Output
-- CrateDB [cratedb](./plugins/outputs/wavefront/README.md) - Thanks to @felixge
-- Wavefront [wavefront](./plugins/outputs/wavefront/README.md) - Thanks to @puckpuck
+- [CrateDB (cratedb)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/wavefront/README.md) - Thanks to @felixge
+- [Wavefront (wavefront)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/wavefront/README.md) - Thanks to @puckpuck
 
 
 ### Release Notes
