@@ -153,9 +153,12 @@ The HTTP Listener service input plugin listens for messages sent via HTTP POST. 
 
 ### [InfluxDB (influxdb)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/influxdb)
 
+The InfluxDB input plugin gathers metrics from the exposed `/debug/vars` endpoint.  Using Telegraf to extract these 
+metrics to create a "monitor of monitors" is a best practice and allows you to reduce the overhead associated with 
+capturing and storing these metrics locally within the `_internal` database for production deployments.  
+[Read more about this approach here.](https://www.influxdata.com/blog/influxdb-debugvars-endpoint/)
 
-
-### [Internal (interal)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/internal)
+### [Internal (intneral)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/internal)
 
 
 
