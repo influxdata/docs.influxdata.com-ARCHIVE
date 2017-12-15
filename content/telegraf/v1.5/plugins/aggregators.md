@@ -1,6 +1,12 @@
 ---
 title: Telegraf aggregator plugins
 
+menu:
+  telegraf_1_5:
+    name: Aggregator
+    identifier: aggregators
+    weight: 30
+    parent: plugins
 ---
 
 Aggregators emit new aggregate metrics based on the metrics collected by the

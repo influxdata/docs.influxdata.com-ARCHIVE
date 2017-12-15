@@ -4,7 +4,7 @@
  menu:
    telegraf_1_5:
      name: Concepts
-     identifier: Concepts
+     identifier: concepts
      weight: 10
 ---
 

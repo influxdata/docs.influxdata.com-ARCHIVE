@@ -5,7 +5,8 @@
    telegraf_1_5:
      name: Administration
      identifier: administration
-     weight: 40
+     weight: 1
+
 ---
 
 ## [Configuration](/telegraf/v1.5/administration/configuration/)
