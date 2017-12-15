@@ -5,7 +5,7 @@ menu:
   enterprise_kapacitor:
     name: v1.3
     identifier: enterprise_kapacitor_1_3
-    weight: 0
+    weight: 100
 ---
 
 # Overview
