@@ -12,7 +12,7 @@ menu:
 #### Input
 - [Bond (bond)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/bond/README.md) - Thanks to @ildarsv
 - [DC/OS (dcos)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/dcos/README.md) - Thanks to @influxdata
-- [Joloki2 (jolokia2)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/jolokia2/README.md) - Thanks to @dylanmei
+- [Jolokia2 (jolokia2)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/jolokia2/README.md) - Thanks to @dylanmei
 - [Nginx Plus (nginx_plus)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/nginx_plus/README.md) - Thanks to @mplonka & @poblahblahblah
 - [OpenSMTPD (opensmtpd)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/opensmtpd/README.md) - Thanks to @aromeyer
 - [Particle.io Webhooks (particle)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/webhooks/particle/README.md) - Thanks to @davidgs
