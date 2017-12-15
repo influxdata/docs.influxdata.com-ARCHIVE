@@ -79,7 +79,7 @@ The Couchbase input plugin read per-node and per-bucket metrics from Couchbase.
 
 The CouchDB plugin gathers metrics of CouchDB using `_stats` endpoint.
 
-### [DC/OS (dcos)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/dcos)
+### [Mesosphere DC/OS (dcos)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/dcos)
 
 This input plugin gathers metrics from a DC/OS cluster's [metrics component](https://docs.mesosphere.com/1.10/metrics/).
 

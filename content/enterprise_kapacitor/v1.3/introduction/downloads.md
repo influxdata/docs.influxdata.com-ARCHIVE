@@ -2,7 +2,7 @@
 title: Downloads
 menu:
   enterprise_kapacitor_1_3:
-    weight: 0
+    weight: 10
     parent: introduction
 ---
 

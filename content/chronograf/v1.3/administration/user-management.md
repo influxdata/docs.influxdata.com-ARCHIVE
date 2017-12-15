@@ -2,7 +2,7 @@
 title: User Management
 menu:
   chronograf_1_3:
-    weight: 0
+    weight: 40
     parent: Administration
 ---
 

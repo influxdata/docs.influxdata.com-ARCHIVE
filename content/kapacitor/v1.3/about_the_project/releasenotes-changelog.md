@@ -2,7 +2,7 @@
 title: Release Notes/Changelog
 menu:
   kapacitor_1_3:
-    weight: 0
+    weight: 1
     parent: about_the_project
 ---
 

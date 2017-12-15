@@ -2,7 +2,7 @@
 title: Frequently Asked Questions (FAQ)
 menu:
   chronograf_1_3:
-    weight: 0
+    weight: 10
     parent: Troubleshooting
 ---
 

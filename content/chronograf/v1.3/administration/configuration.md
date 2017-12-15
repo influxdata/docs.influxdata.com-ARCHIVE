@@ -2,7 +2,7 @@
 title: Configuration
 menu:
   chronograf_1_3:
-    weight: 30
+    weight: 20
     parent: Administration
 ---
 

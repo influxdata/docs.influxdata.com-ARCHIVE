@@ -2,7 +2,7 @@
 title: Create a Dashboard
 menu:
   chronograf_1_3:
-    weight: 0
+    weight: 1
     parent: Guides
 ---
 
