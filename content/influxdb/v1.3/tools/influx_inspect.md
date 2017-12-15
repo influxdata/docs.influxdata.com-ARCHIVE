@@ -176,22 +176,25 @@ If an error occurs, then this operation will fall back to the original in-memory
 
 > ***Note:*** This tool is for offline conversion only.
 >  When TSI is enabled, new shards use the TSI format, but existing shards continue as TSM-based shards until converted offline.
->
+
 #### Usage
 ```
 influx_inspect inmem2tsi [ flags ]
 ```
 #### Flags
 
-#### `-path <data_directory> <wal_directory>` string
-Path of the data directory and the WAL directory.
+#### `-datadir <data_directory>` string
+Path to the data directory.
+
+#### `-waldir <wal_directory>` string
+Path to the WAL directory.
 
 #### `-v` (optional)
 Verbose output
 
 #### Example
 ```
-$ influx_inspect inmem2tsi -path ~/.influxdb/data/stress/autogen/1 ~/.influxdb/wal/stress/autogen/1
+$ influx_inspect inmem2tsi -datadir ~/.influxdb/data/stress/autogen/1 -waldir ~/.influxdb/wal/stress/autogen/1
 ```
 
 ### `influx_inspect report`
