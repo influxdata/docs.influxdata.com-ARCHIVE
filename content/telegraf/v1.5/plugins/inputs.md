@@ -280,16 +280,16 @@ The NATS Consumer plugin reads from specified NATS subjects and adds messages to
 
 The Network Response input plugin tests UDP and TCP connection response time. It can also check response text.
 
-### [Nginx (nginx)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/nginx)
+### [NGINX (nginx)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/nginx)
 
-The Nginx input plugin reads Nginx basic status information (`ngx_http_stub_status_module`).
+The NGINX input plugin reads NGINX basic status information (`ngx_http_stub_status_module`).
 
-### [Nginx Plus (nginx_plus)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/nginx_plus/README.md)  -- NEW in v.1.5
+### [NGINX Plus (nginx_plus)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/nginx_plus/README.md)  -- NEW in v.1.5
 
-Nginx Plus is a commercial version of the open source web server Nginx. To use this plugin you will need a license.
+NGINX Plus is a commercial version of the open source web server NGINX. To use this plugin you will need a license.
 For more information, see [What’s the Difference between Open Source NGINX and NGINX Plus?](https://www.nginx.com/blog/whats-difference-nginx-foss-nginx-plus/).
 
-Structures for Nginx Plus have been built based on history of [status module documentation](http://nginx.org/en/docs/http/ngx_http_status_module.html).
+Structures for NGINX Plus have been built based on history of [status module documentation](http://nginx.org/en/docs/http/ngx_http_status_module.html).
 
 ### [NSQ (nsq)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/nsq)
 
@@ -323,7 +323,7 @@ The Passenger input plugin gets phusion passenger statistics using their command
 
 ### [PF (pf)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/pf/README.md) -- NEW in v1.5
 
-The PF plugin gathers information from the FreeBSD/OpenBSD pf firewall. Currently it can retrive information about
+The PF input plugin gathers information from the FreeBSD/OpenBSD pf firewall. Currently it can retrive information about
 the state table: the number of current entries in the table, and counters for the number of searches, inserts, and
 removals to the table. The pf plugin retrieves this information by invoking the `pfstat` command.
 
@@ -380,16 +380,16 @@ located in `/var/lib/puppet/state/` PuppetAgent Runs.
 
 ### [RabbitMQ (rabbitmq)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/rabbitmq)
 
-Reads metrics from RabbitMQ servers via the [Management Plugin](https://www.rabbitmq.com/management.html).
+The RabbitMQ input plugin eads metrics from RabbitMQ servers via the [Management Plugin](https://www.rabbitmq.com/management.html).
 
 ### [Raindrops (raindrops)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/raindrops)
 
-The Raindrops plugin reads from specified raindops [middleware](http://raindrops.bogomips.org/Raindrops/Middleware.html)
+The Raindrops input plugin reads from specified Raindops [middleware](http://raindrops.bogomips.org/Raindrops/Middleware.html)
 URI and adds the statistics to InfluxDB.
 
 ### [Redis (redis)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/redis)
 
-The Redis input plugin gathers the results of the INFO redis command. There are two separate measurements: `redis`
+The Redis input plugin gathers the results of the INFO Redis command. There are two separate measurements: `redis`
 and `redis_keyspace`, the latter is used for gathering database-related statistics.
 
 Additionally the plugin also calculates the hit/miss ratio (`keyspace_hitrate`) and the elapsed time since the last RDB
@@ -402,7 +402,7 @@ and Handshake protocol v1.0.
 
 ### [Riak (riak)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/riak)
 
-The Riak input plugin gathers metrics from one or more riak instances.
+The Riak input plugin gathers metrics from one or more Riak instances.
 
 ### [Salesforce (salesforce)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/salesforce)
 
@@ -431,22 +431,22 @@ The SNMP Legacy input plugin gathers metrics from SNMP agents.
 
 ### [Socket Listener](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/socket_listener)
 
-The Socket Listener is a service input plugin that listens for messages from streaming (tcp, unix) or datagram
+The Socket Listener service input plugin listens for messages from streaming (tcp, unix) or datagram
 (UDP, unixgram) protocols. Messages are expected in the
 [Telegraf Input Data Formats](https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md).
 
 ### [Solr (solr)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/solr/README.md) -- NEW in v1.5
 
-The Solr plugin collects stats via the MBean Request Handler.
+The Solr plugin collects stats using the MBean Request Handler.
 
 ### [SQL Server (sql_server)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/sqlserver)
 
-The SQL Server input plugin provides metrics for your SQL Server instance. It currently works with SQL Server
+The SQL Server input plugin provides metrics for your Microsoft SQL Server instance. It currently works with SQL Server
 versions 2008+. Recorded metrics are lightweight and use Dynamic Management Views supplied by SQL Server.
 
 ### [StatsD (statsd)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/statsd)
 
-The StatsD plugin is a special type of plugin which runs a backgrounded statsd listener service while Telegraf is
+The StatsD input plugin is a special type of plugin which runs a backgrounded statsd listener service while Telegraf is
 running.
 StatsD messages are formatted as described in the original [etsy statsd](https://github.com/etsy/statsd/blob/master/docs/metric_types.md) implementation.
 
@@ -464,7 +464,7 @@ The Tail plugin "tails" a logfile and parses each log message.
 
 ### [Teamspeak 3 (teamspeak)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/teamspeak/README.md) -- NEW in v1.5
 
-This plugin uses the Teamspeak 3 ServerQuery interface of the Teamspeak server to collect statistics of one or more virtual servers.
+The Teamspeak 3 input plugin uses the Teamspeak 3 ServerQuery interface of the Teamspeak server to collect statistics of one or more virtual servers.
 
 ### [Tomcat (tomcat)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/tomcat)
 
@@ -479,7 +479,7 @@ details of these statistics.
 
 ### [Unbound (unbound)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/unbound/README.md) -- NEW in v1.5
 
-The Unbound plugin gathers stats from [Unbound](https://www.unbound.net/), a validating, recursive, and
+The Unbound input plugin gathers stats from [Unbound](https://www.unbound.net/), a validating, recursive, and
 caching DNS resolver.
 
 ### [Varnish (varnish)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/varnish)
@@ -520,12 +520,12 @@ The Zookeeper input plugin collects variables outputted from the `mntr` command 
 
 ### [Jolokia (jolokia)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/jolokia)
 
-Deprecated in version 1.5: Please use the jolokia2 plugin.
+Deprecated in version 1.5: Please use the [Jolokia2](/#jolokia2) plugin.
 
 ### [TCP Listener](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/tcp_listener)
 
-DEPRECATED: As of version 1.3, the TCP listener plugin has been deprecated in favor of the Socket Listener plugin.
+DEPRECATED: As of version 1.3, the TCP listener plugin has been deprecated in favor of the [Socket Listener](#socket-listener) plugin.
 
 ### [UDP Listener (udp_listener)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/udp_listener)
 
-DEPRECATED: As of version 1.3, the UDP listener plugin has been deprecated in favor of the Socket Listener plugin.
+DEPRECATED: As of version 1.3, the UDP listener plugin has been deprecated in favor of the [Socket Listener](#socket-listener) plugin.
