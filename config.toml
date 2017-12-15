@@ -499,7 +499,14 @@ SectionPagesMenu = "products"
   identifier = "about_the_project"
   weight = 150
   url = "/telegraf/v1.5/about_the_project"
-
+  
+# Telegraf v1.5 Sub-Menu - Introduction and Input plugins
+  [[menu.telegraf_1_5]]
+  name = "Download"
+  identifier = "download"
+  weight = 5
+  url = "https://influxdata.com/downloads/#telegraf"
+  parent = "introduction"  
 
 # Telegraf v1.4 Sub-Menu - Output Plugins
   [[menu.telegraf_1_4]]
