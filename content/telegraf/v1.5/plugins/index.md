@@ -5,7 +5,7 @@ menu:
   telegraf_1_5:
     name: Plugins
     identifier: plugins
-    weight: 0
+    weight: 130
 ---
 
 ## [Input](/telegraf/v1.5/plugins/inputs/)

@@ -472,33 +472,6 @@ SectionPagesMenu = "products"
   weight = 0
   url = "https://influxdata.com/downloads/#chronograf"
   parent = "Introduction"
-
-# Telegraf v1.5 Menu
-  [[menu.telegraf_1_5]]
-  name = "Introduction"
-  identifier = "introduction"
-  weight = 110
-  url = "/telegraf/v1.5/introduction"
-  [[menu.telegraf_1_5]]
-  name = "Concepts"
-  identifier = "concepts"
-  weight = 120
-  url = "/telegraf/v1.5/concepts"
-  [[menu.telegraf_1_5]]
-  name = "Plugins"
-  identifier = "plugins"
-  weight = 130
-  url = "/telegraf/v1.5/plugins"
-  [[menu.telegraf_1_5]]
-  name = "Administration"
-  identifier = "administration"
-  weight = 140
-  url = "/telegraf/v1.5/administration"
-  [[menu.telegraf_1_5]]
-  name = "About the Project"
-  identifier = "about_the_project"
-  weight = 150
-  url = "/telegraf/v1.5/about_the_project"
   
 # Telegraf v1.5 Sub-Menu - Introduction
   [[menu.telegraf_1_5]]

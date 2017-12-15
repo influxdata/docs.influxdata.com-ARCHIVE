@@ -5,7 +5,7 @@
    telegraf_1_5:
      name: Concepts
      identifier: concepts
-     weight: 10
+     weight: 120
 ---
 
 ## [Input Data Formats](/telegraf/v1.5/concepts/data_formats_input/)
