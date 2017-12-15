@@ -13,7 +13,7 @@ menu:
 - [Bond (bond)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/bond/README.md) - Thanks to @ildarsv
 - [DC/OS (dcos)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/dcos/README.md) - Thanks to @influxdata
 - [Jolokia2 (jolokia2)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/jolokia2/README.md) - Thanks to @dylanmei
-- [Nginx Plus (nginx_plus)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/nginx_plus/README.md) - Thanks to @mplonka & @poblahblahblah
+- [NGINX Plus (nginx_plus)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/nginx_plus/README.md) - Thanks to @mplonka & @poblahblahblah
 - [OpenSMTPD (opensmtpd)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/opensmtpd/README.md) - Thanks to @aromeyer
 - [Particle.io Webhooks (particle)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/webhooks/particle/README.md) - Thanks to @davidgs
 - [PF (pf)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/pf/README.md) - Thanks to @nferch
@@ -58,8 +58,7 @@ menu:
 - Add configurable separator for metrics and fields in opentsdb output.
 - Add support for the rollbar occurrence webhook event.
 - Add extra wired tiger cache metrics to mongodb input.
-- Collect Docker Swarm service metrics in docker input plugin.
-- Add smart input plugin for collecting S.M.A.R.T. data.
+- Collect Docker Swarm service metrics in Docker input plugin.
 - Add cluster health level configuration to elasticsearch input.
 - Add ability to limit node stats in elasticsearch input.
 - Add UDP IPv6 support to statsd input.
@@ -74,7 +73,7 @@ menu:
 - Add systemd unit pid and cgroup matching to procstat.
 - Use MAX() instead of SUM() for latency measurements in sqlserver.
 - Add index by week number to Elasticsearch output.
-- Add support for tags in the index name in elasticsearch output.
+- Add support for tags in the index name in Elasticsearch output.
 - Add slab to mem plugin.
 - Add support for glob patterns in net input plugin.
 - Add option to amqp output to publish persistent messages.
