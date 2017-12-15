@@ -2,7 +2,7 @@
 title: Security Best Practices
 menu:
   chronograf_1_3:
-    weight: 20
+    weight: 30
     parent: Administration
 ---
 

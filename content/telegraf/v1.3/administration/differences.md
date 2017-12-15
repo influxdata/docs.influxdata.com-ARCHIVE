@@ -4,7 +4,7 @@ title: Differences between Telegraf 1.3 and 1.2
 menu:
   telegraf_1_3:
     name: Differences between Telegraf 1.3 and 1.2
-    weight: 0
+    weight: 1
     parent: administration
 ---
 

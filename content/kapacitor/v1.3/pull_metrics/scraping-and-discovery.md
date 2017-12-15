@@ -3,7 +3,7 @@ title: Scraping and Discovery
 
 menu:
   kapacitor_1_3:
-    weight: 0
+    weight: 1
     parent: pull_metrics
 ---
 
