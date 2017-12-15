@@ -9,15 +9,17 @@ menu:
     parent: plugins
 ---
 
-Aggregators emit new aggregate metrics based on the metrics collected by the
-input plugins.
+Aggregators emit new aggregate metrics based on the metrics collected by the input plugins.
+
+> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.5`.
+>The [Release Notes/Changelog](/telegraf/v1.5/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
 
 ## Supported aggregator plugins
 
 
-### [BasicStats (basicstats)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/aggregators/basicstats)
+### [BasicStats (basicstats)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/aggregators/basicstats) -- NEW in v1.5
 
-The BasicStats aggregator plugin give us count,max,min,mean,s2(variance), stdev for a set of values, emitting the aggregate every period seconds.
+The BasicStats aggregator plugin gives count, max, min, mean, s2(variance), and stdev for a set of values, emitting the aggregate every period seconds.
 
 ### [Histogram (histogram)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/aggregators/histogram)
 

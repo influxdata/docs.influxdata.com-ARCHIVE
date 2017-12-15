@@ -11,6 +11,9 @@ menu:
 
 Telegraf allows users to specify multiple output sinks in the configuration file.
 
+> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.5`.
+>The [Release Notes/Changelog](/telegraf/v1.5/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
+
 ## Supported output plugins
 
 ### [Amon (amon_output)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/amon)
@@ -23,17 +26,17 @@ Metrics are grouped by converting any _ characters to . in the Point Name.
 
 ### [AMQP (amqp_output)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/amqp)
 
-The AMQP output plugin writes to a AMQP 0-9-1 Exchange, a promenent implementation of this protocol being [RabbitMQ](https://www.rabbitmq.com/).
+The AMQP output plugin writes to a AMQP 0-9-1 Exchange, a prominent implementation of this protocol being [RabbitMQ](https://www.rabbitmq.com/).
 
-Metrics are written to a topic exchange using tag, defined in configuration file as RoutingTag, as a routing key.
+Metrics are written to a topic exchange using `tag`, defined in configuration file as `RoutingTag`, as a routing key.
 
 ### [CloudWatch (cloudwatch_output)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/cloudwatch)
 
 The CloudWatch ouput plugin send metrics to Amazon CloudWatch.
 
-### [CrateDB (cratedb)](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/cratedb)
+### [CrateDB (cratedb)](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/cratedb) -- NEW in v1.5
 
-The CrateDB ouput plugin writes to [CrateDB](https://crate.io/) via its [PostgreSQL protocol](https://crate.io/docs/crate/reference/protocols/postgres.html).
+The CrateDB ouput plugin writes to [CrateDB](https://crate.io/) using its [PostgreSQL protocol](https://crate.io/docs/crate/reference/protocols/postgres.html).
 
 ### [Datadog (datadog_output)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/datadog)
 
@@ -57,11 +60,11 @@ The Graphite output plugin writes to [Graphite](http://graphite.readthedocs.org/
 
 ### [Graylog (graylog_output)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/graylog)
 
-This plugin writes to a Graylog instance using the `gelf` format.
+The Graylog output plugin writes to a Graylog instance using the `gelf` format.
 
 ### [InfluxDB (influxdb_output)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/influxdb)
 
-The InfluxDB output plugin writes to InfluxDB via HTTP or UDP.
+The InfluxDB output plugin writes to InfluxDB using HTTP or UDP.
 
 ### [Instrumental (instrumental_output)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/instrumental)
 
@@ -96,9 +99,7 @@ The NSQ output plugin writes to a specified NSQD instance, usually local to the 
 
 The OpenTSDB output plugin writes to an OpenTSDB instance using either the telnet or HTTP mode.
 
-Using the HTTP API is the recommended way of writing metrics since OpenTSDB 2.0 To use HTTP mode, set `useHttp` to true in config. You can also control how many metrics are sent in each HTTP request by setting `batchSize` in config.
-
-See http://opentsdb.net/docs/build/html/api_http/put.html for details
+Using the HTTP API is the recommended way of writing metrics since OpenTSDB 2.0 To use HTTP mode, set `useHttp` to true in config. You can also control how many metrics are sent in each HTTP request by setting `batchSize` in config. See http://opentsdb.net/docs/build/html/api_http/put.html for details.
 
 ### [Prometheus Client (prometheus_client_output)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/prometheus_client)
 
@@ -106,15 +107,15 @@ The Prometheus Client output plugin starts a [Prometheus](https://prometheus.io/
 
 ### [Riemann (riemann_output)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/riemann)
 
-The Riemann output plugin writes to [Riemann](http://riemann.io/) via TCP or UDP.
+The Riemann output plugin writes to [Riemann](http://riemann.io/) using TCP or UDP.
 
 ### [Riemann Legacy (riemann_legacy_output)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/riemann_legacy)
 
 
 ### [Socket Writer (socket_writer_output)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/socket_writer)
 
-The Socket Writer plugin writes to a UDP, TCP, or UNIX socket. It can output data in any of the [supported output formats](https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_OUTPUT.md).
+The Socket Writer output plugin writes to a UDP, TCP, or UNIX socket. It can output data in any of the [supported output formats](https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_OUTPUT.md).
 
-### [Wavefront (wavefront)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/wavefront/README.md)
+### [Wavefront (wavefront)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/wavefront/README.md) -- NEW in v1.5
 
 The Wavefront output plugin writes to a Wavefront proxy, in Wavefront data format over TCP.
