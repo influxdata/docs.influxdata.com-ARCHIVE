@@ -8,10 +8,10 @@ menu:
     weight: 1
 ---
 
-## [Input plugins](/telegraf/v1.5/inputs/)
+## [Input plugins](/telegraf/v1.5/plugins/inputs/)
 
-## [Output plugins](/telegraf/v1.5/outputs/)
+## [Output plugins](/telegraf/v1.5/plugins/outputs/)
 
-## [Aggregator plugins](/telegraf/v1.5/aggregators/)
+## [Aggregator plugins](/telegraf/v1.5/plugins/aggregators/)
 
-## [Processor plugins](/telegraf/v1.5/processors/)
+## [Processor plugins](/telegraf/v1.5/plugins/processors/)
