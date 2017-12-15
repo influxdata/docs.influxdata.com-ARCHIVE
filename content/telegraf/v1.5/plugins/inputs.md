@@ -520,7 +520,7 @@ The Zookeeper input plugin collects variables outputted from the `mntr` command 
 
 ### [Jolokia (jolokia)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/jolokia)
 
-Deprecated in version 1.5: Please use the [Jolokia2](/#jolokia2) plugin.
+Deprecated in version 1.5: Please use the [Jolokia2](#jolokia2-jolokia2----new-in-v15) plugin.
 
 ### [TCP Listener](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/tcp_listener)
 
