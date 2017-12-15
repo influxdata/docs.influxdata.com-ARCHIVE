@@ -5,7 +5,7 @@ menu:
   telegraf_1_5:
     name: Input
     identifier: inputs
-    weight: 130
+    weight: 10
     parent: plugins
 ---
 
