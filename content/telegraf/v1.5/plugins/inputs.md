@@ -1,11 +1,6 @@
 ---
 title: Telegraf input plugins
 
-menu:
-  telegraf_1_5:
-    name: Input plugins
-    identifier: inputs
-    weight: 30
 ---
 
 Telegraf is entirely input driven. It gathers all metrics from the inputs specified in the configuration file.
