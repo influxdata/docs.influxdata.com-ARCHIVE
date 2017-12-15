@@ -25,25 +25,32 @@ The Aerospike plugin queries Aerospike servers and gets node statistics and  sta
 
 ### [AMQP Consumer (amqp_consumer)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/amqp_consumer)
 
-The AMQP Consumer plugin provides a consumer for use with AMQP 0-9-1, a prominent implementation of this protocol being RabbitMQ.
+The AMQP Consumer plugin provides a consumer for use with AMQP 0-9-1, a prominent implementation of this protocol 
+being RabbitMQ.
 
 ### [Apache (apache)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/apache)
 
 The Apache plugin collects server performance information using the `mod_status` module of the Apache HTTP Server.
 
-Typically, the `mod_status` module is configured to expose a page at the `/server-status?auto` location of the Apache server. The [ExtendedStatus](https://httpd.apache.org/docs/2.4/mod/core.html#extendedstatus) option must be enabled in order to collect all available fields. For information about how to configure your server reference the [module documenation](https://httpd.apache.org/docs/2.4/mod/mod_status.html#enable).
+Typically, the `mod_status` module is configured to expose a page at the `/server-status?auto` location of the Apache 
+server. The [ExtendedStatus](https://httpd.apache.org/docs/2.4/mod/core.html#extendedstatus) option must be enabled in order 
+to collect all available fields. For information about how to configure your server reference the 
+[module documenation](https://httpd.apache.org/docs/2.4/mod/mod_status.html#enable).
 
 ### [Bcache (bcache)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/bcache)
 
 The Bcache plugin get bcache statistics from the `stats_total` directory and `dirty_data` file.
 
-### [Bond (bond)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/bond)
+### [Bond (bond)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/bond) 
+>NEW in v1.5
 
-The Bond input plugin collects network bond interface status, bond's slaves interfaces status and failures count of bond's slaves interfaces. The plugin collects these metrics from `/proc/net/bonding/*` files.
+The Bond input plugin collects network bond interface status, bond's slaves interfaces status and failures count of 
+bond's slaves interfaces. The plugin collects these metrics from `/proc/net/bonding/*` files.
 
 ### [Cassandra (cassandra)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/cassandra)
 
-The Cassandra plugin collects Cassandra 3 / JVM metrics exposed as MBean attributes through the jolokia REST endpoint. All metrics are collected for each server configured.
+The Cassandra plugin collects Cassandra 3 / JVM metrics exposed as MBean attributes through the jolokia REST endpoint. 
+All metrics are collected for each server configured.
 
 ### [Ceph Storage (ceph)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/ceph)
 
@@ -65,11 +72,17 @@ The Amazon CloudWatch plugin will pull Metric Statistics from Amazon CloudWatch.
 
 The Conntrack input plugin collects stats from Netfilter's conntrack-tools.
 
-The conntrack-tools provide a mechanism for tracking various aspects of network connections as they are processed by netfilter. At runtime, conntrack exposes many of those connection statistics within /proc/sys/net. Depending on your kernel version, these files can be found in either /proc/sys/net/ipv4/netfilter or /proc/sys/net/netfilter and will be prefixed with either ip_ or nf_. This plugin reads the files specified in its configuration and publishes each one as a field, with the prefix normalized to ip_.
+The conntrack-tools provide a mechanism for tracking various aspects of network connections as they are processed by
+netfilter. At runtime, conntrack exposes many of those connection statistics within /proc/sys/net. Depending on your 
+kernel version, these files can be found in either /proc/sys/net/ipv4/netfilter or /proc/sys/net/netfilter and will be
+prefixed with either ip_ or nf_. This plugin reads the files specified in its configuration and publishes each one as 
+a field, with the prefix normalized to ip_.
 
 ### [Consul (consul)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/consul)
 
-The Consul input plugin will collect statistics about all health checks registered in the Consul. It uses Consul API to query the data. It will not report the telemetry but Consul can report those stats already using StatsD protocol if needed.
+The Consul input plugin will collect statistics about all health checks registered in the Consul. It uses Consul API 
+to query the data. It will not report the telemetry but Consul can report those stats already using StatsD protocol, 
+if needed.
 
 ### [Couchbase (couchbase)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/couchbase)
 
@@ -98,15 +111,20 @@ The DNS plugin gathers dns query times in miliseconds - like [Dig](https://en.wi
 
 ### [Docker (docker)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/docker)
 
-The Docker input plugin uses the Docker Engine API to gather metrics on running Docker containers. The Docker plugin uses the [Official Docker Client](https://github.com/moby/moby/tree/master/client) to gather stats from the [Engine API](https://docs.docker.com/engine/api/v1.20/) library documentation.
+The Docker input plugin uses the Docker Engine API to gather metrics on running Docker containers. The Docker plugin 
+uses the [Official Docker Client](https://github.com/moby/moby/tree/master/client) to gather stats from the 
+[Engine API](https://docs.docker.com/engine/api/v1.20/) library documentation.
 
 ### [Dovecot (dovecot)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/dovecot)
 
-The Dovecot input plugin uses the dovecot Stats protocol to gather metrics on configured domains. For more information, see the [Dovecot documentation](http://wiki2.dovecot.org/Statistics).
+The Dovecot input plugin uses the dovecot Stats protocol to gather metrics on configured domains. For more information, 
+see the [Dovecot documentation](http://wiki2.dovecot.org/Statistics).
 
 ### [Elasticsearch (elasticsearch)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/elasticsearch)
 
-The [Elasticsearch](https://www.elastic.co/) input plugin queries endpoints to obtain [node](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html) and optionally [cluster-health](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html) or [cluster-stats](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-stats.html) metrics.
+The [Elasticsearch](https://www.elastic.co/) input plugin queries endpoints to obtain [node](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html) 
+and optionally [cluster-health](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html) 
+or [cluster-stats](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-stats.html) metrics.
 
 ### [Exec (exec)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/exec)
 
@@ -122,18 +140,21 @@ The Filestat input plugin gathers metrics about file existence, size, and other 
 
 ### [Fluentd (fluentd)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/fluentd)
 
-The Fluentd input plugin gathers metrics from plugin endpoint provided by in_monitor plugin. This plugin understands data provided by `/api/plugin.json` resource (`/api/config.json` is not covered).
+The Fluentd input plugin gathers metrics from plugin endpoint provided by in_monitor plugin. This plugin understands 
+data provided by `/api/plugin.json` resource (`/api/config.json` is not covered).
 
 ### [Graylog (graylog_input)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/graylog)
 
-The Graylog input plugin can collect data from remote Graylog service URLs. This plugin currently supports two types of endpoints:
+The Graylog input plugin can collect data from remote Graylog service URLs. This plugin currently supports two 
+types of endpoints:
 
 * multiple (e.g., `http://[graylog-server-ip]:12900/system/metrics/multiple`)
 * namespace (e.g., `http://[graylog-server-ip]:12900/system/metrics/namespace/{namespace}`)
 
 ### [HAproxy (haproxy)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/haproxy)
 
-The HAproxy input plugin gathers metrics directly from any running HAproxy instance. It can do so by using CSV generated by HAproxy status page or from admin sockets.
+The HAproxy input plugin gathers metrics directly from any running HAproxy instance. It can do so by using CSV 
+generated by HAproxy status page or from admin sockets.
 
 ### [Hddtemp (hddtemp)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/hddtemp)
 
@@ -141,11 +162,14 @@ The Hddtemp plugin reads data from `hddtemp` daemons.
 
 ### [HTTP JSON (httpjson)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/httpjson)
 
-The HTTP JSON (httpjson) input plugin collects data from HTTP URLs which respond with JSON. It flattens the JSON and finds all numeric values, treating them as floats.
+The HTTP JSON (httpjson) input plugin collects data from HTTP URLs which respond with JSON. It flattens the JSON and 
+finds all numeric values, treating them as floats.
 
 ### [HTTP Listener (http_listener)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/http_listener)
 
-The HTTP Listener service input plugin listens for messages sent via HTTP POST. Messages are expected in the InfluxDB line protocol format ONLY (other Telegraf input data formats are not supported). The plugin allows Telegraf to serve as a proxy/router for the `/write` endpoint of the InfluxDB HTTP API.
+The HTTP Listener service input plugin listens for messages sent via HTTP POST. Messages are expected in the InfluxDB 
+line protocol format ONLY (other Telegraf input data formats are not supported). The plugin allows Telegraf to serve 
+as a proxy/router for the `/write` endpoint of the InfluxDB HTTP API.
 
 ### [HTTP Response (http_response)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/http_response)
 
@@ -176,11 +200,15 @@ capturing and storing these metrics locally within the `_internal` database for 
 
 ### [Jolokia2 (jolokia2)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/jolokia2/README.md)
 
-The [Jolokia](https://jolokia.org/) agent and proxy input plugins collect JMX metrics from an HTTP endpoint using Jolokia's [JSON-over-HTTP protocol](https://jolokia.org/reference/html/protocol.html).
+The [Jolokia](https://jolokia.org/) agent and proxy input plugins collect JMX metrics from an HTTP endpoint using 
+Jolokia's [JSON-over-HTTP protocol](https://jolokia.org/reference/html/protocol.html).
 
 ### [Kafka Consumer (kafka_consumer)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/kafka_consumer)
 
-The [Kafka](http://kafka.apache.org) Consumer plugin polls a specified Kafka topic and adds messages to InfluxDB. Messages are expected in the line protocol format. [Consumer Group](http://godoc.org/github.com/wvanbergen/kafka/consumergroup) is used to talk to the Kafka cluster so multiple instances of Telegraf can read from the same topic in parallel.
+The [Kafka](http://kafka.apache.org) Consumer plugin polls a specified Kafka topic and adds messages to InfluxDB. 
+Messages are expected in the line protocol format. 
+[Consumer Group](http://godoc.org/github.com/wvanbergen/kafka/consumergroup) is used to talk to the Kafka cluster so 
+multiple instances of Telegraf can read from the same topic in parallel.
 
 ### [Kapacitor (kapacitor)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/kapacitor)
 
@@ -188,9 +216,13 @@ The Kapacitor input plugin will collect metrics from the given Kapacitor instanc
 
 ### [Kubernetes (kubernetes)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/kubernetes)
 
->***Note:*** The Kubernetes plugin is experimental and may cause high cardinality issues with moderate to large Kubernetes deployments.
+>***Note:*** The Kubernetes plugin is experimental and may cause high cardinality issues with moderate to 
+large Kubernetes deployments.
 
-This input plugin talks to the kubelet API using the `/stats/summary` endpoint to gather metrics about the running pods and containers for a single host. It is assumed that this plugin is running as part of a daemonset within a kubernetes installation. This means that Telegraf is running on every node within the cluster. Therefore, you should configure this plugin to talk to its locally running kubelet.
+This input plugin talks to the kubelet API using the `/stats/summary` endpoint to gather metrics about the running pods 
+and containers for a single host. It is assumed that this plugin is running as part of a daemonset within a 
+Kubernetes installation. This means that Telegraf is running on every node within the cluster. Therefore, you 
+should configure this plugin to talk to its locally running kubelet.
 
 ### [Leofs (leofs)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/leofs)
 
@@ -198,11 +230,13 @@ This input plugin talks to the kubelet API using the `/stats/summary` endpoint t
 
 ### [Lustre2 (lustre2)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/lustre2)
 
-Lustre Jobstats allows for RPCs to be tagged with a value, such as a job's ID.  This allows for per job statistics. This plugin collects statistics and tags the data with the `jobid`.
+Lustre Jobstats allows for RPCs to be tagged with a value, such as a job's ID.  This allows for per job statistics. 
+This plugin collects statistics and tags the data with the `jobid`.
 
 ### [Logparser (logparser)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/logparser)
 
-The Logparser plugin streams and parses the given logfiles. Currently, it has the capability of parsing "grok" patterns from logfiles, which also supports regex patterns.
+The Logparser plugin streams and parses the given logfiles. Currently, it has the capability of parsing "grok" patterns 
+from logfiles, which also supports regex patterns.
 
 
 ### [Mailchimp (mailchimp)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/mailchimp)
@@ -215,7 +249,8 @@ The Memcached input plugin gathers statistics data from a Memcached server.
 
 ### [Mesos (mesos)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/mesos)
 
-The Mesos input plugin gathers metrics from Mesos. For more information, please check the [Mesos Observability Metrics](http://mesos.apache.org/documentation/latest/monitoring/) page.
+The Mesos input plugin gathers metrics from Mesos. For more information, please check the 
+[Mesos Observability Metrics](http://mesos.apache.org/documentation/latest/monitoring/) page.
 
 ### [Minecraft (minecraft)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/minecraft)
 
@@ -223,11 +258,13 @@ The Minecraft input plugin uses the RCON protocol to collect statistics from a s
 
 ### [MongoDB (mongodb)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/mongodb)
 
-The MongoDB input plugin collects mongodb stats exposed by serverStatus and few more and create a single measurement containing values.
+The MongoDB input plugin collects mongodb stats exposed by serverStatus and few more and create a single 
+measurement containing values.
 
 ### [MQTT Consumer (mqtt_consumer)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/mqtt_consumer)
 
-The MQTT Consumer plugin reads from specified MQTT topics and adds messages to InfluxDB. Messages are in the Telegraf Input Data Formats.
+The MQTT Consumer plugin reads from specified MQTT topics and adds messages to InfluxDB. Messages are in the 
+Telegraf Input Data Formats.
 
 ### [MySQL (mysql)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/mysql)
 
@@ -247,7 +284,8 @@ The Nginx input plugin reads Nginx basic status information (`ngx_http_stub_stat
 
 ### [Nginx Plus (nginx_plus)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/nginx_plus/README.md)
 
-Nginx Plus is a commercial version of the open source web server Nginx. To use this plugin you will need a license. For more information, see [What’s the Difference between Open Source NGINX and NGINX Plus?](https://www.nginx.com/blog/whats-difference-nginx-foss-nginx-plus/).
+Nginx Plus is a commercial version of the open source web server Nginx. To use this plugin you will need a license. 
+For more information, see [What’s the Difference between Open Source NGINX and NGINX Plus?](https://www.nginx.com/blog/whats-difference-nginx-foss-nginx-plus/).
 
 Structures for Nginx Plus have been built based on history of [status module documentation](http://nginx.org/en/docs/http/ngx_http_status_module.html).
 
@@ -256,7 +294,8 @@ Structures for Nginx Plus have been built based on history of [status module doc
 
 ### [NSQ Consumer (nsq_consumer)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/nsq_consumer)
 
-The NSQ Consumer plugin polls a specified NSQD topic and adds messages to InfluxDB. This plugin allows a message to be in any of the supported data_format types.
+The NSQ Consumer plugin polls a specified NSQD topic and adds messages to InfluxDB. This plugin allows a message 
+to be in any of the supported data_format types.
 
 ### [Nstat (nstat)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/nstat)
 
@@ -283,7 +322,9 @@ The Passenger input plugin gets phusion passenger statistics using their command
 
 ### [PF (pf)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/pf/README.md)
 
-The PF plugin gathers information from the FreeBSD/OpenBSD pf firewall. Currently it can retrive information about the state table: the number of current entries in the table, and counters for the number of searches, inserts, and removals to the table. The pf plugin retrieves this information by invoking the `pfstat` command.
+The PF plugin gathers information from the FreeBSD/OpenBSD pf firewall. Currently it can retrive information about 
+the state table: the number of current entries in the table, and counters for the number of searches, inserts, and 
+removals to the table. The pf plugin retrieves this information by invoking the `pfstat` command.
 
 
 ### [PHP FPM (phpfpm)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/phpfpm)
@@ -296,15 +337,20 @@ The Ping input plugin measures the round-trip for ping commands, response time, 
 
 ### [Postfix (postfix)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/postfix/README.md)
 
-The postfix plugin reports metrics on the postfix queues. For each of the active, hold, incoming, maildrop, and deferred [queues](http://www.postfix.org/QSHAPE_README.html#queues), it will report the queue length (number of items), size (bytes used by items), and age (age of oldest item in seconds).
+The postfix plugin reports metrics on the postfix queues. For each of the active, hold, incoming, maildrop, and 
+deferred [queues](http://www.postfix.org/QSHAPE_README.html#queues), it will report the queue length (number of items), 
+size (bytes used by items), and age (age of oldest item in seconds).
 
 ### [PostgreSQL (postgresql)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/postgresql)
 
-The PostgreSQL input plugin provides metrics for your postgres database. It currently works with postgres versions 8.1+. It uses data from the built in `pg_stat_database` and `pg_stat_bgwriter` views. The metrics recorded depend on your version of postgres.
+The PostgreSQL input plugin provides metrics for your postgres database. It currently works with postgres versions 8.1+. 
+It uses data from the built in `pg_stat_database` and `pg_stat_bgwriter` views. The metrics recorded depend on your 
+version of postgres.
 
 ### [PostgreSQL Extensible (postgresql_extensible)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/postgresql_extensible)
 
-This PostgreSQL Extensible input plugin provides metrics for your postgres database. It has been designed to parse SQL queries in the plugin section of `telegraf.conf` files.
+This PostgreSQL Extensible input plugin provides metrics for your postgres database. It has been designed to parse 
+SQL queries in the plugin section of `telegraf.conf` files.
 
 ### [PowerDNS (powerdns)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/powerdns)
 
@@ -314,9 +360,13 @@ The PowerDNS input plugin gathers metrics about PowerDNS using UNIX sockets.
 
 The Procstat input plugin can be used to monitor system resource usage by an individual process using their `/proc` data.
 
-Processes can be specified either by `pid` file, by executable name, by command line pattern matching, by username, by systemd unit name, or by cgroup name/path (in this order or priority). This plugin uses `pgrep` when an executable name is provided to obtain the `pid`. The Procstat plugin transmits IO, memory, cpu, file descriptor-related measurements for every process specified. A prefix can be set to isolate individual process specific measurements.
+Processes can be specified either by `pid` file, by executable name, by command line pattern matching, by username, 
+by systemd unit name, or by cgroup name/path (in this order or priority). This plugin uses `pgrep` when an executable 
+name is provided to obtain the `pid`. The Procstat plugin transmits IO, memory, cpu, file descriptor-related 
+measurements for every process specified. A prefix can be set to isolate individual process specific measurements.
 
-The plugin will tag processes according to how they are specified in the configuration. If a pid file is used, a "pidfile" tag will be generated. On the other hand, if an executable is used an "exe" tag will be generated.
+The plugin will tag processes according to how they are specified in the configuration. If a pid file is used, a 
+"pidfile" tag will be generated. On the other hand, if an executable is used an "exe" tag will be generated.
 
 ### [Prometheus (prometheus)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/prometheus)
 
@@ -324,11 +374,13 @@ The Prometheus input plugin gathers metrics from HTTP servers exposing metrics i
 
 ### [PuppetAgent (puppetagent)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/puppetagent)
 
-The PuppetAgent input plugin collects variables outputted from the `last_run_summary.yaml` file usually located in `/var/lib/puppet/state/` PuppetAgent Runs.
+The PuppetAgent input plugin collects variables outputted from the `last_run_summary.yaml` file usually 
+located in `/var/lib/puppet/state/` PuppetAgent Runs.
 
 ### [Salesforce (salesforce)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/salesforce)
 
-The Salesforce input plugin gathers metrics about the limits in your Salesforce organization and the remaining usage. It fetches its data from the limits endpoint of the Salesforce REST API.
+The Salesforce input plugin gathers metrics about the limits in your Salesforce organization and the remaining usage. 
+It fetches its data from the limits endpoint of the Salesforce REST API.
 
 ### [RabbitMQ (rabbitmq)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/rabbitmq)
 
@@ -336,17 +388,21 @@ Reads metrics from RabbitMQ servers via the [Management Plugin](https://www.rabb
 
 ### [Raindrops (raindrops)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/raindrops)
 
-The Raindrops plugin reads from specified raindops [middleware](http://raindrops.bogomips.org/Raindrops/Middleware.html) URI and adds the statistics to InfluxDB.
+The Raindrops plugin reads from specified raindops [middleware](http://raindrops.bogomips.org/Raindrops/Middleware.html) 
+URI and adds the statistics to InfluxDB.
 
 ### [Redis (redis)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/redis)
 
-The Redis input plugin gathers the results of the INFO redis command. There are two separate measurements: `redis` and `redis_keyspace`, the latter is used for gathering database-related statistics.
+The Redis input plugin gathers the results of the INFO redis command. There are two separate measurements: `redis` 
+and `redis_keyspace`, the latter is used for gathering database-related statistics.
 
-Additionally the plugin also calculates the hit/miss ratio (`keyspace_hitrate`) and the elapsed time since the last rdb save (`rdb_last_save_time_elapsed`).
+Additionally the plugin also calculates the hit/miss ratio (`keyspace_hitrate`) and the elapsed time since the last RDB 
+save (`rdb_last_save_time_elapsed`).
 
 ### [RethinkDB (rethinkdb)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/rethinkdb)
 
-The RethinkDB input plugin works with RethinkDB 2.3.5+ databases that requires username, password authorization, and Handshake protocol v1.0.
+The RethinkDB input plugin works with RethinkDB 2.3.5+ databases that requires username, password authorization, 
+and Handshake protocol v1.0.
 
 ### [Riak (riak)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/riak)
 
@@ -358,7 +414,11 @@ The Sensors input plugin collects collects sensor metrics with the sensors execu
 
 ### [SMART (smart)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/smart/README.md)
 
-The SMART input plugin gets metrics using the command line utility `smartctl` for S.M.A.R.T. (Self-Monitoring, Analysis and Reporting Technology) storage devices. SMART is a monitoring system included in computer hard disk drives (HDDs) and solid-state drives (SSDs), which include most modern ATA/SATA, SCSI/SAS and NVMe disks. The plugin detects and reports on various indicators of drive reliability, with the intent of enabling the anticipation of hardware failures. See [smartmontools](https://www.smartmontools.org/).
+The SMART input plugin gets metrics using the command line utility `smartctl` for S.M.A.R.T. (Self-Monitoring, Analysis 
+and Reporting Technology) storage devices. SMART is a monitoring system included in computer hard disk drives (HDDs) 
+and solid-state drives (SSDs), which include most modern ATA/SATA, SCSI/SAS and NVMe disks. The plugin detects and 
+reports on various indicators of drive reliability, with the intent of enabling the anticipation of hardware failures. 
+See [smartmontools](https://www.smartmontools.org/).
 
 ### [SNMP (snmp)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/snmp)
 
@@ -370,7 +430,9 @@ The SNMP Legacy input plugin gathers metrics from SNMP agents.
 
 ### [Socket Listener](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/socket_listener)
 
-The Socket Listener is a service input plugin that listens for messages from streaming (tcp, unix) or datagram (udp, unixgram) protocols. Messages are expected in the [Telegraf Input Data Formats](https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md).
+The Socket Listener is a service input plugin that listens for messages from streaming (tcp, unix) or datagram 
+(UDP, unixgram) protocols. Messages are expected in the 
+[Telegraf Input Data Formats](https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md).
 
 ### [Solr (solr)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/solr/README.md)
 
@@ -378,15 +440,19 @@ The Solr plugin collects stats via the MBean Request Handler.
 
 ### [SQL Server (sql_server)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/sqlserver)
 
-The SQL Server input plugin provides metrics for your SQL Server instance. It currently works with SQL Server versions 2008+. Recorded metrics are lightweight and use Dynamic Management Views supplied by SQL Server.
+The SQL Server input plugin provides metrics for your SQL Server instance. It currently works with SQL Server 
+versions 2008+. Recorded metrics are lightweight and use Dynamic Management Views supplied by SQL Server.
 
 ### [StatsD (statsd)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/statsd)
 
-The StatsD plugin is a special type of plugin which runs a backgrounded statsd listener service while Telegraf is running. StatsD messages are formatted as described in the original [etsy statsd](https://github.com/etsy/statsd/blob/master/docs/metric_types.md) implementation.
+The StatsD plugin is a special type of plugin which runs a backgrounded statsd listener service while Telegraf is 
+running. 
+StatsD messages are formatted as described in the original [etsy statsd](https://github.com/etsy/statsd/blob/master/docs/metric_types.md) implementation.
 
 ### [Sysstat (sysstat)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/sysstat)
 
-The Sysstat input plugin collects [sysstat](https://github.com/sysstat/sysstat) system metrics with the sysstat collector utility `sadc` and parses the created binary data file with the `sadf` utility.
+The Sysstat input plugin collects [sysstat](https://github.com/sysstat/sysstat) system metrics with the sysstat 
+collector utility `sadc` and parses the created binary data file with the `sadf` utility.
 
 ### [System (system)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/system)
 
@@ -401,7 +467,10 @@ This plugin uses the Teamspeak 3 ServerQuery interface of the Teamspeak server t
 
 ### [Tomcat (tomcat)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/tomcat)
 
-The Tomcat input plugin collects statistics available from the tomcat manager status page from the `http://<host>/manager/status/all?XML=true` URL. (`XML=true` will return only XML data). See the [Tomcat documentation](https://tomcat.apache.org/tomcat-9.0-doc/manager-howto.html#Server_Status) for details of these statistics.
+The Tomcat input plugin collects statistics available from the tomcat manager status page from 
+the `http://<host>/manager/status/all?XML=true` URL. (`XML=true` will return only XML data). 
+See the [Tomcat documentation](https://tomcat.apache.org/tomcat-9.0-doc/manager-howto.html#Server_Status) for 
+details of these statistics.
 
 ### [Trig (trig)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/trig)
 
@@ -409,7 +478,8 @@ The Tomcat input plugin collects statistics available from the tomcat manager st
 
 ### [Unbound (unbound)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/unbound/README.md)
 
-The Unbound plugin gathers stats from [Unbound](https://www.unbound.net/), a validating, recursive, and caching DNS resolver.
+The Unbound plugin gathers stats from [Unbound](https://www.unbound.net/), a validating, recursive, and 
+caching DNS resolver.
 
 ### [Varnish (varnish)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/varnish)
 
@@ -421,7 +491,10 @@ The Webhooks service input plugin starts an HTTPS server and registers multiple 
 
 ### [Win_perf_counters (win_perf_counters)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/win_perf_counters)
 
-The way the Win_perf_counters input plugin works is that on load of Telegraf, the plugin will be handed configuration from Telegraf. This configuration is parsed and then tested for validity such as if the Object, Instance and Counter existing. If it does not match at startup, it will not be fetched. Exceptions to this are in cases where you query for all instances "". By default the plugin does not return _Total when it is querying for all () as this is redundant.
+The way the Win_perf_counters input plugin works is that on load of Telegraf, the plugin will be handed configuration 
+from Telegraf. This configuration is parsed and then tested for validity such as if the Object, Instance and Counter
+existing. If it does not match at startup, it will not be fetched. Exceptions to this are in cases where you query for 
+all instances "". By default the plugin does not return _Total when it is querying for all () as this is redundant.
 
 ### [Win_services (win_services)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/win_services)
 
@@ -429,13 +502,16 @@ The Win_services input plugin reports Windows services info.
 
 ### [ZFS (zfs)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/zfs)
 
-The ZFS input plugin provides metrics from your ZFS filesystems. It supports ZFS on Linux and FreeBSD. It gets ZFS statistics from `/proc/spl/kstat/zfs` on Linux and from `sysctl` and `zpool` on FreeBSD.
+The ZFS input plugin provides metrics from your ZFS filesystems. It supports ZFS on Linux and FreeBSD. It gets 
+ZFS statistics from `/proc/spl/kstat/zfs` on Linux and from `sysctl` and `zpool` on FreeBSD.
 
 ### [Zipkin (zipkin)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/zipkin)
 
-The Zipkin input plugin implements the Zipkin HTTP server to gather trace and timing data needed to troubleshoot latency problems in microservice architectures.
+The Zipkin input plugin implements the Zipkin HTTP server to gather trace and timing data needed to troubleshoot 
+latency problems in microservice architectures.
 
-> ***Note:*** This plugin is experimental; Its data schema may be subject to change based on its main usage cases and the evolution of the OpenTracing standard.
+> ***Note:*** This plugin is experimental; Its data schema may be subject to change based on its main usage cases 
+and the evolution of the OpenTracing standard.
 
 ### [Zookeeper" (zookeeper)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/zookeeper)
 
