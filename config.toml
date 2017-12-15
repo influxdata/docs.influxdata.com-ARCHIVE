@@ -487,33 +487,32 @@ SectionPagesMenu = "products"
     name = "Input plugins"
     identifier = "inputs"
     weight = 0
-    url = "https://influxdata.com/telegraf/tree/release-1.5/plugins/inputs"
-    parent = "plugins"
-
+    url = "/influxdb/v1.5/plugins/inputs"
+    parent = "Plugins"
 
 # Telefraf v1.5 Sub-Menu - Output plugins
   [[menu.telegraf_1_5]]
   name = "Output plugins"
   identifier = "outputs"
   weight = 0
-  url = "https://influxdata.com/telegraf/tree/release-1.5/plugins/outputs"
-  parent = "plugins"
+  url = "/influxdb/v1.5/plugins/outputs"
+  parent = "Plugins"
 
 # Telefraf v1.5 Sub-Menu - Processor plugins
   [[menu.telegraf_1_5]]
   name = "Output plugins"
   identifier = "processors"
   weight = 0
-  url = "https://influxdata.com/telegraf/tree/release-1.5/plugins/processors"
-  parent = "plugins"
+  url = "/influxdb/v1.5/plugins/processors"
+  parent = "Plugins"
 
   # Telefraf v1.5 Sub-Menu - Aggregrator plugins
   [[menu.telegraf_1_5]]
-  name = "Output plugins"
+  name = "Aggregator plugins"
   identifier = "aggregators"
   weight = 0
-  url = "https://influxdata.com/telegraf/tree/release-1.5/plugins/aggregators"
-  parent = "outputs"
+  url = "/influxdb/v1.5/plugins/aggregators"
+  parent = "Plugins"
 
 # Telegraf v1.4 Sub-Menu - Output Plugins
   [[menu.telegraf_1_4]]
