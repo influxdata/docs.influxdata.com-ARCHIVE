@@ -270,6 +270,8 @@ want to ensure that the database doesn't completely starve those those processes
 
 Keep in mind that setting `GOMAXPROCS=1`eliminates all parallelization.  
 
+Please note that this is an environment variable only and is not supported in the config file.
+
 Environment variable: `GOMAXPROCS`
 
 ## [meta]
