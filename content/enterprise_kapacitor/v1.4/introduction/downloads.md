@@ -1,9 +1,9 @@
 ---
-title: Downloads: Enterprise Kapacitor
+title: Downloads: Kapacitor Enterprise
 menu:
-  enterprise_kapacitor_1_3:
+  enterprise_kapacitor_1_4:
     weight: 10
     parent: introduction
 ---
 
-Enterprise Kapacitor license keys and access are available at the [InfluxPortal](https://portal.influxdata.com/).
+Sign in to the [InfluxPortal](https://portal.influxdata.com/) to get your Kapacitor Enterprise license keys and to access the download URLs.

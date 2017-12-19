@@ -1,18 +1,16 @@
 ---
-title: Introduction
+title: Introducing Kapacitor Enterprise
 
 menu:
-  enterprise_kapacitor_1_3:
+  enterprise_kapacitor_1_4:
     name: Introduction
     identifier: introduction
     weight: 5
 ---
 
 The introductory documentation includes all the information you need to get up
-and running with Enterprise Kapacitor.
+and running with Kapacitor Enterprise.
 
-## [Downloads](/enterprise_kapacitor/v1.3/introduction/downloads/)
+## [Downloads](/enterprise_kapacitor/v1.4/introduction/downloads/)
 
-## [Installation](/enterprise_kapacitor/v1.3/introduction/installation_guide/)
-
-
+## [Installation](/enterprise_kapacitor/v1.4/introduction/installation_guide/)

@@ -1,5 +1,5 @@
 ---
-title: Enterprise Kapacitor Version 1.4 Documentation
+title: Kapacitor Enterprise Version 1.4 Documentation
 
 menu:
   enterprise_kapacitor:
@@ -10,7 +10,7 @@ menu:
 
 # Overview
 
-Enterprise Kapacitor extends the open source version of Kapacitor with several key features.
+Kapacitor Enterprise extends the open source version of Kapacitor with several key features.
 
 1. Clustering - Enterprise Kapacitor is cluster-aware and can perform functions across a set of Kapacitor instances.
 2. Authentication and Authorization - Enterprise Kapacitor has an authentication backend as well as some basic authorization permissions.
