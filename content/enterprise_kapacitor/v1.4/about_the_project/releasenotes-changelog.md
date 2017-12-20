@@ -11,10 +11,9 @@ menu:
 ### Release Notes
 Kapacitor v1.4.0 adds many new features, highlighted here:
 
-- Updated logging to use Diagnostics
-- Add signal handling
-- Update tests for new Alert PreviousLevel feature
-
+- Updated logging to use Diagnostics.
+- Add signal handling.
+- Update tests for new Alert PreviousLevel feature.
 - Load directory service for adding topic handlers, tasks, and templates from `dir`.
 - Structed Logging with logging API endpoints that can be used to tail logs for specified tasks.
 - Autoscale support for Docker Swarm and AWS EC2.
