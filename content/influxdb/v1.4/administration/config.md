@@ -17,7 +17,6 @@ The InfluxDB configuration file contains configuration settings specific to a lo
     * [Global options](#global-options)
         * [reporting-disabled](#reporting-disabled-false)
         * [bind-address](#bind-address-1270018088)
-        * [GOMAXPROCS](#gomaxprocs)
     * [[meta]](#meta)
         * [dir](#dir-varlibinfluxdbmeta)
         * [retention-autocreate](#retention-autocreate-true)
@@ -177,13 +176,13 @@ The configuration options in this document are set to their default settings.
 
 Configuration options that specify a duration support the following duration units:
 
-`ns`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;nanoseconds  
-`us` or `µs`&emsp;microseconds  
-`ms`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;milliseconds  
-`s`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;seconds  
-`m`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;minutes  
-`h`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;hours  
-`d`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;days  
+`ns`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;nanoseconds
+`us` or `µs`&emsp;microseconds
+`ms`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;milliseconds
+`s`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;seconds
+`m`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;minutes
+`h`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;hours
+`d`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;days
 `w`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;weeks
 
 >**Note:** This page documents configuration options for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/master/etc/config.sample.toml) will always be slightly ahead of what is documented here.
@@ -237,7 +236,7 @@ description for the configuration setting.
 InfluxData, the company, relies on reported data from running nodes
 primarily to track the adoption rates of different InfluxDB versions.
 This data helps InfluxData support the continuing development of
-InfluxDB.  
+InfluxDB.
 
 The `reporting-disabled` option toggles
 the reporting of data every 24 hours to `usage.influxdata.com`.
@@ -257,20 +256,6 @@ Environment variable: `INFLUXDB_REPORTING_DISABLED`
 The bind address to use for the RPC service for [backup and restore](/influxdb/v1.4/administration/backup_and_restore/).
 
 Environment variable: `INFLUXDB_BIND_ADDRESS`
-
-### GOMAXPROCS
-
-GOMAXPROCS is a GoLang setting.
-
-The default value of GOMAXPROCS is the number of CPUs (whatever your operating system considers to be a CPU --
-this could be the number of cores i.e. GOMAXPROCS=32 for a 32 core machine) visible to the program *at startup.*  
-However, you can override this value to be less than the maxium value.  
-This can be important in cases where you are running the database alongside other processes on the same machine and
-want to ensure that the database doesn't completely starve those those processes.
-
-Keep in mind that setting `GOMAXPROCS=1`eliminates all parallelization.  
-
-Environment variable: `GOMAXPROCS`
 
 ## [meta]
 
@@ -358,7 +343,7 @@ Environment variable: `INFLUXDB_DATA_QUERY_LOG_ENABLED`
 
 The cache maximum memory size is the maximum size that a shard cache can reach before it starts rejecting writes.
 
-Valid memory size suffixes are: k, m, or g (case-insensitive, 1024 = 1k). 
+Valid memory size suffixes are: k, m, or g (case-insensitive, 1024 = 1k).
 Values without a size suffix are in bytes.
 
 Environment variable: `INFLUXDB_DATA_CACHE_MAX_MEMORY_SIZE`
@@ -367,7 +352,7 @@ Environment variable: `INFLUXDB_DATA_CACHE_MAX_MEMORY_SIZE`
 
 The cache snapshot memory size is the size at which the engine will snapshot the cache and write it to a TSM file, freeing up memory.
 
-Valid memory size suffixes are: k, m, or g (case-insensitive, 1024 = 1k). 
+Valid memory size suffixes are: k, m, or g (case-insensitive, 1024 = 1k).
 Values without a size suffix are in bytes.
 
 
@@ -387,8 +372,8 @@ Environment variable: `INFLUXDB_DATA_COMPACT_FULL_WRITE_COLD_DURATION`
 
 ### max-concurrent-compactions = 0
 
-The maximum number of concurrent full and level [compactions](/influxdb/v1.4/concepts/storage_engine/#compactions) that can run at one time.  
-A value of 0 results in runtime.GOMAXPROCS(0) used at runtime -- which means use all processors.  
+The maximum number of concurrent full and level [compactions](/influxdb/v1.4/concepts/storage_engine/#compactions) that can run at one time.
+A value of 0 results in runtime.GOMAXPROCS(0) used at runtime -- which means use all processors.
 This setting does not apply to cache snapshotting.
 
 Environment variable: `INFLUXDB_DATA_MAX_CONCURRENT_COMPACTIONS`
