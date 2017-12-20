@@ -17,6 +17,7 @@ The InfluxDB configuration file contains configuration settings specific to a lo
     * [Global options](#global-options)
         * [reporting-disabled](#reporting-disabled-false)
         * [bind-address](#bind-address-1270018088)
+        * [GOMAXPROCS](#GOMAXPROCS)
     * [[meta]](#meta)
         * [dir](#dir-varlibinfluxdbmeta)
         * [retention-autocreate](#retention-autocreate-true)
@@ -132,45 +133,9 @@ The InfluxDB configuration file contains configuration settings specific to a lo
         * [query-stats-enabled](#query-stats-enabled-false)
         * [run-interval](#run-interval-1s)
 
+### Configuration Overview
 
-## Using Configuration Files
-
-The system has internal defaults for every configuration file setting.
-View the default configuration settings with the `influxd config` command.
-
-Most of the settings in the local configuration file
-(`/etc/influxdb/influxdb.conf`) are commented out; all
-commented-out settings will be determined by the internal defaults.
-Any uncommented settings in the local configuration file override the
-internal defaults.
-Note that the local configuration file does not need to include every
-configuration setting.
-
-There are two ways to launch InfluxDB with your configuration file:
-
-* Point the process to the correct configuration file by using the `-config`
-  option:
-
-    ```bash
-    influxd -config /etc/influxdb/influxdb.conf
-    ```
-* Set the environment variable `INFLUXDB_CONFIG_PATH` to the path of your
-  configuration file and start the process.
-  For example:
-
-    ```
-    echo $INFLUXDB_CONFIG_PATH
-    /etc/influxdb/influxdb.conf
-
-    influxd
-    ```
-
-InfluxDB first checks for the `-config` option and then for the environment
-variable.
-
-### Configuration Options Overview
-
-Every configuration section has configuration options and every configuration option is optional.
+The Every configuration section has configuration options and every configuration option is optional.
 If you do not uncomment a configuration option, the system uses its default setting.
 The configuration options in this document are set to their default settings.
 
@@ -189,16 +154,66 @@ Configuration options that specify a duration support the following duration uni
 
 ### Environment Variables
 
-All configuration options can be specified in the configuration file or in an
-environment variable.
+All of the configuration options in the configuration file can be specified either in the configuration file or in an environment variable.
 The environment variable overrides the equivalent option in the configuration
 file.
-If a configuration option is not specified in either the configuration file
-or in an environment variable, InfluxDB uses its internal default
-configuration.
+If a configuration option is not specified in either the configuration file or in an environment variable, InfluxDB uses its internal default configuration.
 
-In the sections below we name the relevant environment variable in the
-description for the configuration setting.
+> ***Note:*** If an environment variable has already been set, the equivalent configuration setting in the configuration file is ignored.
+>
+
+#### GOMAXPROCS
+
+> ***Note:***
+> The GOMAXPROCS environment variable cannot be set using the InfluxDB configuration file options, like other environment variables.
+
+
+The `GOMAXPROCS` [Go language environment variable](https://golang.org/pkg/runtime/#hdr-Environment_Variables) can be used to set the maximum number of CPUs that can execute simultaneously.
+
+
+The default value of `GOMAXPROCS` is the number of CPUs (whatever your operating system considers to be a CPU) that are visible to the program *on startup.* For a 32-core machine, the `GOMAXPROCS` value would be `32`.
+You can override this value to be less than the maximum value, which can be useful in cases where you are running the InfluxDB along with other processes on the same machine and want to ensure that the database doesn't completely starve those those processes.
+
+> ***Note:***
+>Setting `GOMAXPROCS=1` will eliminate all parallelization.
+
+
+## Using the Configuration File
+
+The InfluxDB system has internal defaults for all of the settings in the configuration file. To view the default configuration settings, use the `influxd config` command.
+
+The configuration file is located here:
+
+- Linux: `/etc/influxdb/influxdb.conf`
+- MacOS: `/usr/local/etc/influxdb.conf`
+
+All settings that are commented out are set to the internal system defaults. Uncommented settings override the internal defaults.
+Note that the local configuration file does not need to include every configuration setting.
+
+There are two ways to launch InfluxDB with your configuration file:
+
+* Point the process to the configuration file by using the `-config`
+  option. For example:
+
+    ```bash
+    influxd -config /etc/influxdb/influxdb.conf
+    ```
+* Set the environment variable `INFLUXDB_CONFIG_PATH` to the path of your
+  configuration file and start the process.
+  For example:
+
+    ```
+    echo $INFLUXDB_CONFIG_PATH
+    /etc/influxdb/influxdb.conf
+
+    influxd
+    ```
+
+InfluxDB first checks for the `-config` option and then for the environment
+variable.
+
+
+## Configuration File Options by Section
 
 > **Note:**
 > To set or override settings in a config section that allows multiple
@@ -227,7 +242,7 @@ description for the configuration setting.
 >environment variables would be of the form `INFLUXDB_GRAPHITE_(N-1)_BATCH_PENDING`.
 >For each section of the configuration file the numbering restarts at zero.
 
-## Configuration Options by Section
+
 
 ## Global Options
 
