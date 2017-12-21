@@ -60,7 +60,7 @@ If a configuration option is not specified in either the configuration file or i
 > ***Note:*** If an environment variable has already been set, the equivalent configuration setting in the configuration file is ignored.
 >
 
-#### InfluxDB environmet variables `[INFLUXDB_*]`
+#### InfluxDB environment variables (`INFLUXDB_*`)
 
 The InfluxDB environment variables are documented below with the corresponding configuration file settings. All of the InfluxDB-specific environment variables are prefixed with `INFLUXDB_`.
 
