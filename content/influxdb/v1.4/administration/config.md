@@ -10,26 +10,25 @@ The InfluxDB configuration file contains configuration settings specific to a lo
 
 #### Content
 
-* [Configuration overview](#configuration-overview)
-    * [Environment variables](#environment-variables)
-      - [GOMAXPROCS](#GOMAXPROCS)
+[Configuration overview](#configuration-overview)
+* [Environment variables](#environment-variables)
 * [Using the configuration file](#using-the-configuration-file)
 * [Configuration file settings](#configuration-file-settings)
-    * [Global settings](#global-settings)
-    * [Metastore settings [meta]](#metastore-settings-meta)
-    * [Data settings [data]](#data-settings-data)
-    * [Coordination settings [coordinator]](#coordination-settings-coordinator)
-    * [Retention settings [retention]](#retention-settings-retention)
-    * [Shard precreation [shard-precreation]](#shard-precreation-settings-shard-precreation)
-    * [Monitoring settings [monitor]](#monitoring-settings-monitor)
-    * [Administration settings [admin]](#administration-settings-admin)
-    * [HTTP settings [http]](#http-settings-http)
-    * [Subscription settings [subscriber]](#subscription-settings-subscriber)
-    * [Graphite settings [[graphite]]](#graphite-settings-graphite)
-    * [CollectD settings [[collectd]]](#collectd-settings-collectd)
-    * [OpenTSB settings [[opentsdb]]](#opentsdb-settings-opentsdb)
-    * [UDP settings [[udp]]](#udp-settings-udp)
-    * [Continuous queries settings [continuous_queries]](#continuous-queries-settings-continuous_queries)
+  * [Global settings](#global-settings)
+  * [Metastore settings [meta]](#metastore-settings-meta)
+  * [Data settings [data]](#data-settings-data)
+  * [Coordination settings [coordinator]](#coordination-settings-coordinator)
+  * [Retention settings [retention]](#retention-settings-retention)
+  * [Shard precreation [shard-precreation]](#shard-precreation-settings-shard-precreation)
+  * [Monitoring settings [monitor]](#monitoring-settings-monitor)
+  * [Administration settings [admin]](#administration-settings-admin)
+  * [HTTP settings [http]](#http-settings-http)
+  * [Subscription settings [subscriber]](#subscription-settings-subscriber)
+  * [Graphite settings [[graphite]]](#graphite-settings-graphite)
+  * [CollectD settings [[collectd]]](#collectd-settings-collectd)
+  * [OpenTSB settings [[opentsdb]]](#opentsdb-settings-opentsdb)
+  * [UDP settings [[udp]]](#udp-settings-udp)
+  * [Continuous queries settings [continuous_queries]](#continuous-queries-settings-continuous_queries)
 
 ## Configuration overview
 
@@ -923,10 +922,10 @@ Environment variable: `INFLUXDB_UDP_BATCH_SIZE`
 
 Environment variable: `INFLUXDB_UDP_PRECISION`
 
-## Continuous query settings `[continuous_queries]`
+## Continuous queries settings `[continuous_queries]`
 
-This section controls how [continuous queries (CQs)](/influxdb/v1.4/concepts/glossary/#continuous-query-cq) run within InfluxDB.
-CQs are automated batches of queries that execute over recent time intervals.
+The `[continuous_queries]` settings control how [continuous queries (CQs)](/influxdb/v1.4/concepts/glossary/#continuous-query-cq) run within InfluxDB.
+Continuous queries are automated batches of queries that execute over recent time intervals.
 InfluxDB executes one auto-generated query per `GROUP BY time()` interval.
 
 ### enabled = true
