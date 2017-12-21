@@ -1,7 +1,8 @@
-settings---
+---
 title: Configuring InfluxDB
 menu:
   influxdb_1_4:
+    name: Configuration
     weight: 70
     parent: administration
 ---
@@ -15,20 +16,20 @@ The InfluxDB configuration file contains configuration settings specific to a lo
 * [Using the configuration file](#using-the-configuration-file)
 * [Configuration file settings](#configuration-file-settings)
   * [Global settings](#global-settings)
-  * [Metastore settings [meta]](#metastore-settings-meta)
-  * [Data settings [data]](#data-settings-data)
-  * [Coordination settings [coordinator]](#coordination-settings-coordinator)
-  * [Retention settings [retention]](#retention-settings-retention)
-  * [Shard precreation [shard-precreation]](#shard-precreation-settings-shard-precreation)
-  * [Monitoring settings [monitor]](#monitoring-settings-monitor)
-  * [Administration settings [admin]](#administration-settings-admin)
-  * [HTTP settings [http]](#http-settings-http)
-  * [Subscription settings [subscriber]](#subscription-settings-subscriber)
-  * [Graphite settings [[graphite]]](#graphite-settings-graphite)
-  * [CollectD settings [[collectd]]](#collectd-settings-collectd)
-  * [OpenTSB settings [[opentsdb]]](#opentsdb-settings-opentsdb)
-  * [UDP settings [[udp]]](#udp-settings-udp)
-  * [Continuous queries settings [continuous_queries]](#continuous-queries-settings-continuous_queries)
+  * [Metastore settings `[meta]`](#metastore-settings-meta)
+  * [Data settings `[data]`](#data-settings-data)
+  * [Coordination settings `[coordinator]`](#coordination-settings-coordinator)
+  * [Retention settings `[retention]`](#retention-settings-retention)
+  * [Shard precreation `[shard-precreation]`](#shard-precreation-settings-shard-precreation)
+  * [Monitoring settings `[monitor]`](#monitoring-settings-monitor)
+  * [Administration settings `[admin]`](#administration-settings-admin)
+  * [HTTP settings `[http]`](#http-settings-http)
+  * [Subscription settings `[subscriber]`](#subscription-settings-subscriber)
+  * [Graphite settings `[[graphite]]`](#graphite-settings-graphite)
+  * [CollectD settings `[[collectd]]`](#collectd-settings-collectd)
+  * [OpenTSB settings `[[opentsdb]]`](#opentsdb-settings-opentsdb)
+  * [UDP settings `[[udp]]`](#udp-settings-udp)
+  * [Continuous queries settings `[continuous_queries]`](#continuous-queries-settings-continuous_queries)
 
 ## Configuration overview
 
