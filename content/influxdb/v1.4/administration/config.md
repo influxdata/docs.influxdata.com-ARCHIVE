@@ -48,7 +48,7 @@ Configuration settings that specify a duration support the following duration un
 - `d`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;days
 - `w`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;weeks
 
->**Note:** This page documents configuration settings for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/master/etc/config.sample.toml) will always be slightly ahead of what is documented here.
+>**Note:** Configuration file settings are documented here for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/master/etc/config.sample.toml) might be slightly newer.
 
 ## Environment variables
 
@@ -60,7 +60,12 @@ If a configuration option is not specified in either the configuration file or i
 > ***Note:*** If an environment variable has already been set, the equivalent configuration setting in the configuration file is ignored.
 >
 
-#### GOMAXPROCS
+#### InfluxDB environmet variables `[INFLUXDB_*]`
+
+The InfluxDB environment variables are documented below with the corresponding configuration file settings. All of the InfluxDB-specific environment variables are prefixed with `INFLUXDB_`.
+
+
+#### `GOMAXPROCS`
 
 > ***Note:***
 > The GOMAXPROCS environment variable cannot be set using the InfluxDB configuration file settings, like other environment variables.
@@ -74,9 +79,6 @@ You can override this value to be less than the maximum value, which can be usef
 
 > ***Note:***
 > Setting `GOMAXPROCS=1` will eliminate all parallelization.
-
-#### InfluxDB Environment Variables
-
 
 
 ## Using the configuration file
@@ -204,14 +206,14 @@ Environment variable: `INFLUXDB_META_LOGGING_ENABLED`
 
 ## Data settings `[data]`
 
-This section controls where the actual shard data for InfluxDB lives and how it is flushed from the WAL. `dir` may need to be changed to a suitable place for you system, but the WAL settings are an advanced configuration. The defaults should work for most systems.
+The `[data]` settings control where the actual shard data for InfluxDB lives and how it is flushed from the WAL. `dir` may need to be changed to a suitable place for your system, but the WAL settings are an advanced configuration. The defaults should work for most systems.
 
 ### `dir = "/var/lib/influxdb/data"`
 
 The directory where InfluxDB stores the data.
 This directory may be changed.
 
->**Note:** The default directory for OS X installations is `/Users/<username>/.influxdb/data`
+>**Note:** The default directory for OS X installations is `/Users/<username>/.influxdb/data`.
 
 Environment variable: `INFLUXDB_DATA_DIR`
 
@@ -227,7 +229,7 @@ Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 
 The WAL directory is the location of the [write ahead log](/influxdb/v1.4/concepts/glossary/#wal-write-ahead-log).
 
->**Note:** The default WAL directory for OS X installations is `/Users/<username>/.influxdb/wal`
+>**Note:** The default WAL directory for Mac OS X installations is `/Users/<username>/.influxdb/wal`.
 
 Environment variable: `INFLUXDB_DATA_WAL_DIR`
 
