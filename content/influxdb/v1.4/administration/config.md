@@ -10,7 +10,7 @@ The InfluxDB configuration file contains configuration settings specific to a lo
 
 #### Content
 
-[Configuration overview](#configuration-overview)
+* [Configuration overview](#configuration-overview)
 * [Environment variables](#environment-variables)
 * [Using the configuration file](#using-the-configuration-file)
 * [Configuration file settings](#configuration-file-settings)
