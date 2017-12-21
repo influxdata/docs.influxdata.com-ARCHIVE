@@ -1,5 +1,5 @@
----
-title: Configuration
+settings---
+title: Configuring InfluxDB
 menu:
   influxdb_1_4:
     weight: 70
@@ -10,151 +10,49 @@ The InfluxDB configuration file contains configuration settings specific to a lo
 
 #### Content
 
-* [Using configuration files](#using-configuration-files)
-    * [Configuration options overview](#configuration-options-overview)
+* [Configuration overview](#configuration-overview)
     * [Environment variables](#environment-variables)
-* [Configuration options by section](#configuration-options-by-section)
-    * [Global options](#global-options)
-        * [reporting-disabled](#reporting-disabled-false)
-        * [bind-address](#bind-address-1270018088)
-        * [GOMAXPROCS](#GOMAXPROCS)
-    * [[meta]](#meta)
-        * [dir](#dir-varlibinfluxdbmeta)
-        * [retention-autocreate](#retention-autocreate-true)
-        * [logging-enabled](#logging-enabled-true)
-    * [[data]](#data)
-      * [dir](#dir-varlibinfluxdbdata)
-        * [index-version](#index-version-inmem)
-        * [wal-dir](#wal-dir-varlibinfluxdbwal)
-        * [wal-fsync-delay](#wal-fsync-delay-0s)
-        * [trace-logging-enabled](#trace-logging-enabled-false)
-        * [query-log-enabled](#query-log-enabled-true)
-        * [cache-max-memory-size](#cache-max-memory-size-1073741824)
-        * [cache-snapshot-memory-size](#cache-snapshot-memory-size-26214400)
-        * [cache-snapshot-write-cold-duration](#cache-snapshot-write-cold-duration-10m)
-        * [compact-full-write-cold-duration](#compact-full-write-cold-duration-4h)
-        * [max-concurrent-compactions](#max-concurrent-compactions-0)
-        * [max-series-per-database](#max-series-per-database-1000000)
-        * [max-values-per-tag](#max-values-per-tag-100000)
-    * [[coordinator]](#coordinator)
-        * [write-timeout](#write-timeout-10s)
-        * [max-concurrent-queries](#max-concurrent-queries-0)
-        * [query-timeout](#query-timeout-0s)
-        * [log-queries-after](#log-queries-after-0s)
-        * [max-select-point](#max-select-point-0)
-        * [max-select-series](#max-select-series-0)
-        * [max-select-buckets](#max-select-buckets-0)
-    * [[retention]](#retention)
-        * [enabled](#enabled-true-1)
-        * [check-interval](#check-interval-30m0s)
-    * [[shard-precreation]](#shard-precreation)
-        * [enabled](#enabled-true-1)
-        * [check-interval](#check-interval-10m)
-        * [advance-period](#advance-period-30m)
-    * [[monitor]](#monitor)
-        * [store-enabled](#store-enabled-true)
-        * [store-database](#store-database-_internal)
-        * [store-interval](#store-interval-10s)
-    * [[admin]](#admin)
-    * [[http]](#http)
-        * [enabled](#enabled-true-2)
-        * [bind-address](#bind-address-8086)
-        * [auth-enabled](#auth-enabled-false)
-        * [realm](#realm-influxdb)
-        * [log-enabled](#log-enabled-true)
-        * [write-tracing](#write-tracing-false)
-        * [pprof-enabled](#pprof-enabled-true)
-        * [https-enabled](#https-enabled-false)
-        * [https-certificate](#https-certificate-etcsslinfluxdbpem)
-        * [https-private-key](#https-private-key)
-        * [shared-secret](#shared-secret)
-        * [max-row-limit](#max-row-limit-0)
-        * [max-connection-limit](#max-connection-limit-0)
-        * [unix-socket-enabled](#unix-socket-enabled-false)
-        * [bind-socket](#bind-socket-varruninfluxdbsock)
-        * [max-body-size](#max-body-size-25000000)
-    * [[subscriber]](#subscriber)
-        * [enabled](#enabled-true-3)
-        * [http-timeout](#http-timeout-30s)
-        * [insecure-skip-verify](#insecure-skip-verify-false)
-        * [ca-certs](#ca-certs)
-        * [write-concurrency](#write-concurrency-40)
-        * [write-buffer-size](#write-buffer-size-1000)
-    * [[[graphite]]](#graphite)
-        * [enabled](#enabled-false)
-        * [database](#database-graphite)
-        * [retention-policy](#retention-policy)
-        * [bind-address](#bind-address-2003)
-        * [protocol](#protocol-tcp)
-        * [consistency-level](#consistency-level-one)
-        * [batch-size](#batch-size-5000)
-        * [batch-pending](#batch-pending-10)
-        * [batch-timeout](#batch-timeout-1s)
-        * [udp-read-buffer](#udp-read-buffer-0)
-        * [separator](#separator)
-    * [[[collectd]]](#collectd)
-        * [enabled](#enabled-false-1)
-        * [bind-address](#bind-address-25826)
-        * [database](#database-collectd)
-        * [retention-policy](#retention-policy-1)
-        * [typesdb](#typesdb-usrlocalsharecollectd)
-        * [security-level](#security-level-none)
-        * [auth-file](#auth-file-etccollectdauth_file)
-        * [batch-size](#batch-size-5000-1)
-        * [batch-pending](#batch-pending-10-1)
-        * [batch-timeout](#batch-timeout-10s)
-        * [read-buffer](#read-buffer-0)
-        * [parse-multivalue-plugin](#parse-multivalue-plugin-split)
-    * [[[opentsdb]]](#opentsdb)
-        * [enabled](#enabled-false-2)
-        * [bind-address](#bind-address-4242)
-        * [database](#database-opentsdb)
-        * [retention-policy](#retention-policy-2)
-        * [consistency-level](#consistency-level-one-1)
-        * [tls-enabled](#tls-enabled-false)
-        * [certificate](#certificate-etcsslinfluxdbpem)
-        * [log-point-errors](#log-point-errors-true)
-        * [batch-size](#batch-size-1000)
-        * [batch-pending](#batch-pending-5)
-        * [batch-timeout](#batch-timeout-1s-1)
-    * [[[udp]]](#udp)
-        * [enabled](#enabled---false-3)
-        * [bind-address](#bind-address-8089)
-        * [database](#database-udp)
-        * [retention-policy](#retention-policy-3)
-        * [batch-size](#batch-size-5000-2)
-        * [batch-pending](#batch-pending-10-2)
-        * [batch-timeout](#batch-timeout-1s-2)
-        * [read-buffer](#read-buffer-0-1)
-        * [precision](#precision)
-     * [[continuous_queries]](#continuous_queries)
-        * [enabled](#enabled-true-4)
-        * [log-enabled](#log-enabled-true-1)
-        * [query-stats-enabled](#query-stats-enabled-false)
-        * [run-interval](#run-interval-1s)
+      - [GOMAXPROCS](#GOMAXPROCS)
+* [Using the configuration file](#using-the-configuration-file)
+* [Configuration file settings](#configuration-file-settings)
+    * [Global settings](#global-settings)
+    * [Metadata settings [meta]](#metadata-settings)
+    * [Data settings [data]](#data)
+    * [Coordination settings [coordinator]](#coordinator)
+    * [Retention settings [retention]](#retention)
+    * [Shard precreaation [shard-precreation]](#shard-precreation)
+    * [Monitoring settings [monitor]](#monitor)
+    * [Administration settings [admin]](#admin)
+    * [HTTP settings [http]](#http)
+    * [Subscription settings [subscriber]](#subscription-settings)
+    * [Graphite settings [[graphite]]](#graphite-settings)
+    * [CollectD settings [[collectd]]](#collectd-settings)
+    * [OpenTSB settings [[opentsdb]]](#opentsdb-settings)
+    * [UDP settings [[udp]]](#udp-settings)
+    * [Continuous queries settings [continuous_queries]](#continuous-queries)
 
-### Configuration Overview
+## Configuration overview
 
-The Every configuration section has configuration options and every configuration option is optional.
+InfluxDB is configured using the configuration file (influxdb.conf) and environment variables.
 If you do not uncomment a configuration option, the system uses its default setting.
-The configuration options in this document are set to their default settings.
+The configuration settings in this document are set to their default settings.
 
-Configuration options that specify a duration support the following duration units:
+Configuration settings that specify a duration support the following duration units:
 
-`ns`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;nanoseconds
-`us` or `µs`&emsp;microseconds
-`ms`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;milliseconds
-`s`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;seconds
-`m`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;minutes
-`h`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;hours
-`d`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;days
-`w`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;weeks
+- `ns`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;nanoseconds
+- `us` or `µs`&emsp;microseconds
+- `ms`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;milliseconds
+- `s`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;seconds
+- `m`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;minutes
+- `h`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;hours
+- `d`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;days
+- `w`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;weeks
 
->**Note:** This page documents configuration options for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/master/etc/config.sample.toml) will always be slightly ahead of what is documented here.
+>**Note:** This page documents configuration settings for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/master/etc/config.sample.toml) will always be slightly ahead of what is documented here.
 
-### Environment Variables
+## Environment variables
 
-All of the configuration options in the configuration file can be specified either in the configuration file or in an environment variable.
+All of the configuration settings in the configuration file can be specified either in the configuration file or in an environment variable.
 The environment variable overrides the equivalent option in the configuration
 file.
 If a configuration option is not specified in either the configuration file or in an environment variable, InfluxDB uses its internal default configuration.
@@ -165,7 +63,7 @@ If a configuration option is not specified in either the configuration file or i
 #### GOMAXPROCS
 
 > ***Note:***
-> The GOMAXPROCS environment variable cannot be set using the InfluxDB configuration file options, like other environment variables.
+> The GOMAXPROCS environment variable cannot be set using the InfluxDB configuration file settings, like other environment variables.
 
 
 The `GOMAXPROCS` [Go language environment variable](https://golang.org/pkg/runtime/#hdr-Environment_Variables) can be used to set the maximum number of CPUs that can execute simultaneously.
@@ -175,19 +73,22 @@ The default value of `GOMAXPROCS` is the number of CPUs (whatever your operating
 You can override this value to be less than the maximum value, which can be useful in cases where you are running the InfluxDB along with other processes on the same machine and want to ensure that the database doesn't completely starve those those processes.
 
 > ***Note:***
->Setting `GOMAXPROCS=1` will eliminate all parallelization.
+> Setting `GOMAXPROCS=1` will eliminate all parallelization.
+
+#### InfluxDB Environment Variables
 
 
-## Using the Configuration File
+
+## Using the configuration file
 
 The InfluxDB system has internal defaults for all of the settings in the configuration file. To view the default configuration settings, use the `influxd config` command.
 
-The configuration file is located here:
+The local InfluxDB configuration file is located here:
 
 - Linux: `/etc/influxdb/influxdb.conf`
 - MacOS: `/usr/local/etc/influxdb.conf`
 
-All settings that are commented out are set to the internal system defaults. Uncommented settings override the internal defaults.
+Settings that are commented out are set to the internal system defaults. Uncommented settings override the internal defaults.
 Note that the local configuration file does not need to include every configuration setting.
 
 There are two ways to launch InfluxDB with your configuration file:
@@ -213,11 +114,11 @@ InfluxDB first checks for the `-config` option and then for the environment
 variable.
 
 
-## Configuration File Options by Section
+## Configuration file settings
 
 > **Note:**
 > To set or override settings in a config section that allows multiple
-> configurations (any section with [[`double_brackets`]] in the header supports
+> configurations (any section with `[[double_brackets]]` in the header supports
 > multiple configurations), the desired configuration must be specified by ordinal
 > number.
 > For example, for the first set of `[[graphite]]` environment variables,
@@ -243,12 +144,11 @@ variable.
 >For each section of the configuration file the numbering restarts at zero.
 
 
-
-## Global Options
+## Global settings
 
 ### reporting-disabled = false
 
-InfluxData, the company, relies on reported data from running nodes
+InfluxData uses voluntarily reported data from running InfluxDB nodes
 primarily to track the adoption rates of different InfluxDB versions.
 This data helps InfluxData support the continuing development of
 InfluxDB.
@@ -272,7 +172,7 @@ The bind address to use for the RPC service for [backup and restore](/influxdb/v
 
 Environment variable: `INFLUXDB_BIND_ADDRESS`
 
-## [meta]
+## Metastore settings `[meta]`
 
 This section controls parameters for InfluxDB's metastore,
 which stores information on users, databases, retention policies, shards, and continuous queries.
@@ -302,7 +202,7 @@ Meta logging toggles the logging of messages from the meta service.
 
 Environment variable: `INFLUXDB_META_LOGGING_ENABLED`
 
-## [data]
+## Data settings `[data]`
 
 This section controls where the actual shard data for InfluxDB lives and how it is flushed from the WAL. `dir` may need to be changed to a suitable place for you system, but the WAL settings are an advanced configuration. The defaults should work for most systems.
 
@@ -431,9 +331,9 @@ will fail.
 
 Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 
-## [coordinator]
+## Query management settings `[coordinator]`
 
-This section contains configuration options for query management.
+This section contains configuration settings for query management.
 For more on managing queries, see [Query Management](/influxdb/v1.4/troubleshooting/query_management/).
 
 ### write-timeout = "10s"
@@ -454,7 +354,7 @@ Environment variable: `INFLUXDB_COORDINATOR_MAX_CONCURRENT_QUERIES`
 The maximum time for which a query can run on your instance before InfluxDB
 kills the query.
 The default setting (`0`) allows queries to run with no time restrictions.
-This setting is a [duration](#configuration-options).
+This setting is a [duration](#configuration-settings).
 
 Environment variable: `INFLUXDB_COORDINATOR_QUERY_TIMEOUT`
 
@@ -464,7 +364,7 @@ The maximum time a query can run after which InfluxDB logs the query with a
 `Detected slow query` message.
 The default setting (`"0"`) will never tell InfluxDB to log the query.
 This setting is a
-[duration](#configuration-options).
+[duration](#configuration-settings).
 
 Environment variable: `INFLUXDB_COORDINATOR_LOG_QUERIES_AFTER`
 
@@ -494,9 +394,9 @@ buckets.
 
 Environment variable: `INFLUXDB_COORDINATOR_MAX_SELECT_BUCKETS`
 
-## [retention]
+## Retention policy settings `[retention]`
 
-This section controls the enforcement of retention policies for evicting old data.
+The `[retention]` settings control the enforcement of retention policies for evicting old data.
 
 ### enabled = true
 
@@ -510,9 +410,9 @@ The rate at which InfluxDB checks to enforce a retention policy.
 
 Environment variable: `INFLUXDB_RETENTION_CHECK_INTERVAL`
 
-## [shard-precreation]
+## Shard precreation settings [shard-precreation]
 
-Controls the precreation of shards so that shards are available before data arrive.
+The `[shard-precreation]` settings control the precreation of shards so that shards are available before data arrive.
 Only shards that, after creation, will have both a start- and end-time in the future are ever created.
 Shards that would be wholly or partially in the past are never precreated.
 
@@ -532,7 +432,7 @@ Increasing this setting too far in the future can cause inefficiencies.
 
 Environment variable: `INFLUXDB_SHARD_PRECREATION_ADVANCE_PERIOD`
 
-## [monitor]
+## Monitoring settings `[monitor]`
 
 This section controls InfluxDB's [system self-monitoring](https://github.com/influxdb/influxdb/blob/master/monitor/README.md).
 
@@ -560,7 +460,7 @@ The interval at which InfluxDB records statistics.
 
 Environment variable: `INFLUXDB_MONITOR_STORE_INTERVAL`
 
-## [admin]
+## Administration settings `[admin]`
 
 <dt> Starting with version 1.3, the web admin interface is no longer available in InfluxDB.
 The interface does not run on port `8083` and InfluxDB ignores the `[admin]` section in the configuration file if that section is present.
@@ -568,11 +468,11 @@ The interface does not run on port `8083` and InfluxDB ignores the `[admin]` sec
 See [Chronograf's transition guide](/chronograf/latest/guides/transition-web-admin-interface/) for more information.
 </dt>
 
-## [http]
+## HTTP endpoint settings `[http]`
 
-This section controls how InfluxDB configures the HTTP endpoints.
+The `[http]` settings control how InfluxDB configures the HTTP endpoints.
 These are the primary mechanisms for getting data into and out of InfluxDB.
-Edit the options in this section to enable HTTPS and authentication.
+Edit the settings in this section to enable HTTPS and authentication.
 See [Authentication and Authorization](/influxdb/v1.4/query_language/authentication_and_authorization/).
 
 ### enabled = true
@@ -681,7 +581,7 @@ maximum size, a 413 Request Entity Too Large HTTP response is returned. This can
 
 Environment variable: `INFLUXDB_HTTP_MAX_BODY_SIZE`
 
-## [subscriber]
+## Subscription settings `[subscriber]`
 
 This section controls how [Kapacitor](/kapacitor/v1.4/) will receive data.
 
@@ -723,7 +623,7 @@ The number of in-flight writes buffered in the write channel.
 
 Environment variable: `INFLUXDB_SUBSCRIBER_WRITE_BUFFER_SIZE`
 
-## [[graphite]]
+## Graphite settings `[[graphite]]`
 
 This section controls one or many listeners for Graphite data.
 See the [README](https://github.com/influxdb/influxdb/blob/master/services/graphite/README.md) on GitHub for more information.
@@ -767,7 +667,7 @@ For more information, see the Query String Parameters for Writes section in the 
 
 Environment variable: `INFLUXDB_GRAPHITE_CONSISTENCY_LEVEL`
 
-*The next three options control how batching works.
+*The next three settings control how batching works.
 You should have this enabled otherwise you could get dropped metrics or poor performance.
 Batching will buffer points in memory if you have many coming in.*
 
@@ -802,9 +702,9 @@ This string joins multiple matching 'measurement' values providing more control 
 
 Environment variable: `INFLUXDB_GRAPHITE_SEPARATOR`
 
-## [[collectd]]
+## CollectD settings `[[collectd]]`
 
-This section controls the listener for collectd data. See the
+The `[[collectd]]` settings control the listener for `collectd` data. See the
 [README](https://github.com/influxdata/influxdb/tree/master/services/collectd)
 on Github for more information.
 
@@ -852,7 +752,7 @@ Environment variable: `INFLUXDB_COLLECTD_SECURITY_LEVEL`
 
 Environment variable: `INFLUXDB_COLLECTD_AUTH_FILE`
 
-*The next three options control how batching works.
+*The next three settings control how batching works.
 You should have this enabled otherwise you could get dropped metrics or poor performance.
 Batching will buffer points in memory if you have many coming in.*
 
@@ -885,7 +785,7 @@ Environment variable: `INFLUXDB_COLLECTD_READ_BUFFER`
 
 When set to `split`, multi-value plugin data (e.g. df free:5000,used:1000) will be split into separate measurements (e.g., (df_free, value=5000) (df_used, value=1000)).  When set to `join`, multi-value plugin will be stored as a single multi-value measurement (e.g., (df, free=5000,used=1000)). Defaults to `split`.
 
-## [[opentsdb]]
+## OpenTSDB settings `[[opentsdb]]`
 
 Controls the listener for OpenTSDB data.
 See the [README](https://github.com/influxdb/influxdb/blob/master/services/opentsdb/README.md) on GitHub for more information.
@@ -936,7 +836,7 @@ Log an error for every malformed point.
 
 Environment variable: `INFLUXDB_OPENTSDB_0_LOG_POINT_ERRORS`
 
-*The next three options control how batching works.
+*The next three settings control how batching works.
 You should have this enabled otherwise you could get dropped metrics or poor performance.
 Only points metrics received over the telnet protocol undergo batching.*
 
@@ -958,9 +858,9 @@ The input will flush at least this often even if it hasn't reached the configure
 
 Environment variable: `INFLUXDB_OPENTSDB_BATCH_TIMEOUT`
 
-## [[udp]]
+## UDP settings [[udp]]
 
-This section controls the listeners for InfluxDB line protocol data via UDP.
+The `udp` settings control the listeners for InfluxDB line protocol data using UDP.
 See the [UDP page](/influxdb/v1.4/write_protocols/udp/) for more information.
 
 ### enabled = false
@@ -988,7 +888,7 @@ An empty string is equivalent to the database's `DEFAULT` retention policy.
 
 Environment variable: `INFLUXDB_UDP_RETENTION_POLICY`
 
-*The next three options control how batching works.
+*The next three settings control how batching works.
 You should have this enabled otherwise you could get dropped metrics or poor performance.
 Batching will buffer points in memory if you have many coming in.*
 
@@ -1023,7 +923,7 @@ Environment variable: `INFLUXDB_UDP_BATCH_SIZE`
 
 Environment variable: `INFLUXDB_UDP_PRECISION`
 
-## [continuous_queries]
+## Continuous query settings `[continuous_queries]`
 
 This section controls how [continuous queries (CQs)](/influxdb/v1.4/concepts/glossary/#continuous-query-cq) run within InfluxDB.
 CQs are automated batches of queries that execute over recent time intervals.
