@@ -1,7 +1,8 @@
 ---
-title: Upgrading
+title: Upgrading to Chronograf 1.4
 menu:
   chronograf_1_4:
+    name: Upgrading
     weight: 10
     parent: Administration
 ---

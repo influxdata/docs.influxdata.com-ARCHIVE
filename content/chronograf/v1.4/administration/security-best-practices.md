@@ -1,5 +1,8 @@
 ---
-title: Security Best Practices
+title: Security considerations
+
+aliases: /chronograf_1_4/security-best-practices/
+
 menu:
   chronograf_1_4:
     weight: 50
@@ -20,7 +23,7 @@ menu:
 * [TLS](#tls)
   * [Running Chronograf with TLS](#running-chronograf-with-tls)
   * [Testing with Self-Signed Certificates ](#testing-with-self-signed-certificates)
-  
+
 ## Chronograf with OAuth 2.0 Authentication
 
 ### Configuration
@@ -134,7 +137,7 @@ The equivalent command line switches are:
 
 #### Optional Heroku Organizations
 
-Like the other OAuth2 providers, access to Chronograf via Heroku can be restricted to members of specific Heroku organizations. 
+Like the other OAuth2 providers, access to Chronograf via Heroku can be restricted to members of specific Heroku organizations.
 This is controlled using the `HEROKU_ORGS` environment variable or the [`--heroku-organizations`](/chronograf/v1.4/administration/configuration/#heroku-organization) switch and is comma-separated.
 If we wanted to permit access from the `hill-valley-preservation-society` organization and `the-pinheads` organization, we would use the following environment variable:
 ```sh
@@ -189,7 +192,7 @@ you are able to set your own authentication, token, and API URLs.
 The callback URL path will be `/oauth/generic/callback`.
 So, if your Chronograf is hosted at `https://localhost:8888` then the full callback URL would be  `https://localhost:8888/oauth/generic/callback`.
 
-The generic OAuth2 provider requires several settings:  
+The generic OAuth2 provider requires several settings:
 
 * `GENERIC_CLIENT_ID` : this application's client [identifier](https://tools.ietf.org/html/rfc6749#section-2.2) issued by the provider
 * `GENERIC_CLIENT_SECRET` : this application's [secret](https://tools.ietf.org/html/rfc6749#section-2.3.1) issued by the provider
@@ -250,7 +253,7 @@ the certificate and key files.  The server reads and parses a public/private key
 pair from these files. The files must contain PEM encoded data.
 
 In Chronograf all command line options also have a corresponding environment
-variable. 
+variable.
 
 To specify the certificate file either use the `--cert` CLI option or `TLS_CERTIFICATE`
 environment variable.

@@ -1,5 +1,5 @@
 ---
-title: Administration
+title: Chronograf Administration
 
 menu:
   chronograf_1_4:
@@ -18,4 +18,3 @@ Follow the links below for more information.
 ## [Multi-Tenant Setup](/chronograf/v1.4/administration/multi-tenant/)
 
 ## [Security Best Practices](/chronograf/v1.4/administration/security-best-practices/)
-

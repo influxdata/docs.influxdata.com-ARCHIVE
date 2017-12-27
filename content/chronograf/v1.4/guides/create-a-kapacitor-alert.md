@@ -1,5 +1,5 @@
 ---
-title: Create a Kapacitor Alert
+title: Creating Kapacitor Alerts
 menu:
   chronograf_1_4:
     weight: 10
@@ -50,7 +50,7 @@ In this example, we select the `telegraf` [database](/influxdb/latest/concepts/g
 The result is the InfluxQL [query](/influxdb/latest/concepts/glossary/#query) in the image below.
 Notice that Chronograf automatically sets a time range in the [`WHERE` clause](/influxdb/latest/query_language/data_exploration/#the-where-clause).
 Don't worry about that for now; we'll discuss that time range in step four.
- 
+
 ![Select your data](/img/chronograf/v1.4/g-kap-ts.png)
 
 ### Step 3: Select the alert type
@@ -142,4 +142,3 @@ The specific field value that triggered the alert is `99.0981963931105`.
 ![See the alerts](/img/chronograf/v1.4/g-kap-slack.png)
 
 That's it! You've successfully used Chronograf to configure a Kapacitor alert rule to monitor your idle CPU usage.
-
