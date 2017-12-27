@@ -1,9 +1,9 @@
 ---
-title: Configuring Chronograf
+title: Chronograf configuration file
 menu:
   chronograf_1_4:
     name: Configuration
-    weight: 20
+    weight: 25
     parent: Administration
 ---
 

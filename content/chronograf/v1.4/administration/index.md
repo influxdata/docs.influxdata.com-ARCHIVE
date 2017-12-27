@@ -11,10 +11,10 @@ Follow the links below for more information.
 
 ## [Upgrading](/chronograf/v1.4/administration/upgrading/)
 
-## [Configuration](/chronograf/v1.4/administration/configuration/)
+## [Configuring](/chronograf/v1.4/administration/configuration/)
 
-## [User Management](/chronograf/v1.4/administration/user-management/)
+## [Managing users and roles](/chronograf/v1.4/administration/managing-users/)
 
-## [Multi-Tenant Setup](/chronograf/v1.4/administration/multi-tenant/)
+## [Managing organizations](/chronograf/v1.4/administration/managing-organizations/)
 
 ## [Security Best Practices](/chronograf/v1.4/administration/security-best-practices/)
