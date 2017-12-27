@@ -1,5 +1,5 @@
 ---
-title: Create a Dashboard
+title: Creating dashboards
 menu:
   chronograf_1_4:
     weight: 0
@@ -25,7 +25,7 @@ See the [Getting Started](/chronograf/v1.4/introduction/getting-started/) guide 
 Before you start, navigate to the Dashboards page and click on the `Create Dashboard` button.
 That button takes you to your new dashboard; this is your blank canvas on which you'll create your visualization masterpieces.
 
-### Step 1: Name your dashboard 
+### Step 1: Name your dashboard
 
 Click the `Rename` icon at the top of the page.
 Name your dashboard anything you want.
@@ -76,7 +76,7 @@ Note that Chronograf does not save your cell if you navigate away from this page
 #### Explore cell data:
 * **Zoom** in on your cell by clicking and dragging your mouse over the area of interest
 * **Pan** over your cell data by pressing the shift key and clicking and dragging your mouse over the graph
-* **Reset** your cell by double-clicking your mouse in the cell window 
+* **Reset** your cell by double-clicking your mouse in the cell window
 
 > Note:
 These tips only apply to the line, stacked, step-plot, and line+stat [visualization types](/chronograf/v1.4/troubleshooting/frequently-asked-questions/#what-visualization-types-does-chronograf-support).
@@ -87,7 +87,7 @@ These tips only apply to the line, stacked, step-plot, and line+stat [visualizat
 
 ![Visualization type](/img/chronograf/v1.4/g-dashboard-resize.gif)
 
-Next, complete your dashboard by creating, editing, and repositioning more cells! 
+Next, complete your dashboard by creating, editing, and repositioning more cells!
 
 ## Extra Tips
 
