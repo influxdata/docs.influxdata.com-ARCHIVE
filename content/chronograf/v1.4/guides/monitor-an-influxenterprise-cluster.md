@@ -7,9 +7,9 @@ menu:
 ---
 
 [InfluxEnterprise](/enterprise_influxdb/v1.2/) offers high availability and a highly-scalable clustering solution for your time series data needs.
-Use Chronograf to assess your cluster's health and monitor the infrastructure behind your project.
+Use Chronograf to assess your cluster's health and to monitor the infrastructure behind your project.
 
-This guides offers step-by-step instructions for using Chronograf, [InfluxDB](/influxdb/latest/), and [Telegraf](/telegraf/latest/) to monitor data nodes in your InfluxEnteprise cluster.
+This guide offers step-by-step instructions for using Chronograf, [InfluxDB](/influxdb/latest/), and [Telegraf](/telegraf/latest/) to monitor data nodes in your InfluxEnteprise cluster.
 
 ## Requirements
 
@@ -21,7 +21,7 @@ This guide uses a cluster with three meta nodes and three data nodes; the steps 
 InfluxData recommends using a separate server to store your monitoring data.
 It is possible to store the monitoring data in your cluster and [connect the cluster to Chronograf](/chronograf/v1.4/troubleshooting/frequently-asked-questions/#how-do-i-connect-chronograf-to-an-influxenterprise-cluster), but, in general, your monitoring data should live on a separate server.
 
-Finally, this guide assumes that you're working on an Ubuntu 16.04 installation.
+You're working on an Ubuntu 16.04 installation.
 Chronograf and the other components of the TICK stack are supported on several operating systems and hardware architectures. Check out the [downloads page](https://portal.influxdata.com/downloads) for links to the binaries of your choice.
 
 ## Architecture Overview
@@ -98,7 +98,7 @@ A successful `CREATE USER` query returns a blank result:
 ### Telegraf Setup
 
 Perform the following steps on each data node in your cluster.
-You'll return to your InfluxDB OSS instance at the end of this section.
+You'll return to your InfluxDB instance at the end of this section.
 
 #### Step 1: Download and install Telegraf
 
@@ -110,7 +110,7 @@ You'll return to your InfluxDB OSS instance at the end of this section.
 #### Step 2: Configure Telegraf
 
 Configure Telegraf to write monitoring data to your InfluxDB OSS instance.
-Telegraf's configuration file is located in `/etc/telegraf/telegraf.conf`.
+The Telegraf configuration file is located in `/etc/telegraf/telegraf.conf`.
 
 First, in the `[[outputs.influxdb]]` section, set the `urls` option to the IP address and port of your InfluxDB OSS instance.
 InfluxDB runs on port `8086` by default.

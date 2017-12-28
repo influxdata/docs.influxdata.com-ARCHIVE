@@ -16,9 +16,9 @@ By the end of this document, you'll be aware of all the tools you need to create
 
 ## Requirements
 
-This guide assumes you have a working Chronograf instance that's connected to an InfluxDB source.
-It uses data from Telegraf's [system statistics](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) input plugin.
-See the [Getting Started](/chronograf/v1.4/introduction/getting-started/) guide for step-by-step installation and configuration instructions.
+You have a working Chronograf instance connected to an InfluxDB source.
+Data is accessed from the Telegraf [system statistics](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) input plugin.
+See [Getting Started](/chronograf/v1.4/introduction/getting-started/) for step-by-step installation and configuration instructions.
 
 ## Build a Dashboard
 

@@ -1,5 +1,5 @@
 ---
-title: Creating Kapacitor Alerts
+title: Creating Kapacitor alerts
 menu:
   chronograf_1_4:
     weight: 10
@@ -14,12 +14,13 @@ By the end of this guide, you'll have an alert rule that sends a message to an e
 
 ## Requirements
 
-This guide assumes that you've already downloaded and installed each component of the TICK stack (Telegraf, InfluxDB, Chronograf, and Kapacitor).
-To follow along, the Telegraf instance must be configured to collect data with the [system statistics](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) input plugin and write data to your InfluxDB instance.
-The steps below also assume that you've already [configured your Kapacitor instance in Chronograf](/chronograf/v1.4/introduction/getting-started/#4-connect-chronograf-to-kapacitor).
+You've already downloaded and installed each component of the TICK stack (Telegraf, InfluxDB, Chronograf, and Kapacitor).
+To follow along, the Telegraf instance must be configured to collect data with the InfluxDB [system statistics](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) input plugin and write data to your InfluxDB instance.
+
+You've already [configured your Kapacitor instance in Chronograf](/chronograf/v1.4/introduction/getting-started/#4-connect-chronograf-to-kapacitor).
 The [Getting Started](/chronograf/v1.4/introduction/getting-started/) guide offers step-by-step instructions for each of those requirements.
 
-The steps below also assume that you have a working Slack instance and that you've configured it as an [event handler](/chronograf/v1.4/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf) in Chronograf.
+You have a working Slack instance and have configured it as an [event handler](/chronograf/v1.4/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf) in Chronograf.
 See the [Configure Kapacitor Event Handlers](/chronograf/v1.4/guides/configure-kapacitor-event-handlers/) guide for detailed configuration instructions.
 
 ## Configure a Kapacitor alert rule
@@ -35,21 +36,21 @@ Steps one through six walk you through each section of the Rule Configuration pa
 
 ### Step 1: Name the rule
 
-Name the alert rule by clicking on `Untitled Rule` in the top left corner.
-You can call your rule anything you want and you can always change it later.
-Here, we call it `Idle CPU Usage`:
+Click `Untitled Rule` in the top left corner and name the rule.
+
+For this example, the rule is named `Idle CPU Usage`:
 
 ![Name your rule](/img/chronograf/v1.4/g-kap-rule-name.png)
 
 ### Step 2: Select the time series
 
-Next, choose the data that you want the alert rule to work with.
+Choose the data that you want the alert rule to work with.
 Navigate through the `Databases`, `Measurements`, `Fields`, and `Tags` tabs to select the relevant data.
 
 In this example, we select the `telegraf` [database](/influxdb/latest/concepts/glossary/#database) and the `autogen` [retention policy](/influxdb/latest/concepts/glossary/#retention-policy-rp), the `cpu` [measurement](/influxdb/latest/concepts/glossary/#measurement), the `usage_idle` [field](/influxdb/latest/concepts/glossary/#field), and no [tags](/influxdb/latest/concepts/glossary/#tag).
 The result is the InfluxQL [query](/influxdb/latest/concepts/glossary/#query) in the image below.
 Notice that Chronograf automatically sets a time range in the [`WHERE` clause](/influxdb/latest/query_language/data_exploration/#the-where-clause).
-Don't worry about that for now; we'll discuss that time range in step four.
+Don't modify that for now; the time range is discussed in step four.
 
 ![Select your data](/img/chronograf/v1.4/g-kap-ts.png)
 
@@ -58,15 +59,15 @@ Don't worry about that for now; we'll discuss that time range in step four.
 Choose from three alert types in the `Rule Conditions` section of the Rule Configuration page.
 The three alert types are:
 
-* Threshold - alert if the data cross a boundary
-* Relative - alert if the data change relative to the data in a different time range
-* Deadman - alert if InfluxDB receives no relevant data for the specified time duration
+* Threshold: Alert if the data cross a boundary
+* Relative: Alert if the data change relative to the data in a different time range
+* Deadman: Alert if InfluxDB receives no relevant data for the specified time duration
 
-Here, we select the `Threshold` alert type.
+For this example, select the `Threshold` alert type.
 
 ### Step 4: Define the rule condition
 
-Next, define the threshold condition:
+Define the threshold condition:
 
 ![Create a condition](/img/chronograf/v1.4/g-kap-condition.png)
 
@@ -77,7 +78,7 @@ Moving across the inputs from right to left:
 * `80`: The threshold number. The system sends an alert when the `usage_idle` data cross that boundary.
 
 The graph shows a preview of the relevant data and the threshold number.
-By default, the graph shows data within the past 15 minutes.
+By default, the graph shows data from the past 15 minutes.
 The time range selector in the top right corner adjusts the graph's time range.
 Use this feature when determining a reasonable threshold number based on your data.
 
@@ -105,7 +106,7 @@ If you did not include a default channel in the initial configuration or if you'
 
 ### Step 6: Save the alert rule
 
-You're all set! Click the `Save Rule` button in the top right corner and navigate to the Kapacitor Rule page to see your rule.
+Click the `Save Rule` button in the top right corner and navigate to the Kapacitor Rule page to see your rule.
 Notice that you can easily enable and disable the rule by toggling the checkbox in the `Enabled` column.
 
 ![See the alert rule](/img/chronograf/v1.4/g-kap-rule-page-ii.png)
@@ -124,12 +125,12 @@ On the machine that's running Telegraf, enter the following command in the termi
 while true; do i=0; done
 ```
 
-Let it run for a couple seconds or minutes before terminating it.
+Let it run for a few seconds or minutes before terminating it.
 On most systems, kill the script by selecting the `Ctrl-c` keys.
 
 ### Step 2: Visit Slack
 
-Next, visit the Slack channel that you specified in the previous section.
+Go to the Slack channel that you specified in the previous section.
 In this example, it's the `#chronocats` channel.
 
 Assuming step one was successful, `#chronograf` should reveal at least two alert messages:

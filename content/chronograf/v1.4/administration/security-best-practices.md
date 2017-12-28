@@ -110,19 +110,19 @@ Alternatively, this can also be set using the command line switches:
 * [`--google-client-secret`](/chronograf/v1.4/administration/configuration/#google-client-secret)
 * [`--public-url`](/chronograf/v1.4/administration/configuration/#public-url)
 
-#### Optional Google Domains
+#### Optional Google domains
 
 Similar to Github's organization restriction, Google authentication can be restricted to permit access to Chronograf from only specific domains.
 These are configured using the `GOOGLE_DOMAINS` environment variable or the [`--google-domains`](/chronograf/v1.4/administration/configuration/#google-domains) switch.
-Multiple domains are separated with a comma.
-For example, if we wanted to permit access only from biffspleasurepalace.com and savetheclocktower.com the environment variable would be set as follows:
+Multiple domains are separated using commas.
+For example, if we wanted to permit access only from biffspleasurepalace.com and savetheclocktower.com, the environment variable would be set as follows:
 ```sh
 export GOOGLE_DOMAINS=biffspleasurepalance.com,savetheclocktower.com
 ```
 
 ### Heroku
 
-#### Creating Heroku Application
+#### Creating a Heroku application
 
 To obtain a client ID and application secret for Heroku, follow the guide posted [here](https://devcenter.heroku.com/articles/oauth#register-client).
 Once your application has been created, those two values should be inserted into the following environment variables:
@@ -135,7 +135,7 @@ The equivalent command line switches are:
 * [`--heroku-client-id`](/chronograf/v1.4/administration/configuration/#heroku-client-id)
 * [`--heroku-secret`](/chronograf/v1.4/administration/configuration/#heroku-secret)
 
-#### Optional Heroku Organizations
+#### Optional Heroku organizations
 
 Like the other OAuth2 providers, access to Chronograf via Heroku can be restricted to members of specific Heroku organizations.
 This is controlled using the `HEROKU_ORGS` environment variable or the [`--heroku-organizations`](/chronograf/v1.4/administration/configuration/#heroku-organization) switch and is comma-separated.
