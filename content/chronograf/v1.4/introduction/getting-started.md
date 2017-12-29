@@ -1,12 +1,24 @@
 ---
-title: Getting Started
+title: Getting started with Chronograf
 aliases:
     - chronograf/v1.4/introduction/getting_started/
 menu:
   chronograf_1_4:
+    menu: Getting started
     weight: 20
     parent: Introduction
 ---
+
+On this page
+
+* Getting started overview](#getting-started-overview)
+* Requirements](#requirements)
+  - [InfluxDB Setup](#influxdb-setup)
+  - [Kapacitor Setup](#kapacitor-setup)
+  - [Telegraf Setup](#telegraf-setup)
+  - [Chronograf Setup](#chronograf-setup)
+
+## Getting started overview
 
 Chronograf is the user interface component of InfluxData's [TICK stack](https://www.influxdata.com/products/).
 It makes owning the monitoring and alerting for your infrastructure easy to setup and maintain.
@@ -53,12 +65,12 @@ If InfluxDB is up and running, you should see an object that contains the `_inte
 ```
 So far so good! You're ready to move on to the next section. Note that there's no need to create your own database on your InfluxDB instance; the other components of the TICK stack will handle that for you.
 
-## Kapacitor Setup
+## Kapacitor setup
 
 [Kapacitor](https://docs.influxdata.com/kapacitor/latest/) is the data processing platform of the TICK stack.
 Kapacitor is responsible for creating and sending alerts in Chronograf.
 
-#### 1. Download and Install Kapacitor
+#### 1. Download and install Kapacitor
 ```
 wget https://dl.influxdata.com/kapacitor/releases/kapacitor_1.4.0_amd64.deb
 sudo dpkg -i kapacitor_1.4.0_amd64.deb
@@ -69,7 +81,7 @@ sudo dpkg -i kapacitor_1.4.0_amd64.deb
 sudo systemctl start kapacitor
 ```
 
-#### 3. Verify that Kapacitor is Running
+#### 3. Verify that Kapacitor is running
 Check the `task` list of Kapacitor with:
 ```
 kapacitor list tasks
@@ -84,7 +96,7 @@ If there was a problem you will see an error message:
 Get http://localhost:9092/kapacitor/v1/tasks?dot-view=attributes&fields=type&fields=status&fields=executing&fields=dbrps&limit=100&offset=0&pattern=&replay-id=&script-format=formatted: dial tcp [::1]:9092: getsockopt: connection refused
 ```
 
-## Telegraf Setup
+## Telegraf setup
 
 [Telegraf](https://docs.influxdata.com/telegraf/v1.3/) is the metrics gathering agent in the TICK stack.
 For the purposes of this guide, we set up Telegraf to collect [system stats](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) data on your machine and write those metrics to your existing InfluxDB instance.
@@ -92,7 +104,7 @@ For the purposes of this guide, we set up Telegraf to collect [system stats](htt
 > In a production environment, Telegraf would be installed on your servers and would point the output to an InfluxDB instance on a separate machine.
 Ultimately, you will configure a Telegraf input plugin for each application that you want to monitor.
 
-#### 1. Download and Install Telegraf
+#### 1. Download and install Telegraf
 ```
 wget https://dl.influxdata.com/telegraf/releases/telegraf_1.4.3-1_amd64.deb
 sudo dpkg -i telegraf_1.4.3-1_amd64.deb
@@ -103,7 +115,7 @@ sudo dpkg -i telegraf_1.4.3-1_amd64.deb
 sudo systemctl start telegraf
 ```
 
-#### 3. Verify Telegraf's Configuration and that the Process is Running
+#### 3. Verify Telegraf is running
 Step 2 should create a configuration file with [system stats](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) as an input plugin and InfluxDB as an output plugin.
 
 Double check the configuration file at `/etc/telegraf/telegraf.conf` for the relevant input and output settings.
@@ -199,7 +211,7 @@ If Telegraf is setup properly you should see a lot of JSON data; if the output i
 ## Chronograf Setup
 Now that we're collecting data with Telegraf and storing data with InfluxDB, it's time to install Chronograf to begin viewing and monitoring the data.
 
-#### 1. Download and Install Chronograf
+#### 1. Download and install Chronograf
 ```
 wget https://dl.influxdata.com/chronograf/releases/chronograf_1.4.0.0_amd64.deb
 sudo dpkg -i chronograf_1.4.0.0_amd64.deb
@@ -253,4 +265,4 @@ See the [Configure Kapacitor Event Handlers](/chronograf/v1.4/guides/configure-k
 ![Alert Endpoints](/img/chronograf/v1.4/gs-alert-endpoints.png)
 
 That's it! You've successfully downloaded, installed, and configured each component of the TICK stack.
-Next, check out [our guides](/chronograf/v1.4/guides/) to get familiar with Chronograf and see all that it can do for you!
+Next, check out [our guides](/chronograf/v1.4/guides/) to become familiar with Chronograf and see all that you can do with it!
