@@ -22,7 +22,7 @@ Chronograf users can be members of one or more organizations.
 
 To use the default organization:
 
-1) In the menu bar on the left of the **Chronograf Admin** page, select **Admin** (displays "crown" icon) > **Chronograf** to open the Chronograf Admin page.
+1) In the navigation bar on the left of the **Chronograf Admin** page, select **Admin** (crown icon) > **Chronograf** to open the Chronograf Admin page.
 2) Click the **Organizations** tab and note that the current organization is "Default". You can optionally rename "Default" to another name.
 3) Under **Public**, click the radio button to Off so that new users cannot authenticate unless an administrator (with the admin role) adds them to the organization.
 4) Under **Default Role**, select the default role for new users (typically, the default is `viewer`).
@@ -41,7 +41,7 @@ Required role: SuperAdmin
 
 To create an organization:
 
-1) In the navigation bar of the Chronograf application, select **Admin** ("crown" icon) > **Chronograf** to open the **Chronograf Admin** page.
+1) In the navigation bar of the Chronograf application, select **Admin** (crown icon) > **Chronograf** to open the **Chronograf Admin** page.
 2) Click the **Organizations** tab and note that the current organization is "Default". You can rename "Default" to a different name by double-clicking on the name.
 3) Under **Public**, click the radio button to **Off** so that new users cannot authenticate unless an administrator (with the admin role) adds them to the organization.
 4) Under **Default Role**, select the default role for new users (typically, the default is viewer).
