@@ -25,20 +25,21 @@ On this page:
 
 To specify the options to set when starting the Chronograf service, include the options after `chronograf`:
 
-```
+```sh
 `chronograf [OPTIONS]`
 ```
 
 Examples:
 
 * Linux: Setting options for develop mode and disabling reporting
-```
-  `sudo systemctl start chronograf --develop --reporting-disabled
+
+```sh
+  sudo systemctl start chronograf --develop --reporting-disabled
 ```
 * Mac OS X: Using shortcut options to set develop mode and disable reporting
 
-```
-  `chronograf -d -r
+```sh
+  chronograf -d -r
 ```
 
 > ***Note:*** Command line options take precedence over corresponding environment variables.
@@ -114,7 +115,7 @@ The password for your Kapacitor instance.
 
 Environment variable: `$KAPACITOR_PASSWORD`
 
-## Other optional options
+## Other options
 
 ### `--develop` | `-d`
 
@@ -156,13 +157,13 @@ Environment variable: `$AUTH_DURATION`
 
 ### `--github-client-id=` | `-i`
 
-The GitHub Client ID for OAuth 2.0 support.
+The GitHub client ID for OAuth 2.0 support.
 
 Environment variable: `$GH_CLIENT_ID`
 
 ### `--github-client-secret=` | `-s`
 
-The GitHub Client Secret for OAuth 2.0 support.
+The GitHub client secret for OAuth 2.0 support.
 
 Environment variable: `$GH_CLIENT_SECRET`
 
@@ -176,13 +177,13 @@ Environment variable: `$GH_ORGS`
 
 ### `--google-client-id=`
 
-The Google Client ID for OAuth 2.0 support.
+The Google client ID for OAuth 2.0 support.
 
 Environment variable: `$GOOGLE_CLIENT_ID`
 
 ### `--google-client-secret=`
 
-The Google Client Secret for OAuth 2.0 support.
+The Google client secret for OAuth 2.0 support.
 
 Environment variable: `$GOOGLE_CLIENT_SECRET`
 
@@ -205,13 +206,13 @@ Environment variable: `$PUBLIC_URL`
 
 ### `--heroku-client-id=`
 
-The Heroku Client ID for OAuth 2.0 support.
+The Heroku client ID for OAuth 2.0 support.
 
 Environment variable: `$HEROKU_CLIENT_ID`
 
 ### `--heroku-secret=`
 
-The Heroku Secret for OAuth 2.0 support.
+The Heroku secret for OAuth 2.0 support.
 
 Environment variable: `$HEROKU_SECRET`
 
