@@ -156,19 +156,19 @@ Environment variable: `$AUTH_DURATION`
 
 ### `-i` | `--github-client-id=`
 
-The Github Client ID for OAuth 2.0 support.
+The GitHub Client ID for OAuth 2.0 support.
 
 Environment variable: `$GH_CLIENT_ID`
 
 ### `-s` | `--github-client-secret=`
 
-The Github Client Secret for OAuth 2.0 support.
+The GitHub Client Secret for OAuth 2.0 support.
 
 Environment variable: `$GH_CLIENT_SECRET`
 
 ### `-o` | `--github-organization=`
 
-The Github organization user is required to have an active membership.
+The GitHub organization user is required to have an active membership.
 
 Environment variable: `$GH_ORGS`
 
