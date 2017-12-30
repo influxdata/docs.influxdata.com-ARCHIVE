@@ -6,19 +6,19 @@ menu:
     parent: Guides
 ---
 
-Versions 1.3+ of [InfluxDB](/influxdb/latest/) and [InfluxEnterprise](/enterprise/latest/) no longer support the [web admin interface](/influxdb/v1.3/tools/web_admin/), the builtin user interface for writing and querying data in InfluxDB.
+Versions 1.3 and later of [InfluxDB](/influxdb/latest/) and [InfluxEnterprise](/enterprise/latest/) do not support the [web admin interface](/influxdb/v1.3/tools/web_admin/), the builtin user interface for writing and querying data in InfluxDB.
 Chronograf replaces the web admin interface with improved tooling for querying data, writing data, and database management.
 
-The next sections describe the Chronograf features that relate to the web admin interface:
+The following sections describe the Chronograf features that relate to the web admin interface:
 
-* [Query Templates](#query-templates)
-* [Writing Data](#writing-data)
-* [Database and Retention Policy Management](#database-and-retention-policy-management)
-* [User Management](#user-management)
+* [Query templates](#query-templates)
+* [Writing data](#writing-data)
+* [Database and retention policy management](#database-and-retention-policy-management)
+* [User management](#user-management)
 
-## Query Templates
+## Query templates
 
-### Web Admin Interface
+### Web admin interface
 
 In the web admin interface, users chose the target database in the top right corner and selected from a set of query templates in the `Query Templates` dropdown.
 The templates included queries with no user-provided values (example: [`SHOW MEASUREMENTS`](/influxdb/latest/query_language/schema_exploration/#show-measurements)) and queries with user-provided values (example: [`SHOW TAG KEYS FROM "<measurement_name>"`](/influxdb/latest/query_language/schema_exploration/#show-tag-keys)).
@@ -33,9 +33,9 @@ Note that unlike the web admin interface, Chronograf does not have a database dr
 
 ![Chronograf Query Templates](/img/chronograf/v1.4/g-admin-chronotemplates.png)
 
-## Writing Data
+## Writing data
 
-### Web Admin Interface
+### Web admin interface
 
 To write data to InfluxDB, users selected the target database in the top right corner, clicked the `Write Data` icon, and entered their [line protocol](/influxdb/latest/concepts/glossary/#line-protocol) in the text input:
 
@@ -49,9 +49,9 @@ Next, enter your line protocol in the main text box and click the `Write` button
 
 ![Chronograf Writing Data](/img/chronograf/v1.4/g-admin-chronowrite.png)
 
-## Database and Retention Policy Management
+## Database and retention policy management
 
-### Web Admin Interface
+### Web admin interface
 
 In the web admin interface, the `Query Template` dropdown was the only way to manage databases and [retention policies](/influxdb/latest/concepts/glossary/#retention-policy-rp) (RP):
 
@@ -67,9 +67,9 @@ The GIF below shows the process of creating a database, creating an RP, and dele
 
 Note that, like the web admin interface, Chronograf's [`Query Templates` dropdown](#chronograf) includes the database- and RP-related queries.
 
-## User Management
+## User management
 
-### Web Admin Interface
+### Web admin interface
 
 In the web admin interface, the `Query Template` dropdown was the only way to manage users:
 

@@ -1,5 +1,5 @@
 ---
-title: Managing roles
+title: Managing Chronograf roles
 menu:
   chronograf_1_4:
     weight: 30
@@ -9,52 +9,58 @@ menu:
 
 ## Chronograf predefined roles
 
-Chronograf includes the following five predefined roles, listed in order of increasing functionality:
+Chronograf includes user roles, listed in order of increasing persmission levels:
 
-* member
-* viewer
-* editor
-* admin
-* superadmin
+* `member`
+* `viewer`
+* `editor`
+* `admin`
+* SuperAdmin
 
+Within an organization, the valid roles are member, viewer, editor, and admin. In order to manage organizations and users across all organizations, the SuperAdmin role allow special permissions.
 
-### Non-administrator roles
+#### Member (`member`)
 
-#### `member`
+Members (given the `member` role) are Chronograf users who have been added to organizations, but do not have any functional role. A member can authenticate, but they are without access to any content within an organization.
 
-When a user is created in Chronograf, the default user is member. A `member` exists and can authenticate, but cannot access any content within Chronograf.
-
-During
-
-
-#### `viewer`
-
-The `viewer` role in Chronograf enables a user to be able to access and view all of the available dashboards within an organization.
+By default, new organizations are created with `member` as the default role.
 
 
-#### `editor`
+#### Viewer (`viewer`)
 
-The `editor` role in Chronograf grants a user the ability to:
+Viewers (given the `viewer` role) are Chronograf who can:
 
-* create and modify dashboards
-* create and modify Kapacitor Alerts
+* Access content restricted to their organization
+* View dashboards
+* View sources
+* Access and use Status Page, Host List, Data Explorer, and Alerting.
 
+#### Editor (`editor`)
 
-### Administrator roles
+Editors are Chronograf users who can:
 
-#### `admin`
+* Access content restricted to their organization
+* View, create, update, and remove dashboards
+* View, create, update, and remove sources
+* Create and modify Kapacitor alerts
+* Access and use Status Page, Host List, Data Explorer, and Alerting.
 
-In addition to rights granted to other roles, users assigned the `admin` role can also:
+#### Administrator (`admin`)
 
-* Create, view, and remove admin and non-admin users
-* view, create, and delete admin and non-admin users
-* Change user passwords
-* Assign admin and remove admin permissions to or from a user
+Administrators are users who can perform administrator functions within an organization. Users in the `admin` role can:
 
+* Access restricted to content and users in their organization
+* View, create, update, and remove dashboards
+* View, create, update, and remove sources
+* Create, view, and remove users
+* Create and update Kapacitor alerts
+* Access and use Status Page, Host List, Data Explorer, and Alerting.
 
-####  `superadmin`
+####  SuperAdmin
 
-A user with `superadmin` privileges can perform the following:
+SuperAdmins are a unique Chronograf administrators who can perform administrator functions within and across organizations. A SuperAdmin can perform two important functions:
 
-* create or remove organizations
-* create, view, and remove superadmin users
+* Create, view, update, and remove organizations
+* Create, view, and remove users in any organizations
+
+When a SuperAdmin is added as a user of an organization, the SuperAdmin is restricted by the limitations of the role. This allows a SuperAdmin to comply with expectations of not accessing content within a specific organization, and if done, an audit trail will show access of the content.

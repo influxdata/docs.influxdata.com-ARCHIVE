@@ -17,7 +17,7 @@ menu:
 * [Heroku OAuth 2.0 authentication options](#heroku-oauth-2-0-authentication-options)
 * [Generic OAuth 2.0 authentication options](#generic-oauth-2-0-authentication-options)
 * [Other options](#other-options)
-* [Help](#help-option)
+* [Help option](#help-option)
 
 
 
@@ -336,7 +336,7 @@ Environment variable: `$PREFIX_ROUTES`
 
 Show Chronograf version information.
 
-## Help Option
+## Help option
 
 ### `-h` | `--help`
 
