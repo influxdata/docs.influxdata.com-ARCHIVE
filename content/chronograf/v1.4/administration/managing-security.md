@@ -1,5 +1,5 @@
 ---
-title: Security considerations
+title: Managing security
 
 aliases: /chronograf_1_4/security-best-practices/
 
@@ -9,24 +9,27 @@ menu:
     parent: Administration
 ---
 
-### Content
+On this page
 
-* [Chronograf with OAuth 2.0 Authentication](#chronograf-with-oauth-2-0-authentication)
+* [Using Chronograf with OAuth 2.0 Authentication](#chronograf-with-oauth-2-0-authentication)
     * [Configuration](#configuration)
         * [JWT Signature](#jwt-signature)
         * [GitHub](#github)
         * [Google](#google)
         * [Heroku](#heroku)
         * [Auth0](#auth0)
-        * [Generic Provider](#generic-provider)
+        * [Generic](#generic)
         * [Optional: Configure an Authentication Duration](#optional-configure-an-authentication-duration)
 * [TLS](#tls)
   * [Running Chronograf with TLS](#running-chronograf-with-tls)
   * [Testing with Self-Signed Certificates ](#testing-with-self-signed-certificates)
 
-## Chronograf with OAuth 2.0 Authentication
+## Using Chronograf with OAuth 2.0 authentication
 
-### Configuration
+To manage organizations and users in Chronograf, you need to configure an OAuth 2.0 authentication provider.
+
+### Configuring a JWT Signature and OAuth 2.0 provider
+
 Configure the JWT signature and the OAuth provider to use authentication in Chronograf.
 
 >**Note:**
@@ -34,42 +37,48 @@ If you're using the [`--basepath` option](/chronograf/v1.4/administration/config
 add the same basepath to the callback URL of any OAuth provider that you configure.
 
 ### JWT Signature
-Set a [JWT](https://tools.ietf.org/html/rfc7519) signature to a random string.
-This is needed for all OAuth2 providers that you choose to configure.
-*Keep this random string around!*
 
-You'll need it each time you start a Chronograf server because it is used to verify user authorization.
-If you are running multiple Chronograf servers in an HA configuration set the `TOKEN_SECRET` environment variable on each server to allow users to stay logged in.
-If you want to log all users out every time the server restarts, change the value of `TOKEN_SECRET` to a different value on each restart.
+A [JWT](https://tools.ietf.org/html/rfc7519) signature is required for all OAuth 2.0 autentication providers.
+
+To create a JWT signature, assign `TOKEN_SECRET` to a random string.
+
+Example:
 
 ```sh
 export TOKEN_SECRET=supersupersecret
 ```
 
-### Github
+*Keep this random string around!*
+
+You'll need it each time you start a Chronograf server because it is used to verify user authorization.
+If you are running multiple Chronograf servers in an HA configuration, set the `TOKEN_SECRET` environment variable on each server to allow users to stay logged in.
+If you want to log all users out every time the server restarts, change the value of `TOKEN_SECRET` to a different value on each restart.
+
+
+### GitHub
 
 #### Overview
 
 ```sh
 export AUTH_DURATION=1h                                           # force login every hour
 export TOKEN_SECRET=supersupersecret                              # Signing secret
-export GH_CLIENT_ID=b339dd4fddd95abec9aa                          # Github client id
-export GH_CLIENT_SECRET=260041897d3252c146ece6b46ba39bc1e54416dc  # Github client secret
+export GH_CLIENT_ID=b339dd4fddd95abec9aa                          # GitHub client ID
+export GH_CLIENT_SECRET=260041897d3252c146ece6b46ba39bc1e54416dc  # GitHub client secret
 export GH_ORGS=biffs-gang                                         # Restrict to GH orgs
 ```
 
-#### Creating Github OAuth Application
+#### Creating a GitHub OAuth 2.0 application
 
-To create a Github OAuth Application follow the [Register your app](https://developer.github.com/guides/basics-of-authentication/#registering-your-app) instructions.
+To create a GitHub OAuth Application, follow the [Register your app](https://developer.github.com/guides/basics-of-authentication/#registering-your-app) instructions.
 Essentially, you'll register your application [here](https://github.com/settings/applications/new).
 
-The `Homepage URL` should be Chronograf's full server name and port.
+The `Homepage URL` should include Chronograf's full server name and port.
 If you are running it locally for example, make it `http://localhost:8888`.
 
 The `Authorization callback URL` must be the location of the `Homepage URL` plus `/oauth/github/callback`.
-For example, if `Homepage URL` was `http://localhost:8888` then the `Authorization callback URL` should be `http://localhost:8888/oauth/github/callback`.
+For example, if `Homepage URL` was `http://localhost:8888`, then the `Authorization callback URL` should be `http://localhost:8888/oauth/github/callback`.
 
-Github provides a `Client ID` and `Client Secret`.
+GitHub provides a `Client ID` and `Client Secret`.
 To register these values with Chronograf set the following environment variables:
 
 * `GH_CLIENT_ID`
@@ -81,14 +90,14 @@ export GH_CLIENT_ID=b339dd4fddd95abec9aa
 export GH_CLIENT_SECRET=260041897d3252c146ece6b46ba39bc1e54416dc
 ```
 
-#### Optional Github Organizations
+#### Optional GitHub organizations
 
 To require an organization membership for a user, set the `GH_ORGS` environment variables:
 ```sh
 export GH_ORGS=biffs-gang
 ```
 If the user is not a member, then the user will not be allowed access.
-To support multiple organizations use a comma-delimited list like so:
+To support multiple organizations, use a comma-delimited list like in this example:
 ```sh
 export GH_ORGS=hill-valley-preservation-sociey,the-pinheads
 ```
@@ -112,10 +121,10 @@ Alternatively, this can also be set using the command line switches:
 
 #### Optional Google domains
 
-Similar to Github's organization restriction, Google authentication can be restricted to permit access to Chronograf from only specific domains.
+Similar to GitHub's organization restriction, Google authentication can be restricted to permit access to Chronograf from only specific domains.
 These are configured using the `GOOGLE_DOMAINS` environment variable or the [`--google-domains`](/chronograf/v1.4/administration/configuration/#google-domains) switch.
 Multiple domains are separated using commas.
-For example, if we wanted to permit access only from biffspleasurepalace.com and savetheclocktower.com, the environment variable would be set as follows:
+For example, if we wanted to permit access only from `biffspleasurepalace.com` and `savetheclocktower.com`, the environment variable would be set as follows:
 ```sh
 export GOOGLE_DOMAINS=biffspleasurepalance.com,savetheclocktower.com
 ```
@@ -146,16 +155,16 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 
 ### Auth0
 
-#### Creating an Auth0 Application
+#### Creating an Auth0 application
 
 To begin authenticating Chronograf users with Auth0, you will need to have an Auth0 account and [register an Auth0 client](https://auth0.com/docs/clients) within their dashboard.
 
-Auth0 clients should be configured as "Regular Web Applications" with the "Token Endpoint Authentication" set to "None".
-Clients must have the "Allowed Callback URLs" set to "https://www.example.com/oauth/auth0/callback" and the "Allowed Logout URLs" to "https://www.example.com", substituting "example.com" for the [`PUBLIC_URL`](/chronograf/v1.4/administration/configuration/#public-url) of your Chronograf instance.
+Auth0 clients should be configured as `Regular Web Applications` with the `Token Endpoint Authentication` set to `None`.
+Clients must have the `Allowed Callback URLs` set to `https://www.example.com/oauth/auth0/callback` and the `Allowed Logout URLs` to `https://www.example.com`, substituting `example.com` for the [`PUBLIC_URL`](/chronograf/v1.4/administration/configuration/#public-url) of your Chronograf instance.
 
 Finally, clients must be set to be ["OIDC Conformant"](https://auth0.com/docs/api-auth/intro#how-to-use-the-new-flows).
 
-Click save, and then take note of your Domain, Client ID, and Secret at the top of the page.
+Click **Save**, and then take note of your Domain, Client ID, and Secret at the top of the page.
 These should be inserted into the following environment variables:
 
 * `AUTH0_DOMAIN`
@@ -168,26 +177,25 @@ The equivalent command line switches are:
 * [`--auth0-client-id`](/chronograf/v1.4/administration/configuration/#auth0-client-id)
 * [`--auth0-client-secret`](/chronograf/v1.4/administration/configuration/#auth0-client-secret)
 
-#### Optional Auth0 Organizations
+#### Optional Auth0 organizations
 
-Auth0 can be customized to operators' requirements, so it has no official concept of an "organization."
-Organizations are supported in Chronograf using a lightweight "app_metadata" key that can be inserted into Auth0 users' profiles automatically or manually.
+Auth0 can be customized to the operator's requirements, so it has no official concept of an "organization."
+Organizations are supported in Chronograf using a lightweight `app_metadata` key that can be inserted into Auth0 user profiles automatically or manually.
 
-To assign a user to an organization, add an "organization" key to the user's "app_metadata" field with the value corresponding to the user's organization.
-For example, we can assign the user Marty McFly to the "time-travelers" organization by setting the "app_metadata" to `{"organization": "time-travelers"}`.
-This can be done either manually by an operator or automatically through the use of an [Auth0 Rule](https://auth0.com/docs/rules/metadata-in-rules#updating-app_metadata) or a [pre-user registration Auth0 Hook](https://auth0.com/docs/hooks/extensibility-points/pre-user-registration)
+To assign a user to an organization, add an `organization` key to the user `app_metadata` field with the value corresponding to the user's organization.
+For example, we can assign the user Marty McFly to the "time-travelers" organization by setting `app_metadata` to `{"organization": "time-travelers"}`.
+This can be done either manually by an operator or automatically through the use of an [Auth0 Rule](https://auth0.com/docs/rules/metadata-in-rules#updating-app_metadata) or a [pre-user registration Auth0 Hook](https://auth0.com/docs/hooks/extensibility-points/pre-user-registration).
 
-Next, you will need to set Chronograf's [`AUTH0_ORGS`](/chronograf/v1.4/administration/configuration/#auth0-client-secret) environment variable to a comma-separated list of the allowed organizations.
-For example, if you have one group of users with an "organization" key set to "biffs-gang" and another group with an "organization" key set to "time-travelers" you can permit access to both with the environment variable: `AUTH0_ORGS=biffs-gang,time-travelers`.
+Next, you will need to set the Chronograf [`AUTH0_ORGS`](/chronograf/v1.4/administration/configuration/#auth0-client-secret) environment variable to a comma-separated list of the allowed organizations.
+    For example, if you have one group of users with an `organization` key set to `biffs-gang` and another group with an `organization` key set to `time-travelers`, you can permit access to both with this environment variable: `AUTH0_ORGS=biffs-gang,time-travelers`.
 
-An `--auth0-organizations` command line switch is also available.
-However, it is limited to a single organization and does not accept a comma-separated list like its environment variable equivalent.
+An `--auth0-organizations` command line switch is also available, but it is limited to a single organization and does not accept a comma-separated list like its environment variable equivalent.
 
-### Generic Provider
+### Generic
 
 #### Creating OAuth Application using your own provider
 
-The generic OAuth2 provider is very similar to the Github provider, but,
+The generic OAuth2 provider is very similar to the GitHub provider, but,
 you are able to set your own authentication, token, and API URLs.
 The callback URL path will be `/oauth/generic/callback`.
 So, if your Chronograf is hosted at `https://localhost:8888` then the full callback URL would be  `https://localhost:8888/oauth/generic/callback`.
@@ -240,28 +248,26 @@ Additionally, for greater security, if you want to require re-authentication eve
 
 ## TLS
 
-Chronograf supports TLS to securely communicate between the browser and server via
-HTTPS.
+Chronograf supports TLS (Transport Layer Security) to securely communicate between the browser and server using HTTPS.
 
 We recommend using HTTPS with Chronograf.
 If you are not using a TLS termination proxy, you can run Chronograf's server with TLS connections.
 
 ### Running Chronograf with TLS
 
-Chronograf server has command line and environment variable options to specify
-the certificate and key files.  The server reads and parses a public/private key
-pair from these files. The files must contain PEM encoded data.
+Chronograf server has command line and environment variable options to specify the certificate and key files.
+The server reads and parses a public/private key pair from these files.
+The files must contain PEM-encoded data.
 
-In Chronograf all command line options also have a corresponding environment
-variable.
+All Chronograf command line options have corresponding environment
+variables.
 
-To specify the certificate file either use the `--cert` CLI option or `TLS_CERTIFICATE`
-environment variable.
+To specify the certificate file, either use the `--cert` CLI option or `TLS_CERTIFICATE` environment variable.
 
 To specify the key file either use the `--key` CLI option or `TLS_PRIVATE_KEY`
 environment variable.
 
-To specify the certificate and key if both are in the same file either use the `--cert`
+To specify the certificate and key if both are in the same file, use either the `--cert`
 CLI option or `TLS_CERTIFICATE` environment variable.
 
 #### Example with CLI options
@@ -280,10 +286,9 @@ docker run -v /host/path/to/certs:/certs -e TLS_CERTIFICATE=/certs/my.crt -e TLS
 ```
 
 ### Testing with Self-Signed Certificates
-In a production environment you should not use self-signed certificates.  However,
-for testing it is fast to create your own certs.
+In a production environment you should not use self-signed certificates, but for testing it is fast to create your own certificates.
 
-To create a cert and key in one file with OpenSSL:
+To create a certificate and key in one file with OpenSSL:
 
 ```sh
 openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout testing.pem -out testing.pem -subj "/CN=localhost" -days 365
