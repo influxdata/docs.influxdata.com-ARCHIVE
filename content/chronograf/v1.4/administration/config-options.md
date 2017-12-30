@@ -23,7 +23,7 @@ menu:
 
 ## Usage:
 
-To specifiy the options to set when starting the Chronograf service, include the options after `chronograf`:
+To specify the options to set when starting the Chronograf service, include the options after `chronograf`:
 
 ```
 `chronograf [OPTIONS]`
@@ -46,7 +46,7 @@ Examples:
 
 ## Application options
 
-### `--host=<ip_address>`
+### `--host=`
 
 The IP that `chronograf` listens on (default: `0.0.0.0`).
 
