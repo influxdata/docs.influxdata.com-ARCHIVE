@@ -1,7 +1,8 @@
 ---
-title: Installation
+title: Installing Chronograf
 menu:
   chronograf_1_4:
+    menu: Installing
     weight: 10
     parent: Introduction
 ---
@@ -96,12 +97,13 @@ The package management tools provided by the operating system deal with the vers
 The recommended way to address this issue when using the TAR package is to do the following:
 
 In your home directory, create a sub-directory called `.chronograf`:
-```
+
+```sh
 mkdir ~/.chronograf
 ```
 
 When starting up Chronograf use the `-b` option to specify the location of this directory for the local datastore:
-```
+```sh
 ./chronograf-<version>/usr/bin/chronograf -b ~/.chronograf/chronograf-v1.db
 ```
 
@@ -109,5 +111,5 @@ The next time you un-TAR a new version of Chronograf, simply change the `<versio
 
 ## Configuration and Security
 
-See the [Configuration](/chronograf/v1.4/administration/configuration/) document for a description of the available configuration options.
-See [Security Best Practices](/chronograf/v1.4/administration/security-best-practices/) for TLS and OAUTH 2.0 setup instructions.
+See [Configuring Chronograf](/chronograf/v1.4/administration/configuring-chronograf/) for a description of the available configuration options.
+See [Managing security](/chronograf/v1.4/administration/security-best-practices/) for TLS and OAuth 2.0 setup instructions.

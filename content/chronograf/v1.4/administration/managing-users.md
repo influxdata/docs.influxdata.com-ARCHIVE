@@ -6,23 +6,25 @@ menu:
     parent: Administration
 ---
 
-Chronograf's `Admin` page includes a complete interface for database user management.
-The `Admin` page supports both OSS InfluxDB users and [InfluxEnterprise](/enterprise_influxdb/latest/) users.
+The **Chronograf Admin** page includes a complete user interface for database user management.
+The `Admin` page supports both InfluxDB OSS users and [InfluxDB Enterprise](/enterprise_influxdb/latest/) users.
 
-This page covers user management specific to OSS InfluxDB and InfluxEnterprise clusters.
-See [Security Best Practices](/chronograf/v1.4/administration/security-best-practices/) for more information about Chronograf's authentication and user management features.
+This page covers user management specific to InfluxDB OSS and InfluxEnterprise clusters.
+See [Managing security](/chronograf/v1.4/administration/managing-security/) for more information about Chronograf authentication and user management features.
 
 ### Content
 
-* [Enable Authentication](#enable-authentication)
-* [OSS InfluxDB User Management](#oss-influxdb-user-management)
-* [InfluxEnterprise User Management](#influxenterprise-user-management)
+* [Enable authentication](#enable-authentication)
+* [InfluxDB OSS user management](#oss-influxdb-user-management)
+* [InfluxEnterprise user management](#influxenterprise-user-management)
 
-## Enable Authentication
+## Enable authentication
 
 Follow the steps below to enable authentication.
-The steps are the same for OSS InfluxDB instances and InfluxEnterprise clusters.
-Note that if you're working with an InfluxEnterprise cluster, you will need to repeat steps one through three for each data node in the cluster.
+The steps are the same for InfluxDB OSS instances and InfluxEnterprise clusters.
+
+> ***InfluxEnterprise clusters:***
+> Repeat the first three steps for each data node in a cluster.
 
 ### Step 1: Enable authentication
 Enable authentication in InfluxDB's configuration file.
@@ -56,8 +58,7 @@ Run the command below to create an admin user, replacing:
 
 * `localhost` with the IP or hostname of your OSS InfluxDB instance or one of your InfluxEnterprise data nodes
 * `chronothan` with your own username
-* `supersecret` with your own password
-(note that the password requires single quotes)
+* `supersecret` with your own password (note that the password requires single quotes)
 
 ```
 ~# curl -XPOST "http://localhost:8086/query" --data-urlencode "q=CREATE USER chronothan WITH PASSWORD 'supersecret' WITH ALL PRIVILEGES"
@@ -75,7 +76,7 @@ Edit existing database sources by navigating to the Chronograf's configuration p
 
 ## OSS InfluxDB User Management
 
-On the `Admin` page:
+On the **Chronograf Admin** page:
 
 * View, create, and delete admin and non-admin users
 * Change user passwords
@@ -86,8 +87,9 @@ On the `Admin` page:
 InfluxDB users are either admin users or non-admin users.
 See InfluxDB's [authentication and authorization](/influxdb/latest/query_language/authentication_and_authorization/#user-types-and-privileges) documentation for more information about those user types.
 
-Note that currently, Chronograf does not support assigning database `READ`or `WRITE` access to non-admin users.
+Note that Chronograf currently does not support assigning database `READ`or `WRITE` access to non-admin users.
 This is a known issue.
+
 As a workaround, grant `READ`, `WRITE`, or `ALL` (`READ` and `WRITE`) permissions to non-admin users with the following curl commands, replacing anything inside `< >` with your own values:
 
 #### Grant `READ` permission:

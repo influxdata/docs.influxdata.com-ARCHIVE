@@ -1,5 +1,5 @@
 ---
-title: Configure Kapacitor Event Handlers
+title: Configuring Kapacitor event handlers
 menu:
   chronograf_1_4:
     weight: 20
