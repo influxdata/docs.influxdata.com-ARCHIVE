@@ -1,15 +1,62 @@
 ---
-title: Release Notes/Changelog
+title: Release notes/changelog
 menu:
   chronograf_1_4:
-    weight: 0
+    weight: 1
     parent: About the Project
 ---
+
+## v1.4.0.0 [2017-12-22]
+
+### Features
+
+* Add support for multiple organizations, multiple users with role-based access control, and private instances
+* Add Kapacitor logs to the TICKscript editor
+* Add time shift feature to DataExplorer and Dashboards
+* Add auto group by time to Data Explorer
+* Support authentication for Enterprise Meta Nodes
+* Add boolean thresholds for kapacitor threshold alerts
+* Update kapacitor alerts to cast to float before sending to influx
+* Allow override of generic oauth2 keys for email
+
+### UI Improvements
+
+* Introduce customizable Gauge visualization type for dashboard cells
+* Improve performance of Hosts, Alert History, and TICKscript logging pages when there are many items to display
+* Add filtering by name to Dashboard index page
+* Improve performance of hoverline rendering
+
+### Bug Fixes
+
+* Fix .jsdep step fails when LDFLAGS is exported
+* Fix logscale producing console errors when only one point in graph
+* Fix 'Cannot connect to source' false error flag on Dashboard page
+* Add fractions of seconds to time field in csv export
+* Fix Chronograf requiring Telegraf's CPU and system plugins to ensure that all Apps appear on the HOST LIST page.
+* Fix template variables in dashboard query building.
+* Fix several kapacitor alert creation panics.
+* Add shadow-utils to RPM release packages
+* Source extra command line options from defaults file
+* After CREATE/DELETE queries, refresh list of databases in Data Explorer
+* Visualize CREATE/DELETE queries with Table view in Data Explorer
+* Include tag values alongside measurement name in Data Explorer result tabs
+* Redesign cell display options panel
+* Fix queries that include regex, numbers and wildcard
+* Fix apps on hosts page from parsing tags with null values
+* Fix updated Dashboard names not updating dashboard list
+* Fix create dashboard button
+* Fix default y-axis labels not displaying properly
+* Gracefully scale Template Variables Manager overlay on smaller displays
+* Fix Influx Enterprise users from deletion in race condition
+* Fix oauth2 logout link not having basepath
+* Fix supplying a role link to sources that do not have a metaURL
+* Fix hoverline intermittently not rendering
+* Update MySQL pre-canned dashboard to have query derivative correctly
 
 ## v1.3.10.0 [2017-10-24]
 ### Bug Fixes
 1. Improve the copy in the retention policy edit page.
-1. Fix 'Could not connect to source' bug on source creation with unsafe-ssl.
+1. Fix `Could not connect to source` bug on source creation with unsafe-ssl.
 1. Fix when exporting `SHOW DATABASES` CSV has bad data.
 1. Fix not-equal-to highlighting in Kapacitor Rule Builder.
 1. Fix undescriptive error messages for database and retention policy creation.
@@ -19,7 +66,7 @@ menu:
 ### Features
 1. Every dashboard can now have its own time range.
 1. Add CSV download option in dashboard cells.
-1. Implicitly prepend source urls with http://
+1. Implicitly prepend source URLs with `http://`
 1. Add support for graph zooming and point display on the millisecond-level.
 1. Add manual refresh button for Dashboard, Data Explorer, and Host Pages.
 
@@ -245,7 +292,7 @@ menu:
   1. Replace the user icon with a solid style
   1. Disable query save in cell editor mode if the query does not have a database, measurement, and field
   1. Improve UX of applying functions to fields in the query builder
-  
+
 ## v1.3.1.0 [2017-05-22]
 
 ### Release notes
@@ -301,11 +348,11 @@ In versions 1.3.1+, installing a new version of Chronograf automatically clears 
 
 ### UI Improvements
   1. Save user-provided relative time ranges in cells
-  1. Improve how cell legends and options appear on dashboards 
+  1. Improve how cell legends and options appear on dashboards
   1. Combine the measurements and tags columns in the Data Explorer and implement a new design for applying functions to fields.
   1. Normalize the terminology in Chronograf
   1. Make overlays full-screen
   1. Change the default global time range to past 1 hour
   1. Add the Source Indicator icon to the Configuration and Admin pages
-  
+
 > See Chronograf's [CHANGELOG](https://github.com/influxdata/chronograf/blob/master/CHANGELOG.md) on GitHub for information about the 1.2.0-beta releases.

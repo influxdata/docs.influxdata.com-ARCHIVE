@@ -1,5 +1,5 @@
 ---
-title: Transition from InfluxDB's Web Admin Interface
+title: Transitioning from the InfluxDB Web Admin Interface
 menu:
   chronograf_1_4:
     weight: 50
