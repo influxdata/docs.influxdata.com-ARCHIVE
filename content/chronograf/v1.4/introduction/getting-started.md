@@ -11,12 +11,12 @@ menu:
 
 On this page
 
-* Getting started overview](#getting-started-overview)
-* Requirements](#requirements)
-  - [InfluxDB Setup](#influxdb-setup)
-  - [Kapacitor Setup](#kapacitor-setup)
-  - [Telegraf Setup](#telegraf-setup)
-  - [Chronograf Setup](#chronograf-setup)
+* [Getting started overview](#getting-started-overview)
+* [Requirements](#requirements)
+  - [InfluxDB setup](#influxdb-setup)
+  - [Kapacitor setup](#kapacitor-setup)
+  - [Telegraf setup](#telegraf-setup)
+  - [Chronograf setup](#chronograf-setup)
 
 ## Getting started overview
 
