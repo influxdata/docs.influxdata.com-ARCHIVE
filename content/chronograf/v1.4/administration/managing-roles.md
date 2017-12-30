@@ -7,9 +7,9 @@ menu:
 ---
 
 
-## Chronograf predefined roles
+## Chronograf user roles
 
-Chronograf includes user roles, listed in order of increasing persmission levels:
+Chronograf includes the following user roles, listed in order of increasing persmission levels:
 
 * `member`
 * `viewer`
@@ -17,11 +17,11 @@ Chronograf includes user roles, listed in order of increasing persmission levels
 * `admin`
 * SuperAdmin
 
-Within an organization, the valid roles are member, viewer, editor, and admin. In order to manage organizations and users across all organizations, the SuperAdmin role allow special permissions.
+Within an organization, the valid roles are member, viewer, editor, and admin. In order to manage organizations and users across all organizations, the SuperAdmin role allows special permissions.
 
 #### Member (`member`)
 
-Members (given the `member` role) are Chronograf users who have been added to organizations, but do not have any functional role. A member can authenticate, but they are without access to any content within an organization.
+Members are Chronograf users who have been added to organizations without any specified functional roles. Although a member can authenticate, the member cannot access any content within an organization.
 
 By default, new organizations are created with `member` as the default role.
 
@@ -63,4 +63,4 @@ SuperAdmins are a unique Chronograf administrators who can perform administrator
 * Create, view, update, and remove organizations
 * Create, view, and remove users in any organizations
 
-When a SuperAdmin is added as a user of an organization, the SuperAdmin is restricted by the limitations of the role. This allows a SuperAdmin to comply with expectations of not accessing content within a specific organization, and if done, an audit trail will show access of the content.
+When a SuperAdmin is added as a user of an organization, the SuperAdmin is restricted by the limitations of the role. This allows a SuperAdmin to be able to comply with expectations of not accessing content within a specific organization and, if done, that an audit trail would show access of the content.
