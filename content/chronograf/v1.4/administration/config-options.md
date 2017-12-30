@@ -7,7 +7,8 @@ menu:
     parent: Administration
 ---
 
-### On this page
+On this page:
+
 * [Usage](#usage)
 * [Application options](#application-options)
 * [InfluxDB authentication options](#influxdb-authentication-options)
@@ -20,9 +21,7 @@ menu:
 * [Other options](#other-options)
 * [Help option](#help-option)
 
-
-
-## Usage:
+## Usage
 
 To specify the options to set when starting the Chronograf service, include the options after `chronograf`:
 
@@ -39,7 +38,7 @@ Examples:
 * Mac OS X: Using shortcut options to set develop mode and disable reporting
 
 ```
-  `chronograf --develop --d --r
+  `chronograf -d -r
 ```
 
 > ***Note:*** Command line options take precedence over corresponding environment variables.
@@ -117,11 +116,11 @@ Environment variable: `$KAPACITOR_PASSWORD`
 
 ## Other optional options
 
-### `-d` | `--develop`
+### `--develop` | `-d`
 
 Run the `chronograf` server in develop mode.
 
-### `-b` | `--bolt-path=`
+### `--bolt-path=` | `-b`
 
 The file path to the BoltDB file.
 
@@ -129,7 +128,7 @@ Default: `/var/lib/chronograf/chronograf-v1-.db`
 
 Environment variable: `$BOLT_PATH`
 
-### `-c` | `--canned-path=`
+### `--canned-path=` | `-c`
 
 The path to the directory for [pre-created dashboards](/chronograf/v1.4/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf)
 
@@ -137,7 +136,7 @@ Default: `/usr/share/chronograf/canned`
 
 Environment variable: `$CANNED_PATH`
 
-### `-t` | `--token-secret=`
+### `--token-secret=` | `-t`
 
 The secret for signing tokens.
 
@@ -155,19 +154,19 @@ Environment variable: `$AUTH_DURATION`
 
 ## GitHub OAuth 2.0 authentication options
 
-### `-i` | `--github-client-id=`
+### `--github-client-id=` | `-i`
 
 The GitHub Client ID for OAuth 2.0 support.
 
 Environment variable: `$GH_CLIENT_ID`
 
-### `-s` | `--github-client-secret=`
+### `--github-client-secret=` | `-s`
 
 The GitHub Client Secret for OAuth 2.0 support.
 
 Environment variable: `$GH_CLIENT_SECRET`
 
-### `-o` | `--github-organization=`
+### `--github-organization=` | `-o`
 
 The GitHub organization user is required to have an active membership.
 
@@ -196,7 +195,7 @@ Environment variable: `$GOOGLE_DOMAINS`
 ### `--public-url=`
 
 The full public URL used to access Chronograf from a web browser.
-Used for Google, Auth0, and some generic OAuth2 authentication providers.
+Used for Google, Auth0, and some generic OAuth 2.0 authentication providers.
 
 Default: `http://localhost:8888`
 
@@ -307,14 +306,14 @@ The URL that returns OpenID UserInfo-compatible information.
 
 Environment variable: `$GENERIC_API_URL`
 
-### `-r` | `--reporting-disabled`
+### `--reporting-disabled` | `-r`
 
 Disables reporting of usage statistics.
 Usage statistics report once every 24 hours include: OS, arch, version, cluster_id, and uptime information.
 
 Environment variable: `$REPORTING_DISABLED`
 
-### `-l` | `--log-level=choice[debug|info|error]`
+### `--log-level=choice[debug|info|error]` | `-l`
 
 Set the logging level.
 
@@ -322,7 +321,7 @@ Default: `info`
 
 Environment variable: `$LOG_LEVEL`
 
-### `-p` | `--basepath=`
+### `--basepath=` | `-p`
 
 The URL path prefix under which all `chronograf` routes will be mounted.
 
@@ -334,12 +333,12 @@ Forces `chronograf` server to require that all requests to it are prefixed with 
 
 Environment variable: `$PREFIX_ROUTES`
 
-### `-v` | `--version`
+### `--version` | `-v`
 
 Show Chronograf version information.
 
 ## Help option
 
-### `-h` | `--help`
+### `--help` | `-h`
 
 Show the help information for `chronograf`.
