@@ -23,10 +23,10 @@ On this page:
 
 ## Usage
 
-To specify the options to set when starting the Chronograf service, include the options after `chronograf`:
+When starting the Chronograf service, include any options after `chronograf`, where `[OPTIONS]` are options separated by spaces:
 
 ```sh
-`chronograf [OPTIONS]`
+ chronograf [OPTIONS]
 ```
 
 Examples:
