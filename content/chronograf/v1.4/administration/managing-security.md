@@ -1,5 +1,5 @@
 ---
-title: Managing security in Chronograf
+title: Managing Chronograf security
 
 aliases: /chronograf_1_4/security-best-practices/
 
@@ -11,27 +11,32 @@ menu:
 ---
 
 **On this page**
-* [Using Chronograf with OAuth 2.0 Authentication](#chronograf-with-oauth-2-0-authentication)
-  * [Configuration](#configuration)
-    * [JWT Signature](#jwt-signature)
-        * [GitHub](#github)
-        * [Google](#google)
-        * [Heroku](#heroku)
-        * [Auth0](#auth0)
-        * [Generic](#generic)
-        * [Optional: Configure an Authentication Duration](#optional-configure-an-authentication-duration)
+
+* [Chronograf security](#chronograf-security)
+* [Using JWT with OAuth 2.0 protocols](#using-jwt-with-oauth-2-0-protocols)
+  * [JWT Signature](#jwt-signature)
+  * [GitHub](#github)
+  * [Google](#google)
+  * [Heroku](#heroku)
+  * [Auth0](#auth0)
+  * [Generic](#generic)
+  * [Optional: Configuring authentication duration](#optional-configure-authentication-duration)
 * [TLS](#tls)
-  * [Running Chronograf with TLS](#running-chronograf-with-tls)
+  * [Using HTTPS and TLS with Chronograf applications](#using-https-and-tls-with-chronograf-applications)
   * [Testing with Self-Signed Certificates ](#testing-with-self-signed-certificates)
 
-## Using Chronograf with OAuth 2.0 authentication providers
+## Chronograf security
 
-User authentication in Chronograf is managed using OAuth 2.0 authentication protocols.
+Chronograf provides two mechanisms for enhancing the secruity of your applications:
 
-Here is a high-level summary of the steps involved in Google OAuth 2.0 authentication with Chronograf:
-1) User logs into Google
-2) Google authorizes the user as a Chronograf user
-3) Chronograf uses the Google authorization to authenticate the user.
+* JWT with OAuth 2.0
+* HTTPS and TLS (Transport Layer Security)
+
+OAuth 2.0 protocol is used for managing Both of these mechanisms are described below.
+
+## Using JWT with OAuth 2.0 protocols
+
+User authorization and authentication in Chronograf is managed using [JSON Web Token (JWT)](https://tools.ietf.org/html/rfc7519) and supported [OAuth 2.0 authentication protocols](https://oauth.net/2/).
 
 In order to use OAuth 2.0 authentication with Chronograf, you must configure two components:
 * [JWT signature](https://tools.ietf.org/html/rfc7519)
@@ -46,19 +51,14 @@ To request authorization and provide authentication to Chronograf applications, 
 * Generic
 
 
-### Configuring a JWT Signature and OAuth 2.0 provider
-
-Configure the JWT signature and the OAuth provider to use authentication in Chronograf.
-
->**Note:**
 If you're using the [`--basepath` option](/chronograf/v1.4/administration/configuration/#p-basepath) when starting Chronograf,
 add the same basepath to the callback URL of any OAuth provider that you configure.
 
 ### JWT Signature
 
-A [JWT](https://tools.ietf.org/html/rfc7519) signature is required for all OAuth 2.0 authentication providers.
+Chronograf requires a [JSON Web Token (JWT)](https://tools.ietf.org/html/rfc7519) signature for use with supported OAuth 2.0 authentication providers.
 
-To create a JWT signature, assign `TOKEN_SECRET` to a random string.
+To create a JWT signature, assign the `TOKEN_SECRET` environment variable to a random string.
 
 Example:
 
@@ -80,12 +80,14 @@ Chronograf supports using the [GitHub OAuth 2.0 authentication](https://develope
 
 #### Overview
 
-Chronograf includes five envirnment variables for  GitHub OAuth 2.0 authentication. The steps below show you how to get the required values for:
+Chronograf has five environment variables for use with GitHub OAuth 2.0 authentication. The steps below show you how to get the required values for:
+
 * TOKEN_SECRET (JWT signature)
 * GH_CLIENT_ID (GitHub Client ID)
 * GH_CLIENT_SECRET (GitHub Client Secret)
 
 You can also specify values for two optional environment variables:
+
 * AUTH_DURATION
 * GH_ORGS (GitHub organizations)
 
@@ -93,7 +95,7 @@ For details on the command line options and environment variables, see [GitHub O
 
 **Example:**
 ```
-# force login every hour
+# Force login every hour
 export AUTH_DURATION=1h
 
 # JWT Signature
@@ -105,11 +107,11 @@ export GH_CLIENT_ID=b339dd4fddd95abec9aa
 # GitHub Client Secret
 export GH_CLIENT_SECRET=260041897d3252c146ece6b46ba39bc1e54416dc
 
-# Restrict to GitHub organizations
+# Restrict to specific GitHub organizations
 export GH_ORGS=biffs-gang
 ```
 
-#### Creating a GitHub OAuth 2.0 application
+#### Creating GitHub OAuth 2.0 applications
 
 To create a GitHub OAuth Application, follow the [Register your app](https://developer.github.com/guides/basics-of-authentication/#registering-your-app) instructions.
 Essentially, you'll register your application [here](https://github.com/settings/applications/new).
@@ -137,7 +139,7 @@ If you need to require an organization membership for a user, set the `GH_ORGS` 
 ```sh
 export GH_ORGS=biffs-gang
 ```
-If the user is not a member, then the user will not be allowed access.
+If the user is not a member of the specified GitHub organization, then the user will not be granted access.
 To support multiple organizations, use a comma-delimited list, as in this example:
 ```sh
 export GH_ORGS=hill-valley-preservation-sociey,the-pinheads
@@ -149,39 +151,49 @@ export GH_ORGS=hill-valley-preservation-sociey,the-pinheads
 
 Chronograf supports the use of the Google OAuth 2.0 protocol for authentication and authorization. The steps below guide you in creating the following required Chronograf environment variables:
 
-* GOOGLE_CLIENT_ID (Google Client ID)
-* GOOGLE_CLIENT_SECRET (Google Client Secret)
-* PUBLIC_URL (Public URL)
+* `GOOGLE_CLIENT_ID` (Google Client ID)
+* `GOOGLE_CLIENT_SECRET` (Google Client Secret)
+* `PUBLIC_URL` (Public URL)
 
 The following environment variable can be use to optionally restrict access to specific domains:
 
-* GOOGLE_DOMAINS (Google domains)
+* `GOOGLE_DOMAINS` (Google domains)
 
 For details on Chronograf command line options and environment variables, see [Google OAuth 2.0 authentication options](/chronograf/v1.4/config-options#google-oauth-2-0-authentication-options).
 
+Here is a high-level summary of the steps involved in Google OAuth 2.0 authentication with Chronograf:
+1) User logs into Google
+2) Google authorizes the user as a Chronograf user
+3) Chronograf uses the Google authorization to authenticate the user.
 
 
-#### Creating Google OAuth Applications
-Obtain a client ID and an application secret by following the steps under "Basic Steps" [here](https://developers.google.com/identity/protocols/OAuth2).
-Chronograf will also need to be publicly accessible via a fully qualified domain name so that Google properly redirects users back to the application.
+#### Creating Google OAuth 2.0 applications
+Obtain a Google Client ID and an Google Client Secret by following the steps in [Using OAuth 2.0 to Access Google APIs](https://developers.google.com/identity/protocols/OAuth2).
+Chronograf will also need to be publicly accessible using a fully-qualified domain name so that Google can properly redirect users back to the application.
 This information should be set in the following environment variables:
 
-* `GOOGLE_CLIENT_ID`
-* `GOOGLE_CLIENT_SECRET`
-* `PUBLIC_URL`
+* `GOOGLE_CLIENT_ID` (Google Client ID)
+* `GOOGLE_CLIENT_SECRET` (Google Client Secret)
+* `PUBLIC_URL` (Public URL)
 
-Alternatively, this can also be set using the command line switches:
+Additionally, you need to add the following required Chronograf environment variable:
 
-* [`--google-client-id`](/chronograf/v1.4/administration/configuration/#google-client-id)
-* [`--google-client-secret`](/chronograf/v1.4/administration/configuration/#google-client-secret)
-* [`--public-url`](/chronograf/v1.4/administration/configuration/#public-url)
+* `TOKEN_SECRET` (JWT Signature)
+
+
+Alternatively, these environment variables can be set using the command line switches:
+
+* [`--google-client-id=`](/chronograf/v1.4/administration/configuration/#google-client-id)
+* [`--google-client-secret=`](/chronograf/v1.4/administration/configuration/#google-client-secret)
+* [`--public-url=`](/chronograf/v1.4/administration/configuration/#public-url)
+* [`--token_secret=`]
 
 #### Optional Google domains
 
-Similar to GitHub's organization restriction, Google authentication can be restricted to permit access to Chronograf from only specific domains.
+Similar to GitHub organization restrictions, Google authentication can be restricted to restrict access to Chronograf from only specific domains.
 These are configured using the `GOOGLE_DOMAINS` environment variable or the [`--google-domains`](/chronograf/v1.4/administration/configuration/#google-domains) switch.
 Multiple domains are separated using commas.
-For example, if we wanted to permit access only from `biffspleasurepalace.com` and `savetheclocktower.com`, the environment variable value is:
+For example, to permit access only from `biffspleasurepalace.com` and `savetheclocktower.com`, the `GOOGLE_DOMAINS` environment variable is:
 ```sh
 export GOOGLE_DOMAINS=biffspleasurepalance.com,savetheclocktower.com
 ```
@@ -190,7 +202,7 @@ export GOOGLE_DOMAINS=biffspleasurepalance.com,savetheclocktower.com
 
 #### Creating a Heroku application
 
-To obtain a client ID and application secret for Heroku, follow the guide posted [here](https://devcenter.heroku.com/articles/oauth#register-client).
+To obtain a Heroku Client ID and Heroku Secret, follow the guide posted [here](https://devcenter.heroku.com/articles/oauth#register-client).
 Once your application has been created, those two values should be inserted into the following environment variables:
 
 * `HEROKU_CLIENT_ID`
@@ -203,7 +215,7 @@ The equivalent command line switches are:
 
 #### Optional Heroku organizations
 
-Like the other OAuth2 providers, access to Chronograf via Heroku can be restricted to members of specific Heroku organizations.
+Like the other OAuth 2.0 providers, access to Chronograf using Heroku can be restricted to members of specific Heroku organizations.
 This is controlled using the `HEROKU_ORGS` environment variable or the [`--heroku-organizations`](/chronograf/v1.4/administration/configuration/#heroku-organization) switch and is comma-separated.
 If we wanted to permit access from the `hill-valley-preservation-society` organization and `the-pinheads` organization, we would use the following environment variable:
 ```sh
@@ -273,7 +285,7 @@ If your provider scopes email access under a different scope or scopes provide t
 export GENERIC_SCOPES="openid,email" # Requests access to openid and email scopes
 ```
 
-#### Optional Email domains
+#### Optional email domains
 
 The generic OAuth2 provider has a few optional parameters.
 
@@ -283,13 +295,14 @@ The generic OAuth2 provider has a few optional parameters.
 #### Configuring the look of the login page
 
 To configure the copy of the login page button text, set the `GENERIC_NAME` environment variable.
+
 For example, with
 ```sh
 export GENERIC_NAME="Hill Valley Preservation Society"
 ```
 the button text will be `Login with Hill Valley Preservation Society`.
 
-### Optional: Configure an Authentication Duration
+### Optional: Configuring authentication duration
 
 By default, authentication will remain valid for 30 days via a cookie stored in the browser.
 Configure that duration with the `AUTH_DURATION` environment variable.
@@ -310,7 +323,10 @@ Chronograf supports TLS (Transport Layer Security) to securely communicate betwe
 We recommend using HTTPS with Chronograf.
 If you are not using a TLS termination proxy, you can run Chronograf's server with TLS connections.
 
-### Running Chronograf with TLS
+### Using HTTPS and TLS with Chronograf applications
+
+InfluxData recommends using HTTPS to communicate securely with Chronograf applications. Chronograf includes command line and environment variable options for configuring TLS (Transport Layer Security) certificates and key files. Use of the TLS cryptographic protocol provides server authentication, data confidentiality, and data integrity. When configured, users can use HTTPS to securely communicate with your Chronograf applications.
+
 
 Chronograf server has command line and environment variable options to specify the certificate and key files.
 The server reads and parses a public/private key pair from these files.
