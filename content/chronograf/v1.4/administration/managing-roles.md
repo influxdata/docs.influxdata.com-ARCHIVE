@@ -28,7 +28,7 @@ By default, new organizations are created with `member` as the default role.
 
 #### Viewer (`viewer`)
 
-Viewers (given the `viewer` role) are Chronograf who can:
+Viewers are Chronograf users who can:
 
 * Access content restricted to their organization
 * View dashboards
@@ -49,7 +49,7 @@ Editors are Chronograf users who can:
 
 Administrators are users who can perform administrator functions within an organization. Users in the `admin` role can:
 
-* Access restricted to content and users in their organization
+* Access content restricted to their organization
 * View, create, update, and remove dashboards
 * View, create, update, and remove sources
 * Create, view, and remove users
@@ -58,7 +58,7 @@ Administrators are users who can perform administrator functions within an organ
 
 ####  SuperAdmin
 
-SuperAdmins are a unique Chronograf administrators who can perform administrator functions within and across organizations. A SuperAdmin can perform two important functions:
+SuperAdmins are unique Chronograf administrators who can perform administrator functions within and across organizations. A SuperAdmin can perform the following two functions unavailable to any other roles:
 
 * Create, view, update, and remove organizations
 * Create, view, and remove users in any organizations
