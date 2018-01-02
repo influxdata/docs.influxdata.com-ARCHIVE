@@ -63,4 +63,4 @@ SuperAdmins are unique Chronograf administrators who can perform administrator f
 * Create, view, update, and remove organizations
 * Create, view, and remove users in any organizations
 
-When a SuperAdmin is added as a user of an organization, the SuperAdmin is restricted by the limitations of the role. This allows a SuperAdmin to be able to comply with expectations of not accessing content within a specific organization and, if done, that an audit trail would show access of the content.
+> ***Note:*** When a SuperAdmin is added as a member of an organization, the SuperAdmin is restricted to access determined by the standard roles (viewer, editor, and admin). This allows a SuperAdmin to be able to comply with expectations of not accessing content within a specific organization and, if done, that an audit trail would show access of the content.
