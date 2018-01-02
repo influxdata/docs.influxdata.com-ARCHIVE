@@ -1,19 +1,19 @@
 ---
-title: Managing security
+title: Managing security in Chronograf
 
 aliases: /chronograf_1_4/security-best-practices/
 
 menu:
   chronograf_1_4:
+    menu: Managing security
     weight: 50
     parent: Administration
 ---
 
-On this page
-
+**On this page**
 * [Using Chronograf with OAuth 2.0 Authentication](#chronograf-with-oauth-2-0-authentication)
-    * [Configuration](#configuration)
-        * [JWT Signature](#jwt-signature)
+  * [Configuration](#configuration)
+    * [JWT Signature](#jwt-signature)
         * [GitHub](#github)
         * [Google](#google)
         * [Heroku](#heroku)
@@ -24,9 +24,27 @@ On this page
   * [Running Chronograf with TLS](#running-chronograf-with-tls)
   * [Testing with Self-Signed Certificates ](#testing-with-self-signed-certificates)
 
-## Using Chronograf with OAuth 2.0 authentication
+## Using Chronograf with OAuth 2.0 authentication providers
 
-To manage organizations and users in Chronograf, you need to configure an OAuth 2.0 authentication provider.
+User authentication in Chronograf is managed using OAuth 2.0 authentication protocols.
+
+Here is a high-level summary of the steps involved in Google OAuth 2.0 authentication with Chronograf:
+1) User logs into Google
+2) Google authorizes the user as a Chronograf user
+3) Chronograf uses the Google authorization to authenticate the user.
+
+In order to use OAuth 2.0 authentication with Chronograf, you must configure two components:
+* [JWT signature](https://tools.ietf.org/html/rfc7519)
+* [OAuth 2.0 authentication provider](https://oauth.net/2/)
+
+To request authorization and provide authentication to Chronograf applications, you need to configure an OAuth 2.0 authentication provider. Chronograf supports user authentication with the following OAuth 2.0 authentication providers:
+
+* GitHub
+* Google
+* Heroku
+* Auth0
+* Generic
+
 
 ### Configuring a JWT Signature and OAuth 2.0 provider
 
@@ -38,7 +56,7 @@ add the same basepath to the callback URL of any OAuth provider that you configu
 
 ### JWT Signature
 
-A [JWT](https://tools.ietf.org/html/rfc7519) signature is required for all OAuth 2.0 autentication providers.
+A [JWT](https://tools.ietf.org/html/rfc7519) signature is required for all OAuth 2.0 authentication providers.
 
 To create a JWT signature, assign `TOKEN_SECRET` to a random string.
 
@@ -57,14 +75,38 @@ If you want to log all users out every time the server restarts, change the valu
 
 ### GitHub
 
+Chronograf supports using the [GitHub OAuth 2.0 authentication](https://developer.github.com/apps/building-oauth-apps/) to request authorization and provide authentication. To use GitHub authentication, you need to register a GitHub application and use the assigned Client ID and Client Secret.
+
+
 #### Overview
 
-```sh
-export AUTH_DURATION=1h                                           # force login every hour
-export TOKEN_SECRET=supersupersecret                              # Signing secret
-export GH_CLIENT_ID=b339dd4fddd95abec9aa                          # GitHub client ID
-export GH_CLIENT_SECRET=260041897d3252c146ece6b46ba39bc1e54416dc  # GitHub client secret
-export GH_ORGS=biffs-gang                                         # Restrict to GH orgs
+Chronograf includes five envirnment variables for  GitHub OAuth 2.0 authentication. The steps below show you how to get the required values for:
+* TOKEN_SECRET (JWT signature)
+* GH_CLIENT_ID (GitHub Client ID)
+* GH_CLIENT_SECRET (GitHub Client Secret)
+
+You can also specify values for two optional environment variables:
+* AUTH_DURATION
+* GH_ORGS (GitHub organizations)
+
+For details on the command line options and environment variables, see [GitHub OAuth 2.0 authentication options](/chronograf/v1.4/administration/config-options#github-oauth-2-0-authentication-options).
+
+**Example:**
+```
+# force login every hour
+export AUTH_DURATION=1h
+
+# JWT Signature
+export TOKEN_SECRET=supersupersecret
+
+# GitHub Client ID
+export GH_CLIENT_ID=b339dd4fddd95abec9aa
+
+# GitHub Client Secret
+export GH_CLIENT_SECRET=260041897d3252c146ece6b46ba39bc1e54416dc
+
+# Restrict to GitHub organizations
+export GH_ORGS=biffs-gang
 ```
 
 #### Creating a GitHub OAuth 2.0 application
@@ -72,14 +114,13 @@ export GH_ORGS=biffs-gang                                         # Restrict to 
 To create a GitHub OAuth Application, follow the [Register your app](https://developer.github.com/guides/basics-of-authentication/#registering-your-app) instructions.
 Essentially, you'll register your application [here](https://github.com/settings/applications/new).
 
-The `Homepage URL` should include Chronograf's full server name and port.
-If you are running it locally for example, make it `http://localhost:8888`.
+The `Homepage URL` should include the full Chronograf server name and port. For example, if you are running it locally, it is `http://localhost:8888`.
 
 The `Authorization callback URL` must be the location of the `Homepage URL` plus `/oauth/github/callback`.
-For example, if `Homepage URL` was `http://localhost:8888`, then the `Authorization callback URL` should be `http://localhost:8888/oauth/github/callback`.
+For example, if `Homepage URL` was `http://localhost:8888`, then the `Authorization callback URL` is `http://localhost:8888/oauth/github/callback`.
 
-GitHub provides a `Client ID` and `Client Secret`.
-To register these values with Chronograf set the following environment variables:
+GitHub provides the `GitHub Client ID` and `GitHub Client Secret`.
+To register these values with Chronograf, set the following environment variables:
 
 * `GH_CLIENT_ID`
 * `GH_CLIENT_SECRET`
@@ -92,19 +133,35 @@ export GH_CLIENT_SECRET=260041897d3252c146ece6b46ba39bc1e54416dc
 
 #### Optional GitHub organizations
 
-To require an organization membership for a user, set the `GH_ORGS` environment variables:
+If you need to require an organization membership for a user, set the `GH_ORGS` environment variable:
 ```sh
 export GH_ORGS=biffs-gang
 ```
 If the user is not a member, then the user will not be allowed access.
-To support multiple organizations, use a comma-delimited list like in this example:
+To support multiple organizations, use a comma-delimited list, as in this example:
 ```sh
 export GH_ORGS=hill-valley-preservation-sociey,the-pinheads
 ```
 
 ### Google
 
-#### Creating Google OAuth Application
+#### Overview
+
+Chronograf supports the use of the Google OAuth 2.0 protocol for authentication and authorization. The steps below guide you in creating the following required Chronograf environment variables:
+
+* GOOGLE_CLIENT_ID (Google Client ID)
+* GOOGLE_CLIENT_SECRET (Google Client Secret)
+* PUBLIC_URL (Public URL)
+
+The following environment variable can be use to optionally restrict access to specific domains:
+
+* GOOGLE_DOMAINS (Google domains)
+
+For details on Chronograf command line options and environment variables, see [Google OAuth 2.0 authentication options](/chronograf/v1.4/config-options#google-oauth-2-0-authentication-options).
+
+
+
+#### Creating Google OAuth Applications
 Obtain a client ID and an application secret by following the steps under "Basic Steps" [here](https://developers.google.com/identity/protocols/OAuth2).
 Chronograf will also need to be publicly accessible via a fully qualified domain name so that Google properly redirects users back to the application.
 This information should be set in the following environment variables:
@@ -124,7 +181,7 @@ Alternatively, this can also be set using the command line switches:
 Similar to GitHub's organization restriction, Google authentication can be restricted to permit access to Chronograf from only specific domains.
 These are configured using the `GOOGLE_DOMAINS` environment variable or the [`--google-domains`](/chronograf/v1.4/administration/configuration/#google-domains) switch.
 Multiple domains are separated using commas.
-For example, if we wanted to permit access only from `biffspleasurepalace.com` and `savetheclocktower.com`, the environment variable would be set as follows:
+For example, if we wanted to permit access only from `biffspleasurepalace.com` and `savetheclocktower.com`, the environment variable value is:
 ```sh
 export GOOGLE_DOMAINS=biffspleasurepalance.com,savetheclocktower.com
 ```

@@ -55,11 +55,11 @@ sudo systemctl start influxdb
 ```
 
 #### 3. Verify that InfluxDB is Running
-Run the `SHOW DATABASES` command using `curl`:
+Using the `SHOW DATABASES` curl command, verify that InfluxDB is up and running:
 ```
 curl "http://localhost:8086/query?q=show+databases"
 ```
-If InfluxDB is up and running, you should see an object that contains the `_internal` database:
+If InfluxDB is running, you should see an object that contains the `_internal` database:
 ```json
 {"results":[{"statement_id":0,"series":[{"name":"databases","columns":["name"],"values":[["_internal"]]}]}]}
 ```

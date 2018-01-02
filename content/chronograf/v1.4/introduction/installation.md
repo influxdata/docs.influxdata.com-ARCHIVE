@@ -111,5 +111,5 @@ The next time you un-TAR a new version of Chronograf, simply change the `<versio
 
 ## Configuration and Security
 
-See [Configuring Chronograf](/chronograf/v1.4/administration/configuring-chronograf/) for a description of the available configuration options.
+See [Configuring Chronograf](/chronograf/v1.4/administration/configuration/) for a description of the available configuration options.
 See [Managing security](/chronograf/v1.4/administration/security-best-practices/) for TLS and OAuth 2.0 setup instructions.

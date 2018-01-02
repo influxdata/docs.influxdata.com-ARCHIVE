@@ -39,6 +39,10 @@ To use the default organization:
 
 Required role: SuperAdmin
 
+After installing Chronograf, the Default organization is available for your users. For some Chronograf installations, the default organization will be sufficient to meet their needs. 
+
+You can create additional organizations to support the needs of organizational units, teams, and projects.
+
 To create an organization:
 
 1) In the navigation bar of the Chronograf application, select **Admin** (crown icon) > **Chronograf** to open the **Chronograf Admin** page.
@@ -56,6 +60,8 @@ To create an organization:
 ### Removing organizations
 
 Required role: SuperAdmin
+
+
 
 To remove an organization:
 
