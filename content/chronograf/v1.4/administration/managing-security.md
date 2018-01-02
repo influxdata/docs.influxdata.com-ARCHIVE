@@ -27,7 +27,7 @@ menu:
 
 ## Chronograf security
 
-Chronograf provides two mechanisms for enhancing the secruity of your applications:
+Chronograf includes two mechanisms for enhancing the secruity of your applications:
 
 * JWT with OAuth 2.0
 * HTTPS and TLS (Transport Layer Security)
