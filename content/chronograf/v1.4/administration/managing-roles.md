@@ -58,7 +58,7 @@ Administrators are users who can perform administrator functions within an organ
 
 ####  SuperAdmin
 
-SuperAdmins are unique Chronograf administrators who can perform administrator functions within and across organizations. A SuperAdmin can perform the following two functions unavailable to any other roles:
+SuperAdmins are unique Chronograf administrators who can perform administrator functions within and across organizations. A SuperAdmin can perform the following operations that are unavailable for other roles:
 
 * Create, view, update, and remove organizations
 * Create, view, and remove users in any organizations

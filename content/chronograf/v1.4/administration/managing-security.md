@@ -32,7 +32,7 @@ Chronograf includes two mechanisms for enhancing the secruity of your applicatio
 * JWT with OAuth 2.0
 * HTTPS and TLS (Transport Layer Security)
 
-OAuth 2.0 protocol is used for managing Both of these mechanisms are described below.
+OAuth 2.0 protocol is used for managing users and organizations. TLS and HTTPS adds server authentication, data confidentiality, and data integrity.  Using both of these mechanisms with Chronograf is explained below.
 
 ## Using JWT with OAuth 2.0 protocols
 
@@ -277,7 +277,7 @@ The generic OAuth2 provider requires several settings:
 * `GENERIC_TOKEN_URL` : OAuth 2.0 provider's token endpoint [endpoint](https://tools.ietf.org/html/rfc6749#section-3.2) is used by the client to obtain an access token
 * `TOKEN_SECRET` : Used to validate OAuth [state](https://tools.ietf.org/html/rfc6749#section-4.1.1) response. (see above)
 
-#### Optional Scopes
+#### Optional scopes
 
 By default Chronograf will ask for the `user:email` [scope](https://tools.ietf.org/html/rfc6749#section-3.3) of the client.
 If your provider scopes email access under a different scope or scopes provide them as comma-separated values in the `GENERIC_SCOPES` environment variable.
