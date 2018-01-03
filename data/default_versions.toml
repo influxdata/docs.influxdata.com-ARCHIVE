@@ -1,5 +1,5 @@
-influxdb = "influxdb_1_3"
-influxdb_semver = "v1.3"
+influxdb = "influxdb_1_4"
+influxdb_semver = "v1.4"
 chronograf = "chronograf_1_4"
 chronograf_semver = "v1.4"
 kapacitor = "kapacitor_1_3"

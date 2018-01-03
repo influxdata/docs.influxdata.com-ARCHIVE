@@ -39,6 +39,68 @@ SectionPagesMenu = "products"
   weight = 50
   url = "/enterprise_kapacitor/"
 
+  # InfluxDB v1.4 Menu
+  [[menu.influxdb_1_4]]
+    name = "Introduction"
+    identifier = "introduction"
+    weight = 0
+    url = "/influxdb/v1.4/introduction/"
+  [[menu.influxdb_1_4]]
+    name = "Guides"
+    identifier = "guides"
+    weight = 10
+    url = "/influxdb/v1.4/guides/"
+  [[menu.influxdb_1_4]]
+    name = "Concepts"
+    identifier = "concepts"
+    weight = 20
+    url = "/influxdb/v1.4/concepts/"
+  [[menu.influxdb_1_4]]
+    name = "Troubleshooting"
+    identifier = "troubleshooting"
+    weight = 30
+    url = "/influxdb/v1.4/troubleshooting/"
+  [[menu.influxdb_1_4]]
+    name = "Tools"
+    identifier = "tools"
+    weight = 40
+    url = "/influxdb/v1.4/tools/"
+  [[menu.influxdb_1_4]]
+    name = "Write Protocol"
+    identifier = "write_protocols"
+    weight = 50
+    url = "/influxdb/v1.4/write_protocols/"
+    [[menu.influxdb_1_4]]
+      name = "Supported Protocols"
+      identifier = "supported_protocols"
+      weight = 60
+      url = "/influxdb/v1.4/supported_protocols/"
+  [[menu.influxdb_1_4]]
+    name = "Query Language"
+    identifier = "query_language"
+    weight = 70
+    url = "/influxdb/v1.4/query_language/"
+  [[menu.influxdb_1_4]]
+    name = "High Availability"
+    identifier = "high_availability"
+    weight = 80
+    url = "/influxdb/v1.4/high_availability/"
+  [[menu.influxdb_1_4]]
+    name = "Administration"
+    identifier = "administration"
+    weight = 90
+    url = "/influxdb/v1.4/administration/"
+  [[menu.influxdb_1_4]]
+    name = "About the Project"
+    identifier = "about_the_project"
+    weight = 100
+    url = "/influxdb/v1.4/about_the_project/"
+  [[menu.influxdb_1_4]]
+    name = "External Resources"
+    identifier = "external_resources"
+    weight = 110
+    url = "/influxdb/v1.4/external_resources/"
+
 # InfluxDB v1.3 Menu
 [[menu.influxdb_1_3]]
   name = "Introduction"
@@ -3091,7 +3153,7 @@ SectionPagesMenu = "products"
  weight = 91
  url = "https://github.com/influxdata/telegraf/tree/release-1.1.0/plugins/inputs/webhooks"
  parent = "services"
- 
+
 # Telegraf v1.0 Sub-Menu - Introduction
    [[menu.telegraf_1_0]]
    name = "Download"
