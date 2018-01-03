@@ -7,7 +7,7 @@ menu:
     parent: Administration
 ---
 
-Starting with Chronograf 1.4, Chronograf includes multiple organizations and user roles.
+Starting with Chronograf 1.4, Chronograf includes the ability to create users with role-based access control and to create organizations for those users to belong to.
 
 
 ### Overview
