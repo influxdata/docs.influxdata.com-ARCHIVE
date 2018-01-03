@@ -125,7 +125,7 @@ stock,symbol=AAPL bid=127.46,ask=127.48
 temperature,machine=unit42,type=assembly external=25,internal=37 1434067467000000000
 ```
 
-> **Note:** More information on the line protocol can be found on the [Write Syntax](/influxdb/v1.4/write_protocols/write_syntax/) page.
+> **Note:** More information on the line protocol can be found on the [Syntax](/influxdb/v1.4/write_protocols/line_protocol_reference/#syntax) page.
 
 To insert a single time-series datapoint into InfluxDB using the CLI, enter `INSERT` followed by a point:
 
