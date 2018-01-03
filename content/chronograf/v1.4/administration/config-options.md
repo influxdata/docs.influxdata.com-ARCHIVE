@@ -196,7 +196,7 @@ Environment variable: `$GOOGLE_DOMAINS`
 ### `--public-url=`
 
 The full public URL used to access Chronograf from a web browser.
-Used for Google, Auth0, and some generic OAuth 2.0 authentication providers.
+Required for Google OAuth 2.0 authentication. Used for Auth0 and some generic OAuth 2.0 authentication providers.
 
 Default: `http://localhost:8888`
 
