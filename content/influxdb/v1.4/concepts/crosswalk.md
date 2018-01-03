@@ -191,6 +191,8 @@ It becomes more useful when combined with the rest of the series and visualized.
 This is where trends over time begin to show, and actionable insight can be drawn from the data.
 In addition, time series data is generally written once and rarely updated.
 
-The result is that InfluxDB is not a full CRUD database but more like a CR-ud,
-prioritizing the performance of creating and reading data over update and destroy,
-and preventing some update and destroy behaviors to make create and read more performant.
+The result is that InfluxDB is not a full CRUD database but more like a CR-ud, prioritizing the performance of creating and reading data over update and destroy, and [preventing some update and destroy behaviors](/influxdb/v1.4/concepts/insights_tradeoffs/) to make create and read more performant:
+* To update a point, insert one with [the same measurement, tag set, and timestamp](/influxdb/v1.4/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points).
+* You can [drop or delete a series](/influxdb/v1.4/query_language/database_management/#drop-series-from-the-index-with-drop-series), but not individual points based on field values. As a workaround, you can search for the field value, retrieve the time, then [DELETE based on the `time` field](/influxdb/v1.4/query_language/database_management/#delete-series-with-delete).
+* You can't update or rename tags yet - see GitHub issue [#4157](https://github.com/influxdata/influxdb/issues/4157) for more information. To modify the tag of a series of points, find the points with the offending tag value, change the value to the desired one, write the points back, then drop the series with the old tag value.
+* You can't delete tags by tag key (as opposed to value) - see GitHub issue [#8604](https://github.com/influxdata/influxdb/issues/8604).
