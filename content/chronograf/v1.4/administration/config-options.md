@@ -49,13 +49,19 @@ Examples:
 
 ### `--host=`
 
-The IP that `chronograf` listens on (default: `0.0.0.0`).
+The IP that `chronograf` listens on.
+
+Default value: `0.0.0.0`
+
+Example: `--host=0.0.0.0`
 
 Environment variable: `$HOST`
 
 ### `--port=`
 
-The port that `chronograf` listens on for insecure connections (default: `8888`).
+The port that `chronograf` listens on for insecure connections.
+
+Default: `8888`
 
 Environment variable: `$PORT`
 
@@ -77,7 +83,7 @@ Environment variable: `$TLS_PRIVATE_KEY`
 
 The location of your InfluxDB instance, including `http://`, IP address, and port.
 
-Example: `http:///0.0.0.0:8086`
+Example: `--influxdb-url=http:///0.0.0.0:8086`
 
 Environment variable: `$INFLUXDB_URL`
 
@@ -99,7 +105,7 @@ Environment variable: `$INFLUXDB_PASSWORD`
 
 The location of your Kapacitor instance, including `http://`, IP address, and port.
 
-Example: `http://0.0.0.0:9092`.
+Example: `--kapacitor-url=http://0.0.0.0:9092`.
 
 Environment variable: `$KAPACITOR_URL`
 
@@ -125,7 +131,7 @@ Run the `chronograf` server in develop mode.
 
 The file path to the BoltDB file.
 
-Default: `/var/lib/chronograf/chronograf-v1-.db`
+Default value: `/var/lib/chronograf/chronograf-v1-.db`
 
 Environment variable: `$BOLT_PATH`
 
@@ -133,7 +139,7 @@ Environment variable: `$BOLT_PATH`
 
 The path to the directory for [pre-created dashboards](/chronograf/v1.4/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf)
 
-Default: `/usr/share/chronograf/canned`
+Default value: `/usr/share/chronograf/canned`
 
 Environment variable: `$CANNED_PATH`
 
@@ -147,9 +153,9 @@ Environment variable: `$TOKEN_SECRET`
 
 The total duration (in hours) of cookie life for authentication.
 
-Default: `720h`
+Default value: `720h`
 
-Authentication expires on browser close when `--auth-duration` is set to `0`.
+Authentication expires on browser close when `--auth-duration=0`.
 
 Environment variable: `$AUTH_DURATION`
 
@@ -157,19 +163,19 @@ Environment variable: `$AUTH_DURATION`
 
 ### `--github-client-id=` | `-i`
 
-The GitHub client ID for OAuth 2.0 support.
+The GitHub client ID value for OAuth 2.0 support.
 
 Environment variable: `$GH_CLIENT_ID`
 
 ### `--github-client-secret=` | `-s`
 
-The GitHub client secret for OAuth 2.0 support.
+The GitHub Client Secret value for OAuth 2.0 support.
 
 Environment variable: `$GH_CLIENT_SECRET`
 
 ### `--github-organization=` | `-o`
 
-The GitHub organization user is required to have an active membership.
+The GitHub organization required for a user.
 
 Environment variable: `$GH_ORGS`
 
@@ -177,13 +183,13 @@ Environment variable: `$GH_ORGS`
 
 ### `--google-client-id=`
 
-The Google client ID for OAuth 2.0 support.
+The Google Client ID value for OAuth 2.0 support.
 
 Environment variable: `$GOOGLE_CLIENT_ID`
 
 ### `--google-client-secret=`
 
-The Google client secret for OAuth 2.0 support.
+The Google Client Secret value for OAuth 2.0 support.
 
 Environment variable: `$GOOGLE_CLIENT_SECRET`
 
@@ -198,7 +204,7 @@ Environment variable: `$GOOGLE_DOMAINS`
 The full public URL used to access Chronograf from a web browser.
 Required for Google OAuth 2.0 authentication. Used for Auth0 and some generic OAuth 2.0 authentication providers.
 
-Default: `http://localhost:8888`
+Default value: `http://localhost:8888`
 
 Environment variable: `$PUBLIC_URL`
 
@@ -234,13 +240,13 @@ Environment variable: `$AUTH0_DOMAIN`
 
 ### `--auth0-client-id=`
 
-The client ID supplied by Auth0 for OAuth 2 support.
+The Auth0 Client ID value required for OAuth 2 support.
 
 Environment variable: `$AUTH0_CLIENT_ID`
 
 ### `--auth0-client-secret=`
 
-The client secret supplied by Auth0 for OAuth 2 support.
+The Auth0 Client Secret value required for OAuth 2 support.
 
 Environment variable: `$AUTH0_CLIENT_SECRET`
 
@@ -262,14 +268,14 @@ Environment variable: `$GENERIC_NAME`
 
 ### `--generic-client-id=`
 
-The generic OAuth 2.0 client ID.
+The generic OAuth 2.0 Client ID value.
 Can be used for a custom OAuth 2.0 service.
 
 Environment variable: `$GENERIC_CLIENT_ID`
 
 ### `--generic-client-secret=`
 
-The generic OAuth 2.0 client secret.
+The generic OAuth 2.0 Client Secret value.
 
 Environment variable: `$GENERIC_CLIENT_SECRET`
 
@@ -277,27 +283,27 @@ Environment variable: `$GENERIC_CLIENT_SECRET`
 
 The scopes requested by provider of web client.
 
-Default: `user:email`
+Default value: `user:email`
 
 Environment variable: `$GENERIC_SCOPES`
 
 ### `--generic-domains=`
 
-The email domain users' email address to have.
+The email domain required for user email addresses.
 
-Example: `example.com`
+Example: `--generic-domains=example.com`
 
 Environment variable: `$GENERIC_DOMAINS`
 
 ### `--generic-auth-url=`
 
-The OAuth 2.0 provider's authorization endpoint URL.
+The authorization endpoint URL for the OAuth 2.0 provider.
 
 Environment variable: `$GENERIC_AUTH_URL`
 
 ### `--generic-token-url=`
 
-The OAuth 2.0 provider's token endpoint URL.
+The token endpoint URL for the OAuth 2.0 provider.
 
 Environment variable: `$GENERIC_TOKEN_URL`
 
@@ -307,6 +313,8 @@ The URL that returns OpenID UserInfo-compatible information.
 
 Environment variable: `$GENERIC_API_URL`
 
+## Other options
+
 ### `--reporting-disabled` | `-r`
 
 Disables reporting of usage statistics.
@@ -314,11 +322,15 @@ Usage statistics report once every 24 hours include: OS, arch, version, cluster_
 
 Environment variable: `$REPORTING_DISABLED`
 
-### `--log-level=choice[debug|info|error]` | `-l`
+### `--log-level=` | `-l`
 
 Set the logging level.
 
-Default: `info`
+Valid values: `debug` | `info` | `error`
+
+Default value: `info`
+
+Example: `--log-level=debug`
 
 Environment variable: `$LOG_LEVEL`
 
@@ -336,7 +348,13 @@ Environment variable: `$PREFIX_ROUTES`
 
 ### `--version` | `-v`
 
-Show Chronograf version information.
+Displays Chronograf version information.
+
+Example:
+```sh
+$ chronograf -v
+2018/01/03 14:11:19 Chronograf 1.4.0.0-rc1-26-gb74ae387 (git: b74ae387)
+```
 
 ## Help option
 
