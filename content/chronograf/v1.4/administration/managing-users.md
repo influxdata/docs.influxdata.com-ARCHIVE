@@ -1,7 +1,8 @@
 ---
-title: Managing users and roles
+title: Managing InfluxDB users in Chronograf
 menu:
   chronograf_1_4:
+    menu: Managing InfluxDB users
     weight: 30
     parent: Administration
 ---
