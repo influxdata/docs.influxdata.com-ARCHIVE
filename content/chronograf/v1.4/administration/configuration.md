@@ -18,12 +18,12 @@ Chronograf is the user interface and data visualization component of the InfluxD
 * Kapacitor
   - optional, but needed to create and use alerts in Chronograf
 
-> ***Note:*** Use the [Getting Started](/chronograf/v1.4/introduction/getting-started) guide to run through a quick start tutorial on configuring InfluxDB, Kapacitor, and Telegraf for use with Chronograf.
+> ***Note:*** Run through the [Getting Started](/chronograf/v1.4/introduction/getting-started) tutorial for a quick start on configuring InfluxDB, Kapacitor, and Telegraf for use with Chronograf.
 
 
 ## Starting the Chronograf service
 
-Chronograf can be started using the default configuration options, but you can use the environment variables and command line options to meet your requirements. To use authentication, you need to include any required options for supported OAuth 2.0 authentication providers.
+Chronograf can be started using the default configuration options, but the environment variables and command line options let you set OAuth 2.0 authentication and other options based on your requirements.
 
 **To start the Chronograf service:**
 
