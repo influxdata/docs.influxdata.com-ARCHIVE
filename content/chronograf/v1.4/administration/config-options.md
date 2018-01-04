@@ -89,13 +89,13 @@ Environment variable: `$INFLUXDB_URL`
 
 ### `--influxdb-username=`
 
-The [username](/chronograf/v1.4/administration/managing-users/) for your InfluxDB instance.
+The [username](/chronograf/v1.4/administration/managing-influxdb-users/) for your InfluxDB instance.
 
 Environment variable: `$INFLUXDB_USERNAME`
 
 ### `--influxdb-password=`
 
-The [password](/chronograf/v1.3/administration/managing-users/) for your InfluxDB instance.
+The [password](/chronograf/v1.3/administration/managing-influxdb-users/) for your InfluxDB instance.
 
 Environment variable: `$INFLUXDB_PASSWORD`
 

@@ -47,5 +47,5 @@ See [Managing security](/chronograf/v1.4/administration/managing-security) for d
 After you configure OAuth 2.0 authentication in Chronograf, you can use the multi-organization/multi-user support described in detail here:
 
 * [Managing organizations](/chronograf/v1.4/administration/managing-organization)
-* [Managing InfluxDB users](/chronograf/v1.4/administration/managing-users)
-* [Managing roles](/chronograf/v1.4/administration/managing-roles) 
+* [Managing Chronograf users](/chronograf/v1.4/administration/managing-chronograf-users)
+* [Managing roles](/chronograf/v1.4/administration/managing-roles)

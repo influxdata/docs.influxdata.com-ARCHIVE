@@ -13,8 +13,10 @@ Follow the links below for more information.
 
 ## [Configuring](/chronograf/v1.4/administration/configuration/)
 
-## [Managing users and roles](/chronograf/v1.4/administration/managing-users/)
+## [Managing InfluxDB users](/chronograf/v1.4/administration/managing-influxdb-users/)
 
 ## [Managing organizations](/chronograf/v1.4/administration/managing-organizations/)
+
+## [Managing Chronograf users](/chronograf/v1.4/administration/managing-chronograf-users/)
 
 ## [Security Best Practices](/chronograf/v1.4/administration/security-best-practices/)
