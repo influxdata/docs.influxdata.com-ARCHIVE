@@ -7,19 +7,17 @@ menu:
     parent: Administration
 ---
 
-The **Chronograf Admin** page includes a complete user interface for database user management.
-The `Admin` page supports both InfluxDB OSS users and [InfluxDB Enterprise](/enterprise_influxdb/latest/) users.
+The **Chronograf Admin** provides InfluxDB user management for InfluxDB OSS and InfluxDB Enterprise users.
 
-This page covers user management specific to InfluxDB OSS and InfluxEnterprise clusters.
-See [Managing security](/chronograf/v1.4/administration/managing-security/) for more information about Chronograf authentication and user management features.
+> ***Note:*** For details on Chronograf user authentication and management, see [Managing security](/chronograf/v1.4/administration/managing-security/).
 
 ### Content
 
-* [Enable authentication](#enable-authentication)
+* [Enable authentication](#enabling-authentication)
 * [InfluxDB OSS user management](#oss-influxdb-user-management)
-* [InfluxEnterprise user management](#influxenterprise-user-management)
+* [InfluxDB Enterprise user management](#influxenterprise-user-management)
 
-## Enable authentication
+## Enabling authentication
 
 Follow the steps below to enable authentication.
 The steps are the same for InfluxDB OSS instances and InfluxEnterprise clusters.
@@ -28,10 +26,10 @@ The steps are the same for InfluxDB OSS instances and InfluxEnterprise clusters.
 > Repeat the first three steps for each data node in a cluster.
 
 ### Step 1: Enable authentication
-Enable authentication in InfluxDB's configuration file.
-For most installations, the configuration file is located in `/etc/influxdb/influxdb.conf`.
+Enable authentication in the InfluxDB configuration file.
+For most Linux installations, the configuration file is located in `/etc/influxdb/influxdb.conf`.
 
-In the `[http]` section, uncomment the `auth-enabled` option and set it to `true`:
+In the `[http]` section of the InfluxDB configuration file (`influxdb.conf`), uncomment the `auth-enabled` option and set it to `true`, as shown here:
 
 ```
 [http]
@@ -42,22 +40,22 @@ In the `[http]` section, uncomment the `auth-enabled` option and set it to `true
   # bind-address = ":8086"
 
   # Determines whether HTTP authentication is enabled.
-  auth-enabled = true #💥
+  auth-enabled = true #
 ```
 
-### Step 2: Restart the process
+### Step 2: Restart the InfluxDB service
 
-Next, restart the InfluxDB process for your configuration changes to take effect:
+Restart the InfluxDB service for your configuration changes to take effect:
 
 ```
 ~# sudo systemctl restart influxdb
 ```
 
 ### Step 3: Create an admin user
-Because you enabled authentication, you must create an [admin user](/influxdb/latest/query_language/authentication_and_authorization/#user-types-and-privileges) before you can do anything else in the database.
-Run the command below to create an admin user, replacing:
+Because authentication is enabled, you need to create an [admin user](/influxdb/latest/query_language/authentication_and_authorization/#user-types-and-privileges) before you can do anything else in the database.
+Run the `curl` command below to create an admin user, replacing:
 
-* `localhost` with the IP or hostname of your OSS InfluxDB instance or one of your InfluxEnterprise data nodes
+* `localhost` with the IP or hostname of your InfluxDB OSS instance or one of your InfluxEnterprise data nodes
 * `chronothan` with your own username
 * `supersecret` with your own password (note that the password requires single quotes)
 
@@ -66,16 +64,17 @@ Run the command below to create an admin user, replacing:
 ```
 
 A successful `CREATE USER` query returns a blank result:
+
 ```
 {"results":[{"statement_id":0}]}   <--- Success!
 ```
 
-### Step 4: Edit the database source in Chronograf
+### Step 4: Edit the InfluxDB source in Chronograf
 
 If you've already [connected your database to Chronograf](/chronograf/v1.4/introduction/getting-started/#3-connect-to-chronograf), update the connection configuration in Chronograf with your new username and password.
-Edit existing database sources by navigating to the Chronograf's configuration page and clicking on the name of the source.
+Edit existing InfluxDB database sources by navigating to the Chronograf configuration page and clicking on the name of the source.
 
-## OSS InfluxDB User Management
+## InfluxDB OSS User Management
 
 On the **Chronograf Admin** page:
 
@@ -83,15 +82,15 @@ On the **Chronograf Admin** page:
 * Change user passwords
 * Assign admin and remove admin permissions to or from a user
 
-![OSS InfluxDB user management](/img/chronograf/v1.4/admin-usermanagement-oss.png)
+![InfluxDB OSS user management](/img/chronograf/v1.4/admin-usermanagement-oss.png)
 
 InfluxDB users are either admin users or non-admin users.
 See InfluxDB's [authentication and authorization](/influxdb/latest/query_language/authentication_and_authorization/#user-types-and-privileges) documentation for more information about those user types.
 
-Note that Chronograf currently does not support assigning database `READ`or `WRITE` access to non-admin users.
-This is a known issue.
-
-As a workaround, grant `READ`, `WRITE`, or `ALL` (`READ` and `WRITE`) permissions to non-admin users with the following curl commands, replacing anything inside `< >` with your own values:
+> ***Note:*** Note that Chronograf currently does not support assigning InfluxDB database `READ`or `WRITE` access to non-admin users.
+>This is a known issue.
+>
+>As a workaround, grant `READ`, `WRITE`, or `ALL` (`READ` and `WRITE`) permissions to non-admin users with the following curl commands, replacing anything inside `< >` with your own values:
 
 #### Grant `READ` permission:
 ```
@@ -114,7 +113,7 @@ In all cases, a successful `GRANT` query returns a blank result:
 ```
 Remove `READ`, `WRITE`, or `ALL` permissions from non-admin users by replacing `GRANT` with `REVOKE` in the curl commands above.
 
-## InfluxEnterprise User Management
+## InfluxDB Enterprise user management
 
 On the `Admin` page:
 
@@ -124,11 +123,11 @@ On the `Admin` page:
 * Create, edit, and delete roles
 * Assign and remove roles to or from a user
 
-![OSS InfluxDB user management](/img/chronograf/v1.4/admin-usermanagement-cluster.png)
+![InfluxDB Enterprise user management](/img/chronograf/v1.4/admin-usermanagement-cluster.png)
 
 ### User Types
 
-The admin user that you created when you enabled authentication, has the following permissions by default:
+Admin users have the following permissions by default:
 
 * [CreateDatabase](#createdatabase)
 * [CreateUserAndRole](#createuserandrole)
@@ -140,8 +139,6 @@ The admin user that you created when you enabled authentication, has the followi
 * [ManageSubscription](#managesubscription)
 * [Monitor](#monitor)
 * [ReadData](#readdata)
-* [ViewAdmin](#viewadmin)
-* [ViewChronograf](#viewchronograf)
 * [WriteData](#writedata)
 
 Non-admin users have no permissions by default.
@@ -182,7 +179,7 @@ Permission to create databases, create [retention policies](/influxdb/v1.3/conce
 **Pages in Chronograf that require this permission**: Dashboards, Data Explorer, and Databases on the Admin page
 
 #### CreateUserAndRole
-Permission to manage users and roles; create users, drop users, grant admin status to users, grant permissions to users, revoke admin status from users, revoke permissions from users, change user's passwords, view user permissions, and view users and their admin status.
+Permission to manage users and roles; create users, drop users, grant admin status to users, grant permissions to users, revoke admin status from users, revoke permissions from users, change user passwords, view user permissions, and view users and their admin status.
 
 **Relevant InfluxQL queries**:
 [`CREATE USER`](/influxdb/latest/query_language/authentication_and_authorization/#user-management-commands),
@@ -275,9 +272,6 @@ Permission to run to view cluster statistics and diagnostics.
 
 **Pages in Chronograf that require this permission**: Data Explorer, Dashboards
 
-#### NoPermissions
-This permission is deprecated.
-
 #### ReadData
 Permission to read data.
 
@@ -290,15 +284,6 @@ Permission to read data.
 
 **Pages in Chronograf that require this permission**: Admin, Alerting, Dashboards, Data Explorer, Host List
 
-#### Rebalance
-This permission is deprecated.
-
-#### ViewAdmin
-This permission is deprecated and will be removed in a future release.
-
-#### ViewChronograf
-This permission is deprecated and will be removed in a future release.
-
 #### WriteData
 Permission to write data.
 
@@ -308,10 +293,10 @@ Permission to write data.
 
 ### Roles
 Roles are groups of permissions.
-Assign roles to one user or to more than one user.
+Assign roles to one or more users.
 
 For example, the image below contains three roles: `CREATOR`, `DESTROYER`, and `POWERLESS`.
 `CREATOR` includes two permissions (`CreateDatbase` and `CreateUserAndRole`) and is assigned to one user (`chrononut`).
 `DESTROYER` also includes two permissions (`DropDatabase` and `DropData`) and is assigned to two users (`chrononut` and `chronelda`).
 
-![OSS InfluxDB user management](/img/chronograf/v1.4/admin-usermanagement-roles.png)
+![InfluxDB OSS user management](/img/chronograf/v1.4/admin-usermanagement-roles.png)
