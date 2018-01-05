@@ -2,8 +2,8 @@
 title: Creating Chronograf dashboards
 menu:
   chronograf_1_4:
-    menu: Creating dashboards
-    weight: 1
+    name: Creating dashboards
+    weight: 10
     parent: Guides
 ---
 

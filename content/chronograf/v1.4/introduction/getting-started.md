@@ -4,8 +4,8 @@ aliases:
     - chronograf/v1.4/introduction/getting_started/
 menu:
   chronograf_1_4:
-    menu: Getting started
-    weight: 20
+    name: Getting started
+    weight: 30
     parent: Introduction
 ---
 

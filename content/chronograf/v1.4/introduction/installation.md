@@ -2,8 +2,8 @@
 title: Installing Chronograf
 menu:
   chronograf_1_4:
-    menu: Installing
-    weight: 10
+    name: Installing
+    weight: 20
     parent: Introduction
 ---
 
@@ -28,7 +28,7 @@ You do not need to install every component of the TICK stack to use Chronograf.
 The following sections give a brief description of the other TICK stack components, how they fit within Chronograf, and if they are necessary for your setup.
 
 #### InfluxDB/InfluxEnterprise cluster (required)
-[InfluxDB](/influxdb/latest/) is InfluxData's open source time-series database built from the ground up to handle high write and query loads.
+[InfluxDB](/influxdb/latest/) is InfluxData's open source time series database designed and built to manage high write and query loads.
 [InfluxDB Enterprise](/enterprise_influxdb/latest/) is the InfluxData closed source time series database with clustering and high availability.
 InfluxDB instances and InfluxEnterprise clusters store the time series data that populate the Chronograf interface.
 

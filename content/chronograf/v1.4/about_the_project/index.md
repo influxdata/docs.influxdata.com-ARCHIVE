@@ -1,10 +1,10 @@
 ---
-title: About the Project
+title: About the project
 
 menu:
   chronograf_1_4:
     name: About the Project
-    weight: 40
+    weight: 1
 ---
 
 Follow the links below for more information.

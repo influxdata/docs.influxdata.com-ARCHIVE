@@ -2,7 +2,7 @@
 title: Managing InfluxDB users in Chronograf
 menu:
   chronograf_1_4:
-    menu: Managing InfluxDB users
+    name: Managing InfluxDB users
     weight: 30
     parent: Administration
 ---

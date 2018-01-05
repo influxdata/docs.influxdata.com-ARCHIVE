@@ -2,7 +2,7 @@
 title: Creating Kapacitor alerts
 menu:
   chronograf_1_4:
-    weight: 10
+    weight: 20
     parent: Guides
 ---
 

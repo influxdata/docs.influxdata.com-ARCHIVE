@@ -4,7 +4,7 @@ title: Administering Chronograf
 menu:
   chronograf_1_4:
     name: Administering
-    weight: 30
+    weight: 1
 ---
 
 Follow the links below for more information.
@@ -17,7 +17,7 @@ Follow the links below for more information.
 
 ## [Managing InfluxDB users](/chronograf/v1.4/administration/managing-influxdb-users/)
 
-## [Managing organizations](/chronograf/v1.4/administration/managing-organizations/)
+## [Managing Chronograf organizations](/chronograf/v1.4/administration/managing-organizations/)
 
 ## [Managing Chronograf users](/chronograf/v1.4/administration/managing-chronograf-users/)
 

@@ -2,7 +2,7 @@
 title: Managing Chronograf organizations
 menu:
   chronograf_1_4:
-    menu: Managing organizations
+    name: Managing Chronograf organizations
     weight: 40
     parent: Administration
 ---
@@ -65,8 +65,6 @@ Related information:
 * [Managing Chronograf users](/chronograf/v1.4/administration/managing-chronograf-users/)
 * [Managing InfluxDB users](/chronograf/v1.4/administration/managing-influxdb-users/)
 * [Managing security](/chronograf/v1.4/administration/managing-security/)
-
-The default Chronograf application is ready to be used. If additional organizations are needed, follow the steps in the section below.
 
 ## Removing organizations
 
