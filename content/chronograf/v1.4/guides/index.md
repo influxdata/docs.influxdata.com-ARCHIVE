@@ -22,8 +22,8 @@ Chronograf works with Kapacitor to send alert messages to supported event handle
 Use Chronograf to send alert messages to specific URLs as well as to applications like Slack and HipChat.
 Learn how to set up event handlers in Chronograf.
 
-## [Monitoring an InfluxEnterprise cluster](/chronograf/v1.4/guides/monitor-an-influxenterprise-cluster/)
-InfluxEnterprise offers high availability and a highly-scalable clustering solution for your time-series data needs.
+## [Monitoring InfluxEnterprise clusters](/chronograf/v1.4/guides/monitoring-influxenterprise-clusters/)
+InfluxEnterprise offers high availability and a highly-scalable clustering solution for your time series data needs.
 Learn how to use Chronograf to assess your cluster’s health and monitor the infrastructure behind your project.
 
 ## [Transitioning from InfluxDB's Web Admin Interface](/chronograf/v1.4/guides/transition-web-admin-interface/)

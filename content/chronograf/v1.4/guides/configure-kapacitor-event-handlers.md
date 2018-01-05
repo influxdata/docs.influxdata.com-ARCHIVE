@@ -7,11 +7,32 @@ menu:
 ---
 
 Chronograf works with [Kapacitor](/kapacitor/latest/) to send alert messages to supported event handlers.
-Use Chronograf to send alert messages to specific URLs as well as to applications like [Slack](https://slack.com/) and [HipChat](https://www.hipchat.com/).
+You can use Chronograf to send alert messages to specific URLs as well as to applications like [Slack](https://slack.com/) and [HipChat](https://www.hipchat.com/).
 
-This guide offers step-by-step instructions for setting up event handlers in Chronograf.
-Currently, the guide doesn't cover every supported event handler, but we will continue to add content to this page over time.
-See the FAQ page for a complete list of the supported [event handlers](/chronograf/v1.4/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf).
+This guide offers step-by-step instructions for setting up a few common event handlers in Chronograf.
+
+## Kapacitor event handlers are supported in Chronograf?
+
+Chronograf integrates with [Kapacitor](/kapacitor/v1.3/), InfluxData's data processing platform, to send alert messages to event handlers.
+Chronograf supports the following event handlers:
+
+* Alerta
+* Exec
+* HipChat
+* HTTP/Post
+* Log
+* OpsGenie
+* PagerDuty
+* Sensu
+* Slack
+* SMTP/Email
+* Talk
+* Telegram
+* TCP
+* VictorOps
+
+To configure a Kapacitor event handler in Chronograf, [install Kapacitor](/chronograf/v1.3/introduction/getting-started/#kapacitor-setup) and [connect it to Chronograf](/chronograf/v1.3/introduction/getting-started/#4-connect-chronograf-to-kapacitor).
+The Configure Kapacitor page includes the event handler configuration options; see the [Configure Kapacitor event handlers](/chronograf/v1.3/guides/configure-kapacitor-event-handlers/) guide for more information.
 
 ### Content
 
@@ -22,18 +43,17 @@ See the FAQ page for a complete list of the supported [event handlers](/chronogr
 
 ## Locate Event Handler Configurations
 
-The event handler configurations appear on Chronograf's Configure Kapacitor page.
+Event handler configurations appear on the Chronograf Configure Kapacitor page.
 You must have a connected Kapacitor instance to access the configurations.
 See the Getting Started guide for [Kapacitor installation instructions](/chronograf/v1.4/introduction/getting-started/#kapacitor-setup) and how to [connect a Kapacitor instance](/chronograf/v1.4/introduction/getting-started/#4-connect-chronograf-to-kapacitor) to Chronograf.
 
-Note that the configuration options in the `Configure Alert Endpoints` section are not all-inclusive.
+Note that the configuration options in the `Configure alert endpoints` section are not all-inclusive.
 Some event handlers allow users to customize event handler configurations per [alert rule](/chronograf/v1.4/guides/create-a-kapacitor-alert/).
-For example, Chronograf's Slack integration allows users to specify a default channel in the `Configure Alert Endpoints` section and a different channel for individual alert rules.
+For example, Chronograf's Slack integration allows users to specify a default channel in the `Configure alert endpoints` section and a different channel for individual alert rules.
 
 ## HipChat
 
-[HipChat](https://www.hipchat.com/) is Atlassian's web service for group chat, video chat, and screen
-sharing.
+[HipChat](https://www.hipchat.com/) is an Atlassian web service for group chat, video chat, and screen sharing.
 Configure Chronograf to send alert messages to a HipChat room.
 The sections below describe each configuration option.
 
@@ -55,8 +75,7 @@ Chronograf sends alert messages to this room.
 A HipChat API access token for sending notifications.
 The following steps describe how to create the API access token:
 
-**1.** From the HipChat home page (`https://<your-subdomain>.hipchat.com/home`), access `Account settings` by clicking on the
-person icon in the top right corner.
+**1.** From the HipChat home page (`https://<your-subdomain>.hipchat.com/home`), access `Account settings` by clicking on the person icon in the top right corner.
 
 **2.** Select `API access` from the items in the left menu sidebar.
 
@@ -89,7 +108,8 @@ The following steps describe how to create a Slack WebHook URL:
 
 **3.** Select a channel or DM in the `Post to Channel` section
 
-This step is necessary for creating the WebHook; note that you can configure Chronograf to send messages to a different Slack channel or DM later.
+This step is necessary for creating the WebHook;
+note that you can configure Chronograf to send messages to a different Slack channel or DM later.
 
 **4.** Click `Add Incoming WebHooks integration`
 
@@ -129,15 +149,15 @@ The following steps describe how to create a new Telegram bot:
 
     Alright, a new bot. How are we going to call it? Please choose a name for your bot.
 
-`@BotFather` will prompt you through the rest of the bot-creation process; feel
-free to follow his directions or continue with our version of the steps below.
+`@BotFather` will prompt you through the rest of the bot-creation process;
+feel free to follow his directions or continue with our version of the steps below.
 Both setups result in success!
 
 **4.** Send your bot's name to `@BotFather`
 
-Your bot's name can be anything.
-Note that this is not your bot's Telegram `@username`; you'll create the username
-in step 5.
+Your bot name can be anything.
+Note that this is not your bot's Telegram `@username`;
+you'll create the username in step 5.
 
 `@BotFather` responds:
 
@@ -188,8 +208,8 @@ below:
 
 ### Chat ID
 
-The Telegram chat id.
-The following steps describe how to identify your chat id:
+The Telegram chat ID.
+The following steps describe how to identify your chat ID:
 
 **1.** Paste the following link in your browser
 Replace `<API-access-token>` with the API access token that you identified or created in the previous section:
@@ -199,28 +219,28 @@ Replace `<API-access-token>` with the API access token that you identified or cr
 **2.** Send a message to your bot
 
 Send a message to your bot in the Telegram application.
-The message text can be anything; your chat history must include at least one message to get your chat id.
+The message text can be anything; your chat history must include at least one message to get your chat ID.
 
 **3.** Refresh your browser
 
-**4.** Identify the chat id
+**4.** Identify the chat ID
 
-Identify the numerical chat id in the browser.
-In the example below, the chat id is `123456789`.
+Identify the numerical chat ID in the browser.
+In the example below, the chat ID is `123456789`.
 
     {"ok":true,"result":[{"update_id":XXXXXXXXX,
     "message":{"message_id":2,"from":{"id":123456789,"first_name":"Mushroom","last_name":"Kap"},"chat":{"id":123456789,"first_name":"Mushroom","last_name":"Kap","type":"private"},"date":1487183963,"text":"hi"}}]}
 
 ### Select the Alert Message Format
 
-Select `Markdown` or `HTML` for markdown-formatted or HTML-formatted alert messages.
+Select `Markdown` or `HTML` for Markdown-formatted or HTML-formatted alert messages.
 The default message format is `Markdown`.
 
-### Disable Link Previews
+### Disable link previews
 
 Select this option to disable [link previews](https://telegram.org/blog/link-preview) in alert messages.
 
-### Disable Notifications
+### Disable notifications
 
 Select this option to disable notifications on iOS Devices and sounds on Android devices.
 Android users will continue to receive notifications.

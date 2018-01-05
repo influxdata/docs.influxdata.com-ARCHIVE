@@ -8,8 +8,8 @@ menu:
 ---
 
 Chronograf offers a complete dashboard solution for visualizing your data and monitoring your infrastructure.
-Use Chronograf's [pre-created dashboards](/chronograf/v1.4/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf) or create customized dashboards to meet your setup's needs.
-This guide introduces Chronograf's customized dashboard features.
+Use Chronograf's [pre-created dashboards](/chronograf/v1.4/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf) or create custom dashboards to meet your needs.
+This guide introduces the Chronograf customized dashboard features.
 
 By the end of this document, you'll be aware of all the tools you need to create a dashboard similar to this one:
 
