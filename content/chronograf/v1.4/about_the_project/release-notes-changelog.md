@@ -2,7 +2,7 @@
 title: Release notes/changelog
 menu:
   chronograf_1_4:
-    weight: 1
+    weight: 20
     parent: About the Project
 ---
 

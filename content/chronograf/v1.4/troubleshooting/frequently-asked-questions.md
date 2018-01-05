@@ -1,8 +1,8 @@
 ---
-title: Frequently Asked Questions (FAQ)
+title: Frequently asked questions (FAQ)
 menu:
   chronograf_1_4:
-    weight: 0
+    weight: 20
     parent: Troubleshooting
 ---
 
@@ -63,7 +63,7 @@ See the [Telegraf Configuration](https://github.com/influxdata/telegraf/blob/mas
 
 The connection details form requires additional information when connecting Chronograf to an [InfluxEnterprise cluster](https://docs.influxdata.com/enterprise_influxdb/v1.2/).
 
-When you enter InfluxDB's HTTP bind address in the `Connection String` input, Chronograf automatically checks if that InfluxDB instance is a data node.
+When you enter the InfluxDB HTTP bind address in the `Connection String` input, Chronograf automatically checks if that InfluxDB instance is a data node.
 If it is a data node, Chronograf automatically adds the `Meta Service Connection URL` input to the connection details form.
 Enter the HTTP bind address of one of your cluster's meta nodes into that input and Chronograf takes care of the rest.
 
@@ -78,22 +78,22 @@ For more details about monitoring an InfluxEnterprise cluster, see the [Monitor 
 Chronograf's dashboards support six visualization types.
 
 ### Line
-Show time-series in a line graph.
+Show time series in a line graph.
 
 ![Cluster connection details](/img/chronograf/v1.3/faq-viz-line.png)
 
 ### Stacked
-Show time-series arranged on top of each other.
+Show time series arranged on top of each other.
 
 ![Cluster connection details](/img/chronograf/v1.3/faq-viz-stacked.png)
 
 ### Step-Plot
-Show time-series in a staircase graph.
+Show time series in a staircase graph.
 
 ![Cluster connection details](/img/chronograf/v1.3/faq-viz-step.png)
 
 ### SingleStat
-Show the time-series' single most recent value.
+Show the most recent value of a time series.
 
 ![Cluster connection details](/img/chronograf/v1.3/faq-viz-single.png)
 

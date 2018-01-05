@@ -2,8 +2,8 @@
 title: Managing Chronograf users
 menu:
   chronograf_1_4:
-    menu: Managing Chronograf users
-    weight: 30
+    name: Managing Chronograf users
+    weight: 50
     parent: Administration
 ---
 
@@ -24,22 +24,22 @@ menu:
 
 ## Managing Chronograf users and roles
 
-Chronograf includes four organization-based user roles and one cross-organization SuperAdmin status.
+Chronograf includes four organization-based user roles and one cross-organization SuperAdmin status. Within an organization, Chronograf users can be created and assigned roles, updated, and removed by administrators.
 
 ### Organization-based users
 
-Chronograf users are assigned one of the following four organization-based user roles:
+Chronograf users are assigned one of the following four organization-based user roles, listed here in order of increasing permissions:
 
 - [`member`](#members-role-member)
 - [`viewer`](#viewer-role-viewer)
 - [`editor`](#editors-role-editor)
 - [`admin`](#administrators-role-admin)
 
-Each of these four roles, described in detail below, have different permission levels and rights to use resources that either owned by Chronograf or accessed using Chronograf. These resources are summarized here:
+Each of these four roles, described in detail below, have different permission levels and rights to use resources that either owned by Chronograf or accessed using Chronograf. These resources are summarized below.
 
 #### Chronograf-owned resources
 
-Chronograf-owned resources are internal resources that are under complete control of Chronograf. These resources include:
+Chronograf-owned resources include internal resources that are under full control by Chronograf. These resources include:
 
 - Kapacitor connections
 - InfluxDB connections
@@ -47,84 +47,87 @@ Chronograf-owned resources are internal resources that are under complete contro
 - Canned layouts
 - Chronograf organizations
 - Chronograf users
-- Chronograf Status page content, including News Feeds and Getting Started
+- Chronograf Status Page content, including News Feeds and Getting Started
 
 #### Chronograf-accessed resources
 
-Chronograf-accessed resources are external resources that can be accessed using Chronograf, but are under limited control. Chronograf users with the roles of `viewer`, `editor`, and `admin` have equal access to these resources which include:
+Chronograf-accessed resources include external resources that can be accessed using Chronograf, but are under limited control by Chronograf. Chronograf users with the roles of `viewer`, `editor`, and `admin` have equal access to these resources which include:
 
 - InfluxDB databases, users, queries, and time series data
 - Kapacitor alerts and rules (called tasks in Kapacitor)
 
 
-#### Member (role:`member`)
+#### Members (role:`member`)
 
 Members are Chronograf users who have been added to organizations but do not have any functional roles. Members can authenticate, but they cannot access any resources within an organization.
 
 By default, new organizations have a default role of `member`.
 
 
-#### Viewer (role:`viewer`)
+#### Viewers (role:`viewer`)
 
-Viewers are Chronograf users with limited permissions for the following Chronograf-owned resources:
+Viewers are Chronograf users with limited permissions for Chronograf-owned resources and can:
 
-- view pre-defined dashboards
-- view canned layouts
+- View predefined dashboards
+- View canned layouts
+- Use InfluxDB connections
+- Use Kapacitor connections
 
 For Chronograf-accessed resources, viewers can:
 
 - InfluxDB
-  - switch the current connection to other available sources
-  - view, create, edit, and delete databases
-  - view, create, edit, and delete InfluxDB users
-  - view and kill queries
+  - Switch the current connection to other available sources
+  - Create, view, edit, and delete databases
+  - Create, view, edit, and delete InfluxDB users
+  - View and kill queries
 - Kapacitor
-  - view current connection
-  - view alerts
-  - create rules
+  - View current connection
+  - View alerts
+  - Create alert rules
 
 #### Editors (role:`editor`)
 
 Viewers are Chronograf users with limited permissions for the following Chronograf-owned resources:
 
-- create, view, edit, and delete dashboards
-- view canned layouts
+- Create, view, edit, and delete dashboards
+- View canned layouts
 
 For Chronograf-accessed resources, editors can:
 
 - InfluxDB
-  - switch the current connection to other available sources
-  - view, create, edit, and delete databases
-  - view, create, edit, and delete InfluxDB users
-  - view and kill queries
+  - Switch the current connection to other available sources
+  - Creat, view, edit, and delete databases
+  - Create, view, edit, and delete InfluxDB users
+  - View and kill queries
 - Kapacitor
-  - view current connection
-  - view alerts
+  - View current connection
+  - View alerts
+  - Create alert rules
 
 #### Administrators (role:`admin`)
 
 Administrators are Chronograf users have all of the capabilities of the viewer and editor roles, but with additional administrator capabilities including permissions for the following Chronograf-owned resources:
 
-- view pre-defined dashboards
-- view canned layouts
+- View predefined dashboards
+- View canned layouts
 
 For Chronograf-accessed resources, administrators can:
 
 - InfluxDB
-  - switch the current connection to other available sources
-  - view, create, edit, and delete databases
-  - view, create, edit, and delete InfluxDB users
-  - view and kill queries
+  - Switch the current connection to other available sources
+  - Create, viiew, edit, and delete databases
+  - Create, view, edit, and delete InfluxDB users
+  - View and kill queries
 - Kapacitor
-  - view current connection
-  - view alerts
+  - View current connection
+  - View alerts
 
 ### Cross-organization SuperAdmin status
 
 SuperAdmins are unique Chronograf administrators who can perform administrator functions across organizations and within organizations as administrators (with the `admin` role). A user with SuperAdmin status can perform the following operations that are unavailable for other roles:
 
 * Create, view, update, and remove organizations
-* Create, view, and remove users in any organizations
+* Create, view, update, and remove users in any organizations
 
 ### Creating users
 
