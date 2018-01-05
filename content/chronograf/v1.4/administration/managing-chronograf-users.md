@@ -76,7 +76,6 @@ Viewers are Chronograf users with limited permissions for Chronograf-owned resou
 For Chronograf-accessed resources, viewers can:
 
 - InfluxDB
-  - Switch the current connection to other available sources
   - Create, view, edit, and delete databases
   - Create, view, edit, and delete InfluxDB users
   - View and kill queries
@@ -90,31 +89,33 @@ For Chronograf-accessed resources, viewers can:
 Viewers are Chronograf users with limited permissions for the following Chronograf-owned resources:
 
 - Create, view, edit, and delete dashboards
-- View canned layouts
+- Create, view, edit, and delete layouts
+- Create, use, switch, edit, and delete InfluxDB connections
+- Create, use, switch, edit, and delete Kapacitor connections
 
 For Chronograf-accessed resources, editors can:
 
 - InfluxDB
-  - Switch the current connection to other available sources
-  - Creat, view, edit, and delete databases
+  - Create, view, edit, and delete databases
   - Create, view, edit, and delete InfluxDB users
   - View and kill queries
 - Kapacitor
-  - View current connection
-  - View alerts
-  - Create alert rules
+  - Create, view, edit, and delete alerts
+  - Create, view, edit, and delete alert rules
 
 #### Administrators (role:`admin`)
 
-Administrators are Chronograf users have all of the capabilities of the viewer and editor roles, but with additional administrator capabilities including permissions for the following Chronograf-owned resources:
+Administrators are Chronograf users have all of the capabilities of viewers and editors, but with additional administrator capabilities including permissions for the following Chronograf-owned resources:
 
-- View predefined dashboards
-- View canned layouts
+- Create, view, edit, and delete dashboards
+- Create, view, edit, and delete layouts
+- Create, use, switch, edit, and delete InfluxDB connections
+- Create, use, switch, edit, and delete Kapacitor connections
+- Create, update, and remove Chronograf users
 
 For Chronograf-accessed resources, administrators can:
 
 - InfluxDB
-  - Switch the current connection to other available sources
   - Create, viiew, edit, and delete databases
   - Create, view, edit, and delete InfluxDB users
   - View and kill queries
