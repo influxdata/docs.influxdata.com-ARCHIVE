@@ -9,81 +9,152 @@ menu:
 
 **On this page**
 
-Managing Chronograf users and roles
-* User roles
-* SuperAdmin status
-* Creating users
-* Updating users
-* Removing users
+[Managing Chronograf users and roles](#managing-chronograf-users-and-roles)
+* [Organization-based users](#organization-based-users)
+  * [Chronograf-owned resources](#chronograf-owned-resources)
+  * [Chronograf-accessed resources](#chronograf-accessed-resources)
+  * [Members](#members-role-member)
+  * [Viewers](#viewer-role-viewer)
+  * [Editors](#editors-role-editor)
+  * [Administrators](#administrators-role-admin)
+* [Cross-organization SuperAdmin status](#cross-organization-superadmin-status)
+* [Creating users](#creating-users)
+* [Updating users](#updating-users)
+* [Removing users](#removing-users)
 
 ## Managing Chronograf users and roles
 
-Chronograf includes four user roles and a SuperAdmin status
+Chronograf includes four organization-based user roles and one cross-organization SuperAdmin status.
 
-* `member`
-* `viewer`
-* `editor`
-* `admin`
+### Organization-based users
 
+Chronograf users are assigned one of the following four organization-based user roles:
 
+- [`member`](#members-role-member)
+- [`viewer`](#viewer-role-viewer)
+- [`editor`](#editors-role-editor)
+- [`admin`](#administrators-role-admin)
 
+Each of these four roles, described in detail below, have different permission levels and rights to use resources that either owned by Chronograf or accessed using Chronograf. These resources are summarized here:
 
-## Chronograf user roles
+#### Chronograf-owned resources
 
-|            | member | viewer | editor | admin |
--------------|--------|--------|--------|-------|--
-Dashboards  |  ---   |  V     | CVUR   | CVUR  |
-InfluxDB sources  |  --- | V  | CVUR  |  CVUR |
-Kapacitor alerts  |  --- | CVUR  | CVUR  |  CVUR |
-Users  |   |  |   |  CVUR |
+Chronograf-owned resources are internal resources that are under complete control of Chronograf. These resources include:
+
+- Kapacitor connections
+- InfluxDB connections
+- Dashboards
+- Canned layouts
+- Chronograf organizations
+- Chronograf users
+- Chronograf Status page content, including News Feeds and Getting Started
+
+#### Chronograf-accessed resources
+
+Chronograf-accessed resources are external resources that can be accessed using Chronograf, but are under limited control. Chronograf users with the roles of `viewer`, `editor`, and `admin` have equal access to these resources which include:
+
+- InfluxDB databases, users, queries, and time series data
+- Kapacitor alerts and rules (called tasks in Kapacitor)
 
 
 #### Member (role:`member`)
 
-Members are Chronograf users who have been added to organizations without any specified functional roles. Although a member can authenticate, the member cannot access any resources within an organization.
+Members are Chronograf users who have been added to organizations but do not have any functional roles. Members can authenticate, but they cannot access any resources within an organization.
 
 By default, new organizations have a default role of `member`.
 
 
 #### Viewer (role:`viewer`)
 
-Viewers are Chronograf users who can access resources and use Status, Host List, Data Explorer, Dashboards, and Alerting:
+Viewers are Chronograf users with limited permissions for the following Chronograf-owned resources:
 
-* Status: view
-* Host List:
-* Data Explorer
-* Dashboards: view
-* Alerting: create, update
-* Sources (InfluxDB): view
-* Create and modify Kapacitor alerts
-* Access and use Status Page, Host List, Data Explorer, and Alerting.
+- view pre-defined dashboards
+- view canned layouts
 
-#### Editor (role:`editor`)
+For Chronograf-accessed resources, viewers can:
 
-Editors are Chronograf users who can access and use Status Page, Host List, Data Explorer, and Alerting.
+- InfluxDB
+  - switch the current connection to other available sources
+  - view, create, edit, and delete databases
+  - view, create, edit, and delete InfluxDB users
+  - view and kill queries
+- Kapacitor
+  - view current connection
+  - view alerts
+  - create rules
 
-* Access resources restricted to their organization
-* View, create, update, and remove dashboards
-* View, create, update, and remove InfluxDB sources
-* Create and modify Kapacitor alerts
-*
+#### Editors (role:`editor`)
 
-#### Administrator (role:`admin`)
+Viewers are Chronograf users with limited permissions for the following Chronograf-owned resources:
 
-Administrators are users who can perform administrator functions within an organization. Users in the `admin` role can:
+- create, view, edit, and delete dashboards
+- view canned layouts
 
-* Access resources restricted to their organization
-* View, create, update, and remove dashboards
-* View, create, update, and remove sources
-* Create, view, and remove users
-* Create and update Kapacitor alerts
-* Access and use Status Page, Host List, Data Explorer, and Alerting.
+For Chronograf-accessed resources, editors can:
 
-####  SuperAdmin (status)
+- InfluxDB
+  - switch the current connection to other available sources
+  - view, create, edit, and delete databases
+  - view, create, edit, and delete InfluxDB users
+  - view and kill queries
+- Kapacitor
+  - view current connection
+  - view alerts
 
-SuperAdmins are unique Chronograf administrators who can perform administrator functions within and across organizations. A user with SuperAdmin status can perform the following operations that are unavailable for other roles:
+#### Administrators (role:`admin`)
+
+Administrators are Chronograf users have all of the capabilities of the viewer and editor roles, but with additional administrator capabilities including permissions for the following Chronograf-owned resources:
+
+- view pre-defined dashboards
+- view canned layouts
+
+For Chronograf-accessed resources, administrators can:
+
+- InfluxDB
+  - switch the current connection to other available sources
+  - view, create, edit, and delete databases
+  - view, create, edit, and delete InfluxDB users
+  - view and kill queries
+- Kapacitor
+  - view current connection
+  - view alerts
+
+### Cross-organization SuperAdmin status
+
+SuperAdmins are unique Chronograf administrators who can perform administrator functions across organizations and within organizations as administrators (with the `admin` role). A user with SuperAdmin status can perform the following operations that are unavailable for other roles:
 
 * Create, view, update, and remove organizations
 * Create, view, and remove users in any organizations
 
-> ***Note:*** When a SuperAdmin is added as a member of an organization, the SuperAdmin is restricted to access determined by the standard roles (viewer, editor, and admin). This allows a SuperAdmin to be able to comply with expectations of not accessing resources within a specific organization and, if done, that an audit trail would show access of the resources.
+### Creating users
+
+Role required: `admin`
+
+**To create a user:**
+
+1) Open Chronograf in your web browser and select **Admin (crown icon) > Chronograf**.
+2) Click the **Users** tab and then click **Create User**.
+3) Add the following user information:
+   * **Username**: Enter the user name that will be used for authentication.
+   * **Role**: Select the Chronograf role.
+   * **Provider**: Type in the OAuth provider to be used for authentication. Valid values, depending on your configured authentication providers: `github`, `google`, `heroku`).
+   * **Scheme**: Displays `oauth2`, which is the only supported scheme in this release.
+3) Click **Save** to finish adding the user.
+
+### Updating users
+
+**To update a user:**
+
+1) Open Chronograf in your web browser and select **Admin (crown icon) > Chronograf**.
+2) Click the **Users** tab to display the list of users.
+3) Make any required changes for the user.
+3) Click **Save** to finish adding the user.
+
+### Removing users
+
+**To remove a user:**
+
+1) Open Chronograf in your web browser and select **Admin (crown icon) > Chronograf**.
+2) Click the **Users** tab to display the list of users.
+3) At the right side of the user information, click **Remove** and then **Confirm**.
+3) Click **Save** to finish adding the user.

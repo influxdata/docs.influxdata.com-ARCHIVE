@@ -9,6 +9,7 @@ menu:
 
 The **Chronograf Admin** provides InfluxDB user management for InfluxDB OSS and InfluxDB Enterprise users.
 
+
 > ***Note:*** For details on Chronograf user authentication and management, see [Managing security](/chronograf/v1.4/administration/managing-security/).
 
 ### Content
