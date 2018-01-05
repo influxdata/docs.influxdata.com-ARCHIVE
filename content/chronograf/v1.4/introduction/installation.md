@@ -38,7 +38,7 @@ A single Chronograf instance can support several InfluxDB instances or InfluxEnt
 **Installation Resources:**
 
 * [Getting Started](/chronograf/v1.4/introduction/getting-started/) guides you how to quickly start using Chronograf with an InfluxDB instance.
-* [Monitor an InfluxEnterprise Cluster](/chronograf/v1.4/guides/monitor-an-influxenterprise-cluster/) offers setup instructions for using Chronograf with an InfluxEnterprise cluster
+* [Monitor an InfluxEnterprise Cluster](/chronograf/v1.4/guides/monitoring-influxenterprise-clusters/) offers setup instructions for using Chronograf with an InfluxEnterprise cluster
 * [InfluxDB documentation](/influxdb/latest/)
 * [InfluxDB Enterprise documentation](/enterprise_influxdb/latest/)
 
@@ -53,7 +53,7 @@ Minimally, the Telegraf instance must have enabled the [system statistics](https
 **Installation Resources:**
 
 * [Getting started](/chronograf/v1.4/introduction/getting-started/) offers setup instructions for using Chronograf and InfluxDB with one Telegraf instance
-* [Monitor an InfluxEnterprise cluster](/chronograf/v1.4/guides/monitor-an-influxenterprise-cluster/) offers setup instructions for using Chronograf and an InfluxEnterprise Cluster with several Telegraf instances
+* [Monitor an InfluxEnterprise cluster](/chronograf/v1.4/guides/monitoring-influxenterprise-clusters/) offers setup instructions for using Chronograf and an InfluxEnterprise Cluster with several Telegraf instances
 * [Telegraf Documentation](/telegraf/latest/)
 
 #### Kapacitor (optional)
