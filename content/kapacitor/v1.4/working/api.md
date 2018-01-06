@@ -2440,3 +2440,5 @@ Displays available routes for the API
 ```
 GET /kapacitor/v1/:routes
 ```
+ 
+

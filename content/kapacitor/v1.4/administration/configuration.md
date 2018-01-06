@@ -18,7 +18,7 @@ menu:
 Basic installation and startup of the Kapacitor service is covered in
 [Getting Started](/kapacitor/v1.4/introduction/getting_started/).
 The basic principles of working with Kapacitor described there should be understood before continuing here.
-This document presents Kapactior configuration in greater detail.
+This document presents Kapacitor configuration in greater detail.
 
 Kapacitor service properties are configured using key-value pairs organized
 into groups.
@@ -31,10 +31,11 @@ Values declared in this file can be overridden by environment variables beginnin
 Some values can also be dynamically altered using the HTTP API when the key  `[config-override].enabled` is set to `true`.
 
 Four primary mechanisms for configuring different aspects of the Kapacitor service are available and listed here in the descending order by which they may be overridden:
-   * The configuration file.
-   * Environment variables.
-   * The HTTP API (for optional services and the InfluxDB connection).
-   * Command line arguments (for changing hostname and logging).
+
+* The configuration file.
+* Environment variables.
+* The HTTP API (for optional services and the InfluxDB connection).
+* Command line arguments (for changing hostname and logging).
 
 > ***Note:*** Setting the property `skip-config-overrides` in the configuration file to `true` will disable configuration overrides at startup.
 
@@ -43,11 +44,12 @@ Four primary mechanisms for configuring different aspects of the Kapacitor servi
 The Kapacitor daemon includes command line options that affect how it loads and
 runs.
 These include:
-   * `-config`: Path to the configuration file.
-   * `-hostname`: Host name that will override the hostname specified in the configuration file.
-   * `-pidfile`: File where the process ID will be written.
-   * `-logfile`: File where logs will be written.
-   * `-log-level`: Threshold for writing messages to the log file. Valid values include `debug, info, warn, error`.
+
+* `-config`: Path to the configuration file.
+* `-hostname`: Host name that will override the hostname specified in the configuration file.
+* `-pidfile`: File where the process ID will be written.
+* `-logfile`: File where logs will be written.
+* `-log-level`: Threshold for writing messages to the log file. Valid values include `debug, info, warn, error`.
 
 ### Systemd
 
@@ -773,7 +775,7 @@ These variables are not found in the configuration file.
 * `KAPACITOR_OPTS`: Found in the `systemd` startup script and used to pass
 command line options to `kapacitord` started by `systemd`.
 * `KAPACITOR_CONFIG_PATH`: Sets the path to the configuration file.
-* `KAPACITOR_URL`: Used to by the client application `kapacitor` to locate
+* `KAPACITOR_URL`: Used by the client application `kapacitor` to locate
 the `kapacitord` service.
 * `KAPACITOR_UNSAFE_SSL`: A boolean used by the client application `kapacitor`
 to skip verification of the `kapacitord` certificate when connecting over SSL.

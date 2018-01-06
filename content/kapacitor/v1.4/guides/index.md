@@ -45,7 +45,3 @@ Use task templates to reduce the amount of TICKscripts you need to write.
 ### [Reference TICKscripts](/kapacitor/v1.4/guides/reference_scripts/)
 
 Some examples of TICKscripts built against common Telegraf plugin data.
-
-### [Event Handler Setup](/kapacitor/v1.4/guides/event-handler-setup/)
-
-Step-by-step instructions for setting up event handlers with Kapacitor.
