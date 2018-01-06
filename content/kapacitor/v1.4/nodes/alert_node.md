@@ -1480,7 +1480,7 @@ Example:
 ```javascript
     [sensu]
       enabled = true
-      url = "http://sensu:3030"
+      addr = "10.56.4.205:3030"
       source = "Kapacitor"
       handlers = ["sns","slack"]
 ```

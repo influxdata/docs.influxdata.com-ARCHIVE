@@ -6,7 +6,7 @@ menu:
   kapacitor_1_3:
     name: Calculate Rates Across Series
     identifier: join_backfill
-    weight: 0
+    weight: 1
     parent: guides
 ---
 

@@ -325,7 +325,7 @@ kind: sensu
 
 #### Slack
 
-Send alert events to Sensu.
+Send alert events to Slack.
 
 Options:
 

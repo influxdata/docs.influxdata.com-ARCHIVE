@@ -208,7 +208,7 @@ Include only files matching the specified pattern.
 
 `default` = ""
 
-#### `-pattern` boolean 
+#### `-detailed` boolean 
 Report detailed cardinality estimates.
 
 `default` = false

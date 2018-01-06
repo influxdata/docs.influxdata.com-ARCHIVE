@@ -4,7 +4,7 @@ title: Introduction to Chronograf
 menu:
   chronograf_1_3:
     name: Introduction
-    weight: 0
+    weight: 1
 ---
 
 Follow the links below to get acquainted with Chronograf:

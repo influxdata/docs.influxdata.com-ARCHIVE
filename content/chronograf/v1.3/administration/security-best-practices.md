@@ -2,7 +2,7 @@
 title: Security Best Practices
 menu:
   chronograf_1_3:
-    weight: 20
+    weight: 30
     parent: Administration
 ---
 
@@ -212,14 +212,28 @@ The generic OAuth2 provider has a few optional parameters.
 * `GENERIC_API_URL` : URL that returns [OpenID UserInfo JWT](https://connect2id.com/products/server/docs/api/userinfo) (specifically email address)
 * `GENERIC_DOMAINS` : Email domains user's email address must use.
 
-#### Configuring the look of the login page
+#### Customizing the login button text and callback URL
 
-To configure the copy of the login page button text, set the `GENERIC_NAME` environment variable.
-For example, with
+Setting the `GENERIC_NAME` environment variable results in the specified value appearing in both the callback URL and the login button text. This allows you to customize the login by replacing "generic" in both locations with a more meaningful name.
+
+> ***Note:*** Since the value you use for GENERIC_NAME is used in the callback URL, make sure to use a short, URL-friendly name.
+
+Example:
+
 ```sh
-export GENERIC_NAME="Hill Valley Preservation Society"
+export GENERIC_NAME="GitLab"
 ```
-the button text will be `Login with Hill Valley Preservation Society`.
+The callback URL changes from:
+```
+https://localhost:8888/oauth/generic/callback
+```
+to:
+```
+https://localhost:8888/oauth/GitLab/callback
+```
+
+Also, on the Chronograf login page, the text on the authentication button changes from `Login with generic` to `Login with GitLab`.
+
 
 ### Optional: Configure an Authentication Duration
 
