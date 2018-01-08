@@ -131,7 +131,7 @@ Run the `chronograf` server in develop mode.
 
 The file path to the BoltDB file.
 
-Default value: `/var/lib/chronograf/chronograf-v1-.db`
+Default value: `/var/lib/chronograf/chronograf-v1.db`
 
 Environment variable: `$BOLT_PATH`
 
