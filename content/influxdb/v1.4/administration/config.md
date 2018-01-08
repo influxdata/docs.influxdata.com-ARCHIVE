@@ -23,7 +23,7 @@ The InfluxDB configuration file contains configuration settings specific to a lo
   * [Shard precreation `[shard-precreation]`](#shard-precreation-settings-shard-precreation)
   * [Monitoring settings `[monitor]`](#monitoring-settings-monitor)
   * [Administration settings `[admin]`](#administration-settings-admin)
-  * [HTTP settings `[http]`](#http-settings-http)
+  * [HTTP endpoint settings `[http]`](#http-endpoint-settings-http)
   * [Subscription settings `[subscriber]`](#subscription-settings-subscriber)
   * [Graphite settings `[[graphite]]`](#graphite-settings-graphite)
   * [CollectD settings `[[collectd]]`](#collectd-settings-collectd)
