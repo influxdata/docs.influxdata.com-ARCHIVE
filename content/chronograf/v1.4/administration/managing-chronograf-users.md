@@ -10,7 +10,7 @@ menu:
 **On this page**
 
 [Managing Chronograf users and roles](#managing-chronograf-users-and-roles)
-* [Organization-based users](#organization-based-users)
+* [Organization-bound users](#organization-bound-users)
   * [Chronograf-owned resources](#chronograf-owned-resources)
   * [Chronograf-accessed resources](#chronograf-accessed-resources)
   * [Members](#members-role-member)
@@ -24,18 +24,18 @@ menu:
 
 ## Managing Chronograf users and roles
 
-Starting with Chronograf 1.4, Chronograf includes the ability to create usesrs using role-based access control. Chronograf now has four organization-based user roles and one cross-organization SuperAdmin status. Within an organization, Chronograf users can be created and assigned roles, updated, and removed by administrators (with the `admin` role) or anyone with SuperAdmin status.
+Starting with Chronograf 1.4, Chronograf includes the ability to create usesrs using role-based access control. Chronograf now has four organization-bound user roles and one cross-organization SuperAdmin status. Within an organization, Chronograf users can be created and assigned roles, updated, and removed by administrators (with the `admin` role) or anyone with SuperAdmin status.
 
-### Organization-based users
+### Organization-bound users
 
-Chronograf users are assigned one of the following four organization-based user roles, listed here in order of increasing permissions:
+Chronograf users are assigned one of the following four organization-bound user roles, listed here in order of increasing permissions:
 
 - [`member`](#members-role-member)
 - [`viewer`](#viewer-role-viewer)
 - [`editor`](#editors-role-editor)
 - [`admin`](#administrators-role-admin)
 
-Each of these four roles, described in detail below, have different permission levels and rights to use resources that either owned by Chronograf or accessed using Chronograf. These resources are summarized below.
+Each of these four roles, described in detail below, have different permission levels and rights to use resources either owned by Chronograf or accessed using Chronograf. These resources are summarized below.
 
 #### Chronograf-owned resources
 
