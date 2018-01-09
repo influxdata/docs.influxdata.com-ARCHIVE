@@ -144,19 +144,18 @@ For Chronograf-accessed resources, admins can:
 
 ### Cross-organization SuperAdmin status
 
-SuperAdmins are unique Chronograf administrators who can perform administrator functions across organizations and within organizations as administrators (with the `admin` role). A user with SuperAdmin status can perform the following operations that are unavailable for other roles:
+SuperAdmin status is a Chronograf status that allows any user, regardless of role, to perform all administrator functions both within organizations, as well as across organizations. A user with SuperAdmin status has _unlimited_ capabilities, including for the following Chronograf-owned resources:
 
 * Create, view, update, and remove organizations
-* Create, view, update, and remove users in any organizations
+* Create, view, update, and remove users within an organization
+* Switch into any organization
 
 Important SuperAdmin behaviors:
 
-* When a Chronograf user with SuperAdmin status creates a new organization or switches into an organization where no role was assigned, the SuperAdmin user is automatically assigned the `admin` role by default.
-* If a Chronograf user with SuperAdmin status switches into an organization where no role was assigned,
-* Since the SuperAdmin status is not a role, the role can be changed to any other role (including `member`, `viewer`, or `editor`), but as a result of their SuperAdmin status, however, this user effectively has `admin` role permissions.
-* Regular administrators who do not have SuperAdmin status can perform normal operations on SuperAdmin users (create that user within their organization, change roles, and remove them), but they will not see that these users have SuperAdmin status.
-* SuperAdmin users are the only ones who can change add or remove the SuperAdmin status to Chronograf users.
-* If the user has the SuperAdmin status revoked, then that user will retain whatever role has been assigned in an organization.
+* SuperAdmin status grants any user (whether `member`, `viewer`, `editor`, or `admin`) the full capabilities of admins and the SuperAdmin capabilities listed above.
+* When a Chronograf user with SuperAdmin status creates a new organization or switches into an organization where that user has no role, that SuperAdmin user is automatically assigned the `admin` role by default.
+* Regular admins who do not have SuperAdmin status can perform normal operations on SuperAdmin users (create that user within their organization, change roles, and remove them), but they will not see that these users have SuperAdmin status, nor will any of their actions affect these users' SuperAdmin status. SuperAdmin users are the only ones who can change the SuperAdmin status of other Chronograf users.
+* If a user has their SuperAdmin status revoked, that user will retain their assigned roles within their organizations.
 
 ### Creating users
 
