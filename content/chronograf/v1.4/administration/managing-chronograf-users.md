@@ -125,7 +125,7 @@ Administrators are Chronograf users have all of the capabilities of viewers and 
 For Chronograf-accessed resources, administrators can:
 
 - InfluxDB
-  - Create, viiew, edit, and delete databases
+  - Create, view, edit, and delete databases
   - Create, view, edit, and delete InfluxDB users
   - View and kill queries
 - Kapacitor
@@ -140,7 +140,14 @@ SuperAdmins are unique Chronograf administrators who can perform administrator f
 * Create, view, update, and remove organizations
 * Create, view, update, and remove users in any organizations
 
-When a Chronograf user with SuperAdmin status creates a new organization, the SuperAdmin user will appear in that organization with the `admin` role by default. Since the SuperAdmin status is not a role, the role can be changed to any other role (including `member`, `viewer`, or `editor`). Due to the SuperAdmin status, however, this user effective;y has the permissions of the `admin` role. If the user has the SuperAdmin status revoked, then that user will retain whatever role has been assigned in an organization.
+Important SuperAdmin behaviors:
+
+* When a Chronograf user with SuperAdmin status creates a new organization or switches into an organization where no role was assigned, the SuperAdmin user is automatically assigned the `admin` role by default.
+* If a Chronograf user with SuperAdmin status switches into an organization where no role was assigned,
+* Since the SuperAdmin status is not a role, the role can be changed to any other role (including `member`, `viewer`, or `editor`), but as a result of their SuperAdmin status, however, this user effectively has `admin` role permissions.
+* Regular administrators who do not have SuperAdmin status can perform normal operations on SuperAdmin users (create that user within their organization, change roles, and remove them), but they will not see that these users have SuperAdmin status.
+* SuperAdmin users are the only ones who can change add or remove the SuperAdmin status to Chronograf users.
+* If the user has the SuperAdmin status revoked, then that user will retain whatever role has been assigned in an organization.
 
 ### Creating users
 
@@ -151,10 +158,10 @@ Role required: `admin`
 1) Open Chronograf in your web browser and select **Admin (crown icon) > Chronograf**.
 2) Click the **Users** tab and then click **Create User**.
 3) Add the following user information:
-   * **Username**: Enter the user name that will be used for authentication.
+   * **Username**: Enter the username as provided by the OAuth provider.
    * **Role**: Select the Chronograf role.
-   * **Provider**: Type in the OAuth provider to be used for authentication. Valid values, depending on your configured authentication providers: `github`, `google`, `heroku`).
-   * **Scheme**: Displays `oauth2`, which is the only supported scheme in this release.
+   * **Provider**: Type in the OAuth provider to be used for authentication. Valid values are: `github`, `google`, `heroku`, and `auth0`.
+   * **Scheme**: Displays `oauth2`, which is the only supported authentication scheme in this release.
 3) Click **Save** to finish adding the user.
 
 ### Updating users
@@ -162,7 +169,7 @@ Role required: `admin`
 **To update a user:**
 
 1) Open Chronograf in your web browser and select **Admin (crown icon) > Chronograf**.
-2) Click the **Users** tab to display the list of users.
+2) Click the **Users** tab to display the list of users within the currently selected organization.
 3) Make any required changes for the user.
 3) Click **Save** to finish adding the user.
 
