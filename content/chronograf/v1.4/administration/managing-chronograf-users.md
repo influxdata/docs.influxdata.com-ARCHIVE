@@ -37,6 +37,12 @@ Chronograf users are assigned one of the following four organization-bound user 
 
 Each of these four roles, described in detail below, have different permission levels and rights to use the following Chronograf-owned or Chronograf-accessed resources.
 
+#### InfluxDB and Kapacitor users within Chronograf
+
+Chronograf uses InfluxDB and Kapacitor connections to manage user access control to InfluxDB and Kapacitor resources within Chronograf. The permissions of the InfluxDB and Kapacitor user specified within such a connection determine the capabilities for any Chronograf user with access (i.e., viewers, editors, and administrators) to that connection.
+
+> ***Note:*** Chronograf users are entirely separate from InfluxDB and Kapacitor users. The only association between Chronograf and InfluxDB or Kapacitor users is through an InfluxDB or Kapacitor connection created within Chronograf.
+
 #### Chronograf-owned resources
 
 Chronograf-owned resources include internal resources that are under the full control of Chronograf, including:
