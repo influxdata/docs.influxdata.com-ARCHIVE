@@ -224,7 +224,7 @@ Environment variable: `$HEROKU_SECRET`
 
 ### `--heroku-organization=`
 
-The Heroku organization memberships required to access Chronograf. Lists are comma-separated.
+The Heroku organization memberships required to access Chronograf. Optional. Lists are comma-separated.
 
 Environment variable: `$HEROKU_ORGS`
 
