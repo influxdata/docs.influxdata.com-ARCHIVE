@@ -68,7 +68,7 @@ By default, new organizations have a default role of `member`.
 
 Viewers are Chronograf users with limited permissions for Chronograf-owned resources and can:
 
-- View predefined dashboards
+- View canned dashboards
 - View canned layouts
 - Use InfluxDB connections
 - Use Kapacitor connections
