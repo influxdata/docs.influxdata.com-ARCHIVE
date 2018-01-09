@@ -85,7 +85,8 @@ Viewers are Chronograf users with effectively read-only capabilities for Chronog
 For Chronograf-accessed resources, viewers can:
 
 - InfluxDB
-  - Create, view, edit, and delete databases
+  - Read and write time series data
+  - Create, view, edit, and delete databases and retention policies
   - Create, view, edit, and delete InfluxDB users
   - View and kill queries
   - _InfluxDB Enterprise_: Create, view, edit, and delete InfluxDB Enterprise roles
@@ -109,7 +110,8 @@ Editors are Chronograf users with limited capabilities for Chronograf-owned reso
 For Chronograf-accessed resources, editors can:
 
 - InfluxDB
-  - Create, view, edit, and delete databases
+  - Read and write time series data
+  - Create, view, edit, and delete databases and retention policies
   - Create, view, edit, and delete InfluxDB users
   - View and kill queries
   - _InfluxDB Enterprise_: Create, view, edit, and delete InfluxDB Enterprise roles
@@ -134,7 +136,8 @@ Admins are Chronograf users with all capabilities for the following Chronograf-o
 For Chronograf-accessed resources, admins can:
 
 - InfluxDB
-  - Create, view, edit, and delete databases
+  - Read and write time series data
+  - Create, view, edit, and delete databases and retention policies
   - Create, view, edit, and delete InfluxDB users
   - View and kill queries
   - _InfluxDB Enterprise_: Create, view, edit, and delete InfluxDB Enterprise roles
