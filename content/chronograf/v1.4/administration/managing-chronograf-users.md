@@ -170,28 +170,32 @@ Role required: `admin`
 **To create a user:**
 
 1) Open Chronograf in your web browser and select **Admin (crown icon) > Chronograf**.
-2) Click the **Users** tab and then click **Create User**.
-3) Add the following user information:
+1) Click the **Users** tab and then click **Create User**.
+1) Add the following user information:
    * **Username**: Enter the username as provided by the OAuth provider.
    * **Role**: Select the Chronograf role.
    * **Provider**: Type in the OAuth provider to be used for authentication. Valid values are: `github`, `google`, `heroku`, and `auth0`.
    * **Scheme**: Displays `oauth2`, which is the only supported authentication scheme in this release.
-3) Click **Save** to finish adding the user.
+1) Click **Save** to finish adding the user.
 
 ### Updating users
 
-**To update a user:**
+Role required: `admin`
+
+Only a user's role can be updated. A user's username, provider, and scheme cannot be updated.
+
+**To change a user's role:**
 
 1) Open Chronograf in your web browser and select **Admin (crown icon) > Chronograf**.
-2) Click the **Users** tab to display the list of users within the currently selected organization.
-3) Make any required changes for the user.
-3) Click **Save** to finish adding the user.
+1) Click the **Users** tab to display the list of users within the current organization.
+1) Select a new role for the user. The update is automatically persisted.
 
 ### Removing users
+
+Role required: `admin`
 
 **To remove a user:**
 
 1) Open Chronograf in your web browser and select **Admin (crown icon) > Chronograf**.
-2) Click the **Users** tab to display the list of users.
-3) At the right side of the user information, click **Remove** and then **Confirm**.
-3) Click **Save** to finish adding the user.
+1) Click the **Users** tab to display the list of users.
+1) At the right side of the user information, click **Remove** and then **Confirm**.
