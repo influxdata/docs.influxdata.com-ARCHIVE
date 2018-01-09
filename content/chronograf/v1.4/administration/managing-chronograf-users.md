@@ -70,8 +70,8 @@ Viewers are Chronograf users with mostly read-only permissions for Chronograf-ow
 
 - View canned dashboards
 - View canned layouts
-- Access InfluxDB sources through existing InfluxDB connections
-- Use Kapacitor connections
+- View and access InfluxDB sources through existing InfluxDB connections
+- View and access Kapacitor server through currently associated Kapacitor connection
 
 For Chronograf-accessed resources, viewers can:
 
@@ -81,7 +81,6 @@ For Chronograf-accessed resources, viewers can:
   - Create, view, edit, and delete InfluxDB Enterprise roles
   - View and kill queries
 - Kapacitor
-  - View current connection
   - View alerts
   - Create, edit, and delete alert rules
 
@@ -129,7 +128,6 @@ For Chronograf-accessed resources, administrators can:
   - Create, view, edit, and delete InfluxDB users
   - View and kill queries
 - Kapacitor
-  - View current connection
   - View alerts
   - Create, edit, and delete alert rules
 
