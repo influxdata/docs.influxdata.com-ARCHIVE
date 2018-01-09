@@ -23,7 +23,7 @@ Chronograf is the user interface and data visualization component of the InfluxD
 
 ## Starting the Chronograf service
 
-Chronograf can be started using the default configuration options, but the environment variables and command line options let you set OAuth 2.0 authentication and other options based on your requirements.
+Chronograf can be started using the default configuration options, but the environment variables and command line options let you configure OAuth 2.0 authentication and other options based on your requirements.
 
 **To start the Chronograf service:**
 
