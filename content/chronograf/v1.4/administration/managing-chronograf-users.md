@@ -72,36 +72,39 @@ By default, organizations have a default role of `member`. If an organization is
 
 #### Viewers (role:`viewer`)
 
-Viewers are Chronograf users with mostly read-only permissions for Chronograf-owned resources who can:
+Viewers are Chronograf users with effectively read-only capabilities for Chronograf-owned resources within their current organization:
 
 - View canned dashboards
 - View canned layouts
-- View and access InfluxDB sources through existing InfluxDB connections
-- View and access Kapacitor server through currently associated Kapacitor connection
+- View InfluxDB connections
+- Switch current InfluxDB connection to other available connections
+- Access InfluxDB resources through the current connection
+- View Kapacitor connections associated with InfluxDB connections
+- Access Kapacitor resources through the current connection
 
 For Chronograf-accessed resources, viewers can:
 
 - InfluxDB
   - Create, view, edit, and delete databases
   - Create, view, edit, and delete InfluxDB users
-  - Create, view, edit, and delete InfluxDB Enterprise roles
   - View and kill queries
+  - _InfluxDB Enterprise_: Create, view, edit, and delete InfluxDB Enterprise roles
 - Kapacitor
   - View alerts
   - Create, edit, and delete alert rules
 
 #### Editors (role:`editor`)
 
-Editors are Chronograf users with limited permissions for Chronograf-owned resources who can:
+Editors are Chronograf users with limited capabilities for Chronograf-owned resources within their current organization:
 
 - Create, view, edit, and delete dashboards
 - View canned layouts
-- Create, edit, and delete layouts (requires command line access to file system)
-- Create, use, edit, and delete InfluxDB connections
+- Create, view, edit, and delete InfluxDB connections
 - Switch current InfluxDB connection to other available connections
-- Create, view, edit, and delete InfluxDB Enterprise roles
-- Create, use, edit, and delete Kapacitor connections
+- Access InfluxDB resources through the current connection
+- Create, view, edit, and delete Kapacitor connections associated with InfluxDB connections
 - Switch current Kapacitor connection to another available connection
+- Access Kapacitor resources through the current connection
 
 For Chronograf-accessed resources, editors can:
 
@@ -109,30 +112,32 @@ For Chronograf-accessed resources, editors can:
   - Create, view, edit, and delete databases
   - Create, view, edit, and delete InfluxDB users
   - View and kill queries
+  - _InfluxDB Enterprise_: Create, view, edit, and delete InfluxDB Enterprise roles
 - Kapacitor
   - View alerts
   - Create, edit, and delete alert rules
 
-#### Administrators (role:`admin`)
+#### Admins (role:`admin`)
 
-Administrators are Chronograf users have all of the capabilities of viewers and editors, but with additional administrator capabilities including permissions for the following Chronograf-owned resources:
+Admins are Chronograf users with all capabilities for the following Chronograf-owned resources within their current organization:
 
+- Create, update, and remove Chronograf users
 - Create, view, edit, and delete dashboards
 - View canned layouts
-- Create, edit, and delete layouts (requires command line access to file system)
-- Create, use, edit, and delete InfluxDB connections
+- Create, view, edit, and delete InfluxDB connections
 - Switch current InfluxDB connection to other available connections
-- Create, view, edit, and delete InfluxDB Enterprise roles
-- Create, use, edit, and delete Kapacitor connections
+- Access InfluxDB resources through the current connection
+- Create, view, edit, and delete Kapacitor connections associated with InfluxDB connections
 - Switch current Kapacitor connection to another available connection
-- Create, update, and remove Chronograf users
+- Access Kapacitor resources through the current connection
 
-For Chronograf-accessed resources, administrators can:
+For Chronograf-accessed resources, admins can:
 
 - InfluxDB
   - Create, view, edit, and delete databases
   - Create, view, edit, and delete InfluxDB users
   - View and kill queries
+  - _InfluxDB Enterprise_: Create, view, edit, and delete InfluxDB Enterprise roles
 - Kapacitor
   - View alerts
   - Create, edit, and delete alert rules
