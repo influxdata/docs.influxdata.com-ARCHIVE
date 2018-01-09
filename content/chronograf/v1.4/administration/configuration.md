@@ -18,7 +18,7 @@ Chronograf is the user interface and data visualization component of the InfluxD
 * Kapacitor
   - optional, but needed to create and use alerts in Chronograf
 
-> ***Note:*** Run through the [Getting Started](/chronograf/v1.4/introduction/getting-started) tutorial for a quick start on configuring InfluxDB, Kapacitor, and Telegraf for use with Chronograf.
+> ***Note:*** Run through the [Getting Started](/chronograf/latest/introduction/getting-started) tutorial for a quick start on configuring InfluxDB, Kapacitor, and Telegraf for use with Chronograf.
 
 
 ## Starting the Chronograf service
@@ -37,15 +37,15 @@ Mac OS X
 * `chronograf`
 * `chronograf [OPTIONS]` (where [OPTIONS] are any command line options, separated by spaces
 
-See [Chronograf configuration options](/chronograf/v1.4/administration/config-options) for details about configuration options, including command line options and corresponding environment variables.
+See [Chronograf configuration options](/chronograf/latest/administration/config-options) for details about configuration options, including command line options and corresponding environment variables.
 
 
 ## Enabling security and multi-organization support
 
-See [Managing security](/chronograf/v1.4/administration/managing-security) for details on configuring authentication options for Chronograf using the JWT and OAuth 2.0 authentication protocols.
+See [Managing security](/chronograf/latest/administration/managing-security) for details on configuring authentication options for Chronograf using the JWT and OAuth 2.0 authentication protocols.
 
 After you configure OAuth 2.0 authentication in Chronograf, you can use the multi-organization/multi-user support described in detail here:
 
-* [Managing organizations](/chronograf/v1.4/administration/managing-organization)
-* [Managing Chronograf users](/chronograf/v1.4/administration/managing-chronograf-users)
-* [Managing roles](/chronograf/v1.4/administration/managing-roles)
+* [Managing organizations](/chronograf/latest/administration/managing-organization)
+* [Managing Chronograf users](/chronograf/latest/administration/managing-chronograf-users)
+* [Managing roles](/chronograf/latest/administration/managing-roles)
