@@ -198,4 +198,4 @@ Role required: `admin`
 
 1) Open Chronograf in your web browser and select **Admin (crown icon) > Chronograf**.
 1) Click the **Users** tab to display the list of users.
-1) At the right side of the user information, click **Remove** and then **Confirm**.
+1) Hover your cursor over the user you want to remove and then click **Remove** and **Confirm**.
