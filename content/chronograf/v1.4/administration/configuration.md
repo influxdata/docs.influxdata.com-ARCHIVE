@@ -40,11 +40,11 @@ Mac OS X
 See [Chronograf configuration options](/chronograf/latest/administration/config-options) for details about configuration options, including command line options and corresponding environment variables.
 
 
-## Enabling security and multi-organization support
+## Enabling security, multi-organization, and multi-user support
 
 See [Managing security](/chronograf/latest/administration/managing-security) for details on configuring authentication options for Chronograf using the JWT and OAuth 2.0 authentication protocols.
 
-After you configure OAuth 2.0 authentication in Chronograf, you can use the multi-organization/multi-user support described in detail here:
+After you configure OAuth 2.0 authentication in Chronograf, you can use the multi-organization and multi-user support described in detail here:
 
 * [Managing organizations](/chronograf/latest/administration/managing-organization)
 * [Managing Chronograf users](/chronograf/latest/administration/managing-chronograf-users)
