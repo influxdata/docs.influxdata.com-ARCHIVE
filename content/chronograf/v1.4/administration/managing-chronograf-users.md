@@ -47,7 +47,7 @@ Chronograf-owned resources include internal resources that are under full contro
 - Canned layouts
 - Chronograf organizations
 - Chronograf users
-- Chronograf Status Page content, including News Feeds and Getting Started
+- Chronograf Status Page content for News Feeds and Getting Started
 
 #### Chronograf-accessed resources
 
