@@ -123,7 +123,7 @@ For Chronograf-accessed resources, editors can:
 
 Admins are Chronograf users with all capabilities for the following Chronograf-owned resources within their current organization:
 
-- Create, update, and remove Chronograf users
+- Create, view, update, and remove Chronograf users
 - Create, view, edit, and delete dashboards
 - View canned layouts
 - Create, view, edit, and delete InfluxDB connections
@@ -152,12 +152,15 @@ SuperAdmin status is a Chronograf status that allows any user, regardless of rol
 * Create, view, update, and remove organizations
 * Create, view, update, and remove users within an organization
 * Switch into any organization
+* Toggle the Public setting of the Default organization
+* Toggle the global config setting for `All new users are SuperAdmin`
 
 Important SuperAdmin behaviors:
 
 * SuperAdmin status grants any user (whether `member`, `viewer`, `editor`, or `admin`) the full capabilities of admins and the SuperAdmin capabilities listed above.
 * When a Chronograf user with SuperAdmin status creates a new organization or switches into an organization where that user has no role, that SuperAdmin user is automatically assigned the `admin` role by default.
-* Regular admins who do not have SuperAdmin status can perform normal operations on SuperAdmin users (create that user within their organization, change roles, and remove them), but they will not see that these users have SuperAdmin status, nor will any of their actions affect these users' SuperAdmin status. SuperAdmin users are the only ones who can change the SuperAdmin status of other Chronograf users.
+* SuperAdmin users cannot revoke their own SuperAdmin status.
+* SuperAdmin users are the only ones who can change the SuperAdmin status of other Chronograf users. Regular admins who do not have SuperAdmin status can perform normal operations on SuperAdmin users (create that user within their organization, change roles, and remove them), but they will not see that these users have SuperAdmin status, nor will any of their actions affect these users' SuperAdmin status.
 * If a user has their SuperAdmin status revoked, that user will retain their assigned roles within their organizations.
 
 ### Creating users
