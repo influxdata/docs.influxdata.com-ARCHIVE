@@ -196,9 +196,12 @@ This way normal tasks work and if at a later date it is decided that another sim
 
 Starting with version 1.4 of Kapacitor, tasks may be generated from templates using a task definition file.
 The task definition file is extended from the variables file of previous releases.
-Two new fields are made avaialble.  Compare Example 7 below to Example 5 above.
-The `template-id` field is used to select the template.
-The `dbrps` field is used to define one or more database/retention policy sets that the task will use.
+Three new fields are made avaialble.  Compare Example 7 below to Example 5 above.
+
+* The `template-id` field is used to select the template.
+* The `dbrps` field is used to define one or more database/retention policy sets that the task will use.
+* The `vars` field groups together the variables, which were the core of the file in previous releases.
+
 This file may be either JSON or YAML.
 
 A task for a memory based alert can be created using the same template defined above.
