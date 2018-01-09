@@ -240,13 +240,13 @@ Environment variable: `$AUTH0_DOMAIN`
 
 ### `--auth0-client-id=`
 
-The Auth0 Client ID value required for OAuth 2 support.
+The Auth0 Client ID value required for OAuth 2.0 support.
 
 Environment variable: `$AUTH0_CLIENT_ID`
 
 ### `--auth0-client-secret=`
 
-The Auth0 Client Secret value required for OAuth 2 support.
+The Auth0 Client Secret value required for OAuth 2.0 support.
 
 Environment variable: `$AUTH0_CLIENT_SECRET`
 
