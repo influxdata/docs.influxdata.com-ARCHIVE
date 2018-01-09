@@ -258,7 +258,7 @@ Lists are comma-separated and only available when using environment variables.
 
 Environment variable: `$AUTH0_ORGS`
 
-## Generic OAuth 2.0 autentication options
+## Generic OAuth 2.0 authentication options
 
 ### `--generic-name=`
 
@@ -318,7 +318,7 @@ Environment variable: `$GENERIC_API_URL`
 ### `--reporting-disabled` | `-r`
 
 Disables reporting of usage statistics.
-Usage statistics report once every 24 hours include: OS, arch, version, cluster_id, and uptime information.
+Usage statistics reported once every 24 hours include: OS, arch, version, cluster_id, and uptime information.
 
 Environment variable: `$REPORTING_DISABLED`
 
