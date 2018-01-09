@@ -9,7 +9,7 @@ menu:
 
 ## Requirements
 
-Chronograf is the user interface and data visualization component of the InfluxData [TICK stack](https://www.influxdata.com/products/) and is is designed to be used together with InfluxDB, Telegraf, and Kapacitor, but the minimum requirements are:
+Chronograf is the user interface and data visualization component of the InfluxData [TICK stack](https://www.influxdata.com/products/) and is designed to be used together with InfluxDB, Telegraf, and Kapacitor, but the minimum requirements are:
 
 * InfluxDB
   - available and running
