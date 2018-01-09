@@ -61,7 +61,7 @@ Chronograf-accessed resources include external resources that can be accessed us
 
 Members are Chronograf users who have been added to organizations but do not have any functional roles. Members can authenticate, but they cannot access any resources within an organization.
 
-By default, new organizations have a default role of `member`.
+By default, organizations have a default role of `member`.
 
 
 #### Viewers (role:`viewer`)
