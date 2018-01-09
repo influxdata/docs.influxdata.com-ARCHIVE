@@ -35,11 +35,11 @@ Chronograf users are assigned one of the following four organization-bound user 
 - [`editor`](#editors-role-editor)
 - [`admin`](#administrators-role-admin)
 
-Each of these four roles, described in detail below, have different permission levels and rights to use resources either owned by Chronograf or accessed using Chronograf. These resources are summarized below.
+Each of these four roles, described in detail below, have different permission levels and rights to use the following Chronograf-owned or Chronograf-accessed resources.
 
 #### Chronograf-owned resources
 
-Chronograf-owned resources include internal resources that are under full control by Chronograf. These resources include:
+Chronograf-owned resources include internal resources that are under the full control of Chronograf, including:
 
 - Kapacitor connections
 - InfluxDB connections
@@ -54,23 +54,23 @@ Chronograf-owned resources include internal resources that are under full contro
 Chronograf-accessed resources include external resources that can be accessed using Chronograf, but are under limited control by Chronograf. Chronograf users with the roles of `viewer`, `editor`, and `admin` have equal access to these resources which include:
 
 - InfluxDB databases, users, queries, and time series data
-- Kapacitor alerts and rules (called tasks in Kapacitor)
+- Kapacitor alerts and alert rules (called tasks in Kapacitor)
 
 
 #### Members (role:`member`)
 
-Members are Chronograf users who have been added to organizations but do not have any functional roles. Members can authenticate, but they cannot access any resources within an organization.
+Members are Chronograf users who have been added to organizations but do not have any functional permissions. Members can authenticate, but they cannot access any resources within an organization and thus cannot use Chronograf.
 
-By default, organizations have a default role of `member`.
+By default, organizations have a default role of `member`. If an organization is in Public mode, then anyone could authenticate and become a member, but not be able to use Chronograf until an administrator adds them to a different role.
 
 
 #### Viewers (role:`viewer`)
 
-Viewers are Chronograf users with limited permissions for Chronograf-owned resources and can:
+Viewers are Chronograf users with mostly read-only permissions for Chronograf-owned resources who can:
 
 - View canned dashboards
 - View canned layouts
-- Use InfluxDB connections
+- Access InfluxDB sources through existing InfluxDB connections
 - Use Kapacitor connections
 
 For Chronograf-accessed resources, viewers can:
@@ -78,20 +78,25 @@ For Chronograf-accessed resources, viewers can:
 - InfluxDB
   - Create, view, edit, and delete databases
   - Create, view, edit, and delete InfluxDB users
+  - Create, view, edit, and delete InfluxDB Enterprise roles
   - View and kill queries
 - Kapacitor
   - View current connection
   - View alerts
-  - Create alert rules
+  - Create, edit, and delete alert rules
 
 #### Editors (role:`editor`)
 
-Viewers are Chronograf users with limited permissions for the following Chronograf-owned resources:
+Editors are Chronograf users with limited permissions for Chronograf-owned resources who can:
 
 - Create, view, edit, and delete dashboards
-- Create, view, edit, and delete layouts
-- Create, use, switch, edit, and delete InfluxDB connections
-- Create, use, switch, edit, and delete Kapacitor connections
+- View canned layouts
+- Create, edit, and delete layouts (requires command line access to file system)
+- Create, use, edit, and delete InfluxDB connections
+- Switch current InfluxDB connection to other available connections
+- Create, view, edit, and delete InfluxDB Enterprise roles
+- Create, use, edit, and delete Kapacitor connections
+- Switch current Kapacitor connection to another available connection
 
 For Chronograf-accessed resources, editors can:
 
@@ -100,17 +105,21 @@ For Chronograf-accessed resources, editors can:
   - Create, view, edit, and delete InfluxDB users
   - View and kill queries
 - Kapacitor
-  - Create, view, edit, and delete alerts
-  - Create, view, edit, and delete alert rules
+  - View alerts
+  - Create, edit, and delete alert rules
 
 #### Administrators (role:`admin`)
 
 Administrators are Chronograf users have all of the capabilities of viewers and editors, but with additional administrator capabilities including permissions for the following Chronograf-owned resources:
 
 - Create, view, edit, and delete dashboards
-- Create, view, edit, and delete layouts
-- Create, use, switch, edit, and delete InfluxDB connections
-- Create, use, switch, edit, and delete Kapacitor connections
+- View canned layouts
+- Create, edit, and delete layouts (requires command line access to file system)
+- Create, use, edit, and delete InfluxDB connections
+- Switch current InfluxDB connection to other available connections
+- Create, view, edit, and delete InfluxDB Enterprise roles
+- Create, use, edit, and delete Kapacitor connections
+- Switch current Kapacitor connection to another available connection
 - Create, update, and remove Chronograf users
 
 For Chronograf-accessed resources, administrators can:
@@ -122,6 +131,7 @@ For Chronograf-accessed resources, administrators can:
 - Kapacitor
   - View current connection
   - View alerts
+  - Create, edit, and delete alert rules
 
 ### Cross-organization SuperAdmin status
 
