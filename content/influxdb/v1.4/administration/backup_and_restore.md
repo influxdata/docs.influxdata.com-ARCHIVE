@@ -9,12 +9,10 @@ menu:
 
 ## Backups
 
-InfluxDB has the ability to snapshot an instance at a point-in-time and restore it.
-All backups are full backups.
-InfluxDB does not yet support incremental backups.
 There are two types of data to backup, the metastore and the metrics themselves.
 The [metastore](/influxdb/v1.4/concepts/glossary/#metastore) is backed up in its entirety.
 The metrics are backed up per-database in a separate operation from the metastore backup.
+Per-database backups can be full, incremental (since a RFC3339 formatted time), or for a specific shard ID.
 
 > **Note:** Backups are not interchangeable between OSS InfluxDB and [InfluxEnterprise](/enterprise/latest/).
 You cannot restore an OSS backup to an InfluxEnterprise data node, nor can you restore
