@@ -66,9 +66,9 @@ At this point `show-template` can be run to see more information about the newly
 kapacitor show-template generic_mean_alert
 ```
 
-A list of variables declared for the template should be returned as part of the console output in the group `vars` as follows:
+A list of variables declared for the template should be returned in the group `vars` as part of the console output as follows:
 
-**Example 2 &ndash; Vars section of kapacitor show-template output**
+**Example 2 &ndash; The Vars section of kapacitor show-template output**
 ```
 ...
 Vars:
@@ -105,7 +105,7 @@ Create a file `cpu_vars.json` with the following content.
 }
 ```
 
-Now define the task using the variable values defined in the variable file.
+Now define the task using the template and the variable values defined in the variable file.
 
 ```
 kapacitor define cpu_alert -template generic_mean_alert -vars cpu_vars.json -dbrp telegraf.autogen
@@ -166,7 +166,7 @@ kapacitor show mem_alert
 
 And again the `vars` output:
 
-**Example 6 &ndash; The vars section of the mem_alert task**
+**Example 6 &ndash; The Vars section of the mem_alert task**
 ```
 ...
 Vars:
@@ -190,7 +190,7 @@ Any number of tasks can be defined using the same template.
 
 Variables work with normal tasks as well and can be used to overwrite any defaults in the script.
 Since at any point a TICKscript could come in handy as a template the recommend best practice is to always use `var` declarations in TICKscripts.
-This way normal tasks work and if at a later date it is decided that another similar task should be created, doing so is  a trivial exercise of creating a template from the existing TICKscript and then defining multiple tasks.
+This way normal tasks work and if at a later date it is decided that another similar task should be created, doing so is  a trivial exercise of creating a template from the existing TICKscript and then defining additional tasks with variable files.
 
 ## Using the `-file` flag
 
@@ -202,10 +202,10 @@ Three new fields are made avaialble.  Compare Example 7 below to Example 5 above
 * The `dbrps` field is used to define one or more database/retention policy sets that the task will use.
 * The `vars` field groups together the variables, which were the core of the file in previous releases.
 
-This file may be either JSON or YAML.
+This file may be in either JSON or YAML.
 
 A task for a memory based alert can be created using the same template defined above.
-Create a `mem_template_task.json` and use this snippet.
+Create a `mem_template_task.json` file using the snippet in Example 7.
 
 **Example 7 &ndash; A task definition file in JSON**
 ```json
@@ -295,7 +295,7 @@ stream
          .channel(slack_channel)
 ```
 
-To use this template, first define the template like so:
+Define a new template from this template script like so:
 
 ```
 kapacitor define-template implicit_generic_mean_alert -tick path/to/above/script.tick
