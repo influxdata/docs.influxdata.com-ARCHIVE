@@ -265,7 +265,7 @@ Permission to create, drop, and view [subscriptions](/influxdb/latest/concepts/g
 **Pages in Chronograf that require this permission**: Alerting
 
 #### Monitor
-Permission to run to view cluster statistics and diagnostics.
+Permission to view cluster statistics and diagnostics.
 
 **Relevant InfluxQL queries**:
 [`SHOW DIAGNOSTICS`](/influxdb/latest/troubleshooting/statistics/) and
