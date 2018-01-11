@@ -17,7 +17,6 @@ menu:
   * [TOKEN_SECRET](#token-secret)
   * [GitHub](#github)
   * [Google](#google)
-  * [Heroku](#heroku)
   * [Auth0](#auth0)
   * [Generic](#generic)
   * [Configuring authentication duration](#optional-configure-authentication-duration)
@@ -44,7 +43,6 @@ Configuration steps, including required and optional configuration options, for 
 
 * [GitHub](#github)
 * [Google](#google)
-* [Heroku](#heroku)
 * [Auth0](#auth0)
 * [Generic](#generic)
 
@@ -205,31 +203,6 @@ Multiple domains are separated using commas.
 For example, to permit access only from `biffspleasurepalace.com` and `savetheclocktower.com`, the `GOOGLE_DOMAINS` environment variable is:
 ```sh
 export GOOGLE_DOMAINS=biffspleasurepalance.com,savetheclocktower.com
-```
-
-### Heroku
-
-#### Creating a Heroku application
-
-To obtain a Heroku Client ID and Heroku Secret, follow the guide posted [here](https://devcenter.heroku.com/articles/oauth#register-client).
-Once your application has been created, those two values should be inserted into the following environment variables:
-
-* `HEROKU_CLIENT_ID`
-* `HEROKU_SECRET`
-
-The equivalent command line options are:
-
-* [`--heroku-client-id`](/chronograf/v1.4/administration/configuration/#heroku-client-id)
-* [`--heroku-secret`](/chronograf/v1.4/administration/configuration/#heroku-secret)
-
-#### Optional Heroku organizations
-
-Like the other OAuth 2.0 providers, access to Chronograf using Heroku can be restricted to members of specific Heroku organizations.
-This is controlled using the `HEROKU_ORGS` environment variable or the [`--heroku-organizations`](/chronograf/v1.4/administration/configuration/#heroku-organization) command line option. If there are multiple organizations, the list is comma-separated.
-For example, to permit access from the `hill-valley-preservation-society` organization and `the-pinheads` organization, use the following environment variable:
-
-```sh
-export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 ```
 
 ### Auth0

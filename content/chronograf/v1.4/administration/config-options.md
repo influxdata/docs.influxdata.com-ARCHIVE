@@ -15,7 +15,6 @@ On this page:
 * [Kapacitor authentication options](#kapacitor-authentication-options)
 * [GitHub OAuth 2.0 authentication options](#github-oauth-2-0-authentication-options)
 * [Google OAuth 2.0 authentication options](#google-oauth-2-0-authentication-options)
-* [Heroku OAuth 2.0 authentication options](#heroku-oauth-2-0-authentication-options)
 * [Auth0 OAuth 2.0 authentication options](#auth0-oauth-2-0-authentication-options)
 * [Generic OAuth 2.0 authentication options](#generic-oauth-2-0-authentication-options)
 * [Other options](#other-options)
@@ -207,26 +206,6 @@ Required for Google OAuth 2.0 authentication. Used for Auth0 and some generic OA
 Default value: `http://localhost:8888`
 
 Environment variable: `$PUBLIC_URL`
-
-## Heroku OAuth 2.0 authentication options
-
-### `--heroku-client-id=`
-
-The Heroku client ID for OAuth 2.0 support.
-
-Environment variable: `$HEROKU_CLIENT_ID`
-
-### `--heroku-secret=`
-
-The Heroku secret for OAuth 2.0 support.
-
-Environment variable: `$HEROKU_SECRET`
-
-### `--heroku-organization=`
-
-The Heroku organization memberships required to access Chronograf. Optional. Lists are comma-separated.
-
-Environment variable: `$HEROKU_ORGS`
 
 ## Auth0 OAuth 2.0 authentication options
 

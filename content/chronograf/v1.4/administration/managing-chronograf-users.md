@@ -174,7 +174,7 @@ Role required: `admin`
 1) Add the following user information:
    * **Username**: Enter the username as provided by the OAuth provider.
    * **Role**: Select the Chronograf role.
-   * **Provider**: Type in the OAuth provider to be used for authentication. Valid values are: `github`, `google`, `heroku`, and `auth0`.
+   * **Provider**: Type in the OAuth provider to be used for authentication. Valid values are: `github`, `google`, and `auth0`.
    * **Scheme**: Displays `oauth2`, which is the only supported authentication scheme in this release.
 1) Click **Save** to finish adding the user.
 
