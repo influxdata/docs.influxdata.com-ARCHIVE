@@ -29,4 +29,4 @@ Users can continue to use the deprecated product; documentation is available und
 For more information, please read the original [announcement blog](https://www.influxdata.com/announcing-the-new-chronograf-a-ui-for-the-tick-stack-and-a-complete-open-source-monitoring-solution/) by our CTO, Paul Dix.
 
 InfluxData recommends migrating to the open source Chronograf product.
-See [Getting Started](/chronograf/v1.4/introduction/getting-started/) to get up and running!
+See [Getting Started](/chronograf/latest/introduction/getting-started/) to get up and running!

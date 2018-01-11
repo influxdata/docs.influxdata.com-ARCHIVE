@@ -9,16 +9,16 @@ menu:
 
 Follow the links below for more information.
 
-## [Upgrading](/chronograf/v1.4/administration/upgrading/)
+## [Upgrading](/chronograf/latest/administration/upgrading/)
 
-## [Configuring](/chronograf/v1.4/administration/configuration/)
+## [Configuring](/chronograf/latest/administration/configuration/)
 
-## [Configuration options](/chronograf/v1.4/administration/config-options/)
+## [Configuration options](/chronograf/latest/administration/config-options/)
 
-## [Managing InfluxDB users](/chronograf/v1.4/administration/managing-influxdb-users/)
+## [Managing InfluxDB users](/chronograf/latest/administration/managing-influxdb-users/)
 
-## [Managing Chronograf organizations](/chronograf/v1.4/administration/managing-organizations/)
+## [Managing Chronograf organizations](/chronograf/latest/administration/managing-organizations/)
 
-## [Managing Chronograf users](/chronograf/v1.4/administration/managing-chronograf-users/)
+## [Managing Chronograf users](/chronograf/latest/administration/managing-chronograf-users/)
 
-## [Managing security](/chronograf/v1.4/administration/managing-security/)
+## [Managing security](/chronograf/latest/administration/managing-security/)

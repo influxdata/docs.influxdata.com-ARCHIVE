@@ -10,7 +10,7 @@ menu:
 The **Chronograf Admin** provides InfluxDB user management for InfluxDB OSS and InfluxDB Enterprise users.
 
 
-> ***Note:*** For details on Chronograf user authentication and management, see [Managing security](/chronograf/v1.4/administration/managing-security/).
+> ***Note:*** For details on Chronograf user authentication and management, see [Managing security](/chronograf/latest/administration/managing-security/).
 
 ### Content
 
@@ -72,7 +72,7 @@ A successful `CREATE USER` query returns a blank result:
 
 ### Step 4: Edit the InfluxDB source in Chronograf
 
-If you've already [connected your database to Chronograf](/chronograf/v1.4/introduction/getting-started/#3-connect-to-chronograf), update the connection configuration in Chronograf with your new username and password.
+If you've already [connected your database to Chronograf](/chronograf/latest/introduction/getting-started/#3-connect-to-chronograf), update the connection configuration in Chronograf with your new username and password.
 Edit existing InfluxDB database sources by navigating to the Chronograf configuration page and clicking on the name of the source.
 
 ## InfluxDB OSS User Management
@@ -83,7 +83,7 @@ On the **Chronograf Admin** page:
 * Change user passwords
 * Assign admin and remove admin permissions to or from a user
 
-![InfluxDB OSS user management](/img/chronograf/v1.4/admin-usermanagement-oss.png)
+![InfluxDB OSS user management](/img/chronograf/latest/admin-usermanagement-oss.png)
 
 InfluxDB users are either admin users or non-admin users.
 See InfluxDB's [authentication and authorization](/influxdb/latest/query_language/authentication_and_authorization/#user-types-and-privileges) documentation for more information about those user types.
@@ -124,7 +124,7 @@ On the `Admin` page:
 * Create, edit, and delete roles
 * Assign and remove roles to or from a user
 
-![InfluxDB Enterprise user management](/img/chronograf/v1.4/admin-usermanagement-cluster.png)
+![InfluxDB Enterprise user management](/img/chronograf/latest/admin-usermanagement-cluster.png)
 
 ### User Types
 
@@ -169,7 +169,7 @@ Permission to copy shards.
 **Pages in Chronograf that require this permission**: NA
 
 #### CreateDatabase
-Permission to create databases, create [retention policies](/influxdb/v1.3/concepts/glossary/#retention-policy-rp), alter retention policies, and view retention policies.
+Permission to create databases, create [retention policies](/influxdb/latest/concepts/glossary/#retention-policy-rp), alter retention policies, and view retention policies.
 
 **Relevant InfluxQL queries**:
 [`CREATE DATABASE`](/influxdb/latest/query_language/database_management/#create-database),
@@ -300,4 +300,4 @@ For example, the image below contains three roles: `CREATOR`, `DESTROYER`, and `
 `CREATOR` includes two permissions (`CreateDatbase` and `CreateUserAndRole`) and is assigned to one user (`chrononut`).
 `DESTROYER` also includes two permissions (`DropDatabase` and `DropData`) and is assigned to two users (`chrononut` and `chronelda`).
 
-![InfluxDB OSS user management](/img/chronograf/v1.4/admin-usermanagement-roles.png)
+![InfluxDB OSS user management](/img/chronograf/latest/admin-usermanagement-roles.png)
