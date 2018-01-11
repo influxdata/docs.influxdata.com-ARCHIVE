@@ -44,8 +44,8 @@ Additional organizations can be created by SuperAdmin users to support the requi
 
 **To create an organization:**
 
-1) In the navigation bar of the Chronograf application, click **Admin** (crown icon) > **Chronograf** to open the **Chronograf Admin** page.
-2) Click the **Organizations** tab and then click **Create Organization**.
+1) In the Chronograf navigation bar, click **Admin** (crown icon) > **Chronograf** to open the **Chronograf Admin** page.
+2) In the **Organizations** tab, click **Create Organization**.
 3) Under **Name**, click on **"Untitled Organization"** and enter the new organization name.
 4) Under **Default Role**, select the default role for new users. Valid options include `member` (default), `viewer`, `editor`, and `admin`.
 5) Click **Save**.
@@ -88,6 +88,6 @@ When an organization is removed:
 
 **To remove an organization:**
 
-1) In the navigation bar of the Chronograf application, select **Admin** ("crown" icon) > **Chronograf** to open the **Chronograf Admin** page.
+1) In the navigation bar of the Chronograf application, select **Admin** (crown icon) > **Chronograf** to open the **Chronograf Admin** page.
 2) Click the **Organizations** tab to view a list of organizations.
 3) To the right of the the organization that you want to remove, click the **Remove** button (trashcan icon) and then confirm by clicking the **Save** button.
