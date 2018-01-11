@@ -20,7 +20,7 @@ menu:
 
 > ***Note:*** Support for organizations and individual users (rather than the shared user) is new in Chronograf 1.4.
 >
-> For information about the new user roles and SuperAdmin status, see [Managing Chronograf users](/chronograf/v1.4/administration/managing-chronograf-users/).
+> For information about the new user roles and SuperAdmin status, see [Managing Chronograf users](/chronograf/latest/administration/managing-chronograf-users/).
 
 A Chronograf organization is a collection of Chronograf users who share common Chronograf-owned resources, including dashboards, InfluxDB and Kapacitor connections, and alerts. Organizations can be used to represent companies, functional units, projects, or teams. Chronograf users can be members of multiple organizations.
 
@@ -71,9 +71,9 @@ JWT and OAuth 2.0 authentication providers are functional components of the Chro
 
 Related information:
 
-* [Managing Chronograf users](/chronograf/v1.4/administration/managing-chronograf-users/)
-* [Managing InfluxDB users](/chronograf/v1.4/administration/managing-influxdb-users/)
-* [Managing security](/chronograf/v1.4/administration/managing-security/)
+* [Managing Chronograf users](/chronograf/latest/administration/managing-chronograf-users/)
+* [Managing InfluxDB users](/chronograf/latest/administration/managing-influxdb-users/)
+* [Managing security](/chronograf/latest/administration/managing-security/)
 
 ## Removing organizations
 
