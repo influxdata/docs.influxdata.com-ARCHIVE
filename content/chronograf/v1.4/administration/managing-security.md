@@ -78,13 +78,13 @@ Chronograf supports using the [GitHub OAuth 2.0 authentication](https://develope
 
 #### Overview
 
-Chronograf has five environment variables for use with GitHub OAuth 2.0 authentication. The steps below show you how to get the required values for:
+Chronograf has five environment variables (and corresponding command line options) for use with GitHub OAuth 2.0 authentication. The steps below show you how to get the required values for:
 
-* TOKEN_SECRET (used to generate the JWT signature)
+* TOKEN_SECRET (secret to use for generating JWT tokens)
 * GH_CLIENT_ID (GitHub Client ID)
 * GH_CLIENT_SECRET (GitHub Client Secret)
 
-You can also specify values for two optional environment variables:
+You can also specify values for two optional environment variables (or corresponding command line options):
 
 * AUTH_DURATION
 * GH_ORGS (GitHub organizations)
@@ -93,11 +93,11 @@ For details on the command line options and environment variables, see [GitHub O
 
 **Example:**
 ```
-# Force login every hour
+# Require users to reauthenticate after 1 hour
 export AUTH_DURATION=1h
 
-# JWT Signature
-export TOKEN_SECRET=supersupersecret
+# Secret used to generate JWT tokens
+export TOKEN_SECRET=Super5uperUdn3verGu355!
 
 # GitHub Client ID
 export GH_CLIENT_ID=b339dd4fddd95abec9aa
@@ -114,69 +114,80 @@ export GH_ORGS=biffs-gang
 To create a GitHub OAuth Application, follow the [Register your app](https://developer.github.com/guides/basics-of-authentication/#registering-your-app) instructions.
 Essentially, you'll register your application [here](https://github.com/settings/applications/new).
 
-The `Homepage URL` should include the full Chronograf server name and port. For example, if you are running it locally, it is `http://localhost:8888`.
+The `Homepage URL` should include the full Chronograf server name and port. For example, if you are running it locally with the default settings, it would be `http://localhost:8888`.
 
 The `Authorization callback URL` must be the location of the `Homepage URL` plus `/oauth/github/callback`.
-For example, if `Homepage URL` was `http://localhost:8888`, then the `Authorization callback URL` is `http://localhost:8888/oauth/github/callback`.
+For example, if `Homepage URL` was `http://localhost:8888`, then the `Authorization callback URL` would be `http://localhost:8888/oauth/github/callback`.
 
 GitHub provides the `GitHub Client ID` and `GitHub Client Secret`.
 To register these values with Chronograf, set the following environment variables:
 
 * `GH_CLIENT_ID`
 * `GH_CLIENT_SECRET`
+* `TOKEN_SECRET`
 
 For example:
 ```sh
 export GH_CLIENT_ID=b339dd4fddd95abec9aa
 export GH_CLIENT_SECRET=260041897d3252c146ece6b46ba39bc1e54416dc
+export TOKEN_SECRET=Super5uperUdn3verGu355!
 ```
+
+Alternatively, these environment variables can be set using the equivalent command line options:
+
+* [`--github-client-id=`](/chronograf/v1.4/administration/configuration/#github-client-id)
+* [`--github-client-secret=`](/chronograf/v1.4/administration/configuration/#ithub-client-secret)
+* [`--token_secret=`](chronograf/v1.4/administration/config-options.md#--token-secret---t)
 
 #### Optional GitHub organizations
 
-If you need to require an organization membership for a user, set the `GH_ORGS` environment variable:
+If you want to require a GitHub organization membership for a user, set the `GH_ORGS` environment variable.
+
+**Example:**
+
 ```sh
 export GH_ORGS=biffs-gang
 ```
 If the user is not a member of the specified GitHub organization, then the user will not be granted access.
-To support multiple organizations, use a comma-delimited list, as in this example:
+To support multiple organizations, use a comma-delimited list.
+
+**Example:**
+
 ```sh
 export GH_ORGS=hill-valley-preservation-sociey,the-pinheads
 ```
 
 ### Google
 
+Chronograf supports using the [Google OAuth 2.0 authentication proivder](https://developers.google.com/identity/protocols/OAuth2) to request authorization and provide authentication. To use GitHub authentication, you need to register a GitHub application and use the assigned Client ID and Client Secret.
+
 #### Overview
 
-Chronograf supports the use of the Google OAuth 2.0 protocol for authentication and authorization. The steps below guide you in creating the following required Chronograf environment variables:
+Chronograf supports the use of the Google OAuth 2.0 protocol for authentication and authorization. The steps below guide you in creating the following required Chronograf environment variables (or corresponding command line options):
 
 * `GOOGLE_CLIENT_ID` (Google Client ID)
 * `GOOGLE_CLIENT_SECRET` (Google Client Secret)
 * `PUBLIC_URL` (Public URL)
 
-The following environment variable can be use to optionally restrict access to specific domains:
+Optionally, you can restrict access to specific domains using the following environment variable (or corresponding command line option):
 
 * `GOOGLE_DOMAINS` (Google domains)
 
 For details on Chronograf command line options and environment variables, see [Google OAuth 2.0 authentication options](/chronograf/v1.4/config-options#google-oauth-2-0-authentication-options).
 
-Here is a high-level summary of the steps involved in Google OAuth 2.0 authentication with Chronograf:
-1) User logs into Google
-2) Google authorizes the user as a Chronograf user
-3) Chronograf uses the Google authorization to authenticate the user.
-
 
 #### Creating Google OAuth 2.0 applications
 Obtain a Google Client ID and an Google Client Secret by following the steps in [Using OAuth 2.0 to Access Google APIs](https://developers.google.com/identity/protocols/OAuth2).
 Chronograf will also need to be publicly accessible using a fully-qualified domain name so that Google can properly redirect users back to the application.
-This information should be set in the following environment variables:
+This information must be set in the following environment variables (or corresponding command line options):
 
 * `GOOGLE_CLIENT_ID` (Google Client ID)
 * `GOOGLE_CLIENT_SECRET` (Google Client Secret)
 * `PUBLIC_URL` (Public URL)
 
-Additionally, you need to add the following required Chronograf environment variable:
+Additionally, you need to add the following required Chronograf environment variable (or corresponding command line option):
 
-* `TOKEN_SECRET` (JWT Signature)
+* `TOKEN_SECRET` (Secret used to generate JWT tokens)
 
 
 Alternatively, these environment variables can be set using the equivalent command line options:
@@ -251,7 +262,7 @@ Auth0 can be customized to the operator's requirements, so it has no official co
 Organizations are supported in Chronograf using a lightweight `app_metadata` key that can be inserted into Auth0 user profiles automatically or manually.
 
 To assign a user to an organization, add an `organization` key to the user `app_metadata` field with the value corresponding to the user's organization.
-For example, we can assign the user Marty McFly to the "time-travelers" organization by setting `app_metadata` to `{"organization": "time-travelers"}`.
+For example, you can assign the user Marty McFly to the "time-travelers" organization by setting `app_metadata` to `{"organization": "time-travelers"}`.
 This can be done either manually by an operator or automatically through the use of an [Auth0 Rule](https://auth0.com/docs/rules/metadata-in-rules#updating-app_metadata) or a [pre-user registration Auth0 Hook](https://auth0.com/docs/hooks/extensibility-points/pre-user-registration).
 
 Next, you will need to set the Chronograf [`AUTH0_ORGS`](/chronograf/v1.4/administration/configuration/#auth0-client-secret) environment variable to a comma-separated list of the allowed organizations.
@@ -329,9 +340,9 @@ Additionally, for greater security, if you want to require re-authentication eve
 
 ## TLS
 
-Chronograf supports TLS (Transport Layer Security) to securely communicate between the browser and server using HTTPS.
+Chronograf supports TLS (Transport Layer Security) to enable secure communications between web browsers and servers using HTTPS.
 
-We recommend using HTTPS with Chronograf.
+InfluxData recommends using HTTPS with Chronograf.
 If you are not using a TLS termination proxy, you can run Chronograf's server with TLS connections.
 
 ### Using HTTPS and TLS with Chronograf

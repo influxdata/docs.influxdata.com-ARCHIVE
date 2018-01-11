@@ -179,7 +179,7 @@ Optionally, specify a GitHub organization required for a user.
 
 Environment variable: `$GH_ORGS`
 
-## Google OAuth 2 authentication options
+## Google OAuth 2.0 authentication options
 
 ### `--google-client-id=`
 
