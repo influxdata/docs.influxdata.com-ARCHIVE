@@ -5,6 +5,17 @@ menu:
     weight: 1
     parent: about_the_project
 ---
+## v1.5.1 [2017-01-10]
+
+### Bugfixes
+
+- Fix name error in jolokia2_agent sample config.
+- Fix DC/OS input - login expiration time.
+- Set Content-Type charset in InfluxDB output and allow it be overridden.
+- Document permissions setup for Postfix input.
+- Fix deliver_get field in RabbitMQ input.
+- Escape environment variables during config toml parsing.
+
 ## v1.5 [2017-12-14]
 
 ### New Plugins
