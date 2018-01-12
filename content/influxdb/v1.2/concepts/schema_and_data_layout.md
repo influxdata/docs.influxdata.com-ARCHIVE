@@ -40,7 +40,7 @@ In general, your queries should guide what gets stored as a tag and what gets st
 
 This isn't necessary, but it simplifies writing queries; you won't have to wrap those identifiers in double quotes.
 Identifiers are database names, [retention policy](/influxdb/v1.2/concepts/glossary/#retention-policy-rp) names, [user](/influxdb/v1.2/concepts/glossary/#user) names, [measurement](/influxdb/v1.2/concepts/glossary/#measurement) names, [tag keys](/influxdb/v1.2/concepts/glossary/#tag-key), and [field keys](/influxdb/v1.2/concepts/glossary/#field-key).
-See [InfluxQL Keywords](https://github.com/influxdata/influxdb/blob/master/influxql/README.md#keywords) for words to avoid.
+See [InfluxQL Keywords](https://github.com/influxdata/influxql/blob/master/README.md#keywords) for words to avoid.
 
 Note that you will also need to wrap identifiers in double quotes in queries if they contain characters other than `[A-z,_]`.
 

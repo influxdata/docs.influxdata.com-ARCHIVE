@@ -209,7 +209,7 @@ Other supported features:
 
 #### Quoting
 [Identifiers](/influxdb/v1.2/concepts/glossary/#identifiers) **must** be double quoted if they contain characters other than `[A-z,0-9,_]`, if they
-begin with a digit, or if they are an [InfluxQL keyword](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords).
+begin with a digit, or if they are an [InfluxQL keyword](https://github.com/influxdata/influxql/blob/master/README.md#keywords).
 While not always necessary, we recommend that you double quote identifiers.
 
 > **Note:** The quoting syntax for queries differs from the [line protocol](/influxdb/v1.2/concepts/glossary/#line-protocol).

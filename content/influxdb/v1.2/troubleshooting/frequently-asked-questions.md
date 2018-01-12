@@ -674,7 +674,7 @@ time                  value	 precision_supplied  timestamp_supplied
 ## When should I single quote and when should I double quote in queries?
 Single quote string values (for example, tag values) but do not single quote identifiers (database names, retention policy names, user names, measurement names, tag keys, and field keys).
 
-Double quote identifiers if they start with a digit, contain characters other than `[A-z,0-9,_]`, or if they are an [InfluxQL keyword](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords).
+Double quote identifiers if they start with a digit, contain characters other than `[A-z,0-9,_]`, or if they are an [InfluxQL keyword](https://github.com/influxdata/influxql/blob/master/README.md#keywords).
 Double quotes are not required for identifiers if they don't fall into one of
 those categories but we recommend double quoting them anyway.
 
@@ -1019,7 +1019,7 @@ Note that Windows uses carriage return and line feed (`\r\n`) as the newline cha
 ## What words and characters should I avoid when writing data to InfluxDB?
 
 ### InfluxQL Keywords
-If you use an [InfluxQL keyword](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords) as an identifier you will need to double quote that identifier in every query.
+If you use an [InfluxQL keyword](https://github.com/influxdata/influxql/blob/master/README.md#keywords) as an identifier you will need to double quote that identifier in every query.
 This can lead to [non-intuitive errors](/influxdb/v1.2/troubleshooting/errors/#error-parsing-query-found-expected-identifier-at-line-char).
 Identifiers are continuous query names, database names, field keys, measurement names, retention policy names, subscription names, tag keys, and user names.
 

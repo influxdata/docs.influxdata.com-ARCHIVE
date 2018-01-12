@@ -112,7 +112,7 @@ Let's start the Kapacitor server:
 kapacitord -config kapacitor.conf
 ```
 
-Since InfluxDB is running on `http://localhost:8086` Kapacitor finds it during start up and creates several [subscriptions](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#create-subscription) on InfluxDB.
+Since InfluxDB is running on `http://localhost:8086` Kapacitor finds it during start up and creates several [subscriptions](https://github.com/influxdata/influxql/blob/master/README.md#create-subscription) on InfluxDB.
 These subscriptions tell InfluxDB to send all the data it receives to Kapacitor.
 You should see some basic start up messages and something about listening on UDP port and starting subscriptions.
 At this point InfluxDB is streaming the data it is receiving from Telegraf to Kapacitor.
