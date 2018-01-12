@@ -10,8 +10,8 @@ menu:
 **On this page:**
 
 * [About Chronograf organizations](#about-chronograf-organizations)
-* [Using the default organization](#using-the-default-organization)
-* [Configuring the default organization](#configuring-the-default-organization)
+* [Using the Default organization](#using-the-default-organization)
+* [Configuring the Default organization](#configuring-the-default-organization)
 * [Creating organizations](#creating-organizations)
 * [Removing organizations](#removing-organizations)
 
@@ -22,23 +22,23 @@ menu:
 >
 > For information about the new user roles and SuperAdmin status, see [Managing Chronograf users](/chronograf/latest/administration/managing-chronograf-users/).
 
-A Chronograf organization is a collection of Chronograf users who share common Chronograf-owned resources, including dashboards, InfluxDB and Kapacitor connections, and alerts. Organizations can be used to represent companies, functional units, projects, or teams. Chronograf users can be members of multiple organizations.
+A Chronograf organization is a collection of Chronograf users who share common Chronograf-owned resources, including dashboards, InfluxDB connections, and Kapacitor connections. Organizations can be used to represent companies, functional units, projects, or teams. Chronograf users can be members of multiple organizations.
+
+> ***Note:*** Only users with SuperAdmin status can manage organizations. Admins, editors, viewers, and members cannot manage organizations unless they have SuperAdmin status.
 
 ## Using the Default organization
 
->***Note:*** This default organization can be used to support Chronograf as configured in versions earlier than 1.4.
+>***Note:*** The Default organization can be used to support Chronograf as configured in versions earlier than 1.4.
+> Upon upgrading, any Chronograf resources that existed prior to 1.4 automatically become owned by the Default organization.
 
-Upon installation, the Default organization is ready for use and can be used as-is for many purposes. This Chronograf instance includes the following behaviors:
+Upon installation, the Default organization is ready for use and can be used as-is for many purposes. The Default organization includes the following default behaviors:
 
-* Anyone who can open the application in a web browser can use it.
-* All users are members with SuperAdmin status.
+* All new users are granted SuperAdmin status, regardless of whether authentication is configured, as long as the default **Config** setting for "**All new users are SuperAdmins"** is **On**.
 * Authentication is not required unless OAuth 2.0 authentication is configured.
 
 ## Creating organizations
 
-Upon installation Chronograf includes the Default organization, ready to be used as-is for many purposes.
-
-Additional organizations can be created by SuperAdmin users to support the requirements of your company, organizational units, teams, and projects.
+Your company, organizational units, teams, and projects may require the creation of additional organizations, beyond the Default organization. Additional organizations can be created as described below.
 
 **To create an organization:**
 
@@ -64,11 +64,10 @@ You can configure existing and new organizations in the **Organizations** tab of
 
   > ***Note:*** All organizations other than the Default organization require users to be explicitly added by an administrator.
 
-* **Default Role**: The role granted to new users by default. Valid options are `member` (default), `viewer`, `editor`, and `admin`.
+* **Default Role**: The role granted to new users by default when added to an organization. Valid options are `member` (default), `viewer`, `editor`, and `admin`.
 * **Config**: **All new users are SuperAdmins**: **On** by default. When **Off**, new users will not have SuperAdmin status and SuperAdmin status must be explicity granted by another SuperAdmin.
 
-
-Related information:
+See the following pages for details about managing users and security:
 
 * [Managing Chronograf users](/chronograf/latest/administration/managing-chronograf-users/)
 * [Managing InfluxDB users](/chronograf/latest/administration/managing-influxdb-users/)

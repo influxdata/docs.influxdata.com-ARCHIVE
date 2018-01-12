@@ -1,4 +1,4 @@
----
+capabilities---
 title: Managing Chronograf users
 menu:
   chronograf_1_4:
@@ -16,7 +16,7 @@ menu:
   * [Members](#members-role-member)
   * [Viewers](#viewer-role-viewer)
   * [Editors](#editors-role-editor)
-  * [Administrators](#administrators-role-admin)
+  * [Admins](#admins-role-admin)
 * [Cross-organization SuperAdmin status](#cross-organization-superadmin-status)
 * [Creating users](#creating-users)
 * [Updating users](#updating-users)
@@ -24,7 +24,7 @@ menu:
 
 ## Managing Chronograf users and roles
 
-Starting with Chronograf 1.4, Chronograf includes the ability to create usesrs using role-based access control. Chronograf now has four organization-bound user roles and one cross-organization SuperAdmin status. Within an organization, Chronograf users can be created and assigned roles, updated, and removed by administrators (with the `admin` role) or anyone with SuperAdmin status.
+Starting with Chronograf 1.4, Chronograf includes the ability to create users using role-based access control. Chronograf now has four organization-bound user roles and one cross-organization SuperAdmin status. Within an organization, Chronograf users can be created and assigned roles, updated, and removed by admins (with the `admin` role) or anyone with SuperAdmin status.
 
 ### Organization-bound users
 
@@ -33,13 +33,13 @@ Chronograf users are assigned one of the following four organization-bound user 
 - [`member`](#members-role-member)
 - [`viewer`](#viewer-role-viewer)
 - [`editor`](#editors-role-editor)
-- [`admin`](#administrators-role-admin)
+- [`admin`](#admins-role-admin)
 
-Each of these four roles, described in detail below, have different permission levels and rights to use the following Chronograf-owned or Chronograf-accessed resources.
+Each of these four roles, described in detail below, have different capabilities for the following Chronograf-owned or Chronograf-accessed resources.
 
 #### InfluxDB and Kapacitor users within Chronograf
 
-Chronograf uses InfluxDB and Kapacitor connections to manage user access control to InfluxDB and Kapacitor resources within Chronograf. The permissions of the InfluxDB and Kapacitor user specified within such a connection determine the capabilities for any Chronograf user with access (i.e., viewers, editors, and administrators) to that connection.
+Chronograf uses InfluxDB and Kapacitor connections to manage user access control to InfluxDB and Kapacitor resources within Chronograf. The permissions of the InfluxDB and Kapacitor user specified within such a connection determine the capabilities for any Chronograf user with access (i.e., viewers, editors, and administrators) to that connection. Administrators include either an admin (`admin` role) or a user of any role with SuperAdmin status.
 
 > ***Note:*** Chronograf users are entirely separate from InfluxDB and Kapacitor users. The only association between Chronograf and InfluxDB or Kapacitor users is through an InfluxDB or Kapacitor connection created within Chronograf.
 
@@ -57,17 +57,17 @@ Chronograf-owned resources include internal resources that are under the full co
 
 #### Chronograf-accessed resources
 
-Chronograf-accessed resources include external resources that can be accessed using Chronograf, but are under limited control by Chronograf. Chronograf users with the roles of `viewer`, `editor`, and `admin` have equal access to these resources which include:
+Chronograf-accessed resources include external resources that can be accessed using Chronograf, but are under limited control by Chronograf. Chronograf users with the roles of `viewer`, `editor`, and `admin`, or users with SuperAdmin status, have equal access to these resources:
 
-- InfluxDB databases, users, queries, and time series data
+- InfluxDB databases, users, queries, and time series data (if using InfluxDB Enterprise, InfluxDB roles can be accessed too)
 - Kapacitor alerts and alert rules (called tasks in Kapacitor)
 
 
 #### Members (role:`member`)
 
-Members are Chronograf users who have been added to organizations but do not have any functional permissions. Members can authenticate, but they cannot access any resources within an organization and thus cannot use Chronograf.
+Members are Chronograf users who have been added to organizations but do not have any functional capabilities. Members cannot access any resources within an organization and thus effectively cannot use Chronograf. Instead, a member can only access Purgatory.
 
-By default, new organizations have a default role of `member`. If an organization is in Public mode, then anyone could authenticate and become a member, but not be able to use Chronograf until an administrator adds them to a different role.
+By default, new organizations have a default role of `member`. If the Default organization is Public, then anyone who can authenticate, would become a member, but not be able to use Chronograf until an administrator assigns a different role.
 
 
 #### Viewers (role:`viewer`)
@@ -79,7 +79,7 @@ Viewers are Chronograf users with effectively read-only capabilities for Chronog
 - View InfluxDB connections
 - Switch current InfluxDB connection to other available connections
 - Access InfluxDB resources through the current connection
-- View Kapacitor connections associated with InfluxDB connections
+- View the name of the current Kapacitor connection associated with with each InfluxDB connection
 - Access Kapacitor resources through the current connection
 
 For Chronograf-accessed resources, viewers can:
@@ -104,7 +104,7 @@ Editors are Chronograf users with limited capabilities for Chronograf-owned reso
 - Switch current InfluxDB connection to other available connections
 - Access InfluxDB resources through the current connection
 - Create, view, edit, and delete Kapacitor connections associated with InfluxDB connections
-- Switch current Kapacitor connection to another available connection
+- Switch current Kapacitor connection to other available connections
 - Access Kapacitor resources through the current connection
 
 For Chronograf-accessed resources, editors can:
@@ -130,7 +130,7 @@ Admins are Chronograf users with all capabilities for the following Chronograf-o
 - Switch current InfluxDB connection to other available connections
 - Access InfluxDB resources through the current connection
 - Create, view, edit, and delete Kapacitor connections associated with InfluxDB connections
-- Switch current Kapacitor connection to another available connection
+- Switch current Kapacitor connection to other available connections
 - Access Kapacitor resources through the current connection
 
 For Chronograf-accessed resources, admins can:
@@ -160,7 +160,7 @@ Important SuperAdmin behaviors:
 * SuperAdmin status grants any user (whether `member`, `viewer`, `editor`, or `admin`) the full capabilities of admins and the SuperAdmin capabilities listed above.
 * When a Chronograf user with SuperAdmin status creates a new organization or switches into an organization where that user has no role, that SuperAdmin user is automatically assigned the `admin` role by default.
 * SuperAdmin users cannot revoke their own SuperAdmin status.
-* SuperAdmin users are the only ones who can change the SuperAdmin status of other Chronograf users. Regular admins who do not have SuperAdmin status can perform normal operations on SuperAdmin users (create that user within their organization, change roles, and remove them), but they will not see that these users have SuperAdmin status, nor will any of their actions affect these users' SuperAdmin status.
+* SuperAdmin users are the only ones who can change the SuperAdmin status of other Chronograf users. Regular admins who do not have SuperAdmin status can perform normal operations on SuperAdmin users (create that user within their organization, change roles, and remove them), but they will not see that these users have SuperAdmin status, nor will any of their actions affect the SuperAdmin status of these users.
 * If a user has their SuperAdmin status revoked, that user will retain their assigned roles within their organizations.
 
 ### Creating users
@@ -174,15 +174,15 @@ Role required: `admin`
 1) Add the following user information:
    * **Username**: Enter the username as provided by the OAuth provider.
    * **Role**: Select the Chronograf role.
-   * **Provider**: Type in the OAuth provider to be used for authentication. Valid values are: `github`, `google`, and `auth0`.
+   * **Provider**: Enter the OAuth 2.0 provider to be used for authentication. Valid values are: `github`, `google`, and `auth0`.
    * **Scheme**: Displays `oauth2`, which is the only supported authentication scheme in this release.
-1) Click **Save** to finish adding the user.
+1) Click **Save** to finish creating the user.
 
 ### Updating users
 
 Role required: `admin`
 
-Only a user's role can be updated. A user's username, provider, and scheme cannot be updated.
+Only a user's role can be updated. A user's username, provider, and scheme cannot be updated. (Effectively, to "update" a user's username, provider, or scheme, the user must be removed and added again with the desired values.)
 
 **To change a user's role:**
 

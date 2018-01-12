@@ -20,7 +20,7 @@ menu:
   * [Google](#google)
   * [Auth0](#auth0)
   * [Generic](#generic)
-* [Configuring authentication duration](#optional-configure-authentication-duration)
+* [Configuring authentication duration](#onfiguring-authentication-duration)
 * [TLS](#tls)
   * [Using HTTPS and TLS with Chronograf](#using-https-and-tls-with-chronograf-applications)
   * [Testing with Self-Signed Certificates](#testing-with-self-signed-certificates)
@@ -199,9 +199,9 @@ The following steps will guide you in configuring Google OAuth 2.0 authorization
 
 **Example:**
 ```sh
-export GOOGLE_CLIENT_ID=b339dd4fddd95abec9aa
-export GOOGLE_CLIENT_SECRET=260041897d3252c146ece6b46ba39bc1e54416dc
-export PUBLIC_URL=
+export GOOGLE_CLIENT_ID= 812760930421-kj6rnscmlbv49pmkgr1jq5autblc49kr.apps.googleusercontent.com
+export GOOGLE_CLIENT_SECRET= wwo0m29iLirM6LzHJWE84GRD
+export PUBLIC_URL=http://localhost:8888/google/callback
 ```
 
 4) Set the Chronograf environment variable (or corresponding command line option) required for JWT support:
