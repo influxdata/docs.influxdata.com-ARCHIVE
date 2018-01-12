@@ -11,10 +11,10 @@ menu:
 
 - Fix name error in jolokia2_agent sample config.
 - Fix DC/OS input - login expiration time.
-- Set Content-Type charset in InfluxDB output and allow it be overridden.
+- Set Content-Type charset parameter in InfluxDB output and allow it to be overridden.
 - Document permissions setup for Postfix input.
-- Fix deliver_get field in RabbitMQ input.
-- Escape environment variables during config toml parsing.
+- Fix `deliver_get` field in RabbitMQ input.
+- Escape environment variables during config TOML parsing.
 
 ## v1.5 [2017-12-14]
 
