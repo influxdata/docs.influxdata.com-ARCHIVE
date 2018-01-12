@@ -81,8 +81,13 @@ ability to push task definitions to other servers.
 ```
 $ sudo kapacitor backup /mnt/datastore/kapacitor/bak/kapacitor-20180101.db
 ```
-* `stats` &ndash; displays statistics about the server.  Takes one of the following two arguments.
-   * `general` &ndash; To view values such as the server ID or hostname and to view counts such as the number of tasks and subscriptions.
+* `stats` &ndash; displays statistics about the server.  Takes the following form.
+
+```
+kapacitor stats [general|ingress]
+```
+
+* `stats general` &ndash; To view values such as the server ID or hostname and to view counts such as the number of tasks and subscriptions.
 
    **Example 3 &ndash; General Statistics**
    ```
@@ -96,7 +101,7 @@ $ sudo kapacitor backup /mnt/datastore/kapacitor/bak/kapacitor-20180101.db
    Version:                      1.5.0~n201711280812     
    ```
 
-   * `ingress` &ndash;  To view InfluxDB measurements and the number of datapoints that pass through the Kapacitor server.
+* `stats ingress` &ndash;  To view InfluxDB measurements and the number of datapoints that pass through the Kapacitor server.
 
    **Example 4 &ndash; Ingress Statistics**
    ```
@@ -131,13 +136,112 @@ $ sudo kapacitor backup /mnt/datastore/kapacitor/bak/kapacitor-20180101.db
     telegraf   autogen          swap                     10560
     telegraf   autogen          system                   15840
    ```
-* `vars`
-* `push`
+* `vars` &ndash; Displays a wide range of variables associated with the kapacitor server.  Results are written to the console in JSON format.  To make the results more readable on a linux system, they can be piped to python `json.tool` or another JSON formatter.
+
+**Example 5 &ndash; Kapacitor vars (partial results)**
+
+```
+$ kapacitor vars | python -m json.tool
+{
+    "cluster_id": "ef3b3f9d-0997-4c0b-b1b6-5d0fb37fe509",
+    "cmdline": [
+        "/usr/bin/kapacitord",
+        "-config",
+        "/etc/kapacitor/kapacitor.conf"
+    ],
+    "host": "localhost",
+    "kapacitor": {
+        "04d05f33-3811-4a19-bfea-ee260372ba54": {
+            "name": "topics",
+            "tags": {
+                "cluster_id": "ef3b3f9d-0997-4c0b-b1b6-5d0fb37fe509",
+                "host": "localhost",
+                "id": "c0c740e5-0480-4b34-9cb2-c01ed45f8d70:cpu_alert:alert2",
+                "server_id": "90582c9c-2e25-4654-903e-0acfc48fb5da"
+            },
+            "values": {
+                "collected": 0
+            }
+        },
+        "06523946-cda3-40eb-85b0-5294d6319ea5": {
+            "name": "ingress",
+            "tags": {
+                "cluster_id": "ef3b3f9d-0997-4c0b-b1b6-5d0fb37fe509",
+                "database": "_kapacitor",
+                "host": "localhost",
+                "measurement": "kapacitor",
+                "retention_policy": "autogen",
+                "server_id": "90582c9c-2e25-4654-903e-0acfc48fb5da",
+                "task_master": "main"
+            },
+            "values": {
+                "points_received": 307
+            }
+        },
+        "074bb9e1-e617-4443-8b2f-697d60f05e54": {
+            "name": "edges",
+...
+```
+
+* `push` &ndash; This command is reserved for a planned feature, which will allow tasks to be pushed from one Kapacitor server to another.
 
 ### Services
 
-* `list service-tests`
-* `service-tests`
+Services are functional modules of the Kapacitor server, that handle
+communications with third party applications, server configuration, and
+discovery and scraping of data.  The current status of a service can be checked
+with the command line tool.   
+
+* `list service-tests` &ndash; the `list` command makes it possible to list all
+of the service tests currently available on the server.
+
+**Example 6 &ndash; Listing service tests**
+```
+$ kapacitor list service-tests
+Service Name
+alerta
+azure
+consul
+dns
+ec2
+file-discovery
+gce
+hipchat
+httppost
+influxdb
+kubernetes
+marathon
+mqtt
+nerve
+opsgenie
+pagerduty
+pushover
+scraper
+sensu
+serverset
+slack
+smtp
+snmptrap
+static-discovery
+swarm
+talk
+telegram
+triton
+victorops
+```
+
+* `service-tests` &ndash; The service-tests command executes one or more of the
+available service tests.  Its arguments are one or more of the service names
+returned by `list service-tests`.
+
+**Example 7 &ndash; Service test execution**
+```
+$ kapacitor service-tests slack talk smtp
+Service             Success   Message
+slack               true      
+talk                false     service is not enabled
+smtp                false     service is not enabled
+```
 
 ### Logging
 
