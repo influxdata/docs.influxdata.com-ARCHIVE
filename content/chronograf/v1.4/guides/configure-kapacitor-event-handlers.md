@@ -9,11 +9,11 @@ menu:
 Chronograf works with [Kapacitor](/kapacitor/latest/) to send alert messages to supported event handlers.
 You can use Chronograf to send alert messages to specific URLs as well as to applications like [Slack](https://slack.com/) and [HipChat](https://www.hipchat.com/).
 
-This guide offers step-by-step instructions for setting up a few common event handlers in Chronograf.
+This guide offers step-by-step instructions for setting up a few of the common event handlers in Chronograf.
 
 ## Kapacitor event handlers are supported in Chronograf?
 
-Chronograf integrates with [Kapacitor](/kapacitor/v1.3/), InfluxData's data processing platform, to send alert messages to event handlers.
+Chronograf integrates with [Kapacitor](/kapacitor/latest/), InfluxData's data processing platform, to send alert messages to event handlers.
 Chronograf supports the following event handlers:
 
 * Alerta
@@ -31,8 +31,8 @@ Chronograf supports the following event handlers:
 * TCP
 * VictorOps
 
-To configure a Kapacitor event handler in Chronograf, [install Kapacitor](/chronograf/v1.3/introduction/getting-started/#kapacitor-setup) and [connect it to Chronograf](/chronograf/v1.3/introduction/getting-started/#4-connect-chronograf-to-kapacitor).
-The Configure Kapacitor page includes the event handler configuration options; see the [Configure Kapacitor event handlers](/chronograf/v1.3/guides/configure-kapacitor-event-handlers/) guide for more information.
+To configure a Kapacitor event handler in Chronograf, [install Kapacitor](/chronograf/latest/introduction/getting-started/#kapacitor-setup) and [connect it to Chronograf](/chronograf/latest/introduction/getting-started/#4-connect-chronograf-to-kapacitor).
+The Configure Kapacitor page includes the event handler configuration options; see the [Configure Kapacitor event handlers](/chronograf/latest/guides/configure-kapacitor-event-handlers/) guide for more information.
 
 ### Content
 
@@ -41,14 +41,14 @@ The Configure Kapacitor page includes the event handler configuration options; s
 * [Slack](#slack)
 * [Telegram](#telegram)
 
-## Locate Event Handler Configurations
+## Locate event handler configurations
 
 Event handler configurations appear on the Chronograf Configure Kapacitor page.
 You must have a connected Kapacitor instance to access the configurations.
-See the Getting Started guide for [Kapacitor installation instructions](/chronograf/v1.4/introduction/getting-started/#kapacitor-setup) and how to [connect a Kapacitor instance](/chronograf/v1.4/introduction/getting-started/#4-connect-chronograf-to-kapacitor) to Chronograf.
+See the Getting Started guide for [Kapacitor installation instructions](/chronograf/latest/introduction/getting-started/#kapacitor-setup) and how to [connect a Kapacitor instance](/chronograf/latest/introduction/getting-started/#4-connect-chronograf-to-kapacitor) to Chronograf.
 
 Note that the configuration options in the `Configure alert endpoints` section are not all-inclusive.
-Some event handlers allow users to customize event handler configurations per [alert rule](/chronograf/v1.4/guides/create-a-kapacitor-alert/).
+Some event handlers allow users to customize event handler configurations per [alert rule](/chronograf/latest/guides/create-a-kapacitor-alert/).
 For example, Chronograf's Slack integration allows users to specify a default channel in the `Configure alert endpoints` section and a different channel for individual alert rules.
 
 ## HipChat
@@ -57,7 +57,7 @@ For example, Chronograf's Slack integration allows users to specify a default ch
 Configure Chronograf to send alert messages to a HipChat room.
 The sections below describe each configuration option.
 
-![HipChat configuration](/img/chronograf/v1.4/g-eventhandlers-hipchat.png)
+![HipChat configuration](/img/chronograf/latest/g-eventhandlers-hipchat.png)
 
 ### Subdomain
 
@@ -87,7 +87,7 @@ The following steps describe how to create the API access token:
 
 Your token appears in the table just above the `Create new token` section:
 
-![HipChat token](/img/chronograf/v1.4/g-eventhandlers-hipchattoken.png)
+![HipChat token](/img/chronograf/latest/g-eventhandlers-hipchattoken.png)
 
 ## Slack
 
@@ -95,7 +95,7 @@ Your token appears in the table just above the `Create new token` section:
 Configure Chronograf to send alerts to an existing Slack channel or as a [direct message (DM)](https://get.slack.help/hc/en-us/articles/201925108-About-channels-and-direct-messages).
 The sections below describe each configuration option.
 
-![Slack configuration](/img/chronograf/v1.4/g-eventhandlers-slack.png)
+![Slack configuration](/img/chronograf/latest/g-eventhandlers-slack.png)
 
 ### Slack WebHook URL
 
@@ -115,7 +115,7 @@ note that you can configure Chronograf to send messages to a different Slack cha
 
 Your Slack WebHook URL appears next to `Webhook URL`:
 
-![Slack WebHook](/img/chronograf/v1.4/g-eventhandlers-slackwebhook.png)
+![Slack WebHook](/img/chronograf/latest/g-eventhandlers-slackwebhook.png)
 
 ### Slack Channel
 
@@ -123,7 +123,7 @@ Chronograf sends alert messages to this channel or DM by default.
 The channel or DM must already exist in Slack.
 Prefix a channel with `#` and a DM with `@`; for example, `#chronocats` is a channel and `@chronothan` is a DM.
 
-If you do not specify a channel or DM, Chronograf sends alert messages to the channel or DM that you selected for the WebHook URL or to the channel or DM specified in the [alert rule](/chronograf/v1.4/guides/create-a-kapacitor-alert/).
+If you do not specify a channel or DM, Chronograf sends alert messages to the channel or DM that you selected for the WebHook URL or to the channel or DM specified in the [alert rule](/chronograf/latest/guides/create-a-kapacitor-alert/).
 The channel or DM specified in the alert rule takes precedence over both the `Slack Channel` configuration option and the WebHook URL configuration.
 
 ## Telegram
@@ -132,7 +132,7 @@ The channel or DM specified in the alert rule takes precedence over both the `Sl
 Configure Chronograf to send alert messages to an existing Telegram bot.
 The sections below describe each configuration option.
 
-![Telegram configuration](/img/chronograf/v1.4/g-eventhandlers-telegram.png)
+![Telegram configuration](/img/chronograf/latest/g-eventhandlers-telegram.png)
 
 ### Telegram Bot
 
@@ -231,7 +231,7 @@ In the example below, the chat ID is `123456789`.
     {"ok":true,"result":[{"update_id":XXXXXXXXX,
     "message":{"message_id":2,"from":{"id":123456789,"first_name":"Mushroom","last_name":"Kap"},"chat":{"id":123456789,"first_name":"Mushroom","last_name":"Kap","type":"private"},"date":1487183963,"text":"hi"}}]}
 
-### Select the Alert Message Format
+### Select the alert message format
 
 Select `Markdown` or `HTML` for Markdown-formatted or HTML-formatted alert messages.
 The default message format is `Markdown`.

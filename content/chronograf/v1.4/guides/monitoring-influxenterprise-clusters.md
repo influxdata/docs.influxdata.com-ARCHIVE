@@ -6,7 +6,7 @@ menu:
     parent: Guides
 ---
 
-[InfluxEnterprise](/enterprise_influxdb/v1.2/) offers high availability and a highly scalable clustering solution for your time series data needs.
+[InfluxEnterprise](/enterprise_influxdb/latest/) offers high availability and a highly scalable clustering solution for your time series data needs.
 Use Chronograf to assess your cluster's health and to monitor the infrastructure behind your project.
 
 This guide offers step-by-step instructions for using Chronograf, [InfluxDB](/influxdb/latest/), and [Telegraf](/telegraf/latest/) to monitor data nodes in your InfluxEnteprise cluster.
@@ -16,33 +16,33 @@ This guide offers step-by-step instructions for using Chronograf, [InfluxDB](/in
 You have a fully-functioning InfluxEnterprise cluster with authentication enabled.
 See the InfluxEnterprise documentation for
 [detailed setup instructions](/enterprise_influxdb/latest/production_installation/).
-This guide uses a cluster with three meta nodes and three data nodes; the steps are also applicable to other cluster configurations.
+This guide uses an InfluxData Enterprise cluster with three meta nodes and three data nodes; the steps are also applicable to other cluster configurations.
 
 InfluxData recommends using a separate server to store your monitoring data.
-It is possible to store the monitoring data in your cluster and [connect the cluster to Chronograf](/chronograf/v1.4/troubleshooting/frequently-asked-questions/#how-do-i-connect-chronograf-to-an-influxenterprise-cluster), but, in general, your monitoring data should live on a separate server.
+It is possible to store the monitoring data in your cluster and [connect the cluster to Chronograf](/chronograf/latest/troubleshooting/frequently-asked-questions/#how-do-i-connect-chronograf-to-an-influxenterprise-cluster), but, in general, your monitoring data should live on a separate server.
 
-You're working on an Ubuntu 16.04 installation.
+You're working on an Ubuntu installation.
 Chronograf and the other components of the TICK stack are supported on several operating systems and hardware architectures. Check out the [downloads page](https://portal.influxdata.com/downloads) for links to the binaries of your choice.
 
-## Architecture Overview
+## Architecture overview
 
 Before we begin, here's an overview of the final monitoring setup:
 
-![Architecture diagram](/img/chronograf/v1.4/g-cluster-diagram.png)
+![Architecture diagram](/img/chronograf/latest/g-cluster-diagram.png)
 
 The diagram above shows an InfluxEnterprise cluster that consists of three meta nodes (M) and three data nodes (D).
 Each data node has its own [Telegraf](/telegraf/latest/) instance (T).
 
-Each Telegraf instance is configured to collect node CPU, disk, and memory data using Telegraf's [system stats](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) input plugin.
+Each Telegraf instance is configured to collect node CPU, disk, and memory data using the Telegraf [system stats](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) input plugin.
 The Telegraf instances are also configured to send those data to a single [InfluxDB OSS](/influxdb/latest/) instance that lives on a separate server.
 When Telegraf sends data to InfluxDB, it automatically [tags](/influxdb/latest/concepts/glossary/#tag) the data with the hostname of the relevant data node.
 
 The InfluxDB OSS instance that stores the Telegraf data is connected to Chronograf.
 Chronograf uses the hostnames in the Telegraf data to populate the Host List page and provide other hostname-specific information in the user interface.
 
-## Setup Description
+## Setup description
 
-### InfluxDB OSS Setup
+### InfluxDB OSS setup
 
 #### Step 1: Download and install InfluxDB
 
@@ -95,7 +95,7 @@ A successful `CREATE USER` query returns a blank result:
 {"results":[{"statement_id":0}]}   <--- Success!
 ```
 
-### Telegraf Setup
+### Telegraf setup
 
 Perform the following steps on each data node in your cluster.
 You'll return to your InfluxDB instance at the end of this section.
@@ -240,7 +240,7 @@ This is not a requirement; you may host Chronograf on a separate server.
 To access Chronograf, go to `http://<ip_address>:8888`, where <ip_address> is the IP address of your InfluxDB OSS instance.
 The welcome page includes instructions for connecting Chronograf to that instance.
 
-![Connect Chronograf to InfluxDB](/img/chronograf/v1.4/g-cluster-welcome.png)
+![Connect Chronograf to InfluxDB](/img/chronograf/latest/g-cluster-welcome.png)
 
 For the `Connection String`, enter the hostname or IP of your InfluxDB OSS instance, and be sure to include the default port: `8086`.
 Next, name your data source; this can be anything you want.
@@ -249,22 +249,22 @@ Finally, enter your username and password and click `Add Source`.
 ### Step 4: Explore the monitoring data in Chronograf
 
 Chronograf works with the Telegraf data in your InfluxDB OSS instance.
-The `Host List` page, the first page that you see in Chronograf, shows your data node's hostnames, their statuses, CPU usage, load, and their configured [applications](/chronograf/v1.4/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf).
+The `Host List` page, the first page that you see in Chronograf, shows your data node's hostnames, their statuses, CPU usage, load, and their configured [applications](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf).
 In this case, you've only enabled the system stats input plugin so `system` is the single application that appears in the `Apps` column.
 
-![Host List page](/img/chronograf/v1.4/g-cluster-hostlist.png)
+![Host List page](/img/chronograf/latest/g-cluster-hostlist.png)
 
-Click `system` to see Chronograf's pre-created dashboard for that application.
+Click `system` to see the Chronograf canned dashboard for that application.
 Keep an eye on your data nodes by viewing that dashboard for each hostname:
 
-![Pre-created dashboard](/img/chronograf/v1.4/g-cluster-predash.gif)
+![Pre-created dashboard](/img/chronograf/latest/g-cluster-predash.gif)
 
 Next, check out the Data Explorer to create a customized graph with the monitoring data.
-In the image below, we use Chronograf's query editor to visualize the idle CPU usage data for each data node:
+In the image below, the Chronograf query editor is used to visualize the idle CPU usage data for each data node:
 
-![Data Explorer](/img/chronograf/v1.4/g-cluster-de.png)
+![Data Explorer](/img/chronograf/latest/g-cluster-de.png)
 
-Create more customized graphs and save them to a dashboard on Chronograf's Dashboard page.
-See the [Create a Dashboard](/chronograf/v1.4/guides/create-a-dashboard/) guide for more information.
+Create more customized graphs and save them to a dashboard on the Dashboard page in Chronograf.
+See the [Creating Chronograf dashboards](/chronograf/latest/guides/create-a-dashboard/) guide for more information.
 
 That's it! You've successfully configured Telegraf to collect and write data, InfluxDB to store those data, and Chonograf to use those data for monitoring and visualization purposes.

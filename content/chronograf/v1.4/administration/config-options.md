@@ -136,7 +136,7 @@ Environment variable: `$BOLT_PATH`
 
 ### `--canned-path=` | `-c`
 
-The path to the directory for [canned dashboards](/chronograf/v1.4/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf)
+The path to the directory for [canned dashboards](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf)
 
 Default value: `/usr/share/chronograf/canned`
 
@@ -182,19 +182,19 @@ Environment variable: `$GH_ORGS`
 
 ### `--google-client-id=`
 
-The Google Client ID value for OAuth 2.0 support.
+The Google Client ID value required for OAuth 2.0 support.
 
 Environment variable: `$GOOGLE_CLIENT_ID`
 
 ### `--google-client-secret=`
 
-The Google Client Secret value for OAuth 2.0 support.
+The Google Client Secret value required for OAuth 2.0 support.
 
 Environment variable: `$GOOGLE_CLIENT_SECRET`
 
 ### `--google-domains=`
 
-The Google email domain user is required to have an active membership.
+[Optional] Restricts authorization to users from specified Google email domains.
 
 Environment variable: `$GOOGLE_DOMAINS`
 
@@ -231,9 +231,9 @@ Environment variable: `$AUTH0_CLIENT_SECRET`
 
 ### `--auth0-organizations=`
 
-The Auth0 organization required to access Chronograf.
+The Auth0 organization required to access Chronograf. Optional.
 Organizations are set using an "organization" key in the user's `app_metadata`.
-Lists are comma-separated and only available when using environment variables.
+Lists are comma-separated and are only available when using environment variables.
 
 Environment variable: `$AUTH0_ORGS`
 

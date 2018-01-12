@@ -18,7 +18,7 @@ menu:
 
 ## About Chronograf organizations
 
-> ***Note:*** Support for organizations and individual users (rather than the shared user) is new in Chronograf 1.4.
+> ***Note:*** Support for organizations and distinct users with role-based access control is new in Chronograf 1.4.
 >
 > For information about the new user roles and SuperAdmin status, see [Managing Chronograf users](/chronograf/latest/administration/managing-chronograf-users/).
 
@@ -36,13 +36,13 @@ Upon installation, the Default organization is ready for use and can be used as-
 
 ## Creating organizations
 
-**Required status:** SuperAdmin
-
 Upon installation Chronograf includes the Default organization, ready to be used as-is for many purposes.
 
 Additional organizations can be created by SuperAdmin users to support the requirements of your company, organizational units, teams, and projects.
 
 **To create an organization:**
+
+**Required status:** SuperAdmin
 
 1) In the Chronograf navigation bar, click **Admin** (crown icon) > **Chronograf** to open the **Chronograf Admin** page.
 2) In the **Organizations** tab, click **Create Organization**.
@@ -65,9 +65,8 @@ You can configure existing and new organizations in the **Organizations** tab of
   > ***Note:*** All organizations other than the Default organization require users to be explicitly added by an administrator.
 
 * **Default Role**: The role granted to new users by default. Valid options are `member` (default), `viewer`, `editor`, and `admin`.
-* **Config**: **All new users are SuperAdmins**: Enabled by default, toggling this to **Off** any new users must be explicitly granted SuperAdmin status.
+* **Config**: **All new users are SuperAdmins**: **On** by default. When **Off**, new users will not have SuperAdmin status and SuperAdmin status must be explicity granted by another SuperAdmin.
 
-JWT and OAuth 2.0 authentication providers are functional components of the Chronograf security model
 
 Related information:
 
@@ -77,16 +76,16 @@ Related information:
 
 ## Removing organizations
 
-**Required status:** SuperAdmin
-
 When an organization is removed:
 
-* Users within that organization are removed and no longer authorized and will be logged out of the application.
+* Users within that organization are removed from that organization and will be logged out of the application.
 * All users with roles in that organization are updated to no longer have a role in that organization
-* All resources specific to that organization are deleted.
+* All resources owned by that organization are deleted.
 
 
 **To remove an organization:**
+
+**Required status:** SuperAdmin
 
 1) In the navigation bar of the Chronograf application, select **Admin** (crown icon) > **Chronograf** to open the **Chronograf Admin** page.
 2) Click the **Organizations** tab to view a list of organizations.
