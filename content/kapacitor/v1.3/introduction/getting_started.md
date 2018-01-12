@@ -247,7 +247,7 @@ zář 01 15:34:16 algonquin kapacitord[18526]: 2017/09/01 15:34:16 Using configu
 
 ```
 
-Since InfluxDB is running on `http://localhost:8086` Kapacitor finds it during start up and creates several [subscriptions](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#create-subscription) on InfluxDB.
+Since InfluxDB is running on `http://localhost:8086` Kapacitor finds it during start up and creates several [subscriptions](https://github.com/influxdata/influxql/blob/master/README.md#create-subscription) on InfluxDB.
 These subscriptions tell InfluxDB to send all the data it receives to Kapacitor.
 
 For more log data check the log file in the traditional `/var/log/kapacitor` directory.

@@ -98,7 +98,7 @@ This consistency is good for those developing and consuming the API: everyone in
 
 REST, however, is a convention.
 InfluxDB makes do with three API endpoints.
-This simple, easy to understand system uses HTTP as a transfer system for [InfluxQL](https://github.com/influxdb/influxdb/blob/master/influxql/README.md).
+This simple, easy to understand system uses HTTP as a transfer system for [InfluxQL](https://github.com/influxdata/influxql/blob/master/README.md).
 The InfluxDB API makes no attempt to be RESTful.
 
 ### HTTP response summary
