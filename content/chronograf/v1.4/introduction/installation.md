@@ -8,7 +8,7 @@ menu:
 ---
 
 This page provides the requirements for installing and configuring Chronograf.
-For the fastest way to get up and running with Chronograf, see the [Getting Started](/chronograf/v1.4/introduction/getting-started/) guide.
+For the fastest way to get up and running with Chronograf, see the [Getting Started](/chronograf/latest/introduction/getting-started/) guide.
 
 ### Content
 
@@ -37,23 +37,23 @@ A single Chronograf instance can support several InfluxDB instances or InfluxEnt
 
 **Installation Resources:**
 
-* [Getting Started](/chronograf/v1.4/introduction/getting-started/) guides you how to quickly start using Chronograf with an InfluxDB instance.
-* [Monitor an InfluxEnterprise Cluster](/chronograf/v1.4/guides/monitoring-influxenterprise-clusters/) offers setup instructions for using Chronograf with an InfluxEnterprise cluster
+* [Getting Started](/chronograf/latest/introduction/getting-started/) guides you how to quickly start using Chronograf with an InfluxDB instance.
+* [Monitor an InfluxEnterprise Cluster](/chronograf/latest/guides/monitoring-influxenterprise-clusters/) offers setup instructions for using Chronograf with an InfluxEnterprise cluster
 * [InfluxDB documentation](/influxdb/latest/)
 * [InfluxDB Enterprise documentation](/enterprise_influxdb/latest/)
 
 #### Telegraf (recommended)
 [Telegraf](/telegraf/latest/) is the InfluxData plugin-driven server agent for collecting and reporting metrics.
 Telegraf collects data and writes data to the InfluxDB instance or InfluxEnterprise cluster that is connected to Chronograf.
-Chronograf is designed to work with Telegraf data and offers [pre-created dashboards](/chronograf/v1.4/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf) for several Telegraf input plugins.
+Chronograf is designed to work with Telegraf data and offers [pre-created dashboards](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf) for several Telegraf input plugins.
 
 Chronograf requires at least one Telegraf instance that collects data and writes the data to an InfluxDB instance or InfluxEnterprise cluster.
 Minimally, the Telegraf instance must have enabled the [system statistics](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) input plugin, which provides the system-level data necessary for the Chronograf interface.
 
 **Installation Resources:**
 
-* [Getting started](/chronograf/v1.4/introduction/getting-started/) offers setup instructions for using Chronograf and InfluxDB with one Telegraf instance
-* [Monitor an InfluxEnterprise cluster](/chronograf/v1.4/guides/monitoring-influxenterprise-clusters/) offers setup instructions for using Chronograf and an InfluxEnterprise Cluster with several Telegraf instances
+* [Getting started](/chronograf/latest/introduction/getting-started/) offers setup instructions for using Chronograf and InfluxDB with one Telegraf instance
+* [Monitor an InfluxEnterprise cluster](/chronograf/latest/guides/monitoring-influxenterprise-clusters/) offers setup instructions for using Chronograf and an InfluxEnterprise Cluster with several Telegraf instances
 * [Telegraf Documentation](/telegraf/latest/)
 
 #### Kapacitor (optional)
@@ -68,14 +68,14 @@ You do not need a Kapacitor instance if you plan on only using Chronograf's host
 
 **Installation Resources:**
 
-* [Getting Started](/chronograf/v1.4/introduction/getting-started/) offers setup instructions for using Chronograf with a Kapacitor instance
-* [Configure Kapacitor Event Handlers](/chronograf/v1.4/guides/configure-kapacitor-event-handlers/) offers setup instructions for Kapacitor event handlers in Chronograf
+* [Getting Started](/chronograf/latest/introduction/getting-started/) offers setup instructions for using Chronograf with a Kapacitor instance
+* [Configure Kapacitor Event Handlers](/chronograf/latest/guides/configure-kapacitor-event-handlers/) offers setup instructions for Kapacitor event handlers in Chronograf
 * [Kapacitor Documentation](/kapacitor/latest/)
 
 ### Networking
 
 Chronograf runs on `localhost:8888` by default.
-Those settings are [configurable](/chronograf/v1.4/administration/config-options).
+Those settings are [configurable](/chronograf/latest/administration/config-options).
 
 ## Builds
 
@@ -111,5 +111,5 @@ The next time you un-TAR a new version of Chronograf, simply change the `<versio
 
 ## Configuration and Security
 
-See [Configuring Chronograf](/chronograf/v1.4/administration/configuration/) for a description of the available configuration options.
-See [Managing security](/chronograf/v1.4/administration/security-best-practices/) for TLS and OAuth 2.0 setup instructions.
+See [Configuring Chronograf](/chronograf/latest/administration/configuration/) for a description of the available configuration options.
+See [Managing security](/chronograf/latest/administration/security-best-practices/) for TLS and OAuth 2.0 setup instructions.
