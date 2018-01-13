@@ -11,6 +11,7 @@ menu:
 
 [Managing Chronograf users and roles](#managing-chronograf-users-and-roles)
 * [Organization-bound users](#organization-bound-users)
+  * [InfluxDB and Kapacitor users within Chronograf](#influxdb-and-kapacitor-users-within-chronograf)
   * [Chronograf-owned resources](#chronograf-owned-resources)
   * [Chronograf-accessed resources](#chronograf-accessed-resources)
   * [Members](#members-role-member)
@@ -21,6 +22,10 @@ menu:
 * [Creating users](#creating-users)
 * [Updating users](#updating-users)
 * [Removing users](#removing-users)
+* [Navigating organizations](#navigating-organizations)
+  * [Logging in and logging out](#logging-in-and-logging-out)
+  * [Switching the current organization](#switching-the-current-organization)
+  * [Purgatory](#purgatory)
 
 ## Managing Chronograf users and roles
 
