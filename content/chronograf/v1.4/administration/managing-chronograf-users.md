@@ -65,7 +65,7 @@ Chronograf-accessed resources include external resources that can be accessed us
 
 #### Members (role:`member`)
 
-Members are Chronograf users who have been added to organizations but do not have any functional capabilities. Members cannot access any resources within an organization and thus effectively cannot use Chronograf. Instead, a member can only access Purgatory.
+Members are Chronograf users who have been added to organizations but do not have any functional capabilities. Members cannot access any resources within an organization and thus effectively cannot use Chronograf. Instead, a member can only access Purgatory, where the user can [switch into organizations](#navigating-organizations) based on assigned roles.
 
 By default, new organizations have a default role of `member`. If the Default organization is Public, then anyone who can authenticate, would become a member, but not be able to use Chronograf until an administrator assigns a different role.
 
@@ -81,6 +81,7 @@ Viewers are Chronograf users with effectively read-only capabilities for Chronog
 - Access InfluxDB resources through the current connection
 - View the name of the current Kapacitor connection associated with with each InfluxDB connection
 - Access Kapacitor resources through the current connection
+- [Switch into organizations](#navigating-organizations) where the user has a role
 
 For Chronograf-accessed resources, viewers can:
 
@@ -106,6 +107,7 @@ Editors are Chronograf users with limited capabilities for Chronograf-owned reso
 - Create, view, edit, and delete Kapacitor connections associated with InfluxDB connections
 - Switch current Kapacitor connection to other available connections
 - Access Kapacitor resources through the current connection
+- [Switch into organizations](#navigating-organizations) where the user has a role
 
 For Chronograf-accessed resources, editors can:
 
@@ -132,6 +134,7 @@ Admins are Chronograf users with all capabilities for the following Chronograf-o
 - Create, view, edit, and delete Kapacitor connections associated with InfluxDB connections
 - Switch current Kapacitor connection to other available connections
 - Access Kapacitor resources through the current connection
+- [Switch into organizations](#navigating-organizations) where the user has a role
 
 For Chronograf-accessed resources, admins can:
 
@@ -151,7 +154,7 @@ SuperAdmin status is a Chronograf status that allows any user, regardless of rol
 
 * Create, view, update, and remove organizations
 * Create, view, update, and remove users within an organization
-* Switch into any organization
+* [Switch into any organization](#switching-organizations)
 * Toggle the Public setting of the Default organization
 * Toggle the global config setting for `All new users are SuperAdmin`
 
@@ -199,3 +202,27 @@ Role required: `admin`
 1) Open Chronograf in your web browser and select **Admin (crown icon) > Chronograf**.
 1) Click the **Users** tab to display the list of users.
 1) Hover your cursor over the user you want to remove and then click **Remove** and **Confirm**.
+
+### Navigating organizations
+
+Chronograf is always used in the context of an organization. When a user without SuperAdmin status logs in to Chronograf, the user will access the resources owned by their current organization.
+
+#### Logging in and logging out
+
+A user can log in from the Chronograf homepage using any configured OAuth 2.0 provider.
+
+A user can log out by hovering over the **User (person icon)** in the left navigation bar and clicking **Log out**.
+
+#### Switching the current organization
+
+A user's current organization and role is highlighted in the **Switch Organizations** list, which can be found by hovering over the **User (person icon)** in the left navigation bar.
+
+When a user has a role in more than one organization, that user can switch into any other organization where they have a role by selecting the desired organization in the **Switch Organizations** list.
+
+#### Purgatory
+
+If at any time, a user is a `member` within their current organization and does not have SuperAdmin status, that user will be redirected to a page called Purgatory. There, the user will see their current organization and role, as well as a message to contact an administrator for access.
+
+On the same page, that user will see a list of all of their organizations and roles. The user can switch into any listed organization where their role is `viewer`, `editor`, or `admin` by clicking **Log in** next to the desired organization.
+
+**Note** In the rare case that a user is granted SuperAdmin status while in Purgatory, they will be able to switch into any listed organization.
