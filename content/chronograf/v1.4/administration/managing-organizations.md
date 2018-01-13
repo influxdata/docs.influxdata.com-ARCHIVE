@@ -11,8 +11,8 @@ menu:
 
 * [About Chronograf organizations](#about-chronograf-organizations)
 * [Using the Default organization](#using-the-default-organization)
-* [Configuring the Default organization](#configuring-the-default-organization)
 * [Creating organizations](#creating-organizations)
+* [Configuring organizations](#configuring-organizations)
 * [Removing organizations](#removing-organizations)
 
 
