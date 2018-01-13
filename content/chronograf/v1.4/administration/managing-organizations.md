@@ -44,7 +44,7 @@ Your company, organizational units, teams, and projects may require the creation
 1) In the Chronograf navigation bar, click **Admin** (crown icon) > **Chronograf** to open the **Chronograf Admin** page.
 2) In the **Organizations** tab, click **Create Organization**.
 3) Under **Name**, click on **"Untitled Organization"** and enter the new organization name.
-4) Under **Default Role**, select the default role for new users. Valid options include `member` (default), `viewer`, `editor`, and `admin`.
+4) Under **Default Role**, select the default role for new users within that organization. Valid options include `member` (default), `viewer`, `editor`, and `admin`.
 5) Click **Save**.
 
 ## Configuring organizations
