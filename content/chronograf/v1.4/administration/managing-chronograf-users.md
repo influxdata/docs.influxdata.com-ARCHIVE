@@ -230,4 +230,4 @@ If at any time, a user is a `member` within their current organization and does 
 
 On the same page, that user will see a list of all of their organizations and roles. The user can switch into any listed organization where their role is `viewer`, `editor`, or `admin` by clicking **Log in** next to the desired organization.
 
-**Note** In the rare case that a user is granted SuperAdmin status while in Purgatory, they will be able to switch into any listed organization.
+**Note** In the rare case that a user is granted SuperAdmin status while in Purgatory, they will be able to switch into any listed organization, as expected.
