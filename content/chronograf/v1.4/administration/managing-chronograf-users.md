@@ -205,7 +205,7 @@ Role required: `admin`
 
 ### Navigating organizations
 
-Chronograf is always used in the context of an organization. When a user without SuperAdmin status logs in to Chronograf, the user will access the resources owned by their current organization.
+Chronograf is always used in the context of an organization. When a user logs in to Chronograf, that user will access only the resources owned by their current organization. The only exception to this is that users with SuperAdmin status will also be able to [manage organizations](#managing-organizations) in the Chronograf Admin page.
 
 #### Logging in and logging out
 
