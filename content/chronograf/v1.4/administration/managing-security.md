@@ -136,8 +136,8 @@ export TOKEN_SECRET=Super5uperUdn3verGu355!
 Alternatively, these environment variables can be set using the equivalent command line options:
 
 * [`--github-client-id=`](/chronograf/latest/administration/configuration/#github-client-id)
-* [`--github-client-secret=`](/chronograf/latest/administration/configuration/#ithub-client-secret)
-* [`--token_secret=`](chronograf/latest/administration/config-options.md#--token-secret---t)
+* [`--github-client-secret=`](/chronograf/latest/administration/configuration/#github-client-secret)
+* [`--token_secret=`](/chronograf/latest/administration/config-options.md#--token-secret---t)
 
 #### Optional GitHub organizations
 
@@ -159,7 +159,7 @@ export GH_ORGS=hill-valley-preservation-sociey,the-pinheads
 
 ### Google
 
-Chronograf supports using the [Google OAuth 2.0 authentication proivder](https://developers.google.com/identity/protocols/OAuth2) to request authorization and provide authentication. To use GitHub authentication, you need to register a GitHub application and use the assigned Client ID and Client Secret.
+Chronograf supports using the [Google OAuth 2.0 authentication proivder](https://developers.google.com/identity/protocols/OAuth2) to request authorization and provide authentication. To use Google authentication, you need to register a Google application and use the assigned Client ID and Client Secret, as well as specify a Public URL.
 
 #### Overview
 
@@ -182,9 +182,9 @@ The following steps will guide you in configuring Google OAuth 2.0 authorization
 
 **To create a Google OAuth 2.0 application:**
 
-1) Obtain the required Google OAuth 2.0 credentials, including a Google client ID and client Secret, by following the steps in [Obtain Oauth 2.0 credentials](https://developers.google.com/identity/protocols/OpenIDConnect#getcredentials).
+1) Obtain the required Google OAuth 2.0 credentials, including a Google Client ID and Client Secret, by following the steps in [Obtain Oauth 2.0 credentials](https://developers.google.com/identity/protocols/OpenIDConnect#getcredentials).
 2) Verify that Chronograf is publicly accessible using a fully-qualified domain name so that Google can properly redirect users back to the application.
-3) Set the Chronograf environment variables (or corresponding command line options) for the Google OAuth 2.0 credentials and public URL:
+3) Set the Chronograf environment variables (or corresponding command line options) for the Google OAuth 2.0 credentials and Public URL:
 
 * `GOOGLE_CLIENT_ID` (Google client ID)
 * `GOOGLE_CLIENT_SECRET` (Google client Secret)
