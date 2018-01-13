@@ -42,8 +42,7 @@ To configure any of the supported OAuth 2.0 providers to work with Chronograf, y
 
 **To set the TOKEN_SECRET option:**
 
-1) Provide a secure arbitrary string that Chronograf will use to generate the JWT Signature used with access tokens.
-2) Set the TOKEN_SECRET environment variable to the secret string.
+Set the value of the TOKEN_SECRET environment variable to a secure, arbitrary string. Chronograf will use this secret to generate the JWT Signature for all access tokens.
 
 **Example:**
 
