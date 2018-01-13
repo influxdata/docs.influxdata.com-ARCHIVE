@@ -84,7 +84,7 @@ Viewers are Chronograf users with effectively read-only capabilities for Chronog
 - View InfluxDB connections
 - Switch current InfluxDB connection to other available connections
 - Access InfluxDB resources through the current connection
-- View the name of the current Kapacitor connection associated with with each InfluxDB connection
+- View the name of the current Kapacitor connection associated with each InfluxDB connection
 - Access Kapacitor resources through the current connection
 - [Switch into organizations](#navigating-organizations) where the user has a role
 
