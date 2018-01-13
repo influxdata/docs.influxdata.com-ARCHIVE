@@ -62,7 +62,6 @@ You can configure existing and new organizations in the **Organizations** tab of
   > ***Note:*** All organizations other than the Default organization require users to be explicitly added by an administrator.
 
 * **Default Role**: The role granted to new users by default when added to an organization. Valid options are `member` (default), `viewer`, `editor`, and `admin`.
-* **Config**: **All new users are SuperAdmins**: **On** by default. When **Off**, new users will not have SuperAdmin status and SuperAdmin status must be explicity granted by another SuperAdmin.
 
 See the following pages for details about managing users and security:
 
