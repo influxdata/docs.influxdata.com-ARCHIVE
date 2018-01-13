@@ -17,8 +17,8 @@ Follow the links below for more information.
 
 ## [Managing InfluxDB users](/chronograf/latest/administration/managing-influxdb-users/)
 
+## [Managing Chronograf security](/chronograf/latest/administration/managing-security/)
+
 ## [Managing Chronograf organizations](/chronograf/latest/administration/managing-organizations/)
 
 ## [Managing Chronograf users](/chronograf/latest/administration/managing-chronograf-users/)
-
-## [Managing security](/chronograf/latest/administration/managing-security/)
