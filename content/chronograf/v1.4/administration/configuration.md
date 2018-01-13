@@ -48,4 +48,3 @@ After you configure OAuth 2.0 authentication in Chronograf, you can use the mult
 
 * [Managing organizations](/chronograf/latest/administration/managing-organization)
 * [Managing Chronograf users](/chronograf/latest/administration/managing-chronograf-users)
-* [Managing roles](/chronograf/latest/administration/managing-roles)
