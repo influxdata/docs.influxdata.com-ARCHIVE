@@ -19,6 +19,7 @@ menu:
   * [Editors](#editors-role-editor)
   * [Admins](#admins-role-admin)
 * [Cross-organization SuperAdmin status](#cross-organization-superadmin-status)
+  * [All New Users are SuperAdmins configuration option](#all-new-users-are-superadmins-configuration-option)
 * [Creating users](#creating-users)
 * [Updating users](#updating-users)
 * [Removing users](#removing-users)
@@ -159,9 +160,10 @@ SuperAdmin status is a Chronograf status that allows any user, regardless of rol
 
 * Create, view, update, and remove organizations
 * Create, view, update, and remove users within an organization
+* Grant or revoke the SuperAdmin status of another user
 * [Switch into any organization](#switching-organizations)
 * Toggle the Public setting of the Default organization
-* Toggle the global config setting for `All new users are SuperAdmin`
+* Toggle the global config setting for [All new users are SuperAdmin](#all-new-users-are-superadmins-configuration-option)
 
 Important SuperAdmin behaviors:
 
@@ -170,6 +172,10 @@ Important SuperAdmin behaviors:
 * SuperAdmin users cannot revoke their own SuperAdmin status.
 * SuperAdmin users are the only ones who can change the SuperAdmin status of other Chronograf users. Regular admins who do not have SuperAdmin status can perform normal operations on SuperAdmin users (create that user within their organization, change roles, and remove them), but they will not see that these users have SuperAdmin status, nor will any of their actions affect the SuperAdmin status of these users.
 * If a user has their SuperAdmin status revoked, that user will retain their assigned roles within their organizations.
+
+#### All New Users are SuperAdmins configuration option
+
+By default, the **Config** setting for "**All new users are SuperAdmins"** is **On**. Any user with SuperAdmin status can toggle this under the **Admin > Chronograf > Organizations** tab. If this setting is _on_, any new user (who is created or who authenticates) will automatically have SuperAdmin status. If this setting is _off_, any new user (who is created or who authenticates) will _not_ have SuperAdmin status unless they are explicitly granted it later by another user with SuperAdmin status.
 
 ### Creating users
 
