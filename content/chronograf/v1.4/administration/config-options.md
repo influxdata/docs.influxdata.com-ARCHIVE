@@ -174,7 +174,7 @@ Environment variable: `$GH_CLIENT_SECRET`
 
 ### `--github-organization=` | `-o`
 
-Optionally, specify a GitHub organization required for a user.
+[Optional] Specify a GitHub organization required for a user.
 
 Environment variable: `$GH_ORGS`
 
