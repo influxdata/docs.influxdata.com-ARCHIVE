@@ -32,11 +32,13 @@ Role-based access control in Chronograf and enhanced security are provided using
 
 Both of these options are discussed in the following sections.
 
+> ***Note:*** All measures of Chronograf security are enforced by the server. Any direct requests to the Chronograf server will be subjected to, and thus must comply with, any configured security options.
+
 ## OAuth 2.0 providers with JWT tokens
 
-[OAuth 2.0](https://tools.ietf.org/html/rfc6749) providers and [JWT (JSON Web Token)](https://tools.ietf.org/html/rfc7519) tokens are used in Chronograf to provide the authorization and authentication of Chronograph users and role-based access control.
+[OAuth 2.0](https://tools.ietf.org/html/rfc6749) providers and [JWT (JSON Web Token)](https://tools.ietf.org/html/rfc7519) tokens are used in Chronograf to provide the authorization and authentication of Chronograf users and role-based access control.
 
-To configure any of the supported OAuth 2.0 providers to work with Chronograf, you must also configure the `TOKEN_SECRET` environment variable (or command line option), which is used to generate valid JWT signatures for access tokens.
+To configure any of the supported OAuth 2.0 providers to work with Chronograf, you must also configure the `TOKEN_SECRET` environment variable (or command line option), which is used for generating and validating JWT tokens.
 
 **To set the TOKEN_SECRET option:**
 
@@ -53,7 +55,7 @@ export TOKEN_SECRET=Super5uperUdn3verGu355!
 
 ## OAuth 2.0 providers
 
-OAuth authorization and authentication in Chronograf require you to specify configuration options for OAuth 2.0 authentication providers you want to use.
+OAuth 2.0 authorization and authentication in Chronograf require you to specify configuration options for OAuth 2.0 authentication providers you want to use.
 
 Configuration steps, including required and optional configuration options, for the following supported authentication providers are provided in these sections below:
 
@@ -73,7 +75,7 @@ Chronograf supports using the [GitHub OAuth 2.0 authentication](https://develope
 
 Chronograf has five environment variables (and corresponding command line options) for use with GitHub OAuth 2.0 authentication. The steps below show you how to set the required values for:
 
-* TOKEN_SECRET (secret to use for generating JWT tokens)
+* TOKEN_SECRET (secret used for generating and validating JWT tokens)
 * GH_CLIENT_ID (GitHub Client ID)
 * GH_CLIENT_SECRET (GitHub Client Secret)
 
@@ -125,7 +127,7 @@ export GH_CLIENT_SECRET=260041897d3252c146ece6b46ba39bc1e54416dc
 ```
 3) Set the Chronograf environment variable (or corresponding command line option) required for JWT support:
 
-* `TOKEN_SECRET` (Secret used to generate JWT tokens)
+* `TOKEN_SECRET` (Secret used for generating and validating JWT tokens)
 
 **Example:**
 ```sh
@@ -198,7 +200,7 @@ export PUBLIC_URL=http://localhost:8888/google/callback
 
 4) Set the Chronograf environment variable (or corresponding command line option) required for JWT support:
 
-* `TOKEN_SECRET` (Secret used to generate JWT tokens)
+* `TOKEN_SECRET` (Secret used for generating and validating JWT tokens)
 
 **Example:**
 ```sh
@@ -224,7 +226,7 @@ export GOOGLE_DOMAINS=biffspleasurepalance.com,savetheclocktower.com
 
 ### Auth0
 
-[Auth0](https://auth0.com/) implements identity protocol support for OAuth 2.0. See [OAuth 2.0](https://auth0.com/docs/protocols/oauth2) for details about Auth0's implementation.
+[Auth0](https://auth0.com/) implements identity protocol support for OAuth 2.0. See [OAuth 2.0](https://auth0.com/docs/protocols/oauth2) for details about the Auth0 implementation.
 
 #### Creating an Auth0 application
 
@@ -251,7 +253,7 @@ The equivalent command line options are:
 
 3) Set the Chronograf environment variable (or corresponding command line option) required for JWT support:
 
-* `TOKEN_SECRET` (Secret used to generate JWT tokens)
+* `TOKEN_SECRET` (Secret used for generating and validating JWT tokens)
 
 **Example:**
 ```sh
@@ -348,6 +350,8 @@ InfluxData recommends using HTTPS to communicate securely with Chronograf applic
 If you are not using a TLS termination proxy, you can run your Chronograf server with TLS connections.
 
 Chronograf includes command line and environment variable options for configuring TLS (Transport Layer Security) certificates and key files. Use of the TLS cryptographic protocol provides server authentication, data confidentiality, and data integrity. When configured, users can use HTTPS to securely communicate with your Chronograf applications.
+
+> ***Note:*** Using HTTPS helps guard against nefarious agents sniffing the JWTand using it to spoof a valid user against the Chronograf server.
 
 ### Configuring TLS for Chronograf
 
