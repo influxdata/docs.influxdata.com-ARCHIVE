@@ -31,10 +31,7 @@ A Chronograf organization is a collection of Chronograf users who share common C
 >***Note:*** The Default organization can be used to support Chronograf as configured in versions earlier than 1.4.
 > Upon upgrading, any Chronograf resources that existed prior to 1.4 automatically become owned by the Default organization.
 
-Upon installation, the Default organization is ready for use and can be used as-is for many purposes. The Default organization includes the following default behaviors:
-
-* All new users are granted SuperAdmin status, regardless of whether authentication is configured, as long as the default **Config** setting for "**All new users are SuperAdmins"** is **On**.
-* Authentication is not required unless OAuth 2.0 authentication is configured.
+Upon installation, the Default organization is ready for use and allows Chronograf to be used as-is.
 
 ## Creating organizations
 
