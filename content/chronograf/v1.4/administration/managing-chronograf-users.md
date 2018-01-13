@@ -33,7 +33,7 @@ Starting with Chronograf 1.4, Chronograf includes the ability to create users us
 
 ### Organization-bound users
 
-Chronograf users are assigned one of the following four organization-bound user roles, listed here in order of increasing permissions:
+Chronograf users are assigned one of the following four organization-bound user roles, listed here in order of increasing capabilities:
 
 - [`member`](#members-role-member)
 - [`viewer`](#viewer-role-viewer)
