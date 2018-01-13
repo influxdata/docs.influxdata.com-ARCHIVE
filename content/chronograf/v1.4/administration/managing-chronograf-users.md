@@ -175,7 +175,7 @@ Important SuperAdmin behaviors:
 
 #### All New Users are SuperAdmins configuration option
 
-By default, the **Config** setting for "**All new users are SuperAdmins"** is **On**. Any user with SuperAdmin status can toggle this under the **Admin > Chronograf > Organizations** tab. If this setting is _on_, any new user (who is created or who authenticates) will automatically have SuperAdmin status. If this setting is _off_, any new user (who is created or who authenticates) will _not_ have SuperAdmin status unless they are explicitly granted it later by another user with SuperAdmin status.
+By default, the **Config** setting for "**All new users are SuperAdmins"** is **On**. Any user with SuperAdmin status can toggle this under the **Admin > Chronograf > Organizations** tab. If this setting is **On**, any new user (who is created or who authenticates) will_ automatically have SuperAdmin status. If this setting is **Off**, any new user (who is created or who authenticates) will _not_ have SuperAdmin status unless they are explicitly granted it later by another user with SuperAdmin status.
 
 ### Creating users
 
