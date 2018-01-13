@@ -63,10 +63,9 @@ You can configure existing and new organizations in the **Organizations** tab of
 
 * **Default Role**: The role granted to new users by default when added to an organization. Valid options are `member` (default), `viewer`, `editor`, and `admin`.
 
-See the following pages for details about managing users and security:
+See the following pages for more information about managing Chronograf users and security:
 
 * [Managing Chronograf users](/chronograf/latest/administration/managing-chronograf-users/)
-* [Managing InfluxDB users](/chronograf/latest/administration/managing-influxdb-users/)
 * [Managing security](/chronograf/latest/administration/managing-security/)
 
 ## Removing organizations
