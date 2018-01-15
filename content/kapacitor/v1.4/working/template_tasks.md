@@ -207,6 +207,8 @@ This file may be in either JSON or YAML.
 A task for a memory based alert can be created using the same template defined above.
 Create a `mem_template_task.json` file using the snippet in Example 7.
 
+<!-- fixes defect 1372 --> 
+
 **Example 7 &ndash; A task definition file in JSON**
 ```json
 {
