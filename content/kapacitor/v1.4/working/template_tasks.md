@@ -211,7 +211,7 @@ Create a `mem_template_task.json` file using the snippet in Example 7.
 ```json
 {
   "template-id": "generic_mean_alert",
-  "dbrps": ["telegraf.autogen"],
+  "dbrps": [{"db": "telegraf", "rp": "autogen"}],
   "vars": {
     "measurement": {"type" : "string", "value" : "mem" },
     "groups": {"type": "list", "value": [{"type":"star", "value":"*"}]},
@@ -237,16 +237,32 @@ Using YAML the task definition file, `mem_template_task.yaml`, appears as follow
 ```yaml
 template-id: generic_mean_alert
 dbrps:
-  - telegraf.autogen
-vars: {
-  "measurement": {"type" : "string", "value" : "mem" },
-    "groups": {"type": "list", "value": [{"type":"star", "value":"*"}]},
-    "field": {"type" : "string", "value" : "used_percent" },
-    "warn": {"type" : "lambda", "value" : "\"mean\" > 80.0" },
-    "crit": {"type" : "lambda", "value" : "\"mean\" > 90.0" },
-    "window": {"type" : "duration", "value" : "10m" },
-    "slack_channel": {"type" : "string", "value" : "#alerts_testing" }
-}
+- db: telegraf
+  rp: autogen
+vars:
+  measurement:
+    type: string
+    value: mem
+  groups:
+    type: list
+    value:
+    - type: star
+      value: "*"
+  field:
+    type: string
+    value: used_percent
+  warn:
+    type: lambda
+    value: '"mean" > 80.0'
+  crit:
+    type: lambda
+    value: '"mean" > 90.0'
+  window:
+    type: duration
+    value: 10m
+  slack_channel:
+    type: string
+    value: "#alerts_testing"
 ```
 
 The task can then be defined with the `file` parameter as previously shown.
@@ -306,15 +322,30 @@ A task may then be defined in a YAML file, `implicit_mem_template_task.yaml`
 **Example 10 &ndash; A YAML vars file leveraging a template with a predefined database and retention policy**
 ```yaml
 template-id: implicit_generic_mean_alert
-vars: {
-  "measurement": {"type" : "string", "value" : "mem" },
-    "groups": {"type": "list", "value": [{"type":"star", "value":"*"}]},
-    "field": {"type" : "string", "value" : "used_percent" },
-    "warn": {"type" : "lambda", "value" : "\"mean\" > 80.0" },
-    "crit": {"type" : "lambda", "value" : "\"mean\" > 90.0" },
-    "window": {"type" : "duration", "value" : "10m" },
-    "slack_channel": {"type" : "string", "value" : "#alerts_testing" }
-}
+vars:
+  measurement:
+    type: string
+    value: mem
+  groups:
+    type: list
+    value:
+    - type: star
+      value: "*"
+  field:
+    type: string
+    value: used_percent
+  warn:
+    type: lambda
+    value: '"mean" > 80.0'
+  crit:
+    type: lambda
+    value: '"mean" > 90.0'
+  window:
+    type: duration
+    value: 10m
+  slack_channel:
+    type: string
+    value: "#alerts_testing"
 ```
 
 The task can then be created as follows:
