@@ -76,7 +76,7 @@ The file path to private key associated with given certificate.
 
 Environment variable: `$TLS_PRIVATE_KEY`
 
-## InfluxDB options
+## InfluxDB authentication options
 
 ### `--influxdb-url=`
 
@@ -98,7 +98,7 @@ The [password] for your InfluxDB instance.
 
 Environment variable: `$INFLUXDB_PASSWORD`
 
-## Kapacitor options
+## Kapacitor authentication options
 
 ### `--kapacitor-url=`
 
