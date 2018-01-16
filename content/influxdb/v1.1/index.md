@@ -6,10 +6,14 @@ menu:
     name: v1.1
     identifier: influxdb_1_1
 <<<<<<< HEAD
+<<<<<<< HEAD
     weight: 20
 =======
     weight: 30
 >>>>>>> updated weightings
+=======
+    weight: 30
+>>>>>>> 96434f37eafc91c5398aa2e6b3d189f815ac07f4
 ---
 
 InfluxDB is a [time series database](https://en.wikipedia.org/wiki/Time_series_database) built from the ground up to handle high write and query loads.
