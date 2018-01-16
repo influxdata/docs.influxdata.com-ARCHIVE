@@ -67,13 +67,13 @@ top_scores                                         stream    disabled  false    
 Core commands are those most common in a command line application or are those
 which are the most commonly used.
 
-**[help](javascript:void())** &ndash; brings up the help message.  To get more detailed help on any command type `kapacitor help <command>`.
+**[help](javascript:void())** &ndash; This command brings up the help message.  To get more detailed help on any command type `kapacitor help <command>`.
 
-**[version](javascript:void())** &ndash; prints the release version of the `kapacitor` client.
+**[version](javascript:void())** &ndash; Use this command to print out the release version of the `kapacitor` client.
 
-**[list](javascript:void())** &ndash; can be used to print out lists of different Kapacitor artifacts.  This command is presented in more detail in the following sections.
+**[list](javascript:void())** &ndash; This command can be used to print out lists of different Kapacitor artifacts.  This command is presented in more detail in the following sections.
 
-**[delete](javascript:void())** &ndash; can be used to remove different Kapacitor arrtifacts.  This command is presented in more detail in the following sections.
+**[delete](javascript:void())** &ndash; This command can be used to remove different Kapacitor arrtifacts.  This command is presented in more detail in the following sections.
 
 ## Server Management
 
@@ -81,19 +81,19 @@ The `kapacitor` client can be used to investigate aspects of the server,
 to backup its data and to work with logs.  One planned feature will be the
 ability to push task definitions to other servers.
 
-**[backup](javascript:void())** &ndash; to back up the Kapacitor database.
+**[backup](javascript:void())** &ndash; Use this command to back up the Kapacitor database.
 
 **Example 2 &ndash; Backup**
 ```
 $ sudo kapacitor backup /mnt/datastore/kapacitor/bak/kapacitor-20180101.db
 ```
-**[stats](javascript:void())** &ndash; displays statistics about the server.  Takes the following form.
+**[stats](javascript:void())** &ndash; This command displays statistics about the server.  Takes the following form.
 
 ```
 kapacitor stats [general|ingress]
 ```
 
-* `stats general` &ndash; To view values such as the server ID or hostname and to view counts such as the number of tasks and subscriptions.
+* `stats general` &ndash; Use this command to view values such as the server ID or hostname and to view counts such as the number of tasks and subscriptions.
 
    **Example 3 &ndash; General Statistics**
    ```
@@ -107,7 +107,7 @@ kapacitor stats [general|ingress]
    Version:                      1.5.0~n201711280812     
    ```
 
-* `stats ingress` &ndash;  To view InfluxDB measurements and the number of datapoints that pass through the Kapacitor server.
+* `stats ingress` &ndash;  Use this command to view InfluxDB measurements and the number of datapoints that pass through the Kapacitor server.
 
    **Example 4 &ndash; Ingress Statistics**
    ```
@@ -142,7 +142,7 @@ kapacitor stats [general|ingress]
     telegraf   autogen          swap                     10560
     telegraf   autogen          system                   15840
    ```
-**[vars](javascript:void())** &ndash; Displays a wide range of variables associated with the kapacitor server.  Results are written to the console in JSON format.  To make the results more readable on a linux system, they can be piped to python `json.tool` or another JSON formatter.
+**[vars](javascript:void())** &ndash; This command displays a wide range of variables associated with the kapacitor server.  Results are written to the console in JSON format.  To make the results more readable on a linux system, they can be piped to python `json.tool` or another JSON formatter.
 
 **Example 5 &ndash; Kapacitor vars (partial results)**
 
@@ -198,7 +198,7 @@ communications with third party applications, server configuration, and
 discovery and scraping of data.  The current status of a service can be checked
 with the command line tool.   
 
-**[list service-tests](javascript:void())** &ndash; the `list` command makes it possible to list all
+**[list service-tests](javascript:void())** &ndash; The `list` command makes it possible to list all
 of the service tests currently available on the server.
 
 **Example 6 &ndash; Listing service tests**
@@ -236,7 +236,7 @@ triton
 victorops
 ```
 
-**[service-tests](javascript:void())** &ndash; The service-tests command executes one or more of the
+**[service-tests](javascript:void())** &ndash; The `service-tests` command executes one or more of the
 available service tests.  Its arguments are one or more of the service names
 returned by `list service-tests`.
 
@@ -251,7 +251,7 @@ smtp                false     service is not enabled
 
 ### Logging
 
-**[logs](javascript:void())** &ndash; The logs command makes it possible to monitor log messages for
+**[logs](javascript:void())** &ndash; The `logs` command makes it possible to monitor log messages for
 a service from the console, or to monitor the entire kapacitor log stream.  The
 log level can also be set.  The command takes the following form.
 
@@ -293,7 +293,7 @@ ts=2018-01-15T10:54:10.020+01:00 lvl=info msg="http request" service=http host=1
 ...
 ```
 
-**[level](javascript:void())** &ndash; Sets the log level for the Kapacitor log stream written to the
+**[level](javascript:void())** &ndash; This command sets the log level for the Kapacitor log stream written to the
 log file from the Kapacitor server.  On Linux systems this file is located by
 default at `/var/log/kapacitor/kapacitor.log`.  The form it takes is as follows:
 
@@ -410,43 +410,375 @@ $ kapacitor replay -recording 4e0f09c5-1426-4778-8f9b-c4a88f5c2b66 -task cpu_ale
 bbe8567c-a642-4da9-83ef-2a7d32ad5eb1
 ```
 
-**[replay-live](javascript:void())** &ndash; This command allows for actual data to be replayed against tasks, to verify task behavior.  It can be executed against either a `batch` or a `query`.
+**[replay-live](javascript:void())** &ndash; This command allows for data to be played on the fly against tasks, to verify task behavior.  It can be executed against either a `batch` or a `query`.  Kapacitor neither saves nor records the data in its database.
 
-* `replay-live query` &ndash;
-* `replay-live batch` &ndash;
+* `replay-live query` &ndash; With the query argument the replay executes an InfluxDB query against the task.  The query should include the database, retention policy and measurement string. It takes the following form:
 
-* **[list](javascript:void())**
-   * recordings
-   * replays
-* **[delete](javascript:void())**
-   * recordings
-   * replays
+```
+kapacitor replay-live query (-cluster <CLUSTER_URL>) (-no-wait) -query <QUERY> (-real-clock) (-rec-time) (-replay-id <REPLAY_ID>) -task <TASK_ID>
+```
+
+**Example 17 &ndash; Replay live query**
+
+```
+$ kapacitor replay-live query -task cpu_alert -query 'select cpu, usage_idle from "telegraf"."autogen"."cpu" where time > now() - 5m'
+2d9be22c-647a-425e-89fb-40543bdd3670
+```
+
+* `replay-live batch` &ndash; With the batch argument the replay executes the task with batch data already stored to InfluxDB. It takes the following form:
+
+```
+kapacitor replay-live batch (-no-wait) ( -past <TIME_WINDOW> | -start <START_TIME> -stop <STOP_TIME> ) (-real-clock) (-rec-time) (-replay-id <REPLAY_ID>) -task <TASK_ID>
+```
+
+**Example 18 &ndash; Replay live batch**
+
+```
+$ kapacitor replay-live batch -start 2018-01-16T00:00:00Z -stop 2018-01-16T12:00:00Z -replay-id GoldRoosterColdBridge180116 -task batch_load_test
+GoldRoosterColdBridge180116
+```
+
+**[list](javascript:void())** &ndash; The universal `list` command can be used to list existing recordings and replays.  
+
+* `list recordings` &ndash; use the `recordings` argument to list recordings.  
+
+**Example 19 &ndash; List Recordings**
+
+```
+$ kapacitor list recordings
+ID                                   Type    Status    Size      Date                   
+0970bcb5-685c-48cc-9a92-741633633f1f stream  finished  3.2 kB    15 Jan 18 16:37 CET    
+78d3a26e-ea1f-4c52-bd56-2016997313fe stream  finished  23 B      15 Jan 18 15:33 CET    
+4e0f09c5-1426-4778-8f9b-c4a88f5c2b66 stream  finished  2.2 kB    15 Jan 18 15:25 CET    
+BlueJaySilverTree                    batch   finished  1.0 kB    15 Jan 18 15:18 CET    
+7d30caff-e443-4d5f-a0f2-6a933ea35284 batch   finished  998 B     15 Jan 18 15:17 CET
+```
+
+* `list replays` &ndash; Use the `replays` argument to list replays.  
+
+**Example 20 &ndash; List Replays**
+
+```
+$ kapacitor list replays
+ID                                   Task            Recording                            Status   Clock   Date                   
+d861ee94-aec1-43b8-b362-5c3d9a036aff cpu_alert       4e0f09c5-1426-4778-8f9b-c4a88f5c2b66 running  real    16 Jan 18 11:02 CET    
+GoldRoosterColdBridge180116          batch_load_test                                      finished fast    16 Jan 18 10:23 CET    
+2d9be22c-647a-425e-89fb-40543bdd3670 cpu_alert                                            finished fast    16 Jan 18 10:12 CET    
+b972582b-5be9-4626-87b7-c3d9bfc67981 batch_load_test                                      finished fast    15 Jan 18 17:26 CET    
+c060f960-6b02-49a7-9376-0ee55952a7f0 cpu_alert                                            finished fast    15 Jan 18 17:25 CET    
+4a43565c-4678-4c98-94b7-e534efdff860 cpu_alert       4e0f09c5-1426-4778-8f9b-c4a88f5c2b66 finished fast    15 Jan 18 16:52 CET    
+31f8ea34-455b-4eee-abf2-ed1eb60166a5 cpu_alert       4e0f09c5-1426-4778-8f9b-c4a88f5c2b66 finished real    15 Jan 18 16:50 CET    
+bbe8567c-a642-4da9-83ef-2a7d32ad5eb1 cpu_alert       4e0f09c5-1426-4778-8f9b-c4a88f5c2b66 finished fast    15 Jan 18 16:49 CET  
+```
+
+**[delete](javascript:void())** &ndash; The universal `delete` command can be used to remove existing recordings and replays.
+
+* `delete recordings` &ndash; use the recordings argument to delete one or more recordings. It takes the following form.
+
+```
+kapacitor delete recordings [ID | Pattern]
+```
+
+`ID` needs to be the full ID of the recording, preferably copied and pasted from
+the results of the `list recordings` command.
+
+`Pattern` can be a GREP like pattern used to identify a set of recordings.  For
+example if the value `test0<N>` was assigned to multiple `recording-id`s, (e.g.
+`test01`, `test02`, `test03`) then all `test` recordings could be removed with
+the pattern `"test*"`.  
+
+**Example 21 &ndash; Delete Recordings**
+
+```
+$ kapacitor delete recordings "test*"
+$
+```
+
+Note that this command returns no status or additional messages.  It fails or
+succeeds silently.  To verify results use the `list recordings` command.
+
+* `delete replays` &ndash; use the replays argument to delete one or more replays. It takes the following form.
+
+```
+kapacitor delete replays [ID | Pattern]
+```
+
+`ID` needs to be the full ID of the replay, preferably copied and pasted from
+the results of the `list replays` command.
+
+`Pattern` can be a GREP like pattern used to identify a set of replays.  For
+example if the value `test0<N>` was assigned to multiple `replay-id`s, (e.g.
+`jan-run01`, `jan-run02`, `jan-run03`) then all `run` replays could be removed with
+the pattern `"jan-run*"`.
+
+**Example 22 &ndash; Delete Replays**
+
+```
+$ kapacitor delete replays "jan-run*"
+$
+```  
+
+Note that this command returns no status or additional messages.  It fails or
+succeeds silently.  To verify the results use the `list replays` command.
 
 ## Topics and Topic Handlers
 
-(n.b. topics are created by the topic node)
+Topics are classes of subjects to which alerts can publish messages and to which
+other services can subscribe in order to receive those messages.  Topic handlers
+bind topics to services, allowing messages to be forwarded by various means.
 
-TBD
+Working with Topics and Topic handlers is introduced in the section [Alerts &ndash; Usng Topics](/kapacitor/v1.4/working/using_alert_topics/).
+Note that topics are created through the `topic` method of the `alert` node in
+TICKscripts.
 
-* **[define-topic-handler](javascript:void())**
-* **[delete](javascript:void())**
-   * topics
-   * topic-handlers  
-* **[list](javascript:void())**
-   * topics
-   * topic-handlers
-* **[show-topic-handler](javascript:void())**
-* **[show-topic](javascript:void())**    
+**[define-topic-handler](javascript:void())** &ndash; This command defines or
+redefines a topic handler based on the contents of a topic handler script.  It
+takes the following form:
+
+```
+kapacitor define-topic-handler <PATH_TO_HANDLER_SCRIPT>
+```
+
+**Example 23 &ndash; Defining a Topic Handler**
+
+```
+$ kapacitor define-topic-handler ./slack_cpu_handler.yaml
+$
+```
+
+Note that this command returns no status or additional messages. It fails or
+succeeds silently.  To verify the results use the `list topic-handlers` command.
+
+**[list](javascript:void())** &ndash; The universal `list` command can be used to list both topics and topic handlers.
+
+* `list topics` &ndash; Use the `list topics` command to display all topics currently stored by Kapacitor.  This command requires no further arguments.
+
+**Example 24 &ndash; Listing Topics**
+
+```
+$ kapacitor list topics
+ID                                                             Level     Collected
+1252f40d-c998-430d-abaf-277c43d390e1:cpu_alert:alert2          OK                0
+32fdb276-4d60-42bc-8f5d-c093e97bd3d0:batch_cpu_alert:alert2    OK                0
+666c444c-a33e-42b5-af4d-732311b0e148:batch_cpu_alert:alert2    CRITICAL          0
+cpu                                                            OK                0
+main:batch_load_test:alert2                                    OK                7
+main:chronograf-v1-b12b2554-cf38-4d7e-af24-5b0cd3cecc54:alert3 OK             1028
+main:chronograf-v1-e77137c5-dcce-4fd5-a612-3cdaa5f98ef9:alert7 OK                0
+main:cpu-alert-test:alert3                                     OK                0
+```
+
+* `list topic-handlers` &ndash; Us the `list topic-handlers` command to display handlers stored by Kapacitor.  This command requires no further arguments.
+
+**Example 25 &ndash; Listing Topic Handlers**
+
+```
+$ kapacitor list topic-handlers
+Topic      ID         Kind       
+cpu        slack      slack      
+```
+
+**[show-topic](javascript:void())** &ndash; Use this command to see the details of a topic.  It takes the following form:
+
+```
+kapacitor show-topic [TOPIC_ID]
+```
+**Example 26 &ndash; Showing a Topic**
+
+```
+$ kapacitor show-topic 1252f40d-c998-430d-abaf-277c43d390e1:cpu_alert:alert2
+ID: 1252f40d-c998-430d-abaf-277c43d390e1:cpu_alert:alert2
+Level: OK
+Collected: 0
+Handlers: []
+Events:
+Event   Level    Message       Date                   
+cpu:nil OK       cpu:nil is OK 13 Nov 17 13:34 CET    
+```
+
+**[show-topic-handler](javascript:void())** &ndash; This command writes out the topic-handler contents to the console. It takes the following form:
+
+```
+kapacitor show-topic-handler [TOPIC_ID] [HANDLER_ID]
+```
+
+**Example 27 &ndash; Showing a Topic Handler**
+
+```
+$ kapacitor show-topic-handler cpu slack
+ID: slack
+Topic: cpu
+Kind: slack
+Match:
+Options: {"channel":"#kapacitor"}
+```
+
+**[delete](javascript:void())** &ndash; The universal `delete` command can be used to remove topics and topic handlers.
+
+* `delete topics` &ndash; Use the `topics` argument to remove one or more topics.  It takes the following form:
+
+```
+kapacitor delete topics [ID | Pattern]
+```
+
+**Example 28 &ndash; Deleting a Topic**
+
+```
+$ kapacitor delete topics 1252f40d-c998-430d-abaf-277c43d390e1:cpu_alert:alert2
+$
+```
+
+Note that this command returns no status or additional messages.  It fails or
+succeeds silently.  To verify the results use the `list topics` command.
+
+* `delete topic-handlers` &ndash; Use the `topic-handlers` argument to remove a topic handler.  It takes the following form:
+
+```
+kapacitor delete topic-handler [TOPIC_ID] [HANDLER_ID]
+```  
+
+The values for `TOPIC_ID` and `HANDLER_ID` can be determined using the `list`
+command.  See Example 25 above.
+
+**Example 29 &ndash; Deleting a Topic Handler**
+```
+$ kapacitor delete topic-handlers cpu slack
+$
+```
+
+Note that this command returns no status or additional messages.  It fails or
+succeeds silently.  To verify the results use the `list topics` command.
 
 ## Tasks and Task Templates
 
-TBD
+Tasks and task definitions comprise the core Kapacitor functionality.  Tasks are
+introduced in the [Getting Started](/kapacitor/v1.4/introduction/getting_started/) guide
+and are explored in detail along side the [TICKscript](/kapacitor/v1.4/tick/).
 
-* **[define](javascript:void())**
-* **[define-template](javascript:void())**
-* **[enable](javascript:void())**
-* **[disable](javascript:void())**
-* **[reload](javascript:void())**
+Task templates make it easy to reuse generic task structures to create a suite
+of similar tasks.  They are introduced in the [Template Tasks](/kapacitor/v1.4/working/template_tasks/)
+document.
+
+**[define](javascript:void())** &ndash; The `define` command is used to create a new task from a TICKscript.  It takes one of the following three forms:
+
+1. As a straight-forward task.
+1. From a template.
+1. From a template with a descriptor file.
+
+
+**As a straight-forward task**
+
+```
+kapacitor define <TASK_ID> -tick <PATH_TO_TICKSCRIPT> -type <stream|batch> (-no-reload) -dbrp <DATABASE>.<RETENTION_POLICY>
+```
+
+**Example 30 &ndash; Defining a new Task - standard**
+
+```
+$ kapacitor define sandbox -tick sandbox.tick -type stream -dbrp "telegraf"."autogen"
+$
+```
+
+Note that this task on success returns no status or additional messages.  Some
+error messages associated with malformed or invalid TICKscripts may be returned.
+To verify the results use the `list tasks` command.
+
+**From a Template**
+```
+kapacitor define <TASK_ID> -template <TEMPLATE_ID> -vars <PATH_TO_VARS_FILE> (-no-reload) -dbrp <DATABASE>.<RETENTION_POLICY>
+```
+
+**Example 31 &ndash; Defining a new Task - from Template**
+
+```
+$ kapacitor define cpu_idle -template generic_mean_alert -vars cpu_vars.json -dbrp "telegraf"."autogen"
+$
+```
+
+Note that this task on success returns no status or additional messages.
+To verify the results use the `list tasks` command.
+
+**From a Template with a Descriptor File**
+
+```
+kapacitor define <TASK_ID> -file <PATH_TO_TEMPLATE_FILE> (-no-reload)
+```
+
+**Example 32 &ndash; Defining a new Task - with a descriptor file**
+
+```
+$ kapacitor define mem_alert -file mem_alert_from_template.json
+$
+```
+
+Note that this task on success returns no status or additional messages.
+To verify the results use the `list tasks` command.
+
+**[define-template](javascript:void())** &ndash; Use this command to load a task template to Kapacitor.  It takes the following form:
+
+```
+kapacitor define-template <TEMPLATE_ID> -tick <PATH_TO_TICKSCRIPT> -type <string|batch>
+```
+
+**Example 33 &ndash; Defining a new Task Template**
+
+```
+$ kapacitor define-template generic_mean_alert -tick template-task.tick -type stream
+$
+```
+
+Note that this task on success returns no status or additional messages.
+To verify the results use the `list templates` command.
+
+
+**[enable](javascript:void())** &ndash; When tasks are first created they are in a `disabled` state.  Use this command to enable one or more tasks.  It takes the following form:
+
+```
+kapacitor enable <TASK_ID>...
+```
+
+**Example 34 &ndash; Enabling a Task**
+
+```
+$ kapacitor enable cpu_alert
+$
+```
+
+Note that this task on success or failure returns no status or additional messages.
+To verify the results use the `list tasks` command.
+
+**[disable](javascript:void())** &ndash; Use this command to disable one or more active tasks.  It takes the following form:
+
+```
+kapacitor disable <TASK_ID>...
+```
+
+**Example 35 &ndash; Disabling Tasks**
+
+```
+$ kapacitor disable cpu_alert cpu_alert_topic sandbox
+$
+```
+Note that this task on success or failure returns no status or additional messages.
+To verify the result use the `list tasks` command.
+
+**[reload](javascript:void())** &ndash; When troubleshooting a task it may be useful to stop it and then start it again.  This command will disable and then enable one or more tasks.  It takes the following form:
+
+```
+kapacitor reload <TASK_ID>...
+```
+
+Note that to redefine a task simply run the `define` command with an updated TICKscript, template or template file.
+
+**Example 36 &ndash; Reloading a Task**
+
+```
+$ kapacitor reload cpu_alert
+$
+```
+Note that this task on success or failure returns no status or additional messages.
+To verify the result use the `list tasks` command.
+
 * **[list](javascript:void())**
    * tasks
    * templates
