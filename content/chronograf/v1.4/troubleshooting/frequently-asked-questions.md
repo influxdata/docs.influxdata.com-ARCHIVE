@@ -67,7 +67,7 @@ When you enter the InfluxDB HTTP bind address in the `Connection String` input, 
 If it is a data node, Chronograf automatically adds the `Meta Service Connection URL` input to the connection details form.
 Enter the HTTP bind address of one of your cluster's meta nodes into that input and Chronograf takes care of the rest.
 
-![Cluster connection details](/img/chronograf/latest/faq-cluster-connection.png)
+![Cluster connection details](/img/chronograf/v1.4/faq-cluster-connection.png)
 
 Note that the example above assumes that you do not have authentication enabled.
 If you have authentication enabled, the form requires username and password information.
@@ -80,22 +80,22 @@ Chronograf's dashboards support six visualization types.
 ### Line
 Show time series in a line graph.
 
-![Cluster connection details](/img/chronograf/latest/faq-viz-line.png)
+![Cluster connection details](/img/chronograf/v1.4/faq-viz-line.png)
 
 ### Stacked
 Show time series arranged on top of each other.
 
-![Cluster connection details](/img/chronograf/latest/faq-viz-stacked.png)
+![Cluster connection details](/img/chronograf/v1.4/faq-viz-stacked.png)
 
 ### Step-Plot
 Show time series in a staircase graph.
 
-![Cluster connection details](/img/chronograf/latest/faq-viz-step.png)
+![Cluster connection details](/img/chronograf/v1.4/faq-viz-step.png)
 
 ### SingleStat
 Show the most recent value of a time series.
 
-![Cluster connection details](/img/chronograf/latest/faq-viz-single.png)
+![Cluster connection details](/img/chronograf/v1.4/faq-viz-single.png)
 
 If a cell's query includes a [`GROUP BY` tag](/influxdb/latest/query_language/data_exploration/#group-by-tags) clause, Chronograf sorts the different [series](/influxdb/latest/concepts/glossary/#series) lexicographically and shows the most recent [field value](/influxdb/latest/concepts/glossary/#field-value) associated with the first series.
 For example, if a query groups by the `name` [tag key](/influxdb/latest/concepts/glossary/#tag-key) and `name` has two [tag values](/influxdb/latest/concepts/glossary/#tag-value) (`chronelda` and `chronz`), Chronograf shows the most recent field value associated with the `chronelda` series.
@@ -106,13 +106,13 @@ For example, if a query's `SELECT` clause is `SELECT "chronogiraffe","chronelda"
 ### Line+Stat
 Show time series in a line graph and overlay the time series' single most recent value.
 
-![Cluster connection details](/img/chronograf/latest/faq-viz-linesingle.png)
+![Cluster connection details](/img/chronograf/v1.4/faq-viz-linesingle.png)
 
 ### Bar
 Show time series in a bar chart.
 Bar graphs are available in versions 1.3.3.0+.
 
-![Cluster connection details](/img/chronograf/latest/faq-viz-bar.png)
+![Cluster connection details](/img/chronograf/v1.4/faq-viz-bar.png)
 
 ## What does the status column indicate on the Host List page?
 
