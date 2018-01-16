@@ -1,4 +1,4 @@
-capabilities---
+---
 title: Managing Chronograf users
 menu:
   chronograf_1_4:
