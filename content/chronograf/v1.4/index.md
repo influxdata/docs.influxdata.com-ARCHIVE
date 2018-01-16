@@ -43,7 +43,7 @@ Chronograf offers a UI for [Kapacitor](https://github.com/influxdata/kapacitor),
 * Create, delete, and assign permissions to users (Chronograf supports [OSS InfluxDB](/influxdb/latest/query_language/authentication_and_authorization/#authorization) and InfluxEnterprise user management)
 
 
-### Multi-Tenant Support
+### Multi-Organization and Multi-User Support
 
 * Create organizations and assign users to those organizations
 * Restrict access to administrative functions
