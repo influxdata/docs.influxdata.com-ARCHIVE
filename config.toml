@@ -570,6 +570,14 @@ SectionPagesMenu = "products"
   url = "https://influxdata.com/downloads/#kapacitor"
   parent = "introduction"
 
+# Chronograf v1.4 Sub-Menu - Introduction
+  [[menu.chronograf_1_4]]
+  name = "Download"
+  identifier = "download"
+  weight = 5
+  url = "https://influxdata.com/downloads/"
+  parent = "Introduction"
+
 # Chronograf v1.3 Sub-Menu - Introduction
   [[menu.chronograf_1_3]]
   name = "Download"
@@ -593,14 +601,14 @@ SectionPagesMenu = "products"
   weight = 5
   url = "https://influxdata.com/downloads/#chronograf"
   parent = "Introduction"
-  
+
 # Telegraf v1.5 Sub-Menu - Introduction
   [[menu.telegraf_1_5]]
   name = "Download"
   identifier = "download"
   weight = 5
   url = "https://influxdata.com/downloads/#telegraf"
-  parent = "introduction"  
+  parent = "introduction"
 
 # Telegraf v1.4 Sub-Menu - Output Plugins
   [[menu.telegraf_1_4]]
