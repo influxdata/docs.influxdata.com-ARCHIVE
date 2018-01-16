@@ -9,7 +9,7 @@ menu:
 
 **On this page**
 
-[Managing Chronograf users and roles](#managing-chronograf-users-and-roles)
+* [Managing Chronograf users and roles](#managing-chronograf-users-and-roles)
 * [Organization-bound users](#organization-bound-users)
   * [InfluxDB and Kapacitor users within Chronograf](#influxdb-and-kapacitor-users-within-chronograf)
   * [Chronograf-owned resources](#chronograf-owned-resources)
