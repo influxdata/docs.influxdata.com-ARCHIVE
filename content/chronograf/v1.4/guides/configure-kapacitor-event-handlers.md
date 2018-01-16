@@ -57,7 +57,7 @@ For example, Chronograf's Slack integration allows users to specify a default ch
 Configure Chronograf to send alert messages to a HipChat room.
 The sections below describe each configuration option.
 
-![HipChat configuration](/img/chronograf/latest/g-eventhandlers-hipchat.png)
+![HipChat configuration](/img/chronograf/v1.4/g-eventhandlers-hipchat.png)
 
 ### Subdomain
 
@@ -95,7 +95,7 @@ Your token appears in the table just above the `Create new token` section:
 Configure Chronograf to send alerts to an existing Slack channel or as a [direct message (DM)](https://get.slack.help/hc/en-us/articles/201925108-About-channels-and-direct-messages).
 The sections below describe each configuration option.
 
-![Slack configuration](/img/chronograf/latest/g-eventhandlers-slack.png)
+![Slack configuration](/img/chronograf/v1.4/g-eventhandlers-slack.png)
 
 ### Slack WebHook URL
 
@@ -115,7 +115,7 @@ note that you can configure Chronograf to send messages to a different Slack cha
 
 Your Slack WebHook URL appears next to `Webhook URL`:
 
-![Slack WebHook](/img/chronograf/latest/g-eventhandlers-slackwebhook.png)
+![Slack WebHook](/img/chronograf/v1.4/g-eventhandlers-slackwebhook.png)
 
 ### Slack Channel
 
@@ -123,7 +123,7 @@ Chronograf sends alert messages to this channel or DM by default.
 The channel or DM must already exist in Slack.
 Prefix a channel with `#` and a DM with `@`; for example, `#chronocats` is a channel and `@chronothan` is a DM.
 
-If you do not specify a channel or DM, Chronograf sends alert messages to the channel or DM that you selected for the WebHook URL or to the channel or DM specified in the [alert rule](/chronograf/latest/guides/create-a-kapacitor-alert/).
+If you do not specify a channel or DM, Chronograf sends alert messages to the channel or DM that you selected for the WebHook URL or to the channel or DM specified in the [alert rule](/chronograf/v1.4/guides/create-a-kapacitor-alert/).
 The channel or DM specified in the alert rule takes precedence over both the `Slack Channel` configuration option and the WebHook URL configuration.
 
 ## Telegram
@@ -132,7 +132,7 @@ The channel or DM specified in the alert rule takes precedence over both the `Sl
 Configure Chronograf to send alert messages to an existing Telegram bot.
 The sections below describe each configuration option.
 
-![Telegram configuration](/img/chronograf/latest/g-eventhandlers-telegram.png)
+![Telegram configuration](/img/chronograf/v1.4/g-eventhandlers-telegram.png)
 
 ### Telegram Bot
 

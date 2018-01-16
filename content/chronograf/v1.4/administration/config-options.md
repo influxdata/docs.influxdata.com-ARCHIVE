@@ -7,7 +7,7 @@ menu:
     parent: Administration
 ---
 
-On this page:
+**On this page:**
 
 * [Usage](#usage)
 * [Application options](#application-options)
