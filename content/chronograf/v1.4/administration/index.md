@@ -3,7 +3,7 @@ title: Administering Chronograf
 
 menu:
   chronograf_1_4:
-    name: Administering Chronograf
+    name: Administration
     weight: 1
     parent: Administration
 ---
