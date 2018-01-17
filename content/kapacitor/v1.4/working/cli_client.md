@@ -81,19 +81,28 @@ The `kapacitor` client can be used to investigate aspects of the server,
 to backup its data and to work with logs.  One planned feature will be the
 ability to push task definitions to other servers.
 
-**[backup](javascript:void())** &ndash; Use this command to back up the Kapacitor database.
+**[backup](javascript:void())** &ndash; Use this command to back up the Kapacitor database.  It takes the following form:
+
+```
+kapacitor backup [PATH_TO_BACKUP_FILE]
+```
 
 **Example 2 &ndash; Backup**
 ```
 $ sudo kapacitor backup /mnt/datastore/kapacitor/bak/kapacitor-20180101.db
 ```
+
+Note that this command will succeed silently.  No status message is returned to
+the console.  Errors such as insufficient permissions, or non-existent directories
+will be reported. To verify the results check the file system.
+
 **[stats](javascript:void())** &ndash; This command displays statistics about the server.  Takes the following form.
 
 ```
 kapacitor stats [general|ingress]
 ```
 
-* `stats general` &ndash; Use this command to view values such as the server ID or hostname and to view counts such as the number of tasks and subscriptions.
+* `stats general` &ndash; Use this command to view values such as the server ID or hostname and to view counts such as the number of tasks and subscriptions used by Kapacitor.
 
    **Example 3 &ndash; General Statistics**
    ```
@@ -195,10 +204,11 @@ $ kapacitor vars | python -m json.tool
 
 Services are functional modules of the Kapacitor server that handle
 communications with third party applications, server configuration, and
-discovery and scraping of data.  The current status of a service can be checked
-with the command line tool.   
+discovery and scraping of data.  For more information about services see the
+[Configuration](/kapacitor/v1.4/administration/configuration/) document. The
+current status of a service can be checked with the command line tool.   
 
-**[list service-tests](javascript:void())** &ndash; The `list` command makes it possible to list all
+**[list service-tests](javascript:void())** &ndash; The universal `list` command makes it possible to list all
 of the service tests currently available on the server.
 
 **Example 6 &ndash; Listing service tests**
@@ -237,8 +247,14 @@ victorops
 ```
 
 **[service-tests](javascript:void())** &ndash; The `service-tests` command executes one or more of the
-available service tests.  Its arguments are one or more of the service names
-returned by `list service-tests`.
+available service tests.  It takes the following form:
+
+```
+kapacitor service-tests [ <SERVICE_NAME>... | <PATTERN> ]
+```
+
+`PATTERN` can be a GREP like pattern.  For example to run tests of all services
+beginning with the letter 'a' use the string 'a*'.
 
 **Example 7 &ndash; Service test execution**
 ```
@@ -251,9 +267,13 @@ smtp                false     service is not enabled
 
 ### Logging
 
+Kapacitor records a wealth of information about itself, its services and its tasks.
+Information about configuring logging is available in the [Configuration](/kapacitor/v1.4/administration/configuration/#logging)
+document.
+
 **[logs](javascript:void())** &ndash; The `logs` command makes it possible to monitor log messages for
 a service from the console, or to monitor the entire kapacitor log stream.  The
-log level can also be set.  The command takes the following form.
+log level can also be set.  The command takes the following form:
 
 ```
 kapacitor logs [service=<SERVICE_ID>] [lvl=<LEVEL>]
@@ -358,8 +378,16 @@ Three types of recording are available: `batch`, `stream` and `query`.
 * `record batch` &ndash; Records the result of an InfluxDB query used in a batch type task. It takes the following form:
 
 ```
-kapacitor record batch -no-wait (-past <WINDOW_IN_PAST> | -start <START_TIME> -stop <STOP_TIME> ) [-recording-id <ID> ] -task <TASK_ID>  
+kapacitor record batch (-no-wait) [-past <WINDOW_IN_PAST> | -start <START_TIME> -stop <STOP_TIME>] [-recording-id <ID>] -task <TASK_ID>  
 ```
+
+This command requires either a time value for a window of past data from `now`,
+defined by the argument `-past` or a past interval defined by the arguments `-start`
+and `-stop`.  A `-recording-id` is optional and will be generated if not provided.
+The `-task` argument with its `TASK_ID` is also required.  The optional boolean
+argument `-no-wait` will spawn the replay into a separate process and exit leaving
+it to run in the background.
+
 
 **Example 13 &ndash; Record Batch**
 
@@ -374,8 +402,14 @@ BlueJaySilverTree
 kapacitor record stream -duration <DURATION> (-no-wait) (-recording-id <ID> ) -task <TASK_ID>
 ```
 
-Note that the `stream` option will run until the time duration has expired, before
-returning the recording ID in the console.  
+This command requires a `-duration` value to determine how long the recording
+will run.  The `-task` argument identifying the target task is also required. A
+`-recording-id` value is optional and when not provided will be generated. The optional
+boolean argument `-no-wait` will spawn the replay into a separate process and exit
+leaving it to run in the background.
+
+Note that this command in combination with the `stream` option will run until
+the time duration has expired.  It returns the recording ID in the console.  
 
 **Example 14 &ndash; Record Stream**
 
@@ -390,6 +424,12 @@ $ kapacitor record stream -duration 1m -task cpu_alert
 kapacitor record query (-cluster <INFLUXDB_CLUSTER_NAME> ) (-no-wait) -query <QUERY> (-recording-id <RECORDING_ID>) -type <stream|batch>
 ```
 
+This command requires an InfluxDB query provided through the `-query` argument.
+It also requires a `-type` value of either `batch` or `stream`.  A `-recording-id`
+can also be provided and when not provided will be generated. The optional boolean
+argument `-no-wait` will spawn the replay into a separate process and exit leaving
+it to run in the background.
+
 **Example 15 &ndash; Record Query**
 
 ```
@@ -402,6 +442,15 @@ $ kapacitor record query -query 'SELECT cpu, usage_idle from "telegraf"."autogen
 ```
 kapacitor replay (-no-wait) (-real-clock) (-rec-time) -recording <ID> (-replay-id <REPLAY_ID>) -task <TASK_ID>
 ```
+
+This command requires a recording ID provided through the argument `-recording`
+and a task ID provided through the argument `-task`.  The optional boolean argument
+`-real-clock` will toggle replaying the data according to the intervals between
+the timestamps contained within.  The optional boolean argument `-rec-time` will
+toggle using the actual recorded times instead of present times.  Use of present
+times is the default behavior.  An optional `-replay-id` can also be provided and
+when not provided will be generated. The optional boolean argument `-no-wait` will
+spawn the replay into a separate process and exit leaving it to run in the background.
 
 **Example 16 &ndash; Replaying a recording**
 
@@ -418,6 +467,17 @@ bbe8567c-a642-4da9-83ef-2a7d32ad5eb1
 kapacitor replay-live query (-cluster <CLUSTER_URL>) (-no-wait) -query <QUERY> (-real-clock) (-rec-time) (-replay-id <REPLAY_ID>) -task <TASK_ID>
 ```
 
+This command requires an InfluxDB query provided through the `-query` argument.
+It also requires a task identified by the argument `-task`.  A `-replay-id`
+can also be provided and when not provided will be generated. The optional boolean
+argument `-no-wait` will spawn the replay into a separate process and exit leaving
+it to run in the background. The optional boolean argument
+`-real-clock` will toggle replaying the data according to the intervals between
+the timestamps contained within.  The optional boolean argument `-rec-time` will
+toggle using the actual recorded times instead of present times.  Use of present
+times is the default behavior.
+
+
 **Example 17 &ndash; Replay live query**
 
 ```
@@ -430,6 +490,18 @@ $ kapacitor replay-live query -task cpu_alert -query 'select cpu, usage_idle fro
 ```
 kapacitor replay-live batch (-no-wait) ( -past <TIME_WINDOW> | -start <START_TIME> -stop <STOP_TIME> ) (-real-clock) (-rec-time) (-replay-id <REPLAY_ID>) -task <TASK_ID>
 ```
+
+This command requires either a time value for a window of past data from `now`,
+defined by the argument `-past` or a past interval defined by the arguments `-start`
+and `-stop`.  A `-replay-id` is optional and will be generated if not provided.
+The `-task` argument with its `TASK_ID` is also required.  The optional boolean
+argument `-no-wait` will spawn the replay into a separate process and exit leaving
+it to run in the background. The optional boolean argument
+`-real-clock` will toggle replaying the data according to the intervals between
+the timestamps contained within.  The optional boolean argument `-rec-time` will
+toggle using the actual recorded times instead of present times.  Use of present
+times is the default behavior.
+
 
 **Example 18 &ndash; Replay live batch**
 
@@ -621,6 +693,12 @@ Options: {"channel":"#kapacitor"}
 kapacitor delete topics [ID | Pattern]
 ```
 
+`Pattern` can be a GREP like pattern used to identify a set of topics.  For
+example if the value `cluster0<N>` was assigned to multiple `topic`s, (e.g.
+`cluster01`, `cluster02`, `cluster03`) then all `cluster` topics could be removed with
+the pattern `"cluster*"`.  
+
+
 **Example 28 &ndash; Deleting a Topic**
 
 ```
@@ -672,6 +750,15 @@ document.
 kapacitor define <TASK_ID> -tick <PATH_TO_TICKSCRIPT> -type <stream|batch> (-no-reload) -dbrp <DATABASE>.<RETENTION_POLICY>
 ```
 
+This form of the `define` command requires a new or existing task identifier
+provided immediately after the `define` token.  If the identifier does not yet
+exist in Kapacitor a new task will be created.  If the identifier already exists
+the existing task will be updated.  A required path to a TICKscript is provided
+through the argument `tick`.  The `-type` of task is also required, as is
+the target database and retention policy identified by the argument `-dbrp`. The
+optional boolean argument `-no-reload` will prevent reloading the task into
+memory.  The default behavior is to reload an updated task.
+
 **Example 30 &ndash; Defining a new Task - standard**
 
 ```
@@ -687,6 +774,16 @@ To verify the results use the `list tasks` command.
 ```
 kapacitor define <TASK_ID> -template <TEMPLATE_ID> -vars <PATH_TO_VARS_FILE> (-no-reload) -dbrp <DATABASE>.<RETENTION_POLICY>
 ```
+
+This form of the `define` command requires a new or existing task identifier
+provided immediately after the `define` token.  If the identifier does not yet
+exist in Kapacitor a new task will be created.  If the identifier already exists
+the existing task will be updated.  The required template to be used is identified
+with the `-template` argument.  The target database and retention policy
+identified by the argument `-dbrp` is also required as is a path to the file
+containing variable definitions identified by the `-var` argument.  The
+optional boolean argument `-no-reload` will prevent reloading the task into
+memory.  The default behavior is to reload an updated task.
 
 **Example 31 &ndash; Defining a new Task - from Template**
 
@@ -704,6 +801,15 @@ To verify the results use the `list tasks` command.
 kapacitor define <TASK_ID> -file <PATH_TO_TEMPLATE_FILE> (-no-reload)
 ```
 
+This form of the `define` command requires a new or existing task identifier
+provided immediately after the `define` token.  If the identifier does not yet
+exist in Kapacitor a new task will be created.  If the identifier already exists
+the existing task will be updated.  A path to the file defining the template,
+database and retention policy and variables is required and provided through the
+`-file` argument. The optional boolean argument `-no-reload` will prevent
+reloading the task into memory.  The default behavior is to reload an updated
+task.
+
 **Example 32 &ndash; Defining a new Task - with a descriptor file**
 
 ```
@@ -719,6 +825,13 @@ To verify the results use the `list tasks` command.
 ```
 kapacitor define-template <TEMPLATE_ID> -tick <PATH_TO_TICKSCRIPT> -type <string|batch>
 ```
+
+This command requires a new or existing template identifier provided immediately
+after the `define-template` token.  If the identifier does not yet
+exist in Kapacitor a new template will be created.  If the identifier already exists
+the existing template will be updated. The path to a TICKscript defining the
+template is also required and is provided through the argument `-tick`.  Finally
+the `-type` of task must also be defined.
 
 **Example 33 &ndash; Defining a new Task Template**
 
@@ -779,9 +892,195 @@ $
 Note that this task on success or failure returns no status or additional messages.
 To verify the result use the `list tasks` command.
 
-* **[list](javascript:void())**
-   * tasks
-   * templates
-* **[delete](javascript:void())**
-   * tasks
-   * templates
+**[list](javascript:void())** &ndash; The universal `list` command can be used to list tasks and task templates.
+
+* `list tasks` &ndash; Use the `list tasks` command to display all tasks currently stored by Kapacitor.  This command requires no further arguments.
+
+**Example 37 &ndash; Listing Tasks**
+
+```
+$ kapacitor list tasks
+ID                                                 Type      Status    Executing Databases and Retention Policies
+8405b862-e488-447d-a021-b1b7fe0d7194               stream    disabled  false     ["telegraf"."autogen"]
+batch_load_test                                    batch     enabled   true      ["telegraf"."autogen"]
+chronograf-v1-b12b2554-cf38-4d7e-af24-5b0cd3cecc54 stream    enabled   true      ["telegraf"."autogen"]
+cpu_alert                                          stream    enabled   true      ["telegraf"."autogen"]
+cpu_idle                                           stream    disabled  false     ["telegraf"."autogen"]
+sandbox                                            stream    disabled  false     ["blabla"."autogen"]
+```
+
+* `list templates` &ndash; Use the `list templates` command to display all templates currently stored by Kapacitor.  This command requires no further arguments.
+
+**Example 38 &ndash; Listing Templates**
+
+```
+$ kapacitor list templates
+ID                 Type      Vars                                    
+generic_mean_alert stream    crit,field,groups,measurement,slack_channel,warn,where_filter,window
+```
+
+**[show](javascript:void())** &ndash; Use this command to see the details of a task.  It takes the following form:
+
+```
+kapacitor show (-replay <REPLAY_ID>) [TASK_ID]
+```
+`REPLAY_ID` is the identifier of a currently running replay.
+
+**Example 39 &ndash; Showing a Task**
+
+```
+$ kapacitor show cpu_alert
+ID: cpu_alert
+Error:
+Template:
+Type: stream
+Status: enabled
+Executing: true
+Created: 13 Nov 17 13:38 CET
+Modified: 16 Jan 18 17:11 CET
+LastEnabled: 16 Jan 18 17:11 CET
+Databases Retention Policies: ["telegraf"."autogen"]
+TICKscript:
+stream
+    // Select just the cpu measurement from our example database.
+    |from()
+        .measurement('cpu')
+    |alert()
+        .crit(lambda: int("usage_idle") < 70)
+        // Whenever we get an alert write it to a file.
+        .log('/tmp/alerts.log')
+
+DOT:
+digraph cpu_alert {
+graph [throughput="0.00 points/s"];
+
+stream0 [avg_exec_time_ns="0s" errors="0" working_cardinality="0" ];
+stream0 -> from1 [processed="2574"];
+
+from1 [avg_exec_time_ns="1.92µs" errors="0" working_cardinality="0" ];
+from1 -> alert2 [processed="2574"];
+
+alert2 [alerts_triggered="147" avg_exec_time_ns="1.665189ms" crits_triggered="104" errors="0" infos_triggered="0" oks_triggered="43" warns_triggered="0" working_cardinality="1" ];
+}
+```
+
+**[show-template](javascript:void())** &ndash; Use this command to see the details of a task template.  It takes the following form:
+
+```
+kapacitor show-template [TEMPLATE_ID]
+```
+
+**Example 40 &ndash; Showing a Task Template**
+
+```
+$ kapacitor show-template generic_mean_alert
+ID: generic_mean_alert
+Error:
+Type: stream
+Created: 25 Oct 17 10:12 CEST
+Modified: 16 Jan 18 16:52 CET
+TICKscript:
+// Which measurement to consume
+var measurement string
+
+// Optional where filter
+var where_filter = lambda: TRUE
+
+// Optional list of group by dimensions
+var groups = [*]
+
+// Which field to process
+var field string
+
+// Warning criteria, has access to 'mean' field
+var warn lambda
+
+// Critical criteria, has access to 'mean' field
+var crit lambda
+
+// How much data to window
+var window = 5m
+
+// The slack channel for alerts
+var slack_channel = '#kapacitor'
+
+stream
+    |from()
+        .measurement(measurement)
+        .where(where_filter)
+        .groupBy(groups)
+    |window()
+        .period(window)
+        .every(window)
+    |mean(field)
+    |alert()
+        .warn(warn)
+        .crit(crit)
+        .slack()
+        .channel(slack_channel)
+
+Vars:
+Name                          Type      Default Value                           Description                             
+crit                          lambda    <required>                              Critical criteria, has access to 'mean' field
+field                         string    <required>                              Which field to process                  
+groups                        list      [*]                                     Optional list of group by dimensions    
+measurement                   string    <required>                              Which measurement to consume            
+slack_channel                 string    #kapacitor                              The slack channel for alerts            
+warn                          lambda    <required>                              Warning criteria, has access to 'mean' field
+where_filter                  lambda    TRUE                                    Optional where filter                   
+window                        duration  5m0s                                    How much data to window                 
+DOT:
+digraph generic_mean_alert {
+stream0 -> from1;
+from1 -> window2;
+window2 -> mean3;
+mean3 -> alert4;
+}
+```
+
+* **[delete](javascript:void())** The universal `delete` command can be used to remove tasks and task templates.
+
+* `delete tasks` &ndash; Use the `tasks` argument to remove one or more tasks.  It takes the following form:
+
+```
+kapacitor delete tasks [ID | Pattern]
+```
+
+`Pattern` can be a GREP like pattern used to identify a set of tasks.  For
+example if the value `cpu0<N>` was assigned to multiple `task`s, (e.g.
+`cpu01`, `cpu02`, `cpu03`) then all `cpu` tests could be removed with
+the pattern `"cpu*"`.  
+
+
+**Example 41 &ndash; Deleting a Task**
+
+```
+$ kapacitor delete tasks 8405b862-e488-447d-a021-b1b7fe0d7194
+$
+```
+
+Note that this command returns no status or additional messages.  It fails or
+succeeds silently.  To verify the results use the `list tasks` command.
+
+
+* `delete templates` &ndash; Use the `templates` argument to remove one or more templates.  It takes the following form:
+
+```
+kapacitor delete templates [ID | Pattern]
+```
+
+`Pattern` can be a GREP like pattern used to identify a set of task templates.  For
+example if the value `generic0<N>` was assigned to multiple `template`s, (e.g.
+`generic01`, `generic02`, `generic03`) then all `generic` templates could be removed with
+the pattern `"generic*"`.  
+
+
+**Example 42 &ndash; Deleting a Template**
+
+```
+$ kapacitor delete templates generic_mean_alert
+$
+```
+
+Note that this command returns no status or additional messages.  It fails or
+succeeds silently.  To verify the results use the `list templates` command.
