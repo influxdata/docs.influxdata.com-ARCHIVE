@@ -15,7 +15,7 @@ menu:
   * [Chronograf-owned resources](#chronograf-owned-resources)
   * [Chronograf-accessed resources](#chronograf-accessed-resources)
   * [Members](#members-role-member)
-  * [Viewers](#viewer-role-viewer)
+  * [Viewers](#viewers-role-viewer)
   * [Editors](#editors-role-editor)
   * [Admins](#admins-role-admin)
 * [Cross-organization SuperAdmin status](#cross-organization-superadmin-status)
