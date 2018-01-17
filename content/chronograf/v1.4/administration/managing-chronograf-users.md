@@ -1,4 +1,4 @@
-capabilities---
+---
 title: Managing Chronograf users
 menu:
   chronograf_1_4:
@@ -9,13 +9,13 @@ menu:
 
 **On this page**
 
-[Managing Chronograf users and roles](#managing-chronograf-users-and-roles)
+* [Managing Chronograf users and roles](#managing-chronograf-users-and-roles)
 * [Organization-bound users](#organization-bound-users)
   * [InfluxDB and Kapacitor users within Chronograf](#influxdb-and-kapacitor-users-within-chronograf)
   * [Chronograf-owned resources](#chronograf-owned-resources)
   * [Chronograf-accessed resources](#chronograf-accessed-resources)
   * [Members](#members-role-member)
-  * [Viewers](#viewer-role-viewer)
+  * [Viewers](#viewers-role-viewer)
   * [Editors](#editors-role-editor)
   * [Admins](#admins-role-admin)
 * [Cross-organization SuperAdmin status](#cross-organization-superadmin-status)

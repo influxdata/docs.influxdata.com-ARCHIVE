@@ -50,7 +50,7 @@ There's no need to include the surrounding colons (`:`) when you enter your vari
 **4.** Click on the green `Get Values` button to see the database names on the instance.
 Here, we have two databases: `plants` and `animals`.
 
-![Database template creation](/img/chronograf/latest/g-templates-database.png)
+![Database template creation](/img/chronograf/v1.4/g-templates-database.png)
 
 Finally, click on the green `Save Changes` button in the top right corner and exit the template variable manager by clicking on the `X`.
 
@@ -68,7 +68,7 @@ SELECT "purchases" FROM :database:."autogen"."customers"
 <br>
 Use the dropdown at the top of the dashboard to select the different options for the `:database:` template variable:
 
-![Database template](/img/chronograf/latest/g-templates-database.gif)
+![Database template](/img/chronograf/v1.4/g-templates-database.gif)
 
 ### Measurements
 Vary the target [measurement](/influxdb/latest/concepts/glossary/#measurement).
@@ -91,7 +91,7 @@ There's no need to include the surrounding colons (`:`) when you enter your vari
 **5.** Click on the green `Get Values` button to see the measurement names in that database.
 Here, we have two measurements: `customers` and `products`.
 
-![Measurement template creation](/img/chronograf/latest/g-templates-measurement.png)
+![Measurement template creation](/img/chronograf/v1.4/g-templates-measurement.png)
 
 Finally, click on the green `Save Changes` button in the top right corner and exit the template variable manager by clicking on the `X`.
 
@@ -108,7 +108,7 @@ SELECT * FROM "animals"."autogen".:measurement:
 <br>
 Use the dropdown at the top of the dashboard to select the different options for the `:measurement:` template variable:
 
-![Measurement template](/img/chronograf/latest/g-templates-measurement.gif)
+![Measurement template](/img/chronograf/v1.4/g-templates-measurement.gif)
 
 ### Field Keys
 Vary the target [field key](/influxdb/latest/concepts/glossary/#field-key).
@@ -130,7 +130,7 @@ There's no need to include the surrounding colons (`:`) when you enter your vari
 **5.** Click on the green `Get Values` button to see the field keys in that database and measurement.
 Here, we have three field keys: `petname`, `purchases`, and `returns`.
 
-![Field key template creation](/img/chronograf/latest/g-templates-fieldkey.png)
+![Field key template creation](/img/chronograf/v1.4/g-templates-fieldkey.png)
 
 Finally, click on the green `Save Changes` button in the top right corner and exit the template variable manager by clicking on the `X`.
 
@@ -147,7 +147,7 @@ SELECT :field-key: FROM "animals"."autogen"."customers"
 <br>
 Use the dropdown at the top of the dashboard to select the different options for the `:field-key:` template variable:
 
-![Field key template](/img/chronograf/latest/g-templates-fieldkey.gif)
+![Field key template](/img/chronograf/v1.4/g-templates-fieldkey.gif)
 
 ### Tag Keys
 Vary the target [tag key](/influxdb/latest/concepts/glossary/#tag-key).
@@ -169,7 +169,7 @@ There's no need to include the surrounding colons (`:`) when you enter your vari
 **5.** Click on the green `Get Values` button to see the tag keys in that database and measurement.
 Here, we have two tag keys: `location` and `species`.
 
-![Tag key template creation](/img/chronograf/latest/g-templates-tagkey.png)
+![Tag key template creation](/img/chronograf/v1.4/g-templates-tagkey.png)
 
 Finally, click on the green `Save Changes` button in the top right corner and exit the template variable manager by clicking on the `X`.
 
@@ -188,7 +188,7 @@ SELECT "purchases" FROM "animals"."autogen"."customers" GROUP BY :tag-key:
 <br>
 Use the dropdown at the top of the dashboard to select the different options for the `:tag-key:` template variable:
 
-![Tag key template](/img/chronograf/latest/g-templates-tagkey.gif)
+![Tag key template](/img/chronograf/v1.4/g-templates-tagkey.gif)
 
 ### Tag Values
 Vary the target [tag value](/influxdb/latest/concepts/glossary/#tag-value).
@@ -210,7 +210,7 @@ There's no need to include the surrounding colons (`:`) when you enter your vari
 **5.** Click on the green `Get Values` button to see the tag values in that database, measurement, and tag key.
 Here, we have two tag values: `chronocat` and `chronogiraffe`.
 
-![Tag value template creation](/img/chronograf/latest/g-templates-tagvalue.png)
+![Tag value template creation](/img/chronograf/v1.4/g-templates-tagvalue.png)
 
 Finally, click on the green `Save Changes` button in the top right corner and exit the template variable manager by clicking on the `X`.
 
@@ -229,7 +229,7 @@ SELECT "purchases" FROM "animals"."autogen"."customers" WHERE "species" = :tag-v
 <br>
 Use the dropdown at the top of the dashboard to select the different options for the `:tag-value:` template variable:
 
-![Tag value template](/img/chronograf/latest/g-templates-tagvalue.gif)
+![Tag value template](/img/chronograf/v1.4/g-templates-tagvalue.gif)
 
 ### CSV
 Vary part of a query with a customized list of comma-separated values (CSV).
@@ -249,7 +249,7 @@ There's no need to include the surrounding colons (`:`) when you enter your vari
 Here, we enter the list `'chronothan','chronobelle'`.
 We single quote the values because we plan to use them as string field values; string field values [require single quotes in InfluxQL](/influxdb/latest/troubleshooting/frequently-asked-questions/#when-should-i-single-quote-and-when-should-i-double-quote-in-queries).
 
-![CSV template creation](/img/chronograf/latest/g-templates-csv.png)
+![CSV template creation](/img/chronograf/v1.4/g-templates-csv.png)
 
 Finally, click on the green `Save Changes` button in the top right corner and exit the template variable manager by clicking on the `X`.
 
@@ -267,4 +267,4 @@ SELECT "purchases" FROM "animals"."autogen"."customers" WHERE "petname" = :field
 <br>
 Use the dropdown at the top of the dashboard to select the different options for the CSV `:field-value:` template variable:
 
-![CSV template](/img/chronograf/latest/g-templates-csv.gif)
+![CSV template](/img/chronograf/v1.4/g-templates-csv.gif)

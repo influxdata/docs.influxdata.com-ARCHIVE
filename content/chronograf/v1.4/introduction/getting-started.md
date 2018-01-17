@@ -27,7 +27,7 @@ The next sections will get you up and running with Chronograf with as little con
 By the end of this document, you will have downloaded, installed, and configured all four packages of the
 TICK stack ([Telegraf](https://github.com/influxdata/telegraf), [InfluxDB](https://github.com/influxdata/influxdb), [Chronograf](https://github.com/influxdata/chronograf), and [Kapacitor](https://github.com/influxdata/kapacitor)), and you will be all set to monitor your infrastructure.
 
-![Getting started setup](/img/chronograf/latest/intro-gs-diagram.png)
+![Getting started setup](/img/chronograf/v1.4/intro-gs-diagram.png)
 
 ## Requirements
 
@@ -228,7 +228,7 @@ Point your web browser to `http://localhost:8888` (replace `localhost` with your
 
 You should see a welcome page:
 
-![Chronograf Welcome Page](/img/chronograf/latest/welcome-page.png)
+![Chronograf Welcome Page](/img/chronograf/v1.4/welcome-page.png)
 
 The next steps connect Chronograf to your InfluxDB instance.
 For the `Connection String`, enter the hostname or IP of the machine that InfluxDB is running on, and be sure to include InfluxDB's default port: `8086`.
@@ -237,21 +237,21 @@ There's no need to edit the last three inputs; [authorization is disabled](https
 
 Click `Connect New Source` to move on to the `HOST LIST` page:
 
-![Chronograf Host List Page](/img/chronograf/latest/gs-host-list.png)
+![Chronograf Host List Page](/img/chronograf/v1.4/gs-host-list.png)
 
 You should see your machine's hostname on the page along with information about its CPU usage and load.
 Assuming you've configured Telegraf's system stats input plugin, `system` should appear in the `Apps` column.
 Go ahead and click on the hostname to see a series of system level graphs about
 your host:
 
-![System Stats Graphs](/img/chronograf/latest/gs-system-dashboard.png)
+![System Stats Graphs](/img/chronograf/v1.4/gs-system-dashboard.png)
 
 #### 4. Connect Chronograf to Kapacitor
 
 The final step in the installation process is to connect Chronograf to Kapacitor.
 Navigate to the Configuration page (the last item in the sidebar) and click `Add Config` in the `Active Kapacitor` column.
 
-![Configure Kapacitor](/img/chronograf/latest/gs-configure-kapacitor.png)
+![Configure Kapacitor](/img/chronograf/v1.4/gs-configure-kapacitor.png)
 
 For the `Kapacitor URL`, enter the hostname or IP of the machine that Kapacitor is running on, and be sure to include Kapacitor's default port: `9092`.
 Next, name the connection string; this can be anything you want.
@@ -262,7 +262,7 @@ When Kapacitor successfully connects, Chronograf automatically opens the `Config
 Kapacitor supports several [alert endpoints/event handlers](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf).
 See the [Configure Kapacitor Event Handlers](/chronograf/latest/guides/configure-kapacitor-event-handlers/) guide for more information.
 
-![Alert Endpoints](/img/chronograf/latest/gs-alert-endpoints.png)
+![Alert Endpoints](/img/chronograf/v1.4/gs-alert-endpoints.png)
 
 That's it! You've successfully downloaded, installed, and configured each component of the TICK stack.
 Next, check out [our guides](/chronograf/latest/guides/) to become familiar with Chronograf and see all that you can do with it!

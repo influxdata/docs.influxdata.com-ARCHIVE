@@ -13,7 +13,7 @@ This guide introduces the Chronograf customized dashboard features.
 
 By the end of this document, you'll be aware of all the tools you need to create a dashboard similar to this one:
 
-![Oh, the Chronobilities](/img/chronograf/latest/g-dashboard-possibilities.png)
+![Oh, the Chronobilities](/img/chronograf/v1.4/g-dashboard-possibilities.png)
 
 ## Requirements
 
@@ -32,14 +32,14 @@ Click the `Rename` icon at the top of the page.
 Name your dashboard anything you want.
 Here, we call it `ChronoDash`.
 
-![Name your dashboard](/img/chronograf/latest/g-dashboard-rename.png)
+![Name your dashboard](/img/chronograf/v1.4/g-dashboard-rename.png)
 
 ### Step 2: Enter cell editor mode
 
 Click on the carrot in the existing cell's top right corner and select `Edit`.
 This step takes you to cell editor mode.
 
-![Edit your cell](/img/chronograf/latest/g-dashboard-edit.png)
+![Edit your cell](/img/chronograf/v1.4/g-dashboard-edit.png)
 
 ### Step 3: Create your query
 
@@ -53,7 +53,7 @@ By default, Chronograf applies the [`MEAN()` function](/influxdb/latest/query_la
 Those defaults are configurable via the builder or by manually editing the query.
 In addition, the time range (`:dashboardTime:`) is [configurable on the dashboard](#step-6-configure-your-dashboard).
 
-![Build your query](/img/chronograf/latest/g-dashboard-builder.png)
+![Build your query](/img/chronograf/v1.4/g-dashboard-builder.png)
 
 ### Step 4: Choose your visualization type
 
@@ -61,7 +61,7 @@ Chronograf supports several [visualization types](/chronograf/latest/troubleshoo
 
 Here, we choose the Step-Plot:
 
-![Visualization type](/img/chronograf/latest/g-dashboard-type.png)
+![Visualization type](/img/chronograf/v1.4/g-dashboard-type.png)
 
 ### Step 5: Save your cell
 Click on the green checkmark to save your cell.
@@ -86,7 +86,7 @@ These tips only apply to the line, stacked, step-plot, and line+stat [visualizat
 * Set the dashboard's **auto-refresh interval** at the top of the page - the default interval is every 15 seconds
 * Set the dashboard's **time range** at the top of the page - the default range is the past one hour
 
-![Visualization type](/img/chronograf/latest/g-dashboard-resize.gif)
+![Visualization type](/img/chronograf/v1.4/g-dashboard-resize.gif)
 
 Next, complete your dashboard by creating, editing, and repositioning more cells!
 

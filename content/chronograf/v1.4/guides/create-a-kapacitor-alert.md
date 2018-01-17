@@ -27,12 +27,12 @@ See the [Configure Kapacitor Event Handlers](/chronograf/latest/guides/configure
 
 Before you start, navigate to the Rule Configuration page by visiting the Alert Rules page and clicking on the `Create Rule` button in the top right corner.
 
-![Navigate to Rule Configuration](/img/chronograf/latest/g-kap-rule-page.png)
+![Navigate to Rule Configuration](/img/chronograf/v1.4/g-kap-rule-page.png)
 
 The Rule Configuration page is where you create and edit your Kapacitor alert rules.
 Steps one through six walk you through each section of the Rule Configuration page:
 
-![Empty Rule Configuration](/img/chronograf/latest/g-kap-blank-rule.png)
+![Empty Rule Configuration](/img/chronograf/v1.4/g-kap-blank-rule.png)
 
 ### Step 1: Name the rule
 
@@ -40,7 +40,7 @@ Click `Untitled Rule` in the top left corner and name the rule.
 
 For this example, the rule is named `Idle CPU Usage`:
 
-![Name your rule](/img/chronograf/latest/g-kap-rule-name.png)
+![Name your rule](/img/chronograf/v1.4/g-kap-rule-name.png)
 
 ### Step 2: Select the time series
 
@@ -52,7 +52,7 @@ The result is the InfluxQL [query](/influxdb/latest/concepts/glossary/#query) in
 Notice that Chronograf automatically sets a time range in the [`WHERE` clause](/influxdb/latest/query_language/data_exploration/#the-where-clause).
 Don't modify that for now; the time range is discussed in step four.
 
-![Select your data](/img/chronograf/latest/g-kap-ts.png)
+![Select your data](/img/chronograf/v1.4/g-kap-ts.png)
 
 ### Step 3: Select the alert type
 
@@ -69,7 +69,7 @@ For this example, select the `Threshold` alert type.
 
 Define the threshold condition:
 
-![Create a condition](/img/chronograf/latest/g-kap-condition.png)
+![Create a condition](/img/chronograf/v1.4/g-kap-condition.png)
 
 Moving across the inputs from right to left:
 
@@ -98,7 +98,7 @@ In this example, the alert message is `Your idle CPU usage is {{.Level}} at {{ i
 `{{.Level}}` is a template that evaluates to `CRITICAL` when the `usage_idle` data initially dip below 80% and `OK` when the `usage_idle` data first return to 80% or above.
 The `{{ index .Fields "value" }}` template prints the relevant [field value](/influxdb/latest/concepts/glossary/#field-value) that triggered the alert.
 
-![Specify event handler and alert message](/img/chronograf/latest/g-kap-alertmessage.png)
+![Specify event handler and alert message](/img/chronograf/v1.4/g-kap-alertmessage.png)
 
 > **Note:**
 There's no need to include a Slack channel in the `Alert Message` section if you specified a default channel in the [initial Slack configuration](/chronograf/latest/guides/configure-kapacitor-event-handlers/).
@@ -109,7 +109,7 @@ If you did not include a default channel in the initial configuration or if you'
 Click `Save Rule` in the top right corner and navigate to the Kapacitor Rule page to see your rule.
 Notice that you can easily enable and disable the rule by toggling the checkbox in the `Enabled` column.
 
-![See the alert rule](/img/chronograf/latest/g-kap-rule-page-ii.png)
+![See the alert rule](/img/chronograf/v1.4/g-kap-rule-page-ii.png)
 
 Next, move on to the section below to experience your alert rule in action.
 
@@ -140,6 +140,6 @@ The specific [field value](/influxdb/latest/concepts/glossary/#field-value) that
 * The second alert message indicates that your idle CPU usage returned to an `OK` level of `80%` or above.
 The specific field value that triggered the alert is `99.0981963931105`.
 
-![See the alerts](/img/chronograf/latest/g-kap-slack.png)
+![See the alerts](/img/chronograf/v1.4/g-kap-slack.png)
 
 That's it! You've successfully used Chronograf to configure a Kapacitor alert rule to monitor your idle CPU usage.

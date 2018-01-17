@@ -11,7 +11,7 @@ menu:
 Chronograf is InfluxData's open source web application.
 Use Chronograf with the other components of the [TICK stack](https://www.influxdata.com/products/) to visualize your monitoring data and easily create alerting and automation rules.
 
-![Chronograf Collage](/img/chronograf/latest/chronograf-collage.png)
+![Chronograf Collage](/img/chronograf/v1.4/chronograf-collage.png)
 
 ## Key Features
 
