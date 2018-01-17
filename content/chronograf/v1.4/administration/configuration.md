@@ -46,5 +46,5 @@ See [Managing security](/chronograf/latest/administration/managing-security) for
 
 After you configure OAuth 2.0 authentication in Chronograf, you can use the multi-organization and multi-user support described in detail here:
 
-* [Managing organizations](/chronograf/latest/administration/managing-organization)
+* [Managing organizations](/chronograf/latest/administration/managing-organizations)
 * [Managing Chronograf users](/chronograf/latest/administration/managing-chronograf-users)
