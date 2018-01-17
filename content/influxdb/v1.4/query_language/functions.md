@@ -1234,7 +1234,7 @@ The query returns the newest field value (determined by timestamp) associated wi
 > SELECT LAST(*) FROM "h2o_feet"
 
 name: h2o_feet
-time                   first_level description   first_water_level
+time                   last_level description   last_water_level
 ----                   -----------------------   -----------------
 1970-01-01T00:00:00Z   between 3 and 6 feet      4.938
 ```
@@ -1246,7 +1246,7 @@ The `h2o_feet` measurement has two field keys: `level description` and `water_le
 > SELECT LAST(/level/) FROM "h2o_feet"
 
 name: h2o_feet
-time                   first_level description   first_water_level
+time                   last_level description   last_water_level
 ----                   -----------------------   -----------------
 1970-01-01T00:00:00Z   between 3 and 6 feet      4.938
 ```
