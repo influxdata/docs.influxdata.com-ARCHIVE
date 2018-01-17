@@ -5,6 +5,7 @@ menu:
   chronograf_1_4:
     name: Administering Chronograf
     weight: 1
+    parent: Administration
 ---
 
 Follow the links below for more information.
