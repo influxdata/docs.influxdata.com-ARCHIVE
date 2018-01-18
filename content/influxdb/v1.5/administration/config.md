@@ -1,7 +1,7 @@
 ---
 title: Configuring InfluxDB
 menu:
-  influxdb_1_4:
+  influxdb_1_5:
     name: Configuration
     weight: 70
     parent: administration

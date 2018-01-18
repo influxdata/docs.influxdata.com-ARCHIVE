@@ -2,7 +2,7 @@
 title: Influx Inspect
 
 menu:
-  influxdb_1_4:
+  influxdb_1_5:
     weight: 40
     parent: tools
 ---

@@ -3,7 +3,7 @@ title: Querying Data with the HTTP API
 alias:
   -/docs/v1.5/query_language/querying_data/
 menu:
-  influxdb_1_4:
+  influxdb_1_5:
     weight: 10
     parent: guides
 ---

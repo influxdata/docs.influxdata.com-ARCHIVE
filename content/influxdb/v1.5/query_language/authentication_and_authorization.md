@@ -3,7 +3,7 @@ title: Authentication and Authorization
 aliases:
     - influxdb/v1.5/administration/authentication_and_authorization/
 menu:
-  influxdb_1_4:
+  influxdb_1_5:
     weight: 90
     parent: query_language
 ---

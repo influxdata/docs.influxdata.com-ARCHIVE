@@ -3,7 +3,7 @@ title: Line Protocol Reference
 aliases:
     - influxdb/v1.5/write_protocols/write_syntax/
 menu:
-  influxdb_1_4:
+  influxdb_1_5:
     weight: 10
     parent: write_protocols
 ---

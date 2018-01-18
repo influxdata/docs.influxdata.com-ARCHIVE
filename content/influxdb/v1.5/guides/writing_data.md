@@ -2,7 +2,7 @@
 title: Writing Data with the HTTP API
 
 menu:
-  influxdb_1_4:
+  influxdb_1_5:
     weight: 0
     parent: guides
 ---

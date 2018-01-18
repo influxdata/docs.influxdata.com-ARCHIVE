@@ -3,7 +3,7 @@ title: API Reference
 aliases:
     - influxdb/v1.5/concepts/api/
 menu:
-  influxdb_1_4:
+  influxdb_1_5:
     weight: 10
     parent: tools
 ---

@@ -1,7 +1,7 @@
 ---
 title: Security Best Practices
 menu:
-  influxdb_1_4:
+  influxdb_1_5:
     weight: 80
     parent: administration
 ---

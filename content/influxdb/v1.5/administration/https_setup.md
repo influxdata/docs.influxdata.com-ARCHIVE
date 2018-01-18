@@ -1,7 +1,7 @@
 ---
 title: HTTPS Setup
 menu:
-  influxdb_1_4:
+  influxdb_1_5:
     weight: 100
     parent: guides
 ---

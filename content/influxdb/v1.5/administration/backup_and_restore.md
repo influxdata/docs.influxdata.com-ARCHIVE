@@ -2,7 +2,7 @@
 title: Backup and restore
 
 menu:
-  influxdb_1_4:
+  influxdb_1_5:
     weight: 30
     parent: administration
 ---

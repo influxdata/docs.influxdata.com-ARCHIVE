@@ -4,7 +4,7 @@ title: InfluxDB Version 1.4 Documentation
 menu:
   influxdb:
     name: v1.4
-    identifier: influxdb_1_4
+    identifier: influxdb_1_5
     weight: 1
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Error Messages
 menu:
-  influxdb_1_4:
+  influxdb_1_5:
     weight: 30
     parent: troubleshooting
 ---

@@ -7,7 +7,7 @@ aliases:
     - influxdb/v1.3/concepts/013_vs_previous/
     - influxdb/v1.3/concepts/1_vs_previous/
 menu:
-  influxdb_1_4:
+  influxdb_1_5:
     weight: 50
     parent: administration
 ---

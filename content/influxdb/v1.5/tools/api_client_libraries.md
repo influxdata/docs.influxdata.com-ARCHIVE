@@ -5,7 +5,7 @@ aliases:
     - influxdb/v1.5/clients/
     - influxdb/v1.5/clients/api
 menu:
-  influxdb_1_4:
+  influxdb_1_5:
     weight: 20
     parent: tools
 ---

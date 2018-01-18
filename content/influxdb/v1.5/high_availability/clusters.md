@@ -6,7 +6,7 @@ aliases:
     - influxdb/v1.5/clustering/cluster_node_config/
     - influxdb/v1.5/guides/clustering/
 menu:
-  influxdb_1_4:
+  influxdb_1_5:
     weight: 0
     parent: high_availability
 ---

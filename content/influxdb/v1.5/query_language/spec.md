@@ -1,7 +1,7 @@
 ---
 title: InfluxQL Reference
 menu:
-  influxdb_1_4:
+  influxdb_1_5:
     weight: 90
     parent: query_language
 ---
