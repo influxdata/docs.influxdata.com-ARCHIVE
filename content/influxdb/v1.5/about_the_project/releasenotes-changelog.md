@@ -1,10 +1,59 @@
 ---
 title: Release Notes/Changelog
 menu:
-  influxdb_1_4:
+  influxdb_1_5:
     weight: 1
     parent: about_the_project
 ---
+
+## v1.5.0 [unreleased]
+
+### Breaking changes
+
+* The default logging format has been changed. See [#9055](https://github.com/influxdata/influxdb/pull/9055) for details.
+
+### Features
+
+- Improve CLI connection warnings.
+- Backup utility prints a list of backup files.
+- Backup/Restore for OSS produces and consumes data in the same format as the enterprise backup and restore tool.
+- Restore runs in online mode; does not delete existing databases.
+- Export functionality using start and end to filter exported data by timestamp
+- Handle high cardinality deletes in TSM engine
+- Improve inmem index startup performance for high cardinality.
+- Add further TSI support for streaming and copying shards.
+- Schedule a full compaction after a successful import.
+- Add Prometheus `/metrics` endpoint.
+- Add ability to generate shard digests.
+- Allow setting the node ID in the InfluxDB CLI program.
+
+### Bugfixes
+
+- Refuse extra arguments to influx CLI.
+- Fix space required after regex operator. Thanks @stop-start!
+- Fix `panic: sync: WaitGroup is reused before previous Wait has returned`.
+- Fix race condition in the merge iterator close method.
+- Fix query compilation so multiple nested distinct calls is allowable
+- Fix CLI to allow quoted database names in use statement.
+- Updated client `4xx` error message when response body length is zero.
+- Remove extraneous newlines from the log.
+- Allow lone boolean literals in a condition expression.
+- Improve performance when writes exceed `max-values-per-tag` or `max-series`.
+- Prevent a panic when a query simultaneously finishes and is killed at the same time.
+- Fix missing sorting of blocks by time when compacting.
+- WAL: update `lastWriteTime` behavior
+
+## v1.4.3 [unreleased]
+
+### Configuration Changes
+
+#### `[data]` Section
+
+`cache-snapshot-memory-size`: default value changed from `25m` to `256m`.
+
+### Bugfixes
+
+- Fix higher disk I/O utilization
 
 ## v1.4.2 [2017-11-15]
 
@@ -23,19 +72,19 @@ Refer to the 1.4.0 breaking changes section if `influxd` fails to start with an 
 ## v1.4.0 [2017-11-13]
 
 ### TSI Index
-This feature remains experimental in this release.  
-However, a number of improvements have been made and new meta query changes will allow for this feature to be explored at more depth than previously possible.  It is not recommended for production use at this time. 
+This feature remains experimental in this release.
+However, a number of improvements have been made and new meta query changes will allow for this feature to be explored at more depth than previously possible.  It is not recommended for production use at this time.
 We appreciate all of the feedback we receive on this feature.  Please keep it coming!
 
 ### Breaking changes
 
-You can no longer specify a different `ORDER BY` clause in a subquery than the one in the top level query. 
-This functionality never worked properly, 
+You can no longer specify a different `ORDER BY` clause in a subquery than the one in the top level query.
+This functionality never worked properly,
 but was not explicitly forbidden.
 
-As part of the ongoing development of the `tsi1` index, 
-the implementation of a Bloom Filter, 
-used to efficiently determine if series are not present in the index, 
+As part of the ongoing development of the `tsi1` index,
+the implementation of a Bloom Filter,
+used to efficiently determine if series are not present in the index,
 was altered.
 While this significantly increases the performance of the index and reduces its memory consumption,
 the existing `tsi1` indexes created while running previous versions of the database are not compatible with 1.4.0.
@@ -52,8 +101,8 @@ Users with databases using the `tsi1` index must go through the following proces
 4. Repeat step (3) for each shard that needs to be converted.
 5. Start `influxd`.
 
-Users with existing `tsi1` shards, 
-who attempt to start version 1.4.0 without following the steps above, 
+Users with existing `tsi1` shards,
+who attempt to start version 1.4.0 without following the steps above,
 will find the shards refuse to open and will most likely see the following error message: `incompatible tsi1 index MANIFEST`.
 
 ### Configuration Changes
@@ -74,10 +123,10 @@ will find the shards refuse to open and will most likely see the following error
 - Allow human-readable byte sizes in configuation file.
 - Respect X-Request-Id/Request-Id headers.
 - Add 'X-Influxdb-Build' to http response headers so users can identify if a response is from an OSS or Enterprise service.
-- All errors from queries or writes are available via X-InfluxDB-Error header, and 5xx error messages will be written 
+- All errors from queries or writes are available via X-InfluxDB-Error header, and 5xx error messages will be written
   to server logs.
 - Add `parse-multivalue-plugin` to allow users to choose how multivalue plugins should be handled by the collectd service.
-- Make client errors more helpful on downstream errors. 
+- Make client errors more helpful on downstream errors.
 - Allow panic recovery to be disabled when investigating server issues.
 - Support http pipelining for `/query` endpoint.
 - Reduce allocations when reading data.
@@ -94,7 +143,7 @@ will find the shards refuse to open and will most likely see the following error
 - Add message pack format for query responses.
 - Implicitly decide on a lower limit for fill queries when none is present.
 - Streaming `inmem2tsi` conversion.
-- Sort & validate TSI key value insertion. 
+- Sort & validate TSI key value insertion.
 - Handle nil MeasurementIterator.
 - Add long-line support to client importer.
 - Update to go 1.9.2.
@@ -105,7 +154,7 @@ will find the shards refuse to open and will most likely see the following error
 - Change the default stats interval to 1 second instead of 10 seconds.
 - illumos build broken on `syscall.Mmap`.
 - Prevent privileges on non-existent databases from being set.
-- `influxd backup` tool now separates out logging to `stdout` and `stderr`. Thanks @xginn8! 
+- `influxd backup` tool now separates out logging to `stdout` and `stderr`. Thanks @xginn8!
 - Dropping measurement used several GB disk space.
 - Fix the CQ start and end times to use Unix timestamps.
 - `influx` CLI case-sensitivity.
@@ -165,7 +214,7 @@ Bug fix identified via Community and InfluxCloud. The build artifacts are now co
 ## v1.3.6 [2017-09-28]
 
 ### Release Notes
-Bug fix identified via Community and InfluxCloud. 
+Bug fix identified via Community and InfluxCloud.
 
 ### Bugfixes
 - Reduce how long it takes to walk the varrefs in an expression.
@@ -176,7 +225,7 @@ Bug fix identified via Community and InfluxCloud.
 - Fix race condition on cache entry.
 
 ### Release Notes
-Bug fix identified via Community and InfluxCloud. 
+Bug fix identified via Community and InfluxCloud.
 
 ### Bugfixes
 - Fix race condition accessing `seriesByID` map.
@@ -185,7 +234,7 @@ Bug fix identified via Community and InfluxCloud.
 ## v1.3.5 [2017-08-29]
 
 ### Release Notes
-Bug fix identified via Community and InfluxCloud. 
+Bug fix identified via Community and InfluxCloud.
 
 ### Bugfixes
 - Fix race condition accessing `seriesByID` map.
@@ -194,7 +243,7 @@ Bug fix identified via Community and InfluxCloud.
 ## v1.3.4 [2017-08-23]
 
 ### Release Notes
-Bug fix identified via Community and InfluxCloud. 
+Bug fix identified via Community and InfluxCloud.
 
 ### Bugfixes
 - Fixed time boundaries for continuous queries with time zones.
@@ -210,7 +259,7 @@ Bug fix identified via Community and InfluxCloud.
 ## v1.3.3 [2017-08-10]
 
 ### Release Notes
-Bug fix identified via Community and InfluxCloud. 
+Bug fix identified via Community and InfluxCloud.
 
 ### Bugfixes
 
@@ -219,7 +268,7 @@ Bug fix identified via Community and InfluxCloud.
 ## v1.3.2 [2017-08-04]
 
 ### Release Notes
-Minor bug fixes were identified via Community and InfluxCloud. 
+Minor bug fixes were identified via Community and InfluxCloud.
 
 ### Bugfixes
 
@@ -230,7 +279,7 @@ Minor bug fixes were identified via Community and InfluxCloud.
 ## v1.3.1 [2017-07-20]
 
 ### Release Notes
-Minor bug fixes were identified via Community and InfluxCloud. 
+Minor bug fixes were identified via Community and InfluxCloud.
 
 ### Bugfixes
 
@@ -293,9 +342,9 @@ The following new configuration options are available.
 
 #### `[http]` Section
 
-* `max-body-size` was added with a default of 25,000,000, but can be disabled by setting it to 0. 
+* `max-body-size` was added with a default of 25,000,000, but can be disabled by setting it to 0.
   Specifies the maximum size (in bytes) of a client request body. When a client sends data that exceeds
-  the configured maximum size, a `413 Request Entity Too Large` HTTP response is returned. 
+  the configured maximum size, a `413 Request Entity Too Large` HTTP response is returned.
 
 #### `[continuous_queries]` Section
 
@@ -489,13 +538,13 @@ The stress tool `influx_stress` will be removed in a subsequent release. We reco
 - Return the time from a percentile call on an integer.
 - Expand string and boolean fields when using a wildcard with `sample()`.
 - Fix chuid argument order in init script.
-- Reject invalid subscription URLs. 
+- Reject invalid subscription URLs.
 - CLI should use spaces for alignment, not tabs.
 - 0.12.2 InfluxDB CLI client PRECISION returns "Unknown precision...".
 - Fix parse key panic when missing tag value.
 - Rentention Policy should not allow `INF` or `0` as a shard duration.
 - Return Error instead of panic when decoding point values.
-- Fix slice out of bounds panic when pruning shard groups. 
+- Fix slice out of bounds panic when pruning shard groups.
 - Drop database will delete /influxdb/data directory.
 - Ensure Subscriber service can be disabled.
 - Fix race in storage engine.
@@ -525,7 +574,7 @@ The stress tool `influx_stress` will be removed in a subsequent release. We reco
 ### Bugfixes
 
 - Fix memory leak when writing new series over HTTP.
-- Fix series tag iteration segfault. 
+- Fix series tag iteration segfault.
 - Fix tag dereferencing panic.
 
 ## v1.1.1 [2016-12-06]
@@ -552,8 +601,8 @@ This release is built with GoLang 1.7.3 and provides many performance optimizati
 
 ### Deprecations
 
-The admin interface is deprecated and will be removed in a subsequent release. 
-The configuration setting to enable the admin UI is now disabled by default, but can be enabled if necessary.  
+The admin interface is deprecated and will be removed in a subsequent release.
+The configuration setting to enable the admin UI is now disabled by default, but can be enabled if necessary.
 We recommend using [Chronograf](https://github.com/influxdata/chronograf) or [Grafana](https://github.com/grafana/grafana) as a replacement.
 
 ### Configuration Changes
@@ -593,7 +642,7 @@ All Changes:
 - Add `fill(linear)` to query language.
 - Implement cumulative_sum() function.
 - Update defaults in config for latest best practices.
-- UDP Client: Split large points. 
+- UDP Client: Split large points.
 - Add stats for active compactions, compaction errors.
 - More man pages for the other tools we package and compress man pages fully.
 - Add max-values-per-tag to limit high tag cardinality data.
@@ -627,7 +676,7 @@ All Changes:
 - Shard stats include WAL path tag so disk bytes make more sense.
 - Panic with unread show series iterators during drop database.
 - Use consistent column output from the CLI for column formatted responses.
-- Correctly use password-type field in Admin UI. 
+- Correctly use password-type field in Admin UI.
 - Duplicate parsing bug in ALTER RETENTION POLICY.
 - Fix database locked up when deleting shards.
 - Fix mmap dereferencing.
@@ -656,7 +705,7 @@ All Changes:
 - Prevent users from manually using system queries since incorrect use would result in a panic.
 - Ensure fieldsCreated stat available in shard measurement.
 - Report cmdline and memstats in /debug/vars.
-- Fixing typo within example configuration file. 
+- Fixing typo within example configuration file.
 - Implement time math for lazy time literals.
 - Fix database locked up when deleting shards.
 - Skip past points at the same time in derivative call within a merged series.
@@ -680,7 +729,7 @@ With this release the systemd configuration files for InfluxDB will use the syst
 
 ### Features
 
-- Add mode function. 
+- Add mode function.
 - Support negative timestamps for the query engine.
 - Write path stats.
 - Add MaxSeriesPerDatabase config setting.
@@ -768,7 +817,7 @@ With this release the systemd configuration files for InfluxDB will use the syst
 - Prevent panic if there are no values.
 - Time sorting broken with overwritten points.
 - queries with strings that look like dates end up with date types, not string types.
-- Concurrent map read write panic. 
+- Concurrent map read write panic.
 - Drop writes from before the retention policy time window.
 - Fix SELECT statement required privileges.
 - Filter out sources that do not match the shard database/retention policy.

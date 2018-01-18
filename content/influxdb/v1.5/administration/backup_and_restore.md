@@ -97,10 +97,10 @@ If you are working with an InfluxEnterprise cluster, please see the [Backup
 and Restore Guide](/enterprise/latest/guides/backup-and-restore/) in the
 InfluxEnterprise documentation.
 
-### Backing up the Metastore
+### Backing up the metastore
 
 InfluxDB's metastore contains internal information about the status of
-the system, including user information, database/shard metadata, CQs, RPs,
+the system, including user information, database and shard metadata, continuous queries, retention policies,
 and subscriptions. While a node is running, you can
 create a backup of your instance's metastore by running the command:
 
@@ -108,7 +108,7 @@ create a backup of your instance's metastore by running the command:
 influxd backup <path-to-backup>
 ```
 
-Where `path-to-backup` can be replaced with the directory where you
+Where `<path-to-backup>` can be replaced with the directory where you
 would like the backup to be written to. Without any other arguments,
 the backup will only record the current state of the system
 metastore. For example, the command:
