@@ -8,39 +8,44 @@ menu:
 ---
 
 ## Overview
-New in version 1.5, the InfluxDB backup utility provides the option to run backup and restore
-functions on a live database. It also provides features to backup and restore single or multiple
-databases, along with optional filtering based on data point timestamps. Finally, the backup tool supports
-import of data from an [InfluxEnterprise](/enterprise/latest/) cluster and can also generate backup files
-that may be imported into an InfluxDB Enterprise database.  The offline backup and restore functions
+New in version 1.5, the InfluxDB `backup` utility provides:
+
+* Option to run backup and restore functions on a live database.
+* Backup and restore single or multiple databases, along with optional filtering based on data point timestamps
+* Supports data imports from [InfluxEnterprise](/enterprise/latest/) clusters
+* Generate backup files that can be imported into an InfluxDB Enterprise database.
+
+> ***Note:*** The offline backup and restore functions
 provided in InfluxDB versions 1.4 and earlier are retained in version 1.5 without change, and
 are detailed in [Backward Compatible Offline Backup/Restore](#legacy).
 
-> **Note:** Prior to version 1.5, the InfluxDB OSS backup tool created a different backup file format than
-the InfluxDB Enterprise version. This document will refer to that format as the _legacy_ format.  The legacy
-format is fully supported, so that it may be provided as input to the new online restore function.  If you are creating a
-new backup process from scratch, InfluxData recommends using the new InfluxDB Enterprise-compatible backup format, which uses less disk space and also provides a clear transfer path for data between the InfluxDB Enterprise and InfluxDB OSS versions.
->
+> ***Note:*** Prior to version 1.5, the InfluxDB OSS `backup` utility created  backup file formats, now referred to as the _legacy_ format, that were incompatible with the InfluxDB Enterprise version.  The legacy format is fully supported in the new `backup` utility as input for the new online restore function. If you are creating new backup processes, InfluxData recommends using the new InfluxDB Enterprise-compatible backup format, which uses less disk space and provides a clear transfer path for data between the InfluxDB Enterprise and InfluxDB OSS versions.
 
-<h2 id="online">Enterprise Compatible Online Backup and Restore</h2>
+<h2 id="online">Enterprise-compatible online backup and restore</h2>
 
-<h3 id="remoteconn">Configuring a Remote Connection</h3>
-The online backup and restore processes execute over a TCP connection to the database.  To enable
-the port for the backup and restore service:
+<h3 id="remoteconn">Configuring remote connections</h3>
 
-**1.** At the root level of the influxdb config file, uncomment the [`bind-address` configuration setting](/influxdb/v1.4/administration/config/#bind-address-127-0-0-1-8088) on the remote node
-**2.** Update the `bind-address` value to `<remote-node-IP>:8088`
-**3.** Provide the IP and port to the `-host` parameter when you run commands. For example:
+The online backup and restore processes execute over a TCP connection to the database.
+
+**To enable the port for the backup and restore service:**
+
+1. At the root level of the InfluxDB config file, uncomment the [`bind-address` configuration setting](/influxdb/v1.4/administration/config/#bind-address-127-0-0-1-8088) on the remote node.
+
+2. Update the `bind-address` value to `<remote-node-IP>:8088`
+
+3. Provide the IP address and port to the `-host` parameter when you run commands.
+
+**Example:**
 
 ```
 $ influxd backup -database mydatabase -host <remote-node-IP>:8088 /tmp/mysnapshot
 ```
 
 ### Backup
-The improved `backup` command is similar to previous versions in InfluxDB, except that it
-generates backups in an InfluxDB Enterprise-compatible format and has some new filtering options
-to constrain the range of data points that are exported to the backup.
-The InfluxDB Enterprise-compatible format is invoked by the `influxd` binary using the `-enterprise` flag:
+The improved `backup` command is similar to previous versions, except that it
+generates backups in an InfluxDB Enterprise-compatible format and has some new filtering options to constrain the range of data points that are exported to the backup.
+
+To invoke the new InfluxDB Enterprise-compatible format, run the `influxd backup` command with the `-enterprise` flag, like this:
 
 ```
 influxd backup -enterprise [options] <path-to-backup>
