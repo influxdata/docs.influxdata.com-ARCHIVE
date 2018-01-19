@@ -21,17 +21,17 @@ SectionPagesMenu = "products"
 [[menu.products]]
   name = "InfluxDB Enterprise"
   identifier = "enterprise_influxdb"
-  weight = 40
+  weight = 20
   url = "/enterprise_influxdb/"
 [[menu.products]]
   name = "Chronograf"
   identifier = "chronograf"
-  weight = 20
+  weight = 30
   url = "/chronograf/"
 [[menu.products]]
   name = "Kapacitor"
   identifier = "kapacitor"
-  weight = 30
+  weight = 40
   url = "/kapacitor/"
 [[menu.products]]
   name = "Kapacitor Enterprise"
