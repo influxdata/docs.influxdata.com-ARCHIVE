@@ -1,7 +1,7 @@
 {{ partial "header.html" . }}
 <div class="homepage">
 	{{ range .Site.Menus.products }}
-		{{ if or (eq .Identifier "telegraf") (eq .Identifier "influxdb") (eq .Identifier "chronograf") (eq .Identifier "kapacitor") (eq .Identifier "enterprise_influxdb") }}
+		{{ if or (eq .Identifier "telegraf") (eq .Identifier "influxdb") (eq .Identifier "enterprise_influxdb") (eq .Identifier "chronograf") (eq .Identifier "kapacitor") }}
 			<div class="homepage--card card-{{ .Name }}">
 				<div class="homepage--card-container">
 					{{ if or (eq .Identifier "telegraf") (eq .Identifier "influxdb") (eq .Identifier "chronograf") (eq .Identifier "kapacitor") }}
@@ -40,7 +40,7 @@
 						{{ end }}
 						{{ if eq .Identifier "enterprise_influxdb" }}
 							<br/>
-							<a class="homepage--card-link" href={{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/>InfluxDB Enterprise On Premises</a>
+							<a class="homepage--card-link" href={{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/>InfluxDB Enterprise</a>
 							<br/>
 						  <a class="homepage--card-link" href=/enterprise_kapacitor/{{ index $.Site.Data.default_versions (print "enterprise_kapacitor" "_semver") }}/>Kapacitor Enterprise</a>
 						  <br/>
