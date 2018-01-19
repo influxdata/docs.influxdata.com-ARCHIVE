@@ -9,7 +9,7 @@ menu:
 ---
 
 The introductory documentation includes all the information you need to get up
-and running with Enterprise Kapacitor.
+and running with Kapacitor Enterprise.
 
 ## [Downloads](/enterprise_kapacitor/v1.3/introduction/downloads/)
 

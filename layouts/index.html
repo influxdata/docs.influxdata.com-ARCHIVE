@@ -15,7 +15,7 @@
 							Telegraf is InfluxData's open source plugin-driven server agent for collecting and reporting metrics.
 						{{ end }}
 						{{ if eq .Identifier "influxdb" }}
-							InfluxDB is InfluxData's open source time series database built from the ground up to handle high write and query loads.
+							InfluxDB is InfluxData's open source time series database designed to handle high write and query loads.
 						{{ end }}
 						{{ if eq .Identifier "chronograf" }}
 							Chronograf is InfluxData's open source web application for infrastructure monitoring, alert management, data visualization, and database management.
@@ -40,9 +40,9 @@
 						{{ end }}
 						{{ if eq .Identifier "enterprise_influxdb" }}
 							<br/>
-							<a class="homepage--card-link" href={{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/>Enterprise InfluxDB On Premises</a>
+							<a class="homepage--card-link" href={{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/>InfluxDB Enterprise On Premises</a>
 							<br/>
-						  <a class="homepage--card-link" href=/enterprise_kapacitor/{{ index $.Site.Data.default_versions (print "enterprise_kapacitor" "_semver") }}/>Enterprise Kapacitor</a>
+						  <a class="homepage--card-link" href=/enterprise_kapacitor/{{ index $.Site.Data.default_versions (print "enterprise_kapacitor" "_semver") }}/>Kapacitor Enterprise</a>
 						  <br/>
 						{{ end }}
 					</p>

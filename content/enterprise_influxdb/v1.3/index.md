@@ -1,5 +1,5 @@
 ---
-title: Enterprise InfluxDB Version 1.3 Documentation
+title: InfluxDB Enterprise Version 1.3 Documentation
 
 aliases:
     - /enterprise/v1.3/
