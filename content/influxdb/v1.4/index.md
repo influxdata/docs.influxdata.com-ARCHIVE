@@ -1,5 +1,5 @@
 ---
-title: InfluxDB Version 1.4 Documentation
+title: InfluxDB 1.4 documentation
 
 menu:
   influxdb:
@@ -29,5 +29,5 @@ It compiles into a single binary with no external dependencies.
 * Continuous queries automatically compute aggregate data to make frequent queries more efficient.
 * Built in web admin interface.
 
-However, the open source edition of InfluxDB runs on a single node. If your requirements dictate a high-availability setup 
+However, the open source edition of InfluxDB runs on a single node. If your requirements dictate a high-availability setup
 to eliminate a single point of failure, you should explore [InfluxDB Enterprise Edition](https://docs.influxdata.com/influxdb/v1.4/high_availability/).

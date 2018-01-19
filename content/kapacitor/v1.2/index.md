@@ -1,5 +1,5 @@
 ---
-title: Kapacitor Version 1.2 Documentation
+title: Kapacitor 1.2 documentation
 
 menu:
   kapacitor:

@@ -1,5 +1,5 @@
 ---
-title: InfluxDB Version 0.6 Documentation
+title: InfluxDB 0.6 documentation
 
 menu:
   influxdb:

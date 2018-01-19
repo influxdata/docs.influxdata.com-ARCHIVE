@@ -1,5 +1,5 @@
 ---
-title: Kapacitor Enterprise Version 1.3 Documentation
+title: Kapacitor Enterprise 1.3 documentation
 
 menu:
   enterprise_kapacitor:
