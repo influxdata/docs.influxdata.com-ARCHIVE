@@ -72,15 +72,15 @@ A list of variables declared for the template should be returned in the group `v
 ```
 ...
 Vars:
-Name                          Type      Default Value                           Description
-crit                          lambda    <required>                              Critical criteria, has access to 'mean' field
-field                         string    <required>                              Which field to process
-groups                        list      [*]                                     Optional list of group by dimensions
-measurement                   string    <required>                              Which measurement to consume
-slack_channel                 string    #alerts                                 The slack channel for alerts
-warn                          lambda    <required>                              Warning criteria, has access to 'mean' field
-where_filter                  lambda    TRUE                                    Optional where filter
-window                        duration  5m0s                                    How much data to window
+Name           Type      Default Value  Description
+crit           lambda    <required>     Critical criteria, has access to 'mean' field
+field          string    <required>     Which field to process
+groups         list      [*]            Optional list of group by dimensions
+measurement    string    <required>     Which measurement to consume
+slack_channel  string    #alerts        The slack channel for alerts
+warn           lambda    <required>     Warning criteria, has access to 'mean' field
+where_filter   lambda    TRUE           Optional where filter
+window         duration  5m0s           How much data to window
 ...
 ```
 
@@ -123,15 +123,15 @@ Example output:
 ```
 ...
 Vars:
-Name                          Type      Value
-crit                          lambda    "mean" < 10.0
-field                         string    usage_idle
-groups                        list      [host,dc]
-measurement                   string    cpu
-slack_channel                 string    #alerts_testing
-warn                          lambda    "mean" < 30.0
-where_filter                  lambda    "cpu" == 'cpu-total'
-window                        duration  1m0s
+Name           Type      Value
+crit           lambda    "mean" < 10.0
+field          string    usage_idle
+groups         list      [host,dc]
+measurement    string    cpu
+slack_channel  string    #alerts_testing
+warn           lambda    "mean" < 30.0
+where_filter   lambda    "cpu" == 'cpu-total'
+window         duration  1m0s
 ...
 ```
 
@@ -170,14 +170,14 @@ And again the `vars` output:
 ```
 ...
 Vars:
-Name                          Type      Value
-crit                          lambda    "mean" > 90.0
-field                         string    used_percent
-groups                        list      [*]
-measurement                   string    mem
-slack_channel                 string    #alerts_testing
-warn                          lambda    "mean" > 80.0
-window                        duration  10m0s
+Name           Type      Value
+crit           lambda    "mean" > 90.0
+field          string    used_percent
+groups         list      [*]
+measurement    string    mem
+slack_channel  string    #alerts_testing
+warn           lambda    "mean" > 80.0
+window         duration  10m0s
 ...
 ```
 
@@ -207,7 +207,7 @@ This file may be in either JSON or YAML.
 A task for a memory based alert can be created using the same template defined above.
 Create a `mem_template_task.json` file using the snippet in Example 7.
 
-<!-- fixes defect 1372 --> 
+<!-- fixes defect 1372 -->
 
 **Example 7 &ndash; A task definition file in JSON**
 ```json
