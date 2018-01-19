@@ -71,9 +71,11 @@ which are the most commonly used.
 
 **[version](javascript:void())** &ndash; Use this command to print out the release version of the `kapacitor` client.
 
-**[list](javascript:void())** &ndash; This command can be used to print out lists of different Kapacitor artifacts.  This command is presented in more detail in the following sections.
+**[list](javascript:void())** &ndash; This command can be used to print out lists of different Kapacitor artifacts.
 
-**[delete](javascript:void())** &ndash; This command can be used to remove different Kapacitor arrtifacts.  This command is presented in more detail in the following sections.
+**[delete](javascript:void())** &ndash; This command can be used to remove different Kapacitor artifacts.  
+
+The commands `list` and `delete` are presented in more detail in the following sections.
 
 ## Server Management
 
@@ -89,7 +91,8 @@ kapacitor backup [PATH_TO_BACKUP_FILE]
 
 **Example 2 &ndash; Backup**
 ```
-$ sudo kapacitor backup /mnt/datastore/kapacitor/bak/kapacitor-20180101.db
+$ kapacitor backup ~/bak/kapacitor-20180101.db
+$
 ```
 
 Note that this command will succeed silently.  No status message is returned to
@@ -209,7 +212,13 @@ discovery and scraping of data.  For more information about services see the
 current status of a service can be checked with the command line tool.   
 
 **[list service-tests](javascript:void())** &ndash; The universal `list` command makes it possible to list all
-of the service tests currently available on the server.
+of the service tests currently available on the server.  It takes the following form:
+
+```
+kapacitor list service-tests (ID | Pattern)
+```
+
+So to list all services starting with the letter `a`, the pattern `a*` could be used.
 
 **Example 6 &ndash; Listing service tests**
 ```
@@ -264,6 +273,9 @@ slack               true
 talk                false     service is not enabled
 smtp                false     service is not enabled
 ```
+
+Combining the `list service-tests` and `service-tests` commands, it is possible
+on a \*Nix system to test all services with the command: `kapacitor list service-tests |xargs kapacitor service-tests`
 
 ### Logging
 
