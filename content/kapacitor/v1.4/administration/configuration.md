@@ -46,7 +46,7 @@ runs.
 These include:
 
 * `-config`: Path to the configuration file.
-* `-hostname`: Host name that will override the hostname specified in the configuration file.
+* `-hostname`: Hostname that will override the hostname specified in the configuration file.
 * `-pidfile`: File where the process ID will be written.
 * `-logfile`: File where logs will be written.
 * `-log-level`: Threshold for writing messages to the log file. Valid values include `debug, info, warn, error`.

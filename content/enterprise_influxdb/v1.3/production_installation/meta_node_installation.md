@@ -36,7 +36,7 @@ of meta nodes for high availability and redundancy.
 We do not recommend having more than three meta nodes unless your servers
 and/or the communication between the servers have chronic reliability issues.
 <br>
-Note: that there is no requirement for each meta node to run on its own server.  But, obviously, deploying 
+Note: that there is no requirement for each meta node to run on its own server.  But, obviously, deploying
 multiple meta nodes on the same server creates a larger point of potential failure if that particular node is unresponsive.
 Best practice is to deploy the meta nodes on relatively small footprint servers.
 
@@ -116,7 +116,7 @@ sudo yum localinstall influxdb-meta-1.3.8_c1.3.8.x86_64.rpm
 In `/etc/influxdb/influxdb-meta.conf`:
 
 * uncomment and set `hostname` to the full hostname of the meta node
-* set `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. 
+* set `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.
 
 <dt>
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
@@ -177,9 +177,9 @@ influxd-ctl add-meta enterprise-meta-02:8091
 influxd-ctl add-meta enterprise-meta-03:8091
 ```
 
-> **Note:** Please make sure that you specify the fully qualified host name of
+> **Note:** Please make sure that you specify the hostname and port of
 the meta node during the join process.
-Please do not specify `localhost` as this can cause cluster connection issues.
+Do not specify `localhost` as this can cause cluster connection issues.
 
 The expected output is:
 ```
@@ -213,4 +213,3 @@ Once your meta nodes are part of your cluster move on to [the next steps to
 set up your data nodes](/enterprise_influxdb/v1.3/production_installation/data_node_installation/).
 Please do not continue to the next steps if your meta nodes are not part of the
 cluster.
-    
