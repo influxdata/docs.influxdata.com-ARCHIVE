@@ -1,13 +1,13 @@
 {{ partial "header.html" . }}
 <div class="homepage">
 	{{ range .Site.Menus.products }}
-		{{ if or (eq .Identifier "telegraf") (eq .Identifier "influxdb") (eq .Identifier "chronograf") (eq .Identifier "kapacitor") (eq .Identifier "influx_enterprise") }}
+		{{ if or (eq .Identifier "telegraf") (eq .Identifier "influxdb") (eq .Identifier "chronograf") (eq .Identifier "kapacitor") (eq .Identifier "enterprise_influxdata") }}
 			<div class="homepage--card card-{{ .Name }}">
 				<div class="homepage--card-container">
 					{{ if or (eq .Identifier "telegraf") (eq .Identifier "influxdb") (eq .Identifier "chronograf") (eq .Identifier "kapacitor") }}
 					  <a class="homepage--card-title" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .Name }}</a>
 					{{ end }}
-					{{ if eq .Identifier "influx_enterprise" }}
+					{{ if eq .Identifier "enterprise_influxdata" }}
 					  <a class="homepage--card-title" href="">Enterprise</a>
 					{{ end }}
 					<p class="homepage--card-description">
@@ -23,7 +23,7 @@
 						{{ if eq .Identifier "kapacitor" }}
 							Kapacitor is InfluxData's open source data processing framework that makes it easy to create alerts, run ETL jobs, and detect anomalies.
 						{{ end }}
-						{{ if eq .Identifier "influx_enterprise" }}
+						{{ if eq .Identifier "enterprise_influxdata" }}
 							InfluxData's enterprise products offer closed source extensions to the open source components of the TICK stack.
 						{{ end }}
 						{{ if or (eq .Identifier "telegraf") (eq .Identifier "influxdb") (eq .Identifier "chronograf") (eq .Identifier "kapacitor") }}
@@ -38,7 +38,7 @@
 							{{ end }}
 							<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">All Documentation</a>
 						{{ end }}
-						{{ if eq .Identifier "influx_enterprise" }}
+						{{ if eq .Identifier "enterprise_influxdata" }}
 							<br/>
 							<a class="homepage--card-link" href={{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/>InfluxDB Enterprise</a>
 							<br/>
