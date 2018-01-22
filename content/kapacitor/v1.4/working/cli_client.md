@@ -105,7 +105,7 @@ will be reported. To verify the results check the file system.
 kapacitor stats [general|ingress]
 ```
 
-* `stats general` &ndash; Use this command to view values such as the server ID or hostname and to view counts such as the number of tasks and subscriptions used by Kapacitor.
+* **[stats general](javascript:void())** &ndash; Use this command to view values such as the server ID or hostname and to view counts such as the number of tasks and subscriptions used by Kapacitor.
 
    **Example 3 &ndash; General Statistics**
    ```
@@ -119,7 +119,7 @@ kapacitor stats [general|ingress]
    Version:                      1.5.0~n201711280812     
    ```
 
-* `stats ingress` &ndash;  Use this command to view InfluxDB measurements and the number of datapoints that pass through the Kapacitor server.
+* **[stats ingress](javascript:void())** &ndash;  Use this command to view InfluxDB measurements and the number of datapoints that pass through the Kapacitor server.
 
    **Example 4 &ndash; Ingress Statistics**
    ```
@@ -387,7 +387,7 @@ either a snapshot of data or the result of an InfluxDB query into the Kapacitor
 database.  The data snapshot is later accessible using its `recording-id`.
 Three types of recording are available: `batch`, `stream` and `query`.
 
-* `record batch` &ndash; Records the result of an InfluxDB query used in a batch type task. It takes the following form:
+* **[record batch](javascript:void())**  &ndash; Records the result of an InfluxDB query used in a batch type task. It takes the following form:
 
 ```
 kapacitor record batch (-no-wait) [-past <WINDOW_IN_PAST> | -start <START_TIME> -stop <STOP_TIME>] [-recording-id <ID>] -task <TASK_ID>  
@@ -408,7 +408,7 @@ $ kapacitor record batch -past 5m -recording-id BlueJaySilverTree -task batch_lo
 BlueJaySilverTree
 ```
 
-* `record stream` &ndash; Records a live stream of data. It takes the following form.
+* **[record stream](javascript:void())** &ndash; Records a live stream of data. It takes the following form.
 
 ```
 kapacitor record stream -duration <DURATION> (-no-wait) (-recording-id <ID> ) -task <TASK_ID>
@@ -430,7 +430,7 @@ $ kapacitor record stream -duration 1m -task cpu_alert
 4e0f09c5-1426-4778-8f9b-c4a88f5c2b66
 ```
 
-* `record query` &ndash; Records an InfluxDB query.  It takes the following form:
+* **[record query](javascript:void())** &ndash; Records an InfluxDB query.  It takes the following form:
 
 ```
 kapacitor record query (-cluster <INFLUXDB_CLUSTER_NAME> ) (-no-wait) -query <QUERY> (-recording-id <RECORDING_ID>) -type <stream|batch>
@@ -473,7 +473,7 @@ bbe8567c-a642-4da9-83ef-2a7d32ad5eb1
 
 **[replay-live](javascript:void())** &ndash; This command allows for data to be played on the fly against tasks, to verify task behavior.  It can be executed against either a `batch` or a `query`.  Kapacitor neither saves nor records the data in its database.
 
-* `replay-live query` &ndash; With the query argument the replay executes an InfluxDB query against the task.  The query should include the database, retention policy and measurement string. It takes the following form:
+* **[replay-live query]](javascript:void())** &ndash; With the query argument the replay executes an InfluxDB query against the task.  The query should include the database, retention policy and measurement string. It takes the following form:
 
 ```
 kapacitor replay-live query (-cluster <CLUSTER_URL>) (-no-wait) -query <QUERY> (-real-clock) (-rec-time) (-replay-id <REPLAY_ID>) -task <TASK_ID>
@@ -497,7 +497,7 @@ $ kapacitor replay-live query -task cpu_alert -query 'select cpu, usage_idle fro
 2d9be22c-647a-425e-89fb-40543bdd3670
 ```
 
-* `replay-live batch` &ndash; With the batch argument the replay executes the task with batch data already stored to InfluxDB. It takes the following form:
+* **[replay-live batch](javascript:void())** &ndash; With the batch argument the replay executes the task with batch data already stored to InfluxDB. It takes the following form:
 
 ```
 kapacitor replay-live batch (-no-wait) ( -past <TIME_WINDOW> | -start <START_TIME> -stop <STOP_TIME> ) (-real-clock) (-rec-time) (-replay-id <REPLAY_ID>) -task <TASK_ID>
@@ -524,7 +524,7 @@ GoldRoosterColdBridge180116
 
 **[list](javascript:void())** &ndash; The universal `list` command can be used to list existing recordings and replays.  
 
-* `list recordings` &ndash; use the `recordings` argument to list recordings.  
+* **[list recordings](javascript:void())** &ndash; use the `recordings` argument to list recordings.  
 
 **Example 19 &ndash; List Recordings**
 
@@ -538,7 +538,7 @@ BlueJaySilverTree                    batch   finished  1.0 kB    15 Jan 18 15:18
 7d30caff-e443-4d5f-a0f2-6a933ea35284 batch   finished  998 B     15 Jan 18 15:17 CET
 ```
 
-* `list replays` &ndash; Use the `replays` argument to list replays.  
+* **[list replays](javascript:void())** &ndash; Use the `replays` argument to list replays.  
 
 **Example 20 &ndash; List Replays**
 
@@ -557,7 +557,7 @@ bbe8567c-a642-4da9-83ef-2a7d32ad5eb1 cpu_alert       4e0f09c5-1426-4778-8f9b-c4a
 
 **[delete](javascript:void())** &ndash; The universal `delete` command can be used to remove existing recordings and replays.
 
-* `delete recordings` &ndash; use the recordings argument to delete one or more recordings. It takes the following form.
+* **[delete recordings](javascript:void())** &ndash; use the recordings argument to delete one or more recordings. It takes the following form.
 
 ```
 kapacitor delete recordings [ID | Pattern]
@@ -581,7 +581,7 @@ $
 Note that this command returns no status or additional messages.  It fails or
 succeeds silently.  To verify results use the `list recordings` command.
 
-* `delete replays` &ndash; use the replays argument to delete one or more replays. It takes the following form.
+* **[delete replays](javascript:void())** &ndash; use the replays argument to delete one or more replays. It takes the following form.
 
 ```
 kapacitor delete replays [ID | Pattern]
@@ -635,7 +635,7 @@ succeeds silently.  To verify the results use the `list topic-handlers` command.
 
 **[list](javascript:void())** &ndash; The universal `list` command can be used to list both topics and topic handlers.
 
-* `list topics` &ndash; Use the `list topics` command to display all topics currently stored by Kapacitor.  This command requires no further arguments.
+* **[list topics](javascript:void())** &ndash; Use the `list topics` command to display all topics currently stored by Kapacitor.  This command requires no further arguments.
 
 **Example 24 &ndash; Listing Topics**
 
@@ -652,7 +652,7 @@ main:chronograf-v1-e77137c5-dcce-4fd5-a612-3cdaa5f98ef9:alert7 OK               
 main:cpu-alert-test:alert3                                     OK                0
 ```
 
-* `list topic-handlers` &ndash; Us the `list topic-handlers` command to display handlers stored by Kapacitor.  This command requires no further arguments.
+* **[list topic-handlers](javascript:void())** &ndash; Us the `list topic-handlers` command to display handlers stored by Kapacitor.  This command requires no further arguments.
 
 **Example 25 &ndash; Listing Topic Handlers**
 
@@ -699,7 +699,7 @@ Options: {"channel":"#kapacitor"}
 
 **[delete](javascript:void())** &ndash; The universal `delete` command can be used to remove topics and topic handlers.
 
-* `delete topics` &ndash; Use the `topics` argument to remove one or more topics.  It takes the following form:
+* **[delete topics](javascript:void())** &ndash; Use the `topics` argument to remove one or more topics.  It takes the following form:
 
 ```
 kapacitor delete topics [ID | Pattern]
@@ -721,7 +721,7 @@ $
 Note that this command returns no status or additional messages.  It fails or
 succeeds silently.  To verify the results use the `list topics` command.
 
-* `delete topic-handlers` &ndash; Use the `topic-handlers` argument to remove a topic handler.  It takes the following form:
+* **[delete topic-handlers](javascript:void())** &ndash; Use the `topic-handlers` argument to remove a topic handler.  It takes the following form:
 
 ```
 kapacitor delete topic-handler [TOPIC_ID] [HANDLER_ID]
@@ -906,7 +906,7 @@ To verify the result use the `list tasks` command.
 
 **[list](javascript:void())** &ndash; The universal `list` command can be used to list tasks and task templates.
 
-* `list tasks` &ndash; Use the `list tasks` command to display all tasks currently stored by Kapacitor.  This command requires no further arguments.
+* **[list tasks](javascript:void())** &ndash; Use the `list tasks` command to display all tasks currently stored by Kapacitor.  This command requires no further arguments.
 
 **Example 37 &ndash; Listing Tasks**
 
@@ -921,7 +921,7 @@ cpu_idle                                           stream    disabled  false    
 sandbox                                            stream    disabled  false     ["blabla"."autogen"]
 ```
 
-* `list templates` &ndash; Use the `list templates` command to display all templates currently stored by Kapacitor.  This command requires no further arguments.
+* **[list templates](javascript:void())** &ndash; Use the `list templates` command to display all templates currently stored by Kapacitor.  This command requires no further arguments.
 
 **Example 38 &ndash; Listing Templates**
 
@@ -1050,9 +1050,9 @@ mean3 -> alert4;
 }
 ```
 
-* **[delete](javascript:void())** The universal `delete` command can be used to remove tasks and task templates.
+**[delete](javascript:void())** The universal `delete` command can be used to remove tasks and task templates.
 
-* `delete tasks` &ndash; Use the `tasks` argument to remove one or more tasks.  It takes the following form:
+* **[delete tasks](javascript:void())**` &ndash; Use the `tasks` argument to remove one or more tasks.  It takes the following form:
 
 ```
 kapacitor delete tasks [ID | Pattern]
@@ -1075,7 +1075,7 @@ Note that this command returns no status or additional messages.  It fails or
 succeeds silently.  To verify the results use the `list tasks` command.
 
 
-* `delete templates` &ndash; Use the `templates` argument to remove one or more templates.  It takes the following form:
+* **[delete templates](javascript:void())** &ndash; Use the `templates` argument to remove one or more templates.  It takes the following form:
 
 ```
 kapacitor delete templates [ID | Pattern]
