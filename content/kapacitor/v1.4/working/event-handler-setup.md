@@ -185,7 +185,7 @@ Configure Kapacitor to send alert messages to a Telegram bot.
 
 ### Requirements
 
-To configure Kapacitor with Telegraf, the following will be needed:
+To configure Kapacitor with Telegram, the following will be needed:
 
 * a Telegram bot
 * a Telegram API access token
