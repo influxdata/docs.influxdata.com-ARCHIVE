@@ -24,8 +24,8 @@ menu:
 
 ### Bugfixes
 
-- Changed handling of previous "stream closed" error within io.EOF. Now dealt with as remote iterator interrupt.
-- Fix spurious "rpc error: i/o deadline exceeded" errors.
+- Changed handling of previous `stream closed` error within `io.EOF`. Now dealt with as remote iterator interrupt.
+- Fix spurious `rpc error: i/o deadline exceeded` errors.
 - Discard remote iterators that label their type as `unknown`.
 - Do not queue `partial write` errors to hinted handoff.
 
