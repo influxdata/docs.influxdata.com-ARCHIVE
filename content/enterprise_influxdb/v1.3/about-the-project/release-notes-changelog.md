@@ -20,6 +20,15 @@ menu:
 
 # Clustering
 
+## v1.3.9 [2018-01-19]
+
+### Bugfixes
+
+- Changed handling of previous `stream closed` error within `io.EOF`. Now dealt with as remote iterator interrupt.
+- Fix spurious `rpc error: i/o deadline exceeded` errors.
+- Discard remote iterators that label their type as `unknown`.
+- Do not queue `partial write` errors to hinted handoff.
+
 ## v1.3.8 [2017-12-04]
 
 ### Upgrading -- for users of the TSI preview
