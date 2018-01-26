@@ -1,7 +1,7 @@
 {{ partial "header.html" . }}
 <div class="homepage">
 	{{ range .Site.Menus.products }}
-		{{ if or (eq .Identifier "telegraf") (eq .Identifier "influxdb") (eq .Identifier "chronograf") (eq .Identifier "kapacitor") (eq .Identifier "enterprise_influxdata") }}
+		{{ if or (eq .Identifier "telegraf") (eq .Identifier "influxdb") (eq .Identifier "chronograf") (eq .Identifier "kapacitor") (eq .Identifier "enterprise") }}
 			<div class="homepage--card card-{{ .Name }}">
 				<div class="homepage--card-container">
 					{{ if or (eq .Identifier "telegraf") (eq .Identifier "influxdb") (eq .Identifier "chronograf") (eq .Identifier "kapacitor") }}
