@@ -146,6 +146,20 @@ will find the shards refuse to open and will most likely see the following error
 - Handle utf16 files when reading the configuration file.
 - Fix `panic: runtime error: slice bounds out of range`.
 
+## v1.3.9 [2018-01-19]
+
+### Bugfixes
+
+- Improve performance when writes exceed `max-values-per-tag` or `max-series`.
+
+## v1.3.8 [2017-12-04]
+
+### Bugfixes
+
+- Add `influx_inspect inmem2tsi` command to convert existing in-memory (TSM-based) shards to the TSI (Time Series Index) format.
+- Fix race condition in the merge iterator close method.
+- Fix compaction aborting early and dropping remaining series.
+
 ## v1.3.7 [2017-10-26]
 
 ### Release Notes
