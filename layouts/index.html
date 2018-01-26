@@ -7,7 +7,7 @@
 					{{ if or (eq .Identifier "telegraf") (eq .Identifier "influxdb") (eq .Identifier "chronograf") (eq .Identifier "kapacitor") }}
 					  <a class="homepage--card-title" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .Name }}</a>
 					{{ end }}
-					{{ if eq .Identifier "enterprisea" }}
+					{{ if eq .Identifier "enterprise" }}
 					  <a class="homepage--card-title" href="">Enterprise</a>
 					{{ end }}
 					<p class="homepage--card-description">
