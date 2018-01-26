@@ -19,4 +19,4 @@ Third-party suppliers assume no liability for any claim that might arise with re
 customer’s use of or inability to use the third-party software. 
 
 The [list of third-party software components, including
-references to the associated license and other materials](https://github.com/influxdata/influxdb/blob/1.2/LICENSE_OF_DEPENDENCIES.md), is maintained on a version by version basis.
+references to associated licenses and other materials](https://github.com/influxdata/influxdb/blob/1.2/LICENSE_OF_DEPENDENCIES.md), is maintained on a version by version basis.
