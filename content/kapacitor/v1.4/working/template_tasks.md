@@ -10,7 +10,7 @@ menu:
     parent: work-w-kapacitor
 ---
 
-Kapacitor has a template system that lets a template be defined and reused for multiple tasks.
+Kapacitor has a template system that allows a template to be defined and reused for multiple tasks.
 Each task can define its own value for all variables declared within the template.
 Templates can be consumed via the CLI and the [API](/kapacitor/v1.4/working/api).
 
@@ -54,19 +54,19 @@ stream
 Notice how all of the fields in the method call are defined by variables declared earlier in the script.
 This allows complete customized usage of the template when later leveraging it to define concrete tasks.
 
-To use this template script, first define a new template like so:
+To use this template script, first define a new template like this:
 
 ```
 kapacitor define-template generic_mean_alert -tick path/to/above/script.tick
 ```
 
-At this point `show-template` can be run to see more information about the newly created template.
+At this point, `show-template` can be run to see more information about the newly created template.
 
 ```
 kapacitor show-template generic_mean_alert
 ```
 
-A list of variables declared for the template should be returned in the group `vars` as part of the console output as follows:
+A list of variables declared for the template should be returned in the group `vars` as part of the console output as shown in this example:
 
 **Example 2 &ndash; The Vars section of kapacitor show-template output**
 ```
@@ -88,7 +88,7 @@ window         duration  5m0s           How much data to window
 Each task will acquire its type and TICKscript structure from the template.
 The specific values of variables and of the database/retention policy set of a task are unique for each task.
 
-Now a task can be defined that uses the template to trigger an alert on cpu usage.
+Now, a task can be defined that uses the template to trigger an alert on cpu usage.
 Create a file `cpu_vars.json` with the following content.
 
 **Example 3 &ndash; A JSON variable file**
@@ -105,7 +105,7 @@ Create a file `cpu_vars.json` with the following content.
 }
 ```
 
-Now define the task using the template and the variable values defined in the variable file.
+Now, define the task using the template and the variable values defined in the variable file.
 
 ```
 kapacitor define cpu_alert -template generic_mean_alert -vars cpu_vars.json -dbrp telegraf.autogen
@@ -190,13 +190,13 @@ Any number of tasks can be defined using the same template.
 
 Variables work with normal tasks as well and can be used to overwrite any defaults in the script.
 Since at any point a TICKscript could come in handy as a template the recommend best practice is to always use `var` declarations in TICKscripts.
-This way normal tasks work and if at a later date it is decided that another similar task should be created, doing so is  a trivial exercise of creating a template from the existing TICKscript and then defining additional tasks with variable files.
+Normal tasks work and at a later date, if you decide that another similar task is needed, you can easily create a template from the existing TICKscript, and then define additional tasks with variable files.
 
 ## Using the `-file` flag
 
-Starting with version 1.4 of Kapacitor, tasks may be generated from templates using a task definition file.
+Starting with Kapacitor 1.4, tasks may be generated from templates using a task definition file.
 The task definition file is extended from the variables file of previous releases.
-Three new fields are made avaialble.  Compare Example 7 below to Example 5 above.
+Three new fields are made available.  Compare Example 7 below to Example 5 above.
 
 * The `template-id` field is used to select the template.
 * The `dbrps` field is used to define one or more database/retention policy sets that the task will use.
@@ -204,7 +204,7 @@ Three new fields are made avaialble.  Compare Example 7 below to Example 5 above
 
 This file may be in either JSON or YAML.
 
-A task for a memory based alert can be created using the same template defined above.
+A task for a memory-based alert can be created using the same template that was defined above.
 Create a `mem_template_task.json` file using the snippet in Example 7.
 
 <!-- fixes defect 1372 -->
@@ -227,13 +227,13 @@ Create a `mem_template_task.json` file using the snippet in Example 7.
 ```
 
 The task can then be defined with the `file` parameter, which with the new content of the
-task definition file replaces the command-line parameters `template`, `dbrp` and `vars`.
+task definition file replaces the command-line parameters `template`, `dbrp`, and `vars`.
 
 ```
 kapacitor define mem_alert -file mem_template_task.json
 ```
 
-Using YAML the task definition file, `mem_template_task.yaml`, appears as follows.
+Using YAML, the task definition file `mem_template_task.yaml` appears as follows.
 
 **Example 8 &ndash; A task definition file in YAML**
 ```yaml
