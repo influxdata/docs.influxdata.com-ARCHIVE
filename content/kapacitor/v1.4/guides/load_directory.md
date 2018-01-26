@@ -113,7 +113,7 @@ Templated tasks are defined according to the following scheme:
 In this example, the templated task YAML file creates a `stream` task, named `my_templated_task`, for the dbrp `telegraf.autogen`.
 
 ```yaml
-# /path/to/directory/tasks/my_templated_tas.tick
+# /path/to/directory/tasks/my_templated_task.tick
 dbrps:
   - { db: "telegraf", rp: "autogen"}
 template-id: my_template
