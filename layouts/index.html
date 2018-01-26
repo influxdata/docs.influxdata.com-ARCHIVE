@@ -46,7 +46,6 @@
 							<br/>
 								<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/troubleshooting/frequently-asked-questions/">FAQ</a>
 								<br/>
-							{{ end }}
 							<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">All Documentation</a>
 						{{ end }}
             {{ if eq .Identifier "enterprise" }}
