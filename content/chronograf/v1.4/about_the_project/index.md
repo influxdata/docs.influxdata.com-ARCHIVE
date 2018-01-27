@@ -1,9 +1,9 @@
 ---
-title: About the project
+title: About the Project
 
 menu:
   chronograf_1_4:
-    name: About the project
+    name: About the Project
     weight: 40
 ---
 
