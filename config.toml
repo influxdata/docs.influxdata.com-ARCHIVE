@@ -119,6 +119,12 @@ SectionPagesMenu = "products"
   weight = 30
   url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
   parent = "about_the_project"
+[[menu.influxdb_1_4]]
+  name = "3rd Party Software"
+  identifier = "third_party"
+  weight = 40
+  url = "/influxdb/v1.4/about_the_project/#third_party"
+  parent = "about_the_project"  
 # InfluxDB v1.4 Sub-Menu - External Resources
 [[menu.influxdb_1_4]]
   name = "InfluxData Blog"
@@ -5854,11 +5860,6 @@ parent = "inputs"
   identifier = "administration"
   weight = 80
   url = "/influxdb/v1.0/administration/"
-[[menu.influxdb_1_0]]
-  name = "About the Project"
-  identifier = "about"
-  weight = 100
-  url = "/influxdb/v1.0/about/"
 [[menu.influxdb_1_0]]
   name = "External Resources"
   identifier = "external_resources"
