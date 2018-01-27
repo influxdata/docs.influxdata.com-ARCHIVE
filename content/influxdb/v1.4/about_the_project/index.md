@@ -4,7 +4,7 @@ title: About the project
 menu:
   influxdb_1_4:
     name: About the project
-    weight: 1
+    weight: 60
 ---
 
 ## [Release Notes/Changelog](/influxdb/v1.4/about_the_project/releasenotes-changelog/)
