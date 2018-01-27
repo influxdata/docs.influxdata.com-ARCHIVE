@@ -29,7 +29,9 @@ Note however that it is NOT required that your dashboards and alerts created by 
 The copyleft applies only to the source code of Chronograf itself. 
 
 If this explanation isn't good enough for you and your use case, we dual license Chronograf under our 
-[standard commercial license](https://www.influxdata.com/legal/slsa/) [Contact sales for more information](https://www.influxdata.com/contact-sales/).
+[standard commercial license](https://www.influxdata.com/legal/slsa/). 
+
+[Contact sales for more information](https://www.influxdata.com/contact-sales/).
 
 ## 3rd Party Software
 InfluxData products contain third-party software, which means the copyrighted, patented, or otherwise legally protected
