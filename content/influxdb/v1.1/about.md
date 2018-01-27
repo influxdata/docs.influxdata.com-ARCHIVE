@@ -1,9 +1,9 @@
 ---
-title: About the project
+title: About the Project
 
 menu:
   influxdb_1_1:
-    name: About the project
+    name: About the Project
     weight: 60
 ---
 
