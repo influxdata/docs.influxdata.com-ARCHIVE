@@ -91,11 +91,6 @@ SectionPagesMenu = "products"
     weight = 90
     url = "/influxdb/v1.4/administration/"
   [[menu.influxdb_1_4]]
-    name = "About the Project"
-    identifier = "about_the_project"
-    weight = 100
-    url = "/influxdb/v1.4/about_the_project/"
-  [[menu.influxdb_1_4]]
     name = "External Resources"
     identifier = "external_resources"
     weight = 110
