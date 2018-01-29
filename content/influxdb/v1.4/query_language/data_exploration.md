@@ -184,8 +184,8 @@ The `FROM` clause supports several formats for specifying a single [measurement]
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 Returns data from a single specified measurement.
 If you're using InfluxDB queries in the [CLI (command line interface)](/influxdb/v1.4/tools/shell/), the measurement in the
-specified database (specified using the [`USE](/influxdb/v1.4/tools/shell/#commands)
-[database](/influxdb/v1.4/concepts/glossary/#database) and the `DEFAULT` [retention policy](/influxdb/v1.4/concepts/glossary/#retention-policy-rp).
+specified database (specified using the [`USE`](/influxdb/v1.4/tools/shell/#commands)
+command and the `DEFAULT` [retention policy](/influxdb/v1.4/concepts/glossary/#retention-policy-rp).
 If you're using [HTTP API](/influxdb/v1.4/tools/api/) InfluxDB queries, the
 measurement in the database specified in the [`db` query string parameter](/influxdb/v1.4/tools/api/#query-string-parameters)
 and the `DEFAULT` retention policy.
