@@ -239,6 +239,12 @@ SectionPagesMenu = "products"
   weight = 30
   url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
   parent = "about_the_project"
+[[menu.influxdb_1_3]]
+  name = "3rd Party Software"
+  identifier = "third_party"
+  weight = 40
+  url = "/influxdb/v1.3/about_the_project/#third_party"
+  parent = "about_the_project"  
 # InfluxDB v1.3 Sub-Menu - External Resources
 [[menu.influxdb_1_3]]
   name = "InfluxData Blog"
@@ -360,7 +366,12 @@ SectionPagesMenu = "products"
   weight = 30
   url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
   parent = "about_the_project"
-
+[[menu.influxdb_1_2]]
+  name = "3rd Party Software"
+  identifier = "third_party"
+  weight = 40
+  url = "/influxdb/v1.2/about_the_project/#third_party"
+  parent = "about_the_project"
 # InfluxDB v1.2 Sub-Menu - External Resources
 [[menu.influxdb_1_2]]
   name = "InfluxData Blog"
@@ -488,6 +499,12 @@ SectionPagesMenu = "products"
   identifier = "licenses"
   weight = 30
   url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
+  parent = "about"
+[[menu.influxdb_1_1]]
+  name = "3rd Party Software"
+  identifier = "third_party"
+  weight = 40
+  url = "/influxdb/v1.1/about/#third_party"
   parent = "about"
 
 # InfluxDB v1.1 Sub-Menu - External Resources
