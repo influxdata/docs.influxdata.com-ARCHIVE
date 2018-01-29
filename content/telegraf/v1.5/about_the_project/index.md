@@ -10,11 +10,11 @@
 
 ## [Release Notes/Changelog](/telegraf/v1.5/about_the_project/release-notes-changelog/)
 
-## [Contributing](https://github.com/influxdata/influxdb/blob/master/CONTRIBUTING.md)
+## [Contributing](https://github.com/influxdata/telegraf/blob/master/CONTRIBUTING.md)
 
 ## [CLA](https://influxdata.com/community/cla/)
 
-## [Licenses](https://github.com/influxdata//blob/master/LICENSE)
+## [Licenses](https://github.com/influxdata/telegraf/blob/master/LICENSE)
 
 ## <a name="third_party">3rd Party Software</a>
 InfluxData products contain third-party software, which means the copyrighted, patented, or otherwise legally protected
