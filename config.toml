@@ -5861,6 +5861,11 @@ parent = "inputs"
   weight = 80
   url = "/influxdb/v1.0/administration/"
 [[menu.influxdb_1_0]]
+    name = "About the Project"
+    identifier = "about_the_project"
+    weight = 100
+    url = "/influxdb/v1.0/about/"
+[[menu.influxdb_1_0]]
   name = "External Resources"
   identifier = "external_resources"
   weight = 110
@@ -5880,25 +5885,25 @@ parent = "inputs"
     identifier = "changelog"
     weight = 5
     url = "https://github.com/influxdb/influxdb/blob/master/CHANGELOG.md"
-    parent = "about"
+    parent = "about_the_project"
   [[menu.influxdb_1_0]]
     name = "Contributing"
     identifier = "contributing"
     weight = 10
     url = "https://github.com/influxdb/influxdb/blob/master/CONTRIBUTING.md"
-    parent = "about"
+    parent = "about_the_project"
   [[menu.influxdb_1_0]]
     name = "CLA"
     identifier = "cla"
     weight = 20
     url = "https://influxdata.com/community/cla/"
-    parent = "about"
+    parent = "about_the_project"
   [[menu.influxdb_1_0]]
     name = "Licenses"
     identifier = "licenses"
     weight = 30
     url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
-    parent = "about"
+    parent = "about_the_project"
 
   # InfluxDB v0.13 Menu
   [[menu.influxdb_013]]
