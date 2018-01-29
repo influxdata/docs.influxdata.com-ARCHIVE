@@ -36,7 +36,7 @@ If you have been using the TSI preview with 1.3.6 or earlier 1.3.x releases, you
 continue using the TSI preview.  Unfortunately, these steps cannot be executed while the cluster is operating -- so it will 
 result in downtime.  
 
-See more details here: [Upgrading from previous versions](/v1.3/administration/upgrading/) 
+See more details here: [Upgrading from previous versions](/enterprise_influxdb/v1.3/administration/upgrading/) 
 
 ### Bugfixes
 
