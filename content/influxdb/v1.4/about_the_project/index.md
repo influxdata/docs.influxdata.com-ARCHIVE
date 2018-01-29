@@ -10,7 +10,7 @@ title: About the Project
 
 ## [Licenses](https://github.com/influxdata/influxdb/blob/master/LICENSE)
 
-## 3rd Party Software
+## 3rd Party Software <a class="anchor" name="third_party"></a>
 InfluxData products contain third-party software, which means the copyrighted, patented, or otherwise legally protected
 software of third parties that is incorporated in InfluxData products.
 
