@@ -4,7 +4,7 @@ title: Administering Chronograf
 menu:
   chronograf_1_4:
     name: Administration
-    weight: 1
+    weight: 20
 ---
 
 Follow the links below for more information.

@@ -1,5 +1,10 @@
 ---
-title: About InfluxDB
+title: About the Project
+
+menu:
+  influxdb_1_1:
+    name: About the Project
+    weight: 60
 ---
 
 ## [Release Notes/Changelog](https://github.com/influxdata/influxdb/blob/master/CHANGELOG.md)
