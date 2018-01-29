@@ -8,8 +8,8 @@ menu:
     parent: Administration
 ---
 
-## Upgrading from version 1.3.x to 1.3.8
-Version 1.3.8 is a drop-in replacement for earlier releases of 1.3.x with no data migration required, unless you have been using the TSI (Time Series Index) preview with 1.3.6 or earlier releases.
+## Upgrading from version 1.3.x to 1.3.9
+Version 1.3.9 is a drop-in replacement for earlier releases of 1.3.x with no data migration required, unless you have been using the TSI (Time Series Index) preview with 1.3.6 or earlier releases.
 
 ### For users of the TSI (Time Series Index) preview
 If you have been using the TSI preview with 1.3.6 or earlier 1.3.x releases, you will need to follow the upgrade steps to 
@@ -17,7 +17,7 @@ continue using the TSI preview.  Unfortunately, these steps cannot be executed w
 result in downtime.  
 
 1. Stop the meta and data node processes.
-1. Download and update bits to 1.3.8.
+1. Download and update bits to 1.3.9.
 1. Delete all /index directories contained with the data nodes (default configuration is [data] dir = /var/lib/influxdb/data). 
 1. Rebuild the TSI indexes using the `influx_inspect` utility with the new `inmem2tsi` parameter.  More documentation
 describing this new parameter with `influx_inspect` [can be found here](https://docs.influxdata.com/influxdb/v1.3/tools/influx_inspect/).
@@ -30,7 +30,7 @@ However, upgrading to 1.3.7 with the TSI preview on will cause compactions to fa
 -- see [Issue #9025](https://github.com/influxdata/influxdb/issues/9025). 
 
 If you are using the TSI preview, **you should not upgrade to 1.3.7** from any other 1.3.x release. 
-Instead, upgrade to 1.3.8 and execute the index rebuild process as described above using `influx_inspect` 
+Instead, upgrade to 1.3.9 and execute the index rebuild process as described above using `influx_inspect` 
 utility with the new `inmem2tsi` parameter.
 
 ## Upgrading from version 1.2.5 to 1.3.x
