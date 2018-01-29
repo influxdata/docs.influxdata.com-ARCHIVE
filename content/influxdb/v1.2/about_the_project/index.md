@@ -1,9 +1,5 @@
 ---
 title: About the Project
-menu:
-  influxdb_1_2:
-    name: About the Project
-    weight: 60
 ---
 
 ## [Release Notes/Changelog](/influxdb/v1.2/about_the_project/release-notes-changelog/)
