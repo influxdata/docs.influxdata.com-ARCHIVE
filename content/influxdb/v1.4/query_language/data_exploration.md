@@ -134,7 +134,7 @@ All of these data are in the `NOAA_water_database` [database](/influxdb/v1.4/con
 <br>
 # The basic SELECT statement
 
-The `SELECT` statement queries data from a particular [measurement](/influxdb/v1.4/concepts/glossary/#measurement) or measurements.
+The `SELECT` statement queries data from a specified [measurement](/influxdb/v1.4/concepts/glossary/#measurement) or measurements.
 
 Tired of reading? Check out this InfluxQL Short:
 <br>
@@ -178,15 +178,15 @@ Other supported features:
 [Regular Expressions](#regular-expressions)
 
 #### `FROM` clause
-The `FROM` clause supports several formats for specifying a [measurement(s)](/influxdb/v1.4/concepts/glossary/#measurement):
+The `FROM` clause supports several formats for specifying a single [measurement](/influxdb/v1.4/concepts/glossary/#measurement) or multiple measurements:
 
 `FROM <measurement_name>`  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Returns data from a single measurement.
-If you're using the [CLI](/influxdb/v1.4/tools/shell/) InfluxDB queries the measurement in the
-[`USE`d](/influxdb/v1.4/tools/shell/#commands)
+Returns data from a single specified measurement.
+If you're using InfluxDB queries in the [CLI (command line interface)](/influxdb/v1.4/tools/shell/), the measurement in the
+specified database (specified using the [`USE](/influxdb/v1.4/tools/shell/#commands)
 [database](/influxdb/v1.4/concepts/glossary/#database) and the `DEFAULT` [retention policy](/influxdb/v1.4/concepts/glossary/#retention-policy-rp).
-If you're using the [HTTP API](/influxdb/v1.4/tools/api/) InfluxDB queries the
+If you're using [HTTP API](/influxdb/v1.4/tools/api/) InfluxDB queries, the
 measurement in the database specified in the [`db` query string parameter](/influxdb/v1.4/tools/api/#query-string-parameters)
 and the `DEFAULT` retention policy.
 
