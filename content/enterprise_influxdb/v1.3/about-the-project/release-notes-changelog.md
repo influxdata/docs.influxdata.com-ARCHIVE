@@ -1,7 +1,5 @@
 ---
 title: Release Notes/Changelog
-aliases:
-    - /enterprise/v1.3/about-the-project/release-notes-changelog/
 menu:
   enterprise_influxdb_1_3:
     weight: 0
@@ -32,28 +30,28 @@ menu:
 ## v1.3.8 [2017-12-04]
 
 ### Upgrading -- for users of the TSI preview
-If you have been using the TSI preview with 1.3.6 or earlier 1.3.x releases, you will need to follow the upgrade steps to 
-continue using the TSI preview.  Unfortunately, these steps cannot be executed while the cluster is operating -- so it will 
-result in downtime.  
+If you have been using the TSI preview with 1.3.6 or earlier 1.3.x releases, you will need to follow the upgrade steps to
+continue using the TSI preview.  Unfortunately, these steps cannot be executed while the cluster is operating -- so it will
+result in downtime.
 
-See more details here: [Upgrading from previous versions](/enterprise_influxdb/v1.3/administration/upgrading/) 
+See more details here: [Upgrading from previous versions](/enterprise_influxdb/v1.3/administration/upgrading/)
 
 ### Bugfixes
 
-- Updated yamux resolves race condition when SYN is successfully sent and a write timeout occurs.
-- Re-send authentication credentials on redirect
+- Updated `yamux` resolves race condition when SYN is successfully sent and a write timeout occurs.
+- Resend authentication credentials on redirect
 - Fix wildcard when one shard has no data for a measurement with partial replication.
-- Fix spurious "rpc error: i/o deadline exceeded" errors.
+- Fix spurious `rpc error: i/o deadline exceeded` errors.
 
 ## v1.3.7 [2017-10-26]
 
 ### Upgrading -- for users of the TSI preview
-The 1.3.7 release resolves a defect that created duplicate tag values in TSI indexes See Issues 
-[#8995](https://github.com/influxdata/influxdb/pull/8995), and [#8998](https://github.com/influxdata/influxdb/pull/8998). 
-However, upgrading to 1.3.7 cause compactions to fail, see [Issue #9025](https://github.com/influxdata/influxdb/issues/9025). 
-We will provide a utility that will allow TSI indexes to be rebuilt, 
-resolving the corruption possible in releases prior to 1.3.7. If you are using the TSI preview, 
-**you should not upgrade to 1.3.7 until this utility is available**. 
+The 1.3.7 release resolves a defect that created duplicate tag values in TSI indexes. See Issues
+[#8995](https://github.com/influxdata/influxdb/pull/8995), and [#8998](https://github.com/influxdata/influxdb/pull/8998).
+However, upgrading to 1.3.7 cause compactions to fail, see [Issue #9025](https://github.com/influxdata/influxdb/issues/9025).
+We will provide a utility that will allow TSI indexes to be rebuilt,
+resolving the corruption possible in releases prior to 1.3.7. If you are using the TSI preview,
+**you should not upgrade to 1.3.7 until this utility is available**.
 We will update this release note with operational steps once the utility is available.
 
 #### Bugfixes
@@ -69,9 +67,9 @@ We will update this release note with operational steps once the utility is avai
 - Fix "group by" marshaling in the IteratorOptions.
 - Address meta service data race condition.
 - Fix race condition when writing points to remote nodes.
-- Use InfluxData fork of yamux. This update reduces overall memory usage when streaming large amounts of data.  
-  Contributed back to the yamux project via: https://github.com/hashicorp/yamux/pull/50
-- Address data race reading Len() in connection pool.
+- Use InfluxData fork of `yamux`. This update reduces overall memory usage when streaming large amounts of data.
+  Contributed back to the `yamux` project via: https://github.com/hashicorp/yamux/pull/50
+- Address data race reading `Len()` in connection pool.
 
 ## v1.3.5 [2017-08-29]
 
@@ -92,7 +90,7 @@ This release builds off of the 1.3.3 release of OSS InfluxDB. Please see the [OS
 
 #### Bugfixes
 
-- Connections are not closed when CreateRemoteIterator RPC returns no iterators, resolved memory leak 
+- Connections are not closed when CreateRemoteIterator RPC returns no iterators, resolved memory leak
 
 ## v1.3.2 [2017-08-04]
 
@@ -121,8 +119,8 @@ This release builds off of the 1.3.3 release of OSS InfluxDB. Please see the [OS
 #### `[cluster]` Section
 
 * `max-remote-write-connections` is deprecated and can be removed.
-* NEW: `pool-max-idle-streams` and `pool-max-idle-time` configure the RPC connection pool. 
-  See `config.sample.toml` for descriptions of these new options. 
+* NEW: `pool-max-idle-streams` and `pool-max-idle-time` configure the RPC connection pool.
+  See `config.sample.toml` for descriptions of these new options.
 
 ### Removals
 
@@ -228,7 +226,7 @@ This change only affects users who have disabled the `retention-autocreate` opti
 
 #### Cluster-specific Bugfixes
 
-- Fix panic: Slice bounds out of range  
+- Fix panic: Slice bounds out of range
 &emsp;Fix how the system removes expired shards.
 - Remove misplaced newlines from cluster logs
 
@@ -312,7 +310,7 @@ users currently running on the Mac OS X platform, powered by the Darwin operatin
 
 #### Cluster-specific Bugfixes
 
-- Fix hinted-handoff issue: Fix record size larger than max size  
+- Fix hinted-handoff issue: Fix record size larger than max size
 &emsp;If a Hinted Handoff write appended a block that was larger than the maximum file size, the queue would get stuck because       the maximum size was not updated. When reading the block back out during processing, the system would return an error         because the block size was larger than the file size -- which indicates a corrupted block.
 
 ## v1.1.0 [2016-11-14]
@@ -342,7 +340,7 @@ Switches to journald logging for on systemd systems. Logs are no longer sent to 
 - Update Go (golang) dependencies: Fix Go Vet and update circle Go Vet command
 - Simplify the process for joining nodes to a cluster
 - Include the node's version number in the `influxd-ctl show` output
-- Return and error if there are additional arguments after `influxd-ctl show`  
+- Return and error if there are additional arguments after `influxd-ctl show`
 &emsp;Fixes any confusion between the correct command for showing detailed shard information (`influxd-ctl show-shards`) and the incorrect command (`influxd-ctl show shards`)
 
 #### Cluster-specific Bugfixes
@@ -428,7 +426,7 @@ The Cluster API used by `influxd-ctl` can not be protected with SSL certs.
 
 Data nodes that can no longer be restarted can now be forcefully removed from the cluster using `influxd-ctl remove-data -force <addr>`.  This should only be run if a grace removal is not possible.
 
-Backup and restore has been updated to fix issues and refine existing capabilities.  
+Backup and restore has been updated to fix issues and refine existing capabilities.
 
 #### Cluster-specific Features
 
@@ -461,9 +459,9 @@ Backup and restore has been updated to fix issues and refine existing capabiliti
 <br>
 # Web Console
 
-## DEPRECATED: Enterprise Web Console 
+## DEPRECATED: Enterprise Web Console
 
-The Enterprise Web Console has officially been deprecated and will be eliminated entirely by the end of 2017.  
+The Enterprise Web Console has officially been deprecated and will be eliminated entirely by the end of 2017.
 No additional features will be added and no additional bug fix releases are planned.
 
 For browser-based access to InfluxEnterprise, [Chronograf](/chronograf/latest/introduction) is now the recommended tool to use.
