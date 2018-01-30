@@ -27,10 +27,12 @@ In addition to [third party software incorporated in InfluxDB](http://docs.influ
 | [Go language library for exporting performance and runtime metrics to external metrics systems (i.e., statsite, statsd)](https://github.com/armon/go-metrics) (armon/go-metrics) | [MIT](https://github.com/armon/go-metrics/blob/master/LICENSE) |
 | [Golang implementation of JavaScript Object](https://github.com/dvsekhvalnov/jose2go) (dvsekhvalnov/jose2go)  | [MIT](https://github.com/dvsekhvalnov/jose2go/blob/master/LICENSE) |
 | [Collection of useful handlers for Go net/http package ](https://github.com/gorilla/handlers) (gorilla/handlers) | [BSD-2](https://github.com/gorilla/handlers/blob/master/LICENSE) |
-| [A powerful URL router and dispatcher for golang)](https://github.com/gorilla/mux) (gorilla/mux) | [BSD-2](https://github.com/gorilla/handlers/blob/master/LICENSE) |
-| [Codec - a high performance and feature-rich Idiomatic encode/decode and rpc library for msgpack and Binc)](https://github.com/hashicorp/go-msgpack) (hashicorp/go-msgpack)| [BSD-3](https://github.com/hashicorp/go-msgpack/blob/master/LICENSE) |
-| [(Go language implementation of the Raft consensus protocol)](https://github.com/hashicorp/raft) (hashicorp/raft) | [Mozilla 2.0](https://github.com/hashicorp/raft/blob/master/LICENSE) |
-| [Raft backend implementation using BoltDB)](https://github.com/hashicorp/raft-boltdb) (hashicorp/raft-boltdb) | [Mozilla 2.0](https://github.com/hashicorp/raft-boltdb/blob/master/LICENSE) |
-| [Pretty printing for Go values)](https://github.com/kr/pretty) (kr/pretty) | [MIT](https://github.com/kr/pretty/blob/master/License) |
-| [Miscellaneous functions for formatting text)](https://github.com/kr/text) (kr/text) | [MIT](https://github.com/kr/text/blob/main/License) |
-| [Some helpful packages for writing Go apps)](https://github.com/markbates/going) (markbates/going) | [MIT](https://github.com/markbates/going/blob/master/LICENSE.txt) |
+| [A powerful URL router and dispatcher for golang](https://github.com/gorilla/mux) (gorilla/mux) | [BSD-2](https://github.com/gorilla/handlers/blob/master/LICENSE) |
+| [Codec - a high performance and feature-rich Idiomatic encode/decode and rpc library for msgpack and Binc](https://github.com/hashicorp/go-msgpack) (hashicorp/go-msgpack)| [BSD-3](https://github.com/hashicorp/go-msgpack/blob/master/LICENSE) |
+| [Go language implementation of the Raft consensus protocol](https://github.com/hashicorp/raft) (hashicorp/raft) | [Mozilla 2.0](https://github.com/hashicorp/raft/blob/master/LICENSE) |
+| [Raft backend implementation using BoltDB](https://github.com/hashicorp/raft-boltdb) (hashicorp/raft-boltdb) | [Mozilla 2.0](https://github.com/hashicorp/raft-boltdb/blob/master/LICENSE) |
+| [Pretty printing for Go values](https://github.com/kr/pretty) (kr/pretty) | [MIT](https://github.com/kr/pretty/blob/master/License) |
+| [Miscellaneous functions for formatting text](https://github.com/kr/text) (kr/text) | [MIT](https://github.com/kr/text/blob/main/License) |
+| [Some helpful packages for writing Go apps](https://github.com/markbates/going) (markbates/going) | [MIT](https://github.com/markbates/going/blob/master/LICENSE.txt) |
+
+***Thanks to the open source community for your contributions!***
