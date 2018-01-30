@@ -22,10 +22,10 @@ customer’s use of or inability to use the third party software.
 
 In addition to [third party software incorporated in InfluxDB](http://docs.influxdata.com/influxdb/v1.4/about_the_project/#third_party), InfluxDB Enterprise incorporates the following additional third party software:
 
-| Third Party / Open Source Software - Description | Licensor Software   |
+| Third Party / Open Source Software - Description | License Type   |
 | ---------------------------------------- | ------------------- |
-| [armon/go-metrics (Go language library for exporting performance and runtime metrics to external metrics systems (i.e., statsite, statsd))](https://github.com/armon/go-metrics) | InfluxDB Enterprise |
-| [dvsekhvalnov/jose2go (Golang implementation of JavaScript Object](https://github.com/dvsekhvalnov/jose2go) | InfluxDB Enterprise |
+| [Go language library for exporting performance and runtime metrics to external metrics systems (i.e., statsite, statsd)](https://github.com/armon/go-metrics) (armon/go-metrics) | [MIT](https://github.com/armon/go-metrics/blob/master/LICENSE) |
+| [Golang implementation of JavaScript Object](https://github.com/dvsekhvalnov/jose2go) (dvsekhvalnov/jose2go)  | [MIT](https://github.com/dvsekhvalnov/jose2go/blob/master/LICENSE) |
 | [gorilla/handlers (Collection of useful handlers for Go net/http package)](https://github.com/gorilla/handlers) | InfluxDB Enterprise |
 | [gorilla/mux (A powerful URL router and dispatcher for golang)](https://github.com/gorilla/mux) | InfluxDB Enterprise |
 | [hashicorp/go-msgpack (Codec - a high performance and feature-rich Idiomatic encode/decode and rpc library for msgpack and Binc)](https://github.com/hashicorp/go-msgpack) | InfluxDB Enterprise |
