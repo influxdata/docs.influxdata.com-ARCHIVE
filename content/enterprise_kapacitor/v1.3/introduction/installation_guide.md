@@ -1,5 +1,5 @@
 ---
-title: Installation Guide
+title: Installing Kapacitor Enterprise
 menu:
   enterprise_kapacitor_1_3:
     weight: 20
@@ -232,4 +232,3 @@ Changing each of these options will make information spread faster throughout th
 * Increase the `gossip-members` option.
 * Decrease the `gossip-interval` option.
 * Decrease the `gossip-sync-interval` option.
-
