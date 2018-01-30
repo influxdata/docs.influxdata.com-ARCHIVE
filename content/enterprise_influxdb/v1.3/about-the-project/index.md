@@ -22,11 +22,15 @@ customer’s use of or inability to use the third party software.
 
 In addition to [third party software incorporated in InfluxDB](http://docs.influxdata.com/influxdb/v1.4/about_the_project/#third_party), InfluxDB Enterprise incorporates the following additional third party software:
 
-| Third Party / Open Source Software - Description |
-| ---------------------------------------- |
-| [golang/crypto (Go supplementary cryptography libraries)](https://github.com/golang/crypto/) |
-| [golang/net (Go supplementary network libraries)](https://github.com/golang/net/) |
-| [hashicorp/serf (Service orchestration and management tool)](https://github.com/hashicorp/serf) |
-| [nathanielc/grpccmd (gRPC Command line interface for any gRPC service in Go)](https://github.com/nathanielc/grpccmd) |
-| [spf13/cobra (A Commander for modern Go CLI interactions)](https://github.com/spf13/cobra) |
-| [grpc (Package grpc implements an RPC system called gRPC)](https://google.golang.org/grpc) |
+| Third Party / Open Source Software - Description | Licensor Software   |
+| ---------------------------------------- | ------------------- |
+| [armon/go-metrics (Go language library for exporting performance and runtime metrics to external metrics systems (i.e., statsite, statsd))](https://github.com/armon/go-metrics) | InfluxDB Enterprise |
+| [dvsekhvalnov/jose2go (Golang implementation of JavaScript Object](https://github.com/dvsekhvalnov/jose2go) | InfluxDB Enterprise |
+| [gorilla/handlers (Collection of useful handlers for Go net/http package)](https://github.com/gorilla/handlers) | InfluxDB Enterprise |
+| [gorilla/mux (A powerful URL router and dispatcher for golang)](https://github.com/gorilla/mux) | InfluxDB Enterprise |
+| [hashicorp/go-msgpack (Codec - a high performance and feature-rich Idiomatic encode/decode and rpc library for msgpack and Binc)](https://github.com/hashicorp/go-msgpack) | InfluxDB Enterprise |
+| [hashicorp/raft (Go language implementation of the Raft consensus protocol)](https://github.com/hashicorp/raft) | InfluxDB Enterprise |
+| [hashicorp/raft-boltdb (Raft backend implementation using BoltDB)](https://github.com/hashicorp/raft-boltdb) | InfluxDB Enterprise |
+| [kr/pretty (Pretty printing for Go values)](https://github.com/kr/pretty) | InfluxDB Enterprise |
+| [kr/text (Miscellaneous functions for formatting text)](https://github.com/kr/text) | InfluxDB Enterprise |
+| [markbates/going (Some helpful packages for writing Go apps)](https://github.com/markbates/going) | InfluxDB Enterprise |
