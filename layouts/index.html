@@ -50,9 +50,9 @@
 						{{ end }}
             {{ if eq .Identifier "enterprise" }}
 							<br/>
-							<a class="homepage--card-link" href=/enterprise_influxdb/{{ index $.Site.Data.default_versions (print "enterprise_influxdb" "_semver") }}/>InfluxDB Enterprise</a>
+							<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print "enterprise_influxdb" "_semver") }}/">InfluxDB Enterprise</a>
 							<br/>
-						  <a class="homepage--card-link" href=/enterprise_kapacitor/{{ index $.Site.Data.default_versions (print "enterprise_kapacitor" "_semver") }}/>Kapacitor Enterprise</a>
+						  <a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print "enterprise_kapacitor" "_semver") }}"/>Kapacitor Enterprise</a>
 						  <br/>
 						{{ end }}
 					</p>
