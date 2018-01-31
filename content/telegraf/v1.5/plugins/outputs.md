@@ -22,7 +22,7 @@ The Amon output plugin writes to [Amon](https://www.amon.cx) and requires a serv
 
 If the point value being sent cannot be converted to a float64, the metric is skipped.
 
-Metrics are grouped by converting any _ characters to . in the Point Name.
+Metrics are grouped by converting any `_` characters to `.` in the Point Name.
 
 ### [AMQP (amqp_output)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/amqp)
 
@@ -32,11 +32,11 @@ Metrics are written to a topic exchange using `tag`, defined in configuration fi
 
 ### [CloudWatch (cloudwatch_output)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/cloudwatch)
 
-The CloudWatch ouput plugin send metrics to Amazon CloudWatch.
+The CloudWatch output plugin send metrics to Amazon CloudWatch.
 
 ### [CrateDB (cratedb)](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/cratedb) -- NEW in v1.5
 
-The CrateDB ouput plugin writes to [CrateDB](https://crate.io/) using its [PostgreSQL protocol](https://crate.io/docs/crate/reference/protocols/postgres.html).
+The CrateDB output plugin writes to [CrateDB](https://crate.io/) using its [PostgreSQL protocol](https://crate.io/docs/crate/reference/protocols/postgres.html).
 
 ### [Datadog (datadog_output)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/datadog)
 
@@ -89,7 +89,7 @@ The Librato output plugin writes to the [Librato Metrics API](http://dev.librato
 
 ### [NATS Output (nats_output)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/nats)
 
-The NATS Output plugin writes to a (list of) specified NATS instance(s).
+The NATS output plugin writes to a (list of) specified NATS instance(s).
 
 ### [NSQ (nsq_output)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/nsq)
 
