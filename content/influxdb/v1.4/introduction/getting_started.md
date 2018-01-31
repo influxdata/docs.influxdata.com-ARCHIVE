@@ -1,5 +1,5 @@
 ---
-title: Getting Started
+title: Getting started with InfluxDB
 menu:
   influxdb_1_4:
     weight: 20

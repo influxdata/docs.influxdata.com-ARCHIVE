@@ -1,5 +1,5 @@
 ---
-title: Installation
+title: Installing InfluxDB
 menu:
   influxdb_1_4:
     weight: 10
@@ -239,7 +239,7 @@ The `influxdb/data` volume should have more disk space with lower IOPS and the `
 
 Each machine should have a minimum of 8G RAM.
 
-We’ve seen the best performance with the R4 class of machines, as they provide more memory than either of the C3/C4 class and the M4 class. 
+We’ve seen the best performance with the R4 class of machines, as they provide more memory than either of the C3/C4 class and the M4 class.
 
 ### Configuring the Instance
 
