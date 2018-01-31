@@ -1,10 +1,10 @@
 ---
-title: Template Tasks
+title: Template tasks
 aliases:
     - kapacitor/v1.4/examples/template_tasks/
 menu:
   kapacitor_1_4:
-    name: Template Tasks
+    name: Template tasks
     identifier: template_tasks
     weight: 9
     parent: work-w-kapacitor

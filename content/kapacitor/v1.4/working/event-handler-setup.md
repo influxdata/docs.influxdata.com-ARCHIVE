@@ -1,9 +1,9 @@
 ---
-title: Event Handler Setup
+title: Event handler setup
 
 menu:
   kapacitor_1_4:
-    name: Alerts - Event Handler Setup
+    name: Alerts - Event handler setup
     weight: 5
     parent: work-w-kapacitor
 ---
@@ -21,10 +21,10 @@ with Kapacitor, including the relevant configuration options and
 cover every supported event handler, but additional content should be added to
 this page over time.  For a complete list of the supported event handlers and for
 additional information, please see the event handler presentation in the
-[Alert Node](/kapacitor/v1.4/nodes/alert_node/#description) documentation.
+[Alert node](/kapacitor/v1.4/nodes/alert_node/#description) documentation.
 
-* [HipChat Setup](#hipchat-setup)
-* [Telegram Setup](#telegram-setup)
+* [HipChat setup](#hipchat-setup)
+* [Telegram setup](#telegram-setup)
 
 <!-- table style="width:100%">
   <tr>
@@ -33,7 +33,7 @@ additional information, please see the event handler presentation in the
   </tr>
 </table -->
 
-## HipChat Setup
+## HipChat setup
 
 [HipChat](https://www.hipchat.com/) is Atlassian's web service for group chat, video chat, and screen
 sharing.
@@ -75,19 +75,19 @@ In the `[hipchat]` section of the Kapacitor configuration file set:
 
 The optional configuration settings are:
 
-`room`  
+`room`
 &emsp;&emsp;Set to a HipChat room.
-This serves as the default chat id if the TICKscript does not specify a chat id.  
-`token`  
+This serves as the default chat id if the TICKscript does not specify a chat id.
+`token`
 &emsp;&emsp;Set to a HipChat [API access token](#hipchat-api-access-token).
-This serves as the default token if the TICKscript does not specify an API access token.  
-`global`  
-&emsp;&emsp;Set to `true` to send all alerts to HipChat without needing to specify HipChat in TICKscripts.  
-`state-changes-only`  
+This serves as the default token if the TICKscript does not specify an API access token.
+`global`
+&emsp;&emsp;Set to `true` to send all alerts to HipChat without needing to specify HipChat in TICKscripts.
+`state-changes-only`
 &emsp;&emsp;Set to `true` to send only an alert to HipChat if the alert state changes.
 This setting only applies if the `global` setting is also set to `true`.
 
-#### Sample Configuration
+#### Sample configuration
 ```javascript
     [hipchat]
       enabled = true
@@ -98,7 +98,7 @@ This setting only applies if the `global` setting is also set to `true`.
       state-changes-only = false
 ```
 
-### TICKscript Syntax
+### TICKscript syntax
 
 ```
 |alert()
@@ -114,9 +114,9 @@ Note that if `global` is set to `true` in the configuration file, there is no
 need to specify `.hipChat()` in the TICKscript; Kapacitor sends all alerts to HipChat
 by default.
 
-`.room('<HipChat-room>')`  
-&emsp;&emsp;&emsp;Sets the HipChat room.  
-`.token('<HipChat-API-token>')`  
+`.room('<HipChat-room>')`
+&emsp;&emsp;&emsp;Sets the HipChat room.
+`.token('<HipChat-API-token>')`
 &emsp;&emsp;&emsp;Sets the HipChat [API access token](#hipchat-api-access-token).
 
 ### Examples
@@ -178,7 +178,7 @@ the `testest` subdomain.
 Notice that `.room()` in the TICKscript overrides the `room` setting in the
 configuration file.
 
-## Telegram Setup
+## Telegram setup
 
 [Telegram](https://telegram.org/) is a messaging app.
 Configure Kapacitor to send alert messages to a Telegram bot.
@@ -192,7 +192,7 @@ To configure Kapacitor with Telegram, the following will be needed:
 * a Telegram chat id
 
 >
-##### Telegram Bot
+##### Telegram bot
 <br>
 The following steps describe how to create a new Telegram bot.
 >
@@ -241,7 +241,7 @@ and click `Start` at the bottom of your Telegram application.
 >
 Your newly-created bot will appear in the chat list on the left side of the application.
 >
-##### Telegram API Access Token
+##### Telegram API access token
 <br>
 The following section describes how to identify or create the API access token.
 >
@@ -262,9 +262,9 @@ below.
 >
     For a description of the Bot API, see this page: https://core.telegram.org/bots/api
 >
-##### Telegram Chat Id
+##### Telegram chat ID
 <br>
-The following steps describe how to identify your chat id.
+The following steps describe how to identify your chat ID.
 >
 **1.** Paste the following link in your browser
 >
@@ -299,20 +299,20 @@ The default `url` setting (`https://api.telegram.org/bot`) requires no additiona
 
 The optional configuration settings are:
 
-`chat_id`  
-&emsp;&emsp;&emsp;Set to a Telegram [chat id](#telegram-chat-id). This serves as the default chat id if the TICKscript does not specify a chat id.  
-`parse-mode`  
-&emsp;&emsp;&emsp;Set to `Markdown` or `HTML` for markdown-formatted or HTML-formatted alert messages. The default `parse-mode` is `Markdown`.  
-`disable-web-page-preview`  
-&emsp;&emsp;&emsp;Set to `true` to disable [link previews](https://telegram.org/blog/link-preview) in alert messages.  
-`disable-notification`.   
-&emsp;&emsp;&emsp;Set to `true` to disable notifications on iOS devices and disable sounds on Android devices. When set to `true`, Android users continue to receive notifications.  
-`global`  
-&emsp;&emsp;&emsp;Set to `true` to send all alerts to Telegram without needing to specify Telegram in TICKscripts.  
-`state-changes-only`  
+`chat_id`
+&emsp;&emsp;&emsp;Set to a Telegram [chat id](#telegram-chat-id). This serves as the default chat id if the TICKscript does not specify a chat id.
+`parse-mode`
+&emsp;&emsp;&emsp;Set to `Markdown` or `HTML` for markdown-formatted or HTML-formatted alert messages. The default `parse-mode` is `Markdown`.
+`disable-web-page-preview`
+&emsp;&emsp;&emsp;Set to `true` to disable [link previews](https://telegram.org/blog/link-preview) in alert messages.
+`disable-notification`.
+&emsp;&emsp;&emsp;Set to `true` to disable notifications on iOS devices and disable sounds on Android devices. When set to `true`, Android users continue to receive notifications.
+`global`
+&emsp;&emsp;&emsp;Set to `true` to send all alerts to Telegram without needing to specify Telegram in TICKscripts.
+`state-changes-only`
 &emsp;&emsp;&emsp;Set to `true` to only send an alert to Telegram if the alert state changes. This setting only applies if the `global` setting is also set to `true`.
 
-#### Sample Configuration
+#### Sample configuration
 
 ```
 [telegram]
@@ -327,7 +327,7 @@ The optional configuration settings are:
   state-changes-only = true
 ```
 
-### TICKscript Syntax
+### TICKscript syntax
 ```
 |alert()
     .telegram()
@@ -341,13 +341,13 @@ The `.chatId()`, `.disableNotification()`, `.disableWebPagePreview()`, and `.par
 If they are not set in the TICKscript, they default to the `chat-id`, `disable-notification`, `disable-web-page-preview`, and `parse-mode` settings in the `[telegram]` section of the configuration file.
 Note that if `global` is set to `true` in the configuration file, there is no need to specify `.telegram()` in the TICKscript; Kapacitor sends all alerts to Telegram by default.
 
-`.chatId('<chat_id>')`  
-&emsp;&emsp;&emsp;Sets the Telegram [chat id](#telegram-chat-id).  
-`.disableNotification()`  
-&emsp;&emsp;&emsp;Disables notifications on iOS devices and disables sounds on Android devices. Android users continue to receive notifications.  
-`.disableWebPagePreview()`  
-&emsp;&emsp;&emsp;Disables [link previews](https://telegram.org/blog/link-preview) in alert messages.  
-`.parseMode(['Markdown' | 'HTML'])`  
+`.chatId('<chat_id>')`
+&emsp;&emsp;&emsp;Sets the Telegram [chat id](#telegram-chat-id).
+`.disableNotification()`
+&emsp;&emsp;&emsp;Disables notifications on iOS devices and disables sounds on Android devices. Android users continue to receive notifications.
+`.disableWebPagePreview()`
+&emsp;&emsp;&emsp;Disables [link previews](https://telegram.org/blog/link-preview) in alert messages.
+`.parseMode(['Markdown' | 'HTML'])`
 &emsp;&emsp;&emsp;Sets `Markdown` or `HTML` as the format for alert messages.
 
 ### Examples
@@ -381,7 +381,7 @@ stream
 
 The setup sends `Might want to check your CPU` to the Telegram bot associated with the chat id `123456789` and API access token `abcdefghi:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`.
 
-#### Example 2: Send alerts to the Telegram chat id set in the TICKscript
+#### Example 2: Send alerts to the Telegram chat ID set in the TICKscript
 
 Configuration file:
 ```
@@ -410,5 +410,3 @@ stream
 ```
 
 The setup sends `Might want to check your CPU` to the Telegram bot associated with the chat id `123456789` and API access token `abcdefghi:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`.
-
-

@@ -1,5 +1,5 @@
 ---
-title: Alerts
+title: Kapacitor alerts overview
 
 menu:
   kapacitor_1_4:
@@ -13,7 +13,7 @@ Kapacitor makes it possible to handle alert messages in two different ways.
 * The messages can be pushed directly to an event handler exposed through the
 [Alert](/kapacitor/v1.4/nodes/alert_node/) node.
 * The messages can be published to a topic namespace to which one or more alert
-handlers can subscribe.    
+handlers can subscribe.
 
 <!--
 In addition to defining alert handler in TICKscript Kapacitor supports an alert system that follows a publish subscribe design pattern.
@@ -31,7 +31,7 @@ Pushing messages to a handler is the basic approach presented in the
 [Getting Stared](/kapacitor/v1.4/introduction/getting_started/#trigger-alert-from-stream-data)
 guide. This involves simply calling the relevant chaining method made available
 through the `alert` node.  Messages can be pushed to `log()` files, the `email()`
-service, the `httpOut()` cache and many [third party services](#list-of-handlers).  
+service, the `httpOut()` cache and many [third party services](#list-of-handlers).
 
 ## Publish and Subscribe
 
@@ -501,5 +501,3 @@ Send events with the tag "host" equal to `s001.example.com` to the handler:
 ```yaml
 match: "host" == 's001.example.com'
 ```
-
-
