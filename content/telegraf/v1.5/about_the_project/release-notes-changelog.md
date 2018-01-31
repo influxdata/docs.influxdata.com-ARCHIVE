@@ -11,7 +11,7 @@ menu:
 ### Bugfixes
 
 - Ignore empty lines in Graphite plaintext.
-- Fix `index out of bounds error` in Solr input plugin.
+- Fix `index out of bounds` error in Solr input plugin.
 - Reconnect before sending Graphite metrics if disconnected.
 - Align aggregator period with internal ticker to avoid skipping metrics.
 - Fix a potential deadlock when using aggregators.
