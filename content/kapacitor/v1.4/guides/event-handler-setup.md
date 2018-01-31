@@ -22,7 +22,7 @@ For a complete list of the supported event handlers and for additional informati
   </tr>
 </table>
 
-## HipChat Setup
+## HipChat setup
 
 [HipChat](https://www.hipchat.com/) is Atlassian's web service for group chat, video chat, and screen
 sharing.
