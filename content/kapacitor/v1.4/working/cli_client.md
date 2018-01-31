@@ -262,7 +262,7 @@ available service tests.  It takes the following form:
 kapacitor service-tests [ <SERVICE_NAME>... | <PATTERN> ]
 ```
 
-`PATTERN` can be a GREP like pattern.  For example to run tests of all services
+`PATTERN` can be a grep-like pattern.  For example, to run tests of all services
 beginning with the letter 'a' use the string 'a*'.
 
 **Example 7: Service test execution**
@@ -275,7 +275,7 @@ smtp                false     service is not enabled
 ```
 
 Combining the `list service-tests` and `service-tests` commands, it is possible
-on a \*Nix system to test all services with the command: `kapacitor list service-tests |xargs kapacitor service-tests`
+on a Linux system to test all services with the command: `kapacitor list service-tests |xargs kapacitor service-tests`
 
 ### Logging
 
@@ -589,7 +589,7 @@ kapacitor delete replays [ID | Pattern]
 `ID` needs to be the full ID of the replay, preferably copied and pasted from
 the results of the `list replays` command.
 
-`Pattern` can be a GREP like pattern used to identify a set of replays.  For
+`Pattern` can be a grep-like pattern used to identify a set of replays.  For
 example, if the value `test0<N>` was assigned to multiple `replay-id`s, (e.g.
 `jan-run01`, `jan-run02`, `jan-run03`) then all `run` replays could be removed with
 the pattern `"jan-run*"`.
@@ -602,7 +602,7 @@ $
 ```
 
 Note that this command returns no status or additional messages.  It fails or
-succeeds silently.  To verify the results use the `list replays` command.
+succeeds silently.  To verify the results, use the `list replays` command.
 
 ## Topics and topic handlers
 
@@ -614,9 +614,8 @@ Working with topics and topic handlers is introduced in the section [Alerts: Usi
 Note that topics are created through the `topic` method of the `alert` node in
 TICKscripts.
 
-**`define-topic-handler`**  This command defines or
-redefines a topic handler based on the contents of a topic handler script.  It
-takes the following form:
+**`define-topic-handler`**  This command defines or redefines a topic handler based on the contents of a topic handler script.
+It takes the following form:
 
 ```
 kapacitor define-topic-handler <PATH_TO_HANDLER_SCRIPT>
@@ -629,12 +628,13 @@ $ kapacitor define-topic-handler ./slack_cpu_handler.yaml
 $
 ```
 
-Note that this command returns no status or additional messages. It fails or
-succeeds silently.  To verify the results use the `list topic-handlers` command.
+Note that this command returns no status or additional messages.
+It fails or succeeds silently.
+To verify the results, use the `list topic-handlers` command.
 
 **`list`**  The universal `list` command can be used to list both topics and topic handlers.
 
-* **`list topics`**  Use the `list topics` command to display all topics currently stored by Kapacitor.  This command requires no further arguments.
+* **`list topics`**  Use the `list topics` command to display all topics currently stored by Kapacitor. This command requires no further arguments.
 
 **Example 24: Listing topics**
 
@@ -651,7 +651,7 @@ main:chronograf-v1-e77137c5-dcce-4fd5-a612-3cdaa5f98ef9:alert7 OK               
 main:cpu-alert-test:alert3                                     OK                0
 ```
 
-* **`list topic-handlers`**  Us the `list topic-handlers` command to display handlers stored by Kapacitor.  This command requires no further arguments.
+* **`list topic-handlers`**  Use the `list topic-handlers` command to display handlers stored by Kapacitor.  This command requires no further arguments.
 
 **Example 25: Listing topic handlers**
 
@@ -704,9 +704,9 @@ Options: {"channel":"#kapacitor"}
 kapacitor delete topics [ID | Pattern]
 ```
 
-`Pattern` can be a GREP like pattern used to identify a set of topics.  For
-example if the value `cluster0<N>` was assigned to multiple `topic`s, (e.g.
-`cluster01`, `cluster02`, `cluster03`) then all `cluster` topics could be removed with
+`Pattern` can be a grep-like pattern used to identify a set of topics.  For
+example, if the value `cluster0<N>` was assigned to multiple `topic`s, (e.g.
+`cluster01`, `cluster02`, `cluster03`), then all `cluster` topics could be removed with
 the pattern `"cluster*"`.
 
 
@@ -717,8 +717,9 @@ $ kapacitor delete topics 1252f40d-c998-430d-abaf-277c43d390e1:cpu_alert:alert2
 $
 ```
 
-Note that this command returns no status or additional messages.  It fails or
-succeeds silently.  To verify the results use the `list topics` command.
+Note that this command returns no status or additional messages.
+It fails or succeeds silently.
+To verify the results use the `list topics` command.
 
 * **`delete topic-handlers`**  Use the `topic-handlers` argument to remove a topic handler.  It takes the following form:
 
@@ -727,7 +728,8 @@ kapacitor delete topic-handler [TOPIC_ID] [HANDLER_ID]
 ```
 
 The values for `TOPIC_ID` and `HANDLER_ID` can be determined using the `list`
-command.  See Example 25 above.
+command.
+See Example 25 above.
 
 **Example 29: Deleting a topic handler**
 ```
@@ -735,8 +737,9 @@ $ kapacitor delete topic-handlers cpu slack
 $
 ```
 
-Note that this command returns no status or additional messages.  It fails or
-succeeds silently.  To verify the results, use the `list topics` command.
+Note that this command returns no status or additional messages.
+It fails or succeeds silently.
+To verify the results, use the `list topics` command.
 
 ## Tasks and task templates
 
@@ -745,10 +748,11 @@ introduced in the [Getting Started](/kapacitor/v1.4/introduction/getting_started
 and are explored in detail along side the [TICKscript](/kapacitor/v1.4/tick/).
 
 Task templates make it easy to reuse generic task structures to create a suite
-of similar tasks.  They are introduced in the [Template Tasks](/kapacitor/v1.4/working/template_tasks/)
-document.
+of similar tasks.
+They are introduced in the [Template Tasks](/kapacitor/v1.4/working/template_tasks/) document.
 
-**define** The `define` command is used to create a new task from a TICKscript.  It takes one of the following three forms:
+**`define`** The `define` command is used to create a new task from a TICKscript.
+It takes one of the following three forms:
 
 1. As a straight-forward task.
 1. From a template.
@@ -762,13 +766,13 @@ kapacitor define <TASK_ID> -tick <PATH_TO_TICKSCRIPT> -type <stream|batch> (-no-
 ```
 
 This form of the `define` command requires a new or existing task identifier
-provided immediately after the `define` token.  If the identifier does not yet
-exist in Kapacitor a new task will be created.  If the identifier already exists
-the existing task will be updated.  A required path to a TICKscript is provided
-through the argument `tick`.  The `-type` of task is also required, as is
-the target database and retention policy identified by the argument `-dbrp`. The
-optional boolean argument `-no-reload` will prevent reloading the task into
-memory.  The default behavior is to reload an updated task.
+provided immediately after the `define` token.
+If the identifier does not yet exist in Kapacitor, a new task will be created.  If the identifier already exists, the existing task will be updated.
+A required path to a TICKscript is provided through the argument `tick`.
+The `-type` of task is also required, as is the target database and retention policy identified by the argument `-dbrp`.
+The optional boolean argument `-no-reload` will prevent reloading the task into
+memory.
+The default behavior is to reload an updated task.
 
 **Example 30: Defining a new Task - standard**
 
@@ -777,9 +781,9 @@ $ kapacitor define sandbox -tick sandbox.tick -type stream -dbrp "telegraf"."aut
 $
 ```
 
-Note that this task on success returns no status or additional messages.  Some
-error messages associated with malformed or invalid TICKscripts may be returned.
-To verify the results use the `list tasks` command.
+Note that this task on success returns no status or additional messages.
+Some error messages associated with malformed or invalid TICKscripts may be returned.
+To verify the results, use the `list tasks` command.
 
 **From a template**
 ```
@@ -787,14 +791,12 @@ kapacitor define <TASK_ID> -template <TEMPLATE_ID> -vars <PATH_TO_VARS_FILE> (-n
 ```
 
 This form of the `define` command requires a new or existing task identifier
-provided immediately after the `define` token.  If the identifier does not yet
-exist in Kapacitor a new task will be created.  If the identifier already exists
-the existing task will be updated.  The required template to be used is identified
-with the `-template` argument.  The target database and retention policy
-identified by the argument `-dbrp` is also required as is a path to the file
-containing variable definitions identified by the `-var` argument.  The
-optional boolean argument `-no-reload` will prevent reloading the task into
-memory.  The default behavior is to reload an updated task.
+provided immediately after the `define` token.
+If the identifier does not yet exist in Kapacitor, a new task will be created.  If the identifier already exists, the existing task will be updated.
+The required template to be used is identified with the `-template` argument.  The target database and retention policy identified by the argument `-dbrp` is also required as is a path to the file containing variable definitions identified by the `-var` argument.
+The optional boolean argument `-no-reload` will prevent reloading the task into
+memory.
+The default behavior is to reload an updated task.
 
 **Example 31: Defining a new task - from template**
 
@@ -831,7 +833,7 @@ $
 Note that this task on success returns no status or additional messages.
 To verify the results use the `list tasks` command.
 
-**define-template** Use this command to load a task template to Kapacitor.  It takes the following form:
+**`define-template`** Use this command to load a task template to Kapacitor.  It takes the following form:
 
 ```
 kapacitor define-template <TEMPLATE_ID> -tick <PATH_TO_TICKSCRIPT> -type <string|batch>
@@ -855,7 +857,7 @@ Note that this task on success returns no status or additional messages.
 To verify the results use the `list templates` command.
 
 
-**enable** When tasks are first created they are in a `disabled` state.  Use this command to enable one or more tasks.  It takes the following form:
+**`enable`** When tasks are first created they are in a `disabled` state.  Use this command to enable one or more tasks.  It takes the following form:
 
 ```
 kapacitor enable <TASK_ID>...
@@ -871,7 +873,7 @@ $
 Note that this task on success or failure returns no status or additional messages.
 To verify the results use the `list tasks` command.
 
-**disable**  Use this command to disable one or more active tasks.  It takes the following form:
+**`disable`**  Use this command to disable one or more active tasks.  It takes the following form:
 
 ```
 kapacitor disable <TASK_ID>...
@@ -886,7 +888,7 @@ $
 Note that this task on success or failure returns no status or additional messages.
 To verify the result use the `list tasks` command.
 
-**reload**  When troubleshooting a task it may be useful to stop it and then start it again.  This command will disable and then enable one or more tasks.  It takes the following form:
+**`reload`**  When troubleshooting a task it may be useful to stop it and then start it again.  This command will disable and then enable one or more tasks.  It takes the following form:
 
 ```
 kapacitor reload <TASK_ID>...
@@ -903,9 +905,9 @@ $
 Note that this task on success or failure returns no status or additional messages.
 To verify the result use the `list tasks` command.
 
-**list**  The universal `list` command can be used to list tasks and task templates.
+**`list`**  The universal `list` command can be used to list tasks and task templates.
 
-* **list tasks**  Use the `list tasks` command to display all tasks currently stored by Kapacitor.  This command requires no further arguments.
+* **`list tasks`**  Use the `list tasks` command to display all tasks currently stored by Kapacitor.  This command requires no further arguments.
 
 **Example 37: Listing tasks**
 
@@ -920,7 +922,7 @@ cpu_idle                                           stream    disabled  false    
 sandbox                                            stream    disabled  false     ["blabla"."autogen"]
 ```
 
-* **list templates**  Use the `list templates` command to display all templates currently stored by Kapacitor.  This command requires no further arguments.
+* **`list templates`**  Use the `list templates` command to display all templates currently stored by Kapacitor.  This command requires no further arguments.
 
 **Example 38: Listing templates**
 
@@ -930,7 +932,7 @@ ID                 Type      Vars
 generic_mean_alert stream    crit,field,groups,measurement,slack_channel,warn,where_filter,window
 ```
 
-**show**  Use this command to see the details of a task.  It takes the following form:
+**`show`**  Use this command to see the details of a task.  It takes the following form:
 
 ```
 kapacitor show (-replay <REPLAY_ID>) [TASK_ID]
@@ -975,7 +977,7 @@ alert2 [alerts_triggered="147" avg_exec_time_ns="1.665189ms" crits_triggered="10
 }
 ```
 
-**show-template**  Use this command to see the details of a task template.  It takes the following form:
+**`show-template`**  Use this command to see the details of a task template.  It takes the following form:
 
 ```
 kapacitor show-template [TEMPLATE_ID]
@@ -1049,9 +1051,9 @@ mean3 -> alert4;
 }
 ```
 
-**delete** The universal `delete` command can be used to remove tasks and task templates.
+**`delete`** The universal `delete` command can be used to remove tasks and task templates.
 
-* **delete tasks**`  Use the `tasks` argument to remove one or more tasks.  It takes the following form:
+* **`delete tasks`**`  Use the `tasks` argument to remove one or more tasks.  It takes the following form:
 
 ```
 kapacitor delete tasks [ID | Pattern]
@@ -1074,7 +1076,7 @@ Note that this command returns no status or additional messages.  It fails or
 succeeds silently.  To verify the results use the `list tasks` command.
 
 
-* **delete templates**  Use the `templates` argument to remove one or more templates.  It takes the following form:
+* **`delete templates`**  Use the `templates` argument to remove one or more templates.  It takes the following form:
 
 ```
 kapacitor delete templates [ID | Pattern]
