@@ -412,7 +412,7 @@ The rate at which InfluxDB checks to enforce a retention policy.
 
 Environment variable: `INFLUXDB_RETENTION_CHECK_INTERVAL`
 
-## Shard precreation settings [shard-precreation]
+## Shard precreation settings `[shard-precreation]`
 
 The `[shard-precreation]` settings control the precreation of shards so that shards are available before data arrive.
 Only shards that, after creation, will have both a start- and end-time in the future are ever created.

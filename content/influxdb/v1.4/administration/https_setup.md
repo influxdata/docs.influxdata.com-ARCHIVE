@@ -1,5 +1,5 @@
 ---
-title: HTTPS Setup
+title: HTTPS setup
 menu:
   influxdb_1_4:
     weight: 100
@@ -50,7 +50,7 @@ certificate](#setup-https-with-a-ca-signed-certificate) and [using a self-signed
 on Ubuntu 16.04.
 Specific steps may be different for other operating systems.
 
-## Setup HTTPS with a CA-Signed Certificate
+## Setup HTTPS with a CA-Signed certificate
 
 #### Step 1: Install the SSL/TLS certificate
 
@@ -58,6 +58,7 @@ Place the private key file (`.key`) and the signed certificate file (`.crt`)
 or the single bundled file (`.pem`) in the `/etc/ssl` directory.
 
 #### Step 2: Ensure file permissions
+
 Certificate files require read and write access by the `root` user.
 Ensure that you have the correct file permissions by running the following
 commands:
@@ -68,7 +69,7 @@ sudo chmod 644 /etc/ssl/<CA-certificate-file>
 sudo chmod 600 /etc/ssl/<private-key-file>
 ```
 
-#### Step 3: Enable HTTPS in InfluxDB's configuration file
+#### Step 3: Enable HTTPS in InfluxDB configuration file
 
 HTTPS is disabled by default.
 Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
@@ -101,7 +102,7 @@ Restart the InfluxDB process for the configuration changes to take effect:
 sudo systemctl restart influxdb
 ```
 
-#### Step 5: Verify the HTTPS Setup
+#### Step 5: Verify the HTTPS setup
 
 Verify that HTTPS is working by connecting to InfluxDB with the [CLI tool](/influxdb/v1.4/tools/shell/):
 ```
@@ -117,7 +118,7 @@ InfluxDB shell version: 1.x.x
 
 That's it! You've successfully set up HTTPS with InfluxDB.
 
-## Setup HTTPS with a Self-Signed Certificate
+## Setup HTTPS with a self-Signed certificate
 
 #### Step 1: Generate a self-signed certificate
 
@@ -134,7 +135,7 @@ When you execute the command, it will prompt you for more information.
 You can choose to fill out that information or leave it blank;
 both actions generate valid certificate files.
 
-#### Step 2: Enable HTTPS in InfluxDB's configuration file
+#### Step 2: Enable HTTPS in InfluxDB configuration file
 
 HTTPS is disabled by default.
 Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
@@ -167,7 +168,7 @@ Restart the InfluxDB process for the configuration changes to take effect:
 sudo systemctl restart influxdb
 ```
 
-#### Step 4: Verify the HTTPS Setup
+#### Step 4: Verify the HTTPS setup
 
 Verify that HTTPS is working by connecting to InfluxDB with the [CLI tool](/influxdb/v1.4/tools/shell/):
 ```

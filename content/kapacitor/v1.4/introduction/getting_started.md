@@ -563,7 +563,7 @@ Once the metrics from several hosts are streaming to Kapacitor, it is possible t
 the cpu usage for each service running in each datacenter, and then trigger an alert
 based off the 95th percentile.
 In addition to just writing the alert to a log, Kapacitor can
-integrate with third-party utilities: currently Slack, PagerDuty, HipChat, VictorOps and more are supported. The alert can also be sent by email, be posted to a custom endpoint or can trigger the execution of a custom script.
+integrate with  third party utilities: currently Slack, PagerDuty, HipChat, VictorOps and more are supported. The alert can also be sent by email, be posted to a custom endpoint or can trigger the execution of a custom script.
 Custom message formats can also be defined so that alerts have the right context and meaning.
 The TICKscript for this would look like the following example.
 

@@ -1,5 +1,5 @@
 ---
-title: Grafana Graphs and Dashboards
+title: Grafana graphs and dashboards
 
 menu:
   influxdb_1_4:

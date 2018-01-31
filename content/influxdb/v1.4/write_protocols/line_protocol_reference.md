@@ -1,5 +1,5 @@
 ---
-title: Line Protocol Reference
+title: Line Protocol reference
 aliases:
     - influxdb/v1.4/write_protocols/write_syntax/
 menu:
