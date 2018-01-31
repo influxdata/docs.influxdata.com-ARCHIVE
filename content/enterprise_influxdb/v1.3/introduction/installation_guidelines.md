@@ -1,5 +1,5 @@
 ---
-title: Installation Guidelines (⏰ Please Read!)
+title: Installation guidelines (⏰ Please read!)
 aliases:
   - /enterprise_influxdb/v1.3/introduction/meta_node_installation/
   - /enterprise_influxdb/v1.3/introduction/data_node_installation/
@@ -71,8 +71,8 @@ any customers running on SSDs.
 
 #### Use three and only three Meta nodes
 
-Although technically the cluster can function with any number of meta nodes, the best pratice is to ALWAYS 
-have an odd number of meta nodes.  This allows the meta nodes to reach consensus.  An even number of meta nodes cannot achieve consensus because there can be no "deciding vote" cast between the nodes if they disagree. 
+Although technically the cluster can function with any number of meta nodes, the best pratice is to ALWAYS
+have an odd number of meta nodes.  This allows the meta nodes to reach consensus.  An even number of meta nodes cannot achieve consensus because there can be no "deciding vote" cast between the nodes if they disagree.
 
 Therefore, the minumum number of meta nodes for a high availability (HA) installation is three (3). So, the typical HA installation for InfluxEnterprise is to deploy three meta nodes.
 

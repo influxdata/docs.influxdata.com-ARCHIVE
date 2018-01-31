@@ -1,5 +1,5 @@
 ---
-title: Step 1 - Meta Node Installation
+title: Step 1 - Installing meta nodes
 aliases:
     - /enterprise/v1.3/production_installation/meta_node_installation/
 
@@ -11,21 +11,21 @@ menu:
 ---
 
 InfluxEnterprise offers highly scalable clusters on your infrastructure
-and a management UI ([via Chronograf](https://docs.influxdata.com/chronograf/latest) for working with clusters.
+and a management UI ([using Chronograf](https://docs.influxdata.com/chronograf/latest) for working with clusters.
 The Production Installation process is designed for users looking to
 deploy InfluxEnterprise in a production environment.
 The following steps will get you up and running with the first essential component of
 your InfluxEnterprise cluster: the meta nodes.
 
-> If you wish to evaluate InfluxEnterprise in a non-production
+> If you want to evaluate InfluxDB Enterprise in a non-production
 environment, feel free to follow the instructions outlined in the
 [QuickStart Installation](/enterprise_influxdb/v1.3/quickstart_installation) section.
-Please note that if you install InfluxEnterprise with the QuickStart Installation process you
-will need to reinstall InfluxEnterprise with the Production Installation
+Please note that if you install InfluxDB Enterprise with the QuickStart Installation process, you
+will need to reinstall InfluxDB Enterprise with the Production Installation
 process before using the product in a production environment.
 
 <br>
-# Meta Node Setup Description and Requirements
+# Meta node setup description and requirements
 
 The Production Installation process sets up three [meta nodes](/enterprise_influxdb/v1.3/concepts/glossary/#meta-node)
 and each meta node runs on its own server.
@@ -44,9 +44,9 @@ See the
 [Clustering Guide](/enterprise_influxdb/v1.3/concepts/clustering#optimal-server-counts)
 for more on cluster architecture.
 
-### Other Requirements
+### Other requirements
 
-#### License Key or File
+#### License key or file
 
 InfluxEnterprise requires a license key **OR** a license file to run.
 Your license key is available at [InfluxPortal](https://portal.influxdata.com/licenses).
@@ -65,8 +65,8 @@ you'll need to set the `license-path` setting instead of the `license-key`
 setting in the meta node configuration file.
 
 <br>
-# Meta Node Setup
-## Step 1: Modify the /etc/hosts File
+# Meta node setup
+## Step 1: Modify the `/etc/hosts` File
 
 Add your servers' hostnames and IP addresses to **each** cluster server's `/etc/hosts`
 file (the hostnames below are representative).
@@ -93,11 +93,11 @@ installation.
 A healthy cluster requires that every meta node can communicate with every other
 meta node.
 
-## Step 2: Set up, Configure, and Start the Meta Services
+## Step 2: Set up, configure, and start the meta services
 
 Perform the following steps on each meta server.
 
-### I. Download and Install the Meta Service
+### I. Download and install the meta service
 
 #### Ubuntu & Debian (64-bit)
 ```
@@ -111,7 +111,7 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.3.8_c1.3.8.x8
 sudo yum localinstall influxdb-meta-1.3.8_c1.3.8.x86_64.rpm
 ```
 
-### II. Edit the Configuration File
+### II. Edit the configuration file
 
 In `/etc/influxdb/influxdb-meta.conf`:
 
@@ -135,7 +135,7 @@ hostname="<enterprise-meta-0x>" #✨
   license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
 ```
 
-### III. Start the Meta Service
+### III. Start the meta service
 
 On sysvinit systems, enter:
 ```
@@ -165,7 +165,7 @@ must pass the `-single-server flag` when starting the single meta node.
 Please note that a cluster with only one meta node is **not** recommended for
 production environments.
 
-## Step 3: Join the Meta Nodes to the Cluster
+## Step 3: Join the meta nodes to the cluster
 
 From one and only one meta node, join all meta nodes including itself.
 In our example, from `enterprise-meta-01`, run:

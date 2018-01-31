@@ -1,5 +1,5 @@
 ---
-title: Step 2 - Data Node Installation
+title: Step 2 - Installing data nodes
 aliases:
     - /enterprise/v1.3/production_installation/data_node_installation/
 menu:
@@ -27,7 +27,7 @@ You **must** have a minimum of two data nodes in a cluster.
 InfluxEnterprise clusters require at least two data nodes for high availability and redundancy.
 <br>
 Note: that there is no requirement for each data node to run on its own
-server.  However, best practices are to deploy each data node on a dedicated server.  
+server.  However, best practices are to deploy each data node on a dedicated server.
 
 See the
 [Clustering Guide](/enterprise_influxdb/v1.3/concepts/clustering.md#optimal-server-counts)
@@ -115,7 +115,7 @@ First, in `/etc/influxdb/influxdb.conf`, uncomment:
 
 Second, in `/etc/influxdb/influxdb.conf`, set:
 
-`license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. 
+`license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.
 
 <dt>
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
@@ -219,7 +219,7 @@ The expected output is:
     ==========
     ID   TCP Address               Version
     4    enterprise-data-01:8088   1.3.8-c1.3.8
-    5    enterprise-data-02:8088   1.3.8-c1.3.8    
+    5    enterprise-data-02:8088   1.3.8-c1.3.8
 >
     Meta Nodes
     ==========

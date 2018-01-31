@@ -1,5 +1,5 @@
 ---
-title: Getting Started
+title: Getting started with InfluxDB Enterprise
 aliases:
   - /enterprise_influxdb/v1.3/introduction/getting-started/
   - /enterprise/v1.3/introduction/getting_started/

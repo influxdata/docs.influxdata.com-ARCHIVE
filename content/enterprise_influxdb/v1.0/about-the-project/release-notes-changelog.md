@@ -74,7 +74,7 @@ The Cluster API used by `influxd-ctl` can not be protected with SSL certs.
 
 Data nodes that can no longer be restarted can now be forcefully removed from the cluster using `influxd-ctl remove-data -force <addr>`.  This should only be run if a grace removal is not possible.
 
-Backup and restore has been updated to fix issues and refine existing capabilities.  
+Backup and restore has been updated to fix issues and refine existing capabilities.
 
 ### Features
 
@@ -127,7 +127,7 @@ This release is for maintaining version parity with clustering.
 
 ### Features
 
-* Log error messages from the InfluxEnterprise cluster
+* Log error messages from the InfluxDB Enterprise cluster
 
 ### Bugfixes
 
@@ -138,6 +138,6 @@ This release is for maintaining version parity with clustering.
 ### Features
 
 * **Rebalancing:** Rebalancing now ensures that all existing data adhere to the relevant [replication factor](/influxdb/v1.0/concepts/glossary/#replication-factor). See [Web Console Features](/enterprise_influxdb/v1.0/features/web-console-features/#cluster-rebalancing) for more information.
-* **User updates:** In versions 0.7.2 and below, users were loosely synced between the cluster and web console. In version 1.0, users have web-console-specific functions and are given cluster-specific permissions by being associated with a separate cluster account. The document [InfluxEnterprise Users](/enterprise_influxdb/v1.0/features/users/) describes the new user arrangement in more detail. Please note that this change requires additional steps if you are [upgrading](/enterprise_influxdb/v1.0/administration/upgrading/) from a previous version of the web console.
+* **User updates:** In versions 0.7.2 and below, users were loosely synced between the cluster and web console. In version 1.0, users have web-console-specific functions and are given cluster-specific permissions by being associated with a separate cluster account. The document [InfluxDB Enterprise Users](/enterprise_influxdb/v1.0/features/users/) describes the new user arrangement in more detail. Please note that this change requires additional steps if you are [upgrading](/enterprise_influxdb/v1.0/administration/upgrading/) from a previous version of the web console.
 
 ### Bugfixes

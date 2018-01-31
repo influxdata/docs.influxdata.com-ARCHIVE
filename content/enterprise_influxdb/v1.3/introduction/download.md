@@ -1,5 +1,5 @@
 ---
-title: Downloads
+title: Downloading InfluxDB Enterprise
 
 aliases:
     - /enterprise/v1.3/introduction/download/

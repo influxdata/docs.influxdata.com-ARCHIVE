@@ -1,5 +1,5 @@
 ---
-title: OSS to Cluster Migration
+title: Migrating from InfluxDB OSS to InfluxDB Enterprise clusters
 aliases:
     - /enterprise/v1.3/guides/migration/
 menu:
@@ -8,33 +8,33 @@ menu:
     parent: Guides
 ---
 
-The following guide has step-by-step instructions for migrating an OSS InfluxDB
-instance into an InfluxEnterprise cluster.
+The following guide has step-by-step instructions for migrating an InfluxDB OSS
+instance into an InfluxDB Enterprise cluster.
 
 <dt>
 The process assumes that you already have a fully configured InfluxEnterprise cluster
 of three or more meta nodes and zero or more data nodes. If you need instructions for meta node installation:
-- [Production Installation of Meta Nodes](/enterprise_influxdb/v1.3/production_installation/meta_node_installation/) 
+- [Production Installation of Meta Nodes](/enterprise_influxdb/v1.3/production_installation/meta_node_installation/)
 </dt>
 
 Please note that this migration process:
 
-* Deletes all data from any data nodes that are already part of the InfluxEnterprise Cluster
-* Will transfer all users from the OSS instance to the InfluxEnterprise Cluster*
+* Deletes all data from any data nodes that are already part of the InfluxDB Enterprise cluster
+* Will transfer all users from the OSS instance to the InfluxDB Enterprise cluster*
 * Requires downtime for writes and reads for the OSS instance
 
 <dt>
-If you're using an InfluxEnterprise cluster version prior to 0.7.4, the
+If you're using an InfluxDB Enterprise cluster version prior to 0.7.4, the
 following steps will **not** transfer users from the OSS instance to the
-InfluxEnterprise Cluster. 
+InfluxDB Enterprise Cluster.
 </dt>
 
-In addition, please refrain from creating a Global Admin user in the InfluxEnterprise Web Console before implementing these steps. If you’ve already created a Global Admin user, contact support.
+In addition, please refrain from creating a Global Admin user in the InfluxDB Enterprise Web Console before implementing these steps. If you’ve already created a Global Admin user, contact support.
 
 ## Modify the /etc/hosts file
 
 Add the IP and hostname of the OSS instance to the
-`/etc/hosts` file on all nodes in the InfluxEnterprise Cluster.
+`/etc/hosts` file on all nodes in the InfluxDB Enterprise cluster.
 Ensure that all cluster IPs and hostnames are also in the OSS
 instance’s `/etc/hosts` file.
 
@@ -46,7 +46,7 @@ environment, then this step can be skipped.
 
 ### 1. Remove the node from the InfluxEnterprise Cluster
 
-From a **meta** node in your InfluxEnterprise Cluster, enter:
+From a **meta** node in your InfluxDB Enterprise cluster, enter:
 ```
 influxd-ctl remove-data <data_node_hostname>:8088
 ```
@@ -70,9 +70,9 @@ sudo chown -R influxdb:influxdb /var/lib/influxdb
 
 ## For the OSS Instance:
 
-### 1. Stop all writes to the OSS Instance
+### 1. Stop all writes to the InfluxDB OSS instance
 
-### 2. Stop the influxdb service on the OSS Instance
+### 2. Stop the influxdb service on the InfluxDB OSS instance
 
 On sysvinit systems, use the `service` command:
 ```
@@ -89,7 +89,7 @@ Double check that the service is stopped (the following should return nothing):
 ps ax | grep influxd
 ```
 
-### 3. Remove the OSS package
+### 3. Remove the InfluxDB OSS package
 
 On Debian/Ubuntu systems:
 ```
@@ -123,8 +123,8 @@ sudo yum localinstall influxdb-data-1.3.8_c1.3.8.x86_64.rpm
 In `/etc/influxdb/influxdb.conf`, set:
 
 * `hostname` to the full hostname of the data node
-* `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` 
-in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. 
+* `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path`
+in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.
 
 <dt>
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
@@ -189,14 +189,14 @@ influxd-ctl show
 
 ### 2. Rebalance the cluster
 
-Increase the [replication factor](/enterprise_influxdb/v1.3/concepts/glossary/#replication-factor) 
+Increase the [replication factor](/enterprise_influxdb/v1.3/concepts/glossary/#replication-factor)
 on all existing retention polices to the number of data nodes in your cluster.
 You can do this with [ALTER RETENTION POLICY](https://docs.influxdata.com/influxdb/v1.3/query_language/database_management/#modify-retention-policies-with-alter-retention-policy).
 
-Next, [rebalance](/enterprise_influxdb/v1.3/guides/rebalance/) your cluster manually to meet the desired 
+Next, [rebalance](/enterprise_influxdb/v1.3/guides/rebalance/) your cluster manually to meet the desired
 replication factor for existing shards.
 
-Finally, if you were using [Chronograf](https://docs.influxdata.com/chronograf/latest/), you can 
-add your Enterprise instance as a new data source.  If you were not using 
-[Chronograf](https://docs.influxdata.com/chronograf/latest/introduction/installation/), we recommend going through 
+Finally, if you were using [Chronograf](https://docs.influxdata.com/chronograf/latest/), you can
+add your Enterprise instance as a new data source.  If you were not using
+[Chronograf](https://docs.influxdata.com/chronograf/latest/introduction/installation/), we recommend going through
 the installation instructions and using it as your primary management UI for the instance.

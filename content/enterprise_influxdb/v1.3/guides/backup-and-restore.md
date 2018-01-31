@@ -1,5 +1,5 @@
 ---
-title: Backup and Restore
+title: Backup and restore
 aliases:
     - /enterprise/v1.3/guides/backup-and-restore/
 menu:
@@ -16,17 +16,16 @@ The primary use cases for backup/restore are:
 * Debugging
 * Restoring clusters to a consistent state
 
-Currently, InfluxEnterprise supports backups and restores for all data in the
+Currently, InfluxDB Enterprise supports backups and restores for all data in the
 cluster; a single database; a single database and retention policy; and a
 single [shard](/influxdb/v1.3/concepts/glossary/#shard).
 
-> **Note:** Backups are not interchangeable between [OSS InfluxDB](/influxdb/v1.3/) and InfluxEnterprise.
+> **Note:** Backups are not interchangeable between [ InfluxDB OSS](/influxdb/v1.3/) and InfluxDB Enterprise.
 You cannot restore an OSS backup to an InfluxEnterprise data node, nor can you restore
-an InfluxEnterprise backup to an OSS instance.
+an InfluxDB Enterprise backup to an InfluxDB OSS instance.
 >
-If you are working with OSS InfluxDB, please see the [Backup
-and Restore documentation](/influxdb/v1.3/administration/backup_and_restore/) in the
-OSS InfluxDB documentation.
+If you are working with InfluxDB OSS, please see the [Backup
+and restore documentation](/influxdb/v1.3/administration/backup_and_restore/) in the InfluxDB OSS documentation.
 
 ## Backup
 

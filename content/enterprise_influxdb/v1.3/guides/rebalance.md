@@ -1,5 +1,5 @@
 ---
-title: Cluster Rebalance
+title: Cluster rebalance
 aliases:
     - /enterprise/v1.3/guides/rebalance/
 menu:
@@ -10,7 +10,7 @@ menu:
 
 ## Introduction
 
-This guide describes how to manually rebalance an InfluxEnterprise cluster.
+This guide describes how to manually rebalance an InfluxDB Enterprise cluster.
 Rebalancing a cluster involves two primary goals:
 
 * Evenly distribute
@@ -282,7 +282,7 @@ Example:
 
 name     duration  shardGroupDuration  replicaN  default
 ----     --------  ------------------  --------  -------
-autogen  0s        1h0m0s              3 #👍     true                                        
+autogen  0s        1h0m0s              3 #👍     true
 ```
 
 ### Step 2: Truncate Hot Shards
