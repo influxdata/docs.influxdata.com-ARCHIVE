@@ -1,5 +1,5 @@
 ---
-title: Upgrading from Previous Versions
+title: Upgrading from previous versions
 aliases:
     - /enterprise/v1.3/administration/upgrading/
 menu:
@@ -12,30 +12,30 @@ menu:
 Version 1.3.9 is a drop-in replacement for earlier releases of 1.3.x with no data migration required, unless you have been using the TSI (Time Series Index) preview with 1.3.6 or earlier releases.
 
 ### For users of the TSI (Time Series Index) preview
-If you have been using the TSI preview with 1.3.6 or earlier 1.3.x releases, you will need to follow the upgrade steps to 
-continue using the TSI preview.  Unfortunately, these steps cannot be executed while the cluster is operating -- so it will 
-result in downtime.  
+If you have been using the TSI preview with 1.3.6 or earlier 1.3.x releases, you will need to follow the upgrade steps to
+continue using the TSI preview.  Unfortunately, these steps cannot be executed while the cluster is operating -- so it will
+result in downtime.
 
 1. Stop the meta and data node processes.
 1. Download and update bits to 1.3.9.
-1. Delete all /index directories contained with the data nodes (default configuration is [data] dir = /var/lib/influxdb/data). 
+1. Delete all /index directories contained with the data nodes (default configuration is [data] dir = /var/lib/influxdb/data).
 1. Rebuild the TSI indexes using the `influx_inspect` utility with the new `inmem2tsi` parameter.  More documentation
 describing this new parameter with `influx_inspect` [can be found here](https://docs.influxdata.com/influxdb/v1.3/tools/influx_inspect/).
 1. Restart meta nodes.
 1. Restart data nodes.
 
 The 1.3.7 release resolved a defect that created duplicate tag values in TSI indexes.
-See Issues [#8995](https://github.com/influxdata/influxdb/pull/8995), and [#8998](https://github.com/influxdata/influxdb/pull/8998). 
-However, upgrading to 1.3.7 with the TSI preview on will cause compactions to fail 
--- see [Issue #9025](https://github.com/influxdata/influxdb/issues/9025). 
+See Issues [#8995](https://github.com/influxdata/influxdb/pull/8995), and [#8998](https://github.com/influxdata/influxdb/pull/8998).
+However, upgrading to 1.3.7 with the TSI preview on will cause compactions to fail
+-- see [Issue #9025](https://github.com/influxdata/influxdb/issues/9025).
 
-If you are using the TSI preview, **you should not upgrade to 1.3.7** from any other 1.3.x release. 
-Instead, upgrade to 1.3.9 and execute the index rebuild process as described above using `influx_inspect` 
+If you are using the TSI preview, **you should not upgrade to 1.3.7** from any other 1.3.x release.
+Instead, upgrade to 1.3.9 and execute the index rebuild process as described above using `influx_inspect`
 utility with the new `inmem2tsi` parameter.
 
 ## Upgrading from version 1.2.5 to 1.3.x
 
-Version 1.3.x introduces changes to the data node configuration file and changes to the 
+Version 1.3.x introduces changes to the data node configuration file and changes to the
 underlying communication protocols between the nodes used for hinted handoff.
 
 The impact of the hinted handoff protocol change means that you will be unable to perform a `downgrade` if there are
@@ -47,29 +47,29 @@ The steps below outline the upgrade process and include a list of the required c
 
 ### Step 0: Back up your cluster before upgrading to version 1.3.
 
-It is recommended that you create a full backup of your cluster before executing the upgrade. 
-If you already have incremental backups created as part of your standard operating procedures, make sure that you 
+It is recommended that you create a full backup of your cluster before executing the upgrade.
+If you already have incremental backups created as part of your standard operating procedures, make sure that you
 trigger a final incremental backup before proceeding with the upgrade.
 
 <dt>
 **NOTE:** Ensure you have sufficient disk space before triggering the backup!
 </dt>
-The following command uses the [version 1.2 backup syntax](https://docs.influxdata.com/enterprise_influxdb/v1.2/guides/backup-and-restore/#syntax) 
+The following command uses the [version 1.2 backup syntax](https://docs.influxdata.com/enterprise_influxdb/v1.2/guides/backup-and-restore/#syntax)
 to create an incremental backup of your cluster and stores that backup in the current directory.
 
 ```
 influxd-ctl backup .
 ```
 
-Otherwise, create a full backup before proceeding. 
-The following command uses the [backup syntax originally introduced in version 1.2](https://docs.influxdata.com/enterprise_influxdb/v1.3/guides/backup-and-restore/#syntax) 
-to create a full backup of your cluster and to store that backup in the current directory. 
+Otherwise, create a full backup before proceeding.
+The following command uses the [backup syntax originally introduced in version 1.2](https://docs.influxdata.com/enterprise_influxdb/v1.3/guides/backup-and-restore/#syntax)
+to create a full backup of your cluster and to store that backup in the current directory.
 
 ```
 influxd-ctl backup -full .
 ```
 Upgrade the meta nodes first, ensuring that the meta cluster is healthy, before proceeding to the
-data nodes. 
+data nodes.
 
 ### Repeat the following steps for each meta node in the cluster
 
@@ -116,7 +116,7 @@ sudo systemctl restart influxdb-meta
 
 ### Step 4: Confirm the upgrade
 
-After performing the upgrade on ALL meta nodes, check your node version numbers using the 
+After performing the upgrade on ALL meta nodes, check your node version numbers using the
 `influxd-ctl show` command.
 The [`influxd-ctl` tool](/enterprise_influxdb/v1.3/features/cluster-commands/) is available on all meta nodes.
 
@@ -126,7 +126,7 @@ The [`influxd-ctl` tool](/enterprise_influxdb/v1.3/features/cluster-commands/) i
 Data Nodes
 ==========
 ID	TCP Address		Version
-4	rk-upgrading-01:8088	1.2.x_c1.2.y   
+4	rk-upgrading-01:8088	1.2.x_c1.2.y
 5	rk-upgrading-02:8088	1.2.x_c1.2.y
 6	rk-upgrading-03:8088	1.2.x_c1.2.y
 
@@ -165,7 +165,7 @@ load balancer prior to performing the remaining steps.
 
 #### Data node package install
 
-When you run the install command, your terminal asks if you want to keep your 
+When you run the install command, your terminal asks if you want to keep your
 current configuration file or overwrite your current configuration file with the file for version 1.3.8.
 
 Please keep your current configuration file by entering `N` or `O`;
@@ -213,10 +213,10 @@ Follow the links for more information about those options.
 ### Step 5: Restart the influxdb process
 
 <dt>
-**NOTE:** As part of the changes associated with InfluxEnterprise 1.3, the hinted handoff queue is now segmented by node and
-shard. See 
-[Release Notes/Change Log](https://docs.influxdata.com/enterprise_influxdb/v1.3/about-the-project/release-notes-changelog/#v1-3-0-2017-06-21).  
-As a result, when you restart data nodes, you will see log messages indicating that there is a "protocol" issue writing points 
+**NOTE:** As part of the changes associated with InfluxDB Enterprise 1.3, the hinted handoff queue is now segmented by node and
+shard. See
+[Release Notes/Change Log](https://docs.influxdata.com/enterprise_influxdb/v1.3/about-the-project/release-notes-changelog/#v1-3-0-2017-06-21).
+As a result, when you restart data nodes, you will see log messages indicating that there is a "protocol" issue writing points
 from the hinted handoff queue between 1.2 and 1.3 nodes. These will resolve themselves after all of the data nodes have been
 upgraded.
 
@@ -239,9 +239,9 @@ sudo systemctl restart influxdb
 ### Step 6: Add the data node back into the load balancer
 
 Re-add the data node back into the load balancer to allow it to serve reads and writes.
-If this is the last data node to be upgraded, proceed to step 7.  
+If this is the last data node to be upgraded, proceed to step 7.
 
-Otherwise, return to step 1 for the data nodes and 
+Otherwise, return to step 1 for the data nodes and
 repeat the process for the remaining data nodes.
 
 ### Step 7: Confirm the upgrade
@@ -268,4 +268,4 @@ rk-upgrading-03:8091	1.3.8_c1.3.8
 ```
 
 If you have any issues upgrading your cluster, please do not hesitate to contact support at the email address
-provided to you when you received your InfluxEnterprise license.
+provided to you when you received your InfluxDB Enterprise license.

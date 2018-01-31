@@ -44,7 +44,7 @@ Related entries: [meta service](#meta-service)
 ## meta service
 
 The consistent data store that keeps state about the cluster, including which
-servers, databases, users, continuous queries, retention policies, subscriptions, 
+servers, databases, users, continuous queries, retention policies, subscriptions,
 and blocks of time exist.
 
 Related entries: [meta node](#meta-node)
@@ -69,7 +69,7 @@ query capacity within the cluster.
 
 ## web console
 
-Legacy user interface for the InfluxEnterprise cluster.
+Legacy user interface for the InfluxDB Enterprise cluster.
 
 This has been deprecated and the suggestion is to use [Chronograf](/chronograf/latest/introduction/).
 

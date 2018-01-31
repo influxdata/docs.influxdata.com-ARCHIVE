@@ -17,9 +17,9 @@ that you set up HTTPS.
 
 ## Requirements
 
-To set up HTTPS with InfluxDB Enterprise, you'll need an existing or new InfluxEnterprise instance
+To set up HTTPS with InfluxDB Enterprise, you'll need an existing or new InfluxDB Enterprise instance
 and a Transport Layer Security (TLS) certificate (also known as a Secured Sockets Layer (SSL) certificate).
-InfluxEnterprise supports three types of TLS/SSL certificates:
+InfluxDB Enterprise supports three types of TLS/SSL certificates:
 
 * **Single domain certificates signed by a [Certificate Authority](https://en.wikipedia.org/wiki/Certificate_authority)**
 
@@ -128,14 +128,14 @@ Second, Configure the data nodes to use HTTPS when communicating with the Meta N
     meta-tls-enabled = true
 ```
 
-#### Step 5: Restart InfluxEnterprise
+#### Step 5: Restart InfluxDB Enterprise
 
-Restart the InfluxEnterprise meta node processes for the configuration changes to take effect:
+Restart the InfluxDB Enterprise meta node processes for the configuration changes to take effect:
 ```
 sudo systemctl start influxdb-meta
 ```
 
-Restart the InfluxEnterprise data node processes for the configuration changes to take effect:
+Restart the InfluxDB Enterprise data node processes for the configuration changes to take effect:
 ```
 sudo systemctl restart influxdb
 ```
@@ -167,7 +167,7 @@ enterprise-meta-03:8091   1.x.y-c1.x.z
 ```
 
 
-Next, verify that HTTPS is working by connecting to InfluxEnterprise with the [CLI tool](/influxdb/v1.3/tools/shell/):
+Next, verify that HTTPS is working by connecting to InfluxDB Enterprise with the [CLI tool](/influxdb/v1.3/tools/shell/):
 ```
 influx -ssl -host <domain_name>.com
 ```
@@ -179,7 +179,7 @@ InfluxDB shell version: 1.x.y
 >
 ```
 
-That's it! You've successfully set up HTTPS with InfluxEnterprise.
+That's it! You've successfully set up HTTPS with InfluxDB Enterprise.
 
 ## Setup HTTPS with a Self-Signed Certificate
 
@@ -187,7 +187,7 @@ That's it! You've successfully set up HTTPS with InfluxEnterprise.
 
 The following command generates a private key file (`.key`) and a self-signed
 certificate file (`.crt`) which remain valid for the specified `NUMBER_OF_DAYS`.
-It outputs those files to InfluxEnterprise's default certificate file paths and gives them
+It outputs those files to InfluxDB Enterprise's default certificate file paths and gives them
 the required permissions.
 
 ```
@@ -271,14 +271,14 @@ Second, Configure the Data Nodes to use HTTPS when communicating with the Meta N
     meta-insecure-tls = true
 ```
 
-#### Step 4: Restart InfluxEnterprise
+#### Step 4: Restart InfluxDB Enterprise
 
-Restart the InfluxEnterprise meta node processes for the configuration changes to take effect:
+Restart the InfluxDB Enterprise meta node processes for the configuration changes to take effect:
 ```
 sudo systemctl restart influxdb-meta
 ```
 
-Restart the InfluxEnterprise data node processes for the configuration changes to take effect:
+Restart the InfluxDB Enterprise data node processes for the configuration changes to take effect:
 ```
 sudo systemctl restart influxdb
 ```
@@ -310,7 +310,7 @@ enterprise-meta-03:8091   1.x.y-c1.x.z
 ```
 
 
-Next, verify that HTTPS is working by connecting to InfluxEnterprise with the [CLI tool](/influxdb/v1.3/tools/shell/):
+Next, verify that HTTPS is working by connecting to InfluxDB Enterprise with the [CLI tool](/influxdb/v1.3/tools/shell/):
 ```
 influx -ssl -unsafeSsl -host <domain_name>.com
 ```
@@ -322,12 +322,12 @@ InfluxDB shell version: 1.x.y
 >
 ```
 
-That's it! You've successfully set up HTTPS with InfluxEnterprise.
+That's it! You've successfully set up HTTPS with InfluxDB Enterprise.
 
 
-## Connect Telegraf to a secured InfluxEnterprise instance
+## Connect Telegraf to a secured InfluxDB Enterprise instance
 
-Connecting [Telegraf](/telegraf/v1.3/) to an InfluxEnterprise instance that's using
+Connecting [Telegraf](/telegraf/v1.3/) to an InfluxDB Enterprise instance that's using
 HTTPS requires some additional steps.
 
 In Telegraf's configuration file (`/etc/telegraf/telegraf.conf`), under the OUTPUT PLUGINS section, edit the `urls`
@@ -346,7 +346,7 @@ setting and set it to `true`.
 
     # Configuration for influxdb server to send metrics to
     [[outputs.influxdb]]
-      ## The full HTTP or UDP endpoint URL for your InfluxEnterprise instance.
+      ## The full HTTP or UDP endpoint URL for your InfluxDB Enterprise instance.
       ## Multiple urls can be specified as part of the same cluster,
       ## this means that only ONE of the urls will be written to each interval.
       # urls = ["udp://localhost:8089"] # UDP endpoint example

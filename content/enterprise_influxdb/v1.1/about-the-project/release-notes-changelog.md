@@ -21,7 +21,7 @@ menu:
 
 ## Release Notes
 
-This release incorporates the changes in the 1.1.4 release of OSS InfluxDB.
+This release incorporates the changes in the 1.1.4 release of InfluxDB OSS.
 Please see the OSS [changelog](https://github.com/influxdata/influxdb/blob/v1.1.4/CHANGELOG.md) for more information about the OSS release.
 
 ### Bugfixes
@@ -34,7 +34,7 @@ Please see the OSS [changelog](https://github.com/influxdata/influxdb/blob/v1.1.
 ## Release Notes
 
 This release was an internal release only.
-It incorporates the changes in the 1.1.3 release of OSS InfluxDB.
+It incorporates the changes in the 1.1.3 release of InfluxDB OSS.
 Please see the OSS [changelog](https://github.com/influxdata/influxdb/blob/v1.1.3/CHANGELOG.md) for more information about the OSS release.
 
 ## v1.1.1 [2016-12-06]

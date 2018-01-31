@@ -24,7 +24,7 @@ Bad things can happen if you complete the following steps without meta nodes.
 The Production Installation process sets up two [data nodes](/enterprise_influxdb/v1.3/concepts/glossary#data-node)
 and each data node runs on its own server.
 You **must** have a minimum of two data nodes in a cluster.
-InfluxEnterprise clusters require at least two data nodes for high availability and redundancy.
+InfluxDB Enterprise clusters require at least two data nodes for high availability and redundancy.
 <br>
 Note: that there is no requirement for each data node to run on its own
 server.  However, best practices are to deploy each data node on a dedicated server.

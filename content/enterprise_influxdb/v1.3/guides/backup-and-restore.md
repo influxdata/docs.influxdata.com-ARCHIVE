@@ -21,7 +21,7 @@ cluster; a single database; a single database and retention policy; and a
 single [shard](/influxdb/v1.3/concepts/glossary/#shard).
 
 > **Note:** Backups are not interchangeable between [ InfluxDB OSS](/influxdb/v1.3/) and InfluxDB Enterprise.
-You cannot restore an OSS backup to an InfluxEnterprise data node, nor can you restore
+You cannot restore an OSS backup to an InfluxDB Enterprise data node, nor can you restore
 an InfluxDB Enterprise backup to an InfluxDB OSS instance.
 >
 If you are working with InfluxDB OSS, please see the [Backup
@@ -337,6 +337,6 @@ The unintended data, however, include only the metastore information, not the sh
 
 #### Issue 2: Restore a backup created prior to version 1.2.0
 
-InfluxEnterprise introduced incremental backups in version 1.2.0.
+InfluxDB Enterprise introduced incremental backups in version 1.2.0.
 To restore a backup created prior to version 1.2.0, be sure to follow the syntax
 for [restoring from a full backup](#syntax-for-a-restore-from-a-full-backup).

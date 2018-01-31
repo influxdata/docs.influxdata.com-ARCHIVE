@@ -11,31 +11,31 @@ menu:
     parent: Introduction
 ---
 
-Please review the sections below before you begin working with InfluxEnterprise.
+Please review the sections below before you begin working with InfluxDB Enterprise.
 
 ## Which installation is right for me?
 
-There are two ways to install InfluxEnterprise.
+There are two ways to install InfluxDB Enterprise.
 
 The first option is the [QuickStart Installation](/enterprise_influxdb/v1.3/quickstart_installation/) process.
 We recommend the QuickStart Installation process for users looking to quickly
-get up and running with InfluxEnterprise and for users who are looking to
+get up and running with InfluxDB Enterprise and for users who are looking to
 evaluate the product.
 The QuickStart Installation process **is not** designed for use
 in a production environment.
 
 The second option is the [Production Installation](/enterprise_influxdb/v1.3/production_installation/) process.
 We recommend the Production Installation process for users looking to deploy
-InfluxEnterprise in a production environment.
+InfluxDB Enterprise in a production environment.
 
-> **Note:** If you install InfluxEnterprise with the QuickStart Installation process you
-will need to reinstall InfluxEnterprise with the Production Installation
+> **Note:** If you install InfluxDB Enterprise with the QuickStart Installation process you
+will need to reinstall InfluxDB Enterprise with the Production Installation
 process before using the product in a production environment.
 
-## Requirements for InfluxEnterprise Clusters
+## Requirements for InfluxDB Enterprise Clusters
 
 Please review the [Clustering Guide](http://docs.influxdata.com/enterprise_influxdb/v1.3/concepts/clustering/)
-for an overview of the architecture and concepts in an InfluxEnterprise Cluster
+for an overview of the architecture and concepts in an InfluxDB Enterprise cluster
 and the
 [Hardware Sizing Guide](http://docs.influxdata.com/influxdb/v1.0/guides/hardware_sizing/#general-hardware-guidelines-for-a-cluster)
 for information on provisioning the correct servers.
@@ -57,14 +57,14 @@ If you alter the default ports in the configuration file(s), ensure the configur
 
 #### Synchronize time between hosts
 
-InfluxEnterprise uses hosts' local time in UTC to assign timestamps to data and for
+InfluxDB Enterprise uses hosts' local time in UTC to assign timestamps to data and for
 coordination purposes.
 Use the Network Time Protocol (NTP) to synchronize time between hosts.
 
 #### Use SSDs
 
 Clusters require sustained availability of 1000-2000 IOPS from the attached storage.
-SANs must guarantee at least 1000 IOPS is always available to InfluxEnterprise
+SANs must guarantee at least 1000 IOPS is always available to InfluxDB Enterprise
 nodes or they may not be sufficient.
 SSDs are strongly recommended, and we have had no reports of IOPS contention from
 any customers running on SSDs.
@@ -74,7 +74,7 @@ any customers running on SSDs.
 Although technically the cluster can function with any number of meta nodes, the best pratice is to ALWAYS
 have an odd number of meta nodes.  This allows the meta nodes to reach consensus.  An even number of meta nodes cannot achieve consensus because there can be no "deciding vote" cast between the nodes if they disagree.
 
-Therefore, the minumum number of meta nodes for a high availability (HA) installation is three (3). So, the typical HA installation for InfluxEnterprise is to deploy three meta nodes.
+Therefore, the minumum number of meta nodes for a high availability (HA) installation is three (3). So, the typical HA installation for InfluxDB Enterprise is to deploy three meta nodes.
 
 Aside from three being a magic number, a three meta node cluster can tolerate the permanent loss of a single
 meta node with no degradation in any function or performance.
@@ -103,4 +103,4 @@ redundancy, all nodes should run on independent servers.
 #### Install Chronograf last
 
 Chronograf should not be installed or configured until the
-InfluxEnterprise cluster is fully functional.
+InfluxDB Enterprise cluster is fully functional.

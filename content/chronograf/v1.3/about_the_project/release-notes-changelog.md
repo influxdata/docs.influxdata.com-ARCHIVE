@@ -245,7 +245,7 @@ menu:
   1. Replace the user icon with a solid style
   1. Disable query save in cell editor mode if the query does not have a database, measurement, and field
   1. Improve UX of applying functions to fields in the query builder
-  
+
 ## v1.3.1.0 [2017-05-22]
 
 ### Release notes
@@ -294,18 +294,18 @@ In versions 1.3.1+, installing a new version of Chronograf automatically clears 
   1. Prevent queries with `:dashboardTime:` from breaking the query builder
 
 ### Features
-  1. Add line-protocol proxy for InfluxDB/InfluxEnterprise Cluster data sources
+  1. Add line-protocol proxy for InfluxDB Enterprise cluster data sources
   1. Add `:dashboardTime:` to support cell-specific time ranges on dashboards
   1. Add support for enabling and disabling [TICKscripts that were created outside Chronograf](/chronograf/v1.3/guides/advanced-kapacitor/#tickscript-management)
   1. Allow users to delete Kapacitor configurations
 
 ### UI Improvements
   1. Save user-provided relative time ranges in cells
-  1. Improve how cell legends and options appear on dashboards 
+  1. Improve how cell legends and options appear on dashboards
   1. Combine the measurements and tags columns in the Data Explorer and implement a new design for applying functions to fields.
   1. Normalize the terminology in Chronograf
   1. Make overlays full-screen
   1. Change the default global time range to past 1 hour
   1. Add the Source Indicator icon to the Configuration and Admin pages
-  
+
 > See Chronograf's [CHANGELOG](https://github.com/influxdata/chronograf/blob/master/CHANGELOG.md) on GitHub for information about the 1.2.0-beta releases.
