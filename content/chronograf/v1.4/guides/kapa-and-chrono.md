@@ -1,5 +1,5 @@
 ---
-title: Kapacitor and Chronograf
+title: Working with Kapacitor in Chronograf
 
 menu:
   kapacitor_1_4:
