@@ -1,5 +1,5 @@
 ---
-title: Calculate Rates across joined series + Backfill
+title: Calculating rates across joined series + backfill
 aliases:
     - kapacitor/v1.4/examples/join_backfill/
 menu:

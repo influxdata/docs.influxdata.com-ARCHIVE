@@ -1,5 +1,5 @@
 ---
-title: Custom Anomaly Detection
+title: Custom Anomaly Detection using Kapacitor
 aliases:
     - kapacitor/v1.4/examples/anomaly_detection/
 menu:
@@ -21,7 +21,7 @@ If you haven't already, we recommend following the [getting started
 guide](/kapacitor/v1.4/introduction/getting_started/) for Kapacitor
 prior to continuing.
 
-## 3D Printing
+## 3D printing
 
 If you own or have recently purchased a 3D printer, you may know that
 3D printing requires the environment to be at certain temperatures in
@@ -59,7 +59,7 @@ must be from something different than the historical data population, or
 _an anomaly_.  This is an oversimplified approach, but we are learning
 how to write UDFs, not statistics.
 
-## Writing a UDF
+## Writing a user-defined function (UDF)
 
 Now that we have an idea of what we want to do, let's understand how
 Kapacitor wants to communicate with our process. From the [UDF
@@ -74,7 +74,7 @@ has agents implemented in Go and Python that take care of the
 communication details and expose an interface for doing the actual
 work.  For this guide, we will be using the Python agent.
 
-### The Handler Interface
+### The Handler interface
 
 Here is the Python handler interface for the agent:
 
@@ -105,7 +105,7 @@ class Handler(object):
         pass
 ```
 
-### The Info Method
+### The Info method
 
 Let's start with the `info` method.  When Kapacitor starts up it will
 call `info` and expect in return some information about how this UDF
@@ -162,7 +162,7 @@ remember this information for each UDF.  This way, Kapacitor can
 understand the available options for a given UDF before its executed
 inside of a task.
 
-### The Init Method
+### The Init method
 
 Next let's implement the `init` method, which is called once the task
 starts executing.  The `init` method receives a list of chosen
@@ -214,7 +214,7 @@ calls `init`, passing any specified options from the TICKscript. Once
 initialized, the process will remain running and Kapacitor will begin
 sending data as it arrives.
 
-### The Batch and Point Methods
+### The Batch and Point methods
 
 Our task wants a `batch` edge, meaning it expects to get data in
 batches or windows.  To send a batch of data to the UDF process,
@@ -229,7 +229,7 @@ At a high level, this is what our UDF code will do for each of the
 * `point` -- store the point
 * `end_batch` -- perform the `t-test` and then update the historical data
 
-### The Complete UDF Script
+### The Complete UDF script
 
 What follows is the complete UDF implementation with our `info`,
 `init`, and batching methods (as well as everything else we need).
@@ -543,7 +543,7 @@ the Kapacitor task:
 kapacitor define print_temps -tick print_temps.tick
 ```
 
-### Generating Test Data
+### Generating test data
 
 To simulate our printer for testing, we will write a simple Python
 script to generate temperatures.  This script generates random
@@ -662,7 +662,7 @@ if __name__ == '__main__':
 Save the above script as `/tmp/kapacitor_udf/printer_data.py`.
 
 > This Python script has two Python dependencies: `requests` and `numpy`.
-They can easily be installed via `pip` or your package manager.  
+They can easily be installed via `pip` or your package manager.
 
 At this point we have a task ready to go, and a script to generate
 some fake data with anomalies.  Now we can create a recording of our
@@ -688,7 +688,7 @@ ID                                      Type    Status    Size      Date
 7bd3ced5-5e95-4a67-a0e1-f00860b1af47    stream  finished  1.6 MB    04 May 16 11:44 MDT
 ```
 
-### Detecting Anomalies
+### Detecting anomalies
 
 Finally, let's run the play against our task and see how it works:
 
@@ -721,7 +721,7 @@ working example as a launching point into further work with UDFS.
 The framework is in place, now go plug in a real anomaly detection
 algorithm that works for your domain!
 
-## Extending This Example
+## Extending the example
 
 There are a few things that we have left as exercises to the reader:
 

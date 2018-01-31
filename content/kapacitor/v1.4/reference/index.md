@@ -1,9 +1,9 @@
 ---
-title: Kapacitor Reference
+title: Kapacitor reference
 
 menu:
   kapacitor_1_4:
-    name: Reference
+    name: Kapacitor reference
     identifier: reference
     weight: 7
 ---

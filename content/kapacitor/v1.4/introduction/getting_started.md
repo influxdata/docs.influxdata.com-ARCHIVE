@@ -1,5 +1,5 @@
 ---
-title: Getting Started
+title: Getting started with Kapacitor
 
 menu:
   kapacitor_1_4:
@@ -41,7 +41,7 @@ The Process
 Installation
 ------------
 
-The TICKStack services can be installed to run on the host machine as a part of Systemd, or they can be run from Docker containers. This guide will focus on installing and running them all on the same host as Systemd services.  
+The TICKStack services can be installed to run on the host machine as a part of Systemd, or they can be run from Docker containers. This guide will focus on installing and running them all on the same host as Systemd services.
 
 If you would like to explore using Docker deployments of these components, [check out these instructions.](/kapacitor/v1.4/introduction/install-docker/)
 
@@ -108,7 +108,7 @@ The Telegraf configuration file can be found at its default location: `/etc/tele
 
    * `[agent]\interval` - declares the frequency at which system metrics will be sent to InfluxDB
    * `[[outputs.influxd]]` - declares how to connect to InfluxDB and the destination database, which is the default 'telegraf' database.
-   * `[[inputs.cpu]]` - declares how to collect the system cpu metrics to be sent to InfluxDB.     
+   * `[[inputs.cpu]]` - declares how to collect the system cpu metrics to be sent to InfluxDB.
 
 *Example - relevant sections of /etc/telegraf/telegraf.conf*
 ```
@@ -139,7 +139,7 @@ The Telegraf configuration file can be found at its default location: `/etc/tele
 
 ```
 
- It is likely that Telegraf has started upon installation.  
+ It is likely that Telegraf has started upon installation.
 
  Check the current status of the Telegraf service:
 
@@ -186,7 +186,7 @@ zář 01 15:15:43 algonquin telegraf[16968]: 2017-09-01T13:15:43Z I! Agent Confi
 
 InfluxDB and Telegraf are now running and listening on localhost.  Wait about a minute for Telegraf to supply a small amount of system metric data to InfluxDB.  Then, confirm that InfluxDB has the data that Kapacitor will use.
 
-This can be achieved with the following query:  
+This can be achieved with the following query:
 
 ```bash
 $ curl -G 'http://localhost:8086/query?db=telegraf' --data-urlencode 'q=SELECT mean(usage_idle) FROM cpu'
@@ -285,7 +285,7 @@ Each TICKscript defines a pipeline that tells Kapacitor which data to process an
 So what should Kapacitor be instructed to do?
 
 The most common Kapacitor use case is triggering alerts. The example that follows will set up an alert on high cpu usage.
-How to define high cpu usage?  Telegraf writes to InfluxDB a cpu metric on the percentage of time a cpu spent in an idle state. For demonstration purposes assume that when idle usage drops below 70% a critical alert should be triggered.    
+How to define high cpu usage?  Telegraf writes to InfluxDB a cpu metric on the percentage of time a cpu spent in an idle state. For demonstration purposes assume that when idle usage drops below 70% a critical alert should be triggered.
 
 A TICKscript can now be written to cover these criteria.  Copy the script below into a file called `cpu_alert.tick`:
 
@@ -345,7 +345,7 @@ kapacitor record stream -task cpu_alert -duration 60s
 Since the task was defined with a database and retention policy pair, the recording knows to
 only record data from that database and retention policy.
 
-   * **NOTE &ndash; troubleshooting connection refused &ndash;** If, when running the record command, an error is returned of the type `getsockopt: connection refused` (Linux) or `connectex: No connection could be made...` (Windows), please ensure that the Kapacitor service is running.  See the section above [Installing and Starting Kapacitor](#installing-and-starting-kapacitor).  If Kapacitor is started and this error is still encountered, check the firewall settings of the host machine and ensure that port `9092` is accessible.  Check as well the messages in `/var/log/kapacitor/kapacitor.log`.  There may be an issue with the `http` or other configuration in `/etc/kapacitor/kapacitor.conf` and this will appear in the log.  If the Kapacitor service is running on another host machine, set the `KAPACITOR_URL` environment variable in the local shell to the Kapacitor endpoint on the remote machine.  
+   * **NOTE &ndash; troubleshooting connection refused &ndash;** If, when running the record command, an error is returned of the type `getsockopt: connection refused` (Linux) or `connectex: No connection could be made...` (Windows), please ensure that the Kapacitor service is running.  See the section above [Installing and Starting Kapacitor](#installing-and-starting-kapacitor).  If Kapacitor is started and this error is still encountered, check the firewall settings of the host machine and ensure that port `9092` is accessible.  Check as well the messages in `/var/log/kapacitor/kapacitor.log`.  There may be an issue with the `http` or other configuration in `/etc/kapacitor/kapacitor.conf` and this will appear in the log.  If the Kapacitor service is running on another host machine, set the `KAPACITOR_URL` environment variable in the local shell to the Kapacitor endpoint on the remote machine.
 
 
 Now grab the ID that was returned and put it in a bash variable for easy use later on (the actual UUID returned will be different):
@@ -390,7 +390,7 @@ kapacitor replay -recording $rid -task cpu_alert
 Since the data has already been recorded, it can be replayed as fast as possible instead of waiting for real time to pass.
 When the flag `-real-clock` is set, the data will be replayed by waiting for the deltas between the timestamps to pass, though the result is identical whether real time passes or not. This is because time is measured on each node by the data points it receives.
 
-Check the log using the command below.  
+Check the log using the command below.
 
 ```bash
 sudo cat /tmp/alerts.log

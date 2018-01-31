@@ -1,5 +1,5 @@
 ---
-title: Cluster rebalance
+title: Rebalancing InfluxDB Enterprise clusters
 aliases:
     - /enterprise/v1.3/guides/rebalance/
 menu:
