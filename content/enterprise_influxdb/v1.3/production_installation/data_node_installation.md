@@ -9,10 +9,10 @@ menu:
     identifier: data_production
 ---
 
-InfluxEnterprise offers highly scalable clusters on your infrastructure
+InfluxDB Enterprise offers highly scalable clusters on your infrastructure
 and a management UI for working with clusters.
 The next steps will get you up and running with the second essential component of
-your InfluxEnterprise cluster: the data nodes.
+your InfluxDB Enterprise cluster: the data nodes.
 
 If you have not set up your meta nodes, please visit
 [Meta Node Installation](/enterprise_influxdb/v1.3/production_installation/meta_node_installation/).
@@ -35,9 +35,9 @@ for more on cluster architecture.
 
 ### Other Requirements
 
-#### License Key or File
+#### License key or file
 
-InfluxEnterprise requires a license key **OR** a license file to run.
+InfluxDB Enterprise requires a license key **OR** a license file to run.
 Your license key is available at [InfluxPortal](https://portal.influxdata.com/licenses).
 Contact support at the email we provided at signup to receive a license file.
 License files are required only if the nodes in your cluster cannot reach
@@ -53,15 +53,15 @@ If the data nodes cannot reach `portal.influxdata.com` on port `80` or `443`,
 you'll need to set the `license-path` setting instead of the `license-key`
 setting in the data node configuration file.
 
-#### Load Balancer
+#### Load balancer
 
-InfluxEnterprise does not function as a load balancer.
+InfluxDB Enterprise does not function as a load balancer.
 You will need to configure your own load balancer to send client traffic to the
 data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.3/tools/api/)).
 
 <br>
-# Data Node Setup
-## Step 1: Modify the /etc/hosts File
+# Data node setup
+## Step 1: Modify the `/etc/hosts` file
 
 Add your servers' hostnames and IP addresses to **each** cluster server's `/etc/hosts`
 file (the hostnames below are representative).
@@ -157,7 +157,7 @@ hostname="<enterprise-data-0x>" #✨
   shared-secret = "long pass phrase used for signing tokens" #✨
 ```
 
-### III. Start the Data Service
+### III. Start the data service
 On sysvinit systems, enter:
 ```
 service influxdb start
@@ -184,7 +184,7 @@ If you do not see the expected output, the process is either not launching or is
 If you see the expected output, repeat for the remaining data nodes.
 Once all data nodes have been installed, configured, and launched, move on to the next section to join the data nodes to the cluster.
 
-## Join the Data Nodes to the Cluster
+## Join the data nodes to the cluster
 
 <dt>You should join your data nodes to the cluster only when you are adding a brand new node,
 either during the initial creation of your cluster or when growing the number of data nodes.

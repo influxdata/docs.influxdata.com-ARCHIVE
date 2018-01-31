@@ -10,12 +10,12 @@ menu:
     identifier: meta_production
 ---
 
-InfluxEnterprise offers highly scalable clusters on your infrastructure
+InfluxDB Enterprise offers highly scalable clusters on your infrastructure
 and a management UI ([using Chronograf](https://docs.influxdata.com/chronograf/latest) for working with clusters.
 The Production Installation process is designed for users looking to
-deploy InfluxEnterprise in a production environment.
+deploy InfluxDB Enterprise in a production environment.
 The following steps will get you up and running with the first essential component of
-your InfluxEnterprise cluster: the meta nodes.
+your InfluxDB Enterprise cluster: the meta nodes.
 
 > If you want to evaluate InfluxDB Enterprise in a non-production
 environment, feel free to follow the instructions outlined in the
@@ -31,7 +31,7 @@ The Production Installation process sets up three [meta nodes](/enterprise_influ
 and each meta node runs on its own server.
 <br>
 You **must** have a minimum of three meta nodes in a cluster.
-InfluxEnterprise clusters require at least three meta nodes and an __**odd number**__
+InfluxDB Enterprise clusters require at least three meta nodes and an __**odd number**__
 of meta nodes for high availability and redundancy.
 We do not recommend having more than three meta nodes unless your servers
 and/or the communication between the servers have chronic reliability issues.
@@ -48,7 +48,7 @@ for more on cluster architecture.
 
 #### License key or file
 
-InfluxEnterprise requires a license key **OR** a license file to run.
+InfluxDB Enterprise requires a license key **OR** a license file to run.
 Your license key is available at [InfluxPortal](https://portal.influxdata.com/licenses).
 Contact support at the email we provided at signup to receive a license file.
 License files are required only if the nodes in your cluster cannot reach
