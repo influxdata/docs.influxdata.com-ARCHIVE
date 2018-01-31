@@ -1,10 +1,10 @@
 ---
-title: Custom Anomaly Detection using Kapacitor
+title: Custom anomaly detection using Kapacitor
 aliases:
     - kapacitor/v1.4/examples/anomaly_detection/
 menu:
   kapacitor_1_4:
-    name: Custom Anomaly Detection
+    name: Custom anomaly detection
     identifier: anomaly_detection
     weight: 20
     parent: guides

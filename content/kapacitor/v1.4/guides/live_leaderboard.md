@@ -1,10 +1,10 @@
 ---
-title: Live Leaderboard of game scores
+title: Live leaderboard of game scores
 aliases:
     - kapacitor/v1.4/examples/live_leaderboard/
 menu:
   kapacitor_1_4:
-    name: Live Leaderboard
+    name: Live leaderboard
     identifier: live_leaderboard
     weight: 10
     parent: guides
