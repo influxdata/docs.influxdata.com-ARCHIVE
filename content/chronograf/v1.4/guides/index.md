@@ -13,6 +13,8 @@ Follow the links below to explore Chronograf's features.
 Chronograf offers a complete dashboard solution for visualizing your data and monitoring your infrastructure.
 Learn how to create customized dashboards in Chronograf.
 
+## [Using Kapacitor in Chronograf](/chronograf/latest/guides/kapa-and-chrono/)
+
 ## [Creating Kapacitor alerts](/chronograf/latest/guides/create-a-kapacitor-alert/)
 Chronograf provides a user interface for Kapacitor, InfluxData’s processing framework for creating alerts, running ETL jobs, and detecting anomalies in your data.
 Learn how to create a Kapacitor alert in Chronograf.
