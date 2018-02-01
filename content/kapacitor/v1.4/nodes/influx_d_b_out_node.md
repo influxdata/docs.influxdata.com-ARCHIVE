@@ -21,7 +21,7 @@ menu:
 |:---|:---|
 | **[buffer](#buffer)&nbsp;(&nbsp;`value`&nbsp;`int64`)** | Number of points to buffer when writing to InfluxDB. Default: 1000  |
 | **[cluster](#cluster)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the InfluxDB instance to connect to. If empty the configured default will be used.  |
-| **[create](#create)&nbsp;(&nbsp;)** | Create indicates that both the database and retention policy will be created, when the task is started. If the retention policy name is empty than no retention policy will be specified and the default retention policy name will be created.  |
+| **[create](#create)&nbsp;(&nbsp;)** | Create indicates that both the database and retention policy will be created, when the task is started. If the retention policy name is empty then no retention policy will be specified and the default retention policy name will be created.  |
 | **[database](#database)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the database.  |
 | **[flushInterval](#flushinterval)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | Write points to InfluxDB after interval even if buffer is not full. Default: 10s  |
 | **[measurement](#measurement)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the measurement.  |
@@ -104,7 +104,7 @@ influxDBOut.cluster(value string)
 
 Create indicates that both the database and retention policy 
 will be created, when the task is started. 
-If the retention policy name is empty than no 
+If the retention policy name is empty then no 
 retention policy will be specified and 
 the default retention policy name will be created. 
 
