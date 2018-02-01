@@ -13,7 +13,8 @@ menu:
 - `[data]` section in influxdb.conf: Default value for `cache-snapshot-memory-size` has been changed from `25m` to `256m`.
 
 ### Bugfixes
-#9201: Fix higher disk i/o utilization
+
+- Fix higher disk I/O utilization
 
 
 ## v1.4.2 [2017-11-15]
