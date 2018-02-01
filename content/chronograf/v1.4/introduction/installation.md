@@ -90,7 +90,7 @@ If you do NOT specify a location for the underlying datastore, a datastore named
 
 Second, specifying the location of the underlying datastore is important because as you take advantage of future release of Chronograf (maintenance releases or feature bearing), you will want to refer to this underlying datastore to preserve your dashboards and datasource configuration.
 
-If you simply un-TAR the downloaded package and restart Chronograf, you will reinitalize the local datastore -- and it will appear as though all of your previous configurations and dashboards have disappeared.
+If you simply un-TAR the downloaded package and restart Chronograf, you will reinitialize the local datastore -- and it will appear as though all of your previous configurations and dashboards have disappeared.
 
 The package management tools provided by the operating system deal with the version changes in the underlying software, but when using TAR, the version number is embedded in the directory structure and you end up with multiple side-by-side versions of the software.
 
