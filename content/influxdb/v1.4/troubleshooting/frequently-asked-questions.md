@@ -1065,7 +1065,7 @@ To keep regular expressions and quoting simple, avoid using the following charac
  `,` comma
 
 ## When should I single quote and when should I double quote when writing data?
-* Avoid single quoting and double quoting identifiers when writing data via the line protocol; see the examples below for how writing identifiers with quotes can complicate queries.
+* Avoid single quoting and double quoting identifiers when writing data using the line protocol; see the examples below for how writing identifiers with quotes can complicate queries.
 Identifiers are database names, retention policy names, user names, measurement names, tag keys, and field keys.
 <br>
 <br>

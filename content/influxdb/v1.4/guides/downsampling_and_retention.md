@@ -39,7 +39,7 @@ If you're new to both concepts, we recommend looking over the detailed
 
 ### Sample data
 This section uses fictional real-time data that track the number of food orders
-to a restaurant via phone and via website at ten second intervals.
+to a restaurant by phone and by website at ten second intervals.
 We will store those data in a
 [database](/influxdb/v1.4/concepts/glossary/#database) called `food_data`, in
 the [measurement](/influxdb/v1.4/concepts/glossary/#measurement) `orders`, and

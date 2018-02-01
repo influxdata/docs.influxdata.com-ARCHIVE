@@ -12,7 +12,7 @@ menu:
 
 Kapacitor has a template system that allows a template to be defined and reused for multiple tasks.
 Each task can define its own value for all variables declared within the template.
-Templates can be consumed via the CLI and the [API](/kapacitor/v1.4/working/api).
+Templates can be consumed using the CLI and the [API](/kapacitor/v1.4/working/api).
 
 The following is a simple example that defines a template that computes the mean of a field and triggers an alert.
 

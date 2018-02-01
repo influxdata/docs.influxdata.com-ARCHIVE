@@ -428,7 +428,7 @@ create_subscription_stmt = "CREATE SUBSCRIPTION" subscription_name "ON" db_name 
 #### Examples:
 
 ```sql
--- Create a SUBSCRIPTION on database 'mydb' and retention policy 'autogen' that send data to 'example.com:9090' via UDP.
+-- Create a SUBSCRIPTION on database 'mydb' and retention policy 'autogen' that send data to 'example.com:9090' using UDP.
 CREATE SUBSCRIPTION "sub0" ON "mydb"."autogen" DESTINATIONS ALL 'udp://example.com:9090'
 
 -- Create a SUBSCRIPTION on database 'mydb' and retention policy 'autogen' that round robins the data to 'h1.example.com:9090' and 'h2.example.com:9090'.
