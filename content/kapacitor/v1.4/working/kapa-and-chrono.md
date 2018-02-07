@@ -11,7 +11,7 @@ menu:
 
 * [Configuring Chronograf to work with Kapacitor](#configuring-chronograf-to-work-with-kapacitor)
    * [Add a Kapacitor Instance](#add-a-kapacitor-instance)
-   * [Managing Kapacitor using Chronograf](#managing-kapacitor-from-chronograf)
+   * [Managing Kapacitor from Chronograf](#managing-kapacitor-from-chronograf)
       * [Event Handlers](#event-handlers)
       * [Creating Alerts in Chronograf](#creating-alerts-in-chronograf)
       * [Managing tasks through Chronograf](#managing-tasks-through-chronograf)
@@ -24,16 +24,16 @@ menu:
 ## Overview
 
 As a part of the [TICK stack](https://www.influxdata.com/products/),
-[Chronograf](/chronograf/latest/) is a graphical user interface designed to
+[Chronograf](/chronograf/v1.3/) is a graphical user interface designed to
 simplify monitoring infrastructure, visualizing data, administering databases
 and managing alerts. It is through alert management that Chronograf gets
 integrated with Kapacitor.
 
 In the Chronograf documentation, working with Kapacitor is covered in the
-sections [Connecting Chronograf to Kapacitor](/chronograf/latest/introduction/getting-started/#4-connect-chronograf-to-kapacitor),
-[Creating Kapacitor alerts](/chronograf/latest/guides/create-a-kapacitor-alert/),
-[Configuring Kapacitor event handlers](/chronograf/latest/guides/configure-kapacitor-event-handlers/),
-and [Advanced Kapacitor Usage](/chronograf/latest/guides/advanced-kapacitor/).
+sections [Connecting Chronograf to Kapacitor](/chronograf/v1.3/introduction/getting-started/#4-connect-chronograf-to-kapacitor),
+[Create a Kapacitor Alert](/chronograf/v1.3/guides/create-a-kapacitor-alert/),
+[Configure Kapacitor Event Handlers](/chronograf/v1.3/guides/configure-kapacitor-event-handlers/),
+and [Advanced Kapacitor Usage](/chronograf/v1.3/guides/advanced-kapacitor/).
 
 This current document will summarize many of the points presented there and
 provide tips for working with tasks and TICKscripts in Chronograf.
@@ -44,15 +44,14 @@ Kapacitor instances in Chronograf are associated with specific Influx databases
 which should already be bound to both Kapacitor and Chronograf.  To define an
 Influx Database in Kapacitor see the [Getting Started](/kapacitor/v1.4/introduction/getting_started/)
 or the [Configuration](/kapacitor/v1.4/administration/configuration/#influxdb)
-guides. To define an Influx database in Chronograf see [InfluxDB Setup](/chronograf/latest/introduction/getting-started/#influxdb-setup)
+guides. To define an Influx database in Chronograf see [InfluxDB Setup](/chronograf/v1.3/introduction/getting-started/#influxdb-setup)
 in the Chronograf documentation.
 
-### Adding Kapacitor instances
+### Add a Kapacitor instance
 
+To add a Kapacitor instance to Chronograf:
 
-**To add a Kapacitor instance to Chronograf:**
-
-1. In the left navigation bar, click the **Configuration** cog-wheel icon.  A
+1. In the left navigation bar click the **Configuration** cog-wheel icon.  A
 list of InfluxDB sources is loaded.
 <br/><br/><img src="/img/kapacitor/chrono/Configuration01.png" alt="conifguration-open" style="max-width: 225px;" />
 1. Locate the InfluxDB source in the list and in the right most column under the
@@ -73,17 +72,17 @@ once more. The new Kapacitor instance should be listed under the "Active
 Kapacitor" heading.
 <br/><br/><img src="/img/kapacitor/chrono/Configuration05.png" alt="conifguration-review" style="max-width: 807px;" />
 
-### Managing Kapacitor using Chronograf
+### Managing Kapacitor from Chronograf
 
-#### Event handlers
+#### Event Handlers
 
 One of key set of Kapacitor features that can be modified through Chronograf are
 third party alert handlers.
 
-##### To modify a third party alert handler:
+##### To modify a thrid party alert handler:
 
-1. In the Configuration table, locate the InfluxDB instance and its associated
-Kapacitor instance, click the Kapacitor drop down menu and select the **edit icon**.
+1. In the Configuration table locate the Influxdata instance and its associated
+Kapacitor instance, click the Kapacitor drop down menu and then the **edit icon**.
 <br/><br/><img src="/img/kapacitor/chrono/UpdateEndpoints01.png" alt="conifguration-open" style="max-width: 833px;" />
 1. Click on the handler that needs to be changed. Its tab will become active.
 <br/><br/><img src="/img/kapacitor/chrono/UpdateEndpoints02.png" alt="conifguration-open" style="max-width: 898px;" />

@@ -4,7 +4,7 @@ aliases:
     - kapacitor/v1.4/examples/join_backfill/
 menu:
   kapacitor_1_4:
-    name: Calculate Rates Across Series
+    name: Calculate rates across series
     identifier: join_backfill
     weight: 0
     parent: guides
