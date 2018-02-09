@@ -34,7 +34,7 @@ The data used in this document are available for download on the [Sample Data](/
 Before proceeding, login to the Influx CLI.
 
 ```bash
-$ influx -precision rfc3339 
+$ influx -precision rfc3339
 Connected to http://localhost:8086 version 1.4.x
 InfluxDB shell 1.4.x
 >
@@ -73,7 +73,8 @@ Returns a list of [retention policies](/influxdb/v1.5/concepts/glossary/#retenti
 SHOW RETENTION POLICIES [ON <database_name>]
 ```
 
-### Description of Syntax
+### Description of syntax
+
 `ON <database_name>` is optional.
 If the query does not include `ON <database_name>`, you must specify the
 database with `USE <database_name>` in the [CLI](/influxdb/v1.5/tools/shell/) or with the `db` query
@@ -173,7 +174,8 @@ the specified [database](/influxdb/v1.5/concepts/glossary/#database).
 SHOW SERIES [ON <database_name>] [FROM_clause] [WHERE <tag_key> <operator> [ '<tag_value>' | <regular_expression>]] [LIMIT_clause] [OFFSET_clause]
 ```
 
-### Description of Syntax
+### Description of syntax
+
 `ON <database_name>` is optional.
 If the query does not include `ON <database_name>`, you must specify the
 database with `USE <database_name>` in the [CLI](/influxdb/v1.5/tools/shell/) or with the `db` query
@@ -183,11 +185,11 @@ The `FROM`, `WHERE`, `LIMIT`, and `OFFSET` clauses are optional.
 The `WHERE` clause supports tag comparisons; field comparisons are not
 valid for the `SHOW SERIES` query.
 
-Supported operators in the `WHERE` clause:  
-`=`&emsp;&nbsp;&thinsp;equal to  
-`<>`&emsp;not equal to  
-`!=`&emsp;not equal to  
-`=~`&emsp;matches against  
+Supported operators in the `WHERE` clause:
+`=`&emsp;&nbsp;&thinsp;equal to
+`<>`&emsp;not equal to
+`!=`&emsp;not equal to
+`=~`&emsp;matches against
 `!~`&emsp;doesn't match against
 
 See the Data Exploration page for documentation on the
@@ -355,6 +357,7 @@ Returns a list of [measurements](/influxdb/v1.5/concepts/glossary/#measurement)
 for the specified [database](/influxdb/v1.5/concepts/glossary/#database).
 
 ### Syntax
+
 ```
 SHOW MEASUREMENTS [ON <database_name>] [WITH MEASUREMENT <regular_expression>] [WHERE <tag_key> <operator> ['<tag_value>' | <regular_expression>]] [LIMIT_clause] [OFFSET_clause]
 ```
@@ -369,17 +372,17 @@ The `WITH`, `WHERE`, `LIMIT` and `OFFSET` clauses are optional.
 The `WHERE` clause supports tag comparisons; field comparisons are not
 valid for the `SHOW SERIES` query.
 
-Supported operators in the `WHERE` clause:  
-`=`&emsp;&nbsp;&thinsp;equal to  
-`<>`&emsp;not equal to  
-`!=`&emsp;not equal to  
-`=~`&emsp;matches against  
+Supported operators in the `WHERE` clause:
+`=`&emsp;&nbsp;&thinsp;equal to
+`<>`&emsp;not equal to
+`!=`&emsp;not equal to
+`=~`&emsp;matches against
 `!~`&emsp;doesn't match against
 
 See the Data Exploration page for documentation on the
 [`LIMIT` clause](/influxdb/v1.5/query_language/data_exploration/#the-limit-clause),
 [`OFFSET` clause](/influxdb/v1.5/query_language/data_exploration/#the-offset-clause),
-and on [Regular Expressions in Queries](/influxdb/v1.5/query_language/data_exploration/#regular-expressions).
+and on [Regular expressions in queries](/influxdb/v1.5/query_language/data_exploration/#regular-expressions).
 
 ### Examples
 
@@ -516,7 +519,7 @@ associated with the specified [database](/influxdb/v1.5/concepts/glossary/#datab
 SHOW TAG KEYS [ON <database_name>] [FROM_clause] [WHERE <tag_key> <operator> ['<tag_value>' | <regular_expression>]] [LIMIT_clause] [OFFSET_clause]
 ```
 
-### Description of Syntax
+### Description of syntax
 
 `ON <database_name>` is optional.
 If the query does not include `ON <database_name>`, you must specify the
@@ -527,11 +530,11 @@ The `FROM` clause and the `WHERE` clause are optional.
 The `WHERE` clause supports tag comparisons; field comparisons are not
 valid for the `SHOW TAG KEYS` query.
 
-Supported operators in the `WHERE` clause:  
-`=`&emsp;&nbsp;&thinsp;equal to  
-`<>`&emsp;not equal to  
-`!=`&emsp;not equal to  
-`=~`&emsp;matches against  
+Supported operators in the `WHERE` clause:
+`=`&emsp;&nbsp;&thinsp;equal to
+`<>`&emsp;not equal to
+`!=`&emsp;not equal to
+`=~`&emsp;matches against
 `!~`&emsp;doesn't match against
 
 See the Data Exploration page for documentation on the
@@ -726,15 +729,16 @@ Returns the list of [tag values](/influxdb/v1.5/concepts/glossary/#tag-value)
 for the specified [tag key(s)](/influxdb/v1.5/concepts/glossary/#tag-key) in the database.
 
 ### Syntax
+
 ```
 SHOW TAG VALUES [ON <database_name>][FROM_clause] WITH KEY [ [<operator> "<tag_key>" | <regular_expression>] | [IN ("<tag_key1>","<tag_key2")]] [WHERE <tag_key> <operator> ['<tag_value>' | <regular_expression>]] [LIMIT_clause] [OFFSET_clause]
 ```
 
-### Description of Syntax
+### Description of syntax
+
 `ON <database_name>` is optional.
 If the query does not include `ON <database_name>`, you must specify the
-database with `USE <database_name>` in the [CLI](/influxdb/v1.5/tools/shell/) or with the `db` query
-string parameter in the [HTTP API](/influxdb/v1.5/tools/api/#query-string-parameters) request.
+database with `USE <database_name>` in the [CLI](/influxdb/v1.5/tools/shell/) or with the `db` query string parameter in the [HTTP API](/influxdb/v1.5/tools/api/#query-string-parameters) request.
 
 The `WITH` clause is required.
 It supports specifying a single tag key, a regular expression, and multiple tag keys.
@@ -743,11 +747,11 @@ The `FROM`, `WHERE`, `LIMIT`, and `OFFSET` clauses are optional.
 The `WHERE` clause supports tag comparisons; field comparisons are not
 valid for the `SHOW TAG KEYS` query.
 
-Supported operators in the `WITH` and `WHERE` clauses:  
-`=`&emsp;&nbsp;&thinsp;equal to  
-`<>`&emsp;not equal to  
-`!=`&emsp;not equal to  
-`=~`&emsp;matches against  
+Supported operators in the `WITH` and `WHERE` clauses:
+`=`&emsp;&nbsp;&thinsp;equal to
+`<>`&emsp;not equal to
+`!=`&emsp;not equal to
+`=~`&emsp;matches against
 `!~`&emsp;doesn't match against
 
 See the Data Exploration page for documentation on the
@@ -871,7 +875,7 @@ Returns the [field keys](/influxdb/v1.5/concepts/glossary/#field-key) and the
 SHOW FIELD KEYS [ON <database_name>] [FROM <measurement_name>]
 ```
 
-### Description of Syntax
+### Description of syntax
 `ON <database_name>` is optional.
 If the query does not include `ON <database_name>`, you must specify the
 database with `USE <database_name>` in the [CLI](/influxdb/v1.5/tools/shell/) or with the `db` query
@@ -889,6 +893,7 @@ occurs first in the following list: float, integer, string, boolean.
 ### Examples
 
 #### Example 1: Run a `SHOW FIELD KEYS` query with the `ON` clause
+
 ```
 > SHOW FIELD KEYS ON "NOAA_water_database"
 
@@ -923,6 +928,8 @@ The query returns the field keys and field value data types for each
 measurement in the `NOAA_water_database` database.
 
 #### Example 2: Run a `SHOW FIELD KEYS` query without the `ON` clause
+
+```
 {{< vertical-tabs >}}
 {{% tabs %}}
 [CLI](#)
@@ -931,7 +938,7 @@ measurement in the `NOAA_water_database` database.
 {{< tab-content-container >}}
 
 {{% tab-content %}}
-
+```
 Specify the database with `USE <database_name>`
 ```
 > USE NOAA_water_database
@@ -1074,7 +1081,7 @@ water_level         float
 The query returns the fields keys and field value data types for the `h2o_feet`
 measurement in the `NOAA_water_database` database.
 
-### Common Issues with SHOW FIELD KEYS
+### Common Issues with `SHOW FIELD KEYS`
 
 #### Issue 1: SHOW FIELD KEYS and field type discrepancies
 Field value

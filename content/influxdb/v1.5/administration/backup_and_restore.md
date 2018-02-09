@@ -10,16 +10,15 @@ menu:
 ## Overview
 New in version 1.5, the InfluxDB `backup` utility provides:
 
-* Option to run backup and restore functions on a live database.
-* Backup and restore single or multiple databases, along with optional filtering based on data point timestamps
-* Supports data imports from [InfluxEnterprise](/enterprise/latest/) clusters
+* Option to run backup and restore functions on an online, or live, database.
+* Backup and restore functions for single or multiple databases, along with optional filtering based on data point timestamps.
+* Supports data imports from [InfluxDB Enterprise](/enterprise_influxdb/latest/) clusters
 * Generate backup files that can be imported into an InfluxDB Enterprise database.
 
 > ***Note:*** The offline backup and restore functions
-provided in InfluxDB versions 1.4 and earlier are retained in version 1.5 without change, and
-are detailed in [Backward Compatible Offline Backup/Restore](#legacy).
+provided in InfluxDB versions 1.4 and earlier are retained in version 1.5 without change, and are detailed in [Backward compatible offline backup and restore](#backup-compatible-offline-backup-and-restore).
 
-> ***Note:*** Prior to version 1.5, the InfluxDB OSS `backup` utility created  backup file formats, now referred to as the _legacy_ format, that were incompatible with the InfluxDB Enterprise version.  The legacy format is fully supported in the new `backup` utility as input for the new online restore function. If you are creating new backup processes, InfluxData recommends using the new InfluxDB Enterprise-compatible backup format, which uses less disk space and provides a clear transfer path for data between the InfluxDB Enterprise and InfluxDB OSS versions.
+> ***Note:*** Prior to version 1.5, the InfluxDB OSS `backup` utility created  backup file formats, now referred to as the _legacy_ format, that were incompatible with the InfluxDB Enterprise version.  This legacy format is fully supported in the new `backup` utility as input for the new online restore function. If you are creating new backup processes, InfluxData recommends using the new InfluxDB Enterprise-compatible backup format, which uses less disk space and provides a clear transfer path for data between the InfluxDB Enterprise and InfluxDB OSS versions.
 
 <h2 id="online">Enterprise-compatible online backup and restore</h2>
 
@@ -41,80 +40,105 @@ The online backup and restore processes execute over a TCP connection to the dat
 $ influxd backup -database mydatabase -host <remote-node-IP>:8088 /tmp/mysnapshot
 ```
 
-### Backup
+### `backup`
 The improved `backup` command is similar to previous versions, except that it
 generates backups in an InfluxDB Enterprise-compatible format and has some new filtering options to constrain the range of data points that are exported to the backup.
 
-To invoke the new InfluxDB Enterprise-compatible format, run the `influxd backup` command with the `-enterprise` flag, like this:
-
-```
-influxd backup -enterprise [options] <path-to-backup>
 ```
 
-**Backup Arguments**
-- `-host <host:port>`- The host to connect to and perform a snapshot of. Default value is '127.0.0.1:8088'.
+influxd backup -database <db_name>
+    [ -portable ]
+    [ -host <host:port> ]
+    [ -retention <rp_name> ] | [ -shard <shard_ID> -retention <rp_name> ]
+    [ -start <timestamp> [ -end <timestamp> ] | -since <timestamp> ]
+    <path-to-backup>
 
-- `-database <name>`- The database to backup. Required.
+```
 
-- `-retention <name>` - The retention policy to backup. Optional.
 
-- `-shard <id>`: The shard ID to backup. Optional. If specified, `-retention <name>` is required.
+To invoke the new InfluxDB Enterprise-compatible format, run the `influxd backup` command with the `-portable` flag, like this:
 
-- `-since <2015-12-24T08:12:13Z>`: Do an incremental backup since the specified timestamp. The specified time needs to be in the [RFC3339 format](https://www.ietf.org/rfc/rfc3339.txt). Optional.
+```
+influxd backup -portable [options] <path-to-backup>
+```
 
-- `-start <2015-12-24T08:12:23Z>`: All points earlier than this timestamp will be excluded from the export. Not compatible with `-since`.
-- `-end <2015-12-24T08:12:23Z>`: All points later than this timestamp will be excluded from the export. Not compatible with `-since`.
-- `-enterprise`: Generate backup files in the format used for InfluxDB Enterprise.
+##### Arguments
 
-### Restore
-An online restore process is initiated by using either the `-enterprise` or `-online` flags.  The flags indicate that the input is either in an InfluxDB Enterprise backup format or a legacy backup format, respectively.  The restore process has the following options:
+Optional arguments are enclosed in brackets.
 
-- `-host <host:port>`: The host to connect to and perform a snapshot of. Default value is `'127.0.0.1:8088'`.
+- `-database <db_name>`: The database to back up. Required.
 
-- `-db <name>`: Identifies the database from the backup that will be restored.
+- `[ -portable ]`: Generates backup files in the newer InfluxDB Enterprise-compatible format. Recommended for both InfluxDB OSS and InfluxDB Enterprise.
 
-- `-newdb <name>`: The name of the database into which the archived data will be imported on the target system.
+- `[ -host <host:port> ]`: The host and port to connect to and perform a snapshot of. Default value is '127.0.0.1:8088'.
+
+
+- `[ -retention <rp_name> ]`: The retention policy to backup. Default value is `autogen`.
+
+- `[ -shard <ID> ]`: The shard ID of the shard to be backed up. If specified, then `-retention <name>` is required.
+
+- `[ -start <timestamp> ]`: Include all points starting with the specified timestamp ([RFC3339 format](https://www.ietf.org/rfc/rfc3339.txt)) and excludes all points before the specified timestamp  from the export. Not compatible with `-since`. Example: `-start 2015-12-24T08:12:23Z`
+
+- `[ -end <timestamp> ]` ]: Exclude all points after the specified timestamp ([RFC3339 format](https://www.ietf.org/rfc/rfc3339.txt)) from the results. Must be used with the `-start <timestamp>` argument. Cannot be used with `-since`. Example: `-end 2015-12-31T08:12:23Z`
+
+- `[ -since <timestamp> ]`: Perform an incremental backup after the specified timestamp [RFC3339 format](https://www.ietf.org/rfc/rfc3339.txt). Example: `-since 2015-12-24T08:12:13Z`
+
+
+### `restore`
+An online `restore` process is initiated by using either the `-portable` or `-online` flags.  The flags indicate that the input is either in an InfluxDB Enterprise backup format or a legacy backup format, respectively.
+
+```
+influxd restore -db <db_name>
+    -portable | -online
+    [ -host <host:port> ]
+    [ -rp <rp_name> ]
+    [ -newrp <newrp_name> ]
+    [ -shard <shard_ID> ]
+```
+
+#### Arguments
+
+- `-host <host:port>`: The host and port to connect to and perform a snapshot of. Default value is `'127.0.0.1:8088'`.
+
+- `-db <db_name>`: Name of the database that will be restored from the backup.
+
+- `[ -newdb <newdb_name> ]`: Name of the database into which the archived data will be imported on the target system.
 	        If not given, then the value of `-db` is used.  The new database name must be unique to the target system.
 
-- `-rp <name>`: Identifies the retention policy from the backup that will be restored.  Requires that `-db` is set.
+- `[ -rp <name> ]`: Identifies the retention policy from the backup that will be restored.  Requires that `-db` is set.
 
-- `-newrp <name>`: The name of the retention policy that will be created on the target system. Requires that `-rp` is set.
+- `[ -newrp <newrp_name> ]`: The name of the retention policy that will be created on the target system. Requires that `-rp` is set.
 	        If not given, the value of `-rp` is used.
 
-- `-shard <id>`: Will restore the single shard's data. Optional. If specified, `-db` and `-rp` are required.
+- `[ -shard <shard_ID> ]`: Will restore the single shard's data. If specified, `-db` and `-rp` are required.
 
-> **Note:** Even if you have previous backup automation that supports the legacy format, you may wish to
-test the new online feature for legacy backups.  It enables restoration of a single database to a running
-instance, while leaving all existing data on the server in place.  The offline restore method will clear
-all existing databases on the server.
->
+> **Note:** Even if you have previous backup automation that supports the legacy format, you may wish to test the new online feature for legacy backups.  It enables restoration of a single database to a running instance, while leaving all existing data on the server in place.  The offline restore method will clear all existing databases on the server.
 
-<h2 id="legacy">Backward Compatible Offline Backup/Restore</h2>
+### Backward compatible offline backup and restore
 
 InfluxDB has the ability to snapshot an instance at a point-in-time and restore it.
 All backups are full backups.
 InfluxDB does not yet support incremental backups.
 There are two types of data to backup, the metastore and the metrics themselves.
 The [metastore](/influxdb/v1.4/concepts/glossary/#metastore) is backed up in its entirety.
-The metrics are backed up per-database in a separate operation from the metastore backup.
+The metrics are backed up per database in a separate operation from the metastore backup.
 
-If you are working with an InfluxEnterprise cluster, please see the [Backup
-and Restore Guide](/enterprise/latest/guides/backup-and-restore/) in the
-InfluxEnterprise documentation.
+If you are working with an InfluxDB Enterprise cluster, see the [Backup
+and restore guide](/enterprise_influxdb/latest/guides/backup-and-restore/) in the InfluxDB Enterprise documentation.
 
 ### Backing up the metastore
 
 InfluxDB's metastore contains internal information about the status of
-the system, including user information, database and shard metadata, continuous queries, retention policies,
-and subscriptions. While a node is running, you can
-create a backup of your instance's metastore by running the command:
+the system,
+including user information, database and shard metadata, continuous queries, retention policies, and subscriptions.
+While a node is running, you can create a backup of your instance's metastore by running the command:
 
 ```
 influxd backup <path-to-backup>
 ```
 
-Where `<path-to-backup>` can be replaced with the directory where you
-would like the backup to be written to. Without any other arguments,
+Where `<path-to-backup>` is the directory where you
+want the backup to be written to. Without any other arguments,
 the backup will only record the current state of the system
 metastore. For example, the command:
 
@@ -127,25 +151,25 @@ $ influxd backup /tmp/backup
 Will create a metastore backup in the directory `/tmp/backup` (the
 directory will be created if it doesn't already exist).
 
-### Backing up a Database
+### Backing up databases
 
 Each database must be backed up individually.
 
-To backup a database, you will need to add the `-database` flag:
+To backup a database, add the `-database` flag:
 
 ```bash
 influxd backup -database <mydatabase> <path-to-backup>
 ```
 
-Where `mydatabase` is the name of the database you would like to
-backup, and `path-to-backup` is where the backup data should be
-stored. Optional flags also include:
+Where `<mydatabase>` is the name of the database you would like to
+backup, and `<path-to-backup>` is where the backup data should be
+stored.
 
-- `-retention <retention policy name>` - This flag can be used to
-  backup a specific retention policy. For more information on
-  retention policies, please see
-  [here](/influxdb/v1.4/query_language/database_management/#retention-policy-management). If
-  not specified, all retention policies will be backed up.
+Optional flags also include:
+
+- `-retention <retention-policy-name>`
+  - This flag can be used to backup a specific retention policy. For more information on retention policies, see
+  [Retention policy management](/influxdb/v1.4/query_language/database_management/#retention-policy-management). If unspecified, all retention policies will be backed up.
 
 - `-shard <shard ID>` - This flag can be used to backup a specific
   shard ID. To see which shards are available, you can run the command
@@ -241,19 +265,16 @@ unpacking /var/lib/influxdb/data/telegraf/default/2/000000004-000000003.tsm
 unpacking /var/lib/influxdb/data/telegraf/default/2/000000005-000000001.tsm
 ```
 
-> **Note:** Once the backed up data has been recovered, the
-permissions on the shards may no longer be accurate. To ensure
-the file permissions are correct, please run:
-
+> **Note:** Once the backed up data has been recovered, the permissions on the shards may no longer be accurate. To ensure the file permissions are correct, please run:
 > `$ sudo chown -R influxdb:influxdb /var/lib/influxdb`
 
-Once the data and metastore are recovered, it's time to start the database:
+Once the data and metastore are recovered, start the database:
 
 ```bash
 $ service influxdb start
 ```
 
-As a quick check, we can verify the database is known to the metastore
+As a quick check, you can verify that the database is known to the metastore
 by running a `SHOW DATABASES` command:
 
 ```
