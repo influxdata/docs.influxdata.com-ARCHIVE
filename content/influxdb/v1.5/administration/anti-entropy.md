@@ -8,4 +8,4 @@ menu:
     parent: administration
 ---
 
-## Anti-entropy and eventual consistency
+## Anti-entropy

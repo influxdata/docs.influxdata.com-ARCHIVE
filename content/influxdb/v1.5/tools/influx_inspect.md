@@ -27,11 +27,11 @@ The commands are:
 
 ### `influx_inspect buildtsi`
 
-Converts existing in-memory (TSM-based) shards to TSI (time series index) format.
+Converts existing TSM-based shards to TSI (time series index) shards with disk-based index files.
 The index is written to a temporary location until complete and then moved to a permanent location.
 If an error occurs, then this operation will fall back to the original in-memory index.
 
-> ***Note:*** This tool is for offline conversion only. When TSI is enabled, new shards use the TSI format, but existing shards continue as TSM-based shards until converted offline.
+> ***Note:*** This tool is for offline conversion only. When TSI is enabled, new shards use the TSI indexes. Existing shards continue as TSM-based shards until converted offline.
 
 ####Usage
 ```

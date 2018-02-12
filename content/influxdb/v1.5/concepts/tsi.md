@@ -10,8 +10,8 @@ menu:
 
 ## Time Series Index (TSI)
 
-InfluxIn order to support a large number of time series, that is, a very high cardinality in the number of unique time series that the database stores.
-Currently, InfluxData supports customers using InfluxDB with tens of millions of time series. InfluxData's goal, however, is to expand to hundreds of millions, and eventually billions.
+Influx... In order to support a large number of time series, that is, a very high cardinality in the number of unique time series that the database stores.
+InfluxData supports customers using InfluxDB with tens of millions of time series. InfluxData's goal, however, is to expand to hundreds of millions, and eventually billions.
 Using InfluxData's TSI storage engine now, users should be able to have millions of unique time series.
 The goal is that the number of series should be unbounded by the amount of memory on the server hardware.
 Importantly, the number of series that exist in the database will have a negligible impact on database startup time.
@@ -26,7 +26,7 @@ InfluxDB actually looks like two databases in one
 
 ### Time series data store
 
-The TSM engine that we built in 2015 and 2016 was an effort to solve the first part of this problem: getting maximum throughput, compression, and query speed for the raw time series data. Up until now the inverted index was an in-memory data structure that was built during startup of the database based on the data in TSM. This meant that for every measurement, tag key/value pair, and field name there was a lookup table in memory to map those bits of metadata to an underlying time series. For users with a high number ephemeral series they’d see their memory utilization go up and up as new time series got created. Further, startup times would increase as all that data would have to be loaded onto the heap at start time.
+The TSM engine that InfluxData built in 2015 and continued woerking on in 2016 was an effort to solve the first problem: getting maximum throughput, compression, and query speed for raw time series data. Up until now the inverted index was an in-memory data structure that was built during startup of the database based on the data in TSM. This meant that for every measurement, tag key/value pair, and field name there was a lookup table in memory to map those bits of metadata to an underlying time series. For users with a high number ephemeral series they’d see their memory utilization go up and up as new time series got created. Further, startup times would increase as all that data would have to be loaded onto the heap at start time.
 
 ### Time series index (TSI)
 
@@ -35,7 +35,7 @@ The new time series index (TSI) moves the index to files on disk that we memory 
 ### Issues solvied by TSI and remaining to be solved
 
 
-The priary issue that Time Series Index (TSI) is intended to address is that of ephemeral time series. Most frequently, this occurs in use cases that want to track per process metrics or per container metrics by putting identifiers in tags. For example, the [Heapster project for Kubernetes](https://github.com/kubernetes/heapster) does this. For series that are no longer hot for writes or queries, they won’t take up space in memory.
+The primary issue that Time Series Index (TSI) is intended to address is that of ephemeral time series. Most frequently, this occurs in use cases that want to track per process metrics or per container metrics by putting identifiers in tags. For example, the [Heapster project for Kubernetes](https://github.com/kubernetes/heapster) does this. For series that are no longer hot for writes or queries, they won’t take up space in memory.
 
 The issue that the Heapster project and similar use cases did not address is limiting the scope of data returned by the SHOW queries. We’ll have updates to the query language in the future to limit those results by time. We also don’t solve the problem of having all these series hot for reads and writes. For that problem scale-out clustering is the solution. We’ll have to continue to optimize the query language and engine to work with large sets of series. The biggest thing to address in the near term is that queries that hit all series in the DB could potentially blow out the memory usage. We’ll need to add guard rails and limits into the language and eventually spill-to-disk query processing. That work will be on-going in every release of InfluxDB.
 
