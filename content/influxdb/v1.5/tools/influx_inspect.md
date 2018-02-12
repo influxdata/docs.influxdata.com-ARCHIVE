@@ -1,5 +1,5 @@
 ---
-title: Influx Inspect
+title: Influx Inspect disk shard utility
 
 menu:
   influxdb_1_5:
@@ -16,14 +16,40 @@ that can be inserted back into the database.
 
 The commands are:
 ```
+    buildtsi             convert existing in-memory (TSM-based) shards to TSI
     dumptsm              dumps low-level details about tsm1 files.
     dumptsi              dumps low-level details about tsi1 files.
     export               exports raw data from a shard to line protocol
-    help                 display this help message
-    inmem2tsi            convert existing in-memory (TSM-based) shards to TSI format
+    help                 display this help message format
     report               displays a shard level report
     verify               verifies integrity of TSM files
 ```
+
+### `influx_inspect buildtsi`
+
+Converts existing in-memory (TSM-based) shards to TSI (time series index) format.
+The index is written to a temporary location until complete and then moved to a permanent location.
+If an error occurs, then this operation will fall back to the original in-memory index.
+
+> ***Note:*** This tool is for offline conversion only. When TSI is enabled, new shards use the TSI format, but existing shards continue as TSM-based shards until converted offline.
+
+####Usage
+```
+influx_inspect buildtsi [ flags ]
+```
+####Flags
+
+####`-path <data_directory> <wal_directory>` string
+Path of the data directory and the WAL directory.
+
+#### `-v` (optional)
+Verbose output
+
+####Example
+```
+$ influx_inspect buildtsi -path ~/.influxdb/data/stress/autogen/1 ~/.influxdb/wal/stress/autogen/1
+```
+
 
 ### `influx_inspect dumptsm`
 Dumps low-level details about [tsm](/influxdb/v1.5/concepts/glossary/#tsm-time-structured-merge-tree) files.
@@ -133,7 +159,7 @@ The end of the time range.
 The date-time string must be [RFC3339 format](/influxdb/v1.5/query_language/data_exploration/#absolute-time).
 
 #### `-out` string
-Specifies location for export file 
+Specifies location for export file
 
 `default` = "$HOME/.influxdb/export"
 
@@ -168,30 +194,6 @@ CREATE RETENTION POLICY autogen ON MY_DB_NAME DURATION inf REPLICATION 1
 randset value=97.9296104805 1439856000000000000
 randset value=25.3849066842 1439856100000000000
 ```
-###`influx_inspect inmem2tsi`
-Converts existing in-memory (TSM-based) shards to TSI (time series index) format. 
-The index is written to a temporary location until complete and then moved to a permanent location. 
-If an error occurs, then this operation will fall back to the original in-memory index.
-
-> ***Note:*** This tool is for offline conversion only.
->  When TSI is enabled, new shards use the TSI format, but existing shards continue as TSM-based shards until converted offline.
->
-####Usage
-```
-influx_inspect inmem2tsi [ flags ]
-```
-####Flags
-
-####`-path <data_directory> <wal_directory>` string
-Path of the data directory and the WAL directory.
-
-#### `-v` (optional)
-Verbose output
-
-####Example
-```
-$ influx_inspect inmem2tsi -path ~/.influxdb/data/stress/autogen/1 ~/.influxdb/wal/stress/autogen/1
-```
 
 ### `influx_inspect report`
 Displays series meta-data for all shards.
@@ -208,7 +210,7 @@ Include only files matching the specified pattern.
 
 `default` = ""
 
-#### `-detailed` boolean 
+#### `-detailed` boolean
 Report detailed cardinality estimates.
 
 `default` = false
@@ -224,7 +226,7 @@ influx_inspect verify [flags]
 
 #### `-dir` string (optional)
 Root storage path
-​           
+​
 `default` = "/root/.influxdb"
 
 
@@ -235,5 +237,3 @@ As such, it always creates the [retention policy](/influxdb/v1.5/concepts/glossa
 replication factor of 1.  End users may want to change this prior to
 re-importing if they are importing to a cluster or want a different duration
 for retention.
-
-
