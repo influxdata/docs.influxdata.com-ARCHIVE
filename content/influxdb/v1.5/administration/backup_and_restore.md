@@ -10,7 +10,7 @@ menu:
 
 ## Overview
 
-Starting in version 1.5, the InfluxDB `backup` utility provides:
+Starting in version 1.5, the InfluxDB `backup` utility, for use with InfluxDB OSS and InfluxDB Enterprise, provides:
 
 * Option to run backup and restore functions on an online, or live, database.
 * Backup and restore functions for single or multiple databases, along with optional filtering based on data point timestamps.
@@ -18,7 +18,7 @@ Starting in version 1.5, the InfluxDB `backup` utility provides:
 * Backup files that can be imported into an InfluxDB Enterprise database.
 
 > ***Note:*** The offline backup and restore functions
-provided in InfluxDB versions 1.4 and earlier are retained in version 1.5 without change, and are detailed in [Backward compatible offline backup and restore](#backup-compatible-offline-backup-and-restore--legacy-format).
+provided in InfluxDB OSS versions 1.4 and earlier are retained in version 1.5 without change, and are detailed in [Backward compatible offline backup and restore](#backup-compatible-offline-backup-and-restore--legacy-format).
 
 > ***Note:*** Prior to version 1.5, the InfluxDB OSS `backup` utility created  backup file formats, now referred to as the _legacy_ format, that were incompatible with the InfluxDB Enterprise version.  This legacy format is fully supported in the new `backup` utility as input for the new online restore function. If you are creating new backup processes, InfluxData recommends using the new InfluxDB Enterprise-compatible backup format, which uses less disk space and provides a clear transfer path for data between the InfluxDB Enterprise and InfluxDB OSS versions.
 
