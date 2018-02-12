@@ -1,7 +1,7 @@
 ---
-title: Step 2 - Data Node Installation
+title: Step 2 - Installing data nodes
 aliases:
-    - /enterprise/v1.3/production_installation/data_node_installation/
+    - /enterprise/v1.5/production_installation/data_node_installation/
 menu:
   enterprise_influxdb_1_5:
     weight: 20
@@ -15,27 +15,27 @@ The next steps will get you up and running with the second essential component o
 your InfluxEnterprise cluster: the data nodes.
 
 If you have not set up your meta nodes, please visit
-[Meta Node Installation](/enterprise_influxdb/v1.3/production_installation/meta_node_installation/).
+[Installing meta nodes](/enterprise_influxdb/v1.5/production_installation/meta_node_installation/).
 Bad things can happen if you complete the following steps without meta nodes.
 
 <br>
-# Data Node Setup Description and Requirements
+# Data node setup description and requirements
 
-The Production Installation process sets up two [data nodes](/enterprise_influxdb/v1.3/concepts/glossary#data-node)
+The Production Installation process sets up two [data nodes](/enterprise_influxdb/v1.5/concepts/glossary#data-node)
 and each data node runs on its own server.
 You **must** have a minimum of two data nodes in a cluster.
 InfluxEnterprise clusters require at least two data nodes for high availability and redundancy.
 <br>
 Note: that there is no requirement for each data node to run on its own
-server.  However, best practices are to deploy each data node on a dedicated server.  
+server.  However, best practices are to deploy each data node on a dedicated server.
 
 See the
-[Clustering Guide](/enterprise_influxdb/v1.3/concepts/clustering.md#optimal-server-counts)
+[Clustering guide](/enterprise_influxdb/v1.5/concepts/clustering.md#optimal-server-counts)
 for more on cluster architecture.
 
-### Other Requirements
+### Other requirements
 
-#### License Key or File
+#### License key or file
 
 InfluxEnterprise requires a license key **OR** a license file to run.
 Your license key is available at [InfluxPortal](https://portal.influxdata.com/licenses).
@@ -53,15 +53,16 @@ If the data nodes cannot reach `portal.influxdata.com` on port `80` or `443`,
 you'll need to set the `license-path` setting instead of the `license-key`
 setting in the data node configuration file.
 
-#### Load Balancer
+#### Load balancer
 
 InfluxEnterprise does not function as a load balancer.
 You will need to configure your own load balancer to send client traffic to the
-data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.3/tools/api/)).
+data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.5/tools/api/)).
 
 <br>
-# Data Node Setup
-## Step 1: Modify the /etc/hosts File
+# Data node setup
+
+## Step 1: Modify the `/etc/hosts` file
 
 Add your servers' hostnames and IP addresses to **each** cluster server's `/etc/hosts`
 file (the hostnames below are representative).
@@ -87,11 +88,11 @@ installation.
 A healthy cluster requires that every meta and data node can communicate
 with every other meta and data node.
 
-## Step 2: Set up, Configure, and start the Data Services
+## Step 2: Set up, configure, and start the data services
 
 Perform the following steps on each data server.
 
-### I. Download and Install the Data Service
+### I. Download and install the data service
 
 #### Ubuntu & Debian (64-bit)
 ```
@@ -105,7 +106,7 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.3.8_c1.3.8.x8
 sudo yum localinstall influxdb-data-1.3.8_c1.3.8.x86_64.rpm
 ```
 
-### II. Edit the Configuration File
+### II. Edit the configuration file
 
 First, in `/etc/influxdb/influxdb.conf`, uncomment:
 
@@ -115,7 +116,7 @@ First, in `/etc/influxdb/influxdb.conf`, uncomment:
 
 Second, in `/etc/influxdb/influxdb.conf`, set:
 
-`license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. 
+`license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.
 
 <dt>
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
@@ -157,7 +158,7 @@ hostname="<enterprise-data-0x>" #✨
   shared-secret = "long pass phrase used for signing tokens" #✨
 ```
 
-### III. Start the Data Service
+### III. Start the data service
 On sysvinit systems, enter:
 ```
 service influxdb start
@@ -179,12 +180,12 @@ You should see output similar to:
     influxdb  2706  0.2  7.0 571008 35376 ?        Sl   15:37   0:16 /usr/bin/influxd -config /etc/influxdb/influxdb.conf
 
 
-If you do not see the expected output, the process is either not launching or is exiting prematurely. Check the [logs](/enterprise_influxdb/v1.3/administration/logs/) for error messages and verify the previous setup steps are complete.
+If you do not see the expected output, the process is either not launching or is exiting prematurely. Check the [logs](/enterprise_influxdb/v1.5/administration/logs/) for error messages and verify the previous setup steps are complete.
 
 If you see the expected output, repeat for the remaining data nodes.
 Once all data nodes have been installed, configured, and launched, move on to the next section to join the data nodes to the cluster.
 
-## Join the Data Nodes to the Cluster
+## Join the data nodes to the cluster
 
 <dt>You should join your data nodes to the cluster only when you are adding a brand new node,
 either during the initial creation of your cluster or when growing the number of data nodes.
@@ -192,7 +193,7 @@ If you are replacing an existing data node with `influxd-ctl update-data`, skip 
 </dt>
 
 On one and only one of the meta nodes that you set up in the
-[previous document](/enterprise_influxdb/v1.3/introduction/meta_node_installation/), run:
+[previous document](/enterprise_influxdb/v1.5/introduction/meta_node_installation/), run:
 ```
 influxd-ctl add-data enterprise-data-01:8088
 
@@ -219,7 +220,7 @@ The expected output is:
     ==========
     ID   TCP Address               Version
     4    enterprise-data-01:8088   1.3.8-c1.3.8
-    5    enterprise-data-02:8088   1.3.8-c1.3.8    
+    5    enterprise-data-02:8088   1.3.8-c1.3.8
 >
     Meta Nodes
     ==========
@@ -239,4 +240,4 @@ If you do not see your data nodes in the output, please retry adding them
 to the cluster.
 
 Once your data nodes are part of your cluster move on to [the final step
-to set up Chronograf](/enterprise_influxdb/v1.3/production_installation/chrono_install).
+to set up Chronograf](/enterprise_influxdb/v1.5/production_installation/chrono_install).

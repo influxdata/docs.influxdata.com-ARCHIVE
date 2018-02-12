@@ -18,6 +18,53 @@ menu:
 <br>
 <br>
 
+## v1.4.2 [2017-11-15]
+
+###Bugfixes
+
+- Fix wildcard when one shard has no data for a measurement with partial replication.
+
+## 1.4.1 [2017-11-13]
+
+This release builds off of the 1.4.1 release of InfluxDB OSS. Please see the [InfluxDB OSS release notes](https://docs.influxdata.com/influxdb/v1.4/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS releases.
+
+### Bugfixes
+
+- Update InfluxDB 1.4.1
+
+## 1.4.0 [2017-11-13]
+
+This release builds off of the 1.4 release of InfluxDB OSS. Please see the [InfluxDB OSS release notes](https://docs.influxdata.com/influxdb/v1.4/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS releases.
+
+### Features
+- Add support for passive nodes
+- Implement explain plan for remote nodes.
+- Add message pack format for query responses.
+- Teach show tag values to respect FGA
+- Deadlock(?) in meta server on 1.3.6
+- Add time support to `SHOW TAG VALUES`
+- Add distributed `SHOW TAG KEYS` with time support
+
+Bugfixes
+
+- Add `X-Influxdb-Build` to http response headers so users can identify if a response is from an OSS or Enterprise service.
+- Ensure that permissions cannot be set on non-existent databases.
+- Switch back to using cluster-tracing config option to enable meta HTTP request logging.
+- `influxd-ctl restore -newdb` can't restore data
+- Close connection for remote iterators after EOF to avoid writer hanging indefinitely
+- Data race reading `Len()` in connection pool
+- Use influxdata fork of yamux. This update reduces overall memory usage when streaming large amounts of data.
+- Fix group by marshaling in the IteratorOptions.
+- Meta service data race
+- Read for the interrupt signal from the stream before creating the iterators.
+- Show retention policies requires the createdatabase permission
+- Handle utf files with a byte order mark when reading the configuration files.
+- Remove the pidfile after the server has exited.
+- Resend authentication credentials on redirect
+- Updated yamux resolves race condition when SYN is successfully sent and a write timeout occurs.
+- Fix no license message.
+
+
 # Clustering
 
 ## v1.3.8 [2017-12-04]
@@ -27,7 +74,7 @@ If you have been using the TSI preview with 1.3.6 or earlier 1.3.x releases, you
 continue using the TSI preview.  Unfortunately, these steps cannot be executed while the cluster is operating -- so it will
 result in downtime.
 
-See more details here: [Upgrading from previous versions](/v1.3/administration/upgrading/)
+See more details here: [Upgrading from previous versions](/enterprise_influxdb/v1.3/administration/upgrading/)
 
 ### Bugfixes
 

@@ -10,7 +10,7 @@ menu:
 ---
 
 The introductory documentation includes all the information you need to get up
-and running with InfluxEnterprise.
+and running with InfluxDB Enterprise.
 
 ## [Downloads](/enterprise_influxdb/v1.5/introduction/download/)
-## [Getting Started](/enterprise_influxdb/v1.5/introduction/getting_started/)
+## [Getting started with InfluxDB Enterprise](/enterprise_influxdb/v1.5/introduction/getting_started/)

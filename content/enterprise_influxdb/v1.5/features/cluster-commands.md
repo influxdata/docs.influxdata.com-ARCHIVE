@@ -1,9 +1,10 @@
 ---
-title: Cluster Commands
+title: InfluxDB Enterprise cluster commands
 aliases:
     - /enterprise/v1.5/features/cluster-commands/
 menu:
   enterprise_influxdb_1_5:
+    name: Cluster commands
     weight: 10
     parent: Features
 ---

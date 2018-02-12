@@ -18,55 +18,77 @@ menu:
 <br>
 <br>
 
-v1.5.0 [unreleased]
-Breaking changes
+## 1.5.0 [unreleased]
+
+This release builds off of the 1.5 release of InfluxDB OSS. Please see the [InfluxDB OSS release notes](https://docs.influxdata.com/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS releases.
+
+### Breaking changes
+
 The default logging format has been changed. See #9055 for details.
-Features
-#2017: Add LastModified fields to Shard RPC calls
-#1698: As of OSS 1.5 backup/restore interoperability is confirmed.
-#2085: Make plutonium use OSS digests.
-#2086: Move digest to its own package.
-#2154: Implement distributed cardinality estimation
+
+### Features
+
+- Add LastModified fields to Shard RPC calls
+- As of InfluxDB OSS 1.5 backup/restore interoperability is confirmed.
+- Make InfluxDB Enterprise use InfluxDB OSS digests.
+- Move digest to its own package.
+- Implement distributed cardinality estimation.
+
+### Bugfixes
+
+- Fix errors occurring when policy or shard keys are missing from the manifest when limited is set to true"
+- Fix spurious `rpc error: i/o deadline exceeded` errors
+- Elide `stream closed` error from logs and handle `io.EOF` as remote iterator interrupt.
+- Discard remote iterators that label their type as unknown.
+- Do not queue partial write errors to hinted handoff.
+- Segfault in `digest.merge`
+- Meta Node CPU pegged on idle cluster
+
+## v1.4.2 [2017-11-15]
+
+###Bugfixes
+
+- Fix wildcard when one shard has no data for a measurement with partial replication.
+
+## 1.4.1 [2017-11-13]
+
+This release builds off of the 1.4.1 release of InfluxDB OSS. Please see the [InfluxDB OSS release notes](https://docs.influxdata.com/influxdb/v1.4/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS releases.
+
+### Bugfixes
+
+- Update InfluxDB 1.4.1
+
+## 1.4.0 [2017-11-13]
+
+This release builds off of the 1.4 release of InfluxDB OSS. Please see the [InfluxDB OSS release notes](https://docs.influxdata.com/influxdb/v1.4/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS releases.
+
+### Features
+- Add support for passive nodes
+- Implement explain plan for remote nodes.
+- Add message pack format for query responses.
+- Teach show tag values to respect FGA
+- Deadlock(?) in meta server on 1.3.6
+- Add time support to SHOW TAG VALUES
+- Add distributed SHOW TAG KEYS with time support
+
 Bugfixes
-#1912: Fix errors occurring when policy or shard keys are missing from the manifest when limited is set to true"
-#1967: Fix spurious "rpc error: i/o deadline exceeded" errors
-#2014: Elide "stream closed" error from logs and handle io.EOF as remote iterator interrupt.
-#2019: Discard remote iterators that label their type as unknown.
-#2045: Do not queue partial write errors to hinted handoff.
-#2134: Segfault in digest.merge
-#2146: Meta Node CPU pegged on idle cluster
-v1.4.2 [2017-11-15]
-Bugfixes
-#1949: Fix wildcard when one shard has no data for a measurement with partial replication.
-v1.4.1 [2017-11-13]
-Bugfixes
-#1942: Update InfluxDB 1.4.1
-v1.4.0 [2017-11-13]
-Features
-#1522: Add support for passive nodes
-#1604: Implement explain plan for remote nodes.
-#1730: Add message pack format for query responses.
-#1530: Teach show tag values to respect FGA
-#1752: Deadlock(?) in meta server on 1.3.6
-#1914: Add time support to SHOW TAG VALUES
-#1920: Add distributed SHOW TAG KEYS with time support
-Bugfixes
-#1240: Add 'X-Influxdb-Build' to http response headers so users can identify if a response is from an OSS or Enterprise service.
-#1410: Ensure that permissions cannot be set on non-existent databases.
-#1268: Switch back to using cluster-tracing config option to enable meta HTTP request logging.
-#1485: Bug: influxd-ctl restore -newdb can't restore data
-#1542: Close connection for remote iterators after EOF to avoid writer hanging indefinitely
-#1612: Data race reading Len() in connection pool
-#1628: Use influxdata fork of yamux. This update reduces overall memory usage when streaming large amounts of data.
-#1637: Fix group by marshaling in the IteratorOptions.
-#1613: Meta service data race
-#1731: Read for the interrupt signal from the stream before creating the iterators.
-#1490: Show retention policies requires the createdatabase permission
-#1879: Handle utf files with a byte order mark when reading the configuration files.
-#1877: Remove the pidfile after the server has exited.
-#1851: Re-send authentication credentials on redirect
-#1888: Updated yamux resolves race condition when SYN is successfully sent and a write timeout occurs.
-#8958: Fix no license message.
+
+- Add `X-Influxdb-Build` to http response headers so users can identify if a response is from an OSS or Enterprise service.
+- Ensure that permissions cannot be set on non-existent databases.
+- Switch back to using cluster-tracing config option to enable meta HTTP request logging.
+- `influxd-ctl restore -newdb` can't restore data
+- Close connection for remote iterators after EOF to avoid writer hanging indefinitely
+- Data race reading `Len()` in connection pool
+- Use influxdata fork of yamux. This update reduces overall memory usage when streaming large amounts of data.
+- Fix group by marshaling in the IteratorOptions.
+- Meta service data race
+- Read for the interrupt signal from the stream before creating the iterators.
+- Show retention policies requires the createdatabase permission
+- Handle utf files with a byte order mark when reading the configuration files.
+- Remove the pidfile after the server has exited.
+- Resend authentication credentials on redirect
+- Updated yamux resolves race condition when SYN is successfully sent and a write timeout occurs.
+- Fix no license message.
 
 # Clustering
 
@@ -84,7 +106,7 @@ See more details here: [Upgrading from previous versions](/v1.3/administration/u
 - Updated yamux resolves race condition when SYN is successfully sent and a write timeout occurs.
 - Re-send authentication credentials on redirect
 - Fix wildcard when one shard has no data for a measurement with partial replication.
-- Fix spurious "rpc error: i/o deadline exceeded" errors.
+- Fix spurious `rpc error: i/o deadline exceeded` errors.
 
 ## v1.3.7 [2017-10-26]
 

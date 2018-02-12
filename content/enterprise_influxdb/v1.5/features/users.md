@@ -1,5 +1,5 @@
 ---
-title: InfluxEnterprise Users
+title: InfluxDB Enterprise users
 aliases:
     - /enterprise/v1.5/features/users/
 menu:
@@ -8,7 +8,7 @@ menu:
     parent: Features
 ---
 
-InfluxEnterprise users have functions that are either specific to the web
+InfluxDB Enterprise users have functions that are either specific to the web
 console or specific to the cluster:
 ```
 Users                            Cluster              Permissions
@@ -27,7 +27,7 @@ Jim
                                                   ---> View Chronograf
 ```
 
-## Cluster User Information
+## Cluster user information
 In the cluster, individual users are assigned to an account.
 Cluster accounts have permissions and roles.
 
@@ -96,7 +96,7 @@ Permission to show stats and diagnostics.
 Permission to copy shards.
 
 ### Permission to Statement
-The following table describes permissions required to execute the associated database statement.  It also describes whether these permissions apply just to InfluxDB (Database) or InfluxEnterprise (Cluster).
+The following table describes permissions required to execute the associated database statement.  It also describes whether these permissions apply just to InfluxDB (Database) or InfluxDB Enterprise (Cluster).
 
 |Permission|Statement|
 |---|---|

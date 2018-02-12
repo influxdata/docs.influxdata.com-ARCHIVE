@@ -1,8 +1,9 @@
 
+
 # Introduction
 
-InfluxEnterprise periodically samples and stores metrics about its own operations. 
-The metrics are stored in the `_internal` database and can be queried, downsampled, passed to Kapacitor, etc. just like any other data in the system.
+InfluxDB Enterprise periodically samples and stores metrics about its own operations.
+The metrics are stored in the `_internal` database and can be queried, downsampled, passed to Kapacitor, etc., just like any other data in the system.
 
 # Using `_internal`
 
@@ -16,8 +17,8 @@ a few examples showing good and problematic query responses for some or all of t
 
 # Metric definitions
 
-These are the metrics that are unique to InfluxEnterprise. 
-For metrics shared by both InfluxDB and InfluxEnterprise, please refer to the [InfluxDB `_internal` documentation](/influxdb/v1.3/troubleshooting/internal_statistics).
+These are the metrics that are unique to InfluxDB Enterprise.
+For metrics shared by both InfluxDB OSS and InfluxDB Enterprise, please refer to the [InfluxDB `_internal` documentation](/influxdb/v1.5/troubleshooting/internal_statistics).
 
 ## cluster
 
@@ -48,11 +49,11 @@ For metrics shared by both InfluxDB and InfluxEnterprise, please refer to the [I
 
 ###writeShardReq
 
-## cq  
+## cq
 
 See \<link to influxdb doc\>
 
-## database  
+## database
 
 See \<link to influxdb doc\>
 
@@ -96,44 +97,44 @@ See \<link to influxdb doc\>
 
 ###writeShardReqPoints
 
-## httpd  
+## httpd
 
 See \<link to influxdb doc\>
 
-## queryExecutor  
+## queryExecutor
 
 See \<link to influxdb doc\>
 
-## runtime  
+## runtime
 
 See \<link to influxdb doc\>
 
-## shard  
+## shard
 
 See \<link to influxdb doc\>
 
-## subscriber  
+## subscriber
 
 See \<link to influxdb doc\>
 
-## tsm1_cache  
+## tsm1_cache
 
 See \<link to influxdb doc\>
 
-## tsm1_engine  
+## tsm1_engine
 
 See \<link to influxdb doc\>
 
-## tsm1_filestore  
+## tsm1_filestore
 
 See \<link to influxdb doc\>
 
-## tsm1_wal  
+## tsm1_wal
 
 See \<link to influxdb doc\>
 
 
-## write  
+## write
 
 | fieldKey | fieldType | units |
 | :---- | :---- | :---- |

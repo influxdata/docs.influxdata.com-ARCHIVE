@@ -1,16 +1,17 @@
 ---
-title: Cluster Rebalance
+title: InfluxDB Enterprise cluster rebalancing
 aliases:
     - /enterprise/v1.5/guides/rebalance/
 menu:
   enterprise_influxdb_1_5:
+    name: Cluster rebalancing
     weight: 19
     parent: Guides
 ---
 
 ## Introduction
 
-This guide describes how to manually rebalance an InfluxEnterprise cluster.
+This guide describes how to manually rebalance an InfluxDB Enterprise cluster.
 Rebalancing a cluster involves two primary goals:
 
 * Evenly distribute

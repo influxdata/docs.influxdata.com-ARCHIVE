@@ -1,11 +1,12 @@
 ---
-title: Downloads
+title: InfluxDB Enterprise downloads
 
 aliases:
     - /enterprise/v1.5/introduction/download/
 
 menu:
   enterprise_influxdb_1_5:
+    name: Downloads
     weight: 0
     parent: Introduction
 ---
