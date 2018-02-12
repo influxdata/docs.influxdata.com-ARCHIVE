@@ -1,5 +1,5 @@
 ---
-title: Glossary of Terms
+title: Glossary of terms
 menu:
   influxdb_1_5:
     weight: 10
@@ -57,9 +57,9 @@ Related entries: [field](/influxdb/v1.5/concepts/glossary/#field), [field set](/
 ## field set
 The collection of field keys and field values on a point.
 
-Related entries: [field](/influxdb/v1.5/concepts/glossary/#field), [field key](/influxdb/v1.5/concepts/glossary/#field-key), [field value](/influxdb/v1.5/concepts/glossary/#field-value), [point](/influxdb/v1.5/concepts/glossary/#point)  
+Related entries: [field](/influxdb/v1.5/concepts/glossary/#field), [field key](/influxdb/v1.5/concepts/glossary/#field-key), [field value](/influxdb/v1.5/concepts/glossary/#field-value), [point](/influxdb/v1.5/concepts/glossary/#point)
 
-## field value  
+## field value
 The value part of the key-value pair that makes up a field.
 Field values are the actual data; they can be strings, floats, integers, or booleans.
 A field value is always associated with a timestamp.
@@ -74,7 +74,7 @@ Related entries: [field](/influxdb/v1.5/concepts/glossary/#field), [field key](/
 InfluxQL aggregations, selectors, and transformations.
 See [InfluxQL Functions](/influxdb/v1.5/query_language/functions/) for a complete list of InfluxQL functions.
 
-Related entries: [aggregation](/influxdb/v1.5/concepts/glossary/#aggregation), [selector](/influxdb/v1.5/concepts/glossary/#selector), [transformation](/influxdb/v1.5/concepts/glossary/#transformation)  
+Related entries: [aggregation](/influxdb/v1.5/concepts/glossary/#aggregation), [selector](/influxdb/v1.5/concepts/glossary/#selector), [transformation](/influxdb/v1.5/concepts/glossary/#transformation)
 
 ## identifier
 Tokens that refer to continuous query names, database names, field keys,
@@ -93,7 +93,7 @@ Related entries:
 ## line protocol
 The text based format for writing points to InfluxDB. See [Line Protocol](/influxdb/v1.5/write_protocols/).
 
-## measurement  
+## measurement
 The part of InfluxDB's structure that describes the data stored in the associated fields.
 Measurements are strings.
 
@@ -113,7 +113,7 @@ Related entries: [server](/influxdb/v1.5/concepts/glossary/#server)
 ## now()
 The local server's nanosecond timestamp.
 
-## point   
+## point
 The part of InfluxDB's data structure that consists of a single collection of fields in a series.
 Each point is uniquely identified by its series and timestamp.
 
@@ -135,7 +135,7 @@ Related entries: [point](/influxdb/v1.5/concepts/glossary/#point), [schema](/inf
 An operation that retrieves data from InfluxDB.
 See [Data Exploration](/influxdb/v1.5/query_language/data_exploration/), [Schema Exploration](/influxdb/v1.5/query_language/schema_exploration/), [Database Management](/influxdb/v1.5/query_language/database_management/).
 
-## replication factor  
+## replication factor
 The attribute of the retention policy that determines how many copies of the data are stored in the cluster.
 InfluxDB replicates data across `N` data nodes, where `N` is the replication factor.
 
@@ -163,13 +163,13 @@ See [Schema Design](/influxdb/v1.5/concepts/schema_and_data_layout/) for more in
 
 Related entries: [database](/influxdb/v1.5/concepts/glossary/#database), [field key](/influxdb/v1.5/concepts/glossary/#field-key), [measurement](/influxdb/v1.5/concepts/glossary/#measurement), [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp), [series](/influxdb/v1.5/concepts/glossary/#series), [tag key](/influxdb/v1.5/concepts/glossary/#tag-key), [tag value](/influxdb/v1.5/concepts/glossary/#tag-value)
 
-## selector  
+## selector
 An InfluxQL function that returns a single point from the range of specified points.
 See [InfluxQL Functions](/influxdb/v1.5/query_language/functions/#selectors) for a complete list of the available and upcoming selectors.
 
 Related entries: [aggregation](/influxdb/v1.5/concepts/glossary/#aggregation), [function](/influxdb/v1.5/concepts/glossary/#function), [transformation](/influxdb/v1.5/concepts/glossary/#transformation)
 
-## series  
+## series
 The collection of data in InfluxDB's data structure that share a measurement, tag set, and retention policy.
 
 
@@ -216,7 +216,7 @@ cardinality.
 
 Related entries: [tag set](/influxdb/v1.5/concepts/glossary/#tag-set), [measurement](/influxdb/v1.5/concepts/glossary/#measurement), [tag key](/influxdb/v1.5/concepts/glossary/#tag-key)
 
-## server  
+## server
 A machine, virtual or physical, that is running InfluxDB.
 There should only be one InfluxDB process per server.
 
@@ -257,14 +257,14 @@ Subscriptions allow [Kapacitor](/kapacitor/latest/) to receive data from InfluxD
 When Kapacitor is configured to work with InfluxDB, the subscription will automatically push every write for the subscribed database from InfluxDB to Kapacitor.
 Subscriptions can use TCP or UDP for transmitting the writes.
 
-## tag  
+## tag
 The key-value pair in InfluxDB's data structure that records metadata.
 Tags are an optional part of InfluxDB's data structure but they are useful for storing commonly-queried metadata; tags are indexed so queries on tags are performant.
 *Query tip:* Compare tags to fields; fields are not indexed.
 
 Related entries: [field](/influxdb/v1.5/concepts/glossary/#field), [tag key](/influxdb/v1.5/concepts/glossary/#tag-key), [tag set](/influxdb/v1.5/concepts/glossary/#tag-set), [tag value](/influxdb/v1.5/concepts/glossary/#tag-value)
 
-## tag key  
+## tag key
 The key part of the key-value pair that makes up a tag.
 Tag keys are strings and they store metadata.
 Tag keys are indexed so queries on tag keys are performant.
@@ -278,7 +278,7 @@ The collection of tag keys and tag values on a point.
 
 Related entries: [point](/influxdb/v1.5/concepts/glossary/#point), [series](/influxdb/v1.5/concepts/glossary/#series), [tag](/influxdb/v1.5/concepts/glossary/#tag), [tag key](/influxdb/v1.5/concepts/glossary/#tag-key), [tag value](/influxdb/v1.5/concepts/glossary/#tag-value)
 
-## tag value  
+## tag value
 The value part of the key-value pair that makes up a tag.
 Tag values are strings and they store metadata.
 Tag values are indexed so queries on tag values are performant.
@@ -286,7 +286,7 @@ Tag values are indexed so queries on tag values are performant.
 
 Related entries: [tag](/influxdb/v1.5/concepts/glossary/#tag), [tag key](/influxdb/v1.5/concepts/glossary/#tag-key), [tag set](/influxdb/v1.5/concepts/glossary/#tag-set)
 
-## timestamp  
+## timestamp
 The date and time associated with a point.
 All time in InfluxDB is UTC.
 
@@ -295,7 +295,7 @@ For how to specify time when querying data, see [Data Exploration](/influxdb/v1.
 
 Related entries: [point](/influxdb/v1.5/concepts/glossary/#point)
 
-## transformation  
+## transformation
 An InfluxQL function that returns a value or a set of values calculated from specified points, but does not return an aggregated value across those points.
 See [InfluxQL Functions](/influxdb/v1.5/query_language/functions/#transformations) for a complete list of the available and upcoming aggregations.
 
@@ -304,7 +304,7 @@ Related entries: [aggregation](/influxdb/v1.5/concepts/glossary/#aggregation), [
 ## tsm (Time Structured Merge tree)
 The purpose-built data storage format for InfluxDB. TSM allows for greater compaction and higher write and read throughput than existing B+ or LSM tree implementations. See [Storage Engine](http://docs.influxdata.com/influxdb/v1.5/concepts/storage_engine/) for more.
 
-## user  
+## user
 There are two kinds of users in InfluxDB:
 
 * *Admin users* have `READ` and `WRITE` access to all databases and full access to administrative queries and user management commands.

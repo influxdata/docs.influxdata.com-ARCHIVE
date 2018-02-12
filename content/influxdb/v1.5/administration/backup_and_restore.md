@@ -1,5 +1,5 @@
 ---
-title: Backup and restore for InfluxDB OSS and InfluxDB Enterprise
+title: Backup and restore for InfluxDB OSS
 
 menu:
   influxdb_1_5:
@@ -10,12 +10,18 @@ menu:
 
 ## Overview
 
-Starting in version 1.5, the InfluxDB `backup` utility, for use with InfluxDB OSS and InfluxDB Enterprise, provides:
+Starting in version 1.5, the InfluxDB OSS `backup` utility provides:
 
 * Option to run backup and restore functions on an online, or live, database.
 * Backup and restore functions for single or multiple databases, along with optional filtering based on data point timestamps.
 * Data imports from [InfluxDB Enterprise](/enterprise_influxdb/latest/) clusters
 * Backup files that can be imported into an InfluxDB Enterprise database.
+
+> **Note:** Backups are not interchangeable between OSS InfluxDB and [InfluxDB Enterprise](/influxdb_enterprise/latest/).
+You cannot restore an InfluxDB OSS backup to an InfluxDB Enterprise data node, nor can you restore an InfluxDB Enterprise backup to an InfluxDB OSS instance.
+>
+If you are working with an InfluxDB Enterprise cluster, see the [Backup
+and restore](/influxdb_enterprise/latest/guides/backup-and-restore/) guide in the InfluxDB Enterprise documentation.
 
 > ***Note:*** The offline backup and restore functions
 provided in InfluxDB OSS versions 1.4 and earlier are retained in version 1.5 without change, and are detailed in [Backward compatible offline backup and restore](#backup-compatible-offline-backup-and-restore--legacy-format).
@@ -68,14 +74,13 @@ Optional arguments are enclosed in brackets.
 
 - `-database <db_name>`: The database to back up. Required.
 
-- `[ -portable ]`: Generates backup files in the newer InfluxDB Enterprise-compatible format. Recommended for both InfluxDB OSS and InfluxDB Enterprise.
+- `[ -portable ]`: Generates backup files in the newer InfluxDB Enterprise-compatible format. Recommended for InfluxDB OSS.
 
 - `[ -host <host:port> ]`: The host and port to connect to and perform a snapshot of. Default value is '127.0.0.1:8088'.
 
+- `[ -retention <rp_name> ]`: The retention policy for the backup. If not specified, the default is to use all retention policies.
 
-- `[ -retention <rp_name> ]`: The retention policy to backup. Default value is `autogen`.
-
-- `[ -shard <ID> ]`: The shard ID of the shard to be backed up. If specified, then `-retention <name>` is required.
+- `[ -shard <ID> ]`: Shard ID of the shard to be backed up. If specified, then `-retention <name>` is required.
 
 - `[ -start <timestamp> ]`: Include all points starting with the specified timestamp ([RFC3339 format](https://www.ietf.org/rfc/rfc3339.txt)). Not compatible with `-since`. Example: `-start 2015-12-24T08:12:23Z`
 
@@ -94,7 +99,7 @@ influxd backup <path-to-backup>
 To backup all databases recently changed at the filesystem level
 
 ```
-influxd backup -start <timestamp>
+influxd backup -start <timestamp> <path-to-backup>
 ```
 
 To backup only the telegraf database:
@@ -108,7 +113,7 @@ influxd backup -database telegraf <path-to-backup>
 An online `restore` process is initiated by using the `restore` command with either the `-portable` argument (indicating the new Enterprise-compatible backup format) or `-online` flag (indicating the legacy backup format).
 
 ```
-influxd restore -db <db_name>
+influxd restore [ -db <db_name> ]
     -portable | -online
     [ -host <host:port> ]
     [ -rp <rp_name> ]
@@ -118,17 +123,17 @@ influxd restore -db <db_name>
 
 #### Arguments
 
-- `[ -portable ]`: Use the new Enterprise-compatible backup format. Recommended for both InfluxDB OSS and InfluxDB Enterprise.
+- `-portable`: Use the new Enterprise-compatible backup format. Recommended for both InfluxDB OSS and InfluxDB Enterprise.
 
-- `[ -online ]`: Use the legacy backup format.
+- `-online`: Use the legacy backup format.
 
-- `-host <host:port>`: Host and port to connect to and perform a snapshot of. Default value is `'127.0.0.1:8088'`. Example: `-host 127.0.0.1:8088`
+- `[ -host <host:port> ]`: Host and port for InfluxDB OSS instance . Default value is `'127.0.0.1:8088'`. Required for remote connections. Example: `-host 127.0.0.1:8088`
 
-- `-db <db_name>`: Name of the database to be restored from the backup.
+- `[ -db <db_name> ]`: Name of the database to be restored from the backup.
 
 - `[ -newdb <newdb_name> ]`: Name of the database into which the archived data will be imported on the target system. If not specified, then the value for `-db` is used.  The new database name must be unique to the target system.
 
-- `[ -rp <rp_name> ]`: Name of the retention policy from the backup that will be restored.  Requires that `-db` is set.
+- `[ -rp <rp_name> ]`: Name of the retention policy from the backup that will be restored.  Requires that `-db` is set. If not specified, all retention policies will be used.
 
 - `[ -newrp <newrp_name> ]`: Name of the retention policy to be created on the target system. Requires that `-rp` is set. If not specified, then the `-rp` value is used.
 

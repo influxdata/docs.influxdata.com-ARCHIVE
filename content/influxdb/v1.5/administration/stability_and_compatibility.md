@@ -1,5 +1,5 @@
 ---
-title: Stability and Compatibility
+title: Stability and compatibility
 menu:
   influxdb_1_5:
     weight: 80

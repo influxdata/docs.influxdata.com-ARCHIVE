@@ -1,5 +1,5 @@
 ---
-title: HTTPS Setup
+title: HTTPS setup
 menu:
   influxdb_1_5:
     weight: 100
@@ -8,8 +8,7 @@ menu:
 
 This guide describes how to enable HTTPS with InfluxDB.
 Setting up HTTPS secures the communication between clients and the InfluxDB
-server,
-and, in some cases, HTTPS verifies the authenticity of the InfluxDB server to
+server, and, in some cases, HTTPS verifies the authenticity of the InfluxDB server to
 clients.
 
 If you plan on sending requests to InfluxDB over a network, we
@@ -50,7 +49,7 @@ certificate](#setup-https-with-a-ca-signed-certificate) and [using a self-signed
 on Ubuntu 16.04.
 Specific steps may be different for other operating systems.
 
-## Setup HTTPS with a CA-Signed Certificate
+## Setup HTTPS with a CA-Signed certificate
 
 #### Step 1: Install the SSL/TLS certificate
 
