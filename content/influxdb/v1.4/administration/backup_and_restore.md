@@ -1,5 +1,5 @@
 ---
-title: Backup and Restore
+title: Backup and restore
 
 menu:
   influxdb_1_4:
@@ -102,8 +102,8 @@ then be compressed and sent to long-term storage.
 
 To capture a backup from a remote node:
 
-**1.** Uncomment the [`bind-address` configuration setting](/influxdb/v1.4/administration/config/#bind-address-127-0-0-1-8088) on the remote node  
-**2.** Update the `bind-address` setting to `<remote-node-IP>:8088`  
+**1.** Uncomment the [`bind-address` configuration setting](/influxdb/v1.4/administration/config/#bind-address-127-0-0-1-8088) on the remote node
+**2.** Update the `bind-address` setting to `<remote-node-IP>:8088`
 **3.** Run the following command from your local node:
 
 ```
@@ -164,7 +164,7 @@ database to `/tmp/backup`, so let's restore that same dataset. To
 restore the `telegraf` database:
 
 ```
-$ influxd restore -database telegraf -datadir /var/lib/influxdb/data /tmp/backup                                                                         
+$ influxd restore -database telegraf -datadir /var/lib/influxdb/data /tmp/backup
 Restoring from backup /tmp/backup/telegraf.*
 unpacking /var/lib/influxdb/data/telegraf/default/2/000000004-000000003.tsm
 unpacking /var/lib/influxdb/data/telegraf/default/2/000000005-000000001.tsm
