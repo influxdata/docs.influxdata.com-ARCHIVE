@@ -1,5 +1,5 @@
 ---
-title: Downsampling and Data Retention
+title: Downsampling and data retention
 menu:
   influxdb_1_5:
     weight: 11
@@ -64,7 +64,7 @@ In the next steps, we use RPs and CQs to:
  * Automatically delete the raw, ten-second resolution data that are older than two hours
  * Automatically delete the 30-minute resolution data that are older than 52 weeks
 
-### Database Preparation
+### Database preparation
 We perform the following steps before writing the data to the database
 `food_data`.
 We do this **before** inserting any data because CQs only run against recent

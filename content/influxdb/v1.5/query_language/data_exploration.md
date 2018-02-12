@@ -1,8 +1,9 @@
 ---
-title: Data Exploration
+title: Data exploration using InfluxQL
 
 menu:
   influxdb_1_5:
+    name: Data exploration
     weight: 10
     parent: query_language
 ---
@@ -66,8 +67,8 @@ InfluxDB shell 1.4.x
 
 Next,  get acquainted with this subsample of the data in the `h2o_feet` measurement:
 
-name: <span class="tooltip" data-tooltip-text="Measurement">h2o_feet</span>  
-\------------------------------------  
+name: <span class="tooltip" data-tooltip-text="Measurement">h2o_feet</span>
+\------------------------------------
 time
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 <span class="tooltip" data-tooltip-text="Field Key">level description</span>
@@ -75,42 +76,42 @@ time
 <span class="tooltip" data-tooltip-text="Tag Key">location</span>
 &emsp;&emsp;&emsp;&emsp;
 <span class="tooltip" data-tooltip-text="Field Key">water_level</span>
-&emsp;&emsp;  
+&emsp;&emsp;
 2015-08-18T00:00:00Z
 &emsp;&emsp;
 between 6 and 9 feet
 &emsp;&emsp;&#8202;&#8202;&#8202;
 coyote_creek
 &emsp;&emsp;
-8.12  
+8.12
 2015-08-18T00:00:00Z
 &emsp;&emsp;
 below 3 feet
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 santa_monica
 &emsp;&nbsp;&nbsp;&#8202;&#8202;
-2.064  
+2.064
 <span class="tooltip" data-tooltip-text="Timestamp">2015-08-18T00:06:00Z</span>
 &emsp;&nbsp;
 <span class="tooltip" data-tooltip-text="Field Value">between 6 and 9 feet</span>
 &emsp;&emsp;&#8202;&#8202;
 <span class="tooltip" data-tooltip-text="Tag Value">coyote_creek</span>
 &emsp;&nbsp;&nbsp;&nbsp;
-<span class="tooltip" data-tooltip-text="Field Value">8.005</span>  
+<span class="tooltip" data-tooltip-text="Field Value">8.005</span>
 2015-08-18T00:06:00Z
 &emsp;&emsp;
 below 3 feet
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 santa_monica
 &emsp;&nbsp;&nbsp;&#8202;&#8202;
-2.116  
+2.116
 2015-08-18T00:12:00Z
 &emsp;&emsp;
 between 6 and 9 feet
 &emsp;&emsp;&#8202;&#8202;&#8202;
 coyote_creek
 &emsp;&emsp;
-7.887  
+7.887
 2015-08-18T00:12:00Z
 &emsp;&emsp;
 below 3 feet
@@ -144,7 +145,7 @@ Tired of reading? Check out this InfluxQL Short:
 ### Syntax
 ```sql
 SELECT <field_key>[,<field_key>,<tag_key>] FROM <measurement_name>[,<measurement_name>]
-```  
+```
 
 ### Description of Syntax
 
@@ -153,20 +154,20 @@ The `SELECT` statement requires a `SELECT` clause and a `FROM` clause.
 #### `SELECT` clause
 The `SELECT` clause supports several formats for specifying data:
 
-`SELECT *`  
+`SELECT *`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all [fields](/influxdb/v1.5/concepts/glossary/#field) and [tags](/influxdb/v1.5/concepts/glossary/#tag).
 
-`SELECT "<field_key>"`  
+`SELECT "<field_key>"`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a specific field.
 
-`SELECT "<field_key>","<field_key>"`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns more than one field.  
+`SELECT "<field_key>","<field_key>"`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns more than one field.
 
-`SELECT "<field_key>","<tag_key>"`  
+`SELECT "<field_key>","<tag_key>"`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a specific field and tag.
 The `SELECT` clause must specify at least one field when it includes a tag.
 
-`SELECT "<field_key>"::field,"<tag_key>"::tag`  
+`SELECT "<field_key>"::field,"<tag_key>"::tag`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a specific field and tag.
 The `::[field | tag]` syntax specifies the [identifier's](/influxdb/v1.5/concepts/glossary/#identifier) type.
 Use this syntax to differentiate between field keys and tag keys that have the same name.
@@ -180,7 +181,7 @@ Other supported features:
 #### `FROM` clause
 The `FROM` clause supports several formats for specifying a [measurement(s)](/influxdb/v1.5/concepts/glossary/#measurement):
 
-`FROM <measurement_name>`  
+`FROM <measurement_name>`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 Returns data from a single measurement.
 If you're using the [CLI](/influxdb/v1.5/tools/shell/) InfluxDB queries the measurement in the
@@ -190,16 +191,16 @@ If you're using the [HTTP API](/influxdb/v1.5/tools/api/) InfluxDB queries the
 measurement in the database specified in the [`db` query string parameter](/influxdb/v1.5/tools/api/#query-string-parameters)
 and the `DEFAULT` retention policy.
 
-`FROM <measurement_name>,<measurement_name>`  
+`FROM <measurement_name>,<measurement_name>`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 Returns data from more than one measurement.
 
-`FROM <database_name>.<retention_policy_name>.<measurement_name>`  
+`FROM <database_name>.<retention_policy_name>.<measurement_name>`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 Returns data from a fully qualified measurement.
 Fully qualify a measurement by specifying its database and retention policy.
 
-`FROM <database_name>..<measurement_name>`  
+`FROM <database_name>..<measurement_name>`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 Returns data from a measurement in a user-specified [database](/influxdb/v1.5/concepts/glossary/#database) and the `DEFAULT`
 [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp).
@@ -462,14 +463,14 @@ Queries with unquoted string field values or double quoted string field values
 will not return any data and, in most cases,
 [will not return an error](#common-issues-with-the-where-clause).
 
-Supported operators:  
-`=`&emsp;&nbsp;&thinsp;equal to  
-`<>`&emsp;not equal to  
-`!=`&emsp;not equal to  
-`>`&emsp;&nbsp;&thinsp;greater than  
-`>=`&emsp;greater than or equal to  
-`<`&emsp;&nbsp;&thinsp;less than  
-`<=`&emsp;less than or equal to  
+Supported operators:
+`=`&emsp;&nbsp;&thinsp;equal to
+`<>`&emsp;not equal to
+`!=`&emsp;not equal to
+`>`&emsp;&nbsp;&thinsp;greater than
+`>=`&emsp;greater than or equal to
+`<`&emsp;&nbsp;&thinsp;less than
+`<=`&emsp;less than or equal to
 
 Other supported features:
 [Arithmetic Operations](/influxdb/v1.5/query_language/math_operators/),
@@ -487,10 +488,10 @@ Queries with unquoted tag values or double quoted tag values will not return
 any data and, in most cases,
 [will not return an error](#common-issues-with-the-where-clause).
 
-Supported operators:  
-`=`&emsp;&nbsp;&thinsp;equal to  
-`<>`&emsp;not equal to  
-`!=`&emsp;not equal to  
+Supported operators:
+`=`&emsp;&nbsp;&thinsp;equal to
+`<>`&emsp;not equal to
+`!=`&emsp;not equal to
 
 Other supported features:
 [Regular Expressions](#regular-expressions)
@@ -544,7 +545,7 @@ The query returns data from the `h2o_feet` measurement with field values of
 InfluxQL requires single quotes around string field values in the `WHERE`
 clause.
 
-#### Example 3: Select data that have a specific field key-value and perform basic arithmetic  
+#### Example 3: Select data that have a specific field key-value and perform basic arithmetic
 ```
 > SELECT * FROM "h2o_feet" WHERE "water_level" + 2 > 11.9
 
@@ -715,13 +716,13 @@ SELECT_clause FROM_clause [WHERE_clause] GROUP BY [* | <tag_key>[,<tag_key]]
 
 #### Description of Syntax
 
-`GROUP BY *`  
+`GROUP BY *`
 &emsp;&emsp;&emsp;Groups results by all [tags](/influxdb/v1.5/concepts/glossary/#tag)
 
-`GROUP BY <tag_key>`  
+`GROUP BY <tag_key>`
 &emsp;&emsp;&emsp;Groups results by a specific tag
 
-`GROUP BY <tag_key>,<tag_key>`  
+`GROUP BY <tag_key>,<tag_key>`
 &emsp;&emsp;&emsp;Groups results by more than one tag.
 The order of the [tag keys](/influxdb/v1.5/concepts/glossary/#tag-key) is irrelevant.
 
@@ -1426,7 +1427,7 @@ time                   max
 2015-09-18T16:00:00Z   3.599
 2015-09-18T16:12:00Z   3.402
 2015-09-18T16:24:00Z   3.235
-2015-09-18T16:36:00Z   
+2015-09-18T16:36:00Z
 ```
 
 With `fill(100)`:
@@ -1543,7 +1544,7 @@ time                   max
 2015-09-18T16:00:00Z   3.599
 2015-09-18T16:12:00Z   3.402
 2015-09-18T16:24:00Z   3.235
-2015-09-18T16:36:00Z   
+2015-09-18T16:36:00Z
 ```
 
 `fill(null)` reports `null` as the value for the time interval with no data.
@@ -1704,7 +1705,7 @@ SELECT_clause INTO <measurement_name> FROM_clause [WHERE_clause] [GROUP_BY_claus
 
 The `INTO` clause supports several formats for specifying a [measurement](/influxdb/v1.5/concepts/glossary/#measurement):
 
-`INTO <measurement_name>`  
+`INTO <measurement_name>`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 Writes data to the specified measurement.
 If you're using the [CLI](/influxdb/v1.5/tools/shell/) InfluxDB writes the data to the measurement in the
@@ -1714,17 +1715,17 @@ If you're using the [HTTP API](/influxdb/v1.5/tools/api/) InfluxDB writes the da
 measurement in the database specified in the [`db` query string parameter](/influxdb/v1.5/tools/api/#query-string-parameters)
 and the `DEFAULT` retention policy.
 
-`INTO <database_name>.<retention_policy_name>.<measurement_name>`  
+`INTO <database_name>.<retention_policy_name>.<measurement_name>`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 Writes data to a fully qualified measurement.
 Fully qualify a measurement by specifying its database and retention policy.
 
-`INTO <database_name>..<measurement_name>`  
+`INTO <database_name>..<measurement_name>`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 Writes data to a measurement in a user-specified database and the `DEFAULT`
 retention policy.
 
-`INTO <database_name>.<retention_policy_name>.:MEASUREMENT FROM /<regular_expression>/`  
+`INTO <database_name>.<retention_policy_name>.:MEASUREMENT FROM /<regular_expression>/`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 Writes data to all measurements in the user-specified database and
 retention policy that match the [regular expression](#regular-expressions) in the `FROM` clause.
@@ -1763,18 +1764,18 @@ This prevents your system from running out of memory.
 The codeblock below provides sample syntax for those queries:
 
 ```
-SELECT * 
-INTO <destination_database>.<retention_policy_name>.<measurement_name> 
+SELECT *
+INTO <destination_database>.<retention_policy_name>.<measurement_name>
 FROM <source_database>.<retention_policy_name>.<measurement_name>
 WHERE time > now() - 100w and time < now() - 90w GROUP BY *
 
-SELECT * 
-INTO <destination_database>.<retention_policy_name>.<measurement_name> 
-FROM <source_database>.<retention_policy_name>.<measurement_name>} 
+SELECT *
+INTO <destination_database>.<retention_policy_name>.<measurement_name>
+FROM <source_database>.<retention_policy_name>.<measurement_name>}
 WHERE time > now() - 90w  and time < now() - 80w GROUP BY *
 
-SELECT * 
-INTO <destination_database>.<retention_policy_name>.<measurement_name> 
+SELECT *
+INTO <destination_database>.<retention_policy_name>.<measurement_name>
 FROM <source_database>.<retention_policy_name>.<measurement_name>
 WHERE time > now() - 80w  and time < now() - 70w GROUP BY *
 ```
@@ -2284,13 +2285,13 @@ time                   mean
 
 This example is pretty involved, so here's the clause-by-clause breakdown:
 
-The [`SELECT` clause](#the-basic-select-statement) specifies an InfluxQL [function](/influxdb/v1.5/query_language/functions).  
-The [`FROM` clause](#the-basic-select-statement) specifies a single measurement.  
-The [`WHERE` clause](#the-where-clause) specifies the time range for the query.  
-The [`GROUP BY` clause](#the-group-by-clause) groups results by all tags  (`*`) and into 12-minute intervals.  
-The [`ORDER BY time DESC` clause](#order-by-time-desc) returns results in descending timestamp order.  
-The [`LIMIT 2` clause](#the-limit-clause) limits the number of points returned to two.  
-The `OFFSET 2` clause excludes the first two averages from the query results.  
+The [`SELECT` clause](#the-basic-select-statement) specifies an InfluxQL [function](/influxdb/v1.5/query_language/functions).
+The [`FROM` clause](#the-basic-select-statement) specifies a single measurement.
+The [`WHERE` clause](#the-where-clause) specifies the time range for the query.
+The [`GROUP BY` clause](#the-group-by-clause) groups results by all tags  (`*`) and into 12-minute intervals.
+The [`ORDER BY time DESC` clause](#order-by-time-desc) returns results in descending timestamp order.
+The [`LIMIT 2` clause](#the-limit-clause) limits the number of points returned to two.
+The `OFFSET 2` clause excludes the first two averages from the query results.
 The [`SLIMIT 1` clause](#the-slimit-clause) limits the number of series returned to one.
 
 Without `OFFSET 2`, the query would return the first two averages of the query results:
@@ -2357,14 +2358,14 @@ time                   mean
 
 This example is pretty involved, so here's the clause-by-clause breakdown:
 
-The [`SELECT` clause](#the-basic-select-statement) specifies an InfluxQL [function](/influxdb/v1.5/query_language/functions).  
-The [`FROM` clause](#the-basic-select-statement) specifies a single measurement.  
-The [`WHERE` clause](#the-where-clause) specifies the time range for the query.  
-The [`GROUP BY` clause](#the-group-by-clause) groups results by all tags  (`*`) and into 12-minute intervals.  
-The [`ORDER BY time DESC` clause](#order-by-time-desc) returns results in descending timestamp order.  
-The [`LIMIT 2` clause](#the-limit-clause) limits the number of points returned to two.  
-The [`OFFSET 2` clause](#the-offset-clause) excludes the first two averages from the query results.  
-The [`SLIMIT 1` clause](#the-slimit-clause) limits the number of series returned to one.  
+The [`SELECT` clause](#the-basic-select-statement) specifies an InfluxQL [function](/influxdb/v1.5/query_language/functions).
+The [`FROM` clause](#the-basic-select-statement) specifies a single measurement.
+The [`WHERE` clause](#the-where-clause) specifies the time range for the query.
+The [`GROUP BY` clause](#the-group-by-clause) groups results by all tags  (`*`) and into 12-minute intervals.
+The [`ORDER BY time DESC` clause](#order-by-time-desc) returns results in descending timestamp order.
+The [`LIMIT 2` clause](#the-limit-clause) limits the number of points returned to two.
+The [`OFFSET 2` clause](#the-offset-clause) excludes the first two averages from the query results.
+The [`SLIMIT 1` clause](#the-slimit-clause) limits the number of series returned to one.
 The `SOFFSET 1` clause paginates the series returned.
 
 Without `SOFFSET 1`, the query would return the results for a different series:
@@ -2449,13 +2450,13 @@ SELECT_clause FROM_clause WHERE time <operator> ['<rfc3339_date_time_string>' | 
 
 #### Supported operators
 
-`=`&emsp;&nbsp;&thinsp;equal to  
-`<>`&emsp;not equal to  
-`!=`&emsp;not equal to  
-`>`&emsp;&nbsp;&thinsp;greater than  
-`>=`&emsp;greater than or equal to  
-`<`&emsp;&nbsp;&thinsp;less than  
-`<=`&emsp;less than or equal to  
+`=`&emsp;&nbsp;&thinsp;equal to
+`<>`&emsp;not equal to
+`!=`&emsp;not equal to
+`>`&emsp;&nbsp;&thinsp;greater than
+`>=`&emsp;greater than or equal to
+`<`&emsp;&nbsp;&thinsp;less than
+`<=`&emsp;less than or equal to
 
 Currently, InfluxDB does not support using `OR` with absolute time in the `WHERE`
 clause. See the [Frequently Asked Questions](/influxdb/v1.5/troubleshooting/frequently-asked-questions/#why-is-my-query-with-a-where-or-time-clause-returning-empty-results)
@@ -2620,22 +2621,22 @@ The whitespace between `-` or `+` and the [duration literal](/influxdb/v1.5/quer
 
 #### Supported operators
 
-`=`&emsp;&nbsp;&thinsp;equal to  
-`<>`&emsp;not equal to  
-`!=`&emsp;not equal to  
-`>`&emsp;&nbsp;&thinsp;greater than  
-`>=`&emsp;greater than or equal to  
-`<`&emsp;&nbsp;&thinsp;less than  
-`<=`&emsp;less than or equal to  
+`=`&emsp;&nbsp;&thinsp;equal to
+`<>`&emsp;not equal to
+`!=`&emsp;not equal to
+`>`&emsp;&nbsp;&thinsp;greater than
+`>=`&emsp;greater than or equal to
+`<`&emsp;&nbsp;&thinsp;less than
+`<=`&emsp;less than or equal to
 
 #### duration_literal
 
-`u` or `µ`&emsp;microseconds  
-`ms`&nbsp;&nbsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;milliseconds  
-`s`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;seconds  
-`m`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;minutes  
-`h`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;hours  
-`d`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;days  
+`u` or `µ`&emsp;microseconds
+`ms`&nbsp;&nbsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;milliseconds
+`s`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;seconds
+`m`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;minutes
+`h`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;hours
+`d`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;days
 `w`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;weeks
 
 ### Examples
@@ -2768,8 +2769,8 @@ SELECT /<regular_expression_field_key>/ FROM /<regular_expression_measurement>/ 
 Regular expressions are surrounded by `/` characters and use
 [Golang's regular expression syntax](http://golang.org/pkg/regexp/syntax/).
 
-Supported operators:  
-`=~`&emsp;matches against  
+Supported operators:
+`=~`&emsp;matches against
 `!~`&emsp;doesn't match against
 
 ### Examples

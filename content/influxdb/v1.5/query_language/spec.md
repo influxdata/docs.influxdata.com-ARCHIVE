@@ -1,15 +1,21 @@
 ---
-title: InfluxQL Reference
+title: Influx Query Language (InfluxQL) reference
 menu:
   influxdb_1_5:
+    name: InfluxQL reference
     weight: 90
     parent: query_language
 ---
 
 ## Introduction
 
-This is the reference for the Influx Query Language ("InfluxQL").
-If you're looking for less formal documentation, see [Data Exploration](/influxdb/v1.5/query_language/data_exploration/), [Schema Exploration](/influxdb/v1.5/query_language/schema_exploration/), [Database Management](/influxdb/v1.5/query_language/database_management/), and [Authentication and Authorization](/influxdb/v1.5/query_language/authentication_and_authorization/).
+This is the reference for the Influx Query Language (InfluxQL).
+If you're looking for less formal documentation, see the following:
+
+* [Data exploration using InfluxQL](/influxdb/v1.5/query_language/data_exploration/)
+* [Schema exploration using InfluxQL](/influxdb/v1.5/query_language/schema_exploration/)
+* [Database management](/influxdb/v1.5/query_language/database_management/)
+* [Authentication and authorization](/influxdb/v1.5/query_language/authentication_and_authorization/).
 
 InfluxQL is a SQL-like query language for interacting with InfluxDB.
 It has been lovingly crafted to feel familiar to those coming from other SQL or SQL-like environments while providing features specific to storing and analyzing time series data.
@@ -27,7 +33,7 @@ Sections:
 * [Clauses](/influxdb/v1.5/query_language/spec/#clauses)
 * [Expressions](/influxdb/v1.5/query_language/spec/#expressions)
 * [Other](/influxdb/v1.5/query_language/spec/#other)
-* [Query Engine Internals](/influxdb/v1.5/query_language/spec/#query-engine-internals)
+* [Query engine internals](/influxdb/v1.5/query_language/spec/#query-engine-internals)
 
 ## Notation
 
@@ -574,8 +580,8 @@ DROP USER "jdoe"
 
 Parses and plans the query, and then prints a summary of estimated costs.
 
-Many SQL engines use the `EXPLAIN` statement to show join order, join algorithms, and predicate and expression pushdown. 
-Since InfluxQL does not support joins, the cost of a InfluxQL query is typically a function of the total series accessed, the number of iterator accesses to a TSM file, and the number of TSM blocks that need to be scanned. 
+Many SQL engines use the `EXPLAIN` statement to show join order, join algorithms, and predicate and expression pushdown.
+Since InfluxQL does not support joins, the cost of a InfluxQL query is typically a function of the total series accessed, the number of iterator accesses to a TSM file, and the number of TSM blocks that need to be scanned.
 
 The elements of `EXPLAIN` query plan include:
 
@@ -746,9 +752,9 @@ SELECT mean("value") FROM "cpu" GROUP BY region, time(1d) fill(0) tz('America/Ch
 
 Refers to the group of commands used to estimate or count exactly the cardinality of measurements, series, tag keys, tag key values, and field keys.
 
-The SHOW CARDINALITY commands are available in two variations: estimated and exact. Estimated values are calculated using sketches and are a safe default for all cardinality sizes. Exact values are counts directly from TSM (Time-Structured Merge Tree) data, but are expensive to run for high cardinality data.  Unless required, use the estimated variety. 
+The SHOW CARDINALITY commands are available in two variations: estimated and exact. Estimated values are calculated using sketches and are a safe default for all cardinality sizes. Exact values are counts directly from TSM (Time-Structured Merge Tree) data, but are expensive to run for high cardinality data.  Unless required, use the estimated variety.
 
-Filtering by `time` is only supported when TSI (Time Series Index) is enabled on a database. 
+Filtering by `time` is only supported when TSI (Time Series Index) is enabled on a database.
 
 See the specific SHOW CARDINALITY commands for details:
 - [SHOW FIELD KEY CARDINALITY](###SHOW FIELD KEY CARDINALITY)
@@ -787,8 +793,8 @@ SHOW DATABASES
 
 Estimates or counts exactly the cardinality of the field key set for the current database unless a database is specified using the `ON <database>` option.
 
-> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optionalgit fetc. 
-> When using these query clauses, the query falls back to an exact count. 
+> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optionalgit fetc.
+> When using these query clauses, the query falls back to an exact count.
 > Filtering by `time` is only supported when TSI (Time Series Index) is enabled and `time` is not supported in the `WHERE` clause.
 
 ```
@@ -838,8 +844,8 @@ SHOW GRANTS FOR "jdoe"
 
 Estimates or counts exactly the cardinality of the measurement set for the current database unless a database is specified using the `ON <database>` option.
 
-> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional. 
-> When using these query clauses, the query falls back to an exact count. 
+> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional.
+> When using these query clauses, the query falls back to an exact count.
 > Filtering by `time` is only supported when TSI (Time Series Index) is enabled and `time` is not supported in the `WHERE` clause.
 
 ```
@@ -887,7 +893,7 @@ show_queries_stmt = "SHOW QUERIES" .
 ```sql
 -- show all currently-running queries
 SHOW QUERIES
--- 
+--
 ```
 
 ### SHOW RETENTION POLICIES
@@ -924,8 +930,8 @@ Estimates or counts exactly the cardinality of the series for the current databa
 - [When do I need more RAM?](/influxdb/v1.5/guides/hardware_sizing/#when-do-i-need-more-ram) in [Hardware Sizing Guidelines](influxdb/v1.5/guides/hardware_sizing/)
 - [Don't have too many series](/influxdb/v1.5/concepts/schema_and_data_layout/#don-t-have-too-many-series)
 
-> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional. 
-> When using these query clauses, the query falls back to an exact count. 
+> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional.
+> When using these query clauses, the query falls back to an exact count.
 > Filtering by `time` is only supported when TSI (Time Series Index) is enabled and `time` is not supported in the `WHERE` clause.
 
 ```
@@ -983,12 +989,12 @@ show_subscriptions_stmt = "SHOW SUBSCRIPTIONS" .
 SHOW SUBSCRIPTIONS
 ```
 
-#### SHOW TAG KEY CARDINALITY 
+#### SHOW TAG KEY CARDINALITY
 
 Estimates or counts exactly the cardinality of tag key set on the current database unless a database is specified using the `ON <database>` option.
 
-> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional. 
-> When using these query clauses, the query falls back to an exact count. 
+> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional.
+> When using these query clauses, the query falls back to an exact count.
 > Filtering by `time` is only supported when TSI (Time Series Index) is enabled and `time` is not supported in the `WHERE` clause.
 
 ```
@@ -1055,8 +1061,8 @@ SHOW TAG VALUES FROM "cpu" WITH KEY IN ("region", "host") WHERE "service" = 'red
 
 Estimates or counts exactly the cardinality of tag key values for the specified tag key on the current database unless a database is specified using the `ON <database>` option.
 
-> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional. 
-> When using these query clauses, the query falls back to an exact count. 
+> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional.
+> When using these query clauses, the query falls back to an exact count.
 > Filtering by `time` is only supported when TSI (Time Series Index) is enabled.
 
 ```

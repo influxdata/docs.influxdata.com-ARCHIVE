@@ -1,9 +1,10 @@
 ---
-title: Line Protocol Reference
+title: InfluxDB Line Protocol reference
 aliases:
     - influxdb/v1.5/write_protocols/write_syntax/
 menu:
   influxdb_1_5:
+    name: Line Protocol reference
     weight: 10
     parent: write_protocols
 ---

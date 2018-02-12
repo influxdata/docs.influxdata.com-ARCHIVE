@@ -1,5 +1,5 @@
 ---
-title: Continuous Queries
+title: InfluxQL Continuous Queries
 
 menu:
   influxdb_1_5:
@@ -126,7 +126,7 @@ range between `now()` and one hour prior to `now()`.
 Annotated log output on the morning of August 28, 2016:
 
 >
-At **8:00** `cq_basic` executes a query with the time range `time >= '7:00' AND time < '08:00'`.  
+At **8:00** `cq_basic` executes a query with the time range `time >= '7:00' AND time < '08:00'`.
 `cq_basic` writes one point to the `average_passengers` measurement:
 >
     name: average_passengers
@@ -134,7 +134,7 @@ At **8:00** `cq_basic` executes a query with the time range `time >= '7:00' AND 
     time                   mean
     2016-08-28T07:00:00Z   7
 >
-At **9:00** `cq_basic` executes a query with the time range `time >= '8:00' AND time < '9:00'`.  
+At **9:00** `cq_basic` executes a query with the time range `time >= '8:00' AND time < '9:00'`.
 `cq_basic` writes one point to the `average_passengers` measurement:
 >
     name: average_passengers
@@ -178,7 +178,7 @@ range between `now()` and one hour prior to `now()`.
 Annotated log output on the morning of August 28, 2016:
 
 >
-At **8:00** `cq_basic_rp` executes a query with the time range `time >= '7:00' AND time < '8:00'`.  
+At **8:00** `cq_basic_rp` executes a query with the time range `time >= '7:00' AND time < '8:00'`.
 `cq_basic_rp` writes one point to the `three_weeks` RP and the `average_passengers` measurement:
 >
     name: average_passengers
@@ -187,7 +187,7 @@ At **8:00** `cq_basic_rp` executes a query with the time range `time >= '7:00' A
     2016-08-28T07:00:00Z   7
 >
 At **9:00** `cq_basic_rp` executes a query with the time range
-`time >= '8:00' AND time < '9:00'`.  
+`time >= '8:00' AND time < '9:00'`.
 `cq_basic_rp` writes one point to the `three_weeks` RP and the `average_passengers` measurement:
 >
     name: average_passengers
@@ -311,7 +311,7 @@ CQ's `WHERE` clause; `cq_basic_offset` queries between 7:15 and 8:14.999999999 i
 Annotated log output on the morning of August 28, 2016:
 
 >
-At **8:15** `cq_basic_offset` executes a query with the time range `time >= '7:15' AND time < '8:15'`.  
+At **8:15** `cq_basic_offset` executes a query with the time range `time >= '7:15' AND time < '8:15'`.
 `cq_basic_offset` writes one point to the `average_passengers` measurement:
 >
     name: average_passengers
@@ -319,7 +319,7 @@ At **8:15** `cq_basic_offset` executes a query with the time range `time >= '7:1
     time                   mean
     2016-08-28T07:15:00Z   7.75
 >
-At **9:15** `cq_basic_offset` executes a query with the time range `time >= '8:15' AND time < '9:15'`.  
+At **9:15** `cq_basic_offset` executes a query with the time range `time >= '8:15' AND time < '9:15'`.
 `cq_basic_offset` writes one point to the `average_passengers` measurement:
 >
     name: average_passengers
@@ -467,7 +467,7 @@ intersects with `now()`.
 Annotated log output on the morning of August 28, 2016:
 
 >
-At **8:00**, `cq_advanced_every` executes a query with the time range `WHERE time >= '7:00' AND time < '8:00'`.  
+At **8:00**, `cq_advanced_every` executes a query with the time range `WHERE time >= '7:00' AND time < '8:00'`.
 `cq_advanced_every` writes one point to the `average_passengers` measurement:
 >
     name: average_passengers
@@ -475,7 +475,7 @@ At **8:00**, `cq_advanced_every` executes a query with the time range `WHERE tim
     time                   mean
     2016-08-28T07:00:00Z   7
 >
-At **8:30**, `cq_advanced_every` executes a query with the time range `WHERE time >= '8:00' AND time < '9:00'`.  
+At **8:30**, `cq_advanced_every` executes a query with the time range `WHERE time >= '8:00' AND time < '9:00'`.
 `cq_advanced_every` writes one point to the `average_passengers` measurement:
 >
     name: average_passengers
@@ -483,7 +483,7 @@ At **8:30**, `cq_advanced_every` executes a query with the time range `WHERE tim
     time                   mean
     2016-08-28T08:00:00Z   12.6667
 >
-At **9:00**, `cq_advanced_every` executes a query with the time range `WHERE time >= '8:00' AND time < '9:00'`.  
+At **9:00**, `cq_advanced_every` executes a query with the time range `WHERE time >= '8:00' AND time < '9:00'`.
 `cq_advanced_every` writes one point to the `average_passengers` measurement:
 >
     name: average_passengers
@@ -538,7 +538,7 @@ range between `now()` and one hour prior to `now()`.
 Annotated log output on the morning of August 28, 2016:
 
 >
-At **8:00** `cq_advanced_for` executes a query with the time range `WHERE time >= '7:00' AND time < '8:00'`.  
+At **8:00** `cq_advanced_for` executes a query with the time range `WHERE time >= '7:00' AND time < '8:00'`.
 `cq_advanced_for` writes two points to the `average_passengers` measurement:
 >
     name: average_passengers
@@ -547,7 +547,7 @@ At **8:00** `cq_advanced_for` executes a query with the time range `WHERE time >
     2016-08-28T07:00:00Z   6.5
     2016-08-28T07:30:00Z   7.5
 >
-At **8:30** `cq_advanced_for` executes a query with the time range  `WHERE time >= '7:30' AND time < '8:30'`.  
+At **8:30** `cq_advanced_for` executes a query with the time range  `WHERE time >= '7:30' AND time < '8:30'`.
 `cq_advanced_for` writes two points to the `average_passengers` measurement:
 >
     name: average_passengers
@@ -556,7 +556,7 @@ At **8:30** `cq_advanced_for` executes a query with the time range  `WHERE time 
     2016-08-28T07:30:00Z   7.5
     2016-08-28T08:00:00Z   11.5
 >
-At **9:00** `cq_advanced_for` executes a query with the time range `WHERE time >= '8:00' AND time < '9:00'`.  
+At **9:00** `cq_advanced_for` executes a query with the time range `WHERE time >= '8:00' AND time < '9:00'`.
 `cq_advanced_for` writes two points to the `average_passengers` measurement:
 >
     name: average_passengers
@@ -609,7 +609,7 @@ range between `now()` and 90 minutes prior to `now()`.
 Annotated log output on the morning of August 28, 2016:
 
 >
-At **8:00** `cq_advanced_every_for` executes a query with the time range `WHERE time >= '6:30' AND time < '8:00'`.  
+At **8:00** `cq_advanced_every_for` executes a query with the time range `WHERE time >= '6:30' AND time < '8:00'`.
 `cq_advanced_every_for` writes three points to the `average_passengers` measurement:
 >
     name: average_passengers
@@ -619,7 +619,7 @@ At **8:00** `cq_advanced_every_for` executes a query with the time range `WHERE 
     2016-08-28T07:00:00Z   6.5
     2016-08-28T07:30:00Z   7.5
 >
-At **9:00** `cq_advanced_every_for` executes a query with the time range `WHERE time >= '7:30' AND time < '9:00'`.  
+At **9:00** `cq_advanced_every_for` executes a query with the time range `WHERE time >= '7:30' AND time < '9:00'`.
 `cq_advanced_every_for` writes three points to the `average_passengers` measurement:
 >
     name: average_passengers
@@ -677,11 +677,11 @@ range between `now()` and two hours prior to `now()`.
 Annotated log output on the morning of August 28, 2016:
 
 >
-At **6:00**, `cq_advanced_for_fill` executes a query with the time range `WHERE time >= '4:00' AND time < '6:00'`.  
+At **6:00**, `cq_advanced_for_fill` executes a query with the time range `WHERE time >= '4:00' AND time < '6:00'`.
 `cq_advanced_for_fill` writes nothing to `average_passengers`; `bus_data` has no data
 that fall within that time range.
 >
-At **7:00**, `cq_advanced_for_fill` executes a query with the time range `WHERE time >= '5:00' AND time < '7:00'`.  
+At **7:00**, `cq_advanced_for_fill` executes a query with the time range `WHERE time >= '5:00' AND time < '7:00'`.
 `cq_advanced_for_fill` writes two points to `average_passengers`:
 >
     name: average_passengers
@@ -692,15 +692,15 @@ At **7:00**, `cq_advanced_for_fill` executes a query with the time range `WHERE 
 >
 [...]
 >
-At **11:00**, `cq_advanced_for_fill` executes a query with the time range `WHERE time >= '9:00' AND time < '11:00'`.  
+At **11:00**, `cq_advanced_for_fill` executes a query with the time range `WHERE time >= '9:00' AND time < '11:00'`.
 `cq_advanced_for_fill` writes two points to `average_passengers`:
 >
     name: average_passengers
     ------------------------
     2016-08-28T09:00:00Z   20            <------ average of 20
-    2016-08-28T10:00:00Z   1000          <------ fill(1000)     
+    2016-08-28T10:00:00Z   1000          <------ fill(1000)
 >
-At **12:00**, `cq_advanced_for_fill` executes a query with the time range `WHERE time >= '10:00' AND time < '12:00'`.  
+At **12:00**, `cq_advanced_for_fill` executes a query with the time range `WHERE time >= '10:00' AND time < '12:00'`.
 `cq_advanced_for_fill` writes nothing to `average_passengers`; `bus_data` has no data
 that fall within that time range.
 
@@ -861,7 +861,7 @@ SELECT mean("bees") FROM "farm" GROUP BY time(30m) HAVING mean("bees") > 20
 
 To get the same results:
 
-**1. Create a CQ**  
+**1. Create a CQ**
 <br>
 This step performs the `mean("bees")` part of the query above.
 Because this step creates CQ you only need to execute it once.
@@ -874,7 +874,7 @@ The following CQ automatically calculates the average number of `bees` at
 CREATE CONTINUOUS QUERY "bee_cq" ON "mydb" BEGIN SELECT mean("bees") AS "mean_bees" INTO "aggregate_bees" FROM "farm" GROUP BY time(30m) END
 ```
 
-**2. Query the CQ results**  
+**2. Query the CQ results**
 <br>
 This step performs the `HAVING mean("bees") > 20` part of the query above.
 
@@ -908,7 +908,7 @@ SELECT mean(count("bees")) FROM "farm" GROUP BY time(30m)
 
 To get the same results:
 
-**1. Create a CQ**  
+**1. Create a CQ**
 <br>
 This step performs the `count("bees")` part of the nested function above.
 Because this step creates a CQ you only need to execute it once.
@@ -919,7 +919,7 @@ and writes those counts to the `count_bees` field in the `aggregate_bees` measur
 CREATE CONTINUOUS QUERY "bee_cq" ON "mydb" BEGIN SELECT count("bees") AS "count_bees" INTO "aggregate_bees" FROM "farm" GROUP BY time(30m) END
 ```
 
-**2. Query the CQ results**  
+**2. Query the CQ results**
 <br>
 This step performs the `mean([...])` part of the nested function above.
 

@@ -1,5 +1,5 @@
 ---
-title: Database Management
+title: Database management
 
 menu:
   influxdb_1_5:
@@ -344,7 +344,7 @@ Delete all measurements and data in a specific retention policy with:
 DROP RETENTION POLICY <retention_policy_name> ON <database_name>
 ```
 
-Delete the retention policy `what_is_time` in the `NOAA_water_database` database:  
+Delete the retention policy `what_is_time` in the `NOAA_water_database` database:
 ```bash
 > DROP RETENTION POLICY "what_is_time" ON "NOAA_water_database"
 >

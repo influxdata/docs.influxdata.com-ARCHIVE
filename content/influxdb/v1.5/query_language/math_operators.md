@@ -1,8 +1,9 @@
 ---
-title: Mathematical Operators
+title: InfluxQL mathematical operators
 
 menu:
   influxdb_1_5:
+    name: Mathematical operators
     weight: 80
     parent: query_language
 ---
@@ -236,7 +237,7 @@ Perform a mathematical operation on a regular expression within a function.
 > SELECT COUNT(/A/) + 2 FROM "nope"
 ERR: unsupported expression with regex field: count(/A/) + 2
 ```
- 
+
 #### Issue 2: Mathematical operators with functions
 
 The use of mathematical operators inside of function calls is currently unsupported.
@@ -275,7 +276,7 @@ However, you can apply the bitwise operators `&`, `|` and `^` to boolean data.
 There is no bitwise-not operator, because the results you expect depend on the width of your bitfield.
 InfluxQL does not know how wide your bitfield is, so cannot implement a suitable bitwise-not operator.
 
-For example, if your bitfield is 8 bits wide, then to you the integer 1 represents the bits `0000 0001`.  
+For example, if your bitfield is 8 bits wide, then to you the integer 1 represents the bits `0000 0001`.
 The bitwise-not of this should return the bits `1111 1110`, i.e. the integer 254.
 
 However, if your bitfield is 16 bits wide, then the integer 1 represents the bits `0000 0000 0000 0001`.

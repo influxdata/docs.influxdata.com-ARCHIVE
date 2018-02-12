@@ -34,9 +34,9 @@ For friendlier documentation, see the guides on
 [writing data](/influxdb/v1.5/guides/writing_data/) and
 [querying data](/influxdb/v1.5/guides/querying_data/) with the HTTP API.
 
-## [API Client Libraries](/influxdb/v1.5/tools/api_client_libraries/)
+## [InfluxDB API client libraries](/influxdb/v1.5/tools/api_client_libraries/)
 
-The list of client libraries for interacting with InfluxDB.
+The list of client libraries for interacting with the InfluxDB API.
 
 ## [Web Admin Interface](/influxdb/v1.5/tools/web_admin/)
 
@@ -45,11 +45,11 @@ The interface does not run on port `8083` and InfluxDB ignores the `[admin]` sec
 [Chronograf](/chronograf/latest/) replaces the web admin interface with improved tooling for querying data, writing data, and database management.
 See [Chronograf's transition guide](/chronograf/latest/guides/transition-web-admin-interface/) for more information.
 
-## [Influx Inspect](/influxdb/v1.5/tools/influx_inspect/)
+## [Influx Inspect disk shard utility](/influxdb/v1.5/tools/influx_inspect/)
 
 Influx Inspect is a tool designed to view detailed information about on disk shards, as well as export data from a shard to line protocol that can be inserted back into the database.
 
-## [Grafana Graphs and Dashboards](http://docs.grafana.org/datasources/influxdb/)
+## [Grafana graphs and dashboards](http://docs.grafana.org/datasources/influxdb/)
 
 Grafana is a convenient dashboard tool for visualizing time series data.
 It was originally built for Graphite, modeled after Kibana, and since been updated to support InfluxDB.

@@ -1,10 +1,11 @@
 ---
-title: Frequently Asked Questions
+title: Frequently asked questions about InfluxDB OSS
 aliases:
   - /influxdb/v1.5/troubleshooting/frequently_encountered_issues/
 
 menu:
   influxdb_1_5:
+    name: Frequently asked questions
     weight: 0
     parent: troubleshooting
 ---
@@ -12,10 +13,10 @@ menu:
 This page addresses frequent sources of confusion and places where InfluxDB behaves in an unexpected way relative to other database systems.
 Where applicable, it links to outstanding issues on GitHub.
 
-**Administration**  
+**Administration**
 
-* [How do I include a single quote in a password?](#how-do-i-include-a-single-quote-in-a-password)  
-* [How can I identify my version of InfluxDB?](#how-can-i-identify-my-version-of-influxdb)  
+* [How do I include a single quote in a password?](#how-do-i-include-a-single-quote-in-a-password)
+* [How can I identify my version of InfluxDB?](#how-can-i-identify-my-version-of-influxdb)
 * [Where can I find InfluxDB logs?](#where-can-i-find-influxdb-logs)
 * [What is the relationship between shard group durations and retention policies?](#what-is-the-relationship-between-shard-group-durations-and-retention-policies)
 * [Why aren't data dropped after I've altered a retention policy?](#why-aren-t-data-dropped-after-i-ve-altered-a-retention-policy)
@@ -23,34 +24,34 @@ Where applicable, it links to outstanding issues on GitHub.
 
 **Command Line Interface (CLI)**
 
-* [How do I make InfluxDB’s CLI return human readable timestamps?](#how-do-i-make-influxdb-s-cli-return-human-readable-timestamps)  
-* [How can a non-admin user `USE` a database in InfluxDB's CLI?](#how-can-a-non-admin-user-use-a-database-in-influxdb-s-cli)  
+* [How do I make InfluxDB’s CLI return human readable timestamps?](#how-do-i-make-influxdb-s-cli-return-human-readable-timestamps)
+* [How can a non-admin user `USE` a database in InfluxDB's CLI?](#how-can-a-non-admin-user-use-a-database-in-influxdb-s-cli)
 * [How do I write to a non-`DEFAULT` retention policy with InfluxDB's CLI?](#how-do-i-write-to-a-non-default-retention-policy-with-influxdb-s-cli)
 * [How do I cancel a long-running query?](#how-do-i-cancel-a-long-running-query)
 
 **Data Types**
 
-* [Why can't I query boolean field values?](#why-can-t-i-query-boolean-field-values)  
-* [How does InfluxDB handle field type discrepancies across shards?](#how-does-influxdb-handle-field-type-discrepancies-across-shards)  
-* [What are the minimum and maximum integers that InfluxDB can store?](#what-are-the-minimum-and-maximum-integers-that-influxdb-can-store)  
+* [Why can't I query boolean field values?](#why-can-t-i-query-boolean-field-values)
+* [How does InfluxDB handle field type discrepancies across shards?](#how-does-influxdb-handle-field-type-discrepancies-across-shards)
+* [What are the minimum and maximum integers that InfluxDB can store?](#what-are-the-minimum-and-maximum-integers-that-influxdb-can-store)
 * [What are the minimum and maximum timestamps that InfluxDB can store?](#what-are-the-minimum-and-maximum-timestamps-that-influxdb-can-store)
 * [How can I tell what type of data are stored in a field?](#how-can-i-tell-what-type-of-data-are-stored-in-a-field)
 * [Can I change a field's data type?](#can-i-change-a-field-s-data-type)
 
 **InfluxQL Functions**
 
-* [How do I perform mathematical operations within a function?](#how-do-i-perform-mathematical-operations-within-a-function)  
-* [Why does my query return epoch 0 as the timestamp?](#why-does-my-query-return-epoch-0-as-the-timestamp)   
+* [How do I perform mathematical operations within a function?](#how-do-i-perform-mathematical-operations-within-a-function)
+* [Why does my query return epoch 0 as the timestamp?](#why-does-my-query-return-epoch-0-as-the-timestamp)
 * [Which InfluxQL functions support nesting?](#which-influxql-functions-support-nesting)
 
-**Querying Data**  
+**Querying Data**
 
-* [What determines the time intervals returned by `GROUP BY time()` queries?](#what-determines-the-time-intervals-returned-by-group-by-time-queries)  
+* [What determines the time intervals returned by `GROUP BY time()` queries?](#what-determines-the-time-intervals-returned-by-group-by-time-queries)
 * [Why do my queries return no data or partial data?](#why-do-my-queries-return-no-data-or-partial-data)
-* [Why don't my `GROUP BY time()` queries return timestamps that occur after `now()`?](#why-don-t-my-group-by-time-queries-return-timestamps-that-occur-after-now)  
-* [Can I perform mathematical operations against timestamps?](#can-i-perform-mathematical-operations-against-timestamps)  
-* [Can I identify write precision from returned timestamps?](#can-i-identify-write-precision-from-returned-timestamps)  
-* [When should I single quote and when should I double quote in queries?](#when-should-i-single-quote-and-when-should-i-double-quote-in-queries)  
+* [Why don't my `GROUP BY time()` queries return timestamps that occur after `now()`?](#why-don-t-my-group-by-time-queries-return-timestamps-that-occur-after-now)
+* [Can I perform mathematical operations against timestamps?](#can-i-perform-mathematical-operations-against-timestamps)
+* [Can I identify write precision from returned timestamps?](#can-i-identify-write-precision-from-returned-timestamps)
+* [When should I single quote and when should I double quote in queries?](#when-should-i-single-quote-and-when-should-i-double-quote-in-queries)
 * [Why am I missing data after creating a new `DEFAULT` retention policy?](#why-am-i-missing-data-after-creating-a-new-default-retention-policy)
 * [Why is my query with a `WHERE OR` time clause returning empty results?](#why-is-my-query-with-a-where-or-time-clause-returning-empty-results)
 * [Why does `fill(previous)` return empty results?](#why-does-fill-previous-return-empty-results)
@@ -62,17 +63,17 @@ Where applicable, it links to outstanding issues on GitHub.
 
 **Series and Series Cardinality**
 
-* [How can I query for series cardinality?](#how-can-i-query-for-series-cardinality)  
-* [Why does series cardinality matter?](#why-does-series-cardinality-matter)  
+* [How can I query for series cardinality?](#how-can-i-query-for-series-cardinality)
+* [Why does series cardinality matter?](#why-does-series-cardinality-matter)
 * [How can I remove series from the index?](#how-can-i-remove-series-from-the-index)
 
-**Writing Data**  
+**Writing Data**
 
-* [How do I write integer field values?](#how-do-i-write-integer-field-values)   
-* [How does InfluxDB handle duplicate points?](#how-does-influxdb-handle-duplicate-points)  
+* [How do I write integer field values?](#how-do-i-write-integer-field-values)
+* [How does InfluxDB handle duplicate points?](#how-does-influxdb-handle-duplicate-points)
 * [What newline character does the HTTP API require?](#what-newline-character-does-the-http-api-require)
-* [What words and characters should I avoid when writing data to InfluxDB?](#what-words-and-characters-should-i-avoid-when-writing-data-to-influxdb)  
-* [When should I single quote and when should I double quote when writing data?](#when-should-i-single-quote-and-when-should-i-double-quote-when-writing-data)  
+* [What words and characters should I avoid when writing data to InfluxDB?](#what-words-and-characters-should-i-avoid-when-writing-data-to-influxdb)
+* [When should I single quote and when should I double quote when writing data?](#when-should-i-single-quote-and-when-should-i-double-quote-when-writing-data)
 * [Does the precision of the timestamp matter?](#does-the-precision-of-the-timestamp-matter)
 * [What are the configuration recommendations and schema guidelines for writing sparse, historical data?](#what-are-the-configuration-recommendations-and-schema-guidelines-for-writing-sparse-historical-data)
 
@@ -107,11 +108,11 @@ Date: Wed, 01 Mar 2017 20:46:17 GMT
 ```
 $ influx
 
-Connected to http://localhost:8086✨ version 1.4.x ✨  
+Connected to http://localhost:8086✨ version 1.4.x ✨
 InfluxDB shell version: 1.4.x
 ```
 
-#### Check the HTTP response in your logs:  
+#### Check the HTTP response in your logs:
 
 ```
 $ journald-ctl -u influxdb.service
@@ -186,8 +187,8 @@ The table below shows the supported syntax for each category:
 |---|---|---|---|---|
 | u  | ❌ | 👍  |  👍 |  👍  |
 | us |  👍  | ❌ | ❌ |  ❌ |
-|  µ  | ❌ | ❌ |  👍  | ❌ |  
-|  µs  | 👍  | ❌ | ❌ |  ❌ |  
+|  µ  | ❌ | ❌ |  👍  | ❌ |
+|  µs  | 👍  | ❌ | ❌ |  ❌ |
 
 
 If a configuration option specifies the `u` or `µ` syntax, InfluxDB fails to start and reports the following error in the logs:
@@ -490,7 +491,7 @@ Raw data:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Results:                
+Results:
 ```
 name: flower_orders                                name: flower_orders
 —————————                                          -------------------
@@ -498,7 +499,7 @@ time                    sunflowers                 time                  mean
 2016-08-29T18:00:00Z    34                         2016-08-29T18:00:00Z  22.332
                        |--|                        2016-08-29T19:00:00Z  62.75
 2016-08-29T18:15:00Z   |28|
-2016-08-29T18:30:00Z   |19|                    
+2016-08-29T18:30:00Z   |19|
 2016-08-29T18:45:00Z   |20|
                        |--|
                        |--|
@@ -542,7 +543,7 @@ Raw data:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Results:  
+Results:
 ```
 name: flower_orders                                name: flower_orders
 —————————                                          -------------------
@@ -932,7 +933,7 @@ To reduce series cardinality, series must be dropped from the index.
 Add a trailing `i` to the end of the field value when writing an integer.
 If you do not provide the `i`, InfluxDB will treat the field value as a float.
 
-Writes an integer: `value=100i`  
+Writes an integer: `value=100i`
 Writes a float: `value=100`
 
 ## How does InfluxDB handle duplicate points?
@@ -989,7 +990,7 @@ name: cpu_load
 time                             az        hostname   val_1   val_2
 1970-01-15T06:56:07.89Z          us_west   server02   24.5    7
 1970-01-15T06:56:07.890000001Z   us_west   server02   5.24
-```    
+```
 
 ## What newline character does the HTTP API require?
 InfluxDB's line protocol relies on line feed (`\n`, which is ASCII `0x0A`) to indicate the end of a line and the beginning of a new line. Files or data that use a newline character other than `\n` will result in the following errors: `bad timestamp`, `unable to parse`.
@@ -1054,14 +1055,14 @@ ERR: {"error":"partial write: invalid tag key: input tag \"time\" on measurement
 The system does does not write the point and returns a `400`.
 
 ### Characters
-To keep regular expressions and quoting simple, avoid using the following characters in identifiers:  
+To keep regular expressions and quoting simple, avoid using the following characters in identifiers:
 
-`\` backslash   
- `^` circumflex accent  
- `$` dollar sign  
- `'` single quotation mark  
- `"` double quotation mark  
- `=` equal sign  
+`\` backslash
+ `^` circumflex accent
+ `$` dollar sign
+ `'` single quotation mark
+ `"` double quotation mark
+ `=` equal sign
  `,` comma
 
 ## When should I single quote and when should I double quote when writing data?
@@ -1069,29 +1070,29 @@ To keep regular expressions and quoting simple, avoid using the following charac
 Identifiers are database names, retention policy names, user names, measurement names, tag keys, and field keys.
 <br>
 <br>
-	Write with a double-quoted measurement: `INSERT "bikes" bikes_available=3`  
+	Write with a double-quoted measurement: `INSERT "bikes" bikes_available=3`
 	Applicable query: `SELECT * FROM "\"bikes\""`
 <br>
 <br>
-	Write with a single-quoted measurement: `INSERT 'bikes' bikes_available=3`  
+	Write with a single-quoted measurement: `INSERT 'bikes' bikes_available=3`
 	Applicable query: `SELECT * FROM "\'bikes\'"`
 <br>
 <br>
-	Write with an unquoted measurement: `INSERT bikes bikes_available=3`  
+	Write with an unquoted measurement: `INSERT bikes bikes_available=3`
 	Applicable query: `SELECT * FROM "bikes"`
 <br>
 <br>
 * Double quote field values that are strings.
 <br>
 <br>
-	Write: `INSERT bikes happiness="level 2"`  
+	Write: `INSERT bikes happiness="level 2"`
 	Applicable query: `SELECT * FROM "bikes" WHERE "happiness"='level 2'`
 <br>
 <br>
 * Special characters should be escaped with a backslash and not placed in quotes.
 <br>
 <br>
-	Write: `INSERT wacky va\"ue=4`  
+	Write: `INSERT wacky va\"ue=4`
 	Applicable query: `SELECT "va\"ue" FROM "wacky"`
 
 See the [Line Protocol](/influxdb/v1.5/write_protocols/) documentation for more information.

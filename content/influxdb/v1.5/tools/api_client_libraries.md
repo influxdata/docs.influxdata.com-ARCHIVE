@@ -1,5 +1,5 @@
 ---
-title: API Client Libraries
+title: InfluxDB API client libraries
 aliases:
     - influxdb/v1.5/clients/api_client_libraries/
     - influxdb/v1.5/clients/
@@ -67,6 +67,5 @@ Functionality will vary, and there are, as yet, no standard features that all li
 ## Sensu
 - [sensu-influxdb-extension](https://github.com/jhrv/sensu-influxdb-extension) by [jhrv](https://github.com/jhrv)
 
-## SNMP agent 
+## SNMP agent
 - [snmpcollector](https://github.com/toni-moreno/snmpcollector)  by [toni-moreno](https://github.com/toni-moreno) A full featured Generic SNMP data collector with Web Administration Interface for InfluxDB.
-

@@ -52,6 +52,6 @@ To enable the Time Series Index (TSI):
 2. Restart the database.
 
 * Existing shards will continue to use the in-memory index.
-* New shards will use the new disk-based TSI (time series index).
+* New shards will use the new disk-based TSI (time series index) indexing.
 
 > ***Note:*** To verify that you’re using disk-based indexing, write some data and then look at your `data/<database>/<retention policy>/<shard id>` directory. You should see a subdirectory called `index`.

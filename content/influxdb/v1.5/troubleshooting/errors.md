@@ -1,7 +1,8 @@
 ---
-title: Error Messages
+title: InfluxDB error messages
 menu:
   influxdb_1_5:
+    name: Error messages
     weight: 30
     parent: troubleshooting
 ---

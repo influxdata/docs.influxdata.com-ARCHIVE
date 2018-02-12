@@ -1,8 +1,9 @@
 ---
-title: Functions
+title: InfluxQL functions
 
 menu:
   influxdb_1_5:
+    name: Functions
     weight: 60
     parent: query_language
 ---
@@ -22,25 +23,25 @@ Aggregate, select, transform, and predict data with InfluxQL functions.
     * [STDDEV()](#stddev)
     * [SUM()](#sum)
 * [Selectors](#selectors)
-    * [BOTTOM()](#bottom)        
-    * [FIRST()](#first)          
-    * [LAST()](#last)            
-    * [MAX()](#max)              
-    * [MIN()](#min)              
+    * [BOTTOM()](#bottom)
+    * [FIRST()](#first)
+    * [LAST()](#last)
+    * [MAX()](#max)
+    * [MIN()](#min)
     * [PERCENTILE()](#percentile)
-    * [SAMPLE()](#sample)        
-    * [TOP()](#top)         
+    * [SAMPLE()](#sample)
+    * [TOP()](#top)
 * [Transformations](#Transformations)
-    * [CEILING()](#ceiling)  
-    * [CUMULATIVE_SUM()](#cumulative-sum)                    
-    * [DERIVATIVE()](#derivative)                          
-    * [DIFFERENCE()](#difference)                          
-    * [ELAPSED()](#elapsed)                                
-    * [FLOOR()](#floor)                                    
-    * [HISTOGRAM()](#histogram)                            
-    * [MOVING_AVERAGE()](#moving-average)                  
+    * [CEILING()](#ceiling)
+    * [CUMULATIVE_SUM()](#cumulative-sum)
+    * [DERIVATIVE()](#derivative)
+    * [DIFFERENCE()](#difference)
+    * [ELAPSED()](#elapsed)
+    * [FLOOR()](#floor)
+    * [HISTOGRAM()](#histogram)
+    * [MOVING_AVERAGE()](#moving-average)
     * [NON_NEGATIVE_DERIVATIVE()](#non-negative-derivative)
-    * [NON_NEGATIVE_DIFFERENCE()](#non-negative-difference) 
+    * [NON_NEGATIVE_DIFFERENCE()](#non-negative-difference)
 * [Predictors](#predictors)
     * [HOLT_WINTERS()](#holt-winters)
 * [Other](#other)
@@ -50,7 +51,7 @@ Aggregate, select, transform, and predict data with InfluxQL functions.
         * [Rename the Output Field Key](#rename-the-output-field-key)
         * [Change the Values Reported for Intervals with no Data](#change-the-values-reported-for-intervals-with-no-data)
     * [Common Issues with Functions](#common-issues-with-functions)
-        
+
 # Aggregations
 
 ## COUNT()
@@ -69,15 +70,15 @@ SELECT COUNT(DISTINCT( [ * | <field_key> | /<regular_expression>/ ] )) [...]
 
 ### Description of Syntax
 
-`COUNT(field_key)`  
+`COUNT(field_key)`
 &emsp;&emsp;&emsp;
 Returns the number of field values associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`COUNT(/regular_expression/)`  
+`COUNT(/regular_expression/)`
 &emsp;&emsp;&emsp;
 Returns the number of field values associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`COUNT(*)`  
+`COUNT(*)`
 &emsp;&emsp;&emsp;
 Returns the number of field values associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
@@ -200,15 +201,15 @@ SELECT COUNT(DISTINCT( [ * | <field_key> | /<regular_expression>/ ] )) [...]
 
 ### Description of Syntax
 
-`DISTINCT(field_key)`  
+`DISTINCT(field_key)`
 &emsp;&emsp;&emsp;
 Returns the unique field values associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`DISTINCT(/regular_expression/)`  
+`DISTINCT(/regular_expression/)`
 &emsp;&emsp;&emsp;
 Returns the unique field values associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`DISTINCT(*)`  
+`DISTINCT(*)`
 &emsp;&emsp;&emsp;
 Returns the unique field values associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
@@ -350,15 +351,15 @@ InfluxDB calculates the area under the curve for subsequent field values and con
 The `unit` argument is an integer followed by a [duration literal](/influxdb/v1.3/query_language/spec/#literals) and it is optional.
 If the query does not specify the `unit`, the unit defaults to one second (`1s`).
 
-`INTEGRAL(field_key)`  
+`INTEGRAL(field_key)`
 &emsp;&emsp;&emsp;
 Returns the area under the curve for subsequent field values assoicated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`INTEGRAL(/regular_expression/)`  
+`INTEGRAL(/regular_expression/)`
 &emsp;&emsp;&emsp;
 Returns the are under the curve for subsequent field values associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`INTEGRAL(*)`  
+`INTEGRAL(*)`
 &emsp;&emsp;&emsp;
 Returns the average field value associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
@@ -449,15 +450,15 @@ SELECT MEAN( [ * | <field_key> | /<regular_expression>/ ] ) [INTO_clause] FROM_c
 
 ### Description of Syntax
 
-`MEAN(field_key)`  
+`MEAN(field_key)`
 &emsp;&emsp;&emsp;
 Returns the average field value associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`MEAN(/regular_expression/)`  
+`MEAN(/regular_expression/)`
 &emsp;&emsp;&emsp;
 Returns the average field value associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`MEAN(*)`  
+`MEAN(*)`
 &emsp;&emsp;&emsp;
 Returns the average field value associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
@@ -528,15 +529,15 @@ SELECT MEDIAN( [ * | <field_key> | /<regular_expression>/ ] ) [INTO_clause] FROM
 
 ### Description of Syntax
 
-`MEDIAN(field_key)`  
+`MEDIAN(field_key)`
 &emsp;&emsp;&emsp;
 Returns the middle field value associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`MEDIAN(/regular_expression/)`  
+`MEDIAN(/regular_expression/)`
 &emsp;&emsp;&emsp;
 Returns the middle field value associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`MEDIAN(*)`  
+`MEDIAN(*)`
 &emsp;&emsp;&emsp;
 Returns the middle field value associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
@@ -609,15 +610,15 @@ SELECT MODE( [ * | <field_key> | /<regular_expression>/ ] ) [INTO_clause] FROM_c
 
 ### Description of Syntax
 
-`MODE(field_key)`  
+`MODE(field_key)`
 &emsp;&emsp;&emsp;
 Returns the most frequent field value associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`MODE(/regular_expression/)`  
+`MODE(/regular_expression/)`
 &emsp;&emsp;&emsp;
 Returns the most frequent field value associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`MODE(*)`  
+`MODE(*)`
 &emsp;&emsp;&emsp;
 Returns the most frequent field value associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
@@ -687,15 +688,15 @@ SELECT SPREAD( [ * | <field_key> | /<regular_expression>/ ] ) [INTO_clause] FROM
 
 ### Description of Syntax
 
-`SPREAD(field_key)`  
+`SPREAD(field_key)`
 &emsp;&emsp;&emsp;
 Returns the difference between the minimum and maximum field values associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`SPREAD(/regular_expression/)`  
+`SPREAD(/regular_expression/)`
 &emsp;&emsp;&emsp;
 Returns the difference between the minimum and maximum field values associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`SPREAD(*)`  
+`SPREAD(*)`
 &emsp;&emsp;&emsp;
 Returns the difference between the minimum and maximum field values associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
@@ -767,15 +768,15 @@ SELECT STDDEV( [ * | <field_key> | /<regular_expression>/ ] ) [INTO_clause] FROM
 
 ### Description of Syntax
 
-`STDDEV(field_key)`  
+`STDDEV(field_key)`
 &emsp;&emsp;&emsp;
 Returns the standard deviation of field values associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`STDDEV(/regular_expression/)`  
+`STDDEV(/regular_expression/)`
 &emsp;&emsp;&emsp;
 Returns the standard deviation of field values associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`STDDEV(*)`  
+`STDDEV(*)`
 &emsp;&emsp;&emsp;
 Returns the standard deviation of field values associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
@@ -818,7 +819,7 @@ time                   stddev_water_level
 1970-01-01T00:00:00Z   2.279144584196141
 ```
 
-The query returns the standard deviation of the field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement. 
+The query returns the standard deviation of the field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement.
 
 #### Example 4: Calculate the standard deviation for the field values associated with a field key and include several clauses
 ```
@@ -846,15 +847,15 @@ SELECT SUM( [ * | <field_key> | /<regular_expression>/ ] ) [INTO_clause] FROM_cl
 
 ### Description of Syntax
 
-`SUM(field_key)`  
+`SUM(field_key)`
 &emsp;&emsp;&emsp;
 Returns the sum of field values associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`SUM(/regular_expression/)`  
+`SUM(/regular_expression/)`
 &emsp;&emsp;&emsp;
 Returns the sum of field values associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`SUM(*)`  
+`SUM(*)`
 &emsp;&emsp;&emsp;
 Returns the sums of field values associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
@@ -928,15 +929,15 @@ SELECT BOTTOM(<field_key>[,<tag_key(s)>],<N> )[,<tag_key(s)>|<field_key(s)>] [IN
 
 ### Description of Syntax
 
-`BOTTOM(field_key,N)`  
+`BOTTOM(field_key,N)`
 &emsp;&emsp;&emsp;
 Returns the smallest N field values associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`BOTTOM(field_key,tag_key(s),N)`  
+`BOTTOM(field_key,tag_key(s),N)`
 &emsp;&emsp;&emsp;
 Returns the smallest field value for N tag values of the [tag key](/influxdb/v1.3/concepts/glossary/#tag-key).
 
-`BOTTOM(field_key,N),tag_key(s),field_key(s)`  
+`BOTTOM(field_key,N),tag_key(s),field_key(s)`
 &emsp;&emsp;&emsp;
 Returns the smallest N field values associated with the field key in the parentheses and the relevant [tag](/influxdb/v1.3/concepts/glossary/#tag) and/or [field](/influxdb/v1.3/concepts/glossary/#field).
 
@@ -1075,7 +1076,7 @@ In those cases, the system preserves the specified tag as a tag in the newly wri
 The first query in the codeblock below returns the smallest field values in the `water_level` field key for two tag values associated with the `location` tag key.
 It also writes those results to the `bottom_water_levels` measurement.
 
-The second query [shows](/influxdb/v1.3/query_language/schema_exploration/#show-tag-keys) that InfluxDB preserved the `location` tag as a tag in the `bottom_water_levels` measurement. 
+The second query [shows](/influxdb/v1.3/query_language/schema_exploration/#show-tag-keys) that InfluxDB preserved the `location` tag as a tag in the `bottom_water_levels` measurement.
 ```
 > SELECT BOTTOM("water_level","location",2) INTO "bottom_water_levels" FROM "h2o_feet"
 
@@ -1102,19 +1103,19 @@ SELECT FIRST(<field_key>)[,<tag_key(s)>|<field_key(s)>] [INTO_clause] FROM_claus
 
 ### Description of Syntax
 
-`FIRST(field_key)`  
+`FIRST(field_key)`
 &emsp;&emsp;&emsp;
 Returns the oldest field value (determined by timestamp) associated with the field key.
 
-`FIRST(/regular_expression/)`  
+`FIRST(/regular_expression/)`
 &emsp;&emsp;&emsp;
 Returns the oldest field value (determined by timestamp) associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`FIRST(*)`  
+`FIRST(*)`
 &emsp;&emsp;&emsp;
 Returns the oldest field value (determined by timestamp) associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
-`FIRST(field_key),tag_key(s),field_key(s)`  
+`FIRST(field_key),tag_key(s),field_key(s)`
 &emsp;&emsp;&emsp;
 Returns the oldest field value (determined by timestamp) associated with the field key in the parentheses and the relevant [tag](/influxdb/v1.3/concepts/glossary/#tag) and/or [field](/influxdb/v1.3/concepts/glossary/#field).
 
@@ -1198,19 +1199,19 @@ SELECT LAST(<field_key>)[,<tag_key(s)>|<field_keys(s)>] [INTO_clause] FROM_claus
 
 ### Description of Syntax
 
-`LAST(field_key)`  
+`LAST(field_key)`
 &emsp;&emsp;&emsp;
 Returns the newest field value (determined by timestamp) associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`LAST(/regular_expression/)`  
+`LAST(/regular_expression/)`
 &emsp;&emsp;&emsp;
 Returns the newest field value (determined by timestamp) associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`LAST(*)`  
+`LAST(*)`
 &emsp;&emsp;&emsp;
 Returns the newest field value (determined by timestamp) associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
-`LAST(field_key),tag_key(s),field_key(s)`  
+`LAST(field_key),tag_key(s),field_key(s)`
 &emsp;&emsp;&emsp;
 Returns the newest field value (determined by timestamp) associated with the field key in the parentheses and the relevant [tag](/influxdb/v1.3/concepts/glossary/#tag) and/or [field](/influxdb/v1.3/concepts/glossary/#field).
 
@@ -1295,19 +1296,19 @@ SELECT MAX(<field_key>)[,<tag_key(s)>|<field__key(s)>] [INTO_clause] FROM_clause
 
 ### Description of Syntax
 
-`MAX(field_key)`  
+`MAX(field_key)`
 &emsp;&emsp;&emsp;
 Returns the greatest field value associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`MAX(/regular_expression/)`  
+`MAX(/regular_expression/)`
 &emsp;&emsp;&emsp;
 Returns the greatest field value associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`MAX(*)`  
+`MAX(*)`
 &emsp;&emsp;&emsp;
 Returns the greatest field value associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
-`MAX(field_key),tag_key(s),field_key(s)`  
+`MAX(field_key),tag_key(s),field_key(s)`
 &emsp;&emsp;&emsp;
 Returns the greatest field value associated with the field key in the parentheses and the relevant [tag](/influxdb/v1.3/concepts/glossary/#tag) and/or [field](/influxdb/v1.3/concepts/glossary/#field).
 
@@ -1391,19 +1392,19 @@ SELECT MIN(<field_key>)[,<tag_key(s)>|<field_key(s)>] [INTO_clause] FROM_clause 
 
 ### Description of Syntax
 
-`MIN(field_key)`  
+`MIN(field_key)`
 &emsp;&emsp;&emsp;
 Returns the lowest field value associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`MIN(/regular_expression/)`  
+`MIN(/regular_expression/)`
 &emsp;&emsp;&emsp;
 Returns the lowest field value associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`MIN(*)`  
+`MIN(*)`
 &emsp;&emsp;&emsp;
 Returns the lowest field value associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
-`MIN(field_key),tag_key(s),field_key(s)`  
+`MIN(field_key),tag_key(s),field_key(s)`
 &emsp;&emsp;&emsp;
 Returns the lowest field value associated with the field key in the parentheses and the relevant [tag](/influxdb/v1.3/concepts/glossary/#tag) and/or [field](/influxdb/v1.3/concepts/glossary/#field).
 
@@ -1487,19 +1488,19 @@ SELECT PERCENTILE(<field_key>, <N>)[,<tag_key(s)>|<field_key(s)>] [INTO_clause] 
 
 ### Description of Syntax
 
-`PERCENTILE(field_key,N)`  
+`PERCENTILE(field_key,N)`
 &emsp;&emsp;&emsp;
 Returns the Nth percentile field value associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`PERCENTILE(/regular_expression/,N)`  
+`PERCENTILE(/regular_expression/,N)`
 &emsp;&emsp;&emsp;
 Returns the Nth percentile field value associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`PERCENTILE(*,N)`  
+`PERCENTILE(*,N)`
 &emsp;&emsp;&emsp;
 Returns the Nth percentile field value associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
-`PERCENTILE(field_key,N),tag_key(s),field_key(s)`  
+`PERCENTILE(field_key,N),tag_key(s),field_key(s)`
 &emsp;&emsp;&emsp;
 Returns the Nth percentile field value associated with the field key in the parentheses and the relevant [tag](/influxdb/v1.3/concepts/glossary/#tag) and/or [field](/influxdb/v1.3/concepts/glossary/#field).
 
@@ -1589,19 +1590,19 @@ SELECT SAMPLE(<field_key>, <N>)[,<tag_key(s)>|<field_key(s)>] [INTO_clause] FROM
 
 ### Description of Syntax
 
-`SAMPLE(field_key,N)`  
+`SAMPLE(field_key,N)`
 &emsp;&emsp;&emsp;
 Returns N randomly selected field values associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`SAMPLE(/regular_expression/,N)`  
+`SAMPLE(/regular_expression/,N)`
 &emsp;&emsp;&emsp;
 Returns N randomly selected field values associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`SAMPLE(*,N)`  
+`SAMPLE(*,N)`
 &emsp;&emsp;&emsp;
 Returns N randomly selected field values associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
-`SAMPLE(field_key,N),tag_key(s),field_key(s)`  
+`SAMPLE(field_key,N),tag_key(s),field_key(s)`
 &emsp;&emsp;&emsp;
 Returns N randomly selected field values associated with the field key in the parentheses and the relevant [tag](/influxdb/v1.3/concepts/glossary/#tag) and/or [field](/influxdb/v1.3/concepts/glossary/#field).
 
@@ -1725,15 +1726,15 @@ SELECT TOP( <field_key>[,<tag_key(s)>],<N> )[,<tag_key(s)>|<field_key(s)>] [INTO
 
 ### Description of Syntax
 
-`TOP(field_key,N)`  
+`TOP(field_key,N)`
 &emsp;&emsp;&emsp;
 Returns the greatest N field values associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`TOP(field_key,tag_key(s),N)`  
+`TOP(field_key,tag_key(s),N)`
 &emsp;&emsp;&emsp;
 Returns the greatest field value for N tag values of the [tag key](/influxdb/v1.3/concepts/glossary/#tag-key).
 
-`TOP(field_key,N),tag_key(s),field_key(s)`  
+`TOP(field_key,N),tag_key(s),field_key(s)`
 &emsp;&emsp;&emsp;
 Returns the greatest N field values associated with the field key in the parentheses and the relevant [tag](/influxdb/v1.3/concepts/glossary/#tag) and/or [field](/influxdb/v1.3/concepts/glossary/#field).
 
@@ -1875,7 +1876,7 @@ In those cases, the system preserves the specified tag as a tag in the newly wri
 The first query in the codeblock below returns the greatest field values in the `water_level` field key for two tag values associated with the `location` tag key.
 It also writes those results to the `top_water_levels` measurement.
 
-The second query [shows](/influxdb/v1.3/query_language/schema_exploration/#show-tag-keys) that InfluxDB preserved the `location` tag as a tag in the `top_water_levels` measurement. 
+The second query [shows](/influxdb/v1.3/query_language/schema_exploration/#show-tag-keys) that InfluxDB preserved the `location` tag as a tag in the `top_water_levels` measurement.
 ```
 > SELECT TOP("water_level","location",2) INTO "top_water_levels" FROM "h2o_feet"
 
@@ -1910,15 +1911,15 @@ SELECT CUMULATIVE_SUM( [ * | <field_key> | /<regular_expression>/ ] ) [INTO_clau
 
 ### Description of Basic Syntax
 
-`CUMULATIVE_SUM(field_key)`  
+`CUMULATIVE_SUM(field_key)`
 &emsp;&emsp;&emsp;
 Returns the running total of subsequent field values associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`CUMULATIVE_SUM(/regular_expression/)`  
+`CUMULATIVE_SUM(/regular_expression/)`
 &emsp;&emsp;&emsp;
 Returns the running total of subsequent field values associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`CUMULATIVE_SUM(*)`  
+`CUMULATIVE_SUM(*)`
 &emsp;&emsp;&emsp;
 Returns the running total of subsequent field values associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
@@ -2081,15 +2082,15 @@ InfluxDB calculates the difference between subsequent field values and converts 
 The `unit` argument is an integer followed by a [duration literal](/influxdb/v1.3/query_language/spec/#literals) and it is optional.
 If the query does not specify the `unit` the unit defaults to one second (`1s`).
 
-`DERIVATIVE(field_key)`  
+`DERIVATIVE(field_key)`
 &emsp;&emsp;&emsp;
 Returns the rate of change between subsequent field values associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`DERIVATIVE(/regular_expression/)`  
+`DERIVATIVE(/regular_expression/)`
 &emsp;&emsp;&emsp;
 Returns the rate of change between subsequent field values associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`DERIVATIVE(*)`  
+`DERIVATIVE(*)`
 &emsp;&emsp;&emsp;
 Returns the rate of change between subsequent field values associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
@@ -2363,15 +2364,15 @@ SELECT DIFFERENCE( [ * | <field_key> | /<regular_expression>/ ] ) [INTO_clause] 
 ```
 
 ### Description of Basic Syntax
-`DIFFERENCE(field_key)`  
+`DIFFERENCE(field_key)`
 &emsp;&emsp;&emsp;
 Returns the difference between subsequent field values associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`DIFFERENCE(/regular_expression/)`  
+`DIFFERENCE(/regular_expression/)`
 &emsp;&emsp;&emsp;
 Returns the difference between subsequent field values associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`DIFFERENCE(*)`  
+`DIFFERENCE(*)`
 &emsp;&emsp;&emsp;
 Returns the difference between subsequent field values associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
@@ -2524,15 +2525,15 @@ InfluxDB calculates the difference between subsequent timestamps.
 The `unit` option is an integer followed by a [duration literal](/influxdb/v1.3/query_language/spec/#literals) and it determines the unit of the returned difference.
 If the query does not specify the `unit` option the query returns the difference between timestamps in nanoseconds.
 
-`ELAPSED(field_key)`  
+`ELAPSED(field_key)`
 &emsp;&emsp;&emsp;
 Returns the difference between subsequent timestamps associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`ELAPSED(/regular_expression/)`  
+`ELAPSED(/regular_expression/)`
 &emsp;&emsp;&emsp;
 Returns the difference between subsequent timestamps associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`ELAPSED(*)`  
+`ELAPSED(*)`
 &emsp;&emsp;&emsp;
 Returns the difference between subsequent timestamps associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
@@ -2593,7 +2594,7 @@ time                   elapsed_level description   elapsed_water_level
 The query returns the difference (in minutes) between subsequent timestamps associated with each field key in the `h2o_feet`
 measurement.
 The `h2o_feet` measurement has two field keys: `level description` and `water_level`.
- 
+
 #### Example 4: Calculate the elapsed time between field values associated with each field key that matches a regular expression and specify the unit option
 ```
 > SELECT ELAPSED(/level/,1s) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:12:00Z'
@@ -2707,15 +2708,15 @@ SELECT MOVING_AVERAGE( [ * | <field_key> | /<regular_expression>/ ] , <N> ) [INT
 `MOVING_AVERAGE()` calculates the rolling average across a window of `N` subsequent field values.
 The `N` argument is an integer and it is required.
 
-`MOVING_AVERAGE(field_key,N)`  
+`MOVING_AVERAGE(field_key,N)`
 &emsp;&emsp;&emsp;
 Returns the rolling average across `N` field values associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`MOVING_AVERAGE(/regular_expression/,N)`  
+`MOVING_AVERAGE(/regular_expression/,N)`
 &emsp;&emsp;&emsp;
 Returns the rolling average across `N` field values associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`MOVING_AVERAGE(*,N)`  
+`MOVING_AVERAGE(*,N)`
 &emsp;&emsp;&emsp;
 Returns the rolling average across `N` field values associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
@@ -2757,7 +2758,7 @@ time                   moving_average
 
 The query returns the rolling average across a two-field-value window for the `water_level` field key and the `h2o_feet` measurement.
 The first result (`2.09`) is the average of the first two points in the raw data: (`2.064 + 2.116) / 2`).
-The second result (`2.072`) is the average of the second two points in the raw data: (`2.116 + 2.028) / 2`). 
+The second result (`2.072`) is the average of the second two points in the raw data: (`2.116 + 2.028) / 2`).
 
 #### Example 2: Calculate the moving average of the field values associated with each field key in a measurement
 ```
@@ -2873,15 +2874,15 @@ The `unit` argument is an integer followed by a [duration literal](/influxdb/v1.
 If the query does not specify the `unit`, the unit defaults to one second (`1s`).
 `NON_NEGATIVE_DERIVATIVE()` returns only positive rates of change or rates of change that equal zero.
 
-`NON_NEGATIVE_DERIVATIVE(field_key)`  
+`NON_NEGATIVE_DERIVATIVE(field_key)`
 &emsp;&emsp;&emsp;
 Returns the non-negative rate of change between subsequent field values associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`NON_NEGATIVE_DERIVATIVE(/regular_expression/)`  
+`NON_NEGATIVE_DERIVATIVE(/regular_expression/)`
 &emsp;&emsp;&emsp;
 Returns the non-negative rate of change between subsequent field values associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`NON_NEGATIVE_DERIVATIVE(*)`  
+`NON_NEGATIVE_DERIVATIVE(*)`
 &emsp;&emsp;&emsp;
 Returns the non-negative rate of change between subsequent field values associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
@@ -2938,15 +2939,15 @@ SELECT NON_NEGATIVE_DIFFERENCE( [ * | <field_key> | /<regular_expression>/ ] ) [
 ```
 
 ### Description of Basic Syntax
-`NON_NEGATIVE_DIFFERENCE(field_key)`  
+`NON_NEGATIVE_DIFFERENCE(field_key)`
 &emsp;&emsp;&emsp;
 Returns the non-negative difference between subsequent field values associated with the [field key](/influxdb/v1.3/concepts/glossary/#field-key).
 
-`NON_NEGATIVE_DIFFERENCE(/regular_expression/)`  
+`NON_NEGATIVE_DIFFERENCE(/regular_expression/)`
 &emsp;&emsp;&emsp;
 Returns the non-negative difference between subsequent field values associated with each field key that matches the [regular expression](/influxdb/v1.3/query_language/data_exploration/#regular-expressions).
 
-`NON_NEGATIVE_DIFFERENCE(*)`  
+`NON_NEGATIVE_DIFFERENCE(*)`
 &emsp;&emsp;&emsp;
 Returns the non-negative difference between subsequent field values associated with each field key in the [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
@@ -3091,7 +3092,7 @@ The blue line shows the results of the query:
 
 ### Common Issues with `HOLT_WINTERS()`
 
-#### Issue 1: `HOLT_WINTERS()` and receiving fewer than `N` points 
+#### Issue 1: `HOLT_WINTERS()` and receiving fewer than `N` points
 In some cases, users may receive fewer predicted points than
 requested by the `N` parameter.
 That behavior occurs when the math becomes unstable and cannot forecast more
@@ -3242,7 +3243,7 @@ time                  median  mode
 1970-01-01T00:00:00Z  4.124   2.69
 ```
 
-### Change the Values Reported for Intervals with no Data 
+### Change the Values Reported for Intervals with no Data
 
 By default, queries with an InfluxQL function and a [`GROUP BY time()` clause](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals) report null values for intervals with no data.
 Include `fill()` at the end of the `GROUP BY` clause to change that value.
@@ -3365,14 +3366,14 @@ A query with more than one function and no time range in the [`WHERE` clause](/i
 A query with more than one function and a time range in the `WHERE` clause returns the lower time bound as the timestamp.
 
 A query with a selector function and a `GROUP BY time()` clause returns the lower time bound for each `GROUP BY time()` interval.
-Note that the `SAMPLE()` function behaves differently from other selector functions when paired with the `GROUP BY time()` clause. 
-See [Common Issues with `SAMPLE()`](#common-issues-with-sample) for more information. 
+Note that the `SAMPLE()` function behaves differently from other selector functions when paired with the `GROUP BY time()` clause.
+See [Common Issues with `SAMPLE()`](#common-issues-with-sample) for more information.
 
 ##### Examples
 <br>
 
 ##### Example 1: Use a single selector function with a single field key and without a specified time range
-<br> 
+<br>
 ```
 > SELECT MAX("water_level") FROM "h2o_feet"
 
@@ -3450,7 +3451,3 @@ time                  max
 2015-08-18T00:12:00Z  7.887
 ```
 The query returns the lower time bound for each `GROUP BY time()` interval as the timestamp.
-
-
-
-

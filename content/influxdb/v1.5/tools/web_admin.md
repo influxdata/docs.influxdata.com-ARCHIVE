@@ -1,8 +1,9 @@
 ---
-title: Web Admin Interface
+title: InfluxDB web admin interface
 
 menu:
   influxdb_1_5:
+    name: Web admin interface
     weight: 30
     parent: tools
 ---

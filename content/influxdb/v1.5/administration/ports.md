@@ -1,8 +1,9 @@
 ---
-title: Ports
+title: InfluxDB ports
 
 menu:
   influxdb_1_5:
+    name: Ports
     weight: 20
     parent: administration
 ---

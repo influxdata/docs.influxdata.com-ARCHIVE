@@ -2,12 +2,12 @@
 title: Guides
 ---
 
-## [Writing Data](/influxdb/v1.5/guides/writing_data/)
+## [Writing data with the HTTP API](/influxdb/v1.5/guides/writing_data/)
 
-## [Querying Data](/influxdb/v1.5/guides/querying_data/)
+## [Querying data with the HTTP API](/influxdb/v1.5/guides/querying_data/)
 
-## [Downsampling and Data Retention](/influxdb/v1.5/guides/downsampling_and_retention/)
+## [Downsampling and data retention](/influxdb/v1.5/guides/downsampling_and_retention/)
 
-## [Hardware Sizing Guidelines](/influxdb/v1.5/guides/hardware_sizing/)
+## [Hardware sizing guidelines](/influxdb/v1.5/guides/hardware_sizing/)
 
-## [HTTPS Setup](/influxdb/v1.5/administration/https_setup/)
+## [HTTPS setup](/influxdb/v1.5/administration/https_setup/)

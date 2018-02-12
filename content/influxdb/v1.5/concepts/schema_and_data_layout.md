@@ -1,5 +1,5 @@
 ---
-title: Schema Design
+title: Schema design
 menu:
   influxdb_1_5:
     weight: 70
@@ -18,9 +18,9 @@ There are, however, general guidelines to follow and pitfalls to avoid when desi
   </tr>
 </table>
 
-# General Recommendations
+# General recommendations
 
-## Encouraged Schema Design
+## Encouraged schema design
 
 In no particular order, we recommend that you:
 
@@ -36,7 +36,7 @@ In general, your queries should guide what gets stored as a tag and what gets st
 * Store data in fields if you plan to use them with an [InfluxQL function](/influxdb/v1.5/query_language/functions/)
 * Store data in fields if you *need* them to be something other than a string - [tag values](/influxdb/v1.5/concepts/glossary/#tag-value) are always interpreted as strings
 
-### *Avoid using InfluxQL Keywords as identifier names*
+### *Avoid using InfluxQL keywords as identifier names*
 
 This isn't necessary, but it simplifies writing queries; you won't have to wrap those identifiers in double quotes.
 Identifiers are database names, [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) names, [user](/influxdb/v1.5/concepts/glossary/#user) names, [measurement](/influxdb/v1.5/concepts/glossary/#measurement) names, [tag keys](/influxdb/v1.5/concepts/glossary/#tag-key), and [field keys](/influxdb/v1.5/concepts/glossary/#field-key).
@@ -44,7 +44,7 @@ See [InfluxQL Keywords](https://github.com/influxdata/influxql/blob/master/READM
 
 Note that you will also need to wrap identifiers in double quotes in queries if they contain characters other than `[A-z,_]`.
 
-## Discouraged Schema Design
+## Discouraged schema design
 
 In no particular order, we recommend that you:
 
@@ -53,7 +53,7 @@ In no particular order, we recommend that you:
 [Tags](/influxdb/v1.5/concepts/glossary/#tag) containing highly variable information like UUIDs, hashes, and random strings will lead to a large number of series in the database, known colloquially as high series cardinality.
 High series cardinality is a primary driver of high memory usage for many database workloads.
 
-See [Hardware Sizing Guidelines](/influxdb/v1.5/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node) for [series cardinality](/influxdb/v1.5/concepts/glossary/#series-cardinality) recommendations based on your hardware. If the system has memory constraints, consider storing high-cardinality data as a field rather than a tag.
+See [Hardware sizing guidelines](/influxdb/v1.5/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node) for [series cardinality](/influxdb/v1.5/concepts/glossary/#series-cardinality) recommendations based on your hardware. If the system has memory constraints, consider storing high-cardinality data as a field rather than a tag.
 
 ### *Don't encode data in measurement names*
 
@@ -131,9 +131,9 @@ While both queries are similar, the use of multiple tags in Schema 2 avoids the 
 > SELECT mean("temp") FROM "weather_sensor" WHERE region = 'north'
 ```
 
-# Shard Group Duration Management
+# Shard group duration management
 
-## Shard Group Duration Overview
+## Shard group duration overview
 
 InfluxDB stores data in shard groups.
 Shard groups are organized by [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) (RP) and store data with timestamps that fall within a specific time interval.
@@ -151,7 +151,7 @@ The shard group duration is also configurable per RP.
 See [Retention Policy Management](/influxdb/v1.5/query_language/database_management/#retention-policy-management) for how to configure the
 shard group duration.
 
-## Shard Group Duration Recommendations
+## Shard group duration recommendations
 
 In general, shorter shard group durations allow the system to efficiently drop data.
 When InfluxDB enforces an RP it drops entire shard groups, not individual data points.

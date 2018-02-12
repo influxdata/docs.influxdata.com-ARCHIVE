@@ -1,5 +1,5 @@
 ---
-title: Clustering
+title: Clustering with InfluxDB
 aliases:
     - influxdb/v1.5/clustering/
     - influxdb/v1.5/clustering/cluster_setup/
@@ -7,6 +7,7 @@ aliases:
     - influxdb/v1.5/guides/clustering/
 menu:
   influxdb_1_5:
+    name: Clustering
     weight: 0
     parent: high_availability
 ---

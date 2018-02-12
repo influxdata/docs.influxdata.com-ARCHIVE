@@ -1,8 +1,9 @@
 ---
-title: Query Management
+title: InfluxDB query management
 
 menu:
   influxdb_1_5:
+    name: Query management
     weight: 20
     parent: troubleshooting
 ---
@@ -39,9 +40,9 @@ qid	  query															               database		  duration
 
 ##### Explanation of the output:
 <br>
-`qid`&emsp;&emsp;&emsp;&nbsp;The id number of the query. Use this value with [`KILL QUERY`](/influxdb/v1.5/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query).  
-`query`&emsp;&emsp;&thinsp;&thinsp;The query text.  
-`database`&emsp;The database targeted by the query.  
+`qid`&emsp;&emsp;&emsp;&nbsp;The id number of the query. Use this value with [`KILL QUERY`](/influxdb/v1.5/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query).
+`query`&emsp;&emsp;&thinsp;&thinsp;The query text.
+`database`&emsp;The database targeted by the query.
 `duration`&emsp;The length of time that the query has been running.
 See [Query Language Reference](/influxdb/v1.5/query_language/spec/#durations)
 for an explanation of InfluxDB's time units.

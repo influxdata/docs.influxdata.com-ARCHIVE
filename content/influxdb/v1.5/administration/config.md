@@ -1,5 +1,5 @@
 ---
-title: Configuring InfluxDB
+title: Configuring InfluxDB OSS
 menu:
   influxdb_1_5:
     name: Configuring InfluxDB
@@ -7,7 +7,7 @@ menu:
     parent: administration
 ---
 
-The InfluxDB configuration file contains configuration settings specific to a local node.
+The InfluxDB OSS configuration file contains configuration settings specific to a local node.
 
 #### Content
 

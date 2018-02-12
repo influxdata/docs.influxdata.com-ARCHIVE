@@ -1,13 +1,13 @@
 ---
-title: Troubleshooting
+title: Troubleshooting InfluxDB
 ---
 
-## [Frequently Asked Questions](/influxdb/v1.5/troubleshooting/frequently-asked-questions/)
+## [Frequently asked questions](/influxdb/v1.5/troubleshooting/frequently-asked-questions/)
 
 This page addresses frequent sources of confusion and places where InfluxDB behaves in an unexpected way relative to other database systems.
 Where applicable, it links to outstanding issues on GitHub.
 
-## [System Monitoring](/influxdb/v1.5/troubleshooting/statistics/)
+## [System monitoring](/influxdb/v1.5/troubleshooting/statistics/)
 
 System Monitoring means all statistical and diagnostic information made available to the user of the InfluxDB system, about the system itself.
 Its purpose is to assist with troubleshooting and performance analysis of the database itself.

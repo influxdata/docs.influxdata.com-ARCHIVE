@@ -1,18 +1,18 @@
 ---
-title: Query Language
+title: InfluxQL query language
 ---
 
 This section introduces InfluxQL, InfluxDB's SQL-like query language for
 interacting with data in InfluxDB.
 
-## InfluxQL Tutorial
+## InfluxQL tutorial
 The first seven documents in this section provide a tutorial-style introduction
 to InfluxQL.
 Feel free to download the dataset provided in
 [Sample Data](/influxdb/v1.5/query_language/data_download/) and follow along
 with the documentation.
 
-#### [Data Exploration](/influxdb/v1.5/query_language/data_exploration/)
+#### [Data exploration](/influxdb/v1.5/query_language/data_exploration/)
 
 Covers the query language basics for InfluxQL, including the
 [`SELECT` statement](/influxdb/v1.5/query_language/data_exploration/#the-basic-select-statement),
@@ -23,14 +23,14 @@ See Data Exploration to learn about
 [regular expressions](/influxdb/v1.5/query_language/data_exploration/#regular-expressions) in
 queries.
 
-#### [Schema Exploration](/influxdb/v1.5/query_language/schema_exploration/)
+#### [Schema exploration](/influxdb/v1.5/query_language/schema_exploration/)
 
 Covers queries that are useful for viewing and exploring your
 [schema](/influxdb/v1.5/concepts/glossary/#schema).
 See Schema Exploration for syntax explanations and examples of InfluxQL's `SHOW`
 queries.
 
-#### [Database Management](/influxdb/v1.5/query_language/database_management/)
+#### [Database management](/influxdb/v1.5/query_language/database_management/)
 
 Covers InfluxQL for managing
 [databases](/influxdb/v1.5/concepts/glossary/#database) and
@@ -39,11 +39,11 @@ InfluxDB.
 See Database Management for creating and dropping databases and retention
 policies as well as deleting and dropping data.
 
-#### [Functions](/influxdb/v1.5/query_language/functions/)
+#### [InfluxQL functions](/influxdb/v1.5/query_language/functions/)
 
 Covers all [InfluxQL functions](/influxdb/v1.5/query_language/functions/).
 
-#### [Continuous Queries](/influxdb/v1.5/query_language/continuous_queries/)
+#### [InfluxQL Continuous Queries](/influxdb/v1.5/query_language/continuous_queries/)
 
 Covers the
 [basic syntax](/influxdb/v1.5/query_language/continuous_queries/#basic-syntax)
@@ -59,11 +59,11 @@ This page also describes how to
 [`DROP`](/influxdb/v1.5/query_language/continuous_queries/#delete-cqs)
 Continuous Queries.
 
-#### [Mathematical Operators](/influxdb/v1.5/query_language/math_operators/)
+#### [Mathematical operators](/influxdb/v1.5/query_language/math_operators/)
 
 Covers the use of mathematical operators in InfluxQL.
 
-#### [Authentication and Authorization](/influxdb/v1.5/query_language/authentication_and_authorization/)
+#### [Authentication and authorization](/influxdb/v1.5/query_language/authentication_and_authorization/)
 
 Covers how to
 [set up authentication](/influxdb/v1.5/query_language/authentication_and_authorization/#set-up-authentication)
@@ -73,6 +73,6 @@ This page also describes the different
 [user types](/influxdb/v1.5/query_language/authentication_and_authorization/#user-types-and-their-privileges) and the InfluxQL for
 [managing database users](/influxdb/v1.5/query_language/authentication_and_authorization/#user-management-commands).
 
-## [InfluxQL Reference](/influxdb/v1.5/query_language/spec/)
+## [InfluxQL reference](/influxdb/v1.5/query_language/spec/)
 
 The reference documentation for InfluxQL.
