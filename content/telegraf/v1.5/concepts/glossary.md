@@ -1,5 +1,5 @@
 ---
-title: Glossary of Terms
+title: Glossary of terms
 menu:
   telegraf_1_5:
     weight: 30

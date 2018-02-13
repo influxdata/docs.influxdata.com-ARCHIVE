@@ -1,9 +1,9 @@
 ---
-title: Input Data Formats
+title: Input data formats
 
 menu:
   telegraf_1_5:
-    name: Input Data Formats
+    name: Input data formats
     weight: 20
     parent: concepts
 ---
@@ -65,7 +65,7 @@ I'll go over below.
 There are no additional configuration options for InfluxDB line-protocol. The
 metrics are parsed directly into Telegraf metrics.
 
-#### Influx Configuration:
+#### Influx configuration:
 
 ```toml
 [[inputs.exec]]
@@ -109,7 +109,7 @@ myjsonmetric a=5,b_c=6
 The _measurement_ _name_ is usually the name of the plugin,
 but can be overridden using the `name_override` config option.
 
-#### JSON Configuration:
+#### JSON configuration:
 
 The JSON data format supports specifying "tag keys". If specified, keys
 will be searched for in the root-level of the JSON blob. If the key(s) exist,
@@ -212,13 +212,13 @@ exec_mycollector,my_tag_1=foo,my_tag_2=baz a=5,b_c=6
 exec_mycollector,my_tag_1=bar,my_tag_2=baz a=7,b_c=8
 ```
 
-# Value:
+# Value
 
 The "value" data format translates single values into Telegraf metrics. This
 is done by assigning a measurement name and setting a single field ("value")
 as the parsed metric.
 
-#### Value Configuration:
+#### Value configuration
 
 You **must** tell Telegraf what type of metric to collect by using the
 `data_type` configuration option. Available options are:
@@ -248,7 +248,7 @@ name of the plugin.
   data_type = "integer" # required
 ```
 
-# Graphite:
+# Graphite
 
 The Graphite data format translates graphite _dot_ buckets directly into
 telegraf measurement names, with a single value field, and without any tags.
@@ -279,7 +279,7 @@ can also be specified multiple times.
 
 NOTE: `field*` cannot be used in conjunction with `measurement*`!
 
-#### Measurement & Tag Templates:
+#### Measurement and tag templates
 
 The most basic template is to specify a single transformation to apply to all
 incoming metrics. So the following template:
@@ -307,9 +307,9 @@ templates = [
 ]
 ```
 
-#### Field Templates:
+#### Field templates
 
-The field keyword tells Telegraf to give the metric that field name.
+The `field` keyword tells Telegraf to give the metric that field name.
 So the following template:
 
 ```toml
@@ -326,7 +326,7 @@ cpu.usage.idle.percent.eu-east 100
 => cpu_usage,region=eu-east idle_percent=100
 ```
 
-The field key can also be derived from all remaining elements of the graphite
+The `field` key can also be derived from all remaining elements of the graphite
 bucket by specifying `field*`:
 
 ```toml
@@ -365,7 +365,7 @@ mem.cached.localhost 256
 => mem_cached,host=localhost value=256
 ```
 
-#### Adding Tags:
+#### Adding tags
 
 Additional tags can be added to a metric that don't exist on the received metric.
 You can add additional tags by specifying them after the pattern.
@@ -388,7 +388,7 @@ cpu.usage.idle.eu-east 100
 There are many more options available,
 [More details can be found here](https://github.com/influxdata/influxdb/tree/master/services/graphite#templates)
 
-#### Graphite Configuration:
+#### Graphite configuration
 
 ```toml
 [[inputs.exec]]
@@ -424,14 +424,14 @@ There are many more options available,
   ]
 ```
 
-# Nagios:
+# Nagios
 
 There are no additional configuration options for Nagios line-protocol. The
 metrics are parsed directly into Telegraf metrics.
 
 Note: Nagios Input Data Formats is only supported in `exec` input plugin.
 
-#### Nagios Configuration:
+#### Nagios configuration
 
 ```toml
 [[inputs.exec]]
@@ -448,7 +448,7 @@ Note: Nagios Input Data Formats is only supported in `exec` input plugin.
   data_format = "nagios"
 ```
 
-# Collectd:
+# Collectd
 
 The collectd format parses the collectd binary network protocol.  Tags are
 created for host, instance, type, and type instance.  All collectd values are
@@ -467,7 +467,7 @@ Additional information including client setup can be found
 You can also change the path to the typesdb or add additional typesdb using
 `collectd_typesdb`.
 
-#### Collectd Configuration:
+#### Collectd configuration
 
 ```toml
 [[inputs.socket_listener]]

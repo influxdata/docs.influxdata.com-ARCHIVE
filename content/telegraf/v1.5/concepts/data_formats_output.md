@@ -1,9 +1,9 @@
 ---
-title: Output Data Formats
+title: Output data formats
 
 menu:
   telegraf_1_5:
-    name: Output Data Formats
+    name: Output data formats
     weight: 30
     parent: concepts
 ---
@@ -55,12 +55,12 @@ config option, for example, in the `file` output plugin:
 Each data_format has an additional set of configuration options available, which
 I'll go over below.
 
-# Influx:
+# Influx
 
 There are no additional configuration options for InfluxDB line-protocol. The
 metrics are serialized directly into InfluxDB line-protocol.
 
-### Influx Configuration:
+### Influx configuration
 
 ```toml
 [[outputs.file]]
@@ -74,7 +74,7 @@ metrics are serialized directly into InfluxDB line-protocol.
   data_format = "influx"
 ```
 
-# Graphite:
+# Graphite
 
 The Graphite data format translates Telegraf metrics into _dot_ buckets. A
 template can be specified for the output of Telegraf metrics into Graphite
@@ -104,7 +104,7 @@ tars.cpu-total.us-east-1.cpu.usage_user 0.89 1455320690
 tars.cpu-total.us-east-1.cpu.usage_idle 98.09 1455320690
 ```
 
-### Graphite Configuration:
+### Graphite configuration
 
 ```toml
 [[outputs.file]]
@@ -123,7 +123,7 @@ tars.cpu-total.us-east-1.cpu.usage_idle 98.09 1455320690
   template = "host.tags.measurement.field"
 ```
 
-# JSON:
+# JSON
 
 The JSON data format serialized Telegraf metrics in json format. The format is:
 
@@ -143,7 +143,7 @@ The JSON data format serialized Telegraf metrics in json format. The format is:
 }
 ```
 
-### JSON Configuration:
+### JSON configuration
 
 ```toml
 [[outputs.file]]

@@ -6,6 +6,17 @@ menu:
     parent: about_the_project
 ---
 
+## v1.4.3 [2018-02-01]
+
+### Configuration changes
+
+- `[data]` section in influxdb.conf: Default value for `cache-snapshot-memory-size` has been changed from `25m` to `256m`.
+
+### Bugfixes
+
+- Fix higher disk I/O utilization
+
+
 ## v1.4.2 [2017-11-15]
 
 Refer to the 1.4.0 breaking changes section if `influxd` fails to start with an `incompatible tsi1 index MANIFEST` error.

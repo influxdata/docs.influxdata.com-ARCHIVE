@@ -897,4 +897,4 @@ After running `influxd-ctl truncate-shards` and waiting three minutes, the outpu
 The `influx` tool, also known as the Command Line Interface (CLI), is available on all [data nodes](/enterprise_influxdb/v1.2/concepts/glossary/#data-node).
 Use `influx` to write data to your cluster, query data interactively, and view query output in different formats.
 
-The complete description of the `influx` tool is available in the [OSS InfluxDB documentation](/influxdb/v1.2/tools/shell/).
+The complete description of the `influx` tool is available in the [InfluxDB OSS documentation](/influxdb/v1.2/tools/shell/).

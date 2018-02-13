@@ -1,5 +1,5 @@
 ---
-title: Authentication and Authorization
+title: Authentication and authorization
 aliases:
     - influxdb/v1.4/administration/authentication_and_authorization/
 menu:
@@ -30,7 +30,7 @@ This document covers setting up and managing authentication and authorization in
 </table>
 
 > **Note:** Authentication and authorization should not be relied upon to prevent access and protect data from malicious actors.
-If additional security or compliance features are desired, InfluxDB should be run behind a third-party service.
+If additional security or compliance features are desired, InfluxDB should be run behind a  third party service.
 
 ## Authentication
 
@@ -41,7 +41,7 @@ When you enable authentication InfluxDB only executes HTTP requests that are sen
 > **Note:** Authentication only occurs at the HTTP request scope.
 Plugins do not currently have the ability to authenticate requests and service endpoints (for example, Graphite, collectd, etc.) are not authenticated.
 
-### Set up Authentication
+### Set up authentication
 
 #### 1. Create at least one [admin user](#admin-users).
 See the [authorization section](#authorization) for how to create an admin user.
@@ -54,22 +54,22 @@ InfluxDB will enforce authentication once there is an admin user.
 Enable authentication by setting the `auth-enabled` option to `true` in the `[http]` section of the configuration file:
 
 ```
-[http]  
-  enabled = true  
-  bind-address = ":8086"  
+[http]
+  enabled = true
+  bind-address = ":8086"
   auth-enabled = true # ✨
-  log-enabled = true  
-  write-tracing = false  
-  pprof-enabled = false  
-  https-enabled = false  
-  https-certificate = "/etc/ssl/influxdb.pem"  
+  log-enabled = true
+  write-tracing = false
+  pprof-enabled = false
+  https-enabled = false
+  https-certificate = "/etc/ssl/influxdb.pem"
 ```
 
 #### 3. Restart the process.
 
 Now InfluxDB will check user credentials on every request and will only process requests that have valid credentials for an existing user.
 
-### Authenticate Requests
+### Authenticate requests
 
 #### Authenticate with the HTTP API
 There are two options for authenticating with the [HTTP API](/influxdb/v1.4/tools/api/).
@@ -183,28 +183,28 @@ By default, authentication is disabled, all credentials are silently ignored, an
 #### Admin users
 Admin users have `READ` and `WRITE` access to all databases and full access to the following administrative queries:
 
-Database management:  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`CREATE DATABASE`, and `DROP DATABASE`  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DROP SERIES` and `DROP MEASUREMENT`  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`CREATE RETENTION POLICY`, `ALTER RETENTION POLICY`, and `DROP RETENTION POLICY`  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`CREATE CONTINUOUS QUERY` and `DROP CONTINUOUS QUERY`  
+Database management:
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`CREATE DATABASE`, and `DROP DATABASE`
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DROP SERIES` and `DROP MEASUREMENT`
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`CREATE RETENTION POLICY`, `ALTER RETENTION POLICY`, and `DROP RETENTION POLICY`
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`CREATE CONTINUOUS QUERY` and `DROP CONTINUOUS QUERY`
 
 See the [database management](/influxdb/v1.4/query_language/database_management/) and [continuous queries](/influxdb/v1.4/query_language/continuous_queries/) pages for a complete discussion of the commands listed above.
 
-User management:  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin user management:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`CREATE USER`](#create-a-new-admin-user), [`GRANT ALL PRIVILEGES`](#grant-administrative-privileges-to-an-existing-user), [`REVOKE ALL PRIVILEGES`](#revoke-administrative-privileges-from-an-admin-user), and [`SHOW USERS`](#show-all-existing-users-and-their-admin-status)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Non-admin user management:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`CREATE USER`](#create-a-new-non-admin-user), [`GRANT [READ,WRITE,ALL]`](#grant-read-write-or-all-database-privileges-to-an-existing-user), [`REVOKE [READ,WRITE,ALL]`](#revoke-read-write-or-all-database-privileges-from-an-existing-user), and [`SHOW GRANTS`](#show-a-user-s-database-privileges)  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;General user management:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`SET PASSWORD`](#re-set-a-user-s-password) and [`DROP USER`](#drop-a-user)  
+User management:
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin user management:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`CREATE USER`](#create-a-new-admin-user), [`GRANT ALL PRIVILEGES`](#grant-administrative-privileges-to-an-existing-user), [`REVOKE ALL PRIVILEGES`](#revoke-administrative-privileges-from-an-admin-user), and [`SHOW USERS`](#show-all-existing-users-and-their-admin-status)
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Non-admin user management:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`CREATE USER`](#create-a-new-non-admin-user), [`GRANT [READ,WRITE,ALL]`](#grant-read-write-or-all-database-privileges-to-an-existing-user), [`REVOKE [READ,WRITE,ALL]`](#revoke-read-write-or-all-database-privileges-from-an-existing-user), and [`SHOW GRANTS`](#show-a-user-s-database-privileges)
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;General user management:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`SET PASSWORD`](#re-set-a-user-s-password) and [`DROP USER`](#drop-a-user)
 
 See [below](#user-management-commands) for a complete discussion of the user management commands.
 
 #### Non-admin users
-Non-admin users can have one of the following three privileges per database:  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`READ`  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`WRITE`  
+Non-admin users can have one of the following three privileges per database:
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`READ`
+&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`WRITE`
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ALL` (both `READ` and `WRITE` access)
 
 `READ`, `WRITE`, and `ALL` privileges are controlled per user per database. A new non-admin user has no access to any database until they are specifically [granted privileges to a database](#grant-read-write-or-all-database-privileges-to-an-existing-user) by an admin user.

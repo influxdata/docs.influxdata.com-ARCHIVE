@@ -37,7 +37,7 @@ and the [data service](/enterprise_influxdb/v1.3/concepts/glossary/#data-service
 
 #### License key or file
 
-InfluxEnterprise requires a license key **OR** a license file to run.
+InfluxDB Enterprise requires a license key **OR** a license file to run.
 Your license key is available at [InfluxPortal](https://portal.influxdata.com/licenses).
 Contact support at the email we provided at signup to receive a license file.
 License files are required only if the nodes in your cluster cannot reach
@@ -56,7 +56,7 @@ setting in the meta node and data node configuration files.
 
 #### Load balancer
 
-InfluxEnterprise does not function as a load balancer.
+InfluxDB Enterprise does not function as a load balancer.
 You will need to configure your own load balancer to send client traffic to the
 data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.3/tools/api/)).
 

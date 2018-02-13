@@ -13,7 +13,7 @@ It is the second piece of the
 [TICK stack](https://influxdata.com/time-series-platform/).
 InfluxDB is meant to be used as a backing store for any use case involving large amounts of timestamped data, including DevOps monitoring, application metrics, IoT sensor data, and real-time analytics.
 
-## Key Features
+## Key features
 
 Here are some of the features that InfluxDB currently supports that make it a great choice for working with time series data.
 

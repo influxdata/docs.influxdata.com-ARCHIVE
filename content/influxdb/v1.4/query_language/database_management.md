@@ -1,5 +1,5 @@
 ---
-title: Database Management
+title: Database management
 
 menu:
   influxdb_1_4:
@@ -49,7 +49,7 @@ See the [Querying Data](/influxdb/v1.4/guides/querying_data/) guide for more on 
 > **Note:** When authentication is enabled, only admin users can execute most of the commands listed on this page.
 See the documentation on [authentication and authorization](/influxdb/v1.4/query_language/authentication_and_authorization/) for more information.
 
-## Data Management
+## Data management
 
 ### CREATE DATABASE
 
@@ -60,7 +60,7 @@ Creates a new database.
 CREATE DATABASE <database_name> [WITH [DURATION <duration>] [REPLICATION <n>] [SHARD DURATION <duration>] [NAME <retention-policy-name>]]
 ```
 
-#### Description of Syntax
+#### Description of syntax
 
 `CREATE DATABASE` requires a database [name](/influxdb/v1.4/troubleshooting/frequently-asked-questions/#what-words-and-characters-should-i-avoid-when-writing-data-to-influxdb).
 
@@ -344,7 +344,7 @@ Delete all measurements and data in a specific retention policy with:
 DROP RETENTION POLICY <retention_policy_name> ON <database_name>
 ```
 
-Delete the retention policy `what_is_time` in the `NOAA_water_database` database:  
+Delete the retention policy `what_is_time` in the `NOAA_water_database` database:
 ```bash
 > DROP RETENTION POLICY "what_is_time" ON "NOAA_water_database"
 >

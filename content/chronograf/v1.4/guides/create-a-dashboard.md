@@ -47,6 +47,7 @@ Chronograf allows you to move seamlessly between using the builder and manually 
 For our example, the query builder is used to generate a query that shows the average idle CPU usage grouped by host (in this case, there are three hosts).
 By default, Chronograf applies the [`MEAN()` function](/influxdb/latest/query_language/functions/#mean) to the data, groups averages into auto-generated time intervals (`:interval:`), and shows data for the past hour (`:dashboardTime:`).
 Those defaults are configurable using the query builder or by manually editing the query.
+
 In addition, the time range (`:dashboardTime:`) is [configurable on the dashboard](#step-6-configure-your-dashboard).
 
 ![Build your query](/img/chronograf/latest/g-dashboard-cell-query-builder.png)

@@ -9,6 +9,6 @@
 
 ---
 
-## [Configuration](/telegraf/v1.5/administration/configuration/)
+## [Configuring Telegraf](/telegraf/v1.5/administration/configuration/)
 
-## [Running as a Windows Service](/telegraf/v1.5/administration/windows_service/)
+## [Running as a Windows service](/telegraf/v1.5/administration/windows_service/)

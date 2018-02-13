@@ -1,5 +1,5 @@
 ---
-title: Error Messages
+title: Error messages
 menu:
   influxdb_1_4:
     weight: 30

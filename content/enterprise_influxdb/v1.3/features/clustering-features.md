@@ -1,5 +1,5 @@
 ---
-title: Cluster features
+title: InfluxDB Enterprise cluster features
 aliases:
     - /enterprise/v1.3/features/clustering-features/
 menu:
@@ -14,10 +14,10 @@ A valid license key is required in order to start `influxd-meta` or `influxd`.
 License keys restrict the number of data nodes that can be added to a cluster as well as the number of CPU cores a data node can use.
 Without a valid license, the process will abort startup.
 
-## Query Management
+## Query management
 
 Query management works cluster wide. Specifically, `SHOW QUERIES` and `KILL QUERY <ID>` on `"<host>"` can be run on any data node. `SHOW QUERIES` will report all queries running across the cluster and the node which is running the query.
-`KILL QUERY` can abort queries running on the local node or any other remote data node. For details on using the `SHOW QUERIES` and `KILL QUERY` on InfluxDB Enterprise clusters, 
+`KILL QUERY` can abort queries running on the local node or any other remote data node. For details on using the `SHOW QUERIES` and `KILL QUERY` on InfluxDB Enterprise clusters,
 see [Query Management](/influxdb/v1.3/troubleshooting/query_management/).
 
 ## Subscriptions
@@ -25,7 +25,7 @@ see [Query Management](/influxdb/v1.3/troubleshooting/query_management/).
 Subscriptions used by Kapacitor work in a cluster. Writes to any node will be forwarded to subscribers across all supported subscription protocols.
 
 ## Continuous Queries
-### Configuration and Operational Considerations on a Cluster
+### Configuration and operational considerations on a cluster
 
 It is important to understand how to configure InfluxDB Enterprise and how this impacts the
 Continuous Queries (CQ) engine’s behavior:
@@ -74,11 +74,11 @@ but ensure that the lease duration is greater than their aggregate execution tim
 “extra” load is not being unnecessarily introduced on your cluster.
 
 
-## PProf Endpoints
+## PProf endpoints
 
 Meta nodes expose the /debug/pprof endpoints for profiling and troubleshooting.
 
-## Shard Movement
+## Shard movement
 
 * [Copy Shard](/enterprise_influxdb/v1.3/features/cluster-commands/#copy-shard) support - copy a shard from one node to another
 * [Copy Shard Status](/enterprise_influxdb/v1.3/features/cluster-commands/#copy-shard-status) - query the status of a copy shard request
@@ -88,21 +88,21 @@ Meta nodes expose the /debug/pprof endpoints for profiling and troubleshooting.
 
 This functionality is exposed via an API on the meta service and through [`influxd-ctl` sub-commands](/enterprise_influxdb/v1.3/features/cluster-commands/).
 
-## OSS Conversion
+## OSS conversion
 
 Importing a OSS single server as the first data node is supported.
 
 See [OSS to Cluster Migration](/enterprise_influxdb/v1.3/guides/migration/) for
 step-by-step instructions.
 
-## Query Routing
+## Query routing
 
 The query engine skips failed nodes that hold a shard needed for queries.
 If there is a replica on another node, it will retry on that node.
 
-## Backup and Restore
+## Backup and restore
 
-InfluxEnterprise clusters support backup and restore functionality starting with
+InfluxDB Enterprise clusters support backup and restore functionality starting with
 version 0.7.1.
 See [Backup and Restore](/enterprise_influxdb/v1.3/guides/backup-and-restore/) for
 more information.

@@ -1,5 +1,5 @@
 ---
-title: Writing Data with the HTTP API
+title: Writing data with the HTTP API
 
 menu:
   influxdb_1_4:
@@ -12,7 +12,7 @@ Here we'll show you how to create a database and write data to it using the buil
 
 ## Creating a database using the HTTP API
 To create a database send a `POST` request to the `/query` endpoint and set the URL parameter `q` to `CREATE DATABASE <new_database_name>`.
-The example below sends a request to InfluxDB running on `localhost` and creates the database `mydb`:  
+The example below sends a request to InfluxDB running on `localhost` and creates the database `mydb`:
 <br>
 
 ```bash
@@ -29,7 +29,7 @@ The data consist of the [measurement](/influxdb/v1.4/concepts/glossary/#measurem
 curl -i -XPOST 'http://localhost:8086/write?db=mydb' --data-binary 'cpu_load_short,host=server01,region=us-west value=0.64 1434055562000000000'
 ```
 When writing points, you must specify an existing database in the `db` query parameter.
-Points will be written to `db`'s default retention policy if you do not supply a retention policy via the `rp` query parameter.
+Points will be written to `db`'s default retention policy if you do not supply a retention policy using the `rp` query parameter.
 See the [API Reference](/influxdb/v1.4/tools/api/#write) documentation for a complete list of the available query parameters.
 
 The body of the POST - we call this the [Line Protocol](/influxdb/v1.4/concepts/glossary/#line-protocol) - contains the time-series data that you wish to store.
@@ -64,7 +64,7 @@ cpu_load_short,direction=in,host=server01,region=us-west value=2.0 1422568543702
 Write points from a file by passing `@filename` to `curl`.
 The data in the file should follow InfluxDB's [line protocol syntax](/influxdb/v1.4/write_protocols/write_syntax/).
 
-Example of a properly-formatted file (`cpu_data.txt`):  
+Example of a properly-formatted file (`cpu_data.txt`):
 <br>
 ```txt
 cpu_load_short,host=server02 value=0.67
@@ -72,7 +72,7 @@ cpu_load_short,host=server02,region=us-west value=0.55 1422568543702900257
 cpu_load_short,direction=in,host=server01,region=us-west value=2.0 1422568543702900257
 ```
 
-Write the data in `cpu_data.txt` to the `mydb` database with:  
+Write the data in `cpu_data.txt` to the `mydb` database with:
 <br>
 `curl -i -XPOST 'http://localhost:8086/write?db=mydb' --data-binary @cpu_data.txt`
 
@@ -112,12 +112,12 @@ The InfluxDB API makes no attempt to be RESTful.
 * Writing a float to a field that previously accepted booleans:
 
 ```bash
-curl -i -XPOST 'http://localhost:8086/write?db=hamlet' --data-binary 'tobeornottobe booleanonly=true'  
+curl -i -XPOST 'http://localhost:8086/write?db=hamlet' --data-binary 'tobeornottobe booleanonly=true'
 
 curl -i -XPOST 'http://localhost:8086/write?db=hamlet' --data-binary 'tobeornottobe booleanonly=5'
 ```
 
-returns:  
+returns:
 <br>
 
 ```bash
@@ -137,7 +137,7 @@ Content-Length: 150
 curl -i -XPOST 'http://localhost:8086/write?db=atlantis' --data-binary 'liters value=10'
 ```
 
-returns:  
+returns:
 <br>
 
 ```bash
@@ -155,5 +155,3 @@ Content-Length: 45
 ---
 Now that you know how to write data with the built-in HTTP API discover how to query them with the [Querying Data](/influxdb/v1.4/guides/querying_data/) guide!
 For more information about writing data with the HTTP API, please see the [API reference documentation](/influxdb/v1.4/tools/api/#write).
-
-

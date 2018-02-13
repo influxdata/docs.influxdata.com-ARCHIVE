@@ -12,7 +12,7 @@ The following guide has step-by-step instructions for migrating an InfluxDB OSS
 instance into an InfluxDB Enterprise cluster.
 
 <dt>
-The process assumes that you already have a fully configured InfluxEnterprise cluster
+The process assumes that you already have a fully configured InfluxDB Enterprise cluster
 of three or more meta nodes and zero or more data nodes. If you need instructions for meta node installation:
 - [Production Installation of Meta Nodes](/enterprise_influxdb/v1.3/production_installation/meta_node_installation/)
 </dt>
@@ -42,9 +42,9 @@ instance’s `/etc/hosts` file.
 other nodes in the cluster. If you have DNS already setup in your
 environment, then this step can be skipped.
 
-## For all existing InfluxEnterprise data nodes:
+## For all existing InfluxDB Enterprise data nodes:
 
-### 1. Remove the node from the InfluxEnterprise Cluster
+### 1. Remove the node from the InfluxDB Enterprise Cluster
 
 From a **meta** node in your InfluxDB Enterprise cluster, enter:
 ```
@@ -172,7 +172,7 @@ Note: it may take a few minutes before the existing data become available in the
 
 ### 1. Add any data nodes that you removed from cluster back into the cluster
 
-From a **meta** node in the InfluxEnterprise Cluster, run:
+From a **meta** node in the InfluxDB Enterprise cluster, run:
 ```
 influxd-ctl add-data <the-hostname>:8088
 ```

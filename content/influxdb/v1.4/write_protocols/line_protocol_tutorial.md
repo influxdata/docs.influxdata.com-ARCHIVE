@@ -1,5 +1,5 @@
 ---
-title: Line Protocol Tutorial
+title: Line Protocol tutorial
 aliases:
     - influxdb/v1.4/write_protocols/line/
 menu:

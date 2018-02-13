@@ -268,7 +268,7 @@ which will be passed to the alert handler.
 
 #### InfluxDB
 
-Kapacitor's main purpose processing between nodes within an InfluxEnterprise cluster or between multiple clusters.
+Kapacitor's main purpose processing between nodes within an InfluxDB Enterprise cluster or between multiple clusters.
 You must define at least one `[[influxdb]]` table array configuration for an InfluxDB connection.
 Multiple InfluxDB table array configurations can be specified,
 but one InfluxDB table array configuration must be flagged as the `default`.

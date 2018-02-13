@@ -1,10 +1,10 @@
 ---
-title: High Availability
+title: High availability
 ---
 
-## [Clustering](/influxdb/v1.4/high_availability/relay/)
-Open-source InfluxDB does not support clustering.
+## [Clustering](/influxdb/latest/high_availability/relay/)
+
+InfluxDB OSS does not support clustering.
 For high availability or horizontal scaling of InfluxDB, please investigate our
 commercial clustered offering,
-[InfluxEnterprise](https://portal.influxdata.com/).
-
+[InfluxDB Enterprise](/enterprise_influxdb/latest/).
