@@ -129,7 +129,7 @@ Optional arguments are enclosed in brackets.
 
 - `-portable`: Use the new Enterprise-compatible backup format for InfluxDB OSS. Recommended instead of `-online`.
 
-- `-online`: Use the legacy backup format. Only use if `-portable` cannot be used. 
+- `-online`: Use the legacy backup format. Only use if the newer `-portable` option cannot be used.
 
 - `[ -host <host:port> ]`: Host and port for InfluxDB OSS instance . Default value is `'127.0.0.1:8088'`. Required for remote connections. Example: `-host 127.0.0.1:8088`
 

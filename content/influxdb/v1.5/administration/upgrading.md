@@ -1,5 +1,5 @@
 ---
-title: Upgrading from previous versions
+title: Upgrading to InfluxDB 1.5
 
 menu:
   influxdb_1_5:
@@ -17,14 +17,26 @@ This page outlines process for upgrading from:
   </tr>
 </table>
 
-## Upgrade from 0.12-1.3 to 1.4
+## Upgrading from 1.4 to 1.5
 
 1. [Download](https://influxdata.com/downloads/#influxdb) InfluxDB version
-1.4
+1.5
 
 2. Update the configuration file
 
-    Migrate any customizations in the 1.4 configuration file to the [1.4 configuration file](/influxdb/v1.5/administration/config/).
+    Migrate any customizations in the 1.4 configuration file to the [1.5 configuration file](/influxdb/v1.5/administration/config/).
+
+
+    Enable TSI (recommended):
+
+     1. Uncomment the [`index-version` setting](/influxdb/v1.5/administration/config/#index-version-inmem) and set it to `tsi1`.
+    The `index-version` setting is in the `[data]` section of the configuration file.
+    
+    ```
+    [data]
+      dir = "/var/lib/influxdb/data"
+      index-version = "tsi1"
+    ```
 
 3. Restart the process
 
@@ -45,7 +57,7 @@ Check for non-`TSM` shards in your data directory:
 
 In versions prior to 0.12, InfluxDB stores
 [metastore](/influxdb/v1.5/concepts/glossary/#metastore) information in
-`raft.db` via the raft services.
+`raft.db` using the raft services.
 In versions 0.12+, InfluxDB stores metastore information in `meta.db`, a binary
 protobuf file.
 
