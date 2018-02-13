@@ -3,7 +3,7 @@ title: Creating Chronograf dashboards
 menu:
   chronograf_1_4:
     name: Creating dashboards
-    weight: 10
+    weight: 15
     parent: Guides
 ---
 
@@ -53,7 +53,7 @@ In addition, the time range (`:dashboardTime:`) is [configurable on the dashboar
 
 ### Step 4: Choose your visualization type
 
-Chronograf supports many different [visualization types](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-visualization-types-does-chronograf-support). To choose a visualization type, click **Visualization** and select **Step-Plot Graph**.
+Chronograf supports many different [visualization types](/chronograf/latest/guides/visualization-types/). To choose a visualization type, click **Visualization** and select **Step-Plot Graph**.
 
 ![Visualization type](/img/chronograf/latest/g-dashboard-visualization.png)
 
@@ -81,7 +81,7 @@ These tips only apply to the line, stacked, step-plot, and line+stat [visualizat
 * You can change the dashboard's *auto-refresh interval* at the top of the page - the default interval selected is **Every 15 seconds**.
 * You can also modify the dashboard's *time range* at the top of the page - the default range is **Past 15 minutes**.
 
-Now, you are free to experiment and complete your dashboard by creating, editing, and repositioning more cells! 
+Now, you are free to experiment and complete your dashboard by creating, editing, and repositioning more cells!
 
 ## Extra Tips
 
