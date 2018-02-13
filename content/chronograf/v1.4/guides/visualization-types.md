@@ -2,7 +2,7 @@
 title: Visualization types in Chronograf
 menu:
   chronograf_1_4:
-    name: Using pre-created dashboards
+    name: Visualization types
     weight: 20
     parent: Administration
 ---

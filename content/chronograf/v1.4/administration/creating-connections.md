@@ -1,9 +1,8 @@
 ---
 title: Creating InfluxDB and Kapacitor connections
 menu:
-  kapacitor_1_4:
+  chronograf_1_4:
     name: Creating InfluxDB and Kapacitor connections
-    identifier: anomaly_detection
     weight: 30
     parent: guides
 ---
