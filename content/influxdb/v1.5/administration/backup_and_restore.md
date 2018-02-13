@@ -17,14 +17,9 @@ Starting in version 1.5, the InfluxDB OSS `backup` utility provides:
 * Data imports from [InfluxDB Enterprise](/enterprise_influxdb/latest/) clusters
 * Backup files that can be imported into an InfluxDB Enterprise database.
 
-> **Note:** Backups are not interchangeable between OSS InfluxDB and [InfluxDB Enterprise](/influxdb_enterprise/latest/).
-You cannot restore an InfluxDB OSS backup to an InfluxDB Enterprise data node, nor can you restore an InfluxDB Enterprise backup to an InfluxDB OSS instance.
->
-If you are working with an InfluxDB Enterprise cluster, see the [Backup
-and restore](/influxdb_enterprise/latest/guides/backup-and-restore/) guide in the InfluxDB Enterprise documentation.
+> **Note:** Backups are not interchangeable between InfluxDB OSS and [InfluxDB Enterprise](/influxdb_enterprise/latest/). You cannot restore an InfluxDB OSS backup to an InfluxDB Enterprise data node, nor can you restore an InfluxDB Enterprise backup to an InfluxDB OSS instance. If you are working with InfluxDB Enterprise clusters, see the [Backup and restore](/influxdb_enterprise/latest/guides/backup-and-restore/) guide in the InfluxDB Enterprise documentation.
 
-> ***Note:*** The offline backup and restore functions
-provided in InfluxDB OSS versions 1.4 and earlier are retained in version 1.5 without change, and are detailed in [Backward compatible offline backup and restore](#backup-compatible-offline-backup-and-restore--legacy-format).
+> ***Note:*** The offline backup and restore functions provided in InfluxDB OSS versions 1.4 and earlier are retained in version 1.5 without change, and are detailed below in [Backward compatible offline backup and restore](#backward-compatible-offline-backup-and-restore-legacy-format).
 
 > ***Note:*** Prior to version 1.5, the InfluxDB OSS `backup` utility created  backup file formats, now referred to as the _legacy_ format, that were incompatible with the InfluxDB Enterprise version.  This legacy format is fully supported in the new `backup` utility as input for the new online restore function. If you are creating new backup processes, InfluxData recommends using the new InfluxDB Enterprise-compatible backup format, which uses less disk space and provides a clear transfer path for data between the InfluxDB Enterprise and InfluxDB OSS versions.
 
@@ -150,7 +145,7 @@ influxd restore [ -db <db_name> ]
 
 ### Backward compatible offline backup and restore (legacy format)
 
-> ***Note:*** The backward compatible backup and restore for InfluxDB OSS described below are now supported as the legacy format. InfluxData recommends using the newer Enterprise-compatible backup and restore utilities, which can be used with InfluxDB OSS and InfluxDB Enterprise.
+> ***Note:*** The backward compatible backup and restore for InfluxDB OSS described below are now supported as the legacy format. InfluxData recommends using the newer Enterprise-compatible backup and restore utilities with InfluxDB OSS.
 
 InfluxDB OSS has the ability to snapshot an instance at a point-in-time and restore it.
 All backups are full backups; incremental backups are not supported.
