@@ -1,5 +1,5 @@
 ---
-title: Differences netween InfluxDB 1.4 and 1.3
+title: Differences netween InfluxDB 1.4 and 1.5
 menu:
   influxdb_1_5:
     weight: 40
