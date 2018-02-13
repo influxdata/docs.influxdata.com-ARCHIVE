@@ -1,9 +1,10 @@
 ---
-title: Backup and restore in InfluxDB Enterprise
+title: Backing up and restoring in InfluxDB Enterprise
 aliases:
     - /enterprise/v1.5/guides/backup-and-restore/
 menu:
   enterprise_influxdb_1_5:
+    name: Backing up and restoring
     weight: 0
     parent: Guides
 ---
@@ -20,12 +21,8 @@ Currently, InfluxDB Enterprise supports backups and restores for all data in the
 cluster; a single database; a single database and retention policy; and a
 single [shard](/influxdb/v1.5/concepts/glossary/#shard).
 
-> **Note:** Backups are not interchangeable between [OSS InfluxDB](/influxdb/v1.5/) and InfluxDB Enterprise.
-You cannot restore an InfluxDB OSS backup to an InfluxDB Enterprise data node, nor can you restore
-an InfluxDB Enterprise backup to an InfluxDB OSS instance.
->
-If you are working with InfluxDB OSS, see [Backup
-and restore](/influxdb/v1.5/administration/backup_and_restore/) in the InfluxDB OSS documentation.
+> **Note:** Backups are not interchangeable between [OSS InfluxDB](/influxdb/v1.5/) and InfluxDB Enterprise. You cannot restore an InfluxDB OSS backup to an InfluxDB Enterprise data node, nor can you restore an InfluxDB Enterprise backup to an InfluxDB OSS instance.
+> If you are working with InfluxDB OSS, see [Backup and restore](/influxdb/v1.5/administration/backup_and_restore/) in the InfluxDB OSS documentation.
 
 ## Backup
 

@@ -10,7 +10,6 @@ menu:
     identifier: chrono_install_qs
 ---
 
-Now that you've installed the Meta nodes and Data nodes, you are ready to install Chronograf
-to provide you with a user interface to access the Enterprise InfluxDB instance.
+Now that you've installed the meta nodes and data nodes, you are ready to install Chronograf to provide you with a user interface to access the Enterprise InfluxDB instance.
 
-[Installation instruction for Chronograf](/chronograf/latest/introduction/installation/)
+[Installing Chronograf](/chronograf/latest/introduction/installation/)

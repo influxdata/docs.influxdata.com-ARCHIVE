@@ -20,7 +20,7 @@ menu:
 
 ## 1.5.0 [unreleased]
 
-This release builds off of the 1.5 release of InfluxDB OSS. Please see the [InfluxDB OSS release notes](https://docs.influxdata.com/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS releases.
+This release builds off of the InfluxDB OSS 1.5 release. Please see the [InfluxDB OSS release notes](https://docs.influxdata.com/influxdb/v1.5/about_the_project/releasenotes-changelog/) for details about the InfluxDB OSS release.
 
 ### Breaking changes
 
@@ -28,35 +28,31 @@ The default logging format has been changed. See #9055 for details.
 
 ### Features
 
-- Add LastModified fields to Shard RPC calls
-- As of InfluxDB OSS 1.5 backup/restore interoperability is confirmed.
+- Add `LastModified` fields to Shard RPC calls.
+- As of InfluxDB OSS 1.5 backup and restore interoperability is confirmed.
 - Make InfluxDB Enterprise use InfluxDB OSS digests.
 - Move digest to its own package.
 - Implement distributed cardinality estimation.
 
 ### Bugfixes
 
-- Fix errors occurring when policy or shard keys are missing from the manifest when limited is set to true"
-- Fix spurious `rpc error: i/o deadline exceeded` errors
+- Fix errors occurring when policy or shard keys are missing from the manifest when limited is set to true.
+- Fix spurious `rpc error: i/o deadline exceeded` errors.
 - Elide `stream closed` error from logs and handle `io.EOF` as remote iterator interrupt.
 - Discard remote iterators that label their type as unknown.
 - Do not queue partial write errors to hinted handoff.
 - Segfault in `digest.merge`
-- Meta Node CPU pegged on idle cluster
+- Meta Node CPU pegged on idle cluster.
 
 ## v1.4.2 [2017-11-15]
 
-###Bugfixes
+### Bugfixes
 
 - Fix wildcard when one shard has no data for a measurement with partial replication.
 
 ## 1.4.1 [2017-11-13]
 
-This release builds off of the 1.4.1 release of InfluxDB OSS. Please see the [InfluxDB OSS release notes](https://docs.influxdata.com/influxdb/v1.4/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS releases.
-
-### Bugfixes
-
-- Update InfluxDB 1.4.1
+This release builds off of the InfluxDB OSS 1.4.1 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.4/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
 
 ## 1.4.0 [2017-11-13]
 
@@ -68,25 +64,25 @@ This release builds off of the 1.4 release of InfluxDB OSS. Please see the [Infl
 - Add message pack format for query responses.
 - Teach show tag values to respect FGA
 - Deadlock(?) in meta server on 1.3.6
-- Add time support to SHOW TAG VALUES
-- Add distributed SHOW TAG KEYS with time support
+- Add time support to `SHOW TAG VALUES`
+- Add distributed `SHOW TAG KEYS` with time support
 
-Bugfixes
+### Bugfixes
 
-- Add `X-Influxdb-Build` to http response headers so users can identify if a response is from an OSS or Enterprise service.
+- Add `X-Influxdb-Build` to http response headers so users can identify if a response is from an InfluxDB OSS or InfluxDB Enterprise service.
 - Ensure that permissions cannot be set on non-existent databases.
-- Switch back to using cluster-tracing config option to enable meta HTTP request logging.
-- `influxd-ctl restore -newdb` can't restore data
-- Close connection for remote iterators after EOF to avoid writer hanging indefinitely
-- Data race reading `Len()` in connection pool
-- Use influxdata fork of yamux. This update reduces overall memory usage when streaming large amounts of data.
+- Switch back to using `cluster-tracing` config option to enable meta HTTP request logging.
+- `influxd-ctl restore -newdb` can't restore data.
+- Close connection for remote iterators after EOF to avoid writer hanging indefinitely.
+- Data race reading `Len()` in connection pool.
+- Use InfluxData fork of `yamux`. This update reduces overall memory usage when streaming large amounts of data.
 - Fix group by marshaling in the IteratorOptions.
-- Meta service data race
+- Meta service data race.
 - Read for the interrupt signal from the stream before creating the iterators.
-- Show retention policies requires the createdatabase permission
-- Handle utf files with a byte order mark when reading the configuration files.
+- Show retention policies requires the `createdatabase` permission
+- Handle UTF files with a byte order mark when reading the configuration files.
 - Remove the pidfile after the server has exited.
-- Resend authentication credentials on redirect
+- Resend authentication credentials on redirect.
 - Updated yamux resolves race condition when SYN is successfully sent and a write timeout occurs.
 - Fix no license message.
 
@@ -95,16 +91,12 @@ Bugfixes
 ## v1.3.8 [2017-12-04]
 
 ### Upgrading -- for users of the TSI preview
-If you have been using the TSI preview with 1.3.6 or earlier 1.3.x releases, you will need to follow the upgrade steps to
-continue using the TSI preview.  Unfortunately, these steps cannot be executed while the cluster is operating -- so it will
-result in downtime.
-
-See more details here: [Upgrading from previous versions](/v1.3/administration/upgrading/)
+If you have been using the TSI preview with 1.3.6 or earlier 1.3.x releases, you will need to follow the upgrade steps to continue using the TSI preview.  Unfortunately, these steps cannot be executed while the cluster is operating -- so it will require downtime.
 
 ### Bugfixes
 
-- Updated yamux resolves race condition when SYN is successfully sent and a write timeout occurs.
-- Re-send authentication credentials on redirect
+- Updated `yamux` resolves race condition when SYN is successfully sent and a write timeout occurs.
+- Resend authentication credentials on redirect.
 - Fix wildcard when one shard has no data for a measurement with partial replication.
 - Fix spurious `rpc error: i/o deadline exceeded` errors.
 
@@ -127,7 +119,7 @@ We will update this release note with operational steps once the utility is avai
 
 ## v1.3.6 [2017-09-28]
 
-#### Bugfixes
+### Bugfixes
 
 - Fix "group by" marshaling in the IteratorOptions.
 - Address meta service data race condition.
@@ -145,7 +137,7 @@ Please see the OSS [release notes](/influxdb/v1.3/about_the_project/releasenotes
 
 This release builds off of the 1.3.4 release of OSS InfluxDB. Please see the [OSS release notes](https://docs.influxdata.com/influxdb/v1.3/about_the_project/releasenotes-changelog/) for more information about the OSS releases.
 
-#### Bugfixes
+### Bugfixes
 
 - Close connection for remote iterators after EOF to avoid writer hanging indefinitely
 
@@ -153,19 +145,16 @@ This release builds off of the 1.3.4 release of OSS InfluxDB. Please see the [OS
 
 This release builds off of the 1.3.3 release of OSS InfluxDB. Please see the [OSS release notes](https://docs.influxdata.com/influxdb/v1.3/about_the_project/releasenotes-changelog/) for more information about the OSS releases.
 
-#### Bugfixes
+### Bugfixes
 
-- Connections are not closed when CreateRemoteIterator RPC returns no iterators, resolved memory leak
+- Connections are not closed when `CreateRemoteIterator` RPC returns no iterators, resolved memory leak
 
 ## v1.3.2 [2017-08-04]
 
-#### Bugfixes
+### Bugfixes
 - `influxd-ctl restore -newdb` unable to restore data.
-- Improve performance of SHOW TAG VALUES.
-
-#### Bugfixes
-
-- Show a subset of config settings in SHOW DIAGNOSTICS.
+- Improve performance of `SHOW TAG VALUES`.
+- Show a subset of config settings in `SHOW DIAGNOSTICS`.
 - Switch back to using cluster-tracing config option to enable meta HTTP request logging.
 - Fix remove-data error.
 

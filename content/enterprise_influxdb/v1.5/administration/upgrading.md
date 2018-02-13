@@ -273,4 +273,4 @@ rk-upgrading-03:8091	1.3.8_c1.3.8
 ```
 
 If you have any issues upgrading your cluster, please do not hesitate to contact support at the email address
-provided to you when you received your InfluxEnterprise license.
+provided to you when you received your InfluxDB Enterprise license.

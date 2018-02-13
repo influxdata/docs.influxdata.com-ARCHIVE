@@ -1,9 +1,10 @@
 ---
-title: Administration
+title: Administering InfluxDB Enterprise
 aliases:
     - /enterprise/v1.5/administration/
 menu:
   enterprise_influxdb_1_5:
+    name: Administering
     weight: 50
 ---
 

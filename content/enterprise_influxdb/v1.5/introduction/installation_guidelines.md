@@ -1,5 +1,5 @@
 ---
-title: Installation Guidelines (⏰ Please Read!)
+title: Installation options (⏰ Please Read!)
 aliases:
   - /enterprise_influxdb/v1.5/introduction/meta_node_installation/
   - /enterprise_influxdb/v1.5/introduction/data_node_installation/
@@ -27,11 +27,9 @@ The [Production installation](/enterprise_influxdb/v1.5/production_installation/
 
 ## Requirements for InfluxDB Enterprise clusters
 
-Please review the [Clustering Guide](http://docs.influxdata.com/enterprise_influxdb/v1.5/concepts/clustering/)
+Review [Clustering Guide](/enterprise_influxdb/v1.5/concepts/clustering/)
 for an overview of the architecture and concepts in an InfluxEnterprise Cluster
-and the
-[Hardware Sizing Guide](http://docs.influxdata.com/influxdb/v1.0/guides/hardware_sizing/#general-hardware-guidelines-for-a-cluster)
-for information on provisioning the correct servers.
+and the [Hardware sizing guide](http://docs.influxdata.com/influxdb/v1.0/guides/hardware_sizing/#general-hardware-guidelines-for-a-cluster) for information on provisioning the correct servers.
 
 For clusters using a license key and not a license file, all nodes must be able to contact `portal.influxdata.com`
 via port `80` or port `443`. Nodes that go more than four hours without connectivity to the Portal may experience license issues.
