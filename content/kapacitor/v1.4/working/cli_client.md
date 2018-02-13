@@ -774,7 +774,7 @@ The optional boolean argument `-no-reload` will prevent reloading the task into
 memory.
 The default behavior is to reload an updated task.
 
-**Example 30: Defining a new Task - standard**
+**Example 30: Defining a new task - standard**
 
 ```
 $ kapacitor define sandbox -tick sandbox.tick -type stream -dbrp "telegraf"."autogen"
@@ -856,8 +856,8 @@ $
 Note that this task on success returns no status or additional messages.
 To verify the results use the `list templates` command.
 
-
 **`enable`** When tasks are first created they are in a `disabled` state.  Use this command to enable one or more tasks.  It takes the following form:
+
 
 ```
 kapacitor enable <TASK_ID>...
@@ -889,6 +889,7 @@ Note that this task on success or failure returns no status or additional messag
 To verify the result use the `list tasks` command.
 
 **`reload`**  When troubleshooting a task it may be useful to stop it and then start it again.  This command will disable and then enable one or more tasks.  It takes the following form:
+
 
 ```
 kapacitor reload <TASK_ID>...
@@ -1074,7 +1075,6 @@ $
 
 Note that this command returns no status or additional messages.  It fails or
 succeeds silently.  To verify the results use the `list tasks` command.
-
 
 * **`delete templates`**  Use the `templates` argument to remove one or more templates.  It takes the following form:
 

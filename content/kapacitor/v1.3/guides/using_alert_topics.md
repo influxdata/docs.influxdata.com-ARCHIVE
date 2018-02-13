@@ -10,14 +10,14 @@ menu:
     parent: guides
 ---
 
-Kapacitor's alert system follows a publish subscribe design pattern.
+Kapacitor's alert system follows a publish/subscribe messaging pattern.
 Alerts are published to a `topic` and `handlers` subscribe to a topic.
 
 This example will walk you through setting up a simple cpu threshold alert that sends alerts to Slack.
 
 ### Requirements
 
-It is expected that you have a working Telegraf and Kapacitor install to walk through this example.
+It is expected that you have a working Telegraf and Kapacitor installed to walk through this example.
 If you do not please take a second to setup both.
 
 
@@ -211,4 +211,3 @@ Now update the handler and only alerts that changed state will be sent to Slack.
 ```
 kapacitor define-topic-handler cpu slack ./slack.yaml
 ```
-

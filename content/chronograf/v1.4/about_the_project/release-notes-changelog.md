@@ -6,6 +6,42 @@ menu:
     parent: About the Project
 ---
 
+## v1.4.1.1 [2018-02-12]
+### Features
+- Allow multiple event handlers per rule
+- Add "Send Test Alert" button to test Kapacitor alert configurations
+- Link to Kapacitor config panel from Alert Rule builder
+- Add auto-refresh widget to Hosts List page
+- Upgrade to Go 1.9.4 and Node 6.12.3
+- Allow users to delete themselves
+- Add All Users page, visible only to SuperAdmins
+- Introduce `chronoctl` binary for user CRUD operations
+- Introduce Mappings to allow control over new user organization assignments
+### UI Improvements
+- Clarify terminology surrounding InfluxDB & Kapacitor connections
+- Separate saving TICKscript from exiting editor page
+- Enable Save (⌘ + Enter) and Cancel (Escape) hotkeys in Cell Editor Overlay
+- Enable customization of Single Stat "Base Color"
+
+### Bug Fixes
+
+- Fix TICKscript Sensu alerts when no group by tags selected
+- Display 200 most-recent TICKscript log messages; prevent overlapping
+- Add "TO" to kapacitor SMTP config; improve config update error messages
+- Remove CLI options from `sysvinit` service file
+- Remove CLI options from `systemd` service file
+- Fix disappearance of text in Single Stat graphs during editing
+- Redirect to Alerts page after saving Alert Rule
+
+## v1.4.0.1 [2018-1-9]
+### Features
+- Add separate CLI flag for canned sources, kapacitors, dashboards, and organizations
+- Add telegraf interval configuration
+
+### Bug Fixes
+- Allow insecure (self-signed) certificates for kapacitor and influxdb
+- Fix positioning of custom time indicator
+
 ## v1.4.0.0 [2017-12-22]
 
 ### Features

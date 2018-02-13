@@ -9,12 +9,12 @@ menu:
 
 Follow the links below to explore Chronograf's features.
 
+## [Using pre-created dashboards](/chronograf/latest/administration/using-precreated-dashboards/)
+Pre-created dashboards are available when the required Telegraf input plugins are enabled. These applications make many useful metrics quickly available and are useful in giving you ideas about  
+
 ## [Creating dashboards](/chronograf/latest/guides/create-a-dashboard/)
 Chronograf offers a complete dashboard solution for visualizing your data and monitoring your infrastructure.
 Learn how to create customized dashboards in Chronograf.
-
-## [Using Kapacitor in Chronograf](/chronograf/latest/guides/kapa-and-chrono/)
-
 
 ## [Creating Kapacitor alerts](/chronograf/latest/guides/create-a-kapacitor-alert/)
 Chronograf provides a user interface for Kapacitor, InfluxData’s processing framework for creating alerts, running ETL jobs, and detecting anomalies in your data.

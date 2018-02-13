@@ -10,7 +10,6 @@ menu:
 Integrate Kapacitor into your monitoring system by sending [alert messages](/kapacitor/latest/nodes/alert_node/#message) to supported event handlers.
 Currently, Kapacitor can send alert messages to specific log files and specific URLs, as well as to applications like [Slack](https://slack.com/) and [HipChat](https://www.hipchat.com/).
 
-
 This document offers step-by-step instructions for setting up event handlers with Kapacitor, including the relevant configuration options and [TICKscript](/kapacitor/latest/tick/) syntax.
 Currently, this document doesn't cover every supported event handler, but we will continue to add content to this page over time.
 For a complete list of the supported event handlers and for additional information, please see the [event handler reference documentation](/kapacitor/latest/nodes/alert_node/).
@@ -37,7 +36,7 @@ To configure Kapacitor with HipChat, you need:
 * a HipChat API access token for sending notifications
 
 > ##### HipChat API access token
-><br>
+
 The following steps describe how to create the API access token.
 >
 **1.** From the HipChat home page, access `Account settings` by clicking on the
@@ -77,6 +76,7 @@ This serves as the default token if the TICKscript doesn't specify an API access
 This setting only applies if the `global` setting is also set to `true`.
 
 #### Sample configuration
+
 ```javascript
     [hipchat]
       enabled = true
@@ -180,9 +180,8 @@ To configure Kapacitor with Telegraf, you need:
 * a Telegram API access token
 * your Telegram chat id
 
->
 ##### Telegram bot
-<br>
+
 The following steps describe how to create a new Telegram bot.
 >
 **1.** Search for the `@BotFather` username in your Telegram application
@@ -230,8 +229,9 @@ and click `Start` at the bottom of your Telegram application.
 >
 Your newly-created bot will appear in the chat list on the left side of the application.
 >
+
 ##### Telegram API access token
-<br>
+
 The following section describes how to identify or create the API access token.
 >
 Telegram's `@BotFather` bot sent you an API access token when you created your bot.
@@ -251,8 +251,9 @@ below.
 >
     For a description of the Bot API, see this page: https://core.telegram.org/bots/api
 >
+
 ##### Telegram chat ID
-<br>
+
 The following steps describe how to identify your chat id.
 >
 **1.** Paste the following link in your browser
@@ -317,6 +318,7 @@ The optional configuration settings are:
 ```
 
 ### TICKscript syntax
+
 ```
 |alert()
     .telegram()
