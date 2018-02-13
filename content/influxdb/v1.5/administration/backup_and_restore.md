@@ -17,7 +17,7 @@ Starting in version 1.5, the InfluxDB OSS `backup` utility provides:
 * Data imports from [InfluxDB Enterprise](/enterprise_influxdb/latest/) clusters
 * Backup files that can be imported into an InfluxDB Enterprise database.
 
-> **Note:** Backups are not interchangeable between InfluxDB OSS and [InfluxDB Enterprise](/influxdb_enterprise/latest/). You cannot restore an InfluxDB OSS backup to an InfluxDB Enterprise data node, nor can you restore an InfluxDB Enterprise backup to an InfluxDB OSS instance. If you are working with InfluxDB Enterprise clusters, see the [Backup and restore](/influxdb_enterprise/latest/guides/backup-and-restore/) guide in the InfluxDB Enterprise documentation.
+> **Note:** Note: This section covers the InfluxDB OSS backup/restore utility.  If you are using an InfluxDB Enterprise cluster, see [Backing up and restoring in InfluxDB Enterprise](/influxdb_enterprise/latest/guides/backup-and-restore/) in the InfluxDB Enterprise documentation.
 
 > ***Note:*** The offline backup and restore functions provided in InfluxDB OSS versions 1.4 and earlier are retained in version 1.5 without change, and are detailed below in [Backward compatible offline backup and restore](#backward-compatible-offline-backup-and-restore-legacy-format).
 
@@ -68,13 +68,13 @@ influxd backup -portable [options] <path-to-backup>
 
 Optional arguments are enclosed in brackets.
 
-- `-database <db_name>`: The database to back up. If not specified, all databases are backed up.
+- `[ -database <db_name> ]`: The database to back up. If not specified, all databases are backed up.
 
 - `[ -portable ]`: Generates backup files in the newer InfluxDB Enterprise-compatible format. Recommended for InfluxDB OSS.
 
-- `[ -host <host:port> ]`: The host and port to connect to and perform a snapshot of. Default value is '127.0.0.1:8088'.
+- `[ -host <host:port> ]`: Host and port for InfluxDB OSS instance . Default value is `'127.0.0.1:8088'`. Required for remote connections. Example: `-host 127.0.0.1:8088`
 
-- `[ -retention <rp_name> ]`: The retention policy for the backup. If not specified, the default is to use all retention policies.
+- `[ -retention <rp_name> ]`: Retention policy for the backup. If not specified, the default is to use all retention policies. If specified, then `-database` is required.
 
 - `[ -shard <ID> ]`: Shard ID of the shard to be backed up. If specified, then `-retention <name>` is required.
 
@@ -125,9 +125,11 @@ influxd restore [ -db <db_name> ]
 
 #### Arguments
 
-- `-portable`: Use the new Enterprise-compatible backup format. Recommended for InfluxDB OSS.
+Optional arguments are enclosed in brackets.
 
-- `-online`: Use the legacy backup format. Not recommended.
+- `-portable`: Use the new Enterprise-compatible backup format for InfluxDB OSS. Recommended instead of `-online`.
+
+- `-online`: Use the legacy backup format. Only use if `-portable` cannot be used. 
 
 - `[ -host <host:port> ]`: Host and port for InfluxDB OSS instance . Default value is `'127.0.0.1:8088'`. Required for remote connections. Example: `-host 127.0.0.1:8088`
 

@@ -28,10 +28,10 @@ Connected to http://localhost:8086 version 1.4.x
 InfluxDB shell 1.4.x
 ```
 
-> **Note:** The CLI and InfluxDB versions should be identical. If not, it can lead to parsing issues with queries.
+> **Note:** The versions of InfluxDB and the CLI should be identical. If not, parsing issues can occur with queries.
 
-You can now enter InfluxQL queries as well as some CLI-specific commands directly in your terminal. You
-can use `help` at any time to get a list of available commands. Use `Ctrl+C` to cancel if you want to cancel a long-running InfluxQL query.
+You can now enter InfluxQL queries as well as some CLI-specific commands directly in your terminal.
+You can use `help` at any time to get a list of available commands. Use `Ctrl+C` to cancel if you want to cancel a long-running InfluxQL query.
 
 ## `influx` Arguments
 There are several arguments you can pass into `influx` when starting.
@@ -88,20 +88,17 @@ Use with `-import`.
 Specifies the format/precision of the timestamp: `rfc3339` (`YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ`), `h` (hours), `m` (minutes), `s` (seconds), `ms` (milliseconds), `u` (microseconds), `ns` (nanoseconds).
 Precision defaults to nanoseconds.
 
-> **Note:** Setting the precision to `rfc3339` (`-precision rfc3339`) works with the `-execute` option, but it does not work with the `-import option`.
-All other precision formats (e.g.
-`h`,`m`,`s`,`ms`,`u`, and `ns`) work with the `-execute` and `-import` options.
+> **Note:** Setting the precision to `rfc3339` (`-precision rfc3339`) works with the `-execute` option, but it does not work with the `-import option`. All other precision formats (e.g., `h`,`m`,`s`,`ms`,`u`, and `ns`) work with the `-execute` and `-import` options.
 
 `-pretty`
 Turns on pretty print for the `json` format.
 
 `-ssl`
-Use https for requests.
+Use HTTPS for requests.
 
 `-username 'username'`
-The username `influx` uses to connect to the server.
-Alternatively, set the username for the CLI with the `INFLUX_USERNAME` environment
-variable.
+The username that `influx` uses to connect to the server.
+Alternatively, set the username for the CLI with the `INFLUX_USERNAME` environment variable.
 
 `-version`
 Display the InfluxDB version and exit.
@@ -131,6 +128,7 @@ time			               level description	    location	     water_level
 ```
 
 ### Specify the format of the server responses with `-format`
+
 The default format is `column`:
 ```bash
 $ influx -format=column
@@ -239,6 +237,7 @@ Results:
 ```
 
 > **Note:** For large datasets, `influx` writes out a status message every 100,000 points.
+
 For example:
 >
     2015/08/21 14:48:01 Processed 3100000 lines.
@@ -247,8 +246,7 @@ For example:
 
 Things to note about `-import`:
 
-* Allow the database to ingest points by using `-pps` to set the number of points per second allowed by the import.
-By default, pps is zero and `influx` does not throttle importing.
+* Allow the database to ingest points by using `-pps` to set the number of points per second allowed by the import. By default, pps is zero and `influx` does not throttle importing.
 * Imports work with `.gz` files, just include `-compressed` in the command.
 * Include timestamps in the data file. InfluxDB will assign the same timestamp to points without a timestamp. This can lead to unintended [overwrite behavior](/influxdb/v1.5/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points).
 * If your data file has more than 5,000 points, it may be necessary to split that file into several files in order to write your data in batches to InfluxDB.
@@ -259,10 +257,12 @@ InfluxDB will still attempt to write the points after that time out but there wi
 
 > **Note:** For how to export data from InfluxDB version 0.8.9, see [Exporting from 0.8.9](https://github.com/influxdb/influxdb/blob/master/importer/README.md).
 
-## `influx` Commands
+## `influx` commands
+
 Enter `help` in the CLI for a partial list of the available commands.
 
 ### Commands
+
 The list below offers a brief discussion of each command.
 We provide detailed information on `insert` at the end of this section.
 
@@ -328,6 +328,7 @@ Once `influx` sets the current database and/or retention policy, there is no nee
 If you do not specify the retention policy, `influx` automatically queries the `use`d database's `DEFAULT` retention policy.
 
 #### Write data to InfluxDB with `insert`
+
 Enter `insert` followed by the data in [line protocol](/influxdb/v1.5/concepts/glossary/#line-protocol) to write data to InfluxDB.
 Use `insert into <retention policy> <line protocol>` to write data to a specific [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp).
 
@@ -346,5 +347,7 @@ Using retention policy oneday
 ```
 
 ### Queries
+
 Execute all InfluxQL queries in `influx`.
-See [Data Exploration](/influxdb/v1.5/query_language/data_exploration/), [Schema Exploration](/influxdb/v1.5/query_language/schema_exploration/), [Database Management](/influxdb/v1.5/query_language/database_management/), [Authentication and Authorization](/influxdb/v1.5/query_language/authentication_and_authorization/) for InfluxQL documentation.
+
+See [Data exploration](/influxdb/v1.5/query_language/data_exploration/), [Schema exploration](/influxdb/v1.5/query_language/schema_exploration/), [Database management](/influxdb/v1.5/query_language/database_management/), [Authentication and authorization](/influxdb/v1.5/query_language/authentication_and_authorization/) for InfluxQL documentation.

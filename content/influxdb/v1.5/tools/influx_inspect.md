@@ -8,11 +8,11 @@ menu:
 ---
 
 Influx Inspect is a tool designed to view detailed information about on disk
-shards, as well as export data from a shard to [line protocol](/influxdb/v1.5/concepts/glossary/#line-protocol)
-that can be inserted back into the database.
+shards, as well as export data from a shard to [line protocol](/influxdb/v1.5/concepts/glossary/#line-protocol) that can be inserted back into the database.
 
 ### `influx_inspect [[command] [arguments]]`
--help is the default command and will print usage for the tool.
+
+`-help` is the default command and will print usage for the tool.
 
 The commands are:
 ```
@@ -102,23 +102,23 @@ Dump raw [measurement](/influxdb/v1.5/concepts/glossary/#measurement) data.
 Dump raw [tag keys](/influxdb/v1.5/concepts/glossary/#tag-key).
 
 ##### `-tag-values`
- Dump raw [tag values](/influxdb/v1.5/concepts/glossary/#tag-value).
+Dump raw [tag values](/influxdb/v1.5/concepts/glossary/#tag-value).
 
 ##### `-tag-value-series`
 Dump raw series for each tag value.
 
 ##### `-measurement-filter` <regular_expression>
-Filters data by measurement regular expression.
+Filter data by measurement regular expression.
 
 ##### `-tag-key-filter` <regular_expression>
-Filters data by tag key regular expression.
+Filter data by tag key regular expression.
 
 ##### `-tag-value-filter` <regular_expresssion>
-Filters data by tag value regular expression.
+Filter data by tag value regular expression.
 
 
 ### `influx_inspect export`
-Exports all tsm files to line protocol.  This output file can be imported via
+Export all TSM files to line protocol.  This output file can be imported using
 the
 [influx](/influxdb/v1.5/tools/shell/#import-data-from-a-file-with-import)
 command.
@@ -232,8 +232,6 @@ Root storage path
 
 # Caveats
 
-The system does not have access to the meta store when exporting TSM shards.
-As such, it always creates the [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) with infinite duration and
-replication factor of 1.  End users may want to change this prior to
-re-importing if they are importing to a cluster or want a different duration
+The system does not have access to the metastore when exporting TSM shards.
+As such, it always creates the [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) with infinite duration and replication factor of 1.  End users may want to change this prior to reimporting if they are importing to a cluster or want a different duration
 for retention.
