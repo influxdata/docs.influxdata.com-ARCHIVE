@@ -4,7 +4,7 @@ menu:
   chronograf_1_4:
     name: Visualization types
     weight: 20
-    parent: Administration
+    parent: Guides
 ---
 
 ## Visualization types supported in Chronograf
