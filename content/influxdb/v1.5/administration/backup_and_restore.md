@@ -53,7 +53,8 @@ The improved `backup` command is similar to previous versions, except that it
 generates backups in an InfluxDB Enterprise-compatible format and has some new filtering options to constrain the range of data points that are exported to the backup.
 
 ```
-influxd backup -database <db_name>
+influxd backup
+    [ -database <db_name> ]
     [ -portable ]
     [ -host <host:port> ]
     [ -retention <rp_name> ] | [ -shard <shard_ID> -retention <rp_name> ]
@@ -72,7 +73,7 @@ influxd backup -portable [options] <path-to-backup>
 
 Optional arguments are enclosed in brackets.
 
-- `-database <db_name>`: The database to back up. Required.
+- `-database <db_name>`: The database to back up. If not specified, all databases are backed up.
 
 - `[ -portable ]`: Generates backup files in the newer InfluxDB Enterprise-compatible format. Recommended for InfluxDB OSS.
 
@@ -108,6 +109,12 @@ To backup only the telegraf database:
 influxd backup -database telegraf <path-to-backup>
 ```
 
+To backup a database for a specified time interval:
+
+```
+influxd backup -database mytsd -start 2017-04-28T06:49:00Z -end 2017-04-28T06:50:00Z /tmp/backup/influxdb
+```
+
 ### `restore`
 
 An online `restore` process is initiated by using the `restore` command with either the `-portable` argument (indicating the new Enterprise-compatible backup format) or `-online` flag (indicating the legacy backup format).
@@ -129,7 +136,7 @@ influxd restore [ -db <db_name> ]
 
 - `[ -host <host:port> ]`: Host and port for InfluxDB OSS instance . Default value is `'127.0.0.1:8088'`. Required for remote connections. Example: `-host 127.0.0.1:8088`
 
-- `[ -db <db_name> ]`: Name of the database to be restored from the backup.
+- `[ -db <db_name> ]`: Name of the database to be restored from the backup. If not specified, all databases will be restored.
 
 - `[ -newdb <newdb_name> ]`: Name of the database into which the archived data will be imported on the target system. If not specified, then the value for `-db` is used.  The new database name must be unique to the target system.
 
