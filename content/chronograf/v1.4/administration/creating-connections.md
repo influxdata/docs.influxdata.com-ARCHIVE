@@ -4,7 +4,7 @@ menu:
   chronograf_1_4:
     name: Creating InfluxDB and Kapacitor connections
     weight: 30
-    parent: guides
+    parent: Administration
 ---
 
 ## Managing InfluxDB connections
