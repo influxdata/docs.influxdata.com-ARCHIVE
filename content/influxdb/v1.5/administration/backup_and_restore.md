@@ -1,9 +1,9 @@
 ---
-title: Backup and restore for InfluxDB OSS
+title: Backing up and restoring in InfluxDB OSS
 
 menu:
   influxdb_1_5:
-    name: Backup and restore
+    name: Backing up and restoring
     weight: 30
     parent: administration
 ---
@@ -125,7 +125,7 @@ influxd restore [ -db <db_name> ]
 
 #### Arguments
 
-- `-portable`: Use the new Enterprise-compatible backup format. Recommended for InfluxDB OSS. 
+- `-portable`: Use the new Enterprise-compatible backup format. Recommended for InfluxDB OSS.
 
 - `-online`: Use the legacy backup format. Not recommended.
 

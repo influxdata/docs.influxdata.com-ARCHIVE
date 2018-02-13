@@ -10,7 +10,7 @@ menu:
 
 ## Upgrading to InfluxDB Enterprise 1.5 (with TSI enabled)
 
-
+Version 1.5 includes the first official Time Series Index (TSI) release. Although you can install without enabling TSI, you are encouraged to begin leveraging the advantages the TSI disk-based indexing offers.
 
 
 ## Upgrading from version 1.3.x to 1.3.8
@@ -22,12 +22,12 @@ continue using the TSI preview.  Unfortunately, these steps cannot be executed w
 result in downtime.
 
 1. Stop the meta and data node processes.
-1. Download and update bits to 1.3.8.
-1. Delete all /index directories contained with the data nodes (default configuration is [data] dir = /var/lib/influxdb/data).
-1. Rebuild the TSI indexes using the `influx_inspect` utility with the new `inmem2tsi` parameter.  More documentation
+2. Download and update bits to 1.3.8.
+3. Delete all /index directories contained with the data nodes (default configuration is [data] dir = /var/lib/influxdb/data).
+4. Rebuild the TSI indexes using the `influx_inspect` utility with the new `inmem2tsi` parameter.  More documentation
 describing this new parameter with `influx_inspect` [can be found here](https://docs.influxdata.com/influxdb/v1.5/tools/influx_inspect/).
-1. Restart meta nodes.
-1. Restart data nodes.
+5. Restart meta nodes.
+6. Restart data nodes.
 
 The 1.3.7 release resolved a defect that created duplicate tag values in TSI indexes.
 See Issues [#8995](https://github.com/influxdata/influxdb/pull/8995), and [#8998](https://github.com/influxdata/influxdb/pull/8998).
