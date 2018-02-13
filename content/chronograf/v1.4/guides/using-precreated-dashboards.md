@@ -4,7 +4,7 @@ menu:
   chronograf_1_4:
     name: Using pre-created dashboards
     weight: 10
-    parent: Administration
+    parent: Guides
 ---
 
 

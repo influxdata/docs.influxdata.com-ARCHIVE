@@ -6,7 +6,7 @@ menu:
   kapacitor_1_4:
     name: Load directory service
     identifier: load_directory
-    weight: 20
+    weight: 15
     parent: guides
 ---
 
