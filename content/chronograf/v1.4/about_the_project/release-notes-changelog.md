@@ -6,6 +6,14 @@ menu:
     parent: About the Project
 ---
 
+## v1.4.1.2 [2018-02-13]
+
+### Bug Fixes
+- Respect basepath when fetching server api routes
+- Set default tempVar :interval: with data explorer csv download call.
+- Display series with value of 0 in a cell legend
+
+
 ## v1.4.1.1 [2018-02-12]
 ### Features
 - Allow multiple event handlers per rule
