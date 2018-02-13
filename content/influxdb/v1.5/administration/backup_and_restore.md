@@ -125,9 +125,9 @@ influxd restore [ -db <db_name> ]
 
 #### Arguments
 
-- `-portable`: Use the new Enterprise-compatible backup format. Recommended for both InfluxDB OSS and InfluxDB Enterprise.
+- `-portable`: Use the new Enterprise-compatible backup format. Recommended for InfluxDB OSS. 
 
-- `-online`: Use the legacy backup format.
+- `-online`: Use the legacy backup format. Not recommended.
 
 - `[ -host <host:port> ]`: Host and port for InfluxDB OSS instance . Default value is `'127.0.0.1:8088'`. Required for remote connections. Example: `-host 127.0.0.1:8088`
 
