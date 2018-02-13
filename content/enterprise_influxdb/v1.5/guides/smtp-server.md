@@ -1,5 +1,5 @@
 ---
-title: InfluxDB Enterprise SMTP server setup
+title: Setup of SMTP server for InfluxDB Enterprise
 aliases:
     - /enterprise/v1.5/guides/smtp-server/
 menu:

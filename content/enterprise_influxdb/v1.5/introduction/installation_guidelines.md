@@ -11,28 +11,21 @@ menu:
     parent: Introduction
 ---
 
-Please review the sections below before you begin working with InfluxEnterprise.
+Please review the sections below before you begin working with InfluxDB Enterprise.
 
 ## Which installation is right for me?
 
-There are two ways to install InfluxEnterprise.
+Two options are described for installing InfluxDB Enterprise.
 
-The first option is the [QuickStart Installation](/enterprise_influxdb/v1.5/quickstart_installation/) process.
-We recommend the QuickStart Installation process for users looking to quickly
-get up and running with InfluxEnterprise and for users who are looking to
-evaluate the product.
-The QuickStart Installation process **is not** designed for use
+The [QuickStart snstallation](/enterprise_influxdb/v1.5/quickstart_installation/) process is intended for users looking to quickly get up and running with InfluxDB Enterprise and for users who want to evaluate it.
+The QuickStart installation process **is not** intended for use
 in a production environment.
 
-The second option is the [Production Installation](/enterprise_influxdb/v1.5/production_installation/) process.
-We recommend the Production Installation process for users looking to deploy
-InfluxEnterprise in a production environment.
+The [Production installation](/enterprise_influxdb/v1.5/production_installation/) process is recommended for users intending to deploy the InfluxDB Enterprise installation in a production environment.
 
-> **Note:** If you install InfluxEnterprise with the QuickStart Installation process you
-will need to reinstall InfluxEnterprise with the Production Installation
-process before using the product in a production environment.
+> **Note:** If you install InfluxDB Enterprise with the QuickStart installation process you will need to reinstall InfluxDB Enterprise with the Production installation process before using the product in a production environment.
 
-## Requirements for InfluxEnterprise Clusters
+## Requirements for InfluxDB Enterprise clusters
 
 Please review the [Clustering Guide](http://docs.influxdata.com/enterprise_influxdb/v1.5/concepts/clustering/)
 for an overview of the architecture and concepts in an InfluxEnterprise Cluster
@@ -57,8 +50,7 @@ If you alter the default ports in the configuration file(s), ensure the configur
 
 #### Synchronize time between hosts
 
-InfluxEnterprise uses hosts' local time in UTC to assign timestamps to data and for
-coordination purposes.
+InfluxEnterprise uses hosts' local time in UTC to assign timestamps to data and for coordination purposes.
 Use the Network Time Protocol (NTP) to synchronize time between hosts.
 
 #### Use SSDs
@@ -66,18 +58,17 @@ Use the Network Time Protocol (NTP) to synchronize time between hosts.
 Clusters require sustained availability of 1000-2000 IOPS from the attached storage.
 SANs must guarantee at least 1000 IOPS is always available to InfluxEnterprise
 nodes or they may not be sufficient.
-SSDs are strongly recommended, and we have had no reports of IOPS contention from
-any customers running on SSDs.
+SSDs are strongly recommended, and we have had no reports of IOPS contention from any customers running on SSDs.
 
-#### Use three and only three Meta nodes
+#### Use three and only three meta nodes
 
-Although technically the cluster can function with any number of meta nodes, the best pratice is to ALWAYS
-have an odd number of meta nodes.  This allows the meta nodes to reach consensus.  An even number of meta nodes cannot achieve consensus because there can be no "deciding vote" cast between the nodes if they disagree.
+Although technically the cluster can function with any number of meta nodes, the best pratice is to ALWAYS have an odd number of meta nodes.
+This allows the meta nodes to reach consensus.
+An even number of meta nodes cannot achieve consensus because there can be no "deciding vote" cast between the nodes if they disagree.
 
-Therefore, the minumum number of meta nodes for a high availability (HA) installation is three (3). So, the typical HA installation for InfluxEnterprise is to deploy three meta nodes.
+Therefore, the minumum number of meta nodes for a high availability (HA) installation is three. The typical HA installation for InfluxDB Enterprise deploys three meta nodes.
 
-Aside from three being a magic number, a three meta node cluster can tolerate the permanent loss of a single
-meta node with no degradation in any function or performance.
+Aside from three being a magic number, a three meta node cluster can tolerate the permanent loss of a single meta node with no degradation in any function or performance.
 A replacement meta node can be added to restore the cluster to full redundancy.
 A three meta node cluster that loses two meta nodes will still be able to handle
 basic writes and queries, but no new shards, databases, users, etc. can be created.
@@ -86,7 +77,7 @@ Running a cluster with five meta nodes does allow for the permanent loss of
 two meta nodes without impact on the cluster, but it doubles the
 Raft communication overhead.
 
-#### Meta and Data nodes are fully independent
+#### Meta and data nodes are fully independent
 
 Meta nodes run the Raft consensus protocol together, and manage the metastore of
 all shared cluster information: cluster nodes, databases, retention policies,
@@ -103,4 +94,4 @@ redundancy, all nodes should run on independent servers.
 #### Install Chronograf last
 
 Chronograf should not be installed or configured until the
-InfluxEnterprise cluster is fully functional.
+InfluxDB Enterprise cluster is fully functional.

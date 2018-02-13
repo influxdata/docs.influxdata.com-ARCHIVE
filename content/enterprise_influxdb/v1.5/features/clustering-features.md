@@ -18,7 +18,7 @@ Without a valid license, the process will abort startup.
 ## Query management
 
 Query management works cluster wide. Specifically, `SHOW QUERIES` and `KILL QUERY <ID>` on `"<host>"` can be run on any data node. `SHOW QUERIES` will report all queries running across the cluster and the node which is running the query.
-`KILL QUERY` can abort queries running on the local node or any other remote data node. For details on using the `SHOW QUERIES` and `KILL QUERY` on InfluxEnterprise clusters,
+`KILL QUERY` can abort queries running on the local node or any other remote data node. For details on using the `SHOW QUERIES` and `KILL QUERY` on InfluxDB Enterprise clusters,
 see [Query Management](/influxdb/v1.5/troubleshooting/query_management/).
 
 ## Subscriptions
@@ -29,7 +29,7 @@ Subscriptions used by Kapacitor work in a cluster. Writes to any node will be fo
 
 ### Configuration and operational considerations on a cluster
 
-It is important to understand how to configure Enterprise InfluxDB and how this impacts the Continuous Queries (CQ) engine’s behavior:
+It is important to understand how to configure InfluxDB Enterprise and how this impacts the Continuous Queries (CQ) engine’s behavior:
 
 - **Data node configuration** `[continuous queries]`
 [run-interval](/enterprise_influxdb/v1.5/administration/configuration#lease-duration--1m0s)

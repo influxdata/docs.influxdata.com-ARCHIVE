@@ -1,5 +1,5 @@
 ---
-title: Upgrading from Previous Versions
+title: Upgrading to InfluxDB Enterprise 1.5
 aliases:
     - /enterprise/v1.5/administration/upgrading/
 menu:
@@ -7,6 +7,11 @@ menu:
     weight: 0
     parent: Administration
 ---
+
+## Upgrading to InfluxDB Enterprise 1.5 (with TSI enabled)
+
+
+
 
 ## Upgrading from version 1.3.x to 1.3.8
 Version 1.3.8 is a drop-in replacement for earlier releases of 1.3.x with no data migration required, unless you have been using the TSI (Time Series Index) preview with 1.3.6 or earlier releases.

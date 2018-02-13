@@ -1,5 +1,5 @@
 ---
-title: InfluxEnterprise Users
+title: InfluxDB Enterprise users
 aliases:
     - /enterprise/v1.4/features/users/
 menu:
@@ -8,7 +8,7 @@ menu:
     parent: Features
 ---
 
-InfluxEnterprise users have functions that are either specific to the web
+InfluxDB Enterprise users have functions that are either specific to the web
 console or specific to the cluster:
 ```
 Users                            Cluster              Permissions
@@ -43,7 +43,7 @@ view Chronograf.
 Roles are groups of permissions.
 A single role can belong to several cluster accounts.
 
-InfluxEnterprise clusters have two built-in roles:
+InfluxDB Enterprise clusters have two built-in roles:
 
 #### Global Admin
 

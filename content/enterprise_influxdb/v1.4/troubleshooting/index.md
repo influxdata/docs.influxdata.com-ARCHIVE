@@ -7,5 +7,5 @@ menu:
     weight: 30
 ---
 
-## [Frequently Asked Questions](/enterprise_influxdb/v1.4/troubleshooting/frequently_asked_questions/)
-## [Reporting Issues](/enterprise_influxdb/v1.4/troubleshooting/reporting-issues/)
+## [Frequently asked questions](/enterprise_influxdb/v1.4/troubleshooting/frequently_asked_questions/)
+## [Reporting issues](/enterprise_influxdb/v1.4/troubleshooting/reporting-issues/)

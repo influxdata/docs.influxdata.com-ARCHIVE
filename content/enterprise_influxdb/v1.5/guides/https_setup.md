@@ -1,12 +1,13 @@
 ---
-title: HTTPS Setup
+title: Enabling HTTPS for InfluxDB Enterprise
 menu:
   enterprise_influxdb_1_5:
+    name: Enabling HTTPS
     weight: 100
     parent: Guides
 ---
 
-This guide describes how to enable HTTPS with InfluxEnterprise.
+This guide describes how to enable HTTPS with InfluxDB Enterprise.
 Setting up HTTPS secures the communication between clients and the InfluxEnterprise
 server,
 and, in some cases, HTTPS verifies the authenticity of the InfluxEnterprise server to

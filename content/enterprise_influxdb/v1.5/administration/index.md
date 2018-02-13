@@ -7,10 +7,10 @@ menu:
     weight: 50
 ---
 
-## [Logs](/enterprise_influxdb/v1.5/administration/logs/)
+## [Logging in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/logs/)
 
-## [Upgrading from Previous Versions](/enterprise_influxdb/v1.5/administration/upgrading/)
+## [Upgrading from previous Versions](/enterprise_influxdb/v1.5/administration/upgrading/)
 
-## [Configuration](/enterprise_influxdb/v1.5/administration/configuration/)
+## [Configuring InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/configuration/)
 
-## [Host Rename](/enterprise_influxdb/v1.5/administration/renaming)
+## [Host renaming in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/renaming)

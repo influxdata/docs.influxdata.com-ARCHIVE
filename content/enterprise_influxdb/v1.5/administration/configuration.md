@@ -1,5 +1,5 @@
 ---
-title: Configuration
+title: Configuring InfluxDB Enterprise
 aliases:
     - /enterprise/v1.5/administration/configuration/
 menu:
@@ -36,7 +36,7 @@ menu:
     * [[anti-entropy]](#anti-entropy)
 
 <br>
-# Using Configuration Files
+# Using configuration files
 
 #### Print a default configuration file
 
@@ -409,10 +409,10 @@ Environment variable: `INFLUXDB_META_INTERNAL_SHARED_SECRET`
 
 <br>
 <br>
-# Data Node Configuration
+# Data node configuration
 
-The InfluxEnterprise data node configuration settings overlap significantly
-with the settings in InfluxDB's Open Source Software (OSS).
+The InfluxDB Enterprise data node configuration settings overlap significantly
+with the settings in InfluxDB OSS.
 Where possible, the following sections link to the [configuration documentation](/influxdb/v1.5/administration/config/)
 for InfluxDB's OSS.
 
@@ -469,7 +469,7 @@ mutually exclusive and one must remain set to the empty string.
 </dt>
 
 We recommended performing rolling restarts on the nodes after the
-license key update. Restart one Meta, Data, or Enterprise service at a time and
+license key update. Restart one meta, data, or Enterprise service at a time and
 wait for it to come back up successfully. The cluster should remain unaffected
 as long as only one node is restarting at a time as long as there are two or more
 data nodes.
@@ -487,7 +487,7 @@ The license file should be saved on every server in the cluster, including Meta,
 Data, and Enterprise nodes. The file contains the JSON-formatted license, and must
 be readable by the influxdb user. Each server in the cluster independently verifies
 its license. We recommended performing rolling restarts on the nodes after the
-license file update. Restart one Meta, Data, or Enterprise service at a time and
+license file update. Restart one meta, data, or Enterprise service at a time and
 wait for it to come back up successfully. The cluster should remain unaffected
 as long as only one node is restarting at a time as long as there are two or more
 data nodes.

@@ -1,5 +1,5 @@
 ---
-title: Backup and restore for InfluxDB Enterprise
+title: Backup and restore in InfluxDB Enterprise
 aliases:
     - /enterprise/v1.5/guides/backup-and-restore/
 menu:

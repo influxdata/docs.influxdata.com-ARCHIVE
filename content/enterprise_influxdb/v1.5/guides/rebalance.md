@@ -1,10 +1,10 @@
 ---
-title: InfluxDB Enterprise cluster rebalancing
+title: Rebalancing InfluxDB Enterprise clusters
 aliases:
     - /enterprise/v1.5/guides/rebalance/
 menu:
   enterprise_influxdb_1_5:
-    name: Cluster rebalancing
+    name: Rebalancing clusters
     weight: 19
     parent: Guides
 ---

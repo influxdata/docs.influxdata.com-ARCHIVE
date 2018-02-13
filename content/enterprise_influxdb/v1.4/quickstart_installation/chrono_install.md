@@ -1,9 +1,10 @@
 ---
-title: Step 2 - Chronograf Installation
+title: Step 2 - Installing Chronograf
 aliases:
     - /enterprise/v1.4/production_installation/chrono_install/
 menu:
   enterprise_influxdb_1_4:
+    name: Installing Chronograf
     weight: 20
     parent: quickstart_installation
     identifier: chrono_install_qs

@@ -1,23 +1,24 @@
 ---
-title: Fine-Grained Authorization
+title: Fine-grained authorization in InfluxDB Enterprise
 alias:
   -/docs/v1.5/administration/fga
 menu:
   enterprise_influxdb_1_5:
+    name: Fine-grained authorization
     weight: 10
     parent: Guides
 ---
 
-## Controlling access to data with Enterprise's Fine-Grained Authorization
+## Controlling access to data with InfluxDB Enterprise's fine-grained authorization
 
-In open source InfluxDB, access control operates only at a database level.
-In Enterprise, fine-grained authorization can be used to control access at a measurement or series level.
+In InfluxDB OSS, access control operates only at a database level.
+In InfluxDB Enterprise, fine-grained authorization can be used to control access at a measurement or series level.
 
 ### Concepts
 
 To use fine-grained authorization (hereafter "FGA"), you must first [enable authentication](/influxdb/v1.5/query_language/authentication_and_authorization/#set-up-authentication) in your configuration file.
 Then the admin user needs to create users through the query API and grant those users explicit read and/or write privileges per database.
-So far, this is the same as how you would configure authorization on an open source InfluxDB instance.
+So far, this is the same as how you would configure authorization on an InfluxDB OSS instance.
 
 To continue setting up fine-grained authorization, the admin user must first set _restrictions_ which define a combination of database, measurement, and tags which cannot be accessed without an explicit _grant_.
 A _grant_ enables access to series that were previously restricted.
@@ -25,7 +26,7 @@ A _grant_ enables access to series that were previously restricted.
 Restrictions limit access to the series that match the database, measurement, and tags specified.
 The different access permissions (currently just "read" and "write") can be restricted independently depending on the scenario.
 Grants will allow access, according to the listed permissions, to restricted series for the users and roles specified.
-Users are the same as the users created in InfluxQL, and [roles](/enterprise_influxdb/v1.5/features/users/#cluster-user-information), an Enterprise feature, are created separately through the Meta HTTP API.
+Users are the same as the users created in InfluxQL, and [roles](/enterprise_influxdb/v1.5/features/users/#cluster-user-information), an InfluxDB Enterprise feature, are created separately through the Meta HTTP API.
 
 ### Modifying grants and restrictions
 

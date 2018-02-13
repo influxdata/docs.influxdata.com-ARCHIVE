@@ -1,31 +1,32 @@
 ---
-title: Step 1 - Cluster Installation
+title: Step 1 - Installing InfluxDB Enterprise clusters
 aliases:
     - /enterprise/v1.4/quickstart_installation/cluster_installation/
 
 menu:
   enterprise_influxdb_1_4:
+    name: Installing clusters
     weight: 10
     parent: quickstart_installation
     identifier: meta_quickstart
 ---
 
-InfluxEnterprise offers highly scalable clusters on your infrastructure
+InfluxDB Enterprise offers highly scalable clusters on your infrastructure
 and a management UI for working with clusters.
 The QuickStart Installation process will get you up and running with your
-InfluxEnterprise cluster.
+InfluxDB Enterprise cluster.
 
 > The QuickStart Installation process **is not** designed for use
 in a production environment.
 Follow the instructions outlined in the [Production Installation](/enterprise_influxdb/v1.4/production_installation/) section
 if you wish to use InfluxEnterprise in a production environment.
-Please note that if you install InfluxEnterprise with the QuickStart Installation process you
+Please note that if you install InfluxDB Enterprise with the QuickStart Installation process you
 will need to reinstall InfluxEnterprise with the Production Installation
 process before using the product in a production environment.
 
-## Setup Description and Requirements
+## Setup description and requirements
 
-### Setup Description
+### Setup description
 
 The QuickStart Installation process sets up an InfluxEnterprise cluster on three servers.
 Each server is a [meta node](/enterprise_influxdb/v1.4/concepts/glossary/#meta-node) and
@@ -35,7 +36,7 @@ and the [data service](/enterprise_influxdb/v1.4/concepts/glossary/#data-service
 
 ### Requirements
 
-#### License Key or File
+#### License key or file
 
 InfluxEnterprise requires a license key **OR** a license file to run.
 Your license key is available at [InfluxPortal](https://portal.influxdata.com/licenses).
@@ -54,13 +55,13 @@ If the nodes cannot reach `portal.influxdata.com` on port `80` or `443`,
 you'll need to set the `license-path` setting instead of the `license-key`
 setting in the meta node and data node configuration files.
 
-#### Load Balancer
+#### Load balancer
 
 InfluxEnterprise does not function as a load balancer.
 You will need to configure your own load balancer to send client traffic to the
 data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.4/tools/api/)).
 
-## Step 1: Modify the /etc/hosts file in each of your servers
+## Step 1: Modify the `/etc/hosts` file in each of your servers
 
 Add your three servers' hostnames and IP addresses to **each** of your server's `/etc/hosts`
 file.
@@ -93,16 +94,14 @@ output for `quickstart-cluster-01`:
     rtt min/avg/max/mdev = 0.064/0.064/0.064/0.000 ms
 ```
 
-If there are any connectivity issues please resolve them before proceeding with the
-installation.
-A healthy cluster requires that every meta node and data node can communicate with every other
-meta node and data node.
+If there are any connectivity issues, resolve them before proceeding with the installation.
+A healthy cluster requires that every meta node and data node can communicate with every other meta node and data node.
 
-## Step 2: Set up the Meta Nodes
+## Step 2: Set up the meta nodes
 
 Perform the following steps on all three servers.
 
-### I. Download and Install the Meta Service
+### I. Download and install the meta dervice
 
 
 #### Ubuntu & Debian (64-bit)
@@ -116,7 +115,7 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.3.8_c1.3.8.x8
 sudo yum localinstall influxdb-meta-1.3.8_c1.3.8.x86_64.rpm
 ```
 
-### II. Edit the Meta Service Configuration File
+### II. Edit the meta service configuration file
 
 In `/etc/influxdb/influxdb-meta.conf`:
 
@@ -142,7 +141,7 @@ hostname="<quickstart-cluster-0x>" #✨
 
 > **Note:** The `hostname` in the configuration file must match the `hostname` in your server's `/etc/hosts` file.
 
-### III. Start the Meta Service
+### III. Start the meta service
 
 On sysvinit systems, enter:
 ```
@@ -164,11 +163,11 @@ You should see output similar to:
 >
     influxdb  3207  0.8  4.4 483000 22168 ?        Ssl  17:05   0:08 /usr/bin/influxd-meta -config /etc/influxdb/influxdb-meta.conf
 
-## Step 3: Set up the Data Nodes
+## Step 3: Set up the data nodes
 
 Perform the following steps on all three servers.
 
-### I. Download and Install the Data Service
+### I. Download and install the data service
 
 #### Ubuntu & Debian (64-bit)
 ```
@@ -181,7 +180,7 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.3.8_c1.3.8.x8
 sudo yum localinstall influxdb-data-1.3.8_c1.3.8.x86_64.rpm
 ```
 
-### II. Edit the Data Service Configuration File
+### II. Edit the data service configuration file
 
 First, in `/etc/influxdb/influxdb.conf`, uncomment:
 

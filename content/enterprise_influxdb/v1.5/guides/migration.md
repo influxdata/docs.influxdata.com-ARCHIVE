@@ -1,9 +1,10 @@
 ---
-title: InfluxDB OSS to InfluxDB Enterprise cluster migration
+title: Migrating InfluxDB OSS instances to InfluxDB Enterprise clusters
 aliases:
     - /enterprise/v1.5/guides/migration/
 menu:
   enterprise_influxdb_1_5:
+    name: Migrating InfluxDB OSS to clusters
     weight: 10
     parent: Guides
 ---

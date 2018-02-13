@@ -1,12 +1,13 @@
 ---
-title: Features
+title: InfluxDB Enterprise features
 aliases:
     - /enterprise/v1.5/features/
 menu:
   enterprise_influxdb_1_5:
+    name: Features
     weight: 40
 ---
 
-## [InfluxEnterprise Users](/enterprise_influxdb/v1.5/features/users/)
-## [Cluster Commands](/enterprise_influxdb/v1.5/features/cluster-commands/)
-## [Clustering Features](/enterprise_influxdb/v1.5/features/clustering-features/)
+## [InfluxEnterprise users](/enterprise_influxdb/v1.5/features/users/)
+## [InfluxDB Enterprise cluster commands](/enterprise_influxdb/v1.5/features/cluster-commands/)
+## [Clustering features](/enterprise_influxdb/v1.5/features/clustering-features/)

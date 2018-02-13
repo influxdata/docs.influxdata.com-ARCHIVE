@@ -1,5 +1,5 @@
 ---
-title: QuickStart Installation
+title: QuickStart installation
 aliases:
     - /enterprise/v1.4/quickstart_installation/
 menu:
