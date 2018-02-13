@@ -9,13 +9,15 @@ menu:
 ## v1.4.1.2 [2018-02-13]
 
 ### Bug Fixes
-- Respect basepath when fetching server api routes
-- Set default tempVar :interval: with data explorer csv download call.
-- Display series with value of 0 in a cell legend
+- Respect `basepath` when fetching server API routes
+- Set default `tempVar :interval:` with Data Explorer CSV download call.
+- Display series with value of `0` in a cell legend
 
 
 ## v1.4.1.1 [2018-02-12]
+
 ### Features
+
 - Allow multiple event handlers per rule
 - Add "Send Test Alert" button to test Kapacitor alert configurations
 - Link to Kapacitor config panel from Alert Rule builder
@@ -25,7 +27,9 @@ menu:
 - Add All Users page, visible only to SuperAdmins
 - Introduce `chronoctl` binary for user CRUD operations
 - Introduce Mappings to allow control over new user organization assignments
+
 ### UI Improvements
+
 - Clarify terminology surrounding InfluxDB & Kapacitor connections
 - Separate saving TICKscript from exiting editor page
 - Enable Save (⌘ + Enter) and Cancel (Escape) hotkeys in Cell Editor Overlay
@@ -35,18 +39,21 @@ menu:
 
 - Fix TICKscript Sensu alerts when no group by tags selected
 - Display 200 most-recent TICKscript log messages; prevent overlapping
-- Add "TO" to kapacitor SMTP config; improve config update error messages
+- Add `TO` to kapacitor SMTP config; improve config update error messages
 - Remove CLI options from `sysvinit` service file
 - Remove CLI options from `systemd` service file
 - Fix disappearance of text in Single Stat graphs during editing
 - Redirect to Alerts page after saving Alert Rule
 
 ## v1.4.0.1 [2018-1-9]
+
 ### Features
+
 - Add separate CLI flag for canned sources, kapacitors, dashboards, and organizations
 - Add telegraf interval configuration
 
 ### Bug Fixes
+
 - Allow insecure (self-signed) certificates for kapacitor and influxdb
 - Fix positioning of custom time indicator
 
@@ -98,7 +105,9 @@ menu:
 * Update MySQL pre-canned dashboard to have query derivative correctly
 
 ## v1.3.10.0 [2017-10-24]
+
 ### Bug Fixes
+
 1. Improve the copy in the retention policy edit page.
 1. Fix `Could not connect to source` bug on source creation with unsafe-ssl.
 1. Fix when exporting `SHOW DATABASES` CSV has bad data.
@@ -108,6 +117,7 @@ menu:
 1. Fix persistence of "SELECT AS" statements in queries.
 
 ### Features
+
 1. Every dashboard can now have its own time range.
 1. Add CSV download option in dashboard cells.
 1. Implicitly prepend source URLs with `http://`
@@ -115,6 +125,7 @@ menu:
 1. Add manual refresh button for Dashboard, Data Explorer, and Host Pages.
 
 ### UI Improvements
+
 1. Increase size of Cell Editor query tabs to reveal more of their query strings.
 1. Improve appearance of Admin Page tabs on smaller screens.
 1. Add cancel button to TICKscript editor.
