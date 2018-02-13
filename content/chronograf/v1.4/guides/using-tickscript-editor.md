@@ -2,13 +2,10 @@
 title: Using Kapacitor editor in Chronograf
 
 menu:
-  kapacitor_1_4:
+  chronograf_1_4:
     weight: 2
     parent: guides
 ---
-
-
-
 ## Writing TICKscripts in Chronograf
 
 **Required Role:** editor, admin
