@@ -1,5 +1,5 @@
 ---
-title: Configuration
+title: Configuring InfluxDB Enterprise
 aliases:
     - /enterprise/v1.3/administration/configuration/
 menu:
@@ -110,9 +110,9 @@ If you do not supply a configuration file, InfluxDB uses an internal default
 configuration (equivalent to the output of `influxd config` and `influxd-meta
 config`).
 
-<dt> Note for 1.3, the influxd-meta binary, if no configuration is specified, will check the INFLUXDB_META_CONFIG_PATH. 
-If that environment variable is set, the path will be used as the configuration file. 
-If unset, the binary will check the ~/.influxdb and /etc/influxdb folder for an influxdb-meta.conf file. 
+<dt> Note for 1.3, the influxd-meta binary, if no configuration is specified, will check the INFLUXDB_META_CONFIG_PATH.
+If that environment variable is set, the path will be used as the configuration file.
+If unset, the binary will check the ~/.influxdb and /etc/influxdb folder for an influxdb-meta.conf file.
 If it finds that file at either of the two locations, the first will be loaded as the configuration file automatically.
 <br>
 This matches a similar behavior that the open source and data node versions of InfluxDB already follow.
@@ -203,7 +203,7 @@ The meta node transmits the license key to [portal.influxdata.com](https://porta
 The server caches the license file locally.
 You must use the [`license-path` setting](#license-path) if your server cannot communicate with [https://portal.influxdata.com](https://portal.influxdata.com).
 
-Use the same key for all nodes in the same cluster.  
+Use the same key for all nodes in the same cluster.
 <dt>The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
 </dt>
 
@@ -224,7 +224,7 @@ Contact [sales@influxdb.com](mailto:sales@influxdb.com) if a licence file is req
 The license file should be saved on every server in the cluster, including Meta,
 Data, and Enterprise nodes. The file contains the JSON-formatted license, and must
 be readable by the influxdb user. Each server in the cluster independently verifies
-its license. 
+its license.
 
 <dt>
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
@@ -394,7 +394,7 @@ For example, [Continuous Queries](/influxdb/v1.3/concepts/glossary/#continuous-q
 (CQ) use a lease so that all data nodes aren't running the same CQs at once.
 
 Environment variable: `INFLUXDB_META_LEASE_DURATION`
- 
+
 ### shared-secret = ""
 The shared secret used by the API for JWT authentication.
 Set [`auth-enabled`](#auth-enabled-false) to `true` if using this option.
@@ -411,8 +411,8 @@ Environment variable: `INFLUXDB_META_INTERNAL_SHARED_SECRET`
 <br>
 # Data Node Configuration
 
-The InfluxEnterprise data node configuration settings overlap significantly
-with the settings in InfluxDB's Open Source Software (OSS).
+The InfluxDB Enterprise data node configuration settings overlap significantly
+with the settings in InfluxDB OSS.
 Where possible, the following sections link to the [configuration documentation](/influxdb/v1.3/administration/config/)
 for InfluxDB's OSS.
 
@@ -569,8 +569,8 @@ Environment variable: `INFLUXDB_DATA_WAL_DIR`
 
 ### wal-fsync-delay = "0s"
 
-The amount of time that a write waits before fsyncing. Use a duration greater than 0 to batch 
-up multiple fsync calls. This is useful for slower disks or when experiencing WAL write contention. 
+The amount of time that a write waits before fsyncing. Use a duration greater than 0 to batch
+up multiple fsync calls. This is useful for slower disks or when experiencing WAL write contention.
 A value of 0s fsyncs every write to the WAL. We recommend values in the range of 0ms-100ms for non-SSD disks.
 
 Environment variable: `INFLUXDB_DATA_WAL_FSYNC_DELAY`
@@ -617,17 +617,17 @@ See the [OSS documentation](/influxdb/v1.3/administration/config/#max-values-per
 
 Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 
-### index-version = inmem 
+### index-version = inmem
 
-The type of shard index to use for new shards. The default is an in-memory index that is recreated at startup. 
+The type of shard index to use for new shards. The default is an in-memory index that is recreated at startup.
 A value of tsi1 will use a disk based index that supports higher cardinality datasets.
 
 Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 
 ### max-concurrent-compactions = 0
 
-The maximum number of concurrent full and level [compactions](/influxdb/v1.3/concepts/storage_engine/#compactions) 
-that can run at one time.  A value of 0 results in runtime.GOMAXPROCS(0) used at runtime.  
+The maximum number of concurrent full and level [compactions](/influxdb/v1.3/concepts/storage_engine/#compactions)
+that can run at one time.  A value of 0 results in runtime.GOMAXPROCS(0) used at runtime.
 This setting does not apply to cache snapshotting.
 
 Environment variable: `INFLUXDB_DATA_MAX_CONCURRENT_COMPACTIONS`
@@ -707,7 +707,7 @@ See the [OSS documentation](/influxdb/v1.3/administration/config/#max-select-buc
 
 Environment variable: `INFLUXDB_CLUSTER_MAX_SELECT_BUCKETS`
 
-### pool-max-idle-time = "60s" 
+### pool-max-idle-time = "60s"
 
 The time a stream remains idle in the connection pool after which it's reaped.
 
@@ -760,13 +760,18 @@ Environment variable: `INFLUXDB_SHARD_PRECREATION_ADVANCE_PERIOD`
 ## [admin]
 
 In version 1.3, the web admin interface is no longer available in InfluxDB.
-The interface does not run on port 8083 and InfluxDB ignores the [admin] section in the configuration file
-if that section is present.
-[Chronograf](/chronograf/latest) replaces the web admin interface with improved tooling for querying data, 
-writing data, and database management.
+The interface does not run on port 8083 and InfluxDB ignores the [admin] section in the configuration file if that section is present.
+[Chronograf](/chronograf/latest) replaces the web admin interface with improved tooling for querying data, writing data, and database management.
 See [Chronograf's transition guide](/chronograf/latest/guides/transition-web-admin-interface/) for more information.
 
 ## [monitor]
+
+By default, InfluxDB writes system monitoring data to the `_internal` database. If that database does not exist, InfluxDB creates it automatically. The `DEFAULT` retention policy on the `internal` database is seven days. To change the default seven-day retention policy, you must [create](/influxdb/v1.3/query_language/database_management/#retention-policy-management) it.
+
+For InfluxDB Enterprise production systems, InfluxData recommends including a dedicated InfluxDB (OSS) monitoring instance for monitoring InfluxDB Enterprise cluster nodes.
+
+* On the dedicated InfluxDB monitoring instance, set `store-enabled = false` to avoid potential performance and storage issues.
+* On each InfluxDB cluster node, install a Telegraf input plugin and Telegraf output plugin configured to report data to the dedicated InfluxDB monitoring instance.
 
 See the [OSS documentation](/influxdb/v1.3/administration/config/#monitor).
 
@@ -776,7 +781,7 @@ See the [OSS documentation](/influxdb/v1.3/administration/config/#store-enabled-
 
 Environment variable: `INFLUXDB_MONITOR_STORE_ENABLED`
 
-###  store-database = "\_internal"  
+###  store-database = "\_internal"
 
 See the [OSS documentation](/influxdb/v1.3/administration/config/#store-database-internal).
 
@@ -845,7 +850,7 @@ See the [OSS documentation](/influxdb/v1.3/administration/config/#bind-address-8
 
 Environment variable: `INFLUXDB_HTTP_BIND_ADDRESS`
 
-###  auth-enabled = false  
+###  auth-enabled = false
 
 See the [OSS documentation](/influxdb/v1.3/administration/config/#auth-enabled-false).
 
@@ -857,7 +862,7 @@ See the [OSS documentation](/influxdb/v1.3/administration/config/#log-enabled-tr
 
 Environment variable: `INFLUXDB_HTTP_LOG_ENABLED`
 
-###  write-tracing = false  
+###  write-tracing = false
 
 See the [OSS documentation](/influxdb/v1.3/administration/config/#write-tracing-false).
 
@@ -905,7 +910,7 @@ Environment variable: `INFLUXDB_HTTP_MAX_CONNECTION_LIMIT`
 
 See the [OSS documentation](/influxdb/v1.3/administration/config/#shared-secret).
 
-This setting is required and must match on each data node if the cluster is using the InfluxEnterprise Web Console.
+This setting is required and must match on each data node if the cluster is using the InfluxDB Enterprise Web Console.
 
 Environment variable: `INFLUXDB_HTTP_SHARED_SECRET`
 
@@ -994,7 +999,7 @@ If there are N data nodes in the cluster, each data node may have up to N-1 hint
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_MAX_SIZE`
 
-###  max-age = "168h0m0s"  
+###  max-age = "168h0m0s"
 
 The time writes sit in the queue before they are purged. The time is determined by how long the batch has been in the queue, not by the timestamps in the data.
 If another data node is unreachable for more than the `max-age` it can lead to data loss.
@@ -1029,7 +1034,7 @@ The time period after which the hinted handoff retries a write after the write f
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_INTERVAL`
 
-###  retry-max-interval = "10s"  
+###  retry-max-interval = "10s"
 
 The maximum interval after which the hinted handoff retries a write after the write fails.
 The `retry-max-interval` option is no longer in use and will be removed from the configuration file in a future release.
@@ -1037,7 +1042,7 @@ Changing the `retry-max-interval` setting has no effect on your cluster.
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_MAX_INTERVAL`
 
-###  purge-interval = "1m0s"  
+###  purge-interval = "1m0s"
 
 The interval at which InfluxDB checks to purge data that are above `max-age`.
 
@@ -1064,4 +1069,3 @@ The maximum number of shards that a single data node will copy or repair in para
 Environment variable: `INFLUXDB_ANTI_ENTROPY_MAX_FETCH`
 
 <br>
-

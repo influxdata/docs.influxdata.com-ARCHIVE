@@ -3,7 +3,7 @@ title: Writing Data with the HTTP API
 
 menu:
   influxdb_1_3:
-    weight: 0
+    weight: 1
     parent: guides
 ---
 

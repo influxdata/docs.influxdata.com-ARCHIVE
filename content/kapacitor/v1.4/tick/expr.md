@@ -1,5 +1,5 @@
 ---
-title: Lambda Expressions
+title: Lambda expressions
 
 menu:
   kapacitor_1_4:
@@ -28,7 +28,7 @@ All lambda expressions in TICKscript begin with the `lambda:` keyword.
 
 In some nodes the results of a lambda expression can be captured into a new
 field as a named result using the property setter `.as()`.
-In this way they can be used in other nodes further down the pipeline.  
+In this way they can be used in other nodes further down the pipeline.
 
 <!--
 Stateful
@@ -95,10 +95,10 @@ look like this:
 
 If in the logs an error appears of the type `E! mismatched type to binary
 operator...`, check to ensure that the fields on both sides of the operator are
-of the same and the desired type.   
+of the same and the desired type.
 
 In short, to ensure that the type of a field value is correct, use the built-in
-type conversion functions (see [below](#above-header-type-conversion)).   
+type conversion functions (see [below](#above-header-type-conversion)).
 
 # Built-in Functions
 
@@ -126,7 +126,7 @@ sigma(value float64) float64
 ##### Spread
 
 Computes the running range of all values passed into it.  The range is the
-difference between the maximum and minimum values received.  
+difference between the maximum and minimum values received.
 
 ```javascript
 spread(value float64) float64

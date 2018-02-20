@@ -180,7 +180,7 @@ influxd-ctl add-meta enterprise-meta-02:8091
 influxd-ctl add-meta enterprise-meta-03:8091
 ```
 
-> **Note:** Please make sure that you specify the fully qualified host name of
+> **Note:** Please make sure that you specify the hostname and port of
 the meta node during the join process.
 Please do not specify `localhost` as this can cause cluster connection issues.
 
@@ -214,5 +214,5 @@ the cluster.
 
 Once your meta nodes are part of your cluster move on to [the next steps to
 set up your data nodes](/enterprise_influxdb/v1.2/production_installation/data_node_installation/).
-Please do not continue to the next steps if your meta nodes are not part of the
+Do not continue to the next steps if your meta nodes are not part of the
 cluster.

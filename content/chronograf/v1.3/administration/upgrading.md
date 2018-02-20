@@ -2,7 +2,7 @@
 title: Upgrading
 menu:
   chronograf_1_3:
-    weight: 10
+    weight: 1
     parent: Administration
 ---
 

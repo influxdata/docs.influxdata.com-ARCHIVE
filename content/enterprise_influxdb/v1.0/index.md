@@ -1,5 +1,5 @@
 ---
-title: Enterprise InfluxDB Version 1.0 Documentation
+title: InfluxDB Enterprise 1.0 documentation
 aliases:
     - /enterprise/v1.0/
 
@@ -7,7 +7,7 @@ menu:
   enterprise_influxdb:
     name: v1.0
     identifier: enterprise_influxdb_1_0
-    weight: 30
+    weight: 100
 ---
 
 InfluxEnterprise offers highly scalable InfluxDB clusters on your infrastructure

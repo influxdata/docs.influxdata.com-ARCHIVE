@@ -1,10 +1,10 @@
 ---
-title: Writing a socket based UDF
+title: Writing socket-based user-defined functions (UDFs)
 aliases:
     - kapacitor/v1.4/examples/socket_udf/
 menu:
   kapacitor_1_4:
-    name: Writing a socket based UDF
+    name: Writing socket-based UDFs
     identifier: socket_udf
     weight: 40
     parent: guides
@@ -13,7 +13,7 @@ menu:
 In [another example](/kapacitor/v1.4/guides/anomaly_detection/) we saw how to write a process based UDF for custom anomaly detection workloads.
 In this example we are going to learn how to write a simple socket based UDF.
 
-## What is a UDF?
+## What is a user-defined function (UDF)?
 
 A UDF is a user defined function that can communicate with Kapacitor to process data.
 Kapacitor will send it data and the UDF can respond with new or modified data.

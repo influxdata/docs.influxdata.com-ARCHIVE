@@ -1,5 +1,5 @@
 ---
-title: Cluster Features
+title: InfluxDB Enterprise cluster features
 aliases:
     - /enterprise/v1.3/features/clustering-features/
 menu:
@@ -14,10 +14,10 @@ A valid license key is required in order to start `influxd-meta` or `influxd`.
 License keys restrict the number of data nodes that can be added to a cluster as well as the number of CPU cores a data node can use.
 Without a valid license, the process will abort startup.
 
-## Query Management
+## Query management
 
 Query management works cluster wide. Specifically, `SHOW QUERIES` and `KILL QUERY <ID>` on `"<host>"` can be run on any data node. `SHOW QUERIES` will report all queries running across the cluster and the node which is running the query.
-`KILL QUERY` can abort queries running on the local node or any other remote data node. For details on using the `SHOW QUERIES` and `KILL QUERY` on InfluxEnterprise clusters, 
+`KILL QUERY` can abort queries running on the local node or any other remote data node. For details on using the `SHOW QUERIES` and `KILL QUERY` on InfluxDB Enterprise clusters,
 see [Query Management](/influxdb/v1.3/troubleshooting/query_management/).
 
 ## Subscriptions
@@ -25,60 +25,60 @@ see [Query Management](/influxdb/v1.3/troubleshooting/query_management/).
 Subscriptions used by Kapacitor work in a cluster. Writes to any node will be forwarded to subscribers across all supported subscription protocols.
 
 ## Continuous Queries
-### Configuration and Operational Considerations on a Cluster
+### Configuration and operational considerations on a cluster
 
-It is important to understand how to configure Enterprise InfluxDB and how this impacts the 
-Continuous Queries (CQ) engine’s behavior: 
+It is important to understand how to configure InfluxDB Enterprise and how this impacts the
+Continuous Queries (CQ) engine’s behavior:
 
-- **Data Node Configuration** `[continuous queries]` 
+- **Data Node Configuration** `[continuous queries]`
 [run-interval](/enterprise_influxdb/v1.3/administration/configuration#lease-duration--1m0s)
--- The interval at which InfluxDB checks to see if a CQ needs to run. Set this option to the lowest interval 
+-- The interval at which InfluxDB checks to see if a CQ needs to run. Set this option to the lowest interval
 at which your CQs run. For example, if your most frequent CQ runs every minute, set run-interval to 1m.
-- **Meta Node Configuration** `[meta]` 
-[lease-duration](/enterprise_influxdb/v1.3/administration/configuration#run-interval--1s) 
+- **Meta Node Configuration** `[meta]`
+[lease-duration](/enterprise_influxdb/v1.3/administration/configuration#run-interval--1s)
 -- The default duration of the leases that data nodes acquire from the meta nodes. Leases automatically expire after the
 lease-duration is met.  Leases ensure that only one data node is running something at a given time. For example, Continuous
 Queries use a lease so that all data nodes aren’t running the same CQs at once.
 - **Execution time of CQs** – CQs are sequentially executed. Depending on the amount of work that they need to accomplish
 in order to complete, the configuration parameters mentioned above can have an impact on the observed behavior of CQs.
- 
+
 The CQ service is running on every node, but only a single node is granted exclusive access to execute CQs at any one time.
-However, every time the `run-interval` elapses (and assuming a node isn't currently executing CQs), a node attempts to 
-acquire the CQ lease. By default the `run-interval` is one second – so the data nodes are aggressively checking to see 
-if they can acquire the lease. On clusters where all CQs execute in an amount of time less than `lease-duration` 
-(default is 1m), there's a good chance that the first data node to acquire the lease will still hold the lease when 
-the `run-interval` elapses. Other nodes will be denied the lease and when the node holding the lease requests it again, 
-the lease is renewed with the expiration extended to `lease-duration`.  So in a typical situation, we observe that a 
-single data node acquires the CQ lease and holds on to it. It effectively becomes the executor of CQs until it is 
+However, every time the `run-interval` elapses (and assuming a node isn't currently executing CQs), a node attempts to
+acquire the CQ lease. By default the `run-interval` is one second – so the data nodes are aggressively checking to see
+if they can acquire the lease. On clusters where all CQs execute in an amount of time less than `lease-duration`
+(default is 1m), there's a good chance that the first data node to acquire the lease will still hold the lease when
+the `run-interval` elapses. Other nodes will be denied the lease and when the node holding the lease requests it again,
+the lease is renewed with the expiration extended to `lease-duration`.  So in a typical situation, we observe that a
+single data node acquires the CQ lease and holds on to it. It effectively becomes the executor of CQs until it is
 recycled (for any reason).
- 
-Now consider the the following case, CQs take longer to execute than the `lease-duration`, so when the lease expires, 
-~1 second later another data node requests and is granted the lease.  The original holder of the lease is busily working 
-on sequentially executing the list of CQs it was originally handed and the data node now holding the lease begins 
-executing CQs from the top of the list. 
- 
-Based on this scenario, it may appear that CQs are “executing in parallel” because multiple data nodes are 
-essentially “rolling” sequentially through the registered CQs and the lease is rolling from node to node.  
-The “long pole” here is effectively your most complex CQ – and it likely means that at some point all nodes 
-are attempting to execute that same complex CQ (and likely competing for resources as they overwrite points 
+
+Now consider the the following case, CQs take longer to execute than the `lease-duration`, so when the lease expires,
+~1 second later another data node requests and is granted the lease.  The original holder of the lease is busily working
+on sequentially executing the list of CQs it was originally handed and the data node now holding the lease begins
+executing CQs from the top of the list.
+
+Based on this scenario, it may appear that CQs are “executing in parallel” because multiple data nodes are
+essentially “rolling” sequentially through the registered CQs and the lease is rolling from node to node.
+The “long pole” here is effectively your most complex CQ – and it likely means that at some point all nodes
+are attempting to execute that same complex CQ (and likely competing for resources as they overwrite points
 generated by that query on each node that is executing it --- likely with some phased offset).
- 
-To avoid this behavior, and this is desirable because it reduces the overall load on your cluster, 
-you should set the lease-duration to a value greater than the aggregate execution time for ALL the CQs that you are running.  
- 
-Based on the current way in which CQs are configured to execute, the way to address parallelism is by using 
-Kapacitor for the more complex CQs that you are attempting to run.  
-[See Kapacitor as a continuous query engine](/kapacitor/v1.3/guides/continuous_queries/). 
-However, you can keep the more simplistic and highly performant CQs within the database – 
-but ensure that the lease duration is greater than their aggregate execution time to ensure that 
+
+To avoid this behavior, and this is desirable because it reduces the overall load on your cluster,
+you should set the lease-duration to a value greater than the aggregate execution time for ALL the CQs that you are running.
+
+Based on the current way in which CQs are configured to execute, the way to address parallelism is by using
+Kapacitor for the more complex CQs that you are attempting to run.
+[See Kapacitor as a continuous query engine](/kapacitor/v1.3/guides/continuous_queries/).
+However, you can keep the more simplistic and highly performant CQs within the database –
+but ensure that the lease duration is greater than their aggregate execution time to ensure that
 “extra” load is not being unnecessarily introduced on your cluster.
 
 
-## PProf Endpoints
+## PProf endpoints
 
 Meta nodes expose the /debug/pprof endpoints for profiling and troubleshooting.
 
-## Shard Movement
+## Shard movement
 
 * [Copy Shard](/enterprise_influxdb/v1.3/features/cluster-commands/#copy-shard) support - copy a shard from one node to another
 * [Copy Shard Status](/enterprise_influxdb/v1.3/features/cluster-commands/#copy-shard-status) - query the status of a copy shard request
@@ -88,21 +88,21 @@ Meta nodes expose the /debug/pprof endpoints for profiling and troubleshooting.
 
 This functionality is exposed via an API on the meta service and through [`influxd-ctl` sub-commands](/enterprise_influxdb/v1.3/features/cluster-commands/).
 
-## OSS Conversion
+## OSS conversion
 
 Importing a OSS single server as the first data node is supported.
 
 See [OSS to Cluster Migration](/enterprise_influxdb/v1.3/guides/migration/) for
 step-by-step instructions.
 
-## Query Routing
+## Query routing
 
 The query engine skips failed nodes that hold a shard needed for queries.
 If there is a replica on another node, it will retry on that node.
 
-## Backup and Restore
+## Backup and restore
 
-InfluxEnterprise clusters support backup and restore functionality starting with
+InfluxDB Enterprise clusters support backup and restore functionality starting with
 version 0.7.1.
 See [Backup and Restore](/enterprise_influxdb/v1.3/guides/backup-and-restore/) for
 more information.

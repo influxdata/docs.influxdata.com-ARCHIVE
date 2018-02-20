@@ -2,7 +2,7 @@
 title: Release Notes/Changelog
 menu:
   telegraf_1_4:
-    weight: 0
+    weight: 1
     parent: about_the_project
 ---
 ## v1.4.5 [2017-12-01]

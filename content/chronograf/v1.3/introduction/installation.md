@@ -38,8 +38,8 @@ A single Chronograf instance can support several InfluxDB instances or InfluxEnt
 
 * [Getting Started](/chronograf/v1.3/introduction/getting-started/) offers setup instructions for using Chronograf with an InfluxDB instance
 * [Monitor an InfluxEnterprise Cluster](/chronograf/v1.3/guides/monitor-an-influxenterprise-cluster/) offers setup instructions for using Chronograf with an InfluxEnterprise Cluster
-* [InfluxDB Documentation](/influxdb/v1.3/) 
-* [InfluxEnterprise Documentation](/enterprise_influxdb/v1.3/) 
+* [InfluxDB Documentation](/influxdb/v1.3/)
+* [InfluxEnterprise Documentation](/enterprise_influxdb/v1.3/)
 
 #### Telegraf (recommended)
 [Telegraf](/telegraf/v1.3/) is InfluxData's plugin-driven server agent for collecting & reporting metrics.
@@ -47,13 +47,13 @@ Telegraf collects data and writes data to the InfluxDB instance or InfluxEnterpr
 Chronograf is designed to work with Telegraf data and offers [pre-created dashboards](/chronograf/v1.3/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf) for several Telegraf input plugins.
 
 Chronograf requires at least one Telegraf instance that collects data and writes the data to an InfluxDB instance or InfluxEnterprise cluster.
-At a minimum, the Telegraf instance must have enabled the [system statistics](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) input plugin; that input plugin provides the system-level data necessary for the Chronograf interface. 
+At a minimum, the Telegraf instance must have enabled the [system statistics](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) input plugin; that input plugin provides the system-level data necessary for the Chronograf interface.
 
 **Installation Resources:**
 
 * [Getting Started](/chronograf/v1.3/introduction/getting-started/) offers setup instructions for using Chronograf and InfluxDB with one Telegraf instance
 * [Monitor an InfluxEnterprise Cluster](/chronograf/v1.3/guides/monitor-an-influxenterprise-cluster/) offers setup instructions for using Chronograf and an InfluxEnterprise Cluster with several Telegraf instances
-* [Telegraf Documentation](/telegraf/v1.3/) 
+* [Telegraf Documentation](/telegraf/v1.3/)
 
 #### Kapacitor (optional)
 [Kapacitor](/kapacitor/v1.3/) is InfluxData’s processing framework for creating alerts, running ETL jobs, and detecting anomalies in your data.
@@ -69,7 +69,7 @@ You do not need a Kapacitor instance if you plan on only using Chronograf's host
 
 * [Getting Started](/chronograf/v1.3/introduction/getting-started/) offers setup instructions for using Chronograf with a Kapacitor instance
 * [Configure Kapacitor Event Handlers](/chronograf/v1.3/guides/configure-kapacitor-event-handlers/) offers setup instructions for Kapacitor event handlers in Chronograf
-* [Kapacitor Documentation](/kapacitor/v1.3/) 
+* [Kapacitor Documentation](/kapacitor/v1.3/)
 
 ### Networking
 
@@ -84,12 +84,12 @@ See Chronograf's [README](https://github.com/influxdata/chronograf/blob/master/R
 ### Using TAR packages
 If you choose to use the TAR packages, as opposed to the operating system package management tools (such as `yum`, `wget`, etc.), there are a couple of things that you should be aware of.
 
-First, when you start-up Chronograf, we recommend that you specify a location for the underlying datastore as a default location is not specified.  
+First, when you start-up Chronograf, we recommend that you specify a location for the underlying datastore as a default location is not specified.
 If you do NOT specify a location for the underlying datastore, a datastore named `chronograf-v1.db` will be created in the directory from which you start Chronograf.
 
-Second, specifying the location of the underlying datastore is important because as you take advantage of future release of Chronograf (maintenance releases or feature bearing), you will want to refer to this underlying datastore to preserve your dashboards and datasource configuration.  
+Second, specifying the location of the underlying datastore is important because as you take advantage of future release of Chronograf (maintenance releases or feature bearing), you will want to refer to this underlying datastore to preserve your dashboards and datasource configuration.
 
-If you simply un-TAR the downloaded package and restart Chronograf, you will reinitalize the local datastore -- and it will appear as though all of your previous configurations and dashboards have disappeared.  
+If you simply un-TAR the downloaded package and restart Chronograf, you will reinitialize the local datastore -- and it will appear as though all of your previous configurations and dashboards have disappeared.
 
 The package management tools provided by the operating system deal with the version changes in the underlying software, but when using TAR, the version number is embedded in the directory structure and you end up with multiple side-by-side versions of the software.
 
@@ -111,4 +111,3 @@ The next time you un-TAR a new version of Chronograf, simply change the `<versio
 
 See the [Configuration](/chronograf/v1.3/administration/configuration/) document for a description of the available configuration options.
 See [Security Best Practices](/chronograf/v1.3/administration/security-best-practices/) for TLS and OAUTH 2.0 setup instructions.
-

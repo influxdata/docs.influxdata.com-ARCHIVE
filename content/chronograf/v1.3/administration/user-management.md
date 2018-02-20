@@ -2,27 +2,27 @@
 title: User Management
 menu:
   chronograf_1_3:
-    weight: 0
+    weight: 40
     parent: Administration
 ---
 
 Chronograf's `Admin` page includes a complete interface for database user management.
-The `Admin` page supports both OSS InfluxDB users and [InfluxEnterprise](/enterprise_influxdb/v1.2/) users.
+The `Admin` page supports both InfluxDB OSS users and [InfluxDB Enterprise](/enterprise_influxdb/v1.2/) users.
 
-This page covers user management specific to OSS InfluxDB and InfluxEnterprise clusters.
+This page covers user management specific to InfluxDB OSS and InfluxDB Enterprise clusters.
 See [Security Best Practices](/chronograf/v1.3/administration/security-best-practices/) for more information about Chronograf's authentication and user management features.
 
 ### Content
 
 * [Enable Authentication](#enable-authentication)
-* [OSS InfluxDB User Management](#oss-influxdb-user-management)
-* [InfluxEnterprise User Management](#influxenterprise-user-management)
+* [InfluxDB OSS User Management](#oss-influxdb-user-management)
+* [InfluxDB Enterprise User Management](#influxenterprise-user-management)
 
 ## Enable Authentication
 
 Follow the steps below to enable authentication.
-The steps are the same for OSS InfluxDB instances and InfluxEnterprise clusters.
-Note that if you're working with an InfluxEnterprise cluster, you will need to repeat steps one through three for each data node in the cluster.
+The steps are the same for InfluxDB OSS instances and InfluxDB Enterprise clusters.
+Note that if you're working with an InfluxDB Enterprise cluster, you will need to repeat steps one through three for each data node in the cluster.
 
 ### Step 1: Enable authentication
 Enable authentication in InfluxDB's configuration file.
@@ -54,7 +54,7 @@ Next, restart the InfluxDB process for your configuration changes to take effect
 Because you enabled authentication, you must create an [admin user](/influxdb/v1.3/query_language/authentication_and_authorization/#user-types-and-privileges) before you can do anything else in the database.
 Run the command below to create an admin user, replacing:
 
-* `localhost` with the IP or hostname of your OSS InfluxDB instance or one of your InfluxEnterprise data nodes
+* `localhost` with the IP or hostname of your InfluxDB OSS instance or one of your InfluxDB Enterprise data nodes
 * `chronothan` with your own username
 * `supersecret` with your own password
 (note that the password requires single quotes)
@@ -73,7 +73,7 @@ A successful `CREATE USER` query returns a blank result:
 If you've already [connected your database to Chronograf](/chronograf/v1.3/introduction/getting-started/#3-connect-to-chronograf), update the connection configuration in Chronograf with your new username and password.
 Edit existing database sources by navigating to the Chronograf's configuration page and clicking on the name of the source.
 
-## OSS InfluxDB User Management
+## InfluxDB OSS User Management
 
 On the `Admin` page:
 
@@ -81,7 +81,7 @@ On the `Admin` page:
 * Change user passwords
 * Assign admin and remove admin permissions to or from a user
 
-![OSS InfluxDB user management](/img/chronograf/v1.3/admin-usermanagement-oss.png)
+![InfluxDB OSS user management](/img/chronograf/v1.3/admin-usermanagement-oss.png)
 
 InfluxDB users are either admin users or non-admin users.
 See InfluxDB's [authentication and authorization](/influxdb/v1.3/query_language/authentication_and_authorization/#user-types-and-privileges) documentation for more information about those user types.
@@ -111,7 +111,7 @@ In all cases, a successful `GRANT` query returns a blank result:
 ```
 Remove `READ`, `WRITE`, or `ALL` permissions from non-admin users by replacing `GRANT` with `REVOKE` in the curl commands above.
 
-## InfluxEnterprise User Management
+## InfluxDB Enterprise User Management
 
 On the `Admin` page:
 
@@ -121,7 +121,7 @@ On the `Admin` page:
 * Create, edit, and delete roles
 * Assign and remove roles to or from a user
 
-![OSS InfluxDB user management](/img/chronograf/v1.3/admin-usermanagement-cluster.png)
+![InfluxDB OSS user management](/img/chronograf/v1.3/admin-usermanagement-cluster.png)
 
 ### User Types
 
@@ -176,7 +176,7 @@ Permission to create databases, create [retention policies](/influxdb/v1.3/conce
 [`ALTER RETENTION POLICY`](/influxdb/v1.3/query_language/database_management/#modify-retention-policies-with-alter-retention-policy), and
 [`SHOW RETENTION POLICIES`](/influxdb/v1.3/query_language/schema_exploration/#show-retention-policies)
 
-**Pages in Chronograf that require this permission**: Dashboards, Data Explorer, and Databases on the Admin page 
+**Pages in Chronograf that require this permission**: Dashboards, Data Explorer, and Databases on the Admin page
 
 #### CreateUserAndRole
 Permission to manage users and roles; create users, drop users, grant admin status to users, grant permissions to users, revoke admin status from users, revoke permissions from users, change user's passwords, view user permissions, and view users and their admin status.
@@ -211,23 +211,23 @@ Permission to drop databases and retention policies.
 [`DROP DATABASE`](/influxdb/v1.3/query_language/database_management/#delete-a-database-with-drop-database) and
 [`DROP RETENTION POLICY`](/influxdb/v1.3/query_language/database_management/#delete-retention-policies-with-drop-retention-policy)
 
-**Pages in Chronograf that require this permission**: Data Explorer, Dashboards, Databases on the Admin page 
+**Pages in Chronograf that require this permission**: Data Explorer, Dashboards, Databases on the Admin page
 
 #### KapacitorAPI
-Permission to access the API for InfluxEnterprise Kapacitor.
+Permission to access the API for InfluxKapacitor Enterprise.
 This does not include configuration-related API calls.
 
 **Pages in Chronograf that require this permission**: NA
 
 #### KapacitorConfigAPI
-Permission to access the configuration-related API calls for InfluxEnterprise Kapacitor.
+Permission to access the configuration-related API calls for InfluxKapacitor Enterprise.
 
 **Pages in Chronograf that require this permission**: NA
 
 #### ManageContinuousQuery
 Permission to create, drop, and view [continuous queries](/influxdb/v1.3/concepts/glossary/#continuous-query-cq).
 
-**Relevant InfluxQL queries**: 
+**Relevant InfluxQL queries**:
 [`CreateContinuousQueryStatement`](/influxdb/v1.3/query_language/continuous_queries/),
 [`DropContinuousQueryStatement`](), and
 [`ShowContinuousQueriesStatement`](/influxdb/v1.3/query_language/continuous_queries/#list-cqs)
@@ -311,8 +311,4 @@ For example, the image below contains three roles: `CREATOR`, `DESTROYER`, and `
 `CREATOR` includes two permissions (`CreateDatbase` and `CreateUserAndRole`) and is assigned to one user (`chrononut`).
 `DESTROYER` also includes two permissions (`DropDatabase` and `DropData`) and is assigned to two users (`chrononut` and `chronelda`).
 
-![OSS InfluxDB user management](/img/chronograf/v1.3/admin-usermanagement-roles.png)
-
-
-
-
+![InfluxDB OSS user management](/img/chronograf/v1.3/admin-usermanagement-roles.png)

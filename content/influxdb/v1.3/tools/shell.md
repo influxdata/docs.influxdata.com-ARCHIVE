@@ -3,7 +3,7 @@ title: CLI/Shell
 
 menu:
   influxdb_1_3:
-    weight: 0
+    weight: 1
     parent: tools
 ---
 

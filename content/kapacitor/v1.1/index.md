@@ -1,11 +1,11 @@
 ---
-title: Kapacitor Version 1.1 Documentation
+title: Kapacitor 1.1 documentation
 
 menu:
   kapacitor:
     name: v1.1
     identifier: kapacitor_1_1
-    weight: 20
+    weight: 25
 ---
 
 Kapacitor is an open source data processing framework that makes it easy to create

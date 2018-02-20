@@ -1,19 +1,19 @@
 ---
-title: How to contribute a new output to Kapacitor
+title: Contributing new Kapacitor output nodes
 aliases:
     - kapacitor/v1.4/contributing/custom_output/
 menu:
   kapacitor_1_4:
-    name: Writing your own Output node
+    name: Writing your own output node
     identifier: custom_output
     weight: 20
     parent: about_the_project
 ---
 
-If you haven't already check out [this] (https://github.com/influxdb/kapacitor/blob/master/CONTRIBUTING.md)
+If you haven't already, check out [this] (https://github.com/influxdb/kapacitor/blob/master/CONTRIBUTING.md)
 information to get started contributing.
 
-The Goal
+The goal
 --------
 
 Add a new node to Kapacitor that can output data to a custom endpoint.
@@ -22,7 +22,7 @@ For this guide assume we want to output data to a fictitous in-house database ca
 Overview
 --------
 
-Kapacitor processes data via a pipeline.
+Kapacitor processes data through a pipeline.
 A pipeline is formally a directed acyclic graph ([DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph)).
 The basic idea is that each node in the graph represents some form of processing on the data and each edge passes the data between nodes.
 In order to add a new type of node there are two components that need to be written:
@@ -37,14 +37,13 @@ The code mirrors these requirements with two Go packages.
 1. `pipeline` -- this package defines what types of nodes are available and how they are configured.
 2. `kapacitor` -- this package provides implementations of each of the nodes defined in the `pipeline` package.
 
-The reason for splitting out defining the node from the implementation of the node is to make the API (i.e.
-a TICKscript) clean and easy to follow.
+To make the API (i.e., a TICKscript) clean and readable,  defining the node is split out from the implementation of the node.
 
 ### Updating TICKscript
 
 First things first, we need to update TICKscript so that users can define a our new node.
 What should the TICKscript look like to send data to HouseDB?
-To connect to a HouseDB instance we need both a URL and a database name, so we need a way to provide that information.
+To connect to a HouseDB instance, we need both a URL and a database name, so we need a way to provide that information.
 How about this?
 
 ```javascript

@@ -1,11 +1,11 @@
 ---
-title: InfluxDB Version 1.3 Documentation
+title: InfluxDB 1.3 documentation
 
 menu:
   influxdb:
     name: v1.3
     identifier: influxdb_1_3
-    weight: 0
+    weight: 10
 ---
 
 InfluxDB is a [time series database](https://en.wikipedia.org/wiki/Time_series_database) built from the ground up to handle high write and query loads.
@@ -29,5 +29,5 @@ It compiles into a single binary with no external dependencies.
 * Continuous queries automatically compute aggregate data to make frequent queries more efficient.
 * Built in web admin interface.
 
-However, the open source edition of InfluxDB runs on a single node. If your requirements dictate a high-availability setup 
+However, the open source edition of InfluxDB runs on a single node. If your requirements dictate a high-availability setup
 to eliminate a single point of failure, you should explore [InfluxDB Enterprise Edition](https://docs.influxdata.com/influxdb/v1.3/high_availability/).

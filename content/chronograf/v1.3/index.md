@@ -1,11 +1,11 @@
 ---
-title: Chronograf Version 1.3 Documentation
+title: Chronograf 1.3 documentation
 
 menu:
   chronograf:
     name: v1.3
     identifier: chronograf_1_3
-    weight: 0
+    weight: 10
 ---
 
 Chronograf is InfluxData's open source web application.
@@ -14,7 +14,7 @@ Use Chronograf with the other components of the [TICK stack](https://www.influxd
 ![Chronograf Collage](/img/chronograf/v1.3/chronograf-collage.png)
 
 ## Key Features
- 
+
 ### Infrastructure Monitoring
 
 * View all hosts and their statuses in your infrastructure
@@ -28,7 +28,7 @@ Chronograf offers a UI for [Kapacitor](https://github.com/influxdata/kapacitor),
 * Generate threshold, relative, and deadman alerts on your data
 * Easily enable and disable existing alert rules
 * View all active alerts on an alert dashboard
-* Send alerts to the supported event handlers, including Slack, PagerDuty, HipChat, and [more](/chronograf/v1.3/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf) 
+* Send alerts to the supported event handlers, including Slack, PagerDuty, HipChat, and [more](/chronograf/v1.3/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf)
 
 ### Data Visualization
 
@@ -40,8 +40,4 @@ Chronograf offers a UI for [Kapacitor](https://github.com/influxdata/kapacitor),
 
 * Create and delete databases and retention policies
 * View currently-running queries and stop inefficient queries from overloading your system
-* Create, delete, and assign permissions to users (Chronograf supports [OSS InfluxDB](/influxdb/v1.3/query_language/authentication_and_authorization/#authorization) and InfluxEnterprise user management)
-
-
-
-
+* Create, delete, and assign permissions to users (Chronograf supports [InfluxDB OSS](/influxdb/v1.3/query_language/authentication_and_authorization/#authorization) and InfluxEnterprise user management)

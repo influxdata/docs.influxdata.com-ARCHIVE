@@ -247,7 +247,7 @@ zář 01 15:34:16 algonquin kapacitord[18526]: 2017/09/01 15:34:16 Using configu
 
 ```
 
-Since InfluxDB is running on `http://localhost:8086` Kapacitor finds it during start up and creates several [subscriptions](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#create-subscription) on InfluxDB.
+Since InfluxDB is running on `http://localhost:8086` Kapacitor finds it during start up and creates several [subscriptions](https://github.com/influxdata/influxql/blob/master/README.md#create-subscription) on InfluxDB.
 These subscriptions tell InfluxDB to send all the data it receives to Kapacitor.
 
 For more log data check the log file in the traditional `/var/log/kapacitor` directory.
@@ -562,7 +562,7 @@ Once the metrics from several hosts are streaming to Kapacitor, it is possible t
 the cpu usage for each service running in each datacenter, and then trigger an alert
 based off the 95th percentile.
 In addition to just writing the alert to a log, Kapacitor can
-integrate with third-party utilities: currently Slack, PagerDuty, HipChat, VictorOps and more are supported. The alert can also be sent by email, be posted to a custom endpoint or can trigger the execution of a custom script.
+integrate with  third party utilities: currently Slack, PagerDuty, HipChat, VictorOps and more are supported. The alert can also be sent by email, be posted to a custom endpoint or can trigger the execution of a custom script.
 Custom message formats can also be defined so that alerts have the right context and meaning.
 The TICKscript for this would look like the following example.
 

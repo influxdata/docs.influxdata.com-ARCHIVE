@@ -178,7 +178,7 @@ influxd-ctl add-meta enterprise-meta-02:8091
 influxd-ctl add-meta enterprise-meta-03:8091
 ```
 
-> **Note:** Please make sure that you specify the fully qualified host name of
+> **Note:** Please make sure that you specify the hostname and port of
 the meta node during the join process.
 Please do not specify `localhost` as this can cause cluster connection issues.
 

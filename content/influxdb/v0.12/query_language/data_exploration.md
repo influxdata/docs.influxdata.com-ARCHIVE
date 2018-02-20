@@ -99,7 +99,7 @@ While they all return the same result, they get to that result in slightly diffe
 * Separate multiple fields and tags of interest with a comma.
 Note that you must specify at least one field in the `SELECT` statement.
 
-* Leave identifiers unquoted unless they start with a digit, contain characters other than `[A-z,0-9,_]`, or if they are an [InfluxQL keyword](https://github.com/influxdb/influxdb/blob/master/influxql/README.md#keywords) - then you need to double quote them.
+* Leave identifiers unquoted unless they start with a digit, contain characters other than `[A-z,0-9,_]`, or if they are an [InfluxQL keyword](https://github.com/influxdata/influxql/blob/master/README.md#keywords) - then you need to double quote them.
 Identifiers are database names, retention policy names, user names, measurement names, tag keys, and field keys.
 
  Select everything from `h2o_feet` by fully qualifying the measurement:

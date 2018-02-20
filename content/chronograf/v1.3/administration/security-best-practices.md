@@ -2,7 +2,7 @@
 title: Security Best Practices
 menu:
   chronograf_1_3:
-    weight: 20
+    weight: 30
     parent: Administration
 ---
 
@@ -41,13 +41,6 @@ If you want to log all users out every time the server restarts, change the valu
 
 ```sh
 export TOKEN_SECRET=supersupersecret
-```
-
-### JWKS Signature Verification
-To enable RS256 signature verification support, you need to export `JWKSURI`. This variable should point to your identity provider's JWKS document. This URI can be retrieved from the OpenID Configuration at `/.well-known/openid-configuration`.
-
-```sh
-export JWKSURI=https://example.com/adfs/discovery/keys
 ```
 
 ### Github
@@ -219,44 +212,28 @@ The generic OAuth2 provider has a few optional parameters.
 * `GENERIC_API_URL` : URL that returns [OpenID UserInfo JWT](https://connect2id.com/products/server/docs/api/userinfo) (specifically email address)
 * `GENERIC_DOMAINS` : Email domains user's email address must use.
 
-#### Processing id_tokens
+#### Customizing the login button text and callback URL
 
-Some providers like Active Directory Federation Services (ADFS) provide the requested scopes as an extra `id_token` along with the access token (and not as userinfo document at APIURL). Processing id_tokens is currently only implemented for the `generic` provider and missing support will be logged.
+Setting the `GENERIC_NAME` environment variable results in the specified value appearing in both the callback URL and the login button text. This allows you to customize the login by replacing "generic" in both locations with a more meaningful name.
 
-#### Configuring the look of the login page
+> ***Note:*** Since the value you use for GENERIC_NAME is used in the callback URL, make sure to use a short, URL-friendly name.
 
-To configure the copy of the login page button text, set the `GENERIC_NAME` environment variable.
-For example, with
+Example:
+
 ```sh
-export GENERIC_NAME="Hill Valley Preservation Society"
+export GENERIC_NAME="GitLab"
 ```
-the button text will be `Login with Hill Valley Preservation Society`.
-
-#### Examples
-##### ADFS (Active Directory Federation Service)
-
-See [Enabling OpenId Connect with AD FS 2016](https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/development/enabling-openid-connect-with-ad-fs) for a walk through of the server configuration.
-
-Exports for chronograf (e.g. in /etc/default.chronograf):
-```sh
-PUBLIC_URL="https://example.com:8888"
-GENERIC_CLIENT_ID="chronograf"
-GENERIC_CLIENT_SECRET="KW-TkvH7vzYeJMAKj-3T1PdHx5bxrZnoNck2KlX8"
-GENERIC_AUTH_URL="https://example.com/adfs/oauth2/authorize"
-GENERIC_TOKEN_URL="https://example.com/adfs/oauth2/token"
-GENERIC_SCOPES="openid"
-GENERIC_API_KEY="upn"
-JWKS_URL="https://example.com/adfs/discovery/keys"
-TOKEN_SECRET="ZNh2N9toMwUVQxTVEe2ZnnMtgkh3xqKZ"
-#TLS_CERTIFICATE=xxx
-#TLS_PRIVATE_KEY=xxx
-#LOG_LEVEL="debug"
+The callback URL changes from:
+```
+https://localhost:8888/oauth/generic/callback
+```
+to:
+```
+https://localhost:8888/oauth/GitLab/callback
 ```
 
-Common errors and fixes:
-MSIS9605: request contains no redirect_uri; you need to set PUBLIC_URL
-MSIS9610: most likely a follow up issue when the token request failed
-MSIS9441: check if CLIENT_ID contains a colon; this breaks authentication for ADFS
+Also, on the Chronograf login page, the text on the authentication button changes from `Login with generic` to `Login with GitLab`.
+
 
 ### Optional: Configure an Authentication Duration
 

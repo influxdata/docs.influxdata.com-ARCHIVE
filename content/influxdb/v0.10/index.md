@@ -1,5 +1,5 @@
 ---
-title: InfluxDB Version 0.10 Documentation
+title: InfluxDB 0.10 documentation
 aliases:
   - /influxdb/v0.10/introduction/overview/
 
@@ -7,7 +7,7 @@ menu:
   influxdb:
     name: v0.10
     identifier: influxdb_010
-    weight: 40
+    weight: 300
 ---
 
 InfluxDB is a [time series database](https://en.wikipedia.org/wiki/Time_series_database) built from the ground up to handle high write and query loads.

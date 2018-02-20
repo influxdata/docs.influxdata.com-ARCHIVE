@@ -1,9 +1,9 @@
 ---
-title: TICKscript Specification
+title: TICKscript specification
 
 menu:
   kapacitor_1_4:
-    name: TICKscript Specification
+    name: TICKscript specification
     identifier: specification
     weight: 10
     parent: reference

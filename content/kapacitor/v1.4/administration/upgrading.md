@@ -11,12 +11,12 @@ menu:
 
 # Contents
 1. [Overview](#overview)
-2. [Stopping the Kapacitor Service](#stopping-the-kapacitor-service)
-3. [Backup Configuration and Data](#backup-configuration-and-data)
-4. [Debian Package Upgrade](#debian-package-upgrade)
-5. [RPM Package Upgrade](#rpm-package-upgrade)
+2. [Stopping the Kapacitor service](#stopping-the-kapacitor-service)
+3. [Backup configuration and data](#backup-configuration-and-data)
+4. [Debian package upgrade](#debian-package-upgrade)
+5. [RPM package upgrade](#rpm-package-upgrade)
 5. [Upgrade with .zip or .tar.gz](#upgrade-with-zip-or-tar-gz)
-6. [Verifying the Restart](#verifying-the-restart)
+6. [Verifying the restart](#verifying-the-restart)
 
 ## Overview
 
@@ -30,13 +30,13 @@ Before proceeding with the Kapacitor upgrade please ensure that InfluxDB and Tel
    * Telegraf 1.4
    * Kapacitor 1.4
 
-For instructions on upgrading InfluxDB, please see the [InfluxDB upgrade](https://docs.influxdata.com/influxdb/latest/administration/upgrading/#main-nav) documentation. For instructions on upgrading Telegraf, please see the [Telegraf upgrade](https://docs.influxdata.com/telegraf/latest/administration/upgrading/#main-nav) documentation.
+For instructions on upgrading InfluxDB, please see the [InfluxDB upgrade](/influxdb/latest/administration/upgrading/#main-nav) documentation. For instructions on upgrading Telegraf, please see the [Telegraf upgrade](/telegraf/latest/administration/upgrading/#main-nav) documentation.
 
 For information about what is new in the latest Kapacitor release, please see the [Changelog](https://github.com/influxdata/kapacitor/blob/master/CHANGELOG.md) available on GitHub.
 
 In general the steps for upgrading Kapacitor are as follows:
 
-   1. Download a copy of the latest Kapacitor install package or binary distribution from the [Influxdata download site](https://portal.influxdata.com/downloads).  
+   1. Download a copy of the latest Kapacitor install package or binary distribution from the [Influxdata download site](https://portal.influxdata.com/downloads).
 
       **Important note** - When upgrading Kapacitor simply download the package using `wget`, do not proceed directly with the installation/upgrade until the following instructions and recommendations have been understood and put to use.
 
@@ -48,9 +48,9 @@ In general the steps for upgrading Kapacitor are as follows:
    1. Restart the Kapacitor service.
    1. Verify the restart in the log files and by test recording existing tasks.
 
-## Stopping the Kapacitor Service
+## Stopping the Kapacitor service
 
-No matter how Kapacitor was installed, it is assumed that Kapacitor is configured to run as a service using `systemd`.  
+No matter how Kapacitor was installed, it is assumed that Kapacitor is configured to run as a service using `systemd`.
 
 Through `systemctl` check to see if the Kapacitor service is running .
 
@@ -73,11 +73,11 @@ If instead this value happens to be 'active(running)', the service can be stoppe
    sudo systemctl stop kapacitor.service
    ```
 
-## Backup Configuration and Data
+## Backup configuration and data
 
 Whenever upgrading, no matter the upgrade approach, it can pay to be a bit paranoid and to backup essential files and data.  Most important, when upgrading Kapacitor, is the Kapacitor configuration file `/etc/kapacitor/kapacitor.conf`. In addition the Kapacitor database, replays and id files in `/var/lib/kapacitor` might be preserved.
 
-## Debian Package Upgrade
+## Debian package upgrade
 
 Check to see if Kapacitor was installed as a Debian package.
 
@@ -88,7 +88,7 @@ ii  kapacitor   1.2.1-1   amd64   Time series data processing engine
 
 If the line `ii  kapacitor...` is returned, it is safe to continue the upgrade using the Debian package and the instructions in this section.  If nothing is returned, please consult the [Upgrade with .zip or .tar.gz section below](#upgrade-with-zip-or-tar-gz) for a general example on how to proceed.
 
-### Package Upgrade
+### Package upgrade
 
 Kapacitor can now be upgraded using the Debian package manager:
 
@@ -136,7 +136,7 @@ Note that `restart` is used here instead of `start`, in the event that Kapacitor
 
 For tips on verifying the restart see the [Verifying the Restart](#verifying-the-restart) section below.
 
-## RPM Package Upgrade
+## RPM package upgrade
 
 Check to see if Kapacitor was installed as an RPM package.
 
@@ -151,9 +151,9 @@ Loading mirror speeds from cached hostfile
 Installed Packages
 kapacitor.x86_64      1.2.1-1     installed
 ```
-If the line `kapacitor.x86_64...1.2.1-1...installed` is returned, it is safe to continue the upgrade using the RPM package and the instructions in this section.  If instead the message `Error: No matching Packages to list` was returned please consult the [Upgrade with .zip or .tar.gz section below](#upgrade-with-zip-or-tar-gz) for a general example on how to proceed.  
+If the line `kapacitor.x86_64...1.2.1-1...installed` is returned, it is safe to continue the upgrade using the RPM package and the instructions in this section.  If instead the message `Error: No matching Packages to list` was returned please consult the [Upgrade with .zip or .tar.gz section below](#upgrade-with-zip-or-tar-gz) for a general example on how to proceed.
 
-### Package Upgrade
+### Package upgrade
 
 Please note that the following example commands are run as user `root`.  To use them directly please log in as the `root` user or append `sudo` to them.
 
@@ -203,7 +203,7 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/kapacitor.servi
   Verifying  : kapacitor-1.2.1-1.x86_64                                                                                                                  2/2
 
 Updated:
-  kapacitor.x86_64 0:1.3.1-1                                                                                                                                 
+  kapacitor.x86_64 0:1.3.1-1
 
 Complete!
 
@@ -229,9 +229,9 @@ For tips on verifying the restart see the [Verifying the Restart](#verifying-the
 
 ## Upgrade with .zip or .tar.gz
 
-How Kapacitor has been installed using the binary distribution (.zip, .tgz) is open to a certain number of variables depending on the specific OS, organizational preferences and other factors.  The package contents may have been simply unpacked in a `/home/<user>` directory.  They may have been copied into the system directories suggested by the package file structure.  Or they may have been leveraged using another file system strategy.  The following discussion presents one hypothetical installation.  The steps are presentational and should, with a little bit of creative thinking, be adaptable to other types of installation.  
+How Kapacitor has been installed using the binary distribution (.zip, .tgz) is open to a certain number of variables depending on the specific OS, organizational preferences and other factors.  The package contents may have been simply unpacked in a `/home/<user>` directory.  They may have been copied into the system directories suggested by the package file structure.  Or they may have been leveraged using another file system strategy.  The following discussion presents one hypothetical installation.  The steps are presentational and should, with a little bit of creative thinking, be adaptable to other types of installation.
 
-### A Hypothetical Installation
+### A hypothetical installation
 The following presentation will use a hypothetical installation, where all Influxdata products have been unpacked and are running from the directory `/opt/influxdata`.  Please note that it is recommended that Influxdata products should be installed using the system specific install packages (e.g. `.deb`, `.rpm`) whenever possible, however on other systems, for which there is no current installation package, the binary distribution (`.zip`, `.tar.gz`) can be used.
 
 *Example - the Influxdata directory*
@@ -358,7 +358,7 @@ $ sudo tar -xvzf /home/karl/Downloads/install/kapacitor-1.3.1_linux_amd64.tar.gz
 ./kapacitor-1.3.1-1/etc/logrotate.d/
 ./kapacitor-1.3.1-1/etc/logrotate.d/kapacitor
 ```
-Following extraction the old symbolic link is removed and a new one is created to the new distribution.  This approach is similar to simply unpacking or copying the distribution contents over the existing directories, which is also a feasible approach.  Parallel unpacking and link creation offers the advantage of preserving the previous installation, albeit in a now inactive place. This approach facilitates reverting back to the previous installation, if for some reason that will be desired.  
+Following extraction the old symbolic link is removed and a new one is created to the new distribution.  This approach is similar to simply unpacking or copying the distribution contents over the existing directories, which is also a feasible approach.  Parallel unpacking and link creation offers the advantage of preserving the previous installation, albeit in a now inactive place. This approach facilitates reverting back to the previous installation, if for some reason that will be desired.
 
 *Example - Post extraction commands*
 ```
@@ -395,7 +395,7 @@ sudo systemctl restart kapacitor.service
 ```
 Note that `restart` is used here instead of `start`, in the event that Kapacitor was not shutdown properly.
 
-## Verifying the Restart
+## Verifying the restart
 
 First check the service status in `systemctl`.
 
@@ -469,6 +469,6 @@ cpu_alert_batch  batch     disabled  false     ["telegraf"."autogen"]
 cpu_alert_stream stream    enabled   true      ["telegraf"."autogen"]
 ```
 
-Test recording existing tasks and replaying the results is also recommended for checking the status of the newly upgraded Kapacitor service.  Which tasks to record will depend on the specifics of the installation.  Please see the [Kapacitor API documentation](https://docs.influxdata.com/kapacitor/v1.4/api/api#recordings) for more details.  
+Test recording existing tasks and replaying the results is also recommended for checking the status of the newly upgraded Kapacitor service.  Which tasks to record will depend on the specifics of the installation.  Please see the [Kapacitor API documentation](/kapacitor/v1.4/working/api#recordings) for more details.
 
 If these checks look correct, then the upgrade can be considered complete.

@@ -1,5 +1,5 @@
 ---
-title: Telegraf Version 1.0 Documentation
+title: Telegraf 1.0 documentation
 
 menu:
   telegraf:

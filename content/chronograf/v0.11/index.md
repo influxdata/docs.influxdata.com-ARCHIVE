@@ -1,11 +1,11 @@
 ---
-title: Chronograf Version 0.11 Documentation
+title: Chronograf 0.11 documentation
 
 menu:
   chronograf:
     name: v0.11
     identifier: chronograf_011
-    weight: 30
+    weight: 130
 ---
 
 ## [Getting Started](/chronograf/v0.11/introduction/getting_started/)
