@@ -55,6 +55,20 @@ in the file will need to be temporarily restored.  An overview of Kapacitor
 configuration is provided in the
 [Configuration](/kapacitor/v1.4/administration/configuration/) document.
 
+### Note on HTTP API Configuration and Restarting Kapacitor
+
+Please be aware that when configuration values are set using the HTTP API, that
+these values will persist even after restarting Kapacitor.  To switch off these
+overrides on restart   set the property `skip-config-overrides` to `true` either
+in the configuration file (`kapacitor.conf`) or as an environment variable
+(`KAPACITOR_SKIP_CONFIG_OVERRIDES`).  
+
+When troubleshooting connection issues after restart, check the HTTP API, for example
+at <span>http</span><span>://</span><span>localhost:9092/kapacitor/v1/config</span>.
+This can be especially useful if Kapacitor to InfluxDB communications does not
+seem to be respecting values seen in the file `kapacitor.conf` or in environment
+variables.
+
 ### Kapacitor and InfluxDB HTTPS
 
 To activate a TLS connection the `urls` strings in the `influxdb` servers
