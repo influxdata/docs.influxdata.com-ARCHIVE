@@ -23,7 +23,7 @@ Starting in version 1.5, the InfluxDB OSS `backup` utility provides:
 
 > ***Note:*** Prior to version 1.5, the InfluxDB OSS `backup` utility created  backup file formats, now referred to as the _legacy_ format, that were incompatible with the InfluxDB Enterprise version.  This legacy format is fully supported in the new `backup` utility as input for the new online restore function. If you are creating new backup processes, InfluxData recommends using the new InfluxDB Enterprise-compatible backup format, which uses less disk space and provides a clear transfer path for data between the InfluxDB Enterprise and InfluxDB OSS versions.
 
-## Online backup and restore (for InfluxDB OSS and InfluxDB Enterprise)
+## Online backup and restore (for InfluxDB OSS)
 
 ### Configuring remote connections
 
@@ -37,7 +37,7 @@ The online backup and restore processes execute over a TCP connection to the dat
 
 3. Provide the IP address and port to the `-host` parameter when you run commands.
 
-**Example:**
+**Example**
 
 ```
 $ influxd backup -database mydatabase -host <remote-node-IP>:8088 /tmp/mysnapshot

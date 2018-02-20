@@ -8,9 +8,13 @@ menu:
     parent: concepts
 ---
 
+> ***Note:*** 
+
+
+
 # The InfluxDB storage engine and the Time-Structured Merge Tree (TSM)
 
-The new InfluxDB storage engine looks very similar to a LSM Tree.
+The InfluxDB storage engine looks very similar to a LSM Tree.
 It has a write ahead log and a collection of read-only data files which are  similar in concept to SSTables in an LSM Tree.
 TSM files contain sorted, compressed series data.
 

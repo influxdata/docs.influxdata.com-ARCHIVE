@@ -479,37 +479,48 @@ See [Authentication and Authorization](/influxdb/v1.5/query_language/authenticat
 
 ### `enabled = true`
 
-Set to `false` to disable HTTP.
-Note that the InfluxDB [command line interface (CLI)](/influxdb/v1.5/tools/shell/) connects to the database using the HTTP API.
+Determines whether HTTP endpoint is enabled. Set to `false` to disable HTTP. Note that the InfluxDB [command line interface (CLI)](/influxdb/v1.5/tools/shell/) connects to the database using the HTTP API.
 
 Environment variable: `INFLUXDB_HTTP_ENABLED`
 
 ### `bind-address = ":8086"`
 
-The port used by the HTTP API.
+The bind address (port) used by the HTTP service.
 
 Environment variable: `INFLUXDB_HTTP_BIND_ADDRESS`
 
 ### `auth-enabled = false`
 
-Set to `true` to require authentication.
+Determines whether user authentication is enabled over HTTP/HTTPS. Set to `true` to require authentication.
 
 Environment variable: `INFLUXDB_HTTP_AUTH_ENABLED`
 
 ### `realm = "InfluxDB"`
 
-Realm is the JWT realm used by the http endpoint.
+The default realm sent back when issuing a basic auth challenge. Realm is the JWT realm used by the HTTP endpoint.
 
 Environment variable: `INFLUXDB_HTTP_REALM`
 
 ### `log-enabled = true`
 
-Set to `false` to disable logging.
+Determines whether HTTP request logging is enabled. Set to `false` to disable logging.
 
 Environment variable: `INFLUXDB_HTTP_LOG_ENABLED`
 
+### `access-log-path = ""`
+
+Determines whether detailed write logging is enabled.
+Specifies whether HTTP request logging is written to the specified path when enabled.
+If `influxd` is unable to access the specified path, it will log an error and fall back to `stderr`.
+When HTTP request logging is enabled, this option specifies the path where log entries should be written.
+If unspecified, the default is to write to stderr, which intermingles HTTP logs with internal InfluxDB logging.
+If `influxd` is unable to access the specified path, it will log an error and fall back to writing the request log to `stderr`.
+
+Environment variable: `INFLUXDB_ACCESS_LOG_PATH`
+
 ### `write-tracing = false`
 
+Determines whether detailed write logging is enabled.
 Set to `true` to enable logging for the write payload.
 If set to `true`, this will duplicate every write statement in the logs and is thus not recommended for general use.
 
@@ -524,23 +535,21 @@ Environment variable: `INFLUXDB_HTTP_PPROF_ENABLED`
 
 ### `https-enabled = false`
 
-Set to `true` to enable HTTPS.
+Determines whether HTTPS is enabled. Set to `true` to enable HTTPS.
 
 Environment variable: `INFLUXDB_HTTP_HTTPS_ENABLED`
 
 ### `https-certificate = "/etc/ssl/influxdb.pem"`
 
-The path of the certificate file.
+The path of the SSL certificate file to use when HTTPS is enabled.
 
 Environment variable: `INFLUXDB_HTTP_HTTPS_CERTIFICATE`
 
 ### `https-private-key = ""`
 
-The separate private key location.
-If only the `https-certificate` is specified, the httpd service will try to load
-the private key from the `https-certificate` file.
-If a separate `https-private-key` file is specified, the httpd service will load
-the private key from the `https-private-key` file.
+Use a separate private key location.
+If only the `https-certificate` is specified, the `httpd` service will try to load the private key from the `https-certificate` file.
+If a separate `https-private-key` file is specified, the `httpd` service will load the private key from the `https-private-key` file.
 
 Environment variable: `INFLUXDB_HTTP_HTTPS_PRIVATE_KEY`
 
@@ -560,28 +569,67 @@ Environment variable: `INFLUXDB_HTTP_MAX_ROW_LIMIT`
 
 ### `max-connection-limit = 0`
 
-Limit the number of connections for the http service.  0 is unlimited.
+Limit the number of connections for the HTTP service.  `0` is unlimited.
 
 Environment variable: `INFLUXDB_HTTP_MAX_CONNECTION_LIMIT`
 
 ### `unix-socket-enabled = false`
 
-Set to `true` to enable http service over unix domain socket.
+Enable HTTP service over UNIX domain socket. Set to `true` to enable HTTP service over UNIX domain socket.
 
 Environment variable: `INFLUXDB_HTTP_UNIX_SOCKET_ENABLED`
 
 ### `bind-socket = "/var/run/influxdb.sock"`
 
-The path of the unix domain socket.
+The path of the UNIX domain socket.
 
 Environment variable: `INFLUXDB_HTTP_UNIX_BIND_SOCKET`
 
 ### `max-body-size = 25000000`
 
-Specifies the maximum size (in bytes) of a client request body. When a client sends data that exceeds the configured
-maximum size, a 413 Request Entity Too Large HTTP response is returned. This can be disabled by setting it to 0.
+Specifies the maximum size (in bytes) of a client request body.
+When a client sends data that exceeds the configured maximum size, a `413 Request Entity Too Large` HTTP response is returned. Setting this value to `0` disables the limit.
 
 Environment variable: `INFLUXDB_HTTP_MAX_BODY_SIZE`
+
+
+## IFQL settings `[ifql]`
+
+Configures the ifql RPC API.
+
+### `enabled = true`
+
+Determines whether the RPC service is enabled.
+
+### `log-enabled = true`
+
+Determines whether additional logging is enabled.
+
+### `bind-address = ":8082"`
+
+The bind address used by the IFQL RPC service.
+
+
+## Logging settings `[logging]`
+
+Controls how the logger emits logs to the output.
+
+### `format = "auto"`
+
+Determines which log encoder to use for logs.
+Available options are `auto`, `logfmt`, and `json`. With the default `auto` option, if the output terminal is a TTY device, a more user-friendly console encoding is used. If the output is a non-TTY device, the auto option will use the `logfmt` encoding.
+The `auto` option uses a more user-friendly console output format if the output terminal is a TTY, but the format is not as easily machine-readable.
+When the output is a non-TTY, auto will use `logfmt`.
+
+### `level = "info"`
+
+Determines which level of logs will be emitted.
+
+### `suppress-logo = false`
+
+Suppresses the logo output that is printed when the program is started.
+The logo is always suppressed if `STDOUT` is not a TTY.
+
 
 ## Subscription settings `[subscriber]`
 

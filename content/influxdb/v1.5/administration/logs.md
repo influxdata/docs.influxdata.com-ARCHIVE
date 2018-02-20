@@ -24,13 +24,11 @@ influxd 2>$HOME/my_log_file
 
 ### sysvinit
 
-If InfluxDB was installed using a pre-built package, and then launched
-as a service, `stderr` is redirected to
-`/var/log/influxdb/influxd.log`, and all log data will be written to
-that file.  You can override this location by setting the variable
-`STDERR` in the file `/etc/default/influxdb`.
+If InfluxDB was installed using a prebuilt package, and then launched
+as a service, `stderr` is redirected to `/var/log/influxdb/influxd.log`, and all log data will be written to that file.
+You can override this location by setting the variable `STDERR` in the file `/etc/default/influxdb`.
 
->**Note:** On OS X the logs, by default, are stored in the file `/usr/local/var/log/influxdb.log`
+>**Note:** Mac OS X logs are stored, by default, in the file `/usr/local/var/log/influxdb.log`.
 
 For example, if `/etc/default/influxdb` contains:
 

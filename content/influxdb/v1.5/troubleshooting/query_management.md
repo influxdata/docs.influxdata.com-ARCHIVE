@@ -47,23 +47,35 @@ qid	  query															               database		  duration
 See [Query Language Reference](/influxdb/v1.5/query_language/spec/#durations)
 for an explanation of InfluxDB's time units.
 
-## Stop currently-running queries with `KILL QUERY` or `Ctrl+C`
-Use the `KILL QUERY` command to stop any currently-running InfluxDB query that is causing performance issues or has been long-running. To stop an interactive query entered in the CLI, use `Ctrl+C`.
+## Stop currently-running queries with `KILL QUERY`
+`KILL QUERY` tells InfluxDB to stop running the relevant query.
 
 #### Syntax:
-Where `qid` is the id of the query from the [`SHOW QUERIES`](/influxdb/v1.5/troubleshooting/query_management/#list-currently-running-queries-with-show-queries) output:
+Where `qid` is the query ID, displayed in the [`SHOW QUERIES`](/influxdb/v1.3/troubleshooting/query_management/#list-currently-running-queries-with-show-queries) output:
 ```
 KILL QUERY <qid>
 ```
+>***InfluxEnterprise clusters:*** To kill queries on a cluster, you need to specify the query ID (qid) and the TCP host (for example, `myhost:8088`),
+>available in the `SHOW QUERIES` output.
+>
+>```
+>KILL QUERY <qid> ON "<host>"
+>```
 
-#### Example:
-<br>
+A successful `KILL QUERY` query returns no results.
+
+#### Examples:
+
 ```
+-- kill query with qid of 36 on the local host
 > KILL QUERY 36
 >
 ```
-
-A successful `KILL QUERY` query returns no results.
+```
+-- kill query on InfluxEnterprise cluster
+> KILL QUERY 53 ON "myhost:8088"
+>
+```
 
 ## Configuration settings for query management
 

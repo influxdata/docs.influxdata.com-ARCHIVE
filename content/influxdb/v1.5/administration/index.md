@@ -3,7 +3,7 @@ title: Administering InfluxDB OSS
 ---
 The administration documentation contains all the information needed to administer a working InfluxDB installation.
 
-## [Loging in InfluxDB](/influxdb/v1.5/administration/logs/)
+## [Logging in InfluxDB](/influxdb/v1.5/administration/logs/)
 
 Information on how to direct InfluxDB log output.
 
@@ -13,9 +13,7 @@ Information on how to direct InfluxDB log output.
 
 Procedures to backup data created by InfluxDB and to restore from a backup.
 
-## [Differences between InfluxDB 1.4 and 1.3](/influxdb/v1.5/administration/differences/)
-
-## [Differences between InfluxDB 1.4 and versions prior to 1.3](/influxdb/v1.5/administration/previous_differences/)
+## [What's new in 1.5](/influxdb/v1.5/administration/differences/)
 
 ## [Upgrading](/influxdb/v1.5/administration/upgrading/)
 

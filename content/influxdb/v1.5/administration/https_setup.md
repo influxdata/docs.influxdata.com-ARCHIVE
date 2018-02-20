@@ -1,23 +1,22 @@
 ---
-title: HTTPS setup
+title: Enabling HTTPS with InfluxDB
 menu:
   influxdb_1_5:
+    name: Enabling HTTPS
     weight: 100
     parent: guides
 ---
 
-This guide describes how to enable HTTPS with InfluxDB.
-Setting up HTTPS secures the communication between clients and the InfluxDB
-server, and, in some cases, HTTPS verifies the authenticity of the InfluxDB server to
-clients.
+Enabling HTTPS secures the communication between clients and the InfluxDB
+server, and, in some cases, HTTPS verifies the authenticity of the InfluxDB server to clients.
 
-If you plan on sending requests to InfluxDB over a network, we
-[strongly recommend](/influxdb/v1.5/administration/security_best_practices/)
-that you set up HTTPS.
+If you plan on sending requests to InfluxDB over a network, InfluxData
+[strongly recommends](/influxdb/v1.5/administration/security_best_practices/)
+that you enable HTTPS.
 
 ## Requirements
 
-To set up HTTPS with InfluxDB, you'll need an existing or new InfluxDB instance
+To enable HTTPS with InfluxDB, you'll need an existing or new InfluxDB instance
 and a Transport Layer Security (TLS) certificate (also known as a
 Secured Sockets Layer (SSL) certificate).
 InfluxDB supports three types of TLS/SSL certificates:
@@ -67,7 +66,7 @@ sudo chmod 644 /etc/ssl/<CA-certificate-file>
 sudo chmod 600 /etc/ssl/<private-key-file>
 ```
 
-#### Step 3: Enable HTTPS in InfluxDB's configuration file
+#### Step 3: Enable HTTPS in the InfluxDB configuration file
 
 HTTPS is disabled by default.
 Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
@@ -93,14 +92,14 @@ Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc
   https-private-key = "<bundled-certificate-file>.pem"
 ```
 
-#### Step 4: Restart InfluxDB
+#### Step 4: Restart the InfluxDB service
 
 Restart the InfluxDB process for the configuration changes to take effect:
 ```
 sudo systemctl restart influxdb
 ```
 
-#### Step 5: Verify the HTTPS Setup
+#### Step 5: Verify the HTTPS setup
 
 Verify that HTTPS is working by connecting to InfluxDB with the [CLI tool](/influxdb/v1.5/tools/shell/):
 ```

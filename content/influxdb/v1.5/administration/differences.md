@@ -1,69 +1,47 @@
 ---
-title: Differences netween InfluxDB 1.4 and 1.5
+title: What's new in InfluxDB 1.5
 menu:
   influxdb_1_5:
+    name: What's new
     weight: 40
     parent: administration
 ---
 
-This page aims to ease the transition from InfluxDB 1.3 to InfluxDB 1.4.
-For a comprehensive list of the differences between the versions
+This page includes a high-level overview of the most important changes introduced in InfluxDB 1.5.
+For a comprehensive list of the changes between versions,
 see [InfluxDB's Changelog](/influxdb/v1.5/about_the_project/releasenotes-changelog/).
 
-### Content
-* [TSI Release](#tsi-release)
-* [Prometheus Read-Write API](#prometheus-read-write-api)
-* [Configuration File Byte Simplification](#configuration-file-byte-simplification)
-* [InfluxQL Updates](#influxql-updates)
-  * [SHOW CARDINALITY](#show-cardinality)
-  * [Ranged Meta Queries](#ranged-meta-queries)
-  * [Operators](#operators)
-  * [Functions](#functions)
-* [Other](#other)
+## TSI (Time Series Index) support
 
-## TSI Release
-Version 1.3.0 marked the first official release of InfluxDB's new time series index (TSI) engine.  Additional
-improvements have been made to the TSI engine for 1.4.
+InfluxDB 1.5.0 marks the first official release of InfluxDB's new time series index (TSI) engine. TSI was first introduced in InfluxDB as a technical preview in InfluxDB 1.3. Since then, InfluxDB users and InfluxData have been able to test, use, and share feedback on this functionality.
 
 With TSI, the number of series should be unbounded by the memory on the server hardware and the number of existing series will have a negligible impact on database startup time.
-See Paul Dix's blogpost [Path to 1 Billion Time Series: InfluxDB High Cardinality Indexing Ready for Testing](https://www.influxdata.com/path-1-billion-time-series-influxdb-high-cardinality-indexing-ready-testing/) for additional information.
 
-> **Note:** TSI remains disabled by default in version 1.4.  We do not recommend using this setting for production deployments
-at this time.  This feature is considered experimental and feedback is welcome.
-
-To enable TSI, uncomment the [`index-version` setting](/influxdb/v1.5/administration/config/#index-version-inmem) and set it to `tsi1`.
-The `index-version` setting is in the `[data]` section of the configuration file.
-Next, restart your InfluxDB instance.
-
-```
-[data]
-  dir = "/var/lib/influxdb/data"
-  index-version = "tsi1"
-```
-
-## Prometheus Read-Write API
-
-## Configuration File Byte Simplification
-
-## InfluxQL Updates
-
-### SHOW CARDINALITY
-
-### Ranged Meta Queries
-
-### Operators
+> **Note:** TSI remains disabled by default in InfluxDB 1.5, but users are encouraged to enable and use TSI to enhance the management of time series data, especially for data with high series cardinality.
 
 
+## Enterprise-compatible backup and restore for InfluxDB OSS
 
-### Functions
+> ***Note:*** For InfluxDB Enterprise clusters, see [Backing up and restoring in InfluxDB Enterprise](/influxdb_enterprise/v1.5/administration/backup-and-restore/).
+
+Starting with InfluxDB 1.5, InfluxDB OSS supports enterprise-compatible backup and restore. The InfluxDB OSS `backup` utility provides:
+
+* Option to run backup and restore functions on an online, or live, database.
+* Backup and restore functions for single or multiple databases with optional filtering based on data point timestamps.
+* Data imports from [InfluxDB Enterprise](/enterprise_influxdb/latest/) clusters
+* Backup files that can be imported into an InfluxDB Enterprise database.
+
+The online `restore` utility in InfluxDB OSS supports the new Enterprise-compatible backup format, but the the legacy backup format is still available.
+
+For details about the new backup and restore functionality, see [Backing up and restoring in InfluxDB OSS](/influxdb/v1.5/administration/backup-and-restore/).
 
 
-#### New function:
+## New logging options
 
-See the [functions page](/influxdb/v1.5/query_language/functions/) for detailed documentation.
+With InfluxDB 1.5, logging is improved and supports multiple formats.
+Using the is easier to integrate with other products (for example, Splunk, Papertrail, Elasticsearch, etc.) and new logging options are available.
 
-#### New function:
+When logging to a file, the `logfmt` is used by default and when logging to a TTY device (for example, a terminal),
 
-#### Updated functions:
-
-### Other
+See [logging options](/influxdb/v1.5/administration/config/#logging-options--logging/) in the configuration section.
+See [Logging in InfluxDB](/influxdb/v1.5/administration/logs/)
