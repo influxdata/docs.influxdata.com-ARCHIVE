@@ -59,7 +59,7 @@ This page also describes how to
 [`DROP`](/influxdb/v1.5/query_language/continuous_queries/#delete-cqs)
 Continuous Queries.
 
-#### [Mathematical operators](/influxdb/v1.5/query_language/math_operators/)
+#### [InfluxQL mathematical operators](/influxdb/v1.5/query_language/math_operators/)
 
 Covers the use of mathematical operators in InfluxQL.
 

@@ -601,14 +601,19 @@ Configures the ifql RPC API.
 
 Determines whether the RPC service is enabled.
 
+Environment variable: `INFLUXDB_IFQL_ENABLED`
+
 ### `log-enabled = true`
 
 Determines whether additional logging is enabled.
+
+Environment variable: `INFLUXDB_IFQL_LOG_ENABLED`
 
 ### `bind-address = ":8082"`
 
 The bind address used by the IFQL RPC service.
 
+Environment variable: `INFLUXDB_IFQL_BIND_ADDRESS`
 
 ## Logging settings `[logging]`
 
@@ -617,19 +622,22 @@ Controls how the logger emits logs to the output.
 ### `format = "auto"`
 
 Determines which log encoder to use for logs.
-Available options are `auto`, `logfmt`, and `json`. With the default `auto` option, if the output terminal is a TTY device, a more user-friendly console encoding is used. If the output is a non-TTY device, the auto option will use the `logfmt` encoding.
-The `auto` option uses a more user-friendly console output format if the output terminal is a TTY, but the format is not as easily machine-readable.
-When the output is a non-TTY, auto will use `logfmt`.
+Available options are `auto`, `logfmt`, and `json`. With the default `auto` option, if the output is to a TTY device (e.g., a terminal), a more user-friendly console encoding is used. If the output is to files, the auto option uses the `logfmt` encoding. The `logfmt` and `json` options are useful for integration with external tools.
+
+Environment variable: `INFLUXDB_LOGGING_FORMAT`
 
 ### `level = "info"`
 
-Determines which level of logs will be emitted.
+Determines which level of logs will be emitted. Valid values are:
+
+Environment variable: `INFLUXDB_LOGGING_LEVEL`
 
 ### `suppress-logo = false`
 
 Suppresses the logo output that is printed when the program is started.
 The logo is always suppressed if `STDOUT` is not a TTY.
 
+Environment variable: `INFLUXDB_LOGGING_SUPPRESS_LOGO`
 
 ## Subscription settings `[subscriber]`
 
