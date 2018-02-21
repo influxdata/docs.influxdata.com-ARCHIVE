@@ -16,7 +16,7 @@ In InfluxDB Enterprise, fine-grained authorization can be used to control access
 
 ### Concepts
 
-To use fine-grained authorization (hereafter "FGA"), you must first [enable authentication](/influxdb/v1.5/query_language/authentication_and_authorization/#set-up-authentication) in your configuration file.
+To use fine-grained authorization (FGA), you must first [enable authentication](/influxdb/v1.5/query_language/authentication_and_authorization/#set-up-authentication) in your configuration file.
 Then the admin user needs to create users through the query API and grant those users explicit read and/or write privileges per database.
 So far, this is the same as how you would configure authorization on an InfluxDB OSS instance.
 
