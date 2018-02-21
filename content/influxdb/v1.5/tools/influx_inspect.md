@@ -16,7 +16,7 @@ shards, as well as export data from a shard to [line protocol](/influxdb/v1.5/co
 
 The commands are:
 ```
-    buildtsi             convert existing in-memory (TSM-based) shards to TSI
+    buildtsi             convert in-memory (TSM-based) shards to TSI
     dumptsm              dumps low-level details about tsm1 files.
     dumptsi              dumps low-level details about tsi1 files.
     export               exports raw data from a shard to line protocol
@@ -27,29 +27,39 @@ The commands are:
 
 ### `influx_inspect buildtsi`
 
-Converts existing TSM-based shards to TSI (time series index) shards with disk-based index files.
+Converts TSM-based shards to shards supporting TSI (time series index) disk-based index files.
 The index is written to a temporary location until complete and then moved to a permanent location.
 If an error occurs, then this operation will fall back to the original in-memory index.
 
 > ***Note:*** This tool is for offline conversion only. When TSI is enabled, new shards use the TSI indexes. Existing shards continue as TSM-based shards until converted offline.
 
-####Usage
+#### Usage
 ```
-influx_inspect buildtsi [ flags ]
+influx_inspect buildtsi -datadir <data_directory> -waldir <WAL_directory> [ options ]
 ```
-####Flags
+#### Flags
 
-####`-path <data_directory> <wal_directory>` string
-Path of the data directory and the WAL directory.
+Optional arguments are in brackets.
 
-#### `-v` (optional)
-Verbose output
+[ -database string ]
+  Database name
+-datadir string
+  Data directory.
+[ -retention string ]
+  Retention policy.
+[ -shard string ]
+  Shard ID.
+[ -v ]
+  Verbose output.
 
-####Example
+-waldir string
+  WAL directory
+
+#### Example
+
 ```
-$ influx_inspect buildtsi -path ~/.influxdb/data/stress/autogen/1 ~/.influxdb/wal/stress/autogen/1
+$ influx_inspect buildtsi -datadir ~/.influxdb/data/stress/autogen/1 -waldir ~/.influxdb/wal/stress/autogen/1
 ```
-
 
 ### `influx_inspect dumptsm`
 Dumps low-level details about [tsm](/influxdb/v1.5/concepts/glossary/#tsm-time-structured-merge-tree) files.
@@ -118,8 +128,8 @@ Filter data by tag value regular expression.
 
 
 ### `influx_inspect export`
-Export all TSM files to line protocol.  This output file can be imported using
-the
+Export all TSM files to line protocol.
+This output file can be imported using the
 [influx](/influxdb/v1.5/tools/shell/#import-data-from-a-file-with-import)
 command.
 
