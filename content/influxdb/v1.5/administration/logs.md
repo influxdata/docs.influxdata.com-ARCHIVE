@@ -8,15 +8,18 @@ menu:
     parent: administration
 ---
 
-On this page
+**Content**
 
 * [Logging locations](#logging-locations)
-* [Logging output formats](#logging-output-formats)
+* [Structured logging](#structured-logging)
+* [Tracing](#tracing)
+* [Generating separate HTTP request logs](#generating-HTTP-request-logs)
+
+
+## Logging locations
 
 InfluxDB writes log output, by default, to `stderr`.
 Depending on your use case, this log information can be written to another location.
-
-## Logging locations
 
 ### Running InfluxDB directly
 
@@ -70,9 +73,11 @@ You can use [logrotate](http://manpages.ubuntu.com/manpages/hardy/man8/logrotate
 If using the package install on a sysvinit system, the config file for logrotate is installed in `/etc/logrotate.d`.
 You can view the file [here](https://github.com/influxdb/influxdb/blob/master/scripts/logrotate).
 
-## Logging output
+## Structured logging
 
-Prior to InfluxDB 1.5, logging configuration options were not available. Starting in InfluxDB 1.5, logging has changed and includes the following logging options:
+With InfluxDB 1.5, logging has been improved to support structured logging, providng machine-readable and more developer-friendly log output formats. The two new structured log formats, `logfmt` and `json`, provide easier filtering and searching with external tools and simplifies integration of InfluxDB logs  with Splunk, Papertrail, Elasticsearch, and other third party tools.
+
+The InfluxDB logging configuration options were now include the following options:
 
 * format: `auto` (default) | `logfmt` | `json`
 * level: `error` | `warn` | `info` (default) | `debug`
@@ -80,14 +85,12 @@ Prior to InfluxDB 1.5, logging configuration options were not available. Startin
 
 ### Logging formats
 
-Two of the new formats, `logfmt` and `json`, are machine-readable and provide easier filtering and searching with external tools. These formats also make it easier to integrate with Elasticsearch, Splunk, Papertrail, and other tools.
-
-With the default logging format setting of `auto`, logging is managed automatically as follows:
+Three logging `format` options are available: `auto`, `logfmt`, and `json`. The default logging format setting of `format = "auto"` lets InfluxDB automatically manage the log output format:
 
 * When logging to a file, the `logfmt` is used and when logging to a TTY device (for example, a terminal).
 * When logging to a TTY (e.g., a terminal), a user-friendly console format is used.
 
-The `json` format, which is machine-readable and more developer-friendly, is available only as an explicit option.
+The `json` format is available when specified.
 
 ### Examples of log output:
 
@@ -115,7 +118,6 @@ ts=2018-02-20T22:48:11.291875Z lvl=info msg="Loading configuration file" path=/U
 2018-02-20T22:55:34.247059Z     info    Loading configuration file      {"path": "/Users/user_name/.influxdb/influxdb.conf"}
 ```
 
-
 ### Logging levels
 
 The `level` option determines which level of logs will be emitted. Available levels are `error`, `warn`, `info` (default), and `debug`. Logs that are equal to or above the specified level will be emitted.
@@ -125,3 +127,103 @@ For details on the logging configuration options and corresponding environment v
 ### Logo suppression
 
 The `suppress-logo` option can be used to suppress the logo output that is printed when the program is started. The logo is always suppressed if `STDOUT` is not a TTY.
+
+## Tracing
+
+InfluxDB 1.5 logging has been enhanced to provide tracing of important InfluxDB operations. Tracing is useful for error reporting and discovering performance bottlenecks.
+
+### Tracing identifiers
+
+* `op.name`: Unique identifier for an operation. You can filter on all operations of a specific name. Example: `tsm1.compact_group`.
+* `op.event` Specifies the start and stop of an event. Two values, `start` or `end` indicate when an operation started or ended.
+    * For example, you can grep by values in `op.name` AND `op.event` to find all starting operation log entries.
+* Traces begin and end with a consistent log entries
+    * Traces begin with a user-friendly description of the operation (e.g.,  "TSM compaction") and the `op.event` context.
+    * Traces end with the same description of the operation (e.g., "TSM compaction").
+* `trace_id`: Unique identifier used for a specific instance of a trace and can be used to correlate all related log events
+* `log_id`: Log identifier added to _every_ log entry for a single execution of the `influxd` process, allowing all log entries for a single run to be easily identified. There are also other ways a log file could be split by a single execution, but the consistent `log_id` eases the searching of log aggregations services.
+* `op.elapsed`: Amount of time the operation spent executing. Logged with the ending trace entry.
+* Context keys are provided for logging related events
+    * `db.instance`: Database name
+    * `db.rp`: Retention policy name
+    * `db.shard_id`: Shard identifier
+    * `db.shard_group` Shard group identifier
+
+### Tooling
+
+Here are a few of the tools available for processing and filtering log files output in `logfmt` or `json` formats.
+
+* [hutils](https://blog.heroku.com/hutils-explore-your-structured-data-logs), provided by Heroku, is a collection of command line utilities for working with logs with `logfmt` encoding, including:
+  - `lcut` extracts values from a `logfmt` trace based on a specified field name.
+  - `lfmt` prettifies `logfmt` lines as they emerge from a stream, and highlights their key sections.
+  - `ltap` accesses messages from log providers in a consistent way to allow easy parsing by other utilities that operate on `logfmt` traces.
+  - `lviz` helps visualize logfmt output by building a tree out of a dataset by combining common sets of key-value pairs into shared parent nodes.
+* `influxlog` – WIP will be our tool to quickly report on various interesting metrics and / or conditions
+    * this will go hand-in-hand with all the usual text filtering
+* [The Log File Navigator (lnav)](http://lnav.org) is an advanced log file viewer useful for watching and analyzing your log files from a terminal. The lnav viewer provides a single log view, automatic log format detection, filtering, timeline view, pretty-print view, and querying logs using SQL.
+
+### Operations
+
+* `tsdb.Open` traces all events related to the initial opening of the `tsdb.Store`
+    * `op.name` : `tsdb.open`
+* Retention policy shard deletions
+    * `op.name` : `retention.delete_check`
+* All TSM compaction strategies
+    * `op.name` : `tsm.compact_group`
+    * `strategy` : `(level|full)`
+    * `level` : `[1,3]`
+    * `optimize` : `(true|false)`
+* Series file compactions
+    * `op.name` : `series_partition.compaction`
+* Continuous query execution (if logging enabled)
+    * `op.name` : `continuous_querier.execute`
+* TSI log file compaction
+    * `op.name` : `index.tsi.compact_log_file`
+* TSI level compaction
+    * `op.name` : `index.tsi.compact_to_level`
+
+### Examples
+
+The following log sample provides some examples of trace log entries.
+
+```
+ts=2018-02-21T20:22:06.293163Z lvl=info msg="Cache snapshot (start)" log_id=06QW8yAl000 engine=tsm1 trace_id=06QWKbqG000 op.name=cache.snapshot op.event=start
+ts=2018-02-21T20:22:06.373734Z lvl=info msg="Snapshot for path written" log_id=06QW8yAl000 engine=tsm1 path=/Users/stuartcarnie/.influxdb/data/bar/autogen/438 duration=80.582ms
+ts=2018-02-21T20:22:06.373775Z lvl=info msg="Cache snapshot (end)" log_id=06QW8yAl000 engine=tsm1 trace_id=06QWKbqG000 op.name=cache.snapshot op.event=end op.elapsed=80ms
+ts=2018-02-21T20:22:09.292390Z lvl=info msg="Cache snapshot (start)" log_id=06QW8yAl000 engine=tsm1 trace_id=06QWKnZ0000 op.name=cache.snapshot op.event=start
+ts=2018-02-21T20:22:09.375122Z lvl=info msg="Snapshot for path written" log_id=06QW8yAl000 engine=tsm1 path=/Users/stuartcarnie/.influxdb/data/bar/autogen/438 duration=82.744ms
+ts=2018-02-21T20:22:09.375169Z lvl=info msg="Cache snapshot (end)" log_id=06QW8yAl000 engine=tsm1 trace_id=06QWKnZ0000 op.name=cache.snapshot op.event=end op.elapsed=82ms
+ts=2018-02-21T20:22:12.292417Z lvl=info msg="Cache snapshot (start)" log_id=06QW8yAl000 engine=tsm1 trace_id=06QWKzH0000 op.name=cache.snapshot op.event=start
+ts=2018-02-21T20:22:12.371576Z lvl=info msg="Snapshot for path written" log_id=06QW8yAl000 engine=tsm1 path=/Users/stuartcarnie/.influxdb/data/bar/autogen/438 duration=79.174ms
+ts=2018-02-21T20:22:12.371621Z lvl=info msg="Cache snapshot (end)" log_id=06QW8yAl000 engine=tsm1 trace_id=06QWKzH0000 op.name=cache.snapshot op.event=end op.elapsed=79ms
+ts=2018-02-21T20:22:13.292489Z lvl=info msg="TSM compaction (start)" log_id=06QW8yAl000 engine=tsm1 level=1 strategy=level trace_id=06QWL2B0000 op.name=tsm1.compact_group op.event=start
+ts=2018-02-21T20:22:13.292571Z lvl=info msg="Beginning compaction" log_id=06QW8yAl000 engine=tsm1 level=1 strategy=level trace_id=06QWL2B0000 op.name=tsm1.compact_group files=8
+ts=2018-02-21T20:22:13.292618Z lvl=info msg="Compacting file" log_id=06QW8yAl000 engine=tsm1 level=1 strategy=level trace_id=06QWL2B0000 op.name=tsm1.compact_group index=0 file=/Users/stuartcarnie/.influxdb/data/bar/autogen/438/000000122-000000001.tsm
+ts=2018-02-21T20:22:13.292653Z lvl=info msg="Compacting file" log_id=06QW8yAl000 engine=tsm1 level=1 strategy=level trace_id=06QWL2B0000 op.name=tsm1.compact_group index=1 file=/Users/stuartcarnie/.influxdb/data/bar/autogen/438/000000123-000000001.tsm
+ts=2018-02-21T20:22:13.292670Z lvl=info msg="Compacting file" log_id=06QW8yAl000 engine=tsm1 level=1 strategy=level trace_id=06QWL2B0000 op.name=tsm1.compact_group index=2 file=/Users/stuartcarnie/.influxdb/data/bar/autogen/438/000000124-000000001.tsm
+ts=2018-02-21T20:22:13.292685Z lvl=info msg="Compacting file" log_id=06QW8yAl000 engine=tsm1 level=1 strategy=level trace_id=06QWL2B0000 op.name=tsm1.compact_group index=3 file=/Users/stuartcarnie/.influxdb/data/bar/autogen/438/000000125-000000001.tsm
+ts=2018-02-21T20:22:13.292700Z lvl=info msg="Compacting file" log_id=06QW8yAl000 engine=tsm1 level=1 strategy=level trace_id=06QWL2B0000 op.name=tsm1.compact_group index=4 file=/Users/stuartcarnie/.influxdb/data/bar/autogen/438/000000126-000000001.tsm
+ts=2018-02-21T20:22:13.292727Z lvl=info msg="Compacting file" log_id=06QW8yAl000 engine=tsm1 level=1 strategy=level trace_id=06QWL2B0000 op.name=tsm1.compact_group index=5 file=/Users/stuartcarnie/.influxdb/data/bar/autogen/438/000000127-000000001.tsm
+ts=2018-02-21T20:22:13.292755Z lvl=info msg="Compacting file" log_id=06QW8yAl000 engine=tsm1 level=1 strategy=level trace_id=06QWL2B0000 op.name=tsm1.compact_group index=6 file=/Users/stuartcarnie/.influxdb/data/bar/autogen/438/000000128-000000001.tsm
+ts=2018-02-21T20:22:13.292773Z lvl=info msg="Compacting file" log_id=06QW8yAl000 engine=tsm1 level=1 strategy=level trace_id=06QWL2B0000 op.name=tsm1.compact_group index=7 file=/Users/stuartcarnie/.influxdb/data/bar/autogen/438/000000129-000000001.tsm
+ts=2018-02-21T20:22:14.262006Z lvl=info msg="Compacted file" log_id=06QW8yAl000 engine=tsm1 level=1 strategy=level trace_id=06QWL2B0000 op.name=tsm1.compact_group index=0 file=/Users/stuartcarnie/.influxdb/data/bar/autogen/438/000000129-000000002.tsm.tmp
+ts=2018-02-21T20:22:14.262060Z lvl=info msg="Finished compacting files" log_id=06QW8yAl000 engine=tsm1 level=1 strategy=level trace_id=06QWL2B0000 op.name=tsm1.compact_group groups=8 files=1 duration=969.583ms
+ts=2018-02-21T20:22:14.262078Z lvl=info msg="TSM compaction (end)" log_id=06QW8yAl000 engine=tsm1 level=1 strategy=level trace_id=06QWL2B0000 op.name=tsm1.compact_group op.event=end op.elapsed=969ms
+ts=2018-02-21T20:22:15.292772Z lvl=info msg="Cache snapshot (start)" log_id=06QW8yAl000 engine=tsm1 trace_id=06QWL9~0000 op.name=cache.snapshot op.event=start
+ts=2018-02-21T20:22:15.394407Z lvl=info msg="Snapshot for path written" log_id=06QW8yAl000 engine=tsm1 path=/Users/stuartcarnie/.influxdb/data/bar/autogen/438 duration=101.658ms
+ts=2018-02-21T20:22:15.394459Z lvl=info msg="Cache snapshot (end)" log_id=06QW8yAl000 engine=tsm1 trace_id=06QWL9~0000 op.name=cache.snapshot op.event=end op.elapsed=101ms
+```
+
+## Generating separate HTTP request logs
+
+InfluxDB 1.5 introduces the option to log HTTP request traffic separately from the other InfluxDB log output. When HTTP request logging is enabled, the HTTP logs are intermingled by default with internal InfluxDB logging. By redirecting the HTTP request log entries to a separate file, both log files are easier to read, monitor, and debug.
+
+**To generate separate HTTP request logging:**
+
+Locate the `[http]` section of your InfluxDB configuration file and set the `access-log-path` option to specify the path where HTTP log entries should be written.
+
+**Notes:**
+
+* If `influxd` is unable to access the specified path, it will log an error and fall back to writing the request log to `stderr`.
+* The `[httpd]` prefix is stripped when HTTP request logging is redirected to a separate file, allowing access log parsing tools (like [lnav](https://lnav.org)) to render the files without additional modification.
+* To rotate the HTTP request log file, use the `copyrotate` method of `logrotate` or similar to leave the original file in place.
