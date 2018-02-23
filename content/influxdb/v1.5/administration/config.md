@@ -655,7 +655,7 @@ Controls how long an http request for the subscriber service will run before it 
 
 Environment variable: `INFLUXDB_SUBSCRIBER_HTTP_TIMEOUT`
 
-### i`nsecure-skip-verify = false`
+### `insecure-skip-verify = false`
 
 Allows insecure HTTPS connections to subscribers.
 This is useful when testing with self-signed certificates.
