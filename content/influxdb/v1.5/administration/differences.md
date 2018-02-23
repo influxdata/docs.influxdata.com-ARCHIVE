@@ -41,12 +41,13 @@ The online `restore` utility in InfluxDB OSS supports the new Enterprise-compati
 For details about the new backup and restore functionality, see [Backing up and restoring in InfluxDB OSS](/influxdb/v1.5/administration/backup-and-restore/).
 
 
-## New logging options
+## Structured logging and tracing
 
-With InfluxDB 1.5, logging is improved and supports multiple formats.
-Using the is easier to integrate with other products (for example, Splunk, Papertrail, Elasticsearch, etc.) and new logging options are available.
+With InfluxDB 1.5, logging has been improved to support structured logging and tracing.
 
-When logging to a file, the `logfmt` is used by default and when logging to a TTY device (for example, a terminal),
+Structured logging support allows you to more easily integrate InfluxDB logs with Splunk, Papertrail, Elasticsearch, and other third party tools. The two new structured log formats, `logfmt` and `json`, provide machine-readable and more developer-friendly log outputs.
+
+Tracing has been added to make it easier for you and InfluxData to diagnosis and troubleshoot InfluxDB behavior.
 
 See [logging options](/influxdb/v1.5/administration/config/#logging-options--logging/) in the configuration section.
 See [Logging in InfluxDB](/influxdb/v1.5/administration/logs/)
