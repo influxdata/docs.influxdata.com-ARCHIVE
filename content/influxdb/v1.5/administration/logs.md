@@ -130,15 +130,110 @@ The `suppress-logo` option can be used to suppress the logo output that is print
 
 InfluxDB 1.5 logging has been enhanced to provide tracing of important InfluxDB operations. Tracing is useful for error reporting and discovering performance bottlenecks.
 
-### Keys used in tracing
+### Logging keys used in tracing
 
-#### Tracing identifier key (`trace_id`)
+#### Tracing identifier key
 
 The `trace_id` key specifies a unique identifier for a specific instance of a trace. You can use this key to filter and correlate all related log entries for an operation.
 
-All operation traces include consistent starting and ending log entries, with the same message (`msg`) describing the operation (e.g., "TSM compaction"), but adding the appropriate `op.event` context (either `start` or `end`).
+All operation traces include consistent starting and ending log entries, with the same message (`msg`) describing the operation (e.g., "TSM compaction"), but adding the appropriate `op.event` context (either `start` or `end`). For an example, see [Finding all trace log entries for an InfluxDB operation](#finding-all-trace-log-entries-for-an-influxdb-operation).
 
-**Example: Finding all log entries related to an InfluxDB operation**
+**Example:** `trace_id=06R0P94G000`
+
+#### Operation keys
+
+The following operation keys identify an operation's name, the start and end timestamps, and the elapsed execution time.
+
+##### `op.name`
+Unique identifier for an operation. You can filter on all operations of a specific name.
+
+**Example:** `op.name=tsm1.compact_group`
+
+##### `op.event`
+Specifies the start and end of an event. The two possible values, `(start)` or `(end)`, are used to indicate when an operation started or ended. For example, you can grep by values in `op.name` AND `op.event` to find all starting operation log entries. For an example of this, see [Finding all starting log entries](#finding-all-starting-log-entries).
+
+**Example:** `op.event=start`
+
+##### `op.elapsed`
+Amount of time the operation spent executing. Logged with the ending trace log entry. Time unit displayed depends on how much time has elapsed -- if it was seconds, it will be suffixed with `s`. Valid time units are `ns`, `µs`, `ms`, and `s`.
+
+**Example:** `op.elapsed=0.352ms`
+
+
+#### Log identifier context key
+
+The log identifier key (`log_id`) lets you easily identify _every_ log entry for a single execution of an `influxd` process. There are other ways a log file could be split by a single execution, but the consistent `log_id` eases the searching of log aggregation services.
+
+**Example:** `log_id=06QknqtW000`
+
+#### Database context keys
+
+`db.instance`: Database name
+
+`db.rp`: Retention policy name
+
+`db.shard_id`: Shard identifier
+
+`db.shard_group` Shard group identifier
+
+### Tooling
+
+Here are a couple of popular tools available for processing and filtering log files output in `logfmt` or `json` formats.
+
+#### [hutils](https://blog.heroku.com/hutils-explore-your-structured-data-logs)
+
+The [hutils](https://blog.heroku.com/hutils-explore-your-structured-data-logs), provided by Heroku, is a collection of command line utilities for working with logs with `logfmt` encoding, including:
+
+* `lcut`: Extracts values from a `logfmt` trace based on a specified field name.
+* `lfmt`: Prettifies `logfmt` lines as they emerge from a stream, and highlights their key sections.
+* `ltap`: Accesses messages from log providers in a consistent way to allow easy parsing by other utilities that operate on `logfmt` traces.
+* `lviz`: Visualizes `logfmt` output by building a tree out of a dataset combining common sets of key-value pairs into shared parent nodes.
+
+#### [lnav (Log File Navigator)](http://lnav.org)
+
+The [lnav (Log File Navigator)](http://lnav.org) is an advanced log file viewer useful for watching and analyzing your log files from a terminal. The lnav viewer provides a single log view, automatic log format detection, filtering, timeline view, pretty-print view, and querying logs using SQL.
+
+### Operations
+
+The following operations, listed by their operation name (`op.name`) are traced in InfluxDB internal logs and available for use without changes in logging level.
+
+#### Initial opening of data files
+
+The `tsdb.open` operation traces include all events related to the initial opening of the `tsdb.store`.
+
+
+#### Retention policy shard deletions
+
+The `retention.delete_check` operation includes all shard deletions related to the retention policy.
+
+#### TSM compaction strategies
+
+The `tsm.compact_group` operation includes all trace log entries related to TSM compaction strategies and displays the related TSM compaction strategy keys:
+
+* `strategy`: `level` | `full`
+* `level`: [1,3]
+* `optimize`: `true` | `false`
+
+#### Series file compactions
+
+The `series_partition.compaction` operation includes all trace log entries related to series file compactions.
+
+####  Continuous query execution (if logging enabled)
+
+The `continuous_querier.execute` operation includes all continuous query executions, if logging is enabled.
+
+#### TSI log file compaction
+
+The `index.tsi.compact_log_file`
+
+#### TSI level compaction
+
+The `index.tsi.compact_to_level` operation includes all trace log entries for TSI level compactions.
+
+
+### Tracing examples
+
+#### Finding all trace log entries for an InfluxDB operation
 
 In the example below, you can see the log entries for all trace operations related to a "TSM compaction" process. Note that the initial entry shows the message "TSM compaction (start)" and the final entry displays the message "TSM compaction (end)". \[Note: Log entries were grepped using the `trace_id` value and then the specified key values were displayed using `lcut` (an hutils tool).\]
 
@@ -155,13 +250,8 @@ $ grep "06QW92x0000" influxd.log | lcut ts lvl msg strategy level
 2018-02-21T20:19:03.928707Z	info	TSM compaction (end)	full
 ```
 
-#### Operation keys
 
-* `op.name`: Unique identifier for an operation. You can filter on all operations of a specific name. Example: `tsm1.compact_group`.
-* `op.event` Specifies the start and end of an event. The two possible values, `(start)` or `(end)`, are used to indicate when an operation started or ended. For example, you can grep by values in `op.name` AND `op.event` to find all starting operation log entries.
-* `op.elapsed`: Amount of time the operation spent executing. Logged with the ending trace log entry.
-
-**Example: Finding all starting operation log entries**
+#### Finding all starting operation log entries
 
 To find all starting operation log entries, you can grep by values in `op.name` AND `op.event`. In the following example, the grep returned 101 entries, so the result below only displays the first entry. In the example result entry, the timestamp, level, strategy, trace_id, op.name, and op.event values are included.
 
@@ -171,7 +261,7 @@ ts=2018-02-21T20:16:16.709953Z lvl=info msg="TSM compaction" log_id=06QVNNCG000 
 ...
 
 ```
-Using the `lcut` utility (in hutils), the following command uses the grep from above, but adds an lcut command to only display the keys and their values for keys that are not identical in all of the entries.
+Using the `lcut` utility (in hutils), the following command uses the previous `grep` command, but adds an `lcut` command to only display the keys and their values for keys that are not identical in all of the entries. The following example includes 19 examples of unique log entries displaying selected keys: `ts`, `strategy`, `level`, and `trace_id`.
 
 ```
 $ grep -F 'op.name=tsm1.compact_group' influxd.log | grep -F 'op.event=start' | lcut ts strategy level trace_id | sort -u
@@ -195,74 +285,6 @@ $ grep -F 'op.name=tsm1.compact_group' influxd.log | grep -F 'op.event=start' | 
 2018-02-21T21:12:08.017055Z	full		06QZBpKG000
 2018-02-21T21:12:08.478200Z	full		06QZBr7W000
 ```
-
-
-#### Log identifier context key
-
-* `log_id`: Log identifier.  This key is added to _every_ log entry for a single execution of the `influxd` process, allowing all log entries for a single process to be easily identified. There are other ways a log file could be split by a single execution, but the consistent `log_id` eases the searching of log aggregation services.
-
-#### Database context keys
-
-Logging context keys related to the database:
-
-* `db.instance`: Database name
-* `db.rp`: Retention policy name
-* `db.shard_id`: Shard identifier
-* `db.shard_group` Shard group identifier
-
-### Tooling
-
-Here are a couple of popular tools available for processing and filtering log files output in `logfmt` or `json` formats.
-
-* [hutils](https://blog.heroku.com/hutils-explore-your-structured-data-logs), provided by Heroku, is a collection of command line utilities for working with logs with `logfmt` encoding, including:
-  - `lcut` extracts values from a `logfmt` trace based on a specified field name.
-  - `lfmt` prettifies `logfmt` lines as they emerge from a stream, and highlights their key sections.
-  - `ltap` accesses messages from log providers in a consistent way to allow easy parsing by other utilities that operate on `logfmt` traces.
-  - `lviz` helps visualize `logfmt` output by building a tree out of a dataset by combining common sets of key-value pairs into shared parent nodes.
-* [The Log File Navigator (lnav)](http://lnav.org) is an advanced log file viewer useful for watching and analyzing your log files from a terminal. The lnav viewer provides a single log view, automatic log format detection, filtering, timeline view, pretty-print view, and querying logs using SQL.
-
-### Operations
-
-The following operations, listed by their operation name (`op.name`) are traced in InfluxDB internal logs and available for use without changes in logging level.
-
-#### Initial opening of data files (`tsdb.open`)
-
-The `tsdb.open` operation traces include all events related to the initial opening of the `tsdb.store`.
-
-
-#### Retention policy shard deletions (`retention.delete_check`)
-
-The `retention.delete_check` operation traces include all shard deletions related to the retention policy.
-
-#### TSM compaction strategies (`tsm.compact_group`)
-
-The `tsm.compact_group` operation traces include all TSM compaction strategies, and includes the following related keys:
-
-* strategy: level | full
-* level: [1,3]
-* optimize: true | false
-
-* All TSM compaction strategies
-    * `op.name` : `tsm1.compact_group`
-    * `strategy` : `(level|full)`
-    * `level` : `[1,3]`
-    * `optimize` : `(true|false)`
-
-
-#### Series file compactions (`series_partition.compaction`)
-
-The `series_partition.compaction` operation traces include all
-
-####  Continuous query execution (if logging enabled)
-
-`op.name` : `continuous_querier.execute`
-
-* TSI log file compaction
-    * `op.name` : `index.tsi.compact_log_file`
-* TSI level compaction
-    * `op.name` : `index.tsi.compact_to_level`
-
-# ===============================================
 
 ## Generating separate HTTP request logs
 
