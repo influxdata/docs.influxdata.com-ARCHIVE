@@ -5,6 +5,12 @@ menu:
     weight: 1
     parent: about_the_project
 ---
+## v1.3.9 [2018-01-19]
+
+### Bugfixes
+
+- Improve performance when writes exceed `max-values-per-tag` or `max-series`.
+
 ## v1.3.8 [2017-12-04]
 
 ### Bugfixes

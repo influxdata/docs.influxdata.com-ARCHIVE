@@ -24,7 +24,7 @@ menu:
 
 **Other**
 
-## Where can I find InfluxEnterprise logs?
+## Where can I find InfluxDB Enterprise logs?
 
 On systemd operating systems service logs can be accessed using the `journalctl` command.
 
@@ -79,7 +79,7 @@ Note that for some [write consistency](/enterprise_influxdb/v1.3/concepts/cluste
 [stats] 2016/10/18 10:35:21 error writing count stats for FOO_grafana: partial write
 ```
 
-The `_internal` database collects per-node and also cluster-wide information about the InfluxEnterprise cluster. The cluster metrics are replicated to other nodes using `consistency=all`. For a [write consistency](/enterprise_influxdb/v1.3/concepts/clustering/#write-consistency) of `all`, InfluxDB returns a write error (500) for the write attempt even if the points are successfully queued in hinted handoff. Thus, if there are points still in hinted handoff, the `_internal` writes will fail the consistency check and log the error, even though the data is in the durable hinted handoff queue and should eventually persist.
+The `_internal` database collects per-node and also cluster-wide information about the InfluxDB Enterprise cluster. The cluster metrics are replicated to other nodes using `consistency=all`. For a [write consistency](/enterprise_influxdb/v1.3/concepts/clustering/#write-consistency) of `all`, InfluxDB returns a write error (500) for the write attempt even if the points are successfully queued in hinted handoff. Thus, if there are points still in hinted handoff, the `_internal` writes will fail the consistency check and log the error, even though the data is in the durable hinted handoff queue and should eventually persist.
 
 
 ## Why am I seeing `queue is full` errors in my data node logs?

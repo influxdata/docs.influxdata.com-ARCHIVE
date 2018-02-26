@@ -1,5 +1,5 @@
 ---
-title: Installation
+title: Installing Kapacitor
 
 menu:
   kapacitor_1_4:
@@ -31,7 +31,7 @@ Kapacitor has two binaries:
 You can download the binaries directly from the
 [downloads](https://influxdata.com/downloads/#kapacitor) page.
 
-### Start the Kapacitor Service
+### Starting the Kapacitor service
 
 For packaged installations, please see the respective sections below
 for your operating system. For non-packaged installations (tarballs or
@@ -42,7 +42,7 @@ manually by running:
 ./kapacitord -config <PATH TO CONFIGURATION>
 ```
 
-#### OS X (via Homebrew)
+#### OS X (using Homebrew)
 
 To have `launchd` start Kapacitor at login:
 
@@ -62,7 +62,7 @@ Or, if you don't want/need `lanchctl`, you can just run:
 kapacitord -config /usr/local/etc/kapacitor.conf
 ```
 
-#### Linux - SysV or Upstart Systems
+#### Linux - SysV or Upstart systems
 
 To start the Kapacitor service, run:
 
@@ -70,7 +70,7 @@ To start the Kapacitor service, run:
 sudo service kapacitor start
 ```
 
-#### Linux - systemd Systems
+#### Linux - systemd systems
 
 To start the Kapacitor service, run:
 

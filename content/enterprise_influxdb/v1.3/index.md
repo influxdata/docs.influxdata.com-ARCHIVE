@@ -1,5 +1,5 @@
 ---
-title: Enterprise InfluxDB Version 1.3 Documentation
+title: InfluxDB Enterprise 1.3 documentation
 
 aliases:
     - /enterprise/v1.3/
@@ -11,9 +11,9 @@ menu:
     weight: 10
 ---
 
-InfluxEnterprise offers highly scalable InfluxDB clusters on your infrastructure
+InfluxDB Enterprise offers highly scalable InfluxDB clusters on your infrastructure
 with a management UI.
-Use InfluxEnterprise to:
+Use InfluxDB Enterprise to:
 
 * Monitor your cluster
 
@@ -31,6 +31,6 @@ Use InfluxEnterprise to:
 
     ![Data Explorer](/img/enterprise/data-explorer-chrono.png)
 
-If you're interested in working with InfluxEnterprise, visit
+If you're interested in working with InfluxDB Enterprise, visit
 [InfluxPortal](https://portal.influxdata.com/) to sign up, get a license key,
 and get started!

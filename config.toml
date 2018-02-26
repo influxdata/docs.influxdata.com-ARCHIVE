@@ -19,22 +19,22 @@ SectionPagesMenu = "products"
   weight = 10
   url = "/influxdb/"
 [[menu.products]]
+  name = "InfluxDB Enterprise"
+  identifier = "enterprise_influxdb"
+  weight = 20
+  url = "/enterprise_influxdb/"
+[[menu.products]]
   name = "Chronograf"
   identifier = "chronograf"
-  weight = 20
+  weight = 30
   url = "/chronograf/"
 [[menu.products]]
   name = "Kapacitor"
   identifier = "kapacitor"
-  weight = 30
+  weight = 40
   url = "/kapacitor/"
 [[menu.products]]
-  name = "Enterprise InfluxDB"
-  identifier = "enterprise_influxdb"
-  weight = 40
-  url = "/enterprise_influxdb/"
-[[menu.products]]
-  name = "Enterprise Kapacitor"
+  name = "Kapacitor Enterprise"
   identifier = "enterprise_kapacitor"
   weight = 50
   url = "/enterprise_kapacitor/"
@@ -118,6 +118,12 @@ SectionPagesMenu = "products"
   identifier = "licenses"
   weight = 30
   url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
+  parent = "about_the_project"
+[[menu.influxdb_1_4]]
+  name = "Third Party Software"
+  identifier = "third_party"
+  weight = 40
+  url = "/influxdb/v1.4/about_the_project/#third_party"
   parent = "about_the_project"
 # InfluxDB v1.4 Sub-Menu - External Resources
 [[menu.influxdb_1_4]]
@@ -232,6 +238,12 @@ SectionPagesMenu = "products"
   identifier = "licenses"
   weight = 30
   url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
+  parent = "about_the_project"
+[[menu.influxdb_1_3]]
+  name = "Third Party Software"
+  identifier = "third_party"
+  weight = 40
+  url = "/influxdb/v1.3/about_the_project/#third_party"
   parent = "about_the_project"
 # InfluxDB v1.3 Sub-Menu - External Resources
 [[menu.influxdb_1_3]]
@@ -354,7 +366,12 @@ SectionPagesMenu = "products"
   weight = 30
   url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
   parent = "about_the_project"
-
+[[menu.influxdb_1_2]]
+  name = "Third Party Software"
+  identifier = "third_party"
+  weight = 40
+  url = "/influxdb/v1.2/about_the_project/#third_party"
+  parent = "about_the_project"
 # InfluxDB v1.2 Sub-Menu - External Resources
 [[menu.influxdb_1_2]]
   name = "InfluxData Blog"
@@ -482,6 +499,12 @@ SectionPagesMenu = "products"
   identifier = "licenses"
   weight = 30
   url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
+  parent = "about"
+[[menu.influxdb_1_1]]
+  name = "Third Party Software"
+  identifier = "third_party"
+  weight = 40
+  url = "/influxdb/v1.1/about/#third_party"
   parent = "about"
 
 # InfluxDB v1.1 Sub-Menu - External Resources
@@ -5855,10 +5878,10 @@ parent = "inputs"
   weight = 80
   url = "/influxdb/v1.0/administration/"
 [[menu.influxdb_1_0]]
-  name = "About the Project"
-  identifier = "about"
-  weight = 100
-  url = "/influxdb/v1.0/about/"
+    name = "About the Project"
+    identifier = "about_the_project"
+    weight = 100
+    url = "/influxdb/v1.0/about/"
 [[menu.influxdb_1_0]]
   name = "External Resources"
   identifier = "external_resources"
@@ -5879,25 +5902,25 @@ parent = "inputs"
     identifier = "changelog"
     weight = 5
     url = "https://github.com/influxdb/influxdb/blob/master/CHANGELOG.md"
-    parent = "about"
+    parent = "about_the_project"
   [[menu.influxdb_1_0]]
     name = "Contributing"
     identifier = "contributing"
     weight = 10
     url = "https://github.com/influxdb/influxdb/blob/master/CONTRIBUTING.md"
-    parent = "about"
+    parent = "about_the_project"
   [[menu.influxdb_1_0]]
     name = "CLA"
     identifier = "cla"
     weight = 20
     url = "https://influxdata.com/community/cla/"
-    parent = "about"
+    parent = "about_the_project"
   [[menu.influxdb_1_0]]
     name = "Licenses"
     identifier = "licenses"
     weight = 30
     url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
-    parent = "about"
+    parent = "about_the_project"
 
   # InfluxDB v0.13 Menu
   [[menu.influxdb_013]]

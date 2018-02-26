@@ -1,5 +1,5 @@
 ---
-title: API Reference
+title: InfluxDB API reference
 aliases:
     - influxdb/v1.4/concepts/api/
 menu:
@@ -38,7 +38,7 @@ curl http://localhost:8086/debug/requests
 
 | Query String Parameter | Optional/Required | Definition |
 | :--------------------- | :---------------- |:---------- |
-| seconds=\<integer>      | Optional          | Sets the duration (in seconds) over which the client collects information. The default duration is ten seconds. | 
+| seconds=\<integer>      | Optional          | Sets the duration (in seconds) over which the client collects information. The default duration is ten seconds. |
 
 #### Examples
 
@@ -52,7 +52,7 @@ $ curl http://localhost:8086/debug/requests
 }
 ```
 
-The response shows that, over the past ten seconds, the `user1` user sent one request to the `/write` endpoint and no requests to the `/query` endpoint from the `123.45.678.91` IP address. 
+The response shows that, over the past ten seconds, the `user1` user sent one request to the `/write` endpoint and no requests to the `/query` endpoint from the `123.45.678.91` IP address.
 
 ##### Example 2: Track requests over a one-minute interval
 <br>

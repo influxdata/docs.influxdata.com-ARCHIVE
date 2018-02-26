@@ -1,5 +1,5 @@
 ---
-title: InfluxEnterprise Users
+title: InfluxDB Enterprise Users
 aliases:
     - /enterprise/v1.3/features/users/
 menu:
@@ -8,23 +8,23 @@ menu:
     parent: Features
 ---
 
-InfluxEnterprise users have functions that are either specific to the web
+InfluxDB Enterprise users have functions that are either specific to the web
 console or specific to the cluster:
 ```
 Users                            Cluster              Permissions
 
 Penelope
-   O                                            
-  \|/                                                                 
-   |    ----------------------> Dev Account  --------> Manage Queries 
-  / \                                        --------> Monitor                                  
-                                             --------> Add/Remove Nodes 
+   O
+  \|/
+   |    ----------------------> Dev Account  --------> Manage Queries
+  / \                                        --------> Monitor
+                                             --------> Add/Remove Nodes
 Jim
-   O    
-  \|/                                                            
+   O
+  \|/
    |    ----------------------> Marketing Account ---> View Admin
-  / \                                             ---> Graph Role ---> Read 
-                                                  ---> View Chronograf                                                             
+  / \                                             ---> Graph Role ---> Read
+                                                  ---> View Chronograf
 ```
 
 ## Cluster User Information
@@ -43,7 +43,7 @@ view Chronograf.
 Roles are groups of permissions.
 A single role can belong to several cluster accounts.
 
-InfluxEnterprise clusters have two built-in roles:
+InfluxDB Enterprise clusters have two built-in roles:
 
 #### Global Admin
 
@@ -60,7 +60,7 @@ permissions to:
 * Rebalance
 
 ### Permissions
-InfluxEnterprise clusters have 16 permissions:
+InfluxDB Enterprise clusters have 16 permissions:
 
 #### View Admin
 Permission to view or edit admin screens.
@@ -96,7 +96,7 @@ Permission to show stats and diagnostics.
 Permission to copy shards.
 
 ### Permission to Statement
-The following table describes permissions required to execute the associated database statement.  It also describes whether these permissions apply just to InfluxDB (Database) or InfluxEnterprise (Cluster).
+The following table describes permissions required to execute the associated database statement.  It also describes whether these permissions apply just to InfluxDB (Database) or InfluxDB Enterprise (Cluster).
 
 |Permission|Statement|
 |---|---|
@@ -114,7 +114,7 @@ The following table describes permissions required to execute the associated dat
 |Determined by type of select statement|SelectStatement|
 
 ### Statement to Permission
-The following table describes database statements and the permissions required to execute them.  It also describes whether these permissions apply just to InfluxDB (Database) or InfluxEnterprise (Cluster).
+The following table describes database statements and the permissions required to execute them.  It also describes whether these permissions apply just to InfluxDB (Database) or InfluxDB Enterprise (Cluster).
 
 |Statment|Permissions|Scope|
 |---|---|---|

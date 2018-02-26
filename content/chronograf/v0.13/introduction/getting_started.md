@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Chronograf
+title: Getting started with Chronograf
 
 menu:
   chronograf_013:
@@ -10,7 +10,7 @@ menu:
 
 This guide shows how to download, install, and start visualizing data with Chronograf.
 
-## Download and Install Chronograf
+## Download and install Chronograf
 Follow the instructions in the Chronograf Downloads section on the [Downloads page](https://influxdata.com/downloads/#chronograf).
 
 ## Start the Chronograf Server
@@ -22,7 +22,7 @@ sudo service chronograf start
 ```
 Note that the Chronograf startup script needs root permission to ensure that it can write to `/var/log`, but the executable runs as a normal user.
 
-#### OS X via [Homebrew](http://brew.sh/)
+#### Mac OS X using [Homebrew](http://brew.sh/)
 * Run Chronograf manually on the command line:
 
     ```

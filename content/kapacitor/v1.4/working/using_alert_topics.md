@@ -1,5 +1,5 @@
 ---
-title: Using Alert Topics
+title: Using alert topics
 aliases:
     - kapacitor/v1.4/examples/using_alert_topics/
 menu:
@@ -26,7 +26,7 @@ It is further expected that a working Telegraf and Kapacitor are installed to
 walk through this example. If these are not installed, please take a second to
 set up both of them.
 
-## The Task
+## The task
 
 This walk-through is going to demonstrate how to set up a `cpu` alert topic and send alerts to that topic.
 
@@ -209,7 +209,7 @@ kapacitor define-topic-handler ./victorops.yaml
 
 Now all `system` related alerts get sent to the `ops_team` topic which in turn get handled in Victor Ops.
 
-### Match Conditions
+### Match conditions
 
 Match conditions can be applied to handlers.
 Only alerts matching the conditions will be handled by that handler.

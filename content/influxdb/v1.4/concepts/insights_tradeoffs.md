@@ -1,5 +1,5 @@
 ---
-title: Design Insights and Tradeoffs in InfluxDB
+title: Design insights and tradeoffs in InfluxDB
 menu:
   influxdb_1_4:
     weight: 60

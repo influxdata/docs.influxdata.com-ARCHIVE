@@ -7,6 +7,6 @@ menu:
     weight: 40
 ---
 
-## [InfluxEnterprise Users](/enterprise_influxdb/v1.3/features/users/)
-## [Cluster Commands](/enterprise_influxdb/v1.3/features/cluster-commands/)
-## [Clustering Features](/enterprise_influxdb/v1.3/features/clustering-features/)
+## [InfluxDB Enterprise users](/enterprise_influxdb/v1.3/features/users/)
+## [Cluster commands](/enterprise_influxdb/v1.3/features/cluster-commands/)
+## [Clustering features](/enterprise_influxdb/v1.3/features/clustering-features/)

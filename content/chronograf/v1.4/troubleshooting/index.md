@@ -4,7 +4,7 @@ title: Troubleshooting
 menu:
   chronograf_1_4:
     name: Troubleshooting
-    weight: 1
+    weight: 30
 ---
 
 Follow the link below to access Chronograf's FAQ.

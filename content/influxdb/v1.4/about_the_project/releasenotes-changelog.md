@@ -6,6 +6,17 @@ menu:
     parent: about_the_project
 ---
 
+## v1.4.3 [2018-02-01]
+
+### Configuration changes
+
+- `[data]` section in influxdb.conf: Default value for `cache-snapshot-memory-size` has been changed from `25m` to `256m`.
+
+### Bugfixes
+
+- Fix higher disk I/O utilization
+
+
 ## v1.4.2 [2017-11-15]
 
 Refer to the 1.4.0 breaking changes section if `influxd` fails to start with an `incompatible tsi1 index MANIFEST` error.
@@ -145,6 +156,20 @@ will find the shards refuse to open and will most likely see the following error
 - Ensure retention service always removes local shards.
 - Handle utf16 files when reading the configuration file.
 - Fix `panic: runtime error: slice bounds out of range`.
+
+## v1.3.9 [2018-01-19]
+
+### Bugfixes
+
+- Improve performance when writes exceed `max-values-per-tag` or `max-series`.
+
+## v1.3.8 [2017-12-04]
+
+### Bugfixes
+
+- Add `influx_inspect inmem2tsi` command to convert existing in-memory (TSM-based) shards to the TSI (Time Series Index) format.
+- Fix race condition in the merge iterator close method.
+- Fix compaction aborting early and dropping remaining series.
 
 ## v1.3.7 [2017-10-26]
 

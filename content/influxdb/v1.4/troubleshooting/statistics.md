@@ -1,5 +1,5 @@
 ---
-title: Server Monitoring
+title: Server monitoring
 aliases:
     - influxdb/v1.4/administration/statistics/
 menu:

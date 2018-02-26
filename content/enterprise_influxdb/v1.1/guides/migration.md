@@ -8,7 +8,7 @@ menu:
     parent: Guides
 ---
 
-The following guide has step-by-step instructions for migrating an OSS InfluxDB
+The following guide has step-by-step instructions for migrating an InfluxDB OSS
 instance into and InfluxEnterprise cluster.
 
 The process assumes that you already have a fully configured InfluxEnterprise cluster

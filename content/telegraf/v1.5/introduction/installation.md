@@ -1,5 +1,5 @@
 ---
-title: Installation
+title: Installing Telegraf
 
 menu:
   telegraf_1_5:

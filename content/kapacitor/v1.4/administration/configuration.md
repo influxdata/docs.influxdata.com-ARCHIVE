@@ -1,5 +1,5 @@
 ---
-title: Configuration
+title: Configuring Kapacitor
 
 menu:
   kapacitor_1_4:
@@ -7,16 +7,14 @@ menu:
     parent: administration
 ---
 
-# Configuring Kapacitor
-
 ### Contents
  * [Startup](#startup)
- * [The Kapacitor Configuration File](#the-kapacitor-configuration-file)
- * [Kapacitor Environment Variables](#kapacitor-environment-variables)
- * [Configuration with The HTTP API](#configuration-with-the-http-api)
+ * [The Kapacitor configuration file](#the-kapacitor-configuration-file)
+ * [Kapacitor environment variables](#kapacitor-environment-variables)
+ * [Configuring with The HTTP API](#configuration-with-the-http-api)
 
 Basic installation and startup of the Kapacitor service is covered in
-[Getting Started](/kapacitor/v1.4/introduction/getting_started/).
+[Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting_started/).
 The basic principles of working with Kapacitor described there should be understood before continuing here.
 This document presents Kapacitor configuration in greater detail.
 
@@ -46,7 +44,7 @@ runs.
 These include:
 
 * `-config`: Path to the configuration file.
-* `-hostname`: Host name that will override the hostname specified in the configuration file.
+* `-hostname`: Hostname that will override the hostname specified in the configuration file.
 * `-pidfile`: File where the process ID will be written.
 * `-logfile`: File where logs will be written.
 * `-log-level`: Threshold for writing messages to the log file. Valid values include `debug, info, warn, error`.
@@ -69,7 +67,7 @@ For more information on working with environment variables,
 see [Kapacitor Environment Variables](#kapacitor-environment-variables)
 below.
 
-## The Kapacitor Configuration File
+## The Kapacitor configuration file
 
 The current configuration can be extracted using the `config` command of the
 Kapacitor daemon.
@@ -122,7 +120,7 @@ The four basic properties of the Kapacitor service include:
 Table groupings and arrays of tables follow the basic properties and include essential and optional features,
 including specific alert handlers and mechanisms for service discovery and data scraping.
 
-#### Essential Tables
+#### Essential tables
 
 ##### HTTP
 
@@ -150,7 +148,7 @@ are defined in the `[http]` table.
 ...
 ```
 
-##### Config Override
+##### Config override
 
 The `[config-override]` table contains only one key which enables or disables the ability to
 override certain values through the HTTP API. It is enabled by default.
@@ -270,7 +268,7 @@ which will be passed to the alert handler.
 
 #### InfluxDB
 
-Kapacitor's main purpose processing between nodes within an InfluxEnterprise cluster or between multiple clusters.
+Kapacitor's main purpose processing between nodes within an InfluxDB Enterprise cluster or between multiple clusters.
 You must define at least one `[[influxdb]]` table array configuration for an InfluxDB connection.
 Multiple InfluxDB table array configurations can be specified,
 but one InfluxDB table array configuration must be flagged as the `default`.
@@ -564,7 +562,7 @@ be found in the configuration file:
    ...
    ```
 
-##### User Defined Functions
+##### User defined functions (UDFs)
 
 Kapacitor can be used to plug in a user defined function
 ([UDF](/kapacitor/v1.4/nodes/u_d_f_node/)), which can then be leveraged as
@@ -605,7 +603,7 @@ identified by the string `udf.functions.<UDF_NAME>.env`.
 
 Additional examples can be found directly in the default configuration file.
 
-##### Input Methods
+##### Input methods
 
 Kapacitor can receive and process data from sources other than InfluxDB, and the results of this processing can then be written to an InfluxDB database.
 
@@ -682,7 +680,7 @@ This is configured much like other input services.
 ...
 ```
 
-#### Service Discovery and Metric Scraping
+#### Service discovery and metric scraping
 
 When the number and addresses of the hosts and services for which Kapacitor
 should collect information are not known at the time of configuring or booting
@@ -763,12 +761,12 @@ services:
 
 The above example is illustrative.
 
-## Kapacitor Environment Variables
+## Kapacitor environment variables
 
 Kapacitor can use environment variables for high-level properties or to
 override properties in the configuration file.
 
-### Environment Only Variables
+### Environment variables not in configuration file
 
 These variables are not found in the configuration file.
 
@@ -780,7 +778,7 @@ the `kapacitord` service.
 * `KAPACITOR_UNSAFE_SSL`: A boolean used by the client application `kapacitor`
 to skip verification of the `kapacitord` certificate when connecting over SSL.
 
-### Mapping Properties to Environment Variables
+### Mapping properties to environment variables
 
 Kapacitor-specific environment variables begin with the token `KAPACITOR`
 followed by an underscore (`_`).
@@ -803,7 +801,7 @@ value of the `authorization` header for the first HTTPPost configuration (`[http
 configuration service (`[kubernetes].enabled`).
 
 
-## Configuration with the HTTP API
+## Configuring with the HTTP API
 
 The Kapacitor [HTTP API](kapacitor/v1.4/working/api/) can also be used to override
 certain parts of the configuration.

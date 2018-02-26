@@ -1,5 +1,5 @@
 ---
-title: InfluxDB Version 1.4 Documentation
+title: InfluxDB 1.4 documentation
 
 menu:
   influxdb:
@@ -13,7 +13,7 @@ It is the second piece of the
 [TICK stack](https://influxdata.com/time-series-platform/).
 InfluxDB is meant to be used as a backing store for any use case involving large amounts of timestamped data, including DevOps monitoring, application metrics, IoT sensor data, and real-time analytics.
 
-## Key Features
+## Key features
 
 Here are some of the features that InfluxDB currently supports that make it a great choice for working with time series data.
 
@@ -29,5 +29,5 @@ It compiles into a single binary with no external dependencies.
 * Continuous queries automatically compute aggregate data to make frequent queries more efficient.
 * Built in web admin interface.
 
-However, the open source edition of InfluxDB runs on a single node. If your requirements dictate a high-availability setup 
+However, the open source edition of InfluxDB runs on a single node. If your requirements dictate a high-availability setup
 to eliminate a single point of failure, you should explore [InfluxDB Enterprise Edition](https://docs.influxdata.com/influxdb/v1.4/high_availability/).

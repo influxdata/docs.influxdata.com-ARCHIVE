@@ -1,25 +1,25 @@
 ---
-title: Sample Data
+title: Sample data
 menu:
   influxdb_1_4:
     weight: 5
     parent: query_language
 ---
 
-In order to explore the query language further, these instructions help you create a database, 
-download and write data to that database within your InfluxDB installation.  
-The sample data is then used and referenced in [Data Exploration](../../query_language/data_exploration/), 
+In order to explore the query language further, these instructions help you create a database,
+download and write data to that database within your InfluxDB installation.
+The sample data is then used and referenced in [Data Exploration](../../query_language/data_exploration/),
 [Schema Exploration](../../query_language/schema_exploration/), and [Functions](../../query_language/functions/).
 
 ## Creating a database
 
-If you've installed InfluxDB locally, the `influx` command should be available via the command line.
+If you've installed InfluxDB locally, the `influx` command should be available using the command line.
 Executing `influx` will start the CLI and automatically connect to the local InfluxDB instance
 (assuming you have already started the server with `service influxdb start` or by running `influxd` directly).
 The output should look like this:
 
 ```bash
-$ influx -precision rfc3339 
+$ influx -precision rfc3339
 Connected to http://localhost:8086 version 1.4.x
 InfluxDB shell 1.4.x
 >
@@ -58,7 +58,7 @@ From your terminal, download the text file that contains the data in [line proto
 curl https://s3.amazonaws.com/noaa.water-database/NOAA_data.txt -o NOAA_data.txt
 ```
 
-Write the data to InfluxDB via the [CLI](../../tools/shell/):
+Write the data to InfluxDB using the [CLI](../../tools/shell/):
 ```
 influx -import -path=NOAA_data.txt -precision=s -database=NOAA_water_database
 ```

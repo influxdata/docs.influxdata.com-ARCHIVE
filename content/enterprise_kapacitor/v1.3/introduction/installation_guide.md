@@ -1,5 +1,5 @@
 ---
-title: Installation Guide
+title: Installing Kapacitor Enterprise
 menu:
   enterprise_kapacitor_1_3:
     weight: 20
@@ -8,7 +8,7 @@ menu:
 
 # Overview
 
-Installing Enterprise Kapacitor is similar to installing the single instance open source Kapacitor.
+Installing Kapacitor Enterprise is similar to installing the single instance open source Kapacitor.
 The main difference being that there are more instances to install and configure.
 
 The basic steps to follow are:
@@ -18,19 +18,19 @@ The basic steps to follow are:
 3. Add the members into a single cluster.
 4. Start using the cluster.
 
-Enterprise Kapacitor has only a single type of member, meaning every member of a cluster is the same and performs the same functions.
+Kapacitor Enterprise has only a single type of member, meaning every member of a cluster is the same and performs the same functions.
 
 ## Terminology
 
 A quick primer on some terms that this document will use.
 
-* Member - A member is an instance of the Enterprise Kapacitor process typically running in a host or in a container.
+* Member - A member is an instance of the Kapacitor Enterprise process typically running in a host or in a container.
 * Cluster - A set of members that are aware of each other.
 
 ## Elasticity
 
-Before we get into the details of installing and running an Enterprise Kapacitor cluster we should first discuss some of the limitations of this first release of clustering.
-This release of Enterprise Kapacitor is not elastic, meaning adding and removing members from the cluster dynamically can cause the cluster to get out of sync with itself.
+Before we get into the details of installing and running an Kapacitor Enterprise cluster we should first discuss some of the limitations of this first release of clustering.
+This release of Kapacitor Enterprise is not elastic, meaning adding and removing members from the cluster dynamically can cause the cluster to get out of sync with itself.
 This means that before hand you should decide on the number of members you want to run.
 Only once you have a clustered set of members should you begin defining any tasks, alert handlers etc.
 
@@ -38,11 +38,11 @@ It is possible to add/remove members once the cluster is running but care must b
 
 ## Step 1: Configuration
 
-Enterprise Kapacitor configuration is the same as open source Kapacitor with a few additions.
+Kapacitor Enterprise configuration is the same as open source Kapacitor with a few additions.
 
 ### Cluster Configuration
 
-Enterprise Kapacitor uses a gossip protocol to maintain cluster membership and otherwise communicate within the cluster.
+Kapacitor Enterprise uses a gossip protocol to maintain cluster membership and otherwise communicate within the cluster.
 There is a new `[cluster]` configuration section with the following options.
 These options define the network settings and tunable paramerters for the gossip protocol.
 In most cases the defaults will be sufficient.
@@ -57,7 +57,7 @@ In most cases the defaults will be sufficient.
 
 ### Alerting Configuration
 
-Enterprise Kapacitor can deduplicate alerts that are generated from duplicate running tasks.
+Kapacitor Enterprise can deduplicate alerts that are generated from duplicate running tasks.
 There is a new `[alert]` configuration section with the following options.
 
 | Name               | Type     | Description                                                                                                                                                                                                                                                                                                                                                                     |
@@ -72,7 +72,7 @@ Increasing the delay-per-member helps to reduce the probability of duplicate ale
 
 ### InfluxDB Configuration
 
-The configuration section for InfluxDB has a new option `subscription-mode` which should be set to `server` when running Enterprise Kapacitor as a cluster.
+The configuration section for InfluxDB has a new option `subscription-mode` which should be set to `server` when running Kapacitor Enterprise as a cluster.
 This allows each server within the cluster to create its own subscriptions to InfluxDB so that each member receives all the data.
 
 ### Hostname Configuration
@@ -201,7 +201,7 @@ Member ID                               Gossip Address RPC Address    API Addres
 
 ## Step 4: Start using the cluster
 
-Now that you have a cluster of Enterprise Kapacitor members how do you take advantage of its clustered features?
+Now that you have a cluster of Kapacitor Enterprise members how do you take advantage of its clustered features?
 The basic design of clustered Kapacitor is to duplicate work in tasks and have the cluster deduplicate the alerts those tasks generate.
 This allows for tasks to be highly available since if one member fails that is running a task, then there is already another member running the task to generate the alert.
 This means that to leverage the high availability features you must define tasks to run on multiple members and then define alert handlers for those tasks.
@@ -211,7 +211,7 @@ Under normal operation alerts are sent out once, under failure conditions alert 
 
 ### Cluster Awareness
 
-This release of Enterprise Kapacitor is only partly cluster aware, meaning that some commands on the cluster will be automatically replicated through out the cluster while other commands need to be explicitly run on each member.
+This release of Kapacitor Enterprise is only partly cluster aware, meaning that some commands on the cluster will be automatically replicated through out the cluster while other commands need to be explicitly run on each member.
 
 All the alert handler related API calls and actions are cluster aware, this means that defining and alert handlers or queries about the state of topics need only make a request to any single member within the cluster.
 
@@ -222,7 +222,7 @@ In this release it is up to the operator of the cluster to define which 2 member
 
 ### Eventual Consistency
 
-Members of an Enterprise Kapacitor cluster communicate in an eventual consistent way, meaning that information starts at one of the members and then spreads out to the rest of the members of the cluster.
+Members of an Kapacitor Enterprise cluster communicate in an eventual consistent way, meaning that information starts at one of the members and then spreads out to the rest of the members of the cluster.
 As a result, it is possible to query two different members at the same time and get different responses, because one of the members has not learned the information yet.
 Under normal operation the time for the information to spread to the entire cluster is small, and so the probability of getting different responses is low.
 
@@ -232,4 +232,3 @@ Changing each of these options will make information spread faster throughout th
 * Increase the `gossip-members` option.
 * Decrease the `gossip-interval` option.
 * Decrease the `gossip-sync-interval` option.
-

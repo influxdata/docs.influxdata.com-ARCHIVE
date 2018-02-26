@@ -1,5 +1,5 @@
 ---
-title: Chronograf Version 0.10 Documentation
+title: Chronograf 0.10 documentation
 
 menu:
   chronograf:

@@ -4,7 +4,7 @@ title: Administering Chronograf
 menu:
   chronograf_1_4:
     name: Administration
-    weight: 1
+    weight: 20
 ---
 
 Follow the links below for more information.
@@ -15,7 +15,9 @@ Follow the links below for more information.
 
 ## [Configuration options](/chronograf/latest/administration/config-options/)
 
-## [Managing InfluxDB users](/chronograf/latest/administration/managing-influxdb-users/)
+## [Creating InfluxDB and Kapacitor connections](/chronograf/latest/administration/creating-connections/)
+
+## [Managing InfluxDB users in Chronograf](/chronograf/latest/administration/managing-influxdb-users/)
 
 ## [Managing Chronograf security](/chronograf/latest/administration/managing-security/)
 

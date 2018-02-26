@@ -1,5 +1,5 @@
 ---
-title: Database Administration
+title: InfluxDB administration
 ---
 The administration documentation contains all the information needed to administer a working InfluxDB installation.
 
@@ -9,7 +9,7 @@ Information on how to direct InfluxDB log output.
 
 ## [Ports](/influxdb/v1.4/administration/ports/)
 
-## [Backup and Restore](/influxdb/v1.4/administration/backup_and_restore/)
+## [Backup and restore](/influxdb/v1.4/administration/backup_and_restore/)
 
 Procedures to backup data created by InfluxDB and to restore from a backup.
 
@@ -25,4 +25,4 @@ Information about upgrading from previous versions of InfluxDB
 
 Information about the config file `influx.conf`
 
-## [Stability and Compatibility](/influxdb/v1.4/administration/stability_and_compatibility/)
+## [Stability and compatibility](/influxdb/v1.4/administration/stability_and_compatibility/)

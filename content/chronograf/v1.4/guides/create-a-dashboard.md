@@ -3,74 +3,70 @@ title: Creating Chronograf dashboards
 menu:
   chronograf_1_4:
     name: Creating dashboards
-    weight: 10
+    weight: 15
     parent: Guides
 ---
 
 Chronograf offers a complete dashboard solution for visualizing your data and monitoring your infrastructure.
-Use Chronograf's [pre-created dashboards](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf) or create custom dashboards to meet your needs.
-This guide introduces the Chronograf customized dashboard features.
+Use Chronograf's [pre-created dashboards](/chronograf/latest/guides/using-precreated-dashboards) or create custom dashboards to meet your requirements.
+This guide shows you how to create custom Chronograf dashboards.
 
-By the end of this document, you'll be aware of all the tools you need to create a dashboard similar to this one:
+By the end of this guide, you'll be aware of the tools available to you for creating dashboards similar to this example:
 
 ![Oh, the Chronobilities](/img/chronograf/v1.4/g-dashboard-possibilities.png)
 
 ## Requirements
 
-You have a working Chronograf instance connected to an InfluxDB source.
-Data is accessed from the Telegraf [system statistics](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) input plugin.
-See [Getting Started](/chronograf/latest/introduction/getting-started/) for step-by-step installation and configuration instructions.
+To perform the tasks in this guide, you must have a working Chronograf instance that is connected to an InfluxDB source.
+Data is accessed using the Telegraf [system ](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) input plugins.
+For more information, see [Configuring Chronograf](/chronograf/latest/administration/configuration).
 
 ## Build a Dashboard
 
-Before you start, navigate to the Dashboards page and click on the `Create Dashboard` button.
-That button takes you to your new dashboard; this is your blank canvas on which you'll create your visualization masterpieces.
+Click **Dashboards** in the navigation bar and then click the **Create Dashboard** button.
+A new dashboard is created and ready to begin adding cells.
 
 ### Step 1: Name your dashboard
 
-Click the `Rename` icon at the top of the page.
-Name your dashboard anything you want.
-Here, we call it `ChronoDash`.
-
-![Name your dashboard](/img/chronograf/v1.4/g-dashboard-rename.png)
+Click **Name This Dashboard** and type a new name. In this guide, "ChronoDash" is used.
 
 ### Step 2: Enter cell editor mode
 
-Click on the carrot in the existing cell's top right corner and select `Edit`.
-This step takes you to cell editor mode.
+In the first cell, titled "Untitled Cell", click **Edit**
+to open the cell editor mode.
 
-![Edit your cell](/img/chronograf/v1.4/g-dashboard-edit.png)
+![Edit your cell](/img/chronograf/v1.4/g-dashboard-cell-edit.png)
 
 ### Step 3: Create your query
 
-Click on the blue `Add a Query` button to create and edit an [InfluxQL](/influxdb/latest/query_language/) query.
+Click the **Add a Query** button to create an [InfluxQL](/influxdb/latest/query_language/) query.
 In query editor mode, use the builder to select from your existing data and allow Chronograf to format the query for you.
 Alternatively, manually enter and edit a query.
 Chronograf allows you to move seamlessly between using the builder and manually editing the query; when possible, the interface automatically populates the builder with the information from your raw query.
 
-Here, we use the builder to generate a query that shows the average idle CPU usage grouped by host (in this case, there are three hosts).
-By default, Chronograf applies the [`MEAN()` function](/influxdb/latest/query_language/functions/#mean) to the data, groups averages into auto-generated time intervals (`:interval:`), and shows data for the past one hour (`:dashboardTime:`).
-Those defaults are configurable via the builder or by manually editing the query.
+For our example, the query builder is used to generate a query that shows the average idle CPU usage grouped by host (in this case, there are three hosts).
+By default, Chronograf applies the [`MEAN()` function](/influxdb/latest/query_language/functions/#mean) to the data, groups averages into auto-generated time intervals (`:interval:`), and shows data for the past hour (`:dashboardTime:`).
+Those defaults are configurable using the query builder or by manually editing the query.
+
 In addition, the time range (`:dashboardTime:`) is [configurable on the dashboard](#step-6-configure-your-dashboard).
 
-![Build your query](/img/chronograf/v1.4/g-dashboard-builder.png)
+![Build your query](/img/chronograf/latest/g-dashboard-cell-query-builder.png)
 
 ### Step 4: Choose your visualization type
 
-Chronograf supports several [visualization types](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-visualization-types-does-chronograf-support):
+Chronograf supports many different [visualization types](/chronograf/latest/guides/visualization-types/). To choose a visualization type, click **Visualization** and select **Step-Plot Graph**.
 
-Here, we choose the Step-Plot:
-
-![Visualization type](/img/chronograf/v1.4/g-dashboard-type.png)
+![Visualization type](/img/chronograf/latest/g-dashboard-visualization.png)
 
 ### Step 5: Save your cell
-Click on the green checkmark to save your cell.
-Note that Chronograf does not save your cell if you navigate away from this page without clicking that checkmark.
+Click **Save** (the green checkmark icon) to save your cell.
+
+> ***Note:*** if you navigate away from this page without clicking Save, your work will not be saved.
 
 ### Step 6: Configure your dashboard
 
 #### Customize cells:
-* **Rename** your cell by clicking on the carrot in its top right corner and selecting `Rename`
+* You can change the name of the cell from "Untitled Cell" by returning to the cell editor mode, clicking on the name, and renaming it. Remember to save your changes.
 * **Move** your cell around by clicking its top bar and dragging it around the page
 * **Resize** your cell by clicking and dragging its bottom right corner
 
@@ -83,12 +79,10 @@ Note that Chronograf does not save your cell if you navigate away from this page
 These tips only apply to the line, stacked, step-plot, and line+stat [visualization types](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-visualization-types-does-chronograf-support).
 
 #### Configure dashboard-wide settings:
-* Set the dashboard's **auto-refresh interval** at the top of the page - the default interval is every 15 seconds
-* Set the dashboard's **time range** at the top of the page - the default range is the past one hour
+* You can change the dashboard's *auto-refresh interval* at the top of the page - the default interval selected is **Every 15 seconds**.
+* You can also modify the dashboard's *time range* at the top of the page - the default range is **Past 15 minutes**.
 
-![Visualization type](/img/chronograf/v1.4/g-dashboard-resize.gif)
-
-Next, complete your dashboard by creating, editing, and repositioning more cells!
+Now, you are free to experiment and complete your dashboard by creating, editing, and repositioning more cells!
 
 ## Extra Tips
 

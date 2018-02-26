@@ -3,7 +3,7 @@ title: Managing Chronograf organizations
 menu:
   chronograf_1_4:
     name: Managing Chronograf organizations
-    weight: 40
+    weight: 60
     parent: Administration
 ---
 

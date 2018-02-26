@@ -1,5 +1,5 @@
 ---
-title: Step 2 - Chronograf Installation
+title: Step 2 - Installing Chronograf
 aliases:
     - /enterprise/v1.3/production_installation/chrono_install/
 menu:
@@ -9,7 +9,6 @@ menu:
     identifier: chrono_install_qs
 ---
 
-Now that you've installed the Meta nodes and Data nodes, you are ready to install Chronograf 
-to provide you with a user interface to access the Enterprise InfluxDB instance.
+Now that you've installed the InfluxDB Enterprise meta nodes and data nodes, you are ready to install Chronograf to provide you with a user interface to access the InfluxDB Enterprise instance.
 
-[Installation instruction for Chronograf](/chronograf/latest/introduction/installation/)
+[Installing Chronograf](/chronograf/latest/introduction/installation/)
