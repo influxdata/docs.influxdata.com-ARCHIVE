@@ -10,8 +10,9 @@ menu:
 
 ## Time Series Index (TSI)
 
-Influx... In order to support a large number of time series, that is, a very high cardinality in the number of unique time series that the database stores.
-InfluxData supports customers using InfluxDB with tens of millions of time series. InfluxData's goal, however, is to expand to hundreds of millions, and eventually billions.
+In order to support a large number of time series, that is, a very high cardinality in the number of unique time series that the database stores, InfluxData has added the new Time Series Index (TSI).
+InfluxData supports customers using InfluxDB with tens of millions of time series.
+InfluxData's goal, however, is to expand to hundreds of millions, and eventually billions.
 Using InfluxData's TSI storage engine now, users should be able to have millions of unique time series.
 The goal is that the number of series should be unbounded by the amount of memory on the server hardware.
 Importantly, the number of series that exist in the database will have a negligible impact on database startup time.
@@ -29,7 +30,7 @@ This meant that for every measurement, tag key/value pair, and field name, there
 For users with a high number of ephemeral series, memory utilization continued increasing as new time series were created.
 And, startup times increased since all of that data would have to be loaded onto the heap at start time.
 
->> For details, see 
+>> For details, see
 
 ### Time series index (TSI)
 
@@ -44,4 +45,4 @@ The latter will give us the ability to add things to the query languages like th
 
 The primary issue that Time Series Index (TSI) addresses is ephemeral time series. Most frequently, this occurs in use cases that want to track per process metrics or per container metrics by putting identifiers in tags. For example, the [Heapster project for Kubernetes](https://github.com/kubernetes/heapster) does this. For series that are no longer hot for writes or queries, they won’t take up space in memory.
 
-The issue that the Heapster project and similar use cases did not address is limiting the scope of data returned by the SHOW queries. We’ll have updates to the query language in the future to limit those results by time. We also don’t solve the problem of having all these series hot for reads and writes. For that problem, scale-out clustering is the solution. We’ll have to continue to optimize the query language and engine to work with large sets of series. The biggest thing to address in the near term is that queries that hit all series in a database could potentially blow out the memory usage. We’ll need to add guard rails and limits into the language and eventually, add spill-to-disk query processing. That work will be on-going in every release of InfluxDB.
+The issue that the Heapster project and similar use cases did not address is limiting the scope of data returned by the SHOW queries. We’ll have updates to the query language in the future to limit those results by time. We also don’t solve the problem of having all these series hot for reads and writes. For that problem, scale-out clustering is the solution. We’ll have to continue to optimize the query language and engine to work with large sets of series. We’ll need to add guard rails and limits into the language and eventually, add spill-to-disk query processing. That work will be on-going in every release of InfluxDB.
