@@ -240,7 +240,7 @@ The `series_partition_compaction` operation includes all trace log entries relat
 
 ####  Continuous query execution (if logging enabled)
 
-The `continuous_querierexecute` operation includes all continuous query executions, if logging is enabled.
+The `continuous_querier_execute` operation includes all continuous query executions, if logging is enabled.
 
 #### TSI log file compaction
 
