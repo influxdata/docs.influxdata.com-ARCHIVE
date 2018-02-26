@@ -11,9 +11,9 @@ menu:
 **Content**
 
 * [Logging locations](#logging-locations)
+* [Generating separate HTTP request logs](#generating-HTTP-request-logs)
 * [Structured logging](#structured-logging)
 * [Tracing](#tracing)
-* [Generating separate HTTP request logs](#generating-HTTP-request-logs)
 
 
 ## Logging locations
@@ -71,6 +71,22 @@ You can use [logrotate](http://manpages.ubuntu.com/manpages/hardy/man8/logrotate
 If using the package install on a `sysvinit` system, the config file for logrotate is installed in `/etc/logrotate.d`.
 You can view the file [here](https://github.com/influxdb/influxdb/blob/master/scripts/logrotate).
 
+
+## Generating separate HTTP request logs
+
+InfluxDB 1.5 introduces the option to log HTTP request traffic separately from the other InfluxDB log output. When HTTP request logging is enabled, the HTTP logs are intermingled by default with internal InfluxDB logging. By redirecting the HTTP request log entries to a separate file, both log files are easier to read, monitor, and debug.
+
+**To generate separate HTTP request logging:**
+
+Locate the `[http]` section of your InfluxDB configuration file and set the `access-log-path` option to specify the path where HTTP log entries should be written.
+
+**Notes:**
+
+* If `influxd` is unable to access the specified path, it will log an error and fall back to writing the request log to `stderr`.
+* The `[httpd]` prefix is stripped when HTTP request logging is redirected to a separate file, allowing access log parsing tools (like [lnav](https://lnav.org)) to render the files without additional modification.
+* To rotate the HTTP request log file, use the `copyrotate` method of `logrotate` or similar to leave the original file in place.
+
+
 ## Structured logging
 
 With InfluxDB 1.5, structured logging is supported and enable machine-readable and more developer-friendly log output formats. The two new structured log formats, `logfmt` and `json`, provide easier filtering and searching with external tools and simplifies integration of InfluxDB logs  with Splunk, Papertrail, Elasticsearch, and other third party tools.
@@ -85,7 +101,7 @@ For details on these logging configuration options and their corresponding envir
 
 ### Logging formats
 
-Three logging `format` options are available: `auto`, `logfmt`, and `json`. The default logging format setting, `format = "auto", lets InfluxDB automatically manage the log encoding format:
+Three logging `format` options are available: `auto`, `logfmt`, and `json`. The default logging format setting, `format = "auto"`, lets InfluxDB automatically manage the log encoding format:
 
 * When logging to a file, the `logfmt` is used
 * When logging to a terminal (or other TTY device), a user-friendly console format is used.
@@ -136,7 +152,7 @@ InfluxDB 1.5 logging has been enhanced to provide tracing of important InfluxDB 
 
 The `trace_id` key specifies a unique identifier for a specific instance of a trace. You can use this key to filter and correlate all related log entries for an operation.
 
-All operation traces include consistent starting and ending log entries, with the same message (`msg`) describing the operation (e.g., "TSM compaction"), but adding the appropriate `op.event` context (either `start` or `end`). For an example, see [Finding all trace log entries for an InfluxDB operation](#finding-all-trace-log-entries-for-an-influxdb-operation).
+All operation traces include consistent starting and ending log entries, with the same message (`msg`) describing the operation (e.g., "TSM compaction"), but adding the appropriate `op_event` context (either `start` or `end`). For an example, see [Finding all trace log entries for an InfluxDB operation](#finding-all-trace-log-entries-for-an-influxdb-operation).
 
 **Example:** `trace_id=06R0P94G000`
 
@@ -144,20 +160,20 @@ All operation traces include consistent starting and ending log entries, with th
 
 The following operation keys identify an operation's name, the start and end timestamps, and the elapsed execution time.
 
-##### `op.name`
+##### `op_name`
 Unique identifier for an operation. You can filter on all operations of a specific name.
 
-**Example:** `op.name=tsm1.compact_group`
+**Example:** `op_name=tsm1_compact_group`
 
-##### `op.event`
-Specifies the start and end of an event. The two possible values, `(start)` or `(end)`, are used to indicate when an operation started or ended. For example, you can grep by values in `op.name` AND `op.event` to find all starting operation log entries. For an example of this, see [Finding all starting log entries](#finding-all-starting-log-entries).
+##### `op_event`
+Specifies the start and end of an event. The two possible values, `(start)` or `(end)`, are used to indicate when an operation started or ended. For example, you can grep by values in `op_name` AND `op_event` to find all starting operation log entries. For an example of this, see [Finding all starting log entries](#finding-all-starting-log-entries).
 
-**Example:** `op.event=start`
+**Example:** `op_event=start`
 
-##### `op.elapsed`
+##### `op_elapsed`
 Amount of time the operation spent executing. Logged with the ending trace log entry. Time unit displayed depends on how much time has elapsed -- if it was seconds, it will be suffixed with `s`. Valid time units are `ns`, `µs`, `ms`, and `s`.
 
-**Example:** `op.elapsed=0.352ms`
+**Example:** `op_elapsed=0.352ms`
 
 
 #### Log identifier context key
@@ -168,13 +184,13 @@ The log identifier key (`log_id`) lets you easily identify _every_ log entry for
 
 #### Database context keys
 
-`db.instance`: Database name
+`db_instance`: Database name
 
-`db.rp`: Retention policy name
+`db_rp`: Retention policy name
 
-`db.shard_id`: Shard identifier
+`db_shard_id`: Shard identifier
 
-`db.shard_group` Shard group identifier
+`db_shard_group` Shard group identifier
 
 ### Tooling
 
@@ -195,40 +211,44 @@ The [lnav (Log File Navigator)](http://lnav.org) is an advanced log file viewer 
 
 ### Operations
 
-The following operations, listed by their operation name (`op.name`) are traced in InfluxDB internal logs and available for use without changes in logging level.
+The following operations, listed by their operation name (`op_name`) are traced in InfluxDB internal logs and available for use without changes in logging level.
 
 #### Initial opening of data files
 
-The `tsdb.open` operation traces include all events related to the initial opening of the `tsdb.store`.
+The `tsdb_open` operation traces include all events related to the initial opening of the `tsdb_store`.
 
 
 #### Retention policy shard deletions
 
 The `retention.delete_check` operation includes all shard deletions related to the retention policy.
 
+#### TSM snapshotting in-memory cache to disk
+
+The `tsm1_cache_snapshot` operation represents the snapshotting of the TSM in-memory cache to disk.
+
 #### TSM compaction strategies
 
-The `tsm.compact_group` operation includes all trace log entries related to TSM compaction strategies and displays the related TSM compaction strategy keys:
+The `tsm1_compact_group` operation includes all trace log entries related to TSM compaction strategies and displays the related TSM compaction strategy keys:
 
-* `strategy`: `level` | `full`
-* `level`: [1,3]
-* `optimize`: `true` | `false`
+* `tsm1_strategy`: `level` | `full`
+* `tsm1_level`: `1` | `2` | `3`
+* `tsm1_optimize`: `true` | `false`
 
 #### Series file compactions
 
-The `series_partition.compaction` operation includes all trace log entries related to series file compactions.
+The `series_partition_compaction` operation includes all trace log entries related to series file compactions.
 
 ####  Continuous query execution (if logging enabled)
 
-The `continuous_querier.execute` operation includes all continuous query executions, if logging is enabled.
+The `continuous_querierexecute` operation includes all continuous query executions, if logging is enabled.
 
 #### TSI log file compaction
 
-The `index.tsi.compact_log_file`
+The `tsi1_compact_log_file`
 
 #### TSI level compaction
 
-The `index.tsi.compact_to_level` operation includes all trace log entries for TSI level compactions.
+The `tsi1_compact_to_level` operation includes all trace log entries for TSI level compactions.
 
 
 ### Tracing examples
@@ -253,18 +273,18 @@ $ grep "06QW92x0000" influxd.log | lcut ts lvl msg strategy level
 
 #### Finding all starting operation log entries
 
-To find all starting operation log entries, you can grep by values in `op.name` AND `op.event`. In the following example, the grep returned 101 entries, so the result below only displays the first entry. In the example result entry, the timestamp, level, strategy, trace_id, op.name, and op.event values are included.
+To find all starting operation log entries, you can grep by values in `op_name` AND `op_event`. In the following example, the grep returned 101 entries, so the result below only displays the first entry. In the example result entry, the timestamp, level, strategy, trace_id, op_name, and op_event values are included.
 
 ```
-$ grep -F 'op.name=tsm1.compact_group' influxd.log | grep -F 'op.event=start'
-ts=2018-02-21T20:16:16.709953Z lvl=info msg="TSM compaction" log_id=06QVNNCG000 engine=tsm1 level=1 strategy=level trace_id=06QV~HHG000 op.name=tsm1.compact_group op.event=start
+$ grep -F 'op_name=tsm1_compact_group' influxd.log | grep -F 'op_event=start'
+ts=2018-02-21T20:16:16.709953Z lvl=info msg="TSM compaction" log_id=06QVNNCG000 engine=tsm1 level=1 strategy=level trace_id=06QV~HHG000 op_name=tsm1_compact_group op_event=start
 ...
-
 ```
+
 Using the `lcut` utility (in hutils), the following command uses the previous `grep` command, but adds an `lcut` command to only display the keys and their values for keys that are not identical in all of the entries. The following example includes 19 examples of unique log entries displaying selected keys: `ts`, `strategy`, `level`, and `trace_id`.
 
 ```
-$ grep -F 'op.name=tsm1.compact_group' influxd.log | grep -F 'op.event=start' | lcut ts strategy level trace_id | sort -u
+$ grep -F 'op_name=tsm1_compact_group' influxd.log | grep -F 'op_event=start' | lcut ts strategy level trace_id | sort -u
 2018-02-21T20:16:16.709953Z	level	1	06QV~HHG000
 2018-02-21T20:16:40.707452Z	level	1	06QW0k0l000
 2018-02-21T20:17:04.711519Z	level	1	06QW2Cml000
@@ -285,17 +305,3 @@ $ grep -F 'op.name=tsm1.compact_group' influxd.log | grep -F 'op.event=start' | 
 2018-02-21T21:12:08.017055Z	full		06QZBpKG000
 2018-02-21T21:12:08.478200Z	full		06QZBr7W000
 ```
-
-## Generating separate HTTP request logs
-
-InfluxDB 1.5 introduces the option to log HTTP request traffic separately from the other InfluxDB log output. When HTTP request logging is enabled, the HTTP logs are intermingled by default with internal InfluxDB logging. By redirecting the HTTP request log entries to a separate file, both log files are easier to read, monitor, and debug.
-
-**To generate separate HTTP request logging:**
-
-Locate the `[http]` section of your InfluxDB configuration file and set the `access-log-path` option to specify the path where HTTP log entries should be written.
-
-**Notes:**
-
-* If `influxd` is unable to access the specified path, it will log an error and fall back to writing the request log to `stderr`.
-* The `[httpd]` prefix is stripped when HTTP request logging is redirected to a separate file, allowing access log parsing tools (like [lnav](https://lnav.org)) to render the files without additional modification.
-* To rotate the HTTP request log file, use the `copyrotate` method of `logrotate` or similar to leave the original file in place.
