@@ -26,7 +26,7 @@ This page outlines process for upgrading from:
 
 2. Update the InfluxDB 1.5 configuration file
 
-    Migrate any customizations in the 1.4 configuration file to the [1.5 configuration file](/influxdb/v1.5/administration/config/).
+    Migrate any customizations in your InfluxDB 1.4 configuration file to the [InfluxDB 1.5 configuration file](/influxdb/v1.5/administration/config/).
 
 
 3. **Enable TSI (Time Series Index) (recommended):**
@@ -42,12 +42,12 @@ This page outlines process for upgrading from:
       index-version = "tsi1"
     ```
 
-3. Restart the service
+4. Restart the InfluxDB service
 
-4. Check out the new features outlined in
-[Differences between InfluxDB 1.4 and 1.5](/influxdb/v1.5/administration/differences/)
+5. Check out the new features highlighted in
+[What's new in InfluxDB 1.5](/influxdb/v1.5/administration/differences/) and the [Release Notes/Changelog](/influxdb/v1.5/about_the_project/releasenotes-changelog/).
 
-To upgrade from 1.4 to 1.5 (if you used TSI Preview on this InfluxDB instance)
+## Upgrading from 1.4 to 1.5 (if you used TSI Preview on this InfluxDB instance)
 
 1. [Download](https://influxdata.com/downloads/#influxdb) InfluxDB version
 1.5
@@ -69,8 +69,6 @@ To upgrade from 1.4 to 1.5 (if you used TSI Preview on this InfluxDB instance)
     ```
 
 3. Delete the existing TSI index files that were created using the TSI Preview.
-
-
 
 
 4. Restart the service
