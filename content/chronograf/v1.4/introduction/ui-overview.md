@@ -103,6 +103,8 @@ Alerts
 
 * Create Mapping (button)
 
+
+
 ### InfluxDB Admin
 
 #### Databases
@@ -142,7 +144,7 @@ Alerts
 
 ### Add a New InfluxDB Connection
 
-For detail on adding InfluxDB connections, see [Managing InfluxDB connections](/influxdb/v1.4/creating-connections/#managing-influxdb-connections).
+For details on adding InfluxDB connections, see [Managing InfluxDB connections](/influxdb/v1.4/creating-connections/#managing-influxdb-connections).
 
 * Connection String
 * Name
