@@ -1,5 +1,5 @@
 ---
-title: Logs
+title: Logging in InfluxDB
 
 menu:
   influxdb_1_4:
