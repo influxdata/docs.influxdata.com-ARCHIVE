@@ -6,62 +6,89 @@ menu:
     parent: About the Project
 ---
 
+## v1.4.2.0 [2018-02-28]
+
+### Features
+
+* Prevent execution of queries in cells that are not in view on the Dashboard page.
+* Prevent execution of queries in cells that are not in view on the Dashboard page.
+* Add an optional persistent legend which can toggle series visibility to dashboard cells.
+
+### UI improvements
+
+* Add ability to set a prefix and suffix on Single Stat and Gauge cell types.
+* Rename 'Create Alerts' page to 'Manage Tasks'; redesign page to improve clarity of purpose.
+
+### Bug fixes
+
+* Save only selected template variable values into dashboards for non-CSV template variables.
+* Use Generic APIKey for OAuth2 group lookup.
+* Fix bug in which resizing any cell in a dashboard causes a Gauge cell to resize.
+* Maintain y-axis labels in dashboard cells.
+* Deprecate `--new-sources` in CLI.
+
+## v1.4.1.3 [2018-02-14]
+
+### Bug fixes
+
+* Allow self-signed certificates for InfluxDB Enterprise meta nodes.
+
 ## v1.4.1.2 [2018-02-13]
 
-### Bug Fixes
-- Respect `basepath` when fetching server API routes
-- Set default `tempVar :interval:` with Data Explorer CSV download call.
-- Display series with value of `0` in a cell legend
+### Bug fixes
 
+* Respect `basepath` when fetching server API routes.
+* Set default `tempVar` `:interval`: with Data Explorer CSV download call.
+* Display series with value of `0` in a cell legend.
 
 ## v1.4.1.1 [2018-02-12]
 
 ### Features
 
-- Allow multiple event handlers per rule
-- Add "Send Test Alert" button to test Kapacitor alert configurations
-- Link to Kapacitor config panel from Alert Rule builder
-- Add auto-refresh widget to Hosts List page
-- Upgrade to Go 1.9.4 and Node 6.12.3
-- Allow users to delete themselves
-- Add All Users page, visible only to SuperAdmins
-- Introduce `chronoctl` binary for user CRUD operations
-- Introduce Mappings to allow control over new user organization assignments
+- Allow multiple event handlers per rule.
+- Add "Send Test Alert" button to test Kapacitor alert configurations.
+- Link to Kapacitor config panel from Alert Rule builder.
+- Add auto-refresh widget to Hosts List page.
+- Upgrade to Go 1.9.4 and Node 6.12.3.
+- Allow users to delete themselves.
+- Add All Users page, visible only to SuperAdmins.
+- Introduce `chronoctl` binary for user CRUD operations.
+- Introduce mappings to allow control over new user organization assignments.
 
 ### UI Improvements
 
-- Clarify terminology surrounding InfluxDB & Kapacitor connections
-- Separate saving TICKscript from exiting editor page
-- Enable Save (⌘ + Enter) and Cancel (Escape) hotkeys in Cell Editor Overlay
-- Enable customization of Single Stat "Base Color"
+- Clarify terminology regarding InfluxDB and Kapacitor connections.
+- Separate saving TICKscript from exiting editor page.
+- Enable Save (`⌘ + Enter`) and Cancel (`Escape`) hotkeys in Cell Editor Overlay.
+- Enable customization of Single Stat "Base Color".
 
 ### Bug Fixes
 
-- Fix TICKscript Sensu alerts when no group by tags selected
-- Display 200 most-recent TICKscript log messages; prevent overlapping
-- Add `TO` to kapacitor SMTP config; improve config update error messages
-- Remove CLI options from `sysvinit` service file
-- Remove CLI options from `systemd` service file
-- Fix disappearance of text in Single Stat graphs during editing
-- Redirect to Alerts page after saving Alert Rule
+- Fix TICKscript Sensu alerts when no GROUP BY tags selected.
+- Display 200 most-recent TICKscript log messages; prevent overlapping.
+- Add `TO` to kapacitor SMTP config; improve config update error messages.
+- Remove CLI options from `sysvinit` service file.
+- Remove CLI options from `systemd` service file.
+- Fix disappearance of text in Single Stat graphs during editing.
+- Redirect to Alerts page after saving Alert Rule.
 
 ## v1.4.0.1 [2018-1-9]
 
 ### Features
 
-- Add separate CLI flag for canned sources, kapacitors, dashboards, and organizations
-- Add telegraf interval configuration
+* Add separate CLI flag for canned sources, Kapacitors, dashboards, and organizations.
+* Add Telegraf interval configuration.
 
 ### Bug Fixes
 
-- Allow insecure (self-signed) certificates for kapacitor and influxdb
-- Fix positioning of custom time indicator
+- Allow insecure (self-signed) certificates for Kapacitor and InfluxDB.
+- Fix positioning of custom time indicator.
 
 ## v1.4.0.0 [2017-12-22]
 
 ### Features
 
-* Add support for multiple organizations, multiple users with role-based access control, and private instances
+* Add support for multiple organizations, multiple users with role-based access control, and private instances.
 * Add Kapacitor logs to the TICKscript editor
 * Add time shift feature to DataExplorer and Dashboards
 * Add auto group by time to Data Explorer
