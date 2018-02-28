@@ -1,5 +1,7 @@
 ---
 title: Managing security
+aliases:
+    - /influxdb/v1.4/administration/security-best-practices/
 menu:
   influxdb_1_4:
     weight: 80
