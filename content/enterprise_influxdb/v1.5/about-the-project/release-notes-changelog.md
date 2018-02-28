@@ -18,35 +18,83 @@ menu:
 <br>
 <br>
 
-## 1.5.0 [unreleased]
-
-This release builds off of the InfluxDB OSS 1.5 release. Please see the [InfluxDB OSS release notes](https://docs.influxdata.com/influxdb/v1.5/about_the_project/releasenotes-changelog/) for details about the InfluxDB OSS release.
+v1.5.0 [unreleased]
+-------------------
 
 ### Breaking changes
 
-The default logging format has been changed. See #9055 for details.
+-	The default logging format has been changed. See [Logging in InfluxDB](/influxdb/v1.5/administration/logs/) for details.
 
 ### Features
 
-- Add `LastModified` fields to Shard RPC calls.
-- As of InfluxDB OSS 1.5 backup and restore interoperability is confirmed.
-- Make InfluxDB Enterprise use InfluxDB OSS digests.
-- Move digest to its own package.
-- Implement distributed cardinality estimation.
+-	[#8495](https://github.com/influxdata/influxdb/pull/8495): Improve CLI connection warnings
+-	[#3019](https://github.com/influxdata/influxdb/issues/3019): Backup utility prints a list of backup files.
+-	[#9146](https://github.com/influxdata/influxdb/issues/9146): Backup/Restore can produce/consume data in the same format as the enterprise backup/restore tool.
+-	[#8880](https://github.com/influxdata/influxdb/issues/8879): Restore runs in online mode, does not delete existing databases
+-	[#8879](https://github.com/influxdata/influxdb/issues/8879): Export functionality using start/end to filter exported data by timestamp
+-	[#9084](https://github.com/influxdata/influxdb/pull/9084): Handle high cardinality deletes in TSM engine
+-	[#9162](https://github.com/influxdata/influxdb/pull/9162): Improve inmem index startup performance for high cardinality.
+-	[#8491](https://github.com/influxdata/influxdb/pull/8491): Add further tsi support for streaming/copying shards.
+-	[#9181](https://github.com/influxdata/influxdb/pull/9181): Schedule a full compaction after a successful import
+-	[#9218](https://github.com/influxdata/influxdb/pull/9218): Add Prometheus `/metrics` endpoint.
+-	[#9213](https://github.com/influxdata/influxdb/pull/9213): Add ability to generate shard digests.
+-	[#9184](https://github.com/influxdata/influxdb/pull/9184): Allow setting the node id in the influx cli program.
+-	[#9056](https://github.com/influxdata/influxdb/pull/9056): Add logging configuration to the main configuration file.
+-	[#9445](https://github.com/influxdata/influxdb/pull/9445): Suppress the InfluxDB banner if the log output is not a TTY.
+-	[#9449](https://github.com/influxdata/influxdb/pull/9449): Added option to write HTTP request logs to separate file.
+-	[#9454](https://github.com/influxdata/influxdb/pull/9454): Update logging calls to take advantage of structured logging.
+-	[#9456](https://github.com/influxdata/influxdb/pull/9456): Generate trace logs for a number of important InfluxDB operations.
+-	[#9488](https://github.com/influxdata/influxdb/pull/9488): Improve startup time of inmem index.
 
 ### Bugfixes
 
-- Fix errors occurring when policy or shard keys are missing from the manifest when limited is set to true.
-- Fix spurious `rpc error: i/o deadline exceeded` errors.
-- Elide `stream closed` error from logs and handle `io.EOF` as remote iterator interrupt.
-- Discard remote iterators that label their type as unknown.
-- Do not queue partial write errors to hinted handoff.
-- Segfault in `digest.merge`
-- Meta Node CPU pegged on idle cluster.
+-	[#9095](https://github.com/influxdata/influxdb/pull/9095): Refuse extra arguments to influx CLI
+-	[#9058](https://github.com/influxdata/influxdb/issues/9058): Fix space required after regex operator. Thanks @stop-start!
+-	[#9109](https://github.com/influxdata/influxdb/issues/9109): Fix: panic: sync: WaitGroup is reused before previous Wait has returned
+-	[#9163](https://github.com/influxdata/influxdb/pull/9163): Fix race condition in the merge iterator close method.
+-	[#9144](https://github.com/influxdata/influxdb/issues/9144): Fix query compilation so multiple nested distinct calls is allowable
+-	[#8789](https://github.com/influxdata/influxdb/issues/8789): Fix CLI to allow quoted database names in use statement
+-	[#9208](https://github.com/influxdata/influxdb/pull/9208): Updated client 4xx error message when response body length is zero.
+-	[#9230](https://github.com/influxdata/influxdb/pull/9230): Remove extraneous newlines from the log.
+-	[#9226](https://github.com/influxdata/influxdb/issues/9226): Allow lone boolean literals in a condition expression.
+-	[#9235](https://github.com/influxdata/influxdb/pull/9235): Improve performance when writes exceed `max-values-per-tag` or `max-series`.
+-	[#9216](https://github.com/influxdata/influxdb/issues/9216): Prevent a panic when a query simultaneously finishes and is killed at the same time.
+-	[#9255](https://github.com/influxdata/influxdb/issues/9255): Fix missing sorting of blocks by time when compacting.
+-	[#9327](https://github.com/influxdata/influxdb/pull/9327): wal: update lastWriteTime behavior
+-	[#9290](https://github.com/influxdata/influxdb/issues/9290): Fix regression to allow binary operations on literals.
+-	[#9342](https://github.com/influxdata/influxdb/pull/9342): Fix data races in tcp.Mux and tcp.listener
+-	[#9353](https://github.com/influxdata/influxdb/pull/9353): Fix panic in msgpack httpd WriteResponse error handler.
+-	[#9335](https://github.com/influxdata/influxdb/pull/9335): Prevent race condition caused by WaitGroup re-use
+-	[#9386](https://github.com/influxdata/influxdb/issues/9386): Fix stddev() call to report itself as always returning a float.
+-	[#9401](https://github.com/influxdata/influxdb/pull/9401): Fix windows history file location.
+-	[#9403](https://github.com/influxdata/influxdb/pull/9403): Do not explicitly specify ports 80 or 443 when they are the default port.
+-	[#8878](https://github.com/influxdata/influxdb/pull/8878): Do not report an error when dropping a CQ on a non-existent DB/RP.
+-	[#9423](https://github.com/influxdata/influxdb/pull/9423): Fix imports of multiple databases in a single import file from `influx -import`.
+-	[#9443](https://github.com/influxdata/influxdb/pull/9443): Fix regression when math between literals is used in a field.
+-	[#9464](https://github.com/influxdata/influxdb/pull/9464): Re-open last WAL segment.
+-	[#9470](https://github.com/influxdata/influxdb/pull/9470): Make closing TSM cursors idempotent.
+-	[#9489](https://github.com/influxdata/influxdb/pull/9489): Add dumptsi path error handling..
+-	[#9493](https://github.com/influxdata/influxdb/pull/9493): Fix the implicit time range in a subquery.
+-	[#9491](https://github.com/influxdata/influxdb/pull/9491): Evaluate a true boolean literal when calculating tag sets.
+-	[#9496](https://github.com/influxdata/influxdb/pull/9496): Fix panic on tsi1 log replay of deleted series..
+
+v1.4.3 [unreleased]
+-------------------
+
+### Configuration Changes
+
+#### `[data]` Section
+
+The default value for `cache-snapshot-memory-size` has been changed from `25m` to `256m`.
+
+### Bug fixes
+
+* Fix higher disk i/o utilization
+-
 
 ## v1.4.2 [2017-11-15]
 
-### Bugfixes
+### Bug fixes
 
 - Fix wildcard when one shard has no data for a measurement with partial replication.
 
@@ -67,7 +115,7 @@ This release builds off of the 1.4 release of InfluxDB OSS. Please see the [Infl
 - Add time support to `SHOW TAG VALUES`
 - Add distributed `SHOW TAG KEYS` with time support
 
-### Bugfixes
+### Bug fixes
 
 - Add `X-Influxdb-Build` to http response headers so users can identify if a response is from an InfluxDB OSS or InfluxDB Enterprise service.
 - Ensure that permissions cannot be set on non-existent databases.
