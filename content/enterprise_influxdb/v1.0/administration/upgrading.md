@@ -8,25 +8,25 @@ menu:
     parent: Administration
 ---
 
-The following sections include instructions for upgrading from InfluxEnterprise
-Clustering version 0.7.4 and InfluxEnterprise Web Console version 0.7.1
-to InfluxEnterprise 1.0.
+The following sections include instructions for upgrading from InfluxDB Enterprise
+Clustering version 0.7.4 and InfluxDB Enterprise Web Console version 0.7.1
+to InfluxDB Enterprise 1.0.
 
 Please note that the upgrade process requires you to delete existing users
 from the web console due to [significant changes](/enterprise_influxdb/v1.0/about-the-project/release-notes-changelog/#user-updates)
-to how users function in InfluxEnterprise.
+to how users function in InfluxDB Enterprise.
 Once you've completed the upgrade process, any users created prior to version 1.0 will be
 [cluster accounts](/enterprise_influxdb/v1.0/features/users/#cluster-user-information).
-Please see [InfluxEnterprise Users](/enterprise_influxdb/v1.0/features/users/) for
-more information on how InfluxEnterprise organizes users in version 1.0.
+Please see [InfluxDB Enterprise Users](/enterprise_influxdb/v1.0/features/users/) for
+more information on how InfluxDB Enterprise organizes users in version 1.0.
 
 > **Note:** Before you start, please review the section at the
 [bottom of this page](#configuration-settings) to ensure that you have the most
 up-to-date configuration settings.
 
-## Upgrading to InfluxEnterprise 1.0
+## Upgrading to InfluxDB Enterprise 1.0
 
-### 1. Download and install the new versions of InfluxEnterprise
+### 1. Download and install the new versions of InfluxDB Enterprise
 
 #### Meta nodes
 
@@ -75,9 +75,9 @@ If you're running Ubuntu 16.04.1, you may need to enter
 `sudo systemctl disable influx-enterprise` before executing the `dpkg` step.
 
 ### 2. Delete existing Web Console users
-The new user organization in InfluxEnterprise requires those looking to
+The new user organization in InfluxDB Enterprise requires those looking to
 upgrade to version 1.0 to remove all existing users from the Web Console.
-On the server that's running InfluxEnterprise, enter:
+On the server that's running InfluxDB Enterprise, enter:
 ```
 rm -rf /var/lib/influx-enterprise/enterprise.db
 ```
@@ -185,17 +185,17 @@ see what's new!
 
 ## Configuration settings
 
-In older versions of InfluxEnterprise, configuration settings ensured that
+In older versions of InfluxDB Enterprise, configuration settings ensured that
 the Web Console registered with the Cluster.
 Those settings are no longer supported.
-If you're working with InfluxEnterprise versions 0.7.2 and up, please be sure
+If you're working with InfluxDB Enterprise versions 0.7.2 and up, please be sure
 to update your configuration settings as outlined below.
 The updated settings ensure that the Cluster registers with the Web Console.
 
 In each meta node’s configuration file (`/etc/influxdb/influxdb-meta.conf`), set:
 
 * `registration-enabled` to `true`
-* `registration-server-url` to the hostname of the InfluxEnterprise Web Console
+* `registration-server-url` to the hostname of the InfluxDB Enterprise Web Console
 
 ```
 reporting-disabled = false

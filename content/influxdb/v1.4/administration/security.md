@@ -1,16 +1,19 @@
 ---
-title: Security Best Practices
+title: Managing InfluxDB security
+tags: ["security"]
+categories: ["InfluxDB"]
 menu:
   influxdb_1_4:
+  name: Managing security
     weight: 80
     parent: administration
 ---
 
-Some customers may choose to install InfluxDB with public internet access, however 
-doing so can inadvertently expose your data and invite unwelcome attacks on your database. 
+Some customers may choose to install InfluxDB with public internet access, however
+doing so can inadvertently expose your data and invite unwelcome attacks on your database.
 Check out the sections below for how protect the data in your InfluxDB instance.
 
-## Enable Authentication
+## Enabling authentication
 
 Password protect your InfluxDB instance to keep any unauthorized individuals
 from accessing your data.
@@ -18,13 +21,13 @@ from accessing your data.
 Resources:
 [Set up Authentication](/influxdb/v1.4/query_language/authentication_and_authorization/#set-up-authentication)
 
-## Manage Users and their Permissions
+## Managing users and their permissions
 
-Restrict access by creating individual users and assigning them relevant 
+Restrict access by creating individual users and assigning them relevant
 read and/or write permissions.
 
 Resources:
-[User Types and Privileges](/influxdb/v1.4/query_language/authentication_and_authorization/#user-types-and-privileges),
+[User types and privileges](/influxdb/v1.4/query_language/authentication_and_authorization/#user-types-and-privileges),
 [User Management Commands](/influxdb/v1.4/query_language/authentication_and_authorization/#user-management-commands)
 
 ## Set up HTTPS
@@ -35,7 +38,7 @@ some cases, HTTPS verifies the authenticity of the InfluxDB server to clients (b
 Resources:
 [HTTPS Setup](/influxdb/v1.4/administration/https_setup/)
 
-## Secure your Host
+## Securing your host
 
 ### Ports
 If you're only running InfluxDB, close all ports on the host except for port `8086`.
@@ -45,6 +48,6 @@ InfluxDB uses port `8088` for remote [backups and restores](/influxdb/v1.4/admin
 We highly recommend closing that port and, if performing a remote backup,
 giving specific permission only to the remote machine.
 
-### AWS Recommendations
+### AWS recommendations
 
 We recommend implementing on-disk encryption; InfluxDB does not offer built-in support to encrypt the data.

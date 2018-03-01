@@ -11,7 +11,7 @@ You can use Chronograf to send alert messages to specific URLs as well as to app
 
 This guide offers step-by-step instructions for setting up a few of the common event handlers in Chronograf.
 
-## Kapacitor event handlers are supported in Chronograf?
+## Kapacitor event handlers supported in Chronograf
 
 Chronograf integrates with [Kapacitor](/kapacitor/latest/), InfluxData's data processing platform, to send alert messages to event handlers.
 Chronograf supports the following event handlers:

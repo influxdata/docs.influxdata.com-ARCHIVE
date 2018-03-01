@@ -1,5 +1,5 @@
 ---
-title: Backup and Restore
+title: Backup and restore
 
 menu:
   influxdb_1_4:
@@ -9,14 +9,12 @@ menu:
 
 ## Backups
 
-InfluxDB has the ability to snapshot an instance at a point-in-time and restore it.
-All backups are full backups.
-InfluxDB does not yet support incremental backups.
 There are two types of data to backup, the metastore and the metrics themselves.
 The [metastore](/influxdb/v1.4/concepts/glossary/#metastore) is backed up in its entirety.
 The metrics are backed up per-database in a separate operation from the metastore backup.
+Per-database backups can be full, incremental (since a RFC3339 formatted time), or for a specific shard ID.
 
-> **Note:** Backups are not interchangeable between OSS InfluxDB and [InfluxEnterprise](/enterprise/latest/).
+> **Note:** Backups are not interchangeable between InfluxDB OSS and [InfluxEnterprise](/enterprise/latest/).
 You cannot restore an OSS backup to an InfluxEnterprise data node, nor can you restore
 an InfluxEnterprise backup to an OSS instance.
 >
@@ -24,7 +22,7 @@ If you are working with an InfluxEnterprise cluster, please see the [Backup
 and Restore Guide](/enterprise/latest/guides/backup-and-restore/) in the
 InfluxEnterprise documentation.
 
-### Backing up the Metastore
+### Backing up the metastore
 
 InfluxDB's metastore contains internal information about the status of
 the system, including user information, database/shard metadata, CQs, RPs,
@@ -49,7 +47,7 @@ $ influxd backup /tmp/backup
 Will create a metastore backup in the directory `/tmp/backup` (the
 directory will be created if it doesn't already exist).
 
-### Backing up a Database
+### Backing up a database
 
 Each database must be backed up individually.
 
@@ -98,12 +96,12 @@ $ influxd backup -database telegraf -retention autogen -since 2016-02-01T00:00:0
 Which will send the resulting backup to `/tmp/backup`, where it can
 then be compressed and sent to long-term storage.
 
-### Remote Backups
+### Remote backups
 
 To capture a backup from a remote node:
 
-**1.** Uncomment the [`bind-address` configuration setting](/influxdb/v1.4/administration/config/#bind-address-127-0-0-1-8088) on the remote node  
-**2.** Update the `bind-address` setting to `<remote-node-IP>:8088`  
+**1.** Uncomment the [`bind-address` configuration setting](/influxdb/v1.4/administration/config/#bind-address-127-0-0-1-8088) on the remote node
+**2.** Update the `bind-address` setting to `<remote-node-IP>:8088`
 **3.** Run the following command from your local node:
 
 ```
@@ -164,7 +162,7 @@ database to `/tmp/backup`, so let's restore that same dataset. To
 restore the `telegraf` database:
 
 ```
-$ influxd restore -database telegraf -datadir /var/lib/influxdb/data /tmp/backup                                                                         
+$ influxd restore -database telegraf -datadir /var/lib/influxdb/data /tmp/backup
 Restoring from backup /tmp/backup/telegraf.*
 unpacking /var/lib/influxdb/data/telegraf/default/2/000000004-000000003.tsm
 unpacking /var/lib/influxdb/data/telegraf/default/2/000000005-000000001.tsm

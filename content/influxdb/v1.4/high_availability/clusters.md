@@ -11,7 +11,7 @@ menu:
     parent: high_availability
 ---
 
-Open-source InfluxDB does not support clustering.
-For high availability or horizontal scaling of InfluxDB, please investigate our
+InfluxDB OSS does not support clustering.
+For high availability or horizontal scaling of InfluxDB, please consider the
 commercial clustered offering,
-[InfluxEnterprise](/enterprise/latest/).
+[InfluxDB Enterprise](/enterprise_influxdb/latest/).

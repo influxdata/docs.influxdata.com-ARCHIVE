@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting
+title: Troubleshooting Telegraf
 
 menu:
   telegraf_1_5:

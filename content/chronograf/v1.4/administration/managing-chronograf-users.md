@@ -3,7 +3,7 @@ title: Managing Chronograf users
 menu:
   chronograf_1_4:
     name: Managing Chronograf users
-    weight: 50
+    weight: 60
     parent: Administration
 ---
 

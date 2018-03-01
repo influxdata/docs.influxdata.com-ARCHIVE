@@ -165,22 +165,22 @@ This must be resolvable and reachable by all other members of the cluster.
 ## [enterprise]
 
 The `[enterprise]` section contains the parameters for the meta node's
-registration with the InfluxEnterprise Web Console and the
+registration with the InfluxDB Enterprise Web Console and the
 [InfluxEnterprise License Portal](https://portal.influxdata.com/).
 
 ###  registration-enabled = true
 
-Set to `true` to enable registration with the InfluxEnterprise web console.
+Set to `true` to enable registration with the InfluxDB Enterprise web console.
 All meta nodes must have `registration-enabled` set to `true` for the
-InfluxEnterprise Web Console to function properly.
+InfluxDB Enterprise Web Console to function properly.
 
 Environment variable: `INFLUXDB_ENTERPRISE_REGISTRATION_ENABLED`
 
 ###  registration-server-url = "http://IP_or_hostname:3000"
 
-The full URL of the server that runs the InfluxEnterprise web console.
+The full URL of the server that runs the InfluxDB Enterprise web console.
 All meta nodes must have `registration-server-url` set to the full protocol,
-hostname, and port for the InfluxEnterprise Web Console to function properly.
+hostname, and port for the InfluxDB Enterprise Web Console to function properly.
 
 Environment variable: `INFLUXDB_ENTERPRISE_REGISTRATION_SERVER_URL`
 
@@ -341,7 +341,7 @@ Environment variable: `INFLUXDB_META_LEASE_DURATION`
 <br>
 # Data Node Configuration
 
-The InfluxEnterprise data node configuration settings overlap significantly
+The InfluxDB Enterprise data node configuration settings overlap significantly
 with the settings in InfluxDB's Open Source Software (OSS).
 Where possible, the following sections link to the [configuration documentation](/influxdb/v1.0/administration/config/)
 for InfluxDB's OSS.
@@ -658,7 +658,7 @@ See the [OSS documentation](/influxdb/v1.0/administration/config/#https-enabled-
 
 Environment variable: `INFLUXDB_ADMIN_HTTPS_ENABLED`
 
-###  https-certificate = "/etc/ssl/influxdb.pem"  
+###  https-certificate = "/etc/ssl/influxdb.pem"
 
 See the [OSS documentation](/influxdb/v1.0/administration/config/#https-certificate-etc-ssl-influxdb-pem).
 
@@ -674,7 +674,7 @@ See the [OSS documentation](/influxdb/v1.0/administration/config/#store-enabled-
 
 Environment variable: `INFLUXDB_MONITOR_STORE_ENABLED`
 
-###  store-database = "\_internal"  
+###  store-database = "\_internal"
 
 See the [OSS documentation](/influxdb/v1.0/administration/config/#store-database-internal).
 
@@ -722,7 +722,7 @@ See the [OSS documentation](/influxdb/v1.0/administration/config/#bind-address-8
 
 Environment variable: `INFLUXDB_HTTP_BIND_ADDRESS`
 
-###  auth-enabled = false  
+###  auth-enabled = false
 
 See the [OSS documentation](/influxdb/v1.0/administration/config/#auth-enabled-false).
 
@@ -734,7 +734,7 @@ See the [OSS documentation](/influxdb/v1.0/administration/config/#log-enabled-tr
 
 Environment variable: `INFLUXDB_HTTP_LOG_ENABLED`
 
-###  write-tracing = false  
+###  write-tracing = false
 
 See the [OSS documentation](/influxdb/v1.0/administration/config/#write-tracing-false).
 
@@ -774,7 +774,7 @@ Environment variable: `INFLUXDB_HTTP_MAX_CONNECTION_LIMIT`
 
 See the [OSS documentation](/influxdb/v1.0/administration/config/#shared-secret).
 
-This setting is required and must match on each data node if the cluster is using the InfluxEnterprise Web Console.
+This setting is required and must match on each data node if the cluster is using the InfluxDB Enterprise Web Console.
 
 Environment variable: `INFLUXDB_HTTP_SHARED_SECRET`
 
@@ -847,7 +847,7 @@ If there are N data nodes in the cluster, each data node may have up to N-1 hint
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_MAX_SIZE`
 
-###  max-age = "168h0m0s"  
+###  max-age = "168h0m0s"
 
 The time writes sit in the queue before they are purged. The time is determined by how long the batch has been in the queue, not by the timestamps in the data.
 If another data node is unreachable for more than the `max-age` it can lead to data loss.
@@ -874,14 +874,14 @@ The initial interval at which the hinted handoff retries a write after it fails.
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_INTERVAL`
 
-###  retry-max-interval = "10s"  
+###  retry-max-interval = "10s"
 
 The maximum interval at which the hinted handoff retries a write after it fails.
 It retries at this interval until it succeeds.
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_MAX_INTERVAL`
 
-###  purge-interval = "1m0s"  
+###  purge-interval = "1m0s"
 
 The interval at which InfluxDB checks to purge data that are above `max-age`.
 

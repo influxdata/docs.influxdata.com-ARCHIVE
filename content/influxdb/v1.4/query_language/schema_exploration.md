@@ -1,5 +1,5 @@
 ---
-title: Schema Exploration
+title: Schema exploration
 menu:
   influxdb_1_4:
     weight: 20
@@ -34,7 +34,7 @@ The data used in this document are available for download on the [Sample Data](/
 Before proceeding, login to the Influx CLI.
 
 ```bash
-$ influx -precision rfc3339 
+$ influx -precision rfc3339
 Connected to http://localhost:8086 version 1.4.x
 InfluxDB shell 1.4.x
 >
@@ -183,11 +183,11 @@ The `FROM`, `WHERE`, `LIMIT`, and `OFFSET` clauses are optional.
 The `WHERE` clause supports tag comparisons; field comparisons are not
 valid for the `SHOW SERIES` query.
 
-Supported operators in the `WHERE` clause:  
-`=`&emsp;&nbsp;&thinsp;equal to  
-`<>`&emsp;not equal to  
-`!=`&emsp;not equal to  
-`=~`&emsp;matches against  
+Supported operators in the `WHERE` clause:
+`=`&emsp;&nbsp;&thinsp;equal to
+`<>`&emsp;not equal to
+`!=`&emsp;not equal to
+`=~`&emsp;matches against
 `!~`&emsp;doesn't match against
 
 See the Data Exploration page for documentation on the
@@ -369,11 +369,11 @@ The `WITH`, `WHERE`, `LIMIT` and `OFFSET` clauses are optional.
 The `WHERE` clause supports tag comparisons; field comparisons are not
 valid for the `SHOW SERIES` query.
 
-Supported operators in the `WHERE` clause:  
-`=`&emsp;&nbsp;&thinsp;equal to  
-`<>`&emsp;not equal to  
-`!=`&emsp;not equal to  
-`=~`&emsp;matches against  
+Supported operators in the `WHERE` clause:
+`=`&emsp;&nbsp;&thinsp;equal to
+`<>`&emsp;not equal to
+`!=`&emsp;not equal to
+`=~`&emsp;matches against
 `!~`&emsp;doesn't match against
 
 See the Data Exploration page for documentation on the
@@ -527,11 +527,11 @@ The `FROM` clause and the `WHERE` clause are optional.
 The `WHERE` clause supports tag comparisons; field comparisons are not
 valid for the `SHOW TAG KEYS` query.
 
-Supported operators in the `WHERE` clause:  
-`=`&emsp;&nbsp;&thinsp;equal to  
-`<>`&emsp;not equal to  
-`!=`&emsp;not equal to  
-`=~`&emsp;matches against  
+Supported operators in the `WHERE` clause:
+`=`&emsp;&nbsp;&thinsp;equal to
+`<>`&emsp;not equal to
+`!=`&emsp;not equal to
+`=~`&emsp;matches against
 `!~`&emsp;doesn't match against
 
 See the Data Exploration page for documentation on the
@@ -743,11 +743,11 @@ The `FROM`, `WHERE`, `LIMIT`, and `OFFSET` clauses are optional.
 The `WHERE` clause supports tag comparisons; field comparisons are not
 valid for the `SHOW TAG KEYS` query.
 
-Supported operators in the `WITH` and `WHERE` clauses:  
-`=`&emsp;&nbsp;&thinsp;equal to  
-`<>`&emsp;not equal to  
-`!=`&emsp;not equal to  
-`=~`&emsp;matches against  
+Supported operators in the `WITH` and `WHERE` clauses:
+`=`&emsp;&nbsp;&thinsp;equal to
+`<>`&emsp;not equal to
+`!=`&emsp;not equal to
+`=~`&emsp;matches against
 `!~`&emsp;doesn't match against
 
 See the Data Exploration page for documentation on the

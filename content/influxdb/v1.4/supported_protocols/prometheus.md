@@ -11,16 +11,9 @@ menu:
 ## Prometheus remote read and write API support
 
 <dt>
-<<<<<<< HEAD
 InfluxDB support for the Prometheus remote read and write API is experimental for both Prometheus and InfluxDB.
 Prometheus documentation states that their remote_read and remote_write configuration settings are "experimental: breaking changes to configuration are likely in future releases."
 </dt>
-
-=======
-Prometheus remote read and write API is experimental for both Prometheus and InfluxDB.
->Prometheus configuration documentation states that their remote_read and remote_write configuration settings are "experimental: breaking changes to configuration are likely in future releases."
-</dt>
->>>>>>> 96434f37eafc91c5398aa2e6b3d189f815ac07f4
 
 InfluxDB support for the Prometheus remote read and write API adds the following two HTTP endpoints to the InfluxDB `httpd` handler:
 
@@ -40,10 +33,10 @@ Example (Prometheus configuration):
 ```
 # Remote write configuration (for Graphite, OpenTSDB, or InfluxDB).
 remote_write:
-* url: "http://localhost:8086/api/v1/prom/write?u=paul&p=foo&db=prometheus"
+  - url: "http://localhost:8086/api/v1/prom/write?u=paul&p=foo&db=prometheus"
 # Remote read configuration (for InfluxDB only at the moment).
 remote_read:
-* url: "http://localhost:8086/api/v1/prom/read?u=paul&p=foo&db=prometheus"
+  - url: "http://localhost:8086/api/v1/prom/read?u=paul&p=foo&db=prometheus"
 ```
 
 You can use query parameters to pass in the database to write data to and optional user and password.

@@ -1,5 +1,5 @@
 ---
-title: Cluster Commands
+title: Cluster commands
 aliases:
     - /enterprise/v1.3/features/cluster-commands/
 menu:
@@ -8,7 +8,7 @@ menu:
     parent: Features
 ---
 
-Use the command line tools [`influxd-ctl`](#influxd-ctl) and [`influx`](#influx) to interact with your cluster and data.
+Use the command line tools [`influxd-ctl`](#influxd-ctl) and [`influx`](#influx) to interact with your InfluxDB Enterprise cluster and data.
 
 #### Content
 
@@ -34,7 +34,7 @@ Use the command line tools [`influxd-ctl`](#influxd-ctl) and [`influx`](#influx)
         * [token](#token)
         * [truncate-shards](#truncate-shards)
 * [influx](#influx)
-    
+
 
 ## influxd-ctl
 
@@ -49,34 +49,34 @@ influxd-ctl [global-options] <command> [arguments]
 
 ### Global Options
 
-`-auth-type [ none | basic | jwt ]`  
+`-auth-type [ none | basic | jwt ]`
 &emsp;&emsp;&emsp;Specify the type of authentication to use. The default authentication type is `none`.
 
-`-bind <hostname>:<port>`  
+`-bind <hostname>:<port>`
 &emsp;&emsp;&emsp;Specify the bind HTTP address of a meta node to connect to. The default is `localhost:8091`.
 
-`-bind-tls`  
+`-bind-tls`
 &emsp;&emsp;&emsp;Use TLS.  If you have enabled HTTPS, you MUST use this option in order for influxd-ctl to connect to the meta node.
 
-`-config '<path-to-configuration-file>'`  
+`-config '<path-to-configuration-file>'`
 &emsp;&emsp;&emsp;Specify the path to the configuration file.
 
-`-pwd <password>`  
+`-pwd <password>`
 &emsp;&emsp;&emsp;Specify the user’s password. This option is ignored if `-auth-type basic` isn’t specified.
 
-`-k`  
+`-k`
 &emsp;&emsp;&emsp;Skip certificate verification; use this option with a self-signed certificate. `-k` is ignored if `-bind-tls` isn't specified.
 
-`-secret <JWT-shared-secret>`  
+`-secret <JWT-shared-secret>`
 &emsp;&emsp;&emsp;Specify the JSON Web Token (JWT) shared secret. This option is ignored if `-auth-type jwt` isn't specified.
 
-`-user <username>`  
+`-user <username>`
 &emsp;&emsp;&emsp;Specify the user’s username. This option is ignored if `-auth-type basic` isn’t specified.
 
 ### Examples of Global Options
 
 The following examples use the tool's [`show` argument](#show).
-See the [section below](#arguments) for more information about `influxd-ctl`'s arguments. 
+See the [section below](#arguments) for more information about `influxd-ctl`'s arguments.
 
 #### Example 1: Bind to a remote meta node
 
@@ -126,13 +126,13 @@ Error: authorization failed.
 
 Adds a data node to a cluster.
 By default, `influxd-ctl` adds the specified data node to the local meta node's cluster.
-Use `add-data` instead of the [`join` argument](#join) when performing a [Production Installation](/enterprise_influxdb/v1.3/production_installation/data_node_installation/) of an InfluxEnterprise cluster.
+Use `add-data` instead of the [`join` argument](#join) when performing a [Production Installation](/enterprise_influxdb/v1.3/production_installation/data_node_installation/) of an InfluxDB Enterprise cluster.
 
 ```
 add-data <data-node-TCP-bind-address>
 ```
 
-Resources: [Production Installation](/enterprise_influxdb/v1.3/production_installation/data_node_installation/)   
+Resources: [Production Installation](/enterprise_influxdb/v1.3/production_installation/data_node_installation/)
 
 ###### Examples
 <br>
@@ -158,16 +158,16 @@ Added data node 3 at cluster-data-node:8088
 The command contacts the meta node running at `cluster-meta-node-01:8091` and adds a data node to that meta node's cluster.
 The data node has the hostname `cluster-data-node` and runs on port `8088`.
 
-#### add-meta         
+#### add-meta
 
 Adds a meta node to a cluster.
 By default, `influxd-ctl` adds the specified meta node to the local meta node's cluster.
-Use `add-meta` instead of the [`join` argument](#join) when performing a [Production Installation](/enterprise_influxdb/v1.3/production_installation/meta_node_installation/) of an InfluxEnterprise cluster.
+Use `add-meta` instead of the [`join` argument](#join) when performing a [Production Installation](/enterprise_influxdb/v1.3/production_installation/meta_node_installation/) of an InfluxDB Enterprise cluster.
 ```
 add-meta <meta-node-HTTP-bind-address>
 ```
 
-Resources: [Production Installation](/enterprise_influxdb/v1.3/production_installation/data_node_installation/)   
+Resources: [Production Installation](/enterprise_influxdb/v1.3/production_installation/data_node_installation/)
 
 ##### Examples
 <br>
@@ -193,8 +193,8 @@ Added meta node 3 at cluster-meta-node-03:8091
 The command contacts the meta node running at `cluster-meta-node-01:8091` and adds a meta node to that meta node's cluster.
 The added meta node has the hostname `cluster-meta-node-03` and runs on port `8091`.
 
-#### backup           
-  
+#### backup
+
 Creates a backup of a cluster's [metastore](/influxdb/v1.3/concepts/glossary/#metastore) and [shard](/influxdb/v1.3/concepts/glossary/#shard) data at that point in time and stores the copy in the specified directory.
 Backups are incremental by default; they create a copy of the metastore and shard data that have changed since the previous incremental backup.
 If there are no existing incremental backups, the system automatically performs a complete backup.
@@ -203,19 +203,19 @@ backup [ -db <database> | -from <data-node-TCP-bind-address> | -full | -rp <rete
 ```
 Options:
 
-`-db <database>`:  
+`-db <database>`:
 &emsp;&emsp;&emsp;The name of the single database to back up.
 
-`-from <data-node-TCP-address>`:  
+`-from <data-node-TCP-address>`:
 &emsp;&emsp;&emsp;The TCP address of the target data node.
 
-`-full`:  
-&emsp;&emsp;&emsp;Perform a [full](/enterprise_influxdb/v1.3/guides/backup-and-restore/#backup) backup. 
+`-full`:
+&emsp;&emsp;&emsp;Perform a [full](/enterprise_influxdb/v1.3/guides/backup-and-restore/#backup) backup.
 
-`-rp <retention-policy>`:  
+`-rp <retention-policy>`:
 &emsp;&emsp;&emsp;The name of the single [retention policy](/influxdb/v1.3/concepts/glossary/#retention-policy-rp) to back up (requires the `-db` flag).
 
-`-shard <shard-id>`:   
+`-shard <shard-id>`:
 &emsp;&emsp;&emsp;The ID of the single shard to back up.
 
 > Restoring a `-full` backup and restoring an incremental backup require different syntax.
@@ -271,14 +271,14 @@ Backed up to backup_dir in 51.388233ms, transferred 333793 bytes
 
 The command performs a full backup of the cluster and stores the backup in the existing directory `backup_dir`.
 
-#### copy-shard       
+#### copy-shard
 
 Copies a [shard](/influxdb/v1.3/concepts/glossary/#shard) from a source data node to a destination data node.
 ```
 copy-shard <data-node-source-TCP-address> <data-node-destination-TCP-address> <shard-id>
 ```
 
-Resources: [Cluster Rebalance](/enterprise_influxdb/v1.3/guides/rebalance/) 
+Resources: [Cluster Rebalance](/enterprise_influxdb/v1.3/guides/rebalance/)
 
 ##### Examples
 <br>
@@ -315,21 +315,21 @@ The system is copying shard `34` from `cluster-data-node-02:8088` to `cluster-da
 Shard `34` is associated with the `telegraf` database and the `autogen` retention policy.
 The `TotalSize` and `CurrentSize` columns are reported in bytes.
 
-#### join             
+#### join
 
 Joins a meta node and/or data node to a cluster.
 By default, `influxd-ctl` joins the local meta node and/or data node into a new cluster.
-Use `join` instead of the [`add-meta`](#add-meta) or [`add-data`](#add-data) arguments when performing a [QuickStart Installation](/enterprise_influxdb/v1.3/quickstart_installation/cluster_installation/) of an InfluxEnterprise cluster.
+Use `join` instead of the [`add-meta`](#add-meta) or [`add-data`](#add-data) arguments when performing a [QuickStart Installation](/enterprise_influxdb/v1.3/quickstart_installation/cluster_installation/) of an InfluxDB Enterprise cluster.
 ```
 join [-v] [<meta-node-HTTP-bind-address>]
 ```
 
 Options:
 
-`-v`  
+`-v`
 &emsp;&emsp;&emsp;Prints verbose information about the join.
 
-`meta-node-HTTP-bind-address`  
+`meta-node-HTTP-bind-address`
 &emsp;&emsp;&emsp;The address of a meta node in an existing cluster.
 Use this option to add the un-joined meta node and/or data node to an existing cluster.
 
@@ -375,7 +375,7 @@ Successfully joined cluster
 
 The command joins the meta node running at `cluster-node-03:8091` and the data node running at `cluster-node-03:8088` to an existing cluster.
 The existing cluster includes the meta node running at `cluster-meta-node-02:8091`.
- 
+
 Example 3: Join a meta node to an existing cluster
 
 ```
@@ -426,7 +426,7 @@ The command joins the meta node running at `cluster-meta-node-03:8091` to an exi
 The existing cluster includes the meta node running at `cluster-meta-node-02:8091`.
 The `-v` option prints detailed information about the join.
 
-#### kill-copy-shard  
+#### kill-copy-shard
 
 Aborts an in-progress [`copy-shard`](#copy-shard) command.
 ```
@@ -445,10 +445,10 @@ Killed shard copy 39 from cluster-data-node-02:8088 to cluster-data-node-03:8088
 
 The command aborts the `copy-shard` command that was copying shard `39` from `cluster-data-node-02:8088` to `cluster-data-node-03:8088`.
 
-#### leave            
+#### leave
 
 Removes a meta node and/or data node from the cluster.
-Use `leave` instead of the [`remove-meta`](#remove-meta) and [`remove-data`](#remove-data) arguments if you set up your InfluxEnterprise cluster with the [QuickStart Installation](/enterprise_influxdb/v1.3/quickstart_installation/cluster_installation/) process.
+Use `leave` instead of the [`remove-meta`](#remove-meta) and [`remove-data`](#remove-data) arguments if you set up your InfluxDB Enterprise cluster with the [QuickStart Installation](/enterprise_influxdb/v1.3/quickstart_installation/cluster_installation/) process.
 
 <dt>The `leave` argument is destructive; it erases all metastore information from meta nodes and all data from data nodes.
 Use `leave` only if you want to *permanently* remove a node from a cluster.</dt>
@@ -459,7 +459,7 @@ leave [-y]
 
 Options:
 
-`-y`  
+`-y`
 &emsp;&emsp;&emsp;Assume yes (`y`) to all prompts.
 
 ##### Examples
@@ -521,10 +521,10 @@ Successfully left cluster
 The command removes the meta node running at `cluster-meta-node-03:8091` from an existing cluster.
 The system doesn't remove a data node from the cluster because it doesn't find a data node running at `cluster-meta-node-03:8088`.
 
-#### remove-data      
+#### remove-data
 
 Removes a data node from a cluster.
-Use `remove-data` instead of the [`leave`](#leave) argument if you set up your InfluxEnterprise cluster with the [Production Installation](/enterprise_influxdb/v1.3/production_installation/) process.
+Use `remove-data` instead of the [`leave`](#leave) argument if you set up your InfluxDB Enterprise cluster with the [Production Installation](/enterprise_influxdb/v1.3/production_installation/) process.
 
 <dt>The `remove-data` argument is destructive; it erases all data from the specified data node.
 Use `remove-data` only if you want to *permanently* remove a data node from a cluster.</dt>
@@ -535,7 +535,7 @@ remove-data [-force] <data-node-TCP-bind-address>
 
 Options:
 
-`-force`  
+`-force`
 &emsp;&emsp;&emsp;Forces the removal of the data node.
 Use `-force` if the data node process is not running.
 
@@ -549,10 +549,10 @@ Removed data node at cluster-data-node-03:8088
 ```
 The command removes a data node running at `cluster-data-node-03:8088` from an existing cluster.
 
-#### remove-meta      
+#### remove-meta
 
 Removes a meta node from the cluster.
-Use `remove-meta` instead of the [`leave`](#leave) argument if you set up your InfluxEnterprise cluster with the [Production Installation](/enterprise_influxdb/v1.3/production_installation/) process.
+Use `remove-meta` instead of the [`leave`](#leave) argument if you set up your InfluxDB Enterprise cluster with the [Production Installation](/enterprise_influxdb/v1.3/production_installation/) process.
 
 <dt>The `remove-meta` argument is destructive; it erases all metastore information from the specified meta node.
 Use `remove-meta` only if you want to *permanently* remove a meta node from a cluster.</dt>
@@ -563,17 +563,17 @@ remove-meta [-force | -tcpAddr <meta-node-TCP-bind_address> | -y] <meta-node-HTT
 
 Options:
 
-`-force`  
+`-force`
 &emsp;&emsp;&emsp;Forces the removal of the meta node.
 Use `-force` if the meta node process if not running, and the node is not reachable and unrecoverable.
 If a meta node restarts after being `-force` removed, it may interfere with the cluster.
 This options requires the `-tcpAddr` option.
 
-`-tcpAddr <meta-node-TCP-bind_address>`  
+`-tcpAddr <meta-node-TCP-bind_address>`
 &emsp;&emsp;&emsp;The TCP address of the meta node to remove from the cluster.
 Use this option with the `-force` option.
 
-`-y`  
+`-y`
 &emsp;&emsp;&emsp;Assumes `Yes` to all prompts.
 
 ##### Examples
@@ -586,7 +586,7 @@ $ influxd-ctl remove-meta cluster-meta-node-02:8091
 Remove cluster-meta-node-02:8091 from the cluster [y/N]: y
 y
 
-Removed meta node at cluster-meta-node-02:8091 
+Removed meta node at cluster-meta-node-02:8091
 ```
 
 The command removes the meta node at `cluster-meta-node-02:8091` from an existing cluster.
@@ -607,7 +607,7 @@ In the example, we respond yes (`y`) to the prompt that asks if we'd like to for
 Note that if the meta node at `cluster-meta-node-02:8091` restarts, it may interfere with the cluster.
 Only perform a force removal of a meta node if the node is not reachable and unrecoverable.
 
-#### remove-shard     
+#### remove-shard
 
 Removes a shard from a data node.
 Removing a shard is an irrecoverable, destructive action; please be cautious with this command.
@@ -628,7 +628,7 @@ Removed shard 31 from cluster-data-node-02:8088
 
 The command removes shard `31` from the data node running at `cluster-data-node-02:8088`.
 
-#### restore          
+#### restore
 
 Restore a [backup](#backup) to an existing cluster or a new cluster.
 Note that he existing cluster must contain no data in the databases affected by the restore.
@@ -644,29 +644,29 @@ If the restore doesn't use the `-full` option, specify the `path-to-backup-direc
 
 Options:
 
-`-db <string>`  
+`-db <string>`
 &emsp;&emsp;&emsp;The name of the single database to restore.
 
-`-full`  
+`-full`
 &emsp;&emsp;&emsp;Restore a backup that was created with the `-full` flag.
 A restore command with the `-full` flag requires the `path-to-backup-manifest-file`.
 
-`-list`  
+`-list`
 &emsp;&emsp;&emsp;Show the contents of the backup.
 
-`-newdb <string>`  
+`-newdb <string>`
 &emsp;&emsp;&emsp;The name of the new database to restore to (must specify with `-db`).
 
-`-newrf <int>`  
+`-newrf <int>`
 &emsp;&emsp;&emsp;The new [replication factor](/influxdb/v1.3/concepts/glossary/#replication-factor) to restore to (this is capped to the number of data nodes in the cluster).
 
-`-newrp <string>`  
+`-newrp <string>`
 &emsp;&emsp;&emsp;The name of the new [retention policy](/influxdb/v1.3/concepts/glossary/#retention-policy-rp) to restore to (must specify with `-rp`).
 
-`-rp <string>`  
+`-rp <string>`
 &emsp;&emsp;&emsp;The name of the single retention policy to restore.
 
-`-shard <unit>`  
+`-shard <unit>`
 &emsp;&emsp;&emsp;The [shard](/influxdb/v1.3/concepts/glossary/#shard) ID to restore.
 
 Resources: [Backup and Restore](/enterprise_influxdb/v1.3/guides/backup-and-restore/#restore)
@@ -702,10 +702,10 @@ Restored from my-full-backup in 58.58301ms, transferred 569344 bytes
 
 The command restores a full backup that includes the manifest file at `my-full-backup/20170131T020341Z.manifest`.
 
-#### show             
+#### show
 
 Shows all [meta nodes](/enterprise_influxdb/v1.3/concepts/glossary/#meta-node) and [data nodes](/enterprise_influxdb/v1.3/concepts/glossary/#data-node) that are part of the cluster.
-The output includes the InfluxEnterprise version number.
+The output includes the InfluxDB Enterprise version number.
 ```
 show
 ```
@@ -733,9 +733,9 @@ cluster-node-03:8091	1.3.x-c1.3.x
 ```
 
 The output shows that the cluster includes three meta nodes and two data nodes.
-Every node is using InfluxEnterprise version `1.3.x-c1.3.x`.
+Every node is using InfluxDB Enterprise version `1.3.x-c1.3.x`.
 
-#### show-shards      
+#### show-shards
 
 Shows the cluster's existing [shards](/influxdb/v1.3/concepts/glossary/#shard), including the shard's id, database, [retention policy](/influxdb/v1.3/concepts/glossary/#retention-policy-rp), desired number of copies, [shard group](/influxdb/v1.3/concepts/glossary/#shard-group), start time, end time, expiry time and [data node](/enterprise_influxdb/v1.3/concepts/glossary/#data-node) owners.
 ```
@@ -763,7 +763,7 @@ The desired number of copies for shard `51` is `2` and it belongs to shard group
 The data in shard `51` cover the time range between `2017-03-13T00:00:00Z` and `2017-03-20T00:00:00Z`, and the shard has no expiry time; `telegraf`'s `autogen` retention policy has an infinite duration so the system never removes shard `51`.
 Finally, shard `51` appears on two data nodes: `cluster-data-node-01:8088` and `cluster-data-node-03:8088`.
 
-#### update-data      
+#### update-data
 
 Updates a data node's address in the [meta store](/enterprise_influxdb/v1.3/concepts/glossary/#meta-service).
 ```
@@ -783,7 +783,7 @@ updated data node 26 to cluster-data-node-01:8088
 
 The command updates the address for data node `26` from `cluster-node-01:8088` to `cluster-data-node-01:8088`.
 
-#### token            
+#### token
 
 Generates a signed JSON Web Token (JWT) token.
 The token argument only works when using JWT authentication in the cluster and when using the [`-auth-type jwt`](#global-options) and [`-secret <shared-secret>`](#global-options) flags.
@@ -794,7 +794,7 @@ token [-exp <duration>]
 
 Options:
 
-`-exp`  
+`-exp`
 &emsp;&emsp;&emsp;Determines the time after which the token expires.
 By default, the token expires after one minute.
 
@@ -821,7 +821,7 @@ token: tokens can only be created when using bearer authentication
 
 The command returns an error because the command doesn't use JWT authentication.
 
-#### truncate-shards  
+#### truncate-shards
 
 Truncates hot [shards](/influxdb/v1.3/concepts/glossary/#shard), that is, shards that cover the time range that includes the current time ([`now()`](/influxdb/v1.3/concepts/glossary/#now)).
 `truncate-shards` creates a new shard and the system writes all new points to that shard.
@@ -832,7 +832,7 @@ truncate-shards [-delay <duration>]
 
 Options:
 
-`-delay <duration>`  
+`-delay <duration>`
 &emsp;&emsp;&emsp;Determines when to truncate shards after [`now()`](/influxdb/v1.3/concepts/glossary/#now).
 By default, the tool sets the delay to one minute.
 The `duration` is an integer followed by a [duration unit](/influxdb/v1.3/query_language/spec/#durations).
@@ -883,4 +883,4 @@ After running `influxd-ctl truncate-shards` and waiting three minutes, the outpu
 The `influx` tool, also known as the Command Line Interface (CLI), is available on all [data nodes](/enterprise_influxdb/v1.3/concepts/glossary/#data-node).
 Use `influx` to write data to your cluster, query data interactively, and view query output in different formats.
 
-The complete description of the `influx` tool is available in the [OSS InfluxDB documentation](/influxdb/v1.3/tools/shell/).
+The complete description of the `influx` tool is available in the [InfluxDB OSS documentation](/influxdb/v1.3/tools/shell/).

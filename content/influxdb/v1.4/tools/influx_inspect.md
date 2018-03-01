@@ -168,7 +168,7 @@ CREATE RETENTION POLICY autogen ON MY_DB_NAME DURATION inf REPLICATION 1
 randset value=97.9296104805 1439856000000000000
 randset value=25.3849066842 1439856100000000000
 ```
-###`influx_inspect inmem2tsi`
+### `influx_inspect inmem2tsi`
 Converts existing in-memory (TSM-based) shards to TSI (time series index) format. 
 The index is written to a temporary location until complete and then moved to a permanent location. 
 If an error occurs, then this operation will fall back to the original in-memory index.
@@ -176,19 +176,19 @@ If an error occurs, then this operation will fall back to the original in-memory
 > ***Note:*** This tool is for offline conversion only.
 >  When TSI is enabled, new shards use the TSI format, but existing shards continue as TSM-based shards until converted offline.
 >
-####Usage
+#### Usage
 ```
 influx_inspect inmem2tsi [ flags ]
 ```
-####Flags
+#### Flags
 
-####`-path <data_directory> <wal_directory>` string
+#### `-path <data_directory> <wal_directory>` string
 Path of the data directory and the WAL directory.
 
 #### `-v` (optional)
 Verbose output
 
-####Example
+#### Example
 ```
 $ influx_inspect inmem2tsi -path ~/.influxdb/data/stress/autogen/1 ~/.influxdb/wal/stress/autogen/1
 ```

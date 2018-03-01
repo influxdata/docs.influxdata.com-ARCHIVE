@@ -15,7 +15,7 @@ menu:
 |:---------|:---------|
 | **[alert](#descr)&nbsp;(&nbsp;)** | Create an alert node, which can trigger alerts.  |
 
-### Property Methods
+### Property methods
 
 | Setters | Description |
 |:---|:---|
@@ -28,7 +28,7 @@ menu:
 | **[email](#email)&nbsp;(&nbsp;`to`&nbsp;`...string`)** | Email the alert data.  |
 | **[exec](#exec)&nbsp;(&nbsp;`executable`&nbsp;`string`,&nbsp;`args`&nbsp;`...string`)** | Execute a command whenever an alert is triggered and pass the alert data over STDIN in JSON format.  |
 | **[flapping](#flapping)&nbsp;(&nbsp;`low`&nbsp;`float64`,&nbsp;`high`&nbsp;`float64`)** | Perform flap detection on the alerts. The method used is similar method to Nagios: https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/flapping.html  |
-| **[hipChat](#hipchat)&nbsp;(&nbsp;)** | Send the alert to HipChat. For step-by-step instructions on setting up Kapacitor with HipChat, see the Event Handler Setup Guide (https://docs.influxdata.com//kapacitor/latest/guides/event-handler-setup/#hipchat-setup). To allow Kapacitor to post to HipChat, go to the URL https://www.hipchat.com/docs/apiv2 for information on how to get your room id and tokens.  |
+| **[hipChat](#hipchat)&nbsp;(&nbsp;)** | Send the alert to HipChat. For step-by-step instructions on setting up Kapacitor with HipChat, see the [Event Handler Setup Guide] (/kapacitor/latest/guides/event-handler-setup/#hipchat-setup). To allow Kapacitor to post to HipChat, go to the URL https://www.hipchat.com/docs/apiv2 for information on how to get your room id and tokens.  |
 | **[history](#history)&nbsp;(&nbsp;`value`&nbsp;`int64`)** | Number of previous states to remember when computing flapping levels and checking for state changes. Minimum value is 2 in order to keep track of current and previous states.  |
 | **[id](#id)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Template for constructing a unique ID for a given alert.  |
 | **[idField](#idfield)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional field key to add to the data, containing the alert ID as a string.  |
@@ -60,8 +60,10 @@ menu:
 
 
 
-### Chaining Methods
+### Chaining methods
+
 [Alert](/kapacitor/v1.4/nodes/alert_node/#alert), [Bottom](/kapacitor/v1.4/nodes/alert_node/#bottom), [Combine](/kapacitor/v1.4/nodes/alert_node/#combine), [Count](/kapacitor/v1.4/nodes/alert_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/alert_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/alert_node/#deadman), [Default](/kapacitor/v1.4/nodes/alert_node/#default), [Delete](/kapacitor/v1.4/nodes/alert_node/#delete), [Derivative](/kapacitor/v1.4/nodes/alert_node/#derivative), [Difference](/kapacitor/v1.4/nodes/alert_node/#difference), [Distinct](/kapacitor/v1.4/nodes/alert_node/#distinct), [Elapsed](/kapacitor/v1.4/nodes/alert_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/alert_node/#eval), [First](/kapacitor/v1.4/nodes/alert_node/#first), [Flatten](/kapacitor/v1.4/nodes/alert_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/alert_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/alert_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/alert_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/alert_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/alert_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/alert_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/alert_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/alert_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/alert_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/alert_node/#last), [Max](/kapacitor/v1.4/nodes/alert_node/#max), [Mean](/kapacitor/v1.4/nodes/alert_node/#mean), [Median](/kapacitor/v1.4/nodes/alert_node/#median), [Min](/kapacitor/v1.4/nodes/alert_node/#min), [Mode](/kapacitor/v1.4/nodes/alert_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/alert_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/alert_node/#percentile), [Sample](/kapacitor/v1.4/nodes/alert_node/#sample), [Shift](/kapacitor/v1.4/nodes/alert_node/#shift), [Sideload](/kapacitor/v1.4/nodes/alert_node/#sideload), [Spread](/kapacitor/v1.4/nodes/alert_node/#spread), [StateCount](/kapacitor/v1.4/nodes/alert_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/alert_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/alert_node/#stats), [Stddev](/kapacitor/v1.4/nodes/alert_node/#stddev), [Sum](/kapacitor/v1.4/nodes/alert_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/alert_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/alert_node/#top), [Union](/kapacitor/v1.4/nodes/alert_node/#union), [Where](/kapacitor/v1.4/nodes/alert_node/#where), [Window](/kapacitor/v1.4/nodes/alert_node/#window)
+
 <a id='descr'/><hr/><br/>
 ### Description
 
@@ -163,7 +165,7 @@ For example given the following values:
 The corresponding alert states are:
 INFO WARNING WARNING CRITICAL INFO INFO OK
 
-Available Statistics:
+Available statistics:
 
 * alerts_triggered -- Total number of alerts triggered
 * oks_triggered -- Number of OK alerts triggered
@@ -241,7 +243,7 @@ alert.alerta()
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-#### Alerta Environment
+#### Alerta environment
 
 Alerta environment.
 Can be a template and has access to the same data as the [AlertNode.Details](/kapacitor/v1.4/nodes/alert_node/#details) property.
@@ -256,7 +258,7 @@ alert.alerta()
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-#### Alerta Event
+#### Alerta event
 
 Alerta event.
 Can be a template and has access to the same data as the idInfo property.
@@ -271,7 +273,7 @@ alert.alerta()
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-#### Alerta Group
+#### Alerta group
 
 Alerta group.
 Can be a template and has access to the same data as the [AlertNode.Details](/kapacitor/v1.4/nodes/alert_node/#details) property.
@@ -286,7 +288,7 @@ alert.alerta()
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-#### Alerta Origin
+#### Alerta origin
 
 Alerta origin.
 If empty, uses the origin from the configuration.
@@ -300,7 +302,7 @@ alert.alerta()
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-#### Alerta Resource
+#### Alerta resource
 
 Alerta resource.
 Can be a template and has access to the same data as the [AlertNode.Details](/kapacitor/v1.4/nodes/alert_node/#details) property.
@@ -315,7 +317,7 @@ alert.alerta()
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-#### Alerta Services
+#### Alerta services
 
 List of effected services.
 If not specified defaults to the Name of the stream.
@@ -329,7 +331,7 @@ alert.alerta()
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-#### Alerta Timeout
+#### Alerta timeout
 
 Alerta timeout.
 Default: 24h
@@ -343,7 +345,7 @@ alert.alerta()
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-#### Alerta Token
+#### Alerta token
 
 Alerta authentication token.
 If empty, uses the token from the configuration.
@@ -357,7 +359,7 @@ alert.alerta()
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-#### Alerta Value
+#### Alerta value
 
 Alerta value.
 Can be a template and has access to the same data as the [AlertNode.Details](/kapacitor/v1.4/nodes/alert_node/#details) property.
@@ -531,7 +533,7 @@ alert.email(to ...string)
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-#### Email To
+#### Email to
 
 Define the To addresses for the email alert.
 Multiple calls append to the existing list of addresses.
@@ -686,7 +688,7 @@ alert.hipChat()
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-#### HipChat Room
+#### HipChat room
 
 HipChat room in which to post messages.
 If empty, uses the channel from the configuration.
@@ -700,7 +702,7 @@ alert.hipChat()
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-#### HipChat Token
+#### HipChat token
 
 HipChat authentication token.
 If empty, uses the token from the configuration.

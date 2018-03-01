@@ -3,7 +3,7 @@ title: Managing InfluxDB users in Chronograf
 menu:
   chronograf_1_4:
     name: Managing InfluxDB users
-    weight: 30
+    weight: 40
     parent: Administration
 ---
 
@@ -215,13 +215,13 @@ Permission to drop databases and retention policies.
 **Pages in Chronograf that require this permission**: Data Explorer, Dashboards, Databases on the Admin page
 
 #### KapacitorAPI
-Permission to access the API for InfluxEnterprise Kapacitor.
+Permission to access the API for InfluxKapacitor Enterprise.
 This does not include configuration-related API calls.
 
 **Pages in Chronograf that require this permission**: NA
 
 #### KapacitorConfigAPI
-Permission to access the configuration-related API calls for InfluxEnterprise Kapacitor.
+Permission to access the configuration-related API calls for InfluxKapacitor Enterprise.
 
 **Pages in Chronograf that require this permission**: NA
 

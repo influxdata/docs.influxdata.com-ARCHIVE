@@ -45,7 +45,7 @@ Check for non-`TSM` shards in your data directory:
 
 In versions prior to 0.12, InfluxDB stores
 [metastore](/influxdb/v1.4/concepts/glossary/#metastore) information in
-`raft.db` via the raft services.
+`raft.db` using the raft services.
 In versions 0.12+, InfluxDB stores metastore information in `meta.db`, a binary
 protobuf file.
 

@@ -5,6 +5,21 @@ menu:
     weight: 1
     parent: about_the_project
 ---
+
+## v1.5.2 [2018-01-30]
+
+### Bugfixes
+
+- Ignore empty lines in Graphite plaintext.
+- Fix `index out of bounds` error in Solr input plugin.
+- Reconnect before sending Graphite metrics if disconnected.
+- Align aggregator period with internal ticker to avoid skipping metrics.
+- Fix a potential deadlock when using aggregators.
+- Limit wait time for writes in MQTT output.
+- Revert change in Graphite output where dot in field key was replaced by underscore.
+- Add `timeout` to Wavefront output write.
+- Exclude `master_replid` fields from Redis input.
+
 ## v1.5.1 [2017-01-10]
 
 ### Bugfixes

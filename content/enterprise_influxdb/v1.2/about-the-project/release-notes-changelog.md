@@ -21,7 +21,7 @@ menu:
 
 ## v1.2.5 [2017-05-16]
 
-This release builds off of the 1.2.4 release of OSS InfluxDB.
+This release builds off of the 1.2.4 release of InfluxDB OSS.
 Please see the OSS [release notes](/influxdb/v1.2/about_the_project/releasenotes-changelog/#v1-2-4-2017-05-08) for more information about the OSS releases.
 
 #### Bugfixes
@@ -36,7 +36,7 @@ Please see the OSS [release notes](/influxdb/v1.2/about_the_project/releasenotes
 
 ## v1.2.2 [2017-03-15]
 
-This release builds off of the 1.2.1 release of OSS InfluxDB.
+This release builds off of the 1.2.1 release of InfluxDB OSS.
 Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.2/CHANGELOG.md#v121-2017-03-08) for more information about the OSS release.
 
 ### Release Notes
@@ -106,7 +106,7 @@ This change only affects users who have disabled the `retention-autocreate` opti
 
 ### Release Notes
 
-This release builds off of the 1.2.0 release of OSS InfluxDB.
+This release builds off of the 1.2.0 release of InfluxDB OSS.
 Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.2/CHANGELOG.md#v120-2017-01-24) for more information about the OSS release.
 
 ### Upgrading
@@ -153,7 +153,7 @@ To disable the auto-creation of retention policies, set `retention-autocreate` t
 
 ## Release Notes
 
-This release incorporates the changes in the 1.1.4 release of OSS InfluxDB.
+This release incorporates the changes in the 1.1.4 release of InfluxDB OSS.
 Please see the OSS [changelog](https://github.com/influxdata/influxdb/blob/v1.1.4/CHANGELOG.md) for more information about the OSS release.
 
 ### Bugfixes
@@ -166,14 +166,14 @@ Please see the OSS [changelog](https://github.com/influxdata/influxdb/blob/v1.1.
 ## Release Notes
 
 This release was an internal release only.
-It incorporates the changes in the 1.1.3 release of OSS InfluxDB.
+It incorporates the changes in the 1.1.3 release of InfluxDB OSS.
 Please see the OSS [changelog](https://github.com/influxdata/influxdb/blob/v1.1.3/CHANGELOG.md) for more information about the OSS release.
 
 ## v1.1.1 [2016-12-06]
 
 ### Release Notes
 
-This release builds off of the 1.1.1 release of OSS InfluxDB.
+This release builds off of the 1.1.1 release of InfluxDB OSS.
 Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.1/CHANGELOG.md#v111-2016-12-06) for more information about the OSS release.
 
 This release is built with Go (golang) 1.7.4.
@@ -188,12 +188,12 @@ users currently running on the Mac OS X platform, powered by the Darwin operatin
 ## v1.1.0 [2016-11-14]
 
 ### Release Notes
-This release builds off of the 1.1.0 release of OSS InfluxDB.
+This release builds off of the 1.1.0 release of InfluxDB OSS.
 Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.1/CHANGELOG.md#v110-2016-11-14) for more information about the OSS release.
 
 ### Upgrading
 
-* The 1.1.0 release of OSS InfluxDB has some important [configuration changes](https://github.com/influxdata/influxdb/blob/1.1/CHANGELOG.md#configuration-changes) that may affect existing clusters.
+* The 1.1.0 release of InfluxDB OSS has some important [configuration changes](https://github.com/influxdata/influxdb/blob/1.1/CHANGELOG.md#configuration-changes) that may affect existing clusters.
 * The `influxd-ctl join` command has been renamed to `influxd-ctl add-meta`.  If you have existing scripts that use `influxd-ctl join`, they will need to use `influxd-ctl add-meta` or be updated to use the new cluster setup command.
 
 #### Cluster Setup
@@ -224,7 +224,7 @@ Switches to journald logging for on systemd systems. Logs are no longer sent to 
 - Use the data reference instead of `Clone()` during read-only operations for performance purposes
 - Prevent the system from double-collecting cluster statistics
 - Ensure that the meta API redirects to the cluster leader when it gets the `ErrNotLeader` error
-- Don't overwrite cluster users with existing OSS InfluxDB users when migrating an OSS instance into a cluster
+- Don't overwrite cluster users with existing InfluxDB OSS users when migrating an OSS instance into a cluster
 - Fix a data race in the raft store
 - Allow large segment files (> 10MB) in the Hinted Handoff
 - Prevent `copy-shard` from retrying if the `copy-shard` command was killed
@@ -245,7 +245,7 @@ Switches to journald logging for on systemd systems. Logs are no longer sent to 
 
 ## v1.0.2 [2016-10-06]
 ### Release Notes
-This release builds off of the 1.0.2 release of OSS InfluxDB.  Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v102-2016-10-05) for more information about the OSS release.
+This release builds off of the 1.0.2 release of InfluxDB OSS.  Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v102-2016-10-05) for more information about the OSS release.
 
 #### Cluster-specific Bugfixes
 
@@ -255,7 +255,7 @@ This release builds off of the 1.0.2 release of OSS InfluxDB.  Please see the OS
 
 ## v1.0.1 [2016-09-28]
 ### Release Notes
-This release builds off of the 1.0.1 release of OSS InfluxDB.
+This release builds off of the 1.0.1 release of InfluxDB OSS.
 Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v101-2016-09-26)
 for more information about the OSS release.
 
@@ -269,7 +269,7 @@ for more information about the OSS release.
 
 ## v1.0.0 [2016-09-07]
 ### Release Notes
-This release builds off of the 1.0.0 release of OSS InfluxDB.
+This release builds off of the 1.0.0 release of InfluxDB OSS.
 Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v100-2016-09-07) for more information about the OSS release.
 
 Breaking Changes:

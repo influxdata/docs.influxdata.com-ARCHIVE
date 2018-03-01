@@ -229,7 +229,7 @@ Environment variable: `$AUTH0_CLIENT_SECRET`
 
 ### `--auth0-organizations=`
 
-The Auth0 organization required to access Chronograf. Optional.
+[Optional] The Auth0 organization required to access Chronograf.
 Organizations are set using an "organization" key in the user's `app_metadata`.
 Lists are comma-separated and are only available when using environment variables.
 

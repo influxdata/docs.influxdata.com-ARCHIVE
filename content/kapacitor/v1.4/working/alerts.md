@@ -1,9 +1,9 @@
 ---
-title: Alerts
+title: Kapacitor alerts overview
 
 menu:
   kapacitor_1_4:
-    name: Alerts - Overview
+    name: Alerts overview
     weight: 3
     parent: work-w-kapacitor
 ---
@@ -13,7 +13,7 @@ Kapacitor makes it possible to handle alert messages in two different ways.
 * The messages can be pushed directly to an event handler exposed through the
 [Alert](/kapacitor/v1.4/nodes/alert_node/) node.
 * The messages can be published to a topic namespace to which one or more alert
-handlers can subscribe.    
+handlers can subscribe.
 
 <!--
 In addition to defining alert handler in TICKscript Kapacitor supports an alert system that follows a publish subscribe design pattern.
@@ -23,17 +23,17 @@ Alerts are published to a `topic` and `handlers` subscribe to a topic.
 No matter which approach is used, the handlers need to be enabled and configured
 in the [configuration](/kapacitor/v1.4/administration/configuration/#optional-table-groupings)
 file.  If the handler requires sensitive information such as tokens and
-passwords it can also be configured over the [HTTP API](/kapacitor/v1.4/working/api/#configuration).
+passwords, it can also be configured using the [Kapacitor HTTP API](/kapacitor/v1.4/working/api/#configuration).
 
-## Push to Handler
+## Push to handler
 
 Pushing messages to a handler is the basic approach presented in the
-[Getting Stared](/kapacitor/v1.4/introduction/getting_started/#trigger-alert-from-stream-data)
+[Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting_started/#trigger-alert-from-stream-data)
 guide. This involves simply calling the relevant chaining method made available
 through the `alert` node.  Messages can be pushed to `log()` files, the `email()`
-service, the `httpOut()` cache and many [third party services](#list-of-handlers).  
+service, the `httpOut()` cache and many [third party services](#list-of-handlers).
 
-## Publish and Subscribe
+## Publish and subscribe
 
 An alert topic is simply a namespace where alerts are grouped.
 When an alert event fires it can be published to a topic.
@@ -45,18 +45,18 @@ optional one.
 
 <!-- fixes defect 1003 -->
 
-* `topic` &ndash; declares the topic to which the handler will subscribe.
-* `id` &ndash; declares the identity of the binding.
-* `kind` &ndash; declares the type of event handler to be used.  Note that this
+* `topic`: declares the topic to which the handler will subscribe.
+* `id`: declares the identity of the binding.
+* `kind`: declares the type of event handler to be used.  Note that this
 needs to be enabled in the `kapacitord` configuration.
-* `match` &ndash; (optional) declares a match expression used to filter which
+* `match`: (optional) declares a match expression used to filter which
 alert events will be processed. See the section [Match Expressions](#match-expressions)
 below.
-* `options` &ndash; options specific to the handler in question. These are
+* `options`: options specific to the handler in question. These are
 listed below in the section [List of handlers](#list-of-handlers)
 
 
-**Example 1 &ndash; A handler binding file for the _slack_ handler and _cpu_ topic**
+**Example 1: A handler binding file for the _slack_ handler and _cpu_ topic**
 ```
 topic: cpu
 id: slack
@@ -453,7 +453,7 @@ options:
     routing-key: ops_team
 ```
 
-## Match Expressions
+## Match expressions
 
 Alert handlers support match expressions that filter which alert events the handler processes.
 
@@ -501,5 +501,3 @@ Send events with the tag "host" equal to `s001.example.com` to the handler:
 ```yaml
 match: "host" == 's001.example.com'
 ```
-
-

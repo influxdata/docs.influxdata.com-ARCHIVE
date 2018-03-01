@@ -1,16 +1,16 @@
 ---
-title: Running Telegraf as a Windows Service
+title: Running Telegraf as a Windows service
 
 menu:
   telegraf_1_5:
-    name: Run as Windows Service
+    name: Run as Windows service
     weight: 30
     parent: administration
 ---
 
-# Running Telegraf as a Windows Service
+# Running Telegraf as a Windows service
 
-Telegraf natively supports running as a Windows Service. Outlined below are
+Telegraf natively supports running as a Windows service. Outlined below are
 the general steps to set it up.
 
 1. Obtain the telegraf distribution for Windows.
