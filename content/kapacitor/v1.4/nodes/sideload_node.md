@@ -6,7 +6,7 @@ menu:
   kapacitor_1_4:
     name: Sideload
     identifier: sideload_node
-    weight: 230
+    weight: 250
     parent: nodes
 ---
 ### Constructor 
@@ -27,7 +27,7 @@ menu:
 
 
 ### Chaining Methods
-[Alert](/kapacitor/v1.4/nodes/sideload_node/#alert), [Bottom](/kapacitor/v1.4/nodes/sideload_node/#bottom), [Combine](/kapacitor/v1.4/nodes/sideload_node/#combine), [Count](/kapacitor/v1.4/nodes/sideload_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/sideload_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/sideload_node/#deadman), [Default](/kapacitor/v1.4/nodes/sideload_node/#default), [Delete](/kapacitor/v1.4/nodes/sideload_node/#delete), [Derivative](/kapacitor/v1.4/nodes/sideload_node/#derivative), [Difference](/kapacitor/v1.4/nodes/sideload_node/#difference), [Distinct](/kapacitor/v1.4/nodes/sideload_node/#distinct), [Elapsed](/kapacitor/v1.4/nodes/sideload_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/sideload_node/#eval), [First](/kapacitor/v1.4/nodes/sideload_node/#first), [Flatten](/kapacitor/v1.4/nodes/sideload_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/sideload_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/sideload_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/sideload_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/sideload_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/sideload_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/sideload_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/sideload_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/sideload_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/sideload_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/sideload_node/#last), [Log](/kapacitor/v1.4/nodes/sideload_node/#log), [Max](/kapacitor/v1.4/nodes/sideload_node/#max), [Mean](/kapacitor/v1.4/nodes/sideload_node/#mean), [Median](/kapacitor/v1.4/nodes/sideload_node/#median), [Min](/kapacitor/v1.4/nodes/sideload_node/#min), [Mode](/kapacitor/v1.4/nodes/sideload_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/sideload_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/sideload_node/#percentile), [Sample](/kapacitor/v1.4/nodes/sideload_node/#sample), [Shift](/kapacitor/v1.4/nodes/sideload_node/#shift), [Sideload](/kapacitor/v1.4/nodes/sideload_node/#sideload), [Spread](/kapacitor/v1.4/nodes/sideload_node/#spread), [StateCount](/kapacitor/v1.4/nodes/sideload_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/sideload_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/sideload_node/#stats), [Stddev](/kapacitor/v1.4/nodes/sideload_node/#stddev), [Sum](/kapacitor/v1.4/nodes/sideload_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/sideload_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/sideload_node/#top), [Union](/kapacitor/v1.4/nodes/sideload_node/#union), [Where](/kapacitor/v1.4/nodes/sideload_node/#where), [Window](/kapacitor/v1.4/nodes/sideload_node/#window)
+[Alert](/kapacitor/v1.4/nodes/sideload_node/#alert), [Barrier](/kapacitor/v1.4/nodes/sideload_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/sideload_node/#bottom), [Combine](/kapacitor/v1.4/nodes/sideload_node/#combine), [Count](/kapacitor/v1.4/nodes/sideload_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/sideload_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/sideload_node/#deadman), [Default](/kapacitor/v1.4/nodes/sideload_node/#default), [Delete](/kapacitor/v1.4/nodes/sideload_node/#delete), [Derivative](/kapacitor/v1.4/nodes/sideload_node/#derivative), [Difference](/kapacitor/v1.4/nodes/sideload_node/#difference), [Distinct](/kapacitor/v1.4/nodes/sideload_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/sideload_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/sideload_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/sideload_node/#eval), [First](/kapacitor/v1.4/nodes/sideload_node/#first), [Flatten](/kapacitor/v1.4/nodes/sideload_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/sideload_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/sideload_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/sideload_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/sideload_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/sideload_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/sideload_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/sideload_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/sideload_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/sideload_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/sideload_node/#last), [Log](/kapacitor/v1.4/nodes/sideload_node/#log), [Max](/kapacitor/v1.4/nodes/sideload_node/#max), [Mean](/kapacitor/v1.4/nodes/sideload_node/#mean), [Median](/kapacitor/v1.4/nodes/sideload_node/#median), [Min](/kapacitor/v1.4/nodes/sideload_node/#min), [Mode](/kapacitor/v1.4/nodes/sideload_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/sideload_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/sideload_node/#percentile), [Sample](/kapacitor/v1.4/nodes/sideload_node/#sample), [Shift](/kapacitor/v1.4/nodes/sideload_node/#shift), [Sideload](/kapacitor/v1.4/nodes/sideload_node/#sideload), [Spread](/kapacitor/v1.4/nodes/sideload_node/#spread), [StateCount](/kapacitor/v1.4/nodes/sideload_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/sideload_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/sideload_node/#stats), [Stddev](/kapacitor/v1.4/nodes/sideload_node/#stddev), [Sum](/kapacitor/v1.4/nodes/sideload_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/sideload_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/sideload_node/#top), [Union](/kapacitor/v1.4/nodes/sideload_node/#union), [Where](/kapacitor/v1.4/nodes/sideload_node/#where), [Window](/kapacitor/v1.4/nodes/sideload_node/#window)
 <a id='descr'/><hr/><br/>
 ### Description
 
@@ -131,6 +131,21 @@ sideload|alert()
 ```
 
 Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
+### Barrier
+
+Create a new Barrier node that emits a BarrierMessage periodically 
+
+One BarrierMessage will be emitted every period duration 
+
+
+```javascript
+sideload|barrier()
+```
+
+Returns: [BarrierNode](/kapacitor/v1.4/nodes/barrier_node/)
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
@@ -335,6 +350,19 @@ sideload|distinct(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
+### Ec2Autoscale
+
+Create a node that can trigger autoscale events for a ec2 autoscalegroup. 
+
+
+```javascript
+sideload|ec2Autoscale()
+```
+
+Returns: [Ec2AutoscaleNode](/kapacitor/v1.4/nodes/ec2_autoscale_node/)
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 

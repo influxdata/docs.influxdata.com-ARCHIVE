@@ -30,10 +30,12 @@ other available property methods are:
 
 * [Alert Node](/kapacitor/v1.4/nodes/alert_node)
 * [Batch Node](/kapacitor/v1.4/nodes/batch_node)
+* [Barrier Node](/kapacitor/v1.4/nodes/barrier_node)
 * [Combine Node](/kapacitor/v1.4/nodes/combine_node)
 * [Default Node](/kapacitor/v1.4/nodes/default_node)
 * [Delete Node](/kapacitor/v1.4/nodes/delete_node)
 * [Derivative Node](/kapacitor/v1.4/nodes/derivative_node)
+* [EC2 Autoscale Node](/kapacitor/v1.4/nodes/ec2_autoscale_node)
 * [Eval Node](/kapacitor/v1.4/nodes/eval_node)
 * [Flatten Node](/kapacitor/v1.4/nodes/flatten_node)
 * [From Node](/kapacitor/v1.4/nodes/from_node)

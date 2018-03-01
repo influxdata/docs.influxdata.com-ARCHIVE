@@ -6,7 +6,7 @@ menu:
   kapacitor_1_4:
     name: KapacitorLoopback
     identifier: kapacitor_loopback_node
-    weight: 170
+    weight: 190
     parent: nodes
 ---
 ### Constructor 

@@ -6,7 +6,7 @@ menu:
   kapacitor_1_4:
     name: Derivative
     identifier: derivative_node
-    weight: 60
+    weight: 70
     parent: nodes
 ---
 ### Constructor 
@@ -26,7 +26,7 @@ menu:
 
 
 ### Chaining Methods
-[Alert](/kapacitor/v1.4/nodes/derivative_node/#alert), [Bottom](/kapacitor/v1.4/nodes/derivative_node/#bottom), [Combine](/kapacitor/v1.4/nodes/derivative_node/#combine), [Count](/kapacitor/v1.4/nodes/derivative_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/derivative_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/derivative_node/#deadman), [Default](/kapacitor/v1.4/nodes/derivative_node/#default), [Delete](/kapacitor/v1.4/nodes/derivative_node/#delete), [Derivative](/kapacitor/v1.4/nodes/derivative_node/#derivative), [Difference](/kapacitor/v1.4/nodes/derivative_node/#difference), [Distinct](/kapacitor/v1.4/nodes/derivative_node/#distinct), [Elapsed](/kapacitor/v1.4/nodes/derivative_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/derivative_node/#eval), [First](/kapacitor/v1.4/nodes/derivative_node/#first), [Flatten](/kapacitor/v1.4/nodes/derivative_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/derivative_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/derivative_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/derivative_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/derivative_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/derivative_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/derivative_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/derivative_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/derivative_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/derivative_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/derivative_node/#last), [Log](/kapacitor/v1.4/nodes/derivative_node/#log), [Max](/kapacitor/v1.4/nodes/derivative_node/#max), [Mean](/kapacitor/v1.4/nodes/derivative_node/#mean), [Median](/kapacitor/v1.4/nodes/derivative_node/#median), [Min](/kapacitor/v1.4/nodes/derivative_node/#min), [Mode](/kapacitor/v1.4/nodes/derivative_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/derivative_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/derivative_node/#percentile), [Sample](/kapacitor/v1.4/nodes/derivative_node/#sample), [Shift](/kapacitor/v1.4/nodes/derivative_node/#shift), [Sideload](/kapacitor/v1.4/nodes/derivative_node/#sideload), [Spread](/kapacitor/v1.4/nodes/derivative_node/#spread), [StateCount](/kapacitor/v1.4/nodes/derivative_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/derivative_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/derivative_node/#stats), [Stddev](/kapacitor/v1.4/nodes/derivative_node/#stddev), [Sum](/kapacitor/v1.4/nodes/derivative_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/derivative_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/derivative_node/#top), [Union](/kapacitor/v1.4/nodes/derivative_node/#union), [Where](/kapacitor/v1.4/nodes/derivative_node/#where), [Window](/kapacitor/v1.4/nodes/derivative_node/#window)
+[Alert](/kapacitor/v1.4/nodes/derivative_node/#alert), [Barrier](/kapacitor/v1.4/nodes/derivative_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/derivative_node/#bottom), [Combine](/kapacitor/v1.4/nodes/derivative_node/#combine), [Count](/kapacitor/v1.4/nodes/derivative_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/derivative_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/derivative_node/#deadman), [Default](/kapacitor/v1.4/nodes/derivative_node/#default), [Delete](/kapacitor/v1.4/nodes/derivative_node/#delete), [Derivative](/kapacitor/v1.4/nodes/derivative_node/#derivative), [Difference](/kapacitor/v1.4/nodes/derivative_node/#difference), [Distinct](/kapacitor/v1.4/nodes/derivative_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/derivative_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/derivative_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/derivative_node/#eval), [First](/kapacitor/v1.4/nodes/derivative_node/#first), [Flatten](/kapacitor/v1.4/nodes/derivative_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/derivative_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/derivative_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/derivative_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/derivative_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/derivative_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/derivative_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/derivative_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/derivative_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/derivative_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/derivative_node/#last), [Log](/kapacitor/v1.4/nodes/derivative_node/#log), [Max](/kapacitor/v1.4/nodes/derivative_node/#max), [Mean](/kapacitor/v1.4/nodes/derivative_node/#mean), [Median](/kapacitor/v1.4/nodes/derivative_node/#median), [Min](/kapacitor/v1.4/nodes/derivative_node/#min), [Mode](/kapacitor/v1.4/nodes/derivative_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/derivative_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/derivative_node/#percentile), [Sample](/kapacitor/v1.4/nodes/derivative_node/#sample), [Shift](/kapacitor/v1.4/nodes/derivative_node/#shift), [Sideload](/kapacitor/v1.4/nodes/derivative_node/#sideload), [Spread](/kapacitor/v1.4/nodes/derivative_node/#spread), [StateCount](/kapacitor/v1.4/nodes/derivative_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/derivative_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/derivative_node/#stats), [Stddev](/kapacitor/v1.4/nodes/derivative_node/#stddev), [Sum](/kapacitor/v1.4/nodes/derivative_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/derivative_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/derivative_node/#top), [Union](/kapacitor/v1.4/nodes/derivative_node/#union), [Where](/kapacitor/v1.4/nodes/derivative_node/#where), [Window](/kapacitor/v1.4/nodes/derivative_node/#window)
 <a id='descr'/><hr/><br/>
 ### Description
 
@@ -125,6 +125,21 @@ derivative|alert()
 ```
 
 Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
+### Barrier
+
+Create a new Barrier node that emits a BarrierMessage periodically 
+
+One BarrierMessage will be emitted every period duration 
+
+
+```javascript
+derivative|barrier()
+```
+
+Returns: [BarrierNode](/kapacitor/v1.4/nodes/barrier_node/)
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
@@ -329,6 +344,19 @@ derivative|distinct(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
+### Ec2Autoscale
+
+Create a node that can trigger autoscale events for a ec2 autoscalegroup. 
+
+
+```javascript
+derivative|ec2Autoscale()
+```
+
+Returns: [Ec2AutoscaleNode](/kapacitor/v1.4/nodes/ec2_autoscale_node/)
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
