@@ -1,5 +1,5 @@
 ---
-title: About the Project
+title: About the project
 
 menu:
   chronograf_1_4:
