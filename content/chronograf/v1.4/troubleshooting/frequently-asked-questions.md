@@ -6,9 +6,7 @@ menu:
     parent: Troubleshooting
 ---
 
-* [What applications are supported in Chronograf?](#what-applications-are-supported-in-chronograf)
 * [How do I connect Chronograf to an InfluxEnterprise cluster?](#how-do-i-connect-chronograf-to-an-influxenterprise-cluster)
-* [What visualization types does Chronograf support?](#what-visualization-types-does-chronograf-support)
 * [What does the status column indicate on the Host List page?](#what-does-the-status-column-indicate-on-the-host-list-page)
 * [Why is my host's status red when data are still arriving?](#why-is-my-host-s-status-red-when-data-are-still-arriving)
 
@@ -16,48 +14,6 @@ menu:
 
 * [Why does the query builder break after I add my template variable to a query?](#why-does-the-query-builder-break-after-i-add-my-template-variable-to-a-query)
 
-## What applications are supported in Chronograf?
-
-Chronograf offers pre-created dashboards for several [Telegraf](/telegraf/latest/) input plugins/applications.
-We list those applications below and link to their Telegraf documentation:
-
-* [Apache](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/apache)
-* [Consul](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/consul)
-* [Docker](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/docker)
-* [Elastic](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/elasticsearch)
-* etcd
-* [HAProxy](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/haproxy)
-* IIS
-* [InfluxDB](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/influxdb)
-* [Kubernetes](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/kubernetes)
-* [Memcached](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/memcached)
-* [Mesos](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/mesos)
-* [MongoDB](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/mongodb)
-* [MySQL](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/mysql)
-* Network
-* [NGINX](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/nginx)
-* [NSQ](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/nsq)
-* [PHPfpm](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/phpfpm)
-* [Ping](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/ping)
-* [PostgreSQL](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/postgresql)
-* Processes
-* [RabbitMQ](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/rabbitmq)
-* [Redis](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/redis)
-* [Riak](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/riak)
-* [System](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/SYSTEM_README.md)
-    * [CPU](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/CPU_README.md)
-    * [Disk](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/DISK_README.md)
-    * [DiskIO](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/disk.go#L136)
-    * [Memory](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/MEM_README.md)
-    * [Net](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/net.go)
-    * [Netstat](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/NETSTAT_README.md)
-    * [Processes](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/PROCESSES_README.md)
-    * [Procstat](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/procstat/README.md)
-* [Varnish](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/varnish)
-* [Windows Performance Counters](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/win_perf_counters)
-
-Enable and disable applications in your [Telegraf configuration file](https://github.com/influxdata/telegraf/blob/master/etc/telegraf.conf).
-See the [Telegraf Configuration](https://github.com/influxdata/telegraf/blob/master/docs/CONFIGURATION.md) documentation for more information.
 
 ## How do I connect Chronograf to an InfluxEnterprise cluster?
 
@@ -73,46 +29,6 @@ Note that the example above assumes that you do not have authentication enabled.
 If you have authentication enabled, the form requires username and password information.
 For more details about monitoring an InfluxEnterprise cluster, see the [Monitor an InfluxEnterprise Cluster](/chronograf/latest/guides/monitoring-influxenterprise-clusters/) guide.
 
-## What visualization types does Chronograf support?
-
-Chronograf's dashboards support six visualization types.
-
-### Line
-Show time series in a line graph.
-
-![Cluster connection details](/img/chronograf/v1.4/faq-viz-line.png)
-
-### Stacked
-Show time series arranged on top of each other.
-
-![Cluster connection details](/img/chronograf/v1.4/faq-viz-stacked.png)
-
-### Step-Plot
-Show time series in a staircase graph.
-
-![Cluster connection details](/img/chronograf/v1.4/faq-viz-step.png)
-
-### SingleStat
-Show the most recent value of a time series.
-
-![Cluster connection details](/img/chronograf/v1.4/faq-viz-single.png)
-
-If a cell's query includes a [`GROUP BY` tag](/influxdb/latest/query_language/data_exploration/#group-by-tags) clause, Chronograf sorts the different [series](/influxdb/latest/concepts/glossary/#series) lexicographically and shows the most recent [field value](/influxdb/latest/concepts/glossary/#field-value) associated with the first series.
-For example, if a query groups by the `name` [tag key](/influxdb/latest/concepts/glossary/#tag-key) and `name` has two [tag values](/influxdb/latest/concepts/glossary/#tag-value) (`chronelda` and `chronz`), Chronograf shows the most recent field value associated with the `chronelda` series.
-
-If a cell's query includes more than one [field key](/influxdb/latest/concepts/glossary/#field-key) in the [`SELECT` clause](/influxdb/latest/query_language/data_exploration/#select-clause), Chronograf returns the most recent field value associated with the first field key in the `SELECT` clause.
-For example, if a query's `SELECT` clause is `SELECT "chronogiraffe","chronelda"`, Chronograf shows the most recent field value associated with the `chronogiraffe` field key.
-
-### Line+Stat
-Show time series in a line graph and overlay the time series' single most recent value.
-
-![Cluster connection details](/img/chronograf/v1.4/faq-viz-linesingle.png)
-
-### Bar
-Show time series in a bar chart.
-Bar graphs are available in versions 1.3.3.0+.
-
-![Cluster connection details](/img/chronograf/v1.4/faq-viz-bar.png)
 
 ## What does the status column indicate on the Host List page?
 
