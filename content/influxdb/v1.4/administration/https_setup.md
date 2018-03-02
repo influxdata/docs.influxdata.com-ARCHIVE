@@ -1,5 +1,6 @@
 ---
 title: HTTPS setup for InfluxDB
+
 menu:
   influxdb_1_4:
   name: HTTPS setup
