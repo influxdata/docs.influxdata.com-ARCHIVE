@@ -115,7 +115,7 @@ The four basic properties of the Kapacitor service include:
    * `hostname`: String declaring the DNS hostname where the Kapacitor daemon runs.
    * `data_dir`: String declaring the file system directory where core Kapacitor data is stored.
    * `skip-config-overrides`: Boolean indicating whether or not to skip configuration overrides.
-   * `default-retention-policy`: String declaring the default retention policy to be used on the Influx database.
+   * `default-retention-policy`: String declaring the default retention policy to be used on the InfluxDB database.
 
 Table groupings and arrays of tables follow the basic properties and include essential and optional features,
 including specific alert handlers and mechanisms for service discovery and data scraping.
