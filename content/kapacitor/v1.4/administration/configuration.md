@@ -64,7 +64,7 @@ KAPACITOR_OPTS="-pidfile=/home/kapacitor/kapacitor.pid -log-file=/home/kapacitor
 The environment variable `KAPACITOR_OPTS` is one of a few special variables used
 by Kapacitor at startup.
 For more information on working with environment variables,
-see [Kapacitor Environment Variables](#kapacitor-environment-variables)
+see [Kapacitor environment variables](#kapacitor-environment-variables)
 below.
 
 ## The Kapacitor configuration file
@@ -145,6 +145,8 @@ are defined in the `[http]` table.
   pprof-enabled = false
   https-enabled = false
   https-certificate = "/etc/ssl/influxdb-selfsigned.pem"
+  ### Use a separate private key location.
+  # https-private-key = ""
 ...
 ```
 
@@ -378,7 +380,7 @@ POSTing alerts to an HTTP endpoint.
 
 ##### Reporting
 
-Kapacitor will send usage statistics back to Influxdata.
+Kapacitor will send usage statistics back to InfluxData.
 This feature can be disabled or enabled in the `[reporting]` table grouping.
 
 **Example 9 &ndash; Reporting configuration**
@@ -394,7 +396,7 @@ This feature can be disabled or enabled in the `[reporting]` table grouping.
 
 ##### Stats
 
-Internal statistics about Kapacitor can also be emitted to an Influx database.
+Internal statistics about Kapacitor can also be emitted to an InfluxDB database.
 The collection frequency and the database to which the statistics are emitted
 can be configured in the `[stats]` table grouping.
 
@@ -418,7 +420,7 @@ can be configured in the `[stats]` table grouping.
 ...
 ```
 
-#### Optional Table Groupings
+#### Optional table groupings
 
 Optional table groupings are disabled by default and relate to specific features that can be leveraged by TICKscript nodes or used to discover and scrape information from remote locations.
 In the default configuration, these optional table groupings may be commented out or include a key `enabled` set to `false` (i.e., `enabled = false`).
