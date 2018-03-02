@@ -7,9 +7,7 @@ menu:
 ---
 
 * [How do I connect Chronograf to an InfluxEnterprise cluster?](#how-do-i-connect-chronograf-to-an-influxenterprise-cluster)
-* [What does the status column indicate on the Host List page?](#what-does-the-status-column-indicate-on-the-host-list-page)
-* [Why is my host's status red when data are still arriving?](#why-is-my-host-s-status-red-when-data-are-still-arriving)
-
+* 
 ### Known Issues
 
 * [Why does the query builder break after I add my template variable to a query?](#why-does-the-query-builder-break-after-i-add-my-template-variable-to-a-query)
@@ -54,7 +52,7 @@ If you configure the setting to an interval that's greater than one minute, Chro
 ## Why does the query builder break after I add my template variable to a query?
 
 Currently, adding a [template variable](/chronograf/latest/guides/dashboard-template-variables/) to a cell's query renders the query builder unusable.
-If you click on a database in the builder's `Databases` column after adding a template variable to your query, Chronograf simply overwrites your existing query.
+If you click on a database in the builder's **Databases** column after adding a template variable to your query, Chronograf simply overwrites your existing query.
 Note that this behavior does not apply to Chronograf's pre-created template variable: `:dashboardTime:`.
 
 This is a known issue and it will be fixed in a future release.
