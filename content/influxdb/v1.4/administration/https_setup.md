@@ -4,7 +4,7 @@ title: HTTPS setup for InfluxDB
 menu:
   influxdb_1_4:
     weight: 100
-    parent: guides
+    parent: administration
 ---
 
 This guide describes how to enable HTTPS with InfluxDB.
