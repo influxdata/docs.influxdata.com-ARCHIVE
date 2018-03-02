@@ -1,7 +1,10 @@
 ---
-title: Managing security
+title: Managing InfluxDB security
+tags: ["security"]
+categories: ["InfluxDB"]
 menu:
   influxdb_1_4:
+  name: Managing security
     weight: 80
     parent: administration
 ---
