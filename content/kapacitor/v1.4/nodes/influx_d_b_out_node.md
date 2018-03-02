@@ -6,7 +6,7 @@ menu:
   kapacitor_1_4:
     name: InfluxDBOut
     identifier: influx_d_b_out_node
-    weight: 130
+    weight: 150
     parent: nodes
 ---
 ### Constructor 
@@ -27,7 +27,7 @@ menu:
 | **[measurement](#measurement)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the measurement.  |
 | **[precision](#precision)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The precision to use when writing the data.  |
 | **[retentionPolicy](#retentionpolicy)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the retention policy.  |
-| **[tag](#tag)&nbsp;(&nbsp;`key`&nbsp;`string`,&nbsp;`value`&nbsp;`string`)** | Add a static tag to all data points. Tag can be called more than once.  |
+| **[tag](#tag)&nbsp;(&nbsp;`key`&nbsp;`string`,&nbsp;`value`&nbsp;`string`)** | Add a static tag to all data points. Tag can be called more then once.  |
 | **[writeConsistency](#writeconsistency)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The write consistency to use when writing the data.  |
 
 
@@ -183,7 +183,7 @@ influxDBOut.retentionPolicy(value string)
 ### Tag
 
 Add a static tag to all data points. 
-Tag can be called more than once. 
+Tag can be called more then once. 
 
 
 

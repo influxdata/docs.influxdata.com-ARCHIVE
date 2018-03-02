@@ -6,7 +6,7 @@ menu:
   kapacitor_1_4:
     name: Delete
     identifier: delete_node
-    weight: 50
+    weight: 60
     parent: nodes
 ---
 ### Constructor 
@@ -25,7 +25,7 @@ menu:
 
 
 ### Chaining Methods
-[Alert](/kapacitor/v1.4/nodes/delete_node/#alert), [Bottom](/kapacitor/v1.4/nodes/delete_node/#bottom), [Combine](/kapacitor/v1.4/nodes/delete_node/#combine), [Count](/kapacitor/v1.4/nodes/delete_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/delete_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/delete_node/#deadman), [Default](/kapacitor/v1.4/nodes/delete_node/#default), [Delete](/kapacitor/v1.4/nodes/delete_node/#delete), [Derivative](/kapacitor/v1.4/nodes/delete_node/#derivative), [Difference](/kapacitor/v1.4/nodes/delete_node/#difference), [Distinct](/kapacitor/v1.4/nodes/delete_node/#distinct), [Elapsed](/kapacitor/v1.4/nodes/delete_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/delete_node/#eval), [First](/kapacitor/v1.4/nodes/delete_node/#first), [Flatten](/kapacitor/v1.4/nodes/delete_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/delete_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/delete_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/delete_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/delete_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/delete_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/delete_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/delete_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/delete_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/delete_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/delete_node/#last), [Log](/kapacitor/v1.4/nodes/delete_node/#log), [Max](/kapacitor/v1.4/nodes/delete_node/#max), [Mean](/kapacitor/v1.4/nodes/delete_node/#mean), [Median](/kapacitor/v1.4/nodes/delete_node/#median), [Min](/kapacitor/v1.4/nodes/delete_node/#min), [Mode](/kapacitor/v1.4/nodes/delete_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/delete_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/delete_node/#percentile), [Sample](/kapacitor/v1.4/nodes/delete_node/#sample), [Shift](/kapacitor/v1.4/nodes/delete_node/#shift), [Sideload](/kapacitor/v1.4/nodes/delete_node/#sideload), [Spread](/kapacitor/v1.4/nodes/delete_node/#spread), [StateCount](/kapacitor/v1.4/nodes/delete_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/delete_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/delete_node/#stats), [Stddev](/kapacitor/v1.4/nodes/delete_node/#stddev), [Sum](/kapacitor/v1.4/nodes/delete_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/delete_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/delete_node/#top), [Union](/kapacitor/v1.4/nodes/delete_node/#union), [Where](/kapacitor/v1.4/nodes/delete_node/#where), [Window](/kapacitor/v1.4/nodes/delete_node/#window)
+[Alert](/kapacitor/v1.4/nodes/delete_node/#alert), [Barrier](/kapacitor/v1.4/nodes/delete_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/delete_node/#bottom), [Combine](/kapacitor/v1.4/nodes/delete_node/#combine), [Count](/kapacitor/v1.4/nodes/delete_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/delete_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/delete_node/#deadman), [Default](/kapacitor/v1.4/nodes/delete_node/#default), [Delete](/kapacitor/v1.4/nodes/delete_node/#delete), [Derivative](/kapacitor/v1.4/nodes/delete_node/#derivative), [Difference](/kapacitor/v1.4/nodes/delete_node/#difference), [Distinct](/kapacitor/v1.4/nodes/delete_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/delete_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/delete_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/delete_node/#eval), [First](/kapacitor/v1.4/nodes/delete_node/#first), [Flatten](/kapacitor/v1.4/nodes/delete_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/delete_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/delete_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/delete_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/delete_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/delete_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/delete_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/delete_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/delete_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/delete_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/delete_node/#last), [Log](/kapacitor/v1.4/nodes/delete_node/#log), [Max](/kapacitor/v1.4/nodes/delete_node/#max), [Mean](/kapacitor/v1.4/nodes/delete_node/#mean), [Median](/kapacitor/v1.4/nodes/delete_node/#median), [Min](/kapacitor/v1.4/nodes/delete_node/#min), [Mode](/kapacitor/v1.4/nodes/delete_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/delete_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/delete_node/#percentile), [Sample](/kapacitor/v1.4/nodes/delete_node/#sample), [Shift](/kapacitor/v1.4/nodes/delete_node/#shift), [Sideload](/kapacitor/v1.4/nodes/delete_node/#sideload), [Spread](/kapacitor/v1.4/nodes/delete_node/#spread), [StateCount](/kapacitor/v1.4/nodes/delete_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/delete_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/delete_node/#stats), [Stddev](/kapacitor/v1.4/nodes/delete_node/#stddev), [Sum](/kapacitor/v1.4/nodes/delete_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/delete_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/delete_node/#top), [Union](/kapacitor/v1.4/nodes/delete_node/#union), [Where](/kapacitor/v1.4/nodes/delete_node/#where), [Window](/kapacitor/v1.4/nodes/delete_node/#window)
 <a id='descr'/><hr/><br/>
 ### Description
 
@@ -102,6 +102,21 @@ delete|alert()
 ```
 
 Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
+### Barrier
+
+Create a new Barrier node that emits a BarrierMessage periodically 
+
+One BarrierMessage will be emitted every period duration 
+
+
+```javascript
+delete|barrier()
+```
+
+Returns: [BarrierNode](/kapacitor/v1.4/nodes/barrier_node/)
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
@@ -306,6 +321,19 @@ delete|distinct(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
+### Ec2Autoscale
+
+Create a node that can trigger autoscale events for a ec2 autoscalegroup. 
+
+
+```javascript
+delete|ec2Autoscale()
+```
+
+Returns: [Ec2AutoscaleNode](/kapacitor/v1.4/nodes/ec2_autoscale_node/)
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 

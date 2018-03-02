@@ -9,13 +9,13 @@ menu:
     weight: 10
     parent: nodes
 ---
-### Constructor
+### Constructor 
 
 | Chaining Method | Description |
 |:---------|:---------|
 | **[alert](#descr)&nbsp;(&nbsp;)** | Create an alert node, which can trigger alerts.  |
 
-### Property methods
+### Property Methods
 
 | Setters | Description |
 |:---|:---|
@@ -28,7 +28,7 @@ menu:
 | **[email](#email)&nbsp;(&nbsp;`to`&nbsp;`...string`)** | Email the alert data.  |
 | **[exec](#exec)&nbsp;(&nbsp;`executable`&nbsp;`string`,&nbsp;`args`&nbsp;`...string`)** | Execute a command whenever an alert is triggered and pass the alert data over STDIN in JSON format.  |
 | **[flapping](#flapping)&nbsp;(&nbsp;`low`&nbsp;`float64`,&nbsp;`high`&nbsp;`float64`)** | Perform flap detection on the alerts. The method used is similar method to Nagios: https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/flapping.html  |
-| **[hipChat](#hipchat)&nbsp;(&nbsp;)** | Send the alert to HipChat. For step-by-step instructions on setting up Kapacitor with HipChat, see the [Event Handler Setup Guide] (/kapacitor/latest/guides/event-handler-setup/#hipchat-setup). To allow Kapacitor to post to HipChat, go to the URL https://www.hipchat.com/docs/apiv2 for information on how to get your room id and tokens.  |
+| **[hipChat](#hipchat)&nbsp;(&nbsp;)** | Send the alert to HipChat. For step-by-step instructions on setting up Kapacitor with HipChat, see the [Event Handler Setup Guide](https://docs.influxdata.com//kapacitor/latest/guides/event-handler-setup/#hipchat-setup). To allow Kapacitor to post to HipChat, go to the URL https://www.hipchat.com/docs/apiv2 for information on how to get your room id and tokens.  |
 | **[history](#history)&nbsp;(&nbsp;`value`&nbsp;`int64`)** | Number of previous states to remember when computing flapping levels and checking for state changes. Minimum value is 2 in order to keep track of current and previous states.  |
 | **[id](#id)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Template for constructing a unique ID for a given alert.  |
 | **[idField](#idfield)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional field key to add to the data, containing the alert ID as a string.  |
@@ -52,7 +52,7 @@ menu:
 | **[stateChangesOnly](#statechangesonly)&nbsp;(&nbsp;`maxInterval`&nbsp;`...time.Duration`)** | Only sends events where the state changed. Each different alert level OK, INFO, WARNING, and CRITICAL are considered different states.  |
 | **[talk](#talk)&nbsp;(&nbsp;)** | Send the alert to Talk. To use Talk alerting you must first follow the steps to create a new incoming webhook.  |
 | **[tcp](#tcp)&nbsp;(&nbsp;`address`&nbsp;`string`)** | Send JSON alert data to a specified address over TCP.  |
-| **[telegram](#telegram)&nbsp;(&nbsp;)** | Send the alert to Telegram. For step-by-step instructions on setting up Kapacitor with Telegram, see the Event Handler Setup Guide (https://docs.influxdata.com//kapacitor/latest/guides/event-handler-setup/#telegram-setup). To allow Kapacitor to post to Telegram,  |
+| **[telegram](#telegram)&nbsp;(&nbsp;)** | Send the alert to Telegram. For step-by-step instructions on setting up Kapacitor with Telegram, see the [Event Handler Setup Guide](https://docs.influxdata.com//kapacitor/latest/guides/event-handler-setup/#telegram-setup). To allow Kapacitor to post to Telegram,  |
 | **[topic](#topic)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Topic specifies the name of an alert topic to which, alerts will be published. Alert handlers can be configured per topic, see the API documentation.  |
 | **[victorOps](#victorops)&nbsp;(&nbsp;)** | Send alert to VictorOps. To use VictorOps alerting you must first enable the 'Alert Ingestion API' in the 'Integrations' section of VictorOps. Then place the API key from the URL into the 'victorops' section of the Kapacitor configuration.  |
 | **[warn](#warn)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for the WARNING alert level. An empty value indicates the level is invalid and is skipped.  |
@@ -60,62 +60,60 @@ menu:
 
 
 
-### Chaining methods
-
-[Alert](/kapacitor/v1.4/nodes/alert_node/#alert), [Bottom](/kapacitor/v1.4/nodes/alert_node/#bottom), [Combine](/kapacitor/v1.4/nodes/alert_node/#combine), [Count](/kapacitor/v1.4/nodes/alert_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/alert_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/alert_node/#deadman), [Default](/kapacitor/v1.4/nodes/alert_node/#default), [Delete](/kapacitor/v1.4/nodes/alert_node/#delete), [Derivative](/kapacitor/v1.4/nodes/alert_node/#derivative), [Difference](/kapacitor/v1.4/nodes/alert_node/#difference), [Distinct](/kapacitor/v1.4/nodes/alert_node/#distinct), [Elapsed](/kapacitor/v1.4/nodes/alert_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/alert_node/#eval), [First](/kapacitor/v1.4/nodes/alert_node/#first), [Flatten](/kapacitor/v1.4/nodes/alert_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/alert_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/alert_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/alert_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/alert_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/alert_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/alert_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/alert_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/alert_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/alert_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/alert_node/#last), [Max](/kapacitor/v1.4/nodes/alert_node/#max), [Mean](/kapacitor/v1.4/nodes/alert_node/#mean), [Median](/kapacitor/v1.4/nodes/alert_node/#median), [Min](/kapacitor/v1.4/nodes/alert_node/#min), [Mode](/kapacitor/v1.4/nodes/alert_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/alert_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/alert_node/#percentile), [Sample](/kapacitor/v1.4/nodes/alert_node/#sample), [Shift](/kapacitor/v1.4/nodes/alert_node/#shift), [Sideload](/kapacitor/v1.4/nodes/alert_node/#sideload), [Spread](/kapacitor/v1.4/nodes/alert_node/#spread), [StateCount](/kapacitor/v1.4/nodes/alert_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/alert_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/alert_node/#stats), [Stddev](/kapacitor/v1.4/nodes/alert_node/#stddev), [Sum](/kapacitor/v1.4/nodes/alert_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/alert_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/alert_node/#top), [Union](/kapacitor/v1.4/nodes/alert_node/#union), [Where](/kapacitor/v1.4/nodes/alert_node/#where), [Window](/kapacitor/v1.4/nodes/alert_node/#window)
-
+### Chaining Methods
+[Alert](/kapacitor/v1.4/nodes/alert_node/#alert), [Barrier](/kapacitor/v1.4/nodes/alert_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/alert_node/#bottom), [Combine](/kapacitor/v1.4/nodes/alert_node/#combine), [Count](/kapacitor/v1.4/nodes/alert_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/alert_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/alert_node/#deadman), [Default](/kapacitor/v1.4/nodes/alert_node/#default), [Delete](/kapacitor/v1.4/nodes/alert_node/#delete), [Derivative](/kapacitor/v1.4/nodes/alert_node/#derivative), [Difference](/kapacitor/v1.4/nodes/alert_node/#difference), [Distinct](/kapacitor/v1.4/nodes/alert_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/alert_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/alert_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/alert_node/#eval), [First](/kapacitor/v1.4/nodes/alert_node/#first), [Flatten](/kapacitor/v1.4/nodes/alert_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/alert_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/alert_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/alert_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/alert_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/alert_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/alert_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/alert_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/alert_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/alert_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/alert_node/#last), [Max](/kapacitor/v1.4/nodes/alert_node/#max), [Mean](/kapacitor/v1.4/nodes/alert_node/#mean), [Median](/kapacitor/v1.4/nodes/alert_node/#median), [Min](/kapacitor/v1.4/nodes/alert_node/#min), [Mode](/kapacitor/v1.4/nodes/alert_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/alert_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/alert_node/#percentile), [Sample](/kapacitor/v1.4/nodes/alert_node/#sample), [Shift](/kapacitor/v1.4/nodes/alert_node/#shift), [Sideload](/kapacitor/v1.4/nodes/alert_node/#sideload), [Spread](/kapacitor/v1.4/nodes/alert_node/#spread), [StateCount](/kapacitor/v1.4/nodes/alert_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/alert_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/alert_node/#stats), [Stddev](/kapacitor/v1.4/nodes/alert_node/#stddev), [Sum](/kapacitor/v1.4/nodes/alert_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/alert_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/alert_node/#top), [Union](/kapacitor/v1.4/nodes/alert_node/#union), [Where](/kapacitor/v1.4/nodes/alert_node/#where), [Window](/kapacitor/v1.4/nodes/alert_node/#window)
 <a id='descr'/><hr/><br/>
 ### Description
 
-An [AlertNode](/kapacitor/v1.4/nodes/alert_node/) can trigger an event of varying severity levels,
-and pass the event to alert handlers. The criteria for triggering
-an alert is specified via a [lambda expression](/kapacitor/latest/tick/expr/).
-See [AlertNode.Info,](/kapacitor/v1.4/nodes/alert_node/#info) [AlertNode.Warn,](/kapacitor/v1.4/nodes/alert_node/#warn) and [AlertNode.Crit](/kapacitor/v1.4/nodes/alert_node/#crit) below.
+An [AlertNode](/kapacitor/v1.4/nodes/alert_node/) can trigger an event of varying severity levels, 
+and pass the event to alert handlers. The criteria for triggering 
+an alert is specified via a [lambda expression](/kapacitor/latest/tick/expr/). 
+See [AlertNode.Info,](/kapacitor/v1.4/nodes/alert_node/#info) [AlertNode.Warn,](/kapacitor/v1.4/nodes/alert_node/#warn) and [AlertNode.Crit](/kapacitor/v1.4/nodes/alert_node/#crit) below. 
 
-Different event handlers can be configured for each [AlertNode.](/kapacitor/v1.4/nodes/alert_node/)
-Some handlers like Email, HipChat, Sensu, Slack, OpsGenie, VictorOps, PagerDuty, Telegram and Talk have a configuration
-option 'global' that indicates that all alerts implicitly use the handler.
+Different event handlers can be configured for each [AlertNode.](/kapacitor/v1.4/nodes/alert_node/) 
+Some handlers like Email, HipChat, Sensu, Slack, OpsGenie, VictorOps, PagerDuty, Telegram and Talk have a configuration 
+option 'global' that indicates that all alerts implicitly use the handler. 
 
-Available event handlers:
+Available event handlers: 
 
-* log -- log alert data to file.
-* post -- HTTP POST data to a specified URL.
-* tcp -- Send data to a specified address via raw TCP.
-* email -- Send and email with alert data.
-* exec -- Execute a command passing alert data over STDIN.
-* HipChat -- Post alert message to HipChat room.
-* Alerta -- Post alert message to Alerta.
-* Sensu -- Post alert message to Sensu client.
-* Slack -- Post alert message to Slack channel.
-* SNMPTraps -- Trigger SNMP traps.
-* OpsGenie -- Send alert to OpsGenie.
-* VictorOps -- Send alert to VictorOps.
-* PagerDuty -- Send alert to PagerDuty.
-* Pushover -- Send alert to Pushover.
-* Talk -- Post alert message to Talk client.
-* Telegram -- Post alert message to Telegram client.
-* MQTT -- Post alert message to MQTT.
+* log -- log alert data to file. 
+* post -- HTTP POST data to a specified URL. 
+* tcp -- Send data to a specified address via raw TCP. 
+* email -- Send and email with alert data. 
+* exec -- Execute a command passing alert data over STDIN. 
+* HipChat -- Post alert message to HipChat room. 
+* Alerta -- Post alert message to Alerta. 
+* Sensu -- Post alert message to Sensu client. 
+* Slack -- Post alert message to Slack channel. 
+* SNMPTraps -- Trigger SNMP traps. 
+* OpsGenie -- Send alert to OpsGenie. 
+* VictorOps -- Send alert to VictorOps. 
+* PagerDuty -- Send alert to PagerDuty. 
+* Pushover -- Send alert to Pushover. 
+* Talk -- Post alert message to Talk client. 
+* Telegram -- Post alert message to Telegram client. 
+* MQTT -- Post alert message to MQTT. 
 
-See below for more details on configuring each handler.
+See below for more details on configuring each handler. 
 
-Each event that gets sent to a handler contains the following alert data:
+Each event that gets sent to a handler contains the following alert data: 
 
-* ID -- the ID of the alert, user defined.
-* Message -- the alert message, user defined.
-* Details -- the alert details, user defined HTML content.
-* Time -- the time the alert occurred.
-* Duration -- the duration of the alert in nanoseconds.
-* Level -- one of OK, INFO, WARNING or CRITICAL.
-* Data -- influxql.Result containing the data that triggered the alert.
+* ID -- the ID of the alert, user defined. 
+* Message -- the alert message, user defined. 
+* Details -- the alert details, user defined HTML content. 
+* Time -- the time the alert occurred. 
+* Duration -- the duration of the alert in nanoseconds. 
+* Level -- one of OK, INFO, WARNING or CRITICAL. 
+* Data -- influxql.Result containing the data that triggered the alert. 
 
-Events are sent to handlers if the alert is in a state other than 'OK'
-or the alert just changed to the 'OK' state from a non 'OK' state (a.k.a. the alert recovered).
-Using the [AlertNode.StateChangesOnly](/kapacitor/v1.4/nodes/alert_node/#statechangesonly) property events will only be sent to handlers
-if the alert changed state.
+Events are sent to handlers if the alert is in a state other than 'OK' 
+or the alert just changed to the 'OK' state from a non 'OK' state (a.k.a. the alert recovered). 
+Using the [AlertNode.StateChangesOnly](/kapacitor/v1.4/nodes/alert_node/#statechangesonly) property events will only be sent to handlers 
+if the alert changed state. 
 
-It is valid to configure multiple alert handlers, even with the same type.
+It is valid to configure multiple alert handlers, even with the same type. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -134,15 +132,15 @@ Example:
 ```
 
 
-Each expression maintains its own state.
-The order of execution for the expressions is not considered to be deterministic.
-For each point an expression may or may not be evaluated.
-If no expression is true, then the alert is considered to be in the OK state.
+Each expression maintains its own state. 
+The order of execution for the expressions is not considered to be deterministic. 
+For each point an expression may or may not be evaluated. 
+If no expression is true then the alert is considered to be in the OK state. 
 
-Kapacitor supports alert reset expressions.
-This way when an alert enters a state, it can only be lowered in severity if its reset expression evaluates to true.
+Kapacitor supports alert reset expressions. 
+This way when an alert enters a state, it can only be lowered in severity if its reset expression evaluates to true. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -160,18 +158,18 @@ Example:
            .critReset(lambda: "value" < 70)
 ```
 
-For example given the following values:
-61 73 64 85 62 56 47
-The corresponding alert states are:
-INFO WARNING WARNING CRITICAL INFO INFO OK
+For example given the following values: 
+61 73 64 85 62 56 47 
+The corresponding alert states are: 
+INFO WARNING WARNING CRITICAL INFO INFO OK 
 
-Available statistics:
+Available Statistics: 
 
-* alerts_triggered -- Total number of alerts triggered
-* oks_triggered -- Number of OK alerts triggered
-* infos_triggered -- Number of informational (`.info`) alerts triggered
-* warns_triggered -- Number of warning (`.warn`) alerts triggered
-* crits_triggered -- Number of critical (`crit`) alerts triggered
+* alerts_triggered -- Total number of alerts triggered 
+* oks_triggered -- Number of OK alerts triggered 
+* infos_triggered -- Number of Info alerts triggered 
+* warns_triggered -- Number of Warn alerts triggered 
+* crits_triggered -- Number of Crit alerts triggered 
 
 
 
@@ -187,9 +185,9 @@ Property methods are marked using the `.` operator.
 
 ### Alerta
 
-Send the alert to Alerta.
+Send the alert to Alerta. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -201,13 +199,13 @@ Example:
       origin = "Kapacitor"
 ```
 
-In order to not post a message every alert interval
-use [AlertNode.StateChangesOnly](/kapacitor/v1.4/nodes/alert_node/#statechangesonly) so that only events
-where the alert changed state are sent to Alerta.
+In order to not post a message every alert interval 
+use [AlertNode.StateChangesOnly](/kapacitor/v1.4/nodes/alert_node/#statechangesonly) so that only events 
+where the alert changed state are sent to Alerta. 
 
-Send alerts to Alerta. The resource and event properties are required.
+Send alerts to Alerta. The resource and event properties are required. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -218,9 +216,9 @@ Example:
                  .event('Something went wrong')
 ```
 
-Alerta also accepts optional alert information.
+Alerta also accepts optional alert information. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -234,7 +232,7 @@ Example:
                  .timeout(5m)
 ```
 
-NOTE: Alerta cannot be configured globally because of its required properties.
+NOTE: Alerta cannot be configured globally because of its required properties. 
 
 
 ```javascript
@@ -243,11 +241,11 @@ alert.alerta()
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-#### Alerta environment
+#### Alerta Environment
 
-Alerta environment.
-Can be a template and has access to the same data as the [AlertNode.Details](/kapacitor/v1.4/nodes/alert_node/#details) property.
-Default is set from the configuration.
+Alerta environment. 
+Can be a template and has access to the same data as the [AlertNode.Details](/kapacitor/v1.4/nodes/alert_node/#details) property. 
+Defaut is set from the configuration. 
 
 
 ```javascript
@@ -258,11 +256,11 @@ alert.alerta()
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-#### Alerta event
+#### Alerta Event
 
-Alerta event.
-Can be a template and has access to the same data as the idInfo property.
-Default: {{ .ID }}
+Alerta event. 
+Can be a template and has access to the same data as the idInfo property. 
+Default: {{ .ID }} 
 
 
 ```javascript
@@ -273,11 +271,11 @@ alert.alerta()
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-#### Alerta group
+#### Alerta Group
 
-Alerta group.
-Can be a template and has access to the same data as the [AlertNode.Details](/kapacitor/v1.4/nodes/alert_node/#details) property.
-Default: {{ .Group }}
+Alerta group. 
+Can be a template and has access to the same data as the [AlertNode.Details](/kapacitor/v1.4/nodes/alert_node/#details) property. 
+Default: {{ .Group }} 
 
 
 ```javascript
@@ -288,10 +286,10 @@ alert.alerta()
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-#### Alerta origin
+#### Alerta Origin
 
-Alerta origin.
-If empty, uses the origin from the configuration.
+Alerta origin. 
+If empty uses the origin from the configuration. 
 
 
 ```javascript
@@ -302,11 +300,11 @@ alert.alerta()
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-#### Alerta resource
+#### Alerta Resource
 
-Alerta resource.
-Can be a template and has access to the same data as the [AlertNode.Details](/kapacitor/v1.4/nodes/alert_node/#details) property.
-Default: {{ .Name }}
+Alerta resource. 
+Can be a template and has access to the same data as the [AlertNode.Details](/kapacitor/v1.4/nodes/alert_node/#details) property. 
+Default: {{ .Name }} 
 
 
 ```javascript
@@ -317,10 +315,10 @@ alert.alerta()
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-#### Alerta services
+#### Alerta Services
 
-List of effected services.
-If not specified defaults to the Name of the stream.
+List of effected services. 
+If not specified defaults to the Name of the stream. 
 
 
 ```javascript
@@ -331,10 +329,10 @@ alert.alerta()
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-#### Alerta timeout
+#### Alerta Timeout
 
-Alerta timeout.
-Default: 24h
+Alerta timeout. 
+Default: 24h 
 
 
 ```javascript
@@ -345,10 +343,10 @@ alert.alerta()
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-#### Alerta token
+#### Alerta Token
 
-Alerta authentication token.
-If empty, uses the token from the configuration.
+Alerta authentication token. 
+If empty uses the token from the configuration. 
 
 
 ```javascript
@@ -359,11 +357,11 @@ alert.alerta()
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-#### Alerta value
+#### Alerta Value
 
-Alerta value.
-Can be a template and has access to the same data as the [AlertNode.Details](/kapacitor/v1.4/nodes/alert_node/#details) property.
-Default is an empty string.
+Alerta value. 
+Can be a template and has access to the same data as the [AlertNode.Details](/kapacitor/v1.4/nodes/alert_node/#details) property. 
+Default is an empty string. 
 
 
 ```javascript
@@ -377,8 +375,8 @@ alert.alerta()
 
 ### All
 
-Indicates an alert should trigger only if all points in a batch match the criteria.
-Does not apply to stream alerts.
+Indicates an alert should trigger only if all points in a batch match the criteria. 
+Does not apply to stream alerts. 
 
 
 ```javascript
@@ -390,8 +388,8 @@ alert.all()
 
 ### Crit
 
-Filter expression for the CRITICAL alert level.
-An empty value indicates the level is invalid and is skipped.
+Filter expression for the CRITICAL alert level. 
+An empty value indicates the level is invalid and is skipped. 
 
 
 ```javascript
@@ -403,7 +401,7 @@ alert.crit(value ast.LambdaNode)
 
 ### CritReset
 
-Filter expression for reseting the CRITICAL alert level to lower level.
+Filter expression for reseting the CRITICAL alert level to lower level. 
 
 
 ```javascript
@@ -415,21 +413,21 @@ alert.critReset(value ast.LambdaNode)
 
 ### Details
 
-Template for constructing a detailed HTML message for the alert.
-The same template data is available as the [AlertNode.Message](/kapacitor/v1.4/nodes/alert_node/#message) property,
-in addition to a Message field that contains the rendered Message value.
+Template for constructing a detailed HTML message for the alert. 
+The same template data is available as the [AlertNode.Message](/kapacitor/v1.4/nodes/alert_node/#message) property, 
+in addition to a Message field that contains the rendered Message value. 
 
-The intent is that the Message property be a single line summary while the
-Details property is a more detailed message possibly spanning multiple lines,
-and containing HTML formatting.
+The intent is that the Message property be a single line summary while the 
+Details property is a more detailed message possibly spanning multiple lines, 
+and containing HTML formatting. 
 
-This template is rendered using the html/template package in Go so that
-safe and valid HTML can be generated.
+This template is rendered using the html/template package in Go so that 
+safe and valid HTML can be generated. 
 
-The `json` method is available within the template to convert any variable to a valid
-JSON string.
+The `json` method is available within the template to convert any variable to a valid 
+JSON string. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -443,7 +441,7 @@ Value: {{ index .Fields "value" }}
        .email()
 ```
 
-Default: {{ json . }}
+Default: {{ json . }} 
 
 
 ```javascript
@@ -455,8 +453,8 @@ alert.details(value string)
 
 ### DurationField
 
-Optional field key to add the alert duration to the data.
-The duration is always in units of nanoseconds.
+Optional field key to add the alert duration to the data. 
+The duration is always in units of nanoseconds. 
 
 
 ```javascript
@@ -468,18 +466,18 @@ alert.durationField(value string)
 
 ### Email
 
-Email the alert data.
+Email the alert data. 
 
-If the To list is empty, the To addresses from the configuration are used.
-The email subject is the [AlertNode.Message](/kapacitor/v1.4/nodes/alert_node/#message) property.
-The email body is the [AlertNode.Details](/kapacitor/v1.4/nodes/alert_node/#details) property.
-The emails are sent as HTML emails and so the body can contain html markup.
+If the To list is empty, the To addresses from the configuration are used. 
+The email subject is the [AlertNode.Message](/kapacitor/v1.4/nodes/alert_node/#message) property. 
+The email body is the [AlertNode.Details](/kapacitor/v1.4/nodes/alert_node/#details) property. 
+The emails are sent as HTML emails and so the body can contain html markup. 
 
-If the 'smtp' section in the configuration has the option: global = true
-then all alerts are sent via email without the need to explicitly state it
-in the TICKscript.
+If the 'smtp' section in the configuration has the option: global = true 
+then all alerts are sent via email without the need to explicitly state it 
+in the TICKscript. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -496,9 +494,9 @@ Value: {{ index .Fields "value" }}
        .email()
 ```
 
-Send an email with custom subject and body.
+Send an email with custom subject and body. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -515,7 +513,7 @@ Example:
        state-changes-only =  true
 ```
 
-Example:
+Example: 
 
 
 ```javascript
@@ -523,7 +521,7 @@ Example:
          |alert()
 ```
 
-Send email to 'oncall@example.com' from 'kapacitor@example.com'
+Send email to 'oncall@example.com' from 'kapacitor@example.com' 
 
 
 
@@ -533,13 +531,13 @@ alert.email(to ...string)
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-#### Email to
+#### Email To
 
-Define the To addresses for the email alert.
-Multiple calls append to the existing list of addresses.
-If empty, uses the addresses from the configuration.
+Define the To addresses for the email alert. 
+Multiple calls append to the existing list of addresses. 
+If empty uses the addresses from the configuration. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -558,9 +556,9 @@ Value: {{ index .Fields "value" }}
          .to('support@example.com')
 ```
 
-All three email addresses will receive the alert message.
+All three email addresses will receive the alert message. 
 
-Passing addresses to the `email` property directly or using the `email.to` property is the same.
+Passing addresses to the `email` property directly or using the `email.to` property is the same. 
 
 
 ```javascript
@@ -574,7 +572,7 @@ alert.email(to ...string)
 
 ### Exec
 
-Execute a command whenever an alert is triggered and pass the alert data over STDIN in JSON format.
+Execute a command whenever an alert is triggered and pass the alert data over STDIN in JSON format. 
 
 
 ```javascript
@@ -586,18 +584,18 @@ alert.exec(executable string, args ...string)
 
 ### Flapping
 
-Perform flap detection on the alerts.
-The method used is similar method to Nagios:
-https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/flapping.html
+Perform flap detection on the alerts. 
+The method used is similar method to Nagios: 
+https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/flapping.html 
 
-Each different alerting level is considered a different state.
-The low and high thresholds are inverted thresholds of a percentage of state changes.
-Meaning that if the percentage of state changes goes above the `high`
-threshold, the alert enters a flapping state. The alert remains in the flapping state
-until the percentage of state changes goes below the `low` threshold.
-Typical values are low: 0.25 and high: 0.5. The percentage values represent the number state changes
-over the total possible number of state changes. A percentage change of 0.5 means that the alert changed
-state in half of the recorded history, and remained the same in the other half of the history.
+Each different alerting level is considered a different state. 
+The low and high thresholds are inverted thresholds of a percentage of state changes. 
+Meaning that if the percentage of state changes goes above the `high` 
+threshold, the alert enters a flapping state. The alert remains in the flapping state 
+until the percentage of state changes goes below the `low` threshold. 
+Typical values are low: 0.25 and high: 0.5. The percentage values represent the number state changes 
+over the total possible number of state changes. A percentage change of 0.5 means that the alert changed 
+state in half of the recorded history, and remained the same in the other half of the history. 
 
 
 ```javascript
@@ -609,13 +607,13 @@ alert.flapping(low float64, high float64)
 
 ### HipChat
 
-Send the alert to HipChat.
-For step-by-step instructions on setting up Kapacitor with HipChat, see the Event Handler Setup Guide (https://docs.influxdata.com//kapacitor/latest/guides/event-handler-setup/#hipchat-setup).
-To allow Kapacitor to post to HipChat,
-go to the URL https://www.hipchat.com/docs/apiv2 for
-information on how to get your room id and tokens.
+Send the alert to HipChat. 
+For step-by-step instructions on setting up Kapacitor with HipChat, see the [Event Handler Setup Guide](https://docs.influxdata.com//kapacitor/latest/guides/event-handler-setup/#hipchat-setup). 
+To allow Kapacitor to post to HipChat, 
+go to the URL https://www.hipchat.com/docs/apiv2 for 
+information on how to get your room id and tokens. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -626,11 +624,11 @@ Example:
       token = "9hiWoDOZ9IbmHsOTeST123ABciWTIqXQVFDo63h9"
 ```
 
-In order to not post a message every alert interval
-use [AlertNode.StateChangesOnly](/kapacitor/v1.4/nodes/alert_node/#statechangesonly) so that only events
-where the alert changed state are posted to the room.
+In order to not post a message every alert interval 
+use [AlertNode.StateChangesOnly](/kapacitor/v1.4/nodes/alert_node/#statechangesonly) so that only events 
+where the alert changed state are posted to the room. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -639,9 +637,9 @@ Example:
              .hipChat()
 ```
 
-Send alerts to HipChat room in the configuration file.
+Send alerts to HipChat room in the configuration file. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -651,14 +649,14 @@ Example:
              .room('Kapacitor')
 ```
 
-Send alerts to HipChat room 'Kapacitor'
+Send alerts to HipChat room 'Kapacitor' 
 
 
-If the 'hipchat' section in the configuration has the option: global = true
-then all alerts are sent to HipChat without the need to explicitly state it
-in the TICKscript.
+If the 'hipchat' section in the configuration has the option: global = true 
+then all alerts are sent to HipChat without the need to explicitly state it 
+in the TICKscript. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -671,7 +669,7 @@ Example:
       state-changes-only = true
 ```
 
-Example:
+Example: 
 
 
 ```javascript
@@ -679,7 +677,7 @@ Example:
          |alert()
 ```
 
-Send alert to HipChat using default room 'Test Room'.
+Send alert to HipChat using default room 'Test Room'. 
 
 
 ```javascript
@@ -688,10 +686,10 @@ alert.hipChat()
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-#### HipChat room
+#### HipChat Room
 
-HipChat room in which to post messages.
-If empty, uses the channel from the configuration.
+HipChat room in which to post messages. 
+If empty uses the channel from the configuration. 
 
 
 ```javascript
@@ -702,10 +700,10 @@ alert.hipChat()
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-#### HipChat token
+#### HipChat Token
 
-HipChat authentication token.
-If empty, uses the token from the configuration.
+HipChat authentication token. 
+If empty uses the token from the configuration. 
 
 
 ```javascript
@@ -719,11 +717,11 @@ alert.hipChat()
 
 ### History
 
-Number of previous states to remember when computing flapping levels and
-checking for state changes.
-Minimum value is 2 in order to keep track of current and previous states.
+Number of previous states to remember when computing flapping levels and 
+checking for state changes. 
+Minimum value is 2 in order to keep track of current and previous states. 
 
-Default: 21
+Default: 21 
 
 
 ```javascript
@@ -735,19 +733,19 @@ alert.history(value int64)
 
 ### Id
 
-Template for constructing a unique ID for a given alert.
+Template for constructing a unique ID for a given alert. 
 
-Available template data:
+Available template data: 
 
-* Name -- Measurement name.
-* TaskName -- The name of the task
-* Group -- Concatenation of all GROUP BY tags of the form [key=value,]+.
-If no `.groupBy` is performed, then it is equal to literal `'nil'`.
-* Tags -- Map of tags. Use ``'{{ index .Tags "key" }}'`` to get a specific tag value.
-* ServerInfo -- Information about the running server. Available nested fields are:
-Hostname, ClusterID, and ServerID.
+* Name -- Measurement name. 
+* TaskName -- The name of the task 
+* Group -- Concatenation of all group-by tags of the form [key=value,]+. 
+If no groupBy is performed equal to literal 'nil'. 
+* Tags -- Map of tags. Use '{{ index .Tags "key" }}' to get a specific tag value. 
+* ServerInfo -- Information about the running server. Available nested fields are: 
+Hostname, ClusterID and ServerID. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -759,9 +757,9 @@ Example:
            .id('kapacitor/{{ .Name }}/{{ .Group }}')
 ```
 
-ID: kapacitor/cpu/cpu=cpu0,
+ID: kapacitor/cpu/cpu=cpu0, 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -773,9 +771,9 @@ Example:
            .id('kapacitor/{{ index .Tags "service" }}')
 ```
 
-ID: kapacitor/authentication
+ID: kapacitor/authentication 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -787,9 +785,9 @@ Example:
            .id('kapacitor/{{ index .Tags "service" }}/{{ index .Tags "host" }}')
 ```
 
-ID: kapacitor/authentication/auth001.example.com
+ID: kapacitor/authentication/auth001.example.com 
 
-Default: {{ .Name }}:{{ .Group }}
+Default: {{ .Name }}:{{ .Group }} 
 
 
 ```javascript
@@ -801,7 +799,7 @@ alert.id(value string)
 
 ### IdField
 
-Optional field key to add to the data, containing the alert ID as a string.
+Optional field key to add to the data, containing the alert ID as a string. 
 
 
 ```javascript
@@ -813,7 +811,7 @@ alert.idField(value string)
 
 ### IdTag
 
-Optional tag key to use when tagging the data with the alert ID.
+Optional tag key to use when tagging the data with the alert ID. 
 
 
 ```javascript
@@ -825,8 +823,8 @@ alert.idTag(value string)
 
 ### Info
 
-Filter expression for the INFO alert level.
-An empty value indicates the level is invalid and is skipped.
+Filter expression for the INFO alert level. 
+An empty value indicates the level is invalid and is skipped. 
 
 
 ```javascript
@@ -838,7 +836,7 @@ alert.info(value ast.LambdaNode)
 
 ### InfoReset
 
-Filter expression for reseting the INFO alert level to lower level.
+Filter expression for reseting the INFO alert level to lower level. 
 
 
 ```javascript
@@ -850,7 +848,7 @@ alert.infoReset(value ast.LambdaNode)
 
 ### LevelField
 
-Optional field key to add to the data, containing the alert level as a string.
+Optional field key to add to the data, containing the alert level as a string. 
 
 
 ```javascript
@@ -862,7 +860,7 @@ alert.levelField(value string)
 
 ### LevelTag
 
-Optional tag key to use when tagging the data with the alert level.
+Optional tag key to use when tagging the data with the alert level. 
 
 
 ```javascript
@@ -874,10 +872,10 @@ alert.levelTag(value string)
 
 ### Log
 
-Log JSON alert data to file. One event per line.
-Must specify the absolute path to the log file.
-It will be created if it does not exist.
-Example:
+Log JSON alert data to file. One event per line. 
+Must specify the absolute path to the log file. 
+It will be created if it does not exist. 
+Example: 
 
 
 ```javascript
@@ -886,7 +884,7 @@ Example:
              .log('/tmp/alert')
 ```
 
-Example:
+Example: 
 
 
 ```javascript
@@ -906,8 +904,8 @@ alert.log(filepath string)
 
 #### Log Mode
 
-File's mode and permissions, default is 0600
-NOTE: The leading 0 is required to interpret the value as an octal integer.
+File's mode and permissions, default is 0600 
+NOTE: The leading 0 is required to interpret the value as an octal integer. 
 
 
 ```javascript
@@ -921,22 +919,22 @@ alert.log(filepath string)
 
 ### Message
 
-Template for constructing a meaningful message for the alert.
+Template for constructing a meaningful message for the alert. 
 
-Available template data:
+Available template data: 
 
-* ID -- The ID of the alert.
-* Name -- Measurement name.
-* TaskName -- The name of the task
-* Group -- Concatenation of all GROUP BY tags of the form [key=value,]+.
-If no groupBy is performed equal to literal 'nil'.
-* Tags -- Map of tags. Use `{{ index .Tags "key" }}` to get a specific tag value.
-* Level -- Alert level. Valid values are: INFO, WARNING, CRITICAL.
-* Fields -- Map of fields. Use `{{ index .Fields "key" }}` to get a specific field value.
-* Time -- The time of the point that triggered the event.
-  - Duration -- The duration of the alert. The duration is printed in user-friendly format (e.g., `1000000000ns` is printed as `1s`).
+* ID -- The ID of the alert. 
+* Name -- Measurement name. 
+* TaskName -- The name of the task 
+* Group -- Concatenation of all group-by tags of the form [key=value,]+. 
+If no groupBy is performed equal to literal 'nil'. 
+* Tags -- Map of tags. Use '{{ index .Tags "key" }}' to get a specific tag value. 
+* Level -- Alert Level, one of: INFO, WARNING, CRITICAL. 
+* Fields -- Map of fields. Use '{{ index .Fields "key" }}' to get a specific field value. 
+* Time -- The time of the point that triggered the event. 
+* Duration -- The duration of the alert. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -949,9 +947,9 @@ Example:
            .message('{{ .ID }} is {{ .Level}} value: {{ index .Fields "value" }}')
 ```
 
-Message: authentication/auth001.example.com is CRITICAL value:42
+Message: authentication/auth001.example.com is CRITICAL value:42 
 
-Default: {{ .ID }} is {{ .Level }}
+Default: {{ .ID }} is {{ .Level }} 
 
 
 ```javascript
@@ -963,7 +961,7 @@ alert.message(value string)
 
 ### MessageField
 
-Optional field key to add to the data, containing the alert message.
+Optional field key to add to the data, containing the alert message. 
 
 
 ```javascript
@@ -975,7 +973,7 @@ alert.messageField(value string)
 
 ### Mqtt
 
-Send alert to an MQTT broker.
+Send alert to an MQTT broker 
 
 
 ```javascript
@@ -986,8 +984,8 @@ alert.mqtt(topic string)
 
 #### Mqtt BrokerName
 
-`BrokerName` is the name of the configured MQTT broker to use when publishing the alert.
-If empty, this defaults to the configured default broker.
+BrokerName is the name of the configured MQTT broker to use when publishing the alert. 
+If empty defaults to the configured default broker. 
 
 
 ```javascript
@@ -1000,13 +998,13 @@ alert.mqtt(topic string)
 
 #### Mqtt Qos
 
-The Qos that will be used to deliver the alerts.
+The Qos that will be used to deliver the alerts 
 
-Valid values are:
+Valid values are: 
 
-* 0 - At most once delivery
-* 1 - At least once delivery
-* 2 - Exactly once delivery
+* 0 - At most once delivery 
+* 1 - At least once delivery 
+* 2 - Exactly once delivery 
 
 
 
@@ -1020,8 +1018,8 @@ alert.mqtt(topic string)
 
 #### Mqtt Retained
 
-Retained indicates whether this alert should be delivered to
-clients that were not connected to the broker at the time of the alert.
+Retained indicates whether this alert should be delivered to 
+clients that were not connected to the broker at the time of the alert. 
 
 
 ```javascript
@@ -1034,7 +1032,7 @@ alert.mqtt(topic string)
 
 #### Mqtt Topic
 
-The MQTT topic where alerts will be dispatched to.
+The topic where alerts will be dispatched to 
 
 
 ```javascript
@@ -1048,7 +1046,7 @@ alert.mqtt(topic string)
 
 ### NoRecoveries
 
-Do not send recovery alerts.
+Do not send recovery alerts. 
 
 
 ```javascript
@@ -1060,12 +1058,12 @@ alert.noRecoveries()
 
 ### OpsGenie
 
-Send alert to OpsGenie.
-To use OpsGenie alerting you must first enable the 'Alert Ingestion API'
-in the 'Integrations' section of OpsGenie.
-Then place the API key from the URL into the `[opsgenie]`` section of the Kapacitor configuration.
+Send alert to OpsGenie. 
+To use OpsGenie alerting you must first enable the 'Alert Ingestion API' 
+in the 'Integrations' section of OpsGenie. 
+Then place the API key from the URL into the 'opsgenie' section of the Kapacitor configuration. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1076,9 +1074,9 @@ Example:
       recipients = ["jim", "bob"]
 ```
 
-With the correct configuration you can now use OpsGenie in TICKscripts.
+With the correct configuration you can now use OpsGenie in TICKscripts. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1087,9 +1085,9 @@ Example:
              .opsGenie()
 ```
 
-Send alerts to OpsGenie using the teams and recipients in the configuration file.
+Send alerts to OpsGenie using the teams and recipients in the configuration file. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1099,13 +1097,13 @@ Example:
              .teams('team_rocket','team_test')
 ```
 
-Send alerts to OpsGenie with team set to 'team_rocket' and 'team_test'.
+Send alerts to OpsGenie with team set to 'team_rocket' and 'team_test' 
 
-If the `[opsgenie]` section in the configuration has the option `global = true`,
-then all alerts are sent to OpsGenie without the need to explicitly state it
-in the TICKscript.
+If the 'opsgenie' section in the configuration has the option: global = true 
+then all alerts are sent to OpsGenie without the need to explicitly state it 
+in the TICKscript. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1116,7 +1114,7 @@ Example:
       global = true
 ```
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1124,7 +1122,7 @@ Example:
          |alert()
 ```
 
-Send alert to OpsGenie using the default recipients, found in the configuration.
+Send alert to OpsGenie using the default recipients, found in the configuration. 
 
 
 ```javascript
@@ -1135,7 +1133,7 @@ alert.opsGenie()
 
 #### OpsGenie Recipients
 
-The list of recipients to be alerted. If empty defaults to the recipients from the configuration.
+The list of recipients to be alerted. If empty defaults to the recipients from the configuration. 
 
 
 ```javascript
@@ -1148,7 +1146,7 @@ alert.opsGenie()
 
 #### OpsGenie Teams
 
-The list of teams to be alerted. If empty defaults to the teams from the configuration.
+The list of teams to be alerted. If empty defaults to the teams from the configuration. 
 
 
 ```javascript
@@ -1162,19 +1160,19 @@ alert.opsGenie()
 
 ### PagerDuty
 
-Send the alert to PagerDuty.
-To use PagerDuty alerting you must first follow the steps to enable a new 'Generic API' service.
+Send the alert to PagerDuty. 
+To use PagerDuty alerting you must first follow the steps to enable a new 'Generic API' service. 
 
-From https://developer.pagerduty.com/documentation/integration/events
+From https://developer.pagerduty.com/documentation/integration/events 
 
-1. In your account, under the Services tab, click "Add New Service".
-2. Enter a name for the service and select an escalation policy. Then, select "Generic API" for the Service Type.
-3. Click the "Add Service" button.
-4. Once the service is created, you'll be taken to the service page. On this page, you'll see the "Service key", which is needed to access the API
+1. In your account, under the Services tab, click "Add New Service". 
+2. Enter a name for the service and select an escalation policy. Then, select "Generic API" for the Service Type. 
+3. Click the "Add Service" button. 
+4. Once the service is created, you'll be taken to the service page. On this page, you'll see the "Service key", which is needed to access the API 
 
-Place the 'service key' into the 'pagerduty' section of the Kapacitor configuration as the option 'service-key'.
+Place the 'service key' into the 'pagerduty' section of the Kapacitor configuration as the option 'service-key'. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1183,9 +1181,9 @@ Example:
       service-key = "xxxxxxxxx"
 ```
 
-With the correct configuration you can now use PagerDuty in TICKscripts.
+With the correct configuration you can now use PagerDuty in TICKscripts. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1194,11 +1192,11 @@ Example:
              .pagerDuty()
 ```
 
-If the `[pagerduty]` section in the configuration has the option `global = true`,
-then all alerts are sent to PagerDuty without the need to explicitly state it
-in the TICKscript.
+If the 'pagerduty' section in the configuration has the option: global = true 
+then all alerts are sent to PagerDuty without the need to explicitly state it 
+in the TICKscript. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1208,7 +1206,7 @@ Example:
       global = true
 ```
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1216,7 +1214,7 @@ Example:
          |alert()
 ```
 
-Send alert to PagerDuty.
+Send alert to PagerDuty. 
 
 
 ```javascript
@@ -1227,8 +1225,8 @@ alert.pagerDuty()
 
 #### PagerDuty ServiceKey
 
-The service key to use for the alert.
-Defaults to the value in the configuration if empty.
+The service key to use for the alert. 
+Defaults to the value in the configuration if empty. 
 
 
 ```javascript
@@ -1242,9 +1240,9 @@ alert.pagerDuty()
 
 ### Post
 
-Send JSON alert data to a specified URL using HTTP POST method.
+HTTP POST JSON alert data to a specified URL. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1254,7 +1252,7 @@ Example:
                  .endpoint('example')
 ```
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1273,8 +1271,8 @@ alert.post(urls ...string)
 
 #### Post CaptureResponse
 
-CaptureResponse indicates that the HTTP response should be read and logged if
-the status code was not an 2xx code.
+CaptureResponse indicates that the HTTP response should be read and logged if 
+the status code was not an 2xx code. 
 
 
 ```javascript
@@ -1287,7 +1285,7 @@ alert.post(urls ...string)
 
 #### Post Endpoint
 
-Name of the endpoint to be used, as is defined in the configuration file.
+Name of the endpoint to be used, as is defined in the configuration file 
 
 
 ```javascript
@@ -1300,11 +1298,11 @@ alert.post(urls ...string)
 
 #### Post Header
 
-Set a header key and value on the post request.
-Setting the Authenticate header is not allowed from within TICKscripts
--- use the configuration file to specify sensitive headers.
+Set a header key and value on the post request. 
+Setting the Authenticate header is not allowed from within TICKscript, 
+please use the configuration file to specify sensitive headers. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1327,7 +1325,7 @@ alert.post(urls ...string)
 
 #### Post Timeout
 
-Timeout for HTTP Post
+Timeout for HTTP Post 
 
 
 ```javascript
@@ -1341,18 +1339,18 @@ alert.post(urls ...string)
 
 ### Pushover
 
-Send the alert to Pushover.
-Register your application with Pushover at
-https://pushover.net/apps/build to get a
-Pushover token.
+Send the alert to Pushover. 
+Register your application with Pushover at 
+https://pushover.net/apps/build to get a 
+Pushover token. 
 
-Alert Level Mapping:
-OK - Sends a -2 priority level.
-Info - Sends a -1 priority level.
-Warning - Sends a 0 priority level.
-Critical - Sends a 1 priority level.
+Alert Level Mapping: 
+OK - Sends a -2 priority level. 
+Info - Sends a -1 priority level. 
+Warning - Sends a 0 priority level. 
+Critical - Sends a 1 priority level. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1362,7 +1360,7 @@ Example:
       user_key = "Pushover"
 ```
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1377,7 +1375,7 @@ Example:
               .URLTitle('mytitle')
 ```
 
-Send alerts to Pushover.
+Send alerts to Pushover. 
 
 
 
@@ -1389,9 +1387,9 @@ alert.pushover()
 
 #### Pushover Device
 
-Users device name to send message directly to that device,
-rather than all of a user's devices (multiple device names may
-be separated by a comma)
+Users device name to send message directly to that device, 
+rather than all of a user's devices (multiple device names may 
+be separated by a comma) 
 
 
 ```javascript
@@ -1404,8 +1402,8 @@ alert.pushover()
 
 #### Pushover Sound
 
-The name of one of the sounds supported by the device clients to override
-the user's default sound choice.
+The name of one of the sounds supported by the device clients to override 
+the user's default sound choice 
 
 
 ```javascript
@@ -1418,7 +1416,7 @@ alert.pushover()
 
 #### Pushover Title
 
-Your message's title, otherwise your apps name is used.
+Your message's title, otherwise your apps name is used 
 
 
 ```javascript
@@ -1431,7 +1429,7 @@ alert.pushover()
 
 #### Pushover URL
 
-A supplementary URL to show with your message.
+A supplementary URL to show with your message 
 
 
 ```javascript
@@ -1444,7 +1442,7 @@ alert.pushover()
 
 #### Pushover URLTitle
 
-A title for your supplementary URL, otherwise just URL is shown.
+A title for your supplementary URL, otherwise just URL is shown 
 
 
 ```javascript
@@ -1457,10 +1455,10 @@ alert.pushover()
 
 #### Pushover UserKey
 
-User/Group key of your user (or you),
-viewable when logged into the Pushover dashboard.
-Often referred to as USER_KEY in the Pushover documentation.
-If empty, uses the user from the configuration.
+User/Group key of your user (or you), viewable when logged 
+into the Pushover dashboard. Often referred to as USER_KEY 
+in the Pushover documentation. 
+If empty uses the user from the configuration. 
 
 
 ```javascript
@@ -1474,20 +1472,20 @@ alert.pushover()
 
 ### Sensu
 
-Send the alert to Sensu.
+Send the alert to Sensu. 
 
-Example:
+Example: 
 
 
 ```javascript
     [sensu]
       enabled = true
-      addr = "10.56.4.205:3030"
+      url = "http://sensu:3030"
       source = "Kapacitor"
       handlers = ["sns","slack"]
 ```
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1496,9 +1494,9 @@ Example:
              .sensu()
 ```
 
-Send alerts to Sensu client.
+Send alerts to Sensu client. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1508,7 +1506,7 @@ Example:
              .handlers('sns','slack')
 ```
 
-Send alerts to Sensu specifying the handlers
+Send alerts to Sensu specifying the handlers 
 
 
 
@@ -1520,8 +1518,8 @@ alert.sensu()
 
 #### Sensu Handlers
 
-List of effected services.
-If not specified defaults to the Name of the stream.
+List of effected services. 
+If not specified defaults to the Name of the stream. 
 
 
 ```javascript
@@ -1534,8 +1532,8 @@ alert.sensu()
 
 #### Sensu Source
 
-Sensu source in which to post messages.
-If empty, uses the Source from the configuration.
+Sensu source in which to post messages. 
+If empty uses the Source from the configuration. 
 
 
 ```javascript
@@ -1549,13 +1547,13 @@ alert.sensu()
 
 ### Slack
 
-Send the alert to Slack.
-To allow Kapacitor to post to Slack,
-go to the URL https://slack.com/services/new/incoming-webhook
-and create a new incoming webhook and place the generated URL
-in the 'slack' configuration section.
+Send the alert to Slack. 
+To allow Kapacitor to post to Slack, 
+go to the URL https://slack.com/services/new/incoming-webhook 
+and create a new incoming webhook and place the generated URL 
+in the 'slack' configuration section. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1565,11 +1563,11 @@ Example:
       channel = "#general"
 ```
 
-In order to not post a message every alert interval
-use [AlertNode.StateChangesOnly](/kapacitor/v1.4/nodes/alert_node/#statechangesonly) so that only events
-where the alert changed state are posted to the channel.
+In order to not post a message every alert interval 
+use [AlertNode.StateChangesOnly](/kapacitor/v1.4/nodes/alert_node/#statechangesonly) so that only events 
+where the alert changed state are posted to the channel. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1578,9 +1576,9 @@ Example:
              .slack()
 ```
 
-Send alerts to Slack channel in the configuration file.
+Send alerts to Slack channel in the configuration file. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1590,9 +1588,9 @@ Example:
              .channel('#alerts')
 ```
 
-Send alerts to Slack channel '#alerts'
+Send alerts to Slack channel '#alerts' 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1602,13 +1600,13 @@ Example:
              .channel('@jsmith')
 ```
 
-Send alert to user '@jsmith'
+Send alert to user '@jsmith' 
 
-If the 'slack' section in the configuration has the option: global = true
-then all alerts are sent to Slack without the need to explicitly state it
-in the TICKscript.
+If the 'slack' section in the configuration has the option: global = true 
+then all alerts are sent to Slack without the need to explicitly state it 
+in the TICKscript. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1620,7 +1618,7 @@ Example:
       state-changes-only = true
 ```
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1628,7 +1626,7 @@ Example:
          |alert()
 ```
 
-Send alert to Slack using default channel '#general'.
+Send alert to Slack using default channel '#general'. 
 
 
 ```javascript
@@ -1639,8 +1637,8 @@ alert.slack()
 
 #### Slack Channel
 
-Slack channel in which to post messages.
-If empty, uses the Channel from the configuration.
+Slack channel in which to post messages. 
+If empty uses the channel from the configuration. 
 
 
 ```javascript
@@ -1653,8 +1651,8 @@ alert.slack()
 
 #### Slack IconEmoji
 
-IconEmoji is an emoji name surrounded in ':' characters.
-The emoji image will replace the normal user icon for the slack bot.
+IconEmoji is an emoji name surrounded in ':' characters. 
+The emoji image will replace the normal user icon for the slack bot. 
 
 
 ```javascript
@@ -1667,8 +1665,8 @@ alert.slack()
 
 #### Slack Username
 
-Username of the Slack bot.
-If empty, uses the username from the configuration.
+Username of the Slack bot. 
+If empty uses the username from the configuration. 
 
 
 ```javascript
@@ -1682,10 +1680,10 @@ alert.slack()
 
 ### SnmpTrap
 
-Send the alert using SNMP traps.
-To allow Kapacitor to post SNMP traps,
+Send the alert using SNMP traps. 
+To allow Kapacitor to post SNMP traps, 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1695,7 +1693,7 @@ Example:
       community = "public"
 ```
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1705,7 +1703,7 @@ Example:
                  .data('1.3.6.1.2.1.1.7', 'i', '{{ index .Field "value" }}')
 ```
 
-Send alerts to `target-ip:target-port` on OID '1.3.6.1.2.1.1.7'
+Send alerts to `target-ip:target-port` on OID '1.3.6.1.2.1.1.7' 
 
 
 
@@ -1717,20 +1715,20 @@ alert.snmpTrap(trapOid string)
 
 #### SnmpTrap Data
 
-Define Data for SNMP Trap alert.
-Multiple calls append to the existing list of data.
+Define Data for SNMP Trap alert. 
+Multiple calls append to the existing list of data. 
 
-Available types:
+Available types: 
 
-| Abbreviation | Datatype |
-| ------------ | -------- |
-| c | Counter |
-| i | Integer |
-| n | Null |
-| s | String |
-| t | Time ticks |
+| Abbreviation | Datatype | 
+| ------------ | -------- | 
+| c | Counter | 
+| i | Integer | 
+| n | Null | 
+| s | String | 
+| t | Time ticks | 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1756,11 +1754,11 @@ alert.snmpTrap(trapOid string)
 
 ### StateChangesOnly
 
-Only sends events where the state changed.
-Each different alert level OK, INFO, WARNING, and CRITICAL
-are considered different states.
+Only sends events where the state changed. 
+Each different alert level OK, INFO, WARNING, and CRITICAL 
+are considered different states. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1776,18 +1774,18 @@ Example:
            .slack()
 ```
 
-If the "value" is greater than 10 for a total of 60s, then
-only two events will be sent. First, when the value crosses
-the threshold, and second, when it falls back into an OK state.
-Without stateChangesOnly, the alert would have triggered 7 times:
-6 times for each 10s period where the condition was met and once more
-for the recovery.
+If the "value" is greater than 10 for a total of 60s, then 
+only two events will be sent. First, when the value crosses 
+the threshold, and second, when it falls back into an OK state. 
+Without stateChangesOnly, the alert would have triggered 7 times: 
+6 times for each 10s period where the condition was met and once more 
+for the recovery. 
 
-An optional maximum interval duration can be provided.
-An event will not be ignore (aka trigger an alert) if more than the maximum interval has elapsed
-since the last alert.
+An optional maximum interval duration can be provided. 
+An event will not be ignore (aka trigger an alert) if more than the maximum interval has elapsed 
+since the last alert. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1803,7 +1801,7 @@ Example:
            .slack()
 ```
 
-The above usage will only trigger alerts to slack on state changes or at least every 10 minutes.
+The above usage will only trigger alerts to slack on state changes or at least every 10 minutes. 
 
 
 
@@ -1816,18 +1814,18 @@ alert.stateChangesOnly(maxInterval ...time.Duration)
 
 ### Talk
 
-Send the alert to Talk.
-To use Talk alerting you must first follow the steps to create a new incoming webhook.
+Send the alert to Talk. 
+To use Talk alerting you must first follow the steps to create a new incoming webhook. 
 
-1. Go to the URL https:/account.jianliao.com/signin.
-2. Sign in with you account. under the Team tab, click "Integrations".
-3. Select "Customize service", click incoming Webhook "Add" button.
-4. After choose the topic to connect with "xxx", click "Confirm Add" button.
-5. Once the service is created, you'll see the "Generate Webhook url".
+1. Go to the URL https:/account.jianliao.com/signin. 
+2. Sign in with you account. under the Team tab, click "Integrations". 
+3. Select "Customize service", click incoming Webhook "Add" button. 
+4. After choose the topic to connect with "xxx", click "Confirm Add" button. 
+5. Once the service is created, you'll see the "Generate Webhook url". 
 
-Place the 'Generate Webhook url' into the 'Talk' section of the Kapacitor configuration as the option 'url'.
+Place the 'Generate Webhook url' into the 'Talk' section of the Kapacitor configuration as the option 'url'. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1837,7 +1835,7 @@ Example:
       author_name = "Kapacitor"
 ```
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1846,7 +1844,7 @@ Example:
              .talk()
 ```
 
-Send alerts to Talk client.
+Send alerts to Talk client. 
 
 
 
@@ -1859,7 +1857,7 @@ alert.talk()
 
 ### Tcp
 
-Send JSON alert data to a specified address over TCP.
+Send JSON alert data to a specified address over TCP. 
 
 
 ```javascript
@@ -1870,7 +1868,7 @@ alert.tcp(address string)
 
 #### Tcp Address
 
-The endpoint address.
+The endpoint address. 
 
 
 ```javascript
@@ -1884,11 +1882,11 @@ alert.tcp(address string)
 
 ### Telegram
 
-Send the alert to Telegram.
-For step-by-step instructions on setting up Kapacitor with Telegram, see the Event Handler Setup Guide (https://docs.influxdata.com//kapacitor/latest/guides/event-handler-setup/#telegram-setup).
-To allow Kapacitor to post to Telegram,
+Send the alert to Telegram. 
+For step-by-step instructions on setting up Kapacitor with Telegram, see the [Event Handler Setup Guide](https://docs.influxdata.com//kapacitor/latest/guides/event-handler-setup/#telegram-setup). 
+To allow Kapacitor to post to Telegram, 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1901,11 +1899,11 @@ Example:
 	disable-notification = false
 ```
 
-In order to not post a message every alert interval
-use [AlertNode.StateChangesOnly](/kapacitor/v1.4/nodes/alert_node/#statechangesonly) so that only events
-where the alert changed state are posted to the chat-id.
+In order to not post a message every alert interval 
+use [AlertNode.StateChangesOnly](/kapacitor/v1.4/nodes/alert_node/#statechangesonly) so that only events 
+where the alert changed state are posted to the chat-id. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1914,9 +1912,9 @@ Example:
              .telegram()
 ```
 
-Send alerts to Telegram chat-id in the configuration file.
+Send alerts to Telegram chat-id in the configuration file. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1926,13 +1924,13 @@ Example:
              .chatId('xxxxxxx')
 ```
 
-Send alerts to Telegram user/group 'xxxxxx'
+Send alerts to Telegram user/group 'xxxxxx' 
 
-If the 'telegram' section in the configuration has the option: global = true
-then all alerts are sent to Telegram without the need to explicitly state it
-in the TICKscript.
+If the 'telegram' section in the configuration has the option: global = true 
+then all alerts are sent to Telegram without the need to explicitly state it 
+in the TICKscript. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1944,7 +1942,7 @@ Example:
       state-changes-only = true
 ```
 
-Example:
+Example: 
 
 
 ```javascript
@@ -1952,7 +1950,7 @@ Example:
          |alert()
 ```
 
-Send alert to Telegram using default chat-id 'xxxxxxxx'.
+Send alert to Telegram using default chat-id 'xxxxxxxx'. 
 
 
 ```javascript
@@ -1963,8 +1961,8 @@ alert.telegram()
 
 #### Telegram ChatId
 
-Telegram user/group ID to post messages to.
-If empty, uses `chati-d` from the configuration.
+Telegram user/group ID to post messages to. 
+If empty uses the chati-d from the configuration. 
 
 
 ```javascript
@@ -1977,7 +1975,7 @@ alert.telegram()
 
 #### Telegram DisableNotification
 
-Disables the Notification. If empty, defaults to the configuration.
+Disables the Notification. If empty defaults to the configuration. 
 
 
 ```javascript
@@ -1990,7 +1988,7 @@ alert.telegram()
 
 #### Telegram DisableWebPagePreview
 
-Disables the WebPagePreview. If empty, defaults to the configuration.
+Disables the WebPagePreview. If empty defaults to the configuration. 
 
 
 ```javascript
@@ -2003,8 +2001,8 @@ alert.telegram()
 
 #### Telegram ParseMode
 
-Parse node, defaults to Markdown.
-If empty, uses the `parse-mode` from the configuration.
+Parse node, defaults to Mardown 
+If empty uses the parse-mode from the configuration. 
 
 
 ```javascript
@@ -2018,8 +2016,9 @@ alert.telegram()
 
 ### Topic
 
-Topic specifies the name of an alert topic to which alerts will be published.
-Alert handlers can be configured per topic -- see the API documentation.
+Topic specifies the name of an alert topic to which, 
+alerts will be published. 
+Alert handlers can be configured per topic, see the API documentation. 
 
 
 ```javascript
@@ -2031,12 +2030,12 @@ alert.topic(value string)
 
 ### VictorOps
 
-Send alert to VictorOps.
-To use VictorOps alerting you must first enable the 'Alert Ingestion API'
-in the 'Integrations' section of VictorOps.
-Then place the API key from the URL into the 'victorops' section of the Kapacitor configuration.
+Send alert to VictorOps. 
+To use VictorOps alerting you must first enable the 'Alert Ingestion API' 
+in the 'Integrations' section of VictorOps. 
+Then place the API key from the URL into the 'victorops' section of the Kapacitor configuration. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -2046,9 +2045,9 @@ Example:
       routing-key = "everyone"
 ```
 
-With the correct configuration you can now use VictorOps in TICKscripts.
+With the correct configuration you can now use VictorOps in TICKscripts. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -2057,9 +2056,9 @@ Example:
              .victorOps()
 ```
 
-Send alerts to VictorOps using the routing key (`routing-key)`) specified in the configuration file.
+Send alerts to VictorOps using the routing key in the configuration file. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -2069,13 +2068,13 @@ Example:
              .routingKey('team_rocket')
 ```
 
-Send alerts to VictorOps with routing key 'team_rocket'
+Send alerts to VictorOps with routing key 'team_rocket' 
 
-If the VictorOps section (`victorops`) in the configuration file has the option `global = true`,
-then all alerts are sent to VictorOps without the need to explicitly state it
-in the TICKscript.
+If the 'victorops' section in the configuration has the option: global = true 
+then all alerts are sent to VictorOps without the need to explicitly state it 
+in the TICKscript. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -2086,7 +2085,7 @@ Example:
       global = true
 ```
 
-Example:
+Example: 
 
 
 ```javascript
@@ -2094,7 +2093,7 @@ Example:
          |alert()
 ```
 
-Send alert to VictorOps using the default routing key, found in the configuration.
+Send alert to VictorOps using the default routing key, found in the configuration. 
 
 
 ```javascript
@@ -2105,8 +2104,8 @@ alert.victorOps()
 
 #### VictorOps RoutingKey
 
-The routing key to use for the alert.
-If empty, defaults to the value in the configuration.
+The routing key to use for the alert. 
+Defaults to the value in the configuration if empty. 
 
 
 ```javascript
@@ -2120,8 +2119,8 @@ alert.victorOps()
 
 ### Warn
 
-Filter expression for the WARNING alert level.
-An empty value indicates the level is invalid and is skipped.
+Filter expression for the WARNING alert level. 
+An empty value indicates the level is invalid and is skipped. 
 
 
 ```javascript
@@ -2133,7 +2132,7 @@ alert.warn(value ast.LambdaNode)
 
 ### WarnReset
 
-Filter expression for resetting the WARNING alert level to lower level.
+Filter expression for reseting the WARNING alert level to lower level. 
 
 
 ```javascript
@@ -2153,7 +2152,7 @@ Chaining methods are marked using the `|` operator.
 
 ### Alert
 
-Create an alert node which can trigger alerts.
+Create an alert node, which can trigger alerts. 
 
 
 ```javascript
@@ -2164,9 +2163,24 @@ Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
+### Barrier
+
+Create a new Barrier node that emits a BarrierMessage periodically 
+
+One BarrierMessage will be emitted every period duration 
+
+
+```javascript
+alert|barrier()
+```
+
+Returns: [BarrierNode](/kapacitor/v1.4/nodes/barrier_node/)
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
 ### Bottom
 
-Select the bottom `num` points for `field` and sort by any extra tags or fields.
+Select the bottom `num` points for `field` and sort by any extra tags or fields. 
 
 
 ```javascript
@@ -2179,7 +2193,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### Combine
 
-Combine this node with itself. The data are combined on timestamp.
+Combine this node with itself. The data are combined on timestamp. 
 
 
 ```javascript
@@ -2192,7 +2206,7 @@ Returns: [CombineNode](/kapacitor/v1.4/nodes/combine_node/)
 
 ### Count
 
-Count the number of points.
+Count the number of points. 
 
 
 ```javascript
@@ -2205,8 +2219,8 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### CumulativeSum
 
-Compute a cumulative sum of each point that is received.
-A point is emitted for every point collected.
+Compute a cumulative sum of each point that is received. 
+A point is emitted for every point collected. 
 
 
 ```javascript
@@ -2219,13 +2233,13 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### Deadman
 
-Helper function for creating an alert on low throughput, a.k.a. deadman's switch.
+Helper function for creating an alert on low throughput, a.k.a. deadman's switch. 
 
-- Threshold: Trigger alert if throughput drops below threshold in points/interval.
-- Interval: How often to check the throughput.
-- Expressions: Optional list of expressions to also evaluate. Useful for time of day alerting.
+- Threshold -- trigger alert if throughput drops below threshold in points/interval. 
+- Interval -- how often to check the throughput. 
+- Expressions -- optional list of expressions to also evaluate. Useful for time of day alerting. 
 
-Example:
+Example: 
 
 
 ```javascript
@@ -2238,9 +2252,8 @@ Example:
     data...
 ```
 
-The above is equivalent to this.
-
-Example:
+The above is equivalent to this 
+Example: 
 
 
 ```javascript
@@ -2261,10 +2274,10 @@ Example:
     data...
 ```
 
-The `id` and `message` alert properties can be configured globally via the 'deadman' configuration section.
+The `id` and `message` alert properties can be configured globally via the 'deadman' configuration section. 
 
-Since the [AlertNode](/kapacitor/v1.4/nodes/alert_node/) is the last piece it can be further modified as usual.
-Example:
+Since the [AlertNode](/kapacitor/v1.4/nodes/alert_node/) is the last piece it can be further modified as usual. 
+Example: 
 
 
 ```javascript
@@ -2279,8 +2292,8 @@ Example:
     data...
 ```
 
-You can specify additional lambda expressions to further constrain when the deadman's switch is triggered.
-Example:
+You can specify additional lambda expressions to further constrain when the deadman's switch is triggered. 
+Example: 
 
 
 ```javascript
@@ -2306,7 +2319,7 @@ Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
 ### Default
 
-Create a node that can set defaults for missing tags or fields.
+Create a node that can set defaults for missing tags or fields. 
 
 
 ```javascript
@@ -2319,7 +2332,7 @@ Returns: [DefaultNode](/kapacitor/v1.4/nodes/default_node/)
 
 ### Delete
 
-Create a node that can delete tags or fields.
+Create a node that can delete tags or fields. 
 
 
 ```javascript
@@ -2332,7 +2345,7 @@ Returns: [DeleteNode](/kapacitor/v1.4/nodes/delete_node/)
 
 ### Derivative
 
-Create a new node that computes the derivative of adjacent points.
+Create a new node that computes the derivative of adjacent points. 
 
 
 ```javascript
@@ -2345,7 +2358,7 @@ Returns: [DerivativeNode](/kapacitor/v1.4/nodes/derivative_node/)
 
 ### Difference
 
-Compute the difference between points independent of elapsed time.
+Compute the difference between points independent of elapsed time. 
 
 
 ```javascript
@@ -2358,7 +2371,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### Distinct
 
-Produce batch of only the distinct points.
+Produce batch of only the distinct points. 
 
 
 ```javascript
@@ -2369,9 +2382,22 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
+### Ec2Autoscale
+
+Create a node that can trigger autoscale events for a ec2 autoscalegroup. 
+
+
+```javascript
+alert|ec2Autoscale()
+```
+
+Returns: [Ec2AutoscaleNode](/kapacitor/v1.4/nodes/ec2_autoscale_node/)
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
 ### Elapsed
 
-Compute the elapsed time between points
+Compute the elapsed time between points 
 
 
 ```javascript
@@ -2384,9 +2410,9 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### Eval
 
-Create an eval node that will evaluate the given transformation function to each data point.
-A list of expressions may be provided and will be evaluated in the order they are given.
-The results are available to later expressions.
+Create an eval node that will evaluate the given transformation function to each data point. 
+A list of expressions may be provided and will be evaluated in the order they are given. 
+The results are available to later expressions. 
 
 
 ```javascript
@@ -2399,7 +2425,7 @@ Returns: [EvalNode](/kapacitor/v1.4/nodes/eval_node/)
 
 ### First
 
-Select the first point.
+Select the first point. 
 
 
 ```javascript
@@ -2412,7 +2438,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### Flatten
 
-Flatten points with similar times into a single point.
+Flatten points with similar times into a single point. 
 
 
 ```javascript
@@ -2425,10 +2451,10 @@ Returns: [FlattenNode](/kapacitor/v1.4/nodes/flatten_node/)
 
 ### GroupBy
 
-Group the data by a set of tags.
+Group the data by a set of tags. 
 
-Can pass literal * to group by all dimensions.
-Example:
+Can pass literal * to group by all dimensions. 
+Example: 
 
 
 ```javascript
@@ -2447,7 +2473,7 @@ Returns: [GroupByNode](/kapacitor/v1.4/nodes/group_by_node/)
 
 ### HoltWinters
 
-Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
+Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set. 
 
 
 ```javascript
@@ -2460,8 +2486,8 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### HoltWintersWithFit
 
-Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
-This method also outputs all the points used to fit the data in addition to the forecasted data.
+Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set. 
+This method also outputs all the points used to fit the data in addition to the forecasted data. 
 
 
 ```javascript
@@ -2474,11 +2500,11 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### HttpOut
 
-Create an HTTP output node that caches the most recent data it has received.
-The cached data are available at the given endpoint.
-The endpoint is the relative path from the API endpoint of the running task.
-For example, if the task endpoint is at `/kapacitor/v1/tasks/<task_id>` and endpoint is
-`top10`, then the data can be requested from `/kapacitor/v1/tasks/<task_id>/top10`.
+Create an HTTP output node that caches the most recent data it has received. 
+The cached data are available at the given endpoint. 
+The endpoint is the relative path from the API endpoint of the running task. 
+For example, if the task endpoint is at `/kapacitor/v1/tasks/<task_id>` and endpoint is 
+`top10`, then the data can be requested from `/kapacitor/v1/tasks/<task_id>/top10`. 
 
 
 ```javascript
@@ -2491,9 +2517,9 @@ Returns: [HTTPOutNode](/kapacitor/v1.4/nodes/http_out_node/)
 
 ### HttpPost
 
-Creates an HTTP Post node that POSTS received data to the provided HTTP endpoint.
-HttpPost expects 0 or 1 arguments. If 0 arguments are provided, you must specify an
-endpoint property method.
+Creates an HTTP Post node that POSTS received data to the provided HTTP endpoint. 
+HttpPost expects 0 or 1 arguments. If 0 arguments are provided, you must specify an 
+endpoint property method. 
 
 
 ```javascript
@@ -2506,7 +2532,7 @@ Returns: [HTTPPostNode](/kapacitor/v1.4/nodes/http_post_node/)
 
 ### InfluxDBOut
 
-Create an influxdb output node that will store the incoming data into InfluxDB.
+Create an influxdb output node that will store the incoming data into InfluxDB. 
 
 
 ```javascript
@@ -2519,7 +2545,7 @@ Returns: [InfluxDBOutNode](/kapacitor/v1.4/nodes/influx_d_b_out_node/)
 
 ### Join
 
-Join this node with other nodes. The data are joined on timestamp.
+Join this node with other nodes. The data are joined on timestamp. 
 
 
 ```javascript
@@ -2532,7 +2558,7 @@ Returns: [JoinNode](/kapacitor/v1.4/nodes/join_node/)
 
 ### K8sAutoscale
 
-Create a node that can trigger autoscale events for a kubernetes cluster.
+Create a node that can trigger autoscale events for a kubernetes cluster. 
 
 
 ```javascript
@@ -2545,7 +2571,7 @@ Returns: [K8sAutoscaleNode](/kapacitor/v1.4/nodes/k8s_autoscale_node/)
 
 ### KapacitorLoopback
 
-Create an kapacitor loopback node that will send data back into Kapacitor as a stream.
+Create an kapacitor loopback node that will send data back into Kapacitor as a stream. 
 
 
 ```javascript
@@ -2558,7 +2584,7 @@ Returns: [KapacitorLoopbackNode](/kapacitor/v1.4/nodes/kapacitor_loopback_node/)
 
 ### Last
 
-Select the last point.
+Select the last point. 
 
 
 ```javascript
@@ -2571,7 +2597,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### Max
 
-Select the maximum point.
+Select the maximum point. 
 
 
 ```javascript
@@ -2584,7 +2610,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### Mean
 
-Compute the mean of the data.
+Compute the mean of the data. 
 
 
 ```javascript
@@ -2597,8 +2623,8 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### Median
 
-Compute the median of the data. Note, this method is not a selector,
-if you want the median point use `.percentile(field, 50.0)`.
+Compute the median of the data. Note, this method is not a selector, 
+if you want the median point use `.percentile(field, 50.0)`. 
 
 
 ```javascript
@@ -2611,7 +2637,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### Min
 
-Select the minimum point.
+Select the minimum point. 
 
 
 ```javascript
@@ -2624,7 +2650,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### Mode
 
-Compute the mode of the data.
+Compute the mode of the data. 
 
 
 ```javascript
@@ -2637,8 +2663,8 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### MovingAverage
 
-Compute a moving average of the last window points.
-No points are emitted until the window is full.
+Compute a moving average of the last window points. 
+No points are emitted until the window is full. 
 
 
 ```javascript
@@ -2651,7 +2677,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### Percentile
 
-Select a point at the given percentile. This is a selector function, no interpolation between points is performed.
+Select a point at the given percentile. This is a selector function, no interpolation between points is performed. 
 
 
 ```javascript
@@ -2664,9 +2690,9 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### Sample
 
-Create a new node that samples the incoming points or batches.
+Create a new node that samples the incoming points or batches. 
 
-One point will be emitted every count or duration specified.
+One point will be emitted every count or duration specified. 
 
 
 ```javascript
@@ -2679,7 +2705,7 @@ Returns: [SampleNode](/kapacitor/v1.4/nodes/sample_node/)
 
 ### Shift
 
-Create a new node that shifts the incoming points or batches in time.
+Create a new node that shifts the incoming points or batches in time. 
 
 
 ```javascript
@@ -2692,7 +2718,7 @@ Returns: [ShiftNode](/kapacitor/v1.4/nodes/shift_node/)
 
 ### Sideload
 
-Create a node that can load data from external sources
+Create a node that can load data from external sources 
 
 
 ```javascript
@@ -2705,7 +2731,7 @@ Returns: [SideloadNode](/kapacitor/v1.4/nodes/sideload_node/)
 
 ### Spread
 
-Compute the difference between `min` and `max` points.
+Compute the difference between `min` and `max` points. 
 
 
 ```javascript
@@ -2718,7 +2744,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### StateCount
 
-Create a node that tracks number of consecutive points in a given state.
+Create a node that tracks number of consecutive points in a given state. 
 
 
 ```javascript
@@ -2731,7 +2757,7 @@ Returns: [StateCountNode](/kapacitor/v1.4/nodes/state_count_node/)
 
 ### StateDuration
 
-Create a node that tracks duration in a given state.
+Create a node that tracks duration in a given state. 
 
 
 ```javascript
@@ -2744,9 +2770,9 @@ Returns: [StateDurationNode](/kapacitor/v1.4/nodes/state_duration_node/)
 
 ### Stats
 
-Create a new stream of data that contains the internal statistics of the node.
-The interval represents how often to emit the statistics based on real time.
-This means the interval time is independent of the times of the data points the source node is receiving.
+Create a new stream of data that contains the internal statistics of the node. 
+The interval represents how often to emit the statistics based on real time. 
+This means the interval time is independent of the times of the data points the source node is receiving. 
 
 
 ```javascript
@@ -2759,7 +2785,7 @@ Returns: [StatsNode](/kapacitor/v1.4/nodes/stats_node/)
 
 ### Stddev
 
-Compute the standard deviation.
+Compute the standard deviation. 
 
 
 ```javascript
@@ -2772,7 +2798,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### Sum
 
-Compute the sum of all values.
+Compute the sum of all values. 
 
 
 ```javascript
@@ -2785,7 +2811,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### SwarmAutoscale
 
-Create a node that can trigger autoscale events for a docker swarm cluster.
+Create a node that can trigger autoscale events for a docker swarm cluster. 
 
 
 ```javascript
@@ -2798,7 +2824,7 @@ Returns: [SwarmAutoscaleNode](/kapacitor/v1.4/nodes/swarm_autoscale_node/)
 
 ### Top
 
-Select the top `num` points for `field` and sort by any extra tags or fields.
+Select the top `num` points for `field` and sort by any extra tags or fields. 
 
 
 ```javascript
@@ -2811,7 +2837,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### Union
 
-Perform the union of this node and all other given nodes.
+Perform the union of this node and all other given nodes. 
 
 
 ```javascript
@@ -2824,7 +2850,7 @@ Returns: [UnionNode](/kapacitor/v1.4/nodes/union_node/)
 
 ### Where
 
-Create a new node that filters the data stream by a given expression.
+Create a new node that filters the data stream by a given expression. 
 
 
 ```javascript
@@ -2837,9 +2863,9 @@ Returns: [WhereNode](/kapacitor/v1.4/nodes/where_node/)
 
 ### Window
 
-Create a new node that windows the stream by time.
+Create a new node that windows the stream by time. 
 
-NOTE: Window can only be applied to stream edges.
+NOTE: Window can only be applied to stream edges. 
 
 
 ```javascript

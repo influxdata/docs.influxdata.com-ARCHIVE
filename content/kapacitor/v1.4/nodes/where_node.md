@@ -6,7 +6,7 @@ menu:
   kapacitor_1_4:
     name: Where
     identifier: where_node
-    weight: 310
+    weight: 330
     parent: nodes
 ---
 ### Constructor 
@@ -20,7 +20,7 @@ This node has no properties that can be set.
 
 
 ### Chaining Methods
-[Alert](/kapacitor/v1.4/nodes/where_node/#alert), [Bottom](/kapacitor/v1.4/nodes/where_node/#bottom), [Combine](/kapacitor/v1.4/nodes/where_node/#combine), [Count](/kapacitor/v1.4/nodes/where_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/where_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/where_node/#deadman), [Default](/kapacitor/v1.4/nodes/where_node/#default), [Delete](/kapacitor/v1.4/nodes/where_node/#delete), [Derivative](/kapacitor/v1.4/nodes/where_node/#derivative), [Difference](/kapacitor/v1.4/nodes/where_node/#difference), [Distinct](/kapacitor/v1.4/nodes/where_node/#distinct), [Elapsed](/kapacitor/v1.4/nodes/where_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/where_node/#eval), [First](/kapacitor/v1.4/nodes/where_node/#first), [Flatten](/kapacitor/v1.4/nodes/where_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/where_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/where_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/where_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/where_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/where_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/where_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/where_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/where_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/where_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/where_node/#last), [Log](/kapacitor/v1.4/nodes/where_node/#log), [Max](/kapacitor/v1.4/nodes/where_node/#max), [Mean](/kapacitor/v1.4/nodes/where_node/#mean), [Median](/kapacitor/v1.4/nodes/where_node/#median), [Min](/kapacitor/v1.4/nodes/where_node/#min), [Mode](/kapacitor/v1.4/nodes/where_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/where_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/where_node/#percentile), [Sample](/kapacitor/v1.4/nodes/where_node/#sample), [Shift](/kapacitor/v1.4/nodes/where_node/#shift), [Sideload](/kapacitor/v1.4/nodes/where_node/#sideload), [Spread](/kapacitor/v1.4/nodes/where_node/#spread), [StateCount](/kapacitor/v1.4/nodes/where_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/where_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/where_node/#stats), [Stddev](/kapacitor/v1.4/nodes/where_node/#stddev), [Sum](/kapacitor/v1.4/nodes/where_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/where_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/where_node/#top), [Union](/kapacitor/v1.4/nodes/where_node/#union), [Where](/kapacitor/v1.4/nodes/where_node/#where), [Window](/kapacitor/v1.4/nodes/where_node/#window)
+[Alert](/kapacitor/v1.4/nodes/where_node/#alert), [Barrier](/kapacitor/v1.4/nodes/where_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/where_node/#bottom), [Combine](/kapacitor/v1.4/nodes/where_node/#combine), [Count](/kapacitor/v1.4/nodes/where_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/where_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/where_node/#deadman), [Default](/kapacitor/v1.4/nodes/where_node/#default), [Delete](/kapacitor/v1.4/nodes/where_node/#delete), [Derivative](/kapacitor/v1.4/nodes/where_node/#derivative), [Difference](/kapacitor/v1.4/nodes/where_node/#difference), [Distinct](/kapacitor/v1.4/nodes/where_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/where_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/where_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/where_node/#eval), [First](/kapacitor/v1.4/nodes/where_node/#first), [Flatten](/kapacitor/v1.4/nodes/where_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/where_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/where_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/where_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/where_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/where_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/where_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/where_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/where_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/where_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/where_node/#last), [Log](/kapacitor/v1.4/nodes/where_node/#log), [Max](/kapacitor/v1.4/nodes/where_node/#max), [Mean](/kapacitor/v1.4/nodes/where_node/#mean), [Median](/kapacitor/v1.4/nodes/where_node/#median), [Min](/kapacitor/v1.4/nodes/where_node/#min), [Mode](/kapacitor/v1.4/nodes/where_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/where_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/where_node/#percentile), [Sample](/kapacitor/v1.4/nodes/where_node/#sample), [Shift](/kapacitor/v1.4/nodes/where_node/#shift), [Sideload](/kapacitor/v1.4/nodes/where_node/#sideload), [Spread](/kapacitor/v1.4/nodes/where_node/#spread), [StateCount](/kapacitor/v1.4/nodes/where_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/where_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/where_node/#stats), [Stddev](/kapacitor/v1.4/nodes/where_node/#stddev), [Sum](/kapacitor/v1.4/nodes/where_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/where_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/where_node/#top), [Union](/kapacitor/v1.4/nodes/where_node/#union), [Where](/kapacitor/v1.4/nodes/where_node/#where), [Window](/kapacitor/v1.4/nodes/where_node/#window)
 <a id='descr'/><hr/><br/>
 ### Description
 
@@ -64,6 +64,21 @@ where|alert()
 ```
 
 Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
+### Barrier
+
+Create a new Barrier node that emits a BarrierMessage periodically 
+
+One BarrierMessage will be emitted every period duration 
+
+
+```javascript
+where|barrier()
+```
+
+Returns: [BarrierNode](/kapacitor/v1.4/nodes/barrier_node/)
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
@@ -268,6 +283,19 @@ where|distinct(field string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
+### Ec2Autoscale
+
+Create a node that can trigger autoscale events for a ec2 autoscalegroup. 
+
+
+```javascript
+where|ec2Autoscale()
+```
+
+Returns: [Ec2AutoscaleNode](/kapacitor/v1.4/nodes/ec2_autoscale_node/)
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
