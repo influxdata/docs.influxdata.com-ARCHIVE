@@ -6,12 +6,13 @@ menu:
     parent: About the Project
 ---
 
-## v1.4.2.0 [2018-02-28]
+## v1.4.2.1 [2018-02-28]
 
 ### Features
 
 * Prevent execution of queries in cells that are not in view on the Dashboard page.
 * Add an optional persistent legend which can toggle series visibility to dashboard cells.
+* Allow user to annotate graphs via UI or API.
 
 ### UI improvements
 
@@ -23,6 +24,7 @@ menu:
 * Save only selected template variable values into dashboards for non-CSV template variables.
 * Use Generic APIKey for OAuth2 group lookup.
 * Fix bug in which resizing any cell in a dashboard causes a Gauge cell to resize.
+* Don't sort Single Stat & Gauge thresholds when editing threshold values.
 * Maintain y-axis labels in dashboard cells.
 * Deprecate `--new-sources` in CLI.
 

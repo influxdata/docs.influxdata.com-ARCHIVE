@@ -1,7 +1,5 @@
 ---
 title: HTTPS setup for InfluxDB
-tags: ["HTTPS","TLS","SSL"]
-categories: ["InfluxDB"]
 menu:
   influxdb_1_4:
   name: HTTPS setup
