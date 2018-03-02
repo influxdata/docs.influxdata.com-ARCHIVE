@@ -3,7 +3,6 @@ title: HTTPS setup for InfluxDB
 
 menu:
   influxdb_1_4:
-  name: HTTPS setup
     weight: 100
     parent: guides
 ---

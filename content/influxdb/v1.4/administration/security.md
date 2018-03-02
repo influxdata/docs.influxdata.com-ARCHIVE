@@ -3,7 +3,6 @@ title: Managing InfluxDB security
 
 menu:
   influxdb_1_4:
-  name: Managing security
     weight: 80
     parent: administration
 ---
