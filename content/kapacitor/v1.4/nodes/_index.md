@@ -1,5 +1,5 @@
 ---
-title: TICKscript Node Overview
+title: TICKscript node overview
 aliases:
     - kapacitor/v1.4/nodes/source_batch_node/
     - kapacitor/v1.4/nodes/source_stream_node/
@@ -7,30 +7,33 @@ aliases:
     - kapacitor/v1.4/nodes/reduce_node/
 menu:
   kapacitor_1_4:
-    name: TICKscript Nodes
+    name: TICKscript nodes
     identifier: nodes
     weight: 4
 ---
 
-> Note: Before continuing, please make sure you have read the
+> ***Note:*** Before continuing, please make sure you have read the
 > [TICKscript Language Specification](/kapacitor/v1.4/tick/).
 
-Property methods modify the node they are called on and return a
-reference to the same node. The two most important property methods
-are:
+ Nodes represent process invocation units that either take data as a batch or a point-by-point stream, and then alter the data, store the data, or trigger some other activity based on changes in the data (e.g., an alert).
+
+The property methods of the nodes modify the node they are called on and return a reference to that node. The property methods for these two nodes are the most important:
 
 * [Batch Node](/kapacitor/v1.4/nodes/batch_node)
 * [Stream Node](/kapacitor/v1.4/nodes/stream_node)
 
-Which define the type of task that you are running (either
+The property methods for these two nodes define the type of task that you are running, either
 [stream](/kapacitor/v1.4/introduction/getting_started/#trigger-alert-from-stream-data)
 or
-[batch](/kapacitor/v1.4/introduction/getting_started/#trigger-alert-from-batch-data)). The
-other available property methods are:
+[batch](/kapacitor/v1.4/introduction/getting_started/#trigger-alert-from-batch-data).
+
+Here is a complete list of the available nodes. For each node, the associated property methods are described.
+
+## Available nodes
 
 * [Alert Node](/kapacitor/v1.4/nodes/alert_node)
-* [Batch Node](/kapacitor/v1.4/nodes/batch_node)
 * [Barrier Node](/kapacitor/v1.4/nodes/barrier_node)
+* [Batch Node](/kapacitor/v1.4/nodes/batch_node)
 * [Combine Node](/kapacitor/v1.4/nodes/combine_node)
 * [Default Node](/kapacitor/v1.4/nodes/default_node)
 * [Delete Node](/kapacitor/v1.4/nodes/delete_node)
