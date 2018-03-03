@@ -9,11 +9,11 @@
 	{{ end }}
 	<section class="article-section">
 		<div class="article-content">
-			{{ partial "influxdb/version.html" . }}
+			{{ partial "telegraf/version.html" . }}
 			{{ .Content }}
 		</div>
 	</section>
-	{{ partial "influxdb/contribute.html" . }}
+	{{ partial "telegraf/contribute.html" . }}
 </article>
-{{ partial "influxdb/sidebar.html" . }}
+{{ partial "telegraf/sidebar.html" . }}
 {{ partial "footer.html" . }}
