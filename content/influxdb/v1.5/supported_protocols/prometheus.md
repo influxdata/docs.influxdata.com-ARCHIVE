@@ -12,8 +12,7 @@ menu:
 ## Prometheus remote read and write API support
 
 <dt>
-Prometheus remote read and write API is experimental for both Prometheus and InfluxDB.
-Prometheus documentation states that their `remote_read` and `remote_write` configuration settings are "experimental: breaking changes to configuration are likely in future releases."
+Note: Prometheus documentation states that their `remote_read` and `remote_write` configuration settings are "experimental: breaking changes to configuration are likely in future releases."
 </dt>
 
 InfluxDB support for the Prometheus remote read and write API adds the following two HTTP endpoints to the InfluxDB `httpd` handler:

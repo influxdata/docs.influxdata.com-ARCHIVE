@@ -6,21 +6,22 @@ menu:
     parent: about_the_project
 ---
 
-## v1.5.0 [unreleased]
+## v1.5.0 [2018-03-06]
 
 ### Breaking changes
 
-* The default logging format has been changed. See [#9055](https://github.com/influxdata/influxdb/pull/9055) for details.
+> ***Note:*** This release builds off of the 1.5 release of InfluxDB OSS. Please see the [InfluxDB OSS release
+> notes](https://docs.influxdata.com/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
 
 ### Features
 
 - Improve CLI connection warnings.
 - Backup utility prints a list of backup files.
 - Backup and restore for OSS produces and consumes data in the Enterprise-compatible backup format.
-- Restore runs in online mode; does not delete existing databases.
-- Export functionality using start and end to filter exported data by timestamp
+- Restore runs in online mode and does not delete existing databases.
+  - Export functionality using `start` and `end` to filter exported data by `timestamp`
 - Handle high cardinality deletes in TSM engine
-- Improve inmem index startup performance for high cardinality.
+- Improve in-memory index startup performance for high cardinality.
 - Add further TSI support for streaming and copying shards.
 - Schedule a full compaction after a successful import.
 - Add Prometheus `/metrics` endpoint.
