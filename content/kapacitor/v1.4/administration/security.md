@@ -25,7 +25,7 @@ communicating with an already secured InfluxDB server.  It will also make its
 tasks and alerts available to a Chronograf installation.  
 
 The following discussion will cover configuring Kapacitor to communicate with a
-secure InfluxDB server; enabling TLS in Kapacitor; and connecting a TLS enabled
+secure InfluxDB server, enabling TLS in Kapacitor and connecting a TLS enabled
 Kapacitor server to Chronograf.  
 
 Authentication and Authorization are not fully implemented in the open-source
@@ -33,39 +33,40 @@ Kapacitor distribution, but are available as a feature of Enterprise Kapacitor.
 
 ## Secure InfluxDB and Kapacitor
 
-InfluxDB communications can be secured with TLS on the transport layer and
-with authentication into the HTTP API.  How to enable TLS and authentication
-and authorization in InfluxDB is covered in the InfluxDB documentation in the
+InfluxDB can secure its communications with TLS on the transport layer and
+with authentication into the database.  How to enable TLS and authentication
+and authorization in InfluxDB is covered in the InfluxDB documentation, in the
 sections [HTTPS Setup](/influxdb/v1.4/administration/https_setup/) and
 [Authentication and Authorization](/influxdb/v1.4/query_language/authentication_and_authorization)
 respectively.
 
-Kapacitor configuration supports secure connections to
-InfluxDB.  
+Kapacitor configuration supports both HTTPS communications and Authentication
+with InfluxDB.  Parameters can be set directly in the configuration file, as
+environment variables or over Kapacitor's HTTP API.  
 
-Configuration parameters can be set directly in the configuration file, as
-environment variables or over Kapacitor's HTTP API.  Storing passwords and
-other sensitive information in a configuration file on disk is discouraged in
-production environments.  However, Kapacitor cannot successfully start without
-communications to a default InfluxDB server.  It is therefore advised to use the
-configuration file to boot Kapacitor, and then to make use of the HTTP API
-when resetting sensitive values, after they have been redacted from the
-configuration file.  Note that if Kapacitor needs to be rebooted, the parameters
-in the file will need to be temporarily restored.  An overview of Kapacitor
-configuration is provided in the
+Storing passwords and other sensitive information in a configuration file on
+disk is discouraged in production environments.  However Kapacitor cannot
+successfully start without communications to a default InfluxDB server.  It is
+therefore advised to use the configuration file to boot Kapacitor, and then to
+make use of the HTTP API when resetting sensitive values, after they have been
+redacted from the configuration file on the storage volume.  Note that if
+Kapacitor needs to be rebooted, the parameters in the file will need to be
+temporarily restored.  
+
+An overview of Kapacitor configuration is provided in the
 [Configuration](/kapacitor/v1.4/administration/configuration/) document.
 
 ### Note on HTTP API Configuration and Restarting Kapacitor
 
 Please be aware that when configuration values are set using the HTTP API, that
-these values will persist even after restarting Kapacitor.  To switch off these
-overrides on restart   set the property `skip-config-overrides` to `true` either
-in the configuration file (`kapacitor.conf`) or as an environment variable
-(`KAPACITOR_SKIP_CONFIG_OVERRIDES`).  
+these values will persist in the Kapacitor database even after restart.  To
+switch off these overrides on restart set the property `skip-config-overrides`
+to `true` either in the configuration file (`kapacitor.conf`) or as an
+environment variable (`KAPACITOR_SKIP_CONFIG_OVERRIDES`).  
 
 When troubleshooting connection issues after restart, check the HTTP API, for example
 at <span>http</span><span>://</span><span>localhost:9092/kapacitor/v1/config</span>.
-This can be especially useful if Kapacitor to InfluxDB communications does not
+This can be especially useful if Kapacitor to InfluxDB communications do not
 seem to be respecting values seen in the file `kapacitor.conf` or in environment
 variables.
 
@@ -73,8 +74,8 @@ variables.
 
 To activate a TLS connection the `urls` strings in the `influxdb` servers
 configuration will need to contain the `https` protocol.  Furthermore either a
-PEM encoded public key and certificate will need to be specified or a PEM encoded
-CA file.
+PEM encoded public key and certificate pair or a PEM encoded CA file will need
+to be specified.
 
 When testing with a **self-signed certificate** it is also important to switch off
 certificate verification with the property `insecure-skip-verify`.  Failure to do
@@ -84,16 +85,9 @@ so will result in x509 certificate errors as follows:
 ts=2018-02-19T13:26:11.437+01:00 lvl=error msg="failed to connect to InfluxDB, retrying..." service=influxdb cluster=localhost err="Get https://localhost:8086/ping: x509: certificate is valid for lenovo-TP02, not localhost"
 ```
 
-> Note that in a production environment with a CA certificate, `insecure-skip-verify` needs to be switched back on.
+<a id="example-1" />
 
-**Subscriptions** will also be handled over the `HTTPS` protocol, so the property
-`subscription-protocol` needs to be set to "`https`".  Failure to do so will
-result in a `TLS handshake error` with the message ` oversized record received
-with length 21536` in the Kapacitor log as shown here:
-
-```
-ts=2018-02-19T13:23:49.684+01:00 lvl=error msg="2018/02/19 13:23:49 http: TLS handshake error from 127.0.0.1:49946: tls: oversized record received with length 21536\n" service=http service=httpd_server_errors
-```
+> **Important** &ndash; Please note that in a production environment with a standard CA certificate, `insecure-skip-verify` needs to be switched on.
 
 In the configuration file these values are set according to the following example.
 
@@ -120,12 +114,12 @@ In the configuration file these values are set according to the following exampl
    subscription-protocol = "https"     
 ...   
 ```
-The relavent properties in Example 1 are:
+The relevant properties in Example 1 are:
 
 * `urls` &ndash; note the protocol is `https` and _not_ `http`.
 * `ssl-cert` and `ssl-key` &ndash; to indicate the location of the certificate and key files.
 * `insecure-skip-verify` &ndash; for testing with a self-signed certificate.
-* `subscription-protocol` &ndash; to declare the correct protocol for subscription communications.   
+* `subscription-protocol` &ndash; to declare the correct protocol for subscription communications.  For example if Kapacitor is to run on HTTP then this should be set to `"http"`, however if Kapacitor is to run on "HTTPS" then this should be set to `"https"`.   
 
 Note that when a CA file contains the certificate and key together the property
 `ssl-ca` can be used in place of `ssl-cert` and `ssl-key`.  
@@ -141,15 +135,15 @@ KAPACITOR_INFLUXDB_0_INSECURE_SKIP_VERIFY=true
 KAPACITOR_INFLUXDB_0_SUBSCRIPTION_PROTOCOL="https"
 ```
 When using Systemd to manage the Kapacitor daemon the above parameters can be
-stored in the file `/etc/defaults/kapacitor`.  
+stored in the file `/etc/default/kapacitor`.  
 
-#### Kapacitor InfluxDB TLS configuration over HTTP API
+#### Kapacitor to InfluxDB TLS configuration over HTTP API
 
 These properties can also be set using the HTTP API.  To get the current
-`InfluxDB` part of the Kapacitor configuration, use the following Curl command:
+`InfluxDB` part of the Kapacitor configuration, use the following `curl` command:
 
 ```
-curl -ks https://localhost:9092/kapacitor/v1/config/influxdb | python -m json.tool > kapacitor-influxdb.conf
+curl -ks http://localhost:9092/kapacitor/v1/config/influxdb | python -m json.tool > kapacitor-influxdb.conf
 ```
 
 This results in the following file:
@@ -210,7 +204,7 @@ This results in the following file:
 The following command switches off the `insecure-skip-verify` property.
 
 ```
-curl -kv -d '{ "set": { "insecure-skip-verify": false } }' https://localhost:9092/kapacitor/v1/config/influxdb/
+curl -kv -d '{ "set": { "insecure-skip-verify": false } }' http://localhost:9092/kapacitor/v1/config/influxdb/
 ...
 upload completely sent off: 43 out of 43 bytes
 < HTTP/1.1 204 No Content
@@ -294,7 +288,7 @@ then providing a path to a certificate with the property `https-certificate`.
 
 Note that enabling HTTPS implies using the `https` protocol in connection URLs.
 
-Example 6 shows how this is done in the `kapacitor.conf` file.
+The following example shows how this is done in the `kapacitor.conf` file.
 
 **Example 6 &ndash; Enabling TLS in kapacitor.conf**
 
@@ -313,7 +307,7 @@ Example 6 shows how this is done in the `kapacitor.conf` file.
   https-certificate = "/etc/ssl/influxdata-selfsigned-incl-pub-key.pem"
 ```
 
-These values can also be set as environment variables as shown in
+These values can also be set as environment variables as shown in the next example.
 
 **Example 7 &ndash; Enabling TLS as ENVARS**
 
@@ -324,6 +318,24 @@ KAPACITOR_HTTP_HTTPS_CERTIFICATE="/etc/ssl/influxdata-selfsigned-incl-pub-key.pe
 
 However, they _cannot_ be set over the HTTP API.
 
+Please remember, that when Kapacitor is running on HTTPS, this needs to be
+reflected in the `subscription-protocol` property for the `[[influxdb]]` group
+of the Kapacitor configuration.  See [Example 1](#example-1) above. The value of
+this property needs to be set to `https`.  Failure to do so will result in
+a `TLS handshake error` with the message ` oversized record received with
+length 21536` in the Kapacitor log as shown here:
+
+```
+ts=2018-02-19T13:23:49.684+01:00 lvl=error msg="2018/02/19 13:23:49 http: TLS handshake error from 127.0.0.1:49946: tls: oversized record received with length 21536\n" service=http service=httpd_server_errors
+```
+
+If for any reason TLS is switched off, this property needs to be reset to `http`.
+Failure to do so will result in the inability of InfluxDB to push subscribed
+data to Kapacitor with a message in the InfluxDB log like the following:
+
+```
+bře 05 17:02:40 algonquin influxd[32520]: [I] 2018-03-05T16:02:40Z Post https://localhost:9092/write?consistency=&db=telegraf&precision=ns&rp=autogen: http: server gave HTTP response to HTTPS client service=subscriber
+```
 
 ### Kapacitor Authentication and Authorization
 
@@ -339,3 +351,86 @@ A true authentication and authorization handler is available only in the
 Enterprise Kapacitor distribution.      
 
 ## Secure Kapacitor and Chronograf
+
+With Kapacitor configured with HTTPS/TLS enabled many users will want to add
+Kapacitor to their connection configuration in Chronograf.  The primary
+requirement for this to work is to have the base signing certificate installed
+on the host where the Chronograf service is running.  With most operating systems
+this should already be the case.  
+
+When working with a **self-signed** certificate, this means installing the
+self-signed certificate into the system.  
+
+### Install a Self-Signed Certificate on Debian
+
+As an example of installing a self-signed certificate to the system, in
+Debian/Ubuntu any certificate can be copied to the directory
+`/usr/local/share/ca-certificates/` and then the certificate store can be rebuilt.
+
+```
+$ sudo cp /etc/ssl/influxdb-selfsigned.crt /usr/local/share/ca-certificates/
+$ sudo update-ca-certificates
+Updating certificates in /etc/ssl/certs...
+1 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+
+Replacing debian:influxdb-selfsigned.pem
+done.
+done.
+```
+
+If a self-signed or other certificate has been added to the system the
+Chronograf service needs to be restarted to gather the new certificate
+information.
+
+```
+$ sudo systemctl restart chronograf.service
+```
+
+### Adding a Kapacitor Connection in Chronograf
+
+The following instructions apply to the Chronograf UI.  If Chronograf has been
+installed it can be found by default at port 8888 (e.g. <span>http</span>://<span>localhost:</span>8888).
+
+1) In the left side navigation bar open the **Configuration** page.
+This will show all available InfluxDB connections.  In the row containing the
+InfluxDB connection for which a Kapacitor connection is to be added, click the
+link **Add Kapacitor Connection**.  This will load the Add a New Kapacitor
+Connection page.
+
+**Image 1 &ndash; Adding a Kapacitor Connection**
+
+<img src="/img/kapacitor/chrono/Add_Kapacitor_Connection01.png" alt="add kapacitor 01" style="max-width: 926px;" />
+
+2) In the **Connection Details** group fill in such details as a name for the
+connection and click the **Connect** button.
+
+**Image 2 &ndash; Kapacitor Connection Details**
+
+<img src="/img/kapacitor/chrono/Add_Kapacitor_Connection02.png" alt="add kapacitor 02" style="max-width: 926px;" />
+
+3) If the certificate is installed on the system a success notification will
+appear.
+
+**Image 3 &ndash; Kapacitor Connection Success**
+
+<img src="/img/kapacitor/chrono/Add_Kapacitor_Connection03.png" alt="add kapacitor 03" style="max-width: 926px;" />
+
+If an error notification is returned check the Chronograf log for proxy errors.
+For example:
+
+```
+bře 06 13:53:07 lenovo-tp02 chronograf[12079]: 2018/03/06 13:53:07 http: proxy error: x509: certificate is valid for locahlost, not localhost
+```
+
+4) Also tabbed forms for editing and adding Kapacitor Handler Endpoints will
+appear.  In wider screens they will be to the right of the Connection Details
+group.  In narrower screens they be below the Connection Details group.
+
+**Image 4 &ndash; Configure Kapacitor Handler Endpoints**
+
+<img src="/img/kapacitor/chrono/Add_Kapacitor_Connection04b.png" alt="add kapacitor 04" style="max-width: 926px;" />
+
+At this point Kapacitor can be used to generate alerts and TICKscripts through
+Chronograf. These features are available through the **Alerting** item in the
+left navigation bar.  
