@@ -34,6 +34,7 @@ If an error occurs, then this operation will fall back to the original in-memory
 > ***Note:*** This tool is for offline conversion only. When TSI is enabled, new shards use the TSI indexes. Existing shards continue as TSM-based shards until converted offline.
 
 #### Usage
+
 ```
 influx_inspect buildtsi -datadir <data_directory> -waldir <WAL_directory> [ options ]
 ```
@@ -41,21 +42,42 @@ influx_inspect buildtsi -datadir <data_directory> -waldir <WAL_directory> [ opti
 
 Optional arguments are in brackets.
 
-[ -database string ]
-  Database name
--datadir string
+#### `[ -database string ]`
+  Database name.
+
+#### `-datadir string`
   Data directory.
-[ -retention string ]
+
+#### `[ -retention string ]`
   Retention policy.
-[ -shard string ]
+
+#### `[ -shard string ]`
   Shard ID.
-[ -v ]
+
+#### `[ -v ]`
   Verbose output.
 
--waldir string
-  WAL directory
+#### -waldir string
+  WAL directory.
 
-#### Example
+#### Examples
+<br>
+
+##### Upgrading all shards on a node
+
+```
+$ influx_inspect buildtsi -datadir ~/.influxdb/data -waldir ~/.influxdb/wal
+
+```
+
+##### Upgrading all shards for a database
+
+```
+$ influx_inspect buildtsi -database mydb -datadir ~/.influxdb/data -waldir ~/.influxdb/wal
+
+```
+
+##### Upgrading a specific shard**
 
 ```
 $ influx_inspect buildtsi -datadir ~/.influxdb/data/stress/autogen/1 -waldir ~/.influxdb/wal/stress/autogen/1
