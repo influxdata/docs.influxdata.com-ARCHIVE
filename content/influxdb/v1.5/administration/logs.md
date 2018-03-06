@@ -72,11 +72,11 @@ If using the package install on a `sysvinit` system, the config file for logrota
 You can view the file [here](https://github.com/influxdb/influxdb/blob/master/scripts/logrotate).
 
 
-## Generating separate HTTP request logs
+## Redirecting HTTP request logging
 
 InfluxDB 1.5 introduces the option to log HTTP request traffic separately from the other InfluxDB log output. When HTTP request logging is enabled, the HTTP logs are intermingled by default with internal InfluxDB logging. By redirecting the HTTP request log entries to a separate file, both log files are easier to read, monitor, and debug.
 
-**To generate separate HTTP request logging:**
+**To redirect HTTP request logging:**
 
 Locate the `[http]` section of your InfluxDB configuration file and set the `access-log-path` option to specify the path where HTTP log entries should be written.
 
@@ -144,7 +144,7 @@ The `suppress-logo` option can be used to suppress the logo output that is print
 
 ## Tracing
 
-InfluxDB 1.5 logging has been enhanced to provide tracing of important InfluxDB operations. Tracing is useful for error reporting and discovering performance bottlenecks.
+Logging has been enhanced to provide tracing of important InfluxDB operations. Tracing is useful for error reporting and discovering performance bottlenecks.
 
 ### Logging keys used in tracing
 

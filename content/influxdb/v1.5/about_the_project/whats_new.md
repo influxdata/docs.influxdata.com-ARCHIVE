@@ -13,7 +13,9 @@ Included here are some highlights of the InfluxDB 1.5 release:
 
 * [Time Series Index (TSI) support](#time-series-index--tsi--support)
 * [Enterprise-compatible backup and restore](#enterprise-compatible-backup-and-restore-for-influxdb-oss)
-* [Logging enhancements](#new-logging-options)
+* [Structured logging](#structured-logging)
+* [Tracing](#tracing)
+* [Redirecting HTTP request logging](#redirecting-http-request-logging)
 * [InfluxDB '/metrics' HTTP endpoint](#influxdb-metrics-http-endpoint)
 
 ## TSI (Time Series Index) support
@@ -46,16 +48,26 @@ The online `restore` utility in InfluxDB OSS supports the new Enterprise-compati
 For details about the new backup and restore functionality, see [Backing up and restoring in InfluxDB OSS](/influxdb/v1.5/administration/backup-and-restore/).
 
 
-## Logging enhancements
+## Structured logging
 
 With InfluxDB 1.5, logging has been improved to support structured logging, trace logs, and generating HTTP request logs separate from InfluxDB internal logs.
 
 Structured logging support allows you to more easily integrate InfluxDB logs with Splunk, Papertrail, Elasticsearch, and other third party tools. The two new structured log formats, `logfmt` and `json`, provide machine-readable and more developer-friendly log outputs.
 
-Tracing has been added to make it easier for you and InfluxData to diagnosis and troubleshoot InfluxDB behavior.
-
 See [logging options](/influxdb/v1.5/administration/config/#logging-options--logging/) in the configuration section.
 See [Logging in InfluxDB](/influxdb/v1.5/administration/logs/)
+
+## Tracing
+
+Logging has been enhanced to provide tracing of important InfluxDB operations. Tracing is useful for error reporting and discovering performance bottlenecks.
+
+For details on the tracing keys, tooling, and examples, see [Tracing](/influxdb/v1.5/administration/logs/#tracing).
+
+## Redirecting HTTP request logging
+
+InfluxDB 1.5 introduces the option to log HTTP request traffic separately from the other InfluxDB log output. When HTTP request logging is enabled, the HTTP logs are intermingled by default with internal InfluxDB logging. By redirecting the HTTP request log entries to a separate file, both log files are easier to read, monitor, and debug.
+
+For more information, see [Redirecting HTTP request logging](/influxdb/v1.5/administration/logs/#redirecting-http-request-logging).
 
 ## InfluxDB '/metrics' HTTP endpoint
 
