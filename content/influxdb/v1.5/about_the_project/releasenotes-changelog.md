@@ -19,7 +19,7 @@ menu:
 - Backup utility prints a list of backup files.
 - Backup and restore for OSS produces and consumes data in the Enterprise-compatible backup format.
 - Restore runs in online mode and does not delete existing databases.
-  - Export functionality using `start` and `end` to filter exported data by `timestamp`
+- Export functionality using `start` and `end` to filter exported data by `timestamp`
 - Handle high cardinality deletes in TSM engine
 - Improve in-memory index startup performance for high cardinality.
 - Add further TSI support for streaming and copying shards.
@@ -28,7 +28,7 @@ menu:
 - Add ability to generate shard digests.
 - Allow setting the node ID in the InfluxDB CLI program.
 
-### Bugfixes
+### Bug fixes
 
 - Refuse extra arguments to influx CLI.
 - Fix space required after regex operator. Thanks @stop-start!
@@ -52,7 +52,7 @@ menu:
 
 `cache-snapshot-memory-size`: default value changed from `25m` to `256m`.
 
-### Bugfixes
+### Bug fixes
 
 - Fix higher disk I/O utilization
 
@@ -60,13 +60,13 @@ menu:
 
 Refer to the 1.4.0 breaking changes section if `influxd` fails to start with an `incompatible tsi1 index MANIFEST` error.
 
-### Bugfixes
+### Bug fixes
 
 - Fix `panic: runtime error: slice bounds out of range` when running `dep init`
 
 ## v1.4.1 [2017-11-13]
 
-### Bugfixes
+### Bug fixes
 
 - Fix descending cursors and range queries via IFQL RPC API.
 
@@ -150,7 +150,7 @@ will find the shards refuse to open and will most likely see the following error
 - Update to go 1.9.2.
 - InfluxDB now uses MIT licensed version of BurntSushi/toml.
 
-### Bugfixes
+### Bug fixes
 
 - Change the default stats interval to 1 second instead of 10 seconds.
 - illumos build broken on `syscall.Mmap`.
@@ -201,7 +201,7 @@ will find the shards refuse to open and will most likely see the following error
 ### Release Notes
 Bug fix identified via Community and InfluxCloud. The build artifacts are now consistent with v1.3.5.
 
-### Bugfixes
+### Bug fixes
 
 - Don't assume `which` is present in package post-install script.
 - Fix use of `INFLUXD_OPTS` in service file.
@@ -217,7 +217,7 @@ Bug fix identified via Community and InfluxCloud. The build artifacts are now co
 ### Release Notes
 Bug fix identified via Community and InfluxCloud.
 
-### Bugfixes
+### Bug fixes
 - Reduce how long it takes to walk the varrefs in an expression.
 - Address `panic: runtime error: invalid memory address or nil pointer dereference`.
 - Fix increased memory usage in cache and WAL readers for clusters with a large number of shards.
@@ -228,7 +228,7 @@ Bug fix identified via Community and InfluxCloud.
 ### Release Notes
 Bug fix identified via Community and InfluxCloud.
 
-### Bugfixes
+### Bug fixes
 - Fix race condition accessing `seriesByID` map.
 - Fix deadlock when calling `SeriesIDsAllOrByExpr`.
 
@@ -237,7 +237,7 @@ Bug fix identified via Community and InfluxCloud.
 ### Release Notes
 Bug fix identified via Community and InfluxCloud.
 
-### Bugfixes
+### Bug fixes
 - Fix race condition accessing `seriesByID` map.
 - Fix deadlock when calling `SeriesIDsAllOrByExpr`.
 
@@ -246,7 +246,7 @@ Bug fix identified via Community and InfluxCloud.
 ### Release Notes
 Bug fix identified via Community and InfluxCloud.
 
-### Bugfixes
+### Bug fixes
 - Fixed time boundaries for continuous queries with time zones.
 - Fix time zone shifts when the shift happens on a time zone boundary.
 - Parse time literals using the time zone in the select statement.
@@ -262,7 +262,7 @@ Bug fix identified via Community and InfluxCloud.
 ### Release Notes
 Bug fix identified via Community and InfluxCloud.
 
-### Bugfixes
+### Bug fixes
 
 - Resolves a memory leak when NewReaderIterator creates a nilFloatIterator, the reader is not closed.
 
@@ -271,7 +271,7 @@ Bug fix identified via Community and InfluxCloud.
 ### Release Notes
 Minor bug fixes were identified via Community and InfluxCloud.
 
-### Bugfixes
+### Bug fixes
 
 - Interrupt "in-progress" TSM compactions.
 - Prevent excessive memory usage when dropping series.
@@ -282,7 +282,7 @@ Minor bug fixes were identified via Community and InfluxCloud.
 ### Release Notes
 Minor bug fixes were identified via Community and InfluxCloud.
 
-### Bugfixes
+### Bug fixes
 
 - Ensure temporary TSM files get cleaned up when compaction aborted.
 - Address deadlock issue causing 1.3.0 to become unresponsive.
