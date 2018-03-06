@@ -188,6 +188,19 @@ Strings are converted to duration of the form as duration literals in TICKscript
 duration(value) duration
 ```
 
+#### Existence
+
+##### isPresent
+
+Returns a Boolean value based on whether the specified field or tag key is present.
+Useful for filtering out data this is missing the specified field or tag.
+
+```javascript
+|where(lambda: isPresent("myfield"))
+```
+
+This returns `TRUE` if `myfield` is a valid identifier and `FALSE` otherwise.
+
 
 #### Time functions
 
