@@ -3,7 +3,7 @@ title: What's new in InfluxDB 1.5
 menu:
   influxdb_1_5:
     name: What's new
-    weight: 40
+    weight: 20
     parent: administration
 ---
 
@@ -13,7 +13,7 @@ InfluxDB 1.5 introduces three important changes:
 
 * [Time Series Index (TSI) support](#time-series-index--tsi--support)
 * [Enterprise-compatible backup and restore](#enterprise-compatible-backup-and-restore-for-influxdb-oss)
-* [Logging options](#new-logging-options)
+* [Logging enhancements](#new-logging-options)
 
 
 ## TSI (Time Series Index) support
