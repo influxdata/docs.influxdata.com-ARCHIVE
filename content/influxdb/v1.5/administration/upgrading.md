@@ -9,9 +9,10 @@ menu:
 
 This page outlines the steps for upgrading from:
 
-* Upgrading from 1.4 (no TSI Preview) to 1.5 (TSI enabled)
-* Upgrading from 1.4 (TSI Preview enabled) to 1.5 (TSI enabled)
-* Upgrading from 1.3 to 1.5 (TSI enabled)
+* [Upgrading from 1.4 (no TSI Preview) to 1.5 (TSI enabled)](#)
+* [Upgrading from 1.4 (TSI Preview enabled) to 1.5 (TSI enabled)](#)
+* [Upgrading from 1.3 to 1.5 (TSI enabled)](#upgrading-from-1-3-to-1-5--tsi-enabled)
+* [Upgrading InfluxDB Enterprise clusters](#upgrading-influxdb-enterprise-clusters)
 
 ## Upgrading from 1.4 (no TSI Preview) to 1.5 (TSI enabled)
 
@@ -106,3 +107,7 @@ When TSI is enabled, new shards use the disk-based indexing. Existing shards mus
 
 6. Check out the new features highlighted in
 [What's new in InfluxDB 1.5](/influxdb/v1.5/administration/differences/) and the [Release Notes/Changelog](/influxdb/v1.5/about_the_project/releasenotes-changelog/).
+
+## Upgrading InfluxDB Enterprise clusters
+
+To upgrade InfluxDB Enterprise clusters, all nodes must be upgraded to the InfluxDB Enterprise 1.5. To upgrade while keeping your InfluxDB Enterprise cluster live, you can perform the upgrade (following the steps above) on each InfluxDB Enterprise node, shutting down the node, performing the upgrade, and then restarting the node.
