@@ -7,7 +7,7 @@ menu:
     parent: administration
 ---
 
-This page outlines the steps for upgrading from:
+This page includes the steps required for upgrading InfluxDB OSS and InfluxDB Enterprise from earlier versions.
 
 * [Upgrading from 1.3/1.4 (no TSI Preview) to 1.5 (TSI enabled)](#upgrading-from-13-14-no-tsi-preview-to-15-tsi-enabled)
 * [Upgrading from 1.4 (TSI Preview enabled) to 1.5 (TSI enabled)](#upgrading-from-13-14-tsi-preview-enabled-to-15-tsi-enabled)
@@ -72,7 +72,7 @@ The steps below assume that your InfluxDB instance was using the TSI Preview.
 5. Run the [influx_inspect buildtsi" utility](/influxdb/v1.5/tools/influx_inspect/#influx_inspect-buildtsi) to convert TSM-based shards to shards supporting TSI (time series index) disk-based index files.
 When TSI is enabled, new shards use the disk-based indexing. Existing shards must be converted to use TSI.
 
-5. Restart the InfluxDB service
+5. Restart the InfluxDB service.
 
 6. Check out the new features highlighted in
 [What's new in InfluxDB 1.5](/influxdb/v1.5/administration/differences/) and the [Release Notes/Changelog](/influxdb/v1.5/about_the_project/releasenotes-changelog/).
@@ -110,7 +110,9 @@ When TSI is enabled, new shards use the disk-based indexing. Existing shards mus
 
 ## Upgrading InfluxDB Enterprise clusters
 
-To upgrade InfluxDB Enterprise clusters, all nodes must be upgraded to the InfluxDB Enterprise 1.5. To upgrade while keeping your InfluxDB Enterprise cluster live, you can perform the upgrade (following the steps above) for each InfluxDB Enterprise cluster node as follows:
+To upgrade InfluxDB Enterprise clusters, all nodes must be upgraded to the InfluxDB Enterprise 1.5. You can either stop all nodes and upgrade each of the nodes while offline or perform a rolling upgrade on a live cluster.
+
+To perform a rolling upgrade on a live InfluxDB Enterprise cluster, perform the upgrade (following the steps above) for each InfluxDB Enterprise cluster node as follows:
 
 1. For each meta node, stop the node service, perform the upgrade steps, and then restart the node.
 2. For each data node, stop the node service, perform the upgrade steps, and then restart the node.

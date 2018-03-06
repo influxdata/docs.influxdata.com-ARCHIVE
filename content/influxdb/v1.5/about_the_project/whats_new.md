@@ -9,12 +9,12 @@ menu:
 
 > For a comprehensive list of the changes between versions, see [InfluxDB's Changelog](/influxdb/v1.5/about_the_project/releasenotes-changelog/).
 
-InfluxDB 1.5 introduces three important changes:
+Included here are some highlights of the InfluxDB 1.5 release:
 
 * [Time Series Index (TSI) support](#time-series-index--tsi--support)
 * [Enterprise-compatible backup and restore](#enterprise-compatible-backup-and-restore-for-influxdb-oss)
 * [Logging enhancements](#new-logging-options)
-
+* [InfluxDB '/metrics' HTTP endpoint](#influxdb-metrics-http-endpoint)
 
 ## TSI (Time Series Index) support
 
@@ -22,7 +22,12 @@ InfluxDB 1.5.0 introduces support for the InfluxDB time series index (TSI) engin
 
 With TSI, the number of series should be unbounded by the memory on the server hardware and the number of existing series will have a negligible impact on database startup time.
 
-> **Note:** TSI remains disabled by default in InfluxDB 1.5, but users are encouraged to enable and use TSI to enhance the management of time series data, especially for data with high series cardinality.
+For more details on TSI, see the following:
+
+* [TSI (Time Series Index) overview](/influxdb/v1.5/concepts/time-series-index/)
+* [TSI (Time Series Index) details](/influxdb/v1.5/concepts/tsi-details/)
+
+> **Note:** TSI remains disabled by default in InfluxDB 1.5, but you are encouraged to enable and use TSI to enhance the management of time series data, especially for data with high series cardinality. You can always revert to in-memory indexing, if required.
 
 
 ## Enterprise-compatible backup and restore for InfluxDB OSS
@@ -51,3 +56,7 @@ Tracing has been added to make it easier for you and InfluxData to diagnosis and
 
 See [logging options](/influxdb/v1.5/administration/config/#logging-options--logging/) in the configuration section.
 See [Logging in InfluxDB](/influxdb/v1.5/administration/logs/)
+
+## InfluxDB '/metrics' HTTP endpoint
+
+A new InfluxDB '/metrics' HTTP endpoint is configured to produce the default Go metrics in Prometheus metrics format. For details, see [InfluxDB `/metrics` HTTP endpoint](/influxdb/v1.5/administration/server_monitoring/#influxdb-metrics-http-endpoint)

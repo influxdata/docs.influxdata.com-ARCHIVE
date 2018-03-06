@@ -19,8 +19,8 @@ menu:
 - Backup utility prints a list of backup files.
 - Backup and restore for OSS produces and consumes data in the Enterprise-compatible backup format.
 - Restore runs in online mode and does not delete existing databases.
-- Export functionality using `start` and `end` to filter exported data by `timestamp`
-- Handle high cardinality deletes in TSM engine
+- Export functionality using `start` and `end` to filter exported data by `timestamp`.
+- Handle high cardinality deletes in TSM engine.
 - Improve in-memory index startup performance for high cardinality.
 - Add further TSI support for streaming and copying shards.
 - Schedule a full compaction after a successful import.
