@@ -239,7 +239,7 @@ Authorization.  Kapacitor can be configured to communicate with Influx using
 a username:password pair.  These properties can be set in the configuration
 file, as environment variables or over the HTTP API.
 
-**Example 4 &ndash; InfluxDB Authentication Parameters &ndash; kapaciotor.conf**
+**Example 4 &ndash; InfluxDB Authentication Parameters &ndash; kapacitor.conf**
 
 ```toml
 [[influxdb]]
