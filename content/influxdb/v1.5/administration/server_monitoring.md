@@ -9,6 +9,15 @@ menu:
     parent: administration
 ---
 
+**On this page**
+
+* SHOW STATS
+* SHOW DIAGNOSTICS
+* Internal monitoring
+* Useful performance metrics commands
+* [InfluxDB `/metrics` HTTP endpoint](#influxDB---metrics--http-endpoint)
+
+
 InfluxDB can display statistical and diagnostic information about each node.
 This information can be very useful for troubleshooting and performance monitoring.
 
@@ -26,7 +35,7 @@ InfluxDB also writes statistical and diagnostic information to database named `_
 The `_internal` database can be queried and manipulated like any other InfluxDB database.
 Check out the [monitor service README](https://github.com/influxdb/influxdb/blob/master/monitor/README.md) and the [internal monitoring blog post](https://influxdb.com/blog/2015/09/22/monitoring_internal_show_stats.html) for more detail.
 
-## Useful Commands
+## Useful performance metrics commands
 
 Below are a collection of commands to find useful performance metrics about your InfluxDB instance.
 
@@ -47,38 +56,16 @@ Or, for systemd systems logging to journald:
 journalctl -u influxdb.service | awk '/POST/ { print $10 }' | sort | uniq -c
 ```
 
-### Prometheus `/metrics` HTTP endpoint
+### InfluxDB `/metrics` HTTP endpoint
 
-<dt>
-Note: The Prometheus [API Stability Guarantees](https://prometheus.io/docs/prometheus/latest/stability/) states that the metrics in the `/metrics` endpoint are considered unstable for 2.x. Any breaking changes will be included in the InfluxDB release notes.
+> ***Note:*** There are no outstanding PRs for improvements to the `/metrics` endpoint, but we’ll add them to the CHANGELOG as they occur.
 
-There are no outstanding PRs for improvements to the `/metrics` endpoint, but we’ll add them to the CHANGELOG as they occur.
-</dt>
+The InfluxDB `/metrics` endpoint is configured to produce the default Go metrics in Prometheus metrics format.
 
-The Prometheus `/metrics` endpoint is configured to produce the default Go metrics.
 
-InfluxDB support for the Prometheus metrics API adds the following HTTP endpoint to the InfluxDB `httpd` handler:
+#### Example using InfluxDB `/metrics' endpoint
 
-* `/api/v1/prom/metrics/`
-
-### Configuration
-
-To enable the use of the Prometheus metrics endpoint with InfluxDB, you need to add the following URL value to the settings in the [Prometheus configuration file](https://prometheus.io/docs/prometheus/latest/configuration/configuration/):
-
-- [`metrics`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#<metrics>)
-
-#### Example of Prometheus `/metrics' endpoint configuration
-
-```
-# Metrics endpoint configuration (for InfluxDB only at the moment).
-metrics:
-* url: "http://localhost:8086/api/v1/prom/metrics?u=paul&p=foo&db=prometheus"
-```
-You can use query parameters to pass in an optional database user and password.
-
->***Note:*** Including the password in the config file is not ideal.  See this Prometheus issue: ["Support for environment variable substitution in configuration file"](https://github.com/prometheus/prometheus/issues/2357).
-
-#### Example of Prometheus `/metrics` endpoint output
+Below is an example of the output generated using the `/metrics` endpoint. Note that HELP is available to explain the Go statistics.
 
 ```
 # HELP go_gc_duration_seconds A summary of the GC invocation durations.
