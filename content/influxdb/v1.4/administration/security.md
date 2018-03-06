@@ -5,8 +5,8 @@ categories: ["InfluxDB"]
 menu:
   influxdb_1_4:
   name: Managing security
-    weight: 80
-    parent: administration
+  weight: 80
+  parent: administration
 ---
 
 Some customers may choose to install InfluxDB with public internet access, however
