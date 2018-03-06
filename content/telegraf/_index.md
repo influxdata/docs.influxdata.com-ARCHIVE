@@ -1,4 +1,4 @@
 ---
 type: telegraf
-layout: list
+
 ---

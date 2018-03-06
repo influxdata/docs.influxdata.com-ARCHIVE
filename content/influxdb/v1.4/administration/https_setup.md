@@ -1,16 +1,15 @@
 ---
-title: HTTPS setup
+title: HTTPS setup for InfluxDB
+
 menu:
   influxdb_1_4:
     weight: 100
-    parent: guides
+    parent: administration
 ---
 
 This guide describes how to enable HTTPS with InfluxDB.
 Setting up HTTPS secures the communication between clients and the InfluxDB
-server,
-and, in some cases, HTTPS verifies the authenticity of the InfluxDB server to
-clients.
+server, and, in some cases, HTTPS verifies the authenticity of the InfluxDB server to clients.
 
 If you plan on sending requests to InfluxDB over a network, we
 [strongly recommend](/influxdb/v1.4/administration/security/)
@@ -184,8 +183,9 @@ InfluxDB shell version: 1.x.x
 
 That's it! You've successfully set up HTTPS with InfluxDB.
 
->
-## Connect Telegraf to a secured InfluxDB instance
+
+## Connecting Telegraf to a secured InfluxDB instance
+
 >
 Connecting [Telegraf](/telegraf/latest/) to an InfluxDB instance that's using
 HTTPS requires some additional steps.

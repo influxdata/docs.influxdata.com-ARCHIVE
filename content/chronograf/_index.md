@@ -1,4 +1,4 @@
 ---
 type: chronograf
-layout: list
+
 ---
