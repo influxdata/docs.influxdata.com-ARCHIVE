@@ -1,5 +1,5 @@
 ---
-title: Logging in InfluxDB
+title: Logging and tracing in InfluxDB
 
 menu:
   influxdb_1_5:
@@ -11,7 +11,7 @@ menu:
 **Content**
 
 * [Logging locations](#logging-locations)
-* [Generating separate HTTP request logs](#generating-HTTP-request-logs)
+* [Redirecting HTTP request logging](#redirecting-HTTP-request-logging)
 * [Structured logging](#structured-logging)
 * [Tracing](#tracing)
 

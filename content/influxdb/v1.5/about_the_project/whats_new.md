@@ -54,8 +54,7 @@ With InfluxDB 1.5, logging has been improved to support structured logging, trac
 
 Structured logging support allows you to more easily integrate InfluxDB logs with Splunk, Papertrail, Elasticsearch, and other third party tools. The two new structured log formats, `logfmt` and `json`, provide machine-readable and more developer-friendly log outputs.
 
-See [logging options](/influxdb/v1.5/administration/config/#logging-options--logging/) in the configuration section.
-See [Logging in InfluxDB](/influxdb/v1.5/administration/logs/)
+See [Structured logging](/influxdb/v1.5/administration/logs/#structured-logging).
 
 ## Tracing
 
