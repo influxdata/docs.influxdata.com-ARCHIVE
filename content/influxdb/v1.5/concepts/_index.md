@@ -22,6 +22,14 @@ A brief treatment of some of the performance tradeoffs made during the design ph
 
 A useful overview of the InfluxDB time series data structure and how it affects performance.
 
-## [Storage engine](/influxdb/v1.5/concepts/storage_engine/)
+## [TSM storage engine](/influxdb/v1.5/concepts/storage_engine/)
 
-A overview of how InfluxDB to stores data on disk.
+An overview of how InfluxDB to stores data on disk and uses TSM for in-memory indexing.
+
+## [TSI (Time Series Index) overview](/influxdb/v1.5/concepts/time-series-index/)
+
+An overview of how InfluxDB uses TSI (Time Series Index) for disk-based indexing.
+
+## [TSI (Time Series Index) details](/influxdb/v1.5/concepts/tsi-details/)
+
+A detail look at understanding how TSI works, the file structure, and tooling.

@@ -1,24 +1,24 @@
 ---
-title: TSI
+title: TSI (Time Series Index) overview
 
 menu:
   influxdb_1_5:
-    name: TSI
-    weight: 90
+    name: TSI (Time Series Index) overview
+    weight: 100
     parent: concepts
 ---
 
-## Time Series Index (TSI)
+## TSI (Time Series Index)
 
 In order to support a large number of time series, that is, a very high cardinality in the number of unique time series that the database stores, InfluxData has added the new Time Series Index (TSI).
 InfluxData supports customers using InfluxDB with tens of millions of time series.
 InfluxData's goal, however, is to expand to hundreds of millions, and eventually billions.
-Using InfluxData's TSI storage engine now, users should be able to have millions of unique time series.
+Using InfluxData's TSI storage engine, users should be able to have millions of unique time series.
 The goal is that the number of series should be unbounded by the amount of memory on the server hardware.
 Importantly, the number of series that exist in the database will have a negligible impact on database startup time.
 This work has been in the making since last August and represents the most significant technical advancement in the database since InfluxData released the Time Series Merge Tree (TSM) storage engine in 2016.
 
-## Background information.
+## Background information
 
 InfluxDB actually looks like two databases in one, a time series data store and an inverted index for the measurement, tag, and field metadata.
 
