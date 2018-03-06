@@ -9,9 +9,9 @@ menu:
 
 This page outlines the steps for upgrading from:
 
-* [Upgrading from 1.4 (no TSI Preview) to 1.5 (TSI enabled)](#)
-* [Upgrading from 1.4 (TSI Preview enabled) to 1.5 (TSI enabled)](#)
-* [Upgrading from 1.3 to 1.5 (TSI enabled)](#upgrading-from-1-3-to-1-5--tsi-enabled)
+* [Upgrading from 1.4 (no TSI Preview) to 1.5 (TSI enabled)](#upgrading-from-14-no-tsi-preview-to-15-tsi-enabled)
+* [Upgrading from 1.4 (TSI Preview enabled) to 1.5 (TSI enabled)](#upgrading-from-14-tsi-preview-enabled-to-15-tsi-enabled)
+* [Upgrading from 1.3 to 1.5 (TSI enabled)](#upgrading-from-13-to-15-tsi-enabled)
 * [Upgrading InfluxDB Enterprise clusters](#upgrading-influxdb-enterprise-clusters)
 
 ## Upgrading from 1.4 (no TSI Preview) to 1.5 (TSI enabled)
