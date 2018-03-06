@@ -1,12 +1,12 @@
 ---
-title: Frequently asked questions about InfluxDB OSS
+title: Frequently asked questions about InfluxDB
 aliases:
   - /influxdb/v1.5/troubleshooting/frequently_encountered_issues/
 
 menu:
   influxdb_1_5:
     name: Frequently asked questions
-    weight: 0
+    weight: 10
     parent: troubleshooting
 ---
 
