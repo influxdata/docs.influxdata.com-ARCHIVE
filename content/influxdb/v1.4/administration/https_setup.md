@@ -1,12 +1,10 @@
 ---
 title: HTTPS setup for InfluxDB
-tags: ["HTTPS","TLS","SSL"]
-categories: ["InfluxDB"]
+
 menu:
   influxdb_1_4:
-  name: HTTPS setup
     weight: 100
-    parent: guides
+    parent: administration
 ---
 
 This guide describes how to enable HTTPS with InfluxDB.
