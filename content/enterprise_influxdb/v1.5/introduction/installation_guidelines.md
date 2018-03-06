@@ -17,7 +17,7 @@ Please review the sections below before you begin working with InfluxDB Enterpri
 
 Two options are described for installing InfluxDB Enterprise.
 
-The [QuickStart snstallation](/enterprise_influxdb/v1.5/quickstart_installation/) process is intended for users looking to quickly get up and running with InfluxDB Enterprise and for users who want to evaluate it.
+The [QuickStart installation](/enterprise_influxdb/v1.5/quickstart_installation/) process is intended for users looking to quickly get up and running with InfluxDB Enterprise and for users who want to evaluate it.
 The QuickStart installation process **is not** intended for use
 in a production environment.
 

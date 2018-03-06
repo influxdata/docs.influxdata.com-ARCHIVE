@@ -9,10 +9,10 @@ menu:
     identifier: data_production
 ---
 
-InfluxEnterprise offers highly scalable clusters on your infrastructure
+InfluxDB Enterprise offers highly scalable clusters on your infrastructure
 and a management UI for working with clusters.
 The next steps will get you up and running with the second essential component of
-your InfluxEnterprise cluster: the data nodes.
+your InfluxDB Enterprise cluster: the data nodes.
 
 If you have not set up your meta nodes, please visit
 [Installing meta nodes](/enterprise_influxdb/v1.5/production_installation/meta_node_installation/).
@@ -24,7 +24,7 @@ Bad things can happen if you complete the following steps without meta nodes.
 The Production Installation process sets up two [data nodes](/enterprise_influxdb/v1.5/concepts/glossary#data-node)
 and each data node runs on its own server.
 You **must** have a minimum of two data nodes in a cluster.
-InfluxEnterprise clusters require at least two data nodes for high availability and redundancy.
+InfluxDB Enterprise clusters require at least two data nodes for high availability and redundancy.
 <br>
 Note: that there is no requirement for each data node to run on its own
 server.  However, best practices are to deploy each data node on a dedicated server.
@@ -37,7 +37,7 @@ for more on cluster architecture.
 
 #### License key or file
 
-InfluxEnterprise requires a license key **OR** a license file to run.
+InfluxDB Enterprise requires a license key **OR** a license file to run.
 Your license key is available at [InfluxPortal](https://portal.influxdata.com/licenses).
 Contact support at the email we provided at signup to receive a license file.
 License files are required only if the nodes in your cluster cannot reach
@@ -55,7 +55,7 @@ setting in the data node configuration file.
 
 #### Load balancer
 
-InfluxEnterprise does not function as a load balancer.
+InfluxDB Enterprise does not function as a load balancer.
 You will need to configure your own load balancer to send client traffic to the
 data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.5/tools/api/)).
 

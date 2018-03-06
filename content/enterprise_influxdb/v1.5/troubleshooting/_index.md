@@ -8,4 +8,5 @@ menu:
 ---
 
 ## [Frequently asked questions](/enterprise_influxdb/v1.5/troubleshooting/frequently_asked_questions/)
+
 ## [Reporting issues](/enterprise_influxdb/v1.5/troubleshooting/reporting-issues/)

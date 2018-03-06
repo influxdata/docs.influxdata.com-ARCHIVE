@@ -353,7 +353,7 @@ quickstart-cluster-02:8091   1.3.8-c1.3.8
 quickstart-cluster-03:8091   1.3.8-c1.3.8
 ```
 
-Your cluster should have three data nodes and three meta nodes.
+Your InfluxDB Enterprise cluster should have three data nodes and three meta nodes.
 If you do not see your meta or data nodes in the output, please retry
 adding them to the cluster.
 

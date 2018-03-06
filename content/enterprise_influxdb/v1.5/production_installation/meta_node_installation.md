@@ -13,15 +13,15 @@ menu:
 InfluxDB Enterprise offers highly scalable clusters on your infrastructure
 and a management UI ([via Chronograf](https://docs.influxdata.com/chronograf/latest) for working with clusters.
 The Production Installation process is designed for users looking to
-deploy InfluxEnterprise in a production environment.
+deploy InfluxDB Enterprise in a production environment.
 The following steps will get you up and running with the first essential component of
 your InfluxDB Enterprise cluster: the meta nodes.
 
-> If you wish to evaluate InfluxEnterprise in a non-production
+> If you wish to evaluate InfluxDB Enterprise in a non-production
 environment, feel free to follow the instructions outlined in the
 [QuickStart installation](/enterprise_influxdb/v1.5/quickstart_installation) section.
-Please note that if you install InfluxEnterprise with the QuickStart Installation process you
-will need to reinstall InfluxEnterprise with the Production Installation
+Please note that if you install InfluxDB Enterprise with the QuickStart Installation process you
+will need to reinstall InfluxDB Enterprise with the Production Installation
 process before using the product in a production environment.
 
 <br>
@@ -31,7 +31,7 @@ The Production Installation process sets up three [meta nodes](/enterprise_influ
 and each meta node runs on its own server.
 <br>
 You **must** have a minimum of three meta nodes in a cluster.
-InfluxEnterprise clusters require at least three meta nodes and an __**odd number**__
+InfluxDB Enterprise clusters require at least three meta nodes and an __**odd number**__
 of meta nodes for high availability and redundancy.
 We do not recommend having more than three meta nodes unless your servers
 and/or the communication between the servers have chronic reliability issues.

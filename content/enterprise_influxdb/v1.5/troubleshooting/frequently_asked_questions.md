@@ -25,7 +25,7 @@ menu:
 
 **Other**
 
-## Where can I find InfluxEnterprise logs?
+## Where can I find InfluxDB Enterprise logs?
 
 On systemd operating systems service logs can be accessed using the `journalctl` command.
 
