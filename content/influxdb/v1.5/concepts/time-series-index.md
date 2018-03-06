@@ -16,7 +16,7 @@ InfluxData's goal, however, is to expand to hundreds of millions, and eventually
 Using InfluxData's TSI storage engine, users should be able to have millions of unique time series.
 The goal is that the number of series should be unbounded by the amount of memory on the server hardware.
 Importantly, the number of series that exist in the database will have a negligible impact on database startup time.
-This work has been in the making since last August and represents the most significant technical advancement in the database since InfluxData released the Time Series Merge Tree (TSM) storage engine in 2016.
+This work represents the most significant technical advancement in the database since InfluxData released the Time Series Merge Tree (TSM) storage engine in 2016.
 
 ## Background information
 
@@ -30,7 +30,7 @@ This meant that for every measurement, tag key/value pair, and field name, there
 For users with a high number of ephemeral series, memory utilization continued increasing as new time series were created.
 And, startup times increased since all of that data would have to be loaded onto the heap at start time.
 
->> For details, see
+>> For details, see [TSM-based data storage and in-memory indexing](/influxdb/v1.5/concepts/storage-engine/).
 
 ### Time series index (TSI)
 
