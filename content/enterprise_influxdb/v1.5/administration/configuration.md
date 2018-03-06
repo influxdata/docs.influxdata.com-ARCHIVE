@@ -120,9 +120,9 @@ This matches a similar behavior that the open source and data node versions of I
 
 ### Environment variables
 
-All configuration options can be specified in the configuration file or in an
-environment variable.
-The environment variable overrides the equivalent option in the configuration
+All configuration options can be specified in the configuration file or in
+environment variables.
+Environment variables override the equivalent options in the configuration
 file.
 If a configuration option is not specified in either the configuration file
 or in an environment variable, InfluxDB uses its internal default
@@ -162,7 +162,7 @@ For each section of the configuration file the numbering restarts at zero.
 
 <br>
 <br>
-# Meta Node Configuration
+# Meta node configuration
 
 ## Global options
 
@@ -619,8 +619,8 @@ Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 
 ### index-version = inmem
 
-The type of shard index to use for new shards. The default is an in-memory index that is recreated at startup.
-A value of tsi1 will use a disk based index that supports higher cardinality datasets.
+The type of shard index to use for new shards. The default (`inmem`) is to use an in-memory index that is recreated at startup.
+A value of `tsi1` will use a disk-based index that supports higher cardinality datasets. 
 
 Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 
