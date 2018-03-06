@@ -334,7 +334,7 @@ Failure to do so will result in the inability of InfluxDB to push subscribed
 data to Kapacitor with a message in the InfluxDB log like the following:
 
 ```
-bře 05 17:02:40 algonquin influxd[32520]: [I] 2018-03-05T16:02:40Z Post https://localhost:9092/write?consistency=&db=telegraf&precision=ns&rp=autogen: http: server gave HTTP response to HTTPS client service=subscriber
+mar 05 17:02:40 algonquin influxd[32520]: [I] 2018-03-05T16:02:40Z Post https://localhost:9092/write?consistency=&db=telegraf&precision=ns&rp=autogen: http: server gave HTTP response to HTTPS client service=subscriber
 ```
 
 ### Kapacitor Authentication and Authorization
@@ -420,7 +420,7 @@ If an error notification is returned check the Chronograf log for proxy errors.
 For example:
 
 ```
-bře 06 13:53:07 lenovo-tp02 chronograf[12079]: 2018/03/06 13:53:07 http: proxy error: x509: certificate is valid for locahlost, not localhost
+mar 06 13:53:07 lenovo-tp02 chronograf[12079]: 2018/03/06 13:53:07 http: proxy error: x509: certificate is valid for locahlost, not localhost
 ```
 
 4) Also tabbed forms for editing and adding Kapacitor Handler Endpoints will
