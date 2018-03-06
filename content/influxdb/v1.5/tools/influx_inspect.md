@@ -17,8 +17,8 @@ shards, as well as export data from a shard to [line protocol](/influxdb/v1.5/co
 The commands are:
 ```
     buildtsi             convert in-memory (TSM-based) shards to TSI
-    dumptsm              dumps low-level details about tsm1 files.
     dumptsi              dumps low-level details about tsi1 files.
+    dumptsm              dumps low-level details about tsm1 files.
     export               exports raw data from a shard to line protocol
     help                 display this help message format
     report               displays a shard level report
@@ -61,36 +61,6 @@ Optional arguments are in brackets.
 $ influx_inspect buildtsi -datadir ~/.influxdb/data/stress/autogen/1 -waldir ~/.influxdb/wal/stress/autogen/1
 ```
 
-### `influx_inspect dumptsm`
-Dumps low-level details about [tsm](/influxdb/v1.5/concepts/glossary/#tsm-time-structured-merge-tree) files.
-
-#### Usage
-```
-influx_inspect dumptsm [<flags>] <path>
-```
-
-#### Flags
-
-##### `-index` bool
-Dump raw index data.
-
-`default` = false
-
-##### `-blocks` bool
-Dump raw block data.
-
-`default` = false
-
-##### `-all`
-Dump all data. Caution: This may print a lot of information.
-
-`default` = false
-
-##### `-filter-key`
-Only display index and block data that match this key substring.
-
-`default` = ""
-
 ### influx_inspect dumptsi
 Dumps low-level details about tsi1 files.
 `dumptsi` returns summary stats for each file if the command does not specify any flags.
@@ -125,6 +95,36 @@ Filter data by tag key regular expression.
 
 ##### `-tag-value-filter` <regular_expresssion>
 Filter data by tag value regular expression.
+
+### `influx_inspect dumptsm`
+Dumps low-level details about [tsm](/influxdb/v1.5/concepts/glossary/#tsm-time-structured-merge-tree) files.
+
+#### Usage
+```
+influx_inspect dumptsm [<flags>] <path>
+```
+
+#### Flags
+
+##### `-index` bool
+Dump raw index data.
+
+`default` = false
+
+##### `-blocks` bool
+Dump raw block data.
+
+`default` = false
+
+##### `-all`
+Dump all data. Caution: This may print a lot of information.
+
+`default` = false
+
+##### `-filter-key`
+Only display index and block data that match this key substring.
+
+`default` = ""
 
 
 ### `influx_inspect export`

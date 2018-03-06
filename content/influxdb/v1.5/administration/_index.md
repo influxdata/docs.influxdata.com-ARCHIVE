@@ -13,8 +13,6 @@ Information on how to direct InfluxDB log output.
 
 Procedures to backup data created by InfluxDB and to restore from a backup.
 
-## [What's new in 1.5](/influxdb/v1.5/administration/differences/)
-
 ## [Upgrading](/influxdb/v1.5/administration/upgrading/)
 
 Information about upgrading from previous versions of InfluxDB
