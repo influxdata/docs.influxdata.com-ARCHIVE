@@ -1,5 +1,6 @@
 ---
-title: Managing security
+title: Managing InfluxDB security
+
 menu:
   influxdb_1_4:
     weight: 80

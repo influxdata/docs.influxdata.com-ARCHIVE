@@ -1,4 +1,4 @@
 ---
 type: kapacitor
-layout: list
+
 ---

@@ -512,7 +512,7 @@ The Zipkin input plugin implements the Zipkin HTTP server to gather trace and ti
 
 > ***Note:*** This plugin is experimental. Its data schema may be subject to change based on its main usage cases and the evolution of the OpenTracing standard.
 
-### [Zookeeper" (zookeeper)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/zookeeper)
+### [Zookeeper (zookeeper)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/zookeeper)
 
 The Zookeeper input plugin collects variables outputted from the `mntr` command [Zookeeper Admin](https://zookeeper.apache.org/doc/trunk/zookeeperAdmin.html).
 

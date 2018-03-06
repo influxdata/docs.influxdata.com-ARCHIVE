@@ -1,8 +1,6 @@
 ---
 title: Managing Chronograf security
-
 aliases: /chronograf_1_4/security-best-practices/
-
 menu:
   chronograf_1_4:
     name: Managing Chronograf security
@@ -74,18 +72,19 @@ Chronograf supports using the [GitHub OAuth 2.0 authentication](https://develope
 
 Chronograf has five environment variables (and corresponding command line options) for use with GitHub OAuth 2.0 authentication. The steps below show you how to set the required values for:
 
-* TOKEN_SECRET (secret used for generating and validating JWT tokens)
-* GH_CLIENT_ID (GitHub Client ID)
-* GH_CLIENT_SECRET (GitHub Client Secret)
+* `TOKEN_SECRET` (secret used for generating and validating JWT tokens)
+* `GH_CLIENT_ID` (GitHub Client ID)
+* `GH_CLIENT_SECRET` (GitHub Client Secret)
 
 Optionally, you can specify values for these two environment variables (or corresponding command line options):
 
-* AUTH_DURATION (authorization duration)
-* GH_ORGS (GitHub organizations)
+* `AUTH_DURATION` (authorization duration)
+* `GH_ORGS` (GitHub organizations)
 
 For details on the command line options and environment variables, see [GitHub OAuth 2.0 authentication options](/chronograf/latest/administration/config-options#github-oauth-2-0-authentication-options).
 
 **Example:**
+
 ```
 # Require users to reauthenticate after 1 hour
 export AUTH_DURATION=1h
@@ -191,6 +190,7 @@ The following steps will guide you in configuring Google OAuth 2.0 authorization
 * `PUBLIC_URL` (Public URL -- the URL used to access Chronograf)
 
 **Example:**
+
 ```sh
 export GOOGLE_CLIENT_ID= 812760930421-kj6rnscmlbv49pmkgr1jq5autblc49kr.apps.googleusercontent.com
 export GOOGLE_CLIENT_SECRET= wwo0m29iLirM6LzHJWE84GRD
@@ -202,6 +202,7 @@ export PUBLIC_URL=http://localhost:8888
 * `TOKEN_SECRET` (Secret used for generating and validating JWT tokens)
 
 **Example:**
+
 ```sh
 export TOKEN_SECRET=Super5uperUdn3verGu355!
 ```

@@ -16,7 +16,7 @@ menu:
 * [Recordings](#recordings)
 * [Replays](#replays)
 * [Alerts](#alerts)
-* [Configuration](#configuration)
+* [Configuration](#overriding-configurations)
 * [Storage](#storage)
 * [Logs](#logs)
 * [Testing services](#testing-services)
