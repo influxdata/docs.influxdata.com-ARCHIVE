@@ -10,8 +10,7 @@ menu:
 
 ### Breaking changes
 
-> ***Note:*** This release builds off of the 1.5 release of InfluxDB OSS. Please see the [InfluxDB OSS release
-> notes](https://docs.influxdata.com/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
+The default logging format has been changed. See [Logging in InfluxDB](/influxdb/v1.5/administration/logs) for details.
 
 ### Features
 
