@@ -11,8 +11,8 @@ menu:
 # Overview
 
 TICKscript uses lambda expressions  to define transformations on data points as
-well as define boolean conditions that act as filters.  Lambda expressions wrap
-mathematical operations, boolean operations, internal function calls or a
+well as define Boolean conditions that act as filters.  Lambda expressions wrap
+mathematical operations, Boolean operations, internal function calls or a
 combination of all three. TICKscript tries to be similar to InfluxQL in that
 most expressions that you would use in an InfluxQL `WHERE` clause will work as
 expressions in TICKscript, but with its own syntax:
@@ -100,7 +100,7 @@ of the same and the desired type.
 In short, to ensure that the type of a field value is correct, use the built-in
 type conversion functions (see [below](#above-header-type-conversion)).
 
-# Built-in Functions
+# Built-in functions
 
 ### Stateful functions
 
@@ -134,11 +134,11 @@ spread(value float64) float64
 <a id="above-header-type-conversion"></a>
 ### Stateless functions
 
-#### Type Conversion functions
+#### Type conversion functions
 
 ##### Bool
 
-Converts a string into a boolean via Golang's
+Converts a string into a Boolean via Golang's
 [strconv.ParseBool](https://golang.org/pkg/strconv/#ParseBool) function. Numeric
 types can also be converted to a bool where a 0 -> false and 1 -> true.
 
@@ -151,7 +151,7 @@ bool(value) bool
 Converts a string or float64 into an int64 via Golang's
 [strconv.ParseInt](https://golang.org/pkg/strconv/#ParseInt) or simple
 `int64()` coercion.  Strings are assumed to be decimal numbers.  Durations are
-converted into an int64 with nanoseconds units.  A boolean is converted to an
+converted into an int64 with nanoseconds units.  A Boolean is converted to an
 int64 where false -> 0 and true -> 1.
 
 ```javascript
@@ -163,7 +163,7 @@ int(value) int64
 Converts a string or int64 into an float64 via Golang's
 [strconv.ParseFloat](https://golang.org/pkg/strconv/#ParseInt) or simple
 `float64()` coercion.
-A boolean is converted to a float64 where false -> 0.0 and true -> 1.0.
+A Boolean is converted to a float64 where false -> 0.0 and true -> 1.0.
 
 ```javascript
 float(value) float64
@@ -190,7 +190,7 @@ duration(value) duration
 
 #### Existence
 
-##### isPresent
+##### IsPresent
 
 Returns a Boolean value based on whether the specified field or tag key is present.
 Useful for filtering out data this is missing the specified field or tag.
@@ -308,7 +308,7 @@ Each function is implemented via the equivalent Go function.
 
 
 
-#### Human String functions
+#### Human string functions
 
 ##### HumanBytes
 
@@ -319,7 +319,7 @@ humanBytes(value) string
 ```
 
 
-#### Conditional Functions
+#### Conditional functions
 
 ##### If
 
