@@ -3,7 +3,7 @@ title: Enabling HTTPS with InfluxDB
 menu:
   influxdb_1_5:
     name: Enabling HTTPS
-    weight: 100
+    weight: 30
     parent: administration
 ---
 

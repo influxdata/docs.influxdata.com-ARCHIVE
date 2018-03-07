@@ -5,16 +5,16 @@ aliases:
 menu:
   influxdb_1_5:
     name: Server monitoring
-    weight: 10
+    weight: 80
     parent: administration
 ---
 
 **On this page**
 
-* SHOW STATS
-* SHOW DIAGNOSTICS
-* Internal monitoring
-* Useful performance metrics commands
+* [SHOW STATS](#show-stats)
+* [SHOW DIAGNOSTICS](#show-diagnostics)
+* I[nternal monitoring](#internal-monitoring)
+* [Useful performance metrics commands](#useful-performance-metrics-commands)
 * [InfluxDB `/metrics` HTTP endpoint](#influxDB---metrics--http-endpoint)
 
 

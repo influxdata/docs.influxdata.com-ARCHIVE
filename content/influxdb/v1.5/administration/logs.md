@@ -4,7 +4,7 @@ title: Logging and tracing in InfluxDB
 menu:
   influxdb_1_5:
     name: Logging and tracing
-    weight: 10
+    weight: 40
     parent: administration
 ---
 

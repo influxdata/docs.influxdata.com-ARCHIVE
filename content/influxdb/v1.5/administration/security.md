@@ -3,7 +3,7 @@ title: Managing InfluxDB security
 menu:
   influxdb_1_5:
     name: Managing security
-    weight: 80
+    weight: 70
     parent: administration
 ---
 
@@ -28,13 +28,13 @@ Resources:
 [User Types and Privileges](/influxdb/v1.5/query_language/authentication_and_authorization/#user-types-and-privileges),
 [User Management Commands](/influxdb/v1.5/query_language/authentication_and_authorization/#user-management-commands)
 
-## Setting up HTTPS
+## Enabling HTTPS
 
 Using HTTPS secures the communication between clients and the InfluxDB server, and, in
 some cases, HTTPS verifies the authenticity of the InfluxDB server to clients (bi-directional authentication).
 
 Resources:
-[HTTPS Setup](/influxdb/v1.5/administration/https_setup/)
+[Enabling HTTPS](/influxdb/v1.5/administration/https_setup/)
 
 ## Securing your host
 

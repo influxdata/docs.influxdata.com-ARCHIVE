@@ -3,7 +3,7 @@ title: Configuring InfluxDB OSS
 menu:
   influxdb_1_5:
     name: Configuring InfluxDB
-    weight: 70
+    weight: 10
     parent: administration
 ---
 

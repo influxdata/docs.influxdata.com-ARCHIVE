@@ -4,7 +4,7 @@ title: Backing up and restoring in InfluxDB OSS
 menu:
   influxdb_1_5:
     name: Backing up and restoring
-    weight: 30
+    weight: 60
     parent: administration
 ---
 

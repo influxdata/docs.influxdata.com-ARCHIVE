@@ -4,11 +4,11 @@ title: InfluxDB ports
 menu:
   influxdb_1_5:
     name: Ports
-    weight: 20
+    weight: 50
     parent: administration
 ---
 
-## Enabled Ports
+## Enabled ports
 
 ### `8086`
 The default port that runs the InfluxDB HTTP service.
@@ -24,7 +24,7 @@ in the configuration file.
 
 **Resources** [Backup and Restore](/influxdb/v1.5/administration/backup_and_restore/)
 
-## Disabled Ports
+## Disabled ports
 
 ### 2003
 
