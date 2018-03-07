@@ -4,7 +4,7 @@ aliases:
     - influxdb/v1.5/write_protocols/line/
 menu:
   influxdb_1_5:
-    weight: 0
+    weight: 20
     parent: write_protocols
 ---
 
