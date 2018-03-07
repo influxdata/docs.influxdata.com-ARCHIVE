@@ -5,7 +5,7 @@ aliases:
 menu:
   influxdb_1_5:
     name: InfluxDB API reference
-    weight: 10
+    weight: 20
     parent: tools
 ---
 

@@ -3,8 +3,8 @@ title: InfluxDB command line interface (CLI/shell)
 
 menu:
   influxdb_1_5:
-    name: InfluxDB command line interface
-    weight: 0
+    name: Command line interface (CLI)
+    weight: 10
     parent: tools
 ---
 

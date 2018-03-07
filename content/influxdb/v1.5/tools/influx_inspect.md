@@ -3,7 +3,7 @@ title: Influx Inspect disk shard utility
 
 menu:
   influxdb_1_5:
-    weight: 40
+    weight: 50
     parent: tools
 ---
 
