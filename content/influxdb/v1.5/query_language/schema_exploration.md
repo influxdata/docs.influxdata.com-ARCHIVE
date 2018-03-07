@@ -1,9 +1,9 @@
 ---
-title: Schema exploration using InfluxQL...
+title: Schema exploration using InfluxQL
 menu:
   influxdb_1_5:
     name: Schema exploration
-    weight: 20
+    weight: 30
     parent: query_language
 ---
 

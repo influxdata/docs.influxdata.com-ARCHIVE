@@ -1,9 +1,10 @@
 ---
-title: Database management
+title: Database management using InfluxQL
 
 menu:
   influxdb_1_5:
-    weight: 30
+    name: Data management
+    weight: 40
     parent: query_language
 ---
 

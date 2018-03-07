@@ -5,7 +5,7 @@ aliases:
 menu:
   influxdb_1_5:
     name: Authentication and authorization
-    weight: 90
+    weight: 80
     parent: query_language
 ---
 

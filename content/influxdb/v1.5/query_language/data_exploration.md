@@ -4,7 +4,7 @@ title: Data exploration using InfluxQL
 menu:
   influxdb_1_5:
     name: Data exploration
-    weight: 10
+    weight: 20
     parent: query_language
 ---
 

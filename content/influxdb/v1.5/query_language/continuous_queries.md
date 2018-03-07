@@ -3,7 +3,8 @@ title: InfluxQL Continuous Queries
 
 menu:
   influxdb_1_5:
-    weight: 40
+    name: Continuous Queries
+    weight: 50
     parent: query_language
 ---
 

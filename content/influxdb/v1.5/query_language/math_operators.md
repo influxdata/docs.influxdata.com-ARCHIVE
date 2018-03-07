@@ -4,7 +4,7 @@ title: InfluxQL mathematical operators
 menu:
   influxdb_1_5:
     name: Mathematical operators
-    weight: 80
+    weight: 70
     parent: query_language
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: InfluxQL query language
+title: Influx Query Language (InfluxQL)
 ---
 
 This section introduces InfluxQL, InfluxDB's SQL-like query language for
