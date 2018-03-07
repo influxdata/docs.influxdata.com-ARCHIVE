@@ -2,7 +2,7 @@
 title: Comparison to SQL
 menu:
   influxdb_1_5:
-    weight: 20
+    weight: 30
     parent: concepts
 ---
 

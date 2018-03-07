@@ -2,7 +2,7 @@
 title: Key concepts
 menu:
   influxdb_1_5:
-    weight: 0
+    weight: 10
     parent: concepts
 ---
 

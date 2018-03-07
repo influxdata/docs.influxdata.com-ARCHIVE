@@ -3,7 +3,7 @@ title: Design insights and tradeoffs in InfluxDB
 menu:
   influxdb_1_5:
     name: Design insights and tradeoffs
-    weight: 60
+    weight: 40
     parent: concepts
 ---
 

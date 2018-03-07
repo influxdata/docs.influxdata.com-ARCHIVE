@@ -1,14 +1,14 @@
 ---
-title: TSI (Time Series Index) details
+title: Time Series Index (TSI) details
 
 menu:
   influxdb_1_5:
-    name: TSI (Time Series Index) details
-    weight: 110
+    name: Time Series Index (TSI) details
+    weight: 80
     parent: concepts
 ---
 
-## Description of TSI
+## Time Series Index (TSI) description
 
 When InfluxDB ingests data, we store not only the value but we also index the measurement and tag information so that it can be queried quickly.
 In earlier versions, index data could only be stored in-memory, however, that requires a lot of RAM and places an upper bound on the number of series a machine can hold.

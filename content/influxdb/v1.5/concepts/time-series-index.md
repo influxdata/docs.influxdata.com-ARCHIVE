@@ -1,14 +1,14 @@
 ---
-title: TSI (Time Series Index) overview
+title: Time Series Index (TSI) overview
 
 menu:
   influxdb_1_5:
-    name: TSI (Time Series Index) overview
-    weight: 100
+    name: Time Series Index (TSI) overview
+    weight: 70
     parent: concepts
 ---
 
-## TSI (Time Series Index)
+## Time Series Index (TSI))
 
 In order to support a large number of time series, that is, a very high cardinality in the number of unique time series that the database stores, InfluxData has added the new Time Series Index (TSI).
 InfluxData supports customers using InfluxDB with tens of millions of time series.
@@ -32,7 +32,7 @@ And, startup times increased since all of that data would have to be loaded onto
 
 >> For details, see [TSM-based data storage and in-memory indexing](/influxdb/v1.5/concepts/storage-engine/).
 
-### Time series index (TSI)
+### Time Series Index (TSI)
 
 The new time series index (TSI) moves the index to files on disk that we memory map.
 This means that we let the operating system handle being the Least Recently Used (LRU) memory.

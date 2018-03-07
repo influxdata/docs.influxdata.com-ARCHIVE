@@ -2,7 +2,7 @@
 title: Glossary of terms
 menu:
   influxdb_1_5:
-    weight: 10
+    weight: 20
     parent: concepts
 ---
 

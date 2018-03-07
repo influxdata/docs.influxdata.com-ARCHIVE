@@ -4,7 +4,7 @@ title: TSM-based data storage and in-memory indexing
 menu:
   influxdb_1_5:
     name: TSM and in-memory indexing
-    weight: 90
+    weight: 60
     parent: concepts
 ---
 
