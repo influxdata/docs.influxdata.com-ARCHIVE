@@ -1,5 +1,5 @@
 ---
-title: About the Project
+title: About the project
 ---
 
 ## [Release Notes/Changelog](/influxdb/v1.5/about_the_project/releasenotes-changelog/)
