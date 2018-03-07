@@ -23,7 +23,7 @@ menu:
 > ***Note:*** This release builds off of the 1.5 release of InfluxDB OSS. Please see the [InfluxDB OSS release
 > notes](https://docs.influxdata.com/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
 
-For highlights of the InfluxDB 1.5 release, see [What's new in InfluxDB 1.5](/influxdb/v1.5/about-the-project/whats_new/).
+For highlights of the InfluxDB 1.5 release, see [What's new in InfluxDB 1.5](/influxdb/v1.5/about_the_project/whats_new/).
 
 ### Breaking changes
 
