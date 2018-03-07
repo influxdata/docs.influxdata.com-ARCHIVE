@@ -1,5 +1,5 @@
 ---
-title: Administering InfluxDB OSS
+title: Administering InfluxDB
 ---
 The administration documentation contains all the information needed to administer a working InfluxDB installation.
 
