@@ -3,6 +3,7 @@ title: Troubleshooting InfluxDB Enterprise
 aliases:
     - /enterprise/v1.5/troubleshooting/
 menu:
+  name: Troubleshooting
   enterprise_influxdb_1_5:
     weight: 30
 ---
