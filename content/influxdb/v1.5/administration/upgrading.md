@@ -10,7 +10,7 @@ menu:
 
 This page includes the steps required for upgrading InfluxDB OSS and InfluxDB Enterprise from earlier versions.
 
-* [Upgrading from 1.3 - 1.4 (no TSI Preview) to 1.5 (TSI enabled)](#upgrading-from-13-14-no-tsi-preview-to-15-tsi-enabled)
+* [Upgrading from 1.0 - 1.4 (no TSI Preview) to 1.5 (TSI enabled)](#upgrading-from-13-14-no-tsi-preview-to-15-tsi-enabled)
 * [Upgrading from 1.4 (TSI Preview enabled) to 1.5 (TSI enabled)](#upgrading-from-13-14-tsi-preview-enabled-to-15-tsi-enabled)
 * [Upgrading from 1.3 to 1.5 (TSI enabled)](#upgrading-from-13-to-15-tsi-enabled)
 * [Upgrading InfluxDB Enterprise clusters](#upgrading-influxdb-enterprise-clusters)
