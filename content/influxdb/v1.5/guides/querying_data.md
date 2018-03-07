@@ -4,7 +4,7 @@ alias:
   -/docs/v1.5/query_language/querying_data/
 menu:
   influxdb_1_5:
-    weight: 10
+    weight: 20
     parent: guides
 ---
 
