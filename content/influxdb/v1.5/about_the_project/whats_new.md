@@ -11,14 +11,14 @@ menu:
 
 Included here are some highlights of the InfluxDB 1.5 release:
 
-* [Time Series Index (TSI) support](#time-series-index--tsi--support)
+* [Time Series Index (TSI) support](#time-series-index-tsi-support)
 * [Enterprise-compatible backup and restore](#enterprise-compatible-backup-and-restore-for-influxdb-oss)
 * [Structured logging](#structured-logging)
 * [Tracing](#tracing)
 * [Redirecting HTTP request logging](#redirecting-http-request-logging)
 * [InfluxDB '/metrics' HTTP endpoint](#influxdb-metrics-http-endpoint)
 
-## TSI (Time Series Index) support
+## Time Series Index (TSI) support
 
 InfluxDB 1.5.0 introduces support for the InfluxDB time series index (TSI) engine. TSI was first introduced in InfluxDB 1.3 as a technical preview. Since then, InfluxDB users and InfluxData have tested, used, and shared feedback on this functionality.
 
