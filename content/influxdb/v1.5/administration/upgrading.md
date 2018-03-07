@@ -15,11 +15,11 @@ This page includes the steps required for upgrading InfluxDB OSS and InfluxDB En
 * [Upgrading from 1.3 to 1.5 (TSI enabled)](#upgrading-from-13-to-15-tsi-enabled)
 * [Upgrading InfluxDB Enterprise clusters](#upgrading-influxdb-enterprise-clusters)
 
-## Upgrading from 1.3 - 1.4 (no TSI Preview) to 1.5 (TSI enabled)
+## Upgrading from 1.0 - 1.4 (no TSI Preview) to 1.5 (TSI enabled)
 
 > ***Note:*** The steps below assume that you are upgrading from InfluxDB 1.3 or 1.4 using the default in-memory indexing to enabling TSI for the first time.
 
-**To upgrade from 1.4 (no TSI Preview) to 1.5 (TSI enabled):**
+**To upgrade from 1.0 - 1.4 (no TSI Preview) to 1.5 (TSI enabled):**
 
 1. [Download](https://influxdata.com/downloads/#influxdb) InfluxDB version
 1.5
