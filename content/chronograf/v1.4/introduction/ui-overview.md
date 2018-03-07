@@ -4,7 +4,7 @@ menu:
   chronograf_1_4:
     name: User interface
     weight: 20
-    parent: Introduction
+    parent: #Introduction
 ---
 
 
