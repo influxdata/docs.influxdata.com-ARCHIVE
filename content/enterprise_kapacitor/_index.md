@@ -1,3 +1,4 @@
 ---
 type: enterprise_kapacitor
+
 ---

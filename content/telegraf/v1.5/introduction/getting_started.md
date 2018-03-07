@@ -26,8 +26,12 @@ Follow the instructions in the Telegraf section on the [Downloads page](https://
 * Linux debian and RPM packages: `/etc/telegraf/telegraf.conf`
 * Standalone Binary: see the next section for how to create a configuration file
 
+<<<<<<< HEAD
+### Creating and Editing the Configuration File
+=======
 ### Creating and editing the configuration file
 
+>>>>>>> master
 Before starting the Telegraf server you need to edit and/or create an initial configuration that specifies your desired [inputs](/telegraf/v1.5/plugins/inputs/) (where the metrics come from) and [outputs](/telegraf/v1.5/plugins/outputs/) (where the metrics go). There are [several ways](/telegraf/v1.5/administration/configuration/) to create and edit the configuration file.
 Here, we'll generate a configuration file and simultaneously specify the desired inputs with the `-input-filter` flag and the desired output with the `-output-filter` flag.
 

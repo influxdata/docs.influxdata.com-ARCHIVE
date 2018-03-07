@@ -128,21 +128,21 @@ See the [functions page](/influxdb/v1.3/query_language/functions/#non-negative-d
 
 Version 1.3 introduces three major changes to the `TOP()` and `BOTTOM()` functions:
 
-> * The `TOP()` and `BOTTOM()` functions no longer support other functions in 
-the `SELECT` [clause](/influxdb/v1.3/query_language/data_exploration/#description-of-syntax). 
+> * The `TOP()` and `BOTTOM()` functions no longer support other functions in
+the `SELECT` [clause](/influxdb/v1.3/query_language/data_exploration/#description-of-syntax).
 The following query now returns an error:
 
-    
+
     > SELECT TOP(value,1),MEAN(value) FROM "gopher"
     ERR: error parsing query: selector function top() cannot be combined with other functions
-    
-    
+
+
 > * The `TOP()` and `BOTTOM()` functions now maintain `tags` as `tags` if the query includes a
-[tag key](/influxdb/v1.3/concepts/glossary/#tag-key) as an argument. 
-The [query below](/influxdb/v1.3/query_language/functions/#issue-3-bottom-tags-and-the-into-clause) 
+[tag key](/influxdb/v1.3/concepts/glossary/#tag-key) as an argument.
+The [query below](/influxdb/v1.3/query_language/functions/#issue-3-bottom-tags-and-the-into-clause)
 preserves `location` as a tag in the newly-written data:
 
-    
+
     > SELECT BOTTOM("water_level","location",2) INTO "bottom_water_levels" FROM "h2o_feet"
     name: result
     time                 written
@@ -154,14 +154,14 @@ preserves `location` as a tag in the newly-written data:
     tagKey
     ------
     location
-    
 
-> * The `TOP()` and `BOTTOM()` functions now preserve the timestamps in the original data when they're 
+
+> * The `TOP()` and `BOTTOM()` functions now preserve the timestamps in the original data when they're
 used with the [`GROUP BY time()` clause](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals).
-The [following query](/influxdb/v1.3/query_language/functions/#issue-1-top-with-a-group-by-time-clause) returns 
+The [following query](/influxdb/v1.3/query_language/functions/#issue-1-top-with-a-group-by-time-clause) returns
 the points' original timestamps; the timestamps are not forced to match the start of the `GROUP BY time()` intervals:
 
-    
+
     > SELECT TOP("water_level",2) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND     "location" = 'santa_monica' GROUP BY time(18m)
 
     name: h2o_feet
@@ -175,8 +175,8 @@ the points' original timestamps; the timestamps are not forced to match the star
     2015-08-18T00:18:00Z  2.126 |
     2015-08-18T00:30:00Z  2.051 | <------- Greatest points for the second time interval
                                  __
-                                 
-                                
+
+
 Review the functions page for a complete discussion of the [`TOP()` function](/influxdb/v1.3/query_language/functions/#top) and the [`BOTTOM()` function](/influxdb/v1.3/query_language/functions/#bottom).
 
 ### Other
@@ -199,11 +199,11 @@ See the [data exploration page](/influxdb/v1.3/query_language/data_exploration/#
 
 #### Continuous Queries
 
-A defect was identified in the way that continuous queries were previously handling time ranges.  The result of that 
-defect is that for certain time scales larger than 1d, the continuous queries had their time ranges miscalculated and 
+A defect was identified in the way that continuous queries were previously handling time ranges.  The result of that
+defect is that for certain time scales larger than 1d, the continuous queries had their time ranges miscalculated and
 were run at the incorrect time.
 
-This has been addressed -- but this change may impact existing continuous queries which process data in time 
+This has been addressed -- but this change may impact existing continuous queries which process data in time
 ranges larger than 1d.
 Additional details [can be found here](https://github.com/influxdata/influxdb/issues/8569).
 

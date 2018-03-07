@@ -1,5 +1,6 @@
 ---
 title: TICKscript nodes overview
+
 aliases:
     - kapacitor/v1.4/nodes/source_batch_node/
     - kapacitor/v1.4/nodes/source_stream_node/
@@ -16,11 +17,6 @@ menu:
 > [TICKscript Language Specification](/kapacitor/v1.4/tick/).
 
 Nodes represent process invocation units that either take data as a batch or a point-by-point stream, and then alter the data, store the data, or trigger some other activity based on changes in the data (e.g., an alert).
-
-The property methods of the nodes modify the node they are called on and return a reference to that node. The property methods for these two nodes are the most important:
-
-* [Batch Node](/kapacitor/v1.4/nodes/batch_node)
-* [Stream Node](/kapacitor/v1.4/nodes/stream_node)
 
 The property methods for these two nodes define the type of task that you are running, either
 [stream](/kapacitor/v1.4/introduction/getting_started/#trigger-alert-from-stream-data)
