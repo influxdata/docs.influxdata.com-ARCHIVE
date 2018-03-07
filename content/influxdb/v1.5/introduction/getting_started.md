@@ -1,7 +1,8 @@
 ---
-title: Getting Started
+title: Getting started with InfluxDB
 menu:
   influxdb_1_5:
+    name: Getting started
     weight: 20
     parent: introduction
 ---
