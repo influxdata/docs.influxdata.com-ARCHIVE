@@ -8,8 +8,6 @@ menu:
 ---
 
 
-
-
 ## Status
 
 ### Alert Events per Day - Last 30 Days (graph)
@@ -74,11 +72,27 @@ If you configure the setting to an interval that's greater than one minute, Chro
 
 ## Dashboards
 
+### Overview
+
+### Features
+
+* Smart loading of visible cells
+  - When a dashboard loads, only the cells currently in view will load and refresh.
+  - As a user scrolls down a page, the cells load and refresh automatically as they become visible to the user, keeping the information current.
+
 ![Dashboard display](/img/chronograf/chrono-dashboard-display.png)
 
 ![Dashboard edit](/img/chronograf/chrono-dashboard-edit.png)
 
 ![Dashboard listing](/img/chronograf/chrono-dashboard-listing.png)
+
+### Cells
+
+* Annotation support
+  - You can add annotations to graphs to mark important events, providing context to the displayed data.
+  - You can add annotations to a single point in time, or create an annotation for an interval.
+  - Annotations you create in one graph are added to all graphs displaying the same time period.
+    - This allows you to correlate the effects of important events, such as changes or autages, across multiple metrics.
 
 ### Why does the query builder break after I add my template variable to a query?
 

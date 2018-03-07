@@ -9,9 +9,9 @@ menu:
 
 Follow the links below for more information.
 
-## [Upgrading](/chronograf/latest/administration/upgrading/)
+## [Upgrading to Chronograf 1.4](/chronograf/latest/administration/upgrading/)
 
-## [Configuring](/chronograf/latest/administration/configuration/)
+## [Configuring Chronograf 1.4](/chronograf/latest/administration/configuration/)
 
 ## [Configuration options](/chronograf/latest/administration/config-options/)
 
@@ -24,3 +24,5 @@ Follow the links below for more information.
 ## [Managing Chronograf organizations](/chronograf/latest/administration/managing-organizations/)
 
 ## [Managing Chronograf users](/chronograf/latest/administration/managing-chronograf-users/)
+
+## [TICKscript logging](/chronograf/v1.4/administration/tickscript-logging/)
