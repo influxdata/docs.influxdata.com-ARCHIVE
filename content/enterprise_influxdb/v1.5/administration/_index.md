@@ -6,6 +6,7 @@ menu:
   enterprise_influxdb_1_5:
     name: Administering
     weight: 50
+    identifier: Administration
 ---
 
 ## [Logging in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/logs/)
