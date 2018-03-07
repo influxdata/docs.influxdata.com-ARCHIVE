@@ -4,7 +4,7 @@ menu:
   influxdb_1_5:
     name: What's new
     weight: 20
-    parent: administration
+    parent: about_the_project
 ---
 
 > For a comprehensive list of the changes between versions, see [InfluxDB's Changelog](/influxdb/v1.5/about_the_project/releasenotes-changelog/).
