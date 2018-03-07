@@ -126,7 +126,7 @@ SectionPagesMenu = "products"
   weight = 40
   url = "/influxdb/v1.5/about_the_project/#third_party"
   parent = "about_the_project"
-  # InfluxDB v1.4 Sub-Menu - External Resources
+  # InfluxDB v1.5 Sub-Menu - External Resources
   [[menu.influxdb_1_5]]
   name = "InfluxData Blog"
   identifier = "infludatablog"
