@@ -8,7 +8,7 @@ menu:
   enterprise_influxdb:
     name: v1.4
     identifier: enterprise_influxdb_1_4
-    weight: 10
+    weight: 9
 ---
 
 InfluxEnterprise offers highly scalable InfluxDB clusters on your infrastructure
