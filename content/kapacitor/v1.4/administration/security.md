@@ -337,6 +337,20 @@ data to Kapacitor with a message in the InfluxDB log like the following:
 mar 05 17:02:40 algonquin influxd[32520]: [I] 2018-03-05T16:02:40Z Post https://localhost:9092/write?consistency=&db=telegraf&precision=ns&rp=autogen: http: server gave HTTP response to HTTPS client service=subscriber
 ```
 
+#### Kapacitor command-line client with HTTPS
+
+Once HTTPS has been enabled the Kapacitor command line client will need to be
+supplied the `-url` argument in order to connect.  If a self-signed or other
+certificate is used, which has not been added to the system certificate store, 
+an addition argument `-skipVerify` will also need to be provided.
+
+```
+$ kapacitor -url https://localhost:9092 -skipVerify list tasks
+ID                                                 Type      Status    Executing Databases and Retention Policies
+chronograf-v1-3586109e-8b7d-437a-80eb-a9c50d00ad53 stream    enabled   true      ["telegraf"."autogen"]
+```
+
+
 ### Kapacitor Authentication and Authorization
 
 The following applies to the open-source distribution of Kapacitor.  While it is
