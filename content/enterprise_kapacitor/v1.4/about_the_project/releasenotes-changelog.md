@@ -2,33 +2,20 @@
 title: Release notes/changelog
 menu:
   enterprise_kapacitor_1_4:
-    weight: 20
+    weight: 10
     parent: about_the_project
 ---
 
 ## v1.4.0 [2017-12-08]
 
+### Features
+
+- Update to Kapacitor v1.4.0, brings logging changes and many other features.
+
 ### Bug fixes
 
 - Update default configuration file with cluster related configuration and descriptions.
 - Update default configuration file with changes from Kapacitor 1.4.0.
-- Update to Kapacitor 1.4.0 final.
-
-## v1.4.0-rc3 [2017-12-05]
-
-### Bug fixes
-
-- Update to Kapacitor 1.4.0-rc3
-
-## v1.4.0-rc1 [2017-11-27]
-
-### Features
-
-- Update to Kapacitor v1.4, brings logging changes and many other features.
-
-### Bug fixes
-
-- Rename config `plutonium-meta-addr` to `enterprise-meta-addr`
 - Fix `meta-tls` support.
 - Change the default `subscription-mode` configuration since most install are going to be clustered.
 
