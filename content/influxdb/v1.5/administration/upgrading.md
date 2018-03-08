@@ -88,19 +88,33 @@ Follow these steps to upgrade an earlier InfluxDB instance (versions 1.3 and 1.4
 
 Follow these steps to upgrade an earlier InfluxDB instance (versions 1.0 to 1.4) using the default TSM in-memory indexing to an InfluxDB 1.5 instance.
 
-1. [Download](https://influxdata.com/downloads/#influxdb) InfluxDB version
-1.5.
+1. [Download](https://influxdata.com/downloads/#influxdb) InfluxDB 1.5.
+
+2. [Install](/influxdb/v1.5/introduction/installation) InfluxDB 1.5.
 
 2. Update your InfluxDB configuration.
 
 - If using the InfluxDB configuration file, migrate your InfluxDB configuration file customizations to the InfluxDB 1.5 [configuration file](/influxdb/v1.5/administration/config/).
 - Add or modify your environment variables.
 
-
-
 5. Restart the InfluxDB service.
 
 
+## Switching between TSM in-memory and TSI disk-based indexes
+
+After installing and upgrading to InfluxDB 1.5, you can switch between using the TSM in-memory index and the TSI disk-based index if needed. 
+
+### Switching from in-memory (TSM-based) index to disk (TSI-based) index:
+
+1. Enable TSI.
+2. Convert TSM-based shards to TSI-based shards.
+3. Restart the InfluxDB service.
+
+### Switching from disk (TSI-based) index to in-memory (TSM-based) index:
+
+1. Enable `inmem`.
+2. Delete all shard `index` directories.
+3. Restart the InfluxDB service.
 
 ## Upgrading InfluxDB Enterprise clusters
 
