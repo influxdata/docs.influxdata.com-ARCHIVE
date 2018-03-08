@@ -6,6 +6,12 @@ menu:
     parent: About the Project
 ---
 
+## v1.4.2.2 [2018-03-07]
+
+### Bug fixes
+
+*  Include URL in Kapacitor connection creation requests.
+
 ## v1.4.2.1 [2018-02-28]
 
 ### Features

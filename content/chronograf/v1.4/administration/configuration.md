@@ -2,7 +2,7 @@
 title: Configuring Chronograf
 menu:
   chronograf_1_4:
-    name: Configuring Chronograf
+    name: Configuring
     weight: 20
     parent: Administration
 ---

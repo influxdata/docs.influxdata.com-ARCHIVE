@@ -3,7 +3,7 @@ title: Managing Chronograf security
 aliases: /chronograf_1_4/security-best-practices/
 menu:
   chronograf_1_4:
-    name: Managing Chronograf security
+    name: Managing security
     weight: 50
     parent: Administration
 ---
