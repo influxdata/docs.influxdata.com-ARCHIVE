@@ -2,7 +2,7 @@
 title: Release notes/changelog
 menu:
   enterprise_kapacitor_1_4:
-    weight: 1
+    weight: 20
     parent: about_the_project
 ---
 

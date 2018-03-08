@@ -2,6 +2,7 @@
 title: Downloading Kapacitor Enterprise
 menu:
   enterprise_kapacitor_1_4:
+    name: Downloads
     weight: 10
     parent: introduction
 ---

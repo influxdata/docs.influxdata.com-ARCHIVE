@@ -2,6 +2,7 @@
 title: Installing Kapacitor Enterprise
 menu:
   enterprise_kapacitor_1_4:
+    name: Installing
     weight: 20
     parent: introduction
 ---

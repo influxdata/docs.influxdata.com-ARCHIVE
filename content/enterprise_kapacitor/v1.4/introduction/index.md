@@ -1,5 +1,5 @@
 ---
-title: Introduction
+title: Introducing Kapacitor Enterprise
 
 menu:
   enterprise_kapacitor_1_4:
