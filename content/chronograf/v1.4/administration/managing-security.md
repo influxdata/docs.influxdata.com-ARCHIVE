@@ -322,7 +322,9 @@ The callback URL changes from:
 https://localhost:8888/oauth/generic/callback
 ```
 to:
-````https://localhost:8888/oauth/gitlab/callback`
+```
+`https://localhost:8888/oauth/gitlab/callback`
+```
 
 Also, on the Chronograf login page, the text on the authentication button changes from `Log in with generic` to `Log in with GitLab`.
 
