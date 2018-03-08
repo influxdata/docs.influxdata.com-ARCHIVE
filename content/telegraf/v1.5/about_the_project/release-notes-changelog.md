@@ -2,13 +2,13 @@
 title: Release Notes/Changelog
 menu:
   telegraf_1_5:
-    weight: 1
+    weight: 10
     parent: about_the_project
 ---
 
 ## v1.5.2 [2018-01-30]
 
-### Bugfixes
+### Bug fixes
 
 - Ignore empty lines in Graphite plaintext.
 - Fix `index out of bounds` error in Solr input plugin.
@@ -22,7 +22,7 @@ menu:
 
 ## v1.5.1 [2017-01-10]
 
-### Bugfixes
+### Bug fixes
 
 - Fix name error in jolokia2_agent sample config.
 - Fix DC/OS input - login expiration time.
@@ -33,7 +33,7 @@ menu:
 
 ## v1.5 [2017-12-14]
 
-### New Plugins
+### New plugins
 
 #### Input
 - [Bond (bond)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/bond/README.md) - Thanks to @ildarsv
@@ -105,7 +105,7 @@ menu:
 - Add option to amqp output to publish persistent messages.
 - Support I (idle) process state on procfs+Linux.
 
-### Bugfixes
+### Bug fixes
 
 - Fix webhooks input address in use during reload.
 - Unlock Statsd when stopping to prevent deadlock.
@@ -124,7 +124,7 @@ menu:
 
 ## v1.4.5 [2017-12-01]
 
-### Bugfixes
+### Bug fixes
 
 - Fix global variable collection when using interval_slow option in MySQL input.
 - Fix error getting net connections info in netstat input.
@@ -132,7 +132,7 @@ menu:
 
 ## v1.4.4 [2017-11-08]
 
-### Bugfixes
+### Bug fixes
 - Use schema specified in mqtt_consumer input.
 - Redact Datadog API key in log output.
 - Fix error getting PIDs in netstat input.
@@ -141,7 +141,7 @@ menu:
 
 ## v1.4.3 [2017-10-25]
 
-### Bugfixes
+### Bug fixes
 
 - Fix container name filters in Docker input.
 - Fix snmpwalk address format in leofs input.
@@ -157,7 +157,7 @@ menu:
 
 ## v1.4.2 [2017-10-10]
 
-### Bugfixes
+### Bug fixes
 
 - Fix error if int larger than 32-bit in `/proc/vmstat`.
 - Fix parsing of JSON with a UTF8 BOM in `httpjson`.
@@ -171,7 +171,7 @@ menu:
 
 ## v1.4.1 [2017-09-26]
 
-### Bugfixes
+### Bug fixes
 
 - Fix MQTT input exits if Broker is not available on startup.
 - Fix optional field value conversions in fluentd input.
@@ -194,7 +194,7 @@ menu:
   for both the `aerospike_node` and `aerospike_namespace` measurements.
 - The default prometheus_client port has been changed to 9273.
 
-### New Plugins
+### New plugins
 
 - fail2ban
 - fluentd
@@ -246,7 +246,7 @@ menu:
 - Add Tomcat input plugin.
 - HTTP headers can be added to InfluxDB output.
 
-### Bugfixes
+### Bug fixes
 
 - Improve logging of errors in Cassandra input.
 - [enh] set db_version at 0 if query version fails.
@@ -289,7 +289,7 @@ menu:
 
 ## v1.3.5 [2017-07-26]
 
-### Bugfixes
+### Bug fixes
 
 - Fix prometheus output cannot be reloaded.
 - Fix filestat reporting exists when cannot list directory.
@@ -298,7 +298,7 @@ menu:
 
 ## v1.3.4 [2017-07-12]
 
-### Bugfixes
+### Bug fixes
 
 - Fix handling of escape characters within fields.
 - Fix chrony plugin does not track system time offset.
@@ -307,7 +307,7 @@ menu:
 
 ## v1.3.3 [2017-06-28]
 
-### Bugfixes
+### Bug fixes
 
 - Allow dos line endings in tail and logparser.
 - Remove label value sanitization in prometheus output.
@@ -316,7 +316,7 @@ menu:
 
 ## v1.3.2 [2017-06-14]
 
-### Bugfixes
+### Bug fixes
 
 - Fix InfluxDB UDP metric splitting.
 - Fix mongodb/leofs urls without scheme.
@@ -324,7 +324,7 @@ menu:
 
 ## v1.3.1 [2017-05-31]
 
-### Bugfixes
+### Bug fixes
 
 - Fixed sqlserver input to work with case-sensitive server collation.
 - Reuse transports in input plugins.
@@ -335,8 +335,6 @@ menu:
 - Fix length calculation of split metric buffer.
 
 ## v1.3.0 [2017-05-09]
-
-### Release Notes
 
 #### Changes to the Windows ping plugin
 
