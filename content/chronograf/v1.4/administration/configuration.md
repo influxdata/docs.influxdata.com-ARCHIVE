@@ -21,6 +21,11 @@ Chronograf is the user interface and data visualization component of the InfluxD
 > ***Note:*** Run through the [Getting Started](/chronograf/latest/introduction/getting-started) tutorial for a quick start on configuring InfluxDB, Kapacitor, and Telegraf for use with Chronograf.
 
 
+## Configuring Chronograf for InfluxDB Enterprise clusters
+
+
+
+
 ## Starting the Chronograf service
 
 Chronograf can be started using the default configuration options, but the environment variables and command line options let you configure OAuth 2.0 authentication and other options based on your requirements.
