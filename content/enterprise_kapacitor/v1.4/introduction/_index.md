@@ -11,6 +11,6 @@ menu:
 The introductory documentation includes all the information you need to get up
 and running with Kapacitor Enterprise.
 
-## [Downloads](/enterprise_kapacitor/v1.4/introduction/downloads/)
+## [Downloading Kapacitor Enterprise](/enterprise_kapacitor/v1.4/introduction/downloads/)
 
-## [Installation](/enterprise_kapacitor/v1.4/introduction/installation_guide/)
+## [Installating Kapacitor Enterprise](/enterprise_kapacitor/v1.4/introduction/installation_guide/)
