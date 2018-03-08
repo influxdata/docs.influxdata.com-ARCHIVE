@@ -220,9 +220,9 @@ Environment variable: `INFLUXDB_DATA_DIR`
 ### `index-version = "inmem"`
 
 The type of shard index to use for new shards.
-The default (`inmem`) index is an in-memory index that recreated at startup.
+The default (`inmem`) index is an in-memory index that is recreated at startup.
 
-To use the TSI (time series index) disk-based indexing, set the value to `tsi1`.
+To enable the Time Series Index (TSI) disk-based index, set the value to `tsi1`.
 
 Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 

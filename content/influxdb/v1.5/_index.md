@@ -18,7 +18,7 @@ InfluxDB is meant to be used as a backing store for any use case involving large
 Here are some of the features that InfluxDB currently supports that make it a great choice for working with time series data.
 
 * Custom high performance datastore written specifically for time series data.
-The TSM engine allows for high ingest speed and data compression.
+The TSM engine allows for high ingest speed and data compression
 * Written entirely in Go.
 It compiles into a single binary with no external dependencies.
 * Simple, high performing write and query HTTP(S) APIs.

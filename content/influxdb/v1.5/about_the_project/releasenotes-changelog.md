@@ -1,5 +1,5 @@
 ---
-title: Release Notes/Changelog
+title: Release notes/changelog
 menu:
   influxdb_1_5:
     weight: 10

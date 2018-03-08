@@ -3,7 +3,7 @@ title: Creating InfluxDB and Kapacitor connections
 menu:
   chronograf_1_4:
     name: Creating InfluxDB and Kapacitor connections
-    weight: 30
+    weight: 50
     parent: Administration
 ---
 

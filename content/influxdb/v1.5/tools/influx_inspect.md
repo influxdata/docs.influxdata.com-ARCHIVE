@@ -7,8 +7,11 @@ menu:
     parent: tools
 ---
 
-Influx Inspect is a tool designed to view detailed information about on disk
-shards, as well as export data from a shard to [line protocol](/influxdb/v1.5/concepts/glossary/#line-protocol) that can be inserted back into the database.
+Influx Inspect is a disk shard utility that can be used to:
+
+* View detailed information about disk shards
+* Exporting data from a shard to [line protocol](/influxdb/v1.5/concepts/glossary/#line-protocol) that can be inserted back into the database
+* Converting TSM-based shards to TSI disk-based shards
 
 ### `influx_inspect [[command] [arguments]]`
 
@@ -63,21 +66,21 @@ Optional arguments are in brackets.
 #### Examples
 <br>
 
-##### Upgrading all shards on a node
+##### Converting all shards on a node
 
 ```
 $ influx_inspect buildtsi -datadir ~/.influxdb/data -waldir ~/.influxdb/wal
 
 ```
 
-##### Upgrading all shards for a database
+##### Converting all shards for a database
 
 ```
 $ influx_inspect buildtsi -database mydb -datadir ~/.influxdb/data -waldir ~/.influxdb/wal
 
 ```
 
-##### Upgrading a specific shard**
+##### Converting a specific shard
 
 ```
 $ influx_inspect buildtsi -datadir ~/.influxdb/data/stress/autogen/1 -waldir ~/.influxdb/wal/stress/autogen/1
