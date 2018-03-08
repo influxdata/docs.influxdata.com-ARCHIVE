@@ -1,5 +1,5 @@
 ---
-title: Downloads: Kapacitor Enterprise
+title: Downloading Kapacitor Enterprise
 menu:
   enterprise_kapacitor_1_4:
     weight: 10

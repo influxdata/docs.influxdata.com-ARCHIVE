@@ -1,5 +1,5 @@
 ---
-title: About the Project
+title: About the project
 aliases:
     - /enterprise/v1.4/about-the-project/
 menu:

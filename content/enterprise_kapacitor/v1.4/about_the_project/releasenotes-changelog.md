@@ -1,5 +1,5 @@
 ---
-title: Kapacitor Enterprise 1.4 Release Notes/Changelog
+title: Release notes/changelog
 menu:
   enterprise_kapacitor_1_4:
     weight: 1
@@ -8,93 +8,48 @@ menu:
 
 ## v1.4.0 [2017-12-08]
 
-### Release Notes
-Kapacitor v1.4.0 adds many new features, highlighted here:
+### Bug fixes
 
-- Updated logging to use Diagnostics.
-- Add signal handling.
-- Update tests for new Alert PreviousLevel feature.
-- Load directory service for adding topic handlers, tasks, and templates from `dir`.
-- Structed Logging with logging API endpoints that can be used to tail logs for specified tasks.
-- Autoscale support for Docker Swarm and AWS EC2.
-- Sideload data into your TICKscript streams from external sources.
-- Fully-customizable HTTP Post body for the alert Post handler and the HTTP Post node.
+- Update default configuration file with cluster related configuration and descriptions.
+- Update default configuration file with changes from Kapacitor 1.4.0.
+- Update to Kapacitor 1.4.0 final.
 
-### Breaking Changes
-#### Change over internal API to use message passing semantics.
-The `Combine` and `Flatten` nodes previously operated (erroneously) across batch boundaries -- this has been fixed.
+## v1.4.0-rc3 [2017-12-05]
+
+### Bug fixes
+
+- Update to Kapacitor 1.4.0-rc3
+
+## v1.4.0-rc1 [2017-11-27]
 
 ### Features
-- Added service for loading topic handlers, tasks, and templates from `dir`.
-- Topic handler file format modified to include TopicID and HandlerID.
-- TICKscript now allows task descriptions exclusively through a TICKscript.
-- Task types (batch or stream) no longer must be specified.
-- `dbrp` expressions were added to TICKscript.
-- Added support for AWS EC2 autoscaling services.
-- Added support for Docker Swarm autoscaling services.
-- Added `BarrierNode` to emit `BarrierMessage` periodically.
-- Added `Previous` state.
-- Added support to persist replay status after it finishes.
-- Added `alert.post` and `https_post` timeouts to ensure cleanup of hung connections.
-- Added subscriptions modes to InfluxDB subscriptions.
-- Added linear fill support for `QueryNode`.
-- Added MQTT alert handler.
-- Added built-in functions for converting timestamps to integers.
-- Added `bools` field types to UDFs.
-- Added stateless `now()` function to get the current local time.
-- Added support for timeout, tags, and service templates in the Alerta AlertNode.
-- Added support for custom HTTP Post bodies via a template system.
-- Added support allowing for the addition of the HTTP status code as a field when using HTTP Post.
-- Added `logfmt` support and refactor logging.
-- Added support for exposing logs via the API. API is released as a technical preview.
-- Added support for `{{ .Duration }}` on Alert Message property.
-- Added support for [JSON lines](https://en.wikipedia.org/wiki/JSON_Streaming#Line_delimited_JSON) for steaming HTTP logs.
-- Added new node `Sideload` that allows loading data from files into the stream of data. Data can be loaded using a hierarchy.
-- Promote Alert API to stable v1 path.
-- Change `WARN` level logs to `INFO` level.
-- Updated Go version to 1.9.2.
 
-### Bugfixes
+- Update to Kapacitor v1.4, brings logging changes and many other features.
 
-- Fixed issues where log API checked the wrong header for the desired content type.
-- Fixed VictorOps "data" field being a string instead of actual JSON.
-- Fixed panic with `MQTT.toml` configuration generation.
-- Fix oddly-generated TOML for MQTT & HTTPpost.
-- Address Idle Barrier dropping all messages when source has clock offset.
-- Address crash of Kapacitor on Windows x64 when starting a recording.
-- Allow for `.yml` file extensions in `define-topic-handler`.
-- Fix HTTP server error logging.
-- Fixed bugs with stopping a running UDF agent.
-- Fixed error messages for missing fields which are arguments to functions are not clear.
-- Fixed bad PagerDuty test the required server info.
-- Added SNMP sysUpTime to SNMP Trap service.
-- Fixed panic on recording replay with HTTPPostHandler.
-- Fixed Kubernetes incluster master API DNS resolution.
-- Remove the pidfile after the server has exited.
-- Logs API writes multiple HTTP headers.
-- Fixed missing dependency in RPM package.
-- Force tar owner/group to be `root`.
-- Fixed install/remove of Kapacitor on non-systemd Debian/Ubuntu systems.
-- Fixed packaging to not enable services on RHEL systems.
-- Fixed issues with recusive symlinks on systemd systems.
-- Fixed invalid default MQTT config.
+### Bug fixes
+
+- Rename config `plutonium-meta-addr` to `enterprise-meta-addr`
+- Fix `meta-tls` support.
+- Change the default `subscription-mode` configuration since most install are going to be clustered.
 
 ## v1.3.3 [2017-08-11]
 
-### Bugfixes
-- Expose pprof without authentication, if enabled.
+### Bug fixes
+
+- Expose `pprof` without authentication, if enabled.
 
 ## v1.3.2 [2017-08-08]
 
-### Bugfixes
-- Use details field from alert node in PagerDuty.
+### Bug fixes
+
+- Use details field from Alert node in PagerDuty.
 
 ## v1.3.1 [2017-06-02]
 
-### Bugfixes
+### Bug fixes
 
-- Proxy from environment for HTTP request to Slack
-- Fix derivative node preserving fields from previous point in stream tasks
+- Proxy from environment for HTTP request to Slack.
+- Fix derivative node preserving fields from previous point in stream tasks.
 
 ## v1.3.0 [2017-05-22]
 

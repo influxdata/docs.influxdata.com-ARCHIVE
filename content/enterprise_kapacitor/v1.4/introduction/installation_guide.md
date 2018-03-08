@@ -8,7 +8,7 @@ menu:
 
 # Overview
 
-Kapacitor Enterprise installations are similar the single instance open source Kapacitor.
+Kapacitor Enterprise installations are similar to the single instance open source Kapacitor.
 The main difference is that there are more instances to install and configure.
 
 The basic installation steps are:
@@ -39,11 +39,11 @@ Define a clustered set of members before defining any tasks, alert handlers, etc
 
 You can add or remove members once a cluster is running, but this must be done correctly. See step 4 for details.
 
-## Step 1: Configuration
+## Step 1: Configure Kapacitor Enterprise.
 
 Configuring Kapacitor Enterprise is similar to the open source Kapacitor, with a few additional steps.
 
-### Cluster Configuration
+### Cluster configuration
 
 Kapacitor Enterprise uses a [gossip protocol](https://en.wikipedia.org/wiki/Gossip_protocol) to maintain cluster membership and communicate within the cluster.
 In the Enterprise Kapactitor configuration file (`kapacitor.conf`), the additional `[cluster]` section includes options that are specific to clusters.
@@ -58,7 +58,7 @@ In most cases the defaults are sufficient.
 | `gossip-interval`      | duration | The `gossip-interval` setting is the time between gossip messages. In the configuration file, the default setting of `gossip=interval = 0s` results in a default value designed for use within a typical LAN network to be used (currently `200ms`). A shorter interval means faster convergence but increased network bandwidth.                                       |
 | `gossip-sync-interval` | duration | The `gossip-sync-interval` setting is the time between full TCP state sync of the cluster gossip state. In the configuration file, the default setting of `gossip-sync-interval = "0s"` results in a default value designed for use within a typical LAN network to be used (currently `30s`). A shorter interval means faster convergence but more network bandwidth. |
 
-### Alerting Configuration
+### Alerting configuration
 
 Kapacitor Enterprise can deduplicate alerts that are generated from duplicate running tasks.
 The `[alert]` configuration section includes the following options.
@@ -73,19 +73,19 @@ Increasing `redundancy` means more work is duplicated within the cluster and dec
 An alert is only dropped if all redundant members handling the alert fail together.
 Increasing the `delay-per-member` can reduce the probability of duplicate alerts in the case of a partial failure, but it also increases the duration at which an alert could arrive late.
 
-### InfluxDB Configuration
+### InfluxDB configuration
 
 The configuration section for InfluxDB has a new option `subscription-mode` which should be set to `server` when running Kapacitor Enterprise as a cluster.
 This allows each server within the cluster to create its own subscriptions to InfluxDB so that each member receives all the data.
 
-### Hostname Configuration
+### Hostname configuration
 
 In order for Kapacitor Enterprise members to communicate with each other, they need to be able resolve each other's address.
 The `hostname` setting for each Kapacitor Enterprise member is the DNS/IP of the member. All other Kapacitor Enterprise members need to be able to resolve and access that address.
 
 If your network has members with different addresses for public and private networks, there are configuration settings for the `advertise-address` of each of the respecitve services.
 
-## Step 2: Starting members
+## Step 2: Start members.
 
 The following commands setup a two members and joins them together.
 This process can be easily extended to more than two members.
@@ -140,7 +140,7 @@ Member ID                               Gossip Address RPC Address    API Addres
 13eeefdd-41b5-453f-928e-cb9c55fd2a5d    serverB:9090   serverB:9091   serverB:9092   worker alive
 ```
 
-## Step 3: Adding members to a cluster
+## Step 3: Add members to a cluster.
 
 Now that we have both serverA and serverB running independently, we need to add them together to form a single cluster.
 
@@ -202,7 +202,7 @@ Member ID                               Gossip Address RPC Address    API Addres
 13eeefdd-41b5-453f-928e-cb9c55fd2a5d    serverB:9090   serverB:9091   serverB:9092   worker alive
 ```
 
-## Step 4: Start using the cluster
+## Step 4: Start using the cluster.
 
 Now that you have a cluster of Kapacitor Enterprise members, how do you take advantage of its clustered features?
 A clustered Kapacitor is designed to duplicate work in tasks and have the cluster deduplicate the alerts those tasks generate.
@@ -212,7 +212,7 @@ This means that to leverage the high availability features you must define tasks
 Under normal operations alerts are sent out once. Under failure conditions alert may be duplicated. Only under catastrophic failure conditions, more than `redundancy` members fails together, will an alert be dropped.
 
 
-### Cluster Awareness
+### Cluster awareness
 
 This release of Kapacitor Enterprise is only partly cluster-aware, meaning that some commands on the cluster will be automatically replicated throughout the cluster while other commands need to be explicitly run on each member:
 
@@ -224,7 +224,7 @@ For example, if you set `redundancy` to 2, then each task that generates alerts 
 >
 >In this release, the cluster operator must define which 2 members should run the task.
 
-### Eventual Consistency
+### Eventual consistency
 
 Members of an Kapacitor Enterprise cluster communicate in an eventual consistent way, meaning that information starts at one of the members and then spreads out to the rest of the members of the cluster.
 As a result, it is possible to query two different members at the same time and get different responses, because one of the members has not learned the information yet.
