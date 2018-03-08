@@ -7,9 +7,6 @@ menu:
     parent: Troubleshooting
 ---
 
-
-## How do I connect Chronograf to an InfluxDB Enterprise cluster?
-
 The connection details form requires additional information when connecting Chronograf to an [InfluxDB Enterprise cluster](https://docs.influxdata.com/enterprise_influxdb/latest/).
 
 When you enter the InfluxDB HTTP bind address in the `Connection String` input, Chronograf automatically checks if that InfluxDB instance is a data node.
