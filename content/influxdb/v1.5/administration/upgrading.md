@@ -9,7 +9,7 @@ menu:
 ---
 
 
-  Starting with the InfluxDB 1.5 release, enabling Time Series Index(TSI) is recommended for all customers. For details on TSI, see:
+  Starting with the InfluxDB 1.5 release, enabling Time Series Index (TSI) is recommended for all customers. To learn more about TSI, see:
 
   * [Time Series Index (TSI) overview](/influxdb/v1.5/concepts/time-series-idnex/)
   * [Time Series Index (TSI) details](/influxdb/v1.5/concepts/tsi-details/)
@@ -102,7 +102,7 @@ Follow these steps to upgrade an earlier InfluxDB instance (versions 1.0 to 1.4)
 
 ## Switching between TSM in-memory and TSI disk-based indexes
 
-After installing and upgrading to InfluxDB 1.5, you can switch between using the TSM in-memory index and the TSI disk-based index if needed. 
+After installing and upgrading to InfluxDB 1.5, you can switch between using the TSM in-memory index and the TSI disk-based index if needed.
 
 ### Switching from in-memory (TSM-based) index to disk (TSI-based) index:
 
@@ -118,12 +118,4 @@ After installing and upgrading to InfluxDB 1.5, you can switch between using the
 
 ## Upgrading InfluxDB Enterprise clusters
 
-To upgrade InfluxDB Enterprise clusters, all nodes must be upgraded to InfluxDB Enterprise 1.5. You can either stop all nodes and upgrade each of the nodes while offline or perform a rolling upgrade on a live cluster.
-
-To perform a rolling upgrade on a live InfluxDB Enterprise cluster, perform the upgrade (following the steps above) for each InfluxDB Enterprise cluster node as follows:
-
-1. For each meta node, stop the node service, perform the upgrade steps, and then restart the node.
-2. For each data node, stop the node service, perform the upgrade steps, and then restart the node.
-
-If you have any issues upgrading your cluster, please do not hesitate to contact support at the email address
-provided to you when you received your InfluxDB Enterprise license.
+See [Upgrading InfluxDB Enterprise clusters](/enterprise_influxdb/v1.5/administration/upgrading/).
