@@ -1,11 +1,6 @@
 ---
 title: Introducing Kapacitor Enterprise
 
-menu:
-  enterprise_kapacitor_1_4:
-    name: Introduction
-    identifier: introduction
-    weight: 10
 ---
 
 The introductory documentation includes all the information you need to get up
