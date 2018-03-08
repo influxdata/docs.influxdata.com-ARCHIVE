@@ -3,6 +3,7 @@ title: Installing Telegraf
 
 menu:
   telegraf_1_5:
+    name: Installation
     weight: 20
     parent: introduction
 ---
