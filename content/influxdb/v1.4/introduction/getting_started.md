@@ -2,6 +2,7 @@
 title: Getting started with InfluxDB
 menu:
   influxdb_1_4:
+    name: Getting started
     weight: 20
     parent: introduction
 ---

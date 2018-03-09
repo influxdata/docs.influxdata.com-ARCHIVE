@@ -2,8 +2,9 @@
 title: Downloading Kapacitor Enterprise
 menu:
   enterprise_kapacitor_1_4:
+    name: Downloading
     weight: 10
     parent: introduction
 ---
 
-Please visit [InfluxPortal](https://portal.influxdata.com/) to get a license key and access the download URLs.
+Sign in to the [InfluxPortal](https://portal.influxdata.com/) to get your Kapacitor Enterprise license keys and to access the download URLs.

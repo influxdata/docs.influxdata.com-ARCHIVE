@@ -14,4 +14,4 @@ menu:
 Open-source InfluxDB does not support clustering.
 For high availability or horizontal scaling of InfluxDB, please investigate our
 commercial clustered offering,
-[InfluxEnterprise](/enterprise/v1.2/).
+[InfluxDB Enterprise](/enterprise/v1.2/).

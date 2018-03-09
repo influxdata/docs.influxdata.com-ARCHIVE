@@ -2,6 +2,7 @@
 title: Installing InfluxDB
 menu:
   influxdb_1_4:
+    name: Installing
     weight: 10
     parent: introduction
 ---

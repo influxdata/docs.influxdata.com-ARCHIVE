@@ -1,8 +1,9 @@
 ---
-title: Storage engine and Time-Structured Merge Tree (TSM)
+title: Storage engine and the Time-Structured Merge Tree (TSM)
 
 menu:
   influxdb_1_4:
+    name: Storage engine
     weight: 90
     parent: concepts
 ---
