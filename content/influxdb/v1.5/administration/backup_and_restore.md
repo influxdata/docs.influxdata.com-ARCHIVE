@@ -127,7 +127,7 @@ influxd restore [ -db <db_name> ]
 
 Optional arguments are enclosed in brackets.
 
-- `-portable`: Use the new Enterprise-compatible backup format for InfluxDB OSS. Recommended instead of `-online`.
+- `-portable`: Use the new Enterprise-compatible backup format for InfluxDB OSS. Recommended instead of `-online`.  A backup created on InfluxDB Enterprise can be restored to an InfluxDB OSS instance.
 
 - `-online`: Use the legacy backup format. Only use if the newer `-portable` option cannot be used.
 
