@@ -109,7 +109,7 @@ The InfluxDB API makes no attempt to be RESTful.
 
 **Examples of error responses:**
 
-* Writing a float to a field that previously accepted booleans:
+* Writing a float to a field that previously accepted Booleans:
 
 ```bash
 curl -i -XPOST 'http://localhost:8086/write?db=hamlet' --data-binary 'tobeornottobe booleanonly=true'

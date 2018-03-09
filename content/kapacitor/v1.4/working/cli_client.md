@@ -395,7 +395,7 @@ kapacitor record batch (-no-wait) [-past <WINDOW_IN_PAST> | -start <START_TIME> 
 This command requires either a time value for a window of past data from `now`,
 defined by the argument `-past` or a past interval defined by the arguments `-start`
 and `-stop`.  A `-recording-id` is optional and will be generated if not provided.
-The `-task` argument with its `TASK_ID` is also required.  The optional boolean
+The `-task` argument with its `TASK_ID` is also required.  The optional Boolean
 argument `-no-wait` will spawn the replay into a separate process and exit leaving
 it to run in the background.
 
@@ -416,7 +416,7 @@ kapacitor record stream -duration <DURATION> (-no-wait) (-recording-id <ID> ) -t
 This command requires a `-duration` value to determine how long the recording
 will run.  The `-task` argument identifying the target task is also required. A
 `-recording-id` value is optional and when not provided will be generated. The optional
-boolean argument `-no-wait` will spawn the replay into a separate process and exit
+Boolean argument `-no-wait` will spawn the replay into a separate process and exit
 leaving it to run in the background.
 
 Note that this command in combination with the `stream` option will run until
@@ -437,7 +437,7 @@ kapacitor record query (-cluster <INFLUXDB_CLUSTER_NAME> ) (-no-wait) -query <QU
 
 This command requires an InfluxDB query provided through the `-query` argument.
 It also requires a `-type` value of either `batch` or `stream`.  A `-recording-id`
-can also be provided and when not provided will be generated. The optional boolean
+can also be provided and when not provided will be generated. The optional Boolean
 argument `-no-wait` will spawn the replay into a separate process and exit leaving
 it to run in the background.
 
@@ -455,12 +455,12 @@ kapacitor replay (-no-wait) (-real-clock) (-rec-time) -recording <ID> (-replay-i
 ```
 
 This command requires a recording ID provided through the argument `-recording`
-and a task ID provided through the argument `-task`.  The optional boolean argument
+and a task ID provided through the argument `-task`.  The optional Boolean argument
 `-real-clock` will toggle replaying the data according to the intervals between
-the timestamps contained within.  The optional boolean argument `-rec-time` will
+the timestamps contained within.  The optional Boolean argument `-rec-time` will
 toggle using the actual recorded times instead of present times.  Use of present
 times is the default behavior.  An optional `-replay-id` can also be provided and
-when not provided will be generated. The optional boolean argument `-no-wait` will
+when not provided will be generated. The optional Boolean argument `-no-wait` will
 spawn the replay into a separate process and exit leaving it to run in the background.
 
 **Example 16: Replaying a recording**
@@ -480,11 +480,11 @@ kapacitor replay-live query (-cluster <CLUSTER_URL>) (-no-wait) -query <QUERY> (
 
 This command requires an InfluxDB query provided through the `-query` argument.
 It also requires a task identified by the argument `-task`.  A `-replay-id`
-can also be provided and when not provided will be generated. The optional boolean
+can also be provided and when not provided will be generated. The optional Boolean
 argument `-no-wait` will spawn the replay into a separate process and exit leaving
-it to run in the background. The optional boolean argument
+it to run in the background. The optional Boolean argument
 `-real-clock` will toggle replaying the data according to the intervals between
-the timestamps contained within.  The optional boolean argument `-rec-time` will
+the timestamps contained within.  The optional Boolean argument `-rec-time` will
 toggle using the actual recorded times instead of present times.  Use of present
 times is the default behavior.
 
@@ -505,11 +505,11 @@ kapacitor replay-live batch (-no-wait) ( -past <TIME_WINDOW> | -start <START_TIM
 This command requires either a time value for a window of past data from `now`,
 defined by the argument `-past` or a past interval defined by the arguments `-start`
 and `-stop`.  A `-replay-id` is optional and will be generated if not provided.
-The `-task` argument with its `TASK_ID` is also required.  The optional boolean
+The `-task` argument with its `TASK_ID` is also required.  The optional Boolean
 argument `-no-wait` will spawn the replay into a separate process and exit leaving
-it to run in the background. The optional boolean argument
+it to run in the background. The optional Boolean argument
 `-real-clock` will toggle replaying the data according to the intervals between
-the timestamps contained within.  The optional boolean argument `-rec-time` will
+the timestamps contained within.  The optional Boolean argument `-rec-time` will
 toggle using the actual recorded times instead of present times.  Use of present
 times is the default behavior.
 
@@ -770,7 +770,7 @@ provided immediately after the `define` token.
 If the identifier does not yet exist in Kapacitor, a new task will be created.  If the identifier already exists, the existing task will be updated.
 A required path to a TICKscript is provided through the argument `tick`.
 The `-type` of task is also required, as is the target database and retention policy identified by the argument `-dbrp`.
-The optional boolean argument `-no-reload` will prevent reloading the task into
+The optional Boolean argument `-no-reload` will prevent reloading the task into
 memory.
 The default behavior is to reload an updated task.
 
@@ -794,7 +794,7 @@ This form of the `define` command requires a new or existing task identifier
 provided immediately after the `define` token.
 If the identifier does not yet exist in Kapacitor, a new task will be created.  If the identifier already exists, the existing task will be updated.
 The required template to be used is identified with the `-template` argument.  The target database and retention policy identified by the argument `-dbrp` is also required as is a path to the file containing variable definitions identified by the `-var` argument.
-The optional boolean argument `-no-reload` will prevent reloading the task into
+The optional Boolean argument `-no-reload` will prevent reloading the task into
 memory.
 The default behavior is to reload an updated task.
 
@@ -819,7 +819,7 @@ provided immediately after the `define` token.  If the identifier does not yet
 exist in Kapacitor a new task will be created.  If the identifier already exists
 the existing task will be updated.  A path to the file defining the template,
 database and retention policy and variables is required and provided through the
-`-file` argument. The optional boolean argument `-no-reload` will prevent
+`-file` argument. The optional Boolean argument `-no-reload` will prevent
 reloading the task into memory.  The default behavior is to reload an updated
 task.
 

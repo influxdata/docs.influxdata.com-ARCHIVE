@@ -454,7 +454,7 @@ timestamps.
 field_key <operator> ['string' | boolean | float | integer]
 ```
 
-The `WHERE` clause supports comparisons against string, boolean, float,
+The `WHERE` clause supports comparisons against string, Boolean, float,
 and integer [field values](/influxdb/v1.4/concepts/glossary/#field-value).
 
 Single quote string field values in the `WHERE` clause.
@@ -2926,7 +2926,7 @@ operations with the `::` syntax.
 
 ## Data types
 
-[Field values](/influxdb/v1.4/concepts/glossary/#field-value) can be floats, integers, strings, or booleans.
+[Field values](/influxdb/v1.4/concepts/glossary/#field-value) can be floats, integers, strings, or Booleans.
 The `::` syntax allows users to specify the field's type in a query.
 
 > **Note:**  Generally, it is not necessary to specify the field value
@@ -2983,7 +2983,7 @@ SELECT_clause <field_key>::<type> FROM_clause
 `type` can be `float` or `integer`.
 
 InfluxDB returns no data if the query attempts to cast an integer or float to a
-string or boolean.
+string or Boolean.
 
 ### Examples
 

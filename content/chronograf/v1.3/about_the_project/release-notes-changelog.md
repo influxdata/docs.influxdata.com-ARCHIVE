@@ -91,7 +91,7 @@ menu:
 ### Features
 1. Add prefix, suffix, scale, and other y-axis formatting for cells in dashboards.
 1. Update the group by time when zooming in graphs.
-1. Add the ability to link directly to presentation mode in dashboards with the `present` boolean query parameter in the URL.
+1. Add the ability to link directly to presentation mode in dashboards with the `present` oolean query parameter in the URL.
 1. Add the ability to select a template variable via a URL parameter.
 
 ### UI Improvements

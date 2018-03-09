@@ -61,7 +61,7 @@ Related entries: [field](/influxdb/v1.4/concepts/glossary/#field), [field key](/
 
 ## field value
 The value part of the key-value pair that makes up a field.
-Field values are the actual data; they can be strings, floats, integers, or booleans.
+Field values are the actual data; they can be strings, floats, integers, or Booleans.
 A field value is always associated with a timestamp.
 
 Field values are not indexed - queries on field values scan all points that match the specified time range and, as a result, are not performant.

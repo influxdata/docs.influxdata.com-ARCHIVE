@@ -31,7 +31,7 @@ and timestamp.
 | :-------| :---------------- |:----------- |:----------------
 | [Measurement](/influxdb/v1.3/concepts/glossary/#measurement) | Required | The measurement name. InfluxDB accepts one measurement per point. | String
 | [Tag set](/influxdb/v1.3/concepts/glossary/#tag-set) | Optional | All tag key-value pairs for the point.  | [Tag keys](/influxdb/v1.3/concepts/glossary/#tag-key) and [tag values](/influxdb/v1.3/concepts/glossary/#tag-value) are both strings.
-| [Field set](/influxdb/v1.3/concepts/glossary/#field-set) | Required. Points must have at least one field. | All field key-value pairs for the point. | [Field keys](/influxdb/v1.3/concepts/glossary/#field-key) are strings. [Field values](/influxdb/v1.3/concepts/glossary/#field-value) can be floats, integers, strings, or booleans.
+| [Field set](/influxdb/v1.3/concepts/glossary/#field-set) | Required. Points must have at least one field. | All field key-value pairs for the point. | [Field keys](/influxdb/v1.3/concepts/glossary/#field-key) are strings. [Field values](/influxdb/v1.3/concepts/glossary/#field-value) can be floats, integers, strings, or Booleans.
 | [Timestamp](/influxdb/v1.3/concepts/glossary/#timestamp) | Optional. InfluxDB uses the server's local nanosecond timestamp in UTC if the timestamp is not included with the point. | The timestamp for the data point. InfluxDB accepts one timestamp per point. | Unix nanosecond timestamp. Specify alternative precisions with the [HTTP API](/influxdb/v1.3/tools/api/#write).
 
 > #### Performance and Setup Tips:
@@ -58,7 +58,7 @@ to InfluxDB can be inaccurate.
 | Timestamp | Timestamps | Unix nanosecond timestamp. Specify alternative precisions with the [HTTP API](/influxdb/v1.3/tools/api/#write). The minimum valid timestamp is `-9223372036854775806` or `1677-09-21T00:12:43.145224194Z`. The maximum valid timestamp is `9223372036854775806` or `2262-04-11T23:47:16.854775806Z`. |
 
 #### Boolean syntax for writes vs. queries
-Acceptable boolean syntax differs for data writes and data queries.
+Acceptable Boolean syntax differs for data writes and data queries.
 See
 [Frequently Asked Questions](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#why-can-t-i-query-boolean-field-values)
 for more information.
@@ -100,11 +100,11 @@ InfluxDB supports field values specified in scientific notation.
 ```
 Always double quote string field values. More on quoting [below](#quoting).
 
-#### Example 6: Write the field value `true` as a boolean to InfluxDB
+#### Example 6: Write the field value `true` as a Boolean to InfluxDB
 ```
 > INSERT mymeas value=true
 ```
-Do not quote boolean field values.
+Do not quote Boolean field values.
 The following statement writes `true` as a string field value to InfluxDB:
 ```
 > INSERT mymeas value="true"
@@ -134,7 +134,7 @@ If the timestamps on the float and string are not stored in the same shard:
 | :------ | :------------ |:------------- |
 | Timestamp | Never | Never |
 | Measurements, tag keys, tag values, field keys | Never* | Never* |
-| Field values | Double quote string field values. Do not double quote floats, integers, or booleans. | Never |
+| Field values | Double quote string field values. Do not double quote floats, integers, or Booleans. | Never |
 
 \* Line Protocol allows users to double and single quote measurement names, tag
 keys, tag values, and field keys.
@@ -153,7 +153,7 @@ ERR: {"error":"unable to parse 'mymeas value=9 \"1466625759000000000\"': bad tim
 Double quoting (or single quoting) the timestamp yields a `bad timestamp`
 error.
 
-##### Example 2: Semantic error - Double quote a boolean field value
+##### Example 2: Semantic error - Double quote a Boolean field value
 <br>
 ```
 > INSERT mymeas value="true"
