@@ -8,6 +8,9 @@ menu:
 
 ## v1.4.0 [2017-12-08]
 
+> ***Note:*** This release builds off of the 1.4 release of Kapacitor. Please see the [Kapacitor release
+> notes](https://docs.influxdata.com/kapacitor/v1.4/about_the_project/releasenotes-changelog/) for more information about the Kapacitor release.
+
 ### Features
 
 - Update to Kapacitor v1.4.0, brings logging changes and many other features.
