@@ -54,13 +54,13 @@ sent to `/dev/null` by default when InfluxDB is launched as a service.
 InfluxDB must be restarted to pick up any changes to `/etc/default/<node-type>`.
 
 
-##### Meta Nodes
+##### Meta nodes
 
 For meta nodes, the <node-type> is `influxdb-meta`.
 The default log file is `/var/log/influxdb/influxdb-meta.log`
 The service configuration file is `/etc/default/influxdb-meta`.
 
-##### Data Nodes
+##### Data nodes
 
 For data nodes, the <node-type> is `influxdb`.
 The default log file is `/var/log/influxdb/influxdb.log`
@@ -87,13 +87,13 @@ sudo journalctl -u <node-type>.service
 Please consult the systemd journald documentation for configuring
 journald.
 
-##### Meta Nodes
+##### Meta nodes
 
 For data nodes the <node-type> is `influxdb-meta`.
 The default log command is `sudo journalctl -u influxdb-meta.service`
 The service configuration file is `/etc/default/influxdb-meta`.
 
-##### Data Nodes
+##### Data nodes
 
 For data nodes the <node-type> is `influxdb`.
 The default log command is `sudo journalctl -u influxdb.service`
