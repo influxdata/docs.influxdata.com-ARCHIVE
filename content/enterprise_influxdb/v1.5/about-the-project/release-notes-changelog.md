@@ -1,11 +1,10 @@
 ---
-title: Release Notes/Changelog
-aliases:
-    - /enterprise/v1.5/about-the-project/release-notes-changelog/
+title: Release notes/changelog
+
 menu:
   enterprise_influxdb_1_5:
-    weight: 0
-    parent: About the Project
+    weight: 10
+    parent: about_the_project
 ---
 
 <table style="width:100%">
@@ -51,7 +50,7 @@ The default logging format has been changed. See [Logging in InfluxDB](/influxdb
 * Do not queue partial write errors to hinted handoff.
 * Segfault in `digest.merge`
 * Meta Node CPU pegged on idle cluster.
-* Data race on (*meta.UserInfo).acl)
+* Data race on `(meta.UserInfo).acl)`
 
 ## v1.4.2 [2017-11-15]
 
@@ -101,6 +100,7 @@ This release builds off of the 1.4 release of InfluxDB OSS. Please see the [Infl
 ## v1.3.8 [2017-12-04]
 
 ### Upgrading -- for users of the TSI preview
+
 If you have been using the TSI preview with 1.3.6 or earlier 1.3.x releases, you will need to follow the upgrade steps to continue using the TSI preview.  Unfortunately, these steps cannot be executed while the cluster is operating -- so it will require downtime.
 
 ### Bugfixes
@@ -113,6 +113,7 @@ If you have been using the TSI preview with 1.3.6 or earlier 1.3.x releases, you
 ## v1.3.7 [2017-10-26]
 
 ### Upgrading -- for users of the TSI preview
+
 The 1.3.7 release resolves a defect that created duplicate tag values in TSI indexes See Issues
 [#8995](https://github.com/influxdata/influxdb/pull/8995), and [#8998](https://github.com/influxdata/influxdb/pull/8998).
 However, upgrading to 1.3.7 cause compactions to fail, see [Issue #9025](https://github.com/influxdata/influxdb/issues/9025).
@@ -161,7 +162,8 @@ This release builds off of the 1.3.3 release of OSS InfluxDB. Please see the [OS
 
 ## v1.3.2 [2017-08-04]
 
-### Bugfixes
+### Bug fixes
+
 - `influxd-ctl restore -newdb` unable to restore data.
 - Improve performance of `SHOW TAG VALUES`.
 - Show a subset of config settings in `SHOW DIAGNOSTICS`.
@@ -170,7 +172,7 @@ This release builds off of the 1.3.3 release of OSS InfluxDB. Please see the [OS
 
 ## v1.3.1 [2017-07-20]
 
-#### Bugfixes
+#### Bug fixes
 
 - Show a subset of config settings in SHOW DIAGNOSTICS.
 - Switch back to using cluster-tracing config option to enable meta HTTP request logging.
@@ -200,7 +202,7 @@ The admin UI is removed and unusable in this release. The `[admin]` configuratio
 - Refactor RPC connection pool to multiplex multiple streams over single connection.
 - Report RPC connection pool statistics.
 
-#### Bugfixes
+#### Bug fixes
 
 - Fix security escalation bug in subscription management.
 - Certain permissions should not be allowed at the database context.
@@ -216,7 +218,7 @@ The admin UI is removed and unusable in this release. The `[admin]` configuratio
 This release builds off of the 1.2.4 release of OSS InfluxDB.
 Please see the OSS [release notes](/influxdb/v1.3/about_the_project/releasenotes-changelog/#v1-2-4-2017-05-08) for more information about the OSS releases.
 
-#### Bugfixes
+#### Bug fixes
 
 - Fix issue where the [`ALTER RETENTION POLICY` query](/influxdb/v1.3/query_language/database_management/#modify-retention-policies-with-alter-retention-policy) does not update the default retention policy.
 - Hinted-handoff: remote write errors containing `partial write` are considered droppable.
@@ -230,8 +232,6 @@ Please see the OSS [release notes](/influxdb/v1.3/about_the_project/releasenotes
 
 This release builds off of the 1.2.1 release of OSS InfluxDB.
 Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.2/CHANGELOG.md#v121-2017-03-08) for more information about the OSS release.
-
-### Release Notes
 
 ### Configuration Changes
 
@@ -254,7 +254,7 @@ To disable retention policy auto-creation, set `retention-autocreate` to `false`
 
 This change only affects users who have disabled the `retention-autocreate` option and have installed version 1.2.0 or 1.2.1.
 
-#### Bugfixes
+#### Bug fixes
 
 ##### Backup and Restore
 <br>
@@ -265,7 +265,7 @@ This change only affects users who have disabled the `retention-autocreate` opti
 - Allow incremental backups with restrictions (for example, they use the `-db` or `rp` flags) to be stores in the same directory
 - Support restores on meta nodes that are not the raft leader
 
-##### Hinted Handoff
+##### Hinted handoff
 <br>
 
 - Fix issue where dropped writes were not recorded when the [hinted handoff](/enterprise_influxdb/v1.3/concepts/clustering/#hinted-handoff) queue reached the maximum size
@@ -295,8 +295,6 @@ This change only affects users who have disabled the `retention-autocreate` opti
 - Remove misplaced newlines from cluster logs
 
 ## v1.2.0 [2017-01-24]
-
-### Release Notes
 
 This release builds off of the 1.2.0 release of OSS InfluxDB.
 Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.2/CHANGELOG.md#v120-2017-01-24) for more information about the OSS release.
@@ -336,34 +334,28 @@ To disable the auto-creation of retention policies, set `retention-autocreate` t
 
 ## v1.1.5 [2017-04-28]
 
-### Bugfixes
+### Bug fixes
 
 - Prevent certain user permissions from having a database-specific scope.
 - Fix security escalation bug in subscription management.
 
 ## v1.1.3 [2017-02-27]
 
-## Release Notes
-
 This release incorporates the changes in the 1.1.4 release of OSS InfluxDB.
 Please see the OSS [changelog](https://github.com/influxdata/influxdb/blob/v1.1.4/CHANGELOG.md) for more information about the OSS release.
 
-### Bugfixes
+### Bug fixes
 
 - Delay when a node listens for network connections until after all requisite services are running. This prevents queries to the cluster from failing unnecessarily.
 - Allow users to set the `GOMAXPROCS` environment variable.
 
 ## v1.1.2 [internal]
 
-## Release Notes
-
 This release was an internal release only.
 It incorporates the changes in the 1.1.3 release of OSS InfluxDB.
 Please see the OSS [changelog](https://github.com/influxdata/influxdb/blob/v1.1.3/CHANGELOG.md) for more information about the OSS release.
 
 ## v1.1.1 [2016-12-06]
-
-### Release Notes
 
 This release builds off of the 1.1.1 release of OSS InfluxDB.
 Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.1/CHANGELOG.md#v111-2016-12-06) for more information about the OSS release.
@@ -372,15 +364,14 @@ This release is built with Go (golang) 1.7.4.
 It resolves a security vulnerability reported in Go (golang) version 1.7.3 which impacts all
 users currently running on the Mac OS X platform, powered by the Darwin operating system.
 
-#### Cluster-specific Bugfixes
+#### Cluster-specific bug fixes
 
 - Fix hinted-handoff issue: Fix record size larger than max size
 &emsp;If a Hinted Handoff write appended a block that was larger than the maximum file size, the queue would get stuck because       the maximum size was not updated. When reading the block back out during processing, the system would return an error         because the block size was larger than the file size -- which indicates a corrupted block.
 
 ## v1.1.0 [2016-11-14]
 
-### Release Notes
-This release builds off of the 1.1.0 release of OSS InfluxDB.
+This release builds off of the 1.1.0 release of InfluxDB OSS.
 Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.1/CHANGELOG.md#v110-2016-11-14) for more information about the OSS release.
 
 ### Upgrading
@@ -388,7 +379,7 @@ Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1
 * The 1.1.0 release of OSS InfluxDB has some important [configuration changes](https://github.com/influxdata/influxdb/blob/1.1/CHANGELOG.md#configuration-changes) that may affect existing clusters.
 * The `influxd-ctl join` command has been renamed to `influxd-ctl add-meta`.  If you have existing scripts that use `influxd-ctl join`, they will need to use `influxd-ctl add-meta` or be updated to use the new cluster setup command.
 
-#### Cluster Setup
+#### Cluster setup
 
 The `influxd-ctl join` command has been changed to simplify cluster setups.  To join a node to a cluster, you can run `influxd-ctl join <meta:8091>`, and we will attempt to detect and add any meta or data node process running on the hosts automatically.  The previous `join` command exists as `add-meta` now.  If it's the first node of a cluster, the meta address argument is optional.
 
@@ -396,7 +387,7 @@ The `influxd-ctl join` command has been changed to simplify cluster setups.  To 
 
 Switches to journald logging for on systemd systems. Logs are no longer sent to `/var/log/influxdb` on systemd systems.
 
-#### Cluster-specific Features
+#### Cluster-specific features
 
 - Add a configuration option for setting gossiping frequency on data nodes
 - Allow for detailed insight into the Hinted Handoff queue size by adding `queueBytes` to the hh\_processor statistics
@@ -407,7 +398,7 @@ Switches to journald logging for on systemd systems. Logs are no longer sent to 
 - Return and error if there are additional arguments after `influxd-ctl show`
 &emsp;Fixes any confusion between the correct command for showing detailed shard information (`influxd-ctl show-shards`) and the incorrect command (`influxd-ctl show shards`)
 
-#### Cluster-specific Bugfixes
+#### Cluster-specific bug fixes
 
 - Return an error if getting latest snapshot takes longer than 30 seconds
 - Remove any expired shards from the `/show-shards` output
@@ -424,34 +415,34 @@ Switches to journald logging for on systemd systems. Logs are no longer sent to 
 
 ## v1.0.4 [2016-10-19]
 
-#### Cluster-specific Bugfixes
+#### Cluster-specific bug fixes
 
 - Respect the [Hinted Handoff settings](/enterprise_influxdb/v1.3/administration/configuration/#hinted-handoff) in the configuration file
 - Fix expanding regular expressions when all shards do not exist on node that's handling the request
 
 ## v1.0.3 [2016-10-07]
 
-#### Cluster-specific Bugfixes
+#### Cluster-specific bug fixes
 
 - Fix a panic in the Hinted Handoff: `lastModified`
 
 ## v1.0.2 [2016-10-06]
-### Release Notes
+
 This release builds off of the 1.0.2 release of OSS InfluxDB.  Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v102-2016-10-05) for more information about the OSS release.
 
-#### Cluster-specific Bugfixes
+#### Cluster-specific bug fixes
 
 - Prevent double read-lock in the meta client
 - Fix a panic around a corrupt block in Hinted Handoff
 - Fix  issue where `systemctl enable` would throw an error if the symlink already exists
 
 ## v1.0.1 [2016-09-28]
-### Release Notes
+
 This release builds off of the 1.0.1 release of OSS InfluxDB.
 Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v101-2016-09-26)
 for more information about the OSS release.
 
-#### Cluster-specific Bugfixes
+#### Cluster-specific bug fixes
 
 * Balance shards correctly with a restore
 * Fix a panic in the Hinted Handoff: `runtime error: invalid memory address or nil pointer dereference`
@@ -460,7 +451,7 @@ for more information about the OSS release.
 * Update the data node configuration file so that only the minimum configuration options are uncommented
 
 ## v1.0.0 [2016-09-07]
-### Release Notes
+
 This release builds off of the 1.0.0 release of OSS InfluxDB.
 Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.0/CHANGELOG.md#v100-2016-09-07) for more information about the OSS release.
 
@@ -469,7 +460,7 @@ Breaking Changes:
 * The keywords `IF`, `EXISTS`, and `NOT` were removed for this release. This means you no longer need to specify `IF NOT EXISTS` for `DROP DATABASE` or `IF EXISTS` for `CREATE DATABASE`.  Using these keywords will return a query error.
 * `max-series-per-database` was added with a default of 1M but can be disabled by setting it to `0`. Existing databases with series that exceed this limit will continue to load, but writes that would create new series will fail.
 
-### Hinted Handoff
+### Hinted handoff
 
 A number of changes to hinted handoff are included in this release:
 
@@ -486,13 +477,13 @@ A number of changes to hinted handoff are included in this release:
 
 The Cluster API used by `influxd-ctl` can not be protected with SSL certs.
 
-### Cluster Management
+### Cluster management
 
 Data nodes that can no longer be restarted can now be forcefully removed from the cluster using `influxd-ctl remove-data -force <addr>`.  This should only be run if a grace removal is not possible.
 
 Backup and restore has been updated to fix issues and refine existing capabilities.
 
-#### Cluster-specific Features
+#### Cluster-specific features
 
 - Add the Users method to control client
 - Add a `-force` option to the `influxd-ctl remove-data` command
@@ -508,7 +499,7 @@ Backup and restore has been updated to fix issues and refine existing capabiliti
 - Update the shard group creation logic to be balanced
 - Keep raft log to a minimum to prevent replaying large raft logs on startup
 
-#### Cluster-specific Bugfixes
+#### Cluster-specific bug fixes
 
 - Remove bad connections from the meta executor connection pool
 - Fix a panic in the meta store
