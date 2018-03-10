@@ -276,55 +276,38 @@ An `--auth0-organizations` command line option is also available, but it is limi
 
 ### Generic
 
-#### Creating OAuth 2.0 applications using your own provider
+#### Configuring Chronograf to use any OAuth 2.0 provider
 
-The generic OAuth 2.0 provider is very similar to the GitHub provider, but
-you are able to set your own authentication, token, and API URLs.
-The callback URL path will be `/oauth/generic/callback`.
-For example, if Chronograf is hosted at `https://localhost:8888` then the full callback URL would be  `https://localhost:8888/oauth/generic/callback`.
+Chronograf can be configured to work with any OAuth 2.0 provider, including those defined above, by using the Generic configuration options below.
 
-The generic OAuth 2.0 provider requires the following five environment variables (or the corresponding command line options):
+Depending on your OAuth 2.0 provider, many or all of the following environment variables (or corresponding command line options) are required by Chronograf when using the Generic configuration:
 
-* `GENERIC_CLIENT_ID`: this application's client [identifier](https://tools.ietf.org/html/rfc6749#section-2.2) issued by the provider
-* `GENERIC_CLIENT_SECRET`: this application's [secret](https://tools.ietf.org/html/rfc6749#section-2.3.1) issued by the provider
-* `GENERIC_AUTH_URL`: OAuth 2.0 provider's authorization [endpoint](https://tools.ietf.org/html/rfc6749#section-3.1) URL
-* `GENERIC_TOKEN_URL`: OAuth 2.0 provider's token endpoint [endpoint](https://tools.ietf.org/html/rfc6749#section-3.2) is used by the client to obtain an access token
+* `GENERIC_CLIENT_ID`: Application client [identifier](https://tools.ietf.org/html/rfc6749#section-2.2) issued by the provider
+* `GENERIC_CLIENT_SECRET`: Application client [secret](https://tools.ietf.org/html/rfc6749#section-2.3.1) issued by the provider
+* `GENERIC_AUTH_URL`: Provider's authorization [endpoint](https://tools.ietf.org/html/rfc6749#section-3.1) URL
+* `GENERIC_TOKEN_URL`: Provider's token [endpoint](https://tools.ietf.org/html/rfc6749#section-3.2) URL used by the Chronograf client to obtain an access token
+* `GENERIC_API_URL`: Provider's [OpenID UserInfo endpoint](https://connect2id.com/products/server/docs/api/userinfo)] URL used by Chronograf to request user data
+* `GENERIC_API_KEY`: JSON lookup key for [OpenID UserInfo](https://connect2id.com/products/server/docs/api/userinfo)] (known to be required for Microsoft Azure, with the value `userPrincipalName`)
+* `GENERIC_SCOPES`: [Scopes](https://tools.ietf.org/html/rfc6749#section-3.3) of user data required for your instance of Chronograf, such as user email and OAuth provider organization
+  - Multiple values must be space-delimited, e.g. `user:email read:org`
+  - These may vary by OAuth 2.0 provider
+  - Default value: `user:email`
+* `PUBLIC_URL`: Full public URL used to access Chronograf from a web browser, i.e. where Chronograf is hosted
+  - Used by Chronograf, for example, to construct the callback URL
 * `TOKEN_SECRET`: Used to validate OAuth [state](https://tools.ietf.org/html/rfc6749#section-4.1.1) response. (see above)
 
-#### Optional scopes
+#### Optional environment variables
 
-By default Chronograf will ask for the `user:email` [scope](https://tools.ietf.org/html/rfc6749#section-3.3) of the client.
-If your provider scopes email access under a different scope or scopes provide them as comma-separated values in the `GENERIC_SCOPES` environment variable.
-```sh
-export GENERIC_SCOPES="openid,email" # Requests access to openid and email scopes
-```
+The following environment variables (and corresponding command line options) are also available for optional use:
 
-#### Optional email domains
-
-The generic OAuth 2.0 provider has the following two optional environment variables (and corresponding command line options):
-
-* `GENERIC_API_URL`: URL that returns [OpenID UserInfo JWT](https://connect2id.com/products/server/docs/api/userinfo) (specifically email address)
 * `GENERIC_DOMAINS`: Email domain where email address must include.
+* `GENERIC_NAME`: Value used in the callback URL in conjunction with `PUBLIC_URL`, e.g. `<PUBLIC_URL>/oauth/<GENERIC_NAME>/callback`
+  - This value is also used in the text for the Chronograf Login button
+  - Default value is `generic`
+  - So, for example, if `PUBLIC_URL` is `https://localhost:8888` and `GENERIC_NAME` is its default value, then the callback URL would be `https://localhost:8888/oauth/generic/callback`, and the Chronograf Login button would read `Log in with Generic`
+  - While using Chronograf, this value should be supplied in the `Provider` field when adding a user or creating an organization mapping
 
-#### Customizing the login button text and callback URL
-
-Setting the `GENERIC_NAME` environment variable results in the specified value appearing in both the callback URL and the login button text. This allows you to customize the login by replacing "generic" in both locations with a more meaningful name.
-
-> ***Note:*** Use a short, URL-friendly name. The GENERIC_NAME value is lowercased in the callback URL
-
-**Example:**
-
-```sh
-export GENERIC_NAME="GitLab"
-```
-The callback URL changes from:
-```
-https://localhost:8888/oauth/generic/callback
-```
-to:
-````https://localhost:8888/oauth/gitlab/callback`
-
-Also, on the Chronograf login page, the text on the authentication button changes from `Log in with generic` to `Log in with GitLab`.
+> ***Note:*** Use a short, URL-friendly name for `GENERIC_NAME`. The value is lowercased in the callback URL.
 
 ### Configuring authentication duration
 
