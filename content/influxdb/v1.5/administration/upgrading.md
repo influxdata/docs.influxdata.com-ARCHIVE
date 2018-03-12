@@ -18,9 +18,9 @@ The upgrade steps below guide you in upgrading InfluxDB OSS and InfluxDB Enterpr
 
 > ***Note:*** For the InfluxDB 1.5 release, the default continues to use TSM-based shards as in earlier versions, with in-memory indexes.
 
-* [Upgrading InfluxDB 1.0 - 1.4 to 1.5 (TSI enabled)](#upgrading-from-1-0-1-4-to-1-5-tsi-enabled)
-* [Upgrading InfluxDB 1.3 - 1.4 (TSI Preview enabled) to 1.5 (TSI enabled)](#upgrading-from-1-3-1-4-tsi-preview-enabled-to-1-5-tsi-enabled)
-* [Upgrading InfluxDB 1.0 - 1.4 to 1.5](#upgrading-from-1-0-1-4-to-1-5)
+* [Upgrading InfluxDB 1.0 - 1.4 to 1.5 (TSI enabled)](#upgrading-influxdb-1-0-1-4-to-1-5-tsi-enabled)
+* [Upgrading InfluxDB 1.3 - 1.4 (TSI Preview enabled) to 1.5 (TSI enabled)](#upgrading-influxdb-1-3-1-4-tsi-preview-enabled-to-1-5-tsi-enabled)
+* [Upgrading InfluxDB 1.0 - 1.4 to 1.5](#upgrading-influxdb-1-0-1-4-to-1-5)
 * [Switching between TSM in-memory and TSI disk-based indexes](#switching-between-tsm-in-memory-and-tsi-disk-based-indexes)
 * [Upgrading InfluxDB Enterprise clusters](#upgrading-influxdb-enterprise-clusters)
 
