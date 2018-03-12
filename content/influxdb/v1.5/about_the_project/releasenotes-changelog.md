@@ -37,7 +37,7 @@ The default logging format has been changed. See [Logging in InfluxDB](/influxdb
 - Fix CLI to allow quoted database names in use statement.
 - Updated client `4xx` error message when response body length is zero.
 - Remove extraneous newlines from the log.
-- Allow lone boolean literals in a condition expression.
+- Allow lone Boolean literals in a condition expression.
 - Improve performance when writes exceed `max-values-per-tag` or `max-series`.
 - Prevent a panic when a query simultaneously finishes and is killed at the same time.
 - Fix missing sorting of blocks by time when compacting.
@@ -403,7 +403,7 @@ The following new configuration options are available.
 - Fix racy integration test
 - Prevent overflowing or underflowing during window computation
 - Enabled golint for admin, httpd, subscriber, udp, thanks @karlding
-- Implicitly cast null to false in binary expressions with a boolean
+- Implicitly cast null to false in binary expressions with a Boolean
 - Restrict fill(none) and fill(linear) to be usable only with aggregate queries
 - Restrict top() and bottom() selectors to be used with no other functions
 - top() and bottom() now returns the time for every point
@@ -536,7 +536,7 @@ The stress tool `influx_stress` will be removed in a subsequent release. We reco
 - Fix cross-platform backup/restore.
 - Ensures that all user privileges associated with a database are removed when the database is dropped.
 - Return the time from a percentile call on an integer.
-- Expand string and boolean fields when using a wildcard with `sample()`.
+- Expand string and Boolean fields when using a wildcard with `sample()`.
 - Fix chuid argument order in init script.
 - Reject invalid subscription URLs.
 - CLI should use spaces for alignment, not tabs.

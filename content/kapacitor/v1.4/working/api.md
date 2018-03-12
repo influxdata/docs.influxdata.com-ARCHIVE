@@ -72,7 +72,7 @@ The API allows the client to specify IDs for the various resources.
 This way you can control the meaning of the IDs.
 If you do not specify an ID a random UUID will be generated for the resource.
 
-All IDs must match this regex `^[-\._\p{L}0-9]+$`, which is essentially numbers, unicode letters, '-', '.' and '_'.
+All IDs must match this regex `^[-\._\p{L}0-9]+$`, which is essentially numbers, unicode letters, `-`, `.` and `_`.
 
 
 ### Backwards compatibility
@@ -1847,7 +1847,7 @@ The returned configuration will be the merged values from the configuration file
 The returned content will be JSON encoded version of the configuration objects.
 
 All sensitive information will not be returned in the request body.
-Instead a boolean value will be in its place indicating whether the value is empty or not.
+Instead a Boolean value will be in its place indicating whether the value is empty or not.
 A list of which options are redacted is returned for each element.
 
 #### Example

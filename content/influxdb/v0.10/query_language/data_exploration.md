@@ -214,7 +214,7 @@ Note that double quotes do not work when specifying string field values and can 
 
 More on the `WHERE` clause in InfluxQL:
 
-* The `WHERE` clause supports comparisons against strings, booleans, floats, integers, and against the `time` of the timestamp.
+* The `WHERE` clause supports comparisons against strings, Booleans, floats, integers, and against the `time` of the timestamp.
 It supports using regular expressions to match tags, but not to match fields.
 * Chain logic together using `AND`  and `OR`, and separate using `(` and `)`.
 * Acceptable comparators include:  
@@ -228,8 +228,8 @@ It supports using regular expressions to match tags, but not to match fields.
 
 ## The GROUP BY clause
 
-Use the `GROUP BY` clause to group data by tags and/or time intervals.
-To successfully implement `GROUP BY`,  append the`GROUP BY` clause to a `SELECT` statement and pair the `SELECT` statement with one of InfluxQL's [functions](/influxdb/v0.10/query_language/functions/).
+Use the `GROUP BY` clause to group data by tags and time intervals.
+To successfully implement `GROUP BY`,  append the `GROUP BY` clause to a `SELECT` statement and pair the `SELECT` statement with one of InfluxQL's [functions](/influxdb/v0.10/query_language/functions/).
 
 > **Note:** If your query includes both a `WHERE` clause and a `GROUP BY` clause, the `GROUP BY` clause must come after the `WHERE` clause.
 
