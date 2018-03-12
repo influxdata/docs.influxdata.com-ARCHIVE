@@ -39,7 +39,7 @@ This means that we let the operating system handle being the Least Recently Used
 Much like the TSM engine for raw time series data we have a write-ahead log with an in-memory structure that gets merged at query time with the memory-mapped index.
 Background routines run constantly to compact the index into larger and larger files to avoid having to do too many index merges at query time.
 Under the covers, we’re using techniques like Robin Hood Hashing to do fast index lookups and HyperLogLog++ to keep sketches of cardinality estimates.
-The latter will give us the ability to add things to the query languages like the [SHOW CARDINALITY](/influxdb/v1.5/query-language/spec#show-cardinality) queries.
+The latter will give us the ability to add things to the query languages like the [SHOW CARDINALITY](/influxdb/v1.5/query_language/spec#show-cardinality) queries.
 
 ### Issues solved by TSI and remaining to be solved
 
