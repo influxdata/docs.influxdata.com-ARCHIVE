@@ -30,7 +30,7 @@ This meant that for every measurement, tag key/value pair, and field name, there
 For users with a high number of ephemeral series, memory utilization continued increasing as new time series were created.
 And, startup times increased since all of that data would have to be loaded onto the heap at start time.
 
->> For details, see [TSM-based data storage and in-memory indexing](/influxdb/v1.5/concepts/storage-engine/).
+> For details, see [TSM-based data storage and in-memory indexing](/influxdb/v1.5/concepts/storage_engine/).
 
 ### Time Series Index (TSI)
 
