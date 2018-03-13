@@ -104,7 +104,9 @@ Alternatively, set the username for the CLI with the `INFLUX_USERNAME` environme
 Display the InfluxDB version and exit.
 
 ### Execute an InfluxQL command and quit with `-execute`
+
 Execute queries that don't require a database specification:
+
 ```bash
 $ influx -execute 'SHOW DATABASES'
 name: databases
@@ -117,6 +119,7 @@ pirates
 ```
 
 Execute queries that do require a database specification, and change the timestamp precision:
+
 ```bash
 $ influx -execute 'SELECT * FROM "h2o_feet" LIMIT 3' -database="NOAA_water_database" -precision=rfc3339
 name: h2o_feet
@@ -130,6 +133,7 @@ time			               level description	    location	     water_level
 ### Specify the format of the server responses with `-format`
 
 The default format is `column`:
+
 ```bash
 $ influx -format=column
 [...]
@@ -144,6 +148,7 @@ pirates
 ```
 
 Change the format to `csv`:
+
 ```bash
 $ influx -format=csv
 [...]
@@ -156,6 +161,7 @@ databases,pirates
 ```
 
 Change the format to `json`:
+
 ```bash
 $ influx -format=json
 [...]
@@ -164,6 +170,7 @@ $ influx -format=json
 ```
 
 Change the format to `json` and turn on pretty print:
+
 ```bash
 $ influx -format=json -pretty
 [...]
@@ -199,6 +206,7 @@ $ influx -format=json -pretty
 ```
 
 ### Import data from a file with `-import`
+
 The import file has two sections:
 
 * **DDL (Data Definition Language)**: Contains the [InfluxQL commands](/influxdb/v1.5/query_language/database_management/) for creating the relevant [database](/influxdb/v1.5/concepts/glossary/) and managing the [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp).

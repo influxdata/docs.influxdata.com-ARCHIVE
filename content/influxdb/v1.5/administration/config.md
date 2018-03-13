@@ -629,7 +629,7 @@ Environment variable: `INFLUXDB_LOGGING_FORMAT`
 
 ### `level = "info"`
 
-Determines which level of logs will be emitted. Valid values are:
+Sets the log level to be emitted. Valid logging level values are `error`, `warn`, `info`(default), and `debug`. Logs that are equal to, or above, the specified level will be emitted.
 
 Environment variable: `INFLUXDB_LOGGING_LEVEL`
 
