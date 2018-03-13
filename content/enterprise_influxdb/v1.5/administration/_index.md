@@ -3,18 +3,16 @@ title: Administering InfluxDB Enterprise
 
 menu:
   enterprise_influxdb_1_5:
-    name: Administering
+    name: Administration
 ---
 
 ## [Configuring InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/configuration/)
 
-## [Upgrading from previous versions](/enterprise_influxdb/v1.5/administration/upgrading/)
-
-## [Rolling upgrade](/enterprise_influxdb/v1.5/administration/rolling-upgrade/)
+## [Upgrading InfluxDB Enterprise clusters](/enterprise_influxdb/v1.5/administration/upgrading/)
 
 ## [Backing up and restoring in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/backup-and-restore/)
 
-## [Logging in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/logs/)
+## [Logging and tracing in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/logs/)
 
 ## [Host renaming in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/renaming/)
 

@@ -10,7 +10,7 @@ menu:
 
 ### Breaking changes
 
-The default logging format has been changed. See [Logging in InfluxDB](/influxdb/v1.5/administration/logs) for details.
+The default logging format has been changed. See [Logging and tracing in InfluxDB](/influxdb/v1.5/administration/logs) for details.
 
 ### Features
 

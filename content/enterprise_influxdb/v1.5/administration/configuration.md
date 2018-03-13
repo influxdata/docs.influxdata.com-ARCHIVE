@@ -5,7 +5,7 @@ aliases:
 menu:
   enterprise_influxdb_1_5:
     name: Configuring
-    weight: 20
+    weight: 10
     parent: Administration
 ---
 

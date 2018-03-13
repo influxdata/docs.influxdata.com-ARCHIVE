@@ -3,7 +3,8 @@ title: Logging and tracing in InfluxDB Enterprise
 
 menu:
   enterprise_influxdb_1_5:
-    weight: 0
+    name: Logging and tracing
+    weight: 40
     parent: Administration
 ---
 

@@ -3,7 +3,7 @@ title: Managing security in InfluxDB Enterprise
 menu:
   enterprise_influxdb_1_5:
     name: Managing security
-    weight: 90
+    weight: 60
     parent: Administration
 ---
 

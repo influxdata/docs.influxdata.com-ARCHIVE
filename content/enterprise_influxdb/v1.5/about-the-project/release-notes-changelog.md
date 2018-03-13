@@ -4,7 +4,7 @@ title: Release notes/changelog
 menu:
   enterprise_influxdb_1_5:
     weight: 10
-    parent: about_the_project
+    parent: About the project
 ---
 
 <table style="width:100%">
@@ -26,7 +26,7 @@ For highlights of the InfluxDB 1.5 release, see [What's new in InfluxDB 1.5](/in
 
 ### Breaking changes
 
-The default logging format has been changed. See [Logging in InfluxDB](/influxdb/v1.5/administration/logs) for details.
+The default logging format has been changed. See [Logging and tracing in InfluxDB](/influxdb/v1.5/administration/logs) for details.
 
 ### Features
 
