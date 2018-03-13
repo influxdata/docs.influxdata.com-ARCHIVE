@@ -16,6 +16,42 @@ menu:
 
 N.B. This is likely to be superseded by JWT
 
+Kapacitor authorization and authentication involves three elements of the
+enterprise TICK stack: Influx Meta nodes, Enterprise Kapacitor and to aid in
+the creation of users and roles Chronograf and its InfluxDB Admin console.  
+
+Influx-Meta provides the API for the user and permission store.  This API makes
+available standard operations such as Creating, Retrieving, Updating and Deleting
+users and roles.  When retrieving users for other TICK components, it becomes
+the TICK authentication service, returning a JSON document describing the user,
+if the user exists, to the requesting component.  To save time and calls,
+components, such as Kapacitor, can cache user documents in their local data
+stores.  
+
+The Influx-Meta schema includes a limited set of predefined permissions.  Among
+these are `KapacitorAPI` and `KapacitorConfigAPI`.  These permissions can be
+assigned directly to the user or to a role, which the user can then be assigned
+in turn.
+
+With authentication enabled for the Kapacitor HTTP service, when a Kapacitor
+user seeks to use the Kapacitor API directly or to use the command line client,
+credentials need to be supplied as part of the URL.  When processing the request,
+Kapacitor will strip out the credentials and send them to the Influx-Meta API.
+The Influx-Meta server will then return the user details JSON document, which the
+Kapacitor server will in turn inspect for the correct privileges (permissions).
+If the document shows the user has the correct permissions, Kapacitor completes
+the requested transaction.  If the user does not have the proper privileges, the
+transaction is aborted and Kapacitor returns 403 and a message like the following:
+
+```
+{"error":"user <USER> does not have \"read\" privilege for API endpoint \"/kapacitor/v1/tasks\""}
+```
+
+Managing users, roles and permissions is easiest using the Chronograf IndfluxDB
+Admin console.  However authentication and authorization entities can also be
+managed directly over the Influx-Meta API.
+
+The rest of this document introduces these two approaches.
 
 ## User and Permission Management
 
