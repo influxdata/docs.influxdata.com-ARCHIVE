@@ -17,17 +17,17 @@ Chronograf's dashboards support seven visualization types, shown together in the
 ### Line Graph
 Show time series in a line graph.
 
-![Cluster connection details](/img/chronograf/v1.4/faq-viz-line.png)
+![Line Graph screenshot](/img/chronograf/v1.4/faq-viz-line.png)
 
 ### Stacked Graph
 Show time series arranged on top of each other.
 
-![Cluster connection details](/img/chronograf/v1.4/faq-viz-stacked.png)
+![Stacked Graph screenshot](/img/chronograf/v1.4/faq-viz-stacked.png)
 
 ### Step-Plot Graph
 Show time series in a staircase graph.
 
-![Ste-Plot Graph](/img/chronograf/v1.4/faq-viz-step.png)
+![Step-Plot Graph screenshot](/img/chronograf/v1.4/faq-viz-step.png)
 
 ### Single Stat
 Show the most recent value of a time series.
@@ -43,14 +43,14 @@ For example, if a query's `SELECT` clause is `SELECT "chronogiraffe","chronelda"
 ### Line Graph + Single Stat
 Show time series in a line graph and overlay the time series' single most recent value.
 
-![Cluster connection details](/img/chronograf/v1.4/faq-viz-linesingle.png)
+![Line Graph + Single Stat screenshot](/img/chronograf/v1.4/faq-viz-linesingle.png)
 
 ### Bar Graph
 Show time series in a bar chart.
 
-![Cluster connection details](/img/chronograf/v1.4/faq-viz-bar.png)
+![Bar Graph screenshot](/img/chronograf/v1.4/faq-viz-bar.png)
 
 ### Gauge
 Shows a single value in a gauge view.
 
-![Cluster connection details](/img/chronograf/v1.4/gauge.png)
+![Gauge screenshot](/img/chronograf/v1.4/gauge.png)
