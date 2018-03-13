@@ -29,39 +29,39 @@ The upgrade steps below guide you in upgrading InfluxDB OSS and InfluxDB Enterpr
 Follow these steps to upgrade an earlier InfluxDB instance (versions 1.0 to 1.4) that did not enable the TSI Preview to an InfluxDB 1.5 instance with Time Series Index (TSI) enabled.
 
 1. [Download](https://influxdata.com/downloads/#influxdb) InfluxDB version
-1.5.
+1.5 and install the upgrade.
 
 2. Update your InfluxDB configuration.
 
   - If using the InfluxDB configuration file, migrate your InfluxDB configuration file customizations to the InfluxDB 1.5 [configuration file](/influxdb/v1.5/administration/config/).
-  - Add or modify your environment variables.
+  - Add, or modify, your environment variables.
 
 3. Enable the Time Series Index (TSI).
 
   -  If using the InfluxDB configuration file, find the `[data]` section, uncomment `index-version = "inmem"'  and change the value to `tsi1`.
       - Example: `index-version = "tsi1"'
 
-  - If using an environment variable, set `INFLUXDB_DATA_INDEX_VERSION` to `tsi1`.
+  - If using environment variables, set `INFLUXDB_DATA_INDEX_VERSION` to `tsi1`.
       - Example: `export INFLUXDB_DATA_INDEX_VERSION="tsi1"`
 
-4. Convert existing TSM-based shards to TSI-based shards.
+4. Convert existing TSM-based shards to TSI-supported shards.
 
-  - Use [influx_inspect buildtsi](/influxdb/v1.5/tools/influx_inspect/#influx_inspect-buildtsi) for converting your TSM-based shards to TSI-based shards. F
+  - Use [influx_inspect buildtsi](/influxdb/v1.5/tools/influx_inspect/#influx_inspect-buildtsi) for converting your TSM-based shards to TSI-based shards.
 
 
-5. Restart the InfluxDB service.
+5. Restart the `influxdb` service.
 
 ## Upgrading InfluxDB 1.3 - 1.4 (TSI Preview enabled) to 1.5 (TSI enabled)
 
 Follow these steps to upgrade an earlier InfluxDB instance (versions 1.3 and 1.4) that had the TSI Preview enabled to an InfluxDB 1.5 instance with Time Series Index (TSI) enabled.
 
 1. [Download](https://influxdata.com/downloads/#influxdb) InfluxDB version
-1.5.
+1.5 and install the upgrade.
 
 2. Update your InfluxDB configuration.
 
 - If using the InfluxDB configuration file, migrate your InfluxDB configuration file customizations to the InfluxDB 1.5 [configuration file](/influxdb/v1.5/administration/config/).
-- Add or modify your environment variables.
+- Add, or modify, your environment variables.
 
 3. Enable the Time Series Index (TSI).
 
@@ -82,7 +82,7 @@ Follow these steps to upgrade an earlier InfluxDB instance (versions 1.3 and 1.4
   - When Time Series Index (TSI) is enabled, new shards use the TSI disk-based indexing. Existing shards must be converted to support TSI.
   - Run the [influx_inspect buildtsi](/influxdb/v1.5/tools/influx_inspect/#influx_inspect-buildtsi) command to convert existing TSM-based shards to TSI-based shards.
 
-5. Restart the InfluxDB service.
+5. Restart the `influxdb` service.
 
 ## Upgrading InfluxDB 1.0 - 1.4 to 1.5
 
@@ -95,9 +95,9 @@ Follow these steps to upgrade an earlier InfluxDB instance (versions 1.0 to 1.4)
 2. Update your InfluxDB configuration.
 
 - If using the InfluxDB configuration file, migrate your InfluxDB configuration file customizations to the InfluxDB 1.5 [configuration file](/influxdb/v1.5/administration/config/).
-- Add or modify your environment variables.
+- Add, or modify, your environment variables.
 
-5. Restart the InfluxDB service.
+5. Restart the `influxdb` service.
 
 
 ## Switching between TSM in-memory and TSI disk-based indexes
@@ -108,13 +108,13 @@ After installing and upgrading to InfluxDB 1.5, you can switch between using the
 
 1. Enable TSI.
 2. Convert TSM-based shards to TSI-based shards.
-3. Restart the InfluxDB service.
+3. Restart the `influxdb` service.
 
 ### Switching from disk (TSI-based) index to in-memory (TSM-based) index:
 
 1. Enable `inmem`.
 2. Delete all shard `index` directories.
-3. Restart the InfluxDB service.
+3. Restart the `influxdb` service.
 
 ## Upgrading InfluxDB Enterprise clusters
 

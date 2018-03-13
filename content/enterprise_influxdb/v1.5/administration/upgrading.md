@@ -8,13 +8,13 @@ menu:
     parent: Administration
 ---
 
-## Upgrading to InfluxDB Enterprise 1.5 (with TSI enabled)
+## Upgrading to InfluxDB Enterprise 1.5
 
 Version 1.5 includes the first official Time Series Index (TSI) release. Although you can install without enabling TSI, you are encouraged to begin leveraging the advantages the TSI disk-based indexing offers.
 
 For upgrading steps, see [Upgrading to InfluxDB 1.5](/influxdb/v1.5/administration/upgrading/).
 
-## Upgrading InfluxDB Enterprise 1.3 to 1.5.0
+## Upgrading InfluxDB Enterprise 1.3 clusters to 1.5.0 (rolling upgrade)
 
 ### Step 0: Back up your cluster before upgrading to version 1.5.
 
@@ -58,7 +58,7 @@ sudo dpkg -i influxdb-meta_1.5.0-c1.5.0_amd64.deb
 sudo yum localinstall influxdb-meta-1.5.0_c1.5.0.x86_64.rpm
 ```
 
-### Step 3: Restart the `influxdb-meta` process.
+### Step 3: Restart the `influxdb-meta` service.
 
 #### Meta node restart
 
