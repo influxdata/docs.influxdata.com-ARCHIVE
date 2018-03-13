@@ -3,7 +3,7 @@ title: Transitioning from the InfluxDB Web Admin Interface
 menu:
   chronograf_1_4:
     weight: 50
-    parent: Guides
+    parent: Administration
 ---
 
 Versions 1.3 and later of [InfluxDB](/influxdb/latest/) and [InfluxEnterprise](/enterprise/latest/) do not support the [web admin interface](/influxdb/latest/tools/web_admin/), the builtin user interface for writing and querying data in InfluxDB.

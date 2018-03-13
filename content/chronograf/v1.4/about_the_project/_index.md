@@ -4,10 +4,11 @@ title: About the project
 menu:
   chronograf_1_4:
     name: About the Project
-    weight: 40
 ---
 
 Follow the links below for more information.
+
+## [What's new in Chronograf](/chronograf/latest/about_the_project/whats_new/)
 
 ## [Release Notes/Changelog](/chronograf/latest/about_the_project/release-notes-changelog/)
 

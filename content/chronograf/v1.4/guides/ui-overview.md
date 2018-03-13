@@ -4,13 +4,13 @@ menu:
   chronograf_1_4:
     name: User interface
     weight: 20
-    parent: #Introduction
+    parent: guides
 ---
 
 
+This page covers user and administrator functionality available using the Chronograf user interface.
 
 
-## Status
 
 ### Alert Events per Day - Last 30 Days (graph)
 
