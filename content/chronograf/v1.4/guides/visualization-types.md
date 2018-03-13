@@ -9,12 +9,15 @@ menu:
 
 ## Visualization types supported in Chronograf
 
-Chronograf's dashboards support seven visualization types.
+Chronograf's dashboards support seven visualization types, shown together in the **Visualization Type** selection view like this:
+
+![Visualization Type selection view](/img/chronograf/faq-viz-line.png)
+
 
 ### Line Graph
 Show time series in a line graph.
 
-![Cluster connection details](/img/chronograf/v1.4/faq-viz-line.png)
+![Line Graph screenshot](/img/chronograf/v1.4/faq-viz-line.png)
 
 ### Stacked Graph
 Show time series arranged on top of each other.
