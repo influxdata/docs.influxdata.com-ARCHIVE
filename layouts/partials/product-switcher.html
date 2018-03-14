@@ -22,7 +22,7 @@
     <div class="navbar--dropdown-dismiss" id="navbar--dropdown-dismiss"></div>
     <ul class="navbar--product-menu" id="navbar--product-menu">
         {{ range .Site.Menus.products }}
-          {{ if or (in .Identifier "telegraf") (in .Identifier "influxdb") (in .Identifier "chronograf") (in .Identifier "kapacitor") }}
+          {{ if or (in .Identifier "telegraf") (in .Identifier "influxdb") (in .Identifier "enterprise_influxdb") (in .Identifier "chronograf") (in .Identifier "kapacitor") (in .Identifier "enterprise_kapacitor") }}
             <li><a class="navbar--product{{if or ($currentNode.IsMenuCurrent "products" .) ($currentNode.HasMenuCurrent "products" .) }} active{{end}}" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .Name }}</a></li>
           {{ end }}
         {{ end }}
@@ -46,7 +46,7 @@
     <div class="navbar--dropdown-dismiss" id="navbar--dropdown-dismiss"></div>
     <ul class="navbar--product-menu" id="navbar--product-menu">
         {{ range .Site.Menus.products }}
-          {{ if or (in .Identifier "telegraf") (in .Identifier "influxdb") (in .Identifier "chronograf") (in .Identifier "kapacitor") }}
+          {{ if or (in .Identifier "telegraf") (in .Identifier "influxdb") (in .Identifier "enterprise_influxdb") (in .Identifier "chronograf") (in .Identifier "kapacitor") (in .Identifier "enterprise_kapacitor") }}
             <li><a class="navbar--product{{if or ($currentNode.IsMenuCurrent "products" .) ($currentNode.HasMenuCurrent "products" .) }} active{{end}}" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .Name }}</a></li>
           {{ end }}
         {{ end }}
