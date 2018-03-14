@@ -4,7 +4,6 @@ title: Guides for Chronograf
 menu:
   chronograf_1_4:
     name: Guides
-    weight: 5
 ---
 
 Follow the links below to explore Chronograf's features.

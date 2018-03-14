@@ -85,7 +85,7 @@ On the **Chronograf Admin** page:
 * Change user passwords
 * Assign admin and remove admin permissions to or from a user
 
-![InfluxDB OSS user management](/img/chronograf/v1.4/admin-usermanagement-oss.png)
+![InfluxDB OSS user management](/img/chronograf/chrono-admin-usermanagement-oss.png)
 
 InfluxDB users are either admin users or non-admin users.
 See InfluxDB's [authentication and authorization](/influxdb/latest/query_language/authentication_and_authorization/#user-types-and-privileges) documentation for more information about those user types.
@@ -126,7 +126,7 @@ On the `Admin` page:
 * Create, edit, and delete roles
 * Assign and remove roles to or from a user
 
-![InfluxDB Enterprise user management](/img/chronograf/v1.4/admin-usermanagement-cluster.png)
+![InfluxDB Enterprise user management](/img/chronograf/chrono-admin-usermanagement-cluster.png)
 
 ### User types
 
@@ -302,4 +302,4 @@ For example, the image below contains three roles: `CREATOR`, `DESTROYER`, and `
 `CREATOR` includes two permissions (`CreateDatbase` and `CreateUserAndRole`) and is assigned to one user (`chrononut`).
 `DESTROYER` also includes two permissions (`DropDatabase` and `DropData`) and is assigned to two users (`chrononut` and `chronelda`).
 
-![InfluxDB OSS user management](/img/chronograf/v1.4/admin-usermanagement-roles.png)
+![InfluxDB OSS user management](/img/chronograf/chrono-admin-usermanagement-roles.png)

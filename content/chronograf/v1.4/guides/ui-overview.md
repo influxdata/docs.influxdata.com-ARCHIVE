@@ -128,6 +128,8 @@ Alerts
   - Scheme
 - Add User (button)
 
+See [Managing Chronograf organizations](/chronograf/v1.4/administration/managing-organizations)
+
 #### All Users
 
 ![All Users](/img/chronograf/chrono-admin-all-users.png)
@@ -140,6 +142,8 @@ Alerts
   - SuperAdmin
 - Add User (button)
 
+See [Managing Chronograf users](/chronograf/v1.4/administration/managing-chronograf-users)
+
 #### All Orgs
 
 ![All Orgs](/img/chronograf/chrono-admin-all-orgs.png)
@@ -148,6 +152,8 @@ Alerts
   - Name
   - Default Role
 * Create Organization (button)
+
+See [Managing Chronograf organizations](/chronograf/v1.4/administration/managing-organizations)
 
 #### Org Mappings
 
@@ -161,7 +167,7 @@ Alerts
 
 * Create Mapping (button)
 
-
+See [Mapping organizations](/chronograf/v1.4/administration/managing-organizations/#mapping-organizations)
 
 ### InfluxDB Admin
 
@@ -189,6 +195,8 @@ Alerts
 * User
 * Password
 * Permissions
+
+See [Managing InfluxDB users](/chronograf/v1.4/administration/managing-influxdb-users)
 
 #### Queries
 

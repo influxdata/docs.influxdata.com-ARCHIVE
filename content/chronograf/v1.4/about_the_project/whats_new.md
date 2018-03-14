@@ -5,11 +5,7 @@ menu:
     weight: 10
     parent: About the Project
 ---
-This page includes highlights of new and enhanced functionality in Chronograf. See the [Release notes/changelog](/chronograf/v1.4/about_the_project/release-notes-changelog/) for a complete listing of new features, changes, and bug fixes.
-
-## Chronograf 1.4.3
-
-* Chart annotations
+This page includes highlights of new and enhanced Chronograf functionality. See the [Release notes/changelog](/chronograf/v1.4/about_the_project/release-notes-changelog/) for a complete listing of new features, changes, and bug fixes.
 
 ## Chronograf 1.4.2
 
