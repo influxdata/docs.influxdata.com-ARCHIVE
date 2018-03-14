@@ -47,7 +47,7 @@ This page includes highlights of new and enhanced functionality in Chronograf. S
 
 ## Chronograf 1.4.0
 
-- Chronograf Admin
+* Chronograf Admin
   - Support for organizations and role-based access control.
   - Support authentication and authorization using OAuth 2.0 providers.
   -
