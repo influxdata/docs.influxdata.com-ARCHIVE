@@ -6,25 +6,11 @@ menu:
     parent: about_the_project
 ---
 
-## v1.4.1.0 [unreleased]
+## v1.4.1 [2018-04-13]
 
-### Release notes
+### Bug fixes
 
-Kapacitor v1.4.1 adds many new features, highlighted here:
-
-- Allow adding multiple event handlers to a rule.
-- Add "send test alert" button to test Kapacitor alert configurations.
-- Link to specified Kapacitor config panel from rule builder alert handlers.
-- Add auto-refresh widget to Hosts List page.
-
-#### UI improvements
-
-- Improve clarity of terminology surrounding InfluxDB and Kapacitor connections.
-
-### Bug Fixes
-
-- Fix TICKscript Sensu alerts when no `group by` tags are selected.
-- Remove CLI options from `systemd` service file.
+* Fix bug where task type was invalid when using var for stream/batch
 
 ## v1.4.0.1 [2017-1-9]
 
@@ -36,8 +22,6 @@ Kapacitor v1.4.1 adds many new features, highlighted here:
 ### Bug fixes
 - Allow insecure (self-signed) certificates for Kapacitor and InfluxDB.
 - Fix positioning of custom time indicator.
-
-
 
 ## v1.4.0 [2017-12-08]
 
@@ -112,17 +96,17 @@ The `Combine` and `Flatten` nodes previously operated (erroneously) across batch
 
 ## v1.3.3 [2017-08-11]
 
-### Bugfixes
+### Bug fixes
 - Expose pprof without authentication, if enabled.
 
 ## v1.3.2 [2017-08-08]
 
-### Bugfixes
+### Bug fixes
 - Use details field from alert node in PagerDuty.
 
 ## v1.3.1 [2017-06-02]
 
-### Bugfixes
+### Bug fixes
 
 - Proxy from environment for HTTP request to Slack
 - Fix derivative node preserving fields from previous point in stream tasks
