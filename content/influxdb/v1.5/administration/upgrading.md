@@ -11,7 +11,7 @@ menu:
 
   Starting with the InfluxDB 1.5 release, enabling Time Series Index (TSI) is recommended for all customers. To learn more about TSI, see:
 
-  * [Time Series Index (TSI) overview](/influxdb/v1.5/concepts/time-series-idnex/)
+  * [Time Series Index (TSI) overview](/influxdb/v1.5/concepts/time-series-index/)
   * [Time Series Index (TSI) details](/influxdb/v1.5/concepts/tsi-details/)
 
 The upgrade steps below guide you in upgrading InfluxDB OSS and InfluxDB Enterprise, enabling TSI functionality.
