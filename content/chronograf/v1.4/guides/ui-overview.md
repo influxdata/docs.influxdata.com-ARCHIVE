@@ -27,7 +27,7 @@ This page covers user and administrator functionality available using the Chrono
 
 ## Host list
 
-![Host List (screenshot)](/img/chronograf/chrono-host-list.png)
+![Host List (screenshot)](/img/chronograf/chrono-cluster-hostlist.png)
 
 * # Host(s)
   - Host
@@ -78,7 +78,7 @@ If you configure the setting to an interval that's greater than one minute, Chro
 
 ![Dashboard edit](/img/chronograf/chrono-dashboard-edit.png)
 
-![Dashboard listing](/img/chronograf/chrono-dashboard-listing.png)
+![Dashboard listing](/img/chronograf/chrono-dashboards-listing.png)
 
 ### Why does the query builder break after I add my template variable to a query?
 
@@ -92,7 +92,9 @@ This is a known issue and it will be fixed in a future release.
 
 ## Alerting
 
-###
+### Alerts
+
+![Databases](/img/chronograf/chrono-alerts.png)
 
 Alerts
 * Name
@@ -100,7 +102,6 @@ Alerts
 * Time
 * Host
 * Value
-*
 
 ### Date Range Selection
 
@@ -114,7 +115,11 @@ Alerts
 
 ### Chronograf Admin
 
+![Current Org](/img/chronograf/chrono-admin-current-org.png)
+
 #### Current Org
+
+![Current Org](/img/chronograf/chrono-admin-current-org.png)
 
 * # User(s) in [Current Org]
   - Username
@@ -125,6 +130,8 @@ Alerts
 
 #### All Users
 
+![All Users](/img/chronograf/chrono-admin-all-users.png)
+
 * # User(s) across # Org(s)
   - Username
   - Organizations
@@ -133,7 +140,9 @@ Alerts
   - SuperAdmin
 - Add User (button)
 
-#### All
+#### All Orgs
+
+![All Orgs](/img/chronograf/chrono-admin-all-orgs.png)
 
 * # Organization(s)
   - Name
@@ -141,6 +150,8 @@ Alerts
 * Create Organization (button)
 
 #### Org Mappings
+
+![Org Mappings](/img/chronograf/chrono-admin-org-mappings.png)
 
 * # Map(s)
   - Scheme
@@ -156,6 +167,8 @@ Alerts
 
 #### Databases
 
+![InfluxDB Databases](/img/chronograf/chrono-influxdb-admin-databases.png)
+
 * # Database(s)
   - Database name
   - Retention Policy
@@ -170,12 +183,16 @@ Alerts
 
 #### Users
 
+![InfluxDB Users](/img/chronograf/chrono-influxdb-admin-users.png)
+
 * Filter Users... (field)
 * User
 * Password
 * Permissions
 
 #### Queries
+
+![InfluxDB Queries](/img/chronograf/chrono-influxdb-admin-queries.png)
 
 * Database
 * Query
