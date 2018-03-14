@@ -8,8 +8,6 @@ menu:
 
 ## v1.4.2.3 [2018-03-08]
 
-## v1.4.2.2 [2018-03-07]
-
 Bug Fixes
 
 * Include URL in Kapacitor connection creation requests.
