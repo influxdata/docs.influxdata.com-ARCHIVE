@@ -463,14 +463,6 @@ The interval at which InfluxDB records statistics.
 
 Environment variable: `INFLUXDB_MONITOR_STORE_INTERVAL`
 
-## Administration settings `[admin]`
-
-<dt> Starting with version 1.3, the web admin interface is no longer available in InfluxDB.
-The interface does not run on port `8083` and InfluxDB ignores the `[admin]` section in the configuration file if that section is present.
-[Chronograf](/chronograf/latest/) replaces the web admin interface with improved tooling for querying data, writing data, and database management.
-See [Chronograf's transition guide](/chronograf/latest/guides/transition-web-admin-interface/) for more information.
-</dt>
-
 ## HTTP endpoint settings `[http]`
 
 The `[http]` settings control how InfluxDB configures the HTTP endpoints.

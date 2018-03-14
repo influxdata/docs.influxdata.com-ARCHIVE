@@ -29,10 +29,6 @@ Learn how to set up event handlers in Chronograf.
 InfluxDB Enterprise offers high availability and a highly-scalable clustering solution for your time series data needs.
 Learn how to use Chronograf to assess your cluster’s health and monitor the infrastructure behind your project.
 
-## [Transitioning from InfluxDB's Web Admin Interface](/chronograf/latest/guides/transition-web-admin-interface/)
-Versions 1.3+ of InfluxDB OSS and InfluxDB Enterprise no longer support the web admin interface, the built-in user interface for writing and querying data in InfluxDB.
-Learn how to use Chronograf as a replacement for the web admin interface.
-
 ## [Using dashboard template variables](/chronograf/latest/guides/dashboard-template-variables/)
 Learn how to use Chronograf's dashboard template variables to interact with your dashboards and gain insights into your data.
 
