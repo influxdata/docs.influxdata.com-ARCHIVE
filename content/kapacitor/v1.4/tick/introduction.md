@@ -17,7 +17,7 @@ menu:
 
 # Overview
 
-Kapacitor uses a Domain Specific Language(DSL) named **TICKscript** to define **tasks** involving the extraction, transformation and loading of data and involving, moreover, the tracking of arbitrary changes and the detection of events within data.  One common task is defining alerts.  TICKscript is used in `.tick` files to define **pipelines** for processing data.  The TICKscript language is designed to chain together the invocation of data processing operations defined in **nodes**.  The Kapacitor [Getting Started](/kapacitor/v1.4/introduction/getting_started/) guide introduces TICKscript basics in the context of that product.  For a better understanding of what follows, it is recommended that the reader review that document first.
+Kapacitor uses a Domain Specific Language(DSL) named **TICKscript** to define **tasks** involving the extraction, transformation and loading of data and involving, moreover, the tracking of arbitrary changes and the detection of events within data.  One common task is defining alerts.  TICKscript is used in `.tick` files to define **pipelines** for processing data.  The TICKscript language is designed to chain together the invocation of data processing operations defined in **nodes**.  The Kapacitor [Getting Started](/kapacitor/v1.4/introduction/getting-started/) guide introduces TICKscript basics in the context of that product.  For a better understanding of what follows, it is recommended that the reader review that document first.
 
 Each script has a flat scope and each variable in the scope can reference a literal value, such as a string, an integer or a float value, or a node instance with methods that can then be called.
 

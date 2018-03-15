@@ -18,4 +18,4 @@ and running with InfluxDB Enterprise.
 
 ## [Installation options](/enterprise_influxdb/v1.5/introduction/installation_guidelines/)
 
-## [Getting started with InfluxDB Enterprise](/enterprise_influxdb/v1.5/introduction/getting_started/)
+## [Getting started with InfluxDB Enterprise](/enterprise_influxdb/v1.5/introduction/getting-started/)

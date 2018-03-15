@@ -14,7 +14,7 @@ menu:
  * [Configuring with The HTTP API](#configuration-with-the-http-api)
 
 Basic installation and startup of the Kapacitor service is covered in
-[Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting_started/).
+[Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting-started/).
 The basic principles of working with Kapacitor described there should be understood before continuing here.
 This document presents Kapacitor configuration in greater detail.
 

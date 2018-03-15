@@ -26,7 +26,7 @@ runs the server, including its HTTP interface.  The command line client
 to many Kapacitor features.
 
 A general introduction to the `kapacitor` client is presented in the
-[Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting_started/).
+[Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting-started/).
 
 When executed the client can take two options and one command followed by
 arguments applicable to that command.
@@ -744,7 +744,7 @@ To verify the results, use the `list topics` command.
 ## Tasks and task templates
 
 Tasks and task definitions comprise the core Kapacitor functionality.  Tasks are
-introduced in the [Getting Started](/kapacitor/v1.4/introduction/getting_started/) guide
+introduced in the [Getting Started](/kapacitor/v1.4/introduction/getting-started/) guide
 and are explored in detail along side the [TICKscript](/kapacitor/v1.4/tick/).
 
 Task templates make it easy to reuse generic task structures to create a suite
