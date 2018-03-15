@@ -28,14 +28,10 @@
 						{{ end }}
 						{{ if or (eq .Identifier "telegraf") (eq .Identifier "influxdb") (eq .Identifier "chronograf") (eq .Identifier "kapacitor") }}
 							<br/>
-							<a class="homepage--card-link" href="https://influxdata.com/downloads/#{{ .Identifier }}" target=blank>Download</a>
+							<a class="homepage--card-link" href="https://influxdata.com/downloads/#{{ .Identifier }}" target="_blank">Download</a>
 							<br/>
 							<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/introduction/getting-started/">Getting started</a>
 							<br/>
-							{{ if eq .Identifier "influxdb" }}
-								<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/troubleshooting/frequently-asked-questions/">FAQ</a>
-								<br/>
-							{{ end }}
 							<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">Documentation</a>
 						{{ end }}
 						{{ if or (eq .Identifier "enterprise_influxdb") (eq .Identifier "enterprise_kapacitor") }}
@@ -44,10 +40,6 @@
 							<br/>
 							<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/introduction/getting-started/">Getting started</a>
 							<br/>
-							{{ if eq .Identifier "influxdb" }}
-								<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/troubleshooting/frequently-asked-questions/">FAQ</a>
-								<br/>
-							{{ end }}
 							<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">Documentation</a>
 						{{ end }}
 					</p>
