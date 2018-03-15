@@ -6,7 +6,7 @@ menu:
     parent: about_the_project
 ---
 
-## v1.4.1 [2018-04-13]
+## v1.4.1 [2018-03-13]
 
 ### Bug fixes
 
