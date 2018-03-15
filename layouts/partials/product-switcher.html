@@ -6,16 +6,18 @@
     <div class="navbar--hamburger-bar bottom"></div>
 </div>
 <div class="navbar--product-dropdown" id="navbar--dropdown">
-    <div class="navbar--current-product">{{$current := . }}
-{{ if not (or .IsHome .IsNode) }}
-{{ range $product := .Site.Menus.products }}
-{{ range $version := (index $.Site.Data.versions $product.Identifier) }}
-{{ if in $current.RelPermalink (print "/" $product.Identifier "/" $version) }}
-{{$product.Name}} {{$version}}
-{{end}}
-{{end}}
-{{end}}
-{{end}}</div>
+    <div class="navbar--current-product">
+      {{$current := . }}
+      {{ if not (or .IsHome .IsNode) }}
+      {{ range $product := .Site.Menus.products }}
+      {{ range $version := (index $.Site.Data.versions $product.Identifier) }}
+      {{ if in $current.RelPermalink (print "/" $product.Identifier "/" $version) }}
+      {{$product.Name}} {{$version}}
+      {{end}}
+      {{end}}
+      {{end}}
+      {{end}}
+    </div>
     <div class="navbar--product-dropdown-caret"><span class="icon arrow-down"></span></div>
 </div>
 <div class="navbar--product-container" id="navbar--product-container">

@@ -2,7 +2,6 @@
 title: Release Notes/Changelog
 menu:
   kapacitor_1_4:
-    weight: 1
     parent: about_the_project
 ---
 
@@ -30,7 +29,7 @@ menu:
 Kapacitor v1.4.0 adds many new features, highlighted here:
 
 - Load directory service for adding topic handlers, tasks, and templates from `dir`.
-- Structured Logging with logging API endpoints that can be used to tail logs for specified tasks.
+- Structured logging with logging API endpoints that can be used to tail logs for specified tasks.
 - Autoscale support for Docker Swarm and AWS EC2.
 - Sideload data into your TICKscript streams from external sources.
 - Fully-customizable HTTP Post body for the alert Post handler and the HTTP Post node.
