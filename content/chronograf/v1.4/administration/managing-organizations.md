@@ -13,6 +13,7 @@ menu:
 * [Using the Default organization](#using-the-default-organization)
 * [Creating organizations](#creating-organizations)
 * [Configuring organizations](#configuring-organizations)
+* [Mapping organizations](#mapping-organizations)
 * [Removing organizations](#removing-organizations)
 
 
