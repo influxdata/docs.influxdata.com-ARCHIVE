@@ -38,6 +38,18 @@
 							{{ end }}
 							<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">All Documentation</a>
 						{{ end }}
+						{{ if or (eq .Identifier "enterprise_influxdb") (eq .Identifier "enterprise_kapacitor") }}
+							<br/>
+							<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/introduction/download/">Download</a>
+							<br/>
+							<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/introduction/getting-started/">Getting Started</a>
+							<br/>
+							{{ if eq .Identifier "influxdb" }}
+								<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/troubleshooting/frequently-asked-questions/">FAQ</a>
+								<br/>
+							{{ end }}
+							<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">All Documentation</a>
+						{{ end }}
 					</p>
 				</div>
 				<div class="homepage--card-mask"></div>
