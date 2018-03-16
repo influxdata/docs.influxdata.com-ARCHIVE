@@ -65,6 +65,8 @@ If you configure the setting to an interval that's greater than one minute, Chro
 
 ![Data Explorer](/img/chronograf/chrono-data-explorer.png)
 
+The **Data Explorer** view
+
 * DB.RetentionPolicy
 * Measurement & Tags [Filer (field)]
 * Fields
@@ -134,13 +136,23 @@ See [Managing Chronograf organizations](/chronograf/v1.4/administration/managing
 
 ![All Users](/img/chronograf/chrono-admin-all-users.png)
 
-* # User(s) across # Org(s)
-  - Username
-  - Organizations
-  - Provider
-  - Scheme
-  - SuperAdmin
-- Add User (button)
+For each Chronograf user, the **All Users** view displays the following:
+
+* **Username**: Username (email address or other unique ID).
+* **Organizations**: Chronograf organizations the user belongs to.
+  - Click the `X` to remove the user from the selected organization.
+  - Click the `+` button to add the user to another organization.
+* **Provider**: Authentication provider.
+* **Scheme**: Authentication scheme.
+  - `oauth2` is the only valid value. User cannot change this value.
+* **SuperAdmin**: SuperAdmin status.
+
+#### Add User
+
+![Add User](/img/chronograf/chrono-admin-all-users-add-user.png)
+
+Click the **Add User** button to create a user.
+
 
 See [Managing Chronograf users](/chronograf/v1.4/administration/managing-chronograf-users)
 
@@ -148,24 +160,38 @@ See [Managing Chronograf users](/chronograf/v1.4/administration/managing-chronog
 
 ![All Orgs](/img/chronograf/chrono-admin-all-orgs.png)
 
-* # Organization(s)
-  - Name
-  - Default Role
-* Create Organization (button)
+The **All Orgs** view lists the **Name** and **Default Role** for each Chronograf organization.
 
-See [Managing Chronograf organizations](/chronograf/v1.4/administration/managing-organizations)
+* **Name**: Chronograf organization name.
+* **Default Role**: Default role for new users in the organization.
+
+
+#### Create Organization (button)
+
+![Create Organization](/img/chronograf/chrono-admin-all-orgs-create.png)
+
+Click the **Create Organization** button to add a new Chronograf organization. You can specify the organization **Name** and **Default Role** for new users.
+
+* **Name**: Chronograf organization name.
+* **Default Role**: Default role for new users in the organization.
+
+See [Creating organizations](/chronograf/v1.4/administration/managing-organizations/#creating-organizations)
 
 #### Org Mappings
 
 ![Org Mappings](/img/chronograf/chrono-admin-org-mappings.png)
 
-* # Map(s)
-  - Scheme
-  - Provider
-  - Provider Org
-  - Organization
+The **Org Mappings** view lists all organization mappings, including **Scheme**, **Provider**, **Provider Org**, and **Organization**.
+
+* **Scheme**: Authentication scheme. Valid choices are `*` (any) and `oauth2` (OAuth 2.0).
+* **Provider**: Authentication provider. Valid choices include `Google`, `GitHub`, and name of other organization specified in generic name.
+* **Provider Org**: Email domains required for authentication. Example: influxdata.com.
+* **Organization**: Chronograf organization this authentication is mapped to.
 
 * Create Mapping (button)
+
+![Org Mappings](/img/chronograf/chrono-admin-org-mappings-create.png)
+
 
 See [Mapping organizations](/chronograf/v1.4/administration/managing-organizations/#mapping-organizations)
 

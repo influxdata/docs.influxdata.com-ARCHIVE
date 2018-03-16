@@ -80,13 +80,18 @@ See the following pages for more information about managing Chronograf users and
 3) To add an organization mapping, click the **Create Mapping** button. A new row is added to the listing.
 4) In the new row, enter the following:
 
-- **Scheme**, select `oauth2`,
+- **Scheme**, select `oauth2`.
 - **Provider**: Enter the provider. Valid values include `Google` and `GitHub`.
 - **Provider Org**: [Optional] Enter the email domain(s) you want to accept.
 - **Organization**: Select the organization that can use this authentication provider.
 
 **To remove an organization mapping:**
 
+**Required status:** SuperAdmin
+
+1) In the Chronograf navigation bar, select **Admin** (crown icon) > **Chronograf** to open the **Chronograf Admin** page.
+2) Click the **Org Mappings** tab to view a list of organization mappings.
+3) To remove an organization mapping, click the **Delete** button at the end of the mapping row you want to remove, and then confirm the action. 
 
 ## Removing organizations
 
