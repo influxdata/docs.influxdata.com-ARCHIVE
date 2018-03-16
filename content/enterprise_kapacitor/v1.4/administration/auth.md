@@ -9,7 +9,9 @@ menu:
 ---
 
 <!-- The Modal -->
-<div id="modal" style="display:none; position:absolute; z-index: 100; top: 100px; left: 400px; max-width: 250%; max-height: 250%; background: linear-gradient(to right,#22ADF6 0,#9394FF 100%);; padding: 30px;">
+<!-- div id="modal" style="display:none; position:absolute; z-index: 100; top: 100px; left: 400px; max-width: 250%; max-height: 250%; background: linear-gradient(to right,#22ADF6 0,#9394FF 100%);; padding: 30px;" -->
+
+<div id="modal" style="display:none; position: fixed; z-index: 100; top 0; right 0; background: linear-gradient(to right,#22ADF6 0,#9394FF 100%);; padding: 30px;">
 
   <!-- The Close Button -->
   <span id="modalClose" style="display:inherit; position: absolute; color: #4591ED; top: 35px; right: 45px; font-size: 40px; font-weight: bold; transition: 0.3s">&times;</span>
@@ -17,8 +19,6 @@ menu:
   <!-- Modal Content (The Image) -->
   <img style="margin: auto; display: block; width: 100%; width: 100%" id="img01">
 
-  <!-- Modal Caption (Image Text) -->
-  <!-- div id="caption"></div -->
 </div>
 
 <script>
@@ -32,11 +32,10 @@ function doModal(imgID){
 
     var img = document.getElementById(imgID);
     var modalImg = document.getElementById("img01");
-    var captionText = document.getElementById("caption");
 
     modal.style.display = "block";
+    // modal.style.left = document.getElementById("sidebar").style.right + 100;
     modalImg.src = img.src;
-    captionText.innerHTML = img.alt;
 
 }
 
@@ -69,13 +68,13 @@ span.onclick = function() {
 
 
 Kapacitor authorization and authentication involves three components of the
-enterprise TICK stack: InfluxDB Enterprise Meta nodes, Enterprise Kapacitor and,
+enterprise TICK stack: InfluxDB Enterprise meta nodes, Enterprise Kapacitor and,
 to aid in the creation of users and roles, Chronograf and its InfluxDB Admin
 console.  
 
-InfluxDB Meta nodes provide the API for the user and permission store.  This API
-makes available standard operations such as Creating, Retrieving, Updating and
-Deleting users and roles.  When retrieving users, it becomes the TICK
+InfluxDB meta nodes provide the API for the user and permission store.  This API
+makes available standard operations such as creating, retrieving, updating and
+deleting users and roles.  When retrieving users, it becomes the TICK
 authentication service for other TICK components, returning a JSON document
 describing the user, if the user exists, to the requesting component.  To save
 time and calls, components, such as Kapacitor, can cache user documents in their
@@ -83,7 +82,7 @@ local data stores.
 
 The Influx-Meta schema includes a limited set of predefined permissions.  Among
 these are `KapacitorAPI` and `KapacitorConfigAPI`.  These permissions can be
-assigned directly to the user or to a role, which the user can then be assigned
+assigned directly to the user or to a role, to which the user can then be assigned
 in turn.
 
 A high level view of the authentication and authorization architecture is
@@ -99,8 +98,7 @@ presented in Image 1.
 
 With authentication enabled for the Kapacitor HTTP service, when a Kapacitor
 user seeks to use the Kapacitor API directly or to use the command line client,
-credentials need to be supplied.  This can be done using basic authentication as
-part of the URL.  
+credentials need to be supplied.
 
 For example when using the Kapacitor client.
 ```
@@ -259,7 +257,7 @@ The Influxd-Meta API provides an endpoint `/user` for managing users.
 To view a list of existing users.
 
 ```
-$ curl --negotiate -u "admin:changeit" -s http://localhost:8091/user | python -m json.tool
+$ curl -u "admin:changeit" -s http://localhost:8091/user | python -m json.tool
 {
     "users": [
         {
@@ -680,15 +678,11 @@ cluster needs to be supplied.
 Once the Chronograf graphical user interface is loaded, open the **InfluxDBAdmin**
 console through the left side navigation bar.
 
-<a href="javascript:doModal('open-admin')">
 <img id='open-admin' src='/img/enterprise/kapacitor/OpenInfluxDBAdmin.png' alt="Open InfluxDBAdmin" style="max-width: 300px"></img>
-</a>
 
 To manage users open the **Users** tab in the console.
 
-<a href="javascript:doModal('open-user-tab')">
 <img id='open-user-tab' src='/img/enterprise/kapacitor/OpenUsersTab.png' alt="Open Users Tab" style="max-width: 300px"></img>
-</a>
 
 #### Managing Users
 
@@ -773,3 +767,126 @@ To manage users open the **Users** tab in the console.
 </a>
 
 #### Managing Roles
+
+To manage roles open the **Roles** tab in the Chronograf InfluxDB Admin console.
+
+<img id='manage-roles-tab' src='/img/enterprise/kapacitor/OpenRolesTab01.png' alt="Open Roles Tab" style="max-width: 300px"></img>
+
+
+##### To Create a Role
+<br/>
+
+1) First click on the **Create Role** button.  A new role entry will appear in the role table with text edit f
+
+<a href="javascript:doModal('create-role-01')">
+<img id='create-role-01' src='/img/enterprise/kapacitor/CreateRole01.png' alt="Create Role 01" style="max-width: 300px"></img>
+</a>
+
+2) Add a name and click the **Save** button.
+
+<a href="javascript:doModal('create-role-02')">
+<img id='create-role-02' src='/img/enterprise/kapacitor/CreateRole02.png' alt="Create Role 02" style="max-width: 300px"></img>
+</a>
+
+3) A notification message will appear, "Roll Created Successfully".
+
+<a href="javascript:doModal('create-role-03')">
+<img id='create-role-03' src='/img/enterprise/kapacitor/CreateRole03.png' alt="Create Role 03" style="max-width: 300px"></img>
+</a>
+
+##### To Add Privileges to a Role
+<br/>
+
+1) Locate the role in the roles table and then open the drop down **Permissions** list box.  
+
+2) Select the permissions to add.
+
+3) Click the **Apply** button.  
+
+
+<a href="javascript:doModal('add-perm-role-01')">
+<img id='add-perm-role-01' src='/img/enterprise/kapacitor/AddPermissionsToRole01.png' alt="Add Privileges to Role 01" style="max-width: 300px"></img>
+</a>
+
+4) A notification message "Role Permissions Updated" appears and the new permissions are partially visible in the **Permissions** column of the role entry.  
+
+<a href="javascript:doModal('add-perm-role-02')">
+<img id='add-perm-role-02' src='/img/enterprise/kapacitor/AddPermissionsToRole02.png' alt="Add Privileges to Role 02" style="max-width: 300px"></img>
+</a>
+
+
+##### To Add a User to a Role
+<br/>
+1) Locate the role in the roles table and then open the drop down **Users** list box.  
+
+2) Select the users to add.
+
+3) Click the **Apply** button.  
+
+<a href="javascript:doModal('add-user-role-01')">
+<img id='add-user-role-01' src='/img/enterprise/kapacitor/AddUserToRole01.png' alt="Add User to Role 01" style="max-width: 300px"></img>
+</a>
+
+4) A notification message "Role Users Updated" appears and the new users are partially visible in the **Users** column of the role entry.  
+
+<a href="javascript:doModal('add-user-role-02')">
+<img id='add-user-role-02' src='/img/enterprise/kapacitor/AddUserToRole02.png' alt="Add User to Role 02" style="max-width: 300px"></img>
+</a>
+
+##### To Remove a User from a Role
+<br/>
+1) Locate the role in the roles table and then open the drop down **Users** list box.  
+
+2) Deselect the users, so that they will be removed.
+
+3) Click the **Apply** button.  
+
+<a href="javascript:doModal('remove-user-role-01')">
+<img id='remove-user-role-01' src='/img/enterprise/kapacitor/RemoveUserFromRole01.png' alt="Remove User from Role 01" style="max-width: 300px"></img>
+</a>
+
+4) A notification message "Role Users Updated" appears and the users are no longer visible in the **Users** column of the role entry.  
+
+<a href="javascript:doModal('remove-user-role-02')">
+<img id='remove-user-role-02' src='/img/enterprise/kapacitor/RemoveUserFromRole02.png' alt="Remove User from Role 02" style="max-width: 300px"></img>
+</a>
+
+##### To Remove Privileges from a Role
+<br/>
+
+1) Locate the role in the roles table and then open the drop down **Permissions** list box.  
+
+2) Deselect the permissions, that should be removed.
+
+3) Click the **Apply** button.  
+
+<a href="javascript:doModal('remove-perm-role-01')">
+<img id='remove-perm-role-01' src='/img/enterprise/kapacitor/RemovePermissionFromRole01.png' alt="Remove User from Role 02" style="max-width: 300px"></img>
+</a>
+
+4) A notification message "Role Permissions Updated" appears and the permissions are no longer visible in the **Permissions** column of the role entry.  
+
+<a href="javascript:doModal('remove-perm-role-02')">
+<img id='remove-perm-role-02' src='/img/enterprise/kapacitor/RemovePermissionsFromRole02.png' alt="Remove User from Role 02" style="max-width: 300px"></img>
+</a>
+
+##### To Delete a Role  
+<br/>
+
+1) Locate the role in the roles table and click the **Delete** button.  This will open **Confirmation** and **Cancel** buttons.
+
+<a href="javascript:doModal('delete-role-01')">
+<img id='delete-role-01' src='/img/enterprise/kapacitor/DeleteRole01.png' alt="Delete Role 01" style="max-width: 300px"></img>
+</a>
+
+2) Click the green **Confirmation** button.
+
+<a href="javascript:doModal('delete-role-02')">
+<img id='delete-role-02' src='/img/enterprise/kapacitor/DeleteRole02.png' alt="Delete Role 02" style="max-width: 300px"></img>
+</a>
+
+3) A confirmation message "Role deleted" appears and the role entry is no longer visible in the roles table.
+
+<a href="javascript:doModal('delete-role-03')">
+<img id='delete-role-03' src='/img/enterprise/kapacitor/DeleteRole03.png' alt="Delete Role 03" style="max-width: 300px"></img>
+</a>
