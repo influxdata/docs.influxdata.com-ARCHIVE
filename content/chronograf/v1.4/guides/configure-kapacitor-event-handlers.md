@@ -36,7 +36,7 @@ The Configure Kapacitor page includes the event handler configuration options; s
 
 ### Content
 
-* [Locate Event Handler Configurations](#locate-event-handler-configurations)
+* [Locate event handler configurations](#locate-event-handler-configurations)
 * [HipChat](#hipchat)
 * [Slack](#slack)
 * [Telegram](#telegram)

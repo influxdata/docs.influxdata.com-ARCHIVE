@@ -65,7 +65,10 @@ If you configure the setting to an interval that's greater than one minute, Chro
 
 ![Data Explorer](/img/chronograf/chrono-data-explorer.png)
 
-The **Data Explorer** view
+![Data Explorer](/img/chronograf/chrono-cluster-de.png)
+
+
+The **Data Explorer** view allows users to
 
 * DB.RetentionPolicy
 * Measurement & Tags [Filer (field)]
@@ -91,6 +94,10 @@ Note that this behavior does not apply to Chronograf's pre-created template vari
 This is a known issue and it will be fixed in a future release.
 
 
+**For more on dashboards, see:**
+
+* [Creating Chronograf dashboards](/chronograf/v1.4/guides/create-a-dashboard/)
+* [Creating dashboard template variables](/chronograf/v1.4/guides/dashboard-template-variables/)
 
 ## Alerting
 
@@ -110,8 +117,12 @@ Alerts
 ### Filter Alerts...
 
 
-### create
+### Create
 
+**See:**
+
+* [Creating Kapacitor alerts](/chronograf/v1.4/create-a-kapacitor-alert/)
+* [Advanced Kapacitor usage](/chronograf/v1.4/advanced-kapacitor/)
 
 ## Admin
 
