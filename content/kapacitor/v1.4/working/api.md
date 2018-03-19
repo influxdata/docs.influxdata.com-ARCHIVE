@@ -147,6 +147,9 @@ Define a task using a JSON object with the following options:
 
 When using PATCH, if any option is missing it will be left unmodified.
 
+> **Note:** When patching a task, no changes are made to the running task.
+> The task needs to be disabled and enabled for the changes to take effect.
+
 ##### Vars
 
 The vars object has the form:
