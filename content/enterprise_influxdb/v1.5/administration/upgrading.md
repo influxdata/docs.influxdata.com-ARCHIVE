@@ -85,9 +85,9 @@ The [`influxd-ctl` utility](/enterprise_influxdb/v1.5/features/cluster-commands/
 Data Nodes
 ==========
 ID	TCP Address		Version
-4	rk-upgrading-01:8088	1.2.x_c1.2.y
-5	rk-upgrading-02:8088	1.2.x_c1.2.y
-6	rk-upgrading-03:8088	1.2.x_c1.2.y
+4	rk-upgrading-01:8088	1.3.x_c1.3.y
+5	rk-upgrading-02:8088	1.3.x_c1.3.y
+6	rk-upgrading-03:8088	1.3.x_c1.3.y
 
 Meta Nodes
 ==========
@@ -146,14 +146,14 @@ sudo yum localinstall influxdb-data-1.5.0_c1.5.0.x86_64.rpm
 
 **Add:**
 
-* If enabling TSI: [index-version = "tsi1"](/enterprise_influxdb/v1.4/administration/configuration/#index-version-inmem) to the `[data]` section.
-* If not enabling TSI: [index-version = "inmem"](/enterprise_influxdb/v1.4/administration/configuration/#index-version-inmem) to the `[data]` section.
+* If enabling TSI: [index-version = "tsi1"](/enterprise_influxdb/v1.5/administration/configuration/#index-version-inmem) to the `[data]` section.
+* If not enabling TSI: [index-version = "inmem"](/enterprise_influxdb/v1.5/administration/configuration/#index-version-inmem) to the `[data]` section.
   - Use 'tsi1' for the Time Series Index (TSI); set the value to `inmem` to use the TSM in-memory index.
-* [wal-fsync-delay = "0s"](/enterprise_influxdb/v1.4/administration/configuration/#wal-fsync-delay-0s) to the `[data]` section
-* [max-concurrent-compactions = 0](/enterprise_influxdb/v1.4/administration/configuration/#max-concurrent-compactions-0) to the `[data]` section
-* [pool-max-idle-streams = 100](/enterprise_influxdb/v1.4/administration/configuration/#pool-max-idle-streams-100) to the `[cluster]` section
-* [pool-max-idle-time = "1m0s"](/enterprise_influxdb/v1.4/administration/configuration/#pool-max-idle-time-1m0s) to the `[cluster]` section
-* the [[anti-entropy]](/enterprise_influxdb/v1.4/administration/configuration/#anti-entropy) section:
+* [wal-fsync-delay = "0s"](/enterprise_influxdb/v1.5/administration/configuration/#wal-fsync-delay-0s) to the `[data]` section
+* [max-concurrent-compactions = 0](/enterprise_influxdb/v1.5/administration/configuration/#max-concurrent-compactions-0) to the `[data]` section
+* [pool-max-idle-streams = 100](/enterprise_influxdb/v1.5/administration/configuration/#pool-max-idle-streams-100) to the `[cluster]` section
+* [pool-max-idle-time = "1m0s"](/enterprise_influxdb/v1.5/administration/configuration/#pool-max-idle-time-1m0s) to the `[cluster]` section
+* the [[anti-entropy]](/enterprise_influxdb/v1.5/administration/configuration/#anti-entropy) section:
 ```
 [anti-entropy]
   enabled = true
@@ -167,7 +167,7 @@ sudo yum localinstall influxdb-data-1.5.0_c1.5.0.x86_64.rpm
 
 **Update:**
 
-* [cache-max-memory-size](/enterprise_influxdb/v1.4/administration/configuration/#cache-max-memory-size-1073741824) to `1073741824` in the `[data]` section
+* [cache-max-memory-size](/enterprise_influxdb/v1.5/administration/configuration/#cache-max-memory-size-1073741824) to `1073741824` in the `[data]` section
 
 The new configuration options are set to the default settings.
 
@@ -210,7 +210,7 @@ Otherwise, return to Step 1 of [Upgrading data nodes](#upgrading-data-nodes) and
 
 Your cluster is now upgraded to InfluxDB Enterprise 1.5.
 Check your node version numbers using the `influxd-ctl show` command.
-The [`influxd-ctl`](/enterprise_influxdb/v1.4/features/cluster-commands/) utility is available on all meta nodes.
+The [`influxd-ctl`](/enterprise_influxdb/v1.5/features/cluster-commands/) utility is available on all meta nodes.
 
 ```
 ~# influxd-ctl show
