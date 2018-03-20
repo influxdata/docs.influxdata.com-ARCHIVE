@@ -1,10 +1,27 @@
 ---
-title: Release notes/changelog
+title: Release notes
 menu:
   chronograf_1_4:
     weight: 20
     parent: About the Project
 ---
+
+## v1.4.3.0 [2018-03-21]
+
+### Features
+
+* Add unsafe SSL to Kapacitor UI configuration
+
+### UI Improvements
+
+### Bug Fixes
+
+* Fix Heroku OAuth 2.0 provider support
+* Fix error reporting in Data Explorer
+* Fix Okta OAuth 2.0 provider support
+* Change hover text on delete mappings confirmation button to 'Delete'
+* Automatically add graph type 'line' to any graph missing a type
+* Fix hanging browser on Docker host dashboard
 
 ## v1.4.2.3 [2018-03-08]
 
