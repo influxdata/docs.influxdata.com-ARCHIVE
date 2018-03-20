@@ -26,7 +26,7 @@ For highlights of the InfluxDB 1.5 release, see [What's new in InfluxDB 1.5](/in
 
 ### Breaking changes
 
-The default logging format has been changed. See [Logging and tracing in InfluxDB](/influxdb/v1.5/administration/logs) for details.
+The default logging format has been changed. See [Logging and tracing in InfluxDB](/influxdb/v1.5/administration/logs/) for details.
 
 ### Features
 
