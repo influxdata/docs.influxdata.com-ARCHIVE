@@ -141,6 +141,12 @@ a {
 		font-weight: 400;
 	}
 
+	&.section-landing{
+		h2 a.off-page:link:hover {
+			color: @default-link-color !important;
+		}
+	}
+
 	/* Markdown Elements */
 	p {
 		font-size: 1em;
@@ -394,6 +400,28 @@ a {
 }
 
 //
+// Landing Page h2s
+// --------------------------------------------------
+.section-landing{
+	h2.no-paragraph {
+		margin: 0 0 1rem;
+		border: none;
+	}
+	a.off-page:link:after {
+		content: '\ea43';
+		font-family: 'icomoon';
+		font-size: 1rem;
+		font-weight: normal;
+		vertical-align: bottom;
+		display: inline;
+		margin-left: .5rem;
+		opacity: .25;
+		transition: color 0.2s ease;
+		color: @default-text-color;
+	}
+}
+
+//
 // Media Queries
 // --------------------------------------------------
 @media (min-width: @breakpoint-small) {
@@ -425,6 +453,9 @@ a {
 		}
 		pre {
 			border-left-width: @thick-left-border;
+		}
+		.section-landing h2 {
+			margin: 0;
 		}
 	}
 }
