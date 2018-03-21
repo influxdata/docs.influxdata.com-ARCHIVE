@@ -279,7 +279,7 @@ Executing: true
 The console output includes a TICKscript section showing the script used to
 create the task.
 
-<a id="example-6"/>
+<span id="example-6"></span>
 **Example 6 &ndash; The TICKscript of a Chronograf Alert task**
 
 ```
