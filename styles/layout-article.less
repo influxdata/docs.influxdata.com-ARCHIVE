@@ -86,7 +86,7 @@ a {
 	blockquote,
 	dt,
 	pre {
-		display: inline-block;
+		display: block;
 		margin-bottom: @margin-bottom-base;
 		line-height: 1.45em;
 	}
@@ -139,6 +139,12 @@ a {
 	h4 {
 		font-size: @heading4Size;
 		font-weight: 400;
+	}
+
+	&.section-landing{
+		h2 a.off-page:link:hover {
+			color: @default-link-color !important;
+		}
 	}
 
 	/* Markdown Elements */
@@ -390,6 +396,28 @@ a {
 		left: 2em;
 		transform: translate(-50%,-50%) scale(1.5,1.5);
 		font-size: 1em;
+	}
+}
+
+//
+// Landing Page h2s
+// --------------------------------------------------
+.section-landing{
+	h2.no-paragraph {
+		margin: 0 0 1rem;
+		border: none;
+	}
+	a.off-page:link:after {
+		content: '\ea43';
+		font-family: 'icomoon';
+		font-size: 1rem;
+		font-weight: normal;
+		vertical-align: bottom;
+		display: inline;
+		margin-left: .5rem;
+		opacity: .25;
+		transition: color 0.2s ease;
+		color: @default-text-color;
 	}
 }
 
