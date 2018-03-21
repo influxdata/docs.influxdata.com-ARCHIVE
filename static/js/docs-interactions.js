@@ -125,3 +125,25 @@ $(document).on('ready', function(){
   	.addClass($contentToInject.style)
   	.append($advertText,$ctaButton);
 });
+
+/*
+ * Add class to outbound title links on section landing pages
+ * Force external links to open in a new tab/window
+ * Handle headings without content
+ */
+
+$(document).ready( function(){
+	// Add arrow icon if h2 links go to a different doc
+  $('h2 a:not([href^="#"])').addClass('off-page');
+
+	// Force links to other sites open in a new tab/window
+	$('.article-content a[href^="http"]').attr('target', '_blank');
+
+	// Remove heading border if not followed by a paragraph
+	$('h2').each(function() {
+		var hasParagraph = $(this).next('p, ol, ul, table, code, pre').length
+		if(hasParagraph == 0) {
+			$(this).addClass('no-paragraph');
+		};
+	});
+});
