@@ -17,6 +17,11 @@ menu:
 <br>
 <br>
 
+## v1.5.1 [2018-03-20]
+
+> ***Note:*** This release builds off of the 1.5.1 release of InfluxDB OSS. Please see the [InfluxDB OSS release
+> notes](https://docs.influxdata.com/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
+
 ## v1.5.0 [2018-03-06]
 
 > ***Note:*** This release builds off of the 1.5 release of InfluxDB OSS. Please see the [InfluxDB OSS release
@@ -26,7 +31,7 @@ For highlights of the InfluxDB 1.5 release, see [What's new in InfluxDB 1.5](/in
 
 ### Breaking changes
 
-The default logging format has been changed. See [Logging and tracing in InfluxDB](/influxdb/v1.5/administration/logs) for details.
+The default logging format has been changed. See [Logging and tracing in InfluxDB](/influxdb/v1.5/administration/logs/) for details.
 
 ### Features
 
