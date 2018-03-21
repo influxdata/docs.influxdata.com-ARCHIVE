@@ -11,46 +11,124 @@ menu:
 <!-- The Modal -->
 <!-- div id="modal" style="display:none; position:absolute; z-index: 100; top: 100px; left: 400px; max-width: 250%; max-height: 250%; background: linear-gradient(to right,#22ADF6 0,#9394FF 100%);; padding: 30px;" -->
 
-<div id="modal" style="display:none; position: fixed; z-index: 100; top 0; right 0; background: linear-gradient(to right,#22ADF6 0,#9394FF 100%);; padding: 30px;">
+<div id="peekaboo" style="display:none">
+</div>
 
+<div id="modal" style="display:none; position: relative; z-index: 100; background: linear-gradient(to right,#22ADF6 0,#9394FF 100%);; padding: 30px;">
+
+  <span id="modalMax" style="display:inherit; position: absolute; color: #4591ED; top: 35px; right: 75px; font-size: 40px; font-weight: bold; transition: 0.3s">⤢</span>
   <!-- The Close Button -->
   <span id="modalClose" style="display:inherit; position: absolute; color: #4591ED; top: 35px; right: 45px; font-size: 40px; font-weight: bold; transition: 0.3s">&times;</span>
 
   <!-- Modal Content (The Image) -->
-  <img style="margin: auto; display: block; width: 100%; width: 100%" id="img01">
+  <img style="margin: auto; display: block; " id="img01">
 
 </div>
 
 <script>
 
+var currentModalImageLocal = "";
 
 
 function doModal(imgID){
 
+    if(currentModalImageLocal.length > 0){ // modal already open
+        alert("Modal already open");
+        return;
+    }
+
+    currentModalImageLocal = imgID;
     // Get the modal
+    var peekaboo = document.getElementById("peekaboo");
     var modal = document.getElementById("modal");
+    var anchor = document.getElementById("anchor-" + imgID);
+    var holder = document.getElementById("holder-" + imgID);
+    var article = document.getElementsByClassName("article-content")[0];
 
     var img = document.getElementById(imgID);
     var modalImg = document.getElementById("img01");
 
-    modal.style.display = "block";
-    // modal.style.left = document.getElementById("sidebar").style.right + 100;
-    modalImg.src = img.src;
+   if(window.innerWidth > window.innerHeight){ //typical PC/Laptop dimensions
+
+       peekaboo.appendChild(anchor);
+       holder.appendChild(modal);
+
+       modal.style.display = "block";
+
+       if(img.naturalWidth > img.naturalHeight){ // Landscape
+           var idealWidth = article.clientWidth * 0.9;
+           console.log(idealWidth)
+           modalImg.style.maxwidth = idealWidth + "px";
+           modalImg.style.height = img.naturalHeight * (idealWidth/img.naturalWidth) + "px";
+           modal.style.maxHeight = parseInt(modalImg.style.height, 10) + (parseInt(modal.style.padding, 10) * 2) + "px" ;
+           //modal.style.maxWidth = parseInt(modalImg.style.maxWidth) + (parseInt(modal.style.padding, 10) * 2) + "px" ;
+
+       }else{ //portrait
+           var idealHeight = window.innerHeight * 0.9;
+           modalImg.style.maxheight = idealHeight + "px";
+           modalImg.style.width = img.naturalWidth * (idealHeight/img.naturalHeight) + "px";
+           modal.style.maxWidth = parseInt(modalImg.style.width, 10) + (parseInt(modal.style.padding, 10) * 2) + "px" ;
+           //modal.style.height = parseInt(modalImg.innerHeight ) + (parseInt(modal.style.padding, 10) * 2) + "px" ;
+       }
+
+       modalImg.src = img.src;
+
+   }else{ // typical smartphone dimensions
+
+      // do nothing for now
+
+   }
 
 }
 
-//img.onclick = function(){
-//    modal.style.display = "block";
-//    modalImg.src = this.src;
-//    captionText.innerHTML = this.alt;
-//}
 
 // Get the <span> element that closes the modal
-var span = document.getElementById("modalClose");
+var spanMCL = document.getElementById("modalClose");
+
+var spanMMX = document.getElementById("modalMax");
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
+spanMCL.onclick = function() {
+
+  var holder = document.getElementById("holder-" + currentModalImageLocal)
+  var modal = document.getElementById("modal");
+  var anchor = document.getElementById("anchor-" + currentModalImageLocal);
+  var peekaboo = document.getElementById("peekaboo");
+  var modalImg = document.getElementById("img01");
+
+
   modal.style.display = "none";
+  modal.style.maxWidth = "100%";
+  modal.style.maxHeight = "100%";
+  modalImg.style.width = "100%";
+  modalImg.style.height = "100%";
+
+  peekaboo.appendChild(modal);
+  holder.appendChild(anchor);
+
+  currentModalImageLocal = ""
+  document.getElementById("modalMax").style.display = "inherit";
+
+}
+
+spanMMX.onclick = function(){
+
+    var holder = document.getElementById("holder-" + currentModalImageLocal)
+    var modal = document.getElementById("modal");
+    var anchor = document.getElementById("anchor-" + currentModalImageLocal);
+    var peekaboo = document.getElementById("peekaboo");
+    var modalImg = document.getElementById("img01");
+    var img = document.getElementById(currentModalImageLocal)
+
+    modalImg.style.width = img.naturalWidth + "px";
+    modalImg.style.height = img.naturalHeight + "px";
+
+    modal.style.maxWidth = img.naturalWidth + (parseInt(modal.style.padding, 10) * 2) + "px" ;
+    modal.style.maxHeight = img.naturalHeight  + (parseInt(modal.style.padding, 10) * 2) + "px" ;
+
+    document.getElementById("modalMax").style.display = "none";
+
+
 }
 
 
@@ -90,9 +168,11 @@ presented in Image 1.
 
 **Image 1 &ndash; Authentication and authorization in the TICK stick (click to enlarge  )**
 
-<a href="javascript:doModal('arch-dia')">
-<img id='arch-dia' src='/img/enterprise/kapacitor/TICKArch01.png' alt="Auth arch view" style="max-width: 300px"></img>
+<div id="holder-arch-dia">
+<a href="javascript:doModal('arch-dia')" id="anchor-arch-dia">
+<img id='arch-dia' src='/img/enterprise/kapacitor/tm-chart-2.jpg' alt="Auth arch view" style="max-width: 300px"></img>
 </a>
+</div>
 
 <!-- N.B. This is likely to be superseded by JWT -->
 
@@ -691,21 +771,27 @@ To manage users open the **Users** tab in the console.
 
 1) First click on the **Create User** button.  This will create a new user entry in the users table.
 
-<a href="javascript:doModal('create-user-01')">
+<div id="holder-create-user-01">
+<a href="javascript:doModal('create-user-01')" id="anchor-create-user-01">
 <img id='create-user-01' src='/img/enterprise/kapacitor/CreateUser01.png' alt="Create User 01" style="max-width: 300px"></img>
 </a>
+</div>
 
 2) In the new user entry in the table fill in the fields **name** and **password** and then click the **save** control.
 
-<a href="javascript:doModal('create-user-02')">
+<div id="holder-create-user-02">
+<a href="javascript:doModal('create-user-02')" id="anchor-create-user-02">
 <img id='create-user-02' src='/img/enterprise/kapacitor/CreateUser02.png' alt="Create User 02" style="max-width: 300px"></img>
 </a>
+</div>
 
 3) The new user is now a standard entry in the users table.
 
-<a href="javascript:doModal('create-user-01')">
-<img id='create-user-01' src='/img/enterprise/kapacitor/CreateUser01.png' alt="Create User 03" style="max-width: 300px"></img>
+<div id="holder-create-user-03">
+<a href="javascript:doModal('create-user-03')" id="anchor-create-user-03">
+<img id='create-user-03' src='/img/enterprise/kapacitor/CreateUser03.png' alt="Create User 03" style="max-width: 300px"></img>
 </a>
+</div>
 
 ##### To Add Privileges to a User
 <br/>
@@ -716,15 +802,19 @@ To manage users open the **Users** tab in the console.
 
 3) Click the **Apply** button.  
 
-<a href="javascript:doModal('add-permissions-user-01')">
+<div id="holder-add-permissions-user-01">
+<a href="javascript:doModal('add-permissions-user-01')" id="anchor-add-permissions-user-01">
 <img id='add-permissions-user-01' src='/img/enterprise/kapacitor/AddPermissionsToUser01.png' alt="Add Privileges to User 01" style="max-width: 300px"></img>
 </a>
+</div>
 
 4) A notification message "User Permissions Updated" appears and the new permissions are partially visible in the **Permissions** column of the user entry.  
 
-<a href="javascript:doModal('add-permissions-user-02')">
+<div id="holder-add-permissions-user-02">
+<a href="javascript:doModal('add-permissions-user-02')" id="anchor-add-permissions-user-02">
 <img id='add-permissions-user-02' src='/img/enterprise/kapacitor/AddPermissionsToUser02.png' alt="Add Privileges to User 02" style="max-width: 300px"></img>
 </a>
+</div>
 
 ##### To Remove Privileges from a User
 <br/>
@@ -735,36 +825,46 @@ To manage users open the **Users** tab in the console.
 
 3) Click the **Apply** button.  
 
-<a href="javascript:doModal('remove-permissions-user-01')">
+<div id="holder-remove-permissions-user-01">
+<a href="javascript:doModal('remove-permissions-user-01')" id="anchor-remove-permissions-user-01">
 <img id='remove-permissions-user-01' src='/img/enterprise/kapacitor/RemovePermissionsToUser01.png' alt="Remove Privileges from User 01" style="max-width: 300px"></img>
 </a>
+</div>
 
 4) A notification message "User Permissions Updated" appears and the permissions are no longer partially visible in the **Permissions** column of the user entry.  
 
-<a href="javascript:doModal('remove-permissions-user-02')">
+<div id="holder-remove-permissions-user-02">
+<a href="javascript:doModal('remove-permissions-user-02')" id="anchor-remove-permissions-user-02">
 <img id='remove-permissions-user-02' src='/img/enterprise/kapacitor/RemovePermissionsToUser02.png' alt="Remove Privileges from User 02" style="max-width: 300px"></img>
 </a>
+</div>
 
 ##### To Delete a User
 <br/>
 
 1) Locate the user in the users table and click the **Delete** button.  This will open **Confirmation** and **Cancel** buttons.
 
-<a href="javascript:doModal('delete-user-01')">
+<div id="holder-delete-user-01">
+<a href="javascript:doModal('delete-user-01')" id="anchor-delete-user-01">
 <img id='delete-user-01' src='/img/enterprise/kapacitor/DeleteUser01.png' alt="Delete User 01" style="max-width: 300px"></img>
 </a>
+</div>
 
 2) Click the green **Confirmation** button.
 
-<a href="javascript:doModal('delete-user-02')">
+<div id="holder-delete-user-02">
+<a href="javascript:doModal('delete-user-02')" id="anchor-delete-user-02">
 <img id='delete-user-02' src='/img/enterprise/kapacitor/DeleteUser02.png' alt="Delete User 01" style="max-width: 300px"></img>
 </a>
+</div>
 
 3) A confirmation message "User Deleted" appears and the user entry is no longer visible in the users table.
 
-<a href="javascript:doModal('delete-user-03')">
+<div id="holder-delete-user-03">
+<a href="javascript:doModal('delete-user-03')" id="anchor-delete-user-03">
 <img id='delete-user-03' src='/img/enterprise/kapacitor/DeleteUser03.png' alt="Delete User 01" style="max-width: 300px"></img>
 </a>
+</div>
 
 #### Managing Roles
 
