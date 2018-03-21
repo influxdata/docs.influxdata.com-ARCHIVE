@@ -3,7 +3,7 @@
     {{ if (eq $currentNode.RelPermalink "/hosted/") }}
         {{ range (index $.Site.Menus .Site.Data.default_versions.hosted) }}
             <div class="product-sidebar--section-title">
-                <a class="product-sidebar--nav-item{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{.URL}}">{{ .Name }}</a>
+                <a class="product-sidebar--nav-item{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
             </div>
             {{ if .HasChildren }}
                 <section class="product-sidebar--section">
@@ -18,7 +18,7 @@
         {{ if (in $currentNode.Permalink .URL) }}
             {{ range (index $.Site.Menus .Identifier) }}
                 <div class="product-sidebar--section-title">
-                    <a class="product-sidebar--nav-item{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{.URL}}">{{ .Name }}</a>
+                    <a class="product-sidebar--nav-item{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
                 </div>
                 {{ if .HasChildren }}
                     <section class="product-sidebar--section">

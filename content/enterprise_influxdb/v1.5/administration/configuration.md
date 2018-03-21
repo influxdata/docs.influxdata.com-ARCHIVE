@@ -5,7 +5,7 @@ aliases:
 menu:
   enterprise_influxdb_1_5:
     name: Configuring
-    weight: 20
+    weight: 10
     parent: Administration
 ---
 
@@ -24,7 +24,6 @@ menu:
     * [[cluster]](#cluster)
     * [[retention]](#retention)
     * [[shard-precreation]](#shard-precreation)
-    * [[admin]](#admin)
     * [[monitor]](#monitor)
     * [[subscriber]](#subscriber)
     * [[http]](#http)
@@ -757,13 +756,6 @@ Environment variable: `INFLUXDB_SHARD_PRECREATION_CHECK_INTERVAL`
 See the [OSS documentation](/influxdb/v1.5/administration/config/#advance-period-30m0s).
 
 Environment variable: `INFLUXDB_SHARD_PRECREATION_ADVANCE_PERIOD`
-
-## [admin]
-
-In version 1.3, the web admin interface is no longer available in InfluxDB.
-The interface does not run on port 8083 and InfluxDB ignores the [admin] section in the configuration file if that section is present.
-[Chronograf](/chronograf/latest) replaces the web admin interface with improved tooling for querying data, writing data, and database management.
-See [Chronograf's transition guide](/chronograf/latest/guides/transition-web-admin-interface/) for more information.
 
 ## [monitor]
 

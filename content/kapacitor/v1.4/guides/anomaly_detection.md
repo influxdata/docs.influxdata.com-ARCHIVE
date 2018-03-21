@@ -18,7 +18,7 @@ Functions.  This guide will walk through the necessary steps for
 writing and using your own UDFs within Kapacitor.
 
 If you haven't already, we recommend following the [getting started
-guide](/kapacitor/v1.4/introduction/getting_started/) for Kapacitor
+guide](/kapacitor/v1.4/introduction/getting-started/) for Kapacitor
 prior to continuing.
 
 ## 3D printing

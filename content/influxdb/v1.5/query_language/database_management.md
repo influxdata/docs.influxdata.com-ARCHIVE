@@ -43,7 +43,7 @@ InfluxQL offers a full suite of administrative commands.
 
 If you're looking for `SHOW` queries (for example, `SHOW DATABASES` or `SHOW RETENTION POLICIES`), see [Schema Exploration](/influxdb/v1.5/query_language/schema_exploration).
 
-The examples in the sections below use InfluxDB's [Command Line Interface (CLI)](/influxdb/v1.5/introduction/getting_started/).
+The examples in the sections below use InfluxDB's [Command Line Interface (CLI)](/influxdb/v1.5/introduction/getting-started/).
 You can also execute the commands using the HTTP API; simply  send a `GET` request to the `/query` endpoint and include the command in the URL parameter `q`.
 See the [Querying Data](/influxdb/v1.5/guides/querying_data/) guide for more on using the HTTP API.
 

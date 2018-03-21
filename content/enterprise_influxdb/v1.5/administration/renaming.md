@@ -5,7 +5,7 @@ aliases:
 menu:
   enterprise_influxdb_1_5:
     name: Host renaming
-    weight: 20
+    weight: 50
     parent: Administration
 ---
 

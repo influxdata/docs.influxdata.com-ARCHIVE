@@ -130,8 +130,8 @@ A task is defined by its id, type, TICKscript, and list of database retention po
 
 ### Defining tasks
 
-To define a task POST to the `/kapacitor/v1/tasks` endpoint.
-If a task already exists then use the `PATCH` method to modify any property of the task.
+To define a task, POST to the `/kapacitor/v1/tasks` endpoint.
+If a task already exists, then use the `PATCH` method to modify any property of the task.
 
 Define a task using a JSON object with the following options:
 
@@ -145,7 +145,10 @@ Define a task using a JSON object with the following options:
 | status      | One of `enabled` or `disabled`.                                                           |
 | vars        | A set of vars for overwriting any defined vars in the TICKscript.                         |
 
-When using PATCH, if any option is missing it will be left unmodified.
+When using `PATCH`, if any property is missing, the task will be left unmodified.
+
+> **Note:** When patching a task, no changes are made to the running task.
+> The task must be disabled and re-enabled for any changes to take effect.
 
 ##### Vars
 
@@ -180,7 +183,7 @@ The following is a table of valid types and example values.
 
 #### Example
 
-Create a new task with ID TASK_ID.
+Create a new task with `id` `TASK_ID`.
 
 ```
 POST /kapacitor/v1/tasks
@@ -198,7 +201,7 @@ POST /kapacitor/v1/tasks
 }
 ```
 
-Response with task id and link.
+Response with task `id` and `link`.
 
 ```json
 {
@@ -223,7 +226,7 @@ Response with task id and link.
 }
 ```
 
-Modify only the dbrps of the task.
+Modify only the `dbrps` of the task.
 
 ```
 PATCH /kapacitor/v1/tasks/TASK_ID
@@ -267,7 +270,7 @@ POST /kapacitor/v1/tasks
 }
 ```
 
-Response with task id and link.
+Response with task `id` and `link`.
 
 ```json
 {
@@ -285,7 +288,7 @@ Response with task id and link.
 
 ### Get Task
 
-To get information about a task make a GET request to the `/kapacitor/v1/tasks/TASK_ID` endpoint.
+To get information about a task, make a `GET` request to the `/kapacitor/v1/tasks/TASK_ID` endpoint.
 
 | Query Parameter | Default    | Purpose                                                                                                                          |
 | --------------- | -------    | -------                                                                                                                          |
@@ -294,7 +297,7 @@ To get information about a task make a GET request to the `/kapacitor/v1/tasks/T
 | replay-id       |            | Optional ID of a running replay. The returned task information will be in the context of the task for the running replay.        |
 
 
-A task has these read only properties in addition to the properties listed [above](#define-task).
+A task has these read-only properties in addition to the properties listed [above](#define-task).
 
 | Property     | Description                                                                                                                     |
 | --------     | -----------                                                                                                                     |
@@ -366,7 +369,7 @@ GET /kapacitor/v1/tasks/TASK_ID?dot-view=labels&script-format=raw
 
 ### Deleting tasks
 
-To delete a task make a DELETE request to the `/kapacitor/v1/tasks/TASK_ID` endpoint.
+To delete a task, make a DELETE request to the `/kapacitor/v1/tasks/TASK_ID` endpoint.
 
 ```
 DELETE /kapacitor/v1/tasks/TASK_ID
@@ -383,7 +386,7 @@ DELETE /kapacitor/v1/tasks/TASK_ID
 
 ### Listing tasks
 
-To get information about several tasks make a GET request to the `/kapacitor/v1/tasks` endpoint.
+To get information about several tasks, make a `GET` request to the `/kapacitor/v1/tasks` endpoint.
 
 | Query Parameter | Default    | Purpose                                                                                                                                           |
 | --------------- | -------    | -------                                                                                                                                           |

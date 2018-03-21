@@ -749,16 +749,17 @@ select_stmt = "SELECT" fields from_clause [ into_clause ] [ where_clause ]
               [ offset_clause ] [ slimit_clause ] [ soffset_clause ] [ timezone_clause ] .
 ```
 
-#### Examples:
+#### Examples
 
-​```sql
--- select mean value from the cpu measurement where region = 'uswest' grouped by 10 minute intervals
-SELECT mean("value") FROM "cpu" WHERE "region" = 'uswest' GROUP BY time(10m) fill(0)
+Select from all measurements beginning with cpu into the same measurement name in the cpu_1h retention policy
 
--- select from all measurements beginning with cpu into the same measurement name in the cpu_1h retention policy
+```sql
 SELECT mean("value") INTO "cpu_1h".:MEASUREMENT FROM /cpu.*/
+```
 
--- select from measurements grouped by the day with a timezone
+Select from measurements grouped by the day with a timezone
+
+```sql
 SELECT mean("value") FROM "cpu" GROUP BY region, time(1d) fill(0) tz('America/Chicago')
 ```
 
@@ -768,14 +769,15 @@ Refers to the group of commands used to estimate or count exactly the cardinalit
 
 The SHOW CARDINALITY commands are available in two variations: estimated and exact. Estimated values are calculated using sketches and are a safe default for all cardinality sizes. Exact values are counts directly from TSM (Time-Structured Merge Tree) data, but are expensive to run for high cardinality data.  Unless required, use the estimated variety.
 
-Filtering by `time` is only supported when TSI (Time Series Index) is enabled on a database.
+Filtering by `time` is only supported when Time Series Index (TSI) is enabled on a database.
 
 See the specific SHOW CARDINALITY commands for details:
-- [SHOW FIELD KEY CARDINALITY](###SHOW FIELD KEY CARDINALITY)
-- [SHOW MEASUREMENT CARDINALITY](###SHOW MEASUREMENT CARDINALITY)
-- [SHOW SERIES CARDINALITY](###SHOW SERIES CARDINALITY)
-- [SHOW TAG KEY CARDINALITY](###SHOW TAG KEY CARDINALITY)
-- [SHOW TAG VALUES CARDINALITY](###SHOW TAG VALUES CARDINALITY)
+
+- [SHOW FIELD KEY CARDINALITY](#show-field-key-cardinality)
+- [SHOW MEASUREMENT CARDINALITY](#show-measurement-cardinality)
+- [SHOW SERIES CARDINALITY](#show-series-cardinality)
+- [SHOW TAG KEY CARDINALITY](#show-tag-key-cardinality)
+- [SHOW TAG VALUES CARDINALITY](#show-tag-values-cardinality)
 
 ### SHOW CONTINUOUS QUERIES
 
@@ -807,9 +809,9 @@ SHOW DATABASES
 
 Estimates or counts exactly the cardinality of the field key set for the current database unless a database is specified using the `ON <database>` option.
 
-> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optionalgit fetc.
+> **Note:** `ON \<database\>`, `FROM \<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional.
 > When using these query clauses, the query falls back to an exact count.
-> Filtering by `time` is only supported when TSI (Time Series Index) is enabled and `time` is not supported in the `WHERE` clause.
+> Filtering by `time` is only supported when Time Series Index (TSI) is enabled and `time` is not supported in the `WHERE` clause.
 
 ```
 show_field_key_cardinality_stmt = "SHOW FIELD KEY CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]
@@ -817,7 +819,7 @@ show_field_key_cardinality_stmt = "SHOW FIELD KEY CARDINALITY" [ on_clause ] [ f
 show_field_key_exact_cardinality_stmt = "SHOW FIELD KEY EXACT CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]
 ```
 
-#### Example:
+#### Examples
 
 ```sql
 -- show estimated cardinality of the field key set of current database
@@ -832,7 +834,7 @@ SHOW FIELD KEY EXACT CARDINALITY ON mydb
 show_field_keys_stmt = "SHOW FIELD KEYS" [on_clause] [ from_clause ] .
 ```
 
-#### Examples:
+#### Examples
 
 ```sql
 -- show field keys and field value data types from all measurements

@@ -6,6 +6,18 @@ menu:
     parent: about_the_project
 ---
 
+## v1.5.3 [2018-03-14]
+
+### Bug fixes
+
+* Set path to `/` if `HOST_MOUNT_PREFIX` matches full path.
+* Remove `userinfo` from `url` tag in Prometheus input plugin.
+* Fix Ping input plugin not reporting zero durations.
+* Disable `keepalive` in MQTT output plugin to prevent deadlock.
+* Fix collation difference in SQL Server (sqlserver) input plugin.
+* Fix uptime metric in Passenger input plugin.
+* Add output of stderr in case of error to exec log message.
+
 ## v1.5.2 [2018-01-30]
 
 ### Bug fixes

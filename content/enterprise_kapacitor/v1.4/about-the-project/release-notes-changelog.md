@@ -8,6 +8,14 @@ menu:
 
 # Changelog
 
+## v1.4.1 [2018-03-14]
+
+Includes bugfixes from Kapacitor 1.4.1
+
+### Bug fixes
+
+* Fix `load` service not working when authentication is enabled.
+
 ## v1.4.0 [2017-12-08]
 
 The v1.4.0 release has many new features, here is a list of some of the highlights:

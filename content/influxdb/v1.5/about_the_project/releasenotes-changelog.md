@@ -6,11 +6,21 @@ menu:
     parent: about_the_project
 ---
 
+## v1.5.1 [2018-03-20]
+
+### Bug fixes
+
+-	Allow time variable to be case insensitive again.
+-	Support setting the log level through the environment variable.
+-	Ensure correct number of tags parsed.
+-	Fix panic when checking fieldsets.
+-	Fix data race in WAL.
+
 ## v1.5.0 [2018-03-06]
 
 ### Breaking changes
 
-The default logging format has been changed. See [Logging in InfluxDB](/influxdb/v1.5/administration/logs) for details.
+The default logging format has been changed. See [Logging and tracing in InfluxDB](/influxdb/v1.5/administration/logs) for details.
 
 ### Features
 

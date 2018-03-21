@@ -33,21 +33,21 @@ For metrics shared by both InfluxDB OSS and InfluxDB Enterprise, please refer to
 | writeShardPointsReq | integer | bananas |
 | writeShardReq | integer | bananas |
 
-###copyShardReq
+### copyShardReq
 
-###createIteratorReq
+### createIteratorReq
 
-###expandSourcesReq
+### expandSourcesReq
 
-###fieldDimensionsReq
+### fieldDimensionsReq
 
-###removeShardReq
+### removeShardReq
 
-###writeShardFail
+### writeShardFail
 
-###writeShardPointsReq
+### writeShardPointsReq
 
-###writeShardReq
+### writeShardReq
 
 ## cq
 
@@ -64,9 +64,9 @@ See \<link to influxdb doc\>
 | writeShardReq | integer | bananas |
 | writeShardReqPoints | integer | bananas |
 
-###writeShardReq
+### writeShardReq
 
-###writeShardReqPoints
+### writeShardReqPoints
 
 ## hh_processor
 
@@ -81,21 +81,21 @@ See \<link to influxdb doc\>
 | writeShardReq | integer | bananas |
 | writeShardReqPoints | integer | bananas |
 
-###bytesRead
+### bytesRead
 
-###bytesWritten
+### bytesWritten
 
-###queueDepth
+### queueDepth
 
-###writeNodeReq
+### writeNodeReq
 
-###writeNodeReqFail
+### writeNodeReqFail
 
-###writeNodeReqPoints
+### writeNodeReqPoints
 
-###writeShardReq
+### writeShardReq
 
-###writeShardReqPoints
+### writeShardReqPoints
 
 ## httpd
 

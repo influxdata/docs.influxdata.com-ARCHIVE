@@ -193,5 +193,5 @@ It's designed to make working with time series data awesome.
 
 You made it!
 You've covered the fundamental concepts and terminology in InfluxDB.
-If you're just starting out, we recommend taking a look at [Getting Started](/influxdb/v1.5/introduction/getting_started/) and the [Writing Data](/influxdb/v1.5/guides/writing_data/) and [Querying Data](/influxdb/v1.5/guides/querying_data/) guides.
+If you're just starting out, we recommend taking a look at [Getting Started](/influxdb/v1.5/introduction/getting-started/) and the [Writing Data](/influxdb/v1.5/guides/writing_data/) and [Querying Data](/influxdb/v1.5/guides/querying_data/) guides.
 May our time series database serve you well 🕔.

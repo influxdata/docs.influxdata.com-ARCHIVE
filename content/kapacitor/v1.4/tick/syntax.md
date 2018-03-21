@@ -24,7 +24,7 @@ menu:
 
 # Concepts
 
-The sections [Introduction](/kapacitor/v1.4/tick/introduction/) and [Getting Started](/kapacitor/v1.4/introduction/getting_started/) present the key concepts of **nodes** and **pipelines**.  Nodes represent process invocation units, that either take data as a batch, or in a point by point stream, and then alter that data, store that data, or based on changes in that data trigger some other activity  such as an alert.  Pipelines are simply logically organized chains of nodes.
+The sections [Introduction](/kapacitor/v1.4/tick/introduction/) and [Getting Started](/kapacitor/v1.4/introduction/getting-started/) present the key concepts of **nodes** and **pipelines**.  Nodes represent process invocation units, that either take data as a batch, or in a point by point stream, and then alter that data, store that data, or based on changes in that data trigger some other activity  such as an alert.  Pipelines are simply logically organized chains of nodes.
 
 In Kapacitor TICKscript is used to define tasks directly and to define template tasks, which act as templates that can be reused to generate new tasks.
 

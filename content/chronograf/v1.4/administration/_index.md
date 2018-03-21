@@ -22,3 +22,7 @@ Follow the links below for more information.
 ## [Managing Chronograf organizations](/chronograf/latest/administration/managing-organizations/)
 
 ## [Managing Chronograf users](/chronograf/latest/administration/managing-chronograf-users/)
+
+## [Transitioning from InfluxDB's Web Admin Interface](/chronograf/latest/guides/transition-web-admin-interface/)
+Versions 1.3+ of InfluxDB OSS and InfluxDB Enterprise no longer support the web admin interface, the built-in user interface for writing and querying data in InfluxDB.
+Learn how to use Chronograf as a replacement for the web admin interface.

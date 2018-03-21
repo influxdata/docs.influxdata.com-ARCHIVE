@@ -12,6 +12,6 @@ Provides the location to download the latest stable and nightly builds of Influx
 
 Provides instructions for installing InfluxDB on Ubuntu, Debian, Red Hat, CentOS, and OS X.
 
-## [Getting started with InfluxDB](/influxdb/v1.5/introduction/getting_started/)
+## [Getting started with InfluxDB](/influxdb/v1.5/introduction/getting-started/)
 
 A introductory guide to reading and writing time series data using InfluxDB.
