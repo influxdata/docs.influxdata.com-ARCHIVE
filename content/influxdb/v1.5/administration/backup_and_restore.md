@@ -143,7 +143,7 @@ Optional arguments are enclosed in brackets.
 
 - `[ -shard <shard_ID> ]`: Shard ID of the shard to be restored. If specified, then `-db` and `-rp` are required.
 
-> **Note:** For automated backups using the legacy format, consider using the new online feature for legacy backups.  The new backup utility lets you restore a single database to a live (online) instance, while leaving all existing data on the server in place.  The offline restore method clears all existing databases on the server.
+> **Note:** For automated backups using the legacy format, consider using the new online feature for legacy backups.  The new backup utility lets you restore a single database to a live (online) instance, while leaving all existing data on the server in place.  The [offline restore method (described below)](#restore-legacy) may result in data loss, since it clears all existing databases on the server.
 
 ### Backward compatible offline backup and restore (legacy format)
 
@@ -234,6 +234,9 @@ The legacy backup mode also supports live, remote backup functionality.
 Follow the directions in [Configuring remote connections](#configuring-remote-connections) above to configure this feature.
 
 ## Restore (legacy)
+
+<dt> This offline restore method described here may result in data loss -- it clears all existing databases on the server. Consider using the `-online` flag with the newer [`restore` method (described above)](#restore) to import legacy data without any data loss.
+</dt>
 
 To restore a backup, you will need to use the `influxd restore` command.
 
