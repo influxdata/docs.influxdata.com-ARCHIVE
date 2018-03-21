@@ -137,7 +137,7 @@ $(document).ready( function(){
   $('h2 a:not([href^="#"])').addClass('off-page');
 
 	// Force links to other sites open in a new tab/window
-	$('a[href^="http"]').attr('target', '_blank');
+	$('.article-content a[href^="http"]').attr('target', '_blank');
 
 	// Remove heading border if not followed by a paragraph
 	$('h2').each(function() {
