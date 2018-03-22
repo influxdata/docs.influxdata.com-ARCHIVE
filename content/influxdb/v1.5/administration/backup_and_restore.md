@@ -121,6 +121,7 @@ influxd restore [ -db <db_name> ]
     [ -rp <rp_name> ]
     [ -newrp <newrp_name> ]
     [ -shard <shard_ID> ]
+    <path-to-backup-files>
 ```
 
 #### Arguments
