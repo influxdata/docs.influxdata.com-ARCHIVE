@@ -184,7 +184,7 @@ metrics to create a "monitor of monitors" is a best practice and allows you to r
 capturing and storing these metrics locally within the `_internal` database for production deployments.
 [Read more about this approach here.](https://www.influxdata.com/blog/influxdb-debugvars-endpoint/)
 
-### [Internal (intneral)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/internal)
+### [Internal (internal)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/internal)
 
 
 
