@@ -31,6 +31,15 @@ a {
 
 .article {
 	background-color: @article-bg;
+	position: fixed;
+	overflow: auto;
+	height: ~"calc(100% - "@sidebar--toggle-height~" - "@nav-height~")";
+	width: 100%;
+
+	&::-webkit-scrollbar { background-color: @article-bg; width: @scrollbar-width; }
+	&::-webkit-scrollbar-track { background-color: @article-bg; }
+	&::-webkit-scrollbar-thumb { border: 4px solid @article-bg; background-color: @article-scrollbar; border-radius: @scrollbar-width/2; }
+
 }
 .article-section {
 	display: block;
@@ -427,6 +436,7 @@ a {
 @media (min-width: @breakpoint-small) {
 	.article {
 		padding-left: @sidebar-small-width;
+		height: ~"calc(100% - "@nav-height~")";
 	}
 	.article-section {
 		padding: 3rem;
