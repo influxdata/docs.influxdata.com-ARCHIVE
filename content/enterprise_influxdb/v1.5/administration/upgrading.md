@@ -175,8 +175,8 @@ The new configuration options are set to the default settings.
 
 1. Delete all existing TSM-based shard `index` directories.
 
-- Remove the existing index directories to ensure there are no incompatible index files.
-- By default, the index directories are located at `/<shard_ID>/index` (e.g., `/2/index`).
+- Remove the existing `index` directories to ensure there are no incompatible index files.
+- By default, the `index` directories are located at `/<shard_ID>/index` (e.g., `/2/index`).
 
 2. Convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
 
