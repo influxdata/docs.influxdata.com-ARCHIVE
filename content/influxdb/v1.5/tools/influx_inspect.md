@@ -83,7 +83,7 @@ $ influx_inspect buildtsi -database mydb -datadir ~/.influxdb/data -waldir ~/.in
 ##### Converting a specific shard
 
 ```
-$ influx_inspect buildtsi -datadir ~/.influxdb/data/stress/autogen/1 -waldir ~/.influxdb/wal/stress/autogen/1
+$ influx_inspect buildtsi -database stress -shard 1 -datadir ~/.influxdb/data -waldir ~/.influxdb/wal
 ```
 
 ### influx_inspect dumptsi
