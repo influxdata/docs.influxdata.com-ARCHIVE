@@ -14,7 +14,7 @@ menu:
 <div id="peekaboo" style="display:none">
 </div>
 
-<div id="modal" style="display:none; position: relative; z-index: 100; background: linear-gradient(to right,#22ADF6 0,#9394FF 100%);; padding: 30px;">
+<div id="modal" style="display:none; position: relative; z-index: 100; background: linear-gradient(to right,#22ADF6 0,#9394FF 100%);; padding: 30px; margin: 10px;">
 
   <span id="modalMax" style="display:inherit; position: absolute; color: #4591ED; top: 35px; right: 75px; font-size: 40px; font-weight: bold; transition: 0.3s">⤢</span>
   <!-- The Close Button -->
@@ -33,8 +33,7 @@ var currentModalImageLocal = "";
 function doModal(imgID){
 
     if(currentModalImageLocal.length > 0){ // modal already open
-        alert("Modal already open");
-        return;
+        document.getElementById("modalClose").click()
     }
 
     currentModalImageLocal = imgID;
@@ -56,19 +55,31 @@ function doModal(imgID){
        modal.style.display = "block";
 
        if(img.naturalWidth > img.naturalHeight){ // Landscape
-           var idealWidth = article.clientWidth * 0.9;
+           var idealWidth = Math.min(article.clientWidth * 0.9, img.naturalWidth);
+//           var idealWidth = article.clientWidth * 0.9;
            console.log(idealWidth)
-           modalImg.style.maxwidth = idealWidth + "px";
+           modalImg.style.width = idealWidth + "px";
+
            modalImg.style.height = img.naturalHeight * (idealWidth/img.naturalWidth) + "px";
-           modal.style.maxHeight = parseInt(modalImg.style.height, 10) + (parseInt(modal.style.padding, 10) * 2) + "px" ;
-           //modal.style.maxWidth = parseInt(modalImg.style.maxWidth) + (parseInt(modal.style.padding, 10) * 2) + "px" ;
+           modal.style.height = parseInt(modalImg.style.height, 10) + (parseInt(modal.style.padding, 10) * 2) + "px" ;
+           modal.style.width = parseInt(modalImg.style.width) + (parseInt(modal.style.padding, 10) * 2) + "px" ;
+
+           if( idealWidth === img.naturalWidth){
+               document.getElementById("modalMax").style.display = "none";
+           }
 
        }else{ //portrait
-           var idealHeight = window.innerHeight * 0.9;
-           modalImg.style.maxheight = idealHeight + "px";
+           var idealHeight = Math.min(window.innerHeight * 0.9, img.naturalHeight);
+//           var idealHeight = window.innerHeight * 0.9;
+           modalImg.style.height = idealHeight + "px";
            modalImg.style.width = img.naturalWidth * (idealHeight/img.naturalHeight) + "px";
-           modal.style.maxWidth = parseInt(modalImg.style.width, 10) + (parseInt(modal.style.padding, 10) * 2) + "px" ;
-           //modal.style.height = parseInt(modalImg.innerHeight ) + (parseInt(modal.style.padding, 10) * 2) + "px" ;
+           modal.style.width = parseInt(modalImg.style.width, 10) + (parseInt(modal.style.padding, 10) * 2) + "px" ;
+           modal.style.height = parseInt(modalImg.height ) + (parseInt(modal.style.padding, 10) * 2) + "px" ;
+
+           if( idealHeight === img.naturalHeight){
+               document.getElementById("modalMax").style.display = "none";
+           }
+
        }
 
        modalImg.src = img.src;
@@ -123,8 +134,8 @@ spanMMX.onclick = function(){
     modalImg.style.width = img.naturalWidth + "px";
     modalImg.style.height = img.naturalHeight + "px";
 
-    modal.style.maxWidth = img.naturalWidth + (parseInt(modal.style.padding, 10) * 2) + "px" ;
-    modal.style.maxHeight = img.naturalHeight  + (parseInt(modal.style.padding, 10) * 2) + "px" ;
+    modal.style.width = img.naturalWidth + (parseInt(modal.style.padding, 10) * 2) + "px" ;
+    modal.style.height = img.naturalHeight  + (parseInt(modal.style.padding, 10) * 2) + "px" ;
 
     document.getElementById("modalMax").style.display = "none";
 
@@ -878,21 +889,27 @@ To manage roles open the **Roles** tab in the Chronograf InfluxDB Admin console.
 
 1) First click on the **Create Role** button.  A new role entry will appear in the role table with text edit f
 
-<a href="javascript:doModal('create-role-01')">
+<div id="holder-create-role-01">
+<a href="javascript:doModal('create-role-01')" id="anchor-create-role-01">
 <img id='create-role-01' src='/img/enterprise/kapacitor/CreateRole01.png' alt="Create Role 01" style="max-width: 300px"></img>
 </a>
+</div>
 
 2) Add a name and click the **Save** button.
 
-<a href="javascript:doModal('create-role-02')">
+<div id="holder-create-role-02">
+<a href="javascript:doModal('create-role-02')" id="anchor-create-role-02">
 <img id='create-role-02' src='/img/enterprise/kapacitor/CreateRole02.png' alt="Create Role 02" style="max-width: 300px"></img>
 </a>
+</div>
 
 3) A notification message will appear, "Roll Created Successfully".
 
-<a href="javascript:doModal('create-role-03')">
+<div id="holder-create-role-03">
+<a href="javascript:doModal('create-role-03')" id="anchor-create-role-03">
 <img id='create-role-03' src='/img/enterprise/kapacitor/CreateRole03.png' alt="Create Role 03" style="max-width: 300px"></img>
 </a>
+</div>
 
 ##### To Add Privileges to a Role
 <br/>
@@ -904,15 +921,19 @@ To manage roles open the **Roles** tab in the Chronograf InfluxDB Admin console.
 3) Click the **Apply** button.  
 
 
-<a href="javascript:doModal('add-perm-role-01')">
+<div id="holder-add-perm-role-01">
+<a href="javascript:doModal('add-perm-role-01')" id="anchor-add-perm-role-01">
 <img id='add-perm-role-01' src='/img/enterprise/kapacitor/AddPermissionsToRole01.png' alt="Add Privileges to Role 01" style="max-width: 300px"></img>
 </a>
+</div>
 
 4) A notification message "Role Permissions Updated" appears and the new permissions are partially visible in the **Permissions** column of the role entry.  
 
-<a href="javascript:doModal('add-perm-role-02')">
+<div id="holder-add-perm-role-02">
+<a href="javascript:doModal('add-perm-role-02')" id="anchor-add-perm-role-02">
 <img id='add-perm-role-02' src='/img/enterprise/kapacitor/AddPermissionsToRole02.png' alt="Add Privileges to Role 02" style="max-width: 300px"></img>
 </a>
+</div>
 
 
 ##### To Add a User to a Role
@@ -923,15 +944,19 @@ To manage roles open the **Roles** tab in the Chronograf InfluxDB Admin console.
 
 3) Click the **Apply** button.  
 
-<a href="javascript:doModal('add-user-role-01')">
+<div id="holder-add-user-role-01">
+<a href="javascript:doModal('add-user-role-01')" id="anchor-add-user-role-01">
 <img id='add-user-role-01' src='/img/enterprise/kapacitor/AddUserToRole01.png' alt="Add User to Role 01" style="max-width: 300px"></img>
 </a>
+</div>
 
 4) A notification message "Role Users Updated" appears and the new users are partially visible in the **Users** column of the role entry.  
 
-<a href="javascript:doModal('add-user-role-02')">
+<div id="holder-add-user-role-02">
+<a href="javascript:doModal('add-user-role-02')" id="anchor-add-user-role-02">
 <img id='add-user-role-02' src='/img/enterprise/kapacitor/AddUserToRole02.png' alt="Add User to Role 02" style="max-width: 300px"></img>
 </a>
+</div>
 
 ##### To Remove a User from a Role
 <br/>
@@ -941,15 +966,19 @@ To manage roles open the **Roles** tab in the Chronograf InfluxDB Admin console.
 
 3) Click the **Apply** button.  
 
-<a href="javascript:doModal('remove-user-role-01')">
+<div id="holder-remove-user-role-01">
+<a href="javascript:doModal('remove-user-role-01')" id="anchor-remove-user-role-01">
 <img id='remove-user-role-01' src='/img/enterprise/kapacitor/RemoveUserFromRole01.png' alt="Remove User from Role 01" style="max-width: 300px"></img>
 </a>
+</div>
 
 4) A notification message "Role Users Updated" appears and the users are no longer visible in the **Users** column of the role entry.  
 
-<a href="javascript:doModal('remove-user-role-02')">
+<div id="holder-remove-user-role-02">
+<a href="javascript:doModal('remove-user-role-02')" id="anchor-remove-user-role-02">
 <img id='remove-user-role-02' src='/img/enterprise/kapacitor/RemoveUserFromRole02.png' alt="Remove User from Role 02" style="max-width: 300px"></img>
 </a>
+</div>
 
 ##### To Remove Privileges from a Role
 <br/>
@@ -960,33 +989,43 @@ To manage roles open the **Roles** tab in the Chronograf InfluxDB Admin console.
 
 3) Click the **Apply** button.  
 
-<a href="javascript:doModal('remove-perm-role-01')">
+<div id="holder-remove-perm-role-01">
+<a href="javascript:doModal('remove-perm-role-01')" id="anchor-remove-perm-role-01">
 <img id='remove-perm-role-01' src='/img/enterprise/kapacitor/RemovePermissionFromRole01.png' alt="Remove User from Role 02" style="max-width: 300px"></img>
 </a>
+</div>
 
 4) A notification message "Role Permissions Updated" appears and the permissions are no longer visible in the **Permissions** column of the role entry.  
 
-<a href="javascript:doModal('remove-perm-role-02')">
+<div id="holder-remove-perm-role-02">
+<a href="javascript:doModal('remove-perm-role-02')" id="anchor-remove-perm-role-02">
 <img id='remove-perm-role-02' src='/img/enterprise/kapacitor/RemovePermissionsFromRole02.png' alt="Remove User from Role 02" style="max-width: 300px"></img>
 </a>
+</div>
 
 ##### To Delete a Role  
 <br/>
 
 1) Locate the role in the roles table and click the **Delete** button.  This will open **Confirmation** and **Cancel** buttons.
 
-<a href="javascript:doModal('delete-role-01')">
+<div id="holder-delete-role-01">
+<a href="javascript:doModal('delete-role-01')" id="anchor-delete-role-01">
 <img id='delete-role-01' src='/img/enterprise/kapacitor/DeleteRole01.png' alt="Delete Role 01" style="max-width: 300px"></img>
 </a>
+</div>
 
 2) Click the green **Confirmation** button.
 
-<a href="javascript:doModal('delete-role-02')">
+<div id="holder-delete-role-02">
+<a href="javascript:doModal('delete-role-02')" id="anchor-delete-role-02">
 <img id='delete-role-02' src='/img/enterprise/kapacitor/DeleteRole02.png' alt="Delete Role 02" style="max-width: 300px"></img>
 </a>
+</div>
 
 3) A confirmation message "Role deleted" appears and the role entry is no longer visible in the roles table.
 
-<a href="javascript:doModal('delete-role-03')">
+<div id="holder-delete-role-03">
+<a href="javascript:doModal('delete-role-03')" id="anchor-delete-role-03">
 <img id='delete-role-03' src='/img/enterprise/kapacitor/DeleteRole03.png' alt="Delete Role 03" style="max-width: 300px"></img>
 </a>
+</div>
