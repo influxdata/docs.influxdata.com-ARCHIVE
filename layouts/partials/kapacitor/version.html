@@ -1,10 +1,5 @@
 {{ if not (or (in .RelPermalink .Site.Data.default_versions.kapacitor_semver) (eq .RelPermalink "/kapacitor/")) }}
 <div class="old-version">
-{{ if or (in .RelPermalink "v0.10") (in .RelPermalink "v0.11") (in .RelPermalink "v0.12") (in .RelPermalink "v0.13") }}
-    <strong>Warning!</strong> This page documents an old version of Kapacitor, which is no longer actively developed. <a href="/kapacitor/{{ .Site.Data.default_versions.kapacitor_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ substr .RelPermalink 16 }}{{end}}">Kapacitor {{ .Site.Data.default_versions.kapacitor_semver }}</a> is the most recent stable version of Kapacitor.
-{{ end }}
-{{ if or (in .RelPermalink "v0.2") (in .RelPermalink "v1.0") (in .RelPermalink "v1.1") (in .RelPermalink "v1.2") (in .RelPermalink "v1.3" ) }}
-    <strong>Warning!</strong> This page documents an old version of Kapacitor, which is no longer actively developed. <a href="/kapacitor/{{ .Site.Data.default_versions.kapacitor_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ substr .RelPermalink 15 }}{{end}}">Kapacitor {{ .Site.Data.default_versions.kapacitor_semver }}</a> is the most recent stable version of Kapacitor.
-{{ end }}
+    <strong>Warning!</strong> This page documents an old version of Kapacitor, which is no longer actively developed. <a href="/kapacitor/{{ .Site.Data.default_versions.kapacitor_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ substr .RelPermalink (len (index (findRE "^/.*?/+.*?/" .RelPermalink) 0)) }}{{end}}">Kapacitor {{ .Site.Data.default_versions.kapacitor_semver }}</a> is the most recent stable version of Kapacitor.
 </div>
 {{ end }}
