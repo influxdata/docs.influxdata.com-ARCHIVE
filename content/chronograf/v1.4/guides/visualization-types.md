@@ -78,3 +78,14 @@ Displays selected time series data in a tabular format.
 #### Table Controls
 
 ![Table Controls for Table view](/img/chronograf/chrono-viz-table-controls.png)
+
+* Time Format
+* Time Axis
+* Lock First Column
+* Customize Fields
+* Thresholds
+  - Add Threshold (button)
+* Base Color (selection list)
+* Threshold Coloring
+  - Background
+  - Text
