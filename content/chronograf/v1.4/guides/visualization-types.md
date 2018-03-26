@@ -11,7 +11,7 @@ menu:
 
 Chronograf's dashboards support seven visualization types, shown together in the **Visualization Type** selection view like this:
 
-![Visualization Type selection view](/img/chronograf/faq-viz-line.png)
+![Visualization Type selection view](/img/chronograf/chrono-visualization-types.png)
 
 
 ### Line Graph
