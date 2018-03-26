@@ -7,6 +7,13 @@ menu:
 ---
 This page includes highlights of new and enhanced Chronograf functionality. See the [Release notes/changelog](/chronograf/v1.4/about_the_project/release-notes-changelog/) for a complete listing of new features, changes, and bug fixes.
 
+## Chronograf 1.4.3
+
+* Table view added to visualization types.
+* Annotation for graph visualization types.
+* Okta OAuth 2.0 support.
+* Heroku OAuth 2.0 support.
+
 ## Chronograf 1.4.2
 
 * Rename **Create Alerts** to **Manage Tasks** and page redesign to improve usability.

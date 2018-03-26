@@ -59,6 +59,8 @@ Configuration steps, including required and optional configuration options, for 
 * [GitHub](#github)
 * [Google](#google)
 * [Auth0](#auth0)
+* [Heroku](#heroku)
+* [Okta](#okta)
 * [Generic](#generic)
 
 > ***Note:*** Each of the following OAuth 2.0 provider configurations require the `TOKEN_SECRET` you created in the previous section.
@@ -273,6 +275,43 @@ Next, you will need to set the Chronograf [`AUTH0_ORGS`](/chronograf/latest/admi
     For example, if you have one group of users with an `organization` key set to `biffs-gang` and another group with an `organization` key set to `time-travelers`, you can permit access to both with this environment variable: `AUTH0_ORGS=biffs-gang,time-travelers`.
 
 An `--auth0-organizations` command line option is also available, but it is limited to a single organization and does not accept a comma-separated list like its environment variable equivalent.
+
+### Heroku
+
+To enable Chronograf support using the Heroku OAuth 2.0 provider:
+
+1. Create a new Okta web app following the steps described in the Okta documentation at: [Implement the Authorization Workflow](https://developer.okta.com/authentication-guide/implementing-authentication/auth-code)
+
+### Okta
+
+[Okta](https://developer.okta.com/) is a popular, OAuth 2.0 compliant authorization and authentication provider that can be used with Chronograf to allow access based on granted scopes and permissions.
+
+**To enable Chronograf support using an Okta OAuth 2.0 application:**
+
+1. Create a new Okta web app following the steps in the following Okta documentation: [Implement the Authorization Code Flow](https://developer.okta.com/authentication-guide/implementing-authentication/auth-code).
+
+  * In the **General Settings** section, find the **Allowed grant types** listing and select
+  only the **Client acting on behalf of a user:** **Authorization Code** option.
+  * In the **LOGIN** section, set the **Login redirect URIs* and **Initiate login URI** to `http://localhost:8888/oauth/okta/callback`
+    - This is the callback URL for Chronograf.
+
+2. Set the following Chronograf environment variables (or associated command line options):
+
+  * `GENERIC_NAME=okta`
+  * `GENERIC_CLIENT_ID=<okta_client_ID>``
+    - The **Client ID** value is in the **Client Credentials** section.
+  * `GENERIC_CLIENT_SECRET=<okta_client_secret>``
+    - The **Client secret** value is in the **Client Credentials** section.
+  * `GENERIC_AUTH_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/authorize`
+  * `GENERIC_TOKEN_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/token`
+  * `GENERIC_API_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/userinfo`
+  * `PUBLIC_URL=http://localhost:8888`
+  * `TOKEN_SECRET=secretsecretsecret`
+  * `GENERIC_SCOPES=openid,profile,email`
+
+3. Restart the Chronograf service.
+
+Your users should now be able to sign into Chronograf using the new Okta provider.
 
 ### Generic
 
