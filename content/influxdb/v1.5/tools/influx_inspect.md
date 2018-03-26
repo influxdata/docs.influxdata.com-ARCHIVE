@@ -67,7 +67,7 @@ Optional arguments are in brackets.
   Verbose output.
 
 #### -waldir string
-  WAL directory.
+  WAL (Write Ahead Log) directory.
 
 #### Examples
 <br>
