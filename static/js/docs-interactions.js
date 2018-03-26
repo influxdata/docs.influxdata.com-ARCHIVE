@@ -147,3 +147,50 @@ $(document).ready( function(){
 		};
 	});
 });
+
+/*
+ * View in Chronograf button and settings
+ */
+
+$(document).ready( function(){
+
+	// Inject the "View in Chronograf" button html on page load
+	addChronografBtnHtml()
+
+	// Open Chronograf settings modal
+  $('.chronograf-url-settings').click(function() {
+		var chronografUrlValue = getChronografUrl()
+		openModal('#chronograf-url-modal');
+		// Update the value of the chronograf url field using the saved cookie
+		$('input#chronograf-url').val(chronografUrlValue)
+	})
+
+	// Close the modal by clicking anywhere but the modal
+	$('.modal-overlay').click(function() {
+		closeModal();
+	})
+
+	// Save Chronograf URL
+	$('#save-chronograf-url').submit(function(e){
+		e.preventDefault();
+		var newChronografUrl = $('input#chronograf-url').val()
+
+		// 1. Update cookie
+		updateChronografUrl(newChronografUrl);
+
+		// 2. Update html
+		updateChronografBtnHtml(newChronografUrl);
+
+		// 3. Button lifecycle
+		saveBtnLifecycle('.save-btn', 150)
+		setTimeout(function(){
+			closeModal();
+		}, 1000)
+
+	})
+
+	// Revert to default Chronograf URL
+	$('#default-chronograf-url').click(function() {
+		revertToDefault();
+	})
+})
