@@ -7,11 +7,24 @@ menu:
     parent: Guides
 ---
 
-## Visualization types supported in Chronograf
+## Visualization types in Chronograf
 
-Chronograf's dashboard cells support seven visualization types, shown together in the **Visualization Type** selection view like this:
+Chronograf's dashboard views support the following visualization types, which can be selected in the **Visualization Type** selection view like this:
 
 [Visualization Type selection view](/img/chronograf/chrono-visualization-types.png)
+
+Each of the data visualization types and the available user controls are described below:
+
+* Line Graph
+* Stacked Graph
+* Step-Plot Graph
+* Single Stat
+* Line Graph + Single Stat
+* Bar Graph
+* Gauge
+* Table
+
+For information on adding and displaying annotations in graph views, see [Adding annotations to Chronograf views](/chronograf/v1.4/guides/annotations/).
 
 
 ### Line Graph
@@ -53,4 +66,10 @@ Show time series in a bar chart.
 ### Gauge
 Shows a single value in a gauge view.
 
-![Gauge screenshot](/img/chronograf/v1.4/gauge.png)
+![Gauge screenshot](/img/chronograf/chrono-viz-gauge.png)
+
+### Table
+
+Displays selected time series data in a tabular format.
+
+![Table view screenshot](/img/chronograf/chrono-viz-table-view.png)

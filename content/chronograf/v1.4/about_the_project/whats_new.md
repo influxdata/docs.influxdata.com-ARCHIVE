@@ -9,10 +9,10 @@ This page includes highlights of new and enhanced Chronograf functionality. See 
 
 ## Chronograf 1.4.3
 
-* Table view added to visualization types.
-* Annotation for graph visualization types.
-* Okta OAuth 2.0 support.
-* Heroku OAuth 2.0 support.
+* [Table view](/chronograf/v1.4/guides/visualization-types/#table-view) added to visualization types.
+* [Annotations](/chronograf/v1.4/guides/annotations/) for graph visualization types.
+* [Okta OAuth 2.0 support](/chronograf/v1.4/administration/managing-security/#okta).
+* [Heroku OAuth 2.0 support](/chronograf/v1.4/administration/managing-security/#heroku)
 
 ## Chronograf 1.4.2
 

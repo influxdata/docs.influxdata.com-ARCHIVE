@@ -280,8 +280,26 @@ An `--auth0-organizations` command line option is also available, but it is limi
 
 To enable Chronograf support using the Heroku OAuth 2.0 provider:
 
-1. Create a new Okta web app following the steps described in the Okta documentation at: [Implement the Authorization Workflow](https://developer.okta.com/authentication-guide/implementing-authentication/auth-code)
+#### Creating Heroku Applications
 
+To obtain a client ID and application secret for Heroku, follow the guide posted [here](https://devcenter.heroku.com/articles/oauth#register-client).
+Once your application has been created, those two values should be inserted into the following environment variables (or associated command line option):
+
+* `HEROKU_CLIENT_ID`
+* `HEROKU_SECRET`
+
+#### Optional Heroku organizations
+
+To restrict access to members of specific Heroku organizations, use
+the `HEROKU_ORGS` environment variable (or associated command line option). Multiple values must be comma-separated.
+
+**Example**
+
+To permit access from the `hill-valley-preservation-society` organization and `the-pinheads` organization, we would use the following environment variable:
+
+```sh
+export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
+```
 ### Okta
 
 [Okta](https://developer.okta.com/) is a popular, OAuth 2.0 compliant authorization and authentication provider that can be used with Chronograf to allow access based on granted scopes and permissions.
