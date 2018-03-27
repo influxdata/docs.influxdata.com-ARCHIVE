@@ -90,9 +90,10 @@ Use the **Single Stat Controls** panel to specify one or more thresholds
 
 **To specify a threshold:**
 
-1. Click the **Add Threshold** button.
-2. Select the **Base Color** you want in the selection list.
+1. Select the **Base Color** you want in the selection list.
   * Options include: Ruby, Fire, Curacao, Tiger, Pineapple, Thunder, Honeydew, Rainforest, Viridian, Ocean, Pool, Laser (default), Planet, Star, Comet, Pepper, Graphite, White, and Castle.
+2. [Optional] Select .
+
 
 ### Line Graph + Single Stat
 
