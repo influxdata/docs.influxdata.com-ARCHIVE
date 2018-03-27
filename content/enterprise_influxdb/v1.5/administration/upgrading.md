@@ -23,7 +23,7 @@ If you have incremental backups created as part of your standard operating proce
 trigger a final incremental backup before proceeding with the upgrade.
 
 > ***Note:*** For information on performing a final incremental backup or a full backup,
-> see the InfluxDB Enterprise 3.x [Backup and restore](/enterprise_influxdb/v1.3/guides/backup-and-restore) documentation.
+> see the InfluxDB Enterprise 3.x [Backup and restore](/enterprise_influxdb/v1.5/guides/backup-and-restore) documentation.
 
 ## Upgrading meta nodes
 
