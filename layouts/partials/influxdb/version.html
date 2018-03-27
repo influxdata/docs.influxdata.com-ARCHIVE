@@ -1,9 +1,9 @@
 {{ if not (or (in .RelPermalink .Site.Data.default_versions.influxdb_semver) (eq .RelPermalink "/influxdb/")) }}
 <div class="old-version">
   {{ if or (in .RelPermalink "v0.6") (in .RelPermalink "v0.7") (in .RelPermalink "v0.8") }}
-      <strong>Warning!</strong> This page documents an old version of InfluxDB, which is no longer actively developed. <a href="/influxdb/{{ .Site.Data.default_versions.influxdb_semver }}/">InfluxDB {{ .Site.Data.default_versions.influxdb_semver }}</a> is the most recent stable version of InfluxDB.
+      <strong>Warning!</strong> This page documents an earlier version of InfluxDB, which is no longer actively developed. <a href="/influxdb/{{ .Site.Data.default_versions.influxdb_semver }}/">InfluxDB {{ .Site.Data.default_versions.influxdb_semver }}</a> is the most recent stable version of InfluxDB.
   {{ else }}
-      <strong>Warning!</strong> This page documents an old version of InfluxDB, which is no longer actively developed. <a href="/influxdb/{{ .Site.Data.default_versions.influxdb_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ substr .RelPermalink (len (index (findRE "^/.*?/+.*?/" .RelPermalink) 0)) }}{{end}}">InfluxDB {{ .Site.Data.default_versions.influxdb_semver }}</a> is the most recent stable version of InfluxDB.
+      <strong>Warning!</strong> This page documents an earlier version of InfluxDB, which is no longer actively developed. <a href="/influxdb/{{ .Site.Data.default_versions.influxdb_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ substr .RelPermalink (len (index (findRE "^/.*?/+.*?/" .RelPermalink) 0)) }}{{end}}">InfluxDB {{ .Site.Data.default_versions.influxdb_semver }}</a> is the most recent stable version of InfluxDB.
   {{ end }}
 </div>
 {{ end }}
