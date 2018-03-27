@@ -178,7 +178,7 @@ The collection of data in InfluxDB's data structure that share a measurement, ta
 Related entries: [field set](/influxdb/v1.5/concepts/glossary/#field-set), [measurement](/influxdb/v1.5/concepts/glossary/#measurement), [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp), [tag set](/influxdb/v1.5/concepts/glossary/#tag-set)
 
 ## series cardinality
-The number of unique database, measurement, and tag set combinations in an InfluxDB instance.
+The number of unique database, measurement, tag set, and field key combinations in an InfluxDB instance.
 
 For example, assume that an InfluxDB instance has a single database and one measurement.
 The single measurement has two tag keys: `email` and `status`.
@@ -211,10 +211,9 @@ It would remain unchanged at 6, as `firstname` is already scoped by the `email` 
 | cliff@influxdata.com | start  | clifford  |
 | cliff@influxdata.com | finish | clifford  |
 
-See [Frequently Asked Questions](/influxdb/v1.5/troubleshooting/frequently-asked-questions/#how-can-i-query-for-series-cardinality) for how to query InfluxDB for series
-cardinality.
+See [SHOW CARDINALITY](/influxdb/v1.5/query_language/spec/#show-cardinality) to learn about the InfluxSQL commands for series cardinality.
 
-Related entries: [tag set](/influxdb/v1.5/concepts/glossary/#tag-set), [measurement](/influxdb/v1.5/concepts/glossary/#measurement), [tag key](/influxdb/v1.5/concepts/glossary/#tag-key)
+Related entries: [field key](#field-key),[measurement](#measurement), [tag key](#tag-key), [tag set](#tag-set)
 
 ## server
 A machine, virtual or physical, that is running InfluxDB.

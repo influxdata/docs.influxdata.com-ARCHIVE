@@ -63,7 +63,6 @@ Where applicable, it links to outstanding issues on GitHub.
 
 **Series and Series Cardinality**
 
-* [How can I query for series cardinality?](#how-can-i-query-for-series-cardinality)
 * [Why does series cardinality matter?](#why-does-series-cardinality-matter)
 * [How can I remove series from the index?](#how-can-i-remove-series-from-the-index)
 
@@ -900,25 +899,9 @@ time                   origin   priceless
 2016-07-20T18:42:00Z   8
 ```
 
-## How can I query for series cardinality?
-
-The following queries return [series cardinality](/influxdb/v1.5/concepts/glossary/#series-cardinality):
-
-#### Series cardinality per database:
-```
-SELECT numSeries FROM "_internal".."database" WHERE time > now() - 10s GROUP BY "database" ORDER BY desc LIMIT 1
-```
-#### Series cardinality across all database:
-```
-SELECT sum(numSeries) AS "total_series" FROM "_internal".."database" WHERE time > now() - 10s
-```
-
-> **Note:** Changes to the [`[monitor]`](/influxdb/v1.5/administration/config/#monitor)
-section in the configuration file may affect query results.
-
 ## Why does series cardinality matter?
 
-InfluxDB maintains an in-memory index of every [series](/influxdb/v1.5/concepts/glossary/#series) in the system. As the number of unique series grows, so does the RAM usage. High [series cardinality](/influxdb/v1.5/concepts/glossary/#series-cardinality) can lead to the operating system killing the InfluxDB process with an out of memory (OOM) exception. See [Querying for series cardinality](#how-can-i-query-for-series-cardinality) to learn how to query for series cardinality.
+InfluxDB maintains an in-memory index of every [series](/influxdb/v1.5/concepts/glossary/#series) in the system. As the number of unique series grows, so does the RAM usage. High [series cardinality](/influxdb/v1.5/concepts/glossary/#series-cardinality) can lead to the operating system killing the InfluxDB process with an out of memory (OOM) exception. See [SHOW CARDINALITY](/influxdb/v1.5/query_language/spec/#show-cardinality) to learn about the InfluxSQL commands for series cardinality.
 
 ## How can I remove series from the index?
 
