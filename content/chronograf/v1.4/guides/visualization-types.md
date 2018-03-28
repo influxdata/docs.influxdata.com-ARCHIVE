@@ -3,7 +3,7 @@ title: Visualization types in Chronograf
 menu:
   chronograf_1_4:
     name: Visualization types
-    weight: 20
+    weight: 30
     parent: Guides
 ---
 
@@ -85,6 +85,7 @@ Use the **Stacked Graph Controls** to specify the following:
 
 ![Stacked Graph example](/img/chronograf/chrono-viz-stacked-graph-example.png)
 
+
 ### Step-Plot Graph
 
 The **Step-Plot Graph** view displays a time series in a staircase graph.
@@ -111,6 +112,7 @@ Use the **Step-Plot Graph Controls** to specify the following:
 #### Step-Plot Graph example
 
 ![Step-Plot Graph view](/img/chronograf/chrono-viz-step-graph-example.png)
+
 
 ### Bar Graph
 

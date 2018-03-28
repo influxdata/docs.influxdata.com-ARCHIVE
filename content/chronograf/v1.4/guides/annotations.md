@@ -2,7 +2,7 @@
 title: Adding annotations in Chronograf views
 menu:
   chronograf_1_4:
-    weight: 70
+    weight: 35
     parent: Guides
 ---
 
@@ -47,7 +47,7 @@ When an annotation is made using the Chronograf user interface, an annotation re
 * `text`: Text note or comment displayed to users.
 * `type`: Not currently used. Intended for future use.
 
-> **Note:** If 
+> **Note:** If
 
 **Syntax:**
 

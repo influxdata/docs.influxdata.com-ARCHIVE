@@ -2,7 +2,7 @@
 title: Configuring Kapacitor event handlers
 menu:
   chronograf_1_4:
-    weight: 40
+    weight: 50
     parent: Guides
 ---
 

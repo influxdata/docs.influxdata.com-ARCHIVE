@@ -2,7 +2,7 @@
 title: Advanced Kapacitor usage
 menu:
   chronograf_1_4:
-    weight: 70
+    weight: 80
     parent: Guides
 ---
 
