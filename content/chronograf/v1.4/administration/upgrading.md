@@ -7,15 +7,9 @@ menu:
     parent: Administration
 ---
 
-#### Content
+## Upgrading to 1.4 from 1.3
 
-* [Upgrade to 1.4 from 1.3.x.x versions](#upgrade-from-1-3.x.x-versions)
-* [Upgrade to 1.4 from older versions](#upgrade-from-older-versions)
-
-## Upgrade from 1.3.x.x versions
-### Versions: 1.3.x.x and 1.2.0-beta1 through 1.2.0-beta9
-
-Version 1.4.x.x is a drop-in upgrade for the 1.3.x.x and 1.2.0-beta releases.
+Version 1.4.x.x is a drop-in upgrade for the 1.3.x.x releases.
 [Download and install](https://portal.influxdata.com/downloads) the most recent version and restart the process.
 
 > ***Note:*** In Chronograf 1.3.1+, installing a new version of Chronograf automatically clears the localStorage settings.
