@@ -1,8 +1,9 @@
 ---
-title: Logs
+title: Logging in InfluxDB
 
 menu:
   influxdb_1_4:
+    name: Logging
     weight: 10
     parent: administration
 ---

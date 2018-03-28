@@ -1,8 +1,9 @@
 ---
-title: Storage engine and Time-Structured Merge Tree (TSM)
+title: Storage engine and the Time-Structured Merge Tree (TSM)
 
 menu:
   influxdb_1_4:
+    name: Storage engine
     weight: 90
     parent: concepts
 ---
@@ -207,8 +208,8 @@ This works very well for values that are frequently constant.
 
 #### Booleans
 
-Booleans are encoded using a simple bit packing strategy where each boolean uses 1 bit.
-The number of booleans encoded is stored using variable-byte encoding at the beginning of the block.
+Booleans are encoded using a simple bit packing strategy where each Boolean uses 1 bit.
+The number of Booleans encoded is stored using variable-byte encoding at the beginning of the block.
 
 #### Strings
 Strings are encoding using [Snappy](http://google.github.io/snappy/) compression.

@@ -1,9 +1,10 @@
 ---
-title: API Reference
+title: InfluxDB API reference
 aliases:
     - influxdb/v1.3/concepts/api/
 menu:
   influxdb_1_3:
+    name: API reference
     weight: 10
     parent: tools
 ---
@@ -38,7 +39,7 @@ curl http://localhost:8086/debug/requests
 
 | Query String Parameter | Optional/Required | Definition |
 | :--------------------- | :---------------- |:---------- |
-| seconds=\<integer>      | Optional          | Sets the duration (in seconds) over which the client collects information. The default duration is ten seconds. | 
+| seconds=\<integer>      | Optional          | Sets the duration (in seconds) over which the client collects information. The default duration is ten seconds. |
 
 #### Examples
 
@@ -52,7 +53,7 @@ $ curl http://localhost:8086/debug/requests
 }
 ```
 
-The response shows that, over the past ten seconds, the `user1` user sent one request to the `/write` endpoint and no requests to the `/query` endpoint from the `123.45.678.91` IP address. 
+The response shows that, over the past ten seconds, the `user1` user sent one request to the `/write` endpoint and no requests to the `/query` endpoint from the `123.45.678.91` IP address.
 
 ##### Example 2: Track requests over a one-minute interval
 <br>
@@ -497,7 +498,7 @@ POST http://localhost:8086/write
 
 | Query String Parameter | Optional/Required | Description |
 | :--------------------- | :---------------- | :---------- |
-| consistency=[any,one,quorum,all] | Optional, available with [InfluxEnterprise clusters](/enterprise/v1.3/) only. | Sets the write consistency for the point. InfluxDB assumes that the write consistency is `one` if you do not specify `consistency`. See the [InfluxEnterprise documentation](https://docs.influxdata.com/enterprise/v1.3/concepts/clustering#write-consistency) for detailed descriptions of each consistency option. |
+| consistency=[any,one,quorum,all] | Optional, available with [InfluxDB Enterprise clusters](/enterprise_influxdb/v1.3/) only. | Sets the write consistency for the point. InfluxDB assumes that the write consistency is `one` if you do not specify `consistency`. See the [InfluxDB Enterprise documentation](/enterprise_influxdb/v1.3/concepts/clustering#write-consistency) for detailed descriptions of each consistency option. |
 | db=\<database> | Required | Sets the target [database](/influxdb/v1.3/concepts/glossary/#database) for the write. |
 | p=\<password> | Optional if you haven't [enabled authentication](/influxdb/v1.3/query_language/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication.* | Sets the password for authentication if you've enabled authentication. Use with the query string parameter `u`. |
 | precision=[ns,u,ms,s,m,h] | Optional | Sets the precision for the supplied Unix time values. InfluxDB assumes that timestamps are in nanoseconds if you do not specify `precision`.** |

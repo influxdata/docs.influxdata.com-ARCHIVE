@@ -1,12 +1,10 @@
 ---
 title: Managing Chronograf security
-
 aliases: /chronograf_1_4/security-best-practices/
-
 menu:
   chronograf_1_4:
     name: Managing Chronograf security
-    weight: 50
+    weight: 70
     parent: Administration
 ---
 
@@ -51,11 +49,12 @@ export TOKEN_SECRET=Super5uperUdn3verGu355!
 ```
 
 **JWKS Signature Verification**
-If the provider implements OpenID Connect with RS256 signatures (as Microsoft ADFS does), you need to provide a JWKS document (holding the ca certificates) so we can validate the RSA signatures against. These certificates are regularly rolled over, so we'll fetch them from the JWKS_URL on demand.
+If the provider implements OpenID Connect with RS256 signatures (as Microsoft AD FS does), you need to enable id_token support and provide a JWKS document (holding the certificate chain) so we can validate the RSA signatures against. These certificate chain is regularly rolled over (when the certificates expire), so we'll fetch it from the JWKS_URL on demand.
 
 **Example:**
 
 ```sh
+export USE_ID_TOKEN=true
 export JWKS_URL=https://example.com/adfs/discovery/keys
 ```
 
@@ -83,18 +82,19 @@ Chronograf supports using the [GitHub OAuth 2.0 authentication](https://develope
 
 Chronograf has five environment variables (and corresponding command line options) for use with GitHub OAuth 2.0 authentication. The steps below show you how to set the required values for:
 
-* TOKEN_SECRET (secret used for generating and validating JWT tokens)
-* GH_CLIENT_ID (GitHub Client ID)
-* GH_CLIENT_SECRET (GitHub Client Secret)
+* `TOKEN_SECRET` (secret used for generating and validating JWT tokens)
+* `GH_CLIENT_ID` (GitHub Client ID)
+* `GH_CLIENT_SECRET` (GitHub Client Secret)
 
 Optionally, you can specify values for these two environment variables (or corresponding command line options):
 
-* AUTH_DURATION (authorization duration)
-* GH_ORGS (GitHub organizations)
+* `AUTH_DURATION` (authorization duration)
+* `GH_ORGS` (GitHub organizations)
 
 For details on the command line options and environment variables, see [GitHub OAuth 2.0 authentication options](/chronograf/latest/administration/config-options#github-oauth-2-0-authentication-options).
 
 **Example:**
+
 ```
 # Require users to reauthenticate after 1 hour
 export AUTH_DURATION=1h
@@ -200,6 +200,7 @@ The following steps will guide you in configuring Google OAuth 2.0 authorization
 * `PUBLIC_URL` (Public URL -- the URL used to access Chronograf)
 
 **Example:**
+
 ```sh
 export GOOGLE_CLIENT_ID= 812760930421-kj6rnscmlbv49pmkgr1jq5autblc49kr.apps.googleusercontent.com
 export GOOGLE_CLIENT_SECRET= wwo0m29iLirM6LzHJWE84GRD
@@ -211,6 +212,7 @@ export PUBLIC_URL=http://localhost:8888
 * `TOKEN_SECRET` (Secret used for generating and validating JWT tokens)
 
 **Example:**
+
 ```sh
 export TOKEN_SECRET=Super5uperUdn3verGu355!
 ```
@@ -284,64 +286,48 @@ An `--auth0-organizations` command line option is also available, but it is limi
 
 ### Generic
 
-#### Creating OAuth 2.0 applications using your own provider
+#### Configuring Chronograf to use any OAuth 2.0 provider
 
-The generic OAuth 2.0 provider is very similar to the GitHub provider, but
-you are able to set your own authentication, token, and API URLs.
-Additionally, this provider implements OpenID Connect (OIDC) id_token parsing, as implemented by Active Directory Federation Services (ADFS).
-The callback URL path will be `/oauth/generic/callback`.
-For example, if Chronograf is hosted at `https://localhost:8888` then the full callback URL would be  `https://localhost:8888/oauth/generic/callback`.
+Chronograf can be configured to work with any OAuth 2.0 provider, including those defined above, by using the Generic configuration options below.
+Additionally, the generic provider implements OpenID Connect (OIDC) as implemented by Active Directory Federation Services (AD FS).
 
-The generic OAuth 2.0 provider requires the following five environment variables (or the corresponding command line options):
+Depending on your OAuth 2.0 provider, many or all of the following environment variables (or corresponding command line options) are required by Chronograf when using the Generic configuration:
 
-* `GENERIC_CLIENT_ID`: this application's client [identifier](https://tools.ietf.org/html/rfc6749#section-2.2) issued by the provider
-* `GENERIC_CLIENT_SECRET`: this application's [secret](https://tools.ietf.org/html/rfc6749#section-2.3.1) issued by the provider
-* `GENERIC_AUTH_URL`: OAuth 2.0 provider's authorization [endpoint](https://tools.ietf.org/html/rfc6749#section-3.1) URL
-* `GENERIC_TOKEN_URL`: OAuth 2.0 provider's token endpoint [endpoint](https://tools.ietf.org/html/rfc6749#section-3.2) is used by the client to obtain an access token
-* `JWKS_URL`: OAuth 2.0 provider's jwks endpoint [endpoint](https://tools.ietf.org/html/rfc7517#section-4.7) is used by the client to validate an id_token
+* `GENERIC_CLIENT_ID`: Application client [identifier](https://tools.ietf.org/html/rfc6749#section-2.2) issued by the provider
+* `GENERIC_CLIENT_SECRET`: Application client [secret](https://tools.ietf.org/html/rfc6749#section-2.3.1) issued by the provider
+* `GENERIC_AUTH_URL`: Provider's authorization [endpoint](https://tools.ietf.org/html/rfc6749#section-3.1) URL
+* `GENERIC_TOKEN_URL`: Provider's token [endpoint](https://tools.ietf.org/html/rfc6749#section-3.2) URL used by the Chronograf client to obtain an access token
+* `USE_ID_TOKEN`: Enable OpenID [id_token](https://openid.net/specs/openid-connect-core-1_0.html#rfc.section.3.1.3.3) processing
+* `JWKS_URL`: OAuth 2.0 provider's jwks [endpoint](https://tools.ietf.org/html/rfc7517#section-4.7) is used by the client to validate RSA signatures
+* `GENERIC_API_URL`: Provider's [OpenID UserInfo endpoint](https://connect2id.com/products/server/docs/api/userinfo)] URL used by Chronograf to request user data
+* `GENERIC_API_KEY`: JSON lookup key for [OpenID UserInfo](https://connect2id.com/products/server/docs/api/userinfo)] (known to be required for Microsoft Azure, with the value `userPrincipalName`)
+* `GENERIC_SCOPES`: [Scopes](https://tools.ietf.org/html/rfc6749#section-3.3) of user data required for your instance of Chronograf, such as user email and OAuth provider organization
+  - Multiple values must be space-delimited, e.g. `user:email read:org`
+  - These may vary by OAuth 2.0 provider
+  - Default value: `user:email`
+* `PUBLIC_URL`: Full public URL used to access Chronograf from a web browser, i.e. where Chronograf is hosted
+  - Used by Chronograf, for example, to construct the callback URL
 * `TOKEN_SECRET`: Used to validate OAuth [state](https://tools.ietf.org/html/rfc6749#section-4.1.1) response. (see above)
 
-#### Optional scopes
+#### Optional environment variables
 
-By default Chronograf will ask for the `user:email` [scope](https://tools.ietf.org/html/rfc6749#section-3.3) of the client.
-If your provider scopes email access under a different scope or scopes provide them as comma-separated values in the `GENERIC_SCOPES` environment variable.
-```sh
-export GENERIC_SCOPES="openid,email" # Requests access to openid and email scopes
-```
+The following environment variables (and corresponding command line options) are also available for optional use:
 
-#### Optional email domains
-
-The generic OAuth 2.0 provider has the following two optional environment variables (and corresponding command line options):
-
-* `GENERIC_API_URL`: URL that returns [OpenID UserInfo JWT](https://connect2id.com/products/server/docs/api/userinfo) (specifically email address)
 * `GENERIC_DOMAINS`: Email domain where email address must include.
+* `GENERIC_NAME`: Value used in the callback URL in conjunction with `PUBLIC_URL`, e.g. `<PUBLIC_URL>/oauth/<GENERIC_NAME>/callback`
+  - This value is also used in the text for the Chronograf Login button
+  - Default value is `generic`
+  - So, for example, if `PUBLIC_URL` is `https://localhost:8888` and `GENERIC_NAME` is its default value, then the callback URL would be `https://localhost:8888/oauth/generic/callback`, and the Chronograf Login button would read `Log in with Generic`
+  - While using Chronograf, this value should be supplied in the `Provider` field when adding a user or creating an organization mapping
 
-#### Customizing the login button text and callback URL
-
-Setting the `GENERIC_NAME` environment variable results in the specified value appearing in both the callback URL and the login button text. This allows you to customize the login by replacing "generic" in both locations with a more meaningful name.
-
-> ***Note:*** Use a short, URL-friendly name. The GENERIC_NAME value is lowercased in the callback URL
-
-**Example:**
-
-```sh
-export GENERIC_NAME="GitLab"
-```
-The callback URL changes from:
-```
-https://localhost:8888/oauth/generic/callback
-```
-to:
-````https://localhost:8888/oauth/gitlab/callback`
-
-Also, on the Chronograf login page, the text on the authentication button changes from `Log in with generic` to `Log in with GitLab`.
+> ***Note:*** Use a short, URL-friendly name for `GENERIC_NAME`. The value is lowercased in the callback URL.
 
 #### Examples
-##### OpenID Connect (OIDC) / Active Directory Federation Services (ADFS)
+##### OpenID Connect (OIDC) / Active Directory Federation Services (AD FS)
 
-See [Enabling OpenId Connect with AD FS 2016](https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/development/enabling-openid-connect-with-ad-fs) for a walk through of the server configuration.
+See [Enabling OpenID Connect with AD FS 2016](https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/development/enabling-openid-connect-with-ad-fs) for a walk through of the server configuration.
 
-Exports for chronograf (e.g. in /etc/default.chronograf):
+Exports for Chronograf (e.g. in /etc/default.chronograf):
 ```sh
 PUBLIC_URL="https://example.com:8888"
 GENERIC_CLIENT_ID="chronograf"
@@ -350,8 +336,11 @@ GENERIC_AUTH_URL="https://example.com/adfs/oauth2/authorize"
 GENERIC_TOKEN_URL="https://example.com/adfs/oauth2/token"
 GENERIC_SCOPES="openid"
 GENERIC_API_KEY="upn"
+USE_ID_TOKEN="true"
 JWKS_URL="https://example.com/adfs/discovery/keys"
 TOKEN_SECRET="ZNh2N9toMwUVQxTVEe2ZnnMtgkh3xqKZ"
+
+> ***Note:*** Do not use special characters for the GENERIC_CLIENT_ID as AD FS will split strings here, finally resulting in an identifier mismatch.
 
 ### Configuring authentication duration
 

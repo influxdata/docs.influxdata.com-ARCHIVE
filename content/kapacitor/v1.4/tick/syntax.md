@@ -24,30 +24,30 @@ menu:
 
 # Concepts
 
-The sections [Introduction](/kapacitor/v1.4/tick/introduction/) and [Getting Started](/kapacitor/v1.4/introduction/getting_started/) present the key concepts of **nodes** and **pipelines**.  Nodes represent process invocation units, that either take data as a batch, or in a point by point stream, and then alter that data, store that data, or based on changes in that data trigger some other activity  such as an alert.  Pipelines are simply logically organized chains of nodes.
+The sections [Introduction](/kapacitor/v1.4/tick/introduction/) and [Getting Started](/kapacitor/v1.4/introduction/getting-started/) present the key concepts of **nodes** and **pipelines**.  Nodes represent process invocation units, that either take data as a batch, or in a point by point stream, and then alter that data, store that data, or based on changes in that data trigger some other activity  such as an alert.  Pipelines are simply logically organized chains of nodes.
 
 In Kapacitor TICKscript is used to define tasks directly and to define template tasks, which act as templates that can be reused to generate new tasks.
 
 **Go**
 
-TICKscript Syntax was inspired by many different languages.  Among the most influential is Go.  This can be seen, for example, in the variable declaration idiom, in string templates, in types such as `duration`, in functions used in lambda expressions, and its influence is also apparent elsewhere in the documentation.
+TICKscript syntax was inspired by many different languages.  Among the most influential is Go.  This can be seen, for example, in the variable declaration idiom, in string templates, in types such as `duration`, in functions used in lambda expressions, and its influence is also apparent elsewhere in the documentation.
 
 **Syntax sub-spaces**
 
-When working with TICKscript, a couple of syntax sub-spaces will be encountered that have caused confusion for some users.  Overarching is the TICKscript syntax of the TICKscript file.  This is primarily composed of variable declarations and of nodes chained together in pipelines.  On creation the `query` node requires a string representing InfluxQL statements.  So, InlfuxQL represents the first syntax sub-space that may be used.  Other nodes and methods use Lambda expressions, which represents a second syntax sub-space that will be met. The syntax between these spaces, such as when accessing variable, tag and field values, can differ, and this can sometimes be a source of confusion.
+When working with TICKscript, a couple of syntax subspaces will be encountered that have caused confusion for some users.  Overarching is the TICKscript syntax of the TICKscript file.  This is primarily composed of variable declarations and of nodes chained together in pipelines.  On creation the `query` node requires a string representing InfluxQL statements.  So, InfluxQL represents the first syntax subspace that may be used.  Other nodes and methods use Lambda expressions, which represents a second syntax sub-space that will be met. The syntax between these spaces, such as when accessing variable, tag and field values, can differ, and this can sometimes be a source of confusion.
 
-To summarize the two syntax sub-spaces to be aware of in TICKscript are:
+To summarize, the two syntax subspaces to be aware of in TICKscript are:
 
    * [InfluxQL](#influxql-in-tickscript)
-   * [Lambda Expressions](#lambda-expressions)
+   * [Lambda expressions](#lambda-expressions)
 
-**Directed Acyclic Graphs**
+**Directed acyclic graphs (DAGs)**
 
 As mentioned in Getting Started, a pipeline is a Directed Acylic Graph (DAG). (For more information see [Wolfram](http://mathworld.wolfram.com/AcyclicDigraph.html) or [Wikipedia](https://en.wikipedia.org/wiki/Directed_acyclic_graph)). It contains a finite number of nodes (a.k.a. vertices) and edges.  Each edge is directed from one node to another.  No edge path can lead back to an earlier node in the path, which would result in a cycle or loop.  TICKscript paths (a.k.a pipelines and chains) typically begin with a data source definition node with an edge to a data set definition node and then pass their results down to data manipulation and processing nodes.
 
 # TICKscript syntax
 
-TICKscript is case sensitive and uses Unicode. The TICKscript parser scans TICKscript code from top to bottom and left to right instantiating variables and nodes and then chaining or linking them together into pipelines as they are encountered.  When loading a TICKscript the parser checks that a chaining method called on a node is valid.  If an invalid chaining method is encountered the parser will throw an error with the message "no method or property &lt;identifier&gt; on &lt;node type&gt;".
+TICKscript is case sensitive and uses Unicode. The TICKscript parser scans TICKscript code from top to bottom and left to right instantiating variables and nodes and then chaining or linking them together into pipelines as they are encountered.  When loading a TICKscript the parser checks that a chaining method called on a node is valid.  If an invalid chaining method is encountered, the parser will throw an error with the message "no method or property &lt;identifier&gt; on &lt;node type&gt;".
 
 ## Code representation
 
@@ -65,10 +65,10 @@ Keywords are tokens that have special meaning within a language and therefore ca
 
 | **Word** | **Usage** |
 | :----|:------|
-| **TRUE** | The literal boolean value "true". |
-| **FALSE** | The literal boolean value "false". |
-| **AND**  | Standard boolean conjunction operator. |
-| **OR** | Standard boolean disjunction operator. |
+| **TRUE** | The literal Boolean value "true". |
+| **FALSE** | The literal Boolean value "false". |
+| **AND**  | Standard Boolean conjunction operator. |
+| **OR** | Standard Boolean disjunction operator. |
 | **lambda:** | Flags that what follows is to be interpreted as a lambda expression. |
 | **var** | Starts a variable declaration. |
 | **dbrp** | Starts a database declaration |
@@ -80,7 +80,7 @@ Since the set of native node types available in TICKscript is limited, each node
 
 TICKscript has support for traditional mathematical operators as well as a few which make sense in its data processing domain.
 
-**Table 2 &ndash; Standard Operators**
+**Table 2 &ndash; Standard operators**
 
 | **Operator** | **Usage** | **Examples** |
 |:-------------|:----------|:-------------|
@@ -102,7 +102,7 @@ TICKscript has support for traditional mathematical operators as well as a few w
 
 Standard operators are used in TICKscript and in Lambda expressions.
 
-**Table 3 &ndash; Chaining Operators**
+**Table 3 &ndash; Chaining operators**
 
 | **Operator** | **Usage** | **Examples** |
 |:-------------|:----------|:------------|
@@ -114,7 +114,7 @@ Chaining operators are used within expressions to define pipelines or pipeline s
 
 ## Variables and literals
 
-Variables in TICKscript are useful for storing and reusing values and for providing a friendly mnemonic for quickly understanding what a variable represents. They are typically declared along with the assignment of a literal value.  In a TICKscript intended to be used as a [Template Task](/kapacitor/v1.4/guides/template_tasks/) they can also be declared with simply a type identifier.
+Variables in TICKscript are useful for storing and reusing values and for providing a friendly mnemonic for quickly understanding what a variable represents. They are typically declared along with the assignment of a literal value.  In a TICKscript intended to be used as a [template task](/kapacitor/v1.4/guides/template_tasks/) they can also be declared with simply a type identifier.
 
 ### Variables
 
@@ -150,7 +150,7 @@ var critical = 3.0
 
 ### Literal values
 
-Literal values are parsed into instances of the types available in TICKscript.  They can be declared directly in method arguments or can be assigned to variables.  The parser interprets types based on context and creates instances of the following primitives: boolean, string, float, integer. Regular expressions, lists, lambda expressions, duration structures and nodes are also recognized.  The rules the parser uses to recognize a type are discussed in the following Types section.
+Literal values are parsed into instances of the types available in TICKscript.  They can be declared directly in method arguments or can be assigned to variables.  The parser interprets types based on context and creates instances of the following primitives: Boolean, string, float, integer. Regular expressions, lists, lambda expressions, duration structures and nodes are also recognized.  The rules the parser uses to recognize a type are discussed in the following Types section.
 
 #### Types
 
@@ -167,7 +167,7 @@ TICKscript recognizes five type identifiers.  These identifiers can be used dire
 | **lambda** | In a template task, declare a variable as a Lambda expression type. | `var crit lambda` |
 
 ##### Booleans
-Boolean values are generated using the boolean keywords: `TRUE` and `FALSE`.  Note that these keywords use all upper case letters.  The parser will throw an error when using lower case characters, e.g. `True` or `true`.
+Boolean values are generated using the Boolean keywords: `TRUE` and `FALSE`.  Note that these keywords use all upper case letters.  The parser will throw an error when using lower case characters, e.g. `True` or `true`.
 
 **Example 3 &ndash; Boolean literals**
 ```javascript
@@ -179,9 +179,10 @@ var true_bool = TRUE
 ...
 ```
 
-In Example 3 above the first line shows a simple assignment using a boolean literal.  The second example shows using the boolean literal `FALSE` in a method call.
+In Example 3 above the first line shows a simple assignment using a Boolean literal.  The second example shows using the Boolean literal `FALSE` in a method call.
 
 ##### Numerical types
+
 Any literal token containing only digits and optionally a decimal will lead to the generation of an instance of a numerical type.  TICKscript understands two numerical types based on Go: `int64` and `float64`.  Any numerical token containing a decimal point will result in the creation of a `float64` value.  Any numerical token that ends without containing a decimal point will result in the creation of an `int64` value.  If an integer is prefixed with the zero character, `0`, it is interpreted as an octal.
 
 **Example 4 &ndash; Numerical literals**
@@ -195,7 +196,7 @@ In Example 4 above `my_int` is of type `int64`, `my_float` is of type `float64` 
 
 ##### Duration literals
 
-Duration literals define a span of time.  Their syntax follows the same syntax present in [InfluxQL](https://docs.influxdata.com/influxdb/v1.3/query_language/spec/#literals).  A duration literal is comprised of two parts: an integer and a duration unit.  It is essentially an integer terminated by one or a pair of reserved characters, which represent a unit of time.
+Duration literals define a span of time.  Their syntax follows the same syntax present in [InfluxQL](/influxdb/v1.4/query_language/spec/#literals).  A duration literal is comprised of two parts: an integer and a duration unit.  It is essentially an integer terminated by one or a pair of reserved characters, which represent a unit of time.
 
 The following table presents the time units used in declaring duration types.
 
@@ -350,7 +351,7 @@ In Example 11 the first three lines show the assignment of regular expressions t
 
 ##### Lambda expressions as literals
 
-A lambda expression is a parameter representing a short easily understood function to be passed into a method call or held in a variable. It can wrap a boolean expression, a mathematical expression, a call to an internal function or a combination of these three.  Lambda expressions always operate on point data.  They are generally compact and as such are used as literals, which eventually get passed into node methods.  Internal functions that can be used in Lambda expressions are discussed in the sections [Type conversion](#type-conversion) and [Lambda Expressions](#lambda-expressions) below.  Lambda expressions are presented in detail in the topic [Lambda Expressions](/kapacitor/v1.4/tick/expr/).
+A lambda expression is a parameter representing a short easily understood function to be passed into a method call or held in a variable. It can wrap a Boolean expression, a mathematical expression, a call to an internal function or a combination of these three.  Lambda expressions always operate on point data.  They are generally compact and as such are used as literals, which eventually get passed into node methods.  Internal functions that can be used in Lambda expressions are discussed in the sections [Type conversion](#type-conversion) and [Lambda expressions](#lambda-expressions) below.  Lambda expressions are presented in detail in the topic [Lambda Expressions](/kapacitor/v1.4/tick/expr/).
 
 Lambda expressions begin with the token `lambda` followed by a colon, ':' &ndash; `lambda:`.
 
@@ -379,7 +380,7 @@ Example 12 above shows that a lambda expression can be directly assigned to a va
 
 ##### Nodes
 
-Like the simpler types, Node types are declared and can be assigned to variables.
+Like the simpler types, node types are declared and can be assigned to variables.
 
 **Example 13 &ndash; Node expressions**
 ```javascript
@@ -510,16 +511,16 @@ As mentioned in the section [String templates](#string-templates) it is possible
 ```
 In Example 18 above, the property method `.id()` uses the value of the tag in the data stream with the key `"host"` to set the part of the value of the id.  This value is then used in the property method `message()` as `.ID`.  This property method also access the value from the named result `"stat"`.
 
-For more specific information see the [Alert](/kapacitor/v1.4/nodes/alert_node/) node documentation.
+For more specific information, see [Alert node](/kapacitor/v1.4/nodes/alert_node/).
 
 ##### Type conversion
 
 Within lambda expressions it is possible to use stateless conversion functions to convert values between types.
 
-   * `bool()` - converts a string, int64 or float64 to boolean.
-   * `int()` - converts a string, float64, boolean or duration type to an int64.
-   * `float()` - converts a string, int64 or boolean to float64.
-   * `string()` - converts an int64, float64, boolean or duration value to a string.
+   * `bool()` - converts a string, int64 or float64 to Boolean.
+   * `int()` - converts a string, float64, Boolean or duration type to an int64.
+   * `float()` - converts a string, int64 or Boolean to float64.
+   * `string()` - converts an int64, float64, Boolean or duration value to a string.
    * `duration()` - converts an int64, float64 or string to a duration type.
 
 **Example 19 &ndash; Type conversion**
@@ -528,13 +529,13 @@ Within lambda expressions it is possible to use stateless conversion functions t
    |eval(lambda: float("total_error_responses")/float("total_responses") * 100.0)
 ```
 
-In Example 19 above the `float` conversion function is used to ensure that the calculated percentage uses floating point precision when the field values in the data series may have been stored as integers.
+In Example 19 above, the `float` conversion function is used to ensure that the calculated percentage uses floating point precision when the field values in the data series may have been stored as integers.
 
 ##### Numerical precision
 
 <!-- issue 1244 -->
 
-When writing floating point values in messages, or to InfluxDB it might be helpful to specify the decimal precision in order to make the values more readable or better comparable.  For example in the `messsage()` method of an `alert` node it is possible to "pipe" a value to a `printf` statement.
+When writing floating point values in messages, or to InfluxDB, it might be helpful to specify the decimal precision in order to make the values more readable or better comparable.  For example, in the `messsage()` method of an `alert` node it is possible to "pipe" a value to a `printf` statement.
 
 ```javascript
 |alert()
@@ -565,7 +566,7 @@ Example 20 accomplishes something similar to using `printf`.  The `usage_idle` v
 
 <!-- Issue 1244 -->
 
-As Kapacitor and TICKscripts can be used to write values into an InfluxDB database, it may be desirable, in some cases, to specify the time precision to be used.  One example occurs when downsizing data using the calculated mean.  The precision to be written could be set to a value coarser than the default up to and even surpassing the bucket size, i.e. the value set by a call to a method like `window.every()`.  Using a precision larger than the bucket size is not recommended.  Specifying time precision can bring storage and performance improvements.  The most common example occurs when working with the `InfluxDBOut` node, whose precision property can be set.  Note that the `InfluxDBOut` node defaults to the most precise precision, which is nanoseconds. It is important not to confuse _mathematical_ precision, which is used most commonly with field values, and _time_ precision which is specified for timestamps.
+As Kapacitor and TICKscripts can be used to write values into an InfluxDB database, it may be desirable, in some cases, to specify the time precision to be used.  One example occurs when downsizing data using the calculated mean.  The precision to be written could be set to a value coarser than the default up to and even surpassing the bucket size, i.e. the value set by a call to a method like `window.every()`.  Using a precision larger than the bucket size is not recommended.  Specifying time precision can bring storage and performance improvements.  The most common example occurs when working with the `InfluxDBOut` node, whose precision property can be set.  Note that the `InfluxDBOut` node defaults to the most precise precision, which is nanoseconds. It is important not to confuse _mathematical_ precision, which is used most commonly with field values, and _time_ precision, which is specified for timestamps.
 
 **Example 21 &ndash; Setting time precision with InfluxDBOut**
 ```javascript
@@ -588,7 +589,7 @@ stream
        .precision('s')
 ...
 ```
-In Example 21, taken from the guide topic [Continuous Query](/kapacitor/v1.4/guides/continuous_queries/), the time precision of the series to be written to the database "telegraf" as measurement "mean_cpu_idle" is set to the unit seconds.
+In Example 21, taken from the guide topic [Continuous queries](/kapacitor/v1.4/guides/continuous_queries/), the time precision of the series to be written to the database "telegraf" as measurement `mean_cpu_idle` is set to the unit seconds.
 
 Valid values for precision are the same as those used in InfluxDB.
 
@@ -604,22 +605,22 @@ Valid values for precision are the same as those used in InfluxDB.
 
 ## Statements
 
-There are two types of statements in TICKscript: Declarations and Expressions.  A declaration can declare either a variable or a database, with which the TICKscript will work.  Expressions express a pipeline (a.k.a chain) of method calls, which create processing nodes and set their properties.
+There are two types of statements in TICKscript: declarations and expressions.  A declaration can declare either a variable or a database, with which the TICKscript will work.  Expressions express a pipeline (a.k.a chain) of method calls, which create processing nodes and set their properties.
 
 ### Declarations
 
-TICKscript works with two types of declarations: Database declarations and Variable declarations.
+TICKscript works with two types of declarations: database declarations and variable declarations.
 
-A **Database declaration** begins with the keyword `dbrp` and is followed by two strings separated by a period.  The first string declares the default database, with which the script will be used.  The second string declares its retention policy.  Note that the database and retention policy can also be declared using the flag `-dbrp` when defining the task with the command `kapacitor define` on the command-line, so this statement is optional.  When used, the Database declaration statement should be the first declaration of a TICKscript.
+A **database declaration** begins with the keyword `dbrp` and is followed by two strings separated by a period.  The first string declares the default database, with which the script will be used.  The second string declares its retention policy.  Note that the database and retention policy can also be declared using the flag `-dbrp` when defining the task with the command `kapacitor define` on the command-line, so this statement is optional.  When used, the Database declaration statement should be the first declaration of a TICKscript.
 
-**Example 22 &ndash; A Database declaration.**
+**Example 22 &ndash; A database declaration**
 ```
 dbrp "telegraf"."autogen"
 ...
 ```
 Example 22 declares that the TICKscript is to be used against the database `telegraf` with its retention policy `autogen`.
 
-A **Variable declaration** begins with the `var` keyword followed by an identifier for the variable being declared.  An assignment operator follows with a literal right side value, which will set the type and value for the new variable.
+A **variable declaration** begins with the `var` keyword followed by an identifier for the variable being declared.  An assignment operator follows with a literal right side value, which will set the type and value for the new variable.
 
 **Example 23 &ndash; Typical declarations**
 ```javascript
@@ -643,7 +644,7 @@ var data = stream
         .database(db)
         .retentionPolicy(rp)
 ```
-In Example 24 the `data` variable holds the stream pipeline declared in the expression beginning with the node `stream`.
+In Example 24, the `data` variable holds the stream pipeline declared in the expression beginning with the node `stream`.
 
 ### Expressions
 
@@ -697,7 +698,7 @@ Example 26, taken from the example [mem_alert_batch.tick](https://github.com/inf
 
 ### Node creation
 
-With two exceptions (`stream` and `batch`) nodes always occur in pipeline expressions (chains), where they are created through chaining methods.  Chaining methods are generally identified using the node type name.  One notable exception to this is the InfluxQL node, which uses aliases.  See the section [Taxonomy of node types](#taxonomy-of-node-types) below.
+With two exceptions, (`stream` and `batch`) nodes always occur in pipeline expressions (chains), where they are created through chaining methods.  Chaining methods are generally identified using the node type name.  One notable exception to this is the InfluxQL node, which uses aliases.  See the section [Taxonomy of node types](#taxonomy-of-node-types) below.
 
 For each node type, the method that creates an instance of that type uses the same signature.  So if a `query` node creates an `eval` node and adds it to the chain, and if a `from` node can also create an `eval` node and add it to the chain, the chaining method creating a new `eval` node will accept the same arguments (e.g. one or more lambda expressions) regardless of which node created it.
 
@@ -844,13 +845,13 @@ Once the data set has been defined it can be passed to other nodes, which will p
    * [`kapacitorLoopback`](/kapacitor/v1.4/nodes/kapacitor_loopback_node/) - empty chaining method &ndash;  configured through property setters. It writes data back into the Kapacitor stream.
    * [`log`](/kapacitor/v1.4/nodes/log_node/) - empty chaining method. It relies on `level` and `prefix` properties for configuration. It logs all data that passes through it.
 
-**User Defined Functions**
+**User defined functions (UDFs)**
 
 User defined functions are nodes that implement functionality defined by user programs or scripts that run as separate processes and that communicate with Kapacitor over sockets or standard system data streams.
 
-   * [`UDF`](/kapacitor/v1.4/nodes/u_d_f_node/) - signature, properties and functionality defined by the user.  To learn about writing User Defined Functions, see the [User Defined Functions Webinar](https://www.influxdata.com/training/advanced-kapacitor-training-user-defined-functions-udfs/?ao_campid=70137000000JiJA) available at [Influx on-line University](https://www.influxdata.com/university/).
+   * [`UDF`](/kapacitor/v1.4/nodes/u_d_f_node/) - signature, properties and functionality defined by the user.  To learn about writing user defined functions, see the [User Defined Functions Webinar](https://www.influxdata.com/training/advanced-kapacitor-training-user-defined-functions-udfs/?ao_campid=70137000000JiJA) available at [Influx online University](https://www.influxdata.com/university/).
 
-**Internally used nodes - Do Not use**
+**Internally used nodes - Do not use**
 
    * [`noOp`](/kapacitor/v1.4/nodes/no_op_node/) - a helper node that performs no operations.  Do not use it!
 
@@ -867,7 +868,7 @@ SELECT {<FIELD_KEY> | <TAG_KEY> | <FUNCTION>([<FIELD_KEY>|<TAG_KEY])} FROM <DATA
    * The base `SELECT` clause can take one or more field or tag keys, or functions.  These can be combined with mathematical operations and literal values.  Their values or results will be added to the data frame and can be aliased with an `AS` clause.  The star, `*`, wild card can also be used to retrieve all tags and fields from a measurement.
        * When using the `AS` clause the alias identifier can be accessed later on in the TICKscript as a named result by using double quotes.
    * The `FROM` clause requires the database, retention policy and the measurement name from which the values will be selected.  Each of these tokens is separated by a dot. The values for the database and retention policy need to be set out using double quotes.
-   * The `WHERE` clause requires a conditional expression.  This may include `AND` and `OR` boolean operators as well as mathematical operations.
+   * The `WHERE` clause requires a conditional expression.  This may include `AND` and `OR` Boolean operators as well as mathematical operations.
 
 **Example 30 &ndash; A simple InfluxQL query statement**
 ```javascript
@@ -911,7 +912,7 @@ See the [InfluxQL](/influxdb/v1.3/query_language/) documentation for a complete 
 
 # Lambda expressions
 
-Lambda expressions occur in a number of chaining and property methods.  Two of the most common usages are in the creation of an `eval` node and in defining threshold properties on an `alert` node.  They are declared with the keyword "lambda" followed by a colon: `lambda:`.  They can contain mathematical and boolean operations as well as calls to a large library of internal functions.  With many nodes, their results can be captured by setting an `as` property on the node.
+Lambda expressions occur in a number of chaining and property methods.  Two of the most common usages are in the creation of an `eval` node and in defining threshold properties on an `alert` node.  They are declared with the keyword "lambda" followed by a colon: `lambda:`.  They can contain mathematical and Boolean operations as well as calls to a large library of internal functions.  With many nodes, their results can be captured by setting an `as` property on the node.
 
 The internal functions can be stateless, such as common mathematical and string manipulation functions, or they can be stateful, updating an internal value with each new call.  As of release 1.3 three stateful functions are provided.
 
@@ -959,7 +960,7 @@ var alert = data
 alert
   .log('/tmp/mem_alert_log.txt')
 ```
-Example 33 contains four lambda expressions.  The first expression is passed to the `eval` node.  It calls the internal stateful function `sigma`, into which it passes the named result `stat`, which is set using the `AS` clause in the query string of the `query` node.  Through the `.as()` setter of the `eval` node its result is named `sigma`.  Three other lambda expressions occur inside the threshold determining property methods of the `alert` node.  These lambda expressions also access the named results `stat` and `sigma` as well as variables declared at the start of the script.  They each define a series of boolean operations, which set the level of the alert message.
+Example 33 contains four lambda expressions.  The first expression is passed to the `eval` node.  It calls the internal stateful function `sigma`, into which it passes the named result `stat`, which is set using the `AS` clause in the query string of the `query` node.  Through the `.as()` setter of the `eval` node its result is named `sigma`.  Three other lambda expressions occur inside the threshold determining property methods of the `alert` node.  These lambda expressions also access the named results `stat` and `sigma` as well as variables declared at the start of the script.  They each define a series of Boolean operations, which set the level of the alert message.
 
 
 # Summary of variable use between syntax sub-spaces
@@ -1091,12 +1092,12 @@ stream
 ```
 > Note: Example 34 illustrates how an infinite loop might be created.  Please, DO NOT USE IT!
 
-The script in Example 34 could be used to define a task on the database `telegraf` with the retention policy `autogen`.  For example:
+The script in Example 34 could be used to define a task on the database `telegraf`, with the retention policy `autogen`.  For example:
 
 ```
 kapacitor define circular_task -type stream -tick circular_rewrite.tick  -dbrp telegraf.autogen
 ```
-In such a case the above script will loop infinitely adding a new data point with a new value for the field `n_cpus` until the task is stopped.
+In such a case, the above script will loop infinitely adding a new data point with a new value for the field `n_cpus` until the task is stopped.
 
 <!-- defect 589 -->
 

@@ -125,3 +125,72 @@ $(document).on('ready', function(){
   	.addClass($contentToInject.style)
   	.append($advertText,$ctaButton);
 });
+
+/*
+ * Add class to outbound title links on section landing pages
+ * Force external links to open in a new tab/window
+ * Handle headings without content
+ */
+
+$(document).ready( function(){
+	// Add arrow icon if h2 links go to a different doc
+  $('h2 a:not([href^="#"])').addClass('off-page');
+
+	// Force links to other sites open in a new tab/window
+	$('.article-content a[href^="http"]').attr('target', '_blank');
+
+	// Remove heading border if not followed by a paragraph
+	$('h2').each(function() {
+		var hasParagraph = $(this).next('p, ol, ul, table, code, pre').length
+		if(hasParagraph == 0) {
+			$(this).addClass('no-paragraph');
+		};
+	});
+});
+
+/*
+ * View in Chronograf button and settings
+ */
+
+$(document).ready( function(){
+
+	// Inject the "View in Chronograf" button html on page load
+	addChronografBtnHtml()
+
+	// Open Chronograf settings modal
+  $('.chronograf-url-settings').click(function() {
+		var chronografUrlValue = getChronografUrl()
+		openModal('#chronograf-url-modal');
+		// Update the value of the chronograf url field using the saved cookie
+		$('input#chronograf-url').val(chronografUrlValue)
+	})
+
+	// Close the modal by clicking anywhere but the modal
+	$('.modal-overlay').click(function() {
+		closeModal();
+	})
+
+	// Save Chronograf URL
+	$('#save-chronograf-url').submit(function(e){
+		e.preventDefault();
+		var newChronografUrl = $('input#chronograf-url').val()
+
+		// 1. Update cookie
+		updateChronografUrl(newChronografUrl);
+
+		// 2. Update html
+		updateChronografBtnHtml(newChronografUrl);
+
+		// 3. Button lifecycle
+		saveBtnLifecycle('.save-btn', 150)
+		setTimeout(function(){
+			closeModal();
+		}, 1000)
+
+	})
+
+	// Revert to default Chronograf URL
+	$('#default-chronograf-url').click(function() {
+		revertToDefault();
+	})
+})

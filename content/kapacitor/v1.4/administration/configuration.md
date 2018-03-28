@@ -14,7 +14,7 @@ menu:
  * [Configuring with The HTTP API](#configuration-with-the-http-api)
 
 Basic installation and startup of the Kapacitor service is covered in
-[Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting_started/).
+[Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting-started/).
 The basic principles of working with Kapacitor described there should be understood before continuing here.
 This document presents Kapacitor configuration in greater detail.
 
@@ -64,18 +64,19 @@ KAPACITOR_OPTS="-pidfile=/home/kapacitor/kapacitor.pid -log-file=/home/kapacitor
 The environment variable `KAPACITOR_OPTS` is one of a few special variables used
 by Kapacitor at startup.
 For more information on working with environment variables,
-see [Kapacitor Environment Variables](#kapacitor-environment-variables)
+see [Kapacitor environment variables](#kapacitor-environment-variables)
 below.
 
 ## The Kapacitor configuration file
 
-The current configuration can be extracted using the `config` command of the
-Kapacitor daemon.
+The default configuration can be displayed using the `config` command of the Kapacitor daemon.
 
 `$ kapacitord config`
 
 A sample configuration file is also available in the Kapacitor code base.
 The most current version can be accessed on [github](https://github.com/influxdata/kapacitor/blob/master/etc/kapacitor/kapacitor.conf).
+
+To get current configuration settings, you can use the Kapacitor HTTP API to get configuration values for settings that can be changed while the Kapacitor service is running. See [Retrieving the current configuration](/kapacitor/v1.4/working/api/#retrieving-the-current-configuration).
 
 ### TOML
 
@@ -115,7 +116,7 @@ The four basic properties of the Kapacitor service include:
    * `hostname`: String declaring the DNS hostname where the Kapacitor daemon runs.
    * `data_dir`: String declaring the file system directory where core Kapacitor data is stored.
    * `skip-config-overrides`: Boolean indicating whether or not to skip configuration overrides.
-   * `default-retention-policy`: String declaring the default retention policy to be used on the Influx database.
+   * `default-retention-policy`: String declaring the default retention policy to be used on the InfluxDB database.
 
 Table groupings and arrays of tables follow the basic properties and include essential and optional features,
 including specific alert handlers and mechanisms for service discovery and data scraping.
@@ -145,6 +146,8 @@ are defined in the `[http]` table.
   pprof-enabled = false
   https-enabled = false
   https-certificate = "/etc/ssl/influxdb-selfsigned.pem"
+  ### Use a separate private key location.
+  # https-private-key = ""
 ...
 ```
 
@@ -378,7 +381,7 @@ POSTing alerts to an HTTP endpoint.
 
 ##### Reporting
 
-Kapacitor will send usage statistics back to Influxdata.
+Kapacitor will send usage statistics back to InfluxData.
 This feature can be disabled or enabled in the `[reporting]` table grouping.
 
 **Example 9 &ndash; Reporting configuration**
@@ -394,7 +397,7 @@ This feature can be disabled or enabled in the `[reporting]` table grouping.
 
 ##### Stats
 
-Internal statistics about Kapacitor can also be emitted to an Influx database.
+Internal statistics about Kapacitor can also be emitted to an InfluxDB database.
 The collection frequency and the database to which the statistics are emitted
 can be configured in the `[stats]` table grouping.
 
@@ -418,7 +421,7 @@ can be configured in the `[stats]` table grouping.
 ...
 ```
 
-#### Optional Table Groupings
+#### Optional table groupings
 
 Optional table groupings are disabled by default and relate to specific features that can be leveraged by TICKscript nodes or used to discover and scrape information from remote locations.
 In the default configuration, these optional table groupings may be commented out or include a key `enabled` set to `false` (i.e., `enabled = false`).
@@ -775,7 +778,7 @@ command line options to `kapacitord` started by `systemd`.
 * `KAPACITOR_CONFIG_PATH`: Sets the path to the configuration file.
 * `KAPACITOR_URL`: Used by the client application `kapacitor` to locate
 the `kapacitord` service.
-* `KAPACITOR_UNSAFE_SSL`: A boolean used by the client application `kapacitor`
+* `KAPACITOR_UNSAFE_SSL`: A Boolean used by the client application `kapacitor`
 to skip verification of the `kapacitord` certificate when connecting over SSL.
 
 ### Mapping properties to environment variables

@@ -30,7 +30,7 @@ Where applicable, it links to outstanding issues on GitHub.
 
 **Data types**
 
-* [Why can't I query boolean field values?](#why-can-t-i-query-boolean-field-values)
+* [Why can't I query Boolean field values?](#why-can-t-i-query-boolean-field-values)
 * [How does InfluxDB handle field type discrepancies across shards?](#how-does-influxdb-handle-field-type-discrepancies-across-shards)
 * [What are the minimum and maximum integers that InfluxDB can store?](#what-are-the-minimum-and-maximum-integers-that-influxdb-can-store)
 * [What are the minimum and maximum timestamps that InfluxDB can store?](#what-are-the-minimum-and-maximum-timestamps-that-influxdb-can-store)
@@ -254,8 +254,8 @@ Note that you will need to fully qualify the measurement to query data in the no
 You can cancel a long-running interactive query from the CLI using `Ctrl+C`. To stop other long-running query that you see when using the [`SHOW QUERIES`](https://docs.influxdata.com/influxdb/v1.3/query_language/spec/#show-queries) command,
 you can use the [`KILL QUERY`](/influxdb/v1.4/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query) command to stop it.
 
-## Why can't I query boolean field values?
-Acceptable boolean syntax differs for data writes and data queries.
+## Why can't I query Boolean field values?
+Acceptable Boolean syntax differs for data writes and data queries.
 
 | Boolean syntax |  Writes | Queries  |
 -----------------------|-----------|--------------|
@@ -271,7 +271,7 @@ For example, `SELECT * FROM "hamlet" WHERE "bool"=True` returns all points with 
 
 ## How does InfluxDB handle field type discrepancies across shards?
 
-Field values can be floats, integers, strings, or booleans.
+Field values can be floats, integers, strings, or Booleans.
 Field value types cannot differ within a
 [shard](/influxdb/v1.4/concepts/glossary/#shard), but they can [differ](/influxdb/v1.4/write_protocols/line_protocol_reference/#example-7-attempt-to-write-a-string-to-a-field-that-previously-accepted-floats) across shards.
 
@@ -283,7 +283,7 @@ returns all field values **if** all values have the same type.
 If field value types differ across shards, InfluxDB first performs any
 applicable [cast](/influxdb/v1.4/query_language/data_exploration/#cast-operations)
 operations and then returns all values with the type that occurs first in the
-following list: float, integer, string, boolean.
+following list: float, integer, string, Boolean.
 
 If your data have field value type discrepancies, use the syntax
 `<field_key>::<type>` to query the different data types.
@@ -292,7 +292,7 @@ If your data have field value type discrepancies, use the syntax
 
 The measurement `just_my_type` has a single field called `my_field`.
 `my_field` has four field values across four different shards, and each value has
-a different data type (float, integer, string, and boolean).
+a different data type (float, integer, string, and Boolean).
 
 `SELECT *` returns only the float and integer field values.
 Note that InfluxDB casts the integer value to a float in the response.
@@ -311,7 +311,7 @@ InfluxDB outputs each value type in its own column with incremented column names
 Where possible, InfluxDB casts field values to another type;
 it casts the integer `7` to a float in the first column, and it
 casts the float `9.879034` to an integer in the second column.
-InfluxDB cannot cast floats or integers to strings or booleans.
+InfluxDB cannot cast floats or integers to strings or Booleans.
 ```
 SELECT "my_field"::float,"my_field"::integer,"my_field"::string,"my_field"::boolean FROM just_my_type
 
@@ -333,7 +333,7 @@ the field key.
 
 The measurement `just_my_type` has a single field called `my_field`.
 `my_field` has four field values across four different shards, and each value has
-a different data type (float, integer, string, and boolean).
+a different data type (float, integer, string, and Boolean).
 `SHOW FIELD KEYS` returns all four data types:
 
 ```
@@ -386,7 +386,7 @@ The `<field_key>::<type>` syntax supports casting field values from integers to
 floats or from floats to integers.
 See [Cast Operations](/influxdb/v1.4/query_language/data_exploration/#data-types-and-cast-operations)
 for an example.
-There is no way to cast a float or integer to a string or boolean (or vice versa).
+There is no way to cast a float or integer to a string or Boolean (or vice versa).
 
 We list possible workarounds for changing a field's data type below.
 Note that these workarounds will not update data that have already been

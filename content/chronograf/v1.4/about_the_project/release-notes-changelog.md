@@ -6,80 +6,115 @@ menu:
     parent: About the Project
 ---
 
+## v1.4.2.3 [2018-03-08]
+
+Bug Fixes
+
+* Include URL in Kapacitor connection creation requests.
+
+
+## v1.4.2.1 [2018-02-28]
+
+### Features
+
+* Prevent execution of queries in cells that are not in view on the Dashboard page.
+* Add an optional persistent legend which can toggle series visibility to dashboard cells.
+* Allow user to annotate graphs via UI or API.
+
+### UI improvements
+
+* Add ability to set a prefix and suffix on Single Stat and Gauge cell types.
+* Rename 'Create Alerts' page to 'Manage Tasks'; redesign page to improve clarity of purpose.
+
+### Bug fixes
+
+* Save only selected template variable values into dashboards for non-CSV template variables.
+* Use Generic APIKey for OAuth2 group lookup.
+* Fix bug in which resizing any cell in a dashboard causes a Gauge cell to resize.
+* Don't sort Single Stat & Gauge thresholds when editing threshold values.
+* Maintain y-axis labels in dashboard cells.
+* Deprecate `--new-sources` in CLI.
+
+## v1.4.1.3 [2018-02-14]
+
+### Bug fixes
+
+* Allow self-signed certificates for InfluxDB Enterprise meta nodes.
+
 ## v1.4.1.2 [2018-02-13]
 
-### Bug Fixes
-- Respect `basepath` when fetching server API routes
-- Set default `tempVar :interval:` with Data Explorer CSV download call.
-- Display series with value of `0` in a cell legend
+### Bug fixes
 
+* Respect `basepath` when fetching server API routes.
+* Set default `tempVar` `:interval`: with Data Explorer CSV download call.
+* Display series with value of `0` in a cell legend.
 
 ## v1.4.1.1 [2018-02-12]
 
 ### Features
 
-- Allow multiple event handlers per rule
-- Add "Send Test Alert" button to test Kapacitor alert configurations
-- Link to Kapacitor config panel from Alert Rule builder
-- Add auto-refresh widget to Hosts List page
-- Upgrade to Go 1.9.4 and Node 6.12.3
-- Allow users to delete themselves
-- Add All Users page, visible only to SuperAdmins
-- Introduce `chronoctl` binary for user CRUD operations
-- Introduce Mappings to allow control over new user organization assignments
+- Allow multiple event handlers per rule.
+- Add "Send Test Alert" button to test Kapacitor alert configurations.
+- Link to Kapacitor config panel from Alert Rule builder.
+- Add auto-refresh widget to Hosts List page.
+- Upgrade to Go 1.9.4 and Node 6.12.3.
+- Allow users to delete themselves.
+- Add All Users page, visible only to SuperAdmins.
+- Introduce `chronoctl` binary for user CRUD operations.
+- Introduce mappings to allow control over new user organization assignments.
 
-### UI Improvements
+### UI improvements
 
-- Clarify terminology surrounding InfluxDB & Kapacitor connections
-- Separate saving TICKscript from exiting editor page
-- Enable Save (⌘ + Enter) and Cancel (Escape) hotkeys in Cell Editor Overlay
-- Enable customization of Single Stat "Base Color"
+- Clarify terminology regarding InfluxDB and Kapacitor connections.
+- Separate saving TICKscript from exiting editor page.
+- Enable Save (`⌘ + Enter`) and Cancel (`Escape`) hotkeys in Cell Editor Overlay.
+- Enable customization of Single Stat "Base Color".
 
-### Bug Fixes
+### Bug fixes
 
-- Fix TICKscript Sensu alerts when no group by tags selected
-- Display 200 most-recent TICKscript log messages; prevent overlapping
-- Add `TO` to kapacitor SMTP config; improve config update error messages
-- Remove CLI options from `sysvinit` service file
-- Remove CLI options from `systemd` service file
-- Fix disappearance of text in Single Stat graphs during editing
-- Redirect to Alerts page after saving Alert Rule
+- Fix TICKscript Sensu alerts when no GROUP BY tags selected.
+- Display 200 most-recent TICKscript log messages; prevent overlapping.
+- Add `TO` to kapacitor SMTP config; improve config update error messages.
+- Remove CLI options from `sysvinit` service file.
+- Remove CLI options from `systemd` service file.
+- Fix disappearance of text in Single Stat graphs during editing.
+- Redirect to Alerts page after saving Alert Rule.
 
 ## v1.4.0.1 [2018-1-9]
 
 ### Features
 
-- Add separate CLI flag for canned sources, kapacitors, dashboards, and organizations
-- Add telegraf interval configuration
+* Add separate CLI flag for canned sources, Kapacitors, dashboards, and organizations.
+* Add Telegraf interval configuration.
 
-### Bug Fixes
+### Bug fixes
 
-- Allow insecure (self-signed) certificates for kapacitor and influxdb
-- Fix positioning of custom time indicator
+- Allow insecure (self-signed) certificates for Kapacitor and InfluxDB.
+- Fix positioning of custom time indicator.
 
 ## v1.4.0.0 [2017-12-22]
 
 ### Features
 
-* Add support for multiple organizations, multiple users with role-based access control, and private instances
+* Add support for multiple organizations, multiple users with role-based access control, and private instances.
 * Add Kapacitor logs to the TICKscript editor
 * Add time shift feature to DataExplorer and Dashboards
 * Add auto group by time to Data Explorer
 * Support authentication for Enterprise Meta Nodes
-* Add boolean thresholds for kapacitor threshold alerts
+* Add Boolean thresholds for kapacitor threshold alerts
 * Update kapacitor alerts to cast to float before sending to influx
 * Allow override of generic oauth2 keys for email
 
-### UI Improvements
+### UI improvements
 
 * Introduce customizable Gauge visualization type for dashboard cells
 * Improve performance of Hosts, Alert History, and TICKscript logging pages when there are many items to display
 * Add filtering by name to Dashboard index page
 * Improve performance of hoverline rendering
 
-### Bug Fixes
+### Bug fixes
 
-* Fix .jsdep step fails when LDFLAGS is exported
+* Fix `.jsdep` step fails when LDFLAGS is exported
 * Fix logscale producing console errors when only one point in graph
 * Fix 'Cannot connect to source' false error flag on Dashboard page
 * Add fractions of seconds to time field in csv export
@@ -106,247 +141,278 @@ menu:
 
 ## v1.3.10.0 [2017-10-24]
 
-### Bug Fixes
+### Bug fixes
 
-1. Improve the copy in the retention policy edit page.
-1. Fix `Could not connect to source` bug on source creation with unsafe-ssl.
-1. Fix when exporting `SHOW DATABASES` CSV has bad data.
-1. Fix not-equal-to highlighting in Kapacitor Rule Builder.
-1. Fix undescriptive error messages for database and retention policy creation.
-1. Fix drag and drop cancel button when writing data in the data explorer.
-1. Fix persistence of "SELECT AS" statements in queries.
+* Improve the copy in the retention policy edit page.
+* Fix `Could not connect to source` bug on source creation with unsafe-ssl.
+* Fix when exporting `SHOW DATABASES` CSV has bad data.
+* Fix not-equal-to highlighting in Kapacitor Rule Builder.
+* Fix undescriptive error messages for database and retention policy creation.
+* Fix drag and drop cancel button when writing data in the data explorer.
+* Fix persistence of "SELECT AS" statements in queries.
 
 ### Features
 
-1. Every dashboard can now have its own time range.
-1. Add CSV download option in dashboard cells.
-1. Implicitly prepend source URLs with `http://`
-1. Add support for graph zooming and point display on the millisecond-level.
-1. Add manual refresh button for Dashboard, Data Explorer, and Host Pages.
+* Every dashboard can now have its own time range.
+* Add CSV download option in dashboard cells.
+* Implicitly prepend source URLs with `http://`
+* Add support for graph zooming and point display on the millisecond-level.
+* Add manual refresh button for Dashboard, Data Explorer, and Host Pages.
 
-### UI Improvements
+### UI improvements
 
-1. Increase size of Cell Editor query tabs to reveal more of their query strings.
-1. Improve appearance of Admin Page tabs on smaller screens.
-1. Add cancel button to TICKscript editor.
-1. Redesign dashboard naming & renaming interaction.
-1. Redesign dashboard switching dropdown.
+* Increase size of Cell Editor query tabs to reveal more of their query strings.
+* Improve appearance of Admin Page tabs on smaller screens.
+* Add cancel button to TICKscript editor.
+* Redesign dashboard naming & renaming interaction.
+* Redesign dashboard switching dropdown.
 
 ## v1.3.9.0 [2017-10-06]
 
-### Bug Fixes
-1. Fix Data Explorer disappearing query templates in dropdown.
-1. Fix missing alert for duplicate db name.
-1. Chronograf shows real status for Windows hosts when metrics are saved in non-default db.
-1. Fix false error warning for duplicate Kapacitor name1. Fix unresponsive display options and query builder in dashboards.
+### Bug fixes
+
+* Fix Data Explorer disappearing query templates in dropdown.
+* Fix missing alert for duplicate db name.
+* Chronograf shows real status for Windows hosts when metrics are saved in non-default db.
+* Fix false error warning for duplicate Kapacitor name
+* Fix unresponsive display options and query builder in dashboards.
 
 ### Features
-1. Add `fill` options to data explorer and dashboard queries.
-1. Support editing kapacitor TICKScript.
-1. Introduce the TICKscript editor UI.
-1. Add .csv download button to the Data Explorer.
-1. Add Data Explorer InfluxQL query and location query synchronization, so queries can be shared via a URL.
-1. Able to switch InfluxDB sources on a per graph basis.
 
-### UI Improvements
-1. Require a second click when deleting a dashboard cell.
-1. Sort database list in Schema Explorer alphabetically.
-1. Improve usability of dashboard cell context menus.
-1. Move dashboard cell renaming UI into Cell Editor Overlay.
-1. Prevent the legend from overlapping graphs at the bottom of the screen.
-1. Add a "Plus" icon to every button with an Add or Create action for clarity and consistency.
-1. Make hovering over series smoother.
-1. Reduce the number of pixels per cell to one point per 3 pixels.
-1. Remove tabs from Data Explorer.
-1. Improve appearance of placeholder text in inputs.
-1. Add ability to use "Default" values in Source Connection form.
-1. Display name & port in SourceIndicator tool tip.
+* Add fill options to Data Explorer and dashboard queries.
+* Support editing kapacitor TICKScript.
+* Introduce the TICKscript editor UI.
+* Add CSV download button to the Data Explorer.
+* Add Data Explorer InfluxQL query and location query synchronization, so queries can be shared using a URL.
+* Able to switch InfluxDB sources on a per graph basis.
+
+### UI improvements
+
+* Require a second click when deleting a dashboard cell.
+* Sort database list in Schema Explorer alphabetically.
+* Improve usability of dashboard cell context menus.
+* Move dashboard cell renaming UI into Cell Editor Overlay.
+* Prevent the legend from overlapping graphs at the bottom of the screen.
+* Add a "Plus" icon to every button with an Add or Create action for clarity and consistency.
+* Make hovering over series smoother.
+* Reduce the number of pixels per cell to one point per 3 pixels.
+* Remove tabs from Data Explorer.
+* Improve appearance of placeholder text in inputs.
+* Add ability to use "Default" values in Source Connection form.
+* Display name & port in SourceIndicator tool tip.
 
 ## v1.3.8.3 [2017-09-29]
-### Bug Fixes
-1. Fix duration for single value and custom time ranges.
-1. Fix Data Explorer query templates dropdown disappearance.
-1. Fix no alert for duplicate db name.
-1. Fix unresponsive display options and query builder in dashboards.
+
+### Bug fixes
+
+* Fix duration for single value and custom time ranges.
+* Fix Data Explorer query templates dropdown disappearance.
+* Fix no alert for duplicate db name.
+* Fix unresponsive display options and query builder in dashboards.
 
 ## v1.3.8.2 [2017-09-22]
-### Bug Fixes
-1. Fix duration for custom time ranges.
+
+### Bug fixes
+
+* Fix duration for custom time ranges.
 
 ## v1.3.8.1 [2017-09-08]
 
-### Bug Fixes
-1. Fix return code on meta nodes when raft redirects to leader.
-1. Reduce points per graph to one point per 3 pixels.
+### Bug fixes
+
+* Fix return code on meta nodes when raft redirects to leader.
+* Reduce points per graph to one point per 3 pixels.
 
 ## v1.3.8.0 [2017-09-07]
 
-### Bug Fixes
-1. Fix the limit of 100 alert rules on alert rules page.
-1. Fix graphs when y-values are constant.
-1. Fix crosshair not being removed when user leaves graph.
-1. Fix inability to add kapacitor from source page on fresh install.
-1. Fix DataExplorer crashing if a field property is not present in the queryConfig.
-1. Fix the max y value of stacked graphs preventing display of the upper bounds of the chart.
-1. Fix for delayed selection of template variables using URL query params.
+### Bug fixes
+
+* Fix the limit of 100 alert rules on alert rules page.
+* Fix graphs when y-values are constant.
+* Fix crosshair not being removed when user leaves graph.
+* Fix inability to add kapacitor from source page on fresh install.
+* Fix DataExplorer crashing if a field property is not present in the queryConfig.
+* Fix the max y value of stacked graphs preventing display of the upper bounds of the chart.
+* Fix for delayed selection of template variables using URL query params.
 
 ### Features
-1. Add prefix, suffix, scale, and other y-axis formatting for cells in dashboards.
-1. Update the group by time when zooming in graphs.
-1. Add the ability to link directly to presentation mode in dashboards with the `present` boolean query parameter in the URL.
-1. Add the ability to select a template variable via a URL parameter.
 
-### UI Improvements
-1. Use line-stacked graph type for memory information.
-1. Improve cell sizes in Admin Database tables.
-1. Polish appearance of optional alert parameters in Kapacitor rule builder.
-1. Add active state for Status page navbar icon.
-1. Improve UX of navigation to a sub-nav item in the navbar.
+* Add prefix, suffix, scale, and other y-axis formatting for cells in dashboards.
+* Update the group by time when zooming in graphs.
+* Add the ability to link directly to presentation mode in dashboards with the `present` Boolean query parameter in the URL.
+* Add the ability to select a template variable via a URL parameter.
+
+### UI improvements
+
+* Use line-stacked graph type for memory information.
+* Improve cell sizes in Admin Database tables.
+* Polish appearance of optional alert parameters in Kapacitor rule builder.
+* Add active state for Status page navbar icon.
+* Improve UX of navigation to a sub-nav item in the navbar.
 
 
 ## v1.3.7.0 [2017-08-23]
 
-### Bug Fixes
- 1. Chronograf now renders on Internet Explorer (IE) 11.
- 1. Resolve Kapacitor config for PagerDuty via the UI.
- 1. Fix Safari display issues in the Cell Editor display options.
- 1. Fix uptime status on Windows hosts running Telegraf.
- 1. Fix console error for 'placing prop on div'.
- 1. Fix Write Data form upload button and add `onDragExit` handler.
- 1. Fix missing cell type (and consequently single-stat).
- 1. Fix regression and redesign drag & drop interaction.
- 1. Prevent stats in the legend from wrapping line.
- 1. Fix raw query editor in Data Explorer, not using selected time.
+### Bug fixes
+
+ * Chronograf now renders on Internet Explorer (IE) 11.
+ * Resolve Kapacitor config for PagerDuty via the UI.
+ * Fix Safari display issues in the Cell Editor display options.
+ * Fix uptime status on Windows hosts running Telegraf.
+ * Fix console error for 'placing prop on div'.
+ * Fix Write Data form upload button and add `onDragExit` handler.
+ * Fix missing cell type (and consequently single-stat).
+ * Fix regression and redesign drag & drop interaction.
+ * Prevent stats in the legend from wrapping line.
+ * Fix raw query editor in Data Explorer, not using selected time.
 
 ### Features
- 1. Improve 'new-sources' server flag example by adding 'type' key.
- 1. Add an input and validation to custom time range calendar dropdowns.
- 1. Add support for selecting template variables with URL params.
 
-### UI Improvements
- 1. Show "Add Graph" button on cells with no queries.
+ * Improve 'new-sources' server flag example by adding 'type' key.
+ * Add an input and validation to custom time range calendar dropdowns.
+ * Add support for selecting template variables with URL params.
+
+### UI improvements
+ * Show "Add Graph" button on cells with no queries.
 
 ## v1.3.6.1 [2017-08-14]
+
 **Upgrade Note** This release (1.3.6.1) fixes a possibly data corruption issue with dashboard cells' graph types. If you upgraded to 1.3.6.0 and visited any dashboard, once you have then upgraded to this release (1.3.6.1) you will need to manually reset the graph type for every cell via the cell's caret --> Edit --> Display Options. If you upgraded directly to 1.3.6.1, you should not experience this issue.
 
-### Bug Fixes
- 1. Fix inaccessible scroll bar in Data Explorer table.
- 1. Fix non-persistence of dashboard graph types.
+### Bug fixes
+
+ * Fix inaccessible scroll bar in Data Explorer table.
+ * Fix non-persistence of dashboard graph types.
 
 ### Features
- 1. Add y-axis controls to the API for layouts.
 
-### UI Improvements
- 1. Increase screen real estate of Query Maker in the Cell Editor Overlay.
+ * Add y-axis controls to the API for layouts.
+
+### UI improvements
+
+ * Increase screen real estate of Query Maker in the Cell Editor Overlay.
 
 ## v1.3.6.0 [2017-08-08]
 
-### Bug Fixes
- 1. Fix domain not updating in visualizations when changing time range manually.
- 1. Prevent console error spam from Dygraph's synchronize method when a dashboard has only one graph.
- 1. Guarantee UUID for each Alert Table key to prevent dropping items when keys overlap.
+### Bug fixes
+
+ * Fix domain not updating in visualizations when changing time range manually.
+ * Prevent console error spam from Dygraph's synchronize method when a dashboard has only one graph.
+ * Guarantee UUID for each Alert Table key to prevent dropping items when keys overlap.
 
 ### Features
- 1. Add a few time range shortcuts to the custom time range menu.
- 1. Add ability to edit a dashboard graph's y-axis bounds.
- 1. Add ability to edit a dashboard graph's y-axis label.
 
-### UI Improvements
- 1. Add spinner in write data modal to indicate data is being written.
- 1. Fix bar graphs overlapping.
- 1. Assign a series consistent coloring when it appears in multiple cells.
- 1. Increase size of line protocol manual entry in Data Explorer's Write Data overlay.
- 1. Improve error message when request for Status Page News Feed fails.
- 1. Provide affirmative UI choice for 'auto' in DisplayOptions with new toggle-based component.
+ * Add a few time range shortcuts to the custom time range menu.
+ * Add ability to edit a dashboard graph's y-axis bounds.
+ * Add ability to edit a dashboard graph's y-axis label.
+
+### UI improvements
+ * Add spinner in write data modal to indicate data is being written.
+ * Fix bar graphs overlapping.
+ * Assign a series consistent coloring when it appears in multiple cells.
+ * Increase size of line protocol manual entry in Data Explorer's Write Data overlay.
+ * Improve error message when request for Status Page News Feed fails.
+ * Provide affirmative UI choice for 'auto' in DisplayOptions with new toggle-based component.
 
 ## v1.3.5.0 [2017-07-27]
 
-### Bug Fixes
- 1. Fix z-index issue in dashboard cell context menu.
- 1. Clarify BoltPath server flag help text by making example the default path.
- 1. Fix cell name cancel not reverting to original name.
- 1. Fix typo that may have affected PagerDuty node creation in Kapacitor.
- 1. Prevent 'auto' GROUP BY as option in Kapacitor rule builder when applying a function to a field.
- 1. Prevent clipped buttons in Rule Builder, Data Explorer, and Configuration pages.
- 1. Fix JWT for the write path.
- 1. Disentangle client Kapacitor rule creation from Data Explorer query creation.
+### Bug fixes
+
+ * Fix z-index issue in dashboard cell context menu.
+ * Clarify BoltPath server flag help text by making example the default path.
+ * Fix cell name cancel not reverting to original name.
+ * Fix typo that may have affected PagerDuty node creation in Kapacitor.
+ * Prevent 'auto' GROUP BY as option in Kapacitor rule builder when applying a function to a field.
+ * Prevent clipped buttons in Rule Builder, Data Explorer, and Configuration pages.
+ * Fix JWT for the write path.
+ * Disentangle client Kapacitor rule creation from Data Explorer query creation.
 
 ### Features
- 1. View server generated TICKscripts.
- 1. Add the ability to select Custom Time Ranges in the Hostpages, Data Explorer, and Dashboards.
- 1. Clarify BoltPath server flag help text by making example the default path
- 1. Add shared secret JWT authorization to InfluxDB.
- 1. Add Pushover alert support.
- 1. Restore all supported Kapacitor services when creating rules, and add most optional message parameters.
 
-### UI Improvements
- 1. Polish alerts table in status page to wrap text less.
- 1. Specify that version is for Chronograf on Configuration page.
- 1. Move custom time range indicator on cells into corner when in presentation mode.
- 1. Highlight legend "Snip" toggle when active.
+ * View server generated TICKscripts.
+ * Add the ability to select Custom Time Ranges in the Hostpages, Data Explorer, and Dashboards.
+ * Clarify BoltPath server flag help text by making example the default path
+ * Add shared secret JWT authorization to InfluxDB.
+ * Add Pushover alert support.
+ * Restore all supported Kapacitor services when creating rules, and add most optional message parameters.
+
+### UI improvements
+
+ * Polish alerts table in status page to wrap text less.
+ * Specify that version is for Chronograf on Configuration page.
+ * Move custom time range indicator on cells into corner when in presentation mode.
+ * Highlight legend "Snip" toggle when active.
 
 ## v1.3.4.0 [2017-07-10]
 
-### Bug Fixes
- 1. Disallow writing to \_internal in the Data Explorer.
- 1. Add more than one color to Line+Stat graphs.
- 1. Fix updating Retention Policies in single-node InfluxDB instances.
- 1. Lock the width of Template Variable dropdown menus to the size of their longest option.
+### Bug fixes
+ * Disallow writing to \_internal in the Data Explorer.
+ * Add more than one color to Line+Stat graphs.
+ * Fix updating Retention Policies in single-node InfluxDB instances.
+ * Lock the width of Template Variable dropdown menus to the size of their longest option.
 
 ### Features
- 1. Add Auth0 as a supported OAuth2 provider.
- 1. Add ability to add custom links to User menu via server CLI or ENV vars.
- 1. Allow users to configure custom links on startup that will appear under the User menu in the sidebar.
- 1. Add support for Auth0 organizations.
- 1. Allow users to configure InfluxDB and Kapacitor sources on startup.
 
-### UI Improvements
- 1. Redesign Alerts History table on Status Page to have sticky headers.
- 1. Refresh Template Variable values on Dashboard page load.
- 1. Display current version of Chronograf at the bottom of Configuration page.
- 1. Redesign Dashboards table and sort them alphabetically.
- 1. Bring design of navigation sidebar in line with Branding Documentation.
+ * Add Auth0 as a supported OAuth2 provider.
+ * Add ability to add custom links to User menu via server CLI or ENV vars.
+ * Allow users to configure custom links on startup that will appear under the User menu in the sidebar.
+ * Add support for Auth0 organizations.
+ * Allow users to configure InfluxDB and Kapacitor sources on startup.
+
+### UI improvements
+
+ * Redesign Alerts History table on Status Page to have sticky headers.
+ * Refresh Template Variable values on Dashboard page load.
+ * Display current version of Chronograf at the bottom of Configuration page.
+ * Redesign Dashboards table and sort them alphabetically.
+ * Bring design of navigation sidebar in line with Branding Documentation.
 
 ## v1.3.3.0 [2017-06-19]
 
-### Bug Fixes
-  1. Prevent legend from flowing over window bottom bound
-  1. Prevent Kapacitor configurations from having the same name
-  1. Limit Kapacitor configuration names to 33 characters to fix display bug
+### Bug fixes
+
+  * Prevent legend from flowing over window bottom bound
+  * Prevent Kapacitor configurations from having the same name
+  * Limit Kapacitor configuration names to 33 characters to fix display bug
 
 ### Features
-  1. Synchronize vertical crosshair at same time across all graphs in a dashboard
-  1. Add automatic `GROUP BY (time)` functionality to dashboards
-  1. Add a Status Page with Recent Alerts bar graph, Recent Alerts table, News Feed, and Getting Started widgets
 
-### UI Improvements
-  1. When dashboard time range is changed, reset graphs that are zoomed in
-  1. [Bar graph](/chronograf/latest/troubleshooting/frequently-asked-questions/#bar) option added to dashboard
-  1. Redesign source management table to be more intuitive
-  1. Redesign [Line + Single Stat](/chronograf/latest/troubleshooting/frequently-asked-questions/#line-stat) cells to appear more like a sparkline, and improve legibility
+  * Synchronize vertical crosshair at same time across all graphs in a dashboard
+  * Add automatic `GROUP BY (time)` functionality to dashboards
+  * Add a Status Page with Recent Alerts bar graph, Recent Alerts table, News Feed, and Getting Started widgets
+
+### UI improvements
+
+  * When dashboard time range is changed, reset graphs that are zoomed in
+  * [Bar graph](/chronograf/latest/troubleshooting/frequently-asked-questions/#bar) option added to dashboard
+  * Redesign source management table to be more intuitive
+  * Redesign [Line + Single Stat](/chronograf/latest/troubleshooting/frequently-asked-questions/#line-stat) cells to appear more like a sparkline, and improve legibility
 
 
 ## v1.3.2.0 [2017-06-05]
 
-### Bug Fixes
-  1. Update the query config's field ordering to always match the input query
-  1. Allow users to add functions to existing Kapacitor rules
-  1. Fix logout menu item regression
-  1. Fix InfluxQL parsing with multiple tag values for a tag key
-  1. Fix load localStorage and warning UX on fresh Chronograf install
-  1. Show submenus when the alert notification is present
+### Bug fixes
+
+  * Update the query config's field ordering to always match the input query
+  * Allow users to add functions to existing Kapacitor rules
+  * Fix logout menu item regression
+  * Fix InfluxQL parsing with multiple tag values for a tag key
+  * Fix load localStorage and warning UX on fresh Chronograf install
+  * Show submenus when the alert notification is present
 
 ### Features
-  1. Add UI to the Data Explorer for [writing data to InfluxDB](/chronograf/latest/guides/transition-web-admin-interface/#writing-data)
 
-### UI Improvements
-  1. Make the enter and escape keys perform as expected when renaming dashboards
-  1. Improve copy on the Kapacitor configuration page
-  1. Reset graph zoom when the user selects a new time range
-  1. Upgrade to new version of Influx Theme, and remove excess stylesheets
-  1. Replace the user icon with a solid style
-  1. Disable query save in cell editor mode if the query does not have a database, measurement, and field
-  1. Improve UX of applying functions to fields in the query builder
+  * Add UI to the Data Explorer for [writing data to InfluxDB](/chronograf/latest/guides/transition-web-admin-interface/#writing-data)
+
+### UI improvements
+
+  * Make the enter and escape keys perform as expected when renaming dashboards
+  * Improve copy on the Kapacitor configuration page
+  * Reset graph zoom when the user selects a new time range
+  * Upgrade to new version of Influx Theme, and remove excess stylesheets
+  * Replace the user icon with a solid style
+  * Disable query save in cell editor mode if the query does not have a database, measurement, and field
+  * Improve UX of applying functions to fields in the query builder
 
 ## v1.3.1.0 [2017-05-22]
 
@@ -354,60 +420,66 @@ menu:
 
 In versions 1.3.1+, installing a new version of Chronograf automatically clears the localStorage settings.
 
-### Bug Fixes
-  1. Fix infinite spinner when `/chronograf` is a [basepath](/chronograf/latest/administration/configuration/#p-basepath)
-  1. Remove the query templates dropdown from dashboard cell editor mode
-  1. Fix the backwards sort arrows in table column headers
-  1. Make the logout button consistent with design
-  1. Fix the loading spinner on graphs
-  1. Filter out any template variable values that are empty, whitespace, or duplicates
-  1. Allow users to click the add query button after selecting singleStat as the [visualization type](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-visualization-types-does-chronograf-support)
-  1. Add a query for windows uptime - thank you, @brianbaker!
+### Bug fixes
+
+  * Fix infinite spinner when `/chronograf` is a [basepath](/chronograf/latest/administration/configuration/#p-basepath)
+  * Remove the query templates dropdown from dashboard cell editor mode
+  * Fix the backwards sort arrows in table column headers
+  * Make the logout button consistent with design
+  * Fix the loading spinner on graphs
+  * Filter out any template variable values that are empty, whitespace, or duplicates
+  * Allow users to click the add query button after selecting singleStat as the [visualization type](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-visualization-types-does-chronograf-support)
+  * Add a query for windows uptime - thank you, @brianbaker!
 
 ### Features
-  1. Add log [event handler](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf) - thank you, @mpchadwick!
-  1. Update Go (golang) vendoring to dep and committed vendor directory
-  1. Add autocomplete functionality to [template variable](/chronograf/latest/guides/dashboard-template-variables/) dropdowns
 
-### UI Improvements
-  1. Refactor scrollbars to support non-webkit browsers
-  1. Increase the query builder's default height in cell editor mode and in the data explorer
-  1. Make the [template variables](/chronograf/latest/guides/dashboard-template-variables/) manager more space efficient
-  1. Add page spinners to pages that did not have them
-  1. Denote which source is connected in the sources table
-  1. Use milliseconds in the InfluxDB dashboard instead of nanoseconds
-  1. Notify users when local settings are cleared
+  * Add log [event handler](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf) - thank you, @mpchadwick!
+  * Update Go (golang) vendoring to dep and committed vendor directory
+  * Add autocomplete functionality to [template variable](/chronograf/latest/guides/dashboard-template-variables/) dropdowns
+
+### UI improvements
+
+  * Refactor scrollbars to support non-webkit browsers
+  * Increase the query builder's default height in cell editor mode and in the data explorer
+  * Make the [template variables](/chronograf/latest/guides/dashboard-template-variables/) manager more space efficient
+  * Add page spinners to pages that did not have them
+  * Denote which source is connected in the sources table
+  * Use milliseconds in the InfluxDB dashboard instead of nanoseconds
+  * Notify users when local settings are cleared
 
 ## v1.3.0 [2017-05-09]
 
-### Bug Fixes
-  1. Fix the link to home when using the [`--basepath` option](/chronograf/latest/administration/configuration/#p-basepath)
-  1. Remove the notification to login on the login page
-  1. Support queries that perform math on functions
-  1. Prevent the creation of blank template variables
-  1. Ensure thresholds for Kapacitor Rule Alerts appear on page load
-  1. Update the Kapacitor configuration page when the configuration changes
-  1. Fix Authentication when using Chronograf with a set [basepath](/chronograf/latest/administration/configuration/#p-basepath)
-  1. Show red indicator on Hosts Page for an offline host
-  1. Support escaping from presentation mode in Safari
-  1. Re-implement level colors on the alerts page
-  1. Fix router bug introduced by upgrading to react-router v3.0
-  1. Show legend on [Line+Stat](/chronograf/latest/troubleshooting/frequently-asked-questions/#line-stat) visualization type
-  1. Prevent queries with `:dashboardTime:` from breaking the query builder
+### Bug fixes
+
+  * Fix the link to home when using the [`--basepath` option](/chronograf/latest/administration/configuration/#p-basepath)
+  * Remove the notification to login on the login page
+  * Support queries that perform math on functions
+  * Prevent the creation of blank template variables
+  * Ensure thresholds for Kapacitor Rule Alerts appear on page load
+  * Update the Kapacitor configuration page when the configuration changes
+  * Fix Authentication when using Chronograf with a set [basepath](/chronograf/latest/administration/configuration/#p-basepath)
+  * Show red indicator on Hosts Page for an offline host
+  * Support escaping from presentation mode in Safari
+  * Re-implement level colors on the alerts page
+  * Fix router bug introduced by upgrading to react-router v3.0
+  * Show legend on [Line+Stat](/chronograf/latest/troubleshooting/frequently-asked-questions/#line-stat) visualization type
+  * Prevent queries with `:dashboardTime:` from breaking the query builder
 
 ### Features
-  1. Add line-protocol proxy for InfluxDB/InfluxEnterprise Cluster data sources
-  1. Add `:dashboardTime:` to support cell-specific time ranges on dashboards
-  1. Add support for enabling and disabling [TICKscripts that were created outside Chronograf](/chronograf/latest/guides/advanced-kapacitor/#tickscript-management)
-  1. Allow users to delete Kapacitor configurations
 
-### UI Improvements
-  1. Save user-provided relative time ranges in cells
-  1. Improve how cell legends and options appear on dashboards
-  1. Combine the measurements and tags columns in the Data Explorer and implement a new design for applying functions to fields.
-  1. Normalize the terminology in Chronograf
-  1. Make overlays full-screen
-  1. Change the default global time range to past 1 hour
-  1. Add the Source Indicator icon to the Configuration and Admin pages
+  * Add line-protocol proxy for InfluxDB/InfluxEnterprise Cluster data sources
+  * Add `:dashboardTime:` to support cell-specific time ranges on dashboards
+  * Add support for enabling and disabling [TICKscripts that were created outside Chronograf](/chronograf/latest/guides/advanced-kapacitor/#tickscript-management)
+  * Allow users to delete Kapacitor configurations
+
+### UI improvements
+
+  * Save user-provided relative time ranges in cells
+  * Improve how cell legends and options appear on dashboards
+  * Combine the measurements and tags columns in the Data Explorer and implement a new design for applying functions to fields.
+  * Normalize the terminology in Chronograf
+  * Make overlays full-screen
+  * Change the default global time range to past 1 hour
+  * Add the Source Indicator icon to the Configuration and Admin pages
 
 > See Chronograf's [CHANGELOG](https://github.com/influxdata/chronograf/blob/master/CHANGELOG.md) on GitHub for information about the 1.2.0-beta releases.

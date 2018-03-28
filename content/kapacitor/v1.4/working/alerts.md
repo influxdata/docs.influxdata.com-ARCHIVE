@@ -28,7 +28,7 @@ passwords, it can also be configured using the [Kapacitor HTTP API](/kapacitor/v
 ## Push to handler
 
 Pushing messages to a handler is the basic approach presented in the
-[Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting_started/#trigger-alert-from-stream-data)
+[Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting-started/#trigger-alert-from-stream-data)
 guide. This involves simply calling the relevant chaining method made available
 through the `alert` node.  Messages can be pushed to `log()` files, the `email()`
 service, the `httpOut()` cache and many [third party services](#list-of-handlers).

@@ -692,18 +692,32 @@ GRANT READ ON "mydb" TO "jdoe"
 
 ### KILL QUERY
 
+Stop currently-running query.
+
 ```
 kill_query_statement = "KILL QUERY" query_id .
 ```
+Where `qid` is the query ID, displayed in the [`SHOW QUERIES`](/influxdb/v1.3/troubleshooting/query_management/#list-currently-running-queries-with-show-queries) output
+
+>***InfluxDB Enterprise clusters:*** To kill queries on a cluster, you need to specify the query ID (qid) and the TCP host (for example, `myhost:8088`),
+>available in the `SHOW QUERIES` output.
+>
+>```
+>KILL QUERY <qid> ON "<host>"
+>```
 
 #### Examples:
 
-​```sql
---- kill a query with the query_id 36
-KILL QUERY 36
 ```
-
-> **NOTE:** You can identify the `query_id` from the [`SHOW QUERIES`](#show-queries) output.
+-- kill query with qid of 36 on the local host
+> KILL QUERY 36
+>
+```
+```
+-- kill query on InfluxEnterprise cluster
+> KILL QUERY 53 ON "myhost:8088"
+>
+```
 
 ### REVOKE
 
