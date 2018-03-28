@@ -8,8 +8,6 @@ menu:
 
 Follow the links below for more information.
 
-## [What's new in Chronograf](/chronograf/latest/about_the_project/whats_new/)
-
 ## [Release Notes/Changelog](/chronograf/latest/about_the_project/release-notes-changelog/)
 
 ## [Contributing](https://github.com/influxdata/chronograf/blob/master/CONTRIBUTING.md)
