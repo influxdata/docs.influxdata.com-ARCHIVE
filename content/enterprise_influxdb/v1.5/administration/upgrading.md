@@ -181,7 +181,7 @@ The new configuration options are set to the default settings.
 2. Convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
 
   - When TSI is enabled, new shards use the TSI disk-based indexing. Existing shards must be converted to support TSI.
-  - Run the [influx_inspect buildtsi](influxdb/v1.5/tools/influx_inspect#influx-inspect-buildtsi) command to convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
+  - Run the [influx_inspect buildtsi](/influxdb/v1.5/tools/influx_inspect#influx-inspect-buildtsi) command to convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
 
 
 ### Step 6: Restart the `influxdb` service.
