@@ -2,17 +2,10 @@
 title: What's new in Chronograf 1.4
 menu:
   chronograf_1_4:
-    weight: 10
+    weight: 20
     parent: About the Project
 ---
 This page includes highlights of new and enhanced Chronograf functionality. See the [Release notes/changelog](/chronograf/v1.4/about_the_project/release-notes-changelog/) for a complete listing of new features, changes, and bug fixes.
-
-## Chronograf 1.4.3
-
-* [Table view](/chronograf/v1.4/guides/visualization-types/#table-view) added to visualization types.
-* [Annotations](/chronograf/v1.4/guides/annotations/) for graph visualization types.
-* [Okta OAuth 2.0 support](/chronograf/v1.4/administration/managing-security/#okta).
-* [Heroku OAuth 2.0 support](/chronograf/v1.4/administration/managing-security/#heroku)
 
 ## Chronograf 1.4.2
 
@@ -22,7 +15,8 @@ This page includes highlights of new and enhanced Chronograf functionality. See 
   - Smarter loading of dashboards. When dashboards are used, only visible graphs load and refresh. Graphs that you cannot see become dormant, improving performance and reducing strain on backend databses.
   - Visualizations
     - Set prefixes and suffixes on Single Stat and Gauge visualizations.
-- Alerts
+    - Annotations for graph visualization types.
+* Alerts
   - Alert Rules
     - Test alert handler configurations.
     - Alert Rule Builder
