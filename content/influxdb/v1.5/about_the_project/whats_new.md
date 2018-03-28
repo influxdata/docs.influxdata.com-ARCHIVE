@@ -3,6 +3,7 @@ title: What's new in InfluxDB 1.5
 menu:
   influxdb_1_5:
     name: What's new
+    identifier: whats_new
     weight: 20
     parent: about_the_project
 ---

@@ -3,7 +3,7 @@ title: About the project
 menu:
   chronograf_1_4:
     name: About the Project
-    weight: 40
+    weight: 10
 ---
 
 Follow the links below for more information.
@@ -13,7 +13,7 @@ Follow the links below for more information.
 ## [Contributing](https://github.com/influxdata/chronograf/blob/master/CONTRIBUTING.md)
 ## [CLA](https://www.influxdata.com/legal/cla/)
 ## [Licenses](https://github.com/influxdata/chronograf/blob/master/LICENSE)
-Chronograf  is released under the GNU Affero General Public License. This Free Software Foundation license is fairly new,
+Chronograf is released under the GNU Affero General Public License. This Free Software Foundation license is fairly new,
 and differs from the more widely known and understood GPL.
 
 Our goal with using AGPL, much like MongoDB, is to preserve the concept of copyleft with Chronograf.
