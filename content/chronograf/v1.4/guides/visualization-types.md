@@ -15,14 +15,13 @@ Chronograf's dashboard views support the following visualization types, which ca
 
 Each of the data visualization types and the available user controls are described below:
 
-* Line Graph
-* Stacked Graph
-* Step-Plot Graph
-* Single Stat
-* Line Graph + Single Stat
-* Bar Graph
-* Gauge
-* Table
+* [Line Graph](#line-graph)
+* [Stacked Graph](#stacked-graph)
+* [Step-Plot Graph](#step-plot-graph)
+* [Single Stat](#single-stat)
+* [Line Graph + Single Stat](#line-graph---single-stat)
+* [Bar Graph](#bar-graph)
+* [Gauge](#gauge)
 
 For information on adding and displaying annotations in graph views, see [Adding annotations to Chronograf views](/chronograf/v1.4/guides/annotations/).
 
@@ -144,33 +143,3 @@ To select this view, click the Gauge selector icon.
 #### Gauge example
 
 ![Gauge view](/img/chronograf/chrono-viz-gauge-example.png)
-
-
-### Table
-
-Displays selected time series data in a tabular format.
-
-![Table view](/img/chronograf/chrono-viz-table-view.png)
-
-#### Table Controls
-
-![Table Controls for Table view](/img/chronograf/chrono-viz-table-controls.png)
-
-In the **Table Controls** view, specify the following options to display time series data in the **Table** view:
-
-* Time Format
-  - Use the selection list to select
-* Time Axis
-  - S
-* Lock First Column
-* Customize Fields
-* Thresholds
-  - Add Threshold (button)
-* Base Color (selection list)
-* Threshold Coloring
-  - Background
-  - Text
-
-#### Table example
-
-![Table Controls for Table view](/img/chronograf/chrono-viz-table-example.png)
