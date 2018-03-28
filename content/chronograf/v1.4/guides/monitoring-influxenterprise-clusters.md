@@ -2,7 +2,7 @@
 title: Monitoring InfluxEnterprise clusters
 menu:
   chronograf_1_4:
-    weight: 60
+    weight: 70
     parent: Guides
 ---
 

@@ -2,7 +2,7 @@
 title: Using dashboard template variables
 menu:
   chronograf_1_4:
-    weight: 70
+    weight: 80
     parent: Guides
 ---
 
