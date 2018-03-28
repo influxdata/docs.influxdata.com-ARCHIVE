@@ -9,11 +9,11 @@ menu:
 
 ## Visualization types in Chronograf
 
-Chronograf's dashboard views support the following visualization types, which can be selected in the **Visualization Type** selection view like this:
+Chronograf's dashboard views support the following visualization types, which can be selected in the **Visualization Type** selection view.
 
-[Visualization Type selection view](/img/chronograf/chrono-viz-types-selector.png)
+[Visualization Type selector](/img/chronograf/chrono-viz-types-selector.png)
 
-Each of the data visualization types and the available user controls are described below:
+Each of the available visualization types and available user controls are described below.
 
 * [Line Graph](#line-graph)
 * [Stacked Graph](#stacked-graph)
@@ -30,27 +30,56 @@ For information on adding and displaying annotations in graph views, see [Adding
 
 The **Line Graph** view displays a time series in a line graph.
 
-![Line Graph view](/img/chronograf/chrono-viz-line-graph-selector.png)
+![Line Graph selector](/img/chronograf/chrono-viz-line-graph-selector.png)
 
 #### Line Graph Controls
 
-![Line Graph view](/img/chronograf/chrono-viz-line-graph-controls.png)
+![Line Graph Controls](/img/chronograf/chrono-viz-line-graph-controls.png)
+
+Use the **Line Graph Controls** to specify the following:
+
+* **Title**: y-axis title. Enter title, if using a custom title.
+  - **auto**: Enable or disable auto-setting.
+* **Min**: Minimum value.
+  - **auto**: Enable or disable auto-setting.
+* **Max**: Maximum value.  
+  - **auto**: Enable or disable auto-setting.
+* **Y-Value's Prefix**: Prefix to be added to y-value.
+* **Y-Value's Suffix**: Suffix to be added to y-value.
+* **Y-Value's Format**: Toggle between **K/M/B** (Thousand/Million/Billion) and **K/M/G** (Kilo/Mega/Giga).
+* **Scale**: Toggle between **Linear** and **Logarithmic**.
+* **Static Legend**: Toggle between **Show** and **Hide**.
 
 
 #### Line Graph example
 
-![Line Graph view](/img/chronograf/chrono-viz-line-graph-example.png)
+![Line Graph example](/img/chronograf/chrono-viz-line-graph-example.png)
 
 
 ### Stacked Graph
 
 The **Stacked Graph** view displays multiple time series bars as segments stacked on top of each other.
 
-![Stacked Graph view](/img/chronograf/chrono-viz-stacked-graph-selector.png)
+![Stacked Graph selector](/img/chronograf/chrono-viz-stacked-graph-selector.png)
 
 #### Stacked Graph Controls
 
-![Stacked Graph view](/img/chronograf/chrono-viz-stacked-graph-controls.png)
+![Stacked Graph Controls](/img/chronograf/chrono-viz-stacked-graph-controls.png)
+
+Use the **Stacked Graph Controls** to specify the following:
+
+* **Title**: y-axis title. Enter title, if using a custom title.
+  - **auto**: Enable or disable auto-setting.
+* **Min**: Minimum value.
+  - **auto**: Enable or disable auto-setting.
+* **Max**: Maximum value.
+  - **auto**: Enable or disable auto-setting.
+* **Y-Value's Prefix**: Prefix to be added to y-value.
+* **Y-Value's Suffix**: Suffix to be added to y-value.
+* **Y-Value's Format**: Toggle between **K/M/B** (Thousand/Million/Billion) and **K/M/G** (Kilo/Mega/Giga).
+* **Scale**: Toggle between **Linear** and **Logarithmic**.
+* **Static Legend**: Toggle between **Show** and **Hide**.
+
 
 #### Stacked Graph example
 
@@ -60,16 +89,88 @@ The **Stacked Graph** view displays multiple time series bars as segments stacke
 
 The **Step-Plot Graph** view displays a time series in a staircase graph.
 
-![Step-Plot Graph view](/img/chronograf/chrono-viz-step-graph-selector.png)
+![Step-Plot Graph selector](/img/chronograf/chrono-viz-step-graph-selector.png)
 
 #### Step-Plot Graph Controls
 
-![Step-Plot Graph view](/img/chronograf/chrono-viz-step-graph-controls.png)
+![Step-Plot Graph Controls](/img/chronograf/chrono-viz-step-graph-controls.png)
 
+Use the **Step-Plot Graph Controls** to specify the following:
+
+* **Title**: y-axis title. Enter title, if using a custom title.
+  - **auto**: Enable or disable auto-setting.
+* **Min**: Minimum value.
+  - **auto**: Enable or disable auto-setting.
+* **Max**: Maximum value.
+  - **auto**: Enable or disable auto-setting.
+* **Y-Value's Prefix**: Prefix to be added to y-value.
+* **Y-Value's Suffix**: Suffix to be added to y-value.
+* **Y-Value's Format**: Toggle between **K/M/B** (Thousand/Million/Billion) and **K/M/G** (Kilo/Mega/Giga).
+* **Scale**: Toggle between **Linear** and **Logarithmic**.
 
 #### Step-Plot Graph example
 
 ![Step-Plot Graph view](/img/chronograf/chrono-viz-step-graph-example.png)
+
+### Bar Graph
+
+The **Bar Graph** view displays the specified time series using a bar chart.
+
+To select this view, click the Bar Graph selector icon.
+
+![Bar Graph selector](/img/chronograf/chrono-viz-bar-graph-selector.png)
+
+#### Bar Graph Controls
+
+![Bar Graph Controls](/img/chronograf/chrono-viz-bar-graph-controls.png)
+
+Use the **Bar Graph Controls** to specify the following:
+
+* **Title**: y-axis title. Enter title, if using a custom title.
+  - **auto**: Enable or disable auto-setting.
+* **Min**: Minimum value.
+  - **auto**: Enable or disable auto-setting.
+* **Max**: Maximum value.
+  - **auto**: Enable or disable auto-setting.
+* **Y-Value's Prefix**: Prefix to be added to y-value.
+* **Y-Value's Suffix**: Suffix to be added to y-value.
+* **Y-Value's Format**: Toggle between **K/M/B** (Thousand/Million/Billion) and **K/M/G** (Kilo/Mega/Giga).
+* **Scale**: Toggle between **Linear** and **Logarithmic**.
+
+#### Bar Graph example
+
+![Bar Graph view](/img/chronograf/chrono-viz-bar-graph-example.png)
+
+
+### Line Graph + Single Stat
+
+The **Line Graph + Single Stat** view displays the specified time series in a line graph and overlays the single most recent value as a large numeric value.
+
+To select this view, click the **Line Graph + Single Stat** view option.
+
+![Line Graph + Single Stat selector](/img/chronograf/chrono-viz-line-graph-single-stat-selector.png)
+
+#### Line Graph + Single Stat Controls
+
+![Line Graph + Single Stat Controls](/img/chronograf/chrono-viz-line-graph-single-stat-controls.png)
+
+Use the **Line Graph + Single Stat Controls** to specify the following:
+
+* **Title**: y-axis title. Enter title, if using a custom title.
+  - **auto**: Enable or disable auto-setting.
+* **Min**: Minimum value.
+  - **auto**: Enable or disable auto-setting.
+* **Max**: Maximum value.
+  - **auto**: Enable or disable auto-setting.
+* **Y-Value's Prefix**: Prefix to be added to y-value.
+* **Y-Value's Suffix**: Suffix to be added to y-value.
+* **Y-Value's Format**: Toggle between **K/M/B** (Thousand/Million/Billion) and **K/M/G** (Kilo/Mega/Giga).
+* **Scale**: Toggle between **Linear** and **Logarithmic**.
+
+#### Line Graph + Single Stat example
+
+![Line Graph + Single Stat example](/img/chronograf/chrono-viz-line-graph-single-stat-example.png)
+
 
 ### Single Stat
 
@@ -85,48 +186,15 @@ For example, if a query's `SELECT` clause is `SELECT "chronogiraffe","chronelda"
 
 #### Single Stat Controls
 
-Use the **Single Stat Controls** panel to specify one or more thresholds
+Use the **Single Stat Controls** panel to specify one or more thresholds:
 
-**To specify a threshold:**
+* **Add Threshold**: Button to add a new threshold.
+* **Base Color**: Select a base, or background, color from the selection list.
+  * Color options: Ruby, Fire, Curacao, Tiger, Pineapple, Thunder, Honeydew, Rainforest, Viridian, Ocean, Pool, Laser (default), Planet, Star, Comet, Pepper, Graphite, White, and Castle.
+* **Prefix**: Prefix. For example, `%`, `MPH`, etc.
+* **Suffix**: Suffix.  For example, `%`, `MPH`, etc.
+* Threshold Coloring: Toggle between **Background** and *Text
 
-1. Select the **Base Color** you want in the selection list.
-  * Options include: Ruby, Fire, Curacao, Tiger, Pineapple, Thunder, Honeydew, Rainforest, Viridian, Ocean, Pool, Laser (default), Planet, Star, Comet, Pepper, Graphite, White, and Castle.
-2. [Optional] Select .
-
-
-### Line Graph + Single Stat
-
-The **Line Graph + Single Stat** view displays the specified time series in a line graph and overlays the single most recent value as a large numeric value.
-
-To select this view, click the **Line Graph + Single Stat** view option.
-
-![Line Graph + Single Stat view](/img/chronograf/chrono-viz-line-graph-single-stat-selector.png)
-
-#### Line Graph + Single Stat Controls
-
-![Line Graph + Single Stat Controls](/img/chronograf/chrono-viz-line-graph-single-stat-controls.png)
-
-In the **Line Graph + Single Stat Controls** panel that appears,
-
-#### Line Graph + Single Stat example
-
-![Line Graph + Single Stat example](/img/chronograf/chrono-viz-line-graph-single-stat-example.png)
-
-### Bar Graph
-
-The **Bar Graph** view displays the specified time series using a bar chart.
-
-To select this view, click the Bar Graph selector icon.
-
-![Bar Graph view](/img/chronograf/chrono-viz-bar-graph-selector.png)
-
-#### Bar Graph Controls
-
-![Bar Graph Controls](/img/chronograf/chrono-viz-bar-graph-controls.png)
-
-#### Bar Graph example
-
-![Bar Graph view](/img/chronograf/chrono-viz-bar-graph-example.png)
 
 ### Gauge
 
@@ -139,6 +207,16 @@ To select this view, click the Gauge selector icon.
 #### Gauge Controls
 
 ![Gauge view](/img/chronograf/chrono-viz-gauge-controls.png)
+
+Use the **Gauge Controls** to specify the following:
+
+* **Add Threshold**: Click button to add a threshold.
+* **Min**: Minimum value for the threshold.
+  - Select color to display. Selection list options include: Laser (default), Ruby, Fire, Curacao, Tiger, Pineapple, Thunder, and Honeydew.
+* **Max**: Maximum value for the threshold.
+  - Select color to display. Selection list options include: Laser (default), Ruby, Fire, Curacao, Tiger, Pineapple, Thunder, and Honeydew.
+* **Prefix**: Prefix. For example, `%`, `MPH`, etc.
+* **Suffix**: Suffix.  For example, `%`, `MPH`, etc.
 
 #### Gauge example
 
