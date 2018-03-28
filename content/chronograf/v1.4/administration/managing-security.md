@@ -49,7 +49,7 @@ export TOKEN_SECRET=Super5uperUdn3verGu355!
 ```
 
 **JWKS Signature Verification**
-If the provider implements OpenID Connect with RS256 signatures (as Microsoft AD FS does), you need to enable id_token support and provide a JWKS document (holding the certificate chain) so we can validate the RSA signatures against. These certificate chain is regularly rolled over (when the certificates expire), so we'll fetch it from the JWKS_URL on demand.
+If the provider implements OpenID Connect with RS256 signatures (as Microsoft AD FS does), you need to enable `id_token` support and provide a JWKS document (holding the certificate chain), to validate the RSA signatures against. This certificate chain is regularly rolled over (when the certificates expire), so it is fetched from the JWKS_URL on demand.
 
 **Example:**
 
