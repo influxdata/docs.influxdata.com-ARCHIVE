@@ -38,13 +38,6 @@ For friendlier documentation, see the guides on
 
 The list of client libraries for interacting with InfluxDB.
 
-## [Web Admin Interface](/influxdb/v1.4/tools/web_admin/)
-
-Starting with version 1.3, the web admin interface is no longer available as a part of InfluxDB.
-The interface does not run on port `8083` and InfluxDB ignores the `[admin]` section in the configuration file if that section is present.
-[Chronograf](/chronograf/latest/) replaces the web admin interface with improved tooling for querying data, writing data, and database management.
-See [Chronograf's transition guide](/chronograf/latest/guides/transition-web-admin-interface/) for more information.
-
 ## [Influx Inspect](/influxdb/v1.4/tools/influx_inspect/)
 
 Influx Inspect is a tool designed to view detailed information about on disk shards, as well as export data from a shard to line protocol that can be inserted back into the database.

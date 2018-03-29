@@ -1,17 +1,41 @@
 ---
-title: Release notes/changelog
+title: Release notes
 menu:
   chronograf_1_4:
-    weight: 20
+    weight: 10
     parent: About the Project
 ---
 
+## v1.4.3.0 [2018-3-28]
+
+### Features
+
+* Add unsafe SSL to Kapacitor UI configuration
+* Add server flag to grant SuperAdmin status to users authenticating from a specific Auth0 organization
+
+### UI Improvements
+
+* Redesign system notifications
+
+### Bug Fixes
+
+* Fix Heroku OAuth 2.0 provider support
+* Fix error reporting in Data Explorer
+* Fix Okta OAuth 2.0 provider support
+* Change hover text on delete mappings confirmation button to 'Delete'
+* Automatically add graph type 'line' to any graph missing a type
+* Fix hanging browser on docker host dashboard
+* Fix Kapacitor Rules task enabled checkboxes to only toggle exactly as clicked
+* Prevent Multi-Select Dropdown in InfluxDB Admin Users and Roles tabs from losing selection state
+* Fix intermittent missing fill from graphs
+* Support custom time range in annotations API wrapper
+
+
 ## v1.4.2.3 [2018-03-08]
 
-Bug Fixes
+### Bug fixes
 
-* Include URL in Kapacitor connection creation requests.
-
+*  Include URL in Kapacitor connection creation requests.
 
 ## v1.4.2.1 [2018-02-28]
 

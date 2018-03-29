@@ -102,17 +102,6 @@ SectionPagesMenu = "products"
     url = "/influxdb/v1.5/external_resources/"
   # InfluxDB v1.5 Sub-Menu - About
 [[menu.influxdb_1_5]]
-  name = "Release notes/changelog"
-  identifier = "release_notes"
-  weight = 10
-  url = "https://github.com/influxdb/influxdb/blob/master/CONTRIBUTING.md"
-  parent = "about_the_project"
-[[menu.influxdb_1_5]]
-  name = "What's new"
-  identifier = "whats_new"
-  weight = 20
-  parent = "about_the_project"
-[[menu.influxdb_1_5]]
   name = "Contributing"
   identifier = "contributing"
   weight = 30
