@@ -3,6 +3,7 @@ title: Release notes/changelog
 menu:
   influxdb_1_5:
     weight: 10
+    identifier: release_notes
     parent: about_the_project
 ---
 
