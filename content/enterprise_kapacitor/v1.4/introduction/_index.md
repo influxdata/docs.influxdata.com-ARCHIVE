@@ -4,6 +4,7 @@ title: Introducing Kapacitor Enterprise
 menu:
   enterprise_kapacitor_1_4:
     name: Introduction
+    weight: 1
 ---
 
 The introductory documentation includes all the information you need to get up

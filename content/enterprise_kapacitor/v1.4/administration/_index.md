@@ -23,4 +23,4 @@ Enterprise Influx DB, as well as how to secure Enterprise Kapacitor and its endp
 ## [Authentication and Authroization](/enterprise_kapacitor/v1.4/administration/auth/)
 
 Presents Authentication and Authorization mechanisms of the Enterprise TICK stack, with
-a special focus on how they are used in Enterprise Kapacitor. 
+a special focus on how they are used in Enterprise Kapacitor.
