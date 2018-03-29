@@ -451,7 +451,7 @@ If set to `false` it will make it substantially more difficult to diagnose issue
 
 Environment variable: `INFLUXDB_MONITOR_STORE_ENABLED`
 
-### `store-database = "\_internal"`
+### `store-database = "_internal"`
 
 The destination database for recorded statistics.
 
