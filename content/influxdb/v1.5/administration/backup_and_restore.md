@@ -31,7 +31,7 @@ The online backup and restore processes execute over a TCP connection to the dat
 
 **To enable the port for the backup and restore service:**
 
-1. At the root level of the InfluxDB config file (`influxdb.conf`), uncomment the [`bind-address` configuration setting](/influxdb/v1.4/administration/config/#bind-address-127-0-0-1-8088) on the remote node.
+1. At the root level of the InfluxDB config file (`influxdb.conf`), uncomment the [`bind-address` configuration setting](/influxdb/v1.5/administration/config/#bind-address-127-0-0-1-8088) on the remote node.
 
 2. Update the `bind-address` value to `<remote-node-IP>:8088`
 
@@ -153,7 +153,7 @@ Optional arguments are enclosed in brackets.
 InfluxDB OSS has the ability to snapshot an instance at a point-in-time and restore it.
 All backups are full backups; incremental backups are not supported.
 Two types of data can be backed up, the metastore and the metrics themselves.
-The [metastore](/influxdb/v1.4/concepts/glossary/#metastore) is backed up in its entirety.
+The [metastore](/influxdb/v1.5/concepts/glossary/#metastore) is backed up in its entirety.
 The metrics are backed up on a per-database basis in an operation separate from the metastore backup.
 
 #### Backing up the metastore
@@ -198,7 +198,7 @@ Optional flags also include:
 
 - `-retention <retention-policy-name>`
   - This flag can be used to backup a specific retention policy. For more information on retention policies, see
-  [Retention policy management](/influxdb/v1.4/query_language/database_management/#retention-policy-management). If unspecified, all retention policies will be backed up.
+  [Retention policy management](/influxdb/v1.5/query_language/database_management/#retention-policy-management). If unspecified, all retention policies will be backed up.
 
 - `-shard <shard ID>` - This flag can be used to backup a specific
   shard ID. To see which shards are available, you can run the command
