@@ -16,6 +16,8 @@ menu:
   * [GitHub](#github)
   * [Google](#google)
   * [Auth0](#auth0)
+  * [Heroku](#heroku)
+  * [Okta](#okta)
   * [Generic](#generic)
 * [Configuring authentication duration](#configuring-authentication-duration)
 * [TLS (Transport Layer Security) and HTTPS](#tls--transport-layer-security-and-https)
@@ -42,11 +44,7 @@ To configure any of the supported OAuth 2.0 providers to work with Chronograf, y
 
 Set the value of the TOKEN_SECRET environment variable to a secure, arbitrary string. Chronograf will use this secret to generate the JWT Signature for all access tokens.
 
-**Example:**
-
-```sh
-export TOKEN_SECRET=Super5uperUdn3verGu355!
-```
+**Example:** `TOKEN_SECRET=Super5uperUdn3verGu355!`
 
 > ***InfluxEnterprise clusters:*** If you are running multiple Chronograf servers in a high availability configuration, set the `TOKEN_SECRET` environment variable on each server to ensure that users can stay logged in.
 
