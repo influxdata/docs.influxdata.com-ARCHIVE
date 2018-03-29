@@ -28,5 +28,5 @@ It compiles into a single binary with no external dependencies.
 * Retention policies efficiently auto-expire stale data.
 * Continuous queries automatically compute aggregate data to make frequent queries more efficient.
 
-However, the open source edition of InfluxDB runs on a single node. If you require a high-availability setup
+However, InfluxDB OSS runs on a single node. If you require a high-availability clustering
 to eliminate a single point of failure, consider the [InfluxDB Enterprise Edition](https://docs.influxdata.com/influxdb/v1.4/high_availability/).
