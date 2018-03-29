@@ -46,12 +46,7 @@ Chronograf uses the hostnames in the Telegraf data to populate the Host List pag
 
 #### Step 1: Download and install InfluxDB
 
-On a server that is separate from your InfluxEnterprise cluster, download and install InfluxDB OSS:
-
-```
-~# wget https://dl.influxdata.com/influxdb/releases/influxdb_1.4.0_amd64.deb
-~# sudo dpkg -i influxdb_1.4.0_amd64.deb
-```
+InfluxDB can be downloaded from the [InfluxData downloads page](https://portal.influxdata.com/downloads).
 
 #### Step 2: Enable authentication
 
