@@ -40,9 +40,9 @@ Use the **Line Graph Controls** to specify the following:
 
 * **Title**: y-axis title. Enter title, if using a custom title.
   - **auto**: Enable or disable auto-setting.
-* **Min**: Minimum value.
+* **Min**: Minimum y-axis value.
   - **auto**: Enable or disable auto-setting.
-* **Max**: Maximum value.  
+* **Max**: Maximum y-axis value.  
   - **auto**: Enable or disable auto-setting.
 * **Y-Value's Prefix**: Prefix to be added to y-value.
 * **Y-Value's Suffix**: Suffix to be added to y-value.
@@ -70,9 +70,9 @@ Use the **Stacked Graph Controls** to specify the following:
 
 * **Title**: y-axis title. Enter title, if using a custom title.
   - **auto**: Enable or disable auto-setting.
-* **Min**: Minimum value.
+* **Min**: Minimum y-axis value.
   - **auto**: Enable or disable auto-setting.
-* **Max**: Maximum value.
+* **Max**: Maximum y-axis value.
   - **auto**: Enable or disable auto-setting.
 * **Y-Value's Prefix**: Prefix to be added to y-value.
 * **Y-Value's Suffix**: Suffix to be added to y-value.
@@ -101,9 +101,9 @@ Use the **Step-Plot Graph Controls** to specify the following:
 
 * **Title**: y-axis title. Enter title, if using a custom title.
   - **auto**: Enable or disable auto-setting.
-* **Min**: Minimum value.
+* **Min**: Minimum y-axis value.
   - **auto**: Enable or disable auto-setting.
-* **Max**: Maximum value.
+* **Max**: Maximum y-axis value.
   - **auto**: Enable or disable auto-setting.
 * **Y-Value's Prefix**: Prefix to be added to y-value.
 * **Y-Value's Suffix**: Suffix to be added to y-value.
@@ -131,9 +131,9 @@ Use the **Bar Graph Controls** to specify the following:
 
 * **Title**: y-axis title. Enter title, if using a custom title.
   - **auto**: Enable or disable auto-setting.
-* **Min**: Minimum value.
+* **Min**: Minimum y-axis value.
   - **auto**: Enable or disable auto-setting.
-* **Max**: Maximum value.
+* **Max**: Maximum y-axis value.
   - **auto**: Enable or disable auto-setting.
 * **Y-Value's Prefix**: Prefix to be added to y-value.
 * **Y-Value's Suffix**: Suffix to be added to y-value.
@@ -161,9 +161,9 @@ Use the **Line Graph + Single Stat Controls** to specify the following:
 
 * **Title**: y-axis title. Enter title, if using a custom title.
   - **auto**: Enable or disable auto-setting.
-* **Min**: Minimum value.
+* **Min**: Minimum y-axis value.
   - **auto**: Enable or disable auto-setting.
-* **Max**: Maximum value.
+* **Max**: Maximum y-axis value.
   - **auto**: Enable or disable auto-setting.
 * **Y-Value's Prefix**: Prefix to be added to y-value.
 * **Y-Value's Suffix**: Suffix to be added to y-value.
@@ -199,7 +199,7 @@ Use the **Single Stat Controls** panel to specify one or more thresholds:
   * Color options: Ruby, Fire, Curacao, Tiger, Pineapple, Thunder, Honeydew, Rainforest, Viridian, Ocean, Pool, Laser (default), Planet, Star, Comet, Pepper, Graphite, White, and Castle.
 * **Prefix**: Prefix. For example, `%`, `MPH`, etc.
 * **Suffix**: Suffix.  For example, `%`, `MPH`, etc.
-* Threshold Coloring: Toggle between **Background** and *Text
+* Threshold Coloring: Toggle between **Background** and **Text**
 
 
 ### Gauge
