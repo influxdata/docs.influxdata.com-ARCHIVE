@@ -66,11 +66,3 @@ unavailable data nodes.
 
 Any replication factor greater than two gives you additional fault tolerance and
 query capacity within the cluster.
-
-## web console
-
-Legacy user interface for the InfluxDB Enterprise cluster.
-
-This has been deprecated and the suggestion is to use [Chronograf](/chronograf/latest/introduction/).
-
-If you are transitioning from the Enterprise Web Console to Chronograf and helpful [transition guide](/chronograf/latest/guides/transition-web-admin-interface/) is available.

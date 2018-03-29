@@ -2,7 +2,7 @@
 title: Configuring Chronograf
 menu:
   chronograf_1_4:
-    name: Configuring Chronograf
+    name: Configuring
     weight: 20
     parent: Administration
 ---
@@ -19,6 +19,11 @@ Chronograf is the user interface and data visualization component of the InfluxD
   - optional, but needed to create and use alerts in Chronograf
 
 > ***Note:*** Run through the [Getting Started](/chronograf/latest/introduction/getting-started) tutorial for a quick start on configuring InfluxDB, Kapacitor, and Telegraf for use with Chronograf.
+
+
+## Configuring Chronograf for InfluxDB Enterprise clusters
+
+
 
 
 ## Starting the Chronograf service
