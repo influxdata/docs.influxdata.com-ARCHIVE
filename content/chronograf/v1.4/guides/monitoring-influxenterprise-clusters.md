@@ -219,10 +219,7 @@ Those values match the hostnames of the three data nodes in the cluster; this me
 Download and install Chronograf on the same server as theInfluxDB instance.
 This is not a requirement; you may host Chronograf on a separate server.
 
-```
-~# wget https://dl.influxdata.com/chronograf/releases/chronograf_1.4.0.0_amd64.deb
-~# sudo dpkg -i chronograf_1.4.0.0_amd64.deb
-```
+Chronograf can be downloaded from the [InfluxData downloads page](https://portal.influxdata.com/downloads).
 
 #### Step 2: Start Chronograf
 
