@@ -97,10 +97,7 @@ You'll return to your InfluxDB instance at the end of this section.
 
 #### Step 1: Download and install Telegraf.
 
-```
-~# wget https://dl.influxdata.com/telegraf/releases/telegraf_1.4.3-1_amd64.deb
-~# sudo dpkg -i telegraf_1.4.3-1_amd64.deb
-```
+Telegraf can be downloaded from the [InfluxData downloads page](https://portal.influxdata.com/downloads).
 
 #### Step 2: Configure Telegraf.
 
@@ -161,7 +158,7 @@ Enabled input plugins are configured in the `INPUT PLUGINS` section of the confi
 
 #### Step 3: Restart the Telegraf service.
 
-Restart Telegraf so that your configuration changes take effect:
+Restart the Telegraf service so that your configuration changes take effect:
 ```
 ~# sudo systemctl restart telegraf
 ```
@@ -229,7 +226,7 @@ Chronograf can be downloaded from the [InfluxData downloads page](https://portal
 
 ### Step 3: Connect Chronograf to the InfluxDB OSS instance
 
-To access Chronograf, go to `http://<ip_address>:8888`, where <ip_address> is the IP address of your InfluxDB OSS instance.
+To access Chronograf, go to http://localhost:8888.
 The welcome page includes instructions for connecting Chronograf to that instance.
 
 ![Connect Chronograf to InfluxDB](/img/chronograf/chrono-cluster-welcome.png)
