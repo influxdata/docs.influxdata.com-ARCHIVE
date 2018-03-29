@@ -360,33 +360,8 @@ The following environment variables (and corresponding command line options) are
   - This value is also used in the text for the Chronograf Login button
   - Default value is `generic`
   - So, for example, if `PUBLIC_URL` is `https://localhost:8888` and `GENERIC_NAME` is its default value, then the callback URL would be `https://localhost:8888/oauth/generic/callback`, and the Chronograf Login button would read `Log in with Generic`
-  - While using Chronograf, this value should be supplied in the `Provider` field when adding a user or creating an organization mapping
+  - While using Chronograf, this value should be supplied in the `Provider` field when adding a user or creating an organization mapping.
 
-<<<<<<< HEAD
-#### Customizing the login button text and callback URL
-
-Setting the `GENERIC_NAME` environment variable results in the specified value appearing in both the callback URL and the login button text. This allows you to customize the login by replacing "generic" in both locations with a more meaningful name.
-
-> ***Note:*** Use a short, URL-friendly name. The GENERIC_NAME value is lowercased in the callback URL
-
-**Example:**
-
-```sh
-export GENERIC_NAME="GitLab"
-```
-The callback URL changes from:
-```
-https://localhost:8888/oauth/generic/callback
-```
-to:
-```
-`https://localhost:8888/oauth/gitlab/callback`
-```
-
-Also, on the Chronograf login page, the text on the authentication button changes from `Log in with generic` to `Log in with GitLab`.
-=======
-> ***Note:*** Use a short, URL-friendly name for `GENERIC_NAME`. The value is lowercased in the callback URL.
->>>>>>> master
 
 ### Configuring authentication duration
 
