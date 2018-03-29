@@ -28,7 +28,7 @@ telegraf --input-filter cpu:mem:net:swap --output-filter influxdb:kafka config
 
 ## Environment variables
 
-Environment variables can be used anywhere in the configuration file by prepending them with `$`. For strings, the variables must be within quotes (i.e., `"$STR_VAR"`) and for numbers and booleans they should be unquoted (i.e., `$INT_VAR`, `$BOOL_VAR`)
+Environment variables can be used anywhere in the configuration file by prepending them with `$`. For strings, the variables must be within quotes (i.e., `"$STR_VAR"`) and for numbers and Booleans they should be unquoted (i.e., `$INT_VAR`, `$BOOL_VAR`)
 
 Environment variables can be set using the Linux `export` command
 (i.e., `export password=mypassword`). Using enviroment variables for sensitive

@@ -125,7 +125,7 @@ menu:
 * Add time shift feature to DataExplorer and Dashboards
 * Add auto group by time to Data Explorer
 * Support authentication for Enterprise Meta Nodes
-* Add boolean thresholds for kapacitor threshold alerts
+* Add Boolean thresholds for kapacitor threshold alerts
 * Update kapacitor alerts to cast to float before sending to influx
 * Allow override of generic oauth2 keys for email
 
@@ -263,7 +263,7 @@ menu:
 
 * Add prefix, suffix, scale, and other y-axis formatting for cells in dashboards.
 * Update the group by time when zooming in graphs.
-* Add the ability to link directly to presentation mode in dashboards with the `present` boolean query parameter in the URL.
+* Add the ability to link directly to presentation mode in dashboards with the `present` Boolean query parameter in the URL.
 * Add the ability to select a template variable via a URL parameter.
 
 ### UI improvements

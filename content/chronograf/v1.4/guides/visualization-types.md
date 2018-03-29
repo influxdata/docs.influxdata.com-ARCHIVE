@@ -88,6 +88,7 @@ Use the **Stacked Graph Controls** to specify the following:
 
 ### Step-Plot Graph
 
+<<<<<<< HEAD
 The **Step-Plot Graph** view displays a time series in a staircase graph.
 
 ![Step-Plot Graph selector](/img/chronograf/chrono-viz-step-graph-selector.png)
@@ -173,12 +174,19 @@ Use the **Line Graph + Single Stat Controls** to specify the following:
 
 ![Line Graph + Single Stat example](/img/chronograf/chrono-viz-line-graph-single-stat-example.png)
 
+=======
+![Ste-Plot Graph](/img/chronograf/v1.4/faq-viz-step.png)
+>>>>>>> master
 
 ### Single Stat
 
+<<<<<<< HEAD
 The **Single Stat** view displays the most recent value of the specified time series as a numerical value.
 
 ![Single Stat view](/img/chronograf/chrono-viz-single-stat-selector.png)
+=======
+![Single Stat screenshot](/img/chronograf/v1.4/faq-viz-single.png)
+>>>>>>> master
 
 If a cell's query includes a [`GROUP BY` tag](/influxdb/latest/query_language/data_exploration/#group-by-tags) clause, Chronograf sorts the different [series](/influxdb/latest/concepts/glossary/#series) lexicographically and shows the most recent [field value](/influxdb/latest/concepts/glossary/#field-value) associated with the first series.
 For example, if a query groups by the `name` [tag key](/influxdb/latest/concepts/glossary/#tag-key) and `name` has two [tag values](/influxdb/latest/concepts/glossary/#tag-value) (`chronelda` and `chronz`), Chronograf shows the most recent field value associated with the `chronelda` series.

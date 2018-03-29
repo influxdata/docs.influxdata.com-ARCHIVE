@@ -184,7 +184,7 @@ metrics to create a "monitor of monitors" is a best practice and allows you to r
 capturing and storing these metrics locally within the `_internal` database for production deployments.
 [Read more about this approach here.](https://www.influxdata.com/blog/influxdb-debugvars-endpoint/)
 
-### [Internal (intneral)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/internal)
+### [Internal (internal)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/internal)
 
 
 
@@ -439,7 +439,7 @@ The Socket Listener service input plugin listens for messages from streaming (tc
 
 The Solr plugin collects stats using the MBean Request Handler.
 
-### [SQL Server (sql_server)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/sqlserver)
+### [SQL Server (sqlserver)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/sqlserver)
 
 The SQL Server input plugin provides metrics for your Microsoft SQL Server instance. It currently works with SQL Server
 versions 2008+. Recorded metrics are lightweight and use Dynamic Management Views supplied by SQL Server.

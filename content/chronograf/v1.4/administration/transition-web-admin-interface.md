@@ -2,7 +2,7 @@
 title: Transitioning from the InfluxDB Web Admin Interface
 menu:
   chronograf_1_4:
-    weight: 50
+    weight: 100
     parent: Administration
 ---
 

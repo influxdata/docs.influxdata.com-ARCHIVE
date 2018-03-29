@@ -2,8 +2,8 @@
 title: Managing Chronograf organizations
 menu:
   chronograf_1_4:
-    name: Managing organizations
-    weight: 60
+    name: Managing Chronograf organizations
+    weight: 80
     parent: Administration
 ---
 
@@ -91,7 +91,7 @@ See the following pages for more information about managing Chronograf users and
 
 1) In the Chronograf navigation bar, select **Admin** (crown icon) > **Chronograf** to open the **Chronograf Admin** page.
 2) Click the **Org Mappings** tab to view a list of organization mappings.
-3) To remove an organization mapping, click the **Delete** button at the end of the mapping row you want to remove, and then confirm the action. 
+3) To remove an organization mapping, click the **Delete** button at the end of the mapping row you want to remove, and then confirm the action.
 
 ## Removing organizations
 

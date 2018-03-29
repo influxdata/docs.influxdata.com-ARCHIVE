@@ -42,7 +42,7 @@ provide tips for working with tasks and TICKscripts in Chronograf.
 
 Kapacitor instances in Chronograf are associated with specific InfluxDB databases
 which should already be bound to both Kapacitor and Chronograf.  To define an
-InfluxDB database in Kapacitor, see [Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting_started/)
+InfluxDB database in Kapacitor, see [Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting-started/)
 or the [Configuring Kapacitor](/kapacitor/v1.4/administration/configuration/#influxdb)
 guides. To define an InfluxDB database in Chronograf, see [InfluxDB setup](/chronograf/v1.3/introduction/getting-started/#influxdb-setup)
 in the Chronograf documentation.
@@ -279,7 +279,7 @@ Executing: true
 The console output includes a TICKscript section showing the script used to
 create the task.
 
-<a id="example-6"/>
+<span id="example-6"></span>
 **Example 6 &ndash; The TICKscript of a Chronograf Alert task**
 
 ```

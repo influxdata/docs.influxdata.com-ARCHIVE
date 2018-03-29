@@ -2,7 +2,7 @@
 title: Hardware sizing guidelines
 menu:
   influxdb_1_4:
-    weight: 12
+    weight: 40
     parent: guides
 ---
 
