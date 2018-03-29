@@ -238,7 +238,7 @@ Finally, enter your username and password and click `Add Source`.
 ### Step 4: Explore the monitoring data in Chronograf
 
 Chronograf works with the Telegraf data in your InfluxDB OSS instance.
-The `Host List` page, the first page that you see in Chronograf, shows your data node's hostnames, their statuses, CPU usage, load, and their configured applications.
+The `Host List` page shows your data node's hostnames, their statuses, CPU usage, load, and their configured applications.
 In this case, you've only enabled the system stats input plugin so `system` is the single application that appears in the `Apps` column.
 
 ![Host List page](/img/chronograf/chrono-cluster-hostlist.png)
