@@ -174,10 +174,6 @@ Use the **Line Graph + Single Stat Controls** to specify the following:
 
 ![Line Graph + Single Stat example](/img/chronograf/chrono-viz-line-graph-single-stat-example.png)
 
-=======
-![Ste-Plot Graph](/img/chronograf/v1.4/faq-viz-step.png)
->>>>>>> master
-
 ### Single Stat
 
 <<<<<<< HEAD
