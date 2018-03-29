@@ -31,39 +31,3 @@ The annotation displays "`Deploy v3.8.1-2`" and the time "`2018/28/02 15:59:30:0
 6. Click on `Name Me` in the annotation and type a note or comment.
 7. Click **Done Editing**.
 8. Your annotation is now available in all graph views.
-
-## Adding annotations to Chronograf using the InfluxDB CLI
-
-When an annotation is made using the Chronograf user interface, an annotation record is saved into the `chronograf` database. You can use the Influx CLI to insert an annotation.
-
-**Annotation components:**
-
-The following measurement and tags must be stored in the `chronograf` database.
-
-* `id`: Unique identifier.
-* `deleted`: Boolean value. `true` if annotation is deleted; `false` if annotation is not deleted.
-  - if `true`, then the annotation is not displayed
-* `start_time`: Integer. Annotation start timestamp in nanoseconds (using UNIX Epoch time). Include an `i` as a suffix to designate integer. If `i` is not added, a floating point is assumed.
-  - RFC 3339 with millisecond preciscio
-  - Example: `12345i`
-* `modified_time_ns`: Integer. Modified time, in nanoseconds (using UNIX Epoch time), of the last modification to the annotation.
-* `text`: Text note or comment displayed to users.
-* `type`: [Not currently used. For future use.]
-
-**Syntax:**
-
-```
-CUR_UNIX_TIME=$(date +'%s')000000000 influx -database chronograf -execute "insert annotations,id=<annotation_ID>,deleted=false|true,start_time=${CUR_UNIX_TIME}i,modified_time_ns=${CUR_UNIX_TIME}i,text=\"spaces\" ${CUR_UNIX_TIME}"
-```
-
-**Example:**
-
-```
-CUR_UNIX_TIME=$(date +'%s')000000000 influx -database chronograf -execute "insert annotations,id=myid,deleted=false,start_time=${CUR_UNIX_TIME}i,modified_time_ns=${CUR_UNIX_TIME}i,text=\"spaces\",type=\"mytype\" ${CUR_UNIX_TIME}"
-```
-
-**To add an annotation to Chronograf using the CLI:**
-
-1. Open the InfluxDB CLI.
-2. Set the database to `chronograf`.
-3. Insert an annotation using the syntax specified above.
