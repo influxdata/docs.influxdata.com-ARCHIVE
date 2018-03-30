@@ -8,7 +8,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
 
-        <meta {{ $project := index (findRE "[^/]+.*?" .RelPermalink) 0 }} {{ project }}>
+        <meta name="robots"
+            {{ if (or .IsPage (eq .Kind "section")) }}
+              {{ $projectDefaultVersion := index .Site.Data.default_versions (printf "%s_semver" (index (findRE "[^/]+.*?" .RelPermalink) 0)) }}
+              {{ if not (in .RelPermalink $projectDefaultVersion) }} content="noindex, nofollow"
+              {{ else }} content="index, follow" {{ end }}
+            {{ else }} content="index, follow" {{ end }}
+        >
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
         <link rel="stylesheet" title="dark-theme" href="/css/docs-default.css">
