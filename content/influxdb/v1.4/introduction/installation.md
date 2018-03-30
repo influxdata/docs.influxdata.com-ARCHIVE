@@ -229,6 +229,12 @@ variable.
 
 See the [Configuration](/influxdb/v1.4/administration/config/) documentation for more information.
 
+### Data & WAL Directory Permissions
+
+Make sure the directories in which data and the [write ahead log](/influxdb/v1.4/concepts/glossary/#wal-write-ahead-log) (WAL) are stored are writable for the user running the `influxd` process.
+If these directories are not writable, `influxd` will not start.
+Information about `data` and `wal` directory paths is available in the [Configuration ](/influxdb/v1.4/administration/config/#data-settings-data) documentation.
+
 ## Hosting on AWS
 
 ### Hardware
