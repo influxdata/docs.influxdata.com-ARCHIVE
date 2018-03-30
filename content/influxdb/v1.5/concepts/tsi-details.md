@@ -142,11 +142,11 @@ The index file has the following sections:
 
 * **TagBlocks:** Maintains an index of tag values for a single tag key.
 * **MeasurementBlock:** Maintains an index of measurements and their tag keys.
-**Trailer:** Stores offset information for the file as well as HyperLogLog sketches for cardinality estimation.
+* **Trailer:** Stores offset information for the file as well as HyperLogLog sketches for cardinality estimation.
 
 ### Manifest
 
-The MANIFEST file is stored the index directory and lists all the files that belong to the index and the order in which they should be accessed.
+The MANIFEST file is stored in the index directory and lists all the files that belong to the index and the order in which they should be accessed.
 This file is updated every time a compaction occurs.
 Any files that are in the directory that are not in the index file are index files that are in the process of being compacted.
 
