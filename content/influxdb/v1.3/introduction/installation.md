@@ -230,8 +230,10 @@ See the [Configuration](/influxdb/v1.3/administration/config/) documentation for
 
 ### Data & WAL Directory Permissions
 
-Make sure the directories in which data and the [write ahead log](/influxdb/v1.3/concepts/glossary/#wal-write-ahead-log) (WAL) are stored are writable for the user running the `influxd` process.
-If these directories are not writable, `influxd` will not start.
+Make sure the directories in which data and the [write ahead log (WASL)](/influxdb/v1.3/concepts/glossary/#wal-write-ahead-log) are stored are writable for the user running the `influxd` service.
+
+> **Note:** If the data and WAL directories are not writable, the `influxd` service will not start.
+
 Information about `data` and `wal` directory paths is available in the [Configuration ](/influxdb/v1.3/administration/config/#data) documentation.
 
 ## Hosting on AWS
