@@ -7,43 +7,23 @@ menu:
     parent: Administration
 ---
 
-## Requirements
-
-Chronograf is the user interface and data visualization component of the InfluxData [TICK stack](https://www.influxdata.com/products/) and is designed to be used together with InfluxDB, Telegraf, and Kapacitor, but the minimum requirements are:
-
-* InfluxDB
-  - available and running
-  - authentication is enabled (`auth-enabled` option)
-  - admin user has been created and is available
-* Kapacitor
-  - optional, but needed to create and use alerts in Chronograf
-
-> ***Note:*** Run through the [Getting Started](/chronograf/latest/introduction/getting-started) tutorial for a quick start on configuring InfluxDB, Kapacitor, and Telegraf for use with Chronograf.
-
-
-## Configuring Chronograf for InfluxDB Enterprise clusters
-
-
-
-
 ## Starting the Chronograf service
 
-Chronograf can be started using the default configuration options, but the environment variables and command line options let you configure OAuth 2.0 authentication and other options based on your requirements.
+Chronograf can be started using the default configuration options, but environment variables and command line options let you configure OAuth 2.0 authentication and other options based on your requirements.
 
-**To start the Chronograf service:**
+**Linux:**
 
-Linux
+```bash
+sudo systemctl start chronograf [OPTIONS]
+```
 
-* `sudo systemctl start chronograf`
-* `sudo systemctl start chronograf [OPTIONS]` (where [OPTIONS] are any command line options, separated by spaces
+**macOS:**
 
-Mac OS X
+```bash
+chronograf [OPTIONS]
+```
 
-* `chronograf`
-* `chronograf [OPTIONS]` (where [OPTIONS] are any command line options, separated by spaces
-
-See [Chronograf configuration options](/chronograf/latest/administration/config-options) for details about configuration options, including command line options and corresponding environment variables.
-
+`[OPTIONS]` are any of the available Chronograf command line options), separated by spaces. See the [Chronograf configuration options](/chronograf/latest/administration/config-options) documetnation for details about configuration options, including command line options and corresponding environment variables.
 
 ## Enabling security, multi-organization, and multi-user support
 
@@ -53,3 +33,5 @@ After you configure OAuth 2.0 authentication in Chronograf, you can use the mult
 
 * [Managing organizations](/chronograf/latest/administration/managing-organizations)
 * [Managing Chronograf users](/chronograf/latest/administration/managing-chronograf-users)
+
+## Configuring Chronograf for InfluxDB Enterprise clusters
