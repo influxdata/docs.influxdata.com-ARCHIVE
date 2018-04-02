@@ -11,7 +11,7 @@ menu:
 
 * [Usage](#usage)
 * [Application options](#application-options)
-* [Authentication options](#global-authentication-options)
+* [Authentication options](#authentication-options)
     * [General authentication options](#general-authentication-options)
     * [InfluxDB authentication options](#influxdb-authentication-options)
     * [Kapacitor authentication options](#kapacitor-authentication-options)
@@ -77,6 +77,8 @@ Environment variable: `$TLS_CERTIFICATE`
 The file path to private key associated with given certificate.
 
 Environment variable: `$TLS_PRIVATE_KEY`
+
+## Authentication options
 
 ## General authentication options
 
