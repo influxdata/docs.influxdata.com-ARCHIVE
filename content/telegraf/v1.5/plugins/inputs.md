@@ -108,7 +108,6 @@ The [DMCache (dmcache) input plugin](https://github.com/influxdata/telegraf/tree
 
 ### [DNS query time (dns_query_time)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/dns_query)
 
-
 The [DNS query time (dns_query_time) input plugin](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/dns_query) gathers dns query times in milliseconds - like [Dig](https://en.wikipedia.org/wiki/Dig_(command)).
 
 ### [Docker (docker)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/docker)
