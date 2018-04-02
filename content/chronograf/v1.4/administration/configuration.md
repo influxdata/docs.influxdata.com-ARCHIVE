@@ -26,7 +26,7 @@ sudo systemctl start chronograf [OPTIONS]
 chronograf [OPTIONS]
 ```
 
-`[OPTIONS]` are any of the available Chronograf command line options), separated by spaces. See the [Chronograf configuration options](/chronograf/v1.4/administration/config-options) documentation for details about configuration options, including command line options and corresponding environment variables.
+`[OPTIONS]` are any of the available Chronograf command line options, separated by spaces. See the [Chronograf configuration options](/chronograf/v1.4/administration/config-options) documentation for details about configuration options, including command line options and corresponding environment variables.
 
 ## Setting custom default Chronograf config options
 
