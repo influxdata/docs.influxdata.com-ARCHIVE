@@ -818,6 +818,15 @@ Drop the `idle_hands` CQ from the `telegraf` database:
 CQs cannot be altered once they're created.
 To change a CQ, you must `DROP` and re`CREATE` it with the updated settings.
 
+### Continuous Query Statistics
+
+If `query-stats-enabled` is set to `true` in your `influxdb.conf` or using the `INFLUXDB_CONTINUOUS_QUERIES_QUERY_STATS_ENABLED` environment variable, data will be written to `_internal` with information about when continuous queries ran and their duration.
+Information about CQ configuration settings is available in the [Configuration](/influxdb/v1.5/administration/config/#continuous-queries-settings-continuous-queries) documentation.
+
+> **Note:** `_internal` houses internal system data and is meant for internal use.
+The structure of and data stored in `_internal` can change at any time.
+Use of this data falls outside the scope of official InfluxData support.
+
 ## Continuous Query Use Cases
 
 ### Downsampling and Data Retention
@@ -844,7 +853,7 @@ the population of graphs and dashboards.
 
 ### Substituting for a `HAVING` Clause
 
-InfluxQL does not support [`HAVING` clauses](https://en.wikipedia.org/wiki/Having_(SQL\)).
+InfluxQL does not support [`HAVING` clauses](https://en.wikipedia.org/wiki/Having_%28SQL%29).
 Get the same functionality by creating a CQ to aggregate the data and querying
 the CQ results to apply the `HAVING` clause.
 
