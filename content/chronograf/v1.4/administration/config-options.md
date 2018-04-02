@@ -12,6 +12,7 @@ menu:
 * [Usage](#usage)
 * [Application options](#application-options)
 * [Authentication options](#global-authentication-options)
+    * [General authentication options](#general-authentication-options)
     * [InfluxDB authentication options](#influxdb-authentication-options)
     * [Kapacitor authentication options](#kapacitor-authentication-options)
     * [GitHub OAuth 2.0 authentication options](#github-oauth-2-0-authentication-options)
@@ -77,7 +78,7 @@ The file path to private key associated with given certificate.
 
 Environment variable: `$TLS_PRIVATE_KEY`
 
-## Global authentication options
+## General authentication options
 
 ### `--token-secret=` | `-t`
 
