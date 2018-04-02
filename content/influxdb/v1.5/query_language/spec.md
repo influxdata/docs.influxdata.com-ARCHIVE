@@ -595,7 +595,7 @@ The elements of `EXPLAIN` query plan include:
 - size of blocks
 
 ```
-explain_stmt = "EXPLAIN" select_stmt"
+explain_stmt = "EXPLAIN" select_stmt .
 ```
 
 #### Example:
@@ -619,7 +619,7 @@ SIZE OF BLOCKS: 931
 Executes the query and counts the actual costs during runtime.
 
 ```
-explain_analyze_stmt = "EXPLAIN ANALYZE" select_stmt"
+explain_analyze_stmt = "EXPLAIN ANALYZE" select_stmt .
 ```
 
 #### Example:
