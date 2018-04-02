@@ -29,7 +29,7 @@ The InfluxDB configuration file contains configuration settings specific to a lo
   * [CollectD settings `[[collectd]]`](#collectd-settings-collectd)
   * [OpenTSB settings `[[opentsdb]]`](#opentsdb-settings-opentsdb)
   * [UDP settings `[[udp]]`](#udp-settings-udp)
-  * [Continuous queries settings `[continuous_queries]`](#continuous-queries-settings-continuous_queries)
+  * [Continuous queries settings `[continuous_queries]`](#continuous-queries-settings-continuous-queries)
 
 ## Configuration overview
 
