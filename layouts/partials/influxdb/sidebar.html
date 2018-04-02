@@ -30,9 +30,6 @@
           </div>
           {{ if .HasChildren }}
             {{ range .Children }}
-                        {{ if in .URL "internal_statistics" }}
-
-                        {{ else }}
               <a class="sidebar--page{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}" {{ if eq .Identifier "download" }} target="_blank" {{ end }}>{{ .Name }}</a>
             {{ end }}
             {{ end }}
