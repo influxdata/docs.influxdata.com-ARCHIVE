@@ -272,15 +272,15 @@ The [NATS Consumer (nats_consumer) input plugin](https://github.com/influxdata/t
 
 ### [Network Response (net_response)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/net_response)
 
-The Network Response input plugin tests UDP and TCP connection response time. It can also check response text.
+The [Network Response (net_response) input plugin](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/net_response) tests UDP and TCP connection response time. It can also check response text.
 
 ### [NGINX (nginx)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/nginx)
 
-The NGINX input plugin reads NGINX basic status information (`ngx_http_stub_status_module`).
+The [NGINX (nginx) input plugin](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/nginx) reads NGINX basic status information (`ngx_http_stub_status_module`).
 
 ### [NGINX Plus (nginx_plus)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/nginx_plus/README.md)  -- NEW in v.1.5
 
-NGINX Plus is a commercial version of the open source web server NGINX. To use this plugin you will need a license.
+The [NGINX Plus (nginx_plus) input plugin](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/nginx_plus/README.md) is for NGINX Plus, the commercial version of the open source web server NGINX. To use this plugin you will need a license.
 For more information, see [What’s the Difference between Open Source NGINX and NGINX Plus?](https://www.nginx.com/blog/whats-difference-nginx-foss-nginx-plus/).
 
 Structures for NGINX Plus have been built based on history of [status module documentation](http://nginx.org/en/docs/http/ngx_http_status_module.html).
@@ -344,7 +344,7 @@ version of postgres.
 
 ### [PostgreSQL Extensible (postgresql_extensible)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/postgresql_extensible)
 
-This PostgreSQL Extensible input plugin provides metrics for your postgres database. It has been designed to parse
+This [PostgreSQL Extensible (postgresql_extensible) input plugin](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/postgresql_extensible) provides metrics for your postgres database. It has been designed to parse
 SQL queries in the plugin section of `telegraf.conf` files.
 
 ### [PowerDNS (powerdns)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/powerdns)
