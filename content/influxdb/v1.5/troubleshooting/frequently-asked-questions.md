@@ -145,7 +145,7 @@ and
 [`ALTER RETENTION POLICY`](/influxdb/v1.5/query_language/database_management/#modify-retention-policies-with-alter-retention-policy)
 statements.
 Check your retention policy's shard group duration with the
-[`SHOW RETENTION POLICY`](/influxdb/v1.5/query_language/schema_exploration/#explore-retention-policies-with-show-retention-policies)
+[`SHOW RETENTION POLICIES`](/influxdb/v1.5/query_language/schema_exploration/#explore-retention-policies-with-show-retention-policies)
 statement.
 
 ## Why aren't data dropped after I've altered a retention policy?
