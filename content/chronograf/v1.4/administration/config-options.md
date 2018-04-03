@@ -11,12 +11,14 @@ menu:
 
 * [Usage](#usage)
 * [Application options](#application-options)
-* [InfluxDB authentication options](#influxdb-authentication-options)
-* [Kapacitor authentication options](#kapacitor-authentication-options)
-* [GitHub OAuth 2.0 authentication options](#github-oauth-2-0-authentication-options)
-* [Google OAuth 2.0 authentication options](#google-oauth-2-0-authentication-options)
-* [Auth0 OAuth 2.0 authentication options](#auth0-oauth-2-0-authentication-options)
-* [Generic OAuth 2.0 authentication options](#generic-oauth-2-0-authentication-options)
+* [Authentication options](#authentication-options)
+    * [General authentication options](#general-authentication-options)
+    * [InfluxDB authentication options](#influxdb-authentication-options)
+    * [Kapacitor authentication options](#kapacitor-authentication-options)
+    * [GitHub OAuth 2.0 authentication options](#github-oauth-2-0-authentication-options)
+    * [Google OAuth 2.0 authentication options](#google-oauth-2-0-authentication-options)
+    * [Auth0 OAuth 2.0 authentication options](#auth0-oauth-2-0-authentication-options)
+    * [Generic OAuth 2.0 authentication options](#generic-oauth-2-0-authentication-options)
 * [Other options](#other-options)
 * [Help option](#help-option)
 
@@ -76,6 +78,26 @@ The file path to private key associated with given certificate.
 
 Environment variable: `$TLS_PRIVATE_KEY`
 
+## Authentication options
+
+## General authentication options
+
+### `--token-secret=` | `-t`
+
+The secret for signing tokens.
+
+Environment variable: `$TOKEN_SECRET`
+
+### `--auth-duration=`
+
+The total duration (in hours) of cookie life for authentication.
+
+Default value: `720h`
+
+Authentication expires on browser close when `--auth-duration=0`.
+
+Environment variable: `$AUTH_DURATION`
+
 ## InfluxDB authentication options
 
 ### `--influxdb-url=`
@@ -119,44 +141,6 @@ Environment variable: `$KAPACITOR_USERNAME`
 The password for your Kapacitor instance.
 
 Environment variable: `$KAPACITOR_PASSWORD`
-
-## Other options
-
-### `--develop` | `-d`
-
-Run the `chronograf` server in develop mode.
-
-### `--bolt-path=` | `-b`
-
-The file path to the BoltDB file.
-
-Default value: `/var/lib/chronograf/chronograf-v1.db`
-
-Environment variable: `$BOLT_PATH`
-
-### `--canned-path=` | `-c`
-
-The path to the directory for [canned dashboards](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf)
-
-Default value: `/usr/share/chronograf/canned`
-
-Environment variable: `$CANNED_PATH`
-
-### `--token-secret=` | `-t`
-
-The secret for signing tokens.
-
-Environment variable: `$TOKEN_SECRET`
-
-### `--auth-duration=`
-
-The total duration (in hours) of cookie life for authentication.
-
-Default value: `720h`
-
-Authentication expires on browser close when `--auth-duration=0`.
-
-Environment variable: `$AUTH_DURATION`
 
 ## GitHub OAuth 2.0 authentication options
 
@@ -311,6 +295,26 @@ Example: `--log-level=debug`
 
 Environment variable: `$LOG_LEVEL`
 
+### `--develop` | `-d`
+
+Run the `chronograf` server in develop mode.
+
+### `--bolt-path=` | `-b`
+
+The file path to the BoltDB file.
+
+Default value: `/var/lib/chronograf/chronograf-v1.db`
+
+Environment variable: `$BOLT_PATH`
+
+### `--canned-path=` | `-c`
+
+The path to the directory for [canned dashboards](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf)
+
+Default value: `/usr/share/chronograf/canned`
+
+Environment variable: `$CANNED_PATH`
+
 ### `--basepath=` | `-p`
 
 The URL path prefix under which all `chronograf` routes will be mounted.
@@ -322,6 +326,14 @@ Environment variable: `$BASE_PATH`
 Forces `chronograf` server to require that all requests to it are prefixed with the value set in `--basepath`.
 
 Environment variable: `$PREFIX_ROUTES`
+
+### `--status-feed-url=`
+
+URL of a JSON feed to display as a News Feed on the client Status page.
+
+Default value: `https://www.influxdata.com/feed/json`
+
+Environment variable: `$STATUS_FEED_URL`
 
 ### `--version` | `-v`
 
