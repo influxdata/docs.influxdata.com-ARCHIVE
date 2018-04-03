@@ -125,7 +125,7 @@ Related entries: [field set](/influxdb/v1.5/concepts/glossary/#field-set), [seri
 
 ## points per second
 A deprecated measurement of the rate at which data are persisted to InfluxDB.
-The schema allows and even encourages the recording of multiple metric vales per point, rendering points per second ambiguous.
+The schema allows and even encourages the recording of multiple metric values per point, rendering points per second ambiguous.
 
 Write speeds are generally quoted in values per second, a more precise metric.
 
