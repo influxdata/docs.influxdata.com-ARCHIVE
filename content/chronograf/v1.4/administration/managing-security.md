@@ -13,15 +13,15 @@ menu:
 * [Chronograf security](#chronograf-security)
 * [OAuth 2.0 providers with JWT tokens](#oauth-2-0-providers-with-jwt-tokens)
 * [OAuth 2.0 providers](#oauth-2-0-providers)
-  * [GitHub](#github)
-  * [Google](#google)
-  * [Auth0](#auth0)
-  * [Heroku](#heroku)
-  * [Okta](#okta)
-  * [Generic](#generic)
+  * [Configuring GitHub authentication](#configuring-github-authentication)
+  * [Configuring Google authentication](#configuring-google-authentication)
+  * [Configuring Auth0 authentication](#configuring-auth0-authentication)
+  * [Configuring Heroku authentication](#configuring-heroku-authentication)
+  * [Configuring Okta authentication](#configuring-okta-authentication)
+  * [Configuring Generic authentication](#configuring-generic-authentication)
 * [Configuring authentication duration](#configuring-authentication-duration)
-* [TLS (Transport Layer Security) and HTTPS](#tls--transport-layer-security-and-https)
-* [Testing with self-signed certificates](#testing-with-self-signed-certificates)
+* [Configuring TLS (Transport Layer Security) and HTTPS](#configuring-tls--transport-layer-security-and-https)
+  - [Testing with self-signed certificates](#testing-with-self-signed-certificates)
 
 ## Chronograf security
 
@@ -63,7 +63,7 @@ Configuration steps, including required and optional configuration options, for 
 
 > ***Note:*** Each of the following OAuth 2.0 provider configurations require the `TOKEN_SECRET` you created in the previous section.
 
-### GitHub
+### Configuring GitHub authentication
 
 Chronograf supports using the [GitHub OAuth 2.0 authentication](https://developer.github.com/apps/building-oauth-apps/) to request authorization and provide authentication. To use GitHub authentication, you need to register a GitHub application and use the assigned Client ID and Client Secret.
 
@@ -156,7 +156,7 @@ To support multiple organizations, use a comma-delimited list.
 export GH_ORGS=hill-valley-preservation-sociey,the-pinheads
 ```
 
-### Google
+### Configuring Google authentication
 
 Chronograf supports using the [Google OAuth 2.0 authentication proivder](https://developers.google.com/identity/protocols/OAuth2) to request authorization and provide authentication. To use Google authentication, you need to register a Google application and use the assigned Client ID and Client Secret, as well as specify a Public URL.
 
@@ -224,7 +224,7 @@ For example, to permit access only from `biffspleasurepalace.com` and `savethecl
 export GOOGLE_DOMAINS=biffspleasurepalance.com,savetheclocktower.com
 ```
 
-### Auth0
+### Configuring Auth0 authentication
 
 [Auth0](https://auth0.com/) implements identity protocol support for OAuth 2.0. See [OAuth 2.0](https://auth0.com/docs/protocols/oauth2) for details about the Auth0 implementation.
 
@@ -274,7 +274,7 @@ Next, you will need to set the Chronograf [`AUTH0_ORGS`](/chronograf/latest/admi
 
 An `--auth0-organizations` command line option is also available, but it is limited to a single organization and does not accept a comma-separated list like its environment variable equivalent.
 
-### Heroku
+### Configuring Heroku authentication
 
 To enable Chronograf support using the Heroku OAuth 2.0 provider:
 
@@ -298,7 +298,7 @@ To permit access from the `hill-valley-preservation-society` organization and `t
 ```sh
 export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 ```
-### Okta
+### Configuring Okta authentication
 
 [Okta](https://developer.okta.com/) is a popular, OAuth 2.0 compliant authorization and authentication provider that can be used with Chronograf to allow access based on granted scopes and permissions.
 
@@ -329,7 +329,7 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 
 Your users should now be able to sign into Chronograf using the new Okta provider.
 
-### Generic
+### Configuring Generic authentications
 
 #### Configuring Chronograf to use any OAuth 2.0 provider
 
@@ -379,7 +379,7 @@ export AUTH_DURATION=1080h
 ```
 Additionally, for greater security, if you want to require re-authentication every time the browser is closed, set `AUTH_DURATION` to `0`. This makes the cookie transient (aka "in-memory").
 
-## TLS (Transport Layer Security) and HTTPS
+## Configuring TLS (Transport Layer Security) and HTTPS
 
 The TLS (Transport Layer Security) cryptographic protocol is supported in Chronograf to provides server authentication, data confidentiality, and data integrity. Using TLS secures traffic between a server and web browser and enables the use of HTTPS.
 
