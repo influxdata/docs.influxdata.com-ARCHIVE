@@ -227,7 +227,7 @@ should configure this plugin to talk to its locally running kubelet.
 ### [Lustre2 (lustre2)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/lustre2)
 
 Lustre Jobstats allows for RPCs to be tagged with a value, such as a job's ID.  This allows for per job statistics.
-Th [Lustre2 (lustre2) input plugin](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/lustre2) collects statistics and tags the data with the `jobid`.
+The [Lustre2 (lustre2) input plugin](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/lustre2) collects statistics and tags the data with the `jobid`.
 
 ### [Logparser (logparser)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/logparser)
 
