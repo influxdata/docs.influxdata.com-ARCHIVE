@@ -12,24 +12,22 @@ menu:
 
 Version 1.5 includes the first official Time Series Index (TSI) release. Although you can install without enabling TSI, you are encouraged to begin leveraging the advantages the TSI disk-based indexing offers.
 
-For upgrading steps, see [Upgrading to InfluxDB 1.5](/influxdb/v1.5/administration/upgrading/).
+## Upgrading InfluxDB Enterprise 1.3.x-1.5.x clusters to 1.5.1 (rolling upgrade)
 
-## Upgrading InfluxDB Enterprise 1.3 clusters to 1.5.x (rolling upgrade)
-
-### Step 0: Back up your cluster before upgrading to version 1.5.
+### Step 0: Back up your cluster before upgrading to version 1.5.1.
 
 Create a full backup of your InfluxDB Enterprise cluster before performing an upgrade.
 If you have incremental backups created as part of your standard operating procedures, make sure to
 trigger a final incremental backup before proceeding with the upgrade.
 
 > ***Note:*** For information on performing a final incremental backup or a full backup,
-> see the InfluxDB Enterprise 1.3 [Backup and restore](/enterprise_influxdb/v1.3/guides/backup-and-restore) documentation.
+> see the InfluxDB Enterprise [Backup and restore](/enterprise_influxdb/v1.5/guides/backup-and-restore) documentation.
 
 ## Upgrading meta nodes
 
 Follow these steps to upgrade all meta nodes in your InfluxDB Enterprise cluster. Ensure that the meta cluster is healthy before proceeding to the data nodes.
 
-### Step 1: Download the 1.5.x meta node package.
+### Step 1: Download the 1.5.1 meta node package.
 
 #### Meta node package download
 **Ubuntu & Debian (64-bit)**
@@ -42,7 +40,7 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.5.1-c1.5.1_am
 wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.5.1_c1.5.1.x86_64.rpm
 ```
 
-### Step 2: Install the 1.5.x meta nodes package.
+### Step 2: Install the 1.5.1 meta nodes package.
 
 #### Meta node package install
 
@@ -101,7 +99,7 @@ rk-upgrading-03:8091	1.5.1_c1.5.1
 
 Repeat the following steps for each data node in your InfluxDB Enterprise cluster.
 
-### Step 1: Download the 1.5.x data node package.
+### Step 1: Download the 1.5.1 data node package.
 
 #### Data node package download
 
@@ -122,15 +120,15 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.5.1_c1.5.1.x8
 To avoid downtime and allow for a smooth transition, remove the data node you are upgrading from your
 load balancer **before** performing the remaining steps.
 
-### Step 3: Install the 1.5.x data node packages.
+### Step 3: Install the 1.5.1 data node packages.
 
 #### Data node package install
 
 When you run the install command, your terminal asks if you want to keep your
-current configuration file or overwrite your current configuration file with the file for version 1.5.x.
+current configuration file or overwrite your current configuration file with the file for version 1.5.1.
 
 Keep your current configuration file by entering `N` or `O`.
-The configuration file will be updated with the necessary changes for version 1.5.x in the next step.
+The configuration file will be updated with the necessary changes for version 1.5.1 in the next step.
 
 **Ubuntu & Debian (64-bit)**
 ```
@@ -182,7 +180,9 @@ The new configuration options are set to the default settings.
 
   - When TSI is enabled, new shards use the TSI disk-based indexing. Existing shards must be converted to support TSI.
   - Run the [`influx_inspect buildtsi`](/influxdb/v1.5/tools/influx_inspect#influx-inspect-buildtsi) command to convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
-
+  
+> **Note:** Run the `buildtsi` command using the user account that you are going to run the database as,
+> or ensure that the permissions match afterward.
 
 ### Step 6: Restart the `influxdb` service.
 
