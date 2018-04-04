@@ -10,17 +10,18 @@ menu:
 **On this page:**
 
 * [Usage](#usage)
-* [Application options](#application-options)
+* [Chronograf service options](#application-options)
+  - [InfluxDB connection options](#influxdb-authentication-options)
+  - [Kapacitor connection options](#kapacitor-authentication-options)
+  - [TLS (Transport Layer Security) options](#tls--transport-layer-security--options)
+  * [Other service options](#other-options)
 * [Authentication options](#authentication-options)
     * [General authentication options](#general-authentication-options)
-    * [InfluxDB authentication options](#influxdb-authentication-options)
-    * [Kapacitor authentication options](#kapacitor-authentication-options)
-    * [GitHub OAuth 2.0 authentication options](#github-oauth-2-0-authentication-options)
-    * [Google OAuth 2.0 authentication options](#google-oauth-2-0-authentication-options)
-    * [Auth0 OAuth 2.0 authentication options](#auth0-oauth-2-0-authentication-options)
+    * [GitHub-specific OAuth 2.0 authentication options](#github-specific-oauth-2-0-authentication-options)
+    * [Google-specific OAuth 2.0 authentication options](#google-specific-oauth-2-0-authentication-options)
+    * [Auth0-specific OAuth 2.0 authentication options](#auth0-specific-oauth-2-0-authentication-options)
+    * [Heroku-specific OAuth 2.0 authentication options](#heroku-specific-oauth-2-0-authentication-options)
     * [Generic OAuth 2.0 authentication options](#generic-oauth-2-0-authentication-options)
-* [Other options](#other-options)
-* [Help option](#help-option)
 
 ## Usage
 
@@ -46,11 +47,11 @@ Examples:
 > ***Note:*** Command line options take precedence over corresponding environment variables.
 
 
-## Application options
+## Chronograf service options
 
-### `--host=`
+#### `--host=`
 
-The IP that `chronograf` listens on.
+The IP that the `chronograf` service listens on.
 
 Default value: `0.0.0.0`
 
@@ -58,47 +59,61 @@ Example: `--host=0.0.0.0`
 
 Environment variable: `$HOST`
 
-### `--port=`
+#### `--port=`
 
-The port that `chronograf` listens on for insecure connections.
+The port that the `chronograf` service listens on for insecure connections.
 
 Default: `8888`
 
 Environment variable: `$PORT`
 
-### `--cert=`
+#### `--bolt-path=` | `-b`
 
-The file path to PEM-encoded public key certificate.
+The file path to the BoltDB file.
 
-Environment variable: `$TLS_CERTIFICATE`
+Default value: `./chronograf-v1.db`
 
-### `--key=`
+Environment variable: `$BOLT_PATH`
 
-The file path to private key associated with given certificate.
+####`--canned-path=` | `-c`
 
-Environment variable: `$TLS_PRIVATE_KEY`
+The path to the directory of [canned dashboards](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf) files.
 
-## Authentication options
+Default value: `/usr/share/chronograf/canned`
 
-## General authentication options
+Environment variable: `$CANNED_PATH`
 
-### `--token-secret=` | `-t`
+####`--basepath=` | `-p`
 
-The secret for signing tokens.
+The URL path prefix under which all `chronograf` routes will be mounted.
 
-Environment variable: `$TOKEN_SECRET`
+Environment variable: `$BASE_PATH`
 
-### `--auth-duration=`
+####`--prefix-routes`
 
-The total duration (in hours) of cookie life for authentication.
+Forces the `chronograf` service to require that all requests are prefixed with the value set in `--basepath`.
 
-Default value: `720h`
+Environment variable: `$PREFIX_ROUTES`
 
-Authentication expires on browser close when `--auth-duration=0`.
+####`--status-feed-url=`
 
-Environment variable: `$AUTH_DURATION`
+URL of JSON feed to display as a news feed on the client Status page.
 
-## InfluxDB authentication options
+Default value: `https://www.influxdata.com/feed/json`
+
+Environment variable: `$STATUS_FEED_URL`
+
+####`--version` | `-v`
+
+Displays the version of the Chronograf service.
+
+Example:
+```sh
+$ chronograf -v
+2018/01/03 14:11:19 Chronograf 1.4.0.0-rc1-26-gb74ae387 (git: b74ae387)
+```
+
+## InfluxDB connection options
 
 ### `--influxdb-url=`
 
@@ -120,7 +135,7 @@ The [password] for your InfluxDB instance.
 
 Environment variable: `$INFLUXDB_PASSWORD`
 
-## Kapacitor authentication options
+## Kapacitor connection options
 
 ### `--kapacitor-url=`
 
@@ -142,148 +157,39 @@ The password for your Kapacitor instance.
 
 Environment variable: `$KAPACITOR_PASSWORD`
 
-## GitHub OAuth 2.0 authentication options
+### TLS (Transport Layer Security) options
 
-### `--github-client-id=` | `-i`
+See [Configuring TLS (Transport Layer Security) and HTTPS](/chronograf/v1.4/administration/managing-security/#configuring-tls--transport-layer-security-and-https) for more information.
 
-The GitHub client ID value for OAuth 2.0 support.
+#### `--cert=`
 
-Environment variable: `$GH_CLIENT_ID`
+The file path to PEM-encoded public key certificate.
 
-### `--github-client-secret=` | `-s`
+Environment variable: `$TLS_CERTIFICATE`
 
-The GitHub Client Secret value for OAuth 2.0 support.
+#### `--key=`
 
-Environment variable: `$GH_CLIENT_SECRET`
+The file path to private key associated with given certificate.
 
-### `--github-organization=` | `-o`
+Environment variable: `$TLS_PRIVATE_KEY`
 
-[Optional] Specify a GitHub organization required for a user.
 
-Environment variable: `$GH_ORGS`
+### Other service options
 
-## Google OAuth 2.0 authentication options
+####`--custom-link <display_name>:<link_address>`
 
-### `--google-client-id=`
+Custom link added to Chronograf User menu options. Useful for providing links to internal company resources for your Chronograf users. Can be used when any OAuth 2.0 authentication is enabled. To add another custom link, repeat the custom link option.
 
-The Google Client ID value required for OAuth 2.0 support.
+Example: `--custom-link InfluxData:http://www.influxdata.com/`
 
-Environment variable: `$GOOGLE_CLIENT_ID`
-
-### `--google-client-secret=`
-
-The Google Client Secret value required for OAuth 2.0 support.
-
-Environment variable: `$GOOGLE_CLIENT_SECRET`
-
-### `--google-domains=`
-
-[Optional] Restricts authorization to users from specified Google email domains.
-
-Environment variable: `$GOOGLE_DOMAINS`
-
-### `--public-url=`
-
-The public URL required to access Chronograf using a web browser. For example, if you access Chronograf using the default URL, the public URL value would be `http://localhost:8888`.
-Required for Google OAuth 2.0 authentication. Used for Auth0 and some generic OAuth 2.0 authentication providers.
-
-Environment variable: `$PUBLIC_URL`
-
-## Auth0 OAuth 2.0 authentication options
-
-### `--auth0-domain=`
-
-The subdomain of your Auth0 client; available on the configuration page for your Auth0 client.
-
-Example: https://myauth0client.auth0.com
-
-Environment variable: `$AUTH0_DOMAIN`
-
-### `--auth0-client-id=`
-
-The Auth0 Client ID value required for OAuth 2.0 support.
-
-Environment variable: `$AUTH0_CLIENT_ID`
-
-### `--auth0-client-secret=`
-
-The Auth0 Client Secret value required for OAuth 2.0 support.
-
-Environment variable: `$AUTH0_CLIENT_SECRET`
-
-### `--auth0-organizations=`
-
-[Optional] The Auth0 organization required to access Chronograf.
-Organizations are set using an "organization" key in the user's `app_metadata`.
-Lists are comma-separated and are only available when using environment variables.
-
-Environment variable: `$AUTH0_ORGS`
-
-## Generic OAuth 2.0 authentication options
-
-### `--generic-name=`
-
-The generic OAuth 2.0 name presented on the login page.
-
-Environment variable: `$GENERIC_NAME`
-
-### `--generic-client-id=`
-
-The generic OAuth 2.0 Client ID value.
-Can be used for a custom OAuth 2.0 service.
-
-Environment variable: `$GENERIC_CLIENT_ID`
-
-### `--generic-client-secret=`
-
-The generic OAuth 2.0 Client Secret value.
-
-Environment variable: `$GENERIC_CLIENT_SECRET`
-
-### `--generic-scopes=`
-
-The scopes requested by provider of web client.
-
-Default value: `user:email`
-
-Environment variable: `$GENERIC_SCOPES`
-
-### `--generic-domains=`
-
-The email domain required for user email addresses.
-
-Example: `--generic-domains=example.com`
-
-Environment variable: `$GENERIC_DOMAINS`
-
-### `--generic-auth-url=`
-
-The authorization endpoint URL for the OAuth 2.0 provider.
-
-Environment variable: `$GENERIC_AUTH_URL`
-
-### `--generic-token-url=`
-
-The token endpoint URL for the OAuth 2.0 provider.
-
-Environment variable: `$GENERIC_TOKEN_URL`
-
-### `--generic-api-url=`
-
-The URL that returns OpenID UserInfo-compatible information.
-
-Environment variable: `$GENERIC_API_URL`
-
-## Other options
-
-### `--reporting-disabled` | `-r`
+#### `--reporting-disabled` | `-r`
 
 Disables reporting of usage statistics.
-Usage statistics reported once every 24 hours include: OS, arch, version, cluster_id, and uptime information.
+Usage statistics reported once every 24 hours include: `OS`, `arch`, `version`, `cluster_id`, and `uptime`.
 
 Environment variable: `$REPORTING_DISABLED`
 
-### `--log-level=` | `-l`
+#### `--log-level=` | `-l`
 
 Set the logging level.
 
@@ -295,58 +201,192 @@ Example: `--log-level=debug`
 
 Environment variable: `$LOG_LEVEL`
 
-### `--develop` | `-d`
+#### `--develop` | `-d`
 
-Run the `chronograf` server in develop mode.
+Run the `chronograf` service in developer mode.
 
-### `--bolt-path=` | `-b`
+####`--help` | `-h`
 
-The file path to the BoltDB file.
+Displays the command line help for `chronograf`.
 
-Default value: `/var/lib/chronograf/chronograf-v1.db`
+## Authentication options
 
-Environment variable: `$BOLT_PATH`
+### General authentication options
 
-### `--canned-path=` | `-c`
+####`--token-secret=` | `-t`
 
-The path to the directory for [canned dashboards](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf)
+The secret for signing tokens.
 
-Default value: `/usr/share/chronograf/canned`
+Environment variable: `$TOKEN_SECRET`
 
-Environment variable: `$CANNED_PATH`
+####`--auth-duration=`
 
-### `--basepath=` | `-p`
+The total duration (in hours) of cookie life for authentication.
 
-The URL path prefix under which all `chronograf` routes will be mounted.
+Default value: `720h`
 
-Environment variable: `$BASE_PATH`
+Authentication expires on browser close when `--auth-duration=0`.
 
-### `--prefix-routes`
+Environment variable: `$AUTH_DURATION`
 
-Forces `chronograf` server to require that all requests to it are prefixed with the value set in `--basepath`.
 
-Environment variable: `$PREFIX_ROUTES`
+### GitHub-specific OAuth 2.0 authentication options
 
-### `--status-feed-url=`
+See [Configuring GitHub authentication](/chronograf/v1.4/administration/managing-security/#configuring-github-authentication) for more information.
 
-URL of a JSON feed to display as a News Feed on the client Status page.
+####`--github-client-id=` | `-i`
 
-Default value: `https://www.influxdata.com/feed/json`
+The GitHub client ID value for OAuth 2.0 support.
 
-Environment variable: `$STATUS_FEED_URL`
+Environment variable: `$GH_CLIENT_ID`
 
-### `--version` | `-v`
+####`--github-client-secret=` | `-s`
 
-Displays Chronograf version information.
+The GitHub Client Secret value for OAuth 2.0 support.
 
-Example:
-```sh
-$ chronograf -v
-2018/01/03 14:11:19 Chronograf 1.4.0.0-rc1-26-gb74ae387 (git: b74ae387)
-```
+Environment variable: `$GH_CLIENT_SECRET`
 
-## Help option
+####`--github-organization=` | `-o`
 
-### `--help` | `-h`
+[Optional] Specify a GitHub organization membership required for a user.
 
-Show the help information for `chronograf`.
+Environment variable: `$GH_ORGS`
+
+### Google-specific OAuth 2.0 authentication options
+
+See [Configuring Google authentication](/chronograf/v1.4/administration/managing-security/#configuring-google-authentication) for more information.
+
+####`--google-client-id=`
+
+The Google Client ID value required for OAuth 2.0 support.
+
+Environment variable: `$GOOGLE_CLIENT_ID`
+
+####`--google-client-secret=`
+
+The Google Client Secret value required for OAuth 2.0 support.
+
+Environment variable: `$GOOGLE_CLIENT_SECRET`
+
+####`--google-domains=`
+
+[Optional] Restricts authorization to users from specified Google email domains.
+
+Environment variable: `$GOOGLE_DOMAINS`
+
+####`--public-url=`
+
+The public URL required to access Chronograf using a web browser. For example, if you access Chronograf using the default URL, the public URL value would be `http://localhost:8888`.
+Required for Google OAuth 2.0 authentication. Used for Auth0 and some generic OAuth 2.0 authentication providers.
+
+Environment variable: `$PUBLIC_URL`
+
+### Auth0-specific OAuth 2.0 authentication options
+
+See [Configuring Auth0 authentication](/chronograf/v1.4/administration/managing-security/#configuring-oauth-authentication) for more information.
+
+####`--auth0-domain=`
+
+The subdomain of your Auth0 client; available on the configuration page for your Auth0 client.
+
+Example: https://myauth0client.auth0.com
+
+Environment variable: `$AUTH0_DOMAIN`
+
+####`--auth0-client-id=`
+
+The Auth0 Client ID value required for OAuth 2.0 support.
+
+Environment variable: `$AUTH0_CLIENT_ID`
+
+####`--auth0-client-secret=`
+
+The Auth0 Client Secret value required for OAuth 2.0 support.
+
+Environment variable: `$AUTH0_CLIENT_SECRET`
+
+####`--auth0-organizations=`
+
+[Optional] The Auth0 organization membership required to access Chronograf.
+Organizations are set using an "organization" key in the user's `app_metadata`.
+Lists are comma-separated and are only available when using environment variables.
+
+Environment variable: `$AUTH0_ORGS`
+
+### Heroku-specific OAuth 2.0 authentication options
+
+See [Configuring Heroku authentication](/chronograf/v1.4/administration/managing-security/#configuring-heroku-authentication) for more information.
+
+### `--heroku-client-id=`                         
+The Heroku Client ID for OAuth 2.0 support.
+
+**Environment Variable:** `$HEROKU_CLIENT_ID`
+
+### `--heroku-secret=`                            
+The Heroku Secret for OAuth 2.0 support.
+
+**Environment Variable:** `$HEROKU_SECRET`
+
+### `--heroku-organization=`                      
+The Heroku organization memberships required for access to Chronograf.
+Lists are comma-separated.
+
+**Environment Variable:** `$HEROKU_ORGS`
+
+
+### Generic OAuth 2.0 authentication options
+
+See [Configuring Generic authentication](/chronograf/v1.4/administration/managing-security/#configuring-g-authentication) for more information.
+
+####`--generic-name=`
+
+The generic OAuth 2.0 name presented on the login page.
+
+Environment variable: `$GENERIC_NAME`
+
+####`--generic-client-id=`
+
+The generic OAuth 2.0 Client ID value.
+Can be used for a custom OAuth 2.0 service.
+
+Environment variable: `$GENERIC_CLIENT_ID`
+
+####`--generic-client-secret=`
+
+The generic OAuth 2.0 Client Secret value.
+
+Environment variable: `$GENERIC_CLIENT_SECRET`
+
+####`--generic-scopes=`
+
+The scopes requested by provider of web client.
+
+Default value: `user:email`
+
+Environment variable: `$GENERIC_SCOPES`
+
+####`--generic-domains=`
+
+The email domain required for user email addresses.
+
+Example: `--generic-domains=example.com`
+
+Environment variable: `$GENERIC_DOMAINS`
+
+####`--generic-auth-url=`
+
+The authorization endpoint URL for the OAuth 2.0 provider.
+
+Environment variable: `$GENERIC_AUTH_URL`
+
+####`--generic-token-url=`
+
+The token endpoint URL for the OAuth 2.0 provider.
+
+Environment variable: `$GENERIC_TOKEN_URL`
+
+####`--generic-api-url=`
+
+The URL that returns OpenID UserInfo-compatible information.
+
+Environment variable: `$GENERIC_API_URL`
