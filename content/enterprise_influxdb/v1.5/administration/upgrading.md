@@ -14,7 +14,7 @@ Version 1.5 includes the first official Time Series Index (TSI) release. Althoug
 
 For upgrading steps, see [Upgrading to InfluxDB 1.5](/influxdb/v1.5/administration/upgrading/).
 
-## Upgrading InfluxDB Enterprise 1.3 clusters to 1.5.0 (rolling upgrade)
+## Upgrading InfluxDB Enterprise 1.3 clusters to 1.5.x (rolling upgrade)
 
 ### Step 0: Back up your cluster before upgrading to version 1.5.
 
@@ -29,33 +29,33 @@ trigger a final incremental backup before proceeding with the upgrade.
 
 Follow these steps to upgrade all meta nodes in your InfluxDB Enterprise cluster. Ensure that the meta cluster is healthy before proceeding to the data nodes.
 
-### Step 1: Download the 1.5.0 meta node package.
+### Step 1: Download the 1.5.x meta node package.
 
 #### Meta node package download
 **Ubuntu & Debian (64-bit)**
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.5.0-c1.5.0_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.5.1-c1.5.1_amd64.deb
 ```
 
 **RedHat & CentOS (64-bit)**
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.5.0_c1.5.0.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.5.1_c1.5.1.x86_64.rpm
 ```
 
-### Step 2: Install the 1.5.0 meta nodes package.
+### Step 2: Install the 1.5.x meta nodes package.
 
 #### Meta node package install
 
 ##### Ubuntu & Debian (64-bit)
 
 ```
-sudo dpkg -i influxdb-meta_1.5.0-c1.5.0_amd64.deb
+sudo dpkg -i influxdb-meta_1.5.1-c1.5.1_amd64.deb
 ```
 
 ##### RedHat & CentOS (64-bit)
 
 ```
-sudo yum localinstall influxdb-meta-1.5.0_c1.5.0.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.5.1_c1.5.1.x86_64.rpm
 ```
 
 ### Step 3: Restart the `influxdb-meta` service.
@@ -92,29 +92,29 @@ ID	TCP Address		Version
 Meta Nodes
 ==========
 TCP Address		Version
-rk-upgrading-01:8091	1.5.0_c1.5.0   # 1.5.0_c1.5.0 = 👍
-rk-upgrading-02:8091	1.5.0_c1.5.0
-rk-upgrading-03:8091	1.5.0_c1.5.0
+rk-upgrading-01:8091	1.5.1_c1.5.1   # 1.5.1_c1.5.1 = 👍
+rk-upgrading-02:8091	1.5.1_c1.5.1
+rk-upgrading-03:8091	1.5.1_c1.5.1
 ```
 
 ## Upgrading data nodes
 
 Repeat the following steps for each data node in your InfluxDB Enterprise cluster.
 
-### Step 1: Download the 1.5.0 data node package.
+### Step 1: Download the 1.5.x data node package.
 
 #### Data node package download
 
 ##### Ubuntu & Debian (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.5.0-c1.5.0_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.5.1-c1.5.1_amd64.deb
 ```
 
 ##### RedHat & CentOS (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.5.0_c1.5.0.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.5.1_c1.5.1.x86_64.rpm
 ```
 
 ### Step 2: Remove the data node from the load balancer.
@@ -122,7 +122,7 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.5.0_c1.5.0.x8
 To avoid downtime and allow for a smooth transition, remove the data node you are upgrading from your
 load balancer **before** performing the remaining steps.
 
-### Step 3: Install the 1.5.0 data node packages.
+### Step 3: Install the 1.5.x data node packages.
 
 #### Data node package install
 
@@ -134,12 +134,12 @@ The configuration file will be updated with the necessary changes for version 1.
 
 **Ubuntu & Debian (64-bit)**
 ```
-sudo dpkg -i influxdb-data_1.5.0-c1.5.0_amd64.deb
+sudo dpkg -i influxdb-data_1.5.1-c1.5.1_amd64.deb
 ```
 
 **RedHat & CentOS (64-bit)**
 ```
-sudo yum localinstall influxdb-data-1.5.0_c1.5.0.x86_64.rpm
+sudo yum localinstall influxdb-data-1.5.1_c1.5.1.x86_64.rpm
 ```
 
 ### Step 4: Update the data node configuration file.
@@ -218,16 +218,16 @@ The [`influxd-ctl`](/enterprise_influxdb/v1.5/features/cluster-commands/) utilit
 Data Nodes
 ==========
 ID	TCP Address		Version
-4	rk-upgrading-01:8088	1.5.0_c1.5.0   # 1.5.0_c1.5.0 = 👍
-5	rk-upgrading-02:8088	1.5.0_c1.5.0
-6	rk-upgrading-03:8088	1.5.0_c1.5.0
+4	rk-upgrading-01:8088	1.5.1_c1.5.1   # 1.5.1_c1.5.1 = 👍
+5	rk-upgrading-02:8088	1.5.1_c1.5.1
+6	rk-upgrading-03:8088	1.5.1_c1.5.1
 
 Meta Nodes
 ==========
 TCP Address		Version
-rk-upgrading-01:8091	1.5.0_c1.5.0
-rk-upgrading-02:8091	1.5.0_c1.5.0
-rk-upgrading-03:8091	1.5.0_c1.5.0
+rk-upgrading-01:8091	1.5.1_c1.5.1
+rk-upgrading-02:8091	1.5.1_c1.5.1
+rk-upgrading-03:8091	1.5.1_c1.5.1
 ```
 
 If you have any issues upgrading your cluster, please do not hesitate to contact support at the email address
