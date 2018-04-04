@@ -23,7 +23,7 @@ If you have incremental backups created as part of your standard operating proce
 trigger a final incremental backup before proceeding with the upgrade.
 
 > ***Note:*** For information on performing a final incremental backup or a full backup,
-> see the InfluxDB Enterprise 3.x [Backup and restore](/enterprise_influxdb/v1.5/guides/backup-and-restore) documentation.
+> see the InfluxDB Enterprise 1.3 [Backup and restore](/enterprise_influxdb/v1.3/guides/backup-and-restore) documentation.
 
 ## Upgrading meta nodes
 
@@ -127,10 +127,10 @@ load balancer **before** performing the remaining steps.
 #### Data node package install
 
 When you run the install command, your terminal asks if you want to keep your
-current configuration file or overwrite your current configuration file with the file for version 1.5.0.
+current configuration file or overwrite your current configuration file with the file for version 1.5.x.
 
 Keep your current configuration file by entering `N` or `O`.
-The configuration file will be updated with the necessary changes for version 1.5.0 in the next step.
+The configuration file will be updated with the necessary changes for version 1.5.x in the next step.
 
 **Ubuntu & Debian (64-bit)**
 ```
