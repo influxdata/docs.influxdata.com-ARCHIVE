@@ -10,7 +10,7 @@ menu:
   kapacitor_1_4:
     name: TICKscript nodes
     identifier: nodes
-    weight: 4
+    weight: 6
 ---
 
 > ***Note:*** Before continuing, please make sure you have read the
