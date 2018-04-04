@@ -12,14 +12,24 @@ Enterprise Kapacitor configuration shares the same principles as those presented
 in the [Confugring Kapacitor](/kapacitor/v1.4/administration/configuration/)
 document of open-source Kapacitor.
 
-However in Enterprise Kapacitor there are new grouping identifiers that pertain
+However in Kapacitor Enterprise there are new grouping identifiers that pertain
 to features specific to an enterprise deployment.
 
-## The Configuration File
+## Configuration Groups
 
-Enterprise licensing
+The four new configuration groups needed in Kapacitor Enterprise are:
 
-```
+* `[enterprise]` &ndash; Covers management of Influxdata licenses.
+* `[auth]` &ndash; Covers the authentication handler.
+* `[cluster]` &ndash; Covers communications over Gossip.
+* `[rpc]` &ndash; Covers procedure calls between cluster members.
+
+### Enterprise licensing
+
+The `[enterprise]` group is required to run Kapacitor Enterprise.  
+
+**Example 1 &ndash; Enterprise configuration group**
+```toml
 [enterprise]
   # Must be set to true to use the Enterprise Web UI.
   # registration-enabled = false
@@ -35,8 +45,28 @@ Enterprise licensing
   license-path = ""
 ```
 
-Authentication
+This group includes the following properties:
 
+* `registration-enabled` &ndash; Whether or not to enable registraion.  Must be set to true.
+* `registration-server-url` &ndash; The url of the registration server, if changed from the default.
+* `license-key` &ndash; The license key string provided by Influxdata.
+* `license-path` &ndash; Path to the license file provided by Influxdata.
+
+Note that `license-key` and `license-path` are mutually exclusive properties.
+Use one or the other but not both.
+
+When a Kapacitor Enterprise node loads it will check the license against the
+registration server before attempting to join the cluster. If the license is
+invalid or no license is found, it will not cluster but will continue to run
+like open-source Kapacitor.
+
+### Authentication
+
+The `[auth]` group is used to declare how to connect to the backend
+Authentication/Authorization user store.  Currently this store is handled by
+default by the influxdb-meta cluster.
+
+**Example 2 &ndash; Auth configuration group**
 ```
 [auth]
   # Configure authentication service.
@@ -48,13 +78,29 @@ Authentication
   # Address of a meta server.
   # If empty then meta is not used as a user backend.
   # host:port
-  meta-addr = ""
-
+  meta-addr = "172.17.0.2:8091"
+  # meta-use-tls = false
 ```
 
-Cluster communications
+This group includes the following properties:
 
-```
+* `cache-expiration` &ndash; How long Kapacitor should cache user information locally in the kapacitor.db before querying the influx-meta back-end once more to authenticate a user.
+* `bcrypt-cost` &ndash; The number of iterations used when hashing the password using the bcrypt algorithm.
+* `meta-addr` &ndash; Address of the influxdb-meta server.  A string containing the host and port. Host can be an IP Address or a domainname.  When using TLS the host part must contain the name used in the CN part of the server certificate.
+* `meta-use-tls` &ndash; Whether to connect to the influxdb-meta server over TLS or not.
+
+Authentication configuration is explained in greater detail in the document
+[Authentication and Authorization](/enterprise_kapacitor/v1.4/administration/auth/).
+
+
+### Cluster communications
+
+The `[cluster]` group defines how the node advertises itself, joins other
+nodes in the cluster and exchanges information with those nodes.  The Gossip
+protocol is used.
+
+**Example 3 &ndash; Cluster configuration group**
+```toml
 [cluster]
   # Bind-address is a host:port pair to bind to for the cluster gossip communitcation.
   # Both a UDP and TCP address will be bound.
@@ -80,9 +126,21 @@ Cluster communications
 
 ```
 
-Remote Procedure Calls
+The following properties are used:
 
-```
+* `bind-address` &ndash; A string containing host(optional) and port to connect to the cluster.  If the host part of the string is missing the system hostname will be used.
+* `advertise-address` &ndash; A string declaring the address advertised to other cluster members as the gossip endpoint.  Can be empty, in which case the hostname and bind address will be used.
+* `roles` &ndash; An array of strings declaring the roles this instance plays in the cluster.  Only the `"worker"` role is currently supported.
+* `gossip-members` &ndash; A positive integer for the number of neighboring cluster nodes to whom messages will be sent.
+* `gossip-interval` &ndash; A time value declaring how frequently gossip messages should be sent.
+* `gossip-sync-interval` &ndash; A time value declaring how frequently the full TCP state sync of the cluster gossip state should occur.
+
+### Remote Procedure Calls
+
+The `[rpc]` group defines how RPC communications between nodes should be handled.
+
+**Example 4 &ndash; RPC configuration group**
+```toml
 [rpc]
   # Bind-address is a host:port pair to bind to for the cluster rpc communitcation.
   bind-address = ":9091"
@@ -93,3 +151,9 @@ Remote Procedure Calls
   enable-grpc-logging = false
 
 ```
+
+The following properties are used:
+
+* `bind-address` &ndash; A string containing the host(optional) and port to connect to the cluster. If the host part of the string is left out the system hostname will be used.
+* `advertise-adress` &ndash; A string declaring the address advertised to other cluster members as the RPC endpoint. Can be empty, in which case the hostname and bind address will be used.
+* `enable-grpc-logging` &ndash; Whether or not to enable logging of RPC communications.

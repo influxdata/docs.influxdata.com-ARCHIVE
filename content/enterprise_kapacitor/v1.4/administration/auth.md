@@ -159,7 +159,8 @@ spanMMX.onclick = function(){
 Kapacitor authorization and authentication involves three components of the
 enterprise TICK stack: InfluxDB Enterprise meta nodes, Enterprise Kapacitor and,
 to aid in the creation of users and roles, Chronograf and its InfluxDB Admin
-console.  
+console.  Since user and role management can also be handled over the
+infludb-meta node API, Chronograf is optional.  
 
 InfluxDB meta nodes provide the API for the user and permission store.  This API
 makes available standard operations such as creating, retrieving, updating and

@@ -14,14 +14,6 @@ features implemented by Kapacitor handlers and services.  These including using
 TLS on public API endpoints and enabling authentication and authorization, which
 is covered in depth in the [Authentication and Authorization](/enterprise_kapacitor/v1.4/administration/auth/) document.    
 
-<!--
-### Security of Communications chnannels
-
-Gossip `:9090`
-RPC: `:9091`
-API: `:9092`
--->
-
 ### Interacting with Secure InfluxDB
 
 A secure Influx Enterprise installation is one which has at a minimum TLS
@@ -42,7 +34,8 @@ when verifying security credentials.
 Properties relating to the Influxdb-Meta configuration are located in the `[auth]`
 group of the configuration schema.  
 
-```
+**Example 1 &ndash; Authentication configuration group**
+```toml
 [auth]
   # Configure authentication service.
   # User permissions cache expiration time.
@@ -64,7 +57,9 @@ The properties can be understood as follows:
 * `meta-addr` &ndash; The address to the Influxdb-meta node API endpoint.  Note that if this endpoint is secured using TLS, then the host and domain name portion of this string must match the FQDN string specified in the CN field of the certificate.  Otherwise Kapacitor will reject the certificate, terminate the credential verification transaction and return 401 to all requests.
 * `meta-use-tls` &ndash; Sets up Kapacitor to connect to the Influxdb-Meta node using TLS/HTTPS.
 
-More detailed information is covered in the [Authentication and Authorization](/enterprise_kapacitor/v1.4/administration/auth/) document.  
+More detailed information is available in the
+[Authentication and Authorization](/enterprise_kapacitor/v1.4/administration/auth/)
+document.  
 
 #### Secure Influxdb-Data
 
@@ -82,6 +77,7 @@ properties in the `[[influxdb]]` group.
       * `ssl-key` &ndash; Path to the public key used by the endpoint.
    * `ssl-ca` &ndash; Path to the PEM record of the certificate authority.
 
+**Example 2 &ndash; Influxdb Group, Enabling TLS Connection**
 ```toml
 [[influxdb]]
   # Connect to an InfluxDB cluster
@@ -108,6 +104,7 @@ To connect to a cluster protected by authentication provide the following parame
 * `username` &ndash; Name of an Influxdb user with admin privilgeges.
 * `password` &ndash; Password of the user.
 
+**Example 3 &ndash; Influxdb Group, Enabling Authentication**
 ```toml
 # Multiple InfluxDB configurations can be defined.
 # Exactly one must be marked as the default.
@@ -124,9 +121,38 @@ To connect to a cluster protected by authentication provide the following parame
   ...
 ```
 
-
 ### Securing Kapacitor
 
+Enterprise Kapacitor listens for communications on three different ports.
+
+* `9090` &nbsp; is the default port for the Gossip Protocol used in establishing and maintaining the cluster.
+* `9091` &nbsp; is the default RPC port for the cluster.
+* `9092` &nbsp; is the API port for a Kapacitor instance.
+
+Each of these default values can be modified in the configuration file.
+
+By default the Gossip and RPC ports communicate over plain text.  It is expected
+that these communications will occur behind a firewall and that these ports
+will not be publicly exposed. They can however be secured if needed.  Contact
+[Influxdata support](mailto:Support@InfluxData.com) if this will be
+required.
+
+The API Port may need to be exposed for client applications.  It features the
+same TLS security measures as
+[Open Source Kapacitor](/kapacitor/v1.4/administration/security/#kapacitor-security)
+and also features an Authentication/Authorization handler. For more information
+see the [Authentication and Authorization](/enterprise_kapacitor/v1.4/administration/auth/)
+document.
+
+#### Kapacitor over TLS
+
+This feature can be enabled in the configuration `http` group of the configuration.
+Activation requires simply setting the property `https-enabled` to `true` and
+then providing a path to a certificate with the property `https-certificate`.
+
+The following example shows how this is done in the `kapacitor.conf` file.
+
+**Example 4 &ndash; Enabling TLS for Kapacitor**
 ```toml
 [http]
   # HTTP API Server for Kapacitor
@@ -143,3 +169,23 @@ To connect to a cluster protected by authentication provide the following parame
   https-certificate = "/etc/ssl/kapacitor.pem"
   shared-secret = ""
 ```
+
+#### Kapacitor command-line client with HTTPS
+
+Once HTTPS has been enabled the Kapacitor command line client will need to be
+supplied the `-url` argument in order to connect.  If a self-signed or other
+certificate is used, which has not been added to the system certificate store,
+an addition argument `-skipVerify` will also need to be provided.
+
+**Example 5 &ndash; Connecting the Kapacitor client with TLS enabled**
+```
+$ kapacitor -url https://localhost:9092 -skipVerify list tasks
+ID                                                 Type      Status    Executing Databases and Retention Policies
+chronograf-v1-3586109e-8b7d-437a-80eb-a9c50d00ad53 stream    enabled   true      ["telegraf"."autogen"]
+```
+
+### Kapacitor with Authentication
+
+Configuring Authentication for Kapacitor Enterprise is presented in the separate
+[Authentication and Authorization](/enterprise_kapacitor/v1.4/administration/auth/)
+document.
