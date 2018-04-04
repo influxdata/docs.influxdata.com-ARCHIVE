@@ -13,6 +13,7 @@ menu:
 * [Chronograf service options](#application-options)
   - [InfluxDB connection options](#influxdb-authentication-options)
   - [Kapacitor connection options](#kapacitor-authentication-options)
+  - [TLS (Transport Layer Security) options](#tls--transport-layer-security--options)
   * [Other service options](#other-options)
 * [Authentication options](#authentication-options)
     * [General authentication options](#general-authentication-options)
@@ -175,6 +176,12 @@ Environment variable: `$TLS_PRIVATE_KEY`
 
 ### Other service options
 
+####`--custom-link <display_name>:<link_address>`
+
+Custom link added to Chronograf User menu options. Useful for providing links to internal company resources for your Chronograf users. Can be used when any OAuth 2.0 authentication is enabled. To add another custom link, repeat the custom link option.
+
+Example: `--custom-link InfluxData:http://www.influxdata.com/`
+
 #### `--reporting-disabled` | `-r`
 
 Disables reporting of usage statistics.
@@ -221,6 +228,7 @@ Default value: `720h`
 Authentication expires on browser close when `--auth-duration=0`.
 
 Environment variable: `$AUTH_DURATION`
+
 
 ### GitHub-specific OAuth 2.0 authentication options
 
