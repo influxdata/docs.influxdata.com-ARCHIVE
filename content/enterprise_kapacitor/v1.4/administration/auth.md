@@ -392,7 +392,7 @@ be sent to the lead node in the Influxd-Meta raft.  If when POSTing a request th
 node returns a 307 redirect message, try resending the request to the lead node
 indicated by the `Location` field in the HTTP header.
 
-**Example 5 &ndash; Creating a User against follower node**
+**Example 5 &ndash; Creating a User against a follower node**
 ```
 $ curl -u "admin:changeit" -s -v -d '{"action":"create","user":{"name":"phantom2","password":"changeit"}}' https://cluster_node_2:8091/user
 *   Trying 172.31.16.140...
