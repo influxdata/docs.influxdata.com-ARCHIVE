@@ -86,6 +86,7 @@ The [Librato (librato_output) output plugin](https://github.com/influxdata/teleg
 
 ### [MQTT (mqtt_output)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/mqtt)
 
+The [MQTT (mqtt_output) output plugin](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/mqtt) writes to the MQTT server using [supported output data formats](https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_OUTPUT.md).
 
 ### [NATS Output (nats_output)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/nats)
 
@@ -111,6 +112,7 @@ The [Riemann (riemann_output) output plugin](https://github.com/influxdata/teleg
 
 ### [Riemann Legacy (riemann_legacy_output)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/riemann_legacy)
 
+The [Riemann Legacy (riemann_legacy_output) output plugin](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/riemann_legacy) will be deprecated in a future release, see https://github.com/influxdata/telegraf/issues/1878 for more details & discussion.
 
 ### [Socket Writer (socket_writer_output)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/socket_writer)
 
