@@ -142,7 +142,6 @@ spanMMX.onclick = function(){
 
 }
 
-
 </script>
 
 ## Contents
@@ -162,7 +161,7 @@ to aid in the creation of users and roles, Chronograf and its InfluxDB Admin
 console.  Since user and role management can also be handled over the
 infludb-meta node API, Chronograf is optional.  
 
-InfluxDB meta nodes provide the API for the user and permission store.  This API
+InfluxDB meta nodes provide the API for the user and privilege store.  This API
 makes available standard operations such as creating, retrieving, updating and
 deleting users and roles.  When retrieving users, it becomes the TICK
 authentication service for other TICK components, returning a JSON document
@@ -170,7 +169,7 @@ describing the user, if the user exists, to the requesting component.  To save
 time and calls, components, such as Kapacitor, can cache user documents in their
 local data stores.  
 
-The Influx-Meta schema includes a limited set of predefined permissions.  Among
+The Influx-Meta schema includes a limited set of predefined privileges.  Among
 these are `KapacitorAPI` and `KapacitorConfigAPI`.  These permissions can be
 assigned directly to the user or to a role, to which the user can then be assigned
 in turn.
@@ -193,10 +192,12 @@ user seeks to use the Kapacitor API directly or to use the command line client,
 credentials need to be supplied.
 
 For example when using the Kapacitor client.
+
+**Example 1 &ndash; Using Credentials with Kapacitor CLI Client**
 ```
-$ kapacitor -url http://tux:changeit@localhost:9092 list tasks
+kapacitor -url https://admin:changeit@cluster_node_1:9092 list tasks
 ID                                                 Type      Status    Executing Databases and Retention Policies
-172-31-16-108-cpu-alert                            stream    enabled   true      ["telegraf"."autogen"]
+cluster_node_1-cpu-alert                            stream    enabled   true      ["telegraf"."autogen"]
 chronograf-v1-9199dfc1-90d3-4a22-a34b-93577057daa3 stream    disabled  false     ["telegraf"."autogen"]
 ```
 
@@ -209,8 +210,8 @@ Authentication roughly follows these steps:
 
 1. When processing the request, Kapacitor will strip out the credentials.
 2. Kapacitor then checks to see whether the user name currently matches any user details document in its local cache in the Kapacitor database.  If so it jumps to step 7.
-3. If the user details are not in the cache, Kapacitor sends the credentials to the Influx-Meta API endpoint.
-4. If the credentials are valid, the Influx-Meta server then returns a user details JSON document.
+3. If the user details are not in the cache, Kapacitor sends the credentials to the Influxdb-Meta API endpoint.
+4. If the credentials are valid, the Influxdb-Meta server then returns a user details JSON document.
 5. Kapacitor in turn inspects the user details document for the correct privileges.
 6. Kapacitor caches the user details document.
 7. If the document shows the user has the correct privileges, Kapacitor completes
@@ -226,7 +227,7 @@ transaction is aborted and Kapacitor returns 403 and a message like the followin
 Authentication can be declared in the configuration file in two parameter
 groups: `[http]` and `[auth]`.  
 
-**Example 1 &ndash; Configuring Authentication in kapacitor.conf**
+**Example 2 &ndash; Configuring Authentication in kapacitor.conf**
 ```
 [http]
   # HTTP API Server for Kapacitor
@@ -253,24 +254,26 @@ groups: `[http]` and `[auth]`.
   # Address of a meta server.
   # If empty then meta is not used as a user backend.
   # host:port
-  meta-addr = "172.17.0.2:8091"
+  meta-addr = "cluster_node_1:8091"
+  # meta-use-tls = false
 ```
 
-In the `[http]` group the value of `authe-enabled` needs to be set to `true`.
+In the `[http]` group the value of `auth-enabled` needs to be set to `true`.
 
-Enterprise Kapacitor also contains a set of authentication specific properties
+The core authentication specific properties of Enterprise Kapacitor are found
 in the `[auth]` group.  These include:
 
 * `cache-expiration` &ndash; Defines how long a consumer service can hold a credential document in its cache.
 * `bcrypt-cost` &ndash; The number of iterations used when hashing the password using the bcrypt algorithm.  Higher values generate hashes more resilient to brute force cracking attempts, but lead to marginally longer resolution times.
 * `meta-addr` &ndash; Declares the address of the InfluxDB Enterprise meta node to connect to in order to access the user and permission store.
+* `meta-use-tls` &ndash; Declares whether to use TLS when communication with the influxdb-meta node or not.  Default is `false`.
 
 Currently no alternative exists to using InfluxDB Enterprise meta nodes as the backend
 user and privilege store, so an address and port need to be supplied.
 
 These properties can also be defined as environment variables.  
 
-**Example 2 &ndash; Configuring Authentication with ENVARS**
+**Example 3 &ndash; Configuring Authentication with ENVARS**
 ```
 KAPACITOR_HTTP_AUTH_ENABLED=true;
 KAPACITOR_AUTH_META_ADDR=172.17.0.2:8091
@@ -348,8 +351,9 @@ The Influxd-Meta API provides an endpoint `/user` for managing users.
 
 To view a list of existing users.
 
+**Example 4 &ndash; Listing Users**
 ```
-$ curl -u "admin:changeit" -s http://localhost:8091/user | python -m json.tool
+$ curl -u "admin:changeit" -s https://cluster_node_1:8091/user | python -m json.tool
 {
     "users": [
         {
@@ -361,24 +365,25 @@ $ curl -u "admin:changeit" -s http://localhost:8091/user | python -m json.tool
                     "ViewChronograf",
                     "CreateDatabase",
                     "CreateUserAndRole",
+                    "AddRemoveNode",
                     "DropDatabase",
                     "DropData",
                     "ReadData",
                     "WriteData",
+                    "Rebalance",
                     "ManageShard",
                     "ManageContinuousQuery",
                     "ManageQuery",
                     "ManageSubscription",
-                    "Monitor"
+                    "Monitor",
+                    "CopyShard",
+                    "KapacitorAPI",
+                    "KapacitorConfigAPI"
                 ]
             }
-        },
-        {
-            "hash": "$2a$10$DJU3VGwJrpl.on9QyyJH3uBGq3UDSo1c.UXUSiCvR0gke85ZJYvsu",
-            "name": "bob",
-            "permissions": {
-                "": []
-            }
+        }
+    ]
+}
 ...            
 ```
 
@@ -387,12 +392,32 @@ be sent to the lead node in the Influxd-Meta raft.  If when POSTing a request th
 node returns a 307 redirect message, try resending the request to the lead node
 indicated by the `Location` field in the HTTP header.
 
+**Example 5 &ndash; Creating a User against follower node**
 ```
-$ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"create","user":{"name":"phantom","password":"changeit"}}' http://localhost:8091/user
-*   Trying 127.0.0.1...
-* Connected to localhost (127.0.0.1) port 8091 (#0)
+$ curl -u "admin:changeit" -s -v -d '{"action":"create","user":{"name":"phantom2","password":"changeit"}}' https://cluster_node_2:8091/user
+*   Trying 172.31.16.140...
+* Connected to cluster_node_2 (172.31.16.140) port 8091 (#0)
+* found 149 certificates in /etc/ssl/certs/ca-certificates.crt
+* found 596 certificates in /etc/ssl/certs
+* ALPN, offering http/1.1
+* SSL connection using TLS1.2 / ECDHE_RSA_AES_128_GCM_SHA256
+* 	 server certificate verification OK
+* 	 server certificate status verification SKIPPED
+* 	 common name: cluster_node_2 (matched)
+* 	 server certificate expiration date OK
+* 	 server certificate activation date OK
+* 	 certificate public key: RSA
+* 	 certificate version: #1
+* 	 subject: C=CZ,ST=Praha,L=Hlavni-mesto,O=Bonitoo.io,OU=QA,CN=cluster_node_2
+* 	 start date: Tue, 27 Mar 2018 12:34:09 GMT
+* 	 expire date: Thu, 26 Mar 2020 12:34:09 GMT
+* 	 issuer: C=CZ,ST=Praha,L=Hlavni-mesto,O=bonitoo.io,OU=QA,CN=bonitoo.io,EMAIL=tester@qa.org
+* 	 compression: NULL
+* ALPN, server did not agree to a protocol
+* Server auth using Basic with user 'admin'
 > POST /user HTTP/1.1
-> Host: localhost:8091
+> Host: cluster_node_2:8091
+> Authorization: Basic YWRtaW46Y2hhbmdlaXQ=
 > User-Agent: curl/7.47.0
 > Accept: */*
 > Content-Length: 68
@@ -400,11 +425,11 @@ $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"create","user":{"nam
 >
 * upload completely sent off: 68 out of 68 bytes
 < HTTP/1.1 307 Temporary Redirect
-< Influxdb-Metaindex: 28443
-< Location: http://ip-172-31-16-140.us-west-1.compute.internal:8091/user
-< Request-Id: ab2924b6-2834-11e8-b553-000000000000
-< X-Influxdb-Version: 1.3.8-c1.3.8
-< Date: Thu, 15 Mar 2018 09:38:51 GMT
+< Influxdb-Metaindex: 33402
+< Location: https://cluster_node_1:8091/user
+< Request-Id: b7489b68-38c4-11e8-9cf7-000000000000
+< X-Influxdb-Version: 1.5.1-c1.5.1
+< Date: Thu, 05 Apr 2018 11:30:17 GMT
 < Content-Length: 0
 < Content-Type: text/plain; charset=utf-8
 <
@@ -412,22 +437,42 @@ $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"create","user":{"nam
 
 To create a new user against the lead node.  
 
+**Example 6 &ndash; Creating a User against the lead node**
 ```
-$ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"create","user":{"name":"phantom","password":"changeit"}}' http://ip-172-31-16-140.us-west-1.compute.internal:8091/user
-*   Trying 172.31.16.140...
-* Connected to ip-172-31-16-140.us-west-1.compute.internal (172.31.16.140) port 8091 (#0)
+$ curl -u "admin:changeit" -s -v -d '{"action":"create","user":{"name":"phantom","password":"changeit"}}' https://cluster_node_1:8091/user
+*   Trying 172.31.16.108...
+* Connected to cluster_node_1 (172.31.16.108) port 8091 (#0)
+* found 149 certificates in /etc/ssl/certs/ca-certificates.crt
+* found 596 certificates in /etc/ssl/certs
+* ALPN, offering http/1.1
+* SSL connection using TLS1.2 / ECDHE_RSA_AES_128_GCM_SHA256
+* 	 server certificate verification OK
+* 	 server certificate status verification SKIPPED
+* 	 common name: cluster_node_1 (matched)
+* 	 server certificate expiration date OK
+* 	 server certificate activation date OK
+* 	 certificate public key: RSA
+* 	 certificate version: #1
+* 	 subject: C=CZ,ST=Praha,L=Hlavni-mesto,O=Bonitoo.io,OU=QA,CN=cluster_node_1
+* 	 start date: Tue, 27 Mar 2018 12:29:36 GMT
+* 	 expire date: Thu, 26 Mar 2020 12:29:36 GMT
+* 	 issuer: C=CZ,ST=Praha,L=Hlavni-mesto,O=bonitoo.io,OU=QA,CN=bonitoo.io,EMAIL=tester@qa.org
+* 	 compression: NULL
+* ALPN, server did not agree to a protocol
+* Server auth using Basic with user 'admin'
 > POST /user HTTP/1.1
-> Host: ip-172-31-16-140.us-west-1.compute.internal:8091
+> Host: cluster_node_1:8091
+> Authorization: Basic YWRtaW46Y2hhbmdlaXQ=
 > User-Agent: curl/7.47.0
 > Accept: */*
-> Content-Length: 67
+> Content-Length: 68
 > Content-Type: application/x-www-form-urlencoded
 >
-* upload completely sent off: 67 out of 67 bytes
+* upload completely sent off: 68 out of 68 bytes
 < HTTP/1.1 200 OK
-< Request-Id: 3a99b41e-2834-11e8-b1a4-000000000000
-< X-Influxdb-Version: 1.3.8-c1.3.8
-< Date: Thu, 15 Mar 2018 09:35:42 GMT
+< Request-Id: 6711760c-38c4-11e8-b7ff-000000000000
+< X-Influxdb-Version: 1.5.1-c1.5.1
+< Date: Thu, 05 Apr 2018 11:28:02 GMT
 < Content-Length: 0
 < Content-Type: text/plain; charset=utf-8
 <
@@ -435,12 +480,13 @@ $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"create","user":{"nam
 
 To get a user details document.
 
+**Example 7 &ndash; Retrieving a User Details Document**
 ```
-$ curl --negotiate -u "admin:changeit" -s http://localhost:8091/user?name=phantom | python -m json.tool
+$ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/user?name=phantom | python -m json.tool
 {
     "users": [
         {
-            "hash": "$2a$10$LqNj.EmmYutGj3jI0E4SEOJFOVHjOoRUgkwMSI5gH1lzObeAc0r7y",
+            "hash": "$2a$10$hR.Ih6DpIHUaynA.uqFhpOiNUgrADlwg3rquueHDuw58AEd7zk5hC",
             "name": "phantom"
         }
     ]
@@ -449,12 +495,30 @@ $ curl --negotiate -u "admin:changeit" -s http://localhost:8091/user?name=phanto
 
 To grant permissions to a user.
 
+**Example 8 &ndash; Granting Permissions to a User**
 ```
-$ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"add-permissions","user":{"name":"phantom","permissions":{"":["KapacitorAPI","KapacitorConfigAPI"]}}}' http://ip-172-31-16-140.us-west-1.compute.internal:8091/user
-*   Trying 172.31.16.140...
-* Connected to ip-172-31-16-140.us-west-1.compute.internal (172.31.16.140) port 8091 (#0)
+$ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"add-permissions","user":{"name":"phantom","permissions":{"":["KapacitorAPI","KapacitorConfigAPI"]}}}' https://cluster_node_1:8091/user
+*   Trying 172.31.16.108...
+* Connected to cluster_node_1 (172.31.16.108) port 8091 (#0)
+* found 149 certificates in /etc/ssl/certs/ca-certificates.crt
+* found 596 certificates in /etc/ssl/certs
+* ALPN, offering http/1.1
+* SSL connection using TLS1.2 / ECDHE_RSA_AES_128_GCM_SHA256
+* 	 server certificate verification OK
+* 	 server certificate status verification SKIPPED
+* 	 common name: cluster_node_1 (matched)
+* 	 server certificate expiration date OK
+* 	 server certificate activation date OK
+* 	 certificate public key: RSA
+* 	 certificate version: #1
+* 	 subject: C=CZ,ST=Praha,L=Hlavni-mesto,O=Bonitoo.io,OU=QA,CN=cluster_node_1
+* 	 start date: Tue, 27 Mar 2018 12:29:36 GMT
+* 	 expire date: Thu, 26 Mar 2020 12:29:36 GMT
+* 	 issuer: C=CZ,ST=Praha,L=Hlavni-mesto,O=bonitoo.io,OU=QA,CN=bonitoo.io,EMAIL=tester@qa.org
+* 	 compression: NULL
+* ALPN, server did not agree to a protocol
 > POST /user HTTP/1.1
-> Host: ip-172-31-16-140.us-west-1.compute.internal:8091
+> Host: cluster_node_1:8091
 > User-Agent: curl/7.47.0
 > Accept: */*
 > Content-Length: 111
@@ -462,9 +526,9 @@ $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"add-permissions","us
 >
 * upload completely sent off: 111 out of 111 bytes
 < HTTP/1.1 200 OK
-< Request-Id: 4bc990ab-2835-11e8-b1fd-000000000000
-< X-Influxdb-Version: 1.3.8-c1.3.8
-< Date: Thu, 15 Mar 2018 09:43:20 GMT
+< Request-Id: 604141f2-38c6-11e8-bc15-000000000000
+< X-Influxdb-Version: 1.5.1-c1.5.1
+< Date: Thu, 05 Apr 2018 11:42:10 GMT
 < Content-Length: 0
 < Content-Type: text/plain; charset=utf-8
 <
@@ -472,11 +536,13 @@ $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"add-permissions","us
 
 Verify permission grant.
 
+**Example 9 &ndash; Verifying User Permissions**
 ```
-$ curl --negotiate -u "admin:changeit" -s http://localhost:8091/user?name=phantom | python -m json.tool{
+$ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/user?name=phantom | python -m json.tool
+{
     "users": [
         {
-            "hash": "$2a$10$LqNj.EmmYutGj3jI0E4SEOJFOVHjOoRUgkwMSI5gH1lzObeAc0r7y",
+            "hash": "$2a$10$hR.Ih6DpIHUaynA.uqFhpOiNUgrADlwg3rquueHDuw58AEd7zk5hC",
             "name": "phantom",
             "permissions": {
                 "": [
@@ -491,12 +557,30 @@ $ curl --negotiate -u "admin:changeit" -s http://localhost:8091/user?name=phanto
 
 To remove permissions.
 
+**Example 10 &ndash; Removing Permissions from a User**
 ```
-$  curl --negotiate -u "admin:changeit" -s -v -d '{"action":"remove-permissions","user":{"name":"phantom","permissions":{"":["KapacitorConfigAPI"]}}}' http://ip-172-31-16-140.us-west-1.compute.internal:8091/user
-*   Trying 172.31.16.140...
-* Connected to ip-172-31-16-140.us-west-1.compute.internal (172.31.16.140) port 8091 (#0)
+$ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"remove-permissions","user":{"name":"phantom","permissions":{"":["KapacitorConfigAPI"]}}}' https://cluster_node_1:8091/user
+*   Trying 172.31.16.108...
+* Connected to cluster_node_1 (172.31.16.108) port 8091 (#0)
+* found 149 certificates in /etc/ssl/certs/ca-certificates.crt
+* found 596 certificates in /etc/ssl/certs
+* ALPN, offering http/1.1
+* SSL connection using TLS1.2 / ECDHE_RSA_AES_128_GCM_SHA256
+* 	 server certificate verification OK
+* 	 server certificate status verification SKIPPED
+* 	 common name: cluster_node_1 (matched)
+* 	 server certificate expiration date OK
+* 	 server certificate activation date OK
+* 	 certificate public key: RSA
+* 	 certificate version: #1
+* 	 subject: C=CZ,ST=Praha,L=Hlavni-mesto,O=Bonitoo.io,OU=QA,CN=cluster_node_1
+* 	 start date: Tue, 27 Mar 2018 12:29:36 GMT
+* 	 expire date: Thu, 26 Mar 2020 12:29:36 GMT
+* 	 issuer: C=CZ,ST=Praha,L=Hlavni-mesto,O=bonitoo.io,OU=QA,CN=bonitoo.io,EMAIL=tester@qa.org
+* 	 compression: NULL
+* ALPN, server did not agree to a protocol
 > POST /user HTTP/1.1
-> Host: ip-172-31-16-140.us-west-1.compute.internal:8091
+> Host: cluster_node_1:8091
 > User-Agent: curl/7.47.0
 > Accept: */*
 > Content-Length: 99
@@ -504,9 +588,9 @@ $  curl --negotiate -u "admin:changeit" -s -v -d '{"action":"remove-permissions"
 >
 * upload completely sent off: 99 out of 99 bytes
 < HTTP/1.1 200 OK
-< Request-Id: 8cbebdc1-2835-11e8-b212-000000000000
-< X-Influxdb-Version: 1.3.8-c1.3.8
-< Date: Thu, 15 Mar 2018 09:45:09 GMT
+< Request-Id: 1d84744c-38c7-11e8-bd97-000000000000
+< X-Influxdb-Version: 1.5.1-c1.5.1
+< Date: Thu, 05 Apr 2018 11:47:27 GMT
 < Content-Length: 0
 < Content-Type: text/plain; charset=utf-8
 <
@@ -514,23 +598,40 @@ $  curl --negotiate -u "admin:changeit" -s -v -d '{"action":"remove-permissions"
 
 To delete a user.
 
+**Example 11 &ndash; Removing a User**
 ```
-p-172-31-16-140.us-west-1.compute.internal left intact
-ubuntu@ip-172-31-16-108:~$  curl --negotiate -u "admin:changeit" -s -v -d '{"action":"delete","user":{"name":"phantom"}}' http://ip-172-31-16-140.us-west-1.compute.internal:8091/user
-*   Trying 172.31.16.140...
-* Connected to ip-172-31-16-140.us-west-1.compute.internal (172.31.16.140) port 8091 (#0)
+$ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"delete","user":{"name":"phantom2"}}' https://cluster_node_1:8091/user
+*   Trying 172.31.16.108...
+* Connected to cluster_node_1 (172.31.16.108) port 8091 (#0)
+* found 149 certificates in /etc/ssl/certs/ca-certificates.crt
+* found 596 certificates in /etc/ssl/certs
+* ALPN, offering http/1.1
+* SSL connection using TLS1.2 / ECDHE_RSA_AES_128_GCM_SHA256
+* 	 server certificate verification OK
+* 	 server certificate status verification SKIPPED
+* 	 common name: cluster_node_1 (matched)
+* 	 server certificate expiration date OK
+* 	 server certificate activation date OK
+* 	 certificate public key: RSA
+* 	 certificate version: #1
+* 	 subject: C=CZ,ST=Praha,L=Hlavni-mesto,O=Bonitoo.io,OU=QA,CN=cluster_node_1
+* 	 start date: Tue, 27 Mar 2018 12:29:36 GMT
+* 	 expire date: Thu, 26 Mar 2020 12:29:36 GMT
+* 	 issuer: C=CZ,ST=Praha,L=Hlavni-mesto,O=bonitoo.io,OU=QA,CN=bonitoo.io,EMAIL=tester@qa.org
+* 	 compression: NULL
+* ALPN, server did not agree to a protocol
 > POST /user HTTP/1.1
-> Host: ip-172-31-16-140.us-west-1.compute.internal:8091
+> Host: cluster_node_1:8091
 > User-Agent: curl/7.47.0
 > Accept: */*
-> Content-Length: 45
+> Content-Length: 46
 > Content-Type: application/x-www-form-urlencoded
 >
-* upload completely sent off: 45 out of 45 bytes
+* upload completely sent off: 46 out of 46 bytes
 < HTTP/1.1 200 OK
-< Request-Id: c9cd5800-2835-11e8-b229-000000000000
-< X-Influxdb-Version: 1.3.8-c1.3.8
-< Date: Thu, 15 Mar 2018 09:46:51 GMT
+< Request-Id: 8dda5513-38c7-11e8-be84-000000000000
+< X-Influxdb-Version: 1.5.1-c1.5.1
+< Date: Thu, 05 Apr 2018 11:50:36 GMT
 < Content-Length: 0
 < Content-Type: text/plain; charset=utf-8
 <
@@ -538,17 +639,21 @@ ubuntu@ip-172-31-16-108:~$  curl --negotiate -u "admin:changeit" -s -v -d '{"act
 
 To verify user has been removed.
 
+**Example 12 &ndash; Verifying User Removal**
 ```
-$ curl --negotiate -u "admin:changeit" -s http://localhost:8091/user?name=phantom
+$ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/user?name=phantom
 {"error":"user not found"}
 ```
 
 #### Roles
 
+The Influxd-Meta API provides an endpoint `/role` for managing roles.
+
 To list roles.
 
+**Example 13 &ndash; Listing Roles**
 ```
-$ curl --negotiate -u "admin:changeit" -s http://localhost:8091/role | python -m json.tool
+$ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/role | python -m json.tool
 {}
 ```
 
@@ -557,12 +662,30 @@ user the lead node must be used.
 
 To create a role.
 
+**Example 14 &ndash; Creating a Role**
 ```
-$ curl --negotiate -u "admin:changeit"  -v -d '{"action":"create","role":{"name":"spectre"}}' http://ip-172-31-16-140.us-west-1.compute.internal:8091/role
-*   Trying 172.31.16.140...
-* Connected to ip-172-31-16-140.us-west-1.compute.internal (172.31.16.140) port 8091 (#0)
+$ curl --negotiate -u "admin:changeit"  -v -d '{"action":"create","role":{"name":"spectre"}}' https://cluster_node_1:8091/role
+*   Trying 172.31.16.108...
+* Connected to cluster_node_1 (172.31.16.108) port 8091 (#0)
+* found 149 certificates in /etc/ssl/certs/ca-certificates.crt
+* found 596 certificates in /etc/ssl/certs
+* ALPN, offering http/1.1
+* SSL connection using TLS1.2 / ECDHE_RSA_AES_128_GCM_SHA256
+* 	 server certificate verification OK
+* 	 server certificate status verification SKIPPED
+* 	 common name: cluster_node_1 (matched)
+* 	 server certificate expiration date OK
+* 	 server certificate activation date OK
+* 	 certificate public key: RSA
+* 	 certificate version: #1
+* 	 subject: C=CZ,ST=Praha,L=Hlavni-mesto,O=Bonitoo.io,OU=QA,CN=cluster_node_1
+* 	 start date: Tue, 27 Mar 2018 12:29:36 GMT
+* 	 expire date: Thu, 26 Mar 2020 12:29:36 GMT
+* 	 issuer: C=CZ,ST=Praha,L=Hlavni-mesto,O=bonitoo.io,OU=QA,CN=bonitoo.io,EMAIL=tester@qa.org
+* 	 compression: NULL
+* ALPN, server did not agree to a protocol
 > POST /role HTTP/1.1
-> Host: ip-172-31-16-140.us-west-1.compute.internal:8091
+> Host: cluster_node_1:8091
 > User-Agent: curl/7.47.0
 > Accept: */*
 > Content-Length: 45
@@ -570,52 +693,95 @@ $ curl --negotiate -u "admin:changeit"  -v -d '{"action":"create","role":{"name"
 >
 * upload completely sent off: 45 out of 45 bytes
 < HTTP/1.1 200 OK
-< Influxdb-Metaindex: 28461
-< Request-Id: e9937ae1-2836-11e8-b2a5-000000000000
-< X-Influxdb-Version: 1.3.8-c1.3.8
-< Date: Thu, 15 Mar 2018 09:54:54 GMT
+< Influxdb-Metaindex: 33408
+< Request-Id: 733b3294-38c8-11e8-805f-000000000000
+< X-Influxdb-Version: 1.5.1-c1.5.1
+< Date: Thu, 05 Apr 2018 11:57:01 GMT
 < Content-Length: 0
 < Content-Type: text/plain; charset=utf-8
 <
 ```
 
-Verify the node has been created.
+Verify the role has been created.
 
+**Example 15 &ndash; Verifying Roles**
 ```
-$ curl --negotiate -u "admin:changeit" -s http://localhost:8091/role | python -m json.tool{
+$ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/role | python -m json.tool
+{
     "roles": [
         {
-            "name": "djinn"
+            "name": "djinn",
         },
         {
             "name": "spectre"
-        }
+        },
     ]
 }
+
 ```
 
 Retrieve a record for a single node.
 
+**Example 16 &ndash; Retrieving a Role Document**
 ```
-$ curl --negotiate -u "admin:changeit" -s http://localhost:8091/role?name=spectre | python -m json.tool{
-    "roles": [
-        {
-            "name": "spectre"
-        }
-    ]
+curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/role?name=spectre | python -m json.tool
+{
+   "roles": [
+       {
+           "name": "spectre"
+       }
+   ]
 }
 ```
 
 Add permissions to a role.
 
+**Example 17 &ndash; Adding Permissions to a Role**
 ```
-$ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"add-permissions","role":{"name":"spectre","permissions":{"":["KapacitorAPI","KapacitorConfigAPI"]}}}' http://ip-172-31-16-140.us-west-1.compute.internal:8091/role
+$ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"add-permissions","role":{"name":"spectre","permissions":{"":["KapacitorAPI","KapacitorConfigAPI"]}}}' https://cluster_node_1:8091/role
+*   Trying 172.31.16.108...
+* Connected to cluster_node_1 (172.31.16.108) port 8091 (#0)
+* found 149 certificates in /etc/ssl/certs/ca-certificates.crt
+* found 596 certificates in /etc/ssl/certs
+* ALPN, offering http/1.1
+* SSL connection using TLS1.2 / ECDHE_RSA_AES_128_GCM_SHA256
+* 	 server certificate verification OK
+* 	 server certificate status verification SKIPPED
+* 	 common name: cluster_node_1 (matched)
+* 	 server certificate expiration date OK
+* 	 server certificate activation date OK
+* 	 certificate public key: RSA
+* 	 certificate version: #1
+* 	 subject: C=CZ,ST=Praha,L=Hlavni-mesto,O=Bonitoo.io,OU=QA,CN=cluster_node_1
+* 	 start date: Tue, 27 Mar 2018 12:29:36 GMT
+* 	 expire date: Thu, 26 Mar 2020 12:29:36 GMT
+* 	 issuer: C=CZ,ST=Praha,L=Hlavni-mesto,O=bonitoo.io,OU=QA,CN=bonitoo.io,EMAIL=tester@qa.org
+* 	 compression: NULL
+* ALPN, server did not agree to a protocol
+> POST /role HTTP/1.1
+> Host: cluster_node_1:8091
+> User-Agent: curl/7.47.0
+> Accept: */*
+> Content-Length: 111
+> Content-Type: application/x-www-form-urlencoded
+>
+* upload completely sent off: 111 out of 111 bytes
+< HTTP/1.1 200 OK
+< Influxdb-Metaindex: 33412
+< Request-Id: 603934f5-38c9-11e8-8252-000000000000
+< X-Influxdb-Version: 1.5.1-c1.5.1
+< Date: Thu, 05 Apr 2018 12:03:38 GMT
+< Content-Length: 0
+< Content-Type: text/plain; charset=utf-8
+<
 ```
 
 Verify permissions have been added.
 
+**Example 18 &ndash; Verifying Role Permissions**
 ```
-$ curl --negotiate -u "admin:changeit" -s http://localhost:8091/role?name=spectre | python -m json.tool{
+$ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/role?name=spectre | python -m json.tool
+{
     "roles": [
         {
             "name": "spectre",
@@ -632,12 +798,30 @@ $ curl --negotiate -u "admin:changeit" -s http://localhost:8091/role?name=spectr
 
 Add user to role.
 
+**Example 19 &ndash; Adding a User to a Role**
 ```
-$ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"add-users","role":{"name":"spectre","users":["phantom"]}}'  http://ec2-13-57-192-165.us-west-1.compute.amazonaws.com:8091/role
-*   Trying 172.31.16.140...
-* Connected to ec2-13-57-192-165.us-west-1.compute.amazonaws.com (172.31.16.140) port 8091 (#0)
+$ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"add-users","role":{"name":"spectre","users":["phantom"]}}'  https://cluster_node_1:8091/role
+*   Trying 172.31.16.108...
+* Connected to cluster_node_1 (172.31.16.108) port 8091 (#0)
+* found 149 certificates in /etc/ssl/certs/ca-certificates.crt
+* found 596 certificates in /etc/ssl/certs
+* ALPN, offering http/1.1
+* SSL connection using TLS1.2 / ECDHE_RSA_AES_128_GCM_SHA256
+* 	 server certificate verification OK
+* 	 server certificate status verification SKIPPED
+* 	 common name: cluster_node_1 (matched)
+* 	 server certificate expiration date OK
+* 	 server certificate activation date OK
+* 	 certificate public key: RSA
+* 	 certificate version: #1
+* 	 subject: C=CZ,ST=Praha,L=Hlavni-mesto,O=Bonitoo.io,OU=QA,CN=cluster_node_1
+* 	 start date: Tue, 27 Mar 2018 12:29:36 GMT
+* 	 expire date: Thu, 26 Mar 2020 12:29:36 GMT
+* 	 issuer: C=CZ,ST=Praha,L=Hlavni-mesto,O=bonitoo.io,OU=QA,CN=bonitoo.io,EMAIL=tester@qa.org
+* 	 compression: NULL
+* ALPN, server did not agree to a protocol
 > POST /role HTTP/1.1
-> Host: ec2-13-57-192-165.us-west-1.compute.amazonaws.com:8091
+> Host: cluster_node_1:8091
 > User-Agent: curl/7.47.0
 > Accept: */*
 > Content-Length: 68
@@ -645,10 +829,10 @@ $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"add-users","role":{"
 >
 * upload completely sent off: 68 out of 68 bytes
 < HTTP/1.1 200 OK
-< Influxdb-Metaindex: 28467
-< Request-Id: ec76460f-2838-11e8-b35d-000000000000
-< X-Influxdb-Version: 1.3.8-c1.3.8
-< Date: Thu, 15 Mar 2018 10:09:18 GMT
+< Influxdb-Metaindex: 33413
+< Request-Id: 2f3f4310-38ca-11e8-83f4-000000000000
+< X-Influxdb-Version: 1.5.1-c1.5.1
+< Date: Thu, 05 Apr 2018 12:09:26 GMT
 < Content-Length: 0
 < Content-Type: text/plain; charset=utf-8
 <
@@ -656,8 +840,10 @@ $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"add-users","role":{"
 
 Verify user has been added to role.
 
+**Example 20 &ndash; Verifying User in Role**
 ```
-$ curl --negotiate -u "admin:changeit" -s http://localhost:8091/role?name=spectre | python -m json.tool{
+$ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/role?name=spectre | python -m json.tool
+{
     "roles": [
         {
             "name": "spectre",
@@ -677,12 +863,30 @@ $ curl --negotiate -u "admin:changeit" -s http://localhost:8091/role?name=spectr
 
 Remove a user from a role.
 
+**Example 21 &ndash; Removing a User from a Role**
 ```
-$ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"remove-users","role":{"name":"spectre","users":["phantom"]}}' http://admin:changeit@ip-172-31-16-140.us-west-1.compute.internal:8091/role
-*   Trying 172.31.16.140...
-* Connected to ip-172-31-16-140.us-west-1.compute.internal (172.31.16.140) port 8091 (#0)
+$ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"remove-users","role":{"name":"spectre","users":["phantom"]}}' https://admin:changeit@cluster_node_1:8091/role
+*   Trying 172.31.16.108...
+* Connected to cluster_node_1 (172.31.16.108) port 8091 (#0)
+* found 149 certificates in /etc/ssl/certs/ca-certificates.crt
+* found 596 certificates in /etc/ssl/certs
+* ALPN, offering http/1.1
+* SSL connection using TLS1.2 / ECDHE_RSA_AES_128_GCM_SHA256
+* 	 server certificate verification OK
+* 	 server certificate status verification SKIPPED
+* 	 common name: cluster_node_1 (matched)
+* 	 server certificate expiration date OK
+* 	 server certificate activation date OK
+* 	 certificate public key: RSA
+* 	 certificate version: #1
+* 	 subject: C=CZ,ST=Praha,L=Hlavni-mesto,O=Bonitoo.io,OU=QA,CN=cluster_node_1
+* 	 start date: Tue, 27 Mar 2018 12:29:36 GMT
+* 	 expire date: Thu, 26 Mar 2020 12:29:36 GMT
+* 	 issuer: C=CZ,ST=Praha,L=Hlavni-mesto,O=bonitoo.io,OU=QA,CN=bonitoo.io,EMAIL=tester@qa.org
+* 	 compression: NULL
+* ALPN, server did not agree to a protocol
 > POST /role HTTP/1.1
-> Host: ip-172-31-16-140.us-west-1.compute.internal:8091
+> Host: cluster_node_1:8091
 > User-Agent: curl/7.47.0
 > Accept: */*
 > Content-Length: 71
@@ -690,10 +894,10 @@ $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"remove-users","role"
 >
 * upload completely sent off: 71 out of 71 bytes
 < HTTP/1.1 200 OK
-< Influxdb-Metaindex: 28470
-< Request-Id: ae85d2a2-2839-11e8-b39f-000000000000
-< X-Influxdb-Version: 1.3.8-c1.3.8
-< Date: Thu, 15 Mar 2018 10:14:44 GMT
+< Influxdb-Metaindex: 33414
+< Request-Id: 840896df-38ca-11e8-84a9-000000000000
+< X-Influxdb-Version: 1.5.1-c1.5.1
+< Date: Thu, 05 Apr 2018 12:11:48 GMT
 < Content-Length: 0
 < Content-Type: text/plain; charset=utf-8
 <
@@ -701,12 +905,30 @@ $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"remove-users","role"
 
 Remove a permission from a role.
 
+**Example 22 &ndash; Removing a Permission from a Role**
 ```
-$ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"remove-permissions","role":{"name":"spectre","permissions":{"":["KapacitorConfigAPI"]}}}' http://ip-172-31-16-140.us-west-1.compute.internal:8091/role
-*   Trying 172.31.16.140...
-* Connected to ip-172-31-16-140.us-west-1.compute.internal (172.31.16.140) port 8091 (#0)
+$ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"remove-permissions","role":{"name":"spectre","permissions":{"":["KapacitorConfigAPI"]}}}' https://cluster_node_1:8091/role
+*   Trying 172.31.16.108...
+* Connected to cluster_node_1 (172.31.16.108) port 8091 (#0)
+* found 149 certificates in /etc/ssl/certs/ca-certificates.crt
+* found 596 certificates in /etc/ssl/certs
+* ALPN, offering http/1.1
+* SSL connection using TLS1.2 / ECDHE_RSA_AES_128_GCM_SHA256
+* 	 server certificate verification OK
+* 	 server certificate status verification SKIPPED
+* 	 common name: cluster_node_1 (matched)
+* 	 server certificate expiration date OK
+* 	 server certificate activation date OK
+* 	 certificate public key: RSA
+* 	 certificate version: #1
+* 	 subject: C=CZ,ST=Praha,L=Hlavni-mesto,O=Bonitoo.io,OU=QA,CN=cluster_node_1
+* 	 start date: Tue, 27 Mar 2018 12:29:36 GMT
+* 	 expire date: Thu, 26 Mar 2020 12:29:36 GMT
+* 	 issuer: C=CZ,ST=Praha,L=Hlavni-mesto,O=bonitoo.io,OU=QA,CN=bonitoo.io,EMAIL=tester@qa.org
+* 	 compression: NULL
+* ALPN, server did not agree to a protocol
 > POST /role HTTP/1.1
-> Host: ip-172-31-16-140.us-west-1.compute.internal:8091
+> Host: cluster_node_1:8091
 > User-Agent: curl/7.47.0
 > Accept: */*
 > Content-Length: 99
@@ -714,10 +936,10 @@ $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"remove-permissions",
 >
 * upload completely sent off: 99 out of 99 bytes
 < HTTP/1.1 200 OK
-< Influxdb-Metaindex: 28471
-< Request-Id: 3a9f2761-283a-11e8-b3d5-000000000000
-< X-Influxdb-Version: 1.3.8-c1.3.8
-< Date: Thu, 15 Mar 2018 10:18:39 GMT
+< Influxdb-Metaindex: 33415
+< Request-Id: a1d9a3e4-38ca-11e8-84f0-000000000000
+< X-Influxdb-Version: 1.5.1-c1.5.1
+< Date: Thu, 05 Apr 2018 12:12:38 GMT
 < Content-Length: 0
 < Content-Type: text/plain; charset=utf-8
 <
@@ -725,12 +947,30 @@ $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"remove-permissions",
 
 Delete a role.
 
+**Example 23 &ndash; Deleting a Role**
 ```
-$ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"delete","role":{"name":"spectre"}}' http://ip-172-31-16-140.us-west-1.compute.internal:8091/role
-*   Trying 172.31.16.140...
-* Connected to ip-172-31-16-140.us-west-1.compute.internal (172.31.16.140) port 8091 (#0)
+$ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"delete","role":{"name":"spectre"}}' https://cluster_node_1:8091/role
+*   Trying 172.31.16.108...
+* Connected to cluster_node_1 (172.31.16.108) port 8091 (#0)
+* found 149 certificates in /etc/ssl/certs/ca-certificates.crt
+* found 596 certificates in /etc/ssl/certs
+* ALPN, offering http/1.1
+* SSL connection using TLS1.2 / ECDHE_RSA_AES_128_GCM_SHA256
+* 	 server certificate verification OK
+* 	 server certificate status verification SKIPPED
+* 	 common name: cluster_node_1 (matched)
+* 	 server certificate expiration date OK
+* 	 server certificate activation date OK
+* 	 certificate public key: RSA
+* 	 certificate version: #1
+* 	 subject: C=CZ,ST=Praha,L=Hlavni-mesto,O=Bonitoo.io,OU=QA,CN=cluster_node_1
+* 	 start date: Tue, 27 Mar 2018 12:29:36 GMT
+* 	 expire date: Thu, 26 Mar 2020 12:29:36 GMT
+* 	 issuer: C=CZ,ST=Praha,L=Hlavni-mesto,O=bonitoo.io,OU=QA,CN=bonitoo.io,EMAIL=tester@qa.org
+* 	 compression: NULL
+* ALPN, server did not agree to a protocol
 > POST /role HTTP/1.1
-> Host: ip-172-31-16-140.us-west-1.compute.internal:8091
+> Host: cluster_node_1:8091
 > User-Agent: curl/7.47.0
 > Accept: */*
 > Content-Length: 45
@@ -738,10 +978,10 @@ $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"delete","role":{"nam
 >
 * upload completely sent off: 45 out of 45 bytes
 < HTTP/1.1 200 OK
-< Influxdb-Metaindex: 28474
-< Request-Id: 82f6260f-283a-11e8-b3f4-000000000000
-< X-Influxdb-Version: 1.3.8-c1.3.8
-< Date: Thu, 15 Mar 2018 10:20:40 GMT
+< Influxdb-Metaindex: 33416
+< Request-Id: c9ae3c8b-38ca-11e8-8546-000000000000
+< X-Influxdb-Version: 1.5.1-c1.5.1
+< Date: Thu, 05 Apr 2018 12:13:45 GMT
 < Content-Length: 0
 < Content-Type: text/plain; charset=utf-8
 <
@@ -749,8 +989,9 @@ $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"delete","role":{"nam
 
 Verify role no longer exists.
 
+**Example 24 &ndash; Verifying Role Deletion**
 ```
-$ curl --negotiate -u "admin:changeit" -s http://localhost:8091/role?name=spectre | python -m json.tool
+$ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/role?name=spectre | python -m json.tool
 {
     "error": "role not found"
 }
