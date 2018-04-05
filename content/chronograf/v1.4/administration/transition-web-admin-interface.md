@@ -4,6 +4,8 @@ menu:
   chronograf_1_4:
     weight: 100
     parent: Administration
+aliases:
+  - /chronograf/v1.4/guides/transition-web-admin-interface/
 ---
 
 Versions 1.3 and later of [InfluxDB](/influxdb/latest/) and [InfluxEnterprise](/enterprise/latest/) do not support the [web admin interface](/influxdb/latest/tools/web_admin/), the builtin user interface for writing and querying data in InfluxDB.

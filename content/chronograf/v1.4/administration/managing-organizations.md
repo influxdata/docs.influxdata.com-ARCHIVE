@@ -13,6 +13,7 @@ menu:
 * [Using the Default organization](#using-the-default-organization)
 * [Creating organizations](#creating-organizations)
 * [Configuring organizations](#configuring-organizations)
+* [Mapping organizations](#mapping-organizations)
 * [Removing organizations](#removing-organizations)
 
 
@@ -42,7 +43,7 @@ Your company, organizational units, teams, and projects may require the creation
 **Required status:** SuperAdmin
 
 1) In the Chronograf navigation bar, click **Admin** (crown icon) > **Chronograf** to open the **Chronograf Admin** page.
-2) In the **Organizations** tab, click **Create Organization**.
+2) In the **All Orgs** tab, click **Create Organization**.
 3) Under **Name**, click on **"Untitled Organization"** and enter the new organization name.
 4) Under **Default Role**, select the default role for new users within that organization. Valid options include `member` (default), `viewer`, `editor`, and `admin`.
 5) Click **Save**.
@@ -68,6 +69,30 @@ See the following pages for more information about managing Chronograf users and
 * [Managing Chronograf users](/chronograf/latest/administration/managing-chronograf-users/)
 * [Managing security](/chronograf/latest/administration/managing-security/)
 
+## Mapping organizations
+
+**To create an organization mapping:**
+
+**Required status:** SuperAdmin
+
+1) In the Chronograf navigation bar, select **Admin** (crown icon) > **Chronograf** to open the **Chronograf Admin** page.
+2) Click the **Org Mappings** tab to view a list of organization mappings.
+3) To add an organization mapping, click the **Create Mapping** button. A new row is added to the listing.
+4) In the new row, enter the following:
+
+- **Scheme**, select `oauth2`.
+- **Provider**: Enter the provider. Valid values include `Google` and `GitHub`.
+- **Provider Org**: [Optional] Enter the email domain(s) you want to accept.
+- **Organization**: Select the organization that can use this authentication provider.
+
+**To remove an organization mapping:**
+
+**Required status:** SuperAdmin
+
+1) In the Chronograf navigation bar, select **Admin** (crown icon) > **Chronograf** to open the **Chronograf Admin** page.
+2) Click the **Org Mappings** tab to view a list of organization mappings.
+3) To remove an organization mapping, click the **Delete** button at the end of the mapping row you want to remove, and then confirm the action.
+
 ## Removing organizations
 
 When an organization is removed:
@@ -82,5 +107,5 @@ When an organization is removed:
 **Required status:** SuperAdmin
 
 1) In the navigation bar of the Chronograf application, select **Admin** (crown icon) > **Chronograf** to open the **Chronograf Admin** page.
-2) Click the **Organizations** tab to view a list of organizations.
+2) Click the **All Orgs** tab to view a list of organizations.
 3) To the right of the the organization that you want to remove, click the **Remove** button (trashcan icon) and then confirm by clicking the **Save** button.

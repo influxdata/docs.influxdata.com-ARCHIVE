@@ -2,43 +2,47 @@
 title: Configuring Chronograf
 menu:
   chronograf_1_4:
-    name: Configuring Chronograf
+    name: Configuring
     weight: 20
     parent: Administration
 ---
 
-## Requirements
-
-Chronograf is the user interface and data visualization component of the InfluxData [TICK stack](https://www.influxdata.com/products/) and is designed to be used together with InfluxDB, Telegraf, and Kapacitor, but the minimum requirements are:
-
-* InfluxDB
-  - available and running
-  - authentication is enabled (`auth-enabled` option)
-  - admin user has been created and is available
-* Kapacitor
-  - optional, but needed to create and use alerts in Chronograf
-
-> ***Note:*** Run through the [Getting Started](/chronograf/latest/introduction/getting-started) tutorial for a quick start on configuring InfluxDB, Kapacitor, and Telegraf for use with Chronograf.
-
+Chronograf is configured by passing command line options when starting the Chronograf service.
+However, it is also possible to set custom default configuration options in the filesystem so they don't have to be passed in when starting Chronograf.
 
 ## Starting the Chronograf service
 
-Chronograf can be started using the default configuration options, but the environment variables and command line options let you configure OAuth 2.0 authentication and other options based on your requirements.
+Chronograf can be started using the default configuration options, but environment variables and command line options let you configure OAuth 2.0 authentication and other options based on your requirements.
 
-**To start the Chronograf service:**
+**Linux:**
 
-Linux
+```bash
+sudo systemctl start chronograf [OPTIONS]
+```
 
-* `sudo systemctl start chronograf`
-* `sudo systemctl start chronograf [OPTIONS]` (where [OPTIONS] are any command line options, separated by spaces
+**macOS:**
 
-Mac OS X
+```bash
+chronograf [OPTIONS]
+```
 
-* `chronograf`
-* `chronograf [OPTIONS]` (where [OPTIONS] are any command line options, separated by spaces
+`[OPTIONS]` are any of the available Chronograf command line options, separated by spaces. See the [Chronograf configuration options](/chronograf/v1.4/administration/config-options) documentation for details about configuration options, including command line options and corresponding environment variables.
 
-See [Chronograf configuration options](/chronograf/latest/administration/config-options) for details about configuration options, including command line options and corresponding environment variables.
+## Setting custom default Chronograf config options
 
+Custom default Chronograf configuration settings can be defined in `/etc/default/chronograf`.
+This file consists of key-value pairs – the key being the environment variable for each configuration option outlined in the [Chronograf configuration options](/chronograf/v1.4/administration/config-options) documentation and the value being the desired setting for that option.
+
+```conf
+HOST=0.0.0.0
+PORT=8888
+TLS_CERTIFICATE=/path/to/cert.pem
+TOKEN_SECRET=MySup3rS3cretT0k3n
+LOG_LEVEL=info
+```
+
+> **Note:** `/etc/default/chronograf` is only created in Linux-based operating systems.
+It is neither created nor used in macOS.
 
 ## Enabling security, multi-organization, and multi-user support
 
@@ -48,3 +52,6 @@ After you configure OAuth 2.0 authentication in Chronograf, you can use the mult
 
 * [Managing organizations](/chronograf/latest/administration/managing-organizations)
 * [Managing Chronograf users](/chronograf/latest/administration/managing-chronograf-users)
+
+
+<!-- TODO ## Configuring Chronograf for InfluxDB Enterprise clusters) -->

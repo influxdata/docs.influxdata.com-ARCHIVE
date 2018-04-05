@@ -2,7 +2,7 @@
 title: Configuring Kapacitor event handlers
 menu:
   chronograf_1_4:
-    weight: 30
+    weight: 50
     parent: Guides
 ---
 
@@ -36,7 +36,7 @@ The Configure Kapacitor page includes the event handler configuration options; s
 
 ### Content
 
-* [Locate Event Handler Configurations](#locate-event-handler-configurations)
+* [Locate event handler configurations](#locate-event-handler-configurations)
 * [HipChat](#hipchat)
 * [Slack](#slack)
 * [Telegram](#telegram)

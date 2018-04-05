@@ -12,50 +12,48 @@ menu:
 
 Version 1.5 includes the first official Time Series Index (TSI) release. Although you can install without enabling TSI, you are encouraged to begin leveraging the advantages the TSI disk-based indexing offers.
 
-For upgrading steps, see [Upgrading to InfluxDB 1.5](/influxdb/v1.5/administration/upgrading/).
+## Upgrading InfluxDB Enterprise 1.3.x-1.5.x clusters to 1.5.1 (rolling upgrade)
 
-## Upgrading InfluxDB Enterprise 1.3 clusters to 1.5.0 (rolling upgrade)
-
-### Step 0: Back up your cluster before upgrading to version 1.5.
+### Step 0: Back up your cluster before upgrading to version 1.5.1.
 
 Create a full backup of your InfluxDB Enterprise cluster before performing an upgrade.
 If you have incremental backups created as part of your standard operating procedures, make sure to
 trigger a final incremental backup before proceeding with the upgrade.
 
 > ***Note:*** For information on performing a final incremental backup or a full backup,
-> see the InfluxDB Enterprise 3.x [Backup and restore](/enterprise_influxdb/v1.3/guides/backup-and-restore) documentation.
+> see the InfluxDB Enterprise [Backup and restore](/enterprise_influxdb/v1.5/guides/backup-and-restore) documentation.
 
 ## Upgrading meta nodes
 
 Follow these steps to upgrade all meta nodes in your InfluxDB Enterprise cluster. Ensure that the meta cluster is healthy before proceeding to the data nodes.
 
-### Step 1: Download the 1.5.0 meta node package.
+### Step 1: Download the 1.5.1 meta node package.
 
 #### Meta node package download
 **Ubuntu & Debian (64-bit)**
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.5.0-c1.5.0_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.5.1-c1.5.1_amd64.deb
 ```
 
 **RedHat & CentOS (64-bit)**
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.5.0_c1.5.0.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.5.1_c1.5.1.x86_64.rpm
 ```
 
-### Step 2: Install the 1.5.0 meta nodes package.
+### Step 2: Install the 1.5.1 meta nodes package.
 
 #### Meta node package install
 
 ##### Ubuntu & Debian (64-bit)
 
 ```
-sudo dpkg -i influxdb-meta_1.5.0-c1.5.0_amd64.deb
+sudo dpkg -i influxdb-meta_1.5.1-c1.5.1_amd64.deb
 ```
 
 ##### RedHat & CentOS (64-bit)
 
 ```
-sudo yum localinstall influxdb-meta-1.5.0_c1.5.0.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.5.1_c1.5.1.x86_64.rpm
 ```
 
 ### Step 3: Restart the `influxdb-meta` service.
@@ -92,29 +90,29 @@ ID	TCP Address		Version
 Meta Nodes
 ==========
 TCP Address		Version
-rk-upgrading-01:8091	1.5.0_c1.5.0   # 1.5.0_c1.5.0 = 👍
-rk-upgrading-02:8091	1.5.0_c1.5.0
-rk-upgrading-03:8091	1.5.0_c1.5.0
+rk-upgrading-01:8091	1.5.1_c1.5.1   # 1.5.1_c1.5.1 = 👍
+rk-upgrading-02:8091	1.5.1_c1.5.1
+rk-upgrading-03:8091	1.5.1_c1.5.1
 ```
 
 ## Upgrading data nodes
 
 Repeat the following steps for each data node in your InfluxDB Enterprise cluster.
 
-### Step 1: Download the 1.5.0 data node package.
+### Step 1: Download the 1.5.1 data node package.
 
 #### Data node package download
 
 ##### Ubuntu & Debian (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.5.0-c1.5.0_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.5.1-c1.5.1_amd64.deb
 ```
 
 ##### RedHat & CentOS (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.5.0_c1.5.0.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.5.1_c1.5.1.x86_64.rpm
 ```
 
 ### Step 2: Remove the data node from the load balancer.
@@ -122,24 +120,24 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.5.0_c1.5.0.x8
 To avoid downtime and allow for a smooth transition, remove the data node you are upgrading from your
 load balancer **before** performing the remaining steps.
 
-### Step 3: Install the 1.5.0 data node packages.
+### Step 3: Install the 1.5.1 data node packages.
 
 #### Data node package install
 
 When you run the install command, your terminal asks if you want to keep your
-current configuration file or overwrite your current configuration file with the file for version 1.5.0.
+current configuration file or overwrite your current configuration file with the file for version 1.5.1.
 
 Keep your current configuration file by entering `N` or `O`.
-The configuration file will be updated with the necessary changes for version 1.5.0 in the next step.
+The configuration file will be updated with the necessary changes for version 1.5.1 in the next step.
 
 **Ubuntu & Debian (64-bit)**
 ```
-sudo dpkg -i influxdb-data_1.5.0-c1.5.0_amd64.deb
+sudo dpkg -i influxdb-data_1.5.1-c1.5.1_amd64.deb
 ```
 
 **RedHat & CentOS (64-bit)**
 ```
-sudo yum localinstall influxdb-data-1.5.0_c1.5.0.x86_64.rpm
+sudo yum localinstall influxdb-data-1.5.1_c1.5.1.x86_64.rpm
 ```
 
 ### Step 4: Update the data node configuration file.
@@ -175,14 +173,16 @@ The new configuration options are set to the default settings.
 
 1. Delete all existing TSM-based shard `index` directories.
 
-- Remove the existing index directories to ensure there are no incompatible index files.
-- By default, the index directories are located at `/<shard_ID>/index` (e.g., `/2/index`).
+- Remove the existing `index` directories to ensure there are no incompatible index files.
+- By default, the `index` directories are located at `/<shard_ID>/index` (e.g., `/2/index`).
 
 2. Convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
 
   - When TSI is enabled, new shards use the TSI disk-based indexing. Existing shards must be converted to support TSI.
-  - Run the [influx_inspect buildtsi](/influxdb/v1.5/tools/influx_inspect/#influx_inspect-buildtsi) command to convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
-
+  - Run the [`influx_inspect buildtsi`](/influxdb/v1.5/tools/influx_inspect#influx-inspect-buildtsi) command to convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
+  
+> **Note:** Run the `buildtsi` command using the user account that you are going to run the database as,
+> or ensure that the permissions match afterward.
 
 ### Step 6: Restart the `influxdb` service.
 
@@ -218,16 +218,16 @@ The [`influxd-ctl`](/enterprise_influxdb/v1.5/features/cluster-commands/) utilit
 Data Nodes
 ==========
 ID	TCP Address		Version
-4	rk-upgrading-01:8088	1.5.0_c1.5.0   # 1.5.0_c1.5.0 = 👍
-5	rk-upgrading-02:8088	1.5.0_c1.5.0
-6	rk-upgrading-03:8088	1.5.0_c1.5.0
+4	rk-upgrading-01:8088	1.5.1_c1.5.1   # 1.5.1_c1.5.1 = 👍
+5	rk-upgrading-02:8088	1.5.1_c1.5.1
+6	rk-upgrading-03:8088	1.5.1_c1.5.1
 
 Meta Nodes
 ==========
 TCP Address		Version
-rk-upgrading-01:8091	1.5.0_c1.5.0
-rk-upgrading-02:8091	1.5.0_c1.5.0
-rk-upgrading-03:8091	1.5.0_c1.5.0
+rk-upgrading-01:8091	1.5.1_c1.5.1
+rk-upgrading-02:8091	1.5.1_c1.5.1
+rk-upgrading-03:8091	1.5.1_c1.5.1
 ```
 
 If you have any issues upgrading your cluster, please do not hesitate to contact support at the email address

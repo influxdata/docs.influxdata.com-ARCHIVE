@@ -17,6 +17,11 @@ menu:
 <br>
 <br>
 
+## v1.5.1 [2018-03-20]
+
+> ***Note:*** This release builds off of the 1.5.1 release of InfluxDB OSS. Please see the [InfluxDB OSS release
+> notes](https://docs.influxdata.com/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
+
 ## v1.5.0 [2018-03-06]
 
 > ***Note:*** This release builds off of the 1.5 release of InfluxDB OSS. Please see the [InfluxDB OSS release

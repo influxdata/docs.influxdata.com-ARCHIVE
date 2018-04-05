@@ -34,9 +34,15 @@ Converts TSM-based shards to shards supporting TSI (time series index) disk-base
 The index is written to a temporary location until complete and then moved to a permanent location.
 If an error occurs, then this operation will fall back to the original in-memory index.
 
-> ***Note:*** This tool is for offline conversion only. When TSI is enabled, new shards use the TSI indexes. Existing shards continue as TSM-based shards until converted offline.
+> ***Note:*** This tool is for offline conversion only.
+> When TSI is enabled, new shards use the TSI indexes.
+> Existing shards continue as TSM-based shards until
+> converted offline.
 
 #### Usage
+
+> **Note:** Run the `buildtsi` command using the user account that you are going to run the database as,
+> or ensure that the permissions match afterward.
 
 ```
 influx_inspect buildtsi -datadir <data_directory> -waldir <WAL_directory> [ options ]
@@ -61,7 +67,7 @@ Optional arguments are in brackets.
   Verbose output.
 
 #### -waldir string
-  WAL directory.
+  WAL (Write Ahead Log) directory.
 
 #### Examples
 <br>
@@ -83,7 +89,7 @@ $ influx_inspect buildtsi -database mydb -datadir ~/.influxdb/data -waldir ~/.in
 ##### Converting a specific shard
 
 ```
-$ influx_inspect buildtsi -datadir ~/.influxdb/data/stress/autogen/1 -waldir ~/.influxdb/wal/stress/autogen/1
+$ influx_inspect buildtsi -database stress -shard 1 -datadir ~/.influxdb/data -waldir ~/.influxdb/wal
 ```
 
 ### influx_inspect dumptsi
