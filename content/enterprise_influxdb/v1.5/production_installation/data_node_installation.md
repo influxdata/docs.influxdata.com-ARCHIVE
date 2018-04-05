@@ -98,7 +98,7 @@ Perform the following steps on each data server.
 
 ```
 wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.5.1-c1.5.1_amd64.deb
-sudo dpkg -i influxdb-data_1.5.0-c1.5.0_amd64.deb
+sudo dpkg -i influxdb-data_1.5.1-c1.5.1_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
