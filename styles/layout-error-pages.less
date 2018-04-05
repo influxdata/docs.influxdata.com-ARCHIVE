@@ -9,49 +9,93 @@
 
 */
 .error-page {
-	overflow: hidden;
-	position: absolute;
-	left: 0;
+	overflow: scroll;
 	top: @nav-height;
-	height: ~"calc(100% - "@nav-height~")";
+	height: 100%;
 	width: 100%;
-	z-index: 2;
 	.gradient-v(@error-bg,@error-bg-accent);
 }
 .error-content {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	max-width: 70%;
+	margin: 15vh auto;
+	width: 85%;
+	max-width: 400px;
 	min-width: 240px;
-	transform: translate(-50%,-50%);
 	font-size: 15px;
 	line-height: 19px;
 	color: @error-text;
 
 	h1 {
 		color: @error-decor;
-		display: inline-block;
-		width: 100%;
-		border-radius: @radius;
+		display: block;
+		margin: 0 auto 50px;
+		padding-top: 15px;
+		width: 212px;
+		height: 212px;
+		border-radius: 50%;
 		text-align: center;
-		margin-top: 50px;
 		font-size: 90px;
 		font-weight: 200;
 		line-height: 180px;
 		position: relative;
+		border: 2px solid @error-decor;
 
-		&:after {
-			content: '';
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			width: 212px;
-			height: 212px;
-			transform: translate(-50%,-50%);
-			border-radius: 50%;
-			border: 2px solid @error-decor;
+		// &:after {
+		// 	content: '';
+		// 	position: absolute;
+		// 	top: 50%;
+		// 	left: 50%;
+		//
+		// 	transform: translate(-50%,-50%);
+		// 	border-radius: 50%;
+		//
+		// }
+	}
+}
+
+.flex {
+	display: flex;
+	justify-content: space-around;
+}
+
+.wayfinding {
+	margin-bottom: 2rem;
+}
+
+.btn {
+	display: block;
+	padding: .5rem;
+	background: @error-decor;
+	color: #fff;
+	border-radius: @radius;
+	text-align: center;
+	transition: background .2s;
+
+	&.back {
+		flex-grow: 1;
+		margin-right: .35rem;
+
+		&:before {
+			content: "\ea41";
+			font-family: 'icomoon';
+			margin-right: .5rem;
+			font-size: 1rem;
 		}
+	}
+
+	&.project{
+		flex-grow: 3;
+		display: none;
+
+		&:before {
+			content: "\e801";
+			font-family: 'icomoon';
+			margin-right: .5rem;
+			flex-grow: 3;
+		}
+	}
+
+	&:hover {
+		background: @c-pool;
 	}
 }
 
@@ -61,7 +105,6 @@
 */
 @media (min-width: @breakpoint-small) {
 	.error-content {
-		max-width: 30%;
 		font-size: 17px;
 		line-height: 22px;
 	}
@@ -70,7 +113,6 @@
 }
 @media (min-width: @breakpoint-huge) {
 	.error-content {
-		max-width: 32%;
 		font-size: 21px;
 		line-height: 32px;
 	}
