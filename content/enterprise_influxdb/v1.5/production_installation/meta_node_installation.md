@@ -107,7 +107,7 @@ sudo dpkg -i influxdb-meta_1.5.1-c1.5.1_amd64.deb
 
 #### RedHat & CentOS (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.5.0_c1.5.0.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.5.1_c1.5.1.x86_64.rpm
 sudo yum localinstall influxdb-meta-1.5.1_c1.5.1.x86_64.rpm
 ```
 
