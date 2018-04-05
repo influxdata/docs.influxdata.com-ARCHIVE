@@ -41,7 +41,7 @@ If an error occurs, then this operation will fall back to the original in-memory
 
 #### Usage
 
-> **Note:** Run the `buildtsi` command as the user you are going to run the database as,
+> **Note:** Run the `buildtsi` command using the user account that you are going to run the database as,
 > or ensure that the permissions match afterward.
 
 ```
