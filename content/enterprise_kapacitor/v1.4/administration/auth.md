@@ -203,7 +203,7 @@ chronograf-v1-9199dfc1-90d3-4a22-a34b-93577057daa3 stream    disabled  false    
 
 Or, as an alternative example, when accessing the API directly.
 ```
-$ curl -v http://tux:changeit@localhost:9092/kapacitor/v1/tasks
+$ curl -v https://admin:changeit@cluster_node_1:9092/kapacitor/v1/tasks
 ```
 
 Authentication roughly follows these steps:  
@@ -302,7 +302,7 @@ a password and granted a set of privileges, which define a set of TICK stack
 resources and APIs available for his use.
 
 Privilege means a level of access to a TICK stack resource.  Level of access can
-mean simply viewing the resource, copying the resource, droping the resource,
+mean simply viewing the resource, copying the resource, dropping the resource,
 writing to the resource or full management capabilities.  The level of access
 and the resource are combined in predefined keys.  The enforcement of privileges
 is handled by the respective TICK stack services.  Predefined key tokens
@@ -329,7 +329,7 @@ tokens include:
 * `KapacitorAPI`
 * `KapacitorConfigAPI`
 
-Note that these privileges are system privilges and are separate from the
+Note that these privileges are system privileges and are separate from the
 database specific privileges that can be inspected using the `show grants for "<USER>"`
 command when connected to an Influxd-Data node.  When working with Kapacitor the
 last two privilege tokens are of interest.
