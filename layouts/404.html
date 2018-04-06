@@ -21,10 +21,10 @@
       var name = urlPath.match(/^\/(.*?)\//)[1]
       if      (name === 'telegraf')             { return 'Telegraf' }
       else if (name === 'influxdb')             { return 'InfluxDB' }
-      else if (name === 'influxdb_enterprise')  { return 'InfluxDB Enterprise' }
+      else if (name === 'enterprise_influxdb')  { return 'InfluxDB Enterprise' }
       else if (name === 'chronograf')           { return 'Chronograf' }
       else if (name === 'kapacitor')            { return 'Kapacitor' }
-      else if (name === 'kapacitor_enterprise') { return 'Kapacitor Enterprise' }
+      else if (name === 'enterprise_kapacitor') { return 'Kapacitor Enterprise' }
       else { return undefined }
     }
   }
