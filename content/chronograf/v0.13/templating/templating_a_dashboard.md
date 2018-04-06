@@ -1,6 +1,6 @@
 ---
 title: Templating a Dashboard
-
+newversionredirect: guides/dashboard-template-variables/
 menu:
   chronograf_013:
     name: Templating a Dashboard

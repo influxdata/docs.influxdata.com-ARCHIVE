@@ -1,6 +1,6 @@
 ---
 title: Upgrading to Kapacitor v0.12
-newversionredirect: /administration/upgrading/
+newversionredirect: administration/upgrading/
 menu:
   kapacitor_012:
     weight: 30

@@ -148,7 +148,7 @@ We want to add the graph we made in the section above so we click `Add From Exis
 Select `Average idle CPU usage` and click the `Add Visualizations to Dash` button in the top right corner.
 <br>
 <br>
-![Select Graph For Dash](/img/chronograf/v1.0/select-graph-for-dash.png)
+![Select Graph For Dash](/img/chronograf/v0.11/select-graph-for-dash.png)
 
 That takes us back to our new dashboard!
 One visualization on a dashboard isn't spectacularly interesting, so we've added a couple more graphs to show you some of the possibilities:
