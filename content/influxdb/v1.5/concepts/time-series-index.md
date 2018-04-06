@@ -8,7 +8,7 @@ menu:
     parent: concepts
 ---
 
-## Time Series Index (TSI))
+## Time Series Index (TSI)
 
 In order to support a large number of time series, that is, a very high cardinality in the number of unique time series that the database stores, InfluxData has added the new Time Series Index (TSI).
 InfluxData supports customers using InfluxDB with tens of millions of time series.
