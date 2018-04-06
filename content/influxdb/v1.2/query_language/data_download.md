@@ -4,6 +4,8 @@ menu:
   influxdb_1_2:
     weight: 90
     parent: query_language
+aliases:
+  - /influxdb/v1.2/sample_data/data_download/
 ---
 
 In order to explore the query language further, these instructions help you create a database, download and write data to that database within your InfluxDB installation.  The sample data is then used and referenced in [Data Exploration](../../query_language/data_exploration/), [Schema Exploration](../../query_language/schema_exploration/), and [Functions](../../query_language/functions/).
@@ -16,7 +18,7 @@ Executing `influx` will start the CLI and automatically connect to the local Inf
 The output should look like this:
 
 ```bash
-$ influx -precision rfc3339 
+$ influx -precision rfc3339
 Connected to http://localhost:8086 version 1.2.x
 InfluxDB shell 1.2.x
 >
