@@ -92,9 +92,8 @@ so it will require downtime.
 
 ### Bugfixes
 
-* Elide "stream closed" error from logs and handle io.EOF as remote iterator interrupt.
-* Fix spurious "rpc error: i/o deadline exceeded" errors
-* Elide "stream closed" error from logs and handle io.EOF as remote iterator interrupt.
+* Elide `stream closed` error from logs and handle `io.EOF` as remote iterator interrupt.
+* Fix spurious `rpc error: i/o deadline exceeded` errors
 * Discard remote iterators that label their type as unknown.
 * Do not queue `partial write` errors to hinted handoff.
 
