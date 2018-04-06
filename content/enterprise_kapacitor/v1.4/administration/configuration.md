@@ -18,7 +18,7 @@ menu:
 
 <br/>
 Enterprise Kapacitor configuration shares the same principles as those presented
-in the [Confugring Kapacitor](/kapacitor/v1.4/administration/configuration/)
+in the [configuring Kapacitor](/kapacitor/v1.4/administration/configuration/)
 document of open-source Kapacitor.
 
 However in Kapacitor Enterprise there are new grouping identifiers that pertain

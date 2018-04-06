@@ -37,7 +37,7 @@ document of that product.
 #### Secure Influxdb-Meta Nodes
 
 Since the Influxdb-Meta node is used as the backend user and privilege store of the
-TICK stack. it is particularly important when securing Kapacitor with
+TICK stack, it is particularly important when securing Kapacitor with
 Authentication and Authorization.  Kapacitor will need to connect to Influxdb-Meta
 when verifying security credentials.
 
@@ -96,7 +96,7 @@ properties in the `[[influxdb]]` group.
   enabled = true
   default = true
   name = "local-cluster"
-  urls = ["https://cluster_node_1:8086", "https://cluster_node_2:8086", "https://cluser_node_3:8086" ]
+  urls = ["https://cluster_node_1:8086", "https://cluster_node_2:8086", "https://cluster_node_3:8086" ]
   ...
   # Absolute path to pem encoded CA file.
   # A CA can be provided without a key/cert pair
@@ -199,7 +199,7 @@ MIIElTCCBo0CAQrwDQYJKoZIhvcNAQELBQAwgZMxCzAJBgNVBAYTAkNaMQ4wDAYD
 
 In addition the `[[influxdb]]` section needs to have its property
 `subscription-protocol` updated to `https`, otherwise subscription data will be
-sent using the wrong prootocol. 
+sent using the wrong prootocol.
 
 **Example 6 &ndash; Subscription Protocol in Influxdb**
 ```toml
@@ -221,7 +221,7 @@ sent using the wrong prootocol.
 Once HTTPS has been enabled the Kapacitor command line client will need to be
 supplied the `-url` argument in order to connect.  If a self-signed or other
 certificate is used, which has not been added to the system certificate store,
-an addition argument `-skipVerify` will also need to be provided.
+an additional argument `-skipVerify` will also need to be provided.
 
 **Example 5 &ndash; Connecting the Kapacitor client with TLS enabled**
 ```
