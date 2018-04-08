@@ -72,8 +72,8 @@ HTTPS is disabled by default.
 Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
 
 * `https-enabled` to `true`
-* `http-certificate` to `/etc/ssl/<signed-certificate-file>.crt` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
-* `http-private-key` to `/etc/ssl/<private-key-file>.key` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
+* `https-certificate` to `/etc/ssl/<signed-certificate-file>.crt` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
+* `https-private-key` to `/etc/ssl/<private-key-file>.key` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
 
 ```
 [http]
@@ -138,8 +138,8 @@ HTTPS is disabled by default.
 Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
 
 * `https-enabled` to `true`
-* `http-certificate` to `/etc/ssl/influxdb-selfsigned.crt`
-* `http-private-key` to `/etc/ssl/influxdb-selfsigned.key`
+* `https-certificate` to `/etc/ssl/influxdb-selfsigned.crt`
+* `https-private-key` to `/etc/ssl/influxdb-selfsigned.key`
 
 ```
 [http]
