@@ -207,7 +207,7 @@ If this looks like your configuration then we can run a quick test to ensure tha
 ```
 curl "http://localhost:8086/query?q=select+*+from+telegraf..cpu"
 ```
-If Telegraf is setup properly you should see a lot of JSON data; if the output is empty than something has gone wrong.
+If Telegraf is setup properly you should see a lot of JSON data; if the output is empty then something has gone wrong.
 
 ## Chronograf Setup
 Now that we're collecting data with Telegraf and storing data with InfluxDB, it's time to install Chronograf to begin viewing and monitoring the data.
