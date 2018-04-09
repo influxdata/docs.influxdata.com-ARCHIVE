@@ -6,6 +6,47 @@ menu:
     parent: About the Project
 ---
 
+
+## v1.4.4.0 [2018-04-11]
+
+### Features
+
+* Add support for RS256/JWKS verification, support for id_token parsing (as in ADFS)
+* Add ability to set a color palette for Line, Stacked, Step-Plot, and Bar graphs
+* Add ability to clone dashboards
+* Change :interval: to represent a raw influxql duration value
+* Add paginated measurements API to server
+
+### UI Improvements
+
+* New dashboard cells appear at bottom of layout and assume the size of the most common cell
+* Standardize delete confirmation interactions
+* Standardize Save and Cancel interactions
+* Improve cell renaming
+
+### Bug fixes
+
+* Always save template variables on first edit
+* Query annotations at auto-refresh interval
+* Display link to configure Kapacitor on Alerts Page if no configured kapacitor.
+* Fix saving of new TICKscripts
+* Fix appearance of cell Y-Axis titles
+* Only add stateChangesOnly to new rules
+* Fix 500s when deleting organizations
+* Fixes issues with providing regexp in query
+* Ensure correct basepath prefix in URL pathname when passing InfluxQL query param to Data Explorer
+* Fix type error bug in Kapacitor Alert Config page and persist deleting of team and recipient in OpsGenieConfig
+* Fixes errors caused by switching query tabs in CEO
+
+## v1.4.3.1 [2018-04-02]
+
+### Bug fixes
+
+* Fixes template variable editing not allowing saving
+* Save template variables on first edit
+* Fix template variables not loading all values
+
+
 ## v1.4.3.0 [2018-3-28]
 
 ### Features

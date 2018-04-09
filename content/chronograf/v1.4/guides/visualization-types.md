@@ -1,5 +1,6 @@
 ---
 title: Visualization types in Chronograf
+descriptions: Chronograf dashboards and views support graphs and other visualization types, including line graphs, stacked graphs, step-plot graphs, single statistics, bar graphs, and gauges.
 menu:
   chronograf_1_4:
     name: Visualization types
