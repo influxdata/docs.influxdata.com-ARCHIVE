@@ -10,11 +10,11 @@ menu:
 
 ## Contents
 
-* [Configuration Groups](#configuration-groups)
-* [Enterprise Licensing](#enterprise-licensing)
+* [Configuration groups](#configuration-groups)
+* [Enterprise licensing](#enterprise-licensing)
 * [Authentication](#authentication)
-* [Cluster Communications](#cluster-communications)
-* [Remote Procedure Calls](#remote-procedure-calls)
+* [Cluster communications](#cluster-communications)
+* [Remote procedure calls (RPCs)](#remote-procedure-calls--rpcs-)
 
 <br/>
 Kapacitor Enterprise configuration shares the same principles as those presented
