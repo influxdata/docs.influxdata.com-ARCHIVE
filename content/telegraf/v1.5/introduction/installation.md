@@ -1,8 +1,9 @@
 ---
-title: Installation
+title: Installing Telegraf
 
 menu:
   telegraf_1_5:
+    name: Installation
     weight: 20
     parent: introduction
 ---
@@ -43,7 +44,7 @@ aren't synchronized with NTP, the timestamps on the data can be inaccurate.
 
   Debian and Ubuntu users can install the latest stable version of Telegraf using the `apt-get` package manager.
 
-  For Ubuntu users, add the InfluxData repository with the following commands:
+  **Ubuntu:** Add the InfluxData repository with the following commands:
 
   ```bash
   curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
@@ -51,9 +52,15 @@ aren't synchronized with NTP, the timestamps on the data can be inaccurate.
   echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
   ```
 
-  For Debian users, add the InfluxData repository with the following commands:
+  **Debian:** Add the InfluxData repository with the following commands:
 
   ```bash
+  # Before adding Influx repository, run this so that apt will be able to read the repository.
+
+  sudo apt-get update && sudo apt-get install apt-transport-https
+
+  # Add the InfluxData key
+
   curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
   source /etc/os-release
   test $VERSION_ID = "7" && echo "deb https://repos.influxdata.com/debian wheezy stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
@@ -77,7 +84,7 @@ aren't synchronized with NTP, the timestamps on the data can be inaccurate.
 {{% tab-content %}}
   For instructions on how to install the RPM package from a file, please see the [downloads page](https://influxdata.com/downloads/).
 
-  RedHat and CentOS users can install the latest stable version of Telegraf using the `yum` package manager:
+  **RedHat and CentOS:** Install the latest stable version of Telegraf using the `yum` package manager:
 
   ```bash
   cat <<EOF | sudo tee /etc/yum.repos.d/influxdb.repo

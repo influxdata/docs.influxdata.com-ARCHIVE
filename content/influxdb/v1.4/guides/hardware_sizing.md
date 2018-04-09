@@ -1,8 +1,8 @@
 ---
-title: Hardware Sizing Guidelines
+title: Hardware sizing guidelines
 menu:
   influxdb_1_4:
-    weight: 12
+    weight: 40
     parent: guides
 ---
 
@@ -63,18 +63,18 @@ Complex queries:
 
 ### Low load recommendations
 * CPU: 2-4 cores
-* RAM: 2-4 GB   
-* IOPS: 500   
+* RAM: 2-4 GB
+* IOPS: 500
 
 ### Moderate load recommendations
 * CPU: 4-6 cores
-* RAM: 8-32 GB  
-* IOPS: 500-1000  
+* RAM: 8-32 GB
+* IOPS: 500-1000
 
 ### High load recommendations
 * CPU: 8+ cores
-* RAM: 32+ GB  
-* IOPS: 1000+  
+* RAM: 32+ GB
+* IOPS: 1000+
 
 ### Probably infeasible load
 Performance at this scale is a significant challenge and may not be achievable. Please contact us at <sales@influxdb.com> for assistance with tuning your systems.
@@ -126,18 +126,18 @@ Complex queries:
 
 ### Low load recommendations
 * CPU: 2 cores
-* RAM: 2-4 GB   
-* IOPS: 1000   
+* RAM: 2-4 GB
+* IOPS: 1000
 
 ### Moderate load recommendations
-* CPU: 4-6  
-* RAM: 8-32GB  
+* CPU: 4-6
+* RAM: 8-32GB
 * IOPS: 1000+
 
 ### High load recommendations
-* CPU: 8+  
-* RAM: 32+ GB  
-* IOPS: 1000+  
+* CPU: 8+
+* RAM: 32+ GB
+* IOPS: 1000+
 
 ## Enterprise Web Node
 The Enterprise Web server is primarily an HTTP server with similar load requirements. For most applications it does not need to be very robust. The cluster will function with only one Web server, but for redundancy multiple Web servers can be connected to a single back-end Postgres database.

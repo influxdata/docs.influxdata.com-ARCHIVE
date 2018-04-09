@@ -1,5 +1,12 @@
 <nav class="navbar" id="main-nav">
-    <a href="https://www.influxdata.com/" target="_blank" title="Go to Documentation Home"><span class="icon logotype navbar--logo"></span></a>
+    <div class="navbar--logo">
+      <a href="https://www.influxdata.com/"  target="_blank" title="Go to InfluxData">
+        <span class="icon logo"></span>
+        <span class="icon logotype"></span>
+      </a>
+      <span class="divider"></span>
+      <a href="/" class="navbar--docs klavika-font" title="Go to Documentation Homepage">Docs</span></a>
+    </div>
     {{ partial "product-switcher.html" . }}
     {{ partial "search.html" . }}
     {{ partial "theme-switcher.html" . }}

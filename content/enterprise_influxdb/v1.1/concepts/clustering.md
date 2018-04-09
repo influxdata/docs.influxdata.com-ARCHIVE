@@ -81,7 +81,7 @@ On disk, the data is always organized by `<database>/<retention_policy>/<shard_i
 
 When creating a cluster you'll need to choose how meta and data nodes to configure and connect. You can think of InfluxEnterprise as two separate clusters that communicate with each other: a cluster of meta nodes and one of data nodes. The number of meta nodes is driven by the number of meta node failures they need to be able to handle, while the number of data nodes scales based on your storage and query needs.
 
-The consensus protocol requires a quorum to perform any operation, so there should always be an odd number of meta nodes. For almost all use cases, 3 meta nodes is the correct number, and such a cluster operates normally even with the permanant loss of 1 meta node. 
+The consensus protocol requires a quorum to perform any operation, so there should always be an odd number of meta nodes. For almost all use cases, 3 meta nodes is the correct number, and such a cluster operates normally even with the permanent loss of 1 meta node.
 
 If you were to create a cluster with 4 meta nodes, it can still only survive the loss of 1 node. Losing a second node means the remaining two nodes can only gather two votes out of a possible four, which does not achieve a majority consensus. Since a cluster of 3 meta nodes can also survive the loss of a single meta node, adding the fourth node achieves no extra redundancy and only complicates cluster maintenance. At higher numbers of meta nodes the communication overhead increases exponentially, so configurations of 5 or more are not recommended unless the cluster will frequently lose meta nodes.
 

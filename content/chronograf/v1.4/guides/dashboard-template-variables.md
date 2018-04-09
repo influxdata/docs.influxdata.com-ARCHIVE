@@ -2,7 +2,7 @@
 title: Using dashboard template variables
 menu:
   chronograf_1_4:
-    weight: 60
+    weight: 80
     parent: Guides
 ---
 
@@ -18,6 +18,7 @@ Engage with your dashboards and gain insights into your data with Chronograf's d
   * [Tag Keys](#tag-keys)
   * [Tag Values](#tag-values)
   * [CSV](#csv)
+
 
 ## Overview
 
@@ -268,3 +269,11 @@ SELECT "purchases" FROM "animals"."autogen"."customers" WHERE "petname" = :field
 Use the dropdown at the top of the dashboard to select the different options for the CSV `:field-value:` template variable:
 
 ![CSV template](/img/chronograf/v1.4/g-templates-csv.gif)
+
+##### Why does the query builder break after I add my template variable to a query?
+
+Currently, adding a [template variable](/chronograf/latest/guides/dashboard-template-variables/) to a cell's query renders the query builder unusable.
+If you click on a database in the builder's **Databases** column after adding a template variable to your query, Chronograf simply overwrites your existing query.
+Note that this behavior does not apply to Chronograf's pre-created template variable: `:dashboardTime:`.
+
+This is a known issue and it will be fixed in a future release.

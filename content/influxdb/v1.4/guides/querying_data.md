@@ -1,10 +1,10 @@
 ---
-title: Querying Data with the HTTP API
+title: Querying data with the HTTP API
 alias:
   -/docs/v1.4/query_language/querying_data/
 menu:
   influxdb_1_4:
-    weight: 10
+    weight: 20
     parent: guides
 ---
 
@@ -57,19 +57,20 @@ If an error occurs, InfluxDB sets an `"error"` key with an explanation of the er
 }
 ```
 
-> **Note:** Appending `pretty=true` to the URL enables pretty-printed JSON output.
-While this is useful for debugging or when querying directly with tools like `curl`, it is not recommended for production use as it consumes unnecessary network bandwidth.
+<dt>
+**Warning:** Appending `pretty=true` to the URL enables pretty-printed JSON output. Although useful for debugging or for querying directly with tools like `curl`, it is **not recommended for production use**.  Using `pretty=true` will significantly expand large dataset extractions and will consume unnecessary network bandwidth.
+</dt>
 
 ### Multiple queries
 ---
 Send multiple queries to InfluxDB in a single API call.
-Simply delimit each query using a semicolon, for example:  
+Simply delimit each query using a semicolon, for example:
 <br>
 ```bash
 curl -G 'http://localhost:8086/query?pretty=true' --data-urlencode "db=mydb" --data-urlencode "q=SELECT \"value\" FROM \"cpu_load_short\" WHERE \"region\"='us-west';SELECT count(\"value\") FROM \"cpu_load_short\" WHERE \"region\"='us-west'"
 ```
 
-returns:  
+returns:
 <br>
 ```
 {
@@ -128,7 +129,7 @@ returns:
 Everything in InfluxDB is stored and reported in UTC.
 By default, timestamps are returned in RFC3339 UTC and have nanosecond precision, for example `2015-08-04T19:05:14.318570484Z`.
 If you want timestamps in Unix epoch format include in your request the query string parameter `epoch` where `epoch=[h,m,s,ms,u,ns]`.
-For example, get epoch in seconds with:  
+For example, get epoch in seconds with:
 <br>
 ```bash
 curl -G 'http://localhost:8086/query' --data-urlencode "db=mydb" --data-urlencode "epoch=s" --data-urlencode "q=SELECT \"value\" FROM \"cpu_load_short\" WHERE \"region\"='us-west'"
@@ -147,7 +148,7 @@ The maximum row limit only applies to non-chunked queries. Chunked queries can r
 
 #### Chunking
 Chunking can be used to return results in streamed batches rather than as a single response by setting the query string parameter `chunked=true`. Responses will be chunked by series or by every 10,000 points, whichever occurs first. To change the maximum chunk size to a different value, set the query string parameter `chunk_size` to a different value.
-For example, get your results in batches of 20,000 points with:  
+For example, get your results in batches of 20,000 points with:
 <br>
 ```bash
 curl -G 'http://localhost:8086/query' --data-urlencode "db=deluge" --data-urlencode "chunked=true" --data-urlencode "chunk_size=20000" --data-urlencode "q=SELECT * FROM liters"
@@ -157,4 +158,3 @@ curl -G 'http://localhost:8086/query' --data-urlencode "db=deluge" --data-urlenc
 ---
 Now that you know how to query data, check out the [Data Exploration page](/influxdb/v1.4/query_language/data_exploration/) to get acquainted with InfluxQL.
 For more information about querying data with the HTTP API, please see the [API reference documentation](/influxdb/v1.4/tools/api/#query).
-

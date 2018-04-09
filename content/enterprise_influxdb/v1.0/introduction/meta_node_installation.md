@@ -26,7 +26,7 @@ You **must** add 3 meta nodes at minimum while setting up the cluster.
 
 There is no requirement to use exactly that number of servers, but
 for high availability and redundancy your cluster should have at least three
-meta nodes and an odd number of meta nodes. 
+meta nodes and an odd number of meta nodes.
 More than three meta nodes is not recommended unless the servers are unreliable.
 See the
 [Clustering Guide](/enterprise_influxdb/v1.0/concepts/clustering#optimal-server-counts)
@@ -149,7 +149,7 @@ influxd-ctl join enterprise-meta-02:8091
 influxd-ctl join enterprise-meta-03:8091
 ```
 
-> **Note:** Please make sure that you specify the fully qualified host name of
+> **Note:** Please make sure that you specify the hostname and port of
 the meta node during the join process.
 Please do not specify `localhost` as this can cause cluster connection issues.
 

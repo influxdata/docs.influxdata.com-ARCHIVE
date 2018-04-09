@@ -1,5 +1,5 @@
 ---
-title: External Resources
+title: External resources
 ---
 
 But wait, there's more!

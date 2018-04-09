@@ -1,4 +1,0 @@
----
-type: influxdb
-layout: list
----

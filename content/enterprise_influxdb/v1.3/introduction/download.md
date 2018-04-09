@@ -1,5 +1,5 @@
 ---
-title: Downloads
+title: Downloading InfluxDB Enterprise
 
 aliases:
     - /enterprise/v1.3/introduction/download/
@@ -11,6 +11,6 @@ menu:
 ---
 
 Please visit [InfluxPortal](https://portal.influxdata.com/) to get a license key and download URLs.
-Also see the [Installation](/enterprise_influxdb/v1.3/introduction/meta_node_installation/) documentation to access the downloads. 
+Also see the [Installation](/enterprise_influxdb/v1.3/introduction/meta_node_installation/) documentation to access the downloads.
 You must have a valid license to run a cluster.
-InfluxPortal offers 14-day Demo licenses on sign-up.
+InfluxPortal offers 14-day demo licenses on sign-up.

@@ -1,5 +1,5 @@
 ---
-title: Scraping and Discovery
+title: Scraping and discovery
 
 menu:
   kapacitor_1_4:
@@ -100,5 +100,3 @@ Kapacitor supports the following services for discovery:
 
 
 See the example [configuration file](https://github.com/influxdata/kapacitor/blob/master/etc/kapacitor/kapacitor.conf) for details on configuring each discoverer.
-
-

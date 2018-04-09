@@ -5,12 +5,11 @@ includes documentation for the following InfluxData projects:
 
 * [Telegraf](https://docs.influxdata.com/telegraf/latest/)
 * [InfluxDB](https://docs.influxdata.com/influxdb/latest/)
+* [InfluxDB Enterprise](https://docs.influxdata.com/enterprise_influxdb/latest/)
 * [Chronograf](https://docs.influxdata.com/chronograf/latest/)
 * [Kapacitor](https://docs.influxdata.com/kapacitor/latest/)
-* Enterprise Editions
-    * [InfluxDB](https://docs.influxdata.com/enterprise_influxdb/latest/)
-    * [Kapacitor](https://docs.influxdata.com/enterprise_kapacitor/latest) 
-    
+* [Kapacitor Enterprise](https://docs.influxdata.com/enterprise_kapacitor/latest) 
+
 
 ## Contributing
 

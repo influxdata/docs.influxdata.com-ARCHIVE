@@ -2,22 +2,40 @@
 title: Release Notes/Changelog
 menu:
   kapacitor_1_4:
-    weight: 1
     parent: about_the_project
 ---
 
+## v1.4.1 [2018-03-13]
+
+### Bug fixes
+
+* Fix bug where task type was invalid when using var for stream/batch
+
+## v1.4.0.1 [2017-1-9]
+
+### Features
+
+- Add separate CLI flag for canned sources, kapacitors, dashboards, and organizations.
+- Add Telegraf interval configuration.
+
+### Bug fixes
+- Allow insecure (self-signed) certificates for Kapacitor and InfluxDB.
+- Fix positioning of custom time indicator.
+
 ## v1.4.0 [2017-12-08]
 
-### Release Notes
+### Release notes
+
 Kapacitor v1.4.0 adds many new features, highlighted here:
 
 - Load directory service for adding topic handlers, tasks, and templates from `dir`.
-- Structed Logging with logging API endpoints that can be used to tail logs for specified tasks.
+- Structured logging with logging API endpoints that can be used to tail logs for specified tasks.
 - Autoscale support for Docker Swarm and AWS EC2.
 - Sideload data into your TICKscript streams from external sources.
 - Fully-customizable HTTP Post body for the alert Post handler and the HTTP Post node.
 
-### Breaking Changes
+### Breaking changes
+
 #### Change over internal API to use message passing semantics.
 The `Combine` and `Flatten` nodes previously operated (erroneously) across batch boundaries -- this has been fixed.
 
@@ -78,17 +96,17 @@ The `Combine` and `Flatten` nodes previously operated (erroneously) across batch
 
 ## v1.3.3 [2017-08-11]
 
-### Bugfixes
+### Bug fixes
 - Expose pprof without authentication, if enabled.
 
 ## v1.3.2 [2017-08-08]
 
-### Bugfixes
+### Bug fixes
 - Use details field from alert node in PagerDuty.
 
 ## v1.3.1 [2017-06-02]
 
-### Bugfixes
+### Bug fixes
 
 - Proxy from environment for HTTP request to Slack
 - Fix derivative node preserving fields from previous point in stream tasks
@@ -186,7 +204,7 @@ For more details on the alerting system, see the full documentation [here](https
 
 ### Breaking Change
 #### Fixed inconsistency with JSON data from alerts.
-    The alert handlers Alerta, Log, OpsGenie, PagerDuty, Post and VictorOps allow extra opaque data to beattached to alert notifications. 
+    The alert handlers Alerta, Log, OpsGenie, PagerDuty, Post and VictorOps allow extra opaque data to beattached to alert notifications.
     That opaque data was inconsistent and this change fixes that.
     Depending on how that data was consumed this could result in a breaking change, since the original behavior
     was inconsistent we decided it would be best to fix the issue now and make it consistent for all future builds.

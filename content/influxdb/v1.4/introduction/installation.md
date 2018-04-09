@@ -1,7 +1,8 @@
 ---
-title: Installation
+title: Installing InfluxDB
 menu:
   influxdb_1_4:
+    name: Installing
     weight: 10
     parent: introduction
 ---
@@ -228,6 +229,14 @@ variable.
 
 See the [Configuration](/influxdb/v1.4/administration/config/) documentation for more information.
 
+### Data & WAL Directory Permissions
+
+Make sure the directories in which data and the [write ahead log (WAL)](/influxdb/v1.4/concepts/glossary/#wal-write-ahead-log) are stored are writable for the user running the `influxd` service.
+
+> **Note:** If the data and WAL directories are not writable, the `influxd` service will not start.
+
+Information about `data` and `wal` directory paths is available in the [Data settings](/influxdb/v1.4/administration/config/#data-settings-data) section of the [Configuring InfluxDB](/influxdb/v1.4/administration/config/) documentation.
+
 ## Hosting on AWS
 
 ### Hardware
@@ -239,7 +248,7 @@ The `influxdb/data` volume should have more disk space with lower IOPS and the `
 
 Each machine should have a minimum of 8G RAM.
 
-We’ve seen the best performance with the R4 class of machines, as they provide more memory than either of the C3/C4 class and the M4 class. 
+We’ve seen the best performance with the R4 class of machines, as they provide more memory than either of the C3/C4 class and the M4 class.
 
 ### Configuring the Instance
 

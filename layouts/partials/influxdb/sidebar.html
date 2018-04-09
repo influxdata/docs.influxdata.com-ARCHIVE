@@ -1,4 +1,4 @@
-<div class="sidebar--toggle" id="sidebar--toggle"><span class="icon search"></span> &nbsp;Browse InfluxDB Documentation</div>
+<div class="sidebar--toggle" id="sidebar--toggle"><span class="icon search"></span> &nbsp;Browse InfluxDB documentation</div>
 <div class="sidebar--mask-container" id="sidebar--mask-container">
   <div class="sidebar--mask" id="sidebar--mask"></div>
 </div>
@@ -11,7 +11,7 @@
     {{ range (index $.Site.Menus .Site.Data.default_versions.influxdb) }}
       <section class="sidebar--section">
         <div class="sidebar--section-title">
-          <a class="{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{.URL}}">{{ .Name }}</a>
+          <a class="{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
         </div>
         {{ if .HasChildren }}
             {{ range .Children }}
@@ -26,7 +26,7 @@
       {{ range (index $.Site.Menus .Identifier) }}
         <section class="sidebar--section">
           <div class="sidebar--section-title">
-            <a class="{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{.URL}}">{{ .Name }}</a>
+            <a class="{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
           </div>
           {{ if .HasChildren }}
             {{ range .Children }}
@@ -43,7 +43,7 @@
   {{end}}
   <section class="sidebar--section">
     <div class="sidebar--section-title">
-      <a href="/influxdb/">InfluxDB Versions</a>
+      <a href="/influxdb/">InfluxDB versions</a>
     </div>
     {{ range .Site.Menus.influxdb }}
     <a class="sidebar--page{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>

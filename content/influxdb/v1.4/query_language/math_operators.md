@@ -1,5 +1,5 @@
 ---
-title: Mathematical Operators
+title: Mathematical operators
 
 menu:
   influxdb_1_4:
@@ -149,8 +149,8 @@ SELECT "A" FROM "modulo" WHERE "A" % "B" = 0
 
 ### Bitwise AND
 
-You can use this operator with any integers or booleans, whether they are fields or constants.
-It does not work with float or string datatypes, and you cannot mix integers and booleans.
+You can use this operator with any integers or Booleans, whether they are fields or constants.
+It does not work with float or string datatypes, and you cannot mix integers and Booleans.
 
 ```sql
 SELECT "A" & 255 FROM "bitfields"
@@ -175,8 +175,8 @@ SELECT ("A" ^ true) & "B" FROM "booleans"
 
 ### Bitwise OR
 
-You can use this operator with any integers or booleans, whether they are fields or constants.
-It does not work with float or string datatypes, and you cannot mix integers and booleans.
+You can use this operator with any integers or Booleans, whether they are fields or constants.
+It does not work with float or string datatypes, and you cannot mix integers and Booleans.
 
 ```sql
 SELECT "A" | 5 FROM "bitfields"
@@ -192,8 +192,8 @@ SELECT * FROM "data" WHERE "bitfield" | 12 = 12
 
 ### Bitwise Exclusive-OR
 
-You can use this operator with any integers or booleans, whether they are fields or constants.
-It does not work with float or string datatypes, and you cannot mix integers and booleans.
+You can use this operator with any integers or Booleans, whether they are fields or constants.
+It does not work with float or string datatypes, and you cannot mix integers and Booleans.
 
 ```sql
 SELECT "A" ^ 255 FROM "bitfields"
@@ -236,7 +236,7 @@ Perform a mathematical operation on a regular expression within a function.
 > SELECT COUNT(/A/) + 2 FROM "nope"
 ERR: unsupported expression with regex field: count(/A/) + 2
 ```
- 
+
 #### Issue 2: Mathematical operators with functions
 
 The use of mathematical operators inside of function calls is currently unsupported.
@@ -268,14 +268,14 @@ See GitHub issue [3525](https://github.com/influxdb/influxdb/issues/3525).
 Using any of `!|`,`NAND`,`XOR`,`NOR` yield a parser error.
 
 Additionally using `AND`, `OR` in the `SELECT` clause of a query will not behave as mathematical operators and simply yield empty results, as they are tokens in InfluxQL.
-However, you can apply the bitwise operators `&`, `|` and `^` to boolean data.
+However, you can apply the bitwise operators `&`, `|` and `^` to Boolean data.
 
 ### Bitwise Not
 
 There is no bitwise-not operator, because the results you expect depend on the width of your bitfield.
 InfluxQL does not know how wide your bitfield is, so cannot implement a suitable bitwise-not operator.
 
-For example, if your bitfield is 8 bits wide, then to you the integer 1 represents the bits `0000 0001`.  
+For example, if your bitfield is 8 bits wide, then to you the integer 1 represents the bits `0000 0001`.
 The bitwise-not of this should return the bits `1111 1110`, i.e. the integer 254.
 
 However, if your bitfield is 16 bits wide, then the integer 1 represents the bits `0000 0000 0000 0001`.

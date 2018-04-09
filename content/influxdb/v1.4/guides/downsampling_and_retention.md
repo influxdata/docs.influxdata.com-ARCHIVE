@@ -1,8 +1,8 @@
 ---
-title: Downsampling and Data Retention
+title: Downsampling and data retention
 menu:
   influxdb_1_4:
-    weight: 11
+    weight: 30
     parent: guides
 ---
 
@@ -39,7 +39,7 @@ If you're new to both concepts, we recommend looking over the detailed
 
 ### Sample data
 This section uses fictional real-time data that track the number of food orders
-to a restaurant via phone and via website at ten second intervals.
+to a restaurant by phone and by website at ten second intervals.
 We will store those data in a
 [database](/influxdb/v1.4/concepts/glossary/#database) called `food_data`, in
 the [measurement](/influxdb/v1.4/concepts/glossary/#measurement) `orders`, and
@@ -64,7 +64,7 @@ In the next steps, we use RPs and CQs to:
  * Automatically delete the raw, ten-second resolution data that are older than two hours
  * Automatically delete the 30-minute resolution data that are older than 52 weeks
 
-### Database Preparation
+### Database preparation
 We perform the following steps before writing the data to the database
 `food_data`.
 We do this **before** inserting any data because CQs only run against recent

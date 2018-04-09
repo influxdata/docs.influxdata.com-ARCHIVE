@@ -1,5 +1,5 @@
 ---
-title: Anti-Entropy
+title: Anti-entropy
 alias:
   -/docs/v1.3/administration/anti-entropy
 menu:

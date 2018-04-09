@@ -228,6 +228,14 @@ variable.
 
 See the [Configuration](/influxdb/v1.3/administration/config/) documentation for more information.
 
+### Data & WAL Directory Permissions
+
+Make sure the directories in which data and the [write ahead log (WASL)](/influxdb/v1.3/concepts/glossary/#wal-write-ahead-log) are stored are writable for the user running the `influxd` service.
+
+> **Note:** If the data and WAL directories are not writable, the `influxd` service will not start.
+
+Information about `data` and `wal` directory paths is available in the [Configuration ](/influxdb/v1.3/administration/config/#data) documentation.
+
 ## Hosting on AWS
 
 ### Hardware
@@ -239,7 +247,7 @@ The `influxdb/data` volume should have more disk space with lower IOPS and the `
 
 Each machine should have a minimum of 8G RAM.
 
-We’ve seen the best performance with the R4 class of machines, as they provide more memory than either of the C3/C4 class and the M4 class. 
+We’ve seen the best performance with the R4 class of machines, as they provide more memory than either of the C3/C4 class and the M4 class.
 
 ### Configuring the Instance
 

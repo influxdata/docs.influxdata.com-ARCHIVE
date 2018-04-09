@@ -29,7 +29,7 @@ The InfluxDB configuration file contains configuration settings specific to a lo
   * [CollectD settings `[[collectd]]`](#collectd-settings-collectd)
   * [OpenTSB settings `[[opentsdb]]`](#opentsdb-settings-opentsdb)
   * [UDP settings `[[udp]]`](#udp-settings-udp)
-  * [Continuous queries settings `[continuous_queries]`](#continuous-queries-settings-continuous_queries)
+  * [Continuous queries settings `[continuous_queries]`](#continuous-queries-settings-continuous-queries)
 
 ## Configuration overview
 
@@ -412,7 +412,7 @@ The rate at which InfluxDB checks to enforce a retention policy.
 
 Environment variable: `INFLUXDB_RETENTION_CHECK_INTERVAL`
 
-## Shard precreation settings [shard-precreation]
+## Shard precreation settings `[shard-precreation]`
 
 The `[shard-precreation]` settings control the precreation of shards so that shards are available before data arrive.
 Only shards that, after creation, will have both a start- and end-time in the future are ever created.
@@ -461,14 +461,6 @@ Environment variable: `INFLUXDB_MONITOR_STORE_DATABASE`
 The interval at which InfluxDB records statistics.
 
 Environment variable: `INFLUXDB_MONITOR_STORE_INTERVAL`
-
-## Administration settings `[admin]`
-
-<dt> Starting with version 1.3, the web admin interface is no longer available in InfluxDB.
-The interface does not run on port `8083` and InfluxDB ignores the `[admin]` section in the configuration file if that section is present.
-[Chronograf](/chronograf/latest/) replaces the web admin interface with improved tooling for querying data, writing data, and database management.
-See [Chronograf's transition guide](/chronograf/latest/guides/transition-web-admin-interface/) for more information.
-</dt>
 
 ## HTTP endpoint settings `[http]`
 

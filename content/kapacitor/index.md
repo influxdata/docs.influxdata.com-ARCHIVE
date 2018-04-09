@@ -1,4 +1,0 @@
----
-type: kapacitor
-layout: list
----

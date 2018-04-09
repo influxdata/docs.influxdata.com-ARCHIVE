@@ -1,5 +1,5 @@
 ---
-title: Schema Design
+title: Schema design and data layout
 menu:
   influxdb_1_4:
     weight: 70
@@ -18,9 +18,9 @@ There are, however, general guidelines to follow and pitfalls to avoid when desi
   </tr>
 </table>
 
-# General Recommendations
+# General recommendations
 
-## Encouraged Schema Design
+## Encouraged schema design
 
 In no particular order, we recommend that you:
 
@@ -44,7 +44,7 @@ See [InfluxQL Keywords](https://github.com/influxdata/influxql/blob/master/READM
 
 Note that you will also need to wrap identifiers in double quotes in queries if they contain characters other than `[A-z,_]`.
 
-## Discouraged Schema Design
+## Discouraged schema design
 
 In no particular order, we recommend that you:
 
@@ -131,9 +131,9 @@ While both queries are similar, the use of multiple tags in Schema 2 avoids the 
 > SELECT mean("temp") FROM "weather_sensor" WHERE region = 'north'
 ```
 
-# Shard Group Duration Management
+# Shard group duration management
 
-## Shard Group Duration Overview
+## Shard group duration overview
 
 InfluxDB stores data in shard groups.
 Shard groups are organized by [retention policy](/influxdb/v1.4/concepts/glossary/#retention-policy-rp) (RP) and store data with timestamps that fall within a specific time interval.
@@ -151,7 +151,7 @@ The shard group duration is also configurable per RP.
 See [Retention Policy Management](/influxdb/v1.4/query_language/database_management/#retention-policy-management) for how to configure the
 shard group duration.
 
-## Shard Group Duration Recommendations
+## Shard group duration recommendations
 
 In general, shorter shard group durations allow the system to efficiently drop data.
 When InfluxDB enforces an RP it drops entire shard groups, not individual data points.

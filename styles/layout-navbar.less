@@ -31,11 +31,23 @@
 }
 .navbar--logo {
 	left: 1em;
-	font-size: 1.5rem;
-	color: @nav-logo;
-	transition: color 0.25s ease;
-	&:hover {
-		color: @nav-logo-hover;
+	a {
+		font-size: 1.5rem;
+		color: @nav-logo;
+		transition: color 0.25s ease;
+		&:hover {
+			color: @nav-logo-hover;
+		}
+	}
+	.divider {
+		border-left: 1px solid @nav-logo;
+    margin: 0 .8rem 0 .5rem;
+    vertical-align: text-top;
+		opacity: .35;
+		line-height: 1.15em;
+	}
+	.navbar--docs {
+		font-size: 1.3rem;
 	}
 }
 .navbar--hamburger {
@@ -232,7 +244,7 @@
 		.aa-suggestion {
 			cursor: pointer;
 			padding: 0;
-			
+
 			.algolia-docsearch-suggestion {
 				background-color: @algolia-category-header;
 				border-radius: @radius;
@@ -278,7 +290,7 @@
 			}
 			// Highlight style
 			&.aa-cursor {
-				
+
 				.algolia-docsearch-suggestion--content {
 					.gradient-h(@algolia-cursor-bg1,@algolia-cursor-bg2);
 				}
@@ -330,6 +342,31 @@
 //
 // Media Queries
 // --------------------------------------------------
+@media (max-width: 500px) {
+	.navbar--logo {
+		.logotype {
+			display: none;
+		}
+		.logo {
+			display: inline;
+		}
+	}
+}
+@media (min-width: 500px) {
+	.navbar--logo {
+		.logotype {
+			display: inline;
+		}
+		.logo {
+			display: none;
+		}
+	}
+}
+
+@media (min-width: 501px) {
+
+}
+
 @media (min-width: @breakpoint-small) {
 	.theme-switcher {
 		display: block;

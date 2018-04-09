@@ -1,7 +1,8 @@
 ---
-title: Getting Started
+title: Getting started with InfluxDB
 menu:
   influxdb_1_4:
+    name: Getting started
     weight: 20
     parent: introduction
 ---
@@ -17,7 +18,7 @@ for examples with the `curl` application.
 
 ## Creating a database
 
-If you've installed InfluxDB locally, the `influx` command should be available via the command line.
+If you've installed InfluxDB locally, the `influx` command should be available using the command line.
 Executing `influx` will start the CLI and automatically connect to the local InfluxDB instance
 (assuming you have already started the server with `service influxdb start` or by running `influxd` directly).
 The output should look like this:

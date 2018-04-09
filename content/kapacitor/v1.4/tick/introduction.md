@@ -1,5 +1,5 @@
 ---
-title: TICKscript Language Introduction
+title: Introducing the TICKscript language
 
 menu:
   kapacitor_1_4:
@@ -12,12 +12,12 @@ menu:
 * [Overview](#overview)
 * [Nodes](#nodes)
 * [Pipelines](#pipelines)
-* [Basic Examples](#basic-examples)
+* [Basic examples](#basic-examples)
 * [Where to next](#where-to-next)
 
 # Overview
 
-Kapacitor uses a Domain Specific Language(DSL) named **TICKscript** to define **tasks** involving the extraction, transformation and loading of data and involving, moreover, the tracking of arbitrary changes and the detection of events within data.  One common task is defining alerts.  TICKscript is used in `.tick` files to define **pipelines** for processing data.  The TICKscript language is designed to chain together the invocation of data processing operations defined in **nodes**.  The Kapacitor [Getting Started](/kapacitor/v1.4/introduction/getting_started/) guide introduces TICKscript basics in the context of that product.  For a better understanding of what follows, it is recommended that the reader review that document first.
+Kapacitor uses a Domain Specific Language(DSL) named **TICKscript** to define **tasks** involving the extraction, transformation and loading of data and involving, moreover, the tracking of arbitrary changes and the detection of events within data.  One common task is defining alerts.  TICKscript is used in `.tick` files to define **pipelines** for processing data.  The TICKscript language is designed to chain together the invocation of data processing operations defined in **nodes**.  The Kapacitor [Getting Started](/kapacitor/v1.4/introduction/getting-started/) guide introduces TICKscript basics in the context of that product.  For a better understanding of what follows, it is recommended that the reader review that document first.
 
 Each script has a flat scope and each variable in the scope can reference a literal value, such as a string, an integer or a float value, or a node instance with methods that can then be called.
 
@@ -30,7 +30,7 @@ These methods come in two forms.
 
 In TICKscript the fundamental type is the **node**.  A node has **properties** and, as mentioned, chaining methods.  A new node can be created from a parent or sibling node using a chaining method of that parent or sibling node.  For each **node type** the signature of this method will be the same, regardless of the parent or sibling node type.  The chaining method can accept zero or more arguments used to initialize internal properties of the new node instance.  Common node types are `batch`, `query`, `stream`, `from`, `eval` and `alert`, though there are dozens of others.
 
-The top level nodes, which establish the processing type of the task to be defined, `stream` and `batch`, are simply declared and take no arguments.  Nodes with more complex sets of properties rely on **Property methods** for their internal configuration.  
+The top level nodes, which establish the processing type of the task to be defined, `stream` and `batch`, are simply declared and take no arguments.  Nodes with more complex sets of properties rely on **Property methods** for their internal configuration.
 
 Each node type **wants** data in either batch or stream mode.  Some can handle both. Each node type also **provides** data in batch or stream mode.  Some can provide both.  This _wants/provides_ pattern is key to understanding how nodes work together.  Taking into consideration the _wants/provides_ pattern, four general node use cases can be defined:
 
@@ -43,23 +43,23 @@ The [node reference documentation](/kapacitor/v1.4/nodes/) lists the property an
 
 # Pipelines
 
-Every TICKscript is broken into one or more **pipelines**.  Pipelines are chains of nodes logically organized along edges that cannot cycle back to earlier nodes in the chain.  The nodes within a pipeline can be assigned to variables. This allows the results of different pipelines to be combined using, for example, a `join` or a `union` node.  It also allows for sections of the pipeline to be broken into reasonably understandable self-descriptive functional units.  In a simple TICKscript there may be no need to assign pipeline nodes to variables.  The initial node in the pipeline sets the processing type for the Kapacitor task they define.  These can be either `stream` or `batch`.  These two types of pipelines cannot be combined.  
+Every TICKscript is broken into one or more **pipelines**.  Pipelines are chains of nodes logically organized along edges that cannot cycle back to earlier nodes in the chain.  The nodes within a pipeline can be assigned to variables. This allows the results of different pipelines to be combined using, for example, a `join` or a `union` node.  It also allows for sections of the pipeline to be broken into reasonably understandable self-descriptive functional units.  In a simple TICKscript there may be no need to assign pipeline nodes to variables.  The initial node in the pipeline sets the processing type for the Kapacitor task they define.  These can be either `stream` or `batch`.  These two types of pipelines cannot be combined.
 
-### Stream or Batch?
+### Stream or batch?
 
-With `stream` processing, datapoints are read, as in a classic data stream, point by point as they arrive.  With `stream` Kapacitor subscribes to all writes of interest in InfluxDB.  With `batch` processing a frame of 'historic' data is read from the database and then processed.  With `stream` processing data can be transformed before being written to InfluxDB.  With `batch` processing, the data should already be stored in InfluxDB.  After processing, it can also be written back to it.  
+With `stream` processing, datapoints are read, as in a classic data stream, point by point as they arrive.  With `stream` Kapacitor subscribes to all writes of interest in InfluxDB.  With `batch` processing a frame of 'historic' data is read from the database and then processed.  With `stream` processing data can be transformed before being written to InfluxDB.  With `batch` processing, the data should already be stored in InfluxDB.  After processing, it can also be written back to it.
 
-Which to use depends upon system resources and the kind of computation being undertaken.  When working with a large set of data over a long time frame `batch` is preferred.  It leaves data stored on the disk until it is required, though the query, when triggered, will result in a sudden high load on the database.  Processing a large set of data over a long time frame with `stream` means needlessly holding potentially billions of data points in memory.  When working with smaller time frames  `stream` is preferred.  It lowers the query load on InfluxDB.  
+Which to use depends upon system resources and the kind of computation being undertaken.  When working with a large set of data over a long time frame `batch` is preferred.  It leaves data stored on the disk until it is required, though the query, when triggered, will result in a sudden high load on the database.  Processing a large set of data over a long time frame with `stream` means needlessly holding potentially billions of data points in memory.  When working with smaller time frames  `stream` is preferred.  It lowers the query load on InfluxDB.
 
 ### Pipelines as graphs
 
 Pipelines in Kapacitor are directed acyclic graphs ([DAGs](https://en.wikipedia.org/wiki/Directed_acyclic_graph)).  This means that
-each edge has a direction down which data flows, and that there cannot be any cycles in the pipeline.  An edge can also be thought of as the data-flow relationship that exists between a parent node and its child.  
+each edge has a direction down which data flows, and that there cannot be any cycles in the pipeline.  An edge can also be thought of as the data-flow relationship that exists between a parent node and its child.
 
 At the start of any pipeline will be declared one of two fundamental edges.  This first edge establishes the type of processing for the task, however, each ensuing node establishes the edge type between itself and its children.
 
 * `stream`&rarr;`from()`&ndash; an edge that transfers data a single data point at a time.
-* `batch`&rarr;`query()`&ndash; an edge that transfers data in chunks instead of one point at a time.  
+* `batch`&rarr;`query()`&ndash; an edge that transfers data in chunks instead of one point at a time.
 
 ### Pipeline validity
 
@@ -72,9 +72,9 @@ When connecting nodes and then creating a new Kapacitor task, Kapacitor will che
 [cpu_alert:alert4] 2017/10/24 14:42:59 E! error evaluating expression for level CRITICAL: left reference value "usage_idle" is missing value
 ...
 ```
-Example 1 shows a runtime error that is thrown because a field value has gone missing from the pipeline.  This can often happen following an `eval` node when the property `keep()` of the `eval` node has not been set.  In general Kapacitor cannot anticipate all the modalities of the data that the task will encounter at runtime.  Some tasks may not be written to handle all deviations or exceptions from the norm, such as when fields or tags go missing.  In these cases Kapacitor will log an error.   
+Example 1 shows a runtime error that is thrown because a field value has gone missing from the pipeline.  This can often happen following an `eval` node when the property `keep()` of the `eval` node has not been set.  In general Kapacitor cannot anticipate all the modalities of the data that the task will encounter at runtime.  Some tasks may not be written to handle all deviations or exceptions from the norm, such as when fields or tags go missing.  In these cases Kapacitor will log an error.
 
-# Basic Examples
+# Basic examples
 
 **Example 2 &ndash; An elementary stream &rarr; from() pipeline**
 ```javascript
@@ -92,7 +92,7 @@ The simple script in Example 2 can be used to create a task with the default Tel
 $ kapacitor define sf_task -tick sf.tick
 ```
 
-The task, `sf_task`, will simply cache the latest cpu datapoint as JSON to the HTTP REST endpoint(e.g http<span>://localhost:</span><span>9092/kapacitor/v1/tasks/sf_task/dump</span>).  
+The task, `sf_task`, will simply cache the latest cpu datapoint as JSON to the HTTP REST endpoint(e.g http<span>://localhost:</span><span>9092/kapacitor/v1/tasks/sf_task/dump</span>).
 
 This example contains a database and retention policy statement: `dbrp`.
 
@@ -100,14 +100,14 @@ This example also contains three nodes:
 
    * The base `stream` node.
    * The requisite `from()` node, that defines the stream of data points.
-   * The processing node `httpOut()`, that caches the data it receives to the REST service of Kapacitor.  
+   * The processing node `httpOut()`, that caches the data it receives to the REST service of Kapacitor.
 
 It contains two edges.
 
    * `stream`&rarr;`from()`&ndash; sets the processing type of the task and the data stream.
    * `from()`&rarr;`httpOut()`&ndash; passes the data stream to the HTTP output processing node.
 
-It contains one property method, which is the call on the `from()` node to `.measurement('cpu')` defining the measurement to be used for further processing.  
+It contains one property method, which is the call on the `from()` node to `.measurement('cpu')` defining the measurement to be used for further processing.
 
 **Example 3 &ndash; An elementary batch &rarr; query() pipeline**
 
@@ -138,7 +138,7 @@ It contains two edges.
    * `batch`&rarr;`query()`&ndash; sets the processing style and data set.
    * `query()`&rarr;`httpOut()`&ndash; passes the data set to the HTTP output processing node.
 
-It contains two property methods, which are called from the `query()` node.    
+It contains two property methods, which are called from the `query()` node.
 
    * `period()`&ndash; sets the period in time which the batch of data will cover.
    * `every()`&ndash; sets the frequency at which the batch of data will be processed.

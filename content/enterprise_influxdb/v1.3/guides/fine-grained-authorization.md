@@ -1,5 +1,5 @@
 ---
-title: Fine-Grained Authorization
+title: Fine-grained authorization
 alias:
   -/docs/v1.3/administration/fga
 menu:
@@ -11,7 +11,7 @@ menu:
 ## Controlling access to data with Enterprise's Fine-Grained Authorization
 
 In open source InfluxDB, access control operates only at a database level.
-In Enterprise, fine-grained authorization can be used to control access at a measurement or series level.
+In InfluxDB Enterprise, fine-grained authorization can be used to control access at a measurement or series level.
 
 ### Concepts
 

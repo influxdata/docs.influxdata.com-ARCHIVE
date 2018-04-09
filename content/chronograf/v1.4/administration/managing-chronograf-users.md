@@ -3,7 +3,7 @@ title: Managing Chronograf users
 menu:
   chronograf_1_4:
     name: Managing Chronograf users
-    weight: 50
+    weight: 90
     parent: Administration
 ---
 
@@ -183,14 +183,14 @@ Role required: `admin`
 
 **To create a user:**
 
-1) Open Chronograf in your web browser and select **Admin (crown icon) > Chronograf**.
-1) Click the **Users** tab and then click **Create User**.
-1) Add the following user information:
+1. Open Chronograf in your web browser and select **Admin (crown icon) > Chronograf**.
+2. Click the **Users** tab and then click **Create User**.
+3. Add the following user information:
    * **Username**: Enter the username as provided by the OAuth provider.
    * **Role**: Select the Chronograf role.
    * **Provider**: Enter the OAuth 2.0 provider to be used for authentication. Valid values are: `github`, `google`, and `auth0`.
    * **Scheme**: Displays `oauth2`, which is the only supported authentication scheme in this release.
-1) Click **Save** to finish creating the user.
+4. Click **Save** to finish creating the user.
 
 ### Updating users
 
@@ -200,9 +200,9 @@ Only a user's role can be updated. A user's username, provider, and scheme canno
 
 **To change a user's role:**
 
-1) Open Chronograf in your web browser and select **Admin (crown icon) > Chronograf**.
-1) Click the **Users** tab to display the list of users within the current organization.
-1) Select a new role for the user. The update is automatically persisted.
+1. Open Chronograf in your web browser and select **Admin (crown icon) > Chronograf**.
+2. Click the **Users** tab to display the list of users within the current organization.
+3. Select a new role for the user. The update is automatically persisted.
 
 ### Removing users
 
@@ -210,9 +210,9 @@ Role required: `admin`
 
 **To remove a user:**
 
-1) Open Chronograf in your web browser and select **Admin (crown icon) > Chronograf**.
-1) Click the **Users** tab to display the list of users.
-1) Hover your cursor over the user you want to remove and then click **Remove** and **Confirm**.
+1. Open Chronograf in your web browser and select **Admin (crown icon) > Chronograf**.
+2. Click the **Users** tab to display the list of users.
+3. Hover your cursor over the user you want to remove and then click **Remove** and **Confirm**.
 
 ### Navigating organizations
 

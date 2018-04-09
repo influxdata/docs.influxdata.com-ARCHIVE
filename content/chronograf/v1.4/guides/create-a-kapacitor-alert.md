@@ -2,14 +2,23 @@
 title: Creating Kapacitor alerts
 menu:
   chronograf_1_4:
-    weight: 20
+    weight: 40
     parent: Guides
 ---
 
 
 Chronograf provides a user interface for [Kapacitor](/kapacitor/latest/), InfluxData's processing framework for creating alerts, running ETL jobs, and detecting anomalies in your data.
+Alerts in Chronograf correspond to Kapacitor tasks designed specifically to
+trigger alerts whenever the data stream values rise above or fall below
+designated thresholds.
+Some of the most common alerting use cases can be managed using Chronograf, including:
 
-This guide offers step-by-step instructions for creating a Kapacitor alert in Chronograf.
+* Thresholds with static ceilings, floors, and ranges.
+* Relative thresholds based on unit or percentage changes.
+* Deadman switches.
+
+For more complex alerts and other tasks, you must define them directly in Kapacitor.
+
 By the end of this guide, you'll have an alert rule that sends a message to an existing [Slack](https://slack.com/) channel whenever your idle CPU usage crosses the 80% threshold.
 
 ## Requirements

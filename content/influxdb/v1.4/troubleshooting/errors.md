@@ -1,5 +1,5 @@
 ---
-title: Error Messages
+title: Error messages
 menu:
   influxdb_1_4:
     weight: 30
@@ -309,3 +309,13 @@ to get a sense of how big the caches are in memory.
 
 **Resources:**
 [Database Configuration](/influxdb/v1.4/administration/config/)
+
+## already killed
+The `already killed` error occurs when a query has already been killed, but
+there are subsequent kill attempts before the query has exited.
+When a query is killed, it may not exit immediately.
+It will be in the `killed` state, which means the signal has been sent, but the
+query itself has not hit an interrupt point.
+
+**Resources:**
+[Query Management](/influxdb/v1.0/troubleshooting/query_management/)
