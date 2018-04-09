@@ -211,7 +211,7 @@ Options:
 &emsp;&emsp;&emsp;The TCP address of the target data node.
 
 `-full`:
-&emsp;&emsp;&emsp;Perform a [full](/enterprise_influxdb/v1.5/guides/backup-and-restore/#backup) backup.
+&emsp;&emsp;&emsp;Perform a [full](/enterprise_influxdb/v1.5/administration/backup-and-restore/#backup) backup.
 
 `-rp <retention-policy>`:
 &emsp;&emsp;&emsp;The name of the single [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) to back up (requires the `-db` flag).
@@ -222,7 +222,7 @@ Options:
 > Restoring a `-full` backup and restoring an incremental backup require different syntax.
 To prevent issues with [`restore`](#restore), keep `-full` backups and incremental backups in separate directories.
 
-Resources: [Backup and Restore](/enterprise_influxdb/v1.5/guides/backup-and-restore/)
+Resources: [Backup and Restore](/enterprise_influxdb/v1.5/administration/backup-and-restore/)
 
 ##### Examples
 <br>
@@ -670,7 +670,7 @@ A restore command with the `-full` flag requires the `path-to-backup-manifest-fi
 `-shard <unit>`
 &emsp;&emsp;&emsp;The [shard](/influxdb/v1.5/concepts/glossary/#shard) ID to restore.
 
-Resources: [Backup and Restore](/enterprise_influxdb/v1.5/guides/backup-and-restore/#restore)
+Resources: [Backup and Restore](/enterprise_influxdb/v1.5/administration/backup-and-restore/#restore)
 
 ##### Examples
 <br>

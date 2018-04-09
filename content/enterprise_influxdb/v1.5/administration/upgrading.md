@@ -21,7 +21,7 @@ If you have incremental backups created as part of your standard operating proce
 trigger a final incremental backup before proceeding with the upgrade.
 
 > ***Note:*** For information on performing a final incremental backup or a full backup,
-> see the InfluxDB Enterprise [Backup and restore](/enterprise_influxdb/v1.5/guides/backup-and-restore) documentation.
+> see the InfluxDB Enterprise [Backup and restore](/enterprise_influxdb/v1.5/administration/backup-and-restore/) documentation.
 
 ## Upgrading meta nodes
 
@@ -150,7 +150,7 @@ sudo yum localinstall influxdb-data-1.5.1_c1.5.1.x86_64.rpm
 * [wal-fsync-delay = "0s"](/enterprise_influxdb/v1.5/administration/configuration/#wal-fsync-delay-0s) to the `[data]` section
 * [max-concurrent-compactions = 0](/enterprise_influxdb/v1.5/administration/configuration/#max-concurrent-compactions-0) to the `[data]` section
 * [pool-max-idle-streams = 100](/enterprise_influxdb/v1.5/administration/configuration/#pool-max-idle-streams-100) to the `[cluster]` section
-* [pool-max-idle-time = "1m0s"](/enterprise_influxdb/v1.5/administration/configuration/#pool-max-idle-time-1m0s) to the `[cluster]` section
+* [pool-max-idle-time = "1m0s"](/enterprise_influxdb/v1.5/administration/configuration/#pool-max-idle-time-60s) to the `[cluster]` section
 * the [[anti-entropy]](/enterprise_influxdb/v1.5/administration/configuration/#anti-entropy) section:
 ```
 [anti-entropy]
@@ -161,7 +161,7 @@ sudo yum localinstall influxdb-data-1.5.1_c1.5.1.x86_64.rpm
 **Remove:**
 
 * `max-remote-write-connections` from the `[cluster]` section
-* [`[admin]`](/enterprise_influxdb/v1.3/administration/configuration/#admin) section
+* `[admin]` section
 
 **Update:**
 
@@ -180,7 +180,7 @@ The new configuration options are set to the default settings.
 
   - When TSI is enabled, new shards use the TSI disk-based indexing. Existing shards must be converted to support TSI.
   - Run the [`influx_inspect buildtsi`](/influxdb/v1.5/tools/influx_inspect#influx-inspect-buildtsi) command to convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
-  
+
 > **Note:** Run the `buildtsi` command using the user account that you are going to run the database as,
 > or ensure that the permissions match afterward.
 

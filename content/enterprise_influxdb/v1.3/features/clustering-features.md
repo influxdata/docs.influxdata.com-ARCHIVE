@@ -31,11 +31,11 @@ It is important to understand how to configure InfluxDB Enterprise and how this 
 Continuous Queries (CQ) engine’s behavior:
 
 - **Data Node Configuration** `[continuous queries]`
-[run-interval](/enterprise_influxdb/v1.3/administration/configuration#lease-duration--1m0s)
+[run-interval](/enterprise_influxdb/v1.3/administration/configuration#run-interval-1s)
 -- The interval at which InfluxDB checks to see if a CQ needs to run. Set this option to the lowest interval
 at which your CQs run. For example, if your most frequent CQ runs every minute, set run-interval to 1m.
 - **Meta Node Configuration** `[meta]`
-[lease-duration](/enterprise_influxdb/v1.3/administration/configuration#run-interval--1s)
+[lease-duration](/enterprise_influxdb/v1.3/administration/configuration#lease-duration-1m0s)
 -- The default duration of the leases that data nodes acquire from the meta nodes. Leases automatically expire after the
 lease-duration is met.  Leases ensure that only one data node is running something at a given time. For example, Continuous
 Queries use a lease so that all data nodes aren’t running the same CQs at once.

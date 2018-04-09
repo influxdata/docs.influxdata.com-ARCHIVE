@@ -30,7 +30,7 @@ Note: that there is no requirement for each data node to run on its own
 server.  However, best practices are to deploy each data node on a dedicated server.
 
 See the
-[Clustering Guide](/enterprise_influxdb/v1.3/concepts/clustering.md#optimal-server-counts)
+[Clustering Guide](/enterprise_influxdb/v1.3/concepts/clustering/#optimal-server-counts)
 for more on cluster architecture.
 
 ### Other Requirements

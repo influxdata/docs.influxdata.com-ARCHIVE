@@ -301,7 +301,7 @@ Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Rest
 Restored from my-incremental-backup/ in 56.623615ms, transferred 588800 bytes
 ```
 
-Then, in the [`influx` client](/influxdb/v1.5/tools/shell/), use an [`INTO` query](/influxdb/v1.5/query_language/data_exploration/#relocate-data) to copy the data from the new database into the existing `telegraf` database:
+Then, in the [`influx` client](/influxdb/v1.5/tools/shell/), use an [`INTO` query](/influxdb/v1.5/query_language/data_exploration/#the-into-clause) to copy the data from the new database into the existing `telegraf` database:
 
 ```
 $ influx
@@ -318,7 +318,7 @@ time                  written
 
 #### Issue 1: Restore writes information not part of the original backup
 
-If a [restore from an incremental backup](#restore-from-an-incremental-backup) does not limit the restore to the same database, retention policy, and shard specified by the backup command, the restore may appear to restore information that was not part of the original backup.
+If a [restore from an incremental backup](#syntax-for-a-restore-from-an-incremental-backup) does not limit the restore to the same database, retention policy, and shard specified by the backup command, the restore may appear to restore information that was not part of the original backup.
 Backups consist of a shard data backup and a metastore backup.
 The **shard data backup** contains the actual time series data: the measurements, tags, fields, and so on.
 The **metastore backup** contains user information, database names, retention policy names, shard metadata, continuous queries, and subscriptions.
