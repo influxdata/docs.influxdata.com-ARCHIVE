@@ -779,7 +779,7 @@ show_continuous_queries_stmt = "SHOW CONTINUOUS QUERIES" .
 
 #### Example:
 
-​```sql
+```sql
 -- show all continuous queries
 SHOW CONTINUOUS QUERIES
 ```
@@ -788,20 +788,20 @@ SHOW CONTINUOUS QUERIES
 
 ```
 show_databases_stmt = "SHOW DATABASES" .
-
 ```
 
 #### Example:
 
-​```sql
+```sql
 -- show all databases
 SHOW DATABASES
 ```
+
 ### SHOW FIELD KEY CARDINALITY
 
 Estimates or counts exactly the cardinality of the field key set for the current database unless a database is specified using the `ON <database>` option.
 
-> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optionalgit fetc.
+> **Note:** `ON <database>`, `FROM <sources>`, `WITH KEY = <key>`, `WHERE <condition>`, `GROUP BY <dimensions>`, and `LIMIT/OFFSET` clauses are optionalgit fetc.
 > When using these query clauses, the query falls back to an exact count.
 > Filtering by `time` is only supported when TSI (Time Series Index) is enabled and `time` is not supported in the `WHERE` clause.
 
@@ -852,7 +852,7 @@ SHOW GRANTS FOR "jdoe"
 
 Estimates or counts exactly the cardinality of the measurement set for the current database unless a database is specified using the `ON <database>` option.
 
-> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional.
+> **Note:** `ON <database>`, `FROM <sources>`, `WITH KEY = <key>`, `WHERE <condition>`, `GROUP BY <dimensions>`, and `LIMIT/OFFSET` clauses are optional.
 > When using these query clauses, the query falls back to an exact count.
 > Filtering by `time` is only supported when TSI (Time Series Index) is enabled and `time` is not supported in the `WHERE` clause.
 
@@ -938,7 +938,7 @@ Estimates or counts exactly the cardinality of the series for the current databa
 - [When do I need more RAM?](/influxdb/v1.4/guides/hardware_sizing/#when-do-i-need-more-ram) in [Hardware Sizing Guidelines](/influxdb/v1.4/guides/hardware_sizing/)
 - [Don't have too many series](/influxdb/v1.4/concepts/schema_and_data_layout/#don-t-have-too-many-series)
 
-> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional.
+> **Note:** `ON <database>`, `FROM <sources>`, `WITH KEY = <key>`, `WHERE <condition>`, `GROUP BY <dimensions>`, and `LIMIT/OFFSET` clauses are optional.
 > When using these query clauses, the query falls back to an exact count.
 > Filtering by `time` is only supported when TSI (Time Series Index) is enabled and `time` is not supported in the `WHERE` clause.
 
@@ -1001,7 +1001,7 @@ SHOW SUBSCRIPTIONS
 
 Estimates or counts exactly the cardinality of tag key set on the current database unless a database is specified using the `ON <database>` option.
 
-> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional.
+> **Note:** `ON <database>`, `FROM <sources>`, `WITH KEY = <key>`, `WHERE <condition>`, `GROUP BY <dimensions>`, and `LIMIT/OFFSET` clauses are optional.
 > When using these query clauses, the query falls back to an exact count.
 > Filtering by `time` is only supported when TSI (Time Series Index) is enabled and `time` is not supported in the `WHERE` clause.
 
@@ -1069,7 +1069,7 @@ SHOW TAG VALUES FROM "cpu" WITH KEY IN ("region", "host") WHERE "service" = 'red
 
 Estimates or counts exactly the cardinality of tag key values for the specified tag key on the current database unless a database is specified using the `ON <database>` option.
 
-> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional.
+> **Note:** `ON <database>`, `FROM <sources>`, `WITH KEY = <key>`, `WHERE <condition>`, `GROUP BY <dimensions>`, and `LIMIT/OFFSET` clauses are optional.
 > When using these query clauses, the query falls back to an exact count.
 > Filtering by `time` is only supported when TSI (Time Series Index) is enabled.
 
