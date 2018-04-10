@@ -5,7 +5,7 @@ menu:
   chronograf_011:
     name: New features in Chronograf 0.11
     weight: 0
-    parent: Administratio
+    parent: Administration
 ---
 
 ### Customizing the y-axis range
