@@ -1,6 +1,6 @@
 ---
 title: Managing Chronograf security
-aliases: /chronograf_1_4/security-best-practices/
+aliases: /chronograf/v1.4/administration/security-best-practices/
 menu:
   chronograf_1_4:
     name: Managing Chronograf security
@@ -20,7 +20,7 @@ menu:
   * [Configuring Okta authentication](#configuring-okta-authentication)
   * [Configuring Generic authentication](#configuring-generic-authentication)
 * [Configuring authentication duration](#configuring-authentication-duration)
-* [Configuring TLS (Transport Layer Security) and HTTPS](#configuring-tls--transport-layer-security-and-https)
+* [Configuring TLS (Transport Layer Security) and HTTPS](#configuring-tls-transport-layer-security-and-https)
   - [Testing with self-signed certificates](#testing-with-self-signed-certificates)
 
 ## Chronograf security
@@ -54,12 +54,12 @@ OAuth 2.0 authorization and authentication in Chronograf require you to specify 
 
 Configuration steps, including required and optional configuration options, for the following supported authentication providers are provided in these sections below:
 
-* [GitHub](#github)
-* [Google](#google)
-* [Auth0](#auth0)
-* [Heroku](#heroku)
-* [Okta](#okta)
-* [Generic](#generic)
+* [GitHub](#configuring-github-authentication)
+* [Google](#configuring-google-authentication)
+* [Auth0](#configuring-auth0-authentication)
+* [Heroku](#configuring-heroku-authentication)
+* [Okta](#configuring-okta-authentication)
+* [Generic](#configuring-generic-authentication)
 
 > ***Note:*** Each of the following OAuth 2.0 provider configurations require the `TOKEN_SECRET` you created in the previous section.
 
@@ -329,7 +329,7 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 
 Your users should now be able to sign into Chronograf using the new Okta provider.
 
-### Configuring Generic authentications
+### Configuring Generic authentication
 
 #### Configuring Chronograf to use any OAuth 2.0 provider
 

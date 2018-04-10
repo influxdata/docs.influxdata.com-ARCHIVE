@@ -1,6 +1,7 @@
 ---
 title: TICKscript syntax
-
+aliases:
+  - /kapacitor/v1.4/tick/spec/
 menu:
   kapacitor_1_4:
     name: Syntax

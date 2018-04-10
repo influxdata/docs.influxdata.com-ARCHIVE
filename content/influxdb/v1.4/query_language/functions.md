@@ -30,7 +30,7 @@ Aggregate, select, transform, and predict data with InfluxQL functions.
     * [PERCENTILE()](#percentile)
     * [SAMPLE()](#sample)
     * [TOP()](#top)
-* [Transformations](#Transformations)
+* [Transformations](#transformations)
     * [CEILING()](#ceiling)
     * [CUMULATIVE_SUM()](#cumulative-sum)
     * [DERIVATIVE()](#derivative)

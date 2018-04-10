@@ -47,7 +47,7 @@ See [Telegraf configuration](https://github.com/influxdata/telegraf/blob/master/
 * [iis](#iis)
 * [influxdb](#influxdb)
 * [kubernetes](#kubernetes)
-* [memcached](#memcached)
+* [memcached](#memcached-memcached)
 * [mesos](#mesos)
 * [mysql](#mysql)
 * [nginx](#nginx)

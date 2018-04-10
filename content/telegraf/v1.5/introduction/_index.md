@@ -16,5 +16,5 @@ Download Telegraf.
 ## [Installing Telegraf](/telegraf/v1.5/introduction/installation/)
 Directions for installing, starting, and configuring Telegraf.
 
-## [Getting started with Telegraf](/telegraf/v1.5/introduction/getting-started-telegraf/)
+## [Getting started with Telegraf](/telegraf/v1.5/introduction/getting-started/)
 This guide walks you through the download, installation, and configuration processes, and it shows how to use Telegraf to get data into InfluxDB.

@@ -32,11 +32,11 @@ Subscriptions used by Kapacitor work in a cluster. Writes to any node will be fo
 It is important to understand how to configure InfluxDB Enterprise and how this impacts the Continuous Queries (CQ) engine’s behavior:
 
 - **Data node configuration** `[continuous queries]`
-[run-interval](/enterprise_influxdb/v1.5/administration/configuration#lease-duration--1m0s)
+[run-interval](/enterprise_influxdb/v1.5/administration/configuration#run-interval-1s)
 -- The interval at which InfluxDB checks to see if a CQ needs to run. Set this option to the lowest interval
 at which your CQs run. For example, if your most frequent CQ runs every minute, set run-interval to 1m.
 - **Meta node configuration** `[meta]`
-[lease-duration](/enterprise_influxdb/v1.5/administration/configuration#run-interval--1s)
+[lease-duration](/enterprise_influxdb/v1.5/administration/configuration#lease-duration-1m0s)
 -- The default duration of the leases that data nodes acquire from the meta nodes. Leases automatically expire after the
 lease-duration is met.  Leases ensure that only one data node is running something at a given time. For example, Continuous
 Queries use a lease so that all data nodes aren’t running the same CQs at once.
@@ -69,7 +69,7 @@ you should set the lease-duration to a value greater than the aggregate executio
 
 Based on the current way in which CQs are configured to execute, the way to address parallelism is by using
 Kapacitor for the more complex CQs that you are attempting to run.
-[See Kapacitor as a continuous query engine](/kapacitor/v1.5/guides/continuous_queries/).
+[See Kapacitor as a continuous query engine](/kapacitor/v1.4/guides/continuous_queries/).
 However, you can keep the more simplistic and highly performant CQs within the database –
 but ensure that the lease duration is greater than their aggregate execution time to ensure that
 “extra” load is not being unnecessarily introduced on your cluster.
@@ -105,5 +105,5 @@ If there is a replica on another node, it will retry on that node.
 
 InfluxDB Enterprise clusters support backup and restore functionality starting with
 version 0.7.1.
-See [Backup and restore](/enterprise_influxdb/v1.5/guides/backup-and-restore/) for
+See [Backup and restore](/enterprise_influxdb/v1.5/administration/backup-and-restore/) for
 more information.

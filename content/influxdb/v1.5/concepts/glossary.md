@@ -249,7 +249,7 @@ Every retention policy that contains data has at least one associated shard grou
 A given shard group contains all shards with data for the interval covered by the shard group.
 The interval spanned by each shard group is the shard duration.
 
-Related entries: [database](/influxdb/v1.5/concepts/glossary/#database), [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy), [series](/influxdb/v1.5/concepts/glossary/#series), [shard](/influxdb/v1.5/concepts/glossary/#shard), [shard duration](/influxdb/v1.5/concepts/glossary/#shard-duration)
+Related entries: [database](/influxdb/v1.5/concepts/glossary/#database), [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp), [series](/influxdb/v1.5/concepts/glossary/#series), [shard](/influxdb/v1.5/concepts/glossary/#shard), [shard duration](/influxdb/v1.5/concepts/glossary/#shard-duration)
 
 ## subscription
 Subscriptions allow [Kapacitor](/kapacitor/latest/) to receive data from InfluxDB in a push model rather than the pull model based on querying data.

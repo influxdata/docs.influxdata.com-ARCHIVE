@@ -1,6 +1,6 @@
 ---
 title: JSON Protocol
-newversionredirect: /tools/
+newversionredirect: tools/
 menu:
   influxdb_013:
     weight: 20

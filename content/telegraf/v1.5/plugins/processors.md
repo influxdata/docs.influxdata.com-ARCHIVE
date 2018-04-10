@@ -1,6 +1,7 @@
 ---
 title: Telegraf processor plugins
-
+aliases:
+  - /telegraf/v1.5/processors/
 menu:
   telegraf_1_5:
     name: Processor

@@ -1,6 +1,6 @@
 ---
 title: Tag Value Template
-
+newversionredirect: guides/dashboard-template-variables/#tag-values
 menu:
   chronograf_013:
     name: Tag Value Template

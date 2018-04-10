@@ -18,7 +18,7 @@ in the configuration file.
 
 ### 8088
 The default port that runs the RPC service for backup and restore.
-[Configure this port](/influxdb/v1.4/administration/config/#bind-address-8088)
+[Configure this port](/influxdb/v1.4/administration/config/#bind-address-127-0-0-1-8088)
 in the configuration file.
 
 **Resources** [Backup and Restore](/influxdb/v1.4/administration/backup_and_restore/)

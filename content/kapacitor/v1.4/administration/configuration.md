@@ -11,7 +11,7 @@ menu:
  * [Startup](#startup)
  * [The Kapacitor configuration file](#the-kapacitor-configuration-file)
  * [Kapacitor environment variables](#kapacitor-environment-variables)
- * [Configuring with The HTTP API](#configuration-with-the-http-api)
+ * [Configuring with the HTTP API](#configuring-with-the-http-api)
 
 Basic installation and startup of the Kapacitor service is covered in
 [Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting-started/).
@@ -806,7 +806,7 @@ configuration service (`[kubernetes].enabled`).
 
 ## Configuring with the HTTP API
 
-The Kapacitor [HTTP API](kapacitor/v1.4/working/api/) can also be used to override
+The Kapacitor [HTTP API](/kapacitor/v1.4/working/api/) can also be used to override
 certain parts of the configuration.
 This can be useful when a property may contain security sensitive information that should not be left in plain view in the file system, or when you need to reconfigure a service without restarting Kapacitor.
 To view which parts of the configuration are available,
@@ -814,7 +814,7 @@ pull the JSON file at the `/kapacitor/v1/config` endpoint.
 (e.g., http<span>:</span><span>//</span>localhost:9092<span>/</span>kapacitor<span>/</span>v1<span>/</span>config).
 
 Working with the HTTP API to override configuration properties is presented in
-detail in the [Configuration](/kapacitor/v1.4/working/api/#configuration) section
+detail in the [Configuration](/kapacitor/v1.4/working/api/#overriding-configurations) section
 of the HTTP API document.
 In order for overrides over the HTTP API to work,
 the `[config-override].enabled` property must be set to `true`.

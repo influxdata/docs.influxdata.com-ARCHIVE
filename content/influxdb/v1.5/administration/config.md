@@ -18,11 +18,10 @@ The InfluxDB OSS configuration file contains configuration settings specific to 
   * [Global settings](#global-settings)
   * [Metastore settings `[meta]`](#metastore-settings-meta)
   * [Data settings `[data]`](#data-settings-data)
-  * [Coordination settings `[coordinator]`](#coordination-settings-coordinator)
-  * [Retention settings `[retention]`](#retention-settings-retention)
-  * [Shard precreation `[shard-precreation]`](#shard-precreation-settings-shard-precreation)
+  * [Query management settings `[coordinator]`](#query-management-settings-coordinator)
+  * [Retention policy settings `[retention]`](#retention-policy-settings-retention)
+  * [Shard precreation settings `[shard-precreation]`](#shard-precreation-settings-shard-precreation)
   * [Monitoring settings `[monitor]`](#monitoring-settings-monitor)
-  * [Administration settings `[admin]`](#administration-settings-admin)
   * [HTTP endpoint settings `[http]`](#http-endpoint-settings-http)
   * [Subscription settings `[subscriber]`](#subscription-settings-subscriber)
   * [Graphite settings `[[graphite]]`](#graphite-settings-graphite)
@@ -319,7 +318,7 @@ Environment variable: `INFLUXDB_DATA_MAX_SERIES_PER_DATABASE`
 
 ### `max-values-per-tag = 100000`
 
-The maximum number of [tag values](/influxdb/v1.5/concepts/glossary/#tag-values)
+The maximum number of [tag values](/influxdb/v1.5/concepts/glossary/#tag-value)
 allowed per [tag key]((/influxdb/v1.5/concepts/glossary/#tag-key).
 The default setting is `100000`.
 Change the setting to `0` to allow an unlimited number of tag values per tag
@@ -357,7 +356,7 @@ Environment variable: `INFLUXDB_COORDINATOR_MAX_CONCURRENT_QUERIES`
 The maximum time for which a query can run on your instance before InfluxDB
 kills the query.
 The default setting (`0`) allows queries to run with no time restrictions.
-This setting is a [duration](#configuration-settings).
+This setting is a [duration](#configuration-overview).
 
 Environment variable: `INFLUXDB_COORDINATOR_QUERY_TIMEOUT`
 
@@ -367,7 +366,7 @@ The maximum time a query can run after which InfluxDB logs the query with a
 `Detected slow query` message.
 The default setting (`"0"`) will never tell InfluxDB to log the query.
 This setting is a
-[duration](#configuration-settings).
+[duration](#configuration-overview).
 
 Environment variable: `INFLUXDB_COORDINATOR_LOG_QUERIES_AFTER`
 
@@ -634,7 +633,7 @@ Environment variable: `INFLUXDB_LOGGING_SUPPRESS_LOGO`
 
 ## Subscription settings `[subscriber]`
 
-This section controls how [Kapacitor](/kapacitor/v1.5/) will receive data.
+This section controls how [Kapacitor](/kapacitor/v1.4/) will receive data.
 
 ### `enabled = true`
 

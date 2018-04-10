@@ -1,6 +1,7 @@
 ---
 title: Aggregator and processor plugins
-
+aliases:
+  - /telegraf/v1.5/aggregators/
 menu:
   telegraf_1_5:
     name: Aggregator and processor plugins

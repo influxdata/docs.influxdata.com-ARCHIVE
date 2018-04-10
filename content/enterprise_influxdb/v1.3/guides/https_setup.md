@@ -12,7 +12,7 @@ server,
 and, in some cases, HTTPS verifies the authenticity of the InfluxDB Enterprise server to clients.
 
 If you plan on sending requests to InfluxDB Enterprise over a network, we
-[strongly recommend](/enterprise_influxdb/v1.3/administration/security_best_practices/)
+[strongly recommend](/enterprise_influxdb/v1.3/administration/security/)
 that you set up HTTPS.
 
 ## Requirements

@@ -1,6 +1,6 @@
 ---
 title: Service - OpenTSDB
-newversionredirect: /tools/opentsdb/
+newversionredirect: tools/opentsdb/
 menu:
   influxdb_013:
     weight: 60

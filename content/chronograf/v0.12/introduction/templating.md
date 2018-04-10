@@ -1,6 +1,6 @@
 ---
 title: Templating
-newversionredirect: /templating/
+newversionredirect: templating/
 menu:
   chronograf_012:
     name: Templating

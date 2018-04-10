@@ -15,8 +15,8 @@ See [Security Best Practices](/chronograf/v1.3/administration/security-best-prac
 ### Content
 
 * [Enable Authentication](#enable-authentication)
-* [InfluxDB OSS User Management](#oss-influxdb-user-management)
-* [InfluxDB Enterprise User Management](#influxenterprise-user-management)
+* [InfluxDB OSS User Management](#influxdb-oss-user-management)
+* [InfluxDB Enterprise User Management](#influxdb-enterprise-user-management)
 
 ## Enable Authentication
 
