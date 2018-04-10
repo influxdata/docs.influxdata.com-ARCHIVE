@@ -1,5 +1,7 @@
 ---
 title: Chronograf 1.4 documentation
+aliases:
+  - /influxdb/v1.5/chronograf/
 
 menu:
   chronograf:

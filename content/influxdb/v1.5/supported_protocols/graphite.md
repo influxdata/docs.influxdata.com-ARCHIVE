@@ -1,7 +1,8 @@
 ---
 title: Graphite protocol support in InfluxDB
 aliases:
-    - influxdb/v1.5/supported_protocols/graphite/
+    - /influxdb/v1.5/tools/graphite/
+    - /influxdb/v1.5/write_protocols/graphite/
 menu:
   influxdb_1_5:
     name: Graphite
@@ -14,7 +15,7 @@ menu:
 ## A Note On UDP/IP OS Buffer Sizes
 
 If you're using UDP input and running Linux or FreeBSD, please adjust your UDP buffer
-size limit, [see here for more details.](../udp/README.md#a-note-on-udpip-os-buffer-sizes)
+size limit, [see here for more details.](../udp/#a-note-on-udp-ip-os-buffer-sizes)
 
 ## Configuration
 

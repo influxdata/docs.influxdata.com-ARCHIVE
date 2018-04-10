@@ -688,7 +688,7 @@ grant_stmt = "GRANT" privilege [ on_clause ] to_clause .
 
 #### Examples:
 
-​```sql
+```sql
 -- grant admin privileges
 GRANT ALL TO "jdoe"
 
@@ -700,40 +700,40 @@ GRANT READ ON "mydb" TO "jdoe"
 
 Stop currently-running query.
 
-```
+```sql
 kill_query_statement = "KILL QUERY" query_id .
 ```
-Where `query_id` is the query ID, displayed in the [`SHOW QUERIES`](/influxdb/v1.3/troubleshooting/query_management/#list-currently-running-queries-with-show-queries) output as `qid`.
 
->***InfluxDB Enterprise clusters:*** To kill queries on a cluster, you need to specify the query ID (qid) and the TCP host (for example, `myhost:8088`),
->available in the `SHOW QUERIES` output.
+Where `query_id` is the query ID, displayed in the [`SHOW QUERIES`](/influxdb/v1.5/troubleshooting/query_management/#list-currently-running-queries-with-show-queries) output as `qid`.
+
+> ***InfluxDB Enterprise clusters:*** To kill queries on a cluster, you need to specify the query ID (qid) and the TCP host (for example, `myhost:8088`),
+> available in the `SHOW QUERIES` output.
 >
->```
->KILL QUERY <qid> ON "<host>"
->```
+> ```sql
+KILL QUERY <qid> ON "<host>"
+```
 
 #### Examples:
 
-```
+```sql
 -- kill query with qid of 36 on the local host
-> KILL QUERY 36
->
+KILL QUERY 36
 ```
-```
+
+```sql
 -- kill query on InfluxEnterprise cluster
-> KILL QUERY 53 ON "myhost:8088"
->
+KILL QUERY 53 ON "myhost:8088"
 ```
 
 ### REVOKE
 
-```
+```sql
 revoke_stmt = "REVOKE" privilege [ on_clause ] "FROM" user_name .
 ```
 
 #### Examples:
 
-​```sql
+```sql
 -- revoke admin privileges from jdoe
 REVOKE ALL PRIVILEGES FROM "jdoe"
 
@@ -781,39 +781,39 @@ See the specific SHOW CARDINALITY commands for details:
 
 ### SHOW CONTINUOUS QUERIES
 
-```
+```sql
 show_continuous_queries_stmt = "SHOW CONTINUOUS QUERIES" .
 ```
 
 #### Example:
 
-​```sql
+```sql
 -- show all continuous queries
 SHOW CONTINUOUS QUERIES
 ```
 
 ### SHOW DATABASES
 
-```
+```sql
 show_databases_stmt = "SHOW DATABASES" .
-
 ```
 
 #### Example:
 
-​```sql
+```sql
 -- show all databases
 SHOW DATABASES
 ```
+
 ### SHOW FIELD KEY CARDINALITY
 
 Estimates or counts exactly the cardinality of the field key set for the current database unless a database is specified using the `ON <database>` option.
 
-> **Note:** `ON \<database\>`, `FROM \<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional.
+> **Note:** `ON <database>`, `FROM <sources>`, `WITH KEY = <key>`, `WHERE <condition>`, `GROUP BY <dimensions>`, and `LIMIT/OFFSET` clauses are optional.
 > When using these query clauses, the query falls back to an exact count.
 > Filtering by `time` is only supported when Time Series Index (TSI) is enabled and `time` is not supported in the `WHERE` clause.
 
-```
+```sql
 show_field_key_cardinality_stmt = "SHOW FIELD KEY CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]
 
 show_field_key_exact_cardinality_stmt = "SHOW FIELD KEY EXACT CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]
@@ -830,7 +830,7 @@ SHOW FIELD KEY EXACT CARDINALITY ON mydb
 
 ### SHOW FIELD KEYS
 
-```
+```sql
 show_field_keys_stmt = "SHOW FIELD KEYS" [on_clause] [ from_clause ] .
 ```
 
@@ -846,7 +846,7 @@ SHOW FIELD KEYS FROM "cpu"
 
 ### SHOW GRANTS
 
-```
+```sql
 show_grants_stmt = "SHOW GRANTS FOR" user_name .
 ```
 
@@ -860,11 +860,11 @@ SHOW GRANTS FOR "jdoe"
 
 Estimates or counts exactly the cardinality of the measurement set for the current database unless a database is specified using the `ON <database>` option.
 
-> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional.
+> **Note:** `ON <database>`, `FROM ,<sources>`, `WITH KEY = <key>`, `WHERE <condition>`, `GROUP BY <dimensions>`, and `LIMIT/OFFSET` clauses are optional.
 > When using these query clauses, the query falls back to an exact count.
 > Filtering by `time` is only supported when TSI (Time Series Index) is enabled and `time` is not supported in the `WHERE` clause.
 
-```
+```sql
 show_measurement_cardinality_stmt = "SHOW MEASUREMENT CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]
 
 show_measurement_exact_cardinality_stmt = "SHOW MEASUREMENT EXACT CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]
@@ -881,7 +881,7 @@ SHOW MEASUREMENT EXACT CARDINALITY ON mydb
 
 ### SHOW MEASUREMENTS
 
-```
+```sql
 show_measurements_stmt = "SHOW MEASUREMENTS" [on_clause] [ with_measurement_clause ] [ where_clause ] [ limit_clause ] [ offset_clause ] .
 ```
 
@@ -900,7 +900,7 @@ SHOW MEASUREMENTS WITH MEASUREMENT =~ /h2o.*/
 
 ### SHOW QUERIES
 
-```
+```sql
 show_queries_stmt = "SHOW QUERIES" .
 ```
 
@@ -914,7 +914,7 @@ SHOW QUERIES
 
 ### SHOW RETENTION POLICIES
 
-```
+```sql
 show_retention_policies = "SHOW RETENTION POLICIES" [on_clause] .
 ```
 
@@ -927,7 +927,7 @@ SHOW RETENTION POLICIES ON "mydb"
 
 ### SHOW SERIES
 
-```
+```sql
 show_series_stmt = "SHOW SERIES" [on_clause] [ from_clause ] [ where_clause ] [ limit_clause ] [ offset_clause ] .
 ```
 
@@ -943,10 +943,10 @@ Estimates or counts exactly the cardinality of the series for the current databa
 
 [Series cardinality](/guides/1.4/guides/hardware_sizing) is the major factor that affects RAM requirements. For more information, see:
 
-- [When do I need more RAM?](/influxdb/v1.5/guides/hardware_sizing/#when-do-i-need-more-ram) in [Hardware Sizing Guidelines](influxdb/v1.5/guides/hardware_sizing/)
+- [When do I need more RAM?](/influxdb/v1.5/guides/hardware_sizing/#when-do-i-need-more-ram) in [Hardware Sizing Guidelines](/influxdb/v1.5/guides/hardware_sizing/)
 - [Don't have too many series](/influxdb/v1.5/concepts/schema_and_data_layout/#don-t-have-too-many-series)
 
-> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional.
+> **Note:** `ON <database>`, `FROM ,<sources>`, `WITH KEY = <key>`, `WHERE <condition>`, `GROUP BY <dimensions>`, and `LIMIT/OFFSET` clauses are optional.
 > When using these query clauses, the query falls back to an exact count.
 > Filtering by `time` is only supported when TSI (Time Series Index) is enabled and `time` is not supported in the `WHERE` clause.
 
@@ -1009,7 +1009,7 @@ SHOW SUBSCRIPTIONS
 
 Estimates or counts exactly the cardinality of tag key set on the current database unless a database is specified using the `ON <database>` option.
 
-> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional.
+> **Note:** `ON <database>`, `FROM ,<sources>`, `WITH KEY = <key>`, `WHERE <condition>`, `GROUP BY <dimensions>`, and `LIMIT/OFFSET` clauses are optional.
 > When using these query clauses, the query falls back to an exact count.
 > Filtering by `time` is only supported when TSI (Time Series Index) is enabled and `time` is not supported in the `WHERE` clause.
 
@@ -1077,7 +1077,7 @@ SHOW TAG VALUES FROM "cpu" WITH KEY IN ("region", "host") WHERE "service" = 'red
 
 Estimates or counts exactly the cardinality of tag key values for the specified tag key on the current database unless a database is specified using the `ON <database>` option.
 
-> **Note:** `ON \<database\>`, `FROM ,\<sources\>`, `WITH KEY = \<key\>`, `WHERE \<condition\>`, `GROUP BY \<dimensions\>`, and `LIMIT/OFFSET` clauses are optional.
+> **Note:** `ON <database>`, `FROM ,<sources>`, `WITH KEY = <key>`, `WHERE <condition>`, `GROUP BY <dimensions>`, and `LIMIT/OFFSET` clauses are optional.
 > When using these query clauses, the query falls back to an exact count.
 > Filtering by `time` is only supported when TSI (Time Series Index) is enabled.
 

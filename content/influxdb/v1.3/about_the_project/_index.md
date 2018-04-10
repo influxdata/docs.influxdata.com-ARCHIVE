@@ -2,7 +2,7 @@
 title: About the Project
 ---
 
-## [Release Notes/Changelog](/influxdb/v1.3/about_the_project/release-notes-changelog/)
+## [Release Notes/Changelog](/influxdb/v1.3/about_the_project/releasenotes-changelog/)
 
 ## [Contributing](https://github.com/influxdata/influxdb/blob/master/CONTRIBUTING.md)
 

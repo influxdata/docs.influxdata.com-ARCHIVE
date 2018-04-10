@@ -1,7 +1,8 @@
 ---
 title: InfluxDB server monitoring
 aliases:
-    - influxdb/v1.5/administration/statistics/
+    - /influxdb/v1.5/administration/statistics/
+    - /influxdb/v1.5/troubleshooting/statistics/
 menu:
   influxdb_1_5:
     name: Server monitoring
@@ -15,7 +16,7 @@ menu:
 * [SHOW DIAGNOSTICS](#show-diagnostics)
 * I[nternal monitoring](#internal-monitoring)
 * [Useful performance metrics commands](#useful-performance-metrics-commands)
-* [InfluxDB `/metrics` HTTP endpoint](#influxDB---metrics--http-endpoint)
+* [InfluxDB `/metrics` HTTP endpoint](#influxdb-metrics-http-endpoint)
 
 
 InfluxDB can display statistical and diagnostic information about each node.

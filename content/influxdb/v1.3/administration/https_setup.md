@@ -13,7 +13,7 @@ and, in some cases, HTTPS verifies the authenticity of the InfluxDB server to
 clients.
 
 If you plan on sending requests to InfluxDB over a network, we
-[strongly recommend](/influxdb/v1.3/administration/security_best_practices/)
+[strongly recommend](/influxdb/v1.3/administration/security/)
 that you set up HTTPS.
 
 ## Requirements

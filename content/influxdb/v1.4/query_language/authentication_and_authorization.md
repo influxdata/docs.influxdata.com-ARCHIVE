@@ -46,7 +46,7 @@ Plugins do not currently have the ability to authenticate requests and service e
 #### 1. Create at least one [admin user](#admin-users).
 See the [authorization section](#authorization) for how to create an admin user.
 
-> **Note:** If you enable authentication and have no users, InfluxDB will **not** enforce authentication and will only accept the [query](#create-a-new-admin-user) that creates a new admin user.
+> **Note:** If you enable authentication and have no users, InfluxDB will **not** enforce authentication and will only accept the [query](#user-management-commands) that creates a new admin user.
 
 InfluxDB will enforce authentication once there is an admin user.
 
@@ -193,7 +193,7 @@ See the [database management](/influxdb/v1.4/query_language/database_management/
 
 User management:
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin user management:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`CREATE USER`](#create-a-new-admin-user), [`GRANT ALL PRIVILEGES`](#grant-administrative-privileges-to-an-existing-user), [`REVOKE ALL PRIVILEGES`](#revoke-administrative-privileges-from-an-admin-user), and [`SHOW USERS`](#show-all-existing-users-and-their-admin-status)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`CREATE USER`](#user-management-commands), [`GRANT ALL PRIVILEGES`](#grant-administrative-privileges-to-an-existing-user), [`REVOKE ALL PRIVILEGES`](#revoke-administrative-privileges-from-an-admin-user), and [`SHOW USERS`](#show-all-existing-users-and-their-admin-status)
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Non-admin user management:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[`CREATE USER`](#create-a-new-non-admin-user), [`GRANT [READ,WRITE,ALL]`](#grant-read-write-or-all-database-privileges-to-an-existing-user), [`REVOKE [READ,WRITE,ALL]`](#revoke-read-write-or-all-database-privileges-from-an-existing-user), and [`SHOW GRANTS`](#show-a-user-s-database-privileges)
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;General user management:
