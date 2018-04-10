@@ -279,7 +279,7 @@ statement           = alter_retention_policy_stmt |
                       show_measurement_exact_cardinality_stmt |
                       show_measurements_stmt |
                       show_queries_stmt |
-                      show_retention_policies |
+                      show_retention_policies_stmt |
                       show_series_cardinality_stmt |
                       show_series_exact_cardinality_stmt |
                       show_series_stmt |
@@ -781,7 +781,7 @@ See the specific SHOW CARDINALITY commands for details:
 
 ### SHOW CONTINUOUS QUERIES
 
-```sql
+```
 show_continuous_queries_stmt = "SHOW CONTINUOUS QUERIES" .
 ```
 
@@ -794,7 +794,7 @@ SHOW CONTINUOUS QUERIES
 
 ### SHOW DATABASES
 
-```sql
+```
 show_databases_stmt = "SHOW DATABASES" .
 ```
 
@@ -830,7 +830,7 @@ SHOW FIELD KEY EXACT CARDINALITY ON mydb
 
 ### SHOW FIELD KEYS
 
-```sql
+```
 show_field_keys_stmt = "SHOW FIELD KEYS" [on_clause] [ from_clause ] .
 ```
 
@@ -846,7 +846,7 @@ SHOW FIELD KEYS FROM "cpu"
 
 ### SHOW GRANTS
 
-```sql
+```
 show_grants_stmt = "SHOW GRANTS FOR" user_name .
 ```
 
@@ -881,7 +881,7 @@ SHOW MEASUREMENT EXACT CARDINALITY ON mydb
 
 ### SHOW MEASUREMENTS
 
-```sql
+```
 show_measurements_stmt = "SHOW MEASUREMENTS" [on_clause] [ with_measurement_clause ] [ where_clause ] [ limit_clause ] [ offset_clause ] .
 ```
 
@@ -900,7 +900,7 @@ SHOW MEASUREMENTS WITH MEASUREMENT =~ /h2o.*/
 
 ### SHOW QUERIES
 
-```sql
+```
 show_queries_stmt = "SHOW QUERIES" .
 ```
 
@@ -914,8 +914,8 @@ SHOW QUERIES
 
 ### SHOW RETENTION POLICIES
 
-```sql
-show_retention_policies = "SHOW RETENTION POLICIES" [on_clause] .
+```
+show_retention_policies_stmt = "SHOW RETENTION POLICIES" [on_clause] .
 ```
 
 #### Example:
@@ -927,7 +927,7 @@ SHOW RETENTION POLICIES ON "mydb"
 
 ### SHOW SERIES
 
-```sql
+```
 show_series_stmt = "SHOW SERIES" [on_clause] [ from_clause ] [ where_clause ] [ limit_clause ] [ offset_clause ] .
 ```
 

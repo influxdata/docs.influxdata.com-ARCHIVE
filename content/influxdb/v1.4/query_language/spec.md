@@ -273,7 +273,7 @@ statement           = alter_retention_policy_stmt |
                       show_measurement_exact_cardinality_stmt |
                       show_measurements_stmt |
                       show_queries_stmt |
-                      show_retention_policies |
+                      show_retention_policies_stmt |
                       show_series_cardinality_stmt |
                       show_series_exact_cardinality_stmt |
                       show_series_stmt |
@@ -907,7 +907,7 @@ SHOW QUERIES
 ### SHOW RETENTION POLICIES
 
 ```
-show_retention_policies = "SHOW RETENTION POLICIES" [on_clause] .
+show_retention_policies_stmt = "SHOW RETENTION POLICIES" [on_clause] .
 ```
 
 #### Example:
