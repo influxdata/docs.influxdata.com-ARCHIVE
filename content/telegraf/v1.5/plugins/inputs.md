@@ -427,8 +427,8 @@ The SNMP Legacy input plugin gathers metrics from SNMP agents.
 
 ### [Socket Listener](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/socket_listener)
 
-The [SNMP Legacy (snmp_legacy) input plugin](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/snmp_legacy) listens for messages from streaming (tcp, unix) or datagram
-(UDP, unixgram) protocols. Messages are expected in the
+The [Socket Listener](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/socket_listener) listens 
+for messages from streaming (tcp, unix) or datagram (UDP, unixgram) protocols. Messages are expected in the
 [Telegraf Input Data Formats](https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md).
 
 ### [Solr (solr)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/solr/README.md) -- NEW in v1.5

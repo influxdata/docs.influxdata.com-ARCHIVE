@@ -1,8 +1,53 @@
 {{partial "header.html" . }}
 <div class="error-page">
     <div class="error-content">
-    	<p>We've heard legends of this page since we were young, but no one has ever seen it; some question whether it even exists. Those who refused to give up searching fell to madness, hearing the same number over and over in their restless sleep. For years we tried to decipher the number, to unlock whatever hidden meaning lie within, but we still have nothing. Perhaps it's your time to take a crack at the number:</p>
-    	<h1>404</h1>
+      <h1>404</h1>
+      <div class="flex wayfinding">
+        <a class="btn back" href="javascript:history.back()">Back</a>
+        <a class="btn project"></a>
+      </div>
+    	<p>We've heard legends of this page since we were young, but no one has ever seen it; some question whether it even exists. Those who refused to give up searching fell to madness, hearing the same number over and over in their restless sleep. For years we tried to decipher the number, to unlock whatever hidden meaning lie within, but we still have nothing.</p>
     </div>
 </div>
 {{ partial "footer.html" . }}
+
+<script>
+  function getProjectName(urlPath) {
+    if ( /^\/(.*?)\//.test(urlPath)) { return urlPath.match(/^\/(.*?)\//)[1] }
+  }
+
+  function getProjectTitle(urlPath) {
+    if ( /^\/(.*?)\//.test(urlPath)) {
+      var name = urlPath.match(/^\/(.*?)\//)[1]
+      if      (name === 'telegraf')             { return 'Telegraf' }
+      else if (name === 'influxdb')             { return 'InfluxDB' }
+      else if (name === 'enterprise_influxdb')  { return 'InfluxDB Enterprise' }
+      else if (name === 'chronograf')           { return 'Chronograf' }
+      else if (name === 'kapacitor')            { return 'Kapacitor' }
+      else if (name === 'enterprise_kapacitor') { return 'Kapacitor Enterprise' }
+      else { return undefined }
+    }
+  }
+
+  function getProjectVersion(urlPath) {
+    if (/v[0-9][.][0-9]*/.test(urlPath)) { return urlPath.match(/v[0-9][.][0-9]*/)[0] }
+    else { return undefined  }
+  }
+
+  var path = window.location.pathname
+  var projectName = getProjectName(path)
+  var projectTitle = getProjectTitle(path)
+  var projectVersion = getProjectVersion(path)
+
+  if ( projectTitle != undefined ) {
+    $('.btn.project').show().html(projectTitle).attr('href', '/' + projectName + '/');
+    $('.navbar--current-product').append(projectTitle)
+    if ( projectVersion != undefined ) {
+      $('.btn.project').append(' ' + projectVersion).attr('href', '/' + projectName + '/' + projectVersion + '/');
+      $('.navbar--current-product').append(' ' + projectVersion)
+    }
+  }
+  else {
+    $('.navbar--current-product').html('Select Project')
+  }
+</script>

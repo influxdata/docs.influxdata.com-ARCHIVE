@@ -211,7 +211,7 @@ It would remain unchanged at 6, as `firstname` is already scoped by the `email` 
 | cliff@influxdata.com | start  | clifford  |
 | cliff@influxdata.com | finish | clifford  |
 
-See [SHOW CARDINALITY](/influxdb/v1.5/query_language/spec/#show-cardinality) to learn about the InfluxSQL commands for series cardinality.
+See [SHOW CARDINALITY](/influxdb/v1.5/query_language/spec/#show-cardinality) to learn about the InfluxQL commands for series cardinality.
 
 Related entries: [field key](#field-key),[measurement](#measurement), [tag key](#tag-key), [tag set](#tag-set)
 

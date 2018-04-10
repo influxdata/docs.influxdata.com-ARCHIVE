@@ -11,17 +11,6 @@ menu:
 
 * Fix bug where task type was invalid when using var for stream/batch
 
-## v1.4.0.1 [2017-1-9]
-
-### Features
-
-- Add separate CLI flag for canned sources, kapacitors, dashboards, and organizations.
-- Add Telegraf interval configuration.
-
-### Bug fixes
-- Allow insecure (self-signed) certificates for Kapacitor and InfluxDB.
-- Fix positioning of custom time indicator.
-
 ## v1.4.0 [2017-12-08]
 
 ### Release notes
