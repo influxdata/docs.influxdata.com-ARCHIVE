@@ -50,7 +50,7 @@ Assuming you're working with Chronograf version 0.13, from the `chronograf-0.13/
 Check to see that Chronograf is running at http://127.0.0.1:10000.
 If this is the first time you've started Chronograf, you'll see this:
 
-![Add new server](/img/chronograf/v0.11/add-new-server.png)
+![Add new server](/img/chronograf/v1.0/add-new-server.png)
 
 > **NOTE:** By default, Chronograf runs on localhost port `10000`.
 Those settings are configurable; see the [configuration file](/chronograf/v1.0/administration/configuration/) to change them and to see the other configuration options.
@@ -70,7 +70,7 @@ In this step the only required fields are `NICKNAME`, `HOST`, and `PORT`.
 In the example below, we've called our server `InfluxDB-1` and it's running on `localhost` on port `8086` (the default `HOST` and `PORT` for InfluxDB).
 <br>
 <br>
-![Add server](/img/chronograf/v0.11/add-server.png)
+![Add server](/img/chronograf/v1.0/add-server.png)
 
 3.
 Click the `Add` button.
@@ -78,7 +78,7 @@ Click the `Add` button.
 In the image below, notice that Chronograf is now aware of our InfluxDB server `InfluxDB-1`.
 <br>
 <br>
-![Servers](/img/chronograf/v0.11/servers.png)
+![Servers](/img/chronograf/v1.0/servers.png)
 
 Click `Done` in the top left corner and move on to the next section to create your first graph.
 You can always return to the `Servers` page by clicking on the gear in the top right corner.
@@ -99,7 +99,7 @@ Click the `Save` button.
 Choose the server, [database](/influxdb/v1.0/concepts/glossary/#database), and [retention policy](/influxdb/v1.0/concepts/glossary/#retention-policy-rp) that you want to work with:
 <br>
 <br>
-![Server Tray](/img/chronograf/v0.11/server-tray.png)
+![Server Tray](/img/chronograf/v1.0/server-tray.png)
 
 In this example, we're working with the the server `InfluxDB-1`, the database `telegraf`, and the retention policy `default`.
 
@@ -116,7 +116,7 @@ SELECT mean(usage_idle) FROM cpu WHERE time > now() - 10m GROUP BY time(1m), cpu
 Our query calculates the average of the field key `usage_idle` in the measurement `cpu`, and it `GROUPs BY` the tag `cpu` and by one minute intervals. The query asks for data that fall within the past 10 minutes.
 <br>
 <br>
-    ![Query Builder](/img/chronograf/v0.11/query-builder.png)
+    ![Query Builder](/img/chronograf/v1.0/query-builder.png)
 
 Click `Done` in the top right corner to complete your graph, and move on to the next section to create your first dashboard.
 
@@ -133,7 +133,7 @@ We'll call our dashboard `Idle CPU usage`.
 Because our dashboard has no visualizations, it looks like this:
 <br>
 <br>
-![Add Graph to Dashboard](/img/chronograf/v0.11/add-graph-to-dash.png)
+![Add Graph to Dashboard](/img/chronograf/v1.0/add-graph-to-dash.png)
 
 3.
 Click the `Add Visualization` button.
@@ -142,19 +142,19 @@ Click the `Add Visualization` button.
 We want to add the graph we made in the section above so we click `Add From Existing Visualizations`.
 <br>
 <br>
-![Add From Existing Graphs](/img/chronograf/v0.11/add-from-existing-graphs.png)
+![Add From Existing Graphs](/img/chronograf/v1.0/add-from-existing-graphs.png)
 
 5.
 Select `Average idle CPU usage` and click the `Add Visualizations to Dash` button in the top right corner.
 <br>
 <br>
-![Select Graph For Dash](/img/chronograf/v0.11/select-graph-for-dash.png)
+![Select Graph For Dash](/img/chronograf/v1.0/select-graph-for-dash.png)
 
 That takes us back to our new dashboard!
 One visualization on a dashboard isn't spectacularly interesting, so we've added a couple more graphs to show you some of the possibilities:
 <br>
 <br>
-![Sample Dashboard](/img/chronograf/v0.11/sample-dashboard.png)
+![Sample Dashboard](/img/chronograf/v1.0/sample-dashboard.png)
 
 And that's it!
 You now have the foundation for building beautiful data visualizations and dashboards with Chronograf.

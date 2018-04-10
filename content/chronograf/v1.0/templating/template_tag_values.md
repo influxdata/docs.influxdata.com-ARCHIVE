@@ -39,4 +39,4 @@ Now you can select alternative tag values of the tag key `cpu` in the `cpu` drop
 
 *Chronograf visualization with a tag template variable:*
 
-![Tag template](/img/chronograf/v0.11/tag-template.gif)
+![Tag template](/img/chronograf/v1.0/tag-template.gif)
