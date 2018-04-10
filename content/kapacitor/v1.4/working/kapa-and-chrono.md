@@ -95,7 +95,7 @@ example, to verify an updated SMTP configuration check the JSON document at the
 endpoint `/kapacitor/v1/config/smtp`
 (e.g. http<span>:</span><span>//</span>localhost<span>:</span>9092<span>/</span>kapacitor<span>/</span>v1<span>/</span>config<span>/</span>smtp).
 
-For more information see the section [Configuration with the HTTP API](/kapacitor/v1.4/administration/configuration/#configuration-with-the-http-api).
+For more information see the section [Configuration with the HTTP API](/kapacitor/v1.4/administration/configuration/#configuring-with-the-http-api).
 
 ### Creating Alerts in Chronograf
 

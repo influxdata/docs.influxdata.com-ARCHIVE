@@ -44,7 +44,7 @@ other available property methods are:
 * [InfluxQL Node](/kapacitor/v1.3/nodes/influx_q_l_node)
 * [Join Node](/kapacitor/v1.3/nodes/join_node)
 * [K8s Autoscale Node](/kapacitor/v1.3/nodes/k8s_autoscale_node)
-* [Kapacitor Loopback Node](/kapacitor/v1.3/nodes/k8s_loopback_node)
+* [Kapacitor Loopback Node](/kapacitor/v1.3/nodes/kapacitor_loopback_node)
 * [Log Node](/kapacitor/v1.3/nodes/log_node)
 * [NoOp Node](/kapacitor/v1.3/nodes/no_op_node)
 * [Sample Node](/kapacitor/v1.3/nodes/sample_node)

@@ -18,7 +18,7 @@ menu:
 * [Alerts](#alerts)
 * [Configuration](#overriding-configurations)
 * [Storage](#storage)
-* [Logs](#logs)
+* [Logging](#logging)
 * [Testing services](#testing-services)
 * [Miscellaneous](#miscellaneous)
 
@@ -297,7 +297,7 @@ To get information about a task, make a `GET` request to the `/kapacitor/v1/task
 | replay-id       |            | Optional ID of a running replay. The returned task information will be in the context of the task for the running replay.        |
 
 
-A task has these read-only properties in addition to the properties listed [above](#define-task).
+A task has these read-only properties in addition to the properties listed [above](#defining-tasks).
 
 | Property     | Description                                                                                                                     |
 | --------     | -----------                                                                                                                     |
@@ -636,7 +636,7 @@ To get information about a template make a GET request to the `/kapacitor/v1/tem
 | script-format   | formatted  | One of `formatted` or `raw`. Raw will return the script identical to how it was defined. Formatted will first format the script. |
 
 
-A template has these read only properties in addition to the properties listed [above](#define-template).
+A template has these read only properties in addition to the properties listed [above](#defining-templates).
 
 | Property | Description                                                                                                                                                                                                         |
 | -------- | -----------                                                                                                                                                                                                         |
@@ -1236,7 +1236,7 @@ All replays are assigned an ID which is returned in this format with a link.
 
 Like recordings you make a GET request to the `/kapacitor/v1/replays/REPLAY_ID` endpoint to get the status of the replay.
 
-A replay has these read only properties in addition to the properties listed [above](#replay-recording).
+A replay has these read only properties in addition to the properties listed [above](#replaying-a-recording).
 
 | Property | Description                                                               |
 | -------- | -----------                                                               |

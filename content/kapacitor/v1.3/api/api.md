@@ -1,6 +1,6 @@
 ---
 title: HTTP API Reference
-
+newversionredirect: working/api/
 menu:
   kapacitor_1_3:
     weight: 10
@@ -630,7 +630,7 @@ To get information about a template make a GET request to the `/kapacitor/v1/tem
 | script-format   | formatted  | One of `formatted` or `raw`. Raw will return the script identical to how it was defined. Formatted will first format the script. |
 
 
-A template has these read only properties in addition to the properties listed [above](#define-template).
+A template has these read only properties in addition to the properties listed [above](#define-templates).
 
 | Property | Description                                                                                                                                                                                                         |
 | -------- | -----------                                                                                                                                                                                                         |
@@ -1228,7 +1228,7 @@ All replays are assigned an ID which is returned in this format with a link.
 
 Like recordings you make a GET request to the `/kapacitor/v1/replays/REPLAY_ID` endpoint to get the status of the replay.
 
-A replay has these read only properties in addition to the properties listed [above](#replay-recording).
+A replay has these read only properties in addition to the properties listed [above](#replaying-a-recording).
 
 | Property | Description                                                               |
 | -------- | -----------                                                               |

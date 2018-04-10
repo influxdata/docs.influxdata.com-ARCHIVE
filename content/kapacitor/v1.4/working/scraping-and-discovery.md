@@ -1,6 +1,8 @@
 ---
 title: Scraping and discovery
-
+aliases:
+  - /kapacitor/v1.4/pull_metrics/scraping-and-discovery/
+  - /kapacitor/v1.4/pull_metrics/
 menu:
   kapacitor_1_4:
     name: Dynamic Data Scraping

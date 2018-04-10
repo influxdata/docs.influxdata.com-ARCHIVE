@@ -19,9 +19,9 @@ menu:
 Nodes represent process invocation units that either take data as a batch or a point-by-point stream, and then alter the data, store the data, or trigger some other activity based on changes in the data (e.g., an alert).
 
 The property methods for these two nodes define the type of task that you are running, either
-[stream](/kapacitor/v1.4/introduction/getting-started/#trigger-alert-from-stream-data)
+[stream](/kapacitor/v1.4/introduction/getting-started/#triggering-alerts-from-stream-data)
 or
-[batch](/kapacitor/v1.4/introduction/getting-started/#trigger-alert-from-batch-data).
+[batch](/kapacitor/v1.4/introduction/getting-started/#triggering-alerts-from-batch-data).
 
 Below is a complete list of the available nodes. For each node, the associated property methods are described.
 

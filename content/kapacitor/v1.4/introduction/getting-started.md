@@ -1,6 +1,7 @@
 ---
 title: Getting started with Kapacitor
-
+aliases:
+  - /kapacitor/v1.4/introduction/getting_started/
 menu:
   kapacitor_1_4:
     weight: 20

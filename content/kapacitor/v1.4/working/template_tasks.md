@@ -1,7 +1,8 @@
 ---
 title: Template tasks
 aliases:
-    - kapacitor/v1.4/examples/template_tasks/
+  - /kapacitor/v1.4/examples/template_tasks/
+  - /kapacitor/v1.4/guides/template_tasks/
 menu:
   kapacitor_1_4:
     name: Template tasks
