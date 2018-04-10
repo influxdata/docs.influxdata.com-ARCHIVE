@@ -694,7 +694,7 @@ GRANT READ ON "mydb" TO "jdoe"
 
 Stop currently-running query.
 
-```
+```sql
 kill_query_statement = "KILL QUERY" query_id .
 ```
 
@@ -703,17 +703,17 @@ Where `qid` is the query ID, displayed in the [`SHOW QUERIES`](/influxdb/v1.3/tr
 > ***InfluxDB Enterprise clusters:*** To kill queries on a cluster, you need to specify the query ID (qid) and the TCP host (for example, `myhost:8088`),
 > available in the `SHOW QUERIES` output.
 >
-> ~~~sql
+>```sql
 KILL QUERY <qid> ON "<host>"
-~~~
+```
 
 #### Examples:
 
-```
+```sql
 -- kill query with qid of 36 on the local host
 KILL QUERY 36
 ```
-```
+```sql
 -- kill query on InfluxEnterprise cluster
 KILL QUERY 53 ON "myhost:8088"
 ```
@@ -721,9 +721,9 @@ KILL QUERY 53 ON "myhost:8088"
 
 ### REVOKE
 
-~~~ sql
+``` sql
 revoke_stmt = "REVOKE" privilege [ on_clause ] "FROM" user_name .
-~~~
+```
 
 #### Examples:
 
