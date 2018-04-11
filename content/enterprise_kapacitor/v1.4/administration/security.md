@@ -1,28 +1,29 @@
 ---
-title: Security
+title: Managing security in Kapacitor Enterprise
 draft: true
 
 menu:
   enterprise_kapacitor_1_4:
+  title: Managing security
     weight: 4
     parent: Administration
 ---
 
 ## Contents
 
-* [Integration with Secure InfluxDB](#integration-with-secure-influxdb)
-   * [Secure Influxb-Meta Nodes](#secure-influxdb-meta-nodes)
-   * [Secure Influxdb-Data Nodes](#secure-influxdb-data-nodes)
-* [Securing Kapacitor](#securing-kapacitor)
-   * [Kapacitor over TLS](#kapacitor-over-tls)
-   * [Kapacitor with Authentication](#kapacitor-with-authentication)  
+* [Integration with secure InfluxDB](#integration-with-secure-influxdb)
+   * [Securing InfluxDB meta Nodes](#secure-influxdb-meta-nodes)
+   * [Secure InfluxDB data Nodes](#secure-influxdb-data-nodes)
+* [Securing Kapacitor Enterprise](#securing-kapacitor-enterprise)
+   * [Kapacitor Enterprise over TLS](#kapacitor-enterprise-over-tls)
+   * [Kapacitor Enterprise with authentication](#kapacitor-enterprise-with-authentication)  
 
 <br/>
 Kapacitor Enterprise security means configuring a Kapacitor cluster to work with
 an already secured InfluxDB Enterprise cluster as well as enabling security
 features implemented by Kapacitor handlers and services.  These including using
 TLS on public API endpoints and enabling authentication and authorization, which
-is covered in depth in the [Authentication and Authorization](/enterprise_kapacitor/v1.4/administration/auth/) document.    
+is covered in depth in [Authentication and authorization](/enterprise_kapacitor/v1.4/administration/auth/).    
 
 ### Integration with secure InfluxDB
 
@@ -31,20 +32,19 @@ enabled on publicly exposed APIs.  These include the user and other APIs of
 the InfluxDB meta nodes.  It may also include enabling authentication to these
 nodes.  
 
-How to set up security in InfluxDB Enterprise is covered in the [Managing security](/enterprise_influxdb/v1.5/administration/security/)
-document of that product.
+Seting up security in InfluxDB Enterprise is covered in [Managing security in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/security/).
 
-#### Securing InfluxDB meta Nodes
+#### Securing InfluxDB meta nodes
 
-Since the InfluxDB-Meta node is used as the backend user and privilege store of the
+Since the InfluxDB meta node is used as the backend user and privilege store of the
 TICK stack, it is particularly important when securing Kapacitor with
-Authentication and Authorization.  Kapacitor will need to connect to InfluxDB meta nodes
+authentication and authorization.  Kapacitor will need to connect to InfluxDB meta nodes
 when verifying security credentials.
 
 Properties relating to the InfluxDB meta node configuration are located in the `[auth]`
 group of the configuration schema.  
 
-**Example 1 &ndash; Authentication configuration group**
+**Example 1:Authentication configuration group**
 ```toml
 [auth]
   # Configure authentication service.
@@ -70,7 +70,7 @@ The properties can be understood as follows:
 More detailed information is available in 
 [Authentication and authorization](/enterprise_kapacitor/v1.4/administration/auth/).  
 
-#### Securubg InfluxDB data nodes
+#### Securing InfluxDB data nodes
 
 InfluxDB Enterprise data nodes can be secured with TLS and authentication.
 
@@ -131,9 +131,9 @@ To connect to a cluster protected by authentication, provide the following param
   ...
 ```
 
-### Securing Kapacitor
+### Securing Kapacitor Enterprise
 
-Enterprise Kapacitor listens for communications on three different ports.
+Kapacitor Enterprise listens for communications on three different ports.
 
 * `9090`: Default port for the gossip protocol used in establishing and maintaining the cluster.
 * `9091`: Default RPC port for the node.
@@ -153,7 +153,7 @@ same TLS security measures as
 and also features an authentication and authorization handler. For more information,
 see [Authentication and authorization](/enterprise_kapacitor/v1.4/administration/auth/).
 
-#### Kapacitor over TLS
+#### Kapacitor Enterprise over TLS
 
 This feature can be enabled in the `[http]` group of the configuration.
 Activation requires simply setting the property `https-enabled` to `true` and
@@ -161,7 +161,7 @@ then providing a path to a certificate with the property `https-certificate`.
 
 The following example shows how this is done in the `kapacitor.conf` file.
 
-**Example 4: Enabling TLS for Kapacitor**
+**Example 4: Enabling TLS for Kapacitor Enterprise**
 ```toml
 [http]
   # HTTP API Server for Kapacitor
@@ -229,6 +229,6 @@ ID                                                 Type      Status    Executing
 chronograf-v1-3586109e-8b7d-437a-80eb-a9c50d00ad53 stream    enabled   true      ["telegraf"."autogen"]
 ```
 
-### Kapacitor with authentication
+### Kapacitor Enterprise with authentication
 
 Steps for configuring authentication for Kapacitor Enterprise are presented in [Authentication and authorization](/enterprise_kapacitor/v1.4/administration/auth/).
