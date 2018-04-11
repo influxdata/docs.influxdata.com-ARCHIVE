@@ -134,7 +134,7 @@ Optional arguments are enclosed in brackets.
 
 - `[ -host <host:port> ]`: Host and port for InfluxDB OSS instance . Default value is `'127.0.0.1:8088'`. Required for remote connections. Example: `-host 127.0.0.1:8088`
 
-- `[ -db <db_name> ]`: Name of the database to be restored from the backup. If not specified, all databases will be restored.
+- `[ -db <db_name> | -database <db_name> ]`: Name of the database to be restored from the backup. If not specified, all databases will be restored.
 
 - `[ -newdb <newdb_name> ]`: Name of the database into which the archived data will be imported on the target system. If not specified, then the value for `-db` is used.  The new database name must be unique to the target system.
 

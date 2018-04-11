@@ -28,10 +28,10 @@ menu:
 
 * Always save template variables on first edit
 * Query annotations at auto-refresh interval
-* Display link to configure Kapacitor on Alerts Page if no configured kapacitor.
+* Display link to configure Kapacitor on Alerts Page if no configured Kapacitor.
 * Fix saving of new TICKscripts
-* Fix appearance of cell Y-Axis titles
-* Only add stateChangesOnly to new rules
+* Fix appearance of cell y-axis titles
+* Only add `stateChangesOnly` to new rules
 * Fix 500s when deleting organizations
 * Fixes issues with providing regexp in query
 * Ensure correct basepath prefix in URL pathname when passing InfluxQL query param to Data Explorer
