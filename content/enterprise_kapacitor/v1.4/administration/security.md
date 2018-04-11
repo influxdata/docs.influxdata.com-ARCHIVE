@@ -111,8 +111,8 @@ properties in the `[[influxdb]]` group.
 
 To connect to a cluster protected by authentication, provide the following parameters:
 
-* `username` &ndash; Name of an Influxdb user with admin privilgeges.
-* `password` &ndash; Password of the user.
+* `username`: Name of InfluxDB user with admin privileges.
+* `password`: Password of the user.
 
 **Example 3: InfluxDB group, enabling authentication**
 ```toml
