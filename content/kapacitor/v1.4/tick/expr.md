@@ -73,7 +73,7 @@ stream
 
 Beware that numerical values declared in the TICKscript follow the parsing rules
 for literals introduced in the
-[Syntax](/kapacitor/v1.4/tick/syntax/#literals) document.  They may not be
+[Syntax](/kapacitor/v1.4/tick/syntax/#literal-values) document.  They may not be
 of a suitable type for the function or operation in which they will be used.
 Numerical values that include a decimal will be interpreted as floats.
 Numerical values without a decimal will be interpreted as integers.  When

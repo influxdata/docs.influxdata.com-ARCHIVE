@@ -941,7 +941,7 @@ SHOW SERIES FROM "telegraf"."autogen"."cpu" WHERE cpu = 'cpu8'
 
 Estimates or counts exactly the cardinality of the series for the current database unless a database is specified using the `ON <database>` option.
 
-[Series cardinality](/guides/1.4/guides/hardware_sizing) is the major factor that affects RAM requirements. For more information, see:
+[Series cardinality](/influxdb/v1.5/concepts/glossary/#series-cardinality) is the major factor that affects RAM requirements. For more information, see:
 
 - [When do I need more RAM?](/influxdb/v1.5/guides/hardware_sizing/#when-do-i-need-more-ram) in [Hardware Sizing Guidelines](/influxdb/v1.5/guides/hardware_sizing/)
 - [Don't have too many series](/influxdb/v1.5/concepts/schema_and_data_layout/#don-t-have-too-many-series)
