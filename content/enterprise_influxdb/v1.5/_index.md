@@ -1,6 +1,6 @@
 ---
 title: InfluxDB Enterprise 1.5 documentation
-
+description: Technical documentation for InfluxDB Enterprise, which adds clustering, high availability, fine-grained authorization, and more to InfluxDB OSS. Documentation includes release notes, what's new, guides, concepts, features, and administration. 
 aliases:
     - /enterprise/v1.5/
 
@@ -17,19 +17,19 @@ Use InfluxDB Enterprise to:
 
 * Monitor your cluster
 
-    ![Overview page](/img/enterprise/overview-chrono.png)
+    ![Overview page](/img/chronograf/overview-chrono.png)
 
 * Manage queries
 
-    ![Query management](/img/enterprise/manage-queries-chrono.png)
+    ![Query management](/img/chronograf/manage-queries-chrono.png)
 
 * Manage users
 
-    ![User page](/img/chronograf/v1.5/admin-usermanagement-cluster.png)
+    ![User page](/img/chronograf/chrono-admin-usermanagement-cluster.png)
 
 * Explore and visualize your data
 
-    ![Data Explorer](/img/enterprise/data-explorer-chrono.png)
+    ![Data Explorer](/img/chronograf/data-explorer-chrono.png)
 
 If you're interested in working with InfluxDB Enterprise, visit
 [InfluxPortal](https://portal.influxdata.com/) to sign up, get a license key,

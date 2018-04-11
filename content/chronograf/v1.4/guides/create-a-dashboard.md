@@ -35,7 +35,7 @@ Click **Name This Dashboard** and type a new name. In this guide, "ChronoDash" i
 In the first cell, titled "Untitled Cell", click **Edit**
 to open the cell editor mode.
 
-![Edit your cell](/img/chronograf/v1.4/g-dashboard-cell-edit.png)
+![Edit your cell](/img/chronograf/g-dashboard-cell-edit.png)
 
 ### Step 3: Create your query
 

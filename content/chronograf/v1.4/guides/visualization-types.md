@@ -92,11 +92,11 @@ Use the **Stacked Graph Controls** to specify the following:
 <<<<<<< HEAD
 The **Step-Plot Graph** view displays a time series in a staircase graph.
 
-![Step-Plot Graph selector](/img/chronograf/chrono-viz-step-graph-selector.png)
+![Step-Plot Graph selector](/img/chronograf/chrono-viz-step-plot-graph-selector.png)
 
 #### Step-Plot Graph Controls
 
-![Step-Plot Graph Controls](/img/chronograf/chrono-viz-step-graph-controls.png)
+![Step-Plot Graph Controls](/img/chronograf/chrono-viz-step-plot-graph-controls.png)
 
 Use the **Step-Plot Graph Controls** to specify the following:
 
@@ -113,7 +113,7 @@ Use the **Step-Plot Graph Controls** to specify the following:
 
 #### Step-Plot Graph example
 
-![Step-Plot Graph view](/img/chronograf/chrono-viz-step-graph-example.png)
+![Step-Plot Graph view](/img/chronograf/chrono-viz-step-plot-graph-example.png)
 
 
 ### Bar Graph
