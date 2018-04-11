@@ -1,5 +1,6 @@
 ---
 title: Introduction to Chronograf
+description: An introduction to Chronograf, including documentation on getting started, installation, and downloading.
 
 menu:
   chronograf_1_4:

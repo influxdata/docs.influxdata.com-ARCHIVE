@@ -1,5 +1,6 @@
 ---
 title: Administering Chronograf
+description: This section documents Chronograf configuration, InfluxDB Enterprise clusters, Kapacitor and InfluxDB connections, user and organization management, security, and upgrading.
 
 ---
 

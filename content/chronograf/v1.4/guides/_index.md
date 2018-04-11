@@ -1,6 +1,6 @@
 ---
 title: Guides for Chronograf
-
+description: The Chronograf guides cover dashboards, monitoring InfluxDB Enterprise clusters, Kapacitor alerts and event handlers, template variables, visualization types, and TICKscript editing/logging.
 menu:
   chronograf_1_4:
     name: Guides
