@@ -45,6 +45,7 @@ Properties relating to the InfluxDB meta node configuration are located in the `
 group of the configuration schema.  
 
 **Example 1:Authentication configuration group**
+
 ```toml
 [auth]
   # Configure authentication service.
@@ -62,7 +63,7 @@ group of the configuration schema.
 
 The properties can be understood as follows:
 
-* `cache-expiration: Length of time credentials should be held in the Kapacitor local cache.
+* `cache-expiration`: Length of time credentials should be held in the Kapacitor local cache.
 * `bcrypt-cost`: Number of iterations used when hashing the password using the bcrypt algorithm.
 * `meta-addr`: Address to the InfluxDB meta node API endpoint.  Note that if this endpoint is secured using TLS, then the host and domain name portion of this string must match the string specified in the CN field of the certificate.  Otherwise, Kapacitor will reject the certificate, terminate the credential verification transaction, and return `401` to all requests.
 * `meta-use-tls`: Sets up Kapacitor to connect to the InfluxDB meta node using TLS/HTTPS.
