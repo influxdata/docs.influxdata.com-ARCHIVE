@@ -1,5 +1,5 @@
 ---
-title: Authentication and Authorization
+title: Authentication and authorization
 draft: true
 
 menu:
@@ -146,13 +146,13 @@ spanMMX.onclick = function(){
 
 ## Contents
 
-* [Overview of Authentication and Authorization in the TICK stack](#overview-of-authentication-and-authorization-in-the-tick-stack)
-* [Enabling Authentication in Kapacitor](#enabling-authentication-in-kapacitor)
-* [User and Privilege Management](#user-and-privilege-management)
-   * [User and Privilege Management over the Influxd-Meta API](#user-and-privilege-management-over-the-influxd-meta-api)
-   * [User and Privilege Management with Chronograf](#user-and-privilege-management-with-chronograf)
+* [Overview of authentication and authorization in the TICK stack](#overview-of-authentication-and-authorization-in-the-tick-stack)
+* [Enabling authentication in Kapacitor](#enabling-authentication-in-kapacitor)
+* [User and privilege management](#user-and-privilege-management)
+   * [User and privilege management over the InfluxDB Meta API](#user-and-privilege-management-over-the-influxd-meta-api)
+   * [User and privilege management with Chronograf](#user-and-privilege-management-with-chronograf)
 
-## Overview of Authentication and Authorization in the TICK stack
+## Overview of authentication and authorization in the TICK stack
 
 
 Kapacitor authorization and authentication involves three components of the
@@ -169,7 +169,7 @@ describing the user, if the user exists, to the requesting component.  To save
 time and calls, components, such as Kapacitor, can cache user documents in their
 local data stores.  
 
-The Influx-Meta schema includes a limited set of predefined privileges.  Among
+The InfluxDB Meta schema includes a limited set of predefined privileges.  Among
 these are `KapacitorAPI` and `KapacitorConfigAPI`.  These permissions can be
 assigned directly to the user or to a role, to which the user can then be assigned
 in turn.
@@ -177,7 +177,7 @@ in turn.
 A high level view of the authentication and authorization architecture is
 presented in Image 1.
 
-**Image 1 &ndash; Authentication and authorization in the TICK stick (click to enlarge  )**
+**Image 1: Authentication and authorization in the TICK stack (click to enlarge  )**
 
 <div id="holder-arch-dia">
 <a href="javascript:doModal('arch-dia')" id="anchor-arch-dia">
@@ -191,9 +191,9 @@ With authentication enabled for the Kapacitor HTTP service, when a Kapacitor
 user seeks to use the Kapacitor API directly or to use the command line client,
 credentials need to be supplied.
 
-For example when using the Kapacitor client.
+For example, when using the Kapacitor client.
 
-**Example 1 &ndash; Using Credentials with Kapacitor CLI Client**
+**Example 1: Using Credentials with Kapacitor CLI Client**
 ```
 kapacitor -url https://admin:changeit@cluster_node_1:9092 list tasks
 ID                                                 Type      Status    Executing Databases and Retention Policies
@@ -210,8 +210,8 @@ Authentication roughly follows these steps:
 
 1. When processing the request, Kapacitor will strip out the credentials.
 2. Kapacitor then checks to see whether the user name currently matches any user details document in its local cache in the Kapacitor database.  If so it jumps to step 7.
-3. If the user details are not in the cache, Kapacitor sends the credentials to the Influxdb-Meta API endpoint.
-4. If the credentials are valid, the Influxdb-Meta server then returns a user details JSON document.
+3. If the user details are not in the cache, Kapacitor sends the credentials to the InfluxDB Meta API endpoint.
+4. If the credentials are valid, the InfluxDB Meta server then returns a user details JSON document.
 5. Kapacitor in turn inspects the user details document for the correct privileges.
 6. Kapacitor caches the user details document.
 7. If the document shows the user has the correct privileges, Kapacitor completes
@@ -222,12 +222,13 @@ transaction is aborted and Kapacitor returns 403 and a message like the followin
 {"error":"user <USER> does not have \"read\" privilege for API endpoint \"/kapacitor/v1/tasks\""}
 ```
 
-## Enabling Authentication in Kapacitor
+## Enabling authentication in Kapacitor
 
 Authentication can be declared in the configuration file in two parameter
 groups: `[http]` and `[auth]`.  
 
-**Example 2 &ndash; Configuring Authentication in kapacitor.conf**
+**Example 2: Configuring authentication in `kapacitor.conf`**
+
 ```
 [http]
   # HTTP API Server for Kapacitor
@@ -263,34 +264,34 @@ In the `[http]` group the value of `auth-enabled` needs to be set to `true`.
 The core authentication specific properties of Enterprise Kapacitor are found
 in the `[auth]` group.  These include:
 
-* `cache-expiration` &ndash; Defines how long a consumer service can hold a credential document in its cache.
-* `bcrypt-cost` &ndash; The number of iterations used when hashing the password using the bcrypt algorithm.  Higher values generate hashes more resilient to brute force cracking attempts, but lead to marginally longer resolution times.
-* `meta-addr` &ndash; Declares the address of the InfluxDB Enterprise meta node to connect to in order to access the user and permission store.
-* `meta-use-tls` &ndash; Declares whether to use TLS when communication with the influxdb-meta node or not.  Default is `false`.
+* `cache-expiration`: Defines how long a consumer service can hold a credential document in its cache.
+* `bcrypt-cost`: The number of iterations used when hashing the password using the bcrypt algorithm.  Higher values generate hashes more resilient to brute force cracking attempts, but lead to marginally longer resolution times.
+* `meta-addr`: Declares the address of the InfluxDB Enterprise meta node to connect to in order to access the user and permission store.
+* `meta-use-tls`: Declares whether to use TLS when communication with the influxdb-meta node or not.  Default is `false`.
 
 Currently no alternative exists to using InfluxDB Enterprise meta nodes as the backend
 user and privilege store, so an address and port need to be supplied.
 
 These properties can also be defined as environment variables.  
 
-**Example 3 &ndash; Configuring Authentication with ENVARS**
+**Example 3: Configuring authentication with ENVARS**
 ```
 KAPACITOR_HTTP_AUTH_ENABLED=true;
 KAPACITOR_AUTH_META_ADDR=172.17.0.2:8091
 ```
 
-When managing Kapacitor with Systemd these environment variables can be stored
+When managing Kapacitor with `systemd`, these environment variables can be stored
 in the file `/etc/default/kapacitor`.
 
 Once these key properties have been set, restart the Kapacitor service.
 
-With Systemd this is done as follows:
+With `systemd`, this is done as follows:
 
 ```
 $ sudo systemctl restart kapacitor.service
 ```
 
-## User and Privilege Management
+## User and privilege management
 
 User and privilege management means managing the contents of a user store and
 the access rights (privileges, permissions) that users can be granted. It entails
@@ -338,4 +339,3 @@ last two privilege tokens are of interest.
 * `KapacitorConfigAPI`: Grants the user permission to override the Kapacitor configuration dynamically using the configuration endpoint.  
 
 Role means a predefined collection of privileges that can be assigned to a user.
-
