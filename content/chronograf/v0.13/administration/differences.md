@@ -1,6 +1,6 @@
 ---
 title: Differences between Chronograf 0.13 and 0.12
-newversionredirect: /administration/upgrading/
+newversionredirect: administration/upgrading/
 menu:
   chronograf_013:
     name: Differences between Chronograf 0.13 and 0.12

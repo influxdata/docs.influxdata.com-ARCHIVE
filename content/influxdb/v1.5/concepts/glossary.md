@@ -211,7 +211,7 @@ It would remain unchanged at 6, as `firstname` is already scoped by the `email` 
 | cliff@influxdata.com | start  | clifford  |
 | cliff@influxdata.com | finish | clifford  |
 
-See [SHOW CARDINALITY](/influxdb/v1.5/query_language/spec/#show-cardinality) to learn about the InfluxSQL commands for series cardinality.
+See [SHOW CARDINALITY](/influxdb/v1.5/query_language/spec/#show-cardinality) to learn about the InfluxQL commands for series cardinality.
 
 Related entries: [field key](#field-key),[measurement](#measurement), [tag key](#tag-key), [tag set](#tag-set)
 
@@ -249,7 +249,7 @@ Every retention policy that contains data has at least one associated shard grou
 A given shard group contains all shards with data for the interval covered by the shard group.
 The interval spanned by each shard group is the shard duration.
 
-Related entries: [database](/influxdb/v1.5/concepts/glossary/#database), [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy), [series](/influxdb/v1.5/concepts/glossary/#series), [shard](/influxdb/v1.5/concepts/glossary/#shard), [shard duration](/influxdb/v1.5/concepts/glossary/#shard-duration)
+Related entries: [database](/influxdb/v1.5/concepts/glossary/#database), [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp), [series](/influxdb/v1.5/concepts/glossary/#series), [shard](/influxdb/v1.5/concepts/glossary/#shard), [shard duration](/influxdb/v1.5/concepts/glossary/#shard-duration)
 
 ## subscription
 Subscriptions allow [Kapacitor](/kapacitor/latest/) to receive data from InfluxDB in a push model rather than the pull model based on querying data.

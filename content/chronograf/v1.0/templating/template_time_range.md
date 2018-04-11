@@ -1,6 +1,6 @@
 ---
 title: Time Range Template
-
+newversionredirect: guides/dashboard-template-variables/
 menu:
   chronograf_1_0:
     name: Time Range Template
@@ -28,4 +28,4 @@ SELECT usage_idle FROM "telegraf"."default"."cpu" WHERE tmplTime()
 
 *Chronograf visualization with a time template variable:*
 
-![Time template](/img/chronograf/v0.11/time-template.gif)
+![Time template](/img/chronograf/v1.0/time-template.gif)

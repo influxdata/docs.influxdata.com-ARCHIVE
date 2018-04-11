@@ -2,7 +2,7 @@
 title: High Availability
 ---
 
-## [Clustering with InfluxDB](/influxdb/v1.5/high_availability/relay/)
+## [Clustering with InfluxDB](/influxdb/v1.5/high_availability/clusters/)
 
 InfluxDB OSS does not support clustering.
 For high availability or horizontal scaling of InfluxDB, consider the InfluxData

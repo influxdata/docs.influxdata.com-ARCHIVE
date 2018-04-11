@@ -1,6 +1,7 @@
 ---
 title: Introducing Kapacitor Enterprise
-
+aliases:
+  - /enterprise_kapacitor/v1.4/introduction/getting-started/
 menu:
   enterprise_kapacitor_1_4:
     name: Introduction

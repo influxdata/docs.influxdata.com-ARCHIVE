@@ -1,6 +1,6 @@
 ---
 title: Sample data
-newversionredirect: /query_language/data_download/
+newversionredirect: query_language/data_download/
 ---
 
 Download and write to any InfluxDB installation the sample data used in [Data Exploration](../../query_language/data_exploration/), [Schema Exploration](../../query_language/schema_exploration/), and [Functions](../../query_language/functions/).

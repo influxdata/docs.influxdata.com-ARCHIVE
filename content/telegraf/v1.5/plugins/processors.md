@@ -1,6 +1,7 @@
 ---
 title: Telegraf processor plugins
-
+aliases:
+  - /telegraf/v1.5/processors/
 menu:
   telegraf_1_5:
     name: Processor
@@ -19,4 +20,4 @@ Processor plugins process metrics as they pass through and immediately emit resu
 
 ### [Printer (printer)](https://github.com/influxdata/telegraf/tree/release-1.4/plugins/processors/printer)
 
-The Printer processor plugin simply prints every metric passing through it.
+The [Printer (printer) processor plugin](https://github.com/influxdata/telegraf/tree/release-1.4/plugins/processors/printer) simply prints every metric passing through it.

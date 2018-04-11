@@ -1,6 +1,6 @@
 ---
 title: Time Range Template
-
+newversionredirect: guides/dashboard-template-variables/
 menu:
   chronograf_013:
     name: Time Range Template

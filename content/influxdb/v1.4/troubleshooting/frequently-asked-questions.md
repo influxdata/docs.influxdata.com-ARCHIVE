@@ -145,7 +145,7 @@ and
 [`ALTER RETENTION POLICY`](/influxdb/v1.4/query_language/database_management/#modify-retention-policies-with-alter-retention-policy)
 statements.
 Check your retention policy's shard group duration with the
-[`SHOW RETENTION POLICY`](/influxdb/v1.4/query_language/schema_exploration/#explore-retention-policies-with-show-retention-policies)
+[`SHOW RETENTION POLICY`](/influxdb/v1.4/query_language/schema_exploration/#show-retention-policies)
 statement.
 
 ## Why aren't data dropped after I've altered a retention policy?
@@ -363,7 +363,7 @@ Timestamps outside that range return a [parsing error](/influxdb/v1.4/troublesho
 
 ## How can I tell what type of data are stored in a field?
 
-The [`SHOW FIELD KEYS`](/influxdb/v1.4/query_language/schema_exploration/#explore-field-keys-with-show-field-keys) query also returns the field's type.
+The [`SHOW FIELD KEYS`](/influxdb/v1.4/query_language/schema_exploration/#show-field-keys) query also returns the field's type.
 
 #### Example
 
@@ -441,14 +441,14 @@ If you request a query that has no timestamp to return, such as an aggregation f
 
 The following InfluxQL functions support nesting:
 
-* [`COUNT()`](#count) with [`DISTINCT()`](#distinct)
-* [`CUMULATIVE_SUM()`](#cumulative-sum)
-* [`DERIVATIVE()`](#derivative)
-* [`DIFFERENCE()`](#difference)
-* [`ELAPSED()`](#elapsed)
-* [`MOVING_AVERAGE()`](#moving-average)
-* [`NON_NEGATIVE_DERIVATIVE()`](#non-negative-derivative)
-* [`HOLT_WINTERS()`](#holt-winters) and [`HOLT_WINTERS_WITH_FIT()`](#holt-winters)
+* [`COUNT()`](/influxdb/v1.4/query_language/functions/#count) with [`DISTINCT()`](/influxdb/v1.4/query_language/functions/#distinct)
+* [`CUMULATIVE_SUM()`](/influxdb/v1.4/query_language/functions/#cumulative-sum)
+* [`DERIVATIVE()`](/influxdb/v1.4/query_language/functions/#derivative)
+* [`DIFFERENCE()`](/influxdb/v1.4/query_language/functions/#difference)
+* [`ELAPSED()`](/influxdb/v1.4/query_language/functions/#elapsed)
+* [`MOVING_AVERAGE()`](/influxdb/v1.4/query_language/functions/#moving-average)
+* [`NON_NEGATIVE_DERIVATIVE()`](/influxdb/v1.4/query_language/functions/#non-negative-derivative)
+* [`HOLT_WINTERS()`](/influxdb/v1.4/query_language/functions/#holt-winters) and [`HOLT_WINTERS_WITH_FIT()`](/influxdb/v1.4/query_language/functions/#holt-winters)
 
 See the
 [Data Exploration](/influxdb/v1.4/query_language/data_exploration/#subqueries)

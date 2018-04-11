@@ -1,6 +1,7 @@
 ---
 title: Backing up and restoring in InfluxDB OSS
-
+aliases:
+  - /influxdb/v1.5/administration/backup-and-restore/
 menu:
   influxdb_1_5:
     name: Backing up and restoring

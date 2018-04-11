@@ -11,7 +11,7 @@ menu:
 InfluxDB's Line Protocol is a text based format for writing points to the
 database.
 Points must be in Line Protocol format for InfluxDB to successfully parse and
-write points (unless you're using a [service plugin](/influxdb/v1.4/tools/#service-plugins)).
+write points (unless you're using a [service plugin](/influxdb/v1.4/supported_protocols/)).
 
 Using fictional temperature data, this page introduces Line Protocol.
 It covers:
@@ -471,10 +471,10 @@ There are several ways to write data to InfluxDB.
 See the [Tools](/influxdb/v1.4/tools/) section for more
 on the [HTTP API](/influxdb/v1.4/tools/api/#write), the
 [CLI](/influxdb/v1.4/tools/shell/), and the available Service Plugins (
-[UDP](/influxdb/v1.4/tools/udp/),
-[Graphite](/influxdb/v1.4/tools/graphite/),
-[CollectD](/influxdb/v1.4/tools/collectd/), and
-[OpenTSDB](/influxdb/v1.4/tools/opentsdb/)).
+[UDP](https://github.com/influxdata/influxdb/blob/master/services/udp/README.md),
+[Graphite](https://github.com/influxdata/influxdb/blob/master/services/graphite/README.md),
+[CollectD](https://github.com/influxdata/influxdb/blob/master/services/collectd/README.md), and
+[OpenTSDB](https://github.com/influxdata/influxdb/blob/master/services/opentsdb/README.md)).
 
 ### Duplicate points
 

@@ -1,8 +1,8 @@
 ---
 title: Getting started with InfluxDB Enterprise
 aliases:
-  - /enterprise_influxdb/v1.5/introduction/getting-started/
-  - /enterprise/v1.5/introduction/getting-started/
+  - /enterprise_influxdb/v1.5/introduction/getting_started/
+  - /enterprise/v1.5/introduction/getting_started/
 menu:
   enterprise_influxdb_1_5:
     name: Getting started

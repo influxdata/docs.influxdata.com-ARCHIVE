@@ -97,7 +97,7 @@ The InfluxDB logging configuration options (in the `[logging]` section) now incl
 * `level`: `error` | `warn` | `info` (default) | `debug`
 * `suppress-logo`: `false` (default) | `true`
 
-For details on these logging configuration options and their corresponding environment variables, see [Logging options](/influxdb/v1.5/administration/config/#logging-options--logging/) in the configuration file documentation.
+For details on these logging configuration options and their corresponding environment variables, see [Logging options](/influxdb/v1.5/administration/config/#logging-settings-logging) in the configuration file documentation.
 
 ### Logging formats
 

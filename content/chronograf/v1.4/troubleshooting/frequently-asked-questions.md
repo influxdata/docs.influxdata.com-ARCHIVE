@@ -6,13 +6,6 @@ menu:
     parent: Troubleshooting
 ---
 
-* [How do I connect Chronograf to an InfluxEnterprise cluster?](#how-do-i-connect-chronograf-to-an-influxenterprise-cluster)
-*
-### Known Issues
-
-* [Why does the query builder break after I add my template variable to a query?](#why-does-the-query-builder-break-after-i-add-my-template-variable-to-a-query)
-
-
 ## How do I connect Chronograf to an InfluxEnterprise cluster?
 
 The connection details form requires additional information when connecting Chronograf to an [InfluxEnterprise cluster](https://docs.influxdata.com/enterprise_influxdb/latest/).

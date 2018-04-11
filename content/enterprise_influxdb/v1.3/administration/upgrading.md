@@ -189,7 +189,7 @@ Add:
 * [wal-fsync-delay = "0s"](/enterprise_influxdb/v1.3/administration/configuration/#wal-fsync-delay-0s) to the `[data]` section
 * [max-concurrent-compactions = 0](/enterprise_influxdb/v1.3/administration/configuration/#max-concurrent-compactions-0) to the `[data]` section
 * [pool-max-idle-streams = 100](/enterprise_influxdb/v1.3/administration/configuration/#pool-max-idle-streams-100) to the `[cluster]` section
-* [pool-max-idle-time = "1m0s"](/enterprise_influxdb/v1.3/administration/configuration/#pool-max-idle-time-1m0s) to the `[cluster]` section
+* [pool-max-idle-time = "60s"](/enterprise_influxdb/v1.3/administration/configuration/#pool-max-idle-time-60s) to the `[cluster]` section
 * the [[anti-entropy]](/enterprise_influxdb/v1.3/administration/configuration/#anti-entropy) section:
 ```
 [anti-entropy]
@@ -201,7 +201,7 @@ Add:
 Remove:
 
 * the `max-remote-write-connections` from the `[cluster]` section
-* the [[admin]](/enterprise_influxdb/v1.3/administration/configuration/#admin) section
+* the `[admin]` section
 
 Update:
 

@@ -1,5 +1,7 @@
 ---
 title: Getting started with InfluxDB
+aliases:
+  - /influxdb/v1.5/introduction/getting_started/
 menu:
   influxdb_1_5:
     name: Getting started

@@ -1,5 +1,7 @@
 ---
 title: Downloading Kapacitor Enterprise
+aliases:
+  - /enterprise_kapacitor/v1.4/introduction/downloads/
 menu:
   enterprise_kapacitor_1_4:
     name: Downloading
