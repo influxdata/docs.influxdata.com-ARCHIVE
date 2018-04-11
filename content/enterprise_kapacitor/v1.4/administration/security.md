@@ -4,7 +4,7 @@ draft: true
 
 menu:
   enterprise_kapacitor_1_4:
-  title: Managing security
+  name: Managing security
     weight: 4
     parent: Administration
 ---
