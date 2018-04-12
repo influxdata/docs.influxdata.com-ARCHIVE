@@ -912,7 +912,7 @@ SELECT numSeries FROM "_internal".."database" WHERE time > now() - 10s GROUP BY 
 SELECT sum(numSeries) AS "total_series" FROM "_internal".."database" WHERE time > now() - 10s
 ```
 
-> **Note:** Changes to the [`[monitor]`](/influxdb/v1.4/administration/config/#monitor)
+> **Note:** Changes to the [`[monitor]`](/influxdb/v1.4/administration/config/#monitoring-settings-monitor)
 section in the configuration file may affect query results.
 
 ## Why does series cardinality matter?
