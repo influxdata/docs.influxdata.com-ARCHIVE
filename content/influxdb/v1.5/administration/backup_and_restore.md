@@ -1,5 +1,6 @@
 ---
-title: Backing up and restoring in InfluxDB OSS
+title: Backing up and restoring InfluxDB OSS
+description: Using InfluxDB OSS backup and restore utilities for online, Enterprise-compatible use and portability between InfluxDB Enterprise and InfluxDB OSS servers.
 aliases:
   - /influxdb/v1.5/administration/backup-and-restore/
 menu:
@@ -41,7 +42,7 @@ The online backup and restore processes execute over a TCP connection to the dat
 **Example**
 
 ```
-$ influxd backup -database mydatabase -host <remote-node-IP>:8088 /tmp/mysnapshot
+$ influxd backup -portable -database mydatabase -host <remote-node-IP>:8088 /tmp/mysnapshot
 ```
 
 ### `backup`
@@ -71,7 +72,11 @@ Optional arguments are enclosed in brackets.
 
 - `[ -database <db_name> ]`: The database to back up. If not specified, all databases are backed up.
 
-- `[ -portable ]`: Generates backup files in the newer InfluxDB Enterprise-compatible format. Recommended for InfluxDB OSS.
+- `[ -portable ]`: Generates backup files in the newer InfluxDB Enterprise-compatible format. Highly recommended for all InfluxDB OSS users.
+
+<dt>
+**Important:** If `-portable` is not specified, the default legacy backup utility is used -- only the host metastore is backed up, unless `-database` is specified. If not using `-portable`, review [Backup (legacy)](#backup-legacy) below for expected behavior.
+</dt>
 
 - `[ -host <host:port> ]`: Host and port for InfluxDB OSS instance . Default value is `'127.0.0.1:8088'`. Required for remote connections. Example: `-host 127.0.0.1:8088`
 
@@ -90,25 +95,25 @@ Optional arguments are enclosed in brackets.
 
 To back up everything:
 ```
-influxd backup <path-to-backup>
+influxd backup -portable <path-to-backup>
 ```
 
 To backup all databases recently changed at the filesystem level
 
 ```
-influxd backup -start <timestamp> <path-to-backup>
+influxd backup -portable -start <timestamp> <path-to-backup>
 ```
 
-To backup only the telegraf database:
+To backup only the `telegraf` database:
 
 ```
-influxd backup -database telegraf <path-to-backup>
+influxd backup -portable -database telegraf <path-to-backup>
 ```
 
 To backup a database for a specified time interval:
 
 ```
-influxd backup -database mytsd -start 2017-04-28T06:49:00Z -end 2017-04-28T06:50:00Z /tmp/backup/influxdb
+influxd backup  -portable -database mytsd -start 2017-04-28T06:49:00Z -end 2017-04-28T06:50:00Z /tmp/backup/influxdb
 ```
 
 ### `restore`
@@ -149,7 +154,7 @@ Optional arguments are enclosed in brackets.
 
 ### Backward compatible offline backup and restore (legacy format)
 
-> ***Note:*** The backward compatible backup and restore for InfluxDB OSS described below are now supported as the legacy format. InfluxData recommends using the newer Enterprise-compatible backup and restore utilities with InfluxDB OSS.
+> ***Note:*** The backward compatible backup and restore for InfluxDB OSS described below are now supported as the legacy format. InfluxData recommends using the newer Enterprise-compatible backup and restore utilities with InfluxDB OSS servers.
 
 InfluxDB OSS has the ability to snapshot an instance at a point-in-time and restore it.
 All backups are full backups; incremental backups are not supported.
