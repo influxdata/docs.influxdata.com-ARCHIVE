@@ -1,6 +1,6 @@
 ---
 title: Administration
-draft: true
+draft: false
 menu:
   enterprise_kapacitor_1_4:
     weight: 5

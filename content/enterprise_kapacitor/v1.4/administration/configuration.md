@@ -1,6 +1,6 @@
 ---
 title: Configuration
-draft: true
+draft: false
 
 menu:
   enterprise_kapacitor_1_4:
@@ -98,7 +98,7 @@ This group includes the following properties:
 * `meta-addr`: Address of the influxdb-meta server.  A string containing its host and port. Host can be an IP Address or a domain name.  When using TLS the host part must contain the name used in the CN part of the server certificate.
 * `meta-use-tls`: Whether to connect to the influxdb-meta server over TLS or not. The default value is `false`.
 
-Authentication configuration is explained in greater detail in 
+Authentication configuration is explained in greater detail in
 [Authentication and Authorization](/enterprise_kapacitor/v1.4/administration/auth/).
 
 

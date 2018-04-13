@@ -1,10 +1,9 @@
 ---
-title: Managing security in Kapacitor Enterprise
-draft: true
+title: Managing security
+draft: false
 
 menu:
   enterprise_kapacitor_1_4:
-  name: Managing security
     weight: 4
     parent: Administration
 ---
@@ -68,7 +67,7 @@ The properties can be understood as follows:
 * `meta-addr`: Address to the InfluxDB meta node API endpoint.  Note that if this endpoint is secured using TLS, then the host and domain name portion of this string must match the string specified in the CN field of the certificate.  Otherwise, Kapacitor will reject the certificate, terminate the credential verification transaction, and return `401` to all requests.
 * `meta-use-tls`: Sets up Kapacitor to connect to the InfluxDB meta node using TLS/HTTPS.
 
-More detailed information is available in 
+More detailed information is available in
 [Authentication and authorization](/enterprise_kapacitor/v1.4/administration/auth/).  
 
 #### Securing InfluxDB data nodes
@@ -228,6 +227,18 @@ an additional argument `-skipVerify` will also need to be provided.
 $ kapacitor -url https://localhost:9092 -skipVerify list tasks
 ID                                                 Type      Status    Executing Databases and Retention Policies
 chronograf-v1-3586109e-8b7d-437a-80eb-a9c50d00ad53 stream    enabled   true      ["telegraf"."autogen"]
+```
+
+To avoid having to enter the URL string every time Kapacitor is invoked, the value
+can be stored as the environment variable `KAPACITOR_URL`.  
+
+**Example 6: Using the environment variable KAPACITOR_URL**
+```
+$ export KAPACITOR_URL=https://localhost:9092
+$ kapacitor -skipVerify list tasks
+ID                                                 Type      Status    Executing Databases and Retention Policies
+172-31-16-108-cpu-alert                            stream    enabled   true      ["telegraf"."autogen"]
+chronograf-v1-9199dfc1-90d3-4a22-a34b-93577057daa3 stream    disabled  false     ["telegraf"."autogen"]
 ```
 
 ### Kapacitor Enterprise with authentication

@@ -1,6 +1,6 @@
 ---
 title: Authentication and authorization
-draft: true
+draft: false
 
 menu:
   enterprise_kapacitor_1_4:
@@ -208,8 +208,8 @@ $ curl -v https://admin:changeit@cluster_node_1:9092/kapacitor/v1/tasks
 
 Authentication roughly follows these steps:  
 
-1. When processing the request, Kapacitor will strip out the credentials.
-2. Kapacitor then checks to see whether the user name currently matches any user details document in its local cache in the Kapacitor database.  If so it jumps to step 7.
+1. When processing the request, Kapacitor parses the credentials.
+2. Kapacitor then validates the credentials.  The first step is to check to see whether the user name and password currently match any user details document in its local cache in the Kapacitor database.  If so it jumps to step 7.
 3. If the user details are not in the cache, Kapacitor sends the credentials to the InfluxDB Meta API endpoint.
 4. If the credentials are valid, the InfluxDB Meta server then returns a user details JSON document.
 5. Kapacitor in turn inspects the user details document for the correct privileges.
