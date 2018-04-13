@@ -12,4 +12,4 @@ menu:
 
 Yes. As of version 0.11, users can customize the y-axis range in Chronograf:
 
-![Y-axis customizer GIF](/img/chronograf/v0.11/y-axis-customization.gif)
+![Y-axis customizer GIF](/img/chronograf/v1.0/y-axis-customization.gif)

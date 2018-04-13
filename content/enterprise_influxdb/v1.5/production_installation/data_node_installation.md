@@ -30,7 +30,7 @@ Note: that there is no requirement for each data node to run on its own
 server.  However, best practices are to deploy each data node on a dedicated server.
 
 See the
-[Clustering guide](/enterprise_influxdb/v1.5/concepts/clustering.md#optimal-server-counts)
+[Clustering guide](/enterprise_influxdb/v1.5/concepts/clustering/#optimal-server-counts)
 for more on cluster architecture.
 
 ### Other requirements
@@ -95,12 +95,14 @@ Perform the following steps on each data server.
 ### I. Download and install the data service
 
 #### Ubuntu & Debian (64-bit)
+
 ```
 wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.5.2-c1.5.2_amd64.deb
 sudo dpkg -i influxdb-data_1.5.2-c1.5.2_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
+
 ```
 wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.5.2_c1.5.2.x86_64.rpm
 sudo yum localinstall influxdb-data-1.5.2_c1.5.2.x86_64.rpm
@@ -159,6 +161,7 @@ hostname="<enterprise-data-0x>" #✨
 ```
 
 ### III. Start the data service
+
 On sysvinit systems, enter:
 ```
 service influxdb start
@@ -221,6 +224,7 @@ The expected output is:
     ID   TCP Address               Version
     4    enterprise-data-01:8088   1.5.2-c1.5.2
     5    enterprise-data-02:8088   1.5.2-c1.5.2
+
 >
     Meta Nodes
     ==========

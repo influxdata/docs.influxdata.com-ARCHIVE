@@ -7,7 +7,7 @@ aliases:
     - influxdb/v1.4/guides/clustering/
 menu:
   influxdb_1_4:
-    weight: 0
+    weight: 10
     parent: high_availability
 ---
 

@@ -8,7 +8,7 @@ aliases:
 menu:
   influxdb_1_5:
     name: Clustering
-    weight: 0
+    weight: 10
     parent: high_availability
 ---
 

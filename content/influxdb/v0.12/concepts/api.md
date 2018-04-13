@@ -1,6 +1,6 @@
 ---
 title: API Endpoints & Ports
-newversionredirect: /tools/api/
+newversionredirect: tools/api/
 menu:
   influxdb_012:
     weight: 80

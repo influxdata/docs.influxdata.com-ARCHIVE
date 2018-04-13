@@ -1,7 +1,7 @@
 ---
 title: OpenTSDB protocol support in InfluxDB
 aliases:
-    - influxdb/v1.5/supported_protocols/opentsdb/
+    - influxdb/v1.5/tools/opentsdb/
 menu:
   influxdb_1_5:
     name: OpenTSDB

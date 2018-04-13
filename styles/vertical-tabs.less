@@ -7,7 +7,7 @@
   flex-wrap: nowrap;
   border-radius: @radius;
   margin-bottom: 1em;
-  .gradient-v(fadeout(@vertical-tabs-bg, 20%),fadeout(@vertical-tabs-bg, 77%));
+  .gradient-v(fadeout(@vertical-tabs-link-bg, 20%),fadeout(@vertical-tabs-link-bg, 77%));
 }
 .vertical-tabs {
   width: @vertical-tabs-sidebar;
@@ -29,17 +29,17 @@
   display: block;
   cursor: pointer;
   background: transparent;
-  border-bottom: 2px solid @vertical-tabs-bg;
+  border-bottom: 2px solid @vertical-tabs-link-bg;
   list-style-type: none !important;
 
   &:hover {
     color: @vertical-tabs-link-hover !important;
-    background-color: fadeout(@vertical-tabs-bg, 50%);
+    background-color: fadeout(@vertical-tabs-link-bg, 50%);
     cursor: pointer;
   }
   &.is-active {
     color: @vertical-tabs-link-active !important;
-    background: @vertical-tabs-bg;
+    background: @vertical-tabs-body-bg;
   }
 }
 
@@ -60,7 +60,7 @@
 .vertical-tab-content-container {
   width: ~"calc(100% - "@vertical-tabs-sidebar~")";
   position: relative;
-  background-color: @vertical-tabs-bg;
+  background-color: @vertical-tabs-body-bg;
   overflow: hidden;
   border-radius: 0 @radius @radius @radius;
 }

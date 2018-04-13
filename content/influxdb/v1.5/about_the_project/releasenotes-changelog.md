@@ -1,5 +1,5 @@
 ---
-title: Release Notes/Changelog
+title: Release notes/changelog
 menu:
   influxdb_1_5:
     weight: 10
@@ -19,27 +19,28 @@ menu:
 * backport: check for failure case where backup directory has no manifest files.
 * Fix regression to allow `now()` to be used as the group by offset again.
 * 1.5: Revert `Use MADV_WILLNEED when loading TSM files`.
-* Ignore index size in Engine.DiskSize().
+* Ignore index size in `Engine.DiskSize()`.
 * [1.5] Fix `buildtsi` partition key.
 * Ensure that conditions are encoded correctly even if the AST is not properly formed.
 
 v1.5.1 [2018-03-20]
 -------------------
 
-### Bugfixes
+## v1.5.1 [2018-03-20]
 
--	[#9542](https://github.com/influxdata/influxdb/pull/9542): Allow time variable to be case insensitive again.
--	[#9564](https://github.com/influxdata/influxdb/pull/9564): Support setting the log level through the environment variable.
--	[#9575](https://github.com/influxdata/influxdb/pull/9575): Ensure correct number of tags parsed.
--	[#9566](https://github.com/influxdata/influxdb/pull/9566): Fix panic when checking fieldsets.
--	[#9587](https://github.com/influxdata/influxdb/pull/9587): Fix data race in WAL.
+### Bug fixes
+
+-	Allow time variable to be case insensitive again.
+-	Support setting the log level through the environment variable.
+-	Ensure correct number of tags parsed.
+-	Fix panic when checking fieldsets.
+-	Fix data race in WAL.
 
 ## v1.5.0 [2018-03-06]
 
 ### Breaking changes
 
-> ***Note:*** This release builds off of the 1.5 release of InfluxDB OSS. Please see the [InfluxDB OSS release
-> notes](https://docs.influxdata.com/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
+The default logging format has been changed. See [Logging and tracing in InfluxDB](/influxdb/v1.5/administration/logs) for details.
 
 ### Features
 
@@ -66,7 +67,7 @@ v1.5.1 [2018-03-20]
 - Fix CLI to allow quoted database names in use statement.
 - Updated client `4xx` error message when response body length is zero.
 - Remove extraneous newlines from the log.
-- Allow lone boolean literals in a condition expression.
+- Allow lone Boolean literals in a condition expression.
 - Improve performance when writes exceed `max-values-per-tag` or `max-series`.
 - Prevent a panic when a query simultaneously finishes and is killed at the same time.
 - Fix missing sorting of blocks by time when compacting.
@@ -432,7 +433,7 @@ The following new configuration options are available.
 - Fix racy integration test
 - Prevent overflowing or underflowing during window computation
 - Enabled golint for admin, httpd, subscriber, udp, thanks @karlding
-- Implicitly cast null to false in binary expressions with a boolean
+- Implicitly cast null to false in binary expressions with a Boolean
 - Restrict fill(none) and fill(linear) to be usable only with aggregate queries
 - Restrict top() and bottom() selectors to be used with no other functions
 - top() and bottom() now returns the time for every point
@@ -565,7 +566,7 @@ The stress tool `influx_stress` will be removed in a subsequent release. We reco
 - Fix cross-platform backup/restore.
 - Ensures that all user privileges associated with a database are removed when the database is dropped.
 - Return the time from a percentile call on an integer.
-- Expand string and boolean fields when using a wildcard with `sample()`.
+- Expand string and Boolean fields when using a wildcard with `sample()`.
 - Fix chuid argument order in init script.
 - Reject invalid subscription URLs.
 - CLI should use spaces for alignment, not tabs.

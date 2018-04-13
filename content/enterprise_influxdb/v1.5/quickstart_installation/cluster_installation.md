@@ -106,11 +106,13 @@ Perform the following steps on all three servers.
 
 
 #### Ubuntu & Debian (64-bit)
+
 ```
 wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.5.2-c1.5.2_amd64.deb
 sudo dpkg -i influxdb-meta_1.5.2-c1.5.2_amd64.deb
 ```
 #### RedHat & CentOS (64-bit)]
+
 ```
 wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.5.2_c1.5.2.x86_64.rpm
 sudo yum localinstall influxdb-meta-1.5.2_c1.5.2.x86_64.rpm
@@ -171,11 +173,13 @@ Perform the following steps on all three servers.
 ### I. Download and install the data service
 
 #### Ubuntu & Debian (64-bit)
+
 ```
 wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.5.2-c1.5.2_amd64.deb
 sudo dpkg -i influxdb-data_1.5.2-c1.5.2_amd64.deb
 ```
 #### RedHat & CentOS (64-bit)
+
 ```
 wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.5.2_c1.5.2.x86_64.rpm
 sudo yum localinstall influxdb-data-1.5.2_c1.5.2.x86_64.rpm

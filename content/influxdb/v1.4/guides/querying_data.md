@@ -4,7 +4,7 @@ alias:
   -/docs/v1.4/query_language/querying_data/
 menu:
   influxdb_1_4:
-    weight: 10
+    weight: 20
     parent: guides
 ---
 
@@ -57,8 +57,9 @@ If an error occurs, InfluxDB sets an `"error"` key with an explanation of the er
 }
 ```
 
-> **Note:** Appending `pretty=true` to the URL enables pretty-printed JSON output.
-While this is useful for debugging or when querying directly with tools like `curl`, it is not recommended for production use as it consumes unnecessary network bandwidth.
+<dt>
+**Warning:** Appending `pretty=true` to the URL enables pretty-printed JSON output. Although useful for debugging or for querying directly with tools like `curl`, it is **not recommended for production use**.  Using `pretty=true` will significantly expand large dataset extractions and will consume unnecessary network bandwidth.
+</dt>
 
 ### Multiple queries
 ---

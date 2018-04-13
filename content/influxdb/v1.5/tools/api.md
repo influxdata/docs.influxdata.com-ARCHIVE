@@ -5,7 +5,7 @@ aliases:
 menu:
   influxdb_1_5:
     name: InfluxDB API reference
-    weight: 10
+    weight: 20
     parent: tools
 ---
 
@@ -14,7 +14,7 @@ It uses HTTP response codes, HTTP authentication, JWT Tokens, and basic authenti
 
 The following sections assume your InfluxDB instance is running on `localhost`
 port `8086` and HTTPS is not enabled.
-Those settings [are configurable](/influxdb/v1.5/administration/config/#http).
+Those settings [are configurable](/influxdb/v1.5/administration/config/#http-endpoint-settings-http).
 
 # Endpoints
 
@@ -358,7 +358,7 @@ mymeas,,1488327378000000000,33.1,mytag1,mytag2
 mymeas,,1488327438000000000,12.4,12,14
 ```
 
-The first point has no [tag values](/influxdb/v1.5/concepts/glossary/#tag-value) for the `mytag1` and `mytag2` [tag keys](/influxdb/v1./concepts/glossary/#tag-key).
+The first point has no [tag values](/influxdb/v1.5/concepts/glossary/#tag-value) for the `mytag1` and `mytag2` [tag keys](/influxdb/v1.5/concepts/glossary/#tag-key).
 
 ##### Example 3: Submit queries from a file
 <br>
@@ -497,7 +497,7 @@ POST http://localhost:8086/write
 
 | Query String Parameter | Optional/Required | Description |
 | :--------------------- | :---------------- | :---------- |
-| consistency=[any,one,quorum,all] | Optional, available with [InfluxDB Enterprise clusters](/enterprise_influxdb/v1.5/) only. | Sets the write consistency for the point. InfluxDB assumes that the write consistency is `one` if you do not specify `consistency`. See the [InfluxDB Enterprise documentation](enterprise_influxdb/v1.5/concepts/clustering#write-consistency) for detailed descriptions of each consistency option. |
+| consistency=[any,one,quorum,all] | Optional, available with [InfluxDB Enterprise clusters](/enterprise_influxdb/v1.5/) only. | Sets the write consistency for the point. InfluxDB assumes that the write consistency is `one` if you do not specify `consistency`. See the [InfluxDB Enterprise documentation](/enterprise_influxdb/v1.5/concepts/clustering#write-consistency) for detailed descriptions of each consistency option. |
 | db=\<database> | Required | Sets the target [database](/influxdb/v1.5/concepts/glossary/#database) for the write. |
 | p=\<password> | Optional if you haven't [enabled authentication](/influxdb/v1.5/query_language/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication.* | Sets the password for authentication if you've enabled authentication. Use with the query string parameter `u`. |
 | precision=[ns,u,ms,s,m,h] | Optional | Sets the precision for the supplied Unix time values. InfluxDB assumes that timestamps are in nanoseconds if you do not specify `precision`.** |

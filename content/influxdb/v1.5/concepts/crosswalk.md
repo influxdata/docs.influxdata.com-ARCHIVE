@@ -2,7 +2,7 @@
 title: Comparison to SQL
 menu:
   influxdb_1_5:
-    weight: 20
+    weight: 30
     parent: concepts
 ---
 
@@ -178,7 +178,7 @@ See our [data exploration](/influxdb/v1.5/query_language/data_exploration/) page
 InfluxQL functions include `COUNT`, `MIN`, `MAX`, `MEDIAN`, `DERIVATIVE` and more.
 For a full list check out the [functions](/influxdb/v1.5/query_language/functions/) page.
 
-Now that you have the general idea, check out our [Getting Started Guide](/influxdb/v1.5/introduction/getting_started/).
+Now that you have the general idea, check out our [Getting Started Guide](/influxdb/v1.5/introduction/getting-started/).
 
 ## A note on why InfluxDB isn't CRUD...
 

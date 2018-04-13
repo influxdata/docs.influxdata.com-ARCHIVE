@@ -1,10 +1,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   {{ range $page := .Data.Pages }}
+  {{ if (or ( .IsHome ) (in .RelPermalink (index .Site.Data.default_versions (print .Section "_semver")))) }}
   <url>
-    <loc>{{ .Permalink }}</loc>{{ if (or (eq .Section "") (eq .RelPermalink "/telegraf/") (eq .RelPermalink "/influxdb/") (eq .RelPermalink "/enterprise_influxdb/") (eq .RelPermalink "/chronograf/") (eq .RelPermalink "/kapacitor/") (eq .RelPermalink "/enterprise_kapacitor/")) }}
-    <priority>1.0</priority>{{ else if (in .RelPermalink (index .Site.Data.default_versions (print .Section "_semver"))) }}
-    <priority>1.0</priority>{{else}}
-    <priority>0.1</priority>{{ end }}
+    <loc>{{ .Permalink }}</loc>
+    <lastmod>{{ safeHTML ( .Lastmod.Format "2006-01-02" ) }}</lastmod>
   </url>
+  {{ end }}
   {{ end }}
 </urlset>

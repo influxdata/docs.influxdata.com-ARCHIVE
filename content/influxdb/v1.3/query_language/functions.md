@@ -30,7 +30,7 @@ Aggregate, select, transform, and predict data with InfluxQL functions.
     * [PERCENTILE()](#percentile)
     * [SAMPLE()](#sample)        
     * [TOP()](#top)         
-* [Transformations](#Transformations)
+* [Transformations](#transformations)
     * [CEILING()](#ceiling)  
     * [CUMULATIVE_SUM()](#cumulative-sum)                    
     * [DERIVATIVE()](#derivative)                          
@@ -40,7 +40,7 @@ Aggregate, select, transform, and predict data with InfluxQL functions.
     * [HISTOGRAM()](#histogram)                            
     * [MOVING_AVERAGE()](#moving-average)                  
     * [NON_NEGATIVE_DERIVATIVE()](#non-negative-derivative)
-    * [NON_NEGATIVE_DIFFERENCE()](#non-negative-difference) 
+    * [NON_NEGATIVE_DIFFERENCE()](#non-negative-difference)
 * [Predictors](#predictors)
     * [HOLT_WINTERS()](#holt-winters)
 * [Other](#other)
@@ -50,7 +50,7 @@ Aggregate, select, transform, and predict data with InfluxQL functions.
         * [Rename the Output Field Key](#rename-the-output-field-key)
         * [Change the Values Reported for Intervals with no Data](#change-the-values-reported-for-intervals-with-no-data)
     * [Common Issues with Functions](#common-issues-with-functions)
-        
+
 # Aggregations
 
 ## COUNT()
@@ -818,7 +818,7 @@ time                   stddev_water_level
 1970-01-01T00:00:00Z   2.279144584196141
 ```
 
-The query returns the standard deviation of the field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement. 
+The query returns the standard deviation of the field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement.
 
 #### Example 4: Calculate the standard deviation for the field values associated with a field key and include several clauses
 ```
@@ -1075,7 +1075,7 @@ In those cases, the system preserves the specified tag as a tag in the newly wri
 The first query in the codeblock below returns the smallest field values in the `water_level` field key for two tag values associated with the `location` tag key.
 It also writes those results to the `bottom_water_levels` measurement.
 
-The second query [shows](/influxdb/v1.3/query_language/schema_exploration/#show-tag-keys) that InfluxDB preserved the `location` tag as a tag in the `bottom_water_levels` measurement. 
+The second query [shows](/influxdb/v1.3/query_language/schema_exploration/#show-tag-keys) that InfluxDB preserved the `location` tag as a tag in the `bottom_water_levels` measurement.
 ```
 > SELECT BOTTOM("water_level","location",2) INTO "bottom_water_levels" FROM "h2o_feet"
 
@@ -1875,7 +1875,7 @@ In those cases, the system preserves the specified tag as a tag in the newly wri
 The first query in the codeblock below returns the greatest field values in the `water_level` field key for two tag values associated with the `location` tag key.
 It also writes those results to the `top_water_levels` measurement.
 
-The second query [shows](/influxdb/v1.3/query_language/schema_exploration/#show-tag-keys) that InfluxDB preserved the `location` tag as a tag in the `top_water_levels` measurement. 
+The second query [shows](/influxdb/v1.3/query_language/schema_exploration/#show-tag-keys) that InfluxDB preserved the `location` tag as a tag in the `top_water_levels` measurement.
 ```
 > SELECT TOP("water_level","location",2) INTO "top_water_levels" FROM "h2o_feet"
 
@@ -2593,7 +2593,7 @@ time                   elapsed_level description   elapsed_water_level
 The query returns the difference (in minutes) between subsequent timestamps associated with each field key in the `h2o_feet`
 measurement.
 The `h2o_feet` measurement has two field keys: `level description` and `water_level`.
- 
+
 #### Example 4: Calculate the elapsed time between field values associated with each field key that matches a regular expression and specify the unit option
 ```
 > SELECT ELAPSED(/level/,1s) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:12:00Z'
@@ -2757,7 +2757,7 @@ time                   moving_average
 
 The query returns the rolling average across a two-field-value window for the `water_level` field key and the `h2o_feet` measurement.
 The first result (`2.09`) is the average of the first two points in the raw data: (`2.064 + 2.116) / 2`).
-The second result (`2.072`) is the average of the second two points in the raw data: (`2.116 + 2.028) / 2`). 
+The second result (`2.072`) is the average of the second two points in the raw data: (`2.116 + 2.028) / 2`).
 
 #### Example 2: Calculate the moving average of the field values associated with each field key in a measurement
 ```
@@ -3091,7 +3091,7 @@ The blue line shows the results of the query:
 
 ### Common Issues with `HOLT_WINTERS()`
 
-#### Issue 1: `HOLT_WINTERS()` and receiving fewer than `N` points 
+#### Issue 1: `HOLT_WINTERS()` and receiving fewer than `N` points
 In some cases, users may receive fewer predicted points than
 requested by the `N` parameter.
 That behavior occurs when the math becomes unstable and cannot forecast more
@@ -3242,7 +3242,7 @@ time                  median  mode
 1970-01-01T00:00:00Z  4.124   2.69
 ```
 
-### Change the Values Reported for Intervals with no Data 
+### Change the Values Reported for Intervals with no Data
 
 By default, queries with an InfluxQL function and a [`GROUP BY time()` clause](/influxdb/v1.3/query_language/data_exploration/#group-by-time-intervals) report null values for intervals with no data.
 Include `fill()` at the end of the `GROUP BY` clause to change that value.
@@ -3365,14 +3365,14 @@ A query with more than one function and no time range in the [`WHERE` clause](/i
 A query with more than one function and a time range in the `WHERE` clause returns the lower time bound as the timestamp.
 
 A query with a selector function and a `GROUP BY time()` clause returns the lower time bound for each `GROUP BY time()` interval.
-Note that the `SAMPLE()` function behaves differently from other selector functions when paired with the `GROUP BY time()` clause. 
-See [Common Issues with `SAMPLE()`](#common-issues-with-sample) for more information. 
+Note that the `SAMPLE()` function behaves differently from other selector functions when paired with the `GROUP BY time()` clause.
+See [Common Issues with `SAMPLE()`](#common-issues-with-sample) for more information.
 
 ##### Examples
 <br>
 
 ##### Example 1: Use a single selector function with a single field key and without a specified time range
-<br> 
+<br>
 ```
 > SELECT MAX("water_level") FROM "h2o_feet"
 
@@ -3450,7 +3450,3 @@ time                  max
 2015-08-18T00:12:00Z  7.887
 ```
 The query returns the lower time bound for each `GROUP BY time()` interval as the timestamp.
-
-
-
-

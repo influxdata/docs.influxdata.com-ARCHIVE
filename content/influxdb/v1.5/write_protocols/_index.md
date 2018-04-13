@@ -1,11 +1,6 @@
 ---
 title: Write protocols in InfluxDB
 
-menu:
-  influxdb_1_5:
-    name: Write protocols
-    weight: 10
-    parent: write_protocols
 ---
 
 InfluxDB's Line Protocol is a text based format for writing points to InfluxDB.

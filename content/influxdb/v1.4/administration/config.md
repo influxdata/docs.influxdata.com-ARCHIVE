@@ -18,18 +18,17 @@ The InfluxDB configuration file contains configuration settings specific to a lo
   * [Global settings](#global-settings)
   * [Metastore settings `[meta]`](#metastore-settings-meta)
   * [Data settings `[data]`](#data-settings-data)
-  * [Coordination settings `[coordinator]`](#coordination-settings-coordinator)
-  * [Retention settings `[retention]`](#retention-settings-retention)
+  * [Query management settings `[coordinator]`](#query-management-settings-coordinator)
+  * [Retention policy settings `[retention]`](#retention-policy-settings-retention)
   * [Shard precreation `[shard-precreation]`](#shard-precreation-settings-shard-precreation)
   * [Monitoring settings `[monitor]`](#monitoring-settings-monitor)
-  * [Administration settings `[admin]`](#administration-settings-admin)
   * [HTTP endpoint settings `[http]`](#http-endpoint-settings-http)
   * [Subscription settings `[subscriber]`](#subscription-settings-subscriber)
   * [Graphite settings `[[graphite]]`](#graphite-settings-graphite)
   * [CollectD settings `[[collectd]]`](#collectd-settings-collectd)
   * [OpenTSB settings `[[opentsdb]]`](#opentsdb-settings-opentsdb)
   * [UDP settings `[[udp]]`](#udp-settings-udp)
-  * [Continuous queries settings `[continuous_queries]`](#continuous-queries-settings-continuous_queries)
+  * [Continuous queries settings `[continuous_queries]`](#continuous-queries-settings-continuous-queries)
 
 ## Configuration overview
 
@@ -318,7 +317,7 @@ Environment variable: `INFLUXDB_DATA_MAX_SERIES_PER_DATABASE`
 
 ### `max-values-per-tag = 100000`
 
-The maximum number of [tag values](/influxdb/v1.4/concepts/glossary/#tag-values)
+The maximum number of [tag values](/influxdb/v1.4/concepts/glossary/#tag-value)
 allowed per [tag key]((/influxdb/v1.4/concepts/glossary/#tag-key).
 The default setting is `100000`.
 Change the setting to `0` to allow an unlimited number of tag values per tag
@@ -356,7 +355,7 @@ Environment variable: `INFLUXDB_COORDINATOR_MAX_CONCURRENT_QUERIES`
 The maximum time for which a query can run on your instance before InfluxDB
 kills the query.
 The default setting (`0`) allows queries to run with no time restrictions.
-This setting is a [duration](#configuration-settings).
+This setting is a [duration](#configuration-overview).
 
 Environment variable: `INFLUXDB_COORDINATOR_QUERY_TIMEOUT`
 
@@ -366,7 +365,7 @@ The maximum time a query can run after which InfluxDB logs the query with a
 `Detected slow query` message.
 The default setting (`"0"`) will never tell InfluxDB to log the query.
 This setting is a
-[duration](#configuration-settings).
+[duration](#configuration-overview).
 
 Environment variable: `INFLUXDB_COORDINATOR_LOG_QUERIES_AFTER`
 
@@ -461,14 +460,6 @@ Environment variable: `INFLUXDB_MONITOR_STORE_DATABASE`
 The interval at which InfluxDB records statistics.
 
 Environment variable: `INFLUXDB_MONITOR_STORE_INTERVAL`
-
-## Administration settings `[admin]`
-
-<dt> Starting with version 1.3, the web admin interface is no longer available in InfluxDB.
-The interface does not run on port `8083` and InfluxDB ignores the `[admin]` section in the configuration file if that section is present.
-[Chronograf](/chronograf/latest/) replaces the web admin interface with improved tooling for querying data, writing data, and database management.
-See [Chronograf's transition guide](/chronograf/latest/guides/transition-web-admin-interface/) for more information.
-</dt>
 
 ## HTTP endpoint settings `[http]`
 
@@ -863,7 +854,7 @@ Environment variable: `INFLUXDB_OPENTSDB_BATCH_TIMEOUT`
 ## UDP settings [[udp]]
 
 The `udp` settings control the listeners for InfluxDB line protocol data using UDP.
-See the [UDP page](/influxdb/v1.4/write_protocols/udp/) for more information.
+See the [UDP page](https://github.com/influxdata/influxdb/blob/master/services/udp/README.md) for more information.
 
 ### `enabled = false`
 

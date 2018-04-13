@@ -1,6 +1,6 @@
 ---
 title: Alerts
-
+newversionredirect: working/alerts/
 menu:
   kapacitor_1_3:
     identifier: alerts

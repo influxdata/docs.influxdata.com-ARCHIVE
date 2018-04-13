@@ -296,7 +296,7 @@ The maximum valid timestamp is `9223372036854775806` or `2262-04-11T23:47:16.854
 
 The `cache maximum memory size exceeded` error occurs when the cached
 memory size increases beyond the
-[`cache-max-memory-size` setting](/influxdb/v1.5/administration/config/#cache-max-memory-size-524288000)
+[`cache-max-memory-size` setting](/influxdb/v1.5/administration/config/#cache-max-memory-size-1073741824)
 in the configuration file.
 
 By default, `cache-max-memory-size` is set to 512mb.
@@ -305,8 +305,18 @@ or for datasets with higher [series cardinality](/influxdb/v1.5/concepts/glossar
 If you have lots of RAM you could set it to `0` to disable the cached memory
 limit and never get this error.
 You can also examine the `memBytes` field in the`cache` measurement in the
-[`_internal` database](/influxdb/v1.5/troubleshooting/statistics/#internal-monitoring)
+[`_internal` database](/influxdb/v1.5/administration/server_monitoring/#internal-monitoring)
 to get a sense of how big the caches are in memory.
 
 **Resources:**
 [Database Configuration](/influxdb/v1.5/administration/config/)
+
+## already killed
+The `already killed` error occurs when a query has already been killed, but
+there are subsequent kill attempts before the query has exited.
+When a query is killed, it may not exit immediately.
+It will be in the `killed` state, which means the signal has been sent, but the
+query itself has not hit an interrupt point.
+
+**Resources:**
+[Query Management](/influxdb/v1.0/troubleshooting/query_management/)

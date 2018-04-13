@@ -1,5 +1,8 @@
 ---
 title: What's new in InfluxDB 1.5.x
+aliases:
+  - /influxdb/v1.5/administration/differences/
+  - /influxdb/v1.5/administration/previous_differences/
 menu:
   influxdb_1_5:
     name: What's new
@@ -34,7 +37,7 @@ For more details on TSI, see the following:
 
 ## Enterprise-compatible backup and restore for InfluxDB OSS
 
-> ***Note:*** For InfluxDB Enterprise clusters, see [Backing up and restoring in InfluxDB Enterprise](/influxdb_enterprise/v1.5/administration/backup-and-restore/).
+> ***Note:*** For InfluxDB Enterprise clusters, see [Backing up and restoring in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/backup-and-restore/).
 
 Starting with InfluxDB 1.5, InfluxDB OSS supports enterprise-compatible backup and restore. The InfluxDB OSS `backup` utility provides:
 
@@ -45,7 +48,7 @@ Starting with InfluxDB 1.5, InfluxDB OSS supports enterprise-compatible backup a
 
 The online `restore` utility in InfluxDB OSS supports the new Enterprise-compatible backup format, but the the legacy backup format is still available.
 
-For details about the new backup and restore functionality, see [Backing up and restoring in InfluxDB OSS](/influxdb/v1.5/administration/backup-and-restore/).
+For details about the new backup and restore functionality, see [Backing up and restoring in InfluxDB OSS](/influxdb/v1.5/administration/backup_and_restore/).
 
 
 ## Structured logging

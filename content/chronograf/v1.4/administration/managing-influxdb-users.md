@@ -1,9 +1,11 @@
 ---
 title: Managing InfluxDB users in Chronograf
+aliases:
+  - /chronograf/v1.4/administration/user-management/
 menu:
   chronograf_1_4:
     name: Managing InfluxDB users
-    weight: 40
+    weight: 60
     parent: Administration
 ---
 
@@ -26,7 +28,8 @@ The steps are the same for InfluxDB OSS instances and InfluxEnterprise clusters.
 > ***InfluxEnterprise clusters:***
 > Repeat the first three steps for each data node in a cluster.
 
-### Step 1: Enable authentication
+### Step 1: Enable authentication.
+
 Enable authentication in the InfluxDB configuration file.
 For most Linux installations, the configuration file is located in `/etc/influxdb/influxdb.conf`.
 
@@ -44,7 +47,7 @@ In the `[http]` section of the InfluxDB configuration file (`influxdb.conf`), un
   auth-enabled = true #
 ```
 
-### Step 2: Restart the InfluxDB service
+### Step 2: Restart the InfluxDB service.
 
 Restart the InfluxDB service for your configuration changes to take effect:
 
@@ -52,7 +55,8 @@ Restart the InfluxDB service for your configuration changes to take effect:
 ~# sudo systemctl restart influxdb
 ```
 
-### Step 3: Create an admin user
+### Step 3: Create an admin user.
+
 Because authentication is enabled, you need to create an [admin user](/influxdb/latest/query_language/authentication_and_authorization/#user-types-and-privileges) before you can do anything else in the database.
 Run the `curl` command below to create an admin user, replacing:
 
@@ -70,7 +74,7 @@ A successful `CREATE USER` query returns a blank result:
 {"results":[{"statement_id":0}]}   <--- Success!
 ```
 
-### Step 4: Edit the InfluxDB source in Chronograf
+### Step 4: Edit the InfluxDB source in Chronograf.
 
 If you've already [connected your database to Chronograf](/chronograf/latest/introduction/getting-started/#3-connect-to-chronograf), update the connection configuration in Chronograf with your new username and password.
 Edit existing InfluxDB database sources by navigating to the Chronograf configuration page and clicking on the name of the source.
@@ -83,7 +87,7 @@ On the **Chronograf Admin** page:
 * Change user passwords
 * Assign admin and remove admin permissions to or from a user
 
-![InfluxDB OSS user management](/img/chronograf/v1.4/admin-usermanagement-oss.png)
+![InfluxDB OSS user management](/img/chronograf/chrono-admin-usermanagement-oss.png)
 
 InfluxDB users are either admin users or non-admin users.
 See InfluxDB's [authentication and authorization](/influxdb/latest/query_language/authentication_and_authorization/#user-types-and-privileges) documentation for more information about those user types.
@@ -124,7 +128,7 @@ On the `Admin` page:
 * Create, edit, and delete roles
 * Assign and remove roles to or from a user
 
-![InfluxDB Enterprise user management](/img/chronograf/v1.4/admin-usermanagement-cluster.png)
+![InfluxDB Enterprise user management](/img/chronograf/chrono-admin-usermanagement-cluster.png)
 
 ### User types
 
@@ -300,4 +304,4 @@ For example, the image below contains three roles: `CREATOR`, `DESTROYER`, and `
 `CREATOR` includes two permissions (`CreateDatbase` and `CreateUserAndRole`) and is assigned to one user (`chrononut`).
 `DESTROYER` also includes two permissions (`DropDatabase` and `DropData`) and is assigned to two users (`chrononut` and `chronelda`).
 
-![InfluxDB OSS user management](/img/chronograf/v1.4/admin-usermanagement-roles.png)
+![InfluxDB OSS user management](/img/chronograf/chrono-admin-usermanagement-roles.png)

@@ -2,42 +2,14 @@
 title: Release Notes/Changelog
 menu:
   kapacitor_1_4:
-    weight: 1
     parent: about_the_project
 ---
 
-## v1.4.1.0 [unreleased]
-
-### Release notes
-
-Kapacitor v1.4.1 adds many new features, highlighted here:
-
-- Allow adding multiple event handlers to a rule.
-- Add "send test alert" button to test Kapacitor alert configurations.
-- Link to specified Kapacitor config panel from rule builder alert handlers.
-- Add auto-refresh widget to Hosts List page.
-
-#### UI improvements
-
-- Improve clarity of terminology surrounding InfluxDB and Kapacitor connections.
-
-### Bug Fixes
-
-- Fix TICKscript Sensu alerts when no `group by` tags are selected.
-- Remove CLI options from `systemd` service file.
-
-## v1.4.0.1 [2017-1-9]
-
-### Features
-
-- Add separate CLI flag for canned sources, kapacitors, dashboards, and organizations.
-- Add Telegraf interval configuration.
+## v1.4.1 [2018-03-13]
 
 ### Bug fixes
-- Allow insecure (self-signed) certificates for Kapacitor and InfluxDB.
-- Fix positioning of custom time indicator.
 
-
+* Fix bug where task type was invalid when using var for stream/batch
 
 ## v1.4.0 [2017-12-08]
 
@@ -46,12 +18,13 @@ Kapacitor v1.4.1 adds many new features, highlighted here:
 Kapacitor v1.4.0 adds many new features, highlighted here:
 
 - Load directory service for adding topic handlers, tasks, and templates from `dir`.
-- Structed Logging with logging API endpoints that can be used to tail logs for specified tasks.
+- Structured logging with logging API endpoints that can be used to tail logs for specified tasks.
 - Autoscale support for Docker Swarm and AWS EC2.
 - Sideload data into your TICKscript streams from external sources.
 - Fully-customizable HTTP Post body for the alert Post handler and the HTTP Post node.
 
 ### Breaking changes
+
 #### Change over internal API to use message passing semantics.
 The `Combine` and `Flatten` nodes previously operated (erroneously) across batch boundaries -- this has been fixed.
 
@@ -112,17 +85,17 @@ The `Combine` and `Flatten` nodes previously operated (erroneously) across batch
 
 ## v1.3.3 [2017-08-11]
 
-### Bugfixes
+### Bug fixes
 - Expose pprof without authentication, if enabled.
 
 ## v1.3.2 [2017-08-08]
 
-### Bugfixes
+### Bug fixes
 - Use details field from alert node in PagerDuty.
 
 ## v1.3.1 [2017-06-02]
 
-### Bugfixes
+### Bug fixes
 
 - Proxy from environment for HTTP request to Slack
 - Fix derivative node preserving fields from previous point in stream tasks

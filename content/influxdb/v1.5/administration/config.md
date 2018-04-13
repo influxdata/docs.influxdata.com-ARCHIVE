@@ -3,7 +3,7 @@ title: Configuring InfluxDB OSS
 menu:
   influxdb_1_5:
     name: Configuring InfluxDB
-    weight: 70
+    weight: 10
     parent: administration
 ---
 
@@ -18,18 +18,17 @@ The InfluxDB OSS configuration file contains configuration settings specific to 
   * [Global settings](#global-settings)
   * [Metastore settings `[meta]`](#metastore-settings-meta)
   * [Data settings `[data]`](#data-settings-data)
-  * [Coordination settings `[coordinator]`](#coordination-settings-coordinator)
-  * [Retention settings `[retention]`](#retention-settings-retention)
-  * [Shard precreation `[shard-precreation]`](#shard-precreation-settings-shard-precreation)
+  * [Query management settings `[coordinator]`](#query-management-settings-coordinator)
+  * [Retention policy settings `[retention]`](#retention-policy-settings-retention)
+  * [Shard precreation settings `[shard-precreation]`](#shard-precreation-settings-shard-precreation)
   * [Monitoring settings `[monitor]`](#monitoring-settings-monitor)
-  * [Administration settings `[admin]`](#administration-settings-admin)
   * [HTTP endpoint settings `[http]`](#http-endpoint-settings-http)
   * [Subscription settings `[subscriber]`](#subscription-settings-subscriber)
   * [Graphite settings `[[graphite]]`](#graphite-settings-graphite)
   * [CollectD settings `[[collectd]]`](#collectd-settings-collectd)
   * [OpenTSB settings `[[opentsdb]]`](#opentsdb-settings-opentsdb)
   * [UDP settings `[[udp]]`](#udp-settings-udp)
-  * [Continuous queries settings `[continuous_queries]`](#continuous-queries-settings-continuous_queries)
+  * [Continuous queries settings `[continuous_queries]`](#continuous-queries-settings-continuous-queries)
 
 ## Configuration overview
 
@@ -220,9 +219,9 @@ Environment variable: `INFLUXDB_DATA_DIR`
 ### `index-version = "inmem"`
 
 The type of shard index to use for new shards.
-The default (`inmem`) index is an in-memory index that recreated at startup.
+The default (`inmem`) index is an in-memory index that is recreated at startup.
 
-To use the TSI (time series index) disk-based indexing, set the value to `tsi1`.
+To enable the Time Series Index (TSI) disk-based index, set the value to `tsi1`.
 
 Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 
@@ -319,7 +318,7 @@ Environment variable: `INFLUXDB_DATA_MAX_SERIES_PER_DATABASE`
 
 ### `max-values-per-tag = 100000`
 
-The maximum number of [tag values](/influxdb/v1.5/concepts/glossary/#tag-values)
+The maximum number of [tag values](/influxdb/v1.5/concepts/glossary/#tag-value)
 allowed per [tag key]((/influxdb/v1.5/concepts/glossary/#tag-key).
 The default setting is `100000`.
 Change the setting to `0` to allow an unlimited number of tag values per tag
@@ -357,7 +356,7 @@ Environment variable: `INFLUXDB_COORDINATOR_MAX_CONCURRENT_QUERIES`
 The maximum time for which a query can run on your instance before InfluxDB
 kills the query.
 The default setting (`0`) allows queries to run with no time restrictions.
-This setting is a [duration](#configuration-settings).
+This setting is a [duration](#configuration-overview).
 
 Environment variable: `INFLUXDB_COORDINATOR_QUERY_TIMEOUT`
 
@@ -367,7 +366,7 @@ The maximum time a query can run after which InfluxDB logs the query with a
 `Detected slow query` message.
 The default setting (`"0"`) will never tell InfluxDB to log the query.
 This setting is a
-[duration](#configuration-settings).
+[duration](#configuration-overview).
 
 Environment variable: `INFLUXDB_COORDINATOR_LOG_QUERIES_AFTER`
 
@@ -451,7 +450,7 @@ If set to `false` it will make it substantially more difficult to diagnose issue
 
 Environment variable: `INFLUXDB_MONITOR_STORE_ENABLED`
 
-### `store-database = "\_internal"`
+### `store-database = "_internal"`
 
 The destination database for recorded statistics.
 
@@ -462,14 +461,6 @@ Environment variable: `INFLUXDB_MONITOR_STORE_DATABASE`
 The interval at which InfluxDB records statistics.
 
 Environment variable: `INFLUXDB_MONITOR_STORE_INTERVAL`
-
-## Administration settings `[admin]`
-
-<dt> Starting with version 1.3, the web admin interface is no longer available in InfluxDB.
-The interface does not run on port `8083` and InfluxDB ignores the `[admin]` section in the configuration file if that section is present.
-[Chronograf](/chronograf/latest/) replaces the web admin interface with improved tooling for querying data, writing data, and database management.
-See [Chronograf's transition guide](/chronograf/latest/guides/transition-web-admin-interface/) for more information.
-</dt>
 
 ## HTTP endpoint settings `[http]`
 
@@ -629,7 +620,7 @@ Environment variable: `INFLUXDB_LOGGING_FORMAT`
 
 ### `level = "info"`
 
-Determines which level of logs will be emitted. Valid values are:
+Sets the log level to be emitted. Valid logging level values are `error`, `warn`, `info`(default), and `debug`. Logs that are equal to, or above, the specified level will be emitted.
 
 Environment variable: `INFLUXDB_LOGGING_LEVEL`
 
@@ -642,7 +633,7 @@ Environment variable: `INFLUXDB_LOGGING_SUPPRESS_LOGO`
 
 ## Subscription settings `[subscriber]`
 
-This section controls how [Kapacitor](/kapacitor/v1.5/) will receive data.
+This section controls how [Kapacitor](/kapacitor/v1.4/) will receive data.
 
 ### `enabled = true`
 

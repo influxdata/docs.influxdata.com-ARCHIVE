@@ -1,10 +1,10 @@
 ---
 title: Managing Chronograf security
-aliases: /chronograf_1_4/security-best-practices/
+aliases: /chronograf/v1.4/administration/security-best-practices/
 menu:
   chronograf_1_4:
     name: Managing Chronograf security
-    weight: 50
+    weight: 70
     parent: Administration
 ---
 
@@ -13,13 +13,15 @@ menu:
 * [Chronograf security](#chronograf-security)
 * [OAuth 2.0 providers with JWT tokens](#oauth-2-0-providers-with-jwt-tokens)
 * [OAuth 2.0 providers](#oauth-2-0-providers)
-  * [GitHub](#github)
-  * [Google](#google)
-  * [Auth0](#auth0)
-  * [Generic](#generic)
+  * [Configuring GitHub authentication](#configuring-github-authentication)
+  * [Configuring Google authentication](#configuring-google-authentication)
+  * [Configuring Auth0 authentication](#configuring-auth0-authentication)
+  * [Configuring Heroku authentication](#configuring-heroku-authentication)
+  * [Configuring Okta authentication](#configuring-okta-authentication)
+  * [Configuring Generic authentication](#configuring-generic-authentication)
 * [Configuring authentication duration](#configuring-authentication-duration)
-* [TLS (Transport Layer Security) and HTTPS](#tls--transport-layer-security-and-https)
-* [Testing with self-signed certificates](#testing-with-self-signed-certificates)
+* [Configuring TLS (Transport Layer Security) and HTTPS](#configuring-tls-transport-layer-security-and-https)
+  - [Testing with self-signed certificates](#testing-with-self-signed-certificates)
 
 ## Chronograf security
 
@@ -42,11 +44,7 @@ To configure any of the supported OAuth 2.0 providers to work with Chronograf, y
 
 Set the value of the TOKEN_SECRET environment variable to a secure, arbitrary string. Chronograf will use this secret to generate the JWT Signature for all access tokens.
 
-**Example:**
-
-```sh
-export TOKEN_SECRET=Super5uperUdn3verGu355!
-```
+**Example:** `TOKEN_SECRET=Super5uperUdn3verGu355!`
 
 > ***InfluxEnterprise clusters:*** If you are running multiple Chronograf servers in a high availability configuration, set the `TOKEN_SECRET` environment variable on each server to ensure that users can stay logged in.
 
@@ -56,14 +54,16 @@ OAuth 2.0 authorization and authentication in Chronograf require you to specify 
 
 Configuration steps, including required and optional configuration options, for the following supported authentication providers are provided in these sections below:
 
-* [GitHub](#github)
-* [Google](#google)
-* [Auth0](#auth0)
-* [Generic](#generic)
+* [GitHub](#configuring-github-authentication)
+* [Google](#configuring-google-authentication)
+* [Auth0](#configuring-auth0-authentication)
+* [Heroku](#configuring-heroku-authentication)
+* [Okta](#configuring-okta-authentication)
+* [Generic](#configuring-generic-authentication)
 
 > ***Note:*** Each of the following OAuth 2.0 provider configurations require the `TOKEN_SECRET` you created in the previous section.
 
-### GitHub
+### Configuring GitHub authentication
 
 Chronograf supports using the [GitHub OAuth 2.0 authentication](https://developer.github.com/apps/building-oauth-apps/) to request authorization and provide authentication. To use GitHub authentication, you need to register a GitHub application and use the assigned Client ID and Client Secret.
 
@@ -156,7 +156,7 @@ To support multiple organizations, use a comma-delimited list.
 export GH_ORGS=hill-valley-preservation-sociey,the-pinheads
 ```
 
-### Google
+### Configuring Google authentication
 
 Chronograf supports using the [Google OAuth 2.0 authentication proivder](https://developers.google.com/identity/protocols/OAuth2) to request authorization and provide authentication. To use Google authentication, you need to register a Google application and use the assigned Client ID and Client Secret, as well as specify a Public URL.
 
@@ -224,7 +224,7 @@ For example, to permit access only from `biffspleasurepalace.com` and `savethecl
 export GOOGLE_DOMAINS=biffspleasurepalance.com,savetheclocktower.com
 ```
 
-### Auth0
+### Configuring Auth0 authentication
 
 [Auth0](https://auth0.com/) implements identity protocol support for OAuth 2.0. See [OAuth 2.0](https://auth0.com/docs/protocols/oauth2) for details about the Auth0 implementation.
 
@@ -274,57 +274,94 @@ Next, you will need to set the Chronograf [`AUTH0_ORGS`](/chronograf/latest/admi
 
 An `--auth0-organizations` command line option is also available, but it is limited to a single organization and does not accept a comma-separated list like its environment variable equivalent.
 
-### Generic
+### Configuring Heroku authentication
 
-#### Creating OAuth 2.0 applications using your own provider
+To enable Chronograf support using the Heroku OAuth 2.0 provider:
 
-The generic OAuth 2.0 provider is very similar to the GitHub provider, but
-you are able to set your own authentication, token, and API URLs.
-The callback URL path will be `/oauth/generic/callback`.
-For example, if Chronograf is hosted at `https://localhost:8888` then the full callback URL would be  `https://localhost:8888/oauth/generic/callback`.
+#### Creating Heroku Applications
 
-The generic OAuth 2.0 provider requires the following five environment variables (or the corresponding command line options):
+To obtain a client ID and application secret for Heroku, follow the guide posted [here](https://devcenter.heroku.com/articles/oauth#register-client).
+Once your application has been created, those two values should be inserted into the following environment variables (or associated command line option):
 
-* `GENERIC_CLIENT_ID`: this application's client [identifier](https://tools.ietf.org/html/rfc6749#section-2.2) issued by the provider
-* `GENERIC_CLIENT_SECRET`: this application's [secret](https://tools.ietf.org/html/rfc6749#section-2.3.1) issued by the provider
-* `GENERIC_AUTH_URL`: OAuth 2.0 provider's authorization [endpoint](https://tools.ietf.org/html/rfc6749#section-3.1) URL
-* `GENERIC_TOKEN_URL`: OAuth 2.0 provider's token endpoint [endpoint](https://tools.ietf.org/html/rfc6749#section-3.2) is used by the client to obtain an access token
+* `HEROKU_CLIENT_ID`
+* `HEROKU_SECRET`
+
+#### Optional Heroku organizations
+
+To restrict access to members of specific Heroku organizations, use
+the `HEROKU_ORGS` environment variable (or associated command line option). Multiple values must be comma-separated.
+
+**Example**
+
+To permit access from the `hill-valley-preservation-society` organization and `the-pinheads` organization, we would use the following environment variable:
+
+```sh
+export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
+```
+### Configuring Okta authentication
+
+[Okta](https://developer.okta.com/) is a popular, OAuth 2.0 compliant authorization and authentication provider that can be used with Chronograf to allow access based on granted scopes and permissions.
+
+**To enable Chronograf support using an Okta OAuth 2.0 application:**
+
+1. Create a new Okta web app following the steps in the following Okta documentation: [Implement the Authorization Code Flow](https://developer.okta.com/authentication-guide/implementing-authentication/auth-code).
+
+  * In the **General Settings** section, find the **Allowed grant types** listing and select
+  only the **Client acting on behalf of a user:** **Authorization Code** option.
+  * In the **LOGIN** section, set the **Login redirect URIs* and **Initiate login URI** to `http://localhost:8888/oauth/okta/callback`
+    - This is the callback URL for Chronograf.
+
+2. Set the following Chronograf environment variables (or associated command line options):
+
+  * `GENERIC_NAME=okta`
+  * `GENERIC_CLIENT_ID=<okta_client_ID>``
+    - The **Client ID** value is in the **Client Credentials** section.
+  * `GENERIC_CLIENT_SECRET=<okta_client_secret>``
+    - The **Client secret** value is in the **Client Credentials** section.
+  * `GENERIC_AUTH_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/authorize`
+  * `GENERIC_TOKEN_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/token`
+  * `GENERIC_API_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/userinfo`
+  * `PUBLIC_URL=http://localhost:8888`
+  * `TOKEN_SECRET=secretsecretsecret`
+  * `GENERIC_SCOPES=openid,profile,email`
+
+3. Restart the Chronograf service.
+
+Your users should now be able to sign into Chronograf using the new Okta provider.
+
+### Configuring Generic authentication
+
+#### Configuring Chronograf to use any OAuth 2.0 provider
+
+Chronograf can be configured to work with any OAuth 2.0 provider, including those defined above, by using the Generic configuration options below.
+
+Depending on your OAuth 2.0 provider, many or all of the following environment variables (or corresponding command line options) are required by Chronograf when using the Generic configuration:
+
+* `GENERIC_CLIENT_ID`: Application client [identifier](https://tools.ietf.org/html/rfc6749#section-2.2) issued by the provider
+* `GENERIC_CLIENT_SECRET`: Application client [secret](https://tools.ietf.org/html/rfc6749#section-2.3.1) issued by the provider
+* `GENERIC_AUTH_URL`: Provider's authorization [endpoint](https://tools.ietf.org/html/rfc6749#section-3.1) URL
+* `GENERIC_TOKEN_URL`: Provider's token [endpoint](https://tools.ietf.org/html/rfc6749#section-3.2) URL used by the Chronograf client to obtain an access token
+* `GENERIC_API_URL`: Provider's [OpenID UserInfo endpoint](https://connect2id.com/products/server/docs/api/userinfo)] URL used by Chronograf to request user data
+* `GENERIC_API_KEY`: JSON lookup key for [OpenID UserInfo](https://connect2id.com/products/server/docs/api/userinfo)] (known to be required for Microsoft Azure, with the value `userPrincipalName`)
+* `GENERIC_SCOPES`: [Scopes](https://tools.ietf.org/html/rfc6749#section-3.3) of user data required for your instance of Chronograf, such as user email and OAuth provider organization
+  - Multiple values must be space-delimited, e.g. `user:email read:org`
+  - These may vary by OAuth 2.0 provider
+  - Default value: `user:email`
+* `PUBLIC_URL`: Full public URL used to access Chronograf from a web browser, i.e. where Chronograf is hosted
+  - Used by Chronograf, for example, to construct the callback URL
 * `TOKEN_SECRET`: Used to validate OAuth [state](https://tools.ietf.org/html/rfc6749#section-4.1.1) response. (see above)
 
-#### Optional scopes
+#### Optional environment variables
 
-By default Chronograf will ask for the `user:email` [scope](https://tools.ietf.org/html/rfc6749#section-3.3) of the client.
-If your provider scopes email access under a different scope or scopes provide them as comma-separated values in the `GENERIC_SCOPES` environment variable.
-```sh
-export GENERIC_SCOPES="openid,email" # Requests access to openid and email scopes
-```
+The following environment variables (and corresponding command line options) are also available for optional use:
 
-#### Optional email domains
-
-The generic OAuth 2.0 provider has the following two optional environment variables (and corresponding command line options):
-
-* `GENERIC_API_URL`: URL that returns [OpenID UserInfo JWT](https://connect2id.com/products/server/docs/api/userinfo) (specifically email address)
 * `GENERIC_DOMAINS`: Email domain where email address must include.
+* `GENERIC_NAME`: Value used in the callback URL in conjunction with `PUBLIC_URL`, e.g. `<PUBLIC_URL>/oauth/<GENERIC_NAME>/callback`
+  - This value is also used in the text for the Chronograf Login button
+  - Default value is `generic`
+  - So, for example, if `PUBLIC_URL` is `https://localhost:8888` and `GENERIC_NAME` is its default value, then the callback URL would be `https://localhost:8888/oauth/generic/callback`, and the Chronograf Login button would read `Log in with Generic`
+  - While using Chronograf, this value should be supplied in the `Provider` field when adding a user or creating an organization mapping.
 
-#### Customizing the login button text and callback URL
-
-Setting the `GENERIC_NAME` environment variable results in the specified value appearing in both the callback URL and the login button text. This allows you to customize the login by replacing "generic" in both locations with a more meaningful name.
-
-> ***Note:*** Use a short, URL-friendly name. The GENERIC_NAME value is lowercased in the callback URL
-
-**Example:**
-
-```sh
-export GENERIC_NAME="GitLab"
-```
-The callback URL changes from:
-```
-https://localhost:8888/oauth/generic/callback
-```
-to:
-````https://localhost:8888/oauth/gitlab/callback`
-
-Also, on the Chronograf login page, the text on the authentication button changes from `Log in with generic` to `Log in with GitLab`.
 
 ### Configuring authentication duration
 
@@ -342,7 +379,7 @@ export AUTH_DURATION=1080h
 ```
 Additionally, for greater security, if you want to require re-authentication every time the browser is closed, set `AUTH_DURATION` to `0`. This makes the cookie transient (aka "in-memory").
 
-## TLS (Transport Layer Security) and HTTPS
+## Configuring TLS (Transport Layer Security) and HTTPS
 
 The TLS (Transport Layer Security) cryptographic protocol is supported in Chronograf to provides server authentication, data confidentiality, and data integrity. Using TLS secures traffic between a server and web browser and enables the use of HTTPS.
 

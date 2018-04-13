@@ -1,6 +1,6 @@
 ---
 title: How to contribute a new output to Kapacitor
-newversionredirect: /about_the_project/custom_output/
+newversionredirect: about_the_project/custom_output/
 menu:
   kapacitor_012:
     name: Writing your own Output node

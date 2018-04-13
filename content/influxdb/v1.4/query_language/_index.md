@@ -51,7 +51,7 @@ Covers the
 [advanced syntax](/influxdb/v1.4/query_language/continuous_queries/#advanced-syntax)
 ,
 and
-[common use cases](/influxdb/v1.4/query_language/continuous_queries/#cq-use-cases)
+[common use cases](/influxdb/v1.4/query_language/continuous_queries/#continuous-query-use-cases)
 for
 [Continuous Queries](/influxdb/v1.4/concepts/glossary/#continuous-query-cq).
 This page also describes how to
@@ -68,9 +68,9 @@ Covers the use of mathematical operators in InfluxQL.
 Covers how to
 [set up authentication](/influxdb/v1.4/query_language/authentication_and_authorization/#set-up-authentication)
 and how to
-[authenticate requests](/influxdb/v1.4/query_language/authentication_and_authorization/#authenticating-requests) in InfluxDB.
+[authenticate requests](/influxdb/v1.4/query_language/authentication_and_authorization/#authenticate-requests) in InfluxDB.
 This page also describes the different
-[user types](/influxdb/v1.4/query_language/authentication_and_authorization/#user-types-and-their-privileges) and the InfluxQL for
+[user types](/influxdb/v1.4/query_language/authentication_and_authorization/#user-types-and-privileges) and the InfluxQL for
 [managing database users](/influxdb/v1.4/query_language/authentication_and_authorization/#user-management-commands).
 
 ## [InfluxQL reference](/influxdb/v1.4/query_language/spec/)

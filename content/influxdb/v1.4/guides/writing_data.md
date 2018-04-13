@@ -3,11 +3,11 @@ title: Writing data with the HTTP API
 
 menu:
   influxdb_1_4:
-    weight: 0
+    weight: 10
     parent: guides
 ---
 
-There are many ways to write data into InfluxDB including the [command line interface](/influxdb/v1.4/tools/shell/), [client libraries](/influxdb/v1.4/clients/api/) and plugins for common data formats such as [Graphite](/influxdb/v1.4/write_protocols/graphite/).
+There are many ways to write data into InfluxDB including the [command line interface](/influxdb/v1.4/tools/shell/), [client libraries](/influxdb/v1.4/clients/api/) and plugins for common data formats such as [Graphite](https://github.com/influxdata/influxdb/blob/master/services/graphite/README.md).
 Here we'll show you how to create a database and write data to it using the built-in HTTP API.
 
 ## Creating a database using the HTTP API
@@ -109,7 +109,7 @@ The InfluxDB API makes no attempt to be RESTful.
 
 **Examples of error responses:**
 
-* Writing a float to a field that previously accepted booleans:
+* Writing a float to a field that previously accepted Booleans:
 
 ```bash
 curl -i -XPOST 'http://localhost:8086/write?db=hamlet' --data-binary 'tobeornottobe booleanonly=true'

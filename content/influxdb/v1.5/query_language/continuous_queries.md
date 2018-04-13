@@ -3,7 +3,8 @@ title: InfluxQL Continuous Queries
 
 menu:
   influxdb_1_5:
-    weight: 40
+    name: Continuous Queries
+    weight: 50
     parent: query_language
 ---
 
@@ -28,7 +29,7 @@ specified measurement.
   <tr>
     <td><a href="#common-issues-with-basic-syntax">Common Issues with Basic Syntax</a></td>
     <td><a href="#common-issues-with-advanced-syntax">Common Issues with Advanced Syntax</a></td>
-    <td><a href="#further-reading">Further Reading</a></td>
+    <td><a href="#further-information">Further information</a></td>
   </tr>
 </table>
 
@@ -79,7 +80,7 @@ When the CQ executes, it runs a single query for the time range between
 If the `GROUP BY time()` interval is one hour and the current time is 17:00,
 the query's time range is between 16:00 and 16:59.999999999.
 
-#### Examples
+#### Examples of basic syntax
 
 The examples below use the following sample data in the `transportation`
 database.
@@ -350,7 +351,7 @@ Note that the basic syntax does not support using
 to change the value reported for intervals with no data.
 Basic syntax CQs ignore `fill()` if it's included in the CQ query.
 A possible workaround is to use the
-[advanced CQ syntax](#example-4-configure-the-cq-s-time-range-and-fill-empty-results).
+[advanced CQ syntax](#example-4-configuring-cq-time-ranges-and-filling-empty-results).
 
 ##### Issue 2: Resampling previous time intervals
 <br>
@@ -760,7 +761,7 @@ outlines a feature request for CQs to support gaps in data coverage.
 
 ## Continuous query management
 
-Only admin users are allowed to work with CQs. For more on user privileges, see [Authentication and Authorization](/influxdb/v1.5/query_language/authentication_and_authorization/#user-types-and-their-privileges).
+Only admin users are allowed to work with CQs. For more on user privileges, see [Authentication and Authorization](/influxdb/v1.5/query_language/authentication_and_authorization/#user-types-and-privileges).
 
 ### Listing Continuous Queries
 
@@ -817,6 +818,15 @@ Drop the `idle_hands` CQ from the `telegraf` database:
 CQs cannot be altered once they're created.
 To change a CQ, you must `DROP` and re`CREATE` it with the updated settings.
 
+### Continuous Query Statistics
+
+If `query-stats-enabled` is set to `true` in your `influxdb.conf` or using the `INFLUXDB_CONTINUOUS_QUERIES_QUERY_STATS_ENABLED` environment variable, data will be written to `_internal` with information about when continuous queries ran and their duration.
+Information about CQ configuration settings is available in the [Configuration](/influxdb/v1.5/administration/config/#continuous-queries-settings-continuous-queries) documentation.
+
+> **Note:** `_internal` houses internal system data and is meant for internal use.
+The structure of and data stored in `_internal` can change at any time.
+Use of this data falls outside the scope of official InfluxData support.
+
 ## Continuous Query Use Cases
 
 ### Downsampling and Data Retention
@@ -843,7 +853,7 @@ the population of graphs and dashboards.
 
 ### Substituting for a `HAVING` Clause
 
-InfluxQL does not support [`HAVING` clauses](https://en.wikipedia.org/wiki/Having_(SQL\)).
+InfluxQL does not support [`HAVING` clauses](https://en.wikipedia.org/wiki/Having_%28SQL%29).
 Get the same functionality by creating a CQ to aggregate the data and querying
 the CQ results to apply the `HAVING` clause.
 

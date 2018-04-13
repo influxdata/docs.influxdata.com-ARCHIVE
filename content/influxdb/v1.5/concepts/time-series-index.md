@@ -1,14 +1,14 @@
 ---
-title: TSI (Time Series Index) overview
+title: Time Series Index (TSI) overview
 
 menu:
   influxdb_1_5:
-    name: TSI (Time Series Index) overview
-    weight: 100
+    name: Time Series Index (TSI) overview
+    weight: 70
     parent: concepts
 ---
 
-## TSI (Time Series Index)
+## Time Series Index (TSI)
 
 In order to support a large number of time series, that is, a very high cardinality in the number of unique time series that the database stores, InfluxData has added the new Time Series Index (TSI).
 InfluxData supports customers using InfluxDB with tens of millions of time series.
@@ -26,20 +26,20 @@ InfluxDB actually looks like two databases in one, a time series data store and 
 
 The Time-Structured Merge Tree (TSM) engine that InfluxData built in 2015 and continued enhancing in 2016 was an effort to solve the problem of getting maximum throughput, compression, and query speed for raw time series data.
 Up until TSI, the inverted index was an in-memory data structure that was built during startup of the database based on the data in TSM.
-This meant that for every measurement, tag key/value pair, and field name, there was a lookup table in-memory to map those bits of metadata to an underlying time series.
+This meant that for every measurement, tag key-value pair, and field name, there was a lookup table in-memory to map those bits of metadata to an underlying time series.
 For users with a high number of ephemeral series, memory utilization continued increasing as new time series were created.
 And, startup times increased since all of that data would have to be loaded onto the heap at start time.
 
->> For details, see [TSM-based data storage and in-memory indexing](/influxdb/v1.5/concepts/storage-engine/).
+> For details, see [TSM-based data storage and in-memory indexing](/influxdb/v1.5/concepts/storage_engine/).
 
-### Time series index (TSI)
+### Time Series Index (TSI)
 
 The new time series index (TSI) moves the index to files on disk that we memory map.
 This means that we let the operating system handle being the Least Recently Used (LRU) memory.
 Much like the TSM engine for raw time series data we have a write-ahead log with an in-memory structure that gets merged at query time with the memory-mapped index.
 Background routines run constantly to compact the index into larger and larger files to avoid having to do too many index merges at query time.
 Under the covers, we’re using techniques like Robin Hood Hashing to do fast index lookups and HyperLogLog++ to keep sketches of cardinality estimates.
-The latter will give us the ability to add things to the query languages like the [SHOW CARDINALITY](/influxdb/v1.5/query-language/spec#show-cardinality) queries.
+The latter will give us the ability to add things to the query languages like the [SHOW CARDINALITY](/influxdb/v1.5/query_language/spec#show-cardinality) queries.
 
 ### Issues solved by TSI and remaining to be solved
 

@@ -2,6 +2,7 @@
 title: Installing InfluxDB
 menu:
   influxdb_1_4:
+    name: Installing
     weight: 10
     parent: introduction
 ---
@@ -227,6 +228,14 @@ InfluxDB first checks for the `-config` option and then for the environment
 variable.
 
 See the [Configuration](/influxdb/v1.4/administration/config/) documentation for more information.
+
+### Data & WAL Directory Permissions
+
+Make sure the directories in which data and the [write ahead log (WAL)](/influxdb/v1.4/concepts/glossary/#wal-write-ahead-log) are stored are writable for the user running the `influxd` service.
+
+> **Note:** If the data and WAL directories are not writable, the `influxd` service will not start.
+
+Information about `data` and `wal` directory paths is available in the [Data settings](/influxdb/v1.4/administration/config/#data-settings-data) section of the [Configuring InfluxDB](/influxdb/v1.4/administration/config/) documentation.
 
 ## Hosting on AWS
 

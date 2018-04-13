@@ -23,12 +23,12 @@ Alerts are published to a `topic` and `handlers` subscribe to a topic.
 No matter which approach is used, the handlers need to be enabled and configured
 in the [configuration](/kapacitor/v1.4/administration/configuration/#optional-table-groupings)
 file.  If the handler requires sensitive information such as tokens and
-passwords, it can also be configured using the [Kapacitor HTTP API](/kapacitor/v1.4/working/api/#configuration).
+passwords, it can also be configured using the [Kapacitor HTTP API](/kapacitor/v1.4/working/api/#overriding-configurations).
 
 ## Push to handler
 
 Pushing messages to a handler is the basic approach presented in the
-[Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting_started/#trigger-alert-from-stream-data)
+[Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting-started/#triggering-alerts-from-stream-data)
 guide. This involves simply calling the relevant chaining method made available
 through the `alert` node.  Messages can be pushed to `log()` files, the `email()`
 service, the `httpOut()` cache and many [third party services](#list-of-handlers).
@@ -75,7 +75,7 @@ $ kapacitor define-topic-handler slack_cpu_handler.yaml
 ```
 
 Handler bindings can also be created over the HTTP API.  See the
-[Create a Handler](/kapacitor/v1.4/working/api/#create-a-handler) section of
+[Create a Handler](/kapacitor/v1.4/working/api/#creating-handlers) section of
 the HTTP API document.
 
 For a walk through on defining and using alert topics see the

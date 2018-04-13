@@ -268,6 +268,3 @@ Create more customized graphs and save them to a dashboard on Chronograf's Dashb
 See the [Create a Dashboard](/chronograf/v1.3/guides/create-a-dashboard/) guide for more information.
 
 That's it! You've successfully configured Telegraf to collect and write data, InfluxDB to store those data, and Chonograf to use those data for monitoring and visualization purposes.
-
-
-

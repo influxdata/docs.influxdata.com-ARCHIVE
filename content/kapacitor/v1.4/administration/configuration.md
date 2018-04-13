@@ -11,10 +11,10 @@ menu:
  * [Startup](#startup)
  * [The Kapacitor configuration file](#the-kapacitor-configuration-file)
  * [Kapacitor environment variables](#kapacitor-environment-variables)
- * [Configuring with The HTTP API](#configuration-with-the-http-api)
+ * [Configuring with the HTTP API](#configuring-with-the-http-api)
 
 Basic installation and startup of the Kapacitor service is covered in
-[Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting_started/).
+[Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting-started/).
 The basic principles of working with Kapacitor described there should be understood before continuing here.
 This document presents Kapacitor configuration in greater detail.
 
@@ -69,13 +69,14 @@ below.
 
 ## The Kapacitor configuration file
 
-The current configuration can be extracted using the `config` command of the
-Kapacitor daemon.
+The default configuration can be displayed using the `config` command of the Kapacitor daemon.
 
 `$ kapacitord config`
 
 A sample configuration file is also available in the Kapacitor code base.
 The most current version can be accessed on [github](https://github.com/influxdata/kapacitor/blob/master/etc/kapacitor/kapacitor.conf).
+
+To get current configuration settings, you can use the Kapacitor HTTP API to get configuration values for settings that can be changed while the Kapacitor service is running. See [Retrieving the current configuration](/kapacitor/v1.4/working/api/#retrieving-the-current-configuration).
 
 ### TOML
 
@@ -777,7 +778,7 @@ command line options to `kapacitord` started by `systemd`.
 * `KAPACITOR_CONFIG_PATH`: Sets the path to the configuration file.
 * `KAPACITOR_URL`: Used by the client application `kapacitor` to locate
 the `kapacitord` service.
-* `KAPACITOR_UNSAFE_SSL`: A boolean used by the client application `kapacitor`
+* `KAPACITOR_UNSAFE_SSL`: A Boolean used by the client application `kapacitor`
 to skip verification of the `kapacitord` certificate when connecting over SSL.
 
 ### Mapping properties to environment variables
@@ -805,7 +806,7 @@ configuration service (`[kubernetes].enabled`).
 
 ## Configuring with the HTTP API
 
-The Kapacitor [HTTP API](kapacitor/v1.4/working/api/) can also be used to override
+The Kapacitor [HTTP API](/kapacitor/v1.4/working/api/) can also be used to override
 certain parts of the configuration.
 This can be useful when a property may contain security sensitive information that should not be left in plain view in the file system, or when you need to reconfigure a service without restarting Kapacitor.
 To view which parts of the configuration are available,
@@ -813,7 +814,7 @@ pull the JSON file at the `/kapacitor/v1/config` endpoint.
 (e.g., http<span>:</span><span>//</span>localhost:9092<span>/</span>kapacitor<span>/</span>v1<span>/</span>config).
 
 Working with the HTTP API to override configuration properties is presented in
-detail in the [Configuration](/kapacitor/v1.4/working/api/#configuration) section
+detail in the [Configuration](/kapacitor/v1.4/working/api/#overriding-configurations) section
 of the HTTP API document.
 In order for overrides over the HTTP API to work,
 the `[config-override].enabled` property must be set to `true`.

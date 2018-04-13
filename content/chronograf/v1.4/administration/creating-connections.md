@@ -3,7 +3,7 @@ title: Creating InfluxDB and Kapacitor connections
 menu:
   chronograf_1_4:
     name: Creating InfluxDB and Kapacitor connections
-    weight: 30
+    weight: 50
     parent: Administration
 ---
 
@@ -23,7 +23,7 @@ menu:
 * **Make this the default source**: By default, this option is selected and this InfluxDB connection will be used when Chronograf is launched.
 
 4. Click the **Add Source** button. If the connection is valid, the Configuration page displays, including the new InfluxDB connection. If the connection cannot be created, the following error message appears: "Unable to create source: Error contacting source."
-5. To specify an active Kapacitor connection, you need to [create Kapacitor connections](#creating-kapacitor-connections) associated with this InfluxDB connection.
+5. To specify an active Kapacitor connection, you need to [create Kapacitor connections](#managing-kapacitor-connections) associated with this InfluxDB connection.
 
 >***Note:*** The **Switch Orgs** button at the bottom of the page will not save any fields you have filled out, but will open a list of your organizations to allow you to log into a different organization.
 
@@ -49,4 +49,4 @@ Kapacitor is the data processing component of the TICK stack. To use Kapacitor i
 * **Username**: Enter the username that will be shared for this connection.
 * **Password**: Enter the password.
 
-4. Click **Connect**. If the connection is valid, the message "Kapacitor Created! Configuring endpoints is optional." appears. To configure alert endpoints, see [Configuring alert endpoints](#configuring-alert-endpoints).
+4. Click **Connect**. If the connection is valid, the message "Kapacitor Created! Configuring endpoints is optional." appears. To configure alert endpoints, see [Configuring alert endpoints](/chronograf/v1.4/guides/configure-kapacitor-event-handlers/).

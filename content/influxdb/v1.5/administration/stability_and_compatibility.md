@@ -22,7 +22,6 @@ The [TSM](/influxdb/v1.5/concepts/glossary/#tsm-time-structured-merge-tree) stor
 
 The query engine will have additive changes over the course of the new releases. We’ll introduce new query functions and new functionality into the language without breaking backwards compatibility. We may introduce new protocol endpoints (like a binary format) and versions of the line protocol and query API to improve performance and/or functionality, but they will have to run in parallel with the existing versions. Existing versions will be supported for the entirety of the 1.x release line.
 
-
 ### Ongoing support
 
 We’ll continue to fix bugs on the 1.x versions of the [line protocol](/influxdb/v1.5/concepts/glossary/#line-protocol), query API, and TSM storage format. Users should expect to upgrade to the latest 1.x.x release for bug fixes, but those releases will all be compatible with the 1.0 API and won’t require data migrations. For instance, if a user is running 1.2 and there are bug fixes released in 1.3, they should upgrade to the 1.3 release. Until 1.4 is released, patch fixes will go into 1.3.x. Because all future 1.x releases are drop in replacements for previous 1.x releases, users should upgrade to the latest in the 1.x line to get all bug fixes.

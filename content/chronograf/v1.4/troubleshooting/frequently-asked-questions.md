@@ -2,11 +2,9 @@
 title: Frequently asked questions (FAQ)
 menu:
   chronograf_1_4:
-    weight: 20
+    weight: 10
     parent: Troubleshooting
 ---
-
-* [How do I connect Chronograf to an InfluxEnterprise cluster?](#how-do-i-connect-chronograf-to-an-influxenterprise-cluster)
 
 ## How do I connect Chronograf to an InfluxEnterprise cluster?
 
@@ -20,4 +18,4 @@ Enter the HTTP bind address of one of your cluster's meta nodes into that input 
 
 Note that the example above assumes that you do not have authentication enabled.
 If you have authentication enabled, the form requires username and password information.
-For more details about monitoring an InfluxEnterprise cluster, see the [Monitoring InfluxDB Enterprise clusters](/chronograf/latest/guides/monitoring-influxenterprise-clusters/) guide.
+For more details about monitoring an InfluxEnterprise cluster, see the [Monitor an InfluxEnterprise Cluster](/chronograf/latest/guides/monitoring-influxenterprise-clusters/) guide.

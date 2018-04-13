@@ -66,7 +66,7 @@ The next two columns, called `butterflies` and `honeybees`, are fields.
 Fields are made up of field keys and field values.
 <a name="field-key"></a>**Field keys** (`butterflies` and `honeybees`) are strings and they store metadata; the field key `butterflies` tells us that the field values `12`-`7` refer to butterflies and the field key `honeybees` tells us that the field values `23`-`22` refer to, well, honeybees.
 
-<a name="field-value"></a>**Field values** are your data; they can be strings, floats, integers, or booleans, and, because InfluxDB is a time series database, a field value is always associated with a timestamp.
+<a name="field-value"></a>**Field values** are your data; they can be strings, floats, integers, or Booleans, and, because InfluxDB is a time series database, a field value is always associated with a timestamp.
 The field values in the sample data are:
 
 ```

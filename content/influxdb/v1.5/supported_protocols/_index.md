@@ -1,5 +1,5 @@
 ---
-title: Supported Protocols in InfluxDB
+title: Supported protocols in InfluxDB
 ---
 
 

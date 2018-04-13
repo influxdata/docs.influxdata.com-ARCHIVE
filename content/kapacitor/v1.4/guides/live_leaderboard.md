@@ -10,7 +10,7 @@ menu:
     parent: guides
 ---
 
-**If you do not have a running Kapacitor instance check out the [getting started guide](/kapacitor/v1.4/introduction/getting_started/)
+**If you do not have a running Kapacitor instance check out the [getting started guide](/kapacitor/v1.4/introduction/getting-started/)
 to get Kapacitor up and running on localhost.**
 
 Today we are game developers.

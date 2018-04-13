@@ -31,6 +31,15 @@ a {
 
 .article {
 	background-color: @article-bg;
+	position: fixed;
+	overflow: auto;
+	height: ~"calc(100% - "@sidebar--toggle-height~" - "@nav-height~")";
+	width: 100%;
+
+	&::-webkit-scrollbar { background-color: @article-bg; width: @scrollbar-width; }
+	&::-webkit-scrollbar-track { background-color: @article-bg; }
+	&::-webkit-scrollbar-thumb { border: 4px solid @article-bg; background-color: @article-scrollbar; border-radius: @scrollbar-width/2; }
+
 }
 .article-section {
 	display: block;
@@ -86,7 +95,7 @@ a {
 	blockquote,
 	dt,
 	pre {
-		display: inline-block;
+		display: block;
 		margin-bottom: @margin-bottom-base;
 		line-height: 1.45em;
 	}
@@ -139,6 +148,12 @@ a {
 	h4 {
 		font-size: @heading4Size;
 		font-weight: 400;
+	}
+
+	&.section-landing{
+		h2 a.off-page:link:hover {
+			color: @default-link-color !important;
+		}
 	}
 
 	/* Markdown Elements */
@@ -196,7 +211,7 @@ a {
 		background-color: @article-line-color;
 	}
 	img {
-		width: 100%;
+		max-width: 100%;
 		height: auto;
 		border-radius: @radius;
 	}
@@ -394,11 +409,198 @@ a {
 }
 
 //
+// Landing Page h2s
+// --------------------------------------------------
+.section-landing{
+	h2.no-paragraph {
+		margin: 0 0 1rem;
+		border: none;
+	}
+	a.off-page:link:after {
+		content: '\ea43';
+		font-family: 'icomoon';
+		font-size: 1rem;
+		font-weight: normal;
+		vertical-align: bottom;
+		display: inline;
+		margin-left: .5rem;
+		opacity: .25;
+		transition: color 0.2s ease;
+		color: @default-text-color;
+	}
+}
+
+//
+// View in Chronograph Button
+// --------------------------------------------------
+.view-in-chronograf {
+	display: flex;
+	justify-content: flex-end;
+	position: relative;
+	background-color: @article-code-border;
+	margin-top: -1.1rem;
+	margin-bottom: 1rem;
+	padding: .15rem;
+	font-size: .8rem;
+	border-radius: 0 0 @radius @radius;
+	align-items: center;
+
+	.chronograf-btn {
+		display: inline-block;
+		padding: .45rem .6rem;
+		color: #fff !important;
+		background: linear-gradient(to left, @chronograf-dropdown-gradient-a, @c-pool);
+		border-radius: calc(~""@radius~" / 2");
+		transition: all .5s ease;
+
+		&:after {
+			content: '\e801';
+			margin-left: .4rem;
+			font-family: 'icomoon';
+		}
+
+		&:hover {
+			color: #fff !important;
+			opacity: 1;
+		}
+	}
+
+	.settings {
+		opacity: .25;
+		color: @article-text !important;
+		margin-right: .75em;
+		transition: opacity .2s ease;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+}
+
+// Modal Styles
+.modal-overlay {
+	display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+	opacity: .75;
+  background: linear-gradient(@chronograf-dropdown-gradient-a, @chronograf-dropdown-gradient-b)
+}
+
+.modal-content {
+	display: none;
+	background: @article-bg;
+	padding: 2rem 2rem 1.5rem;
+	border-radius: @radius;
+	position: fixed;
+	top: 10vh;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 1001;
+	width: 90vw;
+	max-width: 38rem;
+	transition: top .4s ease;
+
+	&.open {
+		top: 40vh;
+	}
+
+	input {
+		width: 100%;
+		min-width: 10rem;
+		border-radius: @radius;
+		border: 2px solid @modal-input-bg;
+		background-color: @modal-input-bg;
+		padding: .5rem;
+		font-weight: 400;
+		font-size: 1rem;
+		outline: none;
+		transition:
+			border-color 0.3s ease,
+			color 0.3s ease;
+		&:focus {
+			border-color: @nav-search-border-focus;
+		}
+	}
+
+	button {
+		border: none;
+		outline: none;
+		&:focus {
+			background: @chronograf-dropdown-gradient-b !important;
+		}
+	}
+
+	label {
+		display: block;
+		margin-bottom: .4rem;
+		font-weight: 600;
+	}
+}
+
+#default-chronograf-url {
+	display: inline-block;
+	margin: .5rem 0 0 .25rem;
+	font-size: .8rem;
+	font-style: italic;
+	font-weight: 400;
+
+	&:hover {
+		text-transform: underline;
+	}
+}
+
+.flex-form {
+	display: flex;
+	justify-content: space-between;
+
+	.save-btn {
+		width: 5.5rem;
+		margin: 0 0 0 .25rem;
+		text-align: center;
+		padding: .75rem 1rem;
+		color: #fff;
+		border-radius: @radius;
+		font-weight: 600;
+		transition: background .2s;
+	}
+}
+
+//
+// Chronograf modal media queries
+// --------------------------------------------------
+@media (max-width: 500px) {
+	.flex-form {
+		flex-flow: column;
+		.save-btn {
+			width: 100%;
+			margin: .25rem 0 0;
+		}
+	}
+	#default-chronograf-url {
+		display: block;
+		margin: 1rem auto 0;
+	}
+}
+
+#save-chronograf-url button {
+	background: @chronograf-link;
+	&:hover {
+		background: @chronograf-dropdown-gradient-b;
+	}
+}
+
+//
 // Media Queries
 // --------------------------------------------------
 @media (min-width: @breakpoint-small) {
 	.article {
 		padding-left: @sidebar-small-width;
+		height: ~"calc(100% - "@nav-height~")";
 	}
 	.article-section {
 		padding: 3rem;
@@ -410,6 +612,7 @@ a {
 		p,
 		ol,
 		ul,
+		.view-in-chronograf,
 		.vertical-tabs-container {
 			width: ~"calc(100% - "@indented-element-size~")";
 			margin-left: @indented-element-size;

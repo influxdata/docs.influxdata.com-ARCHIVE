@@ -1,10 +1,41 @@
 ---
-title: Release notes/changelog
+title: Release notes
 menu:
   chronograf_1_4:
-    weight: 20
+    weight: 10
     parent: About the Project
 ---
+
+## v1.4.3.0 [2018-3-28]
+
+### Features
+
+* Add unsafe SSL to Kapacitor UI configuration
+* Add server flag to grant SuperAdmin status to users authenticating from a specific Auth0 organization
+
+### UI Improvements
+
+* Redesign system notifications
+
+### Bug Fixes
+
+* Fix Heroku OAuth 2.0 provider support
+* Fix error reporting in Data Explorer
+* Fix Okta OAuth 2.0 provider support
+* Change hover text on delete mappings confirmation button to 'Delete'
+* Automatically add graph type 'line' to any graph missing a type
+* Fix hanging browser on docker host dashboard
+* Fix Kapacitor Rules task enabled checkboxes to only toggle exactly as clicked
+* Prevent Multi-Select Dropdown in InfluxDB Admin Users and Roles tabs from losing selection state
+* Fix intermittent missing fill from graphs
+* Support custom time range in annotations API wrapper
+
+
+## v1.4.2.3 [2018-03-08]
+
+### Bug fixes
+
+*  Include URL in Kapacitor connection creation requests.
 
 ## v1.4.2.1 [2018-02-28]
 
@@ -94,7 +125,7 @@ menu:
 * Add time shift feature to DataExplorer and Dashboards
 * Add auto group by time to Data Explorer
 * Support authentication for Enterprise Meta Nodes
-* Add boolean thresholds for kapacitor threshold alerts
+* Add Boolean thresholds for kapacitor threshold alerts
 * Update kapacitor alerts to cast to float before sending to influx
 * Allow override of generic oauth2 keys for email
 
@@ -232,7 +263,7 @@ menu:
 
 * Add prefix, suffix, scale, and other y-axis formatting for cells in dashboards.
 * Update the group by time when zooming in graphs.
-* Add the ability to link directly to presentation mode in dashboards with the `present` boolean query parameter in the URL.
+* Add the ability to link directly to presentation mode in dashboards with the `present` Boolean query parameter in the URL.
 * Add the ability to select a template variable via a URL parameter.
 
 ### UI improvements

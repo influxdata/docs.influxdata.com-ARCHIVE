@@ -11,7 +11,7 @@
     {{ range (index $.Site.Menus .Site.Data.default_versions.influxdb) }}
       <section class="sidebar--section">
         <div class="sidebar--section-title">
-          <a class="{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{.URL}}">{{ .Name }}</a>
+          <a class="{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
         </div>
         {{ if .HasChildren }}
             {{ range .Children }}
@@ -26,7 +26,7 @@
       {{ range (index $.Site.Menus .Identifier) }}
         <section class="sidebar--section">
           <div class="sidebar--section-title">
-            <a class="{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{.URL}}">{{ .Name }}</a>
+            <a class="{{ if or ($currentNode.IsMenuCurrent $currentNode.Section .) ($currentNode.HasMenuCurrent $currentNode.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
           </div>
           {{ if .HasChildren }}
             {{ range .Children }}

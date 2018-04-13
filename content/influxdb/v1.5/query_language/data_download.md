@@ -2,8 +2,10 @@
 title: Sample data
 menu:
   influxdb_1_5:
-    weight: 5
+    weight: 10
     parent: query_language
+aliases:
+  - /influxdb/v1.5/sample_data/data_download/
 ---
 
 In order to explore the query language further, these instructions help you create a database,

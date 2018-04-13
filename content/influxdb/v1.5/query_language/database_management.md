@@ -1,9 +1,10 @@
 ---
-title: Database management
+title: Database management using InfluxQL
 
 menu:
   influxdb_1_5:
-    weight: 30
+    name: Data management
+    weight: 40
     parent: query_language
 ---
 
@@ -42,7 +43,7 @@ InfluxQL offers a full suite of administrative commands.
 
 If you're looking for `SHOW` queries (for example, `SHOW DATABASES` or `SHOW RETENTION POLICIES`), see [Schema Exploration](/influxdb/v1.5/query_language/schema_exploration).
 
-The examples in the sections below use InfluxDB's [Command Line Interface (CLI)](/influxdb/v1.5/introduction/getting_started/).
+The examples in the sections below use InfluxDB's [Command Line Interface (CLI)](/influxdb/v1.5/introduction/getting-started/).
 You can also execute the commands using the HTTP API; simply  send a `GET` request to the `/query` endpoint and include the command in the URL parameter `q`.
 See the [Querying Data](/influxdb/v1.5/guides/querying_data/) guide for more on using the HTTP API.
 
@@ -230,7 +231,7 @@ exist.
 ## Retention Policy Management
 The following sections cover how to create, alter, and delete retention policies.
 Note that when you create a database, InfluxDB automatically creates a retention policy named `autogen` which has infinite retention.
-You may rename that retention policy or disable its auto-creation in the [configuration file](/influxdb/v1.5/administration/config/#meta).
+You may rename that retention policy or disable its auto-creation in the [configuration file](/influxdb/v1.5/administration/config/#metastore-settings-meta).
 
 ### Create retention policies with CREATE RETENTION POLICY
 
@@ -311,7 +312,7 @@ If you attempt to create a retention policy identical to one that already exists
 If you attempt to create a retention policy with the same name as an existing retention policy but with differing attributes, InfluxDB returns an error.
 
 > **Note:** You can also specify a new retention policy in the `CREATE DATABASE` query.
-See [Create a database with CREATE DATABASE](/influxdb/v1.5/query_language/database_management/#create-a-database-with-create-database).
+See [Create a database with CREATE DATABASE](/influxdb/v1.5/query_language/database_management/#create-database).
 
 ### Modify retention policies with ALTER RETENTION POLICY
 

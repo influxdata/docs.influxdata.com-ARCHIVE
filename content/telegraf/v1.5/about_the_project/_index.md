@@ -1,11 +1,10 @@
 ---
- title: About the Project
+ title: About the project
 
  menu:
    telegraf_1_5:
      name: About the Project
      identifier: about_the_project
-     weight: 150
 ---
 
 ## [Release Notes/Changelog](/telegraf/v1.5/about_the_project/release-notes-changelog/)

@@ -1,14 +1,14 @@
 ---
-title: TSI (Time Series Index) details
+title: Time Series Index (TSI) details
 
 menu:
   influxdb_1_5:
-    name: TSI (Time Series Index) details
-    weight: 110
+    name: Time Series Index (TSI) details
+    weight: 80
     parent: concepts
 ---
 
-## Description of TSI
+## Time Series Index (TSI) description
 
 When InfluxDB ingests data, we store not only the value but we also index the measurement and tag information so that it can be queried quickly.
 In earlier versions, index data could only be stored in-memory, however, that requires a lot of RAM and places an upper bound on the number of series a machine can hold.
@@ -29,7 +29,7 @@ If you are troubleshooting an issue with an index, you can use the `influx_inspe
 This command allows you to print summary statistics on an index, file, or a set of files.
 This command only works on one index at a time.
 
-For details on this utility, see [influx_inspect dumptsi](/influxdb/v1.5/tools/influx_inspect/#influx_inspect-dumptsi)
+For details on this command, see [influx_inspect dumptsi](/influxdb/v1.5/tools/influx_inspect/#influx-inspect-dumptsi).
 
 ### `influx_inspect buildtsi`
 
@@ -38,7 +38,7 @@ If you have an existing TSI index that you want to rebuild, first delete the `in
 
 This command works at the server-level but you can optionally add database, retention policy and shard filters to only apply to a subset of shards.
 
-For details on this utility, see [influx inspect buildtsi](/influxdb/v1.5/tools/influx_inspect/#influx_inspect-buildtsi)
+For details on this command, see [influx inspect buildtsi](/influxdb/v1.5/tools/influx_inspect/#influx-inspect-buildtsi).
 
 
 ## Understanding TSI
@@ -142,11 +142,11 @@ The index file has the following sections:
 
 * **TagBlocks:** Maintains an index of tag values for a single tag key.
 * **MeasurementBlock:** Maintains an index of measurements and their tag keys.
-**Trailer:** Stores offset information for the file as well as HyperLogLog sketches for cardinality estimation.
+* **Trailer:** Stores offset information for the file as well as HyperLogLog sketches for cardinality estimation.
 
 ### Manifest
 
-The MANIFEST file is stored the index directory and lists all the files that belong to the index and the order in which they should be accessed.
+The MANIFEST file is stored in the index directory and lists all the files that belong to the index and the order in which they should be accessed.
 This file is updated every time a compaction occurs.
 Any files that are in the directory that are not in the index file are index files that are in the process of being compacted.
 

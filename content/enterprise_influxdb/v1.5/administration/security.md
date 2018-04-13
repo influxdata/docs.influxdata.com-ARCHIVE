@@ -3,7 +3,7 @@ title: Managing security in InfluxDB Enterprise
 menu:
   enterprise_influxdb_1_5:
     name: Managing security
-    weight: 90
+    weight: 60
     parent: Administration
 ---
 
@@ -43,7 +43,7 @@ Resources:
 For InfluxEnterprise Data Nodes, close all ports on each host except for port `8086`.
 You can also use a proxy to port `8086`.  By default, data nodes and meta nodes communicate with each other over '8088','8089',and'8091'
 
-For InfluxDB Enterprise, [backuping and restoring](/enterprise_influxdb/v1.5/guides/backup-and-restore/) is performed from the meta nodes.
+For InfluxDB Enterprise, [backuping and restoring](/enterprise_influxdb/v1.5/administration/backup-and-restore/) is performed from the meta nodes.
 
 
 ### AWS Recommendations

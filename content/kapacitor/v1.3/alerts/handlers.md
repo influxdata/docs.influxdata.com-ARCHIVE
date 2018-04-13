@@ -1,6 +1,6 @@
 ---
 title: Alert Handlers
-
+newversionredirect: working/event-handler-setup/
 menu:
   kapacitor_1_3:
     name: Alert Handlers

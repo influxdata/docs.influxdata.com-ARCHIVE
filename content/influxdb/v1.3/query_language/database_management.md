@@ -311,7 +311,7 @@ If you attempt to create a retention policy identical to one that already exists
 If you attempt to create a retention policy with the same name as an existing retention policy but with differing attributes, InfluxDB returns an error.
 
 > **Note:** You can also specify a new retention policy in the `CREATE DATABASE` query.
-See [Create a database with CREATE DATABASE](/influxdb/v1.3/query_language/database_management/#create-a-database-with-create-database).
+See [Create a database with CREATE DATABASE](/influxdb/v1.3/query_language/database_management/#create-database).
 
 ### Modify retention policies with ALTER RETENTION POLICY
 

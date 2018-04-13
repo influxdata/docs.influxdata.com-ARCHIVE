@@ -1,6 +1,6 @@
 ---
 title: Templating a Dashboard
-
+newversionredirect: guides/dashboard-template-variables/
 menu:
   chronograf_1_0:
     name: Templating a Dashboard
@@ -14,4 +14,4 @@ Note that only visualizations that specify the relevant [`tmplTime()`](/chronogr
 
 *Chronograf dashboard with template variables:*
 
-![Tag template](/img/chronograf/v0.11/template-dashboard.gif)
+![Tag template](/img/chronograf/v1.0/template-dashboard.gif)

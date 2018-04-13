@@ -15,7 +15,7 @@ and prevent and halt the execution of inefficient queries with several configura
 <table style="width:100%">
   <tr>
     <td><a href="#list-currently-running-queries-with-show-queries">SHOW QUERIES</a></td>
-    <td><a href="#stop-currently-running-queries-with-kill-query-or-ctrlc">KILL QUERY</a></td>
+    <td><a href="#stop-currently-running-queries-with-kill-query">KILL QUERY</a></td>
     <td><a href="#configuration-settings-for-query-management">Configuration Settings</a></td>
   </tr>
 </table>
@@ -38,11 +38,12 @@ qid	  query															               database		  duration
 ```
 
 ##### Explanation of the output:
-<br>
-`qid`&emsp;&emsp;&emsp;&nbsp;The id number of the query. Use this value with [`KILL QUERY`](/influxdb/v1.4/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query).
-`query`&emsp;&emsp;&thinsp;&thinsp;The query text.
-`database`&emsp;The database targeted by the query.
-`duration`&emsp;The length of time that the query has been running.
+<br/>
+
+- `qid`&emsp;&emsp;&emsp;&nbsp;The id number of the query. Use this value with [`KILL QUERY`](/influxdb/v1.4/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query).
+- `query`&emsp;&emsp;&thinsp;&thinsp;The query text.
+- `database`&emsp;The database targeted by the query.
+- `duration`&emsp;The length of time that the query has been running.
 See [Query Language Reference](/influxdb/v1.4/query_language/spec/#durations)
 for an explanation of InfluxDB's time units.
 
@@ -54,12 +55,12 @@ Where `qid` is the query ID, displayed in the [`SHOW QUERIES`](/influxdb/v1.3/tr
 ```
 KILL QUERY <qid>
 ```
->***InfluxEnterprise clusters:*** To kill queries on a cluster, you need to specify the query ID (qid) and the TCP host (for example, `myhost:8088`), 
->available in the `SHOW QUERIES` output.
->
->```
->KILL QUERY <qid> ON "<host>"
->```
+***InfluxEnterprise clusters:*** To kill queries on a cluster, you need to specify the query ID (qid) and the TCP host (for example, `myhost:8088`),
+available in the `SHOW QUERIES` output.
+
+```
+KILL QUERY <qid> ON "<host>"
+```
 
 A successful `KILL QUERY` query returns no results.
 
@@ -79,7 +80,7 @@ A successful `KILL QUERY` query returns no results.
 ## Configuration settings for query management
 
 The following configuration settings are in the
-[[coordinator]](/influxdb/v1.4/administration/config/#coordinator) section of the
+[[coordinator]](/influxdb/v1.4/administration/config/#query-management-settings-coordinator) section of the
 configuration file.
 
 ### max-concurrent-queries

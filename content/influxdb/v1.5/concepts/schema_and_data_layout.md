@@ -1,8 +1,9 @@
 ---
-title: Schema design
+title: Schema design and data layout
 menu:
   influxdb_1_5:
-    weight: 70
+    name: Schema design
+    weight: 50
     parent: concepts
 ---
 

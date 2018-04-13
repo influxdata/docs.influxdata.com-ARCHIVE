@@ -4,7 +4,8 @@ aliases:
     - /enterprise/v1.5/administration/configuration/
 menu:
   enterprise_influxdb_1_5:
-    weight: 20
+    name: Configuring
+    weight: 10
     parent: Administration
 ---
 
@@ -23,7 +24,6 @@ menu:
     * [[cluster]](#cluster)
     * [[retention]](#retention)
     * [[shard-precreation]](#shard-precreation)
-    * [[admin]](#admin)
     * [[monitor]](#monitor)
     * [[subscriber]](#subscriber)
     * [[http]](#http)
@@ -434,7 +434,7 @@ See the [OSS documentation](/influxdb/v1.5/administration/config/#reporting-disa
 
 ### bind-address = ":8088"
 
-The bind address to use for the RPC service for [backup and restore](/enterprise_influxdb/v1.5/guides/backup-and-restore/).
+The bind address to use for the RPC service for [backup and restore](/enterprise_influxdb/v1.5/administration/backup-and-restore/).
 
 Environment variable: `INFLUXDB_BIND_ADDRESS`
 
@@ -500,7 +500,7 @@ Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_PATH`
 
 ## [meta]
 
-See the [OSS documentation](/influxdb/v1.5/administration/config/#meta).
+See the [OSS documentation](/influxdb/v1.5/administration/config/#metastore-settings-meta).
 
 ###  dir = "/var/lib/influxdb/meta"
 
@@ -553,7 +553,7 @@ Environment variable: `INFLUXDB_META_LOGGING_ENABLED`
 
 ## [data]
 
-See the [OSS documentation](/influxdb/v1.5/administration/config/#data).
+See the [OSS documentation](/influxdb/v1.5/administration/config/#data-settings-data).
 
 ###  dir = "/var/lib/influxdb/data"
 
@@ -620,7 +620,7 @@ Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 ### index-version = inmem
 
 The type of shard index to use for new shards. The default (`inmem`) is to use an in-memory index that is recreated at startup.
-A value of `tsi1` will use a disk-based index that supports higher cardinality datasets. 
+A value of `tsi1` will use a disk-based index that supports higher cardinality datasets.
 
 Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 
@@ -677,15 +677,15 @@ See the [OSS documentation](/influxdb/v1.5/administration/config/#max-concurrent
 
 Environment variable: `INFLUXDB_CLUSTER_MAX_CONCURRENT_QUERIES`
 
-###  query-timeout = "0"
+###  query-timeout = "0s"
 
-See the [OSS documentation](/influxdb/v1.5/administration/config/#query-timeout-0).
+See the [OSS documentation](/influxdb/v1.5/administration/config/#query-timeout-0s).
 
 Environment variable: `INFLUXDB_CLUSTER_QUERY_TIMEOUT`
 
-###  log-queries-after = "0"
+###  log-queries-after = "0s"
 
-See the [OSS documentation](/influxdb/v1.5/administration/config/#log-queries-after-0).
+See the [OSS documentation](/influxdb/v1.5/administration/config/#log-queries-after-0s).
 
 Environment variable: `INFLUXDB_CLUSTER_LOG_QUERIES_AFTER`
 
@@ -721,7 +721,7 @@ Environment variable: `INFLUXDB_CLUSTER_POOL_MAX_IDLE_STREAMS`
 
 ## [retention]
 
-See the [OSS documentation](/influxdb/v1.5/administration/config/#retention).
+See the [OSS documentation](/influxdb/v1.5/administration/config/#retention-policy-settings-retention).
 
 ###  enabled = true
 
@@ -737,7 +737,7 @@ Environment variable: `INFLUXDB_RETENTION_CHECK_INTERVAL`
 
 ## [shard-precreation]
 
-See the [OSS documentation](/influxdb/v1.5/administration/config/#shard-precreation).
+See the [OSS documentation](/influxdb/v1.5/administration/config/#shard-precreation-settings-shard-precreation).
 
 ###  enabled = true
 
@@ -745,24 +745,17 @@ See the [OSS documentation](/influxdb/v1.5/administration/config/#enabled-true-1
 
 Environment variable: `INFLUXDB_SHARD_PRECREATION_ENABLED`
 
-###  check-interval = "10m0s"
+###  check-interval = "10m"
 
-See the [OSS documentation](/influxdb/v1.5/administration/config/#check-interval-10m0s).
+See the [OSS documentation](/influxdb/v1.5/administration/config/#check-interval-10m).
 
 Environment variable: `INFLUXDB_SHARD_PRECREATION_CHECK_INTERVAL`
 
-###  advance-period = "30m0s"
+###  advance-period = "30m"
 
-See the [OSS documentation](/influxdb/v1.5/administration/config/#advance-period-30m0s).
+See the [OSS documentation](/influxdb/v1.5/administration/config/#advance-period-30m).
 
 Environment variable: `INFLUXDB_SHARD_PRECREATION_ADVANCE_PERIOD`
-
-## [admin]
-
-In version 1.3, the web admin interface is no longer available in InfluxDB.
-The interface does not run on port 8083 and InfluxDB ignores the [admin] section in the configuration file if that section is present.
-[Chronograf](/chronograf/latest) replaces the web admin interface with improved tooling for querying data, writing data, and database management.
-See [Chronograf's transition guide](/chronograf/latest/guides/transition-web-admin-interface/) for more information.
 
 ## [monitor]
 
@@ -773,7 +766,7 @@ For InfluxEnterprise production systems, InfluxData recommends including a dedic
 * On the dedicated InfluxDB monitoring instance, set `store-enabled = false` to avoid potential performance and storage issues.
 * On each InfluxDB cluster node, install a Telegraf input plugin and Telegraf output plugin configured to report data to the dedicated InfluxDB monitoring instance.
 
-See the [OSS documentation](/influxdb/v1.5/administration/config/#monitor).
+See the [OSS documentation](/influxdb/v1.5/administration/config/#monitoring-settings-monitor).
 
 ###  store-enabled = true
 
@@ -799,7 +792,7 @@ Environment variable: `INFLUXDB_MONITOR_REMOTE_COLLECT_INTERVAL`
 
 ## [subscriber]
 
-See the [OSS documentation](/influxdb/v1.5/administration/config/#subscriber).
+See the [OSS documentation](/influxdb/v1.5/administration/config/#subscription-settings-subscriber).
 
 ###  enabled = true
 
@@ -836,7 +829,7 @@ Environment variable: `INFLUXDB_SUBSCRIBER_WRITE_BUFFER_SIZE`
 
 ## [http]
 
-See the [OSS documentation](/influxdb/v1.5/administration/config/#http).
+See the [OSS documentation](/influxdb/v1.5/administration/config/#http-endpoint-settings-http).
 
 ###  enabled = true
 
@@ -876,13 +869,13 @@ Environment variable: `INFLUXDB_HTTP_PPROF_ENABLED`
 
 ###  https-enabled = false
 
-See the [OSS documentation](/influxdb/v1.5/administration/config/#https-enabled-false-1).
+See the [OSS documentation](/influxdb/v1.5/administration/config/#https-enabled-false).
 
 Environment variable: `INFLUXDB_HTTP_HTTPS_ENABLED`
 
 ###  https-certificate = "/etc/ssl/influxdb.pem"
 
-See the [OSS documentation](/influxdb/v1.5/administration/config/#https-certificate-etc-ssl-influxdb-pem-1).
+See the [OSS documentation](/influxdb/v1.5/administration/config/#https-certificate-etc-ssl-influxdb-pem).
 
 Environment variable: `INFLUXDB_HTTP_HTTPS_CERTIFICATE`
 
@@ -932,23 +925,23 @@ Environment variable: `INFLUXDB_HTTP_BIND_SOCKET`
 
 ## [[graphite]]
 
-See the [OSS documentation](/influxdb/v1.5/administration/config/#graphite).
+See the [OSS documentation](/influxdb/v1.5/administration/config/#graphite-settings-graphite).
 
 ## [[collectd]]
 
-See the [OSS documentation](/influxdb/v1.5/administration/config/#collectd).
+See the [OSS documentation](/influxdb/v1.5/administration/config/#collectd-settings-collectd).
 
 ## [[opentsdb]]
 
-See the [OSS documentation](/influxdb/v1.5/administration/config/#opentsdb).
+See the [OSS documentation](/influxdb/v1.5/administration/config/#opentsdb-settings-opentsdb).
 
 ## [[udp]]
 
-See the [OSS documentation](/influxdb/v1.5/administration/config/#udp).
+See the [OSS documentation](/influxdb/v1.5/administration/config/#udp-settings-udp).
 
 ## [continuous_queries]
 
-See the [OSS documentation](/influxdb/v1.5/administration/config/#continuous-queries).
+See the [OSS documentation](/influxdb/v1.5/administration/config/#continuous-queries-settings-continuous-queries).
 
 ###  log-enabled = true
 

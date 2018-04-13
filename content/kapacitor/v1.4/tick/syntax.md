@@ -1,6 +1,7 @@
 ---
 title: TICKscript syntax
-
+aliases:
+  - /kapacitor/v1.4/tick/spec/
 menu:
   kapacitor_1_4:
     name: Syntax
@@ -24,7 +25,7 @@ menu:
 
 # Concepts
 
-The sections [Introduction](/kapacitor/v1.4/tick/introduction/) and [Getting Started](/kapacitor/v1.4/introduction/getting_started/) present the key concepts of **nodes** and **pipelines**.  Nodes represent process invocation units, that either take data as a batch, or in a point by point stream, and then alter that data, store that data, or based on changes in that data trigger some other activity  such as an alert.  Pipelines are simply logically organized chains of nodes.
+The sections [Introduction](/kapacitor/v1.4/tick/introduction/) and [Getting Started](/kapacitor/v1.4/introduction/getting-started/) present the key concepts of **nodes** and **pipelines**.  Nodes represent process invocation units, that either take data as a batch, or in a point by point stream, and then alter that data, store that data, or based on changes in that data trigger some other activity  such as an alert.  Pipelines are simply logically organized chains of nodes.
 
 In Kapacitor TICKscript is used to define tasks directly and to define template tasks, which act as templates that can be reused to generate new tasks.
 
@@ -65,10 +66,10 @@ Keywords are tokens that have special meaning within a language and therefore ca
 
 | **Word** | **Usage** |
 | :----|:------|
-| **TRUE** | The literal boolean value "true". |
-| **FALSE** | The literal boolean value "false". |
-| **AND**  | Standard boolean conjunction operator. |
-| **OR** | Standard boolean disjunction operator. |
+| **TRUE** | The literal Boolean value "true". |
+| **FALSE** | The literal Boolean value "false". |
+| **AND**  | Standard Boolean conjunction operator. |
+| **OR** | Standard Boolean disjunction operator. |
 | **lambda:** | Flags that what follows is to be interpreted as a lambda expression. |
 | **var** | Starts a variable declaration. |
 | **dbrp** | Starts a database declaration |
@@ -150,7 +151,7 @@ var critical = 3.0
 
 ### Literal values
 
-Literal values are parsed into instances of the types available in TICKscript.  They can be declared directly in method arguments or can be assigned to variables.  The parser interprets types based on context and creates instances of the following primitives: boolean, string, float, integer. Regular expressions, lists, lambda expressions, duration structures and nodes are also recognized.  The rules the parser uses to recognize a type are discussed in the following Types section.
+Literal values are parsed into instances of the types available in TICKscript.  They can be declared directly in method arguments or can be assigned to variables.  The parser interprets types based on context and creates instances of the following primitives: Boolean, string, float, integer. Regular expressions, lists, lambda expressions, duration structures and nodes are also recognized.  The rules the parser uses to recognize a type are discussed in the following Types section.
 
 #### Types
 
@@ -167,7 +168,7 @@ TICKscript recognizes five type identifiers.  These identifiers can be used dire
 | **lambda** | In a template task, declare a variable as a Lambda expression type. | `var crit lambda` |
 
 ##### Booleans
-Boolean values are generated using the boolean keywords: `TRUE` and `FALSE`.  Note that these keywords use all upper case letters.  The parser will throw an error when using lower case characters, e.g. `True` or `true`.
+Boolean values are generated using the Boolean keywords: `TRUE` and `FALSE`.  Note that these keywords use all upper case letters.  The parser will throw an error when using lower case characters, e.g. `True` or `true`.
 
 **Example 3 &ndash; Boolean literals**
 ```javascript
@@ -179,7 +180,7 @@ var true_bool = TRUE
 ...
 ```
 
-In Example 3 above the first line shows a simple assignment using a boolean literal.  The second example shows using the boolean literal `FALSE` in a method call.
+In Example 3 above the first line shows a simple assignment using a Boolean literal.  The second example shows using the Boolean literal `FALSE` in a method call.
 
 ##### Numerical types
 
@@ -351,7 +352,7 @@ In Example 11 the first three lines show the assignment of regular expressions t
 
 ##### Lambda expressions as literals
 
-A lambda expression is a parameter representing a short easily understood function to be passed into a method call or held in a variable. It can wrap a boolean expression, a mathematical expression, a call to an internal function or a combination of these three.  Lambda expressions always operate on point data.  They are generally compact and as such are used as literals, which eventually get passed into node methods.  Internal functions that can be used in Lambda expressions are discussed in the sections [Type conversion](#type-conversion) and [Lambda expressions](#lambda-expressions) below.  Lambda expressions are presented in detail in the topic [Lambda Expressions](/kapacitor/v1.4/tick/expr/).
+A lambda expression is a parameter representing a short easily understood function to be passed into a method call or held in a variable. It can wrap a Boolean expression, a mathematical expression, a call to an internal function or a combination of these three.  Lambda expressions always operate on point data.  They are generally compact and as such are used as literals, which eventually get passed into node methods.  Internal functions that can be used in Lambda expressions are discussed in the sections [Type conversion](#type-conversion) and [Lambda expressions](#lambda-expressions) below.  Lambda expressions are presented in detail in the topic [Lambda Expressions](/kapacitor/v1.4/tick/expr/).
 
 Lambda expressions begin with the token `lambda` followed by a colon, ':' &ndash; `lambda:`.
 
@@ -517,10 +518,10 @@ For more specific information, see [Alert node](/kapacitor/v1.4/nodes/alert_node
 
 Within lambda expressions it is possible to use stateless conversion functions to convert values between types.
 
-   * `bool()` - converts a string, int64 or float64 to boolean.
-   * `int()` - converts a string, float64, boolean or duration type to an int64.
-   * `float()` - converts a string, int64 or boolean to float64.
-   * `string()` - converts an int64, float64, boolean or duration value to a string.
+   * `bool()` - converts a string, int64 or float64 to Boolean.
+   * `int()` - converts a string, float64, Boolean or duration type to an int64.
+   * `float()` - converts a string, int64 or Boolean to float64.
+   * `string()` - converts an int64, float64, Boolean or duration value to a string.
    * `duration()` - converts an int64, float64 or string to a duration type.
 
 **Example 19 &ndash; Type conversion**
@@ -868,7 +869,7 @@ SELECT {<FIELD_KEY> | <TAG_KEY> | <FUNCTION>([<FIELD_KEY>|<TAG_KEY])} FROM <DATA
    * The base `SELECT` clause can take one or more field or tag keys, or functions.  These can be combined with mathematical operations and literal values.  Their values or results will be added to the data frame and can be aliased with an `AS` clause.  The star, `*`, wild card can also be used to retrieve all tags and fields from a measurement.
        * When using the `AS` clause the alias identifier can be accessed later on in the TICKscript as a named result by using double quotes.
    * The `FROM` clause requires the database, retention policy and the measurement name from which the values will be selected.  Each of these tokens is separated by a dot. The values for the database and retention policy need to be set out using double quotes.
-   * The `WHERE` clause requires a conditional expression.  This may include `AND` and `OR` boolean operators as well as mathematical operations.
+   * The `WHERE` clause requires a conditional expression.  This may include `AND` and `OR` Boolean operators as well as mathematical operations.
 
 **Example 30 &ndash; A simple InfluxQL query statement**
 ```javascript
@@ -912,7 +913,7 @@ See the [InfluxQL](/influxdb/v1.3/query_language/) documentation for a complete 
 
 # Lambda expressions
 
-Lambda expressions occur in a number of chaining and property methods.  Two of the most common usages are in the creation of an `eval` node and in defining threshold properties on an `alert` node.  They are declared with the keyword "lambda" followed by a colon: `lambda:`.  They can contain mathematical and boolean operations as well as calls to a large library of internal functions.  With many nodes, their results can be captured by setting an `as` property on the node.
+Lambda expressions occur in a number of chaining and property methods.  Two of the most common usages are in the creation of an `eval` node and in defining threshold properties on an `alert` node.  They are declared with the keyword "lambda" followed by a colon: `lambda:`.  They can contain mathematical and Boolean operations as well as calls to a large library of internal functions.  With many nodes, their results can be captured by setting an `as` property on the node.
 
 The internal functions can be stateless, such as common mathematical and string manipulation functions, or they can be stateful, updating an internal value with each new call.  As of release 1.3 three stateful functions are provided.
 
@@ -960,7 +961,7 @@ var alert = data
 alert
   .log('/tmp/mem_alert_log.txt')
 ```
-Example 33 contains four lambda expressions.  The first expression is passed to the `eval` node.  It calls the internal stateful function `sigma`, into which it passes the named result `stat`, which is set using the `AS` clause in the query string of the `query` node.  Through the `.as()` setter of the `eval` node its result is named `sigma`.  Three other lambda expressions occur inside the threshold determining property methods of the `alert` node.  These lambda expressions also access the named results `stat` and `sigma` as well as variables declared at the start of the script.  They each define a series of boolean operations, which set the level of the alert message.
+Example 33 contains four lambda expressions.  The first expression is passed to the `eval` node.  It calls the internal stateful function `sigma`, into which it passes the named result `stat`, which is set using the `AS` clause in the query string of the `query` node.  Through the `.as()` setter of the `eval` node its result is named `sigma`.  Three other lambda expressions occur inside the threshold determining property methods of the `alert` node.  These lambda expressions also access the named results `stat` and `sigma` as well as variables declared at the start of the script.  They each define a series of Boolean operations, which set the level of the alert message.
 
 
 # Summary of variable use between syntax sub-spaces

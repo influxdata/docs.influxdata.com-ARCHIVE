@@ -4,14 +4,14 @@ aliases:
     - influxdb/v1.5/write_protocols/line/
 menu:
   influxdb_1_5:
-    weight: 0
+    weight: 20
     parent: write_protocols
 ---
 
 InfluxDB's Line Protocol is a text based format for writing points to the
 database.
 Points must be in Line Protocol format for InfluxDB to successfully parse and
-write points (unless you're using a [service plugin](/influxdb/v1.5/tools/#service-plugins)).
+write points (unless you're using a [service plugin](http://localhost:1313/influxdb/v1.5/supported_protocols/)).
 
 Using fictional temperature data, this page introduces Line Protocol.
 It covers:
@@ -181,7 +181,7 @@ nanosecond precision.
 See the [API Reference](/influxdb/v1.5/tools/api/#write) for how to specify
 alternative precisions.
 
-Field values can be floats, integers, strings, or booleans:
+Field values can be floats, integers, strings, or Booleans:
 
 * Floats - by default, InfluxDB assumes all numerical field values are floats.
 
@@ -212,13 +212,13 @@ weather,location=us-midwest temperature="too warm" 1465839830100400200
 * Booleans - specify TRUE with `t`, `T`, `true`, `True`, or `TRUE`. Specify
 FALSE with `f`, `F`, `false`, `False`, or `FALSE`.
 
-    Store the field value `true` as a boolean:
+    Store the field value `true` as a Boolean:
 
     ```
 weather,location=us-midwest too_hot=true 1465839830100400200
     ```
 
-    > **Note:** Acceptable boolean syntax differs for data writes and data
+    > **Note:** Acceptable Boolean syntax differs for data writes and data
     queries. See
     [Frequently Asked Questions](/influxdb/v1.5/troubleshooting/frequently-asked-questions/#why-can-t-i-query-boolean-field-values)
     for more information.
@@ -301,7 +301,7 @@ time				            location	 temperature
 2016-06-13T17:43:50.1004002Z	us-midwest	 87
     ```
 
-* Do not double quote field values that are floats, integers, or booleans.
+* Do not double quote field values that are floats, integers, or Booleans.
 InfluxDB will assume that those values are strings.
 
     Example:

@@ -3,12 +3,15 @@ title: Influx Inspect disk shard utility
 
 menu:
   influxdb_1_5:
-    weight: 40
+    weight: 50
     parent: tools
 ---
 
-Influx Inspect is a tool designed to view detailed information about on disk
-shards, as well as export data from a shard to [line protocol](/influxdb/v1.5/concepts/glossary/#line-protocol) that can be inserted back into the database.
+Influx Inspect is a disk shard utility that can be used to:
+
+* View detailed information about disk shards
+* Exporting data from a shard to [line protocol](/influxdb/v1.5/concepts/glossary/#line-protocol) that can be inserted back into the database
+* Converting TSM-based shards to TSI disk-based shards
 
 ### `influx_inspect [[command] [arguments]]`
 
@@ -31,9 +34,15 @@ Converts TSM-based shards to shards supporting TSI (time series index) disk-base
 The index is written to a temporary location until complete and then moved to a permanent location.
 If an error occurs, then this operation will fall back to the original in-memory index.
 
-> ***Note:*** This tool is for offline conversion only. When TSI is enabled, new shards use the TSI indexes. Existing shards continue as TSM-based shards until converted offline.
+> ***Note:*** This tool is for offline conversion only.
+> When TSI is enabled, new shards use the TSI indexes.
+> Existing shards continue as TSM-based shards until
+> converted offline.
 
 #### Usage
+
+> **Note:** Run the `buildtsi` command using the user account that you are going to run the database as,
+> or ensure that the permissions match afterward.
 
 ```
 influx_inspect buildtsi -datadir <data_directory> -waldir <WAL_directory> [ options ]
@@ -58,29 +67,29 @@ Optional arguments are in brackets.
   Verbose output.
 
 #### -waldir string
-  WAL directory.
+  WAL (Write Ahead Log) directory.
 
 #### Examples
 <br>
 
-##### Upgrading all shards on a node
+##### Converting all shards on a node
 
 ```
 $ influx_inspect buildtsi -datadir ~/.influxdb/data -waldir ~/.influxdb/wal
 
 ```
 
-##### Upgrading all shards for a database
+##### Converting all shards for a database
 
 ```
 $ influx_inspect buildtsi -database mydb -datadir ~/.influxdb/data -waldir ~/.influxdb/wal
 
 ```
 
-##### Upgrading a specific shard**
+##### Converting a specific shard
 
 ```
-$ influx_inspect buildtsi -datadir ~/.influxdb/data/stress/autogen/1 -waldir ~/.influxdb/wal/stress/autogen/1
+$ influx_inspect buildtsi -database stress -shard 1 -datadir ~/.influxdb/data -waldir ~/.influxdb/wal
 ```
 
 ### influx_inspect dumptsi

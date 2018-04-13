@@ -208,7 +208,7 @@ Other supported features:
 [Regular Expressions](#regular-expressions)
 
 #### Quoting
-[Identifiers](/influxdb/v1.3/concepts/glossary/#identifiers) **must** be double quoted if they contain characters other than `[A-z,0-9,_]`, if they
+[Identifiers](/influxdb/v1.3/concepts/glossary/#identifier) **must** be double quoted if they contain characters other than `[A-z,0-9,_]`, if they
 begin with a digit, or if they are an [InfluxQL keyword](https://github.com/influxdata/influxql/blob/master/README.md#keywords).
 While not always necessary, we recommend that you double quote identifiers.
 
@@ -1763,18 +1763,18 @@ This prevents your system from running out of memory.
 The codeblock below provides sample syntax for those queries:
 
 ```
-SELECT * 
-INTO <destination_database>.<retention_policy_name>.<measurement_name> 
+SELECT *
+INTO <destination_database>.<retention_policy_name>.<measurement_name>
 FROM <source_database>.<retention_policy_name>.<measurement_name>
 WHERE time > now() - 100w and time < now() - 90w GROUP BY *
 
-SELECT * 
-INTO <destination_database>.<retention_policy_name>.<measurement_name> 
-FROM <source_database>.<retention_policy_name>.<measurement_name>} 
+SELECT *
+INTO <destination_database>.<retention_policy_name>.<measurement_name>
+FROM <source_database>.<retention_policy_name>.<measurement_name>}
 WHERE time > now() - 90w  and time < now() - 80w GROUP BY *
 
-SELECT * 
-INTO <destination_database>.<retention_policy_name>.<measurement_name> 
+SELECT *
+INTO <destination_database>.<retention_policy_name>.<measurement_name>
 FROM <source_database>.<retention_policy_name>.<measurement_name>
 WHERE time > now() - 80w  and time < now() - 70w GROUP BY *
 ```
@@ -1958,7 +1958,7 @@ To preserve tags in the current measurement as tags in the destination measureme
 
 The `INTO` clause section in this document shows how to manually implement
 queries with an `INTO` clause.
-See the [Continuous Queries](/influxdb/v1.3/query_language/#continuous_queries)
+See the [Continuous Queries](/influxdb/v1.3/query_language/continuous_queries/)
 documentation for how to automate `INTO` clause queries on realtime data.
 Among [other uses](/influxdb/v1.3/query_language/continuous_queries/#continuous-query-use-cases),
 Continuous Queries automate the downsampling process.
@@ -2133,7 +2133,7 @@ time                   water_level
 2015-09-18T16:24:00Z   3.235
 ```
 
-The query returns all `water_level` [points](/influxdb/v1.3/concepts/glossary/#points) from one of the [series](/influxdb/v1.3/concepts/glossary/#series) associated
+The query returns all `water_level` [points](/influxdb/v1.3/concepts/glossary/#points-per-second) from one of the [series](/influxdb/v1.3/concepts/glossary/#series) associated
 with the `h2o_feet` [measurement](/influxdb/v1.3/concepts/glossary/#measurement).
 
 #### Example 2: Limit the number of series returned and include a GROUP BY time() clause

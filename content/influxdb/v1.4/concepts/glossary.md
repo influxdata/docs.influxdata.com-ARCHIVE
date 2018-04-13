@@ -61,7 +61,7 @@ Related entries: [field](/influxdb/v1.4/concepts/glossary/#field), [field key](/
 
 ## field value
 The value part of the key-value pair that makes up a field.
-Field values are the actual data; they can be strings, floats, integers, or booleans.
+Field values are the actual data; they can be strings, floats, integers, or Booleans.
 A field value is always associated with a timestamp.
 
 Field values are not indexed - queries on field values scan all points that match the specified time range and, as a result, are not performant.
@@ -250,7 +250,7 @@ Every retention policy that contains data has at least one associated shard grou
 A given shard group contains all shards with data for the interval covered by the shard group.
 The interval spanned by each shard group is the shard duration.
 
-Related entries: [database](/influxdb/v1.4/concepts/glossary/#database), [retention policy](/influxdb/v1.4/concepts/glossary/#retention-policy), [series](/influxdb/v1.4/concepts/glossary/#series), [shard](/influxdb/v1.4/concepts/glossary/#shard), [shard duration](/influxdb/v1.4/concepts/glossary/#shard-duration)
+Related entries: [database](/influxdb/v1.4/concepts/glossary/#database), [retention policy](/influxdb/v1.4/concepts/glossary/#retention-policy-rp), [series](/influxdb/v1.4/concepts/glossary/#series), [shard](/influxdb/v1.4/concepts/glossary/#shard), [shard duration](/influxdb/v1.4/concepts/glossary/#shard-duration)
 
 ## subscription
 Subscriptions allow [Kapacitor](/kapacitor/latest/) to receive data from InfluxDB in a push model rather than the pull model based on querying data.

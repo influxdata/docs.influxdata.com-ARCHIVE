@@ -19,7 +19,7 @@ This section provides introductory information on working with TICKscript.
 
 Outside of this section the following articles may also be of interest.
 
-   * [Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting_started/) - an introduction to Kapacitor, which presents TICKscript basics.
+   * [Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting-started/) - an introduction to Kapacitor, which presents TICKscript basics.
    * [Node overview](/kapacitor/v1.4/nodes/) - a catalog of the types of nodes available in TICKscript.
    * [Guides](/kapacitor/v1.4/guides/) - a collection of intermediate to advanced solutions using the TICKscript language.
 
