@@ -12,7 +12,7 @@ menu:
 
 > For a comprehensive list of the changes between versions, see [InfluxDB's Changelog](/influxdb/v1.5/about_the_project/releasenotes-changelog/).
 
-Included here are some highlights of the InfluxDB 1.5.x release:
+Included here are some highlights of the InfluxDB 1.5.x releases:
 
 * [Time Series Index (TSI) support](#time-series-index-tsi-support)
 * [Enterprise-compatible backup and restore](#enterprise-compatible-backup-and-restore-for-influxdb-oss)
