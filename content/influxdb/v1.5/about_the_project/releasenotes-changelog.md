@@ -6,6 +6,34 @@ menu:
     parent: about_the_project
 ---
 
+## v1.5.2 [2018-04-12]
+-------------------
+
+### Features
+
+* Check for root user when running `buildtsi`.
+* [1.5] Adjustable TSI Compaction Threshold.
+
+### Bugfixes
+
+* backport: check for failure case where backup directory has no manifest files.
+* Fix regression to allow `now()` to be used as the group by offset again.
+* 1.5: Revert `Use MADV_WILLNEED when loading TSM files`.
+* Ignore index size in Engine.DiskSize().
+* [1.5] Fix `buildtsi` partition key.
+* Ensure that conditions are encoded correctly even if the AST is not properly formed.
+
+v1.5.1 [2018-03-20]
+-------------------
+
+### Bugfixes
+
+-	[#9542](https://github.com/influxdata/influxdb/pull/9542): Allow time variable to be case insensitive again.
+-	[#9564](https://github.com/influxdata/influxdb/pull/9564): Support setting the log level through the environment variable.
+-	[#9575](https://github.com/influxdata/influxdb/pull/9575): Ensure correct number of tags parsed.
+-	[#9566](https://github.com/influxdata/influxdb/pull/9566): Fix panic when checking fieldsets.
+-	[#9587](https://github.com/influxdata/influxdb/pull/9587): Fix data race in WAL.
+
 ## v1.5.0 [2018-03-06]
 
 ### Breaking changes
