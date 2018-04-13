@@ -12,24 +12,24 @@ We've provided a list below of all the terms we'll cover, but we recommend readi
 
 <table style="width:100%">
   <tr>
-    <td><a href="/influxdb/v1.4/concepts/key_concepts/#database">database</a></td>
-    <td><a href="/influxdb/v1.4/concepts/key_concepts/#field-key">field key</a></td>
-    <td><a href="/influxdb/v1.4/concepts/key_concepts/#field-set">field set</a></td>
+    <td><a href="#database">database</a></td>
+    <td><a href="#field-key">field key</a></td>
+    <td><a href="#field-set">field set</a></td>
   </tr>
   <tr>
-    <td><a href="/influxdb/v1.4/concepts/key_concepts/#field-value">field value</a></td>
-    <td><a href="/influxdb/v1.4/concepts/key_concepts/#measurement">measurement</a></td>
-    <td><a href="/influxdb/v1.4/concepts/key_concepts/#point">point</a></td>
+    <td><a href="#field-value">field value</a></td>
+    <td><a href="#measurement">measurement</a></td>
+    <td><a href="#point">point</a></td>
   </tr>
     <tr>
-    <td><a href="/influxdb/v1.4/concepts/key_concepts/#retention-policy">retention policy</a></td>
-    <td><a href="/influxdb/v1.4/concepts/key_concepts/#series">series</a></td>
-    <td><a href="/influxdb/v1.4/concepts/key_concepts/#tag-key">tag key</a></td>
+    <td><a href="#retention-policy">retention policy</a></td>
+    <td><a href="#series">series</a></td>
+    <td><a href="#tag-key">tag key</a></td>
   </tr>
     <tr>
-    <td><a href="/influxdb/v1.4/concepts/key_concepts/#tag-set">tag set</a></td>
-    <td><a href="/influxdb/v1.4/concepts/key_concepts/#tag-value">tag value</a></td>
-    <td><a href="/influxdb/v1.4/concepts/key_concepts/#timestamp">timestamp</a></td>
+    <td><a href="#tag-set">tag set</a></td>
+    <td><a href="#tag-value">tag value</a></td>
+    <td><a href="#timestamp">timestamp</a></td>
   </tr>
 </table>
 
@@ -60,13 +60,13 @@ Now that you've seen some sample data in InfluxDB this section covers what it al
 
 InfluxDB is a time series database so it makes sense to start with what is at the root of everything we do: time.
 In the data above there's a column called `time` - all data in InfluxDB have that column.
-`time` stores timestamps, and the <a name="timestamp"></a>*timestamp* shows the date and time, in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) UTC, associated with particular data.
+`time` stores timestamps, and the <a name="timestamp"></a>_**timestamp**_ shows the date and time, in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) UTC, associated with particular data.
 
 The next two columns, called `butterflies` and `honeybees`, are fields.
 Fields are made up of field keys and field values.
-<a name="field-key"></a>*Field keys* (`butterflies` and `honeybees`) are strings and they store metadata; the field key `butterflies` tells us that the field values `12`-`7` refer to butterflies and the field key `honeybees` tells us that the field values `23`-`22` refer to, well, honeybees.
+<a name="field-key"></a>_**Field keys**_ (`butterflies` and `honeybees`) are strings and they store metadata; the field key `butterflies` tells us that the field values `12`-`7` refer to butterflies and the field key `honeybees` tells us that the field values `23`-`22` refer to, well, honeybees.
 
-<a name="field-value"></a>*Field values* are your data; they can be strings, floats, integers, or Booleans, and, because InfluxDB is a time series database, a field value is always associated with a timestamp.
+<a name="field-value"></a>_**Field values**_ are your data; they can be strings, floats, integers, or Booleans, and, because InfluxDB is a time series database, a field value is always associated with a timestamp.
 The field values in the sample data are:
 
 ```
@@ -80,7 +80,7 @@ The field values in the sample data are:
 7    22
 ```
 
-In the data above, the collection of field-key and field-value pairs make up a <a name="field-set"></a>*field set*.
+In the data above, the collection of field-key and field-value pairs make up a <a name="field-set"></a>_**field set**_.
 Here are all eight field sets in the sample data:
 
 * `butterflies = 12   honeybees = 23`
@@ -101,12 +101,12 @@ In general, fields should not contain commonly-queried metadata.
 
 The last two columns in the sample data, called `location` and `scientist`, are tags.
 Tags are made up of tag keys and tag values.
-Both <a name="tag-key"></a>*tag keys* and <a name="tag-value"></a>*tag values* are stored as strings and record metadata.
+Both <a name="tag-key"></a>_**tag keys**_ and <a name="tag-value"></a>_**tag values**_ are stored as strings and record metadata.
 The tag keys in the sample data are `location` and `scientist`.
 The tag key `location` has two tag values: `1` and `2`.
 The tag key `scientist` also has two tag values: `langstroth` and `perpetua`.
 
-In the data above, the <a name="tag-set"></a>*tag set* is the different combinations of all the tag key-value pairs.
+In the data above, the <a name="tag-set"></a>_**tag set**_ is the different combinations of all the tag key-value pairs.
 The four tag sets in the sample data are:
 
 * `location = 1`, `scientist = langstroth`
@@ -143,13 +143,13 @@ time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 
 > Now that `butterflies` and `honeybees` are tags, InfluxDB won't have to scan every one of their values when it performs the queries above - this means that your queries are even faster.
 
-The <a name=measurement></a>*measurement* acts as a container for tags, fields, and the `time` column, and the measurement name is the description of the data that are stored in the associated fields.
+The <a name=measurement></a>_**measurement**_ acts as a container for tags, fields, and the `time` column, and the measurement name is the description of the data that are stored in the associated fields.
 Measurement names are strings, and, for any SQL users out there, a measurement is conceptually similar to a table.
 The only measurement in the sample data is `census`.
 The name `census` tells us that the field values record the number of `butterflies` and `honeybees` - not their size, direction, or some sort of happiness index.
 
 A single measurement can belong to different retention policies.
-A <a name="retention-policy"></a>*retention policy* describes how long InfluxDB keeps data (`DURATION`) and how many copies of those data are stored in the cluster (`REPLICATION`).
+A <a name="retention-policy"></a>_**retention policy**_ describes how long InfluxDB keeps data (`DURATION`) and how many copies of those data are stored in the cluster (`REPLICATION`).
 If you're interested in reading more about retention policies, check out [Database Management](/influxdb/v1.4/query_language/database_management/#retention-policy-management).
 
 <dt> Replication factors do not serve a purpose with single node instances.
@@ -159,7 +159,7 @@ In the sample data, everything in the `census` measurement belongs to the `autog
 InfluxDB automatically creates that retention policy; it has an infinite duration and a replication factor set to one.
 
 Now that you're familiar with measurements, tag sets, and retention policies it's time to discuss series.
-In InfluxDB, a <a name=series></a>*series* is the collection of data that share a retention policy, measurement, and tag set.
+In InfluxDB, a <a name=series></a>_**series**_ is the collection of data that share a retention policy, measurement, and tag set.
 The data above consist of four series:
 
 | Arbitrary series number  |  Retention policy | Measurement  |  Tag set |
@@ -171,7 +171,7 @@ The data above consist of four series:
 
 Understanding the concept of a series is essential when designing your [schema](/influxdb/v1.4/concepts/glossary/#schema) and when working with your data in InfluxDB.
 
-Finally, a <a name="point"></a>*point* is the field set in the same series with the same timestamp.
+Finally, a <a name="point"></a>_**point**_ is the field set in the same series with the same timestamp.
 For example, here's a single point:
 ```
 name: census
@@ -184,7 +184,7 @@ The series in the example is defined by the retention policy (`autogen`), the me
 The timestamp for the point is `2015-08-18T00:00:00Z`.
 
 All of the stuff we've just covered is stored in a database - the sample data are in the database `my_database`.
-An InfluxDB <a name=database></a>*database* is similar to traditional relational databases and serves as a logical container for users, retention policies, continuous queries, and, of course, your time series data.
+An InfluxDB <a name=database></a>_**database**_ is similar to traditional relational databases and serves as a logical container for users, retention policies, continuous queries, and, of course, your time series data.
 See [Authentication and Authorization](/influxdb/v1.4/query_language/authentication_and_authorization/) and [Continuous Queries](/influxdb/v1.4/query_language/continuous_queries/) for more on those topics.
 
 Databases can have several users, continuous queries, retention policies, and measurements.
