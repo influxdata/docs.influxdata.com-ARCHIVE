@@ -23,9 +23,6 @@ menu:
 * [1.5] Fix `buildtsi` partition key.
 * Ensure that conditions are encoded correctly even if the AST is not properly formed.
 
-v1.5.1 [2018-03-20]
--------------------
-
 ## v1.5.1 [2018-03-20]
 
 ### Bug fixes
