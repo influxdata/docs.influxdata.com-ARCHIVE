@@ -6,18 +6,18 @@ menu:
     parent: About the Project
 ---
 
-
-## v1.4.4.0 [2018-04-11]
+## v1.4.4.0 [2018-04-13]
 
 ### Features
 
-* Add support for RS256/JWKS verification, support for id_token parsing (as in ADFS)
+* Add support for RS256/JWKS verification, support for `id_token` parsing (as in ADFS)
 * Add ability to set a color palette for Line, Stacked, Step-Plot, and Bar graphs
 * Add ability to clone dashboards
-* Change :interval: to represent a raw influxql duration value
+* Change `:interval:` to represent a raw InfluxQL duration value
 * Add paginated measurements API to server
+* Data Explorer measurements can be toggled open
 
-### UI Improvements
+### UI improvements
 
 * New dashboard cells appear at bottom of layout and assume the size of the most common cell
 * Standardize delete confirmation interactions
@@ -37,6 +37,11 @@ menu:
 * Ensure correct basepath prefix in URL pathname when passing InfluxQL query param to Data Explorer
 * Fix type error bug in Kapacitor Alert Config page and persist deleting of team and recipient in OpsGenieConfig
 * Fixes errors caused by switching query tabs in CEO
+* Only send threshold value to parent on blur
+* Require that emails on GitHub & Generic OAuth2 principals be verified & primary, if those fields are provided
+* Send notification when rp creation returns a failure
+* Show valid time in custom time range when now is selected
+* Default to zero for gauges
 
 ## v1.4.3.1 [2018-04-02]
 
