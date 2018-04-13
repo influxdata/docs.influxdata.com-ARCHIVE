@@ -18,7 +18,7 @@ menu:
 
 * backport: check for failure case where backup directory has no manifest files.
 * Fix regression to allow `now()` to be used as the group by offset again.
-* 1.5: Revert `Use MADV_WILLNEED when loading TSM files`.
+* [1.5] Revert `Use MADV_WILLNEED when loading TSM files`.
 * Ignore index size in `Engine.DiskSize()`.
 * [1.5] Fix `buildtsi` partition key.
 * Ensure that conditions are encoded correctly even if the AST is not properly formed.
