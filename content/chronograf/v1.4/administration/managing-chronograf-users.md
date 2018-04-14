@@ -1,5 +1,6 @@
 ---
 title: Managing Chronograf users
+description: Managing Chronograf users and roles, SuperAdmin status, and InfluxDB and Kapacitor users.
 menu:
   chronograf_1_4:
     name: Managing Chronograf users

@@ -7,7 +7,7 @@ menu:
     parent: guides
 ---
 
-TICKscript logs data to a log file for debugging purposes. 
+TICKscript logs data to a log file for debugging purposes.
 
 Notes:
 

@@ -1,5 +1,6 @@
 ---
 title: Creating Chronograf dashboards
+description: This tutorial guides you quickly through the essential steps required to create custom Chronograf dashboards for use with InfluxDB and the InfluxData Platform.
 menu:
   chronograf_1_4:
     name: Creating dashboards
@@ -35,7 +36,7 @@ Click **Name This Dashboard** and type a new name. In this guide, "ChronoDash" i
 In the first cell, titled "Untitled Cell", click **Edit**
 to open the cell editor mode.
 
-![Edit your cell](/img/chronograf/v1.4/g-dashboard-cell-edit.png)
+![Edit your cell](/img/chronograf/g-dashboard-cell-edit.png)
 
 ### Step 3: Create your query
 

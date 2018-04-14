@@ -1,5 +1,6 @@
 ---
-title: Introduction to Chronograf
+title: Introducing Chronograf
+description: An introduction to Chronograf, the user interface and data visualization component for the InfluxData Platform. Includes documentation on getting started, installation, and downloading.
 
 menu:
   chronograf_1_4:
@@ -13,7 +14,7 @@ Follow the links below to get acquainted with Chronograf:
 Chronograf is supported on several operating systems and hardware architectures.
 See the [downloads page](https://portal.influxdata.com/downloads) page for links to the available binaries.
 
-## [Installation](/chronograf/latest/introduction/installation/)
+## [Installing Chronograf](/chronograf/latest/introduction/installation/)
 The [installation page](/chronograf/latest/introduction/installation/) lists the requirements for installing, starting, and configuring Chronograf.
 
 ## Getting Started
