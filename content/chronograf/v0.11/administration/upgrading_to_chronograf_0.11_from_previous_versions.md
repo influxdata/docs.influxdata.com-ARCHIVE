@@ -6,6 +6,7 @@ menu:
     name: Upgrading to Chronograf 0.11 from versions <= 0.4
     weight: 10
     parent: Administration
+newversionredirect: administration/upgrading/
 ---
 
 Changes in Chronograf 0.11 require users looking to upgrade from versions prior to 0.10 to take a few additional steps.

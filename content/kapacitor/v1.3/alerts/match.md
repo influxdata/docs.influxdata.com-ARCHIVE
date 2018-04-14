@@ -1,6 +1,6 @@
 ---
 title: Alert Match Expressions
-
+newversionredirect: working/alerts/#match-expressions
 menu:
   kapacitor_1_3:
     name: Alert Match Expressions
@@ -55,5 +55,3 @@ Send events with the tag "host" equal to `s001.example.com` to the handler:
 ```
 "host" == 's001.example.com'
 ```
-
-

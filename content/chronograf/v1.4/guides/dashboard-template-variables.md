@@ -5,6 +5,9 @@ menu:
   chronograf_1_4:
     weight: 80
     parent: Guides
+aliases:
+  - /chronograf/v1.4/introduction/templating/
+  - /chronograf/v1.4/templating/
 ---
 
 Engage with your dashboards and gain insights into your data with Chronograf's dashboard template variables.

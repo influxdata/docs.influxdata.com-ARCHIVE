@@ -8,9 +8,7 @@
      weight: 40
 ---
 
-## [Differences between Telegraf 1.4 and 1.3](/telegraf/v1.4/administration/differences/)
-
-## [Upgrading from Previous Versions](/telegraf/v1.4/administration/upgrading/)
+## [Troubleshooting](/telegraf/v1.4/administration/troubleshooting/)
 
 ## [Configuration](/telegraf/v1.4/administration/configuration/)
 

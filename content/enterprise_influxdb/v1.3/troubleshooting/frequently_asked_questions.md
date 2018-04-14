@@ -41,8 +41,7 @@ The `journalctl` output can be redirected to print the logs to a text file. With
 This is the expected behavior if you haven't joined the meta node to the
 cluster.
 The `503` errors should stop showing up in the logs once you
-[join](/enterprise_influxdb/v1.3/introduction/meta_node_installation/#join-the-meta-nodes-to-the-cluster)
-the meta node to the cluster.
+[join the meta node to the cluster](/enterprise_influxdb/v1.3/production_installation/meta_node_installation/#step-3-join-the-meta-nodes-to-the-cluster).
 
 ## Why am I seeing a `409` error in some of my data node logs?
 

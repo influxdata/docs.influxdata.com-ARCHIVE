@@ -1,5 +1,8 @@
 ---
-title: What's new in InfluxDB 1.5
+title: What's new in InfluxDB 1.5.x
+aliases:
+  - /influxdb/v1.5/administration/differences/
+  - /influxdb/v1.5/administration/previous_differences/
 menu:
   influxdb_1_5:
     name: What's new
@@ -9,7 +12,7 @@ menu:
 
 > For a comprehensive list of the changes between versions, see [InfluxDB's Changelog](/influxdb/v1.5/about_the_project/releasenotes-changelog/).
 
-Included here are some highlights of the InfluxDB 1.5 release:
+Included here are some highlights of the InfluxDB 1.5.x releases:
 
 * [Time Series Index (TSI) support](#time-series-index-tsi-support)
 * [Enterprise-compatible backup and restore](#enterprise-compatible-backup-and-restore-for-influxdb-oss)
@@ -20,7 +23,7 @@ Included here are some highlights of the InfluxDB 1.5 release:
 
 ## Time Series Index (TSI) support
 
-InfluxDB 1.5.0 introduces support for the InfluxDB time series index (TSI) engine. TSI was first introduced in InfluxDB 1.3 as a technical preview. Since then, InfluxDB users and InfluxData have tested, used, and shared feedback on this functionality.
+InfluxDB 1.5.0 introduced support for the InfluxDB time series index (TSI) engine. TSI was first introduced in InfluxDB 1.3 as a technical preview. Since then, InfluxDB users and InfluxData have tested, used, and shared feedback on this functionality.
 
 With TSI, the number of series should be unbounded by the memory on the server hardware and the number of existing series will have a negligible impact on database startup time.
 
@@ -34,7 +37,7 @@ For more details on TSI, see the following:
 
 ## Enterprise-compatible backup and restore for InfluxDB OSS
 
-> ***Note:*** For InfluxDB Enterprise clusters, see [Backing up and restoring in InfluxDB Enterprise](/influxdb_enterprise/v1.5/administration/backup-and-restore/).
+> ***Note:*** For InfluxDB Enterprise clusters, see [Backing up and restoring in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/backup-and-restore/).
 
 Starting with InfluxDB 1.5, InfluxDB OSS supports enterprise-compatible backup and restore. The InfluxDB OSS `backup` utility provides:
 
@@ -45,7 +48,7 @@ Starting with InfluxDB 1.5, InfluxDB OSS supports enterprise-compatible backup a
 
 The online `restore` utility in InfluxDB OSS supports the new Enterprise-compatible backup format, but the the legacy backup format is still available.
 
-For details about the new backup and restore functionality, see [Backing up and restoring in InfluxDB OSS](/influxdb/v1.5/administration/backup-and-restore/).
+For details about the new backup and restore functionality, see [Backing up and restoring in InfluxDB OSS](/influxdb/v1.5/administration/backup_and_restore/).
 
 
 ## Structured logging

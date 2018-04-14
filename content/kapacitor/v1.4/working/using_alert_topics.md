@@ -1,7 +1,8 @@
 ---
 title: Using alert topics
 aliases:
-    - kapacitor/v1.4/examples/using_alert_topics/
+  - /kapacitor/v1.4/examples/using_alert_topics/
+  - /kapacitor/v1.4/guides/using_alert_topics/
 menu:
   kapacitor_1_4:
     name: Alerts - Using Topics

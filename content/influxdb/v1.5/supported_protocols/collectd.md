@@ -1,7 +1,7 @@
 ---
 title: CollectD protocol support in InfluxDB
 aliases:
-    - influxdb/v1.5/supported_protocols/collectd/
+    - /influxdb/v1.5/tools/collectd/
 menu:
   influxdb_1_5:
     name: CollectD

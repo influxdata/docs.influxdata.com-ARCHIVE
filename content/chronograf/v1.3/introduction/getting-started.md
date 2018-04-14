@@ -1,7 +1,7 @@
 ---
 title: Getting Started
 aliases:
-    - chronograf/v1.3/introduction/getting-started/
+    - /chronograf/v1.3/introduction/getting_started/
 menu:
   chronograf_1_3:
     weight: 20

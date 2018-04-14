@@ -97,7 +97,7 @@ The InfluxDB logging configuration options (in the `[logging]` section) now incl
 * `level`: `error` | `warn` | `info` (default) | `debug`
 * `suppress-logo`: `false` (default) | `true`
 
-For details on these logging configuration options and their corresponding environment variables, see [Logging options](/influxdb/v1.5/administration/config/#logging-options--logging/) in the configuration file documentation.
+For details on these logging configuration options and their corresponding environment variables, see [Logging options](/influxdb/v1.5/administration/config/#logging-settings-logging) in the configuration file documentation.
 
 ### Logging formats
 
@@ -166,7 +166,7 @@ Unique identifier for an operation. You can filter on all operations of a specif
 **Example:** `op_name=tsm1_compact_group`
 
 ##### `op_event`
-Specifies the start and end of an event. The two possible values, `(start)` or `(end)`, are used to indicate when an operation started or ended. For example, you can grep by values in `op_name` AND `op_event` to find all starting operation log entries. For an example of this, see [Finding all starting log entries](#finding-all-starting-log-entries).
+Specifies the start and end of an event. The two possible values, `(start)` or `(end)`, are used to indicate when an operation started or ended. For example, you can grep by values in `op_name` AND `op_event` to find all starting operation log entries. For an example of this, see [Finding all starting log entries](#finding-all-starting-operation-log-entries).
 
 **Example:** `op_event=start`
 

@@ -1,6 +1,6 @@
 ---
 title: APIs
-
+newversionredirect: working/api/
 menu:
   kapacitor_1_3:
     name: APIs

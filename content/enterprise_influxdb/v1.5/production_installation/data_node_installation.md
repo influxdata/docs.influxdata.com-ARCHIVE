@@ -30,7 +30,7 @@ Note: that there is no requirement for each data node to run on its own
 server.  However, best practices are to deploy each data node on a dedicated server.
 
 See the
-[Clustering guide](/enterprise_influxdb/v1.5/concepts/clustering.md#optimal-server-counts)
+[Clustering guide](/enterprise_influxdb/v1.5/concepts/clustering/#optimal-server-counts)
 for more on cluster architecture.
 
 ### Other requirements
@@ -97,15 +97,15 @@ Perform the following steps on each data server.
 #### Ubuntu & Debian (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.5.1-c1.5.1_amd64.deb
-sudo dpkg -i influxdb-data_1.5.0-c1.5.0_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.5.2-c1.5.2_amd64.deb
+sudo dpkg -i influxdb-data_1.5.2-c1.5.2_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.5.1_c1.5.1.x86_64.rpm
-sudo yum localinstall influxdb-data-1.5.1_c1.5.1.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.5.2_c1.5.2.x86_64.rpm
+sudo yum localinstall influxdb-data-1.5.2_c1.5.2.x86_64.rpm
 ```
 
 ### II. Edit the configuration file
@@ -222,15 +222,16 @@ The expected output is:
     Data Nodes
     ==========
     ID   TCP Address               Version
-    4    enterprise-data-01:8088   1.5.1-c1.5.1
-    5    enterprise-data-02:8088   1.5.1-c1.5.1
+    4    enterprise-data-01:8088   1.5.2-c1.5.2
+    5    enterprise-data-02:8088   1.5.2-c1.5.2
+
 >
     Meta Nodes
     ==========
     TCP Address               Version
-    enterprise-meta-01:8091   1.5.1-c1.5.1
-    enterprise-meta-02:8091   1.5.1-c1.5.1
-    enterprise-meta-03:8091   1.5.1-c1.5.1
+    enterprise-meta-01:8091   1.5.2-c1.5.2
+    enterprise-meta-02:8091   1.5.2-c1.5.2
+    enterprise-meta-03:8091   1.5.2-c1.5.2
 
 
 The output should include every data node that was added to the cluster.

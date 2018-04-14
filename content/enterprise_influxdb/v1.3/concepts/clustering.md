@@ -103,7 +103,7 @@ The cluster creates shards within a shard group to maximize the number of data n
 
 This means that a new shard group gets created for each day of data that gets written in. Within each shard group 2 shards are created. Because of the replication factor of 2, each of those two shards are copied on 2 servers. For example we have a shard group for `2016-09-19` that has two shards `1` and `2`. Shard `1` is replicated to servers `A` and `B` while shard `2` is copied to servers `C` and `D`.
 
-When a write comes in with values that have a timestamp in `2016-09-19` the cluster must first determine which shard within the shard group should receive the write. This is done by taking a hash of the `measurement` + sorted `tagset` (the [metaseries](/influxdb/v1.3/concepts/glossary/#metaseries)) and bucketing into the correct shard. In Go this looks like:
+When a write comes in with values that have a timestamp in `2016-09-19` the cluster must first determine which shard within the shard group should receive the write. This is done by taking a hash of the `measurement` + sorted `tagset` (the metaseries) and bucketing into the correct shard. In Go this looks like:
 
 ```go
 // key is measurement + tagset

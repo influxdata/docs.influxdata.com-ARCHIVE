@@ -1,6 +1,6 @@
 ---
 title: Web Admin Interface
-
+newversionredirect: chronograf/
 menu:
   influxdb_1_3:
     weight: 30

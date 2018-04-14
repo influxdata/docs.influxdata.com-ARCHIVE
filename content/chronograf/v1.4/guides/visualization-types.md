@@ -20,7 +20,7 @@ Each of the available visualization types and available user controls are descri
 * [Stacked Graph](#stacked-graph)
 * [Step-Plot Graph](#step-plot-graph)
 * [Single Stat](#single-stat)
-* [Line Graph + Single Stat](#line-graph---single-stat)
+* [Line Graph + Single Stat](#line-graph-single-stat)
 * [Bar Graph](#bar-graph)
 * [Gauge](#gauge)
 

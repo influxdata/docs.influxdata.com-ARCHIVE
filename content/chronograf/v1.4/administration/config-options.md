@@ -11,11 +11,11 @@ menu:
 **On this page:**
 
 * [Usage](#usage)
-* [Chronograf service options](#application-options)
-  - [InfluxDB connection options](#influxdb-authentication-options)
-  - [Kapacitor connection options](#kapacitor-authentication-options)
-  - [TLS (Transport Layer Security) options](#tls--transport-layer-security--options)
-  * [Other service options](#other-options)
+* [Chronograf service options](#chronograf-service-options)
+  - [InfluxDB connection options](#influxdb-connection-options)
+  - [Kapacitor connection options](#kapacitor-connection-options)
+  - [TLS (Transport Layer Security) options](#tls-transport-layer-security-options)
+  * [Other service options](#other-service-options)
 * [Authentication options](#authentication-options)
     * [General authentication options](#general-authentication-options)
     * [GitHub-specific OAuth 2.0 authentication options](#github-specific-oauth-2-0-authentication-options)
@@ -160,7 +160,7 @@ Environment variable: `$KAPACITOR_PASSWORD`
 
 ### TLS (Transport Layer Security) options
 
-See [Configuring TLS (Transport Layer Security) and HTTPS](/chronograf/v1.4/administration/managing-security/#configuring-tls--transport-layer-security-and-https) for more information.
+See [Configuring TLS (Transport Layer Security) and HTTPS](/chronograf/v1.4/administration/managing-security/#configuring-tls-transport-layer-security-and-https) for more information.
 
 #### `--cert=`
 
@@ -284,7 +284,7 @@ Environment variable: `$PUBLIC_URL`
 
 ### Auth0-specific OAuth 2.0 authentication options
 
-See [Configuring Auth0 authentication](/chronograf/v1.4/administration/managing-security/#configuring-oauth-authentication) for more information.
+See [Configuring Auth0 authentication](/chronograf/v1.4/administration/managing-security/#configuring-auth0-authentication) for more information.
 
 ####`--auth0-domain=`
 
@@ -337,7 +337,7 @@ Lists are comma-separated.
 
 ### Generic OAuth 2.0 authentication options
 
-See [Configuring Generic authentication](/chronograf/v1.4/administration/managing-security/#configuring-g-authentication) for more information.
+See [Configuring Generic authentication](/chronograf/v1.4/administration/managing-security/#configuring-generic-authentication) for more information.
 
 ####`--generic-name=`
 
