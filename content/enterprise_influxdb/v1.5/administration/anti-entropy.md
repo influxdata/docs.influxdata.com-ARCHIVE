@@ -1,11 +1,11 @@
 ---
 title: Anti-entropy
-alias:
-  -/docs/v1.5/administration/anti-entropy
+aliases:
+  - /enterprise_influxdb/v1.5/guides/anti-entropy/
 menu:
   enterprise_influxdb_1_5:
-    weight: 10
-    parent: Guides
+    weight: 40
+    parent: Administration
 ---
 
 ## Introduction

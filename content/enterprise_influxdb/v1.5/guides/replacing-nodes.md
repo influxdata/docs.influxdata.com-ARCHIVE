@@ -14,7 +14,7 @@ This guide outlines processes for replacing both meta nodes and data nodes in an
 
 ## Concepts
 Meta nodes manage and monitor both the uptime of nodes in the cluster as well as distribution of [shards](/influxdb/v1.5/concepts/glossary/#shard) among nodes in the cluster.
-Meta nodes also handle the [anti-entropy](/enterprise_influxdb/v1.5/guides/anti-entropy/) (AE) process that ensures data nodes have the shards they need.
+Meta nodes also handle the [anti-entropy](/enterprise_influxdb/v1.5/administration/anti-entropy/) (AE) process that ensures data nodes have the shards they need.
 
 Data nodes hold raw time-series data and metadata. Data shards and both distributed and replicated across data nodes in the cluster.
 
@@ -234,7 +234,7 @@ Within the duration defined by [`anti-entropy.check-interval`](/enterprise_influ
 the AE service will begin copying shards from other shard owners to the new node.
 The time it takes for copying to complete is determined by the number of shards copied and how much data is stored in each.
 
-> **Note:** View the [Anti-entropy](/enterprise_influxdb/v1.5/guides/anti-entropy/#concepts) documentation for important information regarding anti-entropy and your database's replication factor.
+> **Note:** View the [Anti-entropy](/enterprise_influxdb/v1.5/administration/anti-entropy/#concepts) documentation for important information regarding anti-entropy and your database's replication factor.
 
 ## Scenarios
 
