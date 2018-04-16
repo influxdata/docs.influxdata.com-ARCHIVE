@@ -50,29 +50,29 @@ influxd-ctl [global-options] <command> [arguments]
 
 ### Global Options
 
-`-auth-type [ none | basic | jwt ]`
-&emsp;&emsp;&emsp;Specify the type of authentication to use. The default authentication type is `none`.
+`-auth-type [ none | basic | jwt ]`  
+Specify the type of authentication to use. The default authentication type is `none`.
 
-`-bind <hostname>:<port>`
-&emsp;&emsp;&emsp;Specify the bind HTTP address of a meta node to connect to. The default is `localhost:8091`.
+`-bind <hostname>:<port>`  
+Specify the bind HTTP address of a meta node to connect to. The default is `localhost:8091`.
 
-`-bind-tls`
-&emsp;&emsp;&emsp;Use TLS.  If you have enabled HTTPS, you MUST use this option in order for influxd-ctl to connect to the meta node.
+`-bind-tls`  
+Use TLS.  If you have enabled HTTPS, you MUST use this option in order for influxd-ctl to connect to the meta node.
 
-`-config '<path-to-configuration-file>'`
-&emsp;&emsp;&emsp;Specify the path to the configuration file.
+`-config '<path-to-configuration-file>'`  
+Specify the path to the configuration file.
 
-`-pwd <password>`
-&emsp;&emsp;&emsp;Specify the user’s password. This option is ignored if `-auth-type basic` isn’t specified.
+`-pwd <password>`  
+Specify the user’s password. This option is ignored if `-auth-type basic` isn’t specified.
 
-`-k`
-&emsp;&emsp;&emsp;Skip certificate verification; use this option with a self-signed certificate. `-k` is ignored if `-bind-tls` isn't specified.
+`-k`  
+Skip certificate verification; use this option with a self-signed certificate. `-k` is ignored if `-bind-tls` isn't specified.
 
-`-secret <JWT-shared-secret>`
-&emsp;&emsp;&emsp;Specify the JSON Web Token (JWT) shared secret. This option is ignored if `-auth-type jwt` isn't specified.
+`-secret <JWT-shared-secret>`  
+Specify the JSON Web Token (JWT) shared secret. This option is ignored if `-auth-type jwt` isn't specified.
 
-`-user <username>`
-&emsp;&emsp;&emsp;Specify the user’s username. This option is ignored if `-auth-type basic` isn’t specified.
+`-user <username>`  
+Specify the user’s username. This option is ignored if `-auth-type basic` isn’t specified.
 
 ### Examples of Global Options
 
@@ -204,20 +204,20 @@ backup [ -db <database> | -from <data-node-TCP-bind-address> | -full | -rp <rete
 ```
 Options:
 
-`-db <database>`:
-&emsp;&emsp;&emsp;The name of the single database to back up.
+`-db <database>`:  
+The name of the single database to back up.
 
-`-from <data-node-TCP-address>`:
-&emsp;&emsp;&emsp;The TCP address of the target data node.
+`-from <data-node-TCP-address>`:  
+The TCP address of the target data node.
 
-`-full`:
-&emsp;&emsp;&emsp;Perform a [full](/enterprise_influxdb/v1.5/administration/backup-and-restore/#backup) backup.
+`-full`:  
+Perform a [full](/enterprise_influxdb/v1.5/administration/backup-and-restore/#backup) backup.
 
-`-rp <retention-policy>`:
-&emsp;&emsp;&emsp;The name of the single [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) to back up (requires the `-db` flag).
+`-rp <retention-policy>`:  
+The name of the single [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) to back up (requires the `-db` flag).
 
-`-shard <shard-id>`:
-&emsp;&emsp;&emsp;The ID of the single shard to back up.
+`-shard <shard-id>`:  
+The ID of the single shard to back up.
 
 > Restoring a `-full` backup and restoring an incremental backup require different syntax.
 To prevent issues with [`restore`](#restore), keep `-full` backups and incremental backups in separate directories.
@@ -327,11 +327,11 @@ join [-v] [<meta-node-HTTP-bind-address>]
 
 Options:
 
-`-v`
-&emsp;&emsp;&emsp;Prints verbose information about the join.
+`-v`  
+Prints verbose information about the join.
 
-`meta-node-HTTP-bind-address`
-&emsp;&emsp;&emsp;The address of a meta node in an existing cluster.
+`meta-node-HTTP-bind-address`  
+The address of a meta node in an existing cluster.
 Use this option to add the un-joined meta node and/or data node to an existing cluster.
 
 Resources: [QuickStart Installation](/enterprise_influxdb/v1.5/quickstart_installation/cluster_installation/)
@@ -460,8 +460,8 @@ leave [-y]
 
 Options:
 
-`-y`
-&emsp;&emsp;&emsp;Assume yes (`y`) to all prompts.
+`-y`  
+Assume yes (`y`) to all prompts.
 
 ##### Examples
 <br>
@@ -536,8 +536,8 @@ remove-data [-force] <data-node-TCP-bind-address>
 
 Options:
 
-`-force`
-&emsp;&emsp;&emsp;Forces the removal of the data node.
+`-force`  
+Forces the removal of the data node.
 Use `-force` if the data node process is not running.
 
 ##### Examples
@@ -564,18 +564,18 @@ remove-meta [-force | -tcpAddr <meta-node-TCP-bind_address> | -y] <meta-node-HTT
 
 Options:
 
-`-force`
-&emsp;&emsp;&emsp;Forces the removal of the meta node.
+`-force`  
+Forces the removal of the meta node.
 Use `-force` if the meta node process if not running, and the node is not reachable and unrecoverable.
 If a meta node restarts after being `-force` removed, it may interfere with the cluster.
 This options requires the `-tcpAddr` option.
 
-`-tcpAddr <meta-node-TCP-bind_address>`
-&emsp;&emsp;&emsp;The TCP address of the meta node to remove from the cluster.
+`-tcpAddr <meta-node-TCP-bind_address>`  
+The TCP address of the meta node to remove from the cluster.
 Use this option with the `-force` option.
 
-`-y`
-&emsp;&emsp;&emsp;Assumes `Yes` to all prompts.
+`-y`  
+Assumes `Yes` to all prompts.
 
 ##### Examples
 <br>
@@ -645,30 +645,30 @@ If the restore doesn't use the `-full` option, specify the `path-to-backup-direc
 
 Options:
 
-`-db <string>`
-&emsp;&emsp;&emsp;The name of the single database to restore.
+`-db <string>`  
+The name of the single database to restore.
 
-`-full`
-&emsp;&emsp;&emsp;Restore a backup that was created with the `-full` flag.
+`-full`  
+Restore a backup that was created with the `-full` flag.
 A restore command with the `-full` flag requires the `path-to-backup-manifest-file`.
 
-`-list`
-&emsp;&emsp;&emsp;Show the contents of the backup.
+`-list`  
+Show the contents of the backup.
 
-`-newdb <string>`
-&emsp;&emsp;&emsp;The name of the new database to restore to (must specify with `-db`).
+`-newdb <string>`  
+The name of the new database to restore to (must specify with `-db`).
 
-`-newrf <int>`
-&emsp;&emsp;&emsp;The new [replication factor](/influxdb/v1.5/concepts/glossary/#replication-factor) to restore to (this is capped to the number of data nodes in the cluster).
+`-newrf <int>`  
+The new [replication factor](/influxdb/v1.5/concepts/glossary/#replication-factor) to restore to (this is capped to the number of data nodes in the cluster).
 
-`-newrp <string>`
-&emsp;&emsp;&emsp;The name of the new [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) to restore to (must specify with `-rp`).
+`-newrp <string>`  
+The name of the new [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) to restore to (must specify with `-rp`).
 
-`-rp <string>`
-&emsp;&emsp;&emsp;The name of the single retention policy to restore.
+`-rp <string>`  
+The name of the single retention policy to restore.
 
-`-shard <unit>`
-&emsp;&emsp;&emsp;The [shard](/influxdb/v1.5/concepts/glossary/#shard) ID to restore.
+`-shard <unit>`  
+The [shard](/influxdb/v1.5/concepts/glossary/#shard) ID to restore.
 
 Resources: [Backup and Restore](/enterprise_influxdb/v1.5/administration/backup-and-restore/#restore)
 
@@ -795,8 +795,8 @@ token [-exp <duration>]
 
 Options:
 
-`-exp`
-&emsp;&emsp;&emsp;Determines the time after which the token expires.
+`-exp`  
+Determines the time after which the token expires.
 By default, the token expires after one minute.
 
 ##### Examples
@@ -833,8 +833,8 @@ truncate-shards [-delay <duration>]
 
 Options:
 
-`-delay <duration>`
-&emsp;&emsp;&emsp;Determines when to truncate shards after [`now()`](/influxdb/v1.5/concepts/glossary/#now).
+`-delay <duration>`  
+Determines when to truncate shards after [`now()`](/influxdb/v1.5/concepts/glossary/#now).
 By default, the tool sets the delay to one minute.
 The `duration` is an integer followed by a [duration unit](/influxdb/v1.5/query_language/spec/#durations).
 
