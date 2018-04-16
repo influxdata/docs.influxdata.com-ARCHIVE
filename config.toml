@@ -745,6 +745,14 @@ SectionPagesMenu = "products"
   url = "https://influxdata.com/downloads/#chronograf"
   parent = "Introduction"
 
+# Telegraf v1.6 Sub-Menu - Introduction
+  [[menu.telegraf_1_6]]
+  name = "Download"
+  identifier = "download"
+  weight = 5
+  url = "https://influxdata.com/downloads/#telegraf"
+  parent = "introduction"
+
 # Telegraf v1.5 Sub-Menu - Introduction
   [[menu.telegraf_1_5]]
   name = "Download"
