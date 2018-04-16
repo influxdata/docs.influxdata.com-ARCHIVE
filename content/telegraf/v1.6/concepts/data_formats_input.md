@@ -1,5 +1,5 @@
 ---
-title: Input data formats
+title: Telegraf input data formats
 
 menu:
   telegraf_1_6:
@@ -10,35 +10,35 @@ menu:
 
 Telegraf is able to parse the following input data formats into metrics:
 
-1. [InfluxDB Line Protocol](#influx)
-1. [JSON](#json)
-1. [Graphite](#graphite)
-1. [Value](#value), ie: 45 or "booyah"
-1. [Nagios](#nagios) (exec input only)
-1. [Collectd](#collectd)
+1. [InfluxDB Line Protocol](#influxdb-line-protocol)
+2. [JSON](#json)
+3. [Graphite](#graphite)
+4. [Value](value), ie: 45 or "booyah"
+5. [Nagios](#nagios)
+6. [Collectd](#collectd)
+7. [Dropwizard](#dropwizard)
 
 Telegraf metrics, like InfluxDB
-[points](https://docs.influxdata.com/influxdb/v0.10/write_protocols/line/),
+[points](/influxdb/latest/write_protocols/line_protocol_tutorial/),
 are a combination of four basic parts:
 
-1. Measurement Name
-1. Tags
-1. Fields
-1. Timestamp
+1. Measurement name
+2. Tags
+3. Fields
+4. Timestamp
 
-These four parts are easily defined when using InfluxDB line-protocol as a
-data format. But there are other data formats that users may want to use which
+These four parts are easily defined when using the [InfluxDB Line Protocol](/influxdb/latest/write_protocols/line_protocol_reference/) as a data format. But there are other data formats that users may want to use which
 require more advanced configuration to create usable Telegraf metrics.
 
-Plugins such as `exec` and `kafka_consumer` parse textual data. Up until now,
+Plugins such as Exec (`exec`) and Kafka Consumer (`kafka_consumer`) parse textual data. Up until now,
 these plugins were statically configured to parse just a single
-data format. `exec` mostly only supported parsing JSON, and `kafka_consumer` only
+data format. The Exec (`exec`) input plugin mostly only supported parsing JSON, and the Kafka Consumer (`kafka_consumer`) only
 supported data in InfluxDB line-protocol.
 
-But now we are normalizing the parsing of various data formats across all
+Now, we are normalizing the parsing of various data formats across all
 plugins that can support it. You will be able to identify a plugin that supports
 different data formats by the presence of a `data_format` config option, for
-example, in the exec plugin:
+example, in the Exec (`exec`) input plugin:
 
 ```toml
 [[inputs.exec]]
@@ -57,15 +57,15 @@ example, in the exec plugin:
   ## Additional configuration options go here
 ```
 
-Each data_format has an additional set of configuration options available, which
-I'll go over below.
+Each `data_format` has an additional set of configuration options available, which
+are discussed below.
 
-# Influx:
+# InfluxDB Line Protocol
 
-There are no additional configuration options for InfluxDB line-protocol. The
+There are no additional configuration options for InfluxDB line protocol. The
 metrics are parsed directly into Telegraf metrics.
 
-#### Influx configuration:
+#### Influx configuration
 
 ```toml
 [[inputs.exec]]
@@ -82,7 +82,7 @@ metrics are parsed directly into Telegraf metrics.
   data_format = "influx"
 ```
 
-# JSON:
+# JSON
 
 The JSON data format flattens JSON into metric _fields_.
 NOTE: Only numerical values are converted to fields, and they are converted
@@ -109,7 +109,7 @@ myjsonmetric a=5,b_c=6
 The _measurement_ _name_ is usually the name of the plugin,
 but can be overridden using the `name_override` config option.
 
-#### JSON configuration:
+#### JSON configuration
 
 The JSON data format supports specifying "tag keys". If specified, keys
 will be searched for in the root-level of the JSON blob. If the key(s) exist,
@@ -309,7 +309,7 @@ templates = [
 
 #### Field templates
 
-The `field` keyword tells Telegraf to give the metric that field name.
+The field keyword tells Telegraf to give the metric that field name.
 So the following template:
 
 ```toml
@@ -326,7 +326,7 @@ cpu.usage.idle.percent.eu-east 100
 => cpu_usage,region=eu-east idle_percent=100
 ```
 
-The `field` key can also be derived from all remaining elements of the graphite
+The field key can also be derived from all remaining elements of the graphite
 bucket by specifying `field*`:
 
 ```toml
@@ -343,7 +343,7 @@ cpu.usage.eu-east.idle.percentage 100
 => cpu_usage,region=eu-east idle_percentage=100
 ```
 
-#### Filter Templates:
+#### Filter templates
 
 Users can also filter the template(s) to use based on the name of the bucket,
 using glob matching, like so:
@@ -426,10 +426,10 @@ There are many more options available,
 
 # Nagios
 
-There are no additional configuration options for Nagios line-protocol. The
+There are no additional configuration options for Nagios line protocol. The
 metrics are parsed directly into Telegraf metrics.
 
-Note: Nagios Input Data Formats is only supported in `exec` input plugin.
+Note: Nagios input data formats are only supported in the [Exec (`exec`) input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/exec).
 
 #### Nagios configuration
 
@@ -454,7 +454,7 @@ The collectd format parses the collectd binary network protocol.  Tags are
 created for host, instance, type, and type instance.  All collectd values are
 added as float64 fields.
 
-For more information about the binary network protocol see
+For more information about the binary network protocol, see
 [here](https://collectd.org/wiki/index.php/Binary_protocol).
 
 You can control the cryptographic settings with parser options.  Create an
@@ -467,7 +467,7 @@ Additional information including client setup can be found
 You can also change the path to the typesdb or add additional typesdb using
 `collectd_typesdb`.
 
-#### Collectd configuration
+#### Collectd Configuration:
 
 ```toml
 [[inputs.socket_listener]]
@@ -486,4 +486,177 @@ You can also change the path to the typesdb or add additional typesdb using
   collectd_security_level = "encrypt"
   ## Path of to TypesDB specifications
   collectd_typesdb = ["/usr/share/collectd/types.db"]
+```
+
+# Dropwizard
+
+The dropwizard format can parse the JSON representation of a single dropwizard metric registry. By default, tags are parsed from metric names as if they were actual influxdb line protocol keys (`measurement<,tag_set>`) which can be overridden by defining custom [measurement & tag templates](./DATA_FORMATS_INPUT.md#measurement--tag-templates). All field value types are supported, `string`, `number` and `boolean`.
+
+A typical JSON of a dropwizard metric registry:
+
+```json
+{
+	"version": "3.0.0",
+	"counters" : {
+		"measurement,tag1=green" : {
+			"count" : 1
+		}
+	},
+	"meters" : {
+		"measurement" : {
+			"count" : 1,
+			"m15_rate" : 1.0,
+			"m1_rate" : 1.0,
+			"m5_rate" : 1.0,
+			"mean_rate" : 1.0,
+			"units" : "events/second"
+		}
+	},
+	"gauges" : {
+		"measurement" : {
+			"value" : 1
+		}
+	},
+	"histograms" : {
+		"measurement" : {
+			"count" : 1,
+			"max" : 1.0,
+			"mean" : 1.0,
+			"min" : 1.0,
+			"p50" : 1.0,
+			"p75" : 1.0,
+			"p95" : 1.0,
+			"p98" : 1.0,
+			"p99" : 1.0,
+			"p999" : 1.0,
+			"stddev" : 1.0
+		}
+	},
+	"timers" : {
+		"measurement" : {
+			"count" : 1,
+			"max" : 1.0,
+			"mean" : 1.0,
+			"min" : 1.0,
+			"p50" : 1.0,
+			"p75" : 1.0,
+			"p95" : 1.0,
+			"p98" : 1.0,
+			"p99" : 1.0,
+			"p999" : 1.0,
+			"stddev" : 1.0,
+			"m15_rate" : 1.0,
+			"m1_rate" : 1.0,
+			"m5_rate" : 1.0,
+			"mean_rate" : 1.0,
+			"duration_units" : "seconds",
+			"rate_units" : "calls/second"
+		}
+	}
+}
+```
+
+Would get translated into 4 different measurements:
+
+```
+measurement,metric_type=counter,tag1=green count=1
+measurement,metric_type=meter count=1,m15_rate=1.0,m1_rate=1.0,m5_rate=1.0,mean_rate=1.0
+measurement,metric_type=gauge value=1
+measurement,metric_type=histogram count=1,max=1.0,mean=1.0,min=1.0,p50=1.0,p75=1.0,p95=1.0,p98=1.0,p99=1.0,p999=1.0
+measurement,metric_type=timer count=1,max=1.0,mean=1.0,min=1.0,p50=1.0,p75=1.0,p95=1.0,p98=1.0,p99=1.0,p999=1.0,stddev=1.0,m15_rate=1.0,m1_rate=1.0,m5_rate=1.0,mean_rate=1.0
+```
+
+You may also parse a dropwizard registry from any JSON document which contains a dropwizard registry in some inner field.
+Eg. to parse the following JSON document:
+
+```json
+{
+	"time" : "2017-02-22T14:33:03.662+02:00",
+	"tags" : {
+		"tag1" : "green",
+		"tag2" : "yellow"
+	},
+	"metrics" : {
+		"counters" : 	{
+			"measurement" : {
+				"count" : 1
+			}
+		},
+		"meters" : {},
+		"gauges" : {},
+		"histograms" : {},
+		"timers" : {}
+	}
+}
+```
+and translate it into:
+
+```
+measurement,metric_type=counter,tag1=green,tag2=yellow count=1 1487766783662000000
+```
+
+you simply need to use the following additional configuration properties:
+
+```toml
+dropwizard_metric_registry_path = "metrics"
+dropwizard_time_path = "time"
+dropwizard_time_format = "2006-01-02T15:04:05Z07:00"
+dropwizard_tags_path = "tags"
+## tag paths per tag are supported too, eg.
+#[inputs.yourinput.dropwizard_tag_paths]
+#  tag1 = "tags.tag1"
+#  tag2 = "tags.tag2"
+```
+
+
+For more information about the dropwizard json format see
+[here](http://metrics.dropwizard.io/3.1.0/manual/json/).
+
+#### Dropwizard configuration
+
+```toml
+[[inputs.exec]]
+  ## Commands array
+  commands = ["curl http://localhost:8080/sys/metrics"]
+  timeout = "5s"
+
+  ## Data format to consume.
+  ## Each data format has its own unique set of configuration options, read
+  ## more about them here:
+  ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
+  data_format = "dropwizard"
+
+  ## Used by the templating engine to join matched values when cardinality is > 1
+  separator = "_"
+
+  ## Each template line requires a template pattern. It can have an optional
+  ## filter before the template and separated by spaces. It can also have optional extra
+  ## tags following the template. Multiple tags should be separated by commas and no spaces
+  ## similar to the line protocol format. There can be only one default template.
+  ## Templates support below format:
+  ## 1. filter + template
+  ## 2. filter + template + extra tag(s)
+  ## 3. filter + template with field key
+  ## 4. default template
+  ## By providing an empty template array, templating is disabled and measurements are parsed as influxdb line protocol keys (measurement<,tag_set>)
+  templates = []
+
+  ## You may use an appropriate [gjson path](https://github.com/tidwall/gjson#path-syntax)
+  ## to locate the metric registry within the JSON document
+  # dropwizard_metric_registry_path = "metrics"
+
+  ## You may use an appropriate [gjson path](https://github.com/tidwall/gjson#path-syntax)
+  ## to locate the default time of the measurements within the JSON document
+  # dropwizard_time_path = "time"
+  # dropwizard_time_format = "2006-01-02T15:04:05Z07:00"
+
+  ## You may use an appropriate [gjson path](https://github.com/tidwall/gjson#path-syntax)
+  ## to locate the tags map within the JSON document
+  # dropwizard_tags_path = "tags"
+
+  ## You may even use tag paths per tag
+  # [inputs.exec.dropwizard_tag_paths]
+  #   tag1 = "tags.tag1"
+  #   tag2 = "tags.tag2"
+
 ```

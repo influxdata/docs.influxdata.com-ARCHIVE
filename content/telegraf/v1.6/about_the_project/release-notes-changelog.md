@@ -10,48 +10,46 @@ menu:
 
 ### Release notes
 
-- The `mysql` input plugin has been updated fix a number of type convertion
+- The MySQL (`mysql`) input plugin has been updated fix a number of type conversion
   issues.  This may cause a `field type error` when inserting into InfluxDB due
   the change of types.
 
-  To address this we have introduced a new `metric_version` option to control
-  enabling the new format.  For in depth recommendations on upgrading please
-  reference the [mysql plugin documentation](./plugins/inputs/mysql/README.md#metric-version).
+  To address this, we have introduced a new `metric_version` option to control
+  enabling the new format.  
+  For in depth recommendations on upgrading, see [Metric version](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/mysql#metric-version) in the MySQL input plugin documentation.
 
-  It is encouraged to migrate to the new model when possible as the old version
+  You are encouraged to migrate to the new model when possible as the old version
   is deprecated and will be removed in a future version.
 
-- The `postgresql` plugins now defaults to using a persistent connection to the database.
+- The PostgreSQL (`postgresql`) input plugin now defaults to using a persistent connection to the database.
   In environments where TCP connections are terminated the `max_lifetime`
   setting should be set less than the collection `interval` to prevent errors.
 
-- The `sqlserver` input plugin has a new query and data model that can be enabled
-  by setting `query_version = 2`.  It is encouraged to migrate to the new
-  model when possible as the old version is deprecated and will be removed in
-  a future version.
+- The SQL Server (`sqlserver`) input plugin has a new query and data model that can be enabled
+  by setting `query_version = 2`.  
+  Migrate to the new model, if possible, since the old version is deprecated and will be removed in a future version.
 
-- An option has been added to the `openldap` input plugin that reverses metric
-  name to improve grouping.  This change is enabled when `reverse_metric_names = true`
-  is set.  It is encouraged to enable this option when possible as the old
-  ordering is deprecated.
+- The OpenLDAP (`openldap`) input plugin has a new option, `reverse_metric_names = true`, that reverses metric
+  names to improve grouping.  
+  Enable this option, when possible, as the old ordering is deprecated.
 
-- The new `http` input configured with `data_format = "json"` can perform the
-  same task as the, now deprecated, `httpjson` input.
+- The new HTTP (`http`) input plugin, when configured with `data_format = "json"`, can perform the
+  same task as the, now deprecated, HTTP JSON (`httpjson`) input plugin.
 
 
 ### New input plugins
 
-- [HTTP (http) input plugin](./plugins/inputs/http/README.md) - Thanks to @grange74
-- [Ipset (`ipset`) input plugin](./plugins/inputs/ipset/README.md) - Thanks to @sajoupa
-- [NATS Server Monitoring (`nats`) input plugin](./plugins/inputs/nats/README.md) - Thanks to @mjs and @levex
+- [HTTP (http) input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/http/README.md) - Thanks to @grange74
+- [Ipset (`ipset`) input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ipset/README.md) - Thanks to @sajoupa
+- [NATS Server Monitoring (`nats`) input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/nats/README.md) - Thanks to @mjs and @levex
 
 ### New processor plugins
 
-- [override](./plugins/processors/override/README.md) - Thanks to @KarstenSchnitter
+- [Override (`override`) processor plugin](https://github.com/influxdata/telegraf/tree/master/plugins/processors/override/README.md) - Thanks to @KarstenSchnitter
 
 ### New parsers
 
-- [dropwizard](./docs/DATA_FORMATS_INPUT.md#dropwizard) - Thanks to @atzoum
+- [Dropwizard format](https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md#dropwizard) - Thanks to @atzoum
 
 ### Features
 
