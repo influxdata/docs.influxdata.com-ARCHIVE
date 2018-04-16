@@ -19,7 +19,7 @@ Telegraf is entirely input driven. It gathers all metrics from the inputs specif
 View usage instructions for each service input by running `telegraf --usage <service-input-name>`.
 
 
-## Supported input plugins
+## Supported Telegraf input plugins
 
 
 ### [Aerospike (`aerospike`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/aerospike)
@@ -544,7 +544,7 @@ The [Zipkin (`zipkin`) input plugin](https://github.com/influxdata/telegraf/tree
 
 The [Zookeeper (`zookeeper`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/zookeeper) collects variables outputted from the `mntr` command [Zookeeper Admin](https://zookeeper.apache.org/doc/trunk/zookeeperAdmin.html).
 
-## Deprecated input plugins
+## Deprecated Telegraf input plugins
 
 ### [HTTP JSON (`httpjson`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/httpjson)
 

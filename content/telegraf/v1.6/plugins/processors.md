@@ -15,7 +15,7 @@ Processor plugins process metrics as they pass through and immediately emit resu
 >The [Release Notes/Changelog](/telegraf/v1.5/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
 
 
-## Supported processor plugins
+## Supported Telegraf processor plugins
 
 ### [Override (`override`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/processors/override) -- NEW in v1.6
 
@@ -32,6 +32,6 @@ Values of `name_override`, `name_prefix`, `name_suffix`, and already present tag
 
 Use case of this plugin encompass ensuring certain tags or naming conventions are adhered to irrespective of input plugin configurations, e.g., by `taginclude`.
 
-### [Printer (printer)](https://github.com/influxdata/telegraf/tree/release-1.4/plugins/processors/printer)
+### [Printer (`printer`)](https://github.com/influxdata/telegraf/tree/release-1.4/plugins/processors/printer)
 
-The [Printer (printer) processor plugin](https://github.com/influxdata/telegraf/tree/release-1.4/plugins/processors/printer) simply prints every metric passing through it.
+The [Printer (`printer`) processor plugin](https://github.com/influxdata/telegraf/tree/release-1.4/plugins/processors/printer) simply prints every metric passing through it.

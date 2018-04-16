@@ -22,7 +22,7 @@ menu:
   is deprecated and will be removed in a future version.
 
 - The PostgreSQL (`postgresql`) input plugin now defaults to using a persistent connection to the database.
-  In environments where TCP connections are terminated the `max_lifetime`
+  In environments where TCP connections are terminated, the `max_lifetime`
   setting should be set less than the collection `interval` to prevent errors.
 
 - The SQL Server (`sqlserver`) input plugin has a new query and data model that can be enabled
@@ -39,7 +39,7 @@ menu:
 
 ### New input plugins
 
-- [HTTP (http) input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/http/README.md) - Thanks to @grange74
+- [HTTP (`http`) input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/http/README.md) - Thanks to @grange74
 - [Ipset (`ipset`) input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ipset/README.md) - Thanks to @sajoupa
 - [NATS Server Monitoring (`nats`) input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/nats/README.md) - Thanks to @mjs and @levex
 
@@ -49,20 +49,20 @@ menu:
 
 ### New parsers
 
-- [Dropwizard format](https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md#dropwizard) - Thanks to @atzoum
+- [Dropwizard input data format](https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md#dropwizard) - Thanks to @atzoum
 
 ### Features
 
-* Add health status mapping from `string` to `int` in Elasticsearch input plugin.
+* Add health status mapping from `string` to `int` in Elasticsearch (`elasticsearch`) input plugin.
 * Add control over which stats to gather in BasicStats (`basicstats`) aggregator plugin.
 * Add `messages_delivered_get` to RabbitMQ (`rabbitmq`) input plugin.
 * Add `wired` field to mem input plugin.
 * Add support for gathering exchange metrics to the RabbitMQ (`rabbitmq`) input plugin.
 * Add support for additional metrics on Linux in Zfs (`zfs`) input plugin.
-* Add `available_entropy` field to Kernal (`kernel`) input plugin.
+* Add `available_entropy` field to Kernel (`kernel`) input plugin.
 * Add user privilege level setting to IPMI sensors.
 * Use persistent connection to PostgreSQL database.
-* Add support for dropwizard input format.
+* Add support for dropwizard input data format.
 * Add container health metrics to Docker (`docker`) input plugin.
 * Add support for using globs in devices list of DiskIO (`diskio`) input plugin.
 * Allow running as console application on Windows.
@@ -71,15 +71,15 @@ menu:
 * Add ability to select which queues will be gathered in RabbitMQ (`rabbitmq`) input plugin.
 * Add support for setting BSD source address to the ping (`ping`) input plugin.
 * Add Ipset (`ipset`) input plugin.
-* Add TLS and HTTP basic auth to Prometheus client (`prometheus_client`) output plugin.
+* Add TLS and HTTP basic auth to Prometheus Client (`prometheus_client`) output plugin.
 * Add new sqlserver output data model.
-* Add native Go method for finding `pid`s to the Procstat (`procstat`) input plugin.
+* Add native Go method for finding `pid` to the Procstat (`procstat`) input plugin.
 * Add additional metrics and reverse metric names option to OpenLDAP (`openldap`) input plugin.
 * Add TLS support to the Mesos (`mesos`) input plugin.
 * Add HTTP (`http`) input plugin.
-* Add keep alive support to the TCP mode of `statsd` .
+* Add keep alive support to the TCP mode of StatsD (`statsd`) input plugin .
 * Support deadline in Ping (`ping`) input plugin.
-* Add option to disable labels in prometheus output plugin for string fields.
+* Add option to disable labels in the Prometheus Client (`prometheus`) output plugin for string fields.
 * Add shard server stats to the MongoDB (`mongodb`) input plugin.
 * Add server option to Unbound (`unbound`) input plugin.
 * Convert boolean metric values to float in Datadog (`datadog`) output plugin.
@@ -135,8 +135,8 @@ menu:
 - Reconnect before sending Graphite metrics if disconnected.
 - Align aggregator period with internal ticker to avoid skipping metrics.
 - Fix a potential deadlock when using aggregators.
-- Limit wait time for writes in MQTT output.
-- Revert change in Graphite output where dot in field key was replaced by underscore.
+- Limit wait time for writes in MQTT (`mqtt`) output plugin.
+- Revert change in Graphite (`graphite`) output plugin where dot(`.`) in field key was replaced by underscore (`_`).
 - Add `timeout` to Wavefront output write.
 - Exclude `master_replid` fields from Redis input.
 
@@ -146,16 +146,16 @@ menu:
 
 - Fix name error in jolokia2_agent sample config.
 - Fix DC/OS input - login expiration time.
-- Set Content-Type charset parameter in InfluxDB output and allow it to be overridden.
-- Document permissions setup for Postfix input.
-- Fix `deliver_get` field in RabbitMQ input.
+- Set Content-Type charset parameter in InfluxDB (`influxdb`) output plugin and allow it to be overridden.
+- Document permissions setup for Postfix (`postfix`) input plugin.
+- Fix `deliver_get` field in RabbitMQ (`rabbitmq`) input plugin.
 - Escape environment variables during config TOML parsing.
 
 ## v1.5 [2017-12-14]
 
 ### New plugins
 
-#### Input
+#### Input plugins
 - [Bond (bond)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/bond/README.md) - Thanks to @ildarsv
 - [DC/OS (dcos)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/dcos/README.md) - Thanks to @influxdata
 - [Jolokia2 (jolokia2)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/jolokia2/README.md) - Thanks to @dylanmei
@@ -169,60 +169,60 @@ menu:
 - [Teamspeak (teamspeak)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/teamspeak/README.md) - Thanks to @p4ddy1
 - [Unbound (unbound)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/unbound/README.md) - Thanks to @aromeyer
 
-#### Aggregator
+#### Aggregator plugins
 - [BasicStats (basicstats)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/aggregators/basicstats/README.md) - Thanks to @toni-moreno
 
-#### Output
+#### Output plugins
 - [CrateDB (cratedb)](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/cratedb) - Thanks to @felixge
 - [Wavefront (wavefront)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/wavefront/README.md) - Thanks to @puckpuck
 
 
-### Release Notes
+### Release notes
 
-- In the `kinesis` output, use of the `partition_key` and
+- In the Kinesis (`kinesis`) output plugin, use of the `partition_key` and
   `use_random_partitionkey` options has been deprecated in favor of the
   `partition` subtable.  This allows for more flexible methods to set the
   partition key such as by metric name or by tag.
 
-- With the release of the new improved `jolokia2` input, the legacy `jolokia`
+- With the release of the new improved Jolokia2 (`jolokia2`) input plugin, the legacy `jolokia`
   plugin is deprecated and will be removed in a future release.  Users of this
   plugin are encouraged to update to the new `jolokia2` plugin.
 
 ### Features
 
 - Add support for sharding based on metric name.
-- Add Kafka output plugin topic_suffix option.
+- Add Kafka output plugin `topic_suffix` option.
 - Include mount mode option in disk metrics.
-- TLS and MTLS enhancements to HTTPListener input plugin.
+- TLS and MTLS enhancements to HTTP Listener input plugin.
 - Add polling method to logparser and tail inputs.
-- Add timeout option for kubernetes input.
-- Add support for timing sums in statsd input.
-- Add resource limit monitoring to procstat.
-- Add support for k8s service DNS discovery to prometheus input.
-- Add configurable metrics endpoint to prometheus output.
-- Add support for NSQLookupd to nsq_consumer.
-- Add configurable separator for metrics and fields in opentsdb output.
+- Add timeout option for Kubernetes (`kubernetes`) input plugin.
+- Add support for timing sums in statsd input plugin.
+- Add resource limit monitoring to Procstat (`procstat`) input plugin.
+- Add support for k8s service DNS discovery to Prometheus Client (`prometheus`) input plugin.
+- Add configurable metrics endpoint to (`prometheus`) output plugin.
+- Add support for NSQLookupd to `nsq_consumer`.
+- Add configurable separator for metrics and fields in OpenTSDB (`opentsdb`) output plugin.
 - Add support for the rollbar occurrence webhook event.
-- Add extra wired tiger cache metrics to mongodb input.
-- Collect Docker Swarm service metrics in Docker input plugin.
-- Add cluster health level configuration to elasticsearch input.
-- Add ability to limit node stats in elasticsearch input.
-- Add UDP IPv6 support to statsd input.
-- Use labels in prometheus output for string fields.
+- Add extra wired tiger cache metrics to `mongodb` input.
+- Collect Docker Swarm service metrics in Docker (`docker`) input plugin.
+- Add cluster health level configuration to Elasticsearch (`elasticsearch`) input plugin.
+- Add ability to limit node stats in Elasticsearch (`elasticsearch`) input plugin.
+- Add UDP IPv6 support to StatsD (`statsd`) input plugin.
+- Use labels in Prometheus Client (`prometheus`) output plugin for string fields.
 - Add support for decimal timestamps to ts-epoch modifier.
-- Add histogram and summary types and use in prometheus plugins.
+- Add histogram and summary types and use in Prometheus (`prometheus`) plugins.
 - Gather concurrently from snmp agents.
 - Perform DNS lookup before ping and report result.
-- Add instance name option to varnish plugin.
-- Add support for SSL settings to ElasticSearch output plugin.
-- Add modification_time field to filestat input plugin.
-- Add systemd unit pid and cgroup matching to procstat.
-- Use MAX() instead of SUM() for latency measurements in sqlserver.
-- Add index by week number to Elasticsearch output.
-- Add support for tags in the index name in Elasticsearch output.
+- Add instance name option to Varnish (`varnish`) plugin.
+- Add support for SSL settings to ElasticSearch (`elasticsearch`) output plugin.
+- Add modification_time field to Filestat (`filestat`) input plugin.
+- Add systemd unit pid and cgroup matching to Procstat (`procstat`) .
+- Use MAX() instead of SUM() for latency measurements in SQL Server (`sqlserver`) input plugin.
+- Add index by week number to Elasticsearch (`elasticsearch`) output plugin.
+- Add support for tags in the index name in Elasticsearch (`elasticsearch`) output plugin.
 - Add slab to mem plugin.
 - Add support for glob patterns in net input plugin.
-- Add option to amqp output to publish persistent messages.
+- Add option to AMQP (`amqp`) output plugin to publish persistent messages.
 - Support I (idle) process state on procfs+Linux.
 
 ### Bug fixes
