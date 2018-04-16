@@ -240,10 +240,9 @@ The [Lustre2 (`lustre2`) input plugin](https://github.com/influxdata/telegraf/tr
 The [Logparser (`logparser`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/logparser) streams and parses the given logfiles. Currently, it has the capability of parsing "grok" patterns
 from logfiles, which also supports regex patterns.
 
-
 ### [Mailchimp (`mailchimp`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/mailchimp)
 
-
+The [Mailchimp (`mailchimp`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/mailchimp) gathers metrics from the `/3.0/reports` MailChimp API.
 
 ### [Memcached (`memcached`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/memcached)
 
@@ -274,32 +273,7 @@ The [MySQL (`mysql`) input plugin](https://github.com/influxdata/telegraf/tree/r
 
 ### [NATS Server Monitoring (`nats`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/nats) -- NEW in v1.6
 
-The [NATS Server Monitoring (`nats`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/nats) gathers metrics when using the [NATS Server monitoring server](https://www.nats.io/documentation/server/gnatsd-monitoring/). The NATS metrics collected by this plugin include:
-
-* Tags
-  - `server`
-* Fields
-  - `uptime` (integer, nanoseconds)
-  - `mem` (integer, bytes)
-  - `subscriptions` (integer, count)
-  - `out_bytes` (integer, bytes)
-  - `connections` (integer, count)
-  - `in_msgs` (integer, bytes)
-  - `total_connections` (integer, count)
-  - `cores` (integer, count)
-  - `cpu` (integer, count)
-  - `slow_consumers` (integer, count)
-  - `routes` (integer, count)
-  - `remotes` (integer, count)
-  - `out_msgs` (integer, count)
-  - `in_bytes` (integer, bytes)
-
-The NATS Server is a simple, high performance open source messaging system for cloud native applications, IoT messaging, and microservices architectures. For more information on the NATS and the NATS Server, see:
-
-* [NATS](https://www.nats.io/)
-* [NATS Server (`gnstsd`)](https://www.nats.io/documentation/server/gnatsd-intro/)
-* [NATS Server Monitoring](https://www.nats.io/documentation/server/gnatsd-monitoring/)
-* [Debug and Monitor NATS](https://www.nats.io/documentation/tutorials/nats-monitoring/) tutorial on how to configure the monitoring port on NATS Server.
+The [NATS Server Monitoring (`nats`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/nats) gathers metrics when using the [NATS Server monitoring server](https://www.nats.io/documentation/server/gnatsd-monitoring/).
 
 ### [NATS Consumer (`nats_consumer`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/nats_consumer)
 
@@ -485,6 +459,7 @@ collector utility `sadc` and parses the created binary data file with the `sadf`
 
 ### [System (`system`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/system)
 
+The [System (`system`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/system) gathers general stats on system load, uptime, and number of users logged in. It is basically equivalent to the UNIX `uptime` command.
 
 ### [Tail (`tail`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/tail)
 
@@ -503,7 +478,11 @@ details of these statistics.
 
 ### [Trig (`trig`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/trig)
 
+The [Trig (`trig`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/trig) inserts sine and cosine waves for demonstration purposes.
+
 ### [Twemproxy (`twemproxy`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/twemproxy)
+
+The [Twemproxy (`twemproxy`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/twemproxy) gathers data from Twemproxy instances, processes Twemproxy server statistics, processes pool data. and processes backend server (Redis/Memcached) statistics.
 
 ### [Unbound (`unbound`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/unbound/README.md)
 
@@ -549,16 +528,16 @@ The [Zookeeper (`zookeeper`) input plugin](https://github.com/influxdata/telegra
 ### [HTTP JSON (`httpjson`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/httpjson)
 
 The [HTTP JSON (`httpjson`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/httpjson) collects data from HTTP URLs which respond with JSON. It flattens the JSON and
-finds all numeric values, treating them as floats. Deprecated (1.6): use the [http input]().
+finds all numeric values, treating them as floats. Deprecated in version 1.6: use the [http input](#http-input).
 
 ### [Jolokia (`jolokia`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/jolokia)
 
-Deprecated in version 1.5: Please use the [Jolokia2](#jolokia2-jolokia2----new-in-v15) plugin.
+Deprecated in version 1.5: Please use the [Jolokia2 input plugin](#jolokia2-jolokia2).
 
 ### [TCP Listener (`tcp_listener`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/tcp_listener)
 
-DEPRECATED: As of version 1.3, the TCP listener plugin has been deprecated in favor of the [Socket Listener](#socket-listener) plugin.
+DEPRECATED: As of version 1.3, the TCP listener plugin has been deprecated in favor of the [Socket Listener input plugin](#socket-listener).
 
 ### [UDP Listener (`udp_listener`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/udp_listener)
 
-DEPRECATED: As of version 1.3, the UDP listener plugin has been deprecated in favor of the [Socket Listener](#socket-listener) plugin.
+DEPRECATED: As of version 1.3, the UDP listener plugin has been deprecated in favor of the [Socket Listener](#socket-listener) input plugin.

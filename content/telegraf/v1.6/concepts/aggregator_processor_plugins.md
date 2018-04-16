@@ -1,6 +1,6 @@
 ---
-title: Aggregator and processor plugins
-
+title: Telegraf aggregator and processor plugins
+description: Telegraf aggregator and processor plugins work between the input plugins and output plugins to aggregate and process metrics in Telegraf.
 menu:
   telegraf_1_6:
     name: Aggregator and processor plugins
