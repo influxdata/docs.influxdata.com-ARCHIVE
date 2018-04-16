@@ -2,7 +2,7 @@
 title: Input data formats
 
 menu:
-  telegraf_1_5:
+  telegraf_1_6:
     name: Input data formats
     weight: 20
     parent: concepts

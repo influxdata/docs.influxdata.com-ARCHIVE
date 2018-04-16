@@ -2,7 +2,7 @@
 title: Telegraf aggregator plugins
 
 menu:
-  telegraf_1_5:
+  telegraf_1_6:
     name: Aggregator
     identifier: aggregators
     weight: 30
@@ -11,13 +11,13 @@ menu:
 
 Aggregators emit new aggregate metrics based on the metrics collected by the input plugins.
 
-> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.5`.
->The [Release Notes/Changelog](/telegraf/v1.5/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
+> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.6`.
+>The [Release notes and changelog](/telegraf/v1.6/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
 
 ## Supported aggregator plugins
 
 
-### [BasicStats (basicstats)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/aggregators/basicstats) -- NEW in v1.5
+### [BasicStats (basicstats)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/aggregators/basicstats)
 
 The [BasicStats (basicstats) aggregator plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/aggregators/basicstats) gives count, max, min, mean, s2(variance), and stdev for a set of values, emitting the aggregate every period seconds.
 

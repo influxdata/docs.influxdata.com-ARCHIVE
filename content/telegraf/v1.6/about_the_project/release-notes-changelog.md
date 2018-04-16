@@ -1,10 +1,120 @@
 ---
-title: Release Notes/Changelog
+title: Release notes and changelog
 menu:
-  telegraf_1_5:
+  telegraf_1_6:
     weight: 10
     parent: about_the_project
 ---
+
+## v1.6 [2018-04-16]
+
+### Release notes
+
+- The `mysql` input plugin has been updated fix a number of type convertion
+  issues.  This may cause a `field type error` when inserting into InfluxDB due
+  the change of types.
+
+  To address this we have introduced a new `metric_version` option to control
+  enabling the new format.  For in depth recommendations on upgrading please
+  reference the [mysql plugin documentation](./plugins/inputs/mysql/README.md#metric-version).
+
+  It is encouraged to migrate to the new model when possible as the old version
+  is deprecated and will be removed in a future version.
+
+- The `postgresql` plugins now defaults to using a persistent connection to the database.
+  In environments where TCP connections are terminated the `max_lifetime`
+  setting should be set less than the collection `interval` to prevent errors.
+
+- The `sqlserver` input plugin has a new query and data model that can be enabled
+  by setting `query_version = 2`.  It is encouraged to migrate to the new
+  model when possible as the old version is deprecated and will be removed in
+  a future version.
+
+- An option has been added to the `openldap` input plugin that reverses metric
+  name to improve grouping.  This change is enabled when `reverse_metric_names = true`
+  is set.  It is encouraged to enable this option when possible as the old
+  ordering is deprecated.
+
+- The new `http` input configured with `data_format = "json"` can perform the
+  same task as the, now deprecated, `httpjson` input.
+
+
+### New input plugins
+
+- [HTTP (http) input plugin](./plugins/inputs/http/README.md) - Thanks to @grange74
+- [Ipset (`ipset`) input plugin](./plugins/inputs/ipset/README.md) - Thanks to @sajoupa
+- [NATS Server Monitoring (`nats`) input plugin](./plugins/inputs/nats/README.md) - Thanks to @mjs and @levex
+
+### New processor plugins
+
+- [override](./plugins/processors/override/README.md) - Thanks to @KarstenSchnitter
+
+### New parsers
+
+- [dropwizard](./docs/DATA_FORMATS_INPUT.md#dropwizard) - Thanks to @atzoum
+
+### Features
+
+* Add health status mapping from `string` to `int` in Elasticsearch input plugin.
+* Add control over which stats to gather in BasicStats (`basicstats`) aggregator plugin.
+* Add `messages_delivered_get` to RabbitMQ (`rabbitmq`) input plugin.
+* Add `wired` field to mem input plugin.
+* Add support for gathering exchange metrics to the RabbitMQ (`rabbitmq`) input plugin.
+* Add support for additional metrics on Linux in Zfs (`zfs`) input plugin.
+* Add `available_entropy` field to Kernal (`kernel`) input plugin.
+* Add user privilege level setting to IPMI sensors.
+* Use persistent connection to PostgreSQL database.
+* Add support for dropwizard input format.
+* Add container health metrics to Docker (`docker`) input plugin.
+* Add support for using globs in devices list of DiskIO (`diskio`) input plugin.
+* Allow running as console application on Windows.
+* Add listener counts and node running status to RabbitMQ (`rabbitmq`) input plugin.
+* Add NATS Server Monitoring (`nats`) input plugin.
+* Add ability to select which queues will be gathered in RabbitMQ (`rabbitmq`) input plugin.
+* Add support for setting BSD source address to the ping (`ping`) input plugin.
+* Add Ipset (`ipset`) input plugin.
+* Add TLS and HTTP basic auth to Prometheus client (`prometheus_client`) output plugin.
+* Add new sqlserver output data model.
+* Add native Go method for finding `pid`s to the Procstat (`procstat`) input plugin.
+* Add additional metrics and reverse metric names option to OpenLDAP (`openldap`) input plugin.
+* Add TLS support to the Mesos (`mesos`) input plugin.
+* Add HTTP (`http`) input plugin.
+* Add keep alive support to the TCP mode of `statsd` .
+* Support deadline in Ping (`ping`) input plugin.
+* Add option to disable labels in prometheus output plugin for string fields.
+* Add shard server stats to the MongoDB (`mongodb`) input plugin.
+* Add server option to Unbound (`unbound`) input plugin.
+* Convert boolean metric values to float in Datadog (`datadog`) output plugin.
+* Add Solr 3 compatibility.
+* Add sum stat to BasicStats (`basicstats`) aggregator plugin.
+* Add ability to override proxy from environment in HTTP Response (`http_response`) input plugin.
+* Add host to ping timeout log message.
+* Add override processor plugin.
+* Add `status_code` and result tags and `result_type` field to HTTP Response (`http_response`) input plugin.
+* Added config flag to skip collection of network protocol metrics.
+* Add TLS support to Kapacitor (`kapacitor`) input plugin.
+* Add HTTP basic auth support to the HTTP Listener (`http_listener`) input plugin.
+* Tags in output InfluxDB Line Protocol are now sorted.
+* InfluxDB Line Protocol parser now accepts DOS line endings.
+* An option has been added to skip database creation in the InfluxDB (`influxdb`) output plugin.
+* Add support for connecting to InfluxDB over a UNIX domain socket.
+* Add optional unsigned integer support to the influx data format.
+* Add TLS support to Zookeeper (`zookeeper`) input plugin.
+* Add filters for container state to Docker (`docker`) input plugin.
+
+### Bug fixes
+
+* Fix various MySQL data type conversions.
+* Fix metric buffer limit in internal plugin after reload.
+* Fix panic in HTTP Response (`http_response`) input plugin on invalid regex.
+* Fix socket_listener setting ReadBufferSize on TCP sockets.
+* Add tag for target URL to `phpfpm` input plugin.
+* Fix cannot unmarshal object error in Mesosphere DC/OS (`dcos`) input plugin.
+* Fix InfluxDB output not able to reconnect when server address changes.
+* Fix parsing of DOS line endings in the SMART (`smart`) input plugin.
+* Fix precision truncation when no timestamp included.
+* Fix SNMPv3 connection with Cisco ASA 5515 in SNMP (`snmp`) input plugin.
+
 
 ## v1.5.3 [2018-03-14]
 
@@ -14,8 +124,8 @@ menu:
 * Remove `userinfo` from `url` tag in Prometheus input plugin.
 * Fix Ping input plugin not reporting zero durations.
 * Disable `keepalive` in MQTT output plugin to prevent deadlock.
-* Fix collation difference in SQL Server (sqlserver) input plugin.
-* Fix uptime metric in Passenger input plugin.
+* Fix collation difference in SQL Server (`sqlserver`) input plugin.
+* Fix uptime metric in Passenger (`passenger`) input plugin.
 * Add output of stderr in case of error to exec log message.
 
 ## v1.5.2 [2018-01-30]

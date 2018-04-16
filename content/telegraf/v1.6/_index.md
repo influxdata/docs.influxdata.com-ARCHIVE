@@ -3,8 +3,8 @@ title: Telegraf 1.5 documentation
 
 menu:
   telegraf:
-    name: v1.5
-    identifier: telegraf_1_5
+    name: v1.6
+    identifier: telegraf_1_6
     weight: 5
 ---
 

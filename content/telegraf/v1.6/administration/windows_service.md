@@ -2,8 +2,8 @@
 title: Running Telegraf as a Windows service
 
 menu:
-  telegraf_1_5:
-    name: Run as Windows service
+  telegraf_1_6:
+    name: Running as Windows service
     weight: 30
     parent: administration
 ---
@@ -13,7 +13,7 @@ menu:
 Telegraf natively supports running as a Windows service. Outlined below are
 the general steps to set it up.
 
-1. Obtain the telegraf distribution for Windows.
+1. Obtain the Telegraf distribution for Windows.
 2. Create the directory `C:\Program Files\Telegraf` (if you install in a different location, specify the `-config` parameter with the desired location)
 3. Place the `telegraf.exe` and the `telegraf.conf` files into `C:\Program Files\Telegraf`.
 4. To install the service into the Windows Service Manager, run the following in PowerShell as an administrator. If necessary, you can wrap any spaces in the file directories in double quotes `"<file directory>"`:

@@ -2,12 +2,12 @@
  title: About the project
 
  menu:
-   telegraf_1_5:
+   telegraf_1_6:
      name: About the Project
      identifier: about_the_project
 ---
 
-## [Release Notes/Changelog](/telegraf/v1.5/about_the_project/release-notes-changelog/)
+## [Release Notes/Changelog](/telegraf/v1.6/about_the_project/release-notes-changelog/)
 
 ## [Contributing](https://github.com/influxdata/telegraf/blob/master/CONTRIBUTING.md)
 

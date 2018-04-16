@@ -2,7 +2,7 @@
 title: Troubleshooting Telegraf
 
 menu:
-  telegraf_1_5:
+  telegraf_1_6:
     name: Troubleshooting
     weight: 40
     parent: administration

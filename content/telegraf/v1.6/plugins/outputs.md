@@ -2,7 +2,7 @@
 title: Telegraf output plugins
 
 menu:
-  telegraf_1_5:
+  telegraf_1_6:
     name: Output
     identifier: outputs
     weight: 20
@@ -11,8 +11,8 @@ menu:
 
 Telegraf allows users to specify multiple output sinks in the configuration file.
 
-> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.5`.
->The [Release Notes/Changelog](/telegraf/v1.5/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
+> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.6`.
+>The [Release notes and changelog](/telegraf/v1.6/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
 
 ## Supported output plugins
 
@@ -34,7 +34,7 @@ Metrics are written to a topic exchange using `tag`, defined in configuration fi
 
 The [CloudWatch (cloudwatch_output) output plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/outputs/cloudwatch) send metrics to Amazon CloudWatch.
 
-### [CrateDB (cratedb)](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/cratedb) -- NEW in v1.5
+### [CrateDB (cratedb)](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/cratedb)
 
 The [CrateDB (cratedb) output plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/cratedb) writes to [CrateDB](https://crate.io/) using its [PostgreSQL protocol](https://crate.io/docs/crate/reference/protocols/postgres.html).
 
@@ -118,6 +118,6 @@ The [Riemann Legacy (riemann_legacy_output) output plugin](https://github.com/in
 
 The [Socket Writer (socket_writer_output) output plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/outputs/socket_writer) writes to a UDP, TCP, or UNIX socket. It can output data in any of the [supported output formats](https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_OUTPUT.md).
 
-### [Wavefront (wavefront)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/outputs/wavefront/README.md) -- NEW in v1.5
+### [Wavefront (wavefront)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/outputs/wavefront/README.md)
 
 The [Wavefront (wavefront) output plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/outputs/wavefront/README.md) writes to a Wavefront proxy, in Wavefront data format over TCP.

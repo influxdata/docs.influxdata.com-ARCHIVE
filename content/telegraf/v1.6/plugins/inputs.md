@@ -2,7 +2,7 @@
 title: Telegraf input plugins
 
 menu:
-  telegraf_1_5:
+  telegraf_1_6:
     name: Input
     identifier: inputs
     weight: 10
@@ -11,8 +11,8 @@ menu:
 
 Telegraf is entirely input driven. It gathers all metrics from the inputs specified in the configuration file.
 
-> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.5`.
->The [Release Notes/Changelog](/telegraf/v1.5/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
+> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.6`.
+>The [Release Notes/Changelog](/telegraf/v1.6/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
 
 ## Usage instructions
 
@@ -75,16 +75,16 @@ The [CloudWatch (`cloudwatch`) input plugin](https://github.com/influxdata/teleg
 The [Conntrack (`conntrack`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/conntrack) collects stats from Netfilter's conntrack-tools.
 
 The conntrack-tools provide a mechanism for tracking various aspects of network connections as they are processed by
-netfilter. At runtime, conntrack exposes many of those connection statistics within /proc/sys/net. Depending on your
-kernel version, these files can be found in either /proc/sys/net/ipv4/netfilter or /proc/sys/net/netfilter and will be
-prefixed with either ip_ or nf_. This plugin reads the files specified in its configuration and publishes each one as
-a field, with the prefix normalized to ip_.
+netfilter. At runtime, conntrack exposes many of those connection statistics within `/proc/sys/net`. Depending on your
+kernel version, these files can be found in either `/proc/sys/net/ipv4/netfilter` or `/proc/sys/net/netfilter` and will be
+prefixed with either `ip_` or `nf_`. This plugin reads the files specified in its configuration and publishes each one as
+a field, with the prefix normalized to `ip_`.
 
 ### [Consul (`consul`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/consul)
 
-The [Consul (`consul`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/consul) will collect statistics about all health checks registered in the Consul. It uses Consul API
-to query the data. It will not report the telemetry but Consul can report those stats already using StatsD protocol,
-if needed.
+The [Consul (`consul`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/consul) will collect statistics about all health checks registered in the Consul.
+It uses Consul API to query the data.
+It will not report the telemetry but Consul can report those stats already using StatsD protocol, if needed.
 
 ### [Couchbase (`couchbas`e)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/couchbase)
 
