@@ -43,6 +43,12 @@ menu:
 * Show valid time in custom time range when now is selected.
 * Default to zero for gauges.
 
+## v1.4.3.3 [2018-04-12]
+
+### Bug Fixes
+
+* Require that emails on GitHub & Generic OAuth2 principals be verified & primary if those fields are provided.
+
 ## v1.4.3.1 [2018-04-02]
 
 ### Bug fixes
@@ -76,6 +82,11 @@ menu:
 * Fix intermittent missing fill from graphs
 * Support custom time range in annotations API wrapper
 
+## v1.4.2.5 [2018-04-12]
+
+### Bug Fixes
+
+* Require that emails on GitHub & Generic OAuth2 principals be verified & primary if those fields are provided.
 
 ## v1.4.2.3 [2018-03-08]
 
@@ -104,6 +115,12 @@ menu:
 * Don't sort Single Stat & Gauge thresholds when editing threshold values.
 * Maintain y-axis labels in dashboard cells.
 * Deprecate `--new-sources` in CLI.
+
+## v1.4.1.5 [2018-04-12]
+
+### Bug Fixes
+
+* Require that emails on GitHub & Generic OAuth2 principals be verified & primary if those fields are provided.
 
 ## v1.4.1.3 [2018-02-14]
 
@@ -149,6 +166,12 @@ menu:
 - Remove CLI options from `systemd` service file.
 - Fix disappearance of text in Single Stat graphs during editing.
 - Redirect to Alerts page after saving Alert Rule.
+
+## v1.4.0.3 [2018-4-12]
+
+### Bug Fixes
+
+* Require that emails on GitHub & Generic OAuth2 principals be verified & primary if those fields are provided.
 
 ## v1.4.0.1 [2018-1-9]
 
