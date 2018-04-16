@@ -1,6 +1,6 @@
 ---
 title: Getting started with Telegraf
-
+description: Downloading, installing, configuring and getting started with Telegraf, the plug-in driven server agent of the InfluxData time series platform.
 menu:
   telegraf_1_6:
     name: Getting started
