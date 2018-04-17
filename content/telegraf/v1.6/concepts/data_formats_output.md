@@ -10,18 +10,18 @@ menu:
 
 Telegraf is able to serialize metrics into the following output data formats:
 
-1. [InfluxDB Line Protocol](#influx)
-1. [JSON](#json)
-1. [Graphite](#graphite)
+1. [InfluxDB Line Protocol](#influxdb-line-protocol)
+2. [JSON](#json-data-format)
+3. [Graphite](#graphite-data-format)
 
 Telegraf metrics, like InfluxDB
 [points](https://docs.influxdata.com/influxdb/v0.10/write_protocols/line/),
 are a combination of four basic parts:
 
 1. Measurement Name
-1. Tags
-1. Fields
-1. Timestamp
+2. Tags
+3. Fields
+4. Timestamp
 
 In InfluxDB line protocol, these 4 parts are easily defined in textual form:
 
@@ -31,12 +31,12 @@ measurement_name[,tag1=val1,...]  field1=val1[,field2=val2,...]  [timestamp]
 
 For Telegraf outputs that write textual data (such as `kafka`, `mqtt`, and `file`),
 InfluxDB line protocol was originally the only available output format. But now
-we are normalizing telegraf metric "serializers" into a
+we are normalizing Telegraf metric "serializers" into a
 [plugin-like interface](https://github.com/influxdata/telegraf/tree/master/plugins/serializers)
 across all output plugins that can support it.
 You will be able to identify a plugin that supports different data formats
 by the presence of a `data_format`
-config option, for example, in the `file` output plugin:
+configuration option, for example, in the `file` output plugin:
 
 ```toml
 [[outputs.file]]
@@ -52,13 +52,13 @@ config option, for example, in the `file` output plugin:
   ## Additional configuration options go here
 ```
 
-Each data_format has an additional set of configuration options available, which
+Each `data_format` has an additional set of configuration options available, which
 I'll go over below.
 
-# Influx
+# InfluxDB Line Protocol
 
-There are no additional configuration options for InfluxDB line-protocol. The
-metrics are serialized directly into InfluxDB line-protocol.
+There are no additional configuration options for InfluxDB line protocol. The
+metrics are serialized directly into InfluxDB line protocol.
 
 ### Influx configuration
 
@@ -74,7 +74,7 @@ metrics are serialized directly into InfluxDB line-protocol.
   data_format = "influx"
 ```
 
-# Graphite
+# Graphite data format
 
 The Graphite data format translates Telegraf metrics into _dot_ buckets. A
 template can be specified for the output of Telegraf metrics into Graphite
@@ -123,7 +123,7 @@ tars.cpu-total.us-east-1.cpu.usage_idle 98.09 1455320690
   template = "host.tags.measurement.field"
 ```
 
-# JSON
+# JSON data format
 
 The JSON data format serialized Telegraf metrics in json format. The format is:
 
