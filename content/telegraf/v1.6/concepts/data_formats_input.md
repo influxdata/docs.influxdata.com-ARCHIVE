@@ -33,7 +33,7 @@ Other data formats may require more advanced configuration to create usable Tele
 Plugins such as the Exec (`exec`) input plugin and the Kafka Consumer (`kafka_consumer`) input plugin parse textual data. Up until now,
 these plugins were statically configured to parse just a single
 data format. The Exec (`exec`) input plugin mostly only supported parsing JSON, and the Kafka Consumer (`kafka_consumer`) only
-supported data in InfluxDB line-protocol.
+supported data in InfluxDB line protocol.
 
 Now, we are normalizing the parsing of various data formats across all
 plugins that can support it. You will be able to identify a plugin that supports
