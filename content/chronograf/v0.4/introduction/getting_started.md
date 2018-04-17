@@ -91,7 +91,7 @@ We'll call our graph `Average idle CPU usage`.
 Click the `Save` button.
 
 3.
-Choose the server, [database](../concepts/glossary.html#database), and [retention policy](../concepts/glossary.html#retention-policy-rp) that you want to work with:
+Choose the server, [database](/influxdb/v1.5/concepts/glossary/#database), and [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) that you want to work with:
 <br>
 <br>
 ![Server Tray](/img/chronograf/server-tray.png)
@@ -155,4 +155,3 @@ One graph on a dashboard isn't spectacularly interesting, so we've added a coupl
 
 And that's it!
 You now have the foundation for building beautiful data visualizations with Chronograf.
-

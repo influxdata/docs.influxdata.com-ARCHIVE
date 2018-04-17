@@ -295,7 +295,7 @@ The maximum valid timestamp is `9223372036854775806` or `2262-04-11T23:47:16.854
 
 The `cache maximum memory size exceeded` error occurs when the cached
 memory size increases beyond the
-[`cache-max-memory-size` setting](/influxdb/v1.3/administration/config/#cache-max-memory-size-524288000)
+[`cache-max-memory-size` setting](/influxdb/v1.3/administration/config/#cache-max-memory-size-1073741824)
 in the configuration file.
 
 By default, `cache-max-memory-size` is set to 512mb.

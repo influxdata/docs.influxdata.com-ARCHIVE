@@ -1,6 +1,6 @@
 ---
 title: New features in Chronograf 0.11
-
+newversionredirect: about_the_project/release-notes-changelog/
 menu:
   chronograf_011:
     name: New features in Chronograf 0.11

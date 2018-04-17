@@ -4,6 +4,8 @@ menu:
   influxdb_1_0:
     weight: 90
     parent: query_language
+aliases:
+  - /influxdb/v1.0/sample_data/data_download/
 ---
 
 Download and write to any InfluxDB installation the sample data used in [Data Exploration](../../query_language/data_exploration/), [Schema Exploration](../../query_language/schema_exploration/), and [Functions](../../query_language/functions/).

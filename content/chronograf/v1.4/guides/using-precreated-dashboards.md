@@ -1,5 +1,6 @@
 ---
 title: Using pre-created dashboards in Chronograf
+description: Preconfigured dashboards can quickly be used to display metrics for popular applications, including Apache, Consul, Docker, Elasticsearch, InfluxDB, Mesos, MySQL, NGINX, PostgreSQL, RabbitMQ, Redis, and more.
 menu:
   chronograf_1_4:
     name: Using pre-created dashboards
@@ -24,7 +25,7 @@ Pre-created dashboards are delivered in Chronograf installations and are ready t
 
 **To view a pre-created dashboard:**
 
-1. Open Chronograf in your web browser and lick **Host List** in the navigation bar.
+1. Open Chronograf in your web browser and click **Host List** in the navigation bar.
 2. Select an application listed under **Apps**. By default, the system `app` should be listed next to a host listing. Other apps appear depending on the Telegraf input plugins that you have enabled.
 3. The selected application appears in a page showing all of the pre-created cells, based on the measurements that are available.
 
@@ -47,7 +48,7 @@ See [Telegraf configuration](https://github.com/influxdata/telegraf/blob/master/
 * [iis](#iis)
 * [influxdb](#influxdb)
 * [kubernetes](#kubernetes)
-* [memcached](#memcached)
+* [memcached](#memcached-memcached)
 * [mesos](#mesos)
 * [mysql](#mysql)
 * [nginx](#nginx)

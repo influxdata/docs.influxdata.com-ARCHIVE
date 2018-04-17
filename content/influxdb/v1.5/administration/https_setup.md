@@ -61,8 +61,10 @@ Ensure that you have the correct file permissions by running the following
 commands:
 
 ```
-sudo chown root:root /etc/ssl/<CA-certificate-file>
-sudo chmod 644 /etc/ssl/<CA-certificate-file>
+sudo chown root:root /etc/ssl/<ca-certificate-file>
+sudo chown root:root /etc/ssl/<certificate-file>
+sudo chmod 644 /etc/ssl/<ca-certificate-file>
+sudo chmod 644 /etc/ssl/<certificate-file>
 sudo chmod 600 /etc/ssl/<private-key-file>
 ```
 
@@ -72,8 +74,9 @@ HTTPS is disabled by default.
 Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
 
 * `https-enabled` to `true`
-* `http-certificate` to `/etc/ssl/<signed-certificate-file>.crt` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
-* `http-private-key` to `/etc/ssl/<private-key-file>.key` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
+* `https-ca-certificate` to `/etc/ssl/<ca-certificate-file>.crt`
+* `https-certificate` to `/etc/ssl/<certificate-file>.crt` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
+* `https-private-key` to `/etc/ssl/<private-key-file>.key` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
 
 ```
 [http]
@@ -85,11 +88,14 @@ Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc
 
   [...]
 
+  # The SSL certificate used to validate client certificates
+  https-ca-certificate = "/etc/ssl/<ca-certificate-file>.crt"
+
   # The SSL certificate to use when HTTPS is enabled.
-  https-certificate = "<bundled-certificate-file>.pem"
+  https-certificate = "/etc/ssl/<certificate-file>.crt"
 
   # Use a separate private key location.
-  https-private-key = "<bundled-certificate-file>.pem"
+  https-private-key = "/etc/ssl/<private-key-file>.key"
 ```
 
 #### Step 4: Restart the InfluxDB service
@@ -138,8 +144,8 @@ HTTPS is disabled by default.
 Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
 
 * `https-enabled` to `true`
-* `http-certificate` to `/etc/ssl/influxdb-selfsigned.crt`
-* `http-private-key` to `/etc/ssl/influxdb-selfsigned.key`
+* `https-certificate` to `/etc/ssl/influxdb-selfsigned.crt`
+* `https-private-key` to `/etc/ssl/influxdb-selfsigned.key`
 
 ```
 [http]
@@ -210,5 +216,91 @@ setting and set it to `true`.
       ## Optional SSL Config
       [...]
       insecure_skip_verify = true # <-- Update only if you're using a self-signed certificate
+>
+Next, restart Telegraf and you're all set!
+
+## Setup HTTPS with client certificate authentication
+
+#### Step 1: Generate a client certificate
+
+The following command generates a private key file (`.key`) and a certificate request (`.csr`).
+The certificate's common name will be the username in InfluxDB.
+The certificate request can be sent off to be signed by a third-party CA, or signed with your own CA.
+
+```
+sudo openssl req -nodes -newkey rsa:2048 -keyout /etc/ssl/client-private-key-file.key -out /etc/ssl/<client-certificate-file>.csr -subj "CN=testuser"
+sudo openssl rsa -in /etc/ssl/client-private-key-file.key -out /etc/ssl/client-private-key-file.key
+# Sign if you manage the CA with openssl
+sudo openssl ca -infiles /etc/ssl/<client-certificate-file>.csr -out /etc/ssl/<client-certificate-file>.crt
+```
+
+#### Step 2: Ensure file permissions
+Certificate files require read and write access by the `root` user.
+Ensure that you have the correct file permissions by running the following
+commands:
+
+```
+sudo chown root:root /etc/ssl/<client-certificate-file>
+sudo chmod 644 /etc/ssl/<client-certificate-file>
+sudo chmod 600 /etc/ssl/<client-private-key-file>
+```
+
+#### Step 3: Create user to match certificate CN (Common Name)
+
+Note: The password is required, but will not be used for client certificate authentication
+```
+> CREATE USER "testuser" WITH PASSWORD '<some_random_password>'
+> GRANT WRITE ON "telegraf" to "testuser"
+```
+
+#### Step 5: Verify the HTTPS setup
+
+Verify that client certificate authentication is working by connecting to InfluxDB with curl:
+```
+curl --cacert /etc/ssl/<ca-certificate-file>.crt --cert /etc/ssl/<client-certificate-file> --key /etc/ssl/<client-private-key-file> https://<FQDN>:8086/query --data-urlencode "q=SHOW DATABASES"
+```
+
+A successful connection returns the following:
+```
+{"results":[{"statement_id":0,"series":[{"name":"databases","columns":["name"],"values":[["_internal"]]}]}]}
+```
+>
+## Connect Telegraf to a secured InfluxDB instance with a client certificate
+>
+Connecting [Telegraf](/telegraf/latest/) to an InfluxDB instance that's using
+HTTPS and client certificates requires some additional steps.
+>
+Copy the CA certificate, the client certificate, and client key to the host system
+running telegraf.
+>
+In Telegraf's configuration file (`/etc/telegraf/telegraf.conf`), edit the `urls`
+setting to indicate `https` instead of `http` and change `localhost` to the
+relevant domain name.
+Edit the `ssl_*` settings to indicate the paths to the certificates and key.
+Leave the `username` and `password` settings commented out.
+>
+    ###############################################################################
+    #                            OUTPUT PLUGINS                                   #
+    ###############################################################################
+>
+    # Configuration for influxdb server to send metrics to
+    [[outputs.influxdb]]
+      ## The full HTTP or UDP endpoint URL for your InfluxDB instance.
+      ## Multiple urls can be specified as part of the same cluster,
+      ## this means that only ONE of the urls will be written to each interval.
+      # urls = ["udp://localhost:8089"] # UDP endpoint example
+      urls = ["https://<domain_name>.com:8086"]
+>
+    [...]
+>
+      # username = "telegraf"
+      # password = "metricsmetricsmetricsmetrics"
+>
+    [...]
+>
+      ## Optional SSL Config
+      ssl_ca = "/etc/ssl/<ca-certificate-file>"
+      ssl_cert = "/etc/ssl/<client-certificate-file>"
+      ssl_key = "/etc/ssl/<client-private-key-file>"
 >
 Next, restart Telegraf and you're all set!

@@ -1,6 +1,7 @@
 ---
 title: Telegraf output plugins
-
+aliases:
+  - /telegraf/v1.5/outputs/
 menu:
   telegraf_1_5:
     name: Output

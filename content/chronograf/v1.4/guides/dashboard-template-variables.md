@@ -1,9 +1,13 @@
 ---
 title: Using dashboard template variables
+description: Chronograf dashboards and views support template variables for databases, measurements, field keys, tag keys, tag values, and comma-separated values (CSV) to enable simple user interactions for modifying queries.
 menu:
   chronograf_1_4:
     weight: 80
     parent: Guides
+aliases:
+  - /chronograf/v1.4/introduction/templating/
+  - /chronograf/v1.4/templating/
 ---
 
 Engage with your dashboards and gain insights into your data with Chronograf's dashboard template variables.

@@ -1,5 +1,6 @@
 ---
 title: Managing Chronograf users
+description: Managing Chronograf users and roles, SuperAdmin status, and InfluxDB and Kapacitor users.
 menu:
   chronograf_1_4:
     name: Managing Chronograf users
@@ -37,7 +38,7 @@ Starting with Chronograf 1.4, Chronograf includes the ability to create users us
 Chronograf users are assigned one of the following four organization-bound user roles, listed here in order of increasing capabilities:
 
 - [`member`](#members-role-member)
-- [`viewer`](#viewer-role-viewer)
+- [`viewer`](#viewers-role-viewer)
 - [`editor`](#editors-role-editor)
 - [`admin`](#admins-role-admin)
 
@@ -161,7 +162,7 @@ SuperAdmin status is a Chronograf status that allows any user, regardless of rol
 * Create, view, update, and remove organizations
 * Create, view, update, and remove users within an organization
 * Grant or revoke the SuperAdmin status of another user
-* [Switch into any organization](#switching-organizations)
+* [Switch into any organization](#navigating-organizations)
 * Toggle the Public setting of the Default organization
 * Toggle the global config setting for [All new users are SuperAdmin](#all-new-users-are-superadmins-configuration-option)
 
@@ -216,7 +217,7 @@ Role required: `admin`
 
 ### Navigating organizations
 
-Chronograf is always used in the context of an organization. When a user logs in to Chronograf, that user will access only the resources owned by their current organization. The only exception to this is that users with SuperAdmin status will also be able to [manage organizations](#managing-organizations) in the Chronograf Admin page.
+Chronograf is always used in the context of an organization. When a user logs in to Chronograf, that user will access only the resources owned by their current organization. The only exception to this is that users with SuperAdmin status will also be able to [manage organizations](/chronograf/v1.4/administration/managing-organizations/) in the Chronograf Admin page.
 
 #### Logging in and logging out
 

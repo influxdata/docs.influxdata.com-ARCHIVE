@@ -29,7 +29,7 @@ specified measurement.
   <tr>
     <td><a href="#common-issues-with-basic-syntax">Common Issues with Basic Syntax</a></td>
     <td><a href="#common-issues-with-advanced-syntax">Common Issues with Advanced Syntax</a></td>
-    <td><a href="#further-reading">Further Reading</a></td>
+    <td><a href="#further-information">Further information</a></td>
   </tr>
 </table>
 
@@ -80,7 +80,7 @@ When the CQ executes, it runs a single query for the time range between
 If the `GROUP BY time()` interval is one hour and the current time is 17:00,
 the query's time range is between 16:00 and 16:59.999999999.
 
-#### Examples
+#### Examples of basic syntax
 
 The examples below use the following sample data in the `transportation`
 database.
@@ -351,7 +351,7 @@ Note that the basic syntax does not support using
 to change the value reported for intervals with no data.
 Basic syntax CQs ignore `fill()` if it's included in the CQ query.
 A possible workaround is to use the
-[advanced CQ syntax](#example-4-configure-the-cq-s-time-range-and-fill-empty-results).
+[advanced CQ syntax](#example-4-configuring-cq-time-ranges-and-filling-empty-results).
 
 ##### Issue 2: Resampling previous time intervals
 <br>
@@ -761,7 +761,7 @@ outlines a feature request for CQs to support gaps in data coverage.
 
 ## Continuous query management
 
-Only admin users are allowed to work with CQs. For more on user privileges, see [Authentication and Authorization](/influxdb/v1.5/query_language/authentication_and_authorization/#user-types-and-their-privileges).
+Only admin users are allowed to work with CQs. For more on user privileges, see [Authentication and Authorization](/influxdb/v1.5/query_language/authentication_and_authorization/#user-types-and-privileges).
 
 ### Listing Continuous Queries
 

@@ -1,6 +1,6 @@
 ---
 title: Frequently Encountered Issues
-newversionredirect: /troubleshooting/frequently-asked-questions/
+newversionredirect: troubleshooting/frequently-asked-questions/
 menu:
   influxdb_013:
     weight: 0

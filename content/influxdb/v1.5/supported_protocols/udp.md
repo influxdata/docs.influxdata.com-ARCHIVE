@@ -1,7 +1,8 @@
 ---
 title: UDP protocol support in InfluxDB
 aliases:
-    - /influxdb/v1.5/supported_protocols/udp/
+  - /influxdb/v1.5/tools/udp/
+  - /influxdb/v1.5/write_protocols/udp/
 menu:
   influxdb_1_5:
     name: UDP

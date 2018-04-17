@@ -1,6 +1,6 @@
 ---
 title: Authentication and Authorization
-newversionredirect: /query_language/authentication_and_authorization/
+newversionredirect: query_language/authentication_and_authorization/
 menu:
   influxdb_013:
     weight: 0

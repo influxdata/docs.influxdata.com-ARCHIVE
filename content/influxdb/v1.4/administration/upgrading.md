@@ -12,8 +12,8 @@ This page outlines process for upgrading from:
 
 <table style="width:100%">
   <tr>
-    <td><a href="#upgrade-from-0-12-1-2-to-1-3">Version 0.12-1.3 to 1.4</a></td>
-    <td><a href="#upgrade-from-0-10-or-0-11-to-1-3">Version 0.10 or 0.11 to 1.4</a></td>
+    <td><a href="#upgrade-from-0-12-1-3-to-1-4">Version 0.12-1.3 to 1.4</a></td>
+    <td><a href="#upgrade-from-0-10-or-0-11-to-1-4">Version 0.10 or 0.11 to 1.4</a></td>
   </tr>
 </table>
 

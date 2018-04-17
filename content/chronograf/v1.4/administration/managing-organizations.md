@@ -1,5 +1,6 @@
 ---
 title: Managing Chronograf organizations
+description: "Managing multiple organizations or groups: creating, configuring, mapping, and removing organizations."
 menu:
   chronograf_1_4:
     name: Managing Chronograf organizations

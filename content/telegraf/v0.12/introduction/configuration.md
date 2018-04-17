@@ -1,6 +1,6 @@
 ---
 title: Configuring Telegraf
-newversionredirect: /administration/configuration/
+newversionredirect: administration/configuration/
 menu:
   telegraf_012:
     name: Configuring Telegraf

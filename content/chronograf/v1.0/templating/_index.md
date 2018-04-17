@@ -1,5 +1,6 @@
 ---
 title: Templating
+newversionredirect: guides/dashboard-template-variables/
 aliases:
     - chronograf/v1.0/introduction/templating/
 menu:

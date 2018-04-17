@@ -1,6 +1,6 @@
 ---
 title: Guides for Chronograf
-
+description: The Chronograf guides discuss dashboards, monitoring InfluxDB Enterprise clusters, Kapacitor alerts and event handlers, template variables, visualization types, and TICKscript editing/logging.
 menu:
   chronograf_1_4:
     name: Guides
@@ -8,7 +8,7 @@ menu:
 
 Follow the links below to explore Chronograf's features.
 
-## [Using pre-created dashboards](/chronograf/v1.4/administration/using-precreated-dashboards/)
+## [Using pre-created dashboards](/chronograf/v1.4/guides/using-precreated-dashboards/)
 
 Pre-created dashboards are available when the required Telegraf input plugins are enabled. These applications make many useful metrics quickly available and are useful in giving you ideas about  
 

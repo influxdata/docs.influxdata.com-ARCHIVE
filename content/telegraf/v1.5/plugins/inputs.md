@@ -1,6 +1,8 @@
 ---
 title: Telegraf input plugins
-
+aliases:
+  - /telegraf/v1.5/inputs/
+  - /telegraf/v1.5/services/
 menu:
   telegraf_1_5:
     name: Input
@@ -425,8 +427,8 @@ The SNMP Legacy input plugin gathers metrics from SNMP agents.
 
 ### [Socket Listener](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/socket_listener)
 
-The [SNMP Legacy (snmp_legacy) input plugin](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/snmp_legacy) listens for messages from streaming (tcp, unix) or datagram
-(UDP, unixgram) protocols. Messages are expected in the
+The [Socket Listener](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/socket_listener) listens 
+for messages from streaming (tcp, unix) or datagram (UDP, unixgram) protocols. Messages are expected in the
 [Telegraf Input Data Formats](https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md).
 
 ### [Solr (solr)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/solr/README.md) -- NEW in v1.5
@@ -518,12 +520,12 @@ finds all numeric values, treating them as floats. Deprecated (1.6): use the [ht
 
 ### [Jolokia (jolokia)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/jolokia)
 
-Deprecated in version 1.5: Please use the [Jolokia2](#jolokia2-jolokia2----new-in-v15) plugin.
+Deprecated in version 1.5: Please use the [Jolokia2](#jolokia2-jolokia2-https-github-com-influxdata-telegraf-tree-release-1-5-plugins-inputs-jolokia2-readme-md-new-in-v-1-5) plugin.
 
 ### [TCP Listener](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/tcp_listener)
 
-DEPRECATED: As of version 1.3, the TCP listener plugin has been deprecated in favor of the [Socket Listener](#socket-listener) plugin.
+DEPRECATED: As of version 1.3, the TCP listener plugin has been deprecated in favor of the [Socket Listener](#socket-listener-https-github-com-influxdata-telegraf-tree-release-1-5-plugins-inputs-socket-listener) plugin.
 
 ### [UDP Listener (udp_listener)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/inputs/udp_listener)
 
-DEPRECATED: As of version 1.3, the UDP listener plugin has been deprecated in favor of the [Socket Listener](#socket-listener) plugin.
+DEPRECATED: As of version 1.3, the UDP listener plugin has been deprecated in favor of the [Socket Listener](#socket-listener-https-github-com-influxdata-telegraf-tree-release-1-5-plugins-inputs-socket-listener) plugin.

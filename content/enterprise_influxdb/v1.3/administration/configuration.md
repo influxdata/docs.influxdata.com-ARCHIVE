@@ -23,7 +23,6 @@ menu:
     * [[cluster]](#cluster)
     * [[retention]](#retention)
     * [[shard-precreation]](#shard-precreation)
-    * [[admin]](#admin)
     * [[monitor]](#monitor)
     * [[subscriber]](#subscriber)
     * [[http]](#http)
@@ -679,13 +678,13 @@ Environment variable: `INFLUXDB_CLUSTER_MAX_CONCURRENT_QUERIES`
 
 ###  query-timeout = "0"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#query-timeout-0).
+See the [OSS documentation](/influxdb/v1.3/administration/config/#query-timeout-0s).
 
 Environment variable: `INFLUXDB_CLUSTER_QUERY_TIMEOUT`
 
 ###  log-queries-after = "0"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#log-queries-after-0).
+See the [OSS documentation](/influxdb/v1.3/administration/config/#log-queries-after-0s).
 
 Environment variable: `INFLUXDB_CLUSTER_LOG_QUERIES_AFTER`
 
@@ -747,13 +746,13 @@ Environment variable: `INFLUXDB_SHARD_PRECREATION_ENABLED`
 
 ###  check-interval = "10m0s"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#check-interval-10m0s).
+See the [OSS documentation](/influxdb/v1.3/administration/config/#check-interval-10m).
 
 Environment variable: `INFLUXDB_SHARD_PRECREATION_CHECK_INTERVAL`
 
 ###  advance-period = "30m0s"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#advance-period-30m0s).
+See the [OSS documentation](/influxdb/v1.3/administration/config/#advance-period-30m).
 
 Environment variable: `INFLUXDB_SHARD_PRECREATION_ADVANCE_PERIOD`
 
@@ -869,13 +868,13 @@ Environment variable: `INFLUXDB_HTTP_PPROF_ENABLED`
 
 ###  https-enabled = false
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#https-enabled-false-1).
+See the [OSS documentation](/influxdb/v1.3/administration/config/#https-enabled-false).
 
 Environment variable: `INFLUXDB_HTTP_HTTPS_ENABLED`
 
 ###  https-certificate = "/etc/ssl/influxdb.pem"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#https-certificate-etc-ssl-influxdb-pem-1).
+See the [OSS documentation](/influxdb/v1.3/administration/config/#https-certificate-etc-ssl-influxdb-pem).
 
 Environment variable: `INFLUXDB_HTTP_HTTPS_CERTIFICATE`
 
@@ -951,7 +950,7 @@ Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_LOG_ENABLED`
 
 ###  enabled = true
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#enabled-true-5).
+See the [OSS documentation](/influxdb/v1.3/administration/config/#enabled-true-4).
 
 Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_ENABLED`
 
