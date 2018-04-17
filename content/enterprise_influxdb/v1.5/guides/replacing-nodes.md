@@ -172,6 +172,7 @@ The process of replacing data nodes is as follows:
 1. [Provision a new data node](#1-provision-a-new-data-node)
 2. [Replace the old data node with the new data node](#2-replace-the-old-data-node-with-the-new-data-node)
 3. [Confirm the data node was added](#3-confirm-the-data-node-was-added)
+4. [Check the copy-shard-status](#4-check-the-copy-shard-status)
 
 ### 1. Provision a new data node
 
@@ -234,7 +235,22 @@ Within the duration defined by [`anti-entropy.check-interval`](/enterprise_influ
 the AE service will begin copying shards from other shard owners to the new node.
 The time it takes for copying to complete is determined by the number of shards copied and how much data is stored in each.
 
-> **Note:** View the [Anti-entropy](/enterprise_influxdb/v1.5/administration/anti-entropy/#concepts) documentation for important information regarding anti-entropy and your database's replication factor.
+### 4. Check the copy-shard-status
+Check on the status of the copy-shard process with:
+
+```bash
+influx-ctl copy-shard-status
+```
+
+The output will show all currently running copy-shard processes.
+
+```
+Source                   Dest                     Database  Policy   ShardID  TotalSize  CurrentSize  StartedAt
+enterprise-data-02:8088  enterprise-data-03:8088  telegraf  autogen  3        119624324  119624324    2018-04-17 23:45:09.470696179 +0000 UTC
+```
+
+> **Important:** If replacing other data nodes in the cluster, make sure shards are completely copied from nodes in the same replica set before replacing the other nodes.
+View the [Anti-entropy](/enterprise_influxdb/v1.5/administration/anti-entropy/#concepts) documentation for important information regarding anti-entropy and your database's replication factor.
 
 ## Scenarios
 
