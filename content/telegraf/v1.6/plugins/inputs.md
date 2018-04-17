@@ -9,7 +9,7 @@ menu:
     parent: plugins
 ---
 
-Telegraf is entirely input driven. It gathers all metrics from the inputs specified in the configuration file.
+Telegraf input plugins are used with the InfluxData time series platform to collect metrics from the system, services, or third party APIs. All metrics are gathered from the inputs you [enable and configure in the configuration file](/telegraf/v1.6/administration/configuration/).
 
 > ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.6`.
 >The [Release Notes/Changelog](/telegraf/v1.6/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
@@ -86,7 +86,7 @@ The [Consul (`consul`) input plugin](https://github.com/influxdata/telegraf/tree
 It uses Consul API to query the data.
 It will not report the telemetry but Consul can report those stats already using StatsD protocol, if needed.
 
-### [Couchbase (`couchbas`e)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/couchbase)
+### [Couchbase (`couchbase`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/couchbase)
 
 The [Couchbase (`couchbase`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/couchbase) reads per-node and per-bucket metrics from Couchbase.
 
@@ -100,7 +100,7 @@ The [Mesosphere DC/OS (`dcos`) input plugin](https://github.com/influxdata/teleg
 
 ### [Disque (`disque`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/disque)
 
-
+The [Disque (`disque`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/disque) gathers metrics from one or more [Disque](https://github.com/antirez/disque) servers.
 
 ### [DMCache (`dmcache`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/dmcache)
 
@@ -144,9 +144,9 @@ The [Filestat (`filestat`) input plugin](https://github.com/influxdata/telegraf/
 The [Fluentd (`fluentd`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/fluentd) gathers metrics from plugin endpoint provided by in_monitor plugin. This plugin understands
 data provided by `/api/plugin.json` resource (`/api/config.json` is not covered).
 
-### [Graylog (`graylog_input`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/graylog)
+### [Graylog (`graylog`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/graylog)
 
-The [Graylog (`graylog_input`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/graylog) can collect data from remote Graylog service URLs. This plugin currently supports two
+The [Graylog (`graylog`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/graylog) can collect data from remote Graylog service URLs. This plugin currently supports two
 types of endpoints:
 
 * multiple (e.g., `http://[graylog-server-ip]:12900/system/metrics/multiple`)
@@ -175,7 +175,6 @@ as a proxy/router for the `/write` endpoint of the InfluxDB HTTP API.
 
 The [HTTP Response (`http_response`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/http_response) gathers metrics for HTTP responses. The measurements and fields include `response_time`, `http_response_code`, and `result_type`. Tags for measurements include `server` and `method`.
 
-
 ### [InfluxDB (`influxdb`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/influxdb)
 
 The [InfluxDB (`influxdb`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/influxdb) gathers metrics from the exposed `/debug/vars` endpoint.  Using Telegraf to extract these metrics to create a "monitor of monitors" is a best practice and allows you to reduce the overhead associated with
@@ -184,19 +183,22 @@ capturing and storing these metrics locally within the `_internal` database for 
 
 ### [Internal (`internal`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/internal)
 
-
+The [Internal (`internal`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/internal) collects metrics about the Telegraf agent itself.
+Note that some metrics are aggregates across all instances of one type of plugin.
 
 ### [Interrupts (`interrupts`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/interrupts)
 
-
+The [Interrupts (`interrupts`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/interrupts) gathers metrics about IRQs, including `interrupts` (from `/proc/interrupts`) and `soft_interrupts` (from `/proc/softirqs`).
 
 ### [IPMI Sensor (`ipmi_sensor`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/ipmi_sensor)
+
+The [IPMI Sensor (`ipmi_sensor`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/ipmi_sensor) queries the local machine or remote host sensor statistics using the `impitool` utility.
 
 ### [ipset (`ipset`)](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ipset) -- NEW in v.1.6
 
 The [Ipset (`ipset`) input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ipset) gathers packets and bytes counters from Linux `ipset`. It uses the output of the command `ipset save`. Ipsets created without the `counters` option are ignored.
 
-### [IPtables (`iptable`s)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/iptables)
+### [IPtables (`iptables`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/iptables)
 
 The [IPtables (`iptables`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/iptables) gathers packets and bytes counters for rules within a set of table and chain from the Linux's iptables firewall.
 
@@ -320,6 +322,7 @@ The [OpenSMTPD (`opensmtpd`) input plugin](https://github.com/influxdata/telegra
 ### [Particle.io Webhooks (`particle`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/webhooks/particle/README.md)
 
 
+
 ### [Passenger (`passenger`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/passenger)
 
 The [Passenger (`passenger`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/passenger) gets phusion passenger statistics using their command line utility `passenger-status`.
@@ -329,7 +332,6 @@ The [Passenger (`passenger`) input plugin](https://github.com/influxdata/telegra
 The [PF (`pf`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/pf/README.md) gathers information from the FreeBSD/OpenBSD pf firewall. Currently it can retrive information about
 the state table: the number of current entries in the table, and counters for the number of searches, inserts, and
 removals to the table. The pf plugin retrieves this information by invoking the `pfstat` command.
-
 
 ### [PHP FPM (`phpfpm`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/phpfpm)
 
@@ -381,7 +383,7 @@ The [Prometheus (`prometheus`) input plugin](https://github.com/influxdata/teleg
 The [PuppetAgent (`puppetagent`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/puppetagent) collects variables outputted from the `last_run_summary.yaml` file usually
 located in `/var/lib/puppet/state/` PuppetAgent Runs.
 
-### [RabbitMQ (`rabbitm`q)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/rabbitmq)
+### [RabbitMQ (`rabbitmq`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/rabbitmq)
 
 The [RabbitMQ (`rabbitmq`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/rabbitmq) reads metrics from RabbitMQ servers via the [Management Plugin](https://www.rabbitmq.com/management.html).
 
@@ -427,10 +429,6 @@ See [smartmontools](https://www.smartmontools.org/).
 ### [SNMP (`snmp`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/snmp)
 
 The [SNMP (`snmp`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/snmp) gathers metrics from SNMP agents.
-
-### [SNMP Legacy (`snmp_legacy`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/snmp_legacy)
-
-The SNMP Legacy input plugin gathers metrics from SNMP agents.
 
 ### [Socket Listener (`socket_listener`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/socket_listener)
 
@@ -527,17 +525,25 @@ The [Zookeeper (`zookeeper`) input plugin](https://github.com/influxdata/telegra
 
 ### [HTTP JSON (`httpjson`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/httpjson)
 
-The [HTTP JSON (`httpjson`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/httpjson) collects data from HTTP URLs which respond with JSON. It flattens the JSON and
-finds all numeric values, treating them as floats. Deprecated in version 1.6: use the [http input](#http-input).
+DEPRECATED as of version 1.6; use the [HTTP (`http`) input plugin](#http-input-http-input).
+
+The [HTTP JSON (`httpjson`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/httpjson) collects data from HTTP URLs which respond with JSON.
+It flattens the JSON and finds all numeric values, treating them as floats.
 
 ### [Jolokia (`jolokia`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/jolokia)
 
-Deprecated in version 1.5: Please use the [Jolokia2 input plugin](#jolokia2-jolokia2).
+DEPRECATED as of version 1.5; use the [Jolokia2 (`jolokia2`) input plugin](#jolokia2-jolokia2).
+
+### [SNMP Legacy (`snmp_legacy`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/snmp_legacy)
+
+DEPRECATED. Use the [SNMP (`snmp`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/snmp).
+
+The SNMP Legacy input plugin gathers metrics from SNMP agents.
 
 ### [TCP Listener (`tcp_listener`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/tcp_listener)
 
-DEPRECATED: As of version 1.3, the TCP listener plugin has been deprecated in favor of the [Socket Listener input plugin](#socket-listener).
+DEPRECATED as of version 1.3; use the [Socket Listener (`socket_listener`) input plugin](#socket-listener-socket-listener).
 
 ### [UDP Listener (`udp_listener`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/udp_listener)
 
-DEPRECATED: As of version 1.3, the UDP listener plugin has been deprecated in favor of the [Socket Listener](#socket-listener) input plugin.
+DEPRECATED as of version 1.3; use the [Socket Listener (`socket_listener`) input plugin](#socket-listener-socket-listener).
