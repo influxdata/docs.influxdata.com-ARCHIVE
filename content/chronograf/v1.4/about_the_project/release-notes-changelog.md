@@ -6,6 +6,12 @@ menu:
     parent: About the Project
 ---
 
+## v1.4.4.1 [2018-04-16]
+
+### Bug fixes
+
+* Snapshot all db struct types in migration files.
+
 ## v1.4.4.0 [2018-04-13]
 
 ### Features
