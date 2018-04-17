@@ -2,6 +2,10 @@ title = "InfluxData Documentation"
 baseurl = "https://docs.influxdata.com"
 enableGitInfo = true
 
+# Syntax Highlighting
+pygmentsCodefences = true
+pygmentsUseClasses = true
+
 languageCode = "en-us"
 
 [blackfriday]

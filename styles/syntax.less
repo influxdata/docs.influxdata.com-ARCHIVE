@@ -1,0 +1,174 @@
+code[class*="language-"],
+pre[class*="language-"] {
+	/*text-shadow: 0 1px #101419;*/
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+	white-space: -o-pre-wrap;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+
+	-moz-tab-size: 1;
+	-o-tab-size: 1;
+	tab-size: 1;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	white-space: normal;
+}
+
+.highlight  { color: @article-code-color;
+
+	// COLORS
+
+	.gh, 		/* Generic.Heading */
+	.go, 		/* Generic.Output */
+	.na, 		/* Name.Attribute */
+	.nt, 		/* Name.Tag */
+	.nv, 		/* Name.Variable */
+	.ow 		/* Operator.Word */
+					{ color: @article-code-color }
+
+	.c, 		/* Comment */
+	.ch, 		/* Comment.Hashbang */
+	.cm, 		/* Comment.Multiline */
+	.cpf, 	/* Comment.PreprocFile */
+	.c1, 		/* Comment.Single */
+	.cs,		/* Comment.Special */
+	.w  		/* Text.Whitespace */
+					{ color: @article-code-accent1; }
+
+	.gi 		/* Generic.Inserted */
+					{ background-color: @article-code-accent1; }
+
+	.k, 		/* Keyword */
+	.kc, 		/* Keyword.Constant */
+	.kd, 		/* Keyword.Declaration */
+	.kn, 		/* Keyword.Namespace */
+	.kp, 		/* Keyword.Pseudo */
+	.kr, 		/* Keyword.Reserved */
+	.nn 		/* Name.Namespace */
+					{ color: @article-code-accent2; }
+
+	.bp, 		/* Name.Builtin.Pseudo */
+	.cp, 		/* Comment.Preproc */
+	.dl, 		/* Literal.String.Delimiter */
+	.gt, 		/* Generic.Traceback */
+	.gu, 		/* Generic.Subheading */
+	.kt, 		/* Keyword.Type */
+	.nb, 		/* Name.Builtin */
+	.nc, 		/* Name.Class */
+	.no, 		/* Name.Constant */
+	.sa, 		/* Literal.String.Affix */
+	.sb, 		/* Literal.String.Backtick */
+	.sc, 		/* Literal.String.Char */
+	.sd, 		/* Literal.String.Doc */
+	.se, 		/* Literal.String.Escape */
+	.sh, 		/* Literal.String.Heredoc */
+	.sx, 		/* Literal.String.Other */
+	.sr, 		/* Literal.String.Regex */
+	.s1, 		/* Literal.String.Single */
+	.s2 		/* Literal.String.Double */
+					{ color: @article-code-accent3 }
+
+	.err,   /* Error */
+	.fm, 		/* Name.Function.Magic */
+	.gr, 		/* Generic.Error */
+	.gd, 		/* Generic.Deleted */
+	.nd, 		/* Name.Decorator */
+	.ne, 		/* Name.Exception */
+	.nf, 		/* Name.Function */
+	.nl, 		/* Name.Label */
+	.si 		/* Literal.String.Interpol */
+					{ color: @article-code-accent4 }
+
+	.m,  		/* Literal.Number */
+	.ni, 		/* Name.Entity */
+	.mb, 		/* Literal.Number.Bin */
+	.mf, 		/* Literal.Number.Float */
+	.mh, 		/* Literal.Number.Hex */
+	.mi, 		/* Literal.Number.Integer */
+	.mo, 		/* Literal.Number.Oct */
+	.vc, 		/* Name.Variable.Class */
+	.vg, 		/* Name.Variable.Global */
+	.vi, 		/* Name.Variable.Instance */
+	.vm, 		/* Name.Variable.Magic */
+	.il 		/* Literal.Number.Integer.Long */
+					{ color: @article-code-accent5 }
+
+	.gp, 		/* Generic.Prompt */
+	.o  		/* Operator */
+					{ color: @article-code-accent6 }
+
+	.ss 		/* Literal.String.Symbol */
+					{ color: @article-code-accent7 }
+
+	// FONT STYLES
+
+	.cs 		/* Comment.Special */
+	.gh, 		/* Generic.Heading */
+	.gu, 		/* Generic.Subheading */
+	.gp, 		/* Generic.Prompt */
+	.gs, 		/* Generic.Strong */
+	.k, 		/* Keyword */
+	.kc, 		/* Keyword.Constant */
+	.kd, 		/* Keyword.Declaration */
+	.kn, 		/* Keyword.Namespace */
+	.kp, 		/* Keyword.Pseudo */
+	.kr, 		/* Keyword.Reserved */
+	.kt, 		/* Keyword.Type */
+	.nc, 		/* Name.Class */
+	.ne, 		/* Name.Exception */
+	.ni, 		/* Name.Entity */
+	.nn 		/* Name.Namespace */
+	.nt, 		/* Name.Tag */
+	.ow, 		/* Operator.Word */
+	.se 		/* Literal.String.Escape */
+					{ font-weight: bold }
+
+	.c, 		/* Comment */
+	.ch, 		/* Comment.Hashbang */
+	.cm, 		/* Comment.Multiline */
+	.cpf, 	/* Comment.PreprocFile */
+	.c1, 		/* Comment.Single */
+	.cs,		/* Comment.Special */
+	.ge, 		/* Generic.Emph */
+	.sd ,		/* Literal.String.Doc */
+	.w  		/* Text.Whitespace */
+					{ font-style: italic }
+}
