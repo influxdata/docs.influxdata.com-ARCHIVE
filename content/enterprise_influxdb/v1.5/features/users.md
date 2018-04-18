@@ -100,7 +100,7 @@ The following table describes permissions required to execute the associated dat
 
 |Permission|Statement|
 |---|---|
-|CreateDatabasePermission|AlterRetentionPolicyStatement, CreateDatabaseStatement, CreateRetentionPolicyStatement|
+|CreateDatabasePermission|AlterRetentionPolicyStatement, CreateDatabaseStatement, CreateRetentionPolicyStatement, ShowRetentionPoliciesStatement|
 |ManageContinuousQueryPermission|CreateContinuousQueryStatement, DropContinuousQueryStatement, ShowContinuousQueriesStatement|
 |ManageSubscriptionPermission|CreateSubscriptionStatement, DropSubscriptionStatement, ShowSubscriptionsStatement|
 |CreateUserAndRolePermission|CreateUserStatement, DropUserStatement, GrantAdminStatement, GrantStatement, RevokeAdminStatement, RevokeStatement, SetPasswordUserStatement, ShowGrantsForUserStatement, ShowUsersStatement|
@@ -148,7 +148,7 @@ The following table describes database statements and the permissions required t
 |ShowGrantsForUserStatement|CreateUserAndRolePermission|Database|
 |ShowMeasurementsStatement|ReadDataPermission|Database|
 |ShowQueriesStatement|ManageQueryPermission|Database|
-|ShowRetentionPoliciesStatement|ReadDataPermission|Database|
+|ShowRetentionPoliciesStatement|CreateDatabasePermission|Database|
 |ShowSeriesStatement|ReadDataPermission|Database|
 |ShowShardGroupsStatement|ManageShardPermission|Cluster|
 |ShowShardsStatement|ManageShardPermission|Cluster|
