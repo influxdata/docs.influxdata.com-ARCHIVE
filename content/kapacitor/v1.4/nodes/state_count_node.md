@@ -13,19 +13,22 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[stateCount](#descr)&nbsp;(&nbsp;`expression`&nbsp;`ast.LambdaNode`)** | Create a node that tracks number of consecutive points in a given state.  |
+| **[stateCount](#description)&nbsp;(&nbsp;`expression`&nbsp;`ast.LambdaNode`)** | Create a node that tracks number of consecutive points in a given state.  |
 
 ### Property Methods
 
 | Setters | Description |
 |:---|:---|
 | **[as](#as)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The new name of the resulting duration field. Default: 'state_count'  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 
 
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/state_count_node/#alert), [Barrier](/kapacitor/v1.4/nodes/state_count_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/state_count_node/#bottom), [Combine](/kapacitor/v1.4/nodes/state_count_node/#combine), [Count](/kapacitor/v1.4/nodes/state_count_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/state_count_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/state_count_node/#deadman), [Default](/kapacitor/v1.4/nodes/state_count_node/#default), [Delete](/kapacitor/v1.4/nodes/state_count_node/#delete), [Derivative](/kapacitor/v1.4/nodes/state_count_node/#derivative), [Difference](/kapacitor/v1.4/nodes/state_count_node/#difference), [Distinct](/kapacitor/v1.4/nodes/state_count_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/state_count_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/state_count_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/state_count_node/#eval), [First](/kapacitor/v1.4/nodes/state_count_node/#first), [Flatten](/kapacitor/v1.4/nodes/state_count_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/state_count_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/state_count_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/state_count_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/state_count_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/state_count_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/state_count_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/state_count_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/state_count_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/state_count_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/state_count_node/#last), [Log](/kapacitor/v1.4/nodes/state_count_node/#log), [Max](/kapacitor/v1.4/nodes/state_count_node/#max), [Mean](/kapacitor/v1.4/nodes/state_count_node/#mean), [Median](/kapacitor/v1.4/nodes/state_count_node/#median), [Min](/kapacitor/v1.4/nodes/state_count_node/#min), [Mode](/kapacitor/v1.4/nodes/state_count_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/state_count_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/state_count_node/#percentile), [Sample](/kapacitor/v1.4/nodes/state_count_node/#sample), [Shift](/kapacitor/v1.4/nodes/state_count_node/#shift), [Sideload](/kapacitor/v1.4/nodes/state_count_node/#sideload), [Spread](/kapacitor/v1.4/nodes/state_count_node/#spread), [StateCount](/kapacitor/v1.4/nodes/state_count_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/state_count_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/state_count_node/#stats), [Stddev](/kapacitor/v1.4/nodes/state_count_node/#stddev), [Sum](/kapacitor/v1.4/nodes/state_count_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/state_count_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/state_count_node/#top), [Union](/kapacitor/v1.4/nodes/state_count_node/#union), [Where](/kapacitor/v1.4/nodes/state_count_node/#where), [Window](/kapacitor/v1.4/nodes/state_count_node/#window)
-<a id='descr'/><hr/><br/>
+
+---
+
 ### Description
 
 Compute the number of consecutive points in a given state.
@@ -59,8 +62,7 @@ Example:
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-Properties
-----------
+## Properties
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -80,8 +82,18 @@ stateCount.as(value string)
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-Chaining Methods
-----------------
+### Quiet
+
+Suppress errors during execution.
+
+```javascript
+stateCount.quiet()
+```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
+
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

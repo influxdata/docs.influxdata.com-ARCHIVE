@@ -13,7 +13,7 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[derivative](#descr)&nbsp;(&nbsp;`field`&nbsp;`string`)** | Create a new node that computes the derivative of adjacent points.  |
+| **[derivative](#description)&nbsp;(&nbsp;`field`&nbsp;`string`)** | Create a new node that computes the derivative of adjacent points.  |
 
 ### Property Methods
 
@@ -21,13 +21,16 @@ menu:
 |:---|:---|
 | **[as](#as)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The new name of the derivative field. Default is the name of the field used when calculating the derivative.  |
 | **[nonNegative](#nonnegative)&nbsp;(&nbsp;)** | If called the derivative will skip negative results.  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 | **[unit](#unit)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | The time unit of the resulting derivative value. Default: 1s  |
 
 
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/derivative_node/#alert), [Barrier](/kapacitor/v1.4/nodes/derivative_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/derivative_node/#bottom), [Combine](/kapacitor/v1.4/nodes/derivative_node/#combine), [Count](/kapacitor/v1.4/nodes/derivative_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/derivative_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/derivative_node/#deadman), [Default](/kapacitor/v1.4/nodes/derivative_node/#default), [Delete](/kapacitor/v1.4/nodes/derivative_node/#delete), [Derivative](/kapacitor/v1.4/nodes/derivative_node/#derivative), [Difference](/kapacitor/v1.4/nodes/derivative_node/#difference), [Distinct](/kapacitor/v1.4/nodes/derivative_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/derivative_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/derivative_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/derivative_node/#eval), [First](/kapacitor/v1.4/nodes/derivative_node/#first), [Flatten](/kapacitor/v1.4/nodes/derivative_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/derivative_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/derivative_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/derivative_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/derivative_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/derivative_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/derivative_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/derivative_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/derivative_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/derivative_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/derivative_node/#last), [Log](/kapacitor/v1.4/nodes/derivative_node/#log), [Max](/kapacitor/v1.4/nodes/derivative_node/#max), [Mean](/kapacitor/v1.4/nodes/derivative_node/#mean), [Median](/kapacitor/v1.4/nodes/derivative_node/#median), [Min](/kapacitor/v1.4/nodes/derivative_node/#min), [Mode](/kapacitor/v1.4/nodes/derivative_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/derivative_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/derivative_node/#percentile), [Sample](/kapacitor/v1.4/nodes/derivative_node/#sample), [Shift](/kapacitor/v1.4/nodes/derivative_node/#shift), [Sideload](/kapacitor/v1.4/nodes/derivative_node/#sideload), [Spread](/kapacitor/v1.4/nodes/derivative_node/#spread), [StateCount](/kapacitor/v1.4/nodes/derivative_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/derivative_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/derivative_node/#stats), [Stddev](/kapacitor/v1.4/nodes/derivative_node/#stddev), [Sum](/kapacitor/v1.4/nodes/derivative_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/derivative_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/derivative_node/#top), [Union](/kapacitor/v1.4/nodes/derivative_node/#union), [Where](/kapacitor/v1.4/nodes/derivative_node/#where), [Window](/kapacitor/v1.4/nodes/derivative_node/#window)
-<a id='descr'/><hr/><br/>
+
+---
+
 ### Description
 
 Compute the derivative of a stream or batch.
@@ -60,8 +63,7 @@ dropped.
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-Properties
-----------
+## Properties
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -93,6 +95,16 @@ derivative.nonNegative()
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
+### Quiet
+
+Suppress errors during execution.
+
+```javascript
+derivative.quiet()
+```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
 
 ### Unit
 
@@ -107,8 +119,7 @@ derivative.unit(value time.Duration)
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-Chaining Methods
-----------------
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

@@ -13,19 +13,23 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[influxQL](#descr)** | Has no constructor signature. |
+| **[influxQL](#description)** | Has no constructor signature. |
+
 ### Property Methods
 
 | Setters | Description |
 |:---|:---|
 | **[as](#as)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the field, defaults to the name of function used (i.e. .mean -> 'mean')  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 | **[usePointTimes](#usepointtimes)&nbsp;(&nbsp;)** | Use the time of the selected point instead of the time of the batch.  |
 
 
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/influx_q_l_node/#alert), [Barrier](/kapacitor/v1.4/nodes/influx_q_l_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/influx_q_l_node/#bottom), [Combine](/kapacitor/v1.4/nodes/influx_q_l_node/#combine), [Count](/kapacitor/v1.4/nodes/influx_q_l_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/influx_q_l_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/influx_q_l_node/#deadman), [Default](/kapacitor/v1.4/nodes/influx_q_l_node/#default), [Delete](/kapacitor/v1.4/nodes/influx_q_l_node/#delete), [Derivative](/kapacitor/v1.4/nodes/influx_q_l_node/#derivative), [Difference](/kapacitor/v1.4/nodes/influx_q_l_node/#difference), [Distinct](/kapacitor/v1.4/nodes/influx_q_l_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/influx_q_l_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/influx_q_l_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/influx_q_l_node/#eval), [First](/kapacitor/v1.4/nodes/influx_q_l_node/#first), [Flatten](/kapacitor/v1.4/nodes/influx_q_l_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/influx_q_l_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/influx_q_l_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/influx_q_l_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/influx_q_l_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/influx_q_l_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/influx_q_l_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/influx_q_l_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/influx_q_l_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/influx_q_l_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/influx_q_l_node/#last), [Log](/kapacitor/v1.4/nodes/influx_q_l_node/#log), [Max](/kapacitor/v1.4/nodes/influx_q_l_node/#max), [Mean](/kapacitor/v1.4/nodes/influx_q_l_node/#mean), [Median](/kapacitor/v1.4/nodes/influx_q_l_node/#median), [Min](/kapacitor/v1.4/nodes/influx_q_l_node/#min), [Mode](/kapacitor/v1.4/nodes/influx_q_l_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/influx_q_l_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/influx_q_l_node/#percentile), [Sample](/kapacitor/v1.4/nodes/influx_q_l_node/#sample), [Shift](/kapacitor/v1.4/nodes/influx_q_l_node/#shift), [Sideload](/kapacitor/v1.4/nodes/influx_q_l_node/#sideload), [Spread](/kapacitor/v1.4/nodes/influx_q_l_node/#spread), [StateCount](/kapacitor/v1.4/nodes/influx_q_l_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/influx_q_l_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/influx_q_l_node/#stats), [Stddev](/kapacitor/v1.4/nodes/influx_q_l_node/#stddev), [Sum](/kapacitor/v1.4/nodes/influx_q_l_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/influx_q_l_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/influx_q_l_node/#top), [Union](/kapacitor/v1.4/nodes/influx_q_l_node/#union), [Where](/kapacitor/v1.4/nodes/influx_q_l_node/#where), [Window](/kapacitor/v1.4/nodes/influx_q_l_node/#window)
-<a id='descr'/><hr/><br/>
+
+---
+
 ### Description
 
 An [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/) performs the available function from the InfluxQL language.
@@ -54,8 +58,7 @@ InfluxQL functions.
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-Properties
-----------
+## Properties
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -70,6 +73,17 @@ function used (i.e. .mean -> 'mean')
 
 ```javascript
 influxQL.as(value string)
+```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
+
+### Quiet
+
+Suppress errors during execution.
+
+```javascript
+influxQL.quiet()
 ```
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
@@ -90,8 +104,7 @@ influxQL.usePointTimes()
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-Chaining Methods
-----------------
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

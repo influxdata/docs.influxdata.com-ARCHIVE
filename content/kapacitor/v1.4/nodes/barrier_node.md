@@ -13,7 +13,7 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[barrier](#descr)&nbsp;(&nbsp;)** | Create a new Barrier node that emits a BarrierMessage periodically  |
+| **[barrier](#description)&nbsp;(&nbsp;)** | Create a new Barrier node that emits a BarrierMessage periodically  |
 
 ### Property Methods
 
@@ -21,13 +21,15 @@ menu:
 |:---|:---|
 | **[idle](#idle)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | Emit barrier based on idle time since the last received message. Must be greater than zero.  |
 | **[period](#period)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | Emit barrier based on periodic timer.  The timer is based on system clock rather than message time. Must be greater than zero.  |
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors that occur while barrier is emitted.  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 
 
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/barrier_node/#alert), [Barrier](/kapacitor/v1.4/nodes/barrier_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/barrier_node/#bottom), [Combine](/kapacitor/v1.4/nodes/barrier_node/#combine), [Count](/kapacitor/v1.4/nodes/barrier_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/barrier_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/barrier_node/#deadman), [Default](/kapacitor/v1.4/nodes/barrier_node/#default), [Delete](/kapacitor/v1.4/nodes/barrier_node/#delete), [Derivative](/kapacitor/v1.4/nodes/barrier_node/#derivative), [Difference](/kapacitor/v1.4/nodes/barrier_node/#difference), [Distinct](/kapacitor/v1.4/nodes/barrier_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/barrier_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/barrier_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/barrier_node/#eval), [First](/kapacitor/v1.4/nodes/barrier_node/#first), [Flatten](/kapacitor/v1.4/nodes/barrier_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/barrier_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/barrier_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/barrier_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/barrier_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/barrier_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/barrier_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/barrier_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/barrier_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/barrier_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/barrier_node/#last), [Log](/kapacitor/v1.4/nodes/barrier_node/#log), [Max](/kapacitor/v1.4/nodes/barrier_node/#max), [Mean](/kapacitor/v1.4/nodes/barrier_node/#mean), [Median](/kapacitor/v1.4/nodes/barrier_node/#median), [Min](/kapacitor/v1.4/nodes/barrier_node/#min), [Mode](/kapacitor/v1.4/nodes/barrier_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/barrier_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/barrier_node/#percentile), [Sample](/kapacitor/v1.4/nodes/barrier_node/#sample), [Shift](/kapacitor/v1.4/nodes/barrier_node/#shift), [Sideload](/kapacitor/v1.4/nodes/barrier_node/#sideload), [Spread](/kapacitor/v1.4/nodes/barrier_node/#spread), [StateCount](/kapacitor/v1.4/nodes/barrier_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/barrier_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/barrier_node/#stats), [Stddev](/kapacitor/v1.4/nodes/barrier_node/#stddev), [Sum](/kapacitor/v1.4/nodes/barrier_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/barrier_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/barrier_node/#top), [Union](/kapacitor/v1.4/nodes/barrier_node/#union), [Where](/kapacitor/v1.4/nodes/barrier_node/#where), [Window](/kapacitor/v1.4/nodes/barrier_node/#window)
-<a id='descr'/><hr/><br/>
+
+---
+
 ### Description
 
 A [BarrierNode](/kapacitor/v1.4/nodes/barrier_node/) will emit a barrier with the current time, according to the system
@@ -55,8 +57,7 @@ Example:
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-Properties
-----------
+## Properties
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -92,8 +93,7 @@ barrier.period(value time.Duration)
 
 ### Quiet
 
-Suppress errors that occur while barrier is emitted.
-
+Suppress errors during execution.
 
 ```js
 barrier.quiet()

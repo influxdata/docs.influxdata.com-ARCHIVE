@@ -13,18 +13,22 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[uDF](#descr)** | Has no constructor signature. |
+| **[uDF](#description)** | Has no constructor signature. |
+
 ### Property Methods
 
 | Setters | Description |
 |:---|:---|
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 | **[uDFName](#udfname)&nbsp;(&nbsp;`value`&nbsp;`string`)** |  |
 
 
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/u_d_f_node/#alert), [Barrier](/kapacitor/v1.4/nodes/u_d_f_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/u_d_f_node/#bottom), [Combine](/kapacitor/v1.4/nodes/u_d_f_node/#combine), [Count](/kapacitor/v1.4/nodes/u_d_f_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/u_d_f_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/u_d_f_node/#deadman), [Default](/kapacitor/v1.4/nodes/u_d_f_node/#default), [Delete](/kapacitor/v1.4/nodes/u_d_f_node/#delete), [Derivative](/kapacitor/v1.4/nodes/u_d_f_node/#derivative), [Difference](/kapacitor/v1.4/nodes/u_d_f_node/#difference), [Distinct](/kapacitor/v1.4/nodes/u_d_f_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/u_d_f_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/u_d_f_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/u_d_f_node/#eval), [First](/kapacitor/v1.4/nodes/u_d_f_node/#first), [Flatten](/kapacitor/v1.4/nodes/u_d_f_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/u_d_f_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/u_d_f_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/u_d_f_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/u_d_f_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/u_d_f_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/u_d_f_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/u_d_f_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/u_d_f_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/u_d_f_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/u_d_f_node/#last), [Log](/kapacitor/v1.4/nodes/u_d_f_node/#log), [Max](/kapacitor/v1.4/nodes/u_d_f_node/#max), [Mean](/kapacitor/v1.4/nodes/u_d_f_node/#mean), [Median](/kapacitor/v1.4/nodes/u_d_f_node/#median), [Min](/kapacitor/v1.4/nodes/u_d_f_node/#min), [Mode](/kapacitor/v1.4/nodes/u_d_f_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/u_d_f_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/u_d_f_node/#percentile), [Sample](/kapacitor/v1.4/nodes/u_d_f_node/#sample), [Shift](/kapacitor/v1.4/nodes/u_d_f_node/#shift), [Sideload](/kapacitor/v1.4/nodes/u_d_f_node/#sideload), [Spread](/kapacitor/v1.4/nodes/u_d_f_node/#spread), [StateCount](/kapacitor/v1.4/nodes/u_d_f_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/u_d_f_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/u_d_f_node/#stats), [Stddev](/kapacitor/v1.4/nodes/u_d_f_node/#stddev), [Sum](/kapacitor/v1.4/nodes/u_d_f_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/u_d_f_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/u_d_f_node/#top), [Union](/kapacitor/v1.4/nodes/u_d_f_node/#union), [Where](/kapacitor/v1.4/nodes/u_d_f_node/#where), [Window](/kapacitor/v1.4/nodes/u_d_f_node/#window)
-<a id='descr'/><hr/><br/>
+
+---
+
 ### Description
 
 A [UDFNode](/kapacitor/v1.4/nodes/u_d_f_node/) is a node that can run a User Defined Function (UDF) in a separate process.
@@ -75,12 +79,22 @@ As a result, make sure the user is properly secured, as well as the configuratio
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-Properties
-----------
+## Properties
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
 Property methods are marked using the `.` operator.
+
+
+### Quiet
+
+Suppress errors during execution.
+
+```javascript
+uDF.quiet()
+```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### UDFName
@@ -92,8 +106,7 @@ uDF.uDFName(value string)
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-Chaining Methods
-----------------
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

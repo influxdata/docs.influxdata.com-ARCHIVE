@@ -13,7 +13,7 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[from](#descr)&nbsp;(&nbsp;)** | Creates a new stream node that can be further filtered using the Database, RetentionPolicy, Measurement and Where properties. From can be called multiple times to create multiple independent forks of the data stream.  |
+| **[from](#description)&nbsp;(&nbsp;)** | Creates a new stream node that can be further filtered using the Database, RetentionPolicy, Measurement and Where properties. From can be called multiple times to create multiple independent forks of the data stream.  |
 
 ### Property Methods
 
@@ -23,6 +23,7 @@ menu:
 | **[groupBy](#groupby)&nbsp;(&nbsp;`tag`&nbsp;`...interface{}`)** | Group the data by a set of tags.  |
 | **[groupByMeasurement](#groupbymeasurement)&nbsp;(&nbsp;)** | If set will include the measurement name in the group ID. Along with any other group by dimensions.  |
 | **[measurement](#measurement)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The measurement name If empty any measurement will be used.  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 | **[retentionPolicy](#retentionpolicy)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The retention policy name If empty any retention policy will be used.  |
 | **[round](#round)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | Optional duration for rounding timestamps. Helpful to ensure data points land on specific boundaries Example: stream |from() .measurement('mydata') .round(1s)  |
 | **[truncate](#truncate)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | Optional duration for truncating timestamps. Helpful to ensure data points land on specific boundaries Example: stream |from() .measurement('mydata') .truncate(1s)  |
@@ -32,7 +33,9 @@ menu:
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/from_node/#alert), [Barrier](/kapacitor/v1.4/nodes/from_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/from_node/#bottom), [Combine](/kapacitor/v1.4/nodes/from_node/#combine), [Count](/kapacitor/v1.4/nodes/from_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/from_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/from_node/#deadman), [Default](/kapacitor/v1.4/nodes/from_node/#default), [Delete](/kapacitor/v1.4/nodes/from_node/#delete), [Derivative](/kapacitor/v1.4/nodes/from_node/#derivative), [Difference](/kapacitor/v1.4/nodes/from_node/#difference), [Distinct](/kapacitor/v1.4/nodes/from_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/from_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/from_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/from_node/#eval), [First](/kapacitor/v1.4/nodes/from_node/#first), [Flatten](/kapacitor/v1.4/nodes/from_node/#flatten), [From](/kapacitor/v1.4/nodes/from_node/#from), [HoltWinters](/kapacitor/v1.4/nodes/from_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/from_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/from_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/from_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/from_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/from_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/from_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/from_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/from_node/#last), [Log](/kapacitor/v1.4/nodes/from_node/#log), [Max](/kapacitor/v1.4/nodes/from_node/#max), [Mean](/kapacitor/v1.4/nodes/from_node/#mean), [Median](/kapacitor/v1.4/nodes/from_node/#median), [Min](/kapacitor/v1.4/nodes/from_node/#min), [Mode](/kapacitor/v1.4/nodes/from_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/from_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/from_node/#percentile), [Sample](/kapacitor/v1.4/nodes/from_node/#sample), [Shift](/kapacitor/v1.4/nodes/from_node/#shift), [Sideload](/kapacitor/v1.4/nodes/from_node/#sideload), [Spread](/kapacitor/v1.4/nodes/from_node/#spread), [StateCount](/kapacitor/v1.4/nodes/from_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/from_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/from_node/#stats), [Stddev](/kapacitor/v1.4/nodes/from_node/#stddev), [Sum](/kapacitor/v1.4/nodes/from_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/from_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/from_node/#top), [Union](/kapacitor/v1.4/nodes/from_node/#union), [Window](/kapacitor/v1.4/nodes/from_node/#window)
-<a id='descr'/><hr/><br/>
+
+---
+
 ### Description
 
 A [FromNode](/kapacitor/v1.4/nodes/from_node/) selects a subset of the data flowing through a [StreamNode.](/kapacitor/v1.4/nodes/stream_node/)
@@ -59,8 +62,7 @@ the tag `host` matches the regex `logger\d+`
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-Properties
-----------
+## Properties
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -139,6 +141,18 @@ If empty any measurement will be used.
 
 ```javascript
 from.measurement(value string)
+```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
+
+### Quiet
+
+Suppress errors during execution.
+
+
+```javascript
+from.quiet()
 ```
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
@@ -296,8 +310,7 @@ from.where(lambda ast.LambdaNode)
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-Chaining Methods
-----------------
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

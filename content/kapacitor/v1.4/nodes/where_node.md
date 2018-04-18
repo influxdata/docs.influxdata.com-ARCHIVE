@@ -13,15 +13,20 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[where](#descr)&nbsp;(&nbsp;`expression`&nbsp;`ast.LambdaNode`)** | Create a new node that filters the data stream by a given expression.  |
+| **[where](#description)&nbsp;(&nbsp;`expression`&nbsp;`ast.LambdaNode`)** | Create a new node that filters the data stream by a given expression.  |
 
 ### Property Methods
-This node has no properties that can be set.
+
+| Setters | Description |
+|:---|:---|
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/where_node/#alert), [Barrier](/kapacitor/v1.4/nodes/where_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/where_node/#bottom), [Combine](/kapacitor/v1.4/nodes/where_node/#combine), [Count](/kapacitor/v1.4/nodes/where_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/where_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/where_node/#deadman), [Default](/kapacitor/v1.4/nodes/where_node/#default), [Delete](/kapacitor/v1.4/nodes/where_node/#delete), [Derivative](/kapacitor/v1.4/nodes/where_node/#derivative), [Difference](/kapacitor/v1.4/nodes/where_node/#difference), [Distinct](/kapacitor/v1.4/nodes/where_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/where_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/where_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/where_node/#eval), [First](/kapacitor/v1.4/nodes/where_node/#first), [Flatten](/kapacitor/v1.4/nodes/where_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/where_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/where_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/where_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/where_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/where_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/where_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/where_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/where_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/where_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/where_node/#last), [Log](/kapacitor/v1.4/nodes/where_node/#log), [Max](/kapacitor/v1.4/nodes/where_node/#max), [Mean](/kapacitor/v1.4/nodes/where_node/#mean), [Median](/kapacitor/v1.4/nodes/where_node/#median), [Min](/kapacitor/v1.4/nodes/where_node/#min), [Mode](/kapacitor/v1.4/nodes/where_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/where_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/where_node/#percentile), [Sample](/kapacitor/v1.4/nodes/where_node/#sample), [Shift](/kapacitor/v1.4/nodes/where_node/#shift), [Sideload](/kapacitor/v1.4/nodes/where_node/#sideload), [Spread](/kapacitor/v1.4/nodes/where_node/#spread), [StateCount](/kapacitor/v1.4/nodes/where_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/where_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/where_node/#stats), [Stddev](/kapacitor/v1.4/nodes/where_node/#stddev), [Sum](/kapacitor/v1.4/nodes/where_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/where_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/where_node/#top), [Union](/kapacitor/v1.4/nodes/where_node/#union), [Where](/kapacitor/v1.4/nodes/where_node/#where), [Window](/kapacitor/v1.4/nodes/where_node/#window)
-<a id='descr'/><hr/><br/>
+
+---
+
 ### Description
 
 The [WhereNode](/kapacitor/v1.4/nodes/where_node/) filters the data stream by a given expression.
@@ -42,12 +47,28 @@ Example:
         .email().to('user@example.com')
 ```
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
+
+## Properties
+
+Property methods modify state on the calling node.
+They do not add another node to the pipeline, and always return a reference to the calling node.
+Property methods are marked using the `.` operator.
+
+
+### Quiet
+
+Suppress errors during execution.
+
+```javascript
+where.quiet()
+```
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-Chaining Methods
-----------------
+
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

@@ -13,7 +13,7 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[eval](#descr)&nbsp;(&nbsp;`expressions`&nbsp;`...ast.LambdaNode`)** | Create an eval node that will evaluate the given transformation function to each data point. A list of expressions may be provided and will be evaluated in the order they are given. The results are available to later expressions.  |
+| **[eval](#description)&nbsp;(&nbsp;`expressions`&nbsp;`...ast.LambdaNode`)** | Create an eval node that will evaluate the given transformation function to each data point. A list of expressions may be provided and will be evaluated in the order they are given. The results are available to later expressions.  |
 
 ### Property Methods
 
@@ -28,7 +28,9 @@ menu:
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/eval_node/#alert), [Barrier](/kapacitor/v1.4/nodes/eval_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/eval_node/#bottom), [Combine](/kapacitor/v1.4/nodes/eval_node/#combine), [Count](/kapacitor/v1.4/nodes/eval_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/eval_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/eval_node/#deadman), [Default](/kapacitor/v1.4/nodes/eval_node/#default), [Delete](/kapacitor/v1.4/nodes/eval_node/#delete), [Derivative](/kapacitor/v1.4/nodes/eval_node/#derivative), [Difference](/kapacitor/v1.4/nodes/eval_node/#difference), [Distinct](/kapacitor/v1.4/nodes/eval_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/eval_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/eval_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/eval_node/#eval), [First](/kapacitor/v1.4/nodes/eval_node/#first), [Flatten](/kapacitor/v1.4/nodes/eval_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/eval_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/eval_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/eval_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/eval_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/eval_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/eval_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/eval_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/eval_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/eval_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/eval_node/#last), [Log](/kapacitor/v1.4/nodes/eval_node/#log), [Max](/kapacitor/v1.4/nodes/eval_node/#max), [Mean](/kapacitor/v1.4/nodes/eval_node/#mean), [Median](/kapacitor/v1.4/nodes/eval_node/#median), [Min](/kapacitor/v1.4/nodes/eval_node/#min), [Mode](/kapacitor/v1.4/nodes/eval_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/eval_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/eval_node/#percentile), [Sample](/kapacitor/v1.4/nodes/eval_node/#sample), [Shift](/kapacitor/v1.4/nodes/eval_node/#shift), [Sideload](/kapacitor/v1.4/nodes/eval_node/#sideload), [Spread](/kapacitor/v1.4/nodes/eval_node/#spread), [StateCount](/kapacitor/v1.4/nodes/eval_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/eval_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/eval_node/#stats), [Stddev](/kapacitor/v1.4/nodes/eval_node/#stddev), [Sum](/kapacitor/v1.4/nodes/eval_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/eval_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/eval_node/#top), [Union](/kapacitor/v1.4/nodes/eval_node/#union), [Where](/kapacitor/v1.4/nodes/eval_node/#where), [Window](/kapacitor/v1.4/nodes/eval_node/#window)
-<a id='descr'/><hr/><br/>
+
+---
+
 ### Description
 
 Evaluates expressions on each data point it receives.
@@ -57,8 +59,7 @@ Available Statistics:
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-Properties
-----------
+## Properties
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -186,8 +187,7 @@ eval.tags(names ...string)
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-Chaining Methods
-----------------
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

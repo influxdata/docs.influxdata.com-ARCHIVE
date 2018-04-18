@@ -13,7 +13,7 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[sideload](#descr)&nbsp;(&nbsp;)** | Create a node that can load data from external sources  |
+| **[sideload](#description)&nbsp;(&nbsp;)** | Create a node that can load data from external sources  |
 
 ### Property Methods
 
@@ -21,6 +21,7 @@ menu:
 |:---|:---|
 | **[field](#field)&nbsp;(&nbsp;`f`&nbsp;`string`,&nbsp;`v`&nbsp;`interface{}`)** | Field is the name of a field to load from the source and its default value. The type loaded must match the type of the default value. Otherwise an error is recorded and the default value is used.  |
 | **[order](#order)&nbsp;(&nbsp;`order`&nbsp;`...string`)** | Order is a list of paths that indicate the hierarchical order. The paths are relative to the source and can have template markers like `{{.tagname}}` that will be replaced with the tag value of the point. The paths are then searched in order for the keys and the first value that is found is used. This allows for values to be overridden based on a hierarchy of tags.  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 | **[source](#source)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Source for the data, currently only `file://` based sources are supported  |
 | **[tag](#tag)&nbsp;(&nbsp;`t`&nbsp;`string`,&nbsp;`v`&nbsp;`string`)** | Tag is the name of a tag to load from the source and its default value. The loaded values must be strings, otherwise an error is recorded and the default value is used.  |
 
@@ -28,7 +29,9 @@ menu:
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/sideload_node/#alert), [Barrier](/kapacitor/v1.4/nodes/sideload_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/sideload_node/#bottom), [Combine](/kapacitor/v1.4/nodes/sideload_node/#combine), [Count](/kapacitor/v1.4/nodes/sideload_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/sideload_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/sideload_node/#deadman), [Default](/kapacitor/v1.4/nodes/sideload_node/#default), [Delete](/kapacitor/v1.4/nodes/sideload_node/#delete), [Derivative](/kapacitor/v1.4/nodes/sideload_node/#derivative), [Difference](/kapacitor/v1.4/nodes/sideload_node/#difference), [Distinct](/kapacitor/v1.4/nodes/sideload_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/sideload_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/sideload_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/sideload_node/#eval), [First](/kapacitor/v1.4/nodes/sideload_node/#first), [Flatten](/kapacitor/v1.4/nodes/sideload_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/sideload_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/sideload_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/sideload_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/sideload_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/sideload_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/sideload_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/sideload_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/sideload_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/sideload_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/sideload_node/#last), [Log](/kapacitor/v1.4/nodes/sideload_node/#log), [Max](/kapacitor/v1.4/nodes/sideload_node/#max), [Mean](/kapacitor/v1.4/nodes/sideload_node/#mean), [Median](/kapacitor/v1.4/nodes/sideload_node/#median), [Min](/kapacitor/v1.4/nodes/sideload_node/#min), [Mode](/kapacitor/v1.4/nodes/sideload_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/sideload_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/sideload_node/#percentile), [Sample](/kapacitor/v1.4/nodes/sideload_node/#sample), [Shift](/kapacitor/v1.4/nodes/sideload_node/#shift), [Sideload](/kapacitor/v1.4/nodes/sideload_node/#sideload), [Spread](/kapacitor/v1.4/nodes/sideload_node/#spread), [StateCount](/kapacitor/v1.4/nodes/sideload_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/sideload_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/sideload_node/#stats), [Stddev](/kapacitor/v1.4/nodes/sideload_node/#stddev), [Sum](/kapacitor/v1.4/nodes/sideload_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/sideload_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/sideload_node/#top), [Union](/kapacitor/v1.4/nodes/sideload_node/#union), [Where](/kapacitor/v1.4/nodes/sideload_node/#where), [Window](/kapacitor/v1.4/nodes/sideload_node/#window)
-<a id='descr'/><hr/><br/>
+
+---
+
 ### Description
 
 Sideload adds fields and tags to points based on hierarchical data from various sources.
@@ -51,8 +54,7 @@ The files paths are checked then checked in order for the specified keys and the
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-Properties
-----------
+## Properties
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -88,6 +90,17 @@ sideload.order(order ...string)
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
+### Quiet
+
+Suppress errors during execution.
+
+```javascript
+sideload.quiet()
+```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
+
 ### Source
 
 Source for the data, currently only `file://` based sources are supported
@@ -113,8 +126,7 @@ sideload.tag(t string, v string)
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-Chaining Methods
-----------------
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

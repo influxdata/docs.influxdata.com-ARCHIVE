@@ -13,7 +13,7 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[join](#descr)&nbsp;(&nbsp;`others`&nbsp;`...Node`)** | Join this node with other nodes. The data are joined on timestamp.  |
+| **[join](#description)&nbsp;(&nbsp;`others`&nbsp;`...Node`)** | Join this node with other nodes. The data are joined on timestamp.  |
 
 ### Property Methods
 
@@ -23,6 +23,7 @@ menu:
 | **[delimiter](#delimiter)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The delimiter for the field name prefixes. Can be the empty string.  |
 | **[fill](#fill)&nbsp;(&nbsp;`value`&nbsp;`interface{}`)** | Fill the data. The fill option implies the type of join: inner or full outer Options are:  |
 | **[on](#on)&nbsp;(&nbsp;`dims`&nbsp;`...string`)** | Join on a subset of the group by dimensions. This is a special case where you want a single point from one parent to join with multiple points from a different parent.  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 | **[streamName](#streamname)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of this new joined data stream. If empty the name of the left parent is used.  |
 | **[tolerance](#tolerance)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | The maximum duration of time that two incoming points can be apart and still be considered to be equal in time. The joined data point's time will be rounded to the nearest multiple of the tolerance duration.  |
 
@@ -30,7 +31,9 @@ menu:
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/join_node/#alert), [Barrier](/kapacitor/v1.4/nodes/join_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/join_node/#bottom), [Combine](/kapacitor/v1.4/nodes/join_node/#combine), [Count](/kapacitor/v1.4/nodes/join_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/join_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/join_node/#deadman), [Default](/kapacitor/v1.4/nodes/join_node/#default), [Delete](/kapacitor/v1.4/nodes/join_node/#delete), [Derivative](/kapacitor/v1.4/nodes/join_node/#derivative), [Difference](/kapacitor/v1.4/nodes/join_node/#difference), [Distinct](/kapacitor/v1.4/nodes/join_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/join_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/join_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/join_node/#eval), [First](/kapacitor/v1.4/nodes/join_node/#first), [Flatten](/kapacitor/v1.4/nodes/join_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/join_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/join_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/join_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/join_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/join_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/join_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/join_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/join_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/join_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/join_node/#last), [Log](/kapacitor/v1.4/nodes/join_node/#log), [Max](/kapacitor/v1.4/nodes/join_node/#max), [Mean](/kapacitor/v1.4/nodes/join_node/#mean), [Median](/kapacitor/v1.4/nodes/join_node/#median), [Min](/kapacitor/v1.4/nodes/join_node/#min), [Mode](/kapacitor/v1.4/nodes/join_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/join_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/join_node/#percentile), [Sample](/kapacitor/v1.4/nodes/join_node/#sample), [Shift](/kapacitor/v1.4/nodes/join_node/#shift), [Sideload](/kapacitor/v1.4/nodes/join_node/#sideload), [Spread](/kapacitor/v1.4/nodes/join_node/#spread), [StateCount](/kapacitor/v1.4/nodes/join_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/join_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/join_node/#stats), [Stddev](/kapacitor/v1.4/nodes/join_node/#stddev), [Sum](/kapacitor/v1.4/nodes/join_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/join_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/join_node/#top), [Union](/kapacitor/v1.4/nodes/join_node/#union), [Where](/kapacitor/v1.4/nodes/join_node/#where), [Window](/kapacitor/v1.4/nodes/join_node/#window)
-<a id='descr'/><hr/><br/>
+
+---
+
 ### Description
 
 Joins the data from any number of nodes.
@@ -81,8 +84,7 @@ and then transformed to calculate a combined field.
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-Properties
-----------
+## Properties
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -225,6 +227,17 @@ join.on(dims ...string)
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
+### Quiet
+
+Suppress errors during execution.
+
+```javascript
+join.quiet()
+```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
+
 ### StreamName
 
 The name of this new joined data stream.
@@ -253,8 +266,7 @@ join.tolerance(value time.Duration)
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-Chaining Methods
-----------------
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

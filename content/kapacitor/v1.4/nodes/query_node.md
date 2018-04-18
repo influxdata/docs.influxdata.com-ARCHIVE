@@ -13,7 +13,7 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[query](#descr)&nbsp;(&nbsp;`q`&nbsp;`string`)** | The query to execute. Must not contain a time condition in the `WHERE` clause or contain a `GROUP BY` clause. The time conditions are added dynamically according to the period, offset and schedule. The `GROUP BY` clause is added dynamically according to the dimensions passed to the `groupBy` method.  |
+| **[query](#description)&nbsp;(&nbsp;`q`&nbsp;`string`)** | The query to execute. Must not contain a time condition in the `WHERE` clause or contain a `GROUP BY` clause. The time conditions are added dynamically according to the period, offset and schedule. The `GROUP BY` clause is added dynamically according to the dimensions passed to the `groupBy` method.  |
 
 ### Property Methods
 
@@ -29,12 +29,15 @@ menu:
 | **[groupByMeasurement](#groupbymeasurement)&nbsp;(&nbsp;)** | If set will include the measurement name in the group ID. Along with any other group by dimensions.  |
 | **[offset](#offset)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | How far back in time to query from the current time  |
 | **[period](#period)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | The period or length of time that will be queried from InfluxDB  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 
 
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/query_node/#alert), [Barrier](/kapacitor/v1.4/nodes/query_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/query_node/#bottom), [Combine](/kapacitor/v1.4/nodes/query_node/#combine), [Count](/kapacitor/v1.4/nodes/query_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/query_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/query_node/#deadman), [Default](/kapacitor/v1.4/nodes/query_node/#default), [Delete](/kapacitor/v1.4/nodes/query_node/#delete), [Derivative](/kapacitor/v1.4/nodes/query_node/#derivative), [Difference](/kapacitor/v1.4/nodes/query_node/#difference), [Distinct](/kapacitor/v1.4/nodes/query_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/query_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/query_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/query_node/#eval), [First](/kapacitor/v1.4/nodes/query_node/#first), [Flatten](/kapacitor/v1.4/nodes/query_node/#flatten), [HoltWinters](/kapacitor/v1.4/nodes/query_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/query_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/query_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/query_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/query_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/query_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/query_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/query_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/query_node/#last), [Log](/kapacitor/v1.4/nodes/query_node/#log), [Max](/kapacitor/v1.4/nodes/query_node/#max), [Mean](/kapacitor/v1.4/nodes/query_node/#mean), [Median](/kapacitor/v1.4/nodes/query_node/#median), [Min](/kapacitor/v1.4/nodes/query_node/#min), [Mode](/kapacitor/v1.4/nodes/query_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/query_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/query_node/#percentile), [Sample](/kapacitor/v1.4/nodes/query_node/#sample), [Shift](/kapacitor/v1.4/nodes/query_node/#shift), [Sideload](/kapacitor/v1.4/nodes/query_node/#sideload), [Spread](/kapacitor/v1.4/nodes/query_node/#spread), [StateCount](/kapacitor/v1.4/nodes/query_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/query_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/query_node/#stats), [Stddev](/kapacitor/v1.4/nodes/query_node/#stddev), [Sum](/kapacitor/v1.4/nodes/query_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/query_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/query_node/#top), [Union](/kapacitor/v1.4/nodes/query_node/#union), [Where](/kapacitor/v1.4/nodes/query_node/#where), [Window](/kapacitor/v1.4/nodes/query_node/#window)
-<a id='descr'/><hr/><br/>
+
+---
+
 ### Description
 
 A [QueryNode](/kapacitor/v1.4/nodes/query_node/) defines a source and a schedule for
@@ -63,8 +66,7 @@ spans 1 minute and is grouped into 10 second buckets.
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-Properties
-----------
+## Properties
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -291,8 +293,18 @@ query.period(value time.Duration)
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-Chaining Methods
-----------------
+### Quiet
+
+Suppress errors during execution.
+
+```javascript
+query.quiet()
+```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
+
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

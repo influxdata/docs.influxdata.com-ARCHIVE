@@ -13,18 +13,20 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[batch](#descr)** | Has no constructor signature. |
+| **[batch](#description)** | Has no constructor signature. |
 
 ### Property Methods
 
 | Setters | Description |
 |:--------|:------------|
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during batch.  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 
 
 ### Chaining Methods
 [Deadman](/kapacitor/v1.4/nodes/batch_node/#deadman), [Query](/kapacitor/v1.4/nodes/batch_node/#query), [Stats](/kapacitor/v1.4/nodes/batch_node/#stats)
-<a id='descr'/><hr/><br/>
+
+---
+
 ### Description
 
 A node that handles creating several child QueryNodes.
@@ -57,9 +59,18 @@ Available Statistics:
 
 ## Properties
 
+Property methods modify state on the calling node.
+They do not add another node to the pipeline, and always return a reference to the calling node.
+Property methods are marked using the `.` operator.
+
+
 ### Quiet
 
-Suppress errors during batch.
+Suppress errors during execution.
+
+```javascript
+batch.quiet()
+```
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 

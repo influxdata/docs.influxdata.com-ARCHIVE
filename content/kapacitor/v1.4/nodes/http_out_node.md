@@ -13,15 +13,20 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[httpOut](#descr)&nbsp;(&nbsp;`endpoint`&nbsp;`string`)** | Create an HTTP output node that caches the most recent data it has received. The cached data are available at the given endpoint. The endpoint is the relative path from the API endpoint of the running task. For example, if the task endpoint is at `/kapacitor/v1/tasks/<task_id>` and endpoint is `top10`, then the data can be requested from `/kapacitor/v1/tasks/<task_id>/top10`.  |
+| **[httpOut](#description)&nbsp;(&nbsp;`endpoint`&nbsp;`string`)** | Create an HTTP output node that caches the most recent data it has received. The cached data are available at the given endpoint. The endpoint is the relative path from the API endpoint of the running task. For example, if the task endpoint is at `/kapacitor/v1/tasks/<task_id>` and endpoint is `top10`, then the data can be requested from `/kapacitor/v1/tasks/<task_id>/top10`.  |
 
 ### Property Methods
-This node has no properties that can be set.
+
+| Setters | Description |
+|:---|:---|
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/http_out_node/#alert), [Barrier](/kapacitor/v1.4/nodes/http_out_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/http_out_node/#bottom), [Combine](/kapacitor/v1.4/nodes/http_out_node/#combine), [Count](/kapacitor/v1.4/nodes/http_out_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/http_out_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/http_out_node/#deadman), [Default](/kapacitor/v1.4/nodes/http_out_node/#default), [Delete](/kapacitor/v1.4/nodes/http_out_node/#delete), [Derivative](/kapacitor/v1.4/nodes/http_out_node/#derivative), [Difference](/kapacitor/v1.4/nodes/http_out_node/#difference), [Distinct](/kapacitor/v1.4/nodes/http_out_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/http_out_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/http_out_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/http_out_node/#eval), [First](/kapacitor/v1.4/nodes/http_out_node/#first), [Flatten](/kapacitor/v1.4/nodes/http_out_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/http_out_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/http_out_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/http_out_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/http_out_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/http_out_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/http_out_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/http_out_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/http_out_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/http_out_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/http_out_node/#last), [Log](/kapacitor/v1.4/nodes/http_out_node/#log), [Max](/kapacitor/v1.4/nodes/http_out_node/#max), [Mean](/kapacitor/v1.4/nodes/http_out_node/#mean), [Median](/kapacitor/v1.4/nodes/http_out_node/#median), [Min](/kapacitor/v1.4/nodes/http_out_node/#min), [Mode](/kapacitor/v1.4/nodes/http_out_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/http_out_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/http_out_node/#percentile), [Sample](/kapacitor/v1.4/nodes/http_out_node/#sample), [Shift](/kapacitor/v1.4/nodes/http_out_node/#shift), [Sideload](/kapacitor/v1.4/nodes/http_out_node/#sideload), [Spread](/kapacitor/v1.4/nodes/http_out_node/#spread), [StateCount](/kapacitor/v1.4/nodes/http_out_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/http_out_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/http_out_node/#stats), [Stddev](/kapacitor/v1.4/nodes/http_out_node/#stddev), [Sum](/kapacitor/v1.4/nodes/http_out_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/http_out_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/http_out_node/#top), [Union](/kapacitor/v1.4/nodes/http_out_node/#union), [Where](/kapacitor/v1.4/nodes/http_out_node/#where), [Window](/kapacitor/v1.4/nodes/http_out_node/#window)
-<a id='descr'/><hr/><br/>
+
+---
+
 ### Description
 
 An [HTTPOutNode](/kapacitor/v1.4/nodes/http_out_node/) caches the most recent data for each group it has received.
@@ -51,12 +56,26 @@ Note that the example script above comes from the
 [scores](https://github.com/influxdata/kapacitor/tree/master/examples/scores) example.
 See the complete scores example for a concrete demonstration.
 
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
+## Properties
+
+Property methods modify state on the calling node.
+They do not add another node to the pipeline, and always return a reference to the calling node.
+Property methods are marked using the `.` operator.
+
+
+### Quiet
+
+Suppress errors during execution.
+
+```javascript
+httpOut.quiet()
+```
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-Chaining Methods
-----------------
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

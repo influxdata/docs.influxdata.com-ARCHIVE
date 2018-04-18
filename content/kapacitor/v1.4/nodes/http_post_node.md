@@ -13,7 +13,7 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[httpPost](#descr)&nbsp;(&nbsp;`url`&nbsp;`...string`)** | Creates an HTTP Post node that POSTS received data to the provided HTTP endpoint. HttpPost expects 0 or 1 arguments. If 0 arguments are provided, you must specify an endpoint property method.  |
+| **[httpPost](#description)&nbsp;(&nbsp;`url`&nbsp;`...string`)** | Creates an HTTP Post node that POSTS received data to the provided HTTP endpoint. HttpPost expects 0 or 1 arguments. If 0 arguments are provided, you must specify an endpoint property method.  |
 
 ### Property Methods
 
@@ -23,13 +23,16 @@ menu:
 | **[codeField](#codefield)&nbsp;(&nbsp;`value`&nbsp;`string`)** | CodeField is the name of the field in which to place the HTTP status code. If the HTTP request fails at a layer below HTTP, (i.e. rejected TCP connection), then the status code is set to 0.  |
 | **[endpoint](#endpoint)&nbsp;(&nbsp;`endpoint`&nbsp;`string`)** | Name of the endpoint to be used, as is defined in the configuration file.  |
 | **[header](#header)&nbsp;(&nbsp;`k`&nbsp;`string`,&nbsp;`v`&nbsp;`string`)** | Add a header to the POST request  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 | **[timeout](#timeout)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | Timeout for HTTP Post  |
 
 
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/http_post_node/#alert), [Barrier](/kapacitor/v1.4/nodes/http_post_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/http_post_node/#bottom), [Combine](/kapacitor/v1.4/nodes/http_post_node/#combine), [Count](/kapacitor/v1.4/nodes/http_post_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/http_post_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/http_post_node/#deadman), [Default](/kapacitor/v1.4/nodes/http_post_node/#default), [Delete](/kapacitor/v1.4/nodes/http_post_node/#delete), [Derivative](/kapacitor/v1.4/nodes/http_post_node/#derivative), [Difference](/kapacitor/v1.4/nodes/http_post_node/#difference), [Distinct](/kapacitor/v1.4/nodes/http_post_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/http_post_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/http_post_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/http_post_node/#eval), [First](/kapacitor/v1.4/nodes/http_post_node/#first), [Flatten](/kapacitor/v1.4/nodes/http_post_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/http_post_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/http_post_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/http_post_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/http_post_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/http_post_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/http_post_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/http_post_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/http_post_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/http_post_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/http_post_node/#last), [Log](/kapacitor/v1.4/nodes/http_post_node/#log), [Max](/kapacitor/v1.4/nodes/http_post_node/#max), [Mean](/kapacitor/v1.4/nodes/http_post_node/#mean), [Median](/kapacitor/v1.4/nodes/http_post_node/#median), [Min](/kapacitor/v1.4/nodes/http_post_node/#min), [Mode](/kapacitor/v1.4/nodes/http_post_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/http_post_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/http_post_node/#percentile), [Sample](/kapacitor/v1.4/nodes/http_post_node/#sample), [Shift](/kapacitor/v1.4/nodes/http_post_node/#shift), [Sideload](/kapacitor/v1.4/nodes/http_post_node/#sideload), [Spread](/kapacitor/v1.4/nodes/http_post_node/#spread), [StateCount](/kapacitor/v1.4/nodes/http_post_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/http_post_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/http_post_node/#stats), [Stddev](/kapacitor/v1.4/nodes/http_post_node/#stddev), [Sum](/kapacitor/v1.4/nodes/http_post_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/http_post_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/http_post_node/#top), [Union](/kapacitor/v1.4/nodes/http_post_node/#union), [Where](/kapacitor/v1.4/nodes/http_post_node/#where), [Window](/kapacitor/v1.4/nodes/http_post_node/#window)
-<a id='descr'/><hr/><br/>
+
+---
+
 ### Description
 
 An [HTTPPostNode](/kapacitor/v1.4/nodes/http_post_node/) will take the incoming data stream and POST it to an HTTP endpoint.
@@ -67,8 +70,7 @@ Example:
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-Properties
-----------
+## Properties
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -146,6 +148,17 @@ httpPost.header(k string, v string)
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
+### Quiet
+
+Suppress errors during execution.
+
+```javascript
+httpPost.quiet()
+```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
+
 ### Timeout
 
 Timeout for HTTP Post
@@ -158,8 +171,7 @@ httpPost.timeout(value time.Duration)
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-Chaining Methods
-----------------
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

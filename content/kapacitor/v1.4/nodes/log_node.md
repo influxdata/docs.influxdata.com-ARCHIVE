@@ -13,7 +13,7 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[log](#descr)&nbsp;(&nbsp;)** | Create a node that logs all data it receives.  |
+| **[log](#description)&nbsp;(&nbsp;)** | Create a node that logs all data it receives.  |
 
 ### Property Methods
 
@@ -21,12 +21,15 @@ menu:
 |:---|:---|
 | **[level](#level)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The level at which to log the data. One of: DEBUG, INFO, WARN, ERROR Default: INFO  |
 | **[prefix](#prefix)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional prefix to add to all log messages  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 
 
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/log_node/#alert), [Barrier](/kapacitor/v1.4/nodes/log_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/log_node/#bottom), [Combine](/kapacitor/v1.4/nodes/log_node/#combine), [Count](/kapacitor/v1.4/nodes/log_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/log_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/log_node/#deadman), [Default](/kapacitor/v1.4/nodes/log_node/#default), [Delete](/kapacitor/v1.4/nodes/log_node/#delete), [Derivative](/kapacitor/v1.4/nodes/log_node/#derivative), [Difference](/kapacitor/v1.4/nodes/log_node/#difference), [Distinct](/kapacitor/v1.4/nodes/log_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/log_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/log_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/log_node/#eval), [First](/kapacitor/v1.4/nodes/log_node/#first), [Flatten](/kapacitor/v1.4/nodes/log_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/log_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/log_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/log_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/log_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/log_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/log_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/log_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/log_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/log_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/log_node/#last), [Log](/kapacitor/v1.4/nodes/log_node/#log), [Max](/kapacitor/v1.4/nodes/log_node/#max), [Mean](/kapacitor/v1.4/nodes/log_node/#mean), [Median](/kapacitor/v1.4/nodes/log_node/#median), [Min](/kapacitor/v1.4/nodes/log_node/#min), [Mode](/kapacitor/v1.4/nodes/log_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/log_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/log_node/#percentile), [Sample](/kapacitor/v1.4/nodes/log_node/#sample), [Shift](/kapacitor/v1.4/nodes/log_node/#shift), [Sideload](/kapacitor/v1.4/nodes/log_node/#sideload), [Spread](/kapacitor/v1.4/nodes/log_node/#spread), [StateCount](/kapacitor/v1.4/nodes/log_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/log_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/log_node/#stats), [Stddev](/kapacitor/v1.4/nodes/log_node/#stddev), [Sum](/kapacitor/v1.4/nodes/log_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/log_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/log_node/#top), [Union](/kapacitor/v1.4/nodes/log_node/#union), [Where](/kapacitor/v1.4/nodes/log_node/#where), [Window](/kapacitor/v1.4/nodes/log_node/#window)
-<a id='descr'/><hr/><br/>
+
+---
+
 ### Description
 
 A node that logs all data that passes through the node.
@@ -47,8 +50,7 @@ Example:
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-Properties
-----------
+## Properties
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -81,8 +83,18 @@ log.prefix(value string)
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-Chaining Methods
-----------------
+### Quiet
+
+Suppress errors during execution.
+
+```javascript
+log.quiet()
+```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
+
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

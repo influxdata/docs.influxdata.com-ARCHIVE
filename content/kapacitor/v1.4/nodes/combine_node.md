@@ -13,7 +13,7 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[combine](#descr)&nbsp;(&nbsp;`expressions`&nbsp;`...ast.LambdaNode`)** | Combine this node with itself. The data are combined on timestamp.  |
+| **[combine](#description)&nbsp;(&nbsp;`expressions`&nbsp;`...ast.LambdaNode`)** | Combine this node with itself. The data are combined on timestamp.  |
 
 ### Property Methods
 
@@ -22,13 +22,16 @@ menu:
 | **[as](#as)&nbsp;(&nbsp;`names`&nbsp;`...string`)** | Prefix names for all fields from the respective nodes. Each field from the parent nodes will be prefixed with the provided name and a '.'. See the example above.  |
 | **[delimiter](#delimiter)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The delimiter between the As names and existing field an tag keys. Can be the empty string, but you are responsible for ensuring conflicts are not possible if you use the empty string.  |
 | **[max](#max)&nbsp;(&nbsp;`value`&nbsp;`int64`)** | Maximum number of possible combinations. Since the number of possible combinations can grow very rapidly you can set a maximum number of combinations allowed. If the max is crossed, an error is logged and the combinations are not calculated. Default: 10,000  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 | **[tolerance](#tolerance)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | The maximum duration of time that two incoming points can be apart and still be considered to be equal in time. The joined data point's time will be rounded to the nearest multiple of the tolerance duration.  |
 
 
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/combine_node/#alert), [Barrier](/kapacitor/v1.4/nodes/combine_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/combine_node/#bottom), [Combine](/kapacitor/v1.4/nodes/combine_node/#combine), [Count](/kapacitor/v1.4/nodes/combine_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/combine_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/combine_node/#deadman), [Default](/kapacitor/v1.4/nodes/combine_node/#default), [Delete](/kapacitor/v1.4/nodes/combine_node/#delete), [Derivative](/kapacitor/v1.4/nodes/combine_node/#derivative), [Difference](/kapacitor/v1.4/nodes/combine_node/#difference), [Distinct](/kapacitor/v1.4/nodes/combine_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/combine_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/combine_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/combine_node/#eval), [First](/kapacitor/v1.4/nodes/combine_node/#first), [Flatten](/kapacitor/v1.4/nodes/combine_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/combine_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/combine_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/combine_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/combine_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/combine_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/combine_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/combine_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/combine_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/combine_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/combine_node/#last), [Log](/kapacitor/v1.4/nodes/combine_node/#log), [Mean](/kapacitor/v1.4/nodes/combine_node/#mean), [Median](/kapacitor/v1.4/nodes/combine_node/#median), [Min](/kapacitor/v1.4/nodes/combine_node/#min), [Mode](/kapacitor/v1.4/nodes/combine_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/combine_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/combine_node/#percentile), [Sample](/kapacitor/v1.4/nodes/combine_node/#sample), [Shift](/kapacitor/v1.4/nodes/combine_node/#shift), [Sideload](/kapacitor/v1.4/nodes/combine_node/#sideload), [Spread](/kapacitor/v1.4/nodes/combine_node/#spread), [StateCount](/kapacitor/v1.4/nodes/combine_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/combine_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/combine_node/#stats), [Stddev](/kapacitor/v1.4/nodes/combine_node/#stddev), [Sum](/kapacitor/v1.4/nodes/combine_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/combine_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/combine_node/#top), [Union](/kapacitor/v1.4/nodes/combine_node/#union), [Where](/kapacitor/v1.4/nodes/combine_node/#where), [Window](/kapacitor/v1.4/nodes/combine_node/#window)
-<a id='descr'/><hr/><br/>
+
+---
+
 ### Description
 
 Combine the data from a single node with itself.
@@ -83,8 +86,7 @@ In the above example all combinations triples are created.
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-Properties
-----------
+## Properties
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -137,6 +139,17 @@ combine.max(value int64)
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
+### Quiet
+
+Suppress errors during execution.
+
+```javascript
+combine.quiet()
+```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
+
 ### Tolerance
 
 The maximum duration of time that two incoming points
@@ -152,8 +165,7 @@ combine.tolerance(value time.Duration)
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-Chaining Methods
-----------------
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

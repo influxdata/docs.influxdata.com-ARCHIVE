@@ -13,7 +13,7 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[influxDBOut](#descr)&nbsp;(&nbsp;)** | Create an influxdb output node that will store the incoming data into InfluxDB.  |
+| **[influxDBOut](#description)&nbsp;(&nbsp;)** | Create an influxdb output node that will store the incoming data into InfluxDB.  |
 
 ### Property Methods
 
@@ -26,6 +26,7 @@ menu:
 | **[flushInterval](#flushinterval)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | Write points to InfluxDB after interval even if buffer is not full. Default: 10s  |
 | **[measurement](#measurement)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the measurement.  |
 | **[precision](#precision)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The precision to use when writing the data.  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 | **[retentionPolicy](#retentionpolicy)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the retention policy.  |
 | **[tag](#tag)&nbsp;(&nbsp;`key`&nbsp;`string`,&nbsp;`value`&nbsp;`string`)** | Add a static tag to all data points. Tag can be called more then once.  |
 | **[writeConsistency](#writeconsistency)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The write consistency to use when writing the data.  |
@@ -34,7 +35,9 @@ menu:
 
 ### Chaining Methods
 [Deadman](/kapacitor/v1.4/nodes/influx_d_b_out_node/#deadman), [Stats](/kapacitor/v1.4/nodes/influx_d_b_out_node/#stats)
-<a id='descr'/><hr/><br/>
+
+---
+
 ### Description
 
 Writes the data to InfluxDB as it is received.
@@ -66,8 +69,7 @@ Available Statistics:
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-Properties
-----------
+## Properties
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -167,6 +169,16 @@ influxDBOut.precision(value string)
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
+### Quiet
+
+Suppress errors during execution.
+
+```javascript
+influxDBOut.quiet()
+```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
 
 ### RetentionPolicy
 
@@ -206,8 +218,7 @@ influxDBOut.writeConsistency(value string)
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-Chaining Methods
-----------------
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.
