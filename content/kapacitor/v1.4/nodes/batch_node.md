@@ -14,8 +14,12 @@ menu:
 | Chaining Method | Description |
 |:---------|:---------|
 | **[batch](#descr)** | Has no constructor signature. |
+
 ### Property Methods
-This node has no properties that can be set.
+
+| Setters | Description |
+|:--------|:------------|
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during batch.  |
 
 
 ### Chaining Methods
@@ -51,8 +55,15 @@ Available Statistics:
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
-Chaining Methods
-----------------
+## Properties
+
+### Quiet
+
+Suppress errors during batch.
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.
@@ -71,7 +82,7 @@ Example:
 
 
 ```javascript
-    var data = stream
+    var data = batch
         |from()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
@@ -85,7 +96,7 @@ Example:
 
 
 ```javascript
-    var data = stream
+    var data = batch
         |from()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
@@ -109,7 +120,7 @@ Example:
 
 
 ```javascript
-    var data = stream
+    var data = batch
         |from()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
@@ -125,7 +136,7 @@ Example:
 
 
 ```javascript
-    var data = stream
+    var data = batch
         |from()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     // Only trigger the alert if the time of day is between 8am-5pm.

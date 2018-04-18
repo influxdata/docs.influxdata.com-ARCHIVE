@@ -19,7 +19,7 @@ menu:
 
 | Setters | description |
 |:---|:---|
-| **[alerta](#alerta)&nbsp;(&nbsp;)** | Send the alert to Alerta.  |
+| **[alerta](#alerta) \( \)** | Send the alert to Alerta.  |
 | **[all](#all)&nbsp;(&nbsp;)** | Indicates an alert should trigger only if all points in a batch match the criteria. Does not apply to stream alerts.  |
 | **[crit](#crit)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for the CRITICAL alert level. An empty value indicates the level is invalid and is skipped.  |
 | **[critReset](#critreset)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for reseting the CRITICAL alert level to lower level.  |
@@ -46,6 +46,7 @@ menu:
 | **[pagerDuty](#pagerduty)&nbsp;(&nbsp;)** | Send the alert to PagerDuty. To use PagerDuty alerting you must first follow the steps to enable a new 'Generic API' service.  |
 | **[post](#post)&nbsp;(&nbsp;`urls`&nbsp;`...string`)** | HTTP POST JSON alert data to a specified URL.  |
 | **[pushover](#pushover)&nbsp;(&nbsp;)** | Send the alert to Pushover. Register your application with Pushover at https://pushover.net/apps/build to get a Pushover token.  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during the alert.  |
 | **[sensu](#sensu)&nbsp;(&nbsp;)** | Send the alert to Sensu.  |
 | **[slack](#slack)&nbsp;(&nbsp;)** | Send the alert to Slack. To allow Kapacitor to post to Slack, go to the URL https://slack.com/services/new/incoming-webhook and create a new incoming webhook and place the generated URL in the 'slack' configuration section.  |
 | **[snmpTrap](#snmptrap)&nbsp;(&nbsp;`trapOid`&nbsp;`string`)** | Send the alert using SNMP traps. To allow Kapacitor to post SNMP traps,  |
@@ -1511,6 +1512,17 @@ alert.pushover()
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
+
+### Quiet
+
+Suppress errors during the alert.
+
+
+```javascript
+alert.quiet()
+```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
 ### Sensu

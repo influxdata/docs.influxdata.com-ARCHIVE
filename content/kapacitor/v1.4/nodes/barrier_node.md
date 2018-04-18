@@ -21,6 +21,7 @@ menu:
 |:---|:---|
 | **[idle](#idle)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | Emit barrier based on idle time since the last received message. Must be greater than zero.  |
 | **[period](#period)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | Emit barrier based on periodic timer.  The timer is based on system clock rather than message time. Must be greater than zero.  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors that occur while barrier is emitted.  |
 
 
 
@@ -84,6 +85,18 @@ Must be greater than zero.
 
 ```javascript
 barrier.period(value time.Duration)
+```
+
+<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+
+
+### Quiet
+
+Suppress errors that occur while barrier is emitted.
+
+
+```js
+barrier.quiet()
 ```
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
