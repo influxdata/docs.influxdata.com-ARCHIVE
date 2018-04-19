@@ -1,9 +1,9 @@
 ---
-title: Command line client
+title: Kapacitor command line client
 
 menu:
   kapacitor_1_4:
-    name: Command line - Overview
+    name: Command line client
     weight: 12
     parent: work-w-kapacitor
 ---
