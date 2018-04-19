@@ -1,5 +1,6 @@
 ---
 title: InfluxDB API client libraries
+description: InfluxDB API client libraries includes support for Elixir, Go, Haskell, Java, JavaScript/Node.js, Lisp, .Net, Perl, PHP, Python, R, Ruby, Rust, Scala, Sensu, and the SNMP agent.
 aliases:
     - influxdb/v1.5/clients/api_client_libraries/
     - influxdb/v1.5/clients/
@@ -10,9 +11,7 @@ menu:
     parent: tools
 ---
 
-This is a list of the client libraries which have some support for InfluxDB version 0.9.
-Most should be fully compatible with InfluxDB version 1.4.
-Functionality will vary, and there are, as yet, no standard features that all libraries must implement in order to be listed here.
+InfluxDB client libraries are developed by the open source community. These client libraries support the InfluxDB API and should be fully compatible with InfluxDB version 1.5. Functionality will vary as there are no standard features that all libraries must implement in order to be listed here.
 
 ## Elixir
 - [Instream](https://github.com/mneudert/instream) by [mneudert](https://github.com/mneudert)
