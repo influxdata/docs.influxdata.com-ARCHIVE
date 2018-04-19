@@ -100,7 +100,7 @@ The following table describes permissions required to execute the associated dat
 
 |Permission|Statement|
 |---|---|
-|CreateDatabasePermission|AlterRetentionPolicyStatement, CreateDatabaseStatement, CreateRetentionPolicyStatement, ShowRetentionPoliciesStatement|
+|CreateDatabasePermission|AlterRetentionPolicyStatement, CreateDatabaseStatement, CreateRetentionPolicyStatement|
 |ManageContinuousQueryPermission|CreateContinuousQueryStatement, DropContinuousQueryStatement, ShowContinuousQueriesStatement|
 |ManageSubscriptionPermission|CreateSubscriptionStatement, DropSubscriptionStatement, ShowSubscriptionsStatement|
 |CreateUserAndRolePermission|CreateUserStatement, DropUserStatement, GrantAdminStatement, GrantStatement, RevokeAdminStatement, RevokeStatement, SetPasswordUserStatement, ShowGrantsForUserStatement, ShowUsersStatement|
@@ -109,7 +109,7 @@ The following table describes permissions required to execute the associated dat
 |ManageShardPermission|DropShardStatement,ShowShardGroupsStatement, ShowShardsStatement|
 |ManageQueryPermission|KillQueryStatement, ShowQueriesStatement|
 |MonitorPermission|ShowDiagnosticsStatement, ShowStatsStatement|
-|ReadDataPermission|ShowFieldKeysStatement, ShowMeasurementsStatement, ShowSeriesStatement, ShowTagKeysStatement, ShowTagValuesStatement|
+|ReadDataPermission|ShowFieldKeysStatement, ShowMeasurementsStatement, ShowSeriesStatement, ShowTagKeysStatement, ShowTagValuesStatement, ShowRetentionPoliciesStatement|
 |NoPermissions|ShowDatabasesStatement|
 |Determined by type of select statement|SelectStatement|
 
@@ -148,7 +148,7 @@ The following table describes database statements and the permissions required t
 |ShowGrantsForUserStatement|CreateUserAndRolePermission|Database|
 |ShowMeasurementsStatement|ReadDataPermission|Database|
 |ShowQueriesStatement|ManageQueryPermission|Database|
-|ShowRetentionPoliciesStatement|CreateDatabasePermission|Database|
+|ShowRetentionPoliciesStatement|ReadDataPermission|Database|
 |ShowSeriesStatement|ReadDataPermission|Database|
 |ShowShardGroupsStatement|ManageShardPermission|Cluster|
 |ShowShardsStatement|ManageShardPermission|Cluster|

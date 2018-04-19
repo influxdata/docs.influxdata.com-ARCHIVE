@@ -13,21 +13,27 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[batch](#descr)** | Has no constructor signature. |
+| **[batch](#description)** | Has no constructor signature. |
+
 ### Property Methods
-This node has no properties that can be set.
+
+| Setters | Description |
+|:--------|:------------|
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 
 
 ### Chaining Methods
-[Deadman](/kapacitor/v1.5/nodes/batch_node/#deadman), [Query](/kapacitor/v1.5/nodes/batch_node/#query), [Stats](/kapacitor/v1.5/nodes/batch_node/#stats)
-<a id='descr'/><hr/><br/>
+[Deadman](/kapacitor/v1.4/nodes/batch_node/#deadman), [Query](/kapacitor/v1.4/nodes/batch_node/#query), [Stats](/kapacitor/v1.4/nodes/batch_node/#stats)
+
+---
+
 ### Description
 
 A node that handles creating several child QueryNodes.
 Each call to `query` creates a child batch node that
-can further be configured. See [QueryNode](/kapacitor/v1.5/nodes/query_node/)
+can further be configured. See [QueryNode](/kapacitor/v1.4/nodes/query_node/)
 The `batch` variable in batch tasks is an instance of
-a [BatchNode.](/kapacitor/v1.5/nodes/batch_node/)
+a [BatchNode.](/kapacitor/v1.4/nodes/batch_node/)
 
 Example:
 
@@ -49,10 +55,26 @@ Available Statistics:
 
 
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
-Chaining Methods
-----------------
+## Properties
+
+Property methods modify state on the calling node.
+They do not add another node to the pipeline, and always return a reference to the calling node.
+Property methods are marked using the `.` operator.
+
+
+### Quiet
+
+Suppress errors during execution.
+
+```javascript
+batch.quiet()
+```
+
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
+
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.
@@ -71,7 +93,7 @@ Example:
 
 
 ```javascript
-    var data = stream
+    var data = batch
         |from()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
@@ -85,7 +107,7 @@ Example:
 
 
 ```javascript
-    var data = stream
+    var data = batch
         |from()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
@@ -104,12 +126,12 @@ Example:
 
 The `id` and `message` alert properties can be configured globally via the 'deadman' configuration section.
 
-Since the [AlertNode](/kapacitor/v1.5/nodes/alert_node/) is the last piece it can be further modified as usual.
+Since the [AlertNode](/kapacitor/v1.4/nodes/alert_node/) is the last piece it can be further modified as usual.
 Example:
 
 
 ```javascript
-    var data = stream
+    var data = batch
         |from()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
@@ -125,7 +147,7 @@ Example:
 
 
 ```javascript
-    var data = stream
+    var data = batch
         |from()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     // Only trigger the alert if the time of day is between 8am-5pm.
@@ -141,9 +163,9 @@ Example:
 batch|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
 ```
 
-Returns: [AlertNode](/kapacitor/v1.5/nodes/alert_node/)
+Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Query
 
@@ -158,9 +180,9 @@ passed to the `groupBy` method.
 batch|query(q string)
 ```
 
-Returns: [QueryNode](/kapacitor/v1.5/nodes/query_node/)
+Returns: [QueryNode](/kapacitor/v1.4/nodes/query_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Stats
 
@@ -173,6 +195,6 @@ This means the interval time is independent of the times of the data points the 
 batch|stats(interval time.Duration)
 ```
 
-Returns: [StatsNode](/kapacitor/v1.5/nodes/stats_node/)
+Returns: [StatsNode](/kapacitor/v1.4/nodes/stats_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
