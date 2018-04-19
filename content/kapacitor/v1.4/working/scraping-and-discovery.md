@@ -1,5 +1,6 @@
 ---
-title: Scraping and discovery
+title: Scraping and discovery with Kapacitor
+descriptiion: Using Kapacitor scraping and discovery to monitor targets, process data, and write data to InfluxDB.
 aliases:
   - /kapacitor/v1.4/pull_metrics/scraping-and-discovery/
   - /kapacitor/v1.4/pull_metrics/
@@ -26,7 +27,7 @@ There may be changes to the configuration and behavior in subsequent releases.
 
 The diagram below outlines the infrastructure for discovering and scraping data with Kapacitor.
 
-**Image 1 &ndash; Scrapping and Discovery work flow**
+**Image 1 &ndash; Scraping and Discovery work flow**
 
 <img src="/img/kapacitor/pull-metrics.png" alt="conifguration-open" style="max-width: 1050px;" />
 
