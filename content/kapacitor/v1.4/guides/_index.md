@@ -1,6 +1,6 @@
 ---
 title: Kapacitor guides
-description: Guides include examples of calculating rates across joine series + backfill, a live leaderboard of game scores, loading directories during Kapacitor booting, and custom anomaly detection.
+description: Guides include examples of calculating rates across joined series + backfill, a live leaderboard of game scores, loading directories during Kapacitor booting, and custom anomaly detection.
 aliases:
     - kapacitor/v1.4/examples/
 menu:
