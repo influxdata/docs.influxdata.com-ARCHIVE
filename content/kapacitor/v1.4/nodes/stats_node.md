@@ -13,19 +13,22 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[stats](#descr)&nbsp;(&nbsp;`interval`&nbsp;`time.Duration`)** | Create a new stream of data that contains the internal statistics of the node. The interval represents how often to emit the statistics based on real time. This means the interval time is independent of the times of the data points the source node is receiving.  |
+| **[stats](#description)&nbsp;(&nbsp;`interval`&nbsp;`time.Duration`)** | Create a new stream of data that contains the internal statistics of the node. The interval represents how often to emit the statistics based on real time. This means the interval time is independent of the times of the data points the source node is receiving.  |
 
 ### Property Methods
 
 | Setters | Description |
 |:---|:---|
 | **[align](#align)&nbsp;(&nbsp;)** | Round times to the StatsNode.Interval value.  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 
 
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/stats_node/#alert), [Barrier](/kapacitor/v1.4/nodes/stats_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/stats_node/#bottom), [Combine](/kapacitor/v1.4/nodes/stats_node/#combine), [Count](/kapacitor/v1.4/nodes/stats_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/stats_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/stats_node/#deadman), [Default](/kapacitor/v1.4/nodes/stats_node/#default), [Delete](/kapacitor/v1.4/nodes/stats_node/#delete), [Derivative](/kapacitor/v1.4/nodes/stats_node/#derivative), [Difference](/kapacitor/v1.4/nodes/stats_node/#difference), [Distinct](/kapacitor/v1.4/nodes/stats_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/stats_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/stats_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/stats_node/#eval), [First](/kapacitor/v1.4/nodes/stats_node/#first), [Flatten](/kapacitor/v1.4/nodes/stats_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/stats_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/stats_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/stats_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/stats_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/stats_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/stats_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/stats_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/stats_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/stats_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/stats_node/#last), [Log](/kapacitor/v1.4/nodes/stats_node/#log), [Max](/kapacitor/v1.4/nodes/stats_node/#max), [Mean](/kapacitor/v1.4/nodes/stats_node/#mean), [Median](/kapacitor/v1.4/nodes/stats_node/#median), [Min](/kapacitor/v1.4/nodes/stats_node/#min), [Mode](/kapacitor/v1.4/nodes/stats_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/stats_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/stats_node/#percentile), [Sample](/kapacitor/v1.4/nodes/stats_node/#sample), [Shift](/kapacitor/v1.4/nodes/stats_node/#shift), [Sideload](/kapacitor/v1.4/nodes/stats_node/#sideload), [Spread](/kapacitor/v1.4/nodes/stats_node/#spread), [StateCount](/kapacitor/v1.4/nodes/stats_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/stats_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/stats_node/#stats), [Stddev](/kapacitor/v1.4/nodes/stats_node/#stddev), [Sum](/kapacitor/v1.4/nodes/stats_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/stats_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/stats_node/#top), [Union](/kapacitor/v1.4/nodes/stats_node/#union), [Where](/kapacitor/v1.4/nodes/stats_node/#where), [Window](/kapacitor/v1.4/nodes/stats_node/#window)
-<a id='descr'/><hr/><br/>
+
+---
+
 ### Description
 
 A [StatsNode](/kapacitor/v1.4/nodes/stats_node/) emits internal statistics about the another node at a given interval.
@@ -66,10 +69,9 @@ Since they operate on different clocks you could potentially create a deadlock.
 This is a limitation of the current implementation and may be removed in the future.
 
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
-Properties
-----------
+## Properties
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -85,11 +87,21 @@ Round times to the [StatsNode.Interval](/kapacitor/v1.4/nodes/stats_node/#stats)
 stats.align()
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
-Chaining Methods
-----------------
+### Quiet
+
+Suppress errors during execution.
+
+```javascript
+stats.quiet()
+```
+
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
+
+
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.
@@ -107,7 +119,7 @@ stats|alert()
 
 Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Barrier
 
@@ -122,7 +134,7 @@ stats|barrier()
 
 Returns: [BarrierNode](/kapacitor/v1.4/nodes/barrier_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Bottom
 
@@ -135,7 +147,7 @@ stats|bottom(num int64, field string, fieldsAndTags ...string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Combine
 
@@ -148,7 +160,7 @@ stats|combine(expressions ...ast.LambdaNode)
 
 Returns: [CombineNode](/kapacitor/v1.4/nodes/combine_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Count
 
@@ -161,7 +173,7 @@ stats|count(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### CumulativeSum
 
@@ -175,7 +187,7 @@ stats|cumulativeSum(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Deadman
 
@@ -261,7 +273,7 @@ stats|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
 
 Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Default
 
@@ -274,7 +286,7 @@ stats|default()
 
 Returns: [DefaultNode](/kapacitor/v1.4/nodes/default_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Delete
 
@@ -287,7 +299,7 @@ stats|delete()
 
 Returns: [DeleteNode](/kapacitor/v1.4/nodes/delete_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Derivative
 
@@ -300,7 +312,7 @@ stats|derivative(field string)
 
 Returns: [DerivativeNode](/kapacitor/v1.4/nodes/derivative_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Difference
 
@@ -313,7 +325,7 @@ stats|difference(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Distinct
 
@@ -326,7 +338,7 @@ stats|distinct(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Ec2Autoscale
 
@@ -339,7 +351,7 @@ stats|ec2Autoscale()
 
 Returns: [Ec2AutoscaleNode](/kapacitor/v1.4/nodes/ec2_autoscale_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Elapsed
 
@@ -352,7 +364,7 @@ stats|elapsed(field string, unit time.Duration)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Eval
 
@@ -367,7 +379,7 @@ stats|eval(expressions ...ast.LambdaNode)
 
 Returns: [EvalNode](/kapacitor/v1.4/nodes/eval_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### First
 
@@ -380,7 +392,7 @@ stats|first(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Flatten
 
@@ -393,7 +405,7 @@ stats|flatten()
 
 Returns: [FlattenNode](/kapacitor/v1.4/nodes/flatten_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### GroupBy
 
@@ -415,7 +427,7 @@ stats|groupBy(tag ...interface{})
 
 Returns: [GroupByNode](/kapacitor/v1.4/nodes/group_by_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### HoltWinters
 
@@ -428,7 +440,7 @@ stats|holtWinters(field string, h int64, m int64, interval time.Duration)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### HoltWintersWithFit
 
@@ -442,7 +454,7 @@ stats|holtWintersWithFit(field string, h int64, m int64, interval time.Duration)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### HttpOut
 
@@ -459,7 +471,7 @@ stats|httpOut(endpoint string)
 
 Returns: [HTTPOutNode](/kapacitor/v1.4/nodes/http_out_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### HttpPost
 
@@ -474,7 +486,7 @@ stats|httpPost(url ...string)
 
 Returns: [HTTPPostNode](/kapacitor/v1.4/nodes/http_post_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### InfluxDBOut
 
@@ -487,7 +499,7 @@ stats|influxDBOut()
 
 Returns: [InfluxDBOutNode](/kapacitor/v1.4/nodes/influx_d_b_out_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Join
 
@@ -500,7 +512,7 @@ stats|join(others ...Node)
 
 Returns: [JoinNode](/kapacitor/v1.4/nodes/join_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### K8sAutoscale
 
@@ -513,7 +525,7 @@ stats|k8sAutoscale()
 
 Returns: [K8sAutoscaleNode](/kapacitor/v1.4/nodes/k8s_autoscale_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### KapacitorLoopback
 
@@ -526,7 +538,7 @@ stats|kapacitorLoopback()
 
 Returns: [KapacitorLoopbackNode](/kapacitor/v1.4/nodes/kapacitor_loopback_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Last
 
@@ -539,7 +551,7 @@ stats|last(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Log
 
@@ -552,7 +564,7 @@ stats|log()
 
 Returns: [LogNode](/kapacitor/v1.4/nodes/log_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Max
 
@@ -565,7 +577,7 @@ stats|max(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Mean
 
@@ -578,7 +590,7 @@ stats|mean(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Median
 
@@ -592,7 +604,7 @@ stats|median(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Min
 
@@ -605,7 +617,7 @@ stats|min(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Mode
 
@@ -618,7 +630,7 @@ stats|mode(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### MovingAverage
 
@@ -632,7 +644,7 @@ stats|movingAverage(field string, window int64)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Percentile
 
@@ -645,7 +657,7 @@ stats|percentile(field string, percentile float64)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Sample
 
@@ -660,7 +672,7 @@ stats|sample(rate interface{})
 
 Returns: [SampleNode](/kapacitor/v1.4/nodes/sample_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Shift
 
@@ -673,7 +685,7 @@ stats|shift(shift time.Duration)
 
 Returns: [ShiftNode](/kapacitor/v1.4/nodes/shift_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Sideload
 
@@ -686,7 +698,7 @@ stats|sideload()
 
 Returns: [SideloadNode](/kapacitor/v1.4/nodes/sideload_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Spread
 
@@ -699,7 +711,7 @@ stats|spread(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### StateCount
 
@@ -712,7 +724,7 @@ stats|stateCount(expression ast.LambdaNode)
 
 Returns: [StateCountNode](/kapacitor/v1.4/nodes/state_count_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### StateDuration
 
@@ -725,7 +737,7 @@ stats|stateDuration(expression ast.LambdaNode)
 
 Returns: [StateDurationNode](/kapacitor/v1.4/nodes/state_duration_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Stats
 
@@ -740,7 +752,7 @@ stats|stats(interval time.Duration)
 
 Returns: [StatsNode](/kapacitor/v1.4/nodes/stats_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Stddev
 
@@ -753,7 +765,7 @@ stats|stddev(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Sum
 
@@ -766,7 +778,7 @@ stats|sum(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### SwarmAutoscale
 
@@ -779,7 +791,7 @@ stats|swarmAutoscale()
 
 Returns: [SwarmAutoscaleNode](/kapacitor/v1.4/nodes/swarm_autoscale_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Top
 
@@ -792,7 +804,7 @@ stats|top(num int64, field string, fieldsAndTags ...string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Union
 
@@ -805,7 +817,7 @@ stats|union(node ...Node)
 
 Returns: [UnionNode](/kapacitor/v1.4/nodes/union_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Where
 
@@ -818,7 +830,7 @@ stats|where(expression ast.LambdaNode)
 
 Returns: [WhereNode](/kapacitor/v1.4/nodes/where_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Window
 
@@ -833,4 +845,4 @@ stats|window()
 
 Returns: [WindowNode](/kapacitor/v1.4/nodes/window_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>

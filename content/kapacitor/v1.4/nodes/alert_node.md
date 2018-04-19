@@ -13,13 +13,13 @@ menu:
 
 | Chaining method | Description |
 |:---------|:---------|
-| **[alert](#descr)&nbsp;(&nbsp;)** | Create an alert node, which can trigger alerts.  |
+| **[alert](#description)&nbsp;(&nbsp;)** | Create an alert node, which can trigger alerts.  |
 
 ### Property methods
 
 | Setters | description |
 |:---|:---|
-| **[alerta](#alerta)&nbsp;(&nbsp;)** | Send the alert to Alerta.  |
+| **[alerta](#alerta) \( \)** | Send the alert to Alerta.  |
 | **[all](#all)&nbsp;(&nbsp;)** | Indicates an alert should trigger only if all points in a batch match the criteria. Does not apply to stream alerts.  |
 | **[crit](#crit)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for the CRITICAL alert level. An empty value indicates the level is invalid and is skipped.  |
 | **[critReset](#critreset)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for reseting the CRITICAL alert level to lower level.  |
@@ -46,6 +46,7 @@ menu:
 | **[pagerDuty](#pagerduty)&nbsp;(&nbsp;)** | Send the alert to PagerDuty. To use PagerDuty alerting you must first follow the steps to enable a new 'Generic API' service.  |
 | **[post](#post)&nbsp;(&nbsp;`urls`&nbsp;`...string`)** | HTTP POST JSON alert data to a specified URL.  |
 | **[pushover](#pushover)&nbsp;(&nbsp;)** | Send the alert to Pushover. Register your application with Pushover at https://pushover.net/apps/build to get a Pushover token.  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 | **[sensu](#sensu)&nbsp;(&nbsp;)** | Send the alert to Sensu.  |
 | **[slack](#slack)&nbsp;(&nbsp;)** | Send the alert to Slack. To allow Kapacitor to post to Slack, go to the URL https://slack.com/services/new/incoming-webhook and create a new incoming webhook and place the generated URL in the 'slack' configuration section.  |
 | **[snmpTrap](#snmptrap)&nbsp;(&nbsp;`trapOid`&nbsp;`string`)** | Send the alert using SNMP traps. To allow Kapacitor to post SNMP traps,  |
@@ -62,7 +63,8 @@ menu:
 
 ### Chaining methods
 [Alert](/kapacitor/v1.4/nodes/alert_node/#alert), [Barrier](/kapacitor/v1.4/nodes/alert_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/alert_node/#bottom), [Combine](/kapacitor/v1.4/nodes/alert_node/#combine), [Count](/kapacitor/v1.4/nodes/alert_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/alert_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/alert_node/#deadman), [Default](/kapacitor/v1.4/nodes/alert_node/#default), [Delete](/kapacitor/v1.4/nodes/alert_node/#delete), [Derivative](/kapacitor/v1.4/nodes/alert_node/#derivative), [Difference](/kapacitor/v1.4/nodes/alert_node/#difference), [Distinct](/kapacitor/v1.4/nodes/alert_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/alert_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/alert_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/alert_node/#eval), [First](/kapacitor/v1.4/nodes/alert_node/#first), [Flatten](/kapacitor/v1.4/nodes/alert_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/alert_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/alert_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/alert_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/alert_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/alert_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/alert_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/alert_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/alert_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/alert_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/alert_node/#last), [Max](/kapacitor/v1.4/nodes/alert_node/#max), [Mean](/kapacitor/v1.4/nodes/alert_node/#mean), [Median](/kapacitor/v1.4/nodes/alert_node/#median), [Min](/kapacitor/v1.4/nodes/alert_node/#min), [Mode](/kapacitor/v1.4/nodes/alert_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/alert_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/alert_node/#percentile), [Sample](/kapacitor/v1.4/nodes/alert_node/#sample), [Shift](/kapacitor/v1.4/nodes/alert_node/#shift), [Sideload](/kapacitor/v1.4/nodes/alert_node/#sideload), [Spread](/kapacitor/v1.4/nodes/alert_node/#spread), [StateCount](/kapacitor/v1.4/nodes/alert_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/alert_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/alert_node/#stats), [Stddev](/kapacitor/v1.4/nodes/alert_node/#stddev), [Sum](/kapacitor/v1.4/nodes/alert_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/alert_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/alert_node/#top), [Union](/kapacitor/v1.4/nodes/alert_node/#union), [Where](/kapacitor/v1.4/nodes/alert_node/#where), [Window](/kapacitor/v1.4/nodes/alert_node/#window)
-<a id='descr'/><hr/><br/>
+
+---
 
 ### Description
 
@@ -172,12 +174,10 @@ Available Statistics:
 * warns_triggered -- Number of Warn alerts triggered
 * crits_triggered -- Number of Crit alerts triggered
 
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
-
-Properties
-----------
+## Properties
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -240,7 +240,7 @@ NOTE: Alerta cannot be configured globally because of its required properties.
 alert.alerta()
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 #### Alerta Environment
 
@@ -254,7 +254,7 @@ alert.alerta()
       .environment(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Alerta Event
@@ -269,7 +269,7 @@ alert.alerta()
       .event(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Alerta Group
@@ -284,7 +284,7 @@ alert.alerta()
       .group(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Alerta Origin
@@ -298,7 +298,7 @@ alert.alerta()
       .origin(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Alerta Resource
@@ -313,7 +313,7 @@ alert.alerta()
       .resource(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Alerta Services
@@ -327,7 +327,7 @@ alert.alerta()
       .services(service ...string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Alerta Timeout
@@ -341,7 +341,7 @@ alert.alerta()
       .timeout(value time.Duration)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Alerta Token
@@ -355,7 +355,7 @@ alert.alerta()
       .token(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Alerta Value
@@ -370,7 +370,7 @@ alert.alerta()
       .value(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 
@@ -384,7 +384,7 @@ Does not apply to stream alerts.
 alert.all()
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Crit
@@ -397,7 +397,7 @@ An empty value indicates the level is invalid and is skipped.
 alert.crit(value ast.LambdaNode)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### CritReset
@@ -409,7 +409,7 @@ Filter expression for reseting the CRITICAL alert level to lower level.
 alert.critReset(value ast.LambdaNode)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Details
@@ -449,7 +449,7 @@ Default: {{ json . }}
 alert.details(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### DurationField
@@ -462,7 +462,7 @@ The duration is always in units of nanoseconds.
 alert.durationField(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Email
@@ -530,7 +530,7 @@ Send email to 'oncall@example.com' from 'kapacitor@example.com'
 alert.email(to ...string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 #### Email To
 
@@ -567,7 +567,7 @@ alert.email(to ...string)
       .to(to ...string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 
@@ -580,7 +580,7 @@ Execute a command whenever an alert is triggered and pass the alert data over ST
 alert.exec(executable string, args ...string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Flapping
@@ -603,7 +603,7 @@ state in half of the recorded history, and remained the same in the other half o
 alert.flapping(low float64, high float64)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### HipChat
@@ -685,7 +685,7 @@ Send alert to HipChat using default room 'Test Room'.
 alert.hipChat()
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 #### HipChat Room
 
@@ -698,7 +698,7 @@ alert.hipChat()
       .room(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### HipChat Token
@@ -712,7 +712,7 @@ alert.hipChat()
       .token(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 
@@ -729,7 +729,7 @@ Default: 21
 alert.history(value int64)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Id
@@ -795,7 +795,7 @@ Default: {{ .Name }}:{{ .Group }}
 alert.id(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### IdField
@@ -807,7 +807,7 @@ Optional field key to add to the data, containing the alert ID as a string.
 alert.idField(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### IdTag
@@ -819,7 +819,7 @@ Optional tag key to use when tagging the data with the alert ID.
 alert.idTag(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Info
@@ -832,7 +832,7 @@ An empty value indicates the level is invalid and is skipped.
 alert.info(value ast.LambdaNode)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### InfoReset
@@ -844,7 +844,7 @@ Filter expression for reseting the INFO alert level to lower level.
 alert.infoReset(value ast.LambdaNode)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### LevelField
@@ -856,7 +856,7 @@ Optional field key to add to the data, containing the alert level as a string.
 alert.levelField(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### LevelTag
@@ -868,7 +868,7 @@ Optional tag key to use when tagging the data with the alert level.
 alert.levelTag(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Log
@@ -901,7 +901,7 @@ Example:
 alert.log(filepath string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 #### Log Mode
 
@@ -914,7 +914,7 @@ alert.log(filepath string)
       .mode(value int64)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 
@@ -957,7 +957,7 @@ Default: {{ .ID }} is {{ .Level }}
 alert.message(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### MessageField
@@ -969,7 +969,7 @@ Optional field key to add to the data, containing the alert message.
 alert.messageField(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Mqtt
@@ -1017,7 +1017,7 @@ Enable the MQTT broker in the configuration file:
 alert.mqtt(topic string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 #### Mqtt BrokerName
 
@@ -1030,7 +1030,7 @@ alert.mqtt(topic string)
       .brokerName(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Mqtt Qos
@@ -1050,7 +1050,7 @@ alert.mqtt(topic string)
       .qos(value int64)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Mqtt Retained
@@ -1064,7 +1064,7 @@ alert.mqtt(topic string)
       .retained(value bool)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Mqtt Topic
@@ -1077,7 +1077,7 @@ alert.mqtt(topic string)
       .topic(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 #### Mqtt Message
 
@@ -1096,7 +1096,7 @@ Do not send recovery alerts.
 alert.noRecoveries()
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### OpsGenie
@@ -1172,7 +1172,7 @@ Send alert to OpsGenie using the default recipients, found in the configuration.
 alert.opsGenie()
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 #### OpsGenie Recipients
 
@@ -1184,7 +1184,7 @@ alert.opsGenie()
       .recipients(recipients ...string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### OpsGenie Teams
@@ -1197,7 +1197,7 @@ alert.opsGenie()
       .teams(teams ...string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 
@@ -1264,7 +1264,7 @@ Send alert to PagerDuty.
 alert.pagerDuty()
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 #### PagerDuty ServiceKey
 
@@ -1277,7 +1277,7 @@ alert.pagerDuty()
       .serviceKey(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 
@@ -1310,7 +1310,7 @@ Example:
 alert.post(urls ...string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 #### Post CaptureResponse
 
@@ -1323,7 +1323,7 @@ alert.post(urls ...string)
       .captureResponse()
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Post Endpoint
@@ -1336,7 +1336,7 @@ alert.post(urls ...string)
       .endpoint(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Post Header
@@ -1363,7 +1363,7 @@ alert.post(urls ...string)
       .header(k string, v string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Post Timeout
@@ -1376,7 +1376,7 @@ alert.post(urls ...string)
       .timeout(value time.Duration)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 
@@ -1426,7 +1426,7 @@ Send alerts to Pushover.
 alert.pushover()
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 #### Pushover Device
 
@@ -1440,7 +1440,7 @@ alert.pushover()
       .device(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Pushover Sound
@@ -1454,7 +1454,7 @@ alert.pushover()
       .sound(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Pushover Title
@@ -1467,7 +1467,7 @@ alert.pushover()
       .title(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Pushover URL
@@ -1480,7 +1480,7 @@ alert.pushover()
       .uRL(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Pushover URLTitle
@@ -1493,7 +1493,7 @@ alert.pushover()
       .uRLTitle(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Pushover UserKey
@@ -1509,8 +1509,19 @@ alert.pushover()
       .userKey(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
+
+### Quiet
+
+Suppress errors during execution.
+
+
+```javascript
+alert.quiet()
+```
+
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Sensu
@@ -1557,7 +1568,7 @@ Send alerts to Sensu specifying the handlers
 alert.sensu()
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 #### Sensu Handlers
 
@@ -1570,7 +1581,7 @@ alert.sensu()
       .handlers(handlers ...string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Sensu Source
@@ -1584,7 +1595,7 @@ alert.sensu()
       .source(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 
@@ -1676,7 +1687,7 @@ Send alert to Slack using default channel '#general'.
 alert.slack()
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 #### Slack Channel
 
@@ -1689,7 +1700,7 @@ alert.slack()
       .channel(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Slack IconEmoji
@@ -1703,7 +1714,7 @@ alert.slack()
       .iconEmoji(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Slack Username
@@ -1717,7 +1728,7 @@ alert.slack()
       .username(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 
@@ -1754,7 +1765,7 @@ Send alerts to `target-ip:target-port` on OID '1.3.6.1.2.1.1.7'
 alert.snmpTrap(trapOid string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 #### SnmpTrap Data
 
@@ -1791,7 +1802,7 @@ alert.snmpTrap(trapOid string)
       .data(oid string, typ string, value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 
@@ -1852,7 +1863,7 @@ The above usage will only trigger alerts to slack on state changes or at least e
 alert.stateChangesOnly(maxInterval ...time.Duration)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Talk
@@ -1895,7 +1906,7 @@ Send alerts to Talk client.
 alert.talk()
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Tcp
@@ -1907,7 +1918,7 @@ Send JSON alert data to a specified address over TCP.
 alert.tcp(address string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 #### Tcp Address
 
@@ -1919,7 +1930,7 @@ alert.tcp(address string)
       .address(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 
@@ -2000,7 +2011,7 @@ Send alert to Telegram using default chat-id 'xxxxxxxx'.
 alert.telegram()
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 #### Telegram ChatId
 
@@ -2013,7 +2024,7 @@ alert.telegram()
       .chatId(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Telegram DisableNotification
@@ -2026,7 +2037,7 @@ alert.telegram()
       .disableNotification()
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Telegram DisableWebPagePreview
@@ -2039,7 +2050,7 @@ alert.telegram()
       .disableWebPagePreview()
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 #### Telegram ParseMode
@@ -2053,7 +2064,7 @@ alert.telegram()
       .parseMode(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 
@@ -2068,7 +2079,7 @@ Alert handlers can be configured per topic, see the API documentation.
 alert.topic(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### VictorOps
@@ -2143,7 +2154,7 @@ Send alert to VictorOps using the default routing key, found in the configuratio
 alert.victorOps()
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 #### VictorOps RoutingKey
 
@@ -2156,7 +2167,7 @@ alert.victorOps()
       .routingKey(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 
@@ -2170,7 +2181,7 @@ An empty value indicates the level is invalid and is skipped.
 alert.warn(value ast.LambdaNode)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### WarnReset
@@ -2182,11 +2193,10 @@ Filter expression for reseting the WARNING alert level to lower level.
 alert.warnReset(value ast.LambdaNode)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
-Chaining Methods
-----------------
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.
@@ -2204,7 +2214,7 @@ alert|alert()
 
 Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Barrier
 
@@ -2219,7 +2229,7 @@ alert|barrier()
 
 Returns: [BarrierNode](/kapacitor/v1.4/nodes/barrier_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Bottom
 
@@ -2232,7 +2242,7 @@ alert|bottom(num int64, field string, fieldsAndTags ...string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Combine
 
@@ -2245,7 +2255,7 @@ alert|combine(expressions ...ast.LambdaNode)
 
 Returns: [CombineNode](/kapacitor/v1.4/nodes/combine_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Count
 
@@ -2258,7 +2268,7 @@ alert|count(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### CumulativeSum
 
@@ -2272,7 +2282,7 @@ alert|cumulativeSum(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Deadman
 
@@ -2358,7 +2368,7 @@ alert|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
 
 Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Default
 
@@ -2371,7 +2381,7 @@ alert|default()
 
 Returns: [DefaultNode](/kapacitor/v1.4/nodes/default_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Delete
 
@@ -2384,7 +2394,7 @@ alert|delete()
 
 Returns: [DeleteNode](/kapacitor/v1.4/nodes/delete_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Derivative
 
@@ -2397,7 +2407,7 @@ alert|derivative(field string)
 
 Returns: [DerivativeNode](/kapacitor/v1.4/nodes/derivative_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Difference
 
@@ -2410,7 +2420,7 @@ alert|difference(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Distinct
 
@@ -2423,7 +2433,7 @@ alert|distinct(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Ec2Autoscale
 
@@ -2436,7 +2446,7 @@ alert|ec2Autoscale()
 
 Returns: [Ec2AutoscaleNode](/kapacitor/v1.4/nodes/ec2_autoscale_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Elapsed
 
@@ -2449,7 +2459,7 @@ alert|elapsed(field string, unit time.Duration)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Eval
 
@@ -2464,7 +2474,7 @@ alert|eval(expressions ...ast.LambdaNode)
 
 Returns: [EvalNode](/kapacitor/v1.4/nodes/eval_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### First
 
@@ -2477,7 +2487,7 @@ alert|first(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Flatten
 
@@ -2490,7 +2500,7 @@ alert|flatten()
 
 Returns: [FlattenNode](/kapacitor/v1.4/nodes/flatten_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### GroupBy
 
@@ -2512,7 +2522,7 @@ alert|groupBy(tag ...interface{})
 
 Returns: [GroupByNode](/kapacitor/v1.4/nodes/group_by_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### HoltWinters
 
@@ -2525,7 +2535,7 @@ alert|holtWinters(field string, h int64, m int64, interval time.Duration)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### HoltWintersWithFit
 
@@ -2539,7 +2549,7 @@ alert|holtWintersWithFit(field string, h int64, m int64, interval time.Duration)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### HttpOut
 
@@ -2556,7 +2566,7 @@ alert|httpOut(endpoint string)
 
 Returns: [HTTPOutNode](/kapacitor/v1.4/nodes/http_out_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### HttpPost
 
@@ -2571,7 +2581,7 @@ alert|httpPost(url ...string)
 
 Returns: [HTTPPostNode](/kapacitor/v1.4/nodes/http_post_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### InfluxDBOut
 
@@ -2584,7 +2594,7 @@ alert|influxDBOut()
 
 Returns: [InfluxDBOutNode](/kapacitor/v1.4/nodes/influx_d_b_out_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Join
 
@@ -2597,7 +2607,7 @@ alert|join(others ...Node)
 
 Returns: [JoinNode](/kapacitor/v1.4/nodes/join_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### K8sAutoscale
 
@@ -2610,7 +2620,7 @@ alert|k8sAutoscale()
 
 Returns: [K8sAutoscaleNode](/kapacitor/v1.4/nodes/k8s_autoscale_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### KapacitorLoopback
 
@@ -2623,7 +2633,7 @@ alert|kapacitorLoopback()
 
 Returns: [KapacitorLoopbackNode](/kapacitor/v1.4/nodes/kapacitor_loopback_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Last
 
@@ -2636,7 +2646,7 @@ alert|last(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Max
 
@@ -2649,7 +2659,7 @@ alert|max(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Mean
 
@@ -2662,7 +2672,7 @@ alert|mean(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Median
 
@@ -2676,7 +2686,7 @@ alert|median(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Min
 
@@ -2689,7 +2699,7 @@ alert|min(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Mode
 
@@ -2702,7 +2712,7 @@ alert|mode(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### MovingAverage
 
@@ -2716,7 +2726,7 @@ alert|movingAverage(field string, window int64)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Percentile
 
@@ -2729,7 +2739,7 @@ alert|percentile(field string, percentile float64)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Sample
 
@@ -2744,7 +2754,7 @@ alert|sample(rate interface{})
 
 Returns: [SampleNode](/kapacitor/v1.4/nodes/sample_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Shift
 
@@ -2757,7 +2767,7 @@ alert|shift(shift time.Duration)
 
 Returns: [ShiftNode](/kapacitor/v1.4/nodes/shift_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Sideload
 
@@ -2770,7 +2780,7 @@ alert|sideload()
 
 Returns: [SideloadNode](/kapacitor/v1.4/nodes/sideload_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Spread
 
@@ -2783,7 +2793,7 @@ alert|spread(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### StateCount
 
@@ -2796,7 +2806,7 @@ alert|stateCount(expression ast.LambdaNode)
 
 Returns: [StateCountNode](/kapacitor/v1.4/nodes/state_count_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### StateDuration
 
@@ -2809,7 +2819,7 @@ alert|stateDuration(expression ast.LambdaNode)
 
 Returns: [StateDurationNode](/kapacitor/v1.4/nodes/state_duration_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Stats
 
@@ -2824,7 +2834,7 @@ alert|stats(interval time.Duration)
 
 Returns: [StatsNode](/kapacitor/v1.4/nodes/stats_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Stddev
 
@@ -2837,7 +2847,7 @@ alert|stddev(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Sum
 
@@ -2850,7 +2860,7 @@ alert|sum(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### SwarmAutoscale
 
@@ -2863,7 +2873,7 @@ alert|swarmAutoscale()
 
 Returns: [SwarmAutoscaleNode](/kapacitor/v1.4/nodes/swarm_autoscale_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Top
 
@@ -2876,7 +2886,7 @@ alert|top(num int64, field string, fieldsAndTags ...string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Union
 
@@ -2889,7 +2899,7 @@ alert|union(node ...Node)
 
 Returns: [UnionNode](/kapacitor/v1.4/nodes/union_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Where
 
@@ -2902,7 +2912,7 @@ alert|where(expression ast.LambdaNode)
 
 Returns: [WhereNode](/kapacitor/v1.4/nodes/where_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Window
 
@@ -2917,4 +2927,4 @@ alert|window()
 
 Returns: [WindowNode](/kapacitor/v1.4/nodes/window_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>

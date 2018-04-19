@@ -13,7 +13,7 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[ec2Autoscale](#descr)&nbsp;(&nbsp;)** | Create a node that can trigger autoscale events for an EC2 Autoscale group.  |
+| **[ec2Autoscale](#description)&nbsp;(&nbsp;)** | Create a node that can trigger autoscale events for an EC2 Autoscale group.  |
 
 ### Property Methods
 
@@ -28,13 +28,16 @@ menu:
 | **[max](#max)&nbsp;(&nbsp;`value`&nbsp;`int64`)** | The maximum scale factor to set. If 0 then there is no upper limit. Default: 0, a.k.a no limit.  |
 | **[min](#min)&nbsp;(&nbsp;`value`&nbsp;`int64`)** | The minimum scale factor to set. Default: 1  |
 | **[outputGroupNameTag](#outputgroupnametag)&nbsp;(&nbsp;`value`&nbsp;`string`)** | OutputGroupName is the name of a tag into which the group name will be written for output autoscale events. Defaults to the value of GroupNameTag if its not empty.  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 | **[replicas](#replicas)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Replicas is a lambda expression that should evaluate to the desired number of replicas for the resource.  |
 
 
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/ec2_autoscale_node/#alert), [Barrier](/kapacitor/v1.4/nodes/ec2_autoscale_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/ec2_autoscale_node/#bottom), [Combine](/kapacitor/v1.4/nodes/ec2_autoscale_node/#combine), [Count](/kapacitor/v1.4/nodes/ec2_autoscale_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/ec2_autoscale_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/ec2_autoscale_node/#deadman), [Default](/kapacitor/v1.4/nodes/ec2_autoscale_node/#default), [Delete](/kapacitor/v1.4/nodes/ec2_autoscale_node/#delete), [Derivative](/kapacitor/v1.4/nodes/ec2_autoscale_node/#derivative), [Difference](/kapacitor/v1.4/nodes/ec2_autoscale_node/#difference), [Distinct](/kapacitor/v1.4/nodes/ec2_autoscale_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/ec2_autoscale_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/ec2_autoscale_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/ec2_autoscale_node/#eval), [First](/kapacitor/v1.4/nodes/ec2_autoscale_node/#first), [Flatten](/kapacitor/v1.4/nodes/ec2_autoscale_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/ec2_autoscale_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/ec2_autoscale_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/ec2_autoscale_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/ec2_autoscale_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/ec2_autoscale_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/ec2_autoscale_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/ec2_autoscale_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/ec2_autoscale_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/ec2_autoscale_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/ec2_autoscale_node/#last), [Log](/kapacitor/v1.4/nodes/ec2_autoscale_node/#log), [Mean](/kapacitor/v1.4/nodes/ec2_autoscale_node/#mean), [Median](/kapacitor/v1.4/nodes/ec2_autoscale_node/#median), [Mode](/kapacitor/v1.4/nodes/ec2_autoscale_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/ec2_autoscale_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/ec2_autoscale_node/#percentile), [Sample](/kapacitor/v1.4/nodes/ec2_autoscale_node/#sample), [Shift](/kapacitor/v1.4/nodes/ec2_autoscale_node/#shift), [Sideload](/kapacitor/v1.4/nodes/ec2_autoscale_node/#sideload), [Spread](/kapacitor/v1.4/nodes/ec2_autoscale_node/#spread), [StateCount](/kapacitor/v1.4/nodes/ec2_autoscale_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/ec2_autoscale_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/ec2_autoscale_node/#stats), [Stddev](/kapacitor/v1.4/nodes/ec2_autoscale_node/#stddev), [Sum](/kapacitor/v1.4/nodes/ec2_autoscale_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/ec2_autoscale_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/ec2_autoscale_node/#top), [Union](/kapacitor/v1.4/nodes/ec2_autoscale_node/#union), [Where](/kapacitor/v1.4/nodes/ec2_autoscale_node/#where), [Window](/kapacitor/v1.4/nodes/ec2_autoscale_node/#window)
-<a id='descr'/><hr/><br/>
+
+---
+
 ### Description
 
 EC2AutoscaleNode triggers autoscale events for a group on a AWS Autoscaling group.
@@ -102,10 +105,9 @@ Available Statistics:
 
 
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
-Properties
-----------
+## Properties
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -122,7 +124,7 @@ The ID of the cluster is specified in the kapacitor configuration.
 ec2Autoscale.cluster(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### CurrentField
@@ -147,7 +149,7 @@ Example:
 ec2Autoscale.currentField(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### DecreaseCooldown
@@ -159,7 +161,7 @@ Only one decrease event can be triggered per resource every DecreaseCooldown int
 ec2Autoscale.decreaseCooldown(value time.Duration)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### GroupName
@@ -171,7 +173,7 @@ GroupName is the name of the autoscaling group to autoscale.
 ec2Autoscale.groupName(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### GroupNameTag
@@ -183,7 +185,7 @@ GroupName is the name of a tag which contains the name of the autoscaling group 
 ec2Autoscale.groupNameTag(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### IncreaseCooldown
@@ -195,7 +197,7 @@ Only one increase event can be triggered per resource every IncreaseCooldown int
 ec2Autoscale.increaseCooldown(value time.Duration)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Max
@@ -209,7 +211,7 @@ Default: 0, a.k.a no limit.
 ec2Autoscale.max(value int64)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Min
@@ -222,7 +224,7 @@ Default: 1
 ec2Autoscale.min(value int64)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### OutputGroupNameTag
@@ -235,7 +237,19 @@ Defaults to the value of GroupNameTag if its not empty.
 ec2Autoscale.outputGroupNameTag(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
+
+
+### Quiet
+
+Suppress errors during execution.
+
+
+```javascript
+ec2Autoscale.quiet()
+```
+
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Replicas
@@ -247,11 +261,10 @@ Replicas is a lambda expression that should evaluate to the desired number of re
 ec2Autoscale.replicas(value ast.LambdaNode)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
-Chaining Methods
-----------------
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.
@@ -269,7 +282,7 @@ ec2Autoscale|alert()
 
 Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Barrier
 
@@ -284,7 +297,7 @@ ec2Autoscale|barrier()
 
 Returns: [BarrierNode](/kapacitor/v1.4/nodes/barrier_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Bottom
 
@@ -297,7 +310,7 @@ ec2Autoscale|bottom(num int64, field string, fieldsAndTags ...string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Combine
 
@@ -310,7 +323,7 @@ ec2Autoscale|combine(expressions ...ast.LambdaNode)
 
 Returns: [CombineNode](/kapacitor/v1.4/nodes/combine_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Count
 
@@ -323,7 +336,7 @@ ec2Autoscale|count(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### CumulativeSum
 
@@ -337,7 +350,7 @@ ec2Autoscale|cumulativeSum(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Deadman
 
@@ -423,7 +436,7 @@ ec2Autoscale|deadman(threshold float64, interval time.Duration, expr ...ast.Lamb
 
 Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Default
 
@@ -436,7 +449,7 @@ ec2Autoscale|default()
 
 Returns: [DefaultNode](/kapacitor/v1.4/nodes/default_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Delete
 
@@ -449,7 +462,7 @@ ec2Autoscale|delete()
 
 Returns: [DeleteNode](/kapacitor/v1.4/nodes/delete_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Derivative
 
@@ -462,7 +475,7 @@ ec2Autoscale|derivative(field string)
 
 Returns: [DerivativeNode](/kapacitor/v1.4/nodes/derivative_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Difference
 
@@ -475,7 +488,7 @@ ec2Autoscale|difference(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Distinct
 
@@ -488,7 +501,7 @@ ec2Autoscale|distinct(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Ec2Autoscale
 
@@ -501,7 +514,7 @@ ec2Autoscale|ec2Autoscale()
 
 Returns: [Ec2AutoscaleNode](/kapacitor/v1.4/nodes/ec2_autoscale_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Elapsed
 
@@ -514,7 +527,7 @@ ec2Autoscale|elapsed(field string, unit time.Duration)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Eval
 
@@ -529,7 +542,7 @@ ec2Autoscale|eval(expressions ...ast.LambdaNode)
 
 Returns: [EvalNode](/kapacitor/v1.4/nodes/eval_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### First
 
@@ -542,7 +555,7 @@ ec2Autoscale|first(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Flatten
 
@@ -555,7 +568,7 @@ ec2Autoscale|flatten()
 
 Returns: [FlattenNode](/kapacitor/v1.4/nodes/flatten_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### GroupBy
 
@@ -577,7 +590,7 @@ ec2Autoscale|groupBy(tag ...interface{})
 
 Returns: [GroupByNode](/kapacitor/v1.4/nodes/group_by_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### HoltWinters
 
@@ -590,7 +603,7 @@ ec2Autoscale|holtWinters(field string, h int64, m int64, interval time.Duration)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### HoltWintersWithFit
 
@@ -604,7 +617,7 @@ ec2Autoscale|holtWintersWithFit(field string, h int64, m int64, interval time.Du
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### HttpOut
 
@@ -621,7 +634,7 @@ ec2Autoscale|httpOut(endpoint string)
 
 Returns: [HTTPOutNode](/kapacitor/v1.4/nodes/http_out_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### HttpPost
 
@@ -636,7 +649,7 @@ ec2Autoscale|httpPost(url ...string)
 
 Returns: [HTTPPostNode](/kapacitor/v1.4/nodes/http_post_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### InfluxDBOut
 
@@ -649,7 +662,7 @@ ec2Autoscale|influxDBOut()
 
 Returns: [InfluxDBOutNode](/kapacitor/v1.4/nodes/influx_d_b_out_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Join
 
@@ -662,7 +675,7 @@ ec2Autoscale|join(others ...Node)
 
 Returns: [JoinNode](/kapacitor/v1.4/nodes/join_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### K8sAutoscale
 
@@ -675,7 +688,7 @@ ec2Autoscale|k8sAutoscale()
 
 Returns: [K8sAutoscaleNode](/kapacitor/v1.4/nodes/k8s_autoscale_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### KapacitorLoopback
 
@@ -688,7 +701,7 @@ ec2Autoscale|kapacitorLoopback()
 
 Returns: [KapacitorLoopbackNode](/kapacitor/v1.4/nodes/kapacitor_loopback_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Last
 
@@ -701,7 +714,7 @@ ec2Autoscale|last(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Log
 
@@ -714,7 +727,7 @@ ec2Autoscale|log()
 
 Returns: [LogNode](/kapacitor/v1.4/nodes/log_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Mean
 
@@ -727,7 +740,7 @@ ec2Autoscale|mean(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Median
 
@@ -741,7 +754,7 @@ ec2Autoscale|median(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Mode
 
@@ -754,7 +767,7 @@ ec2Autoscale|mode(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### MovingAverage
 
@@ -768,7 +781,7 @@ ec2Autoscale|movingAverage(field string, window int64)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Percentile
 
@@ -781,7 +794,7 @@ ec2Autoscale|percentile(field string, percentile float64)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Sample
 
@@ -796,7 +809,7 @@ ec2Autoscale|sample(rate interface{})
 
 Returns: [SampleNode](/kapacitor/v1.4/nodes/sample_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Shift
 
@@ -809,7 +822,7 @@ ec2Autoscale|shift(shift time.Duration)
 
 Returns: [ShiftNode](/kapacitor/v1.4/nodes/shift_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Sideload
 
@@ -822,7 +835,7 @@ ec2Autoscale|sideload()
 
 Returns: [SideloadNode](/kapacitor/v1.4/nodes/sideload_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Spread
 
@@ -835,7 +848,7 @@ ec2Autoscale|spread(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### StateCount
 
@@ -848,7 +861,7 @@ ec2Autoscale|stateCount(expression ast.LambdaNode)
 
 Returns: [StateCountNode](/kapacitor/v1.4/nodes/state_count_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### StateDuration
 
@@ -861,7 +874,7 @@ ec2Autoscale|stateDuration(expression ast.LambdaNode)
 
 Returns: [StateDurationNode](/kapacitor/v1.4/nodes/state_duration_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Stats
 
@@ -876,7 +889,7 @@ ec2Autoscale|stats(interval time.Duration)
 
 Returns: [StatsNode](/kapacitor/v1.4/nodes/stats_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Stddev
 
@@ -889,7 +902,7 @@ ec2Autoscale|stddev(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Sum
 
@@ -902,7 +915,7 @@ ec2Autoscale|sum(field string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### SwarmAutoscale
 
@@ -915,7 +928,7 @@ ec2Autoscale|swarmAutoscale()
 
 Returns: [SwarmAutoscaleNode](/kapacitor/v1.4/nodes/swarm_autoscale_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Top
 
@@ -928,7 +941,7 @@ ec2Autoscale|top(num int64, field string, fieldsAndTags ...string)
 
 Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Union
 
@@ -941,7 +954,7 @@ ec2Autoscale|union(node ...Node)
 
 Returns: [UnionNode](/kapacitor/v1.4/nodes/union_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Where
 
@@ -954,7 +967,7 @@ ec2Autoscale|where(expression ast.LambdaNode)
 
 Returns: [WhereNode](/kapacitor/v1.4/nodes/where_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Window
 
@@ -969,4 +982,4 @@ ec2Autoscale|window()
 
 Returns: [WindowNode](/kapacitor/v1.4/nodes/window_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
