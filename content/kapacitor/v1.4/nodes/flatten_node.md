@@ -13,7 +13,7 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[flatten](#description)&nbsp;(&nbsp;)** | Flatten points with similar times into a single point.  |
+| **[flatten](#descr)&nbsp;(&nbsp;)** | Flatten points with similar times into a single point.  |
 
 ### Property Methods
 
@@ -22,16 +22,13 @@ menu:
 | **[delimiter](#delimiter)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The delimiter between field name parts  |
 | **[dropOriginalFieldName](#droporiginalfieldname)&nbsp;(&nbsp;`drop`&nbsp;`...bool`)** | DropOriginalFieldName indicates whether the original field name should be dropped when constructing the final field name.  |
 | **[on](#on)&nbsp;(&nbsp;`dims`&nbsp;`...string`)** | Specify the dimensions on which to flatten the points.  |
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 | **[tolerance](#tolerance)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | The maximum duration of time that two incoming points can be apart and still be considered to be equal in time. The joined data point's time will be rounded to the nearest multiple of the tolerance duration.  |
 
 
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/flatten_node/#alert), [Barrier](/kapacitor/v1.4/nodes/flatten_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/flatten_node/#bottom), [Combine](/kapacitor/v1.4/nodes/flatten_node/#combine), [Count](/kapacitor/v1.4/nodes/flatten_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/flatten_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/flatten_node/#deadman), [Default](/kapacitor/v1.4/nodes/flatten_node/#default), [Delete](/kapacitor/v1.4/nodes/flatten_node/#delete), [Derivative](/kapacitor/v1.4/nodes/flatten_node/#derivative), [Difference](/kapacitor/v1.4/nodes/flatten_node/#difference), [Distinct](/kapacitor/v1.4/nodes/flatten_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/flatten_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/flatten_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/flatten_node/#eval), [First](/kapacitor/v1.4/nodes/flatten_node/#first), [Flatten](/kapacitor/v1.4/nodes/flatten_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/flatten_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/flatten_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/flatten_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/flatten_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/flatten_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/flatten_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/flatten_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/flatten_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/flatten_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/flatten_node/#last), [Log](/kapacitor/v1.4/nodes/flatten_node/#log), [Max](/kapacitor/v1.4/nodes/flatten_node/#max), [Mean](/kapacitor/v1.4/nodes/flatten_node/#mean), [Median](/kapacitor/v1.4/nodes/flatten_node/#median), [Min](/kapacitor/v1.4/nodes/flatten_node/#min), [Mode](/kapacitor/v1.4/nodes/flatten_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/flatten_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/flatten_node/#percentile), [Sample](/kapacitor/v1.4/nodes/flatten_node/#sample), [Shift](/kapacitor/v1.4/nodes/flatten_node/#shift), [Sideload](/kapacitor/v1.4/nodes/flatten_node/#sideload), [Spread](/kapacitor/v1.4/nodes/flatten_node/#spread), [StateCount](/kapacitor/v1.4/nodes/flatten_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/flatten_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/flatten_node/#stats), [Stddev](/kapacitor/v1.4/nodes/flatten_node/#stddev), [Sum](/kapacitor/v1.4/nodes/flatten_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/flatten_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/flatten_node/#top), [Union](/kapacitor/v1.4/nodes/flatten_node/#union), [Where](/kapacitor/v1.4/nodes/flatten_node/#where), [Window](/kapacitor/v1.4/nodes/flatten_node/#window)
-
----
-
+<a id='descr'/><hr/><br/>
 ### Description
 
 Flatten a set of points on specific dimensions.
@@ -77,7 +74,8 @@ that the resultant data is passed to a UDF or similar for custom processing.
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
-## Properties
+Properties
+----------
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -121,18 +119,6 @@ flatten.on(dims ...string)
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
-### Quiet
-
-Suppress errors during execution.
-
-
-```javascript
-flatten.quiet()
-```
-
-<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
-
-
 ### Tolerance
 
 The maximum duration of time that two incoming points
@@ -148,7 +134,8 @@ flatten.tolerance(value time.Duration)
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
-## Chaining Methods
+Chaining Methods
+----------------
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

@@ -13,13 +13,13 @@ menu:
 
 | Chaining method | Description |
 |:---------|:---------|
-| **[alert](#description)&nbsp;(&nbsp;)** | Create an alert node, which can trigger alerts.  |
+| **[alert](#descr)&nbsp;(&nbsp;)** | Create an alert node, which can trigger alerts.  |
 
 ### Property methods
 
 | Setters | description |
 |:---|:---|
-| **[alerta](#alerta) \( \)** | Send the alert to Alerta.  |
+| **[alerta](#alerta)&nbsp;(&nbsp;)** | Send the alert to Alerta.  |
 | **[all](#all)&nbsp;(&nbsp;)** | Indicates an alert should trigger only if all points in a batch match the criteria. Does not apply to stream alerts.  |
 | **[crit](#crit)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for the CRITICAL alert level. An empty value indicates the level is invalid and is skipped.  |
 | **[critReset](#critreset)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for reseting the CRITICAL alert level to lower level.  |
@@ -46,7 +46,6 @@ menu:
 | **[pagerDuty](#pagerduty)&nbsp;(&nbsp;)** | Send the alert to PagerDuty. To use PagerDuty alerting you must first follow the steps to enable a new 'Generic API' service.  |
 | **[post](#post)&nbsp;(&nbsp;`urls`&nbsp;`...string`)** | HTTP POST JSON alert data to a specified URL.  |
 | **[pushover](#pushover)&nbsp;(&nbsp;)** | Send the alert to Pushover. Register your application with Pushover at https://pushover.net/apps/build to get a Pushover token.  |
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 | **[sensu](#sensu)&nbsp;(&nbsp;)** | Send the alert to Sensu.  |
 | **[slack](#slack)&nbsp;(&nbsp;)** | Send the alert to Slack. To allow Kapacitor to post to Slack, go to the URL https://slack.com/services/new/incoming-webhook and create a new incoming webhook and place the generated URL in the 'slack' configuration section.  |
 | **[snmpTrap](#snmptrap)&nbsp;(&nbsp;`trapOid`&nbsp;`string`)** | Send the alert using SNMP traps. To allow Kapacitor to post SNMP traps,  |
@@ -63,8 +62,7 @@ menu:
 
 ### Chaining methods
 [Alert](/kapacitor/v1.4/nodes/alert_node/#alert), [Barrier](/kapacitor/v1.4/nodes/alert_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/alert_node/#bottom), [Combine](/kapacitor/v1.4/nodes/alert_node/#combine), [Count](/kapacitor/v1.4/nodes/alert_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/alert_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/alert_node/#deadman), [Default](/kapacitor/v1.4/nodes/alert_node/#default), [Delete](/kapacitor/v1.4/nodes/alert_node/#delete), [Derivative](/kapacitor/v1.4/nodes/alert_node/#derivative), [Difference](/kapacitor/v1.4/nodes/alert_node/#difference), [Distinct](/kapacitor/v1.4/nodes/alert_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/alert_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/alert_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/alert_node/#eval), [First](/kapacitor/v1.4/nodes/alert_node/#first), [Flatten](/kapacitor/v1.4/nodes/alert_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/alert_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/alert_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/alert_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/alert_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/alert_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/alert_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/alert_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/alert_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/alert_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/alert_node/#last), [Max](/kapacitor/v1.4/nodes/alert_node/#max), [Mean](/kapacitor/v1.4/nodes/alert_node/#mean), [Median](/kapacitor/v1.4/nodes/alert_node/#median), [Min](/kapacitor/v1.4/nodes/alert_node/#min), [Mode](/kapacitor/v1.4/nodes/alert_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/alert_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/alert_node/#percentile), [Sample](/kapacitor/v1.4/nodes/alert_node/#sample), [Shift](/kapacitor/v1.4/nodes/alert_node/#shift), [Sideload](/kapacitor/v1.4/nodes/alert_node/#sideload), [Spread](/kapacitor/v1.4/nodes/alert_node/#spread), [StateCount](/kapacitor/v1.4/nodes/alert_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/alert_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/alert_node/#stats), [Stddev](/kapacitor/v1.4/nodes/alert_node/#stddev), [Sum](/kapacitor/v1.4/nodes/alert_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/alert_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/alert_node/#top), [Union](/kapacitor/v1.4/nodes/alert_node/#union), [Where](/kapacitor/v1.4/nodes/alert_node/#where), [Window](/kapacitor/v1.4/nodes/alert_node/#window)
-
----
+<a id='descr'/><hr/><br/>
 
 ### Description
 
@@ -174,10 +172,12 @@ Available Statistics:
 * warns_triggered -- Number of Warn alerts triggered
 * crits_triggered -- Number of Crit alerts triggered
 
+
+
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
-
-## Properties
+Properties
+----------
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -1512,17 +1512,6 @@ alert.pushover()
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
-### Quiet
-
-Suppress errors during execution.
-
-
-```javascript
-alert.quiet()
-```
-
-<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
-
 
 ### Sensu
 
@@ -2196,7 +2185,8 @@ alert.warnReset(value ast.LambdaNode)
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
-## Chaining Methods
+Chaining Methods
+----------------
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

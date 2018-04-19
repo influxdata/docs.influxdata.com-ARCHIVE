@@ -13,23 +13,20 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[stateDuration](#description)&nbsp;(&nbsp;`expression`&nbsp;`ast.LambdaNode`)** | Create a node that tracks duration in a given state.  |
+| **[stateDuration](#descr)&nbsp;(&nbsp;`expression`&nbsp;`ast.LambdaNode`)** | Create a node that tracks duration in a given state.  |
 
 ### Property Methods
 
 | Setters | Description |
 |:---|:---|
 | **[as](#as)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The new name of the resulting duration field. Default: 'state_duration'  |
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 | **[unit](#unit)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | The time unit of the resulting duration value. Default: 1s.  |
 
 
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/state_duration_node/#alert), [Barrier](/kapacitor/v1.4/nodes/state_duration_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/state_duration_node/#bottom), [Combine](/kapacitor/v1.4/nodes/state_duration_node/#combine), [Count](/kapacitor/v1.4/nodes/state_duration_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/state_duration_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/state_duration_node/#deadman), [Default](/kapacitor/v1.4/nodes/state_duration_node/#default), [Delete](/kapacitor/v1.4/nodes/state_duration_node/#delete), [Derivative](/kapacitor/v1.4/nodes/state_duration_node/#derivative), [Difference](/kapacitor/v1.4/nodes/state_duration_node/#difference), [Distinct](/kapacitor/v1.4/nodes/state_duration_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/state_duration_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/state_duration_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/state_duration_node/#eval), [First](/kapacitor/v1.4/nodes/state_duration_node/#first), [Flatten](/kapacitor/v1.4/nodes/state_duration_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/state_duration_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/state_duration_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/state_duration_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/state_duration_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/state_duration_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/state_duration_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/state_duration_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/state_duration_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/state_duration_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/state_duration_node/#last), [Log](/kapacitor/v1.4/nodes/state_duration_node/#log), [Max](/kapacitor/v1.4/nodes/state_duration_node/#max), [Mean](/kapacitor/v1.4/nodes/state_duration_node/#mean), [Median](/kapacitor/v1.4/nodes/state_duration_node/#median), [Min](/kapacitor/v1.4/nodes/state_duration_node/#min), [Mode](/kapacitor/v1.4/nodes/state_duration_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/state_duration_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/state_duration_node/#percentile), [Sample](/kapacitor/v1.4/nodes/state_duration_node/#sample), [Shift](/kapacitor/v1.4/nodes/state_duration_node/#shift), [Sideload](/kapacitor/v1.4/nodes/state_duration_node/#sideload), [Spread](/kapacitor/v1.4/nodes/state_duration_node/#spread), [StateCount](/kapacitor/v1.4/nodes/state_duration_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/state_duration_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/state_duration_node/#stats), [Stddev](/kapacitor/v1.4/nodes/state_duration_node/#stddev), [Sum](/kapacitor/v1.4/nodes/state_duration_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/state_duration_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/state_duration_node/#top), [Union](/kapacitor/v1.4/nodes/state_duration_node/#union), [Where](/kapacitor/v1.4/nodes/state_duration_node/#where), [Window](/kapacitor/v1.4/nodes/state_duration_node/#window)
-
----
-
+<a id='descr'/><hr/><br/>
 ### Description
 
 Compute the duration of a given state.
@@ -67,7 +64,8 @@ state duration will be 0.
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
-## Properties
+Properties
+----------
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -87,17 +85,6 @@ stateDuration.as(value string)
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
-### Quiet
-
-Suppress errors during execution.
-
-```javascript
-stateDuration.quiet()
-```
-
-<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
-
-
 ### Unit
 
 The time unit of the resulting duration value.
@@ -111,7 +98,8 @@ stateDuration.unit(value time.Duration)
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
-## Chaining Methods
+Chaining Methods
+----------------
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

@@ -13,7 +13,7 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[window](#description)&nbsp;(&nbsp;)** | Create a new node that windows the stream by time.  |
+| **[window](#descr)&nbsp;(&nbsp;)** | Create a new node that windows the stream by time.  |
 
 ### Property Methods
 
@@ -25,15 +25,12 @@ menu:
 | **[fillPeriod](#fillperiod)&nbsp;(&nbsp;)** | FillPeriod instructs the WindowNode to wait till the period has elapsed before emitting the first batch. This only applies if the period is greater than the every value.  |
 | **[period](#period)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | The period, or length in time, of the window.  |
 | **[periodCount](#periodcount)&nbsp;(&nbsp;`value`&nbsp;`int64`)** | PeriodCount is the number of points per window.  |
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 
 
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/window_node/#alert), [Barrier](/kapacitor/v1.4/nodes/window_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/window_node/#bottom), [Combine](/kapacitor/v1.4/nodes/window_node/#combine), [Count](/kapacitor/v1.4/nodes/window_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/window_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/window_node/#deadman), [Default](/kapacitor/v1.4/nodes/window_node/#default), [Delete](/kapacitor/v1.4/nodes/window_node/#delete), [Derivative](/kapacitor/v1.4/nodes/window_node/#derivative), [Difference](/kapacitor/v1.4/nodes/window_node/#difference), [Distinct](/kapacitor/v1.4/nodes/window_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/window_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/window_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/window_node/#eval), [First](/kapacitor/v1.4/nodes/window_node/#first), [Flatten](/kapacitor/v1.4/nodes/window_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/window_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/window_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/window_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/window_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/window_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/window_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/window_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/window_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/window_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/window_node/#last), [Log](/kapacitor/v1.4/nodes/window_node/#log), [Max](/kapacitor/v1.4/nodes/window_node/#max), [Mean](/kapacitor/v1.4/nodes/window_node/#mean), [Median](/kapacitor/v1.4/nodes/window_node/#median), [Min](/kapacitor/v1.4/nodes/window_node/#min), [Mode](/kapacitor/v1.4/nodes/window_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/window_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/window_node/#percentile), [Sample](/kapacitor/v1.4/nodes/window_node/#sample), [Shift](/kapacitor/v1.4/nodes/window_node/#shift), [Sideload](/kapacitor/v1.4/nodes/window_node/#sideload), [Spread](/kapacitor/v1.4/nodes/window_node/#spread), [StateCount](/kapacitor/v1.4/nodes/window_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/window_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/window_node/#stats), [Stddev](/kapacitor/v1.4/nodes/window_node/#stddev), [Sum](/kapacitor/v1.4/nodes/window_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/window_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/window_node/#top), [Union](/kapacitor/v1.4/nodes/window_node/#union), [Where](/kapacitor/v1.4/nodes/window_node/#where), [Window](/kapacitor/v1.4/nodes/window_node/#window)
-
----
-
+<a id='descr'/><hr/><br/>
 ### Description
 
 A `window` node caches data within a moving time range.
@@ -66,7 +63,8 @@ NOTE: Because no `align` property is defined, the `window` edge is defined relat
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
-## Properties
+Properties
+----------
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -153,18 +151,8 @@ window.periodCount(value int64)
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
-### Quiet
-
-Suppress errors during execution.
-
-```javascript
-window.quiet()
-```
-
-<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
-
-
-## Chaining Methods
+Chaining Methods
+----------------
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

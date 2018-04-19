@@ -13,7 +13,7 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[kapacitorLoopback](#description)&nbsp;(&nbsp;)** | Create an kapacitor loopback node that will send data back into Kapacitor as a stream.  |
+| **[kapacitorLoopback](#descr)&nbsp;(&nbsp;)** | Create an kapacitor loopback node that will send data back into Kapacitor as a stream.  |
 
 ### Property Methods
 
@@ -21,7 +21,6 @@ menu:
 |:---|:---|
 | **[database](#database)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the database.  |
 | **[measurement](#measurement)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the measurement.  |
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 | **[retentionPolicy](#retentionpolicy)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the retention policy.  |
 | **[tag](#tag)&nbsp;(&nbsp;`key`&nbsp;`string`,&nbsp;`value`&nbsp;`string`)** | Add a static tag to all data points. Tag can be called more than once.  |
 
@@ -29,9 +28,7 @@ menu:
 
 ### Chaining Methods
 [Deadman](/kapacitor/v1.4/nodes/kapacitor_loopback_node/#deadman), [Stats](/kapacitor/v1.4/nodes/kapacitor_loopback_node/#stats)
-
----
-
+<a id='descr'/><hr/><br/>
 ### Description
 
 Writes the data back into the Kapacitor stream.
@@ -61,7 +58,8 @@ Available Statistics:
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
-## Properties
+Properties
+----------
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -87,17 +85,6 @@ The name of the measurement.
 
 ```javascript
 kapacitorLoopback.measurement(value string)
-```
-
-<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
-
-
-### Quiet
-
-Suppress errors during execution.
-
-```javascript
-kapacitorLoopback.quiet()
 ```
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
@@ -129,7 +116,8 @@ kapacitorLoopback.tag(key string, value string)
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
-## Chaining Methods
+Chaining Methods
+----------------
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

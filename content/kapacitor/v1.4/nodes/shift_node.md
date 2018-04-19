@@ -13,20 +13,15 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[shift](#description)&nbsp;(&nbsp;`shift`&nbsp;`time.Duration`)** | Create a new node that shifts the incoming points or batches in time.  |
+| **[shift](#descr)&nbsp;(&nbsp;`shift`&nbsp;`time.Duration`)** | Create a new node that shifts the incoming points or batches in time.  |
 
 ### Property Methods
-
-| Setters | Description |
-|:---|:---|
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
+This node has no properties that can be set.
 
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/shift_node/#alert), [Barrier](/kapacitor/v1.4/nodes/shift_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/shift_node/#bottom), [Combine](/kapacitor/v1.4/nodes/shift_node/#combine), [Count](/kapacitor/v1.4/nodes/shift_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/shift_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/shift_node/#deadman), [Default](/kapacitor/v1.4/nodes/shift_node/#default), [Delete](/kapacitor/v1.4/nodes/shift_node/#delete), [Derivative](/kapacitor/v1.4/nodes/shift_node/#derivative), [Difference](/kapacitor/v1.4/nodes/shift_node/#difference), [Distinct](/kapacitor/v1.4/nodes/shift_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/shift_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/shift_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/shift_node/#eval), [First](/kapacitor/v1.4/nodes/shift_node/#first), [Flatten](/kapacitor/v1.4/nodes/shift_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/shift_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/shift_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/shift_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/shift_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/shift_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/shift_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/shift_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/shift_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/shift_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/shift_node/#last), [Log](/kapacitor/v1.4/nodes/shift_node/#log), [Max](/kapacitor/v1.4/nodes/shift_node/#max), [Mean](/kapacitor/v1.4/nodes/shift_node/#mean), [Median](/kapacitor/v1.4/nodes/shift_node/#median), [Min](/kapacitor/v1.4/nodes/shift_node/#min), [Mode](/kapacitor/v1.4/nodes/shift_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/shift_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/shift_node/#percentile), [Sample](/kapacitor/v1.4/nodes/shift_node/#sample), [Shift](/kapacitor/v1.4/nodes/shift_node/#shift), [Sideload](/kapacitor/v1.4/nodes/shift_node/#sideload), [Spread](/kapacitor/v1.4/nodes/shift_node/#spread), [StateCount](/kapacitor/v1.4/nodes/shift_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/shift_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/shift_node/#stats), [Stddev](/kapacitor/v1.4/nodes/shift_node/#stddev), [Sum](/kapacitor/v1.4/nodes/shift_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/shift_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/shift_node/#top), [Union](/kapacitor/v1.4/nodes/shift_node/#union), [Where](/kapacitor/v1.4/nodes/shift_node/#where), [Window](/kapacitor/v1.4/nodes/shift_node/#window)
-
----
-
+<a id='descr'/><hr/><br/>
 ### Description
 
 Shift points and batches in time, this is useful for comparing
@@ -55,26 +50,8 @@ Shift all data points 10s backward in time.
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
-
-## Properties
-
-Property methods modify state on the calling node.
-They do not add another node to the pipeline, and always return a reference to the calling node.
-Property methods are marked using the `.` operator.
-
-
-### Quiet
-
-Suppress errors during execution.
-
-```javascript
-shift.quiet()
-```
-
-<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
-
-
-## Chaining Methods
+Chaining Methods
+----------------
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

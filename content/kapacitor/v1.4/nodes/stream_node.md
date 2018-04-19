@@ -13,20 +13,14 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[stream](#description)** | Has no constructor signature. |
-
+| **[stream](#descr)** | Has no constructor signature. |
 ### Property Methods
-
-| Setters | Description |
-|:---|:---|
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
+This node has no properties that can be set.
 
 
 ### Chaining Methods
 [Deadman](/kapacitor/v1.4/nodes/stream_node/#deadman), [From](/kapacitor/v1.4/nodes/stream_node/#from), [Stats](/kapacitor/v1.4/nodes/stream_node/#stats)
-
----
-
+<a id='descr'/><hr/><br/>
 ### Description
 
 A [StreamNode](/kapacitor/v1.4/nodes/stream_node/) represents the source of data being
@@ -38,24 +32,8 @@ a [StreamNode.](/kapacitor/v1.4/nodes/stream_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
-## Properties
-
-Property methods modify state on the calling node.
-They do not add another node to the pipeline, and always return a reference to the calling node.
-Property methods are marked using the `.` operator.
-
-### Quiet
-
-Suppress errors during execution.
-
-```javascript
-stream.quiet()
-```
-
-<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
-
-
-## Chaining Methods
+Chaining Methods
+----------------
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

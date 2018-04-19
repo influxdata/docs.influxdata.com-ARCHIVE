@@ -13,7 +13,7 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[influxDBOut](#descr)&nbsp;(&nbsp;)** | Create an influxdb output node that will store the incoming data into InfluxDB.  |
+| **[influxDBOut](#description)&nbsp;(&nbsp;)** | Create an influxdb output node that will store the incoming data into InfluxDB.  |
 
 ### Property Methods
 
@@ -26,6 +26,7 @@ menu:
 | **[flushInterval](#flushinterval)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | Write points to InfluxDB after interval even if buffer is not full. Default: 10s  |
 | **[measurement](#measurement)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the measurement.  |
 | **[precision](#precision)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The precision to use when writing the data.  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 | **[retentionPolicy](#retentionpolicy)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the retention policy.  |
 | **[tag](#tag)&nbsp;(&nbsp;`key`&nbsp;`string`,&nbsp;`value`&nbsp;`string`)** | Add a static tag to all data points. Tag can be called more then once.  |
 | **[writeConsistency](#writeconsistency)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The write consistency to use when writing the data.  |
@@ -33,8 +34,10 @@ menu:
 
 
 ### Chaining Methods
-[Deadman](/kapacitor/v1.5/nodes/influx_d_b_out_node/#deadman), [Stats](/kapacitor/v1.5/nodes/influx_d_b_out_node/#stats)
-<a id='descr'/><hr/><br/>
+[Deadman](/kapacitor/v1.4/nodes/influx_d_b_out_node/#deadman), [Stats](/kapacitor/v1.4/nodes/influx_d_b_out_node/#stats)
+
+---
+
 ### Description
 
 Writes the data to InfluxDB as it is received.
@@ -64,10 +67,9 @@ Available Statistics:
 
 
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
-Properties
-----------
+## Properties
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -84,7 +86,7 @@ Default: 1000
 influxDBOut.buffer(value int64)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Cluster
@@ -97,7 +99,7 @@ If empty the configured default will be used.
 influxDBOut.cluster(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Create
@@ -116,7 +118,7 @@ If the database already exists nothing happens.
 influxDBOut.create()
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Database
@@ -128,7 +130,7 @@ The name of the database.
 influxDBOut.database(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### FlushInterval
@@ -141,7 +143,7 @@ Default: 10s
 influxDBOut.flushInterval(value time.Duration)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Measurement
@@ -153,7 +155,7 @@ The name of the measurement.
 influxDBOut.measurement(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Precision
@@ -165,7 +167,17 @@ The precision to use when writing the data.
 influxDBOut.precision(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
+
+### Quiet
+
+Suppress errors during execution.
+
+```javascript
+influxDBOut.quiet()
+```
+
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### RetentionPolicy
@@ -177,7 +189,7 @@ The name of the retention policy.
 influxDBOut.retentionPolicy(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Tag
@@ -191,7 +203,7 @@ Tag can be called more then once.
 influxDBOut.tag(key string, value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### WriteConsistency
@@ -203,11 +215,10 @@ The write consistency to use when writing the data.
 influxDBOut.writeConsistency(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
-Chaining Methods
-----------------
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.
@@ -259,7 +270,7 @@ Example:
 
 The `id` and `message` alert properties can be configured globally via the 'deadman' configuration section.
 
-Since the [AlertNode](/kapacitor/v1.5/nodes/alert_node/) is the last piece it can be further modified as usual.
+Since the [AlertNode](/kapacitor/v1.4/nodes/alert_node/) is the last piece it can be further modified as usual.
 Example:
 
 
@@ -296,9 +307,9 @@ Example:
 influxDBOut|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
 ```
 
-Returns: [AlertNode](/kapacitor/v1.5/nodes/alert_node/)
+Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Stats
 
@@ -311,6 +322,6 @@ This means the interval time is independent of the times of the data points the 
 influxDBOut|stats(interval time.Duration)
 ```
 
-Returns: [StatsNode](/kapacitor/v1.5/nodes/stats_node/)
+Returns: [StatsNode](/kapacitor/v1.4/nodes/stats_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>

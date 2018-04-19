@@ -13,7 +13,7 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[join](#descr)&nbsp;(&nbsp;`others`&nbsp;`...Node`)** | Join this node with other nodes. The data are joined on timestamp.  |
+| **[join](#description)&nbsp;(&nbsp;`others`&nbsp;`...Node`)** | Join this node with other nodes. The data are joined on timestamp.  |
 
 ### Property Methods
 
@@ -23,14 +23,17 @@ menu:
 | **[delimiter](#delimiter)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The delimiter for the field name prefixes. Can be the empty string.  |
 | **[fill](#fill)&nbsp;(&nbsp;`value`&nbsp;`interface{}`)** | Fill the data. The fill option implies the type of join: inner or full outer Options are:  |
 | **[on](#on)&nbsp;(&nbsp;`dims`&nbsp;`...string`)** | Join on a subset of the group by dimensions. This is a special case where you want a single point from one parent to join with multiple points from a different parent.  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 | **[streamName](#streamname)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of this new joined data stream. If empty the name of the left parent is used.  |
 | **[tolerance](#tolerance)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | The maximum duration of time that two incoming points can be apart and still be considered to be equal in time. The joined data point's time will be rounded to the nearest multiple of the tolerance duration.  |
 
 
 
 ### Chaining Methods
-[Alert](/kapacitor/v1.5/nodes/join_node/#alert), [Barrier](/kapacitor/v1.5/nodes/join_node/#barrier), [Bottom](/kapacitor/v1.5/nodes/join_node/#bottom), [Combine](/kapacitor/v1.5/nodes/join_node/#combine), [Count](/kapacitor/v1.5/nodes/join_node/#count), [CumulativeSum](/kapacitor/v1.5/nodes/join_node/#cumulativesum), [Deadman](/kapacitor/v1.5/nodes/join_node/#deadman), [Default](/kapacitor/v1.5/nodes/join_node/#default), [Delete](/kapacitor/v1.5/nodes/join_node/#delete), [Derivative](/kapacitor/v1.5/nodes/join_node/#derivative), [Difference](/kapacitor/v1.5/nodes/join_node/#difference), [Distinct](/kapacitor/v1.5/nodes/join_node/#distinct), [Ec2Autoscale](/kapacitor/v1.5/nodes/join_node/#ec2autoscale), [Elapsed](/kapacitor/v1.5/nodes/join_node/#elapsed), [Eval](/kapacitor/v1.5/nodes/join_node/#eval), [First](/kapacitor/v1.5/nodes/join_node/#first), [Flatten](/kapacitor/v1.5/nodes/join_node/#flatten), [GroupBy](/kapacitor/v1.5/nodes/join_node/#groupby), [HoltWinters](/kapacitor/v1.5/nodes/join_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.5/nodes/join_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.5/nodes/join_node/#httpout), [HttpPost](/kapacitor/v1.5/nodes/join_node/#httppost), [InfluxDBOut](/kapacitor/v1.5/nodes/join_node/#influxdbout), [Join](/kapacitor/v1.5/nodes/join_node/#join), [K8sAutoscale](/kapacitor/v1.5/nodes/join_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.5/nodes/join_node/#kapacitorloopback), [Last](/kapacitor/v1.5/nodes/join_node/#last), [Log](/kapacitor/v1.5/nodes/join_node/#log), [Max](/kapacitor/v1.5/nodes/join_node/#max), [Mean](/kapacitor/v1.5/nodes/join_node/#mean), [Median](/kapacitor/v1.5/nodes/join_node/#median), [Min](/kapacitor/v1.5/nodes/join_node/#min), [Mode](/kapacitor/v1.5/nodes/join_node/#mode), [MovingAverage](/kapacitor/v1.5/nodes/join_node/#movingaverage), [Percentile](/kapacitor/v1.5/nodes/join_node/#percentile), [Sample](/kapacitor/v1.5/nodes/join_node/#sample), [Shift](/kapacitor/v1.5/nodes/join_node/#shift), [Sideload](/kapacitor/v1.5/nodes/join_node/#sideload), [Spread](/kapacitor/v1.5/nodes/join_node/#spread), [StateCount](/kapacitor/v1.5/nodes/join_node/#statecount), [StateDuration](/kapacitor/v1.5/nodes/join_node/#stateduration), [Stats](/kapacitor/v1.5/nodes/join_node/#stats), [Stddev](/kapacitor/v1.5/nodes/join_node/#stddev), [Sum](/kapacitor/v1.5/nodes/join_node/#sum), [SwarmAutoscale](/kapacitor/v1.5/nodes/join_node/#swarmautoscale), [Top](/kapacitor/v1.5/nodes/join_node/#top), [Union](/kapacitor/v1.5/nodes/join_node/#union), [Where](/kapacitor/v1.5/nodes/join_node/#where), [Window](/kapacitor/v1.5/nodes/join_node/#window)
-<a id='descr'/><hr/><br/>
+[Alert](/kapacitor/v1.4/nodes/join_node/#alert), [Barrier](/kapacitor/v1.4/nodes/join_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/join_node/#bottom), [Combine](/kapacitor/v1.4/nodes/join_node/#combine), [Count](/kapacitor/v1.4/nodes/join_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/join_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/join_node/#deadman), [Default](/kapacitor/v1.4/nodes/join_node/#default), [Delete](/kapacitor/v1.4/nodes/join_node/#delete), [Derivative](/kapacitor/v1.4/nodes/join_node/#derivative), [Difference](/kapacitor/v1.4/nodes/join_node/#difference), [Distinct](/kapacitor/v1.4/nodes/join_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/join_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/join_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/join_node/#eval), [First](/kapacitor/v1.4/nodes/join_node/#first), [Flatten](/kapacitor/v1.4/nodes/join_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/join_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/join_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/join_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/join_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/join_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/join_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/join_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/join_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/join_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/join_node/#last), [Log](/kapacitor/v1.4/nodes/join_node/#log), [Max](/kapacitor/v1.4/nodes/join_node/#max), [Mean](/kapacitor/v1.4/nodes/join_node/#mean), [Median](/kapacitor/v1.4/nodes/join_node/#median), [Min](/kapacitor/v1.4/nodes/join_node/#min), [Mode](/kapacitor/v1.4/nodes/join_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/join_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/join_node/#percentile), [Sample](/kapacitor/v1.4/nodes/join_node/#sample), [Shift](/kapacitor/v1.4/nodes/join_node/#shift), [Sideload](/kapacitor/v1.4/nodes/join_node/#sideload), [Spread](/kapacitor/v1.4/nodes/join_node/#spread), [StateCount](/kapacitor/v1.4/nodes/join_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/join_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/join_node/#stats), [Stddev](/kapacitor/v1.4/nodes/join_node/#stddev), [Sum](/kapacitor/v1.4/nodes/join_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/join_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/join_node/#top), [Union](/kapacitor/v1.4/nodes/join_node/#union), [Where](/kapacitor/v1.4/nodes/join_node/#where), [Window](/kapacitor/v1.4/nodes/join_node/#window)
+
+---
+
 ### Description
 
 Joins the data from any number of nodes.
@@ -45,7 +48,7 @@ they arrive.
 
 Aliases are used to prefix all fields from the respective nodes.
 
-The join can be an inner or outer join, see the [JoinNode.Fill](/kapacitor/v1.5/nodes/join_node/#fill) property.
+The join can be an inner or outer join, see the [JoinNode.Fill](/kapacitor/v1.4/nodes/join_node/#fill) property.
 
 Example:
 
@@ -79,10 +82,9 @@ In the above example the `errors` and `requests` streams are joined
 and then transformed to calculate a combined field.
 
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
-Properties
-----------
+## Properties
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -103,7 +105,7 @@ The names cannot have a dot '.' character.
 join.as(names ...string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Delimiter
@@ -116,7 +118,7 @@ Can be the empty string.
 join.delimiter(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Fill
@@ -132,7 +134,7 @@ Options are:
 When using a numerical or null fill, the fields names are determined by copying
 the field names from another point.
 This doesn't work well when different sources have different field names.
-Use the [DefaultNode](/kapacitor/v1.5/nodes/default_node/) and [DeleteNode](/kapacitor/v1.5/nodes/delete_node/) to finalize the fill operation if necessary.
+Use the [DefaultNode](/kapacitor/v1.4/nodes/default_node/) and [DeleteNode](/kapacitor/v1.4/nodes/delete_node/) to finalize the fill operation if necessary.
 
 Example:
 
@@ -175,7 +177,7 @@ Example:
 join.fill(value interface{})
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### On
@@ -222,7 +224,18 @@ Example:
 join.on(dims ...string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
+
+
+### Quiet
+
+Suppress errors during execution.
+
+```javascript
+join.quiet()
+```
+
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### StreamName
@@ -235,7 +248,7 @@ If empty the name of the left parent is used.
 join.streamName(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Tolerance
@@ -250,11 +263,10 @@ multiple of the tolerance duration.
 join.tolerance(value time.Duration)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
-Chaining Methods
-----------------
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.
@@ -270,9 +282,9 @@ Create an alert node, which can trigger alerts.
 join|alert()
 ```
 
-Returns: [AlertNode](/kapacitor/v1.5/nodes/alert_node/)
+Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Barrier
 
@@ -285,9 +297,9 @@ One BarrierMessage will be emitted every period duration
 join|barrier()
 ```
 
-Returns: [BarrierNode](/kapacitor/v1.5/nodes/barrier_node/)
+Returns: [BarrierNode](/kapacitor/v1.4/nodes/barrier_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Bottom
 
@@ -298,9 +310,9 @@ Select the bottom `num` points for `field` and sort by any extra tags or fields.
 join|bottom(num int64, field string, fieldsAndTags ...string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Combine
 
@@ -311,9 +323,9 @@ Combine this node with itself. The data are combined on timestamp.
 join|combine(expressions ...ast.LambdaNode)
 ```
 
-Returns: [CombineNode](/kapacitor/v1.5/nodes/combine_node/)
+Returns: [CombineNode](/kapacitor/v1.4/nodes/combine_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Count
 
@@ -324,9 +336,9 @@ Count the number of points.
 join|count(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### CumulativeSum
 
@@ -338,9 +350,9 @@ A point is emitted for every point collected.
 join|cumulativeSum(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Deadman
 
@@ -387,7 +399,7 @@ Example:
 
 The `id` and `message` alert properties can be configured globally via the 'deadman' configuration section.
 
-Since the [AlertNode](/kapacitor/v1.5/nodes/alert_node/) is the last piece it can be further modified as usual.
+Since the [AlertNode](/kapacitor/v1.4/nodes/alert_node/) is the last piece it can be further modified as usual.
 Example:
 
 
@@ -424,9 +436,9 @@ Example:
 join|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
 ```
 
-Returns: [AlertNode](/kapacitor/v1.5/nodes/alert_node/)
+Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Default
 
@@ -437,9 +449,9 @@ Create a node that can set defaults for missing tags or fields.
 join|default()
 ```
 
-Returns: [DefaultNode](/kapacitor/v1.5/nodes/default_node/)
+Returns: [DefaultNode](/kapacitor/v1.4/nodes/default_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Delete
 
@@ -450,9 +462,9 @@ Create a node that can delete tags or fields.
 join|delete()
 ```
 
-Returns: [DeleteNode](/kapacitor/v1.5/nodes/delete_node/)
+Returns: [DeleteNode](/kapacitor/v1.4/nodes/delete_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Derivative
 
@@ -463,9 +475,9 @@ Create a new node that computes the derivative of adjacent points.
 join|derivative(field string)
 ```
 
-Returns: [DerivativeNode](/kapacitor/v1.5/nodes/derivative_node/)
+Returns: [DerivativeNode](/kapacitor/v1.4/nodes/derivative_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Difference
 
@@ -476,9 +488,9 @@ Compute the difference between points independent of elapsed time.
 join|difference(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Distinct
 
@@ -489,9 +501,9 @@ Produce batch of only the distinct points.
 join|distinct(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Ec2Autoscale
 
@@ -502,9 +514,9 @@ Create a node that can trigger autoscale events for a ec2 autoscalegroup.
 join|ec2Autoscale()
 ```
 
-Returns: [Ec2AutoscaleNode](/kapacitor/v1.5/nodes/ec2_autoscale_node/)
+Returns: [Ec2AutoscaleNode](/kapacitor/v1.4/nodes/ec2_autoscale_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Elapsed
 
@@ -515,9 +527,9 @@ Compute the elapsed time between points
 join|elapsed(field string, unit time.Duration)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Eval
 
@@ -530,9 +542,9 @@ The results are available to later expressions.
 join|eval(expressions ...ast.LambdaNode)
 ```
 
-Returns: [EvalNode](/kapacitor/v1.5/nodes/eval_node/)
+Returns: [EvalNode](/kapacitor/v1.4/nodes/eval_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### First
 
@@ -543,9 +555,9 @@ Select the first point.
 join|first(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Flatten
 
@@ -556,9 +568,9 @@ Flatten points with similar times into a single point.
 join|flatten()
 ```
 
-Returns: [FlattenNode](/kapacitor/v1.5/nodes/flatten_node/)
+Returns: [FlattenNode](/kapacitor/v1.4/nodes/flatten_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### GroupBy
 
@@ -578,9 +590,9 @@ Example:
 join|groupBy(tag ...interface{})
 ```
 
-Returns: [GroupByNode](/kapacitor/v1.5/nodes/group_by_node/)
+Returns: [GroupByNode](/kapacitor/v1.4/nodes/group_by_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### HoltWinters
 
@@ -591,9 +603,9 @@ Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_lang
 join|holtWinters(field string, h int64, m int64, interval time.Duration)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### HoltWintersWithFit
 
@@ -605,9 +617,9 @@ This method also outputs all the points used to fit the data in addition to the 
 join|holtWintersWithFit(field string, h int64, m int64, interval time.Duration)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### HttpOut
 
@@ -622,9 +634,9 @@ For example, if the task endpoint is at `/kapacitor/v1/tasks/<task_id>` and endp
 join|httpOut(endpoint string)
 ```
 
-Returns: [HTTPOutNode](/kapacitor/v1.5/nodes/http_out_node/)
+Returns: [HTTPOutNode](/kapacitor/v1.4/nodes/http_out_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### HttpPost
 
@@ -637,9 +649,9 @@ endpoint property method.
 join|httpPost(url ...string)
 ```
 
-Returns: [HTTPPostNode](/kapacitor/v1.5/nodes/http_post_node/)
+Returns: [HTTPPostNode](/kapacitor/v1.4/nodes/http_post_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### InfluxDBOut
 
@@ -650,9 +662,9 @@ Create an influxdb output node that will store the incoming data into InfluxDB.
 join|influxDBOut()
 ```
 
-Returns: [InfluxDBOutNode](/kapacitor/v1.5/nodes/influx_d_b_out_node/)
+Returns: [InfluxDBOutNode](/kapacitor/v1.4/nodes/influx_d_b_out_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Join
 
@@ -663,9 +675,9 @@ Join this node with other nodes. The data are joined on timestamp.
 join|join(others ...Node)
 ```
 
-Returns: [JoinNode](/kapacitor/v1.5/nodes/join_node/)
+Returns: [JoinNode](/kapacitor/v1.4/nodes/join_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### K8sAutoscale
 
@@ -676,9 +688,9 @@ Create a node that can trigger autoscale events for a kubernetes cluster.
 join|k8sAutoscale()
 ```
 
-Returns: [K8sAutoscaleNode](/kapacitor/v1.5/nodes/k8s_autoscale_node/)
+Returns: [K8sAutoscaleNode](/kapacitor/v1.4/nodes/k8s_autoscale_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### KapacitorLoopback
 
@@ -689,9 +701,9 @@ Create an kapacitor loopback node that will send data back into Kapacitor as a s
 join|kapacitorLoopback()
 ```
 
-Returns: [KapacitorLoopbackNode](/kapacitor/v1.5/nodes/kapacitor_loopback_node/)
+Returns: [KapacitorLoopbackNode](/kapacitor/v1.4/nodes/kapacitor_loopback_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Last
 
@@ -702,9 +714,9 @@ Select the last point.
 join|last(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Log
 
@@ -715,9 +727,9 @@ Create a node that logs all data it receives.
 join|log()
 ```
 
-Returns: [LogNode](/kapacitor/v1.5/nodes/log_node/)
+Returns: [LogNode](/kapacitor/v1.4/nodes/log_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Max
 
@@ -728,9 +740,9 @@ Select the maximum point.
 join|max(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Mean
 
@@ -741,9 +753,9 @@ Compute the mean of the data.
 join|mean(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Median
 
@@ -755,9 +767,9 @@ if you want the median point use `.percentile(field, 50.0)`.
 join|median(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Min
 
@@ -768,9 +780,9 @@ Select the minimum point.
 join|min(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Mode
 
@@ -781,9 +793,9 @@ Compute the mode of the data.
 join|mode(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### MovingAverage
 
@@ -795,9 +807,9 @@ No points are emitted until the window is full.
 join|movingAverage(field string, window int64)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Percentile
 
@@ -808,9 +820,9 @@ Select a point at the given percentile. This is a selector function, no interpol
 join|percentile(field string, percentile float64)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Sample
 
@@ -823,9 +835,9 @@ One point will be emitted every count or duration specified.
 join|sample(rate interface{})
 ```
 
-Returns: [SampleNode](/kapacitor/v1.5/nodes/sample_node/)
+Returns: [SampleNode](/kapacitor/v1.4/nodes/sample_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Shift
 
@@ -836,9 +848,9 @@ Create a new node that shifts the incoming points or batches in time.
 join|shift(shift time.Duration)
 ```
 
-Returns: [ShiftNode](/kapacitor/v1.5/nodes/shift_node/)
+Returns: [ShiftNode](/kapacitor/v1.4/nodes/shift_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Sideload
 
@@ -849,9 +861,9 @@ Create a node that can load data from external sources
 join|sideload()
 ```
 
-Returns: [SideloadNode](/kapacitor/v1.5/nodes/sideload_node/)
+Returns: [SideloadNode](/kapacitor/v1.4/nodes/sideload_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Spread
 
@@ -862,9 +874,9 @@ Compute the difference between `min` and `max` points.
 join|spread(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### StateCount
 
@@ -875,9 +887,9 @@ Create a node that tracks number of consecutive points in a given state.
 join|stateCount(expression ast.LambdaNode)
 ```
 
-Returns: [StateCountNode](/kapacitor/v1.5/nodes/state_count_node/)
+Returns: [StateCountNode](/kapacitor/v1.4/nodes/state_count_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### StateDuration
 
@@ -888,9 +900,9 @@ Create a node that tracks duration in a given state.
 join|stateDuration(expression ast.LambdaNode)
 ```
 
-Returns: [StateDurationNode](/kapacitor/v1.5/nodes/state_duration_node/)
+Returns: [StateDurationNode](/kapacitor/v1.4/nodes/state_duration_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Stats
 
@@ -903,9 +915,9 @@ This means the interval time is independent of the times of the data points the 
 join|stats(interval time.Duration)
 ```
 
-Returns: [StatsNode](/kapacitor/v1.5/nodes/stats_node/)
+Returns: [StatsNode](/kapacitor/v1.4/nodes/stats_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Stddev
 
@@ -916,9 +928,9 @@ Compute the standard deviation.
 join|stddev(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Sum
 
@@ -929,9 +941,9 @@ Compute the sum of all values.
 join|sum(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### SwarmAutoscale
 
@@ -942,9 +954,9 @@ Create a node that can trigger autoscale events for a docker swarm cluster.
 join|swarmAutoscale()
 ```
 
-Returns: [SwarmAutoscaleNode](/kapacitor/v1.5/nodes/swarm_autoscale_node/)
+Returns: [SwarmAutoscaleNode](/kapacitor/v1.4/nodes/swarm_autoscale_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Top
 
@@ -955,9 +967,9 @@ Select the top `num` points for `field` and sort by any extra tags or fields.
 join|top(num int64, field string, fieldsAndTags ...string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Union
 
@@ -968,9 +980,9 @@ Perform the union of this node and all other given nodes.
 join|union(node ...Node)
 ```
 
-Returns: [UnionNode](/kapacitor/v1.5/nodes/union_node/)
+Returns: [UnionNode](/kapacitor/v1.4/nodes/union_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Where
 
@@ -981,9 +993,9 @@ Create a new node that filters the data stream by a given expression.
 join|where(expression ast.LambdaNode)
 ```
 
-Returns: [WhereNode](/kapacitor/v1.5/nodes/where_node/)
+Returns: [WhereNode](/kapacitor/v1.4/nodes/where_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Window
 
@@ -996,6 +1008,6 @@ NOTE: Window can only be applied to stream edges.
 join|window()
 ```
 
-Returns: [WindowNode](/kapacitor/v1.5/nodes/window_node/)
+Returns: [WindowNode](/kapacitor/v1.4/nodes/window_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>

@@ -13,23 +13,20 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[default](#description)&nbsp;(&nbsp;)** | Create a node that can set defaults for missing tags or fields.  |
+| **[default](#descr)&nbsp;(&nbsp;)** | Create a node that can set defaults for missing tags or fields.  |
 
 ### Property Methods
 
 | Setters | Description |
 |:---|:---|
 | **[field](#field)&nbsp;(&nbsp;`name`&nbsp;`string`,&nbsp;`value`&nbsp;`interface{}`)** | Define a field default.  |
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during evaluation.  |
 | **[tag](#tag)&nbsp;(&nbsp;`name`&nbsp;`string`,&nbsp;`value`&nbsp;`string`)** | Define a tag default.  |
 
 
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/default_node/#alert), [Barrier](/kapacitor/v1.4/nodes/default_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/default_node/#bottom), [Combine](/kapacitor/v1.4/nodes/default_node/#combine), [Count](/kapacitor/v1.4/nodes/default_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/default_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/default_node/#deadman), [Default](/kapacitor/v1.4/nodes/default_node/#default), [Delete](/kapacitor/v1.4/nodes/default_node/#delete), [Derivative](/kapacitor/v1.4/nodes/default_node/#derivative), [Difference](/kapacitor/v1.4/nodes/default_node/#difference), [Distinct](/kapacitor/v1.4/nodes/default_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/default_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/default_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/default_node/#eval), [First](/kapacitor/v1.4/nodes/default_node/#first), [Flatten](/kapacitor/v1.4/nodes/default_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/default_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/default_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/default_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/default_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/default_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/default_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/default_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/default_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/default_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/default_node/#last), [Log](/kapacitor/v1.4/nodes/default_node/#log), [Max](/kapacitor/v1.4/nodes/default_node/#max), [Mean](/kapacitor/v1.4/nodes/default_node/#mean), [Median](/kapacitor/v1.4/nodes/default_node/#median), [Min](/kapacitor/v1.4/nodes/default_node/#min), [Mode](/kapacitor/v1.4/nodes/default_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/default_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/default_node/#percentile), [Sample](/kapacitor/v1.4/nodes/default_node/#sample), [Shift](/kapacitor/v1.4/nodes/default_node/#shift), [Sideload](/kapacitor/v1.4/nodes/default_node/#sideload), [Spread](/kapacitor/v1.4/nodes/default_node/#spread), [StateCount](/kapacitor/v1.4/nodes/default_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/default_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/default_node/#stats), [Stddev](/kapacitor/v1.4/nodes/default_node/#stddev), [Sum](/kapacitor/v1.4/nodes/default_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/default_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/default_node/#top), [Union](/kapacitor/v1.4/nodes/default_node/#union), [Where](/kapacitor/v1.4/nodes/default_node/#where), [Window](/kapacitor/v1.4/nodes/default_node/#window)
-
----
-
+<a id='descr'/><hr/><br/>
 ### Description
 
 Defaults fields and tags on data points.
@@ -56,7 +53,8 @@ Available Statistics:
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
-## Properties
+Properties
+----------
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -75,17 +73,6 @@ default.field(name string, value interface{})
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
-### Quiet
-
-Suppress errors during execution.
-
-```javascript
-default.quiet()
-```
-
-<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
-
-
 ### Tag
 
 Define a tag default.
@@ -98,7 +85,8 @@ default.tag(name string, value string)
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
-## Chaining Methods
+Chaining Methods
+----------------
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

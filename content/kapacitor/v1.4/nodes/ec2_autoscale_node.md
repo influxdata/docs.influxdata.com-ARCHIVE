@@ -13,7 +13,7 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[ec2Autoscale](#description)&nbsp;(&nbsp;)** | Create a node that can trigger autoscale events for an EC2 Autoscale group.  |
+| **[ec2Autoscale](#descr)&nbsp;(&nbsp;)** | Create a node that can trigger autoscale events for an EC2 Autoscale group.  |
 
 ### Property Methods
 
@@ -28,16 +28,13 @@ menu:
 | **[max](#max)&nbsp;(&nbsp;`value`&nbsp;`int64`)** | The maximum scale factor to set. If 0 then there is no upper limit. Default: 0, a.k.a no limit.  |
 | **[min](#min)&nbsp;(&nbsp;`value`&nbsp;`int64`)** | The minimum scale factor to set. Default: 1  |
 | **[outputGroupNameTag](#outputgroupnametag)&nbsp;(&nbsp;`value`&nbsp;`string`)** | OutputGroupName is the name of a tag into which the group name will be written for output autoscale events. Defaults to the value of GroupNameTag if its not empty.  |
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 | **[replicas](#replicas)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Replicas is a lambda expression that should evaluate to the desired number of replicas for the resource.  |
 
 
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/ec2_autoscale_node/#alert), [Barrier](/kapacitor/v1.4/nodes/ec2_autoscale_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/ec2_autoscale_node/#bottom), [Combine](/kapacitor/v1.4/nodes/ec2_autoscale_node/#combine), [Count](/kapacitor/v1.4/nodes/ec2_autoscale_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/ec2_autoscale_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/ec2_autoscale_node/#deadman), [Default](/kapacitor/v1.4/nodes/ec2_autoscale_node/#default), [Delete](/kapacitor/v1.4/nodes/ec2_autoscale_node/#delete), [Derivative](/kapacitor/v1.4/nodes/ec2_autoscale_node/#derivative), [Difference](/kapacitor/v1.4/nodes/ec2_autoscale_node/#difference), [Distinct](/kapacitor/v1.4/nodes/ec2_autoscale_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/ec2_autoscale_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/ec2_autoscale_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/ec2_autoscale_node/#eval), [First](/kapacitor/v1.4/nodes/ec2_autoscale_node/#first), [Flatten](/kapacitor/v1.4/nodes/ec2_autoscale_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/ec2_autoscale_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/ec2_autoscale_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/ec2_autoscale_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/ec2_autoscale_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/ec2_autoscale_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/ec2_autoscale_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/ec2_autoscale_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/ec2_autoscale_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/ec2_autoscale_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/ec2_autoscale_node/#last), [Log](/kapacitor/v1.4/nodes/ec2_autoscale_node/#log), [Mean](/kapacitor/v1.4/nodes/ec2_autoscale_node/#mean), [Median](/kapacitor/v1.4/nodes/ec2_autoscale_node/#median), [Mode](/kapacitor/v1.4/nodes/ec2_autoscale_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/ec2_autoscale_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/ec2_autoscale_node/#percentile), [Sample](/kapacitor/v1.4/nodes/ec2_autoscale_node/#sample), [Shift](/kapacitor/v1.4/nodes/ec2_autoscale_node/#shift), [Sideload](/kapacitor/v1.4/nodes/ec2_autoscale_node/#sideload), [Spread](/kapacitor/v1.4/nodes/ec2_autoscale_node/#spread), [StateCount](/kapacitor/v1.4/nodes/ec2_autoscale_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/ec2_autoscale_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/ec2_autoscale_node/#stats), [Stddev](/kapacitor/v1.4/nodes/ec2_autoscale_node/#stddev), [Sum](/kapacitor/v1.4/nodes/ec2_autoscale_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/ec2_autoscale_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/ec2_autoscale_node/#top), [Union](/kapacitor/v1.4/nodes/ec2_autoscale_node/#union), [Where](/kapacitor/v1.4/nodes/ec2_autoscale_node/#where), [Window](/kapacitor/v1.4/nodes/ec2_autoscale_node/#window)
-
----
-
+<a id='descr'/><hr/><br/>
 ### Description
 
 EC2AutoscaleNode triggers autoscale events for a group on a AWS Autoscaling group.
@@ -107,7 +104,8 @@ Available Statistics:
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
-## Properties
+Properties
+----------
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -240,18 +238,6 @@ ec2Autoscale.outputGroupNameTag(value string)
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
-### Quiet
-
-Suppress errors during execution.
-
-
-```javascript
-ec2Autoscale.quiet()
-```
-
-<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
-
-
 ### Replicas
 
 Replicas is a lambda expression that should evaluate to the desired number of replicas for the resource.
@@ -264,7 +250,8 @@ ec2Autoscale.replicas(value ast.LambdaNode)
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
-## Chaining Methods
+Chaining Methods
+----------------
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

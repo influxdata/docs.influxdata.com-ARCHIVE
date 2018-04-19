@@ -13,20 +13,14 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[batch](#description)** | Has no constructor signature. |
-
+| **[batch](#descr)** | Has no constructor signature. |
 ### Property Methods
-
-| Setters | Description |
-|:--------|:------------|
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
+This node has no properties that can be set.
 
 
 ### Chaining Methods
 [Deadman](/kapacitor/v1.4/nodes/batch_node/#deadman), [Query](/kapacitor/v1.4/nodes/batch_node/#query), [Stats](/kapacitor/v1.4/nodes/batch_node/#stats)
-
----
-
+<a id='descr'/><hr/><br/>
 ### Description
 
 A node that handles creating several child QueryNodes.
@@ -57,24 +51,8 @@ Available Statistics:
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
-## Properties
-
-Property methods modify state on the calling node.
-They do not add another node to the pipeline, and always return a reference to the calling node.
-Property methods are marked using the `.` operator.
-
-
-### Quiet
-
-Suppress errors during execution.
-
-```javascript
-batch.quiet()
-```
-
-<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
-
-## Chaining Methods
+Chaining Methods
+----------------
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.
@@ -93,7 +71,7 @@ Example:
 
 
 ```javascript
-    var data = batch
+    var data = stream
         |from()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
@@ -107,7 +85,7 @@ Example:
 
 
 ```javascript
-    var data = batch
+    var data = stream
         |from()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
@@ -131,7 +109,7 @@ Example:
 
 
 ```javascript
-    var data = batch
+    var data = stream
         |from()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
@@ -147,7 +125,7 @@ Example:
 
 
 ```javascript
-    var data = batch
+    var data = stream
         |from()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     // Only trigger the alert if the time of day is between 8am-5pm.

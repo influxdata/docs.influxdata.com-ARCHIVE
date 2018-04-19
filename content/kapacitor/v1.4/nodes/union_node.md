@@ -13,22 +13,19 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[union](#description)&nbsp;(&nbsp;`node`&nbsp;`...Node`)** | Perform the union of this node and all other given nodes.  |
+| **[union](#descr)&nbsp;(&nbsp;`node`&nbsp;`...Node`)** | Perform the union of this node and all other given nodes.  |
 
 ### Property Methods
 
 | Setters | Description |
 |:---|:---|
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 | **[rename](#rename)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The new name of the stream. If empty the name of the left node (i.e. `leftNode.union(otherNode1, otherNode2)`) is used.  |
 
 
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/union_node/#alert), [Barrier](/kapacitor/v1.4/nodes/union_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/union_node/#bottom), [Combine](/kapacitor/v1.4/nodes/union_node/#combine), [Count](/kapacitor/v1.4/nodes/union_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/union_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/union_node/#deadman), [Default](/kapacitor/v1.4/nodes/union_node/#default), [Delete](/kapacitor/v1.4/nodes/union_node/#delete), [Derivative](/kapacitor/v1.4/nodes/union_node/#derivative), [Difference](/kapacitor/v1.4/nodes/union_node/#difference), [Distinct](/kapacitor/v1.4/nodes/union_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/union_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/union_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/union_node/#eval), [First](/kapacitor/v1.4/nodes/union_node/#first), [Flatten](/kapacitor/v1.4/nodes/union_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/union_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/union_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/union_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/union_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/union_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/union_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/union_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/union_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/union_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/union_node/#last), [Log](/kapacitor/v1.4/nodes/union_node/#log), [Max](/kapacitor/v1.4/nodes/union_node/#max), [Mean](/kapacitor/v1.4/nodes/union_node/#mean), [Median](/kapacitor/v1.4/nodes/union_node/#median), [Min](/kapacitor/v1.4/nodes/union_node/#min), [Mode](/kapacitor/v1.4/nodes/union_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/union_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/union_node/#percentile), [Sample](/kapacitor/v1.4/nodes/union_node/#sample), [Shift](/kapacitor/v1.4/nodes/union_node/#shift), [Sideload](/kapacitor/v1.4/nodes/union_node/#sideload), [Spread](/kapacitor/v1.4/nodes/union_node/#spread), [StateCount](/kapacitor/v1.4/nodes/union_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/union_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/union_node/#stats), [Stddev](/kapacitor/v1.4/nodes/union_node/#stddev), [Sum](/kapacitor/v1.4/nodes/union_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/union_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/union_node/#top), [Union](/kapacitor/v1.4/nodes/union_node/#union), [Where](/kapacitor/v1.4/nodes/union_node/#where), [Window](/kapacitor/v1.4/nodes/union_node/#window)
-
----
-
+<a id='descr'/><hr/><br/>
 ### Description
 
 Takes the union of all of its parents.
@@ -60,22 +57,12 @@ Example:
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
-## Properties
+Properties
+----------
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
 Property methods are marked using the `.` operator.
-
-
-### Quiet
-
-Suppress errors during execution.
-
-```javascript
-union.quiet()
-```
-
-<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Rename
@@ -92,7 +79,8 @@ union.rename(value string)
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
-## Chaining Methods
+Chaining Methods
+----------------
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.

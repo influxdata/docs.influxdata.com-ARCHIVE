@@ -13,22 +13,19 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[stats](#description)&nbsp;(&nbsp;`interval`&nbsp;`time.Duration`)** | Create a new stream of data that contains the internal statistics of the node. The interval represents how often to emit the statistics based on real time. This means the interval time is independent of the times of the data points the source node is receiving.  |
+| **[stats](#descr)&nbsp;(&nbsp;`interval`&nbsp;`time.Duration`)** | Create a new stream of data that contains the internal statistics of the node. The interval represents how often to emit the statistics based on real time. This means the interval time is independent of the times of the data points the source node is receiving.  |
 
 ### Property Methods
 
 | Setters | Description |
 |:---|:---|
 | **[align](#align)&nbsp;(&nbsp;)** | Round times to the StatsNode.Interval value.  |
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 
 
 
 ### Chaining Methods
 [Alert](/kapacitor/v1.4/nodes/stats_node/#alert), [Barrier](/kapacitor/v1.4/nodes/stats_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/stats_node/#bottom), [Combine](/kapacitor/v1.4/nodes/stats_node/#combine), [Count](/kapacitor/v1.4/nodes/stats_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/stats_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/stats_node/#deadman), [Default](/kapacitor/v1.4/nodes/stats_node/#default), [Delete](/kapacitor/v1.4/nodes/stats_node/#delete), [Derivative](/kapacitor/v1.4/nodes/stats_node/#derivative), [Difference](/kapacitor/v1.4/nodes/stats_node/#difference), [Distinct](/kapacitor/v1.4/nodes/stats_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/stats_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/stats_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/stats_node/#eval), [First](/kapacitor/v1.4/nodes/stats_node/#first), [Flatten](/kapacitor/v1.4/nodes/stats_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/stats_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/stats_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/stats_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/stats_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/stats_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/stats_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/stats_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/stats_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/stats_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/stats_node/#last), [Log](/kapacitor/v1.4/nodes/stats_node/#log), [Max](/kapacitor/v1.4/nodes/stats_node/#max), [Mean](/kapacitor/v1.4/nodes/stats_node/#mean), [Median](/kapacitor/v1.4/nodes/stats_node/#median), [Min](/kapacitor/v1.4/nodes/stats_node/#min), [Mode](/kapacitor/v1.4/nodes/stats_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/stats_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/stats_node/#percentile), [Sample](/kapacitor/v1.4/nodes/stats_node/#sample), [Shift](/kapacitor/v1.4/nodes/stats_node/#shift), [Sideload](/kapacitor/v1.4/nodes/stats_node/#sideload), [Spread](/kapacitor/v1.4/nodes/stats_node/#spread), [StateCount](/kapacitor/v1.4/nodes/stats_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/stats_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/stats_node/#stats), [Stddev](/kapacitor/v1.4/nodes/stats_node/#stddev), [Sum](/kapacitor/v1.4/nodes/stats_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/stats_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/stats_node/#top), [Union](/kapacitor/v1.4/nodes/stats_node/#union), [Where](/kapacitor/v1.4/nodes/stats_node/#where), [Window](/kapacitor/v1.4/nodes/stats_node/#window)
-
----
-
+<a id='descr'/><hr/><br/>
 ### Description
 
 A [StatsNode](/kapacitor/v1.4/nodes/stats_node/) emits internal statistics about the another node at a given interval.
@@ -71,7 +68,8 @@ This is a limitation of the current implementation and may be removed in the fut
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
-## Properties
+Properties
+----------
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -90,18 +88,8 @@ stats.align()
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
-### Quiet
-
-Suppress errors during execution.
-
-```javascript
-stats.quiet()
-```
-
-<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
-
-
-## Chaining Methods
+Chaining Methods
+----------------
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.
