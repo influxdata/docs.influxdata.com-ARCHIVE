@@ -1,8 +1,9 @@
 ---
-title: Replacing nodes in a cluster
+title: Replacing InfluxDB Enterprise cluster meta nodes and data nodes
 
 menu:
   enterprise_influxdb_1_5:
+    name: Replacing cluster nodes
     weight: 10
     parent: Guides
 ---
@@ -20,7 +21,7 @@ Data nodes hold raw time-series data and metadata. Data shards and both distribu
 
 `influxd-ctl` is a CLI included in each meta node and is used to manage your InfluxDB Enterprise cluster.
 
-## Replacing Meta Nodes
+## Replacing InfluxDB Enterprise cluster meta nodes
 
 [Meta nodes](/enterprise_influxdb/v1.5/concepts/clustering/#meta-nodes) together form a [Raft](https://raft.github.io/) cluster in which nodes elect a leader through consensus vote.
 The leader oversees the management of the meta cluster, so it is important to replace non-leader nodes before the leader node.
@@ -164,7 +165,7 @@ curl localhost:8091/status | jq
 Remove the old leader node and replace it by following steps [2.1-2.4](#2-1-provision-a-new-meta-node).
 The minimum number of meta nodes you should have in your cluster is 3.
 
-## Replacing Data Nodes
+## Replacing InfluxDB Enterprise cluster data nodes
 
 [Data nodes](/enterprise_influxdb/v1.5/concepts/clustering/#data-nodes) house all raw time series data and metadata.
 The process of replacing data nodes is as follows:
@@ -235,7 +236,7 @@ Within the duration defined by [`anti-entropy.check-interval`](/enterprise_influ
 the AE service will begin copying shards from other shard owners to the new node.
 The time it takes for copying to complete is determined by the number of shards copied and how much data is stored in each.
 
-### 4. Check the copy-shard-status
+### 4. Check the `copy-shard-status`
 Check on the status of the copy-shard process with:
 
 ```bash
