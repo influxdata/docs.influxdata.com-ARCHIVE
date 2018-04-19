@@ -70,7 +70,7 @@ Example:
             .as('login', 'other')
 ```
 
-In the above example all combination pairs are created.
+In the example above, all combination pairs are created.
 
 Example:
 
@@ -96,10 +96,10 @@ Property methods are marked using the `.` operator.
 ### As
 
 Prefix names for all fields from the respective nodes.
-Each field from the parent nodes will be prefixed with the provided name and a '.'.
+Each field from the parent nodes will be prefixed with the provided name and a `.`.
 See the example above.
 
-The names cannot have a dot '.' character.
+The names cannot have a dot `.` character.
 
 
 
@@ -126,9 +126,9 @@ combine.delimiter(value string)
 ### Max
 
 Maximum number of possible combinations.
-Since the number of possible combinations can grow very rapidly
+Since the number of possible combinations can grow very rapidly,
 you can set a maximum number of combinations allowed.
-If the max is crossed, an error is logged and the combinations are not calculated.
+If the max is exceeded, an error is logged and the combinations are not calculated.
 Default: 10,000
 
 
@@ -177,9 +177,8 @@ Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
 ### Barrier
 
-Create a new Barrier node that emits a BarrierMessage periodically
-
-One BarrierMessage will be emitted every period duration
+Create a new Barrier node that emits a BarrierMessage periodically.
+One Barrier message will be emitted every period duration.
 
 
 ```javascript
@@ -245,7 +244,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### Deadman
 
-Helper function for creating an alert on low throughput, a.k.a. deadman's switch.
+Helper function for creating an alert on low throughput, a.k.a. Deadman's switch.
 
 - Threshold -- trigger alert if throughput drops below threshold in points/interval.
 - Interval -- how often to check the throughput.
@@ -264,7 +263,8 @@ Example:
     data...
 ```
 
-The above is equivalent to this
+The above is equivalent to this.
+
 Example:
 
 
@@ -357,7 +357,7 @@ Returns: [DeleteNode](/kapacitor/v1.4/nodes/delete_node/)
 
 ### Derivative
 
-Create a new node that computes the derivative of adjacent points.
+Create a node that computes the derivative of adjacent points.
 
 
 ```javascript
@@ -409,7 +409,7 @@ Returns: [Ec2AutoscaleNode](/kapacitor/v1.4/nodes/ec2_autoscale_node/)
 
 ### Elapsed
 
-Compute the elapsed time between points
+Compute the elapsed time between points.
 
 
 ```javascript
@@ -485,7 +485,7 @@ Returns: [GroupByNode](/kapacitor/v1.4/nodes/group_by_node/)
 
 ### HoltWinters
 
-Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
+Compute the Holt-Winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
 
 
 ```javascript
@@ -498,7 +498,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### HoltWintersWithFit
 
-Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
+Compute the Holt-Winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
 This method also outputs all the points used to fit the data in addition to the forecasted data.
 
 
@@ -529,7 +529,7 @@ Returns: [HTTPOutNode](/kapacitor/v1.4/nodes/http_out_node/)
 
 ### HttpPost
 
-Creates an HTTP Post node that POSTS received data to the provided HTTP endpoint.
+Creates an HTTP POST node that POSTS received data to the provided HTTP endpoint.
 HttpPost expects 0 or 1 arguments. If 0 arguments are provided, you must specify an
 endpoint property method.
 
@@ -544,7 +544,7 @@ Returns: [HTTPPostNode](/kapacitor/v1.4/nodes/http_post_node/)
 
 ### InfluxDBOut
 
-Create an influxdb output node that will store the incoming data into InfluxDB.
+Create an InfluxDB output node that will store the incoming data into InfluxDB.
 
 
 ```javascript
@@ -570,7 +570,7 @@ Returns: [JoinNode](/kapacitor/v1.4/nodes/join_node/)
 
 ### K8sAutoscale
 
-Create a node that can trigger autoscale events for a kubernetes cluster.
+Create a node that can trigger autoscale events for a Kubernetes cluster.
 
 
 ```javascript
@@ -583,7 +583,7 @@ Returns: [K8sAutoscaleNode](/kapacitor/v1.4/nodes/k8s_autoscale_node/)
 
 ### KapacitorLoopback
 
-Create an kapacitor loopback node that will send data back into Kapacitor as a stream.
+Create a Kapacitor loopback node that will send data back into Kapacitor as a stream.
 
 
 ```javascript
@@ -702,7 +702,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### Sample
 
-Create a new node that samples the incoming points or batches.
+Create a node that samples the incoming points or batches.
 
 One point will be emitted every count or duration specified.
 
@@ -717,7 +717,7 @@ Returns: [SampleNode](/kapacitor/v1.4/nodes/sample_node/)
 
 ### Shift
 
-Create a new node that shifts the incoming points or batches in time.
+Create a node that shifts the incoming points or batches in time.
 
 
 ```javascript
@@ -730,7 +730,7 @@ Returns: [ShiftNode](/kapacitor/v1.4/nodes/shift_node/)
 
 ### Sideload
 
-Create a node that can load data from external sources
+Create a node that can load data from external sources.
 
 
 ```javascript
@@ -782,7 +782,7 @@ Returns: [StateDurationNode](/kapacitor/v1.4/nodes/state_duration_node/)
 
 ### Stats
 
-Create a new stream of data that contains the internal statistics of the node.
+Create a stream of data that contains the internal statistics of the node.
 The interval represents how often to emit the statistics based on real time.
 This means the interval time is independent of the times of the data points the source node is receiving.
 
@@ -823,7 +823,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### SwarmAutoscale
 
-Create a node that can trigger autoscale events for a docker swarm cluster.
+Create a node that can trigger autoscale events for a Docker swarm cluster.
 
 
 ```javascript
@@ -862,7 +862,7 @@ Returns: [UnionNode](/kapacitor/v1.4/nodes/union_node/)
 
 ### Where
 
-Create a new node that filters the data stream by a given expression.
+Create a node that filters the data stream by a given expression.
 
 
 ```javascript
@@ -875,7 +875,7 @@ Returns: [WhereNode](/kapacitor/v1.4/nodes/where_node/)
 
 ### Window
 
-Create a new node that windows the stream by time.
+Create a node that windows the stream by time.
 
 NOTE: Window can only be applied to stream edges.
 
