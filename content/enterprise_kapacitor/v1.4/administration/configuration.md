@@ -1,14 +1,15 @@
 ---
-title: Configuration
-draft: false
+title: Configuring Kapacitor Enterprise
+description: Covers Kapacitor Enterprise configuration groups, licensing, authentication, cluster communications, and remote procedure calls (RPCs).
 
 menu:
   enterprise_kapacitor_1_4:
+    name: Configuration
     weight: 1
     parent: Administration
 ---
 
-## Contents
+## Content
 
 * [Configuration groups](#configuration-groups)
 * [Enterprise licensing](#enterprise-licensing)
