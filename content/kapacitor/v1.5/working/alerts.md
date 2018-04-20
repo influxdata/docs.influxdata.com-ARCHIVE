@@ -214,12 +214,19 @@ Send alert events to a Kafka cluster.
 
 Options:
 
-| Name    | Type   | Description    |
-| ----    | ----   | -----------    |
-| cluster | string | add something  |
-| topic   | string | add something  |
-| key     | string | add something  |
-| message | string | add something  |
+| Name     | Type   | Description                 |
+| ----     | ----   | -----------                 |
+| cluster  | string | Name of the Kafka cluster.  |
+| topic    | string | Kafka topic.                |
+| template | string | Message template.           |
+
+```yaml
+kind: hipchat
+options:
+    cluster: 'kafka-cluster'
+    topic: 'topic-name'
+    template: 'template-name'
+```
 
 #### Log
 
