@@ -3,6 +3,7 @@ title: Authentication and authorization in Kapacitor Enterprise
 
 menu:
   enterprise_kapacitor_1_4:
+    name: Authentication and authorization
     weight: 7
     parent: Administration
 ---
@@ -175,7 +176,7 @@ in turn.
 A high level view of the authentication and authorization architecture is
 presented in Image 1.
 
-**Image 1: Authentication and authorization in the TICK stack (click to enlarge  )**
+**Image 1: Authentication and authorization in the TICK stack (click to enlarge)**
 
 <div id="holder-arch-dia">
 <a href="javascript:doModal('arch-dia')" id="anchor-arch-dia">
@@ -191,7 +192,8 @@ credentials need to be supplied.
 
 For example, when using the Kapacitor client.
 
-**Example 1: Using Credentials with Kapacitor CLI Client**
+**Example 1: Using credentials with Kapacitor CLI client**
+
 ```
 kapacitor -url https://admin:changeit@cluster_node_1:9092 list tasks
 ID                                                 Type      Status    Executing Databases and Retention Policies
@@ -351,6 +353,7 @@ The Influxd-Meta API provides an endpoint `/user` for managing users.
 To view a list of existing users.
 
 **Example 4: Listing users**
+
 ```
 $ curl -u "admin:changeit" -s https://cluster_node_1:8091/user | python -m json.tool
 {
@@ -392,6 +395,7 @@ node returns a 307 redirect message, try resending the request to the lead node
 indicated by the `Location` field in the HTTP header.
 
 **Example 5: Creating a user against a follower node**
+
 ```
 $ curl -u "admin:changeit" -s -v -d '{"action":"create","user":{"name":"phantom2","password":"changeit"}}' https://cluster_node_2:8091/user
 *   Trying 172.31.16.140...
@@ -437,6 +441,7 @@ $ curl -u "admin:changeit" -s -v -d '{"action":"create","user":{"name":"phantom2
 To create a new user against the lead node.  
 
 **Example 6: Creating a user against the lead node**
+
 ```
 $ curl -u "admin:changeit" -s -v -d '{"action":"create","user":{"name":"phantom","password":"changeit"}}' https://cluster_node_1:8091/user
 *   Trying 172.31.16.108...
@@ -480,6 +485,7 @@ $ curl -u "admin:changeit" -s -v -d '{"action":"create","user":{"name":"phantom"
 To get a user details document.
 
 **Example 7: Retrieving a user details document**
+
 ```
 $ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/user?name=phantom | python -m json.tool
 {
@@ -495,6 +501,7 @@ $ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/user?name=
 To grant permissions to a user.
 
 **Example 8: Granting permissions to a user**
+
 ```
 $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"add-permissions","user":{"name":"phantom","permissions":{"":["KapacitorAPI","KapacitorConfigAPI"]}}}' https://cluster_node_1:8091/user
 *   Trying 172.31.16.108...
@@ -536,6 +543,7 @@ $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"add-permissions","us
 Verify permission grant.
 
 **Example 9: Verifying user permissions**
+
 ```
 $ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/user?name=phantom | python -m json.tool
 {
@@ -557,6 +565,7 @@ $ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/user?name=
 To remove permissions.
 
 **Example 10: Removing permissions from a user**
+
 ```
 $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"remove-permissions","user":{"name":"phantom","permissions":{"":["KapacitorConfigAPI"]}}}' https://cluster_node_1:8091/user
 *   Trying 172.31.16.108...
@@ -598,6 +607,7 @@ $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"remove-permissions",
 To delete a user.
 
 **Example 11: Removing a user**
+
 ```
 $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"delete","user":{"name":"phantom2"}}' https://cluster_node_1:8091/user
 *   Trying 172.31.16.108...
@@ -639,6 +649,7 @@ $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"delete","user":{"nam
 To verify user has been removed.
 
 **Example 12: Verifying user removal**
+
 ```
 $ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/user?name=phantom
 {"error":"user not found"}
@@ -651,6 +662,7 @@ The Influxd-Meta API provides an endpoint `/role` for managing roles.
 To list roles.
 
 **Example 13: Listing roles**
+
 ```
 $ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/role | python -m json.tool
 {}
@@ -662,6 +674,7 @@ user the lead node must be used.
 To create a role.
 
 **Example 14: Creating a role**
+
 ```
 $ curl --negotiate -u "admin:changeit"  -v -d '{"action":"create","role":{"name":"spectre"}}' https://cluster_node_1:8091/role
 *   Trying 172.31.16.108...
@@ -704,6 +717,7 @@ $ curl --negotiate -u "admin:changeit"  -v -d '{"action":"create","role":{"name"
 Verify the role has been created.
 
 **Example 15: Verifying roles**
+
 ```
 $ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/role | python -m json.tool
 {
@@ -722,6 +736,7 @@ $ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/role | pyt
 Retrieve a record for a single node.
 
 **Example 16: Retrieving a role document**
+
 ```
 curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/role?name=spectre | python -m json.tool
 {
@@ -736,6 +751,7 @@ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/role?name=sp
 Add permissions to a role.
 
 **Example 17: Adding permissions to a role**
+
 ```
 $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"add-permissions","role":{"name":"spectre","permissions":{"":["KapacitorAPI","KapacitorConfigAPI"]}}}' https://cluster_node_1:8091/role
 *   Trying 172.31.16.108...
@@ -778,6 +794,7 @@ $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"add-permissions","ro
 Verify permissions have been added.
 
 **Example: Verifying role permissions**
+
 ```
 $ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/role?name=spectre | python -m json.tool
 {
@@ -798,6 +815,7 @@ $ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/role?name=
 Add user to role.
 
 **Example 19: Adding a user to a role**
+
 ```
 $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"add-users","role":{"name":"spectre","users":["phantom"]}}'  https://cluster_node_1:8091/role
 *   Trying 172.31.16.108...
@@ -840,6 +858,7 @@ $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"add-users","role":{"
 Verify user has been added to role.
 
 **Example 20: Verifying user in role**
+
 ```
 $ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/role?name=spectre | python -m json.tool
 {
@@ -863,6 +882,7 @@ $ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/role?name=
 Remove a user from a role.
 
 **Example 21: Removing a user from a role**
+
 ```
 $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"remove-users","role":{"name":"spectre","users":["phantom"]}}' https://admin:changeit@cluster_node_1:8091/role
 *   Trying 172.31.16.108...
@@ -905,6 +925,7 @@ $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"remove-users","role"
 Remove a permission from a role.
 
 **Example 22: Removing a permission from a role**
+
 ```
 $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"remove-permissions","role":{"name":"spectre","permissions":{"":["KapacitorConfigAPI"]}}}' https://cluster_node_1:8091/role
 *   Trying 172.31.16.108...
@@ -947,6 +968,7 @@ $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"remove-permissions",
 Delete a role.
 
 **Example 23: Deleting a role**
+
 ```
 $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"delete","role":{"name":"spectre"}}' https://cluster_node_1:8091/role
 *   Trying 172.31.16.108...
@@ -989,10 +1011,14 @@ $ curl --negotiate -u "admin:changeit" -s -v -d '{"action":"delete","role":{"nam
 Verify role no longer exists.
 
 **Example 24: Verifying role deletion**
+
 ```
 $ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/role?name=spectre | python -m json.tool
 {
     "error": "role not found"
 }
 ```
+### Kapacitor user and privilege management using Chronograf
+
+See [Kapacitor user and privilege management](/chronograf/v1.4/administration/kapacitor-user-privilege-management/) in the Chronograf documentation.
 
