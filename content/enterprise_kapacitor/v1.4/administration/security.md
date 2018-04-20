@@ -1,9 +1,10 @@
 ---
-title: Managing security
-draft: false
+title: Managing security in Kapacitor Enterprise
+description: Covers Kapacitor Enterprise security, integration with secure InfluxDB Enterprise, using TLS, and authentication.
 
 menu:
   enterprise_kapacitor_1_4:
+    name: Managing security
     weight: 4
     parent: Administration
 ---
