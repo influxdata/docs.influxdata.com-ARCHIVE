@@ -2,8 +2,8 @@
 title: Administering Kapacitor Enterprise
 description: Covers Kapacitor Enterprise configuration, security, and authentication and authorization.
 menu:
-  name: Administration
   enterprise_kapacitor_1_4:
+    name: Administration
     weight: 5
 
 ---

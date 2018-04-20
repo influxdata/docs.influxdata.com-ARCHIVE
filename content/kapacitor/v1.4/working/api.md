@@ -2,8 +2,8 @@
 title: Kapacitor HTTP API reference
 description: Covers the Kapacitor HTTP API, writing data, tasks, templates, recordings, replays, alerts, overriding configurations, storage, logging, testing services, and other information.
 menu:
-  name: HTTP API reference
   kapacitor_1_4:
+    name: HTTP API reference
     weight: 10
     parent: work-w-kapacitor
 ---
