@@ -6,6 +6,23 @@ menu:
     parent: about_the_project
 ---
 
+## v1.5.2 [2018-04-12]
+-------------------
+
+### Features
+
+* Check for root user when running `buildtsi`.
+* [1.5] Adjustable TSI Compaction Threshold.
+
+### Bug fixes
+
+* backport: check for failure case where backup directory has no manifest files.
+* Fix regression to allow `now()` to be used as the group by offset again.
+* [1.5] Revert `Use MADV_WILLNEED when loading TSM files`.
+* Ignore index size in `Engine.DiskSize()`.
+* [1.5] Fix `buildtsi` partition key.
+* Ensure that conditions are encoded correctly even if the AST is not properly formed.
+
 ## v1.5.1 [2018-03-20]
 
 ### Bug fixes

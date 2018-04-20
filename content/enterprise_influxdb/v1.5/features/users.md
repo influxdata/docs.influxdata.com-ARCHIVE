@@ -109,7 +109,7 @@ The following table describes permissions required to execute the associated dat
 |ManageShardPermission|DropShardStatement,ShowShardGroupsStatement, ShowShardsStatement|
 |ManageQueryPermission|KillQueryStatement, ShowQueriesStatement|
 |MonitorPermission|ShowDiagnosticsStatement, ShowStatsStatement|
-|ReadDataPermission|ShowFieldKeysStatement, ShowMeasurementsStatement, ShowSeriesStatement, ShowTagKeysStatement, ShowTagValuesStatement|
+|ReadDataPermission|ShowFieldKeysStatement, ShowMeasurementsStatement, ShowSeriesStatement, ShowTagKeysStatement, ShowTagValuesStatement, ShowRetentionPoliciesStatement|
 |NoPermissions|ShowDatabasesStatement|
 |Determined by type of select statement|SelectStatement|
 

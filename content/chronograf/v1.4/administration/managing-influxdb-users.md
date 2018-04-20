@@ -1,5 +1,6 @@
 ---
 title: Managing InfluxDB users in Chronograf
+description: Using Chronograf to enable authentication and manage InfluxDB OSS and InfluxDB Enterprise users.
 aliases:
   - /chronograf/v1.4/administration/user-management/
 menu:
@@ -284,8 +285,9 @@ Permission to read data.
 [`SHOW FIELD KEYS`](/influxdb/latest/query_language/schema_exploration/#show-field-keys),
 [`SHOW MEASUREMENTS`](/influxdb/latest/query_language/schema_exploration/#show-measurements),
 [`SHOW SERIES`](/influxdb/latest/query_language/schema_exploration/#show-series),
-[`SHOW TAG KEYS`](/influxdb/latest/query_language/schema_exploration/#show-tag-keys), and
-[`SHOW TAG VALUES`](/influxdb/latest/query_language/schema_exploration/#show-tag-values)
+[`SHOW TAG KEYS`](/influxdb/latest/query_language/schema_exploration/#show-tag-keys),
+[`SHOW TAG VALUES`](/influxdb/latest/query_language/schema_exploration/#show-tag-values), and
+[`SHOW RETENTION POLICIES`](/influxdb/latest/query_language/schema_exploration/#show-retention-policies)
 
 **Pages in Chronograf that require this permission**: Admin, Alerting, Dashboards, Data Explorer, Host List
 

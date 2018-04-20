@@ -1,5 +1,6 @@
 ---
-title: Using alert topics
+title: Using Kapacitor alert topics
+description: Using Kapacitor to create alert topics and send alerts to those topics. Examples cover CPU usage, Slack channels, and chaining topics
 aliases:
   - /kapacitor/v1.4/examples/using_alert_topics/
   - /kapacitor/v1.4/guides/using_alert_topics/

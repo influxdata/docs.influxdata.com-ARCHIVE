@@ -17,12 +17,19 @@ menu:
 <br>
 <br>
 
-# Clustering
+## v1.5.2 [2018-04-12]
+
+This release builds off of the InfluxDB OSS 1.5.2 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
+
+### Bug fixes
+
+* Running backup snapshot with client's retryWithBackoff function.
+* Ensure that conditions are encoded correctly even if the AST is not properly formed.
 
 ## v1.5.1 [2018-03-20]
 
-> ***Note:*** This release builds off of the 1.5.1 release of InfluxDB OSS. Please see the [InfluxDB OSS release
-> notes](https://docs.influxdata.com/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
+This release builds off of the InfluxDB OSS 1.5.1 release. There are no Enterprise-specific changes.
+Please see the [InfluxDB OSS release notes](/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
 
 ## v1.5.0 [2018-03-06]
 

@@ -1,5 +1,6 @@
 ---
 title: Configuring Chronograf
+description: Configuration of Chronograf, including custom default settings, security, multiple users, and multiple organizations.
 menu:
   chronograf_1_4:
     name: Configuring

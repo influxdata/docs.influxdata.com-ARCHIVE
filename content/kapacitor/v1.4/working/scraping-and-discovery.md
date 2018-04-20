@@ -1,11 +1,12 @@
 ---
-title: Scraping and discovery
+title: Scraping and discovery with Kapacitor
+descriptiion: Using Kapacitor scraping and discovery to monitor targets, process data, and write data to InfluxDB.
 aliases:
   - /kapacitor/v1.4/pull_metrics/scraping-and-discovery/
   - /kapacitor/v1.4/pull_metrics/
 menu:
   kapacitor_1_4:
-    name: Dynamic Data Scraping
+    name: Dynamic data scraping
     weight: 6
     parent: work-w-kapacitor
 ---
@@ -26,7 +27,7 @@ There may be changes to the configuration and behavior in subsequent releases.
 
 The diagram below outlines the infrastructure for discovering and scraping data with Kapacitor.
 
-**Image 1 &ndash; Scrapping and Discovery work flow**
+**Image 1 &ndash; Scraping and discovery workflow**
 
 <img src="/img/kapacitor/pull-metrics.png" alt="conifguration-open" style="max-width: 1050px;" />
 
@@ -41,19 +42,19 @@ The application running on `A`, `B`, and `C` exposes a `/metrics` endpoint on it
 Use TICKscripts to filter, transform, and perform other tasks on the metrics data.
 In addition, if the data should be stored, configure a TICKscript to send it to [InfluxDB](/influxdb/v1.3/).
 
-### Pushing vs. Pulling Metrics
+### Pushing vs. pulling metrics
 
 By combining discovery with scraping, Kapacitor enables a metrics gathering infrastructure to pull metrics off of targets instead of requiring them to push metrics out to InfluxDB.
 Pulling metrics has several advantages in dynamic environments where a target may have a short lifecycle.
 
-## Configuring Scrapers and Discoverers
+## Configuring scrapers and discoverers
 
 A single scraper scrapes the targets from a single discoverer.
 Configuring both scrapers and discoverers comes down to configuring each individually and then informing the scraper about the discoverer.
 
 Below are all the configuration options for a scraper.
 
-**Example 1 &ndash; Scrapper Configuration**
+**Example 1 &ndash; Scraper configuration**
 
 ```
 [[scraper]]
@@ -81,7 +82,7 @@ Below are all the configuration options for a scraper.
 ```
 
 
-### Available Discoverers
+### Available discoverers
 
 Kapacitor supports the following services for discovery:
 

@@ -1,6 +1,6 @@
 ---
 title: TICKscript language reference
-
+description: Provides introductory information on working with TICKsccript, including syntax, lambda expressions, and the TICKscript specification.
 menu:
   kapacitor_1_4:
     name: TICKscript language reference

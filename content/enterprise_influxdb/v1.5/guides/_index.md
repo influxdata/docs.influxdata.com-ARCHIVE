@@ -11,5 +11,5 @@ menu:
 ## [Backing up and restoring in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/backup-and-restore/)
 ## [Fine-grained authorization in InfluxDB Enterprise](/enterprise_influxdb/v1.5/guides/fine-grained-authorization/)
 ## [Migrating InfluxDB OSS instances to InfluxDB Enterprise clusters](/enterprise_influxdb/v1.5/guides/migration/)
-## [Rebalancing InfluxDB Enterprise clusters](http://localhost:1313/enterprise_influxdb/v1.5/guides/rebalance/)
+## [Rebalancing InfluxDB Enterprise clusters](/enterprise_influxdb/v1.5/guides/rebalance/)
 ## [SMTP server setup](/enterprise_influxdb/v1.5/guides/smtp-server/)
