@@ -17,23 +17,23 @@ Use the command line tools [`influxd-ctl`](#influxd-ctl) and [`influx`](#influx)
     * [Syntax](#syntax)
     * [Global options](#global-options)
     * [Arguments](#arguments)
-        * [add-data](#add-data)
-        * [add-meta](#add-meta)
-        * [backup](#backup)
+        * [`add-data`](#add-data)
+        * [`add-meta`](#add-meta)
+        * [`backup`](#backup)
         * [copy-shard](#copy-shard)
-        * [copy-shard-status](#copy-shard-status)
-        * [join](#join)
-        * [kill-copy-shard](#kill-copy-shard)
+        * [`copy-shard-status`](#copy-shard-status)
+        * [`join`](#join)
+        * [`kill-copy-shard`](#kill-copy-shard)
         * [leave](#leave)
-        * [remove-data](#remove-data)
-        * [remove-meta](#remove-meta)
-        * [remove-shard](#remove-shard)
-        * [restore](#restore)
-        * [show](#show)
-        * [show-shards](#show-shards)
-        * [update-data](#update-data)
-        * [token](#token)
-        * [truncate-shards](#truncate-shards)
+        * [`remove-data`](#remove-data)
+        * [`remove-meta`](#remove-meta)
+        * [`remove-shard`](#remove-shard)
+        * [`restore`](#restore)
+        * [`show`](#show)
+        * [`show-shards`](#show-shards)
+        * [`update-data`](#update-data)
+        * [`token`](#token)
+        * [`truncate-shards`](#truncate-shards)
 * [influx](#influx)
 
 
@@ -831,7 +831,7 @@ Truncates hot [shards](/influxdb/v1.5/concepts/glossary/#shard), that is, shards
 truncate-shards [-delay <duration>]
 ```
 
-Options:
+**Options:**
 
 `-delay <duration>`  
 Determines when to truncate shards after [`now()`](/influxdb/v1.5/concepts/glossary/#now).
