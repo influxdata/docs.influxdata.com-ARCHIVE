@@ -21,7 +21,49 @@ Data nodes hold raw time-series data and metadata. Data shards are both distribu
 
 `influxd-ctl` is a CLI included in each meta node and is used to manage your InfluxDB Enterprise cluster.
 
-## Replacing InfluxDB Enterprise cluster meta nodes
+## Scenarios
+
+### Replacing nodes in clusters with security enabled
+Many InfluxDB Enterprise clusters are configured with security enabled, forcing secure TLS encryption between all nodes in the cluster.
+Both `influxd-ctl` and `curl`, the command line tools used when replacing nodes, have options that facilitate the use of TLS.
+
+#### `influxd-ctl -bind-tls`
+In order manage your cluster over TLS, pass the `-bind-tls` flag with any `influxd-ctl` commmand.
+
+> If using a self-signed certificate, pass the `-k` flag to skip certificate verification.
+
+```bash
+# Pattern
+influxd-ctl -bind-tls [-k] <command>
+
+# Example
+influxd-ctl -bind-tls remove-meta enterprise-meta-02:8091
+```
+
+#### `curl -k`
+`curl` natively supports TLS/SSL connections, but if using a self-signed certificate, pass the `-k`/`--insecure` flag to allow for "insecure" SSL connections.
+
+> Self-signed certificates are considered "insecure" due to their lack of a valid chain of authority. However, data is still encrypted when using self-signed certificates.
+
+```bash
+# Pattern
+curl [-k, --insecure] <url>
+
+# Example
+curl -k https://localhost:8091/status
+```
+
+### Replacing meta nodes in a functional cluster
+If all meta nodes in the cluster are fully functional, simply follow the steps for [replacing meta nodes](#replacing-meta-nodes-in-an-influxdb-enterprise-cluster).
+
+### Replacing an unresponsive meta node
+If replacing a meta node that is either unreachable or unrecoverable, you need to forcefully remove it from the meta cluster. Instructions for forcefully removing meta nodes are provided in the [step 2.2](#2-2-remove-the-non-leader-meta-node) of the [replacing meta nodes](#replacing-meta-nodes-in-an-influxdb-enterprise-cluster) process.
+
+### Replacing responsive and unresponsive data nodes in a cluster
+The process of replacing both responsive and unresponsive data nodes is the same. Simply follow the instructions for [replacing data nodes](#replacing-data-nodes-in-an-influxdb-enterprise-cluster).
+
+
+## Replacing meta nodes in an InfluxDB Enterprise cluster
 
 [Meta nodes](/enterprise_influxdb/v1.5/concepts/clustering/#meta-nodes) together form a [Raft](https://raft.github.io/) cluster in which nodes elect a leader through consensus vote.
 The leader oversees the management of the meta cluster, so it is important to replace non-leader nodes before the leader node.
@@ -85,7 +127,20 @@ influxd-ctl remove-meta enterprise-meta-02:8091
 
 > Only use `remove-meta` if you want to permanently remove a meta node from a cluster.
 
-> If the meta process is not running on the node you are trying to remove or the node is neither reachable nor recoverable, use the `-force` flag. More information is available [below](#replacing-an-unresponsive-meta-node).
+<!--  -->
+
+> **For unresponsive or unrecoverable meta nodes:**
+
+>If the meta process is not running on the node you are trying to remove or the node is neither reachable nor recoverable, use the `-force` flag.
+When forcefully removing a meta node, you must also pass the `-tcpAddr` flag with the TCP and HTTP bind addresses of the node you are removing.
+
+>```bash
+# Pattern
+influxd-ctl remove-meta -force -tcpAddr <meta-node-tcp-bind-address> <meta-node-http-bind-address>
+
+# Example
+influxd-ctl remove-meta -force -tcpAddr enterprise-meta-02:8089 enterprise-meta-02:8091
+```
 
 #### 2.3. Add the new meta node
 Once the non-leader meta node has been removed, use `influx-ctl add-meta` to replace it with the new meta node:
@@ -108,7 +163,8 @@ influxd-ctl -bind <remote-meta-node-bind-address> add-meta <meta-node-tcp-bind-a
 influxd-ctl -bind enterprise-meta-node-01:8091 add-meta enterprise-meta-node-04:8091
 ```
 
->This command contacts the meta node running at `cluster-meta-node-01:8091` and adds a meta node to that meta node’s cluster. The added meta node has the hostname `cluster-meta-node-04` and runs on port `8091`.
+>This command contacts the meta node running at `cluster-meta-node-01:8091` and adds a meta node to that meta node’s cluster.
+The added meta node has the hostname `cluster-meta-node-04` and runs on port `8091`.
 
 #### 2.4. Confirm the meta node was added
 Confirm the new meta-node has been added by running:
@@ -165,7 +221,7 @@ curl localhost:8091/status | jq
 Remove the old leader node and replace it by following steps [2.1-2.4](#2-1-provision-a-new-meta-node).
 The minimum number of meta nodes you should have in your cluster is 3.
 
-## Replacing InfluxDB Enterprise cluster data nodes
+## Replacing data nodes in an InfluxDB Enterprise cluster
 
 [Data nodes](/enterprise_influxdb/v1.5/concepts/clustering/#data-nodes) house all raw time series data and metadata.
 The process of replacing data nodes is as follows:
@@ -252,57 +308,3 @@ enterprise-data-02:8088  enterprise-data-03:8088  telegraf  autogen  3        11
 
 > **Important:** If replacing other data nodes in the cluster, make sure shards are completely copied from nodes in the same replica set before replacing the other nodes.
 View the [Anti-entropy](/enterprise_influxdb/v1.5/administration/anti-entropy/#concepts) documentation for important information regarding anti-entropy and your database's replication factor.
-
-## Scenarios
-
-### Replacing meta nodes in a functional cluster
-If all meta nodes in the cluster are fully functional, simply follow the steps for [replacing meta nodes](#replacing-influxdb-enterprise-cluster-meta-nodes).
-
-### Replacing an unresponsive meta node
-If replacing a meta node that is either unreachable or unrecoverable, you need to forcefully remove it from the meta cluster.
-After [provisioning a replacement meta node](#2-1-provision-a-new-meta-node),
-SSH into any of the functional existing meta nodes and use `influxd-ctl remove-meta` with the `-force` flag to remove the unresponsive node.
-When forcefully removing a meta node, you must also pass the `-tcpAddr` flag with the TCP and HTTP bind addresses of the node you are removing.
-
-```bash
-# Pattern
-influxd-ctl remove-meta -force -tcpAddr <meta-node-tcp-bind-address> <meta-node-http-bind-address>
-
-# Example
-influxd-ctl remove-meta -force -tcpAddr enterprise-meta-02:8089 enterprise-meta-02:8091
-```
-
-Once the unresponsive meta node is removed, [add the new meta node](#2-3-add-the-new-meta-node) to the cluster.
-
-### Replacing responsive and unresponsive data nodes in a cluster
-The process of replacing both responsive and unresponsive data nodes is the same. Simply follow the instructions for [replacing data nodes](#replacing-influxdb-enterprise-cluster-data-nodes).
-
-### Replacing nodes with security enabled
-Many InfluxDB Enterprise clusters are configured with security enabled, forcing secure TLS encryption between all nodes in the cluster.
-Both `influxd-ctl` and `curl` have options that facilitate secure communication between nodes.
-
-#### `influxd-ctl -bind-tls`
-In order manage your cluster over TLS, pass the `-bind-tls` flag with any `influxd-ctl` commmand.
-
-> If using a self-signed certificate, pass the `-k` flag to skip certificate verification.
-
-```bash
-# Pattern
-influxd-ctl -bind-tls [-k] <command>
-
-# Example
-influxd-ctl -bind-tls remove-meta enterprise-meta-02:8091
-```
-
-#### `curl -k`
-`curl` natively supports TLS/SSL connections, but if using a self-signed certificate, pass the `-k`/`--insecure` flag to allow for "insecure" SSL connections.
-
-> Self-signed certificates are considered "insecure" due to their lack of a valid chain of authority. However, data is still encrypted when using self-signed certificates.
-
-```bash
-# Pattern
-curl [-k, --insecure] <url>
-
-# Example
-curl -k https://localhost:8091/status | jq
-```
