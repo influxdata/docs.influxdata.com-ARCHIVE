@@ -17,7 +17,7 @@ This guide outlines processes for replacing both meta nodes and data nodes in an
 Meta nodes manage and monitor both the uptime of nodes in the cluster as well as distribution of [shards](/influxdb/v1.5/concepts/glossary/#shard) among nodes in the cluster.
 Meta nodes also handle the [anti-entropy](/enterprise_influxdb/v1.5/administration/anti-entropy/) (AE) process that ensures data nodes have the shards they need.
 
-Data nodes hold raw time-series data and metadata. Data shards and both distributed and replicated across data nodes in the cluster.
+Data nodes hold raw time-series data and metadata. Data shards are both distributed and replicated across data nodes in the cluster.
 
 `influxd-ctl` is a CLI included in each meta node and is used to manage your InfluxDB Enterprise cluster.
 
@@ -256,7 +256,7 @@ View the [Anti-entropy](/enterprise_influxdb/v1.5/administration/anti-entropy/#c
 ## Scenarios
 
 ### Replacing meta nodes in a functional cluster
-If all meta nodes in the cluster are fully functional, simply follow the steps for [replacing meta nodes](#replacing-meta-nodes).
+If all meta nodes in the cluster are fully functional, simply follow the steps for [replacing meta nodes](#replacing-influxdb-enterprise-cluster-meta-nodes).
 
 ### Replacing an unresponsive meta node
 If replacing a meta node that is either unreachable or unrecoverable, you need to forcefully remove it from the meta cluster.
@@ -275,7 +275,7 @@ influxd-ctl remove-meta -force -tcpAddr enterprise-meta-02:8089 enterprise-meta-
 Once the unresponsive meta node is removed, [add the new meta node](#2-3-add-the-new-meta-node) to the cluster.
 
 ### Replacing responsive and unresponsive data nodes in a cluster
-The process of replacing both responsive and unresponsive data nodes is the same. Simply follow the instructions for [replacing data nodes](#replacing-data-nodes).
+The process of replacing both responsive and unresponsive data nodes is the same. Simply follow the instructions for [replacing data nodes](#replacing-influxdb-enterprise-cluster-data-nodes).
 
 ### Replacing nodes with security enabled
 Many InfluxDB Enterprise clusters are configured with security enabled, forcing secure TLS encryption between all nodes in the cluster.
