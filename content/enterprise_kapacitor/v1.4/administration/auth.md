@@ -1,6 +1,6 @@
 ---
 title: Authentication and authorization in Kapacitor Enterprise
-description: Includes and overview of TICK stack authentication and authorization, enabling authentication in Kapacitor Enterprise, and user and privilege management using the InfluxDB Meta API.
+description: Topics include an overview of TICK stack authentication and authorization, enabling authentication in Kapacitor Enterprise, and user and privilege management using the InfluxDB Meta API.
 
 menu:
   enterprise_kapacitor_1_4:
