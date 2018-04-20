@@ -1,6 +1,6 @@
 ---
-title: Introduction
-
+title: Introducing Kapacitor
+description: Introduction to Kapacitor, including information on downloading, installing, and getting started.
 menu:
   kapacitor_1_4:
     name: Introduction

@@ -1,6 +1,6 @@
 ---
-title: Security
-
+title: Kapacitor security
+description: Covers Kapacitor security, securing InfluxDB and Kapacitor, and securing Chronograf and Kapacitor.
 menu:
   kapacitor_1_4:
     weight: 12

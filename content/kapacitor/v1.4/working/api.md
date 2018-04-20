@@ -1,13 +1,12 @@
 ---
-title: Kapacitor HTTP API
-
+title: Kapacitor HTTP API reference
+description: Covers the Kapacitor HTTP API, writing data, tasks, templates, recordings, replays, alerts, overriding configurations, storage, logging, testing services, and other information.
 menu:
+  name: HTTP API reference
   kapacitor_1_4:
     weight: 10
     parent: work-w-kapacitor
 ---
-
-# Kapacitor HTTP API reference documentation
 
 * [General Information](#general-information)
 * [Writing Data](#writing-data)
@@ -16,7 +15,7 @@ menu:
 * [Recordings](#recordings)
 * [Replays](#replays)
 * [Alerts](#alerts)
-* [Configuration](#overriding-configurations)
+* [Overriding configurations](#overriding-configurations)
 * [Storage](#storage)
 * [Logging](#logging)
 * [Testing services](#testing-services)
@@ -452,7 +451,7 @@ GET /kapacitor/v1/tasks?pattern=TASK*
             "dbrps" : [{"db": "DATABASE_NAME", "rp" : "RP_NAME"}],
             "script" : "stream|from().measurement('cpu')",
             "dot" : "digraph TASK_ID { ... }",
-            "status" : "enabled:,
+            "status" : "enabled",
             "executing" : true,
             "error" : "",
             "stats" : {}
@@ -498,7 +497,7 @@ GET /kapacitor/v1/tasks?fields=status&fields=executing&fields=error
 
 ### Custom task HTTP endpoints
 
-In TICKscript it is possible to expose a cache of recent data via the [HTTPOut](https://docs.influxdata.com/kapacitor/latest/nodes/http_out_node/) node.
+In TICKscript it is possible to expose a cache of recent data using the [HTTPOut](https://docs.influxdata.com/kapacitor/latest/nodes/http_out_node/) node.
 The data is available at the path `/kapacitor/v1/tasks/TASK_ID/ENDPOINT_NAME`.
 
 ### Example
