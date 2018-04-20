@@ -82,7 +82,7 @@ The process for replacing meta nodes is as follows:
 
 ### 1. Identify the leader node
 
-SSH into any of your meta nodes and run the following:
+Log into any of your meta nodes and run the following:
 
 ```bash
 curl -s localhost:8091/status | jq
@@ -199,7 +199,7 @@ As non-leader meta nodes are removed and replaced, the leader node oversees the 
 Leave the leader up and running until at least two of the new meta nodes are up, running and healthy.
 
 #### 3.1 - Kill the meta process on the leader node
-SSH into the leader meta node and kill the meta process.
+Log into the leader meta node and kill the meta process.
 
 ```bash
 # List the running processes and get the
@@ -236,7 +236,7 @@ The process of replacing data nodes is as follows:
 [Provision and start a new data node](/enterprise_influxdb/v1.5/production_installation/data_node_installation/), but **do not** add it to your cluster yet.
 
 ### 2. Replace the old data node with the new data node
-SSH into any of your cluster's meta nodes and use `influxd-ctl update-data` to replace the old data node with the new data node:
+Log into any of your cluster's meta nodes and use `influxd-ctl update-data` to replace the old data node with the new data node:
 
 ```bash
 # Pattern
