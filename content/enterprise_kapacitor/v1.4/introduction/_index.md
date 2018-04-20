@@ -1,5 +1,6 @@
 ---
 title: Introducing Kapacitor Enterprise
+description: Covers information needed to get up and running with Kapacitor Enterprise, inclduing downloading and installing.
 aliases:
   - /enterprise_kapacitor/v1.4/introduction/getting-started/
 menu:
