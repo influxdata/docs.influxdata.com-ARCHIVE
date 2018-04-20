@@ -26,7 +26,7 @@ A replication factor of 1 cannot be recovered by the anti-entropy service if the
 
 ## Configuration
 
-Anti-entropy configuration options are available in [`[anti-entropy]`](/enterprise_influxdb/v1.5/administration/configuration/#anti-entropy) section of your `influxdb-conf`.
+Anti-entropy configuration options are available in [`[anti-entropy]`](/enterprise_influxdb/v1.5/administration/configuration/#anti-entropy) section of your `influxdb.conf`.
 
 ## Scenarios
 
