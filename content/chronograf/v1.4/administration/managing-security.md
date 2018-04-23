@@ -250,8 +250,8 @@ The following steps will guide you in configuring Auth0 OAuth 2.0 authorization 
 * Auth0 clients should be configured with the following settings
   * **Regular Web Applications** as the type of application.
   * **Token Endpoint Authentication** set to **None**.
-  * **Allowed Callback URLs**: `https://www.example.com/oauth/auth0/callback` (substituting `example.com` with the [`PUBLIC_URL`](/chronograf/latest/administration/config-options/#public-url) of your Chronograf instance)
-  * **Allowed Logout URLs**: `https://www.example.com` (substituting `example.com` with the [`PUBLIC_URL`](/chronograf/latest/administration/config-options/#public-url) of your Chronograf instance)
+  * **Allowed Callback URLs**: `https://www.example.com/oauth/auth0/callback` (substituting `example.com` with the [`PUBLIC_URL`](/chronograf/v1.4/administration/config-options/#general-authentication-options) of your Chronograf instance)
+  * **Allowed Logout URLs**: `https://www.example.com` (substituting `example.com` with the [`PUBLIC_URL`](/chronograf/v1.4/administration/config-option/#general-authentication-options) of your Chronograf instance)
   * ["OIDC Conformant"](https://auth0.com/docs/api-auth/intro#how-to-use-the-new-flows).
 
 2) Set the Chronograf environment variables (or corresponding command line options) based on your Auth0 client credentials:
@@ -259,16 +259,18 @@ The following steps will guide you in configuring Auth0 OAuth 2.0 authorization 
 * `AUTH0_DOMAIN` (Auth0 domain)
 * `AUTH0_CLIENT_ID` (Auth0 client ID)
 * `AUTH0_CLIENT_SECRET` (Auth0 client Secret)
+* `PUBLIC_URL` (Public URL, used in callback URL and logout URL above)
 
 The equivalent command line options are:
 
-* [`--auth0-domain`](/chronograf/latest/administration/configuration/#auth0-domain)
-* [`--auth0-client-id`](/chronograf/latest/administration/configuration/#auth0-client-id)
-* [`--auth0-client-secret`](/chronograf/latest/administration/configuration/#auth0-client-secret)
+* [`--auth0-domain`](/chronograf/v1.4/administration/config-options/#auth0-specific-oauth-2-0-authentication-options)
+* [`--auth0-client-id`](/chronograf/v1.4/administration/config-options/#auth0-specific-oauth-2-0-authentication-options)
+* [`--auth0-client-secret`](/chronograf/v1.4/administration/config-options/#auth0-specific-oauth-2-0-authentication-options)
+* [`--public-url`](/chronograf/v1.4/administration/config-options/#general-authentication-options)
 
 3) Set the Chronograf environment variable (or corresponding command line option) required for JWT support:
 
-* `TOKEN_SECRET` (Secret used for generating and validating JWT tokens)
+* [`TOKEN_SECRET`](/chronograf/v1.4/administration/config-options/#general-authentication-options) (Secret used for generating and validating JWT tokens)
 
 **Example:**
 ```sh
