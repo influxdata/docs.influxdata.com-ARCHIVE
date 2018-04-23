@@ -44,6 +44,124 @@ SectionPagesMenu = "products"
   weight = 50
   url = "/enterprise_kapacitor/"
 
+  # InfluxDB v1.6 Menu
+  [[menu.influxdb_1_6]]
+    name = "About the Project"
+    identifier = "about_the_project"
+    weight = 10
+    url = "/influxdb/v1.6/about_the_project/"
+  [[menu.influxdb_1_6]]
+    name = "Introduction"
+    identifier = "introduction"
+    weight = 20
+    url = "/influxdb/v1.6/introduction/"
+  [[menu.influxdb_1_6]]
+    name = "Guides"
+    identifier = "guides"
+    weight = 30
+    url = "/influxdb/v1.6/guides/"
+  [[menu.influxdb_1_6]]
+    name = "Concepts"
+    identifier = "concepts"
+    weight = 40
+    url = "/influxdb/v1.6/concepts/"
+  [[menu.influxdb_1_6]]
+    name = "Troubleshooting"
+    identifier = "troubleshooting"
+    weight = 50
+    url = "/influxdb/v1.6/troubleshooting/"
+  [[menu.influxdb_1_6]]
+    name = "Tools"
+    identifier = "tools"
+    weight = 60
+    url = "/influxdb/v1.6/tools/"
+  [[menu.influxdb_1_6]]
+    name = "Write Protocol"
+    identifier = "write_protocols"
+    weight = 70
+    url = "/influxdb/v1.6/write_protocols/"
+    [[menu.influxdb_1_6]]
+      name = "Supported Protocols"
+      identifier = "supported_protocols"
+      weight = 80
+      url = "/influxdb/v1.6/supported_protocols/"
+  [[menu.influxdb_1_6]]
+    name = "Query Language"
+    identifier = "query_language"
+    weight = 90
+    url = "/influxdb/v1.6/query_language/"
+  [[menu.influxdb_1_6]]
+    name = "High Availability"
+    identifier = "high_availability"
+    weight = 100
+    url = "/influxdb/v1.6/high_availability/"
+  [[menu.influxdb_1_6]]
+    name = "Administration"
+    identifier = "administration"
+    weight = 10
+    url = "/influxdb/v1.6/administration/"
+  [[menu.influxdb_1_6]]
+    name = "External Resources"
+    identifier = "external_resources"
+    weight = 110
+    url = "/influxdb/v1.6/external_resources/"
+  # InfluxDB v1.6 Sub-Menu - About
+  [[menu.influxdb_1_6]]
+  name = "Contributing"
+  identifier = "contributing"
+  weight = 30
+  url = "https://github.com/influxdb/influxdb/blob/master/CONTRIBUTING.md"
+  parent = "about_the_project"
+  [[menu.influxdb_1_6]]
+  name = "CLA"
+  identifier = "cla"
+  weight = 40
+  url = "https://influxdata.com/community/cla/"
+  parent = "about_the_project"
+  [[menu.influxdb_1_6]]
+  name = "Licenses"
+  identifier = "licenses"
+  weight = 50
+  url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
+  parent = "about_the_project"
+  [[menu.influxdb_1_6]]
+  name = "Third Party Software"
+  identifier = "third_party"
+  weight = 60
+  url = "/influxdb/v1.6/about_the_project/#third_party"
+  parent = "about_the_project"
+  # InfluxDB v1.6 Sub-Menu - External Resources
+  [[menu.influxdb_1_6]]
+  name = "InfluxData Blog"
+  identifier = "infludatablog"
+  weight = 5
+  url = "https://www.influxdata.com/blog/"
+  parent = "external_resources"
+  [[menu.influxdb_1_6]]
+  name = "Technical Papers"
+  identifier = "technicalpapers"
+  weight = 10
+  url = "https://www.influxdata.com/technical-papers/"
+  parent = "external_resources"
+  [[menu.influxdb_1_6]]
+  name = "Meetup Videos"
+  identifier = "meetupvideos"
+  weight = 20
+  url = "https://www.influxdata.com/videos/"
+  parent = "external_resources"
+  [[menu.influxdb_1_6]]
+  name = "Virtual Training Videos"
+  identifier = "virtualtrainingvideos"
+  weight = 30
+  url = "https://www.influxdata.com/videos-training/"
+  parent = "external_resources"
+  [[menu.influxdb_1_6]]
+  name = "Virtual Training Schedule"
+  identifier = "virtualtrainingschedule"
+  weight = 40
+  url = "https://www.influxdata.com/virtual-training-courses/"
+  parent = "external_resources"
+
   # InfluxDB v1.5 Menu
   [[menu.influxdb_1_5]]
     name = "About the Project"
