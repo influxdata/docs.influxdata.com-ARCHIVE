@@ -79,7 +79,7 @@ Kapacitor" heading.
 One of key set of Kapacitor features that can be modified through Chronograf are
 third party alert handlers.
 
-##### To modify a third party alert handler:
+##### To modify a thid party alert handler:
 
 1. In the Configuration table locate the Influxdata instance and its associated
 Kapacitor instance, click the Kapacitor drop down menu and then the **edit icon**.
