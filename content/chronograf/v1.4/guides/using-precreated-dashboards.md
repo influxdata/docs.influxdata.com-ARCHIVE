@@ -118,6 +118,7 @@ See [Telegraf configuration](https://github.com/influxdata/telegraf/blob/master/
 **Required Telegraf plugin:** [Elasticsearch input plugin](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/elasticsearch/README.md)
 
 `elasticsearch.json`
+
   * "ElasticSearch - Query Throughput"
   * "ElasticSearch - Open Connections"
   * "ElasticSearch - Query Latency"

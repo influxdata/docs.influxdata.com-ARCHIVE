@@ -230,6 +230,13 @@ Authentication expires on browser close when `--auth-duration=0`.
 
 Environment variable: `$AUTH_DURATION`
 
+####`--public-url=`
+
+The public URL required to access Chronograf using a web browser. For example, if you access Chronograf using the default URL, the public URL value would be `http://localhost:8888`.
+Required for Google OAuth 2.0 authentication. Used for Auth0 and some generic OAuth 2.0 authentication providers.
+
+Environment variable: `$PUBLIC_URL`
+
 
 ### GitHub-specific OAuth 2.0 authentication options
 
@@ -274,13 +281,6 @@ Environment variable: `$GOOGLE_CLIENT_SECRET`
 [Optional] Restricts authorization to users from specified Google email domains.
 
 Environment variable: `$GOOGLE_DOMAINS`
-
-####`--public-url=`
-
-The public URL required to access Chronograf using a web browser. For example, if you access Chronograf using the default URL, the public URL value would be `http://localhost:8888`.
-Required for Google OAuth 2.0 authentication. Used for Auth0 and some generic OAuth 2.0 authentication providers.
-
-Environment variable: `$PUBLIC_URL`
 
 ### Auth0-specific OAuth 2.0 authentication options
 

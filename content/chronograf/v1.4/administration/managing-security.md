@@ -247,9 +247,13 @@ The following steps will guide you in configuring Auth0 OAuth 2.0 authorization 
 
 1) Create an Auth0 account and [register an Auth0 client](https://auth0.com/docs/clients) within their dashboard.
 
-    - Auth0 clients should be configured as `Regular Web Applications` with the `Token Endpoint Authentication` set to `None`.
-    - Clients must have the `Allowed Callback URLs` set to `https://www.example.com/oauth/auth0/callback` and the `Allowed Logout URLs` to `https://www.example.com`, substituting `example.com` for the [`PUBLIC_URL`](/chronograf/latest/administration/configuration/#public-url) of your Chronograf instance.
-    - Clients must be set to be ["OIDC Conformant"](https://auth0.com/docs/api-auth/intro#how-to-use-the-new-flows).
+* Auth0 clients should be configured with the following settings
+  * **Regular Web Applications** as the type of application.
+  * **Token Endpoint Authentication** set to **None**.
+  * **Allowed Callback URLs**: `https://www.example.com/oauth/auth0/callback` (substituting `example.com` with the [`PUBLIC_URL`](/chronograf/latest/administration/config-options/#public-url) of your Chronograf instance)
+  * **Allowed Logout URLs**: `https://www.example.com` (substituting `example.com` with the [`PUBLIC_URL`](/chronograf/latest/administration/config-options/#public-url) of your Chronograf instance)
+  * ["OIDC Conformant"](https://auth0.com/docs/api-auth/intro#how-to-use-the-new-flows).
+
 2) Set the Chronograf environment variables (or corresponding command line options) based on your Auth0 client credentials:
 
 * `AUTH0_DOMAIN` (Auth0 domain)
