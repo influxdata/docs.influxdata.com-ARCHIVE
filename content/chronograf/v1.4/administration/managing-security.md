@@ -47,6 +47,16 @@ Set the value of the TOKEN_SECRET environment variable to a secure, arbitrary st
 
 **Example:** `TOKEN_SECRET=Super5uperUdn3verGu355!`
 
+**JWKS Signature Verification**
+If the provider implements OpenID Connect with RS256 signatures (as Microsoft AD FS does), you need to enable `id_token` support and provide a JWKS document (holding the certificate chain), to validate the RSA signatures against. This certificate chain is regularly rolled over (when the certificates expire), so it is fetched from the JWKS_URL on demand.
+
+**Example:**
+
+```sh
+export USE_ID_TOKEN=true
+export JWKS_URL=https://example.com/adfs/discovery/keys
+```
+
 > ***InfluxEnterprise clusters:*** If you are running multiple Chronograf servers in a high availability configuration, set the `TOKEN_SECRET` environment variable on each server to ensure that users can stay logged in.
 
 ## OAuth 2.0 providers
@@ -335,6 +345,7 @@ Your users should now be able to sign into Chronograf using the new Okta provide
 #### Configuring Chronograf to use any OAuth 2.0 provider
 
 Chronograf can be configured to work with any OAuth 2.0 provider, including those defined above, by using the Generic configuration options below.
+Additionally, the generic provider implements OpenID Connect (OIDC) as implemented by Active Directory Federation Services (AD FS).
 
 Depending on your OAuth 2.0 provider, many or all of the following environment variables (or corresponding command line options) are required by Chronograf when using the Generic configuration:
 
@@ -342,6 +353,8 @@ Depending on your OAuth 2.0 provider, many or all of the following environment v
 * `GENERIC_CLIENT_SECRET`: Application client [secret](https://tools.ietf.org/html/rfc6749#section-2.3.1) issued by the provider
 * `GENERIC_AUTH_URL`: Provider's authorization [endpoint](https://tools.ietf.org/html/rfc6749#section-3.1) URL
 * `GENERIC_TOKEN_URL`: Provider's token [endpoint](https://tools.ietf.org/html/rfc6749#section-3.2) URL used by the Chronograf client to obtain an access token
+* `USE_ID_TOKEN`: Enable OpenID [id_token](https://openid.net/specs/openid-connect-core-1_0.html#rfc.section.3.1.3.3) processing
+* `JWKS_URL`: OAuth 2.0 provider's jwks [endpoint](https://tools.ietf.org/html/rfc7517#section-4.7) is used by the client to validate RSA signatures
 * `GENERIC_API_URL`: Provider's [OpenID UserInfo endpoint](https://connect2id.com/products/server/docs/api/userinfo)] URL used by Chronograf to request user data
 * `GENERIC_API_KEY`: JSON lookup key for [OpenID UserInfo](https://connect2id.com/products/server/docs/api/userinfo)] (known to be required for Microsoft Azure, with the value `userPrincipalName`)
 * `GENERIC_SCOPES`: [Scopes](https://tools.ietf.org/html/rfc6749#section-3.3) of user data required for your instance of Chronograf, such as user email and OAuth provider organization
@@ -363,6 +376,26 @@ The following environment variables (and corresponding command line options) are
   - So, for example, if `PUBLIC_URL` is `https://localhost:8888` and `GENERIC_NAME` is its default value, then the callback URL would be `https://localhost:8888/oauth/generic/callback`, and the Chronograf Login button would read `Log in with Generic`
   - While using Chronograf, this value should be supplied in the `Provider` field when adding a user or creating an organization mapping.
 
+
+#### Examples
+##### OpenID Connect (OIDC) / Active Directory Federation Services (AD FS)
+
+See [Enabling OpenID Connect with AD FS 2016](https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/development/enabling-openid-connect-with-ad-fs) for a walk through of the server configuration.
+
+Exports for Chronograf (e.g. in /etc/default.chronograf):
+```sh
+PUBLIC_URL="https://example.com:8888"
+GENERIC_CLIENT_ID="chronograf"
+GENERIC_CLIENT_SECRET="KW-TkvH7vzYeJMAKj-3T1PdHx5bxrZnoNck2KlX8"
+GENERIC_AUTH_URL="https://example.com/adfs/oauth2/authorize"
+GENERIC_TOKEN_URL="https://example.com/adfs/oauth2/token"
+GENERIC_SCOPES="openid"
+GENERIC_API_KEY="upn"
+USE_ID_TOKEN="true"
+JWKS_URL="https://example.com/adfs/discovery/keys"
+TOKEN_SECRET="ZNh2N9toMwUVQxTVEe2ZnnMtgkh3xqKZ"
+
+> ***Note:*** Do not use special characters for the GENERIC_CLIENT_ID as AD FS will split strings here, finally resulting in an identifier mismatch.
 
 ### Configuring authentication duration
 

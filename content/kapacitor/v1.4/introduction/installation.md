@@ -1,6 +1,6 @@
 ---
 title: Installing Kapacitor
-
+description: Directions for installing, starting, and configuring Kapacitor, the data processing component of the InfluxData time series platform.
 menu:
   kapacitor_1_4:
     weight: 10

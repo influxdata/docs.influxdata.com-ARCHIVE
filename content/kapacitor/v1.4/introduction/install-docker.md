@@ -1,8 +1,9 @@
 ---
-title: Docker Install
-
+title: Using Docker Compose to work with Kapacitor and TICKscript
+description: Demonstrates using Kapacitor, Telegraf, and InfluxDB with Docker Compose to learn the basics of Kapacitor and TICKscript.
 menu:
   kapacitor_1_4:
+    name: Docker install
     weight: 70
     parent: introduction
 ---
@@ -12,9 +13,9 @@ menu:
 
 This short tutorial will demonstrate starting TICK stack components (InfluxDB, Telegraf, Kapacitor) with Docker Compose and then using that stack to learn the rudiments of working with Kapacitor and the [TICKscript](/kapacitor/v1.4/tick/) domain specific language (DSL).  The following discussion is based on the tutorial project package (named tik-docker-tutorial.tar.gz) that can be downloaded from [this location](/downloads/tik-docker-tutorial.tar.gz). It will create a running deployment of these applications that can be used for an initial evaluation and testing of Kapacitor.  Chronograf is currently not included in the package.
 
-This tutorial depends on Docker Compose 3.0 to deploy the latest Docker 17.0+ compatible images of InfluxDB, Telegraf and Kapacitor.
+This tutorial depends on Docker Compose 3.0 to deploy the latest Docker 17.0+ compatible images of InfluxDB, Telegraf, and Kapacitor.
 
-To use this package Docker and Docker Compose should be installed on the host machine where it will run.  
+To use this package, Docker and Docker Compose should be installed on the host machine where it will run.  
 
 Docker installation is covered at the [Docker website](https://docs.docker.com/engine/installation/).
 

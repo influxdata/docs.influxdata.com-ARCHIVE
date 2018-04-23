@@ -14,7 +14,7 @@ menu:
 * Check for root user when running `buildtsi`.
 * [1.5] Adjustable TSI Compaction Threshold.
 
-### Bugfixes
+### Bug fixes
 
 * backport: check for failure case where backup directory has no manifest files.
 * Fix regression to allow `now()` to be used as the group by offset again.

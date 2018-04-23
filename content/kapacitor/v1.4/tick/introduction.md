@@ -1,6 +1,6 @@
 ---
 title: Introducing the TICKscript language
-
+description: An overview of the TICKscript language, including nodes, pipelines, and examples.
 menu:
   kapacitor_1_4:
     name: Introduction

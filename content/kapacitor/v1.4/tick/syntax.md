@@ -1,5 +1,6 @@
 ---
 title: TICKscript syntax
+description: Covers the TICKscript syntax, node types, using InfluxQL in TICKscripts, and lambda expressions.
 aliases:
   - /kapacitor/v1.4/tick/spec/
 menu:
