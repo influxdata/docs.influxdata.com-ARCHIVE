@@ -26,13 +26,6 @@ additional information, please see the event handler presentation in the
 * [HipChat setup](#hipchat-setup)
 * [Telegram setup](#telegram-setup)
 
-<!-- table style="width:100%">
-  <tr>
-    <td><a href="#hipchat-setup">HipChat Setup</a></td>
-    <td><a href="#telegram-setup">Telegram Setup</a></td>
-  </tr>
-</table -->
-
 ## HipChat setup
 
 [HipChat](https://www.hipchat.com/) is Atlassian's web service for group chat, video chat, and screen
