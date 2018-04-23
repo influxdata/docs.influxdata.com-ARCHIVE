@@ -92,7 +92,7 @@ Optionally, you can specify values for these two environment variables (or corre
 * `AUTH_DURATION` (authorization duration)
 * `GH_ORGS` (GitHub organizations)
 
-For details on the command line options and environment variables, see [GitHub OAuth 2.0 authentication options](/chronograf/latest/administration/config-options#github-oauth-2-0-authentication-options).
+For details on the command line options and environment variables, see [GitHub OAuth 2.0 authentication options](/chronograf/v1.4/administration/config-options#github-oauth-2-0-authentication-options).
 
 **Example:**
 
@@ -145,9 +145,9 @@ export TOKEN_SECRET=Super5uperUdn3verGu355!
 
 Alternatively, these environment variables can be set using the equivalent command line options:
 
-* [`--github-client-id=`](/chronograf/latest/administration/configuration/#github-client-id)
-* [`--github-client-secret=`](/chronograf/latest/administration/configuration/#github-client-secret)
-* [`--token_secret=`](/chronograf/latest/administration/config-options.md#--token-secret---t)
+* [`--github-client-id=`](/chronograf/v1.4/administration/configuration/#github-client-id)
+* [`--github-client-secret=`](/chronograf/v1.4/administration/configuration/#github-client-secret)
+* [`--token_secret=`](/chronograf/v1.4/administration/config-options.md#--token-secret---t)
 
 #### Optional GitHub organizations
 
@@ -183,7 +183,7 @@ Optionally, you can restrict access to specific domains using the following envi
 
 * `GOOGLE_DOMAINS` (Google domains)
 
-For details on Chronograf command line options and environment variables, see [Google OAuth 2.0 authentication options](/chronograf/latest/config-options#google-oauth-2-0-authentication-options).
+For details on Chronograf command line options and environment variables, see [Google OAuth 2.0 authentication options](/chronograf/v1.4/config-options#google-oauth-2-0-authentication-options).
 
 
 #### Creating Google OAuth 2.0 applications
@@ -220,15 +220,15 @@ export TOKEN_SECRET=Super5uperUdn3verGu355!
 
 Alternatively, the environment variables discussed above can be set using their corresponding command line options:
 
-* [`--google-client-id=`](/chronograf/latest/administration/configuration/#google-client-id)
-* [`--google-client-secret=`](/chronograf/latest/administration/configuration/#google-client-secret)
-* [`--public-url=`](/chronograf/latest/administration/configuration/#public-url)
-* [`--token_secret=`](chronograf/latest/administration/config-options.md#--token-secret---t)
+* [`--google-client-id=`](/chronograf/v1.4/administration/configuration/#google-client-id)
+* [`--google-client-secret=`](/chronograf/v1.4/administration/configuration/#google-client-secret)
+* [`--public-url=`](/chronograf/v1.4/administration/configuration/#public-url)
+* [`--token_secret=`](chronograf/v1.4/administration/config-options.md#--token-secret---t)
 
 #### Optional Google domains
 
 Similar to GitHub organization restrictions, Google authentication can be configured to restrict access to Chronograf to specific domains.
-These are configured using the `GOOGLE_DOMAINS` environment variable or the [`--google-domains`](/chronograf/latest/administration/configuration/#google-domains) command line options.
+These are configured using the `GOOGLE_DOMAINS` environment variable or the [`--google-domains`](/chronograf/v1.4/administration/configuration/#google-domains) command line options.
 Multiple domains are separated using commas.
 For example, to permit access only from `biffspleasurepalace.com` and `savetheclocktower.com`, the `GOOGLE_DOMAINS` environment variable is:
 ```sh
@@ -286,7 +286,7 @@ To assign a user to an organization, add an `organization` key to the user `app_
 For example, you can assign the user Marty McFly to the "time-travelers" organization by setting `app_metadata` to `{"organization": "time-travelers"}`.
 This can be done either manually by an operator or automatically through the use of an [Auth0 Rule](https://auth0.com/docs/rules/metadata-in-rules#updating-app_metadata) or a [pre-user registration Auth0 Hook](https://auth0.com/docs/hooks/extensibility-points/pre-user-registration).
 
-Next, you will need to set the Chronograf [`AUTH0_ORGS`](/chronograf/latest/administration/configuration/#auth0-client-secret) environment variable to a comma-separated list of the allowed organizations.
+Next, you will need to set the Chronograf [`AUTH0_ORGS`](/chronograf/v1.4/administration/configuration/#auth0-client-secret) environment variable to a comma-separated list of the allowed organizations.
     For example, if you have one group of users with an `organization` key set to `biffs-gang` and another group with an `organization` key set to `time-travelers`, you can permit access to both with this environment variable: `AUTH0_ORGS=biffs-gang,time-travelers`.
 
 An `--auth0-organizations` command line option is also available, but it is limited to a single organization and does not accept a comma-separated list like its environment variable equivalent.
