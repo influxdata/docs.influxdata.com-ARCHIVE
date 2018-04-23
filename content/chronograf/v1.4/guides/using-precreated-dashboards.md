@@ -119,16 +119,16 @@ See [Telegraf configuration](https://github.com/influxdata/telegraf/blob/master/
 
 `elasticsearch.json`
 
-  * "ElasticSearch - Query Throughput"
-  * "ElasticSearch - Open Connections"
-  * "ElasticSearch - Query Latency"
-  * "ElasticSearch - Fetch Latency"
-  * "ElasticSearch - Suggest Latency"
-  * "ElasticSearch - Scroll Latency"
-  * "ElasticSearch - Indexing Latency"
-  * "ElasticSearch - JVM GC Collection Counts"
-  * "ElasticSearch - JVM GC Latency"
-  * "ElasticSearch - JVM Heap Usage"
+* "ElasticSearch - Query Throughput"
+* "ElasticSearch - Open Connections"
+* "ElasticSearch - Query Latency"
+* "ElasticSearch - Fetch Latency"
+* "ElasticSearch - Suggest Latency"
+* "ElasticSearch - Scroll Latency"
+* "ElasticSearch - Indexing Latency"
+* "ElasticSearch - JVM GC Collection Counts"
+* "ElasticSearch - JVM GC Latency"
+* "ElasticSearch - JVM Heap Usage"
 
 ## haproxy
 

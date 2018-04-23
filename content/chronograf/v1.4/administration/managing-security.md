@@ -119,50 +119,50 @@ The following steps will guide you in configuring Chronograf to support GitHub O
 
 **To create a GitHub OAuth 2.0 application:**
 
-1) Follow the [Register your app](https://github.com/settings/applications/new) steps at the GitHub Developer website to register your GitHub application and obtain your assigned Client ID and Client Secret.
+1. Follow the [Register your app](https://github.com/settings/applications/new) steps at the GitHub Developer website to register your GitHub application and obtain your assigned Client ID and Client Secret.
 
-    - `Homepage URL`: should include the full Chronograf server name and port. For example, if you are running it locally with the default settings, it would be `http://localhost:8888`.
-    - `Authorization callback URL`: The `Homepage URL` plus the callback URL path `/oauth/github/callback`. Example: `http://localhost:8888/oauth/github/callback`
-2) Set the Chronograf environment variables (or corresponding command line options) for the GitHub OAuth 2.0 credentials:
+    * `Homepage URL`: should include the full Chronograf server name and port. For example, if you are running it locally with the default settings, it would be `http://localhost:8888`.
+    * `Authorization callback URL`: The `Homepage URL` plus the callback URL path `/oauth/github/callback`. Example: `http://localhost:8888/oauth/github/callback`
 
-* `GH_CLIENT_ID` (GitHub Client ID)
-* `GH_CLIENT_SECRET` (GitHub Client Secret)
+2. Set the Chronograf environment variables (or corresponding command line options) for the GitHub OAuth 2.0 credentials:
 
-**Example:**
+    * `GH_CLIENT_ID` (GitHub Client ID)
+    * `GH_CLIENT_SECRET` (GitHub Client Secret)
 
-```sh
-export GH_CLIENT_ID=b339dd4fddd95abec9aa
-export GH_CLIENT_SECRET=260041897d3252c146ece6b46ba39bc1e54416dc
-```
-3) Set the Chronograf environment variable (or corresponding command line option) required for JWT support:
+    **Example:**
 
-* `TOKEN_SECRET` (Secret used for generating and validating JWT tokens)
+    ```sh
+    export GH_CLIENT_ID=b339dd4fddd95abec9aa
+    export GH_CLIENT_SECRET=260041897d3252c146ece6b46ba39bc1e54416dc
+    ```
 
-**Example:**
-```sh
-export TOKEN_SECRET=Super5uperUdn3verGu355!
-```
+3. Set the Chronograf environment variable (or corresponding command line option) required for JWT support:
 
-Alternatively, these environment variables can be set using the equivalent command line options:
+    * `TOKEN_SECRET` (Secret used for generating and validating JWT tokens)
 
-* [`--github-client-id=`](/chronograf/v1.4/administration/configuration/#github-client-id)
-* [`--github-client-secret=`](/chronograf/v1.4/administration/configuration/#github-client-secret)
-* [`--token_secret=`](/chronograf/v1.4/administration/config-options.md#--token-secret---t)
+    **Example:**
+    ```sh
+    export TOKEN_SECRET=Super5uperUdn3verGu355!
+    ```
+
+    Alternatively, these environment variables can be set using the equivalent command line options:
+
+    * [`--github-client-id=`](/chronograf/v1.4/administration/configuration/#github-client-id)
+    * [`--github-client-secret=`](/chronograf/v1.4/administration/configuration/#github-client-secret)
+    * [`--token_secret=`](/chronograf/v1.4/administration/config-options.md#--token-secret---t)
 
 #### Optional GitHub organizations
 
 If you want to require a GitHub organization membership for a user, set the `GH_ORGS` environment variable.
 
-**Example:**
-
+**Example:**  
 ```sh
 export GH_ORGS=biffs-gang
 ```
 If the user is not a member of the specified GitHub organization, then the user will not be granted access.
 To support multiple organizations, use a comma-delimited list.
 
-**Example:**
-
+**Example:**  
 ```sh
 export GH_ORGS=hill-valley-preservation-sociey,the-pinheads
 ```
@@ -192,38 +192,36 @@ The following steps will guide you in configuring Google OAuth 2.0 authorization
 
 **To create a Google OAuth 2.0 application:**
 
-1) Obtain the required Google OAuth 2.0 credentials, including a Google Client ID and Client Secret, by following the steps in [Obtain Oauth 2.0 credentials](https://developers.google.com/identity/protocols/OpenIDConnect#getcredentials).
-2) Verify that Chronograf is publicly accessible using a fully-qualified domain name so that Google can properly redirect users back to the application.
-3) Set the Chronograf environment variables (or corresponding command line options) for the Google OAuth 2.0 credentials and Public URL:
+1. Obtain the required Google OAuth 2.0 credentials, including a Google Client ID and Client Secret, by following the steps in [Obtain Oauth 2.0 credentials](https://developers.google.com/identity/protocols/OpenIDConnect#getcredentials).
+2. Verify that Chronograf is publicly accessible using a fully-qualified domain name so that Google can properly redirect users back to the application.
+3. Set the Chronograf environment variables (or corresponding command line options) for the Google OAuth 2.0 credentials and Public URL:
 
-* `GOOGLE_CLIENT_ID` (Google client ID)
-* `GOOGLE_CLIENT_SECRET` (Google client Secret)
-* `PUBLIC_URL` (Public URL -- the URL used to access Chronograf)
+    * `GOOGLE_CLIENT_ID` (Google client ID)
+    * `GOOGLE_CLIENT_SECRET` (Google client Secret)
+    * `PUBLIC_URL` (Public URL -- the URL used to access Chronograf)
 
-**Example:**
-
-```sh
-export GOOGLE_CLIENT_ID= 812760930421-kj6rnscmlbv49pmkgr1jq5autblc49kr.apps.googleusercontent.com
-export GOOGLE_CLIENT_SECRET= wwo0m29iLirM6LzHJWE84GRD
-export PUBLIC_URL=http://localhost:8888
+    **Example:**  
+    ```sh
+    export GOOGLE_CLIENT_ID= 812760930421-kj6rnscmlbv49pmkgr1jq5autblc49kr.apps.googleusercontent.com
+    export GOOGLE_CLIENT_SECRET= wwo0m29iLirM6LzHJWE84GRD
+    export PUBLIC_URL=http://localhost:8888
 ```
 
-4) Set the Chronograf environment variable (or corresponding command line option) required for JWT support:
+4. Set the Chronograf environment variable (or corresponding command line option) required for JWT support:
 
-* `TOKEN_SECRET` (Secret used for generating and validating JWT tokens)
+    * `TOKEN_SECRET` (Secret used for generating and validating JWT tokens)
 
-**Example:**
+    **Example:**  
+    ```sh
+    export TOKEN_SECRET=Super5uperUdn3verGu355!
+    ```
 
-```sh
-export TOKEN_SECRET=Super5uperUdn3verGu355!
-```
+    Alternatively, the environment variables discussed above can be set using their corresponding command line options:
 
-Alternatively, the environment variables discussed above can be set using their corresponding command line options:
-
-* [`--google-client-id=`](/chronograf/v1.4/administration/configuration/#google-client-id)
-* [`--google-client-secret=`](/chronograf/v1.4/administration/configuration/#google-client-secret)
-* [`--public-url=`](/chronograf/v1.4/administration/configuration/#public-url)
-* [`--token_secret=`](chronograf/v1.4/administration/config-options.md#--token-secret---t)
+    * [`--google-client-id=`](/chronograf/v1.4/administration/configuration/#google-client-id)
+    * [`--google-client-secret=`](/chronograf/v1.4/administration/configuration/#google-client-secret)
+    * [`--public-url=`](/chronograf/v1.4/administration/configuration/#public-url)
+    * [`--token_secret=`](chronograf/v1.4/administration/config-options.md#--token-secret---t)
 
 #### Optional Google domains
 
@@ -245,37 +243,35 @@ The following steps will guide you in configuring Auth0 OAuth 2.0 authorization 
 
 **To create an Auth0 OAuth 2.0 application:**
 
-1) Create an Auth0 account and [register an Auth0 client](https://auth0.com/docs/clients) within their dashboard.
+1. Create an Auth0 account and [register an Auth0 client](https://auth0.com/docs/clients) within their dashboard. Auth0 clients should be configured with the following settings:
+    * **Regular Web Applications** as the type of application.
+    * **Token Endpoint Authentication** set to **None**.
+    * **Allowed Callback URLs**: `https://www.example.com/oauth/auth0/callback` (substituting `example.com` with the [`PUBLIC_URL`](/chronograf/v1.4/administration/config-options/#general-authentication-options) of your Chronograf instance)
+    * **Allowed Logout URLs**: `https://www.example.com` (substituting `example.com` with the [`PUBLIC_URL`](/chronograf/v1.4/administration/config-option/#general-authentication-options) of your Chronograf instance)
+    * ["OIDC Conformant"](https://auth0.com/docs/api-auth/intro#how-to-use-the-new-flows).
 
-* Auth0 clients should be configured with the following settings
-  * **Regular Web Applications** as the type of application.
-  * **Token Endpoint Authentication** set to **None**.
-  * **Allowed Callback URLs**: `https://www.example.com/oauth/auth0/callback` (substituting `example.com` with the [`PUBLIC_URL`](/chronograf/v1.4/administration/config-options/#general-authentication-options) of your Chronograf instance)
-  * **Allowed Logout URLs**: `https://www.example.com` (substituting `example.com` with the [`PUBLIC_URL`](/chronograf/v1.4/administration/config-option/#general-authentication-options) of your Chronograf instance)
-  * ["OIDC Conformant"](https://auth0.com/docs/api-auth/intro#how-to-use-the-new-flows).
+2. Set the Chronograf environment variables (or corresponding command line options) based on your Auth0 client credentials:
 
-2) Set the Chronograf environment variables (or corresponding command line options) based on your Auth0 client credentials:
+    * `AUTH0_DOMAIN` (Auth0 domain)
+    * `AUTH0_CLIENT_ID` (Auth0 client ID)
+    * `AUTH0_CLIENT_SECRET` (Auth0 client Secret)
+    * `PUBLIC_URL` (Public URL, used in callback URL and logout URL above)
 
-* `AUTH0_DOMAIN` (Auth0 domain)
-* `AUTH0_CLIENT_ID` (Auth0 client ID)
-* `AUTH0_CLIENT_SECRET` (Auth0 client Secret)
-* `PUBLIC_URL` (Public URL, used in callback URL and logout URL above)
+    The equivalent command line options are:
 
-The equivalent command line options are:
+    * [`--auth0-domain`](/chronograf/v1.4/administration/config-options/#auth0-specific-oauth-2-0-authentication-options)
+    * [`--auth0-client-id`](/chronograf/v1.4/administration/config-options/#auth0-specific-oauth-2-0-authentication-options)
+    * [`--auth0-client-secret`](/chronograf/v1.4/administration/config-options/#auth0-specific-oauth-2-0-authentication-options)
+    * [`--public-url`](/chronograf/v1.4/administration/config-options/#general-authentication-options)
 
-* [`--auth0-domain`](/chronograf/v1.4/administration/config-options/#auth0-specific-oauth-2-0-authentication-options)
-* [`--auth0-client-id`](/chronograf/v1.4/administration/config-options/#auth0-specific-oauth-2-0-authentication-options)
-* [`--auth0-client-secret`](/chronograf/v1.4/administration/config-options/#auth0-specific-oauth-2-0-authentication-options)
-* [`--public-url`](/chronograf/v1.4/administration/config-options/#general-authentication-options)
+3. Set the Chronograf environment variable (or corresponding command line option) required for JWT support:
 
-3) Set the Chronograf environment variable (or corresponding command line option) required for JWT support:
+    * [`TOKEN_SECRET`](/chronograf/v1.4/administration/config-options/#general-authentication-options) (Secret used for generating and validating JWT tokens)
 
-* [`TOKEN_SECRET`](/chronograf/v1.4/administration/config-options/#general-authentication-options) (Secret used for generating and validating JWT tokens)
-
-**Example:**
-```sh
-export TOKEN_SECRET=Super5uperUdn3verGu355!
-```
+    **Example:**  
+    ```sh
+    export TOKEN_SECRET=Super5uperUdn3verGu355!
+    ```
 
 #### Optional Auth0 organizations
 
@@ -287,7 +283,7 @@ For example, you can assign the user Marty McFly to the "time-travelers" organiz
 This can be done either manually by an operator or automatically through the use of an [Auth0 Rule](https://auth0.com/docs/rules/metadata-in-rules#updating-app_metadata) or a [pre-user registration Auth0 Hook](https://auth0.com/docs/hooks/extensibility-points/pre-user-registration).
 
 Next, you will need to set the Chronograf [`AUTH0_ORGS`](/chronograf/v1.4/administration/configuration/#auth0-client-secret) environment variable to a comma-separated list of the allowed organizations.
-    For example, if you have one group of users with an `organization` key set to `biffs-gang` and another group with an `organization` key set to `time-travelers`, you can permit access to both with this environment variable: `AUTH0_ORGS=biffs-gang,time-travelers`.
+For example, if you have one group of users with an `organization` key set to `biffs-gang` and another group with an `organization` key set to `time-travelers`, you can permit access to both with this environment variable: `AUTH0_ORGS=biffs-gang,time-travelers`.
 
 An `--auth0-organizations` command line option is also available, but it is limited to a single organization and does not accept a comma-separated list like its environment variable equivalent.
 

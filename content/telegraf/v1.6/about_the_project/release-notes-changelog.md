@@ -15,7 +15,7 @@ menu:
 * Report available fields if `utmp` is unreadable.
 * Fix potential `no fields` error writing to outputs.
 * Fix uptime reporting in system input when ran inside docker.
-* Fix mem input `cannot allocate memory` error on FreeBSD based systems.
+* Fix mem input `cannot allocate memory` error on FreeBSD-based systems.
 * Fix duplicate tags when overriding an existing tag.
 * Add server argument as first argument in unbound input.
 * Fix handling of floats with multiple leading zeroes.
