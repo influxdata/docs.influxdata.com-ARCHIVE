@@ -1,10 +1,11 @@
 ---
-title: Concepts
+title: InfluxDB Enterprise concepts
 aliases:
     - /enterprise/v1.5/concepts/
 menu:
   enterprise_influxdb_1_5:
-    weight: 20
+    name: Concepts
+    weight: 30
 ---
 
 ## [Clustering](/enterprise_influxdb/v1.5/concepts/clustering)

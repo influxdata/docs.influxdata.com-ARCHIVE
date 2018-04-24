@@ -5,7 +5,7 @@ aliases:
 menu:
   enterprise_influxdb_1_5:
     name: Guides
-    weight: 10
+    weight: 50
 ---
 ## [Anti-entropy: Replace Data Node](/enterprise_influxdb/v1.5/guides/anti-entropy/)
 ## [Backing up and restoring in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/backup-and-restore/)

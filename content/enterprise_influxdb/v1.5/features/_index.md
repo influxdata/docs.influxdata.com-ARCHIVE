@@ -4,7 +4,7 @@ aliases:
     - /enterprise/v1.5/features/
 menu:
   enterprise_influxdb_1_5:
-    name: Features
+    name: Enterprise features
     weight: 40
 ---
 
