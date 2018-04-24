@@ -1,8 +1,13 @@
 ---
-title: Tools
+title: InfluxDB tools
 aliases:
     - influxdb/v1.5/clients/
     - influxdb/v1.5/write_protocols/json/
+menu:
+  influxdb_1_5:
+    name: Tools
+    weight: 60
+
 ---
 
 This section covers the available tools for interacting with InfluxDB.

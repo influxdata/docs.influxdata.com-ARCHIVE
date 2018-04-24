@@ -2,6 +2,10 @@
 title: About the project
 alias:
   -/docs/v1.5/about/
+  menu:
+    influxdb_1_5:
+      weight: 10
+
 ---
 
 ## [Release Notes/Changelog](/influxdb/v1.5/about_the_project/releasenotes-changelog/)

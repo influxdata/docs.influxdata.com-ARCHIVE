@@ -1,5 +1,8 @@
 ---
 title: External resources
+menu:
+  influxdb_1_5:
+    weight: 110
 ---
 
 But wait, there's more!
