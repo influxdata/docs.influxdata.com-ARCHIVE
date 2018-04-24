@@ -99,6 +99,27 @@ A handler definition has a few properties:
 
 The following is a list of available alert handlers and their options.
 
+[Aggregate](#aggregate)  
+[Alerta](#alerta)  
+[Exec](#exec)  
+[Hipchat](#hipchat)  
+[Kafka](#kafka)  
+[Log](#log)  
+[Opsgenie](#opsgenie)  
+[Pagerduty](#pagerduty)  
+[Pushover](#pushover)  
+[Post](#post)  
+[Publish](#publish)  
+[Sensu](#sensu)  
+[Slack](#slack)  
+[SMTP](#smtp)  
+[Snmptrap](#snmptrap)  
+[Talk](#talk)  
+[TCP](#tcp)  
+[Telegram](#telegram)  
+[Victorops](#victorops)  
+
+
 #### Aggregate
 
 Aggreate multiple events into a single event.
@@ -185,6 +206,26 @@ Example:
 kind: hipchat
 options:
     room: '#alerts'
+```
+
+#### Kafka
+
+Send alert events to an Apache Kafka cluster.
+
+Options:
+
+| Name     | Type   | Description                 |
+| ----     | ----   | -----------                 |
+| cluster  | string | Name of the Kafka cluster.  |
+| topic    | string | Kafka topic.                |
+| template | string | Message template.           |
+
+```yaml
+kind: hipchat
+options:
+    cluster: 'kafka-cluster'
+    topic: 'topic-name'
+    template: 'template-name'
 ```
 
 #### Log

@@ -1,12 +1,13 @@
 ---
-title: Guides
+title: Kapacitor guides
+description: Guides include examples of calculating rates across joined series + backfill, a live leaderboard of game scores, loading directories during Kapacitor booting, and custom anomaly detection.
 aliases:
     - kapacitor/v1.4/examples/
 menu:
   kapacitor_1_4:
     name: Guides
     identifier: guides
-    weight: 1
+    weight: 5 
 ---
 
 The following is a list of examples in no particular order that demonstrate some of the features of Kapacitor.
@@ -23,7 +24,7 @@ See how you can use Kapacitor to create a live updating leaderboard for a game.
 
 ### [Load directory](/kapacitor/v1.4/guides/load_directory/)
 
-Put TICKscripts, TICKscript templates, and handler definitions in a directory,
+Put TICKscripts, TICKscript templates, and handler definitions in a directory
 from where they will be loaded when the Kapcitor daemon boots.
 
 ### [Custom anomaly detection](/kapacitor/v1.4/guides/anomaly_detection/)

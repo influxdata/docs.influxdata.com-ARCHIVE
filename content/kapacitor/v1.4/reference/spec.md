@@ -1,6 +1,6 @@
 ---
 title: TICKscript specification
-
+description: TICKscript specification for use in creating Kapacitor data processing pipelines.
 menu:
   kapacitor_1_4:
     name: TICKscript specification
