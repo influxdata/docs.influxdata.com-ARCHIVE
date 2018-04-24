@@ -13,7 +13,7 @@ menu:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[combine](#descr)&nbsp;(&nbsp;`expressions`&nbsp;`...ast.LambdaNode`)** | Combine this node with itself. The data are combined on timestamp.  |
+| **[combine](#description)&nbsp;(&nbsp;`expressions`&nbsp;`...ast.LambdaNode`)** | Combine this node with itself. The data are combined on timestamp.  |
 
 ### Property Methods
 
@@ -22,13 +22,16 @@ menu:
 | **[as](#as)&nbsp;(&nbsp;`names`&nbsp;`...string`)** | Prefix names for all fields from the respective nodes. Each field from the parent nodes will be prefixed with the provided name and a '.'. See the example above.  |
 | **[delimiter](#delimiter)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The delimiter between the As names and existing field an tag keys. Can be the empty string, but you are responsible for ensuring conflicts are not possible if you use the empty string.  |
 | **[max](#max)&nbsp;(&nbsp;`value`&nbsp;`int64`)** | Maximum number of possible combinations. Since the number of possible combinations can grow very rapidly you can set a maximum number of combinations allowed. If the max is crossed, an error is logged and the combinations are not calculated. Default: 10,000  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
 | **[tolerance](#tolerance)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | The maximum duration of time that two incoming points can be apart and still be considered to be equal in time. The joined data point's time will be rounded to the nearest multiple of the tolerance duration.  |
 
 
 
 ### Chaining Methods
-[Alert](/kapacitor/v1.5/nodes/combine_node/#alert), [Barrier](/kapacitor/v1.5/nodes/combine_node/#barrier), [Bottom](/kapacitor/v1.5/nodes/combine_node/#bottom), [Combine](/kapacitor/v1.5/nodes/combine_node/#combine), [Count](/kapacitor/v1.5/nodes/combine_node/#count), [CumulativeSum](/kapacitor/v1.5/nodes/combine_node/#cumulativesum), [Deadman](/kapacitor/v1.5/nodes/combine_node/#deadman), [Default](/kapacitor/v1.5/nodes/combine_node/#default), [Delete](/kapacitor/v1.5/nodes/combine_node/#delete), [Derivative](/kapacitor/v1.5/nodes/combine_node/#derivative), [Difference](/kapacitor/v1.5/nodes/combine_node/#difference), [Distinct](/kapacitor/v1.5/nodes/combine_node/#distinct), [Ec2Autoscale](/kapacitor/v1.5/nodes/combine_node/#ec2autoscale), [Elapsed](/kapacitor/v1.5/nodes/combine_node/#elapsed), [Eval](/kapacitor/v1.5/nodes/combine_node/#eval), [First](/kapacitor/v1.5/nodes/combine_node/#first), [Flatten](/kapacitor/v1.5/nodes/combine_node/#flatten), [GroupBy](/kapacitor/v1.5/nodes/combine_node/#groupby), [HoltWinters](/kapacitor/v1.5/nodes/combine_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.5/nodes/combine_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.5/nodes/combine_node/#httpout), [HttpPost](/kapacitor/v1.5/nodes/combine_node/#httppost), [InfluxDBOut](/kapacitor/v1.5/nodes/combine_node/#influxdbout), [Join](/kapacitor/v1.5/nodes/combine_node/#join), [K8sAutoscale](/kapacitor/v1.5/nodes/combine_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.5/nodes/combine_node/#kapacitorloopback), [Last](/kapacitor/v1.5/nodes/combine_node/#last), [Log](/kapacitor/v1.5/nodes/combine_node/#log), [Mean](/kapacitor/v1.5/nodes/combine_node/#mean), [Median](/kapacitor/v1.5/nodes/combine_node/#median), [Min](/kapacitor/v1.5/nodes/combine_node/#min), [Mode](/kapacitor/v1.5/nodes/combine_node/#mode), [MovingAverage](/kapacitor/v1.5/nodes/combine_node/#movingaverage), [Percentile](/kapacitor/v1.5/nodes/combine_node/#percentile), [Sample](/kapacitor/v1.5/nodes/combine_node/#sample), [Shift](/kapacitor/v1.5/nodes/combine_node/#shift), [Sideload](/kapacitor/v1.5/nodes/combine_node/#sideload), [Spread](/kapacitor/v1.5/nodes/combine_node/#spread), [StateCount](/kapacitor/v1.5/nodes/combine_node/#statecount), [StateDuration](/kapacitor/v1.5/nodes/combine_node/#stateduration), [Stats](/kapacitor/v1.5/nodes/combine_node/#stats), [Stddev](/kapacitor/v1.5/nodes/combine_node/#stddev), [Sum](/kapacitor/v1.5/nodes/combine_node/#sum), [SwarmAutoscale](/kapacitor/v1.5/nodes/combine_node/#swarmautoscale), [Top](/kapacitor/v1.5/nodes/combine_node/#top), [Union](/kapacitor/v1.5/nodes/combine_node/#union), [Where](/kapacitor/v1.5/nodes/combine_node/#where), [Window](/kapacitor/v1.5/nodes/combine_node/#window)
-<a id='descr'/><hr/><br/>
+[Alert](/kapacitor/v1.4/nodes/combine_node/#alert), [Barrier](/kapacitor/v1.4/nodes/combine_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/combine_node/#bottom), [Combine](/kapacitor/v1.4/nodes/combine_node/#combine), [Count](/kapacitor/v1.4/nodes/combine_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/combine_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/combine_node/#deadman), [Default](/kapacitor/v1.4/nodes/combine_node/#default), [Delete](/kapacitor/v1.4/nodes/combine_node/#delete), [Derivative](/kapacitor/v1.4/nodes/combine_node/#derivative), [Difference](/kapacitor/v1.4/nodes/combine_node/#difference), [Distinct](/kapacitor/v1.4/nodes/combine_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/combine_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/combine_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/combine_node/#eval), [First](/kapacitor/v1.4/nodes/combine_node/#first), [Flatten](/kapacitor/v1.4/nodes/combine_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/combine_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/combine_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/combine_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/combine_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/combine_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/combine_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/combine_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/combine_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/combine_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/combine_node/#last), [Log](/kapacitor/v1.4/nodes/combine_node/#log), [Mean](/kapacitor/v1.4/nodes/combine_node/#mean), [Median](/kapacitor/v1.4/nodes/combine_node/#median), [Min](/kapacitor/v1.4/nodes/combine_node/#min), [Mode](/kapacitor/v1.4/nodes/combine_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/combine_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/combine_node/#percentile), [Sample](/kapacitor/v1.4/nodes/combine_node/#sample), [Shift](/kapacitor/v1.4/nodes/combine_node/#shift), [Sideload](/kapacitor/v1.4/nodes/combine_node/#sideload), [Spread](/kapacitor/v1.4/nodes/combine_node/#spread), [StateCount](/kapacitor/v1.4/nodes/combine_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/combine_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/combine_node/#stats), [Stddev](/kapacitor/v1.4/nodes/combine_node/#stddev), [Sum](/kapacitor/v1.4/nodes/combine_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/combine_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/combine_node/#top), [Union](/kapacitor/v1.4/nodes/combine_node/#union), [Where](/kapacitor/v1.4/nodes/combine_node/#where), [Window](/kapacitor/v1.4/nodes/combine_node/#window)
+
+---
+
 ### Description
 
 Combine the data from a single node with itself.
@@ -81,10 +84,9 @@ Example:
 In the above example all combinations triples are created.
 
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
-Properties
-----------
+## Properties
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -105,7 +107,7 @@ The names cannot have a dot '.' character.
 combine.as(names ...string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Delimiter
@@ -118,7 +120,7 @@ Can be the empty string, but you are responsible for ensuring conflicts are not 
 combine.delimiter(value string)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Max
@@ -134,7 +136,18 @@ Default: 10,000
 combine.max(value int64)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
+
+
+### Quiet
+
+Suppress errors during execution.
+
+```javascript
+combine.quiet()
+```
+
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
 ### Tolerance
@@ -149,11 +162,10 @@ multiple of the tolerance duration.
 combine.tolerance(value time.Duration)
 ```
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
-Chaining Methods
-----------------
+## Chaining Methods
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.
@@ -169,9 +181,9 @@ Create an alert node, which can trigger alerts.
 combine|alert()
 ```
 
-Returns: [AlertNode](/kapacitor/v1.5/nodes/alert_node/)
+Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Barrier
 
@@ -184,9 +196,9 @@ One BarrierMessage will be emitted every period duration
 combine|barrier()
 ```
 
-Returns: [BarrierNode](/kapacitor/v1.5/nodes/barrier_node/)
+Returns: [BarrierNode](/kapacitor/v1.4/nodes/barrier_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Bottom
 
@@ -197,9 +209,9 @@ Select the bottom `num` points for `field` and sort by any extra tags or fields.
 combine|bottom(num int64, field string, fieldsAndTags ...string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Combine
 
@@ -210,9 +222,9 @@ Combine this node with itself. The data are combined on timestamp.
 combine|combine(expressions ...ast.LambdaNode)
 ```
 
-Returns: [CombineNode](/kapacitor/v1.5/nodes/combine_node/)
+Returns: [CombineNode](/kapacitor/v1.4/nodes/combine_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Count
 
@@ -223,9 +235,9 @@ Count the number of points.
 combine|count(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### CumulativeSum
 
@@ -237,9 +249,9 @@ A point is emitted for every point collected.
 combine|cumulativeSum(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Deadman
 
@@ -286,7 +298,7 @@ Example:
 
 The `id` and `message` alert properties can be configured globally via the 'deadman' configuration section.
 
-Since the [AlertNode](/kapacitor/v1.5/nodes/alert_node/) is the last piece it can be further modified as usual.
+Since the [AlertNode](/kapacitor/v1.4/nodes/alert_node/) is the last piece it can be further modified as usual.
 Example:
 
 
@@ -323,9 +335,9 @@ Example:
 combine|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
 ```
 
-Returns: [AlertNode](/kapacitor/v1.5/nodes/alert_node/)
+Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Default
 
@@ -336,9 +348,9 @@ Create a node that can set defaults for missing tags or fields.
 combine|default()
 ```
 
-Returns: [DefaultNode](/kapacitor/v1.5/nodes/default_node/)
+Returns: [DefaultNode](/kapacitor/v1.4/nodes/default_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Delete
 
@@ -349,9 +361,9 @@ Create a node that can delete tags or fields.
 combine|delete()
 ```
 
-Returns: [DeleteNode](/kapacitor/v1.5/nodes/delete_node/)
+Returns: [DeleteNode](/kapacitor/v1.4/nodes/delete_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Derivative
 
@@ -362,9 +374,9 @@ Create a new node that computes the derivative of adjacent points.
 combine|derivative(field string)
 ```
 
-Returns: [DerivativeNode](/kapacitor/v1.5/nodes/derivative_node/)
+Returns: [DerivativeNode](/kapacitor/v1.4/nodes/derivative_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Difference
 
@@ -375,9 +387,9 @@ Compute the difference between points independent of elapsed time.
 combine|difference(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Distinct
 
@@ -388,9 +400,9 @@ Produce batch of only the distinct points.
 combine|distinct(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Ec2Autoscale
 
@@ -401,9 +413,9 @@ Create a node that can trigger autoscale events for a ec2 autoscalegroup.
 combine|ec2Autoscale()
 ```
 
-Returns: [Ec2AutoscaleNode](/kapacitor/v1.5/nodes/ec2_autoscale_node/)
+Returns: [Ec2AutoscaleNode](/kapacitor/v1.4/nodes/ec2_autoscale_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Elapsed
 
@@ -414,9 +426,9 @@ Compute the elapsed time between points
 combine|elapsed(field string, unit time.Duration)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Eval
 
@@ -429,9 +441,9 @@ The results are available to later expressions.
 combine|eval(expressions ...ast.LambdaNode)
 ```
 
-Returns: [EvalNode](/kapacitor/v1.5/nodes/eval_node/)
+Returns: [EvalNode](/kapacitor/v1.4/nodes/eval_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### First
 
@@ -442,9 +454,9 @@ Select the first point.
 combine|first(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Flatten
 
@@ -455,9 +467,9 @@ Flatten points with similar times into a single point.
 combine|flatten()
 ```
 
-Returns: [FlattenNode](/kapacitor/v1.5/nodes/flatten_node/)
+Returns: [FlattenNode](/kapacitor/v1.4/nodes/flatten_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### GroupBy
 
@@ -477,9 +489,9 @@ Example:
 combine|groupBy(tag ...interface{})
 ```
 
-Returns: [GroupByNode](/kapacitor/v1.5/nodes/group_by_node/)
+Returns: [GroupByNode](/kapacitor/v1.4/nodes/group_by_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### HoltWinters
 
@@ -490,9 +502,9 @@ Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_lang
 combine|holtWinters(field string, h int64, m int64, interval time.Duration)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### HoltWintersWithFit
 
@@ -504,9 +516,9 @@ This method also outputs all the points used to fit the data in addition to the 
 combine|holtWintersWithFit(field string, h int64, m int64, interval time.Duration)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### HttpOut
 
@@ -521,9 +533,9 @@ For example, if the task endpoint is at `/kapacitor/v1/tasks/<task_id>` and endp
 combine|httpOut(endpoint string)
 ```
 
-Returns: [HTTPOutNode](/kapacitor/v1.5/nodes/http_out_node/)
+Returns: [HTTPOutNode](/kapacitor/v1.4/nodes/http_out_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### HttpPost
 
@@ -536,9 +548,9 @@ endpoint property method.
 combine|httpPost(url ...string)
 ```
 
-Returns: [HTTPPostNode](/kapacitor/v1.5/nodes/http_post_node/)
+Returns: [HTTPPostNode](/kapacitor/v1.4/nodes/http_post_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### InfluxDBOut
 
@@ -549,9 +561,9 @@ Create an influxdb output node that will store the incoming data into InfluxDB.
 combine|influxDBOut()
 ```
 
-Returns: [InfluxDBOutNode](/kapacitor/v1.5/nodes/influx_d_b_out_node/)
+Returns: [InfluxDBOutNode](/kapacitor/v1.4/nodes/influx_d_b_out_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Join
 
@@ -562,9 +574,9 @@ Join this node with other nodes. The data are joined on timestamp.
 combine|join(others ...Node)
 ```
 
-Returns: [JoinNode](/kapacitor/v1.5/nodes/join_node/)
+Returns: [JoinNode](/kapacitor/v1.4/nodes/join_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### K8sAutoscale
 
@@ -575,9 +587,9 @@ Create a node that can trigger autoscale events for a kubernetes cluster.
 combine|k8sAutoscale()
 ```
 
-Returns: [K8sAutoscaleNode](/kapacitor/v1.5/nodes/k8s_autoscale_node/)
+Returns: [K8sAutoscaleNode](/kapacitor/v1.4/nodes/k8s_autoscale_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### KapacitorLoopback
 
@@ -588,9 +600,9 @@ Create an kapacitor loopback node that will send data back into Kapacitor as a s
 combine|kapacitorLoopback()
 ```
 
-Returns: [KapacitorLoopbackNode](/kapacitor/v1.5/nodes/kapacitor_loopback_node/)
+Returns: [KapacitorLoopbackNode](/kapacitor/v1.4/nodes/kapacitor_loopback_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Last
 
@@ -601,9 +613,9 @@ Select the last point.
 combine|last(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Log
 
@@ -614,9 +626,9 @@ Create a node that logs all data it receives.
 combine|log()
 ```
 
-Returns: [LogNode](/kapacitor/v1.5/nodes/log_node/)
+Returns: [LogNode](/kapacitor/v1.4/nodes/log_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Mean
 
@@ -627,9 +639,9 @@ Compute the mean of the data.
 combine|mean(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Median
 
@@ -641,9 +653,9 @@ if you want the median point use `.percentile(field, 50.0)`.
 combine|median(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Min
 
@@ -654,9 +666,9 @@ Select the minimum point.
 combine|min(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Mode
 
@@ -667,9 +679,9 @@ Compute the mode of the data.
 combine|mode(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### MovingAverage
 
@@ -681,9 +693,9 @@ No points are emitted until the window is full.
 combine|movingAverage(field string, window int64)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Percentile
 
@@ -694,9 +706,9 @@ Select a point at the given percentile. This is a selector function, no interpol
 combine|percentile(field string, percentile float64)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Sample
 
@@ -709,9 +721,9 @@ One point will be emitted every count or duration specified.
 combine|sample(rate interface{})
 ```
 
-Returns: [SampleNode](/kapacitor/v1.5/nodes/sample_node/)
+Returns: [SampleNode](/kapacitor/v1.4/nodes/sample_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Shift
 
@@ -722,9 +734,9 @@ Create a new node that shifts the incoming points or batches in time.
 combine|shift(shift time.Duration)
 ```
 
-Returns: [ShiftNode](/kapacitor/v1.5/nodes/shift_node/)
+Returns: [ShiftNode](/kapacitor/v1.4/nodes/shift_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Sideload
 
@@ -735,9 +747,9 @@ Create a node that can load data from external sources
 combine|sideload()
 ```
 
-Returns: [SideloadNode](/kapacitor/v1.5/nodes/sideload_node/)
+Returns: [SideloadNode](/kapacitor/v1.4/nodes/sideload_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Spread
 
@@ -748,9 +760,9 @@ Compute the difference between `min` and `max` points.
 combine|spread(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### StateCount
 
@@ -761,9 +773,9 @@ Create a node that tracks number of consecutive points in a given state.
 combine|stateCount(expression ast.LambdaNode)
 ```
 
-Returns: [StateCountNode](/kapacitor/v1.5/nodes/state_count_node/)
+Returns: [StateCountNode](/kapacitor/v1.4/nodes/state_count_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### StateDuration
 
@@ -774,9 +786,9 @@ Create a node that tracks duration in a given state.
 combine|stateDuration(expression ast.LambdaNode)
 ```
 
-Returns: [StateDurationNode](/kapacitor/v1.5/nodes/state_duration_node/)
+Returns: [StateDurationNode](/kapacitor/v1.4/nodes/state_duration_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Stats
 
@@ -789,9 +801,9 @@ This means the interval time is independent of the times of the data points the 
 combine|stats(interval time.Duration)
 ```
 
-Returns: [StatsNode](/kapacitor/v1.5/nodes/stats_node/)
+Returns: [StatsNode](/kapacitor/v1.4/nodes/stats_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Stddev
 
@@ -802,9 +814,9 @@ Compute the standard deviation.
 combine|stddev(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Sum
 
@@ -815,9 +827,9 @@ Compute the sum of all values.
 combine|sum(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### SwarmAutoscale
 
@@ -828,9 +840,9 @@ Create a node that can trigger autoscale events for a docker swarm cluster.
 combine|swarmAutoscale()
 ```
 
-Returns: [SwarmAutoscaleNode](/kapacitor/v1.5/nodes/swarm_autoscale_node/)
+Returns: [SwarmAutoscaleNode](/kapacitor/v1.4/nodes/swarm_autoscale_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Top
 
@@ -841,9 +853,9 @@ Select the top `num` points for `field` and sort by any extra tags or fields.
 combine|top(num int64, field string, fieldsAndTags ...string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Union
 
@@ -854,9 +866,9 @@ Perform the union of this node and all other given nodes.
 combine|union(node ...Node)
 ```
 
-Returns: [UnionNode](/kapacitor/v1.5/nodes/union_node/)
+Returns: [UnionNode](/kapacitor/v1.4/nodes/union_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Where
 
@@ -867,9 +879,9 @@ Create a new node that filters the data stream by a given expression.
 combine|where(expression ast.LambdaNode)
 ```
 
-Returns: [WhereNode](/kapacitor/v1.5/nodes/where_node/)
+Returns: [WhereNode](/kapacitor/v1.4/nodes/where_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Window
 
@@ -882,6 +894,6 @@ NOTE: Window can only be applied to stream edges.
 combine|window()
 ```
 
-Returns: [WindowNode](/kapacitor/v1.5/nodes/window_node/)
+Returns: [WindowNode](/kapacitor/v1.4/nodes/window_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
