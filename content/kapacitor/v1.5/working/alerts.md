@@ -210,7 +210,7 @@ options:
 
 #### Kafka
 
-Send alert events to a Kafka cluster.
+Send alert events to an Apache Kafka cluster.
 
 Options:
 
