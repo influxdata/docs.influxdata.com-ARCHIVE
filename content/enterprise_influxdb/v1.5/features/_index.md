@@ -5,7 +5,7 @@ aliases:
 menu:
   enterprise_influxdb_1_5:
     name: Enterprise features
-    weight: 40
+    weight: 60
 ---
 
 ## [InfluxEnterprise users](/enterprise_influxdb/v1.5/features/users/)

@@ -5,7 +5,7 @@ aliases:
 menu:
   enterprise_influxdb_1_5:
     name: Concepts
-    weight: 30
+    weight: 50
 ---
 
 ## [Clustering](/enterprise_influxdb/v1.5/concepts/clustering)

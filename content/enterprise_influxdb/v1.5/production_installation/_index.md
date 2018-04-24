@@ -4,7 +4,7 @@ aliases:
     - /enterprise/v1.5/production_installation/
 menu:
   enterprise_influxdb_1_5:
-    weight: 80
+    weight: 40
 ---
 
 The Production Installation process is designed for users looking to deploy

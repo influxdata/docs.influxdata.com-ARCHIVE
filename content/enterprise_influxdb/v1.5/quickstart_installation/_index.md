@@ -4,7 +4,7 @@ aliases:
     - /enterprise/v1.5/quickstart_installation/
 menu:
   enterprise_influxdb_1_5:
-    weight: 70
+    weight: 30
 ---
 
 The QuickStart installation process is designed for users looking to quickly

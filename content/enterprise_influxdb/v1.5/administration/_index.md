@@ -4,7 +4,7 @@ description: This section includes technical documentation on InfluxDB Enterpris
 menu:
   enterprise_influxdb_1_5:
     name: Administration
-    weight: 60
+    weight: 70
 ---
 
 ## [Configuring InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/configuration/)
