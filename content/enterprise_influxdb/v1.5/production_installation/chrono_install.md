@@ -5,7 +5,7 @@ aliases:
 menu:
   enterprise_influxdb_1_5:
     weight: 20
-    parent: production_installation
+    parent: Production installation
     identifier: chrono_install
 ---
 

@@ -6,7 +6,7 @@ menu:
   enterprise_influxdb_1_5:
     name: Cluster commands
     weight: 10
-    parent: Features
+    parent: Enterprise features
 ---
 
 Use the command line tools [`influxd-ctl`](#influxd-ctl) and [`influx`](#influx) to interact with your cluster and data.
