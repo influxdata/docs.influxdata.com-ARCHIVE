@@ -2,9 +2,10 @@
 title: About the project
 alias:
   -/docs/v1.5/about/
-  menu:
-    influxdb_1_5:
-      weight: 10
+menu:
+  influxdb_1_5:
+    weight: 10
+
 
 ---
 
