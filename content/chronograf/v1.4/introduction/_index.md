@@ -5,7 +5,7 @@ description: An introduction to Chronograf, the user interface and data visualiz
 menu:
   chronograf_1_4:
     name: Introduction
-    weight: 10
+    weight: 20
 ---
 
 Follow the links below to get acquainted with Chronograf:

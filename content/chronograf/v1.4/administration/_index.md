@@ -4,7 +4,7 @@ description: This section documents Chronograf administration, including configu
 menu:
   chronograf_1_4:
     name: Administration
-    weight: 30
+    weight: 40
 
 ---
 

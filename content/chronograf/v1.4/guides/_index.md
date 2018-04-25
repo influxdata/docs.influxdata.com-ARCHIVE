@@ -4,7 +4,7 @@ description: The Chronograf guides discuss dashboards, monitoring InfluxDB Enter
 menu:
   chronograf_1_4:
     name: Guides
-    weight: 20
+    weight: 30
 ---
 
 Follow the links below to explore Chronograf's features.

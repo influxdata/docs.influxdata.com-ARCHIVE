@@ -4,7 +4,7 @@ description: This section includes documentation about the  Chronograf project, 
 menu:
   chronograf_1_4:
     name: About the project
-    weight: 0
+    weight: 10
 ---
 
 Follow the links below for more information.
