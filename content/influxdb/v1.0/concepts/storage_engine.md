@@ -7,7 +7,7 @@ menu:
     parent: concepts
 ---
 
-# The InfluxDB Storage Engine and the Time-Structured Merge Tree (TSM) 
+# The InfluxDB Storage Engine and the Time-Structured Merge Tree (TSM)
 
 The new InfluxDB storage engine looks very similar to a LSM Tree.
 It has a write ahead log and a collection of read-only data files which are  similar in concept to SSTables in an LSM Tree.
@@ -115,13 +115,13 @@ The length of the blocks is stored in the index.
 
 Following the blocks is the index for the blocks in the file.
 The index is composed of a sequence of index entries ordered lexicographically by key and then by time.
-The key includes the measurement name, tag set, and one field. 
+The key includes the measurement name, tag set, and one field.
 Multiple fields per point creates multiple indices in the TSM file.
 Each index entry starts with a key length and the key, followed by the block type (float, int, bool, string) and a count of the number of blocks in the file.  
 Each index block entry is composed of the min and max time for the block, the offset into the file where the block is located and the the size of the block.
 
 The index structure can provide efficient access to all blocks as well as the ability to determine the cost associated with accessing a given key.
-Given a key and timestamp, we can determine whether a file contains the block for that timestamp. 
+Given a key and timestamp, we can determine whether a file contains the block for that timestamp.
 We can also determine where that block resides and how much data must be read to retrieve the block.
 Knowing the size of the block, we can efficiently provision our IO statements.
 
@@ -231,8 +231,8 @@ Higher level (and thus less frequent) compactions will re-combine blocks to full
 * Index Optimization - When many level 4 TSM files accumulate, the internal indexes become larger and more costly to access.
 An index optimization compaction splits the series and indices across a new set of TSM files, sorting all points for a given series into one TSM file.
 Before an index optimization, each TSM file contained points for most or all series, and thus each contains the same series index.
-After an index optimzation, each TSM file contains points from a minimum of series and there is little series overlap between files.
-Each TSM file thus has a smaller unique series index, instead of a duplicate of the full series list. 
+After an index optimization, each TSM file contains points from a minimum of series and there is little series overlap between files.
+Each TSM file thus has a smaller unique series index, instead of a duplicate of the full series list.
 In addition, all points from a particular series are contiguous in a TSM file rather than spread across multiple TSM files.
 * Full Compactions - Full compactions run when a shard has become cold for writes for long time, or when deletes have occurred on the shard.
 Full compactions produce an optimal set of TSM files and include all optimizations from Level and Index Optimization compactions.
@@ -241,7 +241,7 @@ Once a shard is fully compacted, no other compactions will run on it unless new 
 ### Writes
 
 Writes are appended to the current WAL segment and are also added to the Cache.
-Each WAL segment has a maximum size. 
+Each WAL segment has a maximum size.
 Writes roll over to a new file once the current file fills up.
 The cache is also size bounded; snapshots are taken and WAL compactions are initiated when the cache becomes too full.
 If the inbound write rate exceeds the WAL compaction rate for a sustained period, the cache may become too full, in which case new writes will fail until the snapshot process catches up.
@@ -284,7 +284,7 @@ The block is decompressed and we seek to the specific point.
 
 Writing a new storage format should be a last resort.
 So how did InfluxData end up writing our own engine?
-InfluxData has experimented with many storage formats and found each lacking in some fundamental way. 
+InfluxData has experimented with many storage formats and found each lacking in some fundamental way.
 The performance requirements for InfluxDB are significant, and eventually overwhelm other storage systems.
 The 0.8 line of InfluxDB allowed multiple storage engines, including LevelDB, RocksDB, HyperLevelDB, and LMDB.
 The 0.9 line of InfluxDB used BoltDB as the underlying storage engine.
@@ -398,7 +398,7 @@ There were simply too many file handles open.
 
 After struggling with LevelDB and its variants for a year we decided to move over to BoltDB, a pure Golang database heavily inspired by LMDB, a mmap B+Tree database written in C.
 It has the same API semantics as LevelDB: a key value store where the keyspace is ordered.
-Many of our users were surprised. 
+Many of our users were surprised.
 Our own posted tests of the LevelDB variants vs. LMDB (a mmap B+Tree) showed RocksDB as the best performer.
 
 However, there were other considerations that went into this decision outside of the pure write performance.

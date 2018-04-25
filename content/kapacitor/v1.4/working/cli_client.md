@@ -53,7 +53,7 @@ settings and to use the client against any Kapacitor server.
 **Example 1: Using command line options**
 
 ```
-$ kapacitor -skipVerify -url https://192.168.67.88:9093 list tasks
+$ kapacitor -skipVerify -url https://192.168.67.88:9092 list tasks
 ID                                                 Type      Status    Executing Databases and Retention Policies
 batch_load_test                                    batch     enabled   true      ["telegraf"."autogen"]
 chronograf-v1-b12b2554-cf38-4d7e-af24-5b0cd3cecc54 stream    enabled   true      ["telegraf"."autogen"]

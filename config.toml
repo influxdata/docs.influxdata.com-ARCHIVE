@@ -44,6 +44,7 @@ SectionPagesMenu = "products"
   weight = 50
   url = "/enterprise_kapacitor/"
 
+<<<<<<< HEAD
   # InfluxDB v1.6 Menu
   [[menu.influxdb_1_6]]
     name = "About the Project"
@@ -279,6 +280,8 @@ SectionPagesMenu = "products"
   weight = 40
   url = "https://www.influxdata.com/virtual-training-courses/"
   parent = "external_resources"
+=======
+>>>>>>> master
 
 
   # InfluxDB v1.4 Menu

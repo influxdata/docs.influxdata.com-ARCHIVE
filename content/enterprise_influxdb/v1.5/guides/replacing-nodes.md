@@ -28,7 +28,7 @@ Many InfluxDB Enterprise clusters are configured with security enabled, forcing 
 Both `influxd-ctl` and `curl`, the command line tools used when replacing nodes, have options that facilitate the use of TLS.
 
 #### `influxd-ctl -bind-tls`
-In order manage your cluster over TLS, pass the `-bind-tls` flag with any `influxd-ctl` commmand.
+In order to manage your cluster over TLS, pass the `-bind-tls` flag with any `influxd-ctl` commmand.
 
 > If using a self-signed certificate, pass the `-k` flag to skip certificate verification.
 
