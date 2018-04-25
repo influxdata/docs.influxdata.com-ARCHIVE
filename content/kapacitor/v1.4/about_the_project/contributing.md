@@ -1,5 +1,5 @@
 ---
-title: Contributing to Kapacitor
+title: Contributing to Kapacitor OSS
 
 menu:
   kapacitor_1_4:

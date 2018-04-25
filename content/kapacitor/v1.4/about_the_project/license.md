@@ -1,5 +1,5 @@
 ---
-title: Kapacitor license
+title: License
 
 menu:
   kapacitor_1_4:

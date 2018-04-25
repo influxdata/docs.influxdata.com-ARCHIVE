@@ -1,8 +1,9 @@
 ---
-title: Release notes
+title: InfluxDB Enterprise release notes
 
 menu:
   enterprise_influxdb_1_5:
+    name: Release notes
     weight: 10
     parent: About the project
 ---

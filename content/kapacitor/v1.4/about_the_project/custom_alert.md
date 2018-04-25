@@ -1,5 +1,5 @@
 ---
-title: Contributing new Kapacitor alert integrations
+title: Contributing Kapacitor alert integrations
 aliases:
     - kapacitor/v1.4/contributing/custom_alert/
 menu:

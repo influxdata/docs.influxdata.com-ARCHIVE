@@ -2,6 +2,7 @@
 title: Contributing to Chronograf
 menu:
   influxdb_1_5:
+    name: Contributing
     weight: 30
     parent: About the project
 ---

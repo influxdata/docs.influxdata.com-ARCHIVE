@@ -1,9 +1,9 @@
 ---
-title: Contributing license agreement (CLA)
+title: Contributor License Agreement (CLA)
 
 menu:
  kapacitor_1_4:
-  name: Contributing license agreement (CLA)
+  name: Contributor License Agreement (CLA)
   weight: 60
   parent: About the project
   url: https://influxdb.com/community/cla.html

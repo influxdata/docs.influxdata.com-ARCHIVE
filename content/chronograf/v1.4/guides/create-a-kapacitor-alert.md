@@ -1,6 +1,6 @@
 ---
-title: Creating Kapacitor alerts
-description: Creating Kapacitor alert rules in Chronograf, specifying time series data and thresholds. Example sends alerts to a Slack channel.
+title: Creating Chronograf alert rules
+description: Creating Chronograf alert rules, specifying time series data and thresholds. Example sends alerts to a Slack channel.
 menu:
   chronograf_1_4:
     weight: 60

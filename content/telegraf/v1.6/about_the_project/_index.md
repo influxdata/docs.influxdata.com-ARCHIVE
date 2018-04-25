@@ -7,13 +7,13 @@
      weight: 10
 ---
 
-## [Release notes](/telegraf/v1.6/about_the_project/release-notes-changelog/)
+## [Telegraf release notes](/telegraf/v1.6/about_the_project/release-notes-changelog/)
 
 ## [Contributing to Telegraf](https://github.com/influxdata/telegraf/blob/master/CONTRIBUTING.md)
 
-## [Contributing license agreement (CLA)](https://influxdata.com/community/cla/)
+## [Contributor License Agreement (CLA)](https://influxdata.com/community/cla/)
 
-## [Telegraf license](https://github.com/influxdata/telegraf/blob/master/LICENSE)
+## [License](https://github.com/influxdata/telegraf/blob/master/LICENSE)
 
 ## <a name="third_party">Third party software</a>
 InfluxData products contain third party software, which means the copyrighted, patented, or otherwise legally protected

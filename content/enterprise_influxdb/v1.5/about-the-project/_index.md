@@ -1,15 +1,16 @@
 ---
-title: About the project
+title: About the InfluxDB Enterprise project
 menu:
   enterprise_influxdb_1_5:
+    name: About the project
     weight: 10
 ---
 
-## [Release notes/changelog](/enterprise_influxdb/v1.5/about-the-project/release-notes-changelog/)
+## [InfluxDB Enterprise release notes](/enterprise_influxdb/v1.5/about-the-project/release-notes-changelog/)
 
 
 
-## [Commercial license](https://www.influxdata.com/legal/slsa/)
+## [InfluxDB Enterprise commercial license](https://www.influxdata.com/legal/slsa/)
 
 InfluxDB Enterprise is available with a commercial license.  [Contact sales for more information](https://www.influxdata.com/contact-sales/).
 

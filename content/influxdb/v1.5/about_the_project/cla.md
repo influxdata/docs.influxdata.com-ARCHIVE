@@ -1,8 +1,8 @@
 ---
-title: Contributor license agreement
+title: Contributor License Agreement (CLA)
 menu:
   influxdb_1_5:
-    name: Contributor license agreement
+    name: Contributor License Agreement (CLA)
     weight: 40
     parent: About the project
 ---

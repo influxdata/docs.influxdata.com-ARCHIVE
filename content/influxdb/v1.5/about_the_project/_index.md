@@ -1,23 +1,24 @@
 ---
-title: About the project
+title: About the InfluxDB OSS project
 alias:
   -/docs/v1.5/about/
 menu:
   influxdb_1_5:
+    name: About the project
     weight: 10
 ---
 
-## [Release notes](/influxdb/v1.5/about_the_project/releasenotes-changelog/)
+## [InfluxDB OSS release notes](/influxdb/v1.5/about_the_project/releasenotes-changelog/)
 
-## [What's new in InfluxDB 1.5](/influxdb/v1.5/about_the_project/whats_new/)
+## [What's new in InfluxDB OSS 1.5](/influxdb/v1.5/about_the_project/whats_new/)
 
-## [Contributing](https://github.com/influxdata/influxdb/blob/master/CONTRIBUTING.md)
+## [Contributing to InfluxDB OSS](https://github.com/influxdata/influxdb/blob/master/CONTRIBUTING.md)
 
-## [CLA](https://influxdata.com/community/cla/)
+## [Contributor License Agreement (CLA)](https://influxdata.com/community/cla/)
 
-## [Licenses](https://github.com/influxdata/influxdb/blob/master/LICENSE)
+## [License](https://github.com/influxdata/influxdb/blob/master/LICENSE)
 
-## <a name="third_party">Third Party Software</a>
+## <a name="third_party">Third party software</a>
 InfluxData products contain third party software, which means the copyrighted, patented, or otherwise legally protected
 software of third parties that is incorporated in InfluxData products.
 

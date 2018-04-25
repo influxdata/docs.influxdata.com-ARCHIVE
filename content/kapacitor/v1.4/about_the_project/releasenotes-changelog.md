@@ -1,5 +1,5 @@
 ---
-title: Kapacitor release notes
+title: Kapacitor OSS release notes
 menu:
   kapacitor_1_4:
     name: Release notes

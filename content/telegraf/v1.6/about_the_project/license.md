@@ -1,5 +1,5 @@
 ---
- title: Telegraf license
+ title: License
 
  menu:
    telegraf_1_6:

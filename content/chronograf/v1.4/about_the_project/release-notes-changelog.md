@@ -1,7 +1,8 @@
 ---
-title: Release notes
+title: Chronograf release notes
 menu:
   chronograf_1_4:
+    name: Release notes
     weight: 10
     parent: About the project
 ---

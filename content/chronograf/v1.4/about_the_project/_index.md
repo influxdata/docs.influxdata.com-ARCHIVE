@@ -1,5 +1,5 @@
 ---
-title: About the project
+title: About the Chronograf project
 description: This section includes documentation about the  Chronograf project, release notes and changelogs, what's new, contributing, and licenses.
 menu:
   chronograf_1_4:
@@ -9,11 +9,11 @@ menu:
 
 Follow the links below for more information.
 
-## [Release notes](/chronograf/latest/about_the_project/release-notes-changelog/)
+## [Chronograf release notes](/chronograf/latest/about_the_project/release-notes-changelog/)
 
 ## [Contributing to Chronograf](https://github.com/influxdata/chronograf/blob/master/CONTRIBUTING.md)
-## [Contributing license agreement](https://www.influxdata.com/legal/cla/)
-## [Chronograf license](https://github.com/influxdata/chronograf/blob/master/LICENSE)
+## [Contributing License Agreement (CLA)](https://www.influxdata.com/legal/cla/)
+## [License](https://github.com/influxdata/chronograf/blob/master/LICENSE)
 Chronograf is released under the GNU Affero General Public License. This Free Software Foundation license is fairly new,
 and differs from the more widely known and understood GPL.
 

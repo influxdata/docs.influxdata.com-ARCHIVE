@@ -1,9 +1,9 @@
 ---
-title: Contributing license agreement (CLA)
+title: Contributor License Agreement (CLA)
 
 menu:
    telegraf_1_6:
-     name: Contributing license agreement (CLA)
+     name: Contributor License Agreement (CLA)
      parent: About the project
      weight: 30
      url: https://influxdata.com/community/cla/

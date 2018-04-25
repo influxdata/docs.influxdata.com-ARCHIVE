@@ -1,5 +1,5 @@
 ---
-title: About the project
+title: About the Kapacitor Enterprise project
 menu:
   enterprise_kapacitor_1_4:
     name: About the project
