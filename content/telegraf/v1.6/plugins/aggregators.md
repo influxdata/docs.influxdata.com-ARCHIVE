@@ -4,7 +4,6 @@ description: Telegraf aggregator plugins work with the InfluxData time series pl
 menu:
   telegraf_1_6:
     name: Aggregator
-    identifier: aggregators
     weight: 30
     parent: Plugins
 ---

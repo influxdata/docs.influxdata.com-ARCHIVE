@@ -9,18 +9,18 @@ menu:
 
 
 Chronograf provides a user interface for [Kapacitor](/kapacitor/latest/), InfluxData's processing framework for creating alerts, running ETL jobs, and detecting anomalies in your data.
-Alerts in Chronograf correspond to Kapacitor tasks designed specifically to
-trigger alerts whenever the data stream values rise above or fall below
+Chronograf alert rules correspond to Kapacitor tasks that are designed specifically to
+trigger alerts whenever data stream values rise above or fall below
 designated thresholds.
-Some of the most common alerting use cases can be managed using Chronograf, including:
+Most of the common alerting use cases can be managed using Chronograf, including:
 
 * Thresholds with static ceilings, floors, and ranges.
 * Relative thresholds based on unit or percentage changes.
 * Deadman switches.
 
-For more complex alerts and other tasks, you must define them directly in Kapacitor.
+Complex alerts and other tasks must be defined directly in Kapacitor.
 
-By the end of this guide, you'll have an alert rule that sends a message to an existing [Slack](https://slack.com/) channel whenever your idle CPU usage crosses the 80% threshold.
+By the end of this guide, you'll have a Chronograf alert rule that sends an alert message to an existing [Slack](https://slack.com/) channel whenever your idle CPU usage crosses the 80% threshold.
 
 ## Requirements
 
@@ -33,13 +33,13 @@ The [Getting Started](/chronograf/latest/introduction/getting-started/) guide of
 You have a working Slack instance and have configured it as an [event handler](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf) in Chronograf.
 See the [Configure Kapacitor Event Handlers](/chronograf/latest/guides/configure-kapacitor-event-handlers/) guide for detailed configuration instructions.
 
-## Configure a Kapacitor alert rule
+## Configure a Chronograf alert rule
 
 Before you start, navigate to the Rule Configuration page by visiting the Alert Rules page and clicking on the `Create Rule` button in the top right corner.
 
 ![Navigate to Rule Configuration](/img/chronograf/v1.4/g-kap-rule-page.png)
 
-The Rule Configuration page is where you create and edit your Kapacitor alert rules.
+The Rule Configuration page is where you create and edit your Chronogra alert rules.
 Steps one through six walk you through each section of the Rule Configuration page:
 
 ![Empty Rule Configuration](/img/chronograf/v1.4/g-kap-blank-rule.png)
@@ -116,7 +116,7 @@ If you did not include a default channel in the initial configuration or if you'
 
 ### Step 6: Save the alert rule
 
-Click `Save Rule` in the top right corner and navigate to the Kapacitor Rule page to see your rule.
+Click `Save Rule` in the top right corner and navigate to the A Rule page to see your rule.
 Notice that you can easily enable and disable the rule by toggling the checkbox in the `Enabled` column.
 
 ![See the alert rule](/img/chronograf/v1.4/g-kap-rule-page-ii.png)
