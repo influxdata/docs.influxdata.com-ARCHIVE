@@ -4,7 +4,7 @@ aliases:
     - /enterprise/v1.5/concepts/glossary/
 menu:
   enterprise_influxdb_1_5:
-    weight: 0
+    weight: 20
     parent: Concepts
 ---
 

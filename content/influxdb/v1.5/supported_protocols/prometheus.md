@@ -5,7 +5,7 @@ menu:
   influxdb_1_5:
     name: Prometheus
     weight: 40
-    parent: supported_protocols
+    parent: Supported protocols
 ---
 
 

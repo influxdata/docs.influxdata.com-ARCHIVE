@@ -1,5 +1,10 @@
 ---
-title: Guides
+title: InfluxDB guides
+menu:
+  influxdb_1_5:
+    name: Guides
+    weight: 40
+
 ---
 
 ## [Writing data with the HTTP API](/influxdb/v1.5/guides/writing_data/)

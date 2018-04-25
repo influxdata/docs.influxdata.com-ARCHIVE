@@ -4,7 +4,7 @@ menu:
   influxdb_1_5:
     name: Configuring InfluxDB
     weight: 10
-    parent: administration
+    parent: Administration
 ---
 
 The InfluxDB OSS configuration file contains configuration settings specific to a local node.

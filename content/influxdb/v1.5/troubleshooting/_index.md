@@ -1,5 +1,9 @@
 ---
 title: Troubleshooting InfluxDB
+menu:
+  influxdb_1_5:
+    name: Troubleshooting
+    weight: 110
 ---
 
 ## [Frequently asked questions](/influxdb/v1.5/troubleshooting/frequently-asked-questions/)
@@ -11,6 +15,6 @@ Where applicable, it links to outstanding issues on GitHub.
 
 With InfluxDB’s query management features, users are able to identify currently-running queries and have the ability to kill queries that are overloading their system. Additionally, users can prevent and halt the execution of inefficient queries with several configuration settings.
 
-## Error messages
+## [Error messages](/influxdb/v1.5/troubleshooting/errors/)
 
 This page includes information about some of the more common InfluxDB error messages, their descriptions, and, where applicable, common resolutions.

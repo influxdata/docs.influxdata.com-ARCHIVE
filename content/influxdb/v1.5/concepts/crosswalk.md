@@ -1,9 +1,10 @@
 ---
-title: Comparison to SQL
+title: InfluxDB compared to SQL databases
 menu:
   influxdb_1_5:
+    name: Comparing InfluxDB to SQL databases
     weight: 30
-    parent: concepts
+    parent: Concepts
 ---
 
 # What's in a database?

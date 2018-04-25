@@ -1,12 +1,12 @@
 ---
-title: Getting started with InfluxDB
+title: Getting started with InfluxDB OSS
 aliases:
   - /influxdb/v1.5/introduction/getting_started/
 menu:
   influxdb_1_5:
     name: Getting started
-    weight: 20
-    parent: introduction
+    weight: 30
+    parent: Introduction
 ---
 
 With InfluxDB [installed](/influxdb/v1.5/introduction/installation), you're ready to start doing some awesome things.

@@ -1,11 +1,11 @@
 ---
-title: TSM-based data storage and in-memory indexing
+title: In-memory indexing and the Time-Structured Merge Tree (TSM)
 
 menu:
   influxdb_1_5:
-    name: TSM and in-memory indexing
+    name: In-memory indexing with TSM
     weight: 60
-    parent: concepts
+    parent: Concepts
 ---
 
 ## The InfluxDB storage engine and the Time-Structured Merge Tree (TSM)
