@@ -101,6 +101,9 @@ Thanks to the open source community for your contributions, commitment, and effo
 
 * [scala-influxdb-client](https://github.com/paulgoldbaum/scala-influxdb-client)
   * Maintained by [Paul Goldbaum (paulgoldbaum)](https://github.com/paulgoldbaum)
+* [chronicler](https://github.com/fsanaulla/chronicler)
+  * Maintained by [Faiaz Sanaulla (fsanaulla)](https://github.com/fsanaulla)
+
 
 ## Sensu
 
