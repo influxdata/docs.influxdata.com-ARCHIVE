@@ -1,5 +1,5 @@
 ---
-title: Managing security in InfluxDB Enterprise
+title: Managing InfluxDB Enterprise security
 menu:
   enterprise_influxdb_1_5:
     name: Managing security
