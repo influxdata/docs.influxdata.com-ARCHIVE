@@ -7,8 +7,8 @@ menu:
     weight: 0
 ---
 
-## [Configuring Kapacitor](/kapacitor/v1.4/administration/configuration/)
+## [Configuring Kapacitor OSS](/kapacitor/v1.4/administration/configuration/)
 
-## [Securing Kapacitor](/kapacitor/v1.4/administration/security/)
+## [Managing Kapacitor OSS security](/kapacitor/v1.4/administration/security/)
 
 ## [Upgrading to Kapacitor 1.4](/kapacitor/v1.4/administration/upgrading/)

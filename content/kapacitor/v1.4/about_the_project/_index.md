@@ -1,5 +1,5 @@
 ---
-title: About the project
+title: About the Kapacitor project
 aliases:
     - kapacitor/v1.4/contributing/
 menu:
