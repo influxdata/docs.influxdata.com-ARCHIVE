@@ -1,10 +1,11 @@
 ---
-title: Schema design and data layout
+title: InfluxDB schema design and data layout
+description: Covers general guidelines for InfluxDB schema design and data layout.
 menu:
   influxdb_1_6:
-    name: Schema design
+    name: Schema design and data layout
     weight: 50
-    parent: concepts
+    parent: Concepts
 ---
 
 Every InfluxDB use case is special and your [schema](/influxdb/v1.6/concepts/glossary/#schema) will reflect that uniqueness.

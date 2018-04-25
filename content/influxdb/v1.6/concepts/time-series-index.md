@@ -5,7 +5,7 @@ menu:
   influxdb_1_6:
     name: Time Series Index (TSI) overview
     weight: 70
-    parent: concepts
+    parent: Concepts
 ---
 
 ## Time Series Index (TSI)

@@ -5,7 +5,7 @@ aliases:
 menu:
   influxdb_1_6:
     weight: 20
-    parent: write_protocols
+    parent: Write protocols
 ---
 
 InfluxDB's Line Protocol is a text based format for writing points to the

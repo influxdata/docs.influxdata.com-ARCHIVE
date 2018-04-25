@@ -5,7 +5,7 @@ menu:
   influxdb_1_6:
     name: Logging and tracing
     weight: 40
-    parent: administration
+    parent: Administration
 ---
 
 **Content**

@@ -7,6 +7,7 @@ aliases:
 menu:
   enterprise_influxdb_1_6:
     name: Introduction
+    weight: 20
 ---
 
 The introductory documentation includes all the information you need to get up

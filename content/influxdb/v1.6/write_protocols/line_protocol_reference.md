@@ -6,7 +6,7 @@ menu:
   influxdb_1_6:
     name: Line Protocol reference
     weight: 10
-    parent: write_protocols
+    parent: Write protocols
 ---
 
 

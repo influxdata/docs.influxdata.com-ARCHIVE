@@ -1,15 +1,20 @@
 ---
-title: Tools
+title: InfluxDB tools
 aliases:
     - influxdb/v1.6/clients/
     - influxdb/v1.6/write_protocols/json/
+menu:
+  influxdb_1_6:
+    name: Tools
+    weight: 60
+
 ---
 
 This section covers the available tools for interacting with InfluxDB.
 
-## [CLI/Shell](/influxdb/v1.6/tools/shell/)
+## [InfluxDB command line interface (CLI/Shell)](/influxdb/v1.6/tools/shell/)
 
-InfluxDB's Command Line Interface (`influx`) is an interactive shell for the
+InfluxDB's command line interface (`influx`) is an interactive shell for the
 HTTP API that comes with every InfluxDB package.
 Use `influx` to write data (manually or from a file), query data interactively,
 and view query output in different formats:
@@ -21,9 +26,9 @@ Go straight to the documentation on:
 * [Launching `influx`](/influxdb/v1.6/tools/shell/#launch-influx)
 * [Writing data with `influx`](/influxdb/v1.6/tools/shell/#write-data-to-influxdb-with-insert)
 
-## [API Reference](/influxdb/v1.6/tools/api/)
+## [InfluxDB HTTP API Reference](/influxdb/v1.6/tools/api/)
 
-Reference documentation for InfluxDB's HTTP API.
+Reference documentation for the InfluxDB HTTP API.
 
 Go straight to the reference documentation on:
 

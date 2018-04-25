@@ -1,15 +1,15 @@
 ---
-title: InfluxDB API reference
+title: InfluxDB HTTP API reference
 aliases:
     - influxdb/v1.6/concepts/api/
 menu:
   influxdb_1_6:
-    name: InfluxDB API reference
+    name: InfluxDB HTTP API reference
     weight: 20
-    parent: tools
+    parent: Tools
 ---
 
-The InfluxDB API provides a simple way interact with the database.
+The InfluxDB HTTP API provides a simple way interact with the database.
 It uses HTTP response codes, HTTP authentication, JWT Tokens, and basic authentication, and responses are returned in JSON.
 
 The following sections assume your InfluxDB instance is running on `localhost`

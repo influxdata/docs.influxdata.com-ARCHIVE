@@ -7,7 +7,7 @@ menu:
   influxdb_1_6:
     name: Graphite
     weight: 20
-    parent: supported_protocols
+    parent: Supported protocols
 ---
 
 # The Graphite Input

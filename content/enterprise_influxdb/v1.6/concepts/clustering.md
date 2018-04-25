@@ -5,7 +5,7 @@ aliases:
 menu:
   enterprise_influxdb_1_6:
     name: Clustering
-    weight: 0
+    weight: 10
     parent: Concepts
 ---
 

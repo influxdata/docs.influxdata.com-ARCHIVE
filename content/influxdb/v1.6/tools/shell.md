@@ -3,9 +3,9 @@ title: InfluxDB command line interface (CLI/shell)
 
 menu:
   influxdb_1_6:
-    name: Command line interface (CLI)
+    name: InfluxDB command line interface (CLI/shell)
     weight: 10
-    parent: tools
+    parent: Tools
 ---
 
 InfluxDB's command line interface (`influx`) is an interactive shell for the HTTP API.

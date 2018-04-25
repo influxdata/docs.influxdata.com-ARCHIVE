@@ -6,7 +6,7 @@ menu:
   enterprise_influxdb_1_6:
     name: Cluster features
     weight: 20
-    parent: Features
+    parent: Enterprise features
 ---
 
 ## Entitlements

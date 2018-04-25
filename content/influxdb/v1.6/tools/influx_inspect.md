@@ -4,7 +4,7 @@ title: Influx Inspect disk shard utility
 menu:
   influxdb_1_6:
     weight: 50
-    parent: tools
+    parent: Tools
 ---
 
 Influx Inspect is a disk shard utility that can be used to:

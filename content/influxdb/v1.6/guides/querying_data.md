@@ -5,7 +5,7 @@ alias:
 menu:
   influxdb_1_6:
     weight: 20
-    parent: guides
+    parent: Guides
 ---
 
 ## Querying data with the HTTP API

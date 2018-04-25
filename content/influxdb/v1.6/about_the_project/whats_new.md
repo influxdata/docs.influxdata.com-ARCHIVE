@@ -1,5 +1,5 @@
 ---
-title: What's new in InfluxDB 1.5.x
+title: What's new in InfluxDB OSS 1.5
 aliases:
   - /influxdb/v1.6/administration/differences/
   - /influxdb/v1.6/administration/previous_differences/
@@ -7,7 +7,7 @@ menu:
   influxdb_1_6:
     name: What's new
     weight: 20
-    parent: about_the_project
+    parent: About the project
 ---
 
 > For a comprehensive list of the changes between versions, see [InfluxDB's Changelog](/influxdb/v1.6/about_the_project/releasenotes-changelog/).

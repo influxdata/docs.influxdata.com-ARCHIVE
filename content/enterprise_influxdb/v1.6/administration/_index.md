@@ -1,10 +1,10 @@
 ---
 title: Administering InfluxDB Enterprise
 description: This section includes technical documentation on InfluxDB Enterprise administration, including backup and restore, configuration, logs, security, and upgrading.
-
 menu:
   enterprise_influxdb_1_6:
     name: Administration
+    weight: 70
 ---
 
 ## [Configuring InfluxDB Enterprise](/enterprise_influxdb/v1.6/administration/configuration/)

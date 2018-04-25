@@ -7,8 +7,8 @@ aliases:
 menu:
   enterprise_influxdb_1_6:
     name: Frequently asked questions
-    weight: 0
-    parent: troubleshooting
+    weight: 10
+    parent: Troubleshooting
 ---
 
 **Known issues**

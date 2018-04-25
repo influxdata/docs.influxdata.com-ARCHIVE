@@ -1,13 +1,13 @@
 ---
-title: Frequently asked questions about InfluxDB
+title: InfluxDB frequently asked questions
 aliases:
   - /influxdb/v1.6/troubleshooting/frequently_encountered_issues/
 
 menu:
   influxdb_1_6:
-    name: Frequently asked questions
+    name: Frequently asked questions (FAQ)
     weight: 10
-    parent: troubleshooting
+    parent: Troubleshooting
 ---
 
 This page addresses frequent sources of confusion and places where InfluxDB behaves in an unexpected way relative to other database systems.

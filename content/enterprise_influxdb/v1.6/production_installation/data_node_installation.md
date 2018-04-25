@@ -5,8 +5,7 @@ aliases:
 menu:
   enterprise_influxdb_1_6:
     weight: 20
-    parent: production_installation
-    identifier: data_production
+    parent: Production installation
 ---
 
 InfluxDB Enterprise offers highly scalable clusters on your infrastructure

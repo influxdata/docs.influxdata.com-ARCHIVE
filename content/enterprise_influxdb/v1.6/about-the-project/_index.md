@@ -1,6 +1,8 @@
 ---
 title: About the project
-
+menu:
+  enterprise_influxdb_1_6:
+    weight: 10
 ---
 
 ## [Release notes/changelog](/enterprise_influxdb/v1.6/about-the-project/release-notes-changelog/)

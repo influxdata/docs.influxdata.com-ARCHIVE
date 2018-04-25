@@ -1,5 +1,5 @@
 ---
-title: Clustering with InfluxDB
+title: Clustering with InfluxDB Enterprise
 aliases:
     - influxdb/v1.6/clustering/
     - influxdb/v1.6/clustering/cluster_setup/
@@ -9,7 +9,7 @@ menu:
   influxdb_1_6:
     name: Clustering
     weight: 10
-    parent: high_availability
+    parent: High availability
 ---
 
 InfluxDB OSS does not support clustering.

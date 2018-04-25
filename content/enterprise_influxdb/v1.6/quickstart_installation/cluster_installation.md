@@ -6,8 +6,7 @@ aliases:
 menu:
   enterprise_influxdb_1_6:
     weight: 10
-    parent: quickstart_installation
-    identifier: meta_quickstart
+    parent: QuickStart installation
 ---
 
 InfluxDB Enterprise offers highly scalable clusters on your infrastructure

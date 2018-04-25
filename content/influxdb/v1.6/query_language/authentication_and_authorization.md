@@ -6,7 +6,7 @@ menu:
   influxdb_1_6:
     name: Authentication and authorization
     weight: 80
-    parent: query_language
+    parent: InfluxQL
 ---
 
 This document covers setting up and managing authentication and authorization in InfluxDB.

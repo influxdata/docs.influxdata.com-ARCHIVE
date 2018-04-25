@@ -5,8 +5,7 @@ aliases:
 menu:
   enterprise_influxdb_1_6:
     weight: 20
-    parent: quickstart_installation
-    identifier: chrono_install_qs
+    parent: QuickStart installation
 ---
 
 Now that you've installed the meta nodes and data nodes, you are ready to install Chronograf

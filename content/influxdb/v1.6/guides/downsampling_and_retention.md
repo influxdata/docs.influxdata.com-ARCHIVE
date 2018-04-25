@@ -3,7 +3,7 @@ title: Downsampling and data retention
 menu:
   influxdb_1_6:
     weight: 30
-    parent: guides
+    parent: Guides
 ---
 
 InfluxDB can handle hundreds of thousands of data points per second.

@@ -5,7 +5,7 @@ menu:
   influxdb_1_6:
     name: Data exploration
     weight: 20
-    parent: query_language
+    parent: InfluxQL
 ---
 
 InfluxQL is an SQL-like query language for interacting with data in InfluxDB.

@@ -5,7 +5,7 @@ menu:
   influxdb_1_6:
     name: Query management
     weight: 20
-    parent: troubleshooting
+    parent: Troubleshooting
 ---
 
 With InfluxDB's query management features, users are able to
