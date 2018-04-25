@@ -4,7 +4,7 @@ description: Covers Kapacitor Enterprise configuration, security, and authentica
 menu:
   enterprise_kapacitor_1_4:
     name: Administration
-    weight: 30
+    weight: 0
 
 ---
 

@@ -2,7 +2,8 @@
 title: Kapacitor Enterprise release notes
 menu:
   enterprise_kapacitor_1_4:
-    weight: 0
+    name: Release notes
+    weight: 10
     parent: About the project
 ---
 

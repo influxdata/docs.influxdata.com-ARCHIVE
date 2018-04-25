@@ -2,10 +2,11 @@
 title: About the project
 menu:
   enterprise_kapacitor_1_4:
+    name: About the project
     weight: 0
 ---
 
-## [Kapacitor Enterprise elease notes](/enterprise_kapacitor/v1.4/about-the-project/release-notes-changelog/)
+## [Kapacitor Enterprise release notes](/enterprise_kapacitor/v1.4/about-the-project/release-notes-changelog/)
 
 ## [Kapacitor Enterprise commercial license](https://www.influxdata.com/legal/slsa/)
 Kapacitor Enterprise is available with a commercial license.  [Contact sales for more information](https://www.influxdata.com/contact-sales/).
