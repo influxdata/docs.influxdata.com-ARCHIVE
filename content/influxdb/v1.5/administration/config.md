@@ -319,7 +319,7 @@ Environment variable: `INFLUXDB_DATA_MAX_SERIES_PER_DATABASE`
 ### `max-values-per-tag = 100000`
 
 The maximum number of [tag values](/influxdb/v1.5/concepts/glossary/#tag-value)
-allowed per [tag key]((/influxdb/v1.5/concepts/glossary/#tag-key).
+allowed per [tag key](/influxdb/v1.5/concepts/glossary/#tag-key).
 The default setting is `100000`.
 Change the setting to `0` to allow an unlimited number of tag values per tag
 key.
