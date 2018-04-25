@@ -5,7 +5,7 @@ description: Covers Kapacitor Enterprise configuration groups, licensing, authen
 menu:
   enterprise_kapacitor_1_4:
     name: Configuration
-    weight: 1
+    weight: 1o
     parent: Administration
 ---
 

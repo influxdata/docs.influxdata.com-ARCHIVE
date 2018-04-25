@@ -1,12 +1,10 @@
 ---
-title: Release Notes/Changelog
+title: Kapacitor Enterprise release notes
 menu:
   enterprise_kapacitor_1_4:
     weight: 0
-    parent: About the Project
+    parent: About the project
 ---
-
-# Changelog
 
 ## v1.4.1 [2018-03-14]
 

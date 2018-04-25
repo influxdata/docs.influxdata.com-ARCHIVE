@@ -1,11 +1,11 @@
 ---
-title: Authentication and authorization in Kapacitor Enterprise
+title: Kapacitor Enterprise authentication and authorization
 description: Topics include an overview of TICK stack authentication and authorization, enabling authentication in Kapacitor Enterprise, and user and privilege management using the InfluxDB Meta API.
 
 menu:
   enterprise_kapacitor_1_4:
     name: Authentication and authorization
-    weight: 7
+    weight: 30
     parent: Administration
 ---
 
@@ -157,9 +157,9 @@ spanMMX.onclick = function(){
 
 
 Kapacitor authorization and authentication involves three components of the
-enterprise TICK stack: InfluxDB Enterprise meta nodes, Enterprise Kapacitor and,
+enterprise TICK stack: InfluxDB Enterprise meta nodes, Kapacitor Enterprise and,
 to aid in the creation of users and roles, Chronograf and its InfluxDB Admin
-console. 
+console.
 
 InfluxDB meta nodes provide the API for the user and privilege store.  This API
 makes available standard operations such as creating, retrieving, updating and
@@ -262,7 +262,7 @@ groups: `[http]` and `[auth]`.
 
 In the `[http]` group the value of `auth-enabled` needs to be set to `true`.
 
-The core authentication specific properties of Enterprise Kapacitor are found
+The core authentication specific properties of Kapacitor Enterprise are found
 in the `[auth]` group.  These include:
 
 * `cache-expiration`: Defines how long a consumer service can hold a credential document in its cache.
@@ -1022,4 +1022,3 @@ $ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/role?name=
 ### Kapacitor user and privilege management using Chronograf
 
 See [Kapacitor user and privilege management](/chronograf/v1.4/administration/kapacitor-user-privilege-management/) in the Chronograf documentation.
-

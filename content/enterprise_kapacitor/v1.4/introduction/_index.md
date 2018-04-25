@@ -6,7 +6,7 @@ aliases:
 menu:
   enterprise_kapacitor_1_4:
     name: Introduction
-    weight: 1
+    weight: 10
 ---
 
 The introductory documentation includes all the information you need to get up
