@@ -24,7 +24,7 @@ See how you can use Kapacitor to create a live updating leaderboard for a game.
 ### [Load directory service](/kapacitor/v1.4/guides/load_directory/)
 
 Put TICKscripts, TICKscript templates, and handler definitions in a directory
-from where they will be loaded when the Kapcitor daemon boots.
+from where they will be loaded when the Kapacitor daemon boots.
 
 ### [Custom anomaly detection with Kapacitor](/kapacitor/v1.4/guides/anomaly_detection/)
 

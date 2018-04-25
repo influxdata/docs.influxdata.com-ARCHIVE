@@ -4,13 +4,12 @@ description: Introduction to Kapacitor, including information on downloading, in
 menu:
   kapacitor_1_4:
     name: Introduction
-    identifier: introduction
-    weight: 1
+    weight: 0
 ---
 
 The introductory documentation includes all the information you need to get up and running with Kapacitor.
 
-## [Download](https://influxdata.com/downloads/#kapacitor)
+## [Downloading Kapacitor](https://influxdata.com/downloads/#kapacitor)
 Download Kapacitor.
 
 ## [Installing Kapacitor](/kapacitor/v1.4/introduction/installation/)
