@@ -1,5 +1,5 @@
 ---
-title: Installing InfluxDB
+title: Installing InfluxDB OSS
 menu:
   influxdb_1_5:
     name: Installing
@@ -9,11 +9,11 @@ menu:
 
 This page provides directions for installing, starting, and configuring InfluxDB.
 
-## Requirements
+## InfluxDB OSS installation requirements
 
 Installation of the InfluxDB package may require `root` or administrator privileges in order to complete successfully.
 
-### Networking
+### InfluxDB OSS networking ports
 
 By default, InfluxDB uses the following network ports:
 
@@ -25,7 +25,7 @@ require [custom ports](/influxdb/v1.5/administration/ports/).
 All port mappings can be modified through the [configuration file](/influxdb/v1.5/administration/config),
 which is located at `/etc/influxdb/influxdb.conf` for default installations.
 
-### NTP
+### Network Time Protocol (NTP)
 
 InfluxDB uses a host's local time in UTC to assign timestamps to data and for
 coordination purposes.
@@ -33,7 +33,7 @@ Use the Network Time Protocol (NTP) to synchronize time between hosts; if hosts'
 clocks aren't synchronized with NTP, the timestamps on the data written to InfluxDB
 can be inaccurate.
 
-## Installation
+## Installing InfluxDB OSS
 
 For users who don't want to install any software and are ready to use InfluxDB,
 you may want to check out our
@@ -192,7 +192,7 @@ influxd -config /usr/local/etc/influxdb.conf
 {{< /tab-content-container >}}
 {{< /vertical-tabs >}}
 
-## Configuration
+## Configuring InfluxDB OSS
 
 The system has internal defaults for every configuration file setting.
 View the default configuration settings with the `influxd config` command.
@@ -229,7 +229,7 @@ variable.
 
 See the [Configuration](/influxdb/v1.5/administration/config/) documentation for more information.
 
-### Data & WAL Directory Permissions
+### Data and WAL directory permissions
 
 Make sure the directories in which data and the [write ahead log](/influxdb/v1.5/concepts/glossary/#wal-write-ahead-log) (WAL) are stored are writable for the user running the `influxd` service.
 
@@ -237,9 +237,9 @@ Make sure the directories in which data and the [write ahead log](/influxdb/v1.5
 
 Information about `data` and `wal` directory paths is available in the [Data settings](/influxdb/v1.5/administration/config/#data-settings-data) section of the [Configuring InfluxDB](/influxdb/v1.5/administration/config/) documentation.
 
-## Hosting on AWS
+## Hosting InfluxDB OSS on AWS
 
-### Hardware
+### Hardware requirements for InfluxDB
 
 We recommend using two SSD volumes, using one for the `influxdb/wal` and the other for the `influxdb/data`.
 Depending on your load, each volume should have around 1k-3k provisioned IOPS.
@@ -249,13 +249,13 @@ Each machine should have a minimum of 8G RAM.
 
 We’ve seen the best performance with the R4 class of machines, as they provide more memory than either of the C3/C4 class and the M4 class.
 
-### Configuring the instance
+### Configuring InfluxDB OSS instances
 
 This example assumes that you are using two SSD volumes and that you have mounted them appropriately.
 This example also assumes that each of those volumes is mounted at `/mnt/influx` and `/mnt/db`.
 For more information on how to do that see the Amazon documentation on how to [Add a Volume to Your Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html).
 
-### Config File
+### Config file
 You'll have to update the config file appropriately for each InfluxDB instance you have.
 
 ```
@@ -281,7 +281,7 @@ dir = "/mnt/db/hh"
     ...
 ```
 
-### Permissions
+### InfluxDB OSS permissions
 
 When using non-standard directories for InfluxDB data and configurations, also be sure to set filesystem permissions correctly:
 

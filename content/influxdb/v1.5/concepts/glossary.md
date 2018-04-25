@@ -1,7 +1,8 @@
 ---
-title: Glossary of terms
+title: InfluxDB glossary of terms
 menu:
   influxdb_1_5:
+    name: Glossary of terms
     weight: 20
     parent: Concepts
 ---

@@ -1,5 +1,6 @@
 ---
 title: Write protocols in InfluxDB
+description: Covers the Line Protocol and a tutorial using the Line Protocol to write data to InfluxDB.
 menu:
   influxdb_1_5:
     name: Write protocols
@@ -8,10 +9,10 @@ menu:
 
 InfluxDB's Line Protocol is a text based format for writing points to InfluxDB.
 
-## [Line Protocol](/influxdb/v1.5/write_protocols/line_protocol_tutorial/)
+## [Line Protocol tutorial](/influxdb/v1.5/write_protocols/line_protocol_tutorial/)
 
-Tutorial-style documentation for the Line Protocol.
+The [Line Protocol tutorial](/influxdb/v1.5/write_protocols/line_protocol_tutorial/) uses temperature data to introduce you to the Line Protocol and writing data to InfluxDB.
 
-## [Write Syntax](/influxdb/v1.5/write_protocols/line_protocol_reference/)
+## [Line Protocol reference](/influxdb/v1.5/write_protocols/line_protocol_reference/)
 
-Reference documentation for the Line Protocol.
+The [Line Protocol reference](/influxdb/v1.5/write_protocols/line_protocol_reference/) covers the Line Protocol syntax, data types, and guidelines.

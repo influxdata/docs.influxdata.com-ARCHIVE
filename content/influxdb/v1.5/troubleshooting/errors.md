@@ -1,5 +1,6 @@
 ---
 title: InfluxDB error messages
+description: Covers InfluxDB error messages, their descriptions, and common resolutions.
 menu:
   influxdb_1_5:
     name: Error messages

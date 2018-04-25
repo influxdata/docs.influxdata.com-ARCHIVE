@@ -1,12 +1,13 @@
 ---
 title: Additional InfluxDB resources
+description: InfluxDB resources, including InfluxData blog, technical papers, meetup and training videos, and upcoming virtual training and other events.
 menu:
   influxdb_1_5:
     name: Additional resources
     weight: 120
 ---
 
-Check out these resources to learn more about InfluxDB OSS and other InfluxData products.
+Check out the following InfluxData resources to learn more about InfluxDB OSS and other InfluxData products.
 
 ## [InfluxData blog](https://www.influxdata.com/blog/)
 

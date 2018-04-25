@@ -2,7 +2,7 @@
 title: InfluxDB compared to SQL databases
 menu:
   influxdb_1_5:
-    name: Distinctions between InfluxDB and SQL
+    name: Comparing InfluxDB to SQL databases
     weight: 30
     parent: Concepts
 ---

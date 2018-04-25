@@ -9,6 +9,4 @@ menu:
 
 
 
-
-
-[Downloading InfluxDB OSS](https://influxdata.com/downloads/#influxdb)
+Download the latest InfluxDB OSS release at the [InfluxData download page](https://influxdata.com/downloads/#influxdb).

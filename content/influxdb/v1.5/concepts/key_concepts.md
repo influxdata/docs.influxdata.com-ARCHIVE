@@ -1,7 +1,9 @@
 ---
-title: Key concepts
+title: InfluxDB key concepts
+description: Covers key concepts to learn about InfluxDB.
 menu:
   influxdb_1_5:
+    name: Key concepts
     weight: 10
     parent: Concepts
 ---
@@ -33,7 +35,7 @@ We've provided a list below of all the terms we'll cover, but we recommend readi
   </tr>
 </table>
 
-Check out the [Glossary](/influxdb/v1.4/concepts/glossary/) if you prefer the cold, hard facts.
+Check out the [glossary of terms](/influxdb/v1.4/concepts/glossary/) if you prefer the cold, hard facts.
 
 ### Sample data
 The next section references the data printed out below.
