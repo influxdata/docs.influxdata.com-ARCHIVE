@@ -3,7 +3,7 @@ title: Stability and compatibility
 menu:
   influxdb_1_5:
     weight: 90
-    parent: administration
+    parent: Administration
 ---
 
 ## 1.x API compatibility and stability

@@ -7,7 +7,7 @@ menu:
     weight: 10
 ---
 
-## [Release Notes/Changelog](/influxdb/v1.5/about_the_project/releasenotes-changelog/)
+## [Release notes](/influxdb/v1.5/about_the_project/releasenotes-changelog/)
 
 ## [What's new in InfluxDB 1.5](/influxdb/v1.5/about_the_project/whats_new/)
 

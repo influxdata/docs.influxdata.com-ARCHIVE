@@ -3,7 +3,7 @@ title: Glossary of terms
 menu:
   influxdb_1_5:
     weight: 20
-    parent: concepts
+    parent: Concepts
 ---
 
 ## aggregation

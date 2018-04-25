@@ -1,9 +1,10 @@
 ---
-title: Release notes/changelog
+title: InfluxDB 1.5 release notes
 menu:
   influxdb_1_5:
+    name: Release notes
     weight: 10
-    parent: about_the_project
+    parent: About the project
 ---
 
 ## v1.5.2 [2018-04-12]

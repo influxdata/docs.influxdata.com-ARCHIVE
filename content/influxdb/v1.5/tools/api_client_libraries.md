@@ -8,7 +8,7 @@ aliases:
 menu:
   influxdb_1_5:
     weight: 30
-    parent: tools
+    parent: Tools
 ---
 
 InfluxDB client libraries are developed by the open source community. These client libraries support the InfluxDB API and should be fully compatible with InfluxDB version 1.5. Functionality will vary as there are no standard features that all libraries must implement in order to be listed here.
@@ -95,7 +95,7 @@ Thanks to the open source community for your contributions, commitment, and effo
 * [Flux (flux)](https://crates.io/crates/flux)
   * Maintained by [Chris Holcombe (cholcombe973)](https://crates.io/users/cholcombe973) and [Chris MacNaughton](https://crates.io/users/ChrisMacNaughton)
 * [Influent (influent)](https://crates.io/crates/influent)
-  * Maintained by [gobwas](https://crates.io/users/gobwas) and [Eijebong](https://crates.io/users/Eijebong). 
+  * Maintained by [gobwas](https://crates.io/users/gobwas) and [Eijebong](https://crates.io/users/Eijebong).
 
 ## Scala
 
@@ -105,7 +105,7 @@ Thanks to the open source community for your contributions, commitment, and effo
 ## Sensu
 
 * [sensu-influxdb-extension](https://github.com/jhrv/sensu-influxdb-extension)
-  * Maintained by [Johnny Horvi (jhrv)](https://github.com/jhrv) 
+  * Maintained by [Johnny Horvi (jhrv)](https://github.com/jhrv)
 
 ## SNMP agent
 

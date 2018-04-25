@@ -3,6 +3,7 @@ title: Influx Query Language (InfluxQL)
 menu:
   influxdb_1_5:
     weight: 70
+    identifier: InfluxQL
 ---
 
 This section introduces InfluxQL, InfluxDB's SQL-like query language for

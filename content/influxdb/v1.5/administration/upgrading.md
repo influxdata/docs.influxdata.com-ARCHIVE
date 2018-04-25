@@ -5,7 +5,7 @@ menu:
   influxdb_1_5:
     name: Upgrading
     weight: 20
-    parent: administration
+    parent: Administration
 ---
 
 * [Upgrading from 1.3 / 1.4 (no TSI Preview) to 1.5.x (TSI enabled)](#upgrading-from-13-14-no-tsi-preview-to-15-tsi-enabled)

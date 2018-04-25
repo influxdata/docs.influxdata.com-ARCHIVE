@@ -3,7 +3,7 @@ title: Key concepts
 menu:
   influxdb_1_5:
     weight: 10
-    parent: concepts
+    parent: Concepts
 ---
 
 Before diving into InfluxDB it's good to get acquainted with some of the key concepts of the database.

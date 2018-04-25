@@ -3,7 +3,7 @@ title: Sample data
 menu:
   influxdb_1_5:
     weight: 10
-    parent: query_language
+    parent: InfluxQL
 aliases:
   - /influxdb/v1.5/sample_data/data_download/
 ---

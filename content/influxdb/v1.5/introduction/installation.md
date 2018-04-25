@@ -3,8 +3,8 @@ title: Installing InfluxDB
 menu:
   influxdb_1_5:
     name: Installing
-    weight: 10
-    parent: introduction
+    weight: 20
+    parent: Introduction
 ---
 
 This page provides directions for installing, starting, and configuring InfluxDB.

@@ -7,7 +7,7 @@ menu:
   influxdb_1_5:
     name: Backing up and restoring
     weight: 60
-    parent: administration
+    parent: Administration
 ---
 
 ## Overview

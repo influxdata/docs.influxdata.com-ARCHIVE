@@ -5,7 +5,7 @@ menu:
   influxdb_1_5:
     name: Functions
     weight: 60
-    parent: query_language
+    parent: InfluxQL
 ---
 
 Aggregate, select, transform, and predict data with InfluxQL functions.

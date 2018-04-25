@@ -4,7 +4,7 @@ menu:
   influxdb_1_5:
     name: Managing security
     weight: 70
-    parent: administration
+    parent: Administration
 ---
 
 Some customers may choose to install InfluxDB with public internet access, however

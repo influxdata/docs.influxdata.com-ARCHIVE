@@ -4,7 +4,7 @@ menu:
   influxdb_1_5:
     name: Schema design
     weight: 50
-    parent: concepts
+    parent: Concepts
 ---
 
 Every InfluxDB use case is special and your [schema](/influxdb/v1.5/concepts/glossary/#schema) will reflect that uniqueness.

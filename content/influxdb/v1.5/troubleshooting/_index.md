@@ -3,7 +3,7 @@ title: Troubleshooting InfluxDB
 menu:
   influxdb_1_5:
     name: Troubleshooting
-    weight: 120
+    weight: 110
 ---
 
 ## [Frequently asked questions](/influxdb/v1.5/troubleshooting/frequently-asked-questions/)

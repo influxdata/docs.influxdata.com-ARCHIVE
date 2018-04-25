@@ -4,7 +4,7 @@ title: Writing data with the HTTP API
 menu:
   influxdb_1_5:
     weight: 10
-    parent: guides
+    parent: Guides
 ---
 
 There are many ways to write data into InfluxDB including the [command line interface](/influxdb/v1.5/tools/shell/), [client libraries](/influxdb/v1.5/clients/api/) and plugins for common data formats such as [Graphite](/influxdb/v1.5/write_protocols/graphite/).

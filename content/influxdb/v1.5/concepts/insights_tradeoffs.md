@@ -1,10 +1,10 @@
 ---
-title: Design insights and tradeoffs in InfluxDB
+title: InfluxDB design insights and tradeoffs
 menu:
   influxdb_1_5:
     name: Design insights and tradeoffs
     weight: 40
-    parent: concepts
+    parent: Concepts
 ---
 
 InfluxDB is a time series database.
