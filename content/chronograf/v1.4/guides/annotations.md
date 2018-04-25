@@ -4,7 +4,7 @@ description: Annotations provide contextual information by adding explanatory no
 menu:
   chronograf_1_4:
     name: Using annotations
-    weight: 40
+    weight: 50
     parent: Guides
 ---
 

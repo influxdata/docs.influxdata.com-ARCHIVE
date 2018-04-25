@@ -8,7 +8,7 @@ menu:
     name: StateCountNode
     identifier: state_count_node
     weight: 260
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

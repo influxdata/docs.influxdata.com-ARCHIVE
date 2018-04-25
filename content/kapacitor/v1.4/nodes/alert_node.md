@@ -7,7 +7,7 @@ menu:
     name: AlertNode
     identifier: alert_node
     weight: 10
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 
@@ -66,7 +66,7 @@ menu:
 
 ### Description
 
-An [AlertNode](/kapacitor/v1.4/nodes/alert_node/) can trigger an event of varying severity levels and pass the event to alert handlers. 
+An [AlertNode](/kapacitor/v1.4/nodes/alert_node/) can trigger an event of varying severity levels and pass the event to alert handlers.
 The criteria for triggering an alert is specified using a [lambda expression](/kapacitor/latest/tick/expr/).
 See [AlertNode.Info,](/kapacitor/v1.4/nodes/alert_node/#info) [AlertNode.Warn,](/kapacitor/v1.4/nodes/alert_node/#warn) and [AlertNode.Crit](/kapacitor/v1.4/nodes/alert_node/#crit) below.
 

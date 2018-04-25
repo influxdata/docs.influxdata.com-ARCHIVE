@@ -4,10 +4,10 @@ aliases:
     - kapacitor/v1.4/examples/reference_scripts/
 menu:
   kapacitor_1_4:
-    name: Reference TICKscripts
+    name: TICKscript examples
     identifier: reference_scripts
     weight: 80
-    parent: guides
+    parent: Guides
 ---
 
 The Kapacitor repository includes [TICKscript examples](https://github.com/influxdata/kapacitor/tree/master/examples/telegraf).

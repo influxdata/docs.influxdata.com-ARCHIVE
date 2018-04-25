@@ -9,7 +9,7 @@ menu:
     name: EvalNode
     identifier: eval_node
     weight: 90
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

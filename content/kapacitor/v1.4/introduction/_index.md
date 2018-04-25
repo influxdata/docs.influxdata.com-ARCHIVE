@@ -4,7 +4,8 @@ description: Introduction to Kapacitor, including information on downloading, in
 menu:
   kapacitor_1_4:
     name: Introduction
-    weight: 0
+    parent: Introduction
+    weight: 20
 ---
 
 The introductory documentation includes all the information you need to get up and running with Kapacitor.

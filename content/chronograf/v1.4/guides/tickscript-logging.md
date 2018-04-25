@@ -1,9 +1,9 @@
 ---
-title: Viewing TICKscript logs in Chronograf
-description: View TICKscript logs in Chronograf for debugging and testing
+title: Editing TICKscripts in Chronograf
+description: Editing and viewing TICKscript logs in Chronograf
 menu:
-  kapacitor_1_4:
-    weight: 2
+  chronograf_1_4:
+    weight: 20
     parent: Guides
 ---
 

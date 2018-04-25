@@ -7,8 +7,8 @@ menu:
   kapacitor_1_4:
     name: BatchNode
     identifier: batch_node
-    weight: 4
-    parent: nodes
+    weight: 30
+    parent: TICKscript nodes
 ---
 ### Constructor
 

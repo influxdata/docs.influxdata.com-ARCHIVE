@@ -5,7 +5,7 @@ aliases:
 menu:
   kapacitor_1_4:
     name: About the project
-    weight: 0
+    weight: 10
 ---
 
 Kapacitor is open source and we welcome contributions from the community.

@@ -6,7 +6,7 @@ aliases:
   - /chronograf/v1.4/templating/
 menu:
   chronograf_1_4:
-    weight: 80
+    weight: 90
     parent: Guides
 ---
 

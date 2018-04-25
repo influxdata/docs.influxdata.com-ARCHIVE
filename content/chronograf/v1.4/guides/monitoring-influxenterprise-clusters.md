@@ -5,7 +5,7 @@ aliases:
   - /chronograf/v1.4/guides/monitor-an-influxenterprise-cluster/
 menu:
   chronograf_1_4:
-    weight: 70
+    weight: 80
     parent: Guides
 
 ---

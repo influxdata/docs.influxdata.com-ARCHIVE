@@ -4,8 +4,8 @@ description: Demonstrates using Kapacitor, Telegraf, and InfluxDB with Docker Co
 menu:
   kapacitor_1_4:
     name: Docker install
-    weight: 70
-    parent: introduction
+    weight: 30
+    parent: Introduction
 ---
 
 

@@ -8,7 +8,7 @@ menu:
     name: DeleteNode
     identifier: delete_node
     weight: 60
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

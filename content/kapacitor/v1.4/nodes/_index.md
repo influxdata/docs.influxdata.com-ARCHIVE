@@ -9,8 +9,7 @@ aliases:
 menu:
   kapacitor_1_4:
     name: TICKscript nodes
-    identifier: nodes
-    weight: 6
+    weight: 60
 ---
 
 > ***Note:*** Before continuing, please make sure you have read the
@@ -25,7 +24,7 @@ or
 
 Below is a complete list of the available nodes. For each node, the associated property methods are described.
 
-## Available nodes
+## Available TICKscript nodes
 
 * [AlertNode](/kapacitor/v1.4/nodes/alert_node)
 * [BarrierNode](/kapacitor/v1.4/nodes/barrier_node)

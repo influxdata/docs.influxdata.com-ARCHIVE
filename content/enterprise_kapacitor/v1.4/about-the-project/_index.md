@@ -3,7 +3,7 @@ title: About the project
 menu:
   enterprise_kapacitor_1_4:
     name: About the project
-    weight: 0
+    weight: 10
 ---
 
 ## [Kapacitor Enterprise release notes](/enterprise_kapacitor/v1.4/about-the-project/release-notes-changelog/)

@@ -6,7 +6,7 @@ aliases:
 menu:
   kapacitor_1_4:
     name: Guides
-    weight: 0
+    weight: 30
 ---
 
 The following is a list of examples in no particular order that demonstrate some of the features of Kapacitor.
@@ -40,11 +40,7 @@ Learn how to write a simple socket-based user-defined function (UDF).
 
 ### [Using Kapacitor event handlers to send alert messages](/kapacitor/v1.4/guides/event-handler-setup/)
 
-Configuring Kapacitor to send alert messages to a HipChat room using event handlers and TICKscripts
-
-### [Using Kapacitor template tasks](/kapacitor/v1.4/guides/template_tasks/)
-
-Use Kapacitor task templates to reduce the amount of TICKscripts you need to write.
+Configuring Kapacitor to send alert messages to a HipChat room using event handlers and TICKscripts.
 
 ### [Kapacitor TICKscript examples](/kapacitor/v1.4/guides/reference_scripts/)
 

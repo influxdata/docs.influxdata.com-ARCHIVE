@@ -4,7 +4,7 @@ description: Covers the Kapacitor HTTP API, writing data, tasks, templates, reco
 menu:
   kapacitor_1_4:
     name: HTTP API reference
-    weight: 10
+    weight: 20
     parent: work-w-kapacitor
 ---
 

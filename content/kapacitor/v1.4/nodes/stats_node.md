@@ -8,7 +8,7 @@ menu:
     name: StatsNode
     identifier: stats_node
     weight: 280
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

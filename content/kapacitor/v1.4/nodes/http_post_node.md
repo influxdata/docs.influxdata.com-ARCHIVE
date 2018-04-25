@@ -8,7 +8,7 @@ menu:
     name: HTTPPostNode
     identifier: http_post_node
     weight: 140
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

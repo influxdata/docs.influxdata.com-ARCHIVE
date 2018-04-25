@@ -3,7 +3,7 @@ title: Configuring Kapacitor event handlers
 description: Using Kapacitor event handlers to send alert messages with Chronograf's support for Alerta, Exec, HipChat, HTTP/Post, Log, OpsGenie, PagerDuty, Sensu, Slack, SMTP/email, Talk, Telegram, TCP, and VictorOps.
 menu:
   chronograf_1_4:
-    weight: 60
+    weight: 70
     parent: Guides
 ---
 

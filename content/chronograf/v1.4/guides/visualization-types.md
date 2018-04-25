@@ -4,7 +4,7 @@ descriptions: Chronograf dashboards and views support graphs and other visualiza
 menu:
   chronograf_1_4:
     name: Visualization types
-    weight: 30
+    weight: 40
     parent: Guides
 ---
 

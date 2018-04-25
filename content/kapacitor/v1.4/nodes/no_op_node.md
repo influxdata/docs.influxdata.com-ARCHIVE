@@ -8,7 +8,7 @@ menu:
     name: NoOpNode
     identifier: no_op_node
     weight: 210
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 
