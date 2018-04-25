@@ -1,6 +1,8 @@
 ---
 title: HTTP API Reference
-
+newversionredirect: working/api/
+aliases:
+  - /kapacitor/v0.13/api/api
 menu:
   kapacitor_013:
     weight: 10
