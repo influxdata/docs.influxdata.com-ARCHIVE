@@ -8,8 +8,6 @@ menu:
     parent: Guides
 ---
 
-## Visualization types in Chronograf
-
 Chronograf's dashboard views support the following visualization types, which can be selected in the **Visualization Type** selection view.
 
 [Visualization Type selector](/img/chronograf/chrono-viz-types-selector.png)

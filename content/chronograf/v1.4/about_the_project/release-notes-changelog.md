@@ -3,7 +3,7 @@ title: Release notes
 menu:
   chronograf_1_4:
     weight: 10
-    parent: About the Project
+    parent: About the project
 ---
 
 ## v1.4.4.1 [2018-04-16]

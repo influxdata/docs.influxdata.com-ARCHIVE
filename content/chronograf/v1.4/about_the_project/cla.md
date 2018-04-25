@@ -1,10 +1,10 @@
 ---
-title: CLA
+title: Contributor license agreement
 menu:
   chronograf_1_4:
-    weight: 40
-    parent: About the Project
+    weight: 30
+    parent: About the project
     url: https://www.influxdata.com/legal/cla/
 ---
 
-The [Contributor License Agreement](https://www.influxdata.com/legal/cla/) is available on InfluxData's main site.
+The [Contributor License Agreement](https://www.influxdata.com/legal/cla/) is available on InfluxData main site.
