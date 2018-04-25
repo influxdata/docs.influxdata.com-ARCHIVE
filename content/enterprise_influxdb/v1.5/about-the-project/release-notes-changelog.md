@@ -1,5 +1,5 @@
 ---
-title: Release notes/changelog
+title: Release notes
 
 menu:
   enterprise_influxdb_1_5:
@@ -94,7 +94,7 @@ The default logging format has been changed. See [Logging and tracing in InfluxD
 
 ### Upgrading -- for users of the TSI preview
 
-If you have been using the TSI preview with 1.3.6 or earlier 1.3.x releases, you will need to follow the upgrade steps to continue using the TSI preview.  Unfortunately, these steps cannot be executed while the cluster is operating -- 
+If you have been using the TSI preview with 1.3.6 or earlier 1.3.x releases, you will need to follow the upgrade steps to continue using the TSI preview.  Unfortunately, these steps cannot be executed while the cluster is operating --
 so it will require downtime.
 
 ### Bugfixes
