@@ -3,14 +3,12 @@ title: Kapacitor TICKscript language
 description: Provides introductory information on working with TICKsccript, including syntax, lambda expressions, and the TICKscript specification.
 menu:
   kapacitor_1_4:
-    name: Kapacitor TICKscript language
+    name: TICKscript language
     identifier: TICKscript
-    weight: 60
+    weight: 50
 ---
 
-## What is in this section?
-
-This section provides introductory information on working with TICKscript.
+This section provides introductory information on working with the Kapacitor TICKscript language to define data processing pipelines.
 
    * [Introducing the TICKscript language](/kapacitor/v1.4/tick/introduction/) - this document presents the fundamental concepts of working with TICKscript in Kapacitor and Chronograf.
    * [Kapacitor TICKscript Syntax](/kapacitor/v1.4/tick/syntax/) - this covers the essentials of how TICKscript statements and structures are organized.

@@ -8,7 +8,6 @@ menu:
     weight: 30
     parent: Administration
 ---
-# Upgrading Kapacitor
 
 # Contents
 1. [Overview](#overview)

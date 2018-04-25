@@ -4,7 +4,6 @@ description: Introduction to Kapacitor, including information on downloading, in
 menu:
   kapacitor_1_4:
     name: Introduction
-    parent: Introduction
     weight: 20
 ---
 

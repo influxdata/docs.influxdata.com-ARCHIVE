@@ -1,5 +1,5 @@
 ---
-title: TICKscript nodes overview
+title: Kapacitor TICKscript nodes overview
 description: TICKscript nodes represent process invocation units that either take data as a batch or a point-by-point stream, and then alter the data, store the data, or trigger some other activity based on changes in the data (e.g., an alert).
 aliases:
     - kapacitor/v1.4/nodes/source_batch_node/
