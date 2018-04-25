@@ -4,8 +4,7 @@ description: Telegraf plugins are agents used in the InfluxData time series plat
 menu:
   telegraf_1_6:
     name: Plugins
-    identifier: plugins
-    weight: 130
+    weight: 40
 ---
 
 Telegraf is an agent, written in the Go programming language, for collecting, processing, aggregating, and writing metrics. Telegraf is plugin-driven and supports four categories of plugin types, including input, output, aggregator, and processor.

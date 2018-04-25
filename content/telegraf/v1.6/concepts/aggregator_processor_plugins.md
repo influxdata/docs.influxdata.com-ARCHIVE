@@ -5,7 +5,7 @@ menu:
   telegraf_1_6:
     name: Aggregator and processor plugins
     weight: 40
-    parent: concepts
+    parent: Concepts
 ---
 
 As of release 1.1.0, Telegraf has the concept of aggregator and processor plugins.

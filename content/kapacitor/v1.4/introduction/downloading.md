@@ -9,4 +9,4 @@ menu:
 
 
 
-Download the latest InfluxDB OSS release at the [InfluxData download page](https://influxdata.com/downloads/#influxdb).
+Download the latest Kapacitor OSS release at the [InfluxData download page](https://influxdata.com/downloads/#kapacitor).

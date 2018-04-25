@@ -6,7 +6,7 @@ menu:
     name: Aggregator
     identifier: aggregators
     weight: 30
-    parent: plugins
+    parent: Plugins
 ---
 
 Aggregators emit new aggregate metrics based on the metrics collected by the input plugins.
