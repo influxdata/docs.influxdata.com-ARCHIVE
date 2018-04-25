@@ -4,8 +4,7 @@ title: Introducing Telegraf
 menu:
   telegraf_1_6:
     name: Introduction
-    identifier: introduction
-    weight: 10
+    weight: 20
 ---
 
 The introductory documentation includes all the information you need to get up and running with Telegraf.

@@ -1,10 +1,10 @@
 ---
- title: License
+ title: Telegraf license
 
  menu:
    telegraf_1_6:
      name: License
-     parent: about_the_project
+     parent: About the project
      weight: 40
      url: https://github.com/influxdata/telegraf/blob/master/LICENSE
 ---

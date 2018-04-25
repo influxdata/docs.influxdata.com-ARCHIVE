@@ -1,9 +1,10 @@
 ---
-title: Release notes and changelog
+title: Telegraf release notes
 menu:
   telegraf_1_6:
+    name: Release notes
     weight: 10
-    parent: about_the_project
+    parent: About the project
 ---
 
 ## v1.6.1 [2018-04-23]

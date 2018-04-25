@@ -1,10 +1,10 @@
 ---
-title: CLA
+title: Contributing license agreement (CLA)
 
 menu:
    telegraf_1_6:
-     name: CLA
-     parent: about_the_project
+     name: Contributing license agreement (CLA)
+     parent: About the project
      weight: 30
      url: https://influxdata.com/community/cla/
 ---
