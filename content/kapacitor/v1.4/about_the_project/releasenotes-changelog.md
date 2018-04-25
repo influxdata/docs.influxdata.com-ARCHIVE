@@ -1,8 +1,10 @@
 ---
-title: Release Notes/Changelog
+title: Kapacitor release notes
 menu:
   kapacitor_1_4:
-    parent: about_the_project
+    name: Release notes
+    weight: 10
+    parent: About the project
 ---
 
 ## v1.4.1 [2018-03-13]

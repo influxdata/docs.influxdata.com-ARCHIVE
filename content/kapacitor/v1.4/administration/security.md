@@ -1,10 +1,11 @@
 ---
-title: Kapacitor security
-description: Covers Kapacitor security, securing InfluxDB and Kapacitor, and securing Chronograf and Kapacitor.
+title: Securing Kapacitor OSS
+description: Covers Kapacitor OSS security, securing InfluxDB and Kapacitor, and securing Chronograf and Kapacitor.
 menu:
   kapacitor_1_4:
-    weight: 12
-    parent: administration
+    name: Securing
+    weight: 20
+    parent: Administration
 ---
 
 # Contents

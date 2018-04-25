@@ -1,13 +1,12 @@
 ---
-title: Kapacitor guides
+title: Kapacitor guides and tutorials
 description: Guides include examples of calculating rates across joined series + backfill, a live leaderboard of game scores, loading directories during Kapacitor booting, and custom anomaly detection.
 aliases:
     - kapacitor/v1.4/examples/
 menu:
   kapacitor_1_4:
     name: Guides
-    identifier: guides
-    weight: 5 
+    weight: 0
 ---
 
 The following is a list of examples in no particular order that demonstrate some of the features of Kapacitor.
@@ -22,27 +21,31 @@ Learn how to join two series and calculate a combined results, plus how to perfo
 
 See how you can use Kapacitor to create a live updating leaderboard for a game.
 
-### [Load directory](/kapacitor/v1.4/guides/load_directory/)
+### [Load directory service](/kapacitor/v1.4/guides/load_directory/)
 
 Put TICKscripts, TICKscript templates, and handler definitions in a directory
 from where they will be loaded when the Kapcitor daemon boots.
 
-### [Custom anomaly detection](/kapacitor/v1.4/guides/anomaly_detection/)
+### [Custom anomaly detection with Kapacitor](/kapacitor/v1.4/guides/anomaly_detection/)
 
 Integrate your custom anomaly detection algorithm with Kapacitor.
 
-### [Continuous Queries](/kapacitor/v1.4/guides/continuous_queries/)
+### [Using Kapacitor as a continuous query engine](/kapacitor/v1.4/guides/continuous_queries/)
 
 See how to use Kapacitor as a continuous query engine.
 
-### [Socket-based UDF](/kapacitor/v1.4/guides/socket_udf/)
+### [Using socket-based user defined functions (UDFs)](/kapacitor/v1.4/guides/socket_udf/)
 
 Learn how to write a simple socket-based user-defined function (UDF).
 
-### [Template tasks](/kapacitor/v1.4/guides/template_tasks/)
+### [Using Kapacitor event handlers to send alert messages](/kapacitor/v1.4/guides/event-handler-setup/)
 
-Use task templates to reduce the amount of TICKscripts you need to write.
+Configuring Kapacitor to send alert messages to a HipChat room using event handlers and TICKscripts
 
-### [Reference TICKscripts](/kapacitor/v1.4/guides/reference_scripts/)
+### [Using Kapacitor template tasks](/kapacitor/v1.4/guides/template_tasks/)
 
-Some examples of TICKscripts built against common Telegraf plugin data.
+Use Kapacitor task templates to reduce the amount of TICKscripts you need to write.
+
+### [Kapacitor TICKscript examples](/kapacitor/v1.4/guides/reference_scripts/)
+
+Some examples of TICKscripts built using popular Telegraf plugins as data sources.

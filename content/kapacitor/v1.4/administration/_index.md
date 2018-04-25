@@ -4,8 +4,7 @@ description: This section covers Kapacitor administration tasks, including confi
 menu:
   kapacitor_1_4:
     name: Administration
-    identifier: administration
-    weight: 7
+    weight: 0
 ---
 
 ## [Configuring Kapacitor](/kapacitor/v1.4/administration/configuration/)

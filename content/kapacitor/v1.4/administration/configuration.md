@@ -1,10 +1,11 @@
 ---
-title: Configuring Kapacitor
+title: Configuring Kapacitor OSS
 
 menu:
   kapacitor_1_4:
+    name: Configuring
     weight: 10
-    parent: administration
+    parent: Administration
 ---
 
 ### Contents

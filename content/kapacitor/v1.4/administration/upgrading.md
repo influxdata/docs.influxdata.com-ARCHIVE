@@ -1,11 +1,12 @@
 ---
-title: Upgrading to Kapacitor v1.4
+title: Upgrading Kapacitor OSS
 aliases:
     - kapacitor/v1.4/introduction/upgrading/
 menu:
   kapacitor_1_4:
+    name: Upgrading
     weight: 30
-    parent: administration
+    parent: Administration
 ---
 # Upgrading Kapacitor
 
