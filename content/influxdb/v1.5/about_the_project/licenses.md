@@ -7,4 +7,4 @@ menu:
     parent: About the project
 ---
 
-The [License](https://github.com/influxdata/chronograf/blob/master/LICENSE) is available on GitHub.
+The [License](https://github.com/influxdata/influxdb/blob/master/LICENSE) is available on GitHub.

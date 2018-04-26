@@ -1,5 +1,5 @@
 ---
-title: Contributing to Chronograf
+title: Contributing to InfluxDB
 menu:
   influxdb_1_5:
     name: Contributing
@@ -7,4 +7,4 @@ menu:
     parent: About the project
 ---
 
-[Contributing to Chronograf](https://github.com/influxdata/chronograf/blob/master/CONTRIBUTING.md) is available on GitHub.
+[Contributing to InfluxDB](https://github.com/influxdata/influxdb/blob/master/CONTRIBUTING.md) is available on GitHub.
