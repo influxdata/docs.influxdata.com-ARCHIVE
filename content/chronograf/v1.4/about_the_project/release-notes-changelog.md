@@ -1,5 +1,5 @@
 ---
-title: Chronograf release notes
+title: Chronograf 1.4 release notes
 menu:
   chronograf_1_4:
     name: Release notes

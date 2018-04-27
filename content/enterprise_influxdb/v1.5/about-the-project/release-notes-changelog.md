@@ -1,5 +1,5 @@
 ---
-title: InfluxDB Enterprise release notes
+title: InfluxDB Enterprise 1.5 release notes
 
 menu:
   enterprise_influxdb_1_5:

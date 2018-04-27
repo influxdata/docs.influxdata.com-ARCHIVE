@@ -1,5 +1,5 @@
 ---
-title: Contributor License Agreement (CLA)
+title: InfluxDB Contributor License Agreement (CLA)
 menu:
   influxdb_1_5:
     name: Contributor License Agreement (CLA)

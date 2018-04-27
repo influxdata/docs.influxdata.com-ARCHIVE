@@ -1,5 +1,5 @@
 ---
-title: Contributing to InfluxDB
+title: Contributing to InfluxDB OSS
 menu:
   influxdb_1_5:
     name: Contributing
@@ -7,4 +7,4 @@ menu:
     parent: About the project
 ---
 
-[Contributing to InfluxDB](https://github.com/influxdata/influxdb/blob/master/CONTRIBUTING.md) is available on GitHub.
+Information on [contributing to InfluxDB OSS](https://github.com/influxdata/influxdb/blob/master/CONTRIBUTING.md) is available on GitHub.

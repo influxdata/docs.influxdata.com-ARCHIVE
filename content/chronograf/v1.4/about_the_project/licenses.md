@@ -1,7 +1,8 @@
 ---
-title: License
+title: Open source license for Chronograf
 menu:
   chronograf_1_4:
+    Name: Open source license
     weight: 40
     parent: About the project
     url: https://github.com/influxdata/chronograf/blob/master/LICENSE

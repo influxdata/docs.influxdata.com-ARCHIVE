@@ -12,7 +12,19 @@ Kapacitor OSS is open source and we welcome contributions from the community.
 
 ## [Kapacitor OSS release notes](/kapacitor/v1.4/about_the_project/releasenotes-changelog/)
 
+The [Kapacitor OSS release notes](/kapacitor/v1.4/about_the_project/releasenotes-changelog/) cover features, bug fixes, breaking alerts, and other information about the current and previous releases.
+
 ## [Contributing to Kapacitor OSS](https://github.com/influxdata/kapacitor/blob/master/CONTRIBUTING.md)
+
+The [Contributing to Kapacitor OSS](https://github.com/influxdata/kapacitor/blob/master/CONTRIBUTING.md)
+page includes information on how you can contribute to Kapacitor, including:
+
+* filing bug reports (GitHub issues)
+* submitting feature requests
+* contribute to the open source code
+* submitting pull request
+
+This page also includes details on the use of third party software libraries, getting the source, building and testing, code generation, build scripts, and much more.
 
 ## [Contributing Kapacitor alert integrations](https://github.com/influxdata/kapacitor/blob/master/alert/HANDLERS.md)
 
