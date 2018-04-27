@@ -1,5 +1,6 @@
 ---
 title: About the Kapacitor OSS project
+description: This section includes release notes, licenses, and information about contributing to the Kapacitor OSS project.
 aliases:
     - kapacitor/v1.4/contributing/
 menu:
@@ -8,7 +9,7 @@ menu:
     weight: 10
 ---
 
-Kapacitor OSS is open source and we welcome contributions from the community.
+Kapacitor OSS is open source and InfluxData welcomes contributions from the community.
 
 ## [Kapacitor OSS release notes](/kapacitor/v1.4/about_the_project/releasenotes-changelog/)
 
@@ -41,7 +42,7 @@ In order to begin contributing to Kapacitor OSS project, you need to complete an
 
 ## [Open source license](https://github.com/influxdata/kapacitor/blob/master/LICENSE)
 
-See the [Open source license](https://github.com/influxdata/kapacitor/blob/master/LICENSE) for conditions and restrictions for the use of the Kapacitor source code.
+See the [open source license](https://github.com/influxdata/kapacitor/blob/master/LICENSE) for conditions and restrictions for the use of the Kapacitor source code.
 
 ## Third party software
 InfluxData products contain third party software, which means the copyrighted, patented, or otherwise legally protected
