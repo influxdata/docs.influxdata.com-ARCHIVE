@@ -8,8 +8,11 @@ menu:
 
 ## [Kapacitor Enterprise release notes](/enterprise_kapacitor/v1.4/about-the-project/release-notes-changelog/)
 
-## [Kapacitor Enterprise commercial license](https://www.influxdata.com/legal/slsa/)
-Kapacitor Enterprise is available with a commercial license.  [Contact sales for more information](https://www.influxdata.com/contact-sales/).
+The [Kapacitor Enterprise release notes](/enterprise_kapacitor/v1.4/about-the-project/release-notes-changelog/) includes details about features, bug fixes, and breaking changes for the current and earlier Kapacitor Enterprise releases.
+
+## [InfluxData Software License Subscription Agreement (SLSA)](https://www.influxdata.com/legal/slsa/)
+
+Kapacitor Enterprise is available with a commercial license based on the [InfluxData Software License Subscription Agreement (SLSA)](https://www.influxdata.com/legal/slsa/).  [Contact sales for more information](https://www.influxdata.com/contact-sales/).
 
 ## Third party software
 InfluxData products contain third party software, which means the copyrighted, patented, or otherwise legally protected software of third parties, that is incorporated in InfluxData products.
