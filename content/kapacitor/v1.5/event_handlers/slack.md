@@ -1,11 +1,11 @@
 ---
-title: Slack Alert Handler
+title: Slack Event Handler
 
 menu:
   kapacitor_1_5:
     name: Slack
     weight: 13
-    parent: alert-handlers
+    parent: event-handlers
 ---
 
 #### Slack

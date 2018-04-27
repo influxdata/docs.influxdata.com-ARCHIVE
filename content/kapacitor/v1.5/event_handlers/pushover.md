@@ -1,11 +1,11 @@
 ---
-title: Pushover Alert Handler
+title: Pushover Event Handler
 
 menu:
   kapacitor_1_5:
     name: Pushover
     weight: 11
-    parent: alert-handlers
+    parent: event-handlers
 ---
 
 #### Pushover

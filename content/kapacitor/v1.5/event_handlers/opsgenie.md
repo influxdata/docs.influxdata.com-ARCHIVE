@@ -1,11 +1,11 @@
 ---
-title: OpsGenie Alert Handler
+title: OpsGenie Event Handler
 
 menu:
   kapacitor_1_5:
     name: OpsGenie
     weight: 7
-    parent: alert-handlers
+    parent: event-handlers
 ---
 
 #### Opsgenie

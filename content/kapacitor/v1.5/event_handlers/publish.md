@@ -1,11 +1,11 @@
 ---
-title: Publish Alert Handler
+title: Publish Event Handler
 
 menu:
   kapacitor_1_5:
     name: Publish
     weight: 10
-    parent: alert-handlers
+    parent: event-handlers
 ---
 
 #### Publish

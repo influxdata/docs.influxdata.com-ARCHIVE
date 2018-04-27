@@ -1,16 +1,16 @@
 ---
-title: Exec Alert Handler
+title: Exec Event Handler
 
 menu:
   kapacitor_1_5:
     name: Exec
     weight: 3
-    parent: alert-handlers
+    parent: event-handlers
 ---
 
 #### Exec
 
-Execute an external program, the alert data is passed over STDIN to the process.
+Execute an external program, the event data is passed over STDIN to the process.
 
 Options:
 

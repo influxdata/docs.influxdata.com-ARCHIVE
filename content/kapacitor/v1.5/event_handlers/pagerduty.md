@@ -1,11 +1,11 @@
 ---
-title: PagerDuty Alert Handler
+title: PagerDuty Event Handler
 
 menu:
   kapacitor_1_5:
     name: PagerDuty
     weight: 8
-    parent: alert-handlers
+    parent: event-handlers
 ---
 
 #### Pagerduty

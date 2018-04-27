@@ -1,11 +1,11 @@
 ---
-title: SMTP Alert Handler
+title: SMTP Event Handler
 
 menu:
   kapacitor_1_5:
     name: SMTP
     weight: 14
-    parent: alert-handlers
+    parent: event-handlers
 ---
 
 #### SMTP

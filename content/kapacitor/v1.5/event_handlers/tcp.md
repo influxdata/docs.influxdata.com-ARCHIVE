@@ -1,11 +1,11 @@
 ---
-title: TCP Alert Handler
+title: TCP Event Handler
 
 menu:
   kapacitor_1_5:
     name: TCP
     weight: 17
-    parent: alert-handlers
+    parent: event-handlers
 ---
 
 #### TCP

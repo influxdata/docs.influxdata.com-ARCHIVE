@@ -1,11 +1,11 @@
 ---
-title: Kafka Alert Handler
+title: Kafka Event Handler
 
 menu:
   kapacitor_1_5:
     name: Kafka
     weight: 5
-    parent: alert-handlers
+    parent: event-handlers
 ---
 
 #### Kafka

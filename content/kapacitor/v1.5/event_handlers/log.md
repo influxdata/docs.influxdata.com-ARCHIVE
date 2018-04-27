@@ -1,11 +1,11 @@
 ---
-title: Log Alert Handler
+title: Log Event Handler
 
 menu:
   kapacitor_1_5:
     name: Log
     weight: 6
-    parent: alert-handlers
+    parent: event-handlers
 ---
 
 #### Log

@@ -1,11 +1,11 @@
 ---
-title: Post Alert Handler
+title: Post Event Handler
 
 menu:
   kapacitor_1_5:
     name: Post
     weight: 9
-    parent: alert-handlers
+    parent: event-handlers
 ---
 
 #### Post

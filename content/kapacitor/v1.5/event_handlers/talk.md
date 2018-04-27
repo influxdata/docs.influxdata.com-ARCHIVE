@@ -1,11 +1,11 @@
 ---
-title: Talk Alert Handler
+title: Talk Event Handler
 
 menu:
   kapacitor_1_5:
     name: Talk
     weight: 16
-    parent: alert-handlers
+    parent: event-handlers
 ---
 
 #### Talk

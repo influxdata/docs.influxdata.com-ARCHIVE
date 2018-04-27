@@ -1,11 +1,11 @@
 ---
-title: VictorOps Alert Handler
+title: VictorOps Event Handler
 
 menu:
   kapacitor_1_5:
     name: VictorOps
     weight: 19
-    parent: alert-handlers
+    parent: event-handlers
 ---
 
 #### Victorops

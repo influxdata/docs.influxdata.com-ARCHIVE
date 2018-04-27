@@ -1,11 +1,11 @@
 ---
-title: Sensu Alert Handler
+title: Sensu Event Handler
 
 menu:
   kapacitor_1_5:
     name: Sensu
     weight: 12
-    parent: alert-handlers
+    parent: event-handlers
 ---
 
 #### Sensu

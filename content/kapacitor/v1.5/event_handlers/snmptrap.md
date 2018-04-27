@@ -1,11 +1,11 @@
 ---
-title: Snmptrap Alert Handler
+title: Snmptrap Event Handler
 
 menu:
   kapacitor_1_5:
     name: Snmptrap
     weight: 15
-    parent: alert-handlers
+    parent: event-handlers
 ---
 
 #### Snmptrap
