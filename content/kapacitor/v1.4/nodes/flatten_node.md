@@ -8,7 +8,7 @@ menu:
     name: FlattenNode
     identifier: flatten_node
     weight: 100
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

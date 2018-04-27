@@ -1,14 +1,13 @@
 ---
-title: Live leaderboard of game scores
+title: Creating a live leaderboard for game scores
 description: Tutorial on using Kapacitor stream processing and Chronograf to build a leaderboard for gamers to be able to see player scores in realtime. Historical data is also available for post-game analysis.
 aliases:
     - kapacitor/v1.4/examples/live_leaderboard/
 menu:
   kapacitor_1_4:
-    name: Live leaderboard
-    identifier: live_leaderboard
-    weight: 10
-    parent: guides
+    name: Live leaderboard of game scores
+    weight: 20
+    parent: Guides
 ---
 
 **If you do not have a running Kapacitor instance check out the [getting started guide](/kapacitor/v1.4/introduction/getting-started/)
@@ -21,7 +20,7 @@ We need to build a leaderboard so spectators can see the player's scores in real
 We would also like to have historical data on leaders in order to do post game
 analysis on who was leading for how long etc.
 
-We will use Kapacitor's stream processing to do the heavy lifting for us.
+We will use Kapacitor stream processing to do the heavy lifting for us.
 The game servers can send a UDP packet anytime a player's score changes
 or at least every 10 seconds if the score hasn't changed.
 

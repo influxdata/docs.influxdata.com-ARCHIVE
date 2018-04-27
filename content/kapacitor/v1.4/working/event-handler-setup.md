@@ -1,11 +1,11 @@
 ---
-title: Event handler setup
+title: Using Kapacitor event handlers to send alert messages
 
 menu:
   kapacitor_1_4:
-    name: Alerts - Event handler setup
-    weight: 5
-    parent: work-w-kapacitor
+    name: Using event handlers
+    weight: 50
+    parent: Working with Kapacitor
 ---
 
 Kapacitor can be integrated into a monitoring system by sending

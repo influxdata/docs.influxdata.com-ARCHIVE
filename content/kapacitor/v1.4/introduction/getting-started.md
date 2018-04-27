@@ -5,8 +5,9 @@ aliases:
   - /kapacitor/v1.4/introduction/getting_started/
 menu:
   kapacitor_1_4:
-    weight: 20
-    parent: introduction
+    name: Getting started
+    weight: 40
+    parent: Introduction
 ---
 
 Kapacitor is a data processing engine. It can process both stream and batch data. This guide will walk through both workflows and teach the basics of using

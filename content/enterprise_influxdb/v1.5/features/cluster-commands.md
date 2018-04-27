@@ -9,7 +9,7 @@ menu:
     parent: Enterprise features
 ---
 
-Use the command line tools [`influxd-ctl`](#influxd-ctl) and [`influx`](#influx) to interact with your cluster and data.
+Use the cluster command line tools [`influxd-ctl`](#influxd-ctl) and [`influx`](#influx) to interact with your cluster and data.
 
 #### Content
 

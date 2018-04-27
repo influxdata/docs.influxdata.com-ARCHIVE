@@ -1,9 +1,10 @@
 ---
-title: Release notes and changelog
+title: Telegraf release notes
 menu:
   telegraf_1_6:
+    name: Release notes
     weight: 10
-    parent: about_the_project
+    parent: About the project
 ---
 
 ## v1.6.1 [2018-04-23]
@@ -17,7 +18,7 @@ menu:
 * Fix uptime reporting in system input when ran inside docker.
 * Fix mem input `cannot allocate memory` error on FreeBSD-based systems.
 * Fix duplicate tags when overriding an existing tag.
-* Add server argument as first argument in unbound input.
+* Add server argument as first argument in the Unbound (`unbound`) input plugin.
 * Fix handling of floats with multiple leading zeroes.
 * Return errors in SSL/TLS configuration of MongoDB (`mongodb`) input plugin.
 

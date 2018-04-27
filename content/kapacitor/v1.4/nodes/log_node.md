@@ -8,7 +8,7 @@ menu:
     name: LogNode
     identifier: log_node
     weight: 200
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

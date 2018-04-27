@@ -4,7 +4,7 @@ description: Covers Kapacitor Enterprise configuration, security, and authentica
 menu:
   enterprise_kapacitor_1_4:
     name: Administration
-    weight: 5
+    weight: 30
 
 ---
 
@@ -15,12 +15,12 @@ servers, nodes and clusters.
 
 Contains information about configuring Kapacitor Enterprise using the configuration file.
 
-## [Security](/enterprise_kapacitor/v1.4/administration/security/)
+## [Managing Kapacitor Enterprise security](/enterprise_kapacitor/v1.4/administration/security/)
 
 Contains information about using Kapacitor Enterprise with a secure installation of
 InfluxDB Enterprise, as well as how to secure Kapacitor Enterprise and its endpoints.
 
-## [Authentication and authorization](/enterprise_kapacitor/v1.4/administration/auth/)
+## [Kapacitor Enterprise authentication and authorization](/enterprise_kapacitor/v1.4/administration/auth/)
 
 Presents authentication and authorization mechanisms of the Enterprise TICK stack, with
 a special focus on how they are used in Kapacitor Enterprise.

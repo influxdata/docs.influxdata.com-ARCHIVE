@@ -4,9 +4,8 @@ description: Telegraf input plugins are used with the InfluxData time series pla
 menu:
   telegraf_1_6:
     name: Input
-    identifier: inputs
     weight: 10
-    parent: plugins
+    parent: Plugins
 ---
 
 Telegraf input plugins are used with the InfluxData time series platform to collect metrics from the system, services, or third party APIs. All metrics are gathered from the inputs you [enable and configure in the configuration file](/telegraf/v1.6/administration/configuration/).

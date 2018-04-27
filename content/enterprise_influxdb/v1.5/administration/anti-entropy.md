@@ -1,9 +1,10 @@
 ---
-title: Anti-entropy
+title: Anti-entropy service in InfluxDB Enterprise
 aliases:
   - /enterprise_influxdb/v1.5/guides/anti-entropy/
 menu:
   enterprise_influxdb_1_5:
+    name: Anti-entropy service
     weight: 40
     parent: Administration
 ---

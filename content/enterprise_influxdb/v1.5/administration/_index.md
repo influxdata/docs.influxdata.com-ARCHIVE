@@ -17,4 +17,4 @@ menu:
 
 ## [Host renaming in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/renaming/)
 
-## [Managing security in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/security/)
+## [Managing InfluxDB Enterprise security](/enterprise_influxdb/v1.5/administration/security/)

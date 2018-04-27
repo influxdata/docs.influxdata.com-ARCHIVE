@@ -1,12 +1,11 @@
 ---
-title: TICKscript specification
-description: TICKscript specification for use in creating Kapacitor data processing pipelines.
+title: Kapacitor TICKscript specification
+description: Kapacitor TICKscript specification for defining Kapacitor data processing pipelines.
 menu:
   kapacitor_1_4:
     name: TICKscript specification
-    identifier: specification
-    weight: 10
-    parent: reference
+    weight: 40
+    parent: TICKscript
 ---
 
 Introduction

@@ -1,14 +1,14 @@
 ---
-title: Scraping and discovery with Kapacitor
+title: Discovering and scraping data with Kapacitor
 descriptiion: Using Kapacitor scraping and discovery to monitor targets, process data, and write data to InfluxDB.
 aliases:
   - /kapacitor/v1.4/pull_metrics/scraping-and-discovery/
   - /kapacitor/v1.4/pull_metrics/
 menu:
   kapacitor_1_4:
-    name: Dynamic data scraping
-    weight: 6
-    parent: work-w-kapacitor
+    name: Discovering and scraping data
+    weight: 80
+    parent: Working with Kapacitor
 ---
 
 Data can be pulled from a dynamic list of remote targets with the discovery and scraping features of Kapacitor.

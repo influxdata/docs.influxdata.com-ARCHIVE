@@ -8,7 +8,7 @@ menu:
     name: GroupByNode
     identifier: group_by_node
     weight: 120
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

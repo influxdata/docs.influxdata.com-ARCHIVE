@@ -1,12 +1,11 @@
 ---
-title: Introducing the TICKscript language
+title: Introducing the Kapacitor TICKscript language
 description: An overview of the TICKscript language, including nodes, pipelines, and examples.
 menu:
   kapacitor_1_4:
-    name: Introduction
-    identifier: tick_intro
-    parent: tick
-    weight: 1
+    name: Introducing TICKscript
+    parent: TICKscript
+    weight: 10
 ---
 # Contents
 * [Overview](#overview)

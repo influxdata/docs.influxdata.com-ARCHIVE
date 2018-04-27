@@ -8,7 +8,7 @@ menu:
     name: SideloadNode
     identifier: sideload_node
     weight: 250
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

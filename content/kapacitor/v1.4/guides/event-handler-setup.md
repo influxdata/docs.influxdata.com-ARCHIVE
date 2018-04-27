@@ -1,10 +1,11 @@
 ---
-title: Event handler setup
-
+title: Using Kapacitor event handlers to send alert messages
+description: Configuring Kapacitor to send alert messages to a HipChat room using event handlers and TICKscripts
 menu:
   kapacitor_1_4:
+    name: Using event handlers to send alert messages
     weight: 70
-    parent: guides
+    parent: Guides
 ---
 
 Integrate Kapacitor into your monitoring system by sending [alert messages](/kapacitor/latest/nodes/alert_node/#message) to supported event handlers.

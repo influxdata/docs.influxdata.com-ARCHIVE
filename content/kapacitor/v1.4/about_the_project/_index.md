@@ -1,27 +1,50 @@
 ---
-title: About the project
+title: About the Kapacitor OSS project
+description: This section includes release notes, licenses, and information about contributing to the Kapacitor OSS project.
 aliases:
     - kapacitor/v1.4/contributing/
 menu:
   kapacitor_1_4:
     name: About the project
-    identifier: about_the_project
-    weight: 50
+    weight: 10
 ---
 
-Kapacitor is open source and we welcome contributions from the community.
+Kapacitor OSS is open source and InfluxData welcomes contributions from the community.
 
-If you want Kapacitor to be able to output to you own endpoint see this [How To](/kapacitor/v1.4/about_the_project/custom_output/).
+## [Kapacitor OSS release notes](/kapacitor/v1.4/about_the_project/releasenotes-changelog/)
 
-## [Release Notes/Changelog](/kapacitor/v1.4/about_the_project/releasenotes-changelog/)
+The [Kapacitor OSS release notes](/kapacitor/v1.4/about_the_project/releasenotes-changelog/) cover features, bug fixes, breaking alerts, and other information about the current and previous releases.
 
-## [Contributing](https://github.com/influxdata/kapacitor/blob/master/CONTRIBUTING.md)
+## [Contributing to Kapacitor OSS](https://github.com/influxdata/kapacitor/blob/master/CONTRIBUTING.md)
 
-## [CLA](https://influxdata.com/community/cla/)
+See the [Contributing to Kapacitor OSS](https://github.com/influxdata/kapacitor/blob/master/CONTRIBUTING.md)
+page for information on how you can contribute to Kapacitor OSS, including:
 
-## [Licenses](https://github.com/influxdata/kapacitor/blob/master/LICENSE)
+* filing bug reports (GitHub issues)
+* submitting feature requests
+* contribute to the open source code
+* submitting pull requests
 
-## Third Party Software
+This page also includes details on the use of third party software libraries, getting the source, building and testing, code generation, build scripts, and much more.
+
+## [Contributing Kapacitor event handler integrations](/kapacitor/v1.4/about_the_project/custom_alert/)
+
+See [Contributing Kapacitor event handler integrations](/kapacitor/v1.4/about_the_project/custom_alert/) to learn how to create a custom event handler for alerting.
+
+## [Contributing Kapacitor output nodes](/kapacitor/v1.4/about_the_project/custom_output/)
+
+See [Contributing Kapacitor output nodes](/kapacitor/v1.4/about_the_project/custom_output/) to learn how to add a new node to Kapacitor that can output data to a custom endpoint.
+
+## [InfluxData Contributor License Agreement (CLA)](https://influxdata.com/community/cla/)
+
+In order to begin contributing to Kapacitor OSS project, you need to complete and sign the [InfluxData Contributor License Agreement (CLA)](https://influxdata.com/community/cla/).
+
+
+## [Open source license](https://github.com/influxdata/kapacitor/blob/master/LICENSE)
+
+See the [open source license](https://github.com/influxdata/kapacitor/blob/master/LICENSE) for conditions and restrictions for the use of the Kapacitor source code.
+
+## Third party software
 InfluxData products contain third party software, which means the copyrighted, patented, or otherwise legally protected
 software of third parties that is incorporated in InfluxData products.
 

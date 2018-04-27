@@ -1,5 +1,5 @@
 ---
-title: InfluxDB 1.5 release notes
+title: InfluxDB OSS 1.5 release notes
 menu:
   influxdb_1_5:
     name: Release notes
