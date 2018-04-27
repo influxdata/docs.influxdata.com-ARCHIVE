@@ -1,6 +1,6 @@
 ---
-title: Introducing Kapacitor
-description: Introduction to Kapacitor, including information on downloading, installing, and getting started.
+title: Introducing Kapacitor OSS
+description: Introduction to Kapacitor OSS, including information on downloading, installing, and getting started.
 menu:
   kapacitor_1_4:
     name: Introduction
@@ -10,10 +10,13 @@ menu:
 The introductory documentation includes all the information you need to get up and running with Kapacitor.
 
 ## [Downloading Kapacitor](https://influxdata.com/downloads/#kapacitor)
-Download Kapacitor.
+
+See the [InfluxData downloads page](https://influxdata.com/downloads/#kapacitor) to download Kapacitor OSS releases.
 
 ## [Installing Kapacitor](/kapacitor/v1.4/introduction/installation/)
-Directions for installing, starting, and configuring Kapacitor.
+
+See [Installing Kapacitor](/kapacitor/v1.4/introduction/installation/) for details on installing, starting, and configuring Kapacitor OSS.
 
 ## [Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting-started/)
-This guide will walk you through how to process stream and batch data and teaches you the basics of using and running a Kapacitor daemon.
+
+The [Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting-started/) will walk you through how to process stream and batch data and teaches you the basics of using and running a Kapacitor daemon.
