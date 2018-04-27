@@ -1,5 +1,5 @@
 ---
-title: InfluxDB Contributor License Agreement (CLA)
+title: InfluxData Contributor License Agreement (CLA)
 menu:
   influxdb_1_5:
     name: Contributor License Agreement (CLA)
@@ -7,4 +7,4 @@ menu:
     parent: About the project
 ---
 
-The [Contributor License Agreement](https://www.influxdata.com/legal/cla/) is available on the main InfluxData site.
+The [InfluxData Contributor License Agreement](https://www.influxdata.com/legal/cla/) is available on the main InfluxData site.

@@ -1,5 +1,5 @@
 ---
-title: Contributor License Agreement (CLA)
+title: InfluxData Contributor License Agreement (CLA)
 
 menu:
    telegraf_1_6:

@@ -1,5 +1,5 @@
 ---
-title: Kapacitor Enterprise release notes
+title: Kapacitor Enterprise 1.4 release notes
 menu:
   enterprise_kapacitor_1_4:
     name: Release notes
