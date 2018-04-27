@@ -1,6 +1,8 @@
 ---
 title: Kapacitor TICKscript language
 description: Provides introductory information on working with TICKsccript, including syntax, lambda expressions, and the TICKscript specification.
+aliases:
+  - /kapacitor/v1.4/reference/
 menu:
   kapacitor_1_4:
     name: TICKscript language
