@@ -108,7 +108,7 @@ _**Alerta settings in kapacitor.conf**_
 
 ### Send alerts to a Alerta room from a TICKscript
 
-The following TICKscript sends the message, "Hey, check your CPU",  to Alerta whenever idle CPU usage drops below 10% using the `.alerta()` event handler and default Alerta settings defined in the `kapacitor.conf`.
+The following TICKscript sends the message, "Hey, check your CPU", to Alerta whenever idle CPU usage drops below 10% using the `.alerta()` event handler and default Alerta settings defined in the `kapacitor.conf`.
 
 _**alerta-cpu-alert.tick**_  
 ```js
@@ -123,7 +123,7 @@ stream
 
 ### Send alerts to the Alerta room from a defined handler
 
-The following setup sends an alert to the `cpu` topic with the message, "Hey, check your CPU". An Alerta handler is added that subscribes to the `cpu` topic and publishes all alert messages to alerta_cpu_handler using default settings defined in the `kapacitor.conf`.
+The following setup sends an alert to the `cpu` topic with the message, "Hey, check your CPU". An Alerta handler is added that subscribes to the `cpu` topic and publishes all alert messages to Alerta using default settings defined in the `kapacitor.conf`.
 
 Create a TICKscript that publishes alert messages to a topic.
 The TICKscript below sends an alert message to the `cpu` topic any time idle CPU usage drops below 10%.
