@@ -8,22 +8,35 @@ menu:
     parent: event-handlers
 ---
 
-#### Opsgenie
+[OpsGenie](https://www.opsgenie.com/) is an incident response orchestration platform for DevOps & ITOps teams.
+Kapacitor can be configured to send alert messages to OpsGenie.
 
-Send alert events to OpsGenie.
+## Configuration
 
-Options:
+## Options
+The following OpsGenie event handler options can be set in a [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using `.opsgenie()` in a TICKscript.
+
 
 | Name            | Type                | Description    |
 | ----            | ----                | -----------    |
 | teams-list      | list of string      | List of teams. |
-| recipients-list | List of recipients. |
+| recipients-list | List of recipients. |                |
 
-Example:
-
+## Example Handler File
 ```yaml
+id: handler-id
+topic: topic-name
 kind: opsgenie
 options:
-    teams:
-        - rocket
+  teams:
+    - rocket
+  recipient-list:
+    - john@doe.com
+```
+
+## Example TICKscript
+```js
+alert()
+  // ...
+  .opsgenie()
 ```

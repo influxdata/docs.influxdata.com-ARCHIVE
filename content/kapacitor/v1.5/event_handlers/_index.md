@@ -1,6 +1,7 @@
 ---
 title: Kapacitor Event Handlers
-
+aliases:
+  - /kapacitor/v1.5/working/event-handler-setup/
 menu:
   kapacitor_1_5:
     name: Event Handlers
