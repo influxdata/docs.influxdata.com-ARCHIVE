@@ -40,7 +40,7 @@ The publish event handler can be used in both TICKscripts and handler files to p
 
 ### Publish to multiple topics from a TICKscript
 
-The following TICKscript uses the `.publish()` event handler to publish alerts to multiple topics whenever idle CPU usage drops below 10% .
+The following TICKscript uses the `.publish()` event handler to publish alerts to multiple topics whenever idle CPU usage drops below 10%.
 
 _**publish-cpu-alert.tick**_  
 ```js
