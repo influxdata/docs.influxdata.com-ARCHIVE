@@ -34,10 +34,12 @@ options:
 ```
 
 ## Using the TCP event handler
-The TCP event handler can be used in both TICKscripts and handler files to send alert data to TCP endpoint.
+The TCP event handler can be used in both TICKscripts and handler files to send
+alert data to TCP endpoint.
 
 ### Send alert data to a TCP endpoint from a TICKscript
-The following TICKscript uses the `.tcp()` event handler to send alert data whenever idle CPU usage drops below 10%.
+The following TICKscript uses the `.tcp()` event handler to send alert data
+whenever idle CPU usage drops below 10%.
 
 _**tcp-cpu-alert.tick**_  
 ```js
@@ -51,10 +53,13 @@ stream
 ```
 
 ### Send alert data to a TCP endpoint from a defined handler
-The following setup sends an alert to the `cpu` topic with the message, "Hey, check your CPU". A TCP handler is added that subscribes to the `cpu` topic and sends all alert messages to a TCP endpoint.
+The following setup sends an alert to the `cpu` topic with the message,
+"Hey, check your CPU". A TCP handler is added that subscribes to the `cpu` topic
+and sends all alert messages to a TCP endpoint.
 
 Create a TICKscript that publishes alert messages to a topic.
-The TICKscript below sends an alert message to the `cpu` topic any time idle CPU usage drops below 10%.
+The TICKscript below sends an alert message to the `cpu` topic any time idle CPU
+usage drops below 10%.
 
 _**cpu\_alert.tick**_
 ```js
@@ -74,7 +79,8 @@ kapacitor define cpu_alert -tick cpu_alert.tick
 kapacitor enable cpu_alert
 ```
 
-Create a handler file that subscribes to the `cpu` topic and uses the TCP event handler to send alert data to a TCP endpoint.
+Create a handler file that subscribes to the `cpu` topic and uses the TCP event
+handler to send alert data to a TCP endpoint.
 
 _**tcp\_cpu\_handler.yaml**_
 ```yaml

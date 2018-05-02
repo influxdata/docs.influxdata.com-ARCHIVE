@@ -8,11 +8,13 @@ menu:
     parent: event-handlers
 ---
 
-[Apache Kafka](https://kafka.apache.org/) is distributed streaming platform designed for building real-time data pipelines and streaming apps.
+[Apache Kafka](https://kafka.apache.org/) is distributed streaming platform
+designed for building real-time data pipelines and streaming apps.
 Kapacitor can be configured to send alert messages to a Kafka cluster.
 
 ## Configuration
-Configuration as well as default [option](#options) values for the Kafka event handler are set in your `kapacitor.conf`.
+Configuration as well as default [option](#options) values for the Kafka event
+handler are set in your `kapacitor.conf`.
 Below is an example config:
 
 ```toml
@@ -65,10 +67,13 @@ Path to host certificate file.
 Path to certificate private key file.
 
 #### `insecure-skip-verify`
-Use SSL but skip chain and host verification. _This is necessary if using a self-signed certificate._
+Use SSL but skip chain and host verification.
+_This is necessary if using a self-signed certificate._
 
 ## Options
-The following Kafka event handler options can be set in a [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using `.kafka()` in a TICKscript.
+The following Kafka event handler options can be set in a
+[handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
+`.kafka()` in a TICKscript.
 
 | Name     | Type   | Description                 |
 | ----     | ----   | -----------                 |
@@ -98,7 +103,9 @@ options:
 ```
 
 ##  Using the Kafka Event Handler
-With the Kafka event handler enabled in your `kapacitor.conf`, use the `.kafka()` attribute in your TICKscripts to send alerts to a Kafka cluster or define a Kafka handler that subscribes to a topic and sends published alerts to Kafka.
+With the Kafka event handler enabled in your `kapacitor.conf`, use the `.kafka()`
+attribute in your TICKscripts to send alerts to a Kafka cluster or define a
+Kafka handler that subscribes to a topic and sends published alerts to Kafka.
 
 The examples below use the same Kafka configuration defined in the `kapacitor.conf`:
 
@@ -120,7 +127,10 @@ _**Kafka settings in kapacitor.conf**_
 
 ### Send alerts to a Kafka cluster from a TICKscript
 
-The following TICKscript uses the `.kafka()` event handler to send the message, "Hey, check your CPU", whenever idle CPU usage drops below 10%. It publishes the messages to the `cpu-alerts` topic in the `infra-monitoring` Kafka cluster defined in the `kapacitor.conf`.
+The following TICKscript uses the `.kafka()` event handler to send the message,
+"Hey, check your CPU", whenever idle CPU usage drops below 10%.
+It publishes the messages to the `cpu-alerts` topic in the `infra-monitoring`
+Kafka cluster defined in the `kapacitor.conf`.
 
 _**kafka-cpu-alert.tick**_  
 ```js
@@ -136,10 +146,14 @@ stream
 
 ### Send alerts to a Kafka cluster from a defined handler
 
-The following setup sends an alert to the `cpu` topic with the message, "Hey, check your CPU". A Kafka handler is added that subscribes to the `cpu` topic and publishes all alert messages to the `cpu-alerts` topic associated with the `infra-monitoring` Kafka cluster defined in the `kapacitor.conf`.
+The following setup sends an alert to the `cpu` topic with the message, "Hey,
+check your CPU". A Kafka handler is added that subscribes to the `cpu` topic and
+publishes all alert messages to the `cpu-alerts` topic associated with the
+`infra-monitoring` Kafka cluster defined in the `kapacitor.conf`.
 
 Create a TICKscript that publishes alert messages to a topic.
-The TICKscript below sends an alert message to the `cpu` topic any time CPU idle-usage drops below 10% _(or CPU usage is above 90%)_.
+The TICKscript below sends an alert message to the `cpu` topic any time CPU
+idle-usage drops below 10% _(or CPU usage is above 90%)_.
 
 _**cpu\_alert.tick**_
 ```js
@@ -159,7 +173,8 @@ kapacitor define cpu_alert -tick cpu_alert.tick
 kapacitor enable cpu_alert
 ```
 
-Create a handler file that subscribes to the `cpu` topic and uses the Kafka event handler to send alerts to the `alerts` channel in Kafka.
+Create a handler file that subscribes to the `cpu` topic and uses the Kafka
+event handler to send alerts to the `alerts` channel in Kafka.
 
 _**kafka\_cpu\_handler.yaml**_
 ```yaml

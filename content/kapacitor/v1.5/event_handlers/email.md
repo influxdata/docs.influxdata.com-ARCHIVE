@@ -11,7 +11,8 @@ menu:
 The Email event handler sends alert messages via SMTP/email.
 
 ## Configuration
-Configuration as well as default [option](#options) values for the Email event handler are set in the `[smtp]` section of your `kapacitor.conf`.
+Configuration as well as default [option](#options) values for the Email event
+handler are set in the `[smtp]` section of your `kapacitor.conf`.
 Below is an example config:
 
 ```toml
@@ -57,15 +58,19 @@ Skip TLS certificate verification when connecting to the SMTP server.
 The time after which idle connections are closed.
 
 #### `global`
-If `true`, all alerts will be sent via Email without explicitly specifying the SMTP handler in the TICKscript.
+If `true`, all alerts will be sent via Email without explicitly specifying the
+SMTP handler in the TICKscript.
 
 #### `state-changes-only`
-Sets all alerts in state-changes-only mode, meaning alerts will only be sent if the alert state changes.
+Sets all alerts in state-changes-only mode, meaning alerts will only be sent if
+the alert state changes.
 Only applies if `global` is `true`.
 
 
 ## Options
-The following Email event handler options can be set in a [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using `.email()` in a TICKscript.
+The following Email event handler options can be set in a
+[handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
+`.email()` in a TICKscript.
 
 | Name | Type            | Description              |
 | ---- | ----            | -----------              |
@@ -92,7 +97,10 @@ options:
 ```
 
 ### Using the SMTP/Email event handler
-The Email event handler can be used in both TICKscripts and handler files to email alerts. The email subject is the [AlertNode.Message](/kapacitor/v1.5/nodes/alert_node/#message) property. The email body is the [AlertNode.Details](/kapacitor/v1.5/nodes/alert_node/#details) property. The emails are sent as HTML emails so the body can contain html markup.
+The Email event handler can be used in both TICKscripts and handler files to email alerts.
+The email subject is the [AlertNode.Message](/kapacitor/v1.5/nodes/alert_node/#message) property.
+The email body is the [AlertNode.Details](/kapacitor/v1.5/nodes/alert_node/#details) property.
+The emails are sent as HTML emails so the body can contain html markup.
 
 _**SMTP settings in kapacitor.conf**_  
 ```toml
@@ -111,7 +119,8 @@ _**SMTP settings in kapacitor.conf**_
 ```
 
 ### Email alerts from a TICKscript
-The following TICKscript uses the `.email()` event handler to send out emails whenever idle CPU usage drops below 10%.
+The following TICKscript uses the `.email()` event handler to send out emails
+whenever idle CPU usage drops below 10%.
 
 _**email-cpu-alert.tick**_  
 ```js
@@ -127,10 +136,13 @@ stream
 ```
 
 ### Email alerts from a defined handler
-The following setup sends an alert to the `cpu` topic with the message, "Hey, check your CPU". An emai handler is added that subscribes to the `cpu` topic and emails all alerts.
+The following setup sends an alert to the `cpu` topic with the message, "Hey,
+check your CPU". An emai handler is added that subscribes to the `cpu` topic
+and emails all alerts.
 
 Create a TICKscript that publishes alert messages to a topic.
-The TICKscript below sends an alert message to the `cpu` topic any time idle CPU usage drops below 10%.
+The TICKscript below sends an alert message to the `cpu` topic any time idle
+CPU usage drops below 10%.
 
 _**cpu\_alert.tick**_
 ```js
@@ -150,7 +162,8 @@ kapacitor define cpu_alert -tick cpu_alert.tick
 kapacitor enable cpu_alert
 ```
 
-Create a handler file that subscribes to the `cpu` topic and uses the `.email()` event handler to email alerts.
+Create a handler file that subscribes to the `cpu` topic and uses the `.email()`
+event handler to email alerts.
 
 _**email\_cpu\_handler.yaml**_
 ```yaml

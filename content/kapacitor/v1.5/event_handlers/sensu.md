@@ -8,11 +8,13 @@ menu:
     parent: event-handlers
 ---
 
-[Sensu](https://sensu.io/) is a service that provides infrastructure, service, and application monitoring as well as other metrics.
+[Sensu](https://sensu.io/) is a service that provides infrastructure, service,
+and application monitoring as well as other metrics.
 Kapacitor can be configured to send alert messages to Sensu.
 
 ## Configuration
-Configuration as well as default [option](#options) values for the Sensu event handler are set in your `kapacitor.conf`.
+Configuration as well as default [option](#options) values for the Sensu event
+handler are set in your `kapacitor.conf`.
 Below is an example config:
 
 ```toml
@@ -37,7 +39,9 @@ List of [Sensu handlers](https://docs.sensu.io/sensu-core/1.3/guides/intro-to-ha
 
 
 ## Options
-The following Sensu event handler options can be set in a [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using `.sensu()` in a TICKscript.
+The following Sensu event handler options can be set in a
+[handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
+`.sensu()` in a TICKscript.
 
 | Name     | Type            | Description                                                                |
 | ----     | ----            | -----------                                                                |
@@ -66,7 +70,10 @@ options:
 ```
 
 ## Using the Sensu event handler
-With the Sensu event handler enabled and configured in your `kapacitor.conf`, use the `.sensu()` attribute in your TICKscripts to send alerts to Sensu or define a Sensu handler that subscribes to a topic and sends published alerts to Sensu.
+With the Sensu event handler enabled and configured in your `kapacitor.conf`,
+use the `.sensu()` attribute in your TICKscripts to send alerts to Sensu or
+define a Sensu handler that subscribes to a topic and sends published alerts
+to Sensu.
 
 _**Sensu settings in kapacitor.conf**_
 ```toml
@@ -78,7 +85,8 @@ _**Sensu settings in kapacitor.conf**_
 ```
 
 ### Send alerts to Sensu from a TICKscript
-The following TICKscript uses the `.sensu()` event handler to send the message, "Hey, check your CPU", to Sensu whenever idle CPU usage drops below 10%.
+The following TICKscript uses the `.sensu()` event handler to send the message,
+"Hey, check your CPU", to Sensu whenever idle CPU usage drops below 10%.
 
 _**sensu-cpu-alert.tick**_  
 ```js
@@ -93,10 +101,14 @@ stream
 
 ### Send alerts to Sensu from a defined handler
 
-The following setup sends an alert to the `cpu` topic with the message, "Hey, check your CPU". A Sensu handler is added that subscribes to the `cpu` topic and publishes all alert messages to Sensu.
+The following setup sends an alert to the `cpu` topic with the message,
+"Hey, check your CPU".
+A Sensu handler is added that subscribes to the `cpu` topic and publishes all
+alert messages to Sensu.
 
 Create a TICKscript that publishes alert messages to a topic.
-The TICKscript below sends an alert message to the `cpu` topic any time idle CPU usage drops below 10%.
+The TICKscript below sends an alert message to the `cpu` topic any time idle CPU
+usage drops below 10%.
 
 _**cpu\_alert.tick**_
 ```js
@@ -116,7 +128,8 @@ kapacitor define cpu_alert -tick cpu_alert.tick
 kapacitor enable cpu_alert
 ```
 
-Create a handler file that subscribes to the `cpu` topic and uses the Sensu event handler to send alerts to Sensu.
+Create a handler file that subscribes to the `cpu` topic and uses the Sensu
+event handler to send alerts to Sensu.
 
 _**sensu\_cpu\_handler.yaml**_
 ```yaml

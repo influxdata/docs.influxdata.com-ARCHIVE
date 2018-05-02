@@ -11,7 +11,8 @@ menu:
 The post event handler posts JSON encoded data to an HTTP endpoint.
 
 ## Configuration
-Configuration as well as default [option](#options) values for the post event handler are set in your `kapacitor.conf`.
+Configuration as well as default [option](#options) values for the post event
+handler are set in your `kapacitor.conf`.
 Below is an example config:
 
 ### Post Settings in kapacitor.conf
@@ -41,7 +42,8 @@ Set of authentication credentials to set on the POST request.
 
 #### `alert-template`
 Alert template for constructing a custom HTTP body.
-Alert templates are only used with post [alert](/kapacitor/v1.5/nodes/alert_node/) handlers as they consume alert data.
+Alert templates are only used with post [alert](/kapacitor/v1.5/nodes/alert_node/)
+handlers as they consume alert data.
 _Skip to [alert templating](#alert-templates)._
 
 #### `alert-template-file`
@@ -50,7 +52,8 @@ _Skip to [alert templating](#alert-templates)._
 
 #### `row-template`
 Row template for constructing a custom HTTP body.
-Row templates are only used with [httpPost](/kapacitor/v1.5/nodes/http_post_node/) pipeline nodes as they consume a row at a time.
+Row templates are only used with [httpPost](/kapacitor/v1.5/nodes/http_post_node/)
+pipeline nodes as they consume a row at a time.
 _Skip to [row templating](#row-templates)._
 
 #### `row-template-file`
@@ -58,7 +61,8 @@ Absolute path to a row template file.
 _Skip to [row templating](#row-templates)._
 
 ### Defining config options with environment variables
-The `endpoint`, `url`, and `headers` config options can be defined with environment variables:
+The `endpoint`, `url`, and `headers` config options can be defined with
+environment variables:
 
 ```bash
 KAPACITOR_HTTPPOST_0_ENDPOINT = "example"
@@ -68,7 +72,9 @@ KAPACITOR_HTTPPOST_0_HEADERS_Example2 = "header2"
 ```
 
 ## Options
-The following post event handler options can be set in a [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using `.post()` in a TICKscript.
+The following post event handler options can be set in a
+[handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
+`.post()` in a TICKscript.
 
 | Name     | Type                    | Description                                                             |
 | ----     | ----                    | -----------                                                             |
@@ -100,8 +106,10 @@ options:
 ```
 
 ## Using the Post event handler
-The post event handler can be used in both TICKscripts and handler files to post alert and httpPost data to an HTTP endpoint.
-The examples below deal with alerts and use the same `httppost` configuration defined in the `kapacitor.conf`:
+The post event handler can be used in both TICKscripts and handler files to post
+alert and httpPost data to an HTTP endpoint.
+The examples below deal with alerts and use the same `httppost` configuration
+defined in the `kapacitor.conf`:
 
 _**httppost settings in kapacitor.conf**_  
 ```toml
@@ -113,7 +121,8 @@ _**httppost settings in kapacitor.conf**_
 ```
 
 ### Post alerts from a TICKscript
-The following TICKscript uses the `.post()` event handler to post the message, "Hey, check your CPU", whenever idle CPU usage drops below 10%.
+The following TICKscript uses the `.post()` event handler to post the message,
+"Hey, check your CPU", whenever idle CPU usage drops below 10%.
 
 _**post-cpu-alert.tick**_  
 ```js
@@ -129,10 +138,14 @@ stream
 ```
 
 ### Post alerts from a defined handler
-The following setup sends an alert to the `cpu` topic with the message, "Hey, check your CPU". A post handler is added that subscribes to the `cpu` topic and posts all alert messages to the url and endpoint defined in the `kapacitor.conf`.
+The following setup sends an alert to the `cpu` topic with the message, "Hey,
+check your CPU".
+A post handler is added that subscribes to the `cpu` topic and posts all alert
+messages to the url and endpoint defined in the `kapacitor.conf`.
 
 Create a TICKscript that publishes alert messages to a topic.
-The TICKscript below sends an alert message to the `cpu` topic any time idle CPU usage drops below 10%.
+The TICKscript below sends an alert message to the `cpu` topic any time idle CPU
+usage drops below 10%.
 
 _**cpu\_alert.tick**_
 ```js
@@ -152,7 +165,8 @@ kapacitor define cpu_alert -tick cpu_alert.tick
 kapacitor enable cpu_alert
 ```
 
-Create a handler file that subscribes to the `cpu` topic and uses the post event handler to post alerts to an HTTP endpoint.
+Create a handler file that subscribes to the `cpu` topic and uses the post event
+handler to post alerts to an HTTP endpoint.
 
 _**post\_cpu\_handler.yaml**_
 ```yaml
@@ -172,12 +186,19 @@ kapacitor define-topic-handler post_cpu_handler.yaml
 
 
 ## Post Templating
-The post event handler allows you to customize the content and structure of POSTs with alert and row templates.
+The post event handler allows you to customize the content and structure of
+POSTs with alert and row templates.
 
 ### Alert Templates
-Alert templates are used to construct a custom HTTP body. They are only used with post [alert](/kapacitor/v1.5/nodes/alert_node/) handlers as they consume alert data. Templates are defined either inline in the `kapacitor.conf` using the [`alert-template`](#alert-template) config or in a separate file and referenced using the [`alert-template-file`](#alert-template-file) config.
+Alert templates are used to construct a custom HTTP body.
+They are only used with post [alert](/kapacitor/v1.5/nodes/alert_node/) handlers
+as they consume alert data.
+Templates are defined either inline in the `kapacitor.conf` using the
+[`alert-template`](#alert-template) config or in a separate file and referenced
+using the [`alert-template-file`](#alert-template-file) config.
 
-Alert templates use [Golang Template](https://golang.org/pkg/text/template/) and have access to the following fields:
+Alert templates use [Golang Template](https://golang.org/pkg/text/template/) and
+have access to the following fields:
 
 | Field     | Description                                          |
 | -----     | -----------                                          |
@@ -213,9 +234,15 @@ _**/etc/templates/alert.html**_
 ```
 
 ### Row Templates
-Row templates are used to construct a custom HTTP body. They are only used with post [httpPost](/kapacitor/v1.5/nodes/http_post_node/) handlers as they consume a row at a time. Templates are defined either inline in the `kapacitor.conf` using the [`row-template`](#row-template) config or in a separate file and referenced using the [`row-template-file`](#row-template-file) config.
+Row templates are used to construct a custom HTTP body.
+They are only used with post [httpPost](/kapacitor/v1.5/nodes/http_post_node/)
+handlers as they consume a row at a time.
+Templates are defined either inline in the `kapacitor.conf` using the
+[`row-template`](#row-template) config or in a separate file and referenced
+using the [`row-template-file`](#row-template-file) config.
 
-Row templates use [Golang Template](https://golang.org/pkg/text/template/) and have access to the following fields:
+Row templates use [Golang Template](https://golang.org/pkg/text/template/) and
+have access to the following fields:
 
 | Field   | Description                                                                                                                |
 | -----   | -----------                                                                                                                |

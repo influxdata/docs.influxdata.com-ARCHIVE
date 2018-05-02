@@ -8,11 +8,13 @@ menu:
     parent: event-handlers
 ---
 
-[VictorOps](https://victorops.com/) is an incident management platform that provides observability, collaboration, & real-time alerting.
+[VictorOps](https://victorops.com/) is an incident management platform that
+provides observability, collaboration, & real-time alerting.
 Kapacitor can be configured to send alert messages to VictorOps.
 
 ## Configuration
-Configuration as well as default [option](#options) values for the VictorOps event handler are set in your `kapacitor.conf`.
+Configuration as well as default [option](#options) values for the VictorOps
+event handler are set in your `kapacitor.conf`.
 Below is an example config:
 
 ```toml
@@ -45,13 +47,15 @@ the data that triggered the alert available within VictorOps.
 The default is `false` for backwards compatibility.
 
 #### `global`
-If true the all alerts will be sent to VictorOps
-without explicitly marking them in the TICKscript.
-The routing key can still be overridden.
+If true the all alerts will be sent to VictorOps without explicitly specifying
+VictorOps in the TICKscript.
+_The routing key can still be overridden._
 
 
 ## Options
-The following VictorOpas event handler options can be set in a [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using `.victorops()` in a TICKscript.
+The following VictorOpas event handler options can be set in a
+[handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
+`.victorops()` in a TICKscript.
 
 | Name        | Type   | Description                         |
 | ----        | ----   | -----------                         |
@@ -75,7 +79,10 @@ options:
 ```
 
 ## Using the VictorOps event handler
-With the VictorOps event handler enabled and configured in your `kapacitor.conf`, use the `.victorops()` attribute in your TICKscripts to send alerts to VictorOps or define a VictorOps handler that subscribes to a topic and sends published alerts to VictorOps.
+With the VictorOps event handler enabled and configured in your `kapacitor.conf`,
+use the `.victorops()` attribute in your TICKscripts to send alerts to VictorOps
+or define a VictorOps handler that subscribes to a topic and sends published
+alerts to VictorOps.
 
 The examples below use the same VictorOps configuration defined in the `kapacitor.conf`:
 
@@ -92,7 +99,9 @@ _**VictorOps settings in kapacitor.conf**_
 
 ### Send alerts to an VictorOps room from a TICKscript
 
-The following TICKscript uses the `.victorops()` event handler to send the message, "Hey, check your CPU", to VictorOps whenever idle CPU usage drops below 10%.
+The following TICKscript uses the `.victorops()` event handler to send the
+message, "Hey, check your CPU", to VictorOps whenever idle CPU usage drops
+below 10%.
 
 _**victorops-cpu-alert.tick**_  
 ```js
@@ -108,10 +117,14 @@ stream
 
 ### Send alerts to an VictorOps room from a defined handler
 
-The following setup sends an alert to the `cpu` topic with the message, "Hey, check your CPU". A VictorOps handler is added that subscribes to the `cpu` topic and publishes all alert messages to VictorOps using default settings defined in the `kapacitor.conf`.
+The following setup sends an alert to the `cpu` topic with the message,
+"Hey, check your CPU".
+A VictorOps handler is added that subscribes to the `cpu` topic and publishes
+all alert messages to VictorOps using default settings defined in the `kapacitor.conf`.
 
 Create a TICKscript that publishes alert messages to a topic.
-The TICKscript below sends an alert message to the `cpu` topic any time idle CPU usage drops below 10%.
+The TICKscript below sends an alert message to the `cpu` topic any time idle
+CPU usage drops below 10%.
 
 _**cpu\_alert.tick**_
 ```js
@@ -131,7 +144,8 @@ kapacitor define cpu_alert -tick cpu_alert.tick
 kapacitor enable cpu_alert
 ```
 
-Create a handler file that subscribes to the `cpu` topic and uses the VictorOps event handler to send alerts VictorOps.
+Create a handler file that subscribes to the `cpu` topic and uses the VictorOps
+event handler to send alerts VictorOps.
 
 _**victorops\_cpu\_handler.yaml**_
 ```yaml

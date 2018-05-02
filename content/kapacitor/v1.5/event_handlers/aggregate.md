@@ -9,10 +9,12 @@ menu:
 ---
 
 The aggregate event handler aggregates multiple events into a single event.
-It subscribes to a topic and aggregates published messages within a defined interval into an aggregated topic.
+It subscribes to a topic and aggregates published messages within a defined
+interval into an aggregated topic.
 
 ## Options
-The following aggregate event handler options can be set in a [handler file](/kapacitor/v1.5/event_handlers/#handler-file).
+The following aggregate event handler options can be set in a
+[handler file](/kapacitor/v1.5/event_handlers/#handler-file).
 
 | Name     | Type            | Description                                                                                                   |
 | ----     | ----            | -----------                                                                                                   |
@@ -32,8 +34,10 @@ options:
 ```
 
 ## Using the aggregate event handler
-The aggregate event handler subscribes to a topic and aggregates messages published to that topic at specified intervals.
-The TICKscript below, `cpu_alert.tick`, publishes alerts to the `cpu` topic if CPU idle-usage is less than 10% (or CPU usage is greater than 90%).
+The aggregate event handler subscribes to a topic and aggregates messages
+published to that topic at specified intervals.
+The TICKscript below, `cpu_alert.tick`, publishes alerts to the `cpu` topic if
+CPU idle-usage is less than 10% (or CPU usage is greater than 90%).
 
 #### cpu\_alert.tick
 ```js
@@ -53,7 +57,10 @@ kapacitor define cpu_alert -tick cpu_alert.tick
 kapacitor enable cpu_alert
 ```
 
-Create a new handler file, `aggregated_cpu_alerts.yaml`, using the `aggregate` event handler that subscribes to the `cpu` topic, aggregates alerts from the last 10 minutes, and publishes aggregated messages to a new `aggr_cpu` topic. _Handler files can be YAML or JSON._
+Create a new handler file, `aggregated_cpu_alerts.yaml`, using the `aggregate`
+event handler that subscribes to the `cpu` topic, aggregates alerts from the
+last 10 minutes, and publishes aggregated messages to a new `aggr_cpu` topic.
+_Handler files can be YAML or JSON._
 
 #### aggr_cpu_alerts.yaml
 ```yaml
@@ -72,4 +79,6 @@ Add the handler file:
 kapacitor define-topic-handler aggr_cpu_alerts_10m.yaml
 ```
 
-Aggregated CPU alert messages will be published to the `aggr_cpu` topic every 10 minutes. Further handling of the aggregated events can be configured on the `aggr_cpu` topic.
+Aggregated CPU alert messages will be published to the `aggr_cpu` topic every
+10 minutes. Further handling of the aggregated events can be configured on the
+`aggr_cpu` topic.

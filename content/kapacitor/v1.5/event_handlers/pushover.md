@@ -8,11 +8,13 @@ menu:
     parent: event-handlers
 ---
 
-[Pushover](https://pushover.net/) is a service that sends instant push notifications to phone and tablets.
+[Pushover](https://pushover.net/) is a service that sends instant push
+notifications to phone and tablets.
 Kapacitor can be configured to send alert messages to Pushover.
 
 ## Configuration
-Configuration as well as default [option](#options) values for the Pushover event handler are set in your `kapacitor.conf`.
+Configuration as well as default [option](#options) values for the Pushover
+event handler are set in your `kapacitor.conf`.
 Below is an example config:
 
 ```toml
@@ -36,7 +38,9 @@ Your Pushover USER_TOKEN.
 The URL for the Pushover API. _**This should not need to be changed.**_
 
 ## Options
-The following Pushover event handler options can be set in a [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using `.pushover()` in a TICKscript.
+The following Pushover event handler options can be set in a
+[handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
+`.pushover()` in a TICKscript.
 
 | Name      | Type   | Description                                                                                                             |
 | ----      | ----   | -----------                                                                                                             |
@@ -72,12 +76,21 @@ options:
     .sound('siren')
 ```
 
+## Pushover Setup
+[Register your application with Pushover](https://pushover.net/apps/build) to
+get a Pushover token.
+Include the token in the `[pushover]` config section of your `kapacitor.conf`.
+
 ## Using the Pushover event handler
-With the Pushover event handler enabled and configured in your `kapacitor.conf`, use the `.pushover()` attribute in your TICKscripts to send alerts to Pushover or define a Pushover handler that subscribes to a topic and sends published alerts to Pushover.
+With the Pushover event handler enabled and configured in your `kapacitor.conf`,
+use the `.pushover()` attribute in your TICKscripts to send alerts to Pushover
+or define a Pushover handler that subscribes to a topic and sends published
+alerts to Pushover.
 
 ### Send alerts to Pushover from a TICKscript
 
-The following TICKscript sends the message, "Hey, check your CPU", to Pushover whenever idle CPU usage drops below 10% using the `.pushover()` event handler.
+The following TICKscript sends the message, "Hey, check your CPU", to Pushover
+whenever idle CPU usage drops below 10% using the `.pushover()` event handler.
 
 _**pushover-cpu-alert.tick**_  
 ```js
@@ -94,10 +107,14 @@ stream
 
 ### Send alerts to Pushover from a defined handler
 
-The following setup sends an alert to the `cpu` topic with the message, "Hey, check your CPU". A Pushover handler is added that subscribes to the `cpu` topic and publishes all alert messages to Pushover.
+The following setup sends an alert to the `cpu` topic with the message, "Hey,
+check your CPU".
+A Pushover handler is added that subscribes to the `cpu` topic and publishes all
+alert messages to Pushover.
 
 Create a TICKscript that publishes alert messages to a topic.
-The TICKscript below sends an alert message to the `cpu` topic any time idle CPU usage drops below 10%.
+The TICKscript below sends an alert message to the `cpu` topic any time idle CPU
+usage drops below 10%.
 
 _**cpu\_alert.tick**_
 ```js
@@ -117,7 +134,8 @@ kapacitor define cpu_alert -tick cpu_alert.tick
 kapacitor enable cpu_alert
 ```
 
-Create a handler file that subscribes to the `cpu` topic and uses the Pushover event handler to send alerts to Pushover.
+Create a handler file that subscribes to the `cpu` topic and uses the Pushover
+event handler to send alerts to Pushover.
 
 _**pushover\_cpu\_handler.yaml**_
 ```yaml

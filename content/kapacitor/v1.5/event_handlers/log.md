@@ -11,7 +11,9 @@ menu:
 The log event handler writes to a specified log file.
 
 ## Options
-The following log event handler options can be set in a [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using `.log()` in a TICKscript.
+The following log event handler options can be set in a
+[handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
+`.log()` in a TICKscript.
 
 | Name | Type   | Description                              |
 | ---- | ----   | -----------                              |
@@ -37,11 +39,13 @@ options:
 ```
 
 ## Using the log event handler
-The log event handler can be used in both TICKscripts and handler files to log messages to a log file.
+The log event handler can be used in both TICKscripts and handler files to log
+messages to a log file.
 
 ### Log messages from a TICKscript
 
-The following TICKscript uses the `.log()` event handler to log a message to the `/tmp/alerts.log` log file whenever idle CPU usage drops below 10%.
+The following TICKscript uses the `.log()` event handler to log a message to the
+`/tmp/alerts.log` log file whenever idle CPU usage drops below 10%.
 
 _**log-cpu-alert.tick**_  
 ```js
@@ -56,10 +60,14 @@ stream
 
 ### Log messages from a defined handler
 
-The following setup sends an alert to the `cpu` topic with the message, "'{{ .Time }}: CPU usage over 90%'". A log handler is added that subscribes to the `cpu` topic and logs messages to `/tmp/alerts.log` whenever a new message is published.
+The following setup sends an alert to the `cpu` topic with the message,
+"'{{ .Time }}: CPU usage over 90%'".
+A log handler is added that subscribes to the `cpu` topic and logs messages to
+`/tmp/alerts.log` whenever a new message is published.
 
 Create a TICKscript that publishes alert messages to a topic.
-The TICKscript below sends an alert message to the `cpu` topic any time idle CPU usage drops below 10%.
+The TICKscript below sends an alert message to the `cpu` topic any time idle CPU
+usage drops below 10%.
 
 _**cpu\_alert.tick**_
 ```js
@@ -79,7 +87,8 @@ kapacitor define cpu_alert -tick cpu_alert.tick
 kapacitor enable cpu_alert
 ```
 
-Create a handler file that subscribes to the `cpu` topic and uses the log event handler to log messages to the `/tmp/alerts.log` log file.
+Create a handler file that subscribes to the `cpu` topic and uses the log event
+handler to log messages to the `/tmp/alerts.log` log file.
 
 _**log\_cpu\_handler.yaml**_
 ```yaml

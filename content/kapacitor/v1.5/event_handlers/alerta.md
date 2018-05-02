@@ -8,11 +8,13 @@ menu:
     parent: event-handlers
 ---
 
-[Alerta](http://alerta.io/) is a monitoring tool used to consolidate and de-duplicate alerts from multiple sources for quick ‘at-a-glance’ visualization.
+[Alerta](http://alerta.io/) is a monitoring tool used to consolidate and
+de-duplicate alerts from multiple sources for quick ‘at-a-glance’ visualization.
 Kapacitor can be configured to send alert messages to Alerta.
 
 ## Configuration
-Configuration as well as default [option](#options) values for the Alerta event handler are set in your `kapacitor.conf`.
+Configuration as well as default [option](#options) values for the Alerta event
+handler are set in your `kapacitor.conf`.
 Below is an example config:
 
 ```toml
@@ -35,7 +37,8 @@ The Alerta URL.
 Default Alerta authentication token.
 
 #### `token-prefix`
-Default token prefix. _If you are on older versions of Alerta you may need to change this to "Key"._
+Default token prefix.
+_If you are on older versions of Alerta you may need to change this to "Key"._
 
 #### `environment`
 Default Alerta environment.
@@ -44,7 +47,9 @@ Default Alerta environment.
 Default origin of alert.
 
 ## Options
-The following Alerta event handler options can be set in a [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using `.alerta()` in a TICKscript.
+The following Alerta event handler options can be set in a
+[handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
+`.alerta()` in a TICKscript.
 
 | Name         | Type            | Description                                                                                                                                     |
 | ----         | ----            | -----------                                                                                                                                     |
@@ -95,7 +100,10 @@ options:
 ```
 
 ## Using the Alerta event handler
-With the Alerta event handler enabled and configured in your `kapacitor.conf`, use the `.alerta()` attribute in your TICKscripts to send alerts to Alerta or define a Alerta handler that subscribes to a topic and sends published alerts to Alerta.
+With the Alerta event handler enabled and configured in your `kapacitor.conf`,
+use the `.alerta()` attribute in your TICKscripts to send alerts to Alerta or
+define a Alerta handler that subscribes to a topic and sends published alerts
+to Alerta.
 
 The examples below use the same Alerta configuration defined in the `kapacitor.conf`:
 
@@ -111,7 +119,9 @@ _**Alerta settings in kapacitor.conf**_
 
 ### Send alerts to an Alerta room from a TICKscript
 
-The following TICKscript sends the message, "Hey, check your CPU", to Alerta whenever idle CPU usage drops below 10% using the `.alerta()` event handler and default Alerta settings defined in the `kapacitor.conf`.
+The following TICKscript sends the message, "Hey, check your CPU", to Alerta
+whenever idle CPU usage drops below 10% using the `.alerta()` event handler and
+default Alerta settings defined in the `kapacitor.conf`.
 
 _**alerta-cpu-alert.tick**_  
 ```js
@@ -126,10 +136,14 @@ stream
 
 ### Send alerts to an Alerta room from a defined handler
 
-The following setup sends an alert to the `cpu` topic with the message, "Hey, check your CPU". An Alerta handler is added that subscribes to the `cpu` topic and publishes all alert messages to Alerta using default settings defined in the `kapacitor.conf`.
+The following setup sends an alert to the `cpu` topic with the message, "Hey,
+check your CPU". An Alerta handler is added that subscribes to the `cpu` topic
+and publishes all alert messages to Alerta using default settings defined in the
+`kapacitor.conf`.
 
 Create a TICKscript that publishes alert messages to a topic.
-The TICKscript below sends an alert message to the `cpu` topic any time idle CPU usage drops below 10%.
+The TICKscript below sends an alert message to the `cpu` topic any time idle CPU
+usage drops below 10%.
 
 _**cpu\_alert.tick**_
 ```js
@@ -149,7 +163,8 @@ kapacitor define cpu_alert -tick cpu_alert.tick
 kapacitor enable cpu_alert
 ```
 
-Create a handler file that subscribes to the `cpu` topic and uses the Alerta event handler to send alerts to the `alerts` channel in Alerta.
+Create a handler file that subscribes to the `cpu` topic and uses the Alerta
+event handler to send alerts to the `alerts` channel in Alerta.
 
 _**alerta\_cpu\_handler.yaml**_
 ```yaml

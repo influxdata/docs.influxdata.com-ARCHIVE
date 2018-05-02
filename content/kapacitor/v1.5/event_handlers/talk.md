@@ -8,11 +8,13 @@ menu:
     parent: event-handlers
 ---
 
-[Talk](https://jianliao.com/site) is a service that aggregates information into a centralized hub.
+[Talk](https://jianliao.com/site) is a service that aggregates information into
+a centralized hub.
 Kapacitor can be configured to send alert messages to Talk.
 
 ## Conifiguration
-Configuration as well as default [option](#options) values for the Talk event handler are set in your `kapacitor.conf`.
+Configuration as well as default [option](#options) values for the Talk event
+handler are set in your `kapacitor.conf`.
 Below is an example config:
 
 ```toml
@@ -33,7 +35,9 @@ The default authorName.
 
 
 ## Options
-The following Talk event handler options can be set in a [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using `.talk()` in a TICKscript.
+The following Talk event handler options can be set in a
+[handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
+`.talk()` in a TICKscript.
 
 | Name  | Type   | Description    |
 | ----  | ----   | -----------    |
@@ -60,11 +64,14 @@ options:
 ```
 
 ## Using the Talk event handler
-With the Talk event handler enabled and configured in your `kapacitor.conf`, use the `.talk()` attribute in your TICKscripts to send alerts to Talk or define a Talk handler that subscribes to a topic and sends published alerts to Talk.
+With the Talk event handler enabled and configured in your `kapacitor.conf`,
+use the `.talk()` attribute in your TICKscripts to send alerts to Talk or define
+a Talk handler that subscribes to a topic and sends published alerts to Talk.
 
 ### Send alerts to Talk from a TICKscript
 
-The following TICKscript sends the message, "Hey, check your CPU", to Talk whenever idle CPU usage drops below 10% using the `.talk()` event handler.
+The following TICKscript sends the message, "Hey, check your CPU", to Talk
+whenever idle CPU usage drops below 10% using the `.talk()` event handler.
 
 _**talk-cpu-alert.tick**_  
 ```js
@@ -80,10 +87,14 @@ stream
 
 ### Send alerts to Talk from a defined handler
 
-The following setup sends an alert to the `cpu` topic with the message, "Hey, check your CPU". A Talk handler is added that subscribes to the `cpu` topic and publishes all alert messages to Talk.
+The following setup sends an alert to the `cpu` topic with the message,
+"Hey, check your CPU".
+A Talk handler is added that subscribes to the `cpu` topic and publishes all
+alert messages to Talk.
 
 Create a TICKscript that publishes alert messages to a topic.
-The TICKscript below sends an alert message to the `cpu` topic any time idle CPU usage drops below 10%.
+The TICKscript below sends an alert message to the `cpu` topic any time idle CPU
+usage drops below 10%.
 
 _**cpu\_alert.tick**_
 ```js
@@ -103,7 +114,8 @@ kapacitor define cpu_alert -tick cpu_alert.tick
 kapacitor enable cpu_alert
 ```
 
-Create a handler file that subscribes to the `cpu` topic and uses the Talk event handler to send alerts to Talk.
+Create a handler file that subscribes to the `cpu` topic and uses the Talk event
+handler to send alerts to Talk.
 
 _**talk\_cpu\_handler.yaml**_
 ```yaml
