@@ -1,11 +1,34 @@
 ---
-title: Chronograf 1.4 release notes
+title: Chronograf 1.5 release notes
 menu:
   chronograf_1_5:
     name: Release notes
     weight: 10
     parent: About the project
 ---
+
+## v1.5.0 [2018-05-xx]
+
+### Features
+
+* Add default retention policy field as option in source configuration for use in querying hosts from Host List page & Host pages
+* Add support for PagerDuty v2 in UI
+
+UI improvements
+
+* Notify user when a dashboard cell is added, removed, or cloned
+* Fix Template Variables Control Bar to top of dashboard page
+* Remove extra click when creating dashboard cell
+* Reduce font sizes in dashboards for increased space efficiency
+* Display 'no results' on cells without results
+
+Bug fixes
+
+* Allows users to select TICKscript editor with mouse
+* Change color when value is equal to or greater than threshold value
+* Fix base path for Kapacitor logs
+* Fix logout when using `basepath` and simplify `basepath` usage (deprecates `PREFIX_ROUTES`)
+
 
 ## v1.4.4.1 [2018-04-16]
 
