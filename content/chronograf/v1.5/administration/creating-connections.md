@@ -50,4 +50,4 @@ Kapacitor is the data processing component of the TICK stack. To use Kapacitor i
 * **Username**: Enter the username that will be shared for this connection.
 * **Password**: Enter the password.
 
-4. Click **Connect**. If the connection is valid, the message "Kapacitor Created! Configuring endpoints is optional." appears. To configure alert endpoints, see [Configuring alert endpoints](/chronograf/v1.5/guides/configure-kapacitor-event-handlers/).
+4. Click **Connect**. If the connection is valid, the message "Kapacitor Created! Configuring endpoints is optional." appears. To configure alert endpoints, see [Configuring alert endpoints](/chronograf/v1.5/guides/configuring-alert-endpoints/).

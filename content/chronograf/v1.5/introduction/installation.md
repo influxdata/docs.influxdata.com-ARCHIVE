@@ -69,7 +69,7 @@ You do not need a Kapacitor instance if you plan on only using Chronograf's host
 **Installation Resources:**
 
 * [Getting Started](/chronograf/latest/introduction/getting-started/) offers setup instructions for using Chronograf with a Kapacitor instance
-* [Configure Kapacitor Event Handlers](/chronograf/latest/guides/configure-kapacitor-event-handlers/) offers setup instructions for Kapacitor event handlers in Chronograf
+* [Configure Chronograf alert endpoints](/chronograf/latest/guides/configuring-alert-endpoints/) offers setup instructions for Kapacitor event handlers in Chronograf
 * [Kapacitor Documentation](/kapacitor/latest/)
 
 ### Networking

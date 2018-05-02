@@ -36,18 +36,18 @@ Chronograf supports the following event handlers:
 * VictorOps
 
 To configure a Kapacitor event handler in Chronograf, [install Kapacitor](/chronograf/latest/introduction/getting-started/#kapacitor-setup) and [connect it to Chronograf](/chronograf/latest/introduction/getting-started/#4-connect-chronograf-to-kapacitor).
-The **Configure Kapacitor** page includes the event handler configuration options. See  [Configure Kapacitor event handlers](/chronograf/latest/guides/configure-kapacitor-event-handlers/) for more information.
+The **Configure Kapacitor** page includes the event handler configuration options.
 
 ### Content
 
-* [Event handler configurations](#locate-event-handler-configurations)
+* [Alert endpoint configurations](#alert-endpoint-configurations)
 * [HipChat](#hipchat)
 * [Slack](#slack)
 * [Telegram](#telegram)
 
-## Event handler configurations
+## Alert endpoint configurations
 
-Event handler configurations appear on the Chronograf Configure Kapacitor page.
+Alert endpoint configurations appear on the Chronograf Configure Kapacitor page.
 You must have a connected Kapacitor instance to access the configurations.
 For more information, see [Kapacitor installation instructions](/chronograf/latest/introduction/getting-started/#kapacitor-setup) and how to [connect a Kapacitor instance](/chronograf/latest/introduction/getting-started/#4-connect-chronograf-to-kapacitor) to Chronograf.
 

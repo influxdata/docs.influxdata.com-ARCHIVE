@@ -31,7 +31,7 @@ You've already [configured your Kapacitor instance in Chronograf](/chronograf/la
 The [Getting Started](/chronograf/latest/introduction/getting-started/) guide offers step-by-step instructions for each of those requirements.
 
 You have a working Slack instance and have configured it as an [event handler](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf) in Chronograf.
-See the [Configure Kapacitor Event Handlers](/chronograf/latest/guides/configure-kapacitor-event-handlers/) guide for detailed configuration instructions.
+See the [Configure Kapacitor Event Handlers](/chronograf/latest/guides/configuring-alert-endpoints/) guide for detailed configuration instructions.
 
 ## Configure a Chronograf alert rule
 
@@ -111,7 +111,7 @@ The `{{ index .Fields "value" }}` template prints the relevant [field value](/in
 ![Specify event handler and alert message](/img/chronograf/v1.5/g-kap-alertmessage.png)
 
 > **Note:**
-There's no need to include a Slack channel in the `Alert Message` section if you specified a default channel in the [initial Slack configuration](/chronograf/latest/guides/configure-kapacitor-event-handlers/).
+There's no need to include a Slack channel in the `Alert Message` section if you specified a default channel in the [initial Slack configuration](/chronograf/latest/guides/configuring-alert-endpoints/).
 If you did not include a default channel in the initial configuration or if you'd like to send alerts to a non-default channel, specify an alternative Slack channel in this section.
 
 ### Step 6: Save the alert rule

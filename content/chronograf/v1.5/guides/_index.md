@@ -35,7 +35,7 @@ Describes how to add annotations to Chronograf views with the user interface or 
 Chronograf provides a user interface for Kapacitor, InfluxData’s processing framework for creating alerts, running ETL jobs, and detecting anomalies in your data.
 Learn how to create a Kapacitor alert in Chronograf.
 
-## [Configuring Kapacitor event handlers](/chronograf/v1.5/guides/configure-kapacitor-event-handlers/)
+## [Configuring Chronograf alert endpoints](/chronograf/v1.5/guides/configuring-alert-endpoints/)
 
 Chronograf works with Kapacitor to send alert messages to supported event handlers.
 Use Chronograf to send alert messages to specific URLs as well as to applications like Slack and HipChat.

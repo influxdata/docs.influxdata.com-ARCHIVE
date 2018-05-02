@@ -90,12 +90,6 @@ The URL path prefix under which all `chronograf` routes will be mounted.
 
 Environment variable: `$BASE_PATH`
 
-####`--prefix-routes`
-
-Forces the `chronograf` service to require that all requests are prefixed with the value set in `--basepath`.
-
-Environment variable: `$PREFIX_ROUTES`
-
 ####`--status-feed-url=`
 
 URL of JSON feed to display as a news feed on the client Status page.

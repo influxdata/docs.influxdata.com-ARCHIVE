@@ -261,7 +261,7 @@ Finally, click `Connect`.
 
 When Kapacitor successfully connects, Chronograf automatically opens the `Configure Alert Endpoints` section.
 Kapacitor supports several [alert endpoints/event handlers](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf).
-See the [Configure Kapacitor Event Handlers](/chronograf/latest/guides/configure-kapacitor-event-handlers/) guide for more information.
+See the [Configuring Chronograf alert endpoints](/chronograf/latest/guides/configuring-alert-endpoints/) guide for more information.
 
 ![Alert Endpoints](/img/chronograf/v1.5/gs-alert-endpoints.png)
 
