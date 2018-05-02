@@ -68,6 +68,19 @@ For more information on working with environment variables,
 see [Kapacitor environment variables](#kapacitor-environment-variables)
 below.
 
+### Using logrotate
+
+Be aware that Kapacitor uses system resources when logging events.  It follows that
+certain aspects of logging, such as when to compress the log, when and how to start
+a new log file, will therefore need to be managed through mechanisms external to Kapacitor.
+On Linux systems this means using `logrotate`.  See the section [Logging](#logging) below.  
+The `logrotate` man page is available through
+[ubuntu](http://manpages.ubuntu.com/manpages/xenial/en/man8/logrotate.8.html) and
+elsewhere, or locally by running `$ man logrotate`.  Kapacitor packages install
+and prepare a logrotate configuration file at this location:
+`/etc/logrotate.d/kapacitor`.  This file is also viewable on
+[github](https://github.com/influxdata/kapacitor/blob/master/etc/logrotate.d/kapacitor).   
+
 ## The Kapacitor configuration file
 
 The default configuration can be displayed using the `config` command of the Kapacitor daemon.
@@ -184,6 +197,12 @@ The path to the log and the log threshold is defined in `[logging]` table.
     level = "INFO"
 ...
 ```
+
+Note that if the `file` property of the `[logging]` section changes, this may
+require synchronization with the `logrotate` configuration located at
+`/etc/logrotate.d/kapacitor`.  See the section [Using logrotate](#using-logrotate)
+above.
+
 ##### Load
 
 Starting with Kapacitor 1.4, the Kapacitor service includes a feature
