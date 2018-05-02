@@ -1,6 +1,6 @@
 ---
 title: Talk Event Handler
-
+description: The Talk event handler allows you to send Kapacitor alerts to Talk. This doc includes configuration options and usage examples.
 menu:
   kapacitor_1_5:
     name: Talk
@@ -107,8 +107,8 @@ Create a handler file that subscribes to the `cpu` topic and uses the Talk event
 
 _**talk\_cpu\_handler.yaml**_
 ```yaml
-topic: cpu
 id: talk-cpu-alert
+topic: cpu
 kind: talk
 options:
   title: Alert from Kapacitor

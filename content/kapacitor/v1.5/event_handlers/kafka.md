@@ -1,6 +1,6 @@
 ---
 title: Kafka Event Handler
-
+description: The Kafka event handler allows you to send Kapacitor alerts to an Apache Kafka cluster. This doc includes configuration options and usage examples.
 menu:
   kapacitor_1_5:
     name: Kafka
@@ -163,8 +163,8 @@ Create a handler file that subscribes to the `cpu` topic and uses the Kafka even
 
 _**kafka\_cpu\_handler.yaml**_
 ```yaml
-topic: cpu
 id: kafka-cpu-alert
+topic: cpu
 kind: kafka
 options:
   topic: 'cpu-alerts'

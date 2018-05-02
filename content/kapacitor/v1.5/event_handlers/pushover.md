@@ -1,6 +1,6 @@
 ---
 title: Pushover Event Handler
-
+description: The Pushover event handler allows you to send Kapacitor alerts to Pushover. This doc includes configuration options and usage examples.
 menu:
   kapacitor_1_5:
     name: Pushover
@@ -121,8 +121,8 @@ Create a handler file that subscribes to the `cpu` topic and uses the Pushover e
 
 _**pushover\_cpu\_handler.yaml**_
 ```yaml
-topic: cpu
 id: pushover-cpu-alert
+topic: cpu
 kind: pushover
 options:
   title: Alert from Kapacitor

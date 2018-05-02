@@ -1,6 +1,6 @@
 ---
 title: HipChat Event Handler
-
+description: The HipChat event handler allows you to send Kapacitor alerts to HipChat. This doc includes configuration options and usage examples.
 menu:
   kapacitor_1_5:
     name: HipChat
@@ -20,8 +20,8 @@ Below is an example config:
 [hipchat]
   enabled = true
   url = "https://subdomain.hipchat.com/v2/room"
-  room = ""
-  token = ""
+  room = "xxxx"
+  token = "xxxx"
   global = false
   state-changes-only = false
 ```
@@ -60,7 +60,7 @@ The following HipChat event handler options can be set in a [handler file](/kapa
 #### Example Handler File
 ```yaml
 topic: topic-name
-id: alert-id
+id: handler-id
 kind: hipchat
 options:
   room: 'alerts'
@@ -161,8 +161,8 @@ Create a handler file that subscribes to the `cpu` topic and uses the HipChat ev
 
 _**hipchat\_cpu\_handler.yaml**_
 ```yaml
-topic: cpu
 id: hipchat-cpu-alert
+topic: cpu
 kind: hipchat
 options:
   room: 'alerts'

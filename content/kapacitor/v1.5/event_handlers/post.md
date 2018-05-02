@@ -1,6 +1,6 @@
 ---
 title: Post Event Handler
-
+description: The "post" event handler allows you to POST Kapacitor alert data to an HTTP endpoint. This doc includes configuration options and usage examples.
 menu:
   kapacitor_1_5:
     name: Post
@@ -78,7 +78,7 @@ The following post event handler options can be set in a [handler file](/kapacit
 
 ### Example Handler File
 ```yaml
-id: alert-id
+id: handler-id
 topic: topic-name
 kind: post
 options:
@@ -129,7 +129,7 @@ stream
 ```
 
 ### Post alerts from a defined handler
-The following setup sends an alert to the `cpu` topic with the message, "Hey, check your CPU". A post handler is added that subscribes to the `cpu` topic and posts all alert messages to to the url and endpoint defined in the `kapacitor.conf`.
+The following setup sends an alert to the `cpu` topic with the message, "Hey, check your CPU". A post handler is added that subscribes to the `cpu` topic and posts all alert messages to the url and endpoint defined in the `kapacitor.conf`.
 
 Create a TICKscript that publishes alert messages to a topic.
 The TICKscript below sends an alert message to the `cpu` topic any time idle CPU usage drops below 10%.
@@ -156,8 +156,8 @@ Create a handler file that subscribes to the `cpu` topic and uses the post event
 
 _**post\_cpu\_handler.yaml**_
 ```yaml
-topic: cpu
 id: post-cpu-alert
+topic: cpu
 kind: post
 options:
   headers:

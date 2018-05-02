@@ -1,6 +1,6 @@
 ---
 title: Log Event Handler
-
+description: The "log" event handler allows you to send Kapacitor alert messages to a log file. This doc includes options and usage examples.
 menu:
   kapacitor_1_5:
     name: Log
@@ -25,14 +25,15 @@ topic: topic-name
 kind: log
 options:
   path: '/tmp/alerts.log'
-  mode: 755
+  mode: 0644
 ```
 
 #### Example TICKscript
 ```js
 |alert()
   // ...
-  .log('/tmp/alerts.log', 755)
+  .log('/tmp/alerts.log')
+    .mode(0644)
 ```
 
 ## Using the log event handler
@@ -82,8 +83,8 @@ Create a handler file that subscribes to the `cpu` topic and uses the log event 
 
 _**log\_cpu\_handler.yaml**_
 ```yaml
-topic: cpu
 id: log-cpu-alert
+topic: cpu
 kind: log
 options:
   path: '/tmp/alerts.log'

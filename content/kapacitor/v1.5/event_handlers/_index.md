@@ -1,5 +1,6 @@
 ---
 title: Kapacitor Event Handlers
+description: Kapacitor event handlers provide ways to integrate Kapacitor alert messages with logging, specific URLs, and many third-party applications.
 aliases:
   - /kapacitor/v1.5/working/event-handler-setup/
 menu:
@@ -76,7 +77,7 @@ The handler file contains the following:
 
 #### Example handler file
 ```yaml
-id: alert-id
+id: handler-id
 topic: topic-name
 match: changed()
 kind: slack
@@ -96,7 +97,8 @@ kapacitor define-topic-handler slack_cpu_handler.yaml
 ```
 
 ### TICKscript
-Many event handlers can be used directly in TICKscripts to send events. This is generally done with handlers that send messages to third-parties Below is an example TICKscript that publishes CPU alerts to Slack using the `.slack()` event handler:
+Many event handlers can be used directly in TICKscripts to send events.
+This is generally done with handlers that send messages to third-parties Below is an example TICKscript that publishes CPU alerts to Slack using the `.slack()` event handler:
 
 ```js
 stream

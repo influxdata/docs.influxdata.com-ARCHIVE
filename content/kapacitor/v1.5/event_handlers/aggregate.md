@@ -1,6 +1,6 @@
 ---
 title: Aggregate Event Handler
-
+description: The aggregate event handler allows you to aggregate alerts messages over a specified interval. This doc includes aggregate options and usage examples.
 menu:
   kapacitor_1_5:
     name: Aggregrate
@@ -22,7 +22,7 @@ The following aggregate event handler options can be set in a [handler file](/ka
 
 #### Example Handler File
 ```yaml
-id: aggregate_5m
+id: handler-id
 topic: topic-name
 kind: aggregate
 options:
@@ -55,9 +55,9 @@ kapacitor enable cpu_alert
 
 Create a new handler file, `aggregated_cpu_alerts.yaml`, using the `aggregate` event handler that subscribes to the `cpu` topic, aggregates alerts from the last 10 minutes, and publishes aggregated messages to a new `aggr_cpu` topic. _Handler files can be YAML or JSON._
 
-#### aggregated_cpu_alerts.yaml
+#### aggr_cpu_alerts.yaml
 ```yaml
-id: aggregrated_cpu_alerts
+id: aggr_cpu_alerts_10m
 topic: cpu
 kind: aggregate
 options:
@@ -69,7 +69,7 @@ options:
 Add the handler file:
 
 ```bash
-kapacitor define-topic-handler aggregated_cpu_alerts.yaml
+kapacitor define-topic-handler aggr_cpu_alerts_10m.yaml
 ```
 
 Aggregated CPU alert messages will be published to the `aggr_cpu` topic every 10 minutes. Further handling of the aggregated events can be configured on the `aggr_cpu` topic.

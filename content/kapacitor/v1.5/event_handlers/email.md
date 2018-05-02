@@ -1,17 +1,17 @@
 ---
-title: SMTP Event Handler
-
+title: Email Event Handler
+description: The "email" event handler allows you to send Kapacitor alerts via email. This doc includes configuration options and usage examples.
 menu:
   kapacitor_1_5:
-    name: SMTP
+    name: Email
     weight: 14
     parent: event-handlers
 ---
 
-The SMTP event handler sends alert messages via email.
+The Email event handler sends alert messages via SMTP/email.
 
 ## Configuration
-Configuration as well as default [option](#options) values for the SMTP event handler are set in your `kapacitor.conf`.
+Configuration as well as default [option](#options) values for the Email event handler are set in the `[smtp]` section of your `kapacitor.conf`.
 Below is an example config:
 
 ```toml
@@ -65,7 +65,7 @@ Only applies if `global` is `true`.
 
 
 ## Options
-The following SMTP/Email event handler options can be set in a [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using `.email()` in a TICKscript.
+The following Email event handler options can be set in a [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using `.email()` in a TICKscript.
 
 | Name | Type            | Description              |
 | ---- | ----            | -----------              |
@@ -87,11 +87,12 @@ options:
 |alert()
   // ...
   .email()
-    .to('oncall1@example.com', 'oncall2@example.com')
+    .to('oncall1@example.com')
+    .to('oncall2@example.com')
 ```
 
 ### Using the SMTP/Email event handler
-The SMTP/Email event handler can be used in both TICKscripts and handler files to email alerts. The email subject is the [AlertNode.Message](/kapacitor/v1.5/nodes/alert_node/#message) property. The email body is the [AlertNode.Details](/kapacitor/v1.5/nodes/alert_node/#details) property. The emails are sent as HTML emails so the body can contain html markup.
+The Email event handler can be used in both TICKscripts and handler files to email alerts. The email subject is the [AlertNode.Message](/kapacitor/v1.5/nodes/alert_node/#message) property. The email body is the [AlertNode.Details](/kapacitor/v1.5/nodes/alert_node/#details) property. The emails are sent as HTML emails so the body can contain html markup.
 
 _**SMTP settings in kapacitor.conf**_  
 ```toml
@@ -121,7 +122,8 @@ stream
     .crit(lambda: 'usage_idle' < 10)
     .message('Hey, check your CPU')
     .email()
-      .to('oncall1@mydomain.com', 'oncall2@mydomain.com')
+      .to('oncall1@mydomain.com')
+      .to('oncall2@mydomain.com')
 ```
 
 ### Email alerts from a defined handler
@@ -152,8 +154,8 @@ Create a handler file that subscribes to the `cpu` topic and uses the `.email()`
 
 _**email\_cpu\_handler.yaml**_
 ```yaml
-topic: cpu
 id: email-cpu-alert
+topic: cpu
 kind: email
 options:
   to:

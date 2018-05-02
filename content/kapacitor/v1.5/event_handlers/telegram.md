@@ -1,6 +1,6 @@
 ---
 title: Telegram Event Handler
-
+description: The Telegram event handler allows you to send Kapacitor alerts to Telegram. This doc includes configuration options and usage examples.
 menu:
   kapacitor_1_5:
     name: Telegram
@@ -70,7 +70,7 @@ The following Telegram event handler options can be set in a [handler file](/kap
 #### Example Handler File
 ```yaml
 topic: topic-name
-id: alert-id
+id: handler-id
 kind: telegram
 options:
   chat-id: '123456789'
@@ -267,8 +267,8 @@ Create a handler file that subscribes to the `cpu` topic and uses the Telegram e
 
 _**telegram\_cpu\_handler.yaml**_
 ```yaml
-topic: cpu
 id: telegram-cpu-alert
+topic: cpu
 kind: telegram
 options:
   chat-id: '123456789'

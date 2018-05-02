@@ -1,6 +1,6 @@
 ---
 title: Slack Event Handler
-
+description: The Slack event handler allows you to send Kapacitor alerts to Slack. This doc includes configuration options and usage examples.
 menu:
   kapacitor_1_5:
     name: Slack
@@ -118,7 +118,7 @@ _**Slack settings in kapacitor.conf**_
   enabled = true
   default = true
   workspace = "alerts"
-  url = "http://example.com"
+  url = "http://example1.com"
   channel = "#alerts"
   username = "AlertBot"
   global = false
@@ -127,10 +127,10 @@ _**Slack settings in kapacitor.conf**_
 [[slack]]
   enabled = true
   default = false
-  workspace = "critical-alerts"
-  url = "http://example.com"
-  channel = "#critical-alerts"
-  username = "AlertBot"
+  workspace = "daily-stats"
+  url = "http://example2.com"
+  channel = "#daily-stats"
+  username = "StatsBot"
   global = false
   state-changes-only = false
 ```
@@ -155,7 +155,7 @@ stream
 The following setup sends an alert to the `cpu` topic with the message, "Hey, check your CPU". A Slack handler is added that subscribes to the `cpu` topic and publishes all alert messages to Slack.
 
 Create a TICKscript that publishes alert messages to a topic.
-The TICKscript below sends an critical alert message to the `cpu` topic any time idle CPU usage drops below 10%.
+The TICKscript below sends an critical alert message to the `cpu` topic any time idle CPU usage drops below 5%.
 
 _**cpu\_alert.tick**_
 ```js
@@ -163,7 +163,7 @@ stream
   |from()
     .measurement('cpu')
   |alert()
-    .crit(lambda: "usage_idle" < 10)
+    .crit(lambda: "usage_idle" < 5)
     .message('Hey, check your CPU')
     .topic('cpu')
 ```
@@ -179,11 +179,11 @@ Create a handler file that subscribes to the `cpu` topic and uses the Slack even
 
 _**slack\_cpu\_handler.yaml**_
 ```yaml
-topic: cpu
 id: slack-cpu-alert
+topic: cpu
 kind: slack
 options:
-  workspace: 'critical-alerts'
+  workspace: 'alerts'
   icon-emoji: ':fire:'
 ```
 
@@ -196,12 +196,9 @@ kapacitor define-topic-handler slack_cpu_handler.yaml
 ### Using multiple Slack configurations
 Kapacitor can use multiple Slack integrations, each identified by the value of the [`workspace`](#workspace) config. The TICKscript below illustrates how multiple Slack integrations can be used.
 
-There are two alert levels:
+In the `kapacitor.conf` [above](#using-the-slack-event-handler), there are two Slack configurations; one for alerts and the other for daily stats. The `workspace` config for each Slack configuration act as a unique identifiers.
 
-* Warning ([warn](/kapacitor/v1.5/nodes/alert_node/#warn)) - A warning message is sent when idle CPU usage is below 20%.
-* Critical ([crit](/kapacitor/v1.5/nodes/alert_node/#crit)) - A critical message is sent when idle CPU usage is below 5%.
-
-The `workspace` defined for each Slack handler determines the channel to which each alert message is sent.
+The following TICKscript sends alerts to the `alerts` Slack workspace.
 
 _**slack-cpu-alert.tick**_  
 ```js
@@ -209,14 +206,47 @@ stream
   |from()
     .measurement('cpu')
   |alert()
-    .warn(lambda: "usage_idle" < 20)
-      .message('Hey, CPU usage is a little high.')
-      .slack()
-        .workspace('alerts')
-        .iconEmoji(':exclamation:')
     .crit(lambda: "usage_idle" < 5)
       .message('Hey, I think the machine is on fire.')
       .slack()
-        .workspace('critical-alerts')
+        .workspace('alerts')
         .iconEmoji(':fire:')
+```
+
+User signup information is also being stored in the same InfluxDB instance and we want to send daily signup stats to the `daily-stats` Slack workspace. The following TICKscript collects new user signups and publishes them to the `new-users` topic.
+
+_**new\_users.tick**_
+```js
+stream
+  |from()
+    .measurement('users')
+    .groupBy('new')
+  |alert()
+    .info(lamda: 'count' > 0)
+    .message('We have a new user!')
+    .topic('new-users')  
+```
+
+Below is an [aggregate](/kapacitor/v1.5/event_handlers/aggregate/) handler that subscribes to the `new-users` topic, aggregates new user sign-ups over a 24 hour period, then publishes an aggregate message to the `new-users-24h` topic.
+
+_**new\_users\_24h.yaml**_
+```yaml
+id: new-users-24h
+topic: new-users
+kind: aggregate
+options:
+  interval: 24h
+  topic: new-users-24h
+  message: '{{ .Count }} new users added in the last 24 hours.'
+```
+
+Last, but not least, a Slack handler that subscribes to the `new-users-24h` topic and publishes aggregated count messages to the `daily-stats` Slack workspace:
+
+_**slack\_new\_users\_daily.yaml**_
+```yaml
+id: slack-new-users
+topic: new-users-24h
+kind: slack
+options:
+  workspace: daily-stats
 ```

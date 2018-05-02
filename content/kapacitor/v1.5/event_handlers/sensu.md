@@ -1,6 +1,6 @@
 ---
 title: Sensu Event Handler
-
+description: The Sensu event handler allows you to send Kapacitor alerts to Sensu. This doc includes configuration options and usage examples.
 menu:
   kapacitor_1_5:
     name: Sensu
@@ -39,10 +39,10 @@ List of [Sensu handlers](https://docs.sensu.io/sensu-core/1.3/guides/intro-to-ha
 ## Options
 The following Sensu event handler options can be set in a [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using `.sensu()` in a TICKscript.
 
-| Name     | Type            | Description                                                                               |
-| ----     | ----            | -----------                                                                               |
-| source   | string          | Sensu source for which to post messages. |
-| handlers | list of strings | Sensu handler list. If empty uses the handler list from the configuration.                |
+| Name     | Type            | Description                                                                |
+| ----     | ----            | -----------                                                                |
+| source   | string          | Sensu source for which to post messages.                                   |
+| handlers | list of strings | Sensu handler list. If empty uses the handler list from the configuration. |
 
 ### Example Handler File
 ```yaml
@@ -120,8 +120,8 @@ Create a handler file that subscribes to the `cpu` topic and uses the Sensu even
 
 _**sensu\_cpu\_handler.yaml**_
 ```yaml
-topic: cpu
 id: sensu-cpu-alert
+topic: cpu
 kind: sensu
 options:
   source: Kapacitor

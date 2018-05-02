@@ -1,6 +1,6 @@
 ---
 title: Alerta Event Handler
-
+description: The Alerta event handler allows you to send Kapacitor alerts to Alerta. This doc includes configuration options and usage examples.
 menu:
   kapacitor_1_5:
     name: Alerta
@@ -57,11 +57,12 @@ The following Alerta event handler options can be set in a [handler file](/kapac
 | value        | string          | Alerta value. Can be a template and has access to the same data as the AlertNode.Details property. Default is an empty string.                  |
 | origin       | string          | Alerta origin. If empty uses the origin from the configuration.                                                                                 |
 | service      | list of strings | List of effected Services.                                                                                                                      |
+| timeout      | duration string | Alerta timeout. Default is 24 hours.                                                                                                            |
 
 #### Example Handler File
 ```yaml
 topic: topic-name
-id: alert-id
+id: handler-id
 kind: alerta
 options:
     token: 'mysupersecretauthtoken'
@@ -73,6 +74,7 @@ options:
     value: 'some-value'
     origin: 'kapacitor'
     service: ['service1', 'service2']
+    timeout: 24h
 ```
 
 #### Example TICKscript
@@ -88,7 +90,8 @@ options:
     .group('{{ .Group }}')
     .value('some-value')
     .origin('kapacitor')
-    .service(['service1', 'service2'])
+    .service('service1', 'service2')
+    .timeout(24h)
 ```
 
 ## Using the Alerta event handler
@@ -150,8 +153,8 @@ Create a handler file that subscribes to the `cpu` topic and uses the Alerta eve
 
 _**alerta\_cpu\_handler.yaml**_
 ```yaml
-topic: cpu
 id: alerta-cpu-alert
+topic: cpu
 kind: alerta
 options:
   origin: 'kapacitor'

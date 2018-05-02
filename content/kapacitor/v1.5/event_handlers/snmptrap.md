@@ -1,9 +1,9 @@
 ---
-title: Snmptrap Event Handler
-
+title: SNMPtrap Event Handler
+description: The "snmptrap" event handler allows you to send Kapacitor alerts SNMP traps. This doc includes configuration options and usage examples.
 menu:
   kapacitor_1_5:
-    name: Snmptrap
+    name: SNMPtrap
     weight: 15
     parent: event-handlers
 ---
@@ -49,20 +49,31 @@ id: handler-id
 topic: topic-name
 kind: snmptrap
 options:
-  trap-oid: '1.1.1.1'
+  trap-oid: 1.3.6.1.4.1.1
   data-list:
-    oid: '1.3.6.1.2.1.1.7'
-    type: i
-    value: '{{ index .Field "value" }}'
+    - oid: 1.3.6.1.4.1.1.5
+      type: s
+      value: '{{ .Level }}'
+    - oid: 1.3.6.1.4.1.1.6
+      type: i
+      value: 50
+    - oid: 1.3.6.1.4.1.1.7
+      type: c
+      value: '{{ index .Fields "num_requests" }}'
+    - oid: 1.3.6.1.4.1.1.8
+      type: s
+      value: '{{ .Message }}'
 ```
 
 ### Example TICKscript
 ```js
 |alert()
   // ...
-  .snmptrap()
-    .trapOid('1.1.1.1')
-    .dataList( oid: '1.3.6.1.2.1.1.7', type: 'i', value: '{{ index .Field "value" }}' )
+  .snmptrap('1.3.6.1.4.1.1')
+    .data('1.3.6.1.4.1.1.5', 's', '{{ .Level }}')
+    .data('1.3.6.1.4.1.1.6', 'i', '50')
+    .data('1.3.6.1.4.1.1.7', 'c', '{{ index .Fields "num_requests" }}')
+    .data('1.3.6.1.4.1.1.8', 's', '{{ .Message }}')
 ```
 
 ## Using the SNMP trap event handler
@@ -80,9 +91,8 @@ stream
   |alert()
     .crit(lambda: "usage_idle" < 10)
     .message('Hey, check your CPU')
-    .snmptrap()
-      .trapOid('1.1.1.1')
-      .dataList( oid: '1.3.6.1.2.1.1.7', type: 'i', value: '{{ index .Field "value" }}' )
+    .snmptrap('1.3.6.1.2.1.1')
+      .data('1.3.6.1.2.1.1.7', 'i', '{{ index .Field "value" }}')
 ```
 
 ### Publish to multiple topics from a defined handler
@@ -114,15 +124,15 @@ Create a handler file that subscribes to the `cpu` topic and uses the SNMP trap 
 
 _**snmptrap\_cpu\_handler.yaml**_
 ```yaml
-topic: cpu
 id: snmptrap-cpu-alert
+topic: cpu
 kind: snmptrap
 options:
-  trap-oid: '1.1.1.1'
+  trap-oid: '1.3.6.1.2.1.1'
   data-list:
-    oid: '1.3.6.1.2.1.1.7'
-    type: i
-    value: '{{ index .Field "value" }}'
+    - oid: '1.3.6.1.2.1.1.7'
+      type: i
+      value: '{{ index .Field "value" }}'
 ```
 
 Add the handler:

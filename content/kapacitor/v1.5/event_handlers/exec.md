@@ -1,6 +1,6 @@
 ---
 title: Exec Event Handler
-
+description: The "exec" event handler allows you to execute external programs when Kapacitor alert messages are triggered. This doc includes configuration options and usage examples.
 menu:
   kapacitor_1_5:
     name: Exec
@@ -85,8 +85,8 @@ Create a handler file that subscribes to the `cpu` topic and uses the exec event
 
 _**exec\_cpu\_handler.yaml**_
 ```yaml
-topic: cpu
 id: exec-cpu-alert
+topic: cpu
 kind: exec
 options:
   prog: '/usr/bin/python'
