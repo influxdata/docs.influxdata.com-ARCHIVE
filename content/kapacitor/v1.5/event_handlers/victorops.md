@@ -78,6 +78,14 @@ options:
     .routingKey('team_rocket')
 ```
 
+## VictorOps Setup
+To allow Kapacitor to send alerts to VictorOps, do the following:
+
+1. Enable the "Alert Ingestion API" in the "Integrations" section of your
+   VictorOps dashboard.
+2. Use provided API key as the `api-key` in the `[victorops]` section of your
+   `kapacitor.conf`.
+
 ## Using the VictorOps event handler
 With the VictorOps event handler enabled and configured in your `kapacitor.conf`,
 use the `.victorops()` attribute in your TICKscripts to send alerts to VictorOps

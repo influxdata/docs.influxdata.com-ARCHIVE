@@ -22,7 +22,7 @@ Below is an example config:
   enabled = true
   default = true
   workspace = "example.slack.com"
-  url = "http://example.com"
+  url = "https://hooks.slack.com/xxxx/xxxx/xxxx"
   channel = "#alerts"
   username = "kapacitor"
   global = false
@@ -115,6 +115,12 @@ options:
     .iconEmoji(':smile:')
 ```
 
+## Slack Setup
+To allow Kapacitor to send alerts to Slack,
+[create a new incoming webhook](https://slack.com/services/new/incoming-webhook )
+and add the generated webhook URL as the `url` in the `[[slack]]` configuration
+section of your `kapacitor.conf`.
+
 ## Using the Slack event handler
 With one or more Slack event handlers enabled and configured in your
 `kapacitor.conf`, use the `.slack()` attribute in your TICKscripts to send
@@ -129,7 +135,7 @@ _**Slack settings in kapacitor.conf**_
   enabled = true
   default = true
   workspace = "alerts"
-  url = "http://example1.com"
+  url = "https://hooks.slack.com/xxxx/xxxx/example1"
   channel = "#alerts"
   username = "AlertBot"
   global = false
@@ -139,7 +145,7 @@ _**Slack settings in kapacitor.conf**_
   enabled = true
   default = false
   workspace = "daily-stats"
-  url = "http://example2.com"
+  url = "https://hooks.slack.com/xxxx/xxxx/example2"
   channel = "#daily-stats"
   username = "StatsBot"
   global = false

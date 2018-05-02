@@ -63,6 +63,17 @@ options:
     .text('This is the text included in the message.')
 ```
 
+## Talk Setup
+Create a new incoming webhook to allow Kapacitor to send alerts to Talk.
+
+1. [Sign into your Talk account](https:/account.jianliao.com/signin).
+2. Under the "Team" tab, click “Integrations”.
+3. Select “Customize service” and click the Incoming Webhook “Add” button.
+4. Choose the topic to connect with and click “Confirm Add” button.
+5. Once the service is created, you’ll see the “Generate Webhook url”.
+6. Place the generated Webhook URL as the `url` in the `[talk]` section of your
+   `kapacitor.conf`.
+
 ## Using the Talk event handler
 With the Talk event handler enabled and configured in your `kapacitor.conf`,
 use the `.talk()` attribute in your TICKscripts to send alerts to Talk or define
