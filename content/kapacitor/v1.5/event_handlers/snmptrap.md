@@ -4,7 +4,7 @@ description: The "snmptrap" event handler allows you to send Kapacitor alerts SN
 menu:
   kapacitor_1_5:
     name: SNMPtrap
-    weight: 1500
+    weight: 1600
     parent: event-handlers
 ---
 

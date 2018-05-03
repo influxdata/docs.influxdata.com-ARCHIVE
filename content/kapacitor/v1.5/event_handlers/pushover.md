@@ -4,7 +4,7 @@ description: The Pushover event handler allows you to send Kapacitor alerts to P
 menu:
   kapacitor_1_5:
     name: Pushover
-    weight: 1100
+    weight: 1300
     parent: event-handlers
 ---
 

@@ -4,7 +4,7 @@ description: The Telegram event handler allows you to send Kapacitor alerts to T
 menu:
   kapacitor_1_5:
     name: Telegram
-    weight: 1800
+    weight: 1900
     parent: event-handlers
 ---
 

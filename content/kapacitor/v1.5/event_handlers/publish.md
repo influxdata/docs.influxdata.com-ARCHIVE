@@ -4,7 +4,7 @@ description: The "publish" event handler allows you to publish Kapacitor alerts 
 menu:
   kapacitor_1_5:
     name: Publish
-    weight: 1000
+    weight: 1200
     parent: event-handlers
 ---
 

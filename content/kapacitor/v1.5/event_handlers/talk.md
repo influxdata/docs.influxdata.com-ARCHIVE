@@ -4,7 +4,7 @@ description: The Talk event handler allows you to send Kapacitor alerts to Talk.
 menu:
   kapacitor_1_5:
     name: Talk
-    weight: 1600
+    weight: 1700
     parent: event-handlers
 ---
 
