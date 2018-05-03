@@ -113,6 +113,10 @@ With the HipChat event handler enabled in your `kapacitor.conf`, use the
 `.hipchat()` attribute in your TICKscripts to send alerts to HipChat or define a
 HipChat handler that subscribes to a topic and sends published alerts to HipChat.
 
+> To avoid posting a message every alert interval, use
+> [AlertNode.StateChangesOnly](/kapacitor/v1.5/nodes/alert_node/#statechangesonly)
+> so only events where the alert changed state are sent to Alerta.
+
 The examples below use the same HipChat configuration defined in the `kapacitor.conf`:
 
 _**HipChat settings in kapacitor.conf**_  
@@ -140,6 +144,7 @@ stream
     .measurement('cpu')
   |alert()
     .crit(lambda: "usage_idle" < 10)
+    .stateChangesOnly()
     .message('Hey, check your CPU')
     .hipchat()
       .room('alerts')
@@ -164,6 +169,7 @@ stream
     .measurement('cpu')
   |alert()
     .crit(lambda: "usage_idle" < 10)
+    .stateChangesOnly()
     .message('Hey, check your CPU')
     .topic('cpu')
 ```

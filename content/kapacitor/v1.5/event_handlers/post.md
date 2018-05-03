@@ -76,11 +76,13 @@ The following post event handler options can be set in a
 [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
 `.post()` in a TICKscript.
 
-| Name     | Type                    | Description                                                             |
-| ----     | ----                    | -----------                                                             |
-| url      | string                  | The URL to which the alert data will be posted.                         |
-| endpoint | string                  | Name of a configured httppost endpoint, cannot be specified in the URL. |
-| headers  | map of string to string | Set of extra header values to set on the POST request.                  |
+| Name             | Type                    | Description                                                                      |
+| ----             | ----                    | -----------                                                                      |
+| url              | string                  | The URL to which the alert data will be posted.                                  |
+| endpoint         | string                  | Name of a configured httppost endpoint to use, cannot be specified in the URL.   |
+| headers          | map of string to string | Set of extra header values to set on the POST request.                           |
+| capture-response | bool                    | If the HTTP status code is not an `2xx` code, read and log the the HTTP response |
+| timeout          | duration                | Timeout for the HTTP POST.                                                       |
 
 ### Example Handler File
 ```yaml
@@ -93,6 +95,8 @@ options:
   headers:
     'Example1': 'example1'
     'Example2': 'example2'
+  capture-response: true
+  timeout: 10s
 ```
 
 ### Example TICKscript
@@ -102,7 +106,10 @@ options:
   .post()
     .url('http://example.com')
     .endpoint('example')
-    .headers('Example1': 'example1', 'Example2': 'example2')
+    .header('Example1', 'example1')
+    .header('Example2', 'example2')
+    .captureResponse()
+    .timeout(10s)
 ```
 
 ## Using the Post event handler

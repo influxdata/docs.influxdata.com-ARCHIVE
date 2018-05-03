@@ -236,7 +236,9 @@ use the `.telegram()` attribute in your TICKscripts to send alerts to your
 Telegram bot or define a Telegram handler that subscribes to a topic and sends
 published alerts to your Telegram bot.
 
-> **Note:** Use [AlertNode.StateChangesOnly](/kapacitor/v1.5/nodes/alert_node/#statechangesonly) so that only state changes are sent to Alerta. Otherwise, messages will be posted at every alert interval.
+> To avoid posting a message every alert interval, use
+> [AlertNode.StateChangesOnly](/kapacitor/v1.5/nodes/alert_node/#statechangesonly)
+> so only events where the alert changed state are sent to Telegram.
 
 The examples below use the same Telegram configuration defined in the `kapacitor.conf`:
 

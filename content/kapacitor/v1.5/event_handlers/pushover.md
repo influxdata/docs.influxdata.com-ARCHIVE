@@ -71,10 +71,21 @@ options:
   .pushover()
     .device('device1, device2, device3')
     .title('Alert from Kapacitor')
-    .url('http://example.com')
-    .urlTitle('This is an example title')
+    .URL('http://example.com')
+    .URLTitle('This is an example title')
     .sound('siren')
 ```
+
+### Pushover Priority Levels
+Pushover expects priority levels with each alert.
+Kapacitor alert levels are mapped to the following priority levels:
+
+| Alert Level  | Priority Level     |
+| -----------  | --------------     |
+| **OK**       | -2 priority level. |
+| **Info**     | -1 priority level. |
+| **Warning**  | 0 priority level.  |
+| **Critical** | 1 priority level.  |
 
 ## Pushover Setup
 [Register your application with Pushover](https://pushover.net/apps/build) to

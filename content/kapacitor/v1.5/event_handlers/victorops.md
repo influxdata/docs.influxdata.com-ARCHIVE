@@ -55,7 +55,7 @@ _The routing key can still be overridden._
 ## Options
 The following VictorOpas event handler options can be set in a
 [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
-`.victorops()` in a TICKscript.
+`.victorOps()` in a TICKscript.
 
 | Name        | Type   | Description                         |
 | ----        | ----   | -----------                         |
@@ -74,7 +74,7 @@ options:
 ```js
 |alert()
   // ...
-  .victorops()
+  .victorOps()
     .routingKey('team_rocket')
 ```
 
@@ -88,7 +88,7 @@ To allow Kapacitor to send alerts to VictorOps, do the following:
 
 ## Using the VictorOps event handler
 With the VictorOps event handler enabled and configured in your `kapacitor.conf`,
-use the `.victorops()` attribute in your TICKscripts to send alerts to VictorOps
+use the `.victorOps()` attribute in your TICKscripts to send alerts to VictorOps
 or define a VictorOps handler that subscribes to a topic and sends published
 alerts to VictorOps.
 
@@ -107,7 +107,7 @@ _**VictorOps settings in kapacitor.conf**_
 
 ### Send alerts to an VictorOps room from a TICKscript
 
-The following TICKscript uses the `.victorops()` event handler to send the
+The following TICKscript uses the `.victorOps()` event handler to send the
 message, "Hey, check your CPU", to VictorOps whenever idle CPU usage drops
 below 10%.
 
@@ -119,7 +119,7 @@ stream
   |alert()
     .crit(lambda: "usage_idle" < 10)
     .message('Hey, check your CPU')
-    .victorops()
+    .victorOps()
       .routingKey('team_rocket')
 ```
 

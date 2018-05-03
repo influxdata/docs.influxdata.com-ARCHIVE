@@ -8,17 +8,18 @@ menu:
     parent: event-handlers
 ---
 
-The log event handler writes to a specified log file.
+The log event handler writes to a specified log file with one alert event per line.
+If the specified log file does not exist, it will be created.
 
 ## Options
 The following log event handler options can be set in a
 [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
 `.log()` in a TICKscript.
 
-| Name | Type   | Description                              |
-| ---- | ----   | -----------                              |
-| path | string | Path to the log file.                    |
-| mode | int    | File mode to use when creating the file. |
+| Name | Type   | Description                    |
+| ---- | ----   | -----------                    |
+| path | string | Absolute path to the log file. |
+| mode | int    | File mode and permissions to use when creating the file. Default is `0600`. _**The leading 0 is required to interpret the value as an octal integer.**_ |
 
 #### Example Handler File
 ```yaml

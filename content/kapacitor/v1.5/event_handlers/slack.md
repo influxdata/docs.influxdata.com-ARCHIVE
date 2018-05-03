@@ -127,6 +127,10 @@ With one or more Slack event handlers enabled and configured in your
 alerts to Slack or define a Slack handler that subscribes to a topic and sends
 published alerts to Slack.
 
+> To avoid posting a message every alert interval, use
+> [AlertNode.StateChangesOnly](/kapacitor/v1.5/nodes/alert_node/#statechangesonly)
+> so only events where the alert changed state are sent to Slack.
+
 The examples below use the following Slack configurations defined in the `kapacitor.conf`:
 
 _**Slack settings in kapacitor.conf**_
@@ -144,9 +148,9 @@ _**Slack settings in kapacitor.conf**_
 [[slack]]
   enabled = true
   default = false
-  workspace = "daily-stats"
+  workspace = "error-reports"
   url = "https://hooks.slack.com/xxxx/xxxx/example2"
-  channel = "#daily-stats"
+  channel = "#error-reports"
   username = "StatsBot"
   global = false
   state-changes-only = false
@@ -164,6 +168,7 @@ stream
     .measurement('cpu')
   |alert()
     .warn(lambda: "usage_idle" < 20)
+    .stateChangesOnly()
     .message('Hey, check your CPU')
     .slack()   
       .iconEmoji(':exclamation:')  
@@ -187,6 +192,7 @@ stream
     .measurement('cpu')
   |alert()
     .crit(lambda: "usage_idle" < 5)
+    .stateChangesOnly()
     .message('Hey, check your CPU')
     .topic('cpu')
 ```
@@ -237,51 +243,53 @@ stream
     .measurement('cpu')
   |alert()
     .crit(lambda: "usage_idle" < 5)
-      .message('Hey, I think the machine is on fire.')
-      .slack()
-        .workspace('alerts')
-        .iconEmoji(':fire:')
+    .stateChangesOnly()
+    .message('Hey, I think the machine is on fire.')
+    .slack()
+      .workspace('alerts')
+      .iconEmoji(':fire:')
 ```
 
-User signup information is also being stored in the same InfluxDB instance and
-we want to send daily signup stats to the `daily-stats` Slack workspace.
-The following TICKscript collects new user signups and publishes them to the `new-users` topic.
+Error rates are also being stored in the same InfluxDB instance and we want to
+send daily reports of `500` errors to the `error-reports` Slack workspace.
+The following TICKscript collects `500` error occurances and publishes them to
+the `500-errors` topic.
 
-_**new\_users.tick**_
+_**500_errors.tick**_
 ```js
 stream
   |from()
-    .measurement('users')
-    .groupBy('new')
+    .measurement('errors')
+    .groupBy('500')
   |alert()
     .info(lamda: 'count' > 0)
-    .message('We have a new user!')
-    .topic('new-users')  
+    .noRecoveries()
+    .topic('500-errors')  
 ```
 
 Below is an [aggregate](/kapacitor/v1.5/event_handlers/aggregate/) handler that
-subscribes to the `new-users` topic, aggregates new user sign-ups over a 24 hour
-period, then publishes an aggregate message to the `new-users-24h` topic.
+subscribes to the `500-errors` topic, aggregates the number of 500 errors over a
+24 hour period, then publishes an aggregate message to the `500-errors-24h` topic.
 
-_**new\_users\_24h.yaml**_
+_**500\_errors\_24h.yaml**_
 ```yaml
-id: new-users-24h
-topic: new-users
+id: 500-errors-24h
+topic: 500-errors
 kind: aggregate
 options:
   interval: 24h
-  topic: new-users-24h
-  message: '{{ .Count }} new users added in the last 24 hours.'
+  topic: 500-errors-24h
+  message: '{{ .Count }} 500 errors last 24 hours.'
 ```
 
-Last, but not least, a Slack handler that subscribes to the `new-users-24h`
-topic and publishes aggregated count messages to the `daily-stats` Slack workspace:
+Last, but not least, a Slack handler that subscribes to the `500-errors-24h`
+topic and publishes aggregated count messages to the `error-reports` Slack workspace:
 
-_**slack\_new\_users\_daily.yaml**_
+_**slack\_500\_errors\_daily.yaml**_
 ```yaml
-id: slack-new-users
-topic: new-users-24h
+id: slack-500-errors-daily
+topic: 500-errors-24h
 kind: slack
 options:
-  workspace: daily-stats
+  workspace: error-reports
 ```

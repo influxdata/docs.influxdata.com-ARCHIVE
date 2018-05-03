@@ -45,19 +45,19 @@ Default Alerta environment.
 #### `origin`
 Default origin of alert.
 
-> **Note:** Use [AlertNode.StateChangesOnly](/kapacitor/v1.5/nodes/alert_node/#statechangesonly) so that only state changes are sent to Alerta. Otherwise, messages will be posted at every alert interval.
-
 ## Options
 The following Alerta event handler options can be set in a
 [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
 `.alerta()` in a TICKscript.
 
+<span style="color: #ff9e46; font-style: italic; font-size: .8rem;">* Required</span>
+
 | Name         | Type            | Description                                                                                                                                     |
 | ----         | ----            | -----------                                                                                                                                     |
 | token        | string          | Alerta authentication token. If empty uses the token from the configuration.                                                                    |
 | token-prefix | string          | Alerta authentication token prefix. If empty, uses "Bearer".                                                                                    |
-| resource     | string          | Alerta resource. Can be a template and has access to the same data as the AlertNode.Details property. Default: {{ .Name }}                      |
-| event        | string          | Alerta event. Can be a template and has access to the same data as the idInfo property. Default: {{ .ID }}.                                     |
+| resource<span style="color: #ff9e46; font-style: italic;">\*</span>     | string          | Alerta resource. Can be a template and has access to the same data as the AlertNode.Details property. Default: {{ .Name }}                      |
+| event<span style="color: #ff9e46; font-style: italic;">\*</span>        | string          | Alerta event. Can be a template and has access to the same data as the idInfo property. Default: {{ .ID }}.                                     |
 | environment  | string          | Alerta environment. Can be a template and has access to the same data as the AlertNode.Details property. Default is set from the configuration. |
 | group        | string          | Alerta group. Can be a template and has access to the same data as the AlertNode.Details property. Default: {{ .Group }}.                       |
 | value        | string          | Alerta value. Can be a template and has access to the same data as the AlertNode.Details property. Default is an empty string.                  |
@@ -65,22 +65,25 @@ The following Alerta event handler options can be set in a
 | service      | list of strings | List of effected Services.                                                                                                                      |
 | timeout      | duration string | Alerta timeout. Default is 24 hours.                                                                                                            |
 
+> **Note:** The `resource` and `event` properties are required.
+> Alerta cannot be configured globally because of these required properties.
+
 #### Example Handler File
 ```yaml
 topic: topic-name
 id: handler-id
 kind: alerta
 options:
-    token: 'mysupersecretauthtoken'
-    token-prefix: 'Bearer'
-    resource: '{{ .Name }}'
-    event: '{{ .ID }}'
-    environment: 'Production'
-    group: '{{ .Group }}'
-    value: 'some-value'
-    origin: 'kapacitor'
-    service: ['service1', 'service2']
-    timeout: 24h
+  token: 'mysupersecretauthtoken'
+  token-prefix: 'Bearer'
+  resource: '{{ .Name }}'
+  event: '{{ .ID }}'
+  environment: 'Production'
+  group: '{{ .Group }}'
+  value: 'some-value'
+  origin: 'kapacitor'
+  service: ['service1', 'service2']
+  timeout: 24h
 ```
 
 #### Example TICKscript
@@ -106,6 +109,10 @@ With the Alerta event handler enabled and configured in your `kapacitor.conf`,
 use the `.alerta()` attribute in your TICKscripts to send alerts to Alerta or
 define a Alerta handler that subscribes to a topic and sends published alerts
 to Alerta.
+
+> To avoid posting a message every alert interval, use
+> [AlertNode.StateChangesOnly](/kapacitor/v1.5/nodes/alert_node/#statechangesonly)
+> so only events where the alert changed state are sent to Alerta.
 
 The examples below use the same Alerta configuration defined in the `kapacitor.conf`:
 
@@ -135,6 +142,8 @@ stream
     .stateChangesOnly()
     .message('Hey, check your CPU')
     .alerta()
+      .resource('{{ .Name }}')
+      .event('{{ .ID }}')
 ```
 
 ### Send alerts to an Alerta room from a defined handler
@@ -176,6 +185,8 @@ id: alerta-cpu-alert
 topic: cpu
 kind: alerta
 options:
+  resource: '{{ .Name }}'
+  event: '{{ .ID }}'
   origin: 'kapacitor'
 ```
 

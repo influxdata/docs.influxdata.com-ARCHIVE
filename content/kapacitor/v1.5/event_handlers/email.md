@@ -94,6 +94,10 @@ options:
   .email()
     .to('oncall1@example.com')
     .to('oncall2@example.com')
+
+  // OR
+  .email('oncall1@example.com')
+    .to('oncall2@example.com')
 ```
 
 ### Using the SMTP/Email event handler

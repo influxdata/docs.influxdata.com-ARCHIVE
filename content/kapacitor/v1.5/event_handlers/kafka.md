@@ -32,6 +32,9 @@ Below is an example config:
   insecure-skip-verify = false
 ```
 
+> Multiple Kafka clients may be configured by repeating `[[kafka]]` sections.
+> The `id` acts as a unique identifier for each configured Kafka client.
+
 #### `enabled`
 Set to `true` to enable the Kafka event handler.
 
