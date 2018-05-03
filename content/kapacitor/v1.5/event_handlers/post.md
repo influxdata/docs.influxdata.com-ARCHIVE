@@ -260,7 +260,7 @@ have access to the following fields:
 #### Inline Row Template
 _**kapacitor.conf**_
 ```toml
-[httppost]]
+[[httppost]]
   endpoint = "example"
   url = "http://example.com"
   row-template = "{{.Name}} host={{index .Tags \"host\"}}{{range .Values}} {{index . "time"}} {{index . "value"}}{{end}}"
@@ -269,7 +269,7 @@ _**kapacitor.conf**_
 #### Row Template File
 _**kapacitor.conf**_
 ```toml
-[httppost]]
+[[httppost]]
   endpoint = "example"
   url = "http://example.com"
   row-template-file = "/etc/templates/row.html"
