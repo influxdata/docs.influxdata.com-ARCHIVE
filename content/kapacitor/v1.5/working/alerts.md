@@ -97,27 +97,30 @@ A handler definition has a few properties:
 
 ### List of Handlers
 
-The following is a list of available alert handlers:
+The following is a list of available alert event handlers:
 
-[Aggregate](/kapacitor/v1.5/alert_handlers/aggregate/)  
-[Alerta](/kapacitor/v1.5/alert_handlers/alerta/)  
-[Exec](/kapacitor/v1.5/alert_handlers/exec/)  
-[Hipchat](/kapacitor/v1.5/alert_handlers/hipchat/)  
-[Kafka](/kapacitor/v1.5/alert_handlers/kafka/)  
-[Log](/kapacitor/v1.5/alert_handlers/log/)  
-[Opsgenie](/kapacitor/v1.5/alert_handlers/opsgenie/)  
-[Pagerduty](/kapacitor/v1.5/alert_handlers/pagerduty/)  
-[Pushover](/kapacitor/v1.5/alert_handlers/pushover/)  
-[Post](/kapacitor/v1.5/alert_handlers/post/)  
-[Publish](/kapacitor/v1.5/alert_handlers/publish/)  
-[Sensu](/kapacitor/v1.5/alert_handlers/sensu/)  
-[Slack](/kapacitor/v1.5/alert_handlers/slack/)  
-[SMTP](/kapacitor/v1.5/alert_handlers/smtp/)  
-[Snmptrap](/kapacitor/v1.5/alert_handlers/snmptrap/)  
-[Talk](/kapacitor/v1.5/alert_handlers/talk/)  
-[TCP](/kapacitor/v1.5/alert_handlers/tcp/)  
-[Telegram](/kapacitor/v1.5/alert_handlers/telegram/)  
-[Victorops](/kapacitor/v1.5/alert_handlers/victorops/)  
+| Handler                       | Description                                      |
+| -------                       | -----------                                      |
+| [Alerta](#alerta)             | Post alert message to Alerta.                    |
+| [email](#email)               | Send and email with alert data.                  |
+| [exec](#exec)                 | Execute a command passing alert data over STDIN. |
+| [HipChat](#hipchat)           | Post alert message to HipChat room.              |
+| [Kafka](#kafka)               | Send alert to a Apache Kafka cluster.            |
+| [log](#log)                   | Log alert data to file.                          |
+| [MQTT](#mqtt)                 | Post alert message to MQTT.                      |
+| [OpsGenie v1](#opsgenie-v1)   | Send alert to OpsGenie using their v1 API.       |
+| [OpsGenie v2](#opsgenie-v2)   | Send alert to OpsGenie using their v2 API.       |
+| [PagerDuty v1](#pagerduty-v1) | Send alert to PagerDuty using their v1 API.      |
+| [PagerDuty v2](#pagerduty-v1) | Send alert to PagerDuty using their v2 API.      |
+| [post](#post)                 | HTTP POST data to a specified URL.               |
+| [Pushover](#pushover)         | Send alert to Pushover.                          |
+| [Sensu](#sensu)               | Post alert message to Sensu client.              |
+| [Slack](#slack)               | Post alert message to Slack channel.             |
+| [SNMPTrap](#snmptrap)         | Trigger SNMP traps.                              |
+| [Talk](#talk)                 | Post alert message to Talk client.               |
+| [tcp](#tcp)                   | Send data to a specified address via raw TCP.    |
+| [Telegram](#telegram)         | Post alert message to Telegram client.           |
+| [VictorOps](#victorops)       | Send alert to VictorOps.                         |
 
 
 ## Match expressions
