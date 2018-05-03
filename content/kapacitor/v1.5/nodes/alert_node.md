@@ -77,37 +77,42 @@ Different event handlers can be configured for each [AlertNode.](/kapacitor/v1.4
 Some handlers like Email, HipChat, Sensu, Slack, OpsGenie, VictorOps, PagerDuty, Telegram and Talk have a configuration
 option 'global' that indicates that all alerts implicitly use the handler.
 
-Available event handlers:
+#### Available event handlers
 
-* log -- log alert data to file.
-* post -- HTTP POST data to a specified URL.
-* tcp -- Send data to a specified address via raw TCP.
-* email -- Send and email with alert data.
-* exec -- Execute a command passing alert data over STDIN.
-* HipChat -- Post alert message to HipChat room.
-* Alerta -- Post alert message to Alerta.
-* Sensu -- Post alert message to Sensu client.
-* Slack -- Post alert message to Slack channel.
-* SNMPTraps -- Trigger SNMP traps.
-* OpsGenie -- Send alert to OpsGenie.
-* VictorOps -- Send alert to VictorOps.
-* PagerDuty -- Send alert to PagerDuty.
-* Pushover -- Send alert to Pushover.
-* Talk -- Post alert message to Talk client.
-* Telegram -- Post alert message to Telegram client.
-* MQTT -- Post alert message to MQTT.
+| Handler                 | Description                                      |
+| -------                 | -----------                                      |
+| [log](#log)             | log alert data to file.                          |
+| [post](#post)           | HTTP POST data to a specified URL.               |
+| [tcp](#tcp)             | Send data to a specified address via raw TCP.    |
+| [email](#email)         | Send and email with alert data.                  |
+| [exec](#exec)           | Execute a command passing alert data over STDIN. |
+| [HipChat](#hipchat)     | Post alert message to HipChat room.              |
+| [Alerta](#alerta)       | Post alert message to Alerta.                    |
+| [Sensu](#sensu)         | Post alert message to Sensu client.              |
+| [Slack](#slack)         | Post alert message to Slack channel.             |
+| [SNMPTrap](#snmptrap)   | Trigger SNMP traps.                              |
+| [OpsGenie](#opsgenie)   | Send alert to OpsGenie.                          |
+| [VictorOps](#victorops) | Send alert to VictorOps.                         |
+| [PagerDuty](#pagerduty) | Send alert to PagerDuty.                         |
+| [Pushover](#pushover)   | Send alert to Pushover.                          |
+| [Talk](#talk)           | Post alert message to Talk client.               |
+| [Telegram](#telegram)   | Post alert message to Telegram client.           |
+| [MQTT](#mqtt)           | Post alert message to MQTT.                      |
 
 See below for more details on configuring each handler.
 
+#### Alert Event Data
 Each event that gets sent to a handler contains the following alert data:
 
-* ID -- the ID of the alert, user defined.
-* Message -- the alert message, user defined.
-* Details -- the alert details, user defined HTML content.
-* Time -- the time the alert occurred.
-* Duration -- the duration of the alert in nanoseconds.
-* Level -- one of OK, INFO, WARNING or CRITICAL.
-* Data -- influxql.Result containing the data that triggered the alert.
+| Name     | Description                                                   |
+| ----     | -----------                                                   |
+| ID       | The ID of the alert, user defined.                            |
+| Message  | The alert message, user defined.                              |
+| Details  | The alert details, user defined HTML content.                 |
+| Time     | The time the alert occurred.                                  |
+| Duration | The duration of the alert in nanoseconds.                     |
+| Level    | One of OK, INFO, WARNING or CRITICAL.                         |
+| Data     | influxql.Result containing the data that triggered the alert. |
 
 Events are sent to handlers if the alert is in a state other than 'OK'
 or the alert just changed to the 'OK' state from a non 'OK' state (a.k.a. the alert recovered).
@@ -201,7 +206,7 @@ Example:
 ```
 
 In order to not post a message every alert interval
-use [AlertNode.StateChangesOnly](/kapacitor/v1.4/nodes/alert_node/#statechangesonly) so that only events
+use [AlertNode.StateChangesOnly](/kapacitor/v1.5/nodes/alert_node/#statechangesonly) so that only events
 where the alert changed state are sent to Alerta.
 
 Send alerts to Alerta. The resource and event properties are required.

@@ -4,7 +4,7 @@ description: The "post" event handler allows you to POST Kapacitor alert data to
 menu:
   kapacitor_1_5:
     name: Post
-    weight: 9
+    weight: 900
     parent: event-handlers
 ---
 

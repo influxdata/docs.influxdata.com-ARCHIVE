@@ -4,7 +4,7 @@ description: The Alerta event handler allows you to send Kapacitor alerts to Ale
 menu:
   kapacitor_1_5:
     name: Alerta
-    weight: 2
+    weight: 200
     parent: event-handlers
 ---
 
@@ -26,7 +26,6 @@ Below is an example config:
   origin = "kapacitor"
 ```
 
-
 #### `enabled`
 Set to `true` to enable the Alerta event handler.
 
@@ -45,6 +44,8 @@ Default Alerta environment.
 
 #### `origin`
 Default origin of alert.
+
+> **Note:** Use [AlertNode.StateChangesOnly](/kapacitor/v1.5/nodes/alert_node/#statechangesonly) so that only state changes are sent to Alerta. Otherwise, messages will be posted at every alert interval.
 
 ## Options
 The following Alerta event handler options can be set in a
@@ -86,6 +87,7 @@ options:
 ```js
 |alert()
   // ...
+  .stateChangesOnly()
   .alerta()
     .token('mysupersecretauthtoken')
     .tokenPrefix('Bearer')
@@ -130,6 +132,7 @@ stream
     .measurement('cpu')
   |alert()
     .crit(lambda: "usage_idle" < 10)
+    .stateChangesOnly()
     .message('Hey, check your CPU')
     .alerta()
 ```
@@ -152,6 +155,7 @@ stream
     .measurement('cpu')
   |alert()
     .crit(lambda: "usage_idle" < 10)
+    .stateChangesOnly()
     .message('Hey, check your CPU')
     .topic('cpu')
 ```

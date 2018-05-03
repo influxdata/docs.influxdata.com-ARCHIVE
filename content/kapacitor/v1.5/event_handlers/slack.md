@@ -4,7 +4,7 @@ description: The Slack event handler allows you to send Kapacitor alerts to Slac
 menu:
   kapacitor_1_5:
     name: Slack
-    weight: 13
+    weight: 1300
     parent: event-handlers
 ---
 

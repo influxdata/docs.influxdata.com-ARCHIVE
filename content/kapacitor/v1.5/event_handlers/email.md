@@ -4,7 +4,7 @@ description: The "email" event handler allows you to send Kapacitor alerts via e
 menu:
   kapacitor_1_5:
     name: Email
-    weight: 14
+    weight: 300
     parent: event-handlers
 ---
 

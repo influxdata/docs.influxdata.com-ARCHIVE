@@ -4,7 +4,7 @@ description: The Telegram event handler allows you to send Kapacitor alerts to T
 menu:
   kapacitor_1_5:
     name: Telegram
-    weight: 18
+    weight: 1800
     parent: event-handlers
 ---
 
@@ -236,6 +236,8 @@ use the `.telegram()` attribute in your TICKscripts to send alerts to your
 Telegram bot or define a Telegram handler that subscribes to a topic and sends
 published alerts to your Telegram bot.
 
+> **Note:** Use [AlertNode.StateChangesOnly](/kapacitor/v1.5/nodes/alert_node/#statechangesonly) so that only state changes are sent to Alerta. Otherwise, messages will be posted at every alert interval.
+
 The examples below use the same Telegram configuration defined in the `kapacitor.conf`:
 
 _**Telegram settings in kapacitor.conf**_
@@ -265,6 +267,7 @@ stream
     .measurement('cpu')
   |alert()
     .crit(lambda: "usage_idle" < 10)
+    .stateChangesOnly()
     .message('Hey, check your CPU')
     .telegram()
 ```
@@ -285,6 +288,7 @@ stream
     .measurement('cpu')
   |alert()
     .crit(lambda: "usage_idle" < 10)
+    .stateChangesOnly()
     .message('Hey, check your CPU')
     .topic('cpu')
 ```

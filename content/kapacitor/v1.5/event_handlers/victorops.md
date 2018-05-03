@@ -4,7 +4,7 @@ description: The VictorOps event handler allows you to send Kapacitor alerts to 
 menu:
   kapacitor_1_5:
     name: VictorOps
-    weight: 19
+    weight: 1900
     parent: event-handlers
 ---
 

@@ -4,7 +4,7 @@ description: The HipChat event handler allows you to send Kapacitor alerts to Hi
 menu:
   kapacitor_1_5:
     name: HipChat
-    weight: 4
+    weight: 500
     parent: event-handlers
 ---
 

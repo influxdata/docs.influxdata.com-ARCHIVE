@@ -4,7 +4,7 @@ description: The "exec" event handler allows you to execute external programs wh
 menu:
   kapacitor_1_5:
     name: Exec
-    weight: 3
+    weight: 400
     parent: event-handlers
 ---
 

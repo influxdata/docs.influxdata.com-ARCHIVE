@@ -25,6 +25,7 @@ syntax for officially supported Kapacitor event handlers.
 [Hipchat](hipchat/)  
 [Kafka](kafka/)  
 [Log](log/)  
+[MQTT](mqtt/)  
 [Opsgenie](opsgenie/)  
 [Pagerduty](pagerduty/)  
 [Post](post/)  
@@ -123,3 +124,8 @@ stream
     .message('You better check your CPU usage.')
     .slack()
 ```
+
+> Events are sent to handlers if the alert is in a state other than ‘OK’ or the
+alert just changed to the ‘OK’ state from a non ‘OK’ state (a.k.a. the alert
+recovered). Using the [AlertNode.StateChangesOnly](/kapacitor/v1.5/nodes/alert_node/#statechangesonly) property events will only be
+sent to handlers if the alert changed state.

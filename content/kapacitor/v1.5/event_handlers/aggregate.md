@@ -4,7 +4,7 @@ description: The aggregate event handler allows you to aggregate alerts messages
 menu:
   kapacitor_1_5:
     name: Aggregrate
-    weight: 1
+    weight: 100
     parent: event-handlers
 ---
 

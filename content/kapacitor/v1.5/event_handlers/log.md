@@ -4,7 +4,7 @@ description: The "log" event handler allows you to send Kapacitor alert messages
 menu:
   kapacitor_1_5:
     name: Log
-    weight: 6
+    weight: 700
     parent: event-handlers
 ---
 

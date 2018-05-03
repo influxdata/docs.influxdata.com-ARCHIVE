@@ -4,7 +4,7 @@ description: The Sensu event handler allows you to send Kapacitor alerts to Sens
 menu:
   kapacitor_1_5:
     name: Sensu
-    weight: 12
+    weight: 1200
     parent: event-handlers
 ---
 

@@ -4,7 +4,7 @@ description: The "tcp" event handler allows you to send Kapacitor alert data to 
 menu:
   kapacitor_1_5:
     name: TCP
-    weight: 17
+    weight: 1700
     parent: event-handlers
 ---
 

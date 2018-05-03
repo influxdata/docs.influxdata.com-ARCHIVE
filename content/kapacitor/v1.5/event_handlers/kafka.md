@@ -4,7 +4,7 @@ description: The Kafka event handler allows you to send Kapacitor alerts to an A
 menu:
   kapacitor_1_5:
     name: Kafka
-    weight: 5
+    weight: 600
     parent: event-handlers
 ---
 
