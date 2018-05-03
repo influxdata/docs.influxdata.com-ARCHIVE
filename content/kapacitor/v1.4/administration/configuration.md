@@ -73,7 +73,7 @@ below.
 Be aware that Kapacitor uses system resources when logging events.  It follows that
 certain aspects of logging, such as when to compress the log, when and how to start
 a new log file, will therefore need to be managed through mechanisms external to Kapacitor.
-On Linux systems this means using `logrotate`.  See the section [Logging](#logging) below.  
+On Linux systems Kapacitor uses `logrotate`.  See the section [Logging](#logging) below.  
 The `logrotate` man page is available through
 [ubuntu](http://manpages.ubuntu.com/manpages/xenial/en/man8/logrotate.8.html) and
 elsewhere, or locally by running `$ man logrotate`.  Kapacitor packages install
