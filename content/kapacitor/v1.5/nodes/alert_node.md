@@ -28,13 +28,14 @@ menu:
 | **[email](#email)&nbsp;(&nbsp;`to`&nbsp;`...string`)** | Email the alert data.  |
 | **[exec](#exec)&nbsp;(&nbsp;`executable`&nbsp;`string`,&nbsp;`args`&nbsp;`...string`)** | Execute a command whenever an alert is triggered and pass the alert data over STDIN in JSON format.  |
 | **[flapping](#flapping)&nbsp;(&nbsp;`low`&nbsp;`float64`,&nbsp;`high`&nbsp;`float64`)** | Perform flap detection on the alerts. The method used is similar method to Nagios: https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/flapping.html  |
-| **[hipChat](#hipchat)&nbsp;(&nbsp;)** | Send the alert to HipChat. For step-by-step instructions on setting up Kapacitor with HipChat, see the [Event Handler Setup Guide](https://docs.influxdata.com//kapacitor/latest/guides/event-handler-setup/#hipchat-setup). To allow Kapacitor to post to HipChat, go to the URL https://www.hipchat.com/docs/apiv2 for information on how to get your room id and tokens.  |
+| **[hipChat](#hipchat)&nbsp;(&nbsp;)** | Send the alert to HipChat. |
 | **[history](#history)&nbsp;(&nbsp;`value`&nbsp;`int64`)** | Number of previous states to remember when computing flapping levels and checking for state changes. Minimum value is 2 in order to keep track of current and previous states.  |
 | **[id](#id)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Template for constructing a unique ID for a given alert.  |
 | **[idField](#idfield)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional field key to add to the data, containing the alert ID as a string.  |
 | **[idTag](#idtag)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional tag key to use when tagging the data with the alert ID.  |
 | **[info](#info)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for the INFO alert level. An empty value indicates the level is invalid and is skipped.  |
 | **[infoReset](#inforeset)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for reseting the INFO alert level to lower level.  |
+| **[kafka](#kafka)&nbsp;(&nbsp;)** | Send the alert to a Kafka cluster. |
 | **[levelField](#levelfield)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional field key to add to the data, containing the alert level as a string.  |
 | **[levelTag](#leveltag)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional tag key to use when tagging the data with the alert level.  |
 | **[log](#log)&nbsp;(&nbsp;`filepath`&nbsp;`string`)** | Log JSON alert data to file. One event per line. Must specify the absolute path to the log file. It will be created if it does not exist. Example: stream |alert() .log('/tmp/alert')  |
@@ -47,17 +48,17 @@ menu:
 | **[pagerDuty](#pagerduty-v1)&nbsp;(&nbsp;)** | Send the alert to PagerDuty using PagerDuty's v1 API. |
 | **[pagerDuty2](#pagerduty-v2)&nbsp;(&nbsp;)** | Send the alert to PagerDuty using PagerDuty's v2 API. |
 | **[post](#post)&nbsp;(&nbsp;`urls`&nbsp;`...string`)** | HTTP POST JSON alert data to a specified URL.  |
-| **[pushover](#pushover)&nbsp;(&nbsp;)** | Send the alert to Pushover. Register your application with Pushover at https://pushover.net/apps/build to get a Pushover token.  |
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
+| **[pushover](#pushover)&nbsp;(&nbsp;)** | Send the alert to Pushover. |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution. |
 | **[sensu](#sensu)&nbsp;(&nbsp;)** | Send the alert to Sensu.  |
-| **[slack](#slack)&nbsp;(&nbsp;)** | Send the alert to Slack. To allow Kapacitor to post to Slack, go to the URL https://slack.com/services/new/incoming-webhook and create a new incoming webhook and place the generated URL in the 'slack' configuration section.  |
-| **[snmpTrap](#snmptrap)&nbsp;(&nbsp;`trapOid`&nbsp;`string`)** | Send the alert using SNMP traps. To allow Kapacitor to post SNMP traps,  |
+| **[slack](#slack)&nbsp;(&nbsp;)** | Send the alert to Slack. |
+| **[snmpTrap](#snmptrap)&nbsp;(&nbsp;`trapOid`&nbsp;`string`)** | Send the alert using SNMP traps. |
 | **[stateChangesOnly](#statechangesonly)&nbsp;(&nbsp;`maxInterval`&nbsp;`...time.Duration`)** | Only sends events where the state changed. Each different alert level OK, INFO, WARNING, and CRITICAL are considered different states.  |
-| **[talk](#talk)&nbsp;(&nbsp;)** | Send the alert to Talk. To use Talk alerting you must first follow the steps to create a new incoming webhook.  |
+| **[talk](#talk)&nbsp;(&nbsp;)** | Send the alert to Talk. |
 | **[tcp](#tcp)&nbsp;(&nbsp;`address`&nbsp;`string`)** | Send JSON alert data to a specified address over TCP.  |
-| **[telegram](#telegram)&nbsp;(&nbsp;)** | Send the alert to Telegram. For step-by-step instructions on setting up Kapacitor with Telegram, see the [Event Handler Setup Guide](https://docs.influxdata.com//kapacitor/latest/guides/event-handler-setup/#telegram-setup). To allow Kapacitor to post to Telegram,  |
+| **[telegram](#telegram)&nbsp;(&nbsp;)** | Send the alert to Telegram. |
 | **[topic](#topic)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Topic specifies the name of an alert topic to which, alerts will be published. Alert handlers can be configured per topic, see the API documentation.  |
-| **[victorOps](#victorops)&nbsp;(&nbsp;)** | Send alert to VictorOps. To use VictorOps alerting you must first enable the 'Alert Ingestion API' in the 'Integrations' section of VictorOps. Then place the API key from the URL into the 'victorops' section of the Kapacitor configuration.  |
+| **[victorOps](#victorops)&nbsp;(&nbsp;)** | Send alert to VictorOps. |
 | **[warn](#warn)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for the WARNING alert level. An empty value indicates the level is invalid and is skipped.  |
 | **[warnReset](#warnreset)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for reseting the WARNING alert level to lower level.  |
 
@@ -83,23 +84,24 @@ option 'global' that indicates that all alerts implicitly use the handler.
 
 | Handler                       | Description                                      |
 | -------                       | -----------                                      |
-| [log](#log)                   | Log alert data to file.                          |
-| [post](#post)                 | HTTP POST data to a specified URL.               |
-| [tcp](#tcp)                   | Send data to a specified address via raw TCP.    |
+| [Alerta](#alerta)             | Post alert message to Alerta.                    |
 | [email](#email)               | Send and email with alert data.                  |
 | [exec](#exec)                 | Execute a command passing alert data over STDIN. |
-| [Alerta](#alerta)             | Post alert message to Alerta.                    |
 | [HipChat](#hipchat)           | Post alert message to HipChat room.              |
+| [Kafka](#kafka)               | Send alert to a Apache Kafka cluster.            |
+| [log](#log)                   | Log alert data to file.                          |
 | [MQTT](#mqtt)                 | Post alert message to MQTT.                      |
-| [Sensu](#sensu)               | Post alert message to Sensu client.              |
-| [Slack](#slack)               | Post alert message to Slack channel.             |
-| [SNMPTrap](#snmptrap)         | Trigger SNMP traps.                              |
 | [OpsGenie v1](#opsgenie-v1)   | Send alert to OpsGenie using their v1 API.       |
 | [OpsGenie v2](#opsgenie-v2)   | Send alert to OpsGenie using their v2 API.       |
 | [PagerDuty v1](#pagerduty-v1) | Send alert to PagerDuty using their v1 API.      |
 | [PagerDuty v2](#pagerduty-v1) | Send alert to PagerDuty using their v2 API.      |
+| [post](#post)                 | HTTP POST data to a specified URL.               |
 | [Pushover](#pushover)         | Send alert to Pushover.                          |
+| [Sensu](#sensu)               | Post alert message to Sensu client.              |
+| [Slack](#slack)               | Post alert message to Slack channel.             |
+| [SNMPTrap](#snmptrap)         | Trigger SNMP traps.                              |
 | [Talk](#talk)                 | Post alert message to Talk client.               |
+| [tcp](#tcp)                   | Send data to a specified address via raw TCP.    |
 | [Telegram](#telegram)         | Post alert message to Telegram client.           |
 | [VictorOps](#victorops)       | Send alert to VictorOps.                         |
 
@@ -395,6 +397,52 @@ alert.flapping(0.25, 0.5)
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
+### Kafka
+
+Send the alert to an Apache Kafka cluster.
+Detailed configuration options and setup instructions are provided in the
+[Kafka Event Handler](/kapacitor/v1.5/event_handlers/kafka/) doc.
+
+_**Example kapacitor.conf**_
+
+```toml
+[[kafka]]
+  enabled = true
+  id = "localhost"
+  timeout = 10s
+```
+
+_**Example TICKscript**_
+```js
+stream
+  |alert()
+    .kafka()
+      .cluster('kafka-cluster')
+      .topic('kafka-topic-name')
+```
+
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
+
+
+### History
+
+Number of previous states to remember when computing flapping levels and
+checking for state changes.
+Minimum value is 2 in order to keep track of current and previous states.
+
+**Default:** 21
+
+```js
+// Pattern
+alert.history(value int64)
+
+// Example
+alert.history(21)
+```
+
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
+
+
 ### HipChat
 
 Send the alert to HipChat.
@@ -417,26 +465,6 @@ stream
   |alert()
     .hipChat()
       .room('Kapacitor')
-```
-
-<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
-
-
-
-### History
-
-Number of previous states to remember when computing flapping levels and
-checking for state changes.
-Minimum value is 2 in order to keep track of current and previous states.
-
-**Default:** 21
-
-```js
-// Pattern
-alert.history(value int64)
-
-// Example
-alert.history(21)
 ```
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>

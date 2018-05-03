@@ -21,6 +21,7 @@ syntax for officially supported Kapacitor event handlers.
 
 [Aggregate](aggregate/)  
 [Alerta](alerta/)  
+[Email](email/)  
 [Exec](exec/)  
 [Hipchat](hipchat/)  
 [Kafka](kafka/)  
@@ -33,7 +34,6 @@ syntax for officially supported Kapacitor event handlers.
 [Pushover](pushover/)   
 [Sensu](sensu/)  
 [Slack](slack/)  
-[SMTP](smtp/)  
 [Snmptrap](snmptrap/)  
 [Talk](talk/)  
 [TCP](tcp/)  
