@@ -18,7 +18,7 @@ The following publish event handler options can be set in a
 | ----   | ----           | -----------                            |
 | topics | list of string | List of topic names to publish events. |
 
-### Example Handler File
+### Example: handler file
 ```yaml
 id: handler-id
 topic: topic-name

@@ -92,7 +92,7 @@ The following Slack event handler options can be set in a
 | username   | string | Username of the Slack bot. If empty uses the username from the configuration.                                                 |
 | icon-emoji | string | IconEmoji is an emoji name surrounded in ':' characters. The emoji image will replace the normal user icon for the slack bot. |
 
-### Example Handler File
+### Example: handler file
 ```yaml
 id: handler-id
 topic: topic-name
@@ -104,7 +104,7 @@ options:
   icon-emoji: ':smile:'
 ```
 
-### Example TICKscript
+### Example: TICKscript
 ```js
 |alert()
   // ...

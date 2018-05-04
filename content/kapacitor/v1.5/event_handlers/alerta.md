@@ -68,7 +68,7 @@ The following Alerta event handler options can be set in a
 > **Note:** The `resource` and `event` properties are required.
 > Alerta cannot be configured globally because of these required properties.
 
-#### Example Handler File
+### Example: handler file
 ```yaml
 topic: topic-name
 id: handler-id
@@ -86,7 +86,7 @@ options:
   timeout: 24h
 ```
 
-#### Example TICKscript
+### Example: TICKscript
 ```js
 |alert()
   // ...

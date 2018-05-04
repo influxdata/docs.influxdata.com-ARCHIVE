@@ -17,7 +17,7 @@ The following TCP event handler options can be set in a [handler file](/kapacito
 | ----    | ----   | -----------              |
 | address | string | Address of TCP endpoint. |
 
-### Example Handler File
+### Example: handler file
 ```yaml
 id: handler-id
 topic: topic-name
@@ -26,7 +26,7 @@ options:
   address: 127.0.0.1:7777
 ```
 
-### Example TICKscript
+### Example: TICKscript
 ```js
 |alert()
   // ...

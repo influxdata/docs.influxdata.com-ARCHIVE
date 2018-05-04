@@ -64,7 +64,7 @@ The following HipChat event handler options can be set in a
 | room  | string | HipChat room in which to post messages. If empty uses the channel from the configuration. |
 | token | string | HipChat authentication token. If empty uses the token from the configuration.             |
 
-#### Example Handler File
+### Example: handler file
 ```yaml
 topic: topic-name
 id: handler-id
@@ -74,7 +74,7 @@ options:
   token: 'mysupersecretauthtoken'
 ```
 
-#### Example TICKscript
+### Example: TICKscript
 ```js
 |alert()
   // ...

@@ -84,7 +84,7 @@ The following Kafka event handler options can be set in a
 | topic    | string | Kafka topic.                |
 | template | string | Message template.           |
 
-#### Example Handler File
+### Example: handler file
 ```yaml
 id: kafka-event-handler
 topic: kapacitor-topic-name
@@ -95,7 +95,7 @@ options:
   template: 'kafka-template-name'
 ```
 
-#### Example TICKscript
+### Example: TICKscript
 ```js
 |alert()
   // ...

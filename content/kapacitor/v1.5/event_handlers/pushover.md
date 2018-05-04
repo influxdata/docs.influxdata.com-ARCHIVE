@@ -51,7 +51,7 @@ The following Pushover event handler options can be set in a
 | sound     | string | The name of one of the sounds supported by the device clients to override the user's default sound choice.              |
 
 
-### Example Hanlder File
+### Example: handler file
 ```yaml
 id: handler-id
 topic: topic-name
@@ -64,7 +64,7 @@ options:
   sound: siren
 ```
 
-### Example TICKscript
+### Example: TICKscript
 ```js
 |alert()
   // ...

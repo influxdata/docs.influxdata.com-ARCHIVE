@@ -61,7 +61,7 @@ The following VictorOpas event handler options can be set in a
 | ----        | ----   | -----------                         |
 | routing-key | string | The routing key of the alert event. |
 
-### Example Handler File
+### Example: handler file
 ```yaml
 id: handler-id
 topic: topic-name
@@ -70,7 +70,7 @@ options:
   routing-key: ops_team
 ```
 
-### Example TICKscript
+### Example: TICKscript
 ```js
 |alert()
   // ...

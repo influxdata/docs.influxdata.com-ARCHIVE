@@ -76,19 +76,18 @@ The handler file contains the following:
 
 <span style="color: #ff9e46; font-style: italic; font-size: .8rem;">* Required</span>
 
-- ID<span style="color: #ff9e46; font-style: italic;">\*</span> - The unique ID
+- **ID**<span style="color: #ff9e46; font-style: italic;">\*</span>: The unique ID
   of the handler.
-- Topic<span style="color: #ff9e46; font-style: italic;">\*</span> - The topic
+- **Topic**<span style="color: #ff9e46; font-style: italic;">\*</span>: The topic
   to which the handler subscribes.
-- Match - A lambda expression to filter matching alerts. By default all alerts
+- **Match**: A lambda expression to filter matching alerts. By default all alerts
   match. Learn more about [match expressions](/kapacitor/v1.5/working/alerts/#match-expressions).
-- Kind<span style="color: #ff9e46; font-style: italic;">\*</span> - The kind of
+- **Kind**<span style="color: #ff9e46; font-style: italic;">\*</span>: The kind of
   handler.
-- Options - Configurable options determined by the handler kind. If none are
+- **Options**: Configurable options determined by the handler kind. If none are
   provided, default values defined for the handler in the `kapacitor.conf` will
   be used.
 
-#### Example handler file
 ```yaml
 id: handler-id
 topic: topic-name

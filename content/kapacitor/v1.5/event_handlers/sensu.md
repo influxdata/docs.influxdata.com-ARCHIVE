@@ -48,7 +48,7 @@ The following Sensu event handler options can be set in a
 | source   | string          | Sensu source for which to post messages.                                   |
 | handlers | list of strings | Sensu handler list. If empty uses the handler list from the configuration. |
 
-### Example Handler File
+### Example: handler file
 ```yaml
 id: handler-id
 topic: topic-name
@@ -60,7 +60,7 @@ options:
     - handler2-name
 ```
 
-### Example TICKscript
+### Example: TICKscript
 ```js
 |alert()
   // ...

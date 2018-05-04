@@ -21,7 +21,7 @@ The following log event handler options can be set in a
 | path | string | Absolute path to the log file. |
 | mode | int    | File mode and permissions to use when creating the file. Default is `0600`. _**The leading 0 is required to interpret the value as an octal integer.**_ |
 
-#### Example Handler File
+### Example: handler file
 ```yaml
 id: handler-id
 topic: topic-name
@@ -31,7 +31,7 @@ options:
   mode: 0644
 ```
 
-#### Example TICKscript
+### Example: TICKscript
 ```js
 |alert()
   // ...

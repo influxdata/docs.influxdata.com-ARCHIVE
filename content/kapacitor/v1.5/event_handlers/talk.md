@@ -44,7 +44,7 @@ The following Talk event handler options can be set in a
 | Title | string | Message title. |
 | Text  | string | Message text.  |
 
-### Example Handler File
+### Example: handler file
 ```yaml
 id: handler-id
 topic: topic-name
@@ -54,7 +54,7 @@ options:
   text: 'This is the text included in the message.'
 ```
 
-### Example TICKscript
+### Example: TICKscript
 ```js
 |alert()
   // ...

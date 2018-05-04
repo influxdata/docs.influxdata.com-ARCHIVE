@@ -495,7 +495,7 @@ alert.id(value string)
 alert.id('{{ .Name }}:{{ .Group }}')
 ```
 
-_**Example 1:**_
+_**Example: ID template using name and group**_
 ```js
 stream
   |from()
@@ -507,7 +507,7 @@ stream
 
 Resulting ID: `kapacitor/cpu/cpu=cpu0`
 
-_**Example 2:**_
+_**Example: ID template using a tag**_
 ```js
 stream
   |from()
@@ -519,7 +519,7 @@ stream
 
 Resulting ID: `kapacitor/authentication`
 
-_**Example 3:**_
+_**Example:  ID template using multiple tags**_
 ```js
 stream
   |from()

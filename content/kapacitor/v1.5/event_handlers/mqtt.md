@@ -84,7 +84,7 @@ The following MQTT event handler options can be set in a
 | qos         | int64  | The [QoS](http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html#_Toc398718099) that will be used to deliver the alerts. Valid values include: <br><br><code>0</code> : At most once delivery<br><code>1</code> : At least once delivery<br><code>2</code> : Exactly once delivery |
 |	retained    | bool   | Indicates whether this alert should be delivered to clients that were not connected to the broker at the time of the alert.  |
 
-#### Example Handler File
+### Example: handler file
 ```yaml
 id: handler-id
 topic: topic-name
@@ -96,7 +96,7 @@ options:
   retained: true
 ```
 
-#### Example TICKscript
+### Example: TICKscript
 ```js
 |alert()
   // ...

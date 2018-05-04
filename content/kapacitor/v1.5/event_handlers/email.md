@@ -76,7 +76,7 @@ The following Email event handler options can be set in a
 | ---- | ----            | -----------              |
 | to   | list of strings | List of email addresses. |
 
-### Example Handler File
+### Example: handler file
 ```yaml
 id: handler-id
 topic: topic-name
@@ -87,7 +87,7 @@ options:
     - oncall2@example.com
 ```
 
-### Example TICKscript
+### Example: TICKscript
 ```js
 |alert()
   // ...

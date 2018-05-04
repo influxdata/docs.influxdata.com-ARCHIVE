@@ -21,7 +21,7 @@ The following exec event handler options can be set in a
 | prog | string         | Path to program to execute.       |
 | args | list of string | List of arguments to the program. |
 
-#### Example Handler File
+### Example: handler file
 ```yaml
 id: handler-id
 topic: topic-name
@@ -31,7 +31,7 @@ options:
   args: 'executable arguments'
 ```
 
-#### Example TICKscript
+### Example: TICKscript
 ```js
 |alert()
   // ...

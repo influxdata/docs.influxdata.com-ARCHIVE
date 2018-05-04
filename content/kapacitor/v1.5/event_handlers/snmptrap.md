@@ -57,7 +57,7 @@ The SNMP trap event handler supports the following data types:
 | s            |	String     |
 | t            |	Time ticks |
 
-### Example Handler File
+### Example: handler file
 ```yaml
 id: handler-id
 topic: topic-name
@@ -79,7 +79,7 @@ options:
       value: '{{ .Message }}'
 ```
 
-### Example TICKscript
+### Example: TICKscript
 ```js
 |alert()
   // ...

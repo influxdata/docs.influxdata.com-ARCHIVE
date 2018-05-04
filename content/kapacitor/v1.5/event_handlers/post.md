@@ -84,7 +84,7 @@ The following post event handler options can be set in a
 | capture-response | bool                    | If the HTTP status code is not an `2xx` code, read and log the the HTTP response |
 | timeout          | duration                | Timeout for the HTTP POST.                                                       |
 
-### Example Handler File
+### Example: handler file
 ```yaml
 id: handler-id
 topic: topic-name
@@ -99,7 +99,7 @@ options:
   timeout: 10s
 ```
 
-### Example TICKscript
+### Example: TICKscript
 ```js
 |alert()
   // ...

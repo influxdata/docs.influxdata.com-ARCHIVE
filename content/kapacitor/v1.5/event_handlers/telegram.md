@@ -78,7 +78,7 @@ The following Telegram event handler options can be set in a
 | disable-web-page-preview | bool   | Web Page preview. If empty uses the disable-web-page-preview from the configuration.          |
 | disable-notification     | bool   | Disables Notification. If empty uses the disable-notification from the configuration.         |
 
-#### Example Handler File
+### Example: handler file
 ```yaml
 topic: topic-name
 id: handler-id
@@ -90,7 +90,7 @@ options:
   disable-notification: false
 ```
 
-#### Example TICKscript
+### Example: TICKscript
 ```js
 |alert()
   // ...  

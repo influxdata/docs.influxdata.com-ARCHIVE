@@ -22,7 +22,7 @@ The following aggregate event handler options can be set in a
 | topic    | string          | A topic into which to publish the aggregate events.                                                           |
 | message  | string          | A template string where `{{.Interval}}` and `{{.Count}}` are available for constructing a meaningful message. |
 
-#### Example Handler File
+### Example: handler file
 ```yaml
 id: handler-id
 topic: topic-name
