@@ -22,9 +22,9 @@ Below is an example config:
   enabled = true
   id = "localhost"
   brokers = []
-  timeout = 10s
+  timeout = "10s"
   batch-size = 100
-  batch-timeout = 1s
+  batch-timeout = "1s"
   use-ssl = false
   ssl-ca = ""
   ssl-cert = ""
