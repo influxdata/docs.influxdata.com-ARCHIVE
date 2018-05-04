@@ -1,5 +1,5 @@
 ---
-title: Aggregate Event Handler
+title: Aggregate event handler
 description: The aggregate event handler allows you to aggregate alerts messages over a specified interval. This doc includes aggregate options and usage examples.
 menu:
   kapacitor_1_5:

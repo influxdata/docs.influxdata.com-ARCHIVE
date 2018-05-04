@@ -1,5 +1,5 @@
 ---
-title: Sensu Event Handler
+title: Sensu event handler
 description: The Sensu event handler allows you to send Kapacitor alerts to Sensu. This doc includes configuration options and usage examples.
 menu:
   kapacitor_1_5:

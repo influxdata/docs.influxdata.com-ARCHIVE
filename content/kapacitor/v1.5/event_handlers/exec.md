@@ -1,5 +1,5 @@
 ---
-title: Exec Event Handler
+title: Exec event handler
 description: The "exec" event handler allows you to execute external programs when Kapacitor alert messages are triggered. This doc includes configuration options and usage examples.
 menu:
   kapacitor_1_5:

@@ -1,5 +1,5 @@
 ---
-title: Post Event Handler
+title: Post event handler
 description: The "post" event handler allows you to POST Kapacitor alert data to an HTTP endpoint. This doc includes configuration options and usage examples.
 menu:
   kapacitor_1_5:

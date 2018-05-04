@@ -1,5 +1,5 @@
 ---
-title: Kafka Event Handler
+title: Kafka event handler
 description: The Kafka event handler allows you to send Kapacitor alerts to an Apache Kafka cluster. This doc includes configuration options and usage examples.
 menu:
   kapacitor_1_5:

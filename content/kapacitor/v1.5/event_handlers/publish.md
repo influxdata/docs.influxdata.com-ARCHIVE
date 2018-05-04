@@ -1,5 +1,5 @@
 ---
-title: Publish Event Handler
+title: Publish event handler
 description: The "publish" event handler allows you to publish Kapacitor alerts messages to mulitple Kapacitor topics. This doc includes options and usage examples.
 menu:
   kapacitor_1_5:

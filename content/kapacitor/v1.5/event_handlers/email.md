@@ -1,5 +1,5 @@
 ---
-title: Email Event Handler
+title: Email event handler
 description: The "email" event handler allows you to send Kapacitor alerts via email. This doc includes configuration options and usage examples.
 menu:
   kapacitor_1_5:
