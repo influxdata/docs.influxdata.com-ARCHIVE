@@ -16,7 +16,7 @@ menu:
 |:---------|:---------|
 | **[changeDetect](#descr)&nbsp;(&nbsp;`field`&nbsp;`string`)** | Create a new node that only emits new points if different from the previous point  |
 
-### Property Methods
+### Property methods
 
 | Setters | Description |
 |:---|:---|
@@ -24,10 +24,14 @@ menu:
 
 
 
-### Chaining Methods
+### Chaining methods
 [Alert](/kapacitor/v1.4/nodes/change_detect_node/#alert), [Barrier](/kapacitor/v1.4/nodes/change_detect_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/change_detect_node/#bottom), [ChangeDetect](/kapacitor/v1.4/nodes/change_detect_node/#changedetect), [Combine](/kapacitor/v1.4/nodes/change_detect_node/#combine), [Count](/kapacitor/v1.4/nodes/change_detect_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/change_detect_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/change_detect_node/#deadman), [Default](/kapacitor/v1.4/nodes/change_detect_node/#default), [Delete](/kapacitor/v1.4/nodes/change_detect_node/#delete), [Derivative](/kapacitor/v1.4/nodes/change_detect_node/#derivative), [Difference](/kapacitor/v1.4/nodes/change_detect_node/#difference), [Distinct](/kapacitor/v1.4/nodes/change_detect_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/change_detect_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/change_detect_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/change_detect_node/#eval), [First](/kapacitor/v1.4/nodes/change_detect_node/#first), [Flatten](/kapacitor/v1.4/nodes/change_detect_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/change_detect_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/change_detect_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/change_detect_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/change_detect_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/change_detect_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/change_detect_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/change_detect_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/change_detect_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/change_detect_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/change_detect_node/#last), [Log](/kapacitor/v1.4/nodes/change_detect_node/#log), [Max](/kapacitor/v1.4/nodes/change_detect_node/#max), [Mean](/kapacitor/v1.4/nodes/change_detect_node/#mean), [Median](/kapacitor/v1.4/nodes/change_detect_node/#median), [Min](/kapacitor/v1.4/nodes/change_detect_node/#min), [Mode](/kapacitor/v1.4/nodes/change_detect_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/change_detect_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/change_detect_node/#percentile), [Sample](/kapacitor/v1.4/nodes/change_detect_node/#sample), [Shift](/kapacitor/v1.4/nodes/change_detect_node/#shift), [Sideload](/kapacitor/v1.4/nodes/change_detect_node/#sideload), [Spread](/kapacitor/v1.4/nodes/change_detect_node/#spread), [StateCount](/kapacitor/v1.4/nodes/change_detect_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/change_detect_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/change_detect_node/#stats), [Stddev](/kapacitor/v1.4/nodes/change_detect_node/#stddev), [Sum](/kapacitor/v1.4/nodes/change_detect_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/change_detect_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/change_detect_node/#top), [Union](/kapacitor/v1.4/nodes/change_detect_node/#union), [Where](/kapacitor/v1.4/nodes/change_detect_node/#where), [Window](/kapacitor/v1.4/nodes/change_detect_node/#window)
 <a id='descr'/><hr/><br/>
+
+
+
 ### Description
+The ChangeDetectNode creates a new node that only emits new points if different from the previous point.
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
@@ -102,7 +106,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### ChangeDetect
 
-Create a new node that only emits new points if different from the previous point
+Create a new node that only emits new points if different from the previous point.
 
 
 ```javascript
@@ -174,8 +178,7 @@ Example:
     data...
 ```
 
-The above is equivalent to this
-Example:
+The above is equivalent to this example:
 
 
 ```javascript
@@ -395,7 +398,7 @@ Returns: [GroupByNode](/kapacitor/v1.4/nodes/group_by_node/)
 
 ### HoltWinters
 
-Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
+Compute the Holt-Winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
 
 
 ```javascript
@@ -408,7 +411,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### HoltWintersWithFit
 
-Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
+Compute the Holt-Winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
 This method also outputs all the points used to fit the data in addition to the forecasted data.
 
 
@@ -454,7 +457,7 @@ Returns: [HTTPPostNode](/kapacitor/v1.4/nodes/http_post_node/)
 
 ### InfluxDBOut
 
-Create an influxdb output node that will store the incoming data into InfluxDB.
+Create an InfluxDB output node that will store the incoming data into InfluxDB.
 
 
 ```javascript
@@ -480,7 +483,7 @@ Returns: [JoinNode](/kapacitor/v1.4/nodes/join_node/)
 
 ### K8sAutoscale
 
-Create a node that can trigger autoscale events for a kubernetes cluster.
+Create a node that can trigger autoscale events for a Kubernetes cluster.
 
 
 ```javascript
@@ -493,7 +496,7 @@ Returns: [K8sAutoscaleNode](/kapacitor/v1.4/nodes/k8s_autoscale_node/)
 
 ### KapacitorLoopback
 
-Create an kapacitor loopback node that will send data back into Kapacitor as a stream.
+Create an Kapacitor loopback node that will send data back into Kapacitor as a stream.
 
 
 ```javascript
@@ -558,8 +561,10 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### Median
 
-Compute the median of the data. Note, this method is not a selector,
-if you want the median point use `.percentile(field, 50.0)`.
+Compute the median of the data.
+
+> **Note:** This method is not a selector.
+If you want the median point, use `.percentile(field, 50.0)`.
 
 
 ```javascript
@@ -653,7 +658,7 @@ Returns: [ShiftNode](/kapacitor/v1.4/nodes/shift_node/)
 
 ### Sideload
 
-Create a node that can load data from external sources
+Create a node that can load data from external sources.
 
 
 ```javascript
@@ -746,7 +751,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 ### SwarmAutoscale
 
-Create a node that can trigger autoscale events for a docker swarm cluster.
+Create a node that can trigger autoscale events for a Docker swarm cluster.
 
 
 ```javascript
