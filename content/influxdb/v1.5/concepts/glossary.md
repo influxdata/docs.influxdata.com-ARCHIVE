@@ -1,5 +1,6 @@
 ---
 title: InfluxDB glossary of terms
+description: Learn important terms to better understand the InfluxDB time series database and its administration, development, and use.
 menu:
   influxdb_1_5:
     name: Glossary of terms
