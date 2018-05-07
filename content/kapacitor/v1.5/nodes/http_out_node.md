@@ -23,13 +23,13 @@ menu:
 
 
 ### Chaining Methods
-[Alert](/kapacitor/v1.4/nodes/http_out_node/#alert), [Barrier](/kapacitor/v1.4/nodes/http_out_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/http_out_node/#bottom), [Combine](/kapacitor/v1.4/nodes/http_out_node/#combine), [Count](/kapacitor/v1.4/nodes/http_out_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/http_out_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/http_out_node/#deadman), [Default](/kapacitor/v1.4/nodes/http_out_node/#default), [Delete](/kapacitor/v1.4/nodes/http_out_node/#delete), [Derivative](/kapacitor/v1.4/nodes/http_out_node/#derivative), [Difference](/kapacitor/v1.4/nodes/http_out_node/#difference), [Distinct](/kapacitor/v1.4/nodes/http_out_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/http_out_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/http_out_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/http_out_node/#eval), [First](/kapacitor/v1.4/nodes/http_out_node/#first), [Flatten](/kapacitor/v1.4/nodes/http_out_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/http_out_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/http_out_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/http_out_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/http_out_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/http_out_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/http_out_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/http_out_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/http_out_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/http_out_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/http_out_node/#last), [Log](/kapacitor/v1.4/nodes/http_out_node/#log), [Max](/kapacitor/v1.4/nodes/http_out_node/#max), [Mean](/kapacitor/v1.4/nodes/http_out_node/#mean), [Median](/kapacitor/v1.4/nodes/http_out_node/#median), [Min](/kapacitor/v1.4/nodes/http_out_node/#min), [Mode](/kapacitor/v1.4/nodes/http_out_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/http_out_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/http_out_node/#percentile), [Sample](/kapacitor/v1.4/nodes/http_out_node/#sample), [Shift](/kapacitor/v1.4/nodes/http_out_node/#shift), [Sideload](/kapacitor/v1.4/nodes/http_out_node/#sideload), [Spread](/kapacitor/v1.4/nodes/http_out_node/#spread), [StateCount](/kapacitor/v1.4/nodes/http_out_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/http_out_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/http_out_node/#stats), [Stddev](/kapacitor/v1.4/nodes/http_out_node/#stddev), [Sum](/kapacitor/v1.4/nodes/http_out_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/http_out_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/http_out_node/#top), [Union](/kapacitor/v1.4/nodes/http_out_node/#union), [Where](/kapacitor/v1.4/nodes/http_out_node/#where), [Window](/kapacitor/v1.4/nodes/http_out_node/#window)
+[Alert](/kapacitor/v1.5/nodes/http_out_node/#alert), [Barrier](/kapacitor/v1.5/nodes/http_out_node/#barrier), [Bottom](/kapacitor/v1.5/nodes/http_out_node/#bottom), [Combine](/kapacitor/v1.5/nodes/http_out_node/#combine), [Count](/kapacitor/v1.5/nodes/http_out_node/#count), [CumulativeSum](/kapacitor/v1.5/nodes/http_out_node/#cumulativesum), [Deadman](/kapacitor/v1.5/nodes/http_out_node/#deadman), [Default](/kapacitor/v1.5/nodes/http_out_node/#default), [Delete](/kapacitor/v1.5/nodes/http_out_node/#delete), [Derivative](/kapacitor/v1.5/nodes/http_out_node/#derivative), [Difference](/kapacitor/v1.5/nodes/http_out_node/#difference), [Distinct](/kapacitor/v1.5/nodes/http_out_node/#distinct), [Ec2Autoscale](/kapacitor/v1.5/nodes/http_out_node/#ec2autoscale), [Elapsed](/kapacitor/v1.5/nodes/http_out_node/#elapsed), [Eval](/kapacitor/v1.5/nodes/http_out_node/#eval), [First](/kapacitor/v1.5/nodes/http_out_node/#first), [Flatten](/kapacitor/v1.5/nodes/http_out_node/#flatten), [GroupBy](/kapacitor/v1.5/nodes/http_out_node/#groupby), [HoltWinters](/kapacitor/v1.5/nodes/http_out_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.5/nodes/http_out_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.5/nodes/http_out_node/#httpout), [HttpPost](/kapacitor/v1.5/nodes/http_out_node/#httppost), [InfluxDBOut](/kapacitor/v1.5/nodes/http_out_node/#influxdbout), [Join](/kapacitor/v1.5/nodes/http_out_node/#join), [K8sAutoscale](/kapacitor/v1.5/nodes/http_out_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.5/nodes/http_out_node/#kapacitorloopback), [Last](/kapacitor/v1.5/nodes/http_out_node/#last), [Log](/kapacitor/v1.5/nodes/http_out_node/#log), [Max](/kapacitor/v1.5/nodes/http_out_node/#max), [Mean](/kapacitor/v1.5/nodes/http_out_node/#mean), [Median](/kapacitor/v1.5/nodes/http_out_node/#median), [Min](/kapacitor/v1.5/nodes/http_out_node/#min), [Mode](/kapacitor/v1.5/nodes/http_out_node/#mode), [MovingAverage](/kapacitor/v1.5/nodes/http_out_node/#movingaverage), [Percentile](/kapacitor/v1.5/nodes/http_out_node/#percentile), [Sample](/kapacitor/v1.5/nodes/http_out_node/#sample), [Shift](/kapacitor/v1.5/nodes/http_out_node/#shift), [Sideload](/kapacitor/v1.5/nodes/http_out_node/#sideload), [Spread](/kapacitor/v1.5/nodes/http_out_node/#spread), [StateCount](/kapacitor/v1.5/nodes/http_out_node/#statecount), [StateDuration](/kapacitor/v1.5/nodes/http_out_node/#stateduration), [Stats](/kapacitor/v1.5/nodes/http_out_node/#stats), [Stddev](/kapacitor/v1.5/nodes/http_out_node/#stddev), [Sum](/kapacitor/v1.5/nodes/http_out_node/#sum), [SwarmAutoscale](/kapacitor/v1.5/nodes/http_out_node/#swarmautoscale), [Top](/kapacitor/v1.5/nodes/http_out_node/#top), [Union](/kapacitor/v1.5/nodes/http_out_node/#union), [Where](/kapacitor/v1.5/nodes/http_out_node/#where), [Window](/kapacitor/v1.5/nodes/http_out_node/#window)
 
 ---
 
 ### Description
 
-An [HTTPOutNode](/kapacitor/v1.4/nodes/http_out_node/) caches the most recent data for each group it has received.
+An [HTTPOutNode](/kapacitor/v1.5/nodes/http_out_node/) caches the most recent data for each group it has received.
 
 The cached data is available at the given endpoint.
 The endpoint is the relative path from the API endpoint of the running task.
@@ -91,7 +91,7 @@ Create an alert node, which can trigger alerts.
 httpOut|alert()
 ```
 
-Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
+Returns: [AlertNode](/kapacitor/v1.5/nodes/alert_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -106,7 +106,7 @@ One BarrierMessage will be emitted every period duration
 httpOut|barrier()
 ```
 
-Returns: [BarrierNode](/kapacitor/v1.4/nodes/barrier_node/)
+Returns: [BarrierNode](/kapacitor/v1.5/nodes/barrier_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -119,7 +119,7 @@ Select the bottom `num` points for `field` and sort by any extra tags or fields.
 httpOut|bottom(num int64, field string, fieldsAndTags ...string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -132,7 +132,7 @@ Combine this node with itself. The data are combined on timestamp.
 httpOut|combine(expressions ...ast.LambdaNode)
 ```
 
-Returns: [CombineNode](/kapacitor/v1.4/nodes/combine_node/)
+Returns: [CombineNode](/kapacitor/v1.5/nodes/combine_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -145,7 +145,7 @@ Count the number of points.
 httpOut|count(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -159,7 +159,7 @@ A point is emitted for every point collected.
 httpOut|cumulativeSum(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -208,7 +208,7 @@ Example:
 
 The `id` and `message` alert properties can be configured globally via the 'deadman' configuration section.
 
-Since the [AlertNode](/kapacitor/v1.4/nodes/alert_node/) is the last piece it can be further modified as usual.
+Since the [AlertNode](/kapacitor/v1.5/nodes/alert_node/) is the last piece it can be further modified as usual.
 Example:
 
 
@@ -245,7 +245,7 @@ Example:
 httpOut|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
 ```
 
-Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
+Returns: [AlertNode](/kapacitor/v1.5/nodes/alert_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -258,7 +258,7 @@ Create a node that can set defaults for missing tags or fields.
 httpOut|default()
 ```
 
-Returns: [DefaultNode](/kapacitor/v1.4/nodes/default_node/)
+Returns: [DefaultNode](/kapacitor/v1.5/nodes/default_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -271,7 +271,7 @@ Create a node that can delete tags or fields.
 httpOut|delete()
 ```
 
-Returns: [DeleteNode](/kapacitor/v1.4/nodes/delete_node/)
+Returns: [DeleteNode](/kapacitor/v1.5/nodes/delete_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -284,7 +284,7 @@ Create a new node that computes the derivative of adjacent points.
 httpOut|derivative(field string)
 ```
 
-Returns: [DerivativeNode](/kapacitor/v1.4/nodes/derivative_node/)
+Returns: [DerivativeNode](/kapacitor/v1.5/nodes/derivative_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -297,7 +297,7 @@ Compute the difference between points independent of elapsed time.
 httpOut|difference(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -310,7 +310,7 @@ Produce batch of only the distinct points.
 httpOut|distinct(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -323,7 +323,7 @@ Create a node that can trigger autoscale events for a ec2 autoscalegroup.
 httpOut|ec2Autoscale()
 ```
 
-Returns: [Ec2AutoscaleNode](/kapacitor/v1.4/nodes/ec2_autoscale_node/)
+Returns: [Ec2AutoscaleNode](/kapacitor/v1.5/nodes/ec2_autoscale_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -336,7 +336,7 @@ Compute the elapsed time between points
 httpOut|elapsed(field string, unit time.Duration)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -351,7 +351,7 @@ The results are available to later expressions.
 httpOut|eval(expressions ...ast.LambdaNode)
 ```
 
-Returns: [EvalNode](/kapacitor/v1.4/nodes/eval_node/)
+Returns: [EvalNode](/kapacitor/v1.5/nodes/eval_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -364,7 +364,7 @@ Select the first point.
 httpOut|first(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -377,7 +377,7 @@ Flatten points with similar times into a single point.
 httpOut|flatten()
 ```
 
-Returns: [FlattenNode](/kapacitor/v1.4/nodes/flatten_node/)
+Returns: [FlattenNode](/kapacitor/v1.5/nodes/flatten_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -399,7 +399,7 @@ Example:
 httpOut|groupBy(tag ...interface{})
 ```
 
-Returns: [GroupByNode](/kapacitor/v1.4/nodes/group_by_node/)
+Returns: [GroupByNode](/kapacitor/v1.5/nodes/group_by_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -412,7 +412,7 @@ Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_lang
 httpOut|holtWinters(field string, h int64, m int64, interval time.Duration)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -426,7 +426,7 @@ This method also outputs all the points used to fit the data in addition to the 
 httpOut|holtWintersWithFit(field string, h int64, m int64, interval time.Duration)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -443,7 +443,7 @@ For example, if the task endpoint is at `/kapacitor/v1/tasks/<task_id>` and endp
 httpOut|httpOut(endpoint string)
 ```
 
-Returns: [HTTPOutNode](/kapacitor/v1.4/nodes/http_out_node/)
+Returns: [HTTPOutNode](/kapacitor/v1.5/nodes/http_out_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -458,7 +458,7 @@ endpoint property method.
 httpOut|httpPost(url ...string)
 ```
 
-Returns: [HTTPPostNode](/kapacitor/v1.4/nodes/http_post_node/)
+Returns: [HTTPPostNode](/kapacitor/v1.5/nodes/http_post_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -471,7 +471,7 @@ Create an influxdb output node that will store the incoming data into InfluxDB.
 httpOut|influxDBOut()
 ```
 
-Returns: [InfluxDBOutNode](/kapacitor/v1.4/nodes/influx_d_b_out_node/)
+Returns: [InfluxDBOutNode](/kapacitor/v1.5/nodes/influx_d_b_out_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -484,7 +484,7 @@ Join this node with other nodes. The data are joined on timestamp.
 httpOut|join(others ...Node)
 ```
 
-Returns: [JoinNode](/kapacitor/v1.4/nodes/join_node/)
+Returns: [JoinNode](/kapacitor/v1.5/nodes/join_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -497,7 +497,7 @@ Create a node that can trigger autoscale events for a kubernetes cluster.
 httpOut|k8sAutoscale()
 ```
 
-Returns: [K8sAutoscaleNode](/kapacitor/v1.4/nodes/k8s_autoscale_node/)
+Returns: [K8sAutoscaleNode](/kapacitor/v1.5/nodes/k8s_autoscale_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -510,7 +510,7 @@ Create an kapacitor loopback node that will send data back into Kapacitor as a s
 httpOut|kapacitorLoopback()
 ```
 
-Returns: [KapacitorLoopbackNode](/kapacitor/v1.4/nodes/kapacitor_loopback_node/)
+Returns: [KapacitorLoopbackNode](/kapacitor/v1.5/nodes/kapacitor_loopback_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -523,7 +523,7 @@ Select the last point.
 httpOut|last(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -536,7 +536,7 @@ Create a node that logs all data it receives.
 httpOut|log()
 ```
 
-Returns: [LogNode](/kapacitor/v1.4/nodes/log_node/)
+Returns: [LogNode](/kapacitor/v1.5/nodes/log_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -549,7 +549,7 @@ Select the maximum point.
 httpOut|max(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -562,7 +562,7 @@ Compute the mean of the data.
 httpOut|mean(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -576,7 +576,7 @@ if you want the median point use `.percentile(field, 50.0)`.
 httpOut|median(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -589,7 +589,7 @@ Select the minimum point.
 httpOut|min(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -602,7 +602,7 @@ Compute the mode of the data.
 httpOut|mode(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -616,7 +616,7 @@ No points are emitted until the window is full.
 httpOut|movingAverage(field string, window int64)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -629,7 +629,7 @@ Select a point at the given percentile. This is a selector function, no interpol
 httpOut|percentile(field string, percentile float64)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -644,7 +644,7 @@ One point will be emitted every count or duration specified.
 httpOut|sample(rate interface{})
 ```
 
-Returns: [SampleNode](/kapacitor/v1.4/nodes/sample_node/)
+Returns: [SampleNode](/kapacitor/v1.5/nodes/sample_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -657,7 +657,7 @@ Create a new node that shifts the incoming points or batches in time.
 httpOut|shift(shift time.Duration)
 ```
 
-Returns: [ShiftNode](/kapacitor/v1.4/nodes/shift_node/)
+Returns: [ShiftNode](/kapacitor/v1.5/nodes/shift_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -670,7 +670,7 @@ Create a node that can load data from external sources
 httpOut|sideload()
 ```
 
-Returns: [SideloadNode](/kapacitor/v1.4/nodes/sideload_node/)
+Returns: [SideloadNode](/kapacitor/v1.5/nodes/sideload_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -683,7 +683,7 @@ Compute the difference between `min` and `max` points.
 httpOut|spread(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -696,7 +696,7 @@ Create a node that tracks number of consecutive points in a given state.
 httpOut|stateCount(expression ast.LambdaNode)
 ```
 
-Returns: [StateCountNode](/kapacitor/v1.4/nodes/state_count_node/)
+Returns: [StateCountNode](/kapacitor/v1.5/nodes/state_count_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -709,7 +709,7 @@ Create a node that tracks duration in a given state.
 httpOut|stateDuration(expression ast.LambdaNode)
 ```
 
-Returns: [StateDurationNode](/kapacitor/v1.4/nodes/state_duration_node/)
+Returns: [StateDurationNode](/kapacitor/v1.5/nodes/state_duration_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -724,7 +724,7 @@ This means the interval time is independent of the times of the data points the 
 httpOut|stats(interval time.Duration)
 ```
 
-Returns: [StatsNode](/kapacitor/v1.4/nodes/stats_node/)
+Returns: [StatsNode](/kapacitor/v1.5/nodes/stats_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -737,7 +737,7 @@ Compute the standard deviation.
 httpOut|stddev(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -750,7 +750,7 @@ Compute the sum of all values.
 httpOut|sum(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -763,7 +763,7 @@ Create a node that can trigger autoscale events for a docker swarm cluster.
 httpOut|swarmAutoscale()
 ```
 
-Returns: [SwarmAutoscaleNode](/kapacitor/v1.4/nodes/swarm_autoscale_node/)
+Returns: [SwarmAutoscaleNode](/kapacitor/v1.5/nodes/swarm_autoscale_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -776,7 +776,7 @@ Select the top `num` points for `field` and sort by any extra tags or fields.
 httpOut|top(num int64, field string, fieldsAndTags ...string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -789,7 +789,7 @@ Perform the union of this node and all other given nodes.
 httpOut|union(node ...Node)
 ```
 
-Returns: [UnionNode](/kapacitor/v1.4/nodes/union_node/)
+Returns: [UnionNode](/kapacitor/v1.5/nodes/union_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -802,7 +802,7 @@ Create a new node that filters the data stream by a given expression.
 httpOut|where(expression ast.LambdaNode)
 ```
 
-Returns: [WhereNode](/kapacitor/v1.4/nodes/where_node/)
+Returns: [WhereNode](/kapacitor/v1.5/nodes/where_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -817,6 +817,6 @@ NOTE: Window can only be applied to stream edges.
 httpOut|window()
 ```
 
-Returns: [WindowNode](/kapacitor/v1.4/nodes/window_node/)
+Returns: [WindowNode](/kapacitor/v1.5/nodes/window_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>

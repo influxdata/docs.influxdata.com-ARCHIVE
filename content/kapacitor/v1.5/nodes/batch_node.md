@@ -23,7 +23,7 @@ menu:
 
 
 ### Chaining Methods
-[Deadman](/kapacitor/v1.4/nodes/batch_node/#deadman), [Query](/kapacitor/v1.4/nodes/batch_node/#query), [Stats](/kapacitor/v1.4/nodes/batch_node/#stats)
+[Deadman](/kapacitor/v1.5/nodes/batch_node/#deadman), [Query](/kapacitor/v1.5/nodes/batch_node/#query), [Stats](/kapacitor/v1.5/nodes/batch_node/#stats)
 
 ---
 
@@ -31,9 +31,9 @@ menu:
 
 A node that handles creating several child QueryNodes.
 Each call to `query` creates a child batch node that
-can further be configured. See [QueryNode](/kapacitor/v1.4/nodes/query_node/)
+can further be configured. See [QueryNode](/kapacitor/v1.5/nodes/query_node/)
 The `batch` variable in batch tasks is an instance of
-a [BatchNode.](/kapacitor/v1.4/nodes/batch_node/)
+a [BatchNode.](/kapacitor/v1.5/nodes/batch_node/)
 
 Example:
 
@@ -126,7 +126,7 @@ Example:
 
 The `id` and `message` alert properties can be configured globally via the 'deadman' configuration section.
 
-Since the [AlertNode](/kapacitor/v1.4/nodes/alert_node/) is the last piece it can be further modified as usual.
+Since the [AlertNode](/kapacitor/v1.5/nodes/alert_node/) is the last piece it can be further modified as usual.
 Example:
 
 
@@ -163,7 +163,7 @@ Example:
 batch|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
 ```
 
-Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
+Returns: [AlertNode](/kapacitor/v1.5/nodes/alert_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -180,7 +180,7 @@ passed to the `groupBy` method.
 batch|query(q string)
 ```
 
-Returns: [QueryNode](/kapacitor/v1.4/nodes/query_node/)
+Returns: [QueryNode](/kapacitor/v1.5/nodes/query_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -195,6 +195,6 @@ This means the interval time is independent of the times of the data points the 
 batch|stats(interval time.Duration)
 ```
 
-Returns: [StatsNode](/kapacitor/v1.4/nodes/stats_node/)
+Returns: [StatsNode](/kapacitor/v1.5/nodes/stats_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>

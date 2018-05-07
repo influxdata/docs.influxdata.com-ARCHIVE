@@ -23,17 +23,17 @@ menu:
 
 
 ### Chaining Methods
-[Deadman](/kapacitor/v1.4/nodes/stream_node/#deadman), [From](/kapacitor/v1.4/nodes/stream_node/#from), [Stats](/kapacitor/v1.4/nodes/stream_node/#stats)
+[Deadman](/kapacitor/v1.5/nodes/stream_node/#deadman), [From](/kapacitor/v1.5/nodes/stream_node/#from), [Stats](/kapacitor/v1.5/nodes/stream_node/#stats)
 
 ---
 
 ### Description
 
-A [StreamNode](/kapacitor/v1.4/nodes/stream_node/) represents the source of data being
+A [StreamNode](/kapacitor/v1.5/nodes/stream_node/) represents the source of data being
 streamed to Kapacitor via any of its inputs.
 The `stream` variable in stream tasks is an instance of
-a [StreamNode.](/kapacitor/v1.4/nodes/stream_node/)
-[StreamNode.From](/kapacitor/v1.4/nodes/stream_node/#from) is the method/property of this node.
+a [StreamNode.](/kapacitor/v1.5/nodes/stream_node/)
+[StreamNode.From](/kapacitor/v1.5/nodes/stream_node/#from) is the method/property of this node.
 
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
@@ -107,7 +107,7 @@ Example:
 
 The `id` and `message` alert properties can be configured globally via the 'deadman' configuration section.
 
-Since the [AlertNode](/kapacitor/v1.4/nodes/alert_node/) is the last piece it can be further modified as usual.
+Since the [AlertNode](/kapacitor/v1.5/nodes/alert_node/) is the last piece it can be further modified as usual.
 Example:
 
 
@@ -144,13 +144,13 @@ Example:
 stream|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
 ```
 
-Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
+Returns: [AlertNode](/kapacitor/v1.5/nodes/alert_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### From
 
-Creates a new [FromNode](/kapacitor/v1.4/nodes/from_node/) that can be further
+Creates a new [FromNode](/kapacitor/v1.5/nodes/from_node/) that can be further
 filtered using the Database, RetentionPolicy, Measurement and Where properties.
 From can be called multiple times to create multiple
 independent forks of the data stream.
@@ -183,7 +183,7 @@ Example:
 stream|from()
 ```
 
-Returns: [FromNode](/kapacitor/v1.4/nodes/from_node/)
+Returns: [FromNode](/kapacitor/v1.5/nodes/from_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -198,6 +198,6 @@ This means the interval time is independent of the times of the data points the 
 stream|stats(interval time.Duration)
 ```
 
-Returns: [StatsNode](/kapacitor/v1.4/nodes/stats_node/)
+Returns: [StatsNode](/kapacitor/v1.5/nodes/stats_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>

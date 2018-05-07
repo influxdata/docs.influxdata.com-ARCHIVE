@@ -465,9 +465,9 @@ be enabled and configured in the `[smtp]` properties table.
 
 Optional features include supported alert handlers, Docker services, user defined functions, input services, and discovery services.
 
-##### Supported alert handlers
+##### Supported event handlers
 
-Alert handlers manage communications from Kapacitor to third party services or
+Event handlers manage communications from Kapacitor to third party services or
 across Internet standard messaging protocols.
 They are activated through chaining methods on the [Alert](/kapacitor/v1.5/nodes/alert_node/) node.
 
@@ -484,19 +484,21 @@ document.
 
 The following handlers are currently supported:
 
-* [SMTP](/kapacitor/v1.5/nodes/alert_node/#email): To send alerts by email.
-* [SNMP Trap](/kapacitor/v1.5/nodes/alert_node/#snmptrap): Posting to SNMP traps.
-* [OpsGenie](/kapacitor/v1.5/nodes/alert_node/#opsgenie): Sending alerts to the OpsGenie service.
-* [VictorOps](/kapacitor/v1.5/nodes/alert_node/#victorops): Sending alerts to the VictorOps service.
-* [PagerDuty](/kapacitor/v1.5/nodes/alert_node/#pagerduty): Sending alerts to the PagerDuty service.
-* [Pushover](/kapacitor/v1.5/nodes/alert_node/#pushover): Sending alerts to the Pushover service.
-* [Slack](/kapacitor/v1.5/nodes/alert_node/#slack): Sending alerts to Slack.
-* [Telegram](/kapacitor/v1.5/nodes/alert_node/#telegram): Sending alerts to Telegram.
-* [HipChat](/kapacitor/v1.5/nodes/alert_node/#hipchat): sending alerts to the HipChat service.
-* [Alerta](/kapacitor/v1.5/nodes/alert_node/#alerta): Sending alerts to Alerta.
-* [Sensu](/kapacitor/v1.5/nodes/alert_node/#sensu): Sending alerts to Sensu.
-* [Talk](/kapacitor/v1.5/nodes/alert_node/#talk): Sending alerts to the Talk service.
-* [MQTT](/kapacitor/v1.5/nodes/alert_node/#mqtt): Publishing alerts to an MQTT broker.
+* [Alerta](/kapacitor/v1.5/event_handlers/alerta/): Sending alerts to Alerta.
+* [Email](/kapacitor/v1.5/event_handlers/email/): To send alerts by email.
+* [HipChat](/kapacitor/v1.5/event_handlers/hipchat/): Sending alerts to the HipChat service.
+* [Kafka](/kapacitor/v1.5/event_handlers/kafka/): Sending alerts to an Apache Kafka cluster.
+* [MQTT](/kapacitor/v1.5/event_handlers/mqtt/): Publishing alerts to an MQTT broker.
+* [OpsGenie](/kapacitor/v1.5/event_handlers/opsgenie/v2/): Sending alerts to the OpsGenie service.
+* [PagerDuty](/kapacitor/v1.5/event_handlers/pagerduty/v2/): Sending alerts to the PagerDuty service.
+* [Pushover](/kapacitor/v1.5/event_handlers/pushover/): Sending alerts to the Pushover service.
+* [Sensu](/kapacitor/v1.5/event_handlers/sensu/): Sending alerts to Sensu.
+* [Slack](/kapacitor/v1.5/event_handlers/slack/): Sending alerts to Slack.
+* [SNMP Trap](/kapacitor/v1.5/event_handlers/snmptrap/): Posting to SNMP traps.
+* [Talk](/kapacitor/v1.5/event_handlers/talk/): Sending alerts to the Talk service.
+* [Telegram](/kapacitor/v1.5/event_handlers/telegram/): Sending alerts to Telegram.
+* [VictorOps](/kapacitor/v1.5/event_handlers/victorops/): Sending alerts to the VictorOps service.
+
 
 ##### Docker services
 

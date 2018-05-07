@@ -43,7 +43,6 @@ the `kapacitor` command line client and handler binding files.  Handler binding
 files can be written in `yaml` or `json`.  They contain four key fields and one
 optional one.
 
-<!-- fixes defect 1003 -->
 
 * `topic`: declares the topic to which the handler will subscribe.
 * `id`: declares the identity of the binding.
@@ -86,41 +85,32 @@ For a walk through on defining and using alert topics see the
 A handler takes action on incoming alert events for a specific topic.
 Each handler operates on exactly one topic.
 
-<!--
-A handler definition has a few properties:
-
-* ID - The unique ID of the handler.
-* Kind - The kind of handler, see [handlers](./handlers) for a list of available kinds.
-* Match - A lambda expression to filter matching alerts. By default all alerts match, see [matching](./match) for details on the match expression.
-* Options - A map of values, differs by kind.
--->
-
 ### List of handlers
 
 The following is a list of available alert event handlers:
 
 | Handler                       | Description                                                                           |
 | -------                       | -----------                                                                           |
-| [Alerta](#alerta)             | Post alert message to Alerta.                                                         |
-| [email](#email)               | Send and email with alert data.                                                       |
-| [exec](#exec)                 | Execute a command passing alert data over STDIN.                                      |
-| [HipChat](#hipchat)           | Post alert message to HipChat room.                                                   |
-| [Kafka](#kafka)               | Send alert to a Apache Kafka cluster.                                                 |
-| [log](#log)                   | Log alert data to file.                                                               |
-| [MQTT](#mqtt)                 | Post alert message to MQTT.                                                           |
-| [OpsGenie v1](#opsgenie-v1)   | Send alert to OpsGenie using their v1 API. <em style="opacity: .5">(Deprecated)</em>  |
-| [OpsGenie v2](#opsgenie-v2)   | Send alert to OpsGenie using their v2 API.                                            |
-| [PagerDuty v1](#pagerduty-v1) | Send alert to PagerDuty using their v1 API. <em style="opacity: .5">(Deprecated)</em> |
-| [PagerDuty v2](#pagerduty-v1) | Send alert to PagerDuty using their v2 API.                                           |
-| [post](#post)                 | HTTP POST data to a specified URL.                                                    |
-| [Pushover](#pushover)         | Send alert to Pushover.                                                               |
-| [Sensu](#sensu)               | Post alert message to Sensu client.                                                   |
-| [Slack](#slack)               | Post alert message to Slack channel.                                                  |
-| [SNMPTrap](#snmptrap)         | Trigger SNMP traps.                                                                   |
-| [Talk](#talk)                 | Post alert message to Talk client.                                                    |
-| [tcp](#tcp)                   | Send data to a specified address via raw TCP.                                         |
-| [Telegram](#telegram)         | Post alert message to Telegram client.                                                |
-| [VictorOps](#victorops)       | Send alert to VictorOps.                                                              |
+| [Alerta](/kapacitor/v1.5/event_handlers/alerta)             | Post alert message to Alerta.                                                         |
+| [email](/kapacitor/v1.5/event_handlers/email)               | Send and email with alert data.                                                       |
+| [exec](/kapacitor/v1.5/event_handlers/exec)                 | Execute a command passing alert data over STDIN.                                      |
+| [HipChat](/kapacitor/v1.5/event_handlers/hipchat)           | Post alert message to HipChat room.                                                   |
+| [Kafka](/kapacitor/v1.5/event_handlers/kafka)               | Send alert to a Apache Kafka cluster.                                                 |
+| [log](/kapacitor/v1.5/event_handlers/log)                   | Log alert data to file.                                                               |
+| [MQTT](/kapacitor/v1.5/event_handlers/mqtt)                 | Post alert message to MQTT.                                                           |
+| [OpsGenie v1](/kapacitor/v1.5/event_handlers/opsgenie-v1)   | Send alert to OpsGenie using their v1 API. <em style="opacity: .5">(Deprecated)</em>  |
+| [OpsGenie v2](/kapacitor/v1.5/event_handlers/opsgenie-v2)   | Send alert to OpsGenie using their v2 API.                                            |
+| [PagerDuty v1](/kapacitor/v1.5/event_handlers/pagerduty-v1) | Send alert to PagerDuty using their v1 API. <em style="opacity: .5">(Deprecated)</em> |
+| [PagerDuty v2](/kapacitor/v1.5/event_handlers/pagerduty-v1) | Send alert to PagerDuty using their v2 API.                                           |
+| [post](/kapacitor/v1.5/event_handlers/post)                 | HTTP POST data to a specified URL.                                                    |
+| [Pushover](/kapacitor/v1.5/event_handlers/pushover)         | Send alert to Pushover.                                                               |
+| [Sensu](/kapacitor/v1.5/event_handlers/sensu)               | Post alert message to Sensu client.                                                   |
+| [Slack](/kapacitor/v1.5/event_handlers/slack)               | Post alert message to Slack channel.                                                  |
+| [SNMPTrap](/kapacitor/v1.5/event_handlers/snmptrap)         | Trigger SNMP traps.                                                                   |
+| [Talk](/kapacitor/v1.5/event_handlers/talk)                 | Post alert message to Talk client.                                                    |
+| [tcp](/kapacitor/v1.5/event_handlers/tcp)                   | Send data to a specified address via raw TCP.                                         |
+| [Telegram](/kapacitor/v1.5/event_handlers/telegram)         | Post alert message to Telegram client.                                                |
+| [VictorOps](/kapacitor/v1.5/event_handlers/victorops)       | Send alert to VictorOps.                                                              |
 
 
 ## Match expressions

@@ -38,13 +38,13 @@ menu:
 
 
 ### Chaining Methods
-[Alert](/kapacitor/v1.4/nodes/k8s_autoscale_node/#alert), [Barrier](/kapacitor/v1.4/nodes/k8s_autoscale_node/#barrier), [Bottom](/kapacitor/v1.4/nodes/k8s_autoscale_node/#bottom), [Combine](/kapacitor/v1.4/nodes/k8s_autoscale_node/#combine), [Count](/kapacitor/v1.4/nodes/k8s_autoscale_node/#count), [CumulativeSum](/kapacitor/v1.4/nodes/k8s_autoscale_node/#cumulativesum), [Deadman](/kapacitor/v1.4/nodes/k8s_autoscale_node/#deadman), [Default](/kapacitor/v1.4/nodes/k8s_autoscale_node/#default), [Delete](/kapacitor/v1.4/nodes/k8s_autoscale_node/#delete), [Derivative](/kapacitor/v1.4/nodes/k8s_autoscale_node/#derivative), [Difference](/kapacitor/v1.4/nodes/k8s_autoscale_node/#difference), [Distinct](/kapacitor/v1.4/nodes/k8s_autoscale_node/#distinct), [Ec2Autoscale](/kapacitor/v1.4/nodes/k8s_autoscale_node/#ec2autoscale), [Elapsed](/kapacitor/v1.4/nodes/k8s_autoscale_node/#elapsed), [Eval](/kapacitor/v1.4/nodes/k8s_autoscale_node/#eval), [First](/kapacitor/v1.4/nodes/k8s_autoscale_node/#first), [Flatten](/kapacitor/v1.4/nodes/k8s_autoscale_node/#flatten), [GroupBy](/kapacitor/v1.4/nodes/k8s_autoscale_node/#groupby), [HoltWinters](/kapacitor/v1.4/nodes/k8s_autoscale_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.4/nodes/k8s_autoscale_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.4/nodes/k8s_autoscale_node/#httpout), [HttpPost](/kapacitor/v1.4/nodes/k8s_autoscale_node/#httppost), [InfluxDBOut](/kapacitor/v1.4/nodes/k8s_autoscale_node/#influxdbout), [Join](/kapacitor/v1.4/nodes/k8s_autoscale_node/#join), [K8sAutoscale](/kapacitor/v1.4/nodes/k8s_autoscale_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.4/nodes/k8s_autoscale_node/#kapacitorloopback), [Last](/kapacitor/v1.4/nodes/k8s_autoscale_node/#last), [Log](/kapacitor/v1.4/nodes/k8s_autoscale_node/#log), [Mean](/kapacitor/v1.4/nodes/k8s_autoscale_node/#mean), [Median](/kapacitor/v1.4/nodes/k8s_autoscale_node/#median), [Mode](/kapacitor/v1.4/nodes/k8s_autoscale_node/#mode), [MovingAverage](/kapacitor/v1.4/nodes/k8s_autoscale_node/#movingaverage), [Percentile](/kapacitor/v1.4/nodes/k8s_autoscale_node/#percentile), [Sample](/kapacitor/v1.4/nodes/k8s_autoscale_node/#sample), [Shift](/kapacitor/v1.4/nodes/k8s_autoscale_node/#shift), [Sideload](/kapacitor/v1.4/nodes/k8s_autoscale_node/#sideload), [Spread](/kapacitor/v1.4/nodes/k8s_autoscale_node/#spread), [StateCount](/kapacitor/v1.4/nodes/k8s_autoscale_node/#statecount), [StateDuration](/kapacitor/v1.4/nodes/k8s_autoscale_node/#stateduration), [Stats](/kapacitor/v1.4/nodes/k8s_autoscale_node/#stats), [Stddev](/kapacitor/v1.4/nodes/k8s_autoscale_node/#stddev), [Sum](/kapacitor/v1.4/nodes/k8s_autoscale_node/#sum), [SwarmAutoscale](/kapacitor/v1.4/nodes/k8s_autoscale_node/#swarmautoscale), [Top](/kapacitor/v1.4/nodes/k8s_autoscale_node/#top), [Union](/kapacitor/v1.4/nodes/k8s_autoscale_node/#union), [Where](/kapacitor/v1.4/nodes/k8s_autoscale_node/#where), [Window](/kapacitor/v1.4/nodes/k8s_autoscale_node/#window)
+[Alert](/kapacitor/v1.5/nodes/k8s_autoscale_node/#alert), [Barrier](/kapacitor/v1.5/nodes/k8s_autoscale_node/#barrier), [Bottom](/kapacitor/v1.5/nodes/k8s_autoscale_node/#bottom), [Combine](/kapacitor/v1.5/nodes/k8s_autoscale_node/#combine), [Count](/kapacitor/v1.5/nodes/k8s_autoscale_node/#count), [CumulativeSum](/kapacitor/v1.5/nodes/k8s_autoscale_node/#cumulativesum), [Deadman](/kapacitor/v1.5/nodes/k8s_autoscale_node/#deadman), [Default](/kapacitor/v1.5/nodes/k8s_autoscale_node/#default), [Delete](/kapacitor/v1.5/nodes/k8s_autoscale_node/#delete), [Derivative](/kapacitor/v1.5/nodes/k8s_autoscale_node/#derivative), [Difference](/kapacitor/v1.5/nodes/k8s_autoscale_node/#difference), [Distinct](/kapacitor/v1.5/nodes/k8s_autoscale_node/#distinct), [Ec2Autoscale](/kapacitor/v1.5/nodes/k8s_autoscale_node/#ec2autoscale), [Elapsed](/kapacitor/v1.5/nodes/k8s_autoscale_node/#elapsed), [Eval](/kapacitor/v1.5/nodes/k8s_autoscale_node/#eval), [First](/kapacitor/v1.5/nodes/k8s_autoscale_node/#first), [Flatten](/kapacitor/v1.5/nodes/k8s_autoscale_node/#flatten), [GroupBy](/kapacitor/v1.5/nodes/k8s_autoscale_node/#groupby), [HoltWinters](/kapacitor/v1.5/nodes/k8s_autoscale_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.5/nodes/k8s_autoscale_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.5/nodes/k8s_autoscale_node/#httpout), [HttpPost](/kapacitor/v1.5/nodes/k8s_autoscale_node/#httppost), [InfluxDBOut](/kapacitor/v1.5/nodes/k8s_autoscale_node/#influxdbout), [Join](/kapacitor/v1.5/nodes/k8s_autoscale_node/#join), [K8sAutoscale](/kapacitor/v1.5/nodes/k8s_autoscale_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.5/nodes/k8s_autoscale_node/#kapacitorloopback), [Last](/kapacitor/v1.5/nodes/k8s_autoscale_node/#last), [Log](/kapacitor/v1.5/nodes/k8s_autoscale_node/#log), [Mean](/kapacitor/v1.5/nodes/k8s_autoscale_node/#mean), [Median](/kapacitor/v1.5/nodes/k8s_autoscale_node/#median), [Mode](/kapacitor/v1.5/nodes/k8s_autoscale_node/#mode), [MovingAverage](/kapacitor/v1.5/nodes/k8s_autoscale_node/#movingaverage), [Percentile](/kapacitor/v1.5/nodes/k8s_autoscale_node/#percentile), [Sample](/kapacitor/v1.5/nodes/k8s_autoscale_node/#sample), [Shift](/kapacitor/v1.5/nodes/k8s_autoscale_node/#shift), [Sideload](/kapacitor/v1.5/nodes/k8s_autoscale_node/#sideload), [Spread](/kapacitor/v1.5/nodes/k8s_autoscale_node/#spread), [StateCount](/kapacitor/v1.5/nodes/k8s_autoscale_node/#statecount), [StateDuration](/kapacitor/v1.5/nodes/k8s_autoscale_node/#stateduration), [Stats](/kapacitor/v1.5/nodes/k8s_autoscale_node/#stats), [Stddev](/kapacitor/v1.5/nodes/k8s_autoscale_node/#stddev), [Sum](/kapacitor/v1.5/nodes/k8s_autoscale_node/#sum), [SwarmAutoscale](/kapacitor/v1.5/nodes/k8s_autoscale_node/#swarmautoscale), [Top](/kapacitor/v1.5/nodes/k8s_autoscale_node/#top), [Union](/kapacitor/v1.5/nodes/k8s_autoscale_node/#union), [Where](/kapacitor/v1.5/nodes/k8s_autoscale_node/#where), [Window](/kapacitor/v1.5/nodes/k8s_autoscale_node/#window)
 
 ---
 
 ### Description
 
-[K8sAutoscaleNode](/kapacitor/v1.4/nodes/k8s_autoscale_node/) triggers autoscale events for a resource on a Kubernetes cluster.
+[K8sAutoscaleNode](/kapacitor/v1.5/nodes/k8s_autoscale_node/) triggers autoscale events for a resource on a Kubernetes cluster.
 The node also outputs points for the triggered events.
 
 Example:
@@ -339,7 +339,7 @@ Create an alert node, which can trigger alerts.
 k8sAutoscale|alert()
 ```
 
-Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
+Returns: [AlertNode](/kapacitor/v1.5/nodes/alert_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -354,7 +354,7 @@ One BarrierMessage will be emitted every period duration
 k8sAutoscale|barrier()
 ```
 
-Returns: [BarrierNode](/kapacitor/v1.4/nodes/barrier_node/)
+Returns: [BarrierNode](/kapacitor/v1.5/nodes/barrier_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -367,7 +367,7 @@ Select the bottom `num` points for `field` and sort by any extra tags or fields.
 k8sAutoscale|bottom(num int64, field string, fieldsAndTags ...string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -380,7 +380,7 @@ Combine this node with itself. The data are combined on timestamp.
 k8sAutoscale|combine(expressions ...ast.LambdaNode)
 ```
 
-Returns: [CombineNode](/kapacitor/v1.4/nodes/combine_node/)
+Returns: [CombineNode](/kapacitor/v1.5/nodes/combine_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -393,7 +393,7 @@ Count the number of points.
 k8sAutoscale|count(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -407,7 +407,7 @@ A point is emitted for every point collected.
 k8sAutoscale|cumulativeSum(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -456,7 +456,7 @@ Example:
 
 The `id` and `message` alert properties can be configured globally via the 'deadman' configuration section.
 
-Since the [AlertNode](/kapacitor/v1.4/nodes/alert_node/) is the last piece it can be further modified as usual.
+Since the [AlertNode](/kapacitor/v1.5/nodes/alert_node/) is the last piece it can be further modified as usual.
 Example:
 
 
@@ -493,7 +493,7 @@ Example:
 k8sAutoscale|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
 ```
 
-Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
+Returns: [AlertNode](/kapacitor/v1.5/nodes/alert_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -506,7 +506,7 @@ Create a node that can set defaults for missing tags or fields.
 k8sAutoscale|default()
 ```
 
-Returns: [DefaultNode](/kapacitor/v1.4/nodes/default_node/)
+Returns: [DefaultNode](/kapacitor/v1.5/nodes/default_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -519,7 +519,7 @@ Create a node that can delete tags or fields.
 k8sAutoscale|delete()
 ```
 
-Returns: [DeleteNode](/kapacitor/v1.4/nodes/delete_node/)
+Returns: [DeleteNode](/kapacitor/v1.5/nodes/delete_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -532,7 +532,7 @@ Create a new node that computes the derivative of adjacent points.
 k8sAutoscale|derivative(field string)
 ```
 
-Returns: [DerivativeNode](/kapacitor/v1.4/nodes/derivative_node/)
+Returns: [DerivativeNode](/kapacitor/v1.5/nodes/derivative_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -545,7 +545,7 @@ Compute the difference between points independent of elapsed time.
 k8sAutoscale|difference(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -558,7 +558,7 @@ Produce batch of only the distinct points.
 k8sAutoscale|distinct(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -571,7 +571,7 @@ Create a node that can trigger autoscale events for a ec2 autoscalegroup.
 k8sAutoscale|ec2Autoscale()
 ```
 
-Returns: [Ec2AutoscaleNode](/kapacitor/v1.4/nodes/ec2_autoscale_node/)
+Returns: [Ec2AutoscaleNode](/kapacitor/v1.5/nodes/ec2_autoscale_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -584,7 +584,7 @@ Compute the elapsed time between points
 k8sAutoscale|elapsed(field string, unit time.Duration)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -599,7 +599,7 @@ The results are available to later expressions.
 k8sAutoscale|eval(expressions ...ast.LambdaNode)
 ```
 
-Returns: [EvalNode](/kapacitor/v1.4/nodes/eval_node/)
+Returns: [EvalNode](/kapacitor/v1.5/nodes/eval_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -612,7 +612,7 @@ Select the first point.
 k8sAutoscale|first(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -625,7 +625,7 @@ Flatten points with similar times into a single point.
 k8sAutoscale|flatten()
 ```
 
-Returns: [FlattenNode](/kapacitor/v1.4/nodes/flatten_node/)
+Returns: [FlattenNode](/kapacitor/v1.5/nodes/flatten_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -647,7 +647,7 @@ Example:
 k8sAutoscale|groupBy(tag ...interface{})
 ```
 
-Returns: [GroupByNode](/kapacitor/v1.4/nodes/group_by_node/)
+Returns: [GroupByNode](/kapacitor/v1.5/nodes/group_by_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -660,7 +660,7 @@ Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_lang
 k8sAutoscale|holtWinters(field string, h int64, m int64, interval time.Duration)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -674,7 +674,7 @@ This method also outputs all the points used to fit the data in addition to the 
 k8sAutoscale|holtWintersWithFit(field string, h int64, m int64, interval time.Duration)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -691,7 +691,7 @@ For example, if the task endpoint is at `/kapacitor/v1/tasks/<task_id>` and endp
 k8sAutoscale|httpOut(endpoint string)
 ```
 
-Returns: [HTTPOutNode](/kapacitor/v1.4/nodes/http_out_node/)
+Returns: [HTTPOutNode](/kapacitor/v1.5/nodes/http_out_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -706,7 +706,7 @@ endpoint property method.
 k8sAutoscale|httpPost(url ...string)
 ```
 
-Returns: [HTTPPostNode](/kapacitor/v1.4/nodes/http_post_node/)
+Returns: [HTTPPostNode](/kapacitor/v1.5/nodes/http_post_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -719,7 +719,7 @@ Create an influxdb output node that will store the incoming data into InfluxDB.
 k8sAutoscale|influxDBOut()
 ```
 
-Returns: [InfluxDBOutNode](/kapacitor/v1.4/nodes/influx_d_b_out_node/)
+Returns: [InfluxDBOutNode](/kapacitor/v1.5/nodes/influx_d_b_out_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -732,7 +732,7 @@ Join this node with other nodes. The data are joined on timestamp.
 k8sAutoscale|join(others ...Node)
 ```
 
-Returns: [JoinNode](/kapacitor/v1.4/nodes/join_node/)
+Returns: [JoinNode](/kapacitor/v1.5/nodes/join_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -745,7 +745,7 @@ Create a node that can trigger autoscale events for a kubernetes cluster.
 k8sAutoscale|k8sAutoscale()
 ```
 
-Returns: [K8sAutoscaleNode](/kapacitor/v1.4/nodes/k8s_autoscale_node/)
+Returns: [K8sAutoscaleNode](/kapacitor/v1.5/nodes/k8s_autoscale_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -758,7 +758,7 @@ Create an kapacitor loopback node that will send data back into Kapacitor as a s
 k8sAutoscale|kapacitorLoopback()
 ```
 
-Returns: [KapacitorLoopbackNode](/kapacitor/v1.4/nodes/kapacitor_loopback_node/)
+Returns: [KapacitorLoopbackNode](/kapacitor/v1.5/nodes/kapacitor_loopback_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -771,7 +771,7 @@ Select the last point.
 k8sAutoscale|last(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -784,7 +784,7 @@ Create a node that logs all data it receives.
 k8sAutoscale|log()
 ```
 
-Returns: [LogNode](/kapacitor/v1.4/nodes/log_node/)
+Returns: [LogNode](/kapacitor/v1.5/nodes/log_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -797,7 +797,7 @@ Compute the mean of the data.
 k8sAutoscale|mean(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -811,7 +811,7 @@ if you want the median point use `.percentile(field, 50.0)`.
 k8sAutoscale|median(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -824,7 +824,7 @@ Compute the mode of the data.
 k8sAutoscale|mode(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -838,7 +838,7 @@ No points are emitted until the window is full.
 k8sAutoscale|movingAverage(field string, window int64)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -851,7 +851,7 @@ Select a point at the given percentile. This is a selector function, no interpol
 k8sAutoscale|percentile(field string, percentile float64)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -866,7 +866,7 @@ One point will be emitted every count or duration specified.
 k8sAutoscale|sample(rate interface{})
 ```
 
-Returns: [SampleNode](/kapacitor/v1.4/nodes/sample_node/)
+Returns: [SampleNode](/kapacitor/v1.5/nodes/sample_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -879,7 +879,7 @@ Create a new node that shifts the incoming points or batches in time.
 k8sAutoscale|shift(shift time.Duration)
 ```
 
-Returns: [ShiftNode](/kapacitor/v1.4/nodes/shift_node/)
+Returns: [ShiftNode](/kapacitor/v1.5/nodes/shift_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -892,7 +892,7 @@ Create a node that can load data from external sources
 k8sAutoscale|sideload()
 ```
 
-Returns: [SideloadNode](/kapacitor/v1.4/nodes/sideload_node/)
+Returns: [SideloadNode](/kapacitor/v1.5/nodes/sideload_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -905,7 +905,7 @@ Compute the difference between `min` and `max` points.
 k8sAutoscale|spread(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -918,7 +918,7 @@ Create a node that tracks number of consecutive points in a given state.
 k8sAutoscale|stateCount(expression ast.LambdaNode)
 ```
 
-Returns: [StateCountNode](/kapacitor/v1.4/nodes/state_count_node/)
+Returns: [StateCountNode](/kapacitor/v1.5/nodes/state_count_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -931,7 +931,7 @@ Create a node that tracks duration in a given state.
 k8sAutoscale|stateDuration(expression ast.LambdaNode)
 ```
 
-Returns: [StateDurationNode](/kapacitor/v1.4/nodes/state_duration_node/)
+Returns: [StateDurationNode](/kapacitor/v1.5/nodes/state_duration_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -946,7 +946,7 @@ This means the interval time is independent of the times of the data points the 
 k8sAutoscale|stats(interval time.Duration)
 ```
 
-Returns: [StatsNode](/kapacitor/v1.4/nodes/stats_node/)
+Returns: [StatsNode](/kapacitor/v1.5/nodes/stats_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -959,7 +959,7 @@ Compute the standard deviation.
 k8sAutoscale|stddev(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -972,7 +972,7 @@ Compute the sum of all values.
 k8sAutoscale|sum(field string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -985,7 +985,7 @@ Create a node that can trigger autoscale events for a docker swarm cluster.
 k8sAutoscale|swarmAutoscale()
 ```
 
-Returns: [SwarmAutoscaleNode](/kapacitor/v1.4/nodes/swarm_autoscale_node/)
+Returns: [SwarmAutoscaleNode](/kapacitor/v1.5/nodes/swarm_autoscale_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -998,7 +998,7 @@ Select the top `num` points for `field` and sort by any extra tags or fields.
 k8sAutoscale|top(num int64, field string, fieldsAndTags ...string)
 ```
 
-Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
+Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -1011,7 +1011,7 @@ Perform the union of this node and all other given nodes.
 k8sAutoscale|union(node ...Node)
 ```
 
-Returns: [UnionNode](/kapacitor/v1.4/nodes/union_node/)
+Returns: [UnionNode](/kapacitor/v1.5/nodes/union_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -1024,7 +1024,7 @@ Create a new node that filters the data stream by a given expression.
 k8sAutoscale|where(expression ast.LambdaNode)
 ```
 
-Returns: [WhereNode](/kapacitor/v1.4/nodes/where_node/)
+Returns: [WhereNode](/kapacitor/v1.5/nodes/where_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -1039,6 +1039,6 @@ NOTE: Window can only be applied to stream edges.
 k8sAutoscale|window()
 ```
 
-Returns: [WindowNode](/kapacitor/v1.4/nodes/window_node/)
+Returns: [WindowNode](/kapacitor/v1.5/nodes/window_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>

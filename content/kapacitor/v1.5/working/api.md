@@ -1,5 +1,8 @@
 ---
 title: Kapacitor HTTP API
+aliases:
+  - /kapacitor/v1.5/api
+  - /kapacitor/v1.5/api/api
 
 menu:
   kapacitor_1_5:
