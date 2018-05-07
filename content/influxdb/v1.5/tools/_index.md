@@ -1,5 +1,6 @@
 ---
 title: InfluxDB tools
+description: Interact with InfluxDB using tools and utilities, including the HTTP API reference, the API client libraries, the Influx Inspect disk shard utility, and Grafana graphs and dashboards.
 aliases:
     - influxdb/v1.5/clients/
     - influxdb/v1.5/write_protocols/json/

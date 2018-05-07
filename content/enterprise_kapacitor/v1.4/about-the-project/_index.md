@@ -1,5 +1,6 @@
 ---
 title: About the Kapacitor Enterprise project
+description: This section includes information about the Kapacitor Enterprise project, including release notes, commercial licenses, and third party software.
 menu:
   enterprise_kapacitor_1_4:
     name: About the project

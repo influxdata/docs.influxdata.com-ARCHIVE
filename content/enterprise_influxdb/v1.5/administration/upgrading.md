@@ -1,5 +1,6 @@
 ---
 title: Upgrading InfluxDB Enterprise clusters
+description: Steps for upgrading InfluxDB Enterprise clusters, including meta nodes and data nodes, to the lastest release.
 aliases:
     - /enterprise/v1.5/administration/upgrading/
 menu:

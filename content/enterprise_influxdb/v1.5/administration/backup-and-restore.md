@@ -1,5 +1,6 @@
 ---
 title: Backing up and restoring in InfluxDB Enterprise
+description: Using InfluxDB Enterprise backup and restore utilities to back up and restore databases, retention policies, and shards for maintenance, disaster recovery, debugging, and restoring clusters to consistent states.
 aliases:
     - /enterprise/v1.5/guides/backup-and-restore/
 menu:
