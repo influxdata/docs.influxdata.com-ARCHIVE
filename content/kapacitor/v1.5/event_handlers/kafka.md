@@ -117,10 +117,10 @@ _**Kafka settings in kapacitor.conf**_
 [[kafka]]
   enabled = true
   id = "infra-monitoring"
-  brokers = ['123.45.67.89:9092', '123.45.67.90:9092']
-  timeout = 10s
+  brokers = ["123.45.67.89:9092", "123.45.67.90:9092"]
+  timeout = "10s"
   batch-size = 100
-  batch-timeout = 1s
+  batch-timeout = "1s"
   use-ssl = true
   ssl-ca = "/etc/ssl/certs/ca.crt"
   ssl-cert = "/etc/ssl/certs/cert.crt"
