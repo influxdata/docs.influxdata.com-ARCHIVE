@@ -12,50 +12,49 @@ Chronograf provides a user interface for [Kapacitor](/kapacitor/latest/), Influx
 Chronograf alert rules correspond to Kapacitor tasks that are designed specifically to
 trigger alerts whenever data stream values rise above or fall below
 designated thresholds.
-Most of the common alerting use cases can be managed using Chronograf, including:
+Common alerting use cases that can be managed using Chronograf include:
 
 * Thresholds with static ceilings, floors, and ranges.
 * Relative thresholds based on unit or percentage changes.
 * Deadman switches.
 
-Complex alerts and other tasks must be defined directly in Kapacitor.
+Complex alerts and other tasks must be defined directly in Kapacitor, but can be used within Chronograf.
 
-By the end of this guide, you'll have a Chronograf alert rule that sends an alert message to an existing [Slack](https://slack.com/) channel whenever your idle CPU usage crosses the 80% threshold.
+Follow this guide to create a Chronograf alert rule that sends an alert message to an existing [Slack](https://slack.com/) channel whenever your idle CPU usage crosses the 80% threshold.
 
 ## Requirements
 
-You've already downloaded and installed each component of the TICK stack (Telegraf, InfluxDB, Chronograf, and Kapacitor).
-To follow along, the Telegraf instance must be configured to collect data with the InfluxDB [system statistics](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) input plugin and write data to your InfluxDB instance.
+[Getting started with Chronograf](/chronograf/latest/introduction/getting-started/) guide offers step-by-step instructions for each of the requirements here.
 
-You've already [configured your Kapacitor instance in Chronograf](/chronograf/latest/introduction/getting-started/#4-connect-chronograf-to-kapacitor).
-The [Getting Started](/chronograf/latest/introduction/getting-started/) guide offers step-by-step instructions for each of those requirements.
-
-You have a working Slack instance and have configured it as an [event handler](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf) in Chronograf.
-See the [Configure Kapacitor Event Handlers](/chronograf/latest/guides/configuring-alert-endpoints/) guide for detailed configuration instructions.
+* You've already downloaded and installed each component of the TICK stack (Telegraf, InfluxDB, Chronograf, and Kapacitor).
+* Telegraf is configured to collect data using the InfluxDB [system statistics](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) input plugin and write data to your InfluxDB instance.
+* [A Kapacitor connection has been created in Chronograf](/chronograf/latest/introduction/getting-started/#4-connect-chronograf-to-kapacitor).
+* Slack is available and has been configured it as an [event handler](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf) in Chronograf.
+See the [Configuring Kapacitor Event Handlers](/chronograf/latest/guides/configuring-alert-endpoints/) guide for detailed configuration instructions.
 
 ## Configure a Chronograf alert rule
 
-Before you start, navigate to the Rule Configuration page by visiting the Alert Rules page and clicking on the `Create Rule` button in the top right corner.
+Navigate to the **Rule Configuration** page by selecting the **Alerting** page and then clicking `Create Rule` in the top right corner.
 
 ![Navigate to Rule Configuration](/img/chronograf/v1.5/g-kap-rule-page.png)
 
-The Rule Configuration page is where you create and edit your Chronogra alert rules.
-Steps one through six walk you through each section of the Rule Configuration page:
+The **Rule Configuration** page is used to create and edit your Chronogra alert rules.
+The steps below guide you through the process of creating a Chronograf alert rule.
 
 ![Empty Rule Configuration](/img/chronograf/v1.5/g-kap-blank-rule.png)
 
-### Step 1: Name the rule
+### Step 1: Name the alert rule
 
-Click `Untitled Rule` in the top left corner and name the rule.
+Click **Untitled Rule** in the top left corner and name the rule.
 
 For this example, the rule is named `Idle CPU Usage`:
 
 ![Name your rule](/img/chronograf/v1.5/g-kap-rule-name.png)
 
-### Step 2: Select the time series
+### Step 2: Select the time series data
 
-Choose the data that you want the alert rule to work with.
-Navigate through the `Databases`, `Measurements`, `Fields`, and `Tags` tabs to select the relevant data.
+Choose the time series data that you want the Chronograf alert rule to use.
+Navigate through the **Databases**, **Measurements**, **Fields**, and **Tags** tabs to select the relevant data.
 
 In this example, we select the `telegraf` [database](/influxdb/latest/concepts/glossary/#database) and the `autogen` [retention policy](/influxdb/latest/concepts/glossary/#retention-policy-rp), the `cpu` [measurement](/influxdb/latest/concepts/glossary/#measurement), the `usage_idle` [field](/influxdb/latest/concepts/glossary/#field), and no [tags](/influxdb/latest/concepts/glossary/#tag).
 The result is the InfluxQL [query](/influxdb/latest/concepts/glossary/#query) in the image below.
