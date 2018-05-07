@@ -22,7 +22,7 @@ menu:
 | **[alerta](#alerta) \( \)** | Send the alert to Alerta.  |
 | **[all](#all)&nbsp;(&nbsp;)** | Indicates an alert should trigger only if all points in a batch match the criteria. Does not apply to stream alerts.  |
 | **[crit](#crit)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for the CRITICAL alert level. An empty value indicates the level is invalid and is skipped.  |
-| **[critReset](#critreset)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for reseting the CRITICAL alert level to lower level.  |
+| **[critReset](#critreset)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for resetting the CRITICAL alert level to lower level.  |
 | **[details](#details)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Template for constructing a detailed HTML message for the alert. The same template data is available as the AlertNode.Message property, in addition to a Message field that contains the rendered Message value.  |
 | **[durationField](#durationfield)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional field key to add the alert duration to the data. The duration is always in units of nanoseconds.  |
 | **[email](#email)&nbsp;(&nbsp;`to`&nbsp;`...string`)** | Email the alert data.  |
@@ -34,7 +34,7 @@ menu:
 | **[idField](#idfield)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional field key to add to the data, containing the alert ID as a string.  |
 | **[idTag](#idtag)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional tag key to use when tagging the data with the alert ID.  |
 | **[info](#info)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for the INFO alert level. An empty value indicates the level is invalid and is skipped.  |
-| **[infoReset](#inforeset)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for reseting the INFO alert level to lower level.  |
+| **[infoReset](#inforeset)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for resetting the INFO alert level to lower level.  |
 | **[kafka](#kafka)&nbsp;(&nbsp;)** | Send the alert to a Kafka cluster. |
 | **[levelField](#levelfield)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional field key to add to the data, containing the alert level as a string.  |
 | **[levelTag](#leveltag)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional tag key to use when tagging the data with the alert level.  |
@@ -60,7 +60,7 @@ menu:
 | **[topic](#topic)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Topic specifies the name of an alert topic to which, alerts will be published. Alert handlers can be configured per topic, see the API documentation.  |
 | **[victorOps](#victorops)&nbsp;(&nbsp;)** | Send alert to VictorOps. |
 | **[warn](#warn)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for the WARNING alert level. An empty value indicates the level is invalid and is skipped.  |
-| **[warnReset](#warnreset)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for reseting the WARNING alert level to lower level.  |
+| **[warnReset](#warnreset)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for resetting the WARNING alert level to lower level.  |
 
 
 
@@ -582,7 +582,7 @@ alert.info(lambda: 'usage_idle' < 60)
 
 ### InfoReset
 
-Filter expression for reseting the INFO alert level to lower level.
+Filter expression for resetting the INFO alert level to lower level.
 
 ```js
 // Pattern
@@ -1141,7 +1141,7 @@ alert.warn(lambda: 'usage_idle' < 20)
 
 ### WarnReset
 
-Filter expression for reseting the WARNING alert level to lower level.
+Filter expression for resetting the WARNING alert level to lower level.
 
 ```javascript
 // Pattern

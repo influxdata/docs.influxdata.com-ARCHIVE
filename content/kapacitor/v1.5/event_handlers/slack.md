@@ -50,7 +50,9 @@ A logical choice is the name of the Slack workspace, e.g. `<workspace>.slack.com
 
 #### `url`
 The Slack webhook URL. This can be obtained by adding an Incoming Webhook integration.
-Visit https://slack.com/services/new/incoming-webhook to add new webhook for Kapacitor.
+Login to your Slack workspace in your browser and
+[add a new webhook](https://slack.com/services/new/incoming-webhook) for Kapacitor.
+Slack will provide you the webhook URL.
 
 #### `channel`
 Default channel for messages
@@ -116,10 +118,10 @@ options:
 ```
 
 ## Slack Setup
-To allow Kapacitor to send alerts to Slack,
+To allow Kapacitor to send alerts to Slack, login to your Slack workspace and
 [create a new incoming webhook](https://slack.com/services/new/incoming-webhook )
-and add the generated webhook URL as the `url` in the `[[slack]]` configuration
-section of your `kapacitor.conf`.
+for Kapacitor. Add the generated webhook URL as the `url` in the `[[slack]]`
+configuration section of your `kapacitor.conf`.
 
 ## Using the Slack event handler
 With one or more Slack event handlers enabled and configured in your
