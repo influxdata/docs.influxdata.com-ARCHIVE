@@ -1824,7 +1824,7 @@ Without stateChangesOnly, the alert would have triggered 7 times:
 for the recovery.
 
 An optional maximum interval duration can be provided.
-An event will not be ignore (aka trigger an alert) if more than the maximum interval has elapsed
+An event will not be ignored (aka trigger an alert) if more than the maximum interval has elapsed
 since the last alert.
 
 Example:
