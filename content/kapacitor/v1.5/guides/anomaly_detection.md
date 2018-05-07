@@ -478,7 +478,7 @@ to stop properly. Once stopped, you can fix any errors and try again.
 If everything was started correctly, then it's time to write our
 TICKscript to use the `tTest` UDF method:
 
-```javascript
+```js
 dbrp "printer"."autogen"
 
 // This TICKscript monitors the three temperatures for a 3d printing job,

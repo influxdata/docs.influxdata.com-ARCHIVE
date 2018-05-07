@@ -10,6 +10,9 @@ menu:
     parent: nodes
 ---
 
+The `changeDetect` node creates a new node that only emits new points if different
+from the previous point.
+
 ### Constructor
 
 | Chaining Method | Description |
@@ -28,15 +31,9 @@ menu:
 [Alert](/kapacitor/v1.5/nodes/change_detect_node/#alert), [Barrier](/kapacitor/v1.5/nodes/change_detect_node/#barrier), [Bottom](/kapacitor/v1.5/nodes/change_detect_node/#bottom), [ChangeDetect](/kapacitor/v1.5/nodes/change_detect_node/#changedetect), [Combine](/kapacitor/v1.5/nodes/change_detect_node/#combine), [Count](/kapacitor/v1.5/nodes/change_detect_node/#count), [CumulativeSum](/kapacitor/v1.5/nodes/change_detect_node/#cumulativesum), [Deadman](/kapacitor/v1.5/nodes/change_detect_node/#deadman), [Default](/kapacitor/v1.5/nodes/change_detect_node/#default), [Delete](/kapacitor/v1.5/nodes/change_detect_node/#delete), [Derivative](/kapacitor/v1.5/nodes/change_detect_node/#derivative), [Difference](/kapacitor/v1.5/nodes/change_detect_node/#difference), [Distinct](/kapacitor/v1.5/nodes/change_detect_node/#distinct), [Ec2Autoscale](/kapacitor/v1.5/nodes/change_detect_node/#ec2autoscale), [Elapsed](/kapacitor/v1.5/nodes/change_detect_node/#elapsed), [Eval](/kapacitor/v1.5/nodes/change_detect_node/#eval), [First](/kapacitor/v1.5/nodes/change_detect_node/#first), [Flatten](/kapacitor/v1.5/nodes/change_detect_node/#flatten), [GroupBy](/kapacitor/v1.5/nodes/change_detect_node/#groupby), [HoltWinters](/kapacitor/v1.5/nodes/change_detect_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.5/nodes/change_detect_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.5/nodes/change_detect_node/#httpout), [HttpPost](/kapacitor/v1.5/nodes/change_detect_node/#httppost), [InfluxDBOut](/kapacitor/v1.5/nodes/change_detect_node/#influxdbout), [Join](/kapacitor/v1.5/nodes/change_detect_node/#join), [K8sAutoscale](/kapacitor/v1.5/nodes/change_detect_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.5/nodes/change_detect_node/#kapacitorloopback), [Last](/kapacitor/v1.5/nodes/change_detect_node/#last), [Log](/kapacitor/v1.5/nodes/change_detect_node/#log), [Max](/kapacitor/v1.5/nodes/change_detect_node/#max), [Mean](/kapacitor/v1.5/nodes/change_detect_node/#mean), [Median](/kapacitor/v1.5/nodes/change_detect_node/#median), [Min](/kapacitor/v1.5/nodes/change_detect_node/#min), [Mode](/kapacitor/v1.5/nodes/change_detect_node/#mode), [MovingAverage](/kapacitor/v1.5/nodes/change_detect_node/#movingaverage), [Percentile](/kapacitor/v1.5/nodes/change_detect_node/#percentile), [Sample](/kapacitor/v1.5/nodes/change_detect_node/#sample), [Shift](/kapacitor/v1.5/nodes/change_detect_node/#shift), [Sideload](/kapacitor/v1.5/nodes/change_detect_node/#sideload), [Spread](/kapacitor/v1.5/nodes/change_detect_node/#spread), [StateCount](/kapacitor/v1.5/nodes/change_detect_node/#statecount), [StateDuration](/kapacitor/v1.5/nodes/change_detect_node/#stateduration), [Stats](/kapacitor/v1.5/nodes/change_detect_node/#stats), [Stddev](/kapacitor/v1.5/nodes/change_detect_node/#stddev), [Sum](/kapacitor/v1.5/nodes/change_detect_node/#sum), [SwarmAutoscale](/kapacitor/v1.5/nodes/change_detect_node/#swarmautoscale), [Top](/kapacitor/v1.5/nodes/change_detect_node/#top), [Union](/kapacitor/v1.5/nodes/change_detect_node/#union), [Where](/kapacitor/v1.5/nodes/change_detect_node/#where), [Window](/kapacitor/v1.5/nodes/change_detect_node/#window)
 <a id='descr'/><hr/><br/>
 
+---
 
-
-### Description
-The ChangeDetectNode creates a new node that only emits new points if different from the previous point.
-
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
-
-Properties
-----------
+## Properties
 
 Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
@@ -48,15 +45,14 @@ Property methods are marked using the `.` operator.
 Quiet suppresses all error logging events from this node.
 
 
-```javascript
+```js
 changeDetect.quiet()
 ```
 
 <a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
 
 
-Chaining Methods
-----------------
+## Chaining Methods   
 
 Chaining methods create a new node in the pipeline as a child of the calling node.
 They do not modify the calling node.
@@ -68,7 +64,7 @@ Chaining methods are marked using the `|` operator.
 Create an alert node, which can trigger alerts.
 
 
-```javascript
+```js
 changeDetect|alert()
 ```
 
@@ -83,7 +79,7 @@ Create a new Barrier node that emits a BarrierMessage periodically
 One BarrierMessage will be emitted every period duration
 
 
-```javascript
+```js
 changeDetect|barrier()
 ```
 
@@ -96,7 +92,7 @@ Returns: [BarrierNode](/kapacitor/v1.5/nodes/barrier_node/)
 Select the bottom `num` points for `field` and sort by any extra tags or fields.
 
 
-```javascript
+```js
 changeDetect|bottom(num int64, field string, fieldsAndTags ...string)
 ```
 
@@ -109,7 +105,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 Create a new node that only emits new points if different from the previous point.
 
 
-```javascript
+```js
 changeDetect|changeDetect(field string)
 ```
 
@@ -122,7 +118,7 @@ Returns: [ChangeDetectNode](/kapacitor/v1.5/nodes/change_detect_node/)
 Combine this node with itself. The data are combined on timestamp.
 
 
-```javascript
+```js
 changeDetect|combine(expressions ...ast.LambdaNode)
 ```
 
@@ -135,7 +131,7 @@ Returns: [CombineNode](/kapacitor/v1.5/nodes/combine_node/)
 Count the number of points.
 
 
-```javascript
+```js
 changeDetect|count(field string)
 ```
 
@@ -149,7 +145,7 @@ Compute a cumulative sum of each point that is received.
 A point is emitted for every point collected.
 
 
-```javascript
+```js
 changeDetect|cumulativeSum(field string)
 ```
 
@@ -168,7 +164,7 @@ Helper function for creating an alert on low throughput, a.k.a. deadman's switch
 Example:
 
 
-```javascript
+```js
     var data = stream
         |from()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
@@ -181,7 +177,7 @@ Example:
 The above is equivalent to this example:
 
 
-```javascript
+```js
     var data = stream
         |from()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
@@ -205,7 +201,7 @@ Since the [AlertNode](/kapacitor/v1.5/nodes/alert_node/) is the last piece it ca
 Example:
 
 
-```javascript
+```js
     var data = stream
         |from()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
@@ -221,7 +217,7 @@ You can specify additional lambda expressions to further constrain when the dead
 Example:
 
 
-```javascript
+```js
     var data = stream
         |from()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
@@ -234,7 +230,7 @@ Example:
 
 
 
-```javascript
+```js
 changeDetect|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
 ```
 
@@ -247,7 +243,7 @@ Returns: [AlertNode](/kapacitor/v1.5/nodes/alert_node/)
 Create a node that can set defaults for missing tags or fields.
 
 
-```javascript
+```js
 changeDetect|default()
 ```
 
@@ -260,7 +256,7 @@ Returns: [DefaultNode](/kapacitor/v1.5/nodes/default_node/)
 Create a node that can delete tags or fields.
 
 
-```javascript
+```js
 changeDetect|delete()
 ```
 
@@ -273,7 +269,7 @@ Returns: [DeleteNode](/kapacitor/v1.5/nodes/delete_node/)
 Create a new node that computes the derivative of adjacent points.
 
 
-```javascript
+```js
 changeDetect|derivative(field string)
 ```
 
@@ -286,7 +282,7 @@ Returns: [DerivativeNode](/kapacitor/v1.5/nodes/derivative_node/)
 Compute the difference between points independent of elapsed time.
 
 
-```javascript
+```js
 changeDetect|difference(field string)
 ```
 
@@ -299,7 +295,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 Produce batch of only the distinct points.
 
 
-```javascript
+```js
 changeDetect|distinct(field string)
 ```
 
@@ -312,7 +308,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 Create a node that can trigger autoscale events for a ec2 autoscalegroup.
 
 
-```javascript
+```js
 changeDetect|ec2Autoscale()
 ```
 
@@ -325,7 +321,7 @@ Returns: [Ec2AutoscaleNode](/kapacitor/v1.5/nodes/ec2_autoscale_node/)
 Compute the elapsed time between points
 
 
-```javascript
+```js
 changeDetect|elapsed(field string, unit time.Duration)
 ```
 
@@ -340,7 +336,7 @@ A list of expressions may be provided and will be evaluated in the order they ar
 The results are available to later expressions.
 
 
-```javascript
+```js
 changeDetect|eval(expressions ...ast.LambdaNode)
 ```
 
@@ -353,7 +349,7 @@ Returns: [EvalNode](/kapacitor/v1.5/nodes/eval_node/)
 Select the first point.
 
 
-```javascript
+```js
 changeDetect|first(field string)
 ```
 
@@ -366,7 +362,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 Flatten points with similar times into a single point.
 
 
-```javascript
+```js
 changeDetect|flatten()
 ```
 
@@ -382,13 +378,13 @@ Can pass literal * to group by all dimensions.
 Example:
 
 
-```javascript
+```js
     |groupBy(*)
 ```
 
 
 
-```javascript
+```js
 changeDetect|groupBy(tag ...interface{})
 ```
 
@@ -401,7 +397,7 @@ Returns: [GroupByNode](/kapacitor/v1.5/nodes/group_by_node/)
 Compute the Holt-Winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
 
 
-```javascript
+```js
 changeDetect|holtWinters(field string, h int64, m int64, interval time.Duration)
 ```
 
@@ -415,7 +411,7 @@ Compute the Holt-Winters (https://docs.influxdata.com/influxdb/latest/query_lang
 This method also outputs all the points used to fit the data in addition to the forecasted data.
 
 
-```javascript
+```js
 changeDetect|holtWintersWithFit(field string, h int64, m int64, interval time.Duration)
 ```
 
@@ -432,7 +428,7 @@ For example, if the task endpoint is at `/kapacitor/v1/tasks/<task_id>` and endp
 `top10`, then the data can be requested from `/kapacitor/v1/tasks/<task_id>/top10`.
 
 
-```javascript
+```js
 changeDetect|httpOut(endpoint string)
 ```
 
@@ -447,7 +443,7 @@ HttpPost expects 0 or 1 arguments. If 0 arguments are provided, you must specify
 endpoint property method.
 
 
-```javascript
+```js
 changeDetect|httpPost(url ...string)
 ```
 
@@ -460,7 +456,7 @@ Returns: [HTTPPostNode](/kapacitor/v1.5/nodes/http_post_node/)
 Create an InfluxDB output node that will store the incoming data into InfluxDB.
 
 
-```javascript
+```js
 changeDetect|influxDBOut()
 ```
 
@@ -473,7 +469,7 @@ Returns: [InfluxDBOutNode](/kapacitor/v1.5/nodes/influx_d_b_out_node/)
 Join this node with other nodes. The data are joined on timestamp.
 
 
-```javascript
+```js
 changeDetect|join(others ...Node)
 ```
 
@@ -486,7 +482,7 @@ Returns: [JoinNode](/kapacitor/v1.5/nodes/join_node/)
 Create a node that can trigger autoscale events for a Kubernetes cluster.
 
 
-```javascript
+```js
 changeDetect|k8sAutoscale()
 ```
 
@@ -499,7 +495,7 @@ Returns: [K8sAutoscaleNode](/kapacitor/v1.5/nodes/k8s_autoscale_node/)
 Create an Kapacitor loopback node that will send data back into Kapacitor as a stream.
 
 
-```javascript
+```js
 changeDetect|kapacitorLoopback()
 ```
 
@@ -512,7 +508,7 @@ Returns: [KapacitorLoopbackNode](/kapacitor/v1.5/nodes/kapacitor_loopback_node/)
 Select the last point.
 
 
-```javascript
+```js
 changeDetect|last(field string)
 ```
 
@@ -525,7 +521,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 Create a node that logs all data it receives.
 
 
-```javascript
+```js
 changeDetect|log()
 ```
 
@@ -538,7 +534,7 @@ Returns: [LogNode](/kapacitor/v1.5/nodes/log_node/)
 Select the maximum point.
 
 
-```javascript
+```js
 changeDetect|max(field string)
 ```
 
@@ -551,7 +547,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 Compute the mean of the data.
 
 
-```javascript
+```js
 changeDetect|mean(field string)
 ```
 
@@ -567,7 +563,7 @@ Compute the median of the data.
 If you want the median point, use `.percentile(field, 50.0)`.
 
 
-```javascript
+```js
 changeDetect|median(field string)
 ```
 
@@ -580,7 +576,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 Select the minimum point.
 
 
-```javascript
+```js
 changeDetect|min(field string)
 ```
 
@@ -593,7 +589,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 Compute the mode of the data.
 
 
-```javascript
+```js
 changeDetect|mode(field string)
 ```
 
@@ -607,7 +603,7 @@ Compute a moving average of the last window points.
 No points are emitted until the window is full.
 
 
-```javascript
+```js
 changeDetect|movingAverage(field string, window int64)
 ```
 
@@ -620,7 +616,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 Select a point at the given percentile. This is a selector function, no interpolation between points is performed.
 
 
-```javascript
+```js
 changeDetect|percentile(field string, percentile float64)
 ```
 
@@ -635,7 +631,7 @@ Create a new node that samples the incoming points or batches.
 One point will be emitted every count or duration specified.
 
 
-```javascript
+```js
 changeDetect|sample(rate interface{})
 ```
 
@@ -648,7 +644,7 @@ Returns: [SampleNode](/kapacitor/v1.5/nodes/sample_node/)
 Create a new node that shifts the incoming points or batches in time.
 
 
-```javascript
+```js
 changeDetect|shift(shift time.Duration)
 ```
 
@@ -661,7 +657,7 @@ Returns: [ShiftNode](/kapacitor/v1.5/nodes/shift_node/)
 Create a node that can load data from external sources.
 
 
-```javascript
+```js
 changeDetect|sideload()
 ```
 
@@ -674,7 +670,7 @@ Returns: [SideloadNode](/kapacitor/v1.5/nodes/sideload_node/)
 Compute the difference between `min` and `max` points.
 
 
-```javascript
+```js
 changeDetect|spread(field string)
 ```
 
@@ -687,7 +683,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 Create a node that tracks number of consecutive points in a given state.
 
 
-```javascript
+```js
 changeDetect|stateCount(expression ast.LambdaNode)
 ```
 
@@ -700,7 +696,7 @@ Returns: [StateCountNode](/kapacitor/v1.5/nodes/state_count_node/)
 Create a node that tracks duration in a given state.
 
 
-```javascript
+```js
 changeDetect|stateDuration(expression ast.LambdaNode)
 ```
 
@@ -715,7 +711,7 @@ The interval represents how often to emit the statistics based on real time.
 This means the interval time is independent of the times of the data points the source node is receiving.
 
 
-```javascript
+```js
 changeDetect|stats(interval time.Duration)
 ```
 
@@ -728,7 +724,7 @@ Returns: [StatsNode](/kapacitor/v1.5/nodes/stats_node/)
 Compute the standard deviation.
 
 
-```javascript
+```js
 changeDetect|stddev(field string)
 ```
 
@@ -741,7 +737,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 Compute the sum of all values.
 
 
-```javascript
+```js
 changeDetect|sum(field string)
 ```
 
@@ -754,7 +750,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 Create a node that can trigger autoscale events for a Docker swarm cluster.
 
 
-```javascript
+```js
 changeDetect|swarmAutoscale()
 ```
 
@@ -767,7 +763,7 @@ Returns: [SwarmAutoscaleNode](/kapacitor/v1.5/nodes/swarm_autoscale_node/)
 Select the top `num` points for `field` and sort by any extra tags or fields.
 
 
-```javascript
+```js
 changeDetect|top(num int64, field string, fieldsAndTags ...string)
 ```
 
@@ -780,7 +776,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 Perform the union of this node and all other given nodes.
 
 
-```javascript
+```js
 changeDetect|union(node ...Node)
 ```
 
@@ -793,7 +789,7 @@ Returns: [UnionNode](/kapacitor/v1.5/nodes/union_node/)
 Create a new node that filters the data stream by a given expression.
 
 
-```javascript
+```js
 changeDetect|where(expression ast.LambdaNode)
 ```
 
@@ -808,7 +804,7 @@ Create a new node that windows the stream by time.
 NOTE: Window can only be applied to stream edges.
 
 
-```javascript
+```js
 changeDetect|window()
 ```
 

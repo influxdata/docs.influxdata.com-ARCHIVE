@@ -25,7 +25,7 @@ CREATE CONTINUOUS QUERY cpu_idle_mean ON telegraf BEGIN SELECT mean("usage_idle"
 
 To do the same with Kapacitor here is a streaming TICKscript.
 
-```javascript
+```js
 dbrp "telegraf"."autogen"
 
 stream
@@ -48,7 +48,7 @@ stream
 
 The same thing can also be done as a batch task in Kapacitor.
 
-```javascript
+```js
 dbrp "telegraf"."autogen"
 
 batch
@@ -111,7 +111,7 @@ CREATE CONTINUOUS QUERY cpu_idle_median ON telegraf BEGIN SELECT median("usage_i
 
 The stream TICKscript:
 
-```javascript
+```js
 dbrp "telegraf"."autogen"
 
 stream
@@ -135,7 +135,7 @@ stream
 
 And the batch TICKscript:
 
-```javascript
+```js
 dbrp "telegraf"."autogen"
 
 batch

@@ -46,7 +46,7 @@ What should the TICKscript look like to send data to HouseDB?
 To connect to a HouseDB instance, we need both a URL and a database name, so we need a way to provide that information.
 How about this?
 
-```javascript
+```js
     node
         |houseDBOut()
             .url('house://housedb.example.com')
@@ -139,7 +139,7 @@ func (c *chainnode) HouseDBOut() *HouseDBOutNode {
 
 We have now defined all the necessary pieces so that TICKscripts can define HouseDBOutNodes:
 
-```javascript
+```js
     node
         |houseDBOut() // added as a method to the 'chainnode' type
             .url('house://housedb.example.com') // added as a field to the HouseDBOutNode

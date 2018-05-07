@@ -290,7 +290,7 @@ How to define high cpu usage?  Telegraf writes to InfluxDB a cpu metric on the p
 
 A TICKscript can now be written to cover these criteria.  Copy the script below into a file called `cpu_alert.tick`:
 
-```javascript
+```js
 dbrp "telegraf"."autogen"
 
 stream
@@ -490,7 +490,7 @@ Single quotes and double quotes in TICKscripts do very different things:
 
 Note the following example:
 
-```javascript
+```js
 var data = stream
     |from()
         .database('telegraf')
@@ -502,7 +502,7 @@ var data = stream
 
 The result of this search will always be empty, because double quotes were used around "server1". This means that Kapacitor will search for a series where the field "host" is equal to the value held in _the field_ "server1". This is probably not what was intended. More likely the intention was to search for a series where tag "host" has _the value_ 'server1', so single quotes should be used. Double quotes denote data fields, single quotes string values.  To match the _value_, the tick script above should look like this:
 
-```javascript
+```js
 var data = stream
     |from()
         .database('telegraf')
@@ -518,7 +518,7 @@ The TICKscript below will compute the running mean and compare current values to
 It will then trigger an alert if the values are more than 3 standard deviations away from the mean.
 Replace the `cpu_alert.tick` script with the TICKscript below:
 
-```javascript
+```js
 stream
     |from()
         .measurement('cpu')
@@ -569,7 +569,7 @@ Custom message formats can also be defined so that alerts have the right context
 The TICKscript for this would look like the following example.
 
 *Example - TICKscript for stream on multiple service cpus and alert on 95th percentile*
-```javascript
+```js
 stream
     |from()
         .measurement('cpu')
@@ -627,7 +627,7 @@ of how `batch` tasks work is demonstrated here by following the same use case.
 
 This TICKscript does roughly the same thing as the earlier stream task, but as a batch task:
 
-```javascript
+```js
 dbrp "telegraf"."autogen"
 
 batch

@@ -77,7 +77,7 @@ Example 1 shows a runtime error that is thrown because a field value has gone mi
 # Basic examples
 
 **Example 2 &ndash; An elementary stream &rarr; from() pipeline**
-```javascript
+```js
 dbrp "telegraf"."autogen"
 
 stream
@@ -111,7 +111,7 @@ It contains one property method, which is the call on the `from()` node to `.mea
 
 **Example 3 &ndash; An elementary batch &rarr; query() pipeline**
 
-```javascript
+```js
 batch
     |query('SELECT * FROM "telegraf"."autogen".cpu WHERE time > now() - 10s')
         .period(10s)

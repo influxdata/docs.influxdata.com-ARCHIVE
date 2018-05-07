@@ -518,7 +518,7 @@ Take an existing task and add `@mirror()` at any point in the TICKscript pipelin
 
 Here is an example TICKscript, which will need to be saved to a file:
 
-```javascript
+```js
 dbrp "telegraf"."autogen"
 
 stream
@@ -624,7 +624,7 @@ Restart the UDF process and try it out again.
 Specify which field name and value to use with the `.field(name, value)` method.
 You can add a `|log()` after the `mirror` UDF to see that the new field has indeed been created.
 
-```javascript
+```js
 dbrp "telegraf"."autogen"
 
 stream

@@ -22,7 +22,7 @@ expressions in TICKscript, but with its own syntax:
 
 All lambda expressions in TICKscript begin with the `lambda:` keyword.
 
-```javascript
+```js
 .where(lambda: "host" == 'server001.example.com')
 ```
 
@@ -46,7 +46,7 @@ is away from the mean.
 
 **Example 1 &ndash; the sigma function**
 
-```javascript
+```js
 sigma("value") > 3.0
 ```
 
@@ -60,7 +60,7 @@ then returns the deviation. The simple expression in Example 1 evaluates to
 
 **Example 2 &ndash; TICKscript with lambda expression**
 
-```javascript
+```js
 stream
     |from()
     ...
@@ -109,7 +109,7 @@ type conversion functions (see [below](#above-header-type-conversion)).
 Count takes no arguments but returns the number of times the expression has been
 evaluated.
 
-```javascript
+```js
 count() int64
 ```
 
@@ -119,7 +119,7 @@ Computes the number of standard deviations a given value is away from the
 running mean.  Each time the expression is evaluated the running mean and
 standard deviation are updated.
 
-```javascript
+```js
 sigma(value float64) float64
 ```
 
@@ -128,7 +128,7 @@ sigma(value float64) float64
 Computes the running range of all values passed into it.  The range is the
 difference between the maximum and minimum values received.
 
-```javascript
+```js
 spread(value float64) float64
 ```
 <a id="above-header-type-conversion"></a>
@@ -142,7 +142,7 @@ Converts a string into a Boolean via Golang's
 [strconv.ParseBool](https://golang.org/pkg/strconv/#ParseBool) function. Numeric
 types can also be converted to a bool where a 0 -> false and 1 -> true.
 
-```javascript
+```js
 bool(value) bool
 ```
 
@@ -154,7 +154,7 @@ Converts a string or float64 into an int64 via Golang's
 converted into an int64 with nanoseconds units.  A Boolean is converted to an
 int64 where false -> 0 and true -> 1.
 
-```javascript
+```js
 int(value) int64
 ```
 
@@ -165,7 +165,7 @@ Converts a string or int64 into an float64 via Golang's
 `float64()` coercion.
 A Boolean is converted to a float64 where false -> 0.0 and true -> 1.0.
 
-```javascript
+```js
 float(value) float64
 ```
 
@@ -175,7 +175,7 @@ Converts a bool, int64 or float64 into an string via Golang's
 [strconv.Format*](https://golang.org/pkg/strconv/#FormatBool) functions.
 Durations are converted to a string representation of the duration.
 
-```javascript
+```js
 string(value) string
 ```
 
@@ -184,7 +184,7 @@ string(value) string
 Converts an int64 or a float64 into an duration assuming nanoseconds units.
 Strings are converted to duration of the form as duration literals in TICKscript.
 
-```javascript
+```js
 duration(value) duration
 ```
 
@@ -195,7 +195,7 @@ duration(value) duration
 Returns a Boolean value based on whether the specified field or tag key is present.
 Useful for filtering out data this is missing the specified field or tag.
 
-```javascript
+```js
 |where(lambda: isPresent("myfield"))
 ```
 
@@ -219,7 +219,7 @@ Each function returns an int64.
 
 Example usage:
 
-```javascript
+```js
 lambda: hour("time") >= 9 AND hour("time") < 19
 ```
 
@@ -314,7 +314,7 @@ Each function is implemented via the equivalent Go function.
 
 Converts an int64 or a float64 with units bytes into a human readable string representing the number of bytes.
 
-```javascript
+```js
 humanBytes(value) string
 ```
 
@@ -328,7 +328,7 @@ The second and third arguments must return the same type.
 
 Example:
 
-```javascript
+```js
 |eval(lambda: if("field" > threshold AND "field" != 0, 'true', 'false'))
     .as('value')
 ```
@@ -338,6 +338,6 @@ The value of the field `value` in the above example will be the string `true` or
 The `if` function's return type is the same type as its second and third arguments.
 
 
-```javascript
+```js
 if(condition, true expression, false expression)
 ```

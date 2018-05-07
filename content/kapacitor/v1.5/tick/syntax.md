@@ -131,7 +131,7 @@ If a TICKscript proves useful, it may be desirable to reuse it as a template tas
 Variable identifiers must begin with a standard ASCII letter and can be followed by any number of letters, digits and underscores.  Both upper and lower case can be used.  In a TICKscript to be used to define a task directly, the type the variable holds depends on the literal value it is assigned.  In a TICKscript written for a task template, the type can also be set using the keyword for the type the variable will hold.  In a TICKscript to be used to define a task directly, using the type identifier will result in a compile time error `invalid TICKscript: missing value for var "<VARNAME>".`.
 
 **Example 1 &ndash; variable declarations for a task**
-```javascript
+```js
 var my_var = 'foo'
 var MY_VAR = 'BAR'
 var my_float = 2.71
@@ -141,7 +141,7 @@ var my_node = stream
 Variable declarations in templates do not require a literal assignment, as is shown in Example 2 below.
 
 **Example 2 &ndash; variable declarations in a task template**
-```javascript
+```js
 var measurement string
 var frame duration
 var warn = float
@@ -171,7 +171,7 @@ TICKscript recognizes five type identifiers.  These identifiers can be used dire
 Boolean values are generated using the Boolean keywords: `TRUE` and `FALSE`.  Note that these keywords use all upper case letters.  The parser will throw an error when using lower case characters, e.g. `True` or `true`.
 
 **Example 3 &ndash; Boolean literals**
-```javascript
+```js
 var true_bool = TRUE
 ...
    |flatten()
@@ -187,7 +187,7 @@ In Example 3 above the first line shows a simple assignment using a Boolean lite
 Any literal token containing only digits and optionally a decimal will lead to the generation of an instance of a numerical type.  TICKscript understands two numerical types based on Go: `int64` and `float64`.  Any numerical token containing a decimal point will result in the creation of a `float64` value.  Any numerical token that ends without containing a decimal point will result in the creation of an `int64` value.  If an integer is prefixed with the zero character, `0`, it is interpreted as an octal.
 
 **Example 4 &ndash; Numerical literals**
-```javascript
+```js
 var my_int = 6
 var my_float = 2.71828
 var my_octal = 0400
@@ -214,7 +214,7 @@ d      | day
 w      | week
 
 **Example 5 &ndash; Duration expressions**
-```javascript
+```js
 var span = 10s
 var frequency = 10s
 ...
@@ -234,7 +234,7 @@ Strings begin with either one or three single single quotation marks: `'` or `''
 
 **Example 6 &ndash; Basic strings**
 
-```javascript
+```js
 var region1 = 'EMEA'
 var old_standby = 'foo' + 'bar'
 var query1 = 'SELECT 100 - mean(usage_idle) AS stat FROM "telegraf"."autogen"."cpu" WHERE cpu = \'cpu-total\' '
@@ -249,7 +249,7 @@ In Example 6 above the first line shows a simple string assignment using a strin
 To make long complex strings more readable newlines are permitted within the string.
 
 **Example 7 &ndash; Multiline string**
-```javascript
+```js
 batch
    |query('SELECT 100 - mean(usage_idle)
            AS stat
@@ -264,7 +264,7 @@ In Example 7 above the string is broken up to make the query more easily underst
 String templates allow node properties, tags and fields to be added to a string.  The format follows the same format provided by the Go [text.template](https://golang.org/pkg/text/template/) package.  This is useful when writing alert messages.  To add a property, tag or field value to a string template, it needs to be wrapped inside of double curly braces: "{{}}".
 
 **Example 8 &ndash; Variables inside of string templates**
-```javascript
+```js
 |alert()
   .id('{{ index .Tags "host"}}/mem_used')
   .message('{{ .ID }}:{{ index .Fields "stat" }}')
@@ -283,7 +283,7 @@ String templates can also include flow statements such as `if...else` as well as
 A string list is a collection of strings declared between two brackets.  They can be declared with literals, identifiers for other variables, or with the asterisk wild card, "\*".  They can be passed into methods that take multiple string parameters.  They are especially useful in template tasks.  Note that when used in function calls, list contents get exploded and the elements are used as all the arguments to the function.  When a list is given, it is understood that the list contains all the arguments to the function.
 
 **Example 9 &ndash; String lists in a standard task**
-```javascript
+```js
 var foo = 'foo'
 var bar = 'bar'
 var foobar_list = [foo, bar]
@@ -298,7 +298,7 @@ stream
 Example 9 declares two string lists. The first contains identifiers for other variables.  The second contains string literals.  The list `cpu_groups` is used in the method `from.groupBy()`.
 
 **Example 10 &ndash; String list in a template task**
-```javascript
+```js
 brp "telegaf"."not_autogen"
 
 var measurement string
@@ -333,7 +333,7 @@ Example 10, taken from the examples in the [code repository](https://github.com/
 Regular expressions begin and end with a forward slash: `/`. The regular expression syntax is the same as Perl, Python and other languages. For details on the syntax see the Go [regular expression library](https://golang.org/pkg/regexp/syntax/).
 
 **Example 11 &ndash; Regular expressions**
-```javascript
+```js
 var cz_turbines = /^cz\d+/
 var adr_senegal = /\.sn$/
 var local_ips = /^192\.168\..*/
@@ -357,7 +357,7 @@ A lambda expression is a parameter representing a short easily understood functi
 Lambda expressions begin with the token `lambda` followed by a colon, ':' &ndash; `lambda:`.
 
 **Example 12 &ndash; Lambda expressions**
-```javascript
+```js
 var my_lambda = lambda: 1 > 0
 var lazy_lambda = lambda: "usage_idle" < 95
 ...
@@ -384,7 +384,7 @@ Example 12 above shows that a lambda expression can be directly assigned to a va
 Like the simpler types, node types are declared and can be assigned to variables.
 
 **Example 13 &ndash; Node expressions**
-```javascript
+```js
 var data = stream
   |from()
     .database('telegraf')
@@ -421,7 +421,7 @@ Accessing data tags and fields, using string literals and accessing TICKscript v
    * **Variables** &ndash; To access a _TICKscript variable_ simply use its identifier.
 
    **Example 14 &ndash; Variable access**
-   ```javascript
+   ```js
    var db = 'website'
    ...
    var data = stream
@@ -435,7 +435,7 @@ Accessing data tags and fields, using string literals and accessing TICKscript v
    * **Tag and Field values** &ndash; To access a _tag value_ or a _field value_ in a Lambda expression use double quotes.  To refer to them in method calls use single quotes.  In method calls these are in essence string literals to be used by a node in matching tag or field values in the data series.
 
    **Example 15 &ndash; Field access**
-   ```javascript
+   ```js
    // Data frame
   var data = stream
      |from()
@@ -454,7 +454,7 @@ Accessing data tags and fields, using string literals and accessing TICKscript v
 
   **Example 16 &ndash; Named lambda expression access**
 
-  ```javascript
+  ```js
   ...
       |window()
         .period(period)
@@ -479,7 +479,7 @@ Accessing data tags and fields, using string literals and accessing TICKscript v
   **Note &ndash; InfluxQL nodes and tag or field access** &ndash; [InfluxQL nodes](/kapacitor/v1.5/nodes/influx_q_l_node/), such as `mean()` in Example 16, are special nodes that wrap InfluxQL functions. See the section [Taxonomy of node types](#taxonomy-of-node-types) below.  When accessing field values, tag values or named results with this node type single quotes are used.
 
   **Example 17 &ndash; Field access with an InfluxQL node**
-  ```javascript
+  ```js
   // Dataframe
 var data = stream
  |from()
@@ -505,7 +505,7 @@ As mentioned in the section [String templates](#string-templates) it is possible
 
 **Example 18 &ndash; accessing values in string templates**
 
-```javascript
+```js
 |alert()
   .id('{{ index .Tags "host"}}/mem_used')
   .message('{{ .ID }}:{{ index .Fields "stat" }}')
@@ -526,7 +526,7 @@ Within lambda expressions it is possible to use stateless conversion functions t
 
 **Example 19 &ndash; Type conversion**
 
-```javascript
+```js
    |eval(lambda: float("total_error_responses")/float("total_responses") * 100.0)
 ```
 
@@ -538,7 +538,7 @@ In Example 19 above, the `float` conversion function is used to ensure that the 
 
 When writing floating point values in messages, or to InfluxDB, it might be helpful to specify the decimal precision in order to make the values more readable or better comparable.  For example, in the `messsage()` method of an `alert` node it is possible to "pipe" a value to a `printf` statement.
 
-```javascript
+```js
 |alert()
   .id('{{ index .Tags "host"}}/mem_used')
   .message('{{ .ID }}:{{ index .Fields "stat" | printf "%0.2f" }}')
@@ -547,7 +547,7 @@ When writing floating point values in messages, or to InfluxDB, it might be help
 When working with floating point values in lambda expressions, it is also possible to use the floor function and powers of ten to round to a less precise value.  Note that using `printf` in a string template is much faster.  Note as well that since values are written as 64bit, this has no effect on storage.  If this were to be used with the `InfluxDBOut` node, for example when downsizing data, it could lead to a needless loss of information.
 
 **Example 20 &ndash; Rendering floating points less precise**
-```javascript
+```js
 stream
  // Select just the cpu measurement from our example database.
  |from()
@@ -570,7 +570,7 @@ Example 20 accomplishes something similar to using `printf`.  The `usage_idle` v
 As Kapacitor and TICKscripts can be used to write values into an InfluxDB database, it may be desirable, in some cases, to specify the time precision to be used.  One example occurs when downsizing data using the calculated mean.  The precision to be written could be set to a value coarser than the default up to and even surpassing the bucket size, i.e. the value set by a call to a method like `window.every()`.  Using a precision larger than the bucket size is not recommended.  Specifying time precision can bring storage and performance improvements.  The most common example occurs when working with the `InfluxDBOut` node, whose precision property can be set.  Note that the `InfluxDBOut` node defaults to the most precise precision, which is nanoseconds. It is important not to confuse _mathematical_ precision, which is used most commonly with field values, and _time_ precision, which is specified for timestamps.
 
 **Example 21 &ndash; Setting time precision with InfluxDBOut**
-```javascript
+```js
 
 stream
     |from()
@@ -624,7 +624,7 @@ Example 22 declares that the TICKscript is to be used against the database `tele
 A **variable declaration** begins with the `var` keyword followed by an identifier for the variable being declared.  An assignment operator follows with a literal right side value, which will set the type and value for the new variable.
 
 **Example 23 &ndash; Typical declarations**
-```javascript
+```js
 ...
 var db = 'website'
 var rp = 'autogen'
@@ -639,7 +639,7 @@ Example 23 shows six declaration statements. Five of them create variables holdi
 A declaration can also be used to assign an expression to a variable.
 
 **Example 24 &ndash; Declaring an expression to a variable**
-```javascript
+```js
 var data = stream
     |from()
         .database(db)
@@ -656,7 +656,7 @@ Expressions can be written all on a single line, but this can lead to readabilit
 An expression ends with the last setter of the last node in the pipeline.
 
 **Example 25 &ndash; Single line expressions**
-```javascript
+```js
 ...
 // Dataframe
 var data = batch|query('''SELECT mean(used_percent) AS stat FROM "telegraf"."autogen"."mem" ''').period(period).every(every).groupBy('host')
@@ -669,7 +669,7 @@ var alert = data|eval(lambda: sigma("stat")).as('sigma').keep()|alert().id('{{ i
 Example 25 shows an expression with a number of nodes and setters declared all on the same line.  While this is possible, it is not the recommended style.  Note also that the command line utility `tickfmt`, that comes with the Kapacitor distribution, can be used to reformat a TICKscript to follow the recommended style.
 
 **Example 26 &ndash; Recommended expression syntax**
-```javascript
+```js
 ...
 // Dataframe
 var data = batch
@@ -704,7 +704,7 @@ With two exceptions, (`stream` and `batch`) nodes always occur in pipeline expre
 For each node type, the method that creates an instance of that type uses the same signature.  So if a `query` node creates an `eval` node and adds it to the chain, and if a `from` node can also create an `eval` node and add it to the chain, the chaining method creating a new `eval` node will accept the same arguments (e.g. one or more lambda expressions) regardless of which node created it.
 
 **Example 27 &ndash; Instantiate eval node in stream**
-```javascript
+```js
 ...
 var data = stream
   |from()
@@ -721,7 +721,7 @@ var data = stream
 Example 27 creates three nodes: `stream`, `from` and `eval`.
 
 **Example 28 &ndash; Instantiate eval node in batch**
-```javascript
+```js
 ...
 var data = batch
   |query('''SELECT 100 - mean(usage_idle) AS stat FROM "telegraf"."autogen"."cpu" WHERE cpu = 'cpu-total' ''')
@@ -753,7 +753,7 @@ It is important to become familiar with the [reference documentation](/kapacitor
 
 
 **Example 29 &ndash; a typical pipeline**
-```javascript
+```js
 // Dataframe
 var data = batch
   |query('''SELECT 100 - mean(usage_idle) AS stat FROM "telegraf"."autogen"."cpu" WHERE cpu = 'cpu-total' ''')
@@ -872,7 +872,7 @@ SELECT {<FIELD_KEY> | <TAG_KEY> | <FUNCTION>([<FIELD_KEY>|<TAG_KEY])} FROM <DATA
    * The `WHERE` clause requires a conditional expression.  This may include `AND` and `OR` Boolean operators as well as mathematical operations.
 
 **Example 30 &ndash; A simple InfluxQL query statement**
-```javascript
+```js
 batch
     |query('SELECT cpu, usage_idle FROM "telegraf"."autogen".cpu WHERE time > now() - 10s')
         .period(10s)
@@ -883,7 +883,7 @@ batch
 Example 30 shows a simple `SELECT` statement that takes the `cpu` tag and the `usage_idle` field from the cpu measurement as recorded over the last ten seconds.
 
 **Example 31 &ndash; A simple InfluxQL query statement with variables**
-```javascript
+```js
 var my_field = 'usage_idle'
 var my_tag = 'cpu'
 
@@ -896,7 +896,7 @@ batch
 Example 31 reiterates the same query from Example 30, but shows how to add variables to the query string.
 
 **Example 32 &ndash; An InfluxQL query statement with a function call**
-```javascript
+```js
 ...
 var data = batch
   |query('''SELECT 100 - mean(usage_idle) AS stat FROM "telegraf"."autogen"."cpu" WHERE cpu = 'cpu-total' ''')
@@ -926,7 +926,7 @@ The full range of lambda expressions and their uses is presented in the topic [L
 Within lambda expressions TICKscript variables can be accessed using their plain identifiers.  Tag and field values from data series's can be accessed by surrounding them in double quotes.  Literals can also be used directly.
 
 **Example 33 &ndash; Lambda expressions**
-```javascript
+```js
 ...
 // Parameters
 var info = 70
@@ -975,7 +975,7 @@ The following section summarizes how to access variables and data series tags an
 
 Declaration examples:
 
-```javascript
+```js
 var my_var = 'foo'
 var my_field = `usage_idle`
 var my_num = 2.71
@@ -985,7 +985,7 @@ var my_num = 2.71
 
    * In **TICKscript** simply use the identifier.
 
-   ```javascript
+   ```js
       var my_other_num = my_num + 3.14
       ...
          |default()
@@ -995,7 +995,7 @@ var my_num = 2.71
 
    * In a **query string** simply use the identifier with string concatenation.
 
-   ```javascript
+   ```js
       ...
          |query('SELECT ' + my_field + ' FROM "telegraf"."autogen".cpu WHERE host = \'' + my_var + '\'' )
       ...
@@ -1003,7 +1003,7 @@ var my_num = 2.71
 
    * In a **lambda expression** simply use the identifier.
 
-   ```javascript
+   ```js
       ...
         .info(lambda: "stat" > my_num )
       ...
@@ -1011,7 +1011,7 @@ var my_num = 2.71
 
    * In an **InfluxQL node** use the identifier.  Note that in most cases strings will be used as field or tag names.
 
-   ```javascript
+   ```js
       ...
          |mean(my_var)
       ...
@@ -1021,7 +1021,7 @@ var my_num = 2.71
 
 Examples
 
-```javascript
+```js
 ...
    |query('SELECT mean(usage_idle) AS mean ...')
 ...
@@ -1035,7 +1035,7 @@ Examples
 
    * In a **TICKscript** method call use single quotes.
 
-   ```javascript
+   ```js
       ...
          |derivative('mean')
       ...
@@ -1043,7 +1043,7 @@ Examples
 
    * In a **query string** use the identifier directly in the string.
 
-   ```javascript
+   ```js
       ...
          |query('SELECT cpu, usage_idle FROM "telegraf"."autogen".cpu')
       ...
@@ -1051,7 +1051,7 @@ Examples
 
    * In a **lambda expression** use double quotes.
 
-   ```javascript
+   ```js
       ...
          |eval(lambda: 100.0 - "usage_idle")
       ...
@@ -1062,7 +1062,7 @@ Examples
 
    * In an **InfluxQL node**  use single quotes.
 
-   ```javascript
+   ```js
       ...
          |mean('used')
       ...
@@ -1081,7 +1081,7 @@ As of Kapacitor 1.3 it is possible to declare a variable using double quotes, wh
 When using the InfluxDBOut node, be careful not to create circular rewrites to the same database and the same measurement from which data is being read.
 
 **Example 34 &ndash; A circular rewrite**
-```javascript
+```js
 stream
    |from()
       .measurement('system')

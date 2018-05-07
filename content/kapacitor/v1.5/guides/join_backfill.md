@@ -27,7 +27,7 @@ Then to store the data back into InfluxDB as a new measurement.
 ### Joining with batch data
 
 We need to query the two measurements, `errors` and `views`.
-```javascript
+```js
 // Get errors batch data
 var errors = batch
     |query('SELECT sum(value) FROM "pages"."autogen".errors')
@@ -52,7 +52,7 @@ Filling the data ensures every point will have a match with a sane default.
 
 Now that we have two batch sources for each measurement we need to join them like so.
 
-```javascript
+```js
 // Join errors and views
 errors
     |join(views)
@@ -68,7 +68,7 @@ the joined fields will be called `errors.sum` and `views.sum` respectively.
 Now that the data is joined we can calculate the percentage.
 Using the new names for the fields, we can write this expression to calculate our desired percentage.
 
-```javascript
+```js
     //Calculate percentage
     |eval(lambda: "errors.sum" / ("views.sum" + "errors.sum"))
         // Give the resulting field a name
@@ -78,7 +78,7 @@ Using the new names for the fields, we can write this expression to calculate ou
 
  Finally, we want to store this data back into InfluxDB.
 
-```javascript
+```js
     |influxDBOut()
         .database('pages')
         .measurement('error_percent')
@@ -87,7 +87,7 @@ Using the new names for the fields, we can write this expression to calculate ou
 
 Here is the complete TICKscript for the batch task:
 
-```javascript
+```js
 dbrp "pages"."autogen"
 
 // Get errors batch data
@@ -157,7 +157,7 @@ If you would like to try out this example case there are scripts [here](https://
 ### Stream method
 To do the same for the streaming case the TICKscript is very similar:
 
-```javascript
+```js
 dbrp "pages"."autogen"
 
 // Get errors stream data

@@ -77,7 +77,7 @@ This setting only applies if the `global` setting is also set to `true`.
 
 #### Sample configuration
 
-```javascript
+```js
     [hipchat]
       enabled = true
       url = "https://my-subdomain.hipchat.com/v2/room"

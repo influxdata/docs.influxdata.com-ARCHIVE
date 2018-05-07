@@ -100,7 +100,7 @@ What does a leaderboard need to do?
 To complete step one we need to buffer the incoming stream and return the most recent score update per player per game.
 Our [TICKscript](/kapacitor/v1.5/tick/) will look like this:
 
-```javascript
+```js
 var topPlayerScores = stream
     |from()
         .measurement('scores')
@@ -125,7 +125,7 @@ Next to calculate the top scores per game we just need to group by game and run 
 Let's keep the top 15 scores per game.
 Add these lines to the `top_scores.tick` file.
 
-```javascript
+```js
 // Calculate the top 15 scores per game
 var topScores = topPlayerScores
     |groupBy('game')
@@ -138,7 +138,7 @@ Kapacitor can expose the scores over HTTP via the [HTTPOutNode](/kapacitor/v1.5/
 We will call our task `top_scores`; with the following addition the most recent scores will be available at
 `http://localhost:9092/kapacitor/v1/tasks/top_scores/top_scores`.
 
-```javascript
+```js
 // Expose top scores over the HTTP API at the 'top_scores' endpoint.
 // Now your app can just request the top scores from Kapacitor
 // and always get the most recent result.
@@ -155,7 +155,7 @@ Also let's do some basic analysis ahead of time since we already have a stream o
 For now we will just do basic gap analysis where we will store the gap between the top player and the 15th player.
 Add these lines to `top_scores.tick` to complete our task.
 
-```javascript
+```js
 // Sample the top scores and keep a score once every 10s
 var topScoresSampled = topScores
     |sample(10s)
@@ -195,7 +195,7 @@ curl -G 'http://localhost:8086/query?' --data-urlencode 'q=CREATE DATABASE game'
 
 Here is the complete task TICKscript if you don't want to copy paste as much :)
 
-```javascript
+```js
 dbrp "game"."autogen"
 
 // Define a result that contains the most recent score per player.
