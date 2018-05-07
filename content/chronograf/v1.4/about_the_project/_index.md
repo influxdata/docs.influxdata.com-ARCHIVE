@@ -1,6 +1,6 @@
 ---
 title: About the Chronograf project
-description: This section includes documentation about the  Chronograf project, release notes and changelogs, what's new, contributing, and licenses.
+description: This section includes documentation about the Chronograf project, release notes and changelogs, what's new, contributing, and licenses.
 menu:
   chronograf_1_4:
     name: About the project
