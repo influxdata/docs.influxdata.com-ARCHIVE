@@ -95,32 +95,32 @@ A handler definition has a few properties:
 * Options - A map of values, differs by kind.
 -->
 
-### List of Handlers
+### List of handlers
 
 The following is a list of available alert event handlers:
 
-| Handler                       | Description                                      |
-| -------                       | -----------                                      |
-| [Alerta](#alerta)             | Post alert message to Alerta.                    |
-| [email](#email)               | Send and email with alert data.                  |
-| [exec](#exec)                 | Execute a command passing alert data over STDIN. |
-| [HipChat](#hipchat)           | Post alert message to HipChat room.              |
-| [Kafka](#kafka)               | Send alert to a Apache Kafka cluster.            |
-| [log](#log)                   | Log alert data to file.                          |
-| [MQTT](#mqtt)                 | Post alert message to MQTT.                      |
-| [OpsGenie v1](#opsgenie-v1)   | Send alert to OpsGenie using their v1 API.       |
-| [OpsGenie v2](#opsgenie-v2)   | Send alert to OpsGenie using their v2 API.       |
-| [PagerDuty v1](#pagerduty-v1) | Send alert to PagerDuty using their v1 API.      |
-| [PagerDuty v2](#pagerduty-v1) | Send alert to PagerDuty using their v2 API.      |
-| [post](#post)                 | HTTP POST data to a specified URL.               |
-| [Pushover](#pushover)         | Send alert to Pushover.                          |
-| [Sensu](#sensu)               | Post alert message to Sensu client.              |
-| [Slack](#slack)               | Post alert message to Slack channel.             |
-| [SNMPTrap](#snmptrap)         | Trigger SNMP traps.                              |
-| [Talk](#talk)                 | Post alert message to Talk client.               |
-| [tcp](#tcp)                   | Send data to a specified address via raw TCP.    |
-| [Telegram](#telegram)         | Post alert message to Telegram client.           |
-| [VictorOps](#victorops)       | Send alert to VictorOps.                         |
+| Handler                       | Description                                                                           |
+| -------                       | -----------                                                                           |
+| [Alerta](#alerta)             | Post alert message to Alerta.                                                         |
+| [email](#email)               | Send and email with alert data.                                                       |
+| [exec](#exec)                 | Execute a command passing alert data over STDIN.                                      |
+| [HipChat](#hipchat)           | Post alert message to HipChat room.                                                   |
+| [Kafka](#kafka)               | Send alert to a Apache Kafka cluster.                                                 |
+| [log](#log)                   | Log alert data to file.                                                               |
+| [MQTT](#mqtt)                 | Post alert message to MQTT.                                                           |
+| [OpsGenie v1](#opsgenie-v1)   | Send alert to OpsGenie using their v1 API. <em style="opacity: .5">(Deprecated)</em>  |
+| [OpsGenie v2](#opsgenie-v2)   | Send alert to OpsGenie using their v2 API.                                            |
+| [PagerDuty v1](#pagerduty-v1) | Send alert to PagerDuty using their v1 API. <em style="opacity: .5">(Deprecated)</em> |
+| [PagerDuty v2](#pagerduty-v1) | Send alert to PagerDuty using their v2 API.                                           |
+| [post](#post)                 | HTTP POST data to a specified URL.                                                    |
+| [Pushover](#pushover)         | Send alert to Pushover.                                                               |
+| [Sensu](#sensu)               | Post alert message to Sensu client.                                                   |
+| [Slack](#slack)               | Post alert message to Slack channel.                                                  |
+| [SNMPTrap](#snmptrap)         | Trigger SNMP traps.                                                                   |
+| [Talk](#talk)                 | Post alert message to Talk client.                                                    |
+| [tcp](#tcp)                   | Send data to a specified address via raw TCP.                                         |
+| [Telegram](#telegram)         | Post alert message to Telegram client.                                                |
+| [VictorOps](#victorops)       | Send alert to VictorOps.                                                              |
 
 
 ## Match expressions

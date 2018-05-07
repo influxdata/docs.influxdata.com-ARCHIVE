@@ -1,6 +1,6 @@
 ---
 title: VictorOps event handler
-description: The VictorOps event handler allows you to send Kapacitor alerts to VictorOps. This doc includes configuration options and usage examples.
+description: The VictorOps event handler allows you to send Kapacitor alerts to VictorOps. This page includes configuration options and usage examples.
 menu:
   kapacitor_1_5:
     name: VictorOps

@@ -1,6 +1,6 @@
 ---
 title: Aggregate event handler
-description: The aggregate event handler allows you to aggregate alerts messages over a specified interval. This doc includes aggregate options and usage examples.
+description: The aggregate event handler allows you to aggregate alerts messages over a specified interval. This page includes aggregate options and usage examples.
 menu:
   kapacitor_1_5:
     name: Aggregrate
@@ -37,7 +37,7 @@ options:
 The aggregate event handler subscribes to a topic and aggregates messages
 published to that topic at specified intervals.
 The TICKscript below, `cpu_alert.tick`, publishes alerts to the `cpu` topic if
-CPU idle-usage is less than 10% (or CPU usage is greater than 90%).
+CPU idle usage is less than 10% (or CPU usage is greater than 90%).
 
 #### cpu\_alert.tick
 ```js

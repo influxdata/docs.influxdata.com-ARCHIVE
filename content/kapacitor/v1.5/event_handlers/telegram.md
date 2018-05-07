@@ -1,6 +1,6 @@
 ---
 title: Telegram event handler
-description: The Telegram event handler allows you to send Kapacitor alerts to Telegram. This doc includes configuration options and usage examples.
+description: The Telegram event handler allows you to send Kapacitor alerts to Telegram. This page includes configuration options and usage examples.
 menu:
   kapacitor_1_5:
     name: Telegram
@@ -35,7 +35,7 @@ Set to `true` to enable the Telegram event handler.
 
 #### `url`
 The Telegram Bot URL.
-_**This should not need to be changed.**_
+_**This should not need to be changed.**
 
 #### `token`
 Telegram bot token.
@@ -51,7 +51,7 @@ which allow Telegram apps to show bold, italic, fixed-width text or inline URLs
 in alert message.
 
 #### `disable-web-page-preview`
-Disable link previews for links in this message
+Disable link previews for links in this message.
 
 #### `disable-notification`
 Sends the message silently. iOS users will not receive a notification.
@@ -74,7 +74,7 @@ The following Telegram event handler options can be set in a
 | Name                     | Type   | Description                                                                                   |
 | ----                     | ----   | -----------                                                                                   |
 | chat-id                  | string | Telegram user/group ID to post messages to. If empty uses the chati-d from the configuration. |
-| parse-mode               | string | Parse node, defaults to Mardown. If empty uses the parse-mode from the configuration.         |
+| parse-mode               | string | Parse node, defaults to Markdown. If empty uses the parse-mode from the configuration.         |
 | disable-web-page-preview | bool   | Web Page preview. If empty uses the disable-web-page-preview from the configuration.          |
 | disable-notification     | bool   | Disables Notification. If empty uses the disable-notification from the configuration.         |
 
@@ -281,7 +281,7 @@ with the `123456789` chat-ID.
 
 Create a TICKscript that publishes alert messages to a topic.
 The TICKscript below sends an alert message to the `cpu` topic any time CPU
-idle-usage drops below 10% _(or CPU usage is above 90%)_.
+idle usage drops below 10% _(or CPU usage is above 90%)_.
 
 _**cpu\_alert.tick**_
 ```js

@@ -1,6 +1,6 @@
 ---
 title: Email event handler
-description: The "email" event handler allows you to send Kapacitor alerts via email. This doc includes configuration options and usage examples.
+description: The "email" event handler allows you to send Kapacitor alerts via email. This page includes configuration options and usage examples.
 menu:
   kapacitor_1_5:
     name: Email
@@ -141,7 +141,7 @@ stream
 
 ### Email alerts from a defined handler
 The following setup sends an alert to the `cpu` topic with the message, "Hey,
-check your CPU". An emai handler is added that subscribes to the `cpu` topic
+check your CPU". An email handler is added that subscribes to the `cpu` topic
 and emails all alerts.
 
 Create a TICKscript that publishes alert messages to a topic.

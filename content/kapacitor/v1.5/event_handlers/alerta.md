@@ -1,6 +1,6 @@
 ---
 title: Alerta event handler
-description: The Alerta event handler allows you to send Kapacitor alerts to Alerta. This doc includes configuration options and usage examples.
+description: The Alerta event handler allows you to send Kapacitor alerts to Alerta. This page includes configuration options and usage examples.
 menu:
   kapacitor_1_5:
     name: Alerta
@@ -9,7 +9,7 @@ menu:
 ---
 
 [Alerta](http://alerta.io/) is a monitoring tool used to consolidate and
-de-duplicate alerts from multiple sources for quick ‘at-a-glance’ visualization.
+deduplicate alerts from multiple sources for quick ‘at-a-glance’ visualization.
 Kapacitor can be configured to send alert messages to Alerta.
 
 ## Configuration

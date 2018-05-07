@@ -1,6 +1,6 @@
 ---
 title: Post event handler
-description: The "post" event handler allows you to POST Kapacitor alert data to an HTTP endpoint. This doc includes configuration options and usage examples.
+description: The "post" event handler allows you to POST Kapacitor alert data to an HTTP endpoint. This page includes configuration options and usage examples.
 menu:
   kapacitor_1_5:
     name: Post
@@ -192,11 +192,11 @@ kapacitor define-topic-handler post_cpu_handler.yaml
 ```
 
 
-## Post Templating
+## Post templating
 The post event handler allows you to customize the content and structure of
 POSTs with alert and row templates.
 
-### Alert Templates
+### Alert templates
 Alert templates are used to construct a custom HTTP body.
 They are only used with post [alert](/kapacitor/v1.5/nodes/alert_node/) handlers
 as they consume alert data.
@@ -217,7 +217,7 @@ have access to the following fields:
 | .Level    | The level of the alert, i.e INFO, WARN, or CRITICAL. |
 | .Data     | The data that triggered the alert.                   |
 
-#### Inline Alert Template
+#### Inline alert template
 _**kapacitor.conf**_
 ```toml
 [httppost]]
@@ -226,7 +226,7 @@ _**kapacitor.conf**_
   alert-template = "{{.Message}}:{{range .Data.Series}}{{.Tags}},{{range .Values}}{{.}}{{end}}{{end}}"
 ```
 
-#### Alert Template File
+#### Alert template file
 _**kapacitor.conf**_
 ```toml
 [httppost]]
@@ -240,7 +240,7 @@ _**/etc/templates/alert.html**_
 {{.Message}}:{{range .Data.Series}}{{.Tags}},{{range .Values}}{{.}}{{end}}{{end}}
 ```
 
-### Row Templates
+### Row templates
 Row templates are used to construct a custom HTTP body.
 They are only used with post [httpPost](/kapacitor/v1.5/nodes/http_post_node/)
 handlers as they consume a row at a time.
@@ -257,16 +257,16 @@ have access to the following fields:
 | .Tags   | A map of tags on the data.                                                                                                 |
 | .Values | A list of values; each a map containing a "time" key for the time of the point and keys for all other fields on the point. |
 
-#### Inline Row Template
+#### Inline row template
 _**kapacitor.conf**_
 ```toml
 [[httppost]]
   endpoint = "example"
   url = "http://example.com"
-  row-template = "{{.Name}} host={{index .Tags \"host\"}}{{range .Values}} {{index . "time"}} {{index . "value"}}{{end}}"
+  row-template = '{{.Name}} host={{index .Tags "host"}}{{range .Values}} {{index . "time"}} {{index . "value"}}{{end}}'
 ```
 
-#### Row Template File
+#### Row template file
 _**kapacitor.conf**_
 ```toml
 [[httppost]]

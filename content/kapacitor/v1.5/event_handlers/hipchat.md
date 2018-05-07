@@ -1,6 +1,6 @@
 ---
 title: HipChat event handler
-description: The HipChat event handler allows you to send Kapacitor alerts to HipChat. This doc includes configuration options and usage examples.
+description: The HipChat event handler allows you to send Kapacitor alerts to HipChat. This page includes configuration options and usage examples.
 menu:
   kapacitor_1_5:
     name: HipChat
@@ -160,7 +160,7 @@ subdomain defined in the `kapacitor.conf`.
 
 Create a TICKscript that publishes alert messages to a topic.
 The TICKscript below sends an alert message to the `cpu` topic any time CPU
-idle-usage drops below 10% _(or CPU usage is above 90%)_.
+idle usage drops below 10% _(or CPU usage is above 90%)_.
 
 _**cpu\_alert.tick**_
 ```js

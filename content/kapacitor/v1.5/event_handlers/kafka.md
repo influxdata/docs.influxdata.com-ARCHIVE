@@ -1,6 +1,6 @@
 ---
 title: Kafka event handler
-description: The Kafka event handler allows you to send Kapacitor alerts to an Apache Kafka cluster. This doc includes configuration options and usage examples.
+description: The Kafka event handler allows you to send Kapacitor alerts to an Apache Kafka cluster. This page includes configuration options and usage examples.
 menu:
   kapacitor_1_5:
     name: Kafka
@@ -156,7 +156,7 @@ publishes all alert messages to the `cpu-alerts` topic associated with the
 
 Create a TICKscript that publishes alert messages to a topic.
 The TICKscript below sends an alert message to the `cpu` topic any time CPU
-idle-usage drops below 10% _(or CPU usage is above 90%)_.
+idle usage drops below 10% _(or CPU usage is above 90%)_.
 
 _**cpu\_alert.tick**_
 ```js

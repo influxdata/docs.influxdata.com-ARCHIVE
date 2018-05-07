@@ -52,7 +52,7 @@ _The default location for this is `/etc/kapacitor/kapacitor.conf`, but may be
 different depending on your Kapacitor setup._
 
 Many event handlers provide options that can be defined in a TICKscript or in a
-handler file while some can only be configured in a hander file.
+handler file while some can only be configured in a handler file.
 These configurable options are outlined in the documentation for each handler.
 
 ## Adding and using event handlers
