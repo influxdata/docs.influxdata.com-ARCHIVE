@@ -4,8 +4,8 @@ title: Troubleshooting Telegraf
 menu:
   telegraf_1_6:
     name: Troubleshooting
-    weight: 40
-    parent: administration
+    weight: 30
+    parent: Administration
 ---
 
 This guide will show you how to capture Telegraf output, submit sample metrics, and see how Telegraf formats and emits points to its output plugins.

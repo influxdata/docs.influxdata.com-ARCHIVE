@@ -8,7 +8,7 @@ menu:
     name: WindowNode
     identifier: window_node
     weight: 340
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

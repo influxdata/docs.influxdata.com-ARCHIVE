@@ -1,9 +1,10 @@
 ---
-title: Contributing to Chronograf
+title: Contributing to InfluxDB OSS
 menu:
   influxdb_1_5:
+    name: Contributing
     weight: 30
     parent: About the project
 ---
 
-[Contributing to Chronograf](https://github.com/influxdata/chronograf/blob/master/CONTRIBUTING.md) is available on GitHub.
+Information on [contributing to InfluxDB OSS](https://github.com/influxdata/influxdb/blob/master/CONTRIBUTING.md) is available on GitHub.

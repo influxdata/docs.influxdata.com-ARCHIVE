@@ -8,7 +8,7 @@ menu:
     name: BarrierNode
     identifier: barrier_node
     weight: 20
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

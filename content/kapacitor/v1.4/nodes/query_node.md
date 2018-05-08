@@ -8,7 +8,7 @@ menu:
     name: QueryNode
     identifier: query_node
     weight: 220
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

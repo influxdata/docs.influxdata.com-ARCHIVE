@@ -1,17 +1,17 @@
 ---
-title: Writing socket-based user-defined functions (UDFs)
+title: Writing Kapacitor socket-based user defined functions (UDFs)
+description: Learn about Kapacitor user defined functions (UDFs), differences between socket UDFs and process UDFs
 aliases:
     - kapacitor/v1.4/examples/socket_udf/
 menu:
   kapacitor_1_4:
     name: Writing socket-based UDFs
-    identifier: socket_udf
-    weight: 40
-    parent: guides
+    weight: 60
+    parent: Guides
 ---
 
-In [another example](/kapacitor/v1.4/guides/anomaly_detection/) we saw how to write a process based UDF for custom anomaly detection workloads.
-In this example we are going to learn how to write a simple socket based UDF.
+In [Custom anomaly detection with Kapacitor](/kapacitor/v1.4/guides/anomaly_detection/), we saw how to write a process-based user defined function (UDF) for custom anomaly detection workloads.
+In this example we are going to learn how to write a simple socket-based UDF.
 
 ## What is a user-defined function (UDF)?
 

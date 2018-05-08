@@ -8,7 +8,7 @@ menu:
     name: WhereNode
     identifier: where_node
     weight: 330
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

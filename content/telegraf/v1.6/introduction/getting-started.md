@@ -5,7 +5,7 @@ menu:
   telegraf_1_6:
     name: Getting started
     weight: 30
-    parent: introduction
+    parent: Introduction
 ---
 
 ## Getting started with Telegraf

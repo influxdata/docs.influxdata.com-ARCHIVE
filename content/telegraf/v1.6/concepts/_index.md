@@ -4,8 +4,7 @@ description: This section discusses key concepts about Telegraf, including infor
 menu:
    telegraf_1_6:
      name: Concepts
-     identifier: concepts
-     weight: 120
+     weight: 30
 ---
 This section discusses key concepts about Telegraf, the plug-in driven server agent component of the InfluxData time series platform. Topics covered include supported input data formats, output data formats, aggregator and processor plugins, and a glossary of important terms.
 

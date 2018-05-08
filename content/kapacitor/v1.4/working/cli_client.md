@@ -1,11 +1,11 @@
 ---
 title: Kapacitor command line client
-
+description: Overview of the Kapacitor command line client, commands, data sampling, and working with topics and tasks
 menu:
   kapacitor_1_4:
-    name: Command line client
-    weight: 12
-    parent: work-w-kapacitor
+    name: Kapacitor command line client
+    weight: 30
+    parent: Working with Kapacitor
 ---
 
 # Contents

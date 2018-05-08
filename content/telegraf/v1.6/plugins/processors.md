@@ -6,7 +6,7 @@ menu:
     name: Processor
     identifier: processors
     weight: 40
-    parent: plugins
+    parent: Plugins
 ---
 
 Processor plugins process metrics as they pass through and immediately emit results based on the values they process.

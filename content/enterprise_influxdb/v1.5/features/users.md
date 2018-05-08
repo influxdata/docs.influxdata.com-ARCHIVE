@@ -1,5 +1,5 @@
 ---
-title: InfluxDB Enterprise users
+title: Managing InfluxDB Enterprise users
 aliases:
     - /enterprise/v1.5/features/users/
 menu:
