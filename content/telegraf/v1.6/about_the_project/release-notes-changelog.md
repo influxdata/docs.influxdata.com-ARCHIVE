@@ -7,6 +7,17 @@ menu:
     parent: About the project
 ---
 
+## v1.6.2 [2018-05-08]
+
+### Bug fixes
+
+* Use same timestamp for fields in system input.
+* Fix handling of uint64 in Datadog (`datadog`) output.
+* Ignore UTF8 BOM in JSON parser.
+* Fix case for slave metrics in MySQL (`mysql`) input.
+* Fix uint support in CrateDB (`cratedb`) output.
+
+
 ## v1.6.1 [2018-04-23]
 
 ### Bug fixes
