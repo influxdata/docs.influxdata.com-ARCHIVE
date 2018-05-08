@@ -28,11 +28,13 @@ a [StreamNode.](/kapacitor/v1.5/nodes/stream_node/)
 
 | Setters | Description |
 |:---|:---|
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress all error logging events from this node.  |
 
 
 ### Chaining Methods
-[Deadman](/kapacitor/v1.5/nodes/stream_node/#deadman), [From](/kapacitor/v1.5/nodes/stream_node/#from), [Stats](/kapacitor/v1.5/nodes/stream_node/#stats)
+[Deadman](#deadman),
+[From](#from),
+[Stats](#stats)
 
 ---
 
@@ -44,7 +46,7 @@ Property methods are marked using the `.` operator.
 
 ### Quiet
 
-Suppress errors during execution.
+Suppress all error logging events from this node.
 
 ```js
 stream.quiet()
@@ -64,9 +66,9 @@ Chaining methods are marked using the `|` operator.
 
 Helper function for creating an alert on low throughput, a.k.a. deadman's switch.
 
-- Threshold -- trigger alert if throughput drops below threshold in points/interval.
-- Interval -- how often to check the throughput.
-- Expressions -- optional list of expressions to also evaluate. Useful for time of day alerting.
+- Threshold: trigger alert if throughput drops below threshold in points/interval.
+- Interval: how often to check the throughput.
+- Expressions: optional list of expressions to also evaluate. Useful for time of day alerting.
 
 Example:
 
@@ -81,8 +83,7 @@ Example:
     data...
 ```
 
-The above is equivalent to this
-Example:
+The above is equivalent to this example:
 
 
 ```js

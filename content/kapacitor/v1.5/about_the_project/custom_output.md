@@ -34,8 +34,8 @@ In our example the data processing step is outputting the data to HouseDB.
 
 The code mirrors these requirements with two Go packages.
 
-1. `pipeline` -- this package defines what types of nodes are available and how they are configured.
-2. `kapacitor` -- this package provides implementations of each of the nodes defined in the `pipeline` package.
+1. `pipeline`: this package defines what types of nodes are available and how they are configured.
+2. `kapacitor`: this package provides implementations of each of the nodes defined in the `pipeline` package.
 
 To make the API (i.e., a TICKscript) clean and readable,  defining the node is split out from the implementation of the node.
 
@@ -457,9 +457,9 @@ Since TICKscript is its own language we have built a small utility similiar to [
 `tickdoc` generates documentation from comments in the code.
 The `tickdoc` utility understands two special comments to help it generate clean documentation.
 
-1. `tick:ignore` -- can be added to any field, method, function or struct. `tickdoc` will skip it and not
+1. `tick:ignore`: can be added to any field, method, function or struct. `tickdoc` will skip it and not
     generate any documentation for it. This is most useful to ignore fields that are set via property methods.
-2. `tick:property` -- only added to methods. Informs `tickdoc` that the method is a `property method` not a `chaining method`.
+2. `tick:property`: only added to methods. Informs `tickdoc` that the method is a `property method` not a `chaining method`.
 
 Place one of these comments on a line all by itself and `tickdoc` will find it and behave accordingly. Otherwise document your code normaly and `tickdoc` will do the rest.
 

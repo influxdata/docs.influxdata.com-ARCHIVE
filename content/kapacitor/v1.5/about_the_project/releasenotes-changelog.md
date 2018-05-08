@@ -26,7 +26,7 @@ Kapacitor v1.4.0 adds many new features, highlighted here:
 ### Breaking changes
 
 #### Change over internal API to use message passing semantics.
-The `Combine` and `Flatten` nodes previously operated (erroneously) across batch boundaries -- this has been fixed.
+The `Combine` and `Flatten` nodes previously operated (erroneously) across batch boundaries: this has been fixed.
 
 ### Features
 - Added service for loading topic handlers, tasks, and templates from `dir`.

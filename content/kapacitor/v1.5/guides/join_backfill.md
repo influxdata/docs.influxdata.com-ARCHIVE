@@ -15,8 +15,8 @@ Using Kapacitor we can join those series and calculate a combined value.
 
 Let's say we have two measurements:
 
-* `errors` -- the number of page views that had an error.
-* `views` -- the number of page views that had no errror.
+* `errors`: the number of page views that had an error.
+* `views`: the number of page views that had no errror.
 
 Both measurements exist in a database called `pages` and in the retention policy `autogen`.
 

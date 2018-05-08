@@ -44,6 +44,7 @@ and [AlertNode.Crit](/kapacitor/v1.5/nodes/alert_node/#crit) below.
 | **[idField](#idfield)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional field key to add to the data, containing the alert ID as a string.  |
 | **[idTag](#idtag)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional tag key to use when tagging the data with the alert ID.  |
 | **[info](#info)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for the INFO alert level. An empty value indicates the level is invalid and is skipped.  |
+| **[inhibit](#inhibit)&nbsp;(&nbsp;`category`&nbsp;`string`,&nbsp;`equalTags`&nbsp;`...string`)** | Inhibit other alerts in a category. The equal tags provides a list of tags that must be equal in order for an alert event to be inhibited.  |
 | **[infoReset](#inforeset)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for resetting the INFO alert level to lower level.  |
 | **[kafka](#kafka)&nbsp;(&nbsp;)** | Send the alert to a Kafka cluster. |
 | **[levelField](#levelfield)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional field key to add to the data, containing the alert level as a string.  |
@@ -59,7 +60,7 @@ and [AlertNode.Crit](/kapacitor/v1.5/nodes/alert_node/#crit) below.
 | **[pagerDuty2](#pagerduty-v2)&nbsp;(&nbsp;)** | Send the alert to PagerDuty using PagerDuty's v2 API. |
 | **[post](#post)&nbsp;(&nbsp;`urls`&nbsp;`...string`)** | HTTP POST JSON alert data to a specified URL.  |
 | **[pushover](#pushover)&nbsp;(&nbsp;)** | Send the alert to Pushover. |
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution. |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppresses all error logging events from this node. |
 | **[sensu](#sensu)&nbsp;(&nbsp;)** | Send the alert to Sensu.  |
 | **[slack](#slack)&nbsp;(&nbsp;)** | Send the alert to Slack. |
 | **[snmpTrap](#snmptrap)&nbsp;(&nbsp;`trapOid`&nbsp;`string`)** | Send the alert using SNMP traps. |
@@ -75,7 +76,55 @@ and [AlertNode.Crit](/kapacitor/v1.5/nodes/alert_node/#crit) below.
 
 
 ### Chaining methods
-[Alert](/kapacitor/v1.5/nodes/alert_node/#alert), [Barrier](/kapacitor/v1.5/nodes/alert_node/#barrier), [Bottom](/kapacitor/v1.5/nodes/alert_node/#bottom), [Combine](/kapacitor/v1.5/nodes/alert_node/#combine), [Count](/kapacitor/v1.5/nodes/alert_node/#count), [CumulativeSum](/kapacitor/v1.5/nodes/alert_node/#cumulativesum), [Deadman](/kapacitor/v1.5/nodes/alert_node/#deadman), [Default](/kapacitor/v1.5/nodes/alert_node/#default), [Delete](/kapacitor/v1.5/nodes/alert_node/#delete), [Derivative](/kapacitor/v1.5/nodes/alert_node/#derivative), [Difference](/kapacitor/v1.5/nodes/alert_node/#difference), [Distinct](/kapacitor/v1.5/nodes/alert_node/#distinct), [Ec2Autoscale](/kapacitor/v1.5/nodes/alert_node/#ec2autoscale), [Elapsed](/kapacitor/v1.5/nodes/alert_node/#elapsed), [Eval](/kapacitor/v1.5/nodes/alert_node/#eval), [First](/kapacitor/v1.5/nodes/alert_node/#first), [Flatten](/kapacitor/v1.5/nodes/alert_node/#flatten), [GroupBy](/kapacitor/v1.5/nodes/alert_node/#groupby), [HoltWinters](/kapacitor/v1.5/nodes/alert_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.5/nodes/alert_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.5/nodes/alert_node/#httpout), [HttpPost](/kapacitor/v1.5/nodes/alert_node/#httppost), [InfluxDBOut](/kapacitor/v1.5/nodes/alert_node/#influxdbout), [Join](/kapacitor/v1.5/nodes/alert_node/#join), [K8sAutoscale](/kapacitor/v1.5/nodes/alert_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.5/nodes/alert_node/#kapacitorloopback), [Last](/kapacitor/v1.5/nodes/alert_node/#last), [Max](/kapacitor/v1.5/nodes/alert_node/#max), [Mean](/kapacitor/v1.5/nodes/alert_node/#mean), [Median](/kapacitor/v1.5/nodes/alert_node/#median), [Min](/kapacitor/v1.5/nodes/alert_node/#min), [Mode](/kapacitor/v1.5/nodes/alert_node/#mode), [MovingAverage](/kapacitor/v1.5/nodes/alert_node/#movingaverage), [Percentile](/kapacitor/v1.5/nodes/alert_node/#percentile), [Sample](/kapacitor/v1.5/nodes/alert_node/#sample), [Shift](/kapacitor/v1.5/nodes/alert_node/#shift), [Sideload](/kapacitor/v1.5/nodes/alert_node/#sideload), [Spread](/kapacitor/v1.5/nodes/alert_node/#spread), [StateCount](/kapacitor/v1.5/nodes/alert_node/#statecount), [StateDuration](/kapacitor/v1.5/nodes/alert_node/#stateduration), [Stats](/kapacitor/v1.5/nodes/alert_node/#stats), [Stddev](/kapacitor/v1.5/nodes/alert_node/#stddev), [Sum](/kapacitor/v1.5/nodes/alert_node/#sum), [SwarmAutoscale](/kapacitor/v1.5/nodes/alert_node/#swarmautoscale), [Top](/kapacitor/v1.5/nodes/alert_node/#top), [Union](/kapacitor/v1.5/nodes/alert_node/#union), [Where](/kapacitor/v1.5/nodes/alert_node/#where), [Window](/kapacitor/v1.5/nodes/alert_node/#window)
+[Alert](#alert),
+[Barrier](#barrier),
+[Bottom](#bottom),
+[ChangeDetect](#changedetect),
+[Combine](#combine),
+[Count](#count),
+[CumulativeSum](#cumulativesum),
+[Deadman](#deadman),
+[Default](#default),
+[Delete](#delete),
+[Derivative](#derivative),
+[Difference](#difference),
+[Distinct](#distinct),
+[Ec2Autoscale](#ec2autoscale),
+[Elapsed](#elapsed),
+[Eval](#eval),
+[First](#first),
+[Flatten](#flatten),
+[GroupBy](#groupby),
+[HoltWinters](#holtwinters),
+[HoltWintersWithFit](#holtwinterswithfit),
+[HttpOut](#httpout),
+[HttpPost](#httppost),
+[InfluxDBOut](#influxdbout),
+[Join](#join),
+[K8sAutoscale](#k8sautoscale),
+[KapacitorLoopback](#kapacitorloopback),
+[Last](#last),
+[Max](#max),
+[Mean](#mean),
+[Median](#median),
+[Min](#min),
+[Mode](#mode),
+[MovingAverage](#movingaverage),
+[Percentile](#percentile),
+[Sample](#sample),
+[Shift](#shift),
+[Sideload](#sideload),
+[Spread](#spread),
+[StateCount](#statecount),
+[StateDuration](#stateduration),
+[Stats](#stats),
+[Stddev](#stddev),
+[Sum](#sum),
+[SwarmAutoscale](#swarmautoscale),
+[Top](#top),
+[Union](#union),
+[Where](#where),
+[Window](#window)
 
 ---
 
@@ -84,7 +133,7 @@ and [AlertNode.Crit](/kapacitor/v1.5/nodes/alert_node/#crit) below.
 
 Different event handlers can be configured for each [AlertNode.](/kapacitor/v1.5/nodes/alert_node/)
 Some handlers like Email, HipChat, Sensu, Slack, OpsGenie, VictorOps, PagerDuty, Telegram and Talk have a configuration
-option 'global' that indicates that all alerts implicitly use the handler.
+option, `global`, that indicates that all alerts implicitly use the handler.
 
 | Handler                       | Description                                                                           |
 | -------                       | -----------                                                                           |
@@ -191,11 +240,11 @@ For example, given the following values, the corresponding alert states are:
 
 Available Statistics:
 
-* alerts_triggered -- Total number of alerts triggered
-* oks_triggered -- Number of OK alerts triggered
-* infos_triggered -- Number of Info alerts triggered
-* warns_triggered -- Number of Warn alerts triggered
-* crits_triggered -- Number of Crit alerts triggered
+* alerts_triggered: Total number of alerts triggered
+* oks_triggered: Number of OK alerts triggered
+* infos_triggered: Number of Info alerts triggered
+* warns_triggered: Number of Warn alerts triggered
+* crits_triggered: Number of Crit alerts triggered
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -211,7 +260,7 @@ Property methods are marked using the `.` operator.
 
 Send the alert to Alerta.
 Detailed configuration options and setup instructions are provided in the
-[Alerta Event Handler](/kapacitor/v1.5/event_handlers/alerta/) doc.
+[Alerta Event Handler](/kapacitor/v1.5/event_handlers/alerta/) article.
 
 _**Example kapacitor.conf**_  
 ```toml
@@ -240,6 +289,19 @@ Does not apply to stream alerts.
 
 ```js
 alert.all()
+```
+
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
+
+
+### Category
+
+Category places this alert in a named category.
+Categories are used to [inhibit](#inhibit) alerts.
+
+
+```js
+alert.category(value string)
 ```
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
@@ -322,7 +384,7 @@ alert.durationField(value string)
 
 Email the alert data to specified "To" email addresses.
 Detailed configuration options and setup instructions are provided in the
-[Email Event Handler](/kapacitor/v1.5/event_handlers/email/) doc.
+[Email Event Handler](/kapacitor/v1.5/event_handlers/email/) article.
 
 _**Example kapacitor.conf**_
 ```toml
@@ -360,7 +422,7 @@ Value: {{ index .Fields "value" }}
 
 Execute a command whenever an alert is triggered and pass the alert data over STDIN in JSON format.
 Detailed usage instructions and examples are provided in the
-[Exec Event Handler](/kapacitor/v1.5/event_handlers/exec/) doc.
+[Exec Event Handler](/kapacitor/v1.5/event_handlers/exec/) article.
 
 ```js
 // Pattern
@@ -404,7 +466,7 @@ alert.flapping(0.25, 0.5)
 
 Send the alert to an Apache Kafka cluster.
 Detailed configuration options and setup instructions are provided in the
-[Kafka Event Handler](/kapacitor/v1.5/event_handlers/kafka/) doc.
+[Kafka Event Handler](/kapacitor/v1.5/event_handlers/kafka/) article.
 
 _**Example kapacitor.conf**_
 
@@ -450,7 +512,7 @@ alert.history(21)
 
 Send the alert to HipChat.
 Detailed configuration options and setup instructions are provided in the
-[HipChat Event Handler](/kapacitor/v1.5/event_handlers/hipchat/) doc.
+[HipChat Event Handler](/kapacitor/v1.5/event_handlers/hipchat/) article.
 
 _**Example kapacitor.conf**_
 
@@ -522,7 +584,7 @@ stream
 
 Resulting ID: `kapacitor/authentication`
 
-_**Example:  ID template using multiple tags**_
+_**Example: ID template using multiple tags**_
 ```js
 stream
   |from()
@@ -598,6 +660,71 @@ alert.infoReset(lamda: 'usage_idle' > 60)
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
+### Inhibit
+
+Inhibit other alerts in a category.
+The equal tags provides a list of tags that must be equal in order for an alert event to be inhibited.
+
+The following two TICKscripts demonstrate how to use the inhibit feature:
+
+```js
+    //cpu_alert.tick
+stream
+  |from()
+    .measurement('cpu')
+    .groupBy('host')
+  |alert()
+    .category('system_alerts')
+    .crit(lambda: "usage_idle" < 10.0)
+```
+
+```js
+//host_alert.tick
+stream
+  |from()
+    .measurement('uptime')
+    .groupBy('host')
+  |deadman(0.0, 1m)
+    .inhibit('system_alerts', 'host')
+```
+
+The deadman is a type of alert node and can be used to inhibit all alerts in the `system_alerts` category when triggered.
+The `host` argument to the inhibit function says that the host tag must be equal between the CPU alert and the host alert in order for it to be inhibited.
+This has the effect of the deadman alerts only inhibiting CPU alerts for hosts that are currently dead.
+
+```js
+alert.inhibit(category string, equalTags ...string)
+```
+
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
+
+
+### Kafka
+
+Send the alert to a Kafka topic.
+Detailed setup and usage instructions are provided in the
+[Kafka Event Handler](/kapacitor/v1.5/event_handlers/kafka/) article.
+
+_**Example: kapacitor.conf**_  
+```toml
+[[kafka]]
+  enabled = true
+  id = "default"
+  brokers = ["localhost:9092"]
+```
+
+_**Example: TICKscript**_
+```js
+stream
+ |alert()
+    .kafka()
+      .cluster('default')
+      .kafkaTopic('alerts')
+```
+
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
+
+
 ### LevelField
 
 Optional field key to add to the data, containing the alert level as a string.
@@ -632,7 +759,7 @@ alert.levelTag('level')
 
 Log JSON alert data to file.
 Detailed setup and usage instructions are provided in the
-[Log Event Handler](/kapacitor/v1.5/event_handlers/log/) doc.
+[Log Event Handler](/kapacitor/v1.5/event_handlers/log/) article.
 
 _**Example TICKscript**_
 ```js
@@ -702,7 +829,7 @@ alert.messageField('message')
 
 Send alert to an MQTT broker.
 Detailed configuration options and usage instructions are provided in the
-[MQTT Event Handler](/kapacitor/v1.5/event_handlers/mqtt/) doc.
+[MQTT Event Handler](/kapacitor/v1.5/event_handlers/mqtt/) article.
 
 _**Example kapacitor.conf**_
 ```toml
@@ -741,7 +868,7 @@ alert.noRecoveries()
 ### OpsGenie v1
 Send alert to OpsGenie using OpsGenie's v1 API.
 Detailed configuration options and setup instructions are provided in the
-[OpsGenie v1 Event Handler](/kapacitor/v1.5/event_handlers/opsgenie/v1/) doc.
+[OpsGenie v1 Event Handler](/kapacitor/v1.5/event_handlers/opsgenie/v1/) article.
 
 _**Example kapacitor.conf**_
 ```toml
@@ -765,7 +892,7 @@ stream
 ### OpsGenie v2
 Send alert to OpsGenie using OpsGenie's v2 API.
 Detailed configuration options and setup instructions are provided in the
-[OpsGenie v2 Event Handler](/kapacitor/v1.5/event_handlers/opsgenie/v2/) doc.
+[OpsGenie v2 Event Handler](/kapacitor/v1.5/event_handlers/opsgenie/v2/) article.
 
 _**Example kapacitor.conf**_
 ```toml
@@ -789,7 +916,7 @@ stream
 ### PagerDuty v1
 Send the alert to PagerDuty using PagerDuty's v1 API.
 Detailed configuration options and setup instructions are provided in the
-[PagerDuty v1 Event Handler](/kapacitor/v1.5/event_handlers/pagerduty/v1/) doc.
+[PagerDuty v1 Event Handler](/kapacitor/v1.5/event_handlers/pagerduty/v1/) article.
 
 _**Example kapacitor.conf**_
 ```toml
@@ -812,7 +939,7 @@ stream
 ### PagerDuty v2
 Send the alert to PagerDuty using PagerDuty's v2 API.
 Detailed configuration options and setup instructions are provided in the
-[PagerDuty v2 Event Handler](/kapacitor/v1.5/event_handlers/pagerduty/v2/) doc.
+[PagerDuty v2 Event Handler](/kapacitor/v1.5/event_handlers/pagerduty/v2/) article.
 
 _**Example kapacitor.conf**_
 ```toml
@@ -836,7 +963,7 @@ stream
 
 HTTP POST JSON alert data to a specified URL.
 Detailed configuration options and setup instructions are provided in the
-[Post Event Handler](/kapacitor/v1.5/event_handlers/post/) doc.
+[Post Event Handler](/kapacitor/v1.5/event_handlers/post/) article.
 
 _**Example TICKscript**_
 
@@ -854,7 +981,7 @@ stream
 
 Send the alert to Pushover.
 Detailed configuration options and setup instructions are provided in the
-[Pushover Event Handler](/kapacitor/v1.5/event_handlers/pushover/) doc.
+[Pushover Event Handler](/kapacitor/v1.5/event_handlers/pushover/) article.
 
 _**Example kapacitor.conf**_
 ```toml
@@ -882,7 +1009,7 @@ stream
 
 ### Quiet
 
-Suppress errors during execution.
+Suppress all error logging events from this node.
 
 ```js
 alert.quiet()
@@ -895,7 +1022,7 @@ alert.quiet()
 
 Send the alert to Sensu.
 Detailed configuration options and setup instructions are provided in the
-[Sensu Event Handler](/kapacitor/v1.5/event_handlers/sensu/) doc.
+[Sensu Event Handler](/kapacitor/v1.5/event_handlers/sensu/) article.
 
 _**Example kapacitor.conf*_
 ```toml
@@ -921,7 +1048,7 @@ stream
 
 Send the alert to Slack.
 Detailed configuration options and setup instructions are provided in the
-[Slack Event Handler](/kapacitor/v1.5/event_handlers/slack/) doc.
+[Slack Event Handler](/kapacitor/v1.5/event_handlers/slack/) article.
 
 _**Example kapacitor.conf**_
 ```toml
@@ -948,7 +1075,7 @@ stream
 
 Send the alert using SNMP traps.
 Detailed configuration options and setup instructions are provided in the
-[SNMP Trap Event Handler](/kapacitor/v1.5/event_handlers/snmptrap/) doc.
+[SNMP Trap Event Handler](/kapacitor/v1.5/event_handlers/snmptrap/) article.
 
 _**Example kapacitor.conf**_
 ```toml
@@ -1018,7 +1145,7 @@ stream
 
 Send the alert to Talk.
 Detailed configuration options and setup instructions are provided in the
-[Talk Event Handler](/kapacitor/v1.5/event_handlers/talk/) doc.
+[Talk Event Handler](/kapacitor/v1.5/event_handlers/talk/) article.
 
 _**Example kapacitor.conf**_
 ```toml
@@ -1042,7 +1169,7 @@ stream
 
 Send JSON alert data to a specified address over TCP.
 Detailed usage instructions are provided in the
-[TCPEvent Handler](/kapacitor/v1.5/event_handlers/tcp/) doc.
+[TCPEvent Handler](/kapacitor/v1.5/event_handlers/tcp/) article.
 
 ```js
 // Pattern
@@ -1059,7 +1186,7 @@ alert.tcp('127.0.0.1:7777')
 
 Send the alert to Telegram.
 Detailed configuration options and setup instructions are provided in the
-[Telegram Event Handler](/kapacitor/v1.5/event_handlers/telegram/) doc.
+[Telegram Event Handler](/kapacitor/v1.5/event_handlers/telegram/) article.
 
 _**Example kapacitor.conf**_
 ```toml
@@ -1104,7 +1231,7 @@ alert.topic('cpu')
 
 Send alert to VictorOps.
 Detailed configuration options and setup instructions are provided in the
-[VictorOps Event Handler](/kapacitor/v1.5/event_handlers/victorops/) doc.
+[VictorOps Event Handler](/kapacitor/v1.5/event_handlers/victorops/) article.
 
 _**Example kapacitor.conf**_
 ```toml
@@ -1178,9 +1305,9 @@ Returns: [AlertNode](/kapacitor/v1.5/nodes/alert_node/)
 
 ### Barrier
 
-Create a new Barrier node that emits a BarrierMessage periodically
+Create a new Barrier node that emits a BarrierMessage periodically.
 
-One BarrierMessage will be emitted every period duration
+One BarrierMessage will be emitted every period duration.
 
 ```js
 alert|barrier()
@@ -1199,6 +1326,19 @@ alert|bottom(num int64, field string, fieldsAndTags ...string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
+
+### ChangeDetect
+
+Create a new node that only emits new points if different from the previous point.
+
+
+```js
+alert|changeDetect(field string)
+```
+
+Returns: [ChangeDetectNode](/kapacitor/v1.5/nodes/change_detect_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -1243,9 +1383,9 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 Helper function for creating an alert on low throughput, a.k.a. deadman's switch.
 
-- Threshold -- trigger alert if throughput drops below threshold in points/interval.
-- Interval -- how often to check the throughput.
-- Expressions -- optional list of expressions to also evaluate. Useful for time of day alerting.
+- Threshold: trigger alert if throughput drops below threshold in points/interval.
+- Interval: how often to check the throughput.
+- Expressions: optional list of expressions to also evaluate. Useful for time of day alerting.
 
 Example:
 
@@ -1259,8 +1399,7 @@ Example:
     data...
 ```
 
-The above is equivalent to this
-Example:
+The above is equivalent to this example:
 
 ```js
     var data = stream
@@ -1394,7 +1533,7 @@ Returns: [Ec2AutoscaleNode](/kapacitor/v1.5/nodes/ec2_autoscale_node/)
 
 ### Elapsed
 
-Compute the elapsed time between points
+Compute the elapsed time between points.
 
 ```js
 alert|elapsed(field string, unit time.Duration)
@@ -1464,7 +1603,7 @@ Returns: [GroupByNode](/kapacitor/v1.5/nodes/group_by_node/)
 
 ### HoltWinters
 
-Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
+Compute the Holt-Winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
 
 ```js
 alert|holtWinters(field string, h int64, m int64, interval time.Duration)
@@ -1476,7 +1615,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 ### HoltWintersWithFit
 
-Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
+Compute the Holt-Winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
 This method also outputs all the points used to fit the data in addition to the forecasted data.
 
 ```js
@@ -1603,8 +1742,10 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 ### Median
 
-Compute the median of the data. Note, this method is not a selector,
-if you want the median point use `.percentile(field, 50.0)`.
+Compute the median of the data.
+
+> **Note:** This method is not a selector.
+If you want the median point, use `.percentile(field, 50.0)`.
 
 ```js
 alert|median(field string)
@@ -1691,7 +1832,7 @@ Returns: [ShiftNode](/kapacitor/v1.5/nodes/shift_node/)
 
 ### Sideload
 
-Create a node that can load data from external sources
+Create a node that can load data from external sources.
 
 ```js
 alert|sideload()
@@ -1777,7 +1918,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 ### SwarmAutoscale
 
-Create a node that can trigger autoscale events for a docker swarm cluster.
+Create a node that can trigger autoscale events for a Docker swarm cluster.
 
 ```js
 alert|swarmAutoscale()

@@ -225,9 +225,9 @@ subsequent points belong to a batch.  Once the batch is complete, the
 At a high level, this is what our UDF code will do for each of the
 `begin_batch`, `point`, and `end_batch` calls:
 
-* `begin_batch` -- mark the start of a new batch and initialize a structure for it
-* `point` -- store the point
-* `end_batch` -- perform the `t-test` and then update the historical data
+* `begin_batch`: mark the start of a new batch and initialize a structure for it
+* `point`: store the point
+* `end_batch`: perform the `t-test` and then update the historical data
 
 ### The Complete UDF script
 
@@ -705,9 +705,9 @@ cat /tmp/kapacitor_udf/{hotend,bed,air}_failure.log
 
 Based on the `printer_data.py` script above, there should be anomalies at:
 
-* 1hr -- hotend
-* 8hr -- bed
-* 12hr -- air
+* 1hr: hotend
+* 8hr: bed
+* 12hr: air
 
 There may be some false positives as well, but, since we want this to
 work with real data (not our nice clean fake data), it doesn't help
@@ -725,7 +725,7 @@ algorithm that works for your domain!
 
 There are a few things that we have left as exercises to the reader:
 
-1. Snapshot/Restore -- Kapacitor will regularly snapshot the state of
+1. Snapshot/Restore: Kapacitor will regularly snapshot the state of
    your UDF process so that it can be restored if the process is
    restarted.  The examples
    [here](https://github.com/influxdata/kapacitor/tree/master/udf/agent/examples/)

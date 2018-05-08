@@ -11,7 +11,7 @@ menu:
     parent: nodes
 ---
 
-The `groubBy` node will group the incoming data.
+The `groupBy` node will group the incoming data.
 Each group is then processed independently for the rest of the pipeline.
 Only tags that are dimensions in the grouping will be preserved.
 All other tags are dropped.
@@ -41,12 +41,62 @@ independently.
 | Setters | Description |
 |:---|:---|
 | **[byMeasurement](#bymeasurement)&nbsp;(&nbsp;)** | If set will include the measurement name in the group ID. Along with any other group by dimensions.  |
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress all error logging events from this node.  |
 
 
 
 ### Chaining Methods
-[Alert](/kapacitor/v1.5/nodes/group_by_node/#alert), [Barrier](/kapacitor/v1.5/nodes/group_by_node/#barrier), [Bottom](/kapacitor/v1.5/nodes/group_by_node/#bottom), [Combine](/kapacitor/v1.5/nodes/group_by_node/#combine), [Count](/kapacitor/v1.5/nodes/group_by_node/#count), [CumulativeSum](/kapacitor/v1.5/nodes/group_by_node/#cumulativesum), [Deadman](/kapacitor/v1.5/nodes/group_by_node/#deadman), [Default](/kapacitor/v1.5/nodes/group_by_node/#default), [Delete](/kapacitor/v1.5/nodes/group_by_node/#delete), [Derivative](/kapacitor/v1.5/nodes/group_by_node/#derivative), [Difference](/kapacitor/v1.5/nodes/group_by_node/#difference), [Distinct](/kapacitor/v1.5/nodes/group_by_node/#distinct), [Ec2Autoscale](/kapacitor/v1.5/nodes/group_by_node/#ec2autoscale), [Elapsed](/kapacitor/v1.5/nodes/group_by_node/#elapsed), [Eval](/kapacitor/v1.5/nodes/group_by_node/#eval), [Exclude](/kapacitor/v1.5/nodes/group_by_node/#exclude), [First](/kapacitor/v1.5/nodes/group_by_node/#first), [Flatten](/kapacitor/v1.5/nodes/group_by_node/#flatten), [GroupBy](/kapacitor/v1.5/nodes/group_by_node/#groupby), [HoltWinters](/kapacitor/v1.5/nodes/group_by_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.5/nodes/group_by_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.5/nodes/group_by_node/#httpout), [HttpPost](/kapacitor/v1.5/nodes/group_by_node/#httppost), [InfluxDBOut](/kapacitor/v1.5/nodes/group_by_node/#influxdbout), [Join](/kapacitor/v1.5/nodes/group_by_node/#join), [K8sAutoscale](/kapacitor/v1.5/nodes/group_by_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.5/nodes/group_by_node/#kapacitorloopback), [Last](/kapacitor/v1.5/nodes/group_by_node/#last), [Log](/kapacitor/v1.5/nodes/group_by_node/#log), [Max](/kapacitor/v1.5/nodes/group_by_node/#max), [Mean](/kapacitor/v1.5/nodes/group_by_node/#mean), [Median](/kapacitor/v1.5/nodes/group_by_node/#median), [Min](/kapacitor/v1.5/nodes/group_by_node/#min), [Mode](/kapacitor/v1.5/nodes/group_by_node/#mode), [MovingAverage](/kapacitor/v1.5/nodes/group_by_node/#movingaverage), [Percentile](/kapacitor/v1.5/nodes/group_by_node/#percentile), [Sample](/kapacitor/v1.5/nodes/group_by_node/#sample), [Shift](/kapacitor/v1.5/nodes/group_by_node/#shift), [Sideload](/kapacitor/v1.5/nodes/group_by_node/#sideload), [Spread](/kapacitor/v1.5/nodes/group_by_node/#spread), [StateCount](/kapacitor/v1.5/nodes/group_by_node/#statecount), [StateDuration](/kapacitor/v1.5/nodes/group_by_node/#stateduration), [Stats](/kapacitor/v1.5/nodes/group_by_node/#stats), [Stddev](/kapacitor/v1.5/nodes/group_by_node/#stddev), [Sum](/kapacitor/v1.5/nodes/group_by_node/#sum), [SwarmAutoscale](/kapacitor/v1.5/nodes/group_by_node/#swarmautoscale), [Top](/kapacitor/v1.5/nodes/group_by_node/#top), [Union](/kapacitor/v1.5/nodes/group_by_node/#union), [Where](/kapacitor/v1.5/nodes/group_by_node/#where), [Window](/kapacitor/v1.5/nodes/group_by_node/#window)
+[Alert](#alert),
+[Barrier](#barrier),
+[Bottom](#bottom),
+[ChangeDetect](#changedetect),
+[Combine](#combine),
+[Count](#count),
+[CumulativeSum](#cumulativesum),
+[Deadman](#deadman),
+[Default](#default),
+[Delete](#delete),
+[Derivative](#derivative),
+[Difference](#difference),
+[Distinct](#distinct),
+[Ec2Autoscale](#ec2autoscale),
+[Elapsed](#elapsed),
+[Eval](#eval),
+[Exclude](#exclude),
+[First](#first),
+[Flatten](#flatten),
+[GroupBy](#groupby),
+[HoltWinters](#holtwinters),
+[HoltWintersWithFit](#holtwinterswithfit),
+[HttpOut](#httpout),
+[HttpPost](#httppost),
+[InfluxDBOut](#influxdbout),
+[Join](#join),
+[K8sAutoscale](#k8sautoscale),
+[KapacitorLoopback](#kapacitorloopback),
+[Last](#last),
+[Log](#log),
+[Max](#max),
+[Mean](#mean),
+[Median](#median),
+[Min](#min),
+[Mode](#mode),
+[MovingAverage](#movingaverage),
+[Percentile](#percentile),
+[Sample](#sample),
+[Shift](#shift),
+[Sideload](#sideload),
+[Spread](#spread),
+[StateCount](#statecount),
+[StateDuration](#stateduration),
+[Stats](#stats),
+[Stddev](#stddev),
+[Sum](#sum),
+[SwarmAutoscale](#swarmautoscale),
+[Top](#top),
+[Union](#union),
+[Where](#where),
+[Window](#window)
 
 ---
 
@@ -95,7 +145,7 @@ groupBy.byMeasurement()
 
 ### Quiet
 
-Suppress errors during execution.
+Suppress all error logging events from this node.
 
 ```js
 groupBy.quiet()
@@ -126,9 +176,9 @@ Returns: [AlertNode](/kapacitor/v1.5/nodes/alert_node/)
 
 ### Barrier
 
-Create a new Barrier node that emits a BarrierMessage periodically
+Create a new Barrier node that emits a BarrierMessage periodically.
 
-One BarrierMessage will be emitted every period duration
+One BarrierMessage will be emitted every period duration.
 
 
 ```js
@@ -149,6 +199,18 @@ groupBy|bottom(num int64, field string, fieldsAndTags ...string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
+
+### ChangeDetect
+
+Create a new node that only emits new points if different from the previous point.
+
+```js
+groupBy|changeDetect(field string)
+```
+
+Returns: [ChangeDetectNode](/kapacitor/v1.5/nodes/change_detect_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -196,9 +258,9 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 Helper function for creating an alert on low throughput, a.k.a. deadman's switch.
 
-- Threshold -- trigger alert if throughput drops below threshold in points/interval.
-- Interval -- how often to check the throughput.
-- Expressions -- optional list of expressions to also evaluate. Useful for time of day alerting.
+- Threshold: trigger alert if throughput drops below threshold in points/interval.
+- Interval: how often to check the throughput.
+- Expressions: optional list of expressions to also evaluate. Useful for time of day alerting.
 
 Example:
 
@@ -213,8 +275,7 @@ Example:
     data...
 ```
 
-The above is equivalent to this
-Example:
+The above is equivalent to this example:
 
 
 ```js
@@ -358,7 +419,7 @@ Returns: [Ec2AutoscaleNode](/kapacitor/v1.5/nodes/ec2_autoscale_node/)
 
 ### Elapsed
 
-Compute the elapsed time between points
+Compute the elapsed time between points.
 
 
 ```js
@@ -447,7 +508,7 @@ Returns: [GroupByNode](/kapacitor/v1.5/nodes/group_by_node/)
 
 ### HoltWinters
 
-Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
+Compute the Holt-Winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
 
 
 ```js
@@ -460,7 +521,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 ### HoltWintersWithFit
 
-Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
+Compute the Holt-Winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
 This method also outputs all the points used to fit the data in addition to the forecasted data.
 
 
@@ -610,8 +671,10 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 ### Median
 
-Compute the median of the data. Note, this method is not a selector,
-if you want the median point use `.percentile(field, 50.0)`.
+Compute the median of the data.
+
+> **Note:** This method is not a selector.
+If you want the median point, use `.percentile(field, 50.0)`.
 
 
 ```js
@@ -705,7 +768,7 @@ Returns: [ShiftNode](/kapacitor/v1.5/nodes/shift_node/)
 
 ### Sideload
 
-Create a node that can load data from external sources
+Create a node that can load data from external sources.
 
 
 ```js
@@ -798,7 +861,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 ### SwarmAutoscale
 
-Create a node that can trigger autoscale events for a docker swarm cluster.
+Create a node that can trigger autoscale events for a Docker swarm cluster.
 
 
 ```js

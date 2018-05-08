@@ -25,8 +25,8 @@ for handling of InfluxDB data via subscriptions.
 
 Kapacitor has two binaries:
 
-* kapacitor -- a CLI program for calling the Kapacitor API.
-* kapacitord -- the Kapacitor server daemon.
+* kapacitor: a CLI program for calling the Kapacitor API.
+* kapacitord: the Kapacitor server daemon.
 
 You can download the binaries directly from the
 [downloads](https://influxdata.com/downloads/#kapacitor) page.

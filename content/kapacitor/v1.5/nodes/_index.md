@@ -30,6 +30,7 @@ Below is a complete list of the available nodes. For each node, the associated p
 * [AlertNode](/kapacitor/v1.5/nodes/alert_node)
 * [BarrierNode](/kapacitor/v1.5/nodes/barrier_node)
 * [BatchNode](/kapacitor/v1.5/nodes/batch_node)
+* [ChangeDetectNode](/kapacitor/v1.5/nodes/change_detect_node)
 * [CombineNode](/kapacitor/v1.5/nodes/combine_node)
 * [DefaultNode](/kapacitor/v1.5/nodes/default_node)
 * [DeleteNode](/kapacitor/v1.5/nodes/delete_node)

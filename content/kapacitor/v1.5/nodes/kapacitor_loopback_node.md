@@ -12,7 +12,7 @@ menu:
 ---
 
 The `kapacitorLoopback` node writes data back into the Kapacitor stream.
-To write data to a remote Kapacitor instance use the InfluxDBOut node.
+To write data to a remote Kapacitor instance use the  [InfluxDBOutNode](/kapacitor/v1.5/nodes/influx_d_b_out_node/).
 
 Example:
 
@@ -32,7 +32,7 @@ Take care to ensure you do not chain tasks together creating a loop.
 
 Available Statistics:
 
-* points_written -- number of points written back to Kapacitor
+* `points_written`: number of points written back to Kapacitor
 
 
 ### Constructor
@@ -47,14 +47,15 @@ Available Statistics:
 |:---|:---|
 | **[database](#database)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the database.  |
 | **[measurement](#measurement)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the measurement.  |
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress all error logging events from this node.  |
 | **[retentionPolicy](#retentionpolicy)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of the retention policy.  |
 | **[tag](#tag)&nbsp;(&nbsp;`key`&nbsp;`string`,&nbsp;`value`&nbsp;`string`)** | Add a static tag to all data points. Tag can be called more than once.  |
 
 
 
 ### Chaining Methods
-[Deadman](/kapacitor/v1.5/nodes/kapacitor_loopback_node/#deadman), [Stats](/kapacitor/v1.5/nodes/kapacitor_loopback_node/#stats)
+[Deadman](#deadman),
+[Stats](#stats)
 
 ---
 
@@ -91,7 +92,7 @@ kapacitorLoopback.measurement(value string)
 
 ### Quiet
 
-Suppress errors during execution.
+Suppress all error logging events from this node.
 
 ```js
 kapacitorLoopback.quiet()
@@ -137,9 +138,9 @@ Chaining methods are marked using the `|` operator.
 
 Helper function for creating an alert on low throughput, a.k.a. deadman's switch.
 
-- Threshold -- trigger alert if throughput drops below threshold in points/interval.
-- Interval -- how often to check the throughput.
-- Expressions -- optional list of expressions to also evaluate. Useful for time of day alerting.
+- Threshold: trigger alert if throughput drops below threshold in points/interval.
+- Interval: how often to check the throughput.
+- Expressions: optional list of expressions to also evaluate. Useful for time of day alerting.
 
 Example:
 
@@ -154,8 +155,7 @@ Example:
     data...
 ```
 
-The above is equivalent to this
-Example:
+The above is equivalent to this example:
 
 
 ```js

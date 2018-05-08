@@ -262,7 +262,7 @@ which will be passed to the alert handler.
   threshold = 0.0
   # Interval, if globally configured the frequency at which to check the throughput.
   interval = "10s"
-  # Id -- the alert Id, NODE_NAME will be replaced with the name of the node being monitored.
+  # Id: the alert Id, NODE_NAME will be replaced with the name of the node being monitored.
   id = "node 'NODE_NAME' in task '{{ .TaskName }}'"
   # The message of the alert. INTERVAL will be replaced by the interval.
   message = "{{ .ID }} is {{ if eq .Level \"OK\" }}alive{{ else }}dead{{ end }}: {{ index .Fields \"collected\" | printf \"%0.3f\" }} points/INTERVAL."

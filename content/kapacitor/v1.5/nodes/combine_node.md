@@ -14,9 +14,10 @@ menu:
 The `combine` node combines data from a single node with itself.
 Points with the same time are grouped and then combinations are created.
 The size of the combinations is defined by how many expressions are given.
-Combinations are order independent and will not ever include the same point multiple times.
+Combinations are order-independent and will never include the same point multiple times.
 
-Example:
+In the following example, data points for the `login` service are combined with
+the data points from all other services:
 
 ```js
 stream
@@ -37,27 +38,19 @@ stream
   ...
 ```
 
-In the above example the data points for the `login` service are combined with the data points from all other services.
-
-Example:
-
+In the following example, all combination pairs are created:
 
 ```js
-        |combine(lambda: TRUE, lambda: TRUE)
-            .as('login', 'other')
+|combine(lambda: TRUE, lambda: TRUE)
+  .as('login', 'other')
 ```
 
-In the above example all combination pairs are created.
-
-Example:
-
+In the following example, all combinations triples are created:
 
 ```js
-        |combine(lambda: TRUE, lambda: TRUE, lambda: TRUE)
-            .as('login', 'other', 'another')
+|combine(lambda: TRUE, lambda: TRUE, lambda: TRUE)
+  .as('login', 'other', 'another')
 ```
-
-In the above example all combinations triples are created.
 
 
 ### Constructor
@@ -73,13 +66,61 @@ In the above example all combinations triples are created.
 | **[as](#as)&nbsp;(&nbsp;`names`&nbsp;`...string`)** | Prefix names for all fields from the respective nodes. Each field from the parent nodes will be prefixed with the provided name and a '.'. See the example above.  |
 | **[delimiter](#delimiter)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The delimiter between the As names and existing field an tag keys. Can be the empty string, but you are responsible for ensuring conflicts are not possible if you use the empty string.  |
 | **[max](#max)&nbsp;(&nbsp;`value`&nbsp;`int64`)** | Maximum number of possible combinations. Since the number of possible combinations can grow very rapidly you can set a maximum number of combinations allowed. If the max is crossed, an error is logged and the combinations are not calculated. Default: 10,000  |
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress all error logging events from this node. |
 | **[tolerance](#tolerance)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | The maximum duration of time that two incoming points can be apart and still be considered to be equal in time. The joined data point's time will be rounded to the nearest multiple of the tolerance duration.  |
 
 
 
 ### Chaining Methods
-[Alert](/kapacitor/v1.5/nodes/combine_node/#alert), [Barrier](/kapacitor/v1.5/nodes/combine_node/#barrier), [Bottom](/kapacitor/v1.5/nodes/combine_node/#bottom), [Combine](/kapacitor/v1.5/nodes/combine_node/#combine), [Count](/kapacitor/v1.5/nodes/combine_node/#count), [CumulativeSum](/kapacitor/v1.5/nodes/combine_node/#cumulativesum), [Deadman](/kapacitor/v1.5/nodes/combine_node/#deadman), [Default](/kapacitor/v1.5/nodes/combine_node/#default), [Delete](/kapacitor/v1.5/nodes/combine_node/#delete), [Derivative](/kapacitor/v1.5/nodes/combine_node/#derivative), [Difference](/kapacitor/v1.5/nodes/combine_node/#difference), [Distinct](/kapacitor/v1.5/nodes/combine_node/#distinct), [Ec2Autoscale](/kapacitor/v1.5/nodes/combine_node/#ec2autoscale), [Elapsed](/kapacitor/v1.5/nodes/combine_node/#elapsed), [Eval](/kapacitor/v1.5/nodes/combine_node/#eval), [First](/kapacitor/v1.5/nodes/combine_node/#first), [Flatten](/kapacitor/v1.5/nodes/combine_node/#flatten), [GroupBy](/kapacitor/v1.5/nodes/combine_node/#groupby), [HoltWinters](/kapacitor/v1.5/nodes/combine_node/#holtwinters), [HoltWintersWithFit](/kapacitor/v1.5/nodes/combine_node/#holtwinterswithfit), [HttpOut](/kapacitor/v1.5/nodes/combine_node/#httpout), [HttpPost](/kapacitor/v1.5/nodes/combine_node/#httppost), [InfluxDBOut](/kapacitor/v1.5/nodes/combine_node/#influxdbout), [Join](/kapacitor/v1.5/nodes/combine_node/#join), [K8sAutoscale](/kapacitor/v1.5/nodes/combine_node/#k8sautoscale), [KapacitorLoopback](/kapacitor/v1.5/nodes/combine_node/#kapacitorloopback), [Last](/kapacitor/v1.5/nodes/combine_node/#last), [Log](/kapacitor/v1.5/nodes/combine_node/#log), [Mean](/kapacitor/v1.5/nodes/combine_node/#mean), [Median](/kapacitor/v1.5/nodes/combine_node/#median), [Min](/kapacitor/v1.5/nodes/combine_node/#min), [Mode](/kapacitor/v1.5/nodes/combine_node/#mode), [MovingAverage](/kapacitor/v1.5/nodes/combine_node/#movingaverage), [Percentile](/kapacitor/v1.5/nodes/combine_node/#percentile), [Sample](/kapacitor/v1.5/nodes/combine_node/#sample), [Shift](/kapacitor/v1.5/nodes/combine_node/#shift), [Sideload](/kapacitor/v1.5/nodes/combine_node/#sideload), [Spread](/kapacitor/v1.5/nodes/combine_node/#spread), [StateCount](/kapacitor/v1.5/nodes/combine_node/#statecount), [StateDuration](/kapacitor/v1.5/nodes/combine_node/#stateduration), [Stats](/kapacitor/v1.5/nodes/combine_node/#stats), [Stddev](/kapacitor/v1.5/nodes/combine_node/#stddev), [Sum](/kapacitor/v1.5/nodes/combine_node/#sum), [SwarmAutoscale](/kapacitor/v1.5/nodes/combine_node/#swarmautoscale), [Top](/kapacitor/v1.5/nodes/combine_node/#top), [Union](/kapacitor/v1.5/nodes/combine_node/#union), [Where](/kapacitor/v1.5/nodes/combine_node/#where), [Window](/kapacitor/v1.5/nodes/combine_node/#window)
+[Alert](#alert),
+[Barrier](#barrier),
+[Bottom](#bottom),
+[ChangeDetect](#changedetect),
+[Combine](#combine),
+[Count](#count),
+[CumulativeSum](#cumulativesum),
+[Deadman](#deadman),
+[Default](#default),
+[Delete](#delete),
+[Derivative](#derivative),
+[Difference](#difference),
+[Distinct](#distinct),
+[Ec2Autoscale](#ec2autoscale),
+[Elapsed](#elapsed),
+[Eval](#eval),
+[First](#first),
+[Flatten](#flatten),
+[GroupBy](#groupby),
+[HoltWinters](#holtwinters),
+[HoltWintersWithFit](#holtwinterswithfit),
+[HttpOut](#httpout),
+[HttpPost](#httppost),
+[InfluxDBOut](#influxdbout),
+[Join](#join),
+[K8sAutoscale](#k8sautoscale),
+[KapacitorLoopback](#kapacitorloopback),
+[Last](#last),
+[Log](#log),
+[Mean](#mean),
+[Median](#median),
+[Min](#min),
+[Mode](#mode),
+[MovingAverage](#movingaverage),
+[Percentile](#percentile),
+[Sample](#sample),
+[Shift](#shift),
+[Sideload](#sideload),
+[Spread](#spread),
+[StateCount](#statecount),
+[StateDuration](#stateduration),
+[Stats](#stats),
+[Stddev](#stddev),
+[Sum](#sum),
+[SwarmAutoscale](#swarmautoscale),
+[Top](#top),
+[Union](#union),
+[Where](#where),
+[Window](#window)
 
 ---
 
@@ -93,10 +134,10 @@ Property methods are marked using the `.` operator.
 ### As
 
 Prefix names for all fields from the respective nodes.
-Each field from the parent nodes will be prefixed with the provided name and a '.'.
+Each field from the parent nodes will be prefixed with the provided name and a `.`.
 See the example above.
 
-The names cannot have a dot '.' character.
+The names cannot have a dot `.` character.
 
 
 
@@ -123,10 +164,11 @@ combine.delimiter(value string)
 ### Max
 
 Maximum number of possible combinations.
-Since the number of possible combinations can grow very rapidly
+Since the number of possible combinations can grow very rapidly,
 you can set a maximum number of combinations allowed.
-If the max is crossed, an error is logged and the combinations are not calculated.
-Default: 10,000
+If the max is exceeded, an error is logged and the combinations are not calculated.
+
+**Default:** 10,000
 
 
 ```js
@@ -138,7 +180,7 @@ combine.max(value int64)
 
 ### Quiet
 
-Suppress errors during execution.
+Suppress all error logging events from this node.
 
 ```js
 combine.quiet()
@@ -184,9 +226,9 @@ Returns: [AlertNode](/kapacitor/v1.5/nodes/alert_node/)
 
 ### Barrier
 
-Create a new Barrier node that emits a BarrierMessage periodically
+Create a new Barrier node that emits a BarrierMessage periodically.
 
-One BarrierMessage will be emitted every period duration
+One BarrierMessage will be emitted every period duration.
 
 
 ```js
@@ -207,6 +249,18 @@ combine|bottom(num int64, field string, fieldsAndTags ...string)
 ```
 
 Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
+
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
+
+### ChangeDetect
+
+Create a new node that only emits new points if different from the previous point.
+
+```js
+combine|changeDetect(field string)
+```
+
+Returns: [ChangeDetectNode](/kapacitor/v1.5/nodes/change_detect_node/)
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -254,9 +308,9 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 Helper function for creating an alert on low throughput, a.k.a. deadman's switch.
 
-- Threshold -- trigger alert if throughput drops below threshold in points/interval.
-- Interval -- how often to check the throughput.
-- Expressions -- optional list of expressions to also evaluate. Useful for time of day alerting.
+- Threshold: trigger alert if throughput drops below threshold in points/interval.
+- Interval: how often to check the throughput.
+- Expressions: optional list of expressions to also evaluate. Useful for time of day alerting.
 
 Example:
 
@@ -271,8 +325,7 @@ Example:
     data...
 ```
 
-The above is equivalent to this
-Example:
+The above is equivalent to this example:
 
 
 ```js
@@ -416,7 +469,7 @@ Returns: [Ec2AutoscaleNode](/kapacitor/v1.5/nodes/ec2_autoscale_node/)
 
 ### Elapsed
 
-Compute the elapsed time between points
+Compute the elapsed time between points.
 
 
 ```js
@@ -492,7 +545,7 @@ Returns: [GroupByNode](/kapacitor/v1.5/nodes/group_by_node/)
 
 ### HoltWinters
 
-Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
+Compute the Holt-Winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
 
 
 ```js
@@ -505,7 +558,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 ### HoltWintersWithFit
 
-Compute the holt-winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
+Compute the Holt-Winters (https://docs.influxdata.com/influxdb/latest/query_language/functions/#holt-winters) forecast of a data set.
 This method also outputs all the points used to fit the data in addition to the forecasted data.
 
 
@@ -577,7 +630,7 @@ Returns: [JoinNode](/kapacitor/v1.5/nodes/join_node/)
 
 ### K8sAutoscale
 
-Create a node that can trigger autoscale events for a kubernetes cluster.
+Create a node that can trigger autoscale events for a Kubernetes cluster.
 
 
 ```js
@@ -642,8 +695,10 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 ### Median
 
-Compute the median of the data. Note, this method is not a selector,
-if you want the median point use `.percentile(field, 50.0)`.
+Compute the median of the data.
+
+> **Note:** This method is not a selector.
+If you want the median point, use `.percentile(field, 50.0)`.
 
 
 ```js
@@ -737,7 +792,7 @@ Returns: [ShiftNode](/kapacitor/v1.5/nodes/shift_node/)
 
 ### Sideload
 
-Create a node that can load data from external sources
+Create a node that can load data from external sources.
 
 
 ```js
@@ -830,7 +885,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 
 ### SwarmAutoscale
 
-Create a node that can trigger autoscale events for a docker swarm cluster.
+Create a node that can trigger autoscale events for a Docker swarm cluster.
 
 
 ```js

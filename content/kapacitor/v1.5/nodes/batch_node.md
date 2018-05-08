@@ -31,9 +31,9 @@ Example:
 
 Available Statistics:
 
-* query_errors -- number of errors when querying
-* batches_queried -- number of batches returned from queries
-* points_queried -- total number of points in batches
+* query_errors: number of errors when querying
+* batches_queried: number of batches returned from queries
+* points_queried: total number of points in batches
 
 
 ### Constructor
@@ -46,11 +46,13 @@ Available Statistics:
 
 | Setters | Description |
 |:--------|:------------|
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress errors during execution.  |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress all error logging events from this node. |
 
 
 ### Chaining Methods
-[Deadman](/kapacitor/v1.5/nodes/batch_node/#deadman), [Query](/kapacitor/v1.5/nodes/batch_node/#query), [Stats](/kapacitor/v1.5/nodes/batch_node/#stats)
+[Deadman](#deadman),
+[Query](#query),
+[Stats](#stats)
 
 ---
 
@@ -63,7 +65,7 @@ Property methods are marked using the `.` operator.
 
 ### Quiet
 
-Suppress errors during execution.
+Suppress all error logging events from this node.
 
 ```js
 batch.quiet()
@@ -82,9 +84,9 @@ Chaining methods are marked using the `|` operator.
 
 Helper function for creating an alert on low throughput, a.k.a. deadman's switch.
 
-- Threshold -- trigger alert if throughput drops below threshold in points/interval.
-- Interval -- how often to check the throughput.
-- Expressions -- optional list of expressions to also evaluate. Useful for time of day alerting.
+- Threshold: trigger alert if throughput drops below threshold in points/interval.
+- Interval: how often to check the throughput.
+- Expressions: optional list of expressions to also evaluate. Useful for time of day alerting.
 
 Example:
 
@@ -99,8 +101,7 @@ Example:
     data...
 ```
 
-The above is equivalent to this
-Example:
+The above is equivalent to this example:
 
 
 ```js
