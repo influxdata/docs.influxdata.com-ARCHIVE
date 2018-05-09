@@ -159,19 +159,20 @@ option, `global`, that indicates that all alerts implicitly use the handler.
 | [VictorOps](#victorops)       | Send alert to VictorOps.                                                              |
 
 
-#### Alert Event Data
+#### Alert event data
 
 Each event that gets sent to a handler contains the following alert data:
 
-| Name         | Description                                                   |
-| ----         | -----------                                                   |
-| **ID**       | The ID of the alert, user defined.                            |
-| **Message**  | The alert message, user defined.                              |
-| **Details**  | The alert details, user defined HTML content.                 |
-| **Time**     | The time the alert occurred.                                  |
-| **Duration** | The duration of the alert in nanoseconds.                     |
-| **Level**    | One of OK, INFO, WARNING or CRITICAL.                         |
-| **Data**     | influxql.Result containing the data that triggered the alert. |
+| Name            | Description                                                                                                     |
+| ----            | -----------                                                                                                     |
+| **ID**          | The ID of the alert, user defined.                                                                              |
+| **Message**     | The alert message, user defined.                                                                                |
+| **Details**     | The alert details, user defined HTML content.                                                                   |
+| **Time**        | The time the alert occurred.                                                                                    |
+| **Duration**    | The duration of the alert in nanoseconds.                                                                       |
+| **Level**       | One of OK, INFO, WARNING or CRITICAL.                                                                           |
+| **Data**        | influxql.Result containing the data that triggered the alert.                                                   |
+| **Recoverable** | Indicates whether the alert is auto-recoverable. Determined by the [`.noRecoveries()`](#norecoveries) property. |
 
 Events are sent to handlers if the alert is in a state other than 'OK'
 or the alert just changed to the 'OK' state from a non 'OK' state (a.k.a. the alert recovered).
@@ -238,13 +239,13 @@ For example, given the following values, the corresponding alert states are:
 
 
 
-Available Statistics:
+**Available Statistics:**
 
-* alerts_triggered: Total number of alerts triggered
-* oks_triggered: Number of OK alerts triggered
-* infos_triggered: Number of Info alerts triggered
-* warns_triggered: Number of Warn alerts triggered
-* crits_triggered: Number of Crit alerts triggered
+* `alerts_triggered`: Total number of alerts triggered
+* `oks_triggered`: Number of OK alerts triggered
+* `infos_triggered`: Number of Info alerts triggered
+* `warns_triggered`: Number of Warn alerts triggered
+* `crits_triggered`: Number of Crit alerts triggered
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
@@ -856,7 +857,7 @@ stream
 
 ### NoRecoveries
 
-Do not send recovery alerts.
+Do not send recovery alerts. Sets `recoverable` alert data field to `false`.
 
 ```js
 alert.noRecoveries()

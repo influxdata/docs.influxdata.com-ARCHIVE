@@ -207,15 +207,16 @@ using the [`alert-template-file`](#alert-template-file) config.
 Alert templates use [Golang Template](https://golang.org/pkg/text/template/) and
 have access to the following fields:
 
-| Field     | Description                                          |
-| -----     | -----------                                          |
-| .ID       | The unique ID for the alert.                         |
-| .Message  | The message of the alert.                            |
-| .Details  | The details of the alert.                            |
-| .Time     | The time the alert event occurred.                   |
-| .Duration | The duration of the alert event.                     |
-| .Level    | The level of the alert, i.e INFO, WARN, or CRITICAL. |
-| .Data     | The data that triggered the alert.                   |
+| Field        | Description                                             |
+| -----        | -----------                                             |
+| .ID          | The unique ID for the alert.                            |
+| .Message     | The message of the alert.                               |
+| .Details     | The details of the alert.                               |
+| .Time        | The time the alert event occurred.                      |
+| .Duration    | The duration of the alert event.                        |
+| .Level       | The level of the alert, i.e INFO, WARN, or CRITICAL.    |
+| .Data        | The data that triggered the alert.                      |
+| .Recoverable | Indicates whether or not the alert is auto-recoverable. |
 
 #### Inline alert template
 _**kapacitor.conf**_
