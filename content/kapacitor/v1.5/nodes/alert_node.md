@@ -945,7 +945,7 @@ _**Example kapacitor.conf**_
 ```toml
 [pagerduty2]
   enabled = true
-  service-key = "xxxx"
+  routing-key = "xxxx"
   url = "https://events.pagerduty.com/v2/enqueue"
 ```
 
