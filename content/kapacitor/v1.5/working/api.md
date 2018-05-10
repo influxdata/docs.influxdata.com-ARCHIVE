@@ -455,7 +455,7 @@ GET /kapacitor/v1/tasks?pattern=TASK*
             "dbrps" : [{"db": "DATABASE_NAME", "rp" : "RP_NAME"}],
             "script" : "stream|from().measurement('cpu')",
             "dot" : "digraph TASK_ID { ... }",
-            "status" : "enabled:,
+            "status" : "enabled",
             "executing" : true,
             "error" : "",
             "stats" : {}
@@ -1809,7 +1809,7 @@ you can disable applying overrides during startup with the `skip-config-override
 skip-config-overrides = true
 ```
 
-This allows you to still access the API to fix any unwanted configuration without applying that configuration during statup.
+This allows you to still access the API to fix any unwanted configuration without applying that configuration during startup.
 
 >NOTE: It is probably easiest and safest to set this option as an environment variable `KAPACITOR_SKIP_CONFIG_OVERRIDES=true`, since it is meant to be temporary.
 That way you do not have to modify your on disk configuration file or accidentally leave it in place causing issues later on.
