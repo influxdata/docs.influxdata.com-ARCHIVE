@@ -78,11 +78,11 @@ The following Kafka event handler options can be set in a
 [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
 `.kafka()` in a TICKscript.
 
-| Name     | Type   | Description                 |
-| ----     | ----   | -----------                 |
-| cluster  | string | Name of the Kafka cluster.  |
-| topic    | string | Kafka topic.                |
-| template | string | Message template.           |
+| Name     | Type   | Description                                                       |
+| ----     | ----   | -----------                                                       |
+| cluster  | string | Name of the Kafka cluster.                                        |
+| topic    | string | Kafka topic. _In TICKscripts, this is set using `.kafkaTopic()`._ |
+| template | string | Message template.                                                 |
 
 ### Example: handler file
 ```yaml
@@ -101,7 +101,7 @@ options:
   // ...
   .kafka()
     .cluster('kafka-cluster')
-    .topic('kafka-topic-name')
+    .kafkaTopic('kafka-topic-name')
     .template('kafka-template-name')
 ```
 
@@ -144,7 +144,7 @@ stream
     .crit(lambda: "usage_idle" < 10)
     .message('Hey, check your CPU')
     .kafka()
-      .topic('cpu-alerts')
+      .kafkaTopic('cpu-alerts')
 ```
 
 ### Send alerts to a Kafka cluster from a defined handler

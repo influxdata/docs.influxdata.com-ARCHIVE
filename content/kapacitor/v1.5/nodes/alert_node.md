@@ -483,7 +483,7 @@ stream
   |alert()
     .kafka()
       .cluster('kafka-cluster')
-      .topic('kafka-topic-name')
+      .kafkaTopic('kafka-topic-name')
 ```
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
