@@ -32,9 +32,14 @@ argParser.add_argument("--port", metavar='', help='Port of target influxdb')
 subparsers = argParser.add_subparsers(help='sub-commmand prime', dest='command')
 parser_prime = subparsers.add_parser('prime', description = 'Prime the influxdb with datapoints in the past.')
 parser_run = subparsers.add_parser('run', description = 'Start the generator to write datapoints ever 15s continuously. Exit with CTRL+C')
-parser_prime.add_argument('--start', metavar='', help='start time of the dataset, point in the past, e.g. 1d (ago), 12h (ago), etc.')
-parser_prime.add_argument('--end', metavar='', help='end time of the dataset, point in the past or 0d (now), 1h (ago), etc.')
-parser_prime.add_argument('--step', metavar='', help='interval between datapoints. e.g. 5s, 1m, 10m, 100ms')
+parser_pnr = subparsers.add_parser('pnr', description = 'Prime the db and Run generator to write datapoints ever 15s continuously. Exit with CTRL+C')
+parser_prime.add_argument('--start', metavar='', help='start time of the dataset, point in the past, e.g. 1d (ago), 12h (ago), etc.', required=True)
+parser_prime.add_argument('--end', metavar='', help='end time of the dataset, point in the past or 0d (now), 1h (ago), etc. (default 0h)', default='0h')
+parser_prime.add_argument('--step', metavar='', help='interval between datapoints. e.g. 5s, 1m, 10m, 100ms (default 15s)', default='15s')
+parser_run.add_argument('--step', metavar='', help='interval between datapoints. e.g. 5s, 1m, 10m, 100ms (default 15s)', default='15s')
+parser_pnr.add_argument('--start', metavar='', help='start time of the dataset, point in the past, e.g. 1d (ago), 12h (ago), etc.', required=True)
+parser_pnr.add_argument('--end', metavar='', help='end time of the dataset, point in the past or 0d (now), 1h (ago), etc. (default 0h)', default='0h')
+parser_pnr.add_argument('--step', metavar='', help='interval between datapoints. e.g. 5s, 1m, 10m, 100ms (default 15s)', default='15s')
 
 args = argParser.parse_args()
 
@@ -155,6 +160,8 @@ def run_live():
                 print(dp.toJsonWithTime(-1))
                 print(dp.toLineWithTime(-1))
             points.append(dp.toLineWithTime(-1))
+        if gsilent:
+            print('.', end='', flush=True)
         client.write_points(points,database=database_name,protocol='line')
         sys.stdout.flush()
         del points[:]
@@ -193,6 +200,13 @@ def run():
 if args.command == 'prime':
     print("starting prime")
     prime()
-else:
+elif args.command == 'run':
     print("starting run")
     run()
+elif args.command == 'pnr':
+    print("priming and running")
+    prime()
+    print("data primed\ngenerator now running. CTRL+C to stop")
+    run()
+else:
+    argParser.print_usage()
