@@ -1,9 +1,9 @@
 ---
-title: InfluxDB 1.5 documentation
+title: InfluxDB 1.6 documentation
 
 menu:
   influxdb:
-    name: v1.5
+    name: v1.6
     identifier: influxdb_1_6
     weight: 1
 ---
