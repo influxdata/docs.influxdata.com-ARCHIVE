@@ -5,6 +5,7 @@ aliases:
 description: Use Chronograf alert endpoints to send alert messages using Chronograf support for Alerta, Exec, HipChat, HTTP/Post, Kafka, Log, OpsGenie, PagerDuty, Sensu, Slack, SMTP/email, Talk, Telegram, TCP, and VictorOps.
 menu:
   chronograf_1_5:
+    name: Configuring alert endpoints
     weight: 70
     parent: Guides
 ---

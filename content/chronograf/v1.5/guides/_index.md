@@ -34,7 +34,7 @@ Describes the visualization types available to display in Chronograf views in da
 
 Describes how to add annotations to Chronograf views with the user interface or using the command line interface.
 
-## [Creating alert rules](/chronograf/v1.5/guides/create-alert-rules/)
+## [Creating Chronograf alert rules](/chronograf/v1.5/guides/create-alert-rules/)
 
 Learn how to create alert rules in Chronograf.
 

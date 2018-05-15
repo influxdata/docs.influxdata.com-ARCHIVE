@@ -5,6 +5,7 @@ aliases:
   - /chronograf/v1.5/guides/create-a-kapacitor-alert/
 menu:
   chronograf_1_5:
+    name: Creating alert rules
     weight: 60
     parent: Guides
 ---
