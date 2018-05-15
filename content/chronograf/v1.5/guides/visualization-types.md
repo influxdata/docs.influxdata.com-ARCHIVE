@@ -21,6 +21,7 @@ Each of the available visualization types and available user controls are descri
 * [Line Graph + Single Stat](#line-graph-single-stat)
 * [Bar Graph](#bar-graph)
 * [Gauge](#gauge)
+* [Table](#table)
 
 For information on adding and displaying annotations in graph views, see [Adding annotations to Chronograf views](/chronograf/v1.5/guides/annotations/).
 
@@ -222,3 +223,7 @@ Use the **Gauge Controls** to specify the following:
 #### Gauge example
 
 ![Gauge view](/img/chronograf/chrono-viz-gauge-example.png)
+
+### Table
+
+The **Table** panel displays the results of queries in a tabular view, which is sometimes easier to analyze than graph views of data.

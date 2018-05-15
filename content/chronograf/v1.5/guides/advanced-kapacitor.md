@@ -1,21 +1,23 @@
 ---
 title: Advanced Kapacitor usage
-description: How Kapacitor is used with Chronograf for alert history and TICKscript management.
+description: Learn how Kapacitor can be used with Chronograf for alert history and TICKscript management.
 menu:
   chronograf_1_5:
     weight: 100
     parent: Guides
 ---
 
+### On this page
+
+* [Alert history management](#alert-history-management)
+* [TICKscript management](#tickscript-management)
+
+
 Chronograf provides a user interface for [Kapacitor](/kapacitor/latest/), InfluxData's processing framework for creating alerts, running ETL jobs, and detecting anomalies in your data.
 This guide offers insights into how Kapacitor interacts with Chronograf and introduces advanced Kapacitor usage within Chronograf.
 
-### Content
 
-* [Alert History management](#alert-history-management)
-* [TICKscript management](#tickscript-management)
-
-## Alert History management
+## Alert history management
 
 Chronograf stores the information on the Alert History page as time series data in InfluxDB.
 It stores it in the `chronograf` database and in the `alerts` [measurement](/influxdb/latest/concepts/glossary/#measurement).

@@ -9,8 +9,8 @@ menu:
     parent: Guides
 ---
 
-Chronograf alert endpoints are used to quickly create Kapacitor-based event handlers that send alert messages to supported event handlers.
-You can use Chronograf to send alert messages to specific URLs as well as to applications like [Slack](https://slack.com/) and [HipChat](https://www.hipchat.com/).
+Chronograf alert endpoints can be configured using the Chronograf user interface to create Kapacitor-based event handlers that send alert messages.
+You can use Chronograf to send alert messages to specific URLs as well as to applications such as [Slack](https://slack.com/), [HipChat](https://www.hipchat.com/), and many others.
 
 This guide offers step-by-step instructions for configuring Chronograf alert endpoints.
 
@@ -26,7 +26,9 @@ Chronograf supports the following event handlers:
 * [Kafka](#kafka)
 * Log
 * [OpsGenie](#opsgenie)
+* [OpsGenie2](#opsgenie2)
 * [PagerDuty](#pagerduty)
+* [PagerDuty2](#pagerduty2)
 * Sensu
 * [Slack](#slack)
 * SMTP/Email
@@ -121,19 +123,21 @@ See [AlertNode (Kapacitor TICKscript node)](https://docs.influxdata.com/kapacito
 
 ## PagerDuty
 
+The original PagerDuty alert endpoint is deprecated -- use the [PagerDuty2](#pagerduty2) alert endpoint.
+
+## PagerDuty2
+
 Send an alerts about recognized events to PagerDuty using the Chronograf PagerDuty alert endpoint.
 
 **To configure a PagerDuty alert endpoint:**
 
 1. In the **Configure Alert Endpoints** of the **Configure Kapacitor Connection** page, click the **PagerDuty** tab
 2. In the **Service Key** field, enter the `service_key` (or Integration key). The service key is the GUID for your "Generic API" service.
-3. In the **PagerDuty URL**, enter the PagerDuty URL: `https://events.pagerduty.com/generic/2010-04-15/create_event.json`. This URL is used to POST a JSON body representing the event.
+3. In the **PagerDuty URL**, enter the PagerDuty URL: `https://events.pagerduty.com/v2/enqueue`. This URL is used to POST a JSON body representing the event.
 4. Click **Save Changes** to save the configuration settings.
 5. Click **Send Test Alert** to verify the configuration.
 
 See the [PagerDuty Events API 2.0](https://v2.developer.pagerduty.com/docs/send-an-event-events-api-v2) for details on the PagerDuty Events API and recognized event types (`trigger`, `acknowledge`, and `resolve`).
-
-> **Note:** Support for OpsGenie Events API 1.0 is deprecated. As [noted by OpGenie](https://docs.opsgenie.com/docs/migration-guide-for-alert-rest-api), API v1 will be inaccessible for all customers as of June 30, 2018.
 
 See [AlertNode (Kapacitor TICKscript node)](https://docs.influxdata.com/kapacitor/latest/nodes/alert_node/#pagerduty) in the Kapacitor documentation for details about enabling a new "Generic API" service using TICKscripts.
 

@@ -25,13 +25,13 @@ or every 10 seconds if the score hasn't changed.
 
 ### Setup
 
-**All snippets below can be found [here](https://github.com/influxdb/kapacitor/tree/master/examples/scores)**
+>  **Note:** Copies of the code snippets used here can be found in the  [scores](https://github.com/influxdata/kapacitor/tree/master/examples/scores) example in Kapacitor project on GitHub.
 
-Our first order of business is to configure Kapacitor to receive the stream of scores.
-In this case the scores update too often to store all of them in InfluxDB so we will send them directly to Kapacitor.
-Like InfluxDB you can configure a UDP listener.
+First, we need to configure Kapacitor to receive the stream of scores.
+In this example, the scores update too frequently to store all of the score data in a InfluxDB database, so the score data will be semt directly to Kapacitor.
+Like InfluxDB, you can configure a UDP listener.
 
-Add the following section to the end of your Kapacitor configuration.
+Add the following settings the `[[udp]]` secton in  your Kapacitor configuration file (`kapacitor.conf`).
 
 ```
 [[udp]]
@@ -41,8 +41,8 @@ Add the following section to the end of your Kapacitor configuration.
     retention-policy = "autogen"
 ```
 
-With this configuration, Kapacitor listens on port `9100` for UDP packets in the [Line Protocol](/influxdb/v1.5/write_protocols/line_protocol_tutorial/) format.
-It will scope incoming data to be in the `game.autogen` database and retention policy.
+Using this configuration, Kapacitor will listen on port `9100` for UDP packets in [Line Protocol](/influxdb/v1.5/write_protocols/line_protocol_tutorial/) format.
+Incoming data will be scoped to be in the `game.autogen` database and retention policy.
 Restart Kapacitor so that the UDP listener service starts.
 
 Here is a simple bash script to generate random score data so we can test it without

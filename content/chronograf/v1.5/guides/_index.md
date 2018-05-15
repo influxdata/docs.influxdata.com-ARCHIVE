@@ -22,6 +22,10 @@ Using the TICKscript editor in Chronograf to create, test, and debug Kapacitor T
 Chronograf offers a complete dashboard solution for visualizing your data and monitoring your infrastructure.
 Learn how to create customized dashboards in Chronograf.
 
+## [Cloning dashboards and cells](/chronograf/v1.5/guides/cloning-in-ui/)
+
+Use Chronograf's cloning functionality to make copies of dashboards and cells.
+
 ## [Visualization types in Chronograf](/chronograf/v1.5/guides/visualization-types/)
 
 Describes the visualization types available to display in Chronograf views in dashboards.
