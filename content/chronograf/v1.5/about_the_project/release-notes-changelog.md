@@ -7,37 +7,41 @@ menu:
     parent: About the project
 ---
 
-## v1.5.0 [2018-05-15]
+## v1.5.0.0 [2018-05-16]
 
 ### Features
 
-* Add default retention policy field as option in source configuration for use in querying hosts from Host List page and Host page.
-* Add support for PagerDuty v2 in Configure Alert Endpoints.
-* Add support for OpsGenie v2 in Configure Alert Endpoints.
-* Add support for Kafka in Configure Alert Endpoints for configuring and creating alert handlers.
-* Allow Kapacitor services to be disabled.
+* Add table view as a visualization type.
+* Add default retention policy field as option in source configuration for use in querying hosts from Host List page and Host pages.
+* Add support for PagerDuty v2 alert endpoints in UI.
+* Add support for OpsGenie v2 alert endpoints in UI.
+* Add support for Kafka alert endpoint in UI to configure and create alert handlers.
+* Add support for disabling Kapacitor services.
+* Add support for multiple Slack alert endpoint configurations in the UI.
 
-### UI Improvements
+### User interface improvements
 
 * Notify user when a dashboard cell is added, removed, or cloned.
 * Fix Template Variables Control Bar to top of dashboard page.
 * Remove extra click when creating dashboard cell.
 * Reduce font sizes in dashboards for increased space efficiency.
 * Add overlay animation to Template Variables Manager.
-* Display 'no results' on cells without results.
-* Disable template variables for non editing users.
+* Display 'No results' on cells without results.
+* Disable template variables for non-editing users.
 * YAxisLabels in Dashboard Graph Builder not showing until graph is redrawn.
-* Ensure table graphs have a consistent user interface between Google Chrome and Mozilla Firefox.
+* Ensure table views have a consistent user experience between Google Chrome and Mozilla Firefox.
 * Change AutoRefresh interval to paused.
-* Get cloned cell name for notification from cloned cell generator function,
+* Get cloned cell name for notification from cloned cell generator function.
+* Improve load time for Host page.
+* Show Kapacitor batch point info in log panel.
 
-### Bug Fixes
+### Bug fixes
 
-* Allows users to select TICKscript editor with mouse.
+* Allow user to select TICKscript editor with mouse-click.
 * Change color when value is equal to or greater than threshold value.
 * Fix base path for Kapacitor logs.
-* Fix logout when using basepath & simplify basepath usage (deprecates `PREFIX_ROUTES`).
-* Fix graphs in alert rule builder for queries that include groupby.
+* Fix logout when using `basepath` and simplify `basepath` usage (deprecates `PREFIX_ROUTES`).
+* Fix graphs in alert rule builder for queries that include `groupBy`.
 * Fix auto not showing in the group by dropdown and explorer getting disconnected.
 * Display y-axis label on initial graph load.
 * Fix not being able to change the source in the CEO display.
@@ -45,7 +49,8 @@ menu:
 * Fix Generic OAuth bug for GitHub Enterprise where the principal was incorrectly being checked for email being Primary and Verified.
 * Fix missing icons when using basepath.
 * Limit max-width of TICKScript editor.
-* Fixes naming of new TICKScripts.
+* Fix naming of new TICKScripts.
+* Fix data explorer query error reporting regression.
 * Fix Kapacitor Logs fetch regression.
 
 ## v1.4.4.1 [2018-04-16]

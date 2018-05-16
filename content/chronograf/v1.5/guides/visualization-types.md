@@ -227,3 +227,27 @@ Use the **Gauge Controls** to specify the following:
 ### Table
 
 The **Table** panel displays the results of queries in a tabular view, which is sometimes easier to analyze than graph views of data.
+
+![Table view](/img/chronograf/chrono-viz-table-selector.png)
+
+#### Table Controls
+
+Use the **Table Controls** to specify the following:
+
+* **Default Sort Field**: Select the default sort field. Default is **time**.
+* **Decimal Places**: Enter the number of decimal places. Default (empty field) is **unlimited**.
+* **Time Axis**: Select **Vertical** or **Horizontal**.
+* **Time Format**: Select the time format.
+    - Options include: `MM/DD/YYYY HH:mm:ss` (default), `MM/DD/YYYY HH:mm:ss.SSS`, `YYYY-MM-DD HH:mm:ss`, `HH:mm:ss`, `HH:mm:ss.SSS`, `MMMM D, YYYY HH:mm:ss`, `dddd, MMMM D, YYYY HH:mm:ss`, or `Custom`.
+* **Lock First Column**: Lock the first column so that the listings are always visible. Threshold settings do not apply in the first column when locked.
+* **Customize Field**:
+  - **time**: Enter a new name to rename.
+  - [additional]: Enter name for each additional column.
+  - Change the order of the column by dragging to the desired position.
+* **Thresholds**
+
+> **Note:** Threshold settings apply to any cells with values, except when they appear in the first column and **Lock First Column** is enabled.
+
+  - **Add Threshold** (button): Click to add a threshold.
+  - **Base Color**: Select a base, or background, color from the selection list.
+    * Color options: Ruby, Fire, Curacao, Tiger, Pineapple, Thunder, Honeydew, Rainforest, Viridian, Ocean, Pool, Laser (default), Planet, Star, Comet, Pepper, Graphite, White, and Castle.
