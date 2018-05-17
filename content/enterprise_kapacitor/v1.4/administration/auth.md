@@ -151,7 +151,6 @@ spanMMX.onclick = function(){
 * [Enabling authentication in Kapacitor](#enabling-authentication-in-kapacitor)
 * [User and privilege management](#user-and-privilege-management)
    * [User and privilege management over the InfluxDB Meta API](#user-and-privilege-management-over-the-influxdb-meta-api)
-   * [User and privilege management with Chronograf](#user-and-privilege-management-with-chronograf)
 
 ## Overview of authentication and authorization in the TICK stack
    
