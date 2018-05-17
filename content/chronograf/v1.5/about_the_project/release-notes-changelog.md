@@ -1,5 +1,6 @@
 ---
 title: Chronograf 1.5 release notes
+description: Features, breaking features, user interface improvements, and bug fixes for the latest and earlier Chronograf releases for the InfluxData time series platform.
 menu:
   chronograf_1_5:
     name: Release notes
@@ -38,7 +39,7 @@ menu:
 ### Bug fixes
 
 * Allow user to select TICKscript editor with mouse-click.
-* Change color when value is equal to or greater than threshold value.
+* Change color when value is equal to or greater than the threshold value.
 * Fix base path for Kapacitor logs.
 * Fix logout when using `basepath` and simplify `basepath` usage (deprecates `PREFIX_ROUTES`).
 * Fix graphs in alert rule builder for queries that include `groupBy`.

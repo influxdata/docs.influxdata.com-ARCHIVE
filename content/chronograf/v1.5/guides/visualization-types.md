@@ -251,3 +251,5 @@ Use the **Table Controls** to specify the following:
   - **Add Threshold** (button): Click to add a threshold.
   - **Base Color**: Select a base, or background, color from the selection list.
     * Color options: Ruby, Fire, Curacao, Tiger, Pineapple, Thunder, Honeydew, Rainforest, Viridian, Ocean, Pool, Laser (default), Planet, Star, Comet, Pepper, Graphite, White, and Castle.
+
+#### Table view example
