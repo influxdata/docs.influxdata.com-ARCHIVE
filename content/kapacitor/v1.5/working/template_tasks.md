@@ -73,7 +73,7 @@ _View the [literal value types](/kapacitor/v1.5/tick/syntax/#types) section of t
 TICKscript syntax article for information about available data types._
 
 #### Optional variables
-In some cases, a templated task may be used for tasks that do not require a values for all templated variables.
+In some cases, a templated task may be used for tasks that do not require values for all templated variables.
 In order for a variable to be optional, provide a default value. In most cases, the default can simply be `TRUE`:
 
 ```js
