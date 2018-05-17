@@ -32,7 +32,12 @@ Aggregate, select, transform, and predict data with InfluxQL functions.
     * [SAMPLE()](#sample)
     * [TOP()](#top)
 * [Transformations](#transformations)
+    * [ACOS()](#acos)
+    * [ASIN()](#asin)
+    * [ATAN()](#atan)
+    * [ATAN2()](#atan2)
     * [CEIL()](#ceil)
+    * [COS()](#cos)
     * [CUMULATIVE_SUM()](#cumulative-sum)
     * [DERIVATIVE()](#derivative)
     * [DIFFERENCE()](#difference)
@@ -49,7 +54,9 @@ Aggregate, select, transform, and predict data with InfluxQL functions.
     * [NON_NEGATIVE_DIFFERENCE()](#non-negative-difference)
     * [POW()](#pow)
     * [ROUND()](#round)
+    * [SIN()](#sin)
     * [SQRT()](#sqrt)
+    * [TAN()](#tan)
 * [Predictors](#predictors)
     * [HOLT_WINTERS()](#holt-winters)
 * [Other](#other)
@@ -1846,6 +1853,730 @@ location
 
 # Transformations
 
+## ACOS()
+Returns the arccosine (in radians) of the field value. Field values must be between -1 and 1.
+
+### Basic Syntax
+```
+SELECT ACOS( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+### Description of Basic Syntax
+
+`ACOS(field_key)`  
+Returns the arccosine of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
+
+<!-- `ACOS(/regular_expression/)`  
+Returns the arccosine of field values associated with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions). -->
+
+`ACOS(*)`  
+Returns the arccosine of field values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement).
+
+`ACOS()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types) with values between -1 and 1.
+
+The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
+See the [Advanced Syntax](#advanced-syntax) section for how to use `ACOS()` with a `GROUP BY time()` clause.
+
+### Examples of Basic Syntax
+
+Examples 1-3 use the following data sample of simulated park occupancy relative to total capacity. The important thing to note is that all field values fall within the calculable range (-1 to 1) of the `ACOS()` function:
+
+```
+> SELECT "of_capacity" FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
+
+name: park_occupancy
+time                  capacity
+----                  --------
+2017-05-01T00:00:00Z  0.83
+2017-05-02T00:00:00Z  0.3
+2017-05-03T00:00:00Z  0.84
+2017-05-04T00:00:00Z  0.22
+2017-05-05T00:00:00Z  0.17
+2017-05-06T00:00:00Z  0.77
+2017-05-07T00:00:00Z  0.64
+2017-05-08T00:00:00Z  0.72
+2017-05-09T00:00:00Z  0.16
+```
+
+#### Example 1: Calculate the arccosine of field values associated with a field key
+```
+> SELECT ACOS("of_capacity") FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
+
+name: park_occupancy
+time                  acos
+----                  ----
+2017-05-01T00:00:00Z  0.591688642426544
+2017-05-02T00:00:00Z  1.266103672779499
+2017-05-03T00:00:00Z  0.5735131044230969
+2017-05-04T00:00:00Z  1.3489818562981022
+2017-05-05T00:00:00Z  1.399966657665792
+2017-05-06T00:00:00Z  0.6919551751263169
+2017-05-07T00:00:00Z  0.8762980611683406
+2017-05-08T00:00:00Z  0.7669940078618667
+2017-05-09T00:00:00Z  1.410105673842986
+```
+
+The query returns arccosine of field values in the `of_capacity` field key in the `park_occupancy` measurement.
+
+#### Example 2: Calculate the arccosine of field values associated with each field key in a measurement
+```
+> SELECT ACOS(*) FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
+
+name: park_occupancy
+time                  acos_of_capacity
+----                  -------------
+2017-05-01T00:00:00Z  0.591688642426544
+2017-05-02T00:00:00Z  1.266103672779499
+2017-05-03T00:00:00Z  0.5735131044230969
+2017-05-04T00:00:00Z  1.3489818562981022
+2017-05-05T00:00:00Z  1.399966657665792
+2017-05-06T00:00:00Z  0.6919551751263169
+2017-05-07T00:00:00Z  0.8762980611683406
+2017-05-08T00:00:00Z  0.7669940078618667
+2017-05-09T00:00:00Z  1.410105673842986
+```
+
+The query returns arccosine of field values for each field key that stores numerical values in the `park_occupancy` measurement.
+The `park_occupancy` measurement has one numerical field: `of_capacity`.
+
+<!-- #### Example 3: Calculate the arccosine of field values associated with each field key that matches a regular expression
+```
+> SELECT ACOS(/capacity/) FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
+
+name: park_occupancy
+time                  acos_of_capacity
+----                  ----------------
+2017-05-01T00:00:00Z  0.591688642426544
+2017-05-02T00:00:00Z  1.266103672779499
+2017-05-03T00:00:00Z  0.5735131044230969
+2017-05-04T00:00:00Z  1.3489818562981022
+2017-05-05T00:00:00Z  1.399966657665792
+2017-05-06T00:00:00Z  0.6919551751263169
+2017-05-07T00:00:00Z  0.8762980611683406
+2017-05-08T00:00:00Z  0.7669940078618667
+2017-05-09T00:00:00Z  1.410105673842986
+```
+
+The query returns arccosine of field values for each field key that stores numerical values and includes the word `capacity` in the `park_occupancy` measurement. -->
+
+#### Example 3: Calculate the arccosine of field values associated with a field key and include several clauses
+```
+> SELECT ACOS("of_capacity") FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z' ORDER BY time DESC LIMIT 4 OFFSET 2
+
+name: park_occupancy
+time                  acos
+----                  ----
+2017-05-07T00:00:00Z  0.8762980611683406
+2017-05-06T00:00:00Z  0.6919551751263169
+2017-05-05T00:00:00Z  1.399966657665792
+2017-05-04T00:00:00Z  1.3489818562981022
+```
+
+The query returns arccosine of field values associated with the `of_capacity` field key.
+It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2017-05-01T00:00:00Z` and `2017-05-09T00:00:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
+The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
+
+### Advanced Syntax
+```
+SELECT ACOS(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+
+### Description of Advanced Syntax
+
+The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
+The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `ACOS()` function to those results.
+
+`ACOS()` supports the following nested functions:
+[`COUNT()`](#count),
+[`MEAN()`](#mean),
+[`MEDIAN()`](#median),
+[`MODE()`](#mode),
+[`SUM()`](#sum),
+[`FIRST()`](#first),
+[`LAST()`](#last),
+[`MIN()`](#min),
+[`MAX()`](#max), and
+[`PERCENTILE()`](#percentile).
+
+### Examples of Advanced Syntax
+
+#### Example 1: Calculate the arccosine of mean values.
+```
+> SELECT ACOS(MEAN("of_capacity")) FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z' GROUP BY time(3d)
+
+name: park_occupancy
+time                  acos
+----                  ----
+2017-04-30T00:00:00Z  0.9703630732143733
+2017-05-03T00:00:00Z  1.1483422646081407
+2017-05-06T00:00:00Z  0.7812981174487247
+2017-05-09T00:00:00Z  1.410105673842986
+```
+
+The query returns arccosine of [average](#mean) `of_capacity`s that are calculated at 3-day intervals.
+
+To get those results, InfluxDB first calculates the average `of_capacity`s at 3-day intervals.
+This step is the same as using the `MEAN()` function with the `GROUP BY time()` clause and without `ACOS()`:
+```
+> SELECT MEAN("of_capacity") FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z' GROUP BY time(3d)
+
+name: park_occupancy
+time                  mean
+----                  ----
+2017-04-30T00:00:00Z  0.565
+2017-05-03T00:00:00Z  0.41
+2017-05-06T00:00:00Z  0.71
+2017-05-09T00:00:00Z  0.16
+```
+
+InfluxDB then calculates arccosine of those averages.
+
+## ASIN()
+Returns the arcsine (in radians) of the field value. Field values must be between -1 and 1.
+
+### Basic Syntax
+```
+SELECT ASIN( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+### Description of Basic Syntax
+
+`ASIN(field_key)`  
+Returns the arcsine of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
+
+<!-- `ASIN(/regular_expression/)`  
+Returns the arcsine of field values associated with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions). -->
+
+`ASIN(*)`  
+Returns the arcsine of field values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement).
+
+`ASIN()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types) with values between -1 and 1.
+
+The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
+See the [Advanced Syntax](#advanced-syntax) section for how to use `ASIN()` with a `GROUP BY time()` clause.
+
+### Examples of Basic Syntax
+
+Examples 1-3 use the following data sample of simulated park occupancy relative to total capacity. The important thing to note is that all field values fall within the calculable range (-1 to 1) of the `ASIN()` function:
+
+```
+> SELECT "of_capacity" FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
+
+name: park_occupancy
+time                  capacity
+----                  --------
+2017-05-01T00:00:00Z  0.83
+2017-05-02T00:00:00Z  0.3
+2017-05-03T00:00:00Z  0.84
+2017-05-04T00:00:00Z  0.22
+2017-05-05T00:00:00Z  0.17
+2017-05-06T00:00:00Z  0.77
+2017-05-07T00:00:00Z  0.64
+2017-05-08T00:00:00Z  0.72
+2017-05-09T00:00:00Z  0.16
+```
+
+#### Example 1: Calculate the arcsine of field values associated with a field key
+```
+> SELECT ASIN("of_capacity") FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
+
+name: park_occupancy
+time                  asin
+----                  ----
+2017-05-01T00:00:00Z  0.9791076843683526
+2017-05-02T00:00:00Z  0.3046926540153975
+2017-05-03T00:00:00Z  0.9972832223717997
+2017-05-04T00:00:00Z  0.22181447049679442
+2017-05-05T00:00:00Z  0.1708296691291045
+2017-05-06T00:00:00Z  0.8788411516685797
+2017-05-07T00:00:00Z  0.6944982656265559
+2017-05-08T00:00:00Z  0.8038023189330299
+2017-05-09T00:00:00Z  0.1606906529519106
+```
+
+The query returns arcsine of field values in the `of_capacity` field key in the `park_capacity` measurement.
+
+#### Example 2: Calculate the arcsine of field values associated with each field key in a measurement
+```
+> SELECT ASIN(*) FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
+
+name: park_occupancy
+time                  asin_of_capacity
+----                  -------------
+2017-05-01T00:00:00Z  0.9791076843683526
+2017-05-02T00:00:00Z  0.3046926540153975
+2017-05-03T00:00:00Z  0.9972832223717997
+2017-05-04T00:00:00Z  0.22181447049679442
+2017-05-05T00:00:00Z  0.1708296691291045
+2017-05-06T00:00:00Z  0.8788411516685797
+2017-05-07T00:00:00Z  0.6944982656265559
+2017-05-08T00:00:00Z  0.8038023189330299
+2017-05-09T00:00:00Z  0.1606906529519106
+```
+
+The query returns arcsine of field values for each field key that stores numerical values in the `park_capacity` measurement.
+The `h2o_feet` measurement has one numerical field: `of_capacity`.
+
+<!-- #### Example 3: Calculate the arcsine of field values associated with each field key that matches a regular expression
+```
+> SELECT ASIN(/capacity/) FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
+
+name: park_occupancy
+time                  asin
+----                  ----
+2017-05-01T00:00:00Z  0.9791076843683526
+2017-05-02T00:00:00Z  0.3046926540153975
+2017-05-03T00:00:00Z  0.9972832223717997
+2017-05-04T00:00:00Z  0.22181447049679442
+2017-05-05T00:00:00Z  0.1708296691291045
+2017-05-06T00:00:00Z  0.8788411516685797
+2017-05-07T00:00:00Z  0.6944982656265559
+2017-05-08T00:00:00Z  0.8038023189330299
+2017-05-09T00:00:00Z  0.1606906529519106
+```
+
+The query returns arcsine of field values for each field key that stores numerical values and includes the word `of_capacity` in the `park_occupancy` measurement. -->
+
+#### Example 3: Calculate the arcsine of field values associated with a field key and include several clauses
+```
+> SELECT ASIN("of_capacity") FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z' ORDER BY time DESC LIMIT 4 OFFSET 2
+
+name: park_occupancy
+time                  asin
+----                  ----
+2017-05-07T00:00:00Z  0.6944982656265559
+2017-05-06T00:00:00Z  0.8788411516685797
+2017-05-05T00:00:00Z  0.1708296691291045
+2017-05-04T00:00:00Z  0.22181447049679442
+```
+
+The query returns arcsine of field values associated with the `of_capacity` field key.
+It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2017-05-01T00:00:00Z` and `2017-05-09T00:00:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
+The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
+
+### Advanced Syntax
+```
+SELECT ASIN(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+
+### Description of Advanced Syntax
+
+The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
+The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `ASIN()` function to those results.
+
+`ASIN()` supports the following nested functions:
+[`COUNT()`](#count),
+[`MEAN()`](#mean),
+[`MEDIAN()`](#median),
+[`MODE()`](#mode),
+[`SUM()`](#sum),
+[`FIRST()`](#first),
+[`LAST()`](#last),
+[`MIN()`](#min),
+[`MAX()`](#max), and
+[`PERCENTILE()`](#percentile).
+
+### Examples of Advanced Syntax
+
+#### Example 1: Calculate the arcsine of mean values.
+```
+> SELECT ASIN(MEAN("of_capacity")) FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z' GROUP BY time(3d)
+
+name: park_occupancy
+time                  asin
+----                  ----
+2017-04-30T00:00:00Z  0.6004332535805232
+2017-05-03T00:00:00Z  0.42245406218675574
+2017-05-06T00:00:00Z  0.7894982093461719
+2017-05-09T00:00:00Z  0.1606906529519106
+```
+
+The query returns arcsine of [average](#mean) `of_capacity`s that are calculated at 3-day intervals.
+
+To get those results, InfluxDB first calculates the average `of_capacity`s at 3-day intervals.
+This step is the same as using the `MEAN()` function with the `GROUP BY time()` clause and without `ASIN()`:
+```
+> SELECT MEAN("of_capacity") FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z' GROUP BY time(3d)
+
+name: park_occupancy
+time                  mean
+----                  ----
+2017-04-30T00:00:00Z  0.565
+2017-05-03T00:00:00Z  0.41
+2017-05-06T00:00:00Z  0.71
+2017-05-09T00:00:00Z  0.16
+```
+
+InfluxDB then calculates arcsine of those averages.
+
+
+## ATAN()
+Returns the arctangent (in radians) of the field value. Field values must be between -1 and 1.
+
+### Basic Syntax
+```
+SELECT ATAN( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+### Description of Basic Syntax
+
+`ATAN(field_key)`  
+Returns the arctangent of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
+
+<!-- `ATAN(/regular_expression/)`  
+Returns the arctangent of field values associated with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions). -->
+
+`ATAN(*)`  
+Returns the arctangent of field values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement).
+
+`ATAN()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types) with values between -1 and 1.
+
+The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
+See the [Advanced Syntax](#advanced-syntax) section for how to use `ATAN()` with a `GROUP BY time()` clause.
+
+### Examples of Basic Syntax
+
+Examples 1-3 use the following data sample of simulated park occupancy relative to total capacity. The important thing to note is that all field values fall within the calculable range (-1 to 1) of the `ATAN()` function:
+
+```
+> SELECT "of_capacity" FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
+
+name: park_occupancy
+time                  capacity
+----                  --------
+2017-05-01T00:00:00Z  0.83
+2017-05-02T00:00:00Z  0.3
+2017-05-03T00:00:00Z  0.84
+2017-05-04T00:00:00Z  0.22
+2017-05-05T00:00:00Z  0.17
+2017-05-06T00:00:00Z  0.77
+2017-05-07T00:00:00Z  0.64
+2017-05-08T00:00:00Z  0.72
+2017-05-09T00:00:00Z  0.16
+```
+
+#### Example 1: Calculate the arctangent of field values associated with a field key
+```
+> SELECT ATAN("of_capacity") FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
+
+name: park_occupancy
+time                  atan
+----                  ----
+2017-05-01T00:00:00Z  0.6927678353971222
+2017-05-02T00:00:00Z  0.2914567944778671
+2017-05-03T00:00:00Z  0.6986598247214632
+2017-05-04T00:00:00Z  0.2165503049760893
+2017-05-05T00:00:00Z  0.16839015714752992
+2017-05-06T00:00:00Z  0.6561787179913948
+2017-05-07T00:00:00Z  0.5693131911006619
+2017-05-08T00:00:00Z  0.6240230529767568
+2017-05-09T00:00:00Z  0.1586552621864014
+```
+
+The query returns arctangent of field values in the `of_capacity` field key in the `park_occupancy` measurement.
+
+#### Example 2: Calculate the arctangent of field values associated with each field key in a measurement
+```
+> SELECT ATAN(*) FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
+
+name: park_occupancy
+time                  atan_of_capacity
+----                  -------------
+2017-05-01T00:00:00Z  0.6927678353971222
+2017-05-02T00:00:00Z  0.2914567944778671
+2017-05-03T00:00:00Z  0.6986598247214632
+2017-05-04T00:00:00Z  0.2165503049760893
+2017-05-05T00:00:00Z  0.16839015714752992
+2017-05-06T00:00:00Z  0.6561787179913948
+2017-05-07T00:00:00Z  0.5693131911006619
+2017-05-08T00:00:00Z  0.6240230529767568
+2017-05-09T00:00:00Z  0.1586552621864014
+```
+
+The query returns arctangent of field values for each field key that stores numerical values in the `park_occupancy` measurement.
+The `park_occupancy` measurement has one numerical field: `of_capacity`.
+
+<!-- #### Example 3: Calculate the arctangent of field values associated with each field key that matches a regular expression
+```
+> SELECT ATAN(/capacity/) FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
+
+name: park_occupancy
+time                  atan_of_capacity
+----                  -------------
+2017-05-01T00:00:00Z  0.6927678353971222
+2017-05-02T00:00:00Z  0.2914567944778671
+2017-05-03T00:00:00Z  0.6986598247214632
+2017-05-04T00:00:00Z  0.2165503049760893
+2017-05-05T00:00:00Z  0.16839015714752992
+2017-05-06T00:00:00Z  0.6561787179913948
+2017-05-07T00:00:00Z  0.5693131911006619
+2017-05-08T00:00:00Z  0.6240230529767568
+2017-05-09T00:00:00Z  0.1586552621864014
+```
+
+The query returns arctangent of field values for each field key that stores numerical values and includes the word `capacity` in the `park_occupancy` measurement. -->
+
+#### Example 3: Calculate the arctangent of field values associated with a field key and include several clauses
+```
+> SELECT ATAN("of_capacity") FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z' ORDER BY time DESC LIMIT 4 OFFSET 2
+
+name: park_occupancy
+time                  atan
+----                  ----
+2017-05-07T00:00:00Z  0.5693131911006619
+2017-05-06T00:00:00Z  0.6561787179913948
+2017-05-05T00:00:00Z  0.16839015714752992
+2017-05-04T00:00:00Z  0.2165503049760893
+```
+
+The query returns arctangent of field values associated with the `of_capacity` field key.
+It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2017-05-01T00:00:00Z` and `2017-05-09T00:00:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
+The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
+
+### Advanced Syntax
+```
+SELECT ATAN(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+
+### Description of Advanced Syntax
+
+The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
+The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `ATAN()` function to those results.
+
+`ATAN()` supports the following nested functions:
+[`COUNT()`](#count),
+[`MEAN()`](#mean),
+[`MEDIAN()`](#median),
+[`MODE()`](#mode),
+[`SUM()`](#sum),
+[`FIRST()`](#first),
+[`LAST()`](#last),
+[`MIN()`](#min),
+[`MAX()`](#max), and
+[`PERCENTILE()`](#percentile).
+
+### Examples of Advanced Syntax
+
+#### Example 1: Calculate the arctangent of mean values.
+```
+> SELECT ATAN(MEAN("of_capacity")) FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z' GROUP BY time(3d)
+
+name: park_occupancy
+time                 atan
+----                 ----
+2017-04-30T00:00:00Z 0.5142865412694495
+2017-05-03T00:00:00Z 0.3890972310552784
+2017-05-06T00:00:00Z 0.6174058917515726
+2017-05-09T00:00:00Z 0.1586552621864014
+```
+
+The query returns arctangent of [average](#mean) `of_capacity`s that are calculated at 3-day intervals.
+
+To get those results, InfluxDB first calculates the average `of_capacity`s at 3-day intervals.
+This step is the same as using the `MEAN()` function with the `GROUP BY time()` clause and without `ATAN()`:
+```
+> SELECT MEAN("of_capacity") FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z' GROUP BY time(3d)
+
+name: park_occupancy
+time                  mean
+----                  ----
+2017-04-30T00:00:00Z  0.565
+2017-05-03T00:00:00Z  0.41
+2017-05-06T00:00:00Z  0.71
+2017-05-09T00:00:00Z  0.16
+```
+
+InfluxDB then calculates arctangent of those averages.
+
+
+## ATAN2()
+Returns the the arctangent of `y/x` in radians.
+
+### Basic Syntax
+```
+SELECT ATAN2( [ * | <field_key> | num ], [ <field_key> | num ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+### Description of Basic Syntax
+
+`ATAN2(field_key_y, field_key_x)`  
+Returns the arctangent of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key), `field_key_y`, divided by field values associated with `feild_key_x`.
+
+<!-- `ATAN2(/regular_expression/, field_key_x)`  
+Returns the arctangent of field values associated with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions)
+divided by field values associated with `feild_key_x`. -->
+
+`ATAN2(*, field_key_x)`  
+Returns the field values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement)
+divided by field values associated with `feild_key_x`.
+
+`ATAN2()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
+
+The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
+See the [Advanced Syntax](#advanced-syntax) section for how to use `ATAN2()` with a `GROUP BY time()` clause.
+
+### Examples of Basic Syntax
+
+Examples 1-3 use the following sample of simulated flight data:
+
+```
+> SELECT "altitude_ft", "distance_ft" FROM "flight_data" WHERE time >= '2018-05-16T12:01:00Z' AND time <= '2018-05-16T12:10:00Z'
+
+name: flight_data
+time                  altitude_ft  distance_ft
+----                  -----------  -----------
+2018-05-16T12:01:00Z  1026         50094
+2018-05-16T12:02:00Z  2549         53576
+2018-05-16T12:03:00Z  4033         55208
+2018-05-16T12:04:00Z  5579         58579
+2018-05-16T12:05:00Z  7065         61213
+2018-05-16T12:06:00Z  8589         64807
+2018-05-16T12:07:00Z  10180        67707
+2018-05-16T12:08:00Z  11777        69819
+2018-05-16T12:09:00Z  13321        72452
+2018-05-16T12:10:00Z  14885        75881
+```
+
+#### Example 1: Calculate the arctangent of field_key_y over field_key_x
+```
+> SELECT ATAN2("altitude_ft", "distance_ft") FROM "flight_data" WHERE time >= '2018-05-16T12:01:00Z' AND time <= '2018-05-16T12:10:00Z'
+
+name: flight_data
+time                  atan2
+----                  -----
+2018-05-16T12:01:00Z  0.020478631571881498
+2018-05-16T12:02:00Z  0.04754142349303296
+2018-05-16T12:03:00Z  0.07292147724575364
+2018-05-16T12:04:00Z  0.09495251193874832
+2018-05-16T12:05:00Z  0.11490822875441563
+2018-05-16T12:06:00Z  0.13176409347584003
+2018-05-16T12:07:00Z  0.14923587589682233
+2018-05-16T12:08:00Z  0.1671059946640312
+2018-05-16T12:09:00Z  0.18182893717409565
+2018-05-16T12:10:00Z  0.1937028631495223
+```
+
+The query returns the arctangents of field values in the `altitude_ft` field key divided by values in the `distance_ft` field key. Both are part of the `flight_data` measurement.
+
+#### Example 2: Calculate the arctangent of values associated with each field key in a measurement divided by feild_key_x
+```
+> SELECT ATAN2(*, "distance_ft") FROM "flight_data" WHERE time >= '2018-05-16T12:01:00Z' AND time <= '2018-05-16T12:10:00Z'
+
+name: flight_data
+time                  atan2_altitude_ft     atan2_distance_ft
+----                  -----------------     -----------------
+2018-05-16T12:01:00Z  0.020478631571881498  0.7853981633974483
+2018-05-16T12:02:00Z  0.04754142349303296   0.7853981633974483
+2018-05-16T12:03:00Z  0.07292147724575364   0.7853981633974483
+2018-05-16T12:04:00Z  0.09495251193874832   0.7853981633974483
+2018-05-16T12:05:00Z  0.11490822875441563   0.7853981633974483
+2018-05-16T12:06:00Z  0.13176409347584003   0.7853981633974483
+2018-05-16T12:07:00Z  0.14923587589682233   0.7853981633974483
+2018-05-16T12:08:00Z  0.1671059946640312    0.7853981633974483
+2018-05-16T12:09:00Z  0.18182893717409565   0.7853981633974483
+2018-05-16T12:10:00Z  0.19370286314952234   0.7853981633974483
+```
+
+The query returns the arctangents of all numeric field values in the `flight_data` measurement divided by values in the `distance_ft` field key.
+The `flight_data` measurement has two numeric fields: `altitude_ft` and `distance_ft`.
+
+<!-- #### Example 3: Calculate the arctangent of values associated with each field key matching a regular expression divided by feild_key_x
+```
+> SELECT ATAN2(/ft/, "distance_ft") FROM "flight_data" WHERE time >= '2018-05-16T12:01:00Z' AND time <= '2018-05-16T12:10:00Z'
+
+name: flight_data
+time                  atan2_altitude_ft     atan2_distance_ft
+----                  -----------------     -----------------
+2018-05-16T12:01:00Z  0.020478631571881498  0.7853981633974483
+2018-05-16T12:02:00Z  0.04754142349303296   0.7853981633974483
+2018-05-16T12:03:00Z  0.07292147724575364   0.7853981633974483
+2018-05-16T12:04:00Z  0.09495251193874832   0.7853981633974483
+2018-05-16T12:05:00Z  0.11490822875441563   0.7853981633974483
+2018-05-16T12:06:00Z  0.13176409347584003   0.7853981633974483
+2018-05-16T12:07:00Z  0.14923587589682233   0.7853981633974483
+2018-05-16T12:08:00Z  0.1671059946640312    0.7853981633974483
+2018-05-16T12:09:00Z  0.18182893717409565   0.7853981633974483
+2018-05-16T12:10:00Z  0.19370286314952234   0.7853981633974483
+```
+
+The query returns the arctangents of all numeric field values in the `flight_data` measurement that match the `/ft/` regular expression divided by values in the `distance_ft` field key.
+The `flight_data` measurement has two matching numeric fields: `altitude_ft` and `distance_ft`.
+-->
+
+#### Example 3: Calculate the arctangents of field values and include several clauses
+```
+> SELECT ATAN2("altitude_ft", "distance_ft") FROM "flight_data" WHERE time >= '2018-05-16T12:01:00Z' AND time <= '2018-05-16T12:10:00Z' ORDER BY time DESC LIMIT 4 OFFSET 2
+
+name: flight_data
+time                  atan2
+----                  -----
+2018-05-16T12:08:00Z  0.1671059946640312
+2018-05-16T12:07:00Z  0.14923587589682233
+2018-05-16T12:06:00Z  0.13176409347584003
+2018-05-16T12:05:00Z  0.11490822875441563
+```
+
+The query returns the arctangent of field values associated with the `altitude_ft` field key divided by the `distance_ft` field key.
+It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2018-05-16T12:10:00Z` and `2018-05-16T12:10:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
+The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
+
+### Advanced Syntax
+```
+SELECT ATAN2(<function()>, <function()>) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+
+### Description of Advanced Syntax
+
+The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
+The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `ATAN2()` function to those results.
+
+`ATAN2()` supports the following nested functions:
+[`COUNT()`](#count),
+[`MEAN()`](#mean),
+[`MEDIAN()`](#median),
+[`MODE()`](#mode),
+[`SUM()`](#sum),
+[`FIRST()`](#first),
+[`LAST()`](#last),
+[`MIN()`](#min),
+[`MAX()`](#max), and
+[`PERCENTILE()`](#percentile).
+
+### Examples of Advanced Syntax
+
+#### Example 1: Calculate arctangents of mean values
+```
+> SELECT ATAN2(MEAN("altitude_ft"), MEAN("distance_ft")) FROM "flight_data" WHERE time >= '2018-05-16T12:01:00Z' AND time <= '2018-05-16T13:01:00Z' GROUP BY time(12m)
+
+name: flight_data
+time                  atan2
+----                  -----
+2018-05-16T12:00:00Z  0.133815587896842
+2018-05-16T12:12:00Z  0.2662716308351908
+2018-05-16T12:24:00Z  0.2958845306108965
+2018-05-16T12:36:00Z  0.23783439588429497
+2018-05-16T12:48:00Z  0.1906803720242831
+2018-05-16T13:00:00Z  0.17291511946158172
+```
+
+The query returns the argtangents of [average](#mean) `altitude_ft`s divided by average `distance_ft`s. Averages are calculated at 12-minute intervals.
+
+To get those results, InfluxDB first calculates the average `altitude_ft`s and `distance_ft` at 12-minute intervals.
+This step is the same as using the `MEAN()` function with the `GROUP BY time()` clause and without `ATAN2()`:
+
+```
+> SELECT MEAN("altitude_ft"), MEAN("distance_ft") FROM "flight_data" WHERE time >= '2018-05-16T12:01:00Z' AND time <= '2018-05-16T13:01:00Z' GROUP BY time(12m)
+
+name: flight_data
+time                  mean                mean_1
+----                  ----                ------
+2018-05-16T12:00:00Z  8674                64433.181818181816
+2018-05-16T12:12:00Z  26419.833333333332  96865.25
+2018-05-16T12:24:00Z  40337.416666666664  132326.41666666666
+2018-05-16T12:36:00Z  41149.583333333336  169743.16666666666
+2018-05-16T12:48:00Z  41230.416666666664  213600.91666666666
+2018-05-16T13:00:00Z  41184.5             235799
+```
+
+InfluxDB then calculates the arctangents of those averages.
+
+
 ## CEIL()
 Returns the subsequent value rounded up to the nearest integer.
 
@@ -2007,6 +2738,170 @@ time                   mean
 ```
 
 InfluxDB then rounds those averages up to the nearest integer.
+
+
+## COS()
+Returns the cosine of the field value.
+
+### Basic Syntax
+```
+SELECT COS( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+### Description of Basic Syntax
+
+`COS(field_key)`  
+Returns the cosine of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
+
+<!-- `COS(/regular_expression/)`  
+Returns the cosine of field values associated with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions). -->
+
+`COS(*)`  
+Returns the cosine of field values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement).
+
+`COS()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
+
+The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
+See the [Advanced Syntax](#advanced-syntax) section for how to use `COS()` with a `GROUP BY time()` clause.
+
+### Examples of Basic Syntax
+
+Examples 1-3 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
+
+```
+> SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+
+name: h2o_feet
+time                  water_level
+----                  -----------
+2015-08-18T00:00:00Z  2.064
+2015-08-18T00:06:00Z  2.116
+2015-08-18T00:12:00Z  2.028
+2015-08-18T00:18:00Z  2.126
+2015-08-18T00:24:00Z  2.041
+2015-08-18T00:30:00Z  2.051
+```
+
+#### Example 1: Calculate the cosine of field values associated with a field key
+```
+> SELECT COS("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+
+name: h2o_feet
+time                  cos
+----                  ---
+2015-08-18T00:00:00Z  -0.47345017433543124
+2015-08-18T00:06:00Z  -0.5185922462666872
+2015-08-18T00:12:00Z  -0.4414407189100776
+2015-08-18T00:18:00Z  -0.5271163912192579
+2015-08-18T00:24:00Z  -0.45306786455514825
+2015-08-18T00:30:00Z  -0.4619598230611262
+```
+
+The query returns cosine of field values in the `water_level` field key in the `h2o_feet` measurement.
+
+#### Example 2: Calculate the cosine of field values associated with each field key in a measurement
+```
+> SELECT COS(*) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+
+name: h2o_feet
+time                  cos_water_level
+----                  ---------------
+2015-08-18T00:00:00Z  -0.47345017433543124
+2015-08-18T00:06:00Z  -0.5185922462666872
+2015-08-18T00:12:00Z  -0.4414407189100776
+2015-08-18T00:18:00Z  -0.5271163912192579
+2015-08-18T00:24:00Z  -0.45306786455514825
+2015-08-18T00:30:00Z  -0.4619598230611262
+```
+
+The query returns cosine of field values for each field key that stores numerical values in the `h2o_feet` measurement.
+The `h2o_feet` measurement has one numerical field: `water_level`.
+
+<!-- #### Example 3: Calculate the cosine of field values associated with each field key that matches a regular expression
+```
+> SELECT COS(/water/) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+
+name: h2o_feet
+time                  cos
+----                  ---
+2015-08-18T00:00:00Z  -0.47345017433543124
+2015-08-18T00:06:00Z  -0.5185922462666872
+2015-08-18T00:12:00Z  -0.4414407189100776
+2015-08-18T00:18:00Z  -0.5271163912192579
+2015-08-18T00:24:00Z  -0.45306786455514825
+2015-08-18T00:30:00Z  -0.4619598230611262
+```
+
+The query returns cosine of field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement. -->
+
+#### Example 3: Calculate the cosine of field values associated with a field key and include several clauses
+```
+> SELECT COS("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' ORDER BY time DESC LIMIT 4 OFFSET 2
+
+name: h2o_feet
+time                  cos
+----                  ---
+2015-08-18T00:18:00Z  -0.5271163912192579
+2015-08-18T00:12:00Z  -0.4414407189100776
+2015-08-18T00:06:00Z  -0.5185922462666872
+2015-08-18T00:00:00Z  -0.47345017433543124
+```
+
+The query returns cosine of field values associated with the `water_level` field key.
+It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
+The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
+
+### Advanced Syntax
+```
+SELECT COS(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+
+### Description of Advanced Syntax
+
+The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
+The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `COS()` function to those results.
+
+`COS()` supports the following nested functions:
+[`COUNT()`](#count),
+[`MEAN()`](#mean),
+[`MEDIAN()`](#median),
+[`MODE()`](#mode),
+[`SUM()`](#sum),
+[`FIRST()`](#first),
+[`LAST()`](#last),
+[`MIN()`](#min),
+[`MAX()`](#max), and
+[`PERCENTILE()`](#percentile).
+
+### Examples of Advanced Syntax
+
+#### Example 1: Calculate the cosine of mean values.
+```
+> SELECT COS(MEAN("water_level")) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
+
+name: h2o_feet
+time                  cos
+----                  ---
+2015-08-18T00:00:00Z  -0.49618891270599885
+2015-08-18T00:12:00Z  -0.4848605136571181
+2015-08-18T00:24:00Z  -0.4575195627907578
+```
+
+The query returns cosine of [average](#mean) `water_level`s that are calculated at 12-minute intervals.
+
+To get those results, InfluxDB first calculates the average `water_level`s at 12-minute intervals.
+This step is the same as using the `MEAN()` function with the `GROUP BY time()` clause and without `COS()`:
+```
+> SELECT MEAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
+
+name: h2o_feet
+time                   mean
+----                   ----
+2015-08-18T00:00:00Z   2.09
+2015-08-18T00:12:00Z   2.077
+2015-08-18T00:24:00Z   2.0460000000000003
+```
+
+InfluxDB then calculates cosine of those averages.
 
 
 ## CUMULATIVE_SUM()
@@ -3448,7 +4343,7 @@ Returns the logarithm of the field value to the base 2.
 
 ### Basic Syntax
 ```
-SELECT LOG2( [ * | <field_key> ], <b> ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+SELECT LOG2( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 ### Description of Basic Syntax
 
@@ -3613,7 +4508,7 @@ Returns the logarithm of the field value to the base 10.
 
 ### Basic Syntax
 ```
-SELECT LOG10( [ * | <field_key> ], <b> ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+SELECT LOG10( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 ### Description of Basic Syntax
 
@@ -4066,10 +4961,10 @@ SELECT POW( [ * | <field_key> ], <x> ) [INTO_clause] FROM_clause [WHERE_clause] 
 ### Description of Basic Syntax
 
 `POW(field_key, x)`  
-Returns the logarithm of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key) to the power of `x`.
+Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key) to the power of `x`.
 
 <!-- `POW(/regular_expression/, x)`  
-Returns the logarithm of field values associated with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions) to the power of `x`. -->
+Returns the field values associated with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions) to the power of `x`. -->
 
 `POW(*, x)`  
 Returns the field values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement) to the power of `x`.
@@ -4384,6 +5279,170 @@ time                   mean
 InfluxDB then rounds those averages to the nearest integer.
 
 
+## SIN()
+Returns the sine of the field value.
+
+### Basic Syntax
+```
+SELECT SIN( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+### Description of Basic Syntax
+
+`SIN(field_key)`  
+Returns the sine of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
+
+<!-- `SIN(/regular_expression/)`  
+Returns the sine of field values associated with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions). -->
+
+`SIN(*)`  
+Returns the sine of field values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement).
+
+`SIN()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
+
+The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
+See the [Advanced Syntax](#advanced-syntax) section for how to use `SIN()` with a `GROUP BY time()` clause.
+
+### Examples of Basic Syntax
+
+Examples 1-3 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
+
+```
+> SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+
+name: h2o_feet
+time                  water_level
+----                  -----------
+2015-08-18T00:00:00Z  2.064
+2015-08-18T00:06:00Z  2.116
+2015-08-18T00:12:00Z  2.028
+2015-08-18T00:18:00Z  2.126
+2015-08-18T00:24:00Z  2.041
+2015-08-18T00:30:00Z  2.051
+```
+
+#### Example 1: Calculate the sine of field values associated with a field key
+```
+> SELECT SIN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+
+name: h2o_feet
+time                  sin
+----                  ---
+2015-08-18T00:00:00Z  0.8808206017241819
+2015-08-18T00:06:00Z  0.8550216851706579
+2015-08-18T00:12:00Z  0.8972904165810275
+2015-08-18T00:18:00Z  0.8497930984115993
+2015-08-18T00:24:00Z  0.8914760289023131
+2015-08-18T00:30:00Z  0.8869008523376968
+```
+
+The query returns sine of field values in the `water_level` field key in the `h2o_feet` measurement.
+
+#### Example 2: Calculate the sine of field values associated with each field key in a measurement
+```
+> SELECT SIN(*) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+
+name: h2o_feet
+time                  sin_water_level
+----                  ---------------
+2015-08-18T00:00:00Z  0.8808206017241819
+2015-08-18T00:06:00Z  0.8550216851706579
+2015-08-18T00:12:00Z  0.8972904165810275
+2015-08-18T00:18:00Z  0.8497930984115993
+2015-08-18T00:24:00Z  0.8914760289023131
+2015-08-18T00:30:00Z  0.8869008523376968
+```
+
+The query returns sine of field values for each field key that stores numerical values in the `h2o_feet` measurement.
+The `h2o_feet` measurement has one numerical field: `water_level`.
+
+<!-- #### Example 3: Calculate the sine of field values associated with each field key that matches a regular expression
+```
+> SELECT SIN(/water/) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+
+name: h2o_feet
+time                  sin
+----                  ---
+2015-08-18T00:00:00Z  0.8808206017241819
+2015-08-18T00:06:00Z  0.8550216851706579
+2015-08-18T00:12:00Z  0.8972904165810275
+2015-08-18T00:18:00Z  0.8497930984115993
+2015-08-18T00:24:00Z  0.8914760289023131
+2015-08-18T00:30:00Z  0.8869008523376968
+```
+
+The query returns sine of field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement. -->
+
+#### Example 3: Calculate the sine of field values associated with a field key and include several clauses
+```
+> SELECT SIN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' ORDER BY time DESC LIMIT 4 OFFSET 2
+
+name: h2o_feet
+time                  sin
+----                  ---
+2015-08-18T00:18:00Z  0.8497930984115993
+2015-08-18T00:12:00Z  0.8972904165810275
+2015-08-18T00:06:00Z  0.8550216851706579
+2015-08-18T00:00:00Z  0.8808206017241819
+```
+
+The query returns sine of field values associated with the `water_level` field key.
+It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
+The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
+
+### Advanced Syntax
+```
+SELECT SIN(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+
+### Description of Advanced Syntax
+
+The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
+The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `SIN()` function to those results.
+
+`SIN()` supports the following nested functions:
+[`COUNT()`](#count),
+[`MEAN()`](#mean),
+[`MEDIAN()`](#median),
+[`MODE()`](#mode),
+[`SUM()`](#sum),
+[`FIRST()`](#first),
+[`LAST()`](#last),
+[`MIN()`](#min),
+[`MAX()`](#max), and
+[`PERCENTILE()`](#percentile).
+
+### Examples of Advanced Syntax
+
+#### Example 1: Calculate the sine of mean values.
+```
+> SELECT SIN(MEAN("water_level")) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
+
+name: h2o_feet
+time                  sin
+----                  ---
+2015-08-18T00:00:00Z  0.8682145834456126
+2015-08-18T00:12:00Z  0.8745914945253902
+2015-08-18T00:24:00Z  0.8891995555912935
+```
+
+The query returns sine of [average](#mean) `water_level`s that are calculated at 12-minute intervals.
+
+To get those results, InfluxDB first calculates the average `water_level`s at 12-minute intervals.
+This step is the same as using the `MEAN()` function with the `GROUP BY time()` clause and without `SIN()`:
+```
+> SELECT MEAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
+
+name: h2o_feet
+time                   mean
+----                   ----
+2015-08-18T00:00:00Z   2.09
+2015-08-18T00:12:00Z   2.077
+2015-08-18T00:24:00Z   2.0460000000000003
+```
+
+InfluxDB then calculates sine of those averages.
+
+
 ## SQRT()
 Returns the square root of field value.
 
@@ -4547,6 +5606,170 @@ time                   mean
 ```
 
 InfluxDB then calculates the square roots of those averages.
+
+
+## TAN()
+Returns the tangent of the field value.
+
+### Basic Syntax
+```
+SELECT TAN( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+### Description of Basic Syntax
+
+`TAN(field_key)`  
+Returns the tangent of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
+
+<!-- `TAN(/regular_expression/)`  
+Returns the tangent of field values associated with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions). -->
+
+`TAN(*)`  
+Returns the tangent of field values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement).
+
+`TAN()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
+
+The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
+See the [Advanced Syntax](#advanced-syntax) section for how to use `TAN()` with a `GROUP BY time()` clause.
+
+### Examples of Basic Syntax
+
+Examples 1-3 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
+
+```
+> SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+
+name: h2o_feet
+time                  water_level
+----                  -----------
+2015-08-18T00:00:00Z  2.064
+2015-08-18T00:06:00Z  2.116
+2015-08-18T00:12:00Z  2.028
+2015-08-18T00:18:00Z  2.126
+2015-08-18T00:24:00Z  2.041
+2015-08-18T00:30:00Z  2.051
+```
+
+#### Example 1: Calculate the tangent of field values associated with a field key
+```
+> SELECT TAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+
+name: h2o_feet
+time                  tan
+----                  ---
+2015-08-18T00:00:00Z  -1.8604293534384375
+2015-08-18T00:06:00Z  -1.6487359603347427
+2015-08-18T00:12:00Z  -2.0326408012302273
+2015-08-18T00:18:00Z  -1.6121545688343464
+2015-08-18T00:24:00Z  -1.9676434782626282
+2015-08-18T00:30:00Z  -1.9198657720074992
+```
+
+The query returns tangent of field values in the `water_level` field key in the `h2o_feet` measurement.
+
+#### Example 2: Calculate the tangent of field values associated with each field key in a measurement
+```
+> SELECT TAN(*) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+
+name: h2o_feet
+time                  tan_water_level
+----                  ---------------
+2015-08-18T00:00:00Z  -1.8604293534384375
+2015-08-18T00:06:00Z  -1.6487359603347427
+2015-08-18T00:12:00Z  -2.0326408012302273
+2015-08-18T00:18:00Z  -1.6121545688343464
+2015-08-18T00:24:00Z  -1.9676434782626282
+2015-08-18T00:30:00Z  -1.9198657720074992
+```
+
+The query returns tangent of field values for each field key that stores numerical values in the `h2o_feet` measurement.
+The `h2o_feet` measurement has one numerical field: `water_level`.
+
+<!-- #### Example 3: Calculate the tangent of field values associated with each field key that matches a regular expression
+```
+> SELECT TAN(/water/) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+
+name: h2o_feet
+time                  tan
+----                  ---
+2015-08-18T00:00:00Z  -1.8604293534384375
+2015-08-18T00:06:00Z  -1.6487359603347427
+2015-08-18T00:12:00Z  -2.0326408012302273
+2015-08-18T00:18:00Z  -1.6121545688343464
+2015-08-18T00:24:00Z  -1.9676434782626282
+2015-08-18T00:30:00Z  -1.9198657720074992
+```
+
+The query returns tangent of field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement. -->
+
+#### Example 3: Calculate the tangent of field values associated with a field key and include several clauses
+```
+> SELECT TAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' ORDER BY time DESC LIMIT 4 OFFSET 2
+
+name: h2o_feet
+time                  tan
+----                  ---
+2015-08-18T00:18:00Z  -1.6121545688343464
+2015-08-18T00:12:00Z  -2.0326408012302273
+2015-08-18T00:06:00Z  -1.6487359603347427
+2015-08-18T00:00:00Z  -1.8604293534384375
+```
+
+The query returns tangent of field values associated with the `water_level` field key.
+It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
+The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
+
+### Advanced Syntax
+```
+SELECT TAN(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+
+### Description of Advanced Syntax
+
+The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
+The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `TAN()` function to those results.
+
+`TAN()` supports the following nested functions:
+[`COUNT()`](#count),
+[`MEAN()`](#mean),
+[`MEDIAN()`](#median),
+[`MODE()`](#mode),
+[`SUM()`](#sum),
+[`FIRST()`](#first),
+[`LAST()`](#last),
+[`MIN()`](#min),
+[`MAX()`](#max), and
+[`PERCENTILE()`](#percentile).
+
+### Examples of Advanced Syntax
+
+#### Example 1: Calculate the tangent of mean values.
+```
+> SELECT TAN(MEAN("water_level")) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
+
+name: h2o_feet
+time                  tan
+----                  ---
+2015-08-18T00:00:00Z  -1.7497661902817365
+2015-08-18T00:12:00Z  -1.8038002062256624
+2015-08-18T00:24:00Z  -1.9435224805850773
+```
+
+The query returns tangent of [average](#mean) `water_level`s that are calculated at 12-minute intervals.
+
+To get those results, InfluxDB first calculates the average `water_level`s at 12-minute intervals.
+This step is the same as using the `MEAN()` function with the `GROUP BY time()` clause and without `TAN()`:
+```
+> SELECT MEAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
+
+name: h2o_feet
+time                   mean
+----                   ----
+2015-08-18T00:00:00Z   2.09
+2015-08-18T00:12:00Z   2.077
+2015-08-18T00:24:00Z   2.0460000000000003
+```
+
+InfluxDB then calculates tangent of those averages.
 
 
 # Predictors
