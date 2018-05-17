@@ -9,8 +9,8 @@ menu:
 
 Chronograf uses [Bolt](https://github.com/boltdb/bolt) to store Chronograf-specific key-value data.
 Generally speaking, you should never have to manually administer your internal Chronograf database.
-However, rolling back to a previous version of Chronograf does require a restoring
-data and the data-structure specific to that version.
+However, rolling back to a previous version of Chronograf does require restoring
+the data and data-structure specific to that version.
 
 Chronograf's internal database, `chronograf-v1.db`, is stored at your specified
 [`--bolt-path`](/chronograf/v1.4/administration/config-options/#bolt-path-b) which,
