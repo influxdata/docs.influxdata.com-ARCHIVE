@@ -122,6 +122,7 @@ An online `restore` process is initiated by using the `restore` command with eit
 influxd restore [ -db <db_name> ]
     -portable | -online
     [ -host <host:port> ]
+    [ -newdb <newdb_name> ]
     [ -rp <rp_name> ]
     [ -newrp <newrp_name> ]
     [ -shard <shard_ID> ]
