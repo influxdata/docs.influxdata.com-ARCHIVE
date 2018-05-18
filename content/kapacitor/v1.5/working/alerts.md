@@ -49,8 +49,8 @@ optional one.
 * `kind`: declares the type of event handler to be used.  Note that this
 needs to be enabled in the `kapacitord` configuration.
 * `match`: (optional) declares a match expression used to filter which
-alert events will be processed. See the section [Match Expressions](#match-expressions)
-below.
+alert events will be processed. See the [Match Expressions](#match-expressions)
+section below.
 * `options`: options specific to the handler in question. These are
 listed below in the section [List of handlers](#list-of-handlers)
 
@@ -160,4 +160,31 @@ Send events with the tag "host" equal to `s001.example.com` to the handler:
 
 ```yaml
 match: "host" == 's001.example.com'
+```
+
+#### Alert event data
+
+Each alert event that gets sent to a handler contains the following alert data:
+
+| Name            | Description                                                                                                                                      |
+| ----            | -----------                                                                                                                                      |
+| **ID**          | The ID of the alert, user defined.                                                                                                               |
+| **Message**     | The alert message, user defined.                                                                                                                 |
+| **Details**     | The alert details, user defined HTML content.                                                                                                    |
+| **Time**        | The time the alert occurred.                                                                                                                     |
+| **Duration**    | The duration of the alert in nanoseconds.                                                                                                        |
+| **Level**       | One of OK, INFO, WARNING or CRITICAL.                                                                                                            |
+| **Data**        | influxql.Result containing the data that triggered the alert.                                                                                    |
+| **Recoverable** | Indicates whether the alert is auto-recoverable. Determined by the [`.noRecoveries()`](/kapacitor/v1.5/nodes/alert_node/#norecoveries) property. |
+
+This data is used by [event handlers](/kapacitor/v1.5/event_handlers) in their
+handling of alert events.
+
+Alert messages use [Golang Template](https://golang.org/pkg/text/template/) and
+have access to the alert data.
+
+```js
+|alert()
+  // ...
+  .message('{{ .ID }} is {{ .Level }} value:{{ index .Fields "value" }}, {{ if not .Recoverable }}non-recoverable{{ end }}')
 ```
