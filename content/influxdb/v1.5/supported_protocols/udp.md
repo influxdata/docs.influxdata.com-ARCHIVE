@@ -7,7 +7,7 @@ menu:
   influxdb_1_5:
     name: UDP
     weight: 50
-    parent: supported_protocols
+    parent: Supported protocols
 ---
 
 # The UDP Input

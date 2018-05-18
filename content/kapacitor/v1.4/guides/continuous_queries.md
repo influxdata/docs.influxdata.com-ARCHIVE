@@ -1,13 +1,13 @@
 ---
-title: Kapacitor as a Continous Query engine
+title: Using Kapacitor as a continous query engine
+description: Converting an InfluxDB continuous query to a Kapacitor TICKscript
 aliases:
     - kapacitor/v1.4/examples/continuous_queries/
 menu:
   kapacitor_1_4:
-    name: Kapacitor as a Continuous Query engine
-    identifier: continuous_queries
-    weight: 30
-    parent: guides
+    name: Using Kapacitor as a continuous query engine
+    weight: 50
+    parent: Guides
 ---
 
 Kapacitor can be used to do the same work as Continuous Queries in InfluxDB.

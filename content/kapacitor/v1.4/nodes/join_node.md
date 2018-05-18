@@ -8,7 +8,7 @@ menu:
     name: JoinNode
     identifier: join_node
     weight: 170
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

@@ -8,7 +8,7 @@ menu:
     name: UDFNode
     identifier: u_d_f_node
     weight: 310
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

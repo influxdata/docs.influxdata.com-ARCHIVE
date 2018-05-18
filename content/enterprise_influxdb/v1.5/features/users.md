@@ -1,11 +1,11 @@
 ---
-title: InfluxDB Enterprise users
+title: Managing InfluxDB Enterprise users
 aliases:
     - /enterprise/v1.5/features/users/
 menu:
   enterprise_influxdb_1_5:
     weight: 0
-    parent: Features
+    parent: Enterprise features
 ---
 
 InfluxDB Enterprise users have functions that are either specific to the web

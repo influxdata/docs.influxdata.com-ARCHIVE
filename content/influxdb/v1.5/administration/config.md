@@ -4,7 +4,7 @@ menu:
   influxdb_1_5:
     name: Configuring InfluxDB
     weight: 10
-    parent: administration
+    parent: Administration
 ---
 
 The InfluxDB OSS configuration file contains configuration settings specific to a local node.
@@ -74,7 +74,7 @@ The `GOMAXPROCS` [Go language environment variable](https://golang.org/pkg/runti
 
 
 The default value of `GOMAXPROCS` is the number of CPUs (whatever your operating system considers to be a CPU) that are visible to the program *on startup.* For a 32-core machine, the `GOMAXPROCS` value would be `32`.
-You can override this value to be less than the maximum value, which can be useful in cases where you are running the InfluxDB along with other processes on the same machine and want to ensure that the database doesn't completely starve those those processes.
+You can override this value to be less than the maximum value, which can be useful in cases where you are running InfluxDB along with other processes on the same machine and want to ensure that the database doesn't completely starve those processes.
 
 > ***Note:***
 > Setting `GOMAXPROCS=1` will eliminate all parallelization.
@@ -319,7 +319,7 @@ Environment variable: `INFLUXDB_DATA_MAX_SERIES_PER_DATABASE`
 ### `max-values-per-tag = 100000`
 
 The maximum number of [tag values](/influxdb/v1.5/concepts/glossary/#tag-value)
-allowed per [tag key]((/influxdb/v1.5/concepts/glossary/#tag-key).
+allowed per [tag key](/influxdb/v1.5/concepts/glossary/#tag-key).
 The default setting is `100000`.
 Change the setting to `0` to allow an unlimited number of tag values per tag
 key.

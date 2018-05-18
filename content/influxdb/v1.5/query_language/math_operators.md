@@ -5,7 +5,7 @@ menu:
   influxdb_1_5:
     name: Mathematical operators
     weight: 70
-    parent: query_language
+    parent: InfluxQL
 ---
 
 Mathematical operators follow the [standard order of operations](https://golang.org/ref/spec#Operator_precedence).

@@ -8,7 +8,7 @@ menu:
     name: K8sAutoscaleNode
     identifier: k8s_autoscale_node
     weight: 180
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

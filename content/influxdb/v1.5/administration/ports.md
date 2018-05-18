@@ -5,7 +5,7 @@ menu:
   influxdb_1_5:
     name: Ports
     weight: 50
-    parent: administration
+    parent: Administration
 ---
 
 ## Enabled ports

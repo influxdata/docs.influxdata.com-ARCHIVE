@@ -9,7 +9,7 @@ menu:
     name: CombineNode
     identifier: combine_node
     weight: 40
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

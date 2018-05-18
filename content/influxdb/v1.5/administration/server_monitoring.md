@@ -7,7 +7,7 @@ menu:
   influxdb_1_5:
     name: Server monitoring
     weight: 80
-    parent: administration
+    parent: Administration
 ---
 
 **On this page**

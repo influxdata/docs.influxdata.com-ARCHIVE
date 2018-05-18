@@ -8,7 +8,7 @@ menu:
     name: DerivativeNode
     identifier: derivative_node
     weight: 70
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

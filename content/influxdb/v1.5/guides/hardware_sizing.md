@@ -3,7 +3,7 @@ title: Hardware sizing guidelines
 menu:
   influxdb_1_5:
     weight: 40
-    parent: guides
+    parent: Guides
 ---
 
 This guide offers general hardware recommendations for InfluxDB and addresses some frequently asked questions about hardware sizing. The recommendations are only for the [Time Structured Merge](/influxdb/v1.5/concepts/storage_engine/#the-new-influxdb-storage-engine-from-lsm-tree-to-b-tree-and-back-again-to-create-the-time-structured-merge-tree) tree (`TSM`) storage engine, the only storage engine available with InfluxDB 1.4. Users running older versions of InfluxDB with [unconverted](/influxdb/v0.10/administration/upgrading/#convert-b1-and-bz1-shards-to-tsm1) `b1` or `bz1` shards may have different performance characteristics. See the [InfluxDB 0.9 sizing guide](/influxdb/v0.9/guides/hardware_sizing/) for more detail.

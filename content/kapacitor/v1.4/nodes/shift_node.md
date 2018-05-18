@@ -8,7 +8,7 @@ menu:
     name: ShiftNode
     identifier: shift_node
     weight: 240
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

@@ -7,6 +7,7 @@ aliases:
   - /enterprise/v1.5/introduction/installation_guidelines/
 menu:
   enterprise_influxdb_1_5:
+    name: Installing options - QuickStart or Production
     weight: 20
     parent: Introduction
 ---

@@ -1,13 +1,13 @@
 ---
-title: Custom anomaly detection using Kapacitor
+title: Custom anomaly detection with Kapacitor
+description: Tutorial on building a custom anomaly detection system using Kapacitor and user defined functions (UDFs) to get alerts
 aliases:
     - kapacitor/v1.4/examples/anomaly_detection/
 menu:
   kapacitor_1_4:
     name: Custom anomaly detection
-    identifier: anomaly_detection
-    weight: 20
-    parent: guides
+    weight: 40
+    parent: Guides
 ---
 
 
@@ -19,7 +19,7 @@ writing and using your own UDFs within Kapacitor.
 
 If you haven't already, we recommend following the [getting started
 guide](/kapacitor/v1.4/introduction/getting-started/) for Kapacitor
-prior to continuing.
+before you continuine here.
 
 ## 3D printing
 
@@ -162,7 +162,7 @@ remember this information for each UDF.  This way, Kapacitor can
 understand the available options for a given UDF before its executed
 inside of a task.
 
-### The Init method
+### The `init` method
 
 Next let's implement the `init` method, which is called once the task
 starts executing.  The `init` method receives a list of chosen
@@ -214,7 +214,7 @@ calls `init`, passing any specified options from the TICKscript. Once
 initialized, the process will remain running and Kapacitor will begin
 sending data as it arrives.
 
-### The Batch and Point methods
+### The batch and point methods
 
 Our task wants a `batch` edge, meaning it expects to get data in
 batches or windows.  To send a batch of data to the UDF process,

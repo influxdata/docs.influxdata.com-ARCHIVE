@@ -8,7 +8,7 @@ menu:
     name: HTTPOutNode
     identifier: http_out_node
     weight: 130
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

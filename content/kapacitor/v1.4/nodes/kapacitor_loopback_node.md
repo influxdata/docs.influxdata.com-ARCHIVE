@@ -8,7 +8,7 @@ menu:
     name: KapacitorLoopback
     identifier: kapacitor_loopback_node
     weight: 190
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

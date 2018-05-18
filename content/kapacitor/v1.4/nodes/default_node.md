@@ -8,7 +8,7 @@ menu:
     name: DefaultNode
     identifier: default_node
     weight: 50
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

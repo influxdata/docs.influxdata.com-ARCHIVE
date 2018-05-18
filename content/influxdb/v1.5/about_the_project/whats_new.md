@@ -1,5 +1,5 @@
 ---
-title: What's new in InfluxDB 1.5.x
+title: What's new in InfluxDB OSS 1.5
 aliases:
   - /influxdb/v1.5/administration/differences/
   - /influxdb/v1.5/administration/previous_differences/
@@ -7,12 +7,12 @@ menu:
   influxdb_1_5:
     name: What's new
     weight: 20
-    parent: about_the_project
+    parent: About the project
 ---
 
-> For a comprehensive list of the changes between versions, see [InfluxDB's Changelog](/influxdb/v1.5/about_the_project/releasenotes-changelog/).
+> For a comprehensive list of the changes between versions, see [InfluxDB Release Notes/Changelog](/influxdb/v1.5/about_the_project/releasenotes-changelog/).
 
-Included here are some highlights of the InfluxDB 1.5.x releases:
+Included here are some highlights of the InfluxDB OSS 1.5 release:
 
 * [Time Series Index (TSI) support](#time-series-index-tsi-support)
 * [Enterprise-compatible backup and restore](#enterprise-compatible-backup-and-restore-for-influxdb-oss)
@@ -23,7 +23,7 @@ Included here are some highlights of the InfluxDB 1.5.x releases:
 
 ## Time Series Index (TSI) support
 
-InfluxDB 1.5.0 introduced support for the InfluxDB time series index (TSI) engine. TSI was first introduced in InfluxDB 1.3 as a technical preview. Since then, InfluxDB users and InfluxData have tested, used, and shared feedback on this functionality.
+InfluxDB 1.5 introduced support for the InfluxDB time series index (TSI) disk-based storage engine. TSI was first introduced in InfluxDB 1.3 as a technical preview. Since then, InfluxDB users and InfluxData have tested, used, and shared feedback on this functionality.
 
 With TSI, the number of series should be unbounded by the memory on the server hardware and the number of existing series will have a negligible impact on database startup time.
 

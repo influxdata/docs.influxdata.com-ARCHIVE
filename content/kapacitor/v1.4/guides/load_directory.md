@@ -1,13 +1,13 @@
 ---
 title: Load directory service
+description: Configure a load directory service for file-based definitions of Kapacitor tasks, templates, and topic handlers that load on startup
 aliases:
     - kapacitor/v1.4/examples/load_directory/
 menu:
   kapacitor_1_4:
     name: Load directory service
-    identifier: load_directory
-    weight: 15
-    parent: guides
+    weight: 30
+    parent: Guides
 ---
 
 # File-based definitions of tasks, templates, and load handlers

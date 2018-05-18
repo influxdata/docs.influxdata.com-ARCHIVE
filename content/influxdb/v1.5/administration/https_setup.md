@@ -4,7 +4,7 @@ menu:
   influxdb_1_5:
     name: Enabling HTTPS
     weight: 30
-    parent: administration
+    parent: Administration
 ---
 
 Enabling HTTPS secures the communication between clients and the InfluxDB

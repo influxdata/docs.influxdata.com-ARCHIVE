@@ -8,7 +8,7 @@ menu:
     name: FromNode
     identifier: from_node
     weight: 110
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

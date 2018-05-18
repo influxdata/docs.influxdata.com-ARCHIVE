@@ -1,10 +1,17 @@
 ---
-title: Release notes
+title: Chronograf 1.4 release notes
 menu:
   chronograf_1_4:
+    name: Release notes
     weight: 10
-    parent: About the Project
+    parent: About the project
 ---
+
+## v1.4.4.2 [2018-05-01]
+
+### Bug fixes
+
+* Only update template variables that are not CSV type
 
 ## v1.4.4.1 [2018-04-16]
 

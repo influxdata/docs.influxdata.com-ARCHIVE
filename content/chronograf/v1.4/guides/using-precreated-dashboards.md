@@ -1,6 +1,6 @@
 ---
 title: Using pre-created dashboards in Chronograf
-description: Preconfigured dashboards can quickly be used to display metrics for popular applications, including Apache, Consul, Docker, Elasticsearch, InfluxDB, Mesos, MySQL, NGINX, PostgreSQL, RabbitMQ, Redis, and more.
+description: Preconfigured dashboards can quickly be used to display metrics for popular applications, including Apache, Consul, Docker, Elasticsearch, InfluxDB, Mesos, MySQL, NGINX, PostgreSQL, RabbitMQ, Redis, and more
 menu:
   chronograf_1_4:
     name: Using pre-created dashboards
@@ -118,16 +118,17 @@ See [Telegraf configuration](https://github.com/influxdata/telegraf/blob/master/
 **Required Telegraf plugin:** [Elasticsearch input plugin](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/elasticsearch/README.md)
 
 `elasticsearch.json`
-  * "ElasticSearch - Query Throughput"
-  * "ElasticSearch - Open Connections"
-  * "ElasticSearch - Query Latency"
-  * "ElasticSearch - Fetch Latency"
-  * "ElasticSearch - Suggest Latency"
-  * "ElasticSearch - Scroll Latency"
-  * "ElasticSearch - Indexing Latency"
-  * "ElasticSearch - JVM GC Collection Counts"
-  * "ElasticSearch - JVM GC Latency"
-  * "ElasticSearch - JVM Heap Usage"
+
+* "ElasticSearch - Query Throughput"
+* "ElasticSearch - Open Connections"
+* "ElasticSearch - Query Latency"
+* "ElasticSearch - Fetch Latency"
+* "ElasticSearch - Suggest Latency"
+* "ElasticSearch - Scroll Latency"
+* "ElasticSearch - Indexing Latency"
+* "ElasticSearch - JVM GC Collection Counts"
+* "ElasticSearch - JVM GC Latency"
+* "ElasticSearch - JVM Heap Usage"
 
 ## haproxy
 

@@ -44,123 +44,6 @@ SectionPagesMenu = "products"
   weight = 50
   url = "/enterprise_kapacitor/"
 
-  # InfluxDB v1.5 Menu
-  [[menu.influxdb_1_5]]
-    name = "About the Project"
-    identifier = "about_the_project"
-    weight = 10
-    url = "/influxdb/v1.5/about_the_project/"
-  [[menu.influxdb_1_5]]
-    name = "Introduction"
-    identifier = "introduction"
-    weight = 20
-    url = "/influxdb/v1.5/introduction/"
-  [[menu.influxdb_1_5]]
-    name = "Guides"
-    identifier = "guides"
-    weight = 30
-    url = "/influxdb/v1.5/guides/"
-  [[menu.influxdb_1_5]]
-    name = "Concepts"
-    identifier = "concepts"
-    weight = 40
-    url = "/influxdb/v1.5/concepts/"
-  [[menu.influxdb_1_5]]
-    name = "Troubleshooting"
-    identifier = "troubleshooting"
-    weight = 50
-    url = "/influxdb/v1.5/troubleshooting/"
-  [[menu.influxdb_1_5]]
-    name = "Tools"
-    identifier = "tools"
-    weight = 60
-    url = "/influxdb/v1.5/tools/"
-  [[menu.influxdb_1_5]]
-    name = "Write Protocol"
-    identifier = "write_protocols"
-    weight = 70
-    url = "/influxdb/v1.5/write_protocols/"
-    [[menu.influxdb_1_5]]
-      name = "Supported Protocols"
-      identifier = "supported_protocols"
-      weight = 80
-      url = "/influxdb/v1.5/supported_protocols/"
-  [[menu.influxdb_1_5]]
-    name = "Query Language"
-    identifier = "query_language"
-    weight = 90
-    url = "/influxdb/v1.5/query_language/"
-  [[menu.influxdb_1_5]]
-    name = "High Availability"
-    identifier = "high_availability"
-    weight = 100
-    url = "/influxdb/v1.5/high_availability/"
-  [[menu.influxdb_1_5]]
-    name = "Administration"
-    identifier = "administration"
-    weight = 10
-    url = "/influxdb/v1.5/administration/"
-  [[menu.influxdb_1_5]]
-    name = "External Resources"
-    identifier = "external_resources"
-    weight = 110
-    url = "/influxdb/v1.5/external_resources/"
-  # InfluxDB v1.5 Sub-Menu - About
-[[menu.influxdb_1_5]]
-  name = "Contributing"
-  identifier = "contributing"
-  weight = 30
-  url = "https://github.com/influxdb/influxdb/blob/master/CONTRIBUTING.md"
-  parent = "about_the_project"
-[[menu.influxdb_1_5]]
-  name = "CLA"
-  identifier = "cla"
-  weight = 40
-  url = "https://influxdata.com/community/cla/"
-  parent = "about_the_project"
-[[menu.influxdb_1_5]]
-  name = "Licenses"
-  identifier = "licenses"
-  weight = 50
-  url = "https://github.com/influxdb/influxdb/blob/master/LICENSE"
-  parent = "about_the_project"
-[[menu.influxdb_1_5]]
-  name = "Third Party Software"
-  identifier = "third_party"
-  weight = 60
-  url = "/influxdb/v1.5/about_the_project/#third_party"
-  parent = "about_the_project"
-# InfluxDB v1.5 Sub-Menu - External Resources
-[[menu.influxdb_1_5]]
-  name = "InfluxData Blog"
-  identifier = "infludatablog"
-  weight = 5
-  url = "https://www.influxdata.com/blog/"
-  parent = "external_resources"
-[[menu.influxdb_1_5]]
-  name = "Technical Papers"
-  identifier = "technicalpapers"
-  weight = 10
-  url = "https://www.influxdata.com/technical-papers/"
-  parent = "external_resources"
-[[menu.influxdb_1_5]]
-  name = "Meetup Videos"
-  identifier = "meetupvideos"
-  weight = 20
-  url = "https://www.influxdata.com/videos/"
-  parent = "external_resources"
-[[menu.influxdb_1_5]]
-  name = "Virtual Training Videos"
-  identifier = "virtualtrainingvideos"
-  weight = 30
-  url = "https://www.influxdata.com/videos-training/"
-  parent = "external_resources"
-[[menu.influxdb_1_5]]
-  name = "Virtual Training Schedule"
-  identifier = "virtualtrainingschedule"
-  weight = 40
-  url = "https://www.influxdata.com/virtual-training-courses/"
-  parent = "external_resources"
 
 
   # InfluxDB v1.4 Menu
@@ -692,14 +575,6 @@ SectionPagesMenu = "products"
   url = "https://influxdata.com/downloads/#kapacitor"
   parent = "introduction"
 
-# Kapacitor v1.4 Sub-Menu - Introduction
-[[menu.kapacitor_1_4]]
-  name = "Download"
-  identifier = "download"
-  weight = 1
-  url = "https://influxdata.com/downloads/#kapacitor"
-  parent = "introduction"
-
 
 # Kapacitor v1.2 Sub-Menu - Introduction
 [[menu.kapacitor_1_2]]
@@ -716,14 +591,6 @@ SectionPagesMenu = "products"
   weight = 5
   url = "https://influxdata.com/downloads/#kapacitor"
   parent = "introduction"
-
-# Chronograf v1.4 Sub-Menu - Introduction
-  [[menu.chronograf_1_4]]
-  name = "Download"
-  identifier = "download"
-  weight = 5
-  url = "https://influxdata.com/downloads/"
-  parent = "Introduction"
 
 # Chronograf v1.3 Sub-Menu - Introduction
   [[menu.chronograf_1_3]]
@@ -748,14 +615,6 @@ SectionPagesMenu = "products"
   weight = 5
   url = "https://influxdata.com/downloads/#chronograf"
   parent = "Introduction"
-
-# Telegraf v1.6 Sub-Menu - Introduction
-  [[menu.telegraf_1_6]]
-  name = "Download"
-  identifier = "download"
-  weight = 5
-  url = "https://influxdata.com/downloads/#telegraf"
-  parent = "introduction"
 
 # Telegraf v1.5 Sub-Menu - Introduction
   [[menu.telegraf_1_5]]

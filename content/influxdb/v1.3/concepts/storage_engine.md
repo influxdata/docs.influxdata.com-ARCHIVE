@@ -231,7 +231,7 @@ Higher level (and thus less frequent) compactions will re-combine blocks to full
 * Index Optimization - When many level 4 TSM files accumulate, the internal indexes become larger and more costly to access.
 An index optimization compaction splits the series and indices across a new set of TSM files, sorting all points for a given series into one TSM file.
 Before an index optimization, each TSM file contained points for most or all series, and thus each contains the same series index.
-After an index optimzation, each TSM file contains points from a minimum of series and there is little series overlap between files.
+After an index optimization, each TSM file contains points from a minimum of series and there is little series overlap between files.
 Each TSM file thus has a smaller unique series index, instead of a duplicate of the full series list.
 In addition, all points from a particular series are contiguous in a TSM file rather than spread across multiple TSM files.
 * Full Compactions - Full compactions run when a shard has become cold for writes for long time, or when deletes have occurred on the shard.

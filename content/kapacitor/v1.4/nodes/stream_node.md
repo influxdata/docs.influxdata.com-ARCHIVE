@@ -7,8 +7,8 @@ menu:
   kapacitor_1_4:
     name: StreamNode
     identifier: stream_node
-    weight: 5
-    parent: nodes
+    weight: 290
+    parent: TICKscript nodes
 ---
 ### Constructor
 

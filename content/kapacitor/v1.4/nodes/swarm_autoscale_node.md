@@ -8,7 +8,7 @@ menu:
     name: SwarmAutoscaleNode
     identifier: swarm_autoscale_node
     weight: 300
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

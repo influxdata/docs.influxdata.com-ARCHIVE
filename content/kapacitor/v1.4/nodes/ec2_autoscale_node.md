@@ -8,7 +8,7 @@ menu:
     name: EC2AutoscaleNode
     identifier: ec2_autoscale_node
     weight: 80
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

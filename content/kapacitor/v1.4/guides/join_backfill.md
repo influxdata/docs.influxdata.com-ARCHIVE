@@ -5,9 +5,8 @@ aliases:
 menu:
   kapacitor_1_4:
     name: Calculating rates across series
-    identifier: join_backfill
-    weight: 1
-    parent: guides
+    weight: 10
+    parent: Guides
 ---
 
 Often times we have set of series where each series is counting a particular event.

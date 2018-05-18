@@ -8,7 +8,7 @@ menu:
     name: StateDurationNode
     identifier: state_duration_node
     weight: 270
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

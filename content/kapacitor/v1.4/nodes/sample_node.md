@@ -8,7 +8,7 @@ menu:
     name: SampleNode
     identifier: sample_node
     weight: 230
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 

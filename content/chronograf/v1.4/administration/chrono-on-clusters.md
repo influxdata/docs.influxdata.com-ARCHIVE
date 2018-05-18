@@ -5,7 +5,7 @@ menu:
   chronograf_1_4:
     name: Connecting Chronograf to clusters
     weight: 40
-    parent: Troubleshooting
+    parent: Administration
 ---
 
 The connection details form requires additional information when connecting Chronograf to an [InfluxDB Enterprise cluster](https://docs.influxdata.com/enterprise_influxdb/latest/).

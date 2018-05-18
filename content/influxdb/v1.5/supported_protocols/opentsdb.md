@@ -6,7 +6,7 @@ menu:
   influxdb_1_5:
     name: OpenTSDB
     weight: 30
-    parent: supported_protocols
+    parent: Supported protocols
 ---
 
 ## OpenTSDB Input

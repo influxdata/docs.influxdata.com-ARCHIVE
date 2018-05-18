@@ -5,7 +5,7 @@ menu:
   telegraf_1_6:
     name: Output data formats
     weight: 30
-    parent: concepts
+    parent: Concepts
 ---
 
 Telegraf is able to serialize metrics into the following output data formats:

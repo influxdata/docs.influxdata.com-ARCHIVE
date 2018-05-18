@@ -1,10 +1,11 @@
 ---
-title: Glossary
+title: InfluxDB Enterprise glossary of terms
 aliases:
     - /enterprise/v1.5/concepts/glossary/
 menu:
   enterprise_influxdb_1_5:
-    weight: 0
+    name: Glossary of terms
+    weight: 20
     parent: Concepts
 ---
 

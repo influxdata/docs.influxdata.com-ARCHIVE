@@ -5,7 +5,7 @@ menu:
   influxdb_1_5:
     name: Data management
     weight: 40
-    parent: query_language
+    parent: InfluxQL
 ---
 
 InfluxQL offers a full suite of administrative commands.

@@ -6,7 +6,7 @@ menu:
   influxdb_1_5:
     name: CollectD
     weight: 10
-    parent: supported_protocols
+    parent: Supported protocols
 ---
 
 # The collectd input

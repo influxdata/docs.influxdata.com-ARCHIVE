@@ -8,7 +8,7 @@ menu:
     name: UnionNode
     identifier: union_node
     weight: 320
-    parent: nodes
+    parent: TICKscript nodes
 ---
 ### Constructor
 
