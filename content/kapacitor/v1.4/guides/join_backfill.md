@@ -211,7 +211,7 @@ errors
     |join(views)
         .as('errors', 'views')
     //Calculate percentage
-    |eval(lambda: "errors.value" / "views.value")
+    |eval(lambda: "errors.value" / ("views.sum" + "errors.sum"))
         // Give the resulting field a name
         .as('error_percent')
     |influxDBOut()
