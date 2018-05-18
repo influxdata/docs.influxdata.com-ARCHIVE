@@ -100,11 +100,13 @@ Dumps low-level details about tsi1 files.
 ```
 influx_inspect dumptsi [<flags>] <path>
 ```
-
 #### Flags
 
 ##### `-series`
 Dump raw series data.
+
+#### `-series-file`
+Path to the series file.
 
 ##### `-measurements`
 Dump raw [measurement](/influxdb/v1.5/concepts/glossary/#measurement) data.
