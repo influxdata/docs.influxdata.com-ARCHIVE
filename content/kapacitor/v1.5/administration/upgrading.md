@@ -1,5 +1,5 @@
 ---
-title: Upgrading to Kapacitor v1.4
+title: Upgrading to Kapacitor v1.5
 aliases:
     - kapacitor/v1.5/introduction/upgrading/
 menu:
@@ -7,9 +7,8 @@ menu:
     weight: 30
     parent: administration
 ---
-# Upgrading Kapacitor
 
-# Contents
+## Contents
 1. [Overview](#overview)
 2. [Stopping the Kapacitor service](#stopping-the-kapacitor-service)
 3. [Backup configuration and data](#backup-configuration-and-data)
@@ -22,31 +21,31 @@ menu:
 
 How Kapacitor was installed will determine how Kapacitor should be upgraded.
 
-The application may have been installed directly using the package management mechanisms of the OS or it may have been installed by unpackging the `.zip` or `.tar.gz` distributions.  This document will cover upgrading Kapacitor from release 1.3.1 to release 1.4 on Linux(Ubuntu 16.04 and CentOS 7.3).  This document presents some specifics of upgrading using the `.deb` package; some similar specifics of upgrading using the `.rpm` package; and then more generally upgrading using the `.tar.gz` binary distribution.  The binary package upgrade should serve as an example offering hints as to how to upgrade using the binary distributions on other operating systems, for example on Windows using the `.zip` file.  On other operating systems the general steps presented here will be roughly the same.
+The application may have been installed directly using the package management mechanisms of the OS or it may have been installed by unpackging the `.zip` or `.tar.gz` distributions.  This document will cover upgrading Kapacitor from release 1.3.1 to release 1.5 on Linux(Ubuntu 16.04 and CentOS 7.3).  This document presents some specifics of upgrading using the `.deb` package; some similar specifics of upgrading using the `.rpm` package; and then more generally upgrading using the `.tar.gz` binary distribution.  The binary package upgrade should serve as an example offering hints as to how to upgrade using the binary distributions on other operating systems, for example on Windows using the `.zip` file.  On other operating systems the general steps presented here will be roughly the same.
 
 Before proceeding with the Kapacitor upgrade please ensure that InfluxDB and Telegraf (if used) have been upgraded to a release compatible with the latest release of Kapacitor.  In this example we will use:
 
-   * InfluxDB 1.3.2
-   * Telegraf 1.4
-   * Kapacitor 1.4
+   * InfluxDB 1.5.2
+   * Telegraf 1.6
+   * Kapacitor 1.5
 
-For instructions on upgrading InfluxDB, please see the [InfluxDB upgrade](/influxdb/latest/administration/upgrading/#main-nav) documentation. For instructions on upgrading Telegraf, please see the [Telegraf upgrade](/telegraf/latest/administration/upgrading/#main-nav) documentation.
+For instructions on upgrading InfluxDB, please see the [InfluxDB upgrade](/influxdb/latest/administration/upgrading/) documentation. For instructions on upgrading Telegraf, please see the [Telegraf upgrade](/telegraf/latest/administration/upgrading/#main-nav) documentation.
 
-For information about what is new in the latest Kapacitor release, please see the [Changelog](https://github.com/influxdata/kapacitor/blob/master/CHANGELOG.md) available on GitHub.
+For information about what is new in the latest Kapacitor release, view the [Changelog](/kapacitor/v1.5/about_the_project/releasenotes-changelog/).
 
 In general the steps for upgrading Kapacitor are as follows:
 
    1. Download a copy of the latest Kapacitor install package or binary distribution from the [Influxdata download site](https://portal.influxdata.com/downloads).
 
-      **Important note** - When upgrading Kapacitor simply download the package using `wget`, do not proceed directly with the installation/upgrade until the following instructions and recommendations have been understood and put to use.
+      **Important note** - When upgrading Kapacitor, simply download the package using `wget`. Do not proceed directly with the installation/upgrade until the following instructions and recommendations have been understood and put to use.
 
-   1. Stop the running Kapacitor service, if it is not already stopped.
+   1. Stop the running Kapacitor service.
    1. Backup the configuration file (e.g. `/etc/kapacitor/kapacitor.conf` - n.b. the default location).
    1. (Optional) Back up a copy of the contents of the Kapacitor data directory (e.g `/var/lib/kapacitor/*` - n.b. the default location).
    1. Perform the upgrade.
    1. If during the upgrade the current configuration was not preserved, manually migrate the values in the backup configuration file to the new one.
    1. Restart the Kapacitor service.
-   1. Verify the restart in the log files and by test recording existing tasks.
+   1. Verify the restart in the log files and by testing existing tasks.
 
 ## Stopping the Kapacitor service
 
@@ -54,36 +53,36 @@ No matter how Kapacitor was installed, it is assumed that Kapacitor is configure
 
 Through `systemctl` check to see if the Kapacitor service is running .
 
-   ```
-   $ sudo systemctl status kapacitor.service
-   ● kapacitor.service - Time series data processing engine.
-      Loaded: loaded (/lib/systemd/system/kapacitor.service; enabled; vendor preset: enabled)
-      Active: inactive (dead) since Po 2017-08-21 14:06:18 CEST; 2s ago
-        Docs: https://github.com/influxdb/kapacitor
-     Process: 27741 ExecStart=/usr/bin/kapacitord -config /etc/kapacitor/kapacitor.conf $KAPACITOR_OPTS (code=exited, status=0/SUCCESS)
-    Main PID: 27741 (code=exited, status=0/SUCCESS)
-   ```
+```bash
+$ sudo systemctl status kapacitor.service
+● kapacitor.service - Time series data processing engine.
+  Loaded: loaded (/lib/systemd/system/kapacitor.service; enabled; vendor preset: enabled)
+  Active: inactive (dead) since Po 2017-08-21 14:06:18 CEST; 2s ago
+    Docs: https://github.com/influxdb/kapacitor
+ Process: 27741 ExecStart=/usr/bin/kapacitord -config /etc/kapacitor/kapacitor.conf $KAPACITOR_OPTS (code=exited, status=0/SUCCESS)
+Main PID: 27741 (code=exited, status=0/SUCCESS)
+```
 
 The value for the `Active` field shown above should be set to 'inactive'.
 
-If instead this value happens to be 'active(running)', the service can be stopped using `systemctl`.
+If instead this value happens to be `active(running)`, the service can be stopped using `systemctl`.
 
-   *Example - Stopping the service*
-   ```
-   sudo systemctl stop kapacitor.service
-   ```
+*Example - Stopping the service*
+```bash
+sudo systemctl stop kapacitor.service
+```
 
 ## Backup configuration and data
 
-Whenever upgrading, no matter the upgrade approach, it can pay to be a bit paranoid and to backup essential files and data.  Most important, when upgrading Kapacitor, is the Kapacitor configuration file `/etc/kapacitor/kapacitor.conf`. In addition the Kapacitor database, replays and id files in `/var/lib/kapacitor` might be preserved.
+Whenever upgrading, no matter the upgrade approach, it can pay to be a bit paranoid and to backup essential files and data.  The Kapacitor configuration file, located at `/etc/kapacitor/kapacitor.conf` by default, is most important when upgrading Kapacitor. In addition, you may want to backup your Kapacitor database, replays, and id files in `/var/lib/kapacitor`.
 
 ## Debian package upgrade
 
 Check to see if Kapacitor was installed as a Debian package.
 
-```
+```bash
 $ dpkg --list | grep "kapacitor"
-ii  kapacitor   1.2.1-1   amd64   Time series data processing engine
+ii  kapacitor   1.3.1-1   amd64   Time series data processing engine
 ```
 
 If the line `ii  kapacitor...` is returned, it is safe to continue the upgrade using the Debian package and the instructions in this section.  If nothing is returned, please consult the [Upgrade with .zip or .tar.gz section below](#upgrade-with-zip-or-tar-gz) for a general example on how to proceed.
@@ -95,13 +94,13 @@ Kapacitor can now be upgraded using the Debian package manager:
 *Example - upgrade with dpkg*
 
 ```
-$ sudo dpkg -i kapacitor_1.3.1_amd64.deb
+$ sudo dpkg -i kapacitor_1.5.0_amd64.deb
 (Reading database ... 283418 files and directories currently installed.)
-Preparing to unpack kapacitor_1.3.1_amd64.deb ...
-Unpacking kapacitor (1.3.1-1) over (1.2.1-1) ...
+Preparing to unpack kapacitor_1.5.0_amd64.deb ...
+Unpacking kapacitor (1.5.0-1) over (1.3.1-1) ...
 Removed symlink /etc/systemd/system/kapacitor.service.
 Removed symlink /etc/systemd/system/multi-user.target.wants/kapacitor.service.
-Setting up kapacitor (1.3.1-1) ...
+Setting up kapacitor (1.5.0-1) ...
 ```
 
 During the upgrade the package manager will detect any differences between the current configuration file and the new configuration file included in the installation package.  The package manager prompts the user to choose how to deal with this conflict.  The default behavior is to preserve the existing configuration file.  This is generally the safest choice, but it can mean losing visibility of new features provided in the more recent release.
@@ -128,13 +127,13 @@ If during the upgrade the configuration file was overwritten, open the new confi
 
 Restart is best handled through `systemctl`.
 
-```
+```bash
 sudo systemctl restart kapacitor.service
 ```
 
 Note that `restart` is used here instead of `start`, in the event that Kapacitor was not shutdown properly.
 
-For tips on verifying the restart see the [Verifying the Restart](#verifying-the-restart) section below.
+For tips on verifying the restart, see the [Verifying the Restart](#verifying-the-restart) section below.
 
 ## RPM package upgrade
 
@@ -149,9 +148,9 @@ Loading mirror speeds from cached hostfile
  * extras: ftp.fi.muni.cz
  * updates: ftp.sh.cvut.cz
 Installed Packages
-kapacitor.x86_64      1.2.1-1     installed
+kapacitor.x86_64      1.5.0-1     installed
 ```
-If the line `kapacitor.x86_64...1.2.1-1...installed` is returned, it is safe to continue the upgrade using the RPM package and the instructions in this section.  If instead the message `Error: No matching Packages to list` was returned please consult the [Upgrade with .zip or .tar.gz section below](#upgrade-with-zip-or-tar-gz) for a general example on how to proceed.
+If the line `kapacitor.x86_64...1.5.0-1...installed` is returned, it is safe to continue the upgrade using the RPM package and the instructions in this section.  If instead the message `Error: No matching Packages to list` was returned please consult the [Upgrade with .zip or .tar.gz section below](#upgrade-with-zip-or-tar-gz) for a general example on how to proceed.
 
 ### Package upgrade
 
@@ -161,14 +160,14 @@ Kapacitor can now be upgraded using `yum localupdate` from the directory into wh
 
 *Example - yum localupdate*
 ```
-# yum -y localupdate kapacitor-1.3.1.x86_64.rpm
+# yum -y localupdate kapacitor-1.5.0.x86_64.rpm
 Loaded plugins: fastestmirror
-Examining kapacitor-1.3.1.x86_64.rpm: kapacitor-1.3.1-1.x86_64
-Marking kapacitor-1.3.1.x86_64.rpm as an update to kapacitor-1.2.1-1.x86_64
+Examining kapacitor-1.5.1.x86_64.rpm: kapacitor-1.3.1-1.x86_64
+Marking kapacitor-1.5.1.x86_64.rpm as an update to kapacitor-1.3.1-1.x86_64
 Resolving Dependencies
 --> Running transaction check
----> Package kapacitor.x86_64 0:1.2.1-1 will be updated
----> Package kapacitor.x86_64 0:1.3.1-1 will be an update
+---> Package kapacitor.x86_64 0:1.3.1-1 will be updated
+---> Package kapacitor.x86_64 0:1.5.0-1 will be an update
 --> Finished Dependency Resolution
 
 Dependencies Resolved
@@ -177,7 +176,7 @@ Dependencies Resolved
  Package                            Arch                            Version                           Repository                                        Size
 =============================================================================================================================================================
 Updating:
- kapacitor                          x86_64                          1.3.1-1                           /kapacitor-1.3.1.x86_64                           90 M
+ kapacitor                          x86_64                          1.5.0-1                           /kapacitor-1.5.0.x86_64                           90 M
 
 Transaction Summary
 =============================================================================================================================================================
@@ -189,21 +188,21 @@ Running transaction check
 Running transaction test
 Transaction test succeeded
 Running transaction
-  Updating   : kapacitor-1.3.1-1.x86_64                                                                                                                  1/2
+  Updating   : kapacitor-1.5.0-1.x86_64                                                                                                                  1/2
 warning: /etc/kapacitor/kapacitor.conf created as /etc/kapacitor/kapacitor.conf.rpmnew
 Failed to execute operation: Too many levels of symbolic links
-warning: %post(kapacitor-1.3.1-1.x86_64) scriptlet failed, exit status 1
-Non-fatal POSTIN scriptlet failure in rpm package kapacitor-1.3.1-1.x86_64
-  Cleanup    : kapacitor-1.2.1-1.x86_64                                                                                                                  2/2
+warning: %post(kapacitor-1.5.0-1.x86_64) scriptlet failed, exit status 1
+Non-fatal POSTIN scriptlet failure in rpm package kapacitor-1.5.0-1.x86_64
+  Cleanup    : kapacitor-1.3.1-1.x86_64                                                                                                                  2/2
 Removed symlink /etc/systemd/system/multi-user.target.wants/kapacitor.service.
 Removed symlink /etc/systemd/system/kapacitor.service.
 Created symlink from /etc/systemd/system/kapacitor.service to /usr/lib/systemd/system/kapacitor.service.
 Created symlink from /etc/systemd/system/multi-user.target.wants/kapacitor.service to /usr/lib/systemd/system/kapacitor.service.
-  Verifying  : kapacitor-1.3.1-1.x86_64                                                                                                                  1/2
-  Verifying  : kapacitor-1.2.1-1.x86_64                                                                                                                  2/2
+  Verifying  : kapacitor-1.5.0-1.x86_64                                                                                                                  1/2
+  Verifying  : kapacitor-1.3.1-1.x86_64                                                                                                                  2/2
 
 Updated:
-  kapacitor.x86_64 0:1.3.1-1
+  kapacitor.x86_64 0:1.5.0-1
 
 Complete!
 
@@ -219,8 +218,8 @@ In the example from the previous section a warning concerning the `kapacitor.con
 
 Restart is best handled through `systemctl`.
 
-```
-# systemctl restart kapacitor.service
+```bash
+systemctl restart kapacitor.service
 ```
 
 Note that `restart` is used here instead of `start`, in the event that Kapacitor was not shutdown properly.
@@ -238,10 +237,10 @@ The following presentation will use a hypothetical installation, where all Influ
 ```
 $ ls -l /opt/influxdata/
 total 20
-lrwxrwxrwx 1 influxdb  influxdb    33 srp 22 12:51 influxdb -> /opt/influxdata/influxdb-1.2.4-1/
-drwxr-xr-x 5 influxdb  influxdb  4096 kvě  8 22:16 influxdb-1.2.4-1
-lrwxrwxrwx 1 kapacitor kapacitor   34 srp 22 12:52 kapacitor -> /opt/influxdata/kapacitor-1.2.1-1/
-drwxr-xr-x 6 kapacitor kapacitor 4096 srp 22 10:56 kapacitor-1.2.1-1
+lrwxrwxrwx 1 influxdb  influxdb    33 srp 22 12:51 influxdb -> /opt/influxdata/influxdb-1.3.1-1/
+drwxr-xr-x 5 influxdb  influxdb  4096 kvě  8 22:16 influxdb-1.3.1-1
+lrwxrwxrwx 1 kapacitor kapacitor   34 srp 22 12:52 kapacitor -> /opt/influxdata/kapacitor-1.5.0-1/
+drwxr-xr-x 6 kapacitor kapacitor 4096 srp 22 10:56 kapacitor-1.5.0-1
 drwxr-xr-x 2 influxdb  influxdb  4096 srp 22 13:52 ssl
 drwxrwxr-x 5 telegraf  telegraf  4096 úno  1  2017 telegraf
 ```
@@ -309,7 +308,7 @@ lrwxrwxrwx 1 root root 42 srp 22 13:39 /etc/systemd/system/telegraf.service -> /
 ```
 ### Manual upgrade
 
-Ensure that InfluxDB and Telegraf(if installed) have been upgraded, that the Kapacitor service has been stopped and that a backup copy of `kapacitor.conf` has been saved.
+Ensure that InfluxDB and Telegraf (if installed) have been upgraded, that the Kapacitor service has been stopped and that a backup copy of `kapacitor.conf` has been saved.
 
 Here the latest InfluxDB distribution has been unpacked alongside the previous distribution and the general symbolic link has been updated. The Telegraf distribution has been unpacked on top of the previous one.
 
@@ -318,11 +317,11 @@ Here the latest InfluxDB distribution has been unpacked alongside the previous d
 $ ls -l /opt/influxdata/
 total 24
 drwxr-xr-x 2 root      root      4096 srp 22 15:21 bak
-lrwxrwxrwx 1 root      root        17 srp 22 15:15 influxdb -> influxdb-1.3.2-1/
+lrwxrwxrwx 1 root      root        17 srp 22 15:15 influxdb -> influxdb-1.5.2-1/
 drwxr-xr-x 5 influxdb  influxdb  4096 kvě  8 22:16 influxdb-1.2.4-1
-drwxr-xr-x 5 influxdb  influxdb  4096 srp  5 01:33 influxdb-1.3.2-1
-lrwxrwxrwx 1 kapacitor kapacitor   34 srp 22 12:52 kapacitor -> /opt/influxdata/kapacitor-1.2.1-1/
-drwxr-xr-x 6 kapacitor kapacitor 4096 srp 22 10:56 kapacitor-1.2.1-1
+drwxr-xr-x 5 influxdb  influxdb  4096 srp  5 01:33 influxdb-1.5.2-1
+lrwxrwxrwx 1 kapacitor kapacitor   34 srp 22 12:52 kapacitor -> /opt/influxdata/kapacitor-1.5.0-1/
+drwxr-xr-x 6 kapacitor kapacitor 4096 srp 22 10:56 kapacitor-1.5.0-1
 drwxr-xr-x 2 influxdb  influxdb  4096 srp 22 13:52 ssl
 drwxr-xr-x 5 telegraf  telegraf  4096 čec 27 01:26 telegraf
 ```
@@ -332,49 +331,49 @@ Kapacitor is upgraded using the same approach as the InfluxDB upgrade.  The new 
 ```
 $ cd /opt/influxdata
 $ sudo tar -xvzf /home/karl/Downloads/install/kapacitor-1.3.1_linux_amd64.tar.gz
-./kapacitor-1.3.1-1/
-./kapacitor-1.3.1-1/usr/
-./kapacitor-1.3.1-1/usr/bin/
-./kapacitor-1.3.1-1/usr/bin/kapacitord
-./kapacitor-1.3.1-1/usr/bin/kapacitor
-./kapacitor-1.3.1-1/usr/bin/tickfmt
-./kapacitor-1.3.1-1/usr/lib/
-./kapacitor-1.3.1-1/usr/lib/kapacitor/
-./kapacitor-1.3.1-1/usr/lib/kapacitor/scripts/
-./kapacitor-1.3.1-1/usr/lib/kapacitor/scripts/init.sh
-./kapacitor-1.3.1-1/usr/lib/kapacitor/scripts/kapacitor.service
-./kapacitor-1.3.1-1/usr/share/
-./kapacitor-1.3.1-1/usr/share/bash-completion/
-./kapacitor-1.3.1-1/usr/share/bash-completion/completions/
-./kapacitor-1.3.1-1/usr/share/bash-completion/completions/kapacitor
-./kapacitor-1.3.1-1/var/
-./kapacitor-1.3.1-1/var/log/
-./kapacitor-1.3.1-1/var/log/kapacitor/
-./kapacitor-1.3.1-1/var/lib/
-./kapacitor-1.3.1-1/var/lib/kapacitor/
-./kapacitor-1.3.1-1/etc/
-./kapacitor-1.3.1-1/etc/kapacitor/
-./kapacitor-1.3.1-1/etc/kapacitor/kapacitor.conf
-./kapacitor-1.3.1-1/etc/logrotate.d/
-./kapacitor-1.3.1-1/etc/logrotate.d/kapacitor
+./kapacitor-1.5.0-1/
+./kapacitor-1.5.0-1/usr/
+./kapacitor-1.5.0-1/usr/bin/
+./kapacitor-1.5.0-1/usr/bin/kapacitord
+./kapacitor-1.5.0-1/usr/bin/kapacitor
+./kapacitor-1.5.0-1/usr/bin/tickfmt
+./kapacitor-1.5.0-1/usr/lib/
+./kapacitor-1.5.0-1/usr/lib/kapacitor/
+./kapacitor-1.5.0-1/usr/lib/kapacitor/scripts/
+./kapacitor-1.5.0-1/usr/lib/kapacitor/scripts/init.sh
+./kapacitor-1.5.0-1/usr/lib/kapacitor/scripts/kapacitor.service
+./kapacitor-1.5.0-1/usr/share/
+./kapacitor-1.5.0-1/usr/share/bash-completion/
+./kapacitor-1.5.0-1/usr/share/bash-completion/completions/
+./kapacitor-1.5.0-1/usr/share/bash-completion/completions/kapacitor
+./kapacitor-1.5.0-1/var/
+./kapacitor-1.5.0-1/var/log/
+./kapacitor-1.5.0-1/var/log/kapacitor/
+./kapacitor-1.5.0-1/var/lib/
+./kapacitor-1.5.0-1/var/lib/kapacitor/
+./kapacitor-1.5.0-1/etc/
+./kapacitor-1.5.0-1/etc/kapacitor/
+./kapacitor-1.5.0-1/etc/kapacitor/kapacitor.conf
+./kapacitor-1.5.0-1/etc/logrotate.d/
+./kapacitor-1.5.0-1/etc/logrotate.d/kapacitor
 ```
 Following extraction the old symbolic link is removed and a new one is created to the new distribution.  This approach is similar to simply unpacking or copying the distribution contents over the existing directories, which is also a feasible approach.  Parallel unpacking and link creation offers the advantage of preserving the previous installation, albeit in a now inactive place. This approach facilitates reverting back to the previous installation, if for some reason that will be desired.
 
 *Example - Post extraction commands*
-```
-$ sudo chown -R kapacitor:kapacitor kapacitor-1.3.1-1/
+```bash
+$ sudo chown -R kapacitor:kapacitor kapacitor-1.5.0-1/
 $ sudo rm kapacitor
-$ sudo ln -s ./kapacitor-1.3.1-1/ ./kapacitor
+$ sudo ln -s ./kapacitor-1.5.0-1/ ./kapacitor
 $ sudo chown kapacitor:kapacitor kapacitor
 $ ls -l
 total 28
 drwxr-xr-x 2 root      root      4096 srp 22 15:21 bak
-lrwxrwxrwx 1 root      root        17 srp 22 15:15 influxdb -> influxdb-1.3.2-1/
+lrwxrwxrwx 1 root      root        17 srp 22 15:15 influxdb -> influxdb-1.5.2-1/
 drwxr-xr-x 5 influxdb  influxdb  4096 kvě  8 22:16 influxdb-1.2.4-1
-drwxr-xr-x 5 influxdb  influxdb  4096 srp  5 01:33 influxdb-1.3.2-1
-lrwxrwxrwx 1 kapacitor kapacitor   20 srp 22 15:35 kapacitor -> ./kapacitor-1.3.1-1/
-drwxr-xr-x 6 kapacitor kapacitor 4096 srp 22 10:56 kapacitor-1.2.1-1
-drwxr-xr-x 5 kapacitor kapacitor 4096 čen  2 20:22 kapacitor-1.3.1-1
+drwxr-xr-x 5 influxdb  influxdb  4096 srp  5 01:33 influxdb-1.5.2-1
+lrwxrwxrwx 1 kapacitor kapacitor   20 srp 22 15:35 kapacitor -> ./kapacitor-1.5.0-1/
+drwxr-xr-x 6 kapacitor kapacitor 4096 srp 22 10:56 kapacitor-1.5.0-1
+drwxr-xr-x 5 kapacitor kapacitor 4096 čen  2 20:22 kapacitor-1.5.0-1
 drwxr-xr-x 2 influxdb  influxdb  4096 srp 22 13:52 ssl
 drwxr-xr-x 5 telegraf  telegraf  4096 čec 27 01:26 telegraf
 ```
@@ -382,7 +381,7 @@ drwxr-xr-x 5 telegraf  telegraf  4096 čec 27 01:26 telegraf
 
 Using `vim` the values from the backup of the previous configuration file are manually migrated to the new one.
 
-```
+```bash
 $ sudo -u kapacitor vim kapacitor/etc/kapacitor/kapacitor.conf
 ```
 
@@ -390,7 +389,7 @@ $ sudo -u kapacitor vim kapacitor/etc/kapacitor/kapacitor.conf
 
 Restart is handled through `systemctl`.
 
-```
+```bash
 sudo systemctl restart kapacitor.service
 ```
 Note that `restart` is used here instead of `start`, in the event that Kapacitor was not shutdown properly.
@@ -400,7 +399,7 @@ Note that `restart` is used here instead of `start`, in the event that Kapacitor
 First check the service status in `systemctl`.
 
 *Example - service status check*
-```
+```bash
 $ sudo systemctl status kapacitor.service
 ● kapacitor.service - Time series data processing engine.
    Loaded: loaded (/lib/systemd/system/kapacitor.service; enabled; vendor preset: enabled)
@@ -431,7 +430,7 @@ srp 21 14:22:18 algonquin kapacitord[29452]: 2017/08/21 14:22:18 Using configura
 Check as well the log in the directory `/var/log/kapacitor`.
 
 *Example - kapacitor.log check*
-```
+```bash
 $ sudo tail -f  /var/log/kapacitor/kapacitor.log
 [httpd] 127.0.0.1 - - [21/Aug/2017:14:41:50 +0200] "POST /write?consistency=&db=_internal&precision=ns&rp=monitor HTTP/1.1" 204 0 "-" "InfluxDBClient" 1a122e03-866e-11e7-80f1-000000000000 375
 [httpd] 127.0.0.1 - - [21/Aug/2017:14:41:50 +0200] "POST /write?consistency=&db=telegraf&precision=ns&rp=autogen HTTP/1.1" 204 0 "-" "InfluxDBClient" 1a401bb1-866e-11e7-80f2-000000000000 303
@@ -449,7 +448,7 @@ $ sudo tail -f  /var/log/kapacitor/kapacitor.log
 Check for Kapacitor client activity in Influxdb.
 
 *Example - Influxdb check*
-```
+```bash
 sudo journalctl --unit influxdb.service | grep "Kapacitor"
 srp 21 14:45:18 algonquin influxd[27308]: [httpd] 127.0.0.1 - admin [21/Aug/2017:14:45:18 +0200] "GET /ping HTTP/1.1" 204 0 "-" "KapacitorInfluxDBClient" 965e7c0b-866e-11e7-81c7-000000000000 21
 srp 21 14:45:18 algonquin influxd[27308]: [httpd] 127.0.0.1 - admin [21/Aug/2017:14:45:18 +0200] "POST /query?db=&q=SHOW+DATABASES HTTP/1.1" 200 123 "-" "KapacitorInfluxDBClient" 965e89e5-866e-11e7-81c8-000000000000 570
@@ -462,13 +461,13 @@ srp 21 14:45:18 algonquin influxd[27308]: [httpd] 127.0.0.1 - admin [21/Aug/2017
 Verify that old tasks are once again visible and enabled.
 
 *Example - tasks check*
-```
+```bash
 $ kapacitor list tasks
 ID               Type      Status    Executing Databases and Retention Policies
 cpu_alert_batch  batch     disabled  false     ["telegraf"."autogen"]
 cpu_alert_stream stream    enabled   true      ["telegraf"."autogen"]
 ```
 
-Test recording existing tasks and replaying the results is also recommended for checking the status of the newly upgraded Kapacitor service.  Which tasks to record will depend on the specifics of the installation.  Please see the [Kapacitor API documentation](/kapacitor/v1.5/working/api#recordings) for more details.
+Testing recording existing tasks and replaying the results is also recommended for checking the status of the newly upgraded Kapacitor service.  Which tasks to record will depend on the specifics of the installation.  Please see the [Kapacitor API documentation](/kapacitor/v1.5/working/api#recordings) for more details.
 
 If these checks look correct, then the upgrade can be considered complete.
