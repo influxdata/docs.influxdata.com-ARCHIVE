@@ -1,11 +1,11 @@
 ---
-title: Kapacitor Enterprise 1.4 documentation
+title: Kapacitor Enterprise 1.5 documentation
 
 menu:
   enterprise_kapacitor:
-    name: v1.4
+    name: v1.5
     identifier: enterprise_kapacitor_1_5
-    weight: 10
+    weight: 9
 ---
 
 # Overview

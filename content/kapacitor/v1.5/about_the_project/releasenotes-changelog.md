@@ -5,6 +5,30 @@ menu:
     parent: about_the_project
 ---
 
+## v1.5.0 [2018-05-17]
+
+### Features
+
+- Config format updated to allow for more than one slack configuration.  
+- Added a new Kapacitor node changeDetect that emits a value for each time a series field changes.
+- Add recoverable field to JSON alert response to indicate whether the alert will auto-recover.
+- Update OpsGenie integration to use the v2 API.
+  To upgrade to using the new API simply update your config and TICKscripts to use opsgenie2 instead of opsgenie.
+  If your `opsgenie` config uses the `recovery_url` option, for `opsgenie2` you will need to change it to the `recovery_action` option.
+  This is because the new v2 API is not structured with static URLs, and so only the action can be defined and not the entire URL.
+- Add https-private-key option to httpd config.
+- Add `.quiet` to all nodes to silence any errors reported by the node.
+- Add Kafka event handler.
+
+### Bugfixes
+- Kapacitor ticks generating a hash instead of their actual given name.
+- Fix deadlock in load service when task has an error.
+- Support PagerDuty API v2.
+- Add alert inhibitors that allow an alert to supress events from other matching alerts.
+- Fix bug where you could not delete a topic handler with the same name as its topic.
+- Adjust PagerDuty v2 service-test names and capture detailed error messages.
+- Fix Kafka configuration.
+
 ## v1.4.1 [2018-03-13]
 
 ### Bug fixes
