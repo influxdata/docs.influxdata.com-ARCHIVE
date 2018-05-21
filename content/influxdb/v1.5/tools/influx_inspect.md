@@ -30,7 +30,7 @@ The commands are:
 
 ### `influx_inspect buildtsi`
 
-Converts TSM-based shards to shards supporting TSI (time series index) disk-based index files.
+Converts shards using in-memory indexes to shards supporting TSI (time series index) disk-based index files.
 The index is written to a temporary location until complete and then moved to a permanent location.
 If an error occurs, then this operation will fall back to the original in-memory index.
 
@@ -47,7 +47,7 @@ If an error occurs, then this operation will fall back to the original in-memory
 ```
 influx_inspect buildtsi -datadir <data_directory> -waldir <WAL_directory> [ options ]
 ```
-#### Flags
+#### Arguments
 
 Optional arguments are in brackets.
 
@@ -93,40 +93,43 @@ $ influx_inspect buildtsi -database stress -shard 1 -datadir ~/.influxdb/data -w
 ```
 
 ### influx_inspect dumptsi
-Dumps low-level details about tsi1 files.
+Dumps low-level details about `tsi1` files.
 `dumptsi` returns summary stats for each file if the command does not specify any flags.
 
 #### Usage
-```
-influx_inspect dumptsi [<flags>] <path>
-```
-#### Flags
 
-##### `-series`
+```
+influx_inspect dumptsi [<arguments>] <path>
+```
+#### Arguments
+
+Optional arguments are in brackets.
+
+##### [`-series`]
 Dump raw series data.
 
 #### `-series-file`
 Path to the series file.
 
-##### `-measurements`
+##### [`-measurements`]
 Dump raw [measurement](/influxdb/v1.5/concepts/glossary/#measurement) data.
 
-##### `-tag-keys`
+##### [`-tag-keys`]
 Dump raw [tag keys](/influxdb/v1.5/concepts/glossary/#tag-key).
 
-##### `-tag-values`
+##### [`-tag-values`]
 Dump raw [tag values](/influxdb/v1.5/concepts/glossary/#tag-value).
 
-##### `-tag-value-series`
+##### [`-tag-value-series`]
 Dump raw series for each tag value.
 
-##### `-measurement-filter` <regular_expression>
+##### [`-measurement-filter` <regular_expression>]
 Filter data by measurement regular expression.
 
-##### `-tag-key-filter` <regular_expression>
+##### ]`-tag-key-filter` <regular_expression>]
 Filter data by tag key regular expression.
 
-##### `-tag-value-filter` <regular_expresssion>
+##### [`-tag-value-filter` <regular_expresssion>]
 Filter data by tag value regular expression.
 
 ### `influx_inspect dumptsm`
