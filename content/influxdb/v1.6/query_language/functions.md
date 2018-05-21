@@ -59,6 +59,15 @@ Aggregate, select, transform, and predict data with InfluxQL functions.
     * [TAN()](#tan)
 * [Predictors](#predictors)
     * [HOLT_WINTERS()](#holt-winters)
+* [Technical Analysis](#technical-analysis)
+    * [CHANDE_MOMENTUM_OSCILLATOR()](#chande-momentum-oscillator)
+    * [EXPONENTIAL_MOVING_AVERAGE()](#exponential-moving-average)
+    * [DOUBLE_EXPONENTIAL_MOVING_AVERAGE()](#double-exponential-moving-average)
+    * [KAUFMANS_EFFICIENCY_RATIO()](#kaufmans-efficiency-ratio)
+    * [KAUFMANS_ADAPTIVE_MOVING_AVERAGE()](#kaufmans-adaptive-moving-average)
+    * [TRIPLE_EXPONENTIAL_MOVING_AVERAGE()](#triple-exponential-moving-average)
+    * [TRIPLE_EXPONENTIAL_DERIVATIVE()](#triple-exponential-derivative)
+    * [RELATIVE_STRENGTH_INDEX()](#relative-strength-index)
 * [Other](#other)
     * [Sample Data](#sample-data)
     * [General Syntax for Functions](#general-syntax-for-functions)
@@ -5884,6 +5893,205 @@ That behavior occurs when the math becomes unstable and cannot forecast more
 points.
 It implies that either `HOLT_WINTERS()` is not suited for the dataset or that
 the seasonal adjustment parameter is invalid and is confusing the algorithm.
+
+
+# Technical Analysis
+
+The following technical analysis functions apply widely used algorithms to your data.
+While they are primarily used in the world of finance and investing, they have
+application in other industries and use cases as well.
+
+### Arguments
+Along with a [field key](/influxdb/v1.6/concepts/glossary/#field-key),
+technical analysis function accept the following arguments:
+
+#### `PERIOD`
+**Required, integer, min=1**  
+
+The sample size of the algorithm.
+This is essentially the number of historical samples which have any significant
+effect on the output of the algorithm.
+E.G. `2` means the current point and the point before it.
+The algorithm uses an exponential decay rate to determine the weight of a historical point,
+generally known as the alpha (α). The `PERIOD` controls the decay rate.
+
+> NOTE: Older points can still have an impact.
+
+#### `HOLD_PERIOD`
+**integer, min=-1**
+
+How many samples the algorithm needs before it will start emitting results.
+The default of `-1` means the value is based on the algorithm, the `PERIOD`,
+and the `WARMUP_TYPE`, but is a value in which the algorithm can emit meaningful results.
+
+_**Default Hold Periods:**_  
+For most of the available technical analysis, the default `HOLD_PERIOD` is
+determined by which technical analysis algorithm you're using and the [`WARMUP_TYPE`](#warmup-type)
+
+| Algorithm \ Warmup Type           | simple                 | exponential | none                                 |
+| --------------------------------- | ---------------------- | ----------- |:----------:                          |
+| EXPONENTIAL_MOVING_AVERAGE        | PERIOD - 1             | PERIOD - 1  | <span style="opacity:.35">n/a</span> |
+| DOUBLE_EXPONENTIAL_MOVING_AVERAGE | ( PERIOD - 1 ) * 2     | PERIOD - 1  | <span style="opacity:.35">n/a</span> |
+| TRIPLE_EXPONENTIAL_MOVING_AVERAGE | ( PERIOD - 1 ) * 3     | PERIOD - 1  | <span style="opacity:.35">n/a</span> |
+| TRIPLE_EXPONENTIAL_DERIVATIVE     | ( PERIOD - 1 ) * 3 + 1 | PERIOD      | <span style="opacity:.35">n/a</span> |
+| RELATIVE_STRENGTH_INDEX           | PERIOD                 | PERIOD      | <span style="opacity:.35">n/a</span> |
+| CHANDE_MOMENTUM_OSCILLATOR        | PERIOD                 | PERIOD      | PERIOD - 1                           |
+
+_**Kaufman Algorithm Default Hold Periods:**_
+
+| Algorithm                        | Default Hold Period |
+| ---------                        |:-------------------:|
+| KAUFMANS_EFFICIENCY_RATIO        | PERIOD              |
+| KAUFMANS_ADAPTIVE_MOVING_AVERAGE | PERIOD              |
+
+#### `WARMUP_TYPE`
+**default='exponential'**
+
+This controls how the algorithm initializes itself for the first `PERIOD` samples.
+It is essentially the duration for which it has an incomplete sample set.
+
+`simple`  
+Simple moving average (SMA) of the first `PERIOD` samples.
+This is the method used by [ta-lib](https://www.ta-lib.org/).
+
+`exponential`  
+Exponential moving average (EMA) with scaling alpha (α).
+This basically uses an EMA with `PERIOD=1` for the first point, `PERIOD=2`
+for the second point, etc., until algorithm has consumed `PERIOD` number of points.
+As the algorithm immediately starts using an EMA, when this method is used and
+`HOLD_PERIOD` is unspecified or `-1`, the algorithm may start emitting points
+after a much smaller sample size than with `simple`.
+
+`none`  
+The algorithm does not perform any smoothing at all.
+This is the method used by [ta-lib](https://www.ta-lib.org/).
+When this method is used and `HOLD_PERIOD` is unspecified, `HOLD_PERIOD`
+defaults to `PERIOD - 1`.
+
+> The `none` warmup type is only available with the
+> [`CHANDE_MOMENTUM_OSCILLATOR()`](#chande-momentum-oscillator) function.
+
+  ---
+
+* [CHANDE_MOMENTUM_OSCILLATOR()](#chande-momentum-oscillator)
+* [EXPONENTIAL_MOVING_AVERAGE()](#exponential-moving-average)
+* [DOUBLE_EXPONENTIAL_MOVING_AVERAGE()](#double-exponential-moving-average)
+* [KAUFMANS_EFFICIENCY_RATIO()](#kaufmans-efficiency-ratio)
+* [KAUFMANS_ADAPTIVE_MOVING_AVERAGE()](#kaufmans-adaptive-moving-average)
+* [TRIPLE_EXPONENTIAL_MOVING_AVERAGE()](#triple-exponential-moving-average)
+* [TRIPLE_EXPONENTIAL_DERIVATIVE()](#triple-exponential-derivative)
+* [RELATIVE_STRENGTH_INDEX()](#relative-strength-index)
+
+## CHANDE_MOMENTUM_OSCILLATOR()
+The Chande Momentum Oscillator (CMO) is a technical momentum indicator developed by Tushar Chande.
+The CMO indicator is created by calculating the difference between the sum of all
+recent higher data points and the sum of all recent lower data points,
+then dividing the result by the sum of all data movement over a given time period.
+The result is multiplied by 100 to give the -100 to +100 range.
+<sup style="line-height:0; font-size:.7rem; font-style:italic; font-weight:normal;"><a href="https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/cmo" target="\_blank">Source</a>
+
+```
+CHANDE_MOMENTUM_OSCILLATOR(<field_key>, <period>[, <hold_period>, [warmup_type]])
+```
+
+## EXPONENTIAL_MOVING_AVERAGE()
+An exponential moving average (EMA) is a type of moving average that is similar
+to a [simple moving average](#moving-average), except that more weight is given to the latest data.
+It's also known as the "exponentially weighted moving average."
+This type of moving average reacts faster to recent data changes than a simple moving average.
+<sup style="line-height:0; font-size:.7rem; font-style:italic; font-weight:normal;"><a href="https://www.investopedia.com/terms/e/ema.asp" target="\_blank">Source</a>
+
+```
+EXPONENTIAL_MOVING_AVERAGE(<field_key>, <period>[, <hold_period)[, <warmup_type]])
+```
+
+## DOUBLE_EXPONENTIAL_MOVING_AVERAGE()
+The Double Exponential Moving Average (DEMA) attempts to remove the inherent lag
+associated to Moving Averages by placing more weight on recent values.
+The name suggests this is achieved by applying a double exponential smoothing which is not the case.
+The name double comes from the fact that the value of an [EMA](#exponential-moving-average) is doubled.
+To keep it in line with the actual data and to remove the lag, the value "EMA of EMA"
+is subtracted from the previously doubled EMA.
+<sup style="line-height:0; font-size:.7rem; font-style:italic; font-weight:normal;"><a href="https://en.wikipedia.org/wiki/Double_exponential_moving_average" target="\_blank">Source</a>
+
+```
+DOUBLE_EXPONENTIAL_MOVING_AVERAGE(<field_key>, <period>[, <hold_period)[, <warmup_type]])
+```
+
+## KAUFMANS_EFFICIENCY_RATIO()
+Kaufman's Efficiency Ration, or simply "Efficiency Ratio" (ER), is calculated by
+dividing the data change over a period by the absolute sum of the data movements
+that occurred to achieve that change.
+The resulting ratio ranges between 0 and 1 with higher values representing a
+more efficient or trending market.
+
+The ER is very similar to the [Chande Momentum Oscillator](#chande-momentum-oscillator) (CMO).
+The difference is that the CMO takes market direction into account, but if you take the absolute CMO and divide by 100, you you get the Efficiency Ratio.
+<sup style="line-height:0; font-size:.7rem; font-style:italic; font-weight:normal;"><a href="http://etfhq.com/blog/2011/02/07/kaufmans-efficiency-ratio/" target="\_blank">Source</a>
+
+
+```
+KAUFMANS_EFFICIENCY_RATIO(<field_key>, <period>[, <hold_period>])
+```
+
+## KAUFMANS_ADAPTIVE_MOVING_AVERAGE()
+Kaufman's Adaptive Moving Average (KAMA) is a moving average designed to
+account for sample noise or volatility.
+KAMA will closely follow data points when the data swings are relatively small and noise is low.
+KAMA will adjust when the data swings widen and follow data from a greater distance.
+This trend-following indicator can be used to identify the overall trend,
+time turning points and filter data movements.
+<sup style="line-height:0; font-size:.7rem; font-style:italic; font-weight:normal;"><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:kaufman_s_adaptive_moving_average" target="\_blank">Source</a>
+
+```
+KAUFMANS_ADAPTIVE_MOVING_AVERAGE(<field_key>, <period>[, <hold_period>])
+```
+
+## TRIPLE_EXPONENTIAL_MOVING_AVERAGE()
+The triple exponential moving average (TEMA) was developed to filter out
+volatility from conventional moving averages.
+While the name implies that it's a triple exponential smoothing, it's actually a
+composite of a [single exponential moving average](#exponential-moving-average),
+a [double exponential moving average](#double-exponential-moving-average),
+and a triple exponential moving average.
+<sup style="line-height:0; font-size:.7rem; font-style:italic; font-weight:normal;"><a href="https://www.investopedia.com/terms/t/triple-exponential-moving-average.asp#ixzz5GAX9rE9k " target="\_blank">Source</a>
+
+```
+TRIPLE_EXPONENTIAL_MOVING_AVERAGE(<field_key>, <period>[, <hold_period)[, <warmup_type]])
+```
+
+## TRIPLE_EXPONENTIAL_DERIVATIVE()
+The triple exponential derivative indicator, commonly referred to as "TRIX," is
+an oscillator used to identify oversold and overbought markets, and can also be
+used as a momentum indicator.
+TRIX calculates a [triple exponential moving average](#triple-exponential-moving-average)
+of the [log](#log) of the data input over the period of time.
+The previous value is subtracted from the previous value.
+This prevents cycles that are shorter than the defined period from being considered by the indicator.
+
+Like many oscillators, TRIX oscillates around a zero line. When used as an oscillator,
+a positive value indicates an overbought market while a negative value indicates an oversold market.
+When used as a momentum indicator, a positive value suggests momentum is increasing
+while a negative value suggests momentum is decreasing.
+Many analysts believe that when the TRIX crosses above the zero line it gives a
+buy signal, and when it closes below the zero line, it gives a sell signal.
+<sup style="line-height:0; font-size:.7rem; font-style:italic; font-weight:normal;"><a href="https://www.investopedia.com/articles/technical/02/092402.asp#ixzz5GAe037bJ " target="\_blank">Source</a>
+
+```
+TRIPLE_EXPONENTIAL_DERIVATIVE(<field_key>, <period>[, <hold_period)[, <warmup_type]])
+```
+
+## RELATIVE_STRENGTH_INDEX()
+The relative strength index (RSI) is a momentum indicator that compares the magnitude of recent increases and decreases over a specified time period to measure speed and change of data movements.
+<sup style="line-height:0; font-size:.7rem; font-style:italic; font-weight:normal;"><a href="https://www.investopedia.com/terms/r/rsi.asp" target="\_blank">Source</a>
+
+```
+RELATIVE_STRENGTH_INDEX(<field_key>, <period>[, <hold_period)[, <warmup_type]])
+```
+
+
+
+
 
 # Other
 ## Sample Data
