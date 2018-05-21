@@ -168,7 +168,7 @@ influxd restore -portable -db telegraf path-to-backup
 
 **To restore data to a database that already exists:**
 
-1. Restore to a temporary database.
+1. Restore the database to a temporary database.
 
  ```
  influxd restore -portable -db telegraf -newdb telegraf_bak path-to-backup
