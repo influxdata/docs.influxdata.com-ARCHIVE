@@ -98,10 +98,10 @@ The following is a list of available alert event handlers:
 | [Kafka](/kapacitor/v1.5/event_handlers/kafka)               | Send alert to a Apache Kafka cluster.                                                 |
 | [log](/kapacitor/v1.5/event_handlers/log)                   | Log alert data to file.                                                               |
 | [MQTT](/kapacitor/v1.5/event_handlers/mqtt)                 | Post alert message to MQTT.                                                           |
-| [OpsGenie v1](/kapacitor/v1.5/event_handlers/opsgenie-v1)   | Send alert to OpsGenie using their v1 API. <em style="opacity: .5">(Deprecated)</em>  |
-| [OpsGenie v2](/kapacitor/v1.5/event_handlers/opsgenie-v2)   | Send alert to OpsGenie using their v2 API.                                            |
-| [PagerDuty v1](/kapacitor/v1.5/event_handlers/pagerduty-v1) | Send alert to PagerDuty using their v1 API. <em style="opacity: .5">(Deprecated)</em> |
-| [PagerDuty v2](/kapacitor/v1.5/event_handlers/pagerduty-v1) | Send alert to PagerDuty using their v2 API.                                           |
+| [OpsGenie v1](/kapacitor/v1.5/event_handlers/opsgenie/v1)   | Send alert to OpsGenie using their v1 API. <em style="opacity: .5">(Deprecated)</em>  |
+| [OpsGenie v2](/kapacitor/v1.5/event_handlers/opsgenie/v2)   | Send alert to OpsGenie using their v2 API.                                            |
+| [PagerDuty v1](/kapacitor/v1.5/event_handlers/pagerduty/v1) | Send alert to PagerDuty using their v1 API. <em style="opacity: .5">(Deprecated)</em> |
+| [PagerDuty v2](/kapacitor/v1.5/event_handlers/pagerduty/v2) | Send alert to PagerDuty using their v2 API.                                           |
 | [post](/kapacitor/v1.5/event_handlers/post)                 | HTTP POST data to a specified URL.                                                    |
 | [Pushover](/kapacitor/v1.5/event_handlers/pushover)         | Send alert to Pushover.                                                               |
 | [Sensu](/kapacitor/v1.5/event_handlers/sensu)               | Post alert message to Sensu client.                                                   |
