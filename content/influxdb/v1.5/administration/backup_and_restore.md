@@ -91,24 +91,25 @@ Optional arguments are enclosed in brackets.
 
 #### Backup examples
 
-To back up everything:
+**To back up everything:**
+
 ```
 influxd backup -portable <path-to-backup>
 ```
 
-To backup all databases recently changed at the filesystem level
+**To backup all databases recently changed at the filesystem level**
 
 ```
 influxd backup -portable -start <timestamp> <path-to-backup>
 ```
 
-To backup only the `telegraf` database:
+**To backup only the `telegraf` database:**
 
 ```
 influxd backup -portable -database telegraf <path-to-backup>
 ```
 
-To backup a database for a specified time interval:
+**To backup a database for a specified time interval:**
 
 ```
 influxd backup  -portable -database mytsd -start 2017-04-28T06:49:00Z -end 2017-04-28T06:50:00Z /tmp/backup/influxdb
@@ -150,6 +151,50 @@ Optional arguments are enclosed in brackets.
 - `[ -shard <shard_ID> ]`: Shard ID of the shard to be restored. If specified, then `-db` and `-rp` are required.
 
 > **Note:** If you have automated backups based on the legacy format, consider using the new online feature for your legacy backups.  The new backup utility lets you restore a single database to a live (online) instance, while leaving all existing data on the server in place.  The [offline restore method (described below)](#restore-legacy) may result in data loss, since it clears all existing databases on the server.
+
+#### Restore examples
+
+**To restore all databases found within the backup directory:**
+
+```
+influxd restore -portable path-to-backup
+```
+
+**To restore only the `telegraf` database (telegraf database must not exist):**
+
+```
+influxd restore -portable -db telegraf path-to-backup
+```
+
+**To restore data to a database that already exists:**
+
+1. Restore to a temporary database.
+
+ ```
+ influxd restore -portable -db telegraf -newdb telegraf_bak path-to-backup
+ ```
+2. Sideload into the target database and drop the temporary database.
+
+```
+> use telegraf_bak
+> SELECT * INTO telegraf..:MEASUREMENT FROM /.*/ GROUP BY *
+> drop telegraf_bak
+```
+
+**To restore to a retention policy that already exists:**
+
+1. Restore the retention policy to a temporary database.
+
+ ```
+ influxd restore -portable -db telegraf -newdb telegraf_bak -rp autogen -newrp autogen_bak path-to-backup
+ ```
+2. Sideload into the target database and drop the temporary database.
+
+```
+> use telegraf_bak
+> SELECT * INTO telegraf.autogen.:MEASUREMENT FROM /telegraf_bak.autogen_bak.*/ GROUP BY *
+> drop telegraf_bak
+```
 
 ### Backward compatible offline backup and restore (legacy format)
 
