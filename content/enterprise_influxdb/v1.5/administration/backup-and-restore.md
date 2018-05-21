@@ -21,8 +21,8 @@ InfluxDB Enterprise supports backing up and restoring data in a cluster, a singl
 single [shard](/influxdb/v1.5/concepts/glossary/#shard).
 
 > **Note:** Using the [new `backup` and `restore` utilities in InfluxDB OSS 1.5](/influxdb/v1.5/administration/backup_and_restore/), you can:
-* Restore InfluxDB Enterprise 1.5 backup files to InfluxDB OSS 1.5.
-* Back up InfluxDB OSS 1.5 data that can be restored in InfluxDB Enterprise 1.5.
+> * Restore InfluxDB Enterprise 1.5 backup files to InfluxDB OSS 1.5.
+> * Back up InfluxDB OSS 1.5 data that can be restored in InfluxDB Enterprise 1.5.
 
 ## Backup
 
