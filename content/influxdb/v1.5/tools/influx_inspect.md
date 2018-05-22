@@ -112,7 +112,7 @@ Optional arguments are in brackets.
 If optional arguments are not specified, the `dumptsi` command returns summary statistics for each file.
 
 ##### `-series-file <series_path>`
-Path to the `_series` directory. Required.
+Path to the `_series` directory under the database `data` directory. Required.
 
 ##### [ `-series` ]
 Dump raw series data.
