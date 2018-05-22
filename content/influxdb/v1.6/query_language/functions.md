@@ -6000,20 +6000,33 @@ CHANDE_MOMENTUM_OSCILLATOR([ * | <field_key> | /regular_expression/ ], <period>[
 
 ### Description of Basic Syntax
 
-`CHANDE_MOMENTUM_OSCILLATOR(field_key, 2, 10, 'exponential')`  
+`CHANDE_MOMENTUM_OSCILLATOR(field_key, 2)`  
 Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
 processed using the Chande Momentum Oscillator algorithm with a 2-value period
-and 10 value hold period, using the exponential warmup type.
+and the default hold period and warmup type.
 
-`CHANDE_MOMENTUM_OSCILLATOR(/regular_expression/, 2, 10, 'exponential')`  
+`CHANDE_MOMENTUM_OSCILLATOR(field_key, 10, 9, 'none')`  
+Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
+processed using the Chande Momentum Oscillator algorithm with a 10-value period
+a 9-value hold period, and the `none` warmup type.
+
+`CHANDE_MOMENTUM_OSCILLATOR(MEAN(<field_key>), 2) ... GROUP BY time(1d)`  
+Returns the mean of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
+processed using the Chande Momentum Oscillator algorithm with a 2-value period
+and the default hold period and warmup type.
+
+> **Note:** When aggregating data with a `GROUP BY` clause, you must include an
+> [aggregate function](#aggregations) in your call to the `CHANDE_MOMENTUM_OSCILLATOR()` function.
+
+`CHANDE_MOMENTUM_OSCILLATOR(/regular_expression/, 2)`  
 Returns the field values associated with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions)
 processed using the Chande Momentum Oscillator algorithm with a 2-value period
-and 10 value hold period, using the exponential warmup type.
+and the default hold period and warmup type.
 
-`CHANDE_MOMENTUM_OSCILLATOR(*, 2, 10, 'exponential')`  
+`CHANDE_MOMENTUM_OSCILLATOR(*, 2)`  
 Returns the field values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement)
 processed using the Chande Momentum Oscillator algorithm with a 2-value period
-and 10 value hold period, using the exponential warmup type.
+and the default hold period and warmup type.
 
 `CHANDE_MOMENTUM_OSCILLATOR()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
@@ -6039,20 +6052,33 @@ EXPONENTIAL_MOVING_AVERAGE([ * | <field_key> | /regular_expression/ ], <period>[
 
 ### Description of Basic Syntax
 
-`EXPONENTIAL_MOVING_AVERAGE(field_key, 2, 10, 'exponential')`  
+`EXPONENTIAL_MOVING_AVERAGE(field_key, 2)`  
 Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
 processed using the Exponential Moving Average algorithm with a 2-value period
-and 10 value hold period, using the exponential warmup type.
+and the default hold period and warmup type.
 
-`EXPONENTIAL_MOVING_AVERAGE(/regular_expression/, 2, 10, 'exponential')`  
+`EXPONENTIAL_MOVING_AVERAGE(field_key, 10, 9, 'exponential')`  
+Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
+processed using the Exponential Moving Average algorithm with a 10-value period
+a 9-value hold period, and the `exponential` warmup type.
+
+`EXPONENTIAL_MOVING_AVERAGE(MEAN(<field_key>), 2) ... GROUP BY time(1d)`  
+Returns the mean of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
+processed using the Exponential Moving Average algorithm with a 2-value period
+and the default hold period and warmup type.
+
+> **Note:** When aggregating data with a `GROUP BY` clause, you must include an
+> [aggregate function](#aggregations) in your call to the `EXPONENTIAL_MOVING_AVERAGE()` function.
+
+`EXPONENTIAL_MOVING_AVERAGE(/regular_expression/, 2)`  
 Returns the field values associated with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions)
 processed using the Exponential Moving Average algorithm with a 2-value period
-and 10 value hold period, using the exponential warmup type.
+and the default hold period and warmup type.
 
-`EXPONENTIAL_MOVING_AVERAGE(*, 2, 10, 'exponential')`  
+`EXPONENTIAL_MOVING_AVERAGE(*, 2)`  
 Returns the field values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement)
 processed using the Exponential Moving Average algorithm with a 2-value period
-and 10 value hold period, using the exponential warmup type.
+and the default hold period and warmup type.
 
 `EXPONENTIAL_MOVING_AVERAGE()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
@@ -6080,20 +6106,33 @@ DOUBLE_EXPONENTIAL_MOVING_AVERAGE([ * | <field_key> | /regular_expression/ ], <p
 
 ### Description of Basic Syntax
 
-`DOUBLE_EXPONENTIAL_MOVING_AVERAGE(field_key, 2, 10, 'exponential')`  
+`DOUBLE_EXPONENTIAL_MOVING_AVERAGE(field_key, 2)`  
 Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
 processed using the Double Exponential Moving Average algorithm with a 2-value period
-and 10 value hold period, using the exponential warmup type.
+and the default hold period and warmup type.
 
-`DOUBLE_EXPONENTIAL_MOVING_AVERAGE(/regular_expression/, 2, 10, 'exponential')`  
+`DOUBLE_EXPONENTIAL_MOVING_AVERAGE(field_key, 10, 9, 'exponential')`  
+Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
+processed using the Double Exponential Moving Average algorithm with a 10-value period
+a 9-value hold period, and the `exponential` warmup type.
+
+`DOUBLE_EXPONENTIAL_MOVING_AVERAGE(MEAN(<field_key>), 2) ... GROUP BY time(1d)`  
+Returns the mean of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
+processed using the Double Exponential Moving Average algorithm with a 2-value period
+and the default hold period and warmup type.
+
+> **Note:** When aggregating data with a `GROUP BY` clause, you must include an
+> [aggregate function](#aggregations) in your call to the `DOUBLE_EXPONENTIAL_MOVING_AVERAGE()` function.
+
+`DOUBLE_EXPONENTIAL_MOVING_AVERAGE(/regular_expression/, 2)`  
 Returns the field values associated with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions)
 processed using the Double Exponential Moving Average algorithm with a 2-value period
-and 10 value hold period, using the exponential warmup type.
+and the default hold period and warmup type.
 
-`DOUBLE_EXPONENTIAL_MOVING_AVERAGE(*, 2, 10, 'exponential')`  
+`DOUBLE_EXPONENTIAL_MOVING_AVERAGE(*, 2)`  
 Returns the field values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement)
 processed using the Double Exponential Moving Average algorithm with a 2-value period
-and 10 value hold period, using the exponential warmup type.
+and the default hold period and warmup type.
 
 `DOUBLE_EXPONENTIAL_MOVING_AVERAGE()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
@@ -6122,6 +6161,40 @@ KAUFMANS_EFFICIENCY_RATIO([ * | <field_key> | /regular_expression/ ], <period>[,
 
 ### Description of Basic Syntax
 
+`KAUFMANS_EFFICIENCY_RATIO(field_key, 2)`  
+Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
+processed using the Efficiency Index algorithm with a 2-value period
+and the default hold period and warmup type.
+
+`KAUFMANS_EFFICIENCY_RATIO(field_key, 10, 10)`  
+Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
+processed using the Efficiency Index algorithm with a 10-value period and
+a 10-value hold period.
+
+`KAUFMANS_EFFICIENCY_RATIO(MEAN(<field_key>), 2) ... GROUP BY time(1d)`  
+Returns the mean of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
+processed using the Efficiency Index algorithm with a 2-value period
+and the default hold period.
+
+> **Note:** When aggregating data with a `GROUP BY` clause, you must include an
+> [aggregate function](#aggregations) in your call to the `KAUFMANS_EFFICIENCY_RATIO()` function.
+
+`KAUFMANS_EFFICIENCY_RATIO(/regular_expression/, 2)`  
+Returns the field values associated with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions)
+processed using the Efficiency Index algorithm with a 2-value period
+and the default hold period and warmup type.
+
+`KAUFMANS_EFFICIENCY_RATIO(*, 2)`  
+Returns the field values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement)
+processed using the Efficiency Index algorithm with a 2-value period
+and the default hold period and warmup type.
+
+`KAUFMANS_EFFICIENCY_RATIO()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
+
+The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
+See the [Advanced Syntax](#advanced-syntax) section for how to use `KAUFMANS_EFFICIENCY_RATIO()` with a `GROUP BY time()` clause.
+
+
 ## KAUFMANS_ADAPTIVE_MOVING_AVERAGE()
 Kaufman's Adaptive Moving Average (KAMA) is a moving average designed to
 account for sample noise or volatility.
@@ -6141,6 +6214,40 @@ KAUFMANS_ADAPTIVE_MOVING_AVERAGE([ * | <field_key> | /regular_expression/ ], <pe
 [hold_period](#hold-period) <span style="font-size:.8rem; font-style:italic;">(Optional)</span>  
 
 ### Description of Basic Syntax
+
+`KAUFMANS_ADAPTIVE_MOVING_AVERAGE(field_key, 2)`  
+Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
+processed using the Kaufman Adaptive Moving Average algorithm with a 2-value period
+and the default hold period and warmup type.
+
+`KAUFMANS_ADAPTIVE_MOVING_AVERAGE(field_key, 10, 10)`  
+Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
+processed using the Kaufman Adaptive Moving Average algorithm with a 10-value period
+and a 10-value hold period.
+
+`KAUFMANS_ADAPTIVE_MOVING_AVERAGE(MEAN(<field_key>), 2) ... GROUP BY time(1d)`  
+Returns the mean of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
+processed using the Kaufman Adaptive Moving Average algorithm with a 2-value period
+and the default hold period.
+
+> **Note:** When aggregating data with a `GROUP BY` clause, you must include an
+> [aggregate function](#aggregations) in your call to the `KAUFMANS_ADAPTIVE_MOVING_AVERAGE()` function.
+
+`KAUFMANS_ADAPTIVE_MOVING_AVERAGE(/regular_expression/, 2)`  
+Returns the field values associated with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions)
+processed using the Kaufman Adaptive Moving Average algorithm with a 2-value period
+and the default hold period and warmup type.
+
+`KAUFMANS_ADAPTIVE_MOVING_AVERAGE(*, 2)`  
+Returns the field values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement)
+processed using the Kaufman Adaptive Moving Average algorithm with a 2-value period
+and the default hold period and warmup type.
+
+`KAUFMANS_ADAPTIVE_MOVING_AVERAGE()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
+
+The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
+See the [Advanced Syntax](#advanced-syntax) section for how to use `KAUFMANS_ADAPTIVE_MOVING_AVERAGE()` with a `GROUP BY time()` clause.
+
 
 ## TRIPLE_EXPONENTIAL_MOVING_AVERAGE()
 The triple exponential moving average (TEMA) was developed to filter out
@@ -6163,20 +6270,33 @@ TRIPLE_EXPONENTIAL_MOVING_AVERAGE([ * | <field_key> | /regular_expression/ ], <p
 
 ### Description of Basic Syntax
 
-`TRIPLE_EXPONENTIAL_MOVING_AVERAGE(field_key, 2, 10, 'exponential')`  
+`TRIPLE_EXPONENTIAL_MOVING_AVERAGE(field_key, 2)`  
 Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
 processed using the Triple Exponential Moving Average algorithm with a 2-value period
-and 10 value hold period, using the exponential warmup type.
+and the default hold period and warmup type.
 
-`TRIPLE_EXPONENTIAL_MOVING_AVERAGE(/regular_expression/, 2, 10, 'exponential')`  
+`TRIPLE_EXPONENTIAL_MOVING_AVERAGE(field_key, 10, 9, 'exponential')`  
+Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
+processed using the Triple Exponential Moving Average algorithm with a 10-value period
+a 9-value hold period, and the `exponential` warmup type.
+
+`TRIPLE_EXPONENTIAL_MOVING_AVERAGE(MEAN(<field_key>), 2) ... GROUP BY time(1d)`  
+Returns the mean of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
+processed using the Triple Exponential Moving Average algorithm with a 2-value period
+and the default hold period and warmup type.
+
+> **Note:** When aggregating data with a `GROUP BY` clause, you must include an
+> [aggregate function](#aggregations) in your call to the `TRIPLE_EXPONENTIAL_MOVING_AVERAGE()` function.
+
+`TRIPLE_EXPONENTIAL_MOVING_AVERAGE(/regular_expression/, 2)`  
 Returns the field values associated with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions)
 processed using the Triple Exponential Moving Average algorithm with a 2-value period
-and 10 value hold period, using the exponential warmup type.
+and the default hold period and warmup type.
 
-`TRIPLE_EXPONENTIAL_MOVING_AVERAGE(*, 2, 10, 'exponential')`  
+`TRIPLE_EXPONENTIAL_MOVING_AVERAGE(*, 2)`  
 Returns the field values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement)
 processed using the Triple Exponential Moving Average algorithm with a 2-value period
-and 10 value hold period, using the exponential warmup type.
+and the default hold period and warmup type.
 
 `TRIPLE_EXPONENTIAL_MOVING_AVERAGE()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
@@ -6212,20 +6332,33 @@ TRIPLE_EXPONENTIAL_DERIVATIVE([ * | <field_key> | /regular_expression/ ], <perio
 
 ### Description of Basic Syntax
 
-`TRIPLE_EXPONENTIAL_DERIVATIVE(field_key, 2, 10, 'exponential')`  
+`TRIPLE_EXPONENTIAL_DERIVATIVE(field_key, 2)`  
 Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
 processed using the Triple Exponential Derivative algorithm with a 2-value period
-and 10 value hold period, using the exponential warmup type.
+and the default hold period and warmup type.
 
-`TRIPLE_EXPONENTIAL_DERIVATIVE(/regular_expression/, 2, 10, 'exponential')`  
+`TRIPLE_EXPONENTIAL_DERIVATIVE(field_key, 10, 10, 'exponential')`  
+Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
+processed using the Triple Exponential Derivative algorithm with a 10-value period,
+a 10-value hold period, and the `exponential` warmup type.
+
+`TRIPLE_EXPONENTIAL_DERIVATIVE(MEAN(<field_key>), 2) ... GROUP BY time(1d)`  
+Returns the mean of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
+processed using the Triple Exponential Derivative algorithm with a 2-value period
+and the default hold period and warmup type.
+
+> **Note:** When aggregating data with a `GROUP BY` clause, you must include an
+> [aggregate function](#aggregations) in your call to the `TRIPLE_EXPONENTIAL_DERIVATIVE()` function.
+
+`TRIPLE_EXPONENTIAL_DERIVATIVE(/regular_expression/, 2)`  
 Returns the field values associated with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions)
 processed using the Triple Exponential Derivative algorithm with a 2-value period
-and 10 value hold period, using the exponential warmup type.
+and the default hold period and warmup type.
 
-`TRIPLE_EXPONENTIAL_DERIVATIVE(*, 2, 10, 'exponential')`  
+`TRIPLE_EXPONENTIAL_DERIVATIVE(*, 2)`  
 Returns the field values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement)
 processed using the Triple Exponential Derivative algorithm with a 2-value period
-and 10 value hold period, using the exponential warmup type.
+and the default hold period and warmup type.
 
 `TRIPLE_EXPONENTIAL_DERIVATIVE()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
@@ -6248,20 +6381,33 @@ RELATIVE_STRENGTH_INDEX([ * | <field_key> | /regular_expression/ ], <period>[, <
 
 ### Description of Basic Syntax
 
-`RELATIVE_STRENGTH_INDEX(field_key, 2, 10, 'exponential')`  
+`RELATIVE_STRENGTH_INDEX(field_key, 2)`  
 Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
 processed using the Relative Strength Index algorithm with a 2-value period
-and 10 value hold period, using the exponential warmup type.
+and the default hold period and warmup type.
 
-`RELATIVE_STRENGTH_INDEX(/regular_expression/, 2, 10, 'exponential')`  
+`RELATIVE_STRENGTH_INDEX(field_key, 10, 10, 'exponential')`  
+Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
+processed using the Relative Strength Index algorithm with a 10-value period,
+a 10-value hold period, and the `exponential` warmup type.
+
+`RELATIVE_STRENGTH_INDEX(MEAN(<field_key>), 2) ... GROUP BY time(1d)`  
+Returns the mean of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
+processed using the Relative Strength Index algorithm with a 2-value period
+and the default hold period and warmup type.
+
+> **Note:** When aggregating data with a `GROUP BY` clause, you must include an
+> [aggregate function](#aggregations) in your call to the `RELATIVE_STRENGTH_INDEX()` function.
+
+`RELATIVE_STRENGTH_INDEX(/regular_expression/, 2)`  
 Returns the field values associated with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions)
 processed using the Relative Strength Index algorithm with a 2-value period
-and 10 value hold period, using the exponential warmup type.
+and the default hold period and warmup type.
 
-`RELATIVE_STRENGTH_INDEX(*, 2, 10, 'exponential')`  
+`RELATIVE_STRENGTH_INDEX(*, 2)`  
 Returns the field values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement)
 processed using the Relative Strength Index algorithm with a 2-value period
-and 10 value hold period, using the exponential warmup type.
+and the default hold period and warmup type.
 
 `RELATIVE_STRENGTH_INDEX()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
