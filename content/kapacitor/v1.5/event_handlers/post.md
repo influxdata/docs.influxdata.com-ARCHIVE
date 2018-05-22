@@ -13,7 +13,7 @@ The post event handler posts JSON encoded data to an HTTP endpoint.
 ## Configuration
 Configuration as well as default [option](#options) values for the post event
 handler are set in your `kapacitor.conf`.
-Below is an example config:
+Below is an example configuration:
 
 ### Post Settings in kapacitor.conf
 ```toml

@@ -13,7 +13,7 @@ The Email event handler sends alert messages via SMTP/email.
 ## Configuration
 Configuration as well as default [option](#options) values for the Email event
 handler are set in the `[smtp]` section of your `kapacitor.conf`.
-Below is an example config:
+Below is an example configuration:
 
 ```toml
 [smtp]

@@ -15,7 +15,7 @@ Kapacitor can be configured to send alert messages to Slack.
 ## Configuration
 Configuration as well as default [option](#options) values for the Slack event
 handler are set in your `kapacitor.conf`.
-Below is an example config:
+Below is an example configuration:
 
 ```toml
 [[slack]]

@@ -13,7 +13,7 @@ The SNMP trap event handler sends alert messages as SNMP traps.
 ## Configuration
 Configuration as well as default [option](#options) values for the SNMP trap
 event handler are set in your `kapacitor.conf`.
-Below is an example config:
+Below is an example configuration:
 
 ```toml
 [snmptrap]

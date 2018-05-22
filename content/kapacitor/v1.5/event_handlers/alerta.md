@@ -15,7 +15,7 @@ Kapacitor can be configured to send alert messages to Alerta.
 ## Configuration
 Configuration as well as default [option](#options) values for the Alerta event
 handler are set in your `kapacitor.conf`.
-Below is an example config:
+Below is an example configuration:
 
 ```toml
 [alerta]

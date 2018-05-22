@@ -15,7 +15,7 @@ Kapacitor can be configured to send alert messages to a Telegram bot.
 ## Configuration
 Configuration as well as default [option](#options) values for the Telegram
 alert handler are set in your `kapacitor.conf`.
-Below is an example config:
+Below is an example configuration:
 
 ```toml
 [telegram]

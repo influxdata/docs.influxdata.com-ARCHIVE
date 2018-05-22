@@ -15,7 +15,7 @@ Kapacitor can be configured to send alert messages to a Kafka cluster.
 ## Configuration
 Configuration as well as default [option](#options) values for the Kafka event
 handler are set in your `kapacitor.conf`.
-Below is an example config:
+Below is an example configuration:
 
 ```toml
 [[kafka]]

@@ -14,7 +14,7 @@ Kapacitor can be configured to send alert messages to an MQTT broker.
 ## Configuration
 Configuration as well as default [option](#options) values for the MQTT
 event handler are set in your `kapacitor.conf`.
-Below is an example config:
+Below is an example configuration:
 
 ```toml
 [[mqtt]]
