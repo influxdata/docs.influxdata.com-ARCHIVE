@@ -7,4 +7,4 @@ menu:
     parent: About the project
 ---
 
-The [open source icense for InfluxDB OSS](https://github.com/influxdata/influxdb/blob/master/LICENSE) is available on GitHub.
+The [open source license for InfluxDB OSS](https://github.com/influxdata/influxdb/blob/master/LICENSE) is available on GitHub.
