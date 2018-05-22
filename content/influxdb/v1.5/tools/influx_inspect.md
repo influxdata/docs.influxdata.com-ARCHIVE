@@ -100,18 +100,23 @@ including individual `tsi1` files, a subset of files, or the enter `tsi1` index 
 #### Usage
 
 ```
-influx_inspect dumptsi [<arguments>] <path>
+influx_inspect dumptsi [<arguments>] PATH
 ```
+
+##### `PATH`
+Path to the `index` directory, or space-separated paths to individual `index` files. Paths are space-separated. Specify the `index` directory unless you need to target individual `index` files for debugging. See the examples below.
+
+
 #### Arguments
 
 Optional arguments are in brackets.
 If optional arguments are not specified, the `dumptsi` command returns summary statistics for each file.
 
+##### `-series-file <series_path>`
+Path to the `_series` directory. Required.
+
 ##### [`-series`]
 Dump raw series data.
-
-##### `-series-file <series_path> <index_path>`
-Paths to the `_series` directory and the `index` directory (or specific `index` files). Required. Paths are space-separated. Specify the `index` directory unless you need to specify individual `index` files for debugging. See the examples below.
 
 ##### [`-measurements`]
 Dump raw [measurement](/influxdb/v1.5/concepts/glossary/#measurement) data.
