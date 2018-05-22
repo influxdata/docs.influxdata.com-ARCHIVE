@@ -95,7 +95,6 @@ $ influx_inspect buildtsi -database stress -shard 1 -datadir ~/.influxdb/data -w
 ### influx_inspect dumptsi
 
 Dumps low-level details about `tsi1` files, including `.tsl` log files and `.tsi` index files.
-including individual `tsi1` files, a subset of files, or the enter `tsi1` index of a shard.
 
 #### Usage
 
