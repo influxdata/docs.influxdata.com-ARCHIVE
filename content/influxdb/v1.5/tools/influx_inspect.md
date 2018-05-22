@@ -99,10 +99,10 @@ Dumps low-level details about `tsi1` files, including `.tsl` log files and `.tsi
 #### Usage
 
 ```
-influx_inspect dumptsi [<arguments>] PATH
+influx_inspect dumptsi [<arguments>] <index_path>
 ```
 
-##### `PATH`
+##### `<index_path>`
 Path to the `index` directory, or space-separated paths to individual `index` files. Paths are space-separated. Specify the `index` directory unless you need to target individual `index` files for debugging. See the examples below.
 
 
