@@ -370,7 +370,7 @@ The `unit` argument is an integer followed by a [duration literal](/influxdb/v1.
 If the query does not specify the `unit`, the unit defaults to one second (`1s`).
 
 `INTEGRAL(field_key)`  
-Returns the area under the curve for subsequent field values assoicated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
+Returns the area under the curve for subsequent field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
 
 `INTEGRAL(/regular_expression/)`  
 Returns the are under the curve for subsequent field values associated with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions).
