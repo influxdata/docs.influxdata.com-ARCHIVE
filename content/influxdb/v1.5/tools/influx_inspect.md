@@ -94,12 +94,12 @@ $ influx_inspect buildtsi -database stress -shard 1 -datadir ~/.influxdb/data -w
 
 ### `influx_inspect dumptsi`
 
-Dumps low-level details about `tsi1` files, including `.tsl` log files and `.tsi` index files.
+Dumps low-level details about TSI files, including `.tsl` log files and `.tsi` index files.
 
 #### Usage
 
 ```
-influx_inspect dumptsi [<arguments>] <index_path>
+influx_inspect dumptsi [ options ] <index_path>
 ```
 
 ##### `<index_path>`
@@ -163,7 +163,7 @@ Dumps low-level details about [TSM](/influxdb/v1.5/concepts/glossary/#tsm-time-s
 #### Usage
 
 ```
-influx_inspect dumptsm [<flags>] <path>
+influx_inspect dumptsm [ options ] <path>
 ```
 
 ##### `<path>`
@@ -191,7 +191,7 @@ Only display index and block data that match this key substring. Default value i
 
 ### `influx_inspect export`
 
-Export all TSM files to line protocol.
+Export all TSM files to Line Protocol format.
 This output file can be imported using the
 [influx](/influxdb/v1.5/tools/shell/#import-data-from-a-file-with-import)
 command.
@@ -239,7 +239,7 @@ Default value is `"$HOME/.influxdb/export"`.
 
 ##### `-waldir <wal_dir>`
 
-Storage path to the [write-ahead log (WAL)](/influxdb/v1.5/concepts/glossary/#wal-write-ahead-log). Default value is `"$HOME/.influxdb/wal"`.
+Path to the [write-ahead log (WAL)](/influxdb/v1.5/concepts/glossary/#wal-write-ahead-log). Default value is `"$HOME/.influxdb/wal"`.
 
 #### Examples
 
