@@ -141,17 +141,17 @@ Filter data by tag value regular expression.
 
 #### Examples
 
-**Specifying the `_series` and `index` directories**
+**Specifying paths to the `_series` and `index` directories**
 
 ```
 $ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index
 ```
-**Specifying the `_series` directory and an `index` file**
+**Specifying paths to the `_series` directory and an `index` file**
 
 ```
 $ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index/file0
 ```
-**Specifying the `_series` directory and multiple `index` files**
+**Specifying paths to the `_series` directory and multiple `index` files**
 
 ```
 $ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index/file0 /path/to/index/file1 ...
