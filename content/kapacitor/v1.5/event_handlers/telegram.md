@@ -240,7 +240,7 @@ published alerts to your Telegram bot.
 > [AlertNode.StateChangesOnly](/kapacitor/v1.5/nodes/alert_node/#statechangesonly)
 > so only events where the alert changed state are sent to Telegram.
 
-The examples below use the same Telegram configuration defined in the `kapacitor.conf`:
+The examples below use the following Telegram configuration defined in the `kapacitor.conf`:
 
 _**Telegram settings in kapacitor.conf**_
 ```toml

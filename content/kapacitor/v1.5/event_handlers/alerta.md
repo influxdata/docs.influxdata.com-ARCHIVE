@@ -114,7 +114,7 @@ to Alerta.
 > [AlertNode.StateChangesOnly](/kapacitor/v1.5/nodes/alert_node/#statechangesonly)
 > so only events where the alert changed state are sent to Alerta.
 
-The examples below use the same Alerta configuration defined in the `kapacitor.conf`:
+The examples below use the following Alerta configuration defined in the `kapacitor.conf`:
 
 _**Alerta settings in kapacitor.conf**_  
 ```toml

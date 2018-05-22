@@ -103,7 +103,7 @@ If you are using a batch task it is still possible for a point to arrive late an
 
 ## Another Example
 
-Create a continuous query to down sample across retention policies.
+Create a continuous query to downsample across retention policies.
 
 ```
 CREATE CONTINUOUS QUERY cpu_idle_median ON telegraf BEGIN SELECT median("usage_idle") as usage_idle INTO "telegraf"."sampled_5m"."median_cpu_idle" FROM "telegraf"."autogen"."cpu" GROUP BY time(5m),* END

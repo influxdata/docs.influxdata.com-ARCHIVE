@@ -55,7 +55,7 @@ Login to your Slack workspace in your browser and
 Slack will provide you the webhook URL.
 
 #### `channel`
-Default channel for messages
+Default channel for messages.
 
 #### `username`
 The username of the Slack bot.

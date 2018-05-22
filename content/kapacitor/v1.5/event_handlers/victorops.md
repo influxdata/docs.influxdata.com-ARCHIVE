@@ -92,7 +92,7 @@ use the `.victorOps()` attribute in your TICKscripts to send alerts to VictorOps
 or define a VictorOps handler that subscribes to a topic and sends published
 alerts to VictorOps.
 
-The examples below use the same VictorOps configuration defined in the `kapacitor.conf`:
+The examples below use the following VictorOps configuration defined in the `kapacitor.conf`:
 
 _**VictorOps settings in kapacitor.conf**_  
 ```toml

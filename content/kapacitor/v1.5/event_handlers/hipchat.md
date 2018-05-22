@@ -117,7 +117,7 @@ HipChat handler that subscribes to a topic and sends published alerts to HipChat
 > [AlertNode.StateChangesOnly](/kapacitor/v1.5/nodes/alert_node/#statechangesonly)
 > so only events where the alert changed state are sent to Alerta.
 
-The examples below use the same HipChat configuration defined in the `kapacitor.conf`:
+The examples below use the following HipChat configuration defined in the `kapacitor.conf`:
 
 _**HipChat settings in kapacitor.conf**_  
 ```toml
