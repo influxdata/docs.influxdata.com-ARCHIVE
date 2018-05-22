@@ -19,13 +19,13 @@ Influx Inspect is a disk shard utility that can be used to:
 
 The commands are:
 ```
-    buildtsi             convert in-memory (TSM-based) shards to TSI
-    dumptsi              dumps low-level details about tsi1 files.
-    dumptsm              dumps low-level details about tsm1 files.
-    export               exports raw data from a shard to line protocol
-    help                 display this help message format
-    report               displays a shard level report
-    verify               verifies integrity of TSM files
+    buildtsi             Converts in-memory (TSM-based) shards to TSI
+    dumptsi              Dumps low-level details about tsi1 files.
+    dumptsm              Dumps low-level details about tsm1 files.
+    export               Exports raw data from a shard to Line Protocol.
+    help                 Displays this help message format.
+    report               Displays a shard level report.
+    verify               Verifies integrity of TSM files.
 ```
 
 ### `influx_inspect buildtsi`
@@ -51,22 +51,22 @@ influx_inspect buildtsi -datadir <data_directory> -waldir <WAL_directory> [ opti
 
 Optional arguments are in brackets.
 
-#### `[ -database string ]`
+##### `[ -database string ]`
   Database name.
 
-#### `-datadir string`
+##### `-datadir string`
   Data directory.
 
-#### `[ -retention string ]`
+##### `[ -retention string ]`
   Retention policy.
 
-#### `[ -shard string ]`
+##### `[ -shard string ]`
   Shard ID.
 
-#### `[ -v ]`
+##### `[ -v ]`
   Verbose output.
 
-#### -waldir string
+##### -waldir string
   WAL (Write Ahead Log) directory.
 
 #### Examples
@@ -93,8 +93,9 @@ $ influx_inspect buildtsi -database stress -shard 1 -datadir ~/.influxdb/data -w
 ```
 
 ### influx_inspect dumptsi
-Dumps low-level details about `tsi1` files.
-`dumptsi` returns summary stats for each file if the command does not specify any flags.
+
+Dumps low-level details about `tsi1` files, including `.tsl` log files and `.tsi` index files.
+including individual `tsi1` files, a subset of files, or the enter `tsi1` index of a shard.
 
 #### Usage
 
@@ -104,12 +105,13 @@ influx_inspect dumptsi [<arguments>] <path>
 #### Arguments
 
 Optional arguments are in brackets.
+If optional arguments are not specified, the `dumptsi` command returns summary statistics for each file.
 
 ##### [`-series`]
 Dump raw series data.
 
-#### `-series-file`
-Path to the series file.
+##### `-series-file <series_path> <index_path>`
+Paths to the `_series` directory and the `index` directory (or specific `index` files). Required. Paths are space-separated. Specify the `index` directory unless you need to specify individual `index` files for debugging. See the examples below.
 
 ##### [`-measurements`]
 Dump raw [measurement](/influxdb/v1.5/concepts/glossary/#measurement) data.
@@ -131,6 +133,24 @@ Filter data by tag key regular expression.
 
 ##### [`-tag-value-filter` <regular_expresssion>]
 Filter data by tag value regular expression.
+
+#### Examples
+
+**Specifying the `_series` and `index` directories**
+
+```
+$ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index
+```
+**Specifying the `_series` directory and an `index` file**
+
+```
+$ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index/file0
+```
+**Specifying the `_series` directory and multiple `index` files**
+
+```
+$ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index/file0 /path/to/index/file1 ...
+```
 
 ### `influx_inspect dumptsm`
 Dumps low-level details about [tsm](/influxdb/v1.5/concepts/glossary/#tsm-time-structured-merge-tree) files.
