@@ -90,7 +90,7 @@ Kapacitor alert levels are mapped to the following priority levels:
 ## Pushover Setup
 [Register your application with Pushover](https://pushover.net/apps/build) to
 get a Pushover token.
-Include the token in the `[pushover]` config section of your `kapacitor.conf`.
+Include the token in the `[pushover]` configuration section of your `kapacitor.conf`.
 
 ## Using the Pushover event handler
 With the Pushover event handler enabled and configured in your `kapacitor.conf`,

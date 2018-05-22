@@ -57,8 +57,8 @@ The maximum amount of time to wait before flushing an incomplete batch.
 If 0 a default of 1s is used.
 
 #### `use-ssl`
-Enable ssl communication.
-Must be `true` for other ssl options to take effect.
+Enable SSL communication.
+Must be `true` for other SSL options to take effect.
 
 #### `ssl-ca`
 Path to certificate authority file.
@@ -110,7 +110,7 @@ With the Kafka event handler enabled in your `kapacitor.conf`, use the `.kafka()
 attribute in your TICKscripts to send alerts to a Kafka cluster or define a
 Kafka handler that subscribes to a topic and sends published alerts to Kafka.
 
-The examples below use the same Kafka configuration defined in the `kapacitor.conf`:
+The examples below use the following Kafka configuration defined in the `kapacitor.conf`:
 
 _**Kafka settings in kapacitor.conf**_  
 ```toml

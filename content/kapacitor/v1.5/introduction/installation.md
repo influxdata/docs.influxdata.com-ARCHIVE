@@ -82,7 +82,7 @@ sudo systemctl start kapacitor
 
 An example configuration file can be found [here](https://github.com/influxdb/kapacitor/blob/master/etc/kapacitor/kapacitor.conf)
 
-Kapacitor can also provide an example config for you using this command:
+Kapacitor can also provide an example configuration for you using this command:
 
 ```bash
 kapacitord config

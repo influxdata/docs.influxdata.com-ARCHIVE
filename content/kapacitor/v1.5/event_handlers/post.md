@@ -60,8 +60,8 @@ _Skip to [row templating](#row-templates)._
 Absolute path to a row template file.
 _Skip to [row templating](#row-templates)._
 
-### Defining config options with environment variables
-The `endpoint`, `url`, and `headers` config options can be defined with
+### Defining configuration options with environment variables
+The `endpoint`, `url`, and `headers` configuration options can be defined with
 environment variables:
 
 ```bash
@@ -201,7 +201,7 @@ Alert templates are used to construct a custom HTTP body.
 They are only used with post [alert](/kapacitor/v1.5/nodes/alert_node/) handlers
 as they consume alert data.
 Templates are defined either inline in the `kapacitor.conf` using the
-[`alert-template`](#alert-template) config or in a separate file and referenced
+[`alert-template`](#alert-template) configuration or in a separate file and referenced
 using the [`alert-template-file`](#alert-template-file) config.
 
 Alert templates use [Golang Template](https://golang.org/pkg/text/template/) and
@@ -246,7 +246,7 @@ Row templates are used to construct a custom HTTP body.
 They are only used with post [httpPost](/kapacitor/v1.5/nodes/http_post_node/)
 handlers as they consume a row at a time.
 Templates are defined either inline in the `kapacitor.conf` using the
-[`row-template`](#row-template) config or in a separate file and referenced
+[`row-template`](#row-template) configuration or in a separate file and referenced
 using the [`row-template-file`](#row-template-file) config.
 
 Row templates use [Golang Template](https://golang.org/pkg/text/template/) and

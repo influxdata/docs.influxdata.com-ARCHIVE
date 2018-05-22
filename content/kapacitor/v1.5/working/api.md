@@ -1834,15 +1834,15 @@ For example the above paths correspond to the following configuration sections:
 
 ```
 [smtp]
-    # SMTP config here
+    # SMTP configuration here
 
 [[influxdb]]
     name = "localhost"
-    # InfluxDB config here for the "localhost" cluster
+    # InfluxDB configuration here for the "localhost" cluster
 
 [[influxdb]]
     name = "remote"
-    # InfluxDB config here for the "remote" cluster
+    # InfluxDB configuration here for the "remote" cluster
 ```
 
 

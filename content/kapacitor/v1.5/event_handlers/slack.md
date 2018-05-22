@@ -234,7 +234,7 @@ multiple Slack integrations can be used.
 
 In the `kapacitor.conf` [above](#using-the-slack-event-handler), there are two
 Slack configurations; one for alerts and the other for daily stats. The
-`workspace` config for each Slack configuration act as a unique identifiers.
+`workspace` configuration for each Slack configuration act as a unique identifiers.
 
 The following TICKscript sends alerts to the `alerts` Slack workspace.
 

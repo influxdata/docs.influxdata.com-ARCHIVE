@@ -13,8 +13,8 @@ menu:
 - Added a new Kapacitor node changeDetect that emits a value for each time a series field changes.
 - Add recoverable field to JSON alert response to indicate whether the alert will auto-recover.
 - Update OpsGenie integration to use the v2 API.
-  To upgrade to using the new API simply update your config and TICKscripts to use opsgenie2 instead of opsgenie.
-  If your `opsgenie` config uses the `recovery_url` option, for `opsgenie2` you will need to change it to the `recovery_action` option.
+  To upgrade to using the new API simply update your configuration and TICKscripts to use opsgenie2 instead of opsgenie.
+  If your `opsgenie` configuration uses the `recovery_url` option, for `opsgenie2` you will need to change it to the `recovery_action` option.
   This is because the new v2 API is not structured with static URLs, and so only the action can be defined and not the entire URL.
 - Add https-private-key option to httpd config.
 - Add `.quiet` to all nodes to silence any errors reported by the node.
@@ -266,7 +266,7 @@ For more details on the alerting system, see the full documentation [here](https
 
 ### Bugfixes
 
-- Fixed broken ENV var config overrides for the Kubernetes section.
+- Fixed broken ENV var configuration overrides for the Kubernetes section.
 - Copy batch points slice before modification, fixes potential panics and data corruption.
 - Use the Prometheus metric name as the measurement name by default for scrape data.
 - Fixed possible deadlock for scraper configuration updating.
@@ -279,7 +279,7 @@ For more details on the alerting system, see the full documentation [here](https
 - Fixed bug where batch queries would be missing all fields after the first nil field.
 - Fix case-sensitivity for Telegram `parseMode` value.
 - Fix pprof debug endpoint.
-- Fixed hang in config API to update a config section.
+- Fixed hang in configuration API to update a configuration section.
     Now if the service update process takes too long the request will timeout and return an error.
     Previously the request would block forever.
 - Make the Alerta auth token prefix configurable and default it to Bearer.
@@ -428,7 +428,7 @@ See the [API docs](https://docs.influxdata.com/kapacitor/latest/api/api/) for mo
 
 - Fix bug where keeping a list of fields that where not referenced in the eval expressions would cause an error.
 - Fix the number of subscriptions statistic.
-- Fix inconsistency with InfluxDB by adding config option to set a default retention policy.
+- Fix inconsistency with InfluxDB by adding configuration option to set a default retention policy.
 - Sort and dynamically adjust column width in CLI output.
 - Adds missing strLength function.
 
@@ -452,7 +452,7 @@ See the [API docs](https://docs.influxdata.com/kapacitor/latest/api/api/) for mo
 
 ### Bugfixes
 
-- Fixed typo in the default config file
+- Fixed typo in the default configuration file
 - Change |log() output to be in JSON format so its self documenting structure.
 - Fix issue with TMax and the Holt-Winters method.
 - Fix bug with TMax and group by time.

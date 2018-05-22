@@ -322,13 +322,13 @@ but one InfluxDB table array configuration must be flagged as the `default`.
 
   # Override the global hostname option for this InfluxDB cluster.
   # Useful if the InfluxDB cluster is in a separate network and
-  # needs special config to connect back to this Kapacitor instance.
+  # needs special configuration to connect back to this Kapacitor instance.
   # Defaults to `hostname` if empty.
   kapacitor-hostname = ""
 
   # Override the global http port option for this InfluxDB cluster.
   # Useful if the InfluxDB cluster is in a separate network and
-  # needs special config to connect back to this Kapacitor instance.
+  # needs special configuration to connect back to this Kapacitor instance.
   # Defaults to the port from `[http] bind-address` if 0.
   http-port = 0
 
