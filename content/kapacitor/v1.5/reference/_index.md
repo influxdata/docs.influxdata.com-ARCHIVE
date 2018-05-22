@@ -5,5 +5,5 @@ menu:
   kapacitor_1_5:
     name: Kapacitor reference
     identifier: reference
-    weight: 7
+    weight: 60
 ---

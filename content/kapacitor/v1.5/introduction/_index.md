@@ -5,7 +5,7 @@ menu:
   kapacitor_1_5:
     name: Introduction
     identifier: introduction
-    weight: 1
+    weight: 10
 ---
 
 The introductory documentation includes all the information you need to get up and running with Kapacitor.

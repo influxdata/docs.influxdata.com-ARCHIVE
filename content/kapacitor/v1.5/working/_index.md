@@ -5,7 +5,7 @@ menu:
   kapacitor_1_5:
     name: Working with Kapacitor
     identifier: work-w-kapacitor
-    weight: 3
+    weight: 30
 ---
 
 The documents in this section present the key features of the Kapacitor daemon

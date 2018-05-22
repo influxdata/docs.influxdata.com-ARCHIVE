@@ -7,7 +7,7 @@ menu:
   kapacitor_1_5:
     name: Event handlers
     identifier: event-handlers
-    weight: 5
+    weight: 50
 ---
 
 Kapacitor can be integrated into a monitoring system by sending

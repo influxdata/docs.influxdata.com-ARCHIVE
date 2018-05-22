@@ -6,7 +6,7 @@ menu:
   kapacitor_1_5:
     name: About the project
     identifier: about_the_project
-    weight: 50
+    weight: 1
 ---
 
 Kapacitor is open source and we welcome contributions from the community.
