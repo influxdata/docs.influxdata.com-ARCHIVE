@@ -55,5 +55,5 @@ Third party suppliers make no representation nor warranty with respect to such t
 Third party suppliers assume no liability for any claim that might arise with respect to such third party software,
 nor for a customer’s use of or inability to use the third party software.
 
-The [list of third party software components, including references to associated license and other materials](https://github.com/influxdata/chronograf/blob/1.4.2.x/LICENSE_OF_DEPENDENCIES.md),
+The [list of third party software components, including references to associated license and other materials](https://github.com/influxdata/chronograf/blob/1.5.0.x/LICENSE_OF_DEPENDENCIES.md),
 is maintained on a version by version basis.
