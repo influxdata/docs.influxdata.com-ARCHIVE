@@ -24,8 +24,7 @@ Use the cluster command line tools [`influxd-ctl`](#influxd-ctl) and [`influx`](
         * [`k`](#k)
         * [`secret`](#secret-jwt-shard-secret)
         * [`user`](#user-username)
-
-    * [Arguments](#arguments)
+    * [influxd-ctl options](#influxd-ctl-options)
         * [`add-data`](#add-data)
         * [`add-meta`](#add-meta)
         * [`backup`](#backup)
@@ -46,7 +45,7 @@ Use the cluster command line tools [`influxd-ctl`](#influxd-ctl) and [`influx`](
 * [influx](#influx)
 
 
-## `influxd-ctl`
+## `influxd-ctl` tool
 
 The `influxd-ctl` tool is available on all [meta nodes](/enterprise_influxdb/v1.5/concepts/glossary/#meta-node).
 Use `influxd-ctl` to manage your cluster nodes, backup data, restore data, and rebalance your cluster.
@@ -54,33 +53,35 @@ Use `influxd-ctl` to manage your cluster nodes, backup data, restore data, and r
 ### Syntax
 
 ```
-influxd-ctl [global-arguments] <command> [arguments]
+influxd-ctl [ global-arguments ] <command> [ arguments ]
 ```
 
-### Global arguments
+### Global options
 
-#### `-auth-type [ none | basic | jwt ]`  
+Optional arguments are in brackets.
+
+#### `[ -auth-type [ none | basic | jwt ] ]`
 Specify the type of authentication to use. Default value is `none`.
 
-#### `-bind <hostname>:<port>`  
+#### `[ -bind <hostname>:<port> ]`  
 Specify the bind HTTP address of a meta node to connect to. Default value is `localhost:8091`.
 
-#### `-bind-tls`  
+#### `[ -bind-tls ]`  
 Use TLS.  If you have enabled HTTPS, you MUST use this argument in order for influxd-ctl to connect to the meta node.
 
-#### `-config '<path-to-configuration-file>'`  
+#### `[ -config '<path-to-configuration-file> ]'`  
 Specify the path to the configuration file.
 
-#### `-pwd <password>`  
+#### `[ -pwd <password> ]`  
 Specify the user’s password. This argument is ignored if `-auth-type basic` isn’t specified.
 
-#### `-k`  
+#### `[ -k ]`  
 Skip certificate verification; use this argument with a self-signed certificate. `-k` is ignored if `-bind-tls` isn't specified.
 
-#### `-secret <JWT-shared-secret>`  
+#### `[ -secret <JWT-shared-secret> ]`  
 Specify the JSON Web Token (JWT) shared secret. This argument is ignored if `-auth-type jwt` isn't specified.
 
-#### `-user <username>`  
+#### `[ -user <username> ]`  
 Specify the user’s username. This argument is ignored if `-auth-type basic` isn’t specified.
 
 ### Global argument examples
@@ -130,9 +131,9 @@ If authentication is enabled and the `influxd-ctl` command provides the incorrec
 Error: authorization failed.
 ```
 
-### Arguments
+## `influxd-ctl` commands
 
-#### `add-data`
+### `add-data`
 
 Adds a data node to a cluster.
 By default, `influxd-ctl` adds the specified data node to the local meta node's cluster.
@@ -144,9 +145,9 @@ add-data <data-node-TCP-bind-address>
 
 Resources: [Production installation](/enterprise_influxdb/v1.5/production_installation/data_node_installation/)
 
-##### Examples using `add-data`
+#### Examples using `add-data`
 
-###### Adding a data node to a cluster using the local meta node
+##### Adding a data node to a cluster using the local meta node
 
 ```
 $ influxd-ctl add-data cluster-data-node:8088
@@ -157,7 +158,7 @@ Added data node 3 at cluster-data-node:8088
 The command contacts the local meta node running at `localhost:8091` and adds a data node to that meta node's cluster.
 The data node has the hostname `cluster-data-node` and runs on port `8088`.
 
-###### Adding a data node to a cluster using a remote meta node
+##### Adding a data node to a cluster using a remote meta node
 
 ```
 $ influxd-ctl -bind cluster-meta-node-01:8091 add-data cluster-data-node:8088
@@ -168,7 +169,7 @@ Added data node 3 at cluster-data-node:8088
 The command contacts the meta node running at `cluster-meta-node-01:8091` and adds a data node to that meta node's cluster.
 The data node has the hostname `cluster-data-node` and runs on port `8088`.
 
-#### `add-meta`
+### `add-meta`
 
 Adds a meta node to a cluster.
 By default, `influxd-ctl` adds the specified meta node to the local meta node's cluster.
@@ -180,10 +181,10 @@ add-meta <meta-node-HTTP-bind-address>
 
 Resources: [Production installation](/enterprise_influxdb/v1.5/production_installation/data_node_installation/)
 
-##### Examples using `add-meta`
+#### Examples using `add-meta`
 <br>
 
-###### Adding a meta node to a cluster using the local meta node
+##### Adding a meta node to a cluster using the local meta node
 
 ```
 $ influxd-ctl add-meta cluster-meta-node-03:8091
@@ -194,7 +195,7 @@ Added meta node 3 at cluster-meta-node:8091
 The command contacts the local meta node running at `localhost:8091` and adds a meta node to that local meta node's cluster.
 The added meta node has the hostname `cluster-meta-node-03` and runs on port `8091`.
 
-###### Adding a meta node to a cluster using a remote meta node**
+##### Adding a meta node to a cluster using a remote meta node**
 
 ```
 $ influxd-ctl -bind cluster-meta-node-01:8091 add-meta cluster-meta-node-03:8091
@@ -214,6 +215,8 @@ If there are no existing incremental backups, the system automatically performs 
 backup [ -db <database> | -from <data-node-TCP-bind-address> | -full | -rp <retention-policy> | -shard <shard-id> ] <backup-directory>
 ```
 ### Arguments
+
+Optional arguments are in brackets.
 
 #### `-db <db_name>`
 
@@ -289,9 +292,10 @@ Backed up to backup_dir in 51.388233ms, transferred 333793 bytes
 
 The command performs a full backup of the cluster and stores the backup in the existing directory `backup_dir`.
 
-#### `copy-shard`
+### `copy-shard`
 
 Copies a [shard](/influxdb/v1.5/concepts/glossary/#shard) from a source data node to a destination data node.
+
 ```
 copy-shard <data-node-source-TCP-address> <data-node-destination-TCP-address> <shard-id>
 ```
