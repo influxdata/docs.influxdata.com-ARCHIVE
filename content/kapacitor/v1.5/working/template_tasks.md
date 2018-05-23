@@ -127,7 +127,7 @@ created using the template.
 
 ## Define a new task and provide variable values
 Now define a task using the template to trigger an alert on CPU usage.
-Pass variable values into the template using simple JSON file.
+Pass variable values into the template using a simple JSON file.
 
 _**Example: A JSON variable file**_
 ```json
@@ -150,7 +150,7 @@ template file and the JSON variable file.
 kapacitor define cpu_alert -template generic_mean_alert -vars cpu_vars.json -dbrp telegraf.autogen
 ```
 
-Use the `show` command to display the variable values associated with newly created task.
+Use the `show` command to display the variable values associated with the newly created task.
 
 ```
 kapacitor show cpu_alert
