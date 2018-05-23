@@ -5,7 +5,7 @@ menu:
   chronograf:
     name: v0.12
     identifier: chronograf_012
-    weight: 120
+    weight: 140
 ---
 
 ## [Getting Started](/chronograf/v0.12/introduction/getting_started/)
