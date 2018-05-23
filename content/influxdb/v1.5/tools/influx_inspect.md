@@ -103,7 +103,7 @@ influx_inspect dumptsi [ options ] <index_path>
 ```
 
 ##### `<index_path>`
-Path to the `index` directory, or space-separated paths to individual `index` files. Paths are space-separated. Specify the `index` directory unless you need to target individual `index` files for debugging. See the examples below.
+Path to the `index` directory, or paths to individual `index` files. Paths are space-separated. Specify the `index` directory unless you need to target individual `index` files for debugging. See the examples below.
 
 
 #### Arguments
