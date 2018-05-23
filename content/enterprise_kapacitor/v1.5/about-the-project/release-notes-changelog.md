@@ -8,7 +8,7 @@ menu:
 
 # Changelog
 
-## v1.5.0 [2018-05-18]
+## v1.5.0 [2018-05-22]
 
 Includes features and bug fixes from [Kapacitor 1.5.0](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-0-2018-05-17)
 
