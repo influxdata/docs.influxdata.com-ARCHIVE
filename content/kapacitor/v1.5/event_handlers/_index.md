@@ -110,7 +110,7 @@ kapacitor define-topic-handler slack_cpu_handler.yaml
 
 ### TICKscript
 Many event handlers can be used directly in TICKscripts to send events.
-This is generally done with handlers that send messages to third-parties Below
+This is generally done with handlers that send messages to third-parties. Below
 is an example TICKscript that publishes CPU alerts to Slack using the `.slack()`
 event handler:
 
