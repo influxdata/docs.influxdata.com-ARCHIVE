@@ -1,6 +1,6 @@
 ---
 title: Visualization types in Chronograf
-descriptions: Chronograf dashboards and views support graphs and other visualization types, including line graphs, stacked graphs, step-plot graphs, single statistics, bar graphs, and gauges.
+descriptions: Chronograf dashboards and views support graphs and other visualization types, including line graphs, stacked graphs, step-plot graphs, single statistics, bar graphs, gauges, and tables.
 menu:
   chronograf_1_5:
     name: Visualization types
@@ -112,7 +112,7 @@ Use the **Step-Plot Graph Controls** to specify the following:
 
 #### Step-Plot Graph example
 
-![Step-Plot Graph view](/img/chronograf/chrono-viz-step-plot-graph-example.png)
+![Step-Plot Graph example](/img/chronograf/chrono-viz-step-plot-graph-example.png)
 
 
 ### Bar Graph
@@ -142,7 +142,7 @@ Use the **Bar Graph Controls** to specify the following:
 
 #### Bar Graph example
 
-![Bar Graph view](/img/chronograf/chrono-viz-bar-graph-example.png)
+![Bar Graph example](/img/chronograf/chrono-viz-bar-graph-example.png)
 
 
 ### Line Graph + Single Stat
@@ -204,11 +204,11 @@ The **Gauge** view displays the single value most recent value for a time series
 
 To select this view, click the Gauge selector icon.
 
-![Gauge view](/img/chronograf/chrono-viz-gauge-selector.png)
+![Gauge selector](/img/chronograf/chrono-viz-gauge-selector.png)
 
 #### Gauge Controls
 
-![Gauge view](/img/chronograf/chrono-viz-gauge-controls.png)
+![Gauge Controls](/img/chronograf/chrono-viz-gauge-controls.png)
 
 Use the **Gauge Controls** to specify the following:
 
@@ -222,15 +222,17 @@ Use the **Gauge Controls** to specify the following:
 
 #### Gauge example
 
-![Gauge view](/img/chronograf/chrono-viz-gauge-example.png)
+![Gauge example](/img/chronograf/chrono-viz-gauge-example.png)
 
 ### Table
 
 The **Table** panel displays the results of queries in a tabular view, which is sometimes easier to analyze than graph views of data.
 
-![Table view](/img/chronograf/chrono-viz-table-selector.png)
+![Table selector](/img/chronograf/chrono-viz-table-selector.png)
 
 #### Table Controls
+
+![Table Controls](/img/chronograf/chrono-viz-table-controls.png)
 
 Use the **Table Controls** to specify the following:
 
@@ -254,4 +256,4 @@ Use the **Table Controls** to specify the following:
 
 #### Table view example
 
-![Table view example](/img/chronograf/chrono-viz-table-example.png)
+![Table example](/img/chronograf/chrono-viz-table-example.png)
