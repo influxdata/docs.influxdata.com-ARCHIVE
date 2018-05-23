@@ -45,7 +45,7 @@ If an error occurs, then this operation will fall back to the original in-memory
 > or ensure that the permissions match afterward.
 
 ```
-influx_inspect buildtsi -datadir <data_directory> -waldir <WAL_directory> [ options ]
+influx_inspect buildtsi -datadir <data_directory> -waldir <WAL_directory> [ arguments ]
 ```
 #### Arguments
 
@@ -99,7 +99,7 @@ Dumps low-level details about TSI files, including `.tsl` log files and `.tsi` i
 #### Usage
 
 ```
-influx_inspect dumptsi [ options ] <index_path>
+influx_inspect dumptsi [ arguments ] <index_path>
 ```
 
 ##### `<index_path>`
@@ -163,7 +163,7 @@ Dumps low-level details about [TSM](/influxdb/v1.5/concepts/glossary/#tsm-time-s
 #### Usage
 
 ```
-influx_inspect dumptsm [ options ] <path>
+influx_inspect dumptsm [ arguments ] <path>
 ```
 
 ##### `<path>`
@@ -198,7 +198,7 @@ command.
 
 #### Usage
 ```
-influx_inspect export [options]
+influx_inspect export [ arguments ]
 ```
 
 #### Arguments
@@ -275,7 +275,7 @@ The default location is [$HOME/.influxdb].
 
 #### Usage
 ```
-influx_inspect report [ options ]
+influx_inspect report [ arguments ]
 ```
 #### Arguments
 
