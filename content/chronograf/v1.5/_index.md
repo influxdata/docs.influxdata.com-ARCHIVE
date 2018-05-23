@@ -1,5 +1,5 @@
 ---
-title: Chronograf 1.4 documentation
+title: Chronograf 1.5 documentation
 aliases:
   - /influxdb/v1.5/chronograf/
 
