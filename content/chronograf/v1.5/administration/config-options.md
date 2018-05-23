@@ -2,7 +2,7 @@
 title: Chronograf configuration options
 description: Details on configuration settings (command line options and environment variables) for Chronograf services, Kapacitor and InfluxDB connections, and OAuth 2.0 authentication providers.
 menu:
-  chronograf_1_4:
+  chronograf_1_5:
     name: Configuration options
     weight: 30
     parent: Administration
@@ -90,12 +90,6 @@ The URL path prefix under which all `chronograf` routes will be mounted.
 
 Environment variable: `$BASE_PATH`
 
-#### `--prefix-routes`
-
-Forces the `chronograf` service to require that all requests are prefixed with the value set in `--basepath`.
-
-Environment variable: `$PREFIX_ROUTES`
-
 #### `--status-feed-url=`
 
 URL of JSON feed to display as a news feed on the client Status page.
@@ -160,7 +154,7 @@ Environment variable: `$KAPACITOR_PASSWORD`
 
 ### TLS (Transport Layer Security) options
 
-See [Configuring TLS (Transport Layer Security) and HTTPS](/chronograf/v1.4/administration/managing-security/#configuring-tls-transport-layer-security-and-https) for more information.
+See [Configuring TLS (Transport Layer Security) and HTTPS](/chronograf/v1.5/administration/managing-security/#configuring-tls-transport-layer-security-and-https) for more information.
 
 #### `--cert=`
 
@@ -240,7 +234,7 @@ Environment variable: `$PUBLIC_URL`
 
 ### GitHub-specific OAuth 2.0 authentication options
 
-See [Configuring GitHub authentication](/chronograf/v1.4/administration/managing-security/#configuring-github-authentication) for more information.
+See [Configuring GitHub authentication](/chronograf/v1.5/administration/managing-security/#configuring-github-authentication) for more information.
 
 #### `--github-client-id=` | `-i`
 
@@ -262,7 +256,7 @@ Environment variable: `$GH_ORGS`
 
 ### Google-specific OAuth 2.0 authentication options
 
-See [Configuring Google authentication](/chronograf/v1.4/administration/managing-security/#configuring-google-authentication) for more information.
+See [Configuring Google authentication](/chronograf/v1.5/administration/managing-security/#configuring-google-authentication) for more information.
 
 #### `--google-client-id=`
 
@@ -284,7 +278,7 @@ Environment variable: `$GOOGLE_DOMAINS`
 
 ### Auth0-specific OAuth 2.0 authentication options
 
-See [Configuring Auth0 authentication](/chronograf/v1.4/administration/managing-security/#configuring-auth0-authentication) for more information.
+See [Configuring Auth0 authentication](/chronograf/v1.5/administration/managing-security/#configuring-auth0-authentication) for more information.
 
 #### `--auth0-domain=`
 
@@ -316,7 +310,7 @@ Environment variable: `$AUTH0_ORGS`
 
 ### Heroku-specific OAuth 2.0 authentication options
 
-See [Configuring Heroku authentication](/chronograf/v1.4/administration/managing-security/#configuring-heroku-authentication) for more information.
+See [Configuring Heroku authentication](/chronograf/v1.5/administration/managing-security/#configuring-heroku-authentication) for more information.
 
 ### `--heroku-client-id=`                         
 The Heroku Client ID for OAuth 2.0 support.
@@ -337,7 +331,7 @@ Lists are comma-separated.
 
 ### Generic OAuth 2.0 authentication options
 
-See [Configuring Generic authentication](/chronograf/v1.4/administration/managing-security/#configuring-generic-authentication) for more information.
+See [Configuring Generic authentication](/chronograf/v1.5/administration/managing-security/#configuring-generic-authentication) for more information.
 
 #### `--generic-name=`
 
