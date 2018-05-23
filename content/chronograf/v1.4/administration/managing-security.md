@@ -351,19 +351,19 @@ Additionally, the generic provider implements OpenID Connect (OIDC) as implement
 
 Depending on your OAuth 2.0 provider, many or all of the following environment variables (or corresponding command line options) are required by Chronograf when using the Generic configuration:
 
-* `GENERIC_CLIENT_ID`: Application client [identifier](https://tools.ietf.org/html/rfc6749#section-2.2) issued by the provider
-* `GENERIC_CLIENT_SECRET`: Application client [secret](https://tools.ietf.org/html/rfc6749#section-2.3.1) issued by the provider
-* `GENERIC_AUTH_URL`: Provider's authorization [endpoint](https://tools.ietf.org/html/rfc6749#section-3.1) URL
-* `GENERIC_TOKEN_URL`: Provider's token [endpoint](https://tools.ietf.org/html/rfc6749#section-3.2) URL used by the Chronograf client to obtain an access token
-* `USE_ID_TOKEN`: Enable OpenID [id_token](https://openid.net/specs/openid-connect-core-1_0.html#rfc.section.3.1.3.3) processing
-* `JWKS_URL`: OAuth 2.0 provider's jwks [endpoint](https://tools.ietf.org/html/rfc7517#section-4.7) is used by the client to validate RSA signatures
-* `GENERIC_API_URL`: Provider's [OpenID UserInfo endpoint](https://connect2id.com/products/server/docs/api/userinfo)] URL used by Chronograf to request user data
-* `GENERIC_API_KEY`: JSON lookup key for [OpenID UserInfo](https://connect2id.com/products/server/docs/api/userinfo)] (known to be required for Microsoft Azure, with the value `userPrincipalName`)
-* `GENERIC_SCOPES`: [Scopes](https://tools.ietf.org/html/rfc6749#section-3.3) of user data required for your instance of Chronograf, such as user email and OAuth provider organization
+* `GENERIC_CLIENT_ID`: Application [client identifier](https://tools.ietf.org/html/rfc6749#section-2.2) issued by the provider
+* `GENERIC_CLIENT_SECRET`: Application [client secret](https://tools.ietf.org/html/rfc6749#section-2.3.1) issued by the provider
+* `GENERIC_AUTH_URL`: Provider's [authorization endpoint](https://tools.ietf.org/html/rfc6749#section-3.1) URL
+* `GENERIC_TOKEN_URL`: Provider's [token endpoint](https://tools.ietf.org/html/rfc6749#section-3.2) URL used by the Chronograf client to obtain an access token
+* `USE_ID_TOKEN`: Enable OpenID Connect [id_token](https://openid.net/specs/openid-connect-core-1_0.html#rfc.section.3.1.3.3) processing
+* `JWKS_URL`: OAuth 2.0 provider's [JWKS endpoint](https://tools.ietf.org/html/rfc7517#section-4.7) is used by the client to validate RSA signatures
+* `GENERIC_API_URL`: Provider's OpenID Connect [UserInfo endpoint](https://connect2id.com/products/server/docs/api/userinfo)] URL used by Chronograf to request user data
+* `GENERIC_API_KEY`: JSON claim (used to lookup a unique identifier in the identity provider) for OpenID Connect [UserInfo endpoint](https://connect2id.com/products/server/docs/api/userinfo)] (known to be required for Microsoft Azure, with the value `userPrincipalName`)
+* `GENERIC_SCOPES`: [Scopes](https://tools.ietf.org/html/rfc6749#section-3.3) of user data required for your instance of Chronograf, such as user email and OAuth 2.0 provider organization
   - Multiple values must be space-delimited, e.g. `user:email read:org`
   - These may vary by OAuth 2.0 provider
   - Default value: `user:email`
-* `PUBLIC_URL`: Full public URL used to access Chronograf from a web browser, i.e. where Chronograf is hosted
+* `PUBLIC_URL`: Full public URL used to access Chronograf from a web browser, i.e., where Chronograf is hosted
   - Used by Chronograf, for example, to construct the callback URL
 * `TOKEN_SECRET`: Used to validate OAuth [state](https://tools.ietf.org/html/rfc6749#section-4.1.1) response. (see above)
 
@@ -371,10 +371,10 @@ Depending on your OAuth 2.0 provider, many or all of the following environment v
 
 The following environment variables (and corresponding command line options) are also available for optional use:
 
-* `GENERIC_DOMAINS`: Email domain where email address must include.
-* `GENERIC_NAME`: Value used in the callback URL in conjunction with `PUBLIC_URL`, e.g. `<PUBLIC_URL>/oauth/<GENERIC_NAME>/callback`
-  - This value is also used in the text for the Chronograf Login button
-  - Default value is `generic`
+* `GENERIC_DOMAINS`: Email domains required in email addresses.
+* `GENERIC_NAME`: Value used in the callback URL in conjunction with `PUBLIC_URL`, e.g. `<PUBLIC_URL>/oauth/<GENERIC_NAME>/callback`.
+  - This value is also used in the text for the Chronograf Login button.
+  - Default value is `generic`.
   - So, for example, if `PUBLIC_URL` is `https://localhost:8888` and `GENERIC_NAME` is its default value, then the callback URL would be `https://localhost:8888/oauth/generic/callback`, and the Chronograf Login button would read `Log in with Generic`
   - While using Chronograf, this value should be supplied in the `Provider` field when adding a user or creating an organization mapping.
 
