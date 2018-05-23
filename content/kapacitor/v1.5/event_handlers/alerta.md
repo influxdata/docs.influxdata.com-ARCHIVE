@@ -107,7 +107,7 @@ options:
 ## Using the Alerta event handler
 With the Alerta event handler enabled and configured in your `kapacitor.conf`,
 use the `.alerta()` attribute in your TICKscripts to send alerts to Alerta or
-define a Alerta handler that subscribes to a topic and sends published alerts
+define an Alerta handler that subscribes to a topic and sends published alerts
 to Alerta.
 
 > To avoid posting a message every alert interval, use

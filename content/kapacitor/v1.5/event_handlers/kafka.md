@@ -8,7 +8,7 @@ menu:
     parent: event-handlers
 ---
 
-[Apache Kafka](https://kafka.apache.org/) is distributed streaming platform
+[Apache Kafka](https://kafka.apache.org/) is a distributed streaming platform
 designed for building real-time data pipelines and streaming apps.
 Kapacitor can be configured to send alert messages to a Kafka cluster.
 
