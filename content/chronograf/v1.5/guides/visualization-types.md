@@ -253,3 +253,5 @@ Use the **Table Controls** to specify the following:
     * Color options: Ruby, Fire, Curacao, Tiger, Pineapple, Thunder, Honeydew, Rainforest, Viridian, Ocean, Pool, Laser (default), Planet, Star, Comet, Pepper, Graphite, White, and Castle.
 
 #### Table view example
+
+![Table view example](/img/chronograf/chrono-viz-table-example.png)
