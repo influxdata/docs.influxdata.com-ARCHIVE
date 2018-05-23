@@ -51,19 +51,18 @@ stream
     .precision('s')
 ```
 
-The above example computes the mean of cpu usage_percent by host_name name and group_name
-Then sum of mean cpu_usage is calculated as total_cpu.
-Using the total_cpu over the last time period a desired number of replicas is computed
-based on the target percentage usage of cpu.
+The above example computes the mean of CPU `usage_percent` by `host_name`, `name`, and `group_name`.
+The sum of mean CPU usage is calculated as `total_cpu`.
+Using the `total_cpu` over the last time period, a desired number of replicas is computed
+based on the target percentage usage of CPU.
 
-If the desired number of replicas has changed, Kapacitor makes the appropriate API call to AWS autoscaling group
-to update the replicas spec.
+If the desired number of replicas has changed, Kapacitor makes the appropriate API
+call to the AWS autoscaling group to update the replica's spec.
 
 Any time the Ec2Autoscale node changes a replica count, it emits a point.
-The point is tagged with the group name,
-using the groupName respectively
-In addition the group by tags will be preserved on the emitted point.
-The point contains two fields: `old`, and `new` representing change in the replicas.
+The point is tagged with the group name using the `groupName`.
+In addition, the group by tags is preserved on the emitted point.
+The point contains two fields representing change in the replicas: `old` and `new`.
 
 Available Statistics:
 
