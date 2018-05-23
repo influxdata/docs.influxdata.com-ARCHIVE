@@ -5,7 +5,7 @@ menu:
   chronograf:
     name: Deprecated
     identifier: chronograf_deprecated
-    weight: 15
+    weight: 100
 ---
 
 The closed source versions of Chronograf (versions 0.4, 0.10 through 0.13, and 1.0) are deprecated and are no longer supported or developed.
