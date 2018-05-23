@@ -19,11 +19,9 @@ Starting in version 1.5, the InfluxDB OSS `backup` utility provides:
 * Data can be imported from [InfluxDB Enterprise](/enterprise_influxdb/latest/) clusters
 * Backup files that can be imported into an InfluxDB Enterprise database.
 
-> **Note:** Note: This section covers the InfluxDB OSS backup/restore utility.  If you are using an InfluxDB Enterprise cluster, see [Backing up and restoring in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/backup-and-restore/) in the InfluxDB Enterprise documentation.
+> **InfluxDB Enterprise users:** See [Backing up and restoring in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/backup-and-restore/).
 
-> ***Note:*** The offline backup and restore functions provided in InfluxDB OSS versions 1.4 and earlier are retained in version 1.5 without change, and are detailed below in [Backward compatible offline backup and restore](#backward-compatible-offline-backup-and-restore-legacy-format).
-
-> ***Note:*** Prior to version 1.5, the InfluxDB OSS `backup` utility created  backup file formats, now referred to as the _legacy_ format, that were incompatible with the InfluxDB Enterprise version.  This legacy format is fully supported in the new `backup` utility as input for the new online restore function. If you are creating new backup processes, InfluxData recommends using the new InfluxDB Enterprise-compatible backup format, which uses less disk space and provides a clear transfer path for data between the InfluxDB Enterprise and InfluxDB OSS versions.
+> ***Note:*** Prior to InfluxDB OSS 1.5, the `backup` utility created backup file formats incompatible with InfluxDB Enterprise.  This legacy format is still supported in the new `backup` utility as input for the new *online* restore function. The *offline* backup and restore utilities in InfluxDB OSS versions 1.4 and earlier are deprecated, but are documented below in [Backward compatible offline backup and restore](#backward-compatible-offline-backup-and-restore-legacy-format).
 
 ## Online backup and restore (for InfluxDB OSS)
 
@@ -93,24 +91,25 @@ Optional arguments are enclosed in brackets.
 
 #### Backup examples
 
-To back up everything:
+**To back up everything:**
+
 ```
 influxd backup -portable <path-to-backup>
 ```
 
-To backup all databases recently changed at the filesystem level
+**To backup all databases recently changed at the filesystem level**
 
 ```
 influxd backup -portable -start <timestamp> <path-to-backup>
 ```
 
-To backup only the `telegraf` database:
+**To backup only the `telegraf` database:**
 
 ```
 influxd backup -portable -database telegraf <path-to-backup>
 ```
 
-To backup a database for a specified time interval:
+**To backup a database for a specified time interval:**
 
 ```
 influxd backup  -portable -database mytsd -start 2017-04-28T06:49:00Z -end 2017-04-28T06:50:00Z /tmp/backup/influxdb
@@ -124,6 +123,7 @@ An online `restore` process is initiated by using the `restore` command with eit
 influxd restore [ -db <db_name> ]
     -portable | -online
     [ -host <host:port> ]
+    [ -newdb <newdb_name> ]
     [ -rp <rp_name> ]
     [ -newrp <newrp_name> ]
     [ -shard <shard_ID> ]
@@ -150,11 +150,55 @@ Optional arguments are enclosed in brackets.
 
 - `[ -shard <shard_ID> ]`: Shard ID of the shard to be restored. If specified, then `-db` and `-rp` are required.
 
-> **Note:** For automated backups using the legacy format, consider using the new online feature for legacy backups.  The new backup utility lets you restore a single database to a live (online) instance, while leaving all existing data on the server in place.  The [offline restore method (described below)](#restore-legacy) may result in data loss, since it clears all existing databases on the server.
+> **Note:** If you have automated backups based on the legacy format, consider using the new online feature for your legacy backups.  The new backup utility lets you restore a single database to a live (online) instance, while leaving all existing data on the server in place.  The [offline restore method (described below)](#restore-legacy) may result in data loss, since it clears all existing databases on the server.
+
+#### Restore examples
+
+**To restore all databases found within the backup directory:**
+
+```
+influxd restore -portable path-to-backup
+```
+
+**To restore only the `telegraf` database (telegraf database must not exist):**
+
+```
+influxd restore -portable -db telegraf path-to-backup
+```
+
+**To restore data to a database that already exists:**
+
+1. Restore the database to a temporary database.
+
+ ```
+ influxd restore -portable -db telegraf -newdb telegraf_bak path-to-backup
+ ```
+2. Sideload into the target database and drop the temporary database.
+
+```
+> use telegraf_bak
+> SELECT * INTO telegraf..:MEASUREMENT FROM /.*/ GROUP BY *
+> drop telegraf_bak
+```
+
+**To restore to a retention policy that already exists:**
+
+1. Restore the retention policy to a temporary database.
+
+ ```
+ influxd restore -portable -db telegraf -newdb telegraf_bak -rp autogen -newrp autogen_bak path-to-backup
+ ```
+2. Sideload into the target database and drop the temporary database.
+
+```
+> use telegraf_bak
+> SELECT * INTO telegraf.autogen.:MEASUREMENT FROM /telegraf_bak.autogen_bak.*/ GROUP BY *
+> drop telegraf_bak
+```
 
 ### Backward compatible offline backup and restore (legacy format)
 
-> ***Note:*** The backward compatible backup and restore for InfluxDB OSS described below are now supported as the legacy format. InfluxData recommends using the newer Enterprise-compatible backup and restore utilities with InfluxDB OSS servers.
+> ***Note:*** The backward compatible backup and restore for InfluxDB OSS documented below are deprecated. InfluxData recommends using the newer Enterprise-compatible backup and restore utilities with your InfluxDB OSS servers.
 
 InfluxDB OSS has the ability to snapshot an instance at a point-in-time and restore it.
 All backups are full backups; incremental backups are not supported.

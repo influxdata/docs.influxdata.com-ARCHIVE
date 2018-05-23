@@ -51,7 +51,7 @@ Available Statistics:
 
 
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 Chaining Methods
 ----------------
@@ -73,7 +73,7 @@ Example:
 
 
 ```javascript
-    var data = stream
+    var data = batch
         |from()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
@@ -87,7 +87,7 @@ Example:
 
 
 ```javascript
-    var data = stream
+    var data = batch
         |from()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
@@ -97,7 +97,7 @@ Example:
             .unit(10s)
             .nonNegative()
         |alert()
-            .id('node \'stream0\' in task \'{{ .TaskName }}\'')
+            .id('node \'batch0\' in task \'{{ .TaskName }}\'')
             .message('{{ .ID }} is {{ if eq .Level "OK" }}alive{{ else }}dead{{ end }}: {{ index .Fields "emitted" | printf "%0.3f" }} points/10s.')
             .crit(lambda: "emitted" <= 100.0)
     //Do normal processing of data
@@ -111,7 +111,7 @@ Example:
 
 
 ```javascript
-    var data = stream
+    var data = batch
         |from()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
@@ -127,7 +127,7 @@ Example:
 
 
 ```javascript
-    var data = stream
+    var data = batch
         |from()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     // Only trigger the alert if the time of day is between 8am-5pm.
@@ -145,7 +145,7 @@ batch|deadman(threshold float64, interval time.Duration, expr ...ast.LambdaNode)
 
 Returns: [AlertNode](/kapacitor/v1.4/nodes/alert_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Query
 
@@ -162,11 +162,11 @@ batch|query(q string)
 
 Returns: [QueryNode](/kapacitor/v1.4/nodes/query_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 ### Stats
 
-Create a new stream of data that contains the internal statistics of the node.
+Create a new batch of data that contains the internal statistics of the node.
 The interval represents how often to emit the statistics based on real time.
 This means the interval time is independent of the times of the data points the source node is receiving.
 
@@ -177,4 +177,4 @@ batch|stats(interval time.Duration)
 
 Returns: [StatsNode](/kapacitor/v1.4/nodes/stats_node/)
 
-<a href="javascript:document.getElementsByClassName('article')[0].scrollIntoView();" title="top">^</a>
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
