@@ -1,5 +1,5 @@
 ---
-title: Chronograf 1.4 documentation
+title: Chronograf 1.5 documentation
 aliases:
   - /influxdb/v1.5/chronograf/
 
@@ -7,7 +7,7 @@ menu:
   chronograf:
     name: v1.5
     identifier: chronograf_1_5
-    weight: 0
+    weight: 1
 ---
 
 Chronograf is InfluxData's open source web application.
