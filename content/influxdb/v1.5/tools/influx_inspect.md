@@ -13,7 +13,7 @@ Influx Inspect is a disk shard utility that can be used to:
 * Exporting data from a shard to [line protocol](/influxdb/v1.5/concepts/glossary/#line-protocol) that can be inserted back into the database.
 * Converting TSM in-memory index shards to TSI disk-based shards.
 
-### `influx_inspect [ [ command ] [ options ] ]`
+### `influx_inspect [ [ command ] [ arguments ] ]`
 
 `-help` is the default command and will print usage for the tool.
 
@@ -22,7 +22,7 @@ The `influx_inspect` commands are:
 * [`buildtsi`](#influx-inspect-buildtsi): Converts in-memory (TSM-based) shards to TSI.
 * [`dumptsi`](#influx-inspect-dumptsi): Dumps low-level details about TSI files.
 * [`dumptsm`](#influx-inspect-dumptsm): Dumps low-level details about TSM files.
-* [`export`](#influx-inspect-export): Exports raw data from a shard to Line Protocol.
+* [`export`](#influx-inspect-export): Exports raw data from a shard to Line Protocol format.
 * [`help`](#influx-inspect-help): Displays this help message format.
 * [`report`](#influx-inspect-report): Displays a shard level report.
 * [`verify`](#influx-inspect-verify): Verifies integrity of TSM files.
@@ -295,7 +295,7 @@ Verifies the integrity of TSM files.
 
 #### Usage
 ```
-influx_inspect verify [ options ]
+influx_inspect verify [ arguments ]
 ```
 #### Arguments
 

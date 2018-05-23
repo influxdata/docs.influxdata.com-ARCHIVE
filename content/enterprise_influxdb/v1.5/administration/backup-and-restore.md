@@ -1,5 +1,6 @@
 ---
 title: Backing up and restoring in InfluxDB Enterprise
+description: Overview and backup and restore utilities for use with InfluxDB Enterprise.
 aliases:
     - /enterprise/v1.5/guides/backup-and-restore/
 menu:
@@ -44,15 +45,15 @@ To prevent issues with [restore](#restore), keep `-full` backups and incremental
 ### Syntax
 
 ```
-influxd-ctl [global-options] backup [backup-options] <path-to-backup-directory>
+influxd-ctl [ global-arguments ] backup [ backup-arguments ] <path-to-backup-directory>
 ```
 
-#### Global options:
+#### Global arguments:
 
-Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.5/features/cluster-commands/#global-options)
-for a complete list of the global `influxd-ctl` options.
+Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.5/features/cluster-commands/#global-arguments)
+for a complete list of the global `influxd-ctl` arguments.
 
-#### Backup options:
+#### Backup arguments:
 
 * `-db <string>`: the name of the single database to back up
 * `-from <TCP-address>`: the data node TCP address to prefer when backing up
@@ -64,7 +65,7 @@ for a complete list of the global `influxd-ctl` options.
 
 Store the following incremental backups in different directories.
 The first backup specifies `-db myfirstdb` and the second backup specifies
-different options: `-db myfirstdb` and `-rp autogen`.
+different arguments: `-db myfirstdb` and `-rp autogen`.
 ```
 influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
 
@@ -171,19 +172,19 @@ Note that the existing cluster must contain no data in the affected databases.*
 Performing a restore from an incremental backup requires the path to the incremental backup's directory.
 
 ```
-influxd-ctl [global-options] restore [restore-options] <path-to-backup-directory>
+influxd-ctl [global-arguments] restore [restore-arguments] <path-to-backup-directory>
 ```
 
 \* The existing cluster can have data in the `_internal` database, the database
 that the system creates by default.
 The system automatically drops the `_internal` database when it performs a complete restore.
 
-#### Global options:
+#### Global arguments
 
-Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.5/features/cluster-commands/#global-options)
-for a complete list of the global `influxd-ctl` options.
+Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.5/features/cluster-commands/#global-arguments)
+for a complete list of the global `influxd-ctl` arguments.
 
-#### Restore options:
+#### Restore arguments
 
 * `-db <string>`: the name of the single database to restore
 * `-list`: shows the contents of the backup
@@ -200,7 +201,7 @@ Note that the existing cluster must contain no data in the affected databases.*
 Performing a restore from a `-full` backup requires the `-full` flag and the path to the full backup's manifest file.
 
 ```
-influxd-ctl [global-options] restore [options] -full <path-to-manifest-file>
+influxd-ctl [ global-arguments ] restore [ arguments ] -full <path-to-manifest-file>
 ```
 
 \* The existing cluster can have data in the `_internal` database, the database
@@ -208,24 +209,24 @@ that the system creates by default.
 The system automatically drops the `_internal` database when it performs a
 complete restore.
 
-#### Global options:
+#### Global arguments:
 
-Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.5/features/cluster-commands/#global-options)
-for a complete list of the global `influxd-ctl` options.
+Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.5/features/cluster-commands/#global-arguments)
+for a complete list of the global `influxd-ctl` arguments.
 
-#### Restore options:
+#### Restore arguments:
 
-* `-db <string>`: the name of the single database to restore
+* `-db <db_name>`: Name of the single database to restore
 * `-list`: shows the contents of the backup
-* `-newdb <string>`: the name of the new database to restore to (must specify with `-db`)
-* `-newrf <int>`: the new replication factor to restore to (this is capped to the number of data nodes in the cluster)
-* `-newrp <string>`: the name of the new retention policy to restore to (must specify with `-rp`)
-* `-rp <string>`: the name of the single retention policy to restore
-* `-shard <unit>`: the shard ID to restore
+* `-newdb <newdb_name>`: Name of the new database to restore to (must specify with `-db`)
+* `-newrf <newrf>`: New replication factor to restore to (this is capped to the number of data nodes in the cluster)
+* `-newrp <newrp_name>`: Name of the new retention policy to restore to (must specify with `-rp`)
+* `-rp <rp_name>`: Name of the single retention policy to restore
+* `-shard <shard_ID>`: Shard ID to restore
 
 ### Examples
 
-#### Example 1: Perform a restore from an incremental backup
+#### Perform a restore from an incremental backup
 
 ```
 influxd-ctl restore <path-to-backup-directory>
@@ -242,7 +243,7 @@ Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Rest
 Restored from my-incremental-backup/ in 83.892591ms, transferred 588800 bytes
 ```
 
-#### Example 2: Perform a restore from a `-full` backup
+#### Perform a restore from a `-full` backup
 
 ```
 influxd-ctl restore -full <path-to-manifest-file>
@@ -258,7 +259,7 @@ Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Rest
 Restored from my-full-backup in 58.58301ms, transferred 569344 bytes
 ```
 
-#### Example 3: Perform a restore from an incremental backup for a single database and give the database a new name
+#### Perform a restore from an incremental backup for a single database and give the database a new name
 
 ```
 influxd-ctl restore -db <src> -newdb <dest> <path-to-backup-directory>
@@ -275,7 +276,7 @@ Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Rest
 Restored from my-incremental-backup/ in 66.715524ms, transferred 588800 bytes
 ```
 
-#### Example 4: Perform a restore from an incremental backup for a database and merge that database into an existing database
+#### Perform a restore from an incremental backup for a database and merge that database into an existing database
 
 Your `telegraf` database was mistakenly dropped, but you have a recent backup so you've only lost a small amount of data.
 
@@ -290,7 +291,7 @@ Restoring meta data... Error.
 restore: operation exited with error: problem setting snapshot: database already exists
 ```
 
-To work around this, you can restore your telegraf backup into a new database by specifying the `-db` flag for the source and the `-newdb` flag for the new destination:
+To work around this, you can restore your `telegraf` backup into a new database by specifying the `-db` flag for the source and the `-newdb` flag for the new destination:
 
 ```
 $ influxd-ctl restore -db telegraf -newdb restored_telegraf my-incremental-backup/
@@ -315,9 +316,9 @@ time                  written
 1970-01-01T00:00:00Z  471
 ```
 
-### Common Issues with Restore
+### Common Issues with restore
 
-#### Issue 1: Restore writes information not part of the original backup
+#### Restore writes information not part of the original backup
 
 If a [restore from an incremental backup](#syntax-for-a-restore-from-an-incremental-backup) does not limit the restore to the same database, retention policy, and shard specified by the backup command, the restore may appear to restore information that was not part of the original backup.
 Backups consist of a shard data backup and a metastore backup.
@@ -326,13 +327,13 @@ The **metastore backup** contains user information, database names, retention po
 
 When the system creates a backup, the backup includes:
 
-* the relevant shard data determined by the specified backup options
-* all of the metastore information in the cluster regardless of the specified backup options
+* the relevant shard data determined by the specified backup arguments.
+* all of the metastore information in the cluster regardless of the specified backup arguments.
 
-Because a backup always includes the complete metastore information, a restore that doesn't include the same options specified by the backup command may appear to restore data that were not targeted by the original backup.
+Because a backup always includes the complete metastore information, a restore that doesn't include the same arguments specified by the backup command may appear to restore data that were not targeted by the original backup.
 The unintended data, however, include only the metastore information, not the shard data associated with that metastore information.
 
-#### Issue 2: Restore a backup created prior to version 1.2.0
+#### Restore a backup created prior to version 1.2.0
 
 InfluxEnterprise introduced incremental backups in version 1.2.0.
 To restore a backup created prior to version 1.2.0, be sure to follow the syntax
