@@ -14,7 +14,7 @@ InfluxDB Enterprise includes two utilities for interacting with and managing you
 
 #### Content
 
-* [`influxd-ctl` cluster management utility](#influxd-ctl)
+* [`influxd-ctl` cluster management utility](#influxd-ctl-cluster-management-utility)
     * [Syntax](#syntax)
     * [Global options](#global-arguments)
         * [`-auth-type`](#auth-type)
@@ -42,7 +42,7 @@ InfluxDB Enterprise includes two utilities for interacting with and managing you
         * [`update-data`](#update-data)
         * [`token`](#token)
         * [`truncate-shards`](#truncate-shards)
-* [`influx` command line interface](#influx-cli-utility)
+* [`influx` command line interface](#influx-command-line-interface)
 
 
 ## `influxd-ctl` cluster management utility
