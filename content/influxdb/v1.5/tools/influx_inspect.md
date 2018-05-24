@@ -289,11 +289,12 @@ randset value=25.3849066842 1439856100000000000
 Displays series meta-data for all shards.
 The default location is [$HOME/.influxdb].
 
-#### Usage
+#### Syntax
 
 ```
 influx_inspect report [ arguments ]
 ```
+
 #### Arguments
 
 Optional arguments are in brackets.
