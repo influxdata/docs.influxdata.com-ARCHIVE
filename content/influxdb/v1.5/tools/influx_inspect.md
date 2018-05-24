@@ -171,7 +171,7 @@ $ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index/file0 /
 
 Dumps low-level details about [TSM](/influxdb/v1.5/concepts/glossary/#tsm-time-structured-merge-tree) files.
 
-#### Usage
+#### Syntax
 
 ```
 influx_inspect dumptsm [ arguments ] <path>
