@@ -28,7 +28,7 @@ The `influx_inspect` commands are:
 * [`verify`](#influx-inspect-verify): Verifies integrity of TSM files.
 
 
-### `influx_inspect buildtsi`
+### `buildtsi`
 
 Converts shards using in-memory indexes to shards supporting TSI (time series index) disk-based index files.
 The index is written to a temporary location until complete and then moved to a permanent location.
@@ -39,7 +39,7 @@ If an error occurs, then this operation will fall back to the original in-memory
 > Existing shards continue as TSM-based shards until
 > converted offline.
 
-#### Usage
+#### Syntax
 
 > **Note:** Run the `buildtsi` command using the user account that you are going to run the database as,
 > or ensure that the permissions match afterward.
@@ -47,6 +47,7 @@ If an error occurs, then this operation will fall back to the original in-memory
 ```
 influx_inspect buildtsi -datadir <data_directory> -waldir <WAL_directory> [ arguments ]
 ```
+
 #### Arguments
 
 Optional arguments are in brackets.
@@ -96,13 +97,14 @@ $ influx_inspect buildtsi -database stress -shard 1 -datadir ~/.influxdb/data -w
 
 Dumps low-level details about TSI files, including `.tsl` log files and `.tsi` index files.
 
-#### Usage
+#### Syntax
 
 ```
 influx_inspect dumptsi [ arguments ] <index_path>
 ```
 
 ##### `<index_path>`
+
 Path to the `index` directory, or paths to individual `index` files. Paths are space-separated. Specify the `index` directory unless you need to target individual `index` files for debugging. See the examples below.
 
 
@@ -112,40 +114,49 @@ Optional arguments are in brackets.
 If optional arguments are not specified, the `dumptsi` command returns summary statistics for each file.
 
 ##### `-series-file <series_path>`
+
 Path to the `_series` directory under the database `data` directory. Required.
 
 ##### [ `-series` ]
+
 Dump raw series data.
 
 ##### [ `-measurements` ]
+
 Dump raw [measurement](/influxdb/v1.5/concepts/glossary/#measurement) data.
 
 ##### [ `-tag-keys` ]
+
 Dump raw [tag keys](/influxdb/v1.5/concepts/glossary/#tag-key).
 
 ##### [ `-tag-values` ]
+
 Dump raw [tag values](/influxdb/v1.5/concepts/glossary/#tag-value).
 
 ##### [ `-tag-value-series` ]
+
 Dump raw series for each tag value.
 
 ##### [ `-measurement-filter` <regular_expression> ]
+
 Filter data by measurement regular expression.
 
 ##### [ `-tag-key-filter <regular_expression>` ]
+
 Filter data by tag key regular expression.
 
 ##### [ `-tag-value-filter <regular_expresssion>` ]
+
 Filter data by tag value regular expression.
 
 #### Examples
 
-**Specifying paths to the `_series` and `index` directories**
+##### Specifying paths to the `_series` and `index` directories
 
 ```
 $ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index
 ```
-**Specifying paths to the `_series` directory and an `index` file**
+##### Specifying paths to the `_series` directory and an `index` file**
 
 ```
 $ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index/file0
@@ -173,14 +184,17 @@ Path to the `.tsm` file, located by default in the `data` directory.
 
 Optional arguments are in brackets.
 
-##### [ `-index true|false` ]
+##### [ `-index true | false` ]
+
 Dump raw index data.
 Default value is `false`.
 
-##### [ `-blocks true|false` ]
+##### [ `-blocks true | false` ]
+
 Dump raw block data. Default is `false`.
 
-##### [ `-all true|false` ]
+##### [ `-all true | false` ]
+
 Dump all data.  Default is `false`.
 Caution: This may print a lot of information.
 
@@ -196,7 +210,8 @@ This output file can be imported using the
 [influx](/influxdb/v1.5/tools/shell/#import-data-from-a-file-with-import)
 command.
 
-#### Usage
+#### Syntax
+
 ```
 influx_inspect export [ arguments ]
 ```
@@ -205,7 +220,7 @@ influx_inspect export [ arguments ]
 
 Optional arguments are in brackets.
 
-##### [ `-compress true|false` ]
+##### [ `-compress true | false` ]
 
 Compress the output.
 Default value is `false`.
@@ -243,13 +258,13 @@ Path to the [write-ahead log (WAL)](/influxdb/v1.5/concepts/glossary/#wal-write-
 
 #### Examples
 
-**Export entire database and compress the output:**
+##### Exporting entire database and compress the output
 
 ```
 influx_inspect export -compress
 ```
 
-##### Export data from a specific database and retention policy
+##### Exporting data from a specific database and retention policy
 
 ```
 influx_inspect export -database mydb -retention autogen
@@ -270,10 +285,12 @@ randset value=25.3849066842 1439856100000000000
 ```
 
 ### `influx_inspect report`
+
 Displays series meta-data for all shards.
 The default location is [$HOME/.influxdb].
 
 #### Usage
+
 ```
 influx_inspect report [ arguments ]
 ```
@@ -282,18 +299,22 @@ influx_inspect report [ arguments ]
 Optional arguments are in brackets.
 
 ##### [ `-pattern "<regular expression/wildcard>"` ]
+
 Include only files matching the specified pattern.
 Default value is `""`.
 
 ##### [ `-detailed true|false` ]
+
 Report detailed cardinality estimates.
 Default value is `false`.
 
 
 ### `influx_inspect verify`
+
 Verifies the integrity of TSM files.
 
-#### Usage
+#### Syntax
+
 ```
 influx_inspect verify [ arguments ]
 ```
@@ -305,7 +326,6 @@ Optional arguments are in brackets.
 
 Root storage path.
 ​Default value is `"/root/.influxdb"`.
-
 
 # Caveats
 
