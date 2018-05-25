@@ -16,7 +16,6 @@ menu:
 ### Bug fixes
 
 * Fix the validation for multiple nested distinct calls.
-
 * Return the correct auxiliary values for top/bottom.
 
 ## v1.5.2 [2018-04-12]
