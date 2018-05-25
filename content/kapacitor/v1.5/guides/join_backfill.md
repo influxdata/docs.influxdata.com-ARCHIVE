@@ -1,9 +1,9 @@
 ---
 title: Calculating rates across joined series + backfill
 aliases:
-    - kapacitor/v1.4/examples/join_backfill/
+    - kapacitor/v1.5/examples/join_backfill/
 menu:
-  kapacitor_1_4:
+  kapacitor_1_5:
     name: Calculating rates across series
     weight: 10
     parent: Guides
