@@ -249,7 +249,7 @@ influxd-ctl update-data enterprise-data-01:8088 enterprise-data-03:8088
 
 ### 3. Confirm the data node was added
 
-Confirm the new meta-node has been added by running:
+Confirm the new data node has been added by running:
 
 ```bash
 influxd-ctl show
