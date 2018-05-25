@@ -40,8 +40,7 @@ menu:
 
 #### Print a default configuration file
 
-The following commands print out a TOML-formatted configuration with all
-available settings set to their default values.
+The following commands print out a TOML-formatted configuration with all available settings set to their default values.
 
 Meta configuration:
 ```
@@ -379,11 +378,15 @@ Meta logging toggles the logging of messages from the meta service.
 
 Environment variable: `INFLUXDB_META_LOGGING_ENABLED`
 
-###  pprof-enabled = true
+### `pprof-enabled = true`
 
-Set to `false` to disable the `/debug/pprof` endpoint for troubleshooting.
+Enable the `/net/http/pprof` endpoint. Useful for troubleshooting and monitoring.
 
-Environment variable: `INFLUXDB_META_PPROF_ENABLED`
+Environment variable: `INFLUXDB_HTTP_PPROF_ENABLED`
+
+### `debug-pprof-enabled = false`
+
+Enable the default `/net/http/pprof` endpoint and bind against `localhost:6060`. Useful for debugging startup performance issues.
 
 ###  lease-duration = "1m0s"
 
