@@ -6,7 +6,7 @@ menu:
   kapacitor_1_5:
     name: Calculating rates across series
     weight: 10
-    parent: Guides
+    parent: guides
 ---
 
 Collecting a set of data series where each data series is counting a particular event is a common scenario.
