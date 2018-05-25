@@ -150,11 +150,10 @@ spanMMX.onclick = function(){
 * [Overview of authentication and authorization in the TICK stack](#overview-of-authentication-and-authorization-in-the-tick-stack)
 * [Enabling authentication in Kapacitor](#enabling-authentication-in-kapacitor)
 * [User and privilege management](#user-and-privilege-management)
-   * [User and privilege management over the InfluxDB Meta API](#user-and-privilege-management-over-the-influxd-meta-api)
-   * [User and privilege management with Chronograf](#user-and-privilege-management-with-chronograf)
+   * [User and privilege management over the InfluxDB Meta API](#user-and-privilege-management-over-the-influxdb-meta-api)
 
 ## Overview of authentication and authorization in the TICK stack
-
+   
 
 Kapacitor authorization and authentication involves three components of the
 enterprise TICK stack: InfluxDB Enterprise meta nodes, Kapacitor Enterprise and,
@@ -268,7 +267,7 @@ in the `[auth]` group.  These include:
 * `cache-expiration`: Defines how long a consumer service can hold a credential document in its cache.
 * `bcrypt-cost`: The number of iterations used when hashing the password using the bcrypt algorithm.  Higher values generate hashes more resilient to brute force cracking attempts, but lead to marginally longer resolution times.
 * `meta-addr`: Declares the address of the InfluxDB Enterprise meta node to connect to in order to access the user and permission store.
-* `meta-use-tls`: Declares whether to use TLS when communication with the influxdb-meta node or not.  Default is `false`.
+* `meta-use-tls`: Enables TLS to communicate with the InfluxDB meta node.  Default is `false`.
 
 Currently no alternative exists to using InfluxDB Enterprise meta nodes as the backend
 user and privilege store, so an address and port need to be supplied.
@@ -333,7 +332,7 @@ tokens include:
 
 Note that these privileges are system privileges and are separate from the
 database specific privileges that can be inspected using the `show grants for "<USER>"`
-command when connected to an Influxd-Data node.  When working with Kapacitor the
+command when connected to an InfluxDB data node.  When working with Kapacitor the
 last two privilege tokens are of interest.
 
 * `KapacitorAPI`: Grants the user permission to create, read, update and delete tasks, topics, handlers and similar Kapacitor artefacts.
@@ -343,13 +342,13 @@ Role means a predefined collection of privileges that can be assigned to a user.
 
 ÷Managing users, roles and privileges is most easily handled using the Chronograf
 InfluxDB Admin console.  However authentication and authorization entities can
-also be managed directly over the Influxd-Meta API.
+also be managed directly over the InfluxDB Meta API.
 
-### User and privilege management over the Influxd-meta API
+### User and privilege management over the InfluxDB Meta API
 
 #### Users
 
-The Influxd-Meta API provides an endpoint `/user` for managing users.
+The InfluxDB Meta API provides the endpoint `/user` for managing users.
 
 To view a list of existing users.
 
@@ -391,8 +390,8 @@ $ curl -u "admin:changeit" -s https://cluster_node_1:8091/user | python -m json.
 ```
 
 Transactions that modify the user store are initiated using HTTP POST and must
-be sent to the lead node in the Influxd-Meta raft.  If when POSTing a request the
-node returns a 307 redirect message, try resending the request to the lead node
+be sent to the lead node in the InfluxDB meta RAFT.  If the
+node returns a 307 redirect message when posting a request, try resending the request to the lead node
 indicated by the `Location` field in the HTTP header.
 
 **Example 5: Creating a user against a follower node**
@@ -1019,6 +1018,3 @@ $ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/role?name=
     "error": "role not found"
 }
 ```
-### Kapacitor user and privilege management using Chronograf
-
-See [Kapacitor user and privilege management](/chronograf/v1.4/administration/kapacitor-user-privilege-management/) in the Chronograf documentation.

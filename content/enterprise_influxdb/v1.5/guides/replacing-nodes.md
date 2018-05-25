@@ -15,9 +15,10 @@ This guide outlines processes for replacing both meta nodes and data nodes in an
 
 ## Concepts
 Meta nodes manage and monitor both the uptime of nodes in the cluster as well as distribution of [shards](/influxdb/v1.5/concepts/glossary/#shard) among nodes in the cluster.
-Meta nodes also handle the [anti-entropy](/enterprise_influxdb/v1.5/administration/anti-entropy/) (AE) process that ensures data nodes have the shards they need.
+They hold information about which data nodes own which shards; information on which the
+[anti-entropy](/enterprise_influxdb/v1.5/administration/anti-entropy/) (AE) process depends.
 
-Data nodes hold raw time-series data and metadata. Data shards are both distributed and replicated across data nodes in the cluster.
+Data nodes hold raw time-series data and metadata. Data shards are both distributed and replicated across data nodes in the cluster. The AE process runs on data nodes and references the shard information stored in the meta nodes to ensure each data node has the shards they need.
 
 `influxd-ctl` is a CLI included in each meta node and is used to manage your InfluxDB Enterprise cluster.
 

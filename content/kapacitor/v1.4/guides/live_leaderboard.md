@@ -10,19 +10,18 @@ menu:
     parent: Guides
 ---
 
-**If you do not have a running Kapacitor instance check out the [getting started guide](/kapacitor/v1.4/introduction/getting-started/)
-to get Kapacitor up and running on localhost.**
+**If you do not have a running Kapacitor instance, check out [Getting started with Kapacitor](/kapacitor/v1.4/introduction/getting-started/) to get Kapacitor up and running on localhost.**
 
 Today we are game developers.
-We host a several game servers each running an instance of the game code with about a hundred players per game.
+We host a several game servers, each running an instance of the game code, with about a hundred players per game.
 
-We need to build a leaderboard so spectators can see the player's scores in real time.
-We would also like to have historical data on leaders in order to do post game
-analysis on who was leading for how long etc.
+We need to build a leaderboard so that spectators can see player scores in realtime.
+We would also like to have historical data on leaders in order to do postgame
+analysis on who was leading for how long, etc.
 
 We will use Kapacitor stream processing to do the heavy lifting for us.
-The game servers can send a UDP packet anytime a player's score changes
-or at least every 10 seconds if the score hasn't changed.
+The game servers can send a [UDP](https://en.wikipedia.org/wiki/User_Datagram_Protocol) packet whenever a player's score changes,
+or every 10 seconds if the score hasn't changed.
 
 ### Setup
 
@@ -31,7 +30,8 @@ or at least every 10 seconds if the score hasn't changed.
 Our first order of business is to configure Kapacitor to receive the stream of scores.
 In this case the scores update too often to store all of them in InfluxDB so we will send them directly to Kapacitor.
 Like InfluxDB you can configure a UDP listener.
-Add this configuration section to the end of your Kapacitor configuration.
+
+Add the following section to the end of your Kapacitor configuration.
 
 ```
 [[udp]]
@@ -41,9 +41,9 @@ Add this configuration section to the end of your Kapacitor configuration.
     retention-policy = "autogen"
 ```
 
-This configuration tells Kapacitor to listen on port `9100` for UDP packets in the line protocol format.
-It will scope in incoming data to be in the `game.autogen` database and retention policy.
-Start Kapacitor running with that added to the configuration.
+With this configuration, Kapacitor listens on port `9100` for UDP packets in the [Line Protocol](/influxdb/v1.5/write_protocols/line_protocol_tutorial/) format.
+It will scope incoming data to be in the `game.autogen` database and retention policy.
+Restart Kapacitor so that the UDP listener service starts.
 
 Here is a simple bash script to generate random score data so we can test it without
 messing with the real game servers.
@@ -287,4 +287,4 @@ curl \
 
 Great!
 The hard work is done.
-All that is left is to configure the game server to send score updates to Kapacitor and update the spectator dashboard to pull scores from Kapacitor.
+All that remains is configuring the game server to send score updates to Kapacitor and update the spectator dashboard to pull scores from Kapacitor.

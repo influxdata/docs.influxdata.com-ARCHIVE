@@ -617,10 +617,11 @@ See the [OSS documentation](/influxdb/v1.5/administration/config/#max-values-per
 
 Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 
-### index-version = inmem
+### index-version = "inmem"
 
-The type of shard index to use for new shards. The default (`inmem`) is to use an in-memory index that is recreated at startup.
-A value of `tsi1` will use a disk-based index that supports higher cardinality datasets.
+The type of shard index to use for new shards. The default (`inmem`) is to use an in-memory index that is 
+recreated at startup. A value of `tsi1` will use a disk-based index that supports higher cardinality datasets. 
+Value should be enclosed in double quotes.
 
 Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 
