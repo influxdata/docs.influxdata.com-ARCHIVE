@@ -47,7 +47,7 @@ InfluxDB Enterprise includes two utilities for interacting with and managing you
 
 ## `influxd-ctl` cluster management utility
 
-Use the `influxd-ctl` cluster management utility to manage your cluster nodes, back up and restore data, and rebalance your cluster.
+Use the `influxd-ctl` cluster management utility to manage your cluster nodes, back up and restore data, and rebalance clusters.
 The `influxd-ctl` utility is available on all [meta nodes](/enterprise_influxdb/v1.5/concepts/glossary/#meta-node).
 
 ### Syntax
@@ -57,8 +57,6 @@ influxd-ctl [ global-options ] <command> [ arguments ]
 ```
 
 ### Global options
-
-Global options for the `influxd-ctl` utility are used to manage authentication, bindings, .
 
 Optional arguments are in brackets.
 
@@ -72,7 +70,7 @@ Specify the bind HTTP address of a meta node to connect to. Default value is `lo
 
 #### `[ -bind-tls ]`  
 
-Use TLS.  If you have enabled HTTPS, you MUST use this argument in order for influxd-ctl to connect to the meta node.
+Use TLS.  If you have enabled HTTPS, you MUST use this argument in order to connect to the meta node.
 
 #### `[ -config '<path-to-configuration-file> ]'`  
 
@@ -96,7 +94,7 @@ Specify the user’s username. This argument is ignored if `-auth-type basic` is
 
 ### Examples
 
-The following examples use the `influxd-ctl` utility [`show` option](#show).
+The following examples use the `influxd-ctl` utility's [`show` option](#show).
 
 #### Binding to a remote meta node
 
@@ -199,7 +197,7 @@ Resources: [Production installation](/enterprise_influxdb/v1.5/production_instal
 #### Syntax
 
 ```
-add-meta <meta-node-HTTP-bind-address>
+influxd-ctl add-meta <meta-node-HTTP-bind-address>
 ```
 
 #### Examples
@@ -235,7 +233,7 @@ If there are no existing incremental backups, the system automatically performs 
 ##### Syntax
 
 ```
-backup [ -db <database> | -from <data-node-TCP-bind-address> | -full | -rp <retention-policy> | -shard <shard-id> ] <backup-directory>
+influxd-ctl backup [ -db <database> | -from <data-node-TCP-bind-address> | -full | -rp <retention-policy> | -shard <shard-id> ] <backup-directory>
 ```
 ##### Arguments
 
@@ -322,7 +320,7 @@ Copies a [shard](/influxdb/v1.5/concepts/glossary/#shard) from a source data nod
 ##### Syntax
 
 ```
-copy-shard <data-node-source-TCP-address> <data-node-destination-TCP-address> <shard-id>
+influxd-ctl copy-shard <data-node-source-TCP-address> <data-node-destination-TCP-address> <shard-id>
 ```
 
 Resources: [Rebalancing InfluxDB Enterprise clusters](/enterprise_influxdb/v1.5/guides/rebalance/)
@@ -346,7 +344,7 @@ Shows all in-progress [copy shard](#copy-shard) operations, including the shard'
 ##### Syntax
 
 ```
-copy-shard-status
+influxd-ctl copy-shard-status
 ```
 
 ##### Examples
@@ -374,7 +372,7 @@ Use `join` instead of the [`add-meta`](#add-meta) or [`add-data`](#add-data) arg
 ##### Syntax
 
 ```
-join [-v] [ <meta-node-HTTP-bind-address> ]
+influxd-ctl join [-v] <meta-node-HTTP-bind-address>
 ```
 
 ##### Arguments
@@ -385,7 +383,7 @@ Optional arguments are in brackets.
 
 Print verbose information about the join.
 
-###### [ `<meta-node-HTTP-bind-address>` ]
+###### `<meta-node-HTTP-bind-address>`
 
 Address of a meta node in an existing cluster.
 Use this argument to add the un-joined meta node and/or data node to an existing cluster.
@@ -490,7 +488,7 @@ Aborts an in-progress [`copy-shard`](#copy-shard) command.
 ##### Syntax
 
 ```
-kill-copy-shard <data-node-source-TCP-address> <data-node-destination-TCP-address> <shard-ID>
+influxd-ctl kill-copy-shard <data-node-source-TCP-address> <data-node-destination-TCP-address> <shard-ID>
 ```
 
 ##### Examples
@@ -517,7 +515,7 @@ Use `leave` only if you want to *permanently* remove a node from a cluster.
 ##### Syntax
 
 ```
-leave [-y]
+influxd-ctl leave [-y]
 ```
 
 ##### Arguments
@@ -599,7 +597,7 @@ Use `remove-data` only if you want to *permanently* remove a data node from a cl
 ##### Syntax
 
 ```
-remove-data [ -force ] <data-node-TCP-bind-address>
+influxd-ctl remove-data [ -force ] <data-node-TCP-bind-address>
 ```
 
 ##### Arguments
@@ -634,7 +632,7 @@ Use `remove-meta` only if you want to *permanently* remove a meta node from a cl
 ##### Syntax
 
 ```
-remove-meta [ -force | -tcpAddr <meta-node-TCP-bind_address> | -y ] <meta-node-HTTP-bind-address>
+influxd-ctl remove-meta [ -force | -tcpAddr <meta-node-TCP-bind_address> | -y ] <meta-node-HTTP-bind-address>
 ```
 
 ##### Arguments
@@ -695,7 +693,7 @@ Removing a shard is an irrecoverable, destructive action; please be cautious wit
 ##### Syntax
 
 ```
-remove-shard <data-node-source-TCP-address> <shard-id>
+influxd-ctl remove-shard <data-node-source-TCP-address> <shard-id>
 ```
 
 Resources: [Cluster Rebalance](/enterprise_influxdb/v1.5/guides/rebalance/)
@@ -715,13 +713,15 @@ Removed shard 31 from cluster-data-node-02:8088
 #### `restore`
 
 Restore a [backup](#backup) to an existing cluster or a new cluster.
-Note that he existing cluster must contain no data in the databases affected by the restore.
+
+> **Note:** The existing cluster must contain no data in the databases affected by the restore.
+
 Restore supports both full backups and incremental backups; the syntax for a restore differs depending on the backup type.
 
 ##### Syntax
 
 ```
-restore [ -db <db_name> | -full | -list | -newdb <newdb_name> | -newrf <newrf_integer> | -newrp <newrp_name> | -rp <rp_name> | shard <shard_ID> ] ( <path-to-backup-manifest-file> | <path-to-backup-directory> )
+influxd-ctl restore [ -db <db_name> | -full | -list | -newdb <newdb_name> | -newrf <newrf_integer> | -newrp <newrp_name> | -rp <rp_name> | shard <shard_ID> ] ( <path-to-backup-manifest-file> | <path-to-backup-directory> )
 ```
 
 The `restore` command must specify either the `path-to-backup-manifest-file` or the `path-to-backup-directory`.
@@ -754,19 +754,19 @@ Name of the new database to restore to (must specify with `-db`).
 
 Integer of the new [replication factor](/influxdb/v1.5/concepts/glossary/#replication-factor) to restore to (this is capped to the number of data nodes in the cluster).
 
-###### `-newrp <newrp_name>`  
+###### [ `-newrp <newrp_name>` ]
 
 Name of the new [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) to restore to (must specify with `-rp`).
 
-###### `-rp <rp_name>`
+###### [ `-rp <rp_name>` ]
 
 Name of the single retention policy to restore.
 
-###### `-shard <shard_ID>`  
+###### [ `-shard <shard_ID>` ]
 
 Identifier of the [shard](/influxdb/v1.5/concepts/glossary/#shard) to restore.
 
-Resources: [Backup and Restore](/enterprise_influxdb/v1.5/administration/backup-and-restore/#restore)
+Resources: [Backing up and restoring in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/backup-and-restore/#restore)
 
 
 ##### Examples
@@ -808,7 +808,7 @@ The output includes the InfluxDB Enterprise version number.
 ##### Syntax
 
 ```
-show
+influxd-ctl show
 ```
 
 ##### Examples
@@ -840,7 +840,7 @@ cluster-node-03:8091	1.3.x-c1.3.x
 Outputs details about existing [shards](/influxdb/v1.5/concepts/glossary/#shard) of the cluster, including shard ID, database, [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp), desired replicas, [shard group](/influxdb/v1.5/concepts/glossary/#shard-group), starting timestamp, ending timestamp, expiration timestamp, and [data node](/enterprise_influxdb/v1.5/concepts/glossary/#data-node) owners.
 
 ```
-show-shards
+influxd-ctl show-shards
 ```
 
 ##### Examples
@@ -870,7 +870,7 @@ Updates a data node's address in the [meta store](/enterprise_influxdb/v1.5/conc
 ##### Syntax
 
 ```
-update-data <data-node-old-TCP-bind-address> <data-node-new-TCP-bind-address>
+influxd-ctl update-data <data-node-old-TCP-bind-address> <data-node-new-TCP-bind-address>
 ```
 
 ##### Examples
@@ -935,7 +935,7 @@ The `truncate-shards` command creates a new shard and the system writes all new 
 ##### Syntax
 
 ```
-truncate-shards [-delay <duration>]
+influxd-ctl truncate-shards [-delay <duration>]
 ```
 
 ##### Arguments
