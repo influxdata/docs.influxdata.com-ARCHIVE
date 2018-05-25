@@ -6,7 +6,7 @@ aliases:
 menu:
   enterprise_influxdb_1_5:
     name: Backing up and restoring
-    weight: 30
+    weight: 40
     parent: Administration
 ---
 

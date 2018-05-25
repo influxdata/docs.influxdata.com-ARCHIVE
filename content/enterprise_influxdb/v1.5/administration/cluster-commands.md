@@ -1,13 +1,13 @@
 ---
-title: InfluxDB Enterprise cluster commands
+title: InfluxDB Enterprise cluster management utilities
 description: Use the "influxd-ctl" and "influx" command line tools to interact with your InfluxDB Enterprise cluster and data.
 aliases:
     - /enterprise/v1.5/features/cluster-commands/
 menu:
   enterprise_influxdb_1_5:
-    name: Cluster commands
-    weight: 10
-    parent: Enterprise features
+    name: Cluster management utilities
+    weight: 30
+    parent: Administration
 ---
 
 InfluxDB Enterprise includes two utilities for interacting with and managing your clusters. The [`influxd-ctl`](#influxd-ctl) utility provides commands for managing your InfluxDB Enterprise clusters. The [`influx` command line interface](#influx) is used for interacting with and managing your data.
