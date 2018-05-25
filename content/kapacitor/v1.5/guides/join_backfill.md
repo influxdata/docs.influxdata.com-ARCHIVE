@@ -11,12 +11,12 @@ menu:
 ---
 
 Often times we have set of series where each series is counting a particular event.
-Using Kapacitor we can join those series and calculate a combined value.
+Using Kapacitor, we can join those series and calculate a combined value.
 
 Let's say we have two measurements:
 
 * `errors`: the number of page views that had an error.
-* `views`: the number of page views that had no errror.
+* `views`: the number of page views that had no error.
 
 Both measurements exist in a database called `pages` and in the retention policy `autogen`.
 
@@ -62,8 +62,8 @@ errors
 The data is joined by time, meaning that as pairs of batches arrive from each source they will be combined into a single batch.
 As a result the fields from each source need to be renamed to properly namespace the fields.
 This is done via the `.as('errors', 'views')` line.
-In this example each measurement has only one field named `sum`,
-the joined fields will be called `errors.sum` and `views.sum` respectively.
+In this example, each measurement has only one field named `sum`.
+The joined fields will be called `errors.sum` and `views.sum` respectively.
 
 Now that the data is joined we can calculate the percentage.
 Using the new names for the fields, we can write this expression to calculate our desired percentage.
@@ -73,7 +73,6 @@ Using the new names for the fields, we can write this expression to calculate ou
     |eval(lambda: "errors.sum" / ("views.sum" + "errors.sum"))
         // Give the resulting field a name
         .as('value')
-
 ```
 
  Finally, we want to store this data back into InfluxDB.
@@ -82,7 +81,6 @@ Using the new names for the fields, we can write this expression to calculate ou
     |influxDBOut()
         .database('pages')
         .measurement('error_percent')
-
 ```
 
 Here is the complete TICKscript for the batch task:
@@ -152,10 +150,12 @@ kapacitor delete recordings $rid
 Just loop through the above script for each time window and reconstruct all the historical data you need.
 With that we now have the error_percent every minute backfilled for the historical data we had.
 
-If you would like to try out this example case there are scripts [here](https://github.com/influxdb/kapacitor/blob/master/examples/error_percent/) that create test data and backfill the data using Kapacitor.
+If you would like to try out this example case there are scripts
+[here](https://github.com/influxdb/kapacitor/blob/master/examples/error_percent/)
+that create test data and backfill the data using Kapacitor.
 
 ### Stream method
-To do the same for the streaming case the TICKscript is very similar:
+To do the same for the streaming case, the TICKscript is very similar:
 
 ```js
 dbrp "pages"."autogen"
@@ -183,4 +183,13 @@ errors
     |influxDBOut()
         .database('pages')
         .measurement('error_percent')
+```
+
+To provide historical data to stream scripts that process multiple measurements,
+use [multiple statements](/influxdb/latest/query_language/data_exploration/#multiple-statements)
+when recording the data.
+
+```bash
+rid=$(kapacitor record query -query $'SELECT * FROM "pages"."autogen"."errors" WHERE time > \'2016-12-21T07:49:00Z\' AND time < \'2016-12-21T08:21:00Z\'; SELECT * FROM "pages"."autogen"."views" WHERE time > \'2016-12-21T07:49:00Z\' AND time < \'2016-12-21T08:21:00Z\'' -type stream
+kapacitor replay -task error-percent -recording $rid -rec-time
 ```
