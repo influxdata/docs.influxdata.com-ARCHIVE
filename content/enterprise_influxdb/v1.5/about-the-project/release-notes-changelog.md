@@ -18,6 +18,21 @@ menu:
 <br>
 <br>
 
+## v1.5.3 [2018-05-25]
+
+This release builds off of the InfluxDB OSS 1.5.3 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
+
+### Features
+
+* Include the query task status in the show queries output.
+* [1.5] Add hh writeBlocked counter.
+
+### Bug fixes
+
+* Hinted-handoff: enforce max queue size per peer node.
+* TSM files not closed when shard deleted.
+
+
 ## v1.5.2 [2018-04-12]
 
 This release builds off of the InfluxDB OSS 1.5.2 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
