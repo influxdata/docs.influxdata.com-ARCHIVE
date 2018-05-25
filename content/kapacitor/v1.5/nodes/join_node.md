@@ -25,8 +25,9 @@ Aliases are used to prefix all fields from the respective nodes.
 
 The join can be an inner or outer join, see the [JoinNode.Fill](/kapacitor/v1.5/nodes/join_node/#fill) property.
 
-Example:
-
+#### Example: Joining two measurements
+In the example below, the `errors` and `requests` streams are joined
+and transformed to calculate a combined field.
 
 ```js
 var errors = stream
@@ -53,8 +54,47 @@ errors
   ...
 ```
 
-In the above example the `errors` and `requests` streams are joined
-and then transformed to calculate a combined field.
+#### Example: Joining three or more measurements
+In the example below, the `errors`, `missing_page_errors`, and `server_errors` are
+joined and transformed to calculate two combined fields: `404_rate` and `500_rate`.
+
+```js
+var errors = stream
+|from()
+  .measurement('errors')
+
+var missing_page_errors = stream
+|from()
+  .measurement('errors')
+  .where(lambda: "type" == '404')
+
+var server_errors = stream
+|from()
+  .measurement('errors')
+  .where(lambda: "type" == '500')
+
+// Join the errors, missing_page_errors, and server_errors streams
+errors
+  |join(missing_page_errors, server_errors)
+    // Provide prefix names for the fields of the data points.
+    .as('errors', '404', '500')
+    // points that are within 1 second are considered the same time.
+    .tolerance(1s)
+    // fill missing values with 0, implies outer join.
+    .fill(0.0)
+    // name the resulting stream
+    .streamName('error_rates')
+  // The "value" fields from each parent have been prefixed
+  // with the respective names 'errors', 'missing_page_errors', 'and server_errors'.
+  // Calculate the percentage of 404 errors
+  |eval(lambda: "404.value" / "errors.value")
+    .as('404_rate')
+    // Calculate the percentage of 500 errors
+  |eval(lambda: "500.value" / "errors.value")
+    .as('500_rate')
+  ...
+```
+
 
 
 ### Constructor
