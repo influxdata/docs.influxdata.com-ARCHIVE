@@ -893,7 +893,7 @@ The token argument only works when using JWT authentication in the cluster and w
 ##### Syntax
 
 ```
-token [-exp <duration>]
+influxd-ctl token [-exp <duration>]
 ```
 
 ##### Arguments
