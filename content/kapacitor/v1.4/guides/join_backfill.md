@@ -9,12 +9,12 @@ menu:
     parent: Guides
 ---
 
-Collecting a set of data series where each data series is counting a particular event is a common scenario.
-Using Kapacitor, multiple data series in a set can be joined and used to calculate a combined value, which can then be stored as a new data series.
+Collecting a set of time series data where each time series is counting a particular event is a common scenario.
+Using Kapacitor, multiple time series in a set can be joined and used to calculate a combined value, which can then be stored as a new time series.
 
-This guide will show how to use a prepared data generator in python and then how
-to combine two generated data series into a new calculated measurement and then
-store that measurement back into InfluxDB, all through Kapacitor.
+This guide shows how to use a prepared data generator in python to combine two generated
+time series into a new calculated measurement, then
+store that measurement back into InfluxDB using Kapacitor.
 
 It uses as its example a hypothetical high-volume website for which two measurements
 are taken:
@@ -25,12 +25,12 @@ are taken:
 ### The Data generator
 
 Data for such a website can be primed and generated to InfluxDB using the Python
-3 script rolled into [page.zip](/downloads/pages.zip) and created for this purpose.
+3 script rolled into [page.zip](/downloads/pages.zip)([md5](/downloads/pages.zip.md5), [sha256](/downloads/pages.zip.sha256)) and created for this purpose.
 It leverages the [InfluxDB-Python](https://github.com/influxdata/influxdb-python) library.
 See that Github project for instructions on how to install the library in Python.
 
 Once unzipped, this script can be used to create a database called `pages`, which
-will use the default retention policy `autogen`. It can be used to create a backlog
+uses the default retention policy `autogen`. It can be used to create a backlog
 of data and then to set the generator running, walking along randomly generated
 `view` and `error` counts.
 
@@ -52,11 +52,11 @@ Priming two days worth of data can take about a minute.
 
 Having simple counts may not be sufficient for a site administrator. More
 important would be to know the percent of page views that are resulting in error.
-The process is to select both existing measurements, to join them and then to
-calculate an error percentage.  The error percentage can then be stored back into
+The process is to select both existing measurements, join them and calculate an
+error percentage.  The error percentage can then be stored in
 InfluxDB as a new measurement.
 
-The two measurements, `errors` and `views`, will need to be queried.
+The two measurements, `errors` and `views`, need to be queried.
 ```javascript
 // Get errors batch data
 var errors = batch
@@ -95,10 +95,10 @@ errors
 ```
 
 The data is joined by time, meaning that as pairs of batches arrive from each source
-they will be combined into a single batch. As a result the fields from each source
+they are combined into a single batch. As a result the fields from each source
 need to be renamed to properly namespace the fields. This is done via the
 `.as('errors', 'views')` line.  In this example each measurement has only one field
-named `sum`.  The joined fields will be called `errors.sum` and `views.sum` respectively.
+named `sum`.  The joined fields are called `errors.sum` and `views.sum` respectively.
 
 Now that the data is joined the percentage can be calculated.
 Using the new names for the fields, the following expression can be used to calculate

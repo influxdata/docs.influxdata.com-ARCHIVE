@@ -9,12 +9,12 @@ menu:
     parent: guides
 ---
 
-Collecting a set of data series where each data series is counting a particular event is a common scenario.
-Using Kapacitor, multiple data series in a set can be joined and used to calculate a combined value, which can then be stored as a new data series.
+Collecting a set of time series data where each time series is counting a particular event is a common scenario.
+Using Kapacitor, multiple time series in a set can be joined and used to calculate a combined value, which can then be stored as a new time series.
 
-This guide will show how to use a prepared data generator in python and then how
-to combine two generated data series into a new calculated measurement and then
-store that measurement back into InfluxDB, all through Kapacitor.
+This guide shows how to use a prepared data generator in python to combine two generated
+time series into a new calculated measurement, then
+store that measurement back into InfluxDB using Kapacitor.
 
 It uses as its example a hypothetical high-volume website for which two measurements
 are taken:
@@ -30,7 +30,7 @@ It leverages the [InfluxDB-Python](https://github.com/influxdata/influxdb-python
 See that Github project for instructions on how to install the library in Python.
 
 Once unzipped, this script can be used to create a database called `pages`, which
-will use the default retention policy `autogen`. It can be used to create a backlog
+uses the default retention policy `autogen`. It can be used to create a backlog
 of data and then to set the generator running, walking along randomly generated
 `view` and `error` counts.
 
@@ -52,12 +52,12 @@ Priming two days worth of data can take about a minute.
 
 Having simple counts may not be sufficient for a site administrator. More
 important would be to know the percent of page views that are resulting in error.
-The process is to select both existing measurements, to join them and then to
-calculate an error percentage.  The error percentage can then be stored back into
+The process is to select both existing measurements, join them and calculate an
+error percentage.  The error percentage can then be stored in
 InfluxDB as a new measurement.
 
-The two measurements, `errors` and `views`, will need to be queried.
-```js
+The two measurements, `errors` and `views`, need to be queried.
+```javascript
 // Get errors batch data
 var errors = batch
     |query('SELECT sum(value) FROM "pages"."autogen".errors')
@@ -87,7 +87,7 @@ as follows: `.groupBy(time(1m), 'page')`.
 
 With two batch sources for each measurement they need to be joined like so.
 
-```js
+```javascript
 // Join errors and views
 errors
     |join(views)
@@ -95,16 +95,16 @@ errors
 ```
 
 The data is joined by time, meaning that as pairs of batches arrive from each source
-they will be combined into a single batch. As a result the fields from each source
+they are combined into a single batch. As a result the fields from each source
 need to be renamed to properly namespace the fields. This is done via the
 `.as('errors', 'views')` line.  In this example each measurement has only one field
-named `sum`.  The joined fields will be called `errors.sum` and `views.sum` respectively.
+named `sum`.  The joined fields are called `errors.sum` and `views.sum` respectively.
 
 Now that the data is joined the percentage can be calculated.
 Using the new names for the fields, the following expression can be used to calculate
 the desired percentage.
 
-```js
+```javascript
     //Calculate percentage
     |eval(lambda: "errors.sum" / ("views.sum" + "errors.sum"))
         // Give the resulting field a name
@@ -114,7 +114,7 @@ the desired percentage.
 
  Finally, this data is stored back into InfluxDB.
 
-```js
+```javascript
     |influxDBOut()
         .database('pages')
         .measurement('error_percent')
@@ -123,7 +123,7 @@ the desired percentage.
 
 Here is the complete TICKscript for the batch task:
 
-```js
+```javascript
 dbrp "pages"."autogen"
 
 // Get errors batch data
@@ -191,7 +191,7 @@ With that the `error_percent` for every minute will be backfilled for the histor
 ### Stream method
 To do the same for the streaming case the TICKscript is very similar:
 
-```js
+```javascript
 dbrp "pages"."autogen"
 
 // Get errors stream data
