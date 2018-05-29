@@ -187,7 +187,7 @@ The timestamp for the point is `2015-08-18T00:00:00Z`.
 
 All of the stuff we've just covered is stored in a database - the sample data are in the database `my_database`.
 An InfluxDB <a name=database></a>_**database**_ is similar to traditional relational databases and serves as a logical container for users, retention policies, continuous queries, and, of course, your time series data.
-See [Authentication and Authorization](/influxdb/v1.4/query_language/authentication_and_authorization/) and [Continuous Queries](/influxdb/v1.4/query_language/continuous_queries/) for more on those topics.
+See [Authentication and Authorization](/influxdb/v1.4/administration/authentication_and_authorization/) and [Continuous Queries](/influxdb/v1.4/query_language/continuous_queries/) for more on those topics.
 
 Databases can have several users, continuous queries, retention policies, and measurements.
 InfluxDB is a schemaless database which means it's easy to add new measurements, tags, and fields at any time.

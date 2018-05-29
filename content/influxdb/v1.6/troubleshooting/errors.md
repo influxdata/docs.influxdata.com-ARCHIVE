@@ -134,7 +134,7 @@ string:
 Note that you should not include the single quotes when authenticating requests.
 
 **Resources:**
-[Authentication and Authorization](/influxdb/v1.6/query_language/authentication_and_authorization/)
+[Authentication and Authorization](/influxdb/v1.6/administration/authentication_and_authorization/)
 
 ## error parsing query: mixing aggregate and non-aggregate queries is not supported
 

@@ -21,7 +21,7 @@ To use LDAP with InfluxDB Enterprise, you need to support the following requirem
 
 To use LDAP with InfluxDB Enterprise, make the following changes to the InfluxDD Enterprise configuration:
 
-* Provide an HTTP Basic Authentication header. See [Authentication and authorization in InfluxDB](/influxdb/v1.6/query_language/authentication_and_authorization/) for details on using HTTP Basic Authentication with InfluxDB.
+* Provide an HTTP Basic Authentication header. See [Authentication and authorization in InfluxDB](/influxdb/v1.6/administration/authentication_and_authorization/) for details on using HTTP Basic Authentication with InfluxDB.
 * Provide a username and password as HTTP query parameters
   - `u`: username
   - `p`: password
@@ -37,7 +37,7 @@ Typically, database operators, and not database clients, interact directly with 
 
 To use LDAP with InfluxDB Enterprise, you must:
 
-* Provide an HTTP Basic Authentication header. See [Authentication and authorization in InfluxDB](/influxdb/v1.6/query_language/authentication_and_authorization/) for details on using HTTP Basic Authentication with InfluxDB.
+* Provide an HTTP Basic Authentication header. See [Authentication and authorization in InfluxDB](/influxdb/v1.6/administration/authentication_and_authorization/) for details on using HTTP Basic Authentication with InfluxDB.
 * Provide a username and password as HTTP query parameters
   - `u`: username
   - `p`: password

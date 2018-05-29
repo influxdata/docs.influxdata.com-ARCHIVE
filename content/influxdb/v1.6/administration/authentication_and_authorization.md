@@ -5,8 +5,8 @@ aliases:
 menu:
   influxdb_1_6:
     name: Authentication and authorization
-    weight: 80
-    parent: InfluxQL
+    weight: 20
+    parent: Administration
 ---
 
 This document covers setting up and managing authentication and authorization in InfluxDB.

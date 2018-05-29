@@ -17,7 +17,7 @@ Password protect your InfluxDB instance to keep any unauthorized individuals
 from accessing your data.
 
 Resources:
-[Set up Authentication](/influxdb/v1.6/query_language/authentication_and_authorization/#set-up-authentication)
+[Set up Authentication](/influxdb/v1.6/administration/authentication_and_authorization/#set-up-authentication)
 
 ## Managing users and permissions
 
@@ -25,8 +25,8 @@ Restrict access by creating individual users and assigning them relevant
 read and/or write permissions.
 
 Resources:
-[User Types and Privileges](/influxdb/v1.6/query_language/authentication_and_authorization/#user-types-and-privileges),
-[User Management Commands](/influxdb/v1.6/query_language/authentication_and_authorization/#user-management-commands)
+[User Types and Privileges](/influxdb/v1.6/administration/authentication_and_authorization/#user-types-and-privileges),
+[User Management Commands](/influxdb/v1.6/administration/authentication_and_authorization/#user-management-commands)
 
 ## Enabling HTTPS
 

@@ -467,7 +467,7 @@ Environment variable: `INFLUXDB_MONITOR_STORE_INTERVAL`
 The `[http]` settings control how InfluxDB configures the HTTP endpoints.
 These are the primary mechanisms for getting data into and out of InfluxDB.
 Edit the settings in this section to enable HTTPS and authentication.
-See [Authentication and Authorization](/influxdb/v1.6/query_language/authentication_and_authorization/).
+See [Authentication and Authorization](/influxdb/v1.6/administration/authentication_and_authorization/).
 
 ### `enabled = true`
 

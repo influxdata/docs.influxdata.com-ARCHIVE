@@ -217,7 +217,7 @@ Check out [CLI/Shell](/influxdb/v1.6/tools/shell/) for more useful CLI options.
 
 ## How can a non-admin user `USE` a database in InfluxDB's CLI?
 
-In versions prior to v1.3, [non-admin users](/influxdb/v1.6/query_language/authentication_and_authorization/#user-types-and-privileges) could not execute a `USE <database_name>` query in the CLI even if they had `READ` and/or `WRITE` permissions on that database.
+In versions prior to v1.3, [non-admin users](/influxdb/v1.6/administration/authentication_and_authorization/#user-types-and-privileges) could not execute a `USE <database_name>` query in the CLI even if they had `READ` and/or `WRITE` permissions on that database.
 
 Starting with version 1.3, non-admin users can execute the `USE <database_name>` query for databases on which they have `READ` and/or `WRITE` permissions.
 If a non-admin user attempts to `USE` a database on which the user doesn't have `READ` and/or `WRITE` permissions, the system returns an error:
