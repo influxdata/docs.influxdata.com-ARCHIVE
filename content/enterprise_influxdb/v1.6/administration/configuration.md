@@ -1,5 +1,6 @@
 ---
 title: Configuring InfluxDB Enterprise
+description: Covers the InfluxDB Enterprise configuration settings, including global options, meta node options, and data node options
 aliases:
     - /enterprise/v1.5/administration/configuration/
 menu:
@@ -619,7 +620,7 @@ Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 
 ### index-version = "inmem"
 
-The type of shard index to use for new shards. The default (`inmem`) is to use an in-memory index that is 
+The type of shard index to use for new shards. The default (`inmem`) is to use an in-memory index that is
 recreated at startup. A value of `tsi1` will use a disk-based index that supports higher cardinality datasets.
 Value should be enclosed in double quotes.
 
