@@ -1,6 +1,6 @@
 ---
 title: Configuring LDAP authentication in InfluxDB Enterprise
-
+description: Configuring LDAP authentication in InfluxDB Enterprise, including steps for meta nodes and data nodes, and testing LDAP connectivity.
 menu:
   enterprise_influxdb_1_6:
     name: Configuring LDAP authentication

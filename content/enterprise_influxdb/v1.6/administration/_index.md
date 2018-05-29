@@ -33,6 +33,8 @@ See [Authentication and authorization](/influxdb/v1.6/administration/authenticat
 
 ## [Logging and tracing in InfluxDB Enterprise](/enterprise_influxdb/v1.6/administration/logs/)
 
+[Logging and tracing in InfluxDB Enterprise](/enterprise_influxdb/v1.6/administration/logs/) covers logging locations, redirecting HTTP request logging, structured logging, and tracing.
+
 ## [Host renaming in InfluxDB Enterprise](/enterprise_influxdb/v1.6/administration/renaming/)
 
 ## [Managing security in InfluxDB Enterprise](/enterprise_influxdb/v1.6/administration/security/)

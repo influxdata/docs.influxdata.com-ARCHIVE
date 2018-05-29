@@ -1,6 +1,6 @@
 ---
 title: Logging and tracing in InfluxDB Enterprise
-
+description: Covers logging locations, redirecting HTTP request logging, structured logging, and tracing.
 menu:
   enterprise_influxdb_1_6:
     name: Logging and tracing
