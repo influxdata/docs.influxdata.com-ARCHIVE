@@ -18,3 +18,5 @@ menu:
 ## [Host renaming in InfluxDB Enterprise](/enterprise_influxdb/v1.6/administration/renaming/)
 
 ## [Managing security in InfluxDB Enterprise](/enterprise_influxdb/v1.6/administration/security/)
+
+## [Configuring LDAP authentication](/enterprise_influxdb/v1.6/administration/ldap/)
