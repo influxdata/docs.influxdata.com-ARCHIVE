@@ -114,8 +114,8 @@ sudo yum localinstall influxdb-meta-1.5.3_c1.5.3.x86_64.rpm
 
 In `/etc/influxdb/influxdb-meta.conf`:
 
-* uncomment and set `hostname` to the hostname of the meta node.
-* set `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.
+* Uncomment and set `hostname` to the hostname of the meta node.
+* Set `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.
 
 <dt>
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
@@ -159,7 +159,7 @@ ps aux | grep -v grep | grep influxdb-meta
 You should see output similar to:
 
 ```
-    influxdb  3207  0.8  4.4 483000 22168 ?        Ssl  17:05   0:08 /usr/bin/influxd-meta -config /etc/influxdb/influxdb-meta.conf
+influxdb  3207  0.8  4.4 483000 22168 ?        Ssl  17:05   0:08 /usr/bin/influxd-meta -config /etc/influxdb/influxdb-meta.conf
 ```
 
 > **Note:** A cluster with only one meta node is **not recommended** for
@@ -199,16 +199,16 @@ influxd-ctl show
 The expected output is:
 
 ```
-    Data Nodes
-    ==========
-    ID      TCP Address      Version
+Data Nodes
+==========
+ID      TCP Address      Version
 
-    Meta Nodes
-    ==========
-    TCP Address               Version
-    enterprise-meta-01:8091   1.5.3-c1.5.3
-    enterprise-meta-02:8091   1.5.3-c1.5.3
-    enterprise-meta-03:8091   1.5.3-c1.5.3
+Meta Nodes
+==========
+TCP Address               Version
+enterprise-meta-01:8091   1.5.3-c1.5.3
+enterprise-meta-02:8091   1.5.3-c1.5.3
+enterprise-meta-03:8091   1.5.3-c1.5.3
 ```
 
 Your cluster must have at least three meta nodes.
