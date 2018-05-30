@@ -87,7 +87,7 @@ with every other meta and data node.
 
 Perform the following steps on each data server.
 
-### Download and install the data service
+### 2.1 Download and install the data service
 
 #### Ubuntu & Debian (64-bit)
 
@@ -103,7 +103,7 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.5.3_c1.5.3.x8
 sudo yum localinstall influxdb-data-1.5.3_c1.5.3.x86_64.rpm
 ```
 
-### Edit the configuration file
+### 2.2 Edit the configuration file
 
 In the `/etc/influxdb/influxdb.conf` file, complete these steps:
 
@@ -152,7 +152,7 @@ hostname="<enterprise-data-0x>" #✨
   shared-secret = "long pass phrase used for signing tokens" #✨
 ```
 
-### Start the data service
+### 2.3 Start the data service
 
 On `sysvinit` systems, enter:
 
@@ -166,16 +166,19 @@ On `systemd` systems, enter:
 sudo systemctl start influxdb
 ```
 
-> **Verification steps**
->
-Check to see that the process is running by entering:
->
-    ps aux | grep -v grep | grep influxdb
->
-You should see output similar to:
->
-    influxdb  2706  0.2  7.0 571008 35376 ?        Sl   15:37   0:16 /usr/bin/influxd -config /etc/influxdb/influxdb.conf
+#### Verify the data service is running
 
+Check to see that the service is running by entering:
+
+```
+    ps aux | grep -v grep | grep influxdb
+```
+
+You should see output similar to:
+
+```
+influxdb  2706  0.2  7.0 571008 35376 ?        Sl   15:37   0:16 /usr/bin/influxd -config /etc/influxdb/influxdb.conf
+```
 
 If you do not see the expected output, the process is either not launching or is exiting prematurely. Check the [logs](/enterprise_influxdb/v1.5/administration/logs/) for error messages and verify the previous setup steps are complete.
 
@@ -210,24 +213,24 @@ Run the `add-data` command only once for each data node you are joining to the c
 Issue the following command on any meta node:
 
 ```
-    influxd-ctl show
+influxd-ctl show
 ```
 The expected output is:
 
 ```
-    Data Nodes
-    ==========
-    ID   TCP Address               Version
-    4    enterprise-data-01:8088   1.5.3-c1.5.3
-    5    enterprise-data-02:8088   1.5.3-c1.5.3
+Data Nodes
+==========
+ID   TCP Address               Version
+4    enterprise-data-01:8088   1.5.3-c1.5.3
+5    enterprise-data-02:8088   1.5.3-c1.5.3
 
 
-    Meta Nodes
-    ==========
-    TCP Address               Version
-    enterprise-meta-01:8091   1.5.3-c1.5.3
-    enterprise-meta-02:8091   1.5.3-c1.5.3
-    enterprise-meta-03:8091   1.5.3-c1.5.3
+Meta Nodes
+==========
+TCP Address               Version
+enterprise-meta-01:8091   1.5.3-c1.5.3
+enterprise-meta-02:8091   1.5.3-c1.5.3
+enterprise-meta-03:8091   1.5.3-c1.5.3
 ```
 
 The output should list every data node that was added to the cluster.
