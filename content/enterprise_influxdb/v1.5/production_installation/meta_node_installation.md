@@ -35,7 +35,7 @@ We do not recommend having more than three meta nodes unless your servers,
 or the communication between the servers, have chronic reliability issues.
 
 > **Note:** While there is no requirement for each meta node to run on its own server, deploying
-multiple meta nodes on the same server creates a larger point of potential failure if that node is unresponsive. InfluxData recommends that you deploy the meta nodes on relatively small footprint servers.
+multiple meta nodes on the same server creates a larger point of potential failure if that node is unresponsive. InfluxData recommends deploying meta nodes on servers with relatively small footprints.
 
 See [Clustering in InfluxDB Enterprise](/enterprise_influxdb/v1.5/concepts/clustering#optimal-server-counts)
 for more on cluster architecture.
@@ -80,9 +80,9 @@ Before proceeding with the installation, verify on each server that the other
 servers are resolvable. Here is an example set of shell commands using `ping`:
 
 ```
-    ping -qc 1 enterprise-meta-01
-    ping -qc 1 enterprise-meta-02
-    ping -qc 1 enterprise-meta-03
+ping -qc 1 enterprise-meta-01
+ping -qc 1 enterprise-meta-02
+ping -qc 1 enterprise-meta-03
 ```
 
 If there are any connectivity issues resolve them before proceeding with the
@@ -94,7 +94,7 @@ meta node.
 
 Complete the following steps for each meta node server.
 
-#### 2A: Download and install the meta node services
+#### 2.1: Download and install the meta node services
 
 ##### Ubuntu & Debian (64-bit)
 
@@ -110,7 +110,7 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.5.3_c1.5.3.x8
 sudo yum localinstall influxdb-meta-1.5.3_c1.5.3.x86_64.rpm
 ```
 
-#### 2B: Edit the configuration file
+#### 2.2: Edit the configuration file
 
 In `/etc/influxdb/influxdb-meta.conf`:
 
@@ -134,7 +134,7 @@ hostname="<enterprise-meta-0x>" #✨
   license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
 ```
 
-#### 2C: Start the meta service
+#### 2.3: Start the meta service
 
 On `sysvinit` systems, run:
 
