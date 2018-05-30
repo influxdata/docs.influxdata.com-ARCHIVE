@@ -10,7 +10,7 @@ menu:
 ---
 
 InfluxDB Enterprise offers highly scalable clusters on your infrastructure
-and a management user interface ([using Chronograf](https://docs.influxdata.com/chronograf/latest) for working with clusters.
+and a management user interface ([using Chronograf](https://docs.influxdata.com/chronograf/latest)) for working with clusters.
 The Production Installation process is designed for users looking to
 deploy InfluxDB Enterprise in a production environment.
 The following steps will get you up and running with the first essential component of
