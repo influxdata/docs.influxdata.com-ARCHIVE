@@ -204,11 +204,11 @@ To continue our example:
 
 ```go
 // Create a node from a given pipeline node.
-func (et *ExecutingTask) createNode(p pipeline.Node, l *log.Logger) (n Node, err error) {
+func (et *ExecutingTask) createNode(p pipeline.Node, d NodeDiagnostic) (n Node, err error) {
     switch t := p.(type) {
     ...
 	case *pipeline.HouseDBOutNode:
-		n, err = newHouseDBOutNode(et, t, l)
+		n, err = newHouseDBOutNode(et, t, d)
     ...
 }
 ```
