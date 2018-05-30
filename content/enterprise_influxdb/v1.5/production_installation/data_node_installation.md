@@ -20,12 +20,12 @@ Do not proceed unless you have finished installing your meta nodes.
 
 ## Data node setup description and requirements
 
-The Production Installation process sets up two [data nodes](/enterprise_influxdb/v1.5/concepts/glossary#data-node) with each data node running on its own server.
+The Production Installation process sets up two [data nodes](/enterprise_influxdb/v1.5/concepts/glossary#data-node), each running on a dedicated server.
 You **must** have a minimum of two data nodes in a cluster.
 InfluxDB Enterprise clusters require at least two data nodes for high availability and redundancy.
 
-> **Note:** Although there is no requirement that each data node runs on its own
-server, InfluxData recommends deploying each data node on a dedicated server.
+> **Note:** Although there is no requirement that each data node runs on a dedicated
+server, InfluxData recommends this for production installations.
 
 See [Clustering in InfluxDB Enterprise](/enterprise_influxdb/v1.5/concepts/clustering/#optimal-server-counts)
 for more on cluster architecture.
@@ -69,7 +69,7 @@ file (the hostnames below are representative).
 
 > **Verification steps:**
 >
-Before proceeding with the installation, verify on each meta and data server that the other
+Before proceeding with the installation, verify on each meta node and data node server that the other
 servers are resolvable. Here is an example set of shell commands using `ping`:
 >
     ping -qc 1 enterprise-meta-01
