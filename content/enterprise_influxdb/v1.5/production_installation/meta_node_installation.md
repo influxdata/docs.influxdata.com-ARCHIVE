@@ -26,8 +26,7 @@ process before using the product in a production environment.
 
 ## Meta node setup description and requirements
 
-The Production Installation process sets up three [meta nodes](/enterprise_influxdb/v1.5/concepts/glossary/#meta-node)
-with each running on a dedicated server.
+The Production Installation process sets up three [meta nodes](/enterprise_influxdb/v1.5/concepts/glossary/#meta-node), each running on a dedicated server.
 
 You **must** have a minimum of three meta nodes in a cluster.
 InfluxDB Enterprise clusters require at least three meta nodes and an __**odd number**__
