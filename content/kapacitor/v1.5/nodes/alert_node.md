@@ -168,7 +168,7 @@ Each event that gets sent to a handler contains the following alert data:
 | **ID**          | The ID of the alert, user defined.                                                                              |
 | **Message**     | The alert message, user defined.                                                                                |
 | **Details**     | The alert details, user defined HTML content.                                                                   |
-| **Time**        | The time the alert occurred.                                                                                    |
+| **Time**        | The time the alert occurred.                                |
 | **Duration**    | The duration of the alert in nanoseconds.                                                                       |
 | **Level**       | One of OK, INFO, WARNING or CRITICAL.                                                                           |
 | **Data**        | influxql.Result containing the data that triggered the alert.                                                   |
@@ -788,7 +788,7 @@ _**Available template data**_
 | **Tags**     | Map of tags. Use `{{ index .Tags "key" }}` to get a specific tag value.                              |
 | **Level**    | Alert Level - `INFO`, `WARNING`, `CRITICAL`.                                                         |
 | **Fields**   | Map of fields. Use `{{ index .Fields "key" }}` to get a specific field value.                        |
-| **Time**     | The time of the point that triggered the event.                                                      |
+| **Time**     | The time of the point that triggered the event. Default format is `YYYY-MM-DD 00:00:00 +0000 UTC`    |
 | **Duration** | The duration of the alert.                                                                           |
 
 
