@@ -1,5 +1,5 @@
 ---
-title: Step 3 - Chronograf Installation
+title: Step 3 - Installing Chronograf
 aliases:
     - /enterprise/v1.5/production_installation/chrono_install/
 menu:

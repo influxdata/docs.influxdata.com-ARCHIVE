@@ -109,7 +109,6 @@ the desired percentage.
     |eval(lambda: "errors.sum" / ("views.sum" + "errors.sum"))
         // Give the resulting field a name
         .as('value')
-
 ```
 
  Finally, this data is stored back into InfluxDB.
@@ -118,7 +117,6 @@ the desired percentage.
     |influxDBOut()
         .database('pages')
         .measurement('error_percent')
-
 ```
 
 Here is the complete TICKscript for the batch task:
@@ -189,7 +187,7 @@ Just loop through the above script for each time window and reconstruct all the 
 With that the `error_percent` for every minute will be backfilled for the historical data.
 
 ### Stream method
-To do the same for the streaming case the TICKscript is very similar:
+To do the same for the streaming case, the TICKscript is very similar:
 
 ```javascript
 dbrp "pages"."autogen"
@@ -221,3 +219,12 @@ errors
 
 Note that with the streaming approach the new combined measurement, `error_percent`,
 can be calculated and stored in real time.
+
+To provide historical data to stream scripts that process multiple measurements,
+use [multiple statements](/influxdb/latest/query_language/data_exploration/#multiple-statements)
+when recording the data.
+
+```bash
+rid=$(kapacitor record query -query $'SELECT * FROM "pages"."autogen"."errors" WHERE time > \'2016-12-21T07:49:00Z\' AND time < \'2016-12-21T08:21:00Z\'; SELECT * FROM "pages"."autogen"."views" WHERE time > \'2016-12-21T07:49:00Z\' AND time < \'2016-12-21T08:21:00Z\'' -type stream
+kapacitor replay -task error-percent -recording $rid -rec-time
+```

@@ -1,27 +1,26 @@
 ---
-title: InfluxDB command line interface (CLI/shell)
-
+title: InfluxDB command line interface (CLI)
+description: Use the InfluxDB CLI to interact with InfluxDB databases to write data, query data, and view query outputs.
 menu:
   influxdb_1_5:
-    name: InfluxDB command line interface (CLI/shell)
+    name: InfluxDB command line interface (CLI)
     weight: 10
     parent: Tools
 ---
 
-InfluxDB's command line interface (`influx`) is an interactive shell for the HTTP API.
+The InfluxDB command line interface utility (`influx`) is an interactive shell for the HTTP API.
 Use `influx` to write data (manually or from a file), query data interactively, and view query output in different formats.
 
-* [Launch `influx`](/influxdb/v1.5/tools/shell/#launch-influx)
-* [`influx` Arguments](/influxdb/v1.5/tools/shell/#influx-arguments)
-* [`influx` Commands](/influxdb/v1.5/tools/shell/#influx-commands)
+* [Using `influx`](/influxdb/v1.5/tools/shell/#using-influx)
+* [Arguments](/influxdb/v1.5/tools/shell/#arguments)
+* [Commands](/influxdb/v1.5/tools/shell/#commands)
 
-## Launch `influx`
+### Using `influx`
 If you [install](https://influxdata.com/downloads/) InfluxDB via a package manager, the CLI is installed at `/usr/bin/influx` (`/usr/local/bin/influx` on OS X).
 
 To access the CLI, first launch the `influxd` database process and then launch `influx` in your terminal.
 Once you've entered the shell and successfully connected to an InfluxDB node, you'll see the following output:
-<br>
-<br>
+
 ```bash
 $ influx
 Connected to http://localhost:8086 version 1.4.x
@@ -33,74 +32,107 @@ InfluxDB shell 1.4.x
 You can now enter InfluxQL queries as well as some CLI-specific commands directly in your terminal.
 You can use `help` at any time to get a list of available commands. Use `Ctrl+C` to cancel if you want to cancel a long-running InfluxQL query.
 
-## `influx` Arguments
-There are several arguments you can pass into `influx` when starting.
+### Global options
+
+The global options modify the behavior of the `influx` utility during a session and can be passed into `influx` when starting.
 List them with `$ influx --help`.
 The list below offers a brief discussion of each option.
 We provide detailed information on `-execute`, `-format`, and `-import` at the end of this section.
 
-`-compressed`
-Set to true if the import file is compressed.
-Use with `-import`.
+#### `-compressed`
 
-`-consistency 'any|one|quorum|all'`
+Use this flag with the `-import` option to specify that the import file is compressed.
+
+#### [ `-consistency` ]
+
 Set the write consistency level.
 
-`-database 'database name'`
-The database to which `influx` connects.
+##### Syntax
 
-`-execute 'command'`
-Execute an [InfluxQL](/influxdb/v1.5/query_language/data_exploration/) command and quit.
+```bash
+influx -consistency '<consistency-level>'
+```
+where
+
+`<consistency-level>` is the write consistency level.
+Valid values are `'any'`, `'one'`, `'quorum'`, or `'all'`.
+
+
+#### [ `-database '<db_name>'` ]
+
+Name of the database to connect to.
+
+#### `-execute '<command>'`
+
+Execute the specified [InfluxQL](/influxdb/v1.5/query_language/data_exploration/) command and then quit.
 See [-execute](/influxdb/v1.5/tools/shell/#execute-an-influxql-command-and-quit-with-execute).
 
-`-format 'json|csv|column'`
-Specifies the format of the server responses.
+##### Example
+
+```
+$ influx -database 'metrics' -execute 'select * from cpu' -format 'json' -pretty
+```
+
+#### [ `-format <format-type>` ]
+
+Data format to use for server responses. Valid values are `'json'`, `'csv'`, or `'column'`.
 See [-format](/influxdb/v1.5/tools/shell/#specify-the-format-of-the-server-responses-with-format).
 
-`-host 'host name'`
-The host to which `influx` connects.
+#### [ `-host 'host name'` ]
+
+Host to which `influx` connects.
 By default, InfluxDB runs on localhost.
 
-`-import`
+#### [ `-import` ]
+
 Import new data from a file or import a previously [exported](https://github.com/influxdb/influxdb/blob/master/importer/README.md) database from a file.
 See [-import](/influxdb/v1.5/tools/shell/#import-data-from-a-file-with-import).
 
-`-password 'password'`
-The password `influx` uses to connect to the server.
+#### `-password 'password'`
+
+Password to use for connecting to the server.
 `influx` will prompt for a password if you leave it blank (`-password ''`).
 Alternatively, set the password for the CLI with the `INFLUX_PASSWORD` environment
 variable.
 
 `-path`
-The path to the file to import.
+
+Path to the file to import.
 Use with `-import`.
 
-`-port 'port #'`
-The port to which `influx` connects.
-By default, InfluxDB runs on port `8086`.
+#### `-port 'port #'`
 
-`-pps`
+Port to connect to.
+Default value is `8086`.
+
+#### `-pps`
+
 How many points per second the import will allow.
 By default, pps is zero and influx will not throttle importing.
 Use with `-import`.
 
-`-precision 'rfc3339|h|m|s|ms|u|ns'`
+#### `-precision 'rfc3339|h|m|s|ms|u|ns'`
+
 Specifies the format/precision of the timestamp: `rfc3339` (`YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ`), `h` (hours), `m` (minutes), `s` (seconds), `ms` (milliseconds), `u` (microseconds), `ns` (nanoseconds).
 Precision defaults to nanoseconds.
 
 > **Note:** Setting the precision to `rfc3339` (`-precision rfc3339`) works with the `-execute` option, but it does not work with the `-import option`. All other precision formats (e.g., `h`,`m`,`s`,`ms`,`u`, and `ns`) work with the `-execute` and `-import` options.
 
-`-pretty`
-Turns on pretty print for the `json` format.
+#### `-pretty`
 
-`-ssl`
+Enable pretty print for the `json` format.
+
+#### `-ssl`
+
 Use HTTPS for requests.
 
-`-username 'username'`
+#### `-username 'username'`
+
 The username that `influx` uses to connect to the server.
 Alternatively, set the username for the CLI with the `INFLUX_USERNAME` environment variable.
 
-`-version`
+#### `-version`
+
 Display the InfluxDB version and exit.
 
 ### Execute an InfluxQL command and quit with `-execute`
@@ -265,72 +297,86 @@ InfluxDB will still attempt to write the points after that time out but there wi
 
 > **Note:** For how to export data from InfluxDB version 0.8.9, see [Exporting from 0.8.9](https://github.com/influxdb/influxdb/blob/master/importer/README.md).
 
-## `influx` commands
-
-Enter `help` in the CLI for a partial list of the available commands.
-
-### Commands
+## Commands
 
 The list below offers a brief discussion of each command.
 We provide detailed information on `insert` at the end of this section.
 
-`auth`
+Enter `help` in the CLI for a partial list of the available commands.
+
+
+### `auth`
+
 Prompts you for your username and password.
 `influx` uses those credentials when querying a database.
 Alternatively, set the username and password for the CLI with the
 `INFLUX_USERNAME` and `INFLUX_PASSWORD` environment variables.
 
-`chunked`
+### `chunked`
+
 Turns on chunked responses from the server when issuing queries.
 This setting is enabled by default.
 
-`chunk size <size>`
+### `chunk size <size>`
+
 Sets the size of the chunked responses.
 The default size is `10,000`.
 Setting it to `0` resets `chunk size` to its default value.
 
-`clear [ database | db | retention policy | rp ]`
+### `clear [ database | db | retention policy | rp ]`
+
 Clears the current context for the [database](/influxdb/v1.5/concepts/glossary/#database) or [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp).
 
-`connect <host:port>`
+### `connect <host:port>`
+
 Connect to a different server without exiting the shell.
 By default, `influx` connects to `localhost:8086`.
 If you do not specify either the host or the port, `influx` assumes the default setting for the missing attribute.
 
-`consistency <level>`
+### `consistency <level>`
+
 Sets the write consistency level: `any`, `one`, `quorum`, or `all`.
 
 `Ctrl+C`
+
 Terminates the currently running query. Useful when an interactive query is taking too long to respond
 because it is trying to return too much data.
 
-`exit` `quit` `Ctrl+D`
+### `exit` | `quit` | `Ctrl+D`
+
 Quits the `influx` shell.
 
-`format <format>`
+### `format <format>`
+
 Specifies the format of the server responses: `json`, `csv`, or `column`.
 See the description of [-format](/influxdb/v1.5/tools/shell/#specify-the-format-of-the-server-responses-with-format) for examples of each format.
 
-`history`
+### `history`
+
 Displays your command history.
 To use the history while in the shell, simply use the "up" arrow.
 `influx` stores your last 1,000 commands in your home directory in `.influx_history`.
 
-`insert`
+### `insert`
+
 Write data using line protocol.
 See [insert](/influxdb/v1.5/tools/shell/#write-data-to-influxdb-with-insert).
 
-`precision <format>`
+### `precision <format>`
+
 Specifies the format/precision of the timestamp: `rfc3339` (`YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ`), `h` (hours), `m` (minutes), `s` (seconds), `ms` (milliseconds), `u` (microseconds), `ns` (nanoseconds).
 Precision defaults to nanoseconds.
 
-`pretty`
+### `pretty`
+
 Turns on pretty print for the `json` format.
 
-`settings`
+### `settings`
+
 Outputs the current settings for the shell including the `Host`, `Username`, `Database`, `Retention Policy`, `Pretty` status, `Chunked` status, `Chunk Size`, `Format`, and `Write Consistency`.
 
-`use [ "<database_name>" | "<database_name>"."<retention policy_name>" ]`
+### `use [ "<database_name>" | "<database_name>"."<retention policy_name>" ]`
+
 Sets the current [database](/influxdb/v1.5/concepts/glossary/#database) and/or [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp).
 Once `influx` sets the current database and/or retention policy, there is no need to specify that database and/or retention policy in queries.
 If you do not specify the retention policy, `influx` automatically queries the `use`d database's `DEFAULT` retention policy.

@@ -61,7 +61,7 @@ influxd backup
 To invoke the new InfluxDB Enterprise-compatible format, run the `influxd backup` command with the `-portable` flag, like this:
 
 ```
-influxd backup -portable [options] <path-to-backup>
+influxd backup -portable [ arguments ] <path-to-backup>
 ```
 
 ##### Arguments

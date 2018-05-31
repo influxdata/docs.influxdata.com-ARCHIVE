@@ -113,6 +113,7 @@ of one, and it is the `DEFAULT` retention policy for the database.
 {{% tab-content %}}
 
 Specify the database with `USE <database_name>`
+
 ```
 > USE NOAA_water_database
 Using database NOAA_water_database
@@ -241,6 +242,7 @@ The `NOAA_water_database` has five different measurements and 14 different serie
 {{% tab-content %}}
 
 Specify the database with `USE <database_name>`
+
 ```
 > USE NOAA_water_database
 Using database NOAA_water_database
@@ -418,6 +420,7 @@ The database has five measurements: `average_temperature`, `h2o_feet`,
 {{% tab-content %}}
 
 Specify the database with `USE <database_name>`
+
 ```
 > USE NOAA_water_database
 Using database NOAA_water_database
@@ -594,6 +597,7 @@ it shows that every measurement has the `location` tag key and that the
 {{% tab-content %}}
 
 Specify the database with `USE <database_name>`
+
 ```
 > USE NOAA_water_database
 Using database NOAA_water_database
@@ -791,6 +795,7 @@ database.
 {{% tab-content %}}
 
 Specify the database with `USE <database_name>`
+
 ```
 > USE NOAA_water_database
 Using database NOAA_water_database
@@ -930,7 +935,6 @@ measurement in the `NOAA_water_database` database.
 
 #### Example 2: Run a `SHOW FIELD KEYS` query without the `ON` clause
 
-```
 {{< vertical-tabs >}}
 {{% tabs %}}
 [CLI](#)
@@ -939,8 +943,9 @@ measurement in the `NOAA_water_database` database.
 {{< tab-content-container >}}
 
 {{% tab-content %}}
-```
+
 Specify the database with `USE <database_name>`
+
 ```
 > USE NOAA_water_database
 Using database NOAA_water_database
@@ -1069,6 +1074,7 @@ Specify the database with the `db` query string parameter:
 
 
 #### Example 3: Run a `SHOW FIELD KEYS` query with the `FROM` clause
+
 ```
 > SHOW FIELD KEYS ON "NOAA_water_database" FROM "h2o_feet"
 

@@ -9,6 +9,7 @@ menu:
 
 ### Features
 
+- Add alert inhibitors that allow an alert to suppress events from other matching alerts.
 - Config format updated to allow for more than one slack configuration.  
 - Added a new Kapacitor node changeDetect that emits a value for each time a series field changes.
 - Add recoverable field to JSON alert response to indicate whether the alert will auto-recover.
@@ -24,7 +25,6 @@ menu:
 - Kapacitor ticks generating a hash instead of their actual given name.
 - Fix deadlock in load service when task has an error.
 - Support PagerDuty API v2.
-- Add alert inhibitors that allow an alert to supress events from other matching alerts.
 - Fix bug where you could not delete a topic handler with the same name as its topic.
 - Adjust PagerDuty v2 service-test names and capture detailed error messages.
 - Fix Kafka configuration.

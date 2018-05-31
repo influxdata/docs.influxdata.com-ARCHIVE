@@ -11,7 +11,8 @@ menu:
     parent: nodes
 ---
 
-The `httpOut` node caches the most recent data for each group it has received.
+The `httpOut` node acts as a simple passthrough and caches the most recent data for each group it has received.
+Because of this, any available chaining method can be used to handle the cached data.
 
 The cached data is available at the given endpoint.
 The endpoint is the relative path from the API endpoint of the running task.
