@@ -187,7 +187,17 @@ Just loop through the above script for each time window and reconstruct all the 
 With that the `error_percent` for every minute will be backfilled for the historical data.
 
 ### Stream method
-To do the same for the streaming case, the TICKscript is very similar:
+
+With the streaming case something similar can be done.  Note that the command
+`kapacitor record stream` does not include the same a historical option `-past`,
+so backfilling using a _stream_ task directly in Kapacitor is not possible.  If
+backfilling is required, the command [`kapacitor record query`](#record-query),
+presented below, can also be used.
+
+Never the less the same TICKscript semantics can be used with a _stream_ task
+to calculate and store a new calculated value, such as `error_percent`, in real time.
+
+The following is just such a TICKscript.
 
 ```javascript
 dbrp "pages"."autogen"
@@ -209,7 +219,7 @@ errors
     |join(views)
         .as('errors', 'views')
     //Calculate percentage
-    |eval(lambda: "errors.value" / ("views.sum" + "errors.sum"))
+    |eval(lambda: "errors.value" / ("views.value" + "errors.value"))
         // Give the resulting field a name
         .as('error_percent')
     |influxDBOut()
@@ -217,14 +227,33 @@ errors
         .measurement('error_percent')
 ```
 
-Note that with the streaming approach the new combined measurement, `error_percent`,
-can be calculated and stored in real time.
+Note that the above stream script is not semantically identical to the
+previous batch example in that it matches data points and not sums of batches
+of data.  For reasons of presentational simplicity this difference is not
+addressed.  
 
-To provide historical data to stream scripts that process multiple measurements,
+### Record Query and backfill with stream
+
+To provide historical data to stream tasks that process multiple measurements,
 use [multiple statements](/influxdb/latest/query_language/data_exploration/#multiple-statements)
 when recording the data.
 
+First use `record query` following the pattern of this generic command:
+
+```
+kapacitor record query -query $'select field1,field2,field3 from "database_name"."autogen"."one" where time > \'YYYY-mm-ddTHH:MM:SSZ\' and time < \'YYYY-mm-ddTHH:MM:SSZ\' GROUP BY *; select field1,field2,field3 from "database_name"."autogen"."two" where time > \'YYYY-mm-ddTHH:MM:SSZ\' and time < \'YYYY-mm-ddTHH:MM:SSZ\' GROUP BY *' -type stream
+```
+For example:
+
 ```bash
-rid=$(kapacitor record query -query $'SELECT * FROM "pages"."autogen"."errors" WHERE time > \'2016-12-21T07:49:00Z\' AND time < \'2016-12-21T08:21:00Z\'; SELECT * FROM "pages"."autogen"."views" WHERE time > \'2016-12-21T07:49:00Z\' AND time < \'2016-12-21T08:21:00Z\'' -type stream
-kapacitor replay -task error-percent -recording $rid -rec-time
+$ kapacitor record query -query $'select value from "pages"."autogen"."errors" where time > \'2018-05-30T12:00:00Z\' and time < \'2018-05-31T12:00:00Z\' GROUP BY *; select value from "pages"."autogen"."views" where time > \'2018-05-30T12:00:00Z\' and time < \'2018-12-21T12:00:00Z\' GROUP BY *' -type stream
+578bf299-3566-4813-b07b-744da6ab081a
+```
+
+The returned recording ID can then be used in a Kapacitor `replay` command using
+the recorded time.
+
+```bash
+$ kapacitor replay -task error_percent_s -recording 578bf299-3566-4813-b07b-744da6ab081a -rec-time
+c623f73c-cf2a-4fce-be4c-9ab89f0c6045
 ```
