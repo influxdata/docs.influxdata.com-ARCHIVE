@@ -14,14 +14,14 @@ Shard entropy refers to inconsistency among shards in a shard group.
 This can be due to the "eventually consistent" nature of data stored in InfluxDB
 Enterprise clusters or by missing/unreachable shards.
 The anti-entropy (AE) service ensures that each data node has all the shards it
-needs according to the meta store.
+needs according to the metastore.
 Missing shards are automatically repaired without operator intervention.
 This guide covers how AE works and some of the basic situations where it takes effect.
 
 ## Concepts
 
 The anti-entropy service examines each node to see whether it has all the shards
-the meta store says it should have.
+the metastore says it should have.
 If any shards are missing or out of sync, the service will copy existing shards
 from other owners to the node that is missing the shard.
 It also ensures replicated shards remain consistent by detecting inconsistencies
