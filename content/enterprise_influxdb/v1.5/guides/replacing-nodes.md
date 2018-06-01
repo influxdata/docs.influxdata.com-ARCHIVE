@@ -63,6 +63,29 @@ If replacing a meta node that is either unreachable or unrecoverable, you need t
 ### Replacing responsive and unresponsive data nodes in a cluster
 The process of replacing both responsive and unresponsive data nodes is the same. Simply follow the instructions for [replacing data nodes](#replacing-data-nodes-in-an-influxdb-enterprise-cluster).
 
+### Reconnecting a data node with a failed disk
+A disk drive failing is never a good thing, but it does happen, and when it does,
+all shards on that node are lost.
+
+Often in this scenario, rather than replacing the entire host, you just need to replace the disk.
+Host information remains the same, but once started again, the `influxd` process doesn't know
+to communicate with the meta nodes so the AE process can't start the shard-sync process.
+
+To resolve this, login to a meta node and use the `update-data` command
+to [update the failed data node to itself](#2-replace-the-old-data-node-with-the-new-data-node).
+
+```bash
+# Pattern
+influxd-ctl update-data <data-node-tcp-bind-address> <data-node-tcp-bind-address>
+
+# Example
+influxd-ctl update-data enterprise-data-01:8088 enterprise-data-01:8088
+```
+
+This will connect the `influxd` process running on the newly replaced disk to the cluster.
+The AE process will detect the missing shards and begin to sync data from other
+shards in the same replica set.
+
 
 ## Replacing meta nodes in an InfluxDB Enterprise cluster
 
@@ -309,3 +332,78 @@ enterprise-data-02:8088  enterprise-data-03:8088  telegraf  autogen  3        11
 
 > **Important:** If replacing other data nodes in the cluster, make sure shards are completely copied from nodes in the same replica set before replacing the other nodes.
 View the [Anti-entropy](/enterprise_influxdb/v1.5/administration/anti-entropy/#concepts) documentation for important information regarding anti-entropy and your database's replication factor.
+
+
+## Troubleshooting
+
+### Cluster commands result in timeout without error
+In some cases, commands used to add or remove nodes from your cluster
+timeout, but don't return an error.
+
+```
+add-data: operation timed out with error:
+```
+
+#### Check your influxdb user permissions
+In order to add or remove nodes to or from a cluster, your user must have `AddRemoveNode` permissions.
+Attempting to manage cluster nodes without the appropriate permissions results
+in a timeout with no accompanying error.
+
+To check user permissions, `curl` the `/user` API endpoint:
+
+```bash
+curl localhost:8091/user
+```
+
+You can also check the permissions of a specific user by passing the username with the `name` parameter:
+
+```bash
+# Pattern
+curl localhost:8091/user?name=<username>
+
+# Example
+curl localhost:8091/user?name=bob
+```
+
+The JSON output will include user information and permissions:
+
+```json
+"users": [
+  {
+    "name": "bob",
+    "hash": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "permissions": {
+      "": [
+        "ViewAdmin",
+        "ViewChronograf",
+        "CreateDatabase",
+        "CreateUserAndRole",
+        "DropDatabase",
+        "DropData",
+        "ReadData",
+        "WriteData",
+        "ManageShard",
+        "ManageContinuousQuery",
+        "ManageQuery",
+        "ManageSubscription",
+        "Monitor"
+      ]
+    }
+  }
+]
+```
+
+_In the output above, `bob` does not have the required `AddRemoveNode` permissions
+and would not be able to add or remove nodes from the cluster._
+
+#### Check the network connection between nodes
+Something may be interrupting the network connection between nodes.
+To check, `ping` the server/node you're trying to add or remove.
+If the ping is unsuccessful, something in the network is preventing communication.
+
+```bash
+ping enterprise-data-03:8088
+```
+
+_If pings are unsuccessful, be sure to ping from other meta nodes as well to determine
+if the communication issues are unique to specific nodes._
