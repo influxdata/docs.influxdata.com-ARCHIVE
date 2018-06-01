@@ -24,13 +24,17 @@ The anti-entropy service examines each node to see whether it has all the shards
 the meta store says it should have.
 If any shards are missing or out of sync, the service will copy existing shards
 from other owners to the node that is missing the shard.
+It also ensures replicated shards remain consistent by detecting inconsistencies
+and syncing the necessary updates from other shards in the same replica set.
 
 By default, the service checks every 30 seconds, as configured in the [`anti-entropy.check-interval`](/enterprise_influxdb/v1.6/administration/configuration/#check-interval-30s) setting.
 
-The anti-entropy service can only address missing shards when there is at least one copy of the shard available.
-In other words, as long as new and healthy nodes are introduced, a replication factor of 2 can
-recover from one missing node, a replication factor of 3 can recover from two missing nodes, and so on.
-A replication factor of 1 cannot be recovered by the anti-entropy service if the shard goes missing.
+The anti-entropy service can only address missing or inconsistent shards when
+there is at least one copy of the shard available.
+In other words, as long as new and healthy nodes are introduced, a replication
+factor of 2 can recover from one missing or inconsistent node;
+a replication factor of 3 can recover from two missing or inconsistent nodes, and so on.
+A replication factor of 1 cannot be recovered by the anti-entropy service.
 
 ## Technical details
 
