@@ -349,7 +349,7 @@ In order to add or remove nodes to or from a cluster, your user must have `AddRe
 Attempting to manage cluster nodes without the appropriate permissions results
 in a timeout with no accompanying error.
 
-To check user permissions, `curl` the `/user` API endpoint:
+To check user permissions, login to one of your meta nodes and `curl` the `/user` API endpoint:
 
 ```bash
 curl localhost:8091/user
