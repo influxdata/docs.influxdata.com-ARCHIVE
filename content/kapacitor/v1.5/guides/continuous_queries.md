@@ -10,8 +10,8 @@ menu:
     parent: guides
 ---
 
-Kapacitor can be used to do the same work as Continuous Queries in InfluxDB.
-Today we are going to explore reasons to use one over the other and the basics of using Kapacitor for CQ type workloads.
+Kapacitor can be used to do the same work as Continuous Queries (CQ) in InfluxDB.
+Today we are going to explore reasons to use one over the other and the basics of using Kapacitor for CQ-type workloads.
 
 ## An Example
 
@@ -157,3 +157,39 @@ Kapacitor is a powerful tool, if you need more power use it.
 If not keep using CQs until you do.
 For more information and help writing TICKscripts from InfluxQL queries take a looks at these [docs](https://docs.influxdata.com/kapacitor/latest/nodes/influx_q_l_node/) on the InfluxQL node in Kapacitor.
 Every function available in the InfluxDB query language is available in Kapacitor, so you can convert any query into a Kapacitor TICKscript.
+
+## Important to Know
+
+### Continuous queries and Kapacitor tasks may produce different results
+For some types of queries, CQs (InfluxDB) and TICKscripts (Kapacitor) may return different results due to how each selects time boundaries. Kapacitor chooses the maximum timestamp (tMax) while InfluxDB chooses the minimum timestamp (tMin). The choice between using tMax or tMin is somewhat arbitrary for InfluxDB, however the same cannot be said for Kapacitor.
+
+Kapacitor has the ability to do complex joining operations on overlapping time windows. For example, if you were to join the mean over the last month with the the mean over the last day, you would need their resulting values to occur at the same time, using the most recent time, tMax. However, Kapacitor would use tMin and the resulting values would not occur at the same time. One would be at the beginning of the last month, while the other would be at the beginning of the last day.
+
+Consider the following query run as both an InfluxQL query and as a TICKscript:
+
+#### InfluxQL
+
+```sql
+SELECT mean(*) FROM ... time >= '2017-03-13T17:50:00Z' AND time < '2017-03-13T17:51:00Z'
+```
+
+#### TICKscript
+
+``` js
+batch
+  |query('SELECT queryDurationNs FROM "_internal".monitor.queryExecutor')
+    .period(1m)
+    .every(1m)
+    .align()
+  |mean('queryDurationNs')
+```
+
+#### Query Results
+| Query Method     | Time                 | Mean                  |
+|:------------     |:----                 |:----                  |
+| Continuous Query | 2017-03-13T22:29:00Z | 8.083532716666666e+08 |
+| TICKscript       | 2017-03-13T17:51:00Z | 8.083532716666666e+08 |
+
+> Note the difference between the returned timestamps.
+
+This is a known issue discussed in [Issue #1258](https://github.com/influxdata/kapacitor/issues/1258) on Github.
