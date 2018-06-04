@@ -33,6 +33,38 @@ InfluxDB shell 1.4.x
 You can now enter InfluxQL queries as well as some CLI-specific commands directly in your terminal.
 You can use `help` at any time to get a list of available commands. Use `Ctrl+C` to cancel if you want to cancel a long-running InfluxQL query.
 
+## Envrionment Variables
+
+The following environment variables can be used to configure settings used by the `influx` client. They can be specified in lower or upper case, however th upper case version takes precedence.
+
+#### `HTTP_PROXY`
+Defines the proxy server to use for HTTP.
+
+**Value format:**`[protocol://]<host>[:port]`
+
+```
+HTTP_PROXY=http://localhost:1234
+```
+
+#### `HTTPS_PROXY`
+Defines the proxy server to use for HTTPS. Takes precedence over HTTP_PROXY for HTTPS.
+
+**Value format:**`[protocol://]<host>[:port]`
+
+```
+HTTP_PROXY=https://localhost:1443
+```
+
+#### `NO_PROXY`
+List of host names that should **not** go through any proxy. If set to an asterisk '\*' only, it matches all hosts.
+
+**Value format:** comma-separated list of hosts
+
+```
+HTTP_PROXY=123.45.67.89,123.45.67.90
+```
+
+
 ## `influx` Arguments
 There are several arguments you can pass into `influx` when starting.
 List them with `$ influx --help`.
