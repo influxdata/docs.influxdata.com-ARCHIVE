@@ -8,6 +8,15 @@ menu:
     parent: About the project
 ---
 
+## v1.6.4 [2018-06-05]
+
+### Bugfixes
+
+* Fix SNMP overriding of auto-configured table fields.
+* Fix uint support in CloudWatch output.
+* Fix documentation of `instance_name` option in Varnish input.
+* Revert to previous Aerospike library version due to memory leak.
+
 ## v1.6.3 [2018-05-21]
 
 ### Bug fixes
