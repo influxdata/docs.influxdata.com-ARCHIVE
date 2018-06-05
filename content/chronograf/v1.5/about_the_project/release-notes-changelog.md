@@ -8,6 +8,12 @@ menu:
     parent: About the project
 ---
 
+## v1.5.0.1 [2018-06-04]
+
+### Bug Fixes
+
+* Fix Color Scale Dropdown
+
 ## v1.5.0.0 [2018-05-22]
 
 ### Features
