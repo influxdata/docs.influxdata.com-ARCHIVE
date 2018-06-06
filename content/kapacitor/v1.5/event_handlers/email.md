@@ -80,7 +80,7 @@ The following Email event handler options can be set in a
 ```yaml
 id: handler-id
 topic: topic-name
-kind: email
+kind: smtp
 options:
   to:
     - oncall1@example.com
@@ -166,14 +166,14 @@ kapacitor define cpu_alert -tick cpu_alert.tick
 kapacitor enable cpu_alert
 ```
 
-Create a handler file that subscribes to the `cpu` topic and uses the `.email()`
+Create a handler file that subscribes to the `cpu` topic and uses the `email` or `smtp`
 event handler to email alerts.
 
 _**email\_cpu\_handler.yaml**_
 ```yaml
 id: email-cpu-alert
 topic: cpu
-kind: email
+kind: smtp
 options:
   to:
     - oncall1@mydomain.com
