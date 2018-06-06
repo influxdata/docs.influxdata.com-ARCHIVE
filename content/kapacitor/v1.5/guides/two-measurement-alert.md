@@ -81,7 +81,7 @@ data
 
 This can be used to create visualizations similar to:
 
-![Graphing the percentage difference between two measurements](/img/kapacitor/comparing-two-measurements.png)
+<img src='/img/kapacitor/comparing-two-measurements.png' alt='Graphing the percentage difference between two measurements' style='width: 100%; max-width: 800px;'>
 
 ## The full TICKscript
 Below is the entire, uncommented TICKscript:
