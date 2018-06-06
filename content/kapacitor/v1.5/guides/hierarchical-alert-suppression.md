@@ -1,6 +1,6 @@
 ---
 title: Suppressing Kapacitor alerts based on hierarchy
-description: Kapacitor's
+description: Kapacitor's '.inhibit()' allows you to create hierarchical alerting architectures by suppressing alerts with matching tags in a specified alert category.
 menu:
   kapacitor_1_5:
     name: Hierarchical alert suppression
