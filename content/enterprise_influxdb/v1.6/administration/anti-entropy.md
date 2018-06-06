@@ -15,17 +15,22 @@ This can be due to the "eventually consistent" nature of data stored in InfluxDB
 Enterprise clusters or due to missing or unreachable shards.
 The anti-entropy (AE) service ensures that each data node has all the shards it
 needs according to the metastore and that all shards in a shard group are consistent.
-Missing shards are automatically repaired without operator intervention.
+Missing shards are automatically repaired without operator intervention while
+out-of-sync shards can be manually queued for repair.
 This guide covers how AE works and some of the basic situations where it takes effect.
 
 ## Concepts
 
-The anti-entropy service examines each node to see whether it has all the shards
-the metastore says it should have.
-If any shards are missing or out of sync, the service will copy existing shards
-from other owners to the node that is missing the shard.
-It also ensures replicated shards remain consistent by detecting inconsistencies
-and syncing the necessary updates from other shards in the same shard group.
+The anti-entropy service is part of the `influxd` process running on each data node
+that ensures the node has all the shards the metastore says it should have and
+that those shards are in sync with others in the same shard group.
+If any shards are missing, the AE service will copy existing shards from other
+shard owners.
+If data inconsistencies are detected among shards in a shard group, you can
+[envoke the AE process](#command-line-tools-for-managing-entropy) and queue the
+out-of-sync shards for repair.
+In the repair process, AE will sync the necessary updates from other shards
+in the same shard group.
 
 By default, the service checks every 30 seconds, as configured in the [`anti-entropy.check-interval`](/enterprise_influxdb/v1.6/administration/configuration/#check-interval-30s) setting.
 
@@ -188,7 +193,7 @@ The anti-entropy service will automatically copy shards to the new machines.
 Once you have successfully run the `influxd-ctl update-data` command, you are free
 to shut down the retired node without causing any interruption to the cluster.
 The anti-entropy process will continue copying the appropriate shards from the
-remaining replicate in the cluster.
+remaining replicas in the cluster.
 
 ## Changes to the AE Service in v1.6
 
