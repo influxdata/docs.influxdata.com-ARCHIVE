@@ -242,6 +242,29 @@ to shut down the retired node without causing any interruption to the cluster.
 The anti-entropy process will continue copying the appropriate shards from the
 remaining replicas in the cluster.
 
+### Fixing entropy in active shards
+In rare cases, the currently active shard, or the shard to which new data is
+currently being written, may find itself with inconsistent data.
+Because the AE process can't write to hot shards, you must stop writes to the new
+shard using the [`influxd-ctl truncate-shards` command](/enterprise_influxdb/v1.6/administration/cluster-commands/#truncate-shards),
+then add the inconsistent shard to the entropy repair queue:
+
+```bash
+# Truncate hot shards
+influxd-ctl truncate-shards
+
+# Show shards with entropy
+influxd-ctl entropy show
+
+Entropy
+==========
+ID     Database  Retention Policy  Start                          End                            Expires                        Status
+21179  statsdb   1hour             2018-06-06 12:00:00 +0000 UTC  2018-06-06 23:44:12 +0000 UTC  2018-12-06 00:00:00 +0000 UTC  diff
+
+# Add the inconsistent shard to the repair queue
+influxd-ctl entropy repair 21179
+```
+
 ## Changes to the AE Service in v1.6
 
 - New `entropy` command in the `influxd-ctl` cluster management utility that
