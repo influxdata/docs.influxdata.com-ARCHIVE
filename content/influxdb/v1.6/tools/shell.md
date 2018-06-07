@@ -35,7 +35,7 @@ You can use `help` at any time to get a list of available commands. Use `Ctrl+C`
 
 ## Envrionment Variables
 
-The following environment variables can be used to configure settings used by the `influx` client. They can be specified in lower or upper case, however th upper case version takes precedence.
+The following environment variables can be used to configure settings used by the `influx` client. They can be specified in lower or upper case, however the upper case version takes precedence.
 
 #### `HTTP_PROXY`
 Defines the proxy server to use for HTTP.
