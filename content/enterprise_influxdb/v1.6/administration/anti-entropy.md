@@ -41,6 +41,53 @@ factor of 2 can recover from one missing or inconsistent node;
 a replication factor of 3 can recover from two missing or inconsistent nodes, and so on.
 A replication factor of 1 cannot be recovered by the anti-entropy service.
 
+## Symptoms of entropy
+The AE process automatically detects and fixes missing shards, but shard inconsistencies
+must be [manually detected and queued for repair](#detecting-and-repairing-entropy).
+There are symptoms of entropy that, if seen, would indicate an entropy repair is necessary.
+
+### Different results for the same query
+When running queries against an InfluxDB Enterprise cluster, each query may be routed to a different data node.
+If entropy affects data within the queried range, the same query will return different
+results depending on which node it is run against.
+
+_**Query attempt 1**_
+```
+SELECT mean("usage_idle") WHERE time > '2018-06-06T18:00:00Z' AND time < '2018-06-06T18:15:00Z' GROUP BY time(3m) FILL(0)
+
+name: cpu
+time                  mean
+----                  ----
+1528308000000000000   99.11867392974537
+1528308180000000000   99.15410822137049
+1528308360000000000   99.14927494363032
+1528308540000000000   99.1980535465783
+1528308720000000000   99.18584290492262
+```
+
+_**Query attempt 2**_
+```
+SELECT mean("usage_idle") WHERE time > '2018-06-06T18:00:00Z' AND time < '2018-06-06T18:15:00Z' GROUP BY time(3m) FILL(0)
+
+name: cpu
+time                  mean
+----                  ----
+1528308000000000000   99.11867392974537
+1528308180000000000   0
+1528308360000000000   0
+1528308540000000000   0
+1528308720000000000   99.18584290492262
+```
+
+This indicates that data is missing in the queried time range and entropy is present.
+
+### Flapping dashboards
+A "flapping" dashboard means data visualizations changing when data is refreshed
+and pulled from a node with entropy (inconsistent data).
+It is the visual manifestation of getting [different results from the same query](#different-results-from-the-same-query).
+
+<img src="/img/kapacitor/flapping-dashboard.gif" alt="Flapping dashboard" style="width:100%; max-width:800px">
+
 ## Technical details
 
 ### Repair order
@@ -137,7 +184,7 @@ Once a repair has started, requests to cancel it are ignored.
 
 This section covers some of the common use cases for the anti-entropy service.
 
-### Detecting an repairing entropy
+### Detecting and repairing entropy
 Periodically, you may want to see if shards in your cluster have entropy or are
 inconsistent with other shards in the shard group.
 Use the `influxd-ctl entropy show` command to list all shards with detected entropy:
