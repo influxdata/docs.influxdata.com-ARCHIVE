@@ -24,10 +24,12 @@ Aggregate, select, transform, and predict data with InfluxQL functions.
     * [SUM()](#sum)
 * [Selectors](#selectors)
     * [BOTTOM()](#bottom)
+    * [COUNT_BETWEEN()](#count-between)
     * [FIRST()](#first)
     * [LAST()](#last)
     * [MAX()](#max)
     * [MIN()](#min)
+    * [PERCENTAGE_BETWEEN()](#percentage-between)
     * [PERCENTILE()](#percentile)
     * [SAMPLE()](#sample)
     * [TOP()](#top)
@@ -1087,6 +1089,40 @@ tagKey
 location
 ```
 
+## COUNT_BETWEEN()
+Returns number of [field values](/influxdb/v1.6/concepts/glossary/#field-value) that greater than or equal minimum limit an less than or equal maximum limit.
+
+### Description of Syntax
+
+`COUNT_BETWEEN(field_key,MIN,MAX)`
+&emsp;&emsp;&emsp;
+Returns the number of field values greater than or equal to the specified MIN field value and less than or equal to the specified MAX [field values](/influxdb/v1.6/concepts/glossary/#field-value).
+
+`COUNT_BETWEEN(/regular_expression/,MIN,MAX)`
+&emsp;&emsp;&emsp;
+Returns number of fields values with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions) which greater than or equal to the specified MIN field value and less than or equal to the specified MAX.
+
+`COUNT_BETWEEN(*,MIN,MAX)`
+&emsp;&emsp;&emsp;
+Returns number of fields values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement) which greater than or equal to the specified MIN field value and less than or equal to the specified MAX.
+
+`MIN` and `MAX` must be an integer or floating point numbers.
+`COUNT_BETWEEN()` supports uint64, int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
+
+### Examples
+
+#### Example 1: Select the number of field values associated with a field key
+```
+> SELECT COUNT_BETWEEN("water_level",0,5) FROM "h2o_feet"
+
+name: h2o_feet
+time                   count_between
+----                   ----------
+2015-08-31T03:42:00Z   9549
+```
+
+The query returns the number of water_level field keys with values between 0 and 5 feet in the h2o_feet measurement. Values 0 and 5 are included.
+
 ## FIRST()
 Returns the [field value ](/influxdb/v1.6/concepts/glossary/#field-value) with the oldest timestamp.
 
@@ -1455,6 +1491,40 @@ The query [fills](/influxdb/v1.6/query_language/data_exploration/#group-by-time-
 Notice that the [`GROUP BY time()` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) overrides the points’ original timestamps.
 The timestamps in the results indicate the the start of each 12-minute time interval;
 the first point in the results covers the time interval between `2015-08-17T23:48:00Z` and just before `2015-08-18T00:00:00Z` and the last point in the results covers the time interval between `2015-08-18T00:24:00Z` and just before `2015-08-18T00:36:00Z`.
+
+## PERCENTAGE_BETWEEN()
+Returns percent of [field values](/influxdb/v1.6/concepts/glossary/#field-value) that greater than or equal minimum limit an less than or equal maximum limit.
+
+### Description of Syntax
+
+`PERCENTAGE_BETWEEN(field_key,MIN,MAX)`
+&emsp;&emsp;&emsp;
+Returns the percent of field values greater than or equal to the specified MIN field value and less than or equal to the specified MAX [field values](/influxdb/v1.6/concepts/glossary/#field-value).
+
+`PERCENTAGE_BETWEEN(/regular_expression/,MIN,MAX)`
+&emsp;&emsp;&emsp;
+Returns percent of fields values with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions) which greater than or equal to the specified MIN field value and less than or equal to the specified MAX.
+
+`PERCENTAGE_BETWEEN(*,MIN,MAX)`
+&emsp;&emsp;&emsp;
+Returns percent of fields values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement) which greater than or equal to the specified MIN field value and less than or equal to the specified MAX.
+
+`MIN` and `MAX` must be an integer or floating point numbers.
+`PERCENTAGE_BETWEEN()` supports uint64, int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
+
+### Examples
+
+#### Example 1: Select the percent of field values associated with a field key
+```
+> SELECT PERCENTAGE_BETWEEN("water_level",0,5) FROM "h2o_feet"
+
+name: h2o_feet
+time                   percentage_between
+----                   ----------
+2015-08-31T03:42:00Z   0.6258356272119544
+```
+
+The query returns the percent of water_level field keys with values between 0 and 5 feet in the h2o_feet measurement. Values 0 and 5 are included.
 
 ## PERCENTILE()
 Returns the `N`th percentile [field value](/influxdb/v1.6/concepts/glossary/#field-value).
