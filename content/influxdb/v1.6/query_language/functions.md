@@ -1090,21 +1090,21 @@ location
 ```
 
 ## COUNT_BETWEEN()
-Returns number of [field values](/influxdb/v1.6/concepts/glossary/#field-value) that greater than or equal minimum limit an less than or equal maximum limit.
+Returns number of [field values](/influxdb/v1.6/concepts/glossary/#field-value) greater than or equal to the minimum limit and less than or equal to the maximum limit.
 
 ### Description of Syntax
 
 `COUNT_BETWEEN(field_key,MIN,MAX)`
 &emsp;&emsp;&emsp;
-Returns the number of field values greater than or equal to the specified MIN field value and less than or equal to the specified MAX [field values](/influxdb/v1.6/concepts/glossary/#field-value).
+Returns the number of [field values](/influxdb/v1.6/concepts/glossary/#field-value) greater than or equal to the specified MIN [field value](/influxdb/v1.6/concepts/glossary/#field-value) and less than or equal to the specified MAX [field value](/influxdb/v1.6/concepts/glossary/#field-value).
 
 `COUNT_BETWEEN(/regular_expression/,MIN,MAX)`
 &emsp;&emsp;&emsp;
-Returns number of fields values with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions) which greater than or equal to the specified MIN field value and less than or equal to the specified MAX.
+Returns number of [field values](/influxdb/v1.6/concepts/glossary/#field-value) with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions) which greater than or equal to the specified MIN [field value](/influxdb/v1.6/concepts/glossary/#field-value) and less than or equal to the specified MAX [field value](/influxdb/v1.6/concepts/glossary/#field-value).
 
 `COUNT_BETWEEN(*,MIN,MAX)`
 &emsp;&emsp;&emsp;
-Returns number of fields values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement) which greater than or equal to the specified MIN field value and less than or equal to the specified MAX.
+Returns number of fields values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement) which greater than or equal to the specified MIN [field value](/influxdb/v1.6/concepts/glossary/#field-value) and less than or equal to the specified MAX [field value](/influxdb/v1.6/concepts/glossary/#field-value).
 
 `MIN` and `MAX` must be an integer or floating point numbers.
 `COUNT_BETWEEN()` supports uint64, int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
@@ -1493,21 +1493,21 @@ The timestamps in the results indicate the the start of each 12-minute time inte
 the first point in the results covers the time interval between `2015-08-17T23:48:00Z` and just before `2015-08-18T00:00:00Z` and the last point in the results covers the time interval between `2015-08-18T00:24:00Z` and just before `2015-08-18T00:36:00Z`.
 
 ## PERCENTAGE_BETWEEN()
-Returns percent of [field values](/influxdb/v1.6/concepts/glossary/#field-value) that greater than or equal minimum limit an less than or equal maximum limit.
+Returns percent of [field values](/influxdb/v1.6/concepts/glossary/#field-value) greater than or equal to the minimum limit and less than or equal to the maximum limit.
 
 ### Description of Syntax
 
 `PERCENTAGE_BETWEEN(field_key,MIN,MAX)`
 &emsp;&emsp;&emsp;
-Returns the percent of field values greater than or equal to the specified MIN field value and less than or equal to the specified MAX [field values](/influxdb/v1.6/concepts/glossary/#field-value).
+Returns the percent of field values greater than or equal to the specified MIN [field value](/influxdb/v1.6/concepts/glossary/#field-value) and less than or equal to the specified MAX [field value](/influxdb/v1.6/concepts/glossary/#field-value).
 
 `PERCENTAGE_BETWEEN(/regular_expression/,MIN,MAX)`
 &emsp;&emsp;&emsp;
-Returns percent of fields values with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions) which greater than or equal to the specified MIN field value and less than or equal to the specified MAX.
+Returns percent of fields values with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions) which greater than or equal to the specified MIN [field value](/influxdb/v1.6/concepts/glossary/#field-value) and less than or equal to the specified MAX [field value](/influxdb/v1.6/concepts/glossary/#field-value).
 
 `PERCENTAGE_BETWEEN(*,MIN,MAX)`
 &emsp;&emsp;&emsp;
-Returns percent of fields values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement) which greater than or equal to the specified MIN field value and less than or equal to the specified MAX.
+Returns percent of fields values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement) which greater than or equal to the specified MIN [field value](/influxdb/v1.6/concepts/glossary/#field-value) and less than or equal to the specified MAX [field value](/influxdb/v1.6/concepts/glossary/#field-value).
 
 `MIN` and `MAX` must be an integer or floating point numbers.
 `PERCENTAGE_BETWEEN()` supports uint64, int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
