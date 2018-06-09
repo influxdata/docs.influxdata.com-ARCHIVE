@@ -1090,7 +1090,7 @@ location
 ```
 
 ## COUNT_BETWEEN()
-Returns number of [field values](/influxdb/v1.6/concepts/glossary/#field-value) greater than or equal to the minimum limit and less than or equal to the maximum limit.
+Returns number of [field values](/influxdb/v1.6/concepts/glossary/#field-value) greater than or equal to the minimum limit and less than or equal to the maximum limit. 
 
 ### Description of Syntax
 
