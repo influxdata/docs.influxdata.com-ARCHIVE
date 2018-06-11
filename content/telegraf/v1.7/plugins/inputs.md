@@ -8,10 +8,10 @@ menu:
     parent: Plugins
 ---
 
-Telegraf input plugins are used with the InfluxData time series platform to collect metrics from the system, services, or third party APIs. All metrics are gathered from the inputs you [enable and configure in the configuration file](/telegraf/v1.6/administration/configuration/).
+Telegraf input plugins are used with the InfluxData time series platform to collect metrics from the system, services, or third party APIs. All metrics are gathered from the inputs you [enable and configure in the configuration file](/telegraf/v1.7/administration/configuration/).
 
 > ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.6`.
->The [Release Notes/Changelog](/telegraf/v1.6/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
+>The [Release Notes/Changelog](/telegraf/v1.7/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
 
 ## Usage instructions
 
@@ -39,6 +39,10 @@ server. The [ExtendedStatus](https://httpd.apache.org/docs/2.4/mod/core.html#ext
 to collect all available fields. For information about how to configure your server reference the
 [module documenation](https://httpd.apache.org/docs/2.4/mod/mod_status.html#enable).
 
+### [Aurora (`aurora`)](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/aurora) -- NEW in v.1.7
+
+The [Aurora input plugin](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/aurora) gathers metrics from [Apache Aurora](https://aurora.apache.org/) schedulers. For monitoring recommendations, see [Monitoring your Aurora cluster](https://aurora.apache.org/documentation/latest/operations/monitoring/).
+
 ### [Bcache (`bcache`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/bcache)
 
 The [Bcache (`bcache`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/bcache) gets bcache statistics from the `stats_total` directory and `dirty_data` file.
@@ -48,10 +52,9 @@ The [Bcache (`bcache`) input plugin](https://github.com/influxdata/telegraf/tree
 The [Bond (`bond`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/bond) collects network bond interface status, bond's slaves interfaces status and failures count of
 bond's slaves interfaces. The plugin collects these metrics from `/proc/net/bonding/*` files.
 
-### [Cassandra (`cassandra`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/cassandra)
+### [Burrow (`burrow`)](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/burrow) -- NEW in v.1.7
 
-The [Cassandra (`cassandra`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/cassandra) collects Cassandra 3 / JVM metrics exposed as MBean attributes through the jolokia REST endpoint.
-All metrics are collected for each server configured.
+The [Burrow (`burrow` input plugin)](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/burrow) collects Apache Kafka topic, consumer, and partition status using the [Burrow](https://github.com/linkedin/Burrow) HTTP [HTTP Endpoint](https://github.com/linkedin/Burrow/wiki/HTTP-Endpoint).
 
 ### [Ceph Storage (`ceph`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/ceph)
 
@@ -453,6 +456,11 @@ versions 2008+. Recorded metrics are lightweight and use Dynamic Management View
 The [StatsD (`statsd`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/statsd) is a special type of plugin which runs a backgrounded `statsd` listener service while Telegraf is running.
 StatsD messages are formatted as described in the original [etsy statsd](https://github.com/etsy/statsd/blob/master/docs/metric_types.md) implementation.
 
+### [Syslog (`syslog`)](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/syslog) -- NEW in v.1.7
+
+The [Syslog (`syslog`) input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/syslog) listens for syslog messages transmitted over
+[UDP](https://tools.ietf.org/html/rfc5426) or [TCP](https://tools.ietf.org/html/rfc5425). Syslog messages should be formatted according to [RFC 5424](https://tools.ietf.org/html/rfc5424).
+
 ### [Sysstat (`sysstat`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/sysstat)
 
 The [Sysstat (`sysstat`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/sysstat) collects [sysstat](https://github.com/sysstat/sysstat) system metrics with the sysstat
@@ -525,6 +533,11 @@ The [Zipkin (`zipkin`) input plugin](https://github.com/influxdata/telegraf/tree
 The [Zookeeper (`zookeeper`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/zookeeper) collects variables outputted from the `mntr` command [Zookeeper Admin](https://zookeeper.apache.org/doc/trunk/zookeeperAdmin.html).
 
 ## Deprecated Telegraf input plugins
+
+### [Cassandra (`cassandra`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/cassandra)
+
+DEPRECATED as of version 1.7. The [Cassandra (`cassandra`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/cassandra) collects Cassandra 3 / JVM metrics exposed as MBean attributes through the jolokia REST endpoint.
+All metrics are collected for each server configured.
 
 ### [HTTP JSON (`httpjson`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/httpjson)
 

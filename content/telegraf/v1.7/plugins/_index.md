@@ -10,18 +10,18 @@ menu:
 Telegraf is an agent, written in the Go programming language, for collecting, processing, aggregating, and writing metrics. Telegraf is plugin-driven and supports four categories of plugin types, including input, output, aggregator, and processor.
 
 
-## [Telegraf input plugins](/telegraf/v1.6/plugins/inputs/)
+## [Telegraf input plugins](/telegraf/v1.7/plugins/inputs/)
 
-The [Telegraf input plugins](/telegraf/v1.6/plugins/inputs/) collect metrics from the system, services, or third party APIs.
+The [Telegraf input plugins](/telegraf/v1.7/plugins/inputs/) collect metrics from the system, services, or third party APIs.
 
-## [Telegraf output plugins](/telegraf/v1.6/plugins/outputs/)
+## [Telegraf output plugins](/telegraf/v1.7/plugins/outputs/)
 
-The [Telegraf output plugins](/telegraf/v1.6/plugins/outputs/) transform, decorate, and filter metrics.
+The [Telegraf output plugins](/telegraf/v1.7/plugins/outputs/) transform, decorate, and filter metrics.
 
-## [Telegraf aggregator plugins](/telegraf/v1.6/plugins/aggregators/)
+## [Telegraf aggregator plugins](/telegraf/v1.7/plugins/aggregators/)
 
-The [Telegraf aggregator plugins](/telegraf/v1.6/plugins/aggregators/) create aggregate metrics (for example, mean, min, max, quantiles, etc.)
+The [Telegraf aggregator plugins](/telegraf/v1.7/plugins/aggregators/) create aggregate metrics (for example, mean, min, max, quantiles, etc.)
 
-## [Telegraf processor plugins](/telegraf/v1.6/plugins/processors/)
+## [Telegraf processor plugins](/telegraf/v1.7/plugins/processors/)
 
-The [Telegraf processor plugins](/telegraf/v1.6/plugins/processors/) write metrics to various destinations.
+The [Telegraf processor plugins](/telegraf/v1.7/plugins/processors/) write metrics to various destinations.

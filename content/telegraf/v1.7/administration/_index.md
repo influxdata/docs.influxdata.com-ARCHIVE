@@ -8,8 +8,8 @@
 
 ---
 
-## [Configuring Telegraf](/telegraf/v1.6/administration/configuration/)
+## [Configuring Telegraf](/telegraf/v1.7/administration/configuration/)
 
-## [Running Telegraf as a Windows service](/telegraf/v1.6/administration/windows_service/)
+## [Running Telegraf as a Windows service](/telegraf/v1.7/administration/windows_service/)
 
-## [Troubleshooting Telegraf](/telegraf/v1.6/administration/troubleshooting/)
+## [Troubleshooting Telegraf](/telegraf/v1.7/administration/troubleshooting/)

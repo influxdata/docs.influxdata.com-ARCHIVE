@@ -23,13 +23,13 @@ menu:
 
 ### New input plugins
 
-- [`aurora`](./plugins/inputs/aurora/README.md) - Contributed by @influxdata
+- [Aurora (`aurora`)](./plugins/inputs/aurora/README.md) - Contributed by @influxdata
 - [Burrow (`burrow`) input plugin](./plugins/inputs/burrow/README.md) - Contributed by @arkady-emelyanov
 - [`fibaro`](./plugins/inputs/fibaro/README.md) - Contributed by @dynek
 - [`jti_openconfig_telemetry`](./plugins/inputs/jti_openconfig_telemetry/README.md) - Contributed by @ajhai
 - [`mcrouter`](./plugins/inputs/mcrouter/README.md) - Contributed by @cthayer
-- [NVIDIA SMI (`nvidia_smi`) input plugin](./plugins/inputs/nvidia_smi/README.md) - Contributed by @jackzampolin
-- [Syslog (`syslog`) input plugin](./plugins/inputs/syslog/README.md) - Contributed by @influxdata
+- [NVIDIA SMI (`nvidia_smi`)](./plugins/inputs/nvidia_smi/README.md) - Contributed by @jackzampolin
+- [Syslog (`syslog`)](./plugins/inputs/syslog/README.md) - Contributed by @influxdata
 
 ### New processor plugins
 
@@ -39,7 +39,7 @@ menu:
 
 ### New output plugins
 
-- [HTTP (`http`) output plugin](./plugins/outputs/http/README.md) - Contributed by @Dark0096
+- [HTTP (`http`)](./plugins/outputs/http/README.md) - Contributed by @Dark0096
 - [Application Insights (`application_insights`) output plugin](./plugins/outputs/application_insights/README.md): Contribute by @karolz-ms
 
 ### Features

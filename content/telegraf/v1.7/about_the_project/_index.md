@@ -7,7 +7,7 @@
      weight: 10
 ---
 
-## [Telegraf release notes](/telegraf/v1.6/about_the_project/release-notes-changelog/)
+## [Telegraf release notes](/telegraf/v1.7/about_the_project/release-notes-changelog/)
 
 ## [Contributing to Telegraf](https://github.com/influxdata/telegraf/blob/master/CONTRIBUTING.md)
 

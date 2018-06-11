@@ -11,7 +11,7 @@ menu:
 Aggregators emit new aggregate metrics based on the metrics collected by the input plugins.
 
 > ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.6`.
->The [Release notes and changelog](/telegraf/v1.6/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
+>The [Release notes and changelog](/telegraf/v1.7/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
 
 ## Supported Telegraf aggregator plugins
 

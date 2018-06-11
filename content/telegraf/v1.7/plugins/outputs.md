@@ -10,8 +10,8 @@ menu:
 
 Telegraf allows users to specify multiple output sinks in the configuration file.
 
-> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.6`.
->The [Release notes and changelog](/telegraf/v1.6/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
+> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.7`.
+>The [Release notes and changelog](/telegraf/v1.7/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
 
 ## Supported Telegraf output plugins
 
@@ -28,6 +28,10 @@ Metrics are grouped by converting any `_` characters to `.` in the Point Name.
 The [AMQP (`amqp`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/outputs/amqp) writes to a AMQP 0-9-1 Exchange, a prominent implementation of this protocol being [RabbitMQ](https://www.rabbitmq.com/).
 
 Metrics are written to a topic exchange using `tag`, defined in configuration file as `RoutingTag`, as a routing key.
+
+### [Application Insights (`application_insights`)](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/outputs/application_insights)
+
+The [Application Insights (`application_insights`) output plugin](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/outputs/application_insights) writes Telegraf metrics to [Application Insights (Microsoft Azure)](https://azure.microsoft.com/en-us/services/application-insights/).
 
 ### [CloudWatch (`cloudwatch`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/outputs/cloudwatch)
 
@@ -60,6 +64,10 @@ The [Graphite (`graphite`) output plugin](https://github.com/influxdata/telegraf
 ### [Graylog (`graylog`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/outputs/graylog)
 
 The  [Graylog (`graylog`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/outputs/graylog) writes to a Graylog instance using the `gelf` format.
+
+### [HTTP (`http`)](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/http) -- NEW in v.1.7
+
+The [HTTP (`http`) output plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/http) sends metrics in a HTTP message encoded using one of the output data formats. For `data_formats` that support batching, metrics are sent in batch format.
 
 ### [InfluxDB (`influxdb`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/outputs/influxdb)
 
