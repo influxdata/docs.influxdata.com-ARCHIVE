@@ -2,7 +2,7 @@
 title: Telegraf plugins
 description: Telegraf plugins are agents used in the InfluxData time series platform for collecting, processing, aggregating, and writing metrics from time series data on the InfluxDB time series database and other popular databases and applications.
 menu:
-  telegraf_1_6:
+  telegraf_1_7:
     name: Plugins
     weight: 40
 ---

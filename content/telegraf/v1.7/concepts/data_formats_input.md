@@ -2,7 +2,7 @@
 title: Telegraf input data formats
 description: Telegraf, the plugin-driven server agent component of the InfluxData time series platform, supports parsing input data formats into metrics for InfluxDB Line Protocol, JSON, Graphite, Value, Nagios, Collectd, and Dropwizard.
 menu:
-  telegraf_1_6:
+  telegraf_1_7:
     name: Input data formats
     weight: 20
     parent: Concepts

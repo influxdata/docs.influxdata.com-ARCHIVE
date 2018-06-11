@@ -2,7 +2,7 @@
 title: Running Telegraf as a Windows service
 
 menu:
-  telegraf_1_6:
+  telegraf_1_7:
     name: Running as Windows service
     weight: 20
     parent: Administration

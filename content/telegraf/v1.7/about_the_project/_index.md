@@ -2,7 +2,7 @@
  title: About the Telegraf project
 
  menu:
-   telegraf_1_6:
+   telegraf_1_7:
      name: About the project
      weight: 10
 ---

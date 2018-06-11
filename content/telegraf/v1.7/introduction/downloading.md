@@ -1,7 +1,7 @@
 ---
 title: Downloading Telegraf
 menu:
-  telegraf_1_6:
+  telegraf_1_7:
     name: Downloading
     weight: 10
     parent: Introduction

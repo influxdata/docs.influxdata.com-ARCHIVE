@@ -2,7 +2,7 @@
 title: Telegraf output data formats
 description: Telegraf, the plugin-driven server agent component of the InfluxData time series platform, can serialize metrics into output data formats for InfluxDB Line Protocol, JSON, and Graphite.
 menu:
-  telegraf_1_6:
+  telegraf_1_7:
     name: Output data formats
     weight: 30
     parent: Concepts

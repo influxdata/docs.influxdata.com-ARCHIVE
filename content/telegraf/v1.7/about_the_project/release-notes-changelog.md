@@ -2,11 +2,89 @@
 title: Telegraf release notes
 description: See the new features, bug fixes, breaking changes, and enhancements in the latest and earlier Telegraf releases.
 menu:
-  telegraf_1_6:
+  telegraf_1_7:
     name: Release notes
     weight: 10
     parent: About the project
 ---
+
+## v1.7 [2018-06-xx]
+
+### Release notes
+
+- The Cassandra (`cassandra`) input plugin has been deprecated in favor of the Jolokia2 (`jolokia2`)
+  input plugin which is much more configurable and more performant.  There is
+  an [example configuration](./plugins/inputs/jolokia2/examples) to help you
+  get started.
+
+- For plugins supporting TLS, you can now specify the certificate and keys
+  using `tls_ca`, `tls_cert`, `tls_key`.  These options behave the same as
+  the, now deprecated, `ssl` forms.
+
+### New input plugins
+
+- [`aurora`](./plugins/inputs/aurora/README.md) - Contributed by @influxdata
+- [Burrow (`burrow`) input plugin](./plugins/inputs/burrow/README.md) - Contributed by @arkady-emelyanov
+- [`fibaro`](./plugins/inputs/fibaro/README.md) - Contributed by @dynek
+- [`jti_openconfig_telemetry`](./plugins/inputs/jti_openconfig_telemetry/README.md) - Contributed by @ajhai
+- [`mcrouter`](./plugins/inputs/mcrouter/README.md) - Contributed by @cthayer
+- [NVIDIA SMI (`nvidia_smi`) input plugin](./plugins/inputs/nvidia_smi/README.md) - Contributed by @jackzampolin
+- [Syslog (`syslog`) input plugin](./plugins/inputs/syslog/README.md) - Contributed by @influxdata
+
+### New processor plugins
+
+- [converter](./plugins/processors/converter/README.md) - Contributed by @influxdata
+- [regex](./plugins/processors/regex/README.md) - Contributed by @44px
+- [topk](./plugins/processors/topk/README.md) - Contributed by @mirath
+
+### New output plugins
+
+- [HTTP (`http`) output plugin](./plugins/outputs/http/README.md) - Contributed by @Dark0096
+- [Application Insights (`application_insights`) output plugin](./plugins/outputs/application_insights/README.md): Contribute by @karolz-ms
+
+### Features
+
+- Add `repl_oplog_window_se`c metric to `mongodb` input.
+- Add per-host shard metrics in `mongodb` input.
+- Skip files with leading `..` in config directory.
+- Add TLS support to `socket_writer` and `socket_listener` plugins.
+- Add `snmp` input option to strip non-fixed length index suffixes.
+- Add server version tag to `docker` input.
+- Add support for LeoFS 1.4 to `leofs` input.
+- Add parameter to force the interval of gather for `sysstat`.
+- Support busybox ping in the `ping` input.
+- Add input plugin for McRouter.
+- Add `topk` processor plugin.
+- Add cursor metrics to `mongodb` input.
+- Add tag/integer pair for result to `net_response`.
+- Add `application_insights` output plugin.
+- Added several important elasticsearch cluster health metrics.
+- Add batch mode to `mqtt` output.
+- Add `aurora` input plugin.
+- Add regex processor plugin.
+- Add support for Graphite 1.1 tags.
+- Add timeout option to `sensors` input.
+- Add `burrow` input plugin.
+- Add option to unbound module to use threads as tags.
+- Add support for TLS and username/password auth to `aerospike` input.
+- Add special syslog timestamp parser to grok parser that uses current year.
+- Add `syslog` input plugin.
+- Print the enabled aggregator and processor plugins on startup.
+- Add static `routing_key` option to `amqp` output.
+- Add passive mode exchange declaration option to `amqp` consumer input.
+- Add counter fields to `pf` input.
+
+### Bug fixes
+
+- Write to working file outputs if any files are not writeable.
+- Add all win_perf_counters fields for a series in a single metric.
+- Report results of `dns_query` instead of `0ms` on timeout.
+- Add consul service tags to metric.
+- Fix wildcards and multi instance processes in win_perf_counters.
+- Fix crash on 32-bit Windows in `win_perf_counters`.
+- Fix `win_perf_counters` not collecting at every interval.
+- Use same flags for all BSD family ping variants.
+
 
 ## v1.6.4 [2018-06-05]
 

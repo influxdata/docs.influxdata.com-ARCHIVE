@@ -2,7 +2,7 @@
  title: Administering Telegraf
 
  menu:
-   telegraf_1_6:
+   telegraf_1_7:
      name: Administration
      weight: 50
 

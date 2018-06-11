@@ -2,7 +2,7 @@
 title: Telegraf output plugins
 descriptions: Telegraf output plugins are used with the InfluxData time series platform to transform, decorate, and filter metrics. Supported output plugins include Datadog, Elasticsearch, Graphite, InfluxDB, Kafka, MQTT, Prometheus Client, Riemann, and Wavefront.
 menu:
-  telegraf_1_6:
+  telegraf_1_7:
     name: Output
     weight: 20
     parent: Plugins
