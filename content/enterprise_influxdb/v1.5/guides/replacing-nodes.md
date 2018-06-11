@@ -84,7 +84,7 @@ influxd-ctl update-data enterprise-data-01:8088 enterprise-data-01:8088
 
 This will connect the `influxd` process running on the newly replaced disk to the cluster.
 The AE process will detect the missing shards and begin to sync data from other
-shards in the same replica set.
+shards in the same shard group.
 
 
 ## Replacing meta nodes in an InfluxDB Enterprise cluster
@@ -330,7 +330,7 @@ Source                   Dest                     Database  Policy   ShardID  To
 enterprise-data-02:8088  enterprise-data-03:8088  telegraf  autogen  3        119624324  119624324    2018-04-17 23:45:09.470696179 +0000 UTC
 ```
 
-> **Important:** If replacing other data nodes in the cluster, make sure shards are completely copied from nodes in the same replica set before replacing the other nodes.
+> **Important:** If replacing other data nodes in the cluster, make sure shards are completely copied from nodes in the same shard group before replacing the other nodes.
 View the [Anti-entropy](/enterprise_influxdb/v1.5/administration/anti-entropy/#concepts) documentation for important information regarding anti-entropy and your database's replication factor.
 
 
