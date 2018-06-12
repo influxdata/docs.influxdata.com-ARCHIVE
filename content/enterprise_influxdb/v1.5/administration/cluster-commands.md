@@ -241,23 +241,23 @@ Optional arguments are in brackets.
 
 ##### [ `-db <db_name>` ]
 
-Name of the single database to back up.
+The name of the single database to back up.
 
 ##### [ `-from <data-node-TCP-address>` ]
 
-TCP address of the target data node.
+The TCP address of the target data node.
 
 ##### [ `-full` ]
 
-Perform a [full](/enterprise_influxdb/v1.5/administration/backup-and-restore/#backup) backup.
+Flag to perform a [full](/enterprise_influxdb/v1.5/administration/backup-and-restore/#backup) backup.
 
 ##### [ `-rp <rp_name>` ]
 
-Name of the single [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) to back up (requires the `-db` flag).
+The name of the [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) to back up (requires the `-db` flag).
 
 ##### [ `-shard <shard_ID>` ]
 
-Identifier of the shard to back up.
+The identifier of the shard to back up.
 
 > Restoring a `-full` backup and restoring an incremental backup require different syntax.
 To prevent issues with [`restore`](#restore), keep `-full` backups and incremental backups in separate directories.
@@ -381,7 +381,7 @@ Optional arguments are in brackets.
 
 ##### [ `-v` ]
 
-Print verbose information about the join.
+Flag to print verbose information about the join.
 
 ##### `<meta-node-HTTP-bind-address>`
 
@@ -606,7 +606,7 @@ Optional arguments are in brackets.
 
 ##### [ `-force` ]
 
-Forces the removal of the data node.
+Flag to force the removal of the data node.
 Use `-force` if the data node process is not running.
 
 #### Examples
@@ -641,7 +641,7 @@ Optional arguments are in brackets.
 
 ##### [ `-force` ]
 
-Forces the removal of the meta node.
+Flag to force the removal of the meta node.
 Use `-force` if the meta node process if not running, and the node is not reachable and unrecoverable.
 If a meta node restarts after being `-force` removed, it may interfere with the cluster.
 This argument requires the `-tcpAddr` argument.
@@ -653,7 +653,7 @@ Use this argument with the `-force` argument.
 
 ##### [ `-y` ]  
 
-Assumes `Yes` to all prompts.
+Flag to assume `Yes` to all prompts.
 
 #### Examples
 
@@ -735,36 +735,36 @@ Optional arguments are in brackets.
 
 ##### [ `-db <db_name>` ]
 
-Name of the single database to restore.
+The name of the single database to restore.
 
 ##### [ `-full` ]
 
-Restore a backup that was created with the `-full` flag.
+Flag to restore a backup that was created with the `-full` flag.
 A restore command with the `-full` flag requires the `path-to-backup-manifest-file`.
 
 ##### [ `-list` ]
 
-Show the contents of the backup.
+Flag to show the contents of the backup.
 
 ##### [ `-newdb <newdb_name>` ]
 
-Name of the new database to restore to (must specify with `-db`).
+The name of the new database to restore to (must specify with `-db`).
 
 ##### [ `-newrf <newrf_integer>` ]
 
-Integer of the new [replication factor](/influxdb/v1.5/concepts/glossary/#replication-factor) to restore to (this is capped to the number of data nodes in the cluster).
+The integer of the new [replication factor](/influxdb/v1.5/concepts/glossary/#replication-factor) to restore to (this is capped to the number of data nodes in the cluster).
 
 ##### [ `-newrp <newrp_name>` ]
 
-Name of the new [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) to restore to (must specify with `-rp`).
+The name of the new [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) to restore to (must specify with `-rp`).
 
 ##### [ `-rp <rp_name>` ]
 
-Name of the single retention policy to restore.
+The rame of the retention policy to restore.
 
 ##### [ `-shard <shard_ID>` ]
 
-Identifier of the [shard](/influxdb/v1.5/concepts/glossary/#shard) to restore.
+The identifier of the [shard](/influxdb/v1.5/concepts/glossary/#shard) to restore.
 
 Resources: [Backing up and restoring in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/backup-and-restore/#restore)
 
@@ -902,7 +902,7 @@ Optional arguments are in brackets.
 
 ##### [ `-exp <duration>` ]
 
-Determines the time after which the token expires.
+The time after which the token expires.
 By default, the token expires after one minute.
 
 #### Examples
@@ -944,7 +944,7 @@ Optional arguments are in brackets.
 
 ##### [ `-delay <duration>` ]
 
-Determines when to truncate shards after [`now()`](/influxdb/v1.5/concepts/glossary/#now).
+The delay duration when to truncate shards after [`now()`](/influxdb/v1.5/concepts/glossary/#now).
 By default, the tool sets the delay to one minute.
 The `duration` is an integer followed by a [duration unit](/influxdb/v1.5/query_language/spec/#durations).
 
