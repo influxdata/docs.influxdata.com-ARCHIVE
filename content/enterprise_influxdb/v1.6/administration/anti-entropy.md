@@ -265,6 +265,19 @@ ID     Database  Retention Policy  Start                          End           
 influxd-ctl entropy repair 21179
 ```
 
+## Troubleshooting
+
+### Queued repairs are not being processed
+The primary reason a repair in the repair queue isn't being processed is because
+it went "hot" after the repair was queued.
+AE can only repair cold shards, or shards that are not currently being written to.
+If the shard is hot, AE will wait until it goes cold again before performing the repair.
+
+If the shard is "old" and writes to it are part of a backfill process, you simply
+have to wait the until the backfill process is finished. If the shard is the active
+shard, you can `truncate-shards` to stop writes to active shards. This process is
+outlined [above](#fixing-entropy-in-active-shards).
+
 ## Changes to the AE Service in v1.6
 
 - New `entropy` command in the `influxd-ctl` cluster management utility that
