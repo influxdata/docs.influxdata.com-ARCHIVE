@@ -11,10 +11,12 @@ menu:
 
 ## [Upgrading InfluxDB Enterprise clusters](/enterprise_influxdb/v1.5/administration/upgrading/)
 
+## [Cluster management utilities](/enterprise_influxdb/v1.5/administration/customer-commands/)
+
 ## [Backing up and restoring in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/backup-and-restore/)
 
 ## [Logging and tracing in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/logs/)
 
 ## [Host renaming in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/renaming/)
 
-## [Managing security in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/security/)
+## [Managing InfluxDB Enterprise security](/enterprise_influxdb/v1.5/administration/security/)

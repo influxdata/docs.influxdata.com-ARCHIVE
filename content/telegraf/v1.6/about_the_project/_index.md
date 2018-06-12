@@ -1,21 +1,21 @@
 ---
- title: About the project
+ title: About the Telegraf project
 
  menu:
    telegraf_1_6:
-     name: About the Project
-     identifier: about_the_project
+     name: About the project
+     weight: 10
 ---
 
-## [Release Notes/Changelog](/telegraf/v1.6/about_the_project/release-notes-changelog/)
+## [Telegraf release notes](/telegraf/v1.6/about_the_project/release-notes-changelog/)
 
-## [Contributing](https://github.com/influxdata/telegraf/blob/master/CONTRIBUTING.md)
+## [Contributing to Telegraf](https://github.com/influxdata/telegraf/blob/master/CONTRIBUTING.md)
 
-## [CLA](https://influxdata.com/community/cla/)
+## [Contributor License Agreement (CLA)](https://influxdata.com/community/cla/)
 
-## [Licenses](https://github.com/influxdata/telegraf/blob/master/LICENSE)
+## [License](https://github.com/influxdata/telegraf/blob/master/LICENSE)
 
-## <a name="third_party">Third Party Software</a>
+## <a name="third_party">Third party software</a>
 InfluxData products contain third party software, which means the copyrighted, patented, or otherwise legally protected
 software of third parties that is incorporated in InfluxData products.
 

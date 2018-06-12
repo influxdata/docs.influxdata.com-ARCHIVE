@@ -1,9 +1,10 @@
 ---
-title: Reporting issues
+title: Reporting issues with InfluxDB Enterprise
 aliases:
     - /enterprise/v1.5/troubleshooting/reporting-issues/
 menu:
   enterprise_influxdb_1_5:
+    name: Reporting issues
     weight: 20
     parent: Troubleshooting
 ---

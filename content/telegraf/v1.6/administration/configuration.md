@@ -3,9 +3,9 @@ title: Configuring Telegraf
 
 menu:
   telegraf_1_6:
-    name: Configuration
+    name: Configuring
     weight: 20
-    parent: administration
+    parent: Administration
 ---
 
 The Telegraf configuration file (`telegraf.conf`) lists all of the available plugins. The current version is available here:

@@ -74,7 +74,7 @@ The `GOMAXPROCS` [Go language environment variable](https://golang.org/pkg/runti
 
 
 The default value of `GOMAXPROCS` is the number of CPUs (whatever your operating system considers to be a CPU) that are visible to the program *on startup.* For a 32-core machine, the `GOMAXPROCS` value would be `32`.
-You can override this value to be less than the maximum value, which can be useful in cases where you are running the InfluxDB along with other processes on the same machine and want to ensure that the database doesn't completely starve those those processes.
+You can override this value to be less than the maximum value, which can be useful in cases where you are running InfluxDB along with other processes on the same machine and want to ensure that the database doesn't completely starve those processes.
 
 > ***Note:***
 > Setting `GOMAXPROCS=1` will eliminate all parallelization.
@@ -520,10 +520,13 @@ Environment variable: `INFLUXDB_HTTP_WRITE_TRACING`
 
 ### `pprof-enabled = true`
 
-Determines whether the pprof endpoint is enabled.  This endpoint is used for
-troubleshooting and monitoring.
+Enable the `/net/http/pprof` endpoint. Useful for troubleshooting and monitoring.
 
 Environment variable: `INFLUXDB_HTTP_PPROF_ENABLED`
+
+### `debug-pprof-enabled = false`
+
+Enable the default `/net/http/pprof` endpoint and bind against `localhost:6060`. Useful for debugging startup performance issues.
 
 ### `https-enabled = false`
 

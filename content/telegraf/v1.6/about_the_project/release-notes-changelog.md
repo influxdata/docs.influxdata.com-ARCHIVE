@@ -1,10 +1,43 @@
 ---
-title: Release notes and changelog
+title: Telegraf release notes
+description: See the new features, bug fixes, breaking changes, and enhancements in the latest and earlier Telegraf releases.
 menu:
   telegraf_1_6:
+    name: Release notes
     weight: 10
-    parent: about_the_project
+    parent: About the project
 ---
+
+## v1.6.4 [2018-06-05]
+
+### Bugfixes
+
+* Fix SNMP overriding of auto-configured table fields.
+* Fix uint support in CloudWatch output.
+* Fix documentation of `instance_name` option in Varnish input.
+* Revert to previous Aerospike library version due to memory leak.
+
+## v1.6.3 [2018-05-21]
+
+### Bug fixes
+
+* Fix intermittent panic in Aerospike input plugin.
+* Fix connection leak in the Jolokia agent (`Jolokia2_agent`) input plugin.
+* Fix Jolokia agent (`Jolokia2_agent`) input plugin timeout parsing.
+* Fix error parsing Dropwizard metrics.
+* Fix Librato (`librato`) output plugin support for unsigned integer (`uint`) and Boolean (`bool`).
+* Fix WaitGroup deadlock, if URL is incorrect, in Apache input plugin.
+
+## v1.6.2 [2018-05-08]
+
+### Bug fixes
+
+* Use same timestamp for fields in system input.
+* Fix handling of uint64 in Datadog (`datadog`) output.
+* Ignore UTF8 BOM in JSON parser.
+* Fix case for slave metrics in MySQL (`mysql`) input.
+* Fix uint support in CrateDB (`cratedb`) output.
+
 
 ## v1.6.1 [2018-04-23]
 
@@ -17,7 +50,7 @@ menu:
 * Fix uptime reporting in system input when ran inside docker.
 * Fix mem input `cannot allocate memory` error on FreeBSD-based systems.
 * Fix duplicate tags when overriding an existing tag.
-* Add server argument as first argument in unbound input.
+* Add server argument as first argument in the Unbound (`unbound`) input plugin.
 * Fix handling of floats with multiple leading zeroes.
 * Return errors in SSL/TLS configuration of MongoDB (`mongodb`) input plugin.
 

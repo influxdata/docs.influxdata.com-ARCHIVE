@@ -3,7 +3,7 @@ title: Advanced Kapacitor usage
 description: How Kapacitor is used with Chronograf for alert history and TICKscript management.
 menu:
   chronograf_1_4:
-    weight: 90
+    weight: 100
     parent: Guides
 ---
 

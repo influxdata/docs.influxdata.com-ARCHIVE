@@ -4,7 +4,7 @@ description: This tutorial guides you quickly through the essential steps requir
 menu:
   chronograf_1_4:
     name: Creating dashboards
-    weight: 20
+    weight: 30
     parent: Guides
 ---
 

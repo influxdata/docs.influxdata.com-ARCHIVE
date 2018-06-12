@@ -15,9 +15,10 @@ This guide outlines processes for replacing both meta nodes and data nodes in an
 
 ## Concepts
 Meta nodes manage and monitor both the uptime of nodes in the cluster as well as distribution of [shards](/influxdb/v1.5/concepts/glossary/#shard) among nodes in the cluster.
-Meta nodes also handle the [anti-entropy](/enterprise_influxdb/v1.5/administration/anti-entropy/) (AE) process that ensures data nodes have the shards they need.
+They hold information about which data nodes own which shards; information on which the
+[anti-entropy](/enterprise_influxdb/v1.5/administration/anti-entropy/) (AE) process depends.
 
-Data nodes hold raw time-series data and metadata. Data shards are both distributed and replicated across data nodes in the cluster.
+Data nodes hold raw time-series data and metadata. Data shards are both distributed and replicated across data nodes in the cluster. The AE process runs on data nodes and references the shard information stored in the meta nodes to ensure each data node has the shards they need.
 
 `influxd-ctl` is a CLI included in each meta node and is used to manage your InfluxDB Enterprise cluster.
 
@@ -179,15 +180,15 @@ The new meta node should appear in the output:
 Data Nodes
 ==========
 ID	TCP Address	Version
-4	enterprise-data-01:8088	1.5.2-c1.5.2
-5	enterprise-data-02:8088	1.5.2-c1.5.2
+4	enterprise-data-01:8088	1.5.x-c1.5.x
+5	enterprise-data-02:8088	1.5.x-c1.5.x
 
 Meta Nodes
 ==========
 TCP Address	Version
-enterprise-meta-01:8091	1.5.2-c1.5.2
-enterprise-meta-03:8091	1.5.2-c1.5.2
-enterprise-meta-04:8091	1.5.2-c1.5.2 # <-- The newly added meta node
+enterprise-meta-01:8091	1.5.x-c1.5.x
+enterprise-meta-03:8091	1.5.x-c1.5.x
+enterprise-meta-04:8091	1.5.x-c1.5.x # <-- The newly added meta node
 ```
 
 #### 2.5. Remove and replace all other non-leader meta nodes
@@ -248,7 +249,7 @@ influxd-ctl update-data enterprise-data-01:8088 enterprise-data-03:8088
 
 ### 3. Confirm the data node was added
 
-Confirm the new meta-node has been added by running:
+Confirm the new data node has been added by running:
 
 ```bash
 influxd-ctl show
@@ -260,15 +261,15 @@ The new meta node should appear in the output:
 Data Nodes
 ==========
 ID	TCP Address	Version
-4	enterprise-data-03:8088	1.5.2-c1.5.2 # <-- The newly added data node
-5	enterprise-data-02:8088	1.5.2-c1.5.2
+4	enterprise-data-03:8088	1.5.x-c1.5.x # <-- The newly added data node
+5	enterprise-data-02:8088	1.5.x-c1.5.x
 
 Meta Nodes
 ==========
 TCP Address	Version
-enterprise-meta-01:8091	1.5.2-c1.5.2
-enterprise-meta-02:8091	1.5.2-c1.5.2
-enterprise-meta-03:8091	1.5.2-c1.5.2
+enterprise-meta-01:8091	1.5.x-c1.5.x
+enterprise-meta-02:8091	1.5.x-c1.5.x
+enterprise-meta-03:8091	1.5.x-c1.5.x
 ```
 
 Inspect your cluster's shard distribution with `influxd-ctl show-shards`.

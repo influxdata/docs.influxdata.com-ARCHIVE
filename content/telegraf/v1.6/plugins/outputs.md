@@ -4,9 +4,8 @@ descriptions: Telegraf output plugins are used with the InfluxData time series p
 menu:
   telegraf_1_6:
     name: Output
-    identifier: outputs
     weight: 20
-    parent: plugins
+    parent: Plugins
 ---
 
 Telegraf allows users to specify multiple output sinks in the configuration file.

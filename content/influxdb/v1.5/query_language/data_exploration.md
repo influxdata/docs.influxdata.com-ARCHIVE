@@ -1034,7 +1034,7 @@ interval in the results.
 | Time Interval Number | Preset Time Boundary |`GROUP BY time()` Interval | Points Included | Returned Timestamp |
 | :------------- | :------------- | :------------- | :------------- | :------------- |
 | 1  | `time >= 2015-08-18T00:00:00Z AND time < 2015-08-18T00:12:00Z` | `time >= 2015-08-18T00:06:00Z AND time < 2015-08-18T00:12:00Z` | `8.005` | `2015-08-18T00:00:00Z` |
-| 2  | `time >= 2015-08-12T00:12:00Z AND time < 2015-08-18T00:24:00Z` | `time >= 2015-08-12T00:12:00Z AND time < 2015-08-18T00:18:00Z`  | `7.887` | `2015-08-18T00:12:00Z` |
+| 2  | `time >= 2015-08-18T00:12:00Z AND time < 2015-08-18T00:24:00Z` | `time >= 2015-08-18T00:12:00Z AND time < 2015-08-18T00:18:00Z`  | `7.887` | `2015-08-18T00:12:00Z` |
 
 The first preset 12-minute time boundary begins at `00:00` and ends just before
 `00:12`.
@@ -1319,7 +1319,7 @@ The time boundaries and returned timestamps for the query **without** the
 | Time Interval Number | Preset Time Boundary |`GROUP BY time()` Interval | Points Included | Returned Timestamp |
 | :------------- | :------------- | :------------- | :------------- | :------------- |
 | 1  | `time >= 2015-08-18T00:00:00Z AND time < 2015-08-18T00:12:00Z` | `time >= 2015-08-18T00:06:00Z AND time < 2015-08-18T00:12:00Z` | `8.005` | `2015-08-18T00:00:00Z` |
-| 2  | `time >= 2015-08-12T00:12:00Z AND time < 2015-08-18T00:24:00Z` | `time >= 2015-08-12T00:12:00Z AND time < 2015-08-18T00:18:00Z`  | `7.887` | `2015-08-18T00:12:00Z` |
+| 2  | `time >= 2015-08-18T00:12:00Z AND time < 2015-08-18T00:24:00Z` | `time >= 2015-08-18T00:12:00Z AND time < 2015-08-18T00:18:00Z`  | `7.887` | `2015-08-18T00:12:00Z` |
 
 The first preset 12-minute time boundary begins at `00:00` and ends just before
 `00:12`.

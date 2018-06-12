@@ -6,10 +6,9 @@ aliases:
   - /kapacitor/v1.4/guides/using_alert_topics/
 menu:
   kapacitor_1_4:
-    name: Alerts - Using Topics
-    identifier: using_alert_topics
-    weight: 4
-    parent: work-w-kapacitor
+    name: Using Kapacitor alert topics
+    weight: 40
+    parent: Working with Kapacitor
 ---
 
 Kapacitor's alert system allows a publish-and-subscribe design pattern to be used.

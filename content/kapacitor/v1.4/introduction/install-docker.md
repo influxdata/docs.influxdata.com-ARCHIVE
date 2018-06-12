@@ -1,11 +1,11 @@
 ---
-title: Using Docker Compose to work with Kapacitor and TICKscript
+title: Installing Kapacitor OSS with Docker Compose
 description: Demonstrates using Kapacitor, Telegraf, and InfluxDB with Docker Compose to learn the basics of Kapacitor and TICKscript.
 menu:
   kapacitor_1_4:
-    name: Docker install
-    weight: 70
-    parent: introduction
+    name: Installing with Docker Compose
+    weight: 30
+    parent: Introduction
 ---
 
 

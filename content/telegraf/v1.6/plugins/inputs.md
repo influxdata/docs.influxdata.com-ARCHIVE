@@ -4,9 +4,8 @@ description: Telegraf input plugins are used with the InfluxData time series pla
 menu:
   telegraf_1_6:
     name: Input
-    identifier: inputs
     weight: 10
-    parent: plugins
+    parent: Plugins
 ---
 
 Telegraf input plugins are used with the InfluxData time series platform to collect metrics from the system, services, or third party APIs. All metrics are gathered from the inputs you [enable and configure in the configuration file](/telegraf/v1.6/administration/configuration/).
@@ -202,10 +201,14 @@ The [Ipset (`ipset`) input plugin](https://github.com/influxdata/telegraf/tree/m
 
 The [IPtables (`iptables`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/iptables) gathers packets and bytes counters for rules within a set of table and chain from the Linux's iptables firewall.
 
-### [Jolokia2 (`jolokia2`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/jolokia2/README.md)
+### [Jolokia2 Agent (`jolokia2_agent`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/jolokia2/README.md)
 
-The [Jolokia2 (`jolokia2`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/jolokia2/README.md) collect JMX metrics from an HTTP endpoint using the
-[Jolokia](https://jolokia.org/) [JSON-over-HTTP protocol](https://jolokia.org/reference/html/protocol.html).
+The [Jolokia2 Agent (`jolokia2_agent`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/jolokia2/README.md) reads JMX metrics from one or more [Jolokia](https://jolokia.org/) agent REST endpoints using the
+ [JSON-over-HTTP protocol](https://jolokia.org/reference/html/protocol.html).
+
+### [Jolokia2 Proxy (`jolokia2_proxy`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/jolokia2/README.md)
+
+The [Jolokia2 Proxy (`jolokia2_proxy`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/jolokia2/README.md) eads JMX metrics from one or more targets by interacting with a [Jolokia](https://jolokia.org/) proxy REST endpoint using the [Jolokia](https://jolokia.org/) [JSON-over-HTTP protocol](https://jolokia.org/reference/html/protocol.html).
 
 ### [Kafka Consumer (`kafka_consumer`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/kafka_consumer)
 

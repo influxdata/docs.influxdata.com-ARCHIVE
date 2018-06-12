@@ -1,5 +1,5 @@
 ---
-title: InfluxDB 1.5 release notes
+title: InfluxDB OSS 1.5 release notes
 menu:
   influxdb_1_5:
     name: Release notes
@@ -7,8 +7,18 @@ menu:
     parent: About the project
 ---
 
+## v1.5.3 [2018-05-25]
+
+### Features
+
+* Add `debug-pprof-enabled` `[http]` configuration setting immediately on startup. Useful for debugging startup performance issues.
+
+### Bug fixes
+
+* Fix the validation for multiple nested distinct calls.
+* Return the correct auxiliary values for top/bottom.
+
 ## v1.5.2 [2018-04-12]
--------------------
 
 ### Features
 
