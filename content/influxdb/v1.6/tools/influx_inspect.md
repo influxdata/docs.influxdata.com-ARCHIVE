@@ -1,6 +1,6 @@
 ---
 title: Influx Inspect disk utility
-description: Use the "influx_inspect" commands to
+description: Use the "influx_inspect" commands to manage InfluxDB disks and shards.
 menu:
   influxdb_1_6:
     weight: 50
@@ -9,9 +9,9 @@ menu:
 
 Influx Inspect is an InfluxDB disk utility that can be used to:
 
-* View detailed information about disk shards
-* Exporting data from a shard to [line protocol](/influxdb/v1.6/concepts/glossary/#line-protocol) that can be inserted back into the database
-* Converting TSM-based shards to TSI disk-based shards
+* View detailed information about disk shards.
+* Exporting data from a shard to [line protocol](/influxdb/v1.6/concepts/glossary/#line-protocol) that can be inserted back into the database.
+* Converting TSM in-memory index shards to TSI disk-based index shards.
 
 ## `influx_inspect` utility
 
@@ -63,27 +63,27 @@ Optional arguments are in brackets.
 
 #### `[ -database <db_name> ]`
 
-Name of the database.
+The name of the database.
 
 #### `-datadir <data_dir>`
 
-Path to the `data` directory.
+The path to the `data` directory.
 
 #### `[ -retention <rp_name> ]`
 
-Name of the retention policy.
+The name of the retention policy.
 
 #### `[ -shard <shard_ID> ]`
 
-Identifier of the shard.
+The identifier of the shard.
 
 #### `[ -v ]`
 
-Output in verbose mode.
+Enable output in verbose mode.
 
 #### `-waldir <wal_dir>`
 
-Directory for the WAL (Write Ahead Log) files.
+The directory for the WAL (Write Ahead Log) files.
 
 
 #### Examples
@@ -110,18 +110,22 @@ $ influx_inspect buildtsi -database stress -shard 1 -datadir ~/.influxdb/data -w
 
 ### `dumptsi`
 
-Dumps low-level details about TSI (Time Series Index) files.
+Dumps low-level details about TSI files, including `.tsl` log files and `.tsi` index files.
 
 #### Syntax
 
 ```
-influx_inspect dumptsi [ options ] <path>
+influx_inspect dumptsi [ options ] <index_path>
 ```
 If no options are specified, summary statistics are provided for each file.
 
 #### Options
 
 Optional arguments are in brackets.
+
+##### `-series-file <series_path>`
+
+Path to the `_series` directory under the database `data` directory. Required.
 
 ##### [ `-series` ]
 
@@ -155,7 +159,25 @@ Filter data by tag key regular expression.
 
 Filter data by tag value regular expression.
 
-### `dumptsm`
+#### Examples
+
+##### Specifying paths to the `_series` and `index` directories
+
+```
+$ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index
+```
+##### Specifying paths to the `_series` directory and an `index` file**
+
+```
+$ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index/file0
+```
+**Specifying paths to the `_series` directory and multiple `index` files**
+
+```
+$ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index/file0 /path/to/index/file1 ...
+```
+
+### `influx_inspect dumptsm`
 
 Dumps low-level details about [TSM](/influxdb/v1.6/concepts/glossary/#tsm-time-structured-merge-tree) files, including TSM (`.tsm`) files and WAL (`.wal`) files.
 
@@ -165,23 +187,27 @@ Dumps low-level details about [TSM](/influxdb/v1.6/concepts/glossary/#tsm-time-s
 influx_inspect dumptsm [ options ] <path>
 ```
 
+##### `<path>`
+
+Path to the `.tsm` file, located by default in the `data` directory.
+
 #### Options
 
 Optional arguments are in brackets.
 
-##### [ `-index { true | false }` ]
+##### [ `-index` ]
 
-Dump raw index data.
+Flag to dump raw index data.
 Default value is `false`.
 
-##### [ `-blocks { true | false }` ]
+##### [ `-blocks` ]
 
-Dump raw block data.
+Flag to dump raw block data.
 Default value is `false`.
 
 ##### [ `-all` ]
 
-Dump all data. Caution: This may print a lot of information.
+Flag to dump all data. Caution: This may print a lot of information.
 Default value is `false`.
 
 ##### [ `-filter-key <key_name>` ]
@@ -205,7 +231,7 @@ Optional arguments are in brackets.
 
 ##### [ `-show-duplicates` ]
 
-Show keys which have duplicate or out-of-order timestamps.
+Flag to show keys which have duplicate or out-of-order timestamps.
 If a user writes points with timestamps set by the client, then multiple points with the same timestamp (or with time-descending timestamps) can be written.
 
 
@@ -226,38 +252,39 @@ influx_inspect export [ options ]
 
 Optional arguments are in brackets.
 
-#### [ `-compress` ]
+##### [ `-compress` ]
 
-Compress the output.
+The flag to compress the output.
 Default value is `false`.
 
-#### [ `-database <db_name>` ]
+##### [ `-database <db_name>` ]
 
-Name of the database to export.
+The name of the database to export.
 Default value is `""`.
 
-#### [ `-datadir <data_dir>` ]
 
-Path to the `data` directory.
+##### `-datadir <data_dir>`
+
+The path to the `data` directory.
 Default value is `"$HOME/.influxdb/data"`.
 
 #### [ `-end <timestamp>` ]
 
-Timestamp for the end of the time range.
+The timestamp for the end of the time range.
 The timestamp string must be in [RFC3339 format](/influxdb/v1.6/query_language/data_exploration/#absolute-time).
 
 #### [ `-out <export_dir>` ]
 
-Location for the export file.
+The location for the export file.
 Default value is `"$HOME/.influxdb/export"`.
 
 #### [ `-retention <rp_name> ` ]
 
-Name of the [retention policy](/influxdb/v1.6/concepts/glossary/#retention-policy-rp) to export. Default value is `""`.
+The name of the [retention policy](/influxdb/v1.6/concepts/glossary/#retention-policy-rp) to export. Default value is `""`.
 
 #### [ `-start <timestamp>` ]
 
-Timestamp for the start of the time range.
+The timestamp for the start of the time range.
 The timestamp string must be in [RFC3339 format](/influxdb/v1.6/query_language/data_exploration/#absolute-time).
 
 
@@ -302,25 +329,25 @@ The default location is `$HOME/.influxdb`.
 #### Syntax
 
 ```
-influx_inspect report [ options s]
+influx_inspect report [ options ]
 ```
 #### Options
 
 Optional arguments are in brackets.
 
-#### [ `-pattern <regex_pattern>` ]
+##### [ `-pattern "<regular expression/wildcard>"` ]
 
-Regular expression or wildcard pattern to match included files.
+The regular expression or wildcard pattern to match included files.
 Default value is `""`.
 
 #### [ `-detailed` ]
 
-Report detailed cardinality estimates.
+The flag to report detailed cardinality estimates.
 Default value is `false`.
 
 ### [ `-exact` ]
 
-Report exact cardinality counts instead of estimates.
+The flag to report exact cardinality counts instead of estimates.
 Default value is `false`.
 Note: This can use a lot of memory.
 
@@ -341,7 +368,7 @@ Optional arguments are in brackets.
 
 #### `-dir <storage_root>`
 
-Path to the storage root directory.
+The path to the storage root directory.
 ​Default value is `"/root/.influxdb"`.
 
 
