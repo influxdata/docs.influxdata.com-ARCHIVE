@@ -1,5 +1,5 @@
 ---
-title: Telegraf release notes
+title: Telegraf 1.7 release notes
 description: See the new features, bug fixes, breaking changes, and enhancements in the latest and earlier Telegraf releases.
 menu:
   telegraf_1_7:
@@ -8,7 +8,7 @@ menu:
     parent: About the project
 ---
 
-## v1.7 [2018-06-xx]
+## v1.7 [2018-06-12]
 
 ### Release notes
 
@@ -44,35 +44,35 @@ menu:
 
 ### Features
 
-- Add `repl_oplog_window_se`c metric to `mongodb` input.
-- Add per-host shard metrics in `mongodb` input.
+- Add `repl_oplog_window_sec` metric to MongoDB (`mongodb`) input plugin.
+- Add per-host shard metrics in MongoDB (`mongodb`) input plugin.
 - Skip files with leading `..` in config directory.
 - Add TLS support to `socket_writer` and `socket_listener` plugins.
 - Add `snmp` input option to strip non-fixed length index suffixes.
-- Add server version tag to `docker` input.
+- Add server version tag to the Docker (`docker`) input plugin.
 - Add support for LeoFS 1.4 to `leofs` input.
-- Add parameter to force the interval of gather for `sysstat`.
-- Support busybox ping in the `ping` input.
-- Add input plugin for McRouter.
-- Add `topk` processor plugin.
-- Add cursor metrics to `mongodb` input.
-- Add tag/integer pair for result to `net_response`.
-- Add `application_insights` output plugin.
-- Added several important elasticsearch cluster health metrics.
+- Add parameter to force the interval of gather for Sysstat (`sysstat`).
+- Support BusyBox ping in the Ping (`ping`) input plugin.
+- Add Mcrouter (`mcrouter`) input plugin.
+- Add TopK (`topk`) processor plugin.
+- Add cursor metrics to MongoDB (`mongodb`) input plugin.
+- Add tag/integer pair for result to Network Response (`net_response`) input plugin.
+- Add Application Insights (`application_insights`) output plugin.
+- Added several important Elasticsearch cluster health metrics.
 - Add batch mode to `mqtt` output.
-- Add `aurora` input plugin.
-- Add regex processor plugin.
+- Add Aurora (`aurora`) input plugin.
+- Add Regex (`regex`) processor plugin.
 - Add support for Graphite 1.1 tags.
-- Add timeout option to `sensors` input.
-- Add `burrow` input plugin.
-- Add option to unbound module to use threads as tags.
-- Add support for TLS and username/password auth to `aerospike` input.
+- Add timeout option to Sensors (`sensors)` input plugin.
+- Add Burrow (`burrow`) input plugin.
+- Add option to Unbound (`unbound`) input plugin to use threads as tags.
+- Add support for TLS and username/password auth to Aerospike (`aerospike`) input plugin.
 - Add special syslog timestamp parser to grok parser that uses current year.
-- Add `syslog` input plugin.
+- Add Syslog (`syslog`) input plugin.
 - Print the enabled aggregator and processor plugins on startup.
 - Add static `routing_key` option to `amqp` output.
-- Add passive mode exchange declaration option to `amqp` consumer input.
-- Add counter fields to `pf` input.
+- Add passive mode exchange declaration option to AMQP Consumer (`amqp_consumer`) input plugin.
+- Add counter fields to PF (`pf`) input plugin.
 
 ### Bug fixes
 
