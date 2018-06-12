@@ -11,7 +11,7 @@ menu:
 
 Processor plugins process metrics as they pass through and immediately emit results based on the values they process.
 
-> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.6`.
+> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.7`.
 >The [Release Notes/Changelog](/telegraf/v1.7/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
 
 

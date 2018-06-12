@@ -1,5 +1,5 @@
 ---
-title: Telegraf release notes
+title: Telegraf 1.7 release notes
 description: See the new features, bug fixes, breaking changes, and enhancements in the latest and earlier Telegraf releases.
 menu:
   telegraf_1_7:
@@ -8,7 +8,7 @@ menu:
     parent: About the project
 ---
 
-## v1.7 [2018-06-xx]
+## v1.7 [2018-06-12]
 
 ### Release notes
 

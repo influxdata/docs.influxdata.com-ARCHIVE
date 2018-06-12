@@ -293,7 +293,7 @@ Telegraf Input Data Formats.
 
 The [MySQL (`mysql`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/mysql) gathers the statistics data from MySQL servers.0
 
-### [NATS Server Monitoring (`nats`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/nats) -- NEW in v1.6
+### [NATS Server Monitoring (`nats`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/nats)
 
 The [NATS Server Monitoring (`nats`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/nats) gathers metrics when using the [NATS Server monitoring server](https://www.nats.io/documentation/server/gnatsd-monitoring/).
 
