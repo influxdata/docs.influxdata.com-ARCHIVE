@@ -43,7 +43,7 @@ The [Printer (`printer`) processor plugin](https://github.com/influxdata/telegra
 
 ### [Regex (`regex`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/processors/regex) -- NEW in v.1.7
 
-The [Regex (`regex`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/processors/regex) transforms tag and field values using a regular expression (regex) pattern. If `result_key `parameter is present, it can produce new tags and fields from existing ones.
+The [Regex (`regex`) processor plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/processors/regex) transforms tag and field values using a regular expression (regex) pattern. If `result_key `parameter is present, it can produce new tags and fields from existing ones.
 
 ### [TopK (`topk`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/processors/topk) -- NEW in v.1.7
 
