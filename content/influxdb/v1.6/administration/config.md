@@ -520,10 +520,13 @@ Environment variable: `INFLUXDB_HTTP_WRITE_TRACING`
 
 ### `pprof-enabled = true`
 
-Determines whether the pprof endpoint is enabled.  This endpoint is used for
-troubleshooting and monitoring.
+Enable the `/net/http/pprof` endpoint. Useful for troubleshooting and monitoring.
 
 Environment variable: `INFLUXDB_HTTP_PPROF_ENABLED`
+
+### `debug-pprof-enabled = false`
+
+Enable the default `/net/http/pprof` endpoint and bind against `localhost:6060`. Useful for debugging startup performance issues.
 
 ### `https-enabled = false`
 
