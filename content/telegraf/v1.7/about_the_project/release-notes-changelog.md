@@ -14,7 +14,7 @@ menu:
 
 - The Cassandra (`cassandra`) input plugin has been deprecated in favor of the Jolokia2 (`jolokia2`)
   input plugin which is much more configurable and more performant.  There is
-  an [example configuration](./plugins/inputs/jolokia2/examples) to help you
+  an [example configuration](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/jolokia2/examples) to help you
   get started.
 
 - For plugins supporting TLS, you can now specify the certificate and keys
@@ -23,24 +23,24 @@ menu:
 
 ### New input plugins
 
-- [Aurora (`aurora`)](./plugins/inputs/aurora/README.md) - Contributed by @influxdata
-- [Burrow (`burrow`) input plugin](./plugins/inputs/burrow/README.md) - Contributed by @arkady-emelyanov
-- [`fibaro`](./plugins/inputs/fibaro/README.md) - Contributed by @dynek
-- [`jti_openconfig_telemetry`](./plugins/inputs/jti_openconfig_telemetry/README.md) - Contributed by @ajhai
-- [`mcrouter`](./plugins/inputs/mcrouter/README.md) - Contributed by @cthayer
-- [NVIDIA SMI (`nvidia_smi`)](./plugins/inputs/nvidia_smi/README.md) - Contributed by @jackzampolin
-- [Syslog (`syslog`)](./plugins/inputs/syslog/README.md) - Contributed by @influxdata
+- [Aurora (`aurora`)](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/aurora/README.md) - Contributed by @influxdata
+- [Burrow (`burrow`) input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/burrow/README.md) - Contributed by @arkady-emelyanov
+- [`fibaro`](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/fibaro/README.md) - Contributed by @dynek
+- [`jti_openconfig_telemetry`](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/jti_openconfig_telemetry/README.md) - Contributed by @ajhai
+- [`mcrouter`](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/mcrouter/README.md) - Contributed by @cthayer
+- [NVIDIA SMI (`nvidia_smi`)](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/nvidia_smi/README.md) - Contributed by @jackzampolin
+- [Syslog (`syslog`)](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/syslog/README.md) - Contributed by @influxdata
 
 ### New processor plugins
 
-- [converter](./plugins/processors/converter/README.md) - Contributed by @influxdata
-- [regex](./plugins/processors/regex/README.md) - Contributed by @44px
-- [topk](./plugins/processors/topk/README.md) - Contributed by @mirath
+- [converter](https://github.com/influxdata/telegraf/tree/master/plugins/processors/converter/README.md) - Contributed by @influxdata
+- [regex](https://github.com/influxdata/telegraf/tree/master/plugins/processors/regex/README.md) - Contributed by @44px
+- [topk](https://github.com/influxdata/telegraf/tree/master/plugins/processors/topk/README.md) - Contributed by @mirath
 
 ### New output plugins
 
-- [HTTP (`http`)](./plugins/outputs/http/README.md) - Contributed by @Dark0096
-- [Application Insights (`application_insights`) output plugin](./plugins/outputs/application_insights/README.md): Contribute by @karolz-ms
+- [HTTP (`http`)](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/http/README.md) - Contributed by @Dark0096
+- [Application Insights (`application_insights`) output plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/application_insights/README.md): Contribute by @karolz-ms
 
 ### Features
 

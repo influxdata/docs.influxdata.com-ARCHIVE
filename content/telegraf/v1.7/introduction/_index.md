@@ -19,4 +19,4 @@ Go to the [InfluxData downloads page](https://influxdata.com/downloads/#telegraf
 
 ## [Getting started with Telegraf](/telegraf/v1.7/introduction/getting-started/)
 
-[Getting started with Telegraf](/telegraf/v1.7/introduction/getting-started-telegraf/) walks you through the download, installation, and configuration processes, and it shows how to use Telegraf to get data into InfluxDB.
+[Getting started with Telegraf](/telegraf/v1.7/introduction/getting-started/) walks you through the download, installation, and configuration processes, and it shows how to use Telegraf to get data into InfluxDB.
