@@ -51,7 +51,7 @@ Those defaults are configurable using the query builder or by manually editing t
 
 In addition, the time range (`:dashboardTime:`) is [configurable on the dashboard](#step-6-configure-your-dashboard).
 
-![Build your query](/img/chronograf/latest/g-dashboard-cell-query-builder.png)
+![Build your query](/img/chronograf/latest/g-dashboard-builder.png)
 
 ### Step 4: Choose your visualization type
 
