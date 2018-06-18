@@ -289,9 +289,7 @@ Environment variable: `INFLUXDB_DATA_COMPACT_FULL_WRITE_COLD_DURATION`
 
 ### `max-concurrent-compactions = 0`
 
-The maximum number of concurrent full and level [compactions](/influxdb/v1.5/concepts/storage_engine/#compactions) that can run at one time.
-A value of 0 results in runtime.GOMAXPROCS(0) used at runtime -- which means use all processors.
-This setting does not apply to cache snapshotting.
+The maximum number of concurrent full and level compactions. The default value of 0 results in 50% of the CPU cores being used at runtime. With the default setting, at most 4 CPU cores will be used. If explicitly set, the number of cores used for compaction is limited to the specified value. This setting does not apply to cache snapshotting.
 
 Environment variable: `INFLUXDB_DATA_MAX_CONCURRENT_COMPACTIONS`
 
