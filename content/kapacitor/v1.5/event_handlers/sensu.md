@@ -43,10 +43,11 @@ The following Sensu event handler options can be set in a
 [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
 `.sensu()` in a TICKscript.
 
-| Name     | Type            | Description                                                                |
-| ----     | ----            | -----------                                                                |
-| source   | string          | Sensu source for which to post messages.                                   |
-| handlers | list of strings | Sensu handler list. If empty uses the handler list from the configuration. |
+| Name     | Type                    | Description                                                                               |
+| ----     | ----                    | -----------                                                                               |
+| source   | string                  | Sensu source for which to post messages.                                                  |
+| handlers | list of string          | Sensu handler list. If empty uses the handler list from the configuration.                |
+| metadata | map of string interface | Sensu supports the addition of arbitrary metadata                                         |
 
 ### Example: handler file
 ```yaml
@@ -58,6 +59,9 @@ options:
   handlers:
     - handler1-name
     - handler2-name
+  metadata:
+    - string: 'value'
+    - int: 2
 ```
 
 ### Example: TICKscript
@@ -67,6 +71,7 @@ options:
   .sensu()
     .source('Kapacitor')
     .handlers('handler1-name', 'handler2-name')
+    .metadata({'string':'value', 'int':1})
 ```
 
 ## Using the Sensu event handler
@@ -82,6 +87,10 @@ _**Sensu settings in kapacitor.conf**_
   addr = "123.45.67.89:3030"
   source = "Kapacitor"
   handlers = ["tcp", "transport"]
+
+  [sensu.metadata]
+    string = "value"
+    int = 1
 ```
 
 ### Send alerts to Sensu from a TICKscript

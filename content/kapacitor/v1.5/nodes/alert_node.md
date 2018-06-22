@@ -1032,6 +1032,10 @@ _**Example kapacitor.conf*_
   url = "http://sensu:3030"
   source = "Kapacitor"
   handlers = ["sns","slack"]
+
+  [sensu.metadata]
+    string = "value"
+    int = 1
 ```
 
 _**Example TICKscript**_
@@ -1040,6 +1044,7 @@ stream
   |alert()
     .sensu()
       .handlers('sns','slack')
+      .metadata({'string':'value', 'int':1})
 ```
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
