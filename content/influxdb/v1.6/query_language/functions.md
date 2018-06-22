@@ -32,6 +32,7 @@ Aggregate, select, transform, and predict data with InfluxQL functions.
     * [SAMPLE()](#sample)
     * [TOP()](#top)
 * [Transformations](#transformations)
+    * [ABS()](#abs)
     * [ACOS()](#acos)
     * [ASIN()](#asin)
     * [ATAN()](#atan)
@@ -1861,6 +1862,172 @@ location
 ```
 
 # Transformations
+
+## ABS()
+Returns the absolute value of the field value.
+
+### Basic Syntax
+```
+SELECT ABS( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+### Description of Basic Syntax
+
+`ABS(field_key)`  
+Returns the absolute values of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
+
+<!-- `ABS(/regular_expression/)`  
+Returns the absolute value of field values associated with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions). -->
+
+`ABS(*)`  
+Returns the absolute values of field values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement).
+
+`ABS()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
+
+The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
+See the [Advanced Syntax](#advanced-syntax) section for how to use `ABS()` with a `GROUP BY time()` clause.
+
+### Examples of Basic Syntax
+
+Examples 1-3 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
+
+```
+> SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+
+name: h2o_feet
+time                 water_level
+----                 -----------
+1439856000000000000  2.064
+1439856360000000000  2.116
+1439856720000000000  2.028
+1439857080000000000  2.126
+1439857440000000000  2.041
+1439857800000000000  2.051
+```
+
+#### Example 1: Calculate the absolute values of field values associated with a field key
+```
+> SELECT ABS("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+
+name: h2o_feet
+time                 abs
+----                 ---
+1439856000000000000  2.064
+1439856360000000000  2.116
+1439856720000000000  2.028
+1439857080000000000  2.126
+1439857440000000000  2.041
+1439857800000000000  2.051
+```
+
+The query returns the absolute values of field values in the `water_level` field key in the `h2o_feet` measurement.
+
+#### Example 2: Calculate the absolute Values of field values associated with each field key in a measurement
+```
+> SELECT ABS(*) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+
+name: h2o_feet
+time                 abs_water_level
+----                 ---------------
+1439856000000000000  2.064
+1439856360000000000  2.116
+1439856720000000000  2.028
+1439857080000000000  2.126
+1439857440000000000  2.041
+1439857800000000000  2.051
+```
+
+The query returns the absolute values of field values for each field key that stores
+numerical values in the `h2o_feet` measurement.
+The `h2o_feet` measurement has one numerical field: `water_level`.
+
+<!-- #### Example 3: Calculate the absolute values of field values associated with each field key that matches a regular expression
+```
+> SELECT ABS(/water/) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+
+name: h2o_feet
+time                 abs
+----                 ---
+1439856000000000000  2.064
+1439856360000000000  2.116
+1439856720000000000  2.028
+1439857080000000000  2.126
+1439857440000000000  2.041
+1439857800000000000  2.051
+```
+
+The query returns the absolute values of field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement. -->
+
+#### Example 3: Calculate the absolute values of field values associated with a field key and include several clauses
+```
+> SELECT ABS("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' ORDER BY time DESC LIMIT 4 OFFSET 2
+
+name: h2o_feet
+time                 abs
+----                 ---
+1439857080000000000  2.126
+1439856720000000000  2.028
+1439856360000000000  2.116
+1439856000000000000  2.064
+```
+
+The query returns the absolute values of field values associated with the `water_level` field key.
+It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
+The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
+
+### Advanced Syntax
+```
+SELECT ABS(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+
+### Description of Advanced Syntax
+
+The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
+The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `ABS()` function to those results.
+
+`ABS()` supports the following nested functions:
+[`COUNT()`](#count),
+[`MEAN()`](#mean),
+[`MEDIAN()`](#median),
+[`MODE()`](#mode),
+[`SUM()`](#sum),
+[`FIRST()`](#first),
+[`LAST()`](#last),
+[`MIN()`](#min),
+[`MAX()`](#max), and
+[`PERCENTILE()`](#percentile).
+
+### Examples of Advanced Syntax
+
+#### Example 1: Calculate the absolute values of mean values.
+```
+> SELECT ABS(MEAN("water_level")) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
+
+name: h2o_feet
+time                 abs
+----                 ---
+1439856000000000000  2.09
+1439856720000000000  2.077
+1439857440000000000  2.0460000000000003
+```
+
+The query returns the absolute values of [average](#mean) `water_level`s that are calculated at 12-minute intervals.
+
+To get those results, InfluxDB first calculates the average `water_level`s at 12-minute intervals.
+This step is the same as using the `MEAN()` function with the `GROUP BY time()` clause and without `ABS()`:
+
+```
+> SELECT MEAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
+name: h2o_feet
+time                 mean
+----                 ----
+1439856000000000000  2.09
+1439856720000000000  2.077
+1439857440000000000  2.0460000000000003
+```
+
+InfluxDB then calculates absolute values of those averages.
+
+
 
 ## ACOS()
 Returns the arccosine (in radians) of the field value. Field values must be between -1 and 1.
