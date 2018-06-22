@@ -91,9 +91,6 @@ The default logging format has been changed. See [Logging and tracing in InfluxD
 - Fix missing sorting of blocks by time when compacting.
 - WAL: update `lastWriteTime` behavior
 
-### Behavior changes
-* `[data] max-concurrent-compactions` configuration setting default limits the maximum number of concurrent compactions to 4 CPU cores for machines with 8 or more cores.
-
 ## v1.4.3 [unreleased]
 
 ### Configuration changes
