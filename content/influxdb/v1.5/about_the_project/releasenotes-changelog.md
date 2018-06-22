@@ -7,6 +7,12 @@ menu:
     parent: About the project
 ---
 
+## v1.5.4 [2018-06-21]
+
+### Bugfixes
+* [1.5]Fix panic in readTombstoneV4.
+* buildtsi: Do not escape measurement names.
+
 ## v1.5.3 [2018-05-25]
 
 ### Features
@@ -50,6 +56,10 @@ menu:
 
 The default logging format has been changed. See [Logging and tracing in InfluxDB](/influxdb/v1.5/administration/logs) for details.
 
+### Behavior changes
+
+`[data] max-concurrent-compactions` configuration setting default limits the maximum number of concurrent compactions to 4 CPU cores for machines with 8 or more cores.
+
 ### Features
 
 - Improve CLI connection warnings.
@@ -83,9 +93,9 @@ The default logging format has been changed. See [Logging and tracing in InfluxD
 
 ## v1.4.3 [unreleased]
 
-### Configuration Changes
+### Configuration changes
 
-#### `[data]` Section
+#### `[data]` section
 
 `cache-snapshot-memory-size`: default value changed from `25m` to `256m`.
 
