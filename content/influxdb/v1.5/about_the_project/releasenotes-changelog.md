@@ -56,6 +56,10 @@ menu:
 
 The default logging format has been changed. See [Logging and tracing in InfluxDB](/influxdb/v1.5/administration/logs) for details.
 
+### Behavior changes
+
+`[data] max-concurrent-compactions` configuration setting default limits the maximum number of concurrent compactions to 4 CPU cores for machines with 8 or more cores.
+
 ### Features
 
 - Improve CLI connection warnings.
