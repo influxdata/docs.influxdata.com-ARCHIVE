@@ -99,15 +99,15 @@ Complete the following steps for each meta node server.
 ##### Ubuntu & Debian (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.5.3-c1.5.3_amd64.deb
-sudo dpkg -i influxdb-meta_1.5.3-c1.5.3_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.5.4-c1.5.4_amd64.deb
+sudo dpkg -i influxdb-meta_1.5.4-c1.5.4_amd64.deb
 ```
 
 ##### RedHat and CentOS (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.5.3_c1.5.3.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.5.3_c1.5.3.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.5.4_c1.5.4.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.5.4_c1.5.4.x86_64.rpm
 ```
 
 #### 2.2: Edit the configuration file
@@ -206,9 +206,9 @@ ID      TCP Address      Version
 Meta Nodes
 ==========
 TCP Address               Version
-enterprise-meta-01:8091   1.5.3-c1.5.3
-enterprise-meta-02:8091   1.5.3-c1.5.3
-enterprise-meta-03:8091   1.5.3-c1.5.3
+enterprise-meta-01:8091   1.5.4-c1.5.4
+enterprise-meta-02:8091   1.5.4-c1.5.4
+enterprise-meta-03:8091   1.5.4-c1.5.4
 ```
 
 Your cluster must have at least three meta nodes.

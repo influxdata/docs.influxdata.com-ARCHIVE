@@ -7,6 +7,12 @@ menu:
     parent: About the project
 ---
 
+## v1.5.4 [2018-06-21]
+
+### Bugfixes
+* [1.5]Fix panic in readTombstoneV4.
+* buildtsi: Do not escape measurement names.
+
 ## v1.5.3 [2018-05-25]
 
 ### Features
