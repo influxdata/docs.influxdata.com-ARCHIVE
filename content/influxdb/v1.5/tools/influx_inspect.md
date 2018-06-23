@@ -96,7 +96,7 @@ $ influx_inspect buildtsi -database stress -shard 1 -datadir ~/.influxdb/data -w
 
 ### `influx_inspect deletetsm`
 
-Bulk deletes a measurement from raw TSM files.
+Bulk deletes a measurement from a raw TSM file.
 
 #### Syntax
 
@@ -105,7 +105,7 @@ influx_inspect deletetsm -measurement <measurement_name> [ arguments ] <path>
 ````
 ##### `<path>`
 
-Path to the TSM files.
+Path to the `.tsm` file, located by default in the `data` directory.
 
 #### Arguments
 
