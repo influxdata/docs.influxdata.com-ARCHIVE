@@ -11,7 +11,7 @@ menu:
 
 ### Features
 
-* Add `influx_inspect deletetsm`.
+* Add `influx_inspect deletetsm` command for bulk deletes of measurements in raw TSM files.
 
 ### Bug fixes
 
