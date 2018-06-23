@@ -9,6 +9,10 @@ menu:
 
 ## v1.5.4 [2018-06-21]
 
+### Features
+
+* Add `influx_inspect deletetsm`.
+
 ### Bug fixes
 
 * Fix panic in readTombstoneV4.
