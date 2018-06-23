@@ -9,6 +9,10 @@ menu:
 
 ## v1.5.4 [2018-06-21]
 
+### Features
+
+* Add `influx_inspect deletetsm` command for bulk deletes of measurements in raw TSM files.
+
 ### Bug fixes
 
 * Fix panic in readTombstoneV4.

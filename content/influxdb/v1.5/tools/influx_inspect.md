@@ -20,6 +20,7 @@ Influx Inspect is a disk shard utility that can be used to:
 The `influx_inspect` commands are:
 
 * [`buildtsi`](#influx-inspect-buildtsi): Converts in-memory (TSM-based) shards to TSI.
+* [`deletetsm`](#influx-inspect-deletetsm): Bulk deletes a measurement from raw TSM files.
 * [`dumptsi`](#influx-inspect-dumptsi): Dumps low-level details about TSI files.
 * [`dumptsm`](#influx-inspect-dumptsm): Dumps low-level details about TSM files.
 * [`export`](#influx-inspect-export): Exports raw data from a shard to Line Protocol format.
@@ -92,6 +93,36 @@ $ influx_inspect buildtsi -database mydb -datadir ~/.influxdb/data -waldir ~/.in
 ```
 $ influx_inspect buildtsi -database stress -shard 1 -datadir ~/.influxdb/data -waldir ~/.influxdb/wal
 ```
+
+### `influx_inspect deletetsm`
+
+Bulk deletes a measurement from a raw TSM file.
+
+#### Syntax
+
+````
+influx_inspect deletetsm -measurement <measurement_name> [ arguments ] <path>
+````
+##### `<path>`
+
+Path to the `.tsm` file, located by default in the `data` directory.
+
+#### Arguments
+
+Optional arguments are in brackets.
+
+##### `-measurement`
+
+The name of the measurement to delete from TSM files.
+
+##### [ `-sanitize` ]
+
+Flag to remove all keys containing non-printable Unicode characters.
+
+##### [ `-v` ]
+
+Flag to enable verbose logging.
+
 
 ### `influx_inspect dumptsi`
 
