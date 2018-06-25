@@ -1888,90 +1888,90 @@ See the [Advanced Syntax](#advanced-syntax) section for how to use `ABS()` with 
 
 ### Examples of Basic Syntax
 
-Examples 1-3 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
+Examples 1-3 use the following subsample of this [sample data](https://gist.github.com/sanderson/8f8aec94a60b2c31a61f44a37737bfea):
 
 ```
-> SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+> SELECT * FROM "data" WHERE time >= '2018-06-24T12:00:00Z' AND time <= '2018-06-24T12:05:00Z'
 
-name: h2o_feet
-time                 water_level
-----                 -----------
-1439856000000000000  2.064
-1439856360000000000  2.116
-1439856720000000000  2.028
-1439857080000000000  2.126
-1439857440000000000  2.041
-1439857800000000000  2.051
+name: data
+time                 a                   b
+----                 -                   -
+1529841600000000000  1.33909108671076    -0.163643058925645
+1529841660000000000  -0.774984088561186  0.137034364053949
+1529841720000000000  -0.921037167720451  -0.482943221384294
+1529841780000000000  -1.73880754843378   -0.0729732928756677
+1529841840000000000  -0.905980032168252  1.77857552719844
+1529841900000000000  -0.891164752631417  0.741147445214238
 ```
 
 #### Example 1: Calculate the absolute values of field values associated with a field key
 ```
-> SELECT ABS("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+> SELECT ABS("a") FROM "data" WHERE time >= '2018-06-24T12:00:00Z' AND time <= '2018-06-24T12:05:00Z'
 
-name: h2o_feet
+name: data
 time                 abs
 ----                 ---
-1439856000000000000  2.064
-1439856360000000000  2.116
-1439856720000000000  2.028
-1439857080000000000  2.126
-1439857440000000000  2.041
-1439857800000000000  2.051
+1529841600000000000  1.33909108671076
+1529841660000000000  0.774984088561186
+1529841720000000000  0.921037167720451
+1529841780000000000  1.73880754843378
+1529841840000000000  0.905980032168252
+1529841900000000000  0.891164752631417
 ```
 
-The query returns the absolute values of field values in the `water_level` field key in the `h2o_feet` measurement.
+The query returns the absolute values of field values in the `a` field key in the `data` measurement.
 
 #### Example 2: Calculate the absolute Values of field values associated with each field key in a measurement
 ```
-> SELECT ABS(*) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+> SELECT ABS(*) FROM "data" WHERE time >= '2018-06-24T12:00:00Z' AND time <= '2018-06-24T12:05:00Z'
 
-name: h2o_feet
-time                 abs_water_level
-----                 ---------------
-1439856000000000000  2.064
-1439856360000000000  2.116
-1439856720000000000  2.028
-1439857080000000000  2.126
-1439857440000000000  2.041
-1439857800000000000  2.051
+name: data
+time                 abs_a              abs_b
+----                 -----              -----
+1529841600000000000  1.33909108671076   0.163643058925645
+1529841660000000000  0.774984088561186  0.137034364053949
+1529841720000000000  0.921037167720451  0.482943221384294
+1529841780000000000  1.73880754843378   0.0729732928756677
+1529841840000000000  0.905980032168252  1.77857552719844
+1529841900000000000  0.891164752631417  0.741147445214238
 ```
 
 The query returns the absolute values of field values for each field key that stores
-numerical values in the `h2o_feet` measurement.
-The `h2o_feet` measurement has one numerical field: `water_level`.
+numerical values in the `data` measurement.
+The `data` measurement has two numerical fields: `a` and `b`.
 
 <!-- #### Example 3: Calculate the absolute values of field values associated with each field key that matches a regular expression
 ```
-> SELECT ABS(/water/) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
+> SELECT ABS(/a/) FROM "h2o_feet" WHERE time >= '2018-06-24T12:00:00Z' AND time <= '2018-06-24T12:05:00Z' AND "location" = 'santa_monica'
 
-name: h2o_feet
+name: data
 time                 abs
 ----                 ---
-1439856000000000000  2.064
-1439856360000000000  2.116
-1439856720000000000  2.028
-1439857080000000000  2.126
-1439857440000000000  2.041
-1439857800000000000  2.051
+1529841600000000000  1.33909108671076
+1529841660000000000  0.774984088561186
+1529841720000000000  0.921037167720451
+1529841780000000000  1.73880754843378
+1529841840000000000  0.905980032168252
+1529841900000000000  0.891164752631417
 ```
 
-The query returns the absolute values of field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement. -->
+The query returns the absolute values of field values for each field key that stores numerical values and includes `a` in the `data` measurement. -->
 
 #### Example 3: Calculate the absolute values of field values associated with a field key and include several clauses
 ```
-> SELECT ABS("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' ORDER BY time DESC LIMIT 4 OFFSET 2
+> SELECT ABS("a") FROM "data" WHERE time >= '2018-06-24T12:00:00Z' AND time <= '2018-06-24T12:05:00Z' ORDER BY time DESC LIMIT 4 OFFSET 2
 
-name: h2o_feet
+name: data
 time                 abs
 ----                 ---
-1439857080000000000  2.126
-1439856720000000000  2.028
-1439856360000000000  2.116
-1439856000000000000  2.064
+1529841780000000000  1.73880754843378
+1529841720000000000  0.921037167720451
+1529841660000000000  0.774984088561186
+1529841600000000000  1.33909108671076
 ```
 
-The query returns the absolute values of field values associated with the `water_level` field key.
-It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
+The query returns the absolute values of field values associated with the `a` field key.
+It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2018-06-24T12:00:00Z` and `2018-06-24T12:05:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
 ### Advanced Syntax
@@ -2000,29 +2000,36 @@ The query first calculates the results for the nested function at the specified 
 
 #### Example 1: Calculate the absolute values of mean values.
 ```
-> SELECT ABS(MEAN("water_level")) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
+> SELECT ABS(MEAN("a")) FROM "data" WHERE time >= '2018-06-24T12:00:00Z' AND time <= '2018-06-24T13:00:00Z' GROUP BY time(12m)
 
-name: h2o_feet
+name: data
 time                 abs
 ----                 ---
-1439856000000000000  2.09
-1439856720000000000  2.077
-1439857440000000000  2.0460000000000003
+1529841600000000000  0.3960977256302787
+1529842320000000000  0.0010541018316373302
+1529843040000000000  0.04494733240283668
+1529843760000000000  0.2553594777104415
+1529844480000000000  0.20382988543108413
+1529845200000000000  0.790836070736962
 ```
 
-The query returns the absolute values of [average](#mean) `water_level`s that are calculated at 12-minute intervals.
+The query returns the absolute values of [average](#mean) `a`s that are calculated at 12-minute intervals.
 
-To get those results, InfluxDB first calculates the average `water_level`s at 12-minute intervals.
+To get those results, InfluxDB first calculates the average `a`s at 12-minute intervals.
 This step is the same as using the `MEAN()` function with the `GROUP BY time()` clause and without `ABS()`:
 
 ```
-> SELECT MEAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
-name: h2o_feet
+> SELECT MEAN("a") FROM "data" WHERE time >= '2018-06-24T12:00:00Z' AND time <= '2018-06-24T13:00:00Z' GROUP BY time(12m)
+
+name: data
 time                 mean
 ----                 ----
-1439856000000000000  2.09
-1439856720000000000  2.077
-1439857440000000000  2.0460000000000003
+1529841600000000000  -0.3960977256302787
+1529842320000000000  0.0010541018316373302
+1529843040000000000  0.04494733240283668
+1529843760000000000  0.2553594777104415
+1529844480000000000  0.20382988543108413
+1529845200000000000  -0.790836070736962
 ```
 
 InfluxDB then calculates absolute values of those averages.
