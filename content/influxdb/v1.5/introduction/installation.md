@@ -169,16 +169,10 @@ brew update
 brew install influxdb
 ```
 
-To have `launchd` start InfluxDB at login, run:
+To have `launchd` start InfluxDB now and restart at login, run:
 
 ```bash
-ln -sfv /usr/local/opt/influxdb/*.plist ~/Library/LaunchAgents
-```
-
-And then to start InfluxDB now, run:
-
-```bash
-launchctl load ~/Library/LaunchAgents/homebrew.mxcl.influxdb.plist
+brew services start influxdb
 ```
 
 Or, if you don't want/need launchctl, in a separate terminal window you can just run:
