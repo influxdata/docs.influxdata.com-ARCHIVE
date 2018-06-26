@@ -71,7 +71,7 @@ Often in this scenario, rather than replacing the entire host, you just need to 
 Host information remains the same, but once started again, the `influxd` process doesn't know
 to communicate with the meta nodes so the AE process can't start the shard-sync process.
 
-To resolve this, login to a meta node and use the `update-data` command
+To resolve this, log in to a meta node and use the `update-data` command
 to [update the failed data node to itself](#2-replace-the-old-data-node-with-the-new-data-node).
 
 ```bash
@@ -344,12 +344,12 @@ timeout, but don't return an error.
 add-data: operation timed out with error:
 ```
 
-#### Check your influxdb user permissions
+#### Check your InfluxDB user permissions
 In order to add or remove nodes to or from a cluster, your user must have `AddRemoveNode` permissions.
 Attempting to manage cluster nodes without the appropriate permissions results
 in a timeout with no accompanying error.
 
-To check user permissions, login to one of your meta nodes and `curl` the `/user` API endpoint:
+To check user permissions, log in to one of your meta nodes and `curl` the `/user` API endpoint:
 
 ```bash
 curl localhost:8091/user
@@ -398,7 +398,7 @@ and would not be able to add or remove nodes from the cluster._
 
 #### Check the network connection between nodes
 Something may be interrupting the network connection between nodes.
-To check, `ping` the server/node you're trying to add or remove.
+To check, `ping` the server or node you're trying to add or remove.
 If the ping is unsuccessful, something in the network is preventing communication.
 
 ```bash
