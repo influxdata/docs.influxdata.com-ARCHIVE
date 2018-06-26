@@ -20,7 +20,7 @@ function addChronografBtnHtml() {
   $('.view-in-chronograf').each(function() {
     var query = $(this).data('query');
     var encodedQuery = encodeURIComponent(query);
-		var chronografLink = getChronografUrl() + "?query=" + encodedQuery;
+    var chronografLink = ($(this).data('query-override')) ? getChronografUrl() + "?query=" + $(this).data('query-override') : getChronografUrl() + "?query=" + encodedQuery;
 
 		$(this).html("<a class='chronograf-url-settings settings icon cog'></a><a class='chronograf-btn gradient-h klavika-font' href='"+chronografLink+"' target='_blank'>View in Chronograf</a>");
 	})
