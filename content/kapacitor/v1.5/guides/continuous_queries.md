@@ -153,17 +153,23 @@ batch
 
 ## Summary
 
-Kapacitor is a powerful tool, if you need more power use it.
-If not keep using CQs until you do.
-For more information and help writing TICKscripts from InfluxQL queries take a looks at these [docs](https://docs.influxdata.com/kapacitor/latest/nodes/influx_q_l_node/) on the InfluxQL node in Kapacitor.
+Kapacitor is a powerful tool.
+If you need more flexibility than CQs offer, use it.
+For more information and help writing TICKscripts from InfluxQL queries take a look at these [docs](https://docs.influxdata.com/kapacitor/latest/nodes/influx_q_l_node/) on the InfluxQL node in Kapacitor.
 Every function available in the InfluxDB query language is available in Kapacitor, so you can convert any query into a Kapacitor TICKscript.
 
 ## Important to Know
 
 ### Continuous queries and Kapacitor tasks may produce different results
-For some types of queries, CQs (InfluxDB) and TICKscripts (Kapacitor) may return different results due to how each selects time boundaries. Kapacitor chooses the maximum timestamp (tMax) while InfluxDB chooses the minimum timestamp (tMin). The choice between using tMax or tMin is somewhat arbitrary for InfluxDB, however the same cannot be said for Kapacitor.
+For some types of queries, CQs (InfluxDB) and TICKscripts (Kapacitor) may return different results due to how each selects time boundaries.
+Kapacitor chooses the maximum timestamp (tMax) while InfluxDB chooses the minimum timestamp (tMin).
+The choice between using tMax or tMin is somewhat arbitrary for InfluxDB, however the same cannot be said for Kapacitor.
 
-Kapacitor has the ability to do complex joining operations on overlapping time windows. For example, if you were to join the mean over the last month with the the mean over the last day, you would need their resulting values to occur at the same time, using the most recent time, tMax. However, Kapacitor would use tMin and the resulting values would not occur at the same time. One would be at the beginning of the last month, while the other would be at the beginning of the last day.
+Kapacitor has the ability to do complex joining operations on overlapping time windows.
+For example, if you were to join the mean over the last month with the the mean over the last day,
+you would need their resulting values to occur at the same time, using the most recent time, tMax.
+However, Kapacitor would use tMin and the resulting values would not occur at the same time.
+One would be at the beginning of the last month, while the other would be at the beginning of the last day.
 
 Consider the following query run as both an InfluxQL query and as a TICKscript:
 
