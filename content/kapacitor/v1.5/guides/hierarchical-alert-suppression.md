@@ -9,18 +9,22 @@ menu:
     parent: guides
 ---
 
-When using Kapacitor to build out a robust monitoring and alerting solution,
-you'll likely need multiple "levels" or "tiers" of alerts.
-For example, let's say you are monitoring a cluster of servers.
-As part of your alerting architecture, you have host-level alerts such as CPU usage
-alerts, RAM usage alerts, disk I/O, etc.
-You also have cluster-level alerts that monitor network health, host uptime, etc.
-This is a great solution that covers all your bases.
-
+Kapacitor allows you to build out a robust monitoring and alerting solution with
+multiple "levels" or "tiers" of alerts.
 However, an issue arises when an event triggers both high-level and low-level alerts
 and you end up getting multiple alerts from different contexts.
 The [AlertNode's `.inhibit()`](/kapacitor/v1.5/nodes/alert_node/#inhibit) method
 allows you to suppress other alerts when an alert is triggered.
+
+For example, let's say you are monitoring a cluster of servers.
+As part of your alerting architecture, you have host-level alerts such as CPU usage
+alerts, RAM usage alerts, disk I/O, etc.
+You also have cluster-level alerts that monitor network health, host uptime, etc.
+
+If a CPU spike on a host in your cluster takes the machine offline, rather than
+getting a host-level alert for the CPU spike _**and**_ a cluster-level alert for
+the offline node, you'd get a single alert – the alert that the node is offline.
+The cluster-level alert would suppress the host-level alert.
 
 ## Using the `.inhibit()` method to suppress alerts
 The `.inhibit()` method uses alert categories and tags to inhibit or suppress other alerts.
