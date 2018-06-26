@@ -273,7 +273,7 @@ Connecting [Telegraf](/telegraf/latest/) to an InfluxDB instance that's using
 HTTPS and client certificates requires some additional steps.
 
 Copy the CA certificate, the client certificate, and client key to the host system
-running telegraf.
+running Telegraf.
 
 In Telegraf's configuration file (`/etc/telegraf/telegraf.conf`), edit the `urls` setting
 to indicate `https` instead of `http` and change `localhost` to the relevant domain name.
@@ -281,7 +281,7 @@ Edit the `ssl_*` settings to indicate the paths to the certificates and key.
 
 If connecting to an InfluxDB instance with [authentication enabled](/influxdb/v1.5/query_language/authentication_and_authorization/),
 provide a username and password that grant access to InfluxDB instance.
-If not authentication is not enabled on InfluxDB, leave the `username` and `password`
+If authentication is not enabled on InfluxDB, leave the `username` and `password`
 settings commented out.
 
 ```toml
