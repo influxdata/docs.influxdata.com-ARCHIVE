@@ -1,5 +1,5 @@
 ---
-title: Creating alerts based on two measurements
+title: Triggering alerts by comparing two measurements
 description: Kapacitor allows you to create alerts triggered by comparisons between two or more measurements. This guide walks through how to join the measurements, trigger alerts, and create visualizations for the data comparison.
 menu:
   kapacitor_1_5:
