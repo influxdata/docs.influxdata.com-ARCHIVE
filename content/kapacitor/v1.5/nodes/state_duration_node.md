@@ -42,10 +42,10 @@ stream
 Note that as the first point in the given state has no previous point, its
 state duration will be 0.
 
-> Currently, the StateDurationNode only calculates the duration at specified
-intervals defined by the `unit()` method. If your defined `unit()` is greater than
-the actual resolution of your data, state changes that occur at within those intervals
-may not be detected immediately or, in some cases, at all.
+> Currently, the StateDurationNode only emits a point when it receives data.
+It does not assume the previous evaluation if no data is received at the "expected"
+interval or data resolution.
+If no data is sent, the StateDurationNode cannot evaluate the state and cannot calculate a duration.
 
 > More information about this is available in this [comment thread](https://github.com/influxdata/kapacitor/issues/1757) on Github.
 
