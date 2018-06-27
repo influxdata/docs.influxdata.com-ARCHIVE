@@ -32,6 +32,7 @@ Aggregate, select, transform, and predict data with InfluxQL functions.
     * [SAMPLE()](#sample)
     * [TOP()](#top)
 * [Transformations](#transformations)
+    * [ABS()](#abs)
     * [ACOS()](#acos)
     * [ASIN()](#asin)
     * [ATAN()](#atan)
@@ -108,7 +109,7 @@ InfluxQL supports nesting [`DISTINCT()`](#distinct) with `COUNT()`.
 
 ### Examples
 
-#### Example 1: Count the field values associated with a field key
+#### Example: Count the field values associated with a field key
 ```
 > SELECT COUNT("water_level") FROM "h2o_feet"
 
@@ -119,7 +120,7 @@ time                   count
 ```
 The query returns the number of non-null field values in the `water_level` field key in the `h2o_feet` measurement.
 
-#### Example 2: Count the field values associated with each field key in a measurement
+#### Example: Count the field values associated with each field key in a measurement
 ```
 > SELECT COUNT(*) FROM "h2o_feet"
 
@@ -131,7 +132,7 @@ time                   count_level description   count_water_level
 The query returns the number of non-null field values for each field key associated with the `h2o_feet` measurement.
 The `h2o_feet` measurement has two field keys: `level description` and `water_level`.
 
-#### Example 3: Count the field values associated with each field key that matches a regular expression
+#### Example: Count the field values associated with each field key that matches a regular expression
 ```
 > SELECT COUNT(/water/) FROM "h2o_feet"
 
@@ -236,7 +237,7 @@ InfluxQL supports nesting `DISTINCT()` with [`COUNT()`](#count).
 
 ### Examples
 
-#### Example 1: List the distinct field values associated with a field key
+#### Example: List the distinct field values associated with a field key
 ```
 > SELECT DISTINCT("level description") FROM "h2o_feet"
 
@@ -250,7 +251,7 @@ time                   distinct
 ```
 The query returns a tabular list of the unique field values in the `level description` field key in the `h2o_feet` measurement.
 
-#### Example 2: List the distinct field values associated with each field key in a measurement
+#### Example: List the distinct field values associated with each field key in a measurement
 ```
 > SELECT DISTINCT(*) FROM "h2o_feet"
 
@@ -266,7 +267,7 @@ time                   distinct_level description   distinct_water_level
 The query returns a tabular list of the unique field values for each field key in the `h2o_feet` measurement.
 The `h2o_feet` measurement has two field keys: `level description` and `water_level`.
 
-#### Example 3: List the distinct field values associated with each field key that matches a regular expression
+#### Example: List the distinct field values associated with each field key that matches a regular expression
 ```
 > SELECT DISTINCT(/description/) FROM "h2o_feet"
 
@@ -398,7 +399,7 @@ time                   water_level
 2015-08-18T00:30:00Z   2.051
 ```
 
-#### Example 1: Calculate the integral for the field values associated with a field key
+#### Example: Calculate the integral for the field values associated with a field key
 ```
 > SELECT INTEGRAL("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
 
@@ -409,7 +410,7 @@ time                 integral
 ```
 The query returns the area under the curve (in seconds) for the field values associated with the `water_level` field key and in the `h2o_feet` measurement.
 
-#### Example 2: Calculate the integral for the field values associated with a field key and specify the unit option
+#### Example: Calculate the integral for the field values associated with a field key and specify the unit option
 ```
 > SELECT INTEGRAL("water_level",1m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
 
@@ -420,7 +421,7 @@ time                 integral
 ```
 The query returns the area under the curve (in minutes) for the field values associated with the `water_level` field key and in the `h2o_feet` measurement.
 
-#### Example 3: Calculate the integral for the field values associated with each field key in a measurement and specify the unit option
+#### Example: Calculate the integral for the field values associated with each field key in a measurement and specify the unit option
 ```
 > SELECT INTEGRAL(*,1m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
 
@@ -478,7 +479,7 @@ Returns the average field value associated with each field key in the [measureme
 
 ### Examples
 
-#### Example 1: Calculate the mean field value associated with a field key
+#### Example: Calculate the mean field value associated with a field key
 ```
 > SELECT MEAN("water_level") FROM "h2o_feet"
 
@@ -489,7 +490,7 @@ time                   mean
 ```
 The query returns the average field value in the `water_level` field key in the `h2o_feet` measurement.
 
-#### Example 2: Calculate the mean field value associated with each field key in a measurement
+#### Example: Calculate the mean field value associated with each field key in a measurement
 ```
 > SELECT MEAN(*) FROM "h2o_feet"
 
@@ -501,7 +502,7 @@ time                   mean_water_level
 The query returns the average field value for every field key that stores numerical values in the `h2o_feet` measurement.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-#### Example 3: Calculate the mean field value associated with each field key that matches a regular expression
+#### Example: Calculate the mean field value associated with each field key that matches a regular expression
 ```
 > SELECT MEAN(/water/) FROM "h2o_feet"
 
@@ -556,7 +557,7 @@ Returns the middle field value associated with each field key in the [measuremen
 
 ### Examples
 
-#### Example 1: Calculate the median field value associated with a field key
+#### Example: Calculate the median field value associated with a field key
 ```
 > SELECT MEDIAN("water_level") FROM "h2o_feet"
 
@@ -567,7 +568,7 @@ time                   median
 ```
 The query returns the middle field value in the `water_level` field key and in the `h2o_feet` measurement.
 
-#### Example 2: Calculate the median field value associated with each field key in a measurement
+#### Example: Calculate the median field value associated with each field key in a measurement
 ```
 > SELECT MEDIAN(*) FROM "h2o_feet"
 
@@ -579,7 +580,7 @@ time                   median_water_level
 The query returns the middle field value for every field key that stores numerical values in the `h2o_feet` measurement.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-#### Example 3: Calculate the median field value associated with each field key that matches a regular expression
+#### Example: Calculate the median field value associated with each field key that matches a regular expression
 ```
 > SELECT MEDIAN(/water/) FROM "h2o_feet"
 
@@ -634,7 +635,7 @@ Returns the most frequent field value associated with each field key in the [mea
 
 ### Examples
 
-#### Example 1: Calculate the mode field value associated with a field key
+#### Example: Calculate the mode field value associated with a field key
 ```
 > SELECT MODE("level description") FROM "h2o_feet"
 
@@ -645,7 +646,7 @@ time                   mode
 ```
 The query returns the most frequent field value in the `level description` field key and in the `h2o_feet` measurement.
 
-#### Example 2: Calculate the mode field value associated with each field key in a measurement
+#### Example: Calculate the mode field value associated with each field key in a measurement
 ```
 > SELECT MODE(*) FROM "h2o_feet"
 
@@ -657,7 +658,7 @@ time                   mode_level description   mode_water_level
 The query returns the most frequent field value for every field key in the `h2o_feet` measurement.
 The `h2o_feet` measurement has two field keys: `level description` and `water_level`.
 
-#### Example 3: Calculate the mode field value associated with each field key that matches a regular expression
+#### Example: Calculate the mode field value associated with each field key that matches a regular expression
 ```
 > SELECT MODE(/water/) FROM "h2o_feet"
 
@@ -707,7 +708,7 @@ Returns the difference between the minimum and maximum field values associated w
 
 ### Examples
 
-#### Example 1: Calculate the spread for the field values associated with a field key
+#### Example: Calculate the spread for the field values associated with a field key
 ```
 > SELECT SPREAD("water_level") FROM "h2o_feet"
 
@@ -719,7 +720,7 @@ time                   spread
 
 The query returns the difference between the minimum and maximum field values in the `water_level` field key and in the `h2o_feet` measurement.
 
-#### Example 2: Calculate the spread for the field values associated with each field key in a measurement
+#### Example: Calculate the spread for the field values associated with each field key in a measurement
 ```
 > SELECT SPREAD(*) FROM "h2o_feet"
 
@@ -732,7 +733,7 @@ time                   spread_water_level
 The query returns the difference between the minimum and maximum field values for every field key that stores numerical values in the `h2o_feet` measurement.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-#### Example 3: Calculate the spread for the field values associated with each field key that matches a regular expression
+#### Example: Calculate the spread for the field values associated with each field key that matches a regular expression
 ```
 > SELECT SPREAD(/water/) FROM "h2o_feet"
 
@@ -784,7 +785,7 @@ Returns the standard deviation of field values associated with each field key in
 
 ### Examples
 
-#### Example 1: Calculate the standard deviation for the field values associated with a field key
+#### Example: Calculate the standard deviation for the field values associated with a field key
 ```
 > SELECT STDDEV("water_level") FROM "h2o_feet"
 
@@ -796,7 +797,7 @@ time                   stddev
 
 The query returns the standard deviation of the field values in the `water_level` field key and in the `h2o_feet` measurement.
 
-#### Example 2: Calculate the standard deviation for the field values associated with each field key in a measurement
+#### Example: Calculate the standard deviation for the field values associated with each field key in a measurement
 ```
 > SELECT STDDEV(*) FROM "h2o_feet"
 
@@ -809,7 +810,7 @@ time                   stddev_water_level
 The query returns the standard deviation of the field values for each field key that stores numerical values in the `h2o_feet` measurement.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-#### Example 3: Calculate the standard deviation for the field values associated with each field key that matches a regular expression
+#### Example: Calculate the standard deviation for the field values associated with each field key that matches a regular expression
 ```
 > SELECT STDDEV(/water/) FROM "h2o_feet"
 
@@ -860,7 +861,7 @@ Returns the sums of field values associated with each field key in the [measurem
 
 ### Examples:
 
-#### Example 1: Calculate the sum of the field values associated with a field key
+#### Example: Calculate the sum of the field values associated with a field key
 ```
 > SELECT SUM("water_level") FROM "h2o_feet"
 
@@ -872,7 +873,7 @@ time                   sum
 
 The query returns the summed total of the field values in the `water_level` field key and in the `h2o_feet` measurement.
 
-#### Example 2: Calculate the sum of the field values associated with each field key in a measurement
+#### Example: Calculate the sum of the field values associated with each field key in a measurement
 ```
 > SELECT SUM(*) FROM "h2o_feet"
 
@@ -885,7 +886,7 @@ time                   sum_water_level
 The query returns the summed total of the field values for each field key that stores numerical values in the `h2o_feet` measurement.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-#### Example 3: Calculate the sum of the field values associated with each field key that matches a regular expression
+#### Example: Calculate the sum of the field values associated with each field key that matches a regular expression
 ```
 > SELECT SUM(/water/) FROM "h2o_feet"
 
@@ -944,7 +945,7 @@ Returns the smallest N field values associated with the field key in the parenth
 
 ### Examples
 
-#### Example 1: Select the bottom three field values associated with a field key
+#### Example: Select the bottom three field values associated with a field key
 ```
 > SELECT BOTTOM("water_level",3) FROM "h2o_feet"
 
@@ -957,7 +958,7 @@ time                   bottom
 ```
 The query returns the smallest three field values in the `water_level` field key and in the `h2o_feet` [measurement](/influxdb/v1.6/concepts/glossary/#measurement).
 
-#### Example 2: Select the bottom field value associated with a field key for two tags
+#### Example: Select the bottom field value associated with a field key for two tags
 ```
 > SELECT BOTTOM("water_level","location",2) FROM "h2o_feet"
 
@@ -969,7 +970,7 @@ time                   bottom   location
 ```
 The query returns the smallest field values in the `water_level` field key for two tag values associated with the `location` tag key.
 
-#### Example 3: Select the bottom four field values associated with a field key and the relevant tags and fields
+#### Example: Select the bottom four field values associated with a field key and the relevant tags and fields
 ```
 > SELECT BOTTOM("water_level",4),"location","level description" FROM "h2o_feet"
 
@@ -1113,7 +1114,7 @@ Returns the oldest field value (determined by timestamp) associated with the fie
 
 ### Examples
 
-#### Example 1: Select the first field value associated with a field key
+#### Example: Select the first field value associated with a field key
 ```
 > SELECT FIRST("level description") FROM "h2o_feet"
 
@@ -1124,7 +1125,7 @@ time                   first
 ```
 The query returns the oldest field value (determined by timestamp) associated with the `level description` field key and in the `h2o_feet` measurement.
 
-#### Example 2: Select the first field value associated with each field key in a measurement
+#### Example: Select the first field value associated with each field key in a measurement
 ```
 > SELECT FIRST(*) FROM "h2o_feet"
 
@@ -1136,7 +1137,7 @@ time                   first_level description   first_water_level
 The query returns the oldest field value (determined by timestamp) for each field key in the `h2o_feet` measurement.
 The `h2o_feet` measurement has two field keys: `level description` and `water_level`.
 
-#### Example 3: Select the first field value associated with each field key that matches a regular expression
+#### Example: Select the first field value associated with each field key that matches a regular expression
 ```
 > SELECT FIRST(/level/) FROM "h2o_feet"
 
@@ -1205,7 +1206,7 @@ Returns the newest field value (determined by timestamp) associated with the fie
 
 ### Examples
 
-#### Example 1: Select the last field values associated with a field key
+#### Example: Select the last field values associated with a field key
 ```
 > SELECT LAST("level description") FROM "h2o_feet"
 
@@ -1216,7 +1217,7 @@ time                   last
 ```
 The query returns the newest field value (determined by timestamp) associated with the `level description` field key and in the `h2o_feet` measurement.
 
-#### Example 2: Select the last field values associated with each field key in a measurement
+#### Example: Select the last field values associated with each field key in a measurement
 ```
 > SELECT LAST(*) FROM "h2o_feet"
 
@@ -1228,7 +1229,7 @@ time                   last_level description   last_water_level
 The query returns the newest field value (determined by timestamp) for each field key in the `h2o_feet` measurement.
 The `h2o_feet` measurement has two field keys: `level description` and `water_level`.
 
-#### Example 3: Select the last field value associated with each field key that matches a regular expression
+#### Example: Select the last field value associated with each field key that matches a regular expression
 ```
 > SELECT LAST(/level/) FROM "h2o_feet"
 
@@ -1298,7 +1299,7 @@ Returns the greatest field value associated with the field key in the parenthese
 
 ### Examples
 
-#### Example 1: Select the maximum field value associated with a field key
+#### Example: Select the maximum field value associated with a field key
 ```
 > SELECT MAX("water_level") FROM "h2o_feet"
 
@@ -1309,7 +1310,7 @@ time                   max
 ```
 The query returns the greatest field value in the `water_level` field key and in the `h2o_feet` measurement.
 
-#### Example 2: Select the maximum field value associated with each field key in a measurement
+#### Example: Select the maximum field value associated with each field key in a measurement
 ```
 > SELECT MAX(*) FROM "h2o_feet"
 
@@ -1321,7 +1322,7 @@ time                   max_water_level
 The query returns the greatest field value for each field key that stores numerical values in the `h2o_feet` measurement.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-#### Example 3: Select the maximum field value associated with each field key that matches a regular expression
+#### Example: Select the maximum field value associated with each field key that matches a regular expression
 ```
 > SELECT MAX(/level/) FROM "h2o_feet"
 
@@ -1390,7 +1391,7 @@ Returns the lowest field value associated with the field key in the parentheses 
 
 ### Examples
 
-#### Example 1: Select the minimum field value associated with a field key
+#### Example: Select the minimum field value associated with a field key
 ```
 > SELECT MIN("water_level") FROM "h2o_feet"
 
@@ -1401,7 +1402,7 @@ time                   min
 ```
 The query returns the lowest field value in the `water_level` field key and in the `h2o_feet` measurement.
 
-#### Example 2: Select the minimum field value associated with each field key in a measurement
+#### Example: Select the minimum field value associated with each field key in a measurement
 ```
 > SELECT MIN(*) FROM "h2o_feet"
 
@@ -1413,7 +1414,7 @@ time                   min_water_level
 The query returns the lowest field value for each field key that stores numerical values in the `h2o_feet` measurement.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-#### Example 3: Select the minimum field value associated with each field key that matches a regular expression
+#### Example: Select the minimum field value associated with each field key that matches a regular expression
 ```
 > SELECT MIN(/level/) FROM "h2o_feet"
 
@@ -1483,7 +1484,7 @@ Returns the Nth percentile field value associated with the field key in the pare
 
 ### Examples
 
-#### Example 1: Select the fifth percentile field value associated with a field key
+#### Example: Select the fifth percentile field value associated with a field key
 ```
 > SELECT PERCENTILE("water_level",5) FROM "h2o_feet"
 
@@ -1494,7 +1495,7 @@ time                   percentile
 ```
 The query returns the field value that is larger than five percent of the field values in the `water_level` field key and in the `h2o_feet` measurement.
 
-#### Example 2: Select the fifth percentile field value associated with each field key in a measurement
+#### Example: Select the fifth percentile field value associated with each field key in a measurement
 ```
 > SELECT PERCENTILE(*,5) FROM "h2o_feet"
 
@@ -1506,7 +1507,7 @@ time                   percentile_water_level
 The query returns the field value that is larger than five percent of the field values in each field key that stores numerical values in the `h2o_feet` measurement.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-#### Example 3: Select fifth percentile field value associated with each field key that matches a regular expression
+#### Example: Select fifth percentile field value associated with each field key that matches a regular expression
 ```
 > SELECT PERCENTILE(/level/,5) FROM "h2o_feet"
 
@@ -1581,7 +1582,7 @@ Returns N randomly selected field values associated with the field key in the pa
 
 ### Examples
 
-#### Example 1: Select a sample of the field values associated with a field key
+#### Example: Select a sample of the field values associated with a field key
 ```
 > SELECT SAMPLE("water_level",2) FROM "h2o_feet"
 
@@ -1608,7 +1609,7 @@ time                   sample_level description   sample_water_level
 The query returns two randomly selected points for each field key in the `h2o_feet` measurement.
 The `h2o_feet` measurement has two field keys: `level description` and `water_level`.
 
-#### Example 3: Select a sample of the field values associated with each field key that matches a regular expression
+#### Example: Select a sample of the field values associated with each field key that matches a regular expression
 ```
 > SELECT SAMPLE(/level/,2) FROM "h2o_feet"
 
@@ -1715,7 +1716,7 @@ See the [Common Issues](#common-issues-with-top) section for more information.
 
 ### Examples
 
-#### Example 1: Select the top three field values associated with a field key
+#### Example: Select the top three field values associated with a field key
 ```
 > SELECT TOP("water_level",3) FROM "h2o_feet"
 
@@ -1728,7 +1729,7 @@ time                   top
 ```
 The query returns the greatest three field values in the `water_level` field key and in the `h2o_feet` [measurement](/influxdb/v1.6/concepts/glossary/#measurement).
 
-#### Example 2: Select the top field value associated with a field key for two tags
+#### Example: Select the top field value associated with a field key for two tags
 ```
 > SELECT TOP("water_level","location",2) FROM "h2o_feet"
 
@@ -1740,7 +1741,7 @@ time                   top     location
 ```
 The query returns the greatest field values in the `water_level` field key for two tag values associated with the `location` tag key.
 
-#### Example 3: Select the top four field values associated with a field key and the relevant tags and fields
+#### Example: Select the top four field values associated with a field key and the relevant tags and fields
 ```
 > SELECT TOP("water_level",4),"location","level description" FROM "h2o_feet"
 
@@ -1862,14 +1863,187 @@ location
 
 # Transformations
 
+## ABS()
+Returns the absolute value of the field value.
+
+### Basic syntax
+```
+SELECT ABS( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+### Description of basic syntax
+
+`ABS(field_key)`  
+Returns the absolute values of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
+
+<!-- `ABS(/regular_expression/)`  
+Returns the absolute value of field values associated with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions). -->
+
+`ABS(*)`  
+Returns the absolute values of field values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement).
+
+`ABS()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
+
+The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
+See the [Advanced Syntax](#advanced-syntax) section for how to use `ABS()` with a `GROUP BY time()` clause.
+
+### Examples of basic syntax
+
+The examples below use the following subsample of this [sample data](https://gist.github.com/sanderson/8f8aec94a60b2c31a61f44a37737bfea):
+
+```
+> SELECT * FROM "data" WHERE time >= '2018-06-24T12:00:00Z' AND time <= '2018-06-24T12:05:00Z'
+
+name: data
+time                 a                   b
+----                 -                   -
+1529841600000000000  1.33909108671076    -0.163643058925645
+1529841660000000000  -0.774984088561186  0.137034364053949
+1529841720000000000  -0.921037167720451  -0.482943221384294
+1529841780000000000  -1.73880754843378   -0.0729732928756677
+1529841840000000000  -0.905980032168252  1.77857552719844
+1529841900000000000  -0.891164752631417  0.741147445214238
+```
+
+#### Example: Calculate the absolute values of field values associated with a field key
+```
+> SELECT ABS("a") FROM "data" WHERE time >= '2018-06-24T12:00:00Z' AND time <= '2018-06-24T12:05:00Z'
+
+name: data
+time                 abs
+----                 ---
+1529841600000000000  1.33909108671076
+1529841660000000000  0.774984088561186
+1529841720000000000  0.921037167720451
+1529841780000000000  1.73880754843378
+1529841840000000000  0.905980032168252
+1529841900000000000  0.891164752631417
+```
+
+The query returns the absolute values of field values in the `a` field key in the `data` measurement.
+
+#### Example: Calculate the absolute Values of field values associated with each field key in a measurement
+```
+> SELECT ABS(*) FROM "data" WHERE time >= '2018-06-24T12:00:00Z' AND time <= '2018-06-24T12:05:00Z'
+
+name: data
+time                 abs_a              abs_b
+----                 -----              -----
+1529841600000000000  1.33909108671076   0.163643058925645
+1529841660000000000  0.774984088561186  0.137034364053949
+1529841720000000000  0.921037167720451  0.482943221384294
+1529841780000000000  1.73880754843378   0.0729732928756677
+1529841840000000000  0.905980032168252  1.77857552719844
+1529841900000000000  0.891164752631417  0.741147445214238
+```
+
+The query returns the absolute values of field values for each field key that stores
+numerical values in the `data` measurement.
+The `data` measurement has two numerical fields: `a` and `b`.
+
+<!-- #### Example: Calculate the absolute values of field values associated with each field key that matches a regular expression
+```
+> SELECT ABS(/a/) FROM "h2o_feet" WHERE time >= '2018-06-24T12:00:00Z' AND time <= '2018-06-24T12:05:00Z' AND "location" = 'santa_monica'
+
+name: data
+time                 abs
+----                 ---
+1529841600000000000  1.33909108671076
+1529841660000000000  0.774984088561186
+1529841720000000000  0.921037167720451
+1529841780000000000  1.73880754843378
+1529841840000000000  0.905980032168252
+1529841900000000000  0.891164752631417
+```
+
+The query returns the absolute values of field values for each field key that stores numerical values and includes `a` in the `data` measurement. -->
+
+#### Example: Calculate the absolute values of field values associated with a field key and include several clauses
+```
+> SELECT ABS("a") FROM "data" WHERE time >= '2018-06-24T12:00:00Z' AND time <= '2018-06-24T12:05:00Z' ORDER BY time DESC LIMIT 4 OFFSET 2
+
+name: data
+time                 abs
+----                 ---
+1529841780000000000  1.73880754843378
+1529841720000000000  0.921037167720451
+1529841660000000000  0.774984088561186
+1529841600000000000  1.33909108671076
+```
+
+The query returns the absolute values of field values associated with the `a` field key.
+It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2018-06-24T12:00:00Z` and `2018-06-24T12:05:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
+The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
+
+### Advanced syntax
+```
+SELECT ABS(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
+```
+
+### Description of advanced syntax
+
+The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
+The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `ABS()` function to those results.
+
+`ABS()` supports the following nested functions:
+[`COUNT()`](#count),
+[`MEAN()`](#mean),
+[`MEDIAN()`](#median),
+[`MODE()`](#mode),
+[`SUM()`](#sum),
+[`FIRST()`](#first),
+[`LAST()`](#last),
+[`MIN()`](#min),
+[`MAX()`](#max), and
+[`PERCENTILE()`](#percentile).
+
+### Examples of advanced syntax
+
+#### Example: Calculate the absolute values of mean values.
+```
+> SELECT ABS(MEAN("a")) FROM "data" WHERE time >= '2018-06-24T12:00:00Z' AND time <= '2018-06-24T13:00:00Z' GROUP BY time(12m)
+
+name: data
+time                 abs
+----                 ---
+1529841600000000000  0.3960977256302787
+1529842320000000000  0.0010541018316373302
+1529843040000000000  0.04494733240283668
+1529843760000000000  0.2553594777104415
+1529844480000000000  0.20382988543108413
+1529845200000000000  0.790836070736962
+```
+
+The query returns the absolute values of [average](#mean) `a`s that are calculated at 12-minute intervals.
+
+To get those results, InfluxDB first calculates the average `a`s at 12-minute intervals.
+This step is the same as using the `MEAN()` function with the `GROUP BY time()` clause and without `ABS()`:
+
+```
+> SELECT MEAN("a") FROM "data" WHERE time >= '2018-06-24T12:00:00Z' AND time <= '2018-06-24T13:00:00Z' GROUP BY time(12m)
+
+name: data
+time                 mean
+----                 ----
+1529841600000000000  -0.3960977256302787
+1529842320000000000  0.0010541018316373302
+1529843040000000000  0.04494733240283668
+1529843760000000000  0.2553594777104415
+1529844480000000000  0.20382988543108413
+1529845200000000000  -0.790836070736962
+```
+
+InfluxDB then calculates absolute values of those averages.
+
+
+
 ## ACOS()
 Returns the arccosine (in radians) of the field value. Field values must be between -1 and 1.
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT ACOS( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
-### Description of Basic Syntax
+### Description of basic syntax
 
 `ACOS(field_key)`  
 Returns the arccosine of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
@@ -1885,9 +2059,9 @@ Returns the arccosine of field values associated with each field key in the [mea
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax) section for how to use `ACOS()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
+### Examples of basic syntax
 
-Examples 1-3 use the following data sample of simulated park occupancy relative to total capacity. The important thing to note is that all field values fall within the calculable range (-1 to 1) of the `ACOS()` function:
+The examples below use the following data sample of simulated park occupancy relative to total capacity. The important thing to note is that all field values fall within the calculable range (-1 to 1) of the `ACOS()` function:
 
 ```
 > SELECT "of_capacity" FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
@@ -1906,7 +2080,7 @@ time                  capacity
 2017-05-09T00:00:00Z  0.16
 ```
 
-#### Example 1: Calculate the arccosine of field values associated with a field key
+#### Example: Calculate the arccosine of field values associated with a field key
 ```
 > SELECT ACOS("of_capacity") FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
 
@@ -1926,7 +2100,7 @@ time                  acos
 
 The query returns arccosine of field values in the `of_capacity` field key in the `park_occupancy` measurement.
 
-#### Example 2: Calculate the arccosine of field values associated with each field key in a measurement
+#### Example: Calculate the arccosine of field values associated with each field key in a measurement
 ```
 > SELECT ACOS(*) FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
 
@@ -1947,7 +2121,7 @@ time                  acos_of_capacity
 The query returns arccosine of field values for each field key that stores numerical values in the `park_occupancy` measurement.
 The `park_occupancy` measurement has one numerical field: `of_capacity`.
 
-<!-- #### Example 3: Calculate the arccosine of field values associated with each field key that matches a regular expression
+<!-- #### Example: Calculate the arccosine of field values associated with each field key that matches a regular expression
 ```
 > SELECT ACOS(/capacity/) FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
 
@@ -1967,7 +2141,7 @@ time                  acos_of_capacity
 
 The query returns arccosine of field values for each field key that stores numerical values and includes the word `capacity` in the `park_occupancy` measurement. -->
 
-#### Example 3: Calculate the arccosine of field values associated with a field key and include several clauses
+#### Example: Calculate the arccosine of field values associated with a field key and include several clauses
 ```
 > SELECT ACOS("of_capacity") FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z' ORDER BY time DESC LIMIT 4 OFFSET 2
 
@@ -1984,12 +2158,12 @@ The query returns arccosine of field values associated with the `of_capacity` fi
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2017-05-01T00:00:00Z` and `2017-05-09T00:00:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT ACOS(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Advanced Syntax
+### Description of advanced syntax
 
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `ACOS()` function to those results.
@@ -2006,9 +2180,9 @@ The query first calculates the results for the nested function at the specified 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
-#### Example 1: Calculate the arccosine of mean values.
+#### Example: Calculate the arccosine of mean values
 ```
 > SELECT ACOS(MEAN("of_capacity")) FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z' GROUP BY time(3d)
 
@@ -2042,11 +2216,11 @@ InfluxDB then calculates arccosine of those averages.
 ## ASIN()
 Returns the arcsine (in radians) of the field value. Field values must be between -1 and 1.
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT ASIN( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
-### Description of Basic Syntax
+### Description of basic syntax
 
 `ASIN(field_key)`  
 Returns the arcsine of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
@@ -2062,9 +2236,9 @@ Returns the arcsine of field values associated with each field key in the [measu
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax) section for how to use `ASIN()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
+### Examples of basic syntax
 
-Examples 1-3 use the following data sample of simulated park occupancy relative to total capacity. The important thing to note is that all field values fall within the calculable range (-1 to 1) of the `ASIN()` function:
+The examples below use the following data sample of simulated park occupancy relative to total capacity. The important thing to note is that all field values fall within the calculable range (-1 to 1) of the `ASIN()` function:
 
 ```
 > SELECT "of_capacity" FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
@@ -2083,7 +2257,7 @@ time                  capacity
 2017-05-09T00:00:00Z  0.16
 ```
 
-#### Example 1: Calculate the arcsine of field values associated with a field key
+#### Example: Calculate the arcsine of field values associated with a field key
 ```
 > SELECT ASIN("of_capacity") FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
 
@@ -2103,7 +2277,7 @@ time                  asin
 
 The query returns arcsine of field values in the `of_capacity` field key in the `park_capacity` measurement.
 
-#### Example 2: Calculate the arcsine of field values associated with each field key in a measurement
+#### Example: Calculate the arcsine of field values associated with each field key in a measurement
 ```
 > SELECT ASIN(*) FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
 
@@ -2124,7 +2298,7 @@ time                  asin_of_capacity
 The query returns arcsine of field values for each field key that stores numerical values in the `park_capacity` measurement.
 The `h2o_feet` measurement has one numerical field: `of_capacity`.
 
-<!-- #### Example 3: Calculate the arcsine of field values associated with each field key that matches a regular expression
+<!-- #### Example: Calculate the arcsine of field values associated with each field key that matches a regular expression
 ```
 > SELECT ASIN(/capacity/) FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
 
@@ -2144,7 +2318,7 @@ time                  asin
 
 The query returns arcsine of field values for each field key that stores numerical values and includes the word `of_capacity` in the `park_occupancy` measurement. -->
 
-#### Example 3: Calculate the arcsine of field values associated with a field key and include several clauses
+#### Example: Calculate the arcsine of field values associated with a field key and include several clauses
 ```
 > SELECT ASIN("of_capacity") FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z' ORDER BY time DESC LIMIT 4 OFFSET 2
 
@@ -2161,12 +2335,12 @@ The query returns arcsine of field values associated with the `of_capacity` fiel
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2017-05-01T00:00:00Z` and `2017-05-09T00:00:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT ASIN(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Advanced Syntax
+### Description of advanced syntax
 
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `ASIN()` function to those results.
@@ -2183,9 +2357,9 @@ The query first calculates the results for the nested function at the specified 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
-#### Example 1: Calculate the arcsine of mean values.
+#### Example: Calculate the arcsine of mean values.
 ```
 > SELECT ASIN(MEAN("of_capacity")) FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z' GROUP BY time(3d)
 
@@ -2220,11 +2394,11 @@ InfluxDB then calculates arcsine of those averages.
 ## ATAN()
 Returns the arctangent (in radians) of the field value. Field values must be between -1 and 1.
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT ATAN( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
-### Description of Basic Syntax
+### Description of basic syntax
 
 `ATAN(field_key)`  
 Returns the arctangent of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
@@ -2240,9 +2414,9 @@ Returns the arctangent of field values associated with each field key in the [me
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax) section for how to use `ATAN()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
+### Examples of basic syntax
 
-Examples 1-3 use the following data sample of simulated park occupancy relative to total capacity. The important thing to note is that all field values fall within the calculable range (-1 to 1) of the `ATAN()` function:
+The examples below use the following data sample of simulated park occupancy relative to total capacity. The important thing to note is that all field values fall within the calculable range (-1 to 1) of the `ATAN()` function:
 
 ```
 > SELECT "of_capacity" FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
@@ -2261,7 +2435,7 @@ time                  capacity
 2017-05-09T00:00:00Z  0.16
 ```
 
-#### Example 1: Calculate the arctangent of field values associated with a field key
+#### Example: Calculate the arctangent of field values associated with a field key
 ```
 > SELECT ATAN("of_capacity") FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
 
@@ -2281,7 +2455,7 @@ time                  atan
 
 The query returns arctangent of field values in the `of_capacity` field key in the `park_occupancy` measurement.
 
-#### Example 2: Calculate the arctangent of field values associated with each field key in a measurement
+#### Example: Calculate the arctangent of field values associated with each field key in a measurement
 ```
 > SELECT ATAN(*) FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
 
@@ -2302,7 +2476,7 @@ time                  atan_of_capacity
 The query returns arctangent of field values for each field key that stores numerical values in the `park_occupancy` measurement.
 The `park_occupancy` measurement has one numerical field: `of_capacity`.
 
-<!-- #### Example 3: Calculate the arctangent of field values associated with each field key that matches a regular expression
+<!-- #### Example: Calculate the arctangent of field values associated with each field key that matches a regular expression
 ```
 > SELECT ATAN(/capacity/) FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z'
 
@@ -2322,7 +2496,7 @@ time                  atan_of_capacity
 
 The query returns arctangent of field values for each field key that stores numerical values and includes the word `capacity` in the `park_occupancy` measurement. -->
 
-#### Example 3: Calculate the arctangent of field values associated with a field key and include several clauses
+#### Example: Calculate the arctangent of field values associated with a field key and include several clauses
 ```
 > SELECT ATAN("of_capacity") FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z' ORDER BY time DESC LIMIT 4 OFFSET 2
 
@@ -2339,12 +2513,12 @@ The query returns arctangent of field values associated with the `of_capacity` f
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2017-05-01T00:00:00Z` and `2017-05-09T00:00:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT ATAN(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Advanced Syntax
+### Description of advanced syntax
 
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `ATAN()` function to those results.
@@ -2361,9 +2535,9 @@ The query first calculates the results for the nested function at the specified 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
-#### Example 1: Calculate the arctangent of mean values.
+#### Example: Calculate the arctangent of mean values.
 ```
 > SELECT ATAN(MEAN("of_capacity")) FROM "park_occupancy" WHERE time >= '2017-05-01T00:00:00Z' AND time <= '2017-05-09T00:00:00Z' GROUP BY time(3d)
 
@@ -2398,11 +2572,11 @@ InfluxDB then calculates arctangent of those averages.
 ## ATAN2()
 Returns the the arctangent of `y/x` in radians.
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT ATAN2( [ * | <field_key> | num ], [ <field_key> | num ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
-### Description of Basic Syntax
+### Description of basic syntax
 
 `ATAN2(field_key_y, field_key_x)`  
 Returns the arctangent of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key), `field_key_y`, divided by field values associated with `feild_key_x`.
@@ -2420,9 +2594,9 @@ divided by field values associated with `feild_key_x`.
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax) section for how to use `ATAN2()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
+### Examples of basic syntax
 
-Examples 1-3 use the following sample of simulated flight data:
+The examples below use the following sample of simulated flight data:
 
 ```
 > SELECT "altitude_ft", "distance_ft" FROM "flight_data" WHERE time >= '2018-05-16T12:01:00Z' AND time <= '2018-05-16T12:10:00Z'
@@ -2442,7 +2616,7 @@ time                  altitude_ft  distance_ft
 2018-05-16T12:10:00Z  14885        75881
 ```
 
-#### Example 1: Calculate the arctangent of field_key_y over field_key_x
+#### Example: Calculate the arctangent of field_key_y over field_key_x
 ```
 > SELECT ATAN2("altitude_ft", "distance_ft") FROM "flight_data" WHERE time >= '2018-05-16T12:01:00Z' AND time <= '2018-05-16T12:10:00Z'
 
@@ -2463,7 +2637,7 @@ time                  atan2
 
 The query returns the arctangents of field values in the `altitude_ft` field key divided by values in the `distance_ft` field key. Both are part of the `flight_data` measurement.
 
-#### Example 2: Calculate the arctangent of values associated with each field key in a measurement divided by feild_key_x
+#### Example: Calculate the arctangent of values associated with each field key in a measurement divided by feild_key_x
 ```
 > SELECT ATAN2(*, "distance_ft") FROM "flight_data" WHERE time >= '2018-05-16T12:01:00Z' AND time <= '2018-05-16T12:10:00Z'
 
@@ -2485,7 +2659,7 @@ time                  atan2_altitude_ft     atan2_distance_ft
 The query returns the arctangents of all numeric field values in the `flight_data` measurement divided by values in the `distance_ft` field key.
 The `flight_data` measurement has two numeric fields: `altitude_ft` and `distance_ft`.
 
-<!-- #### Example 3: Calculate the arctangent of values associated with each field key matching a regular expression divided by feild_key_x
+<!-- #### Example: Calculate the arctangent of values associated with each field key matching a regular expression divided by feild_key_x
 ```
 > SELECT ATAN2(/ft/, "distance_ft") FROM "flight_data" WHERE time >= '2018-05-16T12:01:00Z' AND time <= '2018-05-16T12:10:00Z'
 
@@ -2508,7 +2682,7 @@ The query returns the arctangents of all numeric field values in the `flight_dat
 The `flight_data` measurement has two matching numeric fields: `altitude_ft` and `distance_ft`.
 -->
 
-#### Example 3: Calculate the arctangents of field values and include several clauses
+#### Example: Calculate the arctangents of field values and include several clauses
 ```
 > SELECT ATAN2("altitude_ft", "distance_ft") FROM "flight_data" WHERE time >= '2018-05-16T12:01:00Z' AND time <= '2018-05-16T12:10:00Z' ORDER BY time DESC LIMIT 4 OFFSET 2
 
@@ -2525,12 +2699,12 @@ The query returns the arctangent of field values associated with the `altitude_f
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2018-05-16T12:10:00Z` and `2018-05-16T12:10:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT ATAN2(<function()>, <function()>) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Advanced Syntax
+### Description of advanced syntax
 
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `ATAN2()` function to those results.
@@ -2547,9 +2721,9 @@ The query first calculates the results for the nested function at the specified 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
-#### Example 1: Calculate arctangents of mean values
+#### Example: Calculate arctangents of mean values
 ```
 > SELECT ATAN2(MEAN("altitude_ft"), MEAN("distance_ft")) FROM "flight_data" WHERE time >= '2018-05-16T12:01:00Z' AND time <= '2018-05-16T13:01:00Z' GROUP BY time(12m)
 
@@ -2589,11 +2763,11 @@ InfluxDB then calculates the arctangents of those averages.
 ## CEIL()
 Returns the subsequent value rounded up to the nearest integer.
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT CEIL( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
-### Description of Basic Syntax
+### Description of basic syntax
 
 `CEIL(field_key)`  
 Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key) rounded up to the nearest integer.
@@ -2609,9 +2783,9 @@ Returns the field values associated with each field key in the [measurement](/in
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax) section for how to use `CEIL()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
+### Examples of basic syntax
 
-Examples 1-3 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
+The examples below use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
 ```
 > SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -2626,7 +2800,7 @@ time                  water_level
 2015-08-18T00:30:00Z  2.051
 ```
 
-#### Example 1: Calculate the ceiling of field values associated with a field key
+#### Example: Calculate the ceiling of field values associated with a field key
 ```
 > SELECT CEIL("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -2643,7 +2817,7 @@ time                  ceil
 
 The query returns field values in the `water_level` field key in the `h2o_feet` measurement rounded up to the nearest integer.
 
-#### Example 2: Calculate the ceiling of field values associated with each field key in a measurement
+#### Example: Calculate the ceiling of field values associated with each field key in a measurement
 ```
 > SELECT CEIL(*) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -2661,7 +2835,7 @@ time                  ceil_water_level
 The query returns field values for each field key that stores numerical values in the `h2o_feet` measurement rounded up to the nearest integer.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-<!-- #### Example 3: Calculate the ceiling of the field values associated with each field key that matches a regular expression
+<!-- #### Example: Calculate the ceiling of the field values associated with each field key that matches a regular expression
 ```
 > SELECT CEIL(/water/) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -2678,7 +2852,7 @@ time                   ceil_water_level
 
 The query returns field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement rounded up to the nearest integer. -->
 
-#### Example 3: Calculate the ceiling of field values associated with a field key and include several clauses
+#### Example: Calculate the ceiling of field values associated with a field key and include several clauses
 ```
 > SELECT CEIL("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' ORDER BY time DESC LIMIT 4 OFFSET 2
 
@@ -2695,12 +2869,12 @@ The query returns field values associated with the `water_level` field key round
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT CEIL(<function>( [ * | <field_key> | /<regular_expression>/ ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Advanced Syntax
+### Description of advanced syntax
 
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `CEIL()` function to those results.
@@ -2717,9 +2891,9 @@ The query first calculates the results for the nested function at the specified 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
-#### Example 1: Calculate mean values rounded up to the nearest integer.
+#### Example: Calculate mean values rounded up to the nearest integer.
 ```
 > SELECT CEIL(MEAN("water_level")) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
 
@@ -2752,11 +2926,11 @@ InfluxDB then rounds those averages up to the nearest integer.
 ## COS()
 Returns the cosine of the field value.
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT COS( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
-### Description of Basic Syntax
+### Description of basic syntax
 
 `COS(field_key)`  
 Returns the cosine of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
@@ -2772,9 +2946,9 @@ Returns the cosine of field values associated with each field key in the [measur
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax) section for how to use `COS()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
+### Examples of basic syntax
 
-Examples 1-3 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
+The examples below use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
 
 ```
 > SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
@@ -2790,7 +2964,7 @@ time                  water_level
 2015-08-18T00:30:00Z  2.051
 ```
 
-#### Example 1: Calculate the cosine of field values associated with a field key
+#### Example: Calculate the cosine of field values associated with a field key
 ```
 > SELECT COS("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -2807,7 +2981,7 @@ time                  cos
 
 The query returns cosine of field values in the `water_level` field key in the `h2o_feet` measurement.
 
-#### Example 2: Calculate the cosine of field values associated with each field key in a measurement
+#### Example: Calculate the cosine of field values associated with each field key in a measurement
 ```
 > SELECT COS(*) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -2825,7 +2999,7 @@ time                  cos_water_level
 The query returns cosine of field values for each field key that stores numerical values in the `h2o_feet` measurement.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-<!-- #### Example 3: Calculate the cosine of field values associated with each field key that matches a regular expression
+<!-- #### Example: Calculate the cosine of field values associated with each field key that matches a regular expression
 ```
 > SELECT COS(/water/) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -2842,7 +3016,7 @@ time                  cos
 
 The query returns cosine of field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement. -->
 
-#### Example 3: Calculate the cosine of field values associated with a field key and include several clauses
+#### Example: Calculate the cosine of field values associated with a field key and include several clauses
 ```
 > SELECT COS("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' ORDER BY time DESC LIMIT 4 OFFSET 2
 
@@ -2859,12 +3033,12 @@ The query returns cosine of field values associated with the `water_level` field
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT COS(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Advanced Syntax
+### Description of advanced syntax
 
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `COS()` function to those results.
@@ -2881,9 +3055,9 @@ The query first calculates the results for the nested function at the specified 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
-#### Example 1: Calculate the cosine of mean values.
+#### Example: Calculate the cosine of mean values.
 ```
 > SELECT COS(MEAN("water_level")) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
 
@@ -2916,12 +3090,12 @@ InfluxDB then calculates cosine of those averages.
 ## CUMULATIVE_SUM()
 Returns the running total of subsequent [field values](/influxdb/v1.6/concepts/glossary/#field-value).
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT CUMULATIVE_SUM( [ * | <field_key> | /<regular_expression>/ ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Basic Syntax
+### Description of basic syntax
 
 `CUMULATIVE_SUM(field_key)`  
 Returns the running total of subsequent field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
@@ -2937,9 +3111,9 @@ Returns the running total of subsequent field values associated with each field 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax) section for how to use `CUMULATIVE_SUM()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
+### Examples of basic syntax
 
-Examples 1-4 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
+The examples below use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
 ```
 > SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -2954,7 +3128,7 @@ time                   water_level
 2015-08-18T00:30:00Z   2.051
 ```
 
-#### Example 1: Calculate the cumulative sum of the field values associated with a field key
+#### Example: Calculate the cumulative sum of the field values associated with a field key
 ```
 > SELECT CUMULATIVE_SUM("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -2971,7 +3145,7 @@ time                   cumulative_sum
 
 The query returns the running total of the field values in the `water_level` field key and in the `h2o_feet` measurement.
 
-#### Example 2: Calculate the cumulative sum of the field values associated with each field key in a measurement
+#### Example: Calculate the cumulative sum of the field values associated with each field key in a measurement
 ```
 > SELECT CUMULATIVE_SUM(*) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -2989,7 +3163,7 @@ time                   cumulative_sum_water_level
 The query returns the running total of the field values for each field key that stores numerical values in the `h2o_feet` measurement.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-#### Example 3: Calculate the cumulative sum of the field values associated with each field key that matches a regular expression
+#### Example: Calculate the cumulative sum of the field values associated with each field key that matches a regular expression
 ```
 > SELECT CUMULATIVE_SUM(/water/) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -3023,12 +3197,12 @@ The query returns the running total of the field values associated with the `wat
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT CUMULATIVE_SUM(<function>( [ * | <field_key> | /<regular_expression>/ ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Advanced Syntax
+### Description of advanced syntax
 
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `CUMULATIVE_SUM()` function to those results.
@@ -3045,9 +3219,9 @@ The query first calculates the results for the nested function at the specified 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
-#### Example 1: Calculate the cumulative sum of mean values
+#### Example: Calculate the cumulative sum of mean values
 ```
 > SELECT CUMULATIVE_SUM(MEAN("water_level")) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
 
@@ -3081,12 +3255,12 @@ and the third point (`6.213`) is the sum of `2.09`, `2.077`, and `2.046000000000
 ## DERIVATIVE()
 Returns the rate of change between subsequent [field values](/influxdb/v1.6/concepts/glossary/#field-value).
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT DERIVATIVE( [ * | <field_key> | /<regular_expression>/ ] [ , <unit> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Basic Syntax
+### Description of basic syntax
 InfluxDB calculates the difference between subsequent field values and converts those results into the rate of change per `unit`.
 The `unit` argument is an integer followed by a [duration literal](/influxdb/v1.6/query_language/spec/#literals) and it is optional.
 If the query does not specify the `unit` the unit defaults to one second (`1s`).
@@ -3105,7 +3279,7 @@ Returns the rate of change between subsequent field values associated with each 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax-1) section for how to use `DERIVATIVE()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
+### Examples of basic syntax
 
 Examples 1-5 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
 
@@ -3123,7 +3297,7 @@ time                   water_level
 2015-08-18T00:30:00Z   2.051
 ```
 
-#### Example 1: Calculate the derivative between the field values associated with a field key
+#### Example: Calculate the derivative between the field values associated with a field key
 ```
 > SELECT DERIVATIVE("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
 
@@ -3150,7 +3324,7 @@ InfluxDB calculates the difference between the field values and normalizes that 
 second field value - first field value
 ```
 
-#### Example 2: Calculate the derivative between the field values associated with a field key and specify the unit option
+#### Example: Calculate the derivative between the field values associated with a field key and specify the unit option
 ```
 > SELECT DERIVATIVE("water_level",6m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
 
@@ -3177,7 +3351,7 @@ InfluxDB calculates the difference between the field values and normalizes that 
 second field value - first field value
 ```
 
-#### Example 3: Calculate the derivative between the field values associated with each field key in a measurement and specify the unit option
+#### Example: Calculate the derivative between the field values associated with each field key in a measurement and specify the unit option
 ```
 > SELECT DERIVATIVE(*,3m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
 
@@ -3258,12 +3432,12 @@ InfluxDB calculates the difference between the field values and normalizes that 
 second field value - first field value
 ```
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT DERIVATIVE(<function> ([ * | <field_key> | /<regular_expression>/ ]) [ , <unit> ] ) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Advanced Syntax
+### Description of advanced syntax
 
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `DERIVATIVE()` function to those results.
@@ -3284,9 +3458,9 @@ Note that this behavior is different from the [basic syntax's](#basic-syntax-1) 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
-#### Example 1: Calculate the derivative of mean values
+#### Example: Calculate the derivative of mean values
 ```
 > SELECT DERIVATIVE(MEAN("water_level")) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
 
@@ -3324,7 +3498,7 @@ InfluxDB calculates the difference between the field values and normalizes that 
 second field value - first field value
 ```
 
-#### Example 2: Calculate the derivative of mean values and specify the unit option
+#### Example: Calculate the derivative of mean values and specify the unit option
 ```
 > SELECT DERIVATIVE(MEAN("water_level"),6m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
 
@@ -3364,12 +3538,12 @@ second field value - first field value
 ## DIFFERENCE()
 Returns the result of subtraction between subsequent [field values](/influxdb/v1.6/concepts/glossary/#field-value).
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT DIFFERENCE( [ * | <field_key> | /<regular_expression>/ ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Basic Syntax
+### Description of basic syntax
 `DIFFERENCE(field_key)`  
 Returns the difference between subsequent field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
 
@@ -3384,8 +3558,8 @@ Returns the difference between subsequent field values associated with each fiel
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax-2) section for how to use `DIFFERENCE()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
-Examples 1-4 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
+### Examples of basic syntax
+The examples below use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
 
 ```
 > SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
@@ -3401,7 +3575,7 @@ time                   water_level
 2015-08-18T00:30:00Z   2.051
 ```
 
-#### Example 1: Calculate the difference between the field values associated with a field key
+#### Example: Calculate the difference between the field values associated with a field key
 ```
 > SELECT DIFFERENCE("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -3417,7 +3591,7 @@ time                   difference
 
 The query returns the difference between the subsequent field values in the `water_level` field key and in the `h2o_feet` measurement.
 
-#### Example 2: Calculate the difference between the field values associated with each field key in a measurement
+#### Example: Calculate the difference between the field values associated with each field key in a measurement
 ```
 > SELECT DIFFERENCE(*) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -3434,7 +3608,7 @@ time                   difference_water_level
 The query returns the difference between the subsequent field values for each field key that stores numerical values in the `h2o_feet` measurement.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-#### Example 3: Calculate the difference between the field values associated with each field key that matches a regular expression
+#### Example: Calculate the difference between the field values associated with each field key that matches a regular expression
 ```
 > SELECT DIFFERENCE(/water/) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -3465,12 +3639,12 @@ The query returns the difference between the subsequent field values in the `wat
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 They query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to two and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT DIFFERENCE(<function>( [ * | <field_key> | /<regular_expression>/ ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-#### Description of Advanced Syntax
+#### Description of advanced syntax
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `DIFFERENCE()` function to those results.
 
@@ -3486,9 +3660,9 @@ The query first calculates the results for the nested function at the specified 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
-#### Example 1: Calculate the difference between maximum values
+#### Example: Calculate the difference between maximum values
 ```
 > SELECT DIFFERENCE(MAX("water_level")) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
 
@@ -3554,7 +3728,7 @@ time                   water_level
 2015-08-18T00:12:00Z   2.028
 ```
 
-#### Example 1: Calculate the elapsed time between field values associated with a field key
+#### Example: Calculate the elapsed time between field values associated with a field key
 ```
 > SELECT ELAPSED("water_level") FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:12:00Z'
 
@@ -3567,7 +3741,7 @@ time                   elapsed
 
 The query returns the difference (in nanoseconds) between subsequent timestamps in the `water_level` field key and in the `h2o_feet` measurement.
 
-#### Example 2: Calculate the elapsed time between field values associated with a field key and specify the unit option
+#### Example: Calculate the elapsed time between field values associated with a field key and specify the unit option
 ```
 > SELECT ELAPSED("water_level",1m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:12:00Z'
 
@@ -3580,7 +3754,7 @@ time                   elapsed
 
 The query returns the difference (in minutes) between subsequent timestamps in the `water_level` field key and in the `h2o_feet` measurement.
 
-#### Example 3: Calculate the elapsed time between field values associated with each field key in a measurement and specify the unit option
+#### Example: Calculate the elapsed time between field values associated with each field key in a measurement and specify the unit option
 ```
 > SELECT ELAPSED(*,1m) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:12:00Z'
 
@@ -3688,11 +3862,11 @@ time                   min
 ## EXP()
 Returns the exponential of the field value.
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT EXP( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
-### Description of Basic Syntax
+### Description of basic syntax
 
 `EXP(field_key)`  
 Returns the exponential of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
@@ -3708,9 +3882,9 @@ Returns the exponential of field values associated with each field key in the [m
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax) section for how to use `EXP()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
+### Examples of basic syntax
 
-Examples 1-3 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
+The examples below use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
 
 ```
 > SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
@@ -3726,7 +3900,7 @@ time                  water_level
 2015-08-18T00:30:00Z  2.051
 ```
 
-#### Example 1: Calculate the exponential of field values associated with a field key
+#### Example: Calculate the exponential of field values associated with a field key
 ```
 > SELECT EXP("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -3743,7 +3917,7 @@ time                  exp
 
 The query returns the exponential of field values in the `water_level` field key in the `h2o_feet` measurement.
 
-#### Example 2: Calculate the exponential of field values associated with each field key in a measurement
+#### Example: Calculate the exponential of field values associated with each field key in a measurement
 ```
 > SELECT EXP(*) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -3761,7 +3935,7 @@ time                  exp_water_level
 The query returns the exponential of field values for each field key that stores numerical values in the `h2o_feet` measurement.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-<!-- #### Example 3: Calculate the exponential of field values associated with each field key that matches a regular expression
+<!-- #### Example: Calculate the exponential of field values associated with each field key that matches a regular expression
 ```
 > SELECT EXP(/water/) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -3779,7 +3953,7 @@ time                  exp_water_level
 
 The query returns the exponential of field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement. -->
 
-#### Example 3: Calculate the exponential of field values associated with a field key and include several clauses
+#### Example: Calculate the exponential of field values associated with a field key and include several clauses
 ```
 > SELECT EXP("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' ORDER BY time DESC LIMIT 4 OFFSET 2
 
@@ -3796,12 +3970,12 @@ The query returns the exponentials of field values associated with the `water_le
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT EXP(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Advanced Syntax
+### Description of advanced syntax
 
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `EXP()` function to those results.
@@ -3818,9 +3992,9 @@ The query first calculates the results for the nested function at the specified 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
-#### Example 1: Calculate the exponential of mean values.
+#### Example: Calculate the exponential of mean values.
 ```
 > SELECT EXP(MEAN("water_level")) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
 
@@ -3853,11 +4027,11 @@ InfluxDB then calculates the exponentials of those averages.
 ## FLOOR()
 Returns the subsequent value rounded down to the nearest integer.
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT FLOOR( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
-### Description of Basic Syntax
+### Description of basic syntax
 
 `FLOOR(field_key)`  
 Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key) rounded down to the nearest integer.
@@ -3873,9 +4047,9 @@ Returns the field values associated with each field key in the [measurement](/in
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax) section for how to use `FLOOR()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
+### Examples of basic syntax
 
-Examples 1-3 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
+The examples below use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
 ```
 > SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -3890,7 +4064,7 @@ time                  water_level
 2015-08-18T00:30:00Z  2.051
 ```
 
-#### Example 1: Calculate the floor of field values associated with a field key
+#### Example: Calculate the floor of field values associated with a field key
 ```
 > SELECT FLOOR("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -3907,7 +4081,7 @@ time                  floor
 
 The query returns field values in the `water_level` field key in the `h2o_feet` measurement rounded down to the nearest integer.
 
-#### Example 2: Calculate the floor of field values associated with each field key in a measurement
+#### Example: Calculate the floor of field values associated with each field key in a measurement
 ```
 > SELECT FLOOR(*) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -3925,7 +4099,7 @@ time                  floor_water_level
 The query returns field values for each field key that stores numerical values in the `h2o_feet` measurement rounded down to the nearest integer.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-<!-- #### Example 3: Calculate the floor of the field values associated with each field key that matches a regular expression
+<!-- #### Example: Calculate the floor of the field values associated with each field key that matches a regular expression
 ```
 > SELECT FLOOR(/water/) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -3942,7 +4116,7 @@ time                   floor_water_level
 
 The query returns field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement rounded down to the nearest integer. -->
 
-#### Example 3: Calculate the floor of field values associated with a field key and include several clauses
+#### Example: Calculate the floor of field values associated with a field key and include several clauses
 ```
 > SELECT FLOOR("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' ORDER BY time DESC LIMIT 4 OFFSET 2
 
@@ -3959,12 +4133,12 @@ The query returns field values associated with the `water_level` field key round
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT FLOOR(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Advanced Syntax
+### Description of advanced syntax
 
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `FLOOR()` function to those results.
@@ -3981,9 +4155,9 @@ The query first calculates the results for the nested function at the specified 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
-#### Example 1: Calculate mean values rounded down to the nearest integer.
+#### Example: Calculate mean values rounded down to the nearest integer.
 ```
 > SELECT FLOOR(MEAN("water_level")) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
 
@@ -4021,11 +4195,11 @@ InfluxDB then rounds those averages down to the nearest integer.
 ## LN()
 Returns the natural logarithm of the field value.
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT LN( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
-### Description of Basic Syntax
+### Description of basic syntax
 
 `LN(field_key)`  
 Returns the natural logarithm of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
@@ -4041,9 +4215,9 @@ Returns the natural logarithm of field values associated with each field key in 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax) section for how to use `LN()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
+### Examples of basic syntax
 
-Examples 1-3 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
+The examples below use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
 
 ```
 > SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
@@ -4059,7 +4233,7 @@ time                  water_level
 2015-08-18T00:30:00Z  2.051
 ```
 
-#### Example 1: Calculate the natural logarithm of field values associated with a field key
+#### Example: Calculate the natural logarithm of field values associated with a field key
 ```
 > SELECT LN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -4076,7 +4250,7 @@ time                  ln
 
 The query returns the natural logarithm of field values in the `water_level` field key in the `h2o_feet` measurement.
 
-#### Example 2: Calculate the natural logarithm of field values associated with each field key in a measurement
+#### Example: Calculate the natural logarithm of field values associated with each field key in a measurement
 ```
 > SELECT LN(*) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -4094,7 +4268,7 @@ time                  ln_water_level
 The query returns the natural logarithm of field values for each field key that stores numerical values in the `h2o_feet` measurement.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-<!-- #### Example 3: Calculate the natural logarithm of field values associated with each field key that matches a regular expression
+<!-- #### Example: Calculate the natural logarithm of field values associated with each field key that matches a regular expression
 ```
 > SELECT LN(/water/) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -4112,7 +4286,7 @@ time                  ln_water_level
 
 The query returns the natural logarithm of field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement. -->
 
-#### Example 3: Calculate the natural logarithm of field values associated with a field key and include several clauses
+#### Example: Calculate the natural logarithm of field values associated with a field key and include several clauses
 ```
 > SELECT LN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' ORDER BY time DESC LIMIT 4 OFFSET 2
 
@@ -4129,12 +4303,12 @@ The query returns the natural logarithms of field values associated with the `wa
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT LN(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Advanced Syntax
+### Description of advanced syntax
 
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `LN()` function to those results.
@@ -4151,9 +4325,9 @@ The query first calculates the results for the nested function at the specified 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
-#### Example 1: Calculate the natural logarithm of mean values.
+#### Example: Calculate the natural logarithm of mean values.
 ```
 > SELECT LN(MEAN("water_level")) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
 
@@ -4185,11 +4359,11 @@ InfluxDB then calculates the natural logarithms of those averages.
 ## LOG()
 Returns the logarithm of the field value with base `b`.
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT LOG( [ * | <field_key> ], <b> ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
-### Description of Basic Syntax
+### Description of basic syntax
 
 `LOG(field_key, b)`  
 Returns the logarithm of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key) with base `b`.
@@ -4205,9 +4379,9 @@ Returns the logarithm of field values associated with each field key in the [mea
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax) section for how to use `LOG()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
+### Examples of basic syntax
 
-Examples 1-3 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
+The examples below use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
 
 ```
 > SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
@@ -4223,7 +4397,7 @@ time                  water_level
 2015-08-18T00:30:00Z  2.051
 ```
 
-#### Example 1: Calculate the logarithm base 4 of field values associated with a field key
+#### Example: Calculate the logarithm base 4 of field values associated with a field key
 ```
 > SELECT LOG("water_level", 4) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -4240,7 +4414,7 @@ time                  log
 
 The query returns the logarithm base 4 of field values in the `water_level` field key in the `h2o_feet` measurement.
 
-#### Example 2: Calculate the logarithm base 4 of field values associated with each field key in a measurement
+#### Example: Calculate the logarithm base 4 of field values associated with each field key in a measurement
 ```
 > SELECT LOG(*, 4) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -4258,7 +4432,7 @@ time                  log_water_level
 The query returns the logarithm base 4 of field values for each field key that stores numerical values in the `h2o_feet` measurement.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-<!-- #### Example 3: Calculate the logarithm base 4 of field values associated with each field key that matches a regular expression
+<!-- #### Example: Calculate the logarithm base 4 of field values associated with each field key that matches a regular expression
 ```
 > SELECT LOG(/water/) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -4276,7 +4450,7 @@ time                  log
 
 The query returns the logarithm base 4 of field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement. -->
 
-#### Example 3: Calculate the logarithm base 4 of field values associated with a field key and include several clauses
+#### Example: Calculate the logarithm base 4 of field values associated with a field key and include several clauses
 ```
 > SELECT LOG("water_level", 4) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' ORDER BY time DESC LIMIT 4 OFFSET 2
 
@@ -4293,12 +4467,12 @@ The query returns the logarithm base 4 of field values associated with the `wate
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT LOG(<function>( [ * | <field_key> ] ), <b>) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Advanced Syntax
+### Description of advanced syntax
 
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `LOG()` function to those results.
@@ -4315,9 +4489,9 @@ The query first calculates the results for the nested function at the specified 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
-#### Example 1: Calculate the logarithm base 4 of mean values.
+#### Example: Calculate the logarithm base 4 of mean values.
 ```
 > SELECT LOG(MEAN("water_level"), 4) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
 
@@ -4350,11 +4524,11 @@ InfluxDB then calculates the logarithm base 4 of those averages.
 ## LOG2()
 Returns the logarithm of the field value to the base 2.
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT LOG2( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
-### Description of Basic Syntax
+### Description of basic syntax
 
 `LOG2(field_key)`  
 Returns the logarithm of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key) to the base 2.
@@ -4370,9 +4544,9 @@ Returns the logarithm of field values associated with each field key in the [mea
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax) section for how to use `LOG2()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
+### Examples of basic syntax
 
-Examples 1-3 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
+The examples below use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
 
 ```
 > SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
@@ -4388,7 +4562,7 @@ time                  water_level
 2015-08-18T00:30:00Z  2.051
 ```
 
-#### Example 1: Calculate the logarithm base 2 of field values associated with a field key
+#### Example: Calculate the logarithm base 2 of field values associated with a field key
 ```
 > SELECT LOG2("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -4405,7 +4579,7 @@ time                  log2
 
 The query returns the logarithm base 2 of field values in the `water_level` field key in the `h2o_feet` measurement.
 
-#### Example 2: Calculate the logarithm base 2 of field values associated with each field key in a measurement
+#### Example: Calculate the logarithm base 2 of field values associated with each field key in a measurement
 ```
 > SELECT LOG2(*) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -4423,7 +4597,7 @@ time                  log2_water_level
 The query returns the logarithm base 2 of field values for each field key that stores numerical values in the `h2o_feet` measurement.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-<!-- #### Example 3: Calculate the logarithm base 2 of field values associated with each field key that matches a regular expression
+<!-- #### Example: Calculate the logarithm base 2 of field values associated with each field key that matches a regular expression
 ```
 > SELECT LOG2(/water/) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -4441,7 +4615,7 @@ time                  log2
 
 The query returns the logarithm base 2 of field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement. -->
 
-#### Example 3: Calculate the logarithm base 2 of field values associated with a field key and include several clauses
+#### Example: Calculate the logarithm base 2 of field values associated with a field key and include several clauses
 ```
 > SELECT LOG2("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' ORDER BY time DESC LIMIT 4 OFFSET 2
 
@@ -4458,12 +4632,12 @@ The query returns the logarithm base 2 of field values associated with the `wate
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT LOG2(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Advanced Syntax
+### Description of advanced syntax
 
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `LOG2()` function to those results.
@@ -4480,9 +4654,9 @@ The query first calculates the results for the nested function at the specified 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
-#### Example 1: Calculate the logarithm base 2 of mean values.
+#### Example: Calculate the logarithm base 2 of mean values.
 ```
 > SELECT LOG2(MEAN("water_level")) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
 
@@ -4515,11 +4689,11 @@ InfluxDB then calculates the logarithm base 2 of those averages.
 ## LOG10()
 Returns the logarithm of the field value to the base 10.
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT LOG10( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
-### Description of Basic Syntax
+### Description of basic syntax
 
 `LOG10(field_key)`  
 Returns the logarithm of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key) to the base 10.
@@ -4535,9 +4709,9 @@ Returns the logarithm of field values associated with each field key in the [mea
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax) section for how to use `LOG10()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
+### Examples of basic syntax
 
-Examples 1-3 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
+The examples below use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
 
 ```
 > SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
@@ -4553,7 +4727,7 @@ time                  water_level
 2015-08-18T00:30:00Z  2.051
 ```
 
-#### Example 1: Calculate the logarithm base 10 of field values associated with a field key
+#### Example: Calculate the logarithm base 10 of field values associated with a field key
 ```
 > SELECT LOG10("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -4570,7 +4744,7 @@ time                  log10
 
 The query returns the logarithm base 10 of field values in the `water_level` field key in the `h2o_feet` measurement.
 
-#### Example 2: Calculate the logarithm base 10 of field values associated with each field key in a measurement
+#### Example: Calculate the logarithm base 10 of field values associated with each field key in a measurement
 ```
 > SELECT LOG10(*) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -4588,7 +4762,7 @@ time                  log10_water_level
 The query returns the logarithm base 10 of field values for each field key that stores numerical values in the `h2o_feet` measurement.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-<!-- #### Example 3: Calculate the logarithm base 10 of field values associated with each field key that matches a regular expression
+<!-- #### Example: Calculate the logarithm base 10 of field values associated with each field key that matches a regular expression
 ```
 > SELECT LOG10(/water/) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -4606,7 +4780,7 @@ time                  log10
 
 The query returns the logarithm base 10 of field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement. -->
 
-#### Example 3: Calculate the logarithm base 10 of field values associated with a field key and include several clauses
+#### Example: Calculate the logarithm base 10 of field values associated with a field key and include several clauses
 ```
 > SELECT LOG10("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' ORDER BY time DESC LIMIT 4 OFFSET 2
 
@@ -4623,12 +4797,12 @@ The query returns the logarithm base 10 of field values associated with the `wat
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT LOG10(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Advanced Syntax
+### Description of advanced syntax
 
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `LOG10()` function to those results.
@@ -4645,9 +4819,9 @@ The query first calculates the results for the nested function at the specified 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
-#### Example 1: Calculate the logarithm base 10 of mean values.
+#### Example: Calculate the logarithm base 10 of mean values.
 ```
 > SELECT LOG10(MEAN("water_level")) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
 
@@ -4680,12 +4854,12 @@ InfluxDB then calculates the logarithm base 10 of those averages.
 ## MOVING_AVERAGE()
 Returns the rolling average across a window of subsequent [field values](/influxdb/v1.6/concepts/glossary/#field-value).
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT MOVING_AVERAGE( [ * | <field_key> | /<regular_expression>/ ] , <N> ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Basic Syntax
+### Description of basic syntax
 `MOVING_AVERAGE()` calculates the rolling average across a window of `N` subsequent field values.
 The `N` argument is an integer and it is required.
 
@@ -4703,8 +4877,8 @@ Returns the rolling average across `N` field values associated with each field k
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax-3) section for how to use `MOVING_AVERAGE()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
-Examples 1-4 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
+### Examples of basic syntax
+The examples below use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
 
 ```
 > SELECT "water_level" FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
@@ -4720,7 +4894,7 @@ time                   water_level
 2015-08-18T00:30:00Z   2.051
 ```
 
-#### Example 1: Calculate the moving average of the field values associated with a field key
+#### Example: Calculate the moving average of the field values associated with a field key
 ```
 > SELECT MOVING_AVERAGE("water_level",2) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
 
@@ -4738,7 +4912,7 @@ The query returns the rolling average across a two-field-value window for the `w
 The first result (`2.09`) is the average of the first two points in the raw data: (`2.064 + 2.116) / 2`).
 The second result (`2.072`) is the average of the second two points in the raw data: (`2.116 + 2.028) / 2`).
 
-#### Example 2: Calculate the moving average of the field values associated with each field key in a measurement
+#### Example: Calculate the moving average of the field values associated with each field key in a measurement
 ```
 > SELECT MOVING_AVERAGE(*,3) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
 
@@ -4754,7 +4928,7 @@ time                   moving_average_water_level
 The query returns the rolling average across a three-field-value window for each field key that stores numerical values in the `h2o_feet` measurement.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-#### Example 3: Calculate the moving average of the field values associated with each field key that matches a regular expression
+#### Example: Calculate the moving average of the field values associated with each field key that matches a regular expression
 ```
 > SELECT MOVING_AVERAGE(/level/,4) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
 
@@ -4783,13 +4957,13 @@ The query returns the rolling average across a two-field-value window for the `w
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to two and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by three points.
 
-### Advanced Syntax
+### Advanced syntax
 
 ```
 SELECT MOVING_AVERAGE(<function> ([ * | <field_key> | /<regular_expression>/ ]) , N ) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Advanced Syntax
+### Description of advanced syntax
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `MOVING_AVERAGE()` function to those results.
 
@@ -4805,9 +4979,9 @@ The query first calculates the results for the nested function at the specified 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
-#### Example 1: Calculate the moving average of maximum values
+#### Example: Calculate the moving average of maximum values
 ```
 > SELECT MOVING_AVERAGE(MAX("water_level"),2) FROM "h2o_feet" WHERE "location" = 'santa_monica' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
 
@@ -4841,12 +5015,12 @@ The first final result (`2.121`) is the average of the first two maximum values 
 Returns the non-negative rate of change between subsequent [field values](/influxdb/v1.6/concepts/glossary/#field-value).
 Non-negative rates of change include positive rates of change and rates of change that equal zero.
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT NON_NEGATIVE_DERIVATIVE( [ * | <field_key> | /<regular_expression>/ ] [ , <unit> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Basic Syntax
+### Description of basic syntax
 InfluxDB calculates the difference between subsequent field values and converts those results into the rate of change per `unit`.
 The `unit` argument is an integer followed by a [duration literal](/influxdb/v1.6/query_language/spec/#literals) and it is optional.
 If the query does not specify the `unit`, the unit defaults to one second (`1s`).
@@ -4866,17 +5040,17 @@ Returns the non-negative rate of change between subsequent field values associat
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax-4) section for how to use `NON_NEGATIVE_DERIVATIVE()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
+### Examples of basic syntax
 
 See the examples in the [`DERIVATIVE()` documentation](#examples-of-basic-syntax-1).
 `NON_NEGATIVE_DERIVATIVE()` behaves the same as the `DERIVATIVE()` function but `NON_NEGATIVE_DERIVATIVE()` returns only positive rates of change or rates of change that equal zero.
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT NON_NEGATIVE_DERIVATIVE(<function> ([ * | <field_key> | /<regular_expression>/ ]) [ , <unit> ] ) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Advanced Syntax
+### Description of advanced syntax
 
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `NON_NEGATIVE_DERIVATIVE()` function to those results.
@@ -4898,7 +5072,7 @@ Note that this behavior is different from the [basic syntax's](#basic-syntax-4) 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
 See the examples in the [`DERIVATIVE()` documentation](#examples-of-advanced-syntax-1).
 `NON_NEGATIVE_DERIVATIVE()` behaves the same as the `DERIVATIVE()` function but `NON_NEGATIVE_DERIVATIVE()` returns only positive rates of change or rates of change that equal zero.
@@ -4908,12 +5082,12 @@ See the examples in the [`DERIVATIVE()` documentation](#examples-of-advanced-syn
 Returns the non-negative result of subtraction between subsequent [field values](/influxdb/v1.6/concepts/glossary/#field-value).
 Non-negative results of subtraction include positive differences and differences that equal zero.
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT NON_NEGATIVE_DIFFERENCE( [ * | <field_key> | /<regular_expression>/ ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Basic Syntax
+### Description of basic syntax
 `NON_NEGATIVE_DIFFERENCE(field_key)`  
 Returns the non-negative difference between subsequent field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
 
@@ -4928,17 +5102,17 @@ Returns the non-negative difference between subsequent field values associated w
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax-5) section for how to use `NON_NEGATIVE_DIFFERENCE()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
+### Examples of basic syntax
 
 See the examples in the [`DIFFERENCE()` documentation](#examples-of-basic-syntax-2).
 `NON_NEGATIVE_DIFFERENCE()` behaves the same as the `DIFFERENCE()` function but `NON_NEGATIVE_DIFFERENCE()` returns only positive differences or differences that equal zero.
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT NON_NEGATIVE_DIFFERENCE(<function>( [ * | <field_key> | /<regular_expression>/ ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-#### Description of Advanced Syntax
+#### Description of advanced syntax
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `NON_NEGATIVE_DIFFERENCE()` function to those results.
 
@@ -4954,7 +5128,7 @@ The query first calculates the results for the nested function at the specified 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
 See the examples in the [`DIFFERENCE()` documentation](#examples-of-advanced-syntax-2).
 `NON_NEGATIVE_DIFFERENCE()` behaves the same as the `DIFFERENCE()` function but `NON_NEGATIVE_DIFFERENCE()` returns only positive differences or differences that equal zero.
@@ -4963,11 +5137,11 @@ See the examples in the [`DIFFERENCE()` documentation](#examples-of-advanced-syn
 ## POW()
 Returns the field value to the power of `x`.
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT POW( [ * | <field_key> ], <x> ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
-### Description of Basic Syntax
+### Description of basic syntax
 
 `POW(field_key, x)`  
 Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key) to the power of `x`.
@@ -4983,9 +5157,9 @@ Returns the field values associated with each field key in the [measurement](/in
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax) section for how to use `POW()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
+### Examples of basic syntax
 
-Examples 1-3 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
+The examples below use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
 
 ```
 > SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
@@ -5001,7 +5175,7 @@ time                  water_level
 2015-08-18T00:30:00Z  2.051
 ```
 
-#### Example 1: Calculate field values associated with a field key to the power of 4
+#### Example: Calculate field values associated with a field key to the power of 4
 ```
 > SELECT POW("water_level", 4) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -5018,7 +5192,7 @@ time                  pow
 
 The query returns field values in the `water_level` field key in the `h2o_feet` measurement multiplied to a power of 4.
 
-#### Example 2: Calculate field values associated with each field key in a measurement to the power of 4
+#### Example: Calculate field values associated with each field key in a measurement to the power of 4
 ```
 > SELECT POW(*, 4) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -5036,7 +5210,7 @@ time                  pow_water_level
 The query returns field values for each field key that stores numerical values in the `h2o_feet` measurement multiplied to the power of 4.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-<!-- #### Example 3: Calculate field values associated with each field key that matches a regular expression to the power of 4
+<!-- #### Example: Calculate field values associated with each field key that matches a regular expression to the power of 4
 ```
 > SELECT POW(/water/) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -5054,7 +5228,7 @@ time                  pow
 
 The query returns field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement multiplied to the power of 4. -->
 
-#### Example 3: Calculate field values associated with a field key to the power of 4 and include several clauses
+#### Example: Calculate field values associated with a field key to the power of 4 and include several clauses
 ```
 > SELECT POW("water_level", 4) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' ORDER BY time DESC LIMIT 4 OFFSET 2
 
@@ -5071,12 +5245,12 @@ The query returns field values associated with the `water_level` field key multi
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT POW(<function>( [ * | <field_key> ] ), <x>) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Advanced Syntax
+### Description of advanced syntax
 
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `POW()` function to those results.
@@ -5093,9 +5267,9 @@ The query first calculates the results for the nested function at the specified 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
-#### Example 1: Calculate mean values to the power of 4
+#### Example: Calculate mean values to the power of 4
 ```
 > SELECT POW(MEAN("water_level"), 4) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
 
@@ -5128,11 +5302,11 @@ InfluxDB then calculates those averages multiplied to the power of 4.
 ## ROUND()
 Returns the subsequent value rounded to the nearest integer.
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT ROUND( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
-### Description of Basic Syntax
+### Description of basic syntax
 
 `ROUND(field_key)`  
 Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key) rounded to the nearest integer.
@@ -5148,9 +5322,9 @@ Returns the field values associated with each field key in the [measurement](/in
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax) section for how to use `ROUND()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
+### Examples of basic syntax
 
-Examples 1-3 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
+The examples below use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
 ```
 > SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -5165,7 +5339,7 @@ time                  water_level
 2015-08-18T00:30:00Z  2.051
 ```
 
-#### Example 1: Round field values associated with a field key
+#### Example: Round field values associated with a field key
 ```
 > SELECT ROUND("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -5182,7 +5356,7 @@ time                  round
 
 The query returns field values in the `water_level` field key in the `h2o_feet` measurement rounded to the nearest integer.
 
-#### Example 2: Round field values associated with each field key in a measurement
+#### Example: Round field values associated with each field key in a measurement
 ```
 > SELECT ROUND(*) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -5200,7 +5374,7 @@ time                  round_water_level
 The query returns field values for each field key that stores numerical values in the `h2o_feet` measurement rounded to the nearest integer.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-<!-- #### Example 3: Rounds field values associated with each field key that matches a regular expression
+<!-- #### Example: Rounds field values associated with each field key that matches a regular expression
 ```
 > SELECT ROUND(/water/) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -5217,7 +5391,7 @@ time                   round_water_level
 
 The query returns field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement rounded to the nearest integer. -->
 
-#### Example 3: Round field values associated with a field key and include several clauses
+#### Example: Round field values associated with a field key and include several clauses
 ```
 > SELECT ROUND("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' ORDER BY time DESC LIMIT 4 OFFSET 2
 
@@ -5234,12 +5408,12 @@ The query returns field values associated with the `water_level` field key round
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT ROUND(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Advanced Syntax
+### Description of advanced syntax
 
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `ROUND()` function to those results.
@@ -5256,9 +5430,9 @@ The query first calculates the results for the nested function at the specified 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
-#### Example 1: Calculate mean values rounded to the nearest integer.
+#### Example: Calculate mean values rounded to the nearest integer.
 ```
 > SELECT ROUND(MEAN("water_level")) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
 
@@ -5291,11 +5465,11 @@ InfluxDB then rounds those averages to the nearest integer.
 ## SIN()
 Returns the sine of the field value.
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT SIN( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
-### Description of Basic Syntax
+### Description of basic syntax
 
 `SIN(field_key)`  
 Returns the sine of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
@@ -5311,9 +5485,9 @@ Returns the sine of field values associated with each field key in the [measurem
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax) section for how to use `SIN()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
+### Examples of basic syntax
 
-Examples 1-3 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
+The examples below use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
 
 ```
 > SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
@@ -5329,7 +5503,7 @@ time                  water_level
 2015-08-18T00:30:00Z  2.051
 ```
 
-#### Example 1: Calculate the sine of field values associated with a field key
+#### Example: Calculate the sine of field values associated with a field key
 ```
 > SELECT SIN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -5346,7 +5520,7 @@ time                  sin
 
 The query returns sine of field values in the `water_level` field key in the `h2o_feet` measurement.
 
-#### Example 2: Calculate the sine of field values associated with each field key in a measurement
+#### Example: Calculate the sine of field values associated with each field key in a measurement
 ```
 > SELECT SIN(*) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -5364,7 +5538,7 @@ time                  sin_water_level
 The query returns sine of field values for each field key that stores numerical values in the `h2o_feet` measurement.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-<!-- #### Example 3: Calculate the sine of field values associated with each field key that matches a regular expression
+<!-- #### Example: Calculate the sine of field values associated with each field key that matches a regular expression
 ```
 > SELECT SIN(/water/) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -5381,7 +5555,7 @@ time                  sin
 
 The query returns sine of field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement. -->
 
-#### Example 3: Calculate the sine of field values associated with a field key and include several clauses
+#### Example: Calculate the sine of field values associated with a field key and include several clauses
 ```
 > SELECT SIN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' ORDER BY time DESC LIMIT 4 OFFSET 2
 
@@ -5398,12 +5572,12 @@ The query returns sine of field values associated with the `water_level` field k
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT SIN(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Advanced Syntax
+### Description of advanced syntax
 
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `SIN()` function to those results.
@@ -5420,9 +5594,9 @@ The query first calculates the results for the nested function at the specified 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
-#### Example 1: Calculate the sine of mean values.
+#### Example: Calculate the sine of mean values.
 ```
 > SELECT SIN(MEAN("water_level")) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
 
@@ -5455,11 +5629,11 @@ InfluxDB then calculates sine of those averages.
 ## SQRT()
 Returns the square root of field value.
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT SQRT( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
-### Description of Basic Syntax
+### Description of basic syntax
 
 `SQRT(field_key)`  
 Returns the square root of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
@@ -5475,9 +5649,9 @@ Returns the square root field values associated with each field key in the [meas
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax) section for how to use `SQRT()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
+### Examples of basic syntax
 
-Examples 1-3 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
+The examples below use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
 
 ```
 > SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
@@ -5493,7 +5667,7 @@ time                  water_level
 2015-08-18T00:30:00Z  2.051
 ```
 
-#### Example 1: Calculate the square root of field values associated with a field key
+#### Example: Calculate the square root of field values associated with a field key
 ```
 > SELECT SQRT("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -5510,7 +5684,7 @@ time                  sqrt
 
 The query returns the square roots of field values in the `water_level` field key in the `h2o_feet` measurement.
 
-#### Example 2: Calculate the square root of field values associated with each field key in a measurement
+#### Example: Calculate the square root of field values associated with each field key in a measurement
 ```
 > SELECT SQRT(*) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -5528,7 +5702,7 @@ time                  sqrt_water_level
 The query returns the square roots of field values for each field key that stores numerical values in the `h2o_feet` measurement.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-<!-- #### Example 3: Calculate the square root of field values associated with each field key that matches a regular expression
+<!-- #### Example: Calculate the square root of field values associated with each field key that matches a regular expression
 ```
 > SELECT SQRT(/water/) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -5546,7 +5720,7 @@ time                  sqrt_water_level
 
 The query returns the square roots of field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement. -->
 
-#### Example 3: Calculate the square root of field values associated with a field key and include several clauses
+#### Example: Calculate the square root of field values associated with a field key and include several clauses
 ```
 > SELECT SQRT("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' ORDER BY time DESC LIMIT 4 OFFSET 2
 
@@ -5563,12 +5737,12 @@ The query returns the square roots of field values associated with the `water_le
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT SQRT(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Advanced Syntax
+### Description of advanced syntax
 
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `SQRT()` function to those results.
@@ -5585,9 +5759,9 @@ The query first calculates the results for the nested function at the specified 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
-#### Example 1: Calculate the square root of mean values.
+#### Example: Calculate the square root of mean values.
 ```
 > SELECT SQRT(MEAN("water_level")) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
 
@@ -5620,11 +5794,11 @@ InfluxDB then calculates the square roots of those averages.
 ## TAN()
 Returns the tangent of the field value.
 
-### Basic Syntax
+### Basic syntax
 ```
 SELECT TAN( [ * | <field_key> ] ) [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
-### Description of Basic Syntax
+### Description of basic syntax
 
 `TAN(field_key)`  
 Returns the tangent of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key).
@@ -5640,9 +5814,9 @@ Returns the tangent of field values associated with each field key in the [measu
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
 See the [Advanced Syntax](#advanced-syntax) section for how to use `TAN()` with a `GROUP BY time()` clause.
 
-### Examples of Basic Syntax
+### Examples of basic syntax
 
-Examples 1-3 use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
+The examples below use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
 
 ```
 > SELECT "water_level" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
@@ -5658,7 +5832,7 @@ time                  water_level
 2015-08-18T00:30:00Z  2.051
 ```
 
-#### Example 1: Calculate the tangent of field values associated with a field key
+#### Example: Calculate the tangent of field values associated with a field key
 ```
 > SELECT TAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -5675,7 +5849,7 @@ time                  tan
 
 The query returns tangent of field values in the `water_level` field key in the `h2o_feet` measurement.
 
-#### Example 2: Calculate the tangent of field values associated with each field key in a measurement
+#### Example: Calculate the tangent of field values associated with each field key in a measurement
 ```
 > SELECT TAN(*) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -5693,7 +5867,7 @@ time                  tan_water_level
 The query returns tangent of field values for each field key that stores numerical values in the `h2o_feet` measurement.
 The `h2o_feet` measurement has one numerical field: `water_level`.
 
-<!-- #### Example 3: Calculate the tangent of field values associated with each field key that matches a regular expression
+<!-- #### Example: Calculate the tangent of field values associated with each field key that matches a regular expression
 ```
 > SELECT TAN(/water/) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica'
 
@@ -5710,7 +5884,7 @@ time                  tan
 
 The query returns tangent of field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement. -->
 
-#### Example 3: Calculate the tangent of field values associated with a field key and include several clauses
+#### Example: Calculate the tangent of field values associated with a field key and include several clauses
 ```
 > SELECT TAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' ORDER BY time DESC LIMIT 4 OFFSET 2
 
@@ -5727,12 +5901,12 @@ The query returns tangent of field values associated with the `water_level` fiel
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced Syntax
+### Advanced syntax
 ```
 SELECT TAN(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
 
-### Description of Advanced Syntax
+### Description of advanced syntax
 
 The advanced syntax requires a [`GROUP BY time() ` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals) and a nested InfluxQL function.
 The query first calculates the results for the nested function at the specified `GROUP BY time()` interval and then applies the `TAN()` function to those results.
@@ -5749,9 +5923,9 @@ The query first calculates the results for the nested function at the specified 
 [`MAX()`](#max), and
 [`PERCENTILE()`](#percentile).
 
-### Examples of Advanced Syntax
+### Examples of advanced syntax
 
-#### Example 1: Calculate the tangent of mean values.
+#### Example: Calculate the tangent of mean values.
 ```
 > SELECT TAN(MEAN("water_level")) FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' AND "location" = 'santa_monica' GROUP BY time(12m)
 
@@ -5824,7 +5998,7 @@ consistent time intervals; the nested InfluxQL function and the
 
 ### Examples
 
-#### Example 1: Predict field values associated with a field key
+#### Example: Predict field values associated with a field key
 
 ##### Raw Data
 <br>
@@ -5988,7 +6162,7 @@ then dividing the result by the sum of all data movement over a given time perio
 The result is multiplied by 100 to give the -100 to +100 range.
 <sup style="line-height:0; font-size:.7rem; font-style:italic; font-weight:normal;"><a href="https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/cmo" target="\_blank">Source</a>
 
-### Basic Syntax
+### Basic syntax
 ```
 CHANDE_MOMENTUM_OSCILLATOR([ * | <field_key> | /regular_expression/ ], <period>[, <hold_period>, [warmup_type]])
 ```
@@ -5998,7 +6172,7 @@ CHANDE_MOMENTUM_OSCILLATOR([ * | <field_key> | /regular_expression/ ], <period>[
 [hold_period](#hold-period) <span style="font-size:.8rem; font-style:italic;">(Optional)</span>  
 [warmup_type](#warmup-type) <span style="font-size:.8rem; font-style:italic;">(Optional)</span>  
 
-### Description of Basic Syntax
+### Description of basic syntax
 
 `CHANDE_MOMENTUM_OSCILLATOR(field_key, 2)`  
 Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
@@ -6040,7 +6214,7 @@ It's also known as the "exponentially weighted moving average."
 This type of moving average reacts faster to recent data changes than a simple moving average.
 <sup style="line-height:0; font-size:.7rem; font-style:italic; font-weight:normal;"><a href="https://www.investopedia.com/terms/e/ema.asp" target="\_blank">Source</a>
 
-### Basic Syntax
+### Basic syntax
 ```
 EXPONENTIAL_MOVING_AVERAGE([ * | <field_key> | /regular_expression/ ], <period>[, <hold_period)[, <warmup_type]])
 ```
@@ -6050,7 +6224,7 @@ EXPONENTIAL_MOVING_AVERAGE([ * | <field_key> | /regular_expression/ ], <period>[
 [hold_period](#hold-period) <span style="font-size:.8rem; font-style:italic;">(Optional)</span>  
 [warmup_type](#warmup-type) <span style="font-size:.8rem; font-style:italic;">(Optional)</span>  
 
-### Description of Basic Syntax
+### Description of basic syntax
 
 `EXPONENTIAL_MOVING_AVERAGE(field_key, 2)`  
 Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
@@ -6094,7 +6268,7 @@ To keep it in line with the actual data and to remove the lag, the value "EMA of
 is subtracted from the previously doubled EMA.
 <sup style="line-height:0; font-size:.7rem; font-style:italic; font-weight:normal;"><a href="https://en.wikipedia.org/wiki/Double_exponential_moving_average" target="\_blank">Source</a>
 
-### Basic Syntax
+### Basic syntax
 ```
 DOUBLE_EXPONENTIAL_MOVING_AVERAGE([ * | <field_key> | /regular_expression/ ], <period>[, <hold_period)[, <warmup_type]])
 ```
@@ -6104,7 +6278,7 @@ DOUBLE_EXPONENTIAL_MOVING_AVERAGE([ * | <field_key> | /regular_expression/ ], <p
 [hold_period](#hold-period) <span style="font-size:.8rem; font-style:italic;">(Optional)</span>  
 [warmup_type](#warmup-type) <span style="font-size:.8rem; font-style:italic;">(Optional)</span>  
 
-### Description of Basic Syntax
+### Description of basic syntax
 
 `DOUBLE_EXPONENTIAL_MOVING_AVERAGE(field_key, 2)`  
 Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
@@ -6150,7 +6324,7 @@ The ER is very similar to the [Chande Momentum Oscillator](#chande-momentum-osci
 The difference is that the CMO takes market direction into account, but if you take the absolute CMO and divide by 100, you you get the Efficiency Ratio.
 <sup style="line-height:0; font-size:.7rem; font-style:italic; font-weight:normal;"><a href="http://etfhq.com/blog/2011/02/07/kaufmans-efficiency-ratio/" target="\_blank">Source</a>
 
-### Basic Syntax
+### Basic syntax
 ```
 KAUFMANS_EFFICIENCY_RATIO([ * | <field_key> | /regular_expression/ ], <period>[, <hold_period>])
 ```
@@ -6159,7 +6333,7 @@ KAUFMANS_EFFICIENCY_RATIO([ * | <field_key> | /regular_expression/ ], <period>[,
 [period](#period)  
 [hold_period](#hold-period) <span style="font-size:.8rem; font-style:italic;">(Optional)</span>  
 
-### Description of Basic Syntax
+### Description of basic syntax
 
 `KAUFMANS_EFFICIENCY_RATIO(field_key, 2)`  
 Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
@@ -6204,7 +6378,7 @@ This trend-following indicator can be used to identify the overall trend,
 time turning points and filter data movements.
 <sup style="line-height:0; font-size:.7rem; font-style:italic; font-weight:normal;"><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:kaufman_s_adaptive_moving_average" target="\_blank">Source</a>
 
-### Basic Syntax
+### Basic syntax
 ```
 KAUFMANS_ADAPTIVE_MOVING_AVERAGE([ * | <field_key> | /regular_expression/ ], <period>[, <hold_period>])
 ```
@@ -6213,7 +6387,7 @@ KAUFMANS_ADAPTIVE_MOVING_AVERAGE([ * | <field_key> | /regular_expression/ ], <pe
 [period](#period)  
 [hold_period](#hold-period) <span style="font-size:.8rem; font-style:italic;">(Optional)</span>  
 
-### Description of Basic Syntax
+### Description of basic syntax
 
 `KAUFMANS_ADAPTIVE_MOVING_AVERAGE(field_key, 2)`  
 Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
@@ -6258,7 +6432,7 @@ a [double exponential moving average](#double-exponential-moving-average),
 and a triple exponential moving average.
 <sup style="line-height:0; font-size:.7rem; font-style:italic; font-weight:normal;"><a href="https://www.investopedia.com/terms/t/triple-exponential-moving-average.asp#ixzz5GAX9rE9k " target="\_blank">Source</a>
 
-### Basic Syntax
+### Basic syntax
 ```
 TRIPLE_EXPONENTIAL_MOVING_AVERAGE([ * | <field_key> | /regular_expression/ ], <period>[, <hold_period)[, <warmup_type]])
 ```
@@ -6268,7 +6442,7 @@ TRIPLE_EXPONENTIAL_MOVING_AVERAGE([ * | <field_key> | /regular_expression/ ], <p
 [hold_period](#hold-period) <span style="font-size:.8rem; font-style:italic;">(Optional)</span>  
 [warmup_type](#warmup-type) <span style="font-size:.8rem; font-style:italic;">(Optional)</span>  
 
-### Description of Basic Syntax
+### Description of basic syntax
 
 `TRIPLE_EXPONENTIAL_MOVING_AVERAGE(field_key, 2)`  
 Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
@@ -6320,7 +6494,7 @@ Many analysts believe that when the TRIX crosses above the zero line it gives a
 buy signal, and when it closes below the zero line, it gives a sell signal.
 <sup style="line-height:0; font-size:.7rem; font-style:italic; font-weight:normal;"><a href="https://www.investopedia.com/articles/technical/02/092402.asp#ixzz5GAe037bJ " target="\_blank">Source</a>
 
-### Basic Syntax
+### Basic syntax
 ```
 TRIPLE_EXPONENTIAL_DERIVATIVE([ * | <field_key> | /regular_expression/ ], <period>[, <hold_period)[, <warmup_type]])
 ```
@@ -6330,7 +6504,7 @@ TRIPLE_EXPONENTIAL_DERIVATIVE([ * | <field_key> | /regular_expression/ ], <perio
 [hold_period](#hold-period) <span style="font-size:.8rem; font-style:italic;">(Optional)</span>  
 [warmup_type](#warmup-type) <span style="font-size:.8rem; font-style:italic;">(Optional)</span>  
 
-### Description of Basic Syntax
+### Description of basic syntax
 
 `TRIPLE_EXPONENTIAL_DERIVATIVE(field_key, 2)`  
 Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
@@ -6369,7 +6543,7 @@ See the [Advanced Syntax](#advanced-syntax) section for how to use `TRIPLE_EXPON
 The relative strength index (RSI) is a momentum indicator that compares the magnitude of recent increases and decreases over a specified time period to measure speed and change of data movements.
 <sup style="line-height:0; font-size:.7rem; font-style:italic; font-weight:normal;"><a href="https://www.investopedia.com/terms/r/rsi.asp" target="\_blank">Source</a>
 
-### Basic Syntax
+### Basic syntax
 ```
 RELATIVE_STRENGTH_INDEX([ * | <field_key> | /regular_expression/ ], <period>[, <hold_period)[, <warmup_type]])
 ```
@@ -6379,7 +6553,7 @@ RELATIVE_STRENGTH_INDEX([ * | <field_key> | /regular_expression/ ], <period>[, <
 [hold_period](#hold-period) <span style="font-size:.8rem; font-style:italic;">(Optional)</span>  
 [warmup_type](#warmup-type) <span style="font-size:.8rem; font-style:italic;">(Optional)</span>  
 
-### Description of Basic Syntax
+### Description of basic syntax
 
 `RELATIVE_STRENGTH_INDEX(field_key, 2)`  
 Returns the field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key)
@@ -6437,7 +6611,7 @@ The `SELECT` clause does not support specifying `TOP()` or `BOTTOM()` with anoth
 
 #### Examples
 
-##### Example 1: Calculate the mean and median field values in one query
+##### Example: Calculate the mean and median field values in one query
 <br>
 ```
 > SELECT MEAN("water_level"),MEDIAN("water_level") FROM "h2o_feet"
@@ -6449,7 +6623,7 @@ time                  mean               median
 ```
 The query returns the [average](#mean) and [median](#median) field values in the `water_level` field key.
 
-##### Example 2: Calculate the mode of two fields in one query
+##### Example: Calculate the mode of two fields in one query
 <br>
 ```
 > SELECT MODE("water_level"),MODE("level description") FROM "h2o_feet"
@@ -6465,7 +6639,7 @@ The system can't return more than one column with the same name so it renames th
 
 See [Rename the Output Field Key](#rename-the-output-field-key) for how to configure the output column headers.
 
-##### Example 3: Calculate the minimum and maximum field values in one query
+##### Example: Calculate the minimum and maximum field values in one query
 <br>
 ```
 > SELECT MIN("water_level"), MAX("water_level") [...]
@@ -6512,7 +6686,7 @@ Include an `AS` clause to specify the name of the output field key.
 
 #### Examples
 
-##### Example 1: Specify the output field key
+##### Example: Specify the output field key
 <br>
 ```
 > SELECT MEAN("water_level") AS "dream_name" FROM "h2o_feet"
@@ -6535,7 +6709,7 @@ time                  mean
 1970-01-01T00:00:00Z  4.442107025822522
 ```
 
-##### Example 2: Specify the output field key for multiple functions
+##### Example: Specify the output field key for multiple functions
 <br>
 ```
 > SELECT MEDIAN("water_level") AS "med_wat",MODE("water_level") AS "mode_wat" FROM "h2o_feet"
@@ -6614,7 +6788,7 @@ A query with an aggregate function that includes a time range in the `WHERE` cla
 
 ##### Examples
 <br>
-##### Example 1: Use an aggregate function without a specified time range
+##### Example: Use an aggregate function without a specified time range
 <br>
 ```
 > SELECT SUM("water_level") FROM "h2o_feet"
@@ -6627,7 +6801,7 @@ time                   sum
 The query returns InfluxDB's null timestamp equivalent (epoch 0: `1970-01-01T00:00:00Z`) as the timestamp.
 [`SUM()`](#sum) aggregates points across several timestamps and has no single timestamp to return.
 
-##### Example 2: Use an aggregate function with a specified time range
+##### Example: Use an aggregate function with a specified time range
 <br>
 ```
 > SELECT SUM("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z'
@@ -6639,7 +6813,7 @@ time                  sum
 ```
 The query returns the lower time bound (`WHERE time >= '2015-08-18T00:00:00Z'`) as the timestamp.
 
-##### Example 3: Use an aggregate function with a specified time range and a GROUP BY time() clause
+##### Example: Use an aggregate function with a specified time range and a GROUP BY time() clause
 <br>
 ```
 > SELECT SUM("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:18:00Z' GROUP BY time(12m)
@@ -6687,7 +6861,7 @@ See [Common Issues with `SAMPLE()`](#common-issues-with-sample) for more informa
 ##### Examples
 <br>
 
-##### Example 1: Use a single selector function with a single field key and without a specified time range
+##### Example: Use a single selector function with a single field key and without a specified time range
 <br>
 ```
 > SELECT MAX("water_level") FROM "h2o_feet"
@@ -6706,7 +6880,7 @@ time                  max
 ```
 The queries return the timestamp for the [maximum](#max) point that appears in the raw data.
 
-##### Example 2: Use a single selector function with multiple field keys and without a specified time range
+##### Example: Use a single selector function with multiple field keys and without a specified time range
 <br>
 ```
 > SELECT FIRST(*) FROM "h2o_feet"
@@ -6729,7 +6903,7 @@ The first query returns InfluxDB's null timestamp equivalent (epoch 0: `1970-01-
 The second query returns the timestamp for the maximum point that appears in the raw data.
 `MAX(*)` returns one timestamp (the `h2o-feet` measurement has only one numerical field) so the system does not overwrite the original timestamp.
 
-##### Example 3: Use a selector function with another function and without a specified time range
+##### Example: Use a selector function with another function and without a specified time range
 <br>
 ```
 > SELECT MAX("water_level"),MIN("water_level") FROM "h2o_feet"
