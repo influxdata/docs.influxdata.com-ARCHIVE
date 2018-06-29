@@ -12,9 +12,9 @@
         {{ if (or .IsPage (eq .Kind "section")) }}
           {{ $projectDefaultVersion := index .Site.Data.default_versions (printf "%s_semver" (index (findRE "[^/]+.*?" .RelPermalink) 0)) }}
           {{ if not (in .RelPermalink $projectDefaultVersion) }}
-            <meta name="docsearch:latest"content="false">
+            <meta name="docsearch:latest" content="false">
           {{ else }}
-            <meta name="docsearch:latest"content="true">
+            <meta name="docsearch:latest" content="true">
           {{ end }}
         {{ end }}
 
