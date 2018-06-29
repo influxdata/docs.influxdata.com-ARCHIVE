@@ -14,6 +14,9 @@ The HTTP API is the primary means for querying data in InfluxDB (see the [comman
 
 To perform a query send a `GET` request to the `/query` endpoint, set the URL parameter `db` as the target database, and set the URL parameter `q` as your query.
 You may also use a `POST` request by sending the same parameters either as URL parameters or as part of the body with `application/x-www-form-urlencoded`.
+
+### Example
+
 The example below uses the HTTP API to query the same database that you encountered in [Writing Data](/influxdb/v1.5/guides/writing_data/).
 <br>
 ```bash
@@ -125,21 +128,31 @@ returns:
 
 ### Other options when querying data
 ---
-#### Timestamp Format
-Everything in InfluxDB is stored and reported in UTC.
+#### Timestamp format
+
+In InfluxDB, data is stored and reported in UTC.
 By default, timestamps are returned in RFC3339 UTC and have nanosecond precision, for example `2015-08-04T19:05:14.318570484Z`.
-If you want timestamps in Unix epoch format include in your request the query string parameter `epoch` where `epoch=[h,m,s,ms,u,ns]`.
-For example, get epoch in seconds with:
-<br>
+
+To return timestamps in Unix epoch format, include the query string parameter `epoch`, where `epoch=[h,m,s,ms,u,ns]`.
+When using epoch format, time values are rounded to the nearest whole unit.
+
+##### Example: Get epoch in seconds:
+
 ```bash
 curl -G 'http://localhost:8086/query' --data-urlencode "db=mydb" --data-urlencode "epoch=s" --data-urlencode "q=SELECT \"value\" FROM \"cpu_load_short\" WHERE \"region\"='us-west'"
 ```
 
+##### Example: Rounding of epoch time value
+
+If a user had a timestamp of  `1970-01-01T00:00:00.000051Z` and queried back for it with `epoch=ms`, the result is time value of `0`.
+
 #### Authentication
+
 Authentication in InfluxDB is disabled by default.
 See [Authentication and Authorization](/influxdb/v1.5/query_language/authentication_and_authorization/) for how to enable and set up authentication.
 
-#### Maximum Row Limit
+#### Maximum row limit
+
 The [`max-row-limit` configuration option](/influxdb/v1.5/administration/config/#max-row-limit-0) allows users to limit the maximum number of returned results to prevent InfluxDB from running out of memory while it aggregates the results.
 The `max-row-limit` configuration option is set to `0` by default.
 That default setting allows for an unlimited number of rows returned per request.
@@ -147,9 +160,13 @@ That default setting allows for an unlimited number of rows returned per request
 The maximum row limit only applies to non-chunked queries. Chunked queries can return an unlimited number of points.
 
 #### Chunking
+
 Chunking can be used to return results in streamed batches rather than as a single response by setting the query string parameter `chunked=true`. Responses will be chunked by series or by every 10,000 points, whichever occurs first. To change the maximum chunk size to a different value, set the query string parameter `chunk_size` to a different value.
-For example, get your results in batches of 20,000 points with:
-<br>
+
+##### Example
+
+The following `curl` example returns results in batches of 20,000 points.
+
 ```bash
 curl -G 'http://localhost:8086/query' --data-urlencode "db=deluge" --data-urlencode "chunked=true" --data-urlencode "chunk_size=20000" --data-urlencode "q=SELECT * FROM liters"
 ```
