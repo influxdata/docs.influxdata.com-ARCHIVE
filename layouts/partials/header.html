@@ -8,6 +8,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
 
+        <!-- Set the docsearch tag "latest" for the latest versions of projects -->
+        {{ if (or .IsPage (eq .Kind "section")) }}
+          {{ $projectDefaultVersion := index .Site.Data.default_versions (printf "%s_semver" (index (findRE "[^/]+.*?" .RelPermalink) 0)) }}
+          {{ if not (in .RelPermalink $projectDefaultVersion) }}
+            <meta name="docsearch:latest"content="false">
+          {{ else }}
+            <meta name="docsearch:latest"content="true">
+          {{ end }}
+        {{ end }}
+
         <!-- Set the robots meta tag to "noindex,nofollow" for legacy versions -->
         <meta name="robots"
             {{ if (or .IsPage (eq .Kind "section")) }}
