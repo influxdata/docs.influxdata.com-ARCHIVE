@@ -10,16 +10,27 @@
   "license": "ISC",
   "devDependencies": {
     "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-clean-css": "^2.0.3",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-clean-css": "^3.9.4",
     "gulp-less": "^3.0.5",
     "gulp-livereload": "^3.8.1",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-watch": "^4.3.5",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-watch": "^5.0.0",
     "less": "^3.0.4"
   },
   "dependencies": {
     "bcrypt": "^2.0.1",
-    "hoek": "^4.2.1"
+    "boom": "^7.2.0",
+    "bounce": "^1.2.0",
+    "brace-expansion": "^1.1.11",
+    "braces": "^2.3.2",
+    "browserslist": "^4.0.0",
+    "cryptiles": "^4.1.2",
+    "graceful-fs": "^4.1.2",
+    "hawk": "^7.0.7",
+    "hoek": "^5.0.3",
+    "minimatch": "^3.0.4",
+    "ncu": "^0.2.1",
+    "sntp": "^3.0.1"
   }
 }
