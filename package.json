@@ -20,6 +20,6 @@
   },
   "dependencies": {
     "bcrypt": "^2.0.1",
-    "hoek": "^5.0.3"
+    "hoek": "^4.2.1"
   }
 }
