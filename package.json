@@ -9,13 +9,17 @@
   "author": "Alex Paxton",
   "license": "ISC",
   "devDependencies": {
-    "less": "^2.6.1",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-clean-css": "^2.0.3",
     "gulp-less": "^3.0.5",
     "gulp-livereload": "^3.8.1",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-watch": "^4.3.5"
+    "gulp-watch": "^4.3.5",
+    "less": "^3.0.4"
+  },
+  "dependencies": {
+    "bcrypt": "^2.0.1",
+    "hoek": "^5.0.3"
   }
 }
