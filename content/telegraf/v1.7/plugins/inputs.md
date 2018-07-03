@@ -475,6 +475,10 @@ versions 2008+. Recorded metrics are lightweight and use Dynamic Management View
 The [StatsD (`statsd`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/statsd) is a special type of plugin which runs a backgrounded `statsd` listener service while Telegraf is running.
 StatsD messages are formatted as described in the original [etsy statsd](https://github.com/etsy/statsd/blob/master/docs/metric_types.md) implementation.
 
+### [Swap (`swap`)](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/system/SWAP_README.md)
+
+The [Swap (`swap`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/system/SWAP_README.md) collects system swap memory usage metrics. For more information about Linux swap spaces, see [All about Linux swap space](https://www.linux.com/news/all-about-linux-swap-space).
+
 ### [Syslog (`syslog`)](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/syslog) -- NEW in v.1.7
 
 The [Syslog (`syslog`) input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/syslog) listens for syslog messages transmitted over
