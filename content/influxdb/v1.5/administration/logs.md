@@ -110,7 +110,7 @@ The `json` format is available when specified.
 
 ### Examples of log output:
 
-**Logfmt**
+**logfmt**
 
 ```
 ts=2018-02-20T22:48:11.291815Z lvl=info msg="InfluxDB starting" version=unknown branch=unknown commit=unknown
