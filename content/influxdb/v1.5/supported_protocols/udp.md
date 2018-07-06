@@ -85,6 +85,8 @@ Each UDP input allows the binding address, target database, and target retention
 
 Each UDP input also performs internal batching of the points it receives, as batched writes to the database are more efficient. The default _batch size_ is 1000, _pending batch_ factor is 5, with a _batch timeout_ of 1 second. This means the input will write batches of maximum size 1000, but if a batch has not reached 1000 points within 1 second of the first point being added to a batch, it will emit that batch regardless of size. The pending batch factor controls how many batches can be in memory at once, allowing the input to transmit a batch, while still building other batches.
 
+Points written via the UDP listener are set to nanosecond level precision by default. Like the HTTP write endpoint, any points written to the UDP listener without a timestamp are assigned a timestamp by InfluxDB when the points are received.
+
 ## Processing
 
 The UDP input can receive up to 64KB per read, and splits the received data by newline. Each part is then interpreted as line-protocol encoded points, and parsed accordingly.
@@ -103,11 +105,12 @@ Since UDP is a connectionless protocol, there is no way to signal to the data so
 [[udp]]
   enabled = true
   bind-address = ":8089" # the bind address
-  database = "telegraf" # Name of the database that will be written to
+  database = "telegraf" # name of the database that will be written to
   batch-size = 5000 # will flush if this many points get buffered
   batch-timeout = "1s" # will flush at least this often even if the batch-size is not reached
   batch-pending = 10 # number of batches that may be pending in memory
   read-buffer = 0 # UDP read buffer, 0 means to use OS default
+  precision = "n" # sets the default precision of points written via UDP
 ...
 ```
 
@@ -120,21 +123,23 @@ Since UDP is a connectionless protocol, there is no way to signal to the data so
   # Default UDP for Telegraf
   enabled = true
   bind-address = ":8089" # the bind address
-  database = "telegraf" # Name of the database that will be written to
+  database = "telegraf" # name of the database that will be written to
   batch-size = 5000 # will flush if this many points get buffered
   batch-timeout = "1s" # will flush at least this often even if the batch-size is not reached
   batch-pending = 10 # number of batches that may be pending in memory
   read-buffer = 0 # UDP read buffer size, 0 means to use OS default
+  precision = "n" # sets the default precision of points written via UDP
 
 [[udp]]
   # High-traffic UDP
   enabled = true
   bind-address = ":8189" # the bind address
-  database = "mymetrics" # Name of the database that will be written to
+  database = "mymetrics" # name of the database that will be written to
   batch-size = 5000 # will flush if this many points get buffered
   batch-timeout = "1s" # will flush at least this often even if the batch-size is not reached
   batch-pending = 100 # number of batches that may be pending in memory
   read-buffer = 8388608 # (8*1024*1024) UDP read buffer size
+  precision = "n" # sets the default precision of points written via UDP
 ...
 ```
 
