@@ -1,11 +1,60 @@
 ---
-title: InfluxDB 1.5 release notes
+title: InfluxDB 1.6 release notes
 menu:
   influxdb_1_6:
     name: Release notes
     weight: 10
     parent: About the project
 ---
+
+# v1.6.0 [2018-07-05]
+-------------------
+
+### Breaking changes
+
+*	If math is used with the same selector multiple times, it will now act as a selector rather than an aggregate. See [#9563](https://github.com/influxdata/influxdb/pull/9563) for details.
+
+### Features
+
+-	Support proxy environment variables in the influx client.
+*	Implement basic trigonometry functions.
+*	Add ability to delete many series with predicate.
+*	Implement floor, ceil, and round functions.
+*	Allow customizing the unix socket group and permissions created by the server.
+*	Add more math functions to influxql.
+*	Add suppress-write-log option to disable the write log when the log is enabled.
+*	Add additional technical analysis algorithms.
+*	Validate points on input.
+*	Log information about index version during startup.
+*	Add key sanitization to `deletetsm` command in `influx_inspect` utility.
+*	Optimize the spread function to process points iteratively instead of in batch.
+*	Allow math functions to be used in the condition.
+*	HTTP Write Throttle.
+*	Implement `SHOW STATS` FOR `indexes`.
+*	Add `dumptsmwal` command to `influx_inspect` utility.
+*	Improve the number of regex patterns that are optimized to static OR conditions.
+
+### Bugfixes
+
+*	[#9553](https://github.com/influxdata/influxdb/pull/9553): Support setting the log level through the environment variable.
+*	[#9551](https://github.com/influxdata/influxdb/pull/9551): Fix panic when checking fieldsets.
+*	[#9573](https://github.com/influxdata/influxdb/pull/9573): Ensure correct number of tags parsed when commas used.
+*	[#9580](https://github.com/influxdata/influxdb/pull/9580): Fix data race in WAL.
+*	[#9586](https://github.com/influxdata/influxdb/pull/9586): Allow SHOW SERIES kill.
+*	[#9612](https://github.com/influxdata/influxdb/pull/9612): Revert "Use MADV_WILLNEED when loading TSM files".
+*	[#9633](https://github.com/influxdata/influxdb/pull/9633): Fix regression to allow now() to be used as the group by offset again.
+*	[#9647](https://github.com/influxdata/influxdb/pull/9647): Delete deleted shards in retention service.
+*	[#9659](https://github.com/influxdata/influxdb/pull/9659): Ignore index size in Engine.DiskSize().
+*	[#9661](https://github.com/influxdata/influxdb/pull/9661): Fix buildtsi partition key.
+*	[#9665](https://github.com/influxdata/influxdb/pull/9665): Enable casting values from a subquery.
+*	[#9682](https://github.com/influxdata/influxdb/pull/9682): Avoid a panic when using show diagnostics with text/csv.
+*	[#9696](https://github.com/influxdata/influxdb/pull/9696): Properly track the response bytes written for queries in all format types.
+*	[#9615](https://github.com/influxdata/influxdb/pull/9615): Remove error for series file when no shards exist.
+*	[#9751](https://github.com/influxdata/influxdb/pull/9751): Fix the validation for multiple nested distinct calls.
+*	[#9792](https://github.com/influxdata/influxdb/pull/9792): TSM: TSMReader.Close blocks until reads complete
+*	[#9858](https://github.com/influxdata/influxdb/pull/9858): Return the correct auxiliary values for top/bottom.
+*	[#9866](https://github.com/influxdata/influxdb/pull/9866): Close TSMReaders from FileStore.Close after releasing FileStore mutex.
+*	[#9932](https://github.com/influxdata/influxdb/pull/9932): buildtsi: Do not escape measurement names.
 
 ## v1.5.2 [2018-04-12]
 -------------------
