@@ -1,7 +1,7 @@
 ---
 title: Querying data with the HTTP API
 alias:
-  -/docs/v1.5/query_language/querying_data/
+  -/docs/v1.6/query_language/querying_data/
 menu:
   influxdb_1_6:
     weight: 20
