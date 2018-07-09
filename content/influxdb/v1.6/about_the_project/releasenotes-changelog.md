@@ -16,21 +16,21 @@ menu:
 
 ### Features
 
--	Support proxy environment variables in the influx client.
+-	Support proxy environment variables in the `influx` client.
 *	Implement basic trigonometry functions.
 *	Add ability to delete many series with predicate.
-*	Implement floor, ceil, and round functions.
+*	Implement `floor`, `ceil`, and `round` functions.
+* Add more math functions to InfluxQL.
 *	Allow customizing the unix socket group and permissions created by the server.
-*	Add more math functions to influxql.
-*	Add suppress-write-log option to disable the write log when the log is enabled.
+*	Add `suppress-write-log` option to disable the write log when the log is enabled.
 *	Add additional technical analysis algorithms.
 *	Validate points on input.
 *	Log information about index version during startup.
 *	Add key sanitization to `deletetsm` command in `influx_inspect` utility.
-*	Optimize the spread function to process points iteratively instead of in batch.
+*	Optimize the `spread` function to process points iteratively instead of in batch.
 *	Allow math functions to be used in the condition.
-*	HTTP Write Throttle.
-*	Implement `SHOW STATS` FOR `indexes`.
+*	Add HTTP Write Throttle.
+*	Implement `SHOW STATS FOR indexes`.
 *	Add `dumptsmwal` command to `influx_inspect` utility.
 *	Improve the number of regex patterns that are optimized to static OR conditions.
 
