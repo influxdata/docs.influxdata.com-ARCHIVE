@@ -57,19 +57,19 @@ InfluxDB must be restarted to pick up any changes to `/etc/default/<node-type>`.
 
 ##### Meta nodes
 
-For meta nodes, the <node-type> is `influxdb-meta`.
+For meta nodes, the `<node-type>` is `influxdb-meta`.
 The default log file is `/var/log/influxdb/influxdb-meta.log`
 The service configuration file is `/etc/default/influxdb-meta`.
 
 ##### Data nodes
 
-For data nodes, the <node-type> is `influxdb`.
+For data nodes, the `<node-type>` is `influxdb`.
 The default log file is `/var/log/influxdb/influxdb.log`
 The service configuration file is `/etc/default/influxdb`.
 
 ##### Enterprise Web
 
-For Enterprise Web nodes, the <node-type> is `influx-enterprise`.
+For Enterprise Web nodes, the `<node-type>` is `influx-enterprise`.
 The default log file is `/var/log/influxdb/influx-enterprise.log`
 The service configuration file is `/etc/default/influx-enterprise`.
 

@@ -107,6 +107,38 @@ $ influx_inspect buildtsi -database mydb -datadir ~/.influxdb/data -waldir ~/.in
 $ influx_inspect buildtsi -database stress -shard 1 -datadir ~/.influxdb/data -waldir ~/.influxdb/wal
 ```
 
+### `deletetsm`
+
+Bulk deletes a measurement from a raw TSM file.
+
+<dt> **Warning:** Use the `deletetsm` command only when your InfluxDB instance is offline (`influxd` service is not running).</dt>
+
+#### Syntax
+
+````
+influx_inspect deletetsm -measurement <measurement_name> [ arguments ] <path>
+````
+##### `<path>`
+
+Path to the `.tsm` file, located by default in the `data` directory.
+
+#### Arguments
+
+Optional arguments are in brackets.
+
+##### `-measurement`
+
+The name of the measurement to delete from TSM files.
+
+##### [ `-sanitize` ]
+
+Flag to remove all keys containing non-printable Unicode characters.
+
+##### [ `-v` ]
+
+Flag to enable verbose logging.
+
+
 ### `dumptsi`
 
 Dumps low-level details about TSI files, including `.tsl` log files and `.tsi` index files.
@@ -176,7 +208,7 @@ $ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index/file0
 $ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index/file0 /path/to/index/file1 ...
 ```
 
-### `influx_inspect dumptsm`
+### `dumptsm`
 
 Dumps low-level details about [TSM](/influxdb/v1.6/concepts/glossary/#tsm-time-structured-merge-tree) files, including TSM (`.tsm`) files and WAL (`.wal`) files.
 

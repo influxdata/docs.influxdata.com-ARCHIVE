@@ -8,6 +8,19 @@ menu:
     parent: About the project
 ---
 
+## v1.7.1 [2018-07-03]
+
+### Bug fixes
+
+* Treat `sigterm` as a clean shutdown signal.
+* Fix selection of tags under nested objects in the JSON parser.
+* Fix Postfix (`postfix`) input plugin handling of multilevel queues.
+* Fix Syslog (`syslog` input plugin timestamp parsing with single digit day of month.
+* Handle MySQL (`mysql`) input plugin variations in the `user_statistics` collecting.
+* Fix Minmax (`minmax`) and Basicstats (`basicstats`) aggregator plugins to use `uint64`.
+* Document Swap (`swap`) input plugin.
+* Fix incorrect precision being applied to metric in HTTP Listener (`http_listener`) input plugin.
+
 ## v1.7 [2018-06-12]
 
 ### Release notes
