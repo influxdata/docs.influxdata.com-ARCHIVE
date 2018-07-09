@@ -1,19 +1,19 @@
 ---
-title: Chronograf 1.5 documentation
+title: Chronograf 1.6 documentation
 aliases:
-  - /influxdb/v1.5/chronograf/
+  - /influxdb/v1.6/chronograf/
 
 menu:
   chronograf:
-    name: v1.5
-    identifier: chronograf_1_5
-    weight: 9
+    name: v1.6
+    identifier: chronograf_1_6
+    weight: 1
 ---
 
 Chronograf is InfluxData's open source web application.
 Use Chronograf with the other components of the [TICK stack](https://www.influxdata.com/products/) to visualize your monitoring data and easily create alerting and automation rules.
 
-![Chronograf Collage](/img/chronograf/v1.5/chronograf-collage.png)
+![Chronograf Collage](/img/chronograf/v1.6/chronograf-collage.png)
 
 ## Key features
 
@@ -34,8 +34,8 @@ Chronograf offers a UI for [Kapacitor](https://github.com/influxdata/kapacitor),
 
 ### Data visualization
 
-* Monitor your application data with Chronograf's [pre-created dashboards](/chronograf/v1.5/troubleshooting/frequently-asked-questions/#what-applications-are-supported-in-chronograf)
-* Create your own customized dashboards complete with various graph types and [template variables](/chronograf/v1.5/guides/dashboard-template-variables/)
+* Monitor your application data with Chronograf's pre-created dashboards
+* Create your own customized dashboards complete with various graph types and [template variables](/chronograf/v1.6/guides/dashboard-template-variables/)
 * Investigate your data with Chronograf's data explorer and query templates
 
 ### Database management
