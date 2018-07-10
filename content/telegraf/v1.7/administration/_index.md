@@ -3,7 +3,7 @@
 
  menu:
    telegraf_1_7:
-     name: Administering
+     name: Administration
      weight: 50
 
 ---
