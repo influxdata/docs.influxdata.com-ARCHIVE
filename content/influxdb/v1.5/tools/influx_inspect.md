@@ -1,78 +1,91 @@
 ---
-title: Influx Inspect disk shard utility
-
+title: Influx Inspect disk utility
+description: Use the "influx_inspect" commands to manage InfluxDB disks and shards.
 menu:
   influxdb_1_5:
     weight: 50
     parent: Tools
 ---
 
-Influx Inspect is a disk shard utility that can be used to:
+Influx Inspect is an InfluxDB disk utility that can be used to:
 
 * View detailed information about disk shards.
 * Exporting data from a shard to [line protocol](/influxdb/v1.5/concepts/glossary/#line-protocol) that can be inserted back into the database.
 * Converting TSM in-memory index shards to TSI disk-based shards.
 
-### `influx_inspect [ [ command ] [ arguments ] ]`
+## `influx_inspect` utility
 
-`-help` is the default command and will print usage for the tool.
+### Syntax
 
-The `influx_inspect` commands are:
+```
+influx_inspect [ [ command ] [ options ] ]`
+```
 
-* [`buildtsi`](#influx-inspect-buildtsi): Converts in-memory (TSM-based) shards to TSI.
-* [`deletetsm`](#influx-inspect-deletetsm): Bulk deletes a measurement from raw TSM files.
-* [`dumptsi`](#influx-inspect-dumptsi): Dumps low-level details about TSI files.
-* [`dumptsm`](#influx-inspect-dumptsm): Dumps low-level details about TSM files.
-* [`export`](#influx-inspect-export): Exports raw data from a shard to Line Protocol format.
-* [`help`](#influx-inspect-help): Displays this help message format.
-* [`report`](#influx-inspect-report): Displays a shard level report.
-* [`verify`](#influx-inspect-verify): Verifies integrity of TSM files.
+`-help` is the default command and prints syntax and usage information for the tool.
+
+### `influx_inspect` commands
+
+The `influx_inspect` commands are summarized here, with links to detailed information on each of the commands.
+
+* [`buildtsi`](#buildtsi): Convert in-memory (TSM-based) shards to TSI
+* [`dumptsi`](#dumptsi): Dump low-level details about TSI files.
+* [`dumptsm`](#dumptsm): Dump low-level details about TSM files. 
+* [`export`](#export): Export raw data from a shard in Line Protocol format.
+* [`help`](#help): Display this help message format.
+* [`report`](#report): Display a shard level report.
+* [`verify`](#verify): Verify the integrity of TSM files.
 
 
 ### `buildtsi`
 
-Converts shards using in-memory indexes to shards supporting TSI (time series index) disk-based index files.
+Builds TSI (Time Series Index) disk-based shard index files and associated series files.
 The index is written to a temporary location until complete and then moved to a permanent location.
 If an error occurs, then this operation will fall back to the original in-memory index.
 
-> ***Note:*** This tool is for offline conversion only.
+> ***Note:*** **For offline conversion only.**
 > When TSI is enabled, new shards use the TSI indexes.
 > Existing shards continue as TSM-based shards until
 > converted offline.
 
-#### Syntax
-
-> **Note:** Run the `buildtsi` command using the user account that you are going to run the database as,
-> or ensure that the permissions match afterward.
+##### Syntax
 
 ```
-influx_inspect buildtsi -datadir <data_directory> -waldir <WAL_directory> [ arguments ]
+influx_inspect buildtsi -datadir <data_dir> -waldir <wal_dir> [ options ]
 ```
+> **Note:** Use the `buildtsi` command with the user account that you are going to run the database as,
+> or ensure that the permissions match after running the command.
 
-#### Arguments
+
+#### Options
 
 Optional arguments are in brackets.
 
-##### [ `-database <db_name>` ]
-  Database name.
+#### `[ -database <db_name> ]`
 
-##### `-datadir <data_dir>`
-  Data directory.
+The name of the database.
 
-##### [ `-retention <rp_name>` ]
-  Retention policy.
+#### `-datadir <data_dir>`
 
-##### [ `-shard <shard_ID>` ]
-  Shard ID.
+The path to the `data` directory.
 
-##### [ `-v` ]
-  Verbose output.
+#### `[ -retention <rp_name> ]`
 
-##### `-waldir <wal_dir>`
-  WAL (Write Ahead Log) directory.
+The name of the retention policy.
+
+#### `[ -shard <shard_ID> ]`
+
+The identifier of the shard.
+
+#### `[ -v ]`
+
+Enable output in verbose mode.
+
+#### `-waldir <wal_dir>`
+
+The directory for the WAL (Write Ahead Log) files.
+
 
 #### Examples
-
 
 ##### Converting all shards on a node
 
@@ -94,7 +107,7 @@ $ influx_inspect buildtsi -database mydb -datadir ~/.influxdb/data -waldir ~/.in
 $ influx_inspect buildtsi -database stress -shard 1 -datadir ~/.influxdb/data -waldir ~/.influxdb/wal
 ```
 
-### `influx_inspect deletetsm`
+### `deletetsm`
 
 Bulk deletes a measurement from a raw TSM file.
 
@@ -126,25 +139,20 @@ Flag to remove all keys containing non-printable Unicode characters.
 Flag to enable verbose logging.
 
 
-### `influx_inspect dumptsi`
+### `dumptsi`
 
 Dumps low-level details about TSI files, including `.tsl` log files and `.tsi` index files.
 
 #### Syntax
 
 ```
-influx_inspect dumptsi [ arguments ] <index_path>
+influx_inspect dumptsi [ options ] <index_path>
 ```
+If no options are specified, summary statistics are provided for each file.
 
-##### `<index_path>`
-
-Path to the `index` directory, or paths to individual `index` files. Paths are space-separated. Specify the `index` directory unless you need to target individual `index` files for debugging. See the examples below.
-
-
-#### Arguments
+#### Options
 
 Optional arguments are in brackets.
-If optional arguments are not specified, the `dumptsi` command returns summary statistics for each file.
 
 ##### `-series-file <series_path>`
 
@@ -200,45 +208,48 @@ $ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index/file0
 $ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index/file0 /path/to/index/file1 ...
 ```
 
-### `influx_inspect dumptsm`
+### `dumptsm`
 
-Dumps low-level details about [TSM](/influxdb/v1.5/concepts/glossary/#tsm-time-structured-merge-tree) files.
+Dumps low-level details about [TSM](/influxdb/v1.6/concepts/glossary/#tsm-time-structured-merge-tree) files, including TSM (`.tsm`) files and WAL (`.wal`) files.
 
 #### Syntax
 
 ```
-influx_inspect dumptsm [ arguments ] <path>
+influx_inspect dumptsm [ options ] <path>
 ```
 
 ##### `<path>`
+
 Path to the `.tsm` file, located by default in the `data` directory.
 
-#### Arguments
+#### Options
 
 Optional arguments are in brackets.
 
-##### [ `-index true | false` ]
+##### [ `-index` ]
 
-Dump raw index data.
+Flag to dump raw index data.
 Default value is `false`.
 
-##### [ `-blocks true | false` ]
+##### [ `-blocks` ]
 
-Dump raw block data. Default is `false`.
+Flag to dump raw block data.
+Default value is `false`.
 
-##### [ `-all true | false` ]
+##### [ `-all` ]
 
-Dump all data.  Default is `false`.
-Caution: This may print a lot of information.
+Flag to dump all data. Caution: This may print a lot of information.
+Default value is `false`.
 
-##### [ `-filter-key <filter_key>` ]
+##### [ `-filter-key <key_name>` ]
 
-Only display index and block data that match this key substring. Default value is `""`.
+Display only index data and block data that match this key substring.
+Default value is `""`.
 
 
-### `influx_inspect export`
+### `export`
 
-Export all TSM files to Line Protocol format.
+Exports all TSM files in Line Protocol format.
 This output file can be imported using the
 [influx](/influxdb/v1.5/tools/shell/#import-data-from-a-file-with-import)
 command.
@@ -246,64 +257,68 @@ command.
 #### Syntax
 
 ```
-influx_inspect export [ arguments ]
+influx_inspect export [ options ]
 ```
 
-#### Arguments
+#### Options
 
 Optional arguments are in brackets.
 
-##### [ `-compress true | false` ]
+##### [ `-compress` ]
 
-Compress the output.
+The flag to compress the output.
 Default value is `false`.
 
 ##### [ `-database <db_name>` ]
 
-Database to export.
+The name of the database to export.
 Default value is `""`.
 
-##### [ `-retention <rp_name>` ]
-
-[Retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) to export. Default value is `""`.
 
 ##### `-datadir <data_dir>`
 
-Data storage path. Required.
+The path to the `data` directory.
 Default value is `"$HOME/.influxdb/data"`.
 
-##### [ `-start <timestamp>` ]
+#### [ `-end <timestamp>` ]
 
-Timestamp representing the start of the time range.
-The timestamp string must be in [RFC3339 format](/influxdb/v1.5/query_language/data_exploration/#absolute-time).
+The timestamp for the end of the time range.
+The timestamp string must be in [RFC3339 format](/influxdb/v1.6/query_language/data_exploration/#absolute-time).
 
-##### [ `-end <timestamp>` ]
-Timestamp representing the end of the time range.
-The timestamp string must be in [RFC3339 format](/influxdb/v1.5/query_language/data_exploration/#absolute-time).
+#### [ `-out <export_dir>` ]
 
-##### `-out <export_location>`
-Specifies the location for the export file.
+The location for the export file.
 Default value is `"$HOME/.influxdb/export"`.
 
-##### `-waldir <wal_dir>`
+#### [ `-retention <rp_name> ` ]
+
+The name of the [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) to export. Default value is `""`.
+
+#### [ `-start <timestamp>` ]
+
+The timestamp for the start of the time range.
+The timestamp string must be in [RFC3339 format](/influxdb/v1.6/query_language/data_exploration/#absolute-time).
+
+
+#### [ `-waldir <wal_dir>` ]
 
 Path to the [write-ahead log (WAL)](/influxdb/v1.5/concepts/glossary/#wal-write-ahead-log). Default value is `"$HOME/.influxdb/wal"`.
 
 #### Examples
 
-##### Exporting entire database and compress the output
+##### Export entire database and compress the output
 
 ```
 influx_inspect export -compress
 ```
 
-##### Exporting data from a specific database and retention policy
+##### Export data from a specific database and retention policy
 
 ```
 influx_inspect export -database mydb -retention autogen
 ```
 
-##### Example of the output
+##### Example of output
 
 ```
 # DDL
@@ -317,49 +332,51 @@ randset value=97.9296104805 1439856000000000000
 randset value=25.3849066842 1439856100000000000
 ```
 
-### `influx_inspect report`
+### `report`
 
-Displays series meta-data for all shards.
-The default location is [$HOME/.influxdb].
+Displays series metadata for all shards.
+The default location is `$HOME/.influxdb`.
 
 #### Syntax
 
 ```
-influx_inspect report [ arguments ]
+influx_inspect report [ options ]
 ```
-
-#### Arguments
+#### Options
 
 Optional arguments are in brackets.
 
 ##### [ `-pattern "<regular expression/wildcard>"` ]
 
-Include only files matching the specified pattern.
+The regular expression or wildcard pattern to match included files.
 Default value is `""`.
 
-##### [ `-detailed true|false` ]
+#### [ `-detailed` ]
 
 Report detailed cardinality estimates.
 Default value is `false`.
 
 
-### `influx_inspect verify`
+
+
+### `verify`
 
 Verifies the integrity of TSM files.
 
 #### Syntax
 
 ```
-influx_inspect verify [ arguments ]
+influx_inspect verify [ options ]
 ```
-#### Arguments
+#### Options
 
 Optional arguments are in brackets.
 
-##### [ `-dir <root_storage>` ]
+#### `-dir <storage_root>`
 
-Root storage path.
+The path to the storage root directory.
 ​Default value is `"/root/.influxdb"`.
+
 
 # Caveats
 
