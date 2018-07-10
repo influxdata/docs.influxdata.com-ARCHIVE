@@ -96,9 +96,21 @@ The [Couchbase (`couchbase`) input plugin](https://github.com/influxdata/telegra
 
 The [CouchDB (`couchdb`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/couchdb) gathers metrics of CouchDB using `_stats` endpoint.
 
+### [CPU (`cpu`)](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/cpu/README.md)
+
+The [CPU (`cpu`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/cpu/README.md) gathers metrics about cpu usage.
+
 ### [Mesosphere DC/OS (`dcos`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/dcos)
 
 The [Mesosphere DC/OS (`dcos`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/dcos) gathers metrics from a DC/OS cluster's [metrics component](https://docs.mesosphere.com/1.10/metrics/).
+
+### [Disk (`disk`)](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/disk/README.md)
+
+The [Disk (`disk`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/disk/README.md gathers metrics about disk usage by mount point.
+
+### [DiskIO (`diskio`)](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/diskio/README.md)
+
+The [DiskIO (`diskio`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/diskio/README.md) gathers metrics about disk IO by device.
 
 ### [Disque (`disque`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/disque)
 
@@ -234,6 +246,14 @@ multiple instances of Telegraf can read from the same topic in parallel.
 
 The [Kapacitor (`kapacitor`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/kapacitor) will collect metrics from the given Kapacitor instances.
 
+### [Kernel (`kernel`)](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/kernel/README.md)
+
+The [Kernel (`kernel`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/kernel/README.md) gathers kernel statistics from `/proc/stat`.
+
+### [Kernel VMStat (`kernel_vmstat`)](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/kernel_vmstat/README.md)
+
+The [Kernel VMStat input plugin](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/kernel_vmstat/README.md) gathers kernel statistics from `/proc/vmstat`.
+
 ### [Kubernetes (`kubernetes`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/kubernetes)
 
 >***Note:*** The Kubernetes input plugin is experimental and may cause high cardinality issues with moderate to
@@ -247,6 +267,10 @@ should configure this plugin to talk to its locally running kubelet.
 ### [LeoFS (`leofs`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/leofs) -- NEW in v.1.7
 
 The [LeoFS (`leofs`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/leofs) gathers metrics of LeoGateway, LeoManager, and LeoStorage using SNMP. See [System Monitoring](https://leo-project.net/leofs/docs/admin/system_admin/monitoring/) in the [LeoFS Documentation](https://leo-project.net/leofs/docs/) for more information.
+
+### [Linux Sysctl FS (`linux_sysctl_fs`)](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/linux_sysctl_fs/README.md)
+
+The [Linux Sysctl FS input plugin](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/linux_sysctl_fs/README.md) provides Linux `sysctl fs` metrics.
 
 ### [Lustre2 (`lustre2`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/lustre2)
 
@@ -265,6 +289,10 @@ The [Mailchimp (`mailchimp`) input plugin](https://github.com/influxdata/telegra
 ### [Mcrouter (`mcrouter`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/mcrouter) -- NEW in v.1.7
 
 The [mcrouter (`mcrouter`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/mcrouter) gathers statistics data from a mcrouter instance. [Mcrouter](https://github.com/facebook/mcrouter) is a memcached protocol router, developed and maintained by Facebook, for scaling memcached (http://memcached.org/) deployments. It's a core component of cache infrastructure at Facebook and Instagram where mcrouter handles almost 5 billion requests per second at peak.
+
+### [Mem (`mem`)](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/mem/README.md)
+
+The [Mem (`mem`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/mem/README.md) gathers metrics about memory usage.
 
 ### [Memcached (`memcached`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/memcached)
 
@@ -301,9 +329,17 @@ The [NATS Server Monitoring (`nats`) input plugin](https://github.com/influxdata
 
 The [NATS Consumer (`nats_consumer`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/nats_consumer) reads from specified NATS subjects and adds messages to InfluxDB. Messages are expected in the Telegraf Input Data Formats. A Queue Group is used when subscribing to subjects so multiple instances of Telegraf can read from a NATS cluster in parallel.
 
+### [Net (`net`)](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/net/NET_README.md)
+
+The [Net (`net`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/net/NET_README.md) gathers metrics about network interface usage (Linux only).
+
 ### [Network Response (`net_response`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/net_response)
 
 The [Network Response (`net_response`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/net_response) tests UDP and TCP connection response time. It can also check response text.
+
+### [Netstat (`netstat`)](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/net/NETSTAT_README.md)
+
+The [Netstat (`netstat`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/net/NETSTAT_README.md) gathers TCP metrics such as established, time wait and sockets counts by using `lsof`.
 
 ### [NGINX (`nginx`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/nginx)
 
@@ -386,6 +422,10 @@ SQL queries in the plugin section of `telegraf.conf` files.
 ### [PowerDNS (`powerdns`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/powerdns)
 
 The [PowerDNS (`powerdns`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/powerdns) gathers metrics about PowerDNS using UNIX sockets.
+
+### [Processes (`processes`)](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/processes/README.md)
+
+The [Processes (`processes`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/processes/README.md) gets the number of processes and groups them by status.
 
 ### [Procstat (`procstat`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/procstat)
 
@@ -475,9 +515,9 @@ versions 2008+. Recorded metrics are lightweight and use Dynamic Management View
 The [StatsD (`statsd`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/statsd) is a special type of plugin which runs a backgrounded `statsd` listener service while Telegraf is running.
 StatsD messages are formatted as described in the original [etsy statsd](https://github.com/etsy/statsd/blob/master/docs/metric_types.md) implementation.
 
-### [Swap (`swap`)](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/system/SWAP_README.md)
+### [Swap (`swap`)](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/swap/README.md)
 
-The [Swap (`swap`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/system/SWAP_README.md) collects system swap memory usage metrics. For more information about Linux swap spaces, see [All about Linux swap space](https://www.linux.com/news/all-about-linux-swap-space).
+The [Swap (`swap`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/swap/README.md) gathers metrics about swap memory usage. For more information about Linux swap spaces, see [All about Linux swap space](https://www.linux.com/news/all-about-linux-swap-space)
 
 ### [Syslog (`syslog`)](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/syslog) -- NEW in v.1.7
 
