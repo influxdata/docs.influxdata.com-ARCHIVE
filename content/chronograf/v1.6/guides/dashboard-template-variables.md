@@ -25,7 +25,7 @@ You can use either [predefined template variables](#predefined-template-variable
 or [custom template variables](#create-custom-template-variables).
 Variable values are then selected in your dashboard user-interface (UI).
 
-![Using template variables](#)
+![Using template variables](/img/chronograf/v1.6/template-vars-use.gif)
 
 ## Predefined template variables
 Chronograf includes predefined template variables controlled by elements in the Chrongraf UI.
@@ -38,7 +38,7 @@ These template variables can be used in any of your cells' queries.
 ### dashboardTime
 The `:dashboardTime:` template variable is controlled by the "time" dropdown in your Chronograf dashboard.
 
-![Dashboard time selector](#)
+![Dashboard time selector](/img/chronograf/v1.6/template-vars-time-dropdown.png)
 
 If using relative times, it represents the time offset specified in the dropdown (-5m, -15m, -30m, etc.) and assumes time is relative to "now".
 If using absolute times defined by the date picker, `:dashboardTime:` is populated with selected lower threshold.
@@ -56,7 +56,7 @@ WHERE time > :dashboardTime:
 ### upperDashboardTime
 The `:upperDashboardTime:` template variable is defined by the upper time limit specified using the date picker in your dashboard.
 
-![Dashboard date picker](#)
+![Dashboard date picker](/img/chronograf/v1.6/template-vars-date-picker.png)
 
 It will inherit `now()` when using relative time frames or the upper time limit when using absolute timeframes.
 If you ever want to be able to specify a past timeframe, your cell's queries should use this.
@@ -70,7 +70,7 @@ WHERE time > :dashboardTime: AND time < :upperDashboardTime:
 ### interval
 The `:interval:` template variable is defined by the interval dropdown in the Chronograf dashboard.
 
-![Dashboard interval selector](#)
+![Dashboard interval selector](/img/chronograf/v1.6/template-vars-interval-dropdown.png)
 
 In cell queries, it should be used in the `GROUP BY time()` clause that accompanies aggregate functions:
 
@@ -96,7 +96,7 @@ To create a template variable:
    If using the CSV or Map types, upload or input the CSV with the desired values in the appropriate format then select a default value.
 5. Click the `Create` button.
 
-![Create a template variable](#)
+![Create a template variable](/img/chronograf/v1.6/template-vars-create.gif)
 
 Once created, the template variable can be used in any of your cell's queries and a
 dropdown for the variable will be included at the top of your dashboard.
@@ -242,7 +242,7 @@ Vary part of a query with a customized list of key-value pairs in CSV format.
 They key of each key-value pair is used to populate the template variable dropdown in your dashboard.
 The value is used when processing cells' queries.
 
-![Map variable dropdown](#)
+![Map variable dropdown](/img/chronograf/v1.6/template-vars-map-dropdown.png)
 
 _**Example CSV:**_
 ```csv
@@ -273,7 +273,7 @@ SELECT "purchases" FROM "animals"."autogen"."customers" WHERE "customer" = :mapV
 Vary part of a query with a customized meta query that pulls a specific array of values from InfluxDB.
 These variables allow you to pull a highly customized array of potential values and offer advanced functional such as [filtering values based on other template variables](#filtering-template-variable-with-other-template-variables).
 
-![Custom meta query](#)
+![Custom meta query](/img/chronograf/v1.6/template-vars-custom-meta-query.png)
 
 _**Example custom meta query variable in a cell query**_
 ```sql
@@ -309,7 +309,7 @@ For example, lets say you want to list all the field keys associated with a meas
 
 1. Create a template variable named `:measurementVar:` _(the name "measurement" is [reserved]( #reserved-variable-names))_ that uses the [Measurements](#measurements) variable type to pull in all the measurements from the `telegraf` database.
 
-    ![measurementVar](#)
+    ![measurementVar](/img/chronograf/v1.6/template-vars-measurement-var.png)
 
 2. Create a template variable named `:fieldKey:` that uses the [custom meta query](#custom-meta-query) variable type.
 The following meta query pulls a list of field keys based on the existing `:measurementVar:` template variable.
@@ -318,7 +318,7 @@ The following meta query pulls a list of field keys based on the existing `:meas
     SHOW FIELD KEYS ON telegraf FROM :measurementVar:
     ```
 
-    ![measurementVar](#)
+    ![fieldKey](/img/chronograf/v1.6/template-vars-fieldkey.png)
 
 3. Create a new dashboard cell that uses the `:fieldKey:` and `:measurementVar` template variables in its query.
 
@@ -328,7 +328,7 @@ The following meta query pulls a list of field keys based on the existing `:meas
 
 The resulting dashboard will work like this:
 
-![Custom meta query filtering](#)
+![Custom meta query filtering](/img/chronograf/v1.6/custom-meta-query-filtering.gif)
 
 ### Defining template variables in the URL
 Chronograf uses URL query parameters (also known as query string parameters) to set both display options and template variables in the URL.
@@ -339,7 +339,7 @@ Multiple query paramemters can be chained together using an ampersand (`&`).
 
 To declare a template variable as a URL query parameter, it must follow the following pattern:
 
-#### Pattern for template variable query parameter
+#### Pattern for template variable query parameters
 ```bash
 # Spaces for clarity only
 & tempVars %5B variableName %5D = variableValue
@@ -367,7 +367,7 @@ Value of the template variable.
 ```
 
 #### Including multiple template variables in the URL
-To chain multiple template variables as URL query parameters, included the full [pattern](#pattern-for-template-variable-query-parameter) for _**each**_ template variable.
+To chain multiple template variables as URL query parameters, included the full [pattern](#pattern-for-template-variable-query-parameters) for _**each**_ template variable.
 
 ```bash
 # Spaces for clarity only
