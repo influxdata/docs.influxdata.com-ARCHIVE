@@ -56,6 +56,28 @@ menu:
 * Close TSMReaders from `FileStore.Close` after releasing FileStore mutex.
 * `buildtsi`: Do not escape measurement names.
 
+## v1.5.4 [2018-06-21]
+
+### Features
+
+* Add `influx_inspect deletetsm` command for bulk deletes of measurements in raw TSM files.
+
+### Bug fixes
+
+* Fix panic in readTombstoneV4.
+* buildtsi: Do not escape measurement names.
+
+## v1.5.3 [2018-05-25]
+
+### Features
+
+* Add `[http] debug-pprof-enabled` configuration setting immediately on startup. Useful for debugging startup performance issues.
+
+### Bug fixes
+
+* Fix the validation for multiple nested `DISTINCT` calls.
+* Return the correct auxiliary values for `TOP` and `BOTTOM`.
+
 ## v1.5.2 [2018-04-12]
 -------------------
 
