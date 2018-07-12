@@ -45,7 +45,6 @@ menu:
 * Fix regression to allow now() to be used as the group by offset again.
 * Delete deleted shards in retention service.
 * Ignore index size in `Engine.DiskSize()`.
-* Fix `buildtsi` partition key.
 * Enable casting values from a subquery.
 * Avoid a panic when using show diagnostics with text/csv.
 * Properly track the response bytes written for queries in all format types.
@@ -54,7 +53,6 @@ menu:
 * TSM: `TSMReader.Close` blocks until reads complete.
 * Return the correct auxiliary values for `top` and `bottom`.
 * Close TSMReaders from `FileStore.Close` after releasing FileStore mutex.
-* `buildtsi`: Do not escape measurement names.
 
 ## v1.5.4 [2018-06-21]
 
@@ -83,15 +81,15 @@ menu:
 ### Features
 
 * Check for root user when running `buildtsi`.
-* [1.5] Adjustable TSI Compaction Threshold.
+* Adjustable TSI Compaction Threshold.
 
 ### Bug fixes
 
 * backport: check for failure case where backup directory has no manifest files.
 * Fix regression to allow `now()` to be used as the group by offset again.
-* [1.5] Revert `Use MADV_WILLNEED when loading TSM files`.
+* Revert `Use MADV_WILLNEED when loading TSM files`.
 * Ignore index size in `Engine.DiskSize()`.
-* [1.5] Fix `buildtsi` partition key.
+* Fix `buildtsi` partition key.
 * Ensure that conditions are encoded correctly even if the AST is not properly formed.
 
 ## v1.5.1 [2018-03-20]
