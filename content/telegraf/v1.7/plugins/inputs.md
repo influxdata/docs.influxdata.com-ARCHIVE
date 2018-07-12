@@ -339,7 +339,7 @@ The [Network Response (`net_response`) input plugin](https://github.com/influxda
 
 ### [Netstat (`netstat`)](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/net/NETSTAT_README.md)
 
-The [Netstat (`netstat`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/net/NETSTAT_README.md) gathers TCP metrics such as established, time wait and sockets counts by using `lsof`.
+The [Netstat (`netstat`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/net/NETSTAT_README.md) gathers TCP metrics such as established, time-wait and sockets counts by using `lsof`.
 
 ### [NGINX (`nginx`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/nginx)
 
