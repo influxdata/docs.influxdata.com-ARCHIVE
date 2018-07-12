@@ -79,7 +79,6 @@ menu:
 * Return the correct auxiliary values for `TOP` and `BOTTOM`.
 
 ## v1.5.2 [2018-04-12]
--------------------
 
 ### Features
 
