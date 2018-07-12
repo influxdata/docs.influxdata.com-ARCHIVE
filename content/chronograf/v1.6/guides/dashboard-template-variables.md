@@ -41,11 +41,7 @@ The `:dashboardTime:` template variable is controlled by the "time" dropdown in 
 <img src="/img/chronograf/v1.6/template-vars-time-dropdown.png" style="width:100%;max-width:549px;" alt="Dashboard time selector"/>
 
 If using relative times, it represents the time offset specified in the dropdown (-5m, -15m, -30m, etc.) and assumes time is relative to "now".
-If using absolute times defined by the date picker, `:dashboardTime:` is populated with selected lower threshold.
-
-> In order to use the date picker to specify a particular time range in the past
-> which does not include "now", the query should be constructed using `:dashboardTime:`
-> as the lower limit and [`:upperDashboardTime:`](#upperdashboardtime) as the upper limit.
+If using absolute times defined by the date picker, `:dashboardTime:` is populated with lower threshold.
 
 ```sql
 SELECT "usage_system" AS "System CPU Usage"
@@ -53,13 +49,17 @@ FROM "telegraf".."cpu"
 WHERE time > :dashboardTime:
 ```
 
+> In order to use the date picker to specify a particular time range in the past
+> which does not include "now", the query should be constructed using `:dashboardTime:`
+> as the lower limit and [`:upperDashboardTime:`](#upperdashboardtime) as the upper limit.
+
 ### upperDashboardTime
-The `:upperDashboardTime:` template variable is defined by the upper time limit specified using the date picker in your dashboard.
+The `:upperDashboardTime:` template variable is defined by the upper time limit specified using the date picker.
 
 <img src="/img/chronograf/v1.6/template-vars-date-picker.png" style="width:100%;max-width:762px;" alt="Dashboard date picker"/>
 
 It will inherit `now()` when using relative time frames or the upper time limit when using absolute timeframes.
-If you ever want to be able to specify a past timeframe, your cell's queries should use this.
+_**If you ever want to be able to specify a past timeframe, your cell's queries should use this template variable.**_
 
 ```sql
 SELECT "usage_system" AS "System CPU Usage"
@@ -84,7 +84,7 @@ GROUP BY time(:interval:)
 
 ## Create custom template variables
 Template variables are essentially an array of potential values used to populate parts of your cells' queries.
-Chronograf lets you create custom template variables powered by meta queries or CSV uploads that return an array of possible variable values.
+Chronograf lets you create custom template variables powered by meta queries or CSV uploads that return an array of possible values.
 
 To create a template variable:
 
@@ -118,7 +118,7 @@ Chronograf supports eight template variable types:
 Database template variables allow you to select from multiple target [databases](/influxdb/latest/concepts/glossary/#database).
 
 _**Database meta query**_  
-Database template variables use the following meta query to return an array of all the databases in your InfluxDB instance.
+Database template variables use the following meta query to return an array of all databases in your InfluxDB instance.
 
 ```sql
 SHOW DATABASES
@@ -130,13 +130,13 @@ SELECT "purchases" FROM :databaseVar:."autogen"."customers"
 ```
 
 #### Database variable use cases
----
+Database template variables are good when visualizing multiple databases with similar or identical data structures. They allow you to quickly switch between visualizations for each of your databases.
 
 ### Measurements
 Vary the target [measurement](/influxdb/latest/concepts/glossary/#measurement).
 
 _**Measurement meta query**_  
-Measurement template variables use the following meta query to return an array of all the measurements in a given database.
+Measurement template variables use the following meta query to return an array of all measurements in a given database.
 
 ```sql
 SHOW MEASUREMENTS ON database_name
@@ -148,14 +148,14 @@ SELECT * FROM "animals"."autogen".:measurementVar:
 ```
 
 #### Measurement variable use cases
----
+Measurement template variables allow you to quickly switch between measurements in a single cell or multiple cells in your dashboard.
 
 
 ### Field Keys
 Vary the target [field key](/influxdb/latest/concepts/glossary/#field-key).
 
 _**Field key meta query**_  
-Field key template variable use the following meta query to return an array of all the field keys in a given measurement from a given database.
+Field key template variables use the following meta query to return an array of all field keys in a given measurement from a given database.
 
 ```sql
 SHOW FIELD KEYS ON database_name FROM measurement_name
@@ -167,14 +167,14 @@ SELECT :fieldKeyVar: FROM "animals"."autogen"."customers"
 ```
 
 #### Field key variable use cases
----
+Field key template variables are great if you want to quickly switch between field key visualizations in a given measurement.
 
 
 ### Tag Keys
 Vary the target [tag key](/influxdb/latest/concepts/glossary/#tag-key).
 
 _**Tag key meta query**_  
-Tag key template variable use the following meta query to return an array of all the tag keys in a given measurement from a given database.
+Tag key template variables use the following meta query to return an array of all tag keys in a given measurement from a given database.
 
 ```sql
 SHOW TAG KEYS ON database_name FROM measurement_name
@@ -186,14 +186,14 @@ SELECT "purchases" FROM "animals"."autogen"."customers" GROUP BY :tagKeyVar:
 ```
 
 #### Tag key variable use cases
----
+Tag key template variables are great if you want to quickly switch between tag key visualizations in a given measurement.
 
 
 ### Tag Values
 Vary the target [tag value](/influxdb/latest/concepts/glossary/#tag-value).
 
 _**Tag value meta query**_  
-Tag value template variable use the following meta query to return an array of all the values associated with a given tag key in a specified measurement and database.
+Tag value template variables use the following meta query to return an array of all values associated with a given tag key in a specified measurement and database.
 
 ```sql
 SHOW TAG VALUES ON database_name FROM measurement_name WITH KEY tag_key
@@ -205,7 +205,7 @@ SELECT "purchases" FROM "animals"."autogen"."customers" WHERE "species" = :tagVa
 ```
 
 #### Tag value variable use cases
----
+Tag value template variables are great if you want to quickly switch between tag value visualizations in a given measurement.
 
 
 ### CSV
@@ -234,7 +234,8 @@ SELECT "purchases" FROM "animals"."autogen"."customers" WHERE "petname" = :csvVa
 ```
 
 #### CSV variable use cases
----
+CSV template variables are great when the array of values necessary for your variable can't be pulled from InfluxDB using a meta query.
+They allow you to use custom variable values.
 
 
 ### Map
@@ -267,11 +268,22 @@ SELECT "purchases" FROM "animals"."autogen"."customers" WHERE "customer" = :mapV
 ```
 
 #### Map variable use cases
----
+Map template variables are good when you need to map or alias simple names or keys to longer or more complex values.
+For example, you may want to create a `:customer:` variable that populates your cell queries with a long, numeric customer ID (`11394850823894034209`).
+With a map variable, you can alias simple names to complex values, so your list of customers would look something like:
+
+```
+Apple,11394850823894034209
+Amazon,11394850823894034210
+Google,11394850823894034211
+Microsoft,11394850823894034212
+```
+
+The customer names would populate your template variable dropdown rather than the customer IDs.
 
 ### Custom Meta Query
 Vary part of a query with a customized meta query that pulls a specific array of values from InfluxDB.
-These variables allow you to pull a highly customized array of potential values and offer advanced functional such as [filtering values based on other template variables](#filtering-template-variable-with-other-template-variables).
+These variables allow you to pull a highly customized array of potential values and offer advanced functionality such as [filtering values based on other template variables](#filtering-template-variables-with-other-template-variables).
 
 <img src="/img/chronograf/v1.6/template-vars-custom-meta-query.png" style="width:100%;max-width:667px;" alt="Custom meta query"/>
 
@@ -281,7 +293,7 @@ SELECT "purchases" FROM "animals"."autogen"."customers" WHERE "customer" = :cust
 ```
 
 #### Custom meta query variable use cases
-Custom meta query template variables should be used any time you are pulling potential values from InfluxDB, but the pre-canned template variable types aren't able to return the desired list of values.
+Custom meta query template variables should be used any time you are pulling values from InfluxDB, but the pre-canned template variable types aren't able to return the desired list of values.
 
 ## Reserved variable names
 The following variable names are reserved and cannot be used when creating template variables.
@@ -302,12 +314,12 @@ conflict with existing URL query parameters.
 
 ## Advanced template variable usage
 
-### Filtering template variable with other template variables
+### Filtering template variables with other template variables
 [Custom meta query template variables](#custom-meta-query) allow you to filter the array of potential variable values using other existing template Variables.
 
 For example, lets say you want to list all the field keys associated with a measurement, but want to be able to change the measurement:
 
-1. Create a template variable named `:measurementVar:` _(the name "measurement" is [reserved]( #reserved-variable-names))_ that uses the [Measurements](#measurements) variable type to pull in all the measurements from the `telegraf` database.
+1. Create a template variable named `:measurementVar:` _(the name "measurement" is [reserved]( #reserved-variable-names))_ that uses the [Measurements](#measurements) variable type to pull in all measurements from the `telegraf` database.
 
     <img src="/img/chronograf/v1.6/template-vars-measurement-var.png" style="width:100%;max-width:667px;" alt="measurementVar"/>
 
@@ -371,5 +383,5 @@ To chain multiple template variables as URL query parameters, included the full 
 
 ```bash
 # Spaces for clarity only
-.../? &tempVars%5BmeasurementVar%5D=cpu &tempVars%5BfieldKey%5D=usage_system
+.../?  &tempVars%5BmeasurementVar%5D=cpu  &tempVars%5BfieldKey%5D=usage_system
 ```
