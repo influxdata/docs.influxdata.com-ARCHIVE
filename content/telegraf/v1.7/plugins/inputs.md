@@ -210,7 +210,7 @@ The [Interrupts (`interrupts`) input plugin](https://github.com/influxdata/teleg
 
 ### [IPMI Sensor (`ipmi_sensor`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/ipmi_sensor)
 
-The [IPMI Sensor (`ipmi_sensor`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/ipmi_sensor) queries the local machine or remote host sensor statistics using the `impitool` utility.
+The [IPMI Sensor (`ipmi_sensor`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/ipmi_sensor) queries the local machine or remote host sensor statistics using the `ipmitool` utility.
 
 ### [ipset (`ipset`)](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ipset)
 
