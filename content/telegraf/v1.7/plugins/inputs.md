@@ -319,7 +319,7 @@ Telegraf Input Data Formats.
 
 ### [MySQL `(mysql`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/mysql)
 
-The [MySQL (`mysql`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/mysql) gathers the statistics data from MySQL servers.0
+The [MySQL (`mysql`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/mysql) gathers the statistics data from MySQL servers.
 
 ### [NATS Server Monitoring (`nats`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/nats)
 
@@ -347,7 +347,7 @@ The [NGINX (nginx) input plugin](https://github.com/influxdata/telegraf/tree/rel
 
 ### [NGINX Plus (`nginx_plus`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/nginx_plus/README.md)
 
-The [NGINX Plus (`nginx_plu`s) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/nginx_plus/README.md) is for NGINX Plus, the commercial version of the open source web server NGINX. To use this plugin you will need a license.
+The [NGINX Plus (`nginx_plus`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/nginx_plus/README.md) is for NGINX Plus, the commercial version of the open source web server NGINX. To use this plugin you will need a license.
 For more information, see [What’s the Difference between Open Source NGINX and NGINX Plus?](https://www.nginx.com/blog/whats-difference-nginx-foss-nginx-plus/).
 
 Structures for NGINX Plus have been built based on history of [status module documentation](http://nginx.org/en/docs/http/ngx_http_status_module.html).
