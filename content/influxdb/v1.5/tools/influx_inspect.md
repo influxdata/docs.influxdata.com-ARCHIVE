@@ -28,8 +28,9 @@ influx_inspect [ [ command ] [ options ] ]`
 The `influx_inspect` commands are summarized here, with links to detailed information on each of the commands.
 
 * [`buildtsi`](#buildtsi): Convert in-memory (TSM-based) shards to TSI
+* [`deletetsm`](#deletetsm): Bulk deletes a measurement from a raw TSM file.
 * [`dumptsi`](#dumptsi): Dump low-level details about TSI files.
-* [`dumptsm`](#dumptsm): Dump low-level details about TSM files. 
+* [`dumptsm`](#dumptsm): Dump low-level details about TSM files.
 * [`export`](#export): Export raw data from a shard in Line Protocol format.
 * [`help`](#help): Display this help message format.
 * [`report`](#report): Display a shard level report.
