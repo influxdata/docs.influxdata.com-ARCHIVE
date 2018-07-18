@@ -5,7 +5,7 @@ menu:
   influxdb:
     name: v1.5
     identifier: influxdb_1_5
-    weight: 1
+    weight: 10
 ---
 
 InfluxDB is a [time series database](https://www.influxdata.com/time-series-database/) designed to handle high write and query loads.

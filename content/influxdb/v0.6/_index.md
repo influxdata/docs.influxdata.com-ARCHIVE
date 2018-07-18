@@ -5,7 +5,7 @@ menu:
   influxdb:
     name: v0.6
     identifier: influxdb_06
-    weight: 600
+    weight: 500
 ---
 
 __InfluxDB v0.6 is no longer actively developed.
