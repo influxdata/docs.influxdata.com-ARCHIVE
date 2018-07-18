@@ -15,11 +15,9 @@ menu:
 - Add support for template variables in cell titles.
 - Add ability to export and import dashboards.
 - Add ability to override template variables and time ranges via URL query.
-- Add pprof routes to Chronograf server.
+- Add pprof routes to chronograf server.
 - Add API to get/update Log Viewer UI config.
 - Consume new Log Viewer config API in client to allow user to configure log viewer UI for their organization.
-- Add V2 Cells API.
-- Add V2 Dashboard API.
 
 ### UI Improvements
 
@@ -34,7 +32,7 @@ menu:
 
 ### Bug Fixes
 
-- Ensure cell queries use constraints from Time Selector.
+- Ensure cell queries use constraints from TimeSelector.
 - Fix Gauge color selection bug.
 - Fix erroneous icons in Date Picker widget.
 - Fix allowing hyphens in basepath.
@@ -45,6 +43,7 @@ menu:
 - Stop making requests for old sources after changing sources.
 - Fix health check status code creating FireFox error.
 - Change decimal places to enforce 2 places by default in cells.
+
 
 ## v1.5.0.1 [2018-06-04]
 
