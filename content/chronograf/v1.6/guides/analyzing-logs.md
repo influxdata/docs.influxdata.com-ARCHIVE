@@ -11,12 +11,9 @@ Chronograf gives you the ability to view, search, filter, visualize, and analyze
 This helps to recognize and diagnose patterns, then quickly dive into logged events that lead up to events.
 
 ## Logging setup
-Logs data is a first glass citizen in InfluxDB and is populated using available log-related [Telegraf input plugins](/telegraf/latest/plugins/inputs/):
+Logs data is a first class citizen in InfluxDB and is populated using available log-related [Telegraf input plugins](/telegraf/latest/plugins/inputs/):
 
-[logparser](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/logparser)  
 [syslog](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/syslog)  
-[GrayLog](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/graylog)  
-[tail](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/tail)  
 
 ## Viewing logs in Chronograf
 Chronograf has a dedicated log viewer accessed by clicking the "Log Viewer" button in the left navigation.
@@ -25,12 +22,15 @@ Chronograf has a dedicated log viewer accessed by clicking the "Log Viewer" butt
 
 The log viewer provides a detailed histogram showing the time-based distribution of log entries color-coded by log severity.
 It also includes a live stream of logs that can be searched, filtered, and paused to analyze specific time ranges.
+Logs are pulled from the `syslog` measurement.
+_Other log inputs and alternate log measurement options will be available in future updates._
 
 <img src="/img/chronograf/v1.6/logs-log-viewer.png" alt="Chronograf log viewer" style="width:100%;max-width:1016px;"/>
 
 ### Searching and filtering logs
 Logs are searched using keywords or regular expressions.
-They can also be filtered by severity and any tag values included with the log entry.
+They can also be filtered by clicking values in the log table such as `severity` or `facility`.
+Any tag values included with the log entry can be used as a filter.
 
 ![Searching and filtering logs](/img/chronograf/v1.6/logs-search-filter.gif)
 
@@ -40,9 +40,9 @@ To remove filters, click the `×` next to the tag key by which you no longer wan
 
 ### Selecting specific times
 In the log viewer, you can select time ranges from which to view logs.
-By default, logs are stream and displayed relative to "now," but it is possible to view logs from a past window of time.
-Timeframe selection is designed to allow you to go to to a specific event and see logs both preceding and following that event.
-When viewing logs from previous time window, first select the target time, then select the offset.
+By default, logs are streamed and displayed relative to "now," but it is possible to view logs from a past window of time.
+Timeframe selection allows you to go to to a specific event and see logs both preceding and following that event.
+When viewing logs from a previous time window, first select the target time, then select the offset.
 The offset is used to define the upper and lower thresholds of the window from which logs are pulled.
 
 ![Selecting time ranges](/img/chronograf/v1.6/logs-time-range.gif)
@@ -75,7 +75,7 @@ Below are the options and how they appear in the log table:
 
 ## Logs in dashboards
 An incredibly powerful way to analyze log data is by creating dashboards that include log data.
-This is possible by using the [Table graph type](/chronograf/v1.6/guides/visualization-types/#table) to display log data in your dashboard.
+This is possible by using the [Table visualization type](/chronograf/v1.6/guides/visualization-types/#table) to display log data in your dashboard.
 
 ![Correlating logs with other metrics](/img/chronograf/v1.6/logs-dashboard-correlation.gif)
 
