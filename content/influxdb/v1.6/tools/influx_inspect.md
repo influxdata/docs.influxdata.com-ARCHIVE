@@ -124,6 +124,21 @@ influx_inspect deletetsm -measurement <measurement_name> [ arguments ] <path>
 
 Path to the `.tsm` file, located by default in the `data` directory.
 
+When specifying the path, wildcards (`*`) can replace one or more characters.
+
+###### Examples
+
+Single shard:
+
+```
+./influx_inspect deletetsm -sanitize /influxdb/data/location/autogen/1384/*.tsm
+```
+All shards in the database:
+
+```
+./influx_inspect deletetsm -sanitize /influxdb/data/location/autogen/*/*.tsm
+```
+
 #### Arguments
 
 Optional arguments are in brackets.
