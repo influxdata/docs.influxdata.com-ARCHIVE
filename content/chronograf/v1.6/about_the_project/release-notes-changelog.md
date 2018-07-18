@@ -8,6 +8,43 @@ menu:
     parent: About the project
 ---
 
+## v1.6.0 [2018-07-18]
+
+### Features
+
+* Add support for template variables in cell titles.
+* Add ability to export and import dashboards.
+* Add ability to override template variables and time ranges via URL query.
+* Add pprof routes to chronograf server.
+* Add API to get/update Log Viewer UI config.
+* Consume new Log Viewer config API in client to allow user to configure log viewer UI for their organization.
+
+### UI Improvements
+
+* Sort task table on Manage Alert page alphabetically.
+* Redesign icons in side navigation.
+* Remove Snip functionality in hover legend.
+* Upgrade Data Explorer query text field with syntax highlighting and partial multi-line support.
+* Truncate message preview in Alert Rules table.
+* Improve performance of graph crosshairs.
+* Hide dashboard cell menu until mouse over cell.
+* Auto-Scale single-stat text to match cell dimensions.
+
+### Bug Fixes
+
+* Ensure cell queries use constraints from TimeSelector.
+* Fix Gauge color selection bug.
+* Fix erroneous icons in Date Picker widget.
+* Fix allowing hyphens in basepath.
+* Fix error in cell when tempVar returns no values.
+* Change arrows in table columns so that ascending sort points up and descending points down.
+* Fix crosshairs moving passed the edges of graphs.
+* Change y-axis options to have valid defaults.
+* Stop making requests for old sources after changing sources.
+* Fix health check status code creating FireFox error.
+* Change decimal places to enforce 2 places by default in cells.
+
+
 ## v1.5.0.1 [2018-06-04]
 
 ### Bug Fixes
