@@ -1,6 +1,6 @@
 ---
 title: Importing and exporting Chronograf dashboards
-description: A step by step guide that walks through both exporting and importing Chrongraf dashboards.
+description: A step-by-step guide that walks through both exporting and importing Chrongraf dashboards.
 menu:
   chronograf_1_6:
     weight: 120
@@ -18,16 +18,15 @@ This allows you to recreate robust dashboards without having to manually configu
 ## Exporting a dashboard
 1. Go to your "Dashboards" landing page.
 2. Hover over the dashboard you would like to export and click the "Export"
-   button appears to the right.
+   button that appears to the right.
 
 <img src="/img/chronograf/v1.6/dashboard-export.png" alt="Exporting a Chronograf dashboard" style="width:100%;max-width:912px"/>
 
-This downloads a JSON file containing dashboard information including cells,
-cell information (query, cell-sizing, color scheme, visualization type, etc.),
-and template variables.
+This downloads a JSON file containing dashboard information including template variables,
+cells and cell information such as the query, cell-sizing, color scheme, visualization type, etc.
 
 > No time series data is exported with a dashboard.
-> Exports include only dashboard-related information.
+> Exports include only dashboard-related information as mentioned above.
 
 ## Importing a dashboard
 1. On your "Dashboards" landing page, click the "Import Dashboard" button.
