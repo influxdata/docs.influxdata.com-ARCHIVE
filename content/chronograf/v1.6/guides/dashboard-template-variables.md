@@ -98,8 +98,8 @@ To create a template variable:
 
 ![Create a template variable](/img/chronograf/v1.6/template-vars-create.gif)
 
-Once created, the template variable can be used in any of your cell's queries and a
-dropdown for the variable will be included at the top of your dashboard.
+Once created, the template variable can be used in any of your cell's queries or titles
+and a dropdown for the variable will be included at the top of your dashboard.
 
 
 ## Template Variable Types
@@ -298,7 +298,7 @@ Custom meta query template variables should be used any time you are pulling val
 
 ### Text
 Vary a part of a query with a single string of text.
-There is only one value per text variable, but this value can be easily altered.
+There is only one value per text variable, but this value is easily altered.
 
 #### Text variable use cases
 Text template variables allow you to dynamically alter queries, such as adding or altering `WHERE` clauses, for multiple cells at once.
