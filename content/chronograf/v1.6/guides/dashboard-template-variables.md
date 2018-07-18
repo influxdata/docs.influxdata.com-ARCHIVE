@@ -59,7 +59,6 @@ The `:upperDashboardTime:` template variable is defined by the upper time limit 
 <img src="/img/chronograf/v1.6/template-vars-date-picker.png" style="width:100%;max-width:762px;" alt="Dashboard date picker"/>
 
 It will inherit `now()` when using relative time frames or the upper time limit when using absolute timeframes.
-_**If you ever want to be able to specify a past timeframe, your cell's queries should use this template variable.**_
 
 ```sql
 SELECT "usage_system" AS "System CPU Usage"
