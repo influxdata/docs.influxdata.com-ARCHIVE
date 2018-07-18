@@ -8,6 +8,18 @@ menu:
     parent: About the project
 ---
 
+## v1.7.2 [2018-07-18]
+
+### Bug fixes
+
+* Use localhost as default server tag in Zookeeper (`zookeeper`) input plugin.
+* Don't set values when pattern doesn't match in Regex (`regex`) processor plugin.
+* Fix output format of Printer (`printer`) processor plugin.
+* Fix metric can have duplicate field.
+* Return error if NewRequest fails in HTTP (`http`) output plugin.
+* Reset read deadline for Syslog (`syslog`) input plugin.
+* Exclude cached memory on Docker (`docker`) input plugin.
+
 ## v1.7.1 [2018-07-03]
 
 ### Bug fixes
