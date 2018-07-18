@@ -34,7 +34,7 @@ TICK stack ([Telegraf](https://github.com/influxdata/telegraf), [InfluxDB](https
 
 This guide walks through getting set up on an Ubuntu 16.04 installation, and is applicable to most flavors of Linux.
 Chronograf and the other components of the TICK stack are supported on a large number of operating systems and hardware architectures.
-Check out the [downloads](https://www.influxdata.com/downloads/) page for links to the binaries of your choice.
+Check out the [InfluxData Downloads page](https://portal.influxdata.com/downloads) \ for links to the binaries of your choice.
 
 For a complete list of the installation requirements, see the [Installation](/chronograf/latest/introduction/installation/) page.
 
@@ -43,12 +43,11 @@ For a complete list of the installation requirements, see the [Installation](/ch
 [InfluxDB](https://docs.influxdata.com/influxdb/latest/) is the time series database that serves as the data storage component of the TICK stack.
 
 #### 1. Download and Install InfluxDB
-```
-wget https://dl.influxdata.com/influxdb/releases/influxdb_1.4.0_amd64.deb
-sudo dpkg -i influxdb_1.4.0_amd64.deb
-```
+
+Download and install the latest InfluxDB version. You can find available downloads at the [InfluxData Downloads page](https://portal.influxdata.com/downloads).
 
 #### 2. Start InfluxDB
+
 There's no need to edit InfluxDB's default [configuration](https://docs.influxdata.com/influxdb/latest/administration/config/) for the purposes of this guide.
 Just start InfluxDB with:
 ```
