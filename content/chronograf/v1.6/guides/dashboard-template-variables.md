@@ -1,6 +1,6 @@
 ---
 title: Using dashboard template variables
-description: Chronograf dashboards support template variables that let you modify queries through simple user interactions. Variable types include databases, measurements, field keys, tag keys, tag values, comma-separated values (CSV), maps, and custom meta queries.
+description: Chronograf dashboards support template variables that let you modify queries through simple user interactions. Variable types include databases, measurements, field keys, tag keys, tag values, comma-separated values (CSV), maps, custom meta queries, and text.
 aliases:
   - /chronograf/v1.6/introduction/templating/
   - /chronograf/v1.6/templating/
@@ -11,10 +11,10 @@ menu:
 ---
 
 Chronograf's dashboard template variables allow you to alter specific components of cells' queries
-without having to navigate away from the dashboard, making it easy to interact with your dashboard cells and explore your data.
+without having to edit the queries, making it easy to interact with your dashboard cells and explore your data.
 
 ## Using template variables
-Template variables are used in cell queries when creating Chronograf dashboards.
+Template variables are used in cell queries and titles when creating Chronograf dashboards.
 Within the query, template variables are referenced by surrounding the variable name with colons (`:`).
 
 ```sql
@@ -88,13 +88,13 @@ Chronograf lets you create custom template variables powered by meta queries or 
 
 To create a template variable:
 
-1. Click on the `Template Variables` button at the top of your dashboard, then `+ Add Variable`.
+1. Click on **Template Variables** at the top of your dashboard, then **+ Add Variable**.
 2. Provide a name for the variable.
 3. Select the [variable type](#template-variable-types).
    The type defines the method for retrieving the array of possible values.
 4. View the list of potential values and select a default.
    If using the CSV or Map types, upload or input the CSV with the desired values in the appropriate format then select a default value.
-5. Click the `Create` button.
+5. Click **Create**.
 
 ![Create a template variable](/img/chronograf/v1.6/template-vars-create.gif)
 
@@ -103,7 +103,7 @@ dropdown for the variable will be included at the top of your dashboard.
 
 
 ## Template Variable Types
-Chronograf supports eight template variable types:
+Chronograf supports the following template variable types:
 
 [Databases](#databases)  
 [Measurements](#measurements)  
@@ -113,6 +113,7 @@ Chronograf supports eight template variable types:
 [CSV](#csv)  
 [Map](#map)  
 [Custom Meta Query](#custom-meta-query)  
+[Text](#text)
 
 ### Databases
 Database template variables allow you to select from multiple target [databases](/influxdb/latest/concepts/glossary/#database).
@@ -295,6 +296,15 @@ SELECT "purchases" FROM "animals"."autogen"."customers" WHERE "customer" = :cust
 #### Custom meta query variable use cases
 Custom meta query template variables should be used any time you are pulling values from InfluxDB, but the pre-canned template variable types aren't able to return the desired list of values.
 
+### Text
+Vary a part of a query with a single string of text.
+There is only one value per text variable, but this value can be easily altered.
+
+#### Text variable use cases
+Text template variables allow you to dynamically alter queries, such as adding or altering `WHERE` clauses, for multiple cells at once.
+You could also use a text template variable to alter a regular expression used in multiple queries.
+They are great when troubleshooting incidents that affect multiple visualized metrics.
+
 ## Reserved variable names
 The following variable names are reserved and cannot be used when creating template variables.
 Chronograf accepts [template variables as URL query parameters](#defining-template-variables-in-the-url)
@@ -315,9 +325,9 @@ conflict with existing URL query parameters.
 ## Advanced template variable usage
 
 ### Filtering template variables with other template variables
-[Custom meta query template variables](#custom-meta-query) allow you to filter the array of potential variable values using other existing template Variables.
+[Custom meta query template variables](#custom-meta-query) allow you to filter the array of potential variable values using other existing template variables.
 
-For example, lets say you want to list all the field keys associated with a measurement, but want to be able to change the measurement:
+For example, let's say you want to list all the field keys associated with a measurement, but want to be able to change the measurement:
 
 1. Create a template variable named `:measurementVar:` _(the name "measurement" is [reserved]( #reserved-variable-names))_ that uses the [Measurements](#measurements) variable type to pull in all measurements from the `telegraf` database.
 
@@ -349,7 +359,7 @@ This makes it easy to share links to dashboards so they load in a specific state
 URL query parameters are appeneded to the end of the URL with a question mark (`?`) indicating beginning of query parameters.
 Multiple query paramemters can be chained together using an ampersand (`&`).
 
-To declare a template variable as a URL query parameter, it must follow the following pattern:
+To declare a template variable or a date range as a URL query parameter, it must follow the following pattern:
 
 #### Pattern for template variable query parameters
 ```bash
@@ -373,13 +383,16 @@ Name of the template variable.
 `variableValue`  
 Value of the template variable.
 
+> Whenever template variables are modified in the dashboard, the corresponding
+> URL query parameters are automatically updated.
+
 #### Example template variable query parameter
 ```
 .../?&tempVars%5BmeasurementVar%5D=cpu
 ```
 
 #### Including multiple template variables in the URL
-To chain multiple template variables as URL query parameters, included the full [pattern](#pattern-for-template-variable-query-parameters) for _**each**_ template variable.
+To chain multiple template variables as URL query parameters, include the full [pattern](#pattern-for-template-variable-query-parameters) for _**each**_ template variable.
 
 ```bash
 # Spaces for clarity only
