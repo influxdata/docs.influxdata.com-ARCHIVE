@@ -145,7 +145,7 @@ errors
     |join(views)
         .as('errors', 'views')
     //Calculate percentage
-    |eval(lambda: "errors.sum" / ("views.sum" + "errors.sum"))
+    |eval(lambda: ("errors.sum" / ("views.sum" + "errors.sum")) * 100)
         // Give the resulting field a name
         .as('value')
     |influxDBOut()
@@ -207,30 +207,33 @@ var errors = stream
     |from()
         .measurement('errors')
         .groupBy(*)
+    |window()
+        .period(1m)
+        .every(1m)
+    |sum('value')
 
 // Get views stream data
 var views = stream
     |from()
         .measurement('views')
         .groupBy(*)
+    |window()
+        .period(1m)
+        .every(1m)
+    |sum('value')
 
 // Join errors and views
 errors
     |join(views)
         .as('errors', 'views')
-    //Calculate percentage
-    |eval(lambda: "errors.value" / ("views.value" + "errors.value"))
+    // Calculate percentage
+    |eval((lambda: "errors.sum" / ("views.sum" + "errors.sum")) * 100)
         // Give the resulting field a name
-        .as('error_percent')
+        .as('value')
     |influxDBOut()
         .database('pages')
         .measurement('error_percent')
-```
-
-Note that the above stream script is not semantically identical to the
-previous batch example in that it matches data points and not sums of batches
-of data.  For reasons of presentational simplicity this difference is not
-addressed.  
+``` 
 
 ### Record Query and backfill with stream
 
