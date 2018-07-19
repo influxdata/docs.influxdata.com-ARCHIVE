@@ -208,14 +208,15 @@ Within each expression the `time` field contains the time of the current data po
 The following functions can be used on the `time` field.
 Each function returns an int64.
 
-| Function              | Description                                           |
-| ----------            | -------------                                         |
-| `minute(t time) int64`  | the minute within the hour: range [0,59]              |
-| `hour(t time) int64`    | the hour within the day: range [0,23]                 |
-| `weekday(t time) int64` | the weekday within the week: range [0,6], 0 is Sunday |
-| `day(t time) int64`     | the day within the month: range [1,31]                |
-| `month(t time) int64`   | the month within the year: range [1,12]               |
-| `year(t time) int64`    | the year                                              |
+| Function                 | Description                                                             |
+| ----------               | -------------                                                           |
+| `unixNano(t time) int64` | the number of nanoseconds elapsed since January 1, 1970 UTC (Unix time) |
+| `minute(t time) int64`   | the minute within the hour: range [0,59]                                |
+| `hour(t time) int64`     | the hour within the day: range [0,23]                                   |
+| `weekday(t time) int64`  | the weekday within the week: range [0,6], 0 is Sunday                   |
+| `day(t time) int64`      | the day within the month: range [1,31]                                  |
+| `month(t time) int64`    | the month within the year: range [1,12]                                 |
+| `year(t time) int64`     | the year                                                                |
 
 Example usage:
 
