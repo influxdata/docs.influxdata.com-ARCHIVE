@@ -33,7 +33,7 @@ InfluxDB shell 1.4.x
 You can now enter InfluxQL queries as well as some CLI-specific commands directly in your terminal.
 You can use `help` at any time to get a list of available commands. Use `Ctrl+C` to cancel if you want to cancel a long-running InfluxQL query.
 
-## Envrionment Variables
+## Environment Variables
 
 The following environment variables can be used to configure settings used by the `influx` client. They can be specified in lower or upper case, however the upper case version takes precedence.
 
