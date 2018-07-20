@@ -306,9 +306,6 @@ alter_retention_policy_stmt  = "ALTER RETENTION POLICY" policy_name on_clause
                                [ retention_policy_option ] .
 ```
 
-<dt> Replication factors do not serve a purpose with single node instances.
-</dt>
-
 #### Examples:
 
 ```sql
