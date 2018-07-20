@@ -12,14 +12,15 @@ menu:
 
 
 Chronograf provides a user interface for [Kapacitor](/kapacitor/latest/), InfluxData's processing framework for creating alerts, running extract, transform, load jobs (ETL), and detecting anomalies in your data.
-Chronograf alert rules correspond to Kapacitor tasks designed specifically to trigger alerts whenever certain conditions are met.
+Chronograf alert rules correspond to Kapacitor tasks that trigger alerts whenever certain conditions are met.
+These taskes are stored as [TICKscripts](/kapacitor/latest/tick/) than can be also edited manually later.
 Common alerting use cases that can be managed using Chronograf include:
 
 * Thresholds with static ceilings, floors, and ranges.
 * Relative thresholds based on unit or percentage changes.
 * Deadman switches.
 
-Complex alerts and other tasks must be defined directly in Kapacitor, but can be used within Chronograf.
+Complex alerts and other tasks can be defined directly in Kapacitor is TICKscripts, but can be used within Chronograf.
 
 Follow this guide to create a Chronograf alert rule that sends an alert message to an existing [Slack](https://slack.com/) channel whenever your idle CPU usage crosses the 80% threshold.
 
