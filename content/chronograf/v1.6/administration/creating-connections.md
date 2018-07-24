@@ -44,7 +44,8 @@ To create an InfluxDB connection in the Chronograf UI:
 ## Managing InfluxDB connections using .src files
 Chronograf stores InfluxDB connection details `.src` files that can also be created manually.
 `.src` files are simple JSON files that contain key-value paired connection details.
-The location of `.src` files is defined by the `--resources-path` command line option, which is, by default, the same as the [`--canned-path`](/chronograf/v1.6/administration/config-options/#canned-path-c).
+The location of `.src` files is defined by the [`--resources-path`](/chronograf/v1.6/administration/config-options/#resources-path)
+command line option, which is, by default, the same as the [`--canned-path`](/chronograf/v1.6/administration/config-options/#canned-path-c).
 An `.src` files contains the details for a single InfluxDB connection.
 
 Create a new file named `example.src` (the filename is arbitrary) and place it at Chronograf's `resource-path`.
