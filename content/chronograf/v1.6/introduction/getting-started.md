@@ -203,7 +203,13 @@ Next, the `INPUT PLUGINS` section should have the following settings for the sys
 [[inputs.system]]
   # no configuration
 ```
+
+> ### System stats on a Windows host
+> **If on a Windows host**, the [`win_perf_counters` Telegraf input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/win_perf_counters)
+> must be enabled and configured to properly report host statistics to InfluxDB.
+
 If this looks like your configuration then we can run a quick test to ensure that the system stats are being written to InfluxDB:
+
 ```
 curl "http://localhost:8086/query?q=select+*+from+telegraf..cpu"
 ```
