@@ -268,9 +268,9 @@ should configure this plugin to talk to its locally running kubelet.
 
 The [LeoFS (`leofs`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/leofs) gathers metrics of LeoGateway, LeoManager, and LeoStorage using SNMP. See [System Monitoring](https://leo-project.net/leofs/docs/admin/system_admin/monitoring/) in the [LeoFS Documentation](https://leo-project.net/leofs/docs/) for more information.
 
-### [Linux Sysctl FS (`linux_sysctl_fs`)](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/linux_sysctl_fs/README.md)
+<!-- ### [Linux Sysctl FS (`linux_sysctl_fs`)](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/linux_sysctl_fs/README.md)
 
-The [Linux Sysctl FS input plugin](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/linux_sysctl_fs/README.md) provides Linux `sysctl fs` metrics.
+The [Linux Sysctl FS input plugin](https://github.com/influxdata/telegraf/blob/release-1.7/plugins/inputs/linux_sysctl_fs/README.md) provides Linux `sysctl fs` metrics. -->
 
 ### [Lustre2 (`lustre2`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/lustre2)
 
