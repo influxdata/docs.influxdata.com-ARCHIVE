@@ -217,7 +217,7 @@ For example given two measurements:
 You want to calculate the percentage of the total building power consumed by each floor. 
 Since you only have one point per building you need it to join multiple times with 
 the points from each floor. By defining the `on` dimensions as `building` we are saying 
-that we want points that only have the building tag to be joined with more specifc points that 
+that we want points that only have the building tag to be joined with more specific points that
 more tags, in this case the `floor` tag. In other words while we have points with tags building and floor 
 we only want to join on the building tag. 
 
