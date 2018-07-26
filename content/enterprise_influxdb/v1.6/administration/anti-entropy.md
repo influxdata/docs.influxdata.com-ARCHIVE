@@ -14,7 +14,7 @@ Shard entropy refers to inconsistency among shards in a shard group.
 This can be due to the "eventually consistent" nature of data stored in InfluxDB
 Enterprise clusters or due to missing or unreachable shards.
 The anti-entropy (AE) service ensures that each data node has all the shards it
-needs according to the metastore and that all shards in a shard group are consistent.
+owns according to the metastore and that all shards in a shard group are consistent.
 Missing shards are automatically repaired without operator intervention while
 out-of-sync shards can be manually queued for repair.
 This guide covers how AE works and some of the basic situations where it takes effect.
@@ -22,10 +22,9 @@ This guide covers how AE works and some of the basic situations where it takes e
 ## Concepts
 
 The anti-entropy service is part of the `influxd` process running on each data node
-that ensures the node has all the shards the metastore says it should have and
+that ensures the node has all the shards the metastore says it owns and
 that those shards are in sync with others in the same shard group.
-If any shards are missing, the AE service will copy existing shards from other
-shard owners.
+If any shards are missing, the AE service will copy existing shards from other shard owners.
 If data inconsistencies are detected among shards in a shard group, you can
 [envoke the AE process](#command-line-tools-for-managing-entropy) and queue the
 out-of-sync shards for repair.
@@ -89,6 +88,31 @@ It is the visual manifestation of getting [different results from the same query
 <img src="/img/kapacitor/flapping-dashboard.gif" alt="Flapping dashboard" style="width:100%; max-width:800px">
 
 ## Technical details
+
+### Detecting entropy
+The AE service runs on each data node and periodically checks its shards' statuses relative to the next data node in the ownership list.
+It does this by creating a "digest" or summary of the data in the shard.
+The status check determines when the last time the shard was modified.
+If modified since the previous status check, a request is sent for a new digest of the next shard in the shard group.
+Once the digest is received from the other node, the AE process performs a `diff` between the other node's digest and the local digest.
+If there's a difference, the shard is flagged as having entropy.
+
+### Repairing entropy
+If during a status check, a node determines the next node is completely missing a shard, it immediately adds the other shard to the repair queue.
+A background routine monitors the queue and begins the repair process as new shards are added to it.
+Repair request are pulled from the queue by the background process and repaired using a `copy shard` operation.
+
+> Currently, shards that are present on both nodes but contain different data are not automatically queued for repair.
+> A user must make the request via `influxd-ctl entropy repair <shard ID>`.
+> More info [below](#Detecting-and-repairing-entropy)
+
+The node requests the digest from the next node.
+The local digest and the other node's digest are `diff`'d again, which creates a new digest containing only the difference between the two nodes.
+The diff digest is used to create a patch containing only the data the next node is missing.
+The node sends the patch to the remote node and instructs it to apply it.
+
+Once the remote node finishes applying the patch, it queues a repair for that shard locally.
+The "node-to-node" shard repair continues until it's run on every data node owning shards in the shard group.
 
 ### Repair order
 Repairs between shard owners happen in a deterministic order.
@@ -277,6 +301,16 @@ If the shard is "old" and writes to it are part of a backfill process, you simpl
 have to wait the until the backfill process is finished. If the shard is the active
 shard, you can `truncate-shards` to stop writes to active shards. This process is
 outlined [above](#fixing-entropy-in-active-shards).
+
+### AE log messages
+Below are common messages output by AE along with what they mean.
+
+#### `Checking status`
+Indicates that the AE process has begun the [status check process](#detecting-entropy).
+
+#### `Skipped shards`
+Indicates that the AE process has skipped a status check on shards because they are currently [hot](#hot-shards).
+
 
 ## Changes to the AE Service in v1.6
 
