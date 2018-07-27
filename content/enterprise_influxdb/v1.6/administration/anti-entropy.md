@@ -90,15 +90,22 @@ It is the visual manifestation of getting [different results from the same query
 ## Technical details
 
 ### Detecting entropy
-The AE service runs on each data node and periodically checks its shards' statuses relative to the next data node in the ownership list.
-It does this by creating a "digest" or summary of the data in the shard.
-The status check determines when the last time the shard was modified.
-If modified since the previous status check, a request is sent for a new digest of the next shard in the shard group.
-Once the digest is received from the other node, the AE process performs a `diff` between the other node's digest and the local digest.
-If there's a difference, the shard is flagged as having entropy.
+The AE service runs on each data node and periodically checks its shards' statuses
+relative to the next data node in the ownership list.
+It does this by creating a "digest" or summary of data in the shards on the node.
+
+As an example, assume there are two data nodes in your cluster: `node1` and `node2`.
+Both `node1` and `node2` own `shard1` so `shard1` is replicated across each.
+
+When a status check runs, `node1` will ask `node2` when `shard1` was last modified.
+If the reported modification time is different than it was in the previous check,
+`node1` will ask `node2` for a new digest of `shard1`.
+`node1` then checks for differences (performs a "diff") between `node2`'s `shard1` digest and its own local digest for `shard1`.
+If there's a difference, `shard1` is flagged as having entropy.
 
 ### Repairing entropy
-If during a status check, a node determines the next node is completely missing a shard, it immediately adds the other shard to the repair queue.
+If during a status check a node determines the next node is completely missing a shard,
+it immediately adds the missing shard to the repair queue.
 A background routine monitors the queue and begins the repair process as new shards are added to it.
 Repair request are pulled from the queue by the background process and repaired using a `copy shard` operation.
 
@@ -106,13 +113,14 @@ Repair request are pulled from the queue by the background process and repaired 
 > A user must make the request via `influxd-ctl entropy repair <shard ID>`.
 > More info [below](#Detecting-and-repairing-entropy)
 
-The node requests the digest from the next node.
-The local digest and the other node's digest are `diff`'d again, which creates a new digest containing only the difference between the two nodes.
-The diff digest is used to create a patch containing only the data the next node is missing.
-The node sends the patch to the remote node and instructs it to apply it.
+Using `node1` and `node2` from the example [above](#detecting-entropy) – `node1` asks `node2` for a digest of `shard1`.
+`node1` diffs its own local `shard1` digest and `node2`'s `shard1` digest,
+then creates a new digest containing only the differences (the diff digest).
+The diff digest is used to create a patch containing only the data `node2` is missing.
+`node1` sends the patch to `node2` and instructs it to apply it.
+Once `node2` finishes applying the patch, it queues a repair for `shard1` locally.
 
-Once the remote node finishes applying the patch, it queues a repair for that shard locally.
-The "node-to-node" shard repair continues until it's run on every data node owning shards in the shard group.
+The "node-to-node" shard repair continues until it runs on every data node that owns the shard in need of repair.
 
 ### Repair order
 Repairs between shard owners happen in a deterministic order.
