@@ -52,7 +52,7 @@ Defines the proxy server to use for HTTPS. Takes precedence over HTTP_PROXY for 
 **Value format:**`[protocol://]<host>[:port]`
 
 ```
-HTTP_PROXY=https://localhost:1443
+HTTPS_PROXY=https://localhost:1443
 ```
 
 #### `NO_PROXY`
@@ -61,7 +61,7 @@ List of host names that should **not** go through any proxy. If set to an asteri
 **Value format:** comma-separated list of hosts
 
 ```
-HTTP_PROXY=123.45.67.89,123.45.67.90
+NO_PROXY=123.45.67.89,123.45.67.90
 ```
 
 
