@@ -19,6 +19,7 @@ menu:
   * [Configuring Auth0 authentication](#configuring-auth0-authentication)
   * [Configuring Heroku authentication](#configuring-heroku-authentication)
   * [Configuring Okta authentication](#configuring-okta-authentication)
+  * [Configuring GitLab authentication](#configuring-gitlab-authentication)
   * [Configuring Generic authentication](#configuring-generic-authentication)
 * [Configuring authentication duration](#configuring-authentication-duration)
 * [Configuring TLS (Transport Layer Security) and HTTPS](#configuring-tls-transport-layer-security-and-https)
