@@ -1,7 +1,7 @@
 ---
 title: Host renaming in InfluxDB Enterprise
 aliases:
-    - /enterprise/v1.5/administration/renaming/
+    - /enterprise/v1.6/administration/renaming/
 menu:
   enterprise_influxdb_1_6:
     name: Host renaming

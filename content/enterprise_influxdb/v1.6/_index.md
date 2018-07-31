@@ -2,7 +2,7 @@
 title: InfluxDB Enterprise 1.6 documentation
 description: Technical documentation for InfluxDB Enterprise, which adds clustering, high availability, fine-grained authorization, and more to InfluxDB OSS. Documentation includes release notes, what's new, guides, concepts, features, and administration.
 aliases:
-    - /enterprise/v1.5/
+    - /enterprise/v1.6/
 
 menu:
   enterprise_influxdb:

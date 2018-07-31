@@ -1,7 +1,7 @@
 ---
 title: Backing up and restoring in InfluxDB Enterprise
 aliases:
-    - /enterprise/v1.5/guides/backup-and-restore/
+    - /enterprise/v1.6/guides/backup-and-restore/
 menu:
   enterprise_influxdb_1_6:
     name: Backing up and restoring

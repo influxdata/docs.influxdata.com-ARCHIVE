@@ -1,7 +1,7 @@
 ---
 title: Production installation
 aliases:
-    - /enterprise/v1.5/production_installation/
+    - /enterprise/v1.6/production_installation/
 menu:
   enterprise_influxdb_1_6:
     weight: 40

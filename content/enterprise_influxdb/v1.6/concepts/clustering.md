@@ -1,7 +1,7 @@
 ---
 title: Clustering in InfluxDB Enterprise
 aliases:
-    - /enterprise/v1.5/concepts/clustering/
+    - /enterprise/v1.6/concepts/clustering/
 menu:
   enterprise_influxdb_1_6:
     name: Clustering

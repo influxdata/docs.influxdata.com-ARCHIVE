@@ -2,7 +2,7 @@
 title: Introducing InfluxDB Enterprise
 
 aliases:
-    - /enterprise/v1.5/introduction/
+    - /enterprise/v1.6/introduction/
 
 menu:
   enterprise_influxdb_1_6:

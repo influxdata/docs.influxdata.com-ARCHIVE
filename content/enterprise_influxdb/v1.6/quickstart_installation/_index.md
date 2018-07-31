@@ -1,7 +1,7 @@
 ---
 title: QuickStart installation
 aliases:
-    - /enterprise/v1.5/quickstart_installation/
+    - /enterprise/v1.6/quickstart_installation/
 menu:
   enterprise_influxdb_1_6:
     weight: 30

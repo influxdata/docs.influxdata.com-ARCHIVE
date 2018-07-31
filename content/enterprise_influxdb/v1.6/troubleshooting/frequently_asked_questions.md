@@ -2,7 +2,7 @@
 title: Frequently asked questions for InfluxDB Enterprise
 aliases:
     - /enterprise_influxdb/v1.6/troubleshooting/frequently-asked-questions/
-    - /enterprise/v1.5/troubleshooting/frequently_asked_questions/
+    - /enterprise/v1.6/troubleshooting/frequently_asked_questions/
     - /enterprise_influxdb/v1.6/introduction/meta_node_installation/
 menu:
   enterprise_influxdb_1_6:

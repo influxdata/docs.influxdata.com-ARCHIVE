@@ -1,7 +1,7 @@
 ---
 title: InfluxDB Enterprise cluster commands
 aliases:
-    - /enterprise/v1.5/features/cluster-commands/
+    - /enterprise/v1.6/features/cluster-commands/
 menu:
   enterprise_influxdb_1_6:
     name: Cluster commands

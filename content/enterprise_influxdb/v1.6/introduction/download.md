@@ -2,7 +2,7 @@
 title: InfluxDB Enterprise downloads
 
 aliases:
-    - /enterprise/v1.5/introduction/download/
+    - /enterprise/v1.6/introduction/download/
 
 menu:
   enterprise_influxdb_1_6:
