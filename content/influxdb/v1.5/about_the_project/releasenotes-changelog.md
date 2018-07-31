@@ -7,31 +7,42 @@ menu:
     parent: About the project
 ---
 
+## v1.5.4 [2018-06-21]
+
+### Features
+
+* Add `influx_inspect deletetsm` command for bulk deletes of measurements in raw TSM files.
+
+### Bug fixes
+
+* Fix panic in readTombstoneV4.
+* buildtsi: Do not escape measurement names.
+
 ## v1.5.3 [2018-05-25]
 
 ### Features
 
-* Add `debug-pprof-enabled` `[http]` configuration setting immediately on startup. Useful for debugging startup performance issues.
+* Add `[http] debug-pprof-enabled` configuration setting immediately on startup. Useful for debugging startup performance issues.
 
 ### Bug fixes
 
-* Fix the validation for multiple nested distinct calls.
-* Return the correct auxiliary values for top/bottom.
+* Fix the validation for multiple nested `DISTINCT` calls.
+* Return the correct auxiliary values for `TOP` and `BOTTOM`.
 
 ## v1.5.2 [2018-04-12]
 
 ### Features
 
 * Check for root user when running `buildtsi`.
-* [1.5] Adjustable TSI Compaction Threshold.
+* Adjustable TSI Compaction Threshold.
 
 ### Bug fixes
 
 * backport: check for failure case where backup directory has no manifest files.
 * Fix regression to allow `now()` to be used as the group by offset again.
-* [1.5] Revert `Use MADV_WILLNEED when loading TSM files`.
+* Revert `Use MADV_WILLNEED when loading TSM files`.
 * Ignore index size in `Engine.DiskSize()`.
-* [1.5] Fix `buildtsi` partition key.
+* Fix `buildtsi` partition key.
 * Ensure that conditions are encoded correctly even if the AST is not properly formed.
 
 ## v1.5.1 [2018-03-20]
@@ -49,6 +60,10 @@ menu:
 ### Breaking changes
 
 The default logging format has been changed. See [Logging and tracing in InfluxDB](/influxdb/v1.5/administration/logs) for details.
+
+### Behavior changes
+
+`[data] max-concurrent-compactions` configuration setting default limits the maximum number of concurrent compactions to 4 CPU cores for machines with 8 or more cores.
 
 ### Features
 
@@ -83,11 +98,9 @@ The default logging format has been changed. See [Logging and tracing in InfluxD
 
 ## v1.4.3 [unreleased]
 
-### Configuration Changes
+### Behavior changes
 
-#### `[data]` Section
-
-`cache-snapshot-memory-size`: default value changed from `25m` to `256m`.
+`[data] cache-snapshot-memory-size`: default value changed from `25m` to `256m`.
 
 ### Bug fixes
 
@@ -105,11 +118,12 @@ Refer to the 1.4.0 breaking changes section if `influxd` fails to start with an 
 
 ### Bug fixes
 
-- Fix descending cursors and range queries via IFQL RPC API.
+- Fix descending cursors and range queries using IFQL RPC API.
 
 ## v1.4.0 [2017-11-13]
 
 ### TSI Index
+
 This feature remains experimental in this release.
 However, a number of improvements have been made and new meta query changes will allow for this feature to be explored at more depth than previously possible.  It is not recommended for production use at this time.
 We appreciate all of the feedback we receive on this feature.  Please keep it coming!

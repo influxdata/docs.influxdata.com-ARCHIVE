@@ -24,8 +24,8 @@ Once you've entered the shell and successfully connected to an InfluxDB node, yo
 <br>
 ```bash
 $ influx
-Connected to http://localhost:8086 version 1.4.x
-InfluxDB shell 1.4.x
+Connected to http://localhost:8086 version 1.6.x
+InfluxDB shell version: 1.6.x
 ```
 
 > **Note:** The versions of InfluxDB and the CLI should be identical. If not, parsing issues can occur with queries.
@@ -52,7 +52,7 @@ Defines the proxy server to use for HTTPS. Takes precedence over HTTP_PROXY for 
 **Value format:**`[protocol://]<host>[:port]`
 
 ```
-HTTP_PROXY=https://localhost:1443
+HTTPS_PROXY=https://localhost:1443
 ```
 
 #### `NO_PROXY`
@@ -61,7 +61,7 @@ List of host names that should **not** go through any proxy. If set to an asteri
 **Value format:** comma-separated list of hosts
 
 ```
-HTTP_PROXY=123.45.67.89,123.45.67.90
+NO_PROXY=123.45.67.89,123.45.67.90
 ```
 
 

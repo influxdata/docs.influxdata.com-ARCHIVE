@@ -1,5 +1,5 @@
 ---
-title: InfluxDB 1.5 release notes
+title: InfluxDB 1.6 release notes
 menu:
   influxdb_1_6:
     name: Release notes
@@ -7,21 +7,89 @@ menu:
     parent: About the project
 ---
 
-## v1.5.2 [2018-04-12]
+# v1.6.0 [2018-07-05]
 -------------------
+
+### Breaking changes
+
+*	If math is used with the same selector multiple times, it will now act as a selector rather than an aggregate. See [#9563](https://github.com/influxdata/influxdb/pull/9563) for details.
+
+### Features
+
+*	Support proxy environment variables in the `influx` client.
+*	Implement basic trigonometry functions.
+*	Add ability to delete many series with predicate.
+*	Implement `floor`, `ceil`, and `round` functions.
+*   Add more math functions to InfluxQL.
+*	Allow customizing the unix socket group and permissions created by the server.
+*	Add `suppress-write-log` option to disable the write log when the log is enabled.
+*	Add additional technical analysis algorithms.
+*	Validate points on input.
+*	Log information about index version during startup.
+*	Add key sanitization to `deletetsm` command in `influx_inspect` utility.
+*	Optimize the `spread` function to process points iteratively instead of in batch.
+*	Allow math functions to be used in the condition.
+*	Add HTTP write throttle settings: `max-concurrent-write-limit`, `max-enqueued-write-limit`, and `enqueued-write-timeout`.
+*	Implement `SHOW STATS FOR indexes`.
+*	Add `dumptsmwal` command to `influx_inspect` utility.
+*	Improve the number of regex patterns that are optimized to static OR conditions.
+
+### Bug fixes
+
+* Support setting the log level through the environment variable.
+* Fix panic when checking fieldsets.
+* Ensure correct number of tags parsed when commas used.
+* Fix data race in WAL.
+* Allow `SHOW SERIES` kill.
+* Revert "Use MADV_WILLNEED when loading TSM files".
+* Fix regression to allow now() to be used as the group by offset again.
+* Delete deleted shards in retention service.
+* Ignore index size in `Engine.DiskSize()`.
+* Enable casting values from a subquery.
+* Avoid a panic when using show diagnostics with text/csv.
+* Properly track the response bytes written for queries in all format types.
+* Remove error for series file when no shards exist.
+* Fix the validation for multiple nested distinct calls.
+* TSM: `TSMReader.Close` blocks until reads complete.
+* Return the correct auxiliary values for `top` and `bottom`.
+* Close TSMReaders from `FileStore.Close` after releasing FileStore mutex.
+
+## v1.5.4 [2018-06-21]
+
+### Features
+
+* Add `influx_inspect deletetsm` command for bulk deletes of measurements in raw TSM files.
+
+### Bug fixes
+
+* Fix panic in readTombstoneV4.
+* buildtsi: Do not escape measurement names.
+
+## v1.5.3 [2018-05-25]
+
+### Features
+
+* Add `[http] debug-pprof-enabled` configuration setting immediately on startup. Useful for debugging startup performance issues.
+
+### Bug fixes
+
+* Fix the validation for multiple nested `DISTINCT` calls.
+* Return the correct auxiliary values for `TOP` and `BOTTOM`.
+
+## v1.5.2 [2018-04-12]
 
 ### Features
 
 * Check for root user when running `buildtsi`.
-* [1.5] Adjustable TSI Compaction Threshold.
+* Adjustable TSI Compaction Threshold.
 
 ### Bug fixes
 
 * backport: check for failure case where backup directory has no manifest files.
 * Fix regression to allow `now()` to be used as the group by offset again.
-* [1.5] Revert `Use MADV_WILLNEED when loading TSM files`.
+* Revert `Use MADV_WILLNEED when loading TSM files`.
 * Ignore index size in `Engine.DiskSize()`.
-* [1.5] Fix `buildtsi` partition key.
+* Fix `buildtsi` partition key.
 * Ensure that conditions are encoded correctly even if the AST is not properly formed.
 
 ## v1.5.1 [2018-03-20]
