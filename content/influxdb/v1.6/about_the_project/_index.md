@@ -1,7 +1,7 @@
 ---
 title: About the project
 alias:
-  -/docs/v1.5/about/
+  -/docs/v1.6/about/
 menu:
   influxdb_1_6:
     weight: 10
@@ -9,9 +9,7 @@ menu:
 
 ## [Release notes](/influxdb/v1.6/about_the_project/releasenotes-changelog/)
 
-## [What's new in InfluxDB 1.5](/influxdb/v1.6/about_the_project/whats_new/)
-
-## [Contributing](https://github.com/influxdata/influxdb/blob/master/CONTRIBUTING.md)
+## [Contributing to InfluxDB](https://github.com/influxdata/influxdb/blob/master/CONTRIBUTING.md)
 
 ## [CLA](https://influxdata.com/community/cla/)
 

@@ -23,13 +23,17 @@ InfluxDB can display statistical and diagnostic information about each node.
 This information can be very useful for troubleshooting and performance monitoring.
 
 ## SHOW STATS
+
 To see node statistics, execute the command `SHOW STATS`.
+For details on this command, see [`SHOW STATS`](/influxdb/v1.6/query_language/spec#show-stats) in the InfluxQL specification.
 
 The statistics returned by `SHOW STATS` are stored in memory only, and are reset to zero when the node is restarted.
 
 ## SHOW DIAGNOSTICS
-To see node diagnostics, execute the command `SHOW DIAGNOSTICS`.
+
+To see node diagnostic information, execute the command `SHOW DIAGNOSTICS`.
 This returns information such as build information, uptime, hostname, server configuration, memory usage, and Go runtime diagnostics.
+For details on this command, see [`SHOW DIAGNOSTICS`](/influxdb/v1.6/query_language/spec#show-diagnostics) in the InfluxQL specification.
 
 ## Internal monitoring
 InfluxDB also writes statistical and diagnostic information to database named `_internal`, which records metrics on the internal runtime and service performance.

@@ -312,7 +312,7 @@ query.groupByMeasurement()
 
 How far back in time to query from the current time
 
-For example an Offest of 2 hours and an Every of 5m,
+For example an Offset of 2 hours and an Every of 5m,
 Kapacitor will query InfluxDB every 5 minutes for the window of data 2 hours ago.
 
 This applies to Cron schedules as well. If the cron specifies to run every Sunday at

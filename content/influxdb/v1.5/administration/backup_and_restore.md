@@ -178,7 +178,7 @@ influxd restore -portable -db telegraf path-to-backup
 ```
 > use telegraf_bak
 > SELECT * INTO telegraf..:MEASUREMENT FROM /.*/ GROUP BY *
-> drop telegraf_bak
+> drop database telegraf_bak
 ```
 
 **To restore to a retention policy that already exists:**

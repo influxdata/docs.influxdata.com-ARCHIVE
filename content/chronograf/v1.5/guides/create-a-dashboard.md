@@ -51,13 +51,13 @@ Those defaults are configurable using the query builder or by manually editing t
 
 In addition, the time range (`:dashboardTime:`) is [configurable on the dashboard](#step-6-configure-your-dashboard).
 
-![Build your query](/img/chronograf/latest/g-dashboard-cell-query-builder.png)
+![Build your query](/img/chronograf/v1.5/g-dashboard-builder.png)
 
 ### Step 4: Choose your visualization type
 
 Chronograf supports many different [visualization types](/chronograf/latest/guides/visualization-types/). To choose a visualization type, click **Visualization** and select **Step-Plot Graph**.
 
-![Visualization type](/img/chronograf/latest/g-dashboard-visualization.png)
+![Visualization type](/img/chronograf/v1.5/g-dashboard-visualization.png)
 
 ### Step 5: Save your cell
 Click **Save** (the green checkmark icon) to save your cell.

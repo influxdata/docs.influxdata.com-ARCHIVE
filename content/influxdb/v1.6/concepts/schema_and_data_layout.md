@@ -141,7 +141,7 @@ InfluxDB stores data in shard groups.
 Shard groups are organized by [retention policy](/influxdb/v1.6/concepts/glossary/#retention-policy-rp) (RP) and store data with timestamps that fall within a specific time interval.
 The length of that time interval is called the [shard group duration](/influxdb/v1.6/concepts/glossary/#shard-duration).
 
-By default, the shard group duration is determined by the RP's [duration](/influxdb/v1.6/concepts/glossary/#duration):
+If no shard group duration is provided, the shard group duration is determined by the RP's [duration](/influxdb/v1.6/concepts/glossary/#duration) at the time the RP is created. The default values are: 
 
 | RP Duration  | Shard Group Duration  |
 |---|---|
@@ -153,23 +153,53 @@ The shard group duration is also configurable per RP.
 See [Retention Policy Management](/influxdb/v1.6/query_language/database_management/#retention-policy-management) for how to configure the
 shard group duration.
 
+## Shard group duration tradeoffs
+
+Determining the optimal shard group duration requires finding the balance between:
+
+- better overall performance with longer shards
+- flexibility provided by shorter shards
+
+### Long shard group duration
+
+Longer shard group durations allow InfluxDB to store more data in the same logical location.
+This reduces data duplication, improves compression efficiency, and allows faster queries in some cases.
+
+### Short shard group duration
+
+Shorter shard group durations allow the system to more efficiently drop data and record incremental backups.
+When InfluxDB enforces an RP it drops entire shard groups, not individual data points, even if the points are older than the RP duration.
+A shard group will only be removed once a shard group's *end time* is older than the RP duration.
+
+For example, if your RP has a duration of one day, InfluxDB will drop an hour's worth of data every hour and will always have 25 shard groups. One for each hour in the day and an extra shard group that is partially expiring, but will not be removed until the whole shard group is older than 24 hours.
+
 ## Shard group duration recommendations
 
-In general, shorter shard group durations allow the system to efficiently drop data.
-When InfluxDB enforces an RP it drops entire shard groups, not individual data points.
-For example, if your RP has a duration of one day, it makes sense to have a shard group duration of one hour; InfluxDB will drop an hour worth of data every hour.
+The default shard group durations works well for most cases.
+However, high-throughput or long-running instances will benefit from using longer shard group durations.
+Here are some recommendations for longer shard group durations:
 
-If your RP's duration is greater than six months, there's no need to have a short shard group duration.
-In fact, increasing the shard group duration beyond the default seven day value can improve compression, improve write speed, and decrease the fixed iterator overhead per shard group.
-Shard group durations of 50 years and over, for example, are acceptable configurations.
+| RP Duration  | Shard Group Duration  |
+|---|---|
+| <= 1 day  | 6 hours  |
+| > 1 day and <= 7 days  | 1 day  |
+| > 7 days and <= 3 months  | 7 days  |
+| > 3 months  | 30 days  |
+| infinite  | 52 weeks or longer  |
 
-> **Note:** Note that `INF` (infinite) is not a valid duration [when configuring](/influxdb/v1.6/query_language/database_management/#retention-policy-management)
-the shard group duration.
-As a workaround, specify a `1000w` duration to achieve an extremely long shard group
-duration.
+> **Note:** Note that `INF` (infinite) is not a [valid shard group duration](/influxdb/v1.6/query_language/database_management/#retention-policy-management).
+In extreme cases where data covers decades and will never be deleted, a long shard group duration like `1040w` (20 years) is perfectly valid.
 
-We recommend configuring the shard group duration such that:
+Here are some other factors to take into considerations when determining shard group duration:
 
-* it is two times your longest typical query's time range
-* each shard group has at least 100,000 [points](/influxdb/v1.6/concepts/glossary/#point) per shard group
-* each shard group has at least 1,000 points per [series](/influxdb/v1.6/concepts/glossary/#series)
+* Shard groups should be twice as long as the longest time range of the most frequent queries
+* Shard groups should each contain more than 100,000 [points](/influxdb/v1.6/concepts/glossary/#point) per shard group
+* Shard groups should each contain more than 1,000 points per [series](/influxdb/v1.6/concepts/glossary/#series)
+
+### Shard group duration for backfilling
+
+Bulk insertion of historical data covering a large time range in the past will trigger the creation of a large number of shards at once.
+The concurrent access and overhead of writing to hundreds or thousands of shards can quickly lead to slow performance and memory exhaustion.
+
+When writing historical data, we highly recommend temporarily setting a longer shard group duration so fewer shards are created.
+Typically, a shard group duration of 52 weeks works well for backfilling.

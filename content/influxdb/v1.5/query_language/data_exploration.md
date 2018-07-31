@@ -1031,7 +1031,7 @@ The table below shows the preset time boundary, the relevant `GROUP BY time()` i
 points included, and the returned timestamp for each `GROUP BY time()`
 interval in the results.
 
-| Time Interval Number | Preset Time Boundary |`GROUP BY time()` Interval | Points Included | Returned Timestamp |
+| Time Interval Number | GROUP BY Preset Time Boundary |GROUP BY Time Condition | Points Included | Returned Timestamp |
 | :------------- | :------------- | :------------- | :------------- | :------------- |
 | 1  | `time >= 2015-08-18T00:00:00Z AND time < 2015-08-18T00:12:00Z` | `time >= 2015-08-18T00:06:00Z AND time < 2015-08-18T00:12:00Z` | `8.005` | `2015-08-18T00:00:00Z` |
 | 2  | `time >= 2015-08-18T00:12:00Z AND time < 2015-08-18T00:24:00Z` | `time >= 2015-08-18T00:12:00Z AND time < 2015-08-18T00:18:00Z`  | `7.887` | `2015-08-18T00:12:00Z` |
@@ -1156,7 +1156,7 @@ time                   mean
 The time boundaries and returned timestamps for the query **without** the
 `offset_interval` adhere to InfluxDB's preset time boundaries:
 
-| Time Interval Number | Preset Time Boundary |`GROUP BY time()` Interval | Points Included | Returned Timestamp |
+| Time Interval Number | GROUP BY Preset Time Boundary | GROUP BY Time Condition | Points Included | Returned Timestamp |
 | :------------- | :------------- | :------------- | :------------- | :------------- |
 | 1  | `time >= 2015-08-18T00:00:00Z AND time < 2015-08-18T00:18:00Z` | `time >= 2015-08-18T00:06:00Z AND time < 2015-08-18T00:18:00Z` | `8.005`,`7.887` | `2015-08-18T00:00:00Z` |
 | 2  | `time >= 2015-08-18T00:18:00Z AND time < 2015-08-18T00:36:00Z` | <--- same | `7.762`,`7.635`,`7.5` | `2015-08-18T00:18:00Z` |

@@ -272,6 +272,7 @@ statement           = alter_retention_policy_stmt |
                       select_stmt |
                       show_continuous_queries_stmt |
                       show_databases_stmt |
+                      show_diagnostics_stmt |
                       show_field_key_cardinality_stmt |
                       show_field_keys_stmt |
                       show_grants_stmt |
@@ -285,7 +286,8 @@ statement           = alter_retention_policy_stmt |
                       show_series_stmt |
                       show_shard_groups_stmt |
                       show_shards_stmt |
-                      show_subscriptions_stmt|
+                      show_stats_stmt |
+                      show_subscriptions_stmt |
                       show_tag_key_cardinality_stmt |
                       show_tag_key_exact_cardinality_stmt |
                       show_tag_keys_stmt |
@@ -306,9 +308,6 @@ alter_retention_policy_stmt  = "ALTER RETENTION POLICY" policy_name on_clause
                                [ retention_policy_option ] .
 ```
 
-<dt> Replication factors do not serve a purpose with single node instances.
-</dt>
-
 #### Examples:
 
 ```sql
@@ -316,6 +315,7 @@ alter_retention_policy_stmt  = "ALTER RETENTION POLICY" policy_name on_clause
 ALTER RETENTION POLICY "1h.cpu" ON "mydb" DEFAULT
 
 -- Change duration and replication factor.
+-- REPLICATION (replication factor) not valid for OSS instances.
 ALTER RETENTION POLICY "policy1" ON "somedb" DURATION 1h REPLICATION 4
 ```
 
@@ -425,7 +425,7 @@ CREATE RETENTION POLICY "10m.events" ON "somedb" DURATION 60m REPLICATION 2 SHAR
 
 ### CREATE SUBSCRIPTION
 
-Subscriptions tell InfluxDB to send all the data it receives to [Kapacitor](https://docs.influxdata.com/kapacitor/v1.5/introduction/).
+Subscriptions tell InfluxDB to send all the data it receives to [Kapacitor](/kapacitor/latest/introduction/).
 
 ```
 create_subscription_stmt = "CREATE SUBSCRIPTION" subscription_name "ON" db_name "." retention_policy "DESTINATIONS" ("ANY"|"ALL") host { "," host} .
@@ -805,6 +805,15 @@ show_databases_stmt = "SHOW DATABASES" .
 SHOW DATABASES
 ```
 
+### SHOW DIAGNOSTICS
+
+Displays node information, such as build information, uptime, hostname, server configuration, memory usage, and Go runtime diagnostics.
+
+```sql
+show_diagnostics_stmt = "SHOW DIAGNOSTICS"
+```
+
+
 ### SHOW FIELD KEY CARDINALITY
 
 Estimates or counts exactly the cardinality of the field key set for the current database unless a database is specified using the `ON <database>` option.
@@ -992,6 +1001,47 @@ show_shards_stmt = "SHOW SHARDS" .
 ```sql
 SHOW SHARDS
 ```
+
+### SHOW STATS
+
+Returns detailed statistics on available components an InfluxDB node and available (enabled) components.
+
+```
+show_stats_stmt = "SHOW STATS [ FOR '<component>' | 'indexes' ]"
+```
+
+#### `SHOW STATS`
+
+* The `SHOW STATS` command does not list index memory usage -- use the [`SHOW STATS FOR 'indexes'`](#show-stats-for-indexes) command.
+* Statistics returned by `SHOW STATS` are stored in memory and reset to zero when the node is restarted, but `SHOW STATS` is triggered every 10 seconds to populate the `_internal` database.
+
+#### `SHOW STATS FOR <component>`
+
+* For the specified component (\<component\>), the command returns available statistics.
+* For the `runtime` component, the command returns an overview of memory usage by the InfluxDB system, using the [Go runtime](https://golang.org/pkg/runtime/) package.
+
+#### `SHOW STATS FOR 'indexes'`
+
+* Returns an estimate of memory use of all indexes. Index memory use is not reported with `SHOW STATS` because it is a potentially expensive operation.
+
+
+#### Example
+
+```
+> show stats
+name: runtime
+-------------
+Alloc   Frees   HeapAlloc       HeapIdle        HeapInUse       HeapObjects     HeapReleased    HeapSys         Lookups Mallocs NumGC   NumGoroutine    PauseTotalNs    Sys             TotalAlloc
+4136056 6684537 4136056         34586624        5816320         49412           0               40402944        110     6733949 83      44              36083006        46692600        439945704
+
+
+name: graphite
+tags: proto=tcp
+batches_tx      bytes_rx        connections_active      connections_handled     points_rx       points_tx
+----------      --------        ------------------      -------------------     ---------       ---------
+159             3999750         0                       1                       158110          158110
+```
+
 
 ### SHOW SUBSCRIPTIONS
 
@@ -1268,7 +1318,7 @@ The life cycle of a query looks like this:
    more complex result objects that are returned to the client.
 
 
-### Understanding Iterators
+### Understanding iterators
 
 Iterators are at the heart of the query engine. They provide a simple interface
 for looping over a set of points. For example, this is an iterator over Float
