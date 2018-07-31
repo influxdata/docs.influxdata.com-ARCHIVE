@@ -2,7 +2,7 @@
 title: Troubleshooting InfluxDB Enterprise
 
 aliases:
-    - /enterprise/v1.5/troubleshooting/
+    - /enterprise/v1.6/troubleshooting/
 menu:
   enterprise_influxdb_1_6:
     name: Troubleshooting

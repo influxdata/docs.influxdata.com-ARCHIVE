@@ -3,9 +3,9 @@ title: Kapacitor alerts overview
 
 menu:
   kapacitor_1_4:
-    name: Alerts overview
-    weight: 3
-    parent: work-w-kapacitor
+    name: Kapacitor alerts overview
+    weight: 30
+    parent: Working with Kapacitor
 ---
 
 Kapacitor makes it possible to handle alert messages in two different ways.

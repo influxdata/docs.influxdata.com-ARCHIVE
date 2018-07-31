@@ -15,9 +15,10 @@ This guide outlines processes for replacing both meta nodes and data nodes in an
 
 ## Concepts
 Meta nodes manage and monitor both the uptime of nodes in the cluster as well as distribution of [shards](/influxdb/v1.5/concepts/glossary/#shard) among nodes in the cluster.
-Meta nodes also handle the [anti-entropy](/enterprise_influxdb/v1.5/administration/anti-entropy/) (AE) process that ensures data nodes have the shards they need.
+They hold information about which data nodes own which shards; information on which the
+[anti-entropy](/enterprise_influxdb/v1.5/administration/anti-entropy/) (AE) process depends.
 
-Data nodes hold raw time-series data and metadata. Data shards are both distributed and replicated across data nodes in the cluster.
+Data nodes hold raw time-series data and metadata. Data shards are both distributed and replicated across data nodes in the cluster. The AE process runs on data nodes and references the shard information stored in the meta nodes to ensure each data node has the shards they need.
 
 `influxd-ctl` is a CLI included in each meta node and is used to manage your InfluxDB Enterprise cluster.
 
@@ -61,6 +62,29 @@ If replacing a meta node that is either unreachable or unrecoverable, you need t
 
 ### Replacing responsive and unresponsive data nodes in a cluster
 The process of replacing both responsive and unresponsive data nodes is the same. Simply follow the instructions for [replacing data nodes](#replacing-data-nodes-in-an-influxdb-enterprise-cluster).
+
+### Reconnecting a data node with a failed disk
+A disk drive failing is never a good thing, but it does happen, and when it does,
+all shards on that node are lost.
+
+Often in this scenario, rather than replacing the entire host, you just need to replace the disk.
+Host information remains the same, but once started again, the `influxd` process doesn't know
+to communicate with the meta nodes so the AE process can't start the shard-sync process.
+
+To resolve this, log in to a meta node and use the `update-data` command
+to [update the failed data node to itself](#2-replace-the-old-data-node-with-the-new-data-node).
+
+```bash
+# Pattern
+influxd-ctl update-data <data-node-tcp-bind-address> <data-node-tcp-bind-address>
+
+# Example
+influxd-ctl update-data enterprise-data-01:8088 enterprise-data-01:8088
+```
+
+This will connect the `influxd` process running on the newly replaced disk to the cluster.
+The AE process will detect the missing shards and begin to sync data from other
+shards in the same shard group.
 
 
 ## Replacing meta nodes in an InfluxDB Enterprise cluster
@@ -179,15 +203,15 @@ The new meta node should appear in the output:
 Data Nodes
 ==========
 ID	TCP Address	Version
-4	enterprise-data-01:8088	1.5.2-c1.5.2
-5	enterprise-data-02:8088	1.5.2-c1.5.2
+4	enterprise-data-01:8088	1.5.x-c1.5.x
+5	enterprise-data-02:8088	1.5.x-c1.5.x
 
 Meta Nodes
 ==========
 TCP Address	Version
-enterprise-meta-01:8091	1.5.2-c1.5.2
-enterprise-meta-03:8091	1.5.2-c1.5.2
-enterprise-meta-04:8091	1.5.2-c1.5.2 # <-- The newly added meta node
+enterprise-meta-01:8091	1.5.x-c1.5.x
+enterprise-meta-03:8091	1.5.x-c1.5.x
+enterprise-meta-04:8091	1.5.x-c1.5.x # <-- The newly added meta node
 ```
 
 #### 2.5. Remove and replace all other non-leader meta nodes
@@ -248,7 +272,7 @@ influxd-ctl update-data enterprise-data-01:8088 enterprise-data-03:8088
 
 ### 3. Confirm the data node was added
 
-Confirm the new meta-node has been added by running:
+Confirm the new data node has been added by running:
 
 ```bash
 influxd-ctl show
@@ -260,15 +284,15 @@ The new meta node should appear in the output:
 Data Nodes
 ==========
 ID	TCP Address	Version
-4	enterprise-data-03:8088	1.5.2-c1.5.2 # <-- The newly added data node
-5	enterprise-data-02:8088	1.5.2-c1.5.2
+4	enterprise-data-03:8088	1.5.x-c1.5.x # <-- The newly added data node
+5	enterprise-data-02:8088	1.5.x-c1.5.x
 
 Meta Nodes
 ==========
 TCP Address	Version
-enterprise-meta-01:8091	1.5.2-c1.5.2
-enterprise-meta-02:8091	1.5.2-c1.5.2
-enterprise-meta-03:8091	1.5.2-c1.5.2
+enterprise-meta-01:8091	1.5.x-c1.5.x
+enterprise-meta-02:8091	1.5.x-c1.5.x
+enterprise-meta-03:8091	1.5.x-c1.5.x
 ```
 
 Inspect your cluster's shard distribution with `influxd-ctl show-shards`.
@@ -306,5 +330,80 @@ Source                   Dest                     Database  Policy   ShardID  To
 enterprise-data-02:8088  enterprise-data-03:8088  telegraf  autogen  3        119624324  119624324    2018-04-17 23:45:09.470696179 +0000 UTC
 ```
 
-> **Important:** If replacing other data nodes in the cluster, make sure shards are completely copied from nodes in the same replica set before replacing the other nodes.
+> **Important:** If replacing other data nodes in the cluster, make sure shards are completely copied from nodes in the same shard group before replacing the other nodes.
 View the [Anti-entropy](/enterprise_influxdb/v1.5/administration/anti-entropy/#concepts) documentation for important information regarding anti-entropy and your database's replication factor.
+
+
+## Troubleshooting
+
+### Cluster commands result in timeout without error
+In some cases, commands used to add or remove nodes from your cluster
+timeout, but don't return an error.
+
+```
+add-data: operation timed out with error:
+```
+
+#### Check your InfluxDB user permissions
+In order to add or remove nodes to or from a cluster, your user must have `AddRemoveNode` permissions.
+Attempting to manage cluster nodes without the appropriate permissions results
+in a timeout with no accompanying error.
+
+To check user permissions, log in to one of your meta nodes and `curl` the `/user` API endpoint:
+
+```bash
+curl localhost:8091/user
+```
+
+You can also check the permissions of a specific user by passing the username with the `name` parameter:
+
+```bash
+# Pattern
+curl localhost:8091/user?name=<username>
+
+# Example
+curl localhost:8091/user?name=bob
+```
+
+The JSON output will include user information and permissions:
+
+```json
+"users": [
+  {
+    "name": "bob",
+    "hash": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "permissions": {
+      "": [
+        "ViewAdmin",
+        "ViewChronograf",
+        "CreateDatabase",
+        "CreateUserAndRole",
+        "DropDatabase",
+        "DropData",
+        "ReadData",
+        "WriteData",
+        "ManageShard",
+        "ManageContinuousQuery",
+        "ManageQuery",
+        "ManageSubscription",
+        "Monitor"
+      ]
+    }
+  }
+]
+```
+
+_In the output above, `bob` does not have the required `AddRemoveNode` permissions
+and would not be able to add or remove nodes from the cluster._
+
+#### Check the network connection between nodes
+Something may be interrupting the network connection between nodes.
+To check, `ping` the server or node you're trying to add or remove.
+If the ping is unsuccessful, something in the network is preventing communication.
+
+```bash
+ping enterprise-data-03:8088
+```
+
+_If pings are unsuccessful, be sure to ping from other meta nodes as well to determine
+if the communication issues are unique to specific nodes._

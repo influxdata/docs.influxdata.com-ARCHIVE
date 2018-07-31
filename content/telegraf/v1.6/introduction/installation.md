@@ -3,9 +3,9 @@ title: Installing Telegraf
 
 menu:
   telegraf_1_6:
-    name: Installation
+    name: Installing
     weight: 20
-    parent: introduction
+    parent: Introduction
 ---
 
 This page provides directions for installing, starting, and configuring Telegraf.

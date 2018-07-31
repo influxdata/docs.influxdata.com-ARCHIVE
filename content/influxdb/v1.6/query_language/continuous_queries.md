@@ -761,7 +761,7 @@ outlines a feature request for CQs to support gaps in data coverage.
 
 ## Continuous query management
 
-Only admin users are allowed to work with CQs. For more on user privileges, see [Authentication and Authorization](/influxdb/v1.6/query_language/authentication_and_authorization/#user-types-and-privileges).
+Only admin users are allowed to work with CQs. For more on user privileges, see [Authentication and Authorization](/influxdb/v1.6/administration/authentication_and_authorization/#user-types-and-privileges).
 
 ### Listing Continuous Queries
 

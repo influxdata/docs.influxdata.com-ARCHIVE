@@ -3,8 +3,8 @@ title: Using Kapacitor in Chronograf
 
 menu:
   kapacitor_1_4:
-    weight: 2
-    parent: work-w-kapacitor
+    weight: 10
+    parent: Working with Kapacitor
 ---
 
 ## Contents

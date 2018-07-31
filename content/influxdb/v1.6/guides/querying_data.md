@@ -1,7 +1,7 @@
 ---
 title: Querying data with the HTTP API
 alias:
-  -/docs/v1.5/query_language/querying_data/
+  -/docs/v1.6/query_language/querying_data/
 menu:
   influxdb_1_6:
     weight: 20
@@ -137,7 +137,7 @@ curl -G 'http://localhost:8086/query' --data-urlencode "db=mydb" --data-urlencod
 
 #### Authentication
 Authentication in InfluxDB is disabled by default.
-See [Authentication and Authorization](/influxdb/v1.6/query_language/authentication_and_authorization/) for how to enable and set up authentication.
+See [Authentication and Authorization](/influxdb/v1.6/administration/authentication_and_authorization/) for how to enable and set up authentication.
 
 #### Maximum Row Limit
 The [`max-row-limit` configuration option](/influxdb/v1.6/administration/config/#max-row-limit-0) allows users to limit the maximum number of returned results to prevent InfluxDB from running out of memory while it aggregates the results.

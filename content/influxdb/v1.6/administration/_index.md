@@ -11,6 +11,17 @@ The administration documentation contains all the information needed to administ
 
 Information about the config file `influx.conf`
 
+#### [Authentication and authorization](/influxdb/v1.6/administration/authentication_and_authorization/)
+
+Covers how to
+[set up authentication](/influxdb/v1.6/administration/authentication_and_authorization/#set-up-authentication)
+and how to
+[authenticate requests](/influxdb/v1.6/administration/authentication_and_authorization/#authenticate-requests) in InfluxDB.
+This page also describes the different
+[user types](/influxdb/v1.6/administration/authentication_and_authorization/#user-types-and-privileges) and the InfluxQL for
+[managing database users](/influxdb/v1.6/administration/authentication_and_authorization/#user-management-commands).
+
+
 ## [Upgrading](/influxdb/v1.6/administration/upgrading/)
 
 Information about upgrading from previous versions of InfluxDB

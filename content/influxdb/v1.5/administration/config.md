@@ -289,8 +289,9 @@ Environment variable: `INFLUXDB_DATA_COMPACT_FULL_WRITE_COLD_DURATION`
 
 ### `max-concurrent-compactions = 0`
 
-The maximum number of concurrent full and level [compactions](/influxdb/v1.5/concepts/storage_engine/#compactions) that can run at one time.
-A value of 0 results in runtime.GOMAXPROCS(0) used at runtime -- which means use all processors.
+The maximum number of concurrent full and level compactions.
+The default value of `0` results in 50% of the CPU cores being used for compactions at runtime.
+With the default setting, at most 4 cores will be used. If explicitly set, the number of cores used for compaction is limited to the specified value.
 This setting does not apply to cache snapshotting.
 
 Environment variable: `INFLUXDB_DATA_MAX_CONCURRENT_COMPACTIONS`
@@ -520,10 +521,13 @@ Environment variable: `INFLUXDB_HTTP_WRITE_TRACING`
 
 ### `pprof-enabled = true`
 
-Determines whether the pprof endpoint is enabled.  This endpoint is used for
-troubleshooting and monitoring.
+Enable the `/net/http/pprof` endpoint. Useful for troubleshooting and monitoring.
 
 Environment variable: `INFLUXDB_HTTP_PPROF_ENABLED`
+
+### `debug-pprof-enabled = false`
+
+Enable the default `/net/http/pprof` endpoint and bind against `localhost:6060`. Useful for debugging startup performance issues.
 
 ### `https-enabled = false`
 

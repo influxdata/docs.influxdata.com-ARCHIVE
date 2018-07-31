@@ -1,18 +1,30 @@
 ---
-title: About the project
-description: This section includes documentation about the  Chronograf project, release notes and changelogs, what's new, contributing, and licenses.
+title: About the Chronograf project
+description: This section includes documentation about the Chronograf project, release notes and changelogs, what's new, contributing, and licenses.
 menu:
   chronograf_1_4:
-    name: About the Project
+    name: About the project
+    weight: 10
 ---
 
 Follow the links below for more information.
 
-## [Release Notes/Changelog](/chronograf/latest/about_the_project/release-notes-changelog/)
+## [Chronograf release notes](/chronograf/latest/about_the_project/release-notes-changelog/)
 
-## [Contributing](https://github.com/influxdata/chronograf/blob/master/CONTRIBUTING.md)
-## [CLA](https://www.influxdata.com/legal/cla/)
-## [Licenses](https://github.com/influxdata/chronograf/blob/master/LICENSE)
+The [Chronograf release notes](/chronograf/latest/about_the_project/release-notes-changelog/) includes details about features, bug fixes, and breaking changes for current and earlier Chronograf OSS releases.
+
+## [Contributing to Chronograf](https://github.com/influxdata/chronograf/blob/master/CONTRIBUTING.md)
+
+See [Contributing to InfluxDB OSS](https://github.com/influxdata/chronograf/blob/master/CONTRIBUTING.md) for information about how you can contribute to the InfluxDB OSS GitHub project.
+
+### [InfluxData Contributor License Agreement (CLA)](https://influxdata.com/community/cla/)
+
+In order to begin contributing to InfluxDB OSS project, you need to complete and sign the [InfluxData Contributor License Agreement (CLA)](https://influxdata.com/community/cla/).
+
+## [Open source license](https://github.com/influxdata/chronograf/blob/master/LICENSE/)
+
+See the [open source license](https://github.com/influxdata/chronograf/blob/master/LICENSE/) for conditions and restrictions for the use of the Chronograf source code.
+
 Chronograf is released under the GNU Affero General Public License. This Free Software Foundation license is fairly new,
 and differs from the more widely known and understood GPL.
 

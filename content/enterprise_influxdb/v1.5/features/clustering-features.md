@@ -1,5 +1,6 @@
 ---
 title: InfluxDB Enterprise cluster features
+description: InfluxDB Enterprise cluster features, including enttitlements, query management, subscriptions, continuous queries, conversion from InfluxDB OSS to InfluxDB Enterprise clusters, and more.
 aliases:
     - /enterprise/v1.5/features/clustering-features/
 menu:
@@ -75,7 +76,7 @@ but ensure that the lease duration is greater than their aggregate execution tim
 “extra” load is not being unnecessarily introduced on your cluster.
 
 
-## PProf endpoints
+## `/debug/pprof` endpoints
 
 Meta nodes expose the `/debug/pprof` endpoints for profiling and troubleshooting.
 
@@ -89,7 +90,7 @@ Meta nodes expose the `/debug/pprof` endpoints for profiling and troubleshooting
 
 This functionality is exposed via an API on the meta service and through [`influxd-ctl` sub-commands](/enterprise_influxdb/v1.5/features/cluster-commands/).
 
-## OSS conversion
+## InfluxDB OSS conversion to InfluxDB Enterprise clusters
 
 Importing a OSS single server as the first data node is supported.
 
@@ -101,9 +102,8 @@ step-by-step instructions.
 The query engine skips failed nodes that hold a shard needed for queries.
 If there is a replica on another node, it will retry on that node.
 
-## Backup and restore
+## Backing up and restoring
 
-InfluxDB Enterprise clusters support backup and restore functionality starting with
-version 0.7.1.
-See [Backup and restore](/enterprise_influxdb/v1.5/administration/backup-and-restore/) for
+InfluxDB Enterprise clusters support backup and restore functionality.
+See [Backing up and restoring in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/backup-and-restore/) for
 more information.

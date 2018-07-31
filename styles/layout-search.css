@@ -56,6 +56,12 @@
 	position: relative;
 	line-height: 2rem;
 }
+
+.algolia-autocomplete .ds-dropdown-menu {
+	overflow: scroll !important;
+	max-height: 90vh !important;
+}
+
 .algolia-autocomplete:after {
 	font-family: 'icomoon';
 	content: "\e98a";

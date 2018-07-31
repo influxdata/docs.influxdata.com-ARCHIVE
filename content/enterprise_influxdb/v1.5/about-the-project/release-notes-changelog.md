@@ -1,21 +1,41 @@
 ---
-title: Release notes/changelog
+title: InfluxDB Enterprise 1.5 release notes
 
 menu:
   enterprise_influxdb_1_5:
+    name: Release notes
     weight: 10
     parent: About the project
 ---
 
 <table style="width:100%">
   <tr>
-    <td><a href="#clustering">Clustering Release Notes/Changelog</a></td>
-    <td><a href="#web-console">DEPRECATED: Web Console Release Notes/Changelog</a></td>
+    <td><a href="#clustering">Clustering release notes</a></td>
+    <td><a href="#web-console">DEPRECATED: Web Console release notes</a></td>
   </tr>
 </table>
 
 <br>
 <br>
+
+## v1.5.4 [2018-06-21]
+
+This release builds off of the InfluxDB OSS 1.5.4 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
+
+## v1.5.3 [2018-05-25]
+
+This release builds off of the InfluxDB OSS 1.5.3 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
+
+### Features
+
+* Include the query task status in the show queries output.
+* [1.5] Add hh writeBlocked counter.
+
+### Bug fixes
+
+* Hinted-handoff: enforce max queue size per peer node.
+* TSM files not closed when shard deleted.
+
 
 ## v1.5.2 [2018-04-12]
 
@@ -94,7 +114,7 @@ The default logging format has been changed. See [Logging and tracing in InfluxD
 
 ### Upgrading -- for users of the TSI preview
 
-If you have been using the TSI preview with 1.3.6 or earlier 1.3.x releases, you will need to follow the upgrade steps to continue using the TSI preview.  Unfortunately, these steps cannot be executed while the cluster is operating -- 
+If you have been using the TSI preview with 1.3.6 or earlier 1.3.x releases, you will need to follow the upgrade steps to continue using the TSI preview.  Unfortunately, these steps cannot be executed while the cluster is operating --
 so it will require downtime.
 
 ### Bugfixes
@@ -110,7 +130,7 @@ so it will require downtime.
 
 If you have been using the TSI preview with 1.3.6 or earlier 1.3.x releases, you will need to follow the upgrade steps to continue using the TSI preview.  Unfortunately, these steps cannot be executed while the cluster is operating -- so it will require downtime.
 
-### Bugfixes
+### Bug fixes
 
 - Updated `yamux` resolves race condition when SYN is successfully sent and a write timeout occurs.
 - Resend authentication credentials on redirect.
@@ -129,7 +149,7 @@ resolving the corruption possible in releases prior to 1.3.7. If you are using t
 **you should not upgrade to 1.3.7 until this utility is available**.
 We will update this release note with operational steps once the utility is available.
 
-#### Bugfixes
+#### Bug fixes
 
  - Read for the interrupt signal from the stream before creating the iterators.
  - Address Deadlock issue in meta server on 1.3.6
@@ -137,7 +157,7 @@ We will update this release note with operational steps once the utility is avai
 
 ## v1.3.6 [2017-09-28]
 
-### Bugfixes
+### Bug fixes
 
 - Fix "group by" marshaling in the IteratorOptions.
 - Address meta service data race condition.
@@ -155,7 +175,7 @@ Please see the OSS [release notes](/influxdb/v1.3/about_the_project/releasenotes
 
 This release builds off of the 1.3.4 release of OSS InfluxDB. Please see the [OSS release notes](https://docs.influxdata.com/influxdb/v1.3/about_the_project/releasenotes-changelog/) for more information about the OSS releases.
 
-### Bugfixes
+### Bug fixes
 
 - Close connection for remote iterators after EOF to avoid writer hanging indefinitely
 
@@ -163,7 +183,7 @@ This release builds off of the 1.3.4 release of OSS InfluxDB. Please see the [OS
 
 This release builds off of the 1.3.3 release of OSS InfluxDB. Please see the [OSS release notes](https://docs.influxdata.com/influxdb/v1.3/about_the_project/releasenotes-changelog/) for more information about the OSS releases.
 
-### Bugfixes
+### Bug fixes
 
 - Connections are not closed when `CreateRemoteIterator` RPC returns no iterators, resolved memory leak
 
@@ -187,7 +207,7 @@ This release builds off of the 1.3.3 release of OSS InfluxDB. Please see the [OS
 
 ## v1.3.0 [2017-06-21]
 
-### Configuration Changes
+### Configuration changes
 
 #### `[cluster]` Section
 
@@ -240,7 +260,7 @@ Please see the OSS [release notes](/influxdb/v1.3/about_the_project/releasenotes
 This release builds off of the 1.2.1 release of OSS InfluxDB.
 Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1.2/CHANGELOG.md#v121-2017-03-08) for more information about the OSS release.
 
-### Configuration Changes
+### Configuration changes
 
 The following configuration changes may need to changed before [upgrading](/enterprise_influxdb/v1.3/administration/upgrading/) to 1.2.2 from prior versions.
 
@@ -263,7 +283,7 @@ This change only affects users who have disabled the `retention-autocreate` opti
 
 #### Bug fixes
 
-##### Backup and Restore
+##### Backup and restore
 <br>
 
 - Prevent the `shard not found` error by making [backups](/enterprise_influxdb/v1.3/guides/backup-and-restore/#backup) skip empty shards
@@ -295,7 +315,7 @@ This change only affects users who have disabled the `retention-autocreate` opti
 
 ## v1.2.1 [2017-01-25]
 
-#### Cluster-specific Bugfixes
+#### Cluster-specific bug fixes
 
 - Fix panic: Slice bounds out of range
 &emsp;Fix how the system removes expired shards.
@@ -320,7 +340,7 @@ To disable the auto-creation of retention policies, set `retention-autocreate` t
 - Uncomment the section headers in the default [configuration file](/enterprise_influxdb/v1.3/administration/configuration/)
 - Add InfluxQL support for [subqueries](/influxdb/v1.3/query_language/data_exploration/#subqueries)
 
-#### Cluster-specific Bugfixes
+#### Cluster-specific bug fixes
 
 - Update dependencies with Godeps
 - Fix a data race in meta client

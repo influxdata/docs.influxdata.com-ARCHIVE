@@ -48,7 +48,7 @@ You can also execute the commands using the HTTP API; simply  send a `GET` reque
 See the [Querying Data](/influxdb/v1.6/guides/querying_data/) guide for more on using the HTTP API.
 
 > **Note:** When authentication is enabled, only admin users can execute most of the commands listed on this page.
-See the documentation on [authentication and authorization](/influxdb/v1.6/query_language/authentication_and_authorization/) for more information.
+See the documentation on [authentication and authorization](/influxdb/v1.6/administration/authentication_and_authorization/) for more information.
 
 ## Data Management
 

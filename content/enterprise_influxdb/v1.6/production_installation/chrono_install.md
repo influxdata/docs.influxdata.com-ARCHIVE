@@ -1,7 +1,7 @@
 ---
 title: Step 3 - Chronograf Installation
 aliases:
-    - /enterprise/v1.5/production_installation/chrono_install/
+    - /enterprise/v1.6/production_installation/chrono_install/
 menu:
   enterprise_influxdb_1_6:
     weight: 20

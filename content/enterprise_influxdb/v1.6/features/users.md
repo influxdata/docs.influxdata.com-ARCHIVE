@@ -1,7 +1,7 @@
 ---
 title: InfluxDB Enterprise users
 aliases:
-    - /enterprise/v1.5/features/users/
+    - /enterprise/v1.6/features/users/
 menu:
   enterprise_influxdb_1_6:
     weight: 0

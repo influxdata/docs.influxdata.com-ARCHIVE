@@ -4,6 +4,7 @@ description: The Chronograf guides discuss dashboards, monitoring InfluxDB Enter
 menu:
   chronograf_1_4:
     name: Guides
+    weight: 30
 ---
 
 Follow the links below to explore Chronograf's features.
@@ -11,6 +12,10 @@ Follow the links below to explore Chronograf's features.
 ## [Using pre-created dashboards](/chronograf/v1.4/guides/using-precreated-dashboards/)
 
 Pre-created dashboards are available when the required Telegraf input plugins are enabled. These applications make many useful metrics quickly available and are useful in giving you ideas about  
+
+## [Using the TICKscript editor](/chronograf/v1.4/guides/tickscript-logging/)
+
+Using the TICKscript editor in Chronograf to create, test, and debug Kapacitor TICKscripts.
 
 ## [Creating dashboards](/chronograf/latest/guides/create-a-dashboard/)
 

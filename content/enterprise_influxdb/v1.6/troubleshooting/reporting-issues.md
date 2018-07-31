@@ -1,7 +1,7 @@
 ---
 title: Reporting issues
 aliases:
-    - /enterprise/v1.5/troubleshooting/reporting-issues/
+    - /enterprise/v1.6/troubleshooting/reporting-issues/
 menu:
   enterprise_influxdb_1_6:
     weight: 20

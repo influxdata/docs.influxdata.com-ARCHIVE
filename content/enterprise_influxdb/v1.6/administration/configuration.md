@@ -1,7 +1,8 @@
 ---
 title: Configuring InfluxDB Enterprise
+description: Covers the InfluxDB Enterprise configuration settings, including global options, meta node options, and data node options
 aliases:
-    - /enterprise/v1.5/administration/configuration/
+    - /enterprise/v1.6/administration/configuration/
 menu:
   enterprise_influxdb_1_6:
     name: Configuring
@@ -617,17 +618,17 @@ See the [OSS documentation](/influxdb/v1.6/administration/config/#max-values-per
 
 Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 
-### index-version = inmem
+### index-version = "inmem"
 
-The type of shard index to use for new shards. The default (`inmem`) is to use an in-memory index that is recreated at startup.
-A value of `tsi1` will use a disk-based index that supports higher cardinality datasets.
+The type of shard index to use for new shards. The default (`inmem`) is to use an in-memory index that is
+recreated at startup. A value of `tsi1` will use a disk-based index that supports higher cardinality datasets.
+Value should be enclosed in double quotes.
 
 Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 
-### max-concurrent-compactions = 0
-
-The maximum number of concurrent full and level [compactions](/influxdb/v1.6/concepts/storage_engine/#compactions)
-that can run at one time.  A value of 0 results in runtime.GOMAXPROCS(0) used at runtime.
+The maximum number of concurrent full and level compactions.
+The default value of `0` results in 50% of the CPU cores being used for compactions at runtime.
+With the default setting, at most 4 cores will be used. If explicitly set, the number of cores used for compaction is limited to the specified value.
 This setting does not apply to cache snapshotting.
 
 Environment variable: `INFLUXDB_DATA_MAX_CONCURRENT_COMPACTIONS`

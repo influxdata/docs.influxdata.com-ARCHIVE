@@ -4,11 +4,9 @@ descriptions: Chronograf dashboards and views support graphs and other visualiza
 menu:
   chronograf_1_4:
     name: Visualization types
-    weight: 30
+    weight: 40
     parent: Guides
 ---
-
-## Visualization types in Chronograf
 
 Chronograf's dashboard views support the following visualization types, which can be selected in the **Visualization Type** selection view.
 

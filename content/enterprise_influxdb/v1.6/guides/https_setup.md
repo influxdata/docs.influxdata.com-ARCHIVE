@@ -77,7 +77,7 @@ Enable HTTPS for each Meta Node within the `[meta]` section of the configuration
 * `http-private-key` to `/etc/ssl/<private-key-file>.key` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
 
 ```
-[http]
+[meta]
 
  [...]
 
@@ -212,7 +212,7 @@ Enable HTTPS for each Meta Node within the `[meta]` section of the configuration
 
 
 ```
-[http]
+[meta]
 
   [...]
 

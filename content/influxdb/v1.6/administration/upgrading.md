@@ -4,7 +4,7 @@ title: Upgrading to InfluxDB 1.5.x
 menu:
   influxdb_1_6:
     name: Upgrading
-    weight: 20
+    weight: 25
     parent: Administration
 ---
 

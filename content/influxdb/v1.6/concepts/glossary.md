@@ -311,7 +311,7 @@ There are two kinds of users in InfluxDB:
 * *Non-admin users* have `READ`, `WRITE`, or `ALL` (both `READ` and `WRITE`) access per database.
 
 When authentication is enabled, InfluxDB only executes HTTP requests that are sent with a valid username and password.
-See [Authentication and Authorization](/influxdb/v1.6/query_language/authentication_and_authorization/).
+See [Authentication and Authorization](/influxdb/v1.6/administration/authentication_and_authorization/).
 
 ## values per second
 The preferred measurement of the rate at which data are persisted to InfluxDB. Write speeds are generally quoted in values per second.

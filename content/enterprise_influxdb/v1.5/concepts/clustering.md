@@ -11,7 +11,7 @@ menu:
 
 This document describes in detail how clustering works in InfluxEnterprise. It starts with a high level description of the different components of a cluster and then delves into the implementation details.
 
-## Architectural Overview
+## Architectural overview
 
 An InfluxEnterprise installation consists of three separate software processes: Data nodes, Meta nodes, and the Enterprise Web server. To run an InfluxDB cluster, only the meta and data nodes are required. Communication within a cluster looks like this:
 
@@ -50,7 +50,7 @@ The meta nodes keep a consistent view of the metadata that describes the cluster
 
 The data nodes replicate data and query each other via a Protobuf protocol over TCP. Details on replication and querying are covered later in this document.
 
-## Where Data Lives
+## Where data lives
 
 The meta and data nodes are each responsible for different parts of the database.
 
@@ -78,7 +78,7 @@ On disk, the data is always organized by `<database>/<retention_policy>/<shard_i
 
 > **Note:** Meta nodes only require the `/meta` directory, but Data nodes require all four subdirectories of `/var/lib/influxdb/`: `/meta`, `/data`, `/wal`, and `/hh`.
 
-## Optimal Server Counts
+## Optimal server counts
 
 When creating a cluster you'll need to choose how meta and data nodes to configure and connect. You can think of InfluxEnterprise as two separate clusters that communicate with each other: a cluster of meta nodes and one of data nodes. The number of meta nodes is driven by the number of meta node failures they need to be able to handle, while the number of data nodes scales based on your storage and query needs.
 
@@ -94,11 +94,11 @@ Data nodes hold the actual time series data. The minimum number of data nodes to
 It makes owning the monitoring and alerting for your infrastructure easy to setup and maintain.
 It talks directly to the data and meta nodes over their HTTP protocols, which are bound by default to ports `8086` for data nodes and port `8091` for meta nodes.
 
-## Writes in a Cluster
+## Writes in a cluster
 
 This section describes how writes in a cluster work. We'll work through some examples using a cluster of four data nodes: `A`, `B`, `C`, and `D`. Assume that we have a retention policy with a replication factor of 2 with shard durations of 1 day.
 
-### Shard Groups
+### Shard groups
 
 The cluster creates shards within a shard group to maximize the number of data nodes utilized. If there are N data nodes in the cluster and the replication factor is X, then N/X shards are created in each shard group, discarding any fractions.
 
@@ -117,7 +117,7 @@ There are multiple implications to this scheme for determining where data lives 
 
 However, there is a method for expanding writes in the current shard group (i.e. today) when growing a cluster. The current shard group can be truncated to stop at the current time using `influxd-ctl truncate-shards`. This immediately closes the current shard group, forcing a new shard group to be created. That new shard group inherits the latest retention policy and data node changes and then copies itself appropriately to the newly available data nodes. Run `influxd-ctl truncate-shards help` for more information on the command.
 
-### Write Consistency
+### Write consistency
 
 Each request to the HTTP API can specify the consistency level via the `consistency` query parameter. For this example let's assume that an HTTP write is being sent to server `D` and the data belongs in shard `1`. The write needs to be replicated to the owners of shard `1`: data nodes `A` and `B`. When the write comes into `D`, that node determines from its local cache of the metastore that the write needs to be replicated to the `A` and `B`, and it immediately tries to write to both. The subsequent behavior depends on the consistency level chosen:
 
@@ -128,7 +128,7 @@ Each request to the HTTP API can specify the consistency level via the `consiste
 
 The important thing to note is how failures are handled. In the case of failures, the database uses the hinted handoff system.
 
-### Hinted Handoff
+### Hinted handoff
 
 Hinted handoff is how InfluxEnterprise deals with data node outages while writes are happening. Hinted handoff is essentially a durable disk based queue. When writing at `any`, `one` or `quorum` consistency, hinted handoff is used when one or more replicas return an error after a success has already been returned to the client. When writing at `all` consistency, writes cannot return success unless all nodes return success. Temporarily stalled or failed writes may still go to the hinted handoff queues but the cluster would have already returned a failure response to the write. The receiving node creates a separate queue on disk for each data node (and shard) it cannot reach.
 
@@ -142,7 +142,7 @@ When restarting nodes within an active cluster, during upgrades or maintenance, 
 
 If a node with pending hinted handoff writes for another data node receives a write destined for that node, it adds the write to the end of the hinted handoff queue rather than attempt a direct write. This ensures that data nodes receive data in mostly chronological order, as well as preventing unnecessary connection attempts while the other node is offline.
 
-## Queries in a Cluster
+## Queries in a cluster
 
 Queries in a cluster are distributed based on the time range being queried and the replication factor of the data. For example if the retention policy has a replication factor of 4, the coordinating data node receiving the query randomly picks any of the 4 data nodes that store a replica of the shard(s) to receive the query. If we assume that the system has shard durations of one day, then for each day of time covered by a query the coordinating node selects one data node to receive the query for that day.
 

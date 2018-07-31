@@ -1,14 +1,13 @@
 ---
-title: TICKscript syntax
-description: Covers the TICKscript syntax, node types, using InfluxQL in TICKscripts, and lambda expressions.
+title: Kapacitor TICKscript syntax
+description: Covers the Kapacitor TICKscript syntax, node types, using InfluxQL in TICKscripts, and lambda expressions.
 aliases:
   - /kapacitor/v1.4/tick/spec/
 menu:
   kapacitor_1_4:
-    name: Syntax
-    identifier: syntax
-    weight: 3
-    parent: tick
+    name: TICKscript syntax
+    weight: 20
+    parent: TICKscript
 ---
 
 # Table of Contents

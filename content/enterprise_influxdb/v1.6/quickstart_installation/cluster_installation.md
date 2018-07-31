@@ -1,7 +1,7 @@
 ---
 title: Step 1 - Installing an InfluxDB Enterprise cluster
 aliases:
-    - /enterprise/v1.5/quickstart_installation/cluster_installation/
+    - /enterprise/v1.6/quickstart_installation/cluster_installation/
 
 menu:
   enterprise_influxdb_1_6:

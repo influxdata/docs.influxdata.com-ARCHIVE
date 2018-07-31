@@ -1,7 +1,7 @@
 ---
 title: Step 2 - Installing InfluxDB Enterprise data nodes
 aliases:
-    - /enterprise/v1.5/production_installation/data_node_installation/
+    - /enterprise/v1.6/production_installation/data_node_installation/
 menu:
   enterprise_influxdb_1_6:
     weight: 20

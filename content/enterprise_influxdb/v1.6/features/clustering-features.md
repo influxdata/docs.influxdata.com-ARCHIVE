@@ -1,7 +1,7 @@
 ---
 title: InfluxDB Enterprise cluster features
 aliases:
-    - /enterprise/v1.5/features/clustering-features/
+    - /enterprise/v1.6/features/clustering-features/
 menu:
   enterprise_influxdb_1_6:
     name: Cluster features
