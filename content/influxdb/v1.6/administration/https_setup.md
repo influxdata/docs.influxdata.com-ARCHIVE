@@ -164,6 +164,9 @@ Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc
   https-private-key = "/etc/ssl/influxdb-selfsigned.key"
 ```
 
+> If setting up HTTPS for [InfluxDB Enterprise](/enterprise_influxdb), you also need to configure insecure TLS connections between both meta and data nodes in your cluster.
+> Instructions are provided in the [InfluxDB Enterprise HTTPS Setup guide](/enterprise_influxdb/latest/guides/https_setup/#setup-https-with-a-self-signed-certificate).
+
 #### Step 3: Restart InfluxDB
 
 Restart the InfluxDB process for the configuration changes to take effect:
