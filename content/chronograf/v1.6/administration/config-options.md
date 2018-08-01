@@ -119,7 +119,7 @@ $ chronograf -v
 ## InfluxDB connection options
 
 > InfluxDB connection details specified via command line when starting Chronograf do not persist when Chronograf is shut down.
-> To persist connection details, [include them in an `.src` file](/chronograf/v1.6/administration/creating-connections/#managing-influxdb-connections-using-src-files) located in your [`--resources-path`](#resources-path).
+> To persist connection details, [include them in a `.src` file](/chronograf/v1.6/administration/creating-connections/#managing-influxdb-connections-using-src-files) located in your [`--resources-path`](#resources-path).
 
 ### `--influxdb-url=`
 
@@ -144,7 +144,7 @@ Environment variable: `$INFLUXDB_PASSWORD`
 ## Kapacitor connection options
 
 > Kapacitor connection details specified via command line when starting Chronograf do not persist when Chronograf is shut down.
-> To persist connection details, [include them in an `.kap` file](/chronograf/v1.6/administration/creating-connections/#managing-influxdb-connections-using-kap-files) located in your [`--resources-path`](#resources-path).
+> To persist connection details, [include them in a `.kap` file](/chronograf/v1.6/administration/creating-connections/#managing-influxdb-connections-using-kap-files) located in your [`--resources-path`](#resources-path).
 
 ### `--kapacitor-url=`
 

@@ -8,7 +8,7 @@ menu:
     parent: Administration
 ---
 
-Connections to InfluxDB and Kapacitor can be configured through the Chronograf user interface (UI) or with JSON config files.
+Connections to InfluxDB and Kapacitor can be configured through the Chronograf user interface (UI) or with JSON configuration files.
 
 ## Managing InfluxDB connections using the Chronograf UI
 
