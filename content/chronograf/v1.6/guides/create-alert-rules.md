@@ -20,7 +20,7 @@ Common alerting use cases that can be managed using Chronograf include:
 * Relative thresholds based on unit or percentage changes.
 * Deadman switches.
 
-Complex alerts and other tasks can be defined directly in Kapacitor is TICKscripts, but can be used within Chronograf.
+Complex alerts and other tasks can be defined directly in Kapacitor as TICKscripts, but can be used within Chronograf.
 
 Follow this guide to create a Chronograf alert rule that sends an alert message to an existing [Slack](https://slack.com/) channel whenever your idle CPU usage crosses the 80% threshold.
 
