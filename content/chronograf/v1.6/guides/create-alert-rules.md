@@ -11,18 +11,18 @@ menu:
 ---
 
 
-Chronograf provides a user interface for [Kapacitor](/kapacitor/latest/), InfluxData's processing framework for creating alerts, running extract, transform, load jobs (ETL), and detecting anomalies in your data.
+Chronograf provides a user interface for [Kapacitor](/kapacitor/latest/), InfluxData's processing framework for creating alerts, ETL jobs (running extract, transform, load), and detecting anomalies in your data.
 Chronograf alert rules correspond to Kapacitor tasks that trigger alerts whenever certain conditions are met.
-These taskes are stored as [TICKscripts](/kapacitor/latest/tick/) than can be also edited manually later.
+Behind the scenes, these tasks are stored as [TICKscripts](/kapacitor/latest/tick/) that can be edited manually or through Chronograf.
 Common alerting use cases that can be managed using Chronograf include:
 
 * Thresholds with static ceilings, floors, and ranges.
 * Relative thresholds based on unit or percentage changes.
 * Deadman switches.
 
-Complex alerts and other tasks can be defined directly in Kapacitor as TICKscripts, but can be used within Chronograf.
+Complex alerts and other tasks can be defined directly in Kapacitor as TICKscripts, but can be viewed and managed within Chronograf.
 
-Follow this guide to create a Chronograf alert rule that sends an alert message to an existing [Slack](https://slack.com/) channel whenever your idle CPU usage crosses the 80% threshold.
+This guide walks through creating a Chronograf alert rule that sends an alert message to an existing [Slack](https://slack.com/) channel whenever your idle CPU usage crosses the 80% threshold.
 
 ## Requirements
 
@@ -55,13 +55,13 @@ For this example, use "Idle CPU Usage" as your alert name.
 Choose from three alert types under the **Alert Types** section of the Rule Configuration page:
 
 _**Threshold**_  
-Alert if the data cross a boundary.
+Alert if data crosses a boundary.
 
 _**Relative**_  
-Alert if the data change relative to the data in a different time range.
+Alert if data changes relative to data in a different time range.
 
 _**Deadman**_  
-Alert if InfluxDB receives no relevant data for the specified time duration.
+Alert if InfluxDB receives no relevant data for a specified time duration.
 
 For this example, select the **Threshold** alert type.
 
@@ -70,7 +70,7 @@ For this example, select the **Threshold** alert type.
 Choose the time series data you want the Chronograf alert rule to use.
 Navigate through databases, measurements, fields, and tags to select the relevant data.
 
-In this example, select the `telegraf` [database](/influxdb/latest/concepts/glossary/#database) and the `autogen` [retention policy](/influxdb/latest/concepts/glossary/#retention-policy-rp), the `cpu` [measurement](/influxdb/latest/concepts/glossary/#measurement), the `usage_idle` [field](/influxdb/latest/concepts/glossary/#field).
+In this example, select the `telegraf` [database](/influxdb/latest/concepts/glossary/#database), the `autogen` [retention policy](/influxdb/latest/concepts/glossary/#retention-policy-rp), the `cpu` [measurement](/influxdb/latest/concepts/glossary/#measurement), and the `usage_idle` [field](/influxdb/latest/concepts/glossary/#field).
 
 ![Select your data](/img/chronograf/v1.6/alerts-time-series.png)
 
@@ -88,7 +88,7 @@ Adjusting the graph's time range is helpful when determining a reasonable thresh
 
 > We set the threshold number to `80` for demonstration purposes.
 > Setting the threshold for idle CPU usage to a high number ensures that we'll be able to see the alert in action.
-> In practice, you'd set the threshold number to better match the patterns in your data and your alert needs.
+> In practice, you'd set the threshold number to better match the patterns in your data and your alerting needs.
 
 ### Step 5: Select and configure the alert handler
 
