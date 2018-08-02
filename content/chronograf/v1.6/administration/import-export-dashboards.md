@@ -37,6 +37,12 @@ The newly imported dashboard will be included in your list of dashboards.
 
 ![Importing a Chronograf dashboard](/img/chronograf/v1.6/dashboard-import.gif)
 
+### Reconciling unmatched sources
+If the data sources defined in the imported dashboard JSON file do not match any of your local sources,
+you will have to opportunity to reconcile each of the unmatched sources during the import process.
+
+![Reconcile unmatched sources](/img/chronograf/v1.6/dashboard-import-reconcile.png)
+
 ## Required user roles
 Depending on the role of your user, there are some restrictions on importing and exporting dashboards:
 
