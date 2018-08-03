@@ -230,7 +230,7 @@ In Example 5 above the first two lines show the declaration of Duration types.  
 
 
 ##### Strings
-Strings begin with either one or three single single quotation marks: `'` or `'''`.  Strings can be concatenated using the addition `+` operator.  To escape quotation marks within a string delimited by a single quotation mark use the backslash character.  If it is to be anticipated that many single quotation marks will be encountered inside the string, delimit it using triple single quotation marks instead.  A string delimited by triple quotation marks requires no escape sequences. In both string demarcation cases, the double quotation mark, which is used to access field and tag values, can be used without an escape.
+Strings begin with either one or three single quotation marks: `'` or `'''`.  Strings can be concatenated using the addition `+` operator.  To escape quotation marks within a string delimited by a single quotation mark use the backslash character.  If it is to be anticipated that many single quotation marks will be encountered inside the string, delimit it using triple single quotation marks instead.  A string delimited by triple quotation marks requires no escape sequences. In both string demarcation cases, the double quotation mark, which is used to access field and tag values, can be used without an escape.
 
 **Example 6 &ndash; Basic strings**
 
@@ -448,7 +448,7 @@ Accessing data tags and fields, using string literals and accessing TICKscript v
         .as('used')
    ...
    ```
-   In Example 15 two values from the data frame are accessed.  In the `where()` method call the lambda expression uses the tag `"cpu"` to filter the data frame down to only datapoints whose "cpu" tag equals the literal value of `'cpu-total'`.  The chaining method `eval()` also takes a lambda expression that accesses the field `"usage-idle"` to calculate cpu processing power 'used'.  Note that the `groupBy()` method uses a string literal `'host'` to be matched to a tag name in the data series.  It will then group the data by this tag.
+   In Example 15 two values from the data frame are accessed.  In the `where()` method call, the lambda expression uses the tag `"cpu"` to filter the data frame down to only datapoints whose "cpu" tag equals the literal value of `'cpu-total'`.  The chaining method `eval()` also takes a lambda expression that accesses the field `"usage-idle"` to calculate cpu processing power 'used'.  Note that the `groupBy()` method uses a string literal `'host'` to be matched to a tag name in the data series.  It will then group the data by this tag.
 
    * **Named lambda expression results** &ndash; Lambda expression results get named and added as fields to the data set using an `as()` method.  Think of the `as()` method functioning just like the 'AS' keyword in InfluxQL.  See the `eval()` method in Example 15 above.  The results of lambda expressions can be accessed in other Lambda expressions with double quotation marks, and in method calls with single quotes, just like data tags and fields.
 
@@ -501,7 +501,7 @@ var data = stream
 
 ##### Accessing values in string templates
 
-As mentioned in the section [String templates](#string-templates) it is possible to add values from node specific properties, and from tags and fields to output strings.  This can be seen under the `alert` node in Example 16.  The accessor expression is wrapped in two curly braces.  To access a property a period, `.`, is used before the identifier.  To access a value from tags or fields the token 'index' is used, followed by a space and a period and then the part of the data series to be accessed (e.g. `.Tags` or `.Fields`); the actual name is then specified in double quotes.
+As mentioned in the section [String templates](#string-templates) it is possible to add values from node specific properties, and from tags and fields to output strings.  This can be seen under the `alert` node in Example 16.  The accessor expression is wrapped in two curly braces.  To access a property, a period `.` is used before the identifier.  To access a value from tags or fields the token 'index' is used, followed by a space and a period and then the part of the data series to be accessed (e.g. `.Tags` or `.Fields`); the actual name is then specified in double quotes.
 
 **Example 18 &ndash; accessing values in string templates**
 
@@ -649,7 +649,7 @@ In Example 24, the `data` variable holds the stream pipeline declared in the exp
 
 ### Expressions
 
-An expression begins with a node identifier or with a variable identifier holding another expression.  It then chains together additional node creation methods (chaining methods), property setters (property methods) or user defined functions (UDF).  The pipe operator "|" indicates the start of a chaining method call, returning a new node into the chain.  The dot operator "." adds a property setter.  The ampersand operator "@" introduces a user defined function.
+An expression begins with a node identifier or with a variable identifier holding another expression.  It then chains together additional node creation methods (chaining methods), property setters (property methods) or user defined functions (UDF).  The pipe operator "|" indicates the start of a chaining method call, returning a new node into the chain.  The dot operator "." adds a property setter.  The at operator "@" introduces a user defined function.
 
 Expressions can be written all on a single line, but this can lead to readability issues.  The command `kapacitor show <taskname>` will show the TICKscript as part of its console output.  This command pretty prints or uses newlines and indentation regardless of how the defining TICKscript was written.  Adding a new line and indenting new method calls is the recommended practice for writing TICKscript expressions.  Typically, when a new chaining method is introduced in an expression, a newline is created and the new link in the chain gets indented three or more spaces.  Likewise, when a new property setter is called, it is set out on a new line and indented an additional number of spaces.  For readability user defined functions should be indented the same as chaining methods.
 
