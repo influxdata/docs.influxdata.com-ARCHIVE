@@ -31,7 +31,7 @@ The `tasks` directory should contain task TICKscripts and the associated templat
 
 The `templates` directory should contain templated TICKscripts.
 
-The `handlers` directory will contain will contain topic handler definitions in yaml or json.
+The `handlers` directory will contain topic handler definitions in yaml or json.
 
 ## Tasks
 
