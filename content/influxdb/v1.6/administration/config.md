@@ -1035,10 +1035,16 @@ Global configuration settings for Transport Layer Security (TLS) in InfluxDB.
 
 Determines the available set of cipher suites. See the https://golang.org/pkg/crypto/tls/#pkg-constants for a list of available ciphers, which depends on the version of Go (use the query `SHOW DIAGNOSTICS` to see the version of Go used to build InfluxDB). If not specified, uses the default settings from the Go `crypto/tls` package.
 
+Environment variable: `INFLUXDB_TLS_CIPHERS`
+
 ### `min-version = "tls1.2"`
 
 Minimum version of the TLS protocol that will be negotiated. If not specified, uses the default settings from the Go `crypto/tls` package.
 
+Environment variable: `INFLUXDB_TLS_MIN_VERSION`
+
 ### `max-version = "tls1.2"`
 
 Maximum version of the TLS protocol that will be negotiated. If not specified, uses the default settings from the Go `crypto/tls` package.
+
+Environment variable: `INFLUXDB_TLS_MAX_VERSION`
