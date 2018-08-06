@@ -1035,18 +1035,18 @@ The InfluxDB default values for TLS `ciphers`, `min-version`, and `max-version` 
 
 ### `ciphers = [ "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305", "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256", ]`
 
-Specifies the set of cipher suite IDs to negotiate. If not specified, uses the list of values from the Go `crypto/tls` package.
+Specifies the set of cipher suite IDs to negotiate. If not specified, `ciphers` uses the list of values from the Go `crypto/tls` package. In this example, only the two specified cipher suite IDs would be supported.
 
 Environment variable: `INFLUXDB_TLS_CIPHERS`
 
 ### `min-version = "tls1.2"`
 
-Minimum version of the TLS protocol that will be negotiated. If not specified, uses the minimum TLS value specified in the Go `crypto/tls` package. In this example, `tls1.2` specifies the same version as the `max-version` example, which would result in support for only TLS 1.2.
+Minimum version of the TLS protocol that will be negotiated. If not specified, `min-version` uses the minimum TLS value specified in the Go `crypto/tls` package. In this example, `tls1.2` specifies the same version as the `max-version` example, which would result in support for only TLS 1.2.
 
 Environment variable: `INFLUXDB_TLS_MIN_VERSION`
 
 ### `max-version = "tls1.2"`
 
-Maximum version of the TLS protocol that will be negotiated. If not specified, uses the maximum TLS value specified in the Go `crypto/tls` package. In this example, `tls1.2` specifies the same version as the `min-version` example, which would result in support for only TLS 1.2.
+Maximum version of the TLS protocol that will be negotiated. If not specified, `max-version` uses the maximum TLS value specified in the Go `crypto/tls` package. In this example, `tls1.2` specifies the same version as the `min-version` example, which would result in support for only TLS 1.2.
 
 Environment variable: `INFLUXDB_TLS_MAX_VERSION`
