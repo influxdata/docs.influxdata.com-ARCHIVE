@@ -94,13 +94,13 @@ Kapacitor can now be upgraded using the Debian package manager:
 *Example - upgrade with dpkg*
 
 ```
-$ sudo dpkg -i kapacitor_1.5.0_amd64.deb
+$ sudo dpkg -i kapacitor_1.5.1_amd64.deb
 (Reading database ... 283418 files and directories currently installed.)
-Preparing to unpack kapacitor_1.5.0_amd64.deb ...
-Unpacking kapacitor (1.5.0-1) over (1.3.1-1) ...
+Preparing to unpack kapacitor_1.5.1_amd64.deb ...
+Unpacking kapacitor (1.5.1-1) over (1.3.1-1) ...
 Removed symlink /etc/systemd/system/kapacitor.service.
 Removed symlink /etc/systemd/system/multi-user.target.wants/kapacitor.service.
-Setting up kapacitor (1.5.0-1) ...
+Setting up kapacitor (1.5.1-1) ...
 ```
 
 During the upgrade the package manager will detect any differences between the current configuration file and the new configuration file included in the installation package.  The package manager prompts the user to choose how to deal with this conflict.  The default behavior is to preserve the existing configuration file.  This is generally the safest choice, but it can mean losing visibility of new features provided in the more recent release.
@@ -148,9 +148,9 @@ Loading mirror speeds from cached hostfile
  * extras: ftp.fi.muni.cz
  * updates: ftp.sh.cvut.cz
 Installed Packages
-kapacitor.x86_64      1.5.0-1     installed
+kapacitor.x86_64      1.5.1-1     installed
 ```
-If the line `kapacitor.x86_64...1.5.0-1...installed` is returned, it is safe to continue the upgrade using the RPM package and the instructions in this section.  If instead the message `Error: No matching Packages to list` was returned please consult the [Upgrade with .zip or .tar.gz section below](#upgrade-with-zip-or-tar-gz) for a general example on how to proceed.
+If the line `kapacitor.x86_64...1.5.1-1...installed` is returned, it is safe to continue the upgrade using the RPM package and the instructions in this section.  If instead the message `Error: No matching Packages to list` was returned please consult the [Upgrade with .zip or .tar.gz section below](#upgrade-with-zip-or-tar-gz) for a general example on how to proceed.
 
 ### Package upgrade
 
@@ -160,14 +160,14 @@ Kapacitor can now be upgraded using `yum localupdate` from the directory into wh
 
 *Example - yum localupdate*
 ```
-# yum -y localupdate kapacitor-1.5.0.x86_64.rpm
+# yum -y localupdate kapacitor-1.5.1.x86_64.rpm
 Loaded plugins: fastestmirror
 Examining kapacitor-1.5.1.x86_64.rpm: kapacitor-1.3.1-1.x86_64
 Marking kapacitor-1.5.1.x86_64.rpm as an update to kapacitor-1.3.1-1.x86_64
 Resolving Dependencies
 --> Running transaction check
 ---> Package kapacitor.x86_64 0:1.3.1-1 will be updated
----> Package kapacitor.x86_64 0:1.5.0-1 will be an update
+---> Package kapacitor.x86_64 0:1.5.1-1 will be an update
 --> Finished Dependency Resolution
 
 Dependencies Resolved
@@ -176,7 +176,7 @@ Dependencies Resolved
  Package                            Arch                            Version                           Repository                                        Size
 =============================================================================================================================================================
 Updating:
- kapacitor                          x86_64                          1.5.0-1                           /kapacitor-1.5.0.x86_64                           90 M
+ kapacitor                          x86_64                          1.5.1-1                           /kapacitor-1.5.1.x86_64                           90 M
 
 Transaction Summary
 =============================================================================================================================================================
@@ -188,21 +188,21 @@ Running transaction check
 Running transaction test
 Transaction test succeeded
 Running transaction
-  Updating   : kapacitor-1.5.0-1.x86_64                                                                                                                  1/2
+  Updating   : kapacitor-1.5.1-1.x86_64                                                                                                                  1/2
 warning: /etc/kapacitor/kapacitor.conf created as /etc/kapacitor/kapacitor.conf.rpmnew
 Failed to execute operation: Too many levels of symbolic links
-warning: %post(kapacitor-1.5.0-1.x86_64) scriptlet failed, exit status 1
-Non-fatal POSTIN scriptlet failure in rpm package kapacitor-1.5.0-1.x86_64
+warning: %post(kapacitor-1.5.1-1.x86_64) scriptlet failed, exit status 1
+Non-fatal POSTIN scriptlet failure in rpm package kapacitor-1.5.1-1.x86_64
   Cleanup    : kapacitor-1.3.1-1.x86_64                                                                                                                  2/2
 Removed symlink /etc/systemd/system/multi-user.target.wants/kapacitor.service.
 Removed symlink /etc/systemd/system/kapacitor.service.
 Created symlink from /etc/systemd/system/kapacitor.service to /usr/lib/systemd/system/kapacitor.service.
 Created symlink from /etc/systemd/system/multi-user.target.wants/kapacitor.service to /usr/lib/systemd/system/kapacitor.service.
-  Verifying  : kapacitor-1.5.0-1.x86_64                                                                                                                  1/2
+  Verifying  : kapacitor-1.5.1-1.x86_64                                                                                                                  1/2
   Verifying  : kapacitor-1.3.1-1.x86_64                                                                                                                  2/2
 
 Updated:
-  kapacitor.x86_64 0:1.5.0-1
+  kapacitor.x86_64 0:1.5.1-1
 
 Complete!
 
@@ -239,8 +239,8 @@ $ ls -l /opt/influxdata/
 total 20
 lrwxrwxrwx 1 influxdb  influxdb    33 srp 22 12:51 influxdb -> /opt/influxdata/influxdb-1.3.1-1/
 drwxr-xr-x 5 influxdb  influxdb  4096 kvě  8 22:16 influxdb-1.3.1-1
-lrwxrwxrwx 1 kapacitor kapacitor   34 srp 22 12:52 kapacitor -> /opt/influxdata/kapacitor-1.5.0-1/
-drwxr-xr-x 6 kapacitor kapacitor 4096 srp 22 10:56 kapacitor-1.5.0-1
+lrwxrwxrwx 1 kapacitor kapacitor   34 srp 22 12:52 kapacitor -> /opt/influxdata/kapacitor-1.5.1-1/
+drwxr-xr-x 6 kapacitor kapacitor 4096 srp 22 10:56 kapacitor-1.5.1-1
 drwxr-xr-x 2 influxdb  influxdb  4096 srp 22 13:52 ssl
 drwxrwxr-x 5 telegraf  telegraf  4096 úno  1  2017 telegraf
 ```
@@ -320,8 +320,8 @@ drwxr-xr-x 2 root      root      4096 srp 22 15:21 bak
 lrwxrwxrwx 1 root      root        17 srp 22 15:15 influxdb -> influxdb-1.5.2-1/
 drwxr-xr-x 5 influxdb  influxdb  4096 kvě  8 22:16 influxdb-1.2.4-1
 drwxr-xr-x 5 influxdb  influxdb  4096 srp  5 01:33 influxdb-1.5.2-1
-lrwxrwxrwx 1 kapacitor kapacitor   34 srp 22 12:52 kapacitor -> /opt/influxdata/kapacitor-1.5.0-1/
-drwxr-xr-x 6 kapacitor kapacitor 4096 srp 22 10:56 kapacitor-1.5.0-1
+lrwxrwxrwx 1 kapacitor kapacitor   34 srp 22 12:52 kapacitor -> /opt/influxdata/kapacitor-1.5.1-1/
+drwxr-xr-x 6 kapacitor kapacitor 4096 srp 22 10:56 kapacitor-1.5.1-1
 drwxr-xr-x 2 influxdb  influxdb  4096 srp 22 13:52 ssl
 drwxr-xr-x 5 telegraf  telegraf  4096 čec 27 01:26 telegraf
 ```
@@ -331,39 +331,39 @@ Kapacitor is upgraded using the same approach as the InfluxDB upgrade.  The new 
 ```
 $ cd /opt/influxdata
 $ sudo tar -xvzf /home/karl/Downloads/install/kapacitor-1.3.1_linux_amd64.tar.gz
-./kapacitor-1.5.0-1/
-./kapacitor-1.5.0-1/usr/
-./kapacitor-1.5.0-1/usr/bin/
-./kapacitor-1.5.0-1/usr/bin/kapacitord
-./kapacitor-1.5.0-1/usr/bin/kapacitor
-./kapacitor-1.5.0-1/usr/bin/tickfmt
-./kapacitor-1.5.0-1/usr/lib/
-./kapacitor-1.5.0-1/usr/lib/kapacitor/
-./kapacitor-1.5.0-1/usr/lib/kapacitor/scripts/
-./kapacitor-1.5.0-1/usr/lib/kapacitor/scripts/init.sh
-./kapacitor-1.5.0-1/usr/lib/kapacitor/scripts/kapacitor.service
-./kapacitor-1.5.0-1/usr/share/
-./kapacitor-1.5.0-1/usr/share/bash-completion/
-./kapacitor-1.5.0-1/usr/share/bash-completion/completions/
-./kapacitor-1.5.0-1/usr/share/bash-completion/completions/kapacitor
-./kapacitor-1.5.0-1/var/
-./kapacitor-1.5.0-1/var/log/
-./kapacitor-1.5.0-1/var/log/kapacitor/
-./kapacitor-1.5.0-1/var/lib/
-./kapacitor-1.5.0-1/var/lib/kapacitor/
-./kapacitor-1.5.0-1/etc/
-./kapacitor-1.5.0-1/etc/kapacitor/
-./kapacitor-1.5.0-1/etc/kapacitor/kapacitor.conf
-./kapacitor-1.5.0-1/etc/logrotate.d/
-./kapacitor-1.5.0-1/etc/logrotate.d/kapacitor
+./kapacitor-1.5.1-1/
+./kapacitor-1.5.1-1/usr/
+./kapacitor-1.5.1-1/usr/bin/
+./kapacitor-1.5.1-1/usr/bin/kapacitord
+./kapacitor-1.5.1-1/usr/bin/kapacitor
+./kapacitor-1.5.1-1/usr/bin/tickfmt
+./kapacitor-1.5.1-1/usr/lib/
+./kapacitor-1.5.1-1/usr/lib/kapacitor/
+./kapacitor-1.5.1-1/usr/lib/kapacitor/scripts/
+./kapacitor-1.5.1-1/usr/lib/kapacitor/scripts/init.sh
+./kapacitor-1.5.1-1/usr/lib/kapacitor/scripts/kapacitor.service
+./kapacitor-1.5.1-1/usr/share/
+./kapacitor-1.5.1-1/usr/share/bash-completion/
+./kapacitor-1.5.1-1/usr/share/bash-completion/completions/
+./kapacitor-1.5.1-1/usr/share/bash-completion/completions/kapacitor
+./kapacitor-1.5.1-1/var/
+./kapacitor-1.5.1-1/var/log/
+./kapacitor-1.5.1-1/var/log/kapacitor/
+./kapacitor-1.5.1-1/var/lib/
+./kapacitor-1.5.1-1/var/lib/kapacitor/
+./kapacitor-1.5.1-1/etc/
+./kapacitor-1.5.1-1/etc/kapacitor/
+./kapacitor-1.5.1-1/etc/kapacitor/kapacitor.conf
+./kapacitor-1.5.1-1/etc/logrotate.d/
+./kapacitor-1.5.1-1/etc/logrotate.d/kapacitor
 ```
 Following extraction the old symbolic link is removed and a new one is created to the new distribution.  This approach is similar to simply unpacking or copying the distribution contents over the existing directories, which is also a feasible approach.  Parallel unpacking and link creation offers the advantage of preserving the previous installation, albeit in a now inactive place. This approach facilitates reverting back to the previous installation, if for some reason that will be desired.
 
 *Example - Post extraction commands*
 ```bash
-$ sudo chown -R kapacitor:kapacitor kapacitor-1.5.0-1/
+$ sudo chown -R kapacitor:kapacitor kapacitor-1.5.1-1/
 $ sudo rm kapacitor
-$ sudo ln -s ./kapacitor-1.5.0-1/ ./kapacitor
+$ sudo ln -s ./kapacitor-1.5.1-1/ ./kapacitor
 $ sudo chown kapacitor:kapacitor kapacitor
 $ ls -l
 total 28
@@ -371,9 +371,9 @@ drwxr-xr-x 2 root      root      4096 srp 22 15:21 bak
 lrwxrwxrwx 1 root      root        17 srp 22 15:15 influxdb -> influxdb-1.5.2-1/
 drwxr-xr-x 5 influxdb  influxdb  4096 kvě  8 22:16 influxdb-1.2.4-1
 drwxr-xr-x 5 influxdb  influxdb  4096 srp  5 01:33 influxdb-1.5.2-1
-lrwxrwxrwx 1 kapacitor kapacitor   20 srp 22 15:35 kapacitor -> ./kapacitor-1.5.0-1/
-drwxr-xr-x 6 kapacitor kapacitor 4096 srp 22 10:56 kapacitor-1.5.0-1
-drwxr-xr-x 5 kapacitor kapacitor 4096 čen  2 20:22 kapacitor-1.5.0-1
+lrwxrwxrwx 1 kapacitor kapacitor   20 srp 22 15:35 kapacitor -> ./kapacitor-1.5.1-1/
+drwxr-xr-x 6 kapacitor kapacitor 4096 srp 22 10:56 kapacitor-1.5.1-1
+drwxr-xr-x 5 kapacitor kapacitor 4096 čen  2 20:22 kapacitor-1.5.1-1
 drwxr-xr-x 2 influxdb  influxdb  4096 srp 22 13:52 ssl
 drwxr-xr-x 5 telegraf  telegraf  4096 čec 27 01:26 telegraf
 ```
