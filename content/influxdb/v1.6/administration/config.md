@@ -29,6 +29,7 @@ The InfluxDB OSS configuration file contains configuration settings specific to 
   * [OpenTSB settings `[[opentsdb]]`](#opentsdb-settings-opentsdb)
   * [UDP settings `[[udp]]`](#udp-settings-udp)
   * [Continuous queries settings `[continuous_queries]`](#continuous-queries-settings-continuous-queries)
+  * [Transport Layer Security (TLS) settings `[tls]`](#transport-layer-security-tls-settings-tls)
 
 ## Configuration overview
 
@@ -1024,3 +1025,20 @@ Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_QUERY_STATS_ENABLED`
 The interval at which InfluxDB checks to see if a CQ needs to run. Set this option to the lowest interval at which your CQs run. For example, if your most frequent CQ runs every minute, set `run-interval` to `1m`.
 
 Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_RUN_INTERVAL`
+
+
+## Transport Layer Security (TLS) settings `[tls]`
+
+Global configuration settings for Transport Layer Security (TLS) in InfluxDB.
+
+### `ciphers = [ "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305", "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256", ]`
+
+Determines the available set of cipher suites. See the https://golang.org/pkg/crypto/tls/#pkg-constants for a list of available ciphers, which depends on the version of Go (use the query `SHOW DIAGNOSTICS` to see the version of Go used to build InfluxDB). If not specified, uses the default settings from the Go `crypto/tls` package.
+
+### `min-version = "tls1.2"`
+
+Minimum version of the TLS protocol that will be negotiated. If not specified, uses the default settings from the Go `crypto/tls` package.
+
+### `max-version = "tls1.2"`
+
+Maximum version of the TLS protocol that will be negotiated. If not specified, uses the default settings from the Go `crypto/tls` package.
