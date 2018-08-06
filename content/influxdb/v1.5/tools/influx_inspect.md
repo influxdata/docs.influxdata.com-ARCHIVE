@@ -27,14 +27,15 @@ influx_inspect [ [ command ] [ options ] ]`
 
 The `influx_inspect` commands are summarized here, with links to detailed information on each of the commands.
 
-* [`buildtsi`](#buildtsi): Convert in-memory (TSM-based) shards to TSI
-* [`dumptsi`](#dumptsi): Dump low-level details about TSI files.
-* [`dumptsm`](#dumptsm): Dump low-level details about TSM files. 
-* [`export`](#export): Export raw data from a shard in Line Protocol format.
-* [`help`](#help): Display this help message format.
-* [`report`](#report): Display a shard level report.
-* [`verify`](#verify): Verify the integrity of TSM files.
-
+* [`buildtsi`](#buildtsi): Converts in-memory (TSM-based) shards to TSI
+* [`dumptsi`](#dumptsi): Dumps low-level details about TSI files.
+* [`dumptsm`](#dumptsm): Dumps low-level details about TSM files.
+* [`export`](#export): Exports raw data from a shard in Line Protocol format.
+* [`help`](#help): Displays this help message format.
+* [`report`](#report): Displays a shard level report.
+* [`reporttsi`](#reporttsi): Provides a report about series cardinality in TSI indexes.
+* [`verify`](#verify): Verifies the integrity of TSM files.
+* [`verify-seriesfile`]: Verifies the integrity of TSI files.
 
 ### `buildtsi`
 
@@ -176,7 +177,7 @@ $ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index/file0
 $ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index/file0 /path/to/index/file1 ...
 ```
 
-### `influx_inspect dumptsm`
+### `dumptsm`
 
 Dumps low-level details about [TSM](/influxdb/v1.6/concepts/glossary/#tsm-time-structured-merge-tree) files, including TSM (`.tsm`) files and WAL (`.wal`) files.
 
@@ -319,13 +320,38 @@ Optional arguments are in brackets.
 The regular expression or wildcard pattern to match included files.
 Default value is `""`.
 
-#### [ `-detailed` ]
+##### [ `-detailed` ]
 
 Report detailed cardinality estimates.
 Default value is `false`.
 
 
+### `reporttsi`
 
+Provides a report about the series cardinality in one or more TSI indexes.
+
+This command is useful when there has been a change in cardinality, and it's not clear whcih measurement is responsible for this change, and further, roughly _when_ that change happened. Emitting an accurate cardinality breakdown for each measurement and for each shard will help answer those questions.
+
+The report does the following:
+* calculates the total exact series cardinality in the database
+* segments cardinality by measurement and emits those cardinality values
+* emits the total exact cardinality for each shard in the database
+* segments for each shard the exact cardinality for each measurement in the shard
+* optionally, limits the results to the top `n` when using the `-top <n>` argument
+
+#### Syntax
+
+```
+$ influx_inspect reporttsi -db-path ~/.influxdb/data/stress -top 10
+```
+#### Arguments
+
+Optional arguments are in brackets.
+
+##### `-db-path`
+
+##### `-top <n>`
+Limits results to the top `<n>` cardinality by measurement.
 
 ### `verify`
 
@@ -340,14 +366,15 @@ influx_inspect verify [ options ]
 
 Optional arguments are in brackets.
 
-#### `-dir <storage_root>`
+##### `-dir <storage_root>`
 
 The path to the storage root directory.
 ​Default value is `"/root/.influxdb"`.
 
+### `verify-seriesfile [ <data_dir> ]`
 
 # Caveats
 
 The system does not have access to the metastore when exporting TSM shards.
-As such, it always creates the [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) with infinite duration and replication factor of 1.  End users may want to change this prior to reimporting if they are importing to a cluster or want a different duration
-for retention.
+As such, it always creates the [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) with infinite duration and replication factor of 1.  
+End users may want to change this prior to reimporting if they are importing to a cluster or want a different duration for retention.
