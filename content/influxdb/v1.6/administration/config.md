@@ -334,6 +334,11 @@ will fail.
 
 Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 
+### `tsm-use-madv-willneed = false`
+
+If true, then the mmap advise value `MADV_WILLNEED` will be provided to the kernel with respect to TSM files. This setting has been found to be problematic on some kernels, and defaults to off. It might help users who have slow disks in some cases.
+
+
 ## Query management settings `[coordinator]`
 
 This section contains configuration settings for query management.
