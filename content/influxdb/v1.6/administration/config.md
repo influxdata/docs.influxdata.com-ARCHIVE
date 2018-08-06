@@ -1029,22 +1029,24 @@ Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_RUN_INTERVAL`
 
 ## Transport Layer Security (TLS) settings `[tls]`
 
-Global configuration settings for Transport Layer Security (TLS) in InfluxDB.
+Global configuration settings for Transport Layer Security (TLS) in InfluxDB.  
+
+The InfluxDB default values for TLS `ciphers`, `min-version`, and `max-version` are listed in the [Constants section of the Go `crypto/tls` package documentation](https://golang.org/pkg/crypto/tls/#pkg-constants) and depend on the version of Go. Use the `SHOW DIAGNOSTICS` command to see the version of Go used to build InfluxDB.
 
 ### `ciphers = [ "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305", "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256", ]`
 
-Determines the available set of cipher suites. See the https://golang.org/pkg/crypto/tls/#pkg-constants for a list of available ciphers, which depends on the version of Go (use the query `SHOW DIAGNOSTICS` to see the version of Go used to build InfluxDB). If not specified, uses the default settings from the Go `crypto/tls` package.
+Specifies the set of cipher suite IDs to negotiate. If not specified, uses the list of values from the Go `crypto/tls` package.
 
 Environment variable: `INFLUXDB_TLS_CIPHERS`
 
 ### `min-version = "tls1.2"`
 
-Minimum version of the TLS protocol that will be negotiated. If not specified, uses the default settings from the Go `crypto/tls` package.
+Minimum version of the TLS protocol that will be negotiated. If not specified, uses the minimum TLS value specified in the Go `crypto/tls` package. In this example, `tls1.2` specifies the same version as the `max-version` example, which would result in support for only TLS 1.2.
 
 Environment variable: `INFLUXDB_TLS_MIN_VERSION`
 
 ### `max-version = "tls1.2"`
 
-Maximum version of the TLS protocol that will be negotiated. If not specified, uses the default settings from the Go `crypto/tls` package.
+Maximum version of the TLS protocol that will be negotiated. If not specified, uses the maximum TLS value specified in the Go `crypto/tls` package. In this example, `tls1.2` specifies the same version as the `min-version` example, which would result in support for only TLS 1.2.
 
 Environment variable: `INFLUXDB_TLS_MAX_VERSION`
