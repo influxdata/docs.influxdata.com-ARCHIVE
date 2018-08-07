@@ -58,7 +58,6 @@ file.
 If a configuration option is not specified in either the configuration file or in an environment variable, InfluxDB uses its internal default configuration.
 
 > ***Note:*** If an environment variable has already been set, the equivalent configuration setting in the configuration file is ignored.
->
 
 #### InfluxDB environment variables (`INFLUXDB_*`)
 
@@ -67,8 +66,7 @@ The InfluxDB environment variables are documented below with the corresponding c
 
 #### `GOMAXPROCS`
 
-> ***Note:***
-> The GOMAXPROCS environment variable cannot be set using the InfluxDB configuration file settings, like other environment variables.
+> ***Note:*** The GOMAXPROCS environment variable cannot be set using the InfluxDB configuration file settings, like other environment variables.
 
 
 The `GOMAXPROCS` [Go language environment variable](https://golang.org/pkg/runtime/#hdr-Environment_Variables) can be used to set the maximum number of CPUs that can execute simultaneously.
@@ -291,7 +289,8 @@ Environment variable: `INFLUXDB_DATA_COMPACT_FULL_WRITE_COLD_DURATION`
 ### `max-concurrent-compactions = 0`
 
 The maximum number of concurrent full and level [compactions](/influxdb/v1.6/concepts/storage_engine/#compactions) that can run at one time.
-A value of `0` results in `runtime.GOMAXPROCS(0)` used at runtime -- which means use all processors.
+A value of `0` results in `runtime.GOMAXPROCS(0)` being used at runtime — all processors are available.
+If explicitly set, the number of cores used for compaction is limited to the specified value.
 This setting does not apply to cache snapshotting.
 
 Environment variable: `INFLUXDB_DATA_MAX_CONCURRENT_COMPACTIONS`
@@ -336,8 +335,9 @@ Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 
 ### `tsm-use-madv-willneed = false`
 
-If true, then the mmap advise value `MADV_WILLNEED` will be provided to the kernel with respect to TSM files. This setting has been found to be problematic on some kernels, and defaults to off. It might help users who have slow disks in some cases.
+If `true`, then the MMap Advise value `MADV_WILLNEED` advises the kernel about how to handle the mapped memory region in terms of input/output paging and to expect access to the mapped memory region in the near future, with respect to TSM files. Because this setting has been problematic on some kernels, the default is `false`. Changing the value to `true` might help users who have slow disks in some cases.
 
+Environment variable: `INFLUXDB_TSM_USE_MADV_WILLNEED`
 
 ## Query management settings `[coordinator]`
 
