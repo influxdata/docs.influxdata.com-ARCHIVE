@@ -9,8 +9,8 @@ menu:
 
 ### Bugfixes
 
-- `pagerduty2` should use `routingKey` rather than `serviceKey`
-- Fix KafkaTopic not working from TICKscript
+- `pagerduty2` should use `routingKey` rather than `serviceKey`.
+- Fix KafkaTopic not working from TICKscript.
 - Improve Kafka alert throughput.
 
 ## v1.5.0 [2018-05-17]
