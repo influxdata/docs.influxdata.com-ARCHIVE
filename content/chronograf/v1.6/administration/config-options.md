@@ -86,7 +86,7 @@ Environment variable: `$CANNED_PATH`
 
 #### `--resources-path=`
 
-Path to directory of pre-canned dashboards, sources, kapacitors, and organizations
+Path to directory of canned dashboards, sources, Kapacitor connections, and organizations.
 
 Default value: `/usr/share/chronograf/resources`
 
