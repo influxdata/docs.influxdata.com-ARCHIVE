@@ -13,6 +13,8 @@ The InfluxDB OSS configuration file contains configuration settings specific to 
 
 * [Configuration overview](#configuration-overview)
 * [Environment variables](#environment-variables)
+  * [InfluxDB environment variables (`INFLUXDB_*`)](#influxdb-environment-variables-influxdb)
+  * [`GOMAXPROCS` environment variable](#gomaxprocs-environment-variable)
 * [Using the configuration file](#using-the-configuration-file)
 * [Configuration file settings](#configuration-file-settings)
   * [Global settings](#global-settings)
@@ -59,12 +61,12 @@ If a configuration option is not specified in either the configuration file or i
 
 > ***Note:*** If an environment variable has already been set, the equivalent configuration setting in the configuration file is ignored.
 
-#### InfluxDB environment variables (`INFLUXDB_*`)
+### InfluxDB environment variables (`INFLUXDB_*`)
 
 The InfluxDB environment variables are documented below with the corresponding configuration file settings. All of the InfluxDB-specific environment variables are prefixed with `INFLUXDB_`.
 
 
-#### `GOMAXPROCS`
+### `GOMAXPROCS` environment variable
 
 > ***Note:*** The GOMAXPROCS environment variable cannot be set using the InfluxDB configuration file settings, like other environment variables.
 
@@ -291,7 +293,7 @@ Environment variable: `INFLUXDB_DATA_COMPACT_FULL_WRITE_COLD_DURATION`
 The maximum number of concurrent full and level [compactions](/influxdb/v1.6/concepts/storage_engine/#compactions) that can run at one time.
 A value of `0` results in `runtime.GOMAXPROCS(0)` being used at runtime — all processors are available.
 If explicitly set, the number of cores used for compaction is limited to the specified value.
-This setting does not apply to cache snapshotting.
+This setting does not apply to cache snapshotting. For more information on GOMAXPROCS environment variable, see the [`GOMAXPROCS` environment variable](#gomaxprocs-environment-variable) section on this page. 
 
 Environment variable: `INFLUXDB_DATA_MAX_CONCURRENT_COMPACTIONS`
 
@@ -335,7 +337,8 @@ Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 
 ### `tsm-use-madv-willneed = false`
 
-If `true`, then the MMap Advise value `MADV_WILLNEED` advises the kernel about how to handle the mapped memory region in terms of input/output paging and to expect access to the mapped memory region in the near future, with respect to TSM files. Because this setting has been problematic on some kernels, the default is `false`. Changing the value to `true` might help users who have slow disks in some cases.
+If `true`, then the MMap Advise value `MADV_WILLNEED` advises the kernel about how to handle the mapped memory region in terms of input/output paging and to expect access to the mapped memory region in the near future, with respect to TSM files. Because this setting has been problematic on some kernels, the default is `false`. 
+Changing the value to `true` might help users who have slow disks in some cases.
 
 Environment variable: `INFLUXDB_TSM_USE_MADV_WILLNEED`
 
