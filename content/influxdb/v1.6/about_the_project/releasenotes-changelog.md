@@ -7,7 +7,31 @@ menu:
     parent: About the project
 ---
 
-# v1.6.0 [2018-07-05]
+## v1.6.1 [2018-08-03]
+-------------------
+
+### Features
+
+*	Improve LogFile performance with bitset iterator.
+*	Add TSI index cardinality report to `influx_inspect`.
+*	Update to Go 1.10.
+*	Improve performance of `buildtsi` and TSI planning.
+*	Improve performance of read service for single measurements.
+*	Remove max concurrent compaction limit.
+*	Add roaring bitmaps to TSI index files.
+*	Provide configurable TLS options.
+*	Add option to hint MADV_WILLNEED to kernel.
+
+### Bugfixes
+
+*	Improve series segment recovery.
+*	Fix windows mmap on zero length file.
+*	Ensure Filter iterators executed as late as possible.
+*	Document UDP precision setting in config.
+*	Allow tag keys to contain underscores.
+*	Fix a panic when matching on a specific type of regular expression.
+
+## v1.6.0 [2018-07-05]
 -------------------
 
 ### Breaking changes
