@@ -8,7 +8,7 @@ menu:
 ---
 
 ## v1.6.1 [2018-08-03]
--------------------
+
 
 ### Features
 
@@ -18,7 +18,6 @@ menu:
 *	Improve performance of `buildtsi` and TSI planning.
 *	Improve performance of read service for single measurements.
 *	Remove max concurrent compaction limit.
-*	Add roaring bitmaps to TSI index files.
 *	Provide configurable TLS options.
 *	Add option to hint MADV_WILLNEED to kernel.
 
@@ -32,7 +31,6 @@ menu:
 *	Fix a panic when matching on a specific type of regular expression.
 
 ## v1.6.0 [2018-07-05]
--------------------
 
 ### Breaking changes
 
