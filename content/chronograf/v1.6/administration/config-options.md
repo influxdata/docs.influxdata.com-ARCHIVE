@@ -84,6 +84,14 @@ Default value: `/usr/share/chronograf/canned`
 
 Environment variable: `$CANNED_PATH`
 
+#### `--resources-path=`
+
+Path to directory of canned dashboards, sources, Kapacitor connections, and organizations.
+
+Default value: `/usr/share/chronograf/resources`
+
+Default value: `$RESOURCES_PATH`
+
 #### `--basepath=` | `-p`
 
 The URL path prefix under which all `chronograf` routes will be mounted.
@@ -110,6 +118,9 @@ $ chronograf -v
 
 ## InfluxDB connection options
 
+> InfluxDB connection details specified via command line when starting Chronograf do not persist when Chronograf is shut down.
+> To persist connection details, [include them in a `.src` file](/chronograf/v1.6/administration/creating-connections/#managing-influxdb-connections-using-src-files) located in your [`--resources-path`](#resources-path).
+
 ### `--influxdb-url=`
 
 The location of your InfluxDB instance, including `http://`, IP address, and port.
@@ -131,6 +142,9 @@ The [password] for your InfluxDB instance.
 Environment variable: `$INFLUXDB_PASSWORD`
 
 ## Kapacitor connection options
+
+> Kapacitor connection details specified via command line when starting Chronograf do not persist when Chronograf is shut down.
+> To persist connection details, [include them in a `.kap` file](/chronograf/v1.6/administration/creating-connections/#managing-influxdb-connections-using-kap-files) located in your [`--resources-path`](#resources-path).
 
 ### `--kapacitor-url=`
 
