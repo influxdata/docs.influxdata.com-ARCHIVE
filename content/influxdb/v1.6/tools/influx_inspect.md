@@ -393,13 +393,12 @@ Default value is `""`.
 The flag to report detailed cardinality estimates.
 Default value is `false`.
 
-### [ `-exact` ]
+#### [ `-exact` ]
 
 The flag to report exact cardinality counts instead of estimates.
 Default value is `false`.
 Note: This can use a lot of memory.
 
-Report
 
 ### `verify`
 

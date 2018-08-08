@@ -1,5 +1,6 @@
 ---
 title: Enabling HTTPS with InfluxDB
+description: Enable HTTPS and Transport Security Layer (TLS) secure communication between clients and your InfluxDB servers.
 menu:
   influxdb_1_6:
     name: Enabling HTTPS
@@ -68,7 +69,13 @@ sudo chmod 644 /etc/ssl/<certificate-file>
 sudo chmod 600 /etc/ssl/<private-key-file>
 ```
 
-#### Step 3: Enable HTTPS in the InfluxDB configuration file
+#### Step 3: Review the TLS configuration settings
+
+By default, InfluxDB supports the values for TLS `ciphers`, `min-version`, and `max-version` listed in the [Constants section of the Go `crypto/tls` package documentation](https://golang.org/pkg/crypto/tls/#pkg-constants) and depends on the version of Go used to build InfluxDB. You can configure InfluxDB to support a restricted list of TLS cipher suite IDs and versions.
+For more information, see [Transport Layer Security (TLS) configuration settings](/influxdb/v1.6/administration/config#transport-layer-security-tls-settings-tls).
+
+
+#### Step 4: Enable HTTPS in the InfluxDB configuration file
 
 HTTPS is disabled by default.
 Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
@@ -98,14 +105,14 @@ Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc
   https-private-key = "/etc/ssl/<private-key-file>.key"
 ```
 
-#### Step 4: Restart the InfluxDB service
+#### Step 5: Restart the InfluxDB service
 
 Restart the InfluxDB process for the configuration changes to take effect:
 ```
 sudo systemctl restart influxdb
 ```
 
-#### Step 5: Verify the HTTPS setup
+#### Step 6: Verify the HTTPS setup
 
 Verify that HTTPS is working by connecting to InfluxDB with the [CLI tool](/influxdb/v1.6/tools/shell/):
 ```
@@ -138,7 +145,12 @@ When you execute the command, it will prompt you for more information.
 You can choose to fill out that information or leave it blank;
 both actions generate valid certificate files.
 
-#### Step 2: Enable HTTPS in InfluxDB's configuration file
+#### Step 2: Review the TLS configuration settings
+
+By default, InfluxDB supports the values for TLS `ciphers`, `min-version`, and `max-version` listed in the [Constants section of the Go `crypto/tls` package documentation](https://golang.org/pkg/crypto/tls/#pkg-constants) and depends on the version of Go used to build InfluxDB. You can configure InfluxDB to support a restricted list of TLS cipher suite IDs and versions. For more information, see [Transport Layer Security (TLS) settings `[tls]`](/influxdb/v1.6/administration/config#transport-layer-security-tls-settings-tls).
+
+
+#### Step 3: Enable HTTPS in InfluxDB's configuration file
 
 HTTPS is disabled by default.
 Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
@@ -164,14 +176,17 @@ Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc
   https-private-key = "/etc/ssl/influxdb-selfsigned.key"
 ```
 
-#### Step 3: Restart InfluxDB
+> If setting up HTTPS for [InfluxDB Enterprise](/enterprise_influxdb), you also need to configure insecure TLS connections between both meta and data nodes in your cluster.
+> Instructions are provided in the [InfluxDB Enterprise HTTPS Setup guide](/enterprise_influxdb/latest/guides/https_setup/#setup-https-with-a-self-signed-certificate).
+
+#### Step 4: Restart InfluxDB
 
 Restart the InfluxDB process for the configuration changes to take effect:
 ```
 sudo systemctl restart influxdb
 ```
 
-#### Step 4: Verify the HTTPS Setup
+#### Step 5: Verify the HTTPS setup
 
 Verify that HTTPS is working by connecting to InfluxDB with the [CLI tool](/influxdb/v1.6/tools/shell/):
 ```
@@ -253,7 +268,7 @@ Note: The password is required, but will not be used for client certificate auth
 > GRANT WRITE ON "telegraf" to "testuser"
 ```
 
-#### Step 5: Verify the HTTPS setup
+#### Step 4: Verify the HTTPS setup
 
 Verify that client certificate authentication is working by connecting to InfluxDB with curl:
 ```
