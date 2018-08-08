@@ -121,7 +121,7 @@ InfluxDB shell version: 1.x.x
 
 That's it! You've successfully set up HTTPS with InfluxDB.
 
-## Setup HTTPS with a Self-Signed Certificate
+## Setup HTTPS with a self-signed certificate
 
 #### Step 1: Generate a self-signed certificate
 
@@ -164,14 +164,14 @@ Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc
   https-private-key = "/etc/ssl/influxdb-selfsigned.key"
 ```
 
-#### Step 3: Restart InfluxDB
+#### Step 3: Restart the InfluxDB service
 
-Restart the InfluxDB process for the configuration changes to take effect:
+Restart the InfluxDB service for the configuration changes to take effect:
 ```bash
 sudo systemctl restart influxdb
 ```
 
-#### Step 4: Verify the HTTPS Setup
+#### Step 4: Verify the HTTPS setup
 
 Verify that HTTPS is working by connecting to InfluxDB with the [CLI tool](/influxdb/v1.5/tools/shell/):
 ```bash
@@ -237,6 +237,7 @@ sudo openssl ca -infiles /etc/ssl/<client-certificate-file>.csr -out /etc/ssl/<c
 ```
 
 #### Step 2: Ensure file permissions
+
 Certificate files require read and write access by the `root` user.
 Ensure that you have the correct file permissions by running the following
 commands:
