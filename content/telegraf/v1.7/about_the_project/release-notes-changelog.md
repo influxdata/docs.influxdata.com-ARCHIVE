@@ -8,6 +8,18 @@ menu:
     parent: About the project
 ---
 
+## v1.7.3 [2018-08-07]
+
+### Bugfixes
+
+* Reduce required Docker API version.
+* Keep leading whitespace for messages in syslog input.
+* Skip bad entries on interrupt input.
+* Preserve metric type when using filters in output plugins.
+* Fix error message if URL is unparseable in InfluxDB output.
+* Use explicit `zpool` properties to fix parse error on FreeBSD 11.2.
+* Lock buffer when adding metrics.
+
 ## v1.7.2 [2018-07-18]
 
 ### Bug fixes

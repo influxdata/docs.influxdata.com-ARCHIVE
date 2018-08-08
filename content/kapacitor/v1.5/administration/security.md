@@ -191,7 +191,7 @@ upload completely sent off: 43 out of 43 bytes
 < HTTP/1.1 204 No Content
 < Content-Type: application/json; charset=utf-8
 < Request-Id: 189e9abb-157b-11e8-866a-000000000000
-< X-Kapacitor-Version: 1.5.0~n201802140813
+< X-Kapacitor-Version: 1.5.1~n201802140813
 < Date: Mon, 19 Feb 2018 13:45:07 GMT
 <
 * Connection #0 to host localhost left intact

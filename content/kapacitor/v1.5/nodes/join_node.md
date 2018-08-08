@@ -109,7 +109,7 @@ errors
 |:---|:---|
 | **[as](#as)&nbsp;(&nbsp;`names`&nbsp;`...string`)** | Prefix names for all fields from the respective nodes. Each field from the parent nodes will be prefixed with the provided name and a `.`. See the example below. |
 | **[delimiter](#delimiter)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The delimiter for the field name prefixes. Can be the empty string.  |
-| **[fill](#fill)&nbsp;(&nbsp;`value`&nbsp;`interface{}`)** | Fill the data. The fill option implies the type of join: inner or full outer Options are:  |
+| **[fill](#fill)&nbsp;(&nbsp;`value`&nbsp;`interface{}`)** | Fill the data. The fill option implies the type of join: inner or full outer.  |
 | **[on](#on)&nbsp;(&nbsp;`dims`&nbsp;`...string`)** | Join on a subset of the group by dimensions. This is a special case where you want a single point from one parent to join with multiple points from a different parent.  |
 | **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress all error logging events from this node.  |
 | **[streamName](#streamname)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of this new joined data stream. If empty the name of the left parent is used.  |
@@ -211,20 +211,24 @@ join.delimiter(value string)
 ### Fill
 
 Fill the data.
-The fill option implies the type of join: inner or full outer
+The fill option implies the type of join: inner or full outer.
 Options are:
 
 - none - (default) skip rows where a point is missing, inner join.
 - null - fill missing points with null, full outer join.
 - Any numerical value - fill fields with given value, full outer join.
 
-When using a numerical or null fill, the fields names are determined by copying
-the field names from another point.
-This doesn't work well when different sources have different field names.
-Use the [DefaultNode](/kapacitor/v1.5/nodes/default_node/) and [DeleteNode](/kapacitor/v1.5/nodes/delete_node/) to finalize the fill operation if necessary.
+> When using a numerical or null fill, the fields names are determined by copying
+> the field names from another point.
+> This doesn't work well when different sources have different field names.
+> Use the [DefaultNode](/kapacitor/v1.5/nodes/default_node/) and [DeleteNode](/kapacitor/v1.5/nodes/delete_node/)
+> to finalize the fill operation if necessary.
+
+```js
+join.fill(value interface{})
+```
 
 Example:
-
 
 ```js
     var maintlock = stream
@@ -258,11 +262,53 @@ Example:
         |...
 ```
 
-
+#### Handling null fill values in outer joins
+When using Kapacitor to perform an outer join, it's important to set default values
+for `null` fields resulting from the join and fill operations.
+This is done using the [DefaultNode](/kapacitor/latest/nodes/default_node/),
+which replaces null values for a specific field key with a specified default value.
+Not doing so may result in invalid line protocol (as `null` isn't an appropriate
+value for all field types) causing the join to fail.
 
 ```js
-join.fill(value interface{})
+source1
+  |join(source2)
+    .as('source1', 'source2')
+    .fill('null')
+  |default()
+    // .field('field-key', default-value)
+
+    // Define a default for an integer field type
+    .field('source1.rounded', 0)
+    // Define a default for a float field type
+    .field('source1.value', 0.0)
+    // Define a default for a string field type
+    .field('source2.location', '')
+    // Define a default for a boolean field type
+    .field('source2.maintenance', false)
 ```
+
+> When using this method, you must know all fields and field types resulting from
+> the join and provide the appropriate default values.
+
+You can also use the [DeleteNode](/kapacitor/v1.5/nodes/delete_node/) to remove
+unnecessary fields or tags resulting from the join.
+
+```js
+source1
+  |join(source2)
+    .as('source1', 'source2')
+    .fill('null')
+  |default()
+    .field('source1.mode', false)
+    .field('source2.value', 0.0)
+  |delete()
+    .field('source1.anon')
+    .tag('host')
+```
+
+
+
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 

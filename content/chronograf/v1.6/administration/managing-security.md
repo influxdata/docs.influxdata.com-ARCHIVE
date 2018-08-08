@@ -19,6 +19,7 @@ menu:
   * [Configuring Auth0 authentication](#configuring-auth0-authentication)
   * [Configuring Heroku authentication](#configuring-heroku-authentication)
   * [Configuring Okta authentication](#configuring-okta-authentication)
+  * [Configuring GitLab authentication](#configuring-gitlab-authentication)
   * [Configuring Generic authentication](#configuring-generic-authentication)
 * [Configuring authentication duration](#configuring-authentication-duration)
 * [Configuring TLS (Transport Layer Security) and HTTPS](#configuring-tls-transport-layer-security-and-https)
@@ -169,7 +170,7 @@ export GH_ORGS=hill-valley-preservation-sociey,the-pinheads
 
 ### Configuring Google authentication
 
-Chronograf supports using the [Google OAuth 2.0 authentication proivder](https://developers.google.com/identity/protocols/OAuth2) to request authorization and provide authentication. To use Google authentication, you need to register a Google application and use the assigned Client ID and Client Secret, as well as specify a Public URL.
+Chronograf supports using the [Google OAuth 2.0 authentication provider](https://developers.google.com/identity/protocols/OAuth2) to request authorization and provide authentication. To use Google authentication, you need to register a Google application and use the assigned Client ID and Client Secret, as well as specify a Public URL.
 
 #### Overview
 
@@ -326,21 +327,79 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 
 2. Set the following Chronograf environment variables (or associated command line options):
 
-  * `GENERIC_NAME=okta`
-  * `GENERIC_CLIENT_ID=<okta_client_ID>``
-    - The **Client ID** value is in the **Client Credentials** section.
-  * `GENERIC_CLIENT_SECRET=<okta_client_secret>``
-    - The **Client secret** value is in the **Client Credentials** section.
-  * `GENERIC_AUTH_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/authorize`
-  * `GENERIC_TOKEN_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/token`
-  * `GENERIC_API_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/userinfo`
-  * `PUBLIC_URL=http://localhost:8888`
-  * `TOKEN_SECRET=secretsecretsecret`
-  * `GENERIC_SCOPES=openid,profile,email`
+  ```bash
+  GENERIC_NAME=okta
+
+  # The client ID is provided in the "Client Credentials" section of the Okta dashboard.
+  GENERIC_CLIENT_ID=<okta_client_ID>
+
+  # The client secret is in the "Client Credentials" section of the Okta dashboard.
+  GENERIC_CLIENT_SECRET=<okta_client_secret>
+
+  GENERIC_AUTH_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/authorize
+  GENERIC_TOKEN_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/token
+  GENERIC_API_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/userinfo
+  PUBLIC_URL=http://localhost:8888
+  TOKEN_SECRET=secretsecretsecret
+  GENERIC_SCOPES=openid,profile,email
+  ```
 
 3. Restart the Chronograf service.
 
 Your users should now be able to sign into Chronograf using the new Okta provider.
+
+#### Configuring GitLab authentication
+[GitLab](https://gitlab.com/) is a popular, OAuth 2.0 compliant authorization and authentication provider that can be used with Chronograf to allow access based on granted scopes and permissions.
+
+**To enable Chronograf support using a GitLab OAuth 2.0 application:**
+
+1. In your GitLab profile, [create a new OAuth2 authentication service](https://docs.gitlab.com/ee/integration/oauth_provider.html#adding-an-application-through-the-profile).
+   Provide a name for your authentication service, then enter your publicly accessible Chronograf URL with the `/oauth/generic/callback` path as your GitLab **callback URL**:
+
+    **Callback URL**:
+
+    ```sh
+    # Pattern
+    http://<your_chronograf_server>:8888/oauth/generic/callback
+
+    # Example
+    http://chronograf-example.com:8888/oauth/generic/callback
+    ```
+
+    Click **Submit** to save the service details.
+
+2. Copy the provided **Application Id** and **Secret** and set the following environment variables:
+
+    > In the examples below, note the use of `gitlab-server-example.com` and `chronograf-server-example.com` in urls.
+    > These should be replaced by the actual URLs used to access each service.
+
+    ```bash
+    GENERIC_NAME=gitlab
+    GENERIC_CLIENT_ID=<gitlab_application_id>
+    GENERIC_CLIENT_ID=<gitlab_secret>
+    GENERIC_AUTH_URL=http://<gitlab-server-example.com>/oauth/authorize?redirect_uri=http%3A%2F%2Fchronograf-server-example.com%3A8888%2Foauth%2Fgeneric%2Fcallback&response_type=code
+    GENERIC_TOKEN_URL=http://gitlab-server-example.com/oauth/token?redirect_uri=http%3A%2F%2Fchronograf-server-example.com%3A8888%2Foauth%2Fgeneric%2Fcallback&grant_type=authorization_code
+    GENERIC_SCOPES=api
+    TOKEN_SECRET=mysupersecret
+    GENERIC_API_URL=http://gitlab-server-example.com/api/v3/user
+    ```
+
+    The equivalent command line options are:
+
+    ```bash
+    --generic-name=gitlab
+    --generic-client-id=<gitlab_application_id>
+    --generic-client-id=<gitlab_secret>
+    --generic-auth-url=http://<gitlab-server-example.com>/oauth/authorize?redirect_uri=http%3A%2F%2Fchronograf-server-example.com%3A8888%2Foauth%2Fgeneric%2Fcallback&response_type=code
+    --generic-token-url=http://gitlab-server-example.com/oauth/token?redirect_uri=http%3A%2F%2Fchronograf-server-example.com%3A8888%2Foauth%2Fgeneric%2Fcallback&grant_type=authorization_code
+    --generic-scopes=api
+    --token-secret=mysupersecret
+    --generic-api-url=http://gitlab-server-example.com/api/v3/user
+    ```
+
+3. Restart the Chronograf service.
+
+Your users should now be able to sign into Chronograf using the new GitLab provider.
 
 ### Configuring Generic authentication
 
@@ -380,11 +439,13 @@ The following environment variables (and corresponding command line options) are
 
 
 #### Examples
+
 ##### OpenID Connect (OIDC) / Active Directory Federation Services (AD FS)
 
 See [Enabling OpenID Connect with AD FS 2016](https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/development/enabling-openid-connect-with-ad-fs) for a walk through of the server configuration.
 
-Exports for Chronograf (e.g. in /etc/default.chronograf):
+Exports for Chronograf (e.g. in `/etc/default.chronograf`):
+
 ```sh
 PUBLIC_URL="https://example.com:8888"
 GENERIC_CLIENT_ID="chronograf"
@@ -399,6 +460,7 @@ TOKEN_SECRET="ZNh2N9toMwUVQxTVEe2ZnnMtgkh3xqKZ"
 ```
 
 > _**Note:**_ Do not use special characters for the GENERIC_CLIENT_ID as AD FS will split strings here, finally resulting in an identifier mismatch.
+
 
 ### Configuring authentication duration
 
