@@ -291,9 +291,9 @@ Environment variable: `INFLUXDB_DATA_COMPACT_FULL_WRITE_COLD_DURATION`
 ### `max-concurrent-compactions = 0`
 
 The maximum number of concurrent full and level [compactions](/influxdb/v1.6/concepts/storage_engine/#compactions) that can run at one time.
-A value of `0` results in `runtime.GOMAXPROCS(0)` being used at runtime — all processors are available.
+The default value of `0` results in 50% of the CPU cores being used at runtime for compactions.
 If explicitly set, the number of cores used for compaction is limited to the specified value.
-This setting does not apply to cache snapshotting. For more information on GOMAXPROCS environment variable, see the [`GOMAXPROCS` environment variable](#gomaxprocs-environment-variable) section on this page. 
+This setting does not apply to cache snapshotting. For more information on GOMAXPROCS environment variable, see the [`GOMAXPROCS` environment variable](#gomaxprocs-environment-variable) section on this page.
 
 Environment variable: `INFLUXDB_DATA_MAX_CONCURRENT_COMPACTIONS`
 
@@ -337,7 +337,7 @@ Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 
 ### `tsm-use-madv-willneed = false`
 
-If `true`, then the MMap Advise value `MADV_WILLNEED` advises the kernel about how to handle the mapped memory region in terms of input/output paging and to expect access to the mapped memory region in the near future, with respect to TSM files. Because this setting has been problematic on some kernels, the default is `false`. 
+If `true`, then the MMap Advise value `MADV_WILLNEED` advises the kernel about how to handle the mapped memory region in terms of input/output paging and to expect access to the mapped memory region in the near future, with respect to TSM files. Because this setting has been problematic on some kernels (including CentOS and RHEL ), the default is `false`.
 Changing the value to `true` might help users who have slow disks in some cases.
 
 Environment variable: `INFLUXDB_TSM_USE_MADV_WILLNEED`
@@ -1039,22 +1039,48 @@ Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_RUN_INTERVAL`
 
 Global configuration settings for Transport Layer Security (TLS) in InfluxDB.  
 
-The InfluxDB default values for TLS `ciphers`, `min-version`, and `max-version` are listed in the [Constants section of the Go `crypto/tls` package documentation](https://golang.org/pkg/crypto/tls/#pkg-constants) and depend on the version of Go. Use the `SHOW DIAGNOSTICS` command to see the version of Go used to build InfluxDB.
+If the TLS configuration settings is not specified, InfluxDB supports all of the cipher suite IDs listed and all TLS versions implemented in the [Constants section of the Go `crypto/tls` package documentation](https://golang.org/pkg/crypto/tls/#pkg-constants), depending on the version of Go used to build InfluxDB.
+Use the `SHOW DIAGNOSTICS` command to see the version of Go used to build InfluxDB.
+
+### Recommended server configuration for "modern compatibility"
+
+InfluxData recommends configuring your InfluxDB server's TLS settings for "modern compatibility" that provides a higher level of security and assumes that backward compatibility is not required.
+Our recommended TLS configuration settings for `ciphers`, `min-version`, and `max-version` are based on Mozilla's "modern compatibility" TLS server configuration described in [Security/Server Side TLS](https://wiki.mozilla.org/Security/Server_Side_TLS#Modern_compatibility).
+
+InfluxData's recommended TLS settings for "modern compatibility" are specified in the following configuration settings example.
+
+####
+
+```
+ciphers = [ "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305",
+            "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305",
+            "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
+            "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+            "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+            "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+]
+
+min-version = "tls1.2"
+
+max-version = "tls1.2"
+
+```
+> **Important:*** The order of the cipher suite IDs in the `ciphers` setting determines which algorithms are selected by priority. The TLS `min-version` and the `max-version` settings restrict support to TLS 1.2.
 
 ### `ciphers = [ "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305", "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256", ]`
 
-Specifies the set of cipher suite IDs to negotiate. If not specified, `ciphers` uses the list of values from the Go `crypto/tls` package. In this example, only the two specified cipher suite IDs would be supported.
+Specifies the set of cipher suite IDs to negotiate. If not specified, `ciphers` supports all existing cipher suite IDs listed in the Go `crypto/tls` package. This is consistent with the behavior within previous releases. In this example, only the two specified cipher suite IDs would be supported.
 
 Environment variable: `INFLUXDB_TLS_CIPHERS`
 
-### `min-version = "tls1.2"`
+### `min-version = "tls1.0"`
 
-Minimum version of the TLS protocol that will be negotiated. If not specified, `min-version` uses the minimum TLS value specified in the Go `crypto/tls` package. In this example, `tls1.2` specifies the same version as the `max-version` example, which would result in support for only TLS 1.2.
+Minimum version of the TLS protocol that will be negotiated. Valid values include: `tls1.0`, `tls1.1`, and `tls1.2`. If not specified, `min-version` is the minimum TLS version specified in the [Go `crypto/tls` package](https://golang.org/pkg/crypto/tls/#pkg-constants). In this example, `tls1.0` specifies the minimum version as TLS 1.0, which is consistent with the behavior of previous InfluxDB releases.
 
 Environment variable: `INFLUXDB_TLS_MIN_VERSION`
 
 ### `max-version = "tls1.2"`
 
-Maximum version of the TLS protocol that will be negotiated. If not specified, `max-version` uses the maximum TLS value specified in the Go `crypto/tls` package. In this example, `tls1.2` specifies the same version as the `min-version` example, which would result in support for only TLS 1.2.
+Maximum version of the TLS protocol that will be negotiated. Valid values include: `tls1.0`, `tls1.1`, and `tls1.2`. If not specified, `max-version` is the maximum TLS version specified in the [Go `crypto/tls` package](https://golang.org/pkg/crypto/tls/#pkg-constants). In this example, `tls1.2` specifies the maximum version as TLS 1.2, which is consistent with the behavior of previous InfluxDB releases.
 
 Environment variable: `INFLUXDB_TLS_MAX_VERSION`
