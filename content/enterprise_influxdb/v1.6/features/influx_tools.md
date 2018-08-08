@@ -1,9 +1,9 @@
 ---
-title: Influx Tools utility
+title: Influx Tools data utility
 description:
 menu:
   enterprise_influxdb_1_6:
-    name: Influx Tools utility
+    name: Influx Tools data utility
     weight: 15
     parent: Enterprise features
 ---
@@ -19,7 +19,7 @@ An InfluxDB utility used to manage and query InfluxDB data.
 ### Syntax
 
 ```
-influx_tools [ [ command ] [ options ] ]`
+influx_tools [ [ command [ arguments ] ] ]`
 ```
 
 `-help` is the default command and prints syntax and usage information for the tool.
@@ -33,9 +33,9 @@ The `influx_inspect` commands are summarized here, with links to detailed inform
 * [`help`](#help): Display this help message format.
 
 
-### `compact`
+### `compact-shard`
 
-Fully compacts a shard at the specified shard path.
+Fully compacts a shard with the specified shard path.
 
 > ***Note:*** **For offline use only.**
 
@@ -44,10 +44,10 @@ When only the `-path` option is specified, the compact shard tool will prompt th
 #### Syntax
 
 ```
-influx_tools compact -path <shard_path> [ `-verbose` ] [ `-force` ]
+influx_tools compact-shard -path <shard_path> [ `-force` ] [ `-verbose` ]
 ```
 
-#### Options
+#### Arguments
 
 Optional arguments are in brackets.
 
@@ -57,7 +57,7 @@ Disables the default prompt asking the user if they wish to proceed with compact
 
 #### `-path <shard_path>`
 
-Required path of the shard to be compacted. Only TSM files are compacted; the WAL is not modified.
+Path of the shard to be compacted. Only TSM files are compacted; the WAL is not modified.
 
 #### `[ -verbose ]`
 
@@ -73,11 +73,13 @@ Transforms existing shards to a new shard duration in order to consolidate into 
 influx_tools export -range  [ `-config <config_file>` ] [ `-print-only` ]
 ```
 
-#### Options
+#### Arguments
 
 Optional arguments are in brackets.
 
 ##### `-database`
+
+Database name.
 
 #### [ `-conflict-path <conflict_path>` ]
 
@@ -87,7 +89,9 @@ All conflicting data will be written as line protocol and gzipped to the path sp
 
 A field type for a given measurement can be different per shard. This creates the potential for field type conflicts when exporting new shard durations. If this happens, the field type will be determined by the first shard containing data for that field in order to fulfill the target shard duration.
 
-#### `-no-conflict-path`
+#### [ `-no-conflict-path` ]
+
+
 
 #### [ `-range` ]
 
@@ -98,6 +102,12 @@ Specifies which target shards should be exported, based on their sequence number
 ##### `-rp`
 
 ##### `-duration`
+
+Duration in hours (e.g., "24h") for retention policy duration.
+
+#### [ `-print-only` ]
+
+Flag to display the plan and exit without exporting any data.
 
 #### Examples
 
@@ -157,7 +167,7 @@ Seq #           ID              Start                           End
 
 A range can either be a single sequence number or an interval as shown previously.
 
-Hint: Include the -print-only option to display the plan and exit without exporting any data.
+Hint: Include the `-print-only` argument to display the plan and exit without exporting any data.
 
 
 ### `import`
@@ -166,7 +176,44 @@ Hint: Include the -print-only option to display the plan and exit without export
 #### Syntax
 
 ```
-influx_tools import -range  [ `-config <config_file>` ] [ `-print-only` ]
+influx_tools import `-config <config_path>` -database <db_name> -rp <retention_policy> [ -duration <rp_duration> ] [ -shard-duration <shard_duration> ] [ -build-tsi ] [ -replace ]
 ```
+
+#### Arguments
+
+Optional arguments are in brackets.
+
+##### [ `-build-tsi` ]
+
+Flag to enable building the on-disk TSI.
+
+##### `-config`
+
+Path to the configuration file.
+
+##### `-database`
+
+Database name.
+
+##### [ `-duration` ]
+
+Retention policy duration.
+
+##### [ `-replace` ]
+
+Flag that enables replacing an existing retention policy.
+
+##### [ `-replicaton` ]
+
+Integer value of the retention policy replication factor.
+
+##### `-rp`
+
+Retention policy.
+
+##### [ `-shard-duration` ]
+
+Retention policy shard duration.
+
 
 ### `help`
