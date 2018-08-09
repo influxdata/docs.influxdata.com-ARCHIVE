@@ -30,6 +30,7 @@ The `influx_inspect` commands are summarized here, with links to detailed inform
 
 * [`compact-shard`](#compact-shard): Fully compacts the specified shard.
 * [`export`](#export): Reshapes existing shards to a new shard duration.
+* [`import`](#import):
 * [`help`](#help): Display this help message format.
 
 
@@ -53,7 +54,7 @@ Optional arguments are in brackets.
 
 #### `[ -force ]`
 
-Disables the default prompt asking the user if they wish to proceed with compaction.
+Flag to disable the default prompt asking the user if they wish to proceed with compaction.
 
 #### `-path <shard_path>`
 
@@ -70,7 +71,7 @@ Transforms existing shards to a new shard duration in order to consolidate into 
 #### Syntax
 
 ```
-influx_tools export -range  [ `-config <config_file>` ] [ `-print-only` ]
+influx_tools export -database <db_name>  [ `-config <config_file>` ] [ `-print-only` ]
 ```
 
 #### Arguments
@@ -92,14 +93,17 @@ A field type for a given measurement can be different per shard. This creates th
 #### [ `-no-conflict-path` ]
 
 
-
 #### [ `-range` ]
 
 Specifies which target shards should be exported, based on their sequence number. See example below.
 
 ##### `-config`
 
+Path to the configuration file.
+
 ##### `-rp`
+
+Retention policy.
 
 ##### `-duration`
 
