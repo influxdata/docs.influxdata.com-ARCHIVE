@@ -1050,7 +1050,7 @@ Set to true to enable the anti-entropy service.
 
 Environment variable: `INFLUXDB_ANTI_ENTROPY_ENABLED`
 
-### check-interval = "30s"
+### check-interval = "5m"
 
 The interval of time when anti-entropy checks run on each data node.
 
