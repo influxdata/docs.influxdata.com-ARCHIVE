@@ -12,7 +12,6 @@ menu:
 ---
 
 InfluxDB OSS does not support clustering.
-<<<<<<< HEAD
 For high availability or horizontal scaling of InfluxDB, consider the InfluxData
 =======
 For high availability or horizontal scaling of InfluxDB, please consider the
