@@ -1834,7 +1834,7 @@ retention policy.
 Note that both `where_else` and `autogen` must exist prior to running the `INTO`
 query.
 See [Database Management](/influxdb/v1.6/query_language/database_management/)
-for how to manage databases and retetion policies.
+for how to manage databases and retention policies.
 
 The response shows the number of points (`7605`) that InfluxDB writes to `h2o_feet_copy_2`.
 The timestamp in the response is meaningless; InfluxDB uses epoch 0
@@ -2885,7 +2885,7 @@ The query uses an InfluxQL [function](/influxdb/v1.6/query_language/functions/)
 to calculate the average `water_level` for all data where the field value of
 `level description` includes the word `between`.
 
-#### Example 8: Use a regular expresssion to specify tag keys in the GROUP BY clause
+#### Example 8: Use a regular expression to specify tag keys in the GROUP BY clause
 ```
 > SELECT FIRST("index") FROM "h2o_quality" GROUP BY /l/
 
