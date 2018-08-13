@@ -39,7 +39,7 @@ The newly imported dashboard will be included in your list of dashboards.
 
 ### Reconciling unmatched sources
 If the data sources defined in the imported dashboard JSON file do not match any of your local sources,
-you will have to opportunity to reconcile each of the unmatched sources during the import process.
+you will have to reconcile each of the unmatched sources during the import process.
 
 ![Reconcile unmatched sources](/img/chronograf/v1.6/dashboard-import-reconcile.png)
 
