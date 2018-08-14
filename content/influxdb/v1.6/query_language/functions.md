@@ -2579,15 +2579,15 @@ SELECT ATAN2( [ * | <field_key> | num ], [ <field_key> | num ] ) [INTO_clause] F
 ### Description of basic syntax
 
 `ATAN2(field_key_y, field_key_x)`  
-Returns the arctangent of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key), `field_key_y`, divided by field values associated with `feild_key_x`.
+Returns the arctangent of field values associated with the [field key](/influxdb/v1.6/concepts/glossary/#field-key), `field_key_y`, divided by field values associated with `field_key_x`.
 
 <!-- `ATAN2(/regular_expression/, field_key_x)`  
 Returns the arctangent of field values associated with each field key that matches the [regular expression](/influxdb/v1.6/query_language/data_exploration/#regular-expressions)
-divided by field values associated with `feild_key_x`. -->
+divided by field values associated with `field_key_x`. -->
 
 `ATAN2(*, field_key_x)`  
 Returns the field values associated with each field key in the [measurement](/influxdb/v1.6/concepts/glossary/#measurement)
-divided by field values associated with `feild_key_x`.
+divided by field values associated with `field_key_x`.
 
 `ATAN2()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
@@ -2637,7 +2637,7 @@ time                  atan2
 
 The query returns the arctangents of field values in the `altitude_ft` field key divided by values in the `distance_ft` field key. Both are part of the `flight_data` measurement.
 
-#### Example: Calculate the arctangent of values associated with each field key in a measurement divided by feild_key_x
+#### Example: Calculate the arctangent of values associated with each field key in a measurement divided by field_key_x
 ```
 > SELECT ATAN2(*, "distance_ft") FROM "flight_data" WHERE time >= '2018-05-16T12:01:00Z' AND time <= '2018-05-16T12:10:00Z'
 
@@ -2659,7 +2659,7 @@ time                  atan2_altitude_ft     atan2_distance_ft
 The query returns the arctangents of all numeric field values in the `flight_data` measurement divided by values in the `distance_ft` field key.
 The `flight_data` measurement has two numeric fields: `altitude_ft` and `distance_ft`.
 
-<!-- #### Example: Calculate the arctangent of values associated with each field key matching a regular expression divided by feild_key_x
+<!-- #### Example: Calculate the arctangent of values associated with each field key matching a regular expression divided by field_key_x
 ```
 > SELECT ATAN2(/ft/, "distance_ft") FROM "flight_data" WHERE time >= '2018-05-16T12:01:00Z' AND time <= '2018-05-16T12:10:00Z'
 

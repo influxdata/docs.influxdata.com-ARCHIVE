@@ -5,6 +5,14 @@ menu:
     parent: about_the_project
 ---
 
+## v1.5.1 [2018-08-06]
+
+### Bugfixes
+
+- `pagerduty2` should use `routingKey` rather than `serviceKey`.
+- Fix KafkaTopic not working from TICKscript.
+- Improve Kafka alert throughput.
+
 ## v1.5.0 [2018-05-17]
 
 ### Features

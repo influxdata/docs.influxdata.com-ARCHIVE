@@ -87,7 +87,6 @@ Use the **Stacked Graph Controls** to specify the following:
 
 ### Step-Plot Graph
 
-<<<<<<< HEAD
 The **Step-Plot Graph** view displays a time series in a staircase graph.
 
 ![Step-Plot Graph selector](/img/chronograf/chrono-viz-step-plot-graph-selector.png)

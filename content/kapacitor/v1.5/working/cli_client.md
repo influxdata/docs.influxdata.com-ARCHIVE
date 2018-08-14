@@ -116,7 +116,7 @@ kapacitor stats [general|ingress]
    Tasks:                        8
    Enabled Tasks:                2
    Subscriptions:                12
-   Version:                      1.5.0~n201711280812
+   Version:                      1.5.1~n201711280812
    ```
 
 * **`stats ingress`**   Use this command to view InfluxDB measurements and the number of data points that pass through the Kapacitor server.

@@ -13,6 +13,8 @@ The InfluxDB OSS configuration file contains configuration settings specific to 
 
 * [Configuration overview](#configuration-overview)
 * [Environment variables](#environment-variables)
+  * [InfluxDB environment variables (`INFLUXDB_*`)](#influxdb-environment-variables-influxdb)
+  * [`GOMAXPROCS` environment variable](#gomaxprocs-environment-variable)
 * [Using the configuration file](#using-the-configuration-file)
 * [Configuration file settings](#configuration-file-settings)
   * [Global settings](#global-settings)
@@ -29,6 +31,7 @@ The InfluxDB OSS configuration file contains configuration settings specific to 
   * [OpenTSB settings `[[opentsdb]]`](#opentsdb-settings-opentsdb)
   * [UDP settings `[[udp]]`](#udp-settings-udp)
   * [Continuous queries settings `[continuous_queries]`](#continuous-queries-settings-continuous-queries)
+  * [Transport Layer Security (TLS) settings `[tls]`](#transport-layer-security-tls-settings-tls)
 
 ## Configuration overview
 
@@ -57,24 +60,22 @@ file.
 If a configuration option is not specified in either the configuration file or in an environment variable, InfluxDB uses its internal default configuration.
 
 > ***Note:*** If an environment variable has already been set, the equivalent configuration setting in the configuration file is ignored.
->
 
-#### InfluxDB environment variables (`INFLUXDB_*`)
+### InfluxDB environment variables (`INFLUXDB_*`)
 
 The InfluxDB environment variables are documented below with the corresponding configuration file settings. All of the InfluxDB-specific environment variables are prefixed with `INFLUXDB_`.
 
 
-#### `GOMAXPROCS`
+### `GOMAXPROCS` environment variable
 
-> ***Note:***
-> The GOMAXPROCS environment variable cannot be set using the InfluxDB configuration file settings, like other environment variables.
+> ***Note:*** The GOMAXPROCS environment variable cannot be set using the InfluxDB configuration file settings, like other environment variables.
 
 
 The `GOMAXPROCS` [Go language environment variable](https://golang.org/pkg/runtime/#hdr-Environment_Variables) can be used to set the maximum number of CPUs that can execute simultaneously.
 
 
 The default value of `GOMAXPROCS` is the number of CPUs (whatever your operating system considers to be a CPU) that are visible to the program *on startup.* For a 32-core machine, the `GOMAXPROCS` value would be `32`.
-You can override this value to be less than the maximum value, which can be useful in cases where you are running the InfluxDB along with other processes on the same machine and want to ensure that the database doesn't completely starve those those processes.
+You can override this value to be less than the maximum value, which can be useful in cases where you are running the InfluxDB along with other processes on the same machine and want to ensure that the database doesn't completely starve those processes.
 
 > ***Note:***
 > Setting `GOMAXPROCS=1` will eliminate all parallelization.
@@ -289,10 +290,10 @@ Environment variable: `INFLUXDB_DATA_COMPACT_FULL_WRITE_COLD_DURATION`
 
 ### `max-concurrent-compactions = 0`
 
-The maximum number of concurrent full and level compactions.
-The default value of `0` results in 50% of the CPU cores being used for compactions at runtime.
-With the default setting, at most 4 cores will be used. If explicitly set, the number of cores used for compaction is limited to the specified value.
-This setting does not apply to cache snapshotting.
+The maximum number of concurrent full and level [compactions](/influxdb/v1.6/concepts/storage_engine/#compactions) that can run at one time.
+The default value of `0` results in 50% of the CPU cores being used at runtime for compactions.
+If explicitly set, the number of cores used for compaction is limited to the specified value.
+This setting does not apply to cache snapshotting. For more information on GOMAXPROCS environment variable, see the [`GOMAXPROCS` environment variable](#gomaxprocs-environment-variable) section on this page.
 
 Environment variable: `INFLUXDB_DATA_MAX_CONCURRENT_COMPACTIONS`
 
@@ -333,6 +334,13 @@ will continue to accept writes, but writes that create a new tag value
 will fail.
 
 Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
+
+### `tsm-use-madv-willneed = false`
+
+If `true`, then the MMap Advise value `MADV_WILLNEED` advises the kernel about how to handle the mapped memory region in terms of input/output paging and to expect access to the mapped memory region in the near future, with respect to TSM files. Because this setting has been problematic on some kernels (including CentOS and RHEL ), the default is `false`.
+Changing the value to `true` might help users who have slow disks in some cases.
+
+Environment variable: `INFLUXDB_TSM_USE_MADV_WILLNEED`
 
 ## Query management settings `[coordinator]`
 
@@ -590,7 +598,7 @@ Environment variable: `INFLUXDB_HTTP_MAX_BODY_SIZE`
 
 ### `max-concurrent-write-limit = 0`
 
-The maximum number of writes processed concurrently. 
+The maximum number of writes processed concurrently.
 Setting this to `0` disables the limit.
 
 Environment variable: `INFLUXDB_HTTP_MAX_CONCURRRENT_WRITE_LIMIT`
@@ -1025,3 +1033,54 @@ Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_QUERY_STATS_ENABLED`
 The interval at which InfluxDB checks to see if a CQ needs to run. Set this option to the lowest interval at which your CQs run. For example, if your most frequent CQ runs every minute, set `run-interval` to `1m`.
 
 Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_RUN_INTERVAL`
+
+
+## Transport Layer Security (TLS) settings `[tls]`
+
+Global configuration settings for Transport Layer Security (TLS) in InfluxDB.  
+
+If the TLS configuration settings is not specified, InfluxDB supports all of the cipher suite IDs listed and all TLS versions implemented in the [Constants section of the Go `crypto/tls` package documentation](https://golang.org/pkg/crypto/tls/#pkg-constants), depending on the version of Go used to build InfluxDB.
+Use the `SHOW DIAGNOSTICS` command to see the version of Go used to build InfluxDB.
+
+### Recommended server configuration for "modern compatibility"
+
+InfluxData recommends configuring your InfluxDB server's TLS settings for "modern compatibility" that provides a higher level of security and assumes that backward compatibility is not required.
+Our recommended TLS configuration settings for `ciphers`, `min-version`, and `max-version` are based on Mozilla's "modern compatibility" TLS server configuration described in [Security/Server Side TLS](https://wiki.mozilla.org/Security/Server_Side_TLS#Modern_compatibility).
+
+InfluxData's recommended TLS settings for "modern compatibility" are specified in the following configuration settings example.
+
+####
+
+```
+ciphers = [ "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305",
+            "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305",
+            "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
+            "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+            "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+            "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+]
+
+min-version = "tls1.2"
+
+max-version = "tls1.2"
+
+```
+> **Important:*** The order of the cipher suite IDs in the `ciphers` setting determines which algorithms are selected by priority. The TLS `min-version` and the `max-version` settings restrict support to TLS 1.2.
+
+### `ciphers = [ "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305", "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256", ]`
+
+Specifies the set of cipher suite IDs to negotiate. If not specified, `ciphers` supports all existing cipher suite IDs listed in the Go `crypto/tls` package. This is consistent with the behavior within previous releases. In this example, only the two specified cipher suite IDs would be supported.
+
+Environment variable: `INFLUXDB_TLS_CIPHERS`
+
+### `min-version = "tls1.0"`
+
+Minimum version of the TLS protocol that will be negotiated. Valid values include: `tls1.0`, `tls1.1`, and `tls1.2`. If not specified, `min-version` is the minimum TLS version specified in the [Go `crypto/tls` package](https://golang.org/pkg/crypto/tls/#pkg-constants). In this example, `tls1.0` specifies the minimum version as TLS 1.0, which is consistent with the behavior of previous InfluxDB releases.
+
+Environment variable: `INFLUXDB_TLS_MIN_VERSION`
+
+### `max-version = "tls1.2"`
+
+Maximum version of the TLS protocol that will be negotiated. Valid values include: `tls1.0`, `tls1.1`, and `tls1.2`. If not specified, `max-version` is the maximum TLS version specified in the [Go `crypto/tls` package](https://golang.org/pkg/crypto/tls/#pkg-constants). In this example, `tls1.2` specifies the maximum version as TLS 1.2, which is consistent with the behavior of previous InfluxDB releases.
+
+Environment variable: `INFLUXDB_TLS_MAX_VERSION`

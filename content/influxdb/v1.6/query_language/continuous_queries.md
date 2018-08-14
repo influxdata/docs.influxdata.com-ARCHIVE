@@ -418,7 +418,7 @@ CQs default to the relevant
 [basic syntax behavior](/influxdb/v1.6/query_language/continuous_queries/#description-of-basic-syntax)
 if the `EVERY` interval or `FOR` interval is not provided (see the first issue in
 [Common Issues with Advanced Syntax](/influxdb/v1.6/query_language/continuous_queries/#common-issues-with-advanced-syntax)
-for an anomalistic case).
+for an anomalous case).
 
 #### Examples of advanced syntax
 

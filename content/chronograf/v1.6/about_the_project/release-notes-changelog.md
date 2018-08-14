@@ -8,6 +8,28 @@ menu:
     parent: About the project
 ---
 
+## v1.6.1 [2018-08-02]
+
+### Features
+
+* Include source IDs, links, and names in dashboard exports
+* Add ability to map sources when importing dashboards
+
+### UI Improvements
+
+* Make it easier to get mouse into hover legend
+
+### Bug Fixes
+
+* Ensure text template variables reflect query parameters
+* Enable using a new, blank text template variable in a query
+* Ensure cells with broken queries display “No Data”
+* Fix use of template variables within InfluxQL regexes
+* Pressing play on log viewer goes to "now"
+* Fix display of log viewer histogram when a basepath is enabled
+* Fix crosshairs and hover legend display in Alert Rule visualization
+* Size loading spinners based on height of their container
+
 ## v1.6.0 [2018-07-18]
 
 ### Features
