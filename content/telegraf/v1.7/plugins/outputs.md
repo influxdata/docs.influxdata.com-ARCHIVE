@@ -69,9 +69,9 @@ The  [Graylog (`graylog`) output plugin](https://github.com/influxdata/telegraf/
 
 The [HTTP (`http`) output plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/http) sends metrics in a HTTP message encoded using one of the output data formats. For `data_formats` that support batching, metrics are sent in batch format.
 
-### [InfluxDB (`influxdb`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/outputs/influxdb)
+### [InfluxDB v1.x (`influxdb`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/outputs/influxdb)
 
-The [InfluxDB (`influxdb`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/outputs/influxdb) writes to InfluxDB using HTTP or UDP.
+The [InfluxDB v1.x (`influxdb`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/outputs/influxdb) writes to InfluxDB using HTTP or UDP.
 
 ### [Instrumental (`instrumental`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/outputs/instrumental)
 

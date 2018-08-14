@@ -193,9 +193,9 @@ as a proxy/router for the `/write` endpoint of the InfluxDB HTTP API.
 
 The [HTTP Response (`http_response`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/http_response) gathers metrics for HTTP responses. The measurements and fields include `response_time`, `http_response_code`, and `result_type`. Tags for measurements include `server` and `method`.
 
-### [InfluxDB (`influxdb`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/influxdb)
+### [InfluxDB v1.x (`influxdb`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/influxdb)
 
-The [InfluxDB (`influxdb`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/influxdb) gathers metrics from the exposed `/debug/vars` endpoint.  Using Telegraf to extract these metrics to create a "monitor of monitors" is a best practice and allows you to reduce the overhead associated with
+The [InfluxDB v1.x (`influxdb`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/influxdb) gathers metrics from the exposed `/debug/vars` endpoint.  Using Telegraf to extract these metrics to create a "monitor of monitors" is a best practice and allows you to reduce the overhead associated with
 capturing and storing these metrics locally within the `_internal` database for production deployments.
 [Read more about this approach here.](https://www.influxdata.com/blog/influxdb-debugvars-endpoint/)
 
