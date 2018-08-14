@@ -15,94 +15,38 @@ menu:
 </table>
 
 
+v1.6.1 [08-03-2018]
 
-## v1.6.1 [2018-08-03]
+This release builds off of the InfluxDB OSS 1.6.1 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.6/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
 
 ### Features
 
-*	Improve LogFile performance with bitset iterator.
-* Add TSI index cardinality report to `influx_inspect`.
-* Update to Go 1.10.
-* Improve performance of `buildtsi` and TSI planning.
-* Improve performance of read service for single measurements.
-* Remove max concurrent compaction limit.
+* Update Go runtime to 1.10.
 * Provide configurable TLS options.
-* Add option to hint `MADV_WILLNEED` to kernel.
+* Implement basic trigonometry functions.
+* Add LDAP functionality for authorization and authentication.
+* AE: add ability to repair shards.
+* AE: improve swagger doc for `/status` endpoint.
+* Include the query task status in the show queries output.
+* Update Go runtime to 1.10.
 
-### Bug fixes
+#### Bug fixes
 
-* Improve series segment recovery.
-* Fix windows mmap on zero length file.
-* Ensure Filter iterators executed as late as possible.
-* Document UDP precision setting in config.
-* Allow tag keys to contain underscores.
-* Fix a panic when matching on a specific type of regular expression.
-
-## v1.6.0 [2018-07-05]
-
-### Breaking changes
-
--	If math is used with the same selector multiple times, it will now act as a selector rather than an aggregate. See [#9563](https://github.com/influxdata/influxdb/pull/9563) for details.
-
-### Features
-
--	[#9429](https://github.com/influxdata/influxdb/pull/9429): Support proxy environment variables in the influx client.
--	[#9499](https://github.com/influxdata/influxdb/pull/9499): Implement basic trigonometry functions.
--	[#9643](https://github.com/influxdata/influxdb/pull/9643): Add ability to delete many series with predicate.
--	[#9632](https://github.com/influxdata/influxdb/pull/9632): Implement floor, ceil, and round functions.
--	[#9399](https://github.com/influxdata/influxdb/pull/9399): Allow customizing the unix socket group and permissions created by the server.
--	[#9620](https://github.com/influxdata/influxdb/pull/9620): Add more math functions to influxql.
--	[#9757](https://github.com/influxdata/influxdb/pull/9757): Add suppress-write-log option to disable the write log when the log is enabled.
--	[#9260](https://github.com/influxdata/influxdb/pull/9260): Add additional technical analysis algorithms.
--	[#8034](https://github.com/influxdata/influxdb/pull/8034): Validate points on input.
--	[#9777](https://github.com/influxdata/influxdb/pull/9777): Log information about index version during startup.
--	[#9793](https://github.com/influxdata/influxdb/pull/9793): Add key sanitization to deletetsm.
--	[#9791](https://github.com/influxdata/influxdb/pull/9791): Optimize the spread function to process points iteratively instead of in batch.
--	[#9649](https://github.com/influxdata/influxdb/pull/9649): Allow math functions to be used in the condition.
--	[#9888](https://github.com/influxdata/influxdb/pull/9888): HTTP Write Throttle.
--	[#9822](https://github.com/influxdata/influxdb/pull/9822): Implement SHOW STATS FOR 'indexes'.
--	[#9832](https://github.com/influxdata/influxdb/pull/9832): Add dumptsmwal command to influx_inspect.
--	[#9959](https://github.com/influxdata/influxdb/pull/9959): Improve the number of regex patterns that are optimized to static OR conditions.
-
-### Bug fixes
-
--	[#9553](https://github.com/influxdata/influxdb/pull/9553): Support setting the log level through the environment variable.
--	[#9551](https://github.com/influxdata/influxdb/pull/9551): Fix panic when checking fieldsets.
--	[#9573](https://github.com/influxdata/influxdb/pull/9573): Ensure correct number of tags parsed when commas used.
--	[#9580](https://github.com/influxdata/influxdb/pull/9580): Fix data race in WAL.
--	[#9586](https://github.com/influxdata/influxdb/pull/9586): Allow SHOW SERIES kill.
--	[#9612](https://github.com/influxdata/influxdb/pull/9612): Revert "Use MADV_WILLNEED when loading TSM files".
--	[#9633](https://github.com/influxdata/influxdb/pull/9633): Fix regression to allow now() to be used as the group by offset again.
--	[#9647](https://github.com/influxdata/influxdb/pull/9647): Delete deleted shards in retention service.
--	[#9659](https://github.com/influxdata/influxdb/pull/9659): Ignore index size in Engine.DiskSize().
--	[#9661](https://github.com/influxdata/influxdb/pull/9661): Fix buildtsi partition key.
--	[#9665](https://github.com/influxdata/influxdb/pull/9665): Enable casting values from a subquery.
--	[#9682](https://github.com/influxdata/influxdb/pull/9682): Avoid a panic when using show diagnostics with text/csv.
--	[#9696](https://github.com/influxdata/influxdb/pull/9696): Properly track the response bytes written for queries in all format types.
--	[#9615](https://github.com/influxdata/influxdb/pull/9615): Remove error for series file when no shards exist.
--	[#9751](https://github.com/influxdata/influxdb/pull/9751): Fix the validation for multiple nested distinct calls.
--	[#9792](https://github.com/influxdata/influxdb/pull/9792): TSM: TSMReader.Close blocks until reads complete
--	[#9858](https://github.com/influxdata/influxdb/pull/9858): Return the correct auxiliary values for top/bottom.
--	[#9866](https://github.com/influxdata/influxdb/pull/9866): Close TSMReaders from FileStore.Close after releasing FileStore mutex.
--	[#9932](https://github.com/influxdata/influxdb/pull/9932): buildtsi: Do not escape measurement names.
+* TSM files not closed when shard deleted.
+* Ensure HH queue makes forward progress when segment errors occur.
+* TSM files not closed when shard deleted.
+* Add hh queue backpressure.
+* Update to latest influxdb 1.6 HEAD.
 
 ## v1.5.4 [2018-06-21]
 
-### Bug fixes
-
--	[#9924](https://github.com/influxdata/influxdb/pull/9924): [1.5] Fix panic in readTombstoneV4.
--	[#9931](https://github.com/influxdata/influxdb/pull/9931): buildtsi: Do not escape measurement names.
+This release builds off of the InfluxDB OSS 1.5.4 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
 
 ## v1.5.3 [2018-05-25]
 
+This release builds off of the InfluxDB OSS 1.5.3 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
+
 ### Features
-
--	[#9903](https://github.com/influxdata/influxdb/pull/9903): Add optional pprof http endpoint immediately on startup.
-
-### Bug fixes
-
--	[#9765](https://github.com/influxdata/influxdb/pull/9765): Fix the validation for multiple nested distinct calls.
--	[#9869](https://github.com/influxdata/influxdb/pull/9869): Return the correct auxiliary values for top/bottom.
 
 ## v1.5.2 [2018-04-12]
 
