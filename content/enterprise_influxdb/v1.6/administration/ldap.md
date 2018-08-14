@@ -11,7 +11,7 @@ InfluxDB Enterprise can be configured to query a Lightweight Directory Access Pr
 
 ## Requirements
 
-To configure InfluxDB Enterprise to support LDAP, the following requirements must be :
+To configure InfluxDB Enterprise to support LDAP, the following requirements must be met:
 
 * All users are managed in the remote LDAP service.
 
