@@ -1,5 +1,5 @@
 ---
-title: Release notes/changelog
+title: InfluxDB Enterprise 1.6 6elease notes
 
 menu:
   enterprise_influxdb_1_6:
@@ -48,9 +48,18 @@ This release builds off of the InfluxDB OSS 1.5.3 release. Please see the [Influ
 
 ### Features
 
+* Include the query task status in the show queries output.
+* Add hh writeBlocked counter.
+
+### Bug fixes
+
+* Hinted-handoff: enforce max queue size per peer node.
+* TSM files not closed when shard deleted.
+
+
 ## v1.5.2 [2018-04-12]
 
-This release builds off of the InfluxDB OSS 1.5.2 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.6/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
+This release builds off of the InfluxDB OSS 1.5.2 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
 
 ### Bug fixes
 
