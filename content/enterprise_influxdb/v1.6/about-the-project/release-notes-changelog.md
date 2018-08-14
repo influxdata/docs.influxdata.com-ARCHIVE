@@ -7,15 +7,7 @@ menu:
     parent: About the project
 ---
 
-<table style="width:100%">
-  <tr>
-    <td><a href="#clustering">Clustering Release Notes/Changelog</a></td>
-    <td><a href="#web-console">DEPRECATED: Web Console Release Notes/Changelog</a></td>
-  </tr>
-</table>
-
-
-v1.6.1 [08-03-2018]
+## v1.6.1 [08-03-2018]
 
 This release builds off of the InfluxDB OSS 1.6.1 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.6/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
 
@@ -28,15 +20,14 @@ This release builds off of the InfluxDB OSS 1.6.1 release. Please see the [Influ
 * AE: add ability to repair shards.
 * AE: improve swagger doc for `/status` endpoint.
 * Include the query task status in the show queries output.
-* Update Go runtime to 1.10.
 
 #### Bug fixes
 
 * TSM files not closed when shard deleted.
 * Ensure HH queue makes forward progress when segment errors occur.
 * TSM files not closed when shard deleted.
-* Add hh queue backpressure.
-* Update to latest influxdb 1.6 HEAD.
+* Add hh queue back pressure.
+* Update to latest InfluxDB 1.6 HEAD.
 
 ## v1.5.4 [2018-06-21]
 
