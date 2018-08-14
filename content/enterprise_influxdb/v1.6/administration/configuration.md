@@ -255,22 +255,12 @@ is not necessary.
 
 Environment variable: `INFLUXDB_META_BIND_ADDRESS`
 
-### auth-enabled = false
-
-Set to `true` to enable authentication.
-Meta nodes support JWT authentication and Basic authentication.
-For JWT authentication, also see the [`shared-secret`](#shared-secret) and [`internal-shared-secret`](#internal-shared-secret) configuration options.
-
-If set to `true`, also set the [`meta-auth-enabled` option](#meta-auth-enabled-false) to `true` in the `[meta]` section of the data node configuration file.
-
-Environment variable: `INFLUXDB_META_AUTH_ENABLED`
-
 ###  http-bind-address = ":8091"
 
 The port used by the [`influxd-ctl` tool](/enterprise_influxdb/v1.6/features/cluster-commands/) and by data nodes to access the
 meta APIs.
-For simplicity we recommend using the same port on all meta nodes, but this
-is not necessary.
+For simplicity, InfluxData recommends using the same port on all meta nodes, but this
+is not required.
 
 Environment variable: `INFLUXDB_META_HTTP_BIND_ADDRESS`
 
@@ -283,7 +273,9 @@ Environment variable: `INFLUXDB_META_HTTPS_ENABLED`
 
 ###  https-certificate = ""
 
-The path of the certificate file.
+The path of the SSL certificate file to be used when HTTPS is enabled.
+The certificate should be a PEM-encoded bundle of the certificate and key.
+If it is just the certificate, a key must be specified in `https-private-key`.
 This is required if [`https-enabled`](#https-enabled-false) is set to `true`.
 
 Environment variable: `INFLUXDB_META_HTTPS_CERTIFICATE`
@@ -293,6 +285,11 @@ Environment variable: `INFLUXDB_META_HTTPS_CERTIFICATE`
 The path of the private key file.
 
 Environment variable: `INFLUXDB_META_HTTPS_PRIVATE_KEY`
+
+### https-insecure-tls = false
+
+Set to `true` to skip certificate validation when making HTTPS requests to other meta nodes.
+Useful when testing with self-signed certificates.
 
 ### https-insecure-tls = false
 
@@ -354,10 +351,6 @@ avoid unnecessary Raft elections.
 
 Environment variable: `INFLUXDB_META_LEADER_LEASE_TIMEOUT`
 
-### consensus-timeout = "30s"
-
-Environment variable: `INFLUXDB_META_CONSENSUS_TIMEOUT`
-
 ###  commit-timeout = "50ms"
 
 The commit timeout is the amount of time a Raft node will tolerate between
@@ -365,6 +358,10 @@ commands before issuing a heartbeat to tell the leader it is alive.
 The default setting should work for most systems.
 
 Environment variable: `INFLUXDB_META_COMMIT_TIMEOUT`
+
+### consensus-timeout = "30s"
+
+Environment variable: `INFLUXDB_META_CONSENSUS_TIMEOUT`
 
 ###  cluster-tracing = false
 
@@ -396,6 +393,21 @@ For example, [Continuous Queries](/influxdb/v1.6/concepts/glossary/#continuous-q
 
 Environment variable: `INFLUXDB_META_LEASE_DURATION`
 
+### auth-enabled = false
+
+Set to `true` to enable authentication.
+Meta nodes support JWT authentication and Basic authentication.
+For JWT authentication, also see the [`shared-secret`](#shared-secret) and [`internal-shared-secret`](#internal-shared-secret) configuration options.
+
+If set to `true`, also set the [`meta-auth-enabled` option](#meta-auth-enabled-false) to `true` in the `[meta]` section of the data node configuration file.
+
+Environment variable: `INFLUXDB_META_AUTH_ENABLED`
+
+### ldap-allowed = false
+If true, you will need to use `influxd ldap set-config` and set  `enabled=true` to use LDAP authentication.
+
+Environment variable: `INFLUXDB_META_LDAP_ALLOWED`
+
 ### shared-secret = ""
 The shared secret used by the API for JWT authentication.
 Set [`auth-enabled`](#auth-enabled-false) to `true` if using this option.
@@ -408,8 +420,7 @@ Set [`auth-enabled`](#auth-enabled-false) to `true` if using this option.
 
 Environment variable: `INFLUXDB_META_INTERNAL_SHARED_SECRET`
 
-<br>
-<br>
+
 # Data node configuration
 
 The InfluxDB Enterprise data node configuration settings overlap significantly
@@ -1050,7 +1061,7 @@ Set to true to enable the anti-entropy service.
 
 Environment variable: `INFLUXDB_ANTI_ENTROPY_ENABLED`
 
-### check-interval = "5m"
+### check-interval = "30s"
 
 The interval of time when anti-entropy checks run on each data node.
 
