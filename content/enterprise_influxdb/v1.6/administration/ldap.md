@@ -1,78 +1,58 @@
 ---
 title: Configure LDAP authentication in InfluxDB Enterprise
-description: Configure LDAP authentication in InfluxDB Enterprise, with steps for meta nodes and data nodes, and testing LDAP connectivity.
+description: Configure LDAP authentication in InfluxDB Enterprise and test LDAP connectivity.
 menu:
   enterprise_influxdb_1_6:
-    name: Configure LDAP authentication
+    name: Configure LDAP authentication for InfluxDB Enterprise
     weight: 40
     parent: Administration
 ---
 InfluxDB Enterprise can be configured to query a Lightweight Directory Access Protocol(LDAP)-compatible directory service for determining user permissions and to synchronize this directory service into InfluxDB so that the remote directory service does not need to be queried for each request.
 
-For more information on LDAP, see [LDAP.com: Lightweight Directory Access Protocol](https://ldap.com). This site includes information on learning and using LDAP, LDAP references, and LDAP tools.
-
 ## Requirements
 
-To configure InfluxDB Enterprise to support LDAP, you need to support the following requirements:
+To configure InfluxDB Enterprise to support LDAP, the following requirements must be :
 
 * All users are managed in the remote LDAP service.
 
+## Configure LDAP for an InfluxDB Enterprise cluster
 
+To use LDAP with an InfluxDB Enterprise cluster, you need to make the following changes to your data node and meta node configurations.
 
-## Configure the InfluxDB Enterprise data nodes
+### Configure the InfluxDB Enterprise data nodes
 
-To enable LDAP support in InfluxDB Enterprise, make the following changes to the InfluxDB Enterprise configuration:
+To enable LDAP support on your data nodes, make the following changes to the InfluxDB Enterprise configuration:
 
 * Provide an HTTP Basic Authentication header. See [Authentication and authorization in InfluxDB](/influxdb/v1.6/administration/authentication_and_authorization/) for details on using HTTP Basic Authentication with InfluxDB.
 * Provide a username and password as HTTP query parameters
   - `u`: username
   - `p`: password
-* Enable HTTP authentication.
-  - Set the `[http]` setting `auth-enabled` configuration setting to `true`. Default is `false`.
-  - The corresponding environment variable is `INFLUXDB_HTTP_AUTH_ENABLED`.
+* Enable HTTP authentication
+  - Set the `[http]` `auth-enabled` configuration setting, or corresponding environment variable `INFLUXDB_HTTP_AUTH_ENABLED`, to `true`. Default is `false`.
 * Configure the HTTP shared secret to validate requests using JSON web tokens (JWT) and sign each HTTP payload with the secret and username.
-  - Set `INFLUXDB_HTTP_SHARED_SECRET`, or the corresponding `[http]` setting `shared-secret`, to `"<shared_secret>""` (your shared secret value). Default value is `""`.
+  - Set the `[http]` configuration setting for `shared-secret`, or the corresponding environment variable `INFLUXDB_HTTP_SHARED_SECRET`. Default value is `""`.
 
 
-## Configure the InfluxDB Enterprise meta nodes
+### Configure the InfluxDB Enterprise meta nodes
 
-Typically, database operators, and not database clients, interact directly with the meta nodes.
-
-To enable LDAP support in InfluxDB Enterprise, make the following configuration settings:
+To enable LDAP support in InfluxDB Enterprise, make the following configuration settings on your meta nodes:
 
 * Provide an HTTP Basic Authentication header. See [Authentication and authorization in InfluxDB](/influxdb/v1.6/administration/authentication_and_authorization/) for details on using HTTP Basic Authentication with InfluxDB.
 * Provide a username and password as HTTP query parameters
   - `u`: username
   - `p`: password
 * Configure the meta node META shared secret to validate requests using JSON web tokens (JWT) and sign each HTTP payloads with the secret and username.
-      - Set the environment variable `INFLUXDB_META_SHARED_SECRET`, or `meta` configuration setting `meta-shared-secret` to `"<shared-secret>"`.
-* Set the `meta.ldap-allowed` configuration setting to `true` on all meta nodes in your cluster.
-    - If using the environment variable, set `INFLUXDB_META_LDAP_ALLOWED` to `1` on all meta nodes.
+      - Set the `[meta]` configuration setting `meta-shared-secret`, or the corresponding environment variable `INFLUXDB_META_SHARED_SECRET` to `"<shared-secret>"`.
+* Set the `[meta]` configuration setting `meta.ldap-allowed`, or the corresponding environment variable `INFLUXDB_META_LDAP_ALLOWED`, to `true` on all meta nodes in your cluster.
+    - If using  to `true` on all meta nodes.
 * If authentication is enabled on meta nodes, then the data nodes must be configured for:
     - `INFLUXDB_META_META_AUTH_ENABLED` environment variable, or `[http]` configuration setting `meta-auth-enabled`, is set to `true`. Default value is `false`. This value must be the same value as the meta node's `meta.auth-enabled` configuration.
       - `INFLUXDB_META_META_INTERNAL_SHARED_SECRET`, or the corresponding `[meta]` configuration setting `meta-internal-shared-secret`, is set to `true`. Default value is `false`. This value must be the same value as the meta node's `meta.internal-shared-secret`.
 
 
-## Load the LDIF file
+### Configure the LDAP configuration file
 
-To load the LDIF configuration, run the `influxd-ctl ldap set-config` command.
-
-```
-influxd-ctl ldap set-config /path/to/ldap.toml
-```
-
-## Verify LDAP authentication
-
-To verify your LDAP configuration and see what happens as you authenticate through LDAP, run:
-
-```
-influxd-ctl ldap verify
-```
-
-
-## Configure LDAP configuration file
-
-To create your LDAP configuration file, generate a sample condfiguration using the following command.
+To create your LDAP configuration file, generate a sample configuration using the following command.
 
 ```
 influxd-ctl ldap sample-config
@@ -80,20 +60,22 @@ influxd-ctl ldap sample-config
 
 Save this file and edit it as needed for your LDAP server.
 
-Then test this configuration with the following command.
+
+### Verify the LDAP authentication
+
+To verify your LDAP configuration and see what happens as you authenticate through LDAP, run:
 
 ```
 influxd-ctl ldap verify -ldap-config /path/to/ldap.toml
 ```
 
-Finally, upload the configuration file to your cluster using the following command.
+### Load the LDAP configuration file
+
+To load your LDAP configuration file, run the `influxd-ctl ldap set-config` command
 
 ```
 influxd-ctl ldap set-config /path/to/ldap.toml
 ```
-
-
-
 
 ## Sample LDAP configuration
 
