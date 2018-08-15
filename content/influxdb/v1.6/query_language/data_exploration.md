@@ -67,57 +67,56 @@ InfluxDB shell 1.4.x
 
 Next,  get acquainted with this subsample of the data in the `h2o_feet` measurement:
 
-name: <span class="tooltip" data-tooltip-text="Measurement">h2o_feet</span>
-\------------------------------------
+name: <span class="tooltip" data-tooltip-text="Measurement">h2o_feet</span><br />
+\------------------------------------<br />
 time
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 <span class="tooltip" data-tooltip-text="Field Key">level description</span>
 &emsp;&emsp;&emsp;&emsp;
 <span class="tooltip" data-tooltip-text="Tag Key">location</span>
 &emsp;&emsp;&emsp;&emsp;
-<span class="tooltip" data-tooltip-text="Field Key">water_level</span>
-&emsp;&emsp;
+<span class="tooltip" data-tooltip-text="Field Key">water_level</span><br />
 2015-08-18T00:00:00Z
 &emsp;&emsp;
 between 6 and 9 feet
-&emsp;&emsp;&#8202;&#8202;&#8202;
+&emsp;&emsp;&thinsp;
 coyote_creek
-&emsp;&emsp;
-8.12
+&emsp;&nbsp;&thinsp;&thinsp;&thinsp;&thinsp;
+8.12<br />
 2015-08-18T00:00:00Z
 &emsp;&emsp;
 below 3 feet
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 santa_monica
-&emsp;&nbsp;&nbsp;&#8202;&#8202;
-2.064
+&emsp;&nbsp;&nbsp;&nbsp;
+2.064<br />
 <span class="tooltip" data-tooltip-text="Timestamp">2015-08-18T00:06:00Z</span>
 &emsp;&nbsp;
 <span class="tooltip" data-tooltip-text="Field Value">between 6 and 9 feet</span>
-&emsp;&emsp;&#8202;&#8202;
+&emsp;&emsp;
 <span class="tooltip" data-tooltip-text="Tag Value">coyote_creek</span>
-&emsp;&nbsp;&nbsp;&nbsp;
-<span class="tooltip" data-tooltip-text="Field Value">8.005</span>
+&emsp;&emsp;
+<span class="tooltip" data-tooltip-text="Field Value">8.005</span><br />
 2015-08-18T00:06:00Z
 &emsp;&emsp;
 below 3 feet
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 santa_monica
-&emsp;&nbsp;&nbsp;&#8202;&#8202;
-2.116
+&emsp;&nbsp;&nbsp;&nbsp;
+2.116<br />
 2015-08-18T00:12:00Z
 &emsp;&emsp;
 between 6 and 9 feet
-&emsp;&emsp;&#8202;&#8202;&#8202;
+&emsp;&emsp;&thinsp;
 coyote_creek
-&emsp;&emsp;
-7.887
+&emsp;&nbsp;&nbsp;&thinsp;&thinsp;&thinsp;
+7.887<br />
 2015-08-18T00:12:00Z
 &emsp;&emsp;
 below 3 feet
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 santa_monica
-&emsp;&nbsp;&nbsp;&#8202;&#8202;
+&emsp;&nbsp;&nbsp;&nbsp;
 2.028
 
 The data in the `h2o_feet` [measurement](/influxdb/v1.6/concepts/glossary/#measurement)
