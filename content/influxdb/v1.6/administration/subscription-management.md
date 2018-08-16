@@ -13,16 +13,16 @@ Subscriptions are primarily used with [Kapacitor](/kapacitor/), but any remote e
 able to accept UDP, HTTP, or HTTPS connections can subscribe to InfluxDB.
 
 ## InfluxQL subscription statements
-- InfluxQL commands for managing subscriptions:
+The following InfluxQL statements are available for managing subscriptions:
 
-- `CREATE SUBSCRIPTION`
-- `SHOW SUBSCRIPTIONS`
-- `DROP SUBSCRIPTION`
+[`CREATE SUBSCRIPTION`](#create-subscriptions)  
+[`SHOW SUBSCRIPTIONS`](#show-subscriptions)  
+[`DROP SUBSCRIPTION`](#remove-subscriptions)  
 
 ## Configure InfluxDB subscriptions
 InfluxDB subscription configuration options are available in the `[subscriber]`
 section of the `influxdb.conf`.
-In order to use subcriptions, the `[subscriber] -> enabled` option must be set to `true`.
+In order to use subcriptions, the `enabled` option in the `[subscriber]` section must be set to `true`.
 Below is an example `influxdb.conf` subscriber configuration:
 
 ```toml
@@ -46,15 +46,6 @@ _Descriptions of `[subscriber]` configuration options are available in the [Conf
 ## Show Subscriptions
 
 ## Remove Subscriptions
-- When a subscription endpoint is no longer accessible, you will see error messages in your logs similar to the following:
-
-```bash
-influxd: ts=2018-07-29T20:09:41.560774Z lvl=info msg="Post http://x.y.z.a:9092/write?consistency=&db=telegraf&precision=ns&rp=autogen: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)" log_id=09H4f9iW000 service=subscriber
-
-# OR
-
-influxd: ts=2018-07-30T21:20:53.588977Z lvl=info msg="Post http://x.y.z.a:9092/write?consistency=&db=RangerConnect&precision=ns&rp=autogen: dial tcp x.y.z.a:9092: getsockopt: connection refused" log_id=09YsXgEl000 service=subscriber
-```
 
 
 ### Drop all subscriptions
@@ -68,4 +59,17 @@ If these are not set, export them as part of the script.
 # export INFLUXPASS=influx-password
 
 IFS=$'\n'; for i in $(influx -format csv -username $INFLUXUSER -password $INFLUXPASS -database _internal -execute 'show subscriptions' | tail -n +2 | grep -v name); do influx -format csv -username $INFLUXUSER -password $INFLUXPASS -database _internal -execute "drop subscription \"$(echo "$i" | cut -f 3 -d ',')\" ON \"$(echo "$i" | cut -f 1 -d ',')\".\"$(echo "$i" | cut -f 2 -d ',')\""; done
+```
+
+## Troubleshooting
+
+### Errors related to inaccessible or old subscription endpoints
+- When a subscription endpoint is no longer accessible, you will see error messages in your logs similar to the following:
+
+```bash
+influxd: ts=2018-07-29T20:09:41.560774Z lvl=info msg="Post http://x.y.z.a:9092/write?consistency=&db=telegraf&precision=ns&rp=autogen: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)" log_id=09H4f9iW000 service=subscriber
+
+# OR
+
+influxd: ts=2018-07-30T21:20:53.588977Z lvl=info msg="Post http://x.y.z.a:9092/write?consistency=&db=RangerConnect&precision=ns&rp=autogen: dial tcp x.y.z.a:9092: getsockopt: connection refused" log_id=09YsXgEl000 service=subscriber
 ```
