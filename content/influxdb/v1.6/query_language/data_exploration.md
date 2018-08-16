@@ -67,8 +67,7 @@ InfluxDB shell 1.4.x
 
 Next,  get acquainted with this subsample of the data in the `h2o_feet` measurement:
 
-name: <span class="tooltip" data-tooltip-text="Measurement">h2o_feet</span><br />
-\------------------------------------
+name: <span class="tooltip" data-tooltip-text="Measurement">h2o_feet</span>
 
 | time                                                                            | <span class ="tooltip" data-tooltip-text ="Field Key">level description</span>      | <span class ="tooltip" data-tooltip-text ="Tag Key">location</span>       | <span class ="tooltip" data-tooltip-text ="Field Key">water_level</span> |
 | ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
