@@ -421,12 +421,14 @@ Set [`auth-enabled`](#auth-enabled-false) to `true` if using this option.
 Environment variable: `INFLUXDB_META_INTERNAL_SHARED_SECRET`
 
 
+
+
+
 # Data node configuration
 
 The InfluxDB Enterprise data node configuration settings overlap significantly
 with the settings in InfluxDB OSS.
-Where possible, the following sections link to the [configuration documentation](/influxdb/v1.6/administration/config/)
-for InfluxDB's OSS.
+Where possible, the following sections link to the [InfluxDB OSS configuration documentation](/influxdb/v1.6/administration/config/).
 
 > **Note:**
 The system has internal defaults for every configuration file setting.
@@ -510,58 +512,6 @@ Use the same license file for all nodes in the same cluster. The `license-key` a
 
 Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_PATH`
 
-## [meta]
-
-See the [OSS documentation](/influxdb/v1.6/administration/config/#metastore-settings-meta).
-
-###  dir = "/var/lib/influxdb/meta"
-
-See the [OSS documentation](/influxdb/v1.6/administration/config/#dir-var-lib-influxdb-meta).
-Note that data nodes do require a local meta directory.
-
-Environment variable: `INFLUXDB_META_DIR`
-
-###  meta-tls-enabled = false
-
-Set to `true` to if [`https-enabled`](#https-enabled-false) is set to `true`.
-
-Environment variable: `INFLUXDB_META_META_TLS_ENABLED`
-
-###  meta-insecure-tls = false
-
-Set to `true` to allow the data node to accept self-signed certificates if
-[`https-enabled`](#https-enabled-false) is set to `true`.
-
-Environment variable: `INFLUXDB_META_META_INSECURE_TLS`
-
-### meta-auth-enabled = false
-
-Set to `true` if [`auth-enabled`](#auth-enabled-false) is set to `true` in the meta node configuration files.
-For JWT authentication, also see the [`meta-internal-shared-secret`](#meta-internal-shared-secret) configuration option.
-
-Environment variable: `INFLUXDB_META_META_AUTH_ENABLED`
-
-### meta-internal-shared-secret = ""
-
-The shared secret used by the internal API for JWT authentication.
-Set to the [`internal-shared-secret`](#internal-shared-secret) specified in the meta node configuration file.
-
-Environment variable: `INFLUXDB_META_META_INTERNAL_SHARED_SECRET`
-
-###  retention-autocreate = true
-
-Automatically creates a default [retention policy](/influxdb/v1.6/concepts/glossary/#retention-policy-rp) (RP) when the system creates a database.
-The default RP (`autogen`) has an infinite duration, a shard group duration of seven days, and a replication factor set to the number of data nodes in the cluster.
-The system targets the `autogen` RP when a write or query does not specify an RP.
-Set this option to `false` to prevent the system from creating the `autogen` RP when the system creates a database.
-
-Environment variable: `INFLUXDB_META_RETENTION_AUTOCREATE`
-
-###  logging-enabled = true
-
-See the [OSS documentation](/influxdb/v1.6/administration/config/#logging-enabled-true).
-
-Environment variable: `INFLUXDB_META_LOGGING_ENABLED`
 
 ## [data]
 
