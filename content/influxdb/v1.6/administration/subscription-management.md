@@ -8,20 +8,46 @@ menu:
     weight: 100
 ---
 
-InfluxDB subscriptions are remote endpoints to which all data written to InfluxDB is copied.
-Subscriptions are primarily used with [Kapacitor](/kapacitor/), but any remote endpoint
+InfluxDB subscriptions are local or remote endpoints to which all data written to InfluxDB is copied.
+Subscriptions are primarily used with [Kapacitor](/kapacitor/), but any endpoint
 able to accept UDP, HTTP, or HTTPS connections can subscribe to InfluxDB.
-All InfluxDB writes are sent to subscription endpoints using [line protocol](/influxdb/v1.6/write_protocols/line_protocol_tutorial/).
+
+## How subscriptions work
+As data is written to InfluxDB, writes are duplicated to subscriber endpoints via
+HTTP, HTTPS, or UDP in [line protocol](/influxdb/v1.6/write_protocols/line_protocol_tutorial/).
+InfluxDB's subscriber service creates multiple "writers" ([goroutines](https://golangbot.com/goroutines/))
+which send writes to the subscription endpoint(s).
+
+_The number of writer goroutines is defined by the [`write-concurrency`](/influxdb/v1.6/administration/config/#write-concurrency-40) configuration.
+If using Kapacitor, this setting also defines how many "readers" Kapacitor spins up to receive the writes._
+
+As writes occur in InfluxDB, each subscription writer sends the writen data to the
+specified subscription endpoint(s).
+Each reader handles them as they are recieved.
+However, with a high `write-concurrency` (multiple writers and readers) and a high ingest rate,
+nanosecond differences in writer and reader processes and the transport layer can result
+in writes being received out of order.
+
+> #### Important information about high write loads
+> While setting the subscriber `write-concurrency` to greater than 1 does increase your
+> subscriber write throughput, it can result in out-of-order writes under high ingest rates.
+> Setting `write-concurrency` to 1 ensures writes are passed to subscriber endpoints sequentially,
+> but can create a bottleneck under high ingest rates.
+>
+> What `write-concurrency` should be set to depends on your specific workload
+> and need for in-order writes to your subscription endpoint.
 
 ## InfluxQL subscription statements
-The following InfluxQL statements are available for managing subscriptions:
+Use the following InfluxQL statements to manage subscriptions:
 
 [`CREATE SUBSCRIPTION`](#create-subscriptions)  
 [`SHOW SUBSCRIPTIONS`](#show-subscriptions)  
 [`DROP SUBSCRIPTION`](#remove-subscriptions)  
 
 ## Create subscriptions
-Subscriptions are created using the `CREATE SUBSCRIPTION` InfluxQL statement.
+Create subscriptions using the `CREATE SUBSCRIPTION` InfluxQL statement.
+Specify the subscription name, the database name and retention policy to subscribe to,
+and the URL of the host to which data written to InfluxDB should be copied.
 
 ```sql
 -- Pattern:
@@ -37,12 +63,12 @@ CREATE SUBSCRIPTION "sub0" ON "mydb"."autogen" DESTINATIONS ANY 'udp://h1.exampl
 
 ### Sending subscription data to multiple hosts
 The `CREATE SUBSCRIPTION` statement allows you to specify multiple hosts as endpoints for the subscription.
-In your `DESTINATIONS` clause, you cast pass multiple host strings separated by commas.
-`ALL` or `ANY` in the `DESTINATIONS` clause determine how InfluxDB writes data to each endpoint:
+In your `DESTINATIONS` clause, you can pass multiple host strings separated by commas.
+Using `ALL` or `ANY` in the `DESTINATIONS` clause determines how InfluxDB writes data to each endpoint:
 
 `ALL`: Writes data to all specified hosts.
 
-`ANY`: Round-robins writes between the specified hosts.
+`ANY`: Round-robins writes between specified hosts.
 
 _**Subscriptions with multiple hosts**_
 ```sql
@@ -54,10 +80,10 @@ CREATE SUBSCRIPTION "mysub" ON "mydb"."autogen" DESTINATIONS ANY 'http://host1.e
 ```
 
 ### Subscription protocols
-Subscriptions can us HTTP, HTTPS, or UDP transport protocols.
-Which one to use is determined by the subscription endpoint.
+Subscriptions can use HTTP, HTTPS, or UDP transport protocols.
+Which to use is determined by the protocol expected by the subscription endpoint.
 If creating a Kapacitor subscription, this is defined by the `subscription-protocol`
-option in the `[[influxdb]]` section of your [`kapacitor.conf`](/kapacitor/v1.5/administration/configuration/#influxdb).
+option in the `[[influxdb]]` section of your [`kapacitor.conf`](/kapacitor/latest/administration/subscription-management/#subscription-protocol).
 
 _**kapacitor.conf**_
 ```toml
@@ -65,8 +91,6 @@ _**kapacitor.conf**_
 
   # ...
 
-  # Which protocol to use for subscriptions
-  # one of 'udp', 'http', or 'https'.
   subscription-protocol = "http"
 
   # ...
@@ -93,7 +117,7 @@ monitor          kapacitor-39545771-7b64-4692-ab8f-1796c07f3314 ANY  [http://loc
 ```
 
 ## Remove subscriptions
-Subscriptions are removed using the `DROP SUBSCRIPTION` InfluxQL statement.
+Remove or drop subscriptions using the `DROP SUBSCRIPTION` InfluxQL statement.
 
 ```sql
 -- Pattern:
@@ -106,7 +130,7 @@ DROP SUBSCRIPTION "sub0" ON "mydb"."autogen"
 ### Drop all subscriptions
 In some cases, it may be necessary to remove all subscriptions.
 Run the following bash script that utilizes the `influx` CLI, loops through all subscriptions, and removes them.
-It depends on the `$INFLUXUSER` and `$INFLUXPASS` environment variables.
+This script depends on the `$INFLUXUSER` and `$INFLUXPASS` environment variables.
 If these are not set, export them as part of the script.
 
 ```bash
@@ -116,29 +140,6 @@ If these are not set, export them as part of the script.
 
 IFS=$'\n'; for i in $(influx -format csv -username $INFLUXUSER -password $INFLUXPASS -database _internal -execute 'show subscriptions' | tail -n +2 | grep -v name); do influx -format csv -username $INFLUXUSER -password $INFLUXPASS -database _internal -execute "drop subscription \"$(echo "$i" | cut -f 3 -d ',')\" ON \"$(echo "$i" | cut -f 1 -d ',')\".\"$(echo "$i" | cut -f 2 -d ',')\""; done
 ```
-
-## How subscriptions work
-As data is written to InfluxDB, writes are duplicated to subscriber endpoints via
-HTTP, HTTPS, or UDP in [line protocol](/influxdb/v1.6/write_protocols/line_protocol_tutorial/).
-InfluxDB subscriber service creates multiple "writers" ([goroutines](https://golangbot.com/goroutines/))
-which send writes to the subscription endpoint(s).
-
-_The number of writer goroutines is defined by the [`write-concurrency`](/influxdb/v1.6/administration/config/#write-concurrency-40) configuration.
-If using Kapacitor, this setting also defines how many "readers" Kapacitor spins up to receive the writes._
-
-As writes occur in InfluxDB, each subscription writer sends the write data to the specified subscription endpoint(s). each reader handles them as they are recieved.
-However, with a high `write-concurrency` (multiple writers and readers) and a high ingest rate,
-nanosecond differences in writer and reader processes and the transport layer can result
-in writes being received out of order.
-
-> #### Important information about high write loads
-> While setting the subscriber `write-concurrency` to greater than 1 does increase your
-> subscriber write throughput, it can result in out-of-order writes under high ingest rates.
-> Setting `write-concurrency` to 1 ensures writes are passed to subscriber endpoints sequentially,
-> but can create a bottleneck under high ingest rates.
->
-> What `write-concurrency` should be set to depends on your specific workload
-> and need for in-order writes to your subscription endpoint.
 
 ## Configure InfluxDB subscriptions
 InfluxDB subscription configuration options are available in the `[subscriber]`
@@ -167,6 +168,7 @@ If an endpoint host is inaccessible or has been decommissioned, you will see err
 similar to the following:
 
 ```bash
+# Some message content omitted (...) for the sake of brevity
 "Post http://x.y.z.a:9092/write?consistency=...: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)" ... service=subscriber
 "Post http://x.y.z.a:9092/write?consistency=...: dial tcp x.y.z.a:9092: getsockopt: connection refused" ... service=subscriber
 "Post http://x.y.z.a:9092/write?consistency=...: dial tcp 172.31.36.5:9092: getsockopt: no route to host" ... service=subscriber
@@ -174,7 +176,8 @@ similar to the following:
 
 In some cases, this may be caused by a networking error or something similar
 preventing a successful connection to the subscription endpoint.
-In other cases, it's because subscription endpoint no longer exists and the subscription hasn't been dropped from InfluxDB.
-Subscriptions aren't automatically removed from InfluxDB when an endpoint becomes inaccessible,
-simply because InfluxDB does not know if it should not or will not come back.
+In other cases, it's because the subscription endpoint no longer exists and
+the subscription hasn't been dropped from InfluxDB.
+Because InfluxDB does not know if a subscription endpoint will or will not become accessible again,
+subscriptions are not automatically dropped when an endpoint becomes inaccessible.
 If a subscription endpoint is removed, you must manually [drop the subscription](#remove-subscriptions) from InfluxDB.
