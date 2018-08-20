@@ -18,14 +18,12 @@ HTTP, HTTPS, or UDP in [line protocol](/influxdb/v1.6/write_protocols/line_proto
 InfluxDB's subscriber service creates multiple "writers" ([goroutines](https://golangbot.com/goroutines/))
 which send writes to the subscription endpoint(s).
 
-_The number of writer goroutines is defined by the [`write-concurrency`](/influxdb/v1.6/administration/config/#write-concurrency-40) configuration.
-If using Kapacitor, this setting also defines how many "readers" Kapacitor spins up to receive the writes._
+_The number of writer goroutines is defined by the [`write-concurrency`](/influxdb/v1.6/administration/config/#write-concurrency-40) configuration._
 
-As writes occur in InfluxDB, each subscription writer sends the writen data to the
+As writes occur in InfluxDB, each subscription writer sends the written data to the
 specified subscription endpoint(s).
-Each reader handles them as they are recieved.
-However, with a high `write-concurrency` (multiple writers and readers) and a high ingest rate,
-nanosecond differences in writer and reader processes and the transport layer can result
+However, with a high `write-concurrency` (multiple writers) and a high ingest rate,
+nanosecond differences in writer processes and the transport layer can result
 in writes being received out of order.
 
 > #### Important information about high write loads
@@ -134,7 +132,8 @@ This script depends on the `$INFLUXUSER` and `$INFLUXPASS` environment variables
 If these are not set, export them as part of the script.
 
 ```bash
-# Optional environment variable exports
+# Environment variable exports:
+# Uncomment these if INFLUXUSER and INFLUXPASS are not already globally set.
 # export INFLUXUSER=influxdb-username
 # export INFLUXPASS=influxdb-password
 

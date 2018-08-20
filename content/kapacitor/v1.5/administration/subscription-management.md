@@ -47,6 +47,7 @@ in the `kapacitor.conf`._
 Kapacitor subscription configuration options are available under the `[[influxdb]]` section in the [`kapacitor.conf`](/kapacitor/v1.5/administration/configuration/).
 Below is an example of subscription-specific configuration options followed by a description of each.
 
+_**Example Kapacitor subscription configuration**_
 ```toml
 [[influxdb]]
 
@@ -60,9 +61,9 @@ Below is an example of subscription-specific configuration options followed by a
   # ...
 
   [influxdb.subscriptions]
-    my_database = [ "default", "longterm" ]
+    my_database1 = [ "default", "longterm" ]
   [influxdb.excluded-subscriptions]
-    my_database = [ "default", "longterm" ]
+    my_database2 = [ "default", "shortterm" ]
 ```
 
 ### `disable-subscriptions`
@@ -113,6 +114,10 @@ Define a set of databases and retention policies to exclude from subscriptions.
   # Example:
   my_database = [ "default", "longterm" ]
 ```
+
+> Only one of `[influxdb.subscriptions]` or `[influxdb.excluded-subscriptions]` need be defined.
+> They essentially fulfill the same purpose in different ways, but specific use-cases do lend
+> themselves to one or the other.
 
 ## Troubleshooting
 
