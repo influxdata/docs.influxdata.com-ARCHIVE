@@ -2219,16 +2219,20 @@ POST /kapacitor/v1/storage/stores/tasks
 ## Logging
 
 The logging API is being release under [Technical Preview](#technical-preview).
-Kapacitor allows users to retrieve the kapacitor logs remotely via HTTP using
+Kapacitor allows users to retrieve the Kapacitor logs remotely using HTTP
 [Chunked Transfer Encoding](https://en.wikipedia.org/wiki/Chunked_transfer_encoding).
-The logs may be queried using key-value pairs correspoding to the log entry.
+The logs may be queried using key-value pairs corresponding to the log entry.
 These key-value are specified as query parameter.
 
-The logging API will return logs in two formats: [logfmt](https://brandur.org/logfmt) and JSON.
-To receive logs in JSON format, you must specify `Content-Type: application/json`. If we receive
-any content type other than `application/json`, we will return the logs in logfmt format.
+The logging API will return logs in two formats:
 
-Each chunk returned to the client will contain a single complete log followed by a `\n`.
+* [logfmt](https://brandur.org/logfmt)
+* JSON
+
+To receive logs in JSON format, you must specify `Content-Type: application/json`.
+If Kapacitor receives any content type other than `application/json`, logs will be returned in logfmt format.
+
+Each chunk returned to the client will contain a single complete log, followed by a `\n`.
 
 ### Example
 
@@ -2322,14 +2326,14 @@ GET /kapacitor/v1/service-tests
 
 ### Testing a service
 
-To test a service make a POST request to the `/kapacitor/v1/service-tests/<service name>` endpoint.
-The contents of the POST body depend on the service in test.
+To test a service, make a POST request to the `/kapacitor/v1/service-tests/<service name>` endpoint.
+The contents of the POST body depend on the service in the test.
 To determine the available options use a GET request to the same endpoint.
 The returned options are also the defaults.
 
 #### Example
 
-See available/default options for the slack service:
+See the available and default options for the Slack service, run the following request.
 
 ```
 GET /kapacitor/v1/service-tests/slack
@@ -2347,7 +2351,7 @@ GET /kapacitor/v1/service-tests/slack
 }
 ```
 
-Test the slack service integration using custom options:
+Test the Slack service integration using custom options:
 
 ```
 POST /kapacitor/v1/service-tests/slack
@@ -2399,49 +2403,83 @@ Ping is a useful request if you simply need the verify the version of server you
 GET /kapacitor/v1/ping
 ```
 
-#### Response
-
+Response:
+```
 | Code | Meaning |
 | ---- | ------- |
 | 204  | Success |
+```
 
-### Sideload Reload
+### Sideload reload
 
-You can trigger a reload of all sideload sources by making a POST request to `kapacitor/v1/sideload/reload`, with an empty body.
+You can trigger a reload of all sideload sources by making an HTTP POST request to `kapacitor/v1/sideload/reload`, with an empty body.
 
 #### Example
 
 ```
 POST /kapacitor/v1/sideload/reload
 ```
+Response:
 
-#### Response
-
+```
 | Code | Meaning |
 | ---- | ------- |
 | 204  | Success |
+```
 
+### `/debug/vars` HTTP endpoint
 
-### Debug Vars
-
-Kapacitor also exposes several statistics and information about its runtime.
-These can be accessed at the `/kapacitor/v1/debug/vars` endpoint.
-
-#### Example
+Kapacitor exposes statistics and information about its runtime through the `kapacitor/v1/debug/vars` endpoint, which can be accessed using the following HTTP GET request:
 
 ```
 GET /kapacitor/v1/debug/vars
 ```
+To see the content of the `kapacitor/v1/debug/vars` endpoint in a web browser, open http://localhost:9092/kapacitor/v1/debug/vars (assuming the default Kapacitor HTTP API server port of `9092`). Server statistics and information are displayed in JSON format.
 
-### Debug Pprof
+>Note: The [Telegraf Kapacitor input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/kapacitor) collects metrics from specified Kapacitor instances using the `/kapacitor/v1/debug/vars` endpoint. For a list of the measurements and fields, see the plugin README.
 
-Kapacitor also the standard Go [net/http/pprof](https://golang.org/pkg/net/http/pprof/) endpoints.
+
+### `/debug/pprof` HTTP endpoints
+
+Kapacitor supports the Go [net/http/pprof](https://golang.org/pkg/net/http/pprof/) endpoints, which can be useful for troubleshooting. The _pprof_ package serves runtime profiling data in the format expected by the _pprof_ visualization tool.
+
+To access the available Kapacitor `/debug/pprof/` profiles, open http://localhost:9092/kapacitor/v1/debug/pprofs (assuming the default Kapacitor HTTP API server port of `9092`). Use the hyperlinks to see the available profiles:
+* **block**
+  - Stack traces that led to blocking on synchronization primitives.
+* **goroutine**
+  - Stack traces of all current goroutines.
+* **heap**
+  - A sampling of all heap allocations.
+* **mutex**
+  - Stack traces of holders of contended mutexes.
+* **threadcreate**
+  - Stack traces that led to the creation of new OS threads
+
+To use an HTTP request to access one of the the `/debug/pprof/` profiles listed above, use the following request, substituting `<profile>` with the name of the profile.
+
+  ```
+  GET /kapacitor/v1/debug/pprof/<profile>
+  ```
+
+Here's an example that gets the heap profile:
+
+  ```
+  GET /kapacitor/v1/debug/pprof/heap
+  ```
+
+You can also use the [Go `pprof` interactive tool](https://github.com/google/pprof) to access the Kapacitor `/debug/pprof/ profiles.
+For example, to look at the heap profile of a Kapacitor instance using this tool, you would use a command like this:
 
 ```
-GET /kapacitor/v1/debug/pprof/...
+go tool pprof http://localhost:9092/kapacitor/v1/debug/pprof/heap
 ```
 
->NOTE: Not all of these endpoints return JSON content.
+For more information about the Go `/net/http/pprof` package and the interactive _pprof_ analysis and visualization tool, see:
+
+* [Package pprof (`net/http/pprof`)](https://golang.org/pkg/net/http/pprof/)
+* [pprof [GitHub `google/pprof` repository\]](https://github.com/google/pprof)
+* [Profiling Go programs](https://blog.golang.org/profiling-go-programs)
+
 
 ### Routes
 

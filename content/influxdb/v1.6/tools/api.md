@@ -16,18 +16,20 @@ The following sections assume your InfluxDB instance is running on `localhost`
 port `8086` and HTTPS is not enabled.
 Those settings [are configurable](/influxdb/v1.6/administration/config/#http-endpoint-settings-http).
 
-# Endpoints
+# InfluxDB HTTP endpoints
 
 | Endpoint    | Description |
 | :---------- | :---------- |
 | [/debug/requests](#debug-requests) | Use `/debug/requests/` to track HTTP client requests to the `/write` and `/query` endpoints. |
+| [/debug/vars](#debug-vars)  | Use `/debug/vars` to collect statistics  |
+| [/debug/pprof ](#debug-pprof)   | Use `/debug/pprof` endpoints for troubleshooting.  |
 | [/ping](#ping) | Use `/ping` to check the status of your InfluxDB instance and your version of InfluxDB. |
 | [/query](#query) | Use `/query` to query data and manage databases, retention policies, and users. |
 | [/write](#write) | Use `/write` to write data to a pre-existing database. |
 
-## /debug/requests
+## `/debug/requests`
 Use this endpoint to track HTTP client requests to the `/write` and `/query` endpoints.
-`/debug/requests` returns the number of writes and queries to InfluxDB per username and IP address.
+The `/debug/requests` endpoint returns the number of writes and queries to InfluxDB per username and IP address.
 
 ### Definition
 ```
@@ -67,8 +69,69 @@ $ curl http://localhost:8086/debug/requests?seconds=60
 ```
 The response shows that, over the past minute, `user1` sent three requests to the `/write` endpoint from `123.45.678.91`, `user1` sent 16 requests to the `/query` endpoint from `000.0.0.0`, and `user2` sent four requests to the `/write` endpoint from `xx.xx.xxx.xxx`.
 
+### `/debug/vars`
 
-## /ping
+InfluxDB exposes statistics and information about its runtime through the `/debug/vars` endpoint, which can be accessed using the following HTTP GET request:
+
+```
+GET /debug/vars
+```
+To see the content of the `/debug/vars` endpoint in a web browser, open http://localhost:8086/debug/vars (assuming the default InfluxDB HTTP API server port of `8086`). Server statistics and information are displayed in JSON format.
+
+>Note: The [InfluxDB Kapacitor input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/influxdb) collects metrics from specified InfluxDB instances using the `/debug/vars` endpoint. For a list of the measurements and fields, see the plugin README.
+
+
+### `/debug/pprof`
+
+InfluxDB supports the Go [net/http/pprof](https://golang.org/pkg/net/http/pprof/) endpoints, which can be useful for troubleshooting. The _pprof_ package serves runtime profiling data in the format expected by the _pprof_ visualization tool.
+
+To access the available InfluxDB `/debug/pprof/` profiles, open http://localhost:8086/debug/pprofs (assuming the default InfluxDB HTTP API server port of `8086`). Use the hyperlinks to see the available Go profiles:
+* **block**
+  - Stack traces that led to blocking on synchronization primitives.
+* **goroutine**
+  - Stack traces of all current goroutines.
+* **heap**
+  - A sampling of all heap allocations.
+* **mutex**
+  - Stack traces of holders of contended mutexes.
+* **threadcreate**
+  - Stack traces that led to the creation of new OS threads
+
+  To use an HTTP request to access one of the the `/debug/pprof/` profiles listed above, use the following request, substituting `<profile>` with the name of the profile.
+
+    ```
+    GET /debug/pprof/<profile>
+    ```
+
+  Here's an example that gets the heap profile:
+
+    ```
+    GET /debug/pprof/heap
+    ```
+
+  You can also use the [Go `pprof` interactive tool](https://github.com/google/pprof) to access the InfluxDB `/debug/pprof/` profiles.
+  For example, to look at the heap profile of a InfluxDB instance using this tool, you would use a command like this:
+
+  ```
+  go tool pprof http://localhost:8086/debug/pprof/heap
+  ```
+
+  For more information about the Go `/net/http/pprof` package and the interactive _pprof_ analysis and visualization tool, see:
+
+  * [Package pprof (`net/http/pprof`)](https://golang.org/pkg/net/http/pprof/)
+  * [pprof [GitHub `google/pprof` repository\]](https://github.com/google/pprof)
+  * [Profiling Go programs](https://blog.golang.org/profiling-go-programs)
+
+#### Custom `/debug/pprof/all` option
+
+The `/debug/pprof/all` endpoint is a custom `/debug/pprof` profile intended primarily for use by InfluxData support. This endpoint generates a `profile.tar.gz` archive containing text files with the standard Go profiling information and additional debugging data.
+
+To create a `profile.tar.gz` archive, open a web browser to
+ http://localhost:8086/debug/pprof/all and then save the generated archive.
+
+
+
+## `/ping`
 
 The ping endpoint accepts both `GET` and `HEAD` HTTP requests.
 Use this endpoint to check the status of your InfluxDB instance and your version
