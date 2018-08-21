@@ -569,9 +569,9 @@ $ influxd-ctl kill-copy-shard cluster-data-node-02:8088 cluster-data-node-03:808
 Killed shard copy 39 from cluster-data-node-02:8088 to cluster-data-node-03:8088
 ```
 
-### `ldap [ <subcommand> ]`
+### `ldap`
 
-Manages the LDAP support in the InfluxDB Enterprise clusters.
+Use the `ldap` subcommands to manage the LDAP support in the InfluxDB Enterprise clusters.
 
 #### Syntax
 
@@ -609,33 +609,33 @@ Downloads group membership from configured LDAP server and preloads cache on dat
 
 Optional arguments are in brackets.
 
-##### [ `-auth-type <authentication_type>` ]
+##### [ `-auth-type { none | basic | jwt }` ]
 
 Type of authentication to use. Valid values are `none` (default), `basic`, and `jwt`.
 
 ##### [ `-bind <HTTP_bind_address>` ]
 
-Bind HTTP address of a meta node. Default value is `"localhost:8091"`.
+HTTP bind address of a meta node. Default value is `"localhost:8091"`.
 
-##### `-bind-tls`
+##### [ `-bind-tls` ]
 
 Flag to enable using TLS.
 
-##### `-k`
+##### [ `-k` ]
 
 Flag to skip certificate verification.
 
-##### `-pwd <password>`
+##### [ `-pwd <password>` ]
 
 JWT password. Ignored if `-auth-type jwt` is not included.
 
-##### `-secret <secret_string>`
+##### [ `-secret <secret_string>` ]
 
 JWT shared secret. Ignored if `-auth-type jwt` is not included.
 
-##### `-user <user_name>`
+##### [ `-user <user_name>` ]
 
-User name. Ignored if `-auth-type basic | jwt` is not included.
+User name. Ignored if `-auth-type { basic | jwt }` is not included.
 
 
 
