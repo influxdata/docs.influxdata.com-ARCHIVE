@@ -2429,19 +2429,19 @@ Response:
 
 ### `/debug/vars` HTTP endpoint
 
-Kapacitor exposes statistics and information about its runtime through the `kapacitor/v1/debug/vars` endpoint, which can be accessed using the following HTTP GET request:
+Kapacitor exposes statistics and information about its runtime through the `kapacitor/v1/debug/vars` endpoint, which can be accessed using the following cURL command:
 
 ```
-GET /kapacitor/v1/debug/vars
+curl http://localhost:9092/kapacitor/v1/debug/vars
 ```
-To see the content of the `kapacitor/v1/debug/vars` endpoint in a web browser, open http://localhost:9092/kapacitor/v1/debug/vars (assuming the default Kapacitor HTTP API server port of `9092`). Server statistics and information are displayed in JSON format.
+Server statistics and information are displayed in JSON format.
 
->Note: The [Telegraf Kapacitor input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/kapacitor) collects metrics from specified Kapacitor instances using the `/kapacitor/v1/debug/vars` endpoint. For a list of the measurements and fields, see the plugin README.
+>**Note:** You can use the [Telegraf Kapacitor input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/kapacitor) to collect metrics (using the `/kapacitor/v1/debug/vars` endpoint) from specified Kapacitor instances. For a list of the measurements and fields, see the plugin README.
 
 
 ### `/debug/pprof` HTTP endpoints
 
-Kapacitor supports the Go [net/http/pprof](https://golang.org/pkg/net/http/pprof/) endpoints, which can be useful for troubleshooting. The _pprof_ package serves runtime profiling data in the format expected by the _pprof_ visualization tool.
+Kapacitor supports the Go [net/http/pprof](https://golang.org/pkg/net/http/pprof/) endpoints, which can be useful for troubleshooting. The `pprof` package serves runtime profiling data in the format expected by the _pprof_ visualization tool.
 
 To access the available Kapacitor `/debug/pprof/` profiles, open http://localhost:9092/kapacitor/v1/debug/pprofs (assuming the default Kapacitor HTTP API server port of `9092`). Use the hyperlinks to see the available profiles:
 * **block**
@@ -2455,19 +2455,19 @@ To access the available Kapacitor `/debug/pprof/` profiles, open http://localhos
 * **threadcreate**
   - Stack traces that led to the creation of new OS threads
 
-To use an HTTP request to access one of the the `/debug/pprof/` profiles listed above, use the following request, substituting `<profile>` with the name of the profile.
+To access one of the profiles listed above, use the following cURL command, substituting `<profile>` with the name of the profile.
 
   ```
-  GET /kapacitor/v1/debug/pprof/<profile>
+curl http://localhost:9092/kapacitor/v1/debug/pprof/<profile>
   ```
 
 Here's an example that gets the heap profile:
 
-  ```
-  GET /kapacitor/v1/debug/pprof/heap
-  ```
+```
+curl http://9092/kapacitor/v1/debug/pprof/heap
+```
 
-You can also use the [Go `pprof` interactive tool](https://github.com/google/pprof) to access the Kapacitor `/debug/pprof/ profiles.
+You can also use the [Go `pprof` interactive tool](https://github.com/google/pprof) to access the Kapacitor `/debug/pprof/` profiles.
 For example, to look at the heap profile of a Kapacitor instance using this tool, you would use a command like this:
 
 ```
@@ -2477,9 +2477,9 @@ go tool pprof http://localhost:9092/kapacitor/v1/debug/pprof/heap
 For more information about the Go `/net/http/pprof` package and the interactive _pprof_ analysis and visualization tool, see:
 
 * [Package pprof (`net/http/pprof`)](https://golang.org/pkg/net/http/pprof/)
-* [pprof [GitHub `google/pprof` repository\]](https://github.com/google/pprof)
+* [`pprof` visualization tool](https://github.com/google/pprof)
 * [Profiling Go programs](https://blog.golang.org/profiling-go-programs)
-
+* [Diagnostics](https://golang.org/doc/diagnostics.html#profiling)
 
 ### Routes
 
