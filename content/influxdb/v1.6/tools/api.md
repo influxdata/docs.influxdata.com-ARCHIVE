@@ -1,5 +1,6 @@
 ---
 title: InfluxDB HTTP API reference
+description: Use the InfluxDB HTTP API endpoints to run queries, write data, check server status, and troubleshoot by tracking HTTP client requests, collecting server statistics, and using Go "pprof" profiles.
 aliases:
     - influxdb/v1.6/concepts/api/
 menu:
@@ -20,8 +21,8 @@ Those settings [are configurable](/influxdb/v1.6/administration/config/#http-end
 
 | Endpoint    | Description |
 | :---------- | :---------- |
-| [/debug/pprof ](#debug-pprof)   | Use `/debug/pprof` to generate profiles for troubleshooting.  |   
-| [/debug/requests](#debug-requests) | Use `/debug/requests/` to track HTTP client requests to the `/write` and `/query` endpoints. | [/debug/vars](#debug-vars)  | Use `/debug/vars` to collect statistics  |
+| [/debug/pprof ](#debug-pprof-http-endpoint)   | Use `/debug/pprof` to generate profiles for troubleshooting.  |   
+| [/debug/requests](#debug-requests-http-endpoint) | Use `/debug/requests/` to track HTTP client requests to the `/write` and `/query` endpoints. | [/debug/vars](#debug-vars)  | Use `/debug/vars` to collect statistics  |
 | [/ping](#ping) | Use `/ping` to check the status of your InfluxDB instance and your version of InfluxDB. |
 | [/query](#query) | Use `/query` to query data and manage databases, retention policies, and users. |
 | [/write](#write) | Use `/write` to write data to a pre-existing database. |
@@ -46,16 +47,16 @@ The `/debug/pprof/` endpoint generates an HTML page with a list of built-in Go p
 | mutex | Stack traces of holders of contended mutexes.  |
 | threadcreate | Stack traces that led to the creation of new OS threads. |
 
-To access one of the the `/debug/pprof/` profiles listed above, use the following cURL request, substituting `<profile>` with the name of the profile.
+To access one of the the `/debug/pprof/` profiles listed above, use the following cURL request, substituting `<profile>` with the name of the profile. The resulting profile is output to a file.
 
 ```
-curl http://localhost:8086/debug/pprof/<profile>
+curl -o http://localhost:8086/debug/pprof/<profile>
 ```
 
-For example, to look at the heap profile, run the following:
+In the following example, the cURL command outputs the resulting heap profile to a file:
 
 ```
-curl http://localhost:/8086/debug/pprof/heap
+curl -o http://localhost:/8086/debug/pprof/heap
 ```
 
 You can also use the [Go `pprof` interactive tool](https://github.com/google/pprof) to access the InfluxDB `/debug/pprof/` profiles.
@@ -68,21 +69,24 @@ go tool pprof http://localhost:8086/debug/pprof/heap
 For more information about the Go `/net/http/pprof` package and the interactive _pprof_ analysis and visualization tool, see:
 
 * [Package pprof (`net/http/pprof`)](https://golang.org/pkg/net/http/pprof/)
-* [`pprof` visualization tool](https://github.com/google/pprof)
+* [`pprof` analysis and visualization tool](https://github.com/google/pprof)
 * [Profiling Go programs](https://blog.golang.org/profiling-go-programs)
-* [Diagnostics](https://golang.org/doc/diagnostics.html#profiling)
+* [Diagnostics - Profiling](https://golang.org/doc/diagnostics.html#profiling)
 
 #### `/debug/pprof/all` HTTP endpoint
 
-The `/debug/pprof/all` endpoint is a custom `/debug/pprof` profile intended primarily for use by InfluxData support. This endpoint generates a `profile.tar.gz` archive containing text files with the standard Go profiling information and additional debugging data.
+The `/debug/pprof/all` endpoint is a custom `/debug/pprof` profile intended primarily for use by InfluxData support. This endpoint generates a `profile.tar.gz` archive containing text files with the standard Go profiling information and additional debugging data. An optional CPU profile is generated when using the `cpu=true` option (default is `false`).
 
 To create a `profile.tar.gz` archive, use the following cURL command to generate a `profile.tar.gz` file for sharing with InfluxData support.
 
 ```
-➜  ~ curl -o profiles.tar.gz "http://localhost:8086/debug/pprof/all?cpu=true"
+curl -o profiles.tar.gz "http://localhost:8086/debug/pprof/all?cpu=true"
 ```
 
-As the following example shows, a display appears and "Time Spent" displays the time (in  seconds) until 30 seconds of data has been collected.
+>**Note:** When the `cpu=true` option is included, a CPU profile is generated for 30+ seconds.
+> If you're concerned about running a CPU profile (which only has a small, temporary impact on performance), then you can set ?cpu=false or omit ?cpu=true altogether.
+
+As the following example shows, a display appears and "Time Spent" displays the time elapsed (in  seconds) until 30 seconds of data has been collected, and then output to a file.
 
 ```
 ➜  ~ curl -o profiles.tar.gz "http://localhost:8086/debug/pprof/all?cpu=true"
