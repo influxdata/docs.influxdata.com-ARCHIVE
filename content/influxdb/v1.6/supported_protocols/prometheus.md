@@ -14,7 +14,7 @@ menu:
 ## Prometheus remote read and write API support
 
 <dt>
-Note: The Prometheus [API Stability Guarantees](https://prometheus.io/docs/prometheus/latest/stability/) states that remote read and remote write endpoints are features listed as experimental or subject to change, and thus considered unstable for 2.x". Any breaking changes will be included in the InfluxDB release notes.
+Note: The Prometheus [API Stability Guarantees](https://prometheus.io/docs/prometheus/latest/stability/) states that remote read and remote write endpoints are features listed as experimental or subject to change, and thus considered unstable for 2.x. Any breaking changes will be included in the InfluxDB release notes.
 </dt>
 
 InfluxDB support for the Prometheus remote read and write API adds the following two HTTP endpoints to the InfluxDB `httpd` handler:
