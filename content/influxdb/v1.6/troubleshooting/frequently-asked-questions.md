@@ -714,7 +714,7 @@ time			               count
 
 Currently, InfluxDB does not support using `OR` with
 [absolute time](/influxdb/v1.6/query_language/data_exploration/#absolute-time)
-in the `WHERE` clause.
+in the `WHERE` clause and  OR cannot be used to specify multiple time ranges.
 InfluxDB returns an empty response if the query's `WHERE` clause uses `OR`
 with absolute time.
 

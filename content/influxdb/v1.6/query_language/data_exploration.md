@@ -1880,7 +1880,7 @@ in the `FROM` clause and writes the results to measurements with the same name i
 `where_else` database and the `autogen` retention policy.
 Note that both `where_else` and `autogen` must exist prior to running the `INTO`
 query.
-See [Database Management](/influxdb/v1.6/query_language/database_management/)
+See [Database management](/influxdb/v1.6/query_language/database_management/)
 for how to manage databases and retention policies.
 
 The response shows the number of points (`5`) that InfluxDB writes to the `where_else`
@@ -1963,6 +1963,7 @@ Without `ORDER by time DESC`, the query would return `2015-08-18T00:00:00Z`
 first and `2015-09-18T21:42:00Z` last.
 
 #### Return the newest points first and include a GROUP BY time() clause
+
 ```
 > SELECT MEAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:42:00Z' GROUP BY time(12m) ORDER BY time DESC
 
@@ -2012,6 +2013,7 @@ Note that the `LIMIT` clause must appear in the order outlined in the syntax abo
 ### Examples
 
 #### Limit the number of points returned
+
 ```
 > SELECT "water_level","location" FROM "h2o_feet" LIMIT 3
 
@@ -2023,10 +2025,10 @@ time                   water_level   location
 2015-08-18T00:06:00Z   8.005         coyote_creek
 ```
 
-The query returns the three oldest [points](/influxdb/v1.6/concepts/glossary/#point) (determined by timestamp) from the
-`h2o_feet` [measurement](/influxdb/v1.6/concepts/glossary/#measurement).
+The query returns the three oldest [points](/influxdb/v1.6/concepts/glossary/#point) (determined by timestamp) from the `h2o_feet` [measurement](/influxdb/v1.6/concepts/glossary/#measurement).
 
 #### Limit the number points returned and include a GROUP BY clause
+
 ```
 > SELECT MEAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:42:00Z' GROUP BY *,time(12m) LIMIT 2
 
@@ -2267,6 +2269,7 @@ time                   mean
 ```
 
 ## The `SOFFSET` clause
+
 `SOFFSET <N>` paginates `N` [series](/influxdb/v1.6/concepts/glossary/#series) in the query results.
 
 ### Syntax
@@ -2310,6 +2313,7 @@ Without `SOFFSET 1`, the query returns data for the series associated with the
 `h2o_feet` measurement and the `location = coyote_creek` tag.
 
 #### Paginate series and include all clauses
+
 ```
 > SELECT MEAN("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:42:00Z' GROUP BY *,time(12m) ORDER BY time DESC LIMIT 2 OFFSET 2 SLIMIT 1 SOFFSET 1
 
@@ -2382,8 +2386,8 @@ The query results include the UTC offset (`-05:00`) for the `America/Chicago` ti
 # Time syntax
 
 For most `SELECT` statements, the default time range is between [`1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC](/influxdb/v1.6/troubleshooting/frequently-asked-questions/#what-are-the-minimum-and-maximum-timestamps-that-influxdb-can-store).
-For `SELECT` statements with a [`GROUP BY time()` clause](#group-by-time-intervals), the default time
-range is between `1677-09-21 00:12:43.145224194` UTC and [`now()`](/influxdb/v1.6/concepts/glossary/#now).
+For `SELECT` statements with a [`GROUP BY time()` clause](#group-by-time-intervals),
+the default time range is between `1677-09-21 00:12:43.145224194` UTC and [`now()`](/influxdb/v1.6/concepts/glossary/#now).
 The following sections detail how to specify alternative time ranges in the `SELECT`
 statement's [`WHERE` clause](#the-where-clause).
 
@@ -2633,17 +2637,16 @@ The whitespace between `+` and `1000d` is required.
 
 ### Using `OR` with absolute time
 
-Currently, InfluxDB does not support using `OR` with absolute time
-in the `WHERE` clause.
+Currently, InfluxDB does not support using the `OR` operator with absolute time
+in the `WHERE` clause and `OR` cannot be used to specify multiple time ranges.
 
-See the [Frequently Asked Questions](/influxdb/v1.6/troubleshooting/frequently-asked-questions/#why-is-my-query-with-a-where-or-time-clause-returning-empty-results)
-document for more information.
+For more information, see [Frequently Asked Questions](/influxdb/v1.6/troubleshooting/frequently-asked-questions/#why-is-my-query-with-a-where-or-time-clause-returning-empty-results).
 
 ### Querying data that occur after `now()` with a `GROUP BY time()` clause
 
 Most `SELECT` statements have a default time range between [`1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC](/influxdb/v1.6/troubleshooting/frequently-asked-questions/#what-are-the-minimum-and-maximum-timestamps-that-influxdb-can-store).
-For `SELECT` statements with a [`GROUP BY time()` clause](#group-by-time-intervals), the default time
-range is between `1677-09-21 00:12:43.145224194` UTC and [`now()`](/influxdb/v1.6/concepts/glossary/#now).
+For `SELECT` statements with a [`GROUP BY time()` clause](#group-by-time-intervals),
+the default time range is between `1677-09-21 00:12:43.145224194` UTC and [`now()`](/influxdb/v1.6/concepts/glossary/#now).
 
 To query data with timestamps that occur after `now()`, `SELECT` statements with
 a `GROUP BY time()` clause must provide an alternative upper bound in the
