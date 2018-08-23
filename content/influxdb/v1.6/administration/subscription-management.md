@@ -1,6 +1,6 @@
 ---
-title: Manage Subscriptions in InfluxDB
-description: placholder
+title: Manage subscriptions in InfluxDB
+description: InfluxDB uses subscriptions to copy all written data to a local or remote endpoint. This article walks through how InfluxDB subscriptions work, how to configure them, and how to manage them.
 menu:
   influxdb_1_6:
     parent: Administration
@@ -10,18 +10,19 @@ menu:
 
 InfluxDB subscriptions are local or remote endpoints to which all data written to InfluxDB is copied.
 Subscriptions are primarily used with [Kapacitor](/kapacitor/), but any endpoint
-able to accept UDP, HTTP, or HTTPS connections can subscribe to InfluxDB.
+able to accept UDP, HTTP, or HTTPS connections can subscribe to InfluxDB and receive
+a copy of all data as it is written.
 
 ## How subscriptions work
 As data is written to InfluxDB, writes are duplicated to subscriber endpoints via
 HTTP, HTTPS, or UDP in [line protocol](/influxdb/v1.6/write_protocols/line_protocol_tutorial/).
 InfluxDB's subscriber service creates multiple "writers" ([goroutines](https://golangbot.com/goroutines/))
-which send writes to the subscription endpoint(s).
+which send writes to the subscription endpoints.
 
 _The number of writer goroutines is defined by the [`write-concurrency`](/influxdb/v1.6/administration/config/#write-concurrency-40) configuration._
 
 As writes occur in InfluxDB, each subscription writer sends the written data to the
-specified subscription endpoint(s).
+specified subscription endpoints.
 However, with a high `write-concurrency` (multiple writers) and a high ingest rate,
 nanosecond differences in writer processes and the transport layer can result
 in writes being received out of order.
@@ -177,6 +178,7 @@ In some cases, this may be caused by a networking error or something similar
 preventing a successful connection to the subscription endpoint.
 In other cases, it's because the subscription endpoint no longer exists and
 the subscription hasn't been dropped from InfluxDB.
-Because InfluxDB does not know if a subscription endpoint will or will not become accessible again,
-subscriptions are not automatically dropped when an endpoint becomes inaccessible.
-If a subscription endpoint is removed, you must manually [drop the subscription](#remove-subscriptions) from InfluxDB.
+
+> Because InfluxDB does not know if a subscription endpoint will or will not become accessible again,
+> subscriptions are not automatically dropped when an endpoint becomes inaccessible.
+> If a subscription endpoint is removed, you must manually [drop the subscription](#remove-subscriptions) from InfluxDB.

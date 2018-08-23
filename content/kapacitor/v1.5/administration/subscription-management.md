@@ -1,6 +1,6 @@
 ---
-title: Manage Kapacitor Subscriptions
-description: placholder
+title: Manage Kapacitor subscriptions
+description: Kapacitor subscribes to InfluxDB and receives all data as it is written to InfluxDB. This article walks through how Kapacitor subscriptions work, how to configure them, and how to manage them.
 menu:
   kapacitor_1_5:
     name: Manage subscriptions
@@ -24,7 +24,7 @@ This ID is stored inside of `/var/lib/kapacitor/`.
 If the ID file doesn't exist on startup, Kapacitor will create one.
 If a subscription matching the Kapacitor ID doesn't exist in InfluxDB, Kapacitor
 will create a new subscription in InfluxDB.
-This process ensures that if or when Kapacitor stops, it will reconnect to the same subscription
+This process ensures that when Kapacitor stops, it will reconnect to the same subscription
 on restart as long as the contents of `/var/lib/kapacitor/` remain intact.
 
 _The directory in which Kapacitor stores its ID can be configured with the
@@ -38,7 +38,7 @@ in the `kapacitor.conf`._
 > on startup, resulting in unnecessary "duplicate" subscriptions.
 > You will then need to manually [drop the unnecessary subscriptions](/influxdb/latest/administration/subscription-management/#remove-subscriptions).
 >
-> To avoid this, it is recommended that you persist the `/var/lib/kapacitor` directory.
+> To avoid this, InfluxData recommends that you persist the `/var/lib/kapacitor` directory.
 > Many persistence strategies are available and which to use depends on your
 > specific architecture and containerization technology.
 
@@ -70,7 +70,7 @@ _**Example Kapacitor subscription configuration**_
 Set to `true` to disable all subscriptions.
 
 ### `subscription-mode`
-Define the subscription mode of Kapacitor.
+Defines the subscription mode of Kapacitor.
 Available options:
 
 - `"server"`
@@ -82,7 +82,7 @@ If used currently, subscription data will not be received.
 </dt>
 
 ### `subscription-protocol`
-Define which protocol to use for subscriptions.
+Defines which protocol to use for subscriptions.
 Available options:
 
 - `"udp"`
@@ -90,7 +90,7 @@ Available options:
 - `"https"`
 
 ### `[influxdb.subscriptions]`
-Define a set of databases and retention policies to subscribe to.
+Defines a set of databases and retention policies to subscribe to.
 If empty, Kapacitor will subscribe to all databases and retention policies except for those listed in
 [`[influxdb.excluded-subscriptions]`](#influxdb-excluded-subscriptions).
 
@@ -104,7 +104,7 @@ If empty, Kapacitor will subscribe to all databases and retention policies excep
 ```
 
 ### `[influxdb.excluded-subscriptions]`
-Define a set of databases and retention policies to exclude from subscriptions.
+Defines a set of databases and retention policies to exclude from subscriptions.
 
 ```toml
 [influxdb.excluded-subscriptions]
@@ -115,9 +115,9 @@ Define a set of databases and retention policies to exclude from subscriptions.
   my_database = [ "default", "longterm" ]
 ```
 
-> Only one of `[influxdb.subscriptions]` or `[influxdb.excluded-subscriptions]` need be defined.
-> They essentially fulfill the same purpose in different ways, but specific use-cases do lend
-> themselves to one or the other.
+> Only one of `[influxdb.subscriptions]` or `[influxdb.excluded-subscriptions]`
+> need be defined. They essentially fulfill the same purpose in different ways,
+> but specific use cases do lend themselves to one or the other.
 
 ## Troubleshooting
 
