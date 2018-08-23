@@ -208,7 +208,7 @@ Otherwise, return to Step 1 of [Upgrading data nodes](#upgrading-data-nodes) and
 
 ### Step 8: Confirm the upgrade.
 
-Your cluster is now upgraded to InfluxDB Enterprise 1.5.
+Your cluster is now upgraded to InfluxDB Enterprise 1.6.
 Check your node version numbers using the `influxd-ctl show` command.
 The [`influxd-ctl`](/enterprise_influxdb/v1.6/features/cluster-commands/) utility is available on all meta nodes.
 
