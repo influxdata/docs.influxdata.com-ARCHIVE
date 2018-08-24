@@ -1,6 +1,6 @@
 ---
 title: Data exploration using InfluxQL
-description: Explore your time series data using InfluxData's SQL-like query language. Understand how to use the SELECT statement and
+description: Explore time series data using InfluxData's SQL-like query language. Understand how to use the SELECT statement to query data from measurements, tags, and fields.
 menu:
   influxdb_1_6:
     name: Data exploration
@@ -60,8 +60,8 @@ the data and follow along with the example queries in the sections below.
 Start by logging into the Influx CLI:
 ```bash
 $ influx -precision rfc3339 -database NOAA_water_database
-Connected to http://localhost:8086 version 1.4.x
-InfluxDB shell 1.4.x
+Connected to http://localhost:8086 version 1.6.x
+InfluxDB shell 1.6.x
 >
 ```
 
@@ -2635,10 +2635,9 @@ The whitespace between `+` and `1000d` is required.
 
 ## Common issues with time syntax
 
-### Using `OR` with absolute time
+### Using `OR` to select time multiple time intervals
 
-Currently, InfluxDB does not support using the `OR` operator with absolute time
-in the `WHERE` clause and `OR` cannot be used to specify multiple time ranges.
+InfluxDB does not support using the `OR` operator in the `WHERE` clause to specify multiple time intervals.
 
 For more information, see [Frequently Asked Questions](/influxdb/v1.6/troubleshooting/frequently-asked-questions/#why-is-my-query-with-a-where-or-time-clause-returning-empty-results).
 

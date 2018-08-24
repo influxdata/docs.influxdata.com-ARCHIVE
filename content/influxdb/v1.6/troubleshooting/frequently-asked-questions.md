@@ -392,12 +392,12 @@ We list possible workarounds for changing a field's data type below.
 Note that these workarounds will not update data that have already been
 written to the database.
 
-#### Write the Data to a Different Field
+#### Write the data to a different field
 
 The simplest workaround is to begin writing the new data type to a different field in the same
 [series](/influxdb/v1.6/concepts/glossary/#series).
 
-#### Work the Shard System
+#### Work the shard system
 Field value types cannot differ within a
 [shard](/influxdb/v1.6/concepts/glossary/#shard) but they can differ across
 shards.
@@ -450,9 +450,8 @@ The following InfluxQL functions support nesting:
 * [`NON_NEGATIVE_DERIVATIVE()`](/influxdb/v1.6/query_language/functions/#non-negative-derivative)
 * [`HOLT_WINTERS()`](/influxdb/v1.6/query_language/functions/#holt-winters) and [`HOLT_WINTERS_WITH_FIT()`](/influxdb/v1.6/query_language/functions/#holt-winters)
 
-See the
-[Data Exploration](/influxdb/v1.6/query_language/data_exploration/#subqueries)
-page for how to use a subquery as a substitute for nested functions.
+For information on how to use a subquery as a substitute for nested functions, see
+[Data exploration](/influxdb/v1.6/query_language/data_exploration/#subqueries).
 
 ## What determines the time intervals returned by `GROUP BY time()` queries?
 
@@ -461,8 +460,8 @@ buckets or to the user-specified [offset interval](/influxdb/v1.6/query_language
 
 #### Example
 
-##### Preset time buckets:
-<br>
+##### Preset time buckets
+
 The following query calculates the average value of `sunflowers` between
 6:15pm and 7:45pm and groups those averages into one hour intervals:
 ```
@@ -512,7 +511,7 @@ time                    sunflowers                 time                  mean
 ```
 
 ##### Offset interval
-<br>
+
 The following query calculates the average value of `sunflowers` between
 6:15pm and 7:45pm and groups those averages into one hour intervals.
 It also offsets InfluxDB's preset time buckets by `15` minutes.
@@ -567,30 +566,35 @@ time                    sunflowers                 time                  mean
 There are several possible explanations for why a query returns no data or partial data.
 We list some of the most frequent cases below:
 
-### Retention Policies
+### Retention policies
+
 The first and most common explanation involves [retention policies](/influxdb/v1.6/concepts/glossary/#retention-policy-rp) (RP).
 InfluxDB automatically queries data in a database’s `DEFAULT` RP.
 If your data are stored in an RP other than the `DEFAULT` RP, InfluxDB won’t return any results unless you [specify](/influxdb/v1.6/query_language/data_exploration/#example-7-select-all-data-from-a-fully-qualified-measurement) the alternative RP.
 
-### Tag Keys in the SELECT clause
+### Tag keys in the SELECT clause
+
 A query requires at least one [field key](/influxdb/v1.6/concepts/glossary/#field-key)
 in the `SELECT` clause to return data.
 If the `SELECT` clause only includes a single [tag key](/influxdb/v1.6/concepts/glossary/#tag-key) or several tag keys, the
 query returns an empty response.
-Please see the [Data Exploration](/influxdb/v1.6/query_language/data_exploration/#common-issues-with-the-select-statement) page for additional information.
+For more information, see [Data exploration](/influxdb/v1.6/query_language/data_exploration/#common-issues-with-the-select-statement).
 
-### Query Time Range
+### Query time range
+
 Another possible explanation has to do with your query’s time range.
 By default, most [`SELECT` queries](/influxdb/v1.6/query_language/data_exploration/#the-basic-select-statement) cover the time range between `1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC. `SELECT` queries that also include a [`GROUP BY time()` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals), however, cover the time range between `1677-09-21 00:12:43.145224194` and [`now()`](/influxdb/v1.6/concepts/glossary/#now).
 If any of your data occur after `now()` a `GROUP BY time()` query will not cover those data points.
 Your query will need to provide [an alternative upper bound](/influxdb/v1.6/query_language/data_exploration/#time-syntax) for the time range if the query includes a `GROUP BY time()` clause and if any of your data occur after `now()`.
 
-### Identifier Names
+### Identifier names
+
 The final common explanation involves [schemas](/influxdb/v1.6/concepts/glossary/#schema) with [fields](/influxdb/v1.6/concepts/glossary/#field) and [tags](/influxdb/v1.6/concepts/glossary/#tag) that have the same key.
 If a field and tag have the same key, the field will take precedence in all queries.
 You’ll need to use the [`::tag` syntax](/influxdb/v1.6/query_language/data_exploration/#description-of-syntax) to specify the tag key in queries.
 
 ## Why don't my GROUP BY time() queries return timestamps that occur after now()?
+
 Most `SELECT` statements have a default time range between [`1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC](#what-are-the-minimum-and-maximum-timestamps-that-influxdb-can-store).
 For `SELECT` statements with a [`GROUP BY time()` clause](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals), the default time
 range is between `1677-09-21 00:12:43.145224194` UTC and [`now()`](/influxdb/v1.6/concepts/glossary/#now).
@@ -599,7 +603,7 @@ To query data with timestamps that occur after `now()`, `SELECT` statements with
 a `GROUP BY time()` clause must provide an alternative upper bound in the
 [`WHERE` clause](/influxdb/v1.6/query_language/data_exploration/#the-where-clause).
 
-In the following codeblock, the first query covers data with timestamps between
+In the following example, the first query covers data with timestamps between
 `2015-09-18T21:30:00Z` and `now()`.
 The second query covers data with timestamps between `2015-09-18T21:30:00Z` and 180 weeks from `now()`.
 ```
@@ -618,10 +622,10 @@ the lower bound to `now()` such that the query's time range is between
 >
 ```
 
-See the [Data Exploration](/influxdb/v1.6/query_language/data_exploration/#time-syntax)
-document for more on time syntax in queries.
+For for more on time syntax in queries, see [Data Exploration](/influxdb/v1.6/query_language/data_exploration/#time-syntax).
 
 ## Can I perform mathematical operations against timestamps?
+
 Currently, it is not possible to execute mathematical operators against timestamp values in InfluxDB.
 Most time calculations must be carried out by the client receiving the query results.
 
@@ -630,12 +634,13 @@ The function [ELAPSED()](/influxdb/v1.6/query_language/functions/#elapsed)
 returns the difference between subsequent timestamps in a single field.
 
 ## Can I identify write precision from returned timestamps?
-InfluxDB stores all timestamps as nanosecond values regardless of the write precision supplied.
+
+InfluxDB stores all timestamps as nanosecond values, regardless of the write precision supplied.
 It is important to note that when returning query results, the database silently drops trailing zeros from timestamps which obscures the initial write precision.
 
 In the example below, the tags `precision_supplied` and `timestamp_supplied` show the time precision and timestamp that the user provided at the write.
 Because InfluxDB silently drops trailing zeros on returned timestamps, the write precision is not recognizable in the returned timestamps.
-<br>
+
 ```bash
 name: trails
 -------------
@@ -649,6 +654,7 @@ time                  value	 precision_supplied  timestamp_supplied
 <dt> [GitHub Issue #2977](https://github.com/influxdb/influxdb/issues/2977) </dt>
 
 ## When should I single quote and when should I double quote in queries?
+
 Single quote string values (for example, tag values) but do not single quote identifiers (database names, retention policy names, user names, measurement names, tag keys, and field keys).
 
 Double quote identifiers if they start with a digit, contain characters other than `[A-z,0-9,_]`, or if they are an [InfluxQL keyword](https://github.com/influxdata/influxql/blob/master/README.md#keywords).
@@ -682,6 +688,7 @@ No: `SELECT "water_level" FROM "h2o_feet" WHERE time > "2015-08-18T23:00:01.2320
 See [Data Exploration](/influxdb/v1.6/query_language/data_exploration/#time-syntax) for more on time syntax in queries.
 
 ## Why am I missing data after creating a new DEFAULT retention policy?
+
 When you create a new `DEFAULT` retention policy (RP) on a database, the data written to the old `DEFAULT` RP remain in the old RP.
 Queries that do not specify an RP automatically query the new `DEFAULT` RP so the old data may appear to be missing.
 To query the old data you must fully qualify the relevant data in the query.
@@ -712,11 +719,9 @@ time			               count
 
 ## Why is my query with a `WHERE OR` time clause returning empty results?
 
-Currently, InfluxDB does not support using `OR` with
-[absolute time](/influxdb/v1.6/query_language/data_exploration/#absolute-time)
-in the `WHERE` clause and  OR cannot be used to specify multiple time ranges.
+Currently, InfluxDB does not support using `OR` in the `WHERE` clause to specify multiple time ranges.
 InfluxDB returns an empty response if the query's `WHERE` clause uses `OR`
-with absolute time.
+with time intervals.
 
 Example:
 ```
