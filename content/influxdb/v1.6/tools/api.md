@@ -47,16 +47,16 @@ The `/debug/pprof/` endpoint generates an HTML page with a list of built-in Go p
 | mutex | Stack traces of holders of contended mutexes.  |
 | threadcreate | Stack traces that led to the creation of new OS threads. |
 
-To access one of the the `/debug/pprof/` profiles listed above, use the following cURL request, substituting `<profile>` with the name of the profile. The resulting profile is output to a file.
+To access one of the the `/debug/pprof/` profiles listed above, use the following cURL request, substituting `<profile>` with the name of the profile. The resulting profile is output to a file specified in `<path\to\output-file>`.
 
 ```
-curl -o http://localhost:8086/debug/pprof/<profile>
+curl -o <path/to/output-file>  http://localhost:8086/debug/pprof/<profile>
 ```
 
 In the following example, the cURL command outputs the resulting heap profile to a file:
 
 ```
-curl -o http://localhost:/8086/debug/pprof/heap
+curl -o <path/to/output-file> http://localhost:/8086/debug/pprof/heap
 ```
 
 You can also use the [Go `pprof` interactive tool](https://github.com/google/pprof) to access the InfluxDB `/debug/pprof/` profiles.
@@ -84,9 +84,9 @@ curl -o profiles.tar.gz "http://localhost:8086/debug/pprof/all?cpu=true"
 ```
 
 >**Note:** When the `cpu=true` option is included, a CPU profile is generated for 30+ seconds.
-> If you're concerned about running a CPU profile (which only has a small, temporary impact on performance), then you can set ?cpu=false or omit ?cpu=true altogether.
+> If you're concerned about running a CPU profile (which only has a small, temporary impact on performance), then you can set `?cpu=false` or omit `?cpu=true` altogether.
 
-As the following example shows, a display appears and "Time Spent" displays the time elapsed (in  seconds) until 30 seconds of data has been collected, and then output to a file.
+As the following example shows, the cURL output includes "Time Spent," the time elapsed (in  seconds). After 30 seconds of data has been collected, the results are output to a file.
 
 ```
 ➜  ~ curl -o profiles.tar.gz "http://localhost:8086/debug/pprof/all?cpu=true"
@@ -150,7 +150,7 @@ curl http://localhost:8086/debug/vars
 
 Server statistics and information are displayed in JSON format.
 
->**Note:** The [InfluxDB Kapacitor input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/influxdb) is available to collect metrics (using the `/debug/vars` endpoint) from specified InfluxDB instances. For a list of the measurements and fields, see the plugin README.
+>**Note:** The [InfluxDB input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/influxdb) is available to collect metrics (using the `/debug/vars` endpoint) from specified Kapacitor instances. For a list of the measurements and fields, see the [InfluxDB input plugin README](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/influxdb).
 
 
 ## `/ping` HTTP endpoint

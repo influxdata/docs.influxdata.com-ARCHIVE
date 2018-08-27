@@ -100,7 +100,7 @@ The technical preview endpoints are only available under the v1preview path.
 
 ## Writing data
 
-Kapacitor accepts writing data over HTTP using the Line Protocol data format.
+Kapacitor accepts writing data over HTTP using InfluxData's [Line Protocol data format](/influxdb/latest/write_protocols/).
 The `kapacitor/v1/write` endpoint is identical in nature to the InfluxDB `/write` endpoint.
 
 | Query Parameter | Purpose                               |
@@ -2230,7 +2230,7 @@ The logging API will return logs in two formats:
 * [logfmt](https://brandur.org/logfmt)
 * JSON
 
-To receive logs in JSON format, you must specify `Content-Type: application/json`.
+To receive logs in JSON format, specify `Content-Type: application/json`.
 If Kapacitor receives any content type other than `application/json`, logs will be returned in logfmt format.
 
 Each chunk returned to the client will contain a single complete log, followed by a `\n`.
@@ -2334,7 +2334,7 @@ The returned options are also the defaults.
 
 #### Example
 
-See the available and default options for the Slack service, run the following request.
+To see the available and default options for the Slack service, run the following request.
 
 ```
 GET /kapacitor/v1/service-tests/slack
@@ -2459,10 +2459,10 @@ The `/debug/pprof/` endpoint generates an HTML page with a list of built-in Go p
 | mutex | Stack traces of holders of contended mutexes.  |
 | threadcreate | Stack traces that led to the creation of new OS threads. |
 
-To access one of the the `/debug/pprof/` profiles listed above, use the following cURL request, substituting `<profile>` with the name of the profile. The resulting profile is output to a file.
+To access one of the the `/debug/pprof/` profiles listed above, use the following cURL request, substituting `<profile>` with the name of the profile. The resulting profile is output to a file, specified for `<path/to/output-file>`.
 
 ```
-curl -o http://localhost:9092/kapacitor/v1/debug/pprof/<profile>
+curl -o <path/to/output-file> http://localhost:9092/kapacitor/v1/debug/pprof/<profile>
 ```
 
 In the following example, the cURL command outputs the resulting heap profile to a file:
