@@ -1009,8 +1009,8 @@ InfluxDB rejects writes with `time` as a field key or tag key and returns an err
 
 #### Examples
 
-##### Example 1: Write `time` as a measurement and query it
-<br>
+##### Write `time` as a measurement and query it
+
 ```
 > INSERT time value=1
 
@@ -1023,8 +1023,8 @@ time                            value
 ```
 `time` is a valid measurement name in InfluxDB.
 
-##### Example 2: Write `time` as a field key and attempt to query it
-<br>
+##### Write `time` as a field key and attempt to query it
+
 ```
 > INSERT mymeas time=1
 ERR: {"error":"partial write: invalid field name: input field \"time\" on measurement \"mymeas\" is invalid dropped=1"}
@@ -1032,8 +1032,8 @@ ERR: {"error":"partial write: invalid field name: input field \"time\" on measur
 `time` is not a valid field key in InfluxDB.
 The system does does not write the point and returns a `400`.
 
-##### Example 3: Write `time` as a tag key and attempt to query it
-<br>
+##### Write `time` as a tag key and attempt to query it
+
 ```
 > INSERT mymeas,time=1 value=1
 ERR: {"error":"partial write: invalid tag key: input tag \"time\" on measurement \"mymeas\" is invalid dropped=1"}
@@ -1043,6 +1043,7 @@ ERR: {"error":"partial write: invalid tag key: input tag \"time\" on measurement
 The system does does not write the point and returns a `400`.
 
 ### Characters
+
 To keep regular expressions and quoting simple, avoid using the following characters in identifiers:
 
 `\` backslash
@@ -1054,6 +1055,7 @@ To keep regular expressions and quoting simple, avoid using the following charac
  `,` comma
 
 ## When should I single quote and when should I double quote when writing data?
+
 * Avoid single quoting and double quoting identifiers when writing data via the line protocol; see the examples below for how writing identifiers with quotes can complicate queries.
 Identifiers are database names, retention policy names, user names, measurement names, tag keys, and field keys.
 <br>
@@ -1089,18 +1091,22 @@ See the [Line Protocol](/influxdb/v1.6/write_protocols/) documentation for more 
 ## Does the precision of the timestamp matter?
 
 Yes.
-To maximize performance we recommend using the coarsest possible timestamp precision when writing data to InfluxDB.
+To maximize performance, use the coarsest possible timestamp precision when writing data to InfluxDB.
 
-For example, we recommend using the second of the following two requests:
+In the following two examples, the first request uses a default precision of nanoseconds while the second example sets the precision to seconds:
+
 ```
 curl -i -XPOST "http://localhost:8086/write?db=weather" --data-binary 'temperature,location=1 value=90 1472666050000000000'
 
 curl -i -XPOST "http://localhost:8086/write?db=weather&precision=s" --data-binary 'temperature,location=1 value=90 1472666050'
 ```
 
+The tradeoff is that identical points with duplicate timestamps, more likely to occur as precision gets coarser, may overwrite other points.
+
+
 ## What are the configuration recommendations and schema guidelines for writing sparse, historical data?
 
-For users who want to write sparse, historical data to InfluxDB, we recommend:
+For users who want to write sparse, historical data to InfluxDB, InfluxData recommends:
 
 First, lengthening your [retention policy](/influxdb/v1.6/concepts/glossary/#retention-policy-rp)‘s [shard group](/influxdb/v1.6/concepts/glossary/#shard-group) duration to cover several years.
 The default shard group duration is one week and if your data cover several hundred years – well, that’s a lot of shards!
