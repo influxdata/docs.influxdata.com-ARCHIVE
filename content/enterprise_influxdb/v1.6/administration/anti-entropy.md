@@ -32,7 +32,7 @@ out-of-sync shards for repair.
 In the repair process, AE will sync the necessary updates from other shards
 in the same shard group.
 
-By default, the service checks every 30 seconds, as configured in the [`anti-entropy.check-interval`](/enterprise_influxdb/v1.6/administration/configuration/#check-interval-30s) setting.
+By default, the service checks every 5 minutes, as configured in the [`anti-entropy.check-interval`](/enterprise_influxdb/v1.6/administration/configuration/#check-interval-5m) setting.
 
 The anti-entropy service can only address missing or inconsistent shards when
 there is at least one copy of the shard available.
