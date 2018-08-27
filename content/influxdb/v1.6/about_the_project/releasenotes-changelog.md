@@ -7,8 +7,17 @@ menu:
     parent: About the project
 ---
 
-## v1.6.1 [2018-08-03]
+## v1.6.2 [2018-08-27]
 
+### Features
+
+*	Reduce allocations in TSI TagSets implementation.
+
+### Bugfixes
+
+*	Ensure orphaned series cleaned up with shard drop.
+
+## v1.6.1 [2018-08-03]
 
 ### Features
 

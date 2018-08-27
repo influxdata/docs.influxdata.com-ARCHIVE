@@ -1,5 +1,6 @@
 ---
-title: Kapacitor HTTP API
+title: Kapacitor HTTP API reference
+description: Use the Kapacitor HTTP API endpoints to control task execution, query statues, and collect troubleshooting data.
 aliases:
   - /kapacitor/v1.5/api
   - /kapacitor/v1.5/api/api
@@ -30,7 +31,7 @@ menu:
 Kapacitor provides an HTTP API on port 9092 by default.
 With the API you can control which tasks are executing, query status of tasks and manage recordings etc.
 
-Each section below defines the available API endpoints and there inputs and outputs.
+Each section below defines the available API endpoints and their inputs and outputs.
 
 All requests are versioned and namespaced using the base path `/kapacitor/v1/`.
 
@@ -73,34 +74,34 @@ Clients should not need to perform path manipulation in most cases and can use t
 
 The API allows the client to specify IDs for the various resources.
 This way you can control the meaning of the IDs.
-If you do not specify an ID a random UUID will be generated for the resource.
+If you do not specify an ID, a random UUID will be generated for the resource.
 
 All IDs must match this regex `^[-\._\p{L}0-9]+$`, which is essentially numbers, unicode letters, `-`, `.` and `_`.
 
 
 ### Backwards compatibility
 
-Currently Kapacitor is in 1.x release with a guarantee that all new releases will be backwards compatible with previous releases.
-This applies directly to the API. New additions may be made to the API but existing endpoints will not be changed in backwards incompatible ways during the 1.x releases.
+Currently, Kapacitor is in 1.x release with a guarantee that all new releases will be backwards compatible with previous releases.
+This applies directly to the API. New additions may be made to the API, but existing endpoints will not be changed in backwards incompatible ways during the 1.x releases.
 
 ### Technical preview
 
-On occasion when a new feature is added to Kapacitor it may be added in a technical preview for a few minor releases and then later promoted to fully fledged v1 feature.
+When a new feature is added to Kapacitor, it may be added in a "technical preview" release for a few minor releases, and then later promoted to a fully fledged v1 feature.
 Preview means that the newly added features may be changed in backwards incompatible ways until they are promoted to v1 features.
-Using technical preview allows for new features to fully mature while maintaining regularly scheduled releases.
+Technical previews allow new features to fully mature while maintaining regularly scheduled releases.
 
-To make it clear which features of the API are in technical preview the base path `/kapacitor/v1preview` is used.
-If you wish to preview some of these new features, simply use the path `/kapacitor/v1preview` instead of `/kapacitor/v1` for your requests.
+To make it clear which features of the API are in technical preview, the base path `/kapacitor/v1preview` is used.
+If you wish to preview some of these new features, use the path `/kapacitor/v1preview` instead of `/kapacitor/v1` for your requests.
 All v1 endpoints are available under the v1preview path so that your client need not be configured with multiple paths.
 The technical preview endpoints are only available under the v1preview path.
 
 
->NOTE: Using a technical preview means that you may have to update your client for breaking changes to the previewed endpoints.
+>**Note:** Using a technical preview means that you may have to update your client for breaking changes to the previewed endpoints.
 
 ## Writing data
 
-Kapacitor can accept writes over HTTP using the line protocol.
-This endpoint is identical in nature to the InfluxDB write endpoint.
+Kapacitor accepts writing data over HTTP using InfluxData's [Line Protocol data format](/influxdb/latest/write_protocols/).
+The `kapacitor/v1/write` endpoint is identical in nature to the InfluxDB `/write` endpoint.
 
 | Query Parameter | Purpose                               |
 | --------------- | -------                               |
@@ -108,7 +109,7 @@ This endpoint is identical in nature to the InfluxDB write endpoint.
 | rp              | Retention policy name for the writes. |
 
 >NOTE: Kapacitor scopes all points by their database and retention policy.
-This means you MUST specify the `rp` for writes or Kapacitor will not know which retention policy to use.
+As a result, you MUST specify the `rp` for writes so that Kapacitor uses the correct retention policy.
 
 #### Example
 
@@ -119,7 +120,7 @@ POST /kapacitor/v1/write?db=DB_NAME&rp=RP_NAME
 cpu,host=example.com value=87.6
 ```
 
-For compatibility with the equivalent InfluxDB write endpoint the `/write` endpoint is maintained as an alias to the `/kapacitor/v1/write` endpoint.
+To maintain compatibility with the equivalent InfluxDB `/write` endpoint, the `/write` endpoint is an alias for the `/kapacitor/v1/write` endpoint.
 
 ```
 POST /write?db=DB_NAME&rp=RP_NAME
@@ -186,7 +187,7 @@ The following is a table of valid types and example values.
 
 #### Example
 
-Create a new task with `id` `TASK_ID`.
+Create a new task with the `id` value of `TASK_ID`.
 
 ```
 POST /kapacitor/v1/tasks
@@ -238,7 +239,7 @@ PATCH /kapacitor/v1/tasks/TASK_ID
 }
 ```
 
->NOTE: Setting any DBRP will overwrite all stored DBRPs.
+>**Note:** Setting any DBRP will overwrite all stored DBRPs.
 Setting any Vars will overwrite all stored Vars.
 
 
@@ -289,7 +290,7 @@ Response with task `id` and `link`.
 | 200  | Task created, contains task information. |
 | 404  | Task does not exist                      |
 
-### Get Task
+### Get task
 
 To get information about a task, make a `GET` request to the `/kapacitor/v1/tasks/TASK_ID` endpoint.
 
@@ -501,7 +502,7 @@ GET /kapacitor/v1/tasks?fields=status&fields=executing&fields=error
 
 ### Custom task HTTP endpoints
 
-In TICKscript it is possible to expose a cache of recent data via the [HTTPOut](https://docs.influxdata.com/kapacitor/latest/nodes/http_out_node/) node.
+In TICKscript, it is possible to expose a cache of recent data via the [HTTPOut](https://docs.influxdata.com/kapacitor/latest/nodes/http_out_node/) node.
 The data is available at the path `/kapacitor/v1/tasks/TASK_ID/ENDPOINT_NAME`.
 
 ### Example
@@ -579,16 +580,16 @@ If an error occurs, any task that was updated to the new definition is reverted 
 This ensures that all associated tasks for a template either succeed or fail together.
 
 As a result, you will not be able to update a template if it introduces a breaking change in the TICKscript.
-In order to update a template in a breaking way you have two options:
+In order to update a template in a breaking way, you have two options:
 
-1. Create a new template and reassign each task to the new template updating the task vars as needed.
+1. Create a new template and reassign each task to the new template, updating the task vars as needed.
 2. If the breaking change is forward compatible (i.e. adds a new required var), first update each task with the needed vars,
 then update the template once all tasks are ready.
 
 
 #### Example
 
-Create a new template with ID TEMPLATE_ID.
+Create a new template with ID `TEMPLATE_ID`.
 
 ```
 POST /kapacitor/v1/templates
@@ -599,7 +600,7 @@ POST /kapacitor/v1/templates
 }
 ```
 
-Response with template id and link.
+Response with template `id` and `link`.
 
 ```json
 {
@@ -632,7 +633,7 @@ PATCH /kapacitor/v1/templates/TEMPLATE_ID
 
 ### Get Template
 
-To get information about a template make a GET request to the `/kapacitor/v1/templates/TEMPLATE_ID` endpoint.
+To get information about a template, make a GET request to the `/kapacitor/v1/templates/TEMPLATE_ID` endpoint.
 
 | Query Parameter | Default    | Purpose                                                                                                                          |
 | --------------- | -------    | -------                                                                                                                          |
@@ -701,7 +702,7 @@ DELETE /kapacitor/v1/templates/TEMPLATE_ID
 
 ### Listing templates
 
-To get information about several templates make a GET request to the `/kapacitor/v1/templates` endpoint.
+To get information about several templates, make a GET request to the `/kapacitor/v1/templates` endpoint.
 
 | Query Parameter | Default    | Purpose                                                                                                                                           |
 | --------------- | -------    | -------                                                                                                                                           |
@@ -742,7 +743,7 @@ GET /kapacitor/v1/templates
 }
 ```
 
-Optionally specify a glob `pattern` to list only matching templates.
+Optionally, specify a glob `pattern` to list only matching templates.
 
 ```
 GET /kapacitor/v1/template?pattern=TEMPLATE*
@@ -763,7 +764,7 @@ GET /kapacitor/v1/template?pattern=TEMPLATE*
 }
 ```
 
-Get all templates, but only the script and error fields.
+Get all templates, but only the `script` and `error` fields.
 
 ```
 GET /kapacitor/v1/templates?fields=status&fields=executing&fields=error
@@ -2219,16 +2220,20 @@ POST /kapacitor/v1/storage/stores/tasks
 ## Logging
 
 The logging API is being release under [Technical Preview](#technical-preview).
-Kapacitor allows users to retrieve the kapacitor logs remotely via HTTP using
+Kapacitor allows users to retrieve the Kapacitor logs remotely using HTTP
 [Chunked Transfer Encoding](https://en.wikipedia.org/wiki/Chunked_transfer_encoding).
-The logs may be queried using key-value pairs correspoding to the log entry.
+The logs may be queried using key-value pairs corresponding to the log entry.
 These key-value are specified as query parameter.
 
-The logging API will return logs in two formats: [logfmt](https://brandur.org/logfmt) and JSON.
-To receive logs in JSON format, you must specify `Content-Type: application/json`. If we receive
-any content type other than `application/json`, we will return the logs in logfmt format.
+The logging API will return logs in two formats:
 
-Each chunk returned to the client will contain a single complete log followed by a `\n`.
+* [logfmt](https://brandur.org/logfmt)
+* JSON
+
+To receive logs in JSON format, specify `Content-Type: application/json`.
+If Kapacitor receives any content type other than `application/json`, logs will be returned in logfmt format.
+
+Each chunk returned to the client will contain a single complete log, followed by a `\n`.
 
 ### Example
 
@@ -2322,14 +2327,14 @@ GET /kapacitor/v1/service-tests
 
 ### Testing a service
 
-To test a service make a POST request to the `/kapacitor/v1/service-tests/<service name>` endpoint.
-The contents of the POST body depend on the service in test.
+To test a service, make a POST request to the `/kapacitor/v1/service-tests/<service name>` endpoint.
+The contents of the POST body depend on the service in the test.
 To determine the available options use a GET request to the same endpoint.
 The returned options are also the defaults.
 
 #### Example
 
-See available/default options for the slack service:
+To see the available and default options for the Slack service, run the following request.
 
 ```
 GET /kapacitor/v1/service-tests/slack
@@ -2347,7 +2352,7 @@ GET /kapacitor/v1/service-tests/slack
 }
 ```
 
-Test the slack service integration using custom options:
+Test the Slack service integration using custom options:
 
 ```
 POST /kapacitor/v1/service-tests/slack
@@ -2399,49 +2404,86 @@ Ping is a useful request if you simply need the verify the version of server you
 GET /kapacitor/v1/ping
 ```
 
-#### Response
-
+Response:
+```
 | Code | Meaning |
 | ---- | ------- |
 | 204  | Success |
+```
 
-### Sideload Reload
+### Sideload reload
 
-You can trigger a reload of all sideload sources by making a POST request to `kapacitor/v1/sideload/reload`, with an empty body.
+You can trigger a reload of all sideload sources by making an HTTP POST request to `kapacitor/v1/sideload/reload`, with an empty body.
 
 #### Example
 
 ```
 POST /kapacitor/v1/sideload/reload
 ```
+Response:
 
-#### Response
-
+```
 | Code | Meaning |
 | ---- | ------- |
 | 204  | Success |
-
-
-### Debug Vars
-
-Kapacitor also exposes several statistics and information about its runtime.
-These can be accessed at the `/kapacitor/v1/debug/vars` endpoint.
-
-#### Example
-
-```
-GET /kapacitor/v1/debug/vars
 ```
 
-### Debug Pprof
+### `/debug/vars` HTTP endpoint
 
-Kapacitor also the standard Go [net/http/pprof](https://golang.org/pkg/net/http/pprof/) endpoints.
+Kapacitor exposes statistics and information about its runtime through the `/debug/vars` endpoint, which can be accessed using the following cURL command:
 
 ```
-GET /kapacitor/v1/debug/pprof/...
+curl http://localhost:9092/kapacitor/v1/debug/vars
+```
+Server statistics and information are displayed in JSON format.
+
+>**Note:** You can use the [Telegraf Kapacitor input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/kapacitor) to collect metrics (using the `/debug/vars` endpoint) from specified Kapacitor instances. For a list of the measurements and fields, see the plugin README.
+
+
+### `/debug/pprof` HTTP endpoints
+
+Kapacitor supports the Go [net/http/pprof](https://golang.org/pkg/net/http/pprof/) endpoints, which can be useful for troubleshooting. The `pprof` package serves runtime profiling data in the format expected by the _pprof_ visualization tool.
+
+
+```
+curl http://localhost:9092/kapacitor/v1/debug/pprof/
 ```
 
->NOTE: Not all of these endpoints return JSON content.
+The `/debug/pprof/` endpoint generates an HTML page with a list of built-in Go profiles and hyperlinks for each.
+
+| Profile | Description
+| :---------------- | :-------------------- |
+| block | Stack traces that led to blocking on synchronization primitives. |
+| goroutine  | Stack traces of all current goroutines.  |
+| heap  | Sampling of stack traces for heap allocations.  |
+| mutex | Stack traces of holders of contended mutexes.  |
+| threadcreate | Stack traces that led to the creation of new OS threads. |
+
+To access one of the the `/debug/pprof/` profiles listed above, use the following cURL request, substituting `<profile>` with the name of the profile. The resulting profile is output to a file, specified for `<path/to/output-file>`.
+
+```
+curl -o <path/to/output-file> http://localhost:9092/kapacitor/v1/debug/pprof/<profile>
+```
+
+In the following example, the cURL command outputs the resulting heap profile to the file specified in `<path/to/output-file>`:
+
+```
+curl -o <path/to/output-file> http://9092/kapacitor/v1/debug/pprof/heap
+```
+
+You can also use the [Go `pprof` interactive tool](https://github.com/google/pprof) to access the Kapacitor `/debug/pprof/` profiles.
+For example, to look at the heap profile of a Kapacitor instance using this tool, you would use a command like this:
+
+```
+go tool pprof http://localhost:9092/kapacitor/v1/debug/pprof/heap
+```
+
+For more information about the Go `/net/http/pprof` package and the interactive `pprof` analysis and visualization tool, see:
+
+* [Package pprof (`net/http/pprof`)](https://golang.org/pkg/net/http/pprof/)
+* [`pprof` analysis and visualization tool](https://github.com/google/pprof)
+* [Profiling Go programs](https://blog.golang.org/profiling-go-programs)
+* [Diagnostics - Profiling](https://golang.org/doc/diagnostics.html#profiling)
 
 ### Routes
 
