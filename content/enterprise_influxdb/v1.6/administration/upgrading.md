@@ -8,10 +8,6 @@ menu:
     parent: Administration
 ---
 
-## Upgrading to InfluxDB Enterprise 1.6.2
-
-Version 1.5 includes the first official Time Series Index (TSI) release. Although you can install without enabling TSI, you are encouraged to begin leveraging the advantages the TSI disk-based indexing offers.
-
 ## Upgrading InfluxDB Enterprise 1.3.x-1.5.x clusters to 1.6.2 (rolling upgrade)
 
 ### Step 0: Back up your cluster before upgrading to version 1.6.2.
@@ -141,6 +137,9 @@ sudo yum localinstall influxdb-data-1.6.2_c1.6.2.x86_64.rpm
 ```
 
 ### Step 4: Update the data node configuration file.
+
+> The first official Time Series Index (TSI) was released with InfluxDB v1.5.
+> Although you can install without enabling TSI, you are encouraged to begin leveraging the advantages the TSI disk-based indexing offers.
 
 **Add:**
 
