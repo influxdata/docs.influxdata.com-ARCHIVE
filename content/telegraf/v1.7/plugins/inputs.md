@@ -195,14 +195,9 @@ The [HTTP Response (`http_response`) input plugin](https://github.com/influxdata
 
 ### [InfluxDB v1.x (`influxdb`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/influxdb)
 
-The [InfluxDB v1.x (`influxdb`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/influxdb) gathers metrics from the exposed `/debug/vars` endpoint.  Using Telegraf to extract these metrics to create a "monitor of monitors" is a best practice and allows you to reduce the overhead associated with
+The [InfluxDB v1.x (`influxdb`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/influxdb) gathers metrics from the exposed InfluxDB v1.x `/debug/vars` endpoint.  Using Telegraf to extract these metrics to create a "monitor of monitors" is a best practice and allows you to reduce the overhead associated with
 capturing and storing these metrics locally within the `_internal` database for production deployments.
 [Read more about this approach here.](https://www.influxdata.com/blog/influxdb-debugvars-endpoint/)
-
-### [Internal (`internal`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/internal)
-
-The [Internal (`internal`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/internal) collects metrics about the Telegraf agent itself.
-Note that some metrics are aggregates across all instances of one type of plugin.
 
 ### [Interrupts (`interrupts`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/interrupts)
 
@@ -371,7 +366,6 @@ The [NTPq (`ntpq`) input plugin](https://github.com/influxdata/telegraf/tree/rel
 ### [NVIDIA SMI (`nvidia-smi`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/nvidia_smi) -- NEW in v.1.7
 
 The [NVIDIA SMI (`nvidia-smi`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/nvidia_smi) uses a query on the [NVIDIA System Management Interface (`nvidia-smi`)](https://developer.nvidia.com/nvidia-system-management-interface) binary to pull GPU stats including memory and GPU usage, temp and other.
-
 
 ### [OpenLDAP (`openldap`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/openldap)
 
@@ -542,6 +536,11 @@ The [Tail (`tail`) input plugin](https://github.com/influxdata/telegraf/tree/rel
 ### [Teamspeak 3 (`teamspeak`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/teamspeak/README.md)
 
 The [Teamspeak 3 (`teamspeak`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/teamspeak/README.md) uses the Teamspeak 3 ServerQuery interface of the Teamspeak server to collect statistics of one or more virtual servers.
+
+### [Telegraf v1.x (`internal`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/internal)
+
+The [Telegraf v1.x (`internal`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/internal) collects metrics about the Telegraf v1.x agent itself.
+Note that some metrics are aggregates across all instances of one type of plugin.
 
 ### [Tomcat (`tomcat`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/tomcat)
 
