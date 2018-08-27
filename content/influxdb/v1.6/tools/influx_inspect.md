@@ -36,7 +36,8 @@ The `influx_inspect` commands are summarized here, with links to detailed inform
 * [`help`](#help): Display this help message format.
 * [`report`](#report): Display a shard level report.
 * [`verify`](#verify): Verify the integrity of TSM files.
-
+* [`verify-seriesfile`](#verify-seriesfile): Verify the integrity of series files.
+*
 
 ### `buildtsi`
 
@@ -413,11 +414,44 @@ influx_inspect verify [ options ]
 
 Optional arguments are in brackets.
 
-#### `-dir <storage_root>`
+##### `-dir <storage_root>`
 
 The path to the storage root directory.
 ​Default value is `"/root/.influxdb"`.
 
+### `verify-seriesfile`
+
+Verifies the integrity of series files.
+
+#### Syntax
+
+```
+influx_inspect verify-seriesfile [ options ]
+```
+
+#### Options
+
+Optional arguments are in brackets.
+
+##### [ `-c <number>` ]
+
+Specifies the number of concurrent workers to run for this command. Default is equal to the value of GOMAXPROCS. If performance is adversely impacted, you can set a lower value.
+
+##### [ `-dir <path>` ]
+
+Specifies the root data path. Defaults to `~/.influxdb/data`.
+
+##### [ `-db <db_name>` ]
+
+Restricts verifying series files to the specified database in the data directory.
+
+##### [ `-series-file <path>` ]
+
+Path to a specific series file; overrides `-db` and `-dir`.
+
+##### [ `-v` ]
+
+Enables verbose logging.
 
 # Caveats
 
