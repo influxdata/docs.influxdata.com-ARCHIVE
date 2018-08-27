@@ -2639,7 +2639,7 @@ The whitespace between `+` and `1000d` is required.
 
 InfluxDB does not support using the `OR` operator in the `WHERE` clause to specify multiple time intervals.
 
-For more information, see [Frequently Asked Questions](/influxdb/v1.6/troubleshooting/frequently-asked-questions/#why-is-my-query-with-a-where-or-time-clause-returning-empty-results).
+For more information, see [Frequently asked questions](/influxdb/v1.6/troubleshooting/frequently-asked-questions/#why-is-my-query-with-a-where-or-time-clause-returning-empty-results).
 
 ### Querying data that occur after `now()` with a `GROUP BY time()` clause
 
@@ -2905,6 +2905,7 @@ Please see the
 document for more information on how InfluxDB handles field value type discrepancies.
 
 ### Syntax
+
 ```
 SELECT_clause <field_key>::<type> FROM_clause
 ```
@@ -3283,7 +3284,7 @@ time                   water_level_derivative
 Next, InfluxDB performs the main query and calculates the sum of the `water_level_derivative` values for each tag value of `location`.
 Notice that the main query specifies `water_level_derivative`, not `water_level` or `derivative`, as the field key in the `SUM()` function.
 
-### Common issues with Subqueries
+### Common issues with subqueries
 
 #### Multiple SELECT statements in a subquery
 
