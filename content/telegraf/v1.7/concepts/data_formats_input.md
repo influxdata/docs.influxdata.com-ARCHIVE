@@ -86,7 +86,7 @@ metrics are parsed directly into Telegraf metrics.
 
 The JSON data format flattens JSON into metric _fields_.
 NOTE: Only numerical values are converted to fields, and they are converted
-into a float. strings are ignored unless specified as a tag_key (see below).
+into a float. Strings are ignored unless specified as a tag_key (see below).
 
 So for example, this JSON:
 
