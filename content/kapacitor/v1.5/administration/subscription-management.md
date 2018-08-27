@@ -126,7 +126,7 @@ There are two ways to view your Kapacitor server or cluster ID:
 
 1. View the contents of `/var/lib/kapacitor/server.id` or `/var/lib/kapacitor/cluster.id`.
 
-    _The location of ID files depends on your operating system at the
+    _The location of ID files depends on your operating system and the
     [`data-dir`](/kapacitor/v1.5/administration/configuration/#organization)
     setting in your `kapacitor.conf`._
 
