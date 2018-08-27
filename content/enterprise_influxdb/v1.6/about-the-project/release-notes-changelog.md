@@ -9,26 +9,25 @@ menu:
 
 ## v1.6.2 [08-27-2018]
 
-This release builds off of the InfluxDB OSS 1.6.2 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.6/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
+This release builds off of the InfluxDB OSS 1.6.0 through 1.6.2 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.6/about_the_project/releasenotes-changelog/).
 
 ### Features
 
-* Update Go runtime to 1.10.
-* Provide configurable TLS options.
+* Update Go runtime to `1.10`.
+* Provide configurable TLS security options.
 * Implement basic trigonometry functions.
 * Add LDAP functionality for authorization and authentication.
-* AE: add ability to repair shards.
-* AE: improve swagger doc for `/status` endpoint.
+* Anti-Entropy (AE): add ability to repair shards.
+* Anti-Entropy (AE): improve swagger doc for `/status` endpoint.
 * Include the query task status in the show queries output.
 
 #### Bug fixes
 
 * TSM files not closed when shard deleted.
 * Ensure shards are not queued to copy if a remote node is unavailable.
-* Ensure HH queue makes forward progress when segment errors occur.
+* Ensure the hinted handoff (hh) queue makes forward progress when segment errors occur.
 * TSM files not closed when shard deleted.
-* Add hh queue back pressure.
-* Update to latest InfluxDB 1.6 HEAD.
+* Add hinted handoff (hh) queue back pressure.
 
 ## v1.5.4 [2018-06-21]
 
