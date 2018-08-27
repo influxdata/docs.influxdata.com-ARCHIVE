@@ -90,6 +90,37 @@ a {
 			background: @default-link-hover;
 		}
 	}
+	a.off-page:link:after {
+		content: '\ea43';
+		font-family: 'icomoon';
+		font-size: .75em;
+		font-weight: normal;
+		vertical-align: bottom;
+		display: inline;
+		margin-left: .5em;
+		opacity: .25;
+		transition: color 0.2s ease;
+		color: @default-text-color;
+	}
+	a code {
+		&:after {
+			content: "";
+			position: absolute;
+			top: -1px;
+			right: -1px;
+			width: 0;
+			height: 0;
+			border-style: solid;
+			border-width: 0 .5em .5em 0;
+			border-color: transparent @article-code-color transparent transparent;
+			opacity: .5;
+			transition: all .2s;
+		}
+		&:hover:after {
+			opacity: 1;
+			border-color: transparent @default-link-hover transparent transparent;
+		}
+	}
 
 	> * {
 		text-decoration: none;
@@ -445,18 +476,6 @@ a {
 	h2.no-paragraph {
 		margin: 0 0 1rem;
 		border: none;
-	}
-	a.off-page:link:after {
-		content: '\ea43';
-		font-family: 'icomoon';
-		font-size: 1rem;
-		font-weight: normal;
-		vertical-align: bottom;
-		display: inline;
-		margin-left: .5rem;
-		opacity: .25;
-		transition: color 0.2s ease;
-		color: @default-text-color;
 	}
 }
 
