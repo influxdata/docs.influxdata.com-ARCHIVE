@@ -2465,10 +2465,10 @@ To access one of the the `/debug/pprof/` profiles listed above, use the followin
 curl -o <path/to/output-file> http://localhost:9092/kapacitor/v1/debug/pprof/<profile>
 ```
 
-In the following example, the cURL command outputs the resulting heap profile to a file:
+In the following example, the cURL command outputs the resulting heap profile to the file specified in `<path/to/output-file>`:
 
 ```
-curl -o http://9092/kapacitor/v1/debug/pprof/heap
+curl -o <path/to/output-file> http://9092/kapacitor/v1/debug/pprof/heap
 ```
 
 You can also use the [Go `pprof` interactive tool](https://github.com/google/pprof) to access the Kapacitor `/debug/pprof/` profiles.
