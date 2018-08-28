@@ -169,16 +169,20 @@ HEAD http://localhost:8086/ping
 
 ### Example
 
-Extract the version of your InfluxDB instance in the `X-Influxdb-Version` field
-of the header:
+You can use the `/ping` endpoint to find the build and version of an InfluxDB instance. 
+The `X-Influxdb-Build` header field displays the InfluxDB build type, either `OSS` (open source) or `ENT` (Enterprise). 
+The `X-Influxdb-Version` header field displays the InfluxDB version.
+
 ```bash
-$ curl -sl -I localhost:8086/ping
+~ curl -sl -I http://localhost:8086/ping
 
 HTTP/1.1 204 No Content
 Content-Type: application/json
-Request-Id: [...]
-X-Influxdb-Version: 1.4.x
-Date: Wed, 08 Nov 2017 00:09:52 GMT
+Request-Id: 9c353b0e-aadc-11e8-8023-000000000000
+X-Influxdb-Build: OSS
+X-Influxdb-Version: v1.6.2
+X-Request-Id: 9c353b0e-aadc-11e8-8023-000000000000
+Date: Tue, 28 Aug 2018 16:08:32 GMT
 ```
 
 ### Status Codes and Responses
