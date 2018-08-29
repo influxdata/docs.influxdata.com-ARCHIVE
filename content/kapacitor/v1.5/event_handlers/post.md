@@ -29,7 +29,8 @@ Below is an example configuration:
 ```
 
 #### `endpoint`
-Name of a configured httppost endpoint. _**Can not be specified in the URL.**_
+Name of a configured httppost endpoint. When using multiple `[[httppost]]` configurations,
+this acts as an identifier for each configuration.
 
 #### `url`
 The URL to which the alert data will be posted.
@@ -71,27 +72,57 @@ KAPACITOR_HTTPPOST_0_HEADERS_Example1 = "header1"
 KAPACITOR_HTTPPOST_0_HEADERS_Example2 = "header2"
 ```
 
+### Configuring and using multiple httppost endpoints
+The `kapacitor.conf` supports multiple `[[httppost]]` sections.
+The [`endpoint`](#endpoint) configuration option of each acts as a unique identifier for that specific configuration.
+To use a specific `[[httppost]]` configuration with the Post alert handler,
+specify the endpoint in your [post alert handler file](#example-handler-file-using-a-pre-configured-endpoint),
+or [your TICKscript](#example-tickscript-using-a-pre-configured-endpoint).
+
+_**kapacitor.conf**_
+```toml
+[[httppost]]
+  endpoint = "endpoint1"
+  url = "http://example-1.com/path"
+  # ...
+
+[[httppost]]
+  endpoint = "endpoint2"
+  url = "http://example-2.com/path"
+  # ...
+```
+
 ## Options
 The following post event handler options can be set in a
 [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
 `.post()` in a TICKscript.
 
-| Name             | Type                    | Description                                                                      |
-| ----             | ----                    | -----------                                                                      |
-| url              | string                  | The URL to which the alert data will be posted.                                  |
-| endpoint         | string                  | Name of a configured httppost endpoint to use, cannot be specified in the URL.   |
-| headers          | map of string to string | Set of extra header values to set on the POST request.                           |
-| capture-response | bool                    | If the HTTP status code is not an `2xx` code, read and log the the HTTP response |
-| timeout          | duration                | Timeout for the HTTP POST.                                                       |
+| Name             | Type                    | Description                                                                                                         |
+| ----             | ----                    | -----------                                                                                                         |
+| url              | string                  | The URL to which the alert data will be posted.                                                                     |
+| endpoint         | string                  | Name of a httppost endpoint (configured in the `kapacitor.conf`) to use. _Cannot be specified in place of the URL._ |
+| headers          | map of string to string | Set of extra header values to set on the POST request.                                                              |
+| capture‑response | bool                    | If the HTTP status code is not an `2xx` code, read and log the the HTTP response.                                   |
+| timeout          | duration                | Timeout for the HTTP POST.                                                                                          |
 
-### Example: handler file
+### Example: Handler file - Using a pre-configured endpoint
 ```yaml
 id: handler-id
 topic: topic-name
 kind: post
 options:
-  url: http://example.com
+  # Using the 'example' endpoint configured in the kapacitor.conf
   endpoint: example
+```
+
+### Example: Handler file - Defining post options "inline"
+```yaml
+id: handler-id
+topic: topic-name
+kind: post
+options:
+  # Defining post options "inline"
+  url: http://example.com
   headers:
     'Example1': 'example1'
     'Example2': 'example2'
@@ -99,13 +130,21 @@ options:
   timeout: 10s
 ```
 
-### Example: TICKscript
+### Example: TICKscript - Using a pre-configured endpoint
+```js
+|alert()
+  // ...  
+  // Using the 'example' endpoint configured in the kapacitor.conf
+  .post()
+    .endpoint('example')
+```
+
+### Example: TICKscript - Defining post options "inline"
 ```js
 |alert()
   // ...
-  .post()
-    .url('http://example.com')
-    .endpoint('example')
+  // Defining post options "inline"
+  .post('http://example.com')
     .header('Example1', 'example1')
     .header('Example2', 'example2')
     .captureResponse()
@@ -121,14 +160,14 @@ defined in the `kapacitor.conf`:
 _**httppost settings in kapacitor.conf**_  
 ```toml
 [[httppost]]
-  endpoint = "api/alert"
+  endpoint = "api-alert"
   url = "http://mydomain.com"
   headers = { From = "alerts@mydomain.com" }
   alert-template = "{{.Message}}:{{range .Data.Series}}{{.Tags}},{{range .Values}}{{.}}{{end}}{{end}}"
 ```
 
 ### Post alerts from a TICKscript
-The following TICKscript uses the `.post()` event handler to post the message,
+The following TICKscripts use the `.post()` event handler to post the message,
 "Hey, check your CPU", whenever idle CPU usage drops below 10%.
 
 _**post-cpu-alert.tick**_  
@@ -140,9 +179,27 @@ stream
     .crit(lambda: "usage_idle" < 10)
     .message('Hey, check your CPU')
     .post()
-      .url('http://mydomain.com')
-      .endpoint('api/alerts')
+      .endpoint('api-alerts')
 ```
+
+If you don't want to use the `[[httppost]]` settings defined in the `kapacitor.conf`,
+you can specify your post options inline.
+
+_**post-cpu-alert.tick**_  
+```js
+stream
+  |from()
+    .measurement('cpu')
+  |alert()
+    .crit(lambda: "usage_idle" < 10)
+    .message('Hey, check your CPU')
+    .post('http://example.com/path')
+      .header('Example1', 'example1')
+      .header('Example2', 'example2')
+      .captureResponse()
+      .timeout(10s)
+```
+
 
 ### Post alerts from a defined handler
 The following setup sends an alert to the `cpu` topic with the message, "Hey,
@@ -181,6 +238,7 @@ id: post-cpu-alert
 topic: cpu
 kind: post
 options:
+  url: 'http://example.com/path'
   headers:
     'From': 'alert@mydomain.com'
 ```
