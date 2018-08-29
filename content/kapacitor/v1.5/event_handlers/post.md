@@ -92,6 +92,21 @@ _**kapacitor.conf**_
   # ...
 ```
 
+Multiple httppost endpoint configurations can also be added using environment variables.
+Variables values are grouped together using the number in each variable key.
+
+```bash
+KAPACITOR_HTTPPOST_0_ENDPOINT = "example0"
+KAPACITOR_HTTPPOST_0_URL = "http://example-0.com/path"
+KAPACITOR_HTTPPOST_0_HEADERS_Example1 = "header1"
+KAPACITOR_HTTPPOST_0_HEADERS_Example2 = "header2"
+
+KAPACITOR_HTTPPOST_1_ENDPOINT = "example1"
+KAPACITOR_HTTPPOST_1_URL = "http://example-1.com/path"
+KAPACITOR_HTTPPOST_1_HEADERS_Example1 = "header1"
+KAPACITOR_HTTPPOST_1_HEADERS_Example2 = "header2"
+```
+
 ## Options
 The following post event handler options can be set in a
 [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
