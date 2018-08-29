@@ -17,7 +17,7 @@ To enter presentation mode manually, click the icon in the upper right:
 
 To exit presentation mode, press `ESC`.
 
-#Using the URL query parameter
+##Using the URL query parameter
 To load the dashboard in presentation mode, add URL query parameter `present=true` to your dashboard URL.
 
 Note that if you use this option, you won't be able to exit presentation mode using `ESC`.
