@@ -1,0 +1,111 @@
+<svg version="1.1" id="kapacitor-cluster-alerts-topic" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 600 679.6" style="display:block; margin:0 auto; width:100%; max-width:600px; enable-background:new 0 0 600 679.6;" xml:space="preserve">
+<style type="text/css">
+	.topic-st0{fill:none;stroke:#FF4D9E;stroke-width:2;stroke-miterlimit:10;}
+	.topic-st1{fill:#FF4D9E;}
+	.topic-st2{font-family:Roboto, sans-serif; font-weight:bold;}
+	.topic-st3{font-size:18px;}
+	.topic-st4{fill:#565666;}
+	.topic-st5{fill:#34C687;}
+	.topic-st6{fill:#FFFFFF;}
+	.topic-st7{fill:#16A55A;}
+	.topic-st8{fill:#6CEAB1;}
+	.topic-st9{font-size:20px;}
+	.topic-st10{opacity:0.75;fill:none;stroke:#565666;stroke-width:8;stroke-miterlimit:10;}
+	.topic-st11{fill:none;stroke:#34C687;stroke-width:4;stroke-miterlimit:10;}
+	.topic-st12{fill:none;stroke:#34C687;stroke-width:4;stroke-miterlimit:10;stroke-dasharray:7.7954,7.7954;}
+	.topic-st13{fill:none;stroke:#34C687;stroke-width:4;stroke-miterlimit:10;stroke-dasharray:7.0903,7.0903;}
+	.topic-st14{fill:none;stroke:#34C687;stroke-width:4;stroke-miterlimit:10;stroke-dasharray:7.831,7.831;}
+	.topic-st15{font-family:Roboto, sans-serif;font-weight:bold;font-style:italic;}
+	.topic-st16{font-size:16.0365px;}
+	.topic-st17{fill:none;stroke:#34C687;stroke-width:4;stroke-miterlimit:10;stroke-dasharray:8,8;}
+</style>
+<g>
+	<g>
+		<g>
+			<polyline class="topic-st0" points="510.2,469.9 414.3,565.8 360.8,565.8 			"/>
+			<g>
+				<polygon class="topic-st1" points="504.8,466.9 516.3,463.9 513.2,475.4 				"/>
+			</g>
+		</g>
+	</g>
+	<text transform="matrix(0.7071 -0.7071 0.7071 0.7071 439.0853 531.841)" class="topic-st1 topic-st2 topic-st3">Alert Data</text>
+</g>
+<g>
+	<path class="topic-st4" d="M263.6,59.8h-184c-4.4,0-8,3.6-8,8v184c0,4.4,3.6,8,8,8h184c4.4,0,8-3.6,8-8v-184
+		C271.6,63.4,268,59.8,263.6,59.8z"/>
+	<g>
+		<path class="topic-st5" d="M150.6,95.9h-79c0,0,0,0,0,0v-28c0-4.4,3.6-8,8-8h79c0,0,0,0,0,0v28C158.6,92.3,155,95.9,150.6,95.9z"/>
+		<text transform="matrix(1 0 0 1 86.3767 83.9295)" class="topic-st6 topic-st2 topic-st3">node-1</text>
+		<g>
+			<path class="topic-st6" d="M207.6,215.8H132c-1.7,0-3-1.3-3-3v-75.4l29.1-29.4h49.5c1.7,0,3,1.3,3,3v101.9
+				C210.6,214.5,209.3,215.8,207.6,215.8z"/>
+			<path class="topic-st5" d="M155.1,137H129l29.1-29.1V134C158.1,135.7,156.8,137,155.1,137z"/>
+			<text transform="matrix(1 0 0 1 138.3654 170.4158)" class="topic-st7 topic-st2 topic-st3">.topic( )</text>
+		</g>
+	</g>
+</g>
+<g>
+	<path class="topic-st4" d="M520.4,59.8h-184c-4.4,0-8,3.6-8,8v184c0,4.4,3.6,8,8,8h184c4.4,0,8-3.6,8-8v-184
+		C528.4,63.4,524.8,59.8,520.4,59.8z"/>
+</g>
+<g>
+	<path class="topic-st5" d="M407.4,95.9h-79c0,0,0,0,0,0v-28c0-4.4,3.6-8,8-8h79c0,0,0,0,0,0v28C415.4,92.3,411.8,95.9,407.4,95.9z"/>
+	<text transform="matrix(1 0 0 1 343.1588 83.9295)" class="topic-st6 topic-st2 topic-st3">node-2</text>
+	<g>
+		<path class="topic-st6" d="M464.4,215.8h-75.6c-1.7,0-3-1.3-3-3v-75.4l29.1-29.4h49.5c1.7,0,3,1.3,3,3v101.9
+			C467.4,214.5,466.1,215.8,464.4,215.8z"/>
+		<path class="topic-st5" d="M411.9,137h-26.1l29.1-29.1V134C414.9,135.7,413.5,137,411.9,137z"/>
+		<text transform="matrix(1 0 0 1 395.1476 170.4158)" class="topic-st7 topic-st2 topic-st3">.topic( )</text>
+	</g>
+</g>
+<g>
+	<g>
+		<path class="topic-st5" d="M357.8,619.8H242.2c-1.7,0-3-1.3-3-3v-75.4l29.1-29.4h89.5c1.7,0,3,1.3,3,3v101.9
+			C360.8,618.4,359.5,619.8,357.8,619.8z"/>
+		<path class="topic-st8" d="M265.3,541h-26.1l29.1-29.1V538C268.3,539.6,266.9,541,265.3,541z"/>
+	</g>
+	<text transform="matrix(1 0 0 1 275.2831 563.3455)"><tspan x="0" y="0" class="topic-st6 topic-st2 topic-st9">Slack</tspan><tspan x="-10.6" y="21.7" class="topic-st6 topic-st2 topic-st9">Handler</tspan></text>
+</g>
+<g>
+	<text transform="matrix(1 0 0 1 260.2307 318.1472)" class="topic-st5 topic-st2 topic-st9">Topic</text>
+	<line class="topic-st10" x1="263.8" y1="335.1" x2="349.8" y2="335.1"/>
+	<line class="topic-st10" x1="263.8" y1="350.2" x2="325.8" y2="350.2"/>
+	<line class="topic-st10" x1="263.8" y1="395.7" x2="325.8" y2="395.7"/>
+	<line class="topic-st10" x1="263.8" y1="380.5" x2="309.7" y2="380.5"/>
+	<line class="topic-st10" x1="263.8" y1="365.4" x2="338.6" y2="365.4"/>
+</g>
+<g>
+	<g>
+		<line class="topic-st11" x1="169.8" y1="215.8" x2="169.8" y2="219.8"/>
+		<line class="topic-st12" x1="169.8" y1="227.6" x2="169.8" y2="348.5"/>
+		<polyline class="topic-st11" points="169.8,352.4 169.8,356.4 173.8,356.4 		"/>
+		<line class="topic-st13" x1="180.9" y1="356.4" x2="219.9" y2="356.4"/>
+		<line class="topic-st11" x1="223.5" y1="356.4" x2="227.5" y2="356.4"/>
+		<g>
+			<polygon class="topic-st5" points="225.1,364.3 238.9,356.4 225.1,348.4 			"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line class="topic-st11" x1="426.6" y1="215.8" x2="426.6" y2="219.8"/>
+		<line class="topic-st12" x1="426.6" y1="227.6" x2="426.6" y2="348.5"/>
+		<polyline class="topic-st11" points="426.6,352.4 426.6,356.4 422.6,356.4 		"/>
+		<line class="topic-st14" x1="414.8" y1="356.4" x2="387.4" y2="356.4"/>
+		<line class="topic-st11" x1="383.5" y1="356.4" x2="379.5" y2="356.4"/>
+		<g>
+			<polygon class="topic-st5" points="381.8,348.4 368,356.4 381.8,364.3 			"/>
+		</g>
+	</g>
+</g>
+<text transform="matrix(1 0 0 1 249.2604 427.558)" class="topic-st5 topic-st15 topic-st16">(Deduplicated)</text>
+<g>
+	<g>
+		<line class="topic-st17" x1="300" y1="445" x2="300" y2="487.2"/>
+		<g>
+			<polygon class="topic-st5" points="292,484.8 300,498.7 308,484.8 			"/>
+		</g>
+	</g>
+</g>
+</svg>
