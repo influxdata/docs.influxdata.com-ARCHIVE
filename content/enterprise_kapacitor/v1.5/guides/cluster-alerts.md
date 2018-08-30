@@ -7,9 +7,7 @@ menu:
     parent: Guides
 ---
 
-## Importat things to know
-
-### Terminology
+## Terminology
 Definitions for terms specific to this guide are defined below:
 
 **Standalone event handler:**  
@@ -22,7 +20,7 @@ How the handler works and to what endpoint data is sent depends on the particula
 "Inline" event handlers are those [used in TICKscripts](/kapacitor/v1.5/event_handlers/#tickscript)
 that send alert data directly from the running task.
 
-### Cluster awareness
+## Cluster awareness
 Currently, Kapacitor Enterprise is only partially cluster-aware.
 For example, Nodes in a Kapacitor cluster aren't aware of tasks and TICKscripts
 running on other nodes in the cluster.
