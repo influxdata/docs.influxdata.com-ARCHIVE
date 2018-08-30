@@ -1,5 +1,6 @@
 ---
 title: Configure alerts in Kapacitor Enterprise clusters
+description: Information about how to avoid duplicate alerts when sending alerts from a Kapacitor cluster.
 menu:
   enterprise_kapacitor_1_5:
     name: Configure alerts in clusters
