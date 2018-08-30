@@ -149,7 +149,7 @@ The following steps will guide you in configuring Chronograf to support GitHub O
 
     * [`--github-client-id=`](/chronograf/v1.5/administration/configuration/#github-client-id)
     * [`--github-client-secret=`](/chronograf/v1.5/administration/configuration/#github-client-secret)
-    * [`--token_secret=`](/chronograf/v1.5/administration/config-options.md#--token-secret---t)
+    * [`--token-secret=`](/chronograf/v1.5/administration/config-options.md#--token-secret---t)
 
 #### Optional GitHub organizations
 

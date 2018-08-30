@@ -13,8 +13,8 @@ menu:
 
 The `stateDuration` node computes the duration of a given state.
 The state is defined via a lambda expression. For each consecutive point for
-which the expression evaluates as true, the state duration will be
-incremented by the duration between points. When a point evaluates as false,
+which the expression evaluates as `true`, the state duration will be
+incremented by the duration between points. When a point evaluates as `false`,
 the state duration is reset.
 
 The state duration will be added as an additional field to each point. If the
@@ -42,6 +42,12 @@ stream
 Note that as the first point in the given state has no previous point, its
 state duration will be 0.
 
+> Currently, the StateDurationNode only emits a point when it receives data.
+It does not assume the previous evaluation if no data is received at the "expected"
+interval or data resolution.
+If no data is sent, the StateDurationNode cannot evaluate the state and cannot calculate a duration.
+
+> More information about this is available in this [comment thread](https://github.com/influxdata/kapacitor/issues/1757) on Github.
 
 ### Constructor
 

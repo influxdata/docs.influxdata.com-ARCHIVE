@@ -22,8 +22,20 @@ appId: 'WHM9UWMP6M',
 indexName: 'influxdata',
 inputSelector: '#algolia-search-input',
 algoliaOptions: {
-hitsPerPage: 8,{{$current := . }}{{ if not (or .IsHome .IsNode) }}{{ range $product := .Site.Menus.products }}{{ range $version := (index $.Site.Data.versions $product.Identifier) }}{{ if in $current.RelPermalink (print "/" $product.Identifier "/" $version) }}
-facetFilters: ["version:{{$version}}", "project:{{$product.Identifier}}"]{{end}}{{end}}{{end}}{{end}}
+  hitsPerPage: 15,
+  facets: [ "project", "version", "latest"],
+  {{$current := . }}
+    {{ if not .IsHome }}
+      {{ range $product := .Site.Menus.products }}
+      {{ range $version := (index $.Site.Data.versions $product.Identifier) }}
+      {{ if in $current.RelPermalink (print "/" $product.Identifier "/" $version) }}
+        facetFilters: [ "project:{{$product.Identifier}}", "version:{{$version}}" ]
+      {{end}}
+    {{end}}
+    {{end}}
+    {{ else }}
+      facetFilters: [ "latest:true" ]
+  {{end}}
 }
 });
 </script>

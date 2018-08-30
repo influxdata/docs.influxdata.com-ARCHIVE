@@ -11,7 +11,7 @@ menu:
     parent: nodes
 ---
 
-The `influxQL` node performs [InfluxQL functions](http://localhost:1313/influxdb/v1.5/query_language/functions/).
+The `influxQL` node performs [InfluxQL functions](/influxdb/v1.5/query_language/functions/).
 The function can be performed on a stream or batch edge.
 The resulting edge is dependent on the function.
 For a stream edge, all points with the same time are accumulated into the function.

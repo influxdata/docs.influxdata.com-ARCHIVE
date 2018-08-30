@@ -59,23 +59,23 @@ Optional arguments are in brackets.
 
 ##### [ `-db <db_name>` ]
 
-Name of the database to back up.
+The name of the database to back up.
 
 ##### [ `-from <TCP-address>` ]
 
-Data node TCP address to prefer when backing up.
+The data node TCP address to prefer when backing up.
 
 ##### [ `-full` ]
 
-Perform a full backup.
+The flag to perform a full backup.
 
 ##### [ `-rp <string>` ]
 
-Name of the single retention policy to back up (must specify `-db` with `-rp`).
+The name of the single retention policy to back up (must specify `-db` with `-rp`).
 
 ##### [ `-shard <unit>` ]
 
-Identifier of the shard to back up.
+The identifier of the shard to back up.
 
 #### Examples
 
@@ -231,31 +231,31 @@ Optional arguments are in brackets.
 
 ##### [ `-db <db_name>` ]
 
-Name of the database to restore.
+The name of the database to restore.
 
 ##### [ `-list` ]
 
-Shows the contents of the backup.
+The flag to show the contents of the backup.
 
 ##### [ `-newdb <newdb_name>` ]
 
-Name of the new database to restore to (must specify with `-db`).
+The name of the new database to restore to (must specify with `-db`).
 
 ##### [ `-newrf <newrf_integer>` ]
 
-New replication factor to restore to (this is capped to the number of data nodes in the cluster).
+The new replication factor to restore to (this is capped to the number of data nodes in the cluster).
 
 ##### [ `-newrp <newrp_name>` ]
 
-Name of the new retention policy to restore to (must specify with `-rp`).
+The name of the new retention policy to restore to (must specify with `-rp`).
 
 ##### [ `-rp <rp_name>` ]
 
-Name of the single retention policy to restore.
+The name of the single retention policy to restore.
 
 ##### [ `-shard <shard_ID>` ]
 
-Identifier of the shard to restore.
+The identifier of the shard to restore.
 
 ### Examples
 

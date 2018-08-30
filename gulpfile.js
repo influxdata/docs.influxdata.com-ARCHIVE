@@ -6,7 +6,7 @@ var gulp = require('gulp'),
 	sourcemaps = require('gulp-sourcemaps'),
 	watch = require('gulp-watch');
 
-gulp.task('less', function() {
+gulp.task('less', function(done) {
 	gulp.src('styles/docs-default.less')
 		.pipe(sourcemaps.init())
 		.pipe(less())
@@ -23,9 +23,10 @@ gulp.task('less', function() {
 		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('static/css/'))
 		.pipe(livereload())
+		done()
 });
 
 gulp.task('watch', function () {
 	livereload.listen();
-	gulp.watch('styles/*.less', ['less']);
+	gulp.watch('styles/{*.less,*.css}', gulp.series('less'));
 });

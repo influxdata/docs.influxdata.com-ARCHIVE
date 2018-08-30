@@ -44,8 +44,6 @@ SectionPagesMenu = "products"
   weight = 50
   url = "/enterprise_kapacitor/"
 
-
-
   # InfluxDB v1.4 Menu
   [[menu.influxdb_1_4]]
     name = "About the Project"

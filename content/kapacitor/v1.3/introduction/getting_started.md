@@ -400,7 +400,7 @@ The JSON line contains the alert level and the data that triggered the alert.
 
 Depending on how busy the host machine was, maybe not.
 
-The task can be modify to be really sensitive to ensure that the alerts are working.
+The task can be modified to be really sensitive to ensure the alerts are working.
 In the TICKscript change the lamda function `.crit(lambda: "usage_idle" < 70)` to `.crit(lambda: "usage_idle" < 100)`, and define the task once more.
 
 Any time you want to update a task change the TICKscript and then run the `define` command again with just the `TASK_NAME` and `-tick` arguments:

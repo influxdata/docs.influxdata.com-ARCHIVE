@@ -306,9 +306,6 @@ alter_retention_policy_stmt  = "ALTER RETENTION POLICY" policy_name on_clause
                                [ retention_policy_option ] .
 ```
 
-<dt> Replication factors do not serve a purpose with single node instances.
-</dt>
-
 #### Examples:
 
 ```sql
@@ -316,6 +313,7 @@ alter_retention_policy_stmt  = "ALTER RETENTION POLICY" policy_name on_clause
 ALTER RETENTION POLICY "1h.cpu" ON "mydb" DEFAULT
 
 -- Change duration and replication factor.
+-- REPLICATION (replication factor) not valid for OSS instances.
 ALTER RETENTION POLICY "policy1" ON "somedb" DURATION 1h REPLICATION 4
 ```
 

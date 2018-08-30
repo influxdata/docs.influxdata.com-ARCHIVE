@@ -60,7 +60,7 @@ Certificate files require read and write access by the `root` user.
 Ensure that you have the correct file permissions by running the following
 commands:
 
-```
+```bash
 sudo chown root:root /etc/ssl/<CA-certificate-file>
 sudo chmod 644 /etc/ssl/<CA-certificate-file>
 sudo chmod 600 /etc/ssl/<private-key-file>
@@ -75,7 +75,7 @@ Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc
 * `https-certificate` to `/etc/ssl/<signed-certificate-file>.crt` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
 * `https-private-key` to `/etc/ssl/<private-key-file>.key` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
 
-```
+```toml
 [http]
 
   [...]
@@ -95,19 +95,19 @@ Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc
 #### Step 4: Restart the InfluxDB service
 
 Restart the InfluxDB process for the configuration changes to take effect:
-```
+```bash
 sudo systemctl restart influxdb
 ```
 
 #### Step 5: Verify the HTTPS setup
 
 Verify that HTTPS is working by connecting to InfluxDB with the [CLI tool](/influxdb/v1.5/tools/shell/):
-```
+```bash
 influx -ssl -host <domain_name>.com
 ```
 
 A successful connection returns the following:
-```
+```bash
 Connected to https://<domain_name>.com:8086 version 1.x.x
 InfluxDB shell version: 1.x.x
 >
@@ -115,7 +115,7 @@ InfluxDB shell version: 1.x.x
 
 That's it! You've successfully set up HTTPS with InfluxDB.
 
-## Setup HTTPS with a Self-Signed Certificate
+## Setup HTTPS with a self-signed certificate
 
 #### Step 1: Generate a self-signed certificate
 
@@ -124,7 +124,7 @@ certificate file (`.crt`) which remain valid for the specified `NUMBER_OF_DAYS`.
 It outputs those files to InfluxDB's default certificate file paths and gives them
 the required permissions.
 
-```
+```bash
 sudo openssl req -x509 -nodes -newkey rsa:2048 -keyout /etc/ssl/influxdb-selfsigned.key -out /etc/ssl/influxdb-selfsigned.crt -days <NUMBER_OF_DAYS>
 ```
 
@@ -141,7 +141,7 @@ Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc
 * `https-certificate` to `/etc/ssl/influxdb-selfsigned.crt`
 * `https-private-key` to `/etc/ssl/influxdb-selfsigned.key`
 
-```
+```toml
 [http]
 
   [...]
@@ -158,22 +158,22 @@ Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc
   https-private-key = "/etc/ssl/influxdb-selfsigned.key"
 ```
 
-#### Step 3: Restart InfluxDB
+#### Step 3: Restart the InfluxDB service
 
-Restart the InfluxDB process for the configuration changes to take effect:
-```
+Restart the InfluxDB service for the configuration changes to take effect:
+```bash
 sudo systemctl restart influxdb
 ```
 
-#### Step 4: Verify the HTTPS Setup
+#### Step 4: Verify the HTTPS setup
 
 Verify that HTTPS is working by connecting to InfluxDB with the [CLI tool](/influxdb/v1.5/tools/shell/):
-```
+```bash
 influx -ssl -unsafeSsl -host <domain_name>.com
 ```
 
 A successful connection returns the following:
-```
+```bash
 Connected to https://<domain_name>.com:8086 version 1.x.x
 InfluxDB shell version: 1.x.x
 >
@@ -181,34 +181,36 @@ InfluxDB shell version: 1.x.x
 
 That's it! You've successfully set up HTTPS with InfluxDB.
 
->
+
 ## Connect Telegraf to a secured InfluxDB instance
->
+
 Connecting [Telegraf](/telegraf/latest/) to an InfluxDB instance that's using
 HTTPS requires some additional steps.
->
+
 In Telegraf's configuration file (`/etc/telegraf/telegraf.conf`), edit the `urls`
 setting to indicate `https` instead of `http` and change `localhost` to the
 relevant domain name.
 If you're using a self-signed certificate, uncomment the `insecure_skip_verify`
 setting and set it to `true`.
->
-    ###############################################################################
-    #                            OUTPUT PLUGINS                                   #
-    ###############################################################################
->
-    # Configuration for influxdb server to send metrics to
-    [[outputs.influxdb]]
-      ## The full HTTP or UDP endpoint URL for your InfluxDB instance.
-      ## Multiple urls can be specified as part of the same cluster,
-      ## this means that only ONE of the urls will be written to each interval.
-      # urls = ["udp://localhost:8089"] # UDP endpoint example
-      urls = ["https://<domain_name>.com:8086"]
->
-    [...]
->
-      ## Optional SSL Config
-      [...]
-      insecure_skip_verify = true # <-- Update only if you're using a self-signed certificate
->
+
+```toml
+###############################################################################
+#                            OUTPUT PLUGINS                                   #
+###############################################################################
+
+# Configuration for influxdb server to send metrics to
+[[outputs.influxdb]]
+  ## The full HTTP or UDP endpoint URL for your InfluxDB instance.
+  ## Multiple urls can be specified as part of the same cluster,
+  ## this means that only ONE of the urls will be written to each interval.
+  # urls = ["udp://localhost:8089"] # UDP endpoint example
+  urls = ["https://<domain_name>.com:8086"]
+
+[...]
+
+  ## Optional SSL Config
+  [...]
+  insecure_skip_verify = true # <-- Update only if you're using a self-signed certificate
+```
+
 Next, restart Telegraf and you're all set!

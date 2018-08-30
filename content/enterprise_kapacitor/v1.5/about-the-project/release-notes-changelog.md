@@ -8,9 +8,20 @@ menu:
 
 # Changelog
 
+## v1.5.1 [2018-08-06]
+
+Includes features and bug fixes from [Kapacitor 1.5.1](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-1-2018-08-06).
+
+### Bugfixes
+
+- Fix an issue to ensure alert deduplication is by topic.
+  Previously, alert events were being erroneously deduplicated across the set of topics assigned to a node.
+  Topic assignment changes with cluster size, so it is not a stable behavior.
+  This change fixes the unintended behavior.
+
 ## v1.5.0 [2018-05-22]
 
-Includes features and bug fixes from [Kapacitor 1.5.0](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-0-2018-05-17)
+Includes features and bug fixes from [Kapacitor 1.5.0](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-0-2018-05-17).
 
 ### Bugfixes
 

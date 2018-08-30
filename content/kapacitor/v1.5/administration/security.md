@@ -191,7 +191,7 @@ upload completely sent off: 43 out of 43 bytes
 < HTTP/1.1 204 No Content
 < Content-Type: application/json; charset=utf-8
 < Request-Id: 189e9abb-157b-11e8-866a-000000000000
-< X-Kapacitor-Version: 1.5.0~n201802140813
+< X-Kapacitor-Version: 1.5.1~n201802140813
 < Date: Mon, 19 Feb 2018 13:45:07 GMT
 <
 * Connection #0 to host localhost left intact
@@ -265,7 +265,9 @@ Open-source Kapacitor offers TLS for encrypting communications to the HTTP API.
 
 This feature can be enabled in the configuration `http` group of the configuration.
 Activation requires simply setting the property `https-enabled` to `true` and
-then providing a path to a certificate with the property `https-certificate`.
+then providing a path to a certificate with the property, `https-certificate`.
+If your certificate's private key is separate, specify the path to the private key
+using the `https-private-key` property.
 
 The following example shows how this is done in the `kapacitor.conf` file.
 
@@ -283,7 +285,8 @@ The following example shows how this is done in the `kapacitor.conf` file.
   write-tracing = false
   pprof-enabled = false
   https-enabled = true
-  https-certificate = "/etc/ssl/influxdata-selfsigned-incl-pub-key.pem"
+  https-certificate = "/etc/ssl/influxdata-selfsigned.crt"
+  https-private-key = "/etc/ssl/influxdata-selfsigned.key"
 ```
 
 These values can also be set as environment variables as shown in the next example.
@@ -292,7 +295,8 @@ These values can also be set as environment variables as shown in the next examp
 
 ```
 KAPACITOR_HTTP_HTTPS_ENABLED=true
-KAPACITOR_HTTP_HTTPS_CERTIFICATE="/etc/ssl/influxdata-selfsigned-incl-pub-key.pem"
+KAPACITOR_HTTP_HTTPS_CERTIFICATE="/etc/ssl/influxdata-selfsigned.crt"
+KAPACITOR_HTTP_HTTPS_PRIVATE_KEY="/etc/ssl/influxdata-selfsigned.key"
 ```
 
 However, they _cannot_ be set over the HTTP API.
@@ -334,7 +338,7 @@ chronograf-v1-3586109e-8b7d-437a-80eb-a9c50d00ad53 stream    enabled   true     
 The following applies to the open-source distribution of Kapacitor.  While it is
 possible to add parameters such as `username`, `password` and `auth-enabled` to
 the section `[http]` of the configuration file, `kapacitor.conf`, and while the
-kapacitor server will then expect a username and password to be supplied when
+Kapacitor server will then expect a username and password to be supplied when
 connecting, the authorization and authentication handler in the open-source
 distribution does not enforce checks against a user-store, nor does it verify
 access permissions to resources using an Access Control List (ACL).  

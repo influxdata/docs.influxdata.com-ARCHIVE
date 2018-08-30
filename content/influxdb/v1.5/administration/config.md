@@ -74,7 +74,7 @@ The `GOMAXPROCS` [Go language environment variable](https://golang.org/pkg/runti
 
 
 The default value of `GOMAXPROCS` is the number of CPUs (whatever your operating system considers to be a CPU) that are visible to the program *on startup.* For a 32-core machine, the `GOMAXPROCS` value would be `32`.
-You can override this value to be less than the maximum value, which can be useful in cases where you are running InfluxDB along with other processes on the same machine and want to ensure that the database doesn't completely starve those processes.
+You can override this value to be less than the maximum value, which can be useful in cases where you are running the InfluxDB along with other processes on the same machine and want to ensure that the database doesn't completely starve those those processes.
 
 > ***Note:***
 > Setting `GOMAXPROCS=1` will eliminate all parallelization.
@@ -289,8 +289,9 @@ Environment variable: `INFLUXDB_DATA_COMPACT_FULL_WRITE_COLD_DURATION`
 
 ### `max-concurrent-compactions = 0`
 
-The maximum number of concurrent full and level [compactions](/influxdb/v1.5/concepts/storage_engine/#compactions) that can run at one time.
-A value of 0 results in runtime.GOMAXPROCS(0) used at runtime -- which means use all processors.
+The maximum number of concurrent full and level compactions.
+The default value of `0` results in 50% of the CPU cores being used for compactions at runtime.
+With the default setting, at most 4 cores will be used. If explicitly set, the number of cores used for compaction is limited to the specified value.
 This setting does not apply to cache snapshotting.
 
 Environment variable: `INFLUXDB_DATA_MAX_CONCURRENT_COMPACTIONS`
