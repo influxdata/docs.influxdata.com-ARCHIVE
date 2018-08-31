@@ -5,7 +5,7 @@ menu:
   enterprise_kapacitor_1_5:
     name: Configure alerts in clusters
     weight: 20
-    parent: Guides
+    parent: Cluster Management
 ---
 
 ## Terminology

@@ -4,7 +4,7 @@ description: placeholder
 menu:
   enterprise_kapacitor_1_5:
     weight: 100
-    parent: Administration
+    parent: Cluster Management
 ---
 
 The `kapacictorctl` utility provides management tools for Kapacitor clusters.
@@ -12,18 +12,18 @@ The `kapacictorctl` utility provides management tools for Kapacitor clusters.
 ## Commands
 The `kapacitorctl` utility includes the following commands:
 
-- [`member`](#member)
-- [`cluster`](#cluster)
-- [`help`](#help)
+- [member](#member)
+- [cluster](#cluster)
+- [help](#help)
 
 ### `member`
 The `kapacitorctl member` command is used to add, remove, and list information
 about members of a Kapacitor cluster.
 In includes three subcommands:
 
-- [`member list`](#member-list)
-- [`member add`](#member-add)
-- [`member remove`](#member-remove)
+- [member list](#member-list)
+- [member add](#member-add)
+- [member remove](#member-remove)
 
 #### `member list`
 The `kapacitorctl member list` subcommand lists cluster members, related information, and statuses.
@@ -45,26 +45,32 @@ f74f3547-efaf-4e6e-8b05-fb12b19f8287    serverA:9090   serverA:9091   serverA:90
 
 #### `member add`
 The `kapacitorctl member add` subcommand adds members to a Kapacitor cluster.
+It requires the RPC address of the member you intend to add.
+The RPC address is the resolvable DNS or IP (access on port 9091) of the Kapacitor host you intend to add as a member.
+
+> RPC addresses can also be found by running [`kapacitorctl memeber list`](#member-list) on the Kapacitor node you intend to add.
+> The Kapacitor host will appear as the only member in the cluster since it has not yet been added to the cluster.
 
 ```bash
 # Pattern
-kapacitorctl member add <rpc-address>
+kapacitorctl member add <member-rpc-address>
 
 # Example
-kapacitorctl member add <rpc-address>
+kapacitorctl member add example.com:9091
 ```
 
 #### `member remove`
-The `kapacitorctl member remove` subcommand remove a node from a Kapacitor cluster.
+The `kapacitorctl member remove` subcommand removes a member from a Kapacitor cluster.
+It requires the member ID of the member you intend to remove.
+Member IDs are included in the [`kapacitorctl member list`](#member-list) output.
 
 ```bash
 # Pattern
-kapacitorctl member remove <node-id>
+kapacitorctl member remove <member-id>
 
 # Example
 kapacitorctl member remove 13eeefdd-41b5-453f-928e-cb9c55fd2a5d
 ```
-_Node IDs are included in the `kapacitorctl member list` output._
 
 ### `cluster`
 The `kapacitorctl cluster` command displays information about the connected Kapacitor cluster.
@@ -77,5 +83,5 @@ The `kapacitorctl help` command outputs help information for a given command.
 kapacitorctl help <command>
 
 # Example
-kapacitor help member
+kapacitorctl help member
 ```
