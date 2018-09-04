@@ -295,7 +295,7 @@ have access to the following fields:
 #### Inline alert template
 _**kapacitor.conf**_
 ```toml
-[httppost]]
+[[httppost]]
   endpoint = "example"
   url = "http://example.com/path"
   alert-template = "{{.Message}}:{{range .Data.Series}}{{.Tags}},{{range .Values}}{{.}}{{end}}{{end}}"
@@ -304,7 +304,7 @@ _**kapacitor.conf**_
 #### Alert template file
 _**kapacitor.conf**_
 ```toml
-[httppost]]
+[[httppost]]
   endpoint = "example"
   url = "http://example.com/path"
   alert-template-file = "/etc/templates/alert.html"
