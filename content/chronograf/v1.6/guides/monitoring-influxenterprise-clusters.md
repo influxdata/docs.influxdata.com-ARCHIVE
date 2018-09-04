@@ -13,7 +13,7 @@ menu:
 [InfluxEnterprise](/enterprise_influxdb/latest/) offers high availability and a highly scalable clustering solution for your time series data needs.
 Use Chronograf to assess your cluster's health and to monitor the infrastructure behind your project.
 
-This guide offers step-by-step instructions for using Chronograf, [InfluxDB](/influxdb/latest/), and [Telegraf](/telegraf/latest/) to monitor data nodes in your InfluxEnteprise cluster.
+This guide offers step-by-step instructions for using Chronograf, [InfluxDB](/influxdb/latest/), and [Telegraf](/telegraf/latest/) to monitor data nodes in your InfluxEnterprise cluster.
 
 ## Requirements
 
@@ -217,7 +217,7 @@ Those values match the hostnames of the three data nodes in the cluster; this me
 
 #### Step 1: Download and install Chronograf
 
-Download and install Chronograf on the same server as theInfluxDB instance.
+Download and install Chronograf on the same server as the InfluxDB instance.
 This is not a requirement; you may host Chronograf on a separate server.
 
 Chronograf can be downloaded from the [InfluxData downloads page](https://portal.influxdata.com/downloads).
