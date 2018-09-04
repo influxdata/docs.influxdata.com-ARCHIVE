@@ -29,9 +29,9 @@ Below is an example configuration:
 ```
 
 #### `endpoint`
-Name of a configured httppost endpoint that acts as an identifier for `[[httppost]]`
+Name of a configured HTTP POST endpoint that acts as an identifier for `[[httppost]]`
 configurations when multiple are present.
-_Endpoints are identifiers only. They are not appended to httppost URLs._
+_Endpoints are identifiers only. They are not appended to HTTP POST URLs._
 
 #### `url`
 The URL to which the alert data will be posted.
@@ -54,7 +54,7 @@ _Skip to [alert templating](#alert-templates)._
 
 #### `row-template`
 Row template for constructing a custom HTTP body.
-Row templates are only used with [httpPost](/kapacitor/v1.5/nodes/http_post_node/)
+Row templates are only used with the [httpPost node](/kapacitor/v1.5/nodes/http_post_node/)
 pipeline nodes as they consume a row at a time.
 _Skip to [row templating](#row-templates)._
 
@@ -73,7 +73,7 @@ KAPACITOR_HTTPPOST_0_HEADERS_Example1 = "header1"
 KAPACITOR_HTTPPOST_0_HEADERS_Example2 = "header2"
 ```
 
-### Configuring and using multiple httppost endpoints
+### Configuring and using multiple HTTP POST endpoints
 The `kapacitor.conf` supports multiple `[[httppost]]` sections.
 The [`endpoint`](#endpoint) configuration option of each acts as a unique identifier for that specific configuration.
 To use a specific `[[httppost]]` configuration with the Post alert handler,
@@ -93,7 +93,7 @@ _**kapacitor.conf**_
   # ...
 ```
 
-Multiple httppost endpoint configurations can also be added using environment variables.
+Multiple HTTP POST endpoint configurations can also be added using environment variables.
 Variables values are grouped together using the number in each variable key.
 
 ```bash
@@ -116,7 +116,7 @@ The following post event handler options can be set in a
 | Name             | Type                    | Description                                                                                                         |
 | ----             | ----                    | -----------                                                                                                         |
 | url              | string                  | The URL to which the alert data will be posted.                                                                     |
-| endpoint         | string                  | Name of a httppost endpoint (configured in the `kapacitor.conf`) to use. _Cannot be specified in place of the URL._ |
+| endpoint         | string                  | Name of a HTTP POST endpoint (configured in the `kapacitor.conf`) to use. _Cannot be specified in place of the URL._ |
 | headers          | map of string to string | Set of extra header values to set on the POST request.                                                              |
 | capture‑response | bool                    | If the HTTP status code is not an `2xx` code, read and log the the HTTP response.                                   |
 | timeout          | duration                | Timeout for the HTTP POST.                                                                                          |
@@ -169,11 +169,11 @@ options:
 
 ## Using the Post event handler
 The post event handler can be used in both TICKscripts and handler files to post
-alert and httpPost data to an HTTP endpoint.
-The examples below deal with alerts and use the same `httppost` configuration
+alert and HTTP POST data to an HTTP endpoint.
+The examples below deal with alerts and use the same `[[httppost]]` configuration
 defined in the `kapacitor.conf`:
 
-_**httppost settings in kapacitor.conf**_  
+_**HTTP POST settings in kapacitor.conf**_  
 ```toml
 [[httppost]]
   endpoint = "api-alert"
@@ -317,7 +317,7 @@ _**/etc/templates/alert.html**_
 
 ### Row templates
 Row templates are used to construct a custom HTTP body.
-They are only used with post [httpPost](/kapacitor/v1.5/nodes/http_post_node/)
+They are only used with [httpPost](/kapacitor/v1.5/nodes/http_post_node/)
 handlers as they consume a row at a time.
 Templates are defined either inline in the `kapacitor.conf` using the
 [`row-template`](#row-template) configuration or in a separate file and referenced
