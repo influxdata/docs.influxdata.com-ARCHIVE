@@ -30,7 +30,7 @@ Below is an example configuration:
 
 #### `endpoint`
 Name of a configured httppost endpoint that acts as an identifier for `[[httppost]]`
-configurations configuration when multiple are present.
+configurations when multiple are present.
 _Endpoints are identifiers only. They are not appended to httppost URLs._
 
 #### `url`
