@@ -19,7 +19,7 @@ Below is an example configuration:
 ```toml
 [[httppost]]
   endpoint = "example"
-  url = "http://example.com"
+  url = "http://example.com/path"
   headers = { Example = "your-key" }
   basic-auth = { username = "my-user", password = "my-pass" }
   alert-template = "{{.Message}}:{{range .Data.Series}}{{.Tags}},{{range .Values}}{{.}}{{end}}{{end}}"
@@ -29,8 +29,9 @@ Below is an example configuration:
 ```
 
 #### `endpoint`
-Name of a configured httppost endpoint. When using multiple `[[httppost]]` configurations,
-this acts as an identifier for each configuration.
+Name of a configured httppost endpoint that acts as an identifier for `[[httppost]]`
+configurations configuration when multiple are present.
+_Endpoints are identifiers only. They are not appended to httppost URLs._
 
 #### `url`
 The URL to which the alert data will be posted.
@@ -67,7 +68,7 @@ environment variables:
 
 ```bash
 KAPACITOR_HTTPPOST_0_ENDPOINT = "example"
-KAPACITOR_HTTPPOST_0_URL = "http://example.com"
+KAPACITOR_HTTPPOST_0_URL = "http://example.com/path"
 KAPACITOR_HTTPPOST_0_HEADERS_Example1 = "header1"
 KAPACITOR_HTTPPOST_0_HEADERS_Example2 = "header2"
 ```
@@ -137,7 +138,7 @@ topic: topic-name
 kind: post
 options:
   # Defining post options "inline"
-  url: http://example.com
+  url: http://example.com/path
   headers:
     'Example1': 'example1'
     'Example2': 'example2'
@@ -159,7 +160,7 @@ options:
 |alert()
   // ...
   // Defining post options "inline"
-  .post('http://example.com')
+  .post('http://example.com/path')
     .header('Example1', 'example1')
     .header('Example2', 'example2')
     .captureResponse()
@@ -176,7 +177,7 @@ _**httppost settings in kapacitor.conf**_
 ```toml
 [[httppost]]
   endpoint = "api-alert"
-  url = "http://mydomain.com"
+  url = "http://mydomain.com/api/alerts"
   headers = { From = "alerts@mydomain.com" }
   alert-template = "{{.Message}}:{{range .Data.Series}}{{.Tags}},{{range .Values}}{{.}}{{end}}{{end}}"
 ```
@@ -296,7 +297,7 @@ _**kapacitor.conf**_
 ```toml
 [httppost]]
   endpoint = "example"
-  url = "http://example.com"
+  url = "http://example.com/path"
   alert-template = "{{.Message}}:{{range .Data.Series}}{{.Tags}},{{range .Values}}{{.}}{{end}}{{end}}"
 ```
 
@@ -305,7 +306,7 @@ _**kapacitor.conf**_
 ```toml
 [httppost]]
   endpoint = "example"
-  url = "http://example.com"
+  url = "http://example.com/path"
   alert-template-file = "/etc/templates/alert.html"
 ```
 
@@ -336,7 +337,7 @@ _**kapacitor.conf**_
 ```toml
 [[httppost]]
   endpoint = "example"
-  url = "http://example.com"
+  url = "http://example.com/path"
   row-template = '{{.Name}} host={{index .Tags "host"}}{{range .Values}} {{index . "time"}} {{index . "value"}}{{end}}'
 ```
 
@@ -345,7 +346,7 @@ _**kapacitor.conf**_
 ```toml
 [[httppost]]
   endpoint = "example"
-  url = "http://example.com"
+  url = "http://example.com/path"
   row-template-file = "/etc/templates/row.html"
 ```
 
