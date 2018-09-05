@@ -9,8 +9,8 @@ menu:
 
 Helpful information related to creating and managing Kapacitor Enterprise clusters.
 
-## [Configure alerts in Kapacitor Enterprise clusters](/enterprise_kapacitor/v1.5/guides/cluster-alerts/)
+## [Configure alerts in Kapacitor Enterprise clusters](/enterprise_kapacitor/v1.5/cluster-management/cluster-alerts/)
 A walkthrough of how to configure alerts in a Kapacitor Enterprise cluster.
 
-## [Kapacitor cluster CLI](/enterprise_kapacitor/v1.5/guides/kapacitorctl/)
+## [Kapacitor cluster CLI](/enterprise_kapacitor/v1.5/cluster-management/kapacitor-cluster-cli/)
 The `kapacitorctl` utility is a command line interface for creating and managing Kapacitor clusters.

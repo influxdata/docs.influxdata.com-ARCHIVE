@@ -1,9 +1,9 @@
 ---
-title: Configure alerts in Kapacitor Enterprise clusters
+title: Configure alerts in a Kapacitor Enterprise cluster
 description: Information about how to avoid duplicate alerts when sending alerts from a Kapacitor cluster.
 menu:
   enterprise_kapacitor_1_5:
-    name: Configure alerts in clusters
+    name: Configure alerts in a cluster
     weight: 20
     parent: Cluster Management
 ---
@@ -72,8 +72,8 @@ kapacitor define cpu-alert -tick cpu_alert.tick
 
 ### 3. Add an alert handler that subscribes to your topic
 Standalone alert handlers are defined using [handler files](/kapacitor/v1.5/event_handlers/#handler-file),
-simple YAML files that include inforamation necessary for the handler to function.
-Below is an example Slack handler file that subcribes to the `topic-name` topic:
+simple YAML files that include information necessary for the handler to function.
+Below is an example Slack handler file that subscribes to the `topic-name` topic:
 
 _**slack-handler.yml**_
 ```yaml

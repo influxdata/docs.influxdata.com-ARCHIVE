@@ -1,6 +1,6 @@
 ---
 title: Kapacitor cluster CLI
-description: placeholder
+description: The 'kapacitorctl' utility is used to manage Kapacitor Enterprise clusters. This article outlines 'kapacitorctl' commands and options.
 menu:
   enterprise_kapacitor_1_5:
     weight: 100
@@ -9,17 +9,46 @@ menu:
 
 The `kapacictorctl` utility provides management tools for Kapacitor clusters.
 
+## Options
+
+#### `-skipVerify`
+Skips TLS verification. This should be used if interacting with Kapacitor servers
+in your cluster that are secured using self-signed TLS certificates.
+
+_This can also be enables using the `KAPACITOR_UNSAFE_SSL` environment variable._
+
+```bash
+# Pattern
+kapacitorctl [command] [subcommand] -skipVerify
+
+# Example
+kapacitorctl member add example.com:9091 -skipVerify
+```
+
+#### `-url`
+This option is used to run `kapacitorctl` commands on a remote host.
+It specifies the resolvable host at which a `kapacitord` process is running.
+
+_This can also be specified using the `KAPACITOR_URL` environment variable._
+
+```bash
+# Pattern
+kapacitorctl [command] [subcommand] -url http://example.com:9092
+
+# Example
+kapacitorctl member list -url http://example.com:9092
+```
+
 ## Commands
 The `kapacitorctl` utility includes the following commands:
 
 - [member](#member)
-- [cluster](#cluster)
 - [help](#help)
 
 ### `member`
 The `kapacitorctl member` command is used to add, remove, and list information
 about members of a Kapacitor cluster.
-In includes three subcommands:
+It includes three subcommands:
 
 - [member list](#member-list)
 - [member add](#member-add)
@@ -46,10 +75,10 @@ f74f3547-efaf-4e6e-8b05-fb12b19f8287    serverA:9090   serverA:9091   serverA:90
 #### `member add`
 The `kapacitorctl member add` subcommand adds members to a Kapacitor cluster.
 It requires the RPC address of the member you intend to add.
-The RPC address is the resolvable DNS or IP (access on port 9091) of the Kapacitor host you intend to add as a member.
+The RPC address is the resolvable DNS or IP (using port 9091) of the Kapacitor host you intend to add as a member.
 
 > RPC addresses can also be found by running [`kapacitorctl memeber list`](#member-list) on the Kapacitor node you intend to add.
-> The Kapacitor host will appear as the only member in the cluster since it has not yet been added to the cluster.
+> The Kapacitor host will appear as the only member in the cluster since it has not yet been added to a cluster.
 
 ```bash
 # Pattern
@@ -72,16 +101,18 @@ kapacitorctl member remove <member-id>
 kapacitorctl member remove 13eeefdd-41b5-453f-928e-cb9c55fd2a5d
 ```
 
-### `cluster`
-The `kapacitorctl cluster` command displays information about the connected Kapacitor cluster.
+## Running kapacitorctl commands remotely
+To run `kapacitorctl` commands remotely, use the [`-url` option](#url) to specify
+the URL at which the remote Kapacitor server is accessed.
 
-### `help`
-The `kapacitorctl help` command outputs help information for a given command.
+For example, if you have a Kapacitor cluster with a member accessible at `https://node-1.my-kapacitor.com:9092`,
+you can run `kapacitorctl` commands on that server by passing the resolvable URL as the `-url`.
 
 ```bash
-# Pattern
-kapacitorctl help <command>
-
-# Example
-kapacitorctl help member
+kapacitorctl member add node-2.my-kapacitor.com:9091 -url https://node-1.my-kapacitor.com:9092
 ```
+
+The `member add` subcommand above will run on the `node-1.my-kapacitor.com` server.
+
+> If Kapacitor members in your cluster are secured using self-signed TLS certificates,
+> include the `-skipVerify` option to avoid SSL/TLS verification issues.
