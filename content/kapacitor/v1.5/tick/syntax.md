@@ -299,7 +299,7 @@ Example 9 declares two string lists. The first contains identifiers for other va
 
 **Example 10 &ndash; String list in a template task**
 ```js
-brp "telegaf"."not_autogen"
+dbrp "telegaf"."not_autogen"
 
 var measurement string
 var where_filter = lambda: TRUE
