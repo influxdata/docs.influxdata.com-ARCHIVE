@@ -3,6 +3,7 @@ title: Create a Kapacitor Enterprise Cluster
 description: placeholder
 menu:
   enterprise_kapacitor_1_5:
+    name: Create a Kapacitor Cluster
     weight: 10
     parent: Cluster Management
 ---
@@ -28,9 +29,25 @@ The following terms are used frequently and need to be understood.
 * Member - A member is an instance of the Kapacitor Enterprise process typically running in a host or in a container.
 * Cluster - A set of members that are aware of each other.
 
-## Elasticity
+## Kapacitor cluster architecture
+- Each member of a Kapacitor cluster essentially runs as a standalone Kapacitor instance,
+  but specific information is shared with other members in the cluster.
+- Information is shared using the [Gossip protocol](https://en.wikipedia.org/wiki/Gossip_protocol).
 
-Before getting into the details of installing and running an Kapacitor Enterprise cluster, let's discuss some of the limitations of this release of clustering.
+### Cluster Gossip
+
+#### What is shared?
+- Host and networking information (member ID, Gossip, RPC, and API addresses)
+- Cluster information (member role, member status)
+- Alert topics and published alerts
+- "Standalone" alert handlers
+
+#### What is not shared?
+- Tasks and task templates (TICKscripts)
+- Inbound or transformed time series data (InfluxDB data)
+
+## Know the size of your cluster before starting
+Before getting into the details of installing and running an Kapacitor Enterprise cluster, let's discuss some of the limitations of the current release of clustering.
 This release of Kapacitor Enterprise is not elastic. Adding and removing members from the cluster dynamically can cause the cluster to get out of sync with itself.
 To prevent synchronization issues, decide in advance how many members you want to run.
 
@@ -39,6 +56,8 @@ Define a clustered set of members before defining any tasks, alert handlers, etc
 </dt>
 
 You can add or remove members once a cluster is running, but this must be done correctly. See step 4 for details.
+
+
 
 ## Step 1: Configure Kapacitor Enterprise.
 
