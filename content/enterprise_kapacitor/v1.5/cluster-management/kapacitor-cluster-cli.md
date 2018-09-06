@@ -101,6 +101,17 @@ kapacitorctl member remove <member-id>
 kapacitorctl member remove 13eeefdd-41b5-453f-928e-cb9c55fd2a5d
 ```
 
+### `help`
+The `help` command prints help information for a given command.
+
+```bash
+# Pattern
+kapacitorctl help [command]
+
+# Example
+kapacitorctl help member
+```
+
 ## Running kapacitorctl commands remotely
 To run `kapacitorctl` commands remotely, use the [`-url` option](#url) to specify
 the URL at which the remote Kapacitor server is accessed.

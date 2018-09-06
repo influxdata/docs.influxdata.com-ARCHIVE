@@ -11,13 +11,13 @@ menu:
 ## Terminology
 Definitions for terms specific to this guide are defined below:
 
-**Standalone event handler:**  
+**Standalone event handler**  
 "Standalone" event handlers (also known as "topic handlers") are those added using an
 [event handler file](/kapacitor/v1.5/event_handlers/#handler-file) that subscribes to a specified alert topic.
 As alerts are published to that topic, the standalone event handler sends alert data to a given endpoint.
 How the handler works and to what endpoint data is sent depends on the particular `kind` of handler you are using.
 
-**Inline event handler:**  
+**Inline event handler**  
 "Inline" event handlers are those [used in TICKscripts](/kapacitor/v1.5/event_handlers/#tickscript)
 that send alert data directly from the running task.
 
@@ -30,7 +30,7 @@ However, "standalone" alert handlers only need to be defined on one instance.
 Kapacitor will manage the replication of that handler.
 
 ## Alert handlers in a cluster
-Because nodes in a Kapacitor enterprise cluster are not aware of tasks running on
+Because nodes in a Kapacitor Enterprise cluster are not aware of tasks running on
 other nodes, alert data should **not** be sent directly from tasks (TICKscripts).
 Doing so will result in duplicate notifications as each node will send the same alert.
 
@@ -48,7 +48,7 @@ To add alerts to your Kapacitor Enterprise cluster without worrying about duplic
 do the following:
 
 ### 1. Publish alert data to a topic
-In your TICKscript [AlertNodes](kapacitor/v1.5/nodes/alert_node/), publish alert
+In your TICKscript [AlertNodes](/kapacitor/v1.5/nodes/alert_node/), publish alert
 data to a topic using the `.topic()` method.
 
 _**TICKscript - Publish alerts to a topic**_
@@ -58,9 +58,9 @@ _**TICKscript - Publish alerts to a topic**_
   .topic('topic-name')
 ```
 
-### 2. Add the task to each node in your cluster
+### 2. Add the task to nodes in your cluster
 Since tasks are not replicated across nodes in you cluster, tasks need to be defined on each node.
-Login to each node and define a new task using your TICKscript:
+Login to each node you wish to run a given task and define a new task using your TICKscript:
 
 ```bash
 # Pattern
@@ -69,6 +69,11 @@ kapacitor define <task-name> -tick <path-to-tickscript-file>
 # Example
 kapacitor define cpu-alert -tick cpu_alert.tick
 ```
+
+> InfluxData recommends defining a given task on the number members set in the
+> `redundancy` configuration option of the `[alert]` section of your `kapacitor.conf`.
+> For example, if you set `redundancy` to 2, then each task that generates alerts
+> should be defined on 2 members of the cluster.
 
 ### 3. Add an alert handler that subscribes to your topic
 Standalone alert handlers are defined using [handler files](/kapacitor/v1.5/event_handlers/#handler-file),
