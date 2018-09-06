@@ -19,7 +19,7 @@ Below is an example configuration:
 ```toml
 [[httppost]]
   endpoint = "example"
-  url = "http://example.com"
+  url = "http://example.com/path"
   headers = { Example = "your-key" }
   basic-auth = { username = "my-user", password = "my-pass" }
   alert-template = "{{.Message}}:{{range .Data.Series}}{{.Tags}},{{range .Values}}{{.}}{{end}}{{end}}"
@@ -29,7 +29,9 @@ Below is an example configuration:
 ```
 
 #### `endpoint`
-Name of a configured httppost endpoint. _**Can not be specified in the URL.**_
+Name of a configured HTTP POST endpoint that acts as an identifier for `[[httppost]]`
+configurations when multiple are present.
+_Endpoints are identifiers only. They are not appended to HTTP POST URLs._
 
 #### `url`
 The URL to which the alert data will be posted.
@@ -52,7 +54,7 @@ _Skip to [alert templating](#alert-templates)._
 
 #### `row-template`
 Row template for constructing a custom HTTP body.
-Row templates are only used with [httpPost](/kapacitor/v1.5/nodes/http_post_node/)
+Row templates are only used with the [httpPost node](/kapacitor/v1.5/nodes/http_post_node/)
 pipeline nodes as they consume a row at a time.
 _Skip to [row templating](#row-templates)._
 
@@ -66,9 +68,44 @@ environment variables:
 
 ```bash
 KAPACITOR_HTTPPOST_0_ENDPOINT = "example"
-KAPACITOR_HTTPPOST_0_URL = "http://example.com"
+KAPACITOR_HTTPPOST_0_URL = "http://example.com/path"
 KAPACITOR_HTTPPOST_0_HEADERS_Example1 = "header1"
 KAPACITOR_HTTPPOST_0_HEADERS_Example2 = "header2"
+```
+
+### Configuring and using multiple HTTP POST endpoints
+The `kapacitor.conf` supports multiple `[[httppost]]` sections.
+The [`endpoint`](#endpoint) configuration option of each acts as a unique identifier for that specific configuration.
+To use a specific `[[httppost]]` configuration with the Post alert handler,
+specify the endpoint in your [post alert handler file](#example-handler-file-using-a-pre-configured-endpoint),
+or [your TICKscript](#example-tickscript-using-a-pre-configured-endpoint).
+
+_**kapacitor.conf**_
+```toml
+[[httppost]]
+  endpoint = "endpoint1"
+  url = "http://example-1.com/path"
+  # ...
+
+[[httppost]]
+  endpoint = "endpoint2"
+  url = "http://example-2.com/path"
+  # ...
+```
+
+Multiple HTTP POST endpoint configurations can also be added using environment variables.
+Variables values are grouped together using the number in each variable key.
+
+```bash
+KAPACITOR_HTTPPOST_0_ENDPOINT = "example0"
+KAPACITOR_HTTPPOST_0_URL = "http://example-0.com/path"
+KAPACITOR_HTTPPOST_0_HEADERS_Example1 = "header1"
+KAPACITOR_HTTPPOST_0_HEADERS_Example2 = "header2"
+
+KAPACITOR_HTTPPOST_1_ENDPOINT = "example1"
+KAPACITOR_HTTPPOST_1_URL = "http://example-1.com/path"
+KAPACITOR_HTTPPOST_1_HEADERS_Example1 = "header1"
+KAPACITOR_HTTPPOST_1_HEADERS_Example2 = "header2"
 ```
 
 ## Options
@@ -76,22 +113,32 @@ The following post event handler options can be set in a
 [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
 `.post()` in a TICKscript.
 
-| Name             | Type                    | Description                                                                      |
-| ----             | ----                    | -----------                                                                      |
-| url              | string                  | The URL to which the alert data will be posted.                                  |
-| endpoint         | string                  | Name of a configured httppost endpoint to use, cannot be specified in the URL.   |
-| headers          | map of string to string | Set of extra header values to set on the POST request.                           |
-| capture-response | bool                    | If the HTTP status code is not an `2xx` code, read and log the the HTTP response |
-| timeout          | duration                | Timeout for the HTTP POST.                                                       |
+| Name             | Type                    | Description                                                                                                         |
+| ----             | ----                    | -----------                                                                                                         |
+| url              | string                  | The URL to which the alert data will be posted.                                                                     |
+| endpoint         | string                  | Name of a HTTP POST endpoint (configured in the `kapacitor.conf`) to use. _Cannot be specified in place of the URL._ |
+| headers          | map of string to string | Set of extra header values to set on the POST request.                                                              |
+| capture‑response | bool                    | If the HTTP status code is not an `2xx` code, read and log the the HTTP response.                                   |
+| timeout          | duration                | Timeout for the HTTP POST.                                                                                          |
 
-### Example: handler file
+### Example: Handler file - Using a pre-configured endpoint
 ```yaml
 id: handler-id
 topic: topic-name
 kind: post
 options:
-  url: http://example.com
+  # Using the 'example' endpoint configured in the kapacitor.conf
   endpoint: example
+```
+
+### Example: Handler file - Defining post options "inline"
+```yaml
+id: handler-id
+topic: topic-name
+kind: post
+options:
+  # Defining post options "inline"
+  url: http://example.com/path
   headers:
     'Example1': 'example1'
     'Example2': 'example2'
@@ -99,13 +146,21 @@ options:
   timeout: 10s
 ```
 
-### Example: TICKscript
+### Example: TICKscript - Using a pre-configured endpoint
+```js
+|alert()
+  // ...  
+  // Using the 'example' endpoint configured in the kapacitor.conf
+  .post()
+    .endpoint('example')
+```
+
+### Example: TICKscript - Defining post options "inline"
 ```js
 |alert()
   // ...
-  .post()
-    .url('http://example.com')
-    .endpoint('example')
+  // Defining post options "inline"
+  .post('http://example.com/path')
     .header('Example1', 'example1')
     .header('Example2', 'example2')
     .captureResponse()
@@ -114,21 +169,21 @@ options:
 
 ## Using the Post event handler
 The post event handler can be used in both TICKscripts and handler files to post
-alert and httpPost data to an HTTP endpoint.
-The examples below deal with alerts and use the same `httppost` configuration
+alert and HTTP POST data to an HTTP endpoint.
+The examples below deal with alerts and use the same `[[httppost]]` configuration
 defined in the `kapacitor.conf`:
 
-_**httppost settings in kapacitor.conf**_  
+_**HTTP POST settings in kapacitor.conf**_  
 ```toml
 [[httppost]]
-  endpoint = "api/alert"
-  url = "http://mydomain.com"
+  endpoint = "api-alert"
+  url = "http://mydomain.com/api/alerts"
   headers = { From = "alerts@mydomain.com" }
   alert-template = "{{.Message}}:{{range .Data.Series}}{{.Tags}},{{range .Values}}{{.}}{{end}}{{end}}"
 ```
 
 ### Post alerts from a TICKscript
-The following TICKscript uses the `.post()` event handler to post the message,
+The following TICKscripts use the `.post()` event handler to post the message,
 "Hey, check your CPU", whenever idle CPU usage drops below 10%.
 
 _**post-cpu-alert.tick**_  
@@ -140,9 +195,27 @@ stream
     .crit(lambda: "usage_idle" < 10)
     .message('Hey, check your CPU')
     .post()
-      .url('http://mydomain.com')
-      .endpoint('api/alerts')
+      .endpoint('api-alerts')
 ```
+
+If you don't want to use the `[[httppost]]` settings defined in the `kapacitor.conf`,
+you can specify your post options inline.
+
+_**post-cpu-alert.tick**_  
+```js
+stream
+  |from()
+    .measurement('cpu')
+  |alert()
+    .crit(lambda: "usage_idle" < 10)
+    .message('Hey, check your CPU')
+    .post('http://example.com/path')
+      .header('Example1', 'example1')
+      .header('Example2', 'example2')
+      .captureResponse()
+      .timeout(10s)
+```
+
 
 ### Post alerts from a defined handler
 The following setup sends an alert to the `cpu` topic with the message, "Hey,
@@ -181,6 +254,7 @@ id: post-cpu-alert
 topic: cpu
 kind: post
 options:
+  url: 'http://example.com/path'
   headers:
     'From': 'alert@mydomain.com'
 ```
@@ -221,18 +295,18 @@ have access to the following fields:
 #### Inline alert template
 _**kapacitor.conf**_
 ```toml
-[httppost]]
+[[httppost]]
   endpoint = "example"
-  url = "http://example.com"
+  url = "http://example.com/path"
   alert-template = "{{.Message}}:{{range .Data.Series}}{{.Tags}},{{range .Values}}{{.}}{{end}}{{end}}"
 ```
 
 #### Alert template file
 _**kapacitor.conf**_
 ```toml
-[httppost]]
+[[httppost]]
   endpoint = "example"
-  url = "http://example.com"
+  url = "http://example.com/path"
   alert-template-file = "/etc/templates/alert.html"
 ```
 
@@ -243,7 +317,7 @@ _**/etc/templates/alert.html**_
 
 ### Row templates
 Row templates are used to construct a custom HTTP body.
-They are only used with post [httpPost](/kapacitor/v1.5/nodes/http_post_node/)
+They are only used with [httpPost](/kapacitor/v1.5/nodes/http_post_node/)
 handlers as they consume a row at a time.
 Templates are defined either inline in the `kapacitor.conf` using the
 [`row-template`](#row-template) configuration or in a separate file and referenced
@@ -263,7 +337,7 @@ _**kapacitor.conf**_
 ```toml
 [[httppost]]
   endpoint = "example"
-  url = "http://example.com"
+  url = "http://example.com/path"
   row-template = '{{.Name}} host={{index .Tags "host"}}{{range .Values}} {{index . "time"}} {{index . "value"}}{{end}}'
 ```
 
@@ -272,7 +346,7 @@ _**kapacitor.conf**_
 ```toml
 [[httppost]]
   endpoint = "example"
-  url = "http://example.com"
+  url = "http://example.com/path"
   row-template-file = "/etc/templates/row.html"
 ```
 
