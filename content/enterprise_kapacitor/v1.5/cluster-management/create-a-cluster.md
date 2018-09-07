@@ -23,7 +23,7 @@ This article covers the following:
 - [Troubleshooting](#troubleshooting)
 
 ## Terminology
-The following terms are used frequently and need to be understood.
+The following terms are used frequently throughout this guide.
 
 * **Member** - An instance of the Kapacitor Enterprise process typically running in a host or container.
 * **Cluster** - A set of members aware of each other.
