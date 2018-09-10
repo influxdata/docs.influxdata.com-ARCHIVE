@@ -414,7 +414,7 @@ See [Telegraf configuration](https://github.com/influxdata/telegraf/blob/master/
 
 ### netstat
 
-**Required Telegraf plugin:** [Netstat input plugin](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/NETSTAT_README.md)
+**Required Telegraf plugin:** [Netstat input plugin](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/net/NETSTAT_README.md)
 
 `netstat.json`
 
