@@ -15,7 +15,7 @@ The `kapacictorctl` utility provides management tools for Kapacitor clusters.
 Skips TLS verification. This should be used if interacting with Kapacitor servers
 in your cluster that are secured using self-signed TLS certificates.
 
-_This can also be enables using the `KAPACITOR_UNSAFE_SSL` environment variable._
+_This can also be enabled using the `KAPACITOR_UNSAFE_SSL` environment variable._
 
 ```bash
 # Pattern
