@@ -1,9 +1,9 @@
 ---
-title: Kapacitor command line clients
+title: Kapacitor command line client
 description:
 menu:
   kapacitor_1_5:
-    name: Kapacitor CLIs
+    name: Kapacitor CLI
     weight: 12
     parent: work-w-kapacitor
 ---

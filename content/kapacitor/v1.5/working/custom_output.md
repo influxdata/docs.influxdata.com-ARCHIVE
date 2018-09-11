@@ -2,12 +2,13 @@
 title: Contributing new Kapacitor output nodes
 aliases:
     - kapacitor/v1.5/contributing/custom_output/
+    - kapacitor/v1.5/about_the_project/custom_output/
 menu:
   kapacitor_1_5:
     name: Writing your own output node
     identifier: custom_output
-    weight: 20
-    parent: about_the_project
+    weight: 5
+    parent: work-w-kapacitor
 ---
 
 If you haven't already, check out [this] (https://github.com/influxdb/kapacitor/blob/master/CONTRIBUTING.md)
