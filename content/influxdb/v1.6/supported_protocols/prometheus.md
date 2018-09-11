@@ -18,7 +18,7 @@ will be included in the InfluxDB release notes.
 </dt>
 
 InfluxDB support for the Prometheus remote read and write API adds the following
-HTTP endpoints to the InfluxDB `httpd` handler:
+HTTP endpoints to InfluxDB:
 
 * `/api/v1/prom/read`
 * `/api/v1/prom/write`
@@ -26,8 +26,8 @@ HTTP endpoints to the InfluxDB `httpd` handler:
 
 ### Create a target database
 Create a database in your InfluxDB instance to house data sent from Prometheus.
-In the examples provided in this article, the database name `prometheus` is used,
-but you're welcome to use the whatever database name you like.
+In the examples provided below, `prometheus` is used as the database name, but
+you're welcome to use the whatever database name you like.
 
 ```sql
 CREATE DATABASE "prometheus"
@@ -35,14 +35,14 @@ CREATE DATABASE "prometheus"
 
 ### Configuration
 
-To enable the use of the Prometheus' remote read and write APIs with InfluxDB,
-add URL values to the following settings in the [Prometheus configuration file](https://prometheus.io/docs/prometheus/latest/configuration/configuration/):
+To enable the use of Prometheus' remote read and write APIs with InfluxDB, add URL
+values to the following settings in the [Prometheus configuration file](https://prometheus.io/docs/prometheus/latest/configuration/configuration/):
 
 - [`remote_write`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#%3Cremote_write%3E)
 - [`remote_read`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#%3Cremote_read%3E)
 
-The URLs must be resolvable from your running Prometheus server and use port `8086`,
-the port used for InfluxDB's HTTP API.
+The URLs must be resolvable from your running Prometheus server and use the port
+on which InfluxDB is running (`8086` by default).
 Also include the database name using the `db=` query parameter.
 
 _**Example endpoints in Prometheus configuration file**_  
