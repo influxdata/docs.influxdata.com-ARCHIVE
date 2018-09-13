@@ -15,7 +15,8 @@ Definitions for terms specific to this guide are defined below:
 "Standalone" event handlers (also known as "topic handlers") are those added using an
 [event handler file](/kapacitor/v1.5/event_handlers/#handler-file) that subscribes to a specified alert topic.
 As alerts are published to that topic, the standalone event handler sends alert data to a given endpoint.
-How the handler works and to what endpoint data is sent depends on the particular `kind` of handler used.
+How the handler works and to what endpoint data is sent depends on the particular type of handler used
+(defined by the `kind` attribute in your [handler file](#3-add-an-alert-handler-that-subscribes-to-your-topic)).
 
 **Inline event handler**  
 "Inline" event handlers are those [used in TICKscripts](/kapacitor/v1.5/event_handlers/#tickscript)
@@ -31,8 +32,9 @@ Kapacitor will manage the replication of that handler across other members of th
 
 ## Alert handlers in a cluster
 Because members of a Kapacitor Enterprise cluster are not aware of tasks running on
-other members, alert data should **not** be sent directly from tasks (TICKscripts).
-Doing so will result in duplicate notifications as each member will send the same alert.
+other members, alert data should **not** be sent directly from TICKscripts.
+Doing so will result in duplicate notifications as each member running the same task
+will send the same alert.
 
 {{< inline-svg svg="static/img/svgs/kapacitor-cluster-alerts-duplicates.svg" >}}
 

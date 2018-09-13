@@ -1,5 +1,5 @@
 ---
-title: Kapacitor Enterprise Cluster Management
+title: Kapacitor Enterprise cluster management
 description: Information related to creating and managing Kapacitor Enterprise clusters.
 menu:
   enterprise_kapacitor_1_5:
