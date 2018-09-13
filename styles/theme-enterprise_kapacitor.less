@@ -1,0 +1,77 @@
+/*
+
+  K A P A C I T O R  T H E M E
+
+  ____________________________________________________________
+
+  Notes:
+  - Only contains color overrides for layout-article.less
+
+*/
+
+
+//
+// Override only if class is applied to body
+// -------------------------------------------------------------
+body.docs-theme--enterprise_kapacitor {
+
+  //
+  //  Article Styles
+  // ---------------------------------------------------------
+  .article-content {
+    a:link,
+    a:active,
+    a:visited {
+      color: @kapacitor-link;
+    }
+    a:hover {
+      color: @kapacitor-link-hover;
+    }
+    a.top:hover {
+      background: @kapacitor-link-hover;
+    }
+    &.section-landing{
+  		h2 a.off-page:link:hover {
+  			color: @kapacitor-link !important;
+  		}
+  	}
+  }
+
+  //
+  //  Sidebar Styles
+  // ---------------------------------------------------------
+  .sidebar--mask-container {
+    .sidebar--mask {
+      .gradient-v(@kapacitor-dropdown-gradient-a,@kapacitor-dropdown-gradient-b);
+    }
+  }
+  .sidebar--section-title {
+    a:link,
+    a:active,
+    a:visited {
+      color: @kapacitor-section-title;
+      font-weight: 400;
+    }
+    a:hover {
+      color: @kapacitor-link-hover;
+    }
+  }
+  a.sidebar--page {
+    &:hover {
+      color: @kapacitor-link-hover;
+    }
+  }
+
+  //
+  //  Navbar Styles
+  // ---------------------------------------------------------
+  .navbar--product-dropdown {
+    background-color: @kapacitor-dropdown;
+    &:hover {
+      background-color: @kapacitor-dropdown-hover;
+    }
+  }
+  .navbar--product-menu {
+    .gradient-v(@kapacitor-dropdown-gradient-a,@kapacitor-dropdown-gradient-b);
+  }
+}
