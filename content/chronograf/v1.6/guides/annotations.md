@@ -25,10 +25,11 @@ The annotation displays "`Deploy v3.8.1-2`" and the time "`2018/28/02 15:59:30:0
 
 **To add an annotation using the Chronograf user interface:**
 
-1. Click the **Edit** button ("pencil" icon) on the graph view.
-2. Click **Add Annotation** to add an annotation.
-3. Move cursor to point of time and click or drag cursor to set an annotation.
-4. Click **Edit** again and then click **Edit Annotation**.
+1. In the top menu bar, click **Annotations**.
+2. Click **Annotate** in the upper right.
+2. Click **Add Annotation**, then move your cursor to point in time you want to annotate and click or drag to create an annotation.
+4. To edit, hover over the annotation and select the edit (pencil) button from the tooltip that appears. The **Edit Annotation** window appears.
+5. Edit the annotation's timestamp 
 5. Click the cursor on the annotation point or interval. The annotation text box appears above the annotation point or interval.
 6. Click on `Name Me` in the annotation and type a note or comment.
 7. Click **Done Editing**.
