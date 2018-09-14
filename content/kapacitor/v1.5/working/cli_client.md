@@ -1,6 +1,6 @@
 ---
 title: Kapacitor command line client
-description:
+description: The 'kapacitor' command line utility is used to manage Kapacitor servers and processes, providing access to server statistics as well as other management tasks.
 menu:
   kapacitor_1_5:
     name: Kapacitor CLI
