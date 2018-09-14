@@ -49,7 +49,7 @@ You can also use Kapacitor's [`/debug/vars` API endpoint](/kapacitor/v1.5/workin
 to view and monitor ingest rates.
 Using this endpoint and [Telegraf's Kapacitor input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/kapacitor),
 you can create visualizations to monitor Kapacitor ingest rates.
-Below are examples queries that use Kapacitor data written into InfluxDB using
+Below are example queries that use Kapacitor data written into InfluxDB using
 Telegraf's Kapacitor input plugin:
 
 _**Kapacitor ingest rate (points/sec)**_
