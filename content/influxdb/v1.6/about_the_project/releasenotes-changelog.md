@@ -7,6 +7,27 @@ menu:
     parent: About the project
 ---
 
+## v1.6.3 [2018-09-14]
+
+### Features
+
+-	Remove TSI1 HLL sketches from heap.
+
+### Bugfixes
+
+-	Fix the inherited interval for derivative and others.  The inherited interval from an outer query should not have caused 
+an inner query to fail because inherited intervals are only implicitly passed to inner queries that support group
+by time functionality. Since an inner query with a derivative doesn't support grouping by time and the inner query itself 
+doesn't specify a time, the outer query shouldn't have invalidated the inner query.
+-	Fix the derivative and others time ranges for aggregate data. The derivative function and others similar to it would 
+preload themselves with data so that the first interval would be the start of the time range. That meant reading data outside
+of the time range. One change to the shard mapper made in v1.4.0 caused the shard mapper to constrict queries to the 
+intervals given to the shard mapper. This was correct because the shard mapper can only deal with times it has mapped,
+but this broke the functionality of looking back into the past for the derivative and other functions that used that 
+functionality. The query compiler has been updated with an additional attribute that records how many intervals in the past 
+will need to be read so that the shard mapper can include extra times that it may not necessarily read from,
+but may be queried because of the above described functionality.
+
 ## v1.6.2 [2018-08-27]
 
 ### Features
