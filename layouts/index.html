@@ -4,7 +4,7 @@
 		<div class="homepage--card-container">
 			<h1 class="homepage--card-title">InfluxData Platform</h1>
 			<p class="homepage--card-description">The leading time-series platform built for metrics and events.</p>
-			<a class="btn" href="/platform/introduction">Get Started</a>
+			<a class="btn" href="/platform/introduction">Start Here</a>
 		</div>
 		<div class="homepage--card-mask"></div>
 	</div>
@@ -55,7 +55,7 @@
 			</div>
 		{{ end }}
 	{{ end }}
-	
+
 	{{ range .Site.Menus.products }}
 		{{ if (in .Identifier "enterprise")}}
 		<div class="homepage--card card-{{ .Name }} enterprise">

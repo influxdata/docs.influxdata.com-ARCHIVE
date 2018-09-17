@@ -8,3 +8,6 @@ menu:
 ---
 
 This is the getting started doc
+
+- Download
+- Install
