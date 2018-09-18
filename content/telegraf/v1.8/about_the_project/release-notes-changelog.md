@@ -10,37 +10,37 @@ menu:
 
 ## v1.8 [2018-09-??]
 
-### New Inputs
+### New input plugins
 
-- [activemq](./plugins/inputs/activemq/README.md) - Contributed by @mlabouardy
+- [ActiveMQ (`activemq`)](./plugins/inputs/activemq/README.md) - Contributed by @mlabouardy
 - [beanstalkd](./plugins/inputs/beanstalkd/README.md) - Contributed by @44px
 - [filecount](./plugins/inputs/filecount/README.md) - Contributed by @sometimesfood
 - [file](./plugins/inputs/file/README.md) - Contributed by @maxunt
 - [icinga2](./plugins/inputs/icinga2/README.md) - Contributed by @mlabouardy
-- [kibana](./plugins/inputs/icinga2/README.md) - Contributed by @lpic10
-- [pgbouncer](./plugins/inputs/pgbouncer/README.md) - Contributed by @nerzhul
+- [Kibana (`kibana`)](./plugins/inputs/icinga2/README.md) - Contributed by @lpic10
+- [PgBouncer (`pgbouncer`)](./plugins/inputs/pgbouncer/README.md) - Contributed by @nerzhul
 - [temp](./plugins/inputs/temp/README.md) - Contributed by @pytimer
 - [tengine](./plugins/inputs/tengine/README.md) - Contributed by @ertaoxu
 - [vsphere](./plugins/inputs/vsphere/README.md) - Contributed by @prydin
 - [x509_cert](./plugins/inputs/x509_cert/README.md) - Contributed by @jtyr
 
-### New Processors
+### New processor plugins
 
 - [enum](./plugins/processors/enum/README.md) - Contributed by @KarstenSchnitter
 - [parser](./plugins/processors/parser/README.md) - Contributed by @Ayrdrie & @maxunt
 - [rename](./plugins/processors/rename/README.md) - Contributed by @goldibex
 - [strings](./plugins/processors/strings/README.md) - Contributed by @bsmaldon
 
-### New Aggregators
+### New aggregator plugins
 
-- [valuecounter](./plugins/aggregators/valuecounter/README.md) - Contributed by @piotr1212
+- [ValueCounter (`valuecounter`)](./plugins/aggregators/valuecounter/README.md) - Contributed by @piotr1212
 
-### New Outputs
+### New output plugins
 
 - [azure_monitor](./plugins/outputs/azure_monitor/README.md) - Contributed by @influxdata
 - [influxdb_v2](./plugins/outputs/influxdb_v2/README.md) - Contributed by @influxdata
 
-### New Parsers
+### New parsers
 
 - [csv](/docs/DATA_FORMATS_INPUT.md#csv) - Contributed by @maxunt
 - [grok](/docs/DATA_FORMATS_INPUT.md#grok) - Contributed by @maxunt
@@ -55,17 +55,17 @@ menu:
 - Add SSL/TLS support to Redis (`redis`) input plugin.
 - Add tengine input plugin.
 - Add power draw field to the NVIDIA SMI (`nvidia_smi`) input plugin.
-- Add support for Solr 7 to the Solr input plugin.
-- Add owner tag on partitions in Burrow input plugin.
-- Add container status tag to Docker input plugin.
-- Add valuecounter aggregator plugin.
+- Add support for Solr 7 to the Solr (`solr`) input plugin.
+- Add owner tag on partitions in Burrow (`burrow`) input plugin.
+- Add container status tag to Docker (`docker`) input plugin.
+- Add ValueCounter (`valuecounter`) aggregator plugin.
 - Add new measurement with results of `pgrep` lookup to Procstat (`procstat`) input plugin.
 - Add support for comma in logparser timestamp format.
-- Add path tag to tail input plugin.
+- Add path tag to Tail (`tail`) input plugin.
 - Add log message when tail is added or removed from a file.
 - Add option to use of counter time in win perf counters.
-- Add energy and power field and device id tag to fibaro input.
-- Add http path configuration for OpenTSDB output.
+- Add energy and power field and device id tag to Fibaro (`fibaro`) input plugin.
+- Add HTTP path configuration for OpenTSDB output.
 - Gather IPMI metrics concurrently.
 - Add mongo document and connection metrics.
 - Add enum processor plugin.
@@ -76,24 +76,24 @@ menu:
 - Improve cloudwatch output performance.
 - Add x509_cert input plugin.
 - Add IPSIpAddress syntax to ipaddr conversion in snmp plugin.
-- Add filecount input plugin.
-- Add support for configuring an AWS endpoint_url.
-- Send all messages before waiting for results in kafka output.
-- Add support for lz4 compression to kafka output.
+- Add Filecount filecount input plugin.
+- Add support for configuring an AWS `endpoint_url`.
+- Send all messages before waiting for results in Kafka output plugin.
+- Add support for lz4 compression to Kafka output plugin.
 - Split multiple sensor keys in ipmi input.
 - Support StatisticValues in cloudwatch output plugin.
 - Add ip restriction for the prometheus_client output.
-- Add pgbouncer input plugin.
+- Add PgBouncer (`pgbouncer`) input plugin.
 - Add ActiveMQ input plugin.
 - Add wavefront parser plugin.
 - Add rename processor plugin.
 - Add message 'max_bytes' configuration to kafka input.
-- Add gopsutil meminfo fields to mem plugin.
-- Document how to parse telegraf logs.
+- Add gopsutil meminfo fields to Mem (`mem`) input plugin.
+- Document how to parse Telegraf logs.
 - Use dep v0.5.0.
 - Add ability to set measurement from matched text in grok parser.
-- Drop message batches in kafka output if too large.
-- Add support for static and random routing keys in kafka output.
+- Drop message batches in Kafka (`kafka`) output plugin if too large.
+- Add support for static and random routing keys in Kafka (`kafka`) output plugin.
 - Add logfmt parser plugin.
 - Add parser processor plugin.
 - Add Icinga2 input plugin.
