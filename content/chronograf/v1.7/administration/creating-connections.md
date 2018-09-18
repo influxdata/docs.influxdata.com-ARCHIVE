@@ -16,20 +16,18 @@ To create an InfluxDB connection in the Chronograf UI:
 
 1. Open Chronograf and click **Configuration** (wrench icon) in the navigation menu.
 2. Click **Add Connection**.
-
-  ![Chronograf connections landing page](/img/chronograf/v1.7/connection-landing-page.png)
-
+    ![Chronograf connections landing page](/img/chronograf/v1.7/connection-landing-page.png)
 3. Enter values for the following fields:
 
     ![InfluxDB connection credentials](/img/chronograf/v1.7/connection-influxdb.png)
 
-    * **Connection String**: Enter the hostname or IP address of the InfluxDB instance and the port. The field is prefilled with  `http://localhost:8086`.
-    * **Name**: Enter the name for this connection.
+    * **Connection URL**: Enter the hostname or IP address of the InfluxDB instance and the port. The field is prefilled with  `http://localhost:8086`.
+    * **Connection Name**: Enter the name for this connection.
     * **Username**: Enter the username that will be shared for this connection.
-      *Only required if [authorization is enabled](/influxdb/latest/administration/authentication_and_authorization/) on the InfluxDB instance to which you're connecting.*
+      *Required only if [authorization is enabled](/influxdb/latest/administration/authentication_and_authorization/) on the InfluxDB instance to which you're connecting.*
     * **Password**: Enter the password.
-      *Only required if [authorization is enabled](/influxdb/latest/administration/authentication_and_authorization/) on the InfluxDB instance to which you're connecting.*
-    * **Telegraf Database**: Enter the name of the Telegraf database. The field is prefilled with `telegraf`.
+      *Required only if [authorization is enabled](/influxdb/latest/administration/authentication_and_authorization/) on the InfluxDB instance to which you're connecting.*
+    * **Telegraf Database* Name*: Enter the name of the Telegraf database. The field is prefilled with `telegraf`.
     * **Default Retention Policy**: Enter the name of the default [retention policy](/influxdb/latest/concepts/glossary/#retention-policy-rp). If none is provided, it assumes `autogen`.
     * **Make this the default source**: By default, this option is selected and this InfluxDB connection will be used when Chronograf is launched.
 
