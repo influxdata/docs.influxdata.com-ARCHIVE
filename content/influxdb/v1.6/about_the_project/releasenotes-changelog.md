@@ -43,7 +43,11 @@ menu:
 
 ### Breaking changes
 
-*	If math is used with the same selector multiple times, it will now act as a selector rather than an aggregate. See [#9563](https://github.com/influxdata/influxdb/pull/9563) for details.
+*	If math is used with the same selector multiple times, it will now act as a selector
+rather than an aggregate. See [#9563](https://github.com/influxdata/influxdb/pull/9563) for details.
+* For data received from Prometheus endpoints, every Prometheus measurement is now
+stored in its own InfluxDB measurement rather than storing everything in the `_` measurement
+using the Prometheus measurement name as the `__name__` label.
 
 ### Features
 
