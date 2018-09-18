@@ -101,9 +101,9 @@ fields
   value = 308
 ```
 
-> In InfluxDB v1.5 and earlier, all measurement names written from remote endpoints
-> are prepended with an underscore (`_`).
-> In InfluxDB v1.6+, this is no longer the case.
+> In InfluxDB v1.5 and earlier, all Prometheus data goes into a single measurement
+> named `_` and the Prometheus measurement name is stored in the `__name__` label.
+> In InfluxDB v1.6+, every Prometheus measurement gets its own InfluxDB measurement.
 
 <dt>
 This format is different than the format used by the Telegraf Prometheus input plugin,
