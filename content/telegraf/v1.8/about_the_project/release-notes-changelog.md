@@ -1,5 +1,5 @@
 ---
-title: Telegraf 1.7 release notes
+title: Telegraf 1.8 release notes
 description: See the new features, bug fixes, breaking changes, and enhancements in the latest and earlier Telegraf releases.
 menu:
   telegraf_1_8:
@@ -7,6 +7,132 @@ menu:
     weight: 10
     parent: About the project
 ---
+
+## v1.8 [2018-09-??]
+
+### New Inputs
+
+- [activemq](./plugins/inputs/activemq/README.md) - Contributed by @mlabouardy
+- [beanstalkd](./plugins/inputs/beanstalkd/README.md) - Contributed by @44px
+- [filecount](./plugins/inputs/filecount/README.md) - Contributed by @sometimesfood
+- [file](./plugins/inputs/file/README.md) - Contributed by @maxunt
+- [icinga2](./plugins/inputs/icinga2/README.md) - Contributed by @mlabouardy
+- [kibana](./plugins/inputs/icinga2/README.md) - Contributed by @lpic10
+- [pgbouncer](./plugins/inputs/pgbouncer/README.md) - Contributed by @nerzhul
+- [temp](./plugins/inputs/temp/README.md) - Contributed by @pytimer
+- [tengine](./plugins/inputs/tengine/README.md) - Contributed by @ertaoxu
+- [vsphere](./plugins/inputs/vsphere/README.md) - Contributed by @prydin
+- [x509_cert](./plugins/inputs/x509_cert/README.md) - Contributed by @jtyr
+
+### New Processors
+
+- [enum](./plugins/processors/enum/README.md) - Contributed by @KarstenSchnitter
+- [parser](./plugins/processors/parser/README.md) - Contributed by @Ayrdrie & @maxunt
+- [rename](./plugins/processors/rename/README.md) - Contributed by @goldibex
+- [strings](./plugins/processors/strings/README.md) - Contributed by @bsmaldon
+
+### New Aggregators
+
+- [valuecounter](./plugins/aggregators/valuecounter/README.md) - Contributed by @piotr1212
+
+### New Outputs
+
+- [azure_monitor](./plugins/outputs/azure_monitor/README.md) - Contributed by @influxdata
+- [influxdb_v2](./plugins/outputs/influxdb_v2/README.md) - Contributed by @influxdata
+
+### New Parsers
+
+- [csv](/docs/DATA_FORMATS_INPUT.md#csv) - Contributed by @maxunt
+- [grok](/docs/DATA_FORMATS_INPUT.md#grok) - Contributed by @maxunt
+- [logfmt](/docs/DATA_FORMATS_INPUT.md#logfmt) - Contributed by @Ayrdrie & @maxunt
+
+### New Serializers
+
+- [splunkmetric](/plugins/serializers/splunkmetric/README.md) - Contributed by @ronnocol
+
+### Features
+
+- Add SSL/TLS support to Redis (`redis`) input plugin.
+- Add tengine input plugin.
+- Add power draw field to the NVIDIA SMI (`nvidia_smi`) input plugin.
+- Add support for Solr 7 to the Solr input plugin.
+- Add owner tag on partitions in Burrow input plugin.
+- Add container status tag to Docker input plugin.
+- Add valuecounter aggregator plugin.
+- Add new measurement with results of `pgrep` lookup to Procstat (`procstat`) input plugin.
+- Add support for comma in logparser timestamp format.
+- Add path tag to tail input plugin.
+- Add log message when tail is added or removed from a file.
+- Add option to use of counter time in win perf counters.
+- Add energy and power field and device id tag to fibaro input.
+- Add http path configuration for OpenTSDB output.
+- Gather IPMI metrics concurrently.
+- Add mongo document and connection metrics.
+- Add enum processor plugin.
+- Add user tag to procstat input.
+- Add support for multivalue metrics to collectd parser.
+- Add support for setting kafka client id.
+- Add file input plugin and grok parser.
+- Improve cloudwatch output performance.
+- Add x509_cert input plugin.
+- Add IPSIpAddress syntax to ipaddr conversion in snmp plugin.
+- Add filecount input plugin.
+- Add support for configuring an AWS endpoint_url.
+- Send all messages before waiting for results in kafka output.
+- Add support for lz4 compression to kafka output.
+- Split multiple sensor keys in ipmi input.
+- Support StatisticValues in cloudwatch output plugin.
+- Add ip restriction for the prometheus_client output.
+- Add pgbouncer input plugin.
+- Add ActiveMQ input plugin.
+- Add wavefront parser plugin.
+- Add rename processor plugin.
+- Add message 'max_bytes' configuration to kafka input.
+- Add gopsutil meminfo fields to mem plugin.
+- Document how to parse telegraf logs.
+- Use dep v0.5.0.
+- Add ability to set measurement from matched text in grok parser.
+- Drop message batches in kafka output if too large.
+- Add support for static and random routing keys in kafka output.
+- Add logfmt parser plugin.
+- Add parser processor plugin.
+- Add Icinga2 input plugin.
+- Add name, time, path and string field options to JSON parser.
+- Add forwarded records to sqlserver input.
+- Add Kibana input plugin.
+- Add csv parser plugin.
+- Add read_buffer_size option to statsd input.
+- Add azure_monitor output plugin.
+- Add queue_durability parameter to amqp_consumer input.
+- Add strings processor.
+- Add OAuth 2.0 support to HTTP output plugin.
+- Add Unix epoch timestamp support for JSON parser.
+- Add options for basic auth to haproxy input.
+- Add temp input plugin.
+- Add Beanstalkd input plugin.
+- Add means to specify server password for redis input.
+- Add Splunk Metrics serializer.
+- Add input plugin for VMware vSphere.
+- Align metrics window to interval in cloudwatch input.
+- Improve Azure Managed Instance support + more in sqlserver input.
+- Allow alternate binaries for iptables input plugin.
+- Add influxdb_v2 output plugin.
+
+### Bug fixes
+
+- Fix divide by zero in logparser input.
+- Fix instance and object name in performance counters with backslashes.
+- Reset/flush saved contents from bad metric.
+- Document all supported cli arguments.
+- Log access denied opening a service at debug level in win_services.
+- Add support for Kafka 2.0.
+- Fix nagios parser does not support ranges in performance data.
+- Fix nagios parser does not strip quotes from performance data.
+- Fix null value crash in postgresql_extensible input.
+- Remove the startup authentication check from the cloudwatch output.
+- Support tailing files created after startup in tail input.
+- Fix CSV format configuration loading.
+
 
 ## v1.7.4 [2018-08-29]
 
