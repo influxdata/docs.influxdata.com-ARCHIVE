@@ -266,12 +266,18 @@
 			a.btn {
 				margin: 2rem 0 1rem;
 				padding: 1em 1.5em;
+				display: inline-block;
 				background: @g20-white;
 				color: @c-pool;
-				display: inline-block;
 				border-radius: 3px;
 				font-size: 1rem;
 				font-weight: bold;
+				transition: all .2s;
+				box-shadow: 0 0 15px rgba(255,255,255,0);
+
+				&:hover {
+					box-shadow: 0 0 15px rgba(255,255,255,1);
+				}
 			}
 		}
 	}
