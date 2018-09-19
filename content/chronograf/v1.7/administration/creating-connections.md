@@ -32,7 +32,7 @@ To create an InfluxDB connection in the Chronograf UI:
     * **Make this the default source**: By default, this option is selected and this InfluxDB connection will be used when Chronograf is launched.
 
 4. Click **Add Connection**.
-   If the connection is valid, the Configuration page displays, including the new InfluxDB connection.
+   If the connection is valid, the Configuration page appears, including the new InfluxDB connection.
    If the connection cannot be created, the following error message appears:
    "Unable to create source: Error contacting source."
    If this occurs, ensure all connection credentials are correct and that the InfluxDB instance is running and accessible.
