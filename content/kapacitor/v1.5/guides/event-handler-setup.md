@@ -231,7 +231,7 @@ The following steps describe how to create a new Telegram bot.
     Click on the `t.me/<bot-username>` link in **@BotFather**'s response
     and click **Start** at the bottom of your Telegram application.
 
-    Your newly-created bot will appear in the chat list on the left side of the application.
+    Your newly created bot will appear in the chat list on the left side of the application.
 
 #### Telegram API access token
 
