@@ -48,10 +48,10 @@ Also include the database name using the `db=` query parameter.
 _**Example endpoints in Prometheus configuration file**_  
 ```yaml
 remote_write:
-  url: "http://localhost:8086/api/v1/prom/write?db=prometheus"
+  - url: "http://localhost:8086/api/v1/prom/write?db=prometheus"
 
 remote_read:
-  url: "http://localhost:8086/api/v1/prom/read?db=prometheus"
+  - url: "http://localhost:8086/api/v1/prom/read?db=prometheus"
 ```
 
 #### Read and write URLs with authentication
@@ -62,10 +62,10 @@ using the `u=` and `p=` query parameters respectively.
 _**Example endpoints with authentication enabled**_  
 ```yaml
 remote_write:
-  url: "http://localhost:8086/api/v1/prom/write?db=prometheus&u=username&p=password"
+  - url: "http://localhost:8086/api/v1/prom/write?db=prometheus&u=username&p=password"
 
 remote_read:
-  url: "http://localhost:8086/api/v1/prom/read?db=prometheus&u=username&p=password"
+  - url: "http://localhost:8086/api/v1/prom/read?db=prometheus&u=username&p=password"
 ```
 
 > Including plain text passwords in your Prometheus configuration file is not ideal.
