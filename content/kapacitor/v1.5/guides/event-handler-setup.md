@@ -315,7 +315,7 @@ The optional configuration settings are:
 Set to your Telegram [chat ID](#telegram-chat-id). This serves as the default chat ID if the TICKscript doesn't specify a chat ID.
 
 `parse-mode`  
-Set to `Markdown` or `HTML` for markdown-formatted or HTML-formatted alert messages.
+Set to `Markdown` or `HTML` for Markdown-formatted or HTML-formatted alert messages.
 The default `parse-mode` is `Markdown`.
 
 `disable-web-page-preview`  
