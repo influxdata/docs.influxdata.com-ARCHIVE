@@ -55,7 +55,7 @@ setting in the meta node and data node configuration files.
 
 #### Load balancer
 
-InfluxEnterprise does not function as a load balancer.
+InfluxDB Enterprise does not function as a load balancer.
 You will need to configure your own load balancer to send client traffic to the
 data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.6/tools/api/)).
 

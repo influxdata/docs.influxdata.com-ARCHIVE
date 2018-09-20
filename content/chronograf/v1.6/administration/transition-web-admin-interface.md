@@ -8,7 +8,7 @@ aliases:
   - /chronograf/v1.6/guides/transition-web-admin-interface/
 ---
 
-Versions 1.3 and later of [InfluxDB](/influxdb/latest/) and [InfluxEnterprise](/enterprise/latest/) do not support the [web admin interface](/influxdb/latest/tools/web_admin/), the builtin user interface for writing and querying data in InfluxDB.
+Versions 1.3 and later of [InfluxDB](/influxdb/latest/) and [InfluxDB Enterprise](/enterprise/latest/) do not support the [web admin interface](/influxdb/latest/tools/web_admin/), the builtin user interface for writing and querying data in InfluxDB.
 Chronograf replaces the web admin interface with improved tooling for querying data, writing data, and database management.
 
 The following sections describe the Chronograf features that relate to the web admin interface:
@@ -80,14 +80,14 @@ In the web admin interface, the `Query Template` dropdown was the only way to ma
 ### Chronograf
 
 In Chronograf, the `Admin` page includes a complete interface for user management.
-The `Admin` page supports both InfluxDB OSS users and InfluxEnterprise users; see the [User Management](/chronograf/latest/administration/user-management/) page for more information.
+The `Admin` page supports both InfluxDB OSS users and InfluxDB Enterprise users; see the [User Management](/chronograf/latest/administration/user-management/) page for more information.
 The `Admin` page allows users to:
 
 * View, create, and delete users
 * Change user passwords
 * Assign and remove permissions to or from a user
-* Create, edit, and delete roles (available in InfluxEnterprise only)
-* Assign and remove roles to or from a user (available in InfluxEnterprise only)
+* Create, edit, and delete roles (available in InfluxDB Enterprise only)
+* Assign and remove roles to or from a user (available in InfluxDB Enterprise only)
 
 ![Chronograf User Management i](/img/chronograf/v1.6/g-admin-chronousers1.png)
 

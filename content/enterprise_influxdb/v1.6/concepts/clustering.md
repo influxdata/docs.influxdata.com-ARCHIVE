@@ -9,11 +9,11 @@ menu:
     parent: Concepts
 ---
 
-This document describes in detail how clustering works in InfluxEnterprise. It starts with a high level description of the different components of a cluster and then delves into the implementation details.
+This document describes in detail how clustering works in InfluxDB Enterprise. It starts with a high level description of the different components of a cluster and then delves into the implementation details.
 
 ## Architectural Overview
 
-An InfluxEnterprise installation consists of three separate software processes: Data nodes, Meta nodes, and the Enterprise Web server. To run an InfluxDB cluster, only the meta and data nodes are required. Communication within a cluster looks like this:
+An InfluxDB Enterprise installation consists of three separate software processes: Data nodes, Meta nodes, and the Enterprise Web server. To run an InfluxDB cluster, only the meta and data nodes are required. Communication within a cluster looks like this:
 
 ```text
     ┌───────┐     ┌───────┐
@@ -80,7 +80,7 @@ On disk, the data is always organized by `<database>/<retention_policy>/<shard_i
 
 ## Optimal Server Counts
 
-When creating a cluster you'll need to choose how meta and data nodes to configure and connect. You can think of InfluxEnterprise as two separate clusters that communicate with each other: a cluster of meta nodes and one of data nodes. The number of meta nodes is driven by the number of meta node failures they need to be able to handle, while the number of data nodes scales based on your storage and query needs.
+When creating a cluster you'll need to choose how meta and data nodes to configure and connect. You can think of InfluxDB Enterprise as two separate clusters that communicate with each other: a cluster of meta nodes and one of data nodes. The number of meta nodes is driven by the number of meta node failures they need to be able to handle, while the number of data nodes scales based on your storage and query needs.
 
 The consensus protocol requires a quorum to perform any operation, so there should always be an odd number of meta nodes. For almost all use cases, 3 meta nodes is the correct number, and such a cluster operates normally even with the permanant loss of 1 meta node.
 
@@ -130,7 +130,7 @@ The important thing to note is how failures are handled. In the case of failures
 
 ### Hinted Handoff
 
-Hinted handoff is how InfluxEnterprise deals with data node outages while writes are happening. Hinted handoff is essentially a durable disk based queue. When writing at `any`, `one` or `quorum` consistency, hinted handoff is used when one or more replicas return an error after a success has already been returned to the client. When writing at `all` consistency, writes cannot return success unless all nodes return success. Temporarily stalled or failed writes may still go to the hinted handoff queues but the cluster would have already returned a failure response to the write. The receiving node creates a separate queue on disk for each data node (and shard) it cannot reach.
+Hinted handoff is how InfluxDB Enterprise deals with data node outages while writes are happening. Hinted handoff is essentially a durable disk based queue. When writing at `any`, `one` or `quorum` consistency, hinted handoff is used when one or more replicas return an error after a success has already been returned to the client. When writing at `all` consistency, writes cannot return success unless all nodes return success. Temporarily stalled or failed writes may still go to the hinted handoff queues but the cluster would have already returned a failure response to the write. The receiving node creates a separate queue on disk for each data node (and shard) it cannot reach.
 
 Let's again use the example of a write coming to `D` that should go to shard `1` on `A` and `B`. If we specified a consistency level of `one` and node `A` returns success, `D` immediately returns success to the client even though the write to `B` is still in progress.
 
