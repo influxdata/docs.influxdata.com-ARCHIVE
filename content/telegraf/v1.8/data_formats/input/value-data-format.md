@@ -1,4 +1,13 @@
-# Value
+---
+title: Value input data format
+description: ???
+menu:
+  telegraf_1_8:
+    name: Value
+    weight: 40
+    parent: input
+---
+
 
 The "value" data format translates single values into Telegraf metrics. This
 is done by assigning a measurement name and setting a single field ("value")

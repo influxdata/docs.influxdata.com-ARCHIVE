@@ -1,3 +1,13 @@
+---
+title: Wavefront input data format
+description: ???
+menu:
+  telegraf_1_8:
+    name: Wavefront
+    weight: 40
+    parent: input
+---
+
 # Wavefront
 
 Wavefront Data Format is metrics are parsed directly into Telegraf metrics.

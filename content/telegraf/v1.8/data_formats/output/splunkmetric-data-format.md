@@ -1,9 +1,18 @@
-# Graphite
+---
+title: SplunkMetric output data format
+description: ???
+menu:
+  telegraf_1_8:
+    name: SplunkMetric
+    weight: 40
+    parent: output
+---
 
-The Graphite data format translates graphite *dot* buckets directly into
-telegraf measurement names, with a single value field, and without any tags.
-By default, the separator is left as `.`, but this can be changed using the
-`separator` argument. For more advanced options, Telegraf supports specifying
+# SplunkMetric output data format
+
+The Graphite data format translates graphite *dot* buckets directly into Telegraf measurement names, with a single value field, and without any tags.
+By default, the separator is left as `.`, but this can be changed using the `separator` argument.
+For more advanced options, Telegraf supports specifying
 [templates](#templates) to translate graphite buckets into Telegraf metrics.
 
 ### Configuration

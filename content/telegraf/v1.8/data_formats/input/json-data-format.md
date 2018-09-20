@@ -1,12 +1,20 @@
-# JSON
+---
+title: JSON input data format
+description: ???
+menu:
+  telegraf_1_8:
+    name: JSON
+    weight: 40
+    parent: input
+---
 
-The JSON data format parses a [JSON][json] object or an array of objects into
-metric fields.
+
+The JSON data format parses a [JSON][json] object or an array of objects into metric fields.
 
 **NOTE:** All JSON numbers are converted to float fields.  JSON String are
 ignored unless specified in the `tag_key` or `json_string_fields` options.
 
-### Configuration
+## Configuration
 
 ```toml
 [[inputs.file]]
@@ -51,7 +59,7 @@ ignored unless specified in the `tag_key` or `json_string_fields` options.
   json_time_format = ""
 ```
 
-#### json_query
+### `json_query`
 
 The `json_query` is a [GJSON][gjson] path that can be used to limit the
 portion of the overall JSON document that should be parsed.  The result of the
@@ -59,7 +67,7 @@ query should contain a JSON object or an array of objects.
 
 Consult the GJSON [path syntax][gjson syntax] for details and examples.
 
-#### json_time_key, json_time_format
+### json_time_key, json_time_format
 
 By default the current time will be used for all created metrics, to set the
 time using the JSON document you can use the `json_time_key` and

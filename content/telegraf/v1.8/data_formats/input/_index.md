@@ -5,27 +5,28 @@ menu:
   telegraf_1_8:
     name: Input data formats
     weight: 20
-    parent: Concepts
+    parent: data_formats
 ---
 
 Telegraf is able to parse the following input data formats into metrics:
 
-1. [InfluxDB Line Protocol](#influxdb-line-protocol)
-2. [JSON](#json-data-format)
-3. [Graphite](#graphite-data-format)
-4. [Value](#value), ie: 45 or "booyah"
-5. [Nagios](#nagios-data-format)
-6. [Collectd](#collectd-data-format)
-7. [Dropwizard](#dropwizard-data-format)
+* [InfluxDB Line Protocol](/telegraf/v1.8/data_formats/influxdb-data-format)
+* [Grok](/telegraf/v1.8/data_formats/input-grok-data-format)
+* [JSON](/telegraf/v1.8/data_formats//input-json-data-format)
+* [Graphite](/telegraf/v1.8/data_formats/input-graphite-data-format)
+* [Value](/telegraf/v1.8/data_formats/input-value-data-format), ie: 45 or "booyah"
+* [Nagios](/telegraf/v1.8/data_formats/input-nagios-data-format)
+* [Collectd](/telegraf/v1.8/data_formats/input-collectd-data-format)
+* [Dropwizard](/telegraf/v1.8/data_formats/input-dropwizard-data-format)
 
 Telegraf metrics, like InfluxDB
 [points](/influxdb/latest/write_protocols/line_protocol_tutorial/),
 are a combination of four basic parts:
 
-1. Measurement name
-2. Tags
-3. Fields
-4. Timestamp
+* Measurement name
+* Tags
+* Fields
+* Timestamp
 
 These four parts are easily defined when using the [InfluxDB Line Protocol](/influxdb/latest/write_protocols/line_protocol_reference/) as a data format.
 Other data formats may require more advanced configuration to create usable Telegraf metrics.

@@ -1,3 +1,13 @@
+---
+title: Nagios input data format
+description: ???
+menu:
+  telegraf_1_8:
+    name: Nagios
+    weight: 40
+    parent: input
+---
+
 # Nagios
 
 The `nagios` data format parses the output of nagios plugins.

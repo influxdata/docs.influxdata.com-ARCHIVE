@@ -1,3 +1,13 @@
+---
+title: Dropwizard input data format
+description: ???
+menu:
+  telegraf_1_8:
+    name: Dropwizard
+    weight: 40
+    parent: input
+---
+
 # Dropwizard
 
 The `dropwizard` data format can parse the [JSON Dropwizard][dropwizard] representation of a single dropwizard metric registry. By default, tags are parsed from metric names as if they were actual influxdb line protocol keys (`measurement<,tag_set>`) which can be overriden by defining a custom [template pattern][templates]. All field value types are supported, `string`, `number` and `boolean`.

@@ -1,10 +1,18 @@
-# Logfmt
+---
+title: `logfmt` input data format
+description: ???
+menu:
+  telegraf_1_8:
+    name: collectd
+    weight: 40
+    parent: data_formats
+---
 
 The `logfmt` data format parses data in [logfmt] format.
 
 [logfmt]: https://brandur.org/logfmt
 
-### Configuration
+## Configuration
 
 ```toml
 [[inputs.file]]
@@ -21,12 +29,12 @@ The `logfmt` data format parses data in [logfmt] format.
   metric_name = "logfmt"
 ```
 
-### Metrics
+## Metrics
 
 Each key/value pair in the line is added to a new metric as a field.  The type
 of the field is automatically determined based on the contents of the value.
 
-### Examples
+## Examples
 
 ```
 - method=GET host=example.org ts=2018-07-24T19:43:40.275Z connect=4ms service=8ms status=200 bytes=1653

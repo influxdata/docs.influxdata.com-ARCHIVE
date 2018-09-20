@@ -1,7 +1,17 @@
-# CSV
+---
+title: CSV input data format
+description: ???
+menu:
+  telegraf_1_8:
+    name: CSV
+    weight: 40
+    parent: input
+---
 
-The `csv` parser creates metrics from a document containing comma separated
-values.
+
+# CSV input data format
+
+The `csv` parser creates metrics from a document containing comma-separated values.
 
 ### Configuration
 
