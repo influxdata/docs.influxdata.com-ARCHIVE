@@ -10,7 +10,7 @@ menu:
 
 Telegraf allows users to specify multiple output sinks in the configuration file.
 
-> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.7`.
+> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.8`.
 >The [Release notes and changelog](/telegraf/v1.8/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
 
 ## Supported Telegraf output plugins
@@ -29,9 +29,17 @@ The [AMQP (`amqp`) output plugin](https://github.com/influxdata/telegraf/tree/re
 
 Metrics are written to a topic exchange using `tag`, defined in configuration file as `RoutingTag`, as a routing key.
 
-### [Application Insights (`application_insights`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/application_insights) -- NEW in v.1.7
+### [Application Insights (`application_insights`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/application_insights)
 
 The [Application Insights (`application_insights`) output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/application_insights) writes Telegraf metrics to [Application Insights (Microsoft Azure)](https://azure.microsoft.com/en-us/services/application-insights/).
+
+### [Azure Monitor (`azure_monitor`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/azure_monitor) -- NEW in v.1.8
+
+>**Note:** The Azure Monitor custom metrics service is currently in preview and not available in a subset of Azure regions.
+
+The [Azure Monitor (`azure_monitor`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/azure_monitor) sends custom metrics to Azure Monitor. Azure Monitor has a metric resolution of one minute. To handle this in Telegraf, the Azure Monitor output plugin automatically aggregates metrics into one minute buckets, which are then sent to Azure Monitor on every flush interval.
+
+The metrics from each input plugin will be written to a separate Azure Monitor namespace, prefixed with `Telegraf/` by default. The field name for each metric is written as the Azure Monitor metric name. All field values are written as a summarized set that includes `min`, `max`, `sum`, and `count`. Tags are written as a dimension on each Azure Monitor metric.
 
 ### [CloudWatch (`cloudwatch`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/cloudwatch)
 
