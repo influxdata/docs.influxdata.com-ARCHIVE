@@ -4,7 +4,7 @@ description: Telegraf supports input data formats and output data formats for co
 menu:
    telegraf_1_8:
      name: Data formats
-     weight: 30
+     weight: 1
 ---
 This section covers the input data formats and output data formats used in the Telegraf plugin-driven server agent component of the InfluxData time series platform.
 

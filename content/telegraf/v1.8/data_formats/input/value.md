@@ -1,6 +1,7 @@
 ---
 title: Value input data format
-description: ???
+description: Use the "value" input data format to parse single values into
+Telegraf metrics.
 menu:
   telegraf_1_8:
     name: Value
@@ -16,7 +17,7 @@ as the parsed metric.
 ## Configuration
 
 You **must** tell Telegraf what type of metric to collect by using the
-`data_type` configuration option. Available options are:
+`data_type` configuration option. Available data type options are:
 
 1. integer
 2. float or long

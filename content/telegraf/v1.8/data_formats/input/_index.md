@@ -1,29 +1,30 @@
 ---
 title: Telegraf input data formats
-description: Telegraf supports parsing input data formats into metrics for InfluxDB Line Protocol, CollectD, CSV, Dropwizard, Graphite, Grok, JSON, Logfmt, Nagios, Value, and Wavefront.
+description: Telegraf supports parsing input data formats into Telegraf metrics
+for InfluxDB Line Protocol, CollectD, CSV, Dropwizard, Graphite, Grok, JSON, Logfmt, Nagios, Value, and Wavefront.
 menu:
   telegraf_1_8:
     name: Input data formats
-    weight: 10
+    weight: 1
     parent: data_formats
 ---
 
 Telegraf contains many general purpose plugins that support parsing input data
 using a configurable parser into [metrics][].  This allows, for example, the
 `kafka_consumer` input plugin to process messages in either InfluxDB Line
-Protocol or in JSON format.
+Protocol or in JSON format. Telegraf supports the following input data formats:
 
-- [InfluxDB Line Protocol](/telegraf/v1.8/plugins/data_formats/internal/influx)
-- [Collectd](/telegraf/v1.8/plugins/data_formats/internal/collectd)
-- [CSV](/telegraf/v1.8/plugins/data_formats/internal/csv)
-- [Dropwizard](/telegraf/v1.8/plugins/data_formats/internal/dropwizard)
-- [Graphite](/telegraf/v1.8/plugins/data_formats/internal/graphite)
-- [Grok](/telegraf/v1.8/plugins/data_formats/internal/grok)
-- [JSON](//telegraf/v1.8/plugins/data_formats/internal/json)
-- [Logfmt](/telegraf/v1.8/plugins/data_formats/internal/logfmt)
-- [Nagios](/telegraf/v1.8/plugins/data_formats/internal/nagios)
-- [Value](/telegraf/v1.8/plugins/data_formats/internal/value), ie: 45 or "booyah"
-- [Wavefront](/telegraf/v1.8/plugins/data_formats/internal/wavefront)
+- [InfluxDB Line Protocol](/telegraf/v1.8/plugins/data_formats/input/influx/)
+- [collectd](/telegraf/v1.8/plugins/data_formats/input/collectd/)
+- [CSV](/telegraf/v1.8/plugins/data_formats/input/csv/)
+- [Dropwizard](/telegraf/v1.8/plugins/data_formats/input/dropwizard/)
+- [Graphite](/telegraf/v1.8/plugins/data_formats/input/graphite/)
+- [Grok](/telegraf/v1.8/plugins/data_formats/input/grok/)
+- [JSON](//telegraf/v1.8/plugins/data_formats/input/json/)
+- [logfmt](/telegraf/v1.8/plugins/data_formats/input/logfmt/)
+- [Nagios](/telegraf/v1.8/plugins/data_formats/input/nagios/)
+- [Value](/telegraf/v1.8/plugins/data_formats/input/value/), ie: 45 or "booyah"
+- [Wavefront](/telegraf/v1.8/plugins/data_formats/input/wavefront/)
 
 Any input plugin containing the `data_format` option can use it to select the
 desired parser:

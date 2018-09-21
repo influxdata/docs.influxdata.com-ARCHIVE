@@ -1,6 +1,6 @@
 ---
 title: Graphite output data format
-description: The "Graphite" output data format is translated from Telegraf metrics using either the template pattern or tag support method.
+description: Use the "Graphite" output data format to serialize data from Telegraf metrics.
 menu:
   telegraf_1_8:
     name: Graphite
@@ -8,10 +8,10 @@ menu:
     parent: output
 ---
 
-The Graphite data format is translated from Telegraf metrics using either the
+The Graphite data format is serialized from Telegraf metrics using either the
 template pattern or tag support method.  You can select between the two
 methods using the [`graphite_tag_support`](#graphite-tag-support) option.  When set, the tag support method is used,
-otherwise the [template pattern][templates]) is used.
+otherwise the [template pattern][templates]) option is used.
 
 ## Configuration
 
@@ -39,7 +39,7 @@ otherwise the [template pattern][templates]) is used.
 
 When the `graphite_tag_support` option is enabled, the template pattern is not
 used.  Instead, tags are encoded using
-[Graphite tag support](http://graphite.readthedocs.io/en/latest/tags.html)
+[Graphite tag support](http://graphite.readthedocs.io/en/latest/tags.html),
 added in Graphite 1.1.  The `metric_path` is a combination of the optional
 `prefix` option, measurement name, and field name.
 
@@ -55,4 +55,4 @@ cpu.usage_idle;cpu=cpu-total;dc=us-east-1;host=tars 98.09 1455320690
 
 ### templates
 
-For more information on templates and template patterns, see [Template patterns](/docs/TEMPLATE_PATTERN.md).
+For more information on templates and template patterns, see [Template patterns](/telegraf/v1.8/data_formats/template-patterns/).

@@ -8,7 +8,7 @@ menu:
     parent: output
 ---
 
-The `json` output data format converts metrics into JSON documents.
+The `json` output data format serializes Telegraf metrics into JSON documents.
 
 ## Configuration
 

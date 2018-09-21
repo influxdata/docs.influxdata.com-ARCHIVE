@@ -9,11 +9,12 @@ menu:
     parent: output
 ---
 
-The `influx` data format outputs metrics into [InfluxDB Line Protocol][line
-protocol].  This is the recommended format unless another format is required
+The `influx` output data format outputs metrics into [InfluxDB Line Protocol][line
+protocol].  InfluxData recommends this data format unless another format is required
 for interoperability.
 
-### Configuration
+## Configuration
+
 ```toml
 [[outputs.file]]
   ## Files to write to, "stdout" is a specially handled file.
