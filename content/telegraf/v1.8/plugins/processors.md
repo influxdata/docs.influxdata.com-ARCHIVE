@@ -18,13 +18,13 @@ Processor plugins process metrics as they pass through and immediately emit resu
 ## Supported Telegraf processor plugins
 
 
-### [Converter (`converter`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/processors/converter) -- NEW in v.1.7
+### [Converter (`converter`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/converter) -- NEW in v.1.7
 
-The [Converter (`converter`) processor plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/processors/converter) is used to change the type of tag or field values. In addition to changing field types, it can convert between fields and tags. Values that cannot be converted are dropped.
+The [Converter (`converter`) processor plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/converter) is used to change the type of tag or field values. In addition to changing field types, it can convert between fields and tags. Values that cannot be converted are dropped.
 
-### [Override (`override`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/processors/override)
+### [Override (`override`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/override)
 
-The [Override (`override`) processor plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/processors/override) allows overriding all modifications that are supported by input plugins and aggregator plugins:
+The [Override (`override`) processor plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/override) allows overriding all modifications that are supported by input plugins and aggregator plugins:
 
 * `name_override`
 * `name_prefix`
@@ -41,13 +41,13 @@ Use case of this plugin encompass ensuring certain tags or naming conventions ar
 
 The [Printer (`printer`) processor plugin](https://github.com/influxdata/telegraf/tree/release-1.4/plugins/processors/printer) simply prints every metric passing through it.
 
-### [Regex (`regex`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/processors/regex) -- NEW in v.1.7
+### [Regex (`regex`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/regex) -- NEW in v.1.7
 
-The [Regex (`regex`) processor plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/processors/regex) transforms tag and field values using a regular expression (regex) pattern. If `result_key `parameter is present, it can produce new tags and fields from existing ones.
+The [Regex (`regex`) processor plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/regex) transforms tag and field values using a regular expression (regex) pattern. If `result_key `parameter is present, it can produce new tags and fields from existing ones.
 
-### [TopK (`topk`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/processors/topk) -- NEW in v.1.7
+### [TopK (`topk`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/topk) -- NEW in v.1.7
 
-The [TopK (`topk`) processor plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/processors/topk) is a filter designed to get the top series over a period of time. It can be tweaked to do its top `K` computation over a period of time, so spikes can be smoothed out.
+The [TopK (`topk`) processor plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/topk) is a filter designed to get the top series over a period of time. It can be tweaked to do its top `K` computation over a period of time, so spikes can be smoothed out.
 
 This processor goes through the following steps when processing a batch of metrics:
 
