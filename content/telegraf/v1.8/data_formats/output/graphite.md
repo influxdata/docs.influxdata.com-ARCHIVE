@@ -1,58 +1,59 @@
 ---
 title: Graphite output data format
-description: ???
+description: The "Graphite" output data format is translated from Telegraf metrics using either the template pattern or tag support method.
 menu:
   telegraf_1_8:
     name: Graphite
-    weight: 40
+    weight: 10
     parent: output
 ---
 
-# Graphite output data format
+The Graphite data format is translated from Telegraf metrics using either the
+template pattern or tag support method.  You can select between the two
+methods using the [`graphite_tag_support`](#graphite-tag-support) option.  When set, the tag support method is used,
+otherwise the [Template Pattern][templates]) is used.
 
-The Graphite data format translates graphite *dot* buckets directly into
-telegraf measurement names, with a single value field, and without any tags.
-By default, the separator is left as `.`, but this can be changed using the
-`separator` argument. For more advanced options, Telegraf supports specifying
-[templates](#templates) to translate graphite buckets into Telegraf metrics.
-
-### Configuration
+## Configuration
 
 ```toml
-[[inputs.exec]]
-  ## Commands array
-  commands = ["/tmp/test.sh", "/usr/bin/mycollector --foo=bar"]
+[[outputs.file]]
+  ## Files to write to, "stdout" is a specially handled file.
+  files = ["stdout", "/tmp/metrics.out"]
 
-  ## measurement name suffix (for separating different commands)
-  name_suffix = "_mycollector"
-
-  ## Data format to consume.
+  ## Data format to output.
   ## Each data format has its own unique set of configuration options, read
   ## more about them here:
-  ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
+  ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_OUTPUT.md
   data_format = "graphite"
 
-  ## This string will be used to join the matched values.
-  separator = "_"
+  ## Prefix added to each graphite bucket
+  prefix = "telegraf"
+  ## Graphite template pattern
+  template = "host.tags.measurement.field"
 
-  ## Each template line requires a template pattern. It can have an optional
-  ## filter before the template and separated by spaces. It can also have optional extra
-  ## tags following the template. Multiple tags should be separated by commas and no spaces
-  ## similar to the line protocol format. There can be only one default template.
-  ## Templates support below format:
-  ## 1. filter + template
-  ## 2. filter + template + extra tag(s)
-  ## 3. filter + template with field key
-  ## 4. default template
-  templates = [
-    "*.app env.service.resource.measurement",
-    "stats.* .host.measurement* region=eu-east,agent=sensu",
-    "stats2.* .host.measurement.field",
-    "measurement*"
-  ]
+  ## Support Graphite tags, recommended to enable when using Graphite 1.1 or later.
+  # graphite_tag_support = false
 ```
 
-#### templates
+### graphite_tag_support
+
+When the `graphite_tag_support` option is enabled, the template pattern is not
+used.  Instead, tags are encoded using
+[Graphite tag support](http://graphite.readthedocs.io/en/latest/tags.html)
+added in Graphite 1.1.  The `metric_path` is a combination of the optional
+`prefix` option, measurement name, and field name.
+
+The tag `name` is reserved by Graphite, any conflicting tags and will be encoded as `_name`.
+
+**Example conversion**:
+```
+cpu,cpu=cpu-total,dc=us-east-1,host=tars usage_idle=98.09,usage_user=0.89 1455320660004257758
+=>
+cpu.usage_user;cpu=cpu-total;dc=us-east-1;host=tars 0.89 1455320690
+cpu.usage_idle;cpu=cpu-total;dc=us-east-1;host=tars 98.09 1455320690
+```
+
+### templates
 
 Consult the [Template Patterns](/docs/TEMPLATE_PATTERN.md) documentation for
 details.

@@ -24,5 +24,5 @@ representation in order to be transmitted or viewed. Telegraf provides [output d
 Protocol][line protocol], which provides a high performance and one-to-one
 direct mapping from Telegraf metrics.
 
-[output data formats]: /telegraf/v1.8/data_formats/output
-[line protocol]: /telegraf/v1.8/data_formats/output/influx
+[output data formats]: /telegraf/v1.8/data_formats/output/
+[line protocol]: /telegraf/v1.8/data_formats/output/influx/

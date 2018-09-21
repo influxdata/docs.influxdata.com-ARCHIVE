@@ -1,19 +1,16 @@
 ---
 title: JSON output data format
-description: ???
+description: Telegraf's "json" output data format converts metrics into JSON documents.
 menu:
   telegraf_1_8:
     name: JSON
-    weight: 40
+    weight: 30
     parent: output
 ---
 
-
-# JSON
-
 The `json` output data format converts metrics into JSON documents.
 
-### Configuration
+## Configuration
 
 ```toml
 [[outputs.file]]
@@ -32,9 +29,10 @@ The `json` output data format converts metrics into JSON documents.
   json_timestamp_units = "1s"
 ```
 
-### Examples:
+## Examples
 
-Standard form:
+### Standard format
+
 ```json
 {
     "fields": {
@@ -51,9 +49,12 @@ Standard form:
 }
 ```
 
-When an output plugin needs to emit multiple metrics at one time, it may use
-the batch format.  The use of batch format is determined by the plugin,
-reference the documentation for the specific plugin.
+### Batch format
+
+When an output plugin needs to emit multiple metrics at one time, it may use the
+batch format.  The use of batch format is determined by the plugin -- reference
+the documentation for the specific plugin.
+
 ```json
 {
     "metrics": [

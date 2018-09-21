@@ -1,19 +1,17 @@
 ---
 title: Telegraf data parser
-description: Telegraf, the plugin-driven server agent component of the InfluxData time series platform, supports parsing input data formats into metrics for InfluxDB Line Protocol, JSON, Graphite, Value, Nagios, Collectd, and Dropwizard.
+description: About the Telegraf data parser and a sample configuration.
 menu:
   telegraf_1_8:
-    name: Telegraf data parser
+    name: Data parser
     weight: 10
     parent: data_formats
 ---
 
-# Example
-
 This description explains at a high level what the parser does and provides
 links to where additional information about the format can be found.
 
-### Configuration
+## Configuration
 
 This section contains the sample configuration for the parser.  Since the
 configuration for a parser is not have a standalone plugin, use the `file` or
@@ -34,17 +32,17 @@ configuration for a parser is not have a standalone plugin, use the `file` or
   example_option = "example_value"
 ```
 
-#### example_option
+### example_option
 
 If an option requires a more expansive explanation than can be included inline
 in the sample configuration, it may be described here.
 
-### Metrics
+## Metrics
 
 The optional Metrics section contains details about how the parser converts
 input data into Telegraf metrics.
 
-### Examples
+## Examples
 
 The optional Examples section can show an example conversion from the input
 format using InfluxDB Line Protocol as the reference format.

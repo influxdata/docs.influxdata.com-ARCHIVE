@@ -1,45 +1,43 @@
 ---
 title: InfluxDB Line Protocol output data format
-description: ???
+description: The "influx" data format outputs metrics into the InfluxDB Line
+Protocol format.
 menu:
   telegraf_1_8:
     name: InfluxDB Line Protocol
-    weight: 40
+    weight: 20
     parent: output
 ---
 
+The `influx` data format outputs metrics into [InfluxDB Line Protocol][line
+protocol].  This is the recommended format unless another format is required
+for interoperability.
 
-# `logfmt` data format
-
-The `logfmt` data format parses data in [logfmt] format.
-
-[logfmt]: https://brandur.org/logfmt
-
-## Configuration
-
+### Configuration
 ```toml
-[[inputs.file]]
-  files = ["example"]
+[[outputs.file]]
+  ## Files to write to, "stdout" is a specially handled file.
+  files = ["stdout", "/tmp/metrics.out"]
 
-  ## Data format to consume.
+  ## Data format to output.
   ## Each data format has its own unique set of configuration options, read
   ## more about them here:
-  ##   https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
-  data_format = "logfmt"
+  ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_OUTPUT.md
+  data_format = "influx"
 
-  ## Set the name of the created metric, if unset the name of the plugin will
-  ## be used.
-  metric_name = "logfmt"
+  ## Maximum line length in bytes.  Useful only for debugging.
+  influx_max_line_bytes = 0
+
+  ## When true, fields will be output in ascending lexical order.  Enabling
+  ## this option will result in decreased performance and is only recommended
+  ## when you need predictable ordering while debugging.
+  influx_sort_fields = false
+
+  ## When true, Telegraf will output unsigned integers as unsigned values,
+  ## i.e.: `42u`.  You will need a version of InfluxDB supporting unsigned
+  ## integer values.  Enabling this option will result in field type errors if
+  ## existing data has been written.
+  influx_uint_support = false
 ```
 
-## Metrics
-
-Each key/value pair in the line is added to a new metric as a field.  The type
-of the field is automatically determined based on the contents of the value.
-
-## Examples
-
-```
-- method=GET host=example.org ts=2018-07-24T19:43:40.275Z connect=4ms service=8ms status=200 bytes=1653
-+ logfmt method="GET",host="example.org",ts="2018-07-24T19:43:40.275Z",connect="4ms",service="8ms",status=200i,bytes=1653i
-```
+[line protocol]: /influxdb/latest/write_protocols/line_protocol_tutorial/

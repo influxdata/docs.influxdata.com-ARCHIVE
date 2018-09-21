@@ -8,15 +8,17 @@ menu:
     parent: data_formats
 ---
 
-In addition to output-specific data formats, Telegraf supports the following standard data formats that can be selected when configuring many of the Telegraf output plugins.
+In addition to output-specific data formats, Telegraf supports a set of
+standard data formats that may be selected from when configuring many output
+plugins.
 
-* [InfluxDB Line Protocol](/telegraf/v1.8/plugins/data_formats/output/influx)
-* [JSON](/telegraf/v1.8/plugins/data_formats/output/json)
-* [Graphite](/telegraf/v1.8/plugins/data_formats/output/graphite)
-* [SplunkMetric](/telegraf/v1.8/data_formats/output/splunkmetric)
+* [InfluxDB Line Protocol](/plugins/serializers/influx)
+* [JSON](/plugins/serializers/json)
+* [Graphite](/plugins/serializers/graphite)
+* [SplunkMetric](/plugins/serializers/splunkmetric)
 
-To identify the output data formats supported by a specific Telegraf output plugin, see the `data_format` configuration setting options.
-For example, in the File (`file`) output plugin, the configuration option specifies that the output data format is the InfluxDB Line Protocol format (`influx`).
+You will be able to identify the plugins with support by the presence of a
+`data_format` configuration option, for example, in the File (`file`) output plugin:
 
 ```toml
 [[outputs.file]]

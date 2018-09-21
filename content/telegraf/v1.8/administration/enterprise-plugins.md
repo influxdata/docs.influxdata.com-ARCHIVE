@@ -6,6 +6,7 @@ menu:
     name: Recommended plugins for Enterprise users
     weight: 20
     parent: Administration
+draft: true
 ---
 
 The Telegraf configuration file (`telegraf.conf`) lists all of the available plugins. The current version is available here:
