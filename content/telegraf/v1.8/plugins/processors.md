@@ -51,11 +51,15 @@ The [Printer (`printer`) processor plugin](https://github.com/influxdata/telegra
 
 ### [Regex (`regex`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/regex)
 
-The [Regex (`regex`) processor plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/regex) transforms tag and field values using a regular expression (regex) pattern. If `result_key `parameter is present, it can produce new tags and fields from existing ones.
+The [Regex (`regex`) processor plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/regex) transforms  -- NEW in v.1.8 tag and field values using a regular expression (regex) pattern. If `result_key `parameter is present, it can produce new tags and fields from existing ones.
+
+### [Rename (`rename`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/rename) -- NEW in v.1.8
+
+The [Rename (`rename`) processor plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/rename) renames InfluxDB measurements, fields, and tags.
 
 ### [Strings (`strings`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/strings) -- NEW in v.1.8
 
-The [Strings (`strings`) processor plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/strings) maps certain go string functions onto measurement, tag, and field values. Values can be modified in place or stored in another key.
+The [Strings (`strings`) processor plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/strings) maps certain Go string functions onto InfluxDB measurement, tag, and field values. Values can be modified in place or stored in another key.
 
 Implemented functions are:
 

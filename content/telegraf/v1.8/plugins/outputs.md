@@ -73,13 +73,17 @@ The [Graphite (`graphite`) output plugin](https://github.com/influxdata/telegraf
 
 The  [Graylog (`graylog`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/graylog) writes to a Graylog instance using the `gelf` format.
 
-### [HTTP (`http`)](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/http) -- NEW in v.1.7
+### [HTTP (`http`)](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/http)
 
 The [HTTP (`http`) output plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/http) sends metrics in a HTTP message encoded using one of the output data formats. For `data_formats` that support batching, metrics are sent in batch format.
 
 ### [InfluxDB v1.x (`influxdb`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/influxdb)
 
 The [InfluxDB v1.x (`influxdb`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/influxdb) writes to InfluxDB using HTTP or UDP.
+
+### [InfluxDB v2 (`influxdb_v2`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/influxdb)-- NEW in v.1.8
+
+The [InfluxDB v2 (`influxdb_v2`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/influxdb) writes metrics to the [InfluxDB 2.0](https://github.com/influxdata/platform) HTTP service.
 
 ### [Instrumental (`instrumental`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/instrumental)
 

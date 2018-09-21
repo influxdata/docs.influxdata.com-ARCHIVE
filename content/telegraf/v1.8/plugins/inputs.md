@@ -10,7 +10,7 @@ menu:
 
 Telegraf input plugins are used with the InfluxData time series platform to collect metrics from the system, services, or third party APIs. All metrics are gathered from the inputs you [enable and configure in the configuration file](/telegraf/v1.8/administration/configuration/).
 
-> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.7`.
+> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.8`.
 >The [Release Notes/Changelog](/telegraf/v1.8/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
 
 ## Usage instructions
@@ -20,7 +20,7 @@ View usage instructions for each service input by running `telegraf --usage <ser
 
 ## Supported Telegraf input plugins
 
-### [ActiveMQ (`activemq`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/activemq)
+### [ActiveMQ (`activemq`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/activemq) -- NEW in v.1.8
 
 The [ActiveMQ (`activemq`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/activemq) gathers queues, topics, and subscriber metrics using the ActiveMQ Console API.
 
@@ -42,7 +42,7 @@ server. The [ExtendedStatus](https://httpd.apache.org/docs/2.4/mod/core.html#ext
 to collect all available fields. For information about how to configure your server reference the
 [module documenation](https://httpd.apache.org/docs/2.4/mod/mod_status.html#enable).
 
-### [Aurora (`aurora`)](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/aurora) -- NEW in v.1.7
+### [Aurora (`aurora`)](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/aurora)
 
 The [Aurora input plugin](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/aurora) gathers metrics from [Apache Aurora](https://aurora.apache.org/) schedulers. For monitoring recommendations, see [Monitoring your Aurora cluster](https://aurora.apache.org/documentation/latest/operations/monitoring/).
 
@@ -50,7 +50,7 @@ The [Aurora input plugin](https://github.com/influxdata/telegraf/blob/master/plu
 
 The [Bcache (`bcache`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/bcache) gets bcache statistics from the `stats_total` directory and `dirty_data` file.
 
-### [Beanstalkd (`beanstalkd`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/beanstalkd)
+### [Beanstalkd (`beanstalkd`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/beanstalkd) -- NEW in v.1.8
 
 The [Beanstalkd (`beanstalkd`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/beanstalkd) collects server stats as well as tube stats (reported by `stats` and `stats-tube` commands respectively).
 
@@ -59,7 +59,7 @@ The [Beanstalkd (`beanstalkd`) input plugin](https://github.com/influxdata/teleg
 The [Bond (`bond`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/bond) collects network bond interface status, bond's slaves interfaces status and failures count of
 bond's slaves interfaces. The plugin collects these metrics from `/proc/net/bonding/*` files.
 
-### [Burrow (`burrow`)](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/burrow) -- NEW in v.1.7
+### [Burrow (`burrow`)](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/burrow)
 
 The [Burrow (`burrow` input plugin)](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/burrow) collects Apache Kafka topic, consumer, and partition status using the [Burrow](https://github.com/linkedin/Burrow) HTTP [HTTP Endpoint](https://github.com/linkedin/Burrow/wiki/HTTP-Endpoint).
 
@@ -156,17 +156,17 @@ The [Exec (`exec`) input plugin](https://github.com/influxdata/telegraf/tree/rel
 
 The [Fail2ban (`fail2ban`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/fail2ban) gathers the count of failed and banned ip addresses using [fail2ban](https://www.fail2ban.org/).
 
-### [Fibaro (`fibaro`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/fibaro) -- NEW in v.1.7
+### [Fibaro (`fibaro`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/fibaro)
 
 The [Fibaro (`fibaro`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/fibaro) makes HTTP calls to the Fibaro controller API to gather values of hooked devices. Those values could be true (`1`) or false (`0`) for switches, percentage for dimmers, temperature, etc.
 
-### [File (`file`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/file)
+### [File (`file`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/file) -- NEW in v.1.8
 
 The [File (`file`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/file) updates a list of files every interval and parses the contents using the selected input data format.
 
 Files will always be read in their entirety, if you wish to tail/follow a file use the [tail input plugin](#tail-tail) instead.
 
-### [Filecount (`filecount`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/filecount)
+### [Filecount (`filecount`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/filecount) -- NEW in v.1.8
 
 The [Filecount (`filecount`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/filecount) counts files in directories that match certain criteria.
 
@@ -210,7 +210,7 @@ as a proxy/router for the `/write` endpoint of the InfluxDB HTTP API.
 
 The [HTTP Response (`http_response`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/http_response) gathers metrics for HTTP responses. The measurements and fields include `response_time`, `http_response_code`, and `result_type`. Tags for measurements include `server` and `method`.
 
-### [Icinga2 (`icinga2`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/file)
+### [Icinga2 (`icinga2`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/incinga2) -- NEW in v.1.8
 
 The [Icinga2 (`icinga2`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/icinga2) gather status on running services and hosts using the [Icinga2 Remote API](https://docs.icinga.com/icinga2/latest/doc/module/icinga2/chapter/icinga2-api).
 
@@ -245,7 +245,7 @@ The [Jolokia2 Agent (`jolokia2_agent`) input plugin](https://github.com/influxda
 
 The [Jolokia2 Proxy (`jolokia2_proxy`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/jolokia2/README.md) eads JMX metrics from one or more targets by interacting with a [Jolokia](https://jolokia.org/) proxy REST endpoint using the [Jolokia](https://jolokia.org/) [JSON-over-HTTP protocol](https://jolokia.org/reference/html/protocol.html).
 
-### [JTI OpenConfig Telemetry](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/jti_openconfig_telemetry) -- NEW in v.1.7
+### [JTI OpenConfig Telemetry](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/jti_openconfig_telemetry)
 
 The [JTI OpenConfig Telemetry (`jti_openconfig_telemetry`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/jti_openconfig_telemetry) reads Juniper Networks implementation of OpenConfig telemetry data from listed sensors using the Junos Telemetry Interface. Refer to
 [openconfig.net](http://openconfig.net/) for more details about OpenConfig and [Junos Telemetry Interface (JTI)](https://www.juniper.net/documentation/en_US/junos/topics/concept/junos-telemetry-interface-oveview.html).
@@ -270,7 +270,7 @@ The [Kernel (`kernel`) input plugin](https://github.com/influxdata/telegraf/blob
 
 The [Kernel VMStat input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/system/KERNEL_VMSTAT_README.md) gathers kernel statistics from `/proc/vmstat`.
 
-### [Kibana (`kibana`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/kibana)
+### [Kibana (`kibana`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/kibana) -- NEW in v.1.8
 
 The [Kibana (`kibana`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/kibana) queries the Kibana status API to obtain the health status of Kibana and some useful metrics.
 
@@ -284,7 +284,7 @@ and containers for a single host. It is assumed that this plugin is running as p
 Kubernetes installation. This means that Telegraf is running on every node within the cluster. Therefore, you
 should configure this plugin to talk to its locally running kubelet.
 
-### [LeoFS (`leofs`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/leofs) -- NEW in v.1.7
+### [LeoFS (`leofs`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/leofs)
 
 The [LeoFS (`leofs`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/leofs) gathers metrics of LeoGateway, LeoManager, and LeoStorage using SNMP. See [System monitoring](https://leo-project.net/leofs/docs/admin/system_admin/monitoring/) in the [LeoFS documentation](https://leo-project.net/leofs/docs/) for more information.
 
@@ -306,7 +306,7 @@ The [Lustre2 (`lustre2`) input plugin](https://github.com/influxdata/telegraf/tr
 
 The [Mailchimp (`mailchimp`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/mailchimp) gathers metrics from the `/3.0/reports` MailChimp API.
 
-### [Mcrouter (`mcrouter`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/mcrouter) -- NEW in v.1.7
+### [Mcrouter (`mcrouter`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/mcrouter)
 
 The [mcrouter (`mcrouter`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/mcrouter) gathers statistics data from a mcrouter instance. [Mcrouter](https://github.com/facebook/mcrouter) is a memcached protocol router, developed and maintained by Facebook, for scaling memcached (http://memcached.org/) deployments. It's a core component of cache infrastructure at Facebook and Instagram where mcrouter handles almost 5 billion requests per second at peak.
 
@@ -388,7 +388,7 @@ The [Nstat (`nstat`) input plugin](https://github.com/influxdata/telegraf/tree/r
 
 The [NTPq (`ntpq`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/ntpq) gets standard NTP query metrics, requires ntpq executable.
 
-### [NVIDIA SMI (`nvidia-smi`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/nvidia_smi) -- NEW in v.1.7
+### [NVIDIA SMI (`nvidia-smi`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/nvidia_smi)
 
 The [NVIDIA SMI (`nvidia-smi`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/nvidia_smi) uses a query on the [NVIDIA System Management Interface (`nvidia-smi`)](https://developer.nvidia.com/nvidia-system-management-interface) binary to pull GPU stats including memory and GPU usage, temp and other.
 
@@ -414,7 +414,7 @@ The [PF (`pf`) input plugin](https://github.com/influxdata/telegraf/tree/release
 the state table: the number of current entries in the table, and counters for the number of searches, inserts, and
 removals to the table. The pf plugin retrieves this information by invoking the `pfstat` command.
 
-### [PgBouncer (`pgbouncer`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/pgbouncer)
+### [PgBouncer (`pgbouncer`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/pgbouncer) -- NEW in v.1.8
 
 The [PgBouncer (`pgbouncer`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/pgbuncer) provides metrics for your PgBouncer load balancer. For information about the metrics, see the [PgBouncer documentation](https://pgbouncer.github.io/usage.html).
 
@@ -544,7 +544,7 @@ StatsD messages are formatted as described in the original [etsy statsd](https:/
 
 The [Swap (`swap`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/system/SWAP_README.md) gathers metrics about swap memory usage. For more information about Linux swap spaces, see [All about Linux swap space](https://www.linux.com/news/all-about-linux-swap-space)
 
-### [Syslog (`syslog`)](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/syslog) -- NEW in v.1.7
+### [Syslog (`syslog`)](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/syslog)
 
 The [Syslog (`syslog`) input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/syslog) listens for syslog messages transmitted over
 [UDP](https://tools.ietf.org/html/rfc5426) or [TCP](https://tools.ietf.org/html/rfc5425). Syslog messages should be formatted according to [RFC 5424](https://tools.ietf.org/html/rfc5424).
@@ -571,11 +571,11 @@ The [Teamspeak 3 (`teamspeak`) input plugin](https://github.com/influxdata/teleg
 The [Telegraf v1.x (`internal`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/internal) collects metrics about the Telegraf v1.x agent itself.
 Note that some metrics are aggregates across all instances of one type of plugin.
 
-### [Temp (`temp`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/temp)
+### [Temp (`temp`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/temp) -- NEW in v.1.8
 
 The [Temp (`temp`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/temp) collects temperature data from sensors.
 
-### [Tengine (`tengine`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/tengine)
+### [Tengine (`tengine`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/tengine) -- NEW in v.1.8
 
 The [Tengine (`tengine`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/tengine) gathers status metrics from the [Tengine Web Server](http://tengine.taobao.org/) using the [Reqstat module](http://tengine.taobao.org/document/http_reqstat.html).
 
@@ -603,7 +603,7 @@ caching DNS resolver.
 
 The [Varnish (`varnish`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/varnish) gathers stats from [Varnish HTTP Cache](https://varnish-cache.org/).
 
-### [VMware vSphere (`vsphere`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/vsphere)
+### [VMware vSphere (`vsphere`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/vsphere) -- NEW in v.1.8
 
 The [VMware vSphere (`vsphere`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/vsphere) uses the vSphere API to gather metrics from multiple vCenter servers (clusters, hosts, VMs, and data stores).
 
@@ -622,7 +622,7 @@ all instances "". By default the plugin does not return `_Total` when it is quer
 
 The [Win_services (`win_services`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/win_services) reports Windows services info.
 
-### [X509 Cert (`x509_cert`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/x509_cert)
+### [X509 Cert (`x509_cert`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/x509_cert) -- NEW in v.1.8
 
 The [X509 Cert (`x509_cert`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/x509_cert) provides information about X509 certificate accessible using the local file or network connection.
 
