@@ -1,6 +1,7 @@
 ---
 title: Grok input data format
-description: ???
+description: Use the grok data format to parse line-delimited data using a
+regular expression-like language.
 menu:
   telegraf_1_8:
     name: Grok
@@ -8,28 +9,23 @@ menu:
     parent: input
 ---
 
-# Grok
-
-The grok data format parses line delimited data using a regular expression like
+The grok data format parses line delimited data using a regular expression-like
 language.
 
-The best way to get acquainted with grok patterns is to read the logstash docs,
-which are available here:
-  https://www.elastic.co/guide/en/logstash/current/plugins-filters-grok.html
-
-The grok parser uses a slightly modified version of logstash "grok"
-patterns, with the format:
+If you need to become familiar with grok patterns, see [Grok Basics](https://www.elastic.co/guide/en/logstash/current/plugins-filters-grok.html#_grok_basics)
+in the Logstash documentation. The grok parser uses a slightly modified version of logstash "grok"
+patterns, using the format:
 
 ```
 %{<capture_syntax>[:<semantic_name>][:<modifier>]}
 ```
 
-The `capture_syntax` defines the grok pattern that's used to parse the input
+The `capture_syntax` defines the grok pattern that is used to parse the input
 line and the `semantic_name` is used to name the field or tag.  The extension
 `modifier` controls the data type that the parsed item is converted to or
 other special handling.
 
-By default all named captures are converted into string fields.
+By default, all named captures are converted into string fields.
 Timestamp modifiers can be used to convert captures to the timestamp of the
 parsed metric.  If no timestamp is parsed the metric will be created using the
 current time.
@@ -74,10 +70,11 @@ as well as support for most of
 _Golang regular expressions do not support lookahead or lookbehind.
 logstash patterns that depend on these are not supported._
 
-If you need help building patterns to match your logs,
-you will find the https://grokdebug.herokuapp.com application quite useful!
+If you need help building patterns to match your logs, the
+[Grok Debugger application](https://grokdebug.herokuapp.com) might be helpful.
 
-### Configuration
+## Configuration
+
 ```toml
 [[inputs.file]]
   ## Files to parse each interval.
@@ -121,7 +118,7 @@ you will find the https://grokdebug.herokuapp.com application quite useful!
   grok_timezone = "Canada/Eastern"
 ```
 
-#### Timestamp Examples
+### Timestamp examples
 
 This example input and config parses a file using a custom timestamp conversion:
 
@@ -167,7 +164,7 @@ will be processed based on the current machine timezone configuration. Lastly, i
 timezone from the list of Unix [timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones),
 grok will offset the timestamp accordingly.
 
-#### TOML Escaping
+### TOML escaping
 
 When saving patterns to the configuration file, keep in mind the different TOML
 [string](https://github.com/toml-lang/toml#string) types and the escaping
@@ -208,7 +205,7 @@ A multi-line literal string allows us to encode the pattern:
   grok_custom_patterns = 'UNICODE_ESCAPE (?:\\u[0-9A-F]{4})+'
 ```
 
-#### Tips for creating patterns
+### Tips for creating patterns
 
 Writing complex patterns can be difficult, here is some advice for writing a
 new pattern or testing a pattern developed [online](https://grokdebug.herokuapp.com).

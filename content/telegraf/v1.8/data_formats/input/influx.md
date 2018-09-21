@@ -1,21 +1,19 @@
 ---
 title: InfluxDB Line Protocol input data format
-description: ???
+description: Use the InfluxDB Line Protocol input data format to parse InfluxDB metrics directly into Telegraf metrics.
 menu:
   telegraf_1_8:
     name: InfluxDB Line Protocol
-    weight: 40
+    weight: 60
     parent: input
 ---
 
+There are no additional configuration options for InfluxDB [line protocol][]. The
+InfluxDB metrics are parsed directly into Telegraf metrics.
 
-# `logfmt` data format
+[line protocol]: /influxdb/latest/write_protocols/line/
 
-The `logfmt` data format parses data in [logfmt] format.
-
-[logfmt]: https://brandur.org/logfmt
-
-## Configuration
+### Configuration
 
 ```toml
 [[inputs.file]]
@@ -25,21 +23,5 @@ The `logfmt` data format parses data in [logfmt] format.
   ## Each data format has its own unique set of configuration options, read
   ## more about them here:
   ##   https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
-  data_format = "logfmt"
-
-  ## Set the name of the created metric, if unset the name of the plugin will
-  ## be used.
-  metric_name = "logfmt"
-```
-
-## Metrics
-
-Each key/value pair in the line is added to a new metric as a field.  The type
-of the field is automatically determined based on the contents of the value.
-
-## Examples
-
-```
-- method=GET host=example.org ts=2018-07-24T19:43:40.275Z connect=4ms service=8ms status=200 bytes=1653
-+ logfmt method="GET",host="example.org",ts="2018-07-24T19:43:40.275Z",connect="4ms",service="8ms",status=200i,bytes=1653i
+  data_format = "influx"
 ```

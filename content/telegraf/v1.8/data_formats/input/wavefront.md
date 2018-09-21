@@ -4,17 +4,15 @@ description: ???
 menu:
   telegraf_1_8:
     name: Wavefront
-    weight: 40
+    weight: 110
     parent: input
 ---
 
-# Wavefront
+The Wavefront input data format parse Wavefront data into Telegraf metrics.
+For more information on the Wavefront native data format, see
+[Wavefront Data Format](https://docs.wavefront.com/wavefront_data_format.html) in the Wavefront documentation.
 
-Wavefront Data Format is metrics are parsed directly into Telegraf metrics.
-For more information about the Wavefront Data Format see
-[here](https://docs.wavefront.com/wavefront_data_format.html).
-
-### Configuration
+## Configuration
 
 There are no additional configuration options for Wavefront Data Format line-protocol.
 

@@ -1,10 +1,10 @@
 ---
 title: Nagios input data format
-description: ???
+description: Use the Nagios input data format to parse the output of Nagios plugins.
 menu:
   telegraf_1_8:
     name: Nagios
-    weight: 40
+    weight: 90
     parent: input
 ---
 

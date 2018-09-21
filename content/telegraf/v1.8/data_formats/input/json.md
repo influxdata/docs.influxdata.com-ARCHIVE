@@ -1,15 +1,17 @@
 ---
 title: JSON input data format
-description: ???
+description: Use the JSON input data format to parse [JSON][json] objects, or
+an array of objects, into Telegraf metric fields.
 menu:
   telegraf_1_8:
     name: JSON
-    weight: 40
+    weight: 70
     parent: input
 ---
 
 
-The JSON data format parses a [JSON][json] object or an array of objects into metric fields.
+The JSON input data format parses a [JSON][json] object or an array of objects
+into Telegraf metric fields.
 
 **NOTE:** All JSON numbers are converted to float fields.  JSON String are
 ignored unless specified in the `tag_key` or `json_string_fields` options.
@@ -81,9 +83,10 @@ time" which is defined to be the specific time: `Mon Jan 2 15:04:05 MST 2006`.
 Consult the Go [time][time parse] package for details and additional examples
 on how to set the time format.
 
-### Examples
+## Examples
 
-#### Basic Parsing
+### Basic parsing
+
 Config:
 ```toml
 [[inputs.file]]
@@ -108,7 +111,7 @@ Output:
 myjsonmetric a=5,b_c=6
 ```
 
-#### Name, Tags, and String Fields
+### Name, tags, and string fields
 
 Config:
 ```toml
@@ -138,7 +141,7 @@ Output:
 my_json,my_tag_1=foo a=5,b_c=6,my_field="description"
 ```
 
-#### Arrays
+### Arrays
 
 If the JSON data is an array, then each object within the array is parsed with
 the configured settings.
@@ -178,7 +181,7 @@ file a=5,b_c=6 1136387040000000000
 file a=7,b_c=8 1168527840000000000
 ```
 
-#### Query
+### Query
 
 The `json_query` option can be used to parse a subset of the document.
 

@@ -4,7 +4,7 @@ description: Use template patterns to describe how dot-delimited strings should 
 menu:
   telegraf_1_8:
     name: Template patterns
-    weight: 20
+    weight: 30
     parent: data_formats
 ---
 

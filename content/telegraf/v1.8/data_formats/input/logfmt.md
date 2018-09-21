@@ -1,14 +1,14 @@
 ---
 title: `logfmt` input data format
-description: ???
+description: Use the "logfmt" input data format to parse "logfmt" data into Telegraf metrics.
 menu:
   telegraf_1_8:
     name: logfmt
-    weight: 40
+    weight: 80
     parent: input
 ---
 
-The `logfmt` data format parses data in [logfmt] format.
+The `logfmt` data format parses [logfmt] data into Telegraf metrics.
 
 [logfmt]: https://brandur.org/logfmt
 

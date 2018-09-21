@@ -1,19 +1,17 @@
 ---
 title: CSV input data format
-description: ???
+description: Use the "csv" input data format to parse a document containing comma-separated values into Telegraf metrics.
+
 menu:
   telegraf_1_8:
     name: CSV
-    weight: 40
+    weight: 20
     parent: input
 ---
 
+The CSV input data format parses documents containing comma-separated values into Telegraf metrics.
 
-# CSV input data format
-
-The `csv` parser creates metrics from a document containing comma-separated values.
-
-### Configuration
+## Configuration
 
 ```toml
 [[inputs.file]]
@@ -71,7 +69,7 @@ The `csv` parser creates metrics from a document containing comma-separated valu
   ## this must be specified if `csv_timestamp_column` is specified
   csv_timestamp_format = ""
   ```
-#### csv_timestamp_column, csv_timestamp_format
+### csv_timestamp_column, csv_timestamp_format
 
 By default the current time will be used for all created metrics, to set the
 time using the JSON document you can use the `csv_timestamp_column` and
@@ -85,12 +83,12 @@ which is defined to be the specific time: `Mon Jan 2 15:04:05 MST 2006`.
 Consult the Go [time][time parse] package for details and additional examples
 on how to set the time format.
 
-### Metrics
+## Metrics
 
 One metric is created for each row with the columns added as fields.  The type
 of the field is automatically determined based on the contents of the value.
 
-### Examples
+## Examples
 
 Config:
 ```

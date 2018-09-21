@@ -18,7 +18,11 @@ This section covers the input data formats and output data formats used in the T
 
 ## [Telegraf data parser](/telegraf/v1.8/data_formats/parser-example/)
 
-The [Telegraf data parser](/telegraf/v1.8/data_formats/parser-example/) is used to parse data inputs into the Graphite data format.
+The [Telegraf data parser](/telegraf/v1.8/data_formats/parser-example/) is used to parse data inputs from Telegraf metrics into the Graphite data format.
+
+## [Telegraf data serializer](/telegraf/v1.8/data_formats/serializer-example/)
+
+The [Telegraf data serializer](/telegraf/v1.8/data_formats/serializer-example/) is used to serialize data inputs from the Graphite data format into Telegraf metrics.
 
 ## [Telegraf template patterns](/telegraf/v1.8/data_formats/template-patterns/)
 

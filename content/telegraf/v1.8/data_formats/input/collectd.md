@@ -1,29 +1,27 @@
 ---
 title: `collectd` input data format
-description: ???
+description: Use the collectd input data format to parse the collectd network binary protocol to create tags for host, instance, type, and type instance.
 menu:
   telegraf_1_8:
     name: collectd
-    weight: 40
+    weight: 10
     parent: input
 ---
 
-The collectd format parses the collectd binary network protocol.  
-Tags are created for host, instance, type, and type instance.  All collectd values are added as float64 fields.
+The collectd input data format parses the collectd network binary protocol to create tags for host, instance, type, and type instance.  All collectd values are added as float64 fields.
 
-For more information about the binary network protocol, see
-[here](https://collectd.org/wiki/index.php/Binary_protocol).
+For more information, see [binary protocol](https://collectd.org/wiki/index.php/Binary_protocol) in the collectd Wiki.
 
 You can control the cryptographic settings with parser options.  
 Create an authentication file and set `collectd_auth_file` to the path of the file, then set the desired security level in `collectd_security_level`.
 
-Additional information including client setup can be found
-[here](https://collectd.org/wiki/index.php/Networking_introduction#Cryptographic_setup).
+For more information, including client setup, see
+[Cryptographic setup](https://collectd.org/wiki/index.php/Networking_introduction#Cryptographic_setup) in the collectd Wiki.
 
 You can also change the path to the typesdb or add additional typesdb using
 `collectd_typesdb`.
 
-### Configuration
+## Configuration
 
 ```toml
 [[inputs.file]]
