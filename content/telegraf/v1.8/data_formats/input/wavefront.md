@@ -5,7 +5,7 @@ menu:
   telegraf_1_8:
     name: Wavefront
     weight: 110
-    parent: input
+    parent: Input
 ---
 
 The Wavefront input data format parse Wavefront data into Telegraf metrics.
