@@ -5,7 +5,7 @@ menu:
   telegraf_1_8:
     name: Serializer
     weight: 20
-    parent: data_formats
+    parent: Data formats
 ---
 
 This description explains at a high level what the serializer does and
