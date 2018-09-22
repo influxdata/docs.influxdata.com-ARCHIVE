@@ -5,7 +5,7 @@ menu:
   telegraf_1_8:
     name: Graphite
     weight: 40
-    parent: input
+    parent: Input
 ---
 
 The Graphite data format translates Graphite *dot* buckets directly into
