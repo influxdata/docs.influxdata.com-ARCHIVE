@@ -5,7 +5,7 @@ menu:
   telegraf_1_8:
     name: Output data formats
     weight: 1
-    parent: data_formats
+    parent: Data formats
 ---
 
 In addition to output-specific data formats, Telegraf supports the following set
