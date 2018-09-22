@@ -5,7 +5,7 @@ menu:
   telegraf_1_8:
     name: Grok
     weight: 40
-    parent: input
+    parent: Input
 ---
 
 The grok data format parses line delimited data using a regular expression-like
