@@ -29,7 +29,7 @@ In addition to [third party software incorporated in InfluxDB](http://docs.influ
 | [Go language library for exporting performance and runtime metrics to external metrics systems (i.e., statsite, statsd)](https://github.com/armon/go-metrics) (armon/go-metrics) | [MIT](https://github.com/armon/go-metrics/blob/master/LICENSE) |
 | [Golang implementation of JavaScript Object](https://github.com/dvsekhvalnov/jose2go) (dvsekhvalnov/jose2go) | [MIT](https://github.com/dvsekhvalnov/jose2go/blob/master/LICENSE) |
 | [Collection of useful handlers for Go net/http package ](https://github.com/gorilla/handlers) (gorilla/handlers) | [BSD-2](https://github.com/gorilla/handlers/blob/master/LICENSE) |
-| [A powerful URL router and dispatcher for golang](https://github.com/gorilla/mux) (gorilla/mux) | [BSD-2](https://github.com/gorilla/handlers/blob/master/LICENSE) |
+| [A powerful URL router and dispatcher for golang](https://github.com/gorilla/mux) (gorilla/mux) | [BSD-3](https://github.com/gorilla/mux/blob/master/LICENSE) |
 | [Golang connection multiplexing library](https://github.com/hashicorp/yamux/) (hashicorp/yamux) | [Mozilla 2.0](https://github.com/hashicorp/yamux/blob/master/LICENSE) |
 | [Codec - a high performance and feature-rich Idiomatic encode/decode and rpc library for msgpack and Binc](https://github.com/hashicorp/go-msgpack) (hashicorp/go-msgpack) | [BSD-3](https://github.com/hashicorp/go-msgpack/blob/master/LICENSE) |
 | [Go language implementation of the Raft consensus protocol](https://github.com/hashicorp/raft) (hashicorp/raft) | [Mozilla 2.0](https://github.com/hashicorp/raft/blob/master/LICENSE) |

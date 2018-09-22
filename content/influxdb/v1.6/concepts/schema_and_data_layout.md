@@ -190,7 +190,7 @@ Here are some recommendations for longer shard group durations:
 > **Note:** Note that `INF` (infinite) is not a [valid shard group duration](/influxdb/v1.6/query_language/database_management/#retention-policy-management).
 In extreme cases where data covers decades and will never be deleted, a long shard group duration like `1040w` (20 years) is perfectly valid.
 
-Here are some other factors to take into considerations when determining shard group duration:
+Here are some other factors to take into consideration when determining shard group duration:
 
 * Shard groups should be twice as long as the longest time range of the most frequent queries
 * Shard groups should each contain more than 100,000 [points](/influxdb/v1.6/concepts/glossary/#point) per shard group

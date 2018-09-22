@@ -64,10 +64,9 @@ a {
 	}
 }
 .article-content {
-	display: inline-block;
 	text-align: left;
-	margin: 0 auto;
 	width: 100%;
+	max-width: 760px;
 	color: @article-text;
 
 	a:link,
@@ -102,7 +101,7 @@ a {
 		transition: color 0.2s ease;
 		color: @default-text-color;
 	}
-	a code {
+	p,li > a code {
 		&:after {
 			content: "";
 			position: absolute;
@@ -141,13 +140,13 @@ a {
 		line-height: 1.45em;
 	}
 	table {
-		display: block;
-		margin-bottom: @margin-bottom-base;
+		margin: 1em 0 @margin-bottom-base;
 		overflow-x: auto;
+		background-color: @article-bg;
 	}
 
 	/* Headings */
-	h1,h2,h3,h4 {
+	h1,h2,h3,h4,h5,h6 {
 		width: 100%;
 		color: @article-text-heading;
 
@@ -180,17 +179,26 @@ a {
 	h2 {
 		font-size: @heading2Size;
 		font-weight: 600;
-		padding-bottom: 0.25em;
-		margin-top: 1.5em;
-		border-bottom: 2px solid @article-line-color;
+		margin: 1.5em 0 .5em;
 	}
 	h3 {
 		font-size: @heading3Size;
 		font-weight: 400;
+		margin: 1em 0 .5em;
 	}
 	h4 {
 		font-size: @heading4Size;
 		font-weight: 400;
+		font-style: italic;
+		margin: 1.25em 0 .5em;
+	}
+	h5 {
+		line-height: 1.6em;
+	}
+	h6 {
+		font-size: @paragraphSize*.95;
+		font-style: italic;
+		line-height: 1.6em;
 	}
 
 	&.section-landing{
@@ -211,6 +219,7 @@ a {
 			display: list-item;;
 			list-style-position: outside;
 			padding-left: 0.5em;
+			margin-bottom: .25em;
 		}
 		p {
 			margin-left: 0;
@@ -257,9 +266,6 @@ a {
 		max-width: 100%;
 		height: auto;
 		border-radius: @radius;
-	}
-	table {
-		background-color: @article-bg;
 	}
 	td,
 	th {
@@ -655,20 +661,6 @@ a {
 		padding: 3rem;
 	}
 	.article-content {
-		dt,
-		blockquote,
-		pre,
-		p,
-		ol,
-		ul,
-		.view-in-chronograf,
-		.vertical-tabs-container {
-			width: ~"calc(100% - "@indented-element-size~")";
-			margin-left: @indented-element-size;
-		}
-		table {
-			margin-left: @indented-element-size;
-		}
 		code,
 		pre,
 		td,
@@ -685,7 +677,7 @@ a {
 		padding-left: @sidebar-large-width;
 	}
 	.article-section {
-		padding: 5rem;
+		padding: 4.5rem;
 	}
 	.old-version {
 		width: 60%;

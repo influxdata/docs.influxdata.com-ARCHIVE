@@ -64,4 +64,4 @@ emit the aggregates and not the original metrics.
 **NOTE** That since aggregators only aggregate metrics within their period, that
 historical data is not supported. In other words, if your metric timestamp is more
 than `now() - period` in the past, it will not be aggregated. If this is a feature
-that you need, please comment on this [GitHub issue](https://github.com/influxdata/telegraf/issues/1992)
+that you need, please comment on this [GitHub issue](https://github.com/influxdata/telegraf/issues/1992).

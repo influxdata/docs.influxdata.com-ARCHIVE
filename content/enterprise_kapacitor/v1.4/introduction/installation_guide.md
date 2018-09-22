@@ -217,7 +217,7 @@ Under normal operations alerts are sent out once. Under failure conditions alert
 
 This release of Kapacitor Enterprise is only partly cluster-aware, meaning that some commands on the cluster will be automatically replicated throughout the cluster while other commands need to be explicitly run on each member:
 
-- Alert handler-related API calls and actions are cluster-aware. Defining and alert handlers or queries about the state of topics only require a request to any single member within the cluster.
+- Alert handler-related API calls and actions are cluster-aware. Defining alert handlers or queries about the state of topics only require a request to any single member within the cluster.
 - Other API calls are not cluster-aware. Tasks must be explicitly defined on each member that you want to run a task.
 
 > ***Recommendation:*** Duplicate a task the same number of times as the `redundancy` configuration option of the alert section.
