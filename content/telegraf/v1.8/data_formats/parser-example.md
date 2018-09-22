@@ -5,7 +5,7 @@ menu:
   telegraf_1_8:
     name: Data parser
     weight: 10
-    parent: data_formats
+    parent: Data formats
 ---
 
 This description explains at a high level what the parser does and provides
