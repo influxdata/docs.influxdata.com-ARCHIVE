@@ -8,7 +8,7 @@ menu:
     parent: About the project
 ---
 
-## v1.8 [2018-09-??]
+## v1.8 [2018-09-21]
 
 ### New input plugins
 
