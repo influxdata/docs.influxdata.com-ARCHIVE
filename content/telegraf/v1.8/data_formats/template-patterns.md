@@ -5,7 +5,7 @@ menu:
   telegraf_1_8:
     name: Template patterns
     weight: 30
-    parent: data_formats
+    parent: Data formats
 ---
 
 
