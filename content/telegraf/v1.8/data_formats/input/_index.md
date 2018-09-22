@@ -5,7 +5,7 @@ menu:
   telegraf_1_8:
     name: Input data formats
     weight: 1
-    parent: data_formats
+    parent: Data formats
 ---
 
 Telegraf contains many general purpose plugins that support parsing input data
