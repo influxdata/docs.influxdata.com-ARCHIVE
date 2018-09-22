@@ -1,5 +1,5 @@
 ---
-title: Telegraf data formats
+title: Data formats
 description: Telegraf supports input data formats and output data formats for converting input and output data.
 menu:
    telegraf_1_8:
