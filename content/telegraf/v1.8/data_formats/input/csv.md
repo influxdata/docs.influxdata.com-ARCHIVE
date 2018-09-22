@@ -5,7 +5,7 @@ menu:
   telegraf_1_8:
     name: CSV
     weight: 20
-    parent: input
+    parent: Input
 ---
 
 The CSV input data format parses documents containing comma-separated values into Telegraf metrics.
