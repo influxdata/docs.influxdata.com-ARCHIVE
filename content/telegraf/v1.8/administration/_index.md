@@ -4,7 +4,7 @@
  menu:
    telegraf_1_8:
      name: Administration
-     weight: 50
+     weight: 60
 
 ---
 

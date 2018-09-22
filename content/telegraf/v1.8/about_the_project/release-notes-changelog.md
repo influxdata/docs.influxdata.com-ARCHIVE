@@ -12,43 +12,43 @@ menu:
 
 ### New input plugins
 
-- [ActiveMQ (`activemq`)](./plugins/inputs/activemq/README.md) - Contributed by @mlabouardy
-- [beanstalkd](./plugins/inputs/beanstalkd/README.md) - Contributed by @44px
-- [filecount](./plugins/inputs/filecount/README.md) - Contributed by @sometimesfood
-- [file](./plugins/inputs/file/README.md) - Contributed by @maxunt
-- [icinga2](./plugins/inputs/icinga2/README.md) - Contributed by @mlabouardy
-- [Kibana (`kibana`)](./plugins/inputs/icinga2/README.md) - Contributed by @lpic10
-- [PgBouncer (`pgbouncer`)](./plugins/inputs/pgbouncer/README.md) - Contributed by @nerzhul
-- [temp](./plugins/inputs/temp/README.md) - Contributed by @pytimer
-- [tengine](./plugins/inputs/tengine/README.md) - Contributed by @ertaoxu
-- [vsphere](./plugins/inputs/vsphere/README.md) - Contributed by @prydin
-- [x509_cert](./plugins/inputs/x509_cert/README.md) - Contributed by @jtyr
+- [ActiveMQ (`activemq`)](/telegraf/tree/release-1.8/plugins/inputs/activemq/) - Contributed by @mlabouardy
+- [Beanstalkd (`beanstalkd`)](/telegraf/tree/release-1.8/plugins/inputs/beanstalkd/) - Contributed by @44px
+- [Filecount (`filecount`)](/telegraf/tree/release-1.8/plugins/inputs/filecount/) - Contributed by @sometimesfood
+- [File (`file`)](/telegraf/tree/release-1.8/plugins/inputs/file/) - Contributed by @maxunt
+- [Icinga2 (`icinga2`)](/telegraf/tree/release-1.8/plugins/inputs/icinga2/) - Contributed by @mlabouardy
+- [Kibana (`kibana`)](/telegraf/tree/release-1.8/plugins/inputs/icinga2/) - Contributed by @lpic10
+- [PgBouncer (`pgbouncer`)](/telegraf/tree/release-1.8/plugins/inputs/pgbouncer/) - Contributed by @nerzhul
+- [Temp (`temp`)](/telegraf/tree/release-1.8/plugins/inputs/temp/) - Contributed by @pytimer
+- [Tengine (`tengine`)](/telegraf/tree/release-1.8/plugins/inputs/tengine/) - Contributed by @ertaoxu
+- [VMware vSphere (`vsphere`)](/telegraf/tree/release-1.8/plugins/inputs/vsphere/) - Contributed by @prydin
+- [X509 Cert (`x509_cert`)](/telegraf/tree/release-1.8/plugins/inputs/x509_cert/) - Contributed by @jtyr
 
 ### New processor plugins
 
-- [enum](./plugins/processors/enum/README.md) - Contributed by @KarstenSchnitter
-- [parser](./plugins/processors/parser/README.md) - Contributed by @Ayrdrie & @maxunt
-- [rename](./plugins/processors/rename/README.md) - Contributed by @goldibex
-- [strings](./plugins/processors/strings/README.md) - Contributed by @bsmaldon
+- [Enum (`enum`)](/telegraf/tree/release-1.8/plugins/processors/enum/) - Contributed by @KarstenSchnitter
+- [Parser (`parser`)](/telegraf/tree/release-1.8/plugins/processors/parser/) - Contributed by @Ayrdrie & @maxunt
+- [Rename (`rename`)](/telegraf/tree/release-1.8/plugins/processors/rename/) - Contributed by @goldibex
+- [Strings (`strings`)](/telegraf/tree/release-1.8/plugins/processors/strings/) - Contributed by @bsmaldon
 
 ### New aggregator plugins
 
-- [ValueCounter (`valuecounter`)](./plugins/aggregators/valuecounter/README.md) - Contributed by @piotr1212
+- [ValueCounter (`valuecounter`)](/telegraf/tree/release-1.8/plugins/aggregators/valuecounter/) - Contributed by @piotr1212
 
 ### New output plugins
 
-- [azure_monitor](./plugins/outputs/azure_monitor/README.md) - Contributed by @influxdata
-- [influxdb_v2](./plugins/outputs/influxdb_v2/README.md) - Contributed by @influxdata
+- [Azure Monitor (`azure_monitor`)](/telegraf/tree/release-1.8/plugins/outputs/azure_monitor/) - Contributed by @influxdata
+- [InfluxDB v2 (`influxdb_v2`)](/telegraf/tree/release-1.8/plugins/influxdb_v2/) - Contributed by @influxdata
 
-### New parsers
+### New input data formats (parsers)
 
-- [csv](/docs/DATA_FORMATS_INPUT.md#csv) - Contributed by @maxunt
-- [grok](/docs/DATA_FORMATS_INPUT.md#grok) - Contributed by @maxunt
-- [logfmt](/docs/DATA_FORMATS_INPUT.md#logfmt) - Contributed by @Ayrdrie & @maxunt
+- [csv](/telegraf/v1.8/data_formats/input/csv) - Contributed by @maxunt
+- [grok](/telegraf/v1.8/data_formats/input/grok/) - Contributed by @maxunt
+- [logfmt](/telegraf/v1.8/data_formats/input/logfmt/) - Contributed by @Ayrdrie & @maxunt
 
-### New Serializers
+### New output data formats (serializers)
 
-- [splunkmetric](/plugins/serializers/splunkmetric/README.md) - Contributed by @ronnocol
+- [splunkmetric](/telegraf/v1.8/data_formats/output/splunkmetric/) - Contributed by @ronnocol
 
 ### Features
 
