@@ -4,7 +4,7 @@ description: This section includes definitions of important terms for related to
 menu:
   telegraf_1_8:
     name: Glossary of terms
-    weight: 40
+    weight: 30
     parent: Concepts
 ---
 

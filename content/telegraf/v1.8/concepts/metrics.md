@@ -4,7 +4,7 @@ description: Telegraf metrics are internal representations used to model data du
 menu:
   telegraf_1_8:
     name: Metrics
-    weight: 40
+    weight: 10
     parent: Concepts
 ---
 
