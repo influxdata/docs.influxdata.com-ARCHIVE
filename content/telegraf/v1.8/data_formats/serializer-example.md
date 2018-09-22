@@ -1,7 +1,6 @@
 ---
 title: Telegraf data serializer
-description: About the Telegraf data serializer, configuration, and a sample
-configuration.
+description: About the Telegraf data serializer, configuration, and a sample configuration.
 menu:
   telegraf_1_8:
     name: Serializer

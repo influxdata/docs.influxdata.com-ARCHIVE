@@ -1,5 +1,5 @@
 ---
-title: `collectd` input data format
+title: Collectd input data format
 description: Use the collectd input data format to parse the collectd network binary protocol to create tags for host, instance, type, and type instance.
 menu:
   telegraf_1_8:

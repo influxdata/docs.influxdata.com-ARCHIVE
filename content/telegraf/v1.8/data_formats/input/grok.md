@@ -1,7 +1,6 @@
 ---
 title: Grok input data format
-description: Use the grok data format to parse line-delimited data using a
-regular expression-like language.
+description: Use the grok data format to parse line-delimited data using a regular expression-like language.
 menu:
   telegraf_1_8:
     name: Grok
