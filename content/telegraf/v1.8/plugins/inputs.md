@@ -530,7 +530,7 @@ The [SNMP (`snmp`) input plugin](https://github.com/influxdata/telegraf/blob/rel
 
 The [Socket Listener (`socket_listener`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/socket_listener/README.md) listens for messages from streaming (tcp, unix) or datagram
 (UDP, unixgram) protocols. Messages are expected in the
-[Telegraf Input Data Formats](https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md).
+[Telegraf Input Data Formats](/telegraf/v1.8/data_formats/input/).
 
 ### [StatsD (`statsd`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/statsd/README.md)
 
