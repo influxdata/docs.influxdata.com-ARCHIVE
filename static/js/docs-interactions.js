@@ -189,7 +189,9 @@ $(document).ready( function(){
 	})
 })
 
-
+/*
+ * Reposition sidebar on vertical scroll
+ */
 
 $(document).ready( function() {
 	var offsetElement = $("#main-nav")
