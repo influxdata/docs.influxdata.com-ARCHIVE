@@ -26,19 +26,19 @@ menu:
 
 ### New processor plugins
 
-- [Enum (`enum`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/enum/) - Contributed by @KarstenSchnitter
-- [Parser (`parser`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/parser/) - Contributed by @Ayrdrie & @maxunt
-- [Rename (`rename`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/rename/) - Contributed by @goldibex
-- [Strings (`strings`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/strings/) - Contributed by @bsmaldon
+- [Enum (`enum`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/processors/enum/README.md) - Contributed by @KarstenSchnitter
+- [Parser (`parser`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/processors/parser/README.md) - Contributed by @Ayrdrie & @maxunt
+- [Rename (`rename`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/processors/rename/README.md) - Contributed by @goldibex
+- [Strings (`strings`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/processors/strings/README.md) - Contributed by @bsmaldon
 
 ### New aggregator plugins
 
-- [ValueCounter (`valuecounter`)](https://github.com/influxdata/telegraf/blob/master/plugins/aggregators/valuecounter/README.md) - Contributed by @piotr1212
+- [ValueCounter (`valuecounter`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/aggregators/valuecounter/README.md) - Contributed by @piotr1212
 
 ### New output plugins
 
-- [Azure Monitor (`azure_monitor`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/azure_monitor/) - Contributed by @influxdata
-- [InfluxDB v2 (`influxdb_v2`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/influxdb_v2/) - Contributed by @influxdata
+- [Azure Monitor (`azure_monitor`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/azure_monitor/README.md) - Contributed by @influxdata
+- [InfluxDB v2 (`influxdb_v2`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/influxdb_v2/README.md) - Contributed by @influxdata
 
 ### New input data formats (parsers)
 
