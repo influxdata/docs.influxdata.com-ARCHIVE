@@ -46,6 +46,13 @@ server. The [ExtendedStatus](https://httpd.apache.org/docs/2.4/mod/core.html#ext
 to collect all available fields. For information about how to configure your server reference the
 [module documenation](https://httpd.apache.org/docs/2.4/mod/mod_status.html#enable).
 
+### [Apache Kafka Consumer (`kafka_consumer`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/kafka_consumer/README.md)
+
+The [Apache Kafka Consumer (`kafka_consumer`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/kafka_consumer/README.md) polls a specified Kafka topic and adds messages to InfluxDB.
+Messages are expected in the line protocol format.
+[Consumer Group](http://godoc.org/github.com/wvanbergen/kafka/consumergroup) is used to talk to the Kafka cluster so
+multiple instances of Telegraf can read from the same topic in parallel.
+
 ### [Apache Solr (`solr`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/solr/README.md)
 
 The [Apache Solr (`solr`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/solr/README.md) collects stats using the MBean Request Handler.
@@ -255,14 +262,6 @@ The [Jolokia2 Proxy (`jolokia2_proxy`) input plugin](https://github.com/influxda
 The [JTI OpenConfig Telemetry (`jti_openconfig_telemetry`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/jti_openconfig_telemetry/README.md) reads Juniper Networks implementation of OpenConfig telemetry data from listed sensors using the Junos Telemetry Interface. Refer to
 [openconfig.net](http://openconfig.net/) for more details about OpenConfig and [Junos Telemetry Interface (JTI)](https://www.juniper.net/documentation/en_US/junos/topics/concept/junos-telemetry-interface-oveview.html).
 
-
-### [Kafka Consumer (`kafka_consumer`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/kafka_consumer/README.md)
-
-The [Kafka Consumer (`kafka_consumer`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/kafka_consumer/README.md) polls a specified Kafka topic and adds messages to InfluxDB.
-Messages are expected in the line protocol format.
-[Consumer Group](http://godoc.org/github.com/wvanbergen/kafka/consumergroup) is used to talk to the Kafka cluster so
-multiple instances of Telegraf can read from the same topic in parallel.
-
 ### [Kapacitor (`kapacitor`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/kapacitor/README.md)
 
 The [Kapacitor (`kapacitor`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/kapacitor/README.md) will collect metrics from the given Kapacitor instances.
@@ -313,7 +312,7 @@ The [Mailchimp (`mailchimp`) input plugin](https://github.com/influxdata/telegra
 
 ### [Mcrouter (`mcrouter`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/mcrouter/README.md)
 
-The [mcrouter (`mcrouter`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/mcrouter/README.md) gathers statistics data from a mcrouter instance. [Mcrouter](https://github.com/facebook/mcrouter) is a memcached protocol router, developed and maintained by Facebook, for scaling memcached (http://memcached.org/) deployments. It's a core component of cache infrastructure at Facebook and Instagram where mcrouter handles almost 5 billion requests per second at peak.
+The [Mcrouter (`mcrouter`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/mcrouter/README.md) gathers statistics data from a mcrouter instance. [Mcrouter](https://github.com/facebook/mcrouter) is a memcached protocol router, developed and maintained by Facebook, for scaling memcached (http://memcached.org/) deployments. It's a core component of cache infrastructure at Facebook and Instagram where mcrouter handles almost 5 billion requests per second at peak.
 
 ### [Mem (`mem`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/mem/README.md)
 
