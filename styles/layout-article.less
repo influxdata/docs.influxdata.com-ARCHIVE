@@ -31,9 +31,7 @@ a {
 
 .article {
 	background-color: @article-bg;
-	position: fixed;
 	overflow: auto;
-	height: ~"calc(100% - "@sidebar--toggle-height~" - "@nav-height~")";
 	width: 100%;
 
 	&::-webkit-scrollbar { background-color: @article-bg; width: @scrollbar-width; }
@@ -52,7 +50,6 @@ a {
 		background-position: center center;
 		background-size: cover !important;
 		background-repeat: no-repeat;
-		position: relative;
 
 		h1 {
 			margin-bottom: 0;
@@ -101,23 +98,26 @@ a {
 		transition: color 0.2s ease;
 		color: @default-text-color;
 	}
-	p,li > a code {
-		&:after {
-			content: "";
-			position: absolute;
-			top: -1px;
-			right: -1px;
-			width: 0;
-			height: 0;
-			border-style: solid;
-			border-width: 0 .5em .5em 0;
-			border-color: transparent @article-code-color transparent transparent;
-			opacity: .5;
-			transition: all .2s;
-		}
-		&:hover:after {
-			opacity: 1;
-			border-color: transparent @default-link-hover transparent transparent;
+	p,li {
+		a code {
+			position: relative;
+			&:after {
+				content: "";
+				position: absolute;
+				top: -1px;
+				right: -1px;
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 0 .5em .5em 0;
+				border-color: transparent @article-code-color transparent transparent;
+				opacity: .5;
+				transition: all .2s;
+			}
+			&:hover:after {
+				opacity: 1;
+				border-color: transparent @default-link-hover transparent transparent;
+			}
 		}
 	}
 
@@ -354,8 +354,6 @@ a {
 		border-color: @article-code-border;
 		border-style: solid;
 		padding: 0.1em 0.5em;
-		position: relative;
-		top: -0.1em;
 		-webkit-font-smoothing: subpixel-antialiased !important;
 		-moz-osx-font-smoothing: auto !important;
 		font-weight: 400 !important;
@@ -371,7 +369,6 @@ a {
 		border-width: @border-small-screen @border-small-screen @border-small-screen @thick-left-border;
 		background-color: @article-code-bg;
 		border-color: @article-code-border;
-    position: relative;
     z-index: 99;
 		line-height: 1.1em !important;
 
@@ -655,7 +652,6 @@ a {
 @media (min-width: @breakpoint-small) {
 	.article {
 		padding-left: @sidebar-small-width;
-		height: ~"calc(100% - "@nav-height~")";
 	}
 	.article-section {
 		padding: 3rem;

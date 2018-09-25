@@ -20,15 +20,15 @@
 // --------------------------------------------------
 
 html {
-	overflow: hidden;
+	overflow: auto;
 }
 html,body {
 	width: 100%;
 	height: 100%;
 	background-color: @body-bg-color;
+  -webkit-overflow-scrolling: touch;
 }
 body {
-	padding-top: @nav-height;
 	padding-bottom: @sidebar--toggle-height;
 	color: @default-text-color;
 	line-height: 1;
