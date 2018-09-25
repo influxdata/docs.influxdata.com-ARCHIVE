@@ -40,7 +40,7 @@ For instructions on building from source, see Chronograf's [README](https://gith
 
 ## Connect Chronograf to your InfluxDB instance or InfluxDB Enterprise cluster
 
-1. Point your web browser to `http://localhost:8888`.
+1. Point your web browser to [http://localhost:8888](http://localhost:8888).
 2. Fill out the form  that appears with the following details:
   * **Connection String**: Enter the host name or IP of the machine that InfluxDB is running on, and be sure to include InfluxDB's default port `8086`.
   * **Connection Name**: Enter a name for your connection string.
