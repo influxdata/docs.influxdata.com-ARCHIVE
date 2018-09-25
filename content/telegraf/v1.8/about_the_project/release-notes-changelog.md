@@ -12,17 +12,17 @@ menu:
 
 ### New input plugins
 
-- [ActiveMQ (`activemq`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/activemq/) - Contributed by @mlabouardy
-- [Beanstalkd (`beanstalkd`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/beanstalkd/) - Contributed by @44px
-- [Filecount (`filecount`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/filecount/) - Contributed by @sometimesfood
-- [File (`file`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/file/) - Contributed by @maxunt
-- [Icinga2 (`icinga2`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/icinga2/) - Contributed by @mlabouardy
-- [Kibana (`kibana`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/icinga2/) - Contributed by @lpic10
-- [PgBouncer (`pgbouncer`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/pgbouncer/) - Contributed by @nerzhul
-- [Temp (`temp`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/temp/) - Contributed by @pytimer
-- [Tengine (`tengine`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/tengine/) - Contributed by @ertaoxu
-- [VMware vSphere (`vsphere`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/vsphere/) - Contributed by @prydin
-- [X509 Cert (`x509_cert`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/x509_cert/) - Contributed by @jtyr
+- [ActiveMQ (`activemq`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/activemq/README.md) - Contributed by @mlabouardy
+- [Beanstalkd (`beanstalkd`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/beanstalkd/README.md) - Contributed by @44px
+- [File (`file`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/file/README.md) - Contributed by @maxunt
+- [Filecount (`filecount`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/filecount/README.md) - Contributed by @sometimesfood
+- [Icinga2 (`icinga2`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/icinga2/README.md) - Contributed by @mlabouardy
+- [Kibana (`kibana`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/kibana/README.md) - Contributed by @lpic10
+- [PgBouncer (`pgbouncer`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/pgbouncer/README.md) - Contributed by @nerzhul
+- [Temp (`temp`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/temp/README.md) - Contributed by @pytimer
+- [Tengine (`tengine`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/tengine/README.md) - Contributed by @ertaoxu
+- [VMware vSphere (`vsphere`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/vsphere/README.md) - Contributed by @prydin
+- [X509 Cert (`x509_cert`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/x509_cert/README.md) - Contributed by @jtyr
 
 ### New processor plugins
 
@@ -33,7 +33,7 @@ menu:
 
 ### New aggregator plugins
 
-- [ValueCounter (`valuecounter`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/aggregators/valuecounter/) - Contributed by @piotr1212
+- [ValueCounter (`valuecounter`)](https://github.com/influxdata/telegraf/blob/master/plugins/aggregators/valuecounter/README.md) - Contributed by @piotr1212
 
 ### New output plugins
 

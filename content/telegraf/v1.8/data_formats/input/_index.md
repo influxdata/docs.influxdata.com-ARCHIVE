@@ -13,17 +13,17 @@ using a configurable parser into [metrics][].  This allows, for example, the
 `kafka_consumer` input plugin to process messages in either InfluxDB Line
 Protocol or in JSON format. Telegraf supports the following input data formats:
 
-- [InfluxDB Line Protocol](/telegraf/v1.8/plugins/data_formats/input/influx/)
-- [collectd](/telegraf/v1.8/plugins/data_formats/input/collectd/)
-- [CSV](/telegraf/v1.8/plugins/data_formats/input/csv/)
-- [Dropwizard](/telegraf/v1.8/plugins/data_formats/input/dropwizard/)
-- [Graphite](/telegraf/v1.8/plugins/data_formats/input/graphite/)
-- [Grok](/telegraf/v1.8/plugins/data_formats/input/grok/)
-- [JSON](//telegraf/v1.8/plugins/data_formats/input/json/)
-- [logfmt](/telegraf/v1.8/plugins/data_formats/input/logfmt/)
-- [Nagios](/telegraf/v1.8/plugins/data_formats/input/nagios/)
-- [Value](/telegraf/v1.8/plugins/data_formats/input/value/), ie: 45 or "booyah"
-- [Wavefront](/telegraf/v1.8/plugins/data_formats/input/wavefront/)
+- [InfluxDB Line Protocol](/telegraf/v1.8/data_formats/input/influx/)
+- [collectd](/telegraf/v1.8/data_formats/input/collectd/)
+- [CSV](/telegraf/v1.8/data_formats/input/csv/)
+- [Dropwizard](/telegraf/v1.8/data_formats/input/dropwizard/)
+- [Graphite](/telegraf/v1.8/data_formats/input/graphite/)
+- [Grok](/telegraf/v1.8/data_formats/input/grok/)
+- [JSON](//telegraf/v1.8/data_formats/input/json/)
+- [logfmt](/telegraf/v1.8/data_formats/input/logfmt/)
+- [Nagios](/telegraf/v1.8/data_formats/input/nagios/)
+- [Value](/telegraf/v1.8/data_formats/input/value/), ie: 45 or "booyah"
+- [Wavefront](/telegraf/v1.8/data_formats/input/wavefront/)
 
 Any input plugin containing the `data_format` option can use it to select the
 desired parser:
