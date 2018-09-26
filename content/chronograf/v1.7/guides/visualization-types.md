@@ -22,6 +22,7 @@ Each of the available visualization types and available user controls are descri
 * [Bar Graph](#bar-graph)
 * [Gauge](#gauge)
 * [Table](#table)
+* [Note](#note)
 
 For information on adding and displaying annotations in graph views, see [Adding annotations to Chronograf views](/chronograf/v1.7/guides/annotations/).
 
@@ -256,3 +257,11 @@ Use the **Table Controls** to specify the following:
 #### Table view example
 
 ![Table example](/img/chronograf/chrono-viz-table-example.png)
+
+### Note
+
+The **Note** panel displays Markdown-formatted text alongside or instead of a graph.
+
+#### Note Controls
+
+#### Note view example
