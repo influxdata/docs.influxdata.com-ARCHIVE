@@ -168,33 +168,42 @@ influxd restore -portable -db telegraf path-to-backup
 
 **To restore data to a database that already exists:**
 
-1. Restore the database to a temporary database.
-
- ```
- influxd restore -portable -db telegraf -newdb telegraf_bak path-to-backup
- ```
-2. Sideload into the target database and drop the temporary database.
+You cannot restore directly into a database that already exists. If you attempt to run the `restore` command into an existing database, you will get a message like this:
 
 ```
-> use telegraf_bak
-> SELECT * INTO telegraf..:MEASUREMENT FROM /.*/ GROUP BY *
-> drop telegraf_bak
+influxd restore -portable -db existingdb path-to-backup
+
+2018/08/30 13:42:46 error updating meta: DB metadata not changed. database may already exist
+restore: DB metadata not changed. database may already exist
 ```
+
+1. Restore the existing database backup to a temporary database.
+
+    ```
+    influxd restore -portable -db telegraf -newdb telegraf_bak path-to-backup
+    ```
+2. Sideload the data (using a `SELECT ... INTO` statement) into the existing target database and drop the temporary database.
+
+    ```
+    > USE telegraf_bak
+    > SELECT * INTO telegraf..:MEASUREMENT FROM /.*/ GROUP BY *
+    > DROP telegraf_bak
+    ```
 
 **To restore to a retention policy that already exists:**
 
 1. Restore the retention policy to a temporary database.
 
- ```
- influxd restore -portable -db telegraf -newdb telegraf_bak -rp autogen -newrp autogen_bak path-to-backup
- ```
+    ```
+    influxd restore -portable -db telegraf -newdb telegraf_bak -rp autogen -newrp autogen_bak path-to-backup
+    ```
 2. Sideload into the target database and drop the temporary database.
 
-```
-> use telegraf_bak
-> SELECT * INTO telegraf.autogen.:MEASUREMENT FROM /telegraf_bak.autogen_bak.*/ GROUP BY *
-> drop telegraf_bak
-```
+    ```
+    > USE telegraf_bak
+    > SELECT * INTO telegraf.autogen.:MEASUREMENT FROM /telegraf_bak.autogen_bak.*/ GROUP BY *
+    > DROP telegraf_bak
+    ```
 
 ### Backward compatible offline backup and restore (legacy format)
 

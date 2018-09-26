@@ -333,6 +333,6 @@ The unintended data, however, include only the metastore information, not the sh
 
 #### Issue 2: Restore a backup created prior to version 1.2.0
 
-InfluxEnterprise introduced incremental backups in version 1.2.0.
+InfluxDB Enterprise introduced incremental backups in version 1.2.0.
 To restore a backup created prior to version 1.2.0, be sure to follow the syntax
 for [restoring from a full backup](#syntax-for-a-restore-from-a-full-backup).

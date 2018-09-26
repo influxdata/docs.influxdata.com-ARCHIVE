@@ -44,7 +44,7 @@ spans 1 minute and is grouped into 10 second buckets.
 
 | Setters | Description |
 |:---|:---|
-| **[align](#align)&nbsp;(&nbsp;)** | Align start and stop times for quiries with even boundaries of the QueryNode.Every property. Does not apply if using the QueryNode.Cron property.  |
+| **[align](#align)&nbsp;(&nbsp;)** | Align start and stop times for queries with even boundaries of the QueryNode.Every property. Does not apply if using the QueryNode.Cron property.  |
 | **[alignGroup](#aligngroup)&nbsp;(&nbsp;)** | Align the group by time intervals with the start time of the query  |
 | **[cluster](#cluster)&nbsp;(&nbsp;`value`&nbsp;`string`)** | The name of a configured InfluxDB cluster. If empty the default cluster will be used.  |
 | **[cron](#cron)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Define a schedule using a cron syntax.  |
@@ -120,7 +120,7 @@ Property methods are marked using the `.` operator.
 
 ### Align
 
-Align start and stop times for quiries with even boundaries of the [QueryNode.Every](/kapacitor/v1.5/nodes/query_node/#every) property.
+Align start and stop times for queries with even boundaries of the [QueryNode.Every](/kapacitor/v1.5/nodes/query_node/#every) property.
 Does not apply if using the [QueryNode.Cron](/kapacitor/v1.5/nodes/query_node/#cron) property.
 
 

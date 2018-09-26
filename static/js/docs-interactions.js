@@ -31,13 +31,7 @@ $('#navbar--product-menu').click( function() {
 
 /* Open Sidebar */
 $('#sidebar--toggle').click( function() {
-	$('#sidebar').addClass('open');
-	$('#sidebar--mask-container').addClass('open');
-});
-/* Close Sidebar */
-$('#sidebar--mask').click( function() {
-	$('#sidebar').removeClass('open');
-	$('#sidebar--mask-container').removeClass('open');
+	$('#sidebar, .sidebar--toggle').toggleClass('open');
 });
 
 function getRandomIntInclusive(min, max) {
@@ -192,5 +186,23 @@ $(document).ready( function(){
 	// Revert to default Chronograf URL
 	$('#default-chronograf-url').click(function() {
 		revertToDefault();
+	})
+})
+
+/*
+ * Reposition sidebar on vertical scroll
+ */
+
+$(document).ready( function() {
+	var offsetElement = $("#main-nav")
+	element = $("#sidebar")
+
+	$("body").scroll(function() {
+		var pos = offsetElement.offset().top + offsetElement.outerHeight(true);
+		if ( pos < 0 ) {
+			$(element).css("top", "0px");
+		} else if ( pos <= 64 ){
+			$(element).css("top", pos + "px");
+		}
 	})
 })

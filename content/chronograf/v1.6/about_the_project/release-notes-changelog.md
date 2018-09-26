@@ -8,6 +8,25 @@ menu:
     parent: About the project
 ---
 
+## v1.6.2 [2018-09-06]
+
+### Features
+
+* Add ability to copy expanded/untruncated log message.
+* Add Close button for logs pop over.
+* Add search attributes to Log Viewer.
+
+### UI improvements
+
+* Make infinite scroll UX in Log Viewer more crisp by decreasing results queried.
+* Clear logs after searching.
+* Add search expression to highlighting log lines.
+
+### Bug Fixes
+
+* Fix notifying user to press ESC to exit presentation mode.
+* Fix socket leaks on Alert Rule pages.
+
 ## v1.6.1 [2018-08-02]
 
 ### Features
@@ -679,7 +698,7 @@ In versions 1.3.1+, installing a new version of Chronograf automatically clears 
 
 ### Features
 
-  * Add line-protocol proxy for InfluxDB/InfluxEnterprise Cluster data sources
+  * Add line-protocol proxy for InfluxDB/InfluxDB Enterprise Cluster data sources
   * Add `:dashboardTime:` to support cell-specific time ranges on dashboards
   * Add support for enabling and disabling [TICKscripts that were created outside Chronograf](/chronograf/latest/guides/advanced-kapacitor/#tickscript-management)
   * Allow users to delete Kapacitor configurations

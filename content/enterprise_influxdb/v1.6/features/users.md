@@ -43,7 +43,7 @@ view Chronograf.
 Roles are groups of permissions.
 A single role can belong to several cluster accounts.
 
-InfluxEnterprise clusters have two built-in roles:
+InfluxDB Enterprise clusters have two built-in roles:
 
 #### Global Admin
 
@@ -60,7 +60,7 @@ permissions to:
 * Rebalance
 
 ### Permissions
-InfluxEnterprise clusters have 16 permissions:
+InfluxDB Enterprise clusters have 16 permissions:
 
 #### View Admin
 Permission to view or edit admin screens.
@@ -114,7 +114,7 @@ The following table describes permissions required to execute the associated dat
 |Determined by type of select statement|SelectStatement|
 
 ### Statement to Permission
-The following table describes database statements and the permissions required to execute them.  It also describes whether these permissions apply just to InfluxDB (Database) or InfluxEnterprise (Cluster).
+The following table describes database statements and the permissions required to execute them.  It also describes whether these permissions apply just to InfluxDB (Database) or InfluxDB Enterprise (Cluster).
 
 |Statment|Permissions|Scope|
 |---|---|---|

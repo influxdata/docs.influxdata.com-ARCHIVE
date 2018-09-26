@@ -17,17 +17,18 @@ The following sections assume your InfluxDB instance is running on `localhost`
 port `8086` and HTTPS is not enabled.
 Those settings [are configurable](/influxdb/v1.6/administration/config/#http-endpoint-settings-http).
 
-# InfluxDB HTTP endpoints
+## InfluxDB HTTP endpoints
 
 | Endpoint    | Description |
 | :---------- | :---------- |
 | [/debug/pprof ](#debug-pprof-http-endpoint)   | Use `/debug/pprof` to generate profiles for troubleshooting.  |   
-| [/debug/requests](#debug-requests-http-endpoint) | Use `/debug/requests/` to track HTTP client requests to the `/write` and `/query` endpoints. | [/debug/vars](#debug-vars)  | Use `/debug/vars` to collect statistics  |
-| [/ping](#ping) | Use `/ping` to check the status of your InfluxDB instance and your version of InfluxDB. |
-| [/query](#query) | Use `/query` to query data and manage databases, retention policies, and users. |
-| [/write](#write) | Use `/write` to write data to a pre-existing database. |
+| [/debug/requests](#debug-requests-http-endpoint) | Use `/debug/requests/` to track HTTP client requests to the `/write` and `/query` endpoints. |
+| [/debug/vars](#debug-vars-http-endpoint)  | Use `/debug/vars` to collect statistics  |
+| [/ping](#ping-http-endpoint) | Use `/ping` to check the status of your InfluxDB instance and your version of InfluxDB. |
+| [/query](#query-http-endpoint) | Use `/query` to query data and manage databases, retention policies, and users. |
+| [/write](#write-http-endpoint) | Use `/write` to write data to a pre-existing database. |
 
-### `/debug/pprof` HTTP endpoint
+## `/debug/pprof` HTTP endpoint
 
 InfluxDB supports the Go [`net/http/pprof`](https://golang.org/pkg/net/http/pprof/) HTTP endpoints, which are useful for troubleshooting. The `pprof` package serves runtime profiling data in the format expected by the _pprof_ visualization tool.
 
@@ -140,7 +141,7 @@ $ curl http://localhost:8086/debug/requests?seconds=60
 
 The response shows that, over the past minute, `user1` sent three requests to the `/write` endpoint from `123.45.678.91`, `user1` sent 16 requests to the `/query` endpoint from `000.0.0.0`, and `user2` sent four requests to the `/write` endpoint from `xx.xx.xxx.xxx`.
 
-### `/debug/vars` HTTP endpoint
+## `/debug/vars` HTTP endpoint
 
 InfluxDB exposes statistics and information about its runtime through the `/debug/vars` endpoint, which can be accessed using the following cURL command:
 
@@ -169,16 +170,20 @@ HEAD http://localhost:8086/ping
 
 ### Example
 
-Extract the version of your InfluxDB instance in the `X-Influxdb-Version` field
-of the header:
+You can use the `/ping` endpoint to find the build and version of an InfluxDB instance. 
+The `X-Influxdb-Build` header field displays the InfluxDB build type, either `OSS` (open source) or `ENT` (Enterprise). 
+The `X-Influxdb-Version` header field displays the InfluxDB version.
+
 ```bash
-$ curl -sl -I localhost:8086/ping
+~ curl -sl -I http://localhost:8086/ping
 
 HTTP/1.1 204 No Content
 Content-Type: application/json
-Request-Id: [...]
-X-Influxdb-Version: 1.4.x
-Date: Wed, 08 Nov 2017 00:09:52 GMT
+Request-Id: 9c353b0e-aadc-11e8-8023-000000000000
+X-Influxdb-Build: OSS
+X-Influxdb-Version: v1.6.2
+X-Request-Id: 9c353b0e-aadc-11e8-8023-000000000000
+Date: Tue, 28 Aug 2018 16:08:32 GMT
 ```
 
 ### Status Codes and Responses

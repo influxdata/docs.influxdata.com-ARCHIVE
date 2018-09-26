@@ -115,7 +115,7 @@ _**SMTP settings in kapacitor.conf**_
   username = "username"
   password = "passw0rd"
   from = "me@emyserver.com"
-  to = "oncall0@mydomain.com"
+  to = ["oncall0@mydomain.com"]
   no-verify = false
   idle-timeout = "30s"
   global = false

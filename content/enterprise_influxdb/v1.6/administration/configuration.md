@@ -195,7 +195,7 @@ Environment variable: `INFLUXDB_HOSTNAME`
 ## [enterprise]
 
 The `[enterprise]` section contains the parameters for the meta node's
-registration with the [InfluxEnterprise License Portal](https://portal.influxdata.com/).
+registration with the [InfluxDB Enterprise License Portal](https://portal.influxdata.com/).
 
 ###  license-key = ""
 
@@ -454,7 +454,7 @@ Environment variable: `INFLUXDB_GOSSIP_FREQUENCY`
 ## [enterprise]
 
 The `[enterprise]` section contains the parameters for the meta node's
-registration with the [InfluxEnterprise License Portal](https://portal.influxdata.com/).
+registration with the [InfluxDB Enterprise License Portal](https://portal.influxdata.com/).
 
 ###  license-key = ""
 
@@ -762,7 +762,7 @@ Environment variable: `INFLUXDB_SHARD_PRECREATION_ADVANCE_PERIOD`
 
 By default, InfluxDB writes system monitoring data to the `_internal` database. If that database does not exist, InfluxDB creates it automatically. The `DEFAULT` retention policy on the `internal` database is seven days. To change the default seven-day retention policy, you must [create](/influxdb/v1.6/query_language/database_management/#retention-policy-management) it.
 
-For InfluxEnterprise production systems, InfluxData recommends including a dedicated InfluxDB (OSS) monitoring instance for monitoring InfluxEnterprise cluster nodes.
+For InfluxDB Enterprise production systems, InfluxData recommends including a dedicated InfluxDB (OSS) monitoring instance for monitoring InfluxDB Enterprise cluster nodes.
 
 * On the dedicated InfluxDB monitoring instance, set `store-enabled = false` to avoid potential performance and storage issues.
 * On each InfluxDB cluster node, install a Telegraf input plugin and Telegraf output plugin configured to report data to the dedicated InfluxDB monitoring instance.
@@ -904,7 +904,7 @@ Environment variable: `INFLUXDB_HTTP_MAX_CONNECTION_LIMIT`
 
 See the [OSS documentation](/influxdb/v1.6/administration/config/#shared-secret).
 
-This setting is required and must match on each data node if the cluster is using the InfluxEnterprise Web Console.
+This setting is required and must match on each data node if the cluster is using the InfluxDB Enterprise Web Console.
 
 Environment variable: `INFLUXDB_HTTP_SHARED_SECRET`
 
