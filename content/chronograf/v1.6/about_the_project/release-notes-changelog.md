@@ -698,7 +698,7 @@ In versions 1.3.1+, installing a new version of Chronograf automatically clears 
 
 ### Features
 
-  * Add line-protocol proxy for InfluxDB/InfluxEnterprise Cluster data sources
+  * Add line-protocol proxy for InfluxDB/InfluxDB Enterprise Cluster data sources
   * Add `:dashboardTime:` to support cell-specific time ranges on dashboards
   * Add support for enabling and disabling [TICKscripts that were created outside Chronograf](/chronograf/latest/guides/advanced-kapacitor/#tickscript-management)
   * Allow users to delete Kapacitor configurations

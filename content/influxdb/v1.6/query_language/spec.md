@@ -720,7 +720,7 @@ KILL QUERY 36
 ```
 
 ```sql
--- kill query on InfluxEnterprise cluster
+-- kill query on InfluxDB Enterprise cluster
 KILL QUERY 53 ON "myhost:8088"
 ```
 

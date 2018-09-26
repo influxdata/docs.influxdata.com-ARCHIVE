@@ -69,7 +69,7 @@ query capacity within the cluster.
 
 ## web console
 
-Legacy user interface for the InfluxEnterprise cluster.
+Legacy user interface for the InfluxDB Enterprise.
 
 This has been deprecated and the suggestion is to use [Chronograf](/chronograf/latest/introduction/).
 
