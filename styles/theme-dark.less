@@ -71,7 +71,7 @@
 @article-gotcha-text:			@c-dreamsicle;
 @article-gotcha-bg:				@g3-castle;
 @article-gotcha-border:			@c-dreamsicle;
-@article-gotcha-code:       #6c5bb1;
+@article-gotcha-code:       @c-potassium;
 @article-gotcha-code-bg:    @g1-raven;
 @article-gotcha-code-border: #673c2c;
 
@@ -98,12 +98,22 @@
 @old-version-bg:				@g3-castle;
 
 /* Fancy background on code blocks */
-.article-content pre {
-	background-image: url(../img/pre-background.svg);
-	background-attachment: fixed;
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-size: 70%;
+.article-content {
+	pre {
+		background-image: url(../img/pre-background.svg);
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: 70%;
+	}
+	strong, em {
+		color: @g16-pearl;
+	}
+	blockquote, dt > table {
+		th,td {
+			border-color: @g5-pepper;
+		}
+	}
 }
 
 @vertical-tabs-body-bg:	@g5-pepper;

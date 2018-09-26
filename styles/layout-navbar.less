@@ -17,8 +17,8 @@
 	height: @nav-height;
 	width: 100%;
 	background-color: @nav-bg;
-	position: fixed;
 	z-index: @z-nav;
+	position: relative;
 }
 .navbar--logo,
 .navbar--hamburger,
@@ -26,11 +26,10 @@
 .navbar--search,
 .theme-switcher {
 	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
 }
 .navbar--logo {
 	left: 1em;
+	top: 1.05em;
 	a {
 		font-size: 1.5rem;
 		color: @nav-logo;
@@ -105,8 +104,7 @@
 .navbar--product-menu {
 	width: 100%;
 	position: absolute;
-	top: 0;
-	width: 100%;
+	top: .5em;
 	height: auto;
 	opacity: 0;
 	transition: opacity 0.25s ease;
@@ -116,10 +114,12 @@
 	width: 100%;
 	height: auto;
 	position: absolute;
-	top: 100%;
+	top: calc(@nav-height * .85);
 	left: 0;
 	visibility: hidden;
 	transition: all 0.25s ease;
+
+	z-index: 100;
 
 	&.open {
 		visibility: visible;
@@ -155,6 +155,7 @@
 }
 .navbar--product-dropdown {
 	display: none;
+	top: .5em;
 	background-color: @c-ocean;
 	height: @nav-component-height;
 	border-radius: @radius;
@@ -189,6 +190,7 @@
 	height: @nav-component-height;
 	width: @search-default-width;
 	right: @nav-height;
+	top: .5em;
 
 	> * {
 		position: absolute !important;
@@ -379,6 +381,7 @@
 	.navbar--product-container {
 		left: @sidebar-small-width;
 		width: @product-dropdown-small-width;
+		top: 2.9em;
 
 		&.open {
 			.navbar--dropdown-dismiss {
