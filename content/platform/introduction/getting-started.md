@@ -7,7 +7,4 @@ menu:
     parent: Introduction
 ---
 
-This is the getting started doc
-
-- Download
-- Install
+_This is the getting started doc._
