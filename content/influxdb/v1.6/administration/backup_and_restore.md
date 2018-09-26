@@ -54,7 +54,6 @@ influxd backup
     [ -host <host:port> ]
     [ -retention <rp_name> ] | [ -shard <shard_ID> -retention <rp_name> ]
     [ -start <timestamp> [ -end <timestamp> ] | -since <timestamp> ]
-    [ -skip-errors ]
     <path-to-backup>
 ```
 
@@ -89,7 +88,6 @@ Optional arguments are enclosed in brackets.
 
 - `[ -since <timestamp> ]`: Perform an incremental backup after the specified timestamp [RFC3339 format](https://www.ietf.org/rfc/rfc3339.txt). Use `-start` instead, unless needed for legacy backup support.
 
-- `[ -skip-errors ]`: Optional flag to continue backing up the remaining shards when the current shard fails to backup.
 
 #### Backup examples
 
