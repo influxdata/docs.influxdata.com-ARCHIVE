@@ -119,7 +119,7 @@ The [Couchbase (`couchbase`) input plugin](https://github.com/influxdata/telegra
 
 The [CouchDB (`couchdb`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/couchdb/README.md) gathers metrics of CouchDB using `_stats` endpoint.
 
-### [CPU (`cpu`)](hhttps://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/cpu/README.md)
+### [CPU (`cpu`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/cpu/README.md)
 
 The [CPU (`cpu`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/cpu/README.md) gathers metrics about cpu usage.
 
@@ -129,7 +129,7 @@ The [Disk (`disk`) input plugin](https://github.com/influxdata/telegraf/blob/rel
 
 ### [DiskIO (`diskio`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/diskio/README.md)
 
-The [DiskIO (`diskio`) input plugin](hhttps://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/diskio/README.md) gathers metrics about disk IO by device.
+The [DiskIO (`diskio`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/diskio/README.md) gathers metrics about disk IO by device.
 
 ### [Disque (`disque`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/disque)
 
@@ -327,7 +327,7 @@ The [Memcached (`memcached`) input plugin](https://github.com/influxdata/telegra
 The [Mesos (`mesos`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/mesos/README.md) gathers metrics from Mesos. For more information, please check the
 [Mesos Observability Metrics](http://mesos.apache.org/documentation/latest/monitoring/) page.
 
-### [Mesosphere DC/OS (`dcos`)](hhttps://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/dcos/README.md)
+### [Mesosphere DC/OS (`dcos`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/dcos/README.md)
 
 The [Mesosphere DC/OS (`dcos`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/dcos/README.md) gathers metrics from a DC/OS cluster's [metrics component](https://docs.mesosphere.com/1.10/metrics/).
 
@@ -429,7 +429,7 @@ The [Phfusion 0Passenger (`passenger`) input plugin](https://github.com/influxda
 
 The [PHP FPM (`phpfpm`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/phpfpm/README.md) gets phpfpm statistics using either HTTP status page or fpm socket.
 
-### [Ping (`ping`)](hhttps://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/ping/README.md)
+### [Ping (`ping`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/ping/README.md)
 
 The [Ping (`ping`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/ping/README.md) measures the round-trip for ping commands, response time, and other packet statistics.
 
