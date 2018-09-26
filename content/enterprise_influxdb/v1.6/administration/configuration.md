@@ -1052,7 +1052,7 @@ The interval of time when anti-entropy checks run on each data node.
 
 Environment variable: `INFLUXDB_ANTI_ENTROPY_CHECK_INTERVAL`
 
-#### max-fetch = 10
+<!-- #### max-fetch = 10
 
 The maximum number of shards that a single data node will copy or repair in parallel.
 
@@ -1062,4 +1062,4 @@ Environment variable: `INFLUXDB_ANTI_ENTROPY_MAX_FETCH`
 > The more shards you have, the lower this should be set.
 > If AE is left enabled while lowering your `max-fetch`, you will initially see
 > higher CPU load as new shard digest files are created.
-> The added load will drop off after shard digests are completed for existing shards.
+> The added load will drop off after shard digests are completed for existing shards. -->
