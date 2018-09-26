@@ -23,13 +23,28 @@ The annotation displays "`Deploy v3.8.1-2`" and the time "`2018/28/02 15:59:30:0
 ![Annotations on multiple graph views](/img/chronograf/chrono-annotations-example.png)
 
 
-**To add an annotation using the Chronograf user interface:**
+**To add and edit an annotation:**
 
-1. Click the **Edit** button ("pencil" icon) on the graph view.
-2. Click **Add Annotation** to add an annotation.
-3. Move cursor to point of time and click or drag cursor to set an annotation.
-4. Click **Edit** again and then click **Edit Annotation**.
-5. Click the cursor on the annotation point or interval. The annotation text box appears above the annotation point or interval.
-6. Click on `Name Me` in the annotation and type a note or comment.
-7. Click **Done Editing**.
-8. Your annotation is now available in all graph views.
+1. In the top menu bar, click **Annotations**.
+2. Click **Annotate** in the upper right.
+2. Click **Add Annotation**, then move your cursor to point in time you want to annotate and click or drag to create an annotation.
+4. To edit, hover over the annotation and select the edit (pencil) button from the tooltip that appears. The **Edit Annotation** window appears:
+  * **Name**: The name for the annotation.
+  * **Type**: Point annotations are for a single point in time. Window annotations cover a specified interval.
+  * **Start and End** (window) or **Time** (point): The timestamp(s) for the annotation.
+  * **Annotation Tags**: Click **+ Add Tag**, then enter a tag key and values.
+5. To delete the annotation, click **Delete**.
+6. Click **Save**.
+
+**To filter annotations by tag:**
+
+1. In the top menu bar, click **Annotations**.
+2. Select **Filter Annotations by Tags** from the drop-down menu in the upper left.
+3. Click **+ Filter** to add a filter.
+4. Enter the tag key and values you want to filter by, then click the green check mark to add that filter.
+5. To filter by more than one tag, repeat steps 3-4.
+
+**To hide all annotations:**
+
+* In the top menu bar, click **Annotations**.
+* Select **Hide Annotations** from the drop-down menu in the upper left.
