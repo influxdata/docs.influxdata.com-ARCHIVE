@@ -8,9 +8,7 @@ menu:
     parent: Output
 ---
 
-The `influx` output data format outputs metrics into [InfluxDB Line Protocol][line
-protocol].  InfluxData recommends this data format unless another format is required
-for interoperability.
+The `influx` output data format outputs metrics into [InfluxDB Line Protocol][line protocol]. InfluxData recommends this data format unless another format is required for interoperability.
 
 ## Configuration
 
