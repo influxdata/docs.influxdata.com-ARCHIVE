@@ -176,7 +176,7 @@ The [Fibaro (`fibaro`) input plugin](https://github.com/influxdata/telegraf/blob
 
 The [File (`file`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/file/README.md) updates a list of files every interval and parses the contents using the selected input data format.
 
-Files will always be read in their entirety, if you wish to tail/follow a file use the [tail input plugin](#tail-tail) instead.
+Files will always be read in their entirety, if you wish to tail/follow a file use the [tail input plugin](#tail-tail-https-github-com-influxdata-telegraf-blob-release-1-8-plugins-inputs-tail-readme-md) instead.
 
 ### [Filecount (`filecount`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/filecount/README.md) -- NEW in v.1.8
 
@@ -653,14 +653,14 @@ All metrics are collected for each server configured.
 
 ### [HTTP JSON (`httpjson`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/httpjson/README.md)
 
-> DEPRECATED as of version 1.6; use the [HTTP (`http`) input plugin](#http-http-https-github-com-influxdata-telegraf-tree-master-plugins-inputs-http).
+> DEPRECATED as of version 1.6; use the [HTTP (`http`) input plugin](#http-http-https-github-com-influxdata-telegraf-blob-release-1-8-plugins-inputs-http-readme-md).
 
 The [HTTP JSON (`httpjson`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/httpjson/README.md) collects data from HTTP URLs which respond with JSON.
 It flattens the JSON and finds all numeric values, treating them as floats.
 
 ### [Jolokia (`jolokia`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/jolokia/README.md)
 
-> DEPRECATED as of version 1.5; use the [Jolokia2 (`jolokia2`) input plugin](#jolokia2-agent-jolokia2-agent-https-github-com-influxdata-telegraf-tree-release-1-6-plugins-inputs-jolokia2-readme-md).
+> DEPRECATED as of version 1.5; use the [Jolokia2 (`jolokia2`) input plugin](#jolokia2-agent-jolokia2-agent-https-github-com-influxdata-telegraf-blob-release-1-8-plugins-inputs-jolokia2-readme-md).
 
 ### [SNMP Legacy (`snmp_legacy`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/snmp_legacy/README.md)
 
@@ -670,8 +670,8 @@ The SNMP Legacy input plugin gathers metrics from SNMP agents.
 
 ### [TCP Listener (`tcp_listener`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/tcp_listener/README.md)
 
-> The [TCP Listener (`tcp_listener` input plugin)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/tcp_listener/README.md) is EPRECATED as of version 1.3; use the [Socket Listener (`socket_listener`) input plugin](#socket-listener-socket-listener-https-github-com-influxdata-telegraf-tree-release-1-6-plugins-inputs-socket-listener).
+> The [TCP Listener (`tcp_listener` input plugin)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/tcp_listener/README.md) is EPRECATED as of version 1.3; use the [Socket Listener (`socket_listener`) input plugin](#socket-listener-socket-listener-https-github-com-influxdata-telegraf-blob-release-1-8-plugins-inputs-socket-listener-readme-md).
 
 ### [UDP Listener (`udp_listener`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/udp_listener)
 
-> DEPRECATED as of version 1.3; use the [Socket Listener (`socket_listener`) input plugin](#socket-listener-socket-listener-https-github-com-influxdata-telegraf-tree-release-1-6-plugins-inputs-socket-listener).
+> DEPRECATED as of version 1.3; use the [Socket Listener (`socket_listener`) input plugin](#socket-listener-socket-listener-https-github-com-influxdata-telegraf-blob-release-1-8-plugins-inputs-socket-listener-readme-md).
