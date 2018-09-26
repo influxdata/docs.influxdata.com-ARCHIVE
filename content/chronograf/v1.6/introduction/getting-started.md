@@ -10,58 +10,19 @@ menu:
     parent: Introduction
 ---
 
-On this page
+## Overview
+Chronograf allows you to quickly see data you have stored in InfluxDB so you can build robust queries and alerts. After your administrator has set up Chronograf as described in [Installing Chronograf](/chronograf/latest/introduction/installation), get started with key features using the guides below.
 
-* [Getting started overview](#getting-started-overview)
-* [Requirements](#requirements)
-  - [InfluxDB setup](#influxdb-setup)
-  - [Kapacitor setup](#kapacitor-setup)
-  - [Telegraf setup](#telegraf-setup)
-  - [Chronograf setup](#chronograf-setup)
+### Data visualization
+* Investigate your data by building queries using [InfluxQL](/influxdb/latest/query_language/).
+* Use pre-created [pre-created dashboards](/chronograf/latest/guides/using-precreated-dashboards/) to monitor your application data or [create your own dashboards](/chronograf/latest/guides/create-a-dashboard/).
+* Customize dashboards using [template variables](chronograf/latest/guides/dashboard-template-variables/).
 
-## Getting started overview
+### Alerting
+* [Create alert rules](/chronograf/latest/guides/create-alert-rules/) to generate threshold, relative, and deadman alerts on your data.
+* [View all active alerts](/chronograf/latest/guides/create-alert-rules/#step-2-view-the-alerts) on an alert dashboard.
+* Use [alert endpoints](/chronograf/latest/guides/configuring-alert-endpoints/) in Chronograf to send alert messages to specific URLs and applications.
 
-Chronograf is the user interface component of InfluxData's [TICK stack](https://www.influxdata.com/products/). The TICK stack also includes the following components:
-
-* [InfluxDB](/influxdb/latest/) or [InfluxDB Enterprise](/enterprise_influxdb/latest/) (required): Stores the time series data that populates the Chronograf interface.
-* [Telegraf](/telegraf/latest/) (recommended): Collects and writes data to an InfluxDB instance or InfluxDB Enterprise cluster.
-* [Kapacitor](/kapacitor/latest/) (optional): Responsible for creating and sending alerts in Chronograf.
-
-![Getting started setup](/img/chronograf/latest/intro-gs-diagram.png)
-
-Before following the steps below, make sure you've [installed Chronograf](/chronograf/installation).
-
-
-## Step One: Start Chronograf
-
-Ubuntu, RedHat:
-```
-sudo systemctl start chronograf
-```
-MacOS X:
-```
-sudo launchctl start chronograf
-```
-
-## Step Two: Point your web browser to `http://localhost:8888`.
-
-## Step Three: Connect Chronograf to your InfluxDB instance or InfluxDB Enterprise cluster.
-Fill out the form  that appears with the following details:
-* _Connection String_: Enter the host name or IP of the machine that InfluxDB is running on, and be sure to include InfluxDB's default port `8086`.
-* _Connection Name_: Enter a name for your connection string.
-* _Username_ and _Password_: These fields can remain blank unless you've [enabled authorization](influxdb/v1.6/administration/config/#auth-enabled-false) in InfluxDB.
-* _Telegraf Database Name_: Optionally, enter a name for your Telegraf database. The default name is Telegraf.
-
-After you've completed the form, click _Add Source_.
-
-## Step Four (optional): Connect Chronograf to Kapacitor
-
-1. In Chronograf, select the configuration icon in the sidebar menu, then select _Add Config_ in the _Active Kapacitator_ column.
-2. In the _Kapacitor URL_ field, enter the hostname or IP of the machine that Kapacitor is running on, and be sure to include Kapacitor's default port: `9092`.
-3. Enter a name for your connection.
-4. Leave the _Username_ and _Password_ fields blank unless you've specifically enabled authorization in Kapacitor.
-5. Click _Connect_.
-
-
-That's it! You've successfully downloaded, installed, and configured each component of the TICK stack.
-Next, check out [our guides](/chronograf/latest/guides/) to become familiar with Chronograf and see all that you can do with it!
+### Infrastructure monitoring
+* [View all hosts](chronograf/latest/guides/monitoring-influxenterprise-clusters/#step-4-explore-the-monitoring-data-in-chronograf) and their statuses in your infrastructure.
+* [Use pre-created dashboards](/chronograf/latest/guides/using-precreated-dashboards/) to monitor your applications.

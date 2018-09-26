@@ -34,7 +34,6 @@ The latest Chronograf builds are available on InfluxData's [Downloads page](http
 3. Start Chronograf:
   * Mac OSX: `tar zxvf chronograf-1.6.2_darwin_amd64.tar.gz`
   * Ubuntu & Debian: `sudo dpkg -i chronograf_1.6.2_amd64.deb`
-  * RedHat and CentOS: ??
 
 For instructions on building from source, see Chronograf's [README](https://github.com/influxdata/chronograf/blob/master/README.md#from-source) on GitHub.
 
@@ -55,8 +54,3 @@ For instructions on building from source, see Chronograf's [README](https://gith
 3. Enter a name for your connection.
 4. Leave the **Username** and **Password** fields blank unless you've specifically enabled authorization in Kapacitor.
 5. Click **Connect**.
-
-## Configuration and security
-
-* See [Configuring Chronograf](/chronograf/latest/administration/configuration/) for a description of the available configuration options.
-* See [Managing security](/chronograf/latest/administration/managing-security/) for TLS and OAuth 2.0 setup instructions.
