@@ -12,10 +12,10 @@ The [InfluxData Sandbox](https://github.com/influxdata/sandbox) is the quickest
 way to get a TICK stack up and running and ready for testing.
 It uses [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose/overview/)
 to build a containerized, ready-to-use TICK stack preconfigured to capture
-data from your local machine and the Sandbox's Docker Containers.
+data from your local machine and the Sandbox's Docker containers.
 
-This is by far the easiest way to quickly build a TICK stack, but the Sandbox is
-not recommended for production use.
+The Sandbox is by far the easiest way to build a TICK stack, but it is not recommended
+for production use.
 
 ## Requirements
 - Linux or MacOS <em style="opacity:.5;margin-left:.5em;">(Windows support is coming)</em>
@@ -35,8 +35,8 @@ git clone git@github.com:influxdata/sandbox.git
 ```
 
 The Sandbox repo includes a `sandbox` binary used to provision and manage the
-Sandbox's containers and data. `./sandbox up` run from inside the `sandbox` directory
-will download, build, and start all the necessary Docker containers.
+Sandbox's containers and data. Run `./sandbox up` from inside the `sandbox` directory
+to download the necessary images, then build and start all the required Docker containers.
 
 ```bash
 # cd into the sandbox directory
@@ -53,7 +53,7 @@ cd sandbox
 Once started, two tabs will open in your browser:
 
 1. Chronograf ([localhost:8888](http://localhost:8888))
-2. Sandbox Documentation  ([localhost:3010](http://localhost:3010))
+2. InfluxData Sandbox Documentation  ([localhost:3010](http://localhost:3010))
 
 Chronograf is the web-base user-interface for the TICK stack and is, for many, the
 primary tool used to manage the stack. It allows you to query and explore data,
@@ -76,13 +76,14 @@ Nightly builds are experimental and are not guaranteed to be functional.
 
 ## Interacting with the Sandbox TICK stack
 With the Sandbox running, each component of the TICK stack is available to work with.
-The Sandox documentation provides tutorials for interacting with each component and
-is accessible at [localhost:3010/tutorials](http://localhost:3010/tutorials)
+The Sandbox documentation provides tutorials for interacting with each component.
+The documentation is available at [localhost:3010/tutorials](http://localhost:3010/tutorials)
 (with the Sandbox running) or [on Github](https://github.com/influxdata/sandbox/tree/master/documentation/static/tutorials).
 
 All configuration files, tools, and CLIs needed for managing each component of the
 TICK stack are included in their respective Docker containers.
-Tasks outlined in each projects' documentation can be accomplished using the Sandbox.
+Tasks outlined throughout the InfluxData documentation can be accomplished using
+the InfluxData Sandbox.
 
 The `./sandbox enter` command opens a console inside the specified container where
 the project's configuration files and CLIs are available.
@@ -95,5 +96,5 @@ the project's configuration files and CLIs are available.
 ./sandbox enter telegraf
 ```
 
-> When updating a configuration file in a Sandbox container, use the `./sandbox restart`
+> After updating a configuration file in a Sandbox container, use the `./sandbox restart`
 > command to restart the containers and apply the updated configuration.
