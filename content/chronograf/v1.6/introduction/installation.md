@@ -12,7 +12,7 @@ This page describes how to download and install Chronograf.
 ### Content
 
 * [TICK overview](#tick-overview)
-* [Downloading and installing](#downloading-and-installing)
+* [Download and install](#downloading-and-installing)
 * [Connect to your InfluxDB instance or InfluxDB Enterprise cluster](#connect-chronograf-to-your-influxdb-instance-or-influxdb-enterprise-cluster)
 * [Connect to Kapacitor](#connect-chronograf-to-kapacitor)
 * [Configuration and security](#configuration-and-security)
@@ -21,36 +21,36 @@ This page describes how to download and install Chronograf.
 ## TICK overview
 Chronograf is the user interface for InfluxData's [TICK stack](https://www.influxdata.com/time-series-platform/).
 
-## Downloading and installing
+## Download and install
 
 The latest Chronograf builds are available on InfluxData's [Downloads page](https://influxdata.com/downloads).
 
 1. Choose the download link for your operating system.
-  * Note that if your download includes a TAR package, we recommend specifying a location for the underlying datastore, `chronograf-v1.db` outside of the directory from which you start Chronograf. This allows you to preserve and reference your existing datastore, including configurations and dashboards, when you download future versions.
+  * Note that if your download includes a TAR package, we recommend specifying a location for the underlying datastore, `chronograf-v1.db`, outside of the directory from which you start Chronograf. This allows you to preserve and reference your existing datastore, including configurations and dashboards, when you download future versions.
 2. Install Chronograf:
-  * Mac OSX: `tar zxvf chronograf-1.6.2_darwin_amd64.tar.gz`
+  * MacOS: `tar zxvf chronograf-1.6.2_darwin_amd64.tar.gz`
   * Ubuntu & Debian: `sudo dpkg -i chronograf_1.6.2_amd64.deb`
   * RedHat and CentOS: `sudo yum localinstall chronograf-1.6.2.x86_64.rpm`
 3. Start Chronograf:
-  * Mac OSX: `tar zxvf chronograf-1.6.2_darwin_amd64.tar.gz`
+  * MacOS: `tar zxvf chronograf-1.6.2_darwin_amd64.tar.gz`
   * Ubuntu & Debian: `sudo dpkg -i chronograf_1.6.2_amd64.deb`
 
 For instructions on building from source, see Chronograf's [README](https://github.com/influxdata/chronograf/blob/master/README.md#from-source) on GitHub.
 
 ## Connect Chronograf to your InfluxDB instance or InfluxDB Enterprise cluster
 
-1. Point your web browser to [http://localhost:8888](http://localhost:8888).
-2. Fill out the form  that appears with the following details:
-  * **Connection String**: Enter the host name or IP of the machine that InfluxDB is running on, and be sure to include InfluxDB's default port `8086`.
+1. Point your web browser to [localhost:8888](http://localhost:8888).
+2. Fill out the form with the following details:
+  * **Connection String**: Enter the hostname or IP of the machine that InfluxDB is running on, and be sure to include InfluxDB's default port `8086`.
   * **Connection Name**: Enter a name for your connection string.
-  * **Username_ and _Password**: These fields can remain blank unless you've [enabled authorization](influxdb/v1.6/administration/config/#auth-enabled-false) in InfluxDB.
+  * **Username** and **Password**: These fields can remain blank unless you've [enabled authorization](influxdb/v1.6/administration/config/#auth-enabled-false) in InfluxDB.
   * **Telegraf Database Name**: Optionally, enter a name for your Telegraf database. The default name is Telegraf.
 3. Click **Add Source**.
 
 ## Connect Chronograf to Kapacitor
 
-1. In Chronograf, select the configuration icon in the sidebar menu, then select **Add Config** in the **Active Kapacitator** column.
-2. In the **Kapacitor URL** field, enter the hostname or IP of the machine that Kapacitor is running on, and be sure to include Kapacitor's default port: `9092`.
+1. In Chronograf, select the configuration (wrench) icon in the sidebar menu, then select **Add Config** in the **Active Kapacitator** column.
+2. In the **Kapacitor URL** field, enter the hostname or IP of the machine that Kapacitor is running on. Be sure to include Kapacitor's default port: `9092`.
 3. Enter a name for your connection.
 4. Leave the **Username** and **Password** fields blank unless you've specifically enabled authorization in Kapacitor.
 5. Click **Connect**.

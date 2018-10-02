@@ -16,7 +16,7 @@ Chronograf allows you to quickly see data you have stored in InfluxDB so you can
 ### Data visualization
 * Investigate your data by building queries using [InfluxQL](/influxdb/latest/query_language/).
 * Use pre-created [pre-created dashboards](/chronograf/latest/guides/using-precreated-dashboards/) to monitor your application data or [create your own dashboards](/chronograf/latest/guides/create-a-dashboard/).
-* Customize dashboards using [template variables](chronograf/latest/guides/dashboard-template-variables/).
+* Customize dashboards using [template variables](/chronograf/latest/guides/dashboard-template-variables/).
 
 ### Alerting
 * [Create alert rules](/chronograf/latest/guides/create-alert-rules/) to generate threshold, relative, and deadman alerts on your data.
@@ -24,5 +24,5 @@ Chronograf allows you to quickly see data you have stored in InfluxDB so you can
 * Use [alert endpoints](/chronograf/latest/guides/configuring-alert-endpoints/) in Chronograf to send alert messages to specific URLs and applications.
 
 ### Infrastructure monitoring
-* [View all hosts](chronograf/latest/guides/monitoring-influxenterprise-clusters/#step-4-explore-the-monitoring-data-in-chronograf) and their statuses in your infrastructure.
+* [View all hosts](/chronograf/latest/guides/monitoring-influxenterprise-clusters/#step-4-explore-the-monitoring-data-in-chronograf) and their statuses in your infrastructure.
 * [Use pre-created dashboards](/chronograf/latest/guides/using-precreated-dashboards/) to monitor your applications.
