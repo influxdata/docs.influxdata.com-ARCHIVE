@@ -19,7 +19,7 @@ Protocol or in JSON format. Telegraf supports the following input data formats:
 - [Dropwizard](/telegraf/v1.8/data_formats/input/dropwizard/)
 - [Graphite](/telegraf/v1.8/data_formats/input/graphite/)
 - [Grok](/telegraf/v1.8/data_formats/input/grok/)
-- [JSON](//telegraf/v1.8/data_formats/input/json/)
+- [JSON](/telegraf/v1.8/data_formats/input/json/)
 - [logfmt](/telegraf/v1.8/data_formats/input/logfmt/)
 - [Nagios](/telegraf/v1.8/data_formats/input/nagios/)
 - [Value](/telegraf/v1.8/data_formats/input/value/), ie: 45 or "booyah"
