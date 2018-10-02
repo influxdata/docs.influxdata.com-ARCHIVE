@@ -1,5 +1,5 @@
 ---
-title: Install and configure the TICK stack in production
+title: Install and configure the TICK stack for production
 description: placeholder
 menu:
   platform:
@@ -8,4 +8,14 @@ menu:
     weight: 2
 ---
 
-_This is the production installation guide_
+The following guide describes or links to content related to installing and configuring the complete InfluxData Platform for production use.
+
+## Download
+
+* InfluxDB Enterprise
+* Kapacitor Enterprise
+* Chronograf
+* Telegraf
+
+
+##
