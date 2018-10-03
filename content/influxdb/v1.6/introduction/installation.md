@@ -87,6 +87,7 @@ Or if your operating system is using systemd (Ubuntu 15.04+, Debian 8+):
 
 ```bash
 sudo apt-get update && sudo apt-get install influxdb
+sudo systemctl unmask influxdb.service
 sudo systemctl start influxdb
 ```
 
