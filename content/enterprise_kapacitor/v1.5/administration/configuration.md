@@ -56,7 +56,7 @@ The `[enterprise]` group is required to run Kapacitor Enterprise.
 
 This group includes the following properties:
 
-* `registration-enabled`: Whether or not to enable registraion.  Must be set to true, which is the default.
+* `registration-enabled`: Whether or not to enable registration.  Must be set to true, which is the default.
 * `registration-server-url`: The url of the registration server, if changed from the default.
 * `license-key`: The license key string provided by Influxdata.
 * `license-path`: Path to the license file provided by Influxdata.
