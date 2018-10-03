@@ -625,9 +625,9 @@ all instances "". By default the plugin does not return `_Total` when it is quer
 
 The [Windows Services (`win_services`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/win_services/README.md) reports Windows services info.
 
-### [X509 Certificate (`x509_cert`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/x509_cert/README.md) -- NEW in v.1.8
+### [X.509 Certificate (`x509_cert`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/x509_cert/README.md) -- NEW in v.1.8
 
-The [X509 Cert (`x509_cert`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/x509_cert/README.md) provides information about X509 certificate accessible using the local file or network connection.
+The [X.509 Certificate (`x509_cert`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/x509_cert/README.md) provides information about X.509 certificate accessible using the local file or network connection.
 
 ### [ZFS (`zfs`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/zfs/README.md)
 
