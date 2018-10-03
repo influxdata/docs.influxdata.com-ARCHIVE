@@ -26,17 +26,17 @@ For details about the configuration file, see [Getting started with Telegraf](ht
 
 ## Query data in InfluxDB
 
-Now that Telegraf is sending system data, including CPU usage, to InfluxDB. There are two ways you can query your InfluxDB data:
+As reviewed above, Telegraf is sending system data, including CPU usage, to InfluxDB. There are two ways you can query your InfluxDB data:
 
 * [In Chronograf with the Data  Explorer.](https://docs.influxdata.com/chronograf/latest/guides/create-a-dashboard/#step-3-create-your-query) Use the builder to select from your existing data and allow Chronograf to format the query for you. Alternatively, manually enter and edit a query. You can move between using the builder and manually editing the query.
 * [Using the command line interface.](https://docs.influxdata.com/influxdb/v1.6/query_language/data_exploration/)
 
 ## Visualize that data in a Chronograf dashboard
 
-* https://docs.influxdata.com/chronograf/latest/guides/create-a-dashboard
+Now that you've explored your data with queries, you can build a dashboard in Chronograf to visualize the data. For details, see [Create a dashboard](https://docs.influxdata.com/chronograf/latest/guides/create-a-dashboard) and [Using pre-created dashboards](https://docs.influxdata.com/chronograf/v1.6/guides/using-precreated-dashboards/).
 
 ## Create an alert in Kapacitor based on that data
 
-Since InfluxDB is running on http://localhost:8086 Kapacitor finds it during start up and creates several subscriptions on InfluxDB. These subscriptions tell InfluxDB to send all the data it receives from Telegraf to Kapacitor.
+Since InfluxDB is running on `localhost:8086`, Kapacitor finds it during start up and creates several subscriptions on InfluxDB. These subscriptions tell InfluxDB to send all the data it receives from Telegraf to Kapacitor.
 
-For step-by-step instructions on how to set up an alert in Kapacitor based on your data, see https://docs.influxdata.com/chronograf/v1.6/guides/create-alert-rules/.
+For step-by-step instructions on how to set up an alert in Kapacitor based on your data, see [Creating Chronograf alert rules](https://docs.influxdata.com/chronograf/latest/guides/create-alert-rules/).
