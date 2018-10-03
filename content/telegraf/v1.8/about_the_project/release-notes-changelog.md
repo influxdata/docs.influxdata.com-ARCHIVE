@@ -8,6 +8,15 @@ menu:
     parent: About the project
 ---
 
+## v1.8.1 [2018-10-03]
+
+### Bug fixes
+
+- Add `UUID` to VMs in VMware vSphere (`vsphere`) input plugin.
+- Skip tags with empty values in Amazon Cloudwatch (`cloudwatch`) output plugin.
+- Fix missing non-realtime samples in VMware vSphere (`vsphere`) input plugin.
+- Fix case of `timezone`/`grok_timezone` options in grok parser and logparser input plugin.
+
 ## v1.8 [2018-09-21]
 
 ### New input plugins
