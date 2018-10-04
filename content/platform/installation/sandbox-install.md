@@ -9,7 +9,7 @@ menu:
 ---
 
 The [InfluxData Sandbox](https://github.com/influxdata/sandbox) is the quickest
-way to get the TICK stack up and running and ready for exploration and testing.
+way to get the OSS TICK stack up and running and ready for exploration and testing.
 It uses [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose/overview/)
 to build a containerized, ready-to-use TICK stack preconfigured to capture
 data from your local machine and the Sandbox's Docker containers.
