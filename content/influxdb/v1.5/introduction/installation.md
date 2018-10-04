@@ -39,7 +39,7 @@ For users who don't want to install any software and are ready to use InfluxDB,
 you may want to check out our
 [managed hosted InfluxDB offering](https://cloud.influxdata.com).
 
-{{< vertical-tabs >}}
+{{< tab-labels >}}
 {{% tabs %}}
 [Ubuntu & Debian](#)
 [Red Hat & CentOS](#)
@@ -184,7 +184,7 @@ influxd -config /usr/local/etc/influxdb.conf
 {{% /tab-content %}}
 
 {{< /tab-content-container >}}
-{{< /vertical-tabs >}}
+{{< /tab-labels >}}
 
 ## Configuring InfluxDB OSS
 
