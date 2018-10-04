@@ -9,15 +9,15 @@ menu:
     weight: 1
 ---
 
-The InfluxData Platform is the leading [time-series](/platform/faq/#what-is-time-series-data)
+The InfluxData Platform is the leading [time series](/platform/faq/#what-is-time-series-data)
 platform designed from the ground up for modern metrics and events.
-It is comprised of four core projects: Telegraf, InfluxDB, Chronograf, and Kapacitor
+It is comprised of four core components: Telegraf, InfluxDB, Chronograf, and Kapacitor
 (often referred to as the [TICK stack](#the-tick-stack)).
 Each fulfills a specific role in managing your time-series data: data collection,
 data storage, data visualization, and data processing and alerting.
 
 [Enterprise versions](#influxdata-enterprise-platform) of InfluxDB and Kapacitor
-provide clustering, access control, and incremental backup functionality as for
+provide clustering, access control, and incremental backup functionality for
 production infrastructures at scale.
 
 ## The TICK stack
@@ -32,15 +32,16 @@ production infrastructures at scale.
 _Data Collection_  
 
 Telegraf is a data collection agent that captures data from a growing list of sources
-and translates it into [line-protocol](#) for storage in InfluxDB.
-It's "pluggable", extensible architecture makes it easy to [create plugins](#) that both
-pull and push data from and to different sources and endpoints.
+and translates it into [Line Protocol data format](/influxdb/latest/write_protocols/line_protocol_reference/)
+for storage in InfluxDB. It's "pluggable", extensible architecture makes it easy to
+create [plugins](/telegraf/latest/plugins/) that both pull and push data from and
+to different sources and endpoints.
 
 ### InfluxDB
 
 _Data Storage_
 
-InfluxDB stores data for any use case involving large amounts of time-stamped data, including
+InfluxDB stores data for any use case involving large amounts of timestamped data, including
 DevOps monitoring, log data, application metrics, IoT sensor data, and real-time analytics.
 It provides functionality that allows you to conserve space on your machine by keeping
 data for a defined length of time, then automatically downsampling or expiring and deleting
@@ -58,7 +59,7 @@ data visualizations, and data exploration. It also allows you to view and manage
 
 _Data Processing & Events_
 
-Kapacitor is a data processing framework that enables you to process and act a data
+Kapacitor is a data processing framework that enables you to process and act on data
 as it is written to InfluxDB. This includes detecting anomalies, creating alerts
 based on user-defined logic, and running ETL jobs.
 
@@ -76,7 +77,7 @@ InfluxDB cluster.
 
 #### Hinted handoff
 Data is written across nodes using an eventually consistent write
-model. All writes are added to the [Hinted Handoff Queue (HHQ)](/enterprise_influxdb/latest/concepts/clustering/#hinted-handoff)
+model. All writes are added to the [Hinted Handoff Queue (HHQ)](/enterprise_influxdb/latest/concepts/clustering/#hinted-handoff),
 then written to other nodes in the cluster.
 
 #### Anti-Entropy
@@ -90,7 +91,7 @@ In InfluxDB Enterprise, fine-grained authorization can be used to control access
 at the measurement or series levels rather than just the database level.
 
 #### Cluster profiling
-Enterprise meta nodes expose the `/degub/pprof` API endpoint that allows you t
+Enterprise meta nodes expose the `/debug/pprof` API endpoint that allows you to
 profile and potentially diagnose performance bottlenecks in your cluster.
 
 #### Incremental backups
@@ -116,7 +117,7 @@ communication between your Kapacitor Enterprise and InfluxDB Enterprise clusters
 
 <div style="display:inline-block;padding:.25em;margin:1em 0 2em; color:#fff;background:#4ed8a0;background:linear-gradient(to right,#4ed8a0 0,#22adf6 100%);border-radius:3px;">
   <a href="https://portal.influxdata.com/" target="\_blank" class="sidebar--support-ad--cta" style="color:#fff;text-align:center;">
-    Try the InfluxData Enterprise platform
+    Try InfluxEnterprise
   </a>
 </div>
 
