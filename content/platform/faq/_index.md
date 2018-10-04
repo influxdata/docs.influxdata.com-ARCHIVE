@@ -11,7 +11,7 @@ menu:
 [Why shouldn't I just use a relational database?](#why-shouldn-t-i-just-use-a-relational-database)  
 
 ## What is time series data?
-Time-series data is a series of data points each associated with a specific time.
+Time series data is a series of data points each associated with a specific time.
 Examples include:
 
 - Server performance metrics
