@@ -11,8 +11,8 @@ menu:
     parent: work-w-kapacitor
 ---
 
-If you haven't already, check out [this] (https://github.com/influxdb/kapacitor/blob/master/CONTRIBUTING.md)
-information to get started contributing.
+If you haven't already, check out the [Kapacitor contributing guidelines](https://github.com/influxdb/kapacitor/blob/master/CONTRIBUTING.md)
+for information about how to get started contributing.
 
 The goal
 --------
