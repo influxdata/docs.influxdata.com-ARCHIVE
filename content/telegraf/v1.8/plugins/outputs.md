@@ -101,7 +101,7 @@ The [Microsoft Azure Application Insights (`application_insights`) output plugin
 
 The [Microsoft Azure Monitor (`azure_monitor`) output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/azure_monitor/README.md) sends custom metrics to [Microsoft Azure Monitor](https://azure.microsoft.com/en-us/services/monitor/). Azure Monitor has a metric resolution of one minute. To handle this in Telegraf, the Azure Monitor output plugin automatically aggregates metrics into one minute buckets, which are then sent to Azure Monitor on every flush interval. 
 
-For a Microsoft blog posting on usingTelegraf with Microsoft Azure monitor, see [Collect custom metrics for a Linux VM with the InfluxData Telegraf Agent](https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/metrics-store-custom-linux-telegraf).
+For a Microsoft blog posting on using Telegraf with Microsoft Azure Monitor, see [Collect custom metrics for a Linux VM with the InfluxData Telegraf Agent](https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/metrics-store-custom-linux-telegraf).
 
 The metrics from each input plugin will be written to a separate Azure Monitor namespace, prefixed with `Telegraf/` by default. The field name for each metric is written as the Azure Monitor metric name. All field values are written as a summarized set that includes `min`, `max`, `sum`, and `count`. Tags are written as a dimension on each Azure Monitor metric.
 
