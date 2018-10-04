@@ -27,7 +27,7 @@ aren't synchronized with NTP, the timestamps on the data can be inaccurate.
 
 ## Installation
 
-{{< vertical-tabs >}}
+{{< tab-labels >}}
 {{% tabs %}}
   [Ubuntu & Debian](#)
   [RedHat & CentOS](#)
@@ -152,7 +152,7 @@ aren't synchronized with NTP, the timestamps on the data can be inaccurate.
   ```
 {{% /tab-content %}}
 {{< /tab-content-container >}}
-{{< /vertical-tabs >}}
+{{< /tab-labels >}}
 
 ## Configuration
 
