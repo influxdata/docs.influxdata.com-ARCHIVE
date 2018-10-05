@@ -12,11 +12,11 @@ menu:
 The InfluxData Platform is the leading [time series](/platform/faq/#what-is-time-series-data)
 platform designed from the ground up for modern metrics and events.
 It is comprised of four core components: Telegraf, InfluxDB, Chronograf, and Kapacitor
-(often referred to as the [TICK stack](#the-tick-stack)).
+(often referred to as the [TICK stack](#the-tick-stack-open-source-components)).
 Each fulfills a specific role in managing your time-series data: data collection,
 data storage, data visualization, and data processing and alerting.
 
-[Enterprise versions](#influxdata-platform-enterprise) of InfluxDB and Kapacitor
+[Enterprise versions](#influxdata-enterprise-commercial-offerings) of InfluxDB and Kapacitor
 provide clustering, access control, and incremental backup functionality for
 production infrastructures at scale.
 
@@ -63,19 +63,19 @@ Kapacitor is a data processing framework that enables you to process and act on 
 as it is written to InfluxDB. This includes detecting anomalies, creating alerts
 based on user-defined logic, and running ETL jobs.
 
-## InfluxData Enterprise - Commerical Offerings
+## InfluxData Enterprise - Commercial Offerings
 InfluxData's Enterprise offerings allow you to run the TICK stack at scale and provide
 enterprise-grade features added to our open source components as well as support directly from InfluxData's support team.
 
-> The open source versions of Telegraf and Chronograf can be used in conjunction with either the open source or Enterprise 
-> editions of InfluxDB and Kapacitor. Additionally, Telegraf and Chronograf do not require the purchase of an enterprise 
+> The open source versions of Telegraf and Chronograf can be used in conjunction with either the open source or Enterprise
+> editions of InfluxDB and Kapacitor. Additionally, Telegraf and Chronograf do not require the purchase of an enterprise
 > subscription.
 
 ### InfluxDB Enterprise
-InfluxDB Enterprise provides functionality necessary to run a high-availability (HA) InfluxDB cluster, providing clustering,  horizontal scale out, and advanced access controls. 
+InfluxDB Enterprise provides functionality necessary to run a high-availability (HA) InfluxDB cluster, providing clustering, horizontal scale out, and advanced access controls.
 
 #### Hinted handoff
-Data is written across nodes using an eventually consistent write model. 
+Data is written across nodes using an eventually consistent write model.
 All writes are added to the [Hinted Handoff Queue (HHQ)](/enterprise_influxdb/latest/concepts/clustering/#hinted-handoff),
 then written to other nodes in the cluster.
 
