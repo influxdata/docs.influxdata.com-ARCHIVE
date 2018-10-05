@@ -16,7 +16,7 @@ It is comprised of four core components: Telegraf, InfluxDB, Chronograf, and Kap
 Each fulfills a specific role in managing your time-series data: data collection,
 data storage, data visualization, and data processing and alerting.
 
-[Enterprise versions](#influxdata-enterprise-platform) of InfluxDB and Kapacitor
+[Enterprise versions](#enterprise-influxdata-platform) of InfluxDB and Kapacitor
 provide clustering, access control, and incremental backup functionality for
 production infrastructures at scale.
 
@@ -63,7 +63,7 @@ Kapacitor is a data processing framework that enables you to process and act on 
 as it is written to InfluxDB. This includes detecting anomalies, creating alerts
 based on user-defined logic, and running ETL jobs.
 
-## InfluxData Enterprise Platform
+## Enterprise InfluxData Platform
 InfluxData's Enterprise offerings allow you to run the TICK stack at scale, providing
 clustering, advanced access control, and other enterprise-specific features for
 InfluxDB and Kapacitor as well as direct support from InfluxData's support team.
@@ -117,7 +117,7 @@ communication between your Kapacitor Enterprise and InfluxDB Enterprise clusters
 
 <div style="display:inline-block;padding:.25em;margin:1em 0 2em; color:#fff;background:#4ed8a0;background:linear-gradient(to right,#4ed8a0 0,#22adf6 100%);border-radius:3px;">
   <a href="https://portal.influxdata.com/" target="\_blank" class="sidebar--support-ad--cta" style="color:#fff;text-align:center;">
-    Try InfluxEnterprise
+    Try the Enterprise InfluxData Platform
   </a>
 </div>
 
