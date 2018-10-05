@@ -3,12 +3,13 @@
 This repository powers [docs.influxdata.com](https://docs.influxdata.com), which
 includes documentation for the following InfluxData projects:
 
+* [InfluxData Platform](https://docs.influxdata.com/platform/introduction/)
 * [Telegraf](https://docs.influxdata.com/telegraf/latest/)
 * [InfluxDB](https://docs.influxdata.com/influxdb/latest/)
 * [InfluxDB Enterprise](https://docs.influxdata.com/enterprise_influxdb/latest/)
 * [Chronograf](https://docs.influxdata.com/chronograf/latest/)
 * [Kapacitor](https://docs.influxdata.com/kapacitor/latest/)
-* [Kapacitor Enterprise](https://docs.influxdata.com/enterprise_kapacitor/latest) 
+* [Kapacitor Enterprise](https://docs.influxdata.com/enterprise_kapacitor/latest)
 
 
 ## Contributing

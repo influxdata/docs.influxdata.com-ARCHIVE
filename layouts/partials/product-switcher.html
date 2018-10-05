@@ -1,4 +1,4 @@
-{{ if not .IsHome }}
+{{ if not (or .IsHome (in .RelPermalink "/platform/")) }}
 {{ $currentNode := . }}
 <div class="navbar--hamburger" id="navbar--hamburger">
     <div class="navbar--hamburger-bar top"></div>
