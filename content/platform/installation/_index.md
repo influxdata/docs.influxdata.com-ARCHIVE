@@ -8,7 +8,8 @@ menu:
 ---
 
 There are multiple ways to install and configure the InfluxData Platform (also known
-as the TICK stack). The following pages walk through different methods:
+as the TICK stack). Included below are several installation options and relevant
+links for exploring the InfluxData Platform and its TICK stack components.
 
 ## [InfluxData Sandbox Installation](/platform/installation/sandbox-install)  
 The InfluxData Sandbox is the quickest way to get the OSS TICK stack up and running
