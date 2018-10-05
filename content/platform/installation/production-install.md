@@ -1,6 +1,7 @@
 ---
 title: Install and configure the TICK stack in production
 description: placeholder
+draft: true
 menu:
   platform:
     name: Production Installation
