@@ -22,7 +22,7 @@
         <meta name="robots"
             {{ if (or .IsPage (eq .Kind "section")) }}
               {{ $projectDefaultVersion := index .Site.Data.default_versions (printf "%s_semver" (index (findRE "[^/]+.*?" .RelPermalink) 0)) }}
-              {{ if not (in .RelPermalink $projectDefaultVersion) }} content="noindex, nofollow"
+              {{ if not (or (in .RelPermalink $projectDefaultVersion) (in .RelPermalink "/platform/")) }} content="noindex, nofollow"
               {{ else }} content="index, follow" {{ end }}
             {{ else }} content="index, follow" {{ end }}
         >
