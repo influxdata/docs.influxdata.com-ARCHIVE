@@ -20,7 +20,7 @@ data storage, data visualization, and data processing and alerting.
 provide clustering, access control, and incremental backup functionality for
 production infrastructures at scale.
 
-## The TICK stack
+## The TICK stack - Open Source Components
 
 [**T**elegraf](#telegraf) - _Data collection_  
 [**I**nfluxDB](#influxdb) - _Data storage_  
@@ -63,21 +63,20 @@ Kapacitor is a data processing framework that enables you to process and act on 
 as it is written to InfluxDB. This includes detecting anomalies, creating alerts
 based on user-defined logic, and running ETL jobs.
 
-## InfluxData Platform Enterprise
-InfluxData's Enterprise offerings allow you to run the TICK stack at scale, providing
-clustering, advanced access control, and other enterprise-specific features for
-InfluxDB and Kapacitor as well as direct support from InfluxData's support team.
+## InfluxData Enterprise - Commerical Offerings
+InfluxData's Enterprise offerings allow you to run the TICK stack at scale and provide
+enterprise-grade features added to our open source components as well as support directly from InfluxData's support team.
 
-> The open source versions of Telegraf and Chronograf are used in the Enterprise
-> TICK stack and do not require enterprise licenses.
+> The open source versions of Telegraf and Chronograf can be used in conjunction with either the open source or Enterprise 
+> editions of InfluxDB and Kapacitor. Additionally, Telegraf and Chronograf do not require the purchase of an enterprise 
+> subscription.
 
 ### InfluxDB Enterprise
-InfluxDB Enterprise provides functionality necessary to run a high-availability (HA)
-InfluxDB cluster.
+InfluxDB Enterprise provides functionality necessary to run a high-availability (HA) InfluxDB cluster, providing clustering,  horizontal scale out, and advanced access controls. 
 
 #### Hinted handoff
-Data is written across nodes using an eventually consistent write
-model. All writes are added to the [Hinted Handoff Queue (HHQ)](/enterprise_influxdb/latest/concepts/clustering/#hinted-handoff),
+Data is written across nodes using an eventually consistent write model. 
+All writes are added to the [Hinted Handoff Queue (HHQ)](/enterprise_influxdb/latest/concepts/clustering/#hinted-handoff),
 then written to other nodes in the cluster.
 
 #### Anti-Entropy
