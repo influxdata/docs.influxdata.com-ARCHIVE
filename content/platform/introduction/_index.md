@@ -117,7 +117,7 @@ communication between your Kapacitor Enterprise and InfluxDB Enterprise clusters
 
 <div style="display:inline-block;padding:.25em;margin:1em 0 2em; color:#fff;background:#4ed8a0;background:linear-gradient(to right,#4ed8a0 0,#22adf6 100%);border-radius:3px;">
   <a href="https://portal.influxdata.com/" target="\_blank" class="sidebar--support-ad--cta" style="color:#fff;text-align:center;">
-    Try the Enterprise InfluxData Platform
+    Try InfluxData Platform Enterprise
   </a>
 </div>
 
