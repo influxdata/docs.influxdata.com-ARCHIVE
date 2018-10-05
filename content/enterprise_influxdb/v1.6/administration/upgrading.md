@@ -230,4 +230,4 @@ rk-upgrading-03:8091	1.6.2_c1.6.2
 ```
 
 If you have any issues upgrading your cluster, please do not hesitate to contact support at the email address
-provided to you when you received your InfluxEnterprise license.
+provided to you when you received your InfluxDB Enterprise license.

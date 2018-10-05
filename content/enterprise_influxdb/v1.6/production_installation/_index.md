@@ -8,9 +8,9 @@ menu:
 ---
 
 The Production Installation process is designed for users looking to deploy
-InfluxEnterprise in a production environment.
+InfluxDB Enterprise in a production environment.
 
-If you wish to evaluate InfluxEnterprise in a non-production
+If you wish to evaluate InfluxDB Enterprise in a non-production
 environment, feel free to follow the instructions outlined in the
 [QuickStart installation](/enterprise_influxdb/v1.6/quickstart_installation) section.
 Please note that if you install InfluxDB Enterprise with the QuickStart Installation process you
@@ -20,7 +20,7 @@ process before using the product in a production environment.
 
 ## Production installation
 
-Follow the links below to get up and running with InfluxEnterprise.
+Follow the links below to get up and running with InfluxDB Enterprise.
 
 ### [Step 1 - Meta node installation](/enterprise_influxdb/v1.6/production_installation/meta_node_installation/)
 ### [Step 2 - Data node installation](/enterprise_influxdb/v1.6/production_installation/data_node_installation/)

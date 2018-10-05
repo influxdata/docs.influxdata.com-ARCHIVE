@@ -56,7 +56,7 @@ Where `qid` is the query ID, displayed in the [`SHOW QUERIES`](/influxdb/v1.3/tr
 ```
 KILL QUERY <qid>
 ```
-***InfluxEnterprise clusters:*** To kill queries on a cluster, you need to specify the query ID (qid) and the TCP host (for example, `myhost:8088`),
+***InfluxDB Enterprise clusters:*** To kill queries on a cluster, you need to specify the query ID (qid) and the TCP host (for example, `myhost:8088`),
 available in the `SHOW QUERIES` output.
 
 ```
@@ -73,7 +73,7 @@ A successful `KILL QUERY` query returns no results.
 >
 ```
 ```
--- kill query on InfluxEnterprise cluster
+-- kill query on InfluxDB Enterprise cluster
 > KILL QUERY 53 ON "myhost:8088"
 >
 ```

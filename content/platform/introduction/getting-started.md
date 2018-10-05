@@ -8,6 +8,7 @@ menu:
 ---
 ## Overview
 
+<<<<<<< HEAD
 [Getting started setup](/img/chronograf/v1.6/intro-gs-diagram.png)
 
 Before following the steps below, you'll need to [download and install](https://docs.influxdata.com/introduction/download-install/) each component of the TICK stack.
@@ -47,3 +48,6 @@ Now that you've explored your data with queries, you can build a dashboard in Ch
 Since InfluxDB is running on `localhost:8086`, Kapacitor finds it during start up and creates several subscriptions on InfluxDB. These subscriptions tell InfluxDB to send all the data it receives from Telegraf to Kapacitor.
 
 For step-by-step instructions on how to set up an alert in Kapacitor based on your data, see [Creating Chronograf alert rules](https://docs.influxdata.com/chronograf/latest/guides/create-alert-rules/).
+=======
+_This is the getting started doc._
+>>>>>>> platform/getting-started

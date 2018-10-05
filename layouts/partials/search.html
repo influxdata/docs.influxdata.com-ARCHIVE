@@ -1,3 +1,9 @@
 <div class="navbar--search" id="navbar--search">
-	<input class="navbar--search-field" id="algolia-search-input" type="text" accesskey="s" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" dir="auto" placeholder="Search the docs...">
+	{{ $productIdentifier := (index (findRE "[^/]+.*?" .RelPermalink) 0) }}
+	{{ if or (eq $productIdentifier "telegraf") (eq $productIdentifier "influxdb") (eq $productIdentifier "enterprise_influxdb") (eq $productIdentifier "chronograf") (eq $productIdentifier "kapacitor") (eq $productIdentifier "enterprise_kapacitor") }}
+		{{ $product := index (where .Site.Menus.products "Identifier" $productIdentifier ) 0 }}
+		<input class="navbar--search-field" id="algolia-search-input" type="text" accesskey="s" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" dir="auto" placeholder="Search the {{ $product.Name }} docs...">
+	{{ else }}
+		<input class="navbar--search-field" id="algolia-search-input" type="text" accesskey="s" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" dir="auto" placeholder="Search the docs...">
+	{{ end }}
 </div>
