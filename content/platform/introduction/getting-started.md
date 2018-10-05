@@ -8,10 +8,9 @@ menu:
 ---
 ## Overview
 
-<<<<<<< HEAD
-[Getting started setup](/img/chronograf/v1.6/intro-gs-diagram.png)
+![Getting started setup](/img/chronograf/v1.6/intro-gs-diagram.png)
 
-Before following the steps below, you'll need to [download and install](https://docs.influxdata.com/introduction/download-install/) each component of the TICK stack.
+Before following the steps below, [download and install](/platform/installation/) each component of the TICK stack.
 
 ## Understand how Telegraf writes data to InfluxDB
 
@@ -23,31 +22,28 @@ The configuration file for Telegraf specifies where metrics come from and where 
 * `[[outputs.influxdb]]` - declares how to connect to InfluxDB and the destination database, which is the default ‘telegraf’ database.
 * `[[inputs.cpu]]` - declares how to collect the system cpu metrics to be sent to InfluxDB. Enabled by default.
 
-For details about the configuration file, see [Getting started with Telegraf](https://docs.influxdata.com/telegraf/v1.7/introduction/getting-started/).
+For details about the configuration file, see [Getting started with Telegraf](https://docs.influxdata.com/telegraf/latest/introduction/getting-started/).
 
 ## Query data in InfluxDB
 
 As reviewed above, Telegraf is sending system data, including CPU usage, to InfluxDB. There are two ways you can query your InfluxDB data:
 
 * [In Chronograf with the Data  Explorer.](https://docs.influxdata.com/chronograf/latest/guides/create-a-dashboard/#step-3-create-your-query) Use the builder to select from your existing data and allow Chronograf to format the query for you. Alternatively, manually enter and edit a query. You can move between using the builder and manually editing the query.
-* [Using the command line interface.](https://docs.influxdata.com/influxdb/v1.6/query_language/data_exploration/)
+* [Using the command line interface.](https://docs.influxdata.com/influxdb/latest/query_language/data_exploration/)
 
 
-Query example:
-```
+**Query example:**
+```sql
 SELECT "usage_system","usage_user" FROM "telegraf"."autogen"."cpu" WHERE time > now() - 30m
 ```
 
 
 ## Visualize that data in a Chronograf dashboard
 
-Now that you've explored your data with queries, you can build a dashboard in Chronograf to visualize the data. For details, see [Create a dashboard](https://docs.influxdata.com/chronograf/latest/guides/create-a-dashboard) and [Using pre-created dashboards](https://docs.influxdata.com/chronograf/v1.6/guides/using-precreated-dashboards/).
+Now that you've explored your data with queries, you can build a dashboard in Chronograf to visualize the data. For details, see [Create a dashboard](https://docs.influxdata.com/chronograf/latest/guides/create-a-dashboard) and [Using pre-created dashboards](https://docs.influxdata.com/chronograf/latest/guides/using-precreated-dashboards/).
 
 ## Create an alert in Kapacitor based on that data
 
 Since InfluxDB is running on `localhost:8086`, Kapacitor finds it during start up and creates several subscriptions on InfluxDB. These subscriptions tell InfluxDB to send all the data it receives from Telegraf to Kapacitor.
 
 For step-by-step instructions on how to set up an alert in Kapacitor based on your data, see [Creating Chronograf alert rules](https://docs.influxdata.com/chronograf/latest/guides/create-alert-rules/).
-=======
-_This is the getting started doc._
->>>>>>> platform/getting-started
