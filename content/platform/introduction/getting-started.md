@@ -34,9 +34,11 @@ As reviewed above, Telegraf is sending system data, including CPU usage, to Infl
 
 **Query example:**
 ```sql
-SELECT "usage_system","usage_user" FROM "telegraf"."autogen"."cpu" WHERE time > now() - 30m
+SELECT "usage_system",
+       "usage_user" 
+FROM "telegraf"."autogen"."cpu" 
+WHERE time > now() - 30m
 ```
-
 
 ## Visualize that data in a Chronograf dashboard
 
