@@ -7,8 +7,17 @@ menu:
     weight: 3
 ---
 
-_PLACEHOLDER CONTENT_
+One of the primary use cases for the InfluxData Platform is as server and infrastructure
+monitoring solution. No matter what type of data you're using the TICK stack to collect and
+store, it's important to monitor the health of your stack and identify any potential issues.
 
-- Monitoring setup (Monitoring TICK with TICK)
-- Internal monitoring vs external monitoring
-- Setting up monitoring dashboards
+The following pages provide information about setting up a TICK stack that monitors
+another OSS or Enterprise TICK stack. They cover different potential monitoring strategies
+and visualizing the monitoring data in a way that makes it easy to recognize, alert on,
+and address anomalies as they happen.
+
+## [Monitoring setup (Monitoring TICK with TICK)](#)
+
+## [Internal monitoring vs external monitoring](#)
+
+## [Setting up monitoring dashboards](#)
