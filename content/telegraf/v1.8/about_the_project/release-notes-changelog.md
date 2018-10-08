@@ -12,6 +12,12 @@ menu:
 
 ### Bug fixes
 
+- Fix `hardware_type` may be truncated in Microsoft SQL Server (`sqlserver`) input plugin.
+- Improve performance in Basicstats (`basicstats`) aggregator plugin.
+- Add `hostname` to TLS config for SNI support in X.509 Certicate (`x509_cert`) input plugin.
+- Don't add tags with empty values to OpenTSDB (`opentsdb`) output plugin.
+- Fix panic during network error in VMware vSphere (`vsphere`) input plugin.
+- Unify error response in HTTP Listener (`http_listener`) input plugin with InfluxDB (`influxdb`) output plugin.
 - Add `UUID` to VMs in VMware vSphere (`vsphere`) input plugin.
 - Skip tags with empty values in Amazon Cloudwatch (`cloudwatch`) output plugin.
 - Fix missing non-realtime samples in VMware vSphere (`vsphere`) input plugin.
@@ -31,7 +37,7 @@ menu:
 - [Temp (`temp`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/temp/README.md) - Contributed by @pytimer
 - [Tengine (`tengine`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/tengine/README.md) - Contributed by @ertaoxu
 - [VMware vSphere (`vsphere`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/vsphere/README.md) - Contributed by @prydin
-- [X509 Cert (`x509_cert`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/x509_cert/README.md) - Contributed by @jtyr
+- [X.509 Certificate (`x509_cert`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/x509_cert/README.md) - Contributed by @jtyr
 
 ### New processor plugins
 

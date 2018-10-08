@@ -41,18 +41,6 @@ Metrics are written to a topic exchange using `tag`, defined in configuration fi
 
 The [Apache Kafka (`kafka`) output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/kafka/README.md) writes to a [Kafka Broker](http://kafka.apache.org/07/quickstart.html) acting a Kafka Producer.
 
-### [Application Insights (`application_insights`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/application_insights/README.md)
-
-The [Application Insights (`application_insights`) output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/application_insights/README.md) writes Telegraf metrics to [Application Insights (Microsoft Azure)](https://azure.microsoft.com/en-us/services/application-insights/).
-
-### [Azure Monitor (`azure_monitor`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/azure_monitor/README.md) -- NEW in v.1.8
-
->**Note:** The Azure Monitor custom metrics service is currently in preview and not available in a subset of Azure regions.
-
-The [Azure Monitor (`azure_monitor`) output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/azure_monitor/README.md) sends custom metrics to [Azure Monitor](https://azure.microsoft.com/en-us/services/monitor/). Azure Monitor has a metric resolution of one minute. To handle this in Telegraf, the Azure Monitor output plugin automatically aggregates metrics into one minute buckets, which are then sent to Azure Monitor on every flush interval.
-
-The metrics from each input plugin will be written to a separate Azure Monitor namespace, prefixed with `Telegraf/` by default. The field name for each metric is written as the Azure Monitor metric name. All field values are written as a summarized set that includes `min`, `max`, `sum`, and `count`. Tags are written as a dimension on each Azure Monitor metric.
-
 ### [CrateDB (`cratedb`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/cratedb/README.md)
 
 The [CrateDB (`cratedb`) output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/cratedb/README.md) writes to [CrateDB](https://crate.io/) using its [PostgreSQL protocol](https://crate.io/docs/crate/reference/protocols/postgres.html).
@@ -102,6 +90,20 @@ Instrumental accepts stats in a format very close to Graphite, with the only dif
 ### [Librato (`librato`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/librato/README.md)
 
 The [Librato (`librato`) output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/librato/README.md) writes to the [Librato Metrics API](http://dev.librato.com/v1/metrics#metrics) and requires an `api_user` and `api_token` which can be obtained [here](https://metrics.librato.com/account/api_tokens) for the account.
+
+### [Microsoft Azure Application Insights (`application_insights`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/application_insights/README.md)
+
+The [Microsoft Azure Application Insights (`application_insights`) output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/application_insights/README.md) writes Telegraf metrics to [Application Insights (Microsoft Azure)](https://azure.microsoft.com/en-us/services/application-insights/).
+
+### [Microsoft Azure Monitor (`azure_monitor`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/azure_monitor/README.md) -- NEW in v.1.8
+
+>**Note:** The Azure Monitor custom metrics service is currently in preview and not available in a subset of Azure regions.
+
+The [Microsoft Azure Monitor (`azure_monitor`) output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/azure_monitor/README.md) sends custom metrics to [Microsoft Azure Monitor](https://azure.microsoft.com/en-us/services/monitor/). Azure Monitor has a metric resolution of one minute. To handle this in Telegraf, the Azure Monitor output plugin automatically aggregates metrics into one minute buckets, which are then sent to Azure Monitor on every flush interval. 
+
+For a Microsoft blog posting on using Telegraf with Microsoft Azure Monitor, see [Collect custom metrics for a Linux VM with the InfluxData Telegraf Agent](https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/metrics-store-custom-linux-telegraf).
+
+The metrics from each input plugin will be written to a separate Azure Monitor namespace, prefixed with `Telegraf/` by default. The field name for each metric is written as the Azure Monitor metric name. All field values are written as a summarized set that includes `min`, `max`, `sum`, and `count`. Tags are written as a dimension on each Azure Monitor metric.
 
 ### [MQTT Producer  (`mqtt`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/mqtt/README.md)
 

@@ -100,7 +100,7 @@ Once Telegraf is installed and started, it will, as configured by default, send 
 
 The Telegraf configuration file can be found at its default location: `/etc/telegraf/telegraf.conf`.  For this introduction it is worth noting some values that will be relevant to the Kapacitor tasks that will be shown below. Namely:
 
-   * `[agent]\interval` - declares the frequency at which system metrics will be sent to InfluxDB
+   * `[agent].interval` - declares the frequency at which system metrics will be sent to InfluxDB
    * `[[outputs.influxd]]` - declares how to connect to InfluxDB and the destination database, which is the default 'telegraf' database.
    * `[[inputs.cpu]]` - declares how to collect the system cpu metrics to be sent to InfluxDB.
 
@@ -329,7 +329,7 @@ This command will be covered in more detail below.
 Kapacitor now knows how to trigger the alert.
 
 However, nothing is going to happen until the task has been enabled.
-Before being enabled, the task should first be tested to ensure it does not spam the log files or communication channels with alerts. 
+Before being enabled, the task should first be tested to ensure it does not spam the log files or communication channels with alerts.
 Record the current data stream for a bit and use it to test the new task:
 
 ```bash
