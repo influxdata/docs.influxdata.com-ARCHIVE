@@ -260,8 +260,13 @@ Use the **Table Controls** to specify the following:
 
 ### Note
 
-The **Note** panel displays Markdown-formatted text alongside or instead of a graph.
+The **Note** panel displays Markdown-formatted text with your graph.
+<screenshot>
 
 #### Note Controls
+
+Enter your text in the **Add a Note** panel, using Markdown to format the text.
+
+Enable the **Display note in cell when query returns no results** option to show the note text in .
 
 #### Note view example
