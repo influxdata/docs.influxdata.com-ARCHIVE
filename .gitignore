@@ -5,3 +5,4 @@ deploy
 .*.swp
 node_modules
 *.log
+content/platform/introduction/getting-started.md
