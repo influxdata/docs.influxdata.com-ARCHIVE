@@ -1,19 +1,17 @@
 ---
 title: Getting started on Google Cloud Platform Marketplace
-aliases:
-    - /enterprise/v1.6/production_installation/meta_node_installation/
 
 menu:
   enterprise_influxdb_1_6:
     weight: 10
-    parent: Production installation
+    parent: Other installation options
 ---
 
 For users looking to deploy InfluxDB Enterprise on Google Cloud Platform infrastructure, InfluxData provides an [InfluxDB Enterprise (BYOL) solution](https://console.cloud.google.com/partner/editor/influxdata-public/influxdb-enterprise-byol) on the [Google Cloud Platform Marketplace](https://cloud.google.com/marketplace/) makes the installation and setup process easy and straightforward. Clusters deployed through the GCP Marketplace are ready for production.
 
 > **Note:** The [Deployment Manager templates](https://cloud.google.com/deployment-manager/) used for the InfluxDB Enterprise BYOL solution are [open source](https://github.com/influxdata/google-deployment-manager-influxdb-enterprise). Issues and feature requests for the Marketplace deployment should be [submitted through the GitHub repository](https://github.com/influxdata/google-deployment-manager-influxdb-enterprise/issues/new) (requires a GitHub account) or by [InfluxData support](mailto:Support@InfluxData.com).
 
-## Pre-requisites
+## Prerequisites
 
 This guide requires the following:
 

@@ -1,7 +1,6 @@
 ---
 title: Other installation options
-aliases:
-    - /enterprise/v1.6/other_installation/
+
 menu:
   enterprise_influxdb_1_6:
     weight: 45
