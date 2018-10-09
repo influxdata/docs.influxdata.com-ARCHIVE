@@ -1,5 +1,5 @@
 ---
-title: Install Google Marketplace InfluxDB Enterprise (BYOL)
+title: Getting started on Google Cloud Platform Marketplace
 aliases:
     - /enterprise/v1.6/production_installation/meta_node_installation/
 
@@ -9,210 +9,79 @@ menu:
     parent: Production installation
 ---
 
-InfluxDB Enterprise offers highly scalable clusters on your infrastructure
-and a management UI ([via Chronograf](https://docs.influxdata.com/chronograf/latest) for working with clusters.
+For users looking to deploy InfluxDB Enterprise on Google Cloud Platform infrastructure, InfluxData provides an [InfluxDB Enterprise (BYOL) solution](https://console.cloud.google.com/partner/editor/influxdata-public/influxdb-enterprise-byol) on the [Google Cloud Platform Marketplace](https://cloud.google.com/marketplace/) makes the installation and setup process easy and straightforward. Clusters deployed through the GCP Marketplace are ready for production.
 
-The Production Installation process is designed for users looking to
-deploy InfluxDB Enterprise in a production environment.
-The following steps will get you up and running with the first essential component of
-your InfluxDB Enterprise cluster: the meta nodes.
+> **Note:** The [Deployment Manager templates](https://cloud.google.com/deployment-manager/) used for the InfluxDB Enterprise BYOL solution are [open source](https://github.com/influxdata/google-deployment-manager-influxdb-enterprise). Issues and feature requests for the Marketplace deployment should be [submitted through the GitHub repository](https://github.com/influxdata/google-deployment-manager-influxdb-enterprise/issues/new) (requires a GitHub account) or by [InfluxData support](mailto:Support@InfluxData.com).
 
-> If you wish to evaluate InfluxDB Enterprise in a non-production
-environment, feel free to follow the instructions outlined in the
-[QuickStart installation](/enterprise_influxdb/v1.6/quickstart_installation) section.
-Please note that if you install InfluxDB Enterprise with the QuickStart Installation process you
-will need to reinstall InfluxDB Enterprise with the Production Installation
-process before using the product in a production environment.
+## Pre-requisites
 
-<br>
-# Meta Node Setup Description and Requirements
+This guide requires the following:
 
-The Production Installation process sets up three [meta nodes](/enterprise_influxdb/v1.6/concepts/glossary/#meta-node)
-and each meta node runs on its own server.
-<br>
-You **must** have a minimum of three meta nodes in a cluster.
-InfluxDB Enterprise clusters require at least three meta nodes and an __**odd number**__
-of meta nodes for high availability and redundancy.
-We do not recommend having more than three meta nodes unless your servers
-and/or the communication between the servers have chronic reliability issues.
-<br>
-Note: that there is no requirement for each meta node to run on its own server.  But, obviously, deploying
-multiple meta nodes on the same server creates a larger point of potential failure if that particular node is unresponsive.
-Best practice is to deploy the meta nodes on relatively small footprint servers.
+- A [Google Cloud Platform (GCP)](https://cloud.google.com/) account with access to the [GCP Marketplace](https://cloud.google.com/marketplace/).
+- A valid InfluxDB Enterprise license key, or [sign up for a free InfluxDB Enterprise trial for GCP](https://portal.influxdata.com/users/gcp).
+- Access to [GCP Cloud Shell](https://cloud.google.com/shell/) or the [`gcloud` SDK and command line tools](https://cloud.google.com/sdk/).
 
-See the
-[Clustering Guide](/enterprise_influxdb/v1.6/concepts/clustering#optimal-server-counts)
-for more on cluster architecture.
+To deploy InfluxDB Enterprise on platforms other than GCP, please see the [installation options](enterprise_influxdb/v1.6/introduction/installation_guidelines).
 
-### Other requirements
+## Deploying a cluster
 
-#### License key or file
+To deploy an InfluxDB Enterprise cluster, log in to your Google Cloud Platform account and navigate to [InfluxData's InfluxDB Enterprise (BYOL)](https://console.cloud.google.com/partner/editor/influxdata-public/influxdb-enterprise-byol) solution on the GCP Marketplace.
 
-InfluxDB Enterprise requires a license key **OR** a license file to run.
-Your license key is available at [InfluxPortal](https://portal.influxdata.com/licenses).
-Contact support at the email we provided at signup to receive a license file.
-License files are required only if the nodes in your cluster cannot reach
-`portal.influxdata.com` on port `80` or `443`.
+![GCP InfluxDB Enterprise solution page](/img/enterprise/gcp/byol-intro-1.png)
 
-#### Ports
+Click __Launch on compute engine__ to open up the configuration page.
 
-Meta nodes communicate over ports `8088`, `8089`, and `8091`.
+![GCP InfluxDB Enterprise configuration page](/img/enterprise/gcp/byol-intro-2.png)
 
-For licensing purposes, meta nodes must also be able to reach `portal.influxdata.com`
-on port `80` or `443`.
-If the meta nodes cannot reach `portal.influxdata.com` on port `80` or `443`,
-you'll need to set the `license-path` setting instead of the `license-key`
-setting in the meta node configuration file.
+Copy the InfluxDB Enterprise license key to the __InfluxDB Enterprise license key__ field or [sign up for a free InfluxDB Enterprise trial for GCP](https://portal.influxdata.com/users/gcp) to obtain a license key.
 
-<br>
-# Meta node setup
-## Step 1: Modify the `/etc/hosts` File
+Adjust any other fields as desired. The cluster will only be accessible within the network (or subnetwork, if specified) it is deploy within. The fields in collapsed sections generally do not need to be altered.
 
-Add your servers' hostnames and IP addresses to **each** cluster server's `/etc/hosts`
-file (the hostnames below are representative).
+Click __Deploy__ to launch the InfluxDB Enterprise cluster.
 
+![GCP InfluxDB Enterprise deployment pending page](/img/enterprise/gcp/byol-intro-3.png)
+
+The cluster will take up to five minutes to fully deploy.
+
+If the deployment does not complete or reports an error, read through the list of [common deployment errors](#common-errors).
+
+![GCP InfluxDB Enterprise deployment complete page](/img/enterprise/gcp/byol-intro-4.png)
+
+Your cluster is now deployed!
+
+> **Note:** Make sure you save the "Admin username", "Admin password", and "Connection internal IP" values displayed on the screen. They will be required when attempting to access the cluster.
+
+## Accessing the cluster
+
+The cluster's IP address is only reachable from within the GCP network (or subnetwork) specified in the solution configuration. A cluster can only be reached from instances or services within the same GCP network/subnetwork it was provisioned in.
+
+Using the GCP Cloud Shell or `gcloud` CLI, create a new instance that will be used to access the InfluxDB Enterprise cluster.
 
 ```
-<Meta_1_IP> enterprise-meta-01
-<Meta_2_IP> enterprise-meta-02
-<Meta_3_IP> enterprise-meta-03
+gcloud compute instances create influxdb-access --zone us-central1-f --image-family debian-9 --image-project debian-cloud
 ```
 
-> **Verification steps:**
->
-Before proceeding with the installation, verify on each server that the other
-servers are resolvable. Here is an example set of shell commands using `ping`:
->
-    ping -qc 1 enterprise-meta-01
-    ping -qc 1 enterprise-meta-02
-    ping -qc 1 enterprise-meta-03
-
-
-If there are any connectivity issues resolve them before proceeding with the
-installation.
-A healthy cluster requires that every meta node can communicate with every other
-meta node.
-
-## Step 2: Set up, configure, and start the meta services
-
-Perform the following steps on each meta server.
-
-### I. Download and install the meta service
-
-#### Ubuntu & Debian (64-bit)
+SSH into the instance.
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.6.2-c1.6.2_amd64.deb
-sudo dpkg -i influxdb-meta_1.6.2-c1.6.2_amd64.deb
+gcloud compute ssh influxdb-access
 ```
 
-#### RedHat & CentOS (64-bit)
+On the instance, install the `influx` command line tool via the InfluxDB open source package.
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.6.2_c1.6.2.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.6.2_c1.6.2.x86_64.rpm
+wget https://dl.influxdata.com/influxdb/releases/influxdb_1.6.3_amd64.deb
+sudo dpkg -i influxdb_1.6.3_amd64.deb
 ```
 
-### II. Edit the configuration file
-
-In `/etc/influxdb/influxdb-meta.conf`:
-
-* uncomment and set `hostname` to the full hostname of the meta node
-* set `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.
-
-<dt>
-The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
-</dt>
+Now the InfluxDB Enterprise cluster can be accessed using the following command with "Admin username", "Admin password", and "Connection internal IP" values from the deployment screen substituted for `<value>`.
 
 ```
-# Hostname advertised by this host for remote addresses.  This must be resolvable by all
-# other nodes in the cluster
-hostname="<enterprise-meta-0x>" #✨
+influx -username <Admin username> -password <Admin password> -host <Connection internal IP> -execute "CREATE DATABASE test"
 
-[enterprise]
-  # license-key and license-path are mutually exclusive, use only one and leave the other blank
-  license-key = "<your_license_key>" #✨ mutually exclusive with license-path
-
-  # license-key and license-path are mutually exclusive, use only one and leave the other blank
-  license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
+influx -username <Admin username> -password <Admin password> -host <Connection internal IP> -execute "SHOW DATABASES"
 ```
 
-### III. Start the meta service
+### Next steps
 
-On sysvinit systems, enter:
-```
-service influxdb-meta start
-```
-
-On systemd systems, enter:
-```
-sudo systemctl start influxdb-meta
-```
-
-> **Verification steps:**
->
-Check to see that the process is running by entering:
->
-    ps aux | grep -v grep | grep influxdb-meta
->
-You should see output similar to:
->
-    influxdb  3207  0.8  4.4 483000 22168 ?        Ssl  17:05   0:08 /usr/bin/influxd-meta -config /etc/influxdb/influxdb-meta.conf
-
-<br>
-
-
-> **Note:** It is possible to start the cluster with a single meta node but you
-must pass the `-single-server flag` when starting the single meta node.
-Please note that a cluster with only one meta node is **not** recommended for
-production environments.
-
-## Step 3: Join the meta nodes to the cluster
-
-From one and only one meta node, join all meta nodes including itself.
-In our example, from `enterprise-meta-01`, run:
-```
-influxd-ctl add-meta enterprise-meta-01:8091
-
-influxd-ctl add-meta enterprise-meta-02:8091
-
-influxd-ctl add-meta enterprise-meta-03:8091
-```
-
-> **Note:** Please make sure that you specify the fully qualified host name of
-the meta node during the join process.
-Please do not specify `localhost` as this can cause cluster connection issues.
-
-The expected output is:
-```
-Added meta node x at enterprise-meta-0x:8091
-```
-
-> **Verification steps:**
->
-Issue the following command on any meta node:
->
-    influxd-ctl show
->
-The expected output is:
->
-    Data Nodes
-    ==========
-    ID      TCP Address      Version
->
-    Meta Nodes
-    ==========
-    TCP Address               Version
-    enterprise-meta-01:8091   1.6.2-c1.6.2
-    enterprise-meta-02:8091   1.6.2-c1.6.2
-    enterprise-meta-03:8091   1.6.2-c1.6.2
-
-
-Note that your cluster must have at least three meta nodes.
-If you do not see your meta nodes in the output, please retry adding them to
-the cluster.
-
-Once your meta nodes are part of your cluster move on to [the next steps to
-set up your data nodes](/enterprise_influxdb/v1.6/production_installation/data_node_installation/).
-Please do not continue to the next steps if your meta nodes are not part of the
-cluster.
+Read through the [InfluxDB Getting Started guide](/platform/introduction/getting-started) for an introduction to InfluxDB and the larger InfluxData platform.
