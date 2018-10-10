@@ -9,7 +9,7 @@ menu:
 
 For users looking to deploy InfluxDB Enterprise on Google Cloud Platform infrastructure, InfluxData provides an [InfluxDB Enterprise (BYOL) solution](https://console.cloud.google.com/partner/editor/influxdata-public/influxdb-enterprise-byol) on the [Google Cloud Platform Marketplace](https://cloud.google.com/marketplace/) makes the installation and setup process easy and straightforward. Clusters deployed through the GCP Marketplace are ready for production.
 
-> **Note:** The [Deployment Manager templates](https://cloud.google.com/deployment-manager/) used for the InfluxDB Enterprise BYOL solution are [open source](https://github.com/influxdata/google-deployment-manager-influxdb-enterprise). Issues and feature requests for the Marketplace deployment should be [submitted through the GitHub repository](https://github.com/influxdata/google-deployment-manager-influxdb-enterprise/issues/new) (requires a GitHub account) or by [InfluxData support](mailto:Support@InfluxData.com).
+> **Note:** The [Deployment Manager templates](https://cloud.google.com/deployment-manager/) used for the InfluxDB Enterprise BYOL solution are [open source](https://github.com/influxdata/google-deployment-manager-influxdb-enterprise). Issues and feature requests for the Marketplace deployment should be [submitted through the related GitHub repository](https://github.com/influxdata/google-deployment-manager-influxdb-enterprise/issues/new) (requires a GitHub account) or by contacting [InfluxData support](mailto:Support@InfluxData.com).
 
 ## Prerequisites
 
@@ -19,11 +19,11 @@ This guide requires the following:
 - A valid InfluxDB Enterprise license key, or [sign up for a free InfluxDB Enterprise trial for GCP](https://portal.influxdata.com/users/gcp).
 - Access to [GCP Cloud Shell](https://cloud.google.com/shell/) or the [`gcloud` SDK and command line tools](https://cloud.google.com/sdk/).
 
-To deploy InfluxDB Enterprise on platforms other than GCP, please see the [installation options](enterprise_influxdb/v1.6/introduction/installation_guidelines).
+To deploy InfluxDB Enterprise on platforms other than GCP, please see [InfluxDB Enterprise installation options](enterprise_influxdb/v1.6/introduction/installation_guidelines).
 
 ## Deploying a cluster
 
-To deploy an InfluxDB Enterprise cluster, log in to your Google Cloud Platform account and navigate to [InfluxData's InfluxDB Enterprise (BYOL)](https://console.cloud.google.com/partner/editor/influxdata-public/influxdb-enterprise-byol) solution on the GCP Marketplace.
+To deploy an InfluxDB Enterprise cluster, log in to your Google Cloud Platform account and navigate to [InfluxData's InfluxDB Enterprise (BYOL)](https://console.cloud.google.com/partner/editor/influxdata-public/influxdb-enterprise-byol) solution in the GCP Marketplace.
 
 ![GCP InfluxDB Enterprise solution page](/img/enterprise/gcp/byol-intro-1.png)
 
@@ -51,7 +51,7 @@ Your cluster is now deployed!
 
 ## Accessing the cluster
 
-The cluster's IP address is only reachable from within the GCP network (or subnetwork) specified in the solution configuration. A cluster can only be reached from instances or services within the same GCP network/subnetwork it was provisioned in.
+The cluster's IP address is only reachable from within the GCP network (or subnetwork) specified in the solution configuration. A cluster can only be reached from instances or services within the same GCP network or subnetwork that it was provisioned in.
 
 Using the GCP Cloud Shell or `gcloud` CLI, create a new instance that will be used to access the InfluxDB Enterprise cluster.
 
@@ -82,4 +82,4 @@ influx -username <Admin username> -password <Admin password> -host <Connection i
 
 ### Next steps
 
-Read through the [InfluxDB Getting Started guide](/platform/introduction/getting-started) for an introduction to InfluxDB and the larger InfluxData platform.
+For an introduction to InfluxDB database and the InfluxData Platform, see [Getting started with InfluxDB](/platform/introduction/getting-started).
