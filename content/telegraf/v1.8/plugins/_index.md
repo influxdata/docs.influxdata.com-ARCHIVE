@@ -9,6 +9,10 @@ menu:
 
 Telegraf is an agent, written in the Go programming language, for collecting, processing, aggregating, and writing metrics. Telegraf is plugin-driven and supports four categories of plugin types, including input, output, aggregator, and processor.
 
+## Telegraf plugins - default and optional
+
+By default, Telegraf runs with some useful plugins enabled.
+
 
 ## [Telegraf input plugins](/telegraf/v1.8/plugins/inputs/)
 
