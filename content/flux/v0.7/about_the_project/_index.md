@@ -3,7 +3,7 @@ title: About the project
 
 menu:
   flux_0_7:
-    weight: 10
+    weight: 1
 ---
 
 ## [Release notes](/flux/v0.7/about_the_project/releasenotes-changelog)
