@@ -1,0 +1,28 @@
+<div class="sidebar--toggle" id="sidebar--toggle">InfluxData Platform contents</div>
+<div class="sidebar--mask-container" id="sidebar--mask-container">
+  <div class="sidebar--mask" id="sidebar--mask"></div>
+</div>
+<aside class="sidebar" id="sidebar">
+  <section class="sidebar--section">
+    {{ partial "support-ad.html" . }}
+  </section>
+  {{ $currentPage := . }}
+  {{ range .Site.Menus.platform }}
+    {{ if .HasChildren }}
+      <section class="sidebar--section">
+        <div class="sidebar--section-title">
+          <a class="{{ if (in $currentPage.Permalink .URL ) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
+        </div>
+          {{ range .Children }}
+          <a class="sidebar--page{{ if or ($currentPage.IsMenuCurrent $currentPage.Section .) ($currentPage.HasMenuCurrent $currentPage.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
+          {{ end }}
+      </section>
+    {{else}}
+      <section class="sidebar--section">
+        <div class="sidebar--section-title">
+          <a class="{{ if (in $currentPage.Permalink .URL ) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
+        </div>
+      </section>
+    {{end}}
+  {{end}}
+</aside>

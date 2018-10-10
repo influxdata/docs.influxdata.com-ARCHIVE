@@ -101,7 +101,7 @@ of one, and it is the `DEFAULT` retention policy for the database.
 
 #### Example 2: Run a `SHOW RETENTION POLICIES` query without the `ON` clause
 
-{{< vertical-tabs >}}
+{{< tab-labels >}}
 {{% tabs %}}
 [CLI](#)
 [HTTP API](#)
@@ -162,7 +162,7 @@ Specify the database with the `db` query string parameter:
 {{% /tab-content %}}
 
 {{< /tab-content-container >}}
-{{< /vertical-tabs >}}
+{{< /tab-labels >}}
 
 ## `SHOW SERIES`
 Returns a list of [series](/influxdb/v1.4/concepts/glossary/#series) for
@@ -228,7 +228,7 @@ The `NOAA_water_database` has five different measurements and 14 different serie
 
 #### Example 2: Run a `SHOW SERIES` query without the `ON` clause
 
-{{< vertical-tabs >}}
+{{< tab-labels >}}
 {{% tabs %}}
 [CLI](#)
 [HTTP API](#)
@@ -333,7 +333,7 @@ Specify the database with the `db` query string parameter:
 {{% /tab-content %}}
 
 {{< /tab-content-container >}}
-{{< /vertical-tabs >}}
+{{< /tab-labels >}}
 
 #### Example 3: Run a `SHOW SERIES` query with several clauses
 
@@ -404,7 +404,7 @@ The database has five measurements: `average_temperature`, `h2o_feet`,
 
 #### Example 2: Run a `SHOW MEASUREMENTS` query without the `ON` clause
 
-{{< vertical-tabs >}}
+{{< tab-labels >}}
 {{% tabs %}}
 [CLI](#)
 [HTTP API](#)
@@ -475,7 +475,7 @@ Specify the database with the `db` query string parameter:
 {{% /tab-content %}}
 
 {{< /tab-content-container >}}
-{{< /vertical-tabs >}}
+{{< /tab-labels >}}
 
 #### Example 3: Run a `SHOW MEASUREMENTS` query with several clauses (i)
 ```
@@ -580,7 +580,7 @@ it shows that every measurement has the `location` tag key and that the
 
 #### Example 2: Run a `SHOW TAG KEYS` query without the `ON` clause
 
-{{< vertical-tabs >}}
+{{< tab-labels >}}
 {{% tabs %}}
 [CLI](#)
 [HTTP API](#)
@@ -703,7 +703,7 @@ Specify the database with the `db` query string parameter:
 {{% /tab-content %}}
 
 {{< /tab-content-container >}}
-{{< /vertical-tabs >}}
+{{< /tab-labels >}}
 
 
 #### Example 3: Run a `SHOW TAG KEYS` query with several clauses
@@ -776,7 +776,7 @@ database.
 
 #### Example 2: Run a `SHOW TAG VALUES` query without the `ON` clause
 
-{{< vertical-tabs >}}
+{{< tab-labels >}}
 {{% tabs %}}
 [CLI](#)
 [HTTP API](#)
@@ -843,7 +843,7 @@ Specify the database with the `db` query string parameter:
 {{% /tab-content %}}
 
 {{< /tab-content-container >}}
-{{< /vertical-tabs >}}
+{{< /tab-labels >}}
 
 #### Example 3: Run a `SHOW TAG VALUES` query with several clauses
 ```
@@ -923,7 +923,7 @@ The query returns the field keys and field value data types for each
 measurement in the `NOAA_water_database` database.
 
 #### Example 2: Run a `SHOW FIELD KEYS` query without the `ON` clause
-{{< vertical-tabs >}}
+{{< tab-labels >}}
 {{% tabs %}}
 [CLI](#)
 [HTTP API](#)
@@ -1057,7 +1057,7 @@ Specify the database with the `db` query string parameter:
 {{% /tab-content %}}
 
 {{< /tab-content-container >}}
-{{< /vertical-tabs >}}
+{{< /tab-labels >}}
 
 
 #### Example 3: Run a `SHOW FIELD KEYS` query with the `FROM` clause

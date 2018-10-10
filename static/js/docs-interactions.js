@@ -53,11 +53,11 @@ $(function(){
 });
 
 /**
- * Behavior for the vertical tab widget.
+ * Behavior for the tabs widget.
  */
 $(function() {
-	const tab = '.vertical-tabs a';
-	const content = '.vertical-tab-content';
+	const tab = '.tabs a';
+	const content = '.tab-content';
 
 	// Add the active class to the first tab, in case it wasn't already set in the markup.
 	$(tab).removeClass('is-active');

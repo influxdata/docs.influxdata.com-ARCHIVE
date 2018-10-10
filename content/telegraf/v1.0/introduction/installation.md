@@ -21,7 +21,7 @@ which is located at `/etc/telegraf/telegraf.conf` for default installations.
 
 ## Installation
 
-{{< vertical-tabs >}}
+{{< tab-labels >}}
 {{% tabs %}}
   [Ubuntu & Debian](#)
   [RedHat & CentOS](#)
@@ -146,7 +146,7 @@ which is located at `/etc/telegraf/telegraf.conf` for default installations.
   ```
 {{% /tab-content %}}
 {{< /tab-content-container >}}
-{{< /vertical-tabs >}}
+{{< /tab-labels >}}
 
 ## Configuration
 
