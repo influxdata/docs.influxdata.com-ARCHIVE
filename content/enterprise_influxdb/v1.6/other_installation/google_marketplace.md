@@ -3,11 +3,12 @@ title: Getting started on Google Cloud Platform Marketplace
 
 menu:
   enterprise_influxdb_1_6:
+    name: Google Cloud Platform Marketplace
     weight: 10
     parent: Other installation options
 ---
 
-For users looking to deploy InfluxDB Enterprise on Google Cloud Platform infrastructure, InfluxData provides an [InfluxDB Enterprise (BYOL) solution](https://console.cloud.google.com/partner/editor/influxdata-public/influxdb-enterprise-byol) on the [Google Cloud Platform Marketplace](https://cloud.google.com/marketplace/) makes the installation and setup process easy and straightforward. Clusters deployed through the GCP Marketplace are ready for production.
+For users looking to deploy InfluxDB Enterprise on Google Cloud Platform (GCP) infrastructure, InfluxData provides an [InfluxDB Enterprise bring-your-own-license (BYOL) solution](https://console.cloud.google.com/partner/editor/influxdata-public/influxdb-enterprise-byol) on the [Google Cloud Platform Marketplace](https://cloud.google.com/marketplace/) that makes the installation and setup process easy and straightforward. Clusters deployed through the GCP Marketplace are ready for production.
 
 > **Note:** The [Deployment Manager templates](https://cloud.google.com/deployment-manager/) used for the InfluxDB Enterprise BYOL solution are [open source](https://github.com/influxdata/google-deployment-manager-influxdb-enterprise). Issues and feature requests for the Marketplace deployment should be [submitted through the related GitHub repository](https://github.com/influxdata/google-deployment-manager-influxdb-enterprise/issues/new) (requires a GitHub account) or by contacting [InfluxData support](mailto:Support@InfluxData.com).
 
@@ -33,15 +34,13 @@ Click __Launch on compute engine__ to open up the configuration page.
 
 Copy the InfluxDB Enterprise license key to the __InfluxDB Enterprise license key__ field or [sign up for a free InfluxDB Enterprise trial for GCP](https://portal.influxdata.com/users/gcp) to obtain a license key.
 
-Adjust any other fields as desired. The cluster will only be accessible within the network (or subnetwork, if specified) it is deploy within. The fields in collapsed sections generally do not need to be altered.
+Adjust any other fields as desired. The cluster will only be accessible within the network (or subnetwork, if specified) in which it is deployed. The fields in collapsed sections generally do not need to be altered.
 
 Click __Deploy__ to launch the InfluxDB Enterprise cluster.
 
 ![GCP InfluxDB Enterprise deployment pending page](/img/enterprise/gcp/byol-intro-3.png)
 
-The cluster will take up to five minutes to fully deploy.
-
-If the deployment does not complete or reports an error, read through the list of [common deployment errors](#common-errors).
+The cluster will take up to five minutes to fully deploy. If the deployment does not complete or reports an error, read through the list of [common deployment errors](#common-errors).
 
 ![GCP InfluxDB Enterprise deployment complete page](/img/enterprise/gcp/byol-intro-4.png)
 
@@ -51,7 +50,7 @@ Your cluster is now deployed!
 
 ## Accessing the cluster
 
-The cluster's IP address is only reachable from within the GCP network (or subnetwork) specified in the solution configuration. A cluster can only be reached from instances or services within the same GCP network or subnetwork that it was provisioned in.
+The cluster's IP address is only reachable from within the GCP network (or subnetwork) specified in the solution configuration. A cluster can only be reached from instances or services within the same GCP network or subnetwork in which it was provisioned.
 
 Using the GCP Cloud Shell or `gcloud` CLI, create a new instance that will be used to access the InfluxDB Enterprise cluster.
 
