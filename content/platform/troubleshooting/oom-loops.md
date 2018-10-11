@@ -30,7 +30,8 @@ The first step is to identify which process is at fault.
 
 If using Linux machine, the `top` command streams the resource usage for running processes.
 Most distributions of `top` include a `-o` option that sorts the output by a given key.
-Using this, you can sort running process by their memory consumption.
+By logging into the machine affected by the OOM loop and using this command,
+you can see all the running process sorted by their memory usage.
 
 ```
 $ top -o %MEM
