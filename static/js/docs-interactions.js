@@ -56,12 +56,15 @@ $(function(){
  * Behavior for the tabs widget.
  */
 $(function() {
-	const tab = '.tabs a';
+	const container = '.tabs-container'
+	const tab = '.tabs p a';
 	const content = '.tab-content';
 
 	// Add the active class to the first tab, in case it wasn't already set in the markup.
-	$(tab).removeClass('is-active');
-	$(tab + ':first').addClass('is-active');
+	$(container).each(function () {
+		$(tab, this).removeClass('is-active');
+		$(tab + ':first', this).addClass('is-active');
+	});
 
 	$(tab).on('click', function(e) {
 		e.preventDefault();
@@ -78,7 +81,9 @@ $(function() {
 				$(this).hide();
 			}
 		});
+		console.log(activeIndex);
 	});
+
 });
 
 
