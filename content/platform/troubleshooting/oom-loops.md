@@ -20,9 +20,17 @@ will appear in the **Memory Usage %** metric and look similar to the following:
 
 ## Potential causes
 The causes of OOM loops vary widely and depend on your specific use case of the TICK stack.
-<!-- The following are the most common causes: -->
+The following are common causes:
 
-<!-- - list of common causes  -->
+### Querying without specifying a time range
+When selecting from a measurement without specifying a time range, InfluxDB will attempt
+to pull data points from the beginning of UNIX epoch time (00:00:00 UTC on 1 January 1970),
+storing the returned data in memory. The operating system will eventually kill the
+process due to high memory usage.
+
+```sql
+SELECT * FROM "<database>"."<retention-policy>".<measurement>
+```
 
 ## Solutions
 Solutions to OOM loops depend on the nature of the process consuming the memory.
