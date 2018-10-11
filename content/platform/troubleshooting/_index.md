@@ -19,7 +19,7 @@ How to identify and resolve runaway series cardinality in your TICK stack.
 ## [Hinted Handoff Queue buildup](/platform/troubleshooting/hhq-buildup)
 How to identify and resolve hinted handoff queue (HHQ) buildup in InfluxDB Enterprise.
 
-## [Disk space](/platform/troubleshooting/disk-space)
+## [Disk usage](/platform/troubleshooting/disk-usage)
 How to identify and resolve high disk usage in your TICK stack.
 
 ## [IOPS](/platform/troubleshooting/iops)
