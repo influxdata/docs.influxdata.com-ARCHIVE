@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting out-of-memory loops
-description: placeholder
+description: How to identify and troubleshoot out-of-memory (OOM) loops when using InfluxData's TICK stack.
 menu:
   platform:
     name: Out-of-memory loops
