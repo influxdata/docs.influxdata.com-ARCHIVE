@@ -46,20 +46,9 @@ be challenging to identify what queries could be better optimized.
 InfluxQL includes tools to help identify the "cost" of queries and gain insight
 into what queries have room for optimization.
 
-#### See what queries are running
-InfluxQL's [`SHOW QUERIES` statement](/influxdb/latest/troubleshooting/query_management/#list-currently-running-queries-with-show-queries)
-outputs a list of running queries and associated information, including the query's current duration.
-This helps to narrow down the list of potentially problematic queries.
-
-###### Example SHOW QUERIES statement
-```
-> SHOW QUERIES
-
-qid	  query															  database   duration
----   -----                               --------   --------
-37	  SHOW QUERIES																   100368u
-36	  SELECT * FROM "telegraf"."autogen   telegraf   4s
-```
+#### View your InfluxDB logs
+If a query is killed, it is logged by InfluxDB.
+View your [InfluxDB logs](/influxdb/latest/administration/logs/) for hints as to what queries are being killed.
 
 #### Estimate query cost
 InfluxQL's [`EXPLAIN` statement](/influxdb/latest/query_language/spec#explain)
