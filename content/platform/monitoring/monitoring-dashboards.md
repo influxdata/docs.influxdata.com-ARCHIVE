@@ -20,11 +20,13 @@ The dashboards below can help you monitor InfluxDB OSS in Chronograf.
 ### With Telegraf
 If you use the `[influxdb]` input plug-in with Telegraf, you can monitor your instance with a prebuilt dashboard.
 
-**To view the prebuilt dashboard:**
+**To view the prebuilt dashboard:**  
+
 * Open Chronograf and click **Host List** in the navigation bar.
 * Click the `influxdb` app in the **Apps** column.
 
-The dashboard contains the following cells:
+The dashboard contains the following cells:  
+
 * InfluxDB - Write Points
 * InfluxDB - Write Errors
 * InfluxDB - Write HTTP Requests
@@ -35,7 +37,7 @@ The dashboard contains the following cells:
 
 For details about the metrics in each cell, see [Steve's doc](link).
 
-![Built-in Telegraf dashboard](/img/platform-dashboard-oss-telegraf.png)
+![Built-in Telegraf dashboard](/img/platform/platform-dashboard-oss-telegraf.png)
 
 ### Without Telegraf
 
@@ -51,7 +53,7 @@ If you're not using Telegraf, you can import [this dashboard](link) built off th
 
 For details about the metrics in each cell, see [Steve's doc](link).
 
-![OSS dashboard (_internal)](/img/platform-dashboard-oss-internal.png)
+![OSS dashboard (_internal)](/img/platform/platform-dashboard-oss-internal.png)
 
 ## Monitor InfluxDB Enterprise
 
@@ -69,4 +71,4 @@ For a single InfluxDB Enterprise instance, you can import [this dashboard](link)
 
 For details about the metrics in each cell, see [Steve's doc](link).
 
-[!Enterprise Dashboard (_internal)](/img/link)
+![Enterprise Dashboard (_internal)](/img/platform/platform-dashboard-enterprise-internal.png.png)
