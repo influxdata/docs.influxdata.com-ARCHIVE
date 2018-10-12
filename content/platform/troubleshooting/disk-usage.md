@@ -26,15 +26,9 @@ data will use more and more disk space.
 ### Log data not being dropped
 Log data is incredibly useful in your monitoring solution, but can also require
 more disk space than other types of time series data.
-If storing log data, it should only be stored in measurements with a finite
-[retention policy](/influxdb/latest/query_language/database_management/#retention-policy-management).
-The duration of your retention policy depends on how long you actually want to keep
-log data around, but log data stored in an infinite retention policy will
-eventually result in high disk usage.
-
-Whether or not you use a [continuous query](/influxdb/latest/query_language/continuous_queries/)
-to downsample log data at the end of its retention period is up to you, but old log
-data should either be downsampled or dropped.
+Many times, log data is stored in an infinite retention policy (the default retention
+policy duration), meaning it never gets dropped.
+This will inevitably lead to high disk utilization.
 
 ## Solutions
 
@@ -44,6 +38,16 @@ This can be done by brute force (deleting/dropping data) or in a more graceful
 manner by tuning the duration of your retention policies and adjusting the downsampling
 rates in your continuous queries.
 
+#### Log data retention policies
+Log data should only be stored in a finite
+[retention policy](/influxdb/latest/query_language/database_management/#retention-policy-management).
+The duration of your retention policy is determined by how long you want to keep
+log data around.
+
+Whether or not you use a [continuous query](/influxdb/latest/query_language/continuous_queries/)
+to downsample log data at the end of its retention period is up to you, but old log
+data should either be downsampled or dropped altogether.
+
 ### Scale your machine's disk capacity
 If removing or downsampling data isn't an option, you can always scale your machine's
 disk capacity. How this is done depends on your hardware or virtualization configuration
@@ -51,13 +55,13 @@ and is not covered in this documentation.
 
 ## Recommendations
 
-### Setup a disk usage alert
+### Set up a disk usage alert
 To preempt disk utilization issues, create a task that alerts you if disk usage
 crosses certain thresholds. The example TICKscript [below](#example-tickscript-alert-for-disk-usage)
 sets warning and critical disk usage thresholds and sends a message to Slack
 whenever those thresholds are crossed.
 
-_For information about Kapacitor tasks and alerts, view the [Kapacitor alerts](/kapacitor/latest/working/alerts/) documentation._
+_For information about Kapacitor tasks and alerts, see the [Kapacitor alerts](/kapacitor/latest/working/alerts/) documentation._
 
 #### Example TICKscript alert for disk usage
 ```
