@@ -5,4 +5,3 @@ deploy
 .*.swp
 node_modules
 *.log
-content/chronograf/v1.7/guides/visualization-types.md
