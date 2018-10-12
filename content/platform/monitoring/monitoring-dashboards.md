@@ -1,42 +1,64 @@
 ---
 title: Set up monitoring dashboards
-description: Instructions for installing the InfluxData Sandbox, the quickest way to get a TICK stack up and running and ready for exploration and testing.
+description:
 menu:
   platform:
-    name: Monitoring Dashboards
-    parent:
+    name: Dashboards for monitoring performance
+    parent: Monitoring
     weight: 1
 ---
 ## Overview
 
+The following dashboards can help you monitor the performance of your InfluxDB OSS or InfluxDB Enterprise instance.
 
-[Importing a dashboard](/chronograf/latest/administration/import-export-dashboards/#importing-a-dashboard)
+With the exception of those already included in the product, you'll need to import the dashboards in Chronograf to use them. For detailed instructions, see [Importing a dashboard](/chronograf/latest/administration/import-export-dashboards/#importing-a-dashboard).
 
-## OSS, Single, Chronograf
+## Monitor InfluxDB OSS
+
+The dashboards below can help you monitor InfluxDB OSS in Chronograf.
 
 ### With Telegraf
 If you use the `[influxdb]` input plug-in with Telegraf, you can monitor your instance with a prebuilt dashboard.
 
+**To view the prebuilt dashboard:**
 * Open Chronograf and click **Host List** in the navigation bar.
 * Click the `influxdb` app in the **Apps** column.
 
+The dashboard contains the following cells:
+* InfluxDB - Write Points
+* InfluxDB - Write Errors
+* InfluxDB - Write HTTP Requests
+* InfluxDB - Query Requests
+* InfluxDB - Client Failures
+* InfluxDB - Query Performance
+* InfluxDB - Cardinality
+
+![Built-in Telegraf dashboard](/img/platform-dashboard-oss-telegraf.png)
 
 ### Without Telegraf
 
-Import the dashboard <link> .
+If you're not using Telegraf, you can import this dashboard (needs link) built off the `_internal` database. It contains the following cells:
 
-##  OSS, Multiple, Chronograf
+* Queries Executed/Min
+* HTTP Requests/Min
+* Per-Host Point Throughput/Min
+* Series Cardinality by Database & Number of Measurements by Database
+* HTTP Request Duration (99th %)
+* Heap Size
+* Shard Write Errors
 
-## OSS, Single, Grafana
+![OSS dashboard (_internal)](/img/platform-dashboard-oss-internal.png)
 
-## OSS, Multiple, Grafana
+## Monitor InfluxDB Enterprise
 
-## Enterprise, Chronograf, Single
+For a single InfluxDB Enterprise instance, you can import this dashboard (needs link) built off the `_internal` database. It contains the following cells:
 
-Import the `_internal` dashboard <link>.
-
-## Enterprise, Chronograf, Multiple
-
-## Enterprise, Grafana, Single
-
-## Enterprise, Grafana, Multiple
+* Queries Executed/Min
+* HTTP Requests/Min
+* Per-Host Point Throughput/Min
+* Series Cardinality by Database & Number of Measurements by Database
+* HTTP Request Duration (99th %)
+* Heap Size
+* Shard Write Errors
+* Hinted HandOff Queue Size
+* Count of AE Errors & Jobs
