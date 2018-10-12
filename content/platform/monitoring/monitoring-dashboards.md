@@ -9,9 +9,10 @@ menu:
 ---
 ## Overview
 
-The following dashboards can help you monitor the performance of your InfluxDB OSS or InfluxDB Enterprise instance.
+The following dashboards can help you monitor the performance of InfluxDB OSS or InfluxDB Enterprise.
 
-With the exception of those already included in the product, you'll need to import the dashboards in Chronograf to use them. For detailed instructions, see [Importing a dashboard](/chronograf/latest/administration/import-export-dashboards/#importing-a-dashboard).
+With the exception of those already included in the product, you'll need to import the dashboards in Chronograf to use them.
+For detailed instructions, see [Importing a dashboard](/chronograf/latest/administration/import-export-dashboards/#importing-a-dashboard).
 
 ## Monitor InfluxDB OSS
 
@@ -41,7 +42,7 @@ For details about the metrics in each cell, see [Steve's doc](link).
 
 ### Without Telegraf
 
-If you're not using Telegraf, you can import the following dashboard built off the `_internal` database that contains the following cells:
+If you're not using Telegraf, you can import the following dashboard built off the `_internal` database that contains these cells:
 
 * Queries Executed/Min
 * HTTP Requests/Min
@@ -59,7 +60,7 @@ _For details about the metrics in each cell, see [Steve's doc](link)._
 
 ## Monitor InfluxDB Enterprise
 
-For a single InfluxDB Enterprise instance, you can import the following dashboard built off the `_internal` database that contains the following cells:
+For a single InfluxDB Enterprise instance, you can import the following dashboard built off the `_internal` database that contains these cells:
 
 * Queries Executed/Min
 * HTTP Requests/Min
