@@ -60,7 +60,8 @@ $(function() {
 	const tab = '.tabs p a';
 	const content = '.tab-content';
 
-	// Add the active class to the first tab, in case it wasn't already set in the markup.
+	// Add the active class to the first tab in each tab group,
+	// in case it wasn't already set in the markup.
 	$(container).each(function () {
 		$(tab, this).removeClass('is-active');
 		$(tab + ':first', this).addClass('is-active');
@@ -77,8 +78,7 @@ $(function() {
 		$(content).each(function(i) {
 			if (i === activeIndex) {
 				$(this).show();
-			} else {
-				$(this).hide();
+				$(this).siblings(content).hide();
 			}
 		});
 		console.log(activeIndex);
