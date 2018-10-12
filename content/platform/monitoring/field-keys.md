@@ -8,12 +8,6 @@ menu:
 ---
 
 
-
-
-
-
-# Field keys used in monitoring dashboard
-
 The listings below include all of the measurements and their field keys that are used in the InfluxDB Enterprise Cluster and InfluxDB OSS monitoring dashboards. Information includes a description of the field keys, their data types, and where they are used in the monitoring dashboards.
 
 
@@ -39,6 +33,18 @@ The listings below include all of the measurements and their field keys that are
 * Queue size, in bytes
 * Used in "Hinted Handoff (HH) Queue Size"
 
+____
+## cq
+
+### queryFail
+
+* Number of queries that failed.
+* Data type: integer
+
+### queryOk
+
+* Number of queries that succeeded.
+* Data type: integer
 ____
 
 ## database

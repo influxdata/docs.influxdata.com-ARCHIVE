@@ -1,15 +1,15 @@
 ---
-title: InfluxDB Enterprise Cluster Stats monitoring dashboard
-description: Describes the measurements and field keys that are used in the InfluxDb OSS and InfluxDB Enterprise monitoring dashboards.
+title: InfluxDB OSS Stats monitoring dashboard
+description: Describes the metrics that are monitored in the InfluxDb OSS monitoring dashboard.
 menu:
   platform:
     name: Cluster monitoring dashboard
-    weight: 30
+    weight: 20
 ---
 
-The InfluxDB Enterprise Cluster Stats dashboard is useful for monitoring the health of your InfluxDB Enterprise clusters. The dashboard visualizations cover commonly monitored metrics that are important for monitoring and maintaining your InfluxDB Enterprise clusters and for troubleshooting. So that you don't have to constantly check the dashboad, you can create alerts to notify you when attention is required.
+The InfluxDB OSS Stats dashboard is useful for monitoring the health of your InfluxDB OSS instances. The dashboard visualizations cover commonly monitored metrics that are important for monitoring and maintaining your InfluxDB OSS instance and for troubleshooting. So that you don't have to constantly check the dashboard, you can create alerts to notify you when attention is required.
 
-> **Note:** The queries below use the `_internal` database, which is enabled by default on InfluxDB nodes.  When using the "watcher of watcher (WoW)" configuration, data is written to the `telegraf` database. In the `telegraf` database, many of the same field keys below are prepended with `infuxdb_`, but are otherwise identical to the field keys used below.
+> **Note:** The queries below use the `_internal` database, which is enabled by default on InfluxDB OSS instances.
 
 ## Continuous Queries Executed / Minute
 
@@ -260,77 +260,3 @@ Writes = `non_negative_derivative(mean(\"writeReq\"), 60s)`
  `queryReq`,  `writeReq`, `serverError`, `clientError`
 
 ____
-
-## Hinted Handoff (HH) Queue Size
-
-### Description
-
-Returns the size, in bytes, of InfluxDB's Hinted Handoff (HH) queue.
-
-### Query
-
- `"SELECT mean(\"queueBytes\") FROM \"_internal\"..\"hh_processor\" WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\" fill(0)"`
-
-### Metrics
-
- \[HH Queue Size\] = `mean(\"queueBytes\")`
-
-### Measurement
-
- `hh_processor`
-
-### Field keys
-
- `queueBytes`
-
-____
-
-## Anti-Entropy Errors (count)
-
-### Description
-
-Returns the count of Anti-Entropy errors.
-
-### Queries
-
- `"SELECT non_negative_derivative(mean(\"errors\"),5m) AS \"errors\" FROM \"_internal\".\"\".\"ae\" WHERE time > :dashboardTime: GROUP BY time(:interval:) FILL(null)"`
-
-### Metric
-
-#### \[Count of AE Errors\]
-
- `non_negative_derivative(mean(\"errors\"),5m)`
-
-### Measurement
-
- `errors`
-
-### Field keys
-
- `errors`
-
-____
-
-## Anti-Entropy Jobs (count)
-
-### Description
-
-Returns the count of active Anti-Entry jobs.
-
-### Queries
-
-`"SELECT count(\"jobs_active\") AS \Active Jobs\" FROM \"_internal\"..\"ae\" WHERE time > :dashboardTime: GROUP BY time(:interval:) FILL(null)"`
-
-### Metrics
-
-#### \[Count of Jobs\]
-
- `count(\"jobs_active\")`
-
-### Measurement
-
- `ae`
-
-### Field keys
-
- `jobs_active`
