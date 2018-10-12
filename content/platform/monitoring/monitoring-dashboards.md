@@ -53,7 +53,7 @@ If you're not using Telegraf, you can import the following dashboard built off t
 
 _For details about the metrics in each cell, see [Steve's doc](link)._
 
-[Download this dashboard](/downloads/dashboard-influxdb-oss-stats_internal.json)
+<a class="btn download" href="/downloads/dashboard-influxdb-oss-stats_internal.json" target="\_blank">Download this dashboard</a>
 
 ![OSS dashboard (_internal)](/img/platform/platform-dashboard-oss-internal.png)
 
@@ -73,6 +73,6 @@ For a single InfluxDB Enterprise instance, you can import the following dashboar
 
 _For details about the metrics in each cell, see [Steve's doc](link)._
 
-[Download this dashboard](/downloads/dashboard-influxdb-enterprise-cluster-stats_internal.json)
+<a class="btn download" href="/downloads/dashboard-influxdb-enterprise-cluster-stats_internal.json" target="\_blank">Download this dashboard</a>
 
 ![Enterprise Dashboard (_internal)](/img/platform/platform-dashboard-enterprise-internal.png.png)
