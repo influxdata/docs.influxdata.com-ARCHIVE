@@ -21,3 +21,7 @@ and address anomalies as they happen.
 ## [Internal monitoring vs external monitoring](#)
 
 ## [Setting up monitoring dashboards](#)
+
+## [InfluxDB OSS Stats monitoring dashboard](/platform/monitoring/oss-monitoring-dashboard/)
+
+## [InfluxDB Enterprise Cluster Stats monitoring dashboard](/platform/monitoring/cluster-monitoring-dashboard)

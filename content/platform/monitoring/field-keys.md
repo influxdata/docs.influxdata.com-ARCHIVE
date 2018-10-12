@@ -1,9 +1,9 @@
 ---
-title: Field keys used in monitoring dashboards
-description: Describes the measurements and field keys that are used in the InfluxDb OSS and InfluxDB Enterprise monitoring dashboards.
+title: Field keys used in InfluxDB monitoring dashboards
+description: Describes the measurements and field keys that are used in the InfluxDB OSS and InfluxDB Enterprise monitoring dashboards.
 menu:
   platform:
-    name: Dashboard field keys
+    name: Field keys in monitoring dashboards
     weight: 30
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: InfluxDB Enterprise Cluster Stats monitoring dashboard
-description: Describes the measurements and field keys that are used in the InfluxDb OSS and InfluxDB Enterprise monitoring dashboards.
+description: Describes details about metrics that are monitored in the InfluxDb Enterprise monitoring dashboard.
 menu:
   platform:
     name: Cluster monitoring dashboard
