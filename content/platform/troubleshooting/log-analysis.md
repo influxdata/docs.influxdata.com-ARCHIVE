@@ -1,6 +1,7 @@
 ---
 title: Troubleshooting with log analysis
 description: placeholder
+draft: true
 menu:
   platform:
     name: Log analysis
