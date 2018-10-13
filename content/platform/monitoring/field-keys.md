@@ -18,14 +18,14 @@ The listings below include all of the measurements and their field keys that are
 
 ### errors
 
-*
-* Data type:
+* Errors in the Anti-Entropy (AE) engine.
+* Data type: integer
 * Used in "Count of AE Errors"
 
 ### jobs_active
 
-* Data type: float
 * Number of active jobs in Anti-Entropy (AE)
+* Data type: integer
 * Used in "Count of AE Jobs"
 
 ### queueBytes
@@ -86,7 +86,7 @@ _____
 
 ### queryReq
 
-* Query requests
+* The number of query requests.
 * Data type: integer
 * Used in "HTTP Request Duration (99th %)" and "HTTP Requests per Minute"
 
@@ -104,7 +104,7 @@ _____
 
 ### writeReq
 
-* Write requests
+* The number of write requests.
 * Data type: integer
 * Used in "HTTP Request Duration (99th %)" and "HTTP Requests per Minute"
 
@@ -120,7 +120,7 @@ _____
 
 ### queriesExecuted
 
-* Queries executed
+* The number of queries executed (started).
 * Data type: integer
 * Used in "Queries Executed per Minute"
 
@@ -130,7 +130,8 @@ _____
 
 ### HeapInUse
 
-* Size of heap that is currently used
+* The size, in bytes, in in-use spans.
+* Data type: integer
 * Used in "Heap Size"
 
 -----
@@ -139,12 +140,12 @@ _____
 
 ### pointReq
 
-* Points requested
+* Incremented after each attempted point request.
 * Data type: integer
 * Used in "Per-host Point Throughput per Minute"
 
 ### writeError
 
-* Write errors
+* Incremented after every batch that was attempted to be written to a shard but failed.
 * Data type: integer
 * Used in "Shard Write Errors"

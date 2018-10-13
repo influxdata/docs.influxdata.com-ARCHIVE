@@ -45,13 +45,13 @@ Returns the current heap size.
 
 ### Queries
 
-`"SELECT mean(\"HeapInUse\") FROM \"_internal\"..\"runtime\" WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\" fill(null)"`
+`"SELECT mean("HeapInUse") FROM "_internal".."runtime" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname" fill(null)"`
 
 ### Metrics
 
 ####  Heap Size
 
- `mean(\"HeapInUse\")`
+ `mean("HeapInUse")`
 
 ## Measurement
 
@@ -69,9 +69,9 @@ _________
 
 Returns the number of shard write errors.
 
-**Query**: `"SELECT non_negative_derivative(max(\"writeError\"), 10s) FROM \"_internal\"..\"write\" WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\" fill(null)"`
+**Query**: `"SELECT non_negative_derivative(max("writeError"), 10s) FROM "_internal".."write" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname" fill(null)"`
 
-**Metric**: [Shard Write Errors] = `non_negative_derivative(max(\"writeError\")`
+**Metric**: [Shard Write Errors] = `non_negative_derivative(max("writeError")`
 
 **Measurement: `write`
 
@@ -85,9 +85,9 @@ ___________
 
 Returns the number of series (series cardinality) for the specified databases.
 
-**Query**: `"SELECT max(\"numSeries\") AS \"Series Cardinality\" FROM \"_internal\"..\"database\" WHERE time > :dashboardTime:  GROUP BY time(:interval:), \"database\" fill(null)"`
+**Query**: `"SELECT max("numSeries") AS "Series Cardinality" FROM "_internal".."database" WHERE time > :dashboardTime:  GROUP BY time(:interval:), "database" fill(null)"`
 
-**Metric**: Series cardinality =`max(\"numSeries\")`
+**Metric**: Series cardinality =`max("numSeries")`
 
 **Measurement**: `database`
 
@@ -101,9 +101,9 @@ _____
 
 Returns the number of measurements, by database.
 
-**Query**: `"SELECT max(\"numMeasurements\") AS \"Measurements\" FROM \"_internal\"..\"database\" WHERE time > :dashboardTime:  GROUP BY time(:interval:), \"database\" fill(null)"`
+**Query**: `"SELECT max("numMeasurements") AS "Measurements" FROM "_internal".."database" WHERE time > :dashboardTime:  GROUP BY time(:interval:), "database" fill(null)"`
 
-**Metric**: Number of measurements = `max(\"numMeasurements\")`
+**Metric**: Number of measurements = `max("numMeasurements")`
 
 **Measurement**: `database`
 
@@ -123,21 +123,21 @@ Returns the duration, in nanoseconds, of the top 1% of HTTP requests.
 
 #### Write Request
 
- `"SELECT non_negative_derivative(percentile(\"writeReqDurationNs\", 99)) /  non_negative_derivative(max(\"writeReq\")) AS \"Write Request\" FROM \"_internal\"..\"httpd\" WHERE time > :dashboardTime: GROUP BY hostname, time(:interval:) fill(0)\t"`
+ `"SELECT non_negative_derivative(percentile("writeReqDurationNs", 99)) /  non_negative_derivative(max("writeReq")) AS "Write Request" FROM "_internal".."httpd" WHERE time > :dashboardTime: GROUP BY hostname, time(:interval:) fill(0)\t"`
 
 #### Query Request
 
-`"SELECT non_negative_derivative(percentile(\"queryReqDurationNs\", 99)) / non_negative_derivative(max(\"queryReq\")) AS \"Query Request\" FROM \"_internal\"..\"httpd\" WHERE time > :dashboardTime: GROUP BY hostname, time(:interval:)"`
+`"SELECT non_negative_derivative(percentile("queryReqDurationNs", 99)) / non_negative_derivative(max("queryReq")) AS "Query Request" FROM "_internal".."httpd" WHERE time > :dashboardTime: GROUP BY hostname, time(:interval:)"`
 
 ### Metrics
 
 #### Write Request
 
- `"non_negative_derivative(percentile(\"writeReqDurationNs\", 99)) /  non_negative_derivative(max(\"writeReq\"))`
+ `"non_negative_derivative(percentile("writeReqDurationNs", 99)) /  non_negative_derivative(max("writeReq"))`
 
 #### Read Request
 
- `non_negative_derivative(percentile(\"queryReqDurationNs\", 99)) / non_negative_derivative(max(\"queryReq\"))`
+ `non_negative_derivative(percentile("queryReqDurationNs", 99)) / non_negative_derivative(max("queryReq"))`
 
 ### Measurement
 
@@ -163,13 +163,13 @@ Returns the number of points requested each minute, by hostname.
 
 ### Query
 
- `"SELECT non_negative_derivative(max(\"pointReq\"), 60s) FROM \"_internal\"..\"write\" WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\""`
+ `"SELECT non_negative_derivative(max("pointReq"), 60s) FROM "_internal".."write" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname""`
 
 ### Metrics
 
 #### [Point Requests]
 
- `non_negative_derivative(max(\"pointReq\"), 60s)`
+ `non_negative_derivative(max("pointReq"), 60s)`
 
 ### Measurement
 
@@ -191,13 +191,13 @@ Returns the number of queries executed per minute.
 
 #### Queries Executed
 
- `"SELECT non_negative_derivative(mean(\"queriesExecuted\"), 60s) AS \"Queries Executed\" FROM \"_internal\"..\"queryExecutor\" WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\" fill(null)"`
+ `"SELECT non_negative_derivative(mean("queriesExecuted"), 60s) AS "Queries Executed" FROM "_internal".."queryExecutor" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname" fill(null)"`
 
 ### Metrics
 
 #### Queries Executed
 
- `non_negative_derivative(mean(\"queriesExecuted\"), 60s)`
+ `non_negative_derivative(mean("queriesExecuted"), 60s)`
 
 ### Measurement
 
@@ -219,37 +219,37 @@ Returns the number of HTTP requests per minute.
 
 #### Query Requests
 
- `"SELECT non_negative_derivative(mean(\"queryReq\"), 60s) AS \"Query\" FROM \"_internal\"..\"httpd\" WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\""`
+ `"SELECT non_negative_derivative(mean("queryReq"), 60s) AS "Query" FROM "_internal".."httpd" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname""`
 
 #### Write Requests
 
-`"SELECT non_negative_derivative(mean(\"writeReq\"), 60s) AS \"Writes\" FROM \"_internal\"..\"httpd\" WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\""`
+`"SELECT non_negative_derivative(mean("writeReq"), 60s) AS "Writes" FROM "_internal".."httpd" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname""`
 
 #### Server Errors
 
-`"SELECT non_negative_derivative(mean(\"serverError\"), 60s) AS \"Server Errors\" FROM \"_internal\"..\"httpd\" WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\""`
+`"SELECT non_negative_derivative(mean("serverError"), 60s) AS "Server Errors" FROM "_internal".."httpd" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname""`
 
 #### Client Errors
 
-`"SELECT non_negative_derivative(mean(\"clientError\"), 60s) AS \"Client Errors\" FROM \"_internal\"..\"httpd\" WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\""`
+`"SELECT non_negative_derivative(mean("clientError"), 60s) AS "Client Errors" FROM "_internal".."httpd" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname""`
 
 ### Metrics
 
 #### Query Requests
 
-Query Requests = `non_negative_derivative(mean(\"queryReq\"), 60s)`
+Query Requests = `non_negative_derivative(mean("queryReq"), 60s)`
 
 #### Writes
 
-Writes = `non_negative_derivative(mean(\"writeReq\"), 60s)`
+Writes = `non_negative_derivative(mean("writeReq"), 60s)`
 
 #### Server Errors
 
- `non_negative_derivative(mean(\"serverError\"), 60s)`
+ `non_negative_derivative(mean("serverError"), 60s)`
 
 #### Client Errors
 
- `non_negative_derivative(mean(\"clientError\"), 60s)`
+ `non_negative_derivative(mean("clientError"), 60s)`
 
 ### Measurement
 
@@ -269,11 +269,11 @@ Returns the size, in bytes, of InfluxDB's Hinted Handoff (HH) queue.
 
 ### Query
 
- `"SELECT mean(\"queueBytes\") FROM \"_internal\"..\"hh_processor\" WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\" fill(0)"`
+ `"SELECT mean("queueBytes") FROM "_internal".."hh_processor" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname" fill(0)"`
 
 ### Metrics
 
- \[HH Queue Size\] = `mean(\"queueBytes\")`
+ \[HH Queue Size\] = `mean("queueBytes")`
 
 ### Measurement
 
@@ -293,13 +293,13 @@ Returns the count of Anti-Entropy errors.
 
 ### Queries
 
- `"SELECT non_negative_derivative(mean(\"errors\"),5m) AS \"errors\" FROM \"_internal\".\"\".\"ae\" WHERE time > :dashboardTime: GROUP BY time(:interval:) FILL(null)"`
+ `"SELECT non_negative_derivative(mean("errors"),5m) AS "errors" FROM "_internal".""."ae" WHERE time > :dashboardTime: GROUP BY time(:interval:) FILL(null)"`
 
 ### Metric
 
 #### \[Count of AE Errors\]
 
- `non_negative_derivative(mean(\"errors\"),5m)`
+ `non_negative_derivative(mean("errors"),5m)`
 
 ### Measurement
 
@@ -319,13 +319,13 @@ Returns the count of active Anti-Entry jobs.
 
 ### Queries
 
-`"SELECT count(\"jobs_active\") AS \Active Jobs\" FROM \"_internal\"..\"ae\" WHERE time > :dashboardTime: GROUP BY time(:interval:) FILL(null)"`
+`"SELECT count("jobs_active") AS \Active Jobs" FROM "_internal".."ae" WHERE time > :dashboardTime: GROUP BY time(:interval:) FILL(null)"`
 
 ### Metrics
 
 #### \[Count of Jobs\]
 
- `count(\"jobs_active\")`
+ `count("jobs_active")`
 
 ### Measurement
 

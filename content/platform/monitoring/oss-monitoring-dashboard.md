@@ -29,11 +29,11 @@ Displays the non-negative mean rate of change in continuous queries (CQs) execut
 
 ### Measurement
 
- `cq`
+ [`cq`](/platform/monitoring/field-keys#cq)
 
 ### Field keys
 
-`cq_query`
+[`queryFail`](/platform/monitoring/field-keys#queryfail), [`queryOk`](/platform/monitoring/field-keys#queryok)
 
 _______________
 
@@ -55,11 +55,11 @@ Returns the current heap size.
 
 ## Measurement
 
- `runtime`
+ [`runtime`](/platform/monitoring/field-keys#runtime)
 
 ### Field keys
 
- `HeapInUse`
+[`HeapInUse`](/platform/monitoring/field-keys#heapinuse)
 
 _________
 
@@ -69,9 +69,14 @@ _________
 
 Returns the number of shard write errors.
 
-**Query**: `"SELECT non_negative_derivative(max(\"writeError\"), 10s) FROM \"_internal\"..\"write\" WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\" fill(null)"`
+### Query
+`"SELECT non_negative_derivative(max("writeError"), 10s) FROM "_internal".."write" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname" fill(null)"`
 
-**Metric**: [Shard Write Errors] = `non_negative_derivative(max(\"writeError\")`
+### Metric
+
+#### [Shard Write Errors]
+
+`non_negative_derivative(max("writeError")`
 
 **Measurement: `write`
 
@@ -85,13 +90,21 @@ ___________
 
 Returns the number of series (series cardinality) for the specified databases.
 
-**Query**: `"SELECT max(\"numSeries\") AS \"Series Cardinality\" FROM \"_internal\"..\"database\" WHERE time > :dashboardTime:  GROUP BY time(:interval:), \"database\" fill(null)"`
+**Query**: `"SELECT max("numSeries") AS "Series Cardinality" FROM "_internal".."database" WHERE time > :dashboardTime:  GROUP BY time(:interval:), "database" fill(null)"`
 
-**Metric**: Series cardinality =`max(\"numSeries\")`
+### Metric
 
-**Measurement**: `database`
+#### Series cardinality
 
-**Field keys**: `numSeries`
+`max("numSeries")`
+
+#### Measurement
+
+`database`
+
+### Field keys
+
+`numSeries`
 
 _____
 
