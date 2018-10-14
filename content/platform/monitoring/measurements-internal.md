@@ -744,17 +744,17 @@ The `subscriber` measurement statistics are related to the usage of InfluxDB sub
 
 ### createFailures
 
-* Number of failures creating a subscription. ???
+* The number of subscriptions that failed to be created.
 * Data type: integer
 
 ### pointsWritten  
 
-* Number of points written successfully to ???
+* The total number of points that were successfully written to subscribers.
 * Data type: integer
 
 ### writeFailures  
 
-* Number of failures to write to ???
+* The total number of batches that failed to be written to subscribers.
 * Data type: integer
 
 ______
