@@ -29,11 +29,11 @@ Displays the non-negative mean rate of change in continuous queries (CQs) execut
 
 ### Measurement
 
-[`cq`](/platform/monitoring/field-keys#cq)
+[`cq`](/platform/monitoring/measurements-internal#cq)
 
 ### Field keys
 
-[`queryOk`](/platform/monitoring/field-keys#queryok), [`queryFail`](/platform/monitoring/field-keys#queryfail)
+[`queryOk`](/platform/monitoring/measurements-internal#queryok), [`queryFail`](/platform/monitoring/measurements-internal#queryfail)
 
 _______________
 
@@ -55,11 +55,11 @@ Displays the current heap size.
 
 ## Measurement
 
-[`runtime`](/platform/monitoring/field-keys#runtime)
+[`runtime`](/platform/monitoring/measurements-internal#runtime)
 
 ### Field keys
 
-[`HeapInUse`](/platform/monitoring/field-keys#heapinuse)
+[`HeapInUse`](/platform/monitoring/measurements-internal#heapinuse)
 
 _________
 
@@ -81,11 +81,11 @@ Displays the number of shard write errors.
 
 ### Measurement
 
-[`write`](/platform/monitoring/field-keys#write)
+[`write`](/platform/monitoring/measurements-internal#write)
 
 ### Field keys
 
-[`writeError`](/platform/monitoring/field-keys#writeerror)
+[`writeError`](/platform/monitoring/measurements-internal#writeerror)
 
 ___________
 
@@ -107,11 +107,11 @@ Displays the number of series (series cardinality) for the specified databases.
 
 ### Measurement
 
-[`database`](/platform/monitoring/field-keys#database)
+[`database`](/platform/monitoring/measurements-internal#database)
 
 ### Field keys
 
-[`numSeries`](/platform/monitoring/field-keys#numseries)
+[`numSeries`](/platform/monitoring/measurements-internal#numseries)
 
 _____
 
@@ -133,11 +133,11 @@ Displays the number of measurements, by database.
 
 ### Measurement
 
-[`database`](/platform/monitoring/field-keys#database)
+[`database`](/platform/monitoring/measurements-internal#database)
 
 ### Field keys
 
-[`numMeasurements`](/platform/monitoring/field-keys#numeasurements)
+[`numMeasurements`](/platform/monitoring/measurements-internal#numeasurements)
 
 _____
 
@@ -169,11 +169,11 @@ Displays the duration, in nanoseconds, of the top 1% of HTTP requests.
 
 ### Measurement
 
-[`httpd`](/platform/monitoring/field-keys#httpd)
+[`httpd`](/platform/monitoring/measurements-internal#httpd)
 
 ### Field keys
 
-[`queryReq`](/platform/monitoring/field-keys#queryreq), [`queryReqDurationNs`](/platform/monitoring/field-keys#queryreqdurationns). [`writeReq`](/platform/monitoring/field-keys#writereq), [`writeReqDurationNs`](/platform/monitoring/field-keys#writereqdurationns)
+[`queryReq`](/platform/monitoring/measurements-internal#queryreq), [`queryReqDurationNs`](/platform/monitoring/measurements-internal#queryreqdurationns). [`writeReq`](/platform/monitoring/measurements-internal#writereq), [`writeReqDurationNs`](/platform/monitoring/measurements-internal#writereqdurationns)
 
 ____
 
@@ -195,11 +195,11 @@ Displays the number of points requested each minute, by hostname.
 
 ### Measurement
 
- [`write`](/platform/monitoring/field-keys#write)
+ [`write`](/platform/monitoring/measurements-internal#write)
 
 ### Field keys
 
-[`pointReq`](/platform/monitoring/field-keys#pointreq)
+[`pointReq`](/platform/monitoring/measurements-internal#pointreq)
 
 _____
 
@@ -223,11 +223,11 @@ Displays the number of queries executed per minute.
 
 ### Measurement
 
-[`queryExecutor`](/platform/monitoring/field-keys#queryexecutor)
+[`queryExecutor`](/platform/monitoring/measurements-internal#queryexecutor)
 
 ### Field keys
 
-[`queriesExecuted`](/platform/monitoring/field-keys#queriesexecuted)
+[`queriesExecuted`](/platform/monitoring/measurements-internal#queriesexecuted)
 
 _____
 
@@ -275,8 +275,8 @@ Displays the number of HTTP requests per minute.
 
 ### Measurement
 
-[`httpd`](/platform/monitoring/field-keys#httpd)
+[`httpd`](/platform/monitoring/measurements-internal#httpd)
 
 ### Field keys
 
-[`queryReq`](/platform/monitoring/field-keys#querureq), [`writeReq`](/platform/monitoring/field-keys#writereq), [`serverError`](/platform/monitoring/field-keys#servererror), [`clientError`](/platform/monitoring/field-keys#clienterror)
+[`queryReq`](/platform/monitoring/measurements-internal#querureq), [`writeReq`](/platform/monitoring/measurements-internal#writereq), [`serverError`](/platform/monitoring/measurements-internal#servererror), [`clientError`](/platform/monitoring/measurements-internal#clienterror)
