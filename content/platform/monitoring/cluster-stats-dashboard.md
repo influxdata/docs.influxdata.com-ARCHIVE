@@ -3,7 +3,7 @@ title: InfluxDB Enterprise Cluster Stats monitoring dashboard
 description: Describes details about metrics that are monitored in the InfluxDb Enterprise monitoring dashboard.
 menu:
   platform:
-    name: Enterprise monitoring dashboard
+    name: Enterprise Stats monitoring dashboard
     weight: 30
 ---
 

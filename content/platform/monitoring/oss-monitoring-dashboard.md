@@ -3,7 +3,7 @@ title: InfluxDB OSS Stats monitoring dashboard
 description: Describes details about metrics that are monitored in the InfluxDb OSS monitoring dashboard.
 menu:
   platform:
-    name: Cluster monitoring dashboard
+    name: InfluxDB OSS Stats monitoring dashboard
     weight: 20
 ---
 

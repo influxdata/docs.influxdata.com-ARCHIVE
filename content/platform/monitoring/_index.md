@@ -27,3 +27,11 @@ and address anomalies as they happen.
 ## [InfluxDB Enterprise Cluster Stats monitoring dashboard](/platform/monitoring/cluster-monitoring-dashboard)
 
 ## [Measurements for monitoring InfluxDB OSS and InfluxDB Enterprise dashboards](/platform/monitoring/measurements-internal/)
+
+## [Using the /debug/vars HTTP endpoint for monitoring InfluxDB](/platform/monitoring/debug-vars-endpoint-influxdb/)
+
+## [Using the /debug/vars HTTP endpoint for monitoring Kapacitor](/platform/monitoring/debug-vars-endpoint-kapa/)
+
+## [Using the SHOW STATISTICS command for monitoring InfluxDB](/platform/monitoring/show-statistics/)
+
+## [Using the SHOW DIAGNOSTICS command for monitoring InfluxDB](/platform/monitoring/show-diagnostics/)
