@@ -25,3 +25,5 @@ and address anomalies as they happen.
 ## [InfluxDB OSS Stats monitoring dashboard](/platform/monitoring/oss-monitoring-dashboard/)
 
 ## [InfluxDB Enterprise Cluster Stats monitoring dashboard](/platform/monitoring/cluster-monitoring-dashboard)
+
+## [Measurements for monitoring InfluxDB OSS and InfluxDB Enterprise dashboards](/platform/monitoring/measurements-internal/)
