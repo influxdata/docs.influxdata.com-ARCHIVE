@@ -383,48 +383,53 @@ _____
 
 ## httpd
 
-The `httpd` measurement statistics are related to HTTP request processing in InfluxDB.
+The `httpd` measurement statistics are related to the InfluxDB HTTP server.
 
 ### authFail
 
+* The number of HTTP requests that were aborted due to authentication being required but not supplied or incorrect.
 * Data type: integer
 
 ### clientError
 
-- Client errors
+- The number of HTTP responses due to client errors, with a 4XX status code.
 - Data type: integer
 - Used in "HTTP Request per Minute"
 
 
 ### pingReq
 
+* The number of times InfluxDB HTTP server served the /ping HTTP endpoint.
 * Data type: integer
 
 ### pointsWrittenDropped
 
+* The number of points dropped by the storage engine.
 * Data type: integer
 
 ### pointsWrittenFail
+
+* The number of points accepted by the /write HTTP endpoint but was unable to be persisted.
 * Data type: integer
 
 ### pointsWrittenOK
 
-* ???
+* The number of points accepted by the /write HTTP endpoint and persisted successfully.
 * Data type: integer
 
 ### promReadReq
 
-* ???
+* The number of read requests to the Prometheus endpoint.
 * Data type: integer
 
 ### promWriteReq
 
-* ???
+* The number of write requests to the Prometheus endpoint.
 * Data type: integer
 
 ### queryReq
 
-* The query requests
+* The number of query requests.
 * Data type: integer
 * Used in "HTTP Request Duration (99th %)" and "HTTP Requests per Minute"
 
@@ -436,60 +441,61 @@ The `httpd` measurement statistics are related to HTTP request processing in Inf
 
 ### queryRespBytes
 
-* ???
+* The sum of all bytes returned in query responses.
 * Data type: integer
 
 ### recoveredPanics
-* ???
+
+* The number of panics recovered by the HTTP handler.
 * Data type: integer
 
 ### req
-* ???
+
+* The number of HTTP requests served.
 * Data Type: integer
 
 ### reqActive  
-* ???
+
+* The number of currently active requests.
 * Data type: integer
 
 ### reqDurationNs
 
-* ???
+* The cumulative duration, in (wall-time) nanoseconds (ns), spent inside requests.
 * Data type: integer
 
 ### serverError
 
-* The server error
+* The number of HTTP responses due to server errors.
 * Data type: integer
 * Used in "HTTP Request per Minute"
 
 ### statusReq
 
-* ???
+* The number of status requests served using the /status HTTP endpoint.
 * Data type: integer
 
 ### writeReq
 
-* The write requests
+* The number of write requests served using the /write HTTP endpoint.
 * Data type: integer
 * Used in "HTTP Request Duration (99th %)" and "HTTP Requests per Minute"
 
 ### writeReqActive
 
-* ???
+* The number of currently active write requests.
 * Data type: integer
 
 ### writeReqBytes
 
-* ???
+* The total size, in bytes, of line protocol data received by write requests, using the /write HTTP endpoint.
 * Data type: integer
 
 ### writeReqDurationNs
 
-* The total write request duration, in nanoseconds (ns).
+* The total duration, in nanoseconds (ns), of write requests served using the /write HTTP endpoint.
 * Data type: integer
 * Used in "HTTP Request Duration (99th %)"
-
-
 
 -----
 
