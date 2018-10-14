@@ -1,8 +1,8 @@
 ---
-title: Using SHOW STATISTICS for monitoring InfluxDB
-description: Use the SHOW STATISTICS command for monitoring InfluxDB instances.
+title: Using the SHOW STATISTICS command to monitor InfluxDB
+description: Use the SHOW STATISTICS command to monitor InfluxDB instances.
 menu:
   platform:
-    name: Using SHOW STATISTICS on InfluxDB
+    name: Using SHOW STATISTICS to monitor InfluxDB
     weight: 90
 ---

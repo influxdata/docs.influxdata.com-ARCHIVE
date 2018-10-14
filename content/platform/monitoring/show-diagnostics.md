@@ -1,8 +1,8 @@
 ---
 title: Using SHOW DIAGNOSTICS for monitoring InfluxDB
-description: Describes details about using the SHOW DIAGNOSTICS command for monitoring InfluxDB instances.
+description: Use the SHOW DIAGNOSTICS command for monitoring InfluxDB instances.
 menu:
   platform:
-    name: Using SHOW DIAGNOSTICS on InfluxDB
+    name: Using SHOW DIAGNOSTICS to monitor InfluxDB
     weight: 90
 ---

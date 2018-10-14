@@ -1,8 +1,8 @@
 ---
-title: Using /debug/vars HTTP endpoint for monitoring Kapacitor
-description: Describes details about InfluxDB measurements and associated field keys that can be used to monitor InfluxDB OSS and InfluxDB  Enterprise servers.
+title: Using the /debug/vars HTTP endpoint to monitor Kapacitor
+description: Describes details about using the /debug/vars HTTP endpoint to monitor Kapacitor instances.
 menu:
   platform:
-    name: Measurements for monitoring
-    weight: 60
+    name: Using /debug/vars endpoint to monitor Kapacitor
+    weight: 80
 ---
