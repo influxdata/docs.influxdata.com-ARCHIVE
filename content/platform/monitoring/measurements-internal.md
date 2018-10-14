@@ -816,152 +816,164 @@ The `tsm1_engine` measurement statistics are related to the usage of the TSM sto
 
 ### cacheCompactionDuration       
 
-* Counter of number of wall nanoseconds spent in cache compactions.
+* The duration, in wall nanoseconds, spent in cache compactions.
 
 * Data type: integer
 
 ### cacheCompactionErr
 
-* Counter of cache compactions that have failed due to error.
+* The number of cache compactions that have failed due to errors.
 * Data type: integer
 
 ### cacheCompactions              
 
-* Counter of cache compactions that have ever run.
+* The total number of cache compactions that have ever run.
 * Data type: integer
 
 ### cacheCompactionsActive
 
-* Gauge of cache compactions currently running.
+* The number of cache compactions that are currently running.
 * Data type: integer
 
 ### tsmFullCompactionDuration
 
-* Counter of number of wall nanoseconds spent in full compactions.
+* The duration, in wall nanoseconds, spent in full compactions.
 * Data type: integer
 
 ### tsmFullCompactionErr
 
-* Counter of full compactions that have failed due to error.
+* The total number of TSM full compactions that have failed due to errors.
 * Data type: integer
 
 ### tsmFullCompactionQueue
 
-* ???
-
+* The current number of pending TMS Full compactions.
 * Data type: integer
 
 ### tsmFullCompactions
 
-* Counter of full compactions that have ever run.
+* The total number of TSM full compactions that have ever run.
 * Data type: integer
 
 ### tsmFullCompactionsActive
 
-* Gauge of full compactions currently running.
+* The number of TSM full compactions currently running.
 * Data type: integer
 
 ### tsmLevel1CompactionDuration
 
+* The duration, in wall nanoseconds, spent in TSM level 1 compactions.
 * Data type: integer
 
 ### tsmLevel1CompactionErr
 
+* The total number of TSM level 1 compactions that have failed due to errors.
 * Data type: integer
 
 ### tsmLevel1CompactionQueue
 
+* The current number of pending TSM level 1 compactions.
 * Data type: integer
 
 ### tsmLevel1Compactions
 
+* The total number of TSM level 1 compactions that have ever run.
 * Data type: integer
 
 ### tsmLevel1CompactionsActive
 
+* The number of TSM level 1 compactions that are currently running.
 * Data type: integer
 
 #### tsmLevel2CompactionDuration
 
+* The duration, in wall nanoseconds, spent in TSM level 2 compactions.
 * Data type: integer
 
 ### tsmLevel2CompactionErr
 
+* The number of TSM level 2 compactions that have failed due to errors.
 * Data type: integer
 
 ### tsmLevel2CompactionQueue
 
+* The current number of pending TSM level 2 compactions.
 * Data type: integer
 
 ### tsmLevel2Compactions
 
+* The total number of TSM level 2 compactions that have ever run.
 * Data type: integer
 
 ### tsmLevel2CompactionsActive    
 
+* The number of TSM level 2 compactions that are currently running.
 * Data type: integer
 
 ### tsmLevel3CompactionDuration   
 
+* The duration, in wall nanoseconds (ns), spent in TSM level 3 compactions.
 * Data type: integer
 
 ### tsmLevel3CompactionErr
 
+* The number of TSM level 3 compactions that have failed due to errors.
 * Data type: integer
 
 ### tsmLevel3CompactionQueue      
 
+* The current number of pending TSM level 3 compactions.
 * Data type: integer
 
 ### tsmLevel3Compactions
 
+* The total number of TSM level 3 compactions that have ever run.
 * Data type: integer
 
 ### tsmLevel3CompactionsActive
 
+* The number of TSM level 3 compactions that are currently running.
 * Data type: integer
 
 ### tsmOptimizeCompactionDuration
 
-* Counter of number of wall nanoseconds spent in optimize compactions.
+* The total duration, in wall nanoseconds, spent during TSM optimize compactions.
 * Data type: integer
 
 ### tsmOptimizeCompactionErr
 
-* Counter of optimize compactions that have failed due to error.
+* The total number of TSM optimize compactions that have failed due to errors.
 * Data type: integer
 
 ### tsmOptimizeCompactionQueue
 
-* ???
+* The current number of pending TSM optimize compactions.
 * Data type: integer
 
 ### tsmOptimizeCompactions
 
-* Counter of optimize compactions that have ever run
+* The total number of TSM optimize compactions that have ever run.
 * Data type: integer
 
 ### tsmOptimizeCompactionsActive
 
-* Gauge of optimize compactions currently running.
+* The number of TSM optimize compactions that are currently running.
 * Data type: integer
-
-
 
 ____
 
 ### tsm1_filestore
 
-The `tsm1_filestore` measurement statistics are related to the usage of the TSM filestore.
+The `tsm1_filestore` measurement statistics are related to the usage of the TSM file store.
 
 ### diskBytes
 
-* Bytes of disk usage by TSM file store.
+* The size, in bytes, of disk usage by the TSM file store.
 * Data type: integer
 
 ### numFiles
 
-* Number of files in the TSM file store.
+* The total number of files in the TSM file store.
 * Data type: integer
 
 ____
@@ -972,18 +984,22 @@ The `tsm1_wal` measurement statistics are related to the usage of the TSM Write 
 
 ### currentSegmentDiskBytes
 
+* The current size, in bytes, of the segment disk.
 * Data type: integer
 
 ### oldSegmentDiskBytes
 
+* The size, in bytes, of the segment disk.
 * Data type: integer
 
 ### writeErr
 
+* The number of writes that failed due to errors.
 * Data type: integer
 
 ### writeOK
 
+* The number of writes that succeeded.
 * Data type: integer
 
 
@@ -996,55 +1012,55 @@ The `write` measurement statistics are related to writing to InfluxDB OSS and In
 
 ### pointReq
 
-* Incremented after each attempted point request.
+* The total number of attempted point requests.
 * Data type: integer
 * Used in "Per-host Point Throughput per Minute"
 
 ### pointReqHH [Enterprise only]
 
-* ???
+* The total number of attempted point requests to Hinted Handoff (HH).
 
 * Data type: integer
 
 ### pointReqLocal
 
-* Incremented after every attempted point request to be written into a shard.
+* The total number of point requests that have been attempted to be written into a shard on the local node.
 * Data type: integer
 
 ### pointReqRemote [Enterprise only]
 
-* ???
+* The total number of point requests that have been attempted to be written into a shard on a  remote node.
 * Data type: integer
 
 ### req
 
-* Incremented every time a batch of points attempts to be written.
+* The total number of write requests, for batches of points, that have been attempted to be written.
 * Data type: integer
 
 ### subWriteDrop
 
-* Incremented every time a batch write to a subscriber is dropped due to contention or write saturation.
+* The total number of batch write requests to  subscribers that were dropped due to contention or write saturation.
 * Data type: integer
 
 ### subWriteOk
 
-* Incremented every time a batch write to a subscriber is successful.
+* The total number of batch write requests that were successfully written to subscribers.
 * Data type: integer
 
 ### writeDrop
 
-* Incremented after every point that is dropped due to having a timestamp that does not match an existing retention policy.
+* The total number of write requests for points that have been dropped due to timestamps not matching any existing retention policies.
 * Data type: integer
 
 ### writeError
 
-* Incremented after every batch that was attempted to be written to a shard but failed.
+* The total number of batch requests that  attempted to be written to a shard but failed.
 * Data type: integer
 * Used in "Shard Write Errors"
 
 ### writeOk
 
-* Incremented for every batch that was successfully written to a shard.
+* The total number of batch requests that were successfully written to a shard.
 * Data type: integer
 
 ### writePartial [Enterprise only]
@@ -1054,5 +1070,5 @@ The `write` measurement statistics are related to writing to InfluxDB OSS and In
 
 ### writeTimeout
 
-* Incremented every time a write fails due to timing out.
+* The total number of write requests that failed due to timing out.
 * Data type: integer
