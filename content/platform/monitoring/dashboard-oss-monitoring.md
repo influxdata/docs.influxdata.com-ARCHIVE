@@ -4,7 +4,7 @@ description: Describes details about metrics that are monitored in the InfluxDb 
 menu:
   platform:
     name: InfluxDB OSS Stats monitoring dashboard
-    weight: 20
+    weight: 40
 ---
 
 The InfluxDB OSS Stats dashboard is useful for monitoring the health of your InfluxDB OSS instances. The dashboard visualizations cover commonly monitored metrics that are important for monitoring and maintaining your InfluxDB OSS instance and for troubleshooting. So that you don't have to constantly check the dashboard, you can create alerts to notify you when attention is required.

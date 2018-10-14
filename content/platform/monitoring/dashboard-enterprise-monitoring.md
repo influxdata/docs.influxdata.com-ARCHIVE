@@ -4,7 +4,7 @@ description: Describes details about metrics that are monitored in the InfluxDb 
 menu:
   platform:
     name: Enterprise Stats monitoring dashboard
-    weight: 30
+    weight: 50
 ---
 
 The InfluxDB Enterprise Cluster Stats dashboard is useful for monitoring the health of your InfluxDB Enterprise clusters. The dashboard visualizations cover commonly monitored metrics that are important for monitoring and maintaining your InfluxDB Enterprise clusters and for troubleshooting. So that you don't have to constantly check the dashboad, you can create alerts to notify you when attention is required.

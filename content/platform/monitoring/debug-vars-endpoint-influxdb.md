@@ -4,5 +4,5 @@ description: Describes details about using the /debug/vars HTTP endpoint to moni
 menu:
   platform:
     name: Using /debug/vars endpoint to monitor InfluxDB
-    weight: 80
+    weight: 70
 ---
