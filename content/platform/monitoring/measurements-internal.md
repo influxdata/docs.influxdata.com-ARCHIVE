@@ -7,12 +7,9 @@ menu:
     weight: 60
 ---
 
-
-
-
-
-
-On this page
+**On this page**
+* [Using the `_internal` database](#using-the-internal-database)
+* [Measurements in the `_internal` database](#internal-measurements details)
 * [ae](#ae-enterprise-only) (E)
   * [bytesRx](#bytesrx)
   * [errors](#errors)
@@ -184,8 +181,18 @@ On this page
   * [writeTimeout](#writetimeout)
 
 
+## Using the `_internal` database
 
-## ae (E)
+
+
+
+
+
+## Measuremments in the `_internal` database
+
+
+
+### ae (E)
 
 The measurement statistics related to Anti-Entropy (AE) used in InfluxDB Enterprise clusters.
 
@@ -210,9 +217,6 @@ The measurement statistics related to Anti-Entropy (AE) used in InfluxDB Enterpr
 * Number of active jobs in Anti-Entropy (AE)
 * Data type: integer
 * Used in "Count of AE Jobs"
-
-
-
 ____
 
 ## cluster

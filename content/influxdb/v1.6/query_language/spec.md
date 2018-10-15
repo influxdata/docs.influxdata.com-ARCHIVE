@@ -1003,7 +1003,9 @@ SHOW SHARDS
 
 ### SHOW STATS
 
-Returns detailed statistics on available components an InfluxDB node and available (enabled) components.
+Returns detailed statistics on available components of an InfluxDB node and available (enabled) components.
+
+For more information on using the `SHOW STATS` command, see [Using the SHOW STATS command to monitor InfluxDB](/platform/monitoring/show-stats/).
 
 ```
 show_stats_stmt = "SHOW STATS [ FOR '<component>' | 'indexes' ]"
