@@ -16,11 +16,13 @@ another OSS or Enterprise TICK stack. They cover different potential monitoring 
 and visualizing the monitoring data in a way that makes it easy to recognize, alert on,
 and address anomalies as they happen.
 
-## [Monitoring setup (Monitoring TICK with TICK)](#)
+<!-- ## [Monitoring setup (Monitoring TICK with TICK)](#) -->
 
-## [Internal monitoring vs external monitoring](#)
+<!-- ## [Internal monitoring vs external monitoring](#) -->
 
 ## [Setting up monitoring dashboards](#)
+
+## [Dashboards for monitoring performance](/platform/monitoring/monitoring-dashboards/)
 
 ## [InfluxDB OSS Stats monitoring dashboard](/platform/monitoring/dashboard-oss-monitoring/)
 
