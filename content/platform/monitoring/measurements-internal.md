@@ -1,6 +1,6 @@
 ---
 title: Measurements for monitoring InfluxDB OSS and InfluxDB Enterprise (_internal)
-description: Describes details about InfluxDB measurements and associated field keys that can be used to monitor InfluxDB OSS and InfluxDB  Enterprise servers.
+description: Use and understand the InfluxDB measurements statistics and field keys that can be used to monitor InfluxDB OSS servers and InfluxDB Enterprise clusters.
 menu:
   platform:
     name: Measurements for monitoring
@@ -9,13 +9,13 @@ menu:
 
 **On this page**
 * [Using the `_internal` database](#using-the-internal-database)
-* [Measurements in the `_internal` database](#internal-measurements details)
-  * [ae](#ae-enterprise-only) (E)
+* [Measurements in the `_internal` database](#internal-measurements-details)
+  * **[ae](#ae-enterprise-only)** (E)
     * [bytesRx](#bytesrx)
     * [errors](#errors)
     * [jobs](#jobs)
     * [jobsActive](#jobsactive)
-  * [cluster](#cluster-enterprise-only) (E)
+  * **[cluster](#cluster-enterprise-only)** (E)
     * [copyShardReq](#copyshardreq)
     * [createIteratorReq](#createiteratorreq)
     * [expandSourcesReq](expandsourcereq)
@@ -25,7 +25,7 @@ menu:
     * [writeShardFail](#writeshardfail)
     * [writeShardPointsReq](#writeshardpointsreq)
     * [writeShardReq](#writeshardreq)
-  * [cq](#cq)
+  * **[cq](#cq)**
     * [queryFail](#queryfail)
     * [queryOk](#queryok)
   * [database](#database)
@@ -34,7 +34,7 @@ menu:
   * [hh](#hh-enterprise-only) (E)
     * [writeShardReq](#writeshardreq)
     * [writeShardReqPoints](#writeshardreqpoints)
-  * [hh_processor](#hh_processor-enterprise-only) (E)
+  * **[hh_processor](#hh_processor-enterprise-only)** (E)
     * [bytesRead](#bytesread)
     * [bytesWritten](#byteswritten)
     * [queueBytes](#queuebytes)
@@ -46,7 +46,7 @@ menu:
     * [writeNodeReqPoints](#writenodereqpoints)
     * [writeShardReq](#writeshardreq)
     * [writeShardReqPoints](#writeshardreqpoints)
-  * [httpd](#httpd)
+  * **[httpd](#httpd)**
     * [authFail](#authfail)
     * [clientError](#clienterror)
     * [pingReq](#pingreq)
@@ -68,13 +68,13 @@ menu:
     * [writeReqActive](#writereqactive)
     * [writeReqBytes](#writereqbytes)
     * [writeReqDurationNs](#writereqdurationns)
-  * [queryExecutor](#queryexecutor)
+  * **[queryExecutor](#queryexecutor)**
     * [queriesActive](#queriesactive)
     * [queriesExecuted](#queriesexecuted)
     * [queriesFinished](#queriesfinished)
     * [queryDurationNs](#querydurationns)
     * [recoveredPanics](#recoveredpanics)
-  * [rpc](#rpc-enterprise-only) (E)
+  * **[rpc](#rpc-enterprise-only)** (E)
     * [idleStreams](#idlestreams)
     * [liveConnections](#liveconnections)
     * [liveStreams](#livestreams)
@@ -87,7 +87,7 @@ menu:
     * [singleUseOpen](#singleuseopen)
     * [totalConnections](#totalconnections)
     * [totalStreams](#totalstreams)
-  * [runtime](#runtime)
+  * **[runtime](#runtime)**
     * [Alloc](#alloc)
     * [Frees](#frees)
     * [HeapAlloc](#heapalloc)
@@ -103,7 +103,7 @@ menu:
     * [PauseTotalNs](#)
     * [Sys](#sys)
     * [TotalAlloc](#totalalloc)
-  * [shard](#shard)
+  * **[shard](#shard)**
     * [diskBytes](#diskbytes)
     * [fieldsCreate](#fieldscreate)
     * [seriesCreate](#seriescreate)
@@ -114,11 +114,11 @@ menu:
     * [writeReq](#writereq)
     * [writeReqErr](#writereqerr)
     * [writeReqOk](#writereqok)
-  * [subscriber](#subscriber)
+  * **[subscriber](#subscriber)**
     * [createFailures](#createfailures)
     * [pointsWritten](#pointswritten)
     * [writeFailures](#writefailures)
-  * [tsm1_cache](#tsm1-cache)
+  * **[tsm1_cache](#tsm1-cache)**
     * [WALCompactionTimeMs](#walcompationtimems)
     * [cacheAgeMs](#cacheagems)
     * [cachedBytes](#cachedbytes)
@@ -128,7 +128,7 @@ menu:
     * [writeDropped](#writedropped)
     * [writeErr](#writeerr)
     * [writeOk](#writeok)
-  * [tsm1_engine](#tsm1-engine)
+  * **[tsm1_engine](#tsm1-engine)**
     * [cacheCompactionDuration](#cachecompactionduration)
     * [cacheCompactionErr](#cachecompactionerr)
     * [cacheCompactions](#cachecompactions)
@@ -158,15 +158,15 @@ menu:
     * [tsmOptimizeCompactionQueue](#tsmoptimizecompactionqueue)
     * [tsmOptimizeCompactions](#tsmoptimizecompactions)
     * [tsmOptimizeCompactionsActive](#tsmoptimizecompactionactive)
-  * [tsm1_filestore](#tsm1-filestore)
+  * **[tsm1_filestore](#tsm1-filestore)**
     * [diskBytes](#diskbytes)
     * [numFiles](#numfiles)
-  * [tsm1_wal](#tsm1-wal)
+  * **[tsm1_wal](#tsm1-wal)**
     * [currentSegmentDiskBytes](#currentsegmentdiskbytes)
     * [oldSegmentsDiskBytes](#oldsegmentsdiskbytes)
     * [writeErr](#writeerr)
     * [writeOk](#writeok)
-  * [write](#write)
+  * **[write](#write)**
     * [pointReq](#pointreq)
     * [pointReqHH](#pointreqhh) (E)
     * [pointReqLocal](#pointreqlocal)
@@ -205,7 +205,9 @@ The measurement statistics related to Anti-Entropy (AE) used in InfluxDB Enterpr
 
 * ???
 * Data type:
-* Used in "Count of AE Errors"
+* Used in "Anti-Entropy Errors"
+* Examples
+  * "Anti-Entropy Errors" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#anti-entropy-errors) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#anti-entropy-errors) dashboards.
 
 #### jobs
 
@@ -216,8 +218,10 @@ The measurement statistics related to Anti-Entropy (AE) used in InfluxDB Enterpr
 
 * Number of active jobs in Anti-Entropy (AE)
 * Data type: integer
-* Used in "Count of AE Jobs"
-____
+* Examples
+  * "Anti-Entropy Jobs" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#anti-entropy-jobs) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#anti-entropy-jobs) dashboards.
+
+_____
 
 ### cluster
 
@@ -269,13 +273,17 @@ The statistics related to continuous queries (CQs).
 
 #### queryFail
 
+* ???
 * Data type: integer
-* Used in "CQs executed per minute"
+* Examples
+  * "Continuous Queries Executed" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#continuous-queries-executed) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#continuous-queries-executed) dashboards.
 
 #### queryOk
 
+* ???
 * Data type: integer
-* Used in "CQs executed per minute"
+* Examples
+  * "Continuous Queries Executed" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#continuous-queries-executed) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#continuous-queries-executed) dashboards.
 
 --------  ---------
 
@@ -283,17 +291,19 @@ The statistics related to continuous queries (CQs).
 
 #### numMeasurements
 
-* Number of measurements in the specified database
+* The current number of measurements in the specified database.
 * Data type: integer
-* Values are estimates, currently implemented using [HyperLogLog++ (HLL++) estimation](https://github.com/influxdata/influxdb/blob/master/pkg/estimator/hll/hll.go). The numbers returned by the estimates when there are thousands or millions of measurements or series should be accurate within a relatively small margin of error.
-* Used in "Number of Measurements by Database"
+* The series cardinality values are estimates, based on [HyperLogLog++ (HLL++)](https://github.com/influxdata/influxdb/blob/master/pkg/estimator/hll/hll.go). The numbers returned by the estimates when there are thousands or millions of measurements or series should be accurate within a relatively small margin of error.
+* Examples:
+  * "Measurements By Database" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#measurements-by-database) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#measurements-by-database) dashboards.
 
 #### numSeries
 
-* Number of series in the specified database
+* The current series cardinality of the specified database.
 * Data type: integer
-* Values are estimates, currently implemented using [HyperLogLog++ (HLL++) estimation](https://github.com/influxdata/influxdb/blob/master/pkg/estimator/hll/hll.go). The numbers returned by the estimates when there are thousands or millions of measurements or series should be accurate within a relatively small margin of error.
-* Used in "Series Cardinality by Database"
+* The series cardinality values are estimates, based on [HyperLogLog++ (HLL++)](https://github.com/influxdata/influxdb/blob/master/pkg/estimator/hll/hll.go). The numbers returned by the estimates when there are thousands or millions of measurements or series should be accurate within a relatively small margin of error.
+* Examples
+  * "Series Cardinality By Database metric" in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#series-cardinality-by-database) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#series-cardinality-by-database) dashboards.
 
 
 
@@ -341,22 +351,23 @@ The `hh_processor` measurement statistics are related to the Hinted Handoff (HH)
 * Data type: integer
 * Should remain correct across restarts, unlike `bytesRead` and `bytesWritten` (See https://github.com/influxdata/docs.influxdata.com/issues/780)
   * See PR on `max-values-per-tag` limit and effects on this field key (https://github.com/influxdata/docs.influxdata.com/issues/780).
-* Used in "Hinted Handoff Queue Size"
+  * Examples:
+    * "Hinted Handoff Queue Size" in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#hinted-handoff-queue-size) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#hinted-handoff-queue-size) dashboards.
 
 #### queueDepth
 
-* The number of segments in the queue.
-* Can give you a sense of when a queue is growing or shrinking.
+* The total number of segments in the Hinted Handoff queue. The HH queue is a sequence of 10MB "segment" files.
+* The `queueDepth` values can give you a sense of when a queue is growing or shrinking.
 * Data type: integer
 
 ####  writeBlocked
 
-* The number of writes dropped because the number of concurrent HH requests exeeds the limit.
+* The number of writes blocked (and thus ) because the number of concurrent HH requests exceeds the limit.
 * Data type: integer
 
 ####  writeDropped
 
-* Increments for every point that was read from the HH queue and appeared to be corrupted and was therefore dropped.
+* The number of writes dropped from the HH queue and appeared to be corrupted and was therefore dropped.
 * Data type: integer
 
 ####  writeNodeReq
@@ -392,9 +403,12 @@ The `httpd` measurement statistics are related to the InfluxDB HTTP server.
 
 ####  clientError
 
-- The number of HTTP responses due to client errors, with a 4XX status code.
-- Data type: integer
-- Used in "HTTP Request per Minute"
+* The number of HTTP responses due to client errors, with a `4XX` HTTP status code.
+* Data type: integer
+* Used in "HTTP Requests"
+* Examples:
+  * "HTTP Requests Per Minute" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#http-requests-per-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#http-requests-per-minute) dashboards.
+
 
 ####  pingReq
 
@@ -408,7 +422,7 @@ The `httpd` measurement statistics are related to the InfluxDB HTTP server.
 
 ####  pointsWrittenFail
 
-* The number of points accepted by the `/write` HTTP endpoint but was unable to be persisted.
+* The number of points accepted by the `/write` HTTP endpoint, but unable to be persisted.
 * Data type: integer
 
 ####  pointsWrittenOK
@@ -418,25 +432,29 @@ The `httpd` measurement statistics are related to the InfluxDB HTTP server.
 
 ####  promReadReq
 
-* The number of read requests to the Prometheus endpoint.
+* The number of read requests to the Prometheus `/read` endpoint.
 * Data type: integer
 
 ####  promWriteReq
 
-* The number of write requests to the Prometheus endpoint.
+* The number of write requests to the Prometheus `/write` endpoint.
 * Data type: integer
 
 ####  queryReq
 
 * The number of query requests.
 * Data type: integer
-* Used in "HTTP Request Duration (99th %)" and "HTTP Requests per Minute"
+* Used in "HTTP Request Duration (99th %)" and "HTTP Requests Per Minute"
+* Examples:
+  * "HTTP Request Duration (99th %)" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#http-request-duration--99th-%-) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#http-request-duration--99th-%-) dashboards.
+  * "HTTP Requests Per Minute" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#http-requests-per-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#http-requests-per-minute) dashboards.
 
 ####  queryReqDurationNs
 
 * The total query request duration, in nanosecond (ns).
 * Data type: integer
-* Used in "HTTP Request Duration (99th %)"
+* Examples:
+  * "HTTP Request Duration (99th %)" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#http-request-duration--99th-%-) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#http-request-duration--99th-%-) dashboards.
 
 ####  queryRespBytes
 
@@ -460,25 +478,28 @@ The `httpd` measurement statistics are related to the InfluxDB HTTP server.
 
 ####  reqDurationNs
 
-* The cumulative duration, in (wall-time) nanoseconds (ns), spent inside requests.
+* The duration (wall time), in nanoseconds, spent inside HTTP requests.
 * Data type: integer
 
 ####  serverError
 
 * The number of HTTP responses due to server errors.
 * Data type: integer
-* Used in "HTTP Request per Minute"
+* Examples
+  * "HTTP Requests Per Minute" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#http-requests-per-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#http-requests-per-minute) dashboards.
 
 ####  statusReq
 
-* The number of status requests served using the /status HTTP endpoint.
+* The number of status requests served using the HTTP `/status` endpoint.
 * Data type: integer
 
 ####  writeReq
 
-* The number of write requests served using the /write HTTP endpoint.
+* The number of write requests served using the HTTP `/write` endpoint.
 * Data type: integer
-* Used in "HTTP Request Duration (99th %)" and "HTTP Requests per Minute"
+* Examples
+  * "HTTP Request Duration (99th %)" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#http-request-duration--99th-%-) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#http-request-duration--99th-%-) dashboards.
+  * "HTTP Requests Per Minute" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#http-requests-per-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#http-requests-per-minute) dashboards.
 
 ####  writeReqActive
 
@@ -487,20 +508,21 @@ The `httpd` measurement statistics are related to the InfluxDB HTTP server.
 
 ####  writeReqBytes
 
-* The total size, in bytes, of line protocol data received by write requests, using the /write HTTP endpoint.
+* The total size, in bytes, of line protocol data received by write requests, using the HTTP `/write` endpoint.
 * Data type: integer
 
 ####  writeReqDurationNs
 
-* The total duration, in nanoseconds (ns), of write requests served using the /write HTTP endpoint.
+* The duration (wall time), in nanoseconds, of write requests served using the `/write` HTTP endpoint.
 * Data type: integer
-* Used in "HTTP Request Duration (99th %)"
+* Examples
+  * "HTTP Request Duration (99th %)" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#http-request-duration-99th-%) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#http-request-duration-99th-%) dashboards.
 
 -----
 
 ### queryExecutor
 
-The statistics related to the Query Executor of the InfluxDB engine.
+The `queryExecutor` statistics related to usage of the Query Executor of the InfluxDB engine.
 
 ####  queriesActive
 
@@ -509,18 +531,19 @@ The statistics related to the Query Executor of the InfluxDB engine.
 
 #####  queriesExecuted
 
-* The number of queries executed (started)
+* The number of queries executed (started).
 * Data type: integer
-* Used in "Queries Executed per Minute"
+* Examples
+  * "Queries Executed Per Minute" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#queries-executed-per-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#queries-executed-per-minute) dashboards.
 
 ####  queriesFinished
 
 * The number of queries that have finished executing.
-* Data t type: integer
+* Data type: integer
 
 ####  queryDurationNs
 
-* The cumulative wall time, in nanoseconds, of every query executed.
+* The duration (wall time), in nanoseconds, of every query executed.
 * If one query took 1000 ns from start to finish, and another query took 500 ns from start to finish and ran before the first query finished, the statistic would increase by 1500.
 * Data type: integer
 
@@ -544,12 +567,12 @@ The `rpc` measurement statistics are related to the use of RPC calls within Infl
 
 ####  liveConnections
 
-* The number of live TCP connections to other nodes.
+* The current number of live TCP connections to other nodes.
 * Data type: integer
 
 ####  liveStreams
 
-*  The number of live multiplexed streams across all live TCP connections.
+*  The current number of live multiplexed streams across all live TCP connections.
 * Data type: integer
 
 ####  rpcCalls
@@ -579,7 +602,7 @@ The `rpc` measurement statistics are related to the use of RPC calls within Infl
 
 ####  singleUse
 
-* The total number of single-use connections opened via Dial.
+* The total number of single-use connections opened using Dial.
 * Data type: integer
 
 ####  singleUseOpen
@@ -629,7 +652,8 @@ The [Go runtime package](https://golang.org/pkg/runtime/) contains operations th
 
 * The size, in bytes, in in-use spans.
 * Data type: integer
-* Used in "Heap Size"
+* Examples
+  * "Heap Size" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#heap-size) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#heap-size) dashboards.
 
 ####  HeapObjects
 
@@ -816,7 +840,7 @@ The `tsm1_engine` measurement statistics are related to the usage of the TSM sto
 
 #### cacheCompactionDuration       
 
-* The duration, in wall nanoseconds, spent in cache compactions.
+* The duration (wall time), in nanoseconds, spent in cache compactions.
 
 * Data type: integer
 
@@ -837,7 +861,7 @@ The `tsm1_engine` measurement statistics are related to the usage of the TSM sto
 
 #### tsmFullCompactionDuration
 
-* The duration, in wall nanoseconds, spent in full compactions.
+* The duration (wall time), in nanoseconds, spent in full compactions.
 * Data type: integer
 
 #### tsmFullCompactionErr
@@ -862,7 +886,7 @@ The `tsm1_engine` measurement statistics are related to the usage of the TSM sto
 
 #### tsmLevel1CompactionDuration
 
-* The duration, in wall nanoseconds, spent in TSM level 1 compactions.
+* The duration (wall time), in nanoseconds, spent in TSM level 1 compactions.
 * Data type: integer
 
 #### tsmLevel1CompactionErr
@@ -887,7 +911,7 @@ The `tsm1_engine` measurement statistics are related to the usage of the TSM sto
 
 ####  tsmLevel2CompactionDuration
 
-* The duration, in wall nanoseconds, spent in TSM level 2 compactions.
+* The duration (wall time), in nanoseconds, spent in TSM level 2 compactions.
 * Data type: integer
 
 #### tsmLevel2CompactionErr
@@ -912,7 +936,7 @@ The `tsm1_engine` measurement statistics are related to the usage of the TSM sto
 
 #### tsmLevel3CompactionDuration   
 
-* The duration, in wall nanoseconds (ns), spent in TSM level 3 compactions.
+* The duration (wall time), in nanoseconds, spent in TSM level 3 compactions.
 * Data type: integer
 
 #### tsmLevel3CompactionErr
@@ -937,7 +961,7 @@ The `tsm1_engine` measurement statistics are related to the usage of the TSM sto
 
 #### tsmOptimizeCompactionDuration
 
-* The total duration, in wall nanoseconds, spent during TSM optimize compactions.
+* The duration (wall time), in nanoseconds, spent during TSM optimize compactions.
 * Data type: integer
 
 #### tsmOptimizeCompactionErr
@@ -1008,13 +1032,14 @@ _____
 
 ### write
 
-The `write` measurement statistics are related to writing to InfluxDB OSS and InfluxDB Enterprise.
+The `write` measurement statistics are related to writing data to InfluxDB OSS and InfluxDB Enterprise.
 
 #### pointReq
 
 * The total number of attempted point requests.
 * Data type: integer
-* Used in "Per-host Point Throughput per Minute"
+* Examples
+  * "Points Throughput / Minute by Hostname" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring/) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring/) dashboards
 
 #### pointReqHH [Enterprise only]
 
@@ -1056,7 +1081,8 @@ The `write` measurement statistics are related to writing to InfluxDB OSS and In
 
 * The total number of batch requests that  attempted to be written to a shard but failed.
 * Data type: integer
-* Used in "Shard Write Errors"
+* Examples
+  * "Shard Write Errors" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-enterprise-monitoring#shard-write-errors/#shard-write-errors) and [InfluxDB Enterprise Statistics](/platform/monitoring/dashboard-enterprise-monitoring#shard-write-errors) dashboards
 
 #### writeOk
 
