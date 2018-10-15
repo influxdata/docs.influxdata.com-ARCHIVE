@@ -28,10 +28,10 @@ menu:
   * **[cq](#cq)**
     * [queryFail](#queryfail)
     * [queryOk](#queryok)
-  * [database](#database)
+  * **[database](#database)**
     * [numMeasurements](#nummeasurements)
     * [numSeries](#numseries)
-  * [hh](#hh-enterprise-only) (E)
+  * **[hh](#hh-enterprise-only)** (E)
     * [writeShardReq](#writeshardreq)
     * [writeShardReqPoints](#writeshardreqpoints)
   * **[hh_processor](#hh_processor-enterprise-only)** (E)
