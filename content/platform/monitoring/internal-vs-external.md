@@ -10,12 +10,10 @@ menu:
 
 One of the primary use cases for InfluxData's TICK stack is infrastructure monitoring,
 including using the TICK stack to monitor itself or another TICK stack.
-These are two main approaches to Monitoring your TICK stack:
+These are the two main approaches to Monitoring your TICK stack:
 
 - **[Internal monitoring](#internal-monitoring)** - A TICK stack that monitors itself.
 - **[External monitoring](#external-monitoring)** - A TICK stack monitored by another TICK stack.
-
-_Be sure to also read through the [monitoring recommendations](#recommendations) below._
 
 ## Internal monitoring
 
@@ -27,9 +25,12 @@ CPU usage, memory usage, disk usage, etc., and stores them in the `telegraf` dat
 InfluxDB also reports performance metrics about itself, such as continuous query statistics,
 internal goroutine statistics, write statistics, series cardinality, and others,
 and stores them in the `_internal` database.
+_See the recommendation about `_internal` databases [below](#disable-the-internal-database-in-production-clusters)._
 
-[Monitoring dashboards](/platform/monitoring/monitoring-dashboards) are available that visualize the default metrics provided in each of these databases.
-You can also [configure Kapacitor alerts](/kapacitor/latest/working/alerts/) to monitor and alert on each of these metrics.
+[Monitoring dashboards](/platform/monitoring/monitoring-dashboards) are available
+that visualize the default metrics provided in each of these databases.
+You can also [configure Kapacitor alerts](/kapacitor/latest/working/alerts/)
+to monitor and alert on each of these metrics.
 
 ### Pros of internal monitoring
 
@@ -54,22 +55,29 @@ It consists of Telegraf agents installed on each node in your primary cluster
 reporting metrics for their respective hosts to a monitoring TICK stack installed
 on a separate server or cluster.
 
-_See the [Setup an external monitor](#) guide for information about setting up an external monitoring TICK stack._
+---
 
-[Monitoring dashboards](/platform/monitoring/monitoring-dashboards) are available that visualize the default metrics provided by the Telegraf agents.
-You can also [configure Kapacitor alerts](/kapacitor/latest/working/alerts/) to monitor and alert on each of these metrics.
+_See the [Setup an external monitor](/platform/monitoring/external-monitor-setup)
+guide for information about setting up an external monitoring TICK stack._
+
+---
+
+[Monitoring dashboards](/platform/monitoring/monitoring-dashboards) are available
+that visualize the default metrics provided by the Telegraf agents.
+You can also [configure Kapacitor alerts](/kapacitor/latest/working/alerts/)
+to monitor and alert on each of these metrics.
 
 ### Pros of external monitoring
 
 #### Hardware separation
 With an monitor running separate from your primary TICK stack, issues that occur in the primary stack will not affect the monitor.
-If your primary TICK stack goes down or has issues, your monitor will be able detect them and to alert you.
+If your primary TICK stack goes down or has issues, your monitor will be able detect them and alert you.
 
 ### Cons of external monitoring
 
 #### Slightly more setup
 There is more setup involved with external monitoring, but the benefits far
-outweigh the extra setup time required, especially for production use cases.
+outweigh the extra time required, especially for production use cases.
 
 ## Recommendations
 
@@ -82,7 +90,15 @@ which should only be tested in non-production environments.
 To disable the `_internal` database, set [`store-enabled`](/influxdb/latest/administration/config/#monitoring-settings-monitor)
 to `false` under the `[monitor]` section of your `influxdb.conf`.
 
+_**influxdb.conf**_
 ```toml
+# ...
 [monitor]
+
+  # ...
+
+  # Whether to record statistics internally.
   store-enabled = false
+
+  #...
 ```
