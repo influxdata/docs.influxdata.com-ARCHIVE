@@ -806,7 +806,7 @@ SHOW DATABASES
 
 ### SHOW DIAGNOSTICS
 
-Displays node information, such as build information, uptime, hostname, server configuration, memory usage, and Go runtime diagnostics.
+Displays node information, such as build information, uptime, hostname, server configuration, memory usage, and Go runtime diagnostics. For details on the output of this command, see [Using the SHOW DIAGNOSTICS command for monitoring InfluxDB](/platform/monitoring/show-diagnostics/).
 
 ```sql
 show_diagnostics_stmt = "SHOW DIAGNOSTICS"

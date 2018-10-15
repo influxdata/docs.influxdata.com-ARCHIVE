@@ -7,7 +7,9 @@ menu:
     weight: 100
 ---
 
-To see node diagnostic information, you can use the SHOW DIAGNOSTICS command. This command returns InfluxDB instance information, including build details, uptime, hostname, server configuration, memory usage, and Go runtime diagnostics.
+Diagnostic information includes mostly information about your InfluxDB server that is not necessarily numerical in format. This diagnostic information is not stored in the `_internal` database.
+
+To see InfluxDB server or node diagnostic information, you can use the [`SHOW DIAGNOSTICS`](influxdb/latest/query_language/spec#show-diagnostics) command. This command returns InfluxDB instance information, including build details, uptime, hostname, server configuration, memory usage, and Go runtime diagnostics. This information is particularly useful to InfluxData Support, so be sure to include the output of this query anytime you file a support ticket or GitHub issue.
 
 
 ## `SHOW DIAGNOSTICS` details
@@ -96,7 +98,7 @@ system
 * uptime
 
 
-## Example
+## Example of `SHOW DIAGNOSTICS` output
 
 Here is an example of the output returned when running the `SHOW DIAGNOSTICS` command on an InfluxDB OSS server.
 
