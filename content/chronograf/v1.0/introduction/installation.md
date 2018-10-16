@@ -25,7 +25,7 @@ Follow the instructions in the Chronograf Downloads section on the [Downloads pa
 
 ### Start the Chronograf service
 
-#### Mac OS X (via Homebrew)
+#### macOS (via Homebrew)
 
 To run Chronograf manually, you can specify the configuration file on the
 command line:

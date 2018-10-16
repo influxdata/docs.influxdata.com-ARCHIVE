@@ -36,7 +36,7 @@ you may want to check out our
 [RedHat & CentOS](#)
 [SLES & openSUSE](#)
 [FreeBSD/PC-BSD](#)
-[MAC OS X](#)
+[macOS](#)
 {{% /tabs %}}
 {{< tab-content-container >}}
 
@@ -151,7 +151,7 @@ To have InfluxDB start at system boot, add `influxd_enable="YES"` to `/etc/rc.co
 
 {{% tab-content %}}
 
-Users of OS X 10.8 and higher can install InfluxDB using the [Homebrew](http://brew.sh/) package manager.
+Users of macOS 10.8 and higher can install InfluxDB using the [Homebrew](http://brew.sh/) package manager.
 Once `brew` is installed, you can install InfluxDB by running:
 
 ```bash
