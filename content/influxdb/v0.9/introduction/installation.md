@@ -88,9 +88,9 @@ sudo service influxd onestart
 ```
 and/or adding `influxd_enable="YES"` to `/etc/rc.conf` to launch influxd during system boot.
 
-### OS X
+### macOS
 
-Users of OS X 10.8 and higher can install using the [Homebrew](http://brew.sh/) package manager.
+Users of macOS 10.8 and higher can install using the [Homebrew](http://brew.sh/) package manager.
 
 ```bash
 brew update

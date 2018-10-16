@@ -42,7 +42,7 @@ manually by running:
 ./kapacitord -config <PATH TO CONFIGURATION>
 ```
 
-#### OS X (via Homebrew)
+#### macOS (via Homebrew)
 
 To have `launchd` start Kapacitor at login:
 
