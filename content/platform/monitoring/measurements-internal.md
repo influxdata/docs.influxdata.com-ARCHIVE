@@ -186,6 +186,18 @@ menu:
 The `_internal` database
 
 
+### Enterprise clusters
+
+In a cluster, each measurement in the `_internal` database has three tags:
+* `clusterID` - the UUID of the cluster recording the `_internal` metrics
+* `hostname` - the hostname of the node reporting the metrics.
+  - The `hostname` is added to all statistics and should indicate the hostname as reported by the operating system.
+* `nodeID` - the hostname and port of the node reporting the metrics.
+  - The `nodeID` is set in closed source, and it looks like it should be set to the hostname or bind address as set in the config file.
+
+### Measurements written to `telegraf`
+
+When 
 
 
 ## Measuremments in the `_internal` database
@@ -223,44 +235,60 @@ The measurement statistics related to Anti-Entropy (AE) used in InfluxDB Enterpr
 
 _____
 
-### cluster
+### cluster [Enterprise only]
 
-The measurement statistics related to clusters.
+The `cluster` measurement tracks statistics related to the clustering features of the data nodes in InfluxDB Enterprise.
+The tags on the series indicate the source host of the stat.
 
 ####  copyShardReq
 
+* The number of internal request to copy a shard from _this_ data node to another data node.
 * Data type: integer
 
 ####  createIteratorReq
 
+* The number of remote node requests made to remotely read data from this data node.
 * Data type: integer
 
-####  expandSourcesReq
+####  expandSourcesReq ???
 
+* The number of remote node requests made to find measurements on this node that match a particular regular expression.
+Looks like this comment was meant for `expandSourcesReq` - and yes, that indicates a SELECT from a regex initiated on a different data node, which then sent an internal request to this node.
+* There is not currently a statistic tracking how many queries with a regex, instead of a fixed measurement, were initiated on a particular node.
 * Data type: integer
 
 ####  fieldDimensionsReq
 
+* The number of remote node requests for information about the fields and associated types, and tag keys, of measurements on this data node.
 * Data type: integer
 
 ####  iteratorCostReq
 
+* ???
 * Data type: integer
 
 ####  removeShardReq
 
+* The number of internal requests to delete a shard from this data node.
+* Exclusively incremented by use of the `influxd-ctl remove shard` command.
 * Data type: integer
 
 #### writeShardFail
 
+* The number of internal write requests from a remote node, and the write fails
+* It's the cousin of OSS shard stat `writeReqErr`.
+* A write request over HTTP is received by Node A. Node A does not have the shard locally, so it creates an internal request to Node B instructing what to write and to which shard. If Node B sees the request and if anything goes wrong, Node B increments its own `writeShardFail`. Depending on what went wrong, in most circumstances Node B would also increment its `writeReqErr` stat inherited from OSS.
+* If Node A had the shard locally, there would be no internal request to write data to a remote node, so `writeShardFail` would not be incremented.
 * Data type: integer
 
 #### writeShardPointsReq
 
+* The number of points in every internal write request from any remote node, regardless of success.
 * Data type: integer
 
 #### writeShardReq
 
+* The number of internal write requests from a remote data node, regardless of success.
 * Data type: integer
 
 
@@ -273,14 +301,15 @@ The statistics related to continuous queries (CQs).
 
 #### queryFail
 
-* ???
+* The total number of continuous queries that executed but failed.
 * Data type: integer
 * Examples
   * "Continuous Queries Executed" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#continuous-queries-executed) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#continuous-queries-executed) dashboards.
 
 #### queryOk
 
-* ???
+* The total number of continuous queries that executed successfully.
+* Note that this value may be incremented in some cases where a CQ is initiated but does not actually run, for example, due to misconfigured resample intervals.
 * Data type: integer
 * Examples
   * "Continuous Queries Executed" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#continuous-queries-executed) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#continuous-queries-executed) dashboards.
@@ -303,7 +332,7 @@ The statistics related to continuous queries (CQs).
 * Data type: integer
 * The series cardinality values are estimates, based on [HyperLogLog++ (HLL++)](https://github.com/influxdata/influxdb/blob/master/pkg/estimator/hll/hll.go). The numbers returned by the estimates when there are thousands or millions of measurements or series should be accurate within a relatively small margin of error.
 * Examples
-  * "Series Cardinality By Database metric" in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#series-cardinality-by-database) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#series-cardinality-by-database) dashboards.
+  * "Series Cardinality By Database" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#series-cardinality-by-database) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#series-cardinality-by-database) dashboards.
 
 
 
@@ -311,16 +340,22 @@ _____
 
 ### hh [Enterprise only]
 
-The `hh` measurement statistics are related to Hinted Handoff (HH) in InfluxDB Enterprise.
+The `hh` measurement statistics track events resulting in new Hinted Handoff (HH) processors in InfluxDB Enterprise.
+
+The `hh` measurement has one additional tag:
+* `path` - The path to the durable hinted handoff queue on disk.
 
 #### writeShardReq
 
-* The number of write shard requests. ???
+* The number of initial write requests handled by the Hinted Handoff engine for a remote node.
+* Subsequent write requests to this node, destined for the same remote node, do not increment this statistics.
+* This statistic will be reset to `0` upon restart of `influxd`, regardless of the state the last time the process was alive. It is incremented when the HH "supersystem" is instructed to enqueue a write for the node, and the "subsystem" for the destination node doesn't exist and has to be created, and the "subsystem" created successfully.
+* If HH files are on disk for a remote node at process startup, the branch that increments this stat will not be reached.
 * Data type: integer
 
 #### writeShardReqPoints
 
-* The number of points written during write shard requests. ???
+* The number of write requests for each point in the initial request to the Hinted Handoff engine for a remote node.
 * Data type: integer
 
 
@@ -329,34 +364,45 @@ _____
 
 ### hh_processor [Enterprise only]
 
-The `hh_processor` measurement statistics are related to the Hinted Handoff (HH) processor in InfluxDB Enterprise.
+The `hh_processor` measurement statistics are related to the Hinted Handoff (HH) processors in InfluxDB Enterprise, one for each data node.
 
-> **Note:** The `hh_processor` statistics against a host are only accurate for the lifecycle of the current process. If the process crashes or restarts, `bytesRead` and `bytesWritten` are reset to zero, even if the HH queue was non-empty. (From https://github.com/influxdata/plutonium/issues/539.)
+The `hh_processor` measurement has two additional tags:
+* `node` - The destination node for the recorded metrics.
+* `path` - The path to the durable hinted handoff queue on disk.
+
+> **Note:** The `hh_processor` statistics against a host are only accurate for the lifecycle of the current process. If the process crashes or restarts, `bytesRead` and `bytesWritten` are reset to zero, even if the HH queue was non-empty.
 
 #### bytesRead
 
-* The size, in bytes, of points read from a remote node.
-* **Note:** Resets to zero after crash or restart, even if the HH queue was non-empty.
+>**Note:** Resets to zero after crash or restart, even if the HH queue was non-empty.
+
+* The size, in bytes, of points read from the Hinted Handoff queue and sent to its destination data node.
+* Note that if the data node process is restarted while there is data in the HH queue, `bytesRead` may settle to a number larger than `bytesWritten`.
+* Hinted Handoff writes occur in concurrent batches as determined by the [`retry-concurrency`](/enterprise_influxdb/latest/administration/configuration/#retry-concurrency-20) setting. If an individual write succeeds, the metric is incremented. If any write out of the whole batch fails, the entire batch is considered unsuccessful, and every part of the batch will be retried later. This was not the intended behavior of this stat.
+* The other situation where `bytesRead` could be larger would be after a restart of the process. Say at startup there were 1000 bytes still enqueued in HH from the previous run of the process. Immediately after a restart, both `bytesRead` and `bytesWritten` are set to zero. Assuming HH is properly depleted, and no future writes require HH, then the stats will read 1000 bytes read and 0 bytes written.
 * Data type: integer
 
 #### bytesWritten
 
-* The size, in bytes, of points written to a remote node.
-* **Note:** Resets to zero after crash or restart, even if the HH queue was non-empty.
+* The size, in bytes, of points written to the Hinted Handoff queue.
+* Note that this statistic only tracks bytes written during the lifecycle of the current process.
+Upon restart or a crash, this statistic resets to zero, even if the Hinted Handoff queue was not empty.
 * Data type: integer
 
 #### queueBytes
 
 * The total size, in bytes, remaining in the queue.
+* This statistic should accurately and absolutely track the number of bytes of encoded data waiting to be sent to the remote node.
 * Data type: integer
-* Should remain correct across restarts, unlike `bytesRead` and `bytesWritten` (See https://github.com/influxdata/docs.influxdata.com/issues/780)
-  * See PR on `max-values-per-tag` limit and effects on this field key (https://github.com/influxdata/docs.influxdata.com/issues/780).
+* This statistic should remain correct across restarts, unlike `bytesRead` and `bytesWritten` (See https://github.com/influxdata/docs.influxdata.com/issues/780)
+  * See PR on `max-values-per-tag` limit and effects on `queueBytes` (https://github.com/influxdata/docs.influxdata.com/issues/780).
   * Examples:
     * "Hinted Handoff Queue Size" in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#hinted-handoff-queue-size) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#hinted-handoff-queue-size) dashboards.
 
 #### queueDepth
 
 * The total number of segments in the Hinted Handoff queue. The HH queue is a sequence of 10MB "segment" files.
+* This is a coarse-grained statistic that roughly represents the amount of data queued for a remote node.
 * The `queueDepth` values can give you a sense of when a queue is growing or shrinking.
 * Data type: integer
 
@@ -372,22 +418,27 @@ The `hh_processor` measurement statistics are related to the Hinted Handoff (HH)
 
 ####  writeNodeReq
 
+* The total number of write requests that succeeded in writing a batch to the destination node.
 * Data type: integer
 
 ####  writeNodeReqFail
 
+* The total number of write requests that failed in writing a batch of data  from the HH queue to the destination node.
 * Data type: integer
 
 ####  writeNodeReqPoints
 
+* The number of points successfully written from the HH queue to the destination node fr
 * Data type: integer
 
 ####  writeShardReq
 
+* The total number of every write batch request enqueued into the Hinted Handoff queue.
 * Data type: integer
 
 ####  writeShardReqPoints
 
+* The total number of points enqueued into the Hinted Handoff queue.
 * Data type: integer
 
 _____
@@ -660,24 +711,24 @@ The [Go runtime package](https://golang.org/pkg/runtime/) contains operations th
 * The number of allocated heap objects.
 * Data type: integer
 
-####  HeapReleased
+#### HeapReleased
 
 * The size, in bytes, of physical memory returned to the OS.
 * Data type: integer
 
-####   HeapSys
+#### HeapSys
 
 * The size, in bytes, of heap memory obtained from the OS.
 * Measures the amount of virtual address space reserved for the heap.
 * Data type: integer
 
-####  Lookups
+#### Lookups
 
 * The number of pointer lookups performed by the runtime.
 * Primarily useful for debugging runtime internals.
 * Data type: integer
 
-####  Mallocs
+#### Mallocs
 
 * The cumulative count of heap objects allocated.
 * The number of live objects is Mallocs - Frees.
@@ -687,7 +738,7 @@ The [Go runtime package](https://golang.org/pkg/runtime/) contains operations th
 
 * Data type: integer
 
-####  NumGoroutine
+#### NumGoroutine
 
 * The number of Go routines.
 * Data type: integer
@@ -700,13 +751,13 @@ The [Go runtime package](https://golang.org/pkg/runtime/) contains operations th
 #### Sys
 
 * The total bytes of memory obtained from the OS.
-* Measures the virtual address space reserved by Go runtime for the heap, stacks, and other internal data structures.
+* Measures the virtual address space reserved by the Go runtime for the heap, stacks, and other internal data structures.
 * Data type: integer
 
 #### TotalAlloc
 
 * The cumulative bytes allocated for heap objects.
-* Does not decrease when objects are freed.
+* This statistic does not decrease when objects are freed.
 * Data type: integer
 
 ____
@@ -716,14 +767,16 @@ ____
 The `shard` measurement statistics are related to working with shards in InfluxDB OSS and InfluxDB Enterprise.
 
 #### diskBytes
-- Data type: integer
+
+* The size, in bytes, of the shard, including the size of the data directory and the WAL directory.
+* Data type: integer
 
 #### fieldsCreate
-- Data type: integer
+* Data type: integer
 
 #### seriesCreate
 
-- Data type: integer
+* Data type: integer
 
 #### writeBytes
 
@@ -1032,44 +1085,47 @@ _____
 
 ### write
 
-The `write` measurement statistics are related to writing data to InfluxDB OSS and InfluxDB Enterprise.
+The `write` measurement statistics are about writes to the data node, regardless of the source of the write.
 
 #### pointReq
 
-* The total number of attempted point requests.
+* The total number of every point requested to be written to this data node.
+* Incoming writes have to make it through a couple of checks before reaching this point (points parse correctly, correct authentication provided, etc.). After these checks, this statistic should be incremented regardless of source (HTTP, UDP, `_internal` stats, OpenTSDB plugin, etc.).
 * Data type: integer
 * Examples
   * "Points Throughput / Minute by Hostname" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring/) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring/) dashboards
 
 #### pointReqHH [Enterprise only]
 
-* The total number of attempted point requests to Hinted Handoff (HH).
+* The total number of points received for write by this node and then enqueued into Hinted Handoff for the destination node.
 
 * Data type: integer
 
 #### pointReqLocal
 
-* The total number of point requests that have been attempted to be written into a shard on the local node.
+* The total number of point requests that have been attempted to be written into a shard on the same (local) node.
 * Data type: integer
 
 #### pointReqRemote [Enterprise only]
 
-* The total number of point requests that have been attempted to be written into a shard on a  remote node.
+* The total number of points received for write by this node but needed to be forwarded into a shard on a remote node.
+The `pointReqRemote` statistic is incremented immediately before the remote write attempt, which only happens if HH doesn't exist for that node. Then if the write attempt fails, we check again if HH exists, and if so, add the point to HH instead.
+* This statistic does not distinguish between requests that are directly written to the destination node versus enqueued into the Hinted Handoff queue for the destination node.
 * Data type: integer
 
 #### req
 
-* The total number of write requests, for batches of points, that have been attempted to be written.
+* The total number of batches of points requested to be written to this node.
 * Data type: integer
 
 #### subWriteDrop
 
-* The total number of batch write requests to  subscribers that were dropped due to contention or write saturation.
+* The total number of batches of points that failed to be sent to the subscription dispatcher.
 * Data type: integer
 
 #### subWriteOk
 
-* The total number of batch write requests that were successfully written to subscribers.
+* The total number of batches of points that were successfully sent to the subscription dispatcher.
 * Data type: integer
 
 #### writeDrop
@@ -1079,22 +1135,24 @@ The `write` measurement statistics are related to writing data to InfluxDB OSS a
 
 #### writeError
 
-* The total number of batch requests that  attempted to be written to a shard but failed.
+* The total number of batches of points that were not successfully written, due to a failure to write to a local or remote shard.
 * Data type: integer
 * Examples
   * "Shard Write Errors" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-enterprise-monitoring#shard-write-errors/#shard-write-errors) and [InfluxDB Enterprise Statistics](/platform/monitoring/dashboard-enterprise-monitoring#shard-write-errors) dashboards
 
 #### writeOk
 
-* The total number of batch requests that were successfully written to a shard.
+* The total number of batches of points written at the requested consistency level.
 * Data type: integer
 
 #### writePartial [Enterprise only]
 
-* ???
+* The total number of batches of points written to at least one node but did not meet the requested consistency level.
 * Data type: integer
 
 #### writeTimeout
 
-* The total number of write requests that failed due to timing out.
+* The total number of write requests that failed to complete within the default write timeout duration.
+* This could indicate severely reduced or contentious disk I/O or a congested network to a remote node.
+* For a single write request that comes in over HTTP or another input method, `writeTimeout` will be incremented by 1 if the entire batch is not written within the timeout period, regardless of whether the points within the batch can be written locally or remotely.
 * Data type: integer
