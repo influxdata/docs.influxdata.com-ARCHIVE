@@ -211,3 +211,14 @@ $(document).ready( function() {
 		}
 	})
 })
+
+/*
+ * Nested left nav toggle behavior
+ */
+
+$(document).ready( function() {
+	$(".sidebar--children-toggle").click(function() {
+		$(this).toggleClass('open');
+		$(this).siblings('.sidebar--children').toggleClass('open');
+	})
+})
