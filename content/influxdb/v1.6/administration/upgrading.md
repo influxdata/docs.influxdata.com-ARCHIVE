@@ -8,12 +8,12 @@ menu:
         parent: Administration
 ---
 
--   [Upgrading from 1.3 / 1.4 (no TSI Preview) to 1.6.x (TSI enabled)](#upgrading-from-13-14-no-tsi-preview-to-15-tsi-enabled)
--   [Upgrading from 1.4 (TSI Preview enabled) to 1.6.x (TSI enabled)](#upgrading-from-13-14-tsi-preview-enabled-to-15-tsi-enabled)
--   [Upgrading from 1.3 to 1.6.x (TSI enabled)](#upgrading-from-13-to-15-tsi-enabled)
+-   [Upgrading InfluxDB 1.3 / 1.4 (no TSI Preview) to 1.6.x (TSI enabled)](#upgrading-influxdb-1-3-1-4-no-tsi-preview-to-1-6-x-tsi-enabled)
+-   [Upgrading InfluxDB 1.3 - 1.4 (TSI Preview enabled) to 1.6.x (TSI enabled)](#upgrading-influxdb-1-3-1-4-tsi-preview-enabled-to-1-6-x-tsi-enabled)
+-   [Upgrading InfluxDB 1.0 - 1.4 to 1.6.x](#upgrading-influxdb-1-0-1-4-to-1-6-x)
 -   [Upgrading InfluxDB Enterprise clusters](#upgrading-influxdb-enterprise-clusters)
 
-## Upgrading from 1.3 / 1.4 (no TSI Preview) to 1.6.x (TSI enabled)
+## Upgrading InfluxDB 1.3 / 1.4 (no TSI Preview) to 1.6.x (TSI enabled)
 
 Starting with the InfluxDB 1.6 release, enabling Time Series Index (TSI) is recommended for all customers. To learn more about TSI, see:
 
