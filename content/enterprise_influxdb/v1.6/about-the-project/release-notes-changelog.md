@@ -10,10 +10,6 @@ menu:
 
 This release builds off of the InfluxDB OSS 1.6.0 through 1.6.4 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.6/about_the_project/releasenotes-changelog/).
 
-### Bug fixes
-
-* Only map shards that are reported ready.
-
 
 ## v1.6.2 [08-27-2018]
 
