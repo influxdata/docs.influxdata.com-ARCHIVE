@@ -18,7 +18,7 @@ The Sandbox is by far the easiest way to build the TICK stack, but it is not rec
 for production use.
 
 ## Requirements
-- Linux or MacOS <em style="opacity:.5;margin-left:.5em;">(Windows support is coming)</em>
+- Linux or macOS <em style="opacity:.5;margin-left:.5em;">(Windows support is coming)</em>
 - [Git](https://git-scm.com/)
 - [Docker](https://docs.docker.com/install/#supported-platforms)
 - [Docker Compose](https://docs.docker.com/compose/install/)
