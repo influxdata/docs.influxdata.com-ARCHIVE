@@ -8,6 +8,17 @@ menu:
     parent: About the project
 ---
 
+## v1.8.2 [2018-10-17]
+
+### Bug fixes
+
+- Aerospike (`aerospike`) input plugin: Support uint fields.
+- Docker (`docker`) input plugin: Use container name from list if no name in container stats.
+- Filecount (`filecount`) input plugin: Prevent panic on error in file stat.
+- InfluxDB v2 (`influxdb_v2`) input plugin: Update write path to match updated v2 API.
+- MQTT Consumer (`mqtt_consumer`) input plugin: Fix connect and reconnect.
+- VMware vSphere (`vsphere`) input plugin: Fix missing timeouts.
+
 ## v1.8.1 [2018-10-03]
 
 ### Bug fixes
