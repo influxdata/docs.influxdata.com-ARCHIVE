@@ -16,8 +16,12 @@ menu:
 - Docker (`docker`) input plugin: Use container name from list if no name in container stats.
 - Filecount (`filecount`) input plugin: Prevent panic on error in file stat.
 - InfluxDB v2 (`influxdb_v2`) input plugin: Update write path to match updated v2 API.
+- Logparser (`logparser`) input plugin: Fix panic.
+- MongoDB (`mongodb`) input plugin: Lower authorization errors to debug level.
 - MQTT Consumer (`mqtt_consumer`) input plugin: Fix connect and reconnect.
+- Ping (`ping`) input plugin: Return correct response code.
 - VMware vSphere (`vsphere`) input plugin: Fix missing timeouts.
+- X.509 Certificate (`x509_cert`) input plugin: Fix segfault.
 
 ## v1.8.1 [2018-10-03]
 
