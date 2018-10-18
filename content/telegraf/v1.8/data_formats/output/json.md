@@ -5,7 +5,7 @@ menu:
   telegraf_1_8:
     name: JSON
     weight: 30
-    parent: Output
+    parent: Output data formats
 ---
 
 The `json` output data format serializes Telegraf metrics into JSON documents.
