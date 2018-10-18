@@ -116,8 +116,9 @@ sudo yum localinstall influxdb-meta-1.6.4_c1.6.4.x86_64.rpm
 
 In `/etc/influxdb/influxdb-meta.conf`:
 
-* uncomment and set `hostname` to the full hostname of the meta node
-* set `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.
+* Uncomment `hostname` and set to the full hostname of the meta node.
+* Uncomment `internal-shared-secret` in the `[meta]` section and set it to a long pass phrase to be used in JWT authentication for intra-node communication. This value must the same for all of your meta nodes and match the `[meta] meta-internal-shared-secret` settings in the configuration files of your data nodes.
+* Set `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.
 
 <dt>
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
