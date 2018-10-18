@@ -58,9 +58,7 @@ The following summarizes the expected settings for proper configuration of JWT a
 
 ### Bug fixes
 
-* Reject `influxd-ctl add-data` if the host being added is already part of the cluster. 
-Also for `influxd-ctl update-data host1 host 2` where host2 != host1 will ALSO be rejected when host2 is already 
-part of the cluster.
+* Reject `influxd-ctl update-data` from one existing host to another.
 * Require `internal-shared-secret` if meta auth enabled.
 
 
