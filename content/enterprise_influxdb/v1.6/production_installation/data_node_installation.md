@@ -89,7 +89,7 @@ with every other meta and data node.
 
 ## Step 2: Set up, configure, and start the data services
 
-Perform the following steps on each data server.
+Perform the following steps on each data node.
 
 ### I. Download and install the data service
 
@@ -109,11 +109,12 @@ sudo yum localinstall influxdb-data-1.6.4_c1.6.4.x86_64.rpm
 
 ### II. Edit the configuration file
 
-First, in `/etc/influxdb/influxdb.conf`, uncomment:
+First, in `/etc/influxdb/influxdb.conf`:
 
-* `hostname` at the top of the file and set it to the full hostname of the data node
-* `auth-enabled` in the `[http]` section and set it to `true`
-* `shared-secret` in the `[http]` section and set it to a long pass phrase that will be used to sign tokens for intra-cluster communication. This value must be consistent across all data nodes.
+* Uncomment `hostname` at the top of the file and set it to the full hostname of the data node.
+* Uncomment `auth-enabled` in the `[http]` section and set it to `true`.
+* Uncomment `meta-auth-enabled` in the `[meta]` section and set it to `true`.
+* Uncomment `meta-internal-shared-secret` in the `[meta]` section and set it to a long pass phrase. The internal shared secret is used in JWT authentication for intra-node communication. This value must be same for all of your data nodes and match the `internal-shared-secret` value in the configuration files of your meta nodes.
 
 Second, in `/etc/influxdb/influxdb.conf`, set:
 
@@ -140,6 +141,9 @@ hostname="<enterprise-data-0x>" #✨
 [meta]
   # Where the cluster metadata is stored
   dir = "/var/lib/influxdb/meta" # data nodes do require a local meta directory
+...
+  # This setting must have the same value as the meta nodes' meta.auth-enabled configuration.
+  meta-auth-enabled - true
 
 [...]
 
