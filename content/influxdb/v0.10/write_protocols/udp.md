@@ -13,7 +13,7 @@ To configure InfluxDB to support writes over UDP you must adjust your config fil
 ## A note on UDP/IP OS Buffer sizes
 
 Some OSes (most notably, Linux) place very restricive limits on the performance of UDP protocols.
-Recent versions of FreeBSD, OSX, and Windows do not have this problem.
+Recent versions of FreeBSD, macOS, and Windows do not have this problem.
 It is _highly_ recommended that you increase these OS limits to 8MB before trying to run large amounts of UDP traffic to your instance.
 8MB is a starting recommendation, and should be adjusted to be in line with your `read-buffer` plugin setting.
 

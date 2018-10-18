@@ -70,10 +70,10 @@ sudo /etc/init.d/influxdb start
 
 ## OS 
 
-XInstallation of version 0.8.8 on OS X 10.8 and higher is available through [Homebrew](http://brew.sh/) [Tap](https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/brew-tap.md).
+XInstallation of version 0.8.8 on macOS 10.8 and higher is available through [Homebrew](http://brew.sh/) [Tap](https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/brew-tap.md).
 
 
-Installing the package on OS X:
+Installing the package on macOS:
 
 ```bash
 brew install homebrew/versions/influxdb08

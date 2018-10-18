@@ -110,9 +110,9 @@ sudo service influxd onestart
 
 To have InfluxDB start at system boot, add `influxd_enable="YES"` to `/etc/rc.conf`.
 
-### Mac OS X
+### macOS
 
-Users of OS X 10.8 and higher can install InfluxDB using the [Homebrew](http://brew.sh/) package manager.
+Users of macOS 10.8 and higher can install InfluxDB using the [Homebrew](http://brew.sh/) package manager.
 Once `brew` is installed, you can install InfluxDB by running:
 
 ```bash

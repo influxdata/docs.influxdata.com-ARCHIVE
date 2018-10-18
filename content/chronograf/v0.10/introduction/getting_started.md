@@ -22,7 +22,7 @@ sudo service chronograf start
 ```
 Note that the Chronograf startup script needs root permission to ensure that it can write to `/var/log`, but the executable runs as a normal user.
 
-#### OS X via [Homebrew](http://brew.sh/)
+#### macOS via [Homebrew](http://brew.sh/)
 * Run Chronograf manually on the command line:
 
     ```
@@ -41,7 +41,7 @@ ln -sfv /usr/local/opt/chronograf/*.plist ~/Library/LaunchAgents
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.chronograf.plist
     ```
 
-#### Standalone OS X binary
+#### Standalone macOS binary
 Assuming you're working with Chronograf version 0.10, from the `chronograf-0.10/` directory:
 ```
 ./chronograf-0.10-darwin_amd64
@@ -57,8 +57,8 @@ Those settings are configurable; see the configuration file to change them and t
 We list the location of the configuration file by installation process below.
 
 > * Debian or RPM package: `/opt/chronograf/config.toml`
-> * OS X via Homebrew: `/usr/local/etc/chronograf.toml`
-> * Standalone OS X binary: `chronograf-0.x.x/chronograf.toml`
+> * macOS via Homebrew: `/usr/local/etc/chronograf.toml`
+> * Standalone macOS binary: `chronograf-0.x.x/chronograf.toml`
 
 Now that you've got everything installed and running it's time to start visualizing your data in Chronograf!
 
